@@ -1,24 +1,25 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
-	[209.85.215.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8ECB1E01324
-	for <meta-ti@yoctoproject.org>; Tue, 18 Oct 2011 07:53:45 -0700 (PDT)
-Received: by eyh5 with SMTP id 5so809239eyh.35
-	for <meta-ti@yoctoproject.org>; Tue, 18 Oct 2011 07:53:44 -0700 (PDT)
-Received: by 10.14.3.138 with SMTP id 10mr340232eeh.218.1318949623938;
-	Tue, 18 Oct 2011 07:53:43 -0700 (PDT)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id w58sm6507683eeb.4.2011.10.18.07.53.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 18 Oct 2011 07:53:42 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 18 Oct 2011 16:53:36 +0200
-Message-Id: <9DCCED58-8630-4FA5-82FA-DD4E727A8348@dominion.thruhere.net>
-To: meta-ti@yoctoproject.org
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-X-Mailer: Apple Mail (2.1251.1)
-Subject: commit mails?
+Return-Path: <denis@denix.org>
+Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
+	[206.46.173.5])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A376CE01324
+	for <meta-ti@yoctoproject.org>; Tue, 18 Oct 2011 07:56:50 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [71.191.138.237])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LT900BTXO69Y8H1@vms173005.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 18 Oct 2011 09:56:39 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id BB1A814AF5D; Tue,
+	18 Oct 2011 10:56:33 -0400 (EDT)
+Date: Tue, 18 Oct 2011 10:56:33 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-id: <20111018145633.GR26170@denix.org>
+References: <9DCCED58-8630-4FA5-82FA-DD4E727A8348@dominion.thruhere.net>
+MIME-version: 1.0
+In-reply-to: <9DCCED58-8630-4FA5-82FA-DD4E727A8348@dominion.thruhere.net>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: commit mails?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,16 +31,18 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2011 14:53:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 18 Oct 2011 14:56:50 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi,
+On Tue, Oct 18, 2011 at 04:53:36PM +0200, Koen Kooi wrote:
+> Hi,
+> 
+> Do we want commit mails to go to this list as well? If so I'll poke Graeme to start sending them.
 
-Do we want commit mails to go to this list as well? If so I'll poke =
-Graeme to start sending them.
+We are going to be mvong the tree anyway. Should probably send commit emails 
+from a master tree...
 
-regards,
-
-Koen=
+-- 
+Denys
 
