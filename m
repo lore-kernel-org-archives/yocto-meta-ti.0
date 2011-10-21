@@ -1,23 +1,27 @@
-Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8738EE01341
-	for <meta-ti@yoctoproject.org>; Thu, 20 Oct 2011 22:56:46 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [71.191.138.237])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LTE00J0PJ6ASO3Z@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 21 Oct 2011 00:56:35 -0500 (CDT)
-Received: from elrond.denix.org (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 8B8CB14AF59; Fri,
-	21 Oct 2011 01:56:34 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
+	[209.85.215.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B3AFE01341
+	for <meta-ti@yoctoproject.org>; Fri, 21 Oct 2011 00:13:39 -0700 (PDT)
+Received: by eyh5 with SMTP id 5so4908701eyh.35
+	for <meta-ti@yoctoproject.org>; Fri, 21 Oct 2011 00:13:38 -0700 (PDT)
+Received: by 10.14.9.198 with SMTP id 46mr1712900eet.176.1319181218389;
+	Fri, 21 Oct 2011 00:13:38 -0700 (PDT)
+Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id q50sm32254147eef.9.2011.10.21.00.13.36
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 21 Oct 2011 00:13:37 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1319159079-4220-1-git-send-email-joelagnel@ti.com>
+Date: Fri, 21 Oct 2011 09:13:35 +0200
+Message-Id: <6A3878F8-1248-4B93-9EB9-AC2BE5028261@dominion.thruhere.net>
+References: <1319159079-4220-1-git-send-email-joelagnel@ti.com>
 To: meta-ti@yoctoproject.org
-Date: Fri, 21 Oct 2011 01:56:25 -0400
-Message-id: <1319176585-30116-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.7.7
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH] u-boot 2011.10rc: update to the latest revision
+X-Mailer: Apple Mail (2.1251.1)
+Cc: Joel A Fernandes <joelagnel@ti.com>, jdk@ti.com
+Subject: Re: [Angstrom-devel] [PATCH meta-ti 1/2] u-boot 2011.10rc: Fix kernel hang due to machine ID patches
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,44 +33,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2011 05:56:47 -0000
+X-List-Received-Date: Fri, 21 Oct 2011 07:13:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-From: Denys Dmytriyenko <denys@ti.com>
 
-Updated to latest version to pick up the following changes:
-* 9158d7f am335x: Really correct NAND partiton layout
-* 4723773 am335x: Wrap spl_board_init in a CONFIG_SPL_BOARD_INIT check
-* 40c310c Change CPU to 720MHz and bump VDD1 to 1.26V
-* 9c154ee Add missing i2c0 pin mux configuration in spl_board_init
+Op 21 okt. 2011, om 03:04 heeft Joel A Fernandes het volgende =
+geschreven:
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-bsp/u-boot/u-boot_2011.10rc.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+> As we're not going to be allocating a new machine ID for BeagleBone
 
-diff --git a/recipes-bsp/u-boot/u-boot_2011.10rc.bb b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
-index 3f6e570..888c5bf 100644
---- a/recipes-bsp/u-boot/u-boot_2011.10rc.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
-@@ -4,7 +4,7 @@ require u-boot.inc
- COMPATIBLE_MACHINE = "(ti33x)"
- DEFAULT_PREFERENCE_ti33x = "99"
- PV = "2011.09+git"
--PR = "r12"
-+PR = "r13"
- 
- # SPL build
- UBOOT_BINARY = "u-boot.img"
-@@ -21,7 +21,7 @@ SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;br
-            file://2011.09git/0004-am335x-evm-fall-back-to-bone-if-header.config-is-emp.patch \
-           "
- 
--SRCREV = "066e4c106677e9243bd7ae26e638f8d98e1f0606"
-+SRCREV = "9158d7f37d596b867039345cb2e3f8f18f54fe46"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
- 
--- 
-1.7.0.4
+That's not what I heard yesterday.
+
+And please follow the instructions at =
+http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-texasinstrument=
+s/tree/README
+
+
+> , and as these patches
+> have been verified to cause the kernel to hang and thus make newer =
+images unbootable,
+> lets drop it from the recipe but lets optionally leave the patches =
+itself undeleted for now.
+>=20
+> Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+> ---
+> Build and run time tested
+>=20
+> recipes-bsp/u-boot/u-boot_2011.10rc.bb |    2 --
+> 1 files changed, 0 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/recipes-bsp/u-boot/u-boot_2011.10rc.bb =
+b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
+> index 3f6e570..35c84da 100644
+> --- a/recipes-bsp/u-boot/u-boot_2011.10rc.bb
+> +++ b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
+> @@ -15,8 +15,6 @@ SRC_URI =3D =
+"git://arago-project.org/git/projects/u-boot-am33x.git;protocol=3Dgit;br
+>            =
+file://2011.09git/0001-am335x_evm-boot-kernel-from-ext2-3-filesystem.patch=
+ \
+>            file://2011.09git/0002-am335x_evm-set-bootdelay-to-0.patch =
+\
+>            =
+file://2011.09git/0003-am335x-evm-make-rootfs-RO-on-boot.patch \
+> -           =
+file://2011.09git/0001-mach-types-Add-new-beaglebone-machine-type.patch =
+\
+> -           =
+file://2011.09git/0002-evm-If-beaglebone-is-detected-pass-the-MACH_TYPE_BE=
+A.patch \
+>            =
+file://2011.09git/0003-am335x_evm-single-byte-address-EEPROM-for-board-ide=
+n.patch \
+>            =
+file://2011.09git/0004-am335x-evm-fall-back-to-bone-if-header.config-is-em=
+p.patch \
+>           "
+> --=20
+> 1.7.0.4
+>=20
+>=20
+> _______________________________________________
+> Angstrom-distro-devel mailing list
+> Angstrom-distro-devel@linuxtogo.org
+> =
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/angstrom-distro-devel
 
 
