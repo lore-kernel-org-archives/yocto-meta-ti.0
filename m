@@ -1,40 +1,32 @@
 Return-Path: <joelagnel@ti.com>
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7952EE006D1
-	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 14:27:59 -0700 (PDT)
-Received: from dlep33.itg.ti.com ([157.170.170.112])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id p9NLRwDY019851
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF279E006D1
+	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 16:41:57 -0700 (PDT)
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id p9NNfuBF028929
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 16:27:58 -0500
+	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 18:41:56 -0500
 Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep33.itg.ti.com (8.13.7/8.13.8) with ESMTP id p9NLRwIb016555
-	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 16:27:58 -0500 (CDT)
-Received: from DFLE70.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9NLRvL6028339
-	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 16:27:57 -0500 (CDT)
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9NNfusa017212
+	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 18:41:56 -0500 (CDT)
+Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9NNfuY8012393
+	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 18:41:56 -0500 (CDT)
 Received: from DLEE09.ent.ti.com ([fe80::a026:b4ad:3e78:5ae5]) by
-	DFLE70.ent.ti.com ([fe80::db3:609a:aa62:e1ec%22]) with mapi id
-	14.01.0323.003; Sun, 23 Oct 2011 16:27:58 -0500
+	DFLE71.ent.ti.com ([fe80::29f6:72ad:a62e:2025%21]) with mapi id
+	14.01.0323.003; Sun, 23 Oct 2011 18:41:56 -0500
 From: "Fernandes, Joel A" <joelagnel@ti.com>
 To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Thread-Topic: linux-ti33x-psp_3.0+3.1rc SRCREV
-Thread-Index: AcyRyqA4oaxWyvoeQNW0CNgF/1aUJA==
-Date: Sun, 23 Oct 2011 21:27:57 +0000
-Message-ID: <083BC63EECB6FD41B8E81CF7FD87CC0F040A57@DLEE09.ent.ti.com>
+Thread-Index: AcyRyqA4oaxWyvoeQNW0CNgF/1aUJAAEouEg
+Date: Sun, 23 Oct 2011 23:41:56 +0000
+Message-ID: <083BC63EECB6FD41B8E81CF7FD87CC0F041A73@DLEE09.ent.ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-cr-hashedpuzzle: AFMZ AeKE Ar0X Dk7N EXfD Ec/M Ee9C Fgps FiJ+ FoWd GQmP
-	HdoZ Kg3E LS+1 L8Kb MExJ; 1;
-	bQBlAHQAYQAtAHQAaQBAAHkAbwBjAHQAbwBwAHIAbwBqAGUAYwB0AC4AbwByAGcA;
-	Sosha1_v1; 7; {B1F5F7E2-84E9-4828-AC47-152980F38B51};
-	agBvAGUAbABhAGcAbgBlAGwAQAB0AGkALgBjAG8AbQA=; Sun,
-	23 Oct 2011 21:27:54 GMT;
-	bABpAG4AdQB4AC0AdABpADMAMwB4AC0AcABzAHAAXwAzAC4AMAArADMALgAxAHIAYwAgAFMAUgBDAFIARQBWAA==
-x-cr-puzzleid: {B1F5F7E2-84E9-4828-AC47-152980F38B51}
 x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-Subject: linux-ti33x-psp_3.0+3.1rc SRCREV
+Subject: Re: linux-ti33x-psp_3.0+3.1rc SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,14 +38,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Oct 2011 21:27:59 -0000
+X-List-Received-Date: Sun, 23 Oct 2011 23:41:58 -0000
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_083BC63EECB6FD41B8E81CF7FD87CC0F040A57DLEE09entticom_"
+	boundary="_000_083BC63EECB6FD41B8E81CF7FD87CC0F041A73DLEE09entticom_"
 
---_000_083BC63EECB6FD41B8E81CF7FD87CC0F040A57DLEE09entticom_
+--_000_083BC63EECB6FD41B8E81CF7FD87CC0F041A73DLEE09entticom_
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+Just to avoid any merge conflicts, I'd like to inform that I am updating SR=
+CREV to the latest in my next pull request which fixes this.
+
+Thanks,
+Joel
+
+From: Fernandes, Joel A
+Sent: Sunday, October 23, 2011 4:28 PM
+To: 'meta-ti@yoctoproject.org'
+Subject: linux-ti33x-psp_3.0+3.1rc SRCREV
 
 Dear Koen,
 
@@ -73,7 +78,7 @@ Either the Arago tree was rebased or the commit ID is not valid.
 Thanks,
 Joel
 
---_000_083BC63EECB6FD41B8E81CF7FD87CC0F040A57DLEE09entticom_
+--_000_083BC63EECB6FD41B8E81CF7FD87CC0F041A73DLEE09entticom_
 Content-Type: text/html; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
@@ -94,6 +99,9 @@ xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
 @font-face
 	{font-family:Calibri;
 	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
  /* Style Definitions */
  p.MsoNormal, li.MsoNormal, div.MsoNormal
 	{margin:0in;
@@ -109,11 +117,16 @@ a:visited, span.MsoHyperlinkFollowed
 	color:purple;
 	text-decoration:underline;}
 span.EmailStyle17
-	{mso-style-type:personal-compose;
+	{mso-style-type:personal;
 	font-family:"Calibri","sans-serif";
 	color:windowtext;}
+span.EmailStyle18
+	{mso-style-type:personal-reply;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
 .MsoChpDefault
-	{mso-style-type:export-only;}
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
 @page Section1
 	{size:8.5in 11.0in;
 	margin:1.0in 1.0in 1.0in 1.0in;}
@@ -129,6 +142,35 @@ div.Section1
 </head>
 <body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
 <div class=3D"Section1">
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Hi,<o:p></o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Just to avoid any merg=
+e conflicts, I&#8217;d like to inform that I am updating SRCREV to the late=
+st in my next pull request which fixes this.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Thanks,<o:p></o:p></sp=
+an></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Joel<o:p></o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<div>
+<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt;font-family:&quot=
+;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span style=3D"font-s=
+ize:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;"> Fernande=
+s, Joel A
+<br>
+<b>Sent:</b> Sunday, October 23, 2011 4:28 PM<br>
+<b>To:</b> 'meta-ti@yoctoproject.org'<br>
+<b>Subject:</b> linux-ti33x-psp_3.0&#43;3.1rc SRCREV<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
 <p class=3D"MsoNormal">Dear Koen,<o:p></o:p></p>
 <p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
 <p class=3D"MsoNormal">In the last update to SRCREV,<o:p></o:p></p>
@@ -156,4 +198,4 @@ s not valid.<o:p></o:p></p>
 </body>
 </html>
 
---_000_083BC63EECB6FD41B8E81CF7FD87CC0F040A57DLEE09entticom_--
+--_000_083BC63EECB6FD41B8E81CF7FD87CC0F041A73DLEE09entticom_--
