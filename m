@@ -1,22 +1,21 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wy0-f176.google.com (mail-wy0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B6AAE0137B
-	for <meta-ti@yoctoproject.org>; Mon, 24 Oct 2011 02:20:15 -0700 (PDT)
-Received: by wyf19 with SMTP id 19so8492473wyf.35
-	for <meta-ti@yoctoproject.org>; Mon, 24 Oct 2011 02:20:14 -0700 (PDT)
-Received: by 10.227.9.30 with SMTP id j30mr8316236wbj.13.1319448013901;
-	Mon, 24 Oct 2011 02:20:13 -0700 (PDT)
+Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6D50E012F3
+	for <meta-ti@yoctoproject.org>; Mon, 24 Oct 2011 04:23:00 -0700 (PDT)
+Received: by wwe5 with SMTP id 5so7861714wwe.11
+	for <meta-ti@yoctoproject.org>; Mon, 24 Oct 2011 04:22:59 -0700 (PDT)
+Received: by 10.216.12.82 with SMTP id 60mr2971447wey.97.1319455377854;
+	Mon, 24 Oct 2011 04:22:57 -0700 (PDT)
 Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id y10sm37805152wbm.14.2011.10.24.02.20.11
+	[84.80.112.235]) by mx.google.com with ESMTPS id
+	fy13sm38385942wbb.18.2011.10.24.04.22.55
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 24 Oct 2011 02:20:12 -0700 (PDT)
+	Mon, 24 Oct 2011 04:22:56 -0700 (PDT)
 Mime-Version: 1.0 (Apple Message framework v1251.1)
 From: Koen Kooi <koen@dominion.thruhere.net>
 In-Reply-To: <4EA52A6E.2090904@ts.fujitsu.com>
-Date: Mon, 24 Oct 2011 11:20:06 +0200
-Message-Id: <F0F70FBC-DC50-4148-99E6-9DB09561EC9A@dominion.thruhere.net>
+Date: Mon, 24 Oct 2011 13:22:54 +0200
+Message-Id: <A9FC6A94-E05C-4396-807B-A71CC08B9B40@dominion.thruhere.net>
 References: <4EA1364A.8000605@ts.fujitsu.com>
 	<2599D0DD-7A48-409A-95A5-CDA103E7E974@dominion.thruhere.net>
 	<4EA5266C.4080002@ts.fujitsu.com>
@@ -24,7 +23,7 @@ References: <4EA1364A.8000605@ts.fujitsu.com>
 	<4EA52A6E.2090904@ts.fujitsu.com>
 To: Rainer Koenig <Rainer.Koenig@ts.fujitsu.com>
 X-Mailer: Apple Mail (2.1251.1)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Cc: meta-ti@yoctoproject.org
 Subject: Re: Building for TI 8148 EVM
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -37,7 +36,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Oct 2011 09:20:17 -0000
+X-List-Received-Date: Mon, 24 Oct 2011 11:23:01 -0000
 Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
@@ -71,17 +70,16 @@ I
 > get the firewall-issues solved, so I should be able to reproduce my
 > results.
 
-The oebb.sh script has builtin firewall support, have a look at that. If =
-something is missing, please let us know.
+Roger provided a log with a related looking bug, which should get solved =
+Real Soon(TM) when the following gets applied:
 
+http://patchwork.openembedded.org/patch/13783/
 
-> I was really just following the linked instructions above, maybe I
-> should have setup something in my local.conf...?
-
-No, the setup scripts try really hard to avoid having you edit conf =
-files :)
+In the mean time you should be able to get around it by doing 'bitbake =
+mesa-dri' manually.
 
 regards,
 
-Koen=
+Koen
+
 
