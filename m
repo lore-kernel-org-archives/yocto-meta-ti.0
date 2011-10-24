@@ -1,31 +1,27 @@
-Return-Path: <joelagnel@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0194E0137B
-	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 21:15:27 -0700 (PDT)
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id p9O4FP1f029571
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 23:15:25 -0500
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep34.itg.ti.com (8.13.7/8.13.8) with ESMTP id p9O4FPTK028467
-	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 23:15:25 -0500 (CDT)
-Received: from DLEE74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9O4FP6U002913
-	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 23:15:25 -0500 (CDT)
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
-	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
-	Sun, 23 Oct 2011 23:15:25 -0500
-Received: from localhost.localdomain (chase-ubuntu.am.dhcp.ti.com
-	[128.247.105.25])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	p9O4FLit023860;	Sun, 23 Oct 2011 23:15:25 -0500
-From: Joel A Fernandes <joelagnel@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Sun, 23 Oct 2011 22:59:20 -0500
-Message-ID: <1319428763-9677-1-git-send-email-joelagnel@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Cc: Joel A Fernandes <joelagnel@ti.com>, jdk@ti.com
-Subject: [PATCH meta-ti 0/3] Update linux-ti33x-psp and beaglebone-tester to latest, add EEPROM patches.
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wy0-f176.google.com (mail-wy0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 305A4E01376
+	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 23:34:26 -0700 (PDT)
+Received: by wyf19 with SMTP id 19so8332233wyf.35
+	for <meta-ti@yoctoproject.org>; Sun, 23 Oct 2011 23:34:25 -0700 (PDT)
+Received: by 10.227.155.204 with SMTP id t12mr971209wbw.46.1319438065757;
+	Sun, 23 Oct 2011 23:34:25 -0700 (PDT)
+Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id n21sm37080610wbp.2.2011.10.23.23.34.23
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 23 Oct 2011 23:34:24 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <083BC63EECB6FD41B8E81CF7FD87CC0F040A57@DLEE09.ent.ti.com>
+Date: Mon, 24 Oct 2011 08:34:18 +0200
+Message-Id: <1CDFBEE6-D267-40AE-A00D-5D3DB19A0490@dominion.thruhere.net>
+References: <083BC63EECB6FD41B8E81CF7FD87CC0F040A57@DLEE09.ent.ti.com>
+To: "Fernandes, Joel A" <joelagnel@ti.com>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: linux-ti33x-psp_3.0+3.1rc SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,30 +33,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Oct 2011 04:15:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 24 Oct 2011 06:34:27 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-Please apply these 3 patches which apart from other things also fixes the kernel build and adds EEPROM support.
 
-All changes have been build and runtime tested.
+Op 23 okt. 2011, om 23:27 heeft Fernandes, Joel A het volgende =
+geschreven:
 
-Thanks!
+> Dear Koen,
+> =20
+> In the last update to SRCREV,
+> =
+http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-texasinstrument=
+s/commit/?id=3Dab07a0ea4be961a7e8c7b8b64a56ce6c730cd6e0
+> =20
+> The Commit: c7fc664a6a36a4721b43dc287e410a2453f0b782 doesn=92t exist =
+anymore in arago. Due to this the fetch breaks.
+> =20
+> joel@minted ~/repo/linux-omap-2.6 $ git show =
+c7fc664a6a36a4721b43dc287e410a2453f0b782
+> fatal: bad object c7fc664a6a36a4721b43dc287e410a2453f0b782
+> =20
+> Either the Arago tree was rebased or the commit ID is not valid.
 
-Joel A Fernandes (3):
-  sdcard_image: Copy uEnv.txt once again as the new bonetester also
-    checks for GPIO grounding
-  linux-ti33x-psp 3.1rc8: Update to latest SRCREV, add EEPROM patches
-  beaglebone-tester: Update to latest and bump PR
+It was rebased:
 
- classes/sdcard_image.bbclass                       |    3 +-
- ...heck-return-value-of-omap_mux_init_signal.patch |   34 ++++++++++
- ...ility-to-dynamically-reconfigure-chip-inf.patch |   57 +++++++++++++++++
- ...econfigure-EEPROM-with-new-eeprom_info-in.patch |   65 ++++++++++++++++++++
- recipes-kernel/linux/linux-ti33x-psp_3.0+3.1rc.bb  |    7 ++-
- recipes-ti/beagleboard/beaglebone-tester.bb        |    6 +-
- 6 files changed, 165 insertions(+), 7 deletions(-)
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.0+3.1rc/0001-am335x-Check-return-value-of-omap_mux_init_signal.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.0+3.1rc/0002-at24-Add-ability-to-dynamically-reconfigure-chip-inf.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.0+3.1rc/0003-am335x-evm-Reconfigure-EEPROM-with-new-eeprom_info-in.patch
+commit c7fc664a6a36a4721b43dc287e410a2453f0b782
+Author: Ajay Kumar Gupta <ajay.gupta@ti.com>
+Date:   Fri Oct 21 14:18:25 2011 +0530
+
+    am335xevm: defconfig: usb setup
+   =20
+    Made one gadget (DBGP) as builtin for USB1 port and other gadget =
+driver as
+    modules for USB0 port.
+
+commit 7a68182e84ec58909a31a37d3c21619ed8ab2111
+Author: Ajay Kumar Gupta <ajay.gupta@ti.com>
+Date:   Fri Oct 21 10:32:12 2011 +0530
+
+    usb: ether_gadget: fix insmod panic after fsg rmmod
+   =20
+    Fixes kernel panic seen during g_ether.ko module insertion performed
+    after the FSG gadget rmmod.
+   =20
+    Ether gadget doesn't reset the usb_ep(s) during initialization and
+    so was getting the previous gadget's usb_ep->desc data.
+
+commit 4be081bbeab0973ae2021622af828be215a3c0ca
+Author: Ravi B <ravibabu@ti.com>
+Date:   Wed Oct 19 21:26:55 2011 +0530
+
+    usb: am335x: gadget: add option for dbgp as one builtin gadget
+   =20
+    DBGP is added as only gadget option to be selected for a port as
+    builtin driver. The gadget driver for other ports can be compiled
+    as module and inserted after the bootups.
+
 
 
