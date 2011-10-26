@@ -1,27 +1,26 @@
 Return-Path: <denis@denix.org>
-Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
-	[206.46.173.1])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 035E5E005BB
-	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2011 00:02:15 -0700 (PDT)
+Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
+	[206.46.173.7])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60A9CE005BB
+	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2011 00:03:52 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173001.mailsrvcs.net
+	by vms173007.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LTN00JD1VJET4F6@vms173001.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 26 Oct 2011 02:02:03 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5324B14AF64; Wed,
-	26 Oct 2011 03:02:02 -0400 (EDT)
-Date: Wed, 26 Oct 2011 03:02:02 -0400
+	2009)) with ESMTPA id <0LTN00CPYVM0VLU4@vms173007.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 26 Oct 2011 02:03:41 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id DFA0B14AF64; Wed,
+	26 Oct 2011 03:03:35 -0400 (EDT)
+Date: Wed, 26 Oct 2011 03:03:35 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: Jason Kridner <jkridner@beagleboard.org>
-Message-id: <20111026070202.GC15391@denix.org>
+Message-id: <20111026070335.GD15391@denix.org>
 References: <1319587995-11126-1-git-send-email-joelagnel@ti.com>
-	<82EB1A3D-8AAA-4D21-AEE9-4A66BFF79DD5@dominion.thruhere.net>
-	<CA+T6QPnrARwPw4VnkRw1s1V=0qFtYTiE_PJY94K92fLAzj9NRQ@mail.gmail.com>
+	<20111026053519.GA15391@denix.org>
+	<CA+T6QPmWEKLjZHV=tnQ+OMROc+s9h-TYy31ykoYHs6AzgPS3_A@mail.gmail.com>
 MIME-version: 1.0
-In-reply-to: <CA+T6QPnrARwPw4VnkRw1s1V=0qFtYTiE_PJY94K92fLAzj9NRQ@mail.gmail.com>
+In-reply-to: <CA+T6QPmWEKLjZHV=tnQ+OMROc+s9h-TYy31ykoYHs6AzgPS3_A@mail.gmail.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: meta-ti@yoctoproject.org, Joel A Fernandes <joelagnel@ti.com>,
-	Koen Kooi <koen@beagleboard.org>
+Cc: meta-ti@yoctoproject.org
 Subject: Re: [PATCH meta-ti] linux-ti33x-psp 3.1rc8: Enable	usb-to-serial drivers
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -34,64 +33,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Oct 2011 07:02:16 -0000
-Content-type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Wed, 26 Oct 2011 07:03:52 -0000
+Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
-Content-transfer-encoding: 8bit
 
-On Wed, Oct 26, 2011 at 02:49:16AM -0400, Jason Kridner wrote:
-> On Wed, Oct 26, 2011 at 1:41 AM, Koen Kooi <koen@beagleboard.org> wrote:
-> > As a general remark: could you also list the git repo where your patches can
-> > be pulled from? That will save me a lot of email troubles while traveling.
-> >
-> > Op 26 okt 2011, om 02:13 heeft Joel A Fernandes het volgende geschreven:
-> >
+On Wed, Oct 26, 2011 at 02:44:16AM -0400, Jason Kridner wrote:
+> On Wed, Oct 26, 2011 at 1:35 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> > On Tue, Oct 25, 2011 at 07:13:14PM -0500, Joel A Fernandes wrote:
 > >> Enable the PL2303 usb-to-serial driver required for serial output
 > >> from the beaglebone tester.
-> >>
-> >> Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
-> >> ---
-> >> .../linux-ti33x-psp-3.0+3.1rc/beaglebone/defconfig |    3 ++-
-> >> recipes-kernel/linux/linux-ti33x-psp_3.0+3.1rc.bb  |    2 +-
-> >> 2 files changed, 3 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git
-> >> a/recipes-kernel/linux/linux-ti33x-psp-3.0+3.1rc/beaglebone/defconfig
-> >> b/recipes-kernel/linux/linux-ti33x-psp-3.0+3.1rc/beaglebone/defconfig
-> >> index 4b3c21d..478ec3e 100644
-> >> --- a/recipes-kernel/linux/linux-ti33x-psp-3.0+3.1rc/beaglebone/defconfig
-> >> +++ b/recipes-kernel/linux/linux-ti33x-psp-3.0+3.1rc/beaglebone/defconfig
-> >> @@ -2558,7 +2558,8 @@ CONFIG_USB_LIBUSUAL=y
-> >> # USB port drivers
-> >> #
-> >> # CONFIG_USB_USS720 is not set
-> >> -# CONFIG_USB_SERIAL is not set
-> >> +CONFIG_USB_SERIAL=y
-> >> +CONFIG_USB_SERIAL_PL2303=y
-> >>
-> >> #
-> >> # USB Miscellaneous drivers
-> >> diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.0+3.1rc.bb
-> >> b/recipes-kernel/linux/linux-ti33x-psp_3.0+3.1rc.bb
-> >> index bffebea..fbee01f 100644
-> >> --- a/recipes-kernel/linux/linux-ti33x-psp_3.0+3.1rc.bb
-> >> +++ b/recipes-kernel/linux/linux-ti33x-psp_3.0+3.1rc.bb
-> >> @@ -11,7 +11,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
-> >>
-> >> BRANCH = "master"
-> >> SRCREV = "1955a86594526e18f03c8d62db81119ffc4ccf0f"
+> >
+> > BTW, has anyone tried building kernel for am335x-evm lately? It appears broken
+> > for me with bunch of unresolved symbols for musb... Doing bisect doesn't help
+> > much, as the tree was rebased and no previous revs are available :(
 > 
-> I believe this SRCREV is only working for you because it is in your
-> cache.  Can you confirm with a kernel revision that is currently in
-> the tree?
+> The lack of previous revs cost me about 24 hours of trying to figure
+> out how to fix the repo and waiting for it to fetch, but I have only
+> been trying to build for the Bone, not for the EVM.  My builds are
+> currently failing on "lzop: command not found".
 
-For a second you got me scared that the tree was rebased again. But I believe
-that SRCREV is still there:
+http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-texasinstruments/commit/?id=21d8165f0ab973f0ce0f2588d2e97b99d885c786
 
-http://arago-project.org/git/projects/?p=linux-am33x.git;a=commit;h=1955a86594526e18f03c8d62db81119ffc4ccf0f
+make sure to have 'lzop' installed, no native recipe for that yet
 
-Not the latest commit though.           
-
---
+-- 
 Denys
 
