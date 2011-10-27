@@ -1,25 +1,30 @@
-Return-Path: <denis@denix.org>
-Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
-	[206.46.173.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C12CEE006B4
-	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2011 10:17:03 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LTO001P4NZX39Z0@vms173009.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 26 Oct 2011 12:16:52 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id BAED414AF5D; Wed,
-	26 Oct 2011 13:16:45 -0400 (EDT)
-Date: Wed, 26 Oct 2011 13:16:45 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Joel A Fernandes <joelagnel@ti.com>
-Message-id: <20111026171645.GF15391@denix.org>
-References: <1319588057-11213-1-git-send-email-joelagnel@ti.com>
-MIME-version: 1.0
-In-reply-to: <1319588057-11213-1-git-send-email-joelagnel@ti.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH meta-ti] beaglebone-tester: Update to latest, bump PR
+Return-Path: <jdk@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 63371E006B4
+	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2011 18:36:04 -0700 (PDT)
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id p9R1a3M8007373
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2011 20:36:03 -0500
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep34.itg.ti.com (8.13.7/8.13.8) with ESMTP id p9R1a3L7017721
+	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2011 20:36:03 -0500 (CDT)
+Received: from DFLE70.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9R1a3jo007882
+	for <meta-ti@yoctoproject.org>; Wed, 26 Oct 2011 20:36:03 -0500 (CDT)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle70.ent.ti.com
+	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 26 Oct 2011 20:36:03 -0500
+Received: from D620.itg.ti.com (h1-206.vpn.ti.com [172.24.1.206])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id p9R1a2k9024815;
+	Wed, 26 Oct 2011 20:36:02 -0500
+From: Jason Kridner <jdk@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 26 Oct 2011 21:36:01 -0400
+Message-ID: <1319679361-13741-1-git-send-email-jdk@ti.com>
+X-Mailer: git-send-email 1.7.4.1
+MIME-Version: 1.0
+Subject: [PATCH] sdcard_image: align partitions with flash pages
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,47 +36,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Oct 2011 17:17:03 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 27 Oct 2011 01:36:04 -0000
+Content-Type: text/plain
 
-On Tue, Oct 25, 2011 at 07:14:16PM -0500, Joel A Fernandes wrote:
-> Added:
-> - Output test status to USB serial port
-> - Made more verbose
-> 
-> Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+See
+http://sakoman.com/OMAP/a-script-for-partitioningformatting-a-bootable-sdmicrosd-card.html
 
-Applied, thanks.
+Signed-off-by: Jason Kridner <jdk@ti.com>
+---
+ classes/sdcard_image.bbclass |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-> ---
->  recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
-> index 9e65d65..9e49e87 100644
-> --- a/recipes-ti/beagleboard/beaglebone-tester.bb
-> +++ b/recipes-ti/beagleboard/beaglebone-tester.bb
-> @@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
->  # only scripts and data
->  inherit allarch
->  
-> -PR = "r2"
-> +PR = "r3"
->  
->  SRC_URI = "git://github.com/joelagnel/validation-scripts.git;protocol=git \
->            "
-> -SRCREV = "fdeaf580e553a0968b777e75306aac3f6a73519e"
-> +SRCREV = "c6faf47c9e73da7d256cd226bc9eb2a3e4a19aaa"
->  
->  S = "${WORKDIR}/git"
->  
-> -- 
-> 1.7.0.4
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+diff --git a/classes/sdcard_image.bbclass b/classes/sdcard_image.bbclass
+index 4ebc998..9e4a959 100644
+--- a/classes/sdcard_image.bbclass
++++ b/classes/sdcard_image.bbclass
+@@ -46,9 +46,9 @@ IMAGE_CMD_sdimg () {
+ 	SIZE=$(/sbin/fdisk -l ${LOOPDEV} | grep Disk | grep bytes | awk '{print $5}')
+ 	CYLINDERS=$(echo $SIZE/255/63/512 | bc)
+ 	{
+-	echo ,9,0x0C,*
+-	echo ,,,-
+-	} | /sbin/sfdisk -D -H 255 -S 63 -C ${CYLINDERS} ${LOOPDEV}
++	echo 128,130944,0x0C,*
++	echo 131072,,,-
++	} | /sbin/sfdisk -D -uS -H 255 -S 63 -C ${CYLINDERS} ${LOOPDEV}
+ 
+ 	# Prepare loop devices for boot and filesystem partitions
+ 	BOOT_OFFSET=32256
+-- 
+1.7.4.1
+
 
