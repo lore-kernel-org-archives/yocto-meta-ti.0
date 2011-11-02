@@ -1,25 +1,31 @@
-Return-Path: <denis@denix.org>
-Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
-	[206.46.173.11])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5EB7CE00559
-	for <meta-ti@yoctoproject.org>; Mon, 31 Oct 2011 19:37:23 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LTY00FR8N9ZFL70@vms173011.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 31 Oct 2011 21:37:11 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 14EE114AF5D; Mon,
-	31 Oct 2011 22:37:11 -0400 (EDT)
-Date: Mon, 31 Oct 2011 22:37:11 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Joel A Fernandes <joelagnel@ti.com>
-Message-id: <20111101023711.GW15391@denix.org>
-References: <1320111122-9374-1-git-send-email-joelagnel@ti.com>
-MIME-version: 1.0
-In-reply-to: <1320111122-9374-1-git-send-email-joelagnel@ti.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] beaglebone-tester: Update with latest fixes
+Return-Path: <joelagnel@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 772C8E006B4
+	for <meta-ti@yoctoproject.org>; Wed,  2 Nov 2011 13:36:38 -0700 (PDT)
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id pA2Kab4Q001069
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <meta-ti@yoctoproject.org>; Wed, 2 Nov 2011 15:36:37 -0500
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA2KabiD002673
+	for <meta-ti@yoctoproject.org>; Wed, 2 Nov 2011 15:36:37 -0500 (CDT)
+Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA2KabNG022143
+	for <meta-ti@yoctoproject.org>; Wed, 2 Nov 2011 15:36:37 -0500 (CDT)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle71.ent.ti.com
+	(128.247.5.62) with Microsoft SMTP Server id 14.1.323.3; Wed, 2 Nov 2011
+	15:36:36 -0500
+Received: from localhost.localdomain (lta0273324a.am.dhcp.ti.com
+	[10.247.20.212])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
+	pA2KaZIA012351;	Wed, 2 Nov 2011 15:36:36 -0500
+From: Joel A Fernandes <joelagnel@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 2 Nov 2011 15:36:33 -0500
+Message-ID: <1320266193-21790-1-git-send-email-joelagnel@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Cc: Joel A Fernandes <joelagnel@ti.com>
+Subject: [PATCH] linux-ti335x-psp 3.1: Fix gpio1_6 pinmux
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,47 +37,74 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2011 02:37:23 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 02 Nov 2011 20:36:38 -0000
+Content-Type: text/plain
 
-On Mon, Oct 31, 2011 at 08:32:01PM -0500, Joel A Fernandes wrote:
-> Fixes:
->  * 100% CPU usage when no test is running
->  * Turn on USB host session before checking for usb-serial device
-> 
-> Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+This change is required to get GPIO 1_6 working for bone test init purposes
+These 2 lines were dropped from the original patch.
 
-Thanks, applied.
+Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+---
+ ...0002-ARM-OMAP2-beaglebone-add-LED-support.patch |   22 ++++++++++++++++---
+ recipes-kernel/linux/linux-ti33x-psp_3.1.bb        |    2 +-
+ 2 files changed, 19 insertions(+), 5 deletions(-)
 
-> ---
->  recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
-> index 9e49e87..6284ff2 100644
-> --- a/recipes-ti/beagleboard/beaglebone-tester.bb
-> +++ b/recipes-ti/beagleboard/beaglebone-tester.bb
-> @@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
->  # only scripts and data
->  inherit allarch
->  
-> -PR = "r3"
-> +PR = "r4"
->  
->  SRC_URI = "git://github.com/joelagnel/validation-scripts.git;protocol=git \
->            "
-> -SRCREV = "c6faf47c9e73da7d256cd226bc9eb2a3e4a19aaa"
-> +SRCREV = "53cc6b3d8f46814d0aa2daedfbc380ba64059a97"
->  
->  S = "${WORKDIR}/git"
->  
-> -- 
-> 1.7.0.4
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.1/0002-ARM-OMAP2-beaglebone-add-LED-support.patch b/recipes-kernel/linux/linux-ti33x-psp-3.1/0002-ARM-OMAP2-beaglebone-add-LED-support.patch
+index c1e7560..68c7f15 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp-3.1/0002-ARM-OMAP2-beaglebone-add-LED-support.patch
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.1/0002-ARM-OMAP2-beaglebone-add-LED-support.patch
+@@ -1,12 +1,13 @@
+-From 3672d287f5382b102e02400298a00d6f8052dd9d Mon Sep 17 00:00:00 2001
++From 4df4ee83b31e09942932d67890d36ae116363ac1 Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen@dominion.thruhere.net>
+ Date: Wed, 2 Nov 2011 09:11:59 +0100
+-Subject: [PATCH 2/3] ARM: OMAP2+: beaglebone: add LED support
++Subject: [PATCH] ARM: OMAP2+: beaglebone: add LED support
+ 
+ Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+ ---
+  arch/arm/mach-omap2/board-am335xevm.c |   66 +++++++++++++++++++++++++++++++++
+- 1 files changed, 66 insertions(+), 0 deletions(-)
++ arch/arm/mach-omap2/mux33xx.c         |    2 +-
++ 2 files changed, 67 insertions(+), 1 deletions(-)
+ 
+ diff --git a/arch/arm/mach-omap2/board-am335xevm.c b/arch/arm/mach-omap2/board-am335xevm.c
+ index ee936e0..ecf4a76 100644
+@@ -113,6 +114,19 @@ index ee936e0..ecf4a76 100644
+  	{NULL, 0, 0},
+  };
+  
++diff --git a/arch/arm/mach-omap2/mux33xx.c b/arch/arm/mach-omap2/mux33xx.c
++index 0286c4f..f09e827 100644
++--- a/arch/arm/mach-omap2/mux33xx.c
+++++ b/arch/arm/mach-omap2/mux33xx.c
++@@ -49,7 +49,7 @@ static struct omap_mux __initdata am33xx_muxmodes[] = {
++ 		NULL, NULL, NULL, NULL),
++ 	_AM33XX_MUXENTRY(GPMC_AD6, 0,
++ 		"gpmc_ad6", "mmc1_dat6", NULL, NULL,
++-		NULL, NULL, NULL, NULL),
+++		NULL, NULL, NULL, "gpio1_6"),
++ 	_AM33XX_MUXENTRY(GPMC_AD7, 0,
++ 		"gpmc_ad7", "mmc1_dat7", NULL, NULL,
++ 		NULL, NULL, NULL, NULL),
+ -- 
+-1.7.2.5
++1.7.4.1
+ 
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
+index faf7406..953b574 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
+@@ -11,7 +11,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
+ 
+ BRANCH = "v3.1-staging"
+ SRCREV = "1d84d8853fa30cf3db2571a5aec572accca4e29d"
+-MACHINE_KERNEL_PR_append = "n+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "o+gitr${SRCREV}"
+ 
+ COMPATIBLE_MACHINE = "(ti33x)"
+ 
+-- 
+1.7.4.1
+
 
