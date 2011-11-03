@@ -1,28 +1,30 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wy0-f176.google.com (mail-wy0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CEE3FE00559
-	for <meta-ti@yoctoproject.org>; Thu,  3 Nov 2011 09:39:38 -0700 (PDT)
-Received: by wyg34 with SMTP id 34so2061539wyg.35
-	for <meta-ti@yoctoproject.org>; Thu, 03 Nov 2011 09:39:37 -0700 (PDT)
-Received: by 10.227.205.20 with SMTP id fo20mr12815648wbb.20.1320338376864;
-	Thu, 03 Nov 2011 09:39:36 -0700 (PDT)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235]) by mx.google.com with ESMTPS id
-	fy13sm11108929wbb.18.2011.11.03.09.39.35
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 03 Nov 2011 09:39:36 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <20111103161518.GB15391@denix.org>
-Date: Thu, 3 Nov 2011 17:39:32 +0100
-Message-Id: <9686C066-9DD2-4BD4-BC5F-A3CFE9222A13@dominion.thruhere.net>
-References: <1320309987-31529-1-git-send-email-koen@dominion.thruhere.net>
-	<20111103161518.GB15391@denix.org>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Mailer: Apple Mail (2.1251.1)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 1/2] beaglebone-getting-started: initial add
+Return-Path: <jdk@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B9DDE00305
+	for <meta-ti@yoctoproject.org>; Thu,  3 Nov 2011 14:34:47 -0700 (PDT)
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id pA3LYkT2010237
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <meta-ti@yoctoproject.org>; Thu, 3 Nov 2011 16:34:46 -0500
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA3LYkSA013596
+	for <meta-ti@yoctoproject.org>; Thu, 3 Nov 2011 16:34:46 -0500 (CDT)
+Received: from DLEE74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA3LYkoK024847
+	for <meta-ti@yoctoproject.org>; Thu, 3 Nov 2011 16:34:46 -0500 (CDT)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Thu, 3 Nov 2011 16:34:46 -0500
+Received: from D620.itg.ti.com (h114-113.vpn.ti.com [172.24.114.113])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA3LYjH0012361;
+	Thu, 3 Nov 2011 16:34:45 -0500
+From: Jason Kridner <jdk@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 3 Nov 2011 17:34:44 -0400
+Message-ID: <1320356084-4206-1-git-send-email-jdk@ti.com>
+X-Mailer: git-send-email 1.7.4.1
+MIME-Version: 1.0
+Subject: [PATCH] sdimage_class: eliminate 2GB exception for BeagleBone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,78 +36,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2011 16:39:39 -0000
-X-Groupsio-MsgNum: 75
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_7D2909F0-E979-4CD3-8120-312D1F854D9D";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Thu, 03 Nov 2011 21:34:47 -0000
+Content-Type: text/plain
 
---Apple-Mail=_7D2909F0-E979-4CD3-8120-312D1F854D9D
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+Gerald has said his supply of 2GB SD cards for BeagleBone has
+gone away, so we are back to 4GB cards.  No more need for this
+exeption:
+
+Signed-off-by: Jason Kridner <jdk@ti.com>
+---
+ classes/sdcard_image.bbclass |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
+
+diff --git a/classes/sdcard_image.bbclass b/classes/sdcard_image.bbclass
+index 45dc54d..e3edf61 100644
+--- a/classes/sdcard_image.bbclass
++++ b/classes/sdcard_image.bbclass
+@@ -12,9 +12,8 @@ LOOPDEV ?= "/dev/loop1"
+ LOOPDEV_BOOT ?= "/dev/loop2"
+ LOOPDEV_FS ?= "/dev/loop3"
+ 
+-# Default to 4GiB images, but use 2GiB images for beaglebone
++# Default to 4GiB images
+ SDIMG_SIZE ?= "444" 
+-SDIMG_SIZE_beaglebone = "222"
+ 
+ BOOTPARTNAME_beaglebone = "BEAGLE_BONE"
+ BOOTPARTNAME ?= "${MACHINE}"
+-- 
+1.7.4.1
 
 
-Op 3 nov. 2011, om 17:15 heeft Denys Dmytriyenko het volgende =
-geschreven:
-
-> On Thu, Nov 03, 2011 at 09:46:26AM +0100, Koen Kooi wrote:
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->> ---
->> recipes-misc/payload/beaglebone-getting-started.bb |   15 =
-+++++++++++++++
->> 1 files changed, 15 insertions(+), 0 deletions(-)
->> create mode 100644 recipes-misc/payload/beaglebone-getting-started.bb
->>=20
->> diff --git a/recipes-misc/payload/beaglebone-getting-started.bb =
-b/recipes-misc/payload/beaglebone-getting-started.bb
->> new file mode 100644
->> index 0000000..d68de7e
->> --- /dev/null
->> +++ b/recipes-misc/payload/beaglebone-getting-started.bb
->> @@ -0,0 +1,15 @@
->> +DESCRIPTION =3D "BeagleBone Getting Started Guide"
->> +
->> +# Ask Jason
->> +LICENSE =3D "MIT"
->> +LIC_FILES_CHKSUM =3D =
-"file://${COREBASE}/LICENSE;md5=3D3f40d7994397109285ec7b81fdeb3b58"
->=20
-> Is this allowed (logically and/or legally)? It seems like defeating =
-the=20
-> purpose of checksumming the license definition of the package. I know =
-it's=20
-> done for the tasks, but tasks are not real packages - they are pure =
-metadata.=20
-> This one fetches a git repository, hence contains "code".
->=20
-> I believe the proper way, if the package even mentions its license, is =
-to=20
-> checksum that text directly or a portion of the code:
->=20
-> LIC_FILES_CHKSUM =3D =
-"file://git/src/main.c;beginline=3D5;endline=3D9;md5=3D1234567890abcdef"
-
-That's why it says "ask jason", since the code itself contains no =
-license info (matrix-gui suffers from the same bug).
-
-regards,
-
-Koen=
-
---Apple-Mail=_7D2909F0-E979-4CD3-8120-312D1F854D9D
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAk6yw8UACgkQMkyGM64RGpHxFwCeOLi9WjEpx9QsxGYnpRgvbRmf
-EJsAn1IG9fRJpv5qRPOJDT5Kj8vYjYK9
-=f+Jv
------END PGP SIGNATURE-----
-
---Apple-Mail=_7D2909F0-E979-4CD3-8120-312D1F854D9D--
