@@ -1,32 +1,37 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-qw0-f48.google.com (mail-qw0-f48.google.com
-	[209.85.216.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B62CDE00307
-	for <meta-ti@yoctoproject.org>; Fri,  4 Nov 2011 10:51:39 -0700 (PDT)
-Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
-	(1024-bit key; insecure key) header.i=@gmail.com;
-	x-dkim-adsp=none (insecure policy)
-Received: by qadb14 with SMTP id b14so3607136qad.35
-	for <meta-ti@yoctoproject.org>; Fri, 04 Nov 2011 10:51:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=Pa5mAmnk0iM7A16z5dff/b2X9E2MYDwXdQX9kDzxhjg=;
-	b=GilBvDnWjlICaQvc7WbHW+BkQcXIvyFZRuJMiudggeqxhFXp8KjTd4WHQPJomSo8Ie
-	dMg9fdbW03kpnzgkU6Py0qUfblFvw9LwymkoWD/Vu7n3lH8IJbPd4lAiKiai3fUMtxwz
-	nEDPUJIYQjgufg1/a1KadA/Z++WXeUjV8wDK0=
-MIME-Version: 1.0
-Received: by 10.229.177.40 with SMTP id bg40mr2036499qcb.152.1320429098868;
-	Fri, 04 Nov 2011 10:51:38 -0700 (PDT)
-Received: by 10.229.94.72 with HTTP; Fri, 4 Nov 2011 10:51:38 -0700 (PDT)
-In-Reply-To: <CC88246E-01E5-4BA1-A555-68F557393200@dominion.thruhere.net>
+Return-Path: <joelagnel@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 59991E00309
+	for <meta-ti@yoctoproject.org>; Fri,  4 Nov 2011 12:26:41 -0700 (PDT)
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id pA4JPo6E018117
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Fri, 4 Nov 2011 14:25:50 -0500
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA4JPo8Q023707;
+	Fri, 4 Nov 2011 14:25:50 -0500 (CDT)
+Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA4JPoVw009922;
+	Fri, 4 Nov 2011 14:25:50 -0500 (CDT)
+Received: from DLEE09.ent.ti.com ([fe80::a026:b4ad:3e78:5ae5]) by
+	DFLE71.ent.ti.com ([fe80::29f6:72ad:a62e:2025%21]) with mapi id
+	14.01.0323.003; Fri, 4 Nov 2011 14:25:50 -0500
+From: "Fernandes, Joel A" <joelagnel@ti.com>
+To: Tom Rini <tom.rini@gmail.com>, Koen Kooi <koen@dominion.thruhere.net>
+Thread-Topic: [meta-ti] [PATCH] u-boot 2011.10rc: Fix pmic shut down over
+	USB power
+Thread-Index: AQHMmqVoyuB9IlrQK0ai1f0D6kZ7L5WcqdEAgACpgwD//8ZBoA==
+Date: Fri, 4 Nov 2011 19:25:49 +0000
+Message-ID: <083BC63EECB6FD41B8E81CF7FD87CC0F043C48@DLEE09.ent.ti.com>
 References: <1320377869-29758-1-git-send-email-joelagnel@ti.com>
 	<CC88246E-01E5-4BA1-A555-68F557393200@dominion.thruhere.net>
-Date: Fri, 4 Nov 2011 10:51:38 -0700
-Message-ID: <CA+M6bXkub505qK5YKWd28mCc0uB974gPmVLw35m6dhNsefnPwg@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: meta-ti@yoctoproject.org, Joel A Fernandes <joelagnel@ti.com>
+	<CA+M6bXkub505qK5YKWd28mCc0uB974gPmVLw35m6dhNsefnPwg@mail.gmail.com>
+In-Reply-To: <CA+M6bXkub505qK5YKWd28mCc0uB974gPmVLw35m6dhNsefnPwg@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
+MIME-Version: 1.0
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [PATCH] u-boot 2011.10rc: Fix pmic shut down over USB power
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -39,23 +44,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Nov 2011 17:51:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 04 Nov 2011 19:26:41 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 4, 2011 at 12:44 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
->
-> Op 4 nov. 2011, om 04:37 heeft Joel A Fernandes het volgende geschreven:
->
->> These are some fixes suggested by Jason Kridner to fix the PMIC
->> instabilities we've been seeing over USB power.
->>
->> Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
->> Cc: Jason Kridner <jdk@ti.com>
->
-> Applied, thanks!
+> -----Original Message-----
+> From: Tom Rini [mailto:tom.rini@gmail.com]
+> Sent: Friday, November 04, 2011 12:52 PM
+> To: Koen Kooi
+> Cc: Fernandes, Joel A; meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCH] u-boot 2011.10rc: Fix pmic shut down
+> over USB power
+>=20
+> On Fri, Nov 4, 2011 at 12:44 AM, Koen Kooi <koen@dominion.thruhere.net>
+> wrote:
+> >
+> > Op 4 nov. 2011, om 04:37 heeft Joel A Fernandes het volgende
+> geschreven:
+> >
+> >> These are some fixes suggested by Jason Kridner to fix the PMIC
+> >> instabilities we've been seeing over USB power.
+> >>
+> >> Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+> >> Cc: Jason Kridner <jdk@ti.com>
+> >
+> > Applied, thanks!
+>=20
+> This is of course the bad for A1 patch :)
 
-This is of course the bad for A1 patch :)
+New patch is coming! And if your A1 does not have a programmed EEPROM, then=
+ it doesn't have a bad effect anyway but that's another topic ;)
 
--- 
-Tom
+Thanks,
+Joel
 
