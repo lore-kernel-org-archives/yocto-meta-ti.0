@@ -1,26 +1,26 @@
 Return-Path: <koen@dominion.thruhere.net>
 Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF5B5E00304
-	for <meta-ti@yoctoproject.org>; Fri,  4 Nov 2011 00:45:06 -0700 (PDT)
-Received: by wwf10 with SMTP id 10so2765184wwf.11
-	for <meta-ti@yoctoproject.org>; Fri, 04 Nov 2011 00:45:05 -0700 (PDT)
-Received: by 10.216.132.215 with SMTP id o65mr4031100wei.17.1320392705084;
-	Fri, 04 Nov 2011 00:45:05 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0333E00309
+	for <meta-ti@yoctoproject.org>; Fri,  4 Nov 2011 00:45:15 -0700 (PDT)
+Received: by mail-ww0-f54.google.com with SMTP id 10so2765184wwf.11
+	for <meta-ti@yoctoproject.org>; Fri, 04 Nov 2011 00:45:15 -0700 (PDT)
+Received: by 10.227.202.149 with SMTP id fe21mr16408190wbb.15.1320392715371;
+	Fri, 04 Nov 2011 00:45:15 -0700 (PDT)
 Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
 	[84.80.112.235])
-	by mx.google.com with ESMTPS id eu16sm14525651wbb.7.2011.11.04.00.45.02
+	by mx.google.com with ESMTPS id eu16sm14525651wbb.7.2011.11.04.00.45.11
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 04 Nov 2011 00:45:03 -0700 (PDT)
+	Fri, 04 Nov 2011 00:45:13 -0700 (PDT)
 Mime-Version: 1.0 (Apple Message framework v1251.1)
 From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1320377869-29758-1-git-send-email-joelagnel@ti.com>
-Date: Fri, 4 Nov 2011 08:44:56 +0100
-Message-Id: <CC88246E-01E5-4BA1-A555-68F557393200@dominion.thruhere.net>
-References: <1320377869-29758-1-git-send-email-joelagnel@ti.com>
-To: Joel A Fernandes <joelagnel@ti.com>
+In-Reply-To: <1320356084-4206-1-git-send-email-jdk@ti.com>
+Date: Fri, 4 Nov 2011 08:45:11 +0100
+Message-Id: <BBFD5A86-6DA8-4342-BD2E-509875E9583E@dominion.thruhere.net>
+References: <1320356084-4206-1-git-send-email-jdk@ti.com>
+To: Jason Kridner <jdk@ti.com>
 X-Mailer: Apple Mail (2.1251.1)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] u-boot 2011.10rc: Fix pmic shut down over USB power
+Subject: Re: [PATCH] sdimage_class: eliminate 2GB exception for BeagleBone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,29 +32,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Nov 2011 07:45:07 -0000
-X-Groupsio-MsgNum: 78
+X-List-Received-Date: Fri, 04 Nov 2011 07:45:16 -0000
+X-Groupsio-MsgNum: 79
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_ED1AAC05-9920-4591-95C0-4B522EC65421";
+	boundary="Apple-Mail=_E008DC39-56CB-4C2B-B270-D4A13B962DE4";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_ED1AAC05-9920-4591-95C0-4B522EC65421
+--Apple-Mail=_E008DC39-56CB-4C2B-B270-D4A13B962DE4
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain;
 	charset=us-ascii
 
 
-Op 4 nov. 2011, om 04:37 heeft Joel A Fernandes het volgende geschreven:
+Op 3 nov. 2011, om 22:34 heeft Jason Kridner het volgende geschreven:
 
-> These are some fixes suggested by Jason Kridner to fix the PMIC
-> instabilities we've been seeing over USB power.
+> Gerald has said his supply of 2GB SD cards for BeagleBone has
+> gone away, so we are back to 4GB cards.  No more need for this
+> exeption:
 > 
-> Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
-> Cc: Jason Kridner <jdk@ti.com>
+> Signed-off-by: Jason Kridner <jdk@ti.com>
 
 Applied, thanks!
 
---Apple-Mail=_ED1AAC05-9920-4591-95C0-4B522EC65421
+--Apple-Mail=_E008DC39-56CB-4C2B-B270-D4A13B962DE4
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline;
 	filename=signature.asc
@@ -64,9 +64,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 
 -----BEGIN PGP SIGNATURE-----
 
-iEYEARECAAYFAk6zl/kACgkQMkyGM64RGpEZLwCfVjdVFoiqWdsZMV1d5V9Pp7fB
-WjgAniEfSF4gPLuhpi0yXo/U4bGsvbuq
-=c6IB
+iEYEARECAAYFAk6zmAcACgkQMkyGM64RGpGmjQCeNwVsiBIHvTO0QibRieq73MGH
+ucwAnRhYF49rOTJlnMCFALTAmLitiKvV
+=mAXI
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_ED1AAC05-9920-4591-95C0-4B522EC65421--
+--Apple-Mail=_E008DC39-56CB-4C2B-B270-D4A13B962DE4--
