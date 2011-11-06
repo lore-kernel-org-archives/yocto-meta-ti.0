@@ -1,31 +1,26 @@
-Return-Path: <joelagnel@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7362AE00310
-	for <meta-ti@yoctoproject.org>; Sun,  6 Nov 2011 01:07:08 -0700 (PDT)
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id pA68776j018008
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <meta-ti@yoctoproject.org>; Sun, 6 Nov 2011 02:07:07 -0600
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep34.itg.ti.com (8.13.7/8.13.8) with ESMTP id pA6876QD013905
-	for <meta-ti@yoctoproject.org>; Sun, 6 Nov 2011 02:07:06 -0600 (CST)
-Received: from DLEE74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA687620013523
-	for <meta-ti@yoctoproject.org>; Sun, 6 Nov 2011 02:07:06 -0600 (CST)
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
-	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
-	Sun, 6 Nov 2011 02:07:06 -0600
-Received: from localhost.localdomain (chase-ubuntu.am.dhcp.ti.com
-	[128.247.105.25])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	pA6875gf010477;	Sun, 6 Nov 2011 02:07:06 -0600
-From: Joel A Fernandes <joelagnel@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Sun, 6 Nov 2011 01:50:45 -0600
-Message-ID: <1320565846-518-1-git-send-email-joelagnel@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Cc: Joel A Fernandes <joelagnel@ti.com>
-Subject: [PATCH] beaglebone-tester: Update to latest with fixes
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
+	[209.85.215.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4EF69E00310
+	for <meta-ti@yoctoproject.org>; Sun,  6 Nov 2011 01:27:08 -0800 (PST)
+Received: by eyh5 with SMTP id 5so4004290eyh.35
+	for <meta-ti@yoctoproject.org>; Sun, 06 Nov 2011 01:27:07 -0800 (PST)
+Received: by 10.14.10.82 with SMTP id 58mr1948274eeu.92.1320571627400;
+	Sun, 06 Nov 2011 01:27:07 -0800 (PST)
+Received: from [10.0.3.16] ([194.171.92.100])
+	by mx.google.com with ESMTPS id z58sm40623768eea.3.2011.11.06.01.27.05
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 06 Nov 2011 01:27:05 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1320565846-518-1-git-send-email-joelagnel@ti.com>
+Date: Sun, 6 Nov 2011 10:26:59 +0100
+Message-Id: <5FB1C247-7FA0-479A-84EA-5F947DC4026D@dominion.thruhere.net>
+References: <1320565846-518-1-git-send-email-joelagnel@ti.com>
+To: Joel A Fernandes <joelagnel@ti.com>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] beaglebone-tester: Update to latest with fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,38 +32,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Nov 2011 08:07:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 06 Nov 2011 09:27:09 -0000
+X-Groupsio-MsgNum: 86
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_425AE082-84B3-4F3B-8B1D-26EB1A44361A";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-  Hopefully the last round of minor fixes:
-    * only leds 3 and 4 are touched, 1 and 2 are for system use
-    * halt after test fail so that the user doesn't accidentaly corrupt the card
-    * remove all usb gadget modules before test start
-
-Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
----
- recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
-index 2db6e8c..1020172 100644
---- a/recipes-ti/beagleboard/beaglebone-tester.bb
-+++ b/recipes-ti/beagleboard/beaglebone-tester.bb
-@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
- # only scripts and data
- inherit allarch
- 
--PR = "r5"
-+PR = "r6"
- 
- SRC_URI = "git://github.com/joelagnel/validation-scripts.git;protocol=git \
-           "
--SRCREV = "7c994dfe5d97d9385605bfafab9c0b967814bac5"
-+SRCREV = "be5173d05cce4f914911366e5ddae1ff5c0af9cf"
- 
- S = "${WORKDIR}/git"
- 
--- 
-1.7.0.4
+--Apple-Mail=_425AE082-84B3-4F3B-8B1D-26EB1A44361A
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
 
+Op 6 nov. 2011, om 08:50 heeft Joel A Fernandes het volgende geschreven:
+
+>  Hopefully the last round of minor fixes:
+>    * only leds 3 and 4 are touched, 1 and 2 are for system use
+>    * halt after test fail so that the user doesn't accidentaly corrupt =
+the card
+>    * remove all usb gadget modules before test start
+>=20
+> Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+
+Applied, thanks!
+
+
+
+--Apple-Mail=_425AE082-84B3-4F3B-8B1D-26EB1A44361A
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk62UugACgkQMkyGM64RGpFhfwCfX87TVYWSnc//EpyozBloksFe
+drAAoImTZDyvSNIZuE+gC6/oDO7x7uLb
+=3ggX
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_425AE082-84B3-4F3B-8B1D-26EB1A44361A--
