@@ -1,26 +1,31 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8F15FE0054A
-	for <meta-ti@yoctoproject.org>; Sun,  6 Nov 2011 11:06:40 -0800 (PST)
-Received: by wwf10 with SMTP id 10so321416wwf.11
-	for <meta-ti@yoctoproject.org>; Sun, 06 Nov 2011 11:06:39 -0800 (PST)
-Received: by 10.180.3.33 with SMTP id 1mr5846328wiz.54.1320606398949;
-	Sun, 06 Nov 2011 11:06:38 -0800 (PST)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id h3sm3741594wiw.18.2011.11.06.11.06.35
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 06 Nov 2011 11:06:36 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1320579644-14051-1-git-send-email-jdk@ti.com>
-Date: Sun, 6 Nov 2011 20:06:32 +0100
-Message-Id: <41A7A313-0CD2-46C0-83A6-59197336DD63@dominion.thruhere.net>
-References: <1320579644-14051-1-git-send-email-jdk@ti.com>
-To: Jason Kridner <jdk@ti.com>
-X-Mailer: Apple Mail (2.1251.1)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] beaglebone-getting-started: Update Mac driver
+Return-Path: <joelagnel@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE772E0138C
+	for <meta-ti@yoctoproject.org>; Mon,  7 Nov 2011 22:10:12 -0800 (PST)
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id pA86ABIA004911
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <meta-ti@yoctoproject.org>; Tue, 8 Nov 2011 00:10:12 -0600
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep34.itg.ti.com (8.13.7/8.13.8) with ESMTP id pA86ABD9007588
+	for <meta-ti@yoctoproject.org>; Tue, 8 Nov 2011 00:10:11 -0600 (CST)
+Received: from DFLE70.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA86ABJE000559
+	for <meta-ti@yoctoproject.org>; Tue, 8 Nov 2011 00:10:11 -0600 (CST)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle70.ent.ti.com
+	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3; Tue, 8 Nov 2011
+	00:10:12 -0600
+Received: from localhost.localdomain (h16-252.vpn.ti.com [172.24.16.252])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA86AAB9021053;
+	Tue, 8 Nov 2011 00:10:11 -0600
+From: Joel A Fernandes <joelagnel@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 8 Nov 2011 00:10:07 -0600
+Message-ID: <1320732607-1033-1-git-send-email-joelagnel@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Cc: Joel A Fernandes <joelagnel@ti.com>
+Subject: [PATCH] beaglebone-tester: Update to latest, add quiet option to bootargs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,41 +37,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Nov 2011 19:06:41 -0000
-X-Groupsio-MsgNum: 88
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_FA028C98-1F15-462F-99C7-A90C40E07860";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 08 Nov 2011 06:10:13 -0000
+Content-Type: text/plain
 
---Apple-Mail=_FA028C98-1F15-462F-99C7-A90C40E07860
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=iso-8859-1
+Changes:
+* Fix a bug where I was removing g_mass_storage causing the storage-gadget service
+to appear to not work
+
+* Add quiet option
+
+Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+---
+ recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
+index 1020172..5816a5c 100644
+--- a/recipes-ti/beagleboard/beaglebone-tester.bb
++++ b/recipes-ti/beagleboard/beaglebone-tester.bb
+@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
+ # only scripts and data
+ inherit allarch
+ 
+-PR = "r6"
++PR = "r7"
+ 
+ SRC_URI = "git://github.com/joelagnel/validation-scripts.git;protocol=git \
+           "
+-SRCREV = "be5173d05cce4f914911366e5ddae1ff5c0af9cf"
++SRCREV = "602b3936907795520dba370b246c195a4f612a44"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+1.7.4.1
 
 
-Op 6 nov. 2011, om 12:40 heeft Jason Kridner het volgende geschreven:
-
-> This still isn't complete, but I wanted to push the latest Mac drivers
-> to be certain they are in the next build.
-
-Applied, thanks! You should see a new build appear in the usual =
-location(s) in =B13 hours from now.
-
-
-
---Apple-Mail=_FA028C98-1F15-462F-99C7-A90C40E07860
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAk622rkACgkQMkyGM64RGpGV4ACgqzDszLDynOSRXM8RmadR6AQ4
-i4YAoJAXYyvoRuPo4DONedJZrRCSj1oX
-=wirr
------END PGP SIGNATURE-----
-
---Apple-Mail=_FA028C98-1F15-462F-99C7-A90C40E07860--
