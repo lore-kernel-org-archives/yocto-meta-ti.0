@@ -1,34 +1,27 @@
-Return-Path: <pabigot@gmail.com>
-Received: from mail-yx0-f176.google.com (mail-yx0-f176.google.com
-	[209.85.213.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CFB31E0132F
-	for <meta-ti@yoctoproject.org>; Wed,  9 Nov 2011 11:01:41 -0800 (PST)
-Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
-	(1024-bit key; insecure key) header.i=@gmail.com;
-	x-dkim-adsp=none (insecure policy)
-Received: by yenm6 with SMTP id m6so2127726yen.35
-	for <meta-ti@yoctoproject.org>; Wed, 09 Nov 2011 11:01:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=Pzu4j+MDAhvu98W/hmfKg2jq65TGwlmLgSSu6kxHtcs=;
-	b=qkjthAiDfp0m1FZVXx6eBPv6DdFz4B+JO6Qv8qicLBQNDfJBfU2qPYmt3pOAxr5gHl
-	5N5PiNPHWEm202BuzT8iDhDkWi1Jlv7cD/HTZT2aQI82r8kQn7QgnpBuRmbiq5Cjnmw8
-	LqqPw5XFoxQ/toBRhyCixzaxo3YzxSmoP9Ut0=
-Received: by 10.50.6.202 with SMTP id d10mr4562442iga.31.1320864802815;
-	Wed, 09 Nov 2011 10:53:22 -0800 (PST)
-Received: from localhost.localdomain (c-66-41-60-82.hsd1.mn.comcast.net.
-	[66.41.60.82])
-	by mx.google.com with ESMTPS id a6sm4406943igc.3.2011.11.09.10.53.20
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
+	[209.85.215.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 51364E00305
+	for <meta-ti@yoctoproject.org>; Wed,  9 Nov 2011 11:46:03 -0800 (PST)
+Received: by eyh5 with SMTP id 5so3147329eyh.35
+	for <meta-ti@yoctoproject.org>; Wed, 09 Nov 2011 11:46:02 -0800 (PST)
+Received: by 10.180.4.37 with SMTP id h5mr4497060wih.45.1320867962572;
+	Wed, 09 Nov 2011 11:46:02 -0800 (PST)
+Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id fo3sm3517637wib.21.2011.11.09.11.46.00
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 09 Nov 2011 10:53:21 -0800 (PST)
-Sender: Peter Bigot <pabigot@gmail.com>
-From: "Peter A. Bigot" <bigotp@acm.org>
-To: meta-ti@yoctoproject.org
-Date: Wed,  9 Nov 2011 12:52:54 -0600
-Message-Id: <1320864774-11603-1-git-send-email-bigotp@acm.org>
-X-Mailer: git-send-email 1.7.6.4
-X-Mailman-Approved-At: Wed, 09 Nov 2011 11:05:00 -0800
-Subject: sdcard_image: add dependency on native ext2 utilities
+	Wed, 09 Nov 2011 11:46:01 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1320864774-11603-1-git-send-email-bigotp@acm.org>
+Date: Wed, 9 Nov 2011 20:45:56 +0100
+Message-Id: <FE1B0D3F-EC41-4BE8-B83A-8A0DA3035E8C@dominion.thruhere.net>
+References: <1320864774-11603-1-git-send-email-bigotp@acm.org>
+To: Peter A. Bigot <bigotp@acm.org>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: sdcard_image: add dependency on native ext2 utilities
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,30 +33,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2011 19:01:42 -0000
+X-List-Received-Date: Wed, 09 Nov 2011 19:46:04 -0000
+X-Groupsio-MsgNum: 101
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_C75DCFCE-AB05-4024-B9DE-A4BDC0E03BF6";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-From: "Peter A. Bigot" <bigotp@acm.org>
-
-Signed-off-by: Peter A. Bigot <bigotp@acm.org>
----
- classes/sdcard_image.bbclass |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
-
-diff --git a/classes/sdcard_image.bbclass b/classes/sdcard_image.bbclass
-index f7251f5..531b419 100644
---- a/classes/sdcard_image.bbclass
-+++ b/classes/sdcard_image.bbclass
-@@ -3,6 +3,9 @@ inherit image
- # Add the fstypes we need
- IMAGE_FSTYPES_append = " tar.bz2 sdimg"
- 
-+# Ensure required utilities are present
-+IMAGE_DEPENDS_sdimg = "genext2fs-native e2fsprogs-native"
-+
- # Change this to match your host distro
- LOSETUP ?= "/sbin/losetup"
- 
--- 
-1.7.6.4
+--Apple-Mail=_C75DCFCE-AB05-4024-B9DE-A4BDC0E03BF6
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset=us-ascii
 
 
+Op 9 nov. 2011, om 19:52 heeft Peter A. Bigot het volgende geschreven:
+
+> From: "Peter A. Bigot" <bigotp@acm.org>
+> 
+> Signed-off-by: Peter A. Bigot <bigotp@acm.org>
+
+Thanks, applied!
+
+
+
+
+--Apple-Mail=_C75DCFCE-AB05-4024-B9DE-A4BDC0E03BF6
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk662HYACgkQMkyGM64RGpEoxwCgkwywgKARz38cC7rWFVp1731q
+PgIAoJuYcb1uBDM7fnViN0mAdcPa2Dlj
+=e04l
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_C75DCFCE-AB05-4024-B9DE-A4BDC0E03BF6--
