@@ -1,27 +1,31 @@
-Return-Path: <denis@denix.org>
-Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
-	[206.46.173.5])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA50DE00305
-	for <meta-ti@yoctoproject.org>; Tue,  8 Nov 2011 17:32:32 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LUD000BSDLG95G5@vms173005.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 08 Nov 2011 19:32:05 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 55FC614AF5D; Tue,
-	08 Nov 2011 20:32:04 -0500 (EST)
-Date: Tue, 08 Nov 2011 20:32:04 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20111109013204.GE15391@denix.org>
-References: <CAPOJ94PUaBtZkRHE_v_x4raOQZnBtHp9bt6mvoMjZGmPTQ=-jQ@mail.gmail.com>
-	<CA+M6bXkfk40ztOn+WFocLFGzLRU6PE4z5Qf_9=NAnhO_U4QFSg@mail.gmail.com>
-	<CAPOJ94NE2DBeyuW5zqusE-HL4dTxGVvf3U0n0dfnscC0UzF0Sw@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAPOJ94NE2DBeyuW5zqusE-HL4dTxGVvf3U0n0dfnscC0UzF0Sw@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [oe] forcing dependency on genext2fs-native
+Return-Path: <joelagnel@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B593FE0132F
+	for <meta-ti@yoctoproject.org>; Wed,  9 Nov 2011 08:01:04 -0800 (PST)
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id pA9G13RD003769
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <meta-ti@yoctoproject.org>; Wed, 9 Nov 2011 10:01:03 -0600
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA9G13iZ008503
+	for <meta-ti@yoctoproject.org>; Wed, 9 Nov 2011 10:01:03 -0600 (CST)
+Received: from DFLE70.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pA9G139d025215
+	for <meta-ti@yoctoproject.org>; Wed, 9 Nov 2011 10:01:03 -0600 (CST)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle70.ent.ti.com
+	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3; Wed, 9 Nov 2011
+	10:01:03 -0600
+Received: from localhost.localdomain (chase-ubuntu.am.dhcp.ti.com
+	[128.247.105.25])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
+	pA9G12AE006401;	Wed, 9 Nov 2011 10:01:02 -0600
+From: Joel A Fernandes <joelagnel@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 9 Nov 2011 10:02:24 -0600
+Message-ID: <1320854545-31502-1-git-send-email-joelagnel@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Cc: Joel A Fernandes <joelagnel@ti.com>
+Subject: [PATCH] gadget-init: Add network-gadget services and other fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,60 +37,163 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2011 01:32:35 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-disposition: inline
-Content-transfer-encoding: 8bit
+X-List-Received-Date: Wed, 09 Nov 2011 16:01:05 -0000
+Content-Type: text/plain
 
-On Tue, Nov 08, 2011 at 02:00:28PM -0600, Peter Bigot wrote:
-> On Tue, Nov 8, 2011 at 1:23 PM, Tom Rini <tom.rini@gmail.com> wrote:
-> > On Tue, Nov 8, 2011 at 11:25 AM, Peter Bigot <bigotp@acm.org> wrote:
-> >> I've added a DEPENDS += "genext2fs-native" for a recipe in meta-ti,
-> >> but the corresponding package is not getting built.  bitbake -DDD
-> >> says:
-> >>
-> >> DEBUG: Added dependency genext2fs-native for
-> >> /prj/oe/angstrom/sources/meta-ti/recipes-misc/images/cloud9-gfx-image.bb
-> >> DEBUG: providers for genext2fs-native are: ['genext2fs-native']
-> >> DEBUG: sorted providers for genext2fs-native are:
-> >> ['virtual:native:/prj/oe/angstrom/sources/openembedded-core/meta/recipes-devtools/genext2fs/genext2fs_1.4.1.bb']
-> >> DEBUG: adding virtual:native:/prj/oe/angstrom/sources/openembedded-core/meta/recipes-devtools/genext2fs/genext2fs_1.4.1.bb
-> >> to satisfy genext2fs-native
-> >>
-> >> I'm guessing the "virtual:native:" means somebody thinks genext2fs
-> >> should already be installed on the host.  It's not available on
-> >> Fedora, so this decision is wrong.  I haven't been able to figure out
-> >> what's causing this to happen.
-> >
-> > No, it means that the "virtual:native" (coming from BBCLASSEXTEND in
-> > the recipe file) is being selected to provide "genext2fs-native"
-> > (since in many cases we don't have a separate -native recipe, we just
-> > use BBCLASSEXTEND).  What's probably happening is that you need
-> > genext2fs to exist for a specific task and just "DEPENDS +=
-> > genext2fs-native" really means "make do_configure depend on
-> > genext2fs-native being in the sysroot".  Did you modify
-> > cloud9-gfx-image?  It should already get the DEPENDS right for
-> > populating the image.
-> 
-> The build had failed in meta-ti/classes/sdcard_image.bbclass which
-> used genext2fs to build an sdimg image.
-> 
-> I had added DEPENDS += "genext2fs-native" to
-> meta-ti/recipes-misc/images/ti-hw-bringup-image.bb since it was what
-> inherited sdcard_image.
-> 
-> On further investigation cued by your response, it seems that the
-> correct change is instead to add:
-> 
-> IMAGE_DEPENDS_sdimg = "genext2fs-native"
-> 
-> analogously to what's done for the other image types.  With that the
-> bitbake of cloud9-gfx-image does the right thing.
+* Add rule to start network-gadget when mass storage is ejected
+* Add network-gadget-init service and scripts to switch to g_ether
+* Add DHCP service / conf
+* Update to storage-gadget: rmmod on stop
 
-Thanks for your report! Can you please submit a patch to meta-ti mailing list 
-at meta-ti@yoctoproject.org
-Thanks.
+Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+---
+ recipes-ti/beagleboard/gadget-init.bb              |   10 ++++++++--
+ .../beagleboard/gadget-init/bone-gmass-eject.rules |    1 +
+ .../beagleboard/gadget-init/g-ether-insert.sh      |   11 +++++++++++
+ .../beagleboard/gadget-init/g-storage-reinsert.sh  |    4 ++++
+ .../gadget-init/network-gadget-init.service        |    9 +++++++++
+ .../gadget-init/storage-gadget-init.service        |    2 ++
+ recipes-ti/beagleboard/gadget-init/udhcpd.conf     |    5 +++++
+ recipes-ti/beagleboard/gadget-init/udhcpd.service  |   11 +++++++++++
+ 8 files changed, 51 insertions(+), 2 deletions(-)
+ create mode 100644 recipes-ti/beagleboard/gadget-init/bone-gmass-eject.rules
+ create mode 100755 recipes-ti/beagleboard/gadget-init/g-ether-insert.sh
+ create mode 100755 recipes-ti/beagleboard/gadget-init/g-storage-reinsert.sh
+ create mode 100644 recipes-ti/beagleboard/gadget-init/network-gadget-init.service
+ create mode 100644 recipes-ti/beagleboard/gadget-init/udhcpd.conf
+ create mode 100644 recipes-ti/beagleboard/gadget-init/udhcpd.service
 
+diff --git a/recipes-ti/beagleboard/gadget-init.bb b/recipes-ti/beagleboard/gadget-init.bb
+index ee51586..7b440ff 100644
+--- a/recipes-ti/beagleboard/gadget-init.bb
++++ b/recipes-ti/beagleboard/gadget-init.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Units to initialize usb gadgets"
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+@@ -9,8 +9,14 @@ COMPATIBLE_MACHINE = "(ti33x)"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ SRC_URI = "file://storage-gadget-init.service \
++           file://network-gadget-init.service \
++           file://udhcpd.service \
++           file://udhcpd.conf \
+            file://99-hokey-pokey.rules \
+            file://hokey-pokey.sh \
++           file://bone-gmass-eject.rules \
++           file://g-storage-reinsert.sh \
++           file://g-ether-insert.sh \
+           "
+ 
+ do_install() {
+@@ -23,10 +29,10 @@ do_install() {
+ 
+ 	install -d ${D}${sysconfdir}/udev/rules.d
+ 	install -m 0644 ${WORKDIR}/*.rules ${D}${sysconfdir}/udev/rules.d
++	install -m 0644 ${WORKDIR}/*.conf ${D}${sysconfdir}
+ 
+ 	install -d ${D}${bindir}
+ 	install -m 0755 ${WORKDIR}/*.sh ${D}${bindir}
+-
+ }
+ 
+ FILES_${PN} = "${base_libdir}/systemd ${sysconfdir} ${bindir}"
+diff --git a/recipes-ti/beagleboard/gadget-init/bone-gmass-eject.rules b/recipes-ti/beagleboard/gadget-init/bone-gmass-eject.rules
+new file mode 100644
+index 0000000..fa5d627
+--- /dev/null
++++ b/recipes-ti/beagleboard/gadget-init/bone-gmass-eject.rules
+@@ -0,0 +1 @@
++SUBSYSTEM=="block",ACTION=="change",KERNEL=="mmcblk0p1",RUN+="/usr/sbin/g-ether-insert.sh"
+diff --git a/recipes-ti/beagleboard/gadget-init/g-ether-insert.sh b/recipes-ti/beagleboard/gadget-init/g-ether-insert.sh
+new file mode 100755
+index 0000000..6c6956e
+--- /dev/null
++++ b/recipes-ti/beagleboard/gadget-init/g-ether-insert.sh
+@@ -0,0 +1,11 @@
++#!/bin/sh
++if [ -a /sys/devices/platform/omap/ti81xx-usbss/musb-hdrc.0/gadget/lun0/file ]
++then
++	x=`cat /sys/devices/platform/omap/ti81xx-usbss/musb-hdrc.0/gadget/lun0/file`
++	if [ "$x" == ""  ]
++	then
++		/bin/systemctl stop storage-gadget-init.service
++		/bin/systemctl start network-gadget-init.service
++		/bin/systemctl start udhcpd.service
++	fi
++fi
+diff --git a/recipes-ti/beagleboard/gadget-init/g-storage-reinsert.sh b/recipes-ti/beagleboard/gadget-init/g-storage-reinsert.sh
+new file mode 100755
+index 0000000..546b438
+--- /dev/null
++++ b/recipes-ti/beagleboard/gadget-init/g-storage-reinsert.sh
+@@ -0,0 +1,4 @@
++#!/bin/bash
++/bin/systemctl stop storage-gadget-init.service
++/bin/systemctl stop network-gadget-init.service
++/bin/systemctl start storage-gadget-init.service
+diff --git a/recipes-ti/beagleboard/gadget-init/network-gadget-init.service b/recipes-ti/beagleboard/gadget-init/network-gadget-init.service
+new file mode 100644
+index 0000000..0a03898
+--- /dev/null
++++ b/recipes-ti/beagleboard/gadget-init/network-gadget-init.service
+@@ -0,0 +1,9 @@
++[Unit]
++Description=Start USB Ethernet gadget
++Conflicts=storage-gadget-init.service
++
++[Service]
++RemainAfterExit=yes
++ExecStart=/sbin/modprobe g_ether host_addr=00:dc:c8:f7:75:05 dev_addr=00:dd:dc:eb:6d:f1
++ExecStartPost=/sbin/ifconfig usb0 192.168.7.2 netmask 255.255.255.252
++ExecStop=/sbin/rmmod g_ether
+diff --git a/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service b/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
+index 2fe48e1..9a8513e 100644
+--- a/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
++++ b/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
+@@ -3,7 +3,9 @@ Description=Start usb mass storage gadget
+ After=dev-mmcblk0p1.device
+ 
+ [Service]
++RemainAfterExit=yes
+ ExecStart=/sbin/modprobe g_mass_storage file=/dev/mmcblk0p1 cdrom=0 stall=0 removable=1 nofua=1
++ExecStop=/sbin/rmmod g_mass_storage
+ 
+ [Install]
+ WantedBy=basic.target
+diff --git a/recipes-ti/beagleboard/gadget-init/udhcpd.conf b/recipes-ti/beagleboard/gadget-init/udhcpd.conf
+new file mode 100644
+index 0000000..3bcf00f
+--- /dev/null
++++ b/recipes-ti/beagleboard/gadget-init/udhcpd.conf
+@@ -0,0 +1,5 @@
++start      192.168.7.1
++end        192.168.7.1
++interface  usb0
++max_leases 1
++option subnet 255.255.255.252
+diff --git a/recipes-ti/beagleboard/gadget-init/udhcpd.service b/recipes-ti/beagleboard/gadget-init/udhcpd.service
+new file mode 100644
+index 0000000..f076673
+--- /dev/null
++++ b/recipes-ti/beagleboard/gadget-init/udhcpd.service
+@@ -0,0 +1,11 @@
++[Unit]
++Description=DHCP server for USB0 network gadget
++After=sys-devices-platform-omap-ti81xx\x2dusbss-musb\x2dhdrc.0-gadget-net-usb0.device
++
++[Service]
++ExecStart=/usr/sbin/udhcpd -f -S /etc/udhcpd.conf
++ExecStop=/bin/kill -TERM $MAINPID
++KillSignal=SIGINT
++
++[Install]
++WantedBy=basic.target
 -- 
-Denys
+1.7.0.4
+
 
