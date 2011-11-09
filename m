@@ -1,36 +1,34 @@
-Return-Path: <jkridner@beagleboard.org>
-Received: from mail-qy0-f169.google.com (mail-qy0-f169.google.com
-	[209.85.216.169])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AEF8FE00307
-	for <meta-ti@yoctoproject.org>; Wed,  9 Nov 2011 08:52:06 -0800 (PST)
-Received: by qyk31 with SMTP id 31so6366804qyk.14
-	for <meta-ti@yoctoproject.org>; Wed, 09 Nov 2011 08:52:05 -0800 (PST)
-Received: by 10.229.48.213 with SMTP id s21mr366530qcf.5.1320857525411;
-	Wed, 09 Nov 2011 08:52:05 -0800 (PST)
-Received: from mail-vx0-f176.google.com (mail-vx0-f176.google.com
-	[209.85.220.176])
-	by mx.google.com with ESMTPS id dk1sm5541572qab.22.2011.11.09.08.52.04
-	(version=SSLv3 cipher=OTHER); Wed, 09 Nov 2011 08:52:04 -0800 (PST)
-Received: by vcbfk14 with SMTP id fk14so3449288vcb.35
-	for <meta-ti@yoctoproject.org>; Wed, 09 Nov 2011 08:52:04 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.182.51.66 with SMTP id i2mr1041402obo.5.1320857523819; Wed, 09
-	Nov 2011 08:52:03 -0800 (PST)
-Received: by 10.182.188.98 with HTTP; Wed, 9 Nov 2011 08:52:03 -0800 (PST)
-In-Reply-To: <333D792C-41CE-45E3-A358-46EC329BC830@dominion.thruhere.net>
-References: <1320854545-31502-1-git-send-email-joelagnel@ti.com>
-	<E0E93B6F-92B9-470D-AA31-CFC6BF01CC07@dominion.thruhere.net>
-	<083BC63EECB6FD41B8E81CF7FD87CC0F0444FD@DLEE09.ent.ti.com>
-	<CA+T6QPmhDgFFgOr3tAmkfV6DasPj8ec5vrDyiGL55R12Z4_4uA@mail.gmail.com>
-	<083BC63EECB6FD41B8E81CF7FD87CC0F04451C@DLEE09.ent.ti.com>
-	<333D792C-41CE-45E3-A358-46EC329BC830@dominion.thruhere.net>
-Date: Wed, 9 Nov 2011 11:52:03 -0500
-Message-ID: <CA+T6QPmHwiR3xmboo4rDSdhiZhq-YAsd+GF2_NmX7P+B_No8OQ@mail.gmail.com>
-From: Jason Kridner <jkridner@beagleboard.org>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "Fernandes,
-	Joel A" <joelagnel@ti.com>
-Subject: Re: [PATCH] gadget-init: Add network-gadget services and other fixes
+Return-Path: <pabigot@gmail.com>
+Received: from mail-yx0-f176.google.com (mail-yx0-f176.google.com
+	[209.85.213.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CFB31E0132F
+	for <meta-ti@yoctoproject.org>; Wed,  9 Nov 2011 11:01:41 -0800 (PST)
+Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
+	(1024-bit key; insecure key) header.i=@gmail.com;
+	x-dkim-adsp=none (insecure policy)
+Received: by yenm6 with SMTP id m6so2127726yen.35
+	for <meta-ti@yoctoproject.org>; Wed, 09 Nov 2011 11:01:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=Pzu4j+MDAhvu98W/hmfKg2jq65TGwlmLgSSu6kxHtcs=;
+	b=qkjthAiDfp0m1FZVXx6eBPv6DdFz4B+JO6Qv8qicLBQNDfJBfU2qPYmt3pOAxr5gHl
+	5N5PiNPHWEm202BuzT8iDhDkWi1Jlv7cD/HTZT2aQI82r8kQn7QgnpBuRmbiq5Cjnmw8
+	LqqPw5XFoxQ/toBRhyCixzaxo3YzxSmoP9Ut0=
+Received: by 10.50.6.202 with SMTP id d10mr4562442iga.31.1320864802815;
+	Wed, 09 Nov 2011 10:53:22 -0800 (PST)
+Received: from localhost.localdomain (c-66-41-60-82.hsd1.mn.comcast.net.
+	[66.41.60.82])
+	by mx.google.com with ESMTPS id a6sm4406943igc.3.2011.11.09.10.53.20
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 09 Nov 2011 10:53:21 -0800 (PST)
+Sender: Peter Bigot <pabigot@gmail.com>
+From: "Peter A. Bigot" <bigotp@acm.org>
+To: meta-ti@yoctoproject.org
+Date: Wed,  9 Nov 2011 12:52:54 -0600
+Message-Id: <1320864774-11603-1-git-send-email-bigotp@acm.org>
+X-Mailer: git-send-email 1.7.6.4
+X-Mailman-Approved-At: Wed, 09 Nov 2011 11:05:00 -0800
+Subject: sdcard_image: add dependency on native ext2 utilities
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,58 +40,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2011 16:52:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 Nov 2011 19:01:42 -0000
 
-On Wed, Nov 9, 2011 at 11:43 AM, Koen Kooi <koen@dominion.thruhere.net> wro=
-te:
->
-> Op 9 nov. 2011, om 17:32 heeft Fernandes, Joel A het volgende geschreven:
->>>
->>> This isn't a generic udhcp recipe. =A0It should probably just be
->>> renamed. =A0It is specifically for the point of providing addresses to
->>> the other end of the USB network gadget.
->>
->> Can we avoid making a new create for udhcpc then? I just feel it is over=
-kill and this simple service/conf can go in this same recipe. I am ok with =
-renaming the config and service files to gether-dhcp or the like. Let us kn=
-ow your opinion so we can collectively take a call on how to go about doing=
- it.
->
-> Think of what happens when you want to install a package with another udh=
-cpc config, do you want to wipe out the gstorage setting as well in that ca=
-se? All this needs to be modularized so people can mix&match, having a sing=
-le big blob is not going to give a nice user experience. And as you might h=
-ave guessed, I'm not too sold on including both the g_ether and gstorage in=
- on package (they can share the same recipe, though).
->
-> In the end it's Jasons call how nice things need to be before we apply th=
-e patch. I must warn that anytime we said "we'll fix it after the deadline"=
- for beagle stuff we never managed to fix it, the most recent example being=
- uLCD support.
+From: "Peter A. Bigot" <bigotp@acm.org>
 
-I'll call Gerald and try to buy more time, but we need some more
-concrete suggestions on how to make it clean.  I think this whole
-g_ether --> g_storage experience is rather Bone specific and rather
-integrated.  The best thing from my perspective is to be able to
-easily replace it with more generic parts by disabling this whole
-experience easily.
+Signed-off-by: Peter A. Bigot <bigotp@acm.org>
+---
+ classes/sdcard_image.bbclass |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-I'm DOA on Cloud9 right now anyway.  The one guy who was responding
-has now stopped responding, so I'm going to e-mail a couple of
-contacts there.
+diff --git a/classes/sdcard_image.bbclass b/classes/sdcard_image.bbclass
+index f7251f5..531b419 100644
+--- a/classes/sdcard_image.bbclass
++++ b/classes/sdcard_image.bbclass
+@@ -3,6 +3,9 @@ inherit image
+ # Add the fstypes we need
+ IMAGE_FSTYPES_append = " tar.bz2 sdimg"
+ 
++# Ensure required utilities are present
++IMAGE_DEPENDS_sdimg = "genext2fs-native e2fsprogs-native"
++
+ # Change this to match your host distro
+ LOSETUP ?= "/sbin/losetup"
+ 
+-- 
+1.7.6.4
 
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
->
-> iEYEARECAAYFAk66rcsACgkQMkyGM64RGpF2NQCfRVbFeUrFPGaJmaVVC/W/GQvh
-> 9w0An0JpZmO4e0dQjOjeCJqvK5Q5deAh
-> =3DaYbJ
-> -----END PGP SIGNATURE-----
->
->
 
