@@ -1,33 +1,27 @@
-Return-Path: <pabigot@gmail.com>
-Received: from mail-yx0-f176.google.com (mail-yx0-f176.google.com
-	[209.85.213.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 08A62E0030B
-	for <meta-ti@yoctoproject.org>; Fri, 11 Nov 2011 11:47:33 -0800 (PST)
-Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
-	(1024-bit key; insecure key) header.i=@gmail.com;
-	x-dkim-adsp=none (insecure policy)
-Received: by yenq10 with SMTP id q10so2287833yen.35
-	for <meta-ti@yoctoproject.org>; Fri, 11 Nov 2011 11:47:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	bh=oVDw+vEMMktuwAZrgq0blXgFQbCKYgwDoOJfEYH6rrk=;
-	b=qhFULSeijWWTUO2+ta8/4ycb5hRZUc9DnWLriTLyqhVQljlJq3NqPIUnlQ743Dygnn
-	uZ+t9xNKCDNjiT6L7o/YP24jSwPE2fxH4oHWCG2FCisVeTthriMhC77RWQklvi7O07Mw
-	1QTY8YOB1jqpOnvK4LkcLc5H1BXriklJP6ulQ=
-Received: by 10.50.213.40 with SMTP id np8mr14169140igc.10.1321040852634;
-	Fri, 11 Nov 2011 11:47:32 -0800 (PST)
-Received: from localhost.localdomain (c-66-41-60-82.hsd1.mn.comcast.net.
-	[66.41.60.82])
-	by mx.google.com with ESMTPS id fu10sm9472033igc.6.2011.11.11.11.47.30
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wy0-f176.google.com (mail-wy0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C9094E0030B
+	for <meta-ti@yoctoproject.org>; Fri, 11 Nov 2011 11:51:21 -0800 (PST)
+Received: by wyg34 with SMTP id 34so7005734wyg.35
+	for <meta-ti@yoctoproject.org>; Fri, 11 Nov 2011 11:51:20 -0800 (PST)
+Received: by 10.180.87.199 with SMTP id ba7mr15927676wib.27.1321041080049;
+	Fri, 11 Nov 2011 11:51:20 -0800 (PST)
+Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id v6sm7557889wix.1.2011.11.11.11.51.18
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 Nov 2011 11:47:31 -0800 (PST)
-Sender: Peter Bigot <pabigot@gmail.com>
-From: "Peter A. Bigot" <bigotp@acm.org>
-To: meta-ti@yoctoproject.org
-Date: Fri, 11 Nov 2011 13:47:16 -0600
-Message-Id: <1321040836-29819-1-git-send-email-bigotp@acm.org>
-X-Mailer: git-send-email 1.7.6.4
-Subject: [PATCH] sdcard_image bbclass: correct MLO path in DEPLOY_DIR_IMAGE
+	Fri, 11 Nov 2011 11:51:19 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1321040836-29819-1-git-send-email-bigotp@acm.org>
+Date: Fri, 11 Nov 2011 20:51:09 +0100
+Message-Id: <DF9F3F54-64A1-467E-B9C1-BFD29A4AE722@dominion.thruhere.net>
+References: <1321040836-29819-1-git-send-email-bigotp@acm.org>
+To: "Peter A. Bigot" <bigotp@acm.org>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] sdcard_image bbclass: correct MLO path in DEPLOY_DIR_IMAGE
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,42 +33,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 19:47:34 -0000
+X-List-Received-Date: Fri, 11 Nov 2011 19:51:22 -0000
+X-Groupsio-MsgNum: 108
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_B504FA92-8B09-4CB2-B27A-9F7ED00D8873";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-From: "Peter A. Bigot" <bigotp@acm.org>
-
-The symlink created by x-load.inc for MLO in ${DEPLOY_DIR_IMAGE} includes
-${MACHINE}.
-
-Signed-off-by: Peter A. Bigot <bigotp@acm.org>
----
- classes/sdcard_image.bbclass |    5 ++++-
- 1 files changed, 4 insertions(+), 1 deletions(-)
-
-diff --git a/classes/sdcard_image.bbclass b/classes/sdcard_image.bbclass
-index 531b419..6c933f9 100644
---- a/classes/sdcard_image.bbclass
-+++ b/classes/sdcard_image.bbclass
-@@ -29,6 +29,9 @@ IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
- # Files and/or directories to be copied into the vfat partition
- FATPAYLOAD ?= ""
- 
-+# Match meta-ti x-load.inc link names
-+MLO_SYMLINK ?= "MLO-${MACHINE}"
-+
- IMAGE_CMD_sdimg () {
- 	SDIMG=${WORKDIR}/sd.img
- 
-@@ -93,7 +96,7 @@ IMAGE_CMD_sdimg () {
- 	if [ -e ${IMAGE_ROOTFS}/boot/MLO ] ; then
- 		cp -v ${IMAGE_ROOTFS}/boot/MLO ${WORKDIR}/tmp-mnt-boot 
- 	else
--		cp -v ${DEPLOY_DIR_IMAGE}/MLO ${WORKDIR}/tmp-mnt-boot
-+		cp -v ${DEPLOY_DIR_IMAGE}/${MLO_SYMLINK} ${WORKDIR}/tmp-mnt-boot/MLO
- 	fi
- 
- 	# Check for u-boot SPL
--- 
-1.7.6.4
+--Apple-Mail=_B504FA92-8B09-4CB2-B27A-9F7ED00D8873
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
 
+Op 11 nov. 2011, om 20:47 heeft Peter A. Bigot het volgende geschreven:
+
+> From: "Peter A. Bigot" <bigotp@acm.org>
+>=20
+> The symlink created by x-load.inc for MLO in ${DEPLOY_DIR_IMAGE} =
+includes
+> ${MACHINE}.
+
+This will break SPL builds, a better idea would be to patch the xloader =
+recipe to generate a MLO symlink as well. It's on my todo do fix xload, =
+uboot(spl) and kernel to generate ready-to-use link like uImage, MLO and =
+u-boot.{img,bin}. If someone beats me to it, great :)
+
+regards,
+
+Koen=
+
+--Apple-Mail=_B504FA92-8B09-4CB2-B27A-9F7ED00D8873
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk69fLAACgkQMkyGM64RGpFITQCfWIupy+vIyAC4LrwvUKETwvPG
+hr4An3TRAFTEVNXi6uvnk8mjda6TY2Gl
+=uIzI
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_B504FA92-8B09-4CB2-B27A-9F7ED00D8873--
