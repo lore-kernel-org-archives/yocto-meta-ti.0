@@ -1,31 +1,33 @@
-Return-Path: <joelagnel@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F16B3E0030A
-	for <meta-ti@yoctoproject.org>; Fri, 11 Nov 2011 06:50:22 -0800 (PST)
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id pABEoMSM015002
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <meta-ti@yoctoproject.org>; Fri, 11 Nov 2011 08:50:22 -0600
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep34.itg.ti.com (8.13.7/8.13.8) with ESMTP id pABEoLPE026857
-	for <meta-ti@yoctoproject.org>; Fri, 11 Nov 2011 08:50:21 -0600 (CST)
-Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pABEoLN7020581
-	for <meta-ti@yoctoproject.org>; Fri, 11 Nov 2011 08:50:21 -0600 (CST)
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle71.ent.ti.com
-	(128.247.5.62) with Microsoft SMTP Server id 14.1.323.3;
-	Fri, 11 Nov 2011 08:50:21 -0600
-Received: from localhost.localdomain (chase-ubuntu.am.dhcp.ti.com
-	[128.247.105.25])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	pABEoKEC005364;	Fri, 11 Nov 2011 08:50:21 -0600
-From: Joel A Fernandes <joelagnel@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 11 Nov 2011 08:51:47 -0600
-Message-ID: <1321023107-6072-1-git-send-email-joelagnel@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Cc: Joel A Fernandes <joelagnel@ti.com>
-Subject: [PATCH] udhcpd: Fixes and new udev rule
+Return-Path: <pabigot@gmail.com>
+Received: from mail-yx0-f176.google.com (mail-yx0-f176.google.com
+	[209.85.213.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 08A62E0030B
+	for <meta-ti@yoctoproject.org>; Fri, 11 Nov 2011 11:47:33 -0800 (PST)
+Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
+	(1024-bit key; insecure key) header.i=@gmail.com;
+	x-dkim-adsp=none (insecure policy)
+Received: by yenq10 with SMTP id q10so2287833yen.35
+	for <meta-ti@yoctoproject.org>; Fri, 11 Nov 2011 11:47:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=oVDw+vEMMktuwAZrgq0blXgFQbCKYgwDoOJfEYH6rrk=;
+	b=qhFULSeijWWTUO2+ta8/4ycb5hRZUc9DnWLriTLyqhVQljlJq3NqPIUnlQ743Dygnn
+	uZ+t9xNKCDNjiT6L7o/YP24jSwPE2fxH4oHWCG2FCisVeTthriMhC77RWQklvi7O07Mw
+	1QTY8YOB1jqpOnvK4LkcLc5H1BXriklJP6ulQ=
+Received: by 10.50.213.40 with SMTP id np8mr14169140igc.10.1321040852634;
+	Fri, 11 Nov 2011 11:47:32 -0800 (PST)
+Received: from localhost.localdomain (c-66-41-60-82.hsd1.mn.comcast.net.
+	[66.41.60.82])
+	by mx.google.com with ESMTPS id fu10sm9472033igc.6.2011.11.11.11.47.30
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 11 Nov 2011 11:47:31 -0800 (PST)
+Sender: Peter Bigot <pabigot@gmail.com>
+From: "Peter A. Bigot" <bigotp@acm.org>
+To: meta-ti@yoctoproject.org
+Date: Fri, 11 Nov 2011 13:47:16 -0600
+Message-Id: <1321040836-29819-1-git-send-email-bigotp@acm.org>
+X-Mailer: git-send-email 1.7.6.4
+Subject: [PATCH] sdcard_image bbclass: correct MLO path in DEPLOY_DIR_IMAGE
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,88 +39,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2011 14:50:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 11 Nov 2011 19:47:34 -0000
 
-This moves the logic to configure and start dhcp to a udev rule which
-is a better place than a systemd service
+From: "Peter A. Bigot" <bigotp@acm.org>
 
-Also fixes a bug where stopping and starting network service would
-cause dhcp to fail.
+The symlink created by x-load.inc for MLO in ${DEPLOY_DIR_IMAGE} includes
+${MACHINE}.
 
-Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+Signed-off-by: Peter A. Bigot <bigotp@acm.org>
 ---
- recipes-ti/beagleboard/gadget-init.bb              |    6 ++++--
- .../gadget-init/g-ether-start-service.sh           |    1 -
- .../gadget-init/network-gadget-init.service        |    3 +--
- recipes-ti/beagleboard/gadget-init/udhcpd.rules    |    2 ++
- 4 files changed, 7 insertions(+), 5 deletions(-)
- create mode 100644 recipes-ti/beagleboard/gadget-init/udhcpd.rules
+ classes/sdcard_image.bbclass |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-ti/beagleboard/gadget-init.bb b/recipes-ti/beagleboard/gadget-init.bb
-index 8ddefaa..0d4682e 100644
---- a/recipes-ti/beagleboard/gadget-init.bb
-+++ b/recipes-ti/beagleboard/gadget-init.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Units to initialize usb gadgets"
+diff --git a/classes/sdcard_image.bbclass b/classes/sdcard_image.bbclass
+index 531b419..6c933f9 100644
+--- a/classes/sdcard_image.bbclass
++++ b/classes/sdcard_image.bbclass
+@@ -29,6 +29,9 @@ IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
+ # Files and/or directories to be copied into the vfat partition
+ FATPAYLOAD ?= ""
  
--PR = "r10"
-+PR = "r11"
++# Match meta-ti x-load.inc link names
++MLO_SYMLINK ?= "MLO-${MACHINE}"
++
+ IMAGE_CMD_sdimg () {
+ 	SDIMG=${WORKDIR}/sd.img
  
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-@@ -15,6 +15,7 @@ SRC_URI = "file://storage-gadget-init.service \
-            file://99-hokey-pokey.rules \
-            file://hokey-pokey.sh \
-            file://bone-gmass-eject.rules \
-+           file://udhcpd.rules \
-            file://g-storage-reinsert.sh \
-            file://g-ether-start-service.sh \
-            file://g-ether-load.sh \
-@@ -50,7 +51,8 @@ FILES_${PN}-storage = "${base_libdir}/systemd/system/storage-gadget-init.service
- FILES_${PN}-network = "${base_libdir}/systemd/system/network-gadget-init.service \
-                        ${base_libdir}/systemd/system/basic.target.wants/network-gadget-init.service \
-                        ${bindir}/g-ether-load.sh \
--                       ${bindir}/g-ether-start-service.sh"
-+                       ${bindir}/g-ether-start-service.sh \
-+                       ${sysconfdir}/udev/rules.d/udhcpd.rules"
- 
- FILES_${PN}-udhcpd = "${base_libdir}/systemd/system/udhcpd.service \
-                       ${base_libdir}/systemd/system/basic.target.wants/udhcpd.service \
-diff --git a/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh b/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh
-index 2db16c2..076a5fe 100755
---- a/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh
-+++ b/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh
-@@ -6,6 +6,5 @@ then
- 	then
- 		/bin/systemctl stop storage-gadget-init.service
- 		/bin/systemctl start network-gadget-init.service
--		/bin/systemctl start udhcpd.service
+@@ -93,7 +96,7 @@ IMAGE_CMD_sdimg () {
+ 	if [ -e ${IMAGE_ROOTFS}/boot/MLO ] ; then
+ 		cp -v ${IMAGE_ROOTFS}/boot/MLO ${WORKDIR}/tmp-mnt-boot 
+ 	else
+-		cp -v ${DEPLOY_DIR_IMAGE}/MLO ${WORKDIR}/tmp-mnt-boot
++		cp -v ${DEPLOY_DIR_IMAGE}/${MLO_SYMLINK} ${WORKDIR}/tmp-mnt-boot/MLO
  	fi
- fi
-diff --git a/recipes-ti/beagleboard/gadget-init/network-gadget-init.service b/recipes-ti/beagleboard/gadget-init/network-gadget-init.service
-index 1e22627..0ee2914 100644
---- a/recipes-ti/beagleboard/gadget-init/network-gadget-init.service
-+++ b/recipes-ti/beagleboard/gadget-init/network-gadget-init.service
-@@ -4,8 +4,7 @@ Conflicts=storage-gadget-init.service
  
- [Service]
- RemainAfterExit=yes
--ExecStartPre=/usr/bin/g-ether-load.sh
--ExecStart=/sbin/ifconfig usb0 192.168.7.2 netmask 255.255.255.252
-+ExecStart=/usr/bin/g-ether-load.sh
- ExecStop=/sbin/rmmod g_ether
- 
- [Install]
-diff --git a/recipes-ti/beagleboard/gadget-init/udhcpd.rules b/recipes-ti/beagleboard/gadget-init/udhcpd.rules
-new file mode 100644
-index 0000000..db65f9a
---- /dev/null
-+++ b/recipes-ti/beagleboard/gadget-init/udhcpd.rules
-@@ -0,0 +1,2 @@
-+SUBSYSTEM=="net",ACTION=="add",KERNEL=="usb0",RUN+="/sbin/ifconfig usb0 192.168.7.2 netmask 255.255.255.252",RUN+="/bin/systemctl start udhcpd.service"
-+SUBSYSTEM=="net",ACTION=="remove",KERNEL=="usb0",RUN+="/bin/systemctl stop udhcpd.service"
+ 	# Check for u-boot SPL
 -- 
-1.7.4.1
+1.7.6.4
 
 
