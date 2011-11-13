@@ -1,26 +1,37 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wy0-f176.google.com (mail-wy0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 55F65E00502
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:09:33 -0800 (PST)
-Received: by wyg10 with SMTP id 10so247007wyg.35
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:09:32 -0800 (PST)
-Received: by 10.180.104.35 with SMTP id gb3mr3367461wib.11.1321204172759;
-	Sun, 13 Nov 2011 09:09:32 -0800 (PST)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id db1sm10709802wib.19.2011.11.13.09.09.30
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 13 Nov 2011 09:09:31 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1321197079-16422-1-git-send-email-joelagnel@ti.com>
-Date: Sun, 13 Nov 2011 18:09:28 +0100
-Message-Id: <96D8B429-D458-46D7-8558-3F33C9EB29BC@dominion.thruhere.net>
+Return-Path: <joelagnel@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C824E00502
+	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:28:51 -0800 (PST)
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id pADHSnOk025674
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Sun, 13 Nov 2011 11:28:49 -0600
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pADHSnjT002843;
+	Sun, 13 Nov 2011 11:28:49 -0600 (CST)
+Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pADHSncH028010;
+	Sun, 13 Nov 2011 11:28:49 -0600 (CST)
+Received: from DLEE09.ent.ti.com ([fe80::a026:b4ad:3e78:5ae5]) by
+	DFLE71.ent.ti.com ([fe80::29f6:72ad:a62e:2025%21]) with mapi id
+	14.01.0323.003; Sun, 13 Nov 2011 11:28:49 -0600
+From: "Fernandes, Joel A" <joelagnel@ti.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Thread-Topic: [meta-ti] [PATCH v2] linux-ti33x-psp: Check if scheduling is
+	required after DMA
+Thread-Index: AQHMohZNCsbN4KR5H0+xV1SoufwX9ZWrbmkA//+fBoA=
+Date: Sun, 13 Nov 2011 17:28:48 +0000
+Message-ID: <083BC63EECB6FD41B8E81CF7FD87CC0F044B49@DLEE09.ent.ti.com>
 References: <1321197079-16422-1-git-send-email-joelagnel@ti.com>
-To: Joel A Fernandes <joelagnel@ti.com>
-X-Mailer: Apple Mail (2.1251.1)
-Cc: meta-ti@yoctoproject.org, chase.maupin@ti.com
+	<96D8B429-D458-46D7-8558-3F33C9EB29BC@dominion.thruhere.net>
+In-Reply-To: <96D8B429-D458-46D7-8558-3F33C9EB29BC@dominion.thruhere.net>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
+MIME-Version: 1.0
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "Maupin,
+	Chase" <chase.maupin@ti.com>
 Subject: Re: [PATCH v2] linux-ti33x-psp: Check if scheduling is required after DMA
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -33,53 +44,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Nov 2011 17:09:35 -0000
-X-Groupsio-MsgNum: 113
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_47E5FF63-1210-40BF-B380-A4A6A68BC8D6";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-
---Apple-Mail=_47E5FF63-1210-40BF-B380-A4A6A68BC8D6
+X-List-Received-Date: Sun, 13 Nov 2011 17:28:51 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
 
-
-Op 13 nov. 2011, om 16:11 heeft Joel A Fernandes het volgende =
-geschreven:
-
-> After processing one DMA completion, checking if rescheduling is
-> required instead of scheduling another completion request if the
-> FIFO is non empty.
+> -----Original Message-----
+> From: Koen Kooi [mailto:koen@dominion.thruhere.net]
+> Sent: Sunday, November 13, 2011 11:09 AM
+> To: Fernandes, Joel A
+> Cc: meta-ti@yoctoproject.org; Maupin, Chase
+> Subject: Re: [meta-ti] [PATCH v2] linux-ti33x-psp: Check if scheduling is
+> required after DMA
 >=20
-> This fixes high CPU load issue seen with g_mass_storage on a =
-beaglebone
-> and could potentially fix similar issues seen with other gadget =
-drivers
 >=20
-> Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+> Op 13 nov. 2011, om 16:11 heeft Joel A Fernandes het volgende geschreven:
+>=20
+> > After processing one DMA completion, checking if rescheduling is
+> > required instead of scheduling another completion request if the FIFO
+> > is non empty.
+> >
+> > This fixes high CPU load issue seen with g_mass_storage on a
+> > beaglebone and could potentially fix similar issues seen with other
+> > gadget drivers
+> >
+> > Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+>=20
+>=20
+> I stil get the 100% cpu load after ejecting the drive even after applying
+> this patch.
 
+There might be more than one issue here, the other issue was with "rcu_kthr=
+ead" taking up 100% CPU which was consistently reproducible with g_ether on=
+ a MAC host, does this process still give a high CPU load and have similar =
+symptoms?
 
-I stil get the 100% cpu load after ejecting the drive even after =
-applying this patch.
+With node not running, do you see the high CPU load with any other applicat=
+ion using g_ether?
 
-regards,
+Regards,
+Joel
 
-Koen=
-
---Apple-Mail=_47E5FF63-1210-40BF-B380-A4A6A68BC8D6
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAk6/+ckACgkQMkyGM64RGpExOACeMaKmmwJwQbD96rcdgyI9OsIp
-n04AoJ/dDKg8IPlSPplfmHi/2U2XOILx
-=5psb
------END PGP SIGNATURE-----
-
---Apple-Mail=_47E5FF63-1210-40BF-B380-A4A6A68BC8D6--
