@@ -1,38 +1,33 @@
-Return-Path: <joelagnel@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C824E00502
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:28:51 -0800 (PST)
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id pADHSnOk025674
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Sun, 13 Nov 2011 11:28:49 -0600
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pADHSnjT002843;
-	Sun, 13 Nov 2011 11:28:49 -0600 (CST)
-Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pADHSncH028010;
-	Sun, 13 Nov 2011 11:28:49 -0600 (CST)
-Received: from DLEE09.ent.ti.com ([fe80::a026:b4ad:3e78:5ae5]) by
-	DFLE71.ent.ti.com ([fe80::29f6:72ad:a62e:2025%21]) with mapi id
-	14.01.0323.003; Sun, 13 Nov 2011 11:28:49 -0600
-From: "Fernandes, Joel A" <joelagnel@ti.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Thread-Topic: [meta-ti] [PATCH v2] linux-ti33x-psp: Check if scheduling is
-	required after DMA
-Thread-Index: AQHMohZNCsbN4KR5H0+xV1SoufwX9ZWrbmkA//+fBoA=
-Date: Sun, 13 Nov 2011 17:28:48 +0000
-Message-ID: <083BC63EECB6FD41B8E81CF7FD87CC0F044B49@DLEE09.ent.ti.com>
-References: <1321197079-16422-1-git-send-email-joelagnel@ti.com>
-	<96D8B429-D458-46D7-8558-3F33C9EB29BC@dominion.thruhere.net>
-In-Reply-To: <96D8B429-D458-46D7-8558-3F33C9EB29BC@dominion.thruhere.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
-MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "Maupin,
-	Chase" <chase.maupin@ti.com>
-Subject: Re: [PATCH v2] linux-ti33x-psp: Check if scheduling is required after DMA
+Return-Path: <pabigot@gmail.com>
+Received: from mail-yx0-f176.google.com (mail-yx0-f176.google.com
+	[209.85.213.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83353E00502
+	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 10:24:42 -0800 (PST)
+Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
+	(1024-bit key; insecure key) header.i=@gmail.com;
+	x-dkim-adsp=none (insecure policy)
+Received: by yenq10 with SMTP id q10so3631004yen.35
+	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 10:24:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=2flbzF8cUE6BlQjpMv+ovHLIDxCb7A5zTHDj6HgzzIc=;
+	b=t4KbLzzrJmIz41YKfSX+znyP59fk01yh/y5oprjOaKgy8AMnS7BgjyhDs+uiJDW11V
+	4xGvIjF3Mt8CBjeRozmAIVZQy0YA9JevQ/utuY62aTYGEil/9e5XV97dy5iuiQnHMOM1
+	klnAX/TwtABVBm8Ve3PSjcrJ8AVXqruEYb5uk=
+Received: by 10.236.200.130 with SMTP id z2mr9512932yhn.25.1321208681293;
+	Sun, 13 Nov 2011 10:24:41 -0800 (PST)
+Received: from localhost.localdomain (c-66-41-60-82.hsd1.mn.comcast.net.
+	[66.41.60.82])
+	by mx.google.com with ESMTPS id 22sm53664880anp.12.2011.11.13.10.24.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 13 Nov 2011 10:24:40 -0800 (PST)
+Sender: Peter Bigot <pabigot@gmail.com>
+From: "Peter A. Bigot" <bigotp@acm.org>
+To: meta-ti@yoctoproject.org
+Date: Sun, 13 Nov 2011 12:24:15 -0600
+Message-Id: <1321208655-9701-1-git-send-email-bigotp@acm.org>
+X-Mailer: git-send-email 1.7.6.4
+Subject: [PATCH 0/2] Alternative and extended improvements to sdclass_image
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,44 +39,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Nov 2011 17:28:51 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 13 Nov 2011 18:24:43 -0000
 
-> -----Original Message-----
-> From: Koen Kooi [mailto:koen@dominion.thruhere.net]
-> Sent: Sunday, November 13, 2011 11:09 AM
-> To: Fernandes, Joel A
-> Cc: meta-ti@yoctoproject.org; Maupin, Chase
-> Subject: Re: [meta-ti] [PATCH v2] linux-ti33x-psp: Check if scheduling is
-> required after DMA
->=20
->=20
-> Op 13 nov. 2011, om 16:11 heeft Joel A Fernandes het volgende geschreven:
->=20
-> > After processing one DMA completion, checking if rescheduling is
-> > required instead of scheduling another completion request if the FIFO
-> > is non empty.
-> >
-> > This fixes high CPU load issue seen with g_mass_storage on a
-> > beaglebone and could potentially fix similar issues seen with other
-> > gadget drivers
-> >
-> > Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
->=20
->=20
-> I stil get the 100% cpu load after ejecting the drive even after applying
-> this patch.
+From: "Peter A. Bigot" <bigotp@acm.org>
 
-There might be more than one issue here, the other issue was with "rcu_kthr=
-ead" taking up 100% CPU which was consistently reproducible with g_ether on=
- a MAC host, does this process still give a high CPU load and have similar =
-symptoms?
+I understand the objections to my previous patch were that it would break
+when SPL was used and there is no MLO, and that the approach isn't the one
+that will eventually be implemented.  Since the current head version also
+aborts if no MLO is present by that name (hence, doesn't work for
+beagleboard), until the "right" solution can be obtained perhaps the version
+herein can be installed.  It uses a more general method that should work now
+and whenever x-load does (or doesn't) get fixed.
 
-With node not running, do you see the high CPU load with any other applicat=
-ion using g_ether?
+I also got tired of having to go down in to the basement to edit /etc/fstab
+on the console every time I rebooted the development server and it hung
+because it couldn't mount an unconfigured loop device.  Two enhancements for
+that: allow an override to the mount point so I don't have to clutter up
+/etc/fstab with hard-coded paths to workspace directories for every image I
+might want to build, and add the noauto option.
 
-Regards,
-Joel
+Finally, I moved the IMAGE_FSTYPES append out of the class into the recipe
+that actually depends on it, and got rid of the tar.bz2 which has nothing to
+do with sdcard_image and is already present in all the machine confs anyway.
+
+Peter A. Bigot (2):
+  sdcard_image bbclass: fix MLO copy, loop device mounts, fstypes
+  ti-hw-bringup-image: add sdimg to fstypes
+
+ classes/sdcard_image.bbclass               |   47 ++++++++++++++++------------
+ recipes-misc/images/ti-hw-bringup-image.bb |    2 +
+ 2 files changed, 29 insertions(+), 20 deletions(-)
+
+-- 
+1.7.6.4
+
 
