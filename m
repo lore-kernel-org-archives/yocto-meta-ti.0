@@ -1,31 +1,27 @@
-Return-Path: <joelagnel@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B6B4E00502
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 07:09:56 -0800 (PST)
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id pADF9tIW012866
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:09:55 -0600
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pADF9tfj014607
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:09:55 -0600 (CST)
-Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pADF9thA006747
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:09:55 -0600 (CST)
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle71.ent.ti.com
-	(128.247.5.62) with Microsoft SMTP Server id 14.1.323.3;
-	Sun, 13 Nov 2011 09:09:55 -0600
-Received: from localhost.localdomain (chase-ubuntu.am.dhcp.ti.com
-	[128.247.105.25])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	pADF9lN0027173;	Sun, 13 Nov 2011 09:09:55 -0600
-From: Joel A Fernandes <joelagnel@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Sun, 13 Nov 2011 09:11:18 -0600
-Message-ID: <1321197079-16422-1-git-send-email-joelagnel@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Cc: Joel A Fernandes <joelagnel@ti.com>, chase.maupin@ti.com
-Subject: [PATCH v2] linux-ti33x-psp: Check if scheduling is required after DMA
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wy0-f176.google.com (mail-wy0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 55F65E00502
+	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:09:33 -0800 (PST)
+Received: by wyg10 with SMTP id 10so247007wyg.35
+	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:09:32 -0800 (PST)
+Received: by 10.180.104.35 with SMTP id gb3mr3367461wib.11.1321204172759;
+	Sun, 13 Nov 2011 09:09:32 -0800 (PST)
+Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id db1sm10709802wib.19.2011.11.13.09.09.30
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 13 Nov 2011 09:09:31 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1321197079-16422-1-git-send-email-joelagnel@ti.com>
+Date: Sun, 13 Nov 2011 18:09:28 +0100
+Message-Id: <96D8B429-D458-46D7-8558-3F33C9EB29BC@dominion.thruhere.net>
+References: <1321197079-16422-1-git-send-email-joelagnel@ti.com>
+To: Joel A Fernandes <joelagnel@ti.com>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: meta-ti@yoctoproject.org, chase.maupin@ti.com
+Subject: Re: [PATCH v2] linux-ti33x-psp: Check if scheduling is required after DMA
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,96 +33,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Nov 2011 15:09:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 13 Nov 2011 17:09:35 -0000
+X-Groupsio-MsgNum: 113
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_47E5FF63-1210-40BF-B380-A4A6A68BC8D6";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-After processing one DMA completion, checking if rescheduling is
-required instead of scheduling another completion request if the
-FIFO is non empty.
-
-This fixes high CPU load issue seen with g_mass_storage on a beaglebone
-and could potentially fix similar issues seen with other gadget drivers
-
-Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
----
-v2 changes:
-* Corrected commit title
-
- ...pi41_dma-Check-if-scheduling-is-required-.patch |   42 ++++++++++++++++++++
- recipes-kernel/linux/linux-ti33x-psp_3.1.bb        |    3 +-
- 2 files changed, 44 insertions(+), 1 deletions(-)
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.1/0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch
-
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.1/0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch b/recipes-kernel/linux/linux-ti33x-psp-3.1/0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch
-new file mode 100644
-index 0000000..701c09d
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.1/0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch
-@@ -0,0 +1,42 @@
-+From b564457d26931a00f8c5645981a00c1eb78e9a90 Mon Sep 17 00:00:00 2001
-+From: Joel A Fernandes <joelagnel@ti.com>
-+Date: Sat, 12 Nov 2011 23:42:26 -0600
-+Subject: [PATCH] usb::musb::cppi41_dma: Check if scheduling is required after DMA
-+
-+Even after TX DMA, data can still be in the FIFO and we would keep
-+rescheduling the worker thread in a polling fashion taking up a lot
-+of CPU if the controller was slow to respond. We check if rescheduling
-+is required and sleep if so.
-+
-+This fixes high CPU load issue seen with g_mass_storage on a BeagleBone
-+and could potentially fix similar issues seen with other gadget drivers.
-+
-+Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
-+---
-+ drivers/usb/musb/cppi41_dma.c |   10 ++++++++++
-+ 1 files changed, 10 insertions(+), 0 deletions(-)
-+
-+diff --git a/drivers/usb/musb/cppi41_dma.c b/drivers/usb/musb/cppi41_dma.c
-+index a24707c..e68c5d7 100644
-+--- a/drivers/usb/musb/cppi41_dma.c
-++++ b/drivers/usb/musb/cppi41_dma.c
-+@@ -1319,6 +1319,16 @@ void txdma_completion_work(struct work_struct *data)
-+ 	struct musb *musb = cppi->musb;
-+ 	unsigned long flags;
-+ 
-++	/*
-++	 * txdma worker thread can call schedule_work on itself and cause
-++	 * itself to be scheduled immediately and because the data might still
-++	 * be in FIFO if it hasn't been pushed out after DMA, it is possible for
-++	 * the worker to consume lot of CPU when the controller is slow, so we
-++	 * reschedule if necessary.
-++	 */
-++	if (need_resched())
-++		cond_resched();
-++
-+ 	spin_lock_irqsave(&musb->lock, flags);
-+ 	cppi41_check_fifo_empty(cppi);
-+ 	spin_unlock_irqrestore(&musb->lock, flags);
-+-- 
-+1.7.4.1
-+
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
-index c4cdfea..37f59ca 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
-@@ -11,7 +11,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
- 
- BRANCH = "v3.1-staging"
- SRCREV = "1d84d8853fa30cf3db2571a5aec572accca4e29d"
--MACHINE_KERNEL_PR_append = "q+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "r+gitr${SRCREV}"
- 
- COMPATIBLE_MACHINE = "(ti33x)"
- 
-@@ -35,6 +35,7 @@ PATCHES_OVER_PSP = " \
- 	file://0003-arm-omap-mcspi-correct-memory-range-when-requesting-.patch \
- 	file://0004-arm-omap-mcspi-follow-proper-pm_runtime-enable-disab.patch \
- 	file://0005-arm-omap-mcspi-follow-proper-probe-remove-steps.patch \
-+	file://0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch \
- 	file://can/0001-can-d_can-Added-support-for-Bosch-D_CAN-controller.patch \
- 	file://can/0002-can-d_can-Added-platform-data-for-am33xx-device.patch \
- 	file://can/0003-can-d_can-DCAN-config-added-to-am335x_evm_defconfig.patch \
--- 
-1.7.0.4
+--Apple-Mail=_47E5FF63-1210-40BF-B380-A4A6A68BC8D6
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
 
+Op 13 nov. 2011, om 16:11 heeft Joel A Fernandes het volgende =
+geschreven:
+
+> After processing one DMA completion, checking if rescheduling is
+> required instead of scheduling another completion request if the
+> FIFO is non empty.
+>=20
+> This fixes high CPU load issue seen with g_mass_storage on a =
+beaglebone
+> and could potentially fix similar issues seen with other gadget =
+drivers
+>=20
+> Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+
+
+I stil get the 100% cpu load after ejecting the drive even after =
+applying this patch.
+
+regards,
+
+Koen=
+
+--Apple-Mail=_47E5FF63-1210-40BF-B380-A4A6A68BC8D6
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk6/+ckACgkQMkyGM64RGpExOACeMaKmmwJwQbD96rcdgyI9OsIp
+n04AoJ/dDKg8IPlSPplfmHi/2U2XOILx
+=5psb
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_47E5FF63-1210-40BF-B380-A4A6A68BC8D6--
