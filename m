@@ -1,31 +1,31 @@
 Return-Path: <joelagnel@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 20E84E006CC
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 07:08:06 -0800 (PST)
-Received: from dlep33.itg.ti.com ([157.170.170.112])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id pADF84In009940
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B6B4E00502
+	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 07:09:56 -0800 (PST)
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id pADF9tIW012866
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:08:05 -0600
+	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:09:55 -0600
 Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep33.itg.ti.com (8.13.7/8.13.8) with ESMTP id pADF84ot024585
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:08:04 -0600 (CST)
-Received: from DLEE74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pADF84Dh005281
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:08:04 -0600 (CST)
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
-	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
-	Sun, 13 Nov 2011 09:08:04 -0600
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pADF9tfj014607
+	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:09:55 -0600 (CST)
+Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pADF9thA006747
+	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 09:09:55 -0600 (CST)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle71.ent.ti.com
+	(128.247.5.62) with Microsoft SMTP Server id 14.1.323.3;
+	Sun, 13 Nov 2011 09:09:55 -0600
 Received: from localhost.localdomain (chase-ubuntu.am.dhcp.ti.com
 	[128.247.105.25])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	pADF7dS8026973;	Sun, 13 Nov 2011 09:08:04 -0600
+	pADF9lN0027173;	Sun, 13 Nov 2011 09:09:55 -0600
 From: Joel A Fernandes <joelagnel@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Sun, 13 Nov 2011 09:09:09 -0600
-Message-ID: <1321196950-9622-1-git-send-email-joelagnel@ti.com>
+Date: Sun, 13 Nov 2011 09:11:18 -0600
+Message-ID: <1321197079-16422-1-git-send-email-joelagnel@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
 Cc: Joel A Fernandes <joelagnel@ti.com>, chase.maupin@ti.com
-Subject: [PATCH] usb::musb::cppi41_dma: Check if scheduling is required after DMA
+Subject: [PATCH v2] linux-ti33x-psp: Check if scheduling is required after DMA
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,7 +37,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Nov 2011 15:08:06 -0000
+X-List-Received-Date: Sun, 13 Nov 2011 15:09:56 -0000
 Content-Type: text/plain
 
 After processing one DMA completion, checking if rescheduling is
@@ -49,6 +49,9 @@ and could potentially fix similar issues seen with other gadget drivers
 
 Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
 ---
+v2 changes:
+* Corrected commit title
+
  ...pi41_dma-Check-if-scheduling-is-required-.patch |   42 ++++++++++++++++++++
  recipes-kernel/linux/linux-ti33x-psp_3.1.bb        |    3 +-
  2 files changed, 44 insertions(+), 1 deletions(-)
