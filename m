@@ -1,36 +1,33 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-qw0-f41.google.com (mail-qw0-f41.google.com
-	[209.85.216.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 550D2E00303
-	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 06:27:57 -0800 (PST)
+Return-Path: <pabigot@gmail.com>
+Received: from mail-wy0-f176.google.com (mail-wy0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7448AE00306
+	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 06:57:21 -0800 (PST)
 Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
 	(1024-bit key; insecure key) header.i=@gmail.com;
 	x-dkim-adsp=none (insecure policy)
-Received: by qadc11 with SMTP id c11so7168517qad.14
-	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 06:27:56 -0800 (PST)
+Received: by wyg10 with SMTP id 10so1202206wyg.35
+	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 06:57:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=NyZAeH9hIqjqP8+/HMT1VYXpyovJyqw+zr6mPQR9E2A=;
-	b=hXqmtI3FW9e91s138mTFmwzpjkxVrFU1NZ7I4B3H+gBLRiIZ29+GDuFJoifP6Hf/rd
-	nOjo5v6k7KbCWwt21VvwbErPfLxCUERZ601JhrBOQF8qIFeuRdH0FG5blHvtoi6VGc/l
-	NcID3GH7cC4XSOugQ0IQ6KgnVF1dHoruIAr1Y=
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=iPqCttNTyP11DLmNNX2jj2sc6WnDHxrPE1bkW7EBhK0=;
+	b=tqZFgFLlIsw9h/NXl79kC96nGxieTtZtdH22qk7OwU4qJxy75xv204QYhKotMZdJRo
+	yqcTkoUzkiDLjyoGphCRu/e5mii6hAZCUojYYHjbAKxSbJLOdFpINvoqEWPFXLu29EpW
+	E3wCMbgP3vdmIrGFGcQLt25H2TlsYasrZtnkc=
 MIME-Version: 1.0
-Received: by 10.229.67.19 with SMTP id p19mr452382qci.188.1321280876513; Mon,
-	14 Nov 2011 06:27:56 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Mon, 14 Nov 2011 06:27:56 -0800 (PST)
-In-Reply-To: <3FD3E4DD-ED39-4FF0-9AE3-182464089A74@dominion.thruhere.net>
+Received: by 10.216.229.17 with SMTP id g17mr1134174weq.40.1321282640161; Mon,
+	14 Nov 2011 06:57:20 -0800 (PST)
+Sender: pabigot@gmail.com
+Received: by 10.216.30.200 with HTTP; Mon, 14 Nov 2011 06:57:20 -0800 (PST)
+In-Reply-To: <489EAC51-52A8-48BC-92F8-6905B9E94589@dominion.thruhere.net>
 References: <1321208655-9701-1-git-send-email-bigotp@acm.org>
 	<1321208716-9749-1-git-send-email-bigotp@acm.org>
 	<489EAC51-52A8-48BC-92F8-6905B9E94589@dominion.thruhere.net>
-	<CAPOJ94P8ahYWx+t9b=LfMnBAD2L130P-_kuEcaM9524VsOVQug@mail.gmail.com>
-	<CA+M6bXntXWXNwuMEes=hXx7ECUwDUbjnHvLZuJC4c0oU2at6kQ@mail.gmail.com>
-	<0EC00F0A-F11C-46D7-9AA8-7519EC67A211@dominion.thruhere.net>
-	<CA+M6bXno8T=v61frO1eRvS0t+NMfR2JufALRimCsgUJJ3wWTdw@mail.gmail.com>
-	<3FD3E4DD-ED39-4FF0-9AE3-182464089A74@dominion.thruhere.net>
-Date: Mon, 14 Nov 2011 07:27:56 -0700
-Message-ID: <CA+M6bX=QacwG2JjFT1MVU+Vzps+UN62ZZEGjv9bxLWB6AuNW_g@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
+Date: Mon, 14 Nov 2011 08:57:20 -0600
+X-Google-Sender-Auth: Zu1pCCYdhTNO4b9vJVQN1KB5Hq0
+Message-ID: <CAPOJ94OE+ALWZkov_w73bh4v2C85X-0MHg+RZDxFhOURqDsAYQ@mail.gmail.com>
+From: Peter Bigot <bigotp@acm.org>
 To: Koen Kooi <koen@dominion.thruhere.net>
 Cc: meta-ti@yoctoproject.org
 Subject: Re: [PATCH 1/2] sdcard_image bbclass: fix MLO copy, loop device mounts, fstypes
@@ -45,74 +42,56 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 14:27:57 -0000
+X-List-Received-Date: Mon, 14 Nov 2011 14:57:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 14, 2011 at 7:20 AM, Koen Kooi <koen@dominion.thruhere.net> wro=
-te:
+On Sun, Nov 13, 2011 at 12:42 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
 >
-> Op 14 nov. 2011, om 15:19 heeft Tom Rini het volgende geschreven:
+> Op 13 nov. 2011, om 19:25 heeft Peter A. Bigot het volgende geschreven:
 >
->> On Mon, Nov 14, 2011 at 3:15 AM, Koen Kooi <koen@dominion.thruhere.net> =
-wrote:
->>>
->>> Op 13 nov. 2011, om 22:06 heeft Tom Rini het volgende geschreven:
->>>
->>>> On Sun, Nov 13, 2011 at 11:57 AM, Peter Bigot <bigotp@acm.org> wrote:
->>>>> On Sun, Nov 13, 2011 at 12:42 PM, Koen Kooi <koen@dominion.thruhere.n=
-et> wrote:
->>>>>>
->>>>>> Op 13 nov. 2011, om 19:25 heeft Peter A. Bigot het volgende geschrev=
-en:
->>>>>>
->>>>>>> From: "Peter A. Bigot" <bigotp@acm.org>
->>>>>>>
->>>>>>> Generalize the search for MLO to install to have correct path for c=
-opies
->>>>>>> placed in ${DEPLOY_DIR_IMAGE} by x-load.inc, and to continue for SP=
-L builds
->>>>>>> where there is no MLO.
->>>>>>>
->>>>>>> Allow user to override the loop mount point as well as the loop dev=
-ice, for
->>>>>>> folks who don't want long paths to temporary directories in their f=
-stabs.
->>>>>>>
->>>>>>> Add noauto to example fstab entries so systems will boot without at=
-tempting
->>>>>>> to mount an unconfigured loopback device.
->>>>>>>
->>>>>>> Remove IMAGE_FSTYPE_append which does not belong in this class.
->>>>>>
->>>>>> I like the fstab changes, but not the others, could you please split=
- this patch?
->>>>>
->>>>> Sure, next time I have to sync with meta-ti. =A0Without the MLO fixes
->>>>> I'd end up with something that doesn't work, and I don't want to blow
->>>>> another half hour testing a script I can't use.
->>>>
->>>> I guess I need to hurry up and bug Koen about switching beagleboard to
->>>> the SPL tree then :)
->>>
->>> Does your v3 work when applied on top of 2011.09?
+>> From: "Peter A. Bigot" <bigotp@acm.org>
 >>
->> Won't apply, no. =A0But my 05.03.01.00 branch is good for beagleboard,
->> am3517* and omap3evm.
+>> Generalize the search for MLO to install to have correct path for copies
+>> placed in ${DEPLOY_DIR_IMAGE} by x-load.inc, and to continue for SPL builds
+>> where there is no MLO.
+>>
+>> Allow user to override the loop mount point as well as the loop device, for
+>> folks who don't want long paths to temporary directories in their fstabs.
+>>
+>> Add noauto to example fstab entries so systems will boot without attempting
+>> to mount an unconfigured loopback device.
+>>
+>> Remove IMAGE_FSTYPE_append which does not belong in this class.
+>
+> I like the fstab changes, but not the others, could you please split this patch?
+
+So I can prepare more appropriate patches now and in the future, please explain:
+
+* Why do you want to hard-code the MLO symlink paths in the install
+and deploy directories instead of using the bitbake variables that
+x-load.inc uses for those paths?
+
+* Why do you want IMAGE_FSTYPE to be extended with .tar.bz2 when this
+class has nothing to do with tar.bz2 images?
+
+* Why do you want IMAGE_FSTYPE to be set in the class when every other
+image recipe in openembedded puts IMAGE_FSTYPE modifications in the
+recipe that incorporates the image?
+
+Thanks.
+
+Peter
+
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+>
+> iEYEARECAAYFAk7AD4IACgkQMkyGM64RGpGW8gCgrK/QEYtpHxYDuOHPuONYeJlv
+> TZgAmQGlt/0ZCZoRvbNbqUpCr6QpT0P3
+> =Az4V
+> -----END PGP SIGNATURE-----
 >
 >
-> How much non-beagle and non-SPL patches does that have in there? For beag=
-le we *really* want as little patches on top of upstream as possible. If th=
-at means moving to latest denx git, so be it.
-
-Well, it's a joint tree for those boards + ti814x/ti816x (but those
-aren't the latest/greatest, just an older iteration) and of course
-am335x.  In terms of non-SPL changes, it's changing the OTG port to
-default to a usb host in U-Boot (from a USB gadget), and non 1-bit
-NAND ECC stuff.  am3517 evm also gets ethernet support (crane could,
-trivially, just need a tester).  omap3evm also gets an ethernet
-releated bugfix.
-
---=20
-Tom
 
