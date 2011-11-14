@@ -1,25 +1,31 @@
-Return-Path: <denis@denix.org>
-Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
-	[206.46.173.3])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 36484E00305
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 21:00:21 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LUM00DMJWJVTR51@vms173003.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sun, 13 Nov 2011 23:00:08 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8A08814AF5D; Sun,
-	13 Nov 2011 23:59:55 -0500 (EST)
-Date: Sun, 13 Nov 2011 23:59:55 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Peter Bigot <bigotp@acm.org>
-Message-id: <20111114045955.GB15557@denix.org>
-References: <CAPOJ94MU-om2UXuHBi+Vfdqr8e_MpWgTnHL__Y0KCELBv1tcpw@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAPOJ94MU-om2UXuHBi+Vfdqr8e_MpWgTnHL__Y0KCELBv1tcpw@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wy0-f176.google.com (mail-wy0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A9886E00303
+	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 02:15:51 -0800 (PST)
+Received: by wyg10 with SMTP id 10so866233wyg.35
+	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 02:15:49 -0800 (PST)
+Received: by 10.216.137.38 with SMTP id x38mr3037447wei.36.1321265749751;
+	Mon, 14 Nov 2011 02:15:49 -0800 (PST)
+Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id em4sm24295714wbb.20.2011.11.14.02.15.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 14 Nov 2011 02:15:48 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <CA+M6bXntXWXNwuMEes=hXx7ECUwDUbjnHvLZuJC4c0oU2at6kQ@mail.gmail.com>
+Date: Mon, 14 Nov 2011 11:15:39 +0100
+Message-Id: <0EC00F0A-F11C-46D7-9AA8-7519EC67A211@dominion.thruhere.net>
+References: <1321208655-9701-1-git-send-email-bigotp@acm.org>
+	<1321208716-9749-1-git-send-email-bigotp@acm.org>
+	<489EAC51-52A8-48BC-92F8-6905B9E94589@dominion.thruhere.net>
+	<CAPOJ94P8ahYWx+t9b=LfMnBAD2L130P-_kuEcaM9524VsOVQug@mail.gmail.com>
+	<CA+M6bXntXWXNwuMEes=hXx7ECUwDUbjnHvLZuJC4c0oU2at6kQ@mail.gmail.com>
+To: Tom Rini <tom.rini@gmail.com>
+X-Mailer: Apple Mail (2.1251.1)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: checksum and path issues building gstreamer-ti
+Subject: Re: [PATCH 1/2] sdcard_image bbclass: fix MLO copy, loop device mounts, fstypes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,68 +37,75 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 05:00:21 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 14 Nov 2011 10:15:52 -0000
+X-Groupsio-MsgNum: 123
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_67796109-3E8A-4481-8642-B0C7D9126B96";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-On Sun, Nov 13, 2011 at 09:37:47PM -0600, Peter Bigot wrote:
-> I didn't get an answer to this when I asked it as an aside on the
-> BeagleBoard google group, but just verified that the same problems are
-> present in oe-classic as is in oe-core.
-> 
-> The recipe checksums don't match the current downloads:
-> 
-> vmserver[52]$ cd Downloads/
-> vmserver[53]$ md5sum ti_cgt_c6000_6.1.17_setup_linux_x86.bin
-> 5ee5c8e573ab0a1ba1249511d4a06c27 ti_cgt_c6000_6.1.17_setup_linux_x86.bin
-> vmserver[54]$ sha256sum ti_cgt_c6000_6.1.17_setup_linux_x86.bin
-> 0cb99e755f5d06a74db22d7c814e4dfd36aa5fcb35eeab01ddb000aef99c08c1
-> ti_cgt_c6000_6.1.17_setup_linux_x86.bin
-> 
-> When that's corrected still doesn't work because do_unpack puts the
-> toolchain in  /opt/TI/TI_CGT_C6000_6.1.17/ instead of under
-> ${installdir} where ti-paths.inc expects it.
-> 
-> NOTE: package ti-cgt6x-1_6_1_17-r4: task do_install: Started
-> ERROR: Logfile of failure stored in:
-> /prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-cgt6x-1_6_1_17-r4/temp/log.do_install.20024
-> Log data follows:
-> | + do_install
-> | + install -d /prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-cgt6x-1_6_1_17-r4/image/usr/share/ti/ti-cgt6x-tree
-> | + cp -pPrf '/prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-cgt6x-1_6_1_17-r4/cgt6x_6_1_17/*'
-> /prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-cgt6x-1_6_1_17-r4/image/usr/share/ti/ti-cgt6x-tree
-> | cp: cannot stat
-> `/prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-cgt6x-1_6_1_17-r4/cgt6x_6_1_17/*':
-> No such file or directory
-> NOTE: package ti-cgt6x-1_6_1_17-r4: task do_install: Failed
-> 
-> For the version in meta-ti, the LIC_FILES_CHKSUM value was reverted to
-> a wrong checksum when it got moved to the recipe file in commit
-> 7feec8987.
-> 
-> Or maybe somebody at TI updated
-> ti_cgt_c6000_6.1.17_setup_linux_x86.bin and the recipe is now broken
-> for anybody who doesn't have a cached copy of a previous release.  I'm
-> going to scrap this and move on, but it'd probably be worth verifying
-> that current Angstrom (classic or core) works with current downloads
-> of the codegen tools.
+--Apple-Mail=_67796109-3E8A-4481-8642-B0C7D9126B96
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=iso-8859-1
 
-Yes, the binary download of CGT 6.1.17 was updated, unfortunately:
 
-https://lists.yoctoproject.org/pipermail/meta-ti/2011-October/000016.html
+Op 13 nov. 2011, om 22:06 heeft Tom Rini het volgende geschreven:
 
-And we did follow up with CGT team. As one of the options to handle this 
-situation more gracefully, I pointed out at the way FSF handled it for when 
-they needed to update all previous releases of binutils - they made available 
-the updated binaries with a suffix.
+> On Sun, Nov 13, 2011 at 11:57 AM, Peter Bigot <bigotp@acm.org> wrote:
+>> On Sun, Nov 13, 2011 at 12:42 PM, Koen Kooi =
+<koen@dominion.thruhere.net> wrote:
+>>>=20
+>>> Op 13 nov. 2011, om 19:25 heeft Peter A. Bigot het volgende =
+geschreven:
+>>>=20
+>>>> From: "Peter A. Bigot" <bigotp@acm.org>
+>>>>=20
+>>>> Generalize the search for MLO to install to have correct path for =
+copies
+>>>> placed in ${DEPLOY_DIR_IMAGE} by x-load.inc, and to continue for =
+SPL builds
+>>>> where there is no MLO.
+>>>>=20
+>>>> Allow user to override the loop mount point as well as the loop =
+device, for
+>>>> folks who don't want long paths to temporary directories in their =
+fstabs.
+>>>>=20
+>>>> Add noauto to example fstab entries so systems will boot without =
+attempting
+>>>> to mount an unconfigured loopback device.
+>>>>=20
+>>>> Remove IMAGE_FSTYPE_append which does not belong in this class.
+>>>=20
+>>> I like the fstab changes, but not the others, could you please split =
+this patch?
+>>=20
+>> Sure, next time I have to sync with meta-ti.  Without the MLO fixes
+>> I'd end up with something that doesn't work, and I don't want to blow
+>> another half hour testing a script I can't use.
+>=20
+> I guess I need to hurry up and bug Koen about switching beagleboard to
+> the SPL tree then :)
 
-Anyway, we need to ping them again and see if this can be done similarly with 
-CGT updates...
+Does your v3 work when applied on top of 2011.09?
 
-Roger/Jason,
+regards,
 
-Would you mind?
+Koen=
 
--- 
-Denys
+--Apple-Mail=_67796109-3E8A-4481-8642-B0C7D9126B96
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk7A6k0ACgkQMkyGM64RGpH+XgCfYPuyej2w7Q5LBzEqaCDEvfmx
+1zcAn32wKxpcHSNhiQqA75s1BuJWS8BY
+=SDT4
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_67796109-3E8A-4481-8642-B0C7D9126B96--
