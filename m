@@ -1,38 +1,30 @@
-Return-Path: <r-monk@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC2A7E00303
-	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 04:32:23 -0800 (PST)
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id pAECWKVU015616
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Mon, 14 Nov 2011 06:32:20 -0600
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAECWKOx014849;
-	Mon, 14 Nov 2011 06:32:20 -0600 (CST)
-Received: from DNCE72.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAECWJOI017849;
-	Mon, 14 Nov 2011 06:32:20 -0600 (CST)
-Received: from DNCE02.ent.ti.com ([fe80::e5b6:a692:b14:3c86]) by
-	DNCE72.ent.ti.com ([fe80::8e3:61e5:a5b9:593c%23]) with mapi id
-	14.01.0323.003; Mon, 14 Nov 2011 13:32:19 +0100
-From: "Monk, Roger" <r-monk@ti.com>
-To: Peter Bigot <bigotp@acm.org>, Denys Dmytriyenko <denis@denix.org>
-Thread-Topic: [meta-ti] checksum and path issues building gstreamer-ti
-Thread-Index: AQHMon7SKfLyJjPOrEC8Dam9USMp3JWrvr6AgAB5JwCAABVy0A==
-Date: Mon, 14 Nov 2011 12:32:17 +0000
-Message-ID: <4C82F39BABFE6A429733A300DEBF522445D348@DNCE02.ent.ti.com>
-References: <CAPOJ94MU-om2UXuHBi+Vfdqr8e_MpWgTnHL__Y0KCELBv1tcpw@mail.gmail.com>
-	<20111114045955.GB15557@denix.org>
-	<CAPOJ94O6Meq2GuHX-dNrGh_Fv-Rp_Ox5xWOSAAbybdZ9i-P_Lw@mail.gmail.com>
-In-Reply-To: <CAPOJ94O6Meq2GuHX-dNrGh_Fv-Rp_Ox5xWOSAAbybdZ9i-P_Lw@mail.gmail.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.167.131.83]
-x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
-MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: checksum and path issues building gstreamer-ti
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wy0-f176.google.com (mail-wy0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E61E0E00303
+	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 05:13:07 -0800 (PST)
+Received: by wyg10 with SMTP id 10so1056315wyg.35
+	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 05:13:06 -0800 (PST)
+Received: by 10.180.75.204 with SMTP id e12mr25084797wiw.61.1321276386536;
+	Mon, 14 Nov 2011 05:13:06 -0800 (PST)
+Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id db1sm12248567wib.19.2011.11.14.05.13.04
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 14 Nov 2011 05:13:05 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <CAPOJ94P8ahYWx+t9b=LfMnBAD2L130P-_kuEcaM9524VsOVQug@mail.gmail.com>
+Date: Mon, 14 Nov 2011 14:13:02 +0100
+Message-Id: <3E9028C1-21DA-4F52-85E5-F20219484970@dominion.thruhere.net>
+References: <1321208655-9701-1-git-send-email-bigotp@acm.org>
+	<1321208716-9749-1-git-send-email-bigotp@acm.org>
+	<489EAC51-52A8-48BC-92F8-6905B9E94589@dominion.thruhere.net>
+	<CAPOJ94P8ahYWx+t9b=LfMnBAD2L130P-_kuEcaM9524VsOVQug@mail.gmail.com>
+To: Peter Bigot <bigotp@acm.org>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 1/2] sdcard_image bbclass: fix MLO copy, loop device mounts, fstypes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,113 +36,78 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 12:32:24 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Mon, 14 Nov 2011 13:13:08 -0000
+X-Groupsio-MsgNum: 126
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_6F8FCA45-A787-431E-B1F5-19C4D4F9D371";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_6F8FCA45-A787-431E-B1F5-19C4D4F9D371
 Content-Transfer-Encoding: quoted-printable
-
-On Mon, Nov 14, 2011 at 12:13:32, Peter Bigot wrote:
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] checksum and path issues building gstreamer-ti
->
-> On Sun, Nov 13, 2011 at 10:59 PM, Denys Dmytriyenko <denis@denix.org>
-> wrote:
-> > On Sun, Nov 13, 2011 at 09:37:47PM -0600, Peter Bigot wrote:
-> >> I didn't get an answer to this when I asked it as an aside on the
-> >> BeagleBoard google group, but just verified that the same problems
-> >> are present in oe-classic as is in oe-core.
-> >>
-> >> The recipe checksums don't match the current downloads:
-> >>
-> >> vmserver[52]$ cd Downloads/
-> >> vmserver[53]$ md5sum ti_cgt_c6000_6.1.17_setup_linux_x86.bin
-> >> 5ee5c8e573ab0a1ba1249511d4a06c27
-> >> ti_cgt_c6000_6.1.17_setup_linux_x86.bin
-> >> vmserver[54]$ sha256sum ti_cgt_c6000_6.1.17_setup_linux_x86.bin
-> >> 0cb99e755f5d06a74db22d7c814e4dfd36aa5fcb35eeab01ddb000aef99c08c1
-> >> ti_cgt_c6000_6.1.17_setup_linux_x86.bin
-> >>
-> >> When that's corrected still doesn't work because do_unpack puts the
-> >> toolchain in  /opt/TI/TI_CGT_C6000_6.1.17/ instead of under
-> >> ${installdir} where ti-paths.inc expects it.
-> >>
-> >> NOTE: package ti-cgt6x-1_6_1_17-r4: task do_install: Started
-> >> ERROR: Logfile of failure stored in:
-> >> /prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-gnueabi/ti
-> >> -
-> c
-> >> gt6x-1_6_1_17-r4/temp/log.do_install.20024
-> >> Log data follows:
-> >> | + do_install
-> >> | + install -d
-> >> | + /prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-
-> gnueabi/
-> >> | + ti-cgt6x-1_6_1_17-r4/image/usr/share/ti/ti-cgt6x-tree
-> >> | + cp -pPrf '/prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-
-> linux-gnueabi/ti-cgt6x-1_6_1_17-r4/cgt6x_6_1_17/*'
-> >> /prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-gnueabi/ti
-> >> -
-> c
-> >> gt6x-1_6_1_17-r4/image/usr/share/ti/ti-cgt6x-tree
-> >> | cp: cannot stat
-> >> `/prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-
-> gnueabi/ti-cgt6x-1_6_1_17-r4/cgt6x_6_1_17/*':
-> >> No such file or directory
-> >> NOTE: package ti-cgt6x-1_6_1_17-r4: task do_install: Failed
-> >>
-> >> For the version in meta-ti, the LIC_FILES_CHKSUM value was reverted
-> >> to a wrong checksum when it got moved to the recipe file in commit
-> >> 7feec8987.
-> >>
-> >> Or maybe somebody at TI updated
-> >> ti_cgt_c6000_6.1.17_setup_linux_x86.bin and the recipe is now
-> >> broken for anybody who doesn't have a cached copy of a previous releas=
-e.
-> >> I'm going to scrap this and move on, but it'd probably be worth
-> >> verifying that current Angstrom (classic or core) works with
-> >> current downloads of the codegen tools.
-> >
-> > Yes, the binary download of CGT 6.1.17 was updated, unfortunately:
-> >
-> > https://lists.yoctoproject.org/pipermail/meta-ti/2011-
-> October/000016.h
-> > tml
->
-> Thanks.  Has anybody successfully built with the new binary?  My
-> experiments suggest correcting the MD5 isn't enough; the installation
-> process also needs to be modified in non-obvious ways.
-
-Not specifically, but I've seen this bug before and submitted a patch a whi=
-le back for this, so either the patch isn't in, or it's re-occurring with t=
-he new binary.  I'll try to take a look.
-
->
-> Peter
->
-> > And we did follow up with CGT team. As one of the options to handle
-> > this situation more gracefully, I pointed out at the way FSF handled
-> > it for when they needed to update all previous releases of binutils
-> > - they made available the updated binaries with a suffix.
-> >
-> > Anyway, we need to ping them again and see if this can be done
-> > similarly with CGT updates...
-> >
-> > Roger/Jason,
-> >
-> > Would you mind?
-> >
-> > --
-> > Denys
-> >
->
-Texas Instruments Limited, 800 Pavilion Drive, Northampton, NN4 7YL. Regist=
-ered in England & Wales under company number 00574102
-
-_______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+Content-Type: text/plain;
+	charset=iso-8859-1
 
 
+Op 13 nov. 2011, om 19:57 heeft Peter Bigot het volgende geschreven:
 
+> On Sun, Nov 13, 2011 at 12:42 PM, Koen Kooi =
+<koen@dominion.thruhere.net> wrote:
+>>=20
+>> Op 13 nov. 2011, om 19:25 heeft Peter A. Bigot het volgende =
+geschreven:
+>>=20
+>>> From: "Peter A. Bigot" <bigotp@acm.org>
+>>>=20
+>>> Generalize the search for MLO to install to have correct path for =
+copies
+>>> placed in ${DEPLOY_DIR_IMAGE} by x-load.inc, and to continue for SPL =
+builds
+>>> where there is no MLO.
+>>>=20
+>>> Allow user to override the loop mount point as well as the loop =
+device, for
+>>> folks who don't want long paths to temporary directories in their =
+fstabs.
+>>>=20
+>>> Add noauto to example fstab entries so systems will boot without =
+attempting
+>>> to mount an unconfigured loopback device.
+>>>=20
+>>> Remove IMAGE_FSTYPE_append which does not belong in this class.
+>>=20
+>> I like the fstab changes, but not the others, could you please split =
+this patch?
+>=20
+> Sure, next time I have to sync with meta-ti.  Without the MLO fixes
+> I'd end up with something that doesn't work, and I don't want to blow
+> another half hour testing a script I can't use.
 
+The MLO issue has been fixed in the proper places now:
+
+=
+http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-texasinstrument=
+s/commit/?id=3D2de08fa6d4208a016b447832601f83fd51cb8f93
+=
+http://git.angstrom-distribution.org/cgi-bin/cgit.cgi/meta-texasinstrument=
+s/commit/?id=3D955b40d36a5d2b6eb9ca50bed7103d7b6daa7feb
+
+regards,
+
+Koen=
+
+--Apple-Mail=_6F8FCA45-A787-431E-B1F5-19C4D4F9D371
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk7BE98ACgkQMkyGM64RGpGyIwCaAqijXuXUgiiwcZ4r9zCyrjUF
+XeMAoKTJFEShy8HsSDc5DYhFx0T+ybZa
+=tUOP
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_6F8FCA45-A787-431E-B1F5-19C4D4F9D371--
