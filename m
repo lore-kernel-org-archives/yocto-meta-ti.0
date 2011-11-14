@@ -1,35 +1,30 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-qw0-f41.google.com (mail-qw0-f41.google.com
-	[209.85.216.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0FBFAE00303
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 13:06:17 -0800 (PST)
+Return-Path: <pabigot@gmail.com>
+Received: from mail-ww0-f42.google.com (mail-ww0-f42.google.com [74.125.82.42])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A50A9E00305
+	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 19:37:48 -0800 (PST)
 Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
 	(1024-bit key; insecure key) header.i=@gmail.com;
 	x-dkim-adsp=none (insecure policy)
-Received: by qam6 with SMTP id 6so1136700qam.14
-	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 13:06:17 -0800 (PST)
+Received: by wwi18 with SMTP id 18so4362035wwi.5
+	for <meta-ti@yoctoproject.org>; Sun, 13 Nov 2011 19:37:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=C9GeYx+QEAKHc+xD2TYn6O/1IP0ZcarjPu3pkceMuBQ=;
-	b=MxRaviNdFNzhC0fWrb4hTyvPVf/P9QsbUR+3PKxT8NqTqktji5Ctgb1HkRQdLcsu7q
-	VDt6HjTi+PLdYIIzpGtoKCZOC2agEIElyehTAuB4VhU/lCPY6tFm0e+HqrNI72VKBPry
-	hnSx6QyxTFTrIL/3ucrXcWf+P1Uegoxe/GubE=
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=gZYpBLEgMSbrun6qZskRZc1H3mH+JjdQPumg+aImwF4=;
+	b=fY3ifYPOoeezIiEleDLcmz5IyoCU4NefCrlrDmpHJFXY3rsGqncWPoO87DOaUs4pGt
+	UcxuMqW57sruD0PvFBma1fb0KdrzvuM/cxpOzhNE52lJO3wgFNbX8rklhea1Vc2CBExe
+	bLhQiUbRQ2bk8hmoGH6GsObjScbXZiuePK1gk=
 MIME-Version: 1.0
-Received: by 10.229.67.19 with SMTP id p19mr167500qci.188.1321218377123; Sun,
-	13 Nov 2011 13:06:17 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Sun, 13 Nov 2011 13:06:17 -0800 (PST)
-In-Reply-To: <CAPOJ94P8ahYWx+t9b=LfMnBAD2L130P-_kuEcaM9524VsOVQug@mail.gmail.com>
-References: <1321208655-9701-1-git-send-email-bigotp@acm.org>
-	<1321208716-9749-1-git-send-email-bigotp@acm.org>
-	<489EAC51-52A8-48BC-92F8-6905B9E94589@dominion.thruhere.net>
-	<CAPOJ94P8ahYWx+t9b=LfMnBAD2L130P-_kuEcaM9524VsOVQug@mail.gmail.com>
-Date: Sun, 13 Nov 2011 14:06:17 -0700
-Message-ID: <CA+M6bXntXWXNwuMEes=hXx7ECUwDUbjnHvLZuJC4c0oU2at6kQ@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: Peter Bigot <bigotp@acm.org>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 1/2] sdcard_image bbclass: fix MLO copy, loop device mounts, fstypes
+Received: by 10.227.205.132 with SMTP id fq4mr13741104wbb.5.1321241867303;
+	Sun, 13 Nov 2011 19:37:47 -0800 (PST)
+Sender: pabigot@gmail.com
+Received: by 10.216.30.200 with HTTP; Sun, 13 Nov 2011 19:37:47 -0800 (PST)
+Date: Sun, 13 Nov 2011 21:37:47 -0600
+X-Google-Sender-Auth: Mhga7L9N_HJVxSLFn5VivWZvjHs
+Message-ID: <CAPOJ94MU-om2UXuHBi+Vfdqr8e_MpWgTnHL__Y0KCELBv1tcpw@mail.gmail.com>
+From: Peter Bigot <bigotp@acm.org>
+To: meta-ti@yoctoproject.org
+Subject: checksum and path issues building gstreamer-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,45 +36,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Nov 2011 21:06:18 -0000
+X-List-Received-Date: Mon, 14 Nov 2011 03:37:49 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Sun, Nov 13, 2011 at 11:57 AM, Peter Bigot <bigotp@acm.org> wrote:
-> On Sun, Nov 13, 2011 at 12:42 PM, Koen Kooi <koen@dominion.thruhere.net> =
-wrote:
->>
->> Op 13 nov. 2011, om 19:25 heeft Peter A. Bigot het volgende geschreven:
->>
->>> From: "Peter A. Bigot" <bigotp@acm.org>
->>>
->>> Generalize the search for MLO to install to have correct path for copie=
-s
->>> placed in ${DEPLOY_DIR_IMAGE} by x-load.inc, and to continue for SPL bu=
-ilds
->>> where there is no MLO.
->>>
->>> Allow user to override the loop mount point as well as the loop device,=
- for
->>> folks who don't want long paths to temporary directories in their fstab=
-s.
->>>
->>> Add noauto to example fstab entries so systems will boot without attemp=
-ting
->>> to mount an unconfigured loopback device.
->>>
->>> Remove IMAGE_FSTYPE_append which does not belong in this class.
->>
->> I like the fstab changes, but not the others, could you please split thi=
-s patch?
->
-> Sure, next time I have to sync with meta-ti. =A0Without the MLO fixes
-> I'd end up with something that doesn't work, and I don't want to blow
-> another half hour testing a script I can't use.
+I didn't get an answer to this when I asked it as an aside on the
+BeagleBoard google group, but just verified that the same problems are
+present in oe-classic as is in oe-core.
 
-I guess I need to hurry up and bug Koen about switching beagleboard to
-the SPL tree then :)
+The recipe checksums don't match the current downloads:
 
---=20
-Tom
+vmserver[52]$ cd Downloads/
+vmserver[53]$ md5sum ti_cgt_c6000_6.1.17_setup_linux_x86.bin
+5ee5c8e573ab0a1ba1249511d4a06c27 ti_cgt_c6000_6.1.17_setup_linux_x86.bin
+vmserver[54]$ sha256sum ti_cgt_c6000_6.1.17_setup_linux_x86.bin
+0cb99e755f5d06a74db22d7c814e4dfd36aa5fcb35eeab01ddb000aef99c08c1
+ti_cgt_c6000_6.1.17_setup_linux_x86.bin
+
+When that's corrected still doesn't work because do_unpack puts the
+toolchain in  /opt/TI/TI_CGT_C6000_6.1.17/ instead of under
+${installdir} where ti-paths.inc expects it.
+
+NOTE: package ti-cgt6x-1_6_1_17-r4: task do_install: Started
+ERROR: Logfile of failure stored in:
+/prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-cgt6x-1_6_1_17-r4/temp/log.do_install.20024
+Log data follows:
+| + do_install
+| + install -d /prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-cgt6x-1_6_1_17-r4/image/usr/share/ti/ti-cgt6x-tree
+| + cp -pPrf '/prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-cgt6x-1_6_1_17-r4/cgt6x_6_1_17/*'
+/prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-cgt6x-1_6_1_17-r4/image/usr/share/ti/ti-cgt6x-tree
+| cp: cannot stat
+`/prj/oe/oe-dev/build/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-cgt6x-1_6_1_17-r4/cgt6x_6_1_17/*':
+No such file or directory
+NOTE: package ti-cgt6x-1_6_1_17-r4: task do_install: Failed
+
+For the version in meta-ti, the LIC_FILES_CHKSUM value was reverted to
+a wrong checksum when it got moved to the recipe file in commit
+7feec8987.
+
+Or maybe somebody at TI updated
+ti_cgt_c6000_6.1.17_setup_linux_x86.bin and the recipe is now broken
+for anybody who doesn't have a cached copy of a previous release.  I'm
+going to scrap this and move on, but it'd probably be worth verifying
+that current Angstrom (classic or core) works with current downloads
+of the codegen tools.
+
+Peter
 
