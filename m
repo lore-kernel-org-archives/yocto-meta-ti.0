@@ -1,32 +1,31 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wy0-f176.google.com (mail-wy0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5AEFE006B8
-	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 08:09:05 -0800 (PST)
-Received: by wyg10 with SMTP id 10so1321791wyg.35
-	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 08:09:04 -0800 (PST)
-Received: by 10.180.76.175 with SMTP id l15mr25766639wiw.67.1321286943724;
-	Mon, 14 Nov 2011 08:09:03 -0800 (PST)
-Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id en7sm12559123wib.0.2011.11.14.08.09.02
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 14 Nov 2011 08:09:02 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <CAPOJ94OKxPJKWy7eNxzMc-HXYJzpMh7pzKSjqotq38FcqWMTNA@mail.gmail.com>
-Date: Mon, 14 Nov 2011 17:08:58 +0100
-Message-Id: <4C8E7030-F3E3-4AD4-BB7E-291314C72531@dominion.thruhere.net>
-References: <1321208655-9701-1-git-send-email-bigotp@acm.org>
-	<1321208716-9749-1-git-send-email-bigotp@acm.org>
-	<489EAC51-52A8-48BC-92F8-6905B9E94589@dominion.thruhere.net>
-	<CAPOJ94OE+ALWZkov_w73bh4v2C85X-0MHg+RZDxFhOURqDsAYQ@mail.gmail.com>
-	<DE33B98D-0A5F-4042-B821-DD8496B9AE59@dominion.thruhere.net>
-	<CAPOJ94OKxPJKWy7eNxzMc-HXYJzpMh7pzKSjqotq38FcqWMTNA@mail.gmail.com>
-To: Peter Bigot <bigotp@acm.org>
-X-Mailer: Apple Mail (2.1251.1)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 1/2] sdcard_image bbclass: fix MLO copy, loop device mounts, fstypes
+Return-Path: <joelagnel@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 18DFDE00306
+	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 19:32:53 -0800 (PST)
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id pAF3WrUo008582
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 21:32:53 -0600
+Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAF3WqMq019306
+	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 21:32:53 -0600 (CST)
+Received: from DLEE74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAF3WqfM012030
+	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 21:32:52 -0600 (CST)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Mon, 14 Nov 2011 21:32:52 -0600
+Received: from localhost.localdomain (chase-ubuntu.am.dhcp.ti.com
+	[128.247.105.25])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
+	pAF3WoEa005430;	Mon, 14 Nov 2011 21:32:52 -0600
+From: Joel A Fernandes <joelagnel@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 14 Nov 2011 21:34:23 -0600
+Message-ID: <1321328063-4162-1-git-send-email-joelagnel@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Cc: Joel A Fernandes <joelagnel@ti.com>
+Subject: [PATCH] linux-ti33x-psp: Refresh musb patch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,93 +37,135 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2011 16:09:06 -0000
-X-Groupsio-MsgNum: 135
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_6E5F24FF-3006-4783-AA93-54533FC551A6";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 15 Nov 2011 03:32:54 -0000
+Content-Type: text/plain
 
---Apple-Mail=_6E5F24FF-3006-4783-AA93-54533FC551A6
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=iso-8859-1
+This patch is rewritten to poll for the channel FIFO state without depending on a worker thread.
+
+The v2 version fixes all the previous issues, and remains to be seen if it also fixes the issue of
+100% CPU usage with a mac.
+
+Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+---
+ ...pi41_dma-Check-if-scheduling-is-required-.patch |   68 ++++++++++++++++----
+ recipes-kernel/linux/linux-ti33x-psp_3.1.bb        |    2 +-
+ 2 files changed, 57 insertions(+), 13 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.1/0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch b/recipes-kernel/linux/linux-ti33x-psp-3.1/0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch
+index 701c09d..db7a7f2 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp-3.1/0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.1/0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch
+@@ -1,7 +1,7 @@
+-From b564457d26931a00f8c5645981a00c1eb78e9a90 Mon Sep 17 00:00:00 2001
++From c5a0664fa68a8541c1400bf7330a072581b12c38 Mon Sep 17 00:00:00 2001
+ From: Joel A Fernandes <joelagnel@ti.com>
+ Date: Sat, 12 Nov 2011 23:42:26 -0600
+-Subject: [PATCH] usb::musb::cppi41_dma: Check if scheduling is required after DMA
++Subject: [PATCH v2] usb::musb::cppi41_dma: Check if scheduling is required after DMA
+ 
+ Even after TX DMA, data can still be in the FIFO and we would keep
+ rescheduling the worker thread in a polling fashion taking up a lot
+@@ -11,19 +11,64 @@ is required and sleep if so.
+ This fixes high CPU load issue seen with g_mass_storage on a BeagleBone
+ and could potentially fix similar issues seen with other gadget drivers.
+ 
++v2 changes:
++Avoid rescheduling a "worker", this process involves a lot of workqueue
++related crunching that is unnecessary. If we're polling, we might as well
++do it with minimum overhead, and giving other processes CPU time at the
++same time.
++
+ Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+ ---
+- drivers/usb/musb/cppi41_dma.c |   10 ++++++++++
+- 1 files changed, 10 insertions(+), 0 deletions(-)
++ drivers/usb/musb/cppi41_dma.c |   30 ++++++++++++++++++------------
++ 1 files changed, 18 insertions(+), 12 deletions(-)
+ 
+ diff --git a/drivers/usb/musb/cppi41_dma.c b/drivers/usb/musb/cppi41_dma.c
+-index a24707c..e68c5d7 100644
++index a24707c..3ac58b1 100644
+ --- a/drivers/usb/musb/cppi41_dma.c
+ +++ b/drivers/usb/musb/cppi41_dma.c
+-@@ -1319,6 +1319,16 @@ void txdma_completion_work(struct work_struct *data)
++@@ -1283,6 +1283,7 @@ void cppi41_check_fifo_empty(struct cppi41 *cppi)
++ 	for (index = 0; index < USB_CPPI41_NUM_CH; index++) {
++ 		void __iomem *epio;
++ 		u16 csr;
+++		unsigned long flags;
++ 
++ 		tx_ch = &cppi->tx_cppi_ch[index];
++ 		if (tx_ch->tx_complete) {
++@@ -1299,29 +1300,34 @@ void cppi41_check_fifo_empty(struct cppi41 *cppi)
++ 			epio = tx_ch->end_pt->regs;
++ 			csr = musb_readw(epio, MUSB_TXCSR);
++ 
++-			if (csr & (MUSB_TXCSR_TXPKTRDY |
++-				MUSB_TXCSR_FIFONOTEMPTY))
++-				resched = 1;
++-			else {
++-				tx_ch->tx_complete = 0;
++-				musb_dma_completion(musb, index+1, 1);
+++			while (1) {
+++				csr = musb_readw(epio, MUSB_TXCSR);
+++				if(!(csr & (MUSB_TXCSR_TXPKTRDY |
+++					MUSB_TXCSR_FIFONOTEMPTY)))
+++				break;
+++				cond_resched();
++ 			}
+++			tx_ch->tx_complete = 0;
+++			spin_lock_irqsave(&musb->lock, flags);
+++			musb_dma_completion(musb, index+1, 1);
+++			spin_unlock_irqrestore(&musb->lock, flags);
++ 		}
++ 	}
++-
++-	if (resched)
++-		schedule_work(&cppi->txdma_work);
++ }
++ 
++ void txdma_completion_work(struct work_struct *data)
++ {
++ 	struct cppi41 *cppi = container_of(data, struct cppi41, txdma_work);
+  	struct musb *musb = cppi->musb;
+- 	unsigned long flags;
++-	unsigned long flags;
+  
++-	spin_lock_irqsave(&musb->lock, flags);
+ +	/*
+ +	 * txdma worker thread can call schedule_work on itself and cause
+ +	 * itself to be scheduled immediately and because the data might still
+@@ -31,12 +76,11 @@ index a24707c..e68c5d7 100644
+ +	 * the worker to consume lot of CPU when the controller is slow, so we
+ +	 * reschedule if necessary.
+ +	 */
+-+	if (need_resched())
+-+		cond_resched();
+-+
+- 	spin_lock_irqsave(&musb->lock, flags);
+  	cppi41_check_fifo_empty(cppi);
+- 	spin_unlock_irqrestore(&musb->lock, flags);
++-	spin_unlock_irqrestore(&musb->lock, flags);
++ }
++ 
++ /**
+ -- 
+ 1.7.4.1
+ 
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
+index 37f59ca..556ad5a 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
+@@ -11,7 +11,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
+ 
+ BRANCH = "v3.1-staging"
+ SRCREV = "1d84d8853fa30cf3db2571a5aec572accca4e29d"
+-MACHINE_KERNEL_PR_append = "r+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "s+gitr${SRCREV}"
+ 
+ COMPATIBLE_MACHINE = "(ti33x)"
+ 
+-- 
+1.7.4.1
 
 
-Op 14 nov. 2011, om 16:32 heeft Peter Bigot het volgende geschreven:
-
-> On Mon, Nov 14, 2011 at 9:07 AM, Koen Kooi =
-<koen@dominion.thruhere.net> wrote:
->>=20
->> Op 14 nov. 2011, om 15:57 heeft Peter Bigot het volgende geschreven:
->>=20
->>> On Sun, Nov 13, 2011 at 12:42 PM, Koen Kooi =
-<koen@dominion.thruhere.net> wrote:
->>>>=20
->>>> Op 13 nov. 2011, om 19:25 heeft Peter A. Bigot het volgende =
-geschreven:
->>>>=20
->>>>> From: "Peter A. Bigot" <bigotp@acm.org>
->>>>>=20
->>>>> Generalize the search for MLO to install to have correct path for =
-copies
->>>>> placed in ${DEPLOY_DIR_IMAGE} by x-load.inc, and to continue for =
-SPL builds
->>>>> where there is no MLO.
->>>>>=20
->>>>> Allow user to override the loop mount point as well as the loop =
-device, for
->>>>> folks who don't want long paths to temporary directories in their =
-fstabs.
->>>>>=20
->>>>> Add noauto to example fstab entries so systems will boot without =
-attempting
->>>>> to mount an unconfigured loopback device.
->>>>>=20
->>>>> Remove IMAGE_FSTYPE_append which does not belong in this class.
->>>>=20
->>>> I like the fstab changes, but not the others, could you please =
-split this patch?
->>>=20
->>> So I can prepare more appropriate patches now and in the future, =
-please explain:
->>>=20
->>> * Why do you want to hard-code the MLO symlink paths in the install
->>> and deploy directories instead of using the bitbake variables that
->>> x-load.inc uses for those paths?
->>=20
->> Due to variable scoping those are only available inside those =
-recipes, not the image class.
->=20
-> Yes, but they're default-assigned, so an override in local.conf would
-> apply to both, no?  Why does x-load allow them to be overridden?
-> Maybe that'd be a clue as to the right way to change the point-of-use.
->=20
-> What's the point of adding a nomachine symlink anyway?  A desire to
-> avoid specifying the target filename in the cp command?  Consistently
-> using MLO-${MACHINE} for the source and MLO for the target would be a
-> lot more clear, since the target absolutely must be named "MLO".
->=20
-> meta-ti now has two things that can create an MLO file (x-load and
-> u-boot) and a third thing that uses it (sdcard_image), and they're
-> inconsistent in how they name it.  Ick.
-
-u-boot and x-load are now internally consistent with naming nowadays.
-
-
-
---Apple-Mail=_6E5F24FF-3006-4783-AA93-54533FC551A6
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAk7BPR0ACgkQMkyGM64RGpEffQCfRZEp2xI2WKDzzhyn21fx23dz
-OtoAn1TBbZD/bbsh7BhUHEZv9umHcBZ2
-=GJIO
------END PGP SIGNATURE-----
-
---Apple-Mail=_6E5F24FF-3006-4783-AA93-54533FC551A6--
