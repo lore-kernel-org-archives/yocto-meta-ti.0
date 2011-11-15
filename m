@@ -1,31 +1,22 @@
-Return-Path: <joelagnel@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 18DFDE00306
-	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 19:32:53 -0800 (PST)
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id pAF3WrUo008582
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 21:32:53 -0600
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAF3WqMq019306
-	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 21:32:53 -0600 (CST)
-Received: from DLEE74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pAF3WqfM012030
-	for <meta-ti@yoctoproject.org>; Mon, 14 Nov 2011 21:32:52 -0600 (CST)
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
-	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 14 Nov 2011 21:32:52 -0600
-Received: from localhost.localdomain (chase-ubuntu.am.dhcp.ti.com
-	[128.247.105.25])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	pAF3WoEa005430;	Mon, 14 Nov 2011 21:32:52 -0600
-From: Joel A Fernandes <joelagnel@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 14 Nov 2011 21:34:23 -0600
-Message-ID: <1321328063-4162-1-git-send-email-joelagnel@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Cc: Joel A Fernandes <joelagnel@ti.com>
-Subject: [PATCH] linux-ti33x-psp: Refresh musb patch
+Return-Path: <jkridner@beagleboard.org>
+Received: from mail-yw0-f48.google.com (mail-yw0-f48.google.com
+	[209.85.213.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57731E00305
+	for <meta-ti@yoctoproject.org>; Tue, 15 Nov 2011 05:41:39 -0800 (PST)
+Received: by ywb26 with SMTP id 26so4278161ywb.35
+	for <meta-ti@yoctoproject.org>; Tue, 15 Nov 2011 05:41:38 -0800 (PST)
+Received: by 10.68.31.129 with SMTP id a1mr58867157pbi.131.1321364497233;
+	Tue, 15 Nov 2011 05:41:37 -0800 (PST)
+Received: from localhost.localdomain
+	(ec2-75-101-156-174.compute-1.amazonaws.com. [75.101.156.174])
+	by mx.google.com with ESMTPS id wn14sm65138077pbb.5.2011.11.15.05.41.34
+	(version=SSLv3 cipher=OTHER); Tue, 15 Nov 2011 05:41:34 -0800 (PST)
+From: Jason Kridner <jkridner@beagleboard.org>
+To: meta-ti@yoctoproject.org
+Date: Tue, 15 Nov 2011 07:41:31 -0600
+Message-Id: <1321364491-20230-1-git-send-email-jdk@ti.com>
+X-Mailer: git-send-email 1.7.0.2.276.g60daf
+Subject: [PATCH] gadget-init: create info.txt upon starting storage gadget
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,135 +28,99 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Nov 2011 03:32:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 15 Nov 2011 13:41:40 -0000
 
-This patch is rewritten to poll for the channel FIFO state without depending on a worker thread.
+This creates a file called info.txt that saves some useful information
+for image versioning, network connectivity and beginner user debugging.
 
-The v2 version fixes all the previous issues, and remains to be seen if it also fixes the issue of
-100% CPU usage with a mac.
-
-Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+Signed-off-by: Jason Kridner <jdk@ti.com>
 ---
- ...pi41_dma-Check-if-scheduling-is-required-.patch |   68 ++++++++++++++++----
- recipes-kernel/linux/linux-ti33x-psp_3.1.bb        |    2 +-
- 2 files changed, 57 insertions(+), 13 deletions(-)
+ recipes-ti/beagleboard/gadget-init.bb              |    4 ++-
+ .../gadget-init/storage-gadget-init.service        |    1 +
+ .../gadget-init/update-image-info-on-mmcblk0p1.sh  |   33 ++++++++++++++++++++
+ 3 files changed, 37 insertions(+), 1 deletions(-)
+ create mode 100755 recipes-ti/beagleboard/gadget-init/update-image-info-on-mmcblk0p1.sh
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.1/0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch b/recipes-kernel/linux/linux-ti33x-psp-3.1/0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch
-index 701c09d..db7a7f2 100644
---- a/recipes-kernel/linux/linux-ti33x-psp-3.1/0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.1/0006-usb-musb-cppi41_dma-Check-if-scheduling-is-required-.patch
-@@ -1,7 +1,7 @@
--From b564457d26931a00f8c5645981a00c1eb78e9a90 Mon Sep 17 00:00:00 2001
-+From c5a0664fa68a8541c1400bf7330a072581b12c38 Mon Sep 17 00:00:00 2001
- From: Joel A Fernandes <joelagnel@ti.com>
- Date: Sat, 12 Nov 2011 23:42:26 -0600
--Subject: [PATCH] usb::musb::cppi41_dma: Check if scheduling is required after DMA
-+Subject: [PATCH v2] usb::musb::cppi41_dma: Check if scheduling is required after DMA
+diff --git a/recipes-ti/beagleboard/gadget-init.bb b/recipes-ti/beagleboard/gadget-init.bb
+index 0d4682e..16137fa 100644
+--- a/recipes-ti/beagleboard/gadget-init.bb
++++ b/recipes-ti/beagleboard/gadget-init.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Units to initialize usb gadgets"
  
- Even after TX DMA, data can still be in the FIFO and we would keep
- rescheduling the worker thread in a polling fashion taking up a lot
-@@ -11,19 +11,64 @@ is required and sleep if so.
- This fixes high CPU load issue seen with g_mass_storage on a BeagleBone
- and could potentially fix similar issues seen with other gadget drivers.
+-PR = "r11"
++PR = "r12"
  
-+v2 changes:
-+Avoid rescheduling a "worker", this process involves a lot of workqueue
-+related crunching that is unnecessary. If we're polling, we might as well
-+do it with minimum overhead, and giving other processes CPU time at the
-+same time.
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+@@ -19,6 +19,7 @@ SRC_URI = "file://storage-gadget-init.service \
+            file://g-storage-reinsert.sh \
+            file://g-ether-start-service.sh \
+            file://g-ether-load.sh \
++           file://update-image-info-on-mmcblk0p1.sh \
+           "
+ 
+ do_install() {
+@@ -46,6 +47,7 @@ FILES_${PN} = "${sysconfdir}/udev/rules.d/99-hokey-pokey.rules \
+ FILES_${PN}-storage = "${base_libdir}/systemd/system/storage-gadget-init.service \
+                        ${base_libdir}/systemd/system/basic.target.wants/storage-gadget-init.service \
+                        ${bindir}/g-storage-reinsert.sh \
++                       ${bindir}/update-image-info-on-mmcblk0p1.sh \
+                        ${sysconfdir}/udev/rules.d/bone-gmass-eject.rules"
+ 
+ FILES_${PN}-network = "${base_libdir}/systemd/system/network-gadget-init.service \
+diff --git a/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service b/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
+index 9a8513e..601e0d7 100644
+--- a/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
++++ b/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
+@@ -4,6 +4,7 @@ After=dev-mmcblk0p1.device
+ 
+ [Service]
+ RemainAfterExit=yes
++ExecStartPre=/usr/bin/update-image-info-on-mmcblk0p1.sh
+ ExecStart=/sbin/modprobe g_mass_storage file=/dev/mmcblk0p1 cdrom=0 stall=0 removable=1 nofua=1
+ ExecStop=/sbin/rmmod g_mass_storage
+ 
+diff --git a/recipes-ti/beagleboard/gadget-init/update-image-info-on-mmcblk0p1.sh b/recipes-ti/beagleboard/gadget-init/update-image-info-on-mmcblk0p1.sh
+new file mode 100755
+index 0000000..62aab39
+--- /dev/null
++++ b/recipes-ti/beagleboard/gadget-init/update-image-info-on-mmcblk0p1.sh
+@@ -0,0 +1,33 @@
++#!/bin/sh
++mount /dev/mmcblk0p1 /mnt
++echo "Image info snapshot" > /mnt/info.txt
 +
- Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
- ---
-- drivers/usb/musb/cppi41_dma.c |   10 ++++++++++
-- 1 files changed, 10 insertions(+), 0 deletions(-)
-+ drivers/usb/musb/cppi41_dma.c |   30 ++++++++++++++++++------------
-+ 1 files changed, 18 insertions(+), 12 deletions(-)
- 
- diff --git a/drivers/usb/musb/cppi41_dma.c b/drivers/usb/musb/cppi41_dma.c
--index a24707c..e68c5d7 100644
-+index a24707c..3ac58b1 100644
- --- a/drivers/usb/musb/cppi41_dma.c
- +++ b/drivers/usb/musb/cppi41_dma.c
--@@ -1319,6 +1319,16 @@ void txdma_completion_work(struct work_struct *data)
-+@@ -1283,6 +1283,7 @@ void cppi41_check_fifo_empty(struct cppi41 *cppi)
-+ 	for (index = 0; index < USB_CPPI41_NUM_CH; index++) {
-+ 		void __iomem *epio;
-+ 		u16 csr;
-++		unsigned long flags;
-+ 
-+ 		tx_ch = &cppi->tx_cppi_ch[index];
-+ 		if (tx_ch->tx_complete) {
-+@@ -1299,29 +1300,34 @@ void cppi41_check_fifo_empty(struct cppi41 *cppi)
-+ 			epio = tx_ch->end_pt->regs;
-+ 			csr = musb_readw(epio, MUSB_TXCSR);
-+ 
-+-			if (csr & (MUSB_TXCSR_TXPKTRDY |
-+-				MUSB_TXCSR_FIFONOTEMPTY))
-+-				resched = 1;
-+-			else {
-+-				tx_ch->tx_complete = 0;
-+-				musb_dma_completion(musb, index+1, 1);
-++			while (1) {
-++				csr = musb_readw(epio, MUSB_TXCSR);
-++				if(!(csr & (MUSB_TXCSR_TXPKTRDY |
-++					MUSB_TXCSR_FIFONOTEMPTY)))
-++				break;
-++				cond_resched();
-+ 			}
-++			tx_ch->tx_complete = 0;
-++			spin_lock_irqsave(&musb->lock, flags);
-++			musb_dma_completion(musb, index+1, 1);
-++			spin_unlock_irqrestore(&musb->lock, flags);
-+ 		}
-+ 	}
-+-
-+-	if (resched)
-+-		schedule_work(&cppi->txdma_work);
-+ }
-+ 
-+ void txdma_completion_work(struct work_struct *data)
-+ {
-+ 	struct cppi41 *cppi = container_of(data, struct cppi41, txdma_work);
-  	struct musb *musb = cppi->musb;
-- 	unsigned long flags;
-+-	unsigned long flags;
-  
-+-	spin_lock_irqsave(&musb->lock, flags);
- +	/*
- +	 * txdma worker thread can call schedule_work on itself and cause
- +	 * itself to be scheduled immediately and because the data might still
-@@ -31,12 +76,11 @@ index a24707c..e68c5d7 100644
- +	 * the worker to consume lot of CPU when the controller is slow, so we
- +	 * reschedule if necessary.
- +	 */
--+	if (need_resched())
--+		cond_resched();
--+
-- 	spin_lock_irqsave(&musb->lock, flags);
-  	cppi41_check_fifo_empty(cppi);
-- 	spin_unlock_irqrestore(&musb->lock, flags);
-+-	spin_unlock_irqrestore(&musb->lock, flags);
-+ }
-+ 
-+ /**
- -- 
- 1.7.4.1
- 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
-index 37f59ca..556ad5a 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
-@@ -11,7 +11,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
- 
- BRANCH = "v3.1-staging"
- SRCREV = "1d84d8853fa30cf3db2571a5aec572accca4e29d"
--MACHINE_KERNEL_PR_append = "r+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "s+gitr${SRCREV}"
- 
- COMPATIBLE_MACHINE = "(ti33x)"
- 
++echo >> /mnt/info.txt
++echo "/etc/angstrom-version:" >> /mnt/info.txt
++cat /etc/angstrom-version >> /mnt/info.txt
++
++echo >> /mnt/info.txt
++echo "/proc/cpuinfo:" >> /mnt/info.txt
++cat /proc/cpuinfo >> /mnt/info.txt
++
++echo >> /mnt/info.txt
++echo "uname -a:" >> /mnt/info.txt
++uname -a >> /mnt/info.txt
++
++echo >> /mnt/info.txt
++echo "/proc/cmdline:" >> /mnt/info.txt
++cat /proc/cmdline >> /mnt/info.txt
++
++echo >> /mnt/info.txt
++echo "ifconfig:" >> /mnt/info.txt
++ifconfig >> /mnt/info.txt
++
++echo >> /mnt/info.txt
++echo "/etc/angstrom-build-info:" >> /mnt/info.txt
++cat /etc/angstrom-build-info >> /mnt/info.txt
++
++echo >> /mnt/info.txt
++echo "opkg list-installed:" >> /mnt/info.txt
++opkg list-installed >> /mnt/info.txt
++
++umount /mnt
 -- 
-1.7.4.1
+1.7.0.2.276.g60daf
 
 
