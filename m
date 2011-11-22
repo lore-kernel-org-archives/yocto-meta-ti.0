@@ -1,22 +1,21 @@
 Return-Path: <cliff.brake@gmail.com>
 Received: from happy.bec-systems.com (oh-69-34-21-229.sta.embarqhsd.net
 	[69.34.21.229])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EEBD0E00307
-	for <meta-ti@yoctoproject.org>; Wed, 16 Nov 2011 12:50:20 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04E26E00303
+	for <meta-ti@yoctoproject.org>; Tue, 22 Nov 2011 06:28:52 -0800 (PST)
 Received: from localhost.localdomain ([127.0.0.1] helo=happy.bec-systems.com)
 	by happy.bec-systems.com with esmtp (Exim 4.72)
 	(envelope-from <cliff.brake@gmail.com>)
-	id 1RQmR1-0004Qo-C6; Wed, 16 Nov 2011 15:50:19 -0500
-Date: Wed, 16 Nov 2011 15:50:19 -0500
-Message-Id: <E1RQmR1-0004Qo-C6@happy.bec-systems.com>
+	id 1RSrL8-0001ss-IV; Tue, 22 Nov 2011 09:28:50 -0500
+Date: Tue, 22 Nov 2011 09:28:50 -0500
+Message-Id: <E1RSrL8-0001ss-IV@happy.bec-systems.com>
 X-Mailer: Nodemailer (0.1.13; +http://www.nodemailer.org)
 From: cliff.brake@gmail.com
 To: openembedded-core@lists.openembedded.org,
 	openembedded-devel@lists.openembedded.org,
 	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
 MIME-Version: 1.0
-X-Mailman-Approved-At: Wed, 16 Nov 2011 12:58:49 -0800
-Subject: OE Changelog for 2011-11-7 to 2011-11-14
+Subject: OE Changelog for 2011-11-14 to 2011-11-21
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -28,11 +27,11 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Nov 2011 20:50:21 -0000
+X-List-Received-Date: Tue, 22 Nov 2011 14:28:52 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Changelog for 2011-11-7 to 2011-11-14.  Projects included in this report:
+Changelog for 2011-11-14 to 2011-11-21.  Projects included in this report:
 
 bitbake: git://git.openembedded.org/bitbake
 openembedded-core: git://git.openembedded.org/openembedded-core
@@ -53,440 +52,332 @@ openembedded: git://git.openembedded.org/openembedded
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for bitbake:
 
-Richard Purdie (4):
-=20=20utils.py: Fix lockfile retry handling
-=20=20cooker.py: Ensure only one copy of bitbake executes at once
-=20=20Add FAKEROOTNOENV variable
-=20=20data_smart: Add appendVar/prependVar functions
+Paul Eggleton (1):
+=20=20lib/bb/runqueue: avoid marking runtime dependencies as covered
+
+Richard Purdie (3):
+=20=20siggen.py: Fix diffsigs output for filename comparisions
+=20=20siggen.py: Include list of variables in hashes
+=20=20parse_py: Use absolute paths for FILE
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for openembedded-core:
 
-Bruce Ashfield (1):
-=20=20linux-yocto: config cleanups + romely rt support
+Chris Larson (1):
+=20=20bitbake.conf: add a couple explicit vardeps
 
-Darren Hart (1):
-=20=20ncurses: refactor configure to avoid configuring widec when disabled
+Connor Abbott (1):
+=20=20mime.bbclass: fix typo
 
-Dmitry Cherukhin (1):
-=20=20qt-mobility: qa_configure stage failed
+Damien Lespiau (1):
+=20=20bootimg: Create a valid boot sector for the iso image
 
-Dongxiao Xu (1):
-=20=20multilib: Drop MULTILIB_IMAGE_INSTALL
+Dmitry Eremin-Solenikov (2):
+=20=20screenshot: rename to sato-screenshot
+=20=20gobject-introspection: update frome meta-oe
 
-Eric B=C3=A9nard (2):
-=20=20dbus: fix install for virtclass-nativesdk
-=20=20useradd.bbclass: handle nativesdk case
+Henning Heinold (1):
+=20=20glib-2.0: fix qsort_t testing for uclibc
 
 Jan Luebbe (1):
-=20=20syslinux: fix the SRC_URI by using the 4.xx directory
+=20=20libpcap: use binconfig class to deploy pcap-config
 
-Joshua Lock (14):
-=20=20cogl: add cogl 1.8.0 recipe
-=20=20clutter-1.8: add 1.8.0
-=20=20clutter-gst-1.8: add 1.4.2 for use with clutter 1.8
-=20=20clutter-gtk-1.8: add clutter-gtk 0.11.4
-=20=20mx: add mx toolkit 1.3.2
-=20=20libcanberra: add libvorbis to DEPENDS
-=20=20gypsy: fix packaging
-=20=20connman: split scripts into separate package
-=20=20pulseaudio: make X11 dependencies optional and add gtk+
-=20=20contacts: fix packaging of icons
-=20=20clutter-gst: fix patch filename
-=20=20shared-mime-info: package runtime data separately
-=20=20classes/[gnome|gnomebase|mime]: enhance gnome related classes
-=20=20gconf: add upstream GNOME gconf 3.2.3 and drop gconf-dbus
+Jiajun Xu (2):
+=20=20sanitytest: use different option for command ps from busybox and =
+procps
+=20=20sanitytest: remove rpm/zypper tests if PACKAGE_CLASSES does not set =
+package_
 
-Mark Hatle (6):
-=20=20pseudo: Uprev pseudo to version 1.2
-=20=20rootfs_rpm.bbclass: Enable pre and post install scripts
-=20=20rootfs_rpm.bbclass: Turn off script debugging
-=20=20wpa-supplicant: Avoid blocking the post install script at cross =
-rootfs time.
-=20=20shadow: Generate the shadow files at rootfs construction
-=20=20sudo: Avoid post install scripts
+Kang Kai (1):
+=20=20mesa: fix calling host's commands
 
-Martin Jansa (6):
-=20=20libxml2: use Copyright in LIC_FILES_CHKSUM instead of COPYING
-=20=20kbd: import from meta-oe
-=20=20kbd: add RREPLACES/RCONFLICTS/RPROVIDES for upgradeable path from =
-console-to
-=20=20task-core-boot, keymaps: add another VIRTUAL-RUNTIME to allow =
-distributions=20
-=20=20keymaps: depend on kbd instead of console-tools
-=20=20task-core-x11: use VIRTUAL-RUNTIME variables for xserver_common and =
-graphica
+Koen Kooi (1):
+=20=20shared-mime-info: fix ordering of PACKAGES
 
-Matthew McClintock (2):
-=20=20Add new IMAGE_CLASSES variable for classes for image generation
-=20=20Introduce new SERIAL_CONSOLES to add multiple consoles for your =
-MACHINE
+Martin Jansa (16):
+=20=20subversion: add 1.7.0 with native support and negative D_P for now
+=20=20util-linux: use u-a for flock and blockdev, conflicts with busybox
+=20=20util-linux: add missing u-a calls for setsid chrt
+=20=20util-linux: bump PR after u-a changes
+=20=20kbd: use u-a for chvt, deallocvt, fgconssole, openvt, conflicts with =
+busybox
+=20=20time: rename files dir to time-1.7 for faster lookup
+=20=20time: drop default S and 2 useless comments
+=20=20time: use u-a for time, conflicts with busybox
+=20=20libatomics-ops: force ARM mode
+=20=20pulseaudio-0.9.23: force ARM mode
+=20=20aspell: force ARM mode
+=20=20webkit-gtk: force arm mode to work around binutils segfault
+=20=20alsa-lib: use PKGSUFFIX for every package to resolve multiple runtime =
+provid
+=20=20alsa-lib: add nativesdk BBCLASSEXTEND
+=20=20base.bbclass: add subversion-native to DEPENDS if there is svn:// in =
+SRC_URI
+=20=20apr-util: extend sed call to fix libtool patch for case without SHELL =
+in LIB
 
-Otavio Salvador (7):
-=20=20libcap: fix sstate for native package
-=20=20files/device_table-minimal.txt: add /dev/kmsg
-=20=20dhcp: drop unused dhcp3.inc file
-=20=20dhcp: rename dhcp4.inc to dhcp.inc
-=20=20dhcp: move server configuration to dhcp-server-config
-=20=20util-linux: split mcookie into a package
-=20=20xinit: rdepends on util-linux-mcookie to avoid brining whole =
-util-linux
+Michael Brown (1):
+=20=20gcc-4.6: fix toolchain build for SH4
 
-Paul Eggleton (2):
-=20=20classes/package_rpm: disable uninstall scripts for upgrades
-=20=20busybox: add grep to temporary links during uninstall
+Nitin A Kamble (7):
+=20=20libpcre: upgrade from 8.12 to 8.20
+=20=20mpfr: upgrade from 3.0.1 to 3.1.0
+=20=20tcl: upgrade from 8.5.10 to 8.5.11
+=20=20python-gst: upgrade from 0.10.21 to 0.10.22
+=20=20insane.bbclass: avoid errors for x32 kernel
+=20=20update distro tracking recipe information
+=20=20btrfs-tools: update to the latest git commit
 
-Paul Menzel (2):
-=20=20libarchive: Remove obsolete comment and empty line at the end
-=20=20xinit: Fix `startx` looking for `mcookie` in sysroot
+Otavio Salvador (1):
+=20=20dhcp: generate initial leases files for server
 
-Richard Purdie (13):
-=20=20mime.bbclass: No need to import os.path, it then breaks the os module
-=20=20gconf: Drop polkit dependency
-=20=20useradd: Add missing DEPEND on shadow
-=20=20scripts/qemuimage-testlib: Output a slightly better error if expect =
-is missi
-=20=20classes: Remove various bashisms
-=20=20qemu: Ensure an internal qemugl script uses bash as it has bashisms
-=20=20Allow use of dash as /bin/sh
-=20=20Convert to use direct access to the data store (instead of =
-bb.data.*Var*())
-=20=20bitbake.conf: Unload pseudo when its not required for a given task
-=20=20populate_*.bbclass: Drop pointless fakeroot attribute (fakeroot is at =
-the ta
-=20=20populate_*.bbclass: Correct INSTALL variable name after recent =
-multilib chan
-=20=20rootfs_ipk.bbclass: Ensure bad recommendations persist in the status =
-file
-=20=20opkg: Ensure we use the uname/gname fields when extracting tarballs
+Phil Blundell (1):
+=20=20libnss-mdns: avoid race condition in postinst
 
-Saul Wold (4):
-=20=20Distro_tracking: Update Manual Check Date
-=20=20udev-extraconf: blacklist /dev/md
-=20=20libtasn1: update to 2.10
-=20=20lame: update to 3.99.1
+Richard Purdie (9):
+=20=20base-passwd: Fix the broken preinst/postinstall
+=20=20base-passwd: Move update-passwd into a separate package
+=20=20dpkg/update-alternatives: Fix dpkg version of update-alternatives to =
+be usab
+=20=20bitbake.conf: Correct svn-native -> subversion-native so we use =
+consistent n
+=20=20libconvert-asn1-perl/libtimedate-perl: Convert to use allarch
+=20=20sanity.bbclass: No need to check for cvs any more
+=20=20update-alternatives: Various fixes
+=20=20package.bbclass: Ensure we tell rpmdeps where to find its magic file
+=20=20package_rpm: Set _tmppath to avoid races over tmp files
 
-Scott Garman (5):
-=20=20useradd.bbclass: fix how RDEPENDS is setup
-=20=20useradd.bbclass: only modify packages in USERADD_PACKAGES
-=20=20useradd.bbclass: do not modify -nativesdk packages
-=20=20useradd-example.bb: update example documentation comments
-=20=20avahi: remove USERADDPN
+Saul Wold (7):
+=20=20libgcrypt: add BBCLASSEXTEND native for gnutls-native
+=20=20libgpg-error: add BBCLASSEXTEND native for libgcrypts and =
+gnutls-native
+=20=20file: update to 5.09
+=20=20gnu-config: update to git HEAD
+=20=20gnu-config: Create 2011111 release
+=20=20boost: Update to 1.47.0 & Cleanup
+=20=20bitbake.conf: Update ASSUME_PROVIDED
 
-Tom Zanussi (4):
-=20=20gmp_5.0.2: Set CC_FOR_BUILD to BUILD_CC
-=20=20libzypp: fix mishandling of hyphenated arches
-=20=20python: skip setup.py 'import check' when cross-compiling
-=20=20python: bump PR
+Simon Busch (1):
+=20=20qt4-x11-free: bring back pkg-config fixups
 
-Xiaofeng Yan (5):
-=20=20libarchive: update to 2.8.5
-=20=20distro_tracking_fields.inc: update to libarchive to 2.8.5
-=20=20qmmp: update to 0.5.2
-=20=20distro_tracking_fields.inc: Modify the status of qmmp
-=20=20local.conf.sample.extended: Fix bug 1674
+Xiaofeng Yan (2):
+=20=20libx11-diet: update to 1.4.4
+=20=20directfb: update to 1.4.15
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for meta-openembedded:
 
-Anders Darander (1):
-=20=20rsyslog: change postrm to prerm
+Andreas M=C3=BCller (5):
+=20=20xfce4-dev-tools: cleanups
+=20=20midori: update to 0.4.2
+=20=20tumbler: initial add 0.1.22
+=20=20ristretto: update to 0.3.0
+=20=20ristretto: add tumbler to RRECOMMENDS_${PN}
 
-Andreas M=C3=BCller (1):
-=20=20task-xfce-extended: initial add task for full featured XFCE
-
-Jason Kridner (2):
-=20=20cloud9: updated to latest version
-=20=20cloud9: fixed loading of o3.node
-
-Koen Kooi (19):
-=20=20udev: update to 175
-=20=20systemd: bump SRCREV
-=20=20ntp 4.2.6p3: add native systemd support
-=20=20cronie 1.4.8: add native systemd support
-=20=20nodejs 0.4.2: make npm and node-waf work
-=20=20gateone: make it work
-=20=20gateone: add avahi and systemd support
-=20=20libsocketcan: add 0.0.8 + fixes
-=20=20canutils: add 4.0.6
-=20=20networkmanager: update to 0.9.2.0
-=20=20gateone: add missing files
-=20=20gateone: bump SRCREV to latest git
-=20=20classes: remove duplicate classes
-=20=20gateone: update SRCREV to drag in the http redirect option
-=20=20network-manager-applet: update to 0.9.2.0
+Koen Kooi (20):
 =20=20qcanobserver: import from OE Classic with updates and cleanups
 =20=20qcanobserver-socketcan: import from OE Classic with updates
 =20=20nodejs: update to 0.4.9
 =20=20nodejs: add 0.6.1
+=20=20python-imaging: add 1.1.7
+=20=20gateone: update to latest SRCREV, add missing python modules
+=20=20networkmanager 0.9.2.0: add patch to fix dhcp version detection
+=20=20gvfs 1.8.2: disable samba, it causes an OOM
+=20=20uhd-firmware: update to 3.3.1
+=20=20uhd: update to 3.3.1 to match kernel and FPGA firmware
+=20=20gateone: update to latest SRCREV for performance improvements
+=20=20gateone: convert to allarch, it's pure python + js
+=20=20systemd: bump SRCREV
+=20=20gconf: drop from meta-oe, oe-core has 3.2.3 nowadays
+=20=20libwmf: add 0.2.8.4
+=20=20t1lib: add 5.1.2
+=20=20gtkmathview: add 0.8.0
+=20=20libwmf 0.2.8.4: fix native build
+=20=20loudmouth: add 1.4.3
+=20=20abiword: update to 2.8.6
 
-Martin Jansa (2):
-=20=20openssl: bump PR to fix license
-=20=20kbd: move to oe-core
+Martin Jansa (1):
+=20=20systemd: add prerm u-a calls
 
-Otavio Salvador (3):
-=20=20systemd.bbclass: stop using SYSTEMDPN to rdepends addition
-=20=20connman: bump PR due systemd.bbclass fixes
-=20=20atftp: add 0.7 version
+Otavio Salvador (1):
+=20=20freerdp: use FreeRDP-old repository as 1.0 release is not stable yet
+
+Stefan Schmidt (1):
+=20=20nodejs: Update to latest 0.4x series release 0.4.12
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for meta-angstrom:
 
-Bernhard Guillon (1):
-=20=20angstrom-version.bb: fix LexToken(TOKEN, 'nobranch', 0, 0) error
-
-Koen Kooi (2):
-=20=20angstrom: prefer udev 175
-=20=20timestap-service: /etc/timestamp support for systemd
-
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for meta-yocto:
 
-Bruce Ashfield (1):
-=20=20linux-yocto: config cleanups + romely rt support
+Chris Larson (1):
+=20=20bitbake.conf: add a couple explicit vardeps
 
-Christopher Larson (5):
-=20=20codeparser: merge the nested python parsing classes
-=20=20codeparser: simplify how we compare the called node names
-=20=20codeparser: accept a name for better messages
-=20=20codeparser: drop expand tracking
-=20=20codeparser: silence non-literal warnings for vardeps
+Connor Abbott (1):
+=20=20mime.bbclass: fix typo
 
-Darren Hart (1):
-=20=20ncurses: refactor configure to avoid configuring widec when disabled
+Damien Lespiau (1):
+=20=20bootimg: Create a valid boot sector for the iso image
 
-Dmitry Cherukhin (1):
-=20=20qt-mobility: qa_configure stage failed
+Dmitry Eremin-Solenikov (2):
+=20=20screenshot: rename to sato-screenshot
+=20=20gobject-introspection: update frome meta-oe
 
-Dongxiao Xu (1):
-=20=20multilib: Drop MULTILIB_IMAGE_INSTALL
+Henning Heinold (1):
+=20=20glib-2.0: fix qsort_t testing for uclibc
 
-Eric B=C3=A9nard (2):
-=20=20dbus: fix install for virtclass-nativesdk
-=20=20useradd.bbclass: handle nativesdk case
+Jan Luebbe (2):
+=20=20syslinux: fix the SRC_URI by using the 4.xx directory
+=20=20libpcap: use binconfig class to deploy pcap-config
 
-Joshua Lock (16):
-=20=20cogl: add cogl 1.8.0 recipe
-=20=20clutter-1.8: add 1.8.0
-=20=20clutter-gst-1.8: add 1.4.2 for use with clutter 1.8
-=20=20clutter-gtk-1.8: add clutter-gtk 0.11.4
-=20=20mx: add mx toolkit 1.3.2
-=20=20libcanberra: add libvorbis to DEPENDS
-=20=20gypsy: fix packaging
-=20=20connman: split scripts into separate package
-=20=20pulseaudio: make X11 dependencies optional and add gtk+
-=20=20contacts: fix packaging of icons
-=20=20clutter-gst: fix patch filename
-=20=20clutter-1.8: add bbappend for new clutter-1.8 recipe
-=20=20clutter-1.8: this should be a bbappend
-=20=20shared-mime-info: package runtime data separately
-=20=20classes/[gnome|gnomebase|mime]: enhance gnome related classes
-=20=20gconf: add upstream GNOME gconf 3.2.3 and drop gconf-dbus
+Jiajun Xu (2):
+=20=20sanitytest: use different option for command ps from busybox and =
+procps
+=20=20sanitytest: remove rpm/zypper tests if PACKAGE_CLASSES does not set =
+package_
 
-Mark Hatle (6):
-=20=20pseudo: Uprev pseudo to version 1.2
-=20=20rootfs_rpm.bbclass: Enable pre and post install scripts
-=20=20rootfs_rpm.bbclass: Turn off script debugging
-=20=20wpa-supplicant: Avoid blocking the post install script at cross =
-rootfs time.
-=20=20shadow: Generate the shadow files at rootfs construction
-=20=20sudo: Avoid post install scripts
+Kang Kai (1):
+=20=20mesa: fix calling host's commands
 
-Martin Jansa (6):
-=20=20libxml2: use Copyright in LIC_FILES_CHKSUM instead of COPYING
-=20=20kbd: import from meta-oe
-=20=20kbd: add RREPLACES/RCONFLICTS/RPROVIDES for upgradeable path from =
-console-to
-=20=20task-core-boot, keymaps: add another VIRTUAL-RUNTIME to allow =
-distributions=20
-=20=20keymaps: depend on kbd instead of console-tools
-=20=20task-core-x11: use VIRTUAL-RUNTIME variables for xserver_common and =
-graphica
+Koen Kooi (1):
+=20=20shared-mime-info: fix ordering of PACKAGES
 
-Matthew McClintock (2):
-=20=20Add new IMAGE_CLASSES variable for classes for image generation
-=20=20Introduce new SERIAL_CONSOLES to add multiple consoles for your =
-MACHINE
+Martin Jansa (16):
+=20=20subversion: add 1.7.0 with native support and negative D_P for now
+=20=20util-linux: use u-a for flock and blockdev, conflicts with busybox
+=20=20util-linux: add missing u-a calls for setsid chrt
+=20=20util-linux: bump PR after u-a changes
+=20=20kbd: use u-a for chvt, deallocvt, fgconssole, openvt, conflicts with =
+busybox
+=20=20time: rename files dir to time-1.7 for faster lookup
+=20=20time: drop default S and 2 useless comments
+=20=20time: use u-a for time, conflicts with busybox
+=20=20libatomics-ops: force ARM mode
+=20=20pulseaudio-0.9.23: force ARM mode
+=20=20aspell: force ARM mode
+=20=20webkit-gtk: force arm mode to work around binutils segfault
+=20=20alsa-lib: use PKGSUFFIX for every package to resolve multiple runtime =
+provid
+=20=20alsa-lib: add nativesdk BBCLASSEXTEND
+=20=20base.bbclass: add subversion-native to DEPENDS if there is svn:// in =
+SRC_URI
+=20=20apr-util: extend sed call to fix libtool patch for case without SHELL =
+in LIB
 
-Otavio Salvador (7):
-=20=20libcap: fix sstate for native package
-=20=20files/device_table-minimal.txt: add /dev/kmsg
-=20=20dhcp: drop unused dhcp3.inc file
-=20=20dhcp: rename dhcp4.inc to dhcp.inc
-=20=20dhcp: move server configuration to dhcp-server-config
-=20=20util-linux: split mcookie into a package
-=20=20xinit: rdepends on util-linux-mcookie to avoid brining whole =
-util-linux
+Michael Brown (1):
+=20=20gcc-4.6: fix toolchain build for SH4
 
-Paul Eggleton (4):
-=20=20classes/package_rpm: disable uninstall scripts for upgrades
-=20=20busybox: add grep to temporary links during uninstall
-=20=20README.hardware: update atom-pc instructions
-=20=20README.hardware: declare support for BeagleBoard xM rev B
+Nitin A Kamble (7):
+=20=20libpcre: upgrade from 8.12 to 8.20
+=20=20mpfr: upgrade from 3.0.1 to 3.1.0
+=20=20tcl: upgrade from 8.5.10 to 8.5.11
+=20=20python-gst: upgrade from 0.10.21 to 0.10.22
+=20=20insane.bbclass: avoid errors for x32 kernel
+=20=20update distro tracking recipe information
+=20=20btrfs-tools: update to the latest git commit
 
-Paul Menzel (2):
-=20=20libarchive: Remove obsolete comment and empty line at the end
-=20=20xinit: Fix `startx` looking for `mcookie` in sysroot
+Otavio Salvador (1):
+=20=20dhcp: generate initial leases files for server
 
-Richard Purdie (17):
-=20=20mime.bbclass: No need to import os.path, it then breaks the os module
-=20=20gconf: Drop polkit dependency
-=20=20useradd: Add missing DEPEND on shadow
-=20=20utils.py: Fix lockfile retry handling
-=20=20cooker.py: Ensure only one copy of bitbake executes at once
-=20=20Add FAKEROOTNOENV variable
-=20=20data_smart: Add appendVar/prependVar functions
-=20=20scripts/qemuimage-testlib: Output a slightly better error if expect =
-is missi
-=20=20classes: Remove various bashisms
-=20=20qemu: Ensure an internal qemugl script uses bash as it has bashisms
-=20=20Allow use of dash as /bin/sh
-=20=20Convert to use direct access to the data store (instead of =
-bb.data.*Var*())
-=20=20bitbake.conf: Unload pseudo when its not required for a given task
-=20=20populate_*.bbclass: Drop pointless fakeroot attribute (fakeroot is at =
-the ta
-=20=20populate_*.bbclass: Correct INSTALL variable name after recent =
-multilib chan
-=20=20rootfs_ipk.bbclass: Ensure bad recommendations persist in the status =
-file
-=20=20opkg: Ensure we use the uname/gname fields when extracting tarballs
+Paul Eggleton (1):
+=20=20lib/bb/runqueue: avoid marking runtime dependencies as covered
 
-Robert P. J. Day (6):
-=20=20Documentation/dev-manual/dev-manual-intro.xml: Edits to Intro section.
-=20=20documentation/dev-manual/dev-manual-start.xml: Robert P. J. Edits
-=20=20documentation/dev-manual/dev-manual-newbie.xml: Robert P. J. Edits
-=20=20documentation/dev-manual/dev-manual-newbie.xml: Robert P. J. Edits
-=20=20documentation/dev-manual/dev-manual-model.xml: Robert P. J. Day Edits
-=20=20documentation/dev-manual/dev-manual-bsp-appendix.xml: Robert P. J. =
-Day edits
+Phil Blundell (1):
+=20=20libnss-mdns: avoid race condition in postinst
 
-Saul Wold (4):
-=20=20Distro_tracking: Update Manual Check Date
-=20=20udev-extraconf: blacklist /dev/md
-=20=20libtasn1: update to 2.10
-=20=20lame: update to 3.99.1
+Richard Purdie (12):
+=20=20base-passwd: Fix the broken preinst/postinstall
+=20=20base-passwd: Move update-passwd into a separate package
+=20=20dpkg/update-alternatives: Fix dpkg version of update-alternatives to =
+be usab
+=20=20bitbake.conf: Correct svn-native -> subversion-native so we use =
+consistent n
+=20=20libconvert-asn1-perl/libtimedate-perl: Convert to use allarch
+=20=20sanity.bbclass: No need to check for cvs any more
+=20=20update-alternatives: Various fixes
+=20=20package.bbclass: Ensure we tell rpmdeps where to find its magic file
+=20=20siggen.py: Fix diffsigs output for filename comparisions
+=20=20siggen.py: Include list of variables in hashes
+=20=20package_rpm: Set _tmppath to avoid races over tmp files
+=20=20parse_py: Use absolute paths for FILE
 
-Scott Garman (5):
-=20=20useradd.bbclass: fix how RDEPENDS is setup
-=20=20useradd.bbclass: only modify packages in USERADD_PACKAGES
-=20=20useradd.bbclass: do not modify -nativesdk packages
-=20=20useradd-example.bb: update example documentation comments
-=20=20avahi: remove USERADDPN
+Saul Wold (7):
+=20=20libgcrypt: add BBCLASSEXTEND native for gnutls-native
+=20=20libgpg-error: add BBCLASSEXTEND native for libgcrypts and =
+gnutls-native
+=20=20file: update to 5.09
+=20=20gnu-config: update to git HEAD
+=20=20gnu-config: Create 2011111 release
+=20=20boost: Update to 1.47.0 & Cleanup
+=20=20bitbake.conf: Update ASSUME_PROVIDED
 
-Scott Rifenbark (9):
-=20=20documentation/dev-manual/dev-manual-bsp-appendix.xml: Added text to =
-find t-b
-=20=20documentation/dev-manual/dev-manual-bsp-appendix.xml: Robert P. J. =
-Day edits
-=20=20documentation/bsp-guide/bsp.xml: fix link - found by Robert P. J. Day
-=20=20documentation/dev-manual/dev-manual-bsp-appendix.xml: Tom Zanussi =
-edits.
-=20=20documentation/dev-manual/dev-manual-bsp-appendix.xml: Added footnote
-=20=20documentation/dev-manual/style.css: added .footnote element
-=20=20documentation/dev-manual: Fixed PDF Note line breaks
-=20=20documentation/dev-manual/style.css: Fixed HTML output
-=20=20documentation/adt-manual/adt-prepare.xml: Fixed broken link
+Simon Busch (1):
+=20=20qt4-x11-free: bring back pkg-config fixups
 
-Tom Zanussi (5):
-=20=20documentation/dev-manual/dev-manual-bsp-appendix.xml: BSP example =
-scrub
-=20=20gmp_5.0.2: Set CC_FOR_BUILD to BUILD_CC
-=20=20libzypp: fix mishandling of hyphenated arches
-=20=20python: skip setup.py 'import check' when cross-compiling
-=20=20python: bump PR
-
-Xiaofeng Yan (5):
-=20=20libarchive: update to 2.8.5
-=20=20distro_tracking_fields.inc: update to libarchive to 2.8.5
-=20=20qmmp: update to 0.5.2
-=20=20distro_tracking_fields.inc: Modify the status of qmmp
-=20=20local.conf.sample.extended: Fix bug 1674
+Xiaofeng Yan (2):
+=20=20libx11-diet: update to 1.4.4
+=20=20directfb: update to 1.4.15
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for meta-texasinstruments:
 
 Jason Kridner (1):
-=20=20cloud9-image: added ntp
+=20=20gadget-init: create info.txt upon starting storage gadget
 
-Joel A Fernandes (4):
-=20=20beaglebone-tester: Update to latest, add quiet option to bootargs
-=20=20gadget-init: Add network-gadget services and other fixes
-=20=20udhcpd: Fixes and new udev rule
-=20=20linux-ti33x-psp: Check if scheduling is required after DMA
+Joel A Fernandes (3):
+=20=20linux-ti33x-psp: Refresh musb patch
+=20=20sdcard_image: Add image version info to root fs
+=20=20gadget-init: Add image-version-info to info.txt
 
-Koen Kooi (34):
-=20=20u-boot 2011.10rc: turn on dcache for beaglebone
-=20=20sdcard_image bbclass: switch to vfat layout
-=20=20sdcard_image bbclass: reinstate vfat copy of uImage
-=20=20u-boot 2011.10rc: uboot extX loading is 20 times slower than vfat =
-loading :(
-=20=20u-boot 2011.10rc: fatload does not set loadaddr, so be explicit
-=20=20cloud9-image: add more stuff
-=20=20cloud9-image: switch to ntpdate+cron instead of ntpd
-=20=20cloud9-image: add hicolor-icon-theme
-=20=20cloud9-image: add gateone
-=20=20linux-omap4 2.6.35.x: update to glp1.4
-=20=20linux-omap4: add experimental 3.0.0 version
-=20=20cloud9-image: add tar, gdb and gdbserver
-=20=20linux-ti33x-psp 3.1: add custom beaglebone bootlogo
-=20=20gadget-init: also package activation symlinks
-=20=20gadget-init: minor logic cleanups
-=20=20linux-ti335x-psp 3.1: backport some PSP patches, add beaglebone =
-bootlogo
-=20=20linux-ti335x-psp 3.1: add CAN bus patches
-=20=20beaglebone-getting-started: update to latest SRCREV
-=20=20ti-hw-bringup-image: add timestamp service
-=20=20bonescript: fixup git repo
-=20=20cloud9-image: add nodejs-dev
-=20=20beaglebone getting started: bump SRCREV
-=20=20beaglebone-getting-started: add windows installer, update README, etc
-=20=20linux 3.0: update to 3.0.9
-=20=20beaglebone-getting-started: update to latest git
-=20=20beaglebone-getting-started: add systemd unit
-=20=20beaglebone-getting-started: active bone101 webserver on boot
-=20=20beaglebone-getting-started: update to latest SRCREV
-=20=20beaglebone-getting-started: disable bone101 autostart, it takes 100% =
-cpu all
-=20=20sdcard_image bbclass: run genex2fs directly on the loop device
-=20=20u-boot: enhance deploy symlinking logic
-=20=20x-load: sync deploy layout with u-boot SPL
-=20=20bonescript, beaglebone-getting-started: move bone101 startup to =
-proper recip
-
-Peter A. Bigot (1):
-=20=20sdcard_image: add dependency on native ext2 utilities
+Koen Kooi (11):
+=20=20linux-ti33x-psp 3.1: remove CAN patch that hardcodes evm as machine =
+instead=20
+=20=20linux-ti33x-psp 3.1: switch to beagleboard repo
+=20=20bonescript: fix c/p mistake
+=20=20beaglebone getting started: update to latest SRCREV
+=20=20bonescript: update to latest SRCREV for fiber support
+=20=20beaglebone getting started: update to latest SRCREV
+=20=20beaglebone getting started: update to 1.0 release
+=20=20bonescript: update to latest SRCREV
+=20=20linux-ti335x 3.1: enable i2c2 for beaglebone
+=20=20u-boot 2011.10rc: enable i2c2 for beaglebone
+=20=20linux-ti335x-psp 3.1: enable all i2c and spi sensors for beaglebone
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for meta-smartphone:
 
+Denis 'GNUtoo' Carikli (2):
+=20=20meta-openmoko: base-files: override /etc/fstab with one that =
+automounts the=20
+=20=20meta-shr: recipes-graphics: xserver-xorg: bring back =
+randr-support.patch
+
 Klaus Kurzmann (1):
-=20=20meta-fso: bump FSO_CORNUCOPIA_SRCREV
+=20=20linux-gta04_git.bb: switch to master branch based on 3.1
 
-Martin Jansa (5):
-=20=20meta-aurora: qt-components: bump SRCREV and pass qmake-exec param to =
-find qm
-=20=20meta-smartphone: meta-nokia: add mplayer2_git.bbappend for -vo omapfb
-=20=20aurora-daemon: export XDG_DATA_DIRS to help valac find vapis
-=20=20mplayer2: force tremor instead of libvorbis
-=20=20meta-shr: drop TCLIBCAPPEND, add it to local.conf if you don't want =
-to rebui
+Lukas M=C3=A4rdian (1):
+=20=20frameworkd: update SRCREV and bump PR
 
-Sebastian Krzyszkowiak (1):
-=20=20e-wm-theme-illume-gry: bump rev for keyboard fix
+Martin Jansa (8):
+=20=20base-files: move PRINC to meta-shr
+=20=20qi: upgrade to latest SRCREV
+=20=20linux-openmoko_2.6.39: apply work around for GCC bug
+=20=20linux-openmoko: remove only glamo_mci_pre_request & =
+glamo_mci_post_request i
+=20=20elsa: add bbappend with our autologin elsa.conf
+=20=20libphone-ui-shr: bump PR
+=20=20meta-nokia: add formfactor files
+=20=20initscripts: move PRINC to meta-shr
 
-Simon Busch (7):
-=20=20qt-components: remove it as the relevant parts are now part of aurora =
-itself
-=20=20meta-aurora: aurora-daemon: remove dependency for qt-components which =
-is not
-=20=20meta-aurora: aurora-daemon: update md5 checksum for COPYING license =
-file
-=20=20meta-aurora: aurora-base: bump SRCREV
-=20=20meta-aurora: aurora-daemon: add libfsobasics and libfsoframework as =
-dependen
-=20=20meta-aurora: aurora-daemon: add qt4-plugin-imageformat-svg to RDEPENDS
+Simon Busch (6):
 =20=20meta-fso: libsamsung-ipc: add vapi to dev package and bump PR
+=20=20meta-aurora: aurora-base: bump SRCREV
+=20=20meta-samsung: xf86-input-mtev: bump SRCREV
+=20=20meta-fso: cornucopia: bump SRCREV
+=20=20meta-fso: libsamsung-ipc: bump SRCREV
+=20=20meta-aurora: aurora-base: bump SRCREV to a more stable version than =
+before
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for meta-micro:
@@ -500,8 +391,7 @@ Changelog for meta-nslu2:
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for meta-intel:
 
-Tom Zanussi (2):
-=20=20meta-emenlow: fix mesa-dri multiple-providers warning
+Tom Zanussi (1):
 =20=20meta-intel: update kernel SRCREVs
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
@@ -513,26 +403,11 @@ Changelog for meta-opie:
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for openembedded:
 
-Florian Boor (1):
-=20=20libgee.inc: Increment PR in order to fix decrement from previous =
-revert.=20=20=20=20
-
-Koen Kooi (1):
-=20=20Revert "omap3.inc: Remove hardcoded x-loader dependency breaking =
-builds for=20
-
-Marco Cavallini (3):
-=20=20linux_2.6.28.bb: added download of a patch for at91sam9263-ek, =
-ronetix-pm926
-=20=20ronetix-pm9263/defconfig: added PWM and BACKLIGHT options
-=20=20mh355/defconfig: added PWM and BACKLIGHT options
-
-Philip Balister (2):
-=20=20uhd-firmware : Update to 3.3.1.
-=20=20uhd : Update to version 3.3.1.
-
 Todd Kempel (1):
 =20=20batctl: Add version 2011.3.0 (initial recipe)
+
+Vita Preskovsky (1):
+=20=20bluez4: Add version 4.95
 
 
 
