@@ -1,24 +1,28 @@
-Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ADA20E00305
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-vw0-f53.google.com (mail-vw0-f53.google.com
+	[209.85.212.53])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 212BFE0030A
 	for <meta-ti@lists.yoctoproject.org>;
-	Sun, 27 Nov 2011 18:27:25 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LVC00C7KMSZF8X0@vms173013.mailsrvcs.net> for
-	meta-ti@lists.yoctoproject.org; Sun, 27 Nov 2011 20:27:12 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9454C14AF5D; Sun,
-	27 Nov 2011 21:26:59 -0500 (EST)
-Date: Sun, 27 Nov 2011 21:26:59 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-id: <20111128022659.GA24182@denix.org>
+	Mon, 28 Nov 2011 01:39:51 -0800 (PST)
+Received: by vbbff1 with SMTP id ff1so5418175vbb.26
+	for <meta-ti@lists.yoctoproject.org>;
+	Mon, 28 Nov 2011 01:39:50 -0800 (PST)
+Received: by 10.52.33.143 with SMTP id r15mr42478440vdi.22.1322473190717;
+	Mon, 28 Nov 2011 01:39:50 -0800 (PST)
+Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id m7sm935468vdi.16.2011.11.28.01.39.49
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 28 Nov 2011 01:39:50 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20111128022659.GA24182@denix.org>
+Date: Mon, 28 Nov 2011 10:39:46 +0100
+Message-Id: <7E76BA15-93BA-4AED-B0D9-E43A74912917@dominion.thruhere.net>
 References: <1322422715-10741-1-git-send-email-koen@dominion.thruhere.net>
-MIME-version: 1.0
-In-reply-to: <1322422715-10741-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.16 (2007-06-09)
+	<20111128022659.GA24182@denix.org>
+To: Denys Dmytriyenko <denis@denix.org>
+X-Mailer: Apple Mail (2.1251.1)
 Cc: meta-ti@lists.yoctoproject.org
 Subject: Re: [PATCH] linux 3.0: update to 3.0.11
 X-BeenThere: meta-ti@yoctoproject.org
@@ -32,56 +36,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2011 02:27:26 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 28 Nov 2011 09:39:52 -0000
+X-Groupsio-MsgNum: 153
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_481FAB18-2EB5-4344-B72F-2AEF8BAE43A0";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-On Sun, Nov 27, 2011 at 08:38:35PM +0100, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+--Apple-Mail=_481FAB18-2EB5-4344-B72F-2AEF8BAE43A0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset=us-ascii
 
-Acked-by: Denys Dmytriyenko <denys@ti.com>
 
-> ---
->  conf/machine/include/omap3.inc    |    2 +-
->  recipes-kernel/linux/linux_3.0.bb |    6 +++---
->  2 files changed, 4 insertions(+), 4 deletions(-)
+Op 28 nov. 2011, om 03:26 heeft Denys Dmytriyenko het volgende geschreven:
+
+> On Sun, Nov 27, 2011 at 08:38:35PM +0100, Koen Kooi wrote:
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 > 
-> diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-> index 1469f98..262e212 100644
-> --- a/conf/machine/include/omap3.inc
-> +++ b/conf/machine/include/omap3.inc
-> @@ -3,7 +3,7 @@ SOC_FAMILY = "omap3"
->  require conf/machine/include/tune-cortexa8.inc
->  PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
->  # Increase this everytime you change something in the kernel
-> -MACHINE_KERNEL_PR = "r111"
-> +MACHINE_KERNEL_PR = "r112"
->  
->  KERNEL_IMAGETYPE = "uImage"
->  
-> diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
-> index 93042b3..1e61628 100644
-> --- a/recipes-kernel/linux/linux_3.0.bb
-> +++ b/recipes-kernel/linux/linux_3.0.bb
-> @@ -5,9 +5,9 @@ KERNEL_IMAGETYPE = "uImage"
->  
->  COMPATIBLE_MACHINE = "(beagleboard)"
->  
-> -PV = "3.0.10"
-> -# v3.0.10 tag
-> -SRCREV_pn-${PN} = "c7e2ea59cdd74342d3614bee9fc42fa2fb5add7e"
-> +PV = "3.0.11"
-> +# v3.0.11 tag
-> +SRCREV_pn-${PN} = "7a576d2dcd5807a7310032b380442eeba8c1c293"
->  
->  # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
->  MACHINE_KERNEL_PR_append = "a"
-> -- 
-> 1.7.2.5
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+> Acked-by: Denys Dmytriyenko <denys@ti.com>
 
+Pushed!
+
+--Apple-Mail=_481FAB18-2EB5-4344-B72F-2AEF8BAE43A0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk7TVuQACgkQMkyGM64RGpFo5wCfUpteJpA3qy+30ynqM4fR/91U
+ZaIAnjo6QQZA2JdG9vGkQseRYWAtlfDM
+=zKt4
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_481FAB18-2EB5-4344-B72F-2AEF8BAE43A0--
