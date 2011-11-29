@@ -1,37 +1,34 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yw0-f48.google.com (mail-yw0-f48.google.com
-	[209.85.213.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 14561E0072C
-	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 04:41:49 -0800 (PST)
+Received: from mail-bw0-f48.google.com (mail-bw0-f48.google.com
+	[209.85.214.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4D52AE00309
+	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 04:53:21 -0800 (PST)
 Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
 	(1024-bit key; insecure key) header.i=@gmail.com;
 	x-dkim-adsp=none (insecure policy)
-Received: by ywp31 with SMTP id 31so7980410ywp.35
-	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 04:41:48 -0800 (PST)
+Received: by bkbc12 with SMTP id c12so12180953bkb.35
+	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 04:53:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=wVjhCr8eZdPC1gLI+cl76uiQC96gaGHP0jGKsC4VVN4=;
-	b=vCITilxi4aSJC2vYo0qZldBNoEfPpQ8XCig33bIusF692TwzT99Qx30uTjtoqm+L7O
-	35exXFFvKwbokSjVkKq8R5KNeiQhGRhOu/SJGeS3cist5kCcSDn8ROdb6lk2crIyiogr
-	uO0XtmpIXNEFyJU5vOJnS+b8ZO9YX+B8+y9gY=
-Received: by 10.101.95.19 with SMTP id x19mr10906759anl.70.1322570508509;
-	Tue, 29 Nov 2011 04:41:48 -0800 (PST)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id 33sm2938343ano.1.2011.11.29.04.41.46
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 29 Nov 2011 04:41:47 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=y08S/9hcNDOBGbzOO97w2fz9I8+bhkPK7sQI1BdJ4PA=;
+	b=vF98Jsn/iXOLlhsG3m/nanluCkV777ZPBUu5eKHM6sEpnut/K6To7k4a5/CH4fHsSo
+	RW7DPPY6b6XmM3WZMdBLTTOajildYi6XamSX3Z96vQbrn4hHD1RBTmkQhWsdd0K7qmfp
+	jXDVndWiO88lLUfpJLDka3oglGLdfHROriYLA=
+MIME-Version: 1.0
+Received: by 10.205.126.13 with SMTP id gu13mr50370649bkc.114.1322571199733;
+	Tue, 29 Nov 2011 04:53:19 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.113.148 with HTTP; Tue, 29 Nov 2011 04:53:19 -0800 (PST)
+In-Reply-To: <ee2873ddeae5a79375823882a15da057536e2574.1322570446.git.otavio@ossystems.com.br>
+References: <cover.1322570446.git.otavio@ossystems.com.br>
+	<ee2873ddeae5a79375823882a15da057536e2574.1322570446.git.otavio@ossystems.com.br>
+Date: Tue, 29 Nov 2011 10:53:19 -0200
+X-Google-Sender-Auth: QN-3KAOE12AIpxQxrmryOs-FkjU
+Message-ID: <CAP9ODKrAZudP6NLcuMk1-Sx7xphW-9Q_CrD0osj94th+_outkg@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: meta-ti@yoctoproject.org
-Date: Tue, 29 Nov 2011 12:41:31 +0000
-Message-Id: <216feed1f6f000da0efcd35e0993638ae747caae.1322570446.git.otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1322570446.git.otavio@ossystems.com.br>
-References: <cover.1322570446.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1322570446.git.otavio@ossystems.com.br>
-References: <cover.1322570446.git.otavio@ossystems.com.br>
-Subject: [PATCH v2 3/3] cloud9-image: adapt to newer sdcard_image class
+Subject: Re: [PATCH v2 1/3] sdcard_image: rewrote to avoid using loopback and mount/unmount
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,36 +40,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Nov 2011 12:41:49 -0000
+X-List-Received-Date: Tue, 29 Nov 2011 12:53:21 -0000
+Content-Type: multipart/alternative; boundary=00151747b7448ce1fc04b2df1aa8
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- recipes-misc/images/cloud9-image.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+--00151747b7448ce1fc04b2df1aa8
+Content-Type: text/plain; charset=ISO-8859-1
 
-diff --git a/recipes-misc/images/cloud9-image.bb b/recipes-misc/images/cloud9-image.bb
-index 826dc93..7214d91 100644
---- a/recipes-misc/images/cloud9-image.bb
-+++ b/recipes-misc/images/cloud9-image.bb
-@@ -4,8 +4,6 @@ require ti-hw-bringup-image.bb
- 
- FATPAYLOAD = "${datadir}/beaglebone-getting-started/*"
- 
--ROOTFSTYPE_beaglebone = "ext4"
--
- IMAGE_INSTALL += " \
- 	cloud9 \
- 	task-sdk-target \
-@@ -27,5 +25,7 @@ IMAGE_INSTALL += " \
- 	nodejs-dev \
- "
- 
--export IMAGE_BASENAME = "Cloud9-IDE"
-+ROOTFS_beaglebone = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4"
-+IMAGE_FSTYPES_beaglebone= "ext4"
- 
-+export IMAGE_BASENAME = "Cloud9-IDE"
+On Tue, Nov 29, 2011 at 10:41, Otavio Salvador <otavio@ossystems.com.br>wrote:
+
+> ...
+
++# Copyright (C) 2011 O.S. Systems Software LTDA.
+> +#
+> +# Create an image that can by written onto a SD card using dd.
+> +#
+> +# External variables needed:
+> +#   ${ROOTFS} - the rootfs image to incorporate
+>
+
+I added Joel in copyright noticed as he did the first version of it. You
+can look at
+https://github.com/OSSystems/meta-ti/commit/cc8f9eeb2e73c77cdb24f8d8eb2398ea12d660b3
+
+
+
 -- 
-1.7.2.5
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
+--00151747b7448ce1fc04b2df1aa8
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
+<div class=3D"gmail_quote">On Tue, Nov 29, 2011 at 10:41, Otavio Salvador <=
+span dir=3D"ltr">&lt;<a href=3D"mailto:otavio@ossystems.com.br">otavio@ossy=
+stems.com.br</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" sty=
+le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex;">
+...=A0</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 =
+.8ex;border-left:1px #ccc solid;padding-left:1ex;">+# Copyright (C) 2011 O.=
+S. Systems Software LTDA.<br>
++#<br>
++# Create an image that can by written onto a SD card using dd.<br>
++#<br>
++# External variables needed:<br>
++# =A0 ${ROOTFS} - the rootfs image to incorporate<br></blockquote><div><br=
+></div><div>I added Joel in copyright noticed as he did the first version o=
+f it. You can look at=A0<a href=3D"https://github.com/OSSystems/meta-ti/com=
+mit/cc8f9eeb2e73c77cdb24f8d8eb2398ea12d660b3">https://github.com/OSSystems/=
+meta-ti/commit/cc8f9eeb2e73c77cdb24f8d8eb2398ea12d660b3</a>=A0</div>
+</div><br clear=3D"all"><div><br></div>-- <br>Otavio Salvador=A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O.S. Systems<br>E-mail: <a h=
+ref=3D"mailto:otavio@ossystems.com.br" target=3D"_blank">otavio@ossystems.c=
+om.br</a>=A0 <a href=3D"http://www.ossystems.com.br" target=3D"_blank">http=
+://www.ossystems.com.br</a><br>
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0<a href=3D"http://pro=
+jetos.ossystems.com.br" target=3D"_blank">http://projetos.ossystems.com.br<=
+/a><br><br>
+
+--00151747b7448ce1fc04b2df1aa8--
