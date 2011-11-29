@@ -1,22 +1,26 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
-	[209.85.215.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E1ECE0072A
-	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 09:48:54 -0800 (PST)
-Received: by eaal12 with SMTP id l12so4744924eaa.35
-	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 09:48:53 -0800 (PST)
-Received: by 10.213.19.9 with SMTP id y9mr1362725eba.54.1322588933004;
-	Tue, 29 Nov 2011 09:48:53 -0800 (PST)
-Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id a60sm1631966eeb.4.2011.11.29.09.48.51
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 29 Nov 2011 09:48:52 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <F00F7FDA-EEA8-47BD-AE07-52A4EFA8C078@dominion.thruhere.net>
-Date: Tue, 29 Nov 2011 18:48:48 +0100
-Message-Id: <4E93189F-8970-4235-AC37-4712652FD449@dominion.thruhere.net>
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-fx0-f48.google.com (mail-fx0-f48.google.com
+	[209.85.161.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34FCCE0072A
+	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 09:51:50 -0800 (PST)
+Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
+	(1024-bit key; insecure key) header.i=@gmail.com;
+	x-dkim-adsp=none (insecure policy)
+Received: by faao14 with SMTP id o14so1527161faa.35
+	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 09:51:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=phDNwZRXvGj/Kp5x9gZNRCxGi4aszwczMf/9x3SvHUs=;
+	b=nchfjdlU7Kqm2htJGYpwK870zgIB/7hgW5vR9kAs+WKfgMQfR4efGAZcNaFoL/wBKb
+	FTyyzzCCQpLgLpg9Rz/PlQKRSba9OIFe1kvgikS5InD1wZTkL1EICj77/7eobaGREld7
+	Vk3TO3KZnGdBHZ6DI8oN3VvyUgG8Ggf520WNg=
+MIME-Version: 1.0
+Received: by 10.204.13.70 with SMTP id b6mr52403920bka.78.1322589109006; Tue,
+	29 Nov 2011 09:51:49 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.113.148 with HTTP; Tue, 29 Nov 2011 09:51:48 -0800 (PST)
+In-Reply-To: <4E93189F-8970-4235-AC37-4712652FD449@dominion.thruhere.net>
 References: <cover.1322570446.git.otavio@ossystems.com.br>
 	<ee2873ddeae5a79375823882a15da057536e2574.1322570446.git.otavio@ossystems.com.br>
 	<CAP9ODKrAZudP6NLcuMk1-Sx7xphW-9Q_CrD0osj94th+_outkg@mail.gmail.com>
@@ -24,8 +28,12 @@ References: <cover.1322570446.git.otavio@ossystems.com.br>
 	<4ED4DEF2.2000705@ti.com>
 	<CAP9ODKrpdQoT-1v75X21p0E4rujj_Sg8wR3QDXW6kgPHWJEjgw@mail.gmail.com>
 	<F00F7FDA-EEA8-47BD-AE07-52A4EFA8C078@dominion.thruhere.net>
-To: Otavio Salvador <otavio@ossystems.com.br>
-X-Mailer: Apple Mail (2.1251.1)
+	<4E93189F-8970-4235-AC37-4712652FD449@dominion.thruhere.net>
+Date: Tue, 29 Nov 2011 15:51:48 -0200
+X-Google-Sender-Auth: _7-fCstdXrNs58PRn-peEFUZgYQ
+Message-ID: <CAP9ODKpFT7sYS7scbVE1_EY+Qx5F9QcuV0jXCHfq5Kvk+qpjvg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Koen Kooi <koen@dominion.thruhere.net>
 Cc: meta-ti@yoctoproject.org
 Subject: Re: [PATCH v2 1/3] sdcard_image: rewrote to avoid using loopback and mount/unmount
 X-BeenThere: meta-ti@yoctoproject.org
@@ -39,80 +47,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Nov 2011 17:48:56 -0000
-X-Groupsio-MsgNum: 177
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_D81B7425-15B1-42DC-AD16-DDAD52114CF1";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 29 Nov 2011 17:51:50 -0000
+Content-Type: multipart/alternative; boundary=00151750da4a06b21004b2e346ab
 
---Apple-Mail=_D81B7425-15B1-42DC-AD16-DDAD52114CF1
+--00151750da4a06b21004b2e346ab
+Content-Type: text/plain; charset=ISO-8859-1
+
+On Tue, Nov 29, 2011 at 15:48, Koen Kooi <koen@dominion.thruhere.net> wrote:
+
+> mkfs.vfat keeps segfaulting at different points, I'll try to find out why.
+>
+
+It works fine here.
+
+Maybe a change in your layer?
+
+-- 
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+
+--00151750da4a06b21004b2e346ab
+Content-Type: text/html; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=iso-8859-1
 
+<div class=3D"gmail_quote">On Tue, Nov 29, 2011 at 15:48, Koen Kooi <span d=
+ir=3D"ltr">&lt;<a href=3D"mailto:koen@dominion.thruhere.net">koen@dominion.=
+thruhere.net</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" sty=
+le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex;">
+<div><div class=3D"h5">mkfs.vfat keeps segfaulting at different points, I&#=
+39;ll try to find out why.</div></div>
+</blockquote></div><div><br></div><div>It works fine here.</div><div><br></=
+div><div>Maybe a change in your layer?</div><div><br></div>-- <br>Otavio Sa=
+lvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O.S. Syste=
+ms<br>E-mail: <a href=3D"mailto:otavio@ossystems.com.br" target=3D"_blank">=
+otavio@ossystems.com.br</a>=A0 <a href=3D"http://www.ossystems.com.br" targ=
+et=3D"_blank">http://www.ossystems.com.br</a><br>
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0<a href=3D"http://pro=
+jetos.ossystems.com.br" target=3D"_blank">http://projetos.ossystems.com.br<=
+/a><br><br>
 
-Op 29 nov. 2011, om 18:12 heeft Koen Kooi het volgende geschreven:
-
->=20
-> Op 29 nov. 2011, om 14:38 heeft Otavio Salvador het volgende =
-geschreven:
->=20
->> On Tue, Nov 29, 2011 at 11:32, William Mills <wmills@ti.com> wrote:
->> On 11/29/2011 08:22 AM, Koen Kooi wrote:
->> Op 29 nov. 2011, om 13:53 heeft Otavio Salvador het volgende =
-geschreven:
->> On Tue, Nov 29, 2011 at 10:41, Otavio =
-Salvador<otavio@ossystems.com.br>  wrote:
->> ...
->> +# Copyright (C) 2011 O.S. Systems Software LTDA.
->> +#
->> +# Create an image that can by written onto a SD card using dd.
->> +#
->> +# External variables needed:
->> +#   ${ROOTFS} - the rootfs image to incorporate
->>=20
->> I added Joel in copyright noticed as he did the first version of it. =
-You can look at =
-https://github.com/OSSystems/meta-ti/commit/cc8f9eeb2e73c77cdb24f8d8eb2398=
-ea12d660b3
->>=20
->> And I wrote the original and then rewrote Joels version. So lets =
-leave out any copyright statement from the class.
->>=20
->>=20
->> A copyright notice in a file without an explicit statement of license =
-(in the same file) should always be rejected as it will cause major =
-problems with all license review processes (including TI's).
->>=20
->> I agree with Koen that it is best to just drop the (c) notice.
->>=20
->> No problem; I will wait for more comments and do that for a v3 =
-version.
->=20
-> I'm testing the latest version from your github, I should have more =
-feedback tomorrow.
-
-
-mkfs.vfat keeps segfaulting at different points, I'll try to find out =
-why.
-
-regards,
-
-Koen=
-
---Apple-Mail=_D81B7425-15B1-42DC-AD16-DDAD52114CF1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAk7VGwIACgkQMkyGM64RGpEILgCdHTiRnD+Q1mnfZSIC1EUiZcMm
-K/QAoIqYXSs5mzU1zwuXJCb1kIpdKKlu
-=rm5p
------END PGP SIGNATURE-----
-
---Apple-Mail=_D81B7425-15B1-42DC-AD16-DDAD52114CF1--
+--00151750da4a06b21004b2e346ab--
