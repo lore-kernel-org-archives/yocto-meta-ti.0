@@ -1,33 +1,28 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-bw0-f48.google.com (mail-bw0-f48.google.com
-	[209.85.214.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4D52AE00309
-	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 04:53:21 -0800 (PST)
-Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
-	(1024-bit key; insecure key) header.i=@gmail.com;
-	x-dkim-adsp=none (insecure policy)
-Received: by bkbc12 with SMTP id c12so12180953bkb.35
-	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 04:53:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=y08S/9hcNDOBGbzOO97w2fz9I8+bhkPK7sQI1BdJ4PA=;
-	b=vF98Jsn/iXOLlhsG3m/nanluCkV777ZPBUu5eKHM6sEpnut/K6To7k4a5/CH4fHsSo
-	RW7DPPY6b6XmM3WZMdBLTTOajildYi6XamSX3Z96vQbrn4hHD1RBTmkQhWsdd0K7qmfp
-	jXDVndWiO88lLUfpJLDka3oglGLdfHROriYLA=
-MIME-Version: 1.0
-Received: by 10.205.126.13 with SMTP id gu13mr50370649bkc.114.1322571199733;
-	Tue, 29 Nov 2011 04:53:19 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.113.148 with HTTP; Tue, 29 Nov 2011 04:53:19 -0800 (PST)
-In-Reply-To: <ee2873ddeae5a79375823882a15da057536e2574.1322570446.git.otavio@ossystems.com.br>
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
+	[209.85.215.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 27325E00309
+	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 05:22:44 -0800 (PST)
+Received: by eaal12 with SMTP id l12so4291274eaa.35
+	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 05:22:43 -0800 (PST)
+Received: by 10.227.205.135 with SMTP id fq7mr30864618wbb.19.1322572963539;
+	Tue, 29 Nov 2011 05:22:43 -0800 (PST)
+Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id es5sm42730405wbb.11.2011.11.29.05.22.41
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 29 Nov 2011 05:22:42 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <CAP9ODKrAZudP6NLcuMk1-Sx7xphW-9Q_CrD0osj94th+_outkg@mail.gmail.com>
+Date: Tue, 29 Nov 2011 14:22:37 +0100
+Message-Id: <4EC9DF51-D28A-440F-889F-CC9EDCEA2530@dominion.thruhere.net>
 References: <cover.1322570446.git.otavio@ossystems.com.br>
 	<ee2873ddeae5a79375823882a15da057536e2574.1322570446.git.otavio@ossystems.com.br>
-Date: Tue, 29 Nov 2011 10:53:19 -0200
-X-Google-Sender-Auth: QN-3KAOE12AIpxQxrmryOs-FkjU
-Message-ID: <CAP9ODKrAZudP6NLcuMk1-Sx7xphW-9Q_CrD0osj94th+_outkg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: meta-ti@yoctoproject.org
+	<CAP9ODKrAZudP6NLcuMk1-Sx7xphW-9Q_CrD0osj94th+_outkg@mail.gmail.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: meta-ti@yoctoproject.org
 Subject: Re: [PATCH v2 1/3] sdcard_image: rewrote to avoid using loopback and mount/unmount
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -40,62 +35,55 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Nov 2011 12:53:21 -0000
-Content-Type: multipart/alternative; boundary=00151747b7448ce1fc04b2df1aa8
+X-List-Received-Date: Tue, 29 Nov 2011 13:22:45 -0000
+X-Groupsio-MsgNum: 168
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_CF07CB1B-97B2-4D9C-93D2-2F7F81D11524";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---00151747b7448ce1fc04b2df1aa8
-Content-Type: text/plain; charset=ISO-8859-1
+--Apple-Mail=_CF07CB1B-97B2-4D9C-93D2-2F7F81D11524
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=iso-8859-1
 
-On Tue, Nov 29, 2011 at 10:41, Otavio Salvador <otavio@ossystems.com.br>wrote:
 
-> ...
+Op 29 nov. 2011, om 13:53 heeft Otavio Salvador het volgende geschreven:
 
-+# Copyright (C) 2011 O.S. Systems Software LTDA.
+> On Tue, Nov 29, 2011 at 10:41, Otavio Salvador =
+<otavio@ossystems.com.br> wrote:
+> ...=20
+> +# Copyright (C) 2011 O.S. Systems Software LTDA.
 > +#
 > +# Create an image that can by written onto a SD card using dd.
 > +#
 > +# External variables needed:
 > +#   ${ROOTFS} - the rootfs image to incorporate
->
+>=20
+> I added Joel in copyright noticed as he did the first version of it. =
+You can look at =
+https://github.com/OSSystems/meta-ti/commit/cc8f9eeb2e73c77cdb24f8d8eb2398=
+ea12d660b3=20
 
-I added Joel in copyright noticed as he did the first version of it. You
-can look at
-https://github.com/OSSystems/meta-ti/commit/cc8f9eeb2e73c77cdb24f8d8eb2398ea12d660b3
+And I wrote the original and then rewrote Joels version. So lets leave =
+out any copyright statement from the class.
 
+regards,
 
+Koen=
 
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+--Apple-Mail=_CF07CB1B-97B2-4D9C-93D2-2F7F81D11524
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
---00151747b7448ce1fc04b2df1aa8
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNATURE-----
 
-<div class=3D"gmail_quote">On Tue, Nov 29, 2011 at 10:41, Otavio Salvador <=
-span dir=3D"ltr">&lt;<a href=3D"mailto:otavio@ossystems.com.br">otavio@ossy=
-stems.com.br</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" sty=
-le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex;">
-...=A0</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 =
-.8ex;border-left:1px #ccc solid;padding-left:1ex;">+# Copyright (C) 2011 O.=
-S. Systems Software LTDA.<br>
-+#<br>
-+# Create an image that can by written onto a SD card using dd.<br>
-+#<br>
-+# External variables needed:<br>
-+# =A0 ${ROOTFS} - the rootfs image to incorporate<br></blockquote><div><br=
-></div><div>I added Joel in copyright noticed as he did the first version o=
-f it. You can look at=A0<a href=3D"https://github.com/OSSystems/meta-ti/com=
-mit/cc8f9eeb2e73c77cdb24f8d8eb2398ea12d660b3">https://github.com/OSSystems/=
-meta-ti/commit/cc8f9eeb2e73c77cdb24f8d8eb2398ea12d660b3</a>=A0</div>
-</div><br clear=3D"all"><div><br></div>-- <br>Otavio Salvador=A0 =A0 =A0 =
-=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O.S. Systems<br>E-mail: <a h=
-ref=3D"mailto:otavio@ossystems.com.br" target=3D"_blank">otavio@ossystems.c=
-om.br</a>=A0 <a href=3D"http://www.ossystems.com.br" target=3D"_blank">http=
-://www.ossystems.com.br</a><br>
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0<a href=3D"http://pro=
-jetos.ossystems.com.br" target=3D"_blank">http://projetos.ossystems.com.br<=
-/a><br><br>
+iEYEARECAAYFAk7U3KAACgkQMkyGM64RGpF/0gCfXnQtgR/8Lt6N/oeUOvSZVGQw
+UkIAn3qJtVrlsv0oSfYphViOmfVCh1ab
+=kUmN
+-----END PGP SIGNATURE-----
 
---00151747b7448ce1fc04b2df1aa8--
+--Apple-Mail=_CF07CB1B-97B2-4D9C-93D2-2F7F81D11524--
