@@ -1,41 +1,23 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-fx0-f48.google.com (mail-fx0-f48.google.com
-	[209.85.161.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34FCCE0072A
-	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 09:51:50 -0800 (PST)
-Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
-	(1024-bit key; insecure key) header.i=@gmail.com;
-	x-dkim-adsp=none (insecure policy)
-Received: by faao14 with SMTP id o14so1527161faa.35
-	for <meta-ti@yoctoproject.org>; Tue, 29 Nov 2011 09:51:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=phDNwZRXvGj/Kp5x9gZNRCxGi4aszwczMf/9x3SvHUs=;
-	b=nchfjdlU7Kqm2htJGYpwK870zgIB/7hgW5vR9kAs+WKfgMQfR4efGAZcNaFoL/wBKb
-	FTyyzzCCQpLgLpg9Rz/PlQKRSba9OIFe1kvgikS5InD1wZTkL1EICj77/7eobaGREld7
-	Vk3TO3KZnGdBHZ6DI8oN3VvyUgG8Ggf520WNg=
-MIME-Version: 1.0
-Received: by 10.204.13.70 with SMTP id b6mr52403920bka.78.1322589109006; Tue,
-	29 Nov 2011 09:51:49 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.113.148 with HTTP; Tue, 29 Nov 2011 09:51:48 -0800 (PST)
-In-Reply-To: <4E93189F-8970-4235-AC37-4712652FD449@dominion.thruhere.net>
-References: <cover.1322570446.git.otavio@ossystems.com.br>
-	<ee2873ddeae5a79375823882a15da057536e2574.1322570446.git.otavio@ossystems.com.br>
-	<CAP9ODKrAZudP6NLcuMk1-Sx7xphW-9Q_CrD0osj94th+_outkg@mail.gmail.com>
-	<4EC9DF51-D28A-440F-889F-CC9EDCEA2530@dominion.thruhere.net>
-	<4ED4DEF2.2000705@ti.com>
-	<CAP9ODKrpdQoT-1v75X21p0E4rujj_Sg8wR3QDXW6kgPHWJEjgw@mail.gmail.com>
-	<F00F7FDA-EEA8-47BD-AE07-52A4EFA8C078@dominion.thruhere.net>
-	<4E93189F-8970-4235-AC37-4712652FD449@dominion.thruhere.net>
-Date: Tue, 29 Nov 2011 15:51:48 -0200
-X-Google-Sender-Auth: _7-fCstdXrNs58PRn-peEFUZgYQ
-Message-ID: <CAP9ODKpFT7sYS7scbVE1_EY+Qx5F9QcuV0jXCHfq5Kvk+qpjvg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v2 1/3] sdcard_image: rewrote to avoid using loopback and mount/unmount
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 343CFE00307
+	for <meta-ti@lists.yoctoproject.org>;
+	Wed, 30 Nov 2011 01:08:25 -0800 (PST)
+Received: by eekc41 with SMTP id c41so232548eek.26
+	for <meta-ti@lists.yoctoproject.org>;
+	Wed, 30 Nov 2011 01:08:25 -0800 (PST)
+Received: by 10.14.10.20 with SMTP id 20mr158751eeu.79.1322644104821;
+	Wed, 30 Nov 2011 01:08:24 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id d6sm4043157eec.10.2011.11.30.01.08.23
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 30 Nov 2011 01:08:24 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: meta-ti@lists.yoctoproject.org
+Date: Wed, 30 Nov 2011 10:08:18 +0100
+Message-Id: <1322644098-9974-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH] linux 3.0: fix regression introduced in 3.0.11
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,44 +29,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Nov 2011 17:51:50 -0000
-Content-Type: multipart/alternative; boundary=00151750da4a06b21004b2e346ab
+X-List-Received-Date: Wed, 30 Nov 2011 09:08:26 -0000
 
---00151750da4a06b21004b2e346ab
-Content-Type: text/plain; charset=ISO-8859-1
+Upstream has been notified, so hopefully 3.0.13 will have this fix included
 
-On Tue, Nov 29, 2011 at 15:48, Koen Kooi <koen@dominion.thruhere.net> wrote:
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ ...-Fix-twl4030-dependencies-for-audio-codec.patch |   26 ++++++++++++++++++++
+ recipes-kernel/linux/linux_3.0.bb                  |    3 +-
+ 2 files changed, 28 insertions(+), 1 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-3.0/beagle/0011-Revert-mfd-Fix-twl4030-dependencies-for-audio-codec.patch
 
-> mkfs.vfat keeps segfaulting at different points, I'll try to find out why.
->
-
-It works fine here.
-
-Maybe a change in your layer?
-
+diff --git a/recipes-kernel/linux/linux-3.0/beagle/0011-Revert-mfd-Fix-twl4030-dependencies-for-audio-codec.patch b/recipes-kernel/linux/linux-3.0/beagle/0011-Revert-mfd-Fix-twl4030-dependencies-for-audio-codec.patch
+new file mode 100644
+index 0000000..527b0f5
+--- /dev/null
++++ b/recipes-kernel/linux/linux-3.0/beagle/0011-Revert-mfd-Fix-twl4030-dependencies-for-audio-codec.patch
+@@ -0,0 +1,26 @@
++From 6d7bf5251219d2aa604ada2c955812b16ad5cff4 Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Wed, 30 Nov 2011 09:50:56 +0100
++Subject: [PATCH] Revert "mfd: Fix twl4030 dependencies for audio codec"
++
++This reverts commit 11b8fc6ae54bf18a48c94e181c37ca135b858b42.
++---
++ drivers/mfd/twl-core.c |    2 +-
++ 1 files changed, 1 insertions(+), 1 deletions(-)
++
++diff --git a/drivers/mfd/twl-core.c b/drivers/mfd/twl-core.c
++index f0dfca3..e659d4e 100644
++--- a/drivers/mfd/twl-core.c
+++++ b/drivers/mfd/twl-core.c
++@@ -116,7 +116,7 @@
++ #define twl_has_watchdog()        false
++ #endif
++ 
++-#if defined(CONFIG_MFD_TWL4030_AUDIO) || defined(CONFIG_MFD_TWL4030_AUDIO_MODULE) ||\
+++#if defined(CONFIG_TWL4030_CODEC) || defined(CONFIG_TWL4030_CODEC_MODULE) ||\
++ 	defined(CONFIG_SND_SOC_TWL6040) || defined(CONFIG_SND_SOC_TWL6040_MODULE)
++ #define twl_has_codec()	true
++ #else
++-- 
++1.7.2.5
++
+diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
+index 5039b22..38b90e9 100644
+--- a/recipes-kernel/linux/linux_3.0.bb
++++ b/recipes-kernel/linux/linux_3.0.bb
+@@ -10,7 +10,7 @@ PV = "3.0.12"
+ SRCREV_pn-${PN} = "ac6766564c0305ca020fe747dfd7dbdf0881369d"
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ 
+ FILESPATH =. "${FILE_DIRNAME}/linux-3.0:${FILE_DIRNAME}/linux-3.0/${MACHINE}:"
+ 
+@@ -194,6 +194,7 @@ SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.gi
+             file://beagle/0008-OMAP2-add-cpu-id-register-to-MAC-address-helper.patch \
+             file://beagle/0009-HACK-OMAP2-BeagleBoard-Fix-up-random-or-missing-MAC-.patch \
+             file://beagle/0010-ARM-OMAP2-beagleboard-fix-mmc-write-protect-pin-when.patch \
++            file://beagle/0011-Revert-mfd-Fix-twl4030-dependencies-for-audio-codec.patch \
+             file://madc/0001-Enabling-Hwmon-driver-for-twl4030-madc.patch \
+             file://madc/0002-mfd-twl-core-enable-madc-clock.patch \
+             \
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+1.7.2.5
 
---00151750da4a06b21004b2e346ab
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-<div class=3D"gmail_quote">On Tue, Nov 29, 2011 at 15:48, Koen Kooi <span d=
-ir=3D"ltr">&lt;<a href=3D"mailto:koen@dominion.thruhere.net">koen@dominion.=
-thruhere.net</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" sty=
-le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex;">
-<div><div class=3D"h5">mkfs.vfat keeps segfaulting at different points, I&#=
-39;ll try to find out why.</div></div>
-</blockquote></div><div><br></div><div>It works fine here.</div><div><br></=
-div><div>Maybe a change in your layer?</div><div><br></div>-- <br>Otavio Sa=
-lvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O.S. Syste=
-ms<br>E-mail: <a href=3D"mailto:otavio@ossystems.com.br" target=3D"_blank">=
-otavio@ossystems.com.br</a>=A0 <a href=3D"http://www.ossystems.com.br" targ=
-et=3D"_blank">http://www.ossystems.com.br</a><br>
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0<a href=3D"http://pro=
-jetos.ossystems.com.br" target=3D"_blank">http://projetos.ossystems.com.br<=
-/a><br><br>
-
---00151750da4a06b21004b2e346ab--
