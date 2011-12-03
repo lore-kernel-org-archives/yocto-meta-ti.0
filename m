@@ -1,32 +1,29 @@
-Return-Path: <matthias@kaehlcke.net>
-Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
-	[217.70.183.196])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4B8A9E0059E
-	for <meta-ti@yoctoproject.org>; Wed, 30 Nov 2011 13:14:03 -0800 (PST)
-X-Originating-IP: 217.70.178.139
-Received: from mfilter10-d.gandi.net (mfilter10-d.gandi.net [217.70.178.139])
-	by relay4-d.mail.gandi.net (Postfix) with ESMTP id D53F5172095
-	for <meta-ti@yoctoproject.org>; Wed, 30 Nov 2011 22:14:01 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mfilter10-d.gandi.net
-Received: from relay4-d.mail.gandi.net ([217.70.183.196])
-	by mfilter10-d.gandi.net (mfilter10-d.gandi.net [10.0.15.180])
-	(amavisd-new, port 10024)
-	with ESMTP id HUSuR9F87u9E for <meta-ti@yoctoproject.org>;
-	Wed, 30 Nov 2011 22:14:00 +0100 (CET)
-X-Originating-IP: 83.160.107.163
-Received: from d4rwin.no-ip.org (a83-160-107-163.adsl.xs4all.nl
-	[83.160.107.163]) (Authenticated sender: matthias@kaehlcke.net)
-	by relay4-d.mail.gandi.net (Postfix) with ESMTPSA id 255F717209D
-	for <meta-ti@yoctoproject.org>; Wed, 30 Nov 2011 22:13:59 +0100 (CET)
-Received: by d4rwin.no-ip.org (Postfix, from userid 1000)
-	id CDA8813FA87; Wed, 30 Nov 2011 22:12:29 +0100 (CET)
-Date: Wed, 30 Nov 2011 22:12:29 +0100
-From: Matthias Kaehlcke <matthias@kaehlcke.net>
-To: meta-ti@yoctoproject.org
-Message-ID: <20111130211229.GC30533@darwin>
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-lpp01m010-f48.google.com (mail-lpp01m010-f48.google.com
+	[209.85.215.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A2008E006DD
+	for <meta-ti@yoctoproject.org>; Sat,  3 Dec 2011 13:14:15 -0800 (PST)
+Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
+	(1024-bit key; insecure key) header.i=@gmail.com;
+	x-dkim-adsp=none (insecure policy)
+Received: by lagv3 with SMTP id v3so2467891lag.35
+	for <meta-ti@yoctoproject.org>; Sat, 03 Dec 2011 13:14:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=RGqQtg4FXuXJ9hGeGzpXe3Bqp/K8kk8uAHOcm92xtFk=;
+	b=X/f570MxXPLOrsEQUwWjAjD5vXGZtp1F79VYDzER4GgUqsJOV2E8yt1cxrkWrEkHEA
+	/413l99tuDIDP9FeXrZnx2kPOuVol0bwLiDTykBII2BqRMkZpEDd6OUoy9tUAPTqHFFC
+	QHLgvq7R8HcmIlBQ79ndvsQ6YSy4rEvW5PTkc=
+Received: by 10.152.122.34 with SMTP id lp2mr2273667lab.20.1322946853495; Sat,
+	03 Dec 2011 13:14:13 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [PATCH] beaglebone.conf: Eliminate settings already specified in ti33x.inc
+Received: by 10.152.24.36 with HTTP; Sat, 3 Dec 2011 13:13:42 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 3 Dec 2011 13:13:42 -0800
+Message-ID: <CAMKF1spb7EReb9Zdjfarb7aoKTAcJ_eEL2jFTpytPm5NoVXGLg@mail.gmail.com>
+To: meta-ti@yoctoproject.org
+X-Mailman-Approved-At: Sat, 03 Dec 2011 14:24:44 -0800
+Subject: Use of MACHINE_KERNEL_PR in meta-ti recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,33 +35,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2011 21:14:03 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 03 Dec 2011 21:14:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Remove preferred kernel and image dependency on u-boot. Both are specified in
-ti33x.inc, which is included
+Hi
 
-Signed-off-by: Matthias Kaehlcke <matthias@kaehlcke.net>
----
- conf/machine/beaglebone.conf |    3 ---
- 1 files changed, 0 insertions(+), 3 deletions(-)
+I am seeing this kind of error all over in meta-ti recipes
 
-diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-index 3803edf..9a551d7 100644
---- a/conf/machine/beaglebone.conf
-+++ b/conf/machine/beaglebone.conf
-@@ -11,9 +11,6 @@ XSERVER = "xserver-xorg \
- GUI_MACHINE_CLASS = "bigscreen"
- 
- require conf/machine/include/ti33x.inc
--EXTRA_IMAGEDEPENDS = "u-boot"
--
--PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
- 
- IMAGE_FSTYPES += "tar.bz2 "
- 
--- 
-1.7.7.3
 
+ERROR: Unable to analyse format of PR variable: ${MACHINE_KERNEL_PR}e
+ERROR: Unable to parse
+/home/kraj/work/angstrom/sources/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager_1.24.02.09.bb
+
+Problem seems to be that these recipes are not getting
+MACHINE_KERNEL_PR from anywhere but they are using it
+and its not a standard variable in bitbake.conf either. I have
+manually patched recipes-ti/includes/ti-staging.inc
+to contain MACHINE_KERNEL_PR ?= "r0"
+
+and patched few recipes which did not include this include to have the
+definition in them
+
+I don't know if this is the right way to fix it but this has got me
+over the parsing problems
+
+Thanks
+
+-Khem
+
+ps: I am not subscribed to this mailing list so please CC me in responses
 
