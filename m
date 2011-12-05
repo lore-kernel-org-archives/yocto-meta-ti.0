@@ -1,28 +1,35 @@
-Return-Path: <denis@denix.org>
-Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
-	[206.46.173.11])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC628E006DD
-	for <meta-ti@yoctoproject.org>; Sat,  3 Dec 2011 16:24:26 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [96.240.135.93])
-	by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LVN00BXJL4H3JR5@vms173011.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sat, 03 Dec 2011 18:24:17 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3EC2414AF5D; Sat,
-	03 Dec 2011 19:24:17 -0500 (EST)
-Date: Sat, 03 Dec 2011 19:24:17 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Khem Raj <raj.khem@gmail.com>
-Message-id: <20111204002417.GD14132@denix.org>
-References: <CAMKF1spb7EReb9Zdjfarb7aoKTAcJ_eEL2jFTpytPm5NoVXGLg@mail.gmail.com>
-	<CAMKF1sr+w_5PtYQhi-p6epp+pAyJkHPbWwcWK1YUmwo6nqmHSg@mail.gmail.com>
-	<20111203231817.GC14132@denix.org>
-	<CAMKF1sqxbhAVY8XNyts1-8qGYwnXoMzaJGHZuzuJOg4wsAXJ1w@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAMKF1sqxbhAVY8XNyts1-8qGYwnXoMzaJGHZuzuJOg4wsAXJ1w@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-qw0-f41.google.com (mail-qw0-f41.google.com
+	[209.85.216.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 155C1E005B2
+	for <meta-ti@yoctoproject.org>; Mon,  5 Dec 2011 03:30:21 -0800 (PST)
+Received: by qadc12 with SMTP id c12so479061qad.14
+	for <meta-ti@yoctoproject.org>; Mon, 05 Dec 2011 03:30:20 -0800 (PST)
+Received: by 10.224.117.74 with SMTP id p10mr7590557qaq.28.1323084620811;
+	Mon, 05 Dec 2011 03:30:20 -0800 (PST)
+Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id j7sm25100385qaq.11.2011.12.05.03.30.18
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 05 Dec 2011 03:30:19 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <CAP9ODKpFT7sYS7scbVE1_EY+Qx5F9QcuV0jXCHfq5Kvk+qpjvg@mail.gmail.com>
+Date: Mon, 5 Dec 2011 12:30:13 +0100
+Message-Id: <CDEAD2BF-A97E-4CB4-AC24-C1C79C37B75D@dominion.thruhere.net>
+References: <cover.1322570446.git.otavio@ossystems.com.br>
+	<ee2873ddeae5a79375823882a15da057536e2574.1322570446.git.otavio@ossystems.com.br>
+	<CAP9ODKrAZudP6NLcuMk1-Sx7xphW-9Q_CrD0osj94th+_outkg@mail.gmail.com>
+	<4EC9DF51-D28A-440F-889F-CC9EDCEA2530@dominion.thruhere.net>
+	<4ED4DEF2.2000705@ti.com>
+	<CAP9ODKrpdQoT-1v75X21p0E4rujj_Sg8wR3QDXW6kgPHWJEjgw@mail.gmail.com>
+	<F00F7FDA-EEA8-47BD-AE07-52A4EFA8C078@dominion.thruhere.net>
+	<4E93189F-8970-4235-AC37-4712652FD449@dominion.thruhere.net>
+	<CAP9ODKpFT7sYS7scbVE1_EY+Qx5F9QcuV0jXCHfq5Kvk+qpjvg@mail.gmail.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+X-Mailer: Apple Mail (2.1251.1)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: Use of MACHINE_KERNEL_PR in meta-ti recipes
+Subject: Re: [PATCH v2 1/3] sdcard_image: rewrote to avoid using loopback and mount/unmount
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,55 +41,52 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Dec 2011 00:24:27 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 05 Dec 2011 11:30:22 -0000
+X-Groupsio-MsgNum: 191
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_0B0BCEF6-C644-43EC-AF41-4571F7F7B616";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-On Sat, Dec 03, 2011 at 03:26:32PM -0800, Khem Raj wrote:
-> On Sat, Dec 3, 2011 at 3:18 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> > On Sat, Dec 03, 2011 at 01:42:30PM -0800, Khem Raj wrote:
-> >> On Sat, Dec 3, 2011 at 1:13 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> >> > Hi
-> >> >
-> >> > I am seeing this kind of error all over in meta-ti recipes
-> >> >
-> >> >
-> >> > ERROR: Unable to analyse format of PR variable: ${MACHINE_KERNEL_PR}e
-> >> > ERROR: Unable to parse
-> >> > /home/kraj/work/angstrom/sources/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager_1.24.02.09.bb
-> >> >
-> >> > Problem seems to be that these recipes are not getting
-> >> > MACHINE_KERNEL_PR from anywhere but they are using it
-> >> > and its not a standard variable in bitbake.conf either. I have
-> >> > manually patched recipes-ti/includes/ti-staging.inc
-> >> > to contain MACHINE_KERNEL_PR ?= "r0"
-> >> >
-> >> > and patched few recipes which did not include this include to have the
-> >> > definition in them
-> >> >
-> >> > I don't know if this is the right way to fix it but this has got me
-> >> > over the parsing problems
-> >>
-> >> btw. I am using qemuarm machine with angstrom distro on top of oe-core
-> >> and qemuarm conf does not define MACHINE_KERNEL_PR either
-> >
-> > Ah, that explains it. Why do you need meta-ti layer with qemuarm? Is there a
-> > specific recipe you need from it or you are just trying all layers in default
-> > setup?
-> 
-> I am trying angstrom defaults. I think a COMPATIBLE_MACHINE is nice to contain
-> the recipes for your machine layer only so it can be used in default
-> angstrom setup
-> for non TI machines. Since I build TI and non TI machines in same
-> tmpdir I dont want
-> to keep editing my layers.txt every time I use a different machine
+--Apple-Mail=_0B0BCEF6-C644-43EC-AF41-4571F7F7B616
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=iso-8859-1
 
-Actually, we'd like to ease off of COMPATIBLE_MACHINE use in our recipes to 
-make them more generic wherever possible.
 
-I understand that MACHINE_KERNEL_PR is not entirely standard variable and 
-probably we should try to find a better alternative for its purpose...
+Op 29 nov. 2011, om 18:51 heeft Otavio Salvador het volgende geschreven:
 
--- 
-Denys
+> On Tue, Nov 29, 2011 at 15:48, Koen Kooi <koen@dominion.thruhere.net> =
+wrote:
+> mkfs.vfat keeps segfaulting at different points, I'll try to find out =
+why.
+>=20
+> It works fine here.
+>=20
+> Maybe a change in your layer?
 
+I did some more tests (MACHINE=3Dbeaglebone bitbake cloud9-image) and =
+with your patches mkfs.vfat segfaults, without the patches it works. I =
+don't know why that is.
+I do want to get rid of the loopdevices, so if other people on this list =
+can test these patches as well...
+
+regards,
+
+Koen=
+
+--Apple-Mail=_0B0BCEF6-C644-43EC-AF41-4571F7F7B616
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk7cq0cACgkQMkyGM64RGpFQ5gCggMzMNi1TF+OIlU6El3KmPFdl
+EOIAnipM8FyiRCU4H7u/KLScIk3DbuAt
+=Ks2T
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_0B0BCEF6-C644-43EC-AF41-4571F7F7B616--
