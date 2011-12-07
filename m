@@ -1,23 +1,24 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B43E2E0030C
+Received: from mail-ey0-f181.google.com (mail-ey0-f181.google.com
+	[209.85.215.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0FAB0E0030C
 	for <meta-ti@lists.yoctoproject.org>;
-	Wed,  7 Dec 2011 05:27:55 -0800 (PST)
-Received: by eekb57 with SMTP id b57so560330eek.26
+	Wed,  7 Dec 2011 06:42:21 -0800 (PST)
+Received: by eaal13 with SMTP id l13so631929eaa.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Wed, 07 Dec 2011 05:27:54 -0800 (PST)
-Received: by 10.14.3.206 with SMTP id 54mr3561578eeh.214.1323264474454;
-	Wed, 07 Dec 2011 05:27:54 -0800 (PST)
+	Wed, 07 Dec 2011 06:42:20 -0800 (PST)
+Received: by 10.213.32.202 with SMTP id e10mr604934ebd.133.1323268939956;
+	Wed, 07 Dec 2011 06:42:19 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id d6sm5630560eec.10.2011.12.07.05.27.53
+	by mx.google.com with ESMTPS id x12sm6273150eef.9.2011.12.07.06.42.18
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 07 Dec 2011 05:27:53 -0800 (PST)
+	Wed, 07 Dec 2011 06:42:19 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@lists.yoctoproject.org
-Date: Wed,  7 Dec 2011 14:27:50 +0100
-Message-Id: <1323264470-29505-1-git-send-email-koen@dominion.thruhere.net>
+Date: Wed,  7 Dec 2011 15:42:12 +0100
+Message-Id: <1323268934-11949-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH] linux-ti33x-psp 3.1: disable MUSB DMA for beaglebone
+Subject: [PATCH 1/3] u-boot 2011.09: add pandaboard support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,48 +30,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2011 13:27:57 -0000
-
-This trades "not working" for "slightly less performance" for a lot of use cases
+X-List-Received-Date: Wed, 07 Dec 2011 14:42:22 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../linux/linux-ti33x-psp-3.1/beaglebone/defconfig |    7 ++-----
- recipes-kernel/linux/linux-ti33x-psp_3.1.bb        |    2 +-
- 2 files changed, 3 insertions(+), 6 deletions(-)
+ recipes-bsp/u-boot/u-boot_2011.09.bb |    9 ++++++---
+ 1 files changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.1/beaglebone/defconfig b/recipes-kernel/linux/linux-ti33x-psp-3.1/beaglebone/defconfig
-index fcff591..a762e6f 100644
---- a/recipes-kernel/linux/linux-ti33x-psp-3.1/beaglebone/defconfig
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.1/beaglebone/defconfig
-@@ -2507,13 +2507,10 @@ CONFIG_USB_MUSB_TI81XX_GLUE=y
- CONFIG_USB_MUSB_TI81XX=y
- # CONFIG_USB_MUSB_BLACKFIN is not set
- # CONFIG_USB_MUSB_UX500 is not set
--# CONFIG_MUSB_PIO_ONLY is not set
--# CONFIG_USB_INVENTRA_DMA_HW is not set
--# CONFIG_USB_TI_CPPI_DMA_HW is not set
--CONFIG_USB_TI_CPPI41_DMA_HW=y
-+CONFIG_MUSB_PIO_ONLY=y
- # CONFIG_USB_INVENTRA_DMA is not set
- # CONFIG_USB_TI_CPPI_DMA is not set
--CONFIG_USB_TI_CPPI41_DMA=y
-+# CONFIG_USB_TI_CPPI41_DMA is not set
- # CONFIG_USB_TUSB_OMAP_DMA is not set
- # CONFIG_USB_UX500_DMA is not set
+diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb b/recipes-bsp/u-boot/u-boot_2011.09.bb
+index 74c8518..955bd5e 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.09.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.09.bb
+@@ -8,9 +8,9 @@ UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
+ UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
  
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
-index 4668749..029b5c3 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
-@@ -11,7 +11,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
+ # No patches for other machines yet
+-COMPATIBLE_MACHINE = "(beagleboard)"
++COMPATIBLE_MACHINE = "(beagleboard|omap4430-panda)"
  
- BRANCH = "v3.1-meta-ti-r1r+gitr1d84d8853fa30cf3db2571a5aec572accca4e29d"
- SRCREV = "1d84d8853fa30cf3db2571a5aec572accca4e29d"
--MACHINE_KERNEL_PR_append = "e+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "f+gitr${SRCREV}"
+-SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
++SRC_URI_pn-${PN}_beagleboard = "git://www.denx.de/git/u-boot.git;protocol=git \
+            file://2011.09/0001-omap3-mem-Comment-enable_gpmc_cs_config-more.patch \
+            file://2011.09/0002-OMAP3-Update-SDRC-dram_init-to-always-call-make_cs1_.patch \
+            file://2011.09/0003-OMAP3-Add-a-helper-function-to-set-timings-in-SDRC.patch \
+@@ -35,7 +35,10 @@ SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
+            file://fw_env.config \
+           "
  
- COMPATIBLE_MACHINE = "(ti33x)"
+-SRCREV = "fdbe8b9a2d1858ba35dd6214315563ad44d4a0e3"
++SRCREV_pn-${PN}_beagleboard = "fdbe8b9a2d1858ba35dd6214315563ad44d4a0e3"
++
++SRC_URI_pn-${PN}_omap4430-panda = "git://git.linaro.org/boot/u-boot-linaro-stable.git"
++SRCREV_pn-${PN}_omap4430-panda = "3d343a62b8240100d6ce76b9126ff1e97be1eb5f"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
  
 -- 
 1.7.2.5
