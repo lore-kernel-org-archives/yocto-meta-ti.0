@@ -1,24 +1,36 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-fx0-f53.google.com (mail-fx0-f53.google.com
-	[209.85.161.53])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD1A0E006B5
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-bw0-f53.google.com (mail-bw0-f53.google.com
+	[209.85.214.53])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 75E5FE006B5
 	for <meta-ti@lists.yoctoproject.org>;
-	Fri,  9 Dec 2011 04:07:31 -0800 (PST)
-Received: by faaa5 with SMTP id a5so818023faa.26
+	Fri,  9 Dec 2011 04:10:12 -0800 (PST)
+Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
+	(1024-bit key; insecure key) header.i=@gmail.com;
+	x-dkim-adsp=none (insecure policy)
+Received: by bkat8 with SMTP id t8so3005704bka.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Fri, 09 Dec 2011 04:07:30 -0800 (PST)
-Received: by 10.180.80.101 with SMTP id q5mr1784842wix.58.1323432449993;
-	Fri, 09 Dec 2011 04:07:29 -0800 (PST)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id em4sm12335856wbb.20.2011.12.09.04.07.28
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 09 Dec 2011 04:07:29 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: meta-ti@lists.yoctoproject.org
-Date: Fri,  9 Dec 2011 13:07:27 +0100
-Message-Id: <1323432447-6809-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH] beaglebone-getting-started: fix LICENSE, update to latest git
+	Fri, 09 Dec 2011 04:10:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=tQj106EfDJB+9Wy0KrkGsGlnCKsxuUUq2ylFFtOSmBE=;
+	b=PVo7iwoRiPQWbIfXw0WUfPqHH0Tzf0ZdJI8G4hXKji5d3QDo2A2mdcR1NpTnRKEcjd
+	xWa1SGu5g0LEh9dbdJhIg/VWMLYVbXzmiM9xW1LAtm4CYazRBF8W5LYgvlnfnVaIBjsJ
+	78hVI4Ra/JWTn5SLJn4MBhGyGIPjkfuFStp8c=
+MIME-Version: 1.0
+Received: by 10.205.128.3 with SMTP id hc3mr507921bkc.29.1323432610655; Fri,
+	09 Dec 2011 04:10:10 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.204.113.132 with HTTP; Fri, 9 Dec 2011 04:10:10 -0800 (PST)
+In-Reply-To: <1323432447-6809-1-git-send-email-koen@dominion.thruhere.net>
+References: <1323432447-6809-1-git-send-email-koen@dominion.thruhere.net>
+Date: Fri, 9 Dec 2011 10:10:10 -0200
+X-Google-Sender-Auth: VeHJ1D_gHqDbXJqu32Nb0c8-Rpo
+Message-ID: <CAP9ODKqT=51kG4RoE2AUMbrKHjFML2WpkAOcBmt=Ho-8TSBPCg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: [PATCH] beaglebone-getting-started: fix LICENSE, update to latest git
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,35 +42,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 12:07:32 -0000
+X-List-Received-Date: Fri, 09 Dec 2011 12:10:13 -0000
+Content-Type: multipart/alternative; boundary=000e0cdfc836a46d8f04b3a7aa10
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- recipes-misc/payload/beaglebone-getting-started.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+--000e0cdfc836a46d8f04b3a7aa10
+Content-Type: text/plain; charset=ISO-8859-1
 
-diff --git a/recipes-misc/payload/beaglebone-getting-started.bb b/recipes-misc/payload/beaglebone-getting-started.bb
-index b2b9308..2407d92 100644
---- a/recipes-misc/payload/beaglebone-getting-started.bb
-+++ b/recipes-misc/payload/beaglebone-getting-started.bb
-@@ -1,13 +1,13 @@
- DESCRIPTION = "BeagleBone Getting Started Guide"
- 
--PR = "r15"
-+PR = "r16"
- 
- inherit allarch
- 
+On Fri, Dec 9, 2011 at 10:07, Koen Kooi <koen@dominion.thruhere.net> wrote:
+
+> ...
+
 -LICENSE = "GPLv2+ && MIT && PD && others"
-+LICENSE = "GPLv2+ & MIT && PD & others"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=603591dea023c3c75b48e07cb47ce639"
- 
--SRCREV = "46c58edffaca856fbe5efa8126af7b1e933a1c9b"
-+SRCREV = "a698888220634a1b549bc2f2e6b33aa03709cb19"
- SRC_URI = "git://github.com/jadonk/beaglebone-getting-started.git"
- 
- S = "${WORKDIR}/git"
+> +LICENSE = "GPLv2+ & MIT && PD & others"
+
+...
+
+
+Missed one &&.
+
 -- 
-1.7.2.5
+Otavio Salvador                             O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
 
+--000e0cdfc836a46d8f04b3a7aa10
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
+<div class=3D"gmail_quote">On Fri, Dec 9, 2011 at 10:07, Koen Kooi <span di=
+r=3D"ltr">&lt;<a href=3D"mailto:koen@dominion.thruhere.net">koen@dominion.t=
+hruhere.net</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex;">
+...=A0</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 =
+.8ex;border-left:1px #ccc solid;padding-left:1ex;">-LICENSE =3D &quot;GPLv2=
++ &amp;&amp; MIT &amp;&amp; PD &amp;&amp; others&quot;<br>
++LICENSE =3D &quot;GPLv2+ &amp; MIT &amp;&amp; PD &amp; others&quot;</block=
+quote><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-l=
+eft:1px #ccc solid;padding-left:1ex;">...</blockquote><div><br></div><div>M=
+issed one &amp;&amp;.=A0</div>
+</div><div><br></div>-- <br>Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0 =A0O.S. Systems<br>E-mail: <a href=3D"mailto:otavio=
+@ossystems.com.br" target=3D"_blank">otavio@ossystems.com.br</a>=A0 <a href=
+=3D"http://www.ossystems.com.br" target=3D"_blank">http://www.ossystems.com=
+.br</a><br>
+Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0<a href=3D"http://pro=
+jetos.ossystems.com.br" target=3D"_blank">http://projetos.ossystems.com.br<=
+/a><br><br>
+
+--000e0cdfc836a46d8f04b3a7aa10--
