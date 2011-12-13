@@ -1,39 +1,23 @@
-Return-Path: <jdk@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 47814E0054C
-	for <meta-ti@lists.yoctoproject.org>;
-	Fri,  9 Dec 2011 06:57:55 -0800 (PST)
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id pB9EvsJl032621
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Fri, 9 Dec 2011 08:57:54 -0600
-Received: from dlep26.itg.ti.com (smtp-le.itg.ti.com [157.170.170.27])
-	by dlep34.itg.ti.com (8.13.7/8.13.8) with ESMTP id pB9Evr2J028096;
-	Fri, 9 Dec 2011 08:57:53 -0600 (CST)
-Received: from DLEE74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pB9Evrjf003949;
-	Fri, 9 Dec 2011 08:57:53 -0600 (CST)
-Received: from DFLE34.ent.ti.com ([fe80::c12:d795:2e56:2d02]) by
-	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
-	14.01.0323.003; Fri, 9 Dec 2011 08:57:53 -0600
-From: "Kridner, Jason" <jdk@ti.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Thread-Topic: [meta-ti] [PATCH v2] beaglebone-getting-started: fix LICENSE,
-	update to latest git
-Thread-Index: AQHMtmwhSlyynEUeIEWiG74D54cUNpXTiFongABz7gD//5y6/Q==
-Date: Fri, 9 Dec 2011 14:57:52 +0000
-Message-ID: <7559B410-F226-491F-8BD5-6054A6B2A1C9@ti.com>
-References: <1323432702-7423-1-git-send-email-koen@dominion.thruhere.net>,
-	<CAP9ODKpXCJXmGPp=7KznuRnurZrVg=KT_AA=x_u5rbeL+wb9eg@mail.gmail.com>
-	<F61A9010E56D7F4C93A19FD36DAAC3592F2E39@DFLE34.ent.ti.com>,
-	<7CB8547B-9AC0-41B5-8A4A-69D1A26967CA@dominion.thruhere.net>
-In-Reply-To: <7CB8547B-9AC0-41B5-8A4A-69D1A26967CA@dominion.thruhere.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+Return-Path: <schnitzeltony@gmx.de>
+Received: from mailout-de.gmx.net (mailout-de.gmx.net [213.165.64.22])
+	by yocto-www.yoctoproject.org (Postfix) with SMTP id 4DA20E006DF
+	for <meta-ti@yoctoproject.org>; Mon, 12 Dec 2011 16:54:34 -0800 (PST)
+Received: (qmail invoked by alias); 13 Dec 2011 00:54:33 -0000
+Received: from p5B0A2D4D.dip.t-dialin.net (EHLO localhost.localdomain)
+	[91.10.45.77]
+	by mail.gmx.net (mp006) with SMTP; 13 Dec 2011 01:54:33 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/nGLkxfIHnjCNIoG47RWxh0zqIK6F8gFQnt2JMro
+	V7MXG4lUN0fVV8
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
+To: meta-ti@yoctoproject.org
+Date: Tue, 13 Dec 2011 01:54:52 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-106.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
 MIME-Version: 1.0
-Cc: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Subject: Re: [PATCH v2] beaglebone-getting-started: fix LICENSE, update to latest git
+Message-Id: <201112130154.53016.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [PATCH 1/2] u-boot 2011.09: convert beagleboard to SPL build
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,26 +29,81 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2011 14:57:55 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 13 Dec 2011 00:54:36 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-
-
-On Dec 9, 2011, at 10:53 AM, "Koen Kooi" <koen@dominion.thruhere.net> wrote=
-:
-
+On Thursday, December 08, 2011 03:49:47 PM Tom Rini wrote:
+> On Wed, Dec 7, 2011 at 6:13 PM, Andreas M=FCller <schnitzeltony@gmx.de> w=
+rote:
+> > On Sunday, November 27, 2011 04:03:37 PM Koen Kooi wrote:
+> >> Runtime tested on an xM rev C
+> >>=20
+> >> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> >> ---
+> >>  ...-probe-DDC-bus-for-expansionboard-EEPROMS.patch |  165 ----------
+> >>  ...p3-mem-Comment-enable_gpmc_cs_config-more.patch |   56 ++++
+> >>  ...e-SDRC-dram_init-to-always-call-make_cs1_.patch |   66 ++++
+> >>  ...-a-helper-function-to-set-timings-in-SDRC.patch |  172 +++++++++++
+> >>  ...e-mem_ok-to-clear-again-after-reading-bac.patch |   30 ++
+> >>  .../0005-OMAP3-Remove-get_mem_type-prototype.patch |   28 ++
+> >>  .../0006-omap3-mem-Add-MCFG-helper-macro.patch     |   97 ++++++
+> >>  ...d-optimal-SDRC-autorefresh-control-values.patch |   59 ++++
+> >>  ...x-all-Micron-memory-timing-parts-with-the.patch |   55 ++++
+> >>  ...ework-memory-initalization-and-devkit8000.patch |  174 +++++++++++
+> >>  ...OMAP3-SPL-Add-identify_nand_chip-function.patch |  142 +++++++++
+> >>  ...0011-OMAP3-Add-SPL-support-to-Beagleboard.patch |  315
+> >=20
+> > Is anybody working on SPL support for gumstix overo?
 >=20
-> Op 9 dec. 2011, om 14:59 heeft Kridner, Jason het volgende geschreven:
->=20
->> Acked-by: Jason Kridner <jdk@ti.com>
->>=20
->> However, note that there is now a 3f87d61b7d960d50eb68cd30154e12ceef6e41=
-7c with updated Windows drivers based on user feedback.
->=20
-> patches welcome :)
+> No, but in mainline U-Boot it should be very easy to do so and I'd be
+> glad to help out with questions on the SPL specific side of things
+> (basically overo needs to provide a function that returns the correct
+> timings for the SDRC for the board rev in question).
+Got overo board revisions 0 & 1 booting fine from SDcard ( revision 2 might=
+ need=20
+further alignment.. ) [1].=20
 
+To prevent modifying multiple locations I left=20
 
-Just want to fix up the Mac drivers similarly first. =
+CONFIG_SYS_TEXT_BASE           0x80080000
+
+To test NAND I did on u-boot console ( based on [2] )
+
+| nand erase.chip
+| mmc rescan 0
+
+| # write MLO
+| fatload mmc 0 $loadaddr MLO
+| nandecc hw
+| nand write $loadaddr 0 ${filesize}
+
+| # write u-boot
+| fatload mmc 0 ${loadaddr} u-boot.bin
+| nand write ${loadaddr} 80000 ${filesize}
+
+| # write the kernel
+| fatload mmc 0 ${loadaddr} uImage
+| nand write ${loadaddr} 280000 ${filesize}
+
+After power off / power on without SDcard I get
+
+| Boot SPL 2011.09-01172-gfdbe8b9-dirty (Dec 13 2011 - 00:58:36)
+| Texas Instruments Revision detection unimplemented
+Is it correct that this is only implemented for OMAP4/5 so for OMAP3 this=20
+message is OK?
+| mkimage signature not found - ih_magic =3D ea000014
+| Assuming u-boot.bin ..
+
+Asking google for 'mkimage signature not found' showed me many pastebins bu=
+t no=20
+answer. Anybody out there with a hint?
+
+Andreas
+
+[1] https://gitorious.org/schnitzeltony-oe-meta/meta-
+gumstix/blobs/master/recipes-bsp/u-boot/2011.09/0001-u-boot-add-SPL-
+support.patch
+[2] http://www.gumstix.org/how-to/70-writing-images-to-flash.html
 
