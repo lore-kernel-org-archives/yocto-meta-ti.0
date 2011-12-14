@@ -1,27 +1,32 @@
-Return-Path: <schnitzeltony@gmx.de>
-Received: from mailout-de.gmx.net (mailout-de.gmx.net [213.165.64.22])
-	by yocto-www.yoctoproject.org (Postfix) with SMTP id CB970E006DF
-	for <meta-ti@yoctoproject.org>; Mon, 12 Dec 2011 17:42:38 -0800 (PST)
-Received: (qmail invoked by alias); 13 Dec 2011 01:42:36 -0000
-Received: from p5B0A2D4D.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.45.77]
-	by mail.gmx.net (mp026) with SMTP; 13 Dec 2011 02:42:36 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/r3A1226vrlM+m7vNJQ1eZLdLxCqaOScPjtNjZlj
-	Kv1rhYDF8j0+MP
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-gy0-f176.google.com (mail-gy0-f176.google.com
+	[209.85.160.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8570FE00305
+	for <meta-ti@yoctoproject.org>; Tue, 13 Dec 2011 17:08:10 -0800 (PST)
+Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
+	(1024-bit key; insecure key) header.i=@gmail.com;
+	x-dkim-adsp=none (insecure policy)
+Received: by ghbz10 with SMTP id z10so294863ghb.35
+	for <meta-ti@yoctoproject.org>; Tue, 13 Dec 2011 17:08:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=PxGHIwz8b48k75xoeJ9kedg/1G1zufJGHJZZSByDB6s=;
+	b=S64ZG9QCziMOTUFe+KYkUfkF+3abDIpDBGw3vsPVlKIXRc8Ifho69gsC4tgWB5CzY+
+	lfwxHDN1Juo8VN1b4NvTab0FWUMbwKw/It7uj3Zz22tuywBYnOyhy7NA0QOnvhnykwsW
+	KbHey9L1i2OdWWBLb8hYrA680w7ZsAqKoi/WU=
+Received: by 10.236.185.231 with SMTP id u67mr7762658yhm.75.1323824889410;
+	Tue, 13 Dec 2011 17:08:09 -0800 (PST)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id q5sm1276275yhm.7.2011.12.13.17.08.07
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 13 Dec 2011 17:08:08 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: meta-ti@yoctoproject.org
-Date: Tue, 13 Dec 2011 02:42:56 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-106.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <1322406218-8831-1-git-send-email-koen@dominion.thruhere.net>
-	<201112130142.24576.schnitzeltony@gmx.de>
-	<CA+M6bXm7w-JgO4XdVs+EYorTMU1AVFA37C5BKV72OundKA_g_w@mail.gmail.com>
-In-Reply-To: <CA+M6bXm7w-JgO4XdVs+EYorTMU1AVFA37C5BKV72OundKA_g_w@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <201112130242.56955.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [PATCH 1/2] u-boot 2011.09: convert beagleboard to SPL build
+Date: Wed, 14 Dec 2011 01:07:53 +0000
+Message-Id: <cover.1323824833.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH 0/4] Remove PRIORITY setting for optional as it is the default
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,37 +38,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2011 01:42:39 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 14 Dec 2011 01:08:10 -0000
 
-Party time! 
+The following changes since commit 487e6c18670f406e14be94c5998d08d73a0bc73f:
 
-with
+  beaglebone-getting-started: fix LICENSE, update to latest git (2011-12-09 14:39:27 +0100)
 
+are available in the git repository at:
+  git://github.com/OSSystems/meta-ti master
+  https://github.com/OSSystems/meta-ti/tree/master
 
-nand erase.chip
-mmc rescan 0
+Otavio Salvador (4):
+  am-sysinfo_svn.bb: drop 'PRIORITY = "optional"' as it is the default
+  u-boot.inc: drop 'PRIORITY = "optional"' as it is the default
+  x-load.inc: drop 'PRIORITY = "optional"' as it is the default
+  matrix-tui.inc: drop 'PRIORITY = "optional"' as it is the default
 
-# write MLO
-fatload mmc 0 $loadaddr MLO
-nandecc hw
-nand write $loadaddr 0 ${filesize}
+ recipes-bsp/ti/am-sysinfo_svn.bb |    1 -
+ recipes-bsp/u-boot/u-boot.inc    |    1 -
+ recipes-bsp/x-load/x-load.inc    |    1 -
+ recipes-ti/matrix/matrix-tui.inc |    1 -
+ 4 files changed, 0 insertions(+), 4 deletions(-)
 
-# write u-boot
-fatload mmc 0 ${loadaddr} u-boot.img
-nand write ${loadaddr} 80000 ${filesize}
+-- 
+1.7.2.5
 
-# write the kernel
-fatload mmc 0 ${loadaddr} uImage
-nandecc sw
-nand write ${loadaddr} 280000 ${filesize}
-
-
-kernel boots from NAND ( kernel needs 'nandecc sw' !! )
-
-Now is time for happy zzz..
-
-Andreas
 
