@@ -1,31 +1,32 @@
-Return-Path: <r-monk@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7E23E013A8
-	for <meta-ti@yoctoproject.org>; Wed, 14 Dec 2011 04:29:47 -0800 (PST)
-Received: from dlep26.itg.ti.com ([157.170.170.121])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id pBECTfrj030451;
-	Wed, 14 Dec 2011 06:29:41 -0600
-Received: from DNCE72.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pBECTe0Y029852;
-	Wed, 14 Dec 2011 06:29:41 -0600 (CST)
-Received: from DNCE02.ent.ti.com ([fe80::e5b6:a692:b14:3c86]) by
-	DNCE72.ent.ti.com ([fe80::8e3:61e5:a5b9:593c%23]) with mapi id
-	14.01.0323.003; Wed, 14 Dec 2011 13:29:40 +0100
-From: "Monk, Roger" <r-monk@ti.com>
-To: Rainer Koenig <Rainer.Koenig@ts.fujitsu.com>
-Thread-Topic: [meta-ti] Questions about ti-syslink-module
-Thread-Index: AQHMulWcogy+vlsZFkiao677qQjJm5XbQ24b
-Date: Wed, 14 Dec 2011 12:29:40 +0000
-Message-ID: <410B417B-8ECE-477C-967A-100DDCB6BAD6@ti.com>
-References: <4EE88BCC.8070502@ts.fujitsu.com>
-In-Reply-To: <4EE88BCC.8070502@ts.fujitsu.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
+Return-Path: <tom.rini@gmail.com>
+Received: from mail-qy0-f176.google.com (mail-qy0-f176.google.com
+	[209.85.216.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B3E29E0072A
+	for <meta-ti@yoctoproject.org>; Wed, 14 Dec 2011 06:38:39 -0800 (PST)
+Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
+	(1024-bit key; insecure key) header.i=@gmail.com;
+	x-dkim-adsp=none (insecure policy)
+Received: by qcsc2 with SMTP id c2so647304qcs.35
+	for <meta-ti@yoctoproject.org>; Wed, 14 Dec 2011 06:38:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=QiZpBffL7IABstPp3u4mgrNViQuRt7rFDSLyFvaAO38=;
+	b=Hisgv6Q7T68AZY6NDi2+1lkL4k8xEuWK8d4MKoQOfZIPnfZiS/R54OIdSZja6oPzR4
+	5DM6ulPpxSehByeK8eEzfyNKmRP1iXgMSJEI3w+VgN1B8fgffs/mWToyVfhG9dQH/2wu
+	DDt9a1RVyFLVSSfvXKHy2V8pzAg02xlNDeV80=
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Questions about ti-syslink-module
+Received: by 10.224.198.10 with SMTP id em10mr9831119qab.44.1323873518772;
+	Wed, 14 Dec 2011 06:38:38 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Wed, 14 Dec 2011 06:38:38 -0800 (PST)
+In-Reply-To: <1323858401-15332-1-git-send-email-schnitzeltony@gmx.de>
+References: <1323858401-15332-1-git-send-email-schnitzeltony@gmx.de>
+Date: Wed, 14 Dec 2011 07:38:38 -0700
+Message-ID: <CA+M6bXkBesXqv2qG-xFD8JJkTStiqb60xdNLET8NDr7qPYxthg@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@gmx.de>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] omap3.inc: adjust UBOOT_ENTRYPOINT and UBOOT_LOADADRESS to u-boot SPL changes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,70 +38,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Dec 2011 12:29:48 -0000
-Content-Language: en-GB
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Wed, 14 Dec 2011 14:38:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Unfortunately we haven't merged syslink support for dm81xx to meta-ti yet. =
- This is very likely the culprit.
-
-~roger
-
-On 14 Dec 2011, at 11:43, "Rainer Koenig" <Rainer.Koenig@ts.fujitsu.com> wr=
+On Wed, Dec 14, 2011 at 3:26 AM, Andreas M=FCller <schnitzeltony@gmx.de> wr=
 ote:
+>
+> Signed-off-by: Andreas M=FCller <schnitzeltony@gmx.de>
+> ---
+> =A0conf/machine/include/omap3.inc | =A0 =A04 ++--
+> =A01 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.=
+inc
+> index 4530ae1..2198281 100644
+> --- a/conf/machine/include/omap3.inc
+> +++ b/conf/machine/include/omap3.inc
+> @@ -7,8 +7,8 @@ MACHINE_KERNEL_PR =3D "r113"
+>
+> =A0KERNEL_IMAGETYPE =3D "uImage"
+>
+> -UBOOT_ENTRYPOINT =3D "0x80008000"
+> -UBOOT_LOADADDRESS =3D "0x80008000"
+> +UBOOT_ENTRYPOINT =3D "0x80010000"
+> +UBOOT_LOADADDRESS =3D "0x80010000"
 
-> Hi there,
->
-> still playing around with my dm814x-evm board and at least now I
-> successfully builded a systemd-gnome-image that runs if you add syslink
-> from the TI EZSDK 5.02 and some firmware files. I tried to build those
-> things, so I include ti-syslink-module in my build, and I also made a
-> recipe to copy the firmware binaries to the /usr/share/ti/... direcotries=
-.
->
-> The problem is, that this image crashes as soon as I load the vpss
-> firmware.
->
-> At the moment I wonder if syslink is the cause of the problem. Looking
-> at the recipe in meta-ti I see that it builds a version 2_00_00_78, but
-> the EZSDK 5.02 uses 2_00_00_80.
->
-> The other thing that puzzles me is that my kernel config has
-> CONFIG_Sys_Link=3Dy
-> CONFIG_SYSLINK_MULTIPROC=3Dy
-> CONFIG_SYSLINK_NOTIFY=3Dy
->
-> What part of syslink is that which is already in the kernel sources?
->
-> At the moment it looks all confusing and I guess that the crashes come
-> from version mixing, but I'm not sure.
->
-> Best regards
-> Rainer
-> --
-> Dipl.-Inf. (FH) Rainer Koenig
-> Project Manager Linux Clients
-> Dept. PDG WPS R&D SW OSE
->
-> Fujitsu Technology Solutions
-> B=FCrgermeister-Ullrich-Str. 100
-> 86199 Augsburg
-> Germany
->
-> Telephone: +49-821-804-3321
-> Telefax:   +49-821-804-2131
-> Mail:      mailto:Rainer.Koenig@ts.fujitsu.com
->
-> Internet         ts.fujtsu.com
-> Company Details  ts.fujitsu.com/imprint.html
->
-Texas Instruments Limited, 800 Pavilion Drive, Northampton, NN4 7YL. Regist=
-ered in England & Wales under company number 00574102
+NAK, it's 0x8010 0000 not 0x8001 0000.   And we should consider making
+these soft-assign (and if there's a previous soft assign, make that
+??=3D) as there's at least one board today that uses the old entry/load
+and just moves other parts of SPL to non-conflicting areas.  That may
+however change to just using the same areas as everyone else (not sure
+if his platform requires backwards compat with x-loader).  Thanks!
 
-_______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-
+--=20
+Tom
 
