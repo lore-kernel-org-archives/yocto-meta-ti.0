@@ -1,48 +1,32 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
-	[209.85.215.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 89E99E0030D
-	for <meta-ti@yoctoproject.org>; Thu, 15 Dec 2011 02:47:00 -0800 (PST)
+Received: from mail-yx0-f176.google.com (mail-yx0-f176.google.com
+	[209.85.213.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 747CEE006DD
+	for <meta-ti@yoctoproject.org>; Thu, 15 Dec 2011 07:05:18 -0800 (PST)
 Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
 	(1024-bit key; insecure key) header.i=@gmail.com;
 	x-dkim-adsp=none (insecure policy)
-Received: by eaac13 with SMTP id c13so2450520eaa.35
-	for <meta-ti@yoctoproject.org>; Thu, 15 Dec 2011 02:46:59 -0800 (PST)
+Received: by yenm10 with SMTP id m10so1818138yen.35
+	for <meta-ti@yoctoproject.org>; Thu, 15 Dec 2011 07:05:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=2viUw1GX2fpeOZVjftMxjO2iB04YamXngKQJ3+65x84=;
-	b=YlxEQ7Si9rOMtAVadX92fl0H4SbLqVmPjfnJkvAaISTTgWWUdHNUEw+bvyUQIn50eB
-	t2eDyOtvM3gbpIsT+PeipNEmidteLP+OgPqscwQ+7GHGn54pgZgwGYKTPy92Ja2J0ZWh
-	xnU2hJ4UA+JWPzAuLRYdp2djqjckCaW3/qZ8Y=
-MIME-Version: 1.0
-Received: by 10.205.137.144 with SMTP id io16mr632166bkc.23.1323946018945;
-	Thu, 15 Dec 2011 02:46:58 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.162.76 with HTTP; Thu, 15 Dec 2011 02:46:58 -0800 (PST)
-In-Reply-To: <6F7036D3-C9F8-4CBA-B7C1-654E2113E9EC@dominion.thruhere.net>
-References: <cover.1322570446.git.otavio@ossystems.com.br>
-	<ee2873ddeae5a79375823882a15da057536e2574.1322570446.git.otavio@ossystems.com.br>
-	<CAP9ODKrAZudP6NLcuMk1-Sx7xphW-9Q_CrD0osj94th+_outkg@mail.gmail.com>
-	<4EC9DF51-D28A-440F-889F-CC9EDCEA2530@dominion.thruhere.net>
-	<4ED4DEF2.2000705@ti.com>
-	<CAP9ODKrpdQoT-1v75X21p0E4rujj_Sg8wR3QDXW6kgPHWJEjgw@mail.gmail.com>
-	<F00F7FDA-EEA8-47BD-AE07-52A4EFA8C078@dominion.thruhere.net>
-	<4E93189F-8970-4235-AC37-4712652FD449@dominion.thruhere.net>
-	<CAP9ODKpFT7sYS7scbVE1_EY+Qx5F9QcuV0jXCHfq5Kvk+qpjvg@mail.gmail.com>
-	<CDEAD2BF-A97E-4CB4-AC24-C1C79C37B75D@dominion.thruhere.net>
-	<CAP9ODKqvBccdQJuk0mf+ZmzMivsVSLi86cYh72DyRb1-SAWO3w@mail.gmail.com>
-	<7A48A7A4-9B78-4C36-91CB-A02CFB138110@dominion.thruhere.net>
-	<CAP9ODKqEnA5622xebKPjDAHKckSR+WwWDPqMzxcLs8uj+b3f1w@mail.gmail.com>
-	<CAP9ODKpzGkocCG9UX34BCnBkQPCCRYd3Kho49RATA3PQawMT7A@mail.gmail.com>
-	<6F7036D3-C9F8-4CBA-B7C1-654E2113E9EC@dominion.thruhere.net>
-Date: Thu, 15 Dec 2011 08:46:58 -0200
-X-Google-Sender-Auth: sBjvsEsNWKltC8xe3_PESand4kE
-Message-ID: <CAP9ODKrzW6cy=LiPcw62qD_W3=mXKqkW43qNoc2S+aO3y1VMXw@mail.gmail.com>
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=134evLwoNVIZdC50oHxgwAHM/2krEHd4oJ1xxek01nQ=;
+	b=venWiAe0ELFC3J6i0PD1RMq3lPzbYSCmC+/3ji1CwbN4dHqdJiQikdBQk4BPZ2PGlQ
+	w8TOITng9ViyA2UVqKn4oMgM0KvCr/5VBOIqxYfgw4xGSyDE8pnOymeQ+FuWTr9ZNuLh
+	OtBtfA+cPb6Mlvr2vhrP8pnJ4jNCFWI/M8G1c=
+Received: by 10.236.189.97 with SMTP id b61mr5206528yhn.116.1323961515578;
+	Thu, 15 Dec 2011 07:05:15 -0800 (PST)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id i4sm9326685yhk.21.2011.12.15.07.05.13
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 15 Dec 2011 07:05:14 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v2 1/3] sdcard_image: rewrote to avoid using loopback and mount/unmount
+To: meta-ti@yoctoproject.org
+Date: Thu, 15 Dec 2011 15:05:01 +0000
+Message-Id: <cover.1323961434.git.otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH v3 0/3] Rewrite sdcard_image.bbclass
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -54,55 +38,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Dec 2011 10:47:01 -0000
-Content-Type: multipart/alternative; boundary=0015173feb66293c7f04b41f34f8
+X-List-Received-Date: Thu, 15 Dec 2011 15:05:18 -0000
 
---0015173feb66293c7f04b41f34f8
-Content-Type: text/plain; charset=ISO-8859-1
+The required fix for dosfstools to work has been merged on OE-Core and
+this allows this changes to be tested and merged now.
 
-On Thu, Dec 15, 2011 at 07:19, Koen Kooi <koen@dominion.thruhere.net> wrote:
+The following changes since commit 018824ece4a04245b4277d5c8afcccfd6ca75df0:
 
-> > This is a know issue, as shown at
-> http://bugzilla.pokylinux.org/show_bug.cgi?id=1783
->
-> There's a fix pending for that in OE-core:
-> http://patches.openembedded.org/patch/16951/
->
-> Could you rebase and resend your patches after that goes in?
->
+  matrix-tui.inc: drop 'PRIORITY = "optional"' as it is the default (2011-12-14 01:05:59 +0000)
 
-Yes; IIRC I did minor fixes on this patch after sending it.
+are available in the git repository at:
+  git://github.com/OSSystems/meta-ti master
+  https://github.com/OSSystems/meta-ti/tree/master
+
+Otavio Salvador (3):
+  sdcard_image: rewrote to avoid using loopback and mount/unmount
+  ti-hw-bringup-image: adapt to newer sdcard_image class
+  cloud9-image: adapt to newer sdcard_image class
+
+ classes/sdcard_image.bbclass               |  180 ++++++++++------------------
+ recipes-misc/images/cloud9-image.bb        |    6 +-
+ recipes-misc/images/ti-hw-bringup-image.bb |    3 +
+ 3 files changed, 69 insertions(+), 120 deletions(-)
 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+1.7.2.5
 
---0015173feb66293c7f04b41f34f8
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-<div class=3D"gmail_quote">On Thu, Dec 15, 2011 at 07:19, Koen Kooi <span d=
-ir=3D"ltr">&lt;<a href=3D"mailto:koen@dominion.thruhere.net">koen@dominion.=
-thruhere.net</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" sty=
-le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-<div class=3D"im">&gt; This is a know issue, as shown at <a href=3D"http://=
-bugzilla.pokylinux.org/show_bug.cgi?id=3D1783" target=3D"_blank">http://bug=
-zilla.pokylinux.org/show_bug.cgi?id=3D1783</a><br>
-<br>
-</div>There&#39;s a fix pending for that in OE-core: <a href=3D"http://patc=
-hes.openembedded.org/patch/16951/" target=3D"_blank">http://patches.openemb=
-edded.org/patch/16951/</a><br>
-<br>
-Could you rebase and resend your patches after that goes in?<br></blockquot=
-e><div><br></div><div>Yes; IIRC I did minor fixes on this patch after sendi=
-ng it.</div><div>=A0</div></div>-- <br>Otavio Salvador=A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0O.S. Systems<br>
-E-mail: <a href=3D"mailto:otavio@ossystems.com.br" target=3D"_blank">otavio=
-@ossystems.com.br</a>=A0 <a href=3D"http://www.ossystems.com.br" target=3D"=
-_blank">http://www.ossystems.com.br</a><br>Mobile: +55 53 9981-7854=A0 =A0 =
-=A0 =A0=A0 =A0 =A0 =A0<a href=3D"http://projetos.ossystems.com.br" target=
-=3D"_blank">http://projetos.ossystems.com.br</a><br>
-<br>
-
---0015173feb66293c7f04b41f34f8--
