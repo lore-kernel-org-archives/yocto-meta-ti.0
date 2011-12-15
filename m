@@ -1,32 +1,40 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-qy0-f176.google.com (mail-qy0-f176.google.com
-	[209.85.216.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B3E29E0072A
-	for <meta-ti@yoctoproject.org>; Wed, 14 Dec 2011 06:38:39 -0800 (PST)
-Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
-	(1024-bit key; insecure key) header.i=@gmail.com;
-	x-dkim-adsp=none (insecure policy)
-Received: by qcsc2 with SMTP id c2so647304qcs.35
-	for <meta-ti@yoctoproject.org>; Wed, 14 Dec 2011 06:38:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=QiZpBffL7IABstPp3u4mgrNViQuRt7rFDSLyFvaAO38=;
-	b=Hisgv6Q7T68AZY6NDi2+1lkL4k8xEuWK8d4MKoQOfZIPnfZiS/R54OIdSZja6oPzR4
-	5DM6ulPpxSehByeK8eEzfyNKmRP1iXgMSJEI3w+VgN1B8fgffs/mWToyVfhG9dQH/2wu
-	DDt9a1RVyFLVSSfvXKHy2V8pzAg02xlNDeV80=
-MIME-Version: 1.0
-Received: by 10.224.198.10 with SMTP id em10mr9831119qab.44.1323873518772;
-	Wed, 14 Dec 2011 06:38:38 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Wed, 14 Dec 2011 06:38:38 -0800 (PST)
-In-Reply-To: <1323858401-15332-1-git-send-email-schnitzeltony@gmx.de>
-References: <1323858401-15332-1-git-send-email-schnitzeltony@gmx.de>
-Date: Wed, 14 Dec 2011 07:38:38 -0700
-Message-ID: <CA+M6bXkBesXqv2qG-xFD8JJkTStiqb60xdNLET8NDr7qPYxthg@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@gmx.de>
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-fx0-f48.google.com (mail-fx0-f48.google.com
+	[209.85.161.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE984E0030D
+	for <meta-ti@yoctoproject.org>; Thu, 15 Dec 2011 01:19:59 -0800 (PST)
+Received: by fanq24 with SMTP id q24so2764627fan.35
+	for <meta-ti@yoctoproject.org>; Thu, 15 Dec 2011 01:19:58 -0800 (PST)
+Received: by 10.180.84.71 with SMTP id w7mr3258071wiy.37.1323940798040;
+	Thu, 15 Dec 2011 01:19:58 -0800 (PST)
+Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id ea8sm7378845wib.17.2011.12.15.01.19.55
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 15 Dec 2011 01:19:56 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <CAP9ODKpzGkocCG9UX34BCnBkQPCCRYd3Kho49RATA3PQawMT7A@mail.gmail.com>
+Date: Thu, 15 Dec 2011 10:19:58 +0100
+Message-Id: <6F7036D3-C9F8-4CBA-B7C1-654E2113E9EC@dominion.thruhere.net>
+References: <cover.1322570446.git.otavio@ossystems.com.br>
+	<ee2873ddeae5a79375823882a15da057536e2574.1322570446.git.otavio@ossystems.com.br>
+	<CAP9ODKrAZudP6NLcuMk1-Sx7xphW-9Q_CrD0osj94th+_outkg@mail.gmail.com>
+	<4EC9DF51-D28A-440F-889F-CC9EDCEA2530@dominion.thruhere.net>
+	<4ED4DEF2.2000705@ti.com>
+	<CAP9ODKrpdQoT-1v75X21p0E4rujj_Sg8wR3QDXW6kgPHWJEjgw@mail.gmail.com>
+	<F00F7FDA-EEA8-47BD-AE07-52A4EFA8C078@dominion.thruhere.net>
+	<4E93189F-8970-4235-AC37-4712652FD449@dominion.thruhere.net>
+	<CAP9ODKpFT7sYS7scbVE1_EY+Qx5F9QcuV0jXCHfq5Kvk+qpjvg@mail.gmail.com>
+	<CDEAD2BF-A97E-4CB4-AC24-C1C79C37B75D@dominion.thruhere.net>
+	<CAP9ODKqvBccdQJuk0mf+ZmzMivsVSLi86cYh72DyRb1-SAWO3w@mail.gmail.com>
+	<7A48A7A4-9B78-4C36-91CB-A02CFB138110@dominion.thruhere.net>
+	<CAP9ODKqEnA5622xebKPjDAHKckSR+WwWDPqMzxcLs8uj+b3f1w@mail.gmail.com>
+	<CAP9ODKpzGkocCG9UX34BCnBkQPCCRYd3Kho49RATA3PQawMT7A@mail.gmail.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+X-Mailer: Apple Mail (2.1251.1)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] omap3.inc: adjust UBOOT_ENTRYPOINT and UBOOT_LOADADRESS to u-boot SPL changes
+Subject: Re: [PATCH v2 1/3] sdcard_image: rewrote to avoid using loopback and mount/unmount
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,39 +46,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Dec 2011 14:38:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 15 Dec 2011 09:20:00 -0000
+X-Groupsio-MsgNum: 232
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_8169059E-19AA-40E2-9BB5-819003E20541";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_8169059E-19AA-40E2-9BB5-819003E20541
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=iso-8859-1
 
-On Wed, Dec 14, 2011 at 3:26 AM, Andreas M=FCller <schnitzeltony@gmx.de> wr=
-ote:
->
-> Signed-off-by: Andreas M=FCller <schnitzeltony@gmx.de>
-> ---
-> =A0conf/machine/include/omap3.inc | =A0 =A04 ++--
-> =A01 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.=
-inc
-> index 4530ae1..2198281 100644
-> --- a/conf/machine/include/omap3.inc
-> +++ b/conf/machine/include/omap3.inc
-> @@ -7,8 +7,8 @@ MACHINE_KERNEL_PR =3D "r113"
->
-> =A0KERNEL_IMAGETYPE =3D "uImage"
->
-> -UBOOT_ENTRYPOINT =3D "0x80008000"
-> -UBOOT_LOADADDRESS =3D "0x80008000"
-> +UBOOT_ENTRYPOINT =3D "0x80010000"
-> +UBOOT_LOADADDRESS =3D "0x80010000"
 
-NAK, it's 0x8010 0000 not 0x8001 0000.   And we should consider making
-these soft-assign (and if there's a previous soft assign, make that
-??=3D) as there's at least one board today that uses the old entry/load
-and just moves other parts of SPL to non-conflicting areas.  That may
-however change to just using the same areas as everyone else (not sure
-if his platform requires backwards compat with x-loader).  Thanks!
+Op 6 dec. 2011, om 15:10 heeft Otavio Salvador het volgende geschreven:
 
---=20
-Tom
+> On Tue, Dec 6, 2011 at 11:43, Otavio Salvador =
+<otavio@ossystems.com.br> wrote:
+> On Mon, Dec 5, 2011 at 09:59, Koen Kooi <koen@dominion.thruhere.net> =
+wrote:
+> ...
+> my suspicion is that it segfaults on the cloud9-image because we copy =
+over a lot of files into the vfat partition.
+>=20
+> This is dependent on how many files are copied onto the fat =
+filesystem. This is also dependent on use of -d option that copies a =
+directory onto the fs instead of just creating a filesystem.
+>=20
+> This is a know issue, as shown at =
+http://bugzilla.pokylinux.org/show_bug.cgi?id=3D1783
 
+There's a fix pending for that in OE-core: =
+http://patches.openembedded.org/patch/16951/
+
+Could you rebase and resend your patches after that goes in?
+
+regards,
+
+Koen=
+
+--Apple-Mail=_8169059E-19AA-40E2-9BB5-819003E20541
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk7pu8MACgkQMkyGM64RGpE9wACgtcW+pWWvePZnG/NNwBI+HQSe
+QtsAoJ9SJfSTk3LEzrbosGetSrcfjo4g
+=cLKI
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_8169059E-19AA-40E2-9BB5-819003E20541--
