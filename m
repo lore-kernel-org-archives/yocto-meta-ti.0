@@ -1,22 +1,32 @@
-Return-Path: <schnitzeltony@gmx.de>
-Received: from mailout-de.gmx.net (mailout-de.gmx.net [213.165.64.23])
-	by yocto-www.yoctoproject.org (Postfix) with SMTP id 53B94E013E8
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2011 01:21:48 -0800 (PST)
-Received: (qmail invoked by alias); 16 Dec 2011 09:21:46 -0000
-Received: from ip-95-222-156-232.unitymediagroup.de (EHLO
-	zera-git-ew.localnet) [95.222.156.232]
-	by mail.gmx.net (mp029) with SMTP; 16 Dec 2011 10:21:46 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18/Qag7Eak/vSC/yieEz+zTcpLqY2liwYPz6wTgbn
-	7cVOrYfG/lGZYi
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
-To: meta-ti@yoctoproject.org
-Date: Fri, 16 Dec 2011 10:21:49 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.41.4-1.fc15.x86_64; KDE/4.6.5; x86_64; ; )
+Return-Path: <jdk@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA0ADE013EB
+	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2011 05:44:10 -0800 (PST)
+Received: from dlep26.itg.ti.com ([157.170.170.121])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id pBGDi86J020476;
+	Fri, 16 Dec 2011 07:44:08 -0600
+Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id pBGDi8Ci004847;
+	Fri, 16 Dec 2011 07:44:08 -0600 (CST)
+Received: from DFLE34.ent.ti.com ([fe80::c12:d795:2e56:2d02]) by
+	DFLE71.ent.ti.com ([fe80::29f6:72ad:a62e:2025%21]) with mapi id
+	14.01.0323.003; Fri, 16 Dec 2011 07:44:08 -0600
+From: "Kridner, Jason" <jdk@ti.com>
+To: =?iso-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@gmx.de>,
+	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] Is it intended to build TI bootloaders with
+	march=armv5?
+Thread-Index: AQHMu9Qvkg2g2Kf6lkiM5oMxeTvRTpXedu50
+Date: Fri, 16 Dec 2011 13:44:07 +0000
+Message-ID: <F61A9010E56D7F4C93A19FD36DAAC3592FF98E@DFLE34.ent.ti.com>
+References: <201112161021.49738.schnitzeltony@gmx.de>
+In-Reply-To: <201112161021.49738.schnitzeltony@gmx.de>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-Message-Id: <201112161021.49738.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Is it intended to build TI bootloaders with march=armv5?
+Subject: Re: Is it intended to build TI bootloaders with march=armv5?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -28,27 +38,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2011 09:21:49 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 16 Dec 2011 13:44:11 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hi
-
-as some of you might know, I am desperately working on u-boot SPL support for 
-gumstix overo and having very strange effects: as soon as a stacic integer 
-variable is accessed, the bootloader hangs [1].
-
-In the compile logs I found ( checked also for beagleboard ) that 
-
-march=armv5
-
-is used ( x-load is build with march=armv7-a ). Is this intended? Could this 
-explain my trouble?
-
-Andreas
-
-[1] http://lists.denx.de/pipermail/u-boot/2011-December/113491.html
-
-
+Do you have the disassembly around the access?=0A=
+________________________________________=0A=
+From: meta-ti-bounces@yoctoproject.org [meta-ti-bounces@yoctoproject.org] o=
+n behalf of Andreas M=FCller [schnitzeltony@gmx.de]=0A=
+Sent: Friday, December 16, 2011 4:21 AM=0A=
+To: meta-ti@yoctoproject.org=0A=
+Subject: [meta-ti] Is it intended to build TI bootloaders with march=3Darmv=
+5?=0A=
+=0A=
+Hi=0A=
+=0A=
+as some of you might know, I am desperately working on u-boot SPL support f=
+or=0A=
+gumstix overo and having very strange effects: as soon as a stacic integer=
+=0A=
+variable is accessed, the bootloader hangs [1].=0A=
+=0A=
+In the compile logs I found ( checked also for beagleboard ) that=0A=
+=0A=
+march=3Darmv5=0A=
+=0A=
+is used ( x-load is build with march=3Darmv7-a ). Is this intended? Could t=
+his=0A=
+explain my trouble?=0A=
+=0A=
+Andreas=0A=
+=0A=
+[1] http://lists.denx.de/pipermail/u-boot/2011-December/113491.html=0A=
+=0A=
+=0A=
+_______________________________________________=0A=
+meta-ti mailing list=0A=
+meta-ti@yoctoproject.org=0A=
+https://lists.yoctoproject.org/listinfo/meta-ti=0A=
 
