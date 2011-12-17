@@ -1,33 +1,28 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
-	[209.85.215.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB6A8E0070D
-	for <meta-ti@yoctoproject.org>; Sat, 17 Dec 2011 08:11:46 -0800 (PST)
-Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
-	(1024-bit key; insecure key) header.i=@gmail.com;
-	x-dkim-adsp=none (insecure policy)
-Received: by eaac13 with SMTP id c13so5289723eaa.35
-	for <meta-ti@yoctoproject.org>; Sat, 17 Dec 2011 08:11:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=w+M4AV48V7gt7Pq3yumxJfYgTcffPEOND36ux1bOkwU=;
-	b=qb7vJJjLPGp1ORcC+6HO/yFmZUt/tjA6owhAEB31tTrZ6YhZpe0uKlFFwpncqIWFV3
-	ccQh7ypjchkBp9+QcO5j7FtTzBdIqpW+fjv2gFFj1AGJHum3h4j70IsjIWTRZf9qH+WK
-	8cOtTo2ZOEjPu+jAj+WJhigzvueYH6Vy/JQ7Q=
-MIME-Version: 1.0
-Received: by 10.205.122.68 with SMTP id gf4mr3715012bkc.5.1324138304050; Sat,
-	17 Dec 2011 08:11:44 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.204.162.76 with HTTP; Sat, 17 Dec 2011 08:11:44 -0800 (PST)
-In-Reply-To: <cover.1323961434.git.otavio@ossystems.com.br>
-References: <cover.1323961434.git.otavio@ossystems.com.br>
-Date: Sat, 17 Dec 2011 14:11:44 -0200
-X-Google-Sender-Auth: Hpdw8BhUJNkL9QUThvFIeXVNNKY
-Message-ID: <CAP9ODKqADK3jzDncQQ65tr8pOnrehWHvrYPKkMn8O+qgaxekxg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v3 0/3] Rewrite sdcard_image.bbclass
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ww0-f51.google.com (mail-ww0-f51.google.com [74.125.82.51])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C8A97E0070D
+	for <meta-ti@lists.yoctoproject.org>;
+	Sat, 17 Dec 2011 11:02:29 -0800 (PST)
+Received: by wgbdr1 with SMTP id dr1so7409781wgb.8
+	for <meta-ti@lists.yoctoproject.org>;
+	Sat, 17 Dec 2011 11:02:28 -0800 (PST)
+Received: by 10.216.139.23 with SMTP id b23mr2224779wej.59.1324148548339;
+	Sat, 17 Dec 2011 11:02:28 -0800 (PST)
+Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id ff1sm19275490wbb.5.2011.12.17.11.02.27
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 17 Dec 2011 11:02:27 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+Date: Sat, 17 Dec 2011 20:02:21 +0100
+In-Reply-To: <1324137836-6696-2-git-send-email-koen@dominion.thruhere.net>
+To: meta-ti@lists.yoctoproject.org
+References: <1324137836-6696-1-git-send-email-koen@dominion.thruhere.net>
+	<1324137836-6696-2-git-send-email-koen@dominion.thruhere.net>
+Message-Id: <CC6CE606-2810-48FD-86FF-B9145B75E772@dominion.thruhere.net>
+X-Mailer: Apple Mail (2.1251.1)
+Subject: Re: [PATCH 2/2] linux 3.0: update to 3.0.13
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,47 +34,149 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Dec 2011 16:11:47 -0000
-Content-Type: multipart/alternative; boundary=000e0cdf71243f17d304b44bf9e3
+X-List-Received-Date: Sat, 17 Dec 2011 19:02:30 -0000
+X-Groupsio-MsgNum: 249
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_8D03E102-96D4-40CD-872A-657F56463BC7";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---000e0cdf71243f17d304b44bf9e3
-Content-Type: text/plain; charset=ISO-8859-1
-
-On Thu, Dec 15, 2011 at 13:05, Otavio Salvador <otavio@ossystems.com.br>wrote:
-
-> The required fix for dosfstools to work has been merged on OE-Core and
-> this allows this changes to be tested and merged now.
->
-
-I am converting those to use mtools and avoid the dosfstools -d usage.
-
-Please hold the merging until I do that.
-
--- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
-
---000e0cdf71243f17d304b44bf9e3
-Content-Type: text/html; charset=ISO-8859-1
+--Apple-Mail=_8D03E102-96D4-40CD-872A-657F56463BC7
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-<div class=3D"gmail_quote">On Thu, Dec 15, 2011 at 13:05, Otavio Salvador <=
-span dir=3D"ltr">&lt;<a href=3D"mailto:otavio@ossystems.com.br">otavio@ossy=
-stems.com.br</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" sty=
-le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-The required fix for dosfstools to work has been merged on OE-Core and<br>
-this allows this changes to be tested and merged now.<br></blockquote><div>=
-<br></div><div>I am converting those to use mtools and avoid the dosfstools=
- -d usage.</div><div><br></div><div>Please hold the merging until I do that=
-.</div>
-<div><br></div></div>-- <br>Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 =A0 =A0 =A0 =A0O.S. Systems<br>E-mail: <a href=3D"mailto:otavio=
-@ossystems.com.br" target=3D"_blank">otavio@ossystems.com.br</a>=A0 <a href=
-=3D"http://www.ossystems.com.br" target=3D"_blank">http://www.ossystems.com=
-.br</a><br>
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0<a href=3D"http://pro=
-jetos.ossystems.com.br" target=3D"_blank">http://projetos.ossystems.com.br<=
-/a><br><br>
+Ignore this one, it's still work in progress
 
---000e0cdf71243f17d304b44bf9e3--
+Op 17 dec. 2011, om 17:03 heeft Koen Kooi het volgende geschreven:
+
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+> conf/machine/include/omap3.inc                     |    2 +-
+> ...-Fix-twl4030-dependencies-for-audio-codec.patch |   26 =
+--------------------
+> recipes-kernel/linux/linux_3.0.bb                  |    9 +++----
+> 3 files changed, 5 insertions(+), 32 deletions(-)
+> delete mode 100644 =
+recipes-kernel/linux/linux-3.0/beagle/0011-Revert-mfd-Fix-twl4030-dependen=
+cies-for-audio-codec.patch
+>=20
+> diff --git a/conf/machine/include/omap3.inc =
+b/conf/machine/include/omap3.inc
+> index 4530ae1..fc252ba 100644
+> --- a/conf/machine/include/omap3.inc
+> +++ b/conf/machine/include/omap3.inc
+> @@ -3,7 +3,7 @@ SOC_FAMILY =3D "omap3"
+> require conf/machine/include/tune-cortexa8.inc
+> PREFERRED_PROVIDER_virtual/kernel =3D "linux-omap"
+> # Increase this everytime you change something in the kernel
+> -MACHINE_KERNEL_PR =3D "r113"
+> +MACHINE_KERNEL_PR =3D "r114"
+>=20
+> KERNEL_IMAGETYPE =3D "uImage"
+>=20
+> diff --git =
+a/recipes-kernel/linux/linux-3.0/beagle/0011-Revert-mfd-Fix-twl4030-depend=
+encies-for-audio-codec.patch =
+b/recipes-kernel/linux/linux-3.0/beagle/0011-Revert-mfd-Fix-twl4030-depend=
+encies-for-audio-codec.patch
+> deleted file mode 100644
+> index 527b0f5..0000000
+> --- =
+a/recipes-kernel/linux/linux-3.0/beagle/0011-Revert-mfd-Fix-twl4030-depend=
+encies-for-audio-codec.patch
+> +++ /dev/null
+> @@ -1,26 +0,0 @@
+> -=46rom 6d7bf5251219d2aa604ada2c955812b16ad5cff4 Mon Sep 17 00:00:00 =
+2001
+> -From: Koen Kooi <koen@dominion.thruhere.net>
+> -Date: Wed, 30 Nov 2011 09:50:56 +0100
+> -Subject: [PATCH] Revert "mfd: Fix twl4030 dependencies for audio =
+codec"
+> -
+> -This reverts commit 11b8fc6ae54bf18a48c94e181c37ca135b858b42.
+> ----
+> - drivers/mfd/twl-core.c |    2 +-
+> - 1 files changed, 1 insertions(+), 1 deletions(-)
+> -
+> -diff --git a/drivers/mfd/twl-core.c b/drivers/mfd/twl-core.c
+> -index f0dfca3..e659d4e 100644
+> ---- a/drivers/mfd/twl-core.c
+> -+++ b/drivers/mfd/twl-core.c
+> -@@ -116,7 +116,7 @@
+> - #define twl_has_watchdog()        false
+> - #endif
+> -=20
+> --#if defined(CONFIG_MFD_TWL4030_AUDIO) || =
+defined(CONFIG_MFD_TWL4030_AUDIO_MODULE) ||\
+> -+#if defined(CONFIG_TWL4030_CODEC) || =
+defined(CONFIG_TWL4030_CODEC_MODULE) ||\
+> - 	defined(CONFIG_SND_SOC_TWL6040) || =
+defined(CONFIG_SND_SOC_TWL6040_MODULE)
+> - #define twl_has_codec()	true
+> - #else
+> ---=20
+> -1.7.2.5
+> -
+> diff --git a/recipes-kernel/linux/linux_3.0.bb =
+b/recipes-kernel/linux/linux_3.0.bb
+> index 38b90e9..f335506 100644
+> --- a/recipes-kernel/linux/linux_3.0.bb
+> +++ b/recipes-kernel/linux/linux_3.0.bb
+> @@ -5,12 +5,12 @@ KERNEL_IMAGETYPE =3D "uImage"
+>=20
+> COMPATIBLE_MACHINE =3D "(beagleboard)"
+>=20
+> -PV =3D "3.0.12"
+> -# v3.0.12 tag
+> -SRCREV_pn-${PN} =3D "ac6766564c0305ca020fe747dfd7dbdf0881369d"
+> +PV =3D "3.0.13"
+> +# v3.0.13 tag
+> +SRCREV_pn-${PN} =3D "d986a8dbfd7358bfbda116650c4caf8a3b90d865"
+>=20
+> # The main PR is now using MACHINE_KERNEL_PR, for omap3 see =
+conf/machine/include/omap3.inc
+> -MACHINE_KERNEL_PR_append =3D "b"
+> +MACHINE_KERNEL_PR_append =3D "a"
+>=20
+> FILESPATH =3D. =
+"${FILE_DIRNAME}/linux-3.0:${FILE_DIRNAME}/linux-3.0/${MACHINE}:"
+>=20
+> @@ -194,7 +194,6 @@ SRC_URI +=3D =
+"git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.gi
+>             =
+file://beagle/0008-OMAP2-add-cpu-id-register-to-MAC-address-helper.patch =
+\
+>             =
+file://beagle/0009-HACK-OMAP2-BeagleBoard-Fix-up-random-or-missing-MAC-.pa=
+tch \
+>             =
+file://beagle/0010-ARM-OMAP2-beagleboard-fix-mmc-write-protect-pin-when.pa=
+tch \
+> -            =
+file://beagle/0011-Revert-mfd-Fix-twl4030-dependencies-for-audio-codec.pat=
+ch \
+>             =
+file://madc/0001-Enabling-Hwmon-driver-for-twl4030-madc.patch \
+>             file://madc/0002-mfd-twl-core-enable-madc-clock.patch \
+>             \
+> --=20
+> 1.7.2.5
+>=20
+
+
+--Apple-Mail=_8D03E102-96D4-40CD-872A-657F56463BC7
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk7s50EACgkQMkyGM64RGpE7EACgqFEZdluLpDC+Z5SyD2/kU4cp
+pD8AoK22uIZLKpilGTY7b3APMTuys9R6
+=+tca
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_8D03E102-96D4-40CD-872A-657F56463BC7--
