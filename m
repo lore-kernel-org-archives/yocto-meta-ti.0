@@ -1,26 +1,25 @@
-Return-Path: <schnitzeltony@gmx.de>
-Received: from mailout-de.gmx.net (mailout-de.gmx.net [213.165.64.23])
-	by yocto-www.yoctoproject.org (Postfix) with SMTP id B15DFE00303
-	for <meta-ti@yoctoproject.org>; Fri, 16 Dec 2011 08:03:14 -0800 (PST)
-Received: (qmail invoked by alias); 16 Dec 2011 16:03:12 -0000
-Received: from p5B0A1AB8.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.26.184]
-	by mail.gmx.net (mp003) with SMTP; 16 Dec 2011 17:03:12 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19Y8xI5n1ZY80iOdZA/3MRL1IjLlKKUE81mp7Az4F
-	kD1Jf2jy0K8rSV
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
-To: meta-ti@yoctoproject.org
-Date: Fri, 16 Dec 2011 17:03:34 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-106.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <201112161021.49738.schnitzeltony@gmx.de>
-	<F61A9010E56D7F4C93A19FD36DAAC3592FF98E@DFLE34.ent.ti.com>
-In-Reply-To: <F61A9010E56D7F4C93A19FD36DAAC3592FF98E@DFLE34.ent.ti.com>
-MIME-Version: 1.0
-Message-Id: <201112161703.34351.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: Is it intended to build TI bootloaders with march=armv5?
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C8ECDE0070D
+	for <meta-ti@lists.yoctoproject.org>;
+	Sat, 17 Dec 2011 08:04:11 -0800 (PST)
+Received: by wibhq2 with SMTP id hq2so692056wib.26
+	for <meta-ti@lists.yoctoproject.org>;
+	Sat, 17 Dec 2011 08:04:10 -0800 (PST)
+Received: by 10.180.80.197 with SMTP id t5mr2586353wix.48.1324137850162;
+	Sat, 17 Dec 2011 08:04:10 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id fg15sm18781545wbb.7.2011.12.17.08.04.07
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 17 Dec 2011 08:04:09 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: meta-ti@lists.yoctoproject.org
+Date: Sat, 17 Dec 2011 17:03:55 +0100
+Message-Id: <1324137836-6696-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [PATCH 1/2] linux.inc: If the kernel has CONFIG_KERNEL_LZO=y, it may well attempt to use the 'lzop' utility to do the lzo compression, but we should not be relying on that utility being installed on the build machine.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,41 +31,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2011 16:03:15 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 17 Dec 2011 16:04:12 -0000
 
-On Friday, December 16, 2011 02:44:07 PM you wrote:
-> Do you have the disassembly around the access?
-> ________________________________________
-> From: meta-ti-bounces@yoctoproject.org [meta-ti-bounces@yoctoproject.org]
-> on behalf of Andreas M=FCller [schnitzeltony@gmx.de] Sent: Friday, Decemb=
-er
-> 16, 2011 4:21 AM
-> To: meta-ti@yoctoproject.org
-> Subject: [meta-ti] Is it intended to build TI bootloaders with march=3Dar=
-mv5?
->=20
-> Hi
->=20
-> as some of you might know, I am desperately working on u-boot SPL support
-> for gumstix overo and having very strange effects: as soon as a stacic
-> integer variable is accessed, the bootloader hangs [1].
->=20
-> In the compile logs I found ( checked also for beagleboard ) that
->=20
-> march=3Darmv5
->=20
-> is used ( x-load is build with march=3Darmv7-a ). Is this intended? Could
-> this explain my trouble?
->=20
-> Andreas
->=20
-> [1] http://lists.denx.de/pipermail/u-boot/2011-December/113491.html
->=20
->=20
-Please give me a hint how/where to get this.
+From: Christopher Larson <chris_larson@mentor.com>
 
-Andreas
+This currently affects the linux-omap4 build for omap4430-panda.
+
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ recipes-kernel/linux/linux.inc |   11 +++++++++++
+ 1 files changed, 11 insertions(+), 0 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linux.inc
+index 9650e68..e8a754f 100644
+--- a/recipes-kernel/linux/linux.inc
++++ b/recipes-kernel/linux/linux.inc
+@@ -264,3 +264,14 @@ pkg_postrm_kernel-devicetree () {
+ 	cd /${KERNEL_IMAGEDEST}; update-alternatives --remove devicetree devicetree-${KERNEL_VERSION} || true
+ }
+ 
++# Automatically depend on lzop-native if CONFIG_KERNEL_LZO is enabled
++python () {
++    try:
++        defconfig = bb.fetch2.localpath('file://defconfig', d)
++    except bb.fetch2.FetchError:
++        pass
++    else:
++        if 'CONFIG_KERNEL_LZO=y\n' in open(defconfig).readlines():
++            depends = d.getVar('DEPENDS', False)
++            d.setVar('DEPENDS', depends + ' lzop-native')
++}
+-- 
+1.7.2.5
+
 
