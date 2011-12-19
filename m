@@ -1,25 +1,27 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f51.google.com (mail-ww0-f51.google.com [74.125.82.51])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7EDE7E0136E
+Return-Path: <denis@denix.org>
+Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
+	[206.46.173.5])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 95BFEE00305
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 19 Dec 2011 08:15:53 -0800 (PST)
-Received: by mail-ww0-f51.google.com with SMTP id dr1so9641581wgb.8
-	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 19 Dec 2011 08:15:53 -0800 (PST)
-Received: by 10.227.206.4 with SMTP id fs4mr12478707wbb.21.1324311353158;
-	Mon, 19 Dec 2011 08:15:53 -0800 (PST)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id cy8sm1150655wib.2.2011.12.19.08.15.51
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 19 Dec 2011 08:15:52 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: meta-ti@lists.yoctoproject.org
-Date: Mon, 19 Dec 2011 17:15:40 +0100
-Message-Id: <1324311340-16981-5-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1324311340-16981-1-git-send-email-koen@dominion.thruhere.net>
+	Mon, 19 Dec 2011 11:59:18 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [108.48.17.70])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LWG008OKVIHDPP5@vms173005.mailsrvcs.net> for
+	meta-ti@lists.yoctoproject.org; Mon, 19 Dec 2011 13:59:06 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 40A1E202E0; Mon,
+	19 Dec 2011 14:42:01 -0500 (EST)
+Date: Mon, 19 Dec 2011 14:42:01 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-id: <20111219194201.GD6128@denix.org>
 References: <1324311340-16981-1-git-send-email-koen@dominion.thruhere.net>
-Subject: [PATCH 5/5] ti-sysbios: add 6.33.00.19
+	<1324311340-16981-4-git-send-email-koen@dominion.thruhere.net>
+MIME-version: 1.0
+In-reply-to: <1324311340-16981-4-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: [PATCH 4/5] ti-ipc: update to 1_24_00_16
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,46 +33,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2011 16:15:53 -0000
+X-List-Received-Date: Mon, 19 Dec 2011 19:59:19 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- recipes-ti/bios/ti-sysbios_6.31.04.27.bb |    8 --------
- recipes-ti/bios/ti-sysbios_6.33.00.19.bb |    9 +++++++++
- 2 files changed, 9 insertions(+), 8 deletions(-)
- delete mode 100644 recipes-ti/bios/ti-sysbios_6.31.04.27.bb
- create mode 100644 recipes-ti/bios/ti-sysbios_6.33.00.19.bb
+On Mon, Dec 19, 2011 at 05:15:39PM +0100, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-diff --git a/recipes-ti/bios/ti-sysbios_6.31.04.27.bb b/recipes-ti/bios/ti-sysbios_6.31.04.27.bb
-deleted file mode 100644
-index 107affd..0000000
---- a/recipes-ti/bios/ti-sysbios_6.31.04.27.bb
-+++ /dev/null
-@@ -1,8 +0,0 @@
--require ti-sysbios.inc
--
--PV = "6_31_04_27"
--LIC_FILES_CHKSUM = "file://sysbios_6_31_04_27_manifest.html;md5=36efea2939274c46b73f5e170abaffcb"
--
--SRC_URI[sysbiosbin.md5sum] = "c82e1d3afc9e2d3e88b0e4137f152ed6"
--SRC_URI[sysbiosbin.sha256sum] = "92337cf3197d2b7ffe2316f311cd163be7b470acbb032273894d7d39182f4227"
--
-diff --git a/recipes-ti/bios/ti-sysbios_6.33.00.19.bb b/recipes-ti/bios/ti-sysbios_6.33.00.19.bb
-new file mode 100644
-index 0000000..4e2b445
---- /dev/null
-+++ b/recipes-ti/bios/ti-sysbios_6.33.00.19.bb
-@@ -0,0 +1,9 @@
-+require ti-sysbios.inc
-+
-+PV = "6_33_00_19"
-+LIC_FILES_CHKSUM = "file://sysbios_${PV}_manifest.html;md5=94136ca9815f76603b7202a41f1d6f5e"
-+
-+SRC_URI[sysbiosbin.md5sum] = "e1a2f28a8b3087896bbd986696e1a908"
-+SRC_URI[sysbiosbin.sha256sum] = "b7e096662f5d928eb818bbb14474deb1e3e038fea34b516b248de637835121ec"
-+
-+S = "${WORKDIR}/ti/bios_${PV}"
--- 
-1.7.2.5
+Acked-by: Denys Dmytriyenko <denys@ti.com>
 
+
+> ---
+>  recipes-ti/ipc/ti-ipc_1.23.02.27.bb |    9 ---------
+>  recipes-ti/ipc/ti-ipc_1.24.00.16.bb |    8 ++++++++
+>  2 files changed, 8 insertions(+), 9 deletions(-)
+>  delete mode 100644 recipes-ti/ipc/ti-ipc_1.23.02.27.bb
+>  create mode 100644 recipes-ti/ipc/ti-ipc_1.24.00.16.bb
+> 
+> diff --git a/recipes-ti/ipc/ti-ipc_1.23.02.27.bb b/recipes-ti/ipc/ti-ipc_1.23.02.27.bb
+> deleted file mode 100644
+> index 2176b13..0000000
+> --- a/recipes-ti/ipc/ti-ipc_1.23.02.27.bb
+> +++ /dev/null
+> @@ -1,9 +0,0 @@
+> -require ti-ipc.inc
+> -
+> -LIC_FILES_CHKSUM = "file://ipc_1_23_02_27_manifest.html;md5=74cbdd9a526809df81e080f19b36eec7"
+> -
+> -PV = "1_23_02_27"
+> -
+> -SRC_URI[ipcbin.md5sum] = "8c45f6a81cef62f9717335911ee1c9cd"
+> -SRC_URI[ipcbin.sha256sum] = "b16f29ef016819fe0632468e2f756e05508143cbc732bcaabd269571163b568e"
+> -
+> diff --git a/recipes-ti/ipc/ti-ipc_1.24.00.16.bb b/recipes-ti/ipc/ti-ipc_1.24.00.16.bb
+> new file mode 100644
+> index 0000000..e7ae7ef
+> --- /dev/null
+> +++ b/recipes-ti/ipc/ti-ipc_1.24.00.16.bb
+> @@ -0,0 +1,8 @@
+> +require ti-ipc.inc
+> +
+> +PV = "1_24_00_16"
+> +
+> +LIC_FILES_CHKSUM = "file://ipc_${PV}_manifest.html;md5=573f5a5c0448d28bf8db35f438244d7f"
+> +
+> +SRC_URI[ipcbin.md5sum] = "d2f7cc82310d555ca039dcd353bd94c5"
+> +SRC_URI[ipcbin.sha256sum] = "96df7835e920c7dabcd63d30ec8bc2aea7cd0c6197c9fb9ca0f8a9b681aa5396"
+> -- 
+> 1.7.2.5
+> 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+> 
 
