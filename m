@@ -1,27 +1,27 @@
 Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A1CC4E0121A
+Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
+	[206.46.173.13])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E877E0121A
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 19 Dec 2011 11:59:25 -0800 (PST)
+	Mon, 19 Dec 2011 11:59:44 -0800 (PST)
 Received: from gandalf.denix.org ([unknown] [108.48.17.70])
-	by vms173017.mailsrvcs.net
+	by vms173013.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LWG008E4VIH3QG2@vms173017.mailsrvcs.net> for
-	meta-ti@lists.yoctoproject.org; Mon, 19 Dec 2011 13:59:11 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id A5F6920296; Mon,
-	19 Dec 2011 14:40:28 -0500 (EST)
-Date: Mon, 19 Dec 2011 14:40:28 -0500
+	2009)) with ESMTPA id <0LWG0037BVIH09Y2@vms173013.mailsrvcs.net> for
+	meta-ti@lists.yoctoproject.org; Mon, 19 Dec 2011 13:59:18 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 225B720333; Mon,
+	19 Dec 2011 14:42:26 -0500 (EST)
+Date: Mon, 19 Dec 2011 14:42:26 -0500
 From: Denys Dmytriyenko <denis@denix.org>
 To: Koen Kooi <koen@dominion.thruhere.net>
-Message-id: <20111219194028.GB6128@denix.org>
+Message-id: <20111219194226.GE6128@denix.org>
 References: <1324311340-16981-1-git-send-email-koen@dominion.thruhere.net>
-	<1324311340-16981-2-git-send-email-koen@dominion.thruhere.net>
+	<1324311340-16981-5-git-send-email-koen@dominion.thruhere.net>
 MIME-version: 1.0
-In-reply-to: <1324311340-16981-2-git-send-email-koen@dominion.thruhere.net>
+In-reply-to: <1324311340-16981-5-git-send-email-koen@dominion.thruhere.net>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [PATCH 2/5] ti-xdctools: update to 3.23.00.32
+Subject: Re: [PATCH 5/5] ti-sysbios: add 6.33.00.19
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,78 +33,52 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2011 19:59:25 -0000
+X-List-Received-Date: Mon, 19 Dec 2011 19:59:44 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Mon, Dec 19, 2011 at 05:15:37PM +0100, Koen Kooi wrote:
+On Mon, Dec 19, 2011 at 05:15:40PM +0100, Koen Kooi wrote:
 > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
 Acked-by: Denys Dmytriyenko <denys@ti.com>
 
 
 > ---
->  recipes-ti/devtools/ti-xdctools.inc           |    6 +-----
->  recipes-ti/devtools/ti-xdctools_3.20.06.81.bb |   14 --------------
->  recipes-ti/devtools/ti-xdctools_3.23.00.32.bb |   11 +++++++++++
->  3 files changed, 12 insertions(+), 19 deletions(-)
->  delete mode 100644 recipes-ti/devtools/ti-xdctools_3.20.06.81.bb
->  create mode 100644 recipes-ti/devtools/ti-xdctools_3.23.00.32.bb
+>  recipes-ti/bios/ti-sysbios_6.31.04.27.bb |    8 --------
+>  recipes-ti/bios/ti-sysbios_6.33.00.19.bb |    9 +++++++++
+>  2 files changed, 9 insertions(+), 8 deletions(-)
+>  delete mode 100644 recipes-ti/bios/ti-sysbios_6.31.04.27.bb
+>  create mode 100644 recipes-ti/bios/ti-sysbios_6.33.00.19.bb
 > 
-> diff --git a/recipes-ti/devtools/ti-xdctools.inc b/recipes-ti/devtools/ti-xdctools.inc
-> index 120ebaa..c76ad80 100644
-> --- a/recipes-ti/devtools/ti-xdctools.inc
-> +++ b/recipes-ti/devtools/ti-xdctools.inc
-> @@ -1,11 +1,7 @@
->  DESCRIPTION = "TI XDCtools (RTSC - Real Time Software Components - http://rtsc.eclipse.org)"
->  HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc"
->  SECTION = "devel"
-> -LICENSE = "BSD, GPLv2"
-> -
-> -LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=eace8fa313a140ef178ecfa0f53cc655"
-> -
-> -PR = "r2"
-> +LICENSE = "BSD & GPLv2"
->  
->  require ../includes/ti-paths.inc
->  require ../includes/ti-staging.inc
-> diff --git a/recipes-ti/devtools/ti-xdctools_3.20.06.81.bb b/recipes-ti/devtools/ti-xdctools_3.20.06.81.bb
+> diff --git a/recipes-ti/bios/ti-sysbios_6.31.04.27.bb b/recipes-ti/bios/ti-sysbios_6.31.04.27.bb
 > deleted file mode 100644
-> index 45bedaa..0000000
-> --- a/recipes-ti/devtools/ti-xdctools_3.20.06.81.bb
+> index 107affd..0000000
+> --- a/recipes-ti/bios/ti-sysbios_6.31.04.27.bb
 > +++ /dev/null
-> @@ -1,14 +0,0 @@
-> -require ti-xdctools.inc
+> @@ -1,8 +0,0 @@
+> -require ti-sysbios.inc
 > -
-> -PV = "3_20_06_81"
+> -PV = "6_31_04_27"
+> -LIC_FILES_CHKSUM = "file://sysbios_6_31_04_27_manifest.html;md5=36efea2939274c46b73f5e170abaffcb"
 > -
-> -# This fixes c6accel, but breaks codec-engine and lpm
-> -#SRC_URI += "file://arm-linker-hack.diff"
+> -SRC_URI[sysbiosbin.md5sum] = "c82e1d3afc9e2d3e88b0e4137f152ed6"
+> -SRC_URI[sysbiosbin.sha256sum] = "92337cf3197d2b7ffe2316f311cd163be7b470acbb032273894d7d39182f4227"
 > -
-> -SRC_URI += "file://fix-hardcoded-paths.diff"
-> -
-> -SRC_URI[xdcbin.md5sum] = "65151268d6be6ad6eb940ef7ed03af16"
-> -SRC_URI[xdcbin.sha256sum] = "8ea6b851521ce41fe0b4a349b2d922af7e70f48c50ad9fd21f62627446a834f8"
-> -
-> -
-> -
-> diff --git a/recipes-ti/devtools/ti-xdctools_3.23.00.32.bb b/recipes-ti/devtools/ti-xdctools_3.23.00.32.bb
+> diff --git a/recipes-ti/bios/ti-sysbios_6.33.00.19.bb b/recipes-ti/bios/ti-sysbios_6.33.00.19.bb
 > new file mode 100644
-> index 0000000..b2db76c
+> index 0000000..4e2b445
 > --- /dev/null
-> +++ b/recipes-ti/devtools/ti-xdctools_3.23.00.32.bb
-> @@ -0,0 +1,11 @@
-> +require ti-xdctools.inc
+> +++ b/recipes-ti/bios/ti-sysbios_6.33.00.19.bb
+> @@ -0,0 +1,9 @@
+> +require ti-sysbios.inc
 > +
-> +PV = "3_23_00_32"
-> +LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=49b2dfbf48860a0da844709c3ce63a9c"
+> +PV = "6_33_00_19"
+> +LIC_FILES_CHKSUM = "file://sysbios_${PV}_manifest.html;md5=94136ca9815f76603b7202a41f1d6f5e"
 > +
-> +SRC_URI += "file://fix-hardcoded-paths.diff"
+> +SRC_URI[sysbiosbin.md5sum] = "e1a2f28a8b3087896bbd986696e1a908"
+> +SRC_URI[sysbiosbin.sha256sum] = "b7e096662f5d928eb818bbb14474deb1e3e038fea34b516b248de637835121ec"
 > +
-> +SRC_URI[xdcbin.md5sum] = "263aa11795670265551d36a8c77ad27d"
-> +SRC_URI[xdcbin.sha256sum] = "880b4e263850f2a3c0ea7352c5b6e0a86692361e26634c3b70dddc42c71231a5"
-> +
-> +S = "${WORKDIR}/ti/xdctools_${PV}"
+> +S = "${WORKDIR}/ti/bios_${PV}"
 > -- 
 > 1.7.2.5
 > 
