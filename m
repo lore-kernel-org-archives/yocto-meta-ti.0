@@ -1,24 +1,27 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f51.google.com (mail-ww0-f51.google.com [74.125.82.51])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7C6CAE00749
+Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
+	[74.125.82.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD127E0135B
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 19 Dec 2011 08:15:45 -0800 (PST)
-Received: by wgbdr1 with SMTP id dr1so9641581wgb.8
+	Mon, 19 Dec 2011 08:15:47 -0800 (PST)
+Received: by werm12 with SMTP id m12so1800889wer.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 19 Dec 2011 08:15:44 -0800 (PST)
-Received: by 10.227.206.10 with SMTP id fs10mr12743898wbb.13.1324311344623;
-	Mon, 19 Dec 2011 08:15:44 -0800 (PST)
+	Mon, 19 Dec 2011 08:15:46 -0800 (PST)
+Received: by 10.216.132.141 with SMTP id o13mr7036454wei.58.1324311346681;
+	Mon, 19 Dec 2011 08:15:46 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id ei9sm26439789wid.0.2011.12.19.08.15.42
+	by mx.google.com with ESMTPS id
+	ej17sm26231164wbb.14.2011.12.19.08.15.45
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 19 Dec 2011 08:15:43 -0800 (PST)
+	Mon, 19 Dec 2011 08:15:46 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@lists.yoctoproject.org
-Date: Mon, 19 Dec 2011 17:15:36 +0100
-Message-Id: <1324311340-16981-1-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 19 Dec 2011 17:15:37 +0100
+Message-Id: <1324311340-16981-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [PATCH 1/5] linux.inc: If the kernel has CONFIG_KERNEL_LZO=y, it may well attempt to use the 'lzop' utility to do the lzo compression, but we should not be relying on that utility being installed on the build machine.
+In-Reply-To: <1324311340-16981-1-git-send-email-koen@dominion.thruhere.net>
+References: <1324311340-16981-1-git-send-email-koen@dominion.thruhere.net>
+Subject: [PATCH 2/5] ti-xdctools: update to 3.23.00.32
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,37 +33,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2011 16:15:47 -0000
+X-List-Received-Date: Mon, 19 Dec 2011 16:15:48 -0000
 
-From: Christopher Larson <chris_larson@mentor.com>
-
-This currently affects the linux-omap4 build for omap4430-panda.
-
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- recipes-kernel/linux/linux.inc |   11 +++++++++++
- 1 files changed, 11 insertions(+), 0 deletions(-)
+ recipes-ti/devtools/ti-xdctools.inc           |    6 +-----
+ recipes-ti/devtools/ti-xdctools_3.20.06.81.bb |   14 --------------
+ recipes-ti/devtools/ti-xdctools_3.23.00.32.bb |   11 +++++++++++
+ 3 files changed, 12 insertions(+), 19 deletions(-)
+ delete mode 100644 recipes-ti/devtools/ti-xdctools_3.20.06.81.bb
+ create mode 100644 recipes-ti/devtools/ti-xdctools_3.23.00.32.bb
 
-diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linux.inc
-index 9650e68..e8a754f 100644
---- a/recipes-kernel/linux/linux.inc
-+++ b/recipes-kernel/linux/linux.inc
-@@ -264,3 +264,14 @@ pkg_postrm_kernel-devicetree () {
- 	cd /${KERNEL_IMAGEDEST}; update-alternatives --remove devicetree devicetree-${KERNEL_VERSION} || true
- }
+diff --git a/recipes-ti/devtools/ti-xdctools.inc b/recipes-ti/devtools/ti-xdctools.inc
+index 120ebaa..c76ad80 100644
+--- a/recipes-ti/devtools/ti-xdctools.inc
++++ b/recipes-ti/devtools/ti-xdctools.inc
+@@ -1,11 +1,7 @@
+ DESCRIPTION = "TI XDCtools (RTSC - Real Time Software Components - http://rtsc.eclipse.org)"
+ HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc"
+ SECTION = "devel"
+-LICENSE = "BSD, GPLv2"
+-
+-LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=eace8fa313a140ef178ecfa0f53cc655"
+-
+-PR = "r2"
++LICENSE = "BSD & GPLv2"
  
-+# Automatically depend on lzop-native if CONFIG_KERNEL_LZO is enabled
-+python () {
-+    try:
-+        defconfig = bb.fetch2.localpath('file://defconfig', d)
-+    except bb.fetch2.FetchError:
-+        pass
-+    else:
-+        if 'CONFIG_KERNEL_LZO=y\n' in open(defconfig).readlines():
-+            depends = d.getVar('DEPENDS', False)
-+            d.setVar('DEPENDS', depends + ' lzop-native')
-+}
+ require ../includes/ti-paths.inc
+ require ../includes/ti-staging.inc
+diff --git a/recipes-ti/devtools/ti-xdctools_3.20.06.81.bb b/recipes-ti/devtools/ti-xdctools_3.20.06.81.bb
+deleted file mode 100644
+index 45bedaa..0000000
+--- a/recipes-ti/devtools/ti-xdctools_3.20.06.81.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-require ti-xdctools.inc
+-
+-PV = "3_20_06_81"
+-
+-# This fixes c6accel, but breaks codec-engine and lpm
+-#SRC_URI += "file://arm-linker-hack.diff"
+-
+-SRC_URI += "file://fix-hardcoded-paths.diff"
+-
+-SRC_URI[xdcbin.md5sum] = "65151268d6be6ad6eb940ef7ed03af16"
+-SRC_URI[xdcbin.sha256sum] = "8ea6b851521ce41fe0b4a349b2d922af7e70f48c50ad9fd21f62627446a834f8"
+-
+-
+-
+diff --git a/recipes-ti/devtools/ti-xdctools_3.23.00.32.bb b/recipes-ti/devtools/ti-xdctools_3.23.00.32.bb
+new file mode 100644
+index 0000000..b2db76c
+--- /dev/null
++++ b/recipes-ti/devtools/ti-xdctools_3.23.00.32.bb
+@@ -0,0 +1,11 @@
++require ti-xdctools.inc
++
++PV = "3_23_00_32"
++LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=49b2dfbf48860a0da844709c3ce63a9c"
++
++SRC_URI += "file://fix-hardcoded-paths.diff"
++
++SRC_URI[xdcbin.md5sum] = "263aa11795670265551d36a8c77ad27d"
++SRC_URI[xdcbin.sha256sum] = "880b4e263850f2a3c0ea7352c5b6e0a86692361e26634c3b70dddc42c71231a5"
++
++S = "${WORKDIR}/ti/xdctools_${PV}"
 -- 
 1.7.2.5
 
