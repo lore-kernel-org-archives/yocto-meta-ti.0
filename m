@@ -1,30 +1,25 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE3C3E01217
-	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2011 04:50:28 -0800 (PST)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 5ABDAF81292; Tue, 20 Dec 2011 05:50:27 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id E1459F81265;
-	Tue, 20 Dec 2011 05:50:18 -0700 (MST)
-Message-ID: <4EF0848A.4090906@mlbassoc.com>
-Date: Tue, 20 Dec 2011 05:50:18 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:8.0) Gecko/20111115 Thunderbird/8.0
-MIME-Version: 1.0
-To: Koen Kooi <koen@dominion.thruhere.net>
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1A044E01217
+	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2011 04:58:57 -0800 (PST)
+Received: by wgbdt13 with SMTP id dt13so11372079wgb.11
+	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2011 04:58:56 -0800 (PST)
+Received: by 10.227.206.66 with SMTP id ft2mr1975712wbb.8.1324385932919;
+	Tue, 20 Dec 2011 04:58:52 -0800 (PST)
+Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id ep16sm1861938wbb.21.2011.12.20.04.58.51
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 20 Dec 2011 04:58:52 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <201112201115.39033.schnitzeltony@gmx.de>
+Date: Tue, 20 Dec 2011 13:58:51 +0100
+Message-Id: <79C18ABD-7DA9-4886-9D94-A39CC6532B2B@dominion.thruhere.net>
 References: <201112201115.39033.schnitzeltony@gmx.de>
-	<FEF0BC67-DB90-448F-B36A-F847037D4CBE@dominion.thruhere.net>
-	<201112201155.39426.schnitzeltony@gmx.de>
-	<D926CBED-9400-4BD4-918D-D6A62C687658@dominion.thruhere.net>
-In-Reply-To: <D926CBED-9400-4BD4-918D-D6A62C687658@dominion.thruhere.net>
-Cc: meta-ti@yoctoproject.org
+To: =?iso-8859-1?Q?Andreas_M=FCller?= <Schnitzeltony@gmx.de>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: meta-ti@yoctoproject.org, Chris Larson <clarson@kergoth.com>
 Subject: Re: commit b72cb13fcf83b9d342808ea30379bfb6a1321b54 breaks parse
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -37,51 +32,126 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Dec 2011 12:50:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 20 Dec 2011 12:58:58 -0000
+X-Groupsio-MsgNum: 268
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_7884C945-57DB-4DFC-A91E-A5579ADF6809";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-On 2011-12-20 04:06, Koen Kooi wrote:
->
-> Op 20 dec. 2011, om 11:55 heeft Andreas Müller het volgende geschreven:
->
->> On Tuesday, December 20, 2011 11:31:47 AM Koen Kooi wrote:
->>> Op 20 dec. 2011, om 11:15 heeft Andreas Müller het volgende geschreven:
->>>> On all my build machines  I get
->>>>
->>>> Loading cache: 100% |
->>>> #########################################################################
->>>> #####################################################################|
->>>> ETA:  00:00:00
->>>> Loaded 1880 entries from dependency cache.
->>>> ERROR: Unable to parse
->>>> /home/andreas/data/oe-core/sources/meta-ti/recipes-
->>>> kernel/linux/linux_3.1.bb
->>>> ...
->>>> IOError: [Errno 2] No such file or directory:
->>>> '/home/andreas/data/Downloads/packets/dl/defconfig'
->>>
->>> I'm not seeing any of that, but I'm keeping an eye on it.
->> Hm.. can you try to set DL_DIR outside of OE_BASE?
->
-> My setup is:
->
-> /OE/tentacle/oebb.sh ->  DL_DIR /OE/downloads (debian)
-> ~/Angstrom/oebb.sh ->  DL_DIR ~/Angstrom/sources/downloads (fedora)
->
-> Both don't seem to suffer from the defconfig problem yet.
->
-> regards,
->
-> Koen
+--Apple-Mail=_7884C945-57DB-4DFC-A91E-A5579ADF6809
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=iso-8859-1
 
-What version of bitbake & python are each of you running?  Since the
-error is happening during the parsing of new python code, this might
-be significant.
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Op 20 dec. 2011, om 11:15 heeft Andreas M=FCller het volgende =
+geschreven:
 
+> Hi,
+>=20
+> I thought I sent it alrerady but cannot find it in mailing archive. If =
+you have=20
+> already received simply ignore.
+>=20
+> On all my build machines  I get
+>=20
+> Loading cache: 100% |
+> =
+##########################################################################=
+####################################################################|=20
+> ETA:  00:00:00
+> Loaded 1880 entries from dependency cache.
+> ERROR: Unable to parse =
+/home/andreas/data/oe-core/sources/meta-ti/recipes-
+> kernel/linux/linux_3.1.bb                                              =
+                 =20
+> | ETA:  --:--:--
+> Traceback (most recent call last):
+>  File "/home/andreas/oe-core/sources/bitbake/lib/bb/parse/ast.py", =
+line 379,=20
+> in =
+multi_finalize(fn=3D'/home/andreas/data/oe-core/sources/meta-ti/recipes-
+> kernel/linux/linux_3.1.bb', d=3D<bb.data_smart.DataSmart object at =
+0x7cec6d0>):
+>         try:
+>>       finalize(fn, d)
+>         except bb.parse.SkipPackage as e:
+>  File "/home/andreas/oe-core/sources/bitbake/lib/bb/parse/ast.py", =
+line 323,=20
+> in finalize(fn=3D'/home/andreas/data/oe-core/sources/meta-ti/recipes-
+> kernel/linux/linux_3.1.bb', d=3D<bb.data_smart.DataSmart object at =
+0x7cec6d0>,=20
+> variant=3DNone):
+>             code.append("%s(d)" % funcname)
+>>   bb.utils.simple_exec("\n".join(code), {"d": d})
+>         bb.data.update_data(d)
+>  File "/home/andreas/oe-core/sources/bitbake/lib/bb/utils.py", line =
+387, in=20
+> =
+simple_exec(code=3D'__anon_119__home_andreas_data_oe_core_sources_openembe=
+dded_core_meta_classes_staging_bbclass(d)\n__anon_487__home_andreas_data_o=
+e_core_sources_openembedded_core_meta_classes_base_bbclass(d)\n__anon_20__=
+home_andreas_data_oe_core_sources_openembedded_core_meta_classes_debian_bb=
+class(d)\n__anon_19__home_andreas_data_oe_core_sources_meta_openembedded_m=
+eta_oe_classes_blacklist_bbclass(d)\n__anon_189__home_andreas_data_oe_core=
+_sources_openembedded_core_meta_classes_package_bbclass(d)\n__anon_55__hom=
+e_andreas_data_oe_core_sources_openembedded_core_meta_classes_sstate_bbcla=
+ss(d)\n__anon_447__home_andreas_data_oe_core_sources_openembedded_core_met=
+a_classes_package_ipk_bbclass(d)\n__anon_28__home_andreas_data_oe_core_sou=
+rces_meta_openembedded_meta_oe_classes_kernel_bbclass(d)\n__anon_119__home=
+_andreas_data_oe_core_sources_openembedded_core_meta_classes_siteinfo_bbcl=
+ass(d)\n__anon_72__home_andreas_data_oe_core_sources_meta_ti_recipes_kerne=
+l_linux_linux_inc(d)\n__anon_2
+> =
+77__home_andreas_data_oe_core_sources_meta_ti_recipes_kernel_linux_linux_i=
+nc(d)',=20
+> context=3D{'d': <bb.data_smart.DataSmart object at 0x7cec6d0>}):
+>     def simple_exec(code, context):
+>>   exec(code, _context, context)
+>=20
+>  File "<string>", line 11, in <module>
+>  File=20
+> =
+"__anon_277__home_andreas_data_oe_core_sources_meta_ti_recipes_kernel_linu=
+x_linux_inc",=20
+> line 7, in=20
+> =
+__anon_277__home_andreas_data_oe_core_sources_meta_ti_recipes_kernel_linux=
+_linux_inc(d=3D<bb.data_smart.DataSmart=20
+> object at 0x7cec6d0>)
+> IOError: [Errno 2] No such file or directory:=20
+> '/home/andreas/data/Downloads/packets/dl/defconfig'
+
+I figured it out, this happens when:
+
+1) SOC_FAMILY =3D omap3
+2) you have no defconfig for linux_3.1.bb for your machine(s).
+
+I've pushed a workaround for the kernel recipe till linux.inc gets fixed =
+to include more exceptions.
+
+regards,
+
+Koen
+
+
+regards,
+
+Koen=
+
+--Apple-Mail=_7884C945-57DB-4DFC-A91E-A5579ADF6809
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk7who0ACgkQMkyGM64RGpFsygCfZqYOHPFM10FD4ejrx1JEXmiz
+1u8AnifUUB4eq/NKSlRX3Yb4+xfo2Z7D
+=CAoB
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_7884C945-57DB-4DFC-A91E-A5579ADF6809--
