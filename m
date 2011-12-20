@@ -1,33 +1,33 @@
-Return-Path: <kergoth@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 Received: from mail-iy0-f176.google.com (mail-iy0-f176.google.com
 	[209.85.210.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D8879E006B5
-	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2011 10:16:40 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3DFF0E0030D
+	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2011 15:54:32 -0800 (PST)
 Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
 	(1024-bit key; insecure key) header.i=@gmail.com;
 	x-dkim-adsp=none (insecure policy)
-Received: by iapp10 with SMTP id p10so14355726iap.35
-	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2011 10:16:40 -0800 (PST)
+Received: by iapp10 with SMTP id p10so14978967iap.35
+	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2011 15:54:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=S882py6+Qp/gFlWkT9wNwTtdXPOS6H0FqfW4CrrKWVk=;
-	b=GwHJnv+t1PM/XbVG38xvjJCWMADje73nJwkryPjYlAXDKCxepB/9UzCmgIh0hgKP9K
-	+eVV8DhHtjOctok1BREbSo5X8PRUC/CXNz4kY8hiGbVwEN4iQD7nZOlfJt7/NT/eGChL
-	2oxNkI+TkLOalLF6raLLxeqmPUibhXdnCVGy8=
-Received: by 10.42.137.197 with SMTP id z5mr2900775ict.5.1324405000290;
-	Tue, 20 Dec 2011 10:16:40 -0800 (PST)
-Received: from [192.168.1.112] (ip24-251-167-38.ph.ph.cox.net. [24.251.167.38])
-	by mx.google.com with ESMTPS id x18sm7470425ibi.2.2011.12.20.10.16.33
-	(version=SSLv3 cipher=OTHER); Tue, 20 Dec 2011 10:16:35 -0800 (PST)
-Message-ID: <4EF0D0FC.2050201@gmail.com>
-Date: Tue, 20 Dec 2011 11:16:28 -0700
-From: Christopher Larson <kergoth@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:8.0) Gecko/20111105 Thunderbird/8.0
-MIME-Version: 1.0
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=/G936sjbqAnGNIdCh/4yQOzpX8iPWq5Xmz86KjY/1tI=;
+	b=h04vTNQSxwSUWgm04N0yjww9Na7wbt6c98ZAwV1n4p/SiInaB8q3xvj2DHIPc2ZvzK
+	Y88MXqOMx0KbwVbwRmmfizz8X4+TDltbNELc8yUutXq5KuvIRdTDkQcaihMS8x6ZcKlb
+	yFU6DpCmd6JLhwCLwDmTAz3WeQdVd469in2xE=
+Received: by 10.42.19.195 with SMTP id d3mr4308786icb.21.1324425271359;
+	Tue, 20 Dec 2011 15:54:31 -0800 (PST)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id b20sm10094479ibj.7.2011.12.20.15.54.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 20 Dec 2011 15:54:27 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: meta-ti@yoctoproject.org
-Subject: [PATCH] linux.inc: don't choke on missing defconfig in lzop dep
+Date: Tue, 20 Dec 2011 15:54:10 -0800
+Message-Id: <1324425250-25536-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH] u-boot_2011.09: Always use gnu ld for LD
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,46 +39,75 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Dec 2011 18:16:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Dec 2011 23:54:32 -0000
 
-When a recipe is being parsed which will be skipped due to an incompatible
-machine, no local defconfig will exist for the current machine. It seems 
-that
-the fetch localpath code doesn't error in that case, so we need to check for
-an IOError on the attempted open. Without this, we can hit parse errors.
+u-boot wants GNU ld and cant link with gold
+so when default linker is gold we make sure
+that it still uses good old GNU ld
 
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-  recipes-kernel/linux/linux.inc |   15 ++++++++++-----
-  1 files changed, 10 insertions(+), 5 deletions(-)
+ recipes-bsp/u-boot/u-boot/always-use-bfd-ld.patch |   29 +++++++++++++++++++++
+ recipes-bsp/u-boot/u-boot_2011.09.bb              |    3 +-
+ 2 files changed, 31 insertions(+), 1 deletions(-)
+ create mode 100644 recipes-bsp/u-boot/u-boot/always-use-bfd-ld.patch
 
-diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linux.inc
-index e8a754f..6996283 100644
---- a/recipes-kernel/linux/linux.inc
-+++ b/recipes-kernel/linux/linux.inc
-@@ -269,9 +269,14 @@ python () {
-      try:
-          defconfig = bb.fetch2.localpath('file://defconfig', d)
-      except bb.fetch2.FetchError:
--        pass
--    else:
--        if 'CONFIG_KERNEL_LZO=y\n' in open(defconfig).readlines():
--            depends = d.getVar('DEPENDS', False)
--            d.setVar('DEPENDS', depends + ' lzop-native')
-+        return
+diff --git a/recipes-bsp/u-boot/u-boot/always-use-bfd-ld.patch b/recipes-bsp/u-boot/u-boot/always-use-bfd-ld.patch
+new file mode 100644
+index 0000000..a527317
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot/always-use-bfd-ld.patch
+@@ -0,0 +1,29 @@
++This patch makes sure that we always use the GNU ld. u-boot uses certain contruct
++e.g. OVERLAY which are not implemented in gold therefore it always needs GNU ld
++for linking. It works well if default linker in toolchain is GNU ld but in some cases
++we can have gold to be the default linker and also ship GNU ld but not as default
++in such cases its called $(PREFIX)ld.bfd, with this patch we make sure that if
++$(PREFIX)ld.bfd exists than we use that for our ld. This way it does not matter
++what the default ld is.
 +
-+    try:
-+        configfile = open(defconfig)
-+    except IOError:
-+        return
++Upstream-status: Pending
 +
-+    if 'CONFIG_KERNEL_LZO=y\n' in configfile.readlines():
-+        depends = d.getVar('DEPENDS', False)
-+        d.setVar('DEPENDS', depends + ' lzop-native')
-  }
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++--- a/config.mk
+++++ b/config.mk
++@@ -126,11 +126,13 @@ cc-option = $(strip $(if $(findstring $1
++ 		$(if $(call cc-option-sys,$1),$1,$2)))
++ endif
++ 
+++exists_bfd_ld = $(shell if $(CROSS_COMPILE)ld.bfd -v >& /dev/null; \
+++		then echo "$(1)"; else echo "$(2)"; fi; )
++ #
++ # Include the make variables (CC, etc...)
++ #
++ AS	= $(CROSS_COMPILE)as
++-LD	= $(CROSS_COMPILE)ld
+++LD	= $(call exists_bfd_ld, "$(CROSS_COMPILE)ld.bfd", "$(CROSS_COMPILE)ld")
++ CC	= $(CROSS_COMPILE)gcc
++ CPP	= $(CC) -E
++ AR	= $(CROSS_COMPILE)ar
+diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb b/recipes-bsp/u-boot/u-boot_2011.09.bb
+index 74c8518..7924fe3 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.09.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.09.bb
+@@ -1,6 +1,6 @@
+ require u-boot.inc
+ 
+-PR = "r5"
++PR = "r6"
+ 
+ # SPL build
+ UBOOT_BINARY = "u-boot.img"
+@@ -32,6 +32,7 @@ SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
+            file://2011.09/0019-BeagleBoard-config-Really-switch-to-ttyO2.patch \
+            file://2011.09/0020-beagleboard-add-support-for-TCT-Beacon-board.patch \
+            file://2011.09/0021-beagleboard-add-support-for-scanning-loop-through-ex.patch \
++           file://always-use-bfd-ld.patch \
+            file://fw_env.config \
+           "
+ 
 -- 
-1.7.8
+1.7.5.4
 
 
