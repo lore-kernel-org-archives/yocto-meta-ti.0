@@ -1,26 +1,24 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1A044E01217
-	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2011 04:58:57 -0800 (PST)
-Received: by wgbdt13 with SMTP id dt13so11372079wgb.11
-	for <meta-ti@yoctoproject.org>; Tue, 20 Dec 2011 04:58:56 -0800 (PST)
-Received: by 10.227.206.66 with SMTP id ft2mr1975712wbb.8.1324385932919;
-	Tue, 20 Dec 2011 04:58:52 -0800 (PST)
-Received: from [172.20.1.19] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id ep16sm1861938wbb.21.2011.12.20.04.58.51
+Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
+	[74.125.82.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0CE97E00305
+	for <meta-ti@lists.yoctoproject.org>;
+	Tue, 20 Dec 2011 08:24:08 -0800 (PST)
+Received: by werm12 with SMTP id m12so2664511wer.26
+	for <meta-ti@lists.yoctoproject.org>;
+	Tue, 20 Dec 2011 08:24:07 -0800 (PST)
+Received: by 10.216.139.71 with SMTP id b49mr6989095wej.47.1324398247722;
+	Tue, 20 Dec 2011 08:24:07 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id z5sm5822763wix.5.2011.12.20.08.24.06
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 20 Dec 2011 04:58:52 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
+	Tue, 20 Dec 2011 08:24:07 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <201112201115.39033.schnitzeltony@gmx.de>
-Date: Tue, 20 Dec 2011 13:58:51 +0100
-Message-Id: <79C18ABD-7DA9-4886-9D94-A39CC6532B2B@dominion.thruhere.net>
-References: <201112201115.39033.schnitzeltony@gmx.de>
-To: =?iso-8859-1?Q?Andreas_M=FCller?= <Schnitzeltony@gmx.de>
-X-Mailer: Apple Mail (2.1251.1)
-Cc: meta-ti@yoctoproject.org, Chris Larson <clarson@kergoth.com>
-Subject: Re: commit b72cb13fcf83b9d342808ea30379bfb6a1321b54 breaks parse
+To: meta-ti@lists.yoctoproject.org
+Date: Tue, 20 Dec 2011 17:24:02 +0100
+Message-Id: <1324398242-32416-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH] linux-ti81xx-psp 2.6.37: update to match latest *SDK
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,126 +30,105 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Dec 2011 12:58:58 -0000
-X-Groupsio-MsgNum: 268
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_7884C945-57DB-4DFC-A91E-A5579ADF6809";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 20 Dec 2011 16:24:09 -0000
 
---Apple-Mail=_7884C945-57DB-4DFC-A91E-A5579ADF6809
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=iso-8859-1
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ conf/machine/include/ti814x.inc                    |    2 +-
+ ...d-code-for-disabling-the-least-significan.patch |   45 ++++++++++++++++++++
+ recipes-kernel/linux/linux-ti81xx-psp_2.6.37.bb    |    9 ++--
+ 3 files changed, 50 insertions(+), 6 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-ti81xx-psp-2.6.37/0001-ti814x-added-code-for-disabling-the-least-significan.patch
+
+diff --git a/conf/machine/include/ti814x.inc b/conf/machine/include/ti814x.inc
+index 4f1c1de..23b6a1d 100644
+--- a/conf/machine/include/ti814x.inc
++++ b/conf/machine/include/ti814x.inc
+@@ -6,7 +6,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-ti81xx-psp"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
+ 
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r1"
++MACHINE_KERNEL_PR = "r2"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+diff --git a/recipes-kernel/linux/linux-ti81xx-psp-2.6.37/0001-ti814x-added-code-for-disabling-the-least-significan.patch b/recipes-kernel/linux/linux-ti81xx-psp-2.6.37/0001-ti814x-added-code-for-disabling-the-least-significan.patch
+new file mode 100644
+index 0000000..c1f368d
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti81xx-psp-2.6.37/0001-ti814x-added-code-for-disabling-the-least-significan.patch
+@@ -0,0 +1,45 @@
++From 1d43359e415cada4607d0d21b7de07c740616386 Mon Sep 17 00:00:00 2001
++From: Amarinder Bindra <a-bindra@ti.com>
++Date: Wed, 7 Dec 2011 20:54:56 +0530
++Subject: [PATCH] ti814x: added code for disabling the least significant bit of TI814x_HDMI_MUX_ADDR before vps init
++
++
++Signed-off-by: Amarinder Bindra <a-bindra@ti.com>
++---
++ drivers/video/ti81xx/vpss/core.c |   13 ++++++++++++-
++ 1 files changed, 12 insertions(+), 1 deletions(-)
++
++diff --git a/drivers/video/ti81xx/vpss/core.c b/drivers/video/ti81xx/vpss/core.c
++index eb9c074..80008b9 100644
++--- a/drivers/video/ti81xx/vpss/core.c
+++++ b/drivers/video/ti81xx/vpss/core.c
++@@ -41,7 +41,7 @@
++ 
++ #define VPS_DRIVER_NAME  "vpss"
++ 
++-
+++#define TI814x_HDMI_MUX_ADDR (0x481C52C8)
++ 
++ #ifdef DEBUG
++ unsigned int vpss_debug;
++@@ -148,6 +148,17 @@ static int __init vps_init(void)
++ {
++ 	VPSSDBG("core init\n");
++ 
+++        /* This mux is for configuring the pixel clock to Venc through HDMI or PLL*/
+++        u32 reg_value;
+++        u32 reg_base;
+++
+++        reg_base = (u32)ioremap(TI814x_HDMI_MUX_ADDR, 0x10);
+++        reg_value = __raw_readl(reg_base);
+++        reg_value &= 0xFFFFFFFE;
+++
+++        __raw_writel(reg_value, reg_base);
+++        iounmap((u32 *)TI814x_HDMI_MUX_ADDR);
+++
++ 	if (platform_driver_probe(&vps_driver, vps_probe)) {
++ 		VPSSERR("failed to register ti81xx-vpss driver\n");
++ 		return -ENODEV;
++-- 
++1.7.1
++
+diff --git a/recipes-kernel/linux/linux-ti81xx-psp_2.6.37.bb b/recipes-kernel/linux/linux-ti81xx-psp_2.6.37.bb
+index bae58b9..e5a3836 100644
+--- a/recipes-kernel/linux/linux-ti81xx-psp_2.6.37.bb
++++ b/recipes-kernel/linux/linux-ti81xx-psp_2.6.37.bb
+@@ -6,15 +6,14 @@ KERNEL_IMAGETYPE = "uImage"
+ COMPATIBLE_MACHINE = "am387x-evm|am389x-evm|c6a814x-evm|c6a816x-evm|dm814x-evm"
+ 
+ # This is on the ti81xx-master branch
+-SRCREV = "a02ce6137c1647009a17ecac35d846fe9479dded"
+-
+-# requires .28 hdvpss: d686b2da5d2e7337c9759f910c3a665c27b0ec31
++SRCREV = "745a06cb913ad7a9ab44855aa36d8c012cd5793b"
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+-MACHINE_KERNEL_PR_append = "d+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
+ 
+ SRC_URI += "git://arago-project.org/git/projects/linux-omap3.git;protocol=git;branch=ti81xx-master \
+-           file://defconfig"
++            file://0001-ti814x-added-code-for-disabling-the-least-significan.patch \
++            file://defconfig"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+1.7.2.5
 
 
-Op 20 dec. 2011, om 11:15 heeft Andreas M=FCller het volgende =
-geschreven:
-
-> Hi,
->=20
-> I thought I sent it alrerady but cannot find it in mailing archive. If =
-you have=20
-> already received simply ignore.
->=20
-> On all my build machines  I get
->=20
-> Loading cache: 100% |
-> =
-##########################################################################=
-####################################################################|=20
-> ETA:  00:00:00
-> Loaded 1880 entries from dependency cache.
-> ERROR: Unable to parse =
-/home/andreas/data/oe-core/sources/meta-ti/recipes-
-> kernel/linux/linux_3.1.bb                                              =
-                 =20
-> | ETA:  --:--:--
-> Traceback (most recent call last):
->  File "/home/andreas/oe-core/sources/bitbake/lib/bb/parse/ast.py", =
-line 379,=20
-> in =
-multi_finalize(fn=3D'/home/andreas/data/oe-core/sources/meta-ti/recipes-
-> kernel/linux/linux_3.1.bb', d=3D<bb.data_smart.DataSmart object at =
-0x7cec6d0>):
->         try:
->>       finalize(fn, d)
->         except bb.parse.SkipPackage as e:
->  File "/home/andreas/oe-core/sources/bitbake/lib/bb/parse/ast.py", =
-line 323,=20
-> in finalize(fn=3D'/home/andreas/data/oe-core/sources/meta-ti/recipes-
-> kernel/linux/linux_3.1.bb', d=3D<bb.data_smart.DataSmart object at =
-0x7cec6d0>,=20
-> variant=3DNone):
->             code.append("%s(d)" % funcname)
->>   bb.utils.simple_exec("\n".join(code), {"d": d})
->         bb.data.update_data(d)
->  File "/home/andreas/oe-core/sources/bitbake/lib/bb/utils.py", line =
-387, in=20
-> =
-simple_exec(code=3D'__anon_119__home_andreas_data_oe_core_sources_openembe=
-dded_core_meta_classes_staging_bbclass(d)\n__anon_487__home_andreas_data_o=
-e_core_sources_openembedded_core_meta_classes_base_bbclass(d)\n__anon_20__=
-home_andreas_data_oe_core_sources_openembedded_core_meta_classes_debian_bb=
-class(d)\n__anon_19__home_andreas_data_oe_core_sources_meta_openembedded_m=
-eta_oe_classes_blacklist_bbclass(d)\n__anon_189__home_andreas_data_oe_core=
-_sources_openembedded_core_meta_classes_package_bbclass(d)\n__anon_55__hom=
-e_andreas_data_oe_core_sources_openembedded_core_meta_classes_sstate_bbcla=
-ss(d)\n__anon_447__home_andreas_data_oe_core_sources_openembedded_core_met=
-a_classes_package_ipk_bbclass(d)\n__anon_28__home_andreas_data_oe_core_sou=
-rces_meta_openembedded_meta_oe_classes_kernel_bbclass(d)\n__anon_119__home=
-_andreas_data_oe_core_sources_openembedded_core_meta_classes_siteinfo_bbcl=
-ass(d)\n__anon_72__home_andreas_data_oe_core_sources_meta_ti_recipes_kerne=
-l_linux_linux_inc(d)\n__anon_2
-> =
-77__home_andreas_data_oe_core_sources_meta_ti_recipes_kernel_linux_linux_i=
-nc(d)',=20
-> context=3D{'d': <bb.data_smart.DataSmart object at 0x7cec6d0>}):
->     def simple_exec(code, context):
->>   exec(code, _context, context)
->=20
->  File "<string>", line 11, in <module>
->  File=20
-> =
-"__anon_277__home_andreas_data_oe_core_sources_meta_ti_recipes_kernel_linu=
-x_linux_inc",=20
-> line 7, in=20
-> =
-__anon_277__home_andreas_data_oe_core_sources_meta_ti_recipes_kernel_linux=
-_linux_inc(d=3D<bb.data_smart.DataSmart=20
-> object at 0x7cec6d0>)
-> IOError: [Errno 2] No such file or directory:=20
-> '/home/andreas/data/Downloads/packets/dl/defconfig'
-
-I figured it out, this happens when:
-
-1) SOC_FAMILY =3D omap3
-2) you have no defconfig for linux_3.1.bb for your machine(s).
-
-I've pushed a workaround for the kernel recipe till linux.inc gets fixed =
-to include more exceptions.
-
-regards,
-
-Koen
-
-
-regards,
-
-Koen=
-
---Apple-Mail=_7884C945-57DB-4DFC-A91E-A5579ADF6809
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAk7who0ACgkQMkyGM64RGpFsygCfZqYOHPFM10FD4ejrx1JEXmiz
-1u8AnifUUB4eq/NKSlRX3Yb4+xfo2Z7D
-=CAoB
------END PGP SIGNATURE-----
-
---Apple-Mail=_7884C945-57DB-4DFC-A91E-A5579ADF6809--
