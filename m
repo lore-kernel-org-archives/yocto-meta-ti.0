@@ -1,33 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-iy0-f176.google.com (mail-iy0-f176.google.com
-	[209.85.210.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 27E7BE0123C
-	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2011 08:59:21 -0800 (PST)
-Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
-	(1024-bit key; insecure key) header.i=@gmail.com;
-	x-dkim-adsp=none (insecure policy)
-Received: by iapp10 with SMTP id p10so16595309iap.35
-	for <meta-ti@yoctoproject.org>; Wed, 21 Dec 2011 08:59:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=4EIV7CJWid5eMnjjx9bf8p8nj0cgY1HHQL8iJPkrhgc=;
-	b=PBbWqQiCQeqOH5P0W52t45kWXB3nZztAUXWLKLEr7NvhtwGunpbnUi7h31yNdl74Vz
-	sVc15139VuqjALxVbnbb5YqAcMyQyvPZ3rKEfpx0N0XVH4SAToSnZFjUARSaxKlTlCm+
-	lhEb9wUyr+QA0baKVjvK7fUe7DMEKPURs7cLI=
-Received: by 10.50.153.135 with SMTP id vg7mr4477026igb.12.1324486759690;
-	Wed, 21 Dec 2011 08:59:19 -0800 (PST)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
-	by mx.google.com with ESMTPS id b20sm18857940ibj.7.2011.12.21.08.59.16
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07799E005A3
+	for <meta-ti@lists.yoctoproject.org>;
+	Thu, 22 Dec 2011 00:20:43 -0800 (PST)
+Received: by wibhq2 with SMTP id hq2so3021047wib.26
+	for <meta-ti@lists.yoctoproject.org>;
+	Thu, 22 Dec 2011 00:20:42 -0800 (PST)
+Received: by 10.180.96.72 with SMTP id dq8mr21183170wib.10.1324542042350;
+	Thu, 22 Dec 2011 00:20:42 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id fw16sm8775547wbb.13.2011.12.22.00.20.40
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 21 Dec 2011 08:59:18 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Wed, 21 Dec 2011 08:59:01 -0800
-Message-Id: <1324486741-23134-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.5.4
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH V2] u-boot_2011.09: Always use gnu ld for LD
+	Thu, 22 Dec 2011 00:20:41 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: meta-ti@lists.yoctoproject.org
+Date: Thu, 22 Dec 2011 09:20:26 +0100
+Message-Id: <1324542026-29756-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+Subject: [PATCH] linux 3.0: update to 3.0.14
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,89 +30,81 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2011 16:59:21 -0000
+X-List-Received-Date: Thu, 22 Dec 2011 08:20:44 -0000
 
-u-boot wants GNU ld and cant link with gold
-so when default linker is gold we make sure
-that it still uses good old GNU ld
+Also make oprofile a module to workaround an oprofile bug highlighted in 3.0.13
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../u-boot/0001-config-Always-use-GNU-ld.patch     |   43 ++++++++++++++++++++
- recipes-bsp/u-boot/u-boot_2011.09.bb               |    3 +-
- 2 files changed, 45 insertions(+), 1 deletions(-)
- create mode 100644 recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
+ conf/machine/include/omap3.inc                     |    2 +-
+ .../linux/linux-3.0/beagleboard/defconfig          |    4 ++--
+ recipes-kernel/linux/linux_3.0.bb                  |    9 ++++-----
+ 3 files changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch b/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
-new file mode 100644
-index 0000000..2564d1d
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
-@@ -0,0 +1,43 @@
-+From dff01fc9346e6f4e3386536df309d2e78f03f3ee Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 21 Dec 2011 08:53:02 -0800
-+Subject: [PATCH] config: Always use GNU ld
-+
-+This patch makes sure that we always use the GNU ld. u-boot uses certain
-+construct e.g. OVERLAY which are not implemented in gold therefore it
-+always needs GNU ld for linking. It works well if default linker in
-+toolchain is GNU ld but in some cases we can have gold to be the
-+default linker and also ship GNU ld but not as default in such cases
-+its called $(PREFIX)ld.bfd, with this patch we make sure that if
-+$(PREFIX)ld.bfd exists than we use that for our ld. This way it
-+does not matter what the default ld is.
-+
-+Upstream-status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ config.mk |    4 +++-
-+ 1 files changed, 3 insertions(+), 1 deletions(-)
-+
-+diff --git a/config.mk b/config.mk
-+index ddaa477..59b3e71 100644
-+--- a/config.mk
-++++ b/config.mk
-+@@ -126,11 +126,13 @@ cc-option = $(strip $(if $(findstring $1,$(CC_OPTIONS)),$1,\
-+ 		$(if $(call cc-option-sys,$1),$1,$2)))
-+ endif
-+ 
-++exists_bfd_ld = $(shell if $(CROSS_COMPILE)ld.bfd -v >& /dev/null; \
-++		then echo "$(1)"; else echo "$(2)"; fi; )
-+ #
-+ # Include the make variables (CC, etc...)
-+ #
-+ AS	= $(CROSS_COMPILE)as
-+-LD	= $(CROSS_COMPILE)ld
-++LD	= $(call exists_bfd_ld, "$(CROSS_COMPILE)ld.bfd", "$(CROSS_COMPILE)ld")
-+ CC	= $(CROSS_COMPILE)gcc
-+ CPP	= $(CC) -E
-+ AR	= $(CROSS_COMPILE)ar
-+-- 
-+1.7.5.4
-+
-diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb b/recipes-bsp/u-boot/u-boot_2011.09.bb
-index 74c8518..4a9d3cb 100644
---- a/recipes-bsp/u-boot/u-boot_2011.09.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.09.bb
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index 4530ae1..fc252ba 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -3,7 +3,7 @@ SOC_FAMILY = "omap3"
+ require conf/machine/include/tune-cortexa8.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r113"
++MACHINE_KERNEL_PR = "r114"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+diff --git a/recipes-kernel/linux/linux-3.0/beagleboard/defconfig b/recipes-kernel/linux/linux-3.0/beagleboard/defconfig
+index 0b150c5..5f2a7eb 100644
+--- a/recipes-kernel/linux/linux-3.0/beagleboard/defconfig
++++ b/recipes-kernel/linux/linux-3.0/beagleboard/defconfig
 @@ -1,6 +1,6 @@
- require u-boot.inc
+ #
+ # Automatically generated make config: don't edit
+-# Linux/arm 3.0.7 Kernel Configuration
++# Linux/arm 3.0.14 Kernel Configuration
+ #
+ CONFIG_ARM=y
+ CONFIG_HAVE_PWM=y
+@@ -149,7 +149,7 @@ CONFIG_SLAB=y
+ # CONFIG_SLUB is not set
+ # CONFIG_SLOB is not set
+ CONFIG_PROFILING=y
+-CONFIG_OPROFILE=y
++CONFIG_OPROFILE=m
+ CONFIG_HAVE_OPROFILE=y
+ # CONFIG_KPROBES is not set
+ CONFIG_HAVE_KPROBES=y
+diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
+index 38b90e9..d72826b 100644
+--- a/recipes-kernel/linux/linux_3.0.bb
++++ b/recipes-kernel/linux/linux_3.0.bb
+@@ -5,12 +5,12 @@ KERNEL_IMAGETYPE = "uImage"
  
--PR = "r5"
-+PR = "r6"
+ COMPATIBLE_MACHINE = "(beagleboard)"
  
- # SPL build
- UBOOT_BINARY = "u-boot.img"
-@@ -32,6 +32,7 @@ SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
-            file://2011.09/0019-BeagleBoard-config-Really-switch-to-ttyO2.patch \
-            file://2011.09/0020-beagleboard-add-support-for-TCT-Beacon-board.patch \
-            file://2011.09/0021-beagleboard-add-support-for-scanning-loop-through-ex.patch \
-+           file://0001-config-Always-use-GNU-ld.patch \
-            file://fw_env.config \
-           "
+-PV = "3.0.12"
+-# v3.0.12 tag
+-SRCREV_pn-${PN} = "ac6766564c0305ca020fe747dfd7dbdf0881369d"
++PV = "3.0.14"
++# v3.0.14 tag
++SRCREV_pn-${PN} = "6636552f1dd0d2e2be2f87605ea2cd3aa4d2e5b6"
  
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "a"
+ 
+ FILESPATH =. "${FILE_DIRNAME}/linux-3.0:${FILE_DIRNAME}/linux-3.0/${MACHINE}:"
+ 
+@@ -194,7 +194,6 @@ SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.gi
+             file://beagle/0008-OMAP2-add-cpu-id-register-to-MAC-address-helper.patch \
+             file://beagle/0009-HACK-OMAP2-BeagleBoard-Fix-up-random-or-missing-MAC-.patch \
+             file://beagle/0010-ARM-OMAP2-beagleboard-fix-mmc-write-protect-pin-when.patch \
+-            file://beagle/0011-Revert-mfd-Fix-twl4030-dependencies-for-audio-codec.patch \
+             file://madc/0001-Enabling-Hwmon-driver-for-twl4030-madc.patch \
+             file://madc/0002-mfd-twl-core-enable-madc-clock.patch \
+             \
 -- 
-1.7.5.4
+1.7.2.5
 
 
