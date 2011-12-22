@@ -1,32 +1,37 @@
 Return-Path: <otavio.salvador@gmail.com>
 Received: from mail-yx0-f176.google.com (mail-yx0-f176.google.com
 	[209.85.213.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5E98E006B5
-	for <meta-ti@yoctoproject.org>; Thu, 22 Dec 2011 05:00:47 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8983CE006DD
+	for <meta-ti@yoctoproject.org>; Thu, 22 Dec 2011 05:00:49 -0800 (PST)
 Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
 	(1024-bit key; insecure key) header.i=@gmail.com;
 	x-dkim-adsp=none (insecure policy)
-Received: by yenm10 with SMTP id m10so6062536yen.35
-	for <meta-ti@yoctoproject.org>; Thu, 22 Dec 2011 05:00:46 -0800 (PST)
+Received: by mail-yx0-f176.google.com with SMTP id m10so6062536yen.35
+	for <meta-ti@yoctoproject.org>; Thu, 22 Dec 2011 05:00:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer;
-	bh=Yd3f/sxMf/9IVI4sNAo9lCIzvds1ec3DJOziSeHSjoc=;
-	b=NpO+xVtF56Bo791pbWrZ3ongYJaGh/Lnp2KkGgT8eHc+OfSn4OQ7SmROIrep14IGuc
-	lguRGnPde8ri/VXcsCl2Y1JNVNSDMy+6hpbxBucMSkFQkCzAbE2s2HjrIn77J8xFa7ey
-	z1lGFSikZBil0R9Q98ePWeZpXpdoXPiLGxFeM=
-Received: by 10.236.155.194 with SMTP id j42mr14764589yhk.34.1324558846825;
-	Thu, 22 Dec 2011 05:00:46 -0800 (PST)
+	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references:in-reply-to:references;
+	bh=3OQbBAjnAhndbZs6a+iMT2SB4Eo+LavsuWvqVuMGDvU=;
+	b=nHXYlgFsvMahUG9tHuPKKZkKYBdNKCZIaL/6dE3paPLSRz/4iTZeYtbGo2/AtuMIap
+	YEwLmUnhruF76sIURYRQoE8P46/1/acMiXYuHNapkRqRT6+62twA65oJkt2BUcwYPkay
+	c62SpU6fHsJUQNeEvvBjMneHU2t6GdeKcGP/4=
+Received: by 10.236.131.1 with SMTP id l1mr14969123yhi.82.1324558849369;
+	Thu, 22 Dec 2011 05:00:49 -0800 (PST)
 Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id i22sm14543132yhm.10.2011.12.22.05.00.44
+	by mx.google.com with ESMTPS id i22sm14543132yhm.10.2011.12.22.05.00.46
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Dec 2011 05:00:45 -0800 (PST)
+	Thu, 22 Dec 2011 05:00:48 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: meta-ti@yoctoproject.org
-Date: Thu, 22 Dec 2011 13:00:32 +0000
-Message-Id: <cover.1324558731.git.otavio@ossystems.com.br>
+Date: Thu, 22 Dec 2011 13:00:33 +0000
+Message-Id: <affa7f3179773a6a8b6c4a80079f7daadb8eade5.1324558731.git.otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH v3 0/3] Rewrite sdcard_image.bbclass
+In-Reply-To: <cover.1324558731.git.otavio@ossystems.com.br>
+References: <cover.1324558731.git.otavio@ossystems.com.br>
+In-Reply-To: <cover.1324558731.git.otavio@ossystems.com.br>
+References: <cover.1324558731.git.otavio@ossystems.com.br>
+Subject: [PATCH v3 1/3] sdcard_image: rewrote to avoid using loopback and mount/unmount
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,29 +43,246 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2011 13:00:48 -0000
+X-List-Received-Date: Thu, 22 Dec 2011 13:00:49 -0000
 
-This version of patches uses mtools to copy the files onto the fat
-partition avoiding the problems from dosfstools in previous versions.
+Allow generation by regular users without fancy setup requirements and
+use of loopback and mount/unmount. Besides, this also includes
+following improvements:
 
-The following changes since commit c00b5df3b85b3badbd268e376c0a19fab19cc4f3:
+ * use of megabytes when specifying SDIMG_SIZE
+ * remove restriction of filesystem to rootfs
 
-  linux-ti335x-psp 3.1: disable whiteheat firmware to unbreak build with make 3.85 (2011-12-21 15:33:36 +0100)
+Images that use this class needs to generate the rootfs filesystem and
+set ROOTFS variable according.
 
-are available in the git repository at:
-  git://github.com/OSSystems/meta-ti master
-  https://github.com/OSSystems/meta-ti/tree/master
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ classes/sdcard_image.bbclass |  181 +++++++++++++++---------------------------
+ 1 files changed, 64 insertions(+), 117 deletions(-)
 
-Otavio Salvador (3):
-  sdcard_image: rewrote to avoid using loopback and mount/unmount
-  ti-hw-bringup-image: adapt to newer sdcard_image class
-  cloud9-image: adapt to newer sdcard_image class
-
- classes/sdcard_image.bbclass               |  181 ++++++++++------------------
- recipes-misc/images/cloud9-image.bb        |    6 +-
- recipes-misc/images/ti-hw-bringup-image.bb |    3 +
- 3 files changed, 70 insertions(+), 120 deletions(-)
-
+diff --git a/classes/sdcard_image.bbclass b/classes/sdcard_image.bbclass
+index 519bd9a..831a1f7 100644
+--- a/classes/sdcard_image.bbclass
++++ b/classes/sdcard_image.bbclass
+@@ -1,99 +1,42 @@
++#
++# Create an image that can by written onto a SD card using dd.
++#
++# External variables needed:
++#   ${ROOTFS} - the rootfs image to incorporate
++
+ inherit image
+ 
+ # Add the fstypes we need
+-IMAGE_FSTYPES_append = " tar.bz2 sdimg"
++IMAGE_FSTYPES += "sdimg"
+ 
+ # Ensure required utilities are present
+-IMAGE_DEPENDS_sdimg = "genext2fs-native e2fsprogs-native"
+-
+-# Change this to match your host distro
+-LOSETUP ?= "/sbin/losetup"
+-
+-# Since these need to go in /etc/fstab we can hardcode them
+-# Since the vars are weakly assigned, you can override them from your local.conf
+-LOOPDEV ?= "/dev/loop1"
+-LOOPDEV_BOOT ?= "/dev/loop2"
+-LOOPDEV_FS ?= "/dev/loop3"
++IMAGE_DEPENDS_sdimg = "dosfstools-native mtools-native parted-native"
+ 
+-# Default to 4GiB images
+-SDIMG_SIZE ?= "444" 
++# Default to 3.4GiB images
++SDIMG_SIZE ?= "3400"
+ 
+-# FS type for rootfs
+-ROOTFSTYPE ?= "ext3"
++# Boot partition volume id
++BOOTDD_VOLUME_ID_beaglebone = "BEAGLE_BONE"
++BOOTDD_VOLUME_ID ?= "${MACHINE}"
+ 
+-BOOTPARTNAME_beaglebone = "BEAGLE_BONE"
+-BOOTPARTNAME ?= "${MACHINE}"
+-
+-IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
++# Addional space for boot partition
++BOOTDD_EXTRA_SPACE ?= "16384"
+ 
+ # Files and/or directories to be copied into the vfat partition
+ FATPAYLOAD ?= ""
+ 
+ IMAGE_CMD_sdimg () {
+-	SDIMG=${WORKDIR}/sd.img
+-
+-	# sanity check fstab entry for boot partition mounting
+-	if [ "x$(cat /etc/fstab | grep ${LOOPDEV_BOOT} | grep ${WORKDIR}/tmp-mnt-boot | grep user || true)" = "x" ]; then
+-		echo "/etc/fstab entries need to be created with the user flag for the loop devices like:"
+-		echo "${LOOPDEV_BOOT} ${WORKDIR}/tmp-mnt-boot vfat user 0 0"
+-        false
+-	fi
+-
+-	# cleanup loops
+-	for loop in ${LOOPDEV} ${LOOPDEV_BOOT} ${LOOPDEV_FS} ; do
+-		${LOSETUP} -d $loop || true
+-	done
+-
+-	# If an SD image is already present, reuse and reformat it
+-	if [ ! -e ${SDIMG} ] ; then
+-		dd if=/dev/zero of=${SDIMG} bs=$(echo '255 * 63 * 512' | bc) count=${SDIMG_SIZE}
+-	fi
+-
+-	${LOSETUP} ${LOOPDEV} ${SDIMG}
+-
+-	# Create partition table
+-	dd if=/dev/zero of=${LOOPDEV} bs=1024 count=1024
+-	SIZE=$(/sbin/fdisk -l ${LOOPDEV} | grep Disk | grep bytes | awk '{print $5}')
+-	CYLINDERS=$(echo $SIZE/255/63/512 | bc)
+-	{
+-	echo ,9,0x0C,*
+-	echo ,,,-
+-	} | /sbin/sfdisk -D -H 255 -S 63 -C ${CYLINDERS} ${LOOPDEV}
+-
+-	# Prepare loop devices for boot and filesystem partitions
+-	BOOT_OFFSET=32256
+-	FS_OFFSET_SECT=$(/sbin/fdisk -l -u ${LOOPDEV} 2>&1 | grep Linux | perl -p -i -e "s/\s+/ /"|cut -d " " -f 2)
+-	FS_OFFSET=$(echo "$FS_OFFSET_SECT * 512" | bc)
+-	FS_SIZE_BLOCKS=$(/sbin/fdisk -l -u ${LOOPDEV} 2>&1 | grep Linux | perl -p -i -e "s/\s+/ /g" \ 
+-	|cut -d " " -f 4 | cut -d "+" -f 1)
+- 
+-	LOOPDEV_BLOCKS=$(/sbin/fdisk -l -u ${LOOPDEV} 2>&1 | grep FAT | perl -p -i -e "s/\s+/ /g"|cut -d " " -f 5)
+-	LOOPDEV_BYTES=$(echo "$LOOPDEV_BLOCKS * 1024" | bc)
+-
+-	${LOSETUP} -d ${LOOPDEV}
+-
+-	${LOSETUP} ${LOOPDEV_BOOT} ${SDIMG} -o ${BOOT_OFFSET} 
+-
+-	/sbin/mkfs.vfat ${LOOPDEV_BOOT} -n ${BOOTPARTNAME} $LOOPDEV_BLOCKS
+-
+-	# Prepare filesystem partition
+-	# Copy ubi used by flashing scripts
+-	if [ -e  ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ] ; then
+-		echo "Copying UBIFS image to file system"
+-		cp ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${IMAGE_ROOTFS}/boot/fs.ubi
+-	fi
++	TMP=${WORKDIR}/tmp
++	SDIMG=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.sdimg
+ 
+-	# Prepare boot partion. First mount the boot partition, and copy the boot loader and supporting files
+-	# from the root filesystem
+-
+-	mkdir -p ${WORKDIR}/tmp-mnt-boot
+-	mount $LOOPDEV_BOOT ${WORKDIR}/tmp-mnt-boot
++	# Prepare boot filesystem
++	install -d $TMP/boot
+ 
+ 	echo "Copying bootloaders into the boot partition"
+ 	if [ -e ${IMAGE_ROOTFS}/boot/MLO ] ; then
+-		cp -v ${IMAGE_ROOTFS}/boot/MLO ${WORKDIR}/tmp-mnt-boot 
++		cp -v ${IMAGE_ROOTFS}/boot/MLO $TMP/boot
+ 	else
+-		cp -v ${DEPLOY_DIR_IMAGE}/MLO ${WORKDIR}/tmp-mnt-boot
++		cp -v ${DEPLOY_DIR_IMAGE}/MLO $TMP/boot
+ 	fi
+ 
+ 	# Check for u-boot SPL
+@@ -103,54 +46,58 @@ IMAGE_CMD_sdimg () {
+ 		suffix=bin
+ 	fi
+ 
+-	cp -v ${IMAGE_ROOTFS}/boot/uEnv.txt ${WORKDIR}/tmp-mnt-boot || true
+-	cp -v ${IMAGE_ROOTFS}/boot/user.txt ${WORKDIR}/tmp-mnt-boot || true
+-	cp -v ${IMAGE_ROOTFS}/boot/uImage ${WORKDIR}/tmp-mnt-boot || true
+-
+ 	if [ -e ${IMAGE_ROOTFS}/boot/u-boot.$suffix ] ; then
+-		cp -v ${IMAGE_ROOTFS}/boot/{u-boot.$suffix} ${WORKDIR}/tmp-mnt-boot || true
++		cp -v ${IMAGE_ROOTFS}/boot/u-boot.$suffix $TMP/boot || true
+ 	else
+-		cp -v ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.$suffix ${WORKDIR}/tmp-mnt-boot/u-boot.$suffix 
++		cp -v ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.$suffix $TMP/boot/u-boot.$suffix
++	fi
++
++	if [ -e ${IMAGE_ROOTFS}/boot/uImage ]; then
++		cp -v ${IMAGE_ROOTFS}/boot/uImage $TMP/boot || true
++	else
++		cp -v ${DEPLOY_DIR_IMAGE}/uImage-${MACHINE}.bin $TMP/boot/uImage
++	fi
++
++	cp -v ${IMAGE_ROOTFS}/boot/uEnv.txt $TMP/boot || true
++	cp -v ${IMAGE_ROOTFS}/boot/user.txt $TMP/boot || true
++
++	# Copy ubi used by flashing scripts
++	if [ -e  ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ] ; then
++		echo "Copying UBIFS image to file system"
++		cp ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${IMAGE_ROOTFS}/boot/fs.ubi
+ 	fi
+ 
+ 	if [ -n ${FATPAYLOAD} ] ; then
+ 		echo "Copying payload into VFAT"
+ 		for entry in ${FATPAYLOAD} ; do
+ 				# add the || true to stop aborting on vfat issues like not supporting .~lock files
+-				cp -av ${IMAGE_ROOTFS}$entry ${WORKDIR}/tmp-mnt-boot || true
++				cp -av ${IMAGE_ROOTFS}$entry $TMP/boot || true
+ 		done
+ 	fi
+ 
+-	echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > ${IMAGE_ROOTFS}/etc/image-version-info
+-
+-	# Cleanup VFAT mount
+-	echo "Cleaning up VFAT mount"
+-	umount ${WORKDIR}/tmp-mnt-boot
+-	${LOSETUP} -d ${LOOPDEV_BOOT} || true
+-
+-	# Prepare rootfs parition
+-	echo "Creating rootfs loopback"
+-	${LOSETUP} ${LOOPDEV_FS} ${SDIMG} -o ${FS_OFFSET}
+-
+-	FS_NUM_INODES=$(echo $FS_SIZE_BLOCKS / 4 | bc)
+-
+-	case "${ROOTFSTYPE}" in
+-		ext3)
+-				genext2fs -z -N $FS_NUM_INODES -b $FS_SIZE_BLOCKS -d ${IMAGE_ROOTFS} ${LOOPDEV_FS}
+-				tune2fs -L ${IMAGE_NAME} -j ${LOOPDEV_FS}
+-				;;
+-		ext4)
+-				genext2fs -z -N $FS_NUM_INODES -b $FS_SIZE_BLOCKS -d ${IMAGE_ROOTFS} ${LOOPDEV_FS}
+-				tune2fs -L ${IMAGE_NAME} -j -O extents,uninit_bg,dir_index ${LOOPDEV_FS}
+-				;;
+-		*)
+-				echo "Please set ROOTFSTYPE to something supported"
+-				exit 1
+-				;;
+-	esac
+-
+-	${LOSETUP} -d ${LOOPDEV_FS} || true
+-
+-	gzip -c ${WORKDIR}/sd.img > ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-${IMAGEDATESTAMP}.img.gz
+-	rm -f ${WORKDIR}/sd.img
++	dd if=/dev/zero of=${SDIMG} bs=$(expr 1000 \* 1000) count=${SDIMG_SIZE}
++
++	# Create the boot filesystem
++	BOOT_OFFSET=32256
++	BOOT_BLOCKS=$(du --apparent-size -ks $TMP/boot | cut -f 1)
++	BOOT_SIZE=$(expr $BOOT_BLOCKS + ${BOOTDD_EXTRA_SPACE})
++	mkfs.vfat -n ${BOOTDD_VOLUME_ID} -S 512 -C $TMP/boot.img $BOOT_SIZE
++	mcopy -i $TMP/boot.img -s $TMP/boot/* ::/
++
++	# Create partition table
++	END1=$(expr $BOOT_SIZE \* 1024)
++	END2=$(expr $END1 + 512)
++	parted -s ${SDIMG} mklabel msdos
++	parted -s ${SDIMG} mkpart primary fat16 ${BOOT_OFFSET}B ${END1}B
++	parted -s ${SDIMG} mkpart primary ext3 ${END2}B 100%
++	parted -s ${SDIMG} set 1 boot on
++	parted ${SDIMG} print
++
++	OFFSET1=$(expr $BOOT_OFFSET / 512)
++	OFFSET2=$(expr $END2 / 512)
++	dd if=$TMP/boot.img of=${SDIMG} conv=notrunc seek=$OFFSET1 bs=512
++	dd if=${ROOTFS} of=${SDIMG} conv=notrunc seek=$OFFSET2 bs=512
++
++	cd ${DEPLOY_DIR_IMAGE}
++	ln -sf ${IMAGE_NAME}.sdimg ${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.sdimg
+ }
 -- 
 1.7.2.5
 
