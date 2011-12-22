@@ -1,37 +1,23 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yw0-f48.google.com (mail-yw0-f48.google.com
-	[209.85.213.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 25691E00738
-	for <meta-ti@yoctoproject.org>; Thu, 22 Dec 2011 05:00:54 -0800 (PST)
-Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
-	(1024-bit key; insecure key) header.i=@gmail.com;
-	x-dkim-adsp=none (insecure policy)
-Received: by mail-yw0-f48.google.com with SMTP id p56so6670174yhp.35
-	for <meta-ti@yoctoproject.org>; Thu, 22 Dec 2011 05:00:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references:in-reply-to:references;
-	bh=wVjhCr8eZdPC1gLI+cl76uiQC96gaGHP0jGKsC4VVN4=;
-	b=lvzKpyLf6bot6aW63W6mvOwHm8LwkPMkzgc3UeEFMcoG3vO75Eh2qgwzwsY0TfX0Jh
-	tEQz9+Ez0ziltmpyQtI42QzAI6tIud1P5icYkrPd1cu6fz2A+71t4TJ22d55cr170aAF
-	FBGA0PuxNXLdpUbF2pK3dY9fYpapE7jMwzdJc=
-Received: by 10.236.73.230 with SMTP id v66mr14878047yhd.61.1324558853986;
-	Thu, 22 Dec 2011 05:00:53 -0800 (PST)
-Received: from localhost.localdomain ([189.114.111.55])
-	by mx.google.com with ESMTPS id i22sm14543132yhm.10.2011.12.22.05.00.51
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ww0-f51.google.com (mail-ww0-f51.google.com [74.125.82.51])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 18229E01299
+	for <meta-ti@lists.yoctoproject.org>;
+	Thu, 22 Dec 2011 07:33:50 -0800 (PST)
+Received: by wgbdr1 with SMTP id dr1so14284265wgb.8
+	for <meta-ti@lists.yoctoproject.org>;
+	Thu, 22 Dec 2011 07:33:49 -0800 (PST)
+Received: by 10.227.60.14 with SMTP id n14mr10933646wbh.5.1324568029619;
+	Thu, 22 Dec 2011 07:33:49 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id n9sm10121227wbo.16.2011.12.22.07.33.48
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Dec 2011 05:00:53 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: meta-ti@yoctoproject.org
-Date: Thu, 22 Dec 2011 13:00:35 +0000
-Message-Id: <9e58454b8203539c4a163cf3ce6bb384e2a0af10.1324558731.git.otavio@ossystems.com.br>
+	Thu, 22 Dec 2011 07:33:48 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: meta-ti@lists.yoctoproject.org
+Date: Thu, 22 Dec 2011 16:33:44 +0100
+Message-Id: <1324568025-24923-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <cover.1324558731.git.otavio@ossystems.com.br>
-References: <cover.1324558731.git.otavio@ossystems.com.br>
-In-Reply-To: <cover.1324558731.git.otavio@ossystems.com.br>
-References: <cover.1324558731.git.otavio@ossystems.com.br>
-Subject: [PATCH v3 3/3] cloud9-image: adapt to newer sdcard_image class
+Subject: [PATCH 1/2] ti-cgt6x: update to 6.1.20
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,35 +29,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2011 13:00:54 -0000
+X-List-Received-Date: Thu, 22 Dec 2011 15:33:51 -0000
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- recipes-misc/images/cloud9-image.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/devtools/ti-cgt6x_6.1.17.bb |   11 -----------
+ recipes-ti/devtools/ti-cgt6x_6.1.20.bb |   11 +++++++++++
+ 2 files changed, 11 insertions(+), 11 deletions(-)
+ delete mode 100644 recipes-ti/devtools/ti-cgt6x_6.1.17.bb
+ create mode 100644 recipes-ti/devtools/ti-cgt6x_6.1.20.bb
 
-diff --git a/recipes-misc/images/cloud9-image.bb b/recipes-misc/images/cloud9-image.bb
-index 826dc93..7214d91 100644
---- a/recipes-misc/images/cloud9-image.bb
-+++ b/recipes-misc/images/cloud9-image.bb
-@@ -4,8 +4,6 @@ require ti-hw-bringup-image.bb
- 
- FATPAYLOAD = "${datadir}/beaglebone-getting-started/*"
- 
--ROOTFSTYPE_beaglebone = "ext4"
+diff --git a/recipes-ti/devtools/ti-cgt6x_6.1.17.bb b/recipes-ti/devtools/ti-cgt6x_6.1.17.bb
+deleted file mode 100644
+index d47ad3c..0000000
+--- a/recipes-ti/devtools/ti-cgt6x_6.1.17.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-require ti-cgt6x.inc
 -
- IMAGE_INSTALL += " \
- 	cloud9 \
- 	task-sdk-target \
-@@ -27,5 +25,7 @@ IMAGE_INSTALL += " \
- 	nodejs-dev \
- "
- 
--export IMAGE_BASENAME = "Cloud9-IDE"
-+ROOTFS_beaglebone = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext4"
-+IMAGE_FSTYPES_beaglebone= "ext4"
- 
-+export IMAGE_BASENAME = "Cloud9-IDE"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=712a8c64bb70c5ea5fa193faef3bed6f"
+-
+-PE = "1"
+-PV = "6_1_17"
+-PVwithdots = "6.1.17"
+-
+-SRC_URI[cgt6xbin.md5sum] = "41ee41cc74800b06705804f7ef901447"
+-SRC_URI[cgt6xbin.sha256sum] = "7e1c8b67420abf6f2f44786811d0a2b5692e76194743bed714ec9087cc1a75c7"
+-
+diff --git a/recipes-ti/devtools/ti-cgt6x_6.1.20.bb b/recipes-ti/devtools/ti-cgt6x_6.1.20.bb
+new file mode 100644
+index 0000000..1d6609c
+--- /dev/null
++++ b/recipes-ti/devtools/ti-cgt6x_6.1.20.bb
+@@ -0,0 +1,11 @@
++require ti-cgt6x.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=62f46f1125a152a2e213b414db7ac600"
++
++PE = "1"
++PV = "6_1_20"
++PVwithdots = "6.1.20"
++
++SRC_URI[cgt6xbin.md5sum] = "39485ea8211960de0a958ab27106ab9b"
++SRC_URI[cgt6xbin.sha256sum] = "a020142011c8160e24f6386f7696ecfbfe02dab2a6c83af74ce6b67eb1da9900"
++
 -- 
 1.7.2.5
 
