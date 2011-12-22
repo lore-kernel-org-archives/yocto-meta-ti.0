@@ -1,24 +1,32 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D15A4E005A3
-	for <meta-ti@lists.yoctoproject.org>;
-	Thu, 22 Dec 2011 00:40:38 -0800 (PST)
-Received: by werm12 with SMTP id m12so3964337wer.26
-	for <meta-ti@lists.yoctoproject.org>;
-	Thu, 22 Dec 2011 00:40:37 -0800 (PST)
-Received: by 10.216.136.70 with SMTP id v48mr5358296wei.48.1324543236646;
-	Thu, 22 Dec 2011 00:40:36 -0800 (PST)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id d17sm8828774wbh.19.2011.12.22.00.40.34
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yx0-f176.google.com (mail-yx0-f176.google.com
+	[209.85.213.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5E98E006B5
+	for <meta-ti@yoctoproject.org>; Thu, 22 Dec 2011 05:00:47 -0800 (PST)
+Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
+	(1024-bit key; insecure key) header.i=@gmail.com;
+	x-dkim-adsp=none (insecure policy)
+Received: by yenm10 with SMTP id m10so6062536yen.35
+	for <meta-ti@yoctoproject.org>; Thu, 22 Dec 2011 05:00:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=Yd3f/sxMf/9IVI4sNAo9lCIzvds1ec3DJOziSeHSjoc=;
+	b=NpO+xVtF56Bo791pbWrZ3ongYJaGh/Lnp2KkGgT8eHc+OfSn4OQ7SmROIrep14IGuc
+	lguRGnPde8ri/VXcsCl2Y1JNVNSDMy+6hpbxBucMSkFQkCzAbE2s2HjrIn77J8xFa7ey
+	z1lGFSikZBil0R9Q98ePWeZpXpdoXPiLGxFeM=
+Received: by 10.236.155.194 with SMTP id j42mr14764589yhk.34.1324558846825;
+	Thu, 22 Dec 2011 05:00:46 -0800 (PST)
+Received: from localhost.localdomain ([189.114.111.55])
+	by mx.google.com with ESMTPS id i22sm14543132yhm.10.2011.12.22.05.00.44
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 22 Dec 2011 00:40:35 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: meta-ti@lists.yoctoproject.org
-Date: Thu, 22 Dec 2011 09:40:30 +0100
-Message-Id: <1324543230-17994-1-git-send-email-koen@dominion.thruhere.net>
+	Thu, 22 Dec 2011 05:00:45 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: meta-ti@yoctoproject.org
+Date: Thu, 22 Dec 2011 13:00:32 +0000
+Message-Id: <cover.1324558731.git.otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH] ti-linuxutils: fix LICENSE syntax
+Subject: [PATCH v3 0/3] Rewrite sdcard_image.bbclass
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,34 +38,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2011 08:40:39 -0000
+X-List-Received-Date: Thu, 22 Dec 2011 13:00:48 -0000
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- recipes-ti/linuxutils/ti-linuxutils.inc |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+This version of patches uses mtools to copy the files onto the fat
+partition avoiding the problems from dosfstools in previous versions.
 
-diff --git a/recipes-ti/linuxutils/ti-linuxutils.inc b/recipes-ti/linuxutils/ti-linuxutils.inc
-index 0c0ebe3..d6cd18c 100644
---- a/recipes-ti/linuxutils/ti-linuxutils.inc
-+++ b/recipes-ti/linuxutils/ti-linuxutils.inc
-@@ -1,6 +1,6 @@
- DESCRIPTION = "MFP Linux utils for TI ARM/DSP processors"
- SECTION = "devel"
--LICENSE = "GPLv2,BSD"
-+LICENSE = "GPLv2 & BSD"
- 
- BASE_SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/linuxutils/${PV}/exports"
- SRC_URI = "${BASE_SRC_URI}/linuxutils_${PV}.tar.gz "
-@@ -15,7 +15,7 @@ require recipes-ti/includes/ti-staging.inc
- PR = "${MACHINE_KERNEL_PR}"
- 
- #This is a kernel module, don't set PR directly
--MACHINE_KERNEL_PR_append = "d"
-+MACHINE_KERNEL_PR_append = "e"
- 
- inherit module
- 
+The following changes since commit c00b5df3b85b3badbd268e376c0a19fab19cc4f3:
+
+  linux-ti335x-psp 3.1: disable whiteheat firmware to unbreak build with make 3.85 (2011-12-21 15:33:36 +0100)
+
+are available in the git repository at:
+  git://github.com/OSSystems/meta-ti master
+  https://github.com/OSSystems/meta-ti/tree/master
+
+Otavio Salvador (3):
+  sdcard_image: rewrote to avoid using loopback and mount/unmount
+  ti-hw-bringup-image: adapt to newer sdcard_image class
+  cloud9-image: adapt to newer sdcard_image class
+
+ classes/sdcard_image.bbclass               |  181 ++++++++++------------------
+ recipes-misc/images/cloud9-image.bb        |    6 +-
+ recipes-misc/images/ti-hw-bringup-image.bb |    3 +
+ 3 files changed, 70 insertions(+), 120 deletions(-)
+
 -- 
 1.7.2.5
 
