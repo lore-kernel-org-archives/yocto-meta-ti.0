@@ -1,35 +1,32 @@
-Return-Path: <pabigot@gmail.com>
-Received: from mail-yw0-f48.google.com (mail-yw0-f48.google.com
-	[209.85.213.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D29CCE00744
-	for <meta-ti@yoctoproject.org>; Tue, 27 Dec 2011 11:13:20 -0800 (PST)
+Return-Path: <tom.rini@gmail.com>
+Received: from mail-qw0-f41.google.com (mail-qw0-f41.google.com
+	[209.85.216.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F0DF7E00744
+	for <meta-ti@yoctoproject.org>; Tue, 27 Dec 2011 14:32:27 -0800 (PST)
 Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
 	(1024-bit key; insecure key) header.i=@gmail.com;
 	x-dkim-adsp=none (insecure policy)
-Received: by yhpp56 with SMTP id p56so8498072yhp.35
-	for <meta-ti@yoctoproject.org>; Tue, 27 Dec 2011 11:13:20 -0800 (PST)
+Received: by qabg40 with SMTP id g40so5812185qab.14
+	for <meta-ti@yoctoproject.org>; Tue, 27 Dec 2011 14:32:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=ptL9cdM3ljBN+k1nMO7DQxfyc2NjCOBnpxwXwnAxDKM=;
-	b=tUJ+UIIEYGI/osdtY+c0ehx4EME81FRy3LrdFgQ+LWbHCXS0NxBUlOxOQWo+HOw9FW
-	Ql9TrLu14doVsyBU9MZe8wNDTe67chHYfHFuiZpnLE7qiFg0UuMGDhYv6mGTpVpXA2tu
-	cBI4hI6106n3tdqF5mBjHCY7EqfidWHebmFDE=
-Received: by 10.236.181.137 with SMTP id l9mr21496800yhm.124.1325013200043;
-	Tue, 27 Dec 2011 11:13:20 -0800 (PST)
-Received: from localhost.localdomain (c-66-41-60-82.hsd1.mn.comcast.net.
-	[66.41.60.82])
-	by mx.google.com with ESMTPS id 32sm68772440ant.12.2011.12.27.11.13.18
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 27 Dec 2011 11:13:19 -0800 (PST)
-Sender: Peter Bigot <pabigot@gmail.com>
-From: "Peter A. Bigot" <bigotp@acm.org>
-To: meta-ti@yoctoproject.org
-Date: Tue, 27 Dec 2011 13:13:04 -0600
-Message-Id: <1325013184-25813-1-git-send-email-bigotp@acm.org>
-X-Mailer: git-send-email 1.7.6.4
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=S3g2TWwithBZTVOcmq6fSepz+N++efVGg1N29tjoOQ0=;
+	b=UH30Zp8bw4EvvHwOZWA2iE5unH7v6EyeSSexMtp/b9DoSpsOzA/616cOuEjBRobz5P
+	z8TmOwhSh84Efxe+Bfsa/1Z4k2lBWv0yPoaDSEsc+9XHx/18YUI5rIdt7XSel6hNwGWN
+	tTc/gWMB9H5ptqPbHjpe/i5zgRyqHDqBn2SZs=
 MIME-Version: 1.0
-Subject: [PATCH] u-boot 2011.12rc1: OMAP MMC: Add delay before waiting for status
+Received: by 10.224.95.196 with SMTP id e4mr28107400qan.18.1325025146119; Tue,
+	27 Dec 2011 14:32:26 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Tue, 27 Dec 2011 14:32:26 -0800 (PST)
+In-Reply-To: <1325013184-25813-1-git-send-email-bigotp@acm.org>
+References: <1325013184-25813-1-git-send-email-bigotp@acm.org>
+Date: Tue, 27 Dec 2011 15:32:26 -0700
+Message-ID: <CA+M6bXn4OJPD=xJCo1-WDTJ5DxXN68644Qop4vjanq_M2tf83w@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: "Peter A. Bigot" <bigotp@acm.org>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] u-boot 2011.12rc1: OMAP MMC: Add delay before waiting for status
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,95 +38,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Dec 2011 19:13:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 27 Dec 2011 22:32:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: "Peter A. Bigot" <bigotp@acm.org>
+On Tue, Dec 27, 2011 at 12:13 PM, Peter A. Bigot <bigotp@acm.org> wrote:
+> From: "Peter A. Bigot" <bigotp@acm.org>
+>
+> Pending upstream patch from http://patchwork.ozlabs.org/patch/132795/ is
+> required to successfully boot on xM.
+>
+> Signed-off-by: Peter A. Bigot <bigotp@acm.org>
 
-Pending upstream patch from http://patchwork.ozlabs.org/patch/132795/ is
-required to successfully boot on xM.
+I don't see the harm here so:
 
-Signed-off-by: Peter A. Bigot <bigotp@acm.org>
----
- ...P-MMC-Add-delay-before-waiting-for-status.patch |   45 ++++++++++++++++++++
- recipes-bsp/u-boot/u-boot_2011.12.bb               |    3 +-
- 2 files changed, 47 insertions(+), 1 deletions(-)
- create mode 100644 recipes-bsp/u-boot/u-boot/2011.12/U-Boot-OMAP-MMC-Add-delay-before-waiting-for-status.patch
+Acked-by: Tom Rini <tom.rini@gmail.com>
 
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/U-Boot-OMAP-MMC-Add-delay-before-waiting-for-status.patch b/recipes-bsp/u-boot/u-boot/2011.12/U-Boot-OMAP-MMC-Add-delay-before-waiting-for-status.patch
-new file mode 100644
-index 0000000..b334639
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot/2011.12/U-Boot-OMAP-MMC-Add-delay-before-waiting-for-status.patch
-@@ -0,0 +1,45 @@
-+From patchwork Thu Dec 22 09:56:35 2011
-+Content-Type: text/plain; charset="utf-8"
-+MIME-Version: 1.0
-+Content-Transfer-Encoding: 8bit
-+Subject: [U-Boot] OMAP MMC: Add delay before waiting for status
-+Date: Wed, 21 Dec 2011 23:56:35 -0000
-+From: =?utf-8?q?Andreas_M=C3=BCller_=3Cschnitzeltony=40gmx=2Ede=3E?=
-+X-Patchwork-Id: 132795
-+Message-Id: <1324547795-19678-1-git-send-email-schnitzeltony@gmx.de>
-+To: u-boot@lists.denx.de
-+
-+Loading kernel from MMC created the following error message reproducable:
-+
-+| reading uImage
-+| mmc_send_cmd: timedout waiting for stat!
-+|
-+| 2860468 bytes read
-+
-+Tested on overo with OMAP3530:
-+* OMAP3530-GP ES3.1, CPU-OPP2, L3-165MHz, Max CPU Clock 720 mHz
-+  Die ID #470e000400000000040398d31402100c
-+* OMAP3530-GP ES3.1, CPU-OPP2, L3-165MHz, Max CPU Clock 600 mHz
-+  Die ID #112000040000000004035c140101b011
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
-+
-+---
-+drivers/mmc/omap_hsmmc.c |    4 ++++
-+ 1 files changed, 4 insertions(+), 0 deletions(-)
-+
-+diff --git a/drivers/mmc/omap_hsmmc.c b/drivers/mmc/omap_hsmmc.c
-+index c38b9e6..ac91e5d 100644
-+--- a/drivers/mmc/omap_hsmmc.c
-++++ b/drivers/mmc/omap_hsmmc.c
-+@@ -197,6 +197,10 @@ static int mmc_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
-+ 	unsigned int flags, mmc_stat;
-+ 	ulong start;
-+ 
-++	/* Delay added before checking the status */
-++	if (cmd->cmdidx == MMC_CMD_SEND_STATUS)
-++		udelay(1); /* wait 1 us */
-++
-+ 	start = get_timer(0);
-+ 	while ((readl(&mmc_base->pstate) & DATI_MASK) == DATI_CMDDIS) {
-+ 		if (get_timer(0) - start > MAX_RETRY_MS) {
-diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
-index b735702..ed6e9be 100644
---- a/recipes-bsp/u-boot/u-boot_2011.12.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
-@@ -6,7 +6,7 @@ UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
- UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
- 
- PV = "2011.09+2011.12rc1"
--PR = "r1"
-+PR = "r2"
- 
- # No patches for other machines yet
- COMPATIBLE_MACHINE = "(beagleboard|pandaboard|hawkboard|am3517-evm|am37x-evm|omap3evm)"
-@@ -17,6 +17,7 @@ SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
-            file://2011.12/0003-beagleboard-add-support-for-scanning-loop-through-ex.patch \
-            file://2011.12/0004-omap4-common-mount-root-RO.patch \
-            file://2011.12/0005-omap4-common-use-ext4-by-default.patch \
-+           file://2011.12/U-Boot-OMAP-MMC-Add-delay-before-waiting-for-status.patch \
-           "
- 
- SRCREV = "d82a27bc5c404da907f71960a3ed2e148ac73fd0"
+But I need to talk with Andreas a bit and see what's going on here as
+I hadn't seen that problem here before.
+
 -- 
-1.7.6.4
-
+Tom
 
