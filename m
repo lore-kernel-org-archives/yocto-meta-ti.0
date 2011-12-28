@@ -1,37 +1,30 @@
-Return-Path: <pabigot@gmail.com>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A2A3BE00744
-	for <meta-ti@yoctoproject.org>; Wed, 28 Dec 2011 04:33:28 -0800 (PST)
-Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
-	(1024-bit key; insecure key) header.i=@gmail.com;
-	x-dkim-adsp=none (insecure policy)
-Received: by werm10 with SMTP id m10so8545420wer.35
-	for <meta-ti@yoctoproject.org>; Wed, 28 Dec 2011 04:33:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=GqFCeBdTwvormMoYGFNNi1PCj4WS4Ybj6c0lclu4U+s=;
-	b=dLlPis533W/sJHUvrc0PNpTDYx/i40oK4VZ+1hsyK3vsKfLm9IcNvE+BCG6jSVJsq+
-	DGzh0oy6qPCuquzzMV6DNCDVA+jZnUkMngJB4QhpZONSvvcbVDGQrqtVDkG0jHwelvJd
-	oIaPHRKC4QmOHJDmHo30dz0vrgO4cHpBWKkqo=
-MIME-Version: 1.0
-Received: by 10.216.131.152 with SMTP id m24mr21606436wei.56.1325075607645;
-	Wed, 28 Dec 2011 04:33:27 -0800 (PST)
-Sender: pabigot@gmail.com
-Received: by 10.216.231.84 with HTTP; Wed, 28 Dec 2011 04:33:27 -0800 (PST)
-In-Reply-To: <E19397F7-B6E9-40F8-8A4E-0165FC8387AD@dominion.thruhere.net>
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E33FBE00744
+	for <meta-ti@yoctoproject.org>; Wed, 28 Dec 2011 05:11:43 -0800 (PST)
+Received: by wibhq4 with SMTP id hq4so7910687wib.35
+	for <meta-ti@yoctoproject.org>; Wed, 28 Dec 2011 05:11:43 -0800 (PST)
+Received: by 10.180.20.18 with SMTP id j18mr69652973wie.20.1325077902913;
+	Wed, 28 Dec 2011 05:11:42 -0800 (PST)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id g12sm7406079wiw.10.2011.12.28.05.11.41
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 28 Dec 2011 05:11:42 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <CAPOJ94PeTHUYZWgArUH1LEXP-s0-RR9MddooCwzgt7k06pBa1g@mail.gmail.com>
+Date: Wed, 28 Dec 2011 14:11:39 +0100
+Message-Id: <FE0A0E7A-AE21-48FB-85D3-123D054FC4F1@dominion.thruhere.net>
 References: <1325033520-6907-1-git-send-email-bigotp@acm.org>
 	<1325033520-6907-6-git-send-email-bigotp@acm.org>
 	<9F092876-645C-47D9-8F73-860C7847E8D9@dominion.thruhere.net>
 	<CAPOJ94MZfzhxmMqweM5KxSbuzSqgua8YrF4yHZOy42WLh7qKJw@mail.gmail.com>
 	<E19397F7-B6E9-40F8-8A4E-0165FC8387AD@dominion.thruhere.net>
-Date: Wed, 28 Dec 2011 06:33:27 -0600
-X-Google-Sender-Auth: aohIfCdGckZguXDJEamOMNy0U9I
-Message-ID: <CAPOJ94PeTHUYZWgArUH1LEXP-s0-RR9MddooCwzgt7k06pBa1g@mail.gmail.com>
-From: Peter Bigot <bigotp@acm.org>
-To: Koen Kooi <koen@dominion.thruhere.net>
+	<CAPOJ94PeTHUYZWgArUH1LEXP-s0-RR9MddooCwzgt7k06pBa1g@mail.gmail.com>
+To: Peter Bigot <bigotp@acm.org>
+X-Mailer: Apple Mail (2.1251.1)
 Cc: meta-ti@yoctoproject.org
 Subject: Re: [PATCH 5/5] linux 3.0: put back support for graphics on ULCD7
 X-BeenThere: meta-ti@yoctoproject.org
@@ -45,64 +38,84 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2011 12:33:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 28 Dec 2011 13:11:45 -0000
+X-Groupsio-MsgNum: 307
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_E81F84E4-2F3D-40F9-9D52-B5E009C785FF";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_E81F84E4-2F3D-40F9-9D52-B5E009C785FF
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=iso-8859-1
 
-On Wed, Dec 28, 2011 at 6:22 AM, Koen Kooi <koen@dominion.thruhere.net> wro=
-te:
->
-> Op 28 dec. 2011, om 13:13 heeft Peter Bigot het volgende geschreven:
->
->> On Wed, Dec 28, 2011 at 3:37 AM, Koen Kooi <koen@dominion.thruhere.net> =
-wrote:
->>>
->>> Op 28 dec. 2011, om 01:52 heeft Peter A. Bigot het volgende geschreven:
->>>
->>>> From: "Peter A. Bigot" <bigotp@acm.org>
->>>>
->>>> Signed-off-by: Peter A. Bigot <bigotp@acm.org>
->>>> ---
->>>> .../linux/linux-3.0/beagleboard/defconfig =A0 =A0 =A0 =A0 =A0| =A0 =A0=
-2 +-
->>>> recipes-kernel/linux/linux_3.0.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0|=
- =A0 =A02 +-
->>>> 2 files changed, 2 insertions(+), 2 deletions(-)
->>>>
->>>> diff --git a/recipes-kernel/linux/linux-3.0/beagleboard/defconfig b/re=
-cipes-kernel/linux/linux-3.0/beagleboard/defconfig
->>>> index 5f2a7eb..7938236 100644
->>>> --- a/recipes-kernel/linux/linux-3.0/beagleboard/defconfig
->>>> +++ b/recipes-kernel/linux/linux-3.0/beagleboard/defconfig
->>>> @@ -2456,7 +2456,7 @@ CONFIG_OMAP2_DSS_SLEEP_BEFORE_RESET=3Dy
->>>> CONFIG_OMAP2_DSS_SLEEP_AFTER_VENC_RESET=3Dy
->>>> CONFIG_FB_OMAP2=3Dy
->>>> CONFIG_FB_OMAP2_DEBUG_SUPPORT=3Dy
->>>> -CONFIG_FB_OMAP2_NUM_FBS=3D2
->>>> +CONFIG_FB_OMAP2_NUM_FBS=3D3
->>>
->>> NAK, we need one to be available for v4l
->>
->> Is there some other solution that lets the ULCD7 work like it used to,
->> or is it no longer a supported BeagleBoard accessory?
->
-> http://www.flickr.com/photos/koenkooi/6527657487
->
-> That's with 3.0.12, but 3.0.14 works the same.
 
-I need a customizable touchpad UI.  I got "/dev/fb2 not found" and an
-abort when trying to run Xserver (which, as I said, used to work).
+Op 28 dec. 2011, om 13:33 heeft Peter Bigot het volgende geschreven:
 
-What image recipe and related software did you install to get the
-result you show on flickr?
+> On Wed, Dec 28, 2011 at 6:22 AM, Koen Kooi =
+<koen@dominion.thruhere.net> wrote:
+>>=20
+>> Op 28 dec. 2011, om 13:13 heeft Peter Bigot het volgende geschreven:
+>>=20
+>>> On Wed, Dec 28, 2011 at 3:37 AM, Koen Kooi =
+<koen@dominion.thruhere.net> wrote:
+>>>>=20
+>>>> Op 28 dec. 2011, om 01:52 heeft Peter A. Bigot het volgende =
+geschreven:
+>>>>=20
+>>>>> From: "Peter A. Bigot" <bigotp@acm.org>
+>>>>>=20
+>>>>> Signed-off-by: Peter A. Bigot <bigotp@acm.org>
+>>>>> ---
+>>>>> .../linux/linux-3.0/beagleboard/defconfig          |    2 +-
+>>>>> recipes-kernel/linux/linux_3.0.bb                  |    2 +-
+>>>>> 2 files changed, 2 insertions(+), 2 deletions(-)
+>>>>>=20
+>>>>> diff --git a/recipes-kernel/linux/linux-3.0/beagleboard/defconfig =
+b/recipes-kernel/linux/linux-3.0/beagleboard/defconfig
+>>>>> index 5f2a7eb..7938236 100644
+>>>>> --- a/recipes-kernel/linux/linux-3.0/beagleboard/defconfig
+>>>>> +++ b/recipes-kernel/linux/linux-3.0/beagleboard/defconfig
+>>>>> @@ -2456,7 +2456,7 @@ CONFIG_OMAP2_DSS_SLEEP_BEFORE_RESET=3Dy
+>>>>> CONFIG_OMAP2_DSS_SLEEP_AFTER_VENC_RESET=3Dy
+>>>>> CONFIG_FB_OMAP2=3Dy
+>>>>> CONFIG_FB_OMAP2_DEBUG_SUPPORT=3Dy
+>>>>> -CONFIG_FB_OMAP2_NUM_FBS=3D2
+>>>>> +CONFIG_FB_OMAP2_NUM_FBS=3D3
+>>>>=20
+>>>> NAK, we need one to be available for v4l
+>>>=20
+>>> Is there some other solution that lets the ULCD7 work like it used =
+to,
+>>> or is it no longer a supported BeagleBoard accessory?
+>>=20
+>> http://www.flickr.com/photos/koenkooi/6527657487
+>>=20
+>> That's with 3.0.12, but 3.0.14 works the same.
+>=20
+> I need a customizable touchpad UI.  I got "/dev/fb2 not found" and an
+> abort when trying to run Xserver (which, as I said, used to work).
+>=20
+> What image recipe and related software did you install to get the
+> result you show on flickr?
 
-Peter
+systemd-image with the gnome and xfce tasks installed. The image was =
+built months ago and updated with opkg. I don't remember changing =
+anything, but it is a while ago since I set it up.=
 
-> -----BEGIN PGP SIGNATURE-----
->
-> iEYEARECAAYFAk77CgoACgkQMkyGM64RGpHJVwCeIAd6WpSGi+5ACrc969ImJL59
-> uT0AnRaccTls0n5bg1dvUx8U1+P66SfJ
-> =3DeYJ0
-> -----END PGP SIGNATURE-----
->
+--Apple-Mail=_E81F84E4-2F3D-40F9-9D52-B5E009C785FF
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
+-----BEGIN PGP SIGNATURE-----
+
+iEYEARECAAYFAk77FY0ACgkQMkyGM64RGpF84ACfQfWRK4DAosXYnFe8dqUfDqlb
+aroAnR+hoyEVfryZLUoTPrRR0Dsf1WP0
+=YcCY
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_E81F84E4-2F3D-40F9-9D52-B5E009C785FF--
