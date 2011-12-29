@@ -1,35 +1,35 @@
 Return-Path: <pabigot@gmail.com>
-Received: from mail-iy0-f176.google.com (mail-iy0-f176.google.com
-	[209.85.210.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCE23E01276
-	for <meta-ti@yoctoproject.org>; Thu, 29 Dec 2011 03:24:14 -0800 (PST)
+Received: from mail-tul01m020-f176.google.com (mail-tul01m020-f176.google.com
+	[209.85.214.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2C6EAE006DC
+	for <meta-ti@yoctoproject.org>; Thu, 29 Dec 2011 03:27:42 -0800 (PST)
 Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
 	(1024-bit key; insecure key) header.i=@gmail.com;
 	x-dkim-adsp=none (insecure policy)
-Received: by iapp10 with SMTP id p10so31843300iap.35
-	for <meta-ti@yoctoproject.org>; Thu, 29 Dec 2011 03:24:14 -0800 (PST)
+Received: by obcwn14 with SMTP id wn14so12764514obc.35
+	for <meta-ti@yoctoproject.org>; Thu, 29 Dec 2011 03:27:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:mime-version
 	:content-type:content-transfer-encoding;
 	bh=9FNf/2cPxVVBarq6MpBhSowdNMHu/hOnTEkXmDZem2Q=;
-	b=bqgzRkJhPJf4xmRVYhpxDv7t5b9Ni7UNBIk1mwp4b38vyoLdYvKRPgL8ymOKB/hQT6
-	jb7STax0HIDbWURol4uDVGlUi9hRKJm1D6RGFVB3XKUKUtnuSLFDnGK1h+rFvv880nyv
-	CZA8loii5ivIREvs7IhOprNCCmXCTA52rK784=
-Received: by 10.50.187.233 with SMTP id fv9mr40593950igc.24.1325157853915;
-	Thu, 29 Dec 2011 03:24:13 -0800 (PST)
+	b=AXAIUHg3TjCgHBd3IKan3V6yJr7knbSXQ9QD+3VunUfhW6rQolak2eXaBqVKwt/PdY
+	/yBST+UtZUFVz/S90UKTDDr9WQyP6IEcHlDeCkJ4gwYo4HkiV9pEZMnp56hQ4TX+AS3+
+	e6WBnHjRj/1/630ugx65VQKdeixTjdzsfMpcs=
+Received: by 10.50.187.226 with SMTP id fv2mr40196254igc.20.1325158061243;
+	Thu, 29 Dec 2011 03:27:41 -0800 (PST)
 Received: from localhost.localdomain (c-66-41-60-82.hsd1.mn.comcast.net.
 	[66.41.60.82])
-	by mx.google.com with ESMTPS id rc7sm78719471igb.0.2011.12.29.03.24.12
+	by mx.google.com with ESMTPS id j3sm114000204ibj.1.2011.12.29.03.27.39
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 29 Dec 2011 03:24:12 -0800 (PST)
+	Thu, 29 Dec 2011 03:27:40 -0800 (PST)
 Sender: Peter Bigot <pabigot@gmail.com>
 From: "Peter A. Bigot" <bigotp@acm.org>
 To: meta-ti@yoctoproject.org
-Date: Thu, 29 Dec 2011 05:24:05 -0600
-Message-Id: <1325157845-23185-1-git-send-email-bigotp@acm.org>
+Date: Thu, 29 Dec 2011 05:27:38 -0600
+Message-Id: <1325158058-23286-1-git-send-email-bigotp@acm.org>
 X-Mailer: git-send-email 1.7.6.4
 MIME-Version: 1.0
-Subject: [PATCH v2] u-boot 2011.12rc1: OMAP MMC: Add delay before waiting for status
+Subject: [PATCH v3] u-boot 2011.12: OMAP MMC: Add delay before waiting for status
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,7 +41,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Dec 2011 11:24:15 -0000
+X-List-Received-Date: Thu, 29 Dec 2011 11:27:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
