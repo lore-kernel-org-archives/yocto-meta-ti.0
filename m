@@ -1,35 +1,27 @@
-Return-Path: <pabigot@gmail.com>
-Received: from mail-tul01m020-f176.google.com (mail-tul01m020-f176.google.com
-	[209.85.214.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2C6EAE006DC
-	for <meta-ti@yoctoproject.org>; Thu, 29 Dec 2011 03:27:42 -0800 (PST)
-Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
-	(1024-bit key; insecure key) header.i=@gmail.com;
-	x-dkim-adsp=none (insecure policy)
-Received: by obcwn14 with SMTP id wn14so12764514obc.35
-	for <meta-ti@yoctoproject.org>; Thu, 29 Dec 2011 03:27:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=9FNf/2cPxVVBarq6MpBhSowdNMHu/hOnTEkXmDZem2Q=;
-	b=AXAIUHg3TjCgHBd3IKan3V6yJr7knbSXQ9QD+3VunUfhW6rQolak2eXaBqVKwt/PdY
-	/yBST+UtZUFVz/S90UKTDDr9WQyP6IEcHlDeCkJ4gwYo4HkiV9pEZMnp56hQ4TX+AS3+
-	e6WBnHjRj/1/630ugx65VQKdeixTjdzsfMpcs=
-Received: by 10.50.187.226 with SMTP id fv2mr40196254igc.20.1325158061243;
-	Thu, 29 Dec 2011 03:27:41 -0800 (PST)
-Received: from localhost.localdomain (c-66-41-60-82.hsd1.mn.comcast.net.
-	[66.41.60.82])
-	by mx.google.com with ESMTPS id j3sm114000204ibj.1.2011.12.29.03.27.39
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C19C0E00303
+	for <meta-ti@yoctoproject.org>; Fri, 30 Dec 2011 10:12:26 -0800 (PST)
+Received: by wibhq4 with SMTP id hq4so10216573wib.35
+	for <meta-ti@yoctoproject.org>; Fri, 30 Dec 2011 10:12:25 -0800 (PST)
+Received: by 10.180.106.165 with SMTP id gv5mr87745945wib.18.1325268745385;
+	Fri, 30 Dec 2011 10:12:25 -0800 (PST)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id i9sm42723039wie.8.2011.12.30.10.12.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 29 Dec 2011 03:27:40 -0800 (PST)
-Sender: Peter Bigot <pabigot@gmail.com>
-From: "Peter A. Bigot" <bigotp@acm.org>
-To: meta-ti@yoctoproject.org
-Date: Thu, 29 Dec 2011 05:27:38 -0600
-Message-Id: <1325158058-23286-1-git-send-email-bigotp@acm.org>
-X-Mailer: git-send-email 1.7.6.4
-MIME-Version: 1.0
-Subject: [PATCH v3] u-boot 2011.12: OMAP MMC: Add delay before waiting for status
+	Fri, 30 Dec 2011 10:12:24 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <4EF0D0FC.2050201@gmail.com>
+Date: Fri, 30 Dec 2011 19:12:21 +0100
+Message-Id: <901561C5-2E5A-4424-ABD8-C48C598B71F7@dominion.thruhere.net>
+References: <4EF0D0FC.2050201@gmail.com>
+To: Christopher Larson <kergoth@gmail.com>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] linux.inc: don't choke on missing defconfig in lzop dep
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,96 +33,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Dec 2011 11:27:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 30 Dec 2011 18:12:27 -0000
+X-Groupsio-MsgNum: 315
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_DB73A24C-0BAE-4935-A03B-0FC99F3E36BF";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-From: "Peter A. Bigot" <bigotp@acm.org>
-
-Pending upstream patch from http://patchwork.ozlabs.org/patch/132795/ is
-required to successfully boot on xM.
-
-Signed-off-by: Peter A. Bigot <bigotp@acm.org>
-Acked-by: Tom Rini <tom.rini@gmail.com>
----
- ...P-MMC-Add-delay-before-waiting-for-status.patch |   45 ++++++++++++++++++++
- recipes-bsp/u-boot/u-boot_2011.12.bb               |    3 +-
- 2 files changed, 47 insertions(+), 1 deletions(-)
- create mode 100644 recipes-bsp/u-boot/u-boot/2011.12/U-Boot-OMAP-MMC-Add-delay-before-waiting-for-status.patch
-
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/U-Boot-OMAP-MMC-Add-delay-before-waiting-for-status.patch b/recipes-bsp/u-boot/u-boot/2011.12/U-Boot-OMAP-MMC-Add-delay-before-waiting-for-status.patch
-new file mode 100644
-index 0000000..b334639
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot/2011.12/U-Boot-OMAP-MMC-Add-delay-before-waiting-for-status.patch
-@@ -0,0 +1,45 @@
-+From patchwork Thu Dec 22 09:56:35 2011
-+Content-Type: text/plain; charset="utf-8"
-+MIME-Version: 1.0
-+Content-Transfer-Encoding: 8bit
-+Subject: [U-Boot] OMAP MMC: Add delay before waiting for status
-+Date: Wed, 21 Dec 2011 23:56:35 -0000
-+From: =?utf-8?q?Andreas_M=C3=BCller_=3Cschnitzeltony=40gmx=2Ede=3E?=
-+X-Patchwork-Id: 132795
-+Message-Id: <1324547795-19678-1-git-send-email-schnitzeltony@gmx.de>
-+To: u-boot@lists.denx.de
-+
-+Loading kernel from MMC created the following error message reproducable:
-+
-+| reading uImage
-+| mmc_send_cmd: timedout waiting for stat!
-+|
-+| 2860468 bytes read
-+
-+Tested on overo with OMAP3530:
-+* OMAP3530-GP ES3.1, CPU-OPP2, L3-165MHz, Max CPU Clock 720 mHz
-+  Die ID #470e000400000000040398d31402100c
-+* OMAP3530-GP ES3.1, CPU-OPP2, L3-165MHz, Max CPU Clock 600 mHz
-+  Die ID #112000040000000004035c140101b011
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
-+
-+---
-+drivers/mmc/omap_hsmmc.c |    4 ++++
-+ 1 files changed, 4 insertions(+), 0 deletions(-)
-+
-+diff --git a/drivers/mmc/omap_hsmmc.c b/drivers/mmc/omap_hsmmc.c
-+index c38b9e6..ac91e5d 100644
-+--- a/drivers/mmc/omap_hsmmc.c
-++++ b/drivers/mmc/omap_hsmmc.c
-+@@ -197,6 +197,10 @@ static int mmc_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
-+ 	unsigned int flags, mmc_stat;
-+ 	ulong start;
-+ 
-++	/* Delay added before checking the status */
-++	if (cmd->cmdidx == MMC_CMD_SEND_STATUS)
-++		udelay(1); /* wait 1 us */
-++
-+ 	start = get_timer(0);
-+ 	while ((readl(&mmc_base->pstate) & DATI_MASK) == DATI_CMDDIS) {
-+ 		if (get_timer(0) - start > MAX_RETRY_MS) {
-diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
-index 5a19066..d776c38 100644
---- a/recipes-bsp/u-boot/u-boot_2011.12.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
-@@ -6,7 +6,7 @@ UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
- UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
- 
- PV = "2011.12"
--PR = "r0"
-+PR = "r1"
- 
- # No patches for other machines yet
- COMPATIBLE_MACHINE = "(beagleboard|pandaboard|hawkboard|am3517-evm|am37x-evm|omap3evm)"
-@@ -17,6 +17,7 @@ SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
-            file://2011.12/0003-beagleboard-add-support-for-scanning-loop-through-ex.patch \
-            file://2011.12/0004-omap4-common-mount-root-RO.patch \
-            file://2011.12/0005-omap4-common-use-ext4-by-default.patch \
-+           file://2011.12/U-Boot-OMAP-MMC-Add-delay-before-waiting-for-status.patch \
-           "
- 
- # v2011.12 tag
--- 
-1.7.6.4
+--Apple-Mail=_DB73A24C-0BAE-4935-A03B-0FC99F3E36BF
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
 
+Op 20 dec. 2011, om 19:16 heeft Christopher Larson het volgende =
+geschreven:
+
+> When a recipe is being parsed which will be skipped due to an =
+incompatible
+> machine, no local defconfig will exist for the current machine. It =
+seems that
+> the fetch localpath code doesn't error in that case, so we need to =
+check for
+> an IOError on the attempted open. Without this, we can hit parse =
+errors.
+>=20
+> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+> ---
+
+meta-ti$ git am -s /tmp/\[meta-ti\]\ \[PATCH\]\ linux.inc_\ don\'t\ =
+choke\ on\ missing\ defconfig\ in\ lzop\ dep.eml=20
+Applying: linux.inc: don't choke on missing defconfig in lzop dep
+error: patch failed: recipes-kernel/linux/linux.inc:269
+error: recipes-kernel/linux/linux.inc: patch does not apply
+Patch failed at 0001 linux.inc: don't choke on missing defconfig in lzop =
+dep
+When you have resolved this problem run "git am --resolved".
+If you would prefer to skip this patch, instead run "git am --skip".
+To restore the original branch and stop patching run "git am --abort".
+
+
+--Apple-Mail=_DB73A24C-0BAE-4935-A03B-0FC99F3E36BF
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG/MacGPG2 v2.0.17 (Darwin)
+
+iEYEARECAAYFAk79/wcACgkQMkyGM64RGpHDlgCeMaH907/RSeuCXpzyr1LLwta4
+Hc0AniqF7Kw18aCrowtOzBDiqv+SpnbT
+=wJS4
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_DB73A24C-0BAE-4935-A03B-0FC99F3E36BF--
