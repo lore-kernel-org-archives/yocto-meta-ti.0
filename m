@@ -1,26 +1,32 @@
-Return-Path: <schnitzeltony@gmx.de>
-Received: from mailout-de.gmx.net (mailout-de.gmx.net [213.165.64.23])
-	by yocto-www.yoctoproject.org (Postfix) with SMTP id 7DE2DE005B4
-	for <meta-ti@yoctoproject.org>; Sun,  1 Jan 2012 16:31:34 -0800 (PST)
-Received: (qmail invoked by alias); 02 Jan 2012 00:31:32 -0000
-Received: from p4FDF0DB6.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.223.13.182]
-	by mail.gmx.net (mp011) with SMTP; 02 Jan 2012 01:31:32 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19I4EkDE/tIvCwo5RZQZFOZpzVjh79TFDNl4OfuqE
-	PYpR0yrNg1TMrI
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
-To: meta-ti@yoctoproject.org
-Date: Mon, 2 Jan 2012 01:32:34 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-106.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <1325013184-25813-1-git-send-email-bigotp@acm.org>
-	<CA+M6bXn4OJPD=xJCo1-WDTJ5DxXN68644Qop4vjanq_M2tf83w@mail.gmail.com>
-In-Reply-To: <CA+M6bXn4OJPD=xJCo1-WDTJ5DxXN68644Qop4vjanq_M2tf83w@mail.gmail.com>
+Return-Path: <tom.rini@gmail.com>
+Received: from mail-qw0-f48.google.com (mail-qw0-f48.google.com
+	[209.85.216.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 18D93E006DD
+	for <meta-ti@yoctoproject.org>; Wed,  4 Jan 2012 10:47:37 -0800 (PST)
+Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
+	(1024-bit key; insecure key) header.i=@gmail.com;
+	x-dkim-adsp=none (insecure policy)
+Received: by qadc16 with SMTP id c16so13008446qad.14
+	for <meta-ti@yoctoproject.org>; Wed, 04 Jan 2012 10:47:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=kHg3dH11bvl5oUdHMuyL9Sdw9arBWwsgcC+JVQMvr40=;
+	b=NEe73upSKpuYe9UslyNmuPrZshRp2JDB6d0aIsckKfZzk+JlkxtNLowN5E+0C/7qce
+	1W8nNp0TA7VJhUJIZN4aGY9b1ftsl2mo+6xWpwOzE9B517lvF5lLDlwU6eN1s6bkZWdT
+	mRo23B3R8tW9YOCv1ERkRnm1BdSVt3F1yNuOM=
 MIME-Version: 1.0
-Message-Id: <201201020132.34526.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [PATCH] u-boot 2011.12rc1: OMAP MMC: Add delay before waiting for status
+Received: by 10.224.102.2 with SMTP id e2mr68573554qao.31.1325702856269; Wed,
+	04 Jan 2012 10:47:36 -0800 (PST)
+Received: by 10.229.94.72 with HTTP; Wed, 4 Jan 2012 10:47:36 -0800 (PST)
+In-Reply-To: <1324486741-23134-1-git-send-email-raj.khem@gmail.com>
+References: <1324486741-23134-1-git-send-email-raj.khem@gmail.com>
+Date: Wed, 4 Jan 2012 11:47:36 -0700
+Message-ID: <CA+M6bXk7vTW0M37D6_aRHp2eNrBjycw97SjSh27ipe-z5U69HQ@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH V2] u-boot_2011.09: Always use gnu ld for LD
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,157 +38,115 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jan 2012 00:31:35 -0000
-X-Groupsio-MsgNum: 317
-Content-Type: Multipart/Mixed;
-  boundary="Boundary-00=_isPAPCF2tAEtxVD"
-
---Boundary-00=_isPAPCF2tAEtxVD
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-
-On Tuesday, December 27, 2011 11:32:26 PM Tom Rini wrote:
-> On Tue, Dec 27, 2011 at 12:13 PM, Peter A. Bigot <bigotp@acm.org> wrote:
-> > From: "Peter A. Bigot" <bigotp@acm.org>
-> > 
-> > Pending upstream patch from http://patchwork.ozlabs.org/patch/132795/ is
-> > required to successfully boot on xM.
-> > 
-> > Signed-off-by: Peter A. Bigot <bigotp@acm.org>
-> 
-> I don't see the harm here so:
-> 
-> Acked-by: Tom Rini <tom.rini@gmail.com>
-> 
-> But I need to talk with Andreas a bit and see what's going on here as
-> I hadn't seen that problem here before.
-Some more background on this patch:
-
-For my two overos board revision 2 I got
-
-| reading uImage
-| mmc_send_cmd: timedout waiting for stat!
-|
-| 2860468 bytes read
-
-but the loaded kernel worked without issues. To invesigate, I added a message in 
-drivers/mmc/omap_hsmmc.c / mmc_send_cmd():
-
-	while (readl(&mmc_base->stat)) {
-		if (get_timer(0) - start > MAX_RETRY_MS) {
-			printf("%s: timedout waiting for stat!\n", __func__);
--->			printf("cmd->cmdidx: %u\n", cmd->cmdidx);
-			return TIMEOUT;
-		}
-	}
-
-This lead to
-
-| cmd->cmdidx: 13
-
-which is found in include/mmc.h:
-
-| #define MMC_CMD_SEND_STATUS 13. 
-
-This cmdidx is only set once in drivers/mmc/mmc.c / mmc_send_status(). On all 
-calls of mmc_send_status I added (see attachment)
-
-printf("mmc_send_status called from %s\n", __func__);
-
-and got:
-
-| reading uImage
-| mmc_send_status called from mmc_read_blocks
-| mmc_send_status called from mmc_read_blocks
-| mmc_send_status called from mmc_read_blocks
-| mmc_send_status called from mmc_read_blocks
-| mmc_send_status called from mmc_read_blocks
-| mmc_send_status called from mmc_read_blocks
-| mmc_send_status called from mmc_read_blocks
-| mmc_send_status called from mmc_read_blocks
-| mmc_send_status called from mmc_read_blocks
-| 
-| 3018844 bytes read
-
-This showed me (I recreated this here with a different kernel):
-1. In my case mmc_send_status is called only from mmc_read_blocks and < 10 times
-2. The error message disappeared!!
-
-So I added the delay as you see in the patch. I started with a delay of 10ms and 
-reduced it to minimum of 1us and the error did not occure anymore.
-
-Maybe the problem is depending on the SDcard type? At the moment I cannot tell 
-which card type I used because it is at the office. It seems Peter had same 
-issues: Which card type do you use?
-
-Happy new year
-
-Andreas
-
---Boundary-00=_isPAPCF2tAEtxVD
-Content-Type: text/x-patch;
-  charset="UTF-8";
-  name="0001-test-printf.patch"
+X-List-Received-Date: Wed, 04 Jan 2012 18:47:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
-	filename="0001-test-printf.patch"
 
-From a439a42b8e2e30d1db0dc85cc6c673b5e9c6f561 Mon Sep 17 00:00:00 2001
-From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmx.de>
-Date: Mon, 2 Jan 2012 01:04:13 +0100
-Subject: [PATCH] test printf
-MIME-Version: 1.0
-Content-Type: text/plain; charset=3DUTF-8
-Content-Transfer-Encoding: 8bit
+On Wed, Dec 21, 2011 at 9:59 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> u-boot wants GNU ld and cant link with gold
+> so when default linker is gold we make sure
+> that it still uses good old GNU ld
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Acked-by: Tom Rini <trini@ti.com>
+
+> ---
+> =A0.../u-boot/0001-config-Always-use-GNU-ld.patch =A0 =A0 | =A0 43 ++++++=
+++++++++++++++
+> =A0recipes-bsp/u-boot/u-boot_2011.09.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0=
+ =A03 +-
+> =A02 files changed, 45 insertions(+), 1 deletions(-)
+> =A0create mode 100644 recipes-bsp/u-boot/u-boot/0001-config-Always-use-GN=
+U-ld.patch
+>
+> diff --git a/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patc=
+h b/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
+> new file mode 100644
+> index 0000000..2564d1d
+> --- /dev/null
+> +++ b/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
+> @@ -0,0 +1,43 @@
+> +From dff01fc9346e6f4e3386536df309d2e78f03f3ee Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Wed, 21 Dec 2011 08:53:02 -0800
+> +Subject: [PATCH] config: Always use GNU ld
+> +
+> +This patch makes sure that we always use the GNU ld. u-boot uses certain
+> +construct e.g. OVERLAY which are not implemented in gold therefore it
+> +always needs GNU ld for linking. It works well if default linker in
+> +toolchain is GNU ld but in some cases we can have gold to be the
+> +default linker and also ship GNU ld but not as default in such cases
+> +its called $(PREFIX)ld.bfd, with this patch we make sure that if
+> +$(PREFIX)ld.bfd exists than we use that for our ld. This way it
+> +does not matter what the default ld is.
+> +
+> +Upstream-status: Pending
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + config.mk | =A0 =A04 +++-
+> + 1 files changed, 3 insertions(+), 1 deletions(-)
+> +
+> +diff --git a/config.mk b/config.mk
+> +index ddaa477..59b3e71 100644
+> +--- a/config.mk
+> ++++ b/config.mk
+> +@@ -126,11 +126,13 @@ cc-option =3D $(strip $(if $(findstring $1,$(CC_OP=
+TIONS)),$1,\
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 $(if $(call cc-option-sys,$1),$1,$2)))
+> + endif
+> +
+> ++exists_bfd_ld =3D $(shell if $(CROSS_COMPILE)ld.bfd -v >& /dev/null; \
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0then echo "$(1)"; else echo "$(2)"; fi; )
+> + #
+> + # Include the make variables (CC, etc...)
+> + #
+> + AS =A0 =A0=3D $(CROSS_COMPILE)as
+> +-LD =A0 =A0=3D $(CROSS_COMPILE)ld
+> ++LD =A0 =A0=3D $(call exists_bfd_ld, "$(CROSS_COMPILE)ld.bfd", "$(CROSS_=
+COMPILE)ld")
+> + CC =A0 =A0=3D $(CROSS_COMPILE)gcc
+> + CPP =A0 =3D $(CC) -E
+> + AR =A0 =A0=3D $(CROSS_COMPILE)ar
+> +--
+> +1.7.5.4
+> +
+> diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb b/recipes-bsp/u-boot/u-=
+boot_2011.09.bb
+> index 74c8518..4a9d3cb 100644
+> --- a/recipes-bsp/u-boot/u-boot_2011.09.bb
+> +++ b/recipes-bsp/u-boot/u-boot_2011.09.bb
+> @@ -1,6 +1,6 @@
+> =A0require u-boot.inc
+>
+> -PR =3D "r5"
+> +PR =3D "r6"
+>
+> =A0# SPL build
+> =A0UBOOT_BINARY =3D "u-boot.img"
+> @@ -32,6 +32,7 @@ SRC_URI =3D "git://www.denx.de/git/u-boot.git;protocol=
+=3Dgit \
+> =A0 =A0 =A0 =A0 =A0 =A0file://2011.09/0019-BeagleBoard-config-Really-swit=
+ch-to-ttyO2.patch \
+> =A0 =A0 =A0 =A0 =A0 =A0file://2011.09/0020-beagleboard-add-support-for-TC=
+T-Beacon-board.patch \
+> =A0 =A0 =A0 =A0 =A0 =A0file://2011.09/0021-beagleboard-add-support-for-sc=
+anning-loop-through-ex.patch \
+> + =A0 =A0 =A0 =A0 =A0 file://0001-config-Always-use-GNU-ld.patch \
+> =A0 =A0 =A0 =A0 =A0 =A0file://fw_env.config \
+> =A0 =A0 =A0 =A0 =A0 "
+>
+> --
+> 1.7.5.4
+>
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
 
-Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmx.de>
----
- drivers/mmc/mmc.c |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
 
-diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index 21665ec..eee32a4 100644
---- a/drivers/mmc/mmc.c
-+++ b/drivers/mmc/mmc.c
-@@ -307,6 +307,7 @@ mmc_write_blocks(struct mmc *mmc, ulong start, lbaint_t=
- blkcnt, const void*src)
- 		}
-=20
- 		/* Waiting for the ready status */
-+		printf("mmc_send_status called from %s\n", __func__);
- 		mmc_send_status(mmc, timeout);
- 	}
-=20
-@@ -375,6 +376,7 @@ int mmc_read_blocks(struct mmc *mmc, void *dst, ulong s=
-tart, lbaint_t blkcnt)
- 		}
-=20
- 		/* Waiting for the ready status */
-+		printf("mmc_send_status called from %s\n", __func__);
- 		mmc_send_status(mmc, timeout);
- 	}
-=20
-@@ -610,6 +612,7 @@ int mmc_switch(struct mmc *mmc, u8 set, u8 index, u8 va=
-lue)
- 	ret =3D mmc_send_cmd(mmc, &cmd, NULL);
-=20
- 	/* Waiting for the ready status */
-+	printf("mmc_send_status called from %s\n", __func__);
- 	mmc_send_status(mmc, timeout);
-=20
- 	return ret;
-@@ -918,6 +921,7 @@ int mmc_startup(struct mmc *mmc)
- 	err =3D mmc_send_cmd(mmc, &cmd, NULL);
-=20
- 	/* Waiting for the ready status */
-+	printf("mmc_send_status called from %s\n", __func__);
- 	mmc_send_status(mmc, timeout);
-=20
- 	if (err)
 --=20
-1.7.4.4
+Tom
 
-
---Boundary-00=_isPAPCF2tAEtxVD--
