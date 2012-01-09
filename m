@@ -1,30 +1,24 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-qw0-f48.google.com (mail-qw0-f48.google.com
-	[209.85.216.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 18D93E006DD
-	for <meta-ti@yoctoproject.org>; Wed,  4 Jan 2012 10:47:37 -0800 (PST)
-Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
-	(1024-bit key; insecure key) header.i=@gmail.com;
-	x-dkim-adsp=none (insecure policy)
-Received: by qadc16 with SMTP id c16so13008446qad.14
-	for <meta-ti@yoctoproject.org>; Wed, 04 Jan 2012 10:47:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=kHg3dH11bvl5oUdHMuyL9Sdw9arBWwsgcC+JVQMvr40=;
-	b=NEe73upSKpuYe9UslyNmuPrZshRp2JDB6d0aIsckKfZzk+JlkxtNLowN5E+0C/7qce
-	1W8nNp0TA7VJhUJIZN4aGY9b1ftsl2mo+6xWpwOzE9B517lvF5lLDlwU6eN1s6bkZWdT
-	mRo23B3R8tW9YOCv1ERkRnm1BdSVt3F1yNuOM=
-MIME-Version: 1.0
-Received: by 10.224.102.2 with SMTP id e2mr68573554qao.31.1325702856269; Wed,
-	04 Jan 2012 10:47:36 -0800 (PST)
-Received: by 10.229.94.72 with HTTP; Wed, 4 Jan 2012 10:47:36 -0800 (PST)
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 847F8E0127D
+	for <meta-ti@yoctoproject.org>; Mon,  9 Jan 2012 01:47:04 -0800 (PST)
+Received: by wgbdq11 with SMTP id dq11so1219017wgb.11
+	for <meta-ti@yoctoproject.org>; Mon, 09 Jan 2012 01:47:03 -0800 (PST)
+Received: by 10.180.90.136 with SMTP id bw8mr3422424wib.1.1326102423317;
+	Mon, 09 Jan 2012 01:47:03 -0800 (PST)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id ee6sm942621wib.4.2012.01.09.01.47.01
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 09 Jan 2012 01:47:01 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
 In-Reply-To: <1324486741-23134-1-git-send-email-raj.khem@gmail.com>
+Date: Mon, 9 Jan 2012 10:47:00 +0100
+Message-Id: <84DA4353-76E0-4AB7-9589-49B2BC259A9A@dominion.thruhere.net>
 References: <1324486741-23134-1-git-send-email-raj.khem@gmail.com>
-Date: Wed, 4 Jan 2012 11:47:36 -0700
-Message-ID: <CA+M6bXk7vTW0M37D6_aRHp2eNrBjycw97SjSh27ipe-z5U69HQ@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
+X-Mailer: Apple Mail (2.1251.1)
 Cc: meta-ti@yoctoproject.org
 Subject: Re: [PATCH V2] u-boot_2011.09: Always use gnu ld for LD
 X-BeenThere: meta-ti@yoctoproject.org
@@ -38,41 +32,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2012 18:47:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 09 Jan 2012 09:47:06 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 21, 2011 at 9:59 AM, Khem Raj <raj.khem@gmail.com> wrote:
+I suspect you did this for the beagleboard machine, which isn't using =
+2011.09 anymore. Do you still want this patch in?
+
+Op 21 dec. 2011, om 17:59 heeft Khem Raj het volgende geschreven:
+
 > u-boot wants GNU ld and cant link with gold
 > so when default linker is gold we make sure
 > that it still uses good old GNU ld
->
+>=20
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
-Acked-by: Tom Rini <trini@ti.com>
-
 > ---
-> =A0.../u-boot/0001-config-Always-use-GNU-ld.patch =A0 =A0 | =A0 43 ++++++=
-++++++++++++++
-> =A0recipes-bsp/u-boot/u-boot_2011.09.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0=
- =A03 +-
-> =A02 files changed, 45 insertions(+), 1 deletions(-)
-> =A0create mode 100644 recipes-bsp/u-boot/u-boot/0001-config-Always-use-GN=
-U-ld.patch
->
-> diff --git a/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patc=
-h b/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
+> .../u-boot/0001-config-Always-use-GNU-ld.patch     |   43 =
+++++++++++++++++++++
+> recipes-bsp/u-boot/u-boot_2011.09.bb               |    3 +-
+> 2 files changed, 45 insertions(+), 1 deletions(-)
+> create mode 100644 =
+recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
+>=20
+> diff --git =
+a/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch =
+b/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
 > new file mode 100644
 > index 0000000..2564d1d
 > --- /dev/null
 > +++ b/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
 > @@ -0,0 +1,43 @@
-> +From dff01fc9346e6f4e3386536df309d2e78f03f3ee Mon Sep 17 00:00:00 2001
+> +=46rom dff01fc9346e6f4e3386536df309d2e78f03f3ee Mon Sep 17 00:00:00 =
+2001
 > +From: Khem Raj <raj.khem@gmail.com>
 > +Date: Wed, 21 Dec 2011 08:53:02 -0800
 > +Subject: [PATCH] config: Always use GNU ld
 > +
-> +This patch makes sure that we always use the GNU ld. u-boot uses certain
+> +This patch makes sure that we always use the GNU ld. u-boot uses =
+certain
 > +construct e.g. OVERLAY which are not implemented in gold therefore it
 > +always needs GNU ld for linking. It works well if default linker in
 > +toolchain is GNU ld but in some cases we can have gold to be the
@@ -85,68 +82,66 @@ h b/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
 > +
 > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > +---
-> + config.mk | =A0 =A04 +++-
+> + config.mk |    4 +++-
 > + 1 files changed, 3 insertions(+), 1 deletions(-)
 > +
 > +diff --git a/config.mk b/config.mk
 > +index ddaa477..59b3e71 100644
 > +--- a/config.mk
 > ++++ b/config.mk
-> +@@ -126,11 +126,13 @@ cc-option =3D $(strip $(if $(findstring $1,$(CC_OP=
-TIONS)),$1,\
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 $(if $(call cc-option-sys,$1),$1,$2)))
+> +@@ -126,11 +126,13 @@ cc-option =3D $(strip $(if $(findstring =
+$1,$(CC_OPTIONS)),$1,\
+> + 		$(if $(call cc-option-sys,$1),$1,$2)))
 > + endif
-> +
-> ++exists_bfd_ld =3D $(shell if $(CROSS_COMPILE)ld.bfd -v >& /dev/null; \
-> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0then echo "$(1)"; else echo "$(2)"; fi; )
+> +=20
+> ++exists_bfd_ld =3D $(shell if $(CROSS_COMPILE)ld.bfd -v >& /dev/null; =
+\
+> ++		then echo "$(1)"; else echo "$(2)"; fi; )
 > + #
 > + # Include the make variables (CC, etc...)
 > + #
-> + AS =A0 =A0=3D $(CROSS_COMPILE)as
-> +-LD =A0 =A0=3D $(CROSS_COMPILE)ld
-> ++LD =A0 =A0=3D $(call exists_bfd_ld, "$(CROSS_COMPILE)ld.bfd", "$(CROSS_=
-COMPILE)ld")
-> + CC =A0 =A0=3D $(CROSS_COMPILE)gcc
-> + CPP =A0 =3D $(CC) -E
-> + AR =A0 =A0=3D $(CROSS_COMPILE)ar
-> +--
+> + AS	=3D $(CROSS_COMPILE)as
+> +-LD	=3D $(CROSS_COMPILE)ld
+> ++LD	=3D $(call exists_bfd_ld, "$(CROSS_COMPILE)ld.bfd", =
+"$(CROSS_COMPILE)ld")
+> + CC	=3D $(CROSS_COMPILE)gcc
+> + CPP	=3D $(CC) -E
+> + AR	=3D $(CROSS_COMPILE)ar
+> +--=20
 > +1.7.5.4
 > +
-> diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb b/recipes-bsp/u-boot/u-=
-boot_2011.09.bb
+> diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb =
+b/recipes-bsp/u-boot/u-boot_2011.09.bb
 > index 74c8518..4a9d3cb 100644
 > --- a/recipes-bsp/u-boot/u-boot_2011.09.bb
 > +++ b/recipes-bsp/u-boot/u-boot_2011.09.bb
 > @@ -1,6 +1,6 @@
-> =A0require u-boot.inc
->
+> require u-boot.inc
+>=20
 > -PR =3D "r5"
 > +PR =3D "r6"
->
-> =A0# SPL build
-> =A0UBOOT_BINARY =3D "u-boot.img"
-> @@ -32,6 +32,7 @@ SRC_URI =3D "git://www.denx.de/git/u-boot.git;protocol=
-=3Dgit \
-> =A0 =A0 =A0 =A0 =A0 =A0file://2011.09/0019-BeagleBoard-config-Really-swit=
-ch-to-ttyO2.patch \
-> =A0 =A0 =A0 =A0 =A0 =A0file://2011.09/0020-beagleboard-add-support-for-TC=
-T-Beacon-board.patch \
-> =A0 =A0 =A0 =A0 =A0 =A0file://2011.09/0021-beagleboard-add-support-for-sc=
-anning-loop-through-ex.patch \
-> + =A0 =A0 =A0 =A0 =A0 file://0001-config-Always-use-GNU-ld.patch \
-> =A0 =A0 =A0 =A0 =A0 =A0file://fw_env.config \
-> =A0 =A0 =A0 =A0 =A0 "
->
-> --
+>=20
+> # SPL build
+> UBOOT_BINARY =3D "u-boot.img"
+> @@ -32,6 +32,7 @@ SRC_URI =3D =
+"git://www.denx.de/git/u-boot.git;protocol=3Dgit \
+>            =
+file://2011.09/0019-BeagleBoard-config-Really-switch-to-ttyO2.patch \
+>            =
+file://2011.09/0020-beagleboard-add-support-for-TCT-Beacon-board.patch \
+>            =
+file://2011.09/0021-beagleboard-add-support-for-scanning-loop-through-ex.p=
+atch \
+> +           file://0001-config-Always-use-GNU-ld.patch \
+>            file://fw_env.config \
+>           "
+>=20
+> --=20
 > 1.7.5.4
->
+>=20
 > _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
 > https://lists.yoctoproject.org/listinfo/meta-ti
 
-
-
---=20
-Tom
 
