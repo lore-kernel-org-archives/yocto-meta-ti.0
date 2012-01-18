@@ -1,33 +1,33 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-lpp01m010-f48.google.com (mail-lpp01m010-f48.google.com
-	[209.85.215.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BE368E0030C
-	for <meta-ti@yoctoproject.org>; Sat, 14 Jan 2012 17:30:23 -0800 (PST)
+Received: from mail-iy0-f176.google.com (mail-iy0-f176.google.com
+	[209.85.210.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1C367E00307
+	for <meta-ti@yoctoproject.org>; Wed, 18 Jan 2012 09:27:29 -0800 (PST)
 Authentication-Results: yocto-www.yoctoproject.org; dkim=pass
 	(1024-bit key; insecure key) header.i=@gmail.com;
 	x-dkim-adsp=none (insecure policy)
-Received: by lagp5 with SMTP id p5so1346127lag.35
-	for <meta-ti@yoctoproject.org>; Sat, 14 Jan 2012 17:30:22 -0800 (PST)
+Received: by iagj37 with SMTP id j37so12393369iag.35
+	for <meta-ti@yoctoproject.org>; Wed, 18 Jan 2012 09:27:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=yV36EFq5uzTn9f9RbGZPxlTdIyUFOaxWzY6FwEgpI84=;
-	b=PLR2ZxwYfeIlG6bGu4ZrT/ehfsaNZhcdUTwdlGIQDi+6gc+4XX7ZWgUD3DaU9Udohd
-	5MHgikWRj74OsWYgoqS6JHUlrDdRaMYVISlXK4OI6uewxjTFfWMLxTCQcjN3qU0yY0BE
-	gplNv56QLYcRSAZgEKGNXhFwpnpL47TLFpkb4=
-Received: by 10.112.23.5 with SMTP id i5mr1613611lbf.92.1326591022397; Sat, 14
-	Jan 2012 17:30:22 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.152.115.1 with HTTP; Sat, 14 Jan 2012 17:29:51 -0800 (PST)
-In-Reply-To: <CA+M6bX=jC_u1U1FJPg2kjMZVavU+2q04Bt2s-6W1qzCBu+DCdw@mail.gmail.com>
-References: <1326399305-32405-1-git-send-email-raj.khem@gmail.com>
-	<CA+M6bX=jC_u1U1FJPg2kjMZVavU+2q04Bt2s-6W1qzCBu+DCdw@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=hEJ5DsCYnzpl97T2BN6sF+9+J5XqJQq4kzmp+QC9XD8=;
+	b=Qv4pGB2coTnyUBQHzlh7vf4N3jPNOcDfoQmc7IvmMuXbOjY0LANJbgdlGTXL2+3AFQ
+	FUf72sUvS2OkrQ1GxCYVRq6dNSHT+B46SjfFERKjAexX7tg9yS04YLBfGBM1m87/g2W7
+	vYUw+GDpO+r46WsNbtnWpPJf9Jw76iRf+G9qM=
+Received: by 10.50.178.106 with SMTP id cx10mr5391090igc.15.1326907648423;
+	Wed, 18 Jan 2012 09:27:28 -0800 (PST)
+Received: from leto.gateway.2wire.net
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net. [99.57.141.118])
+	by mx.google.com with ESMTPS id x18sm91189569ibi.2.2012.01.18.09.27.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 18 Jan 2012 09:27:27 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 14 Jan 2012 17:29:51 -0800
-Message-ID: <CAMKF1spqb5Dwv0w=Xk5vKGtPLgzGuKa+XqrAC_XbeMe03y1B5Q@mail.gmail.com>
-To: Tom Rini <tom.rini@gmail.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH V3] u-boot_2011.09, u-boot_2011.12: Always use gnu ld for LD
+To: meta-ti@yoctoproject.org
+Date: Wed, 18 Jan 2012 09:27:19 -0800
+Message-Id: <1326907639-31710-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.8.3
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH] linux-3.0: Fix perf compile failure with eglibc 2.15
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,17 +39,126 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Jan 2012 01:30:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 18 Jan 2012 17:27:29 -0000
 
-On Sat, Jan 14, 2012 at 1:35 PM, Tom Rini <tom.rini@gmail.com> wrote:
-> I suspect Wolfgang would NAK this as he's said before that you should
-> use the correct toolchain to build things. =C2=A0So perhaps Inappropriate
-> [integration] ?
+There is a conflict with eglibc headers since
+new headers added the defines that compiler.h
+was redefining without undefining them
 
-Although I feel that having a fall back with in u-boot is better
-option since you can avoid lot of support so probably no harm in
-proposing it. If its not accepted we can always keep it
-local.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...Undef-before-redefining-__attribute_const.patch |   28 ++++++++++++++++++++
+ ...Undef-before-redefining-__attribute_const.patch |   28 ++++++++++++++++++++
+ recipes-kernel/linux/linux-3.0/patch.sh            |    2 +-
+ recipes-kernel/linux/linux_3.0.bb                  |    4 ++-
+ 4 files changed, 60 insertions(+), 2 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-3.0/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
+ create mode 100644 recipes-kernel/linux/linux-3.0/misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
+
+diff --git a/recipes-kernel/linux/linux-3.0/0001-compiler.h-Undef-before-redefining-__attribute_const.patch b/recipes-kernel/linux/linux-3.0/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
+new file mode 100644
+index 0000000..92fe004
+--- /dev/null
++++ b/recipes-kernel/linux/linux-3.0/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
+@@ -0,0 +1,28 @@
++From 6f92ab6de9d8daeb575949bbbcbc7bcdcebc60af Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 5 Jan 2012 11:42:35 -0800
++Subject: [PATCH] compiler.h: Undef before redefining __attribute_const__
++
++This is required to avoid warnings like
++util/include/linux/compiler.h:8:0: error: "__attribute_const__" redefined [-Werror]
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ tools/perf/util/include/linux/compiler.h |    4 +++-
++ 1 files changed, 3 insertions(+), 1 deletions(-)
++
++--- a/tools/perf/util/include/linux/compiler.h
+++++ b/tools/perf/util/include/linux/compiler.h
++@@ -4,9 +4,11 @@
++ #ifndef __always_inline
++ #define __always_inline	inline
++ #endif
+++#undef __user
++ #define __user
+++#undef __attribute_const__
++ #define __attribute_const__
++-
+++#undef __used
++ #define __used		__attribute__((__unused__))
++ 
++ #endif
+diff --git a/recipes-kernel/linux/linux-3.0/misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch b/recipes-kernel/linux/linux-3.0/misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
+new file mode 100644
+index 0000000..92fe004
+--- /dev/null
++++ b/recipes-kernel/linux/linux-3.0/misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
+@@ -0,0 +1,28 @@
++From 6f92ab6de9d8daeb575949bbbcbc7bcdcebc60af Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 5 Jan 2012 11:42:35 -0800
++Subject: [PATCH] compiler.h: Undef before redefining __attribute_const__
++
++This is required to avoid warnings like
++util/include/linux/compiler.h:8:0: error: "__attribute_const__" redefined [-Werror]
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ tools/perf/util/include/linux/compiler.h |    4 +++-
++ 1 files changed, 3 insertions(+), 1 deletions(-)
++
++--- a/tools/perf/util/include/linux/compiler.h
+++++ b/tools/perf/util/include/linux/compiler.h
++@@ -4,9 +4,11 @@
++ #ifndef __always_inline
++ #define __always_inline	inline
++ #endif
+++#undef __user
++ #define __user
+++#undef __attribute_const__
++ #define __attribute_const__
++-
+++#undef __used
++ #define __used		__attribute__((__unused__))
++ 
++ #endif
+diff --git a/recipes-kernel/linux/linux-3.0/patch.sh b/recipes-kernel/linux/linux-3.0/patch.sh
+index 885db09..dc19a9e 100755
+--- a/recipes-kernel/linux/linux-3.0/patch.sh
++++ b/recipes-kernel/linux/linux-3.0/patch.sh
+@@ -13,7 +13,7 @@ git reset --hard ${TAG}
+ rm export -rf
+ 
+ previous=${TAG}
+-PATCHSET="pm-wip/voltdm pm-wip/cpufreq beagle madc sakoman sgx ulcd omap4"
++PATCHSET="pm-wip/voltdm pm-wip/cpufreq beagle madc sakoman sgx ulcd omap4 misc"
+ 
+ # apply patches
+ for patchset in ${PATCHSET} ; do
+diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
+index 2796304..70ca7cc 100644
+--- a/recipes-kernel/linux/linux_3.0.bb
++++ b/recipes-kernel/linux/linux_3.0.bb
+@@ -10,7 +10,7 @@ PV = "3.0.17"
+ SRCREV_pn-${PN} = "e9d23be2708477feeaec78e707c80441520c1ef6"
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ 
+ FILESPATH =. "${FILE_DIRNAME}/linux-3.0:${FILE_DIRNAME}/linux-3.0/${MACHINE}:"
+ 
+@@ -221,6 +221,8 @@ SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.gi
+             \
+             file://omap4/0001-OMAP-Fix-linking-error-in-twl-common.c-for-OMAP2-3-4.patch \
+             \
++            file://misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch \
++            \
+             file://defconfig"
+ 
+ SRC_URI_append_beagleboard = " file://logo_linux_clut224.ppm \
+-- 
+1.7.8.3
+
 
