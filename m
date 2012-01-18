@@ -1,23 +1,28 @@
-Return-Path: <denis@denix.org>
-Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
-	[206.46.173.1])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B9DEE00307
-	for <meta-ti@yoctoproject.org>; Wed, 18 Jan 2012 09:44:07 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.163.124.23])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LY0000OZ98T3J9X@vms173001.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 18 Jan 2012 11:43:51 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0D4BD200A1; Wed,
-	18 Jan 2012 12:43:40 -0500 (EST)
-Date: Wed, 18 Jan 2012 12:43:40 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Khem Raj <raj.khem@gmail.com>
-Message-id: <20120118174340.GE17838@denix.org>
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-lpp01m010-f48.google.com (mail-lpp01m010-f48.google.com
+	[209.85.215.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1B516E00307
+	for <meta-ti@yoctoproject.org>; Wed, 18 Jan 2012 10:49:47 -0800 (PST)
+Received: by lahl5 with SMTP id l5so2335260lah.35
+	for <meta-ti@yoctoproject.org>; Wed, 18 Jan 2012 10:49:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=EbBt2w76JBVGnliKvr4HSJ2LMLJPy2BRd60YjwjdW9c=;
+	b=o+kCBj14AK5oF2m4Wx9hKmQ+boqt+qS76evd2jpITYsZ6ddgVagEa0X69j6oC6b51N
+	S+H0rdJiLXjSizzt2gRhXGJIbXRtg41LPm7rV+kPX7R794c7e/ODfLWDkD9VSupCCIAZ
+	u8bcomwwTDkWYmsCQ53jmcsfwvrqxRnYl9UaU=
+Received: by 10.112.101.34 with SMTP id fd2mr5520308lbb.16.1326912586283; Wed,
+	18 Jan 2012 10:49:46 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.152.21.161 with HTTP; Wed, 18 Jan 2012 10:49:15 -0800 (PST)
+In-Reply-To: <20120118174340.GE17838@denix.org>
 References: <1326907639-31710-1-git-send-email-raj.khem@gmail.com>
-MIME-version: 1.0
-In-reply-to: <1326907639-31710-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20120118174340.GE17838@denix.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 18 Jan 2012 10:49:15 -0800
+Message-ID: <CAMKF1soF5BPGw0FLOg5MTSG4DwL17n-92Dc8K6PhoJAnfk6iKA@mail.gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>
 Cc: meta-ti@yoctoproject.org
 Subject: Re: [PATCH] linux-3.0: Fix perf compile failure with eglibc 2.15
 X-BeenThere: meta-ti@yoctoproject.org
@@ -31,146 +36,23 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2012 17:44:07 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 18 Jan 2012 18:49:48 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, Jan 18, 2012 at 09:27:19AM -0800, Khem Raj wrote:
-> There is a conflict with eglibc headers since
-> new headers added the defines that compiler.h
-> was redefining without undefining them
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  ...Undef-before-redefining-__attribute_const.patch |   28 ++++++++++++++++++++
->  ...Undef-before-redefining-__attribute_const.patch |   28 ++++++++++++++++++++
->  recipes-kernel/linux/linux-3.0/patch.sh            |    2 +-
->  recipes-kernel/linux/linux_3.0.bb                  |    4 ++-
->  4 files changed, 60 insertions(+), 2 deletions(-)
->  create mode 100644 recipes-kernel/linux/linux-3.0/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
->  create mode 100644 recipes-kernel/linux/linux-3.0/misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
-
-Khem,
-
-Do we need 2 copies of the patch - one in linux-3.0 and one in linux-3.0/misc? 
-I see the first copy is not being used...
-
-Also, does it need to be submitted upstream? Should there be an 
-Upstream-Status field?
-
--- 
-Denys
+On Wed, Jan 18, 2012 at 9:43 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+>
+> Khem,
+>
+> Do we need 2 copies of the patch - one in linux-3.0 and one in linux-3.0/misc?
+> I see the first copy is not being used...
 
 
-> diff --git a/recipes-kernel/linux/linux-3.0/0001-compiler.h-Undef-before-redefining-__attribute_const.patch b/recipes-kernel/linux/linux-3.0/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
-> new file mode 100644
-> index 0000000..92fe004
-> --- /dev/null
-> +++ b/recipes-kernel/linux/linux-3.0/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
-> @@ -0,0 +1,28 @@
-> +From 6f92ab6de9d8daeb575949bbbcbc7bcdcebc60af Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 5 Jan 2012 11:42:35 -0800
-> +Subject: [PATCH] compiler.h: Undef before redefining __attribute_const__
-> +
-> +This is required to avoid warnings like
-> +util/include/linux/compiler.h:8:0: error: "__attribute_const__" redefined [-Werror]
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + tools/perf/util/include/linux/compiler.h |    4 +++-
-> + 1 files changed, 3 insertions(+), 1 deletions(-)
-> +
-> +--- a/tools/perf/util/include/linux/compiler.h
-> ++++ b/tools/perf/util/include/linux/compiler.h
-> +@@ -4,9 +4,11 @@
-> + #ifndef __always_inline
-> + #define __always_inline	inline
-> + #endif
-> ++#undef __user
-> + #define __user
-> ++#undef __attribute_const__
-> + #define __attribute_const__
-> +-
-> ++#undef __used
-> + #define __used		__attribute__((__unused__))
-> + 
-> + #endif
-> diff --git a/recipes-kernel/linux/linux-3.0/misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch b/recipes-kernel/linux/linux-3.0/misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
-> new file mode 100644
-> index 0000000..92fe004
-> --- /dev/null
-> +++ b/recipes-kernel/linux/linux-3.0/misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
-> @@ -0,0 +1,28 @@
-> +From 6f92ab6de9d8daeb575949bbbcbc7bcdcebc60af Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 5 Jan 2012 11:42:35 -0800
-> +Subject: [PATCH] compiler.h: Undef before redefining __attribute_const__
-> +
-> +This is required to avoid warnings like
-> +util/include/linux/compiler.h:8:0: error: "__attribute_const__" redefined [-Werror]
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + tools/perf/util/include/linux/compiler.h |    4 +++-
-> + 1 files changed, 3 insertions(+), 1 deletions(-)
-> +
-> +--- a/tools/perf/util/include/linux/compiler.h
-> ++++ b/tools/perf/util/include/linux/compiler.h
-> +@@ -4,9 +4,11 @@
-> + #ifndef __always_inline
-> + #define __always_inline	inline
-> + #endif
-> ++#undef __user
-> + #define __user
-> ++#undef __attribute_const__
-> + #define __attribute_const__
-> +-
-> ++#undef __used
-> + #define __used		__attribute__((__unused__))
-> + 
-> + #endif
-> diff --git a/recipes-kernel/linux/linux-3.0/patch.sh b/recipes-kernel/linux/linux-3.0/patch.sh
-> index 885db09..dc19a9e 100755
-> --- a/recipes-kernel/linux/linux-3.0/patch.sh
-> +++ b/recipes-kernel/linux/linux-3.0/patch.sh
-> @@ -13,7 +13,7 @@ git reset --hard ${TAG}
->  rm export -rf
->  
->  previous=${TAG}
-> -PATCHSET="pm-wip/voltdm pm-wip/cpufreq beagle madc sakoman sgx ulcd omap4"
-> +PATCHSET="pm-wip/voltdm pm-wip/cpufreq beagle madc sakoman sgx ulcd omap4 misc"
->  
->  # apply patches
->  for patchset in ${PATCHSET} ; do
-> diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
-> index 2796304..70ca7cc 100644
-> --- a/recipes-kernel/linux/linux_3.0.bb
-> +++ b/recipes-kernel/linux/linux_3.0.bb
-> @@ -10,7 +10,7 @@ PV = "3.0.17"
->  SRCREV_pn-${PN} = "e9d23be2708477feeaec78e707c80441520c1ef6"
->  
->  # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
-> -MACHINE_KERNEL_PR_append = "a"
-> +MACHINE_KERNEL_PR_append = "b"
->  
->  FILESPATH =. "${FILE_DIRNAME}/linux-3.0:${FILE_DIRNAME}/linux-3.0/${MACHINE}:"
->  
-> @@ -221,6 +221,8 @@ SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.gi
->              \
->              file://omap4/0001-OMAP-Fix-linking-error-in-twl-common.c-for-OMAP2-3-4.patch \
->              \
-> +            file://misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch \
-> +            \
->              file://defconfig"
->  
->  SRC_URI_append_beagleboard = " file://logo_linux_clut224.ppm \
-> -- 
-> 1.7.8.3
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+ah the one in linux-3.0 is spurious
+>
+> Also, does it need to be submitted upstream? Should there be an
+> Upstream-Status field?
+>
+yes I will add that although its a git-am able patch so if I add
+that field you have to edit that if this patch is to sent upstream
+with other pull requests
 
