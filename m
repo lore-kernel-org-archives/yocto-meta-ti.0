@@ -1,25 +1,22 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43573E00307
-	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 08:40:43 -0800 (PST)
-Received: by wgbdq10 with SMTP id dq10so713768wgb.11
-	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 08:40:42 -0800 (PST)
-Received: by 10.180.19.42 with SMTP id b10mr5113661wie.13.1327077642382;
-	Fri, 20 Jan 2012 08:40:42 -0800 (PST)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id bj10sm34559520wib.9.2012.01.20.08.40.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 20 Jan 2012 08:40:41 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <CA+M6bXn-Rz=zrzAx0A6FVrRQrHr5uk2U17_UCPwOSC2FkN-HGg@mail.gmail.com>
-Date: Fri, 20 Jan 2012 17:40:39 +0100
-Message-Id: <9861DC2A-D4A4-4275-936B-260B601A1784@dominion.thruhere.net>
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F198BE00307
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 09:10:12 -0800 (PST)
+Received: (qmail 20534 invoked by uid 1003); 20 Jan 2012 17:10:11 -0000
+Received: from unknown (HELO ?192.168.1.104?)
+	(philip@opensdr.com@96.240.160.175)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	20 Jan 2012 17:10:11 -0000
+Message-ID: <4F199FF1.8090606@balister.org>
+Date: Fri, 20 Jan 2012 12:10:09 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+MIME-Version: 1.0
+To: Koen Kooi <koen@dominion.thruhere.net>
 References: <9F2249DF-2E56-4B4E-98CB-CE746690DCEC@dominion.thruhere.net>
-	<CA+M6bXn-Rz=zrzAx0A6FVrRQrHr5uk2U17_UCPwOSC2FkN-HGg@mail.gmail.com>
-To: Tom Rini <tom.rini@gmail.com>
-X-Mailer: Apple Mail (2.1251.1)
+In-Reply-To: <9F2249DF-2E56-4B4E-98CB-CE746690DCEC@dominion.thruhere.net>
+X-Enigmail-Version: 1.1.2
 Cc: meta-ti@yoctoproject.org
 Subject: Re: [RFC] u-boot recipe naming
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,38 +30,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2012 16:40:44 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 20 Jan 2012 17:10:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
+On 01/20/2012 07:41 AM, Koen Kooi wrote:
+> Hi,
+> 
+> We currently have a problem with other layers including their own version of u-boot_2011.12.bb which confuses bitbake. To avoid such hassle in the future I'm going to propose using the kernel naming scheme for u-boot recipes as well:
+> 
+> u-boot-denx_2011.12.bb -> u-boot from git.denx.de master + patches
+> u-boot-ti_git.bb -> u-boot from git.denx.de ti branch + patches
+> u-boot-psp-<soc>_git.bb -> u-boot from psp tree for $SoC + patches e.g. u-boot-psp-am18x_git.bb
 
-Op 20 jan. 2012, om 16:39 heeft Tom Rini het volgende geschreven:
+Since I kind of started the problem, some background....
 
-> On Fri, Jan 20, 2012 at 5:41 AM, Koen Kooi =
-<koen@dominion.thruhere.net> wrote:
->> Hi,
->>=20
->> We currently have a problem with other layers including their own =
-version of u-boot_2011.12.bb which confuses bitbake. To avoid such =
-hassle in the future I'm going to propose using the kernel naming scheme =
-for u-boot recipes as well:
->>=20
->> u-boot-denx_2011.12.bb -> u-boot from git.denx.de master + patches
->> u-boot-ti_git.bb -> u-boot from git.denx.de ti branch + patches
->> u-boot-psp-<soc>_git.bb -> u-boot from psp tree for $SoC + patches =
-e.g. u-boot-psp-am18x_git.bb
->>=20
->> This should avoid filename based conflicts between layers and make it =
-clearer which tree the recipe will be building.
->>=20
->> Thoughts/flames/opinions?
->=20
-> Works for me, but I do hope we need u-boot-ti_git.bb sparingly as I'm
-> just using that for requests for Albert to pull into u-boot-arm (it's
-> possible that stuff might stay in 'next' for a while, ie when merge
-> window closes but I don't want to lose stuff) so please make sure it's
-> marked as a rebasing git tree.
+I'm very nervous using a shared u-boot recipe to ship to customers,
+since there always seems to be some regression creeping in as other
+people fix things for their hardware (the recent L2 cache turn off for
+omap3 to fix omap4 booting comes to mind).
 
-It was only mean as an example to illustrate the namespace, if we don't =
-need it, it's one less recipe to support :)=
+So I want to control my u-boot with an iron fist!
+
+But, I tried to be lazy and not pollute the u-boot package namespace by
+calling the recipe u-boot-usrp-e1xx. Apparently this did not work so well :)
+
+Philip
+
+> 
+> This should avoid filename based conflicts between layers and make it clearer which tree the recipe will be building.
+> 
+> Thoughts/flames/opinions?
+> 
+> regards,
+> 
+> Koen
 
