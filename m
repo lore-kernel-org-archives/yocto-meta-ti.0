@@ -1,25 +1,27 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2634EE00B0A
-	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 06:20:16 -0800 (PST)
-Received: by wgbdq10 with SMTP id dq10so549388wgb.11
-	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 06:20:15 -0800 (PST)
-Received: by 10.180.14.72 with SMTP id n8mr52017568wic.22.1327069215700;
-	Fri, 20 Jan 2012 06:20:15 -0800 (PST)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id eb2sm33887826wib.0.2012.01.20.06.20.14
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 20 Jan 2012 06:20:15 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <201201201507.23879.schnitzeltony@gmx.de>
-Date: Fri, 20 Jan 2012 15:20:13 +0100
-Message-Id: <EC3AC66F-9A7F-4A18-911E-11AA2096C123@dominion.thruhere.net>
+Return-Path: <tom.rini@gmail.com>
+Received: from mail-qy0-f176.google.com (mail-qy0-f176.google.com
+	[209.85.216.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6E2EE01346
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 07:39:04 -0800 (PST)
+Received: by qcsp19 with SMTP id p19so433904qcs.35
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 07:39:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=u57oDrXbMmxBVoAJmbIfG6TzoqlVuTg0hxiI1JOiyNs=;
+	b=DfJFogAsdqFOSU0WNbkKF+oWIm6HgL+y/Y7jEnRt+mmLV94/ta/vtJSIeA9OrmNjfg
+	uBHGifvdJ3bsZMSDcnv5mEosVF1ZQQmMODMfsxu14DK8fsvqTYpelc8y30E79vjlgGPX
+	SmN5qed4mu+Arp6O9T7V9qmgTSKAPrK3L0DJg=
+MIME-Version: 1.0
+Received: by 10.229.106.35 with SMTP id v35mr12625322qco.84.1327073944071;
+	Fri, 20 Jan 2012 07:39:04 -0800 (PST)
+Received: by 10.229.98.149 with HTTP; Fri, 20 Jan 2012 07:39:03 -0800 (PST)
+In-Reply-To: <9F2249DF-2E56-4B4E-98CB-CE746690DCEC@dominion.thruhere.net>
 References: <9F2249DF-2E56-4B4E-98CB-CE746690DCEC@dominion.thruhere.net>
-	<201201201507.23879.schnitzeltony@gmx.de>
-To: =?iso-8859-1?Q?Andreas_M=FCller?= <Schnitzeltony@gmx.de>
-X-Mailer: Apple Mail (2.1251.1)
+Date: Fri, 20 Jan 2012 08:39:03 -0700
+Message-ID: <CA+M6bXn-Rz=zrzAx0A6FVrRQrHr5uk2U17_UCPwOSC2FkN-HGg@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
 Cc: meta-ti@yoctoproject.org
 Subject: Re: [RFC] u-boot recipe naming
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,45 +35,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2012 14:20:17 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 20 Jan 2012 15:39:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+On Fri, Jan 20, 2012 at 5:41 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> Hi,
+>
+> We currently have a problem with other layers including their own version of u-boot_2011.12.bb which confuses bitbake. To avoid such hassle in the future I'm going to propose using the kernel naming scheme for u-boot recipes as well:
+>
+> u-boot-denx_2011.12.bb -> u-boot from git.denx.de master + patches
+> u-boot-ti_git.bb -> u-boot from git.denx.de ti branch + patches
+> u-boot-psp-<soc>_git.bb -> u-boot from psp tree for $SoC + patches e.g. u-boot-psp-am18x_git.bb
+>
+> This should avoid filename based conflicts between layers and make it clearer which tree the recipe will be building.
+>
+> Thoughts/flames/opinions?
 
-Op 20 jan. 2012, om 15:07 heeft Andreas M=FCller het volgende =
-geschreven:
+Works for me, but I do hope we need u-boot-ti_git.bb sparingly as I'm
+just using that for requests for Albert to pull into u-boot-arm (it's
+possible that stuff might stay in 'next' for a while, ie when merge
+window closes but I don't want to lose stuff) so please make sure it's
+marked as a rebasing git tree.
 
-> On Friday, January 20, 2012 01:41:51 PM Koen Kooi wrote:
->> Hi,
->>=20
->> We currently have a problem with other layers including their own =
-version
->> of u-boot_2011.12.bb which confuses bitbake. To avoid such hassle in =
-the
->> future I'm going to propose using the kernel naming scheme for u-boot
->> recipes as well:
->>=20
->> u-boot-denx_2011.12.bb -> u-boot from git.denx.de master + patches
->> u-boot-ti_git.bb -> u-boot from git.denx.de ti branch + patches
->> u-boot-psp-<soc>_git.bb -> u-boot from psp tree for $SoC + patches =
-e.g.
->> u-boot-psp-am18x_git.bb
->>=20
->> This should avoid filename based conflicts between layers and make it
->> clearer which tree the recipe will be building.
->>=20
->> Thoughts/flames/opinions?
->>=20
->> regards,
->>=20
->> Koen
-> Additional: How about exceeding the u-boot.inc ( linux.inc too? ) =
-filenames by=20
-> the layer name they live in, so other layers don't need to copy & =
-paste (=20
-> happend yesterday after meta-ettus fallout - know it is worked around =
-now ).
-
-I would suggest moving those into meta-oe and making then raise priority =
-in meta-oe. Or just not using .inc files :(=
+-- 
+Tom
 
