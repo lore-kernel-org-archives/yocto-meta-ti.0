@@ -1,24 +1,26 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F198BE00307
-	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 09:10:12 -0800 (PST)
-Received: (qmail 20534 invoked by uid 1003); 20 Jan 2012 17:10:11 -0000
-Received: from unknown (HELO ?192.168.1.104?)
-	(philip@opensdr.com@96.240.160.175)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	20 Jan 2012 17:10:11 -0000
-Message-ID: <4F199FF1.8090606@balister.org>
-Date: Fri, 20 Jan 2012 12:10:09 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+Return-Path: <schnitzeltony@gmx.de>
+Received: from mailout-de.gmx.net (mailout-de.gmx.net [213.165.64.22])
+	by yocto-www.yoctoproject.org (Postfix) with SMTP id 0F0C4E0030F
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 15:01:44 -0800 (PST)
+Received: (qmail invoked by alias); 20 Jan 2012 23:01:43 -0000
+Received: from p4FDF004E.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.0.78]
+	by mail.gmx.net (mp032) with SMTP; 21 Jan 2012 00:01:43 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/PWslCYmPPdgA/CcwTG9qcsUUsj2BhbYe4y+OvZH
+	YW9gHWXMnDiLYK
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
+To: meta-ti@yoctoproject.org
+Date: Sat, 21 Jan 2012 00:03:09 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-106.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+References: <1327063792-2685-1-git-send-email-koen@dominion.thruhere.net>
+	<CA+M6bXkSKimGzpL+-W4JQ5095SiwJx7iukM8y-X8+icZjbPLHw@mail.gmail.com>
+In-Reply-To: <CA+M6bXkSKimGzpL+-W4JQ5095SiwJx7iukM8y-X8+icZjbPLHw@mail.gmail.com>
 MIME-Version: 1.0
-To: Koen Kooi <koen@dominion.thruhere.net>
-References: <9F2249DF-2E56-4B4E-98CB-CE746690DCEC@dominion.thruhere.net>
-In-Reply-To: <9F2249DF-2E56-4B4E-98CB-CE746690DCEC@dominion.thruhere.net>
-X-Enigmail-Version: 1.1.2
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [RFC] u-boot recipe naming
+Message-Id: <201201210003.10081.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: Re: [PATCH] u-boot 2011.12: fix L2 cache on non-omap4 platforms
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,39 +32,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2012 17:10:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 20 Jan 2012 23:01:45 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On 01/20/2012 07:41 AM, Koen Kooi wrote:
-> Hi,
+On Friday, January 20, 2012 04:40:43 PM Tom Rini wrote:
+> On Fri, Jan 20, 2012 at 5:49 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 > 
-> We currently have a problem with other layers including their own version of u-boot_2011.12.bb which confuses bitbake. To avoid such hassle in the future I'm going to propose using the kernel naming scheme for u-boot recipes as well:
+> Acked-by: Tom Rini <trini@ti.com>
 > 
-> u-boot-denx_2011.12.bb -> u-boot from git.denx.de master + patches
-> u-boot-ti_git.bb -> u-boot from git.denx.de ti branch + patches
-> u-boot-psp-<soc>_git.bb -> u-boot from psp tree for $SoC + patches e.g. u-boot-psp-am18x_git.bb
+> And to address Andreas' comment, for now the proper solution is still
+> under discussion so an isolated revert is fine here.
+I know - but the commit message of original patch said:
 
-Since I kind of started the problem, some background....
+| This was breaking the boot for OMAP4 with latest mainline
+| kernel. The solution is to disable external caches in
+| cleanup_before_linux(). With this fix kernel is booting again.
 
-I'm very nervous using a shared u-boot recipe to ship to customers,
-since there always seems to be some regression creeping in as other
-people fix things for their hardware (the recent L2 cache turn off for
-omap3 to fix omap4 booting comes to mind).
+Just wanted to avoid issues on OMAP4 because my feeling is that discussions on 
+this issue will last a while so that this patch will be more than a temporary 
+workaround and I do not see what's wrong with some #ifdeffing here.
 
-So I want to control my u-boot with an iron fist!
-
-But, I tried to be lazy and not pollute the u-boot package namespace by
-calling the recipe u-boot-usrp-e1xx. Apparently this did not work so well :)
-
-Philip
-
-> 
-> This should avoid filename based conflicts between layers and make it clearer which tree the recipe will be building.
-> 
-> Thoughts/flames/opinions?
-> 
-> regards,
-> 
-> Koen
+Andreas
 
