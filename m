@@ -1,31 +1,27 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-qy0-f181.google.com (mail-qy0-f181.google.com
-	[209.85.216.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85A85E01346
-	for <meta-ti@lists.yoctoproject.org>;
-	Fri, 20 Jan 2012 07:40:44 -0800 (PST)
-Received: by qcpx40 with SMTP id x40so432364qcp.26
-	for <meta-ti@lists.yoctoproject.org>;
-	Fri, 20 Jan 2012 07:40:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=sXmD77LpGu9+UZrEzq+Lp5l5o/09X862Qgek9lTpIvk=;
-	b=P5mBE7Y7uSd37vGC2PsGEo+HqM2pz6RIvnYYi1fOIp1+AAIAVqxtRuYSp/JwPAhOFt
-	DDV9mnYIqX5IQ3e7F2JVpIZtOnUpyGtKPMHSTCaZS8al1CcStYlKdfmPZ1wY4is3xczM
-	1kPnLX02PHGV03a/lVj0mKwZz55kGyv1MW3Xo=
-MIME-Version: 1.0
-Received: by 10.224.111.6 with SMTP id q6mr34649396qap.65.1327074043942; Fri,
-	20 Jan 2012 07:40:43 -0800 (PST)
-Received: by 10.229.98.149 with HTTP; Fri, 20 Jan 2012 07:40:43 -0800 (PST)
-In-Reply-To: <1327063792-2685-1-git-send-email-koen@dominion.thruhere.net>
-References: <1327063792-2685-1-git-send-email-koen@dominion.thruhere.net>
-Date: Fri, 20 Jan 2012 08:40:43 -0700
-Message-ID: <CA+M6bXkSKimGzpL+-W4JQ5095SiwJx7iukM8y-X8+icZjbPLHw@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [PATCH] u-boot 2011.12: fix L2 cache on non-omap4 platforms
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43573E00307
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 08:40:43 -0800 (PST)
+Received: by wgbdq10 with SMTP id dq10so713768wgb.11
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 08:40:42 -0800 (PST)
+Received: by 10.180.19.42 with SMTP id b10mr5113661wie.13.1327077642382;
+	Fri, 20 Jan 2012 08:40:42 -0800 (PST)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id bj10sm34559520wib.9.2012.01.20.08.40.41
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 20 Jan 2012 08:40:41 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <CA+M6bXn-Rz=zrzAx0A6FVrRQrHr5uk2U17_UCPwOSC2FkN-HGg@mail.gmail.com>
+Date: Fri, 20 Jan 2012 17:40:39 +0100
+Message-Id: <9861DC2A-D4A4-4275-936B-260B601A1784@dominion.thruhere.net>
+References: <9F2249DF-2E56-4B4E-98CB-CE746690DCEC@dominion.thruhere.net>
+	<CA+M6bXn-Rz=zrzAx0A6FVrRQrHr5uk2U17_UCPwOSC2FkN-HGg@mail.gmail.com>
+To: Tom Rini <tom.rini@gmail.com>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [RFC] u-boot recipe naming
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,17 +33,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2012 15:40:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 20 Jan 2012 16:40:44 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 20, 2012 at 5:49 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-Acked-by: Tom Rini <trini@ti.com>
+Op 20 jan. 2012, om 16:39 heeft Tom Rini het volgende geschreven:
 
-And to address Andreas' comment, for now the proper solution is still
-under discussion so an isolated revert is fine here.
+> On Fri, Jan 20, 2012 at 5:41 AM, Koen Kooi =
+<koen@dominion.thruhere.net> wrote:
+>> Hi,
+>>=20
+>> We currently have a problem with other layers including their own =
+version of u-boot_2011.12.bb which confuses bitbake. To avoid such =
+hassle in the future I'm going to propose using the kernel naming scheme =
+for u-boot recipes as well:
+>>=20
+>> u-boot-denx_2011.12.bb -> u-boot from git.denx.de master + patches
+>> u-boot-ti_git.bb -> u-boot from git.denx.de ti branch + patches
+>> u-boot-psp-<soc>_git.bb -> u-boot from psp tree for $SoC + patches =
+e.g. u-boot-psp-am18x_git.bb
+>>=20
+>> This should avoid filename based conflicts between layers and make it =
+clearer which tree the recipe will be building.
+>>=20
+>> Thoughts/flames/opinions?
+>=20
+> Works for me, but I do hope we need u-boot-ti_git.bb sparingly as I'm
+> just using that for requests for Albert to pull into u-boot-arm (it's
+> possible that stuff might stay in 'next' for a while, ie when merge
+> window closes but I don't want to lose stuff) so please make sure it's
+> marked as a rebasing git tree.
 
--- 
-Tom
+It was only mean as an example to illustrate the namespace, if we don't =
+need it, it's one less recipe to support :)=
 
