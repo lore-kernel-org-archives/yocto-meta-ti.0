@@ -1,25 +1,27 @@
-Return-Path: <schnitzeltony@gmx.de>
-Received: from mailout-de.gmx.net (mailout-de.gmx.net [213.165.64.22])
-	by yocto-www.yoctoproject.org (Postfix) with SMTP id 885A8E00B0A
-	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 06:10:06 -0800 (PST)
-Received: (qmail invoked by alias); 20 Jan 2012 14:10:03 -0000
-Received: from p5B0A175F.dip.t-dialin.net (EHLO localhost.localdomain)
-	[91.10.23.95]
-	by mail.gmx.net (mp032) with SMTP; 20 Jan 2012 15:10:03 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/I1oEVFrnIQq4p6CIunwCsVMBLHGq416mhpCDe42
-	v8aWytj+2VmebO
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
-To: meta-ti@yoctoproject.org
-Date: Fri, 20 Jan 2012 15:11:31 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-106.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-References: <1327063792-2685-1-git-send-email-koen@dominion.thruhere.net>
-In-Reply-To: <1327063792-2685-1-git-send-email-koen@dominion.thruhere.net>
-MIME-Version: 1.0
-Message-Id: <201201201511.31737.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: Re: [PATCH] u-boot 2011.12: fix L2 cache on non-omap4 platforms
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2634EE00B0A
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 06:20:16 -0800 (PST)
+Received: by wgbdq10 with SMTP id dq10so549388wgb.11
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 06:20:15 -0800 (PST)
+Received: by 10.180.14.72 with SMTP id n8mr52017568wic.22.1327069215700;
+	Fri, 20 Jan 2012 06:20:15 -0800 (PST)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id eb2sm33887826wib.0.2012.01.20.06.20.14
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 20 Jan 2012 06:20:15 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <201201201507.23879.schnitzeltony@gmx.de>
+Date: Fri, 20 Jan 2012 15:20:13 +0100
+Message-Id: <EC3AC66F-9A7F-4A18-911E-11AA2096C123@dominion.thruhere.net>
+References: <9F2249DF-2E56-4B4E-98CB-CE746690DCEC@dominion.thruhere.net>
+	<201201201507.23879.schnitzeltony@gmx.de>
+To: =?iso-8859-1?Q?Andreas_M=FCller?= <Schnitzeltony@gmx.de>
+X-Mailer: Apple Mail (2.1251.1)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [RFC] u-boot recipe naming
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,53 +33,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2012 14:10:07 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 Jan 2012 14:20:17 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Friday, January 20, 2012 01:49:52 PM Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  ...7-disable-L2-cache-in-cleanup_before_linu.patch |   25
-> ++++++++++++++++++++ recipes-bsp/u-boot/u-boot_2011.12.bb               | 
->   7 ++++-
->  2 files changed, 31 insertions(+), 1 deletions(-)
->  create mode 100644
-> recipes-bsp/u-boot/u-boot/2011.12/0001-Revert-armv7-disable-L2-cache-in-cl
-> eanup_before_linu.patch
-> 
-> diff --git
-> a/recipes-bsp/u-boot/u-boot/2011.12/0001-Revert-armv7-disable-L2-cache-in-
-> cleanup_before_linu.patch
-> b/recipes-bsp/u-boot/u-boot/2011.12/0001-Revert-armv7-disable-L2-cache-in-
-> cleanup_before_linu.patch new file mode 100644
-> index 0000000..ea94709
-> --- /dev/null
-> +++
-> b/recipes-bsp/u-boot/u-boot/2011.12/0001-Revert-armv7-disable-L2-cache-in-
-> cleanup_before_linu.patch @@ -0,0 +1,25 @@
-> +From 9ac047a112d8c6fe25e71a78946dbe9d707abd98 Mon Sep 17 00:00:00 2001
-> +From: Philip Balister <philip@opensdr.com>
-> +Date: Mon, 16 Jan 2012 09:45:11 -0500
-> +Subject: [PATCH] Revert "armv7: disable L2 cache in
-> cleanup_before_linux()" +
-> +This reverts commit dc7100f4080952798413fb63bb4134b22c57623a.
-> +---
-> + arch/arm/cpu/armv7/cpu.c |    1 -
-> + 1 files changed, 0 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/arch/arm/cpu/armv7/cpu.c b/arch/arm/cpu/armv7/cpu.c
-> +index 662c496..091e3e0 100644
-> +--- a/arch/arm/cpu/armv7/cpu.c
-> ++++ b/arch/arm/cpu/armv7/cpu.c
-> +@@ -65,7 +65,6 @@ int cleanup_before_linux(void)
-> + 	 * dcache_disable() in turn flushes the d-cache and disables MMU
-> + 	 */
-> + 	dcache_disable();
-> +-	v7_outer_cache_disable();
-How about some #ifdef OMAP3 ( or similar - did not check in detail ) here. As 
-far as I understood there was a reason for OMAP4 to disable cache.
 
-Andreas
+Op 20 jan. 2012, om 15:07 heeft Andreas M=FCller het volgende =
+geschreven:
+
+> On Friday, January 20, 2012 01:41:51 PM Koen Kooi wrote:
+>> Hi,
+>>=20
+>> We currently have a problem with other layers including their own =
+version
+>> of u-boot_2011.12.bb which confuses bitbake. To avoid such hassle in =
+the
+>> future I'm going to propose using the kernel naming scheme for u-boot
+>> recipes as well:
+>>=20
+>> u-boot-denx_2011.12.bb -> u-boot from git.denx.de master + patches
+>> u-boot-ti_git.bb -> u-boot from git.denx.de ti branch + patches
+>> u-boot-psp-<soc>_git.bb -> u-boot from psp tree for $SoC + patches =
+e.g.
+>> u-boot-psp-am18x_git.bb
+>>=20
+>> This should avoid filename based conflicts between layers and make it
+>> clearer which tree the recipe will be building.
+>>=20
+>> Thoughts/flames/opinions?
+>>=20
+>> regards,
+>>=20
+>> Koen
+> Additional: How about exceeding the u-boot.inc ( linux.inc too? ) =
+filenames by=20
+> the layer name they live in, so other layers don't need to copy & =
+paste (=20
+> happend yesterday after meta-ettus fallout - know it is worked around =
+now ).
+
+I would suggest moving those into meta-oe and making then raise priority =
+in meta-oe. Or just not using .inc files :(=
 
