@@ -1,23 +1,29 @@
-Return-Path: <schnitzeltony@gmx.de>
-Received: from mailout-de.gmx.net (mailout-de.gmx.net [213.165.64.22])
-	by yocto-www.yoctoproject.org (Postfix) with SMTP id F067FE0030F
-	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 17:39:58 -0800 (PST)
-Received: (qmail invoked by alias); 21 Jan 2012 01:39:55 -0000
-Received: from p4FDF004E.dip.t-dialin.net (EHLO localhost.localdomain)
-	[79.223.0.78]
-	by mail.gmx.net (mp008) with SMTP; 21 Jan 2012 02:39:55 +0100
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/ocA0QhkrorOjdxUWWEQNPEzkIWg4TBcoN404ANQ
-	28Z9D3tOII3xJJ
-From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
-To: meta-ti@yoctoproject.org
-Date: Sat, 21 Jan 2012 02:41:23 +0100
-User-Agent: KMail/1.13.7 (Linux/2.6.35.14-106.fc14.x86_64; KDE/4.6.5; x86_64; ;
-	)
-MIME-Version: 1.0
-Message-Id: <201201210241.24183.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-Subject: omap3-sgx-modules build is broken
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ww0-f42.google.com (mail-ww0-f42.google.com [74.125.82.42])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E4A3FE004D2
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 23:34:30 -0800 (PST)
+Received: by wgbgn7 with SMTP id gn7so97608wgb.5
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 23:34:29 -0800 (PST)
+Received: by 10.180.104.198 with SMTP id gg6mr695319wib.4.1327131269354;
+	Fri, 20 Jan 2012 23:34:29 -0800 (PST)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id di5sm17194088wib.3.2012.01.20.23.34.28
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 20 Jan 2012 23:34:28 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1251.1)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <201201210003.10081.schnitzeltony@gmx.de>
+Date: Sat, 21 Jan 2012 08:34:25 +0100
+Message-Id: <54EBC8C3-C012-4C02-9A82-61598E92D74C@dominion.thruhere.net>
+References: <1327063792-2685-1-git-send-email-koen@dominion.thruhere.net>
+	<CA+M6bXkSKimGzpL+-W4JQ5095SiwJx7iukM8y-X8+icZjbPLHw@mail.gmail.com>
+	<201201210003.10081.schnitzeltony@gmx.de>
+To: =?iso-8859-1?Q?Andreas_M=FCller?= <Schnitzeltony@gmx.de>
+X-Mailer: Apple Mail (2.1251.1)
+X-Gm-Message-State: ALoCoQnquj9wn7U6wR3+3kgJapegAcLrJy20Xpa25L68RHUuFS0HzW4kjDV+92OJBHJg3AvtElXN
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] u-boot 2011.12: fix L2 cache on non-omap4 platforms
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,34 +35,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jan 2012 01:39:59 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 21 Jan 2012 07:34:31 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi
 
-when building omap3-sgx-modules, build breaks on do_patch because source-dir is 
-almost empty. I checked a bit: seems ti-eula-unpack does not start the installer 
-properly. In log.do_unpack I see only log created by base_do_unpack:
+Op 21 jan. 2012, om 00:03 heeft Andreas M=FCller het volgende =
+geschreven:
 
-NOTE: Unpacking 
-/home/Superandy/data/Downloads/packets/dl/Graphics_SDK_setuplinux_4_03_00_02.bin 
-to /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/omap3-
-sgx-modules-1.6.16.3977-r115a/
-NOTE: Unpacking /home/Superandy/data/oe-core/sources/meta-ti/recipes-
-bsp/powervr-drivers/omap3-sgx-modules/Compile-fixes-for-38-kernel.patch to 
-/home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/omap3-sgx-
-modules-1.6.16.3977-r115a/
-NOTE: Unpacking /home/Superandy/data/oe-core/sources/meta-ti/recipes-
-bsp/powervr-drivers/omap3-sgx-modules/kernel-30.patch to /home/Superandy/tmp/oe-
-core-eglibc/work/overo-angstrom-linux-gnueabi/omap3-sgx-modules-1.6.16.3977-
-r115a/
+> On Friday, January 20, 2012 04:40:43 PM Tom Rini wrote:
+>> On Fri, Jan 20, 2012 at 5:49 AM, Koen Kooi =
+<koen@dominion.thruhere.net> wrote:
+>>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>>=20
+>> Acked-by: Tom Rini <trini@ti.com>
+>>=20
+>> And to address Andreas' comment, for now the proper solution is still
+>> under discussion so an isolated revert is fine here.
+> I know - but the commit message of original patch said:
+>=20
+> | This was breaking the boot for OMAP4 with latest mainline
+> | kernel. The solution is to disable external caches in
+> | cleanup_before_linux(). With this fix kernel is booting again.
+>=20
+> Just wanted to avoid issues on OMAP4 because my feeling is that =
+discussions on=20
+> this issue will last a while so that this patch will be more than a =
+temporary=20
+> workaround and I do not see what's wrong with some #ifdeffing here.
 
-I added some print here and there but I am afraid my python is too limited to 
-jump into this further.
+The ifdef is in the recipe itself:
 
-Regards
-
-Andreas
++# Non-omap4 platforms need outer cache turned on
++CACHEFIX =3D =
+"file://2011.12/0001-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.=
+patch"
++CACHEFIX_omap4 =3D ""=
 
