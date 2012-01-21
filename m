@@ -1,22 +1,23 @@
-Return-Path: <denis@denix.org>
-Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
-	[206.46.173.5])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86ED3E00307
-	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 16:35:02 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.163.124.23])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LY400KYSHM0K8R5@vms173005.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 20 Jan 2012 18:34:54 -0600 (CST)
-Message-id: <0LY400KYUHM0K8R5@vms173005.mailsrvcs.net>
-Received: from [25.235.186.214] (ma52336d0.tmodns.net [208.54.35.165])
-	by gandalf.denix.org (Postfix) with ESMTPA id C228B20033; Fri,
-	20 Jan 2012 19:34:44 -0500 (EST)
-To: schnitzeltony@gmx.de,meta-ti@yoctoproject.org
-From: "=?utf-8?B?RGVueXMgRG15dHJpeWVua28=?=" <denis@denix.org>
-Date: Fri, 20 Jan 2012 19:32:42 -0500
-MIME-version: 1.0
-Subject: Re: meta commits mailing list
+Return-Path: <schnitzeltony@gmx.de>
+Received: from mailout-de.gmx.net (mailout-de.gmx.net [213.165.64.22])
+	by yocto-www.yoctoproject.org (Postfix) with SMTP id F067FE0030F
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jan 2012 17:39:58 -0800 (PST)
+Received: (qmail invoked by alias); 21 Jan 2012 01:39:55 -0000
+Received: from p4FDF004E.dip.t-dialin.net (EHLO localhost.localdomain)
+	[79.223.0.78]
+	by mail.gmx.net (mp008) with SMTP; 21 Jan 2012 02:39:55 +0100
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/ocA0QhkrorOjdxUWWEQNPEzkIWg4TBcoN404ANQ
+	28Z9D3tOII3xJJ
+From: Andreas =?iso-8859-1?q?M=FCller?= <schnitzeltony@gmx.de>
+To: meta-ti@yoctoproject.org
+Date: Sat, 21 Jan 2012 02:41:23 +0100
+User-Agent: KMail/1.13.7 (Linux/2.6.35.14-106.fc14.x86_64; KDE/4.6.5; x86_64; ;
+	)
+MIME-Version: 1.0
+Message-Id: <201201210241.24183.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+Subject: omap3-sgx-modules build is broken
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -28,40 +29,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jan 2012 00:35:02 -0000
-Content-type: multipart/alternative; boundary="----=_Part_0_1327105962263"
+X-List-Received-Date: Sat, 21 Jan 2012 01:39:59 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-------=_Part_0_1327105962263
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
+Hi
 
-Tm90IHlldCwgSSdtIHdvcmtpbmcgb24gaXQuIAoKRGVueXMKCgotLS0tLSBSZXBseSBtZXNzYWdl
-IC0tLS0tCkZyb206ICJBbmRyZWFzIE3DvGxsZXIiIDxzY2huaXR6ZWx0b255QGdteC5kZT4KVG86
-IDxtZXRhLXRpQHlvY3RvcHJvamVjdC5vcmc+ClN1YmplY3Q6IFttZXRhLXRpXSBtZXRhIGNvbW1p
-dHMgbWFpbGluZyBsaXN0CkRhdGU6IEZyaSwgSmFuIDIwLCAyMDEyIDE5OjMyCgoKSGksCgpJcyB0
-aGVyZSBhIG1haWxpbmcgbGlzdCBtZXRhLXRpLWNvbW1pdHM/CgpBbmRyZWFzCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCm1ldGEtdGkgbWFpbGluZyBsaXN0
-Cm1ldGEtdGlAeW9jdG9wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnlvY3RvcHJvamVjdC5vcmcv
-bGlzdGluZm8vbWV0YS10aQoK
+when building omap3-sgx-modules, build breaks on do_patch because source-dir is 
+almost empty. I checked a bit: seems ti-eula-unpack does not start the installer 
+properly. In log.do_unpack I see only log created by base_do_unpack:
 
+NOTE: Unpacking 
+/home/Superandy/data/Downloads/packets/dl/Graphics_SDK_setuplinux_4_03_00_02.bin 
+to /home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/omap3-
+sgx-modules-1.6.16.3977-r115a/
+NOTE: Unpacking /home/Superandy/data/oe-core/sources/meta-ti/recipes-
+bsp/powervr-drivers/omap3-sgx-modules/Compile-fixes-for-38-kernel.patch to 
+/home/Superandy/tmp/oe-core-eglibc/work/overo-angstrom-linux-gnueabi/omap3-sgx-
+modules-1.6.16.3977-r115a/
+NOTE: Unpacking /home/Superandy/data/oe-core/sources/meta-ti/recipes-
+bsp/powervr-drivers/omap3-sgx-modules/kernel-30.patch to /home/Superandy/tmp/oe-
+core-eglibc/work/overo-angstrom-linux-gnueabi/omap3-sgx-modules-1.6.16.3977-
+r115a/
 
-------=_Part_0_1327105962263
-Content-Type: text/html;
-	charset=utf-8
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
+I added some print here and there but I am afraid my python is too limited to 
+jump into this further.
 
-Tm90IHlldCwgSSYjMzk7bSB3b3JraW5nIG9uIGl0LiA8YnI+PGJyPkRlbnlzPGJyPjxicj48YnI+
-LS0tLS0gUmVwbHkgbWVzc2FnZSAtLS0tLTxicj5Gcm9tOiAmcXVvdDtBbmRyZWFzIE3DvGxsZXIm
-cXVvdDsgJmx0O3NjaG5pdHplbHRvbnlAZ214LmRlJmd0Ozxicj5UbzogJmx0O21ldGEtdGlAeW9j
-dG9wcm9qZWN0Lm9yZyZndDs8YnI+U3ViamVjdDogW21ldGEtdGldIG1ldGEgY29tbWl0cyBtYWls
-aW5nIGxpc3Q8YnI+RGF0ZTogRnJpLCBKYW4gMjAsIDIwMTIgMTk6MzI8YnI+PGJyPjxicj5IaSw8
-YnI+PGJyPklzIHRoZXJlIGEgbWFpbGluZyBsaXN0IG1ldGEtdGktY29tbWl0cz88YnI+PGJyPkFu
-ZHJlYXM8YnI+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX188
-YnI+bWV0YS10aSBtYWlsaW5nIGxpc3Q8YnI+bWV0YS10aUB5b2N0b3Byb2plY3Qub3JnPGJyPmh0
-dHBzOi8vbGlzdHMueW9jdG9wcm9qZWN0Lm9yZy9saXN0aW5mby9tZXRhLXRpPGJyPjxicj4=
+Regards
 
+Andreas
 
-------=_Part_0_1327105962263--
