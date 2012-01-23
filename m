@@ -1,23 +1,26 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f51.google.com (mail-ww0-f51.google.com [74.125.82.51])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03181E01373
+Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
+	[74.125.82.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6FDE0E01376
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 23 Jan 2012 06:18:40 -0800 (PST)
-Received: by wgbdy1 with SMTP id dy1so2539157wgb.8
+	Mon, 23 Jan 2012 06:18:42 -0800 (PST)
+Received: by werb10 with SMTP id b10so2486358wer.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 23 Jan 2012 06:18:39 -0800 (PST)
-Received: by 10.180.104.5 with SMTP id ga5mr14463636wib.21.1327328319308;
-	Mon, 23 Jan 2012 06:18:39 -0800 (PST)
+	Mon, 23 Jan 2012 06:18:41 -0800 (PST)
+Received: by 10.216.140.15 with SMTP id d15mr3749808wej.16.1327328321501;
+	Mon, 23 Jan 2012 06:18:41 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id bj10sm13174013wib.9.2012.01.23.06.18.37
+	by mx.google.com with ESMTPS id m8sm20448744wia.11.2012.01.23.06.18.40
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 23 Jan 2012 06:18:38 -0800 (PST)
+	Mon, 23 Jan 2012 06:18:40 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@lists.yoctoproject.org
-Date: Mon, 23 Jan 2012 15:18:22 +0100
-Message-Id: <1327328309-15956-1-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 23 Jan 2012 15:18:23 +0100
+Message-Id: <1327328309-15956-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH 0/7] SGX recipe rework
+In-Reply-To: <1327328309-15956-1-git-send-email-koen@dominion.thruhere.net>
+References: <1327328309-15956-1-git-send-email-koen@dominion.thruhere.net>
+Subject: [PATCH 1/7] libgles-omap3: split support for ES revisions into subpackages where possible
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,39 +32,98 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2012 14:18:41 -0000
+X-List-Received-Date: Mon, 23 Jan 2012 14:18:43 -0000
 
-This series reworks the packaging of the sgx recipes in the following ways:
+This allows deinstalling ES revisions which aren't wanted on your target.
 
-1) all the es 'versions' are now subpackaged in to PN-foo-es<version and PN-foo RRECOMMENDS all of them
-2) the DRI WS is now packaged as well
-3) For recent SDKs the X11 WS is packaged, but nothing is done to shuffle the base libraries around
-4) all the PN-foo subpackages remove /etc/powervr-esrev to trigger the relocation code
-5) the initscript doesn't depend in the the 'initscripts' package anymore making use work in a systemd world as well as a sysvinit world. 
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ recipes-graphics/libgles/libgles-omap3.inc |   57 +++++++++++++++++++++++++---
+ 1 files changed, 51 insertions(+), 6 deletions(-)
 
-The most noticable effect is that user can now deinstall (e.g. using BAD_RECOMMENDATIONS) all the es 'versions' they don't need saving a few megabytes of space.
-
-Koen Kooi (7):
-  libgles-omap3: split support for ES revisions into subpackages where
-    possible
-  libgles-omap3: merge in updates from arago
-  libgles-omap3: package DRI windowing system as well
-  libgles-omap3: install X11 windowing system for newer SDK releases as
-    well
-  libgles-omap3: adjust packaging for all windowing systems to remove
-    the magic esrev file
-  omap3-sgx-modules: add 4.05.00.03
-  libgles-omap3: add 4.05.00.03
-
- ....16.3977.bb => omap3-sgx-modules_4.05.00.03.bb} |   12 +-
- recipes-graphics/libgles/libgles-omap3.inc         |  119 +++++++++++++++++---
- recipes-graphics/libgles/libgles-omap3/cputype     |   10 ++-
- recipes-graphics/libgles/libgles-omap3/rc.pvr      |   29 ++++-
- ...3_4.03.00.02.bb => libgles-omap3_4.05.00.03.bb} |   14 +--
- 5 files changed, 145 insertions(+), 39 deletions(-)
- copy recipes-bsp/powervr-drivers/{omap3-sgx-modules_1.6.16.3977.bb => omap3-sgx-modules_4.05.00.03.bb} (81%)
- copy recipes-graphics/libgles/{libgles-omap3_4.03.00.02.bb => libgles-omap3_4.05.00.03.bb} (68%)
-
+diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
+index 4459bef..dc0185a 100644
+--- a/recipes-graphics/libgles/libgles-omap3.inc
++++ b/recipes-graphics/libgles/libgles-omap3.inc
+@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
+ # 'TSPA.txt' might not be the best file to md5sum
+ LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
+ 
+-PR = "r17"
++PR = "r18"
+ 
+ COMPATIBLE_MACHINE = "(omap3|ti816x)"
+ 
+@@ -219,19 +219,64 @@ PACKAGES =+ "${PN}-rawdemos \
+ PACKAGES += "xserver-kdrive-powervrsgx \
+              ${PN}-tests "
+ 
++# Package the base libraries per silicon revision
++PACKAGES =+ "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
++RRECOMMENDS_${PN} += "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
++FILES_${PN}-es2 = "${libdir}/ES2*/* ${bindir}/ES2*/*"
++FILES_${PN}-es3 = "${libdir}/ES3*/* ${bindir}/ES3*/*"
++FILES_${PN}-es5 = "${libdir}/ES5*/* ${bindir}/ES5*/*"
++FILES_${PN}-es6 = "${libdir}/ES6*/* ${bindir}/ES6*/*"
++FILES_${PN}-es8 = "${libdir}/ES8*/* ${bindir}/ES8*/*"
++
+ PACKAGES =+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl ${PN}-linuxfbwsegl ${PN}-x11wsegl"
++FILES_${PN}-blitwsegl = "${libdir}/libpvrPVR2D_BLITWSEGL.so.*"
++FILES_${PN}-flipwsegl = "${libdir}/libpvrPVR2D_FLIPWSEGL.so.*"
++FILES_${PN}-frontwsegl = "${libdir}/libpvrPVR2D_FRONTWSEGL.so.*"
++FILES_${PN}-linuxfbwsegl = "${libdir}/libpvrPVR2D_LINUXFBWSEGL.so.*"
++FILES_${PN}-x11wsegl = "${libdir}/libpvrPVR2D_X11WSEGL.so*"
+ 
+-FILES_${PN}-blitwsegl = "${libdir}/libpvrPVR2D_BLITWSEGL.so.* ${libdir}/*/libpvrPVR2D_BLITWSEGL.so.*"
+-FILES_${PN}-flipwsegl = "${libdir}/libpvrPVR2D_FLIPWSEGL.so.* ${libdir}/*/libpvrPVR2D_FLIPWSEGL.so.*"
+-FILES_${PN}-frontwsegl = "${libdir}/libpvrPVR2D_FRONTWSEGL.so.* ${libdir}/*/libpvrPVR2D_FRONTWSEGL.so.*"
+-FILES_${PN}-linuxfbwsegl = "${libdir}/libpvrPVR2D_LINUXFBWSEGL.so.* ${libdir}/*/libpvrPVR2D_LINUXFBWSEGL.so.*"
+-FILES_${PN}-x11wsegl = "${libdir}/libpvrPVR2D_X11WSEGL.so* ${libdir}/*/libpvrPVR2D_X11WSEGL.so*"
++PACKAGES =+ "${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-flipwsegl-es2 ${PN}-flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8 ${PN}-frontwsegl-es2 ${PN}-frontwsegl-es3 ${PN}-frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8 ${PN}-linuxfbwsegl-es2 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8 ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8"
++FILES_${PN}-blitwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_BLITWSEGL.so.*"
++FILES_${PN}-blitwsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_BLITWSEGL.so.*"
++FILES_${PN}-blitwsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_BLITWSEGL.so.*"
++FILES_${PN}-blitwsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_BLITWSEGL.so.*"
++FILES_${PN}-blitwsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_BLITWSEGL.so.*"
++RRECOMMENDS_${PN}-blitwsegl = " ${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8"
++
++FILES_${PN}-flipwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_FLIPWSEGL.so.*"
++FILES_${PN}-flipwsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_FLIPWSEGL.so.*"
++FILES_${PN}-flipwsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_FLIPWSEGL.so.*"
++FILES_${PN}-flipwsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_FLIPWSEGL.so.*"
++FILES_${PN}-flipwsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_FLIPWSEGL.so.*"
++RRECOMMENDS_${PN}-flipwsegl = " ${PN}-flipwsegl-es2 ${PN}-flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8"
++
++FILES_${PN}-frontwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_FRONTWSEGL.so.*"
++FILES_${PN}-frontwsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_FRONTWSEGL.so.*"
++FILES_${PN}-frontwsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_FRONTWSEGL.so.*"
++FILES_${PN}-frontwsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_FRONTWSEGL.so.*"
++FILES_${PN}-frontwsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_FRONTWSEGL.so.*"
++RRECOMMENDS_${PN}-frontwsegl = " ${PN}-frontwsegl-es2 ${PN}-frontwsegl-es3 ${PN}-frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8"
++
++FILES_${PN}-linuxfbwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_LINUXFBWSEGL.so.*"
++FILES_${PN}-linuxfbwsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_LINUXFBWSEGL.so.*"
++FILES_${PN}-linuxfbwsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_LINUXFBWSEGL.so.*"
++FILES_${PN}-linuxfbwsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_LINUXFBWSEGL.so.*"
++FILES_${PN}-linuxfbwsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_LINUXFBWSEGL.so.*"
++RRECOMMENDS_${PN}-linuxfbwsegl = " ${PN}-linuxfbwsegl-es2 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8"
++
++FILES_${PN}-x11wsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_X11WSEGL.so.*"
++FILES_${PN}-x11wsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_X11WSEGL.so.*"
++FILES_${PN}-x11wsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_X11WSEGL.so.*"
++FILES_${PN}-x11wsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_X11WSEGL.so.*"
++FILES_${PN}-x11wsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_X11WSEGL.so.*"
++RRECOMMENDS_${PN}-x11wsegl = " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8"
+ 
+ CONFFILES_${PN} = "${sysconfdir}/powervr.ini"
+ # 'cputype' uses /etc/init.d/functions
+ RRECOMMENDS_${PN} += "initscripts"
+ 
+ FILES_${PN} = "${sysconfdir} ${libdir}/lib*.so.* ${libdir}/ES*/* ${bindir}/pvrsrvinit ${bindir}/cputype ${bindir}/*/*"
++
+ FILES_xserver-kdrive-powervrsgx = "${bindir}/Xsgx"
+ FILES_${PN}-tests = "${bindir}/*"
+ FILES_${PN}-dbg = "${libdir}/.debug/* ${bindir}/.debug/* \
 -- 
 1.7.2.5
 
