@@ -1,27 +1,25 @@
-Return-Path: <denis@denix.org>
-Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
-	[206.46.173.15])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 96BCEE0030B
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ww0-f51.google.com (mail-ww0-f51.google.com [74.125.82.51])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 99132E004D2
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 23 Jan 2012 12:02:28 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.163.124.23])
-	by vms173015.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LY90066AOZEQQ10@vms173015.mailsrvcs.net> for
-	meta-ti@lists.yoctoproject.org; Mon, 23 Jan 2012 14:02:12 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id E1E2920333; Mon,
-	23 Jan 2012 15:02:01 -0500 (EST)
-Date: Mon, 23 Jan 2012 15:02:01 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-id: <20120123200201.GK17838@denix.org>
-References: <1327328309-15956-1-git-send-email-koen@dominion.thruhere.net>
-	<1327328309-15956-6-git-send-email-koen@dominion.thruhere.net>
-MIME-version: 1.0
-In-reply-to: <1327328309-15956-6-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [PATCH 5/7] libgles-omap3: adjust packaging for all windowing systems to remove the magic esrev file
+	Tue, 24 Jan 2012 01:24:42 -0800 (PST)
+Received: by wgbdy1 with SMTP id dy1so3405404wgb.8
+	for <meta-ti@lists.yoctoproject.org>;
+	Tue, 24 Jan 2012 01:24:41 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.180.96.3 with SMTP id do3mr2166069wib.1.1327397080897;
+	Tue, 24 Jan 2012 01:24:40 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id l6sm6259731wiv.11.2012.01.24.01.24.39
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 24 Jan 2012 01:24:40 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: meta-ti@lists.yoctoproject.org
+Date: Tue, 24 Jan 2012 10:24:28 +0100
+Message-Id: <1327397074-15731-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+X-Gm-Message-State: ALoCoQlrJ5eWfHJUrYcvN3iwdI01PbcG+nAtjZ/Bda/qvJjeDT89oS+HYQkUCdbEJm+KMzGzBote
+Subject: [PATCH 1/7] libgles-omap3: split support for ES revisions into subpackages where possible
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,85 +31,100 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2012 20:02:28 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 24 Jan 2012 09:24:43 -0000
 
-On Mon, Jan 23, 2012 at 03:18:27PM +0100, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  recipes-graphics/libgles/libgles-omap3.inc |   29 ++++++++++++++++++++++++++-
->  1 files changed, 27 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-> index 289b7d5..722ac13 100644
-> --- a/recipes-graphics/libgles/libgles-omap3.inc
-> +++ b/recipes-graphics/libgles/libgles-omap3.inc
-> @@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
->  # 'TSPA.txt' might not be the best file to md5sum
->  LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
->  
-> -PR = "r21"
-> +PR = "r22"
->  
->  COMPATIBLE_MACHINE = "(omap3|ti816x|ti33x)"
->  
-> @@ -325,6 +325,7 @@ INSANE_SKIP_${PN}-flipwsegl = "ldflags"
->  INSANE_SKIP_${PN}-frontwsegl = "ldflags"
->  INSANE_SKIP_${PN}-linuxfbwsegl = "ldflags"
->  INSANE_SKIP_${PN}-x11wsegl = "ldflags dev-so"
-> +INSANE_SKIP_${PN}-driwsegl = "ldflags dev-so"
+This allows deinstalling ES revisions which aren't wanted on your target.
 
-While we can argue this entire patch can be squashed with #3, the above line 
-definitely belongs to #3, when split this way...
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ recipes-graphics/libgles/libgles-omap3.inc |   59 ++++++++++++++++++++++++---
+ 1 files changed, 52 insertions(+), 7 deletions(-)
 
+diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
+index 4459bef..dc0185a 100644
+--- a/recipes-graphics/libgles/libgles-omap3.inc
++++ b/recipes-graphics/libgles/libgles-omap3.inc
+@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
+ # 'TSPA.txt' might not be the best file to md5sum
+ LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
+ 
+-PR = "r17"
++PR = "r18"
+ 
+ COMPATIBLE_MACHINE = "(omap3|ti816x)"
+ 
+@@ -219,19 +219,64 @@ PACKAGES =+ "${PN}-rawdemos \
+ PACKAGES += "xserver-kdrive-powervrsgx \
+              ${PN}-tests "
+ 
+-PACKAGES =+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl ${PN}-linuxfbwsegl ${PN}-x11wsegl"
++# Package the base libraries per silicon revision
++PACKAGES =+ "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
++RRECOMMENDS_${PN} += "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
++FILES_${PN}-es2 = "${libdir}/ES2*/* ${bindir}/ES2*/*"
++FILES_${PN}-es3 = "${libdir}/ES3*/* ${bindir}/ES3*/*"
++FILES_${PN}-es5 = "${libdir}/ES5*/* ${bindir}/ES5*/*"
++FILES_${PN}-es6 = "${libdir}/ES6*/* ${bindir}/ES6*/*"
++FILES_${PN}-es8 = "${libdir}/ES8*/* ${bindir}/ES8*/*"
+ 
+-FILES_${PN}-blitwsegl = "${libdir}/libpvrPVR2D_BLITWSEGL.so.* ${libdir}/*/libpvrPVR2D_BLITWSEGL.so.*"
+-FILES_${PN}-flipwsegl = "${libdir}/libpvrPVR2D_FLIPWSEGL.so.* ${libdir}/*/libpvrPVR2D_FLIPWSEGL.so.*"
+-FILES_${PN}-frontwsegl = "${libdir}/libpvrPVR2D_FRONTWSEGL.so.* ${libdir}/*/libpvrPVR2D_FRONTWSEGL.so.*"
+-FILES_${PN}-linuxfbwsegl = "${libdir}/libpvrPVR2D_LINUXFBWSEGL.so.* ${libdir}/*/libpvrPVR2D_LINUXFBWSEGL.so.*"
+-FILES_${PN}-x11wsegl = "${libdir}/libpvrPVR2D_X11WSEGL.so* ${libdir}/*/libpvrPVR2D_X11WSEGL.so*"
++PACKAGES =+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl ${PN}-linuxfbwsegl ${PN}-x11wsegl"
++FILES_${PN}-blitwsegl = "${libdir}/libpvrPVR2D_BLITWSEGL.so.*"
++FILES_${PN}-flipwsegl = "${libdir}/libpvrPVR2D_FLIPWSEGL.so.*"
++FILES_${PN}-frontwsegl = "${libdir}/libpvrPVR2D_FRONTWSEGL.so.*"
++FILES_${PN}-linuxfbwsegl = "${libdir}/libpvrPVR2D_LINUXFBWSEGL.so.*"
++FILES_${PN}-x11wsegl = "${libdir}/libpvrPVR2D_X11WSEGL.so*"
++
++PACKAGES =+ "${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-flipwsegl-es2 ${PN}-flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8 ${PN}-frontwsegl-es2 ${PN}-frontwsegl-es3 ${PN}-frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8 ${PN}-linuxfbwsegl-es2 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8 ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8"
++FILES_${PN}-blitwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_BLITWSEGL.so.*"
++FILES_${PN}-blitwsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_BLITWSEGL.so.*"
++FILES_${PN}-blitwsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_BLITWSEGL.so.*"
++FILES_${PN}-blitwsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_BLITWSEGL.so.*"
++FILES_${PN}-blitwsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_BLITWSEGL.so.*"
++RRECOMMENDS_${PN}-blitwsegl = " ${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8"
++
++FILES_${PN}-flipwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_FLIPWSEGL.so.*"
++FILES_${PN}-flipwsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_FLIPWSEGL.so.*"
++FILES_${PN}-flipwsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_FLIPWSEGL.so.*"
++FILES_${PN}-flipwsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_FLIPWSEGL.so.*"
++FILES_${PN}-flipwsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_FLIPWSEGL.so.*"
++RRECOMMENDS_${PN}-flipwsegl = " ${PN}-flipwsegl-es2 ${PN}-flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8"
++
++FILES_${PN}-frontwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_FRONTWSEGL.so.*"
++FILES_${PN}-frontwsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_FRONTWSEGL.so.*"
++FILES_${PN}-frontwsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_FRONTWSEGL.so.*"
++FILES_${PN}-frontwsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_FRONTWSEGL.so.*"
++FILES_${PN}-frontwsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_FRONTWSEGL.so.*"
++RRECOMMENDS_${PN}-frontwsegl = " ${PN}-frontwsegl-es2 ${PN}-frontwsegl-es3 ${PN}-frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8"
++
++FILES_${PN}-linuxfbwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_LINUXFBWSEGL.so.*"
++FILES_${PN}-linuxfbwsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_LINUXFBWSEGL.so.*"
++FILES_${PN}-linuxfbwsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_LINUXFBWSEGL.so.*"
++FILES_${PN}-linuxfbwsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_LINUXFBWSEGL.so.*"
++FILES_${PN}-linuxfbwsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_LINUXFBWSEGL.so.*"
++RRECOMMENDS_${PN}-linuxfbwsegl = " ${PN}-linuxfbwsegl-es2 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8"
++
++FILES_${PN}-x11wsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_X11WSEGL.so.*"
++FILES_${PN}-x11wsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_X11WSEGL.so.*"
++FILES_${PN}-x11wsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_X11WSEGL.so.*"
++FILES_${PN}-x11wsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_X11WSEGL.so.*"
++FILES_${PN}-x11wsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_X11WSEGL.so.*"
++RRECOMMENDS_${PN}-x11wsegl = " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8"
+ 
+ CONFFILES_${PN} = "${sysconfdir}/powervr.ini"
+ # 'cputype' uses /etc/init.d/functions
+ RRECOMMENDS_${PN} += "initscripts"
+ 
+ FILES_${PN} = "${sysconfdir} ${libdir}/lib*.so.* ${libdir}/ES*/* ${bindir}/pvrsrvinit ${bindir}/cputype ${bindir}/*/*"
++
+ FILES_xserver-kdrive-powervrsgx = "${bindir}/Xsgx"
+ FILES_${PN}-tests = "${bindir}/*"
+ FILES_${PN}-dbg = "${libdir}/.debug/* ${bindir}/.debug/* \
 -- 
-Denys
+1.7.2.5
 
-
->  INSANE_SKIP_${PN}-tests = "ldflags"
->  INSANE_SKIP_xserver-kdrive-powervrsgx = "ldflags"
->  
-> @@ -339,8 +340,32 @@ INITSCRIPT_PARAMS = "start 30 5 2 . stop 40 0 1 6 ."
->  
->  # Append to update-rc.d postinst
->  pkg_postinst_${PN}_append() {
-> -rm -f /etc/powervr-esrev
-> +rm -f ${sysconfdir}/powervr-esrev
->  
->  ln -sf /usr/lib/libXdmcp.so.6.0.0 /usr/lib/libXdmcp.so.0 
->  ln -sf /usr/lib/libXau.so.6.0.0 /usr/lib/libXau.so.0
->  }
-> +
-> +pkg_postinst_${PN}-blitwsegl() {
-> +rm -f ${sysconfdir}/powervr-esrev
-> +}
-> +
-> +pkg_postinst_${PN}-flipwsegl() {
-> +rm -f ${sysconfdir}/powervr-esrev
-> +}
-> +
-> +pkg_postinst_${PN}-frontwsegl() {
-> +rm -f ${sysconfdir}/powervr-esrev
-> +}
-> +pkg_postinst_${PN}-linuxfbwsegl() {
-> +rm -f ${sysconfdir}/powervr-esrev
-> +}
-> +
-> +pkg_postinst_${PN}-x11wsegl() {
-> +rm -f ${sysconfdir}/powervr-esrev
-> +}
-> +
-> +pkg_postinst_${PN}-driwsegl() {
-> +rm -f ${sysconfdir}/powervr-esrev
-> +}
-> +
-> -- 
-> 1.7.2.5
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
 
