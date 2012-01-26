@@ -1,38 +1,30 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 739E8E0030F
-	for <meta-ti@lists.yoctoproject.org>;
-	Thu, 26 Jan 2012 12:37:50 -0800 (PST)
+Return-Path: <wmills@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 28B36E00592
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 14:44:07 -0800 (PST)
 Received: from dlep26.itg.ti.com ([157.170.170.121])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q0QKblRo015676;
-	Thu, 26 Jan 2012 14:37:47 -0600
-Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q0QKbkCP006037;
-	Thu, 26 Jan 2012 14:37:46 -0600 (CST)
-Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
-	DFLE71.ent.ti.com ([fe80::29f6:72ad:a62e:2025%21]) with mapi id
-	14.01.0323.003; Thu, 26 Jan 2012 14:37:47 -0600
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Philip Balister <philip@balister.org>, Koen Kooi
-	<koen@dominion.thruhere.net>
-Thread-Topic: [meta-ti] [PATCH] linux-ti33x-psp 3.1: add dto patch to fix
-	problems with various sd cards
-Thread-Index: AQHM3GoNZjhVh95970KTZi3oMo75K5YfG5MA
-Date: Thu, 26 Jan 2012 20:37:46 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1010BF9A59C@DLEE12.ent.ti.com>
-References: <1327599532-31609-1-git-send-email-koen@dominion.thruhere.net>
-	<CA+M6bXmFYnz62unD5Mq5-3cbTmk4rpuySETP7Kd134F_k+qXvw@mail.gmail.com>
-	<F17AE0E2-A005-4000-A122-3C7BA4393875@dominion.thruhere.net>
-	<4F21B90B.9020103@balister.org>
-In-Reply-To: <4F21B90B.9020103@balister.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q0QMi6sb024825
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 16:44:06 -0600
+Received: from DFLE70.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q0QMi6L4008073
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 16:44:06 -0600 (CST)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle70.ent.ti.com
+	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
+	Thu, 26 Jan 2012 16:44:06 -0600
+Received: from gtwmills.gt.design.ti.com (gtwmills.gt.design.ti.com
+	[158.218.100.52])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
+	q0QMi5ug005464;	Thu, 26 Jan 2012 16:44:05 -0600
+Message-ID: <4F21D735.5000303@ti.com>
+Date: Thu, 26 Jan 2012 17:44:05 -0500
+From: William Mills <wmills@ti.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.18) Gecko/20110617 Thunderbird/3.1.11
 MIME-Version: 1.0
-Cc: Ben Hilburn <ben@ettus.com>,
-	"meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
-Subject: Re: [PATCH] linux-ti33x-psp 3.1: add dto patch to fix	problems with various sd cards
+To: Chase Maupin <Chase.Maupin@ti.com>
+References: <1327603585-5599-1-git-send-email-Chase.Maupin@ti.com>
+In-Reply-To: <1327603585-5599-1-git-send-email-Chase.Maupin@ti.com>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 1/3] matrix-gui-browser: port from arago overlay
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,70 +36,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2012 20:37:50 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 26 Jan 2012 22:44:07 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Philip,
+On 01/26/2012 01:46 PM, Chase Maupin wrote:
+> * This package adds a simple web browser GUI application with
+>    no decorations used to display matrix on the local display.
+> * Ported from arago overlay
+>
 
-We use the dto=3D14 setting in the AMSDK from TI because this calculation o=
-nly seems to work 50% of the time.  So I would be find with ditching the ca=
-lculation altogether.
+Sorry for hijacking your patch Chase but I have serious big picture 
+questions about all this stuff going into meta-ti and especially all 
+into one layer.
 
-Sincerely,
-Chase Maupin
-Software Applications
-ARM MPU
-e-mail: chase.maupin@ti.com
-phone: (214) 567-2950
+meta-ti is suppose to be the TI specific stuff people need to support 
+their platforms regardless of what layer stack they are using.  I 
+understand we are not layer stack independent yet but that needs to be 
+the goal.  Certainly adding a whole bunch of non-HW related stuff into 
+the same layer is not going to move us any closer.
 
-For support:
-Forums - http://community.ti.com/forums/
-Wiki - http://wiki.davincidsp.com/=20
+When we talked about where matrix belonged before there was debate about 
+meta-oe or meta-arago.  When did I miss the memo that put it into meta-ti??
 
-
-> -----Original Message-----
-> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> bounces@yoctoproject.org] On Behalf Of Philip Balister
-> Sent: Thursday, January 26, 2012 2:35 PM
-> To: Koen Kooi
-> Cc: Ben Hilburn; meta-ti@lists.yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH] linux-ti33x-psp 3.1: add dto patch
-> to fix problems with various sd cards
->=20
-> On 01/26/2012 01:12 PM, Koen Kooi wrote:
-> >
-> > Op 26 jan. 2012, om 19:01 heeft Tom Rini het volgende geschreven:
-> >
-> >> On Thu, Jan 26, 2012 at 10:38 AM, Koen Kooi
-> <koen@dominion.thruhere.net> wrote:
-> >>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> >>
-> >> I know the patch isn't yours but should we perhaps go in and
-> make the
-> >> patch more obvious?  The function we're patching does a lot of
-> >> guesswork to find 'dto' and then we just say 'use the max'.  Why
-> not
-> >> also go rip out that logic?
-> >
-> > I was having the same conversation with Philip Balister on IRC
-> just now :) It seems that this patch is being used by various TI
-> customers to magically fix things so we do need to come up with a
-> proper solution.
->=20
-> Basically, we are pissed of with really annoying SD card failures.
-> (This
-> is an understatement, the problem cost me a lot of sleep at ELCE)
->=20
-> Unless someone has a better solution, we should rip out the hairy
-> calculation and set dto to 14 al the time and send the patch
-> upstream.
-> Does anyone see any reason not to do this?
->=20
-> Philip
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
