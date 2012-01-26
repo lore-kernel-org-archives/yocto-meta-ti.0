@@ -1,30 +1,26 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1CC84E00596
-	for <meta-ti@lists.yoctoproject.org>;
-	Thu, 26 Jan 2012 10:12:20 -0800 (PST)
-Received: by werb10 with SMTP id b10so703225wer.26
-	for <meta-ti@lists.yoctoproject.org>;
-	Thu, 26 Jan 2012 10:12:19 -0800 (PST)
-Received: by 10.216.52.198 with SMTP id e48mr1596494wec.18.1327601539629;
-	Thu, 26 Jan 2012 10:12:19 -0800 (PST)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id em13sm6728155wid.7.2012.01.26.10.12.17
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 26 Jan 2012 10:12:18 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <CA+M6bXmFYnz62unD5Mq5-3cbTmk4rpuySETP7Kd134F_k+qXvw@mail.gmail.com>
-Date: Thu, 26 Jan 2012 19:12:11 +0100
-Message-Id: <F17AE0E2-A005-4000-A122-3C7BA4393875@dominion.thruhere.net>
-References: <1327599532-31609-1-git-send-email-koen@dominion.thruhere.net>
-	<CA+M6bXmFYnz62unD5Mq5-3cbTmk4rpuySETP7Kd134F_k+qXvw@mail.gmail.com>
-To: Tom Rini <tom.rini@gmail.com>
-X-Mailer: Apple Mail (2.1251.1)
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [PATCH] linux-ti33x-psp 3.1: add dto patch to fix problems with various sd cards
+Return-Path: <chase.maupin@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0DFDBE00597
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 10:46:35 -0800 (PST)
+Received: from dbdp20.itg.ti.com ([172.24.170.38])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q0QIkWIP012392
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 12:46:33 -0600
+Received: from DBDE71.ent.ti.com (localhost [127.0.0.1])
+	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id q0QIkVuE006167
+	for <meta-ti@yoctoproject.org>; Fri, 27 Jan 2012 00:16:32 +0530 (IST)
+Received: from dbdp31.itg.ti.com (172.24.170.98) by DBDE71.ent.ti.com
+	(172.24.170.149) with Microsoft SMTP Server id 14.1.323.3;
+	Fri, 27 Jan 2012 00:16:31 +0530
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id q0QIkSQG011887;
+	Fri, 27 Jan 2012 00:16:30 +0530 (IST)
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 26 Jan 2012 12:46:23 -0600
+Message-ID: <1327603585-5599-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Subject: [PATCH 1/3] matrix-gui-browser: port from arago overlay
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,27 +32,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2012 18:12:21 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 26 Jan 2012 18:46:35 -0000
+Content-Type: text/plain
 
+* This package adds a simple web browser GUI application with
+  no decorations used to display matrix on the local display.
+* Ported from arago overlay
 
-Op 26 jan. 2012, om 19:01 heeft Tom Rini het volgende geschreven:
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ recipes-ti/matrix/matrix-gui-browser_2.0.bb |   25 +++++++++++++++++++++++++
+ 1 files changed, 25 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-ti/matrix/matrix-gui-browser_2.0.bb
 
-> On Thu, Jan 26, 2012 at 10:38 AM, Koen Kooi =
-<koen@dominion.thruhere.net> wrote:
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->=20
-> I know the patch isn't yours but should we perhaps go in and make the
-> patch more obvious?  The function we're patching does a lot of
-> guesswork to find 'dto' and then we just say 'use the max'.  Why not
-> also go rip out that logic?
+diff --git a/recipes-ti/matrix/matrix-gui-browser_2.0.bb b/recipes-ti/matrix/matrix-gui-browser_2.0.bb
+new file mode 100644
+index 0000000..602487b
+--- /dev/null
++++ b/recipes-ti/matrix/matrix-gui-browser_2.0.bb
+@@ -0,0 +1,25 @@
++DESCRIPTION = "Simple Qt web display using webkit"
++HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix_browser"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://main.cpp;beginline=9;endline=37;md5=884b90f5bf0d711fe32c4f04b5276496"
++SECTION = "multimedia"
++PRIORITY = "optional"
++
++# Make sure that QT font libraries have been installed
++RDEPENDS += "qt4-embedded-fonts"
++
++PR = "r0"
++
++SRCREV = "db2e6b10e5a14358b6120a4a28de2f9d591bc55c"
++BRANCH ?= "master"
++
++SRC_URI = "git://gitorious.org/matrix-gui-v2/matrix_browser.git;protocol=git;branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
++
++inherit qt4e
++
++do_install() {
++	install -d ${D}/${bindir}
++	install -m 0755 ${S}/matrix_browser ${D}/${bindir}
++}
+-- 
+1.7.0.4
 
-I was having the same conversation with Philip Balister on IRC just now =
-:) It seems that this patch is being used by various TI customers to =
-magically fix things so we do need to come up with a proper solution.
-
-regards,
-
-Koen=
 
