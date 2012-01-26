@@ -1,26 +1,27 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7DF4EE0030F
-	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 11:35:39 -0800 (PST)
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q0QJZbx9001295
-	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 13:35:38 -0600
-Received: from DBDE71.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id q0QJZb8X011360
-	for <meta-ti@yoctoproject.org>; Fri, 27 Jan 2012 01:05:37 +0530 (IST)
-Received: from dbdp31.itg.ti.com (172.24.170.98) by DBDE71.ent.ti.com
-	(172.24.170.149) with Microsoft SMTP Server id 14.1.323.3;
-	Fri, 27 Jan 2012 01:05:36 +0530
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id q0QJZZ6F016451;
-	Fri, 27 Jan 2012 01:05:35 +0530 (IST)
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 26 Jan 2012 13:35:33 -0600
-Message-ID: <1327606533-29940-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Subject: [PATCH] am-sysinfo: port to latest version from arago
+Return-Path: <denis@denix.org>
+Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
+	[206.46.173.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A778E0030F
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 11:39:54 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.163.124.23])
+	by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LYF00A0P7YBK1C1@vms173009.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 26 Jan 2012 13:39:53 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 28757201F9; Thu,
+	26 Jan 2012 14:39:46 -0500 (EST)
+Date: Thu, 26 Jan 2012 14:39:46 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: "Maupin, Chase" <chase.maupin@ti.com>
+Message-id: <20120126193946.GB18244@denix.org>
+References: <1327604455-4778-1-git-send-email-Chase.Maupin@ti.com>
+	<20120126190949.GA18244@denix.org>
+	<7D46E86EC0A8354091174257B2FED1010BF9A18A@DLEE12.ent.ti.com>
+MIME-version: 1.0
+In-reply-to: <7D46E86EC0A8354091174257B2FED1010BF9A18A@DLEE12.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] arm-benchmarks: port of am-benchmarks from arago
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,88 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2012 19:35:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 26 Jan 2012 19:39:54 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-* Ported am-sysinfo from arago
-* relocated from recipes-bsp/ti to recipes-ti/am-sysinfo
-* Bumped the PR
+On Thu, Jan 26, 2012 at 07:28:01PM +0000, Maupin, Chase wrote:
+> > > +do_install() {
+> > > +	export ARCH=${TUNE_PKGARCH}
+> > > +	make DESTDIR=${D} install
+> > > +}
+> > > +
+> > > +RDEPENDS += matrix-gui-armbenchmarks-demos
+> > 
+> > Do we really need to RDEPENDS on matrix?
+> 
+> It just pulls in the matrix information, but this by itself does not pull in 
+> full matrix.
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
- recipes-bsp/ti/am-sysinfo_svn.bb        |   23 -----------------------
- recipes-ti/am-sysinfo/am-sysinfo_svn.bb |   31 +++++++++++++++++++++++++++++++
- 2 files changed, 31 insertions(+), 23 deletions(-)
- delete mode 100644 recipes-bsp/ti/am-sysinfo_svn.bb
- create mode 100644 recipes-ti/am-sysinfo/am-sysinfo_svn.bb
+Isn't it a bit reverse? Can arm-benchmarks be used on its own?
 
-diff --git a/recipes-bsp/ti/am-sysinfo_svn.bb b/recipes-bsp/ti/am-sysinfo_svn.bb
-deleted file mode 100644
-index d4f8740..0000000
---- a/recipes-bsp/ti/am-sysinfo_svn.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--DESCRIPTION = "AM SysInfo"
--HOMEPAGE = "https://gforge.ti.com/gf/project/am_sysinfo/"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://mem_util/mem_util.c;beginline=1;endline=37;md5=8aa8e714ab729cfe8177298af8a5a25d"
--
--SECTION = "system"
--
--SRCREV = "5"
--PV = "1.0"
--PR = "r1+svnr${SRCPV}"
--
--SRC_URI = "svn://gforge.ti.com/svn/am_sysinfo/;module=trunk;proto=https;user=anonymous;pswd=''"
--
--S = "${WORKDIR}/trunk"
--
--do_compile() {
--	${CC} ${CFLAGS} ${LDFLAGS} -o mem_util/mem_util mem_util/mem_util.c
--}
--
--do_install() {
--	install -d ${D}/${bindir}
--	install -m 0755 ${S}/mem_util/mem_util ${D}/${bindir}
--}
-diff --git a/recipes-ti/am-sysinfo/am-sysinfo_svn.bb b/recipes-ti/am-sysinfo/am-sysinfo_svn.bb
-new file mode 100644
-index 0000000..4797c93
---- /dev/null
-+++ b/recipes-ti/am-sysinfo/am-sysinfo_svn.bb
-@@ -0,0 +1,31 @@
-+DESCRIPTION = "AM SysInfo"
-+HOMEPAGE = "https://gforge.ti.com/gf/project/am_sysinfo/"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://mem_util/mem_util.c;beginline=1;endline=37;md5=8aa8e714ab729cfe8177298af8a5a25d"
-+
-+SECTION = "system"
-+
-+PACKAGE_STRIP = no
-+
-+SRCREV = "16"
-+PV = "1.0"
-+PR = "r2+svnr${SRCPV}"
-+
-+SRC_URI = "svn://gforge.ti.com/svn/am_sysinfo/;module=trunk;proto=https;user=anonymous;pswd=''"
-+
-+S = "${WORKDIR}/trunk"
-+
-+do_compile() {
-+	${CC} ${CFLAGS} ${LDFLAGS} -o mem_util/mem_util mem_util/mem_util.c
-+    ${CC} ${CFLAGS} ${LDFLAGS} -o oprofile_example/Debug/signal_parent oprofile_example/signal_parent.c
-+    ${CC} ${CFLAGS} -DUSE_SIGNALS ${LDFLAGS} -o oprofile_example/Debug1/signal_parent.opt oprofile_example/signal_parent.c
-+}
-+
-+do_install() {
-+	install -d ${D}/${bindir}
-+	install -m 0755 ${S}/mem_util/mem_util ${D}/${bindir}
-+    install -m 0755 ${S}/oprofile_example/Debug/signal_parent ${D}/${bindir}
-+    install -m 0755 ${S}/oprofile_example/Debug1/signal_parent.opt ${D}/${bindir}
-+}
-+
-+RDEPENDS += "matrix-gui-settings-demos"
 -- 
-1.7.0.4
-
+Denys
 
