@@ -1,28 +1,28 @@
 Return-Path: <chase.maupin@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 11E10E0030F
-	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 12:11:25 -0800 (PST)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 25A3AE00597
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 12:11:28 -0800 (PST)
 Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q0QKBNHK029245
-	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 14:11:24 -0600
-Received: from DBDE71.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id q0QKBMlm014609
-	for <meta-ti@yoctoproject.org>; Fri, 27 Jan 2012 01:41:23 +0530 (IST)
-Received: from dbdp31.itg.ti.com (172.24.170.98) by DBDE71.ent.ti.com
-	(172.24.170.149) with Microsoft SMTP Server id 14.1.323.3;
-	Fri, 27 Jan 2012 01:41:22 +0530
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q0QKBQ4T006007
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 14:11:27 -0600
+Received: from DBDE70.ent.ti.com (localhost [127.0.0.1])
+	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id q0QKBPHl014619
+	for <meta-ti@yoctoproject.org>; Fri, 27 Jan 2012 01:41:25 +0530 (IST)
+Received: from dbdp31.itg.ti.com (172.24.170.98) by dbde70.ent.ti.com
+	(172.24.170.148) with Microsoft SMTP Server id 14.1.323.3;
+	Fri, 27 Jan 2012 01:41:25 +0530
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id q0QKBIlI019414;
-	Fri, 27 Jan 2012 01:41:21 +0530 (IST)
+	dbdp31.itg.ti.com (8.13.8/8.13.8) with ESMTP id q0QKBIlK019414;
+	Fri, 27 Jan 2012 01:41:24 +0530 (IST)
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 26 Jan 2012 14:11:12 -0600
-Message-ID: <1327608676-4790-2-git-send-email-Chase.Maupin@ti.com>
+Date: Thu, 26 Jan 2012 14:11:14 -0600
+Message-ID: <1327608676-4790-4-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1327608676-4790-1-git-send-email-Chase.Maupin@ti.com>
 References: <1327608676-4790-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/5] arm-benchmarks: port of am-benchmarks from arago
+Subject: [PATCH 3/5] matrix-gui-browser: port from arago overlay
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,48 +34,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2012 20:11:25 -0000
+X-List-Received-Date: Thu, 26 Jan 2012 20:11:28 -0000
 Content-Type: text/plain
 
-* Ported the am-benchmarks recipe from arago and changed the name
-  to arm-benchmarks.
-* Updated the SRCREV to pickup licensing file
+* This package adds a simple web browser GUI application with
+  no decorations used to display matrix on the local display.
+* Ported from arago overlay
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes-ti/arm-benchmarks/arm-benchmarks_1.3.bb |   24 +++++++++++++++++++++++
+ recipes-ti/matrix/matrix-gui-browser_2.0.bb |   24 ++++++++++++++++++++++++
  1 files changed, 24 insertions(+), 0 deletions(-)
- create mode 100644 recipes-ti/arm-benchmarks/arm-benchmarks_1.3.bb
+ create mode 100644 recipes-ti/matrix/matrix-gui-browser_2.0.bb
 
-diff --git a/recipes-ti/arm-benchmarks/arm-benchmarks_1.3.bb b/recipes-ti/arm-benchmarks/arm-benchmarks_1.3.bb
+diff --git a/recipes-ti/matrix/matrix-gui-browser_2.0.bb b/recipes-ti/matrix/matrix-gui-browser_2.0.bb
 new file mode 100644
-index 0000000..71f5eb8
+index 0000000..2574ace
 --- /dev/null
-+++ b/recipes-ti/arm-benchmarks/arm-benchmarks_1.3.bb
++++ b/recipes-ti/matrix/matrix-gui-browser_2.0.bb
 @@ -0,0 +1,24 @@
-+DESCRIPTION = "ARM Benchmarks"
-+HOMEPAGE = "https://gforge.ti.com/gf/project/am_benchmarks/"
++DESCRIPTION = "Simple Qt web display using webkit"
++HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix_browser"
 +LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=7aefb5e1cffc7b6a3ef18b803f957922"
-+SECTION = "system"
++LIC_FILES_CHKSUM = "file://main.cpp;beginline=9;endline=37;md5=884b90f5bf0d711fe32c4f04b5276496"
++SECTION = "multimedia"
 +
-+SRCREV = "76"
-+PR = "r0+svnr${SRCPV}"
++# Make sure that QT font libraries have been installed
++RDEPENDS += "qt4-embedded-fonts"
 +
-+SRC_URI = "svn://gforge.ti.com/svn/am_benchmarks/;module=trunk;proto=https;user=anonymous;pswd=''"
++PR = "r0"
 +
-+S = "${WORKDIR}/trunk"
++SRCREV = "db2e6b10e5a14358b6120a4a28de2f9d591bc55c"
++BRANCH ?= "master"
 +
-+do_compile() {
-+	export CROSS_COMPILE=${TARGET_PREFIX}
-+	export ARCH=${TUNE_PKGARCH}
-+	# build the release version
-+	make release 
-+}
++SRC_URI = "git://gitorious.org/matrix-gui-v2/matrix_browser.git;protocol=git;branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
++
++inherit qt4e
 +
 +do_install() {
-+	export ARCH=${TUNE_PKGARCH}
-+	make DESTDIR=${D} install
++	install -d ${D}/${bindir}
++	install -m 0755 ${S}/matrix_browser ${D}/${bindir}
 +}
 -- 
 1.7.0.4
