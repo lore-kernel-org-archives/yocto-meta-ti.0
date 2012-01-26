@@ -1,24 +1,24 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A8A2EE00596
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4C07FE00596
 	for <meta-ti@lists.yoctoproject.org>;
-	Thu, 26 Jan 2012 09:06:58 -0800 (PST)
-Received: by werb10 with SMTP id b10so642465wer.26
+	Thu, 26 Jan 2012 09:38:58 -0800 (PST)
+Received: by wibhi8 with SMTP id hi8so643538wib.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Thu, 26 Jan 2012 09:06:57 -0800 (PST)
-Received: by 10.216.138.36 with SMTP id z36mr1301345wei.22.1327597617341;
-	Thu, 26 Jan 2012 09:06:57 -0800 (PST)
+	Thu, 26 Jan 2012 09:38:56 -0800 (PST)
+Received: by 10.180.94.97 with SMTP id db1mr5314093wib.16.1327599536859;
+	Thu, 26 Jan 2012 09:38:56 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id l12sm7260277wiw.0.2012.01.26.09.06.56
+	by mx.google.com with ESMTPS id n3sm14671207wiz.9.2012.01.26.09.38.55
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 26 Jan 2012 09:06:56 -0800 (PST)
+	Thu, 26 Jan 2012 09:38:56 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@lists.yoctoproject.org
-Date: Thu, 26 Jan 2012 18:06:51 +0100
-Message-Id: <1327597611-2282-1-git-send-email-koen@dominion.thruhere.net>
+Date: Thu, 26 Jan 2012 18:38:52 +0100
+Message-Id: <1327599532-31609-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
-Subject: [PATCH] libgles-omap3: hide subpackages from shlib code
+Subject: [PATCH] linux-ti33x-psp 3.1: add dto patch to fix problems with various sd cards
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,42 +30,76 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2012 17:06:59 -0000
-
-This depends on a matching patch to OE-core: http://patches.openembedded.org/patch/20191/
+X-List-Received-Date: Thu, 26 Jan 2012 17:38:58 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- recipes-graphics/libgles/libgles-omap3.inc |    9 ++++++++-
- 1 files changed, 8 insertions(+), 1 deletions(-)
+ ...Set-dto-to-max-value-of-14-to-avoid-SD-Ca.patch |   34 ++++++++++++++++++++
+ recipes-kernel/linux/linux-ti33x-psp_3.1.bb        |    3 +-
+ 2 files changed, 36 insertions(+), 1 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.1/0038-omap_hsmmc-Set-dto-to-max-value-of-14-to-avoid-SD-Ca.patch
 
-diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-index da3aeb8..69254c1 100644
---- a/recipes-graphics/libgles/libgles-omap3.inc
-+++ b/recipes-graphics/libgles/libgles-omap3.inc
-@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum
- LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
- 
--PR = "r24"
-+PR = "r25"
- 
- COMPATIBLE_MACHINE = "(omap3|ti816x|ti33x)"
- 
-@@ -241,6 +241,13 @@ FILES_${PN}-es5 = "${libdir}/ES5*/* ${bindir}/ES5*/*"
- FILES_${PN}-es6 = "${libdir}/ES6*/* ${bindir}/ES6*/*"
- FILES_${PN}-es8 = "${libdir}/ES8*/* ${bindir}/ES8*/*"
- 
-+# Stop shlib code from picking a subpackage
-+PRIVATE_LIBS_${PN}-es2 = "libGLESv2.so libIMGegl.so libsrv_um.so libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so libOpenVGU.so libglslcompiler.so libGLES_CM.so"
-+PRIVATE_LIBS_${PN}-es3 = "libGLESv2.so libIMGegl.so libsrv_um.so libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so libOpenVGU.so libglslcompiler.so libGLES_CM.so"
-+PRIVATE_LIBS_${PN}-es5 = "libGLESv2.so libIMGegl.so libsrv_um.so libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so libOpenVGU.so libglslcompiler.so libGLES_CM.so"
-+PRIVATE_LIBS_${PN}-es6 = "libGLESv2.so libIMGegl.so libsrv_um.so libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so libOpenVGU.so libglslcompiler.so libGLES_CM.so"
-+PRIVATE_LIBS_${PN}-es8 = "libGLESv2.so libIMGegl.so libsrv_um.so libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so libOpenVGU.so libglslcompiler.so libGLES_CM.so"
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.1/0038-omap_hsmmc-Set-dto-to-max-value-of-14-to-avoid-SD-Ca.patch b/recipes-kernel/linux/linux-ti33x-psp-3.1/0038-omap_hsmmc-Set-dto-to-max-value-of-14-to-avoid-SD-Ca.patch
+new file mode 100644
+index 0000000..4fe037e
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.1/0038-omap_hsmmc-Set-dto-to-max-value-of-14-to-avoid-SD-Ca.patch
+@@ -0,0 +1,34 @@
++From d12058d27dddf60b36f5b2142ee999e55bddfff6 Mon Sep 17 00:00:00 2001
++From: Steve Sakoman <steve@sakoman.com>
++Date: Mon, 18 Jul 2011 23:13:41 -0500
++Subject: [PATCH 38/38] omap_hsmmc: Set dto to max value of 14 to avoid SD
++ Card timeouts
 +
- PACKAGES =+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl ${PN}-linuxfbwsegl ${PN}-x11wsegl ${PN}-driwsegl"
- FILES_${PN}-blitwsegl = "${libdir}/libpvrPVR2D_BLITWSEGL.so.*"
- FILES_${PN}-flipwsegl = "${libdir}/libpvrPVR2D_FLIPWSEGL.so.*"
++This fixes MMC errors due to timeouts on certain SD Cards following suggestions
++to set dto to 14 by Jason Kridner and Steven Kipisz
++
++Details of the issue:
++http://talk.maemo.org/showthread.php?p=1000707#post1000707
++
++This fix was originally proposed by Sukumar Ghoral of TI.
++---
++ drivers/mmc/host/omap_hsmmc.c |    3 +++
++ 1 files changed, 3 insertions(+), 0 deletions(-)
++
++diff --git a/drivers/mmc/host/omap_hsmmc.c b/drivers/mmc/host/omap_hsmmc.c
++index 35505bd..0be77ec 100644
++--- a/drivers/mmc/host/omap_hsmmc.c
+++++ b/drivers/mmc/host/omap_hsmmc.c
++@@ -1574,6 +1574,9 @@ static void set_data_timeout(struct omap_hsmmc_host *host,
++ 			dto = 14;
++ 	}
++ 
+++	/* Set dto to max value of 14 to avoid SD Card timeouts */
+++	dto = 14;
+++
++ 	reg &= ~DTO_MASK;
++ 	reg |= dto << DTO_SHIFT;
++ 	OMAP_HSMMC_WRITE(host->base, SYSCTL, reg);
++-- 
++1.7.7.5
++
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
+index 84e5c3b..591731c 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
+@@ -11,7 +11,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
+ 
+ BRANCH = "v3.1-meta-ti-r1r+gitr1d84d8853fa30cf3db2571a5aec572accca4e29d"
+ SRCREV = "1d84d8853fa30cf3db2571a5aec572accca4e29d"
+-MACHINE_KERNEL_PR_append = "k+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "l+gitr${SRCREV}"
+ 
+ COMPATIBLE_MACHINE = "(ti33x)"
+ 
+@@ -62,6 +62,7 @@ PATCHES_OVER_PSP = " \
+ 	file://0035-beaglebone-add-structs-for-DVI-cape-LEDs.patch\
+ 	file://0036-beaglebone-update-LCD-cape-partnumber.patch \
+     file://0037-beaglebone-compare-complete-partnumber-not-the-first.patch \
++	file://0038-omap_hsmmc-Set-dto-to-max-value-of-14-to-avoid-SD-Ca.patch \
+ 	"
+ 
+ SRC_URI += "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "", "${PATCHES_OVER_PSP}", d)}"
 -- 
 1.7.2.5
 
