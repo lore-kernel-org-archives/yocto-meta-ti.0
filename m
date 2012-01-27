@@ -1,30 +1,30 @@
-Return-Path: <wmills@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 28B36E00592
-	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 14:44:07 -0800 (PST)
-Received: from dlep26.itg.ti.com ([157.170.170.121])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q0QMi6sb024825
-	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 16:44:06 -0600
-Received: from DFLE70.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q0QMi6L4008073
-	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 16:44:06 -0600 (CST)
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle70.ent.ti.com
-	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
-	Thu, 26 Jan 2012 16:44:06 -0600
-Received: from gtwmills.gt.design.ti.com (gtwmills.gt.design.ti.com
-	[158.218.100.52])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	q0QMi5ug005464;	Thu, 26 Jan 2012 16:44:05 -0600
-Message-ID: <4F21D735.5000303@ti.com>
-Date: Thu, 26 Jan 2012 17:44:05 -0500
-From: William Mills <wmills@ti.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.18) Gecko/20110617 Thunderbird/3.1.11
-MIME-Version: 1.0
-To: Chase Maupin <Chase.Maupin@ti.com>
-References: <1327603585-5599-1-git-send-email-Chase.Maupin@ti.com>
-In-Reply-To: <1327603585-5599-1-git-send-email-Chase.Maupin@ti.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 1/3] matrix-gui-browser: port from arago overlay
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-gx0-f176.google.com (mail-gx0-f176.google.com
+	[209.85.161.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 752E6E00592
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 16:32:12 -0800 (PST)
+Received: by ggnq1 with SMTP id q1so798811ggn.35
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jan 2012 16:32:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=4wyuRdMeFw49zIdJTBFrzgwxMoPG3ulX5bPBUX/vpaM=;
+	b=BnTtyDNN9OAJ2qttQN7xgEGZ3wQWjnhYR9cIQfeNEU/ffdZRYLkKRkdVTvxAjuXdaP
+	PIbqulMjpVIy0kPV3jyzbSCZeU0weSzGmznK5dW9V8MdyLSY1JONawHtpkHjKEPIYce7
+	NR662keVlsH1BudvksLw+nN70EXLob6uqd+yA=
+Received: by 10.101.2.32 with SMTP id e32mr2081603ani.13.1327624331637;
+	Thu, 26 Jan 2012 16:32:11 -0800 (PST)
+Received: from localhost.localdomain (oldbuilder.nslu2-linux.org.
+	[140.211.169.168])
+	by mx.google.com with ESMTPS id i12sm15390198anm.6.2012.01.26.16.32.09
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 26 Jan 2012 16:32:10 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: meta-ti@yoctoproject.org
+Date: Thu, 26 Jan 2012 16:31:29 -0800
+Message-Id: <1327624289-20845-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.5.4
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH] meta-ti: Guard use of SOC_FAMILY to account for it being empty
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,27 +36,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2012 22:44:07 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Jan 2012 00:32:12 -0000
 
-On 01/26/2012 01:46 PM, Chase Maupin wrote:
-> * This package adds a simple web browser GUI application with
->    no decorations used to display matrix on the local display.
-> * Ported from arago overlay
->
+Right now SOC_FAMILY is set to 'Unknown' by default by angstrom
+distro but others might not set it as all so it will be empty
+hence we take care of the case if this is empty
 
-Sorry for hijacking your patch Chase but I have serious big picture 
-questions about all this stuff going into meta-ti and especially all 
-into one layer.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes-ti/linuxutils/ti-linuxutils.inc |   10 +++++-----
+ recipes-ti/syslink/ti-syslink.inc       |    2 +-
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-meta-ti is suppose to be the TI specific stuff people need to support 
-their platforms regardless of what layer stack they are using.  I 
-understand we are not layer stack independent yet but that needs to be 
-the goal.  Certainly adding a whole bunch of non-HW related stuff into 
-the same layer is not going to move us any closer.
-
-When we talked about where matrix belonged before there was debate about 
-meta-oe or meta-arago.  When did I miss the memo that put it into meta-ti??
+diff --git a/recipes-ti/linuxutils/ti-linuxutils.inc b/recipes-ti/linuxutils/ti-linuxutils.inc
+index d6cd18c..06b254d 100644
+--- a/recipes-ti/linuxutils/ti-linuxutils.inc
++++ b/recipes-ti/linuxutils/ti-linuxutils.inc
+@@ -23,12 +23,12 @@ do_compile() {
+     do_make_scripts
+     unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
+ 
+-    case ${SOC_FAMILY} in 
+-    dm365)
++    case "${SOC_FAMILY}" in
++    "dm365")
+             modules="cmem edma irq";;
+-    omap3)
++    "omap3")
+             modules="cmem sdma";;
+-	dm355)
++    "dm355")
+             modules="cmem edma irq";;
+     *)
+             modules="cmem"
+@@ -58,7 +58,7 @@ do_install () {
+       EXEC_DIR="${D}${installdir}/ti-linuxutils-app/cmem-app" \
+       install
+     # Install EDMA
+-    if [ ${SOC_FAMILY} = "dm365" ] ; then
++    if [ "${SOC_FAMILY}" = "dm365" ] ; then
+         cd ${S}/packages/ti/sdo/linuxutils/edma/apps
+         make \
+          LINUXKERNEL_INSTALL_DIR="${STAGING_KERNEL_DIR}" \
+diff --git a/recipes-ti/syslink/ti-syslink.inc b/recipes-ti/syslink/ti-syslink.inc
+index 8cc5775..d7df8c1 100644
+--- a/recipes-ti/syslink/ti-syslink.inc
++++ b/recipes-ti/syslink/ti-syslink.inc
+@@ -196,7 +196,7 @@ do_install () {
+     # Install the rtos example apps 
+     install -d ${D}/${installdir}/ti-syslink-examples/dsp
+     cd ${SYSLINK_ROOT}/ti/syslink/samples/rtos
+-    for i in $(find . -name "*.${SYSLINKSUFFIX}" | grep ${SOC_FAMILY}); do
++    for i in $(find . -name "*.${SYSLINKSUFFIX}" | grep "${SOC_FAMILY}"); do
+         install ${i} ${D}/${installdir}/ti-syslink-examples/dsp/
+     done
+ 
+-- 
+1.7.5.4
 
 
