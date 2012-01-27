@@ -1,26 +1,30 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 150D1E00592
-	for <meta-ti@yoctoproject.org>; Fri, 27 Jan 2012 03:50:59 -0800 (PST)
-Received: by wejx9 with SMTP id x9so1617772wej.35
-	for <meta-ti@yoctoproject.org>; Fri, 27 Jan 2012 03:50:58 -0800 (PST)
-Received: by 10.216.131.78 with SMTP id l56mr3431941wei.56.1327665058194;
-	Fri, 27 Jan 2012 03:50:58 -0800 (PST)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id df2sm11235476wib.4.2012.01.27.03.50.57
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 27 Jan 2012 03:50:57 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <4F21D735.5000303@ti.com>
-Date: Fri, 27 Jan 2012 12:50:55 +0100
-Message-Id: <27324814-C581-4BD9-92DF-68FC5CB4CECF@dominion.thruhere.net>
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-lpp01m010-f48.google.com (mail-lpp01m010-f48.google.com
+	[209.85.215.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 327BBE00592
+	for <meta-ti@yoctoproject.org>; Fri, 27 Jan 2012 04:09:53 -0800 (PST)
+Received: by lagz14 with SMTP id z14so1264255lag.35
+	for <meta-ti@yoctoproject.org>; Fri, 27 Jan 2012 04:09:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=/I5NQ28rmuROxmOujLgEMeaz82cVp+nhlc05JWP+zhc=;
+	b=XhvNj1tSdlbusFv4JwcBx1hDI1DGzKGxqsXSqYLzG0grR7Y3c55cxOaf6QKyQ7cC81
+	ybUQVZU4N/jwnLC7mg8kqUq7L7Z3V0nMISlVpg7dSm9dqRaUDoNvYf3JNGZthT2YWpJj
+	j/jEKylTwL9Q4jXQbHp48fwwwvX2kyLzNaikc=
+MIME-Version: 1.0
+Received: by 10.152.132.104 with SMTP id ot8mr3432252lab.17.1327666191311;
+	Fri, 27 Jan 2012 04:09:51 -0800 (PST)
+Received: by 10.112.102.165 with HTTP; Fri, 27 Jan 2012 04:09:51 -0800 (PST)
+In-Reply-To: <27324814-C581-4BD9-92DF-68FC5CB4CECF@dominion.thruhere.net>
 References: <1327603585-5599-1-git-send-email-Chase.Maupin@ti.com>
 	<4F21D735.5000303@ti.com>
+	<27324814-C581-4BD9-92DF-68FC5CB4CECF@dominion.thruhere.net>
+Date: Fri, 27 Jan 2012 13:09:51 +0100
+Message-ID: <CALbNGRTQSj696KijHn+UU45e9Z+-JhWW5FUv0GUx724PgfzpZA@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: meta-ti@yoctoproject.org
-X-Mailer: Apple Mail (2.1251.1)
 Subject: Re: [PATCH 1/3] matrix-gui-browser: port from arago overlay
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -33,43 +37,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2012 11:51:00 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 27 Jan 2012 12:09:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
+On Fri, Jan 27, 2012 at 12:50 PM, Koen Kooi <koen@dominion.thruhere.net> wr=
+ote:
+> Since meta-arago is supposed to be as empty as possible and matrix doesn'=
+t play well with others it's a bad fit for both meta-arago and meta-oe. May=
+be we should split the meta-ti repo into 2 layers: one for BSP things (incl=
+uding sgx, dsp, etc) and one for 'sdk' things (matrix).
+> The idea is to keep reusable TI deliverables together without forcing peo=
+ple to use arago. Putting matrix in meta-arago would mean you can only use =
+it with DISTRO=3Darago, which is a huge step backwards from the current sit=
+uation.
+>
+I think splitting out BSP into an own layer is a good idea and sorry
+for another hijacking: This would be a good chance to make it
+independent of angstrom ( e.g ti-hw-bringup ).
 
-Op 26 jan. 2012, om 23:44 heeft William Mills het volgende geschreven:
-
-> On 01/26/2012 01:46 PM, Chase Maupin wrote:
->> * This package adds a simple web browser GUI application with
->>   no decorations used to display matrix on the local display.
->> * Ported from arago overlay
->>=20
->=20
-> Sorry for hijacking your patch Chase but I have serious big picture =
-questions about all this stuff going into meta-ti and especially all =
-into one layer.
->=20
-> meta-ti is suppose to be the TI specific stuff people need to support =
-their platforms regardless of what layer stack they are using.  I =
-understand we are not layer stack independent yet but that needs to be =
-the goal.  Certainly adding a whole bunch of non-HW related stuff into =
-the same layer is not going to move us any closer.
->=20
-> When we talked about where matrix belonged before there was debate =
-about meta-oe or meta-arago.  When did I miss the memo that put it into =
-meta-ti??
-
-Since meta-arago is supposed to be as empty as possible and matrix =
-doesn't play well with others it's a bad fit for both meta-arago and =
-meta-oe. Maybe we should split the meta-ti repo into 2 layers: one for =
-BSP things (including sgx, dsp, etc) and one for 'sdk' things (matrix).
-The idea is to keep reusable TI deliverables together without forcing =
-people to use arago. Putting matrix in meta-arago would mean you can =
-only use it with DISTRO=3Darago, which is a huge step backwards from the =
-current situation.
-
-regards,
-
-Koen=
+Andreas
 
