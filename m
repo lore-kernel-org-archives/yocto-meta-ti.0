@@ -1,29 +1,22 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
-	[209.85.214.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C48A7E00306
-	for <meta-ti@yoctoproject.org>; Mon, 30 Jan 2012 10:26:21 -0800 (PST)
-Received: by bkat8 with SMTP id t8so4970017bka.35
-	for <meta-ti@yoctoproject.org>; Mon, 30 Jan 2012 10:26:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=tx3Mh4I2VTZpe/IdLcpmYSzOXcHt22eGEPxvg+GL2+o=;
-	b=Hvia/fR+6zudHwlvYg8bwwt7wN5CrFBMq9Ll9rva8r6TPDbq9qEixHHq8sNfVQWnK+
-	Uq/rAFoWt7fu73YqSTxMt9RYzOpBqlg6At/FHkXiNu5gVZfdgyt1MpEVw8nyDVUpDA59
-	Aj5djHnJ0/pK9Vc66Nrhx42N/qx9bW36QYRQs=
-MIME-Version: 1.0
-Received: by 10.204.152.219 with SMTP id h27mr9242316bkw.40.1327947980317;
-	Mon, 30 Jan 2012 10:26:20 -0800 (PST)
-Received: by 10.205.141.203 with HTTP; Mon, 30 Jan 2012 10:26:20 -0800 (PST)
-In-Reply-To: <20120130181959.GB2032@denix.org>
-References: <20120130181959.GB2032@denix.org>
-Date: Mon, 30 Jan 2012 13:26:20 -0500
-Message-ID: <CAFZh4h9voCMP+D+5rZ6+93C5DA-h4wrRbUo65Z-HWqSZcOfJoQ@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: meta-ti@yoctoproject.org, arago-devel@gforge.ti.com
-Subject: Re: meta-arago
+Return-Path: <denis@denix.org>
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 317CAE0030B
+	for <meta-ti@yoctoproject.org>; Mon, 30 Jan 2012 13:08:07 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.163.124.23])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LYM00EJ7QP7QQM2@vms173003.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 30 Jan 2012 15:07:56 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id C4E7820238; Mon,
+	30 Jan 2012 16:07:55 -0500 (EST)
+Date: Mon, 30 Jan 2012 16:07:55 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Message-id: <20120130210755.GD2032@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: [bitbake-devel] [PATCH 0/6] bitbake-layers improvements
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,8 +28,60 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2012 18:26:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 30 Jan 2012 21:08:08 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Thank you Denys!
+All,
+
+There is a set of patches for bitbake-layers just posted to bitbake-devel 
+mailing list by Paul with really nice improvements, such as showing overlayed 
+(shadowed or extended) recipes and classes with layer priorities taken into 
+account. Seems like a great overall improvement and definitely worth checking 
+out.
+
+Denys
+
+
+----- Forwarded message from Paul Eggleton <paul.eggleton@linux.intel.com> -----
+
+Date: Mon, 30 Jan 2012 16:25:48 +0000
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: bitbake-devel@lists.openembedded.org
+X-Mailer: git-send-email 1.7.5.4
+Subject: [bitbake-devel] [PATCH 0/6] bitbake-layers improvements
+
+Make some significant improvements to bitbake-layers that should provide
+more information about what files each layer is overlaying as well as
+making the utility easier to use.
+
+The following changes (against Poky, but apply cleanly with -p2 against
+bitbake master) are available in the git repository at:
+  git://git.yoctoproject.org/poky-contrib paule/bitbake-layers-fix5
+  http://git.yoctoproject.org/cgit.cgi/poky-contrib/log/?h=paule/bitbake-layers-fix5
+
+Paul Eggleton (6):
+  bitbake-layers: add copyright notice
+  bitbake-layers: use dashes in subcommands
+  bitbake-layers: use directory name as layer name
+  bitbake-layers: improve show-overlayed output
+  bitbake-layers: add show-recipes subcommand
+  bitbake-layers: list overlayed classes in show-overlayed
+
+ bitbake/bin/bitbake-layers  |  262 +++++++++++++++++++++++++++++++++++++------
+ bitbake/lib/bb/cooker.py    |   14 +--
+ bitbake/lib/bb/providers.py |   36 ++++++
+ 3 files changed, 265 insertions(+), 47 deletions(-)
+
+-- 
+1.7.5.4
+
+
+_______________________________________________
+bitbake-devel mailing list
+bitbake-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/bitbake-devel
+
+
+----- End forwarded message -----
 
