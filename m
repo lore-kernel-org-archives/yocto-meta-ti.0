@@ -1,31 +1,30 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-lpp01m010-f48.google.com (mail-lpp01m010-f48.google.com
-	[209.85.215.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0A6F8E0030B
-	for <meta-ti@yoctoproject.org>; Tue, 31 Jan 2012 04:16:00 -0800 (PST)
-Received: by lagw12 with SMTP id w12so28105lag.35
-	for <meta-ti@yoctoproject.org>; Tue, 31 Jan 2012 04:15:59 -0800 (PST)
+Return-Path: <pabigot@gmail.com>
+Received: from mail-gy0-f176.google.com (mail-gy0-f176.google.com
+	[209.85.160.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CFC72E0030B
+	for <meta-ti@yoctoproject.org>; Tue, 31 Jan 2012 04:41:13 -0800 (PST)
+Received: by ghbz2 with SMTP id z2so607146ghb.35
+	for <meta-ti@yoctoproject.org>; Tue, 31 Jan 2012 04:41:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=++lcIQjp+ShKXFFrk4e9JeqpDNinC3EaVOQeKBuqHhY=;
-	b=E8yjqDbe2T6XcNRFL6+PPbGdhuAwGk7eiNoOOCF9tVH8gVIFDPeRG757DzPNg1V6rh
-	vNbzaCs6liIBc30YgwYv/FtWmJAP0dsenkNzNxpjdwUG7BzxrjOeneGbq80t9d9hdvSa
-	yDI/3Go8dWAS0rhWmGQh6b+UxbxqQA8DVxXUY=
-MIME-Version: 1.0
-Received: by 10.112.36.34 with SMTP id n2mr3195013lbj.24.1328012159238; Tue,
-	31 Jan 2012 04:15:59 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.112.46.199 with HTTP; Tue, 31 Jan 2012 04:15:59 -0800 (PST)
-In-Reply-To: <20120131004439.GF2032@denix.org>
-References: <20120131004439.GF2032@denix.org>
-Date: Tue, 31 Jan 2012 10:15:59 -0200
-X-Google-Sender-Auth: neHmm0pQ-G2248MYKTfExOBSCA4
-Message-ID: <CAP9ODKpqy29_dW30Qb8xQfgcU6A1aqsh_9x8tNEHAFqh_vOoOg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: meta-ti layer split
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=3wOv6kekbzG6W9I56Y7IqagHBPK3B8Kz1nWFjDgvLoQ=;
+	b=RiJJQUVu6d/8rLg32C6nIsZtb6y08tq3fhVSZNhs0hzmNs0YnxWS5pp0MeHg3fKAYK
+	E2DkDO+51Y7V5R9squLy5ElHPfMLm9um05wBQyjlCp9cyENixnI9RlO7gVEnz1limWW/
+	H5MZ4J7x/1JMy7gPYXTmoFLmXWYxpf2l/MxqM=
+Received: by 10.236.122.12 with SMTP id s12mr33908435yhh.63.1328013673167;
+	Tue, 31 Jan 2012 04:41:13 -0800 (PST)
+Received: from localhost.localdomain (c-66-41-60-82.hsd1.mn.comcast.net.
+	[66.41.60.82])
+	by mx.google.com with ESMTPS id t13sm55432563anh.2.2012.01.31.04.41.08
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 31 Jan 2012 04:41:08 -0800 (PST)
+Sender: Peter Bigot <pabigot@gmail.com>
+From: "Peter A. Bigot" <bigotp@acm.org>
+To: meta-ti@yoctoproject.org
+Date: Tue, 31 Jan 2012 06:40:53 -0600
+Message-Id: <1328013657-2069-1-git-send-email-bigotp@acm.org>
+X-Mailer: git-send-email 1.7.6.4
+Subject: [PATCH 0/4] Resubmit TI DSP build issues related to installer
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,108 +36,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jan 2012 12:16:01 -0000
-Content-Type: multipart/alternative; boundary=e0cb4efe34ec02425504b7d1eded
+X-List-Received-Date: Tue, 31 Jan 2012 12:41:14 -0000
 
---e0cb4efe34ec02425504b7d1eded
-Content-Type: text/plain; charset=ISO-8859-1
+From: "Peter A. Bigot" <bigotp@acm.org>
 
-On Mon, Jan 30, 2012 at 22:44, Denys Dmytriyenko <denis@denix.org> wrote:
+This patch set re-submits the (updated) uncommitted parts of my 27Dec2011
+patch set to get gstreamer-ti and its dependencies to build in a pristine
+work environment.  It was left back on 29Dec2011 with:
 
-> After much debate and further considerations ;) we've decided to split
-> meta-ti
-> repository into 2 layers to ease up on inter-layer dependencies and to
-> enable
-> additional use cases of building basic BSP images with a very small set of
-> layers, only requiring oe-core as a dependency. The proposed split is the
-> following:
->
-> 1. meta-ti-bsp-core - is the ultra portable layer.  Starting out it will
-> contain only recipes-kernel and recipes-bootloader plus necessary machine
-> configurations. Depending on the platform, can be as little as basic board
-> support.
->
-> 2. meta-ti-bsp-extras - provides the full chip functions with perhaps some
-> extra constraints. Initialy this will contian support for DSP, Graphics,
-> and
-> Wifi. Provides additional board support for peripherals that may require
-> software components like DSPBIOS, CodecEngine, gst-ti, firmware etc.
-> Depends
-> on meta-ti-bsp-core. In the future, if certain technologies prove
-> themselves
-> well portable, we may move them from meta-ti-bsp-extras to
-> meta-ti-bsp-core.
->
-> I'll be starting the initial work on this in a separate branch, calling for
-> wider review once ready.
->
-> Please provide feedback. Thanks.
+> I'm going to wait for Roger to get back from holidays to comment on the installer issues, I'll push the CE and dmai patches later today.
 
+The installer issues are:
 
-I don't like the idea. In my POV what is not compatible with OE-Core might
-be moved to a meta-ti-extras, no problem, but making a meta-ti-bsp-core
-seems too restrictive and I see not many people end using only it in the
-end.
+ti-eula-unpack spawns the installer, then writes canned input to it to do
+things like set the output directory.  The function that does this
+explicitly tacks a second newline on, in addition to the one normally added
+by Python's print statement.
+
+For ti-cgt6x, the result is that a bare newline is fed to the installer at
+the point where the installation directory is requested, instead of the
+workdir.  Hence, the default directory gets used; for this package, that's
+in /opt/TI.
+
+For ti-xdctools, ti-edma3lld, and ti-dspbios, the bare newline also caused
+the default installation directory to be requested, but for this package
+that's ${HOME}/ti.  Since ti-eula-unpack overrides the HOME environment
+variable to be the work directory, everything somehow happened to work out,
+at least for other folks.  I don't think that's a great solution though, so
+I updated the recipes to do it "right", by changing the commands to conform
+to what the current installers expect.  There may be other installation
+recipes for other tools that need the same fixes.
+
+For the 31Jan2012 attempt, similar changes had to be made to
+ti-codecs-omap3530.
+
+For the 31Jan2012 attempt, the ti-dmai build required more than just
+altering the striplevel: the ${S} value had to be changed since there was no
+Makefile at its original value.  There is still an issue that prevents use
+of where make 3.85 produces a "Entering an unknown directory" failure in
+do_install, but that's an upstream problem: I just used make 3.81 to
+complete the build.
+
+Peter A. Bigot (4):
+  ti-eula-unpack: remove extraneous newline in cmd output
+  various: fix installation directories for corrected ti-eula-unpack
+  ti-codecs-omap3530: fix for corrected ti-eula-unpack
+  ti-dmai_svn: correct path within svn checkout
+
+ recipes-ti/bios/ti-dspbios.inc                     |    3 ++-
+ .../codec-engine/ti-codecs-omap3530_4.00.00.00.bb  |   20 ++++++++++----------
+ recipes-ti/devtools/ti-xdctools.inc                |    3 ++-
+ recipes-ti/dmai/ti-dmai_svn.bb                     |    9 ++++++---
+ recipes-ti/edma3lld/ti-edma3lld.inc                |    3 ++-
+ recipes-ti/includes/ti-eula-unpack.inc             |    2 +-
+ 6 files changed, 23 insertions(+), 17 deletions(-)
 
 -- 
-Otavio Salvador                             O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854              http://projetos.ossystems.com.br
+1.7.6.4
 
---e0cb4efe34ec02425504b7d1eded
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-<div class=3D"gmail_quote">On Mon, Jan 30, 2012 at 22:44, Denys Dmytriyenko=
- <span dir=3D"ltr">&lt;<a href=3D"mailto:denis@denix.org">denis@denix.org</=
-a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0=
- 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-After much debate and further considerations ;) we&#39;ve decided to split =
-meta-ti<br>
-repository into 2 layers to ease up on inter-layer dependencies and to enab=
-le<br>
-additional use cases of building basic BSP images with a very small set of<=
-br>
-layers, only requiring oe-core as a dependency. The proposed split is the<b=
-r>
-following:<br>
-<br>
-1. meta-ti-bsp-core - is the ultra portable layer. =A0Starting out it will<=
-br>
-contain only recipes-kernel and recipes-bootloader plus necessary machine<b=
-r>
-configurations. Depending on the platform, can be as little as basic board<=
-br>
-support.<br>
-<br>
-2. meta-ti-bsp-extras - provides the full chip functions with perhaps some<=
-br>
-extra constraints. Initialy this will contian support for DSP, Graphics, an=
-d<br>
-Wifi. Provides additional board support for peripherals that may require<br=
->
-software components like DSPBIOS, CodecEngine, gst-ti, firmware etc. Depend=
-s<br>
-on meta-ti-bsp-core. In the future, if certain technologies prove themselve=
-s<br>
-well portable, we may move them from meta-ti-bsp-extras to meta-ti-bsp-core=
-.<br>
-<br>
-I&#39;ll be starting the initial work on this in a separate branch, calling=
- for<br>
-wider review once ready.<br>
-<br>
-Please provide feedback. Thanks.</blockquote><div><br></div><div>I don&#39;=
-t like the idea. In my POV what is not compatible with OE-Core might be mov=
-ed to a meta-ti-extras, no problem, but making a meta-ti-bsp-core seems too=
- restrictive and I see not many people end using only it in the end.</div>
-<div>=A0</div></div>-- <br>Otavio Salvador=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 =A0 =A0 =A0 =A0O.S. Systems<br>E-mail: <a href=3D"mailto:otavio=
-@ossystems.com.br" target=3D"_blank">otavio@ossystems.com.br</a>=A0 <a href=
-=3D"http://www.ossystems.com.br" target=3D"_blank">http://www.ossystems.com=
-.br</a><br>
-Mobile: +55 53 9981-7854=A0 =A0 =A0 =A0=A0 =A0 =A0 =A0<a href=3D"http://pro=
-jetos.ossystems.com.br" target=3D"_blank">http://projetos.ossystems.com.br<=
-/a><br><br>
-
---e0cb4efe34ec02425504b7d1eded--
