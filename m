@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3A647E01372
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3BF44E01373
 	for <meta-ti@yoctoproject.org>; Tue,  7 Feb 2012 22:29:26 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 21542529A0; Wed,  8 Feb 2012 06:29:25 +0000 (UTC)
+	id 960C452A8C; Wed,  8 Feb 2012 06:29:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120208062925.21542529A0@arago-project.org>
+Message-Id: <20120208062925.960C452A8C@arago-project.org>
 Date: Wed,  8 Feb 2012 06:29:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-ti335x-psp: add 3.2 based on 3.2-staging branch
+Subject: Koen Kooi : gadget-init: adjust for kernel 3.2 based sysfs layout
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,39 +26,96 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 034e54254f1e5de481714bbfed85d80a677d7ea3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=034e54254f1e5de481714bbfed85d80a677d7ea3
+Commit: f244d42300e290fac43bedf875c199fa0e8ad2f5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f244d42300e290fac43bedf875c199fa0e8ad2f5
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Tue Jan 31 16:29:11 2012 +0100
+Date:   Tue Jan 31 16:34:00 2012 +0100
 
-linux-ti335x-psp: add 3.2 based on 3.2-staging branch
-
-runtime tested on beaglebone
+gadget-init: adjust for kernel 3.2 based sysfs layout
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
 ---
 
- ...1-f_rndis-HACK-around-undefined-variables.patch |   31 +
- ...2-da8xx-fb-add-DVI-support-for-beaglebone.patch |   38 +
- .../0003-arm-omap-mux33xx-Add-i2c2-pin-mux.patch   |   30 +
- ...-hwmod-33xx-Add-support-for-third-i2c-bus.patch |   92 +
- ...rebase-everything-onto-3.2-WARNING-MEGAPA.patch |  548 ++
- .../0006-more-beaglebone-merges.patch              |  125 +
- .../0007-beaglebone-disable-tsadc.patch            |   31 +
- ...general-purpose-mode-untested-with-touchs.patch |  411 ++
- ...dc-Add-board-file-mfd-support-fix-warning.patch |   44 +
- ...AM335X-init-tsc-bone-style-for-new-boards.patch |   26 +
- ...cadc-make-stepconfig-channel-configurable.patch |   46 +
- .../0012-tscadc-Trigger-through-sysfs.patch        |  147 +
- ...meta-ti-Remove-debug-messages-for-meta-ti.patch |   34 +
- ...c-switch-to-polling-instead-of-interrupts.patch |   54 +
- .../0015-beaglebone-fix-ADC-init.patch             |   47 +
- .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig | 3566 ++++++++++
- .../beaglebone/logo_linux_clut224.ppm              | 7053 ++++++++++++++++++++
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |   46 +
- 18 files changed, 12369 insertions(+), 0 deletions(-)
+ recipes-ti/beagleboard/gadget-init.bb              |   10 +++++-----
+ .../beagleboard/gadget-init/99-hokey-pokey.rules   |    2 --
+ .../gadget-init/g-ether-start-service.sh           |    4 ++--
+ recipes-ti/beagleboard/gadget-init/hokey-pokey.sh  |    7 -------
+ 4 files changed, 7 insertions(+), 16 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=034e54254f1e5de481714bbfed85d80a677d7ea3
+diff --git a/recipes-ti/beagleboard/gadget-init.bb b/recipes-ti/beagleboard/gadget-init.bb
+index d016c09..150ff8e 100644
+--- a/recipes-ti/beagleboard/gadget-init.bb
++++ b/recipes-ti/beagleboard/gadget-init.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Units to initialize usb gadgets"
+ 
+-PR = "r13"
++PR = "r16"
+ 
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+@@ -12,8 +12,6 @@ SRC_URI = "file://storage-gadget-init.service \
+            file://network-gadget-init.service \
+            file://udhcpd.service \
+            file://udhcpd.conf \
+-           file://99-hokey-pokey.rules \
+-           file://hokey-pokey.sh \
+            file://bone-gmass-eject.rules \
+            file://udhcpd.rules \
+            file://g-storage-reinsert.sh \
+@@ -37,12 +35,14 @@ do_install() {
+ 
+ 	install -d ${D}${bindir}
+ 	install -m 0755 ${WORKDIR}/*.sh ${D}${bindir}
++
++	install -d ${D}${sysconfdir}/tmpfiles.d
++	echo "w    /sys/class/pwm/ehrpwm.1:0/polarity -    -    -    -   1" > ${D}${sysconfdir}/tmpfiles.d/lcd7.conf
+ }
+ 
+ PACKAGES =+ "${PN}-storage ${PN}-network ${PN}-udhcpd"
+ 
+-FILES_${PN} = "${sysconfdir}/udev/rules.d/99-hokey-pokey.rules \
+-               ${bindir}/hokey-pokey.sh \"
++FILES_${PN} = "${sysconfdir}/tmpfiles.d"
+ 
+ FILES_${PN}-storage = "${base_libdir}/systemd/system/storage-gadget-init.service \
+                        ${base_libdir}/systemd/system/basic.target.wants/storage-gadget-init.service \
+diff --git a/recipes-ti/beagleboard/gadget-init/99-hokey-pokey.rules b/recipes-ti/beagleboard/gadget-init/99-hokey-pokey.rules
+deleted file mode 100644
+index bb3c8d3..0000000
+--- a/recipes-ti/beagleboard/gadget-init/99-hokey-pokey.rules
++++ /dev/null
+@@ -1,2 +0,0 @@
+-ACTION=="remove", DEVPATH=="/devices/platform/omap/ti81xx-usbss/musb-hdrc.1/usb1/1-1",  RUN+="/usr/bin/hokey-pokey.sh"
+-
+diff --git a/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh b/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh
+index 076a5fe..6e73b15 100755
+--- a/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh
++++ b/recipes-ti/beagleboard/gadget-init/g-ether-start-service.sh
+@@ -1,7 +1,7 @@
+ #!/bin/sh
+-if [ -a /sys/devices/platform/omap/ti81xx-usbss/musb-hdrc.0/gadget/lun0/file ]
++if [ -a /sys/devices/platform/omap/musb-ti81xx/musb-hdrc.0/gadget/lun0/file ]
+ then
+-	x=$(cat /sys/devices/platform/omap/ti81xx-usbss/musb-hdrc.0/gadget/lun0/file)
++	x=$(cat /sys/devices/platform/omap/musb-ti81xx/musb-hdrc.0/gadget/lun0/file)
+ 	if [ -z "$x" ]
+ 	then
+ 		/bin/systemctl stop storage-gadget-init.service
+diff --git a/recipes-ti/beagleboard/gadget-init/hokey-pokey.sh b/recipes-ti/beagleboard/gadget-init/hokey-pokey.sh
+deleted file mode 100755
+index 2139eb0..0000000
+--- a/recipes-ti/beagleboard/gadget-init/hokey-pokey.sh
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#!/bin/sh
+-
+-sleep 1
+-echo F > /proc/driver/musb_hdrc.1
+-sleep 1
+-echo F > /proc/driver/musb_hdrc.1
+-
+
 
