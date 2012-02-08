@@ -1,29 +1,30 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f51.google.com (mail-ww0-f51.google.com [74.125.82.51])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 88056E0136A
-	for <meta-ti@lists.yoctoproject.org>;
-	Tue,  7 Feb 2012 23:48:07 -0800 (PST)
-Received: by wgbdy1 with SMTP id dy1so198541wgb.8
-	for <meta-ti@lists.yoctoproject.org>;
-	Tue, 07 Feb 2012 23:48:06 -0800 (PST)
-Received: by 10.216.138.130 with SMTP id a2mr6415455wej.42.1328687285967;
-	Tue, 07 Feb 2012 23:48:05 -0800 (PST)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id y1sm552620wiw.6.2012.02.07.23.48.04
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 07 Feb 2012 23:48:04 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <20120208063326.GF8770@denix.org>
-Date: Wed, 8 Feb 2012 08:48:04 +0100
-Message-Id: <B9AE78DF-A6EB-4014-A67A-FC4379E8EEA4@dominion.thruhere.net>
-References: <1328613252-27915-1-git-send-email-koen@dominion.thruhere.net>
-	<20120208063326.GF8770@denix.org>
-X-Mailer: Apple Mail (2.1251.1)
-X-Gm-Message-State: ALoCoQlpEiaSrZ4C3Cc8MHOHXqg2vFTMuY6sKGIQbCN4QydfiHs7RzxSseWEXRWZDMbfCDXzQ2f3
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [BeagleBone][PATCH 1/6] linux-ti335x-psp: add 3.2 based on 3.2-staging branch
+Return-Path: <jfabernathy@gmail.com>
+Received: from mail-yw0-f48.google.com (mail-yw0-f48.google.com
+	[209.85.213.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3F0CCE0059B
+	for <meta-ti@yoctoproject.org>; Wed,  8 Feb 2012 13:58:48 -0800 (PST)
+Received: by yhjj52 with SMTP id j52so693240yhj.35
+	for <meta-ti@yoctoproject.org>; Wed, 08 Feb 2012 13:58:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=UYWeucgH0mVUxlGX055Ks22eLZjA0BEoG/ilRPRGHLM=;
+	b=S7t2/sBi9vH0sIJ/5Gb0h1AdNtLb8v+9rAd/rQLuS41DkBFg6AEJBncSGOszUSfNHi
+	8vFp7RDI0Abk9tN9Ol8jX34pLvrg7cuafdwY/oVUyV4raLR3DwdDJffeWr88ZvGEU+Wr
+	MgUaVBWOzisep9Chp6hZZIIuBl9mcW0idsPNE=
+Received: by 10.236.175.164 with SMTP id z24mr39020449yhl.84.1328738327185;
+	Wed, 08 Feb 2012 13:58:47 -0800 (PST)
+Received: from [10.0.1.54] (nc-184-3-54-63.dhcp.embarqhsd.net. [184.3.54.63])
+	by mx.google.com with ESMTPS id q55sm892689yhi.0.2012.02.08.13.58.46
+	(version=SSLv3 cipher=OTHER); Wed, 08 Feb 2012 13:58:46 -0800 (PST)
+Message-ID: <4F32F016.4020008@gmail.com>
+Date: Wed, 08 Feb 2012 16:58:46 -0500
+From: jfabernathy <jfabernathy@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:9.0) Gecko/20111229 Thunderbird/9.0
+MIME-Version: 1.0
+To: meta-ti@yoctoproject.org
+Subject: building Yocto for Pandaboard
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,16 +36,21 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 07:48:07 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 08 Feb 2012 21:58:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
+I'm trying to build the pandaboard BSP for Yocto.  I cloned the meta-ti 
+repository in the poky directory and tried to build core-image-sato for 
+both machine pandaboard and omap4430-panda. However, I immediately get 
+an error because bitbake is looking for 
+recipes-images/angstrom/systemd-image.bb, which is required in the 
+ti-hw-bringup-image.bb image recipe.
 
-Op 8 feb. 2012, om 07:33 heeft Denys Dmytriyenko het volgende geschreven:
+All I really included was the machine name change in local.conf and 
+added the meta-ti layer in bblayers.conf.
 
-> Koen,
-> 
-> I've merged your beaglebone-rebase branch into master.
+Did I miss a step?
 
-Thanks!
+Jim A
 
