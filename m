@@ -1,15 +1,26 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0C27E01370
-	for <meta-ti@yoctoproject.org>; Tue,  7 Feb 2012 22:29:26 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id CE21152A9E; Wed,  8 Feb 2012 06:29:25 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20120208062925.CE21152A9E@arago-project.org>
-Date: Wed,  8 Feb 2012 06:29:25 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : cloud9-image: add tslib-tests to test touchscreens
+Return-Path: <denis@denix.org>
+Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
+	[206.46.173.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7656BE01353
+	for <meta-ti@lists.yoctoproject.org>;
+	Tue,  7 Feb 2012 22:33:37 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0LZ2007UDA7QXHF1@vms173009.mailsrvcs.net> for
+	meta-ti@lists.yoctoproject.org; Wed, 08 Feb 2012 00:33:26 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2ED0721393; Wed,
+	08 Feb 2012 01:33:26 -0500 (EST)
+Date: Wed, 08 Feb 2012 01:33:26 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-id: <20120208063326.GF8770@denix.org>
+References: <1328613252-27915-1-git-send-email-koen@dominion.thruhere.net>
+MIME-version: 1.0
+In-reply-to: <1328613252-27915-1-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: [BeagleBone][PATCH 1/6] linux-ti335x-psp: add 3.2 based on 3.2-staging branch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,37 +32,14 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 06:29:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 08 Feb 2012 06:33:37 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: 08a78956183db95153202871a20977ddca26aa02
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=08a78956183db95153202871a20977ddca26aa02
+Koen,
 
-Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Thu Feb  2 19:07:22 2012 +0100
+I've merged your beaglebone-rebase branch into master.
 
-cloud9-image: add tslib-tests to test touchscreens
-
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-
----
-
- recipes-misc/images/cloud9-image.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-misc/images/cloud9-image.bb b/recipes-misc/images/cloud9-image.bb
-index 087e88f..5d25493 100644
---- a/recipes-misc/images/cloud9-image.bb
-+++ b/recipes-misc/images/cloud9-image.bb
-@@ -26,6 +26,7 @@ IMAGE_INSTALL += " \
- 	gdb gdbserver \
- 	nodejs-dev \
- 	mplayer2 \
-+	tslib-tests tslib-calibrate \
- "
- 
- export IMAGE_BASENAME = "Cloud9-IDE"
-
+-- 
+Denys
 
