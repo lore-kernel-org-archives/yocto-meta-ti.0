@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A02B0E0136A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0C27E01370
 	for <meta-ti@yoctoproject.org>; Tue,  7 Feb 2012 22:29:26 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0EA7A52AA1; Wed,  8 Feb 2012 06:29:26 +0000 (UTC)
+	id CE21152A9E; Wed,  8 Feb 2012 06:29:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120208062926.0EA7A52AA1@arago-project.org>
-Date: Wed,  8 Feb 2012 06:29:26 +0000 (UTC)
+Message-Id: <20120208062925.CE21152A9E@arago-project.org>
+Date: Wed,  8 Feb 2012 06:29:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : beaglebone-tester: bump SRCREV
+Subject: Koen Kooi : cloud9-image: add tslib-tests to test touchscreens
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,38 +26,32 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: d874e605466525bdb189543885597a6a0ebdce71
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d874e605466525bdb189543885597a6a0ebdce71
+Commit: 08a78956183db95153202871a20977ddca26aa02
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=08a78956183db95153202871a20977ddca26aa02
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Tue Feb  7 19:50:29 2012 +0100
+Date:   Thu Feb  2 19:07:22 2012 +0100
 
-beaglebone-tester: bump SRCREV
+cloud9-image: add tslib-tests to test touchscreens
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
 ---
 
- recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-misc/images/cloud9-image.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
-index ee81d2b..b4a94ab 100644
---- a/recipes-ti/beagleboard/beaglebone-tester.bb
-+++ b/recipes-ti/beagleboard/beaglebone-tester.bb
-@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
- # only scripts and data
- inherit allarch
+diff --git a/recipes-misc/images/cloud9-image.bb b/recipes-misc/images/cloud9-image.bb
+index 087e88f..5d25493 100644
+--- a/recipes-misc/images/cloud9-image.bb
++++ b/recipes-misc/images/cloud9-image.bb
+@@ -26,6 +26,7 @@ IMAGE_INSTALL += " \
+ 	gdb gdbserver \
+ 	nodejs-dev \
+ 	mplayer2 \
++	tslib-tests tslib-calibrate \
+ "
  
--PR = "r10"
-+PR = "r11"
- 
- SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
-           "
--SRCREV = "02c6005871a83c289ac01a93c3dbd9cc7e4c80be"
-+SRCREV = "ab8c1e604575b85eca9a55073f7d50ac465a1072"
- 
- S = "${WORKDIR}/git"
- 
+ export IMAGE_BASENAME = "Cloud9-IDE"
 
 
