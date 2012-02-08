@@ -1,26 +1,26 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B66DDE0059B
-	for <meta-ti@yoctoproject.org>; Wed,  8 Feb 2012 14:04:09 -0800 (PST)
-Received: by wgbdq12 with SMTP id dq12so962339wgb.11
-	for <meta-ti@yoctoproject.org>; Wed, 08 Feb 2012 14:04:08 -0800 (PST)
-Received: by 10.180.96.8 with SMTP id do8mr28761731wib.21.1328738648122;
-	Wed, 08 Feb 2012 14:04:08 -0800 (PST)
-Received: from [172.20.1.20] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id y6sm2750711wix.10.2012.02.08.14.04.06
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 08 Feb 2012 14:04:07 -0800 (PST)
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B661E0059B
+	for <meta-ti@yoctoproject.org>; Wed,  8 Feb 2012 14:05:42 -0800 (PST)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 26108F81207; Wed,  8 Feb 2012 15:05:41 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 97CB2F811FC;
+	Wed,  8 Feb 2012 15:05:39 -0700 (MST)
+Message-ID: <4F32F1B3.8090000@mlbassoc.com>
+Date: Wed, 08 Feb 2012 15:05:39 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:10.0) Gecko/20120131 Thunderbird/10.0
+MIME-Version: 1.0
+To: meta-ti@yoctoproject.org
 References: <4F32F016.4020008@gmail.com>
 In-Reply-To: <4F32F016.4020008@gmail.com>
-Mime-Version: 1.0 (1.0)
-Message-Id: <FB5B1FDD-43CA-4F8B-B6AD-E9288B165C4D@dominion.thruhere.net>
-X-Mailer: iPhone Mail (9A405)
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 8 Feb 2012 23:04:01 +0100
-To: jfabernathy <jfabernathy@gmail.com>
-X-Gm-Message-State: ALoCoQk/P3gQ1bNoP9O5HoJE8jVGZKYlm0gVGe+40ZuU+k9+SFtZjipquHPFrAiQO6e9R/H5lfWN
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: building Yocto for Pandaboard
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -33,30 +33,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2012 22:04:10 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+X-List-Received-Date: Wed, 08 Feb 2012 22:05:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-There's a README in the layer, read it and follow the instructions
-
-Op 8 feb. 2012 om 22:58 heeft jfabernathy <jfabernathy@gmail.com> het volgen=
-de geschreven:
-
-> I'm trying to build the pandaboard BSP for Yocto.  I cloned the meta-ti re=
-pository in the poky directory and tried to build core-image-sato for both m=
-achine pandaboard and omap4430-panda. However, I immediately get an error be=
-cause bitbake is looking for recipes-images/angstrom/systemd-image.bb, which=
- is required in the ti-hw-bringup-image.bb image recipe.
->=20
-> All I really included was the machine name change in local.conf and added t=
-he meta-ti layer in bblayers.conf.
->=20
+On 2012-02-08 14:58, jfabernathy wrote:
+> I'm trying to build the pandaboard BSP for Yocto. I cloned the meta-ti repository in the poky directory and tried to build core-image-sato for both machine pandaboard and
+> omap4430-panda. However, I immediately get an error because bitbake is looking for recipes-images/angstrom/systemd-image.bb, which is required in the ti-hw-bringup-image.bb image
+> recipe.
+>
+> All I really included was the machine name change in local.conf and added the meta-ti layer in bblayers.conf.
+>
 > Did I miss a step?
->=20
-> Jim A
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+
+This was discussed last week.  Add this line to your local.conf
+   BBMASK = ".*/meta-ti/recipes-misc/"
+This will skip some BeagleBoard/BeagleBone recipes that are not
+currently working in a Yocto tree.
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
