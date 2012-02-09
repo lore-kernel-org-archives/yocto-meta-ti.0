@@ -1,27 +1,37 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23509E01370
-	for <meta-ti@yoctoproject.org>; Thu,  9 Feb 2012 04:53:44 -0800 (PST)
-Received: by werf1 with SMTP id f1so1503251wer.35
-	for <meta-ti@yoctoproject.org>; Thu, 09 Feb 2012 04:53:43 -0800 (PST)
-Received: by 10.180.90.194 with SMTP id by2mr2664676wib.5.1328792023873;
-	Thu, 09 Feb 2012 04:53:43 -0800 (PST)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id dw7sm6569731wib.4.2012.02.09.04.53.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 09 Feb 2012 04:53:42 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1251.1)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <4F33BE16.2080802@gmail.com>
-Date: Thu, 9 Feb 2012 13:53:41 +0100
-Message-Id: <C07F39F8-891A-4122-A6A6-844C5EA55C09@dominion.thruhere.net>
-References: <4F33BE16.2080802@gmail.com>
-To: meta-ti@yoctoproject.org
-X-Mailer: Apple Mail (2.1251.1)
-X-Gm-Message-State: ALoCoQl5JIG/XHqX5vIKijmszZQe1brtnKmjIuKwY1P5nKlaGxATCL/PImx+td5Yd1GNAkW0YPNt
-Subject: Re: build error on machine omap4330-panda
+Return-Path: <chase.maupin@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 10BB1E01370
+	for <meta-ti@yoctoproject.org>; Thu,  9 Feb 2012 05:01:52 -0800 (PST)
+Received: from dlep26.itg.ti.com ([157.170.170.121])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q19D1olJ018608;
+	Thu, 9 Feb 2012 07:01:50 -0600
+Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q19D1oT9013806;
+	Thu, 9 Feb 2012 07:01:50 -0600 (CST)
+Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
+	DFLE71.ent.ti.com ([fe80::29f6:72ad:a62e:2025%21]) with mapi id
+	14.01.0323.003; Thu, 9 Feb 2012 07:01:50 -0600
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: James Abernathy <jfabernathy@gmail.com>, Gary Thomas <gary@mlbassoc.com>
+Thread-Topic: [meta-ti] building Yocto for Pandaboard
+Thread-Index: AQHM5rQnABlTcsc9UEeGcv8Cg1R3AZY0iAHg
+Date: Thu, 9 Feb 2012 13:01:49 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED10127667EB8@DLEE12.ent.ti.com>
+References: <4F32F016.4020008@gmail.com> <4F32F1B3.8090000@mlbassoc.com>
+	<4F32F31B.2000303@gmail.com>
+	<59EDC5ED-F339-48E8-8C4D-7137C23927CD@dominion.thruhere.net>
+	<4F32F59B.7010804@mlbassoc.com>
+	<8EA0B5D5-4DC5-4F48-83E6-B019862BD57F@dominion.thruhere.net>
+	<4F32F87E.2070907@mlbassoc.com>
+	<38997C75-E36D-4A49-96D0-FB5E8A52817D@gmail.com>
+In-Reply-To: <38997C75-E36D-4A49-96D0-FB5E8A52817D@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
+MIME-Version: 1.0
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: building Yocto for Pandaboard
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,28 +43,105 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2012 12:53:45 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Thu, 09 Feb 2012 13:01:52 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-
-Op 9 feb. 2012, om 13:37 heeft jfabernathy het volgende geschreven:
-
-> While trying to build core-image-sato for machine=3D omap4430-panda, =
-I'm getting a build error a good ways into the build.  My bblayers.conf =
-file just adds meta-ti and my local.conf is standard with the following =
-key lines:
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of James Abernathy
+> Sent: Wednesday, February 08, 2012 4:52 PM
+> To: Gary Thomas
+> Cc: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] building Yocto for Pandaboard
 >=20
-> MACHINE ??=3D "omap4430-panda"
-> BBMASK =3D ".*/meta-ti/recipes-misc/"
 >=20
-> The error I'm getting with bitbake -D -v core-image-sato is below and =
-I've attached the log.do_compile_perf file.
+> On Feb 8, 2012, at 5:34 PM, Gary Thomas wrote:
 >=20
-> Anyone know the fix?  Not sure the all warings being treated as errors =
-message.
+> > On 2012-02-08 15:27, Koen Kooi wrote:
+> >>
+> >> Op 8 feb. 2012, om 23:22 heeft Gary Thomas het volgende
+> geschreven:
+> >>
+> >>> On 2012-02-08 15:18, Koen Kooi wrote:
+> >>>>
+> >>>> Op 8 feb. 2012, om 23:11 heeft jfabernathy het volgende
+> geschreven:
+> >>>>
+> >>>>> On 02/08/2012 05:05 PM, Gary Thomas wrote:
+> >>>>>> On 2012-02-08 14:58, jfabernathy wrote:
+> >>>>>>> I'm trying to build the pandaboard BSP for Yocto. I cloned
+> the meta-ti repository in the poky directory and tried to build
+> core-image-sato for both machine pandaboard and
+> >>>>>>> omap4430-panda. However, I immediately get an error because
+> bitbake is looking for recipes-images/angstrom/systemd-image.bb,
+> which is required in the ti-hw-bringup-image.bb image
+> >>>>>>> recipe.
+> >>>>>>>
+> >>>>>>> All I really included was the machine name change in
+> local.conf and added the meta-ti layer in bblayers.conf.
+> >>>>>>>
+> >>>>>>> Did I miss a step?
+> >>>>>>
+> >>>>>> This was discussed last week.  Add this line to your
+> local.conf
+> >>>>>>  BBMASK =3D ".*/meta-ti/recipes-misc/"
+> >>>>>> This will skip some BeagleBoard/BeagleBone recipes that are
+> not
+> >>>>>> currently working in a Yocto tree.
+> >>>>>>
+> >>>>> Thanks a bunch. That got it going.  The README said nothing
+> >>>>
+> >>>> Stop spreading such lies!
+> >>>
+> >>> It's not a lie, just a perspective.
+> >>
+> >> It *is* a lie, since the README is non-empty. Regardless of what
+> you want to do, the README does contain content.
+> >
+> > Sorry, I thought you were referring to my work-around to get this
+> > going in Yocto.  Obviously, he was looking for more info in the
+> > README than just how to use this layer with Angstrom and I agree
+> > that this "trick" probably does not belong in the README.
+> >
+> > --
+>=20
+> Wow!  Sorry I jumped into a mailing list I obviously don't
+> understand or belong in.  I apologize if I offended.  I did read
+> the README, but it didn't make a bit of sense to me because it
+> talked about angstrom, which I don't know anything about and
+> wondered what that had to do with yocto.  My current Yocto
+> knowledge is based on the meta-intel layer, which doesn't mention
+> angstrom.  It sounds like the hint/trick that Gary mentioned will
+> make bitbake build with just yocto, which is what I want.  My goal
+> is more of a proof of concept.  I'd like to prove if you could take
+> the same image recipe and move it from Pandaboard to Atom and vice
+> versa.  That way a developer could pick the hardware platform based
+> on the performance, features, and cost.  The software effort should
+> be minimal to move if the Yocto concept works as advertised.
 
-Like I said, follow the instructions in the README. That sets up the =
-right toolchain for everything *and* it sets up things to support 3d and =
-multimedia.=
+Jim, you are welcome here.  As was mentioned before there have been a lot o=
+f discussions about this layer.  One of the goals for the meta-ti layer wil=
+l be to work with just oe-core and yocto and not require meta-angstrom.  We=
+ are moving that direction and the use case you are trying and your experie=
+nces with it are important.  Thanks for taking the time to give this a shot=
+.
+
+>=20
+> Jim A
+>=20
+> > ------------------------------------------------------------
+> > Gary Thomas                 |  Consulting for the
+> > MLB Associates              |    Embedded world
+> > ------------------------------------------------------------
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+>=20
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
