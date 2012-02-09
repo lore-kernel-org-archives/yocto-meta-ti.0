@@ -1,22 +1,24 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7CFE1E00307
-	for <meta-ti@yoctoproject.org>; Thu,  9 Feb 2012 07:21:12 -0800 (PST)
-Received: from dlep26.itg.ti.com ([157.170.170.121])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q19FLBUj000343;
-	Thu, 9 Feb 2012 09:21:11 -0600
-Received: from DFLE70.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q19FLBMb018931;
-	Thu, 9 Feb 2012 09:21:11 -0600 (CST)
-Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
-	DFLE70.ent.ti.com ([fe80::db3:609a:aa62:e1ec%22]) with mapi id
-	14.01.0323.003; Thu, 9 Feb 2012 09:21:11 -0600
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Koen Kooi <koen@dominion.thruhere.net>, jfabernathy <jfabernathy@gmail.com>
-Thread-Topic: [meta-ti] building Yocto for Pandaboard
-Thread-Index: AQHM5rQnABlTcsc9UEeGcv8Cg1R3AZY0iAHggAAPS1CAABa6sA==
-Date: Thu, 9 Feb 2012 15:21:10 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED10127668446@DLEE12.ent.ti.com>
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from tim.rpsys.net (93-97-173-237.zone5.bethere.co.uk
+	[93.97.173.237])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EBECEE00307
+	for <meta-ti@yoctoproject.org>; Thu,  9 Feb 2012 07:33:52 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q19FXnqH015186;
+	Thu, 9 Feb 2012 15:33:49 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 15142-01; Thu,  9 Feb 2012 15:33:45 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q19FXdl7015180
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 9 Feb 2012 15:33:40 GMT
+Message-ID: <1328801627.9968.32.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Date: Thu, 09 Feb 2012 15:33:47 +0000
+In-Reply-To: <4C3F7029-4844-4BA7-B378-BC30E27660F0@dominion.thruhere.net>
 References: <4F32F016.4020008@gmail.com> <4F32F1B3.8090000@mlbassoc.com>
 	<4F32F31B.2000303@gmail.com>
 	<59EDC5ED-F339-48E8-8C4D-7137C23927CD@dominion.thruhere.net>
@@ -27,13 +29,9 @@ References: <4F32F016.4020008@gmail.com> <4F32F1B3.8090000@mlbassoc.com>
 	<7D46E86EC0A8354091174257B2FED10127667EB8@DLEE12.ent.ti.com>
 	<4F33C61E.5080505@gmail.com>
 	<4C3F7029-4844-4BA7-B378-BC30E27660F0@dominion.thruhere.net>
-In-Reply-To: <4C3F7029-4844-4BA7-B378-BC30E27660F0@dominion.thruhere.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
-MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+X-Mailer: Evolution 3.2.2- 
+Mime-Version: 1.0
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: building Yocto for Pandaboard
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -46,121 +44,87 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2012 15:21:12 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 09 Feb 2012 15:33:53 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-> -----Original Message-----
-> From: Koen Kooi [mailto:koen@dominion.thruhere.net]
-> Sent: Thursday, February 09, 2012 7:54 AM
-> To: jfabernathy
-> Cc: Maupin, Chase; meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] building Yocto for Pandaboard
->=20
->=20
+On Thu, 2012-02-09 at 14:54 +0100, Koen Kooi wrote:
 > Op 9 feb. 2012, om 14:11 heeft jfabernathy het volgende geschreven:
->=20
 > > On 02/09/2012 08:01 AM, Maupin, Chase wrote:
-> >>> -----Original Message-----
-> >>> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> >>> bounces@yoctoproject.org] On Behalf Of James Abernathy
-> >>> Sent: Wednesday, February 08, 2012 4:52 PM
-> >>> To: Gary Thomas
-> >>> Cc: meta-ti@yoctoproject.org
-> >>> Subject: Re: [meta-ti] building Yocto for Pandaboard
-> >>>
-> >>>
-> >>> On Feb 8, 2012, at 5:34 PM, Gary Thomas wrote:
-> >>>
-> >>>> On 2012-02-08 15:27, Koen Kooi wrote:
-> >>>>> Op 8 feb. 2012, om 23:22 heeft Gary Thomas het volgende
-> >>> geschreven:
-> >>>>>> On 2012-02-08 15:18, Koen Kooi wrote:
-> >>>>>>> Op 8 feb. 2012, om 23:11 heeft jfabernathy het volgende
-> >>> geschreven:
-> >>>>>>>> On 02/08/2012 05:05 PM, Gary Thomas wrote:
-> >>>>>>>>> On 2012-02-08 14:58, jfabernathy wrote:
-> >>>>>>>>>> I'm trying to build the pandaboard BSP for Yocto. I
-> cloned
-> >>> the meta-ti repository in the poky directory and tried to build
-> >>> core-image-sato for both machine pandaboard and
-> >>>>>>>>>> omap4430-panda. However, I immediately get an error
-> because
-> >>> bitbake is looking for recipes-images/angstrom/systemd-
-> image.bb,
-> >>> which is required in the ti-hw-bringup-image.bb image
-> >>>>>>>>>> recipe.
-> >>>>>>>>>>
-> >>>>>>>>>> All I really included was the machine name change in
-> >>> local.conf and added the meta-ti layer in bblayers.conf.
-> >>>>>>>>>> Did I miss a step?
-> >>>>>>>>> This was discussed last week.  Add this line to your
-> >>> local.conf
-> >>>>>>>>>  BBMASK =3D ".*/meta-ti/recipes-misc/"
-> >>>>>>>>> This will skip some BeagleBoard/BeagleBone recipes that
-> are
-> >>> not
-> >>>>>>>>> currently working in a Yocto tree.
-> >>>>>>>>>
-> >>>>>>>> Thanks a bunch. That got it going.  The README said
-> nothing
-> >>>>>>> Stop spreading such lies!
-> >>>>>> It's not a lie, just a perspective.
-> >>>>> It *is* a lie, since the README is non-empty. Regardless of
-> what
-> >>> you want to do, the README does contain content.
-> >>>> Sorry, I thought you were referring to my work-around to get
-> this
-> >>>> going in Yocto.  Obviously, he was looking for more info in
-> the
-> >>>> README than just how to use this layer with Angstrom and I
-> agree
-> >>>> that this "trick" probably does not belong in the README.
-> >>>>
-> >>>> --
 > >>> Wow!  Sorry I jumped into a mailing list I obviously don't
-> >>> understand or belong in.  I apologize if I offended.  I did
-> read
+> >>> understand or belong in.  I apologize if I offended.  I did read
 > >>> the README, but it didn't make a bit of sense to me because it
 > >>> talked about angstrom, which I don't know anything about and
 > >>> wondered what that had to do with yocto.  My current Yocto
-> >>> knowledge is based on the meta-intel layer, which doesn't
-> mention
-> >>> angstrom.  It sounds like the hint/trick that Gary mentioned
-> will
-> >>> make bitbake build with just yocto, which is what I want.  My
-> goal
-> >>> is more of a proof of concept.  I'd like to prove if you could
-> take
-> >>> the same image recipe and move it from Pandaboard to Atom and
-> vice
-> >>> versa.  That way a developer could pick the hardware platform
-> based
-> >>> on the performance, features, and cost.  The software effort
-> should
+> >>> knowledge is based on the meta-intel layer, which doesn't mention
+> >>> angstrom.  It sounds like the hint/trick that Gary mentioned will
+> >>> make bitbake build with just yocto, which is what I want.  My goal
+> >>> is more of a proof of concept.  I'd like to prove if you could take
+> >>> the same image recipe and move it from Pandaboard to Atom and vice
+> >>> versa.  That way a developer could pick the hardware platform based
+> >>> on the performance, features, and cost.  The software effort should
 > >>> be minimal to move if the Yocto concept works as advertised.
-> >> Jim, you are welcome here.  As was mentioned before there have
-> been a lot of discussions about this layer.  One of the goals for
-> the meta-ti layer will be to work with just oe-core and yocto and
-> not require meta-angstrom.  We are moving that direction and the
-> use case you are trying and your experiences with it are important.
-> Thanks for taking the time to give this a shot.
-> >>
-> > Thanks, glad the proof of concept falls into the groups thinking
-> as well.  I will monitor for progress on the use of just the Yocto
-> Linux for this POC.
->=20
+> >> Jim, you are welcome here.  As was mentioned before there have been
+> a lot of discussions about this layer.  One of the goals for the
+> meta-ti layer will be to work with just oe-core and yocto and not
+> require meta-angstrom.  We are moving that direction and the use case
+> you are trying and your experiences with it are important.  Thanks for
+> taking the time to give this a shot.
+> >> 
+> > Thanks, glad the proof of concept falls into the groups thinking as
+> well.  I will monitor for progress on the use of just the Yocto Linux
+> for this POC.
+>
 > Yocto or Poky? Because if you want yocto, angstrom very much *is*
 > yocto. If you want Poky, that's something different.
 
-I believe it is fair to say that that we should be able to use meta-ti with=
- only openembedded-core and also with openembedded-core + meta-yocto.  Basi=
-cally if there is something in meta-ti that requires things in meta-angstro=
-m then those should be moved to either meta-angstrom or meta-arago correct?
+I think there are a few things need to get cleared up here as this is
+likely confusing for people.
+
+The Yocto Project is the overall project which is working on improving
+embedded Linux for people in whatever areas those improvements are
+needed in. This involves things like eglibc, creating standard formats
+for hardware definitions (BSPs) and has also involved some work on build
+system which are derived from OpenEmbedded.
+
+The Yocto Project uses Poky as its reference build system which is a
+combination of Bitbake, OE-Core, a load of documentation and a very
+small shim called meta-yocto. Its purpose is to provide a known good
+base system people can build on top of by adding layers.
+
+Angstrom is similar to Poky in that its a mix of components allowing
+people to build things. It includes Bitbake and OE-Core and some other
+pieces. It has an equivalent to meta-yocto with different functionality.
+I'll let Koen as one of its maintainers describe what its purpose is.
+One difference is that is has a specific set of hardware targets and
+provides prebuilt package feeds which Poky does not (nor does the Yocto
+Project).
+
+meta-ti is intended as a hardware support layer for various TI products.
+
+The trouble is that some of these components have been around for a
+while and it hasn't always been possible to neatly layer things. In
+particular, meta-ti historically has a dependency on Angstrom.
+
+Work is underway to remove that dependency so meta-ti can operate freely
+with both Poky and Angstrom, or just with OE-Core and Bitbake as
+separate pieces. There is no architectural problem with this and it is
+the intention of everyone involved. There is the question of sorting
+some of the mechanics and making the change whilst not causing problems
+for existing users. I'm really happy to see progress on this!
+
+So in answer to Jim's question, you will be able to use meta-ti with
+Poky directly but right now, there are some details being worked through
+and it doesn't quite work. Perhaps we could mention that in the meta-ti
+README so people can see what the plan is as well as the current
+situation?
+
+Cheers,
+
+Richard
 
 
 
->=20
+
 
 
