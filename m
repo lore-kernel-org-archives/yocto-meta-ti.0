@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCA1CE0123C
-	for <meta-ti@yoctoproject.org>; Fri, 10 Feb 2012 18:33:31 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CD4BCE0136C
+	for <meta-ti@yoctoproject.org>; Fri, 10 Feb 2012 18:33:36 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2060D52AA3; Sat, 11 Feb 2012 02:33:31 +0000 (UTC)
+	id 4D7D0529C1; Sat, 11 Feb 2012 02:33:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120211023331.2060D52AA3@arago-project.org>
-Date: Sat, 11 Feb 2012 02:33:31 +0000 (UTC)
+Message-Id: <20120211023330.4D7D0529C1@arago-project.org>
+Date: Sat, 11 Feb 2012 02:33:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-ti33x-psp 3.2: rebase patches onto latest v3. 2-staging branch
+Subject: Tom Rini : beagleboard: Add fw_env.config
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,48 +21,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Feb 2012 02:33:32 -0000
+X-List-Received-Date: Sat, 11 Feb 2012 02:33:36 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 263dac0f942f43b1afe55817f5f12e069f86f957
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=263dac0f942f43b1afe55817f5f12e069f86f957
+Commit: c4ca936b97c2839b9f34e5badd19d6388c28da2d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c4ca936b97c2839b9f34e5badd19d6388c28da2d
 
-Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Thu Feb  9 20:21:24 2012 +0100
+Author: Tom Rini <trini@ti.com>
+Date:   Fri Feb  3 15:59:34 2012 -0700
 
-linux-ti33x-psp 3.2: rebase patches onto latest v3.2-staging branch
+beagleboard: Add fw_env.config
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+This adds a fw_env.config file that is valid for BeagleBoard's
+with NAND for U-Boot environment.
+
+Signed-off-by: Tom Rini <trini@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...-f_rndis-HACK-around-undefined-variables.patch} |    6 +-
- .../0003-arm-omap-mux33xx-Add-i2c2-pin-mux.patch   |   30 -------
- ...-da8xx-fb-add-DVI-support-for-beaglebone.patch} |    6 +-
- ...ebase-everything-onto-3.2-WARNING-MEGAPA.patch} |   77 +++++++++--------
- ...-hwmod-33xx-Add-support-for-third-i2c-bus.patch |   92 --------------------
- ...ges.patch => 0005-more-beaglebone-merges.patch} |    6 +-
- ...c.patch => 0006-beaglebone-disable-tsadc.patch} |    6 +-
- ...eneral-purpose-mode-untested-with-touchs.patch} |    9 +-
- ...c-Add-board-file-mfd-support-fix-warning.patch} |    6 +-
- ...M335X-init-tsc-bone-style-for-new-boards.patch} |    6 +-
- ...adc-make-stepconfig-channel-configurable.patch} |    6 +-
- ...tch => 0011-tscadc-Trigger-through-sysfs.patch} |    6 +-
- ...eta-ti-Remove-debug-messages-for-meta-ti.patch} |    6 +-
- ...-switch-to-polling-instead-of-interrupts.patch} |    6 +-
- ...it.patch => 0014-beaglebone-fix-ADC-init.patch} |    6 +-
- ...1A.patch => 0015-AM335x-MUX-add-ehrpwm1A.patch} |    8 +-
- ...nable-PWM-for-lcd-backlight-backlight-is.patch} |   11 ++-
- ...et-dto-to-max-value-of-14-to-avoid-SD-Ca.patch} |    7 +-
- ...et-default-brightness-to-50-for-pwm-back.patch} |    7 +-
- ...-framebuffer-driver-supporting-Adafruit-.patch} |    7 +-
- ...20-beaglebone-use-P8_6-gpio1_3-as-w1-bus.patch} |    6 +-
- ...dd-support-for-Towertech-TT3201-CAN-cape.patch} |   32 ++++---
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |   46 +++++-----
- 23 files changed, 146 insertions(+), 252 deletions(-)
+ .../u-boot/u-boot/beagleboard/fw_env.config        |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=263dac0f942f43b1afe55817f5f12e069f86f957
+diff --git a/recipes-bsp/u-boot/u-boot/beagleboard/fw_env.config b/recipes-bsp/u-boot/u-boot/beagleboard/fw_env.config
+new file mode 100644
+index 0000000..ba8147a
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot/beagleboard/fw_env.config
+@@ -0,0 +1 @@
++/dev/mtd5 0x0 0x20000 0x20000
+
 
