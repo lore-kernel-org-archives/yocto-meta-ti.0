@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CD4BCE0136C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CD4ECE013A2
 	for <meta-ti@yoctoproject.org>; Fri, 10 Feb 2012 18:33:36 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4D7D0529C1; Sat, 11 Feb 2012 02:33:30 +0000 (UTC)
+	id 8BC1352A78; Sat, 11 Feb 2012 02:33:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120211023330.4D7D0529C1@arago-project.org>
+Message-Id: <20120211023330.8BC1352A78@arago-project.org>
 Date: Sat, 11 Feb 2012 02:33:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Tom Rini : beagleboard: Add fw_env.config
+Subject: Koen Kooi : beaglebone-getting-started: update to latest git
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,31 +26,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: c4ca936b97c2839b9f34e5badd19d6388c28da2d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c4ca936b97c2839b9f34e5badd19d6388c28da2d
+Commit: e58c65aca39d3688f3455c31309a54bd3e2ddc56
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e58c65aca39d3688f3455c31309a54bd3e2ddc56
 
-Author: Tom Rini <trini@ti.com>
-Date:   Fri Feb  3 15:59:34 2012 -0700
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Thu Feb  9 20:21:19 2012 +0100
 
-beagleboard: Add fw_env.config
+beaglebone-getting-started: update to latest git
 
-This adds a fw_env.config file that is valid for BeagleBoard's
-with NAND for U-Boot environment.
-
-Signed-off-by: Tom Rini <trini@ti.com>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../u-boot/u-boot/beagleboard/fw_env.config        |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+ recipes-misc/payload/beaglebone-getting-started.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot/beagleboard/fw_env.config b/recipes-bsp/u-boot/u-boot/beagleboard/fw_env.config
-new file mode 100644
-index 0000000..ba8147a
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot/beagleboard/fw_env.config
-@@ -0,0 +1 @@
-+/dev/mtd5 0x0 0x20000 0x20000
+diff --git a/recipes-misc/payload/beaglebone-getting-started.bb b/recipes-misc/payload/beaglebone-getting-started.bb
+index 142da90..b135176 100644
+--- a/recipes-misc/payload/beaglebone-getting-started.bb
++++ b/recipes-misc/payload/beaglebone-getting-started.bb
+@@ -1,13 +1,13 @@
+ DESCRIPTION = "BeagleBone Getting Started Guide"
+ 
+-PR = "r16"
++PR = "r17"
+ 
+ inherit allarch
+ 
+ LICENSE = "GPLv2+ & MIT & PD & others"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=603591dea023c3c75b48e07cb47ce639"
+ 
+-SRCREV = "a698888220634a1b549bc2f2e6b33aa03709cb19"
++SRCREV = "5b93037d0504ab194709cf8b6dc3890fefe19fd9"
+ SRC_URI = "git://github.com/jadonk/beaglebone-getting-started.git"
+ 
+ S = "${WORKDIR}/git"
 
 
