@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6C54BE003E5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCDD4E0136A
 	for <meta-ti@yoctoproject.org>; Fri, 10 Feb 2012 18:33:31 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B74FE52A7E; Sat, 11 Feb 2012 02:33:30 +0000 (UTC)
+	id EAFC752AA1; Sat, 11 Feb 2012 02:33:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120211023330.B74FE52A7E@arago-project.org>
+Message-Id: <20120211023330.EAFC752AA1@arago-project.org>
 Date: Sat, 11 Feb 2012 02:33:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : cloud9-image: include CAN support
+Subject: Koen Kooi : linux-ti33x-psp 3.2: add support for Towertech TT3201 CAN cape
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,33 +26,23 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 9c197d70799ab721501e4d8a5be11746f7867843
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9c197d70799ab721501e4d8a5be11746f7867843
+Commit: 2405c4176760e9659d1748362a83ce07d650e495
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2405c4176760e9659d1748362a83ce07d650e495
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Thu Feb  9 20:21:21 2012 +0100
+Date:   Thu Feb  9 20:21:23 2012 +0100
 
-cloud9-image: include CAN support
+linux-ti33x-psp 3.2: add support for Towertech TT3201 CAN cape
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-misc/images/cloud9-image.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+ ...add-support-for-Towertech-TT3201-CAN-cape.patch |  312 ++++++++++++++++++++
+ .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |   14 +-
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    3 +-
+ 3 files changed, 321 insertions(+), 8 deletions(-)
 
-diff --git a/recipes-misc/images/cloud9-image.bb b/recipes-misc/images/cloud9-image.bb
-index 65ce4e0..1a7e269 100644
---- a/recipes-misc/images/cloud9-image.bb
-+++ b/recipes-misc/images/cloud9-image.bb
-@@ -28,6 +28,7 @@ IMAGE_INSTALL += " \
- 	nodejs-dev \
- 	mplayer2 \
- 	tslib-tests tslib-calibrate \
-+	iproute2 canutils \
- "
- 
- export IMAGE_BASENAME = "Cloud9-IDE"
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=2405c4176760e9659d1748362a83ce07d650e495
 
