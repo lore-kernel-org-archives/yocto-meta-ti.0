@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 69D8EE003E3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B1A6E003E4
 	for <meta-ti@yoctoproject.org>; Fri, 10 Feb 2012 18:33:31 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6FAAC52984; Sat, 11 Feb 2012 02:33:30 +0000 (UTC)
+	id A471252A8D; Sat, 11 Feb 2012 02:33:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120211023330.6FAAC52984@arago-project.org>
+Message-Id: <20120211023330.A471252A8D@arago-project.org>
 Date: Sat, 11 Feb 2012 02:33:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Enrico Butera : ti-dmai: build fix
+Subject: Koen Kooi : bonescript: major rework
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,36 +26,73 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: f88a0a9d7cd64101e5f5564ca0cf47c5209e21ef
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f88a0a9d7cd64101e5f5564ca0cf47c5209e21ef
+Commit: a924b24328daa3104d5d8538d417763a9e8b459c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a924b24328daa3104d5d8538d417763a9e8b459c
 
-Author: Enrico Butera <ebutera@users.berlios.de>
-Date:   Thu Feb  9 15:12:44 2012 +0100
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Thu Feb  9 20:21:20 2012 +0100
 
-ti-dmai: build fix
+bonescript: major rework
 
-Properly set ${S} dir.
+* switch to tarball to get a working .git
+* post-process out x86 binaries
+* remove allarch
 
-Signed-off-by: Enrico Butera <ebutera@users.berlios.de>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/dmai/ti-dmai.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-misc/payload/bonescript.bb |   23 +++++++++++------------
+ 1 files changed, 11 insertions(+), 12 deletions(-)
 
-diff --git a/recipes-ti/dmai/ti-dmai.inc b/recipes-ti/dmai/ti-dmai.inc
-index 8c20384..b22495a 100644
---- a/recipes-ti/dmai/ti-dmai.inc
-+++ b/recipes-ti/dmai/ti-dmai.inc
-@@ -15,7 +15,7 @@ PE = "1"
- SRCREV               ?= "UNDEFINED_SRCREV"
- DMAIBRANCH           ?= "UNDEFINED_DMAIBRANCH"
+diff --git a/recipes-misc/payload/bonescript.bb b/recipes-misc/payload/bonescript.bb
+index 4557eae..3361cb4 100644
+--- a/recipes-misc/payload/bonescript.bb
++++ b/recipes-misc/payload/bonescript.bb
+@@ -1,32 +1,31 @@
+ DESCRIPTION = "Scripting tools for the BeagleBoard and BeagleBone"
  
--S = "${WORKDIR}/${DMAIBRANCH}/davinci_multimedia_application_interface/dmai_${PV}"
-+S = "${WORKDIR}/${DMAIBRANCH}/davinci_multimedia_application_interface/dmai_${PV}/dmai"
+-PR = "r12"
++PR = "r13"
  
- SRC_URI = "svn://gforge.ti.com/svn/dmai/;module=${DMAIBRANCH};proto=https;user=anonymous;pswd='' \
- 		file://loadmodules-ti-dmai-dm6446_al.sh \
+-inherit allarch systemd
++inherit systemd
+ 
+-# Ask Jason
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=659ee0c98db2664403c769d6b9ab50eb"
+ 
+-SRCREV = "8118a541e8927f48de2cf9ec203aa1caf88ec1f3"
+-SRC_URI = "git://github.com/jadonk/bonescript.git \
++SRC_URI = "http://dominion.thruhere.net/koen/angstrom/beaglebone/bonescript-8898f4ee4ae2548642679626a03e332a4cd43331.tar.bz2 \
+            file://bonescript-git \
+            file://bone101.service \
+           "
+-S = "${WORKDIR}/git"
++SRC_URI[md5sum] = "306278a2afc10b75f4fc886918fb02b7"
++SRC_URI[sha256sum] = "01c87e59adcc663365c664b0731f0e5a23feeae1965a5cd5edd3e89255f8a30b"
++
++S = "${WORKDIR}/bonescript"
+ 
+ do_install() {
+-	install -m 0644 ${WORKDIR}/bonescript-git ${S}/.git/config
+-	cp $(cat .git/objects/info/alternates)/pack/* .git/objects/pack
+-	rm -f ${S}/.git/objects/info/alternates
+-	echo ${SRCREV} > .git/refs/heads/master
+-	git checkout master || true
+ 	install -d ${D}${localstatedir}/lib/cloud9/
+ 	cp -a ${S}/* ${D}${localstatedir}/lib/cloud9/
+ 	cp -a ${S}/.git ${D}${localstatedir}/lib/cloud9/
+ 
+ 	install -d ${D}${base_libdir}/systemd/system
+ 	install -m 0644 ${WORKDIR}/bone101.service ${D}${base_libdir}/systemd/system
++
++	rm -f ${D}${localstatedir}/lib/cloud9/node_modules/binary/node_modules/put/test/c/itof
++	rm -f ${D}${localstatedir}/lib/cloud9/node_modules/binary/node_modules/put/test/c/ftoi
+ }
+ 
+ SYSTEMD_PACKAGES = "${PN}"
 
 
