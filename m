@@ -1,34 +1,34 @@
 Return-Path: <tom.rini@gmail.com>
-Received: from mail-pz0-f53.google.com (mail-pz0-f53.google.com
-	[209.85.210.53])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 904A8E011D1
+Received: from mail-pw0-f53.google.com (mail-pw0-f53.google.com
+	[209.85.160.53])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F54BE0136A
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 13 Feb 2012 08:51:28 -0800 (PST)
-Received: by dady25 with SMTP id y25so5429996dad.26
+	Mon, 13 Feb 2012 08:51:29 -0800 (PST)
+Received: by mail-pw0-f53.google.com with SMTP id rq13so4446581pbb.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 13 Feb 2012 08:51:28 -0800 (PST)
+	Mon, 13 Feb 2012 08:51:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=5TQ18n5/O/QLA+laZoGGgjUMo5wPKospjeANUl85dK4=;
-	b=QYkpwFd8uWBxDkRgROrz1UwqoPViEqlLPCz+Gz/8tHhJ30yiR73t0qqCDVZ/F+ej4d
-	todwmq6mlCVEpb98pKrVnqhH4zp7UeI/oWwvfXmZXtQtCn2/R5rQWKAPZU1/75lZmvBy
-	QkS5st5dBX8Xhzs7mN9ol/08czmSXIUgTfeBI=
-Received: by 10.68.141.232 with SMTP id rr8mr14120213pbb.29.1329151888122;
-	Mon, 13 Feb 2012 08:51:28 -0800 (PST)
+	:references; bh=V9PX4AV9n4vCiRTGg56s71TedJVGGEwVLD5oBfhwMfc=;
+	b=XqFzKfM/IDOGsK45RinIiQY3pcaqFOiDTzfTfWI6Dj6UUYV7T/B/TZKV5ZKrTnPyyX
+	muNRmXFMwOs35bSmlSmSGsMZVDIL22Ur7umHw4T6N6EZO0OLnEX9Pbxt7WhSb34fxSFS
+	k8LAk2bPlI8TCP2kyDLteFQGHDYSr8mDDCtJE=
+Received: by 10.68.224.9 with SMTP id qy9mr49289540pbc.102.1329151889215;
+	Mon, 13 Feb 2012 08:51:29 -0800 (PST)
 Received: from localhost.localdomain (ip68-230-54-74.ph.ph.cox.net.
 	[68.230.54.74])
-	by mx.google.com with ESMTPS id p2sm40953852pbb.14.2012.02.13.08.51.27
+	by mx.google.com with ESMTPS id p2sm40953852pbb.14.2012.02.13.08.51.28
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 13 Feb 2012 08:51:27 -0800 (PST)
+	Mon, 13 Feb 2012 08:51:28 -0800 (PST)
 Sender: Tom Rini <tom.rini@gmail.com>
 From: Tom Rini <trini@ti.com>
 To: meta-ti@lists.yoctoproject.org
-Date: Mon, 13 Feb 2012 09:51:27 -0700
-Message-Id: <1329151888-7525-2-git-send-email-trini@ti.com>
+Date: Mon, 13 Feb 2012 09:51:28 -0700
+Message-Id: <1329151888-7525-3-git-send-email-trini@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1329151888-7525-1-git-send-email-trini@ti.com>
 References: <1329151888-7525-1-git-send-email-trini@ti.com>
-Subject: [PATCH 2/3] u-boot 2011.12: Add fw_env.config for beagleboard
+Subject: [PATCH 3/3] u-boot git: Update omap3-touchbook for u-boot-fw-utils change
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,48 +40,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2012 16:51:28 -0000
-
-beagleboard provides a correct fw_env.config file so add to the SRC_URI
-and RRECOMMENDS on u-boot-fw-utils.
+X-List-Received-Date: Mon, 13 Feb 2012 16:51:29 -0000
 
 Signed-off-by: Tom Rini <trini@ti.com>
 ---
- recipes-bsp/u-boot/u-boot_2011.12.bb |    8 +++++++-
- 1 files changed, 7 insertions(+), 1 deletions(-)
+ recipes-bsp/u-boot/u-boot_git.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
-index 3610837..4024e64 100644
---- a/recipes-bsp/u-boot/u-boot_2011.12.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
-@@ -6,7 +6,7 @@ UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
- UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
+diff --git a/recipes-bsp/u-boot/u-boot_git.bb b/recipes-bsp/u-boot/u-boot_git.bb
+index 5abb6f5..90527f6 100644
+--- a/recipes-bsp/u-boot/u-boot_git.bb
++++ b/recipes-bsp/u-boot/u-boot_git.bb
+@@ -1,5 +1,5 @@
+ require u-boot.inc
+-PR ="r67"
++PR ="r68"
  
- PV = "2011.12"
--PR = "r4"
-+PR = "r5"
+ DEFAULT_PREFERENCE = "-1"
+ DEFAULT_PREFERENCE_ti814x = "-1"
+@@ -42,6 +42,7 @@ SRC_URI_omap3-touchbook = "git://gitorious.org/u-boot-omap3/mainline.git;branch=
+ "
+ SRCREV_pn-${PN}_omap3-touchbook = "d363f9cb0918a1b6b92e2e20d01543d0c4f53274"
+ PV_omap3-touchbook = "2009.05+${PR}+gitr${SRCREV}"
++RRECOMMENDS_omap3-touchbook = "u-boot-fw-utils"
  
- # No patches for other machines yet
- COMPATIBLE_MACHINE = "(beagleboard|pandaboard|hawkboard|am3517-evm|am37x-evm|omap3evm)"
-@@ -15,6 +15,11 @@ COMPATIBLE_MACHINE = "(beagleboard|pandaboard|hawkboard|am3517-evm|am37x-evm|oma
- CACHEFIX = "file://2011.12/0008-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.patch"
- CACHEFIX_omap4 = ""
- 
-+# File is board-specific, only copy when it will be correct.
-+FWENV_beagleboard = "file://fw_env.config"
-+FWENV = ""
-+RRECOMMENDS_beagleboard = "u-boot-fw-utils"
-+
- SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
-            file://2011.12/0001-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch \
-            file://2011.12/0002-beagleboard-add-support-for-TCT-Beacon-board.patch \
-@@ -26,6 +31,7 @@ SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
-            ${CACHEFIX} \
-            file://2011.12/0009-Beagleboard-Correct-memory-size-on-rev-C4.patch \
-            file://2011.12/0010-OMAP3-Correct-get_sdr_cs_offset-mask.patch \
-+           ${FWENV} \
-           "
- 
+ # OMAPL1 omapl137/omapl138 - PSP 3.20.0.11
  
 -- 
 1.7.0.4
