@@ -1,34 +1,32 @@
 Return-Path: <tom.rini@gmail.com>
 Received: from mail-pz0-f43.google.com (mail-pz0-f43.google.com
 	[209.85.210.43])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 431A7E0138D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0641E0030B
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 13 Feb 2012 10:40:29 -0800 (PST)
-Received: by mail-pz0-f43.google.com with SMTP id c16so5353230dam.2
+	Mon, 13 Feb 2012 10:51:49 -0800 (PST)
+Received: by damc16 with SMTP id c16so5362558dam.2
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 13 Feb 2012 10:40:29 -0800 (PST)
+	Mon, 13 Feb 2012 10:51:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=UzMLvkaALuGUzmJe0rU1ZTVdBwQn+wXgd/qe8/xeFR4=;
-	b=ukZdomo9J26DTtOHZeVJxYz427wUDPMKvVS71BLacG8vHU/RI8VyeDDcrRwO1I9Cas
-	dL4LGioCYxz9/qSNxgjYdCjetwSE4CGEsvu7vSanNKfH5LwyNoPOcQxynzyN9n22aRN8
-	D63embGzP0lOqVYoXm9UCOzqQtAvmR5a/1LEc=
-Received: by 10.68.74.167 with SMTP id u7mr49724159pbv.103.1329158429195;
-	Mon, 13 Feb 2012 10:40:29 -0800 (PST)
-Received: from localhost.localdomain (ip68-230-54-74.ph.ph.cox.net.
-	[68.230.54.74]) by mx.google.com with ESMTPS id
-	li19sm41467821pbb.17.2012.02.13.10.40.28
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 13 Feb 2012 10:40:28 -0800 (PST)
-Sender: Tom Rini <tom.rini@gmail.com>
-From: Tom Rini <trini@ti.com>
-To: meta-ti@lists.yoctoproject.org
-Date: Mon, 13 Feb 2012 11:40:28 -0700
-Message-Id: <1329158428-8747-3-git-send-email-trini@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1329158428-8747-1-git-send-email-trini@ti.com>
-References: <1329158428-8747-1-git-send-email-trini@ti.com>
-Subject: [PATCH v2 3/3] u-boot git: Update omap3-touchbook for u-boot-fw-utils change
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=BhvR9AakwBl/2Gokzblg6vRdbkMxXQ04lRe1bWNn5IM=;
+	b=q2Gt1od1oxbPK123G5e5QTL+p+yPZ2v0l6ISZgXCCARzbyiQdeqXS3Wh9V7U0EOw8y
+	g0CRZmCbT1K2W5PBVKdNYK4rmgb2yDSDDSZdVjZb/q3G1D338YU8tl730MaAaueIpzBm
+	7u9K2emhN+9HfEXgFXOIfQ4xMpvs9N5N2WOvY=
+MIME-Version: 1.0
+Received: by 10.68.72.138 with SMTP id d10mr47877087pbv.15.1329159109629; Mon,
+	13 Feb 2012 10:51:49 -0800 (PST)
+Received: by 10.142.237.1 with HTTP; Mon, 13 Feb 2012 10:51:49 -0800 (PST)
+In-Reply-To: <1329156766-29776-7-git-send-email-koen@dominion.thruhere.net>
+References: <1329156766-29776-1-git-send-email-koen@dominion.thruhere.net>
+	<1329156766-29776-7-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 13 Feb 2012 11:51:49 -0700
+Message-ID: <CA+M6bXnhni9NZN1YOEKZK81HOCbLektXzsoFijY0gmjAtZcWvA@mail.gmail.com>
+From: Tom Rini <tom.rini@gmail.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: [PATCH 7/8] u-boot 2011.09: add patch to support 'cold' AM335x silicon
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,31 +38,14 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2012 18:40:29 -0000
+X-List-Received-Date: Mon, 13 Feb 2012 18:51:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Tom Rini <trini@ti.com>
----
- recipes-bsp/u-boot/u-boot_git.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+On Mon, Feb 13, 2012 at 11:12 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-diff --git a/recipes-bsp/u-boot/u-boot_git.bb b/recipes-bsp/u-boot/u-boot_git.bb
-index 5abb6f5..e7f1777 100644
---- a/recipes-bsp/u-boot/u-boot_git.bb
-+++ b/recipes-bsp/u-boot/u-boot_git.bb
-@@ -1,5 +1,5 @@
- require u-boot.inc
--PR ="r67"
-+PR ="r68"
- 
- DEFAULT_PREFERENCE = "-1"
- DEFAULT_PREFERENCE_ti814x = "-1"
-@@ -57,3 +57,5 @@ PV_hawkboard               = "2009.08+gitr${SRCREV}"
- 
- 
- S = "${WORKDIR}/git"
-+
-+RRECOMMENDS_omap3-touchbook = "u-boot-fw-utils"
+Acked-by: Tom Rini <trini@ti.com>
+
 -- 
-1.7.0.4
-
+Tom
 
