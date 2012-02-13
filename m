@@ -1,28 +1,28 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E3218E00B0A
+Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
+	[74.125.82.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B3313E00B0A
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 13 Feb 2012 10:13:02 -0800 (PST)
-Received: by mail-wi0-f181.google.com with SMTP id hi8so4248170wib.26
+	Mon, 13 Feb 2012 10:13:05 -0800 (PST)
+Received: by mail-we0-f181.google.com with SMTP id p13so4307838wer.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 13 Feb 2012 10:13:02 -0800 (PST)
+	Mon, 13 Feb 2012 10:13:05 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.216.138.75 with SMTP id z53mr5102356wei.25.1329156782365;
-	Mon, 13 Feb 2012 10:13:02 -0800 (PST)
+Received: by 10.180.95.1 with SMTP id dg1mr25815763wib.21.1329156785234;
+	Mon, 13 Feb 2012 10:13:05 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id y1sm48942901wiw.6.2012.02.13.10.13.01
+	by mx.google.com with ESMTPS id er8sm1672193wib.1.2012.02.13.10.13.03
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 13 Feb 2012 10:13:01 -0800 (PST)
+	Mon, 13 Feb 2012 10:13:03 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@lists.yoctoproject.org
-Date: Mon, 13 Feb 2012 19:12:44 +0100
-Message-Id: <1329156766-29776-6-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 13 Feb 2012 19:12:45 +0100
+Message-Id: <1329156766-29776-7-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <1329156766-29776-1-git-send-email-koen@dominion.thruhere.net>
 References: <1329156766-29776-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQnkO5/K5OPzIlrGKUBsWZjG+SAEPvLDRTJPNkth+3yuLYMAf43lyIiqPwWXUYTM9ywstvCB
-Subject: [PATCH 6/8] linux-ti33x-psp 3.2: update to 3.2.5
+X-Gm-Message-State: ALoCoQlM/4Rsd53iG8k1HlcGTO9BO66+GSAgS7eYnjwfLlTlNbia5nvOfH/vIw/6R8bwhJO+auKt
+Subject: [PATCH 7/8] u-boot 2011.09: add patch to support 'cold' AM335x silicon
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,568 +34,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2012 18:13:03 -0000
-
-Runtime tested on a beaglebone A3
+X-List-Received-Date: Mon, 13 Feb 2012 18:13:06 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-
-https://github.com/Angstrom-distribution/meta-ti/commit/abe620834f4b290156b9de970cfbdaf58ebeadce
-https://github.com/Angstrom-distribution/meta-ti/commit/abe620834f4b290156b9de970cfbdaf58ebeadce.patch
-
-branch: https://github.com/Angstrom-distribution/meta-ti/commits/beaglebone-release-201202
-
 ---
- .../0001-MAINTAINERS-stable-Update-address.patch   |   31 +
- .../0002-Documentation-Update-stable-address.patch |   56 ++
- ...x-an-oops-on-reading-fw_priv-fw-in-sysfs-.patch |   81 +++
- .../0004-rt2800usb-Move-ID-out-of-unknown.patch    |   43 ++
- ...ix-setting-of-the-pseudo-palette-for-8bpp.patch |   92 +++
- ...ix-bug-in-calculating-requested-vram-size.patch |   32 +
- ...07-libertas-clean-up-scan-thread-handling.patch |   86 +++
- .../0008-bcma-support-for-suspend-and-resume.patch |  120 ++++
- ...x-Validate-FEM-index-from-ini-file-and-FW.patch |   75 +++
- ...eck-buffer-bound-when-processing-nvs-data.patch |   68 ++
- .../3.2.1/0011-wl12xx-Restore-testmode-ABI.patch   |   32 +
- ...werpc-time-Handle-wrapping-of-decrementer.patch |   93 +++
- ...-unpaired-probe_hcall_entry-and-probe_hca.patch |   85 +++
- ...a-possible-data-corruption-when-receiving.patch |   78 +++
- .../0015-IB-uverbs-Protect-QP-multicast-list.patch |   96 +++
- .../3.2.1/0016-iwlagn-fix-TID-use-bug.patch        |   50 ++
- .../0017-iwlagn-fix-remove-use-of-PAGE_SIZE.patch  |  180 +++++
- ...Fix-parsing-of-__print_flags-in-TP_printk.patch |   37 +
- ...0019-ore-Fix-crash-in-case-of-an-IO-error.patch |   41 ++
- ...0-ore-fix-BUG_ON-too-few-sgs-when-reading.patch |   56 ++
- ...021-ore-Must-support-none-PAGE-aligned-IO.patch |  163 +++++
- ...breakage-when-MISC_FILESYSTEMS-is-not-set.patch |   89 +++
- ...3-reiserfs-Fix-quota-mount-option-parsing.patch |   34 +
- ...rce-inode-evictions-before-umount-to-avoi.patch |   70 ++
- ...warn-from-writepage-when-readonly-inode-i.patch |   73 ++
- ...-hv-Don-t-OOPS-when-you-cannot-init-vmbus.patch |   70 ++
- ...s-hv-Fix-a-bug-in-vmbus_driver_unregister.patch |   40 ++
- .../0028-USB-update-documentation-for-usbmon.patch |   54 ++
- ...oops-related-to-user-namespace-conversion.patch |  125 ++++
- ..._serial-fix-spinlock-lockup-in-RS485-code.patch |   47 ++
- ...fix-to-allow-mounting-a-hierarchy-by-name.patch |   50 ++
- ...dlock-when-converting-file-from-in-ICB-on.patch |  130 ++++
- ...sb-class-cdc-acm.c-clear-dangling-pointer.patch |   45 ++
- ...ight-fix-kernel-bug-when-loading-firmware.patch |   47 ++
- ...rage-doesn-t-support-dynamic-id-currently.patch |  121 ++++
- .../0036-USB-pxa168-Fix-compilation-error.patch    |   42 ++
- .../0037-USB-add-quirk-for-another-camera.patch    |   37 +
- .../3.2.1/0038-USB-omninet-fix-write_room.patch    |   34 +
- ...usb-option-add-ZD-Incorporated-HSPA-modem.patch |   53 ++
- ...-ID-for-Multiplex-RC-serial-adapter-to-cp.patch |   36 +
- ...1-usb-fix-number-of-mapped-SG-DMA-entries.patch |  155 +++++
- ...0042-xhci-Properly-handle-COMP_2ND_BW_ERR.patch |   62 ++
- .../0043-usb-ch9-fix-up-MaxStreams-helper.patch    |   81 +++
- ...zero-delay-when-receiving-odd-mixture-of-.patch |   37 +
- .../0045-asix-fix-infinite-loop-in-rx_fixup.patch  |   38 ++
- ...ng-fix-error-handling-if-slave-is-busy-v2.patch |   68 ++
- ...-Fix-acm_tty_hangup-vs.-acm_tty_close-rac.patch |   54 ++
- ...acl-count-validation-in-xfs_acl_from_disk.patch |   34 +
- .../3.2.1/0049-Linux-3.2.1.patch                   |   24 +
- ...mtdoops-fix-the-oops_page_used-array-size.patch |   39 ++
- ...mtdoops-skip-reading-initially-bad-blocks.patch |   36 +
- ...devs-don-t-increase-open-count-on-error-p.patch |   85 +++
- ...tresstest-bail-out-if-device-has-not-enou.patch |   60 ++
- ...-interface.c-fix-alarm-rollover-when-day-.patch |   53 ++
- ...dd-missing-ext4_resize_end-on-error-paths.patch |  109 +++
- ...undefined-behavior-in-ext4_fill_flex_info.patch |   74 ++
- ...sb-us122l-Delete-calls-to-preempt_disable.patch |   54 ++
- ...-Fix-master-control-for-Cirrus-Logic-421X.patch |   57 ++
- ...SA-HDA-Fix-automute-for-Cirrus-Logic-421x.patch |   48 ++
- ...e1724-Check-for-ac97-to-avoid-kernel-oops.patch |   38 ++
- ...dio-Avoid-flood-of-frame-active-debug-mes.patch |   46 ++
- ...e-auto-parser-for-HP-laptops-with-cx20459.patch |   37 +
- ...turn-the-error-from-get_wcaps_type-for-in.patch |   58 ++
- ...x-the-detection-of-Loopback-Mixing-contro.patch |   42 ++
- ...x-the-lost-power-setup-of-seconary-pins-a.patch |   92 +++
- ...kms-workaround-invalid-AVI-infoframe-chec.patch |   43 ++
- ...n-kms-disable-writeback-on-pre-R300-asics.patch |   40 ++
- ...disabling-PCI-bus-mastering-on-big-endian.patch |   70 ++
- ...FS-errors-are-communicated-on-iodata-pnfs.patch |   50 ++
- ...1-pnfs-obj-Must-return-layout-on-IO-error.patch |   92 +++
- .../3.2.2/0022-NFS-Retry-mounting-NFSROOT.patch    |   94 +++
- ...4.1-fix-backchannel-slotid-off-by-one-bug.patch |   30 +
- ...fix-recent-breakage-to-NFS-error-handling.patch |   60 ++
- ...FSv4-include-bitmap-in-nfsv4-get-acl-data.patch |  313 +++++++++
- ...ression-in-handling-of-context-option-in-.patch |  147 ++++
- ...ximum-global-item-tag-report-size-to-96-b.patch |   35 +
- .../0028-HID-wiimote-Select-INPUT_FF_MEMLESS.patch |   33 +
- ...ix-missing-scrub-when-there-is-a-bit-flip.patch |   81 +++
- ...0030-UBI-fix-use-after-free-on-error-path.patch |   52 ++
- .../0031-PCI-Fix-PCI_EXP_TYPE_RC_EC-value.patch    |   32 +
- ...able-msi-interrupts-when-we-initialize-a-.patch |   53 ++
- ...ore-CPU-non-addressable-_CRS-reserved-mem.patch |   65 ++
- ...x86-PCI-amd-factor-out-MMCONFIG-discovery.patch |  160 +++++
- ...build-amd_bus.o-only-when-CONFIG_AMD_NB-y.patch |   37 +
- ...s-Release-spinlock-for-the-raid-device-li.patch |   56 ++
- ...s-Fix-for-memory-allocation-error-for-lar.patch |  177 +++++
- ...Reject-replies-with-payload-XENSTORE_PAYL.patch |   78 +++
- ...rform-bad-block-tests-for-WriteMostly-dev.patch |   56 ++
- ...040-ima-free-duplicate-measurement-memory.patch |   52 ++
- .../0041-ima-fix-invalid-memory-reference.patch    |   68 ++
- ...ub-fix-a-possible-memleak-in-__slab_alloc.patch |   47 ++
- ...ound-Dell-1536-1546-BIOS-MMCONFIG-bug-tha.patch |  101 +++
- ...tting-custom-MAC-address-on-Asix-88178-de.patch |   45 ++
- ...tting-custom-MAC-address-on-Asix-88772-de.patch |   53 ++
- ...46-include-linux-crash_dump.h-needs-elf.h.patch |   54 ++
- ...ix-BUG-caused-by-failure-to-check-skb-all.patch |   44 ++
- ...x-rx-key-NULL-pointer-dereference-in-prom.patch |   52 ++
- ...egression-in-channelwidth-switch-at-the-s.patch |   68 ++
- ...em_cgroup_replace_page_cache-to-fix-LRU-i.patch |  179 +++++
- .../0051-x86-Fix-mmap-random-address-range.patch   |   47 ++
- .../0052-UBI-fix-nameless-volumes-handling.patch   |   37 +
- .../3.2.2/0053-UBI-fix-debugging-messages.patch    |   42 ++
- .../3.2.2/0054-UBI-make-vid_hdr-non-static.patch   |   36 +
- .../3.2.2/0055-UBIFS-fix-debugging-messages.patch  |   41 ++
- ...UBIFS-make-debugging-messages-light-again.patch |   57 ++
- ...ror-value-returned-by-several-bus-drivers.patch |  197 ++++++
- ...8-mmc-core-Fix-voltage-select-in-DDR-mode.patch |   39 ++
- ...ix-tuning-timer-incorrect-setting-when-su.patch |   39 ++
- .../0060-mmc-sd-Fix-SDR12-timing-regression.patch  |   38 ++
- ...2-ioctl-integer-overflow-in-video_usercop.patch |   54 ++
- ...s-in-a-batch-should-not-be-accounted-as-a.patch |   71 ++
- ...race-Fix-unregister-ftrace_ops-accounting.patch |  227 +++++++
- ...eamline-config.pl-Simplify-backslash-line.patch |   68 ++
- ...eamline-config.pl-Fix-parsing-Makefile-wi.patch |   98 +++
- ...double-free-on-shutdown-of-nfsd-after-cha.patch |   60 ++
- ...svcrpc-destroy-server-sockets-all-at-once.patch |   85 +++
- ...-avoid-memory-corruption-on-pool-shutdown.patch |  156 +++++
- .../3.2.2/0069-nfsd4-fix-lockowner-matching.patch  |   59 ++
- ...d-Fix-oops-when-parsing-a-0-length-export.patch |   82 +++
- ...notify-don-t-BUG-in-fsnotify_destroy_mark.patch |   61 ++
- ...Update-Boot-messages-for-SGI-UV2-platform.patch |   44 ++
- ...t-Fix-handling-of-elf64-big-endian-object.patch |   46 ++
- ...ix-integer-overflow-in-uvc_ioctl_ctrl_map.patch |   62 ++
- ...cache-use-a-dispose-list-in-select_parent.patch |  172 +++++
- .../0076-fix-shrink_dcache_parent-livelock.patch   |  130 ++++
- ...fsblock-acquire-im_lock-in-_preload_range.patch |   64 ++
- ...ock-don-t-spinlock-when-freeing-block_dev.patch |   46 ++
- .../0079-pnfsblock-limit-bio-page-count.patch      |   51 ++
- ...0211-revert-on-channel-work-optimisations.patch |  635 ++++++++++++++++++
- ...-HID-hid-multitouch-add-another-eGalax-id.patch |   60 ++
- ...touch-cleanup-with-eGalax-PID-definitions.patch |  112 ++++
- ...itouch-Add-egalax-ID-for-Acer-Iconia-W500.patch |   62 ++
- ...ouch-add-support-for-the-MSI-Windpad-110W.patch |   49 ++
- ...titouch-add-support-for-new-Hanvon-panels.patch |   63 ++
- ...uch-add-support-of-Atmel-multitouch-panel.patch |   63 ++
- ...0087-HID-multitouch-add-support-for-3M-32.patch |   45 ++
- ...ltitouch-add-support-9-new-Xiroku-devices.patch |  117 ++++
- ...-fix-cputime-overflow-in-uptime_proc_show.patch |   49 ++
- ...0090-block-add-and-use-scsi_blk_cmd_ioctl.patch |  166 +++++
- ...SCSI-passthrough-ioctls-on-partition-devi.patch |  166 +++++
- ...orward-ioctls-from-logical-volumes-to-the.patch |   90 +++
- ...oc-clean-up-and-fix-proc-pid-mem-handling.patch |  271 ++++++++
- ...Use-LPIB-position-fix-for-Macbook-Pro-7-1.patch |   35 +
- ...oso-Xonar-DS-fix-polarity-of-front-output.patch |   37 +
- ...x-internal-microphone-on-Dell-Studio-16-X.patch |   36 +
- ...97-TOMOYO-Accept-000-as-a-valid-character.patch |   43 ++
- ...8-intel-idle-Make-idle-driver-more-robust.patch |   53 ++
- .../3.2.2/0099-intel_idle-fix-API-misuse.patch     |   56 ++
- .../0100-ACPI-Store-SRAT-table-revision.patch      |   66 ++
- ...e-SRAT-table-rev-to-use-8bit-or-32bit-PXM.patch |   50 ++
- ...se-SRAT-table-rev-to-use-8bit-or-16-32bit.patch |   66 ++
- ...back-the-call-to-acpi_os_validate_address.patch |   59 ++
- ...essor-fix-acpi_get_cpuid-for-UP-processor.patch |   75 +++
- ...ix-NULL-pointer-dereference-in-slave_dest.patch |   37 +
- ...t-Set-response-format-in-INQUIRY-response.patch |   44 ++
- ...additional-sense-length-field-in-sense-da.patch |  177 +++++
- ...idate-the-mapped-core-over-suspend-resume.patch |   44 ++
- ...-cx23885-dvb-check-if-dvb_attach-succeded.patch |   36 +
- ...ix-don-t-duplicate-xc4000-entry-for-radio.patch |   95 +++
- ...umberspace-conflict-between-xc4000-and-pt.patch |   42 ++
- ...-module-Fix-disabling-tracepoints-with-ta.patch |   50 ++
- ...AP-correct-SYSC-register-offset-for-OMAP4.patch |   34 +
- ...-new-UV2-hardware-by-using-native-UV2-bro.patch |  350 ++++++++++
- ...ix-BAU-destination-timeout-initialization.patch |   66 ++
- .../3.2.2/0116-x86-UV2-Work-around-BAU-bug.patch   |  570 ++++++++++++++++
- ...fix-interpretation-of-the-rx-KeyMiss-flag.patch |   61 ++
- ...800pci-fix-spurious-interrupts-generation.patch |   86 +++
- ...x-endian-conversion-issue-in-discard-code.patch |   45 ++
- ...20t-modified-the-setting-of-transfer-rate.patch |   33 +
- ...e-fix-off-by-one-index-into-syscall-table.patch |   46 ++
- ...default-wsize-when-unix-extensions-are-no.patch |   67 ++
- ...3-kprobes-initialize-before-using-a-hlist.patch |   49 ++
- ...oc-clear_refs-do-not-clear-reserved-pages.patch |   64 ++
- ...-ptr-dereference-in-__count_immobile_page.patch |   91 +++
- .../3.2.2/0126-iwlagn-check-for-SMPS-mode.patch    |   50 ++
- ...945-fix-hw-passive-scan-on-radar-channels.patch |   60 ++
- ...SHM_UNLOCK-fix-long-unpreemptible-section.patch |  186 ++++++
- ...fix-Unevictable-pages-stranded-after-swap.patch |  342 ++++++++++
- .../3.2.2/0130-Linux-3.2.2.patch                   |   24 +
- ...x-buffer-alignment-regression-with-Nvidia.patch |   62 ++
- ...x-silent-outputs-from-docking-station-jac.patch |   64 ++
- ...tfs-Sanitize-write-counts-of-dev-ecryptfs.patch |  103 +++
- ...tfs-Improve-metadata-read-failure-logging.patch |   58 ++
- ...0005-eCryptfs-Make-truncate-path-killable.patch |   71 ++
- ...6-eCryptfs-Check-inode-changes-in-setattr.patch |  122 ++++
- ...x-oops-when-printing-debug-info-in-extent.patch |  103 +++
- ...adeon-kms-Add-an-MSI-quirk-for-Dell-RS690.patch |   38 ++
- ...kms-move-panel-mode-setup-into-encoder-mo.patch |  130 ++++
- ...kms-rework-modeset-sequence-for-DCE41-and.patch |   87 +++
- .../0011-drm-Fix-authentication-kernel-crash.patch |   91 +++
- ...sing-xfs_iunlock-on-error-recovery-path-i.patch |   38 ++
- ...M5100-register-map-cache-only-when-going-.patch |   32 +
- ...e-register-synchronisation-for-low-freque.patch |   66 ++
- ...go-through-cache-when-applying-WM5100-rev.patch |   41 ++
- ...-wm8996-Call-_POST_PMU-callback-for-CPVDD.patch |   33 +
- ...brcmsmac-fix-tx-queue-flush-infinite-loop.patch |   53 ++
- ...c80211-fix-work-removal-on-deauth-request.patch |  111 +++
- ...jbd-Issue-cache-flush-after-checkpointing.patch |  118 ++++
- ...12-make-it-work-undo-percpu-message-sched.patch |   78 +++
- ...-sha512-reduce-stack-usage-to-safe-number.patch |  129 ++++
- ...-tpm_tis-add-delay-after-aborting-command.patch |   37 +
- .../0023-x86-uv-Fix-uninitialized-spinlocks.patch  |   58 ++
- ...4-x86-uv-Fix-uv_gpa_to_soc_phys_ram-shift.patch |   41 ++
- ...de_amd-Add-support-for-CPU-family-specifi.patch |   75 +++
- ...sembler-constraint-to-prevent-overeager-g.patch |  172 +++++
- ...t-mute-led-polarity-for-laptops-with-bugg.patch |   43 ++
- ...8-ALSA-hda-Fix-silent-output-on-ASUS-A6Rp.patch |   55 ++
- ...hda-Fix-silent-output-on-Haier-W18-laptop.patch |   34 +
- ...per-over-missed-irq-issues-with-force-wak.patch |  126 ++++
- ...15-sdvo-always-set-positive-sync-polarity.patch |   52 ++
- ...-enable-gen7-RC6-and-GPU-turbo-after-resu.patch |   43 ++
- ...-at91-fix-at91rm9200-soc-subtype-handling.patch |   46 ++
- .../0034-mach-ux500-enable-ARM-errata-764369.patch |   31 +
- ...proc-v7.S-remove-HARVARD_CACHE-preprocess.patch |   53 ++
- ...ain-bitterly-about-attempts-to-remove-fil.patch |   68 ++
- ...e-struct-xen_spinlock-to-always-fit-in-ar.patch |  103 +++
- ...oved-redundant-calling-of-_scsih_probe_de.patch |   96 +++
- .../0039-USB-option-Add-LG-docomo-L-02C.patch      |   41 ++
- ...di_sio-fix-TIOCSSERIAL-baud_base-handling.patch |   41 ++
- .../0041-USB-ftdi_sio-fix-initial-baud-rate.patch  |   49 ++
- ...sio-add-PID-for-TI-XDS100v2-BeagleBone-A3.patch |   50 ++
- .../0043-USB-serial-ftdi-additional-IDs.patch      |   49 ++
- .../0044-USB-ftdi_sio-Add-more-identifiers.patch   |   48 ++
- ...-updating-desc-length-must-be-protected-b.patch |   37 +
- ...-use-two-mutexes-to-allow-simultaneous-re.patch |  178 +++++
- ...-add-more-Pantech-UML190-and-UML290-ports.patch |   43 ++
- ...dwc3-ep0-tidy-up-Pending-Request-handling.patch |   54 ++
- ...ake-edge_remove_sysfs_attrs-the-port_remo.patch |   60 ++
- ...0050-TTY-fix-UV-serial-console-regression.patch |   72 ++
- ...-pl011-lock-console-writes-against-interr.patch |   67 ++
- .../3.2.3/0052-jsm-Fixed-EEH-recovery-error.patch  |   53 ++
- ...053-iwlwifi-fix-PCI-E-transport-inta-race.patch |   53 ++
- ...assignment-in-vmw_framebuffer_create_hand.patch |   34 +
- ...tek-cr-fix-autopm-scheduling-while-atomic.patch |   36 +
- .../3.2.3/0056-USB-usbsevseg-fix-max-length.patch  |   34 +
- ...t-langwell-don-t-call-gadget-s-disconnect.patch |   94 +++
- .../3.2.3/0058-usb-gadget-storage-endian-fix.patch |   43 ++
- ...s-usb-host-ehci-fsl.c-add-missing-iounmap.patch |   54 ++
- ...xhci-Fix-USB-3.0-device-restart-on-resume.patch |   51 ++
- ...p-isoc-transfer-ring-when-TD-length-misma.patch |   40 ++
- .../0062-usb-musb-davinci-fix-build-breakage.patch |   41 ++
- ...71805f-Fix-clamping-of-temperature-limits.patch |   43 ++
- ...7ehf-Disable-setting-DC-mode-for-pwm2-pwm.patch |   46 ++
- .../0065-hwmon-sht15-fix-bad-error-code.patch      |   40 ++
- ...-call-wake_up_all-to-allow-driver-to-shut.patch |   45 ++
- ...-better-allocate-a-buffer-that-is-at-leas.patch |   38 ++
- ...-Avoid-hanging-on-interface-with-no-USB_C.patch |   53 ++
- .../3.2.3/0069-netns-fix-net_alloc_generic.patch   |  120 ++++
- ...conspicously-if-someone-uses-net_generic-.patch |   42 ++
- ...f-Register-properly-as-a-pernet-subsystem.patch |  117 ++++
- ...fix-EPOLLET-regression-for-stream-sockets.patch |   96 +++
- ...-fix-enslaving-in-alb-mode-when-link-down.patch |  116 ++++
- ...tp_ip-fix-possible-oops-on-packet-receive.patch |   73 ++
- ...075-macvlan-fix-a-possible-use-after-free.patch |   34 +
- ...76-net-bpf_jit-fix-divide-by-0-generation.patch |  129 ++++
- ...ntroduce-missing-rcu_assign_pointer-calls.patch |  703 ++++++++++++++++++++
- ...ake-rds_sock_lock-BH-rather-than-IRQ-safe.patch |  119 ++++
- ..._trim_head-to-adjust-segment-count-with-s.patch |   61 ++
- ...ng-remote-adress-for-md5-lookup-in-rst-pa.patch |   49 ++
- ...CP210x-Added-USB-ID-for-the-Link-Instrume.patch |   32 +
- ...USB-cp210x-call-generic-open-last-in-open.patch |   47 ++
- ...0083-USB-cp210x-fix-CP2104-baudrate-usage.patch |   78 +++
- ...84-USB-cp210x-do-not-map-baud-rates-to-B0.patch |   34 +
- ...5-USB-cp210x-fix-up-set_termios-variables.patch |   44 ++
- ...clean-up-refactor-and-document-speed-hand.patch |  121 ++++
- ...7-USB-cp210x-initialise-baud-rate-at-open.patch |   35 +
- ...cp210x-allow-more-baud-rates-above-1Mbaud.patch |   48 ++
- ...ux500-no-MMC_CAP_SD_HIGHSPEED-on-Snowball.patch |   34 +
- .../3.2.3/0090-Linux-3.2.3.patch                   |   24 +
- ...-Mark-WM5100-register-map-cache-only-when.patch |   32 +
- ...-Don-t-go-through-cache-when-applying-WM5.patch |   39 ++
- .../3.2.4/0003-Linux-3.2.4.patch                   |   24 +
- .../3.2.5/0001-PCI-Rework-ASPM-disable-code.patch  |  236 +++++++
- .../3.2.5/0002-Linux-3.2.5.patch                   |   24 +
- recipes-kernel/linux/linux-ti33x-psp-3.2/src.txt   |  295 ++++++++
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |  276 ++++++++-
- 276 files changed, 21801 insertions(+), 1 deletions(-)
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0001-MAINTAINERS-stable-Update-address.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0002-Documentation-Update-stable-address.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0003-firmware-Fix-an-oops-on-reading-fw_priv-fw-in-sysfs-.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0004-rt2800usb-Move-ID-out-of-unknown.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0005-offb-Fix-setting-of-the-pseudo-palette-for-8bpp.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0006-offb-Fix-bug-in-calculating-requested-vram-size.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0007-libertas-clean-up-scan-thread-handling.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0008-bcma-support-for-suspend-and-resume.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0009-wl12xx-Validate-FEM-index-from-ini-file-and-FW.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0010-wl12xx-Check-buffer-bound-when-processing-nvs-data.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0011-wl12xx-Restore-testmode-ABI.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0012-powerpc-time-Handle-wrapping-of-decrementer.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0013-powerpc-Fix-unpaired-probe_hcall_entry-and-probe_hca.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0014-IB-qib-Fix-a-possible-data-corruption-when-receiving.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0015-IB-uverbs-Protect-QP-multicast-list.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0016-iwlagn-fix-TID-use-bug.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0017-iwlagn-fix-remove-use-of-PAGE_SIZE.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0018-perf-Fix-parsing-of-__print_flags-in-TP_printk.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0019-ore-Fix-crash-in-case-of-an-IO-error.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0020-ore-fix-BUG_ON-too-few-sgs-when-reading.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0021-ore-Must-support-none-PAGE-aligned-IO.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0022-ore-FIX-breakage-when-MISC_FILESYSTEMS-is-not-set.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0023-reiserfs-Fix-quota-mount-option-parsing.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0024-reiserfs-Force-inode-evictions-before-umount-to-avoi.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0025-ext3-Don-t-warn-from-writepage-when-readonly-inode-i.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0026-drivers-hv-Don-t-OOPS-when-you-cannot-init-vmbus.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0027-Drivers-hv-Fix-a-bug-in-vmbus_driver_unregister.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0028-USB-update-documentation-for-usbmon.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0029-usbfs-Fix-oops-related-to-user-namespace-conversion.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0030-atmel_serial-fix-spinlock-lockup-in-RS485-code.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0031-cgroup-fix-to-allow-mounting-a-hierarchy-by-name.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0032-udf-Fix-deadlock-when-converting-file-from-in-ICB-on.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0033-drivers-usb-class-cdc-acm.c-clear-dangling-pointer.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0034-USB-isight-fix-kernel-bug-when-loading-firmware.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0035-usb-usb-storage-doesn-t-support-dynamic-id-currently.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0036-USB-pxa168-Fix-compilation-error.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0037-USB-add-quirk-for-another-camera.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0038-USB-omninet-fix-write_room.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0039-usb-option-add-ZD-Incorporated-HSPA-modem.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0040-USB-Add-USB-ID-for-Multiplex-RC-serial-adapter-to-cp.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0041-usb-fix-number-of-mapped-SG-DMA-entries.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0042-xhci-Properly-handle-COMP_2ND_BW_ERR.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0043-usb-ch9-fix-up-MaxStreams-helper.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0044-igmp-Avoid-zero-delay-when-receiving-odd-mixture-of-.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0045-asix-fix-infinite-loop-in-rx_fixup.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0046-bonding-fix-error-handling-if-slave-is-busy-v2.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0047-usb-cdc-acm-Fix-acm_tty_hangup-vs.-acm_tty_close-rac.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0048-xfs-fix-acl-count-validation-in-xfs_acl_from_disk.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.1/0049-Linux-3.2.1.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0001-mtdoops-fix-the-oops_page_used-array-size.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0002-mtd-mtdoops-skip-reading-initially-bad-blocks.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0003-mtd-mtd_blkdevs-don-t-increase-open-count-on-error-p.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0004-mtd-tests-stresstest-bail-out-if-device-has-not-enou.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0005-drivers-rtc-interface.c-fix-alarm-rollover-when-day-.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0006-ext4-add-missing-ext4_resize_end-on-error-paths.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0007-ext4-fix-undefined-behavior-in-ext4_fill_flex_info.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0008-ALSA-snd-usb-us122l-Delete-calls-to-preempt_disable.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0009-ALSA-HDA-Fix-master-control-for-Cirrus-Logic-421X.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0010-ALSA-HDA-Fix-automute-for-Cirrus-Logic-421x.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0011-ALSA-ice1724-Check-for-ac97-to-avoid-kernel-oops.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0012-ALSA-usb-audio-Avoid-flood-of-frame-active-debug-mes.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0013-ALSA-hda-Use-auto-parser-for-HP-laptops-with-cx20459.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0014-ALSA-hda-Return-the-error-from-get_wcaps_type-for-in.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0015-ALSA-hda-Fix-the-detection-of-Loopback-Mixing-contro.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0016-ALSA-hda-Fix-the-lost-power-setup-of-seconary-pins-a.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0017-drm-radeon-kms-workaround-invalid-AVI-infoframe-chec.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0018-drm-radeon-kms-disable-writeback-on-pre-R300-asics.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0019-radeon-Fix-disabling-PCI-bus-mastering-on-big-endian.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0020-pnfs-obj-pNFS-errors-are-communicated-on-iodata-pnfs.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0021-pnfs-obj-Must-return-layout-on-IO-error.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0022-NFS-Retry-mounting-NFSROOT.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0023-NFSv4.1-fix-backchannel-slotid-off-by-one-bug.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0024-NFS-fix-recent-breakage-to-NFS-error-handling.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0025-NFSv4-include-bitmap-in-nfsv4-get-acl-data.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0026-nfs-fix-regression-in-handling-of-context-option-in-.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0027-HID-bump-maximum-global-item-tag-report-size-to-96-b.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0028-HID-wiimote-Select-INPUT_FF_MEMLESS.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0029-UBI-fix-missing-scrub-when-there-is-a-bit-flip.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0030-UBI-fix-use-after-free-on-error-path.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0031-PCI-Fix-PCI_EXP_TYPE_RC_EC-value.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0032-PCI-msi-Disable-msi-interrupts-when-we-initialize-a-.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0033-x86-PCI-Ignore-CPU-non-addressable-_CRS-reserved-mem.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0034-x86-PCI-amd-factor-out-MMCONFIG-discovery.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0035-x86-PCI-build-amd_bus.o-only-when-CONFIG_AMD_NB-y.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0036-SCSI-mpt2sas-Release-spinlock-for-the-raid-device-li.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0037-SCSI-mpt2sas-Fix-for-memory-allocation-error-for-lar.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0038-xen-xenbus-Reject-replies-with-payload-XENSTORE_PAYL.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0039-md-raid1-perform-bad-block-tests-for-WriteMostly-dev.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0040-ima-free-duplicate-measurement-memory.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0041-ima-fix-invalid-memory-reference.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0042-slub-fix-a-possible-memleak-in-__slab_alloc.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0043-PNP-work-around-Dell-1536-1546-BIOS-MMCONFIG-bug-tha.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0044-asix-fix-setting-custom-MAC-address-on-Asix-88178-de.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0045-asix-fix-setting-custom-MAC-address-on-Asix-88772-de.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0046-include-linux-crash_dump.h-needs-elf.h.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0047-rtl8192se-Fix-BUG-caused-by-failure-to-check-skb-all.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0048-mac80211-fix-rx-key-NULL-pointer-dereference-in-prom.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0049-ath9k-Fix-regression-in-channelwidth-switch-at-the-s.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0050-memcg-add-mem_cgroup_replace_page_cache-to-fix-LRU-i.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0051-x86-Fix-mmap-random-address-range.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0052-UBI-fix-nameless-volumes-handling.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0053-UBI-fix-debugging-messages.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0054-UBI-make-vid_hdr-non-static.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0055-UBIFS-fix-debugging-messages.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0056-UBIFS-make-debugging-messages-light-again.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0057-i2c-Fix-error-value-returned-by-several-bus-drivers.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0058-mmc-core-Fix-voltage-select-in-DDR-mode.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0059-mmc-sdhci-Fix-tuning-timer-incorrect-setting-when-su.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0060-mmc-sd-Fix-SDR12-timing-regression.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0061-V4L-DVB-v4l2-ioctl-integer-overflow-in-video_usercop.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0062-Unused-iocbs-in-a-batch-should-not-be-accounted-as-a.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0063-ftrace-Fix-unregister-ftrace_ops-accounting.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0064-kconfig-streamline-config.pl-Simplify-backslash-line.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0065-kconfig-streamline-config.pl-Fix-parsing-Makefile-wi.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0066-svcrpc-fix-double-free-on-shutdown-of-nfsd-after-cha.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0067-svcrpc-destroy-server-sockets-all-at-once.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0068-svcrpc-avoid-memory-corruption-on-pool-shutdown.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0069-nfsd4-fix-lockowner-matching.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0070-nfsd-Fix-oops-when-parsing-a-0-length-export.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0071-fsnotify-don-t-BUG-in-fsnotify_destroy_mark.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0072-x86-UV-Update-Boot-messages-for-SGI-UV2-platform.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0073-recordmcount-Fix-handling-of-elf64-big-endian-object.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0074-uvcvideo-Fix-integer-overflow-in-uvc_ioctl_ctrl_map.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0075-dcache-use-a-dispose-list-in-select_parent.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0076-fix-shrink_dcache_parent-livelock.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0077-pnfsblock-acquire-im_lock-in-_preload_range.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0078-pnfsblock-don-t-spinlock-when-freeing-block_dev.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0079-pnfsblock-limit-bio-page-count.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0080-mac80211-revert-on-channel-work-optimisations.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0081-HID-hid-multitouch-add-another-eGalax-id.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0082-HID-multitouch-cleanup-with-eGalax-PID-definitions.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0083-HID-multitouch-Add-egalax-ID-for-Acer-Iconia-W500.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0084-HID-multitouch-add-support-for-the-MSI-Windpad-110W.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0085-HID-hid-multitouch-add-support-for-new-Hanvon-panels.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0086-HID-multitouch-add-support-of-Atmel-multitouch-panel.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0087-HID-multitouch-add-support-for-3M-32.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0088-HID-hid-multitouch-add-support-9-new-Xiroku-devices.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0089-fix-cputime-overflow-in-uptime_proc_show.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0090-block-add-and-use-scsi_blk_cmd_ioctl.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0091-block-fail-SCSI-passthrough-ioctls-on-partition-devi.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0092-dm-do-not-forward-ioctls-from-logical-volumes-to-the.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0093-proc-clean-up-and-fix-proc-pid-mem-handling.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0094-ALSA-HDA-Use-LPIB-position-fix-for-Macbook-Pro-7-1.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0095-ALSA-virtuoso-Xonar-DS-fix-polarity-of-front-output.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0096-ALSA-HDA-Fix-internal-microphone-on-Dell-Studio-16-X.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0097-TOMOYO-Accept-000-as-a-valid-character.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0098-intel-idle-Make-idle-driver-more-robust.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0099-intel_idle-fix-API-misuse.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0100-ACPI-Store-SRAT-table-revision.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0101-ACPI-x86-Use-SRAT-table-rev-to-use-8bit-or-32bit-PXM.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0102-ACPI-ia64-Use-SRAT-table-rev-to-use-8bit-or-16-32bit.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0103-ACPICA-Put-back-the-call-to-acpi_os_validate_address.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0104-ACPI-processor-fix-acpi_get_cpuid-for-UP-processor.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0105-sym53c8xx-Fix-NULL-pointer-dereference-in-slave_dest.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0106-target-Set-response-format-in-INQUIRY-response.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0107-target-Set-additional-sense-length-field-in-sense-da.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0108-bcma-invalidate-the-mapped-core-over-suspend-resume.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0109-cx23885-dvb-check-if-dvb_attach-succeded.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0110-cx88-fix-don-t-duplicate-xc4000-entry-for-radio.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0111-tuner-Fix-numberspace-conflict-between-xc4000-and-pt.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0112-tracepoints-module-Fix-disabling-tracepoints-with-ta.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0113-I2C-OMAP-correct-SYSC-register-offset-for-OMAP4.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0114-x86-UV2-Fix-new-UV2-hardware-by-using-native-UV2-bro.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0115-x86-UV2-Fix-BAU-destination-timeout-initialization.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0116-x86-UV2-Work-around-BAU-bug.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0117-ath9k_hw-fix-interpretation-of-the-rx-KeyMiss-flag.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0118-rt2800pci-fix-spurious-interrupts-generation.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0119-xfs-fix-endian-conversion-issue-in-discard-code.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0120-i2c-eg20t-modified-the-setting-of-transfer-rate.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0121-score-fix-off-by-one-index-into-syscall-table.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0122-cifs-lower-default-wsize-when-unix-extensions-are-no.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0123-kprobes-initialize-before-using-a-hlist.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0124-proc-clear_refs-do-not-clear-reserved-pages.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0125-mm-fix-NULL-ptr-dereference-in-__count_immobile_page.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0126-iwlagn-check-for-SMPS-mode.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0127-iwlegacy-3945-fix-hw-passive-scan-on-radar-channels.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0128-SHM_UNLOCK-fix-long-unpreemptible-section.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0129-SHM_UNLOCK-fix-Unevictable-pages-stranded-after-swap.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.2/0130-Linux-3.2.2.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0001-ALSA-hda-Fix-buffer-alignment-regression-with-Nvidia.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0002-ALSA-hda-Fix-silent-outputs-from-docking-station-jac.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0003-eCryptfs-Sanitize-write-counts-of-dev-ecryptfs.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0004-ecryptfs-Improve-metadata-read-failure-logging.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0005-eCryptfs-Make-truncate-path-killable.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0006-eCryptfs-Check-inode-changes-in-setattr.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0007-eCryptfs-Fix-oops-when-printing-debug-info-in-extent.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0008-drm-radeon-kms-Add-an-MSI-quirk-for-Dell-RS690.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0009-drm-radeon-kms-move-panel-mode-setup-into-encoder-mo.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0010-drm-radeon-kms-rework-modeset-sequence-for-DCE41-and.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0011-drm-Fix-authentication-kernel-crash.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0012-xfs-Fix-missing-xfs_iunlock-on-error-recovery-path-i.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0013-ASoC-Mark-WM5100-register-map-cache-only-when-going-.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0014-ASoC-Disable-register-synchronisation-for-low-freque.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0015-ASoC-Don-t-go-through-cache-when-applying-WM5100-rev.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0016-ASoC-wm8996-Call-_POST_PMU-callback-for-CPVDD.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0017-brcmsmac-fix-tx-queue-flush-infinite-loop.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0018-mac80211-fix-work-removal-on-deauth-request.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0019-jbd-Issue-cache-flush-after-checkpointing.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0020-crypto-sha512-make-it-work-undo-percpu-message-sched.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0021-crypto-sha512-reduce-stack-usage-to-safe-number.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0022-tpm_tis-add-delay-after-aborting-command.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0023-x86-uv-Fix-uninitialized-spinlocks.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0024-x86-uv-Fix-uv_gpa_to_soc_phys_ram-shift.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0025-x86-microcode_amd-Add-support-for-CPU-family-specifi.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0026-m68k-Fix-assembler-constraint-to-prevent-overeager-g.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0027-ALSA-hda-set-mute-led-polarity-for-laptops-with-bugg.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0028-ALSA-hda-Fix-silent-output-on-ASUS-A6Rp.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0029-ALSA-hda-Fix-silent-output-on-Haier-W18-laptop.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0030-drm-i915-paper-over-missed-irq-issues-with-force-wak.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0031-drm-i915-sdvo-always-set-positive-sync-polarity.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0032-drm-i915-Re-enable-gen7-RC6-and-GPU-turbo-after-resu.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0033-ARM-at91-fix-at91rm9200-soc-subtype-handling.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0034-mach-ux500-enable-ARM-errata-764369.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0035-ARM-7296-1-proc-v7.S-remove-HARVARD_CACHE-preprocess.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0036-sysfs-Complain-bitterly-about-attempts-to-remove-fil.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0037-x86-xen-size-struct-xen_spinlock-to-always-fit-in-ar.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0038-mpt2sas-Removed-redundant-calling-of-_scsih_probe_de.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0039-USB-option-Add-LG-docomo-L-02C.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0040-USB-ftdi_sio-fix-TIOCSSERIAL-baud_base-handling.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0041-USB-ftdi_sio-fix-initial-baud-rate.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0042-USB-ftdi_sio-add-PID-for-TI-XDS100v2-BeagleBone-A3.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0043-USB-serial-ftdi-additional-IDs.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0044-USB-ftdi_sio-Add-more-identifiers.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0045-USB-cdc-wdm-updating-desc-length-must-be-protected-b.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0046-USB-cdc-wdm-use-two-mutexes-to-allow-simultaneous-re.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0047-qcaux-add-more-Pantech-UML190-and-UML290-ports.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0048-usb-dwc3-ep0-tidy-up-Pending-Request-handling.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0049-usb-io_ti-Make-edge_remove_sysfs_attrs-the-port_remo.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0050-TTY-fix-UV-serial-console-regression.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0051-serial-amba-pl011-lock-console-writes-against-interr.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0052-jsm-Fixed-EEH-recovery-error.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0053-iwlwifi-fix-PCI-E-transport-inta-race.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0054-vmwgfx-Fix-assignment-in-vmw_framebuffer_create_hand.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0055-USB-Realtek-cr-fix-autopm-scheduling-while-atomic.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0056-USB-usbsevseg-fix-max-length.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0057-usb-gadget-langwell-don-t-call-gadget-s-disconnect.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0058-usb-gadget-storage-endian-fix.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0059-drivers-usb-host-ehci-fsl.c-add-missing-iounmap.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0060-xhci-Fix-USB-3.0-device-restart-on-resume.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0061-xHCI-Cleanup-isoc-transfer-ring-when-TD-length-misma.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0062-usb-musb-davinci-fix-build-breakage.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0063-hwmon-f71805f-Fix-clamping-of-temperature-limits.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0064-hwmon-w83627ehf-Disable-setting-DC-mode-for-pwm2-pwm.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0065-hwmon-sht15-fix-bad-error-code.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0066-USB-cdc-wdm-call-wake_up_all-to-allow-driver-to-shut.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0067-USB-cdc-wdm-better-allocate-a-buffer-that-is-at-leas.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0068-USB-cdc-wdm-Avoid-hanging-on-interface-with-no-USB_C.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0069-netns-fix-net_alloc_generic.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0070-netns-Fail-conspicously-if-someone-uses-net_generic-.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0071-net-caif-Register-properly-as-a-pernet-subsystem.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0072-af_unix-fix-EPOLLET-regression-for-stream-sockets.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0073-bonding-fix-enslaving-in-alb-mode-when-link-down.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0074-l2tp-l2tp_ip-fix-possible-oops-on-packet-receive.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0075-macvlan-fix-a-possible-use-after-free.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0076-net-bpf_jit-fix-divide-by-0-generation.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0077-net-reintroduce-missing-rcu_assign_pointer-calls.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0078-rds-Make-rds_sock_lock-BH-rather-than-IRQ-safe.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0079-tcp-fix-tcp_trim_head-to-adjust-segment-count-with-s.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0080-tcp-md5-using-remote-adress-for-md5-lookup-in-rst-pa.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0081-USB-serial-CP210x-Added-USB-ID-for-the-Link-Instrume.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0082-USB-cp210x-call-generic-open-last-in-open.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0083-USB-cp210x-fix-CP2104-baudrate-usage.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0084-USB-cp210x-do-not-map-baud-rates-to-B0.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0085-USB-cp210x-fix-up-set_termios-variables.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0086-USB-cp210x-clean-up-refactor-and-document-speed-hand.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0087-USB-cp210x-initialise-baud-rate-at-open.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0088-USB-cp210x-allow-more-baud-rates-above-1Mbaud.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0089-mach-ux500-no-MMC_CAP_SD_HIGHSPEED-on-Snowball.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.3/0090-Linux-3.2.3.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.4/0001-Revert-ASoC-Mark-WM5100-register-map-cache-only-when.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.4/0002-Revert-ASoC-Don-t-go-through-cache-when-applying-WM5.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.4/0003-Linux-3.2.4.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.5/0001-PCI-Rework-ASPM-disable-code.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/3.2.5/0002-Linux-3.2.5.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/src.txt
+ ...ddr_defs-change-DDR-timings-for-15x15-EVM.patch |   30 ++++++++++++++++++++
+ recipes-bsp/u-boot/u-boot_2011.10rc.bb             |    3 +-
+ 2 files changed, 32 insertions(+), 1 deletions(-)
+ create mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0001-ddr_defs-change-DDR-timings-for-15x15-EVM.patch
+
+diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0001-ddr_defs-change-DDR-timings-for-15x15-EVM.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0001-ddr_defs-change-DDR-timings-for-15x15-EVM.patch
+new file mode 100644
+index 0000000..4563a2c
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot/2011.09git/0001-ddr_defs-change-DDR-timings-for-15x15-EVM.patch
+@@ -0,0 +1,30 @@
++From 7a3b3b04b1aed6a649d99396f914ec042968f924 Mon Sep 17 00:00:00 2001
++From: Chase Maupin <Chase.Maupin@ti.com>
++Date: Thu, 9 Feb 2012 13:09:27 -0600
++Subject: [PATCH] ddr_defs: change DDR timings for 15x15 EVM
++
++* For cold silicon the DDR timings need to be relaxed in order for
++  the device to boot with DDR at 266MHz
++* Fix proposed by James Doublesin
++
++Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
++---
++ arch/arm/include/asm/arch-ti81xx/ddr_defs.h |    2 +-
++ 1 files changed, 1 insertions(+), 1 deletions(-)
++
++diff --git a/arch/arm/include/asm/arch-ti81xx/ddr_defs.h b/arch/arm/include/asm/arch-ti81xx/ddr_defs.h
++index 6c4b422..0b7ffe7 100644
++--- a/arch/arm/include/asm/arch-ti81xx/ddr_defs.h
+++++ b/arch/arm/include/asm/arch-ti81xx/ddr_defs.h
++@@ -338,7 +338,7 @@
++ #define DDR2_RD_DQS		0x40
++ #define DDR2_PHY_FIFO_WE	0x56
++ #else
++-#define EMIF_READ_LATENCY	0x04
+++#define EMIF_READ_LATENCY	0x05
++ #define EMIF_TIM1		0x0666B3D6
++ #define EMIF_TIM2		0x143731DA
++ #define	EMIF_TIM3		0x00000347
++-- 
++1.7.0.4
++
+diff --git a/recipes-bsp/u-boot/u-boot_2011.10rc.bb b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
+index 74597f6..0102d15 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.10rc.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
+@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "(ti33x)"
+ DEFAULT_PREFERENCE_ti33x = "99"
+ 
+ PV = "2011.09+git"
+-PR = "r25"
++PR = "r26"
+ 
+ # SPL build
+ UBOOT_BINARY = "u-boot.img"
+@@ -23,6 +23,7 @@ SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;br
+            file://2011.09git/0007-am335x_evm-switch-to-ext4.patch \
+            file://2011.09git/0008-HACK-am335x-evm-turn-d-cache-on-globally-turn-it-off.patch \
+            file://2011.09git/0009-am335x-evm-enable-i2c2-pinmux-for-beaglebone.patch \
++           file://2011.09git/0001-ddr_defs-change-DDR-timings-for-15x15-EVM.patch \
+           "
+ 
+ SRCREV = "f63b270e47f62f4d1a05b2001357e215966c6f5a"
+-- 
+1.7.2.5
+
 
