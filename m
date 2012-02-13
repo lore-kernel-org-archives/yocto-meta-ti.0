@@ -1,26 +1,26 @@
 Return-Path: <denis@denix.org>
-Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
-	[206.46.173.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 107AFE003E4
-	for <meta-ti@yoctoproject.org>; Fri, 10 Feb 2012 20:04:12 -0800 (PST)
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 79EAAE01217
+	for <meta-ti@yoctoproject.org>; Sun, 12 Feb 2012 19:17:47 -0800 (PST)
 Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173009.mailsrvcs.net
+	by vms173003.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0LZ700CFYNAPNVT0@vms173009.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 10 Feb 2012 22:04:02 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 48D7420272; Fri,
-	10 Feb 2012 23:03:57 -0500 (EST)
-Date: Fri, 10 Feb 2012 23:03:57 -0500
+	2009)) with ESMTPA id <0LZB009ACAH9OA91@vms173003.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Sun, 12 Feb 2012 21:17:46 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 949C6202F7; Sun,
+	12 Feb 2012 22:17:33 -0500 (EST)
+Date: Sun, 12 Feb 2012 22:17:33 -0500
 From: Denys Dmytriyenko <denis@denix.org>
-To: "Monk, Roger" <r-monk@ti.com>
-Message-id: <20120211040357.GC2525@denix.org>
-References: <1328013657-2069-1-git-send-email-bigotp@acm.org>
-	<4C82F39BABFE6A429733A300DEBF52240B5AC841@DNCE02.ent.ti.com>
+To: Brian Hutchinson <b.hutchman@gmail.com>
+Message-id: <20120213031733.GA6838@denix.org>
+References: <4F33F01E.2000601@communistcode.co.uk>
+	<CAFZh4h-2sWHUGcBW-y--tw+QFaLeNAiFmnm43bh7NFNvqMwdzg@mail.gmail.com>
 MIME-version: 1.0
-In-reply-to: <4C82F39BABFE6A429733A300DEBF52240B5AC841@DNCE02.ent.ti.com>
+In-reply-to: <CAFZh4h-2sWHUGcBW-y--tw+QFaLeNAiFmnm43bh7NFNvqMwdzg@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 0/4] Resubmit TI DSP build issues related to installer
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Beaglebone kernel/u-boot/userspace
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,37 +32,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Feb 2012 04:04:13 -0000
+X-List-Received-Date: Mon, 13 Feb 2012 03:17:47 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Wed, Feb 01, 2012 at 12:45:03AM +0000, Monk, Roger wrote:
-> Hi Peter,
+On Thu, Feb 09, 2012 at 11:30:18AM -0500, Brian Hutchinson wrote:
+> I've not seen anything like you describe but I can say that I recently
+> checked out master and didn't do anything different to it and was able
+> to build a core-image-base for BeagleBoard just fine without having to
+> mess with any other layers.
 > 
-> On Tue, Jan 31, 2012 at 12:40:53, Peter A. Bigot wrote:
-> > Subject: [meta-ti] [PATCH 0/4] Resubmit TI DSP build issues related to
-> > installer
-> >
-> > From: "Peter A. Bigot" <bigotp@acm.org>
-> >
-> > This patch set re-submits the (updated) uncommitted parts of my
-> > 27Dec2011 patch set to get gstreamer-ti and its dependencies to build
-> > in a pristine work environment.  It was left back on 29Dec2011 with:
-> >
-> > > I'm going to wait for Roger to get back from holidays to comment on
-> > the installer issues, I'll push the CE and dmai patches later today.
-> >
-> 
-> Thanks for re-basing/re-submitting - sorry this has taken a while.  Your 
-> patches look good - however, I have some other failing installer scenarios 
-> like these for which I have a similar, but unfortunately, not the same 
-> patchset, in progress.  I hope to review yours in the coming days if ok.
+> It is my understanding that you only have to mess with meta-ti if you
+> are working with TI processors other than what is on the BeagleBoard.
 
-Roger,
-
-Were you able to look into this issue and review Peter's patches and/or merge 
-with your work? Please let me know if you are making progress and new more 
-time. Thanks for your time and support!
+That is not entirely correct statement. While you are correct that 
+OE-Core/Yocto provide basic support for BeagleBoard, as a reference platform, 
+it does not have all the peripherals and subsystems supported besides the 
+baseport, such as SGX Graphics, DSP and some of the extension. For any of that 
+you would need to add meta-ti layer and use it's BeagleBoard support.
 
 -- 
 Denys
