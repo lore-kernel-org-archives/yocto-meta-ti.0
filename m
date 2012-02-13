@@ -1,30 +1,26 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-pz0-f43.google.com (mail-pz0-f43.google.com
-	[209.85.210.43])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B4EADE0030B
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CDAADE0030B
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 13 Feb 2012 10:02:03 -0800 (PST)
-Received: by mail-pz0-f43.google.com with SMTP id c16so5319456dam.2
+	Mon, 13 Feb 2012 10:12:53 -0800 (PST)
+Received: by wibhi8 with SMTP id hi8so4248170wib.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 13 Feb 2012 10:02:03 -0800 (PST)
-Received: by 10.68.222.194 with SMTP id qo2mr49695047pbc.20.1329156123585;
-	Mon, 13 Feb 2012 10:02:03 -0800 (PST)
-Received: from [10.10.0.62] ([108.60.121.129]) by mx.google.com with ESMTPS id
-	li19sm41281608pbb.17.2012.02.13.10.02.02
+	Mon, 13 Feb 2012 10:12:51 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.180.24.166 with SMTP id v6mr19871423wif.10.1329156771425;
+	Mon, 13 Feb 2012 10:12:51 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id ec3sm23155312wib.1.2012.02.13.10.12.50
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 13 Feb 2012 10:02:03 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1257)
+	Mon, 13 Feb 2012 10:12:50 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1329151888-7525-3-git-send-email-trini@ti.com>
-Date: Mon, 13 Feb 2012 10:02:01 -0800
-Message-Id: <808A2E17-433C-4910-8D70-66DCC744491E@dominion.thruhere.net>
-References: <1329151888-7525-1-git-send-email-trini@ti.com>
-	<1329151888-7525-3-git-send-email-trini@ti.com>
-To: Tom Rini <trini@ti.com>
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQmNUC2ySBC80tzocFaoNEPyUZMSoY3qnF6+fzfUfBhXTAJ8DOqNGodn6+ekxrv3hsWvkJYA
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [PATCH 3/3] u-boot git: Update omap3-touchbook for u-boot-fw-utils change
+To: meta-ti@lists.yoctoproject.org
+Date: Mon, 13 Feb 2012 19:12:39 +0100
+Message-Id: <1329156766-29776-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+X-Gm-Message-State: ALoCoQklZqOa5nOekTXVrU6oJLVBsb0CP4XlKjK4nvEi+qODwqS6cR6Ep+Rel+axzVsFNugsbp07
+Subject: [PATCH 1/8] beaglebone-tester: include Jasons debug tweaks
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,37 +32,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2012 18:02:03 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 13 Feb 2012 18:12:54 -0000
 
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Op 13 feb. 2012, om 08:51 heeft Tom Rini het volgende geschreven:
+diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
+index dae9628..7a72547 100644
+--- a/recipes-ti/beagleboard/beaglebone-tester.bb
++++ b/recipes-ti/beagleboard/beaglebone-tester.bb
+@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
+ # only scripts and data
+ inherit allarch
+ 
+-PR = "r12"
++PR = "r13"
+ 
+ SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
+           "
+-SRCREV = "0a3415705afb206694d4e873fe8228b7440213db"
++SRCREV = "dc89e2d6b2ac0238a7aa5a334d7c86d7b8613837"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+1.7.2.5
 
-> Signed-off-by: Tom Rini <trini@ti.com>
-> ---
-> recipes-bsp/u-boot/u-boot_git.bb |    3 ++-
-> 1 files changed, 2 insertions(+), 1 deletions(-)
->=20
-> diff --git a/recipes-bsp/u-boot/u-boot_git.bb =
-b/recipes-bsp/u-boot/u-boot_git.bb
-> index 5abb6f5..90527f6 100644
-> --- a/recipes-bsp/u-boot/u-boot_git.bb
-> +++ b/recipes-bsp/u-boot/u-boot_git.bb
-> @@ -1,5 +1,5 @@
-> require u-boot.inc
-> -PR =3D"r67"
-> +PR =3D"r68"
->=20
-> DEFAULT_PREFERENCE =3D "-1"
-> DEFAULT_PREFERENCE_ti814x =3D "-1"
-> @@ -42,6 +42,7 @@ SRC_URI_omap3-touchbook =3D =
-"git://gitorious.org/u-boot-omap3/mainline.git;branch=3D
-> "
-> SRCREV_pn-${PN}_omap3-touchbook =3D =
-"d363f9cb0918a1b6b92e2e20d01543d0c4f53274"
-> PV_omap3-touchbook =3D "2009.05+${PR}+gitr${SRCREV}"
-> +RRECOMMENDS_omap3-touchbook =3D "u-boot-fw-utils"
-
-RECOMMENS_${PN}_foo and move it below do_install=
 
