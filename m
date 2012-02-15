@@ -1,34 +1,35 @@
 Return-Path: <r-monk@ti.com>
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB755E0123F
-	for <meta-ti@yoctoproject.org>; Wed, 15 Feb 2012 07:11:25 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 986B8E01370
+	for <meta-ti@yoctoproject.org>; Wed, 15 Feb 2012 07:11:26 -0800 (PST)
 Received: from dlep26.itg.ti.com ([157.170.170.121])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q1FFBNJh027389;
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q1FFBNBc027392;
 	Wed, 15 Feb 2012 09:11:23 -0600
 Received: from DNCE73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q1FFBM6a004337;
-	Wed, 15 Feb 2012 09:11:22 -0600 (CST)
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q1FFBM6b004337;
+	Wed, 15 Feb 2012 09:11:23 -0600 (CST)
 Received: from DNCE02.ent.ti.com ([fe80::e5b6:a692:b14:3c86]) by
 	DNCE73.ent.ti.com ([fe80::a454:462:d009:b2c%21]) with mapi id
-	14.01.0323.003; Wed, 15 Feb 2012 16:11:22 +0100
+	14.01.0323.003; Wed, 15 Feb 2012 16:11:23 +0100
 From: "Monk, Roger" <r-monk@ti.com>
-To: "Peter A. Bigot" <bigotp@acm.org>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH 3/4] ti-codecs-omap3530: fix for corrected
-	ti-eula-unpack
-Thread-Index: AQHM4BWlvBrkYKrfLEO2Onu50VCTHpY+JxyA
+To: Peter Bigot <bigotp@acm.org>
+Thread-Topic: [meta-ti] [PATCH 0/4] Resubmit TI DSP build issues related to
+	installer
+Thread-Index: AQHM4SHgA9+zicKU1U+8ZRghoPx9HpY+JZIA
 Date: Wed, 15 Feb 2012 15:11:21 +0000
-Message-ID: <4C82F39BABFE6A429733A300DEBF52240B5E7FCF@DNCE02.ent.ti.com>
+Message-ID: <4C82F39BABFE6A429733A300DEBF52240B5E7FDB@DNCE02.ent.ti.com>
 References: <1328013657-2069-1-git-send-email-bigotp@acm.org>
-	<1328013657-2069-4-git-send-email-bigotp@acm.org>
-In-Reply-To: <1328013657-2069-4-git-send-email-bigotp@acm.org>
+	<4C82F39BABFE6A429733A300DEBF52240B5AC841@DNCE02.ent.ti.com>
+	<CAPOJ94NTu_TMaJ_hYOvtpHmJDyQyfOythjYRtBukCeUKYgtFOw@mail.gmail.com>
+In-Reply-To: <CAPOJ94NTu_TMaJ_hYOvtpHmJDyQyfOythjYRtBukCeUKYgtFOw@mail.gmail.com>
 Accept-Language: en-GB, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [137.167.88.84]
 x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
 MIME-Version: 1.0
-Subject: Re: [PATCH 3/4] ti-codecs-omap3530: fix for corrected	ti-eula-unpack
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH 0/4] Resubmit TI DSP build issues related to installer
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,151 +41,132 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2012 15:11:25 -0000
+X-List-Received-Date: Wed, 15 Feb 2012 15:11:26 -0000
 Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 31, 2012 at 12:40:56, Peter A. Bigot wrote:
-> Subject: [meta-ti] [PATCH 3/4] ti-codecs-omap3530: fix for corrected
-> ti-eula-unpack
+On Wed, Feb 01, 2012 at 20:41:26, Peter Bigot wrote:
+> Cc: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCH 0/4] Resubmit TI DSP build issues
+> related to installer
 >
-> From: "Peter A. Bigot" <bigotp@acm.org>
+> On Tue, Jan 31, 2012 at 6:45 PM, Monk, Roger <r-monk@ti.com> wrote:
+> > Hi Peter,
+> >
+> > On Tue, Jan 31, 2012 at 12:40:53, Peter A. Bigot wrote:
+> >> Subject: [meta-ti] [PATCH 0/4] Resubmit TI DSP build issues related
+> >> to installer
+> >>
+> >> From: "Peter A. Bigot" <bigotp@acm.org>
+> >>
+> >> This patch set re-submits the (updated) uncommitted parts of my
+> >> 27Dec2011 patch set to get gstreamer-ti and its dependencies to
+> build
+> >> in a pristine work environment.  It was left back on 29Dec2011 with:
+> >>
+> >> > I'm going to wait for Roger to get back from holidays to comment
+> on
+> >> the installer issues, I'll push the CE and dmai patches later today.
+> >>
+> >
+> > Thanks for re-basing/re-submitting - sorry this has taken a while.
+>  Your patches look good - however, I have some other failing installer
+> scenarios like these for which I have a similar, but unfortunately,
+> not the same patchset, in progress.  I hope to review yours in the
+> coming days if ok.
 >
-> Remove directory prefix for tar files that use TI_BIN_UNPK_CMDS that
-> specifies unpacking into workdir; formerly that specification was
-> ignored and these were unpacked into a package-specific subdirectory
-> of ${HOME}=3D${WORKDIR}.  Note c64xplus_deinterlacer overrides
-> TI_BIN_UNPK_CMDS and does not specify workdir, so its prefix is
-> correct.
+> That's fine.  Rather than bug everybody with update emails while the
+> two approaches are reconciled, these fixes are available at
+> https://github.com/pabigot/meta-ti/tree/ti-eula-unpack.  There you'll
+> find the corresponding change as required for omap3-sgx-modules.
 >
-> Signed-off-by: Peter A. Bigot <bigotp@acm.org>
+> Peter
+>
 
-Acked-by: Roger Monk <r-monk@ti.com>
+Thanks Peter - sorry for the delay.  Looks like I can add my patches separa=
+tely.  I follow-up with those.
 
-> ---
->  .../codec-engine/ti-codecs-omap3530_4.00.00.00.bb  |   20 ++++++++++--
-> --------
->  1 files changed, 10 insertions(+), 10 deletions(-)
->
-> diff --git a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-> b/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-> index ae218b1..ea9f389 100644
-> --- a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-> +++ b/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-> @@ -77,43 +77,43 @@ python do_unpack () {
->      bb.build.exec_func('base_do_unpack', d)
->
->      bb.data.setVar("BINFILE",
-> "omap3530_h264enc_2_01_013_production.bin", d)
-> -    bb.data.setVar("TARFILE",
-> "h264enc_dm6467_1_20_00_08/omap3530_h264enc_2_01_013_production.tar",
-> d)
-> +    bb.data.setVar("TARFILE",
-> + "omap3530_h264enc_2_01_013_production.tar", d)
->      bb.build.exec_func('ti_bin_do_unpack', d)
->
->      bb.data.setVar("BINFILE",
-> "omap3530_h264dec_2_01_007_production.bin", d)
-> -    bb.data.setVar("TARFILE",
-> "omap3530_h264dec_2_01_007_production/omap3530_h264dec_2_01_007_produc
-> t
-> ion.tar", d)
-> +    bb.data.setVar("TARFILE",
-> + "omap3530_h264dec_2_01_007_production.tar", d)
->      bb.build.exec_func('ti_bin_do_unpack', d)
->
->      bb.data.setVar("BINFILE",
-> "omap3530_jpegenc_02_01_01_00_production.bin", d)
-> -    bb.data.setVar("TARFILE",
-> "omap3530_jpegenc_02_01_01_00_production/omap3530_jpegenc_02_01_01_00_
-> p
-> roduction.tar", d)
-> +    bb.data.setVar("TARFILE",
-> + "omap3530_jpegenc_02_01_01_00_production.tar", d)
->      bb.build.exec_func('ti_bin_do_unpack', d)
->
->      bb.data.setVar("BINFILE",
-> "c64xplus_jpegdec_02_00_01_01_production.bin", d)
-> -    bb.data.setVar("TARFILE",
-> "c64xplus_jpegdec_02_00_01_01_production/c64xplus_jpegdec_02_00_01_01_
-> p
-> roduction.tar", d)
-> +    bb.data.setVar("TARFILE",
-> + "c64xplus_jpegdec_02_00_01_01_production.tar", d)
->      bb.build.exec_func('ti_bin_do_unpack', d)
->
->      bb.data.setVar("BINFILE",
-> "c64xplus_mpeg2dec_02_00_02_00_production.bin", d)
-> -    bb.data.setVar("TARFILE",
-> "c64xplus_mpeg2dec_02_00_02_00_production/c64xplus_mpeg2dec_02_00_02_0
-> 0
-> _production.tar", d)
-> +    bb.data.setVar("TARFILE",
-> + "c64xplus_mpeg2dec_02_00_02_00_production.tar", d)
->      bb.build.exec_func('ti_bin_do_unpack', d)
->
->      bb.data.setVar("BINFILE",
-> "omap3530_mpeg4enc_02_04_00_00_production.bin", d)
-> -    bb.data.setVar("TARFILE",
-> "omap3530_mpeg4enc_02_04_00_00_production/omap3530_mpeg4enc_02_04_00_0
-> 0
-> _production.tar", d)
-> +    bb.data.setVar("TARFILE",
-> + "omap3530_mpeg4enc_02_04_00_00_production.tar", d)
->      bb.build.exec_func('ti_bin_do_unpack', d)
->
->      bb.data.setVar("BINFILE",
-> "c64xplus_mpeg4dec_02_01_00_00_production.bin", d)
-> -    bb.data.setVar("TARFILE",
-> "h264enc_dm6467_1_20_00_08/c64xplus_mpeg4dec_02_01_00_00_production.ta
-> r
-> ", d)
-> +    bb.data.setVar("TARFILE",
-> + "c64xplus_mpeg4dec_02_01_00_00_production.tar", d)
->      bb.build.exec_func('ti_bin_do_unpack', d)
->
->      bb.data.setVar("BINFILE",
-> "c64xplus_aachedec_01_30_03_00_production.bin", d)
-> -    bb.data.setVar("TARFILE",
-> "c64xplus_aachedec_01_30_03_00_production/dm6446_aachedec_01_30_03_00_
-> p
-> roduction.tar", d)
-> +    bb.data.setVar("TARFILE",
-> + "dm6446_aachedec_01_30_03_00_production.tar", d)
->      bb.build.exec_func('ti_bin_do_unpack', d)
->
->      bb.data.setVar("BINFILE",
-> "c64xplus_g711_1_12_00_000_production.bin", d)
-> -    bb.data.setVar("TARFILE",
-> "h264enc_dm6467_1_20_00_08/dm6446_g711enc_1_12_00_000_production.tar",
-> d)
-> +    bb.data.setVar("TARFILE",
-> + "dm6446_g711enc_1_12_00_000_production.tar", d)
->      bb.build.exec_func('ti_bin_do_unpack', d)
->
->      bb.data.setVar("BINFILE",
-> "c64xplus_g711_1_12_00_000_production.bin", d)
-> -    bb.data.setVar("TARFILE",
-> "h264enc_dm6467_1_20_00_08/dm6446_g711dec_1_12_00_000_production.tar",
-> d)
-> +    bb.data.setVar("TARFILE",
-> + "dm6446_g711dec_1_12_00_000_production.tar", d)
->      bb.build.exec_func('ti_bin_do_unpack', d)
->
->      bb.data.setVar("BINFILE",
-> "c64xplus_deinterlacer_01_00_00_07_production.bin", d)
-> --
-> 1.7.6.4
->
->
+You're patchset looks good to go from me - thanks for the time and effort y=
+ou put into this.
+
+~roger
+
+
+> >> The installer issues are:
+> >>
+> >> ti-eula-unpack spawns the installer, then writes canned input to it
+> >> to do things like set the output directory.  The function that does
+> >> this explicitly tacks a second newline on, in addition to the one
+> >> normally added by Python's print statement.
+> >>
+> >> For ti-cgt6x, the result is that a bare newline is fed to the
+> >> installer at the point where the installation directory is
+> requested,
+> >> instead of the workdir.  Hence, the default directory gets used;
+> >> for this package, that's in /opt/TI.
+> >>
+> >> For ti-xdctools, ti-edma3lld, and ti-dspbios, the bare newline also
+> >> caused the default installation directory to be requested, but for
+> >> this package that's ${HOME}/ti.  Since ti-eula-unpack overrides the
+> >> HOME environment variable to be the work directory, everything
+> >> somehow happened to work out, at least for other folks.  I don't
+> >> think that's a great solution though, so I updated the recipes to
+> >> do it "right", by changing the commands to conform to what the
+> >> current
+> installers expect.
+> >> There may be other installation recipes for other tools that need
+> the
+> >> same fixes.
+> >>
+> >> For the 31Jan2012 attempt, similar changes had to be made to
+> >> ti-codecs- omap3530.
+> >>
+> >> For the 31Jan2012 attempt, the ti-dmai build required more than
+> >> just altering the striplevel: the ${S} value had to be changed
+> >> since
+> there
+> >> was no Makefile at its original value.  There is still an issue
+> >> that prevents use of where make 3.85 produces a "Entering an
+> >> unknown directory" failure in do_install, but that's an upstream
+> >> problem: I just used make 3.81 to complete the build.
+> >>
+> >> Peter A. Bigot (4):
+> >>   ti-eula-unpack: remove extraneous newline in cmd output
+> >>   various: fix installation directories for corrected
+> >> ti-eula-unpack
+> >>   ti-codecs-omap3530: fix for corrected ti-eula-unpack
+> >>   ti-dmai_svn: correct path within svn checkout
+> >>
+> >>  recipes-ti/bios/ti-dspbios.inc                     |    3 ++-
+> >>  .../codec-engine/ti-codecs-omap3530_4.00.00.00.bb  |   20
+> >> ++++++++++--
+> >> --------
+> >>  recipes-ti/devtools/ti-xdctools.inc                |    3 ++-
+> >>  recipes-ti/dmai/ti-dmai_svn.bb                     |    9
+> >> ++++++---
+> >>  recipes-ti/edma3lld/ti-edma3lld.inc                |    3 ++-
+> >>  recipes-ti/includes/ti-eula-unpack.inc             |    2 +-
+> >>  6 files changed, 23 insertions(+), 17 deletions(-)
+> >>
+> >> --
+> >> 1.7.6.4
+> >>
+> >>
+> > Texas Instruments Limited, 800 Pavilion Drive, Northampton, NN4 7YL.
+> > Registered in England & Wales under company number 00574102
+> >
+> >
 Texas Instruments Limited, 800 Pavilion Drive, Northampton, NN4 7YL. Regist=
 ered in England & Wales under company number 00574102
 
 _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+> >> meta-ti mailing list
+> >> meta-ti@yoctoproject.org
+> >> https://lists.yoctoproject.org/listinfo/meta-ti
+> >
+> >
+> >
 
 
 
