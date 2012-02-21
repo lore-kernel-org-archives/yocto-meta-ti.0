@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53E9DE0059B
-	for <meta-ti@yoctoproject.org>; Mon, 20 Feb 2012 18:26:20 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60FE1E004D2
+	for <meta-ti@yoctoproject.org>; Mon, 20 Feb 2012 18:30:14 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 374EB52AB5; Tue, 21 Feb 2012 02:26:18 +0000 (UTC)
+	id F0EDE52ABC; Tue, 21 Feb 2012 02:30:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120221022619.374EB52AB5@arago-project.org>
-Date: Tue, 21 Feb 2012 02:26:18 +0000 (UTC)
+Message-Id: <20120221023013.F0EDE52ABC@arago-project.org>
+Date: Tue, 21 Feb 2012 02:30:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Peter A. Bigot : ti-codecs-omap3530: fix for corrected ti-eula-unpack
+Subject: Tom Rini : u-boot.inc: Move fw_env.config to main package
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,91 +21,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2012 02:26:20 -0000
+X-List-Received-Date: Tue, 21 Feb 2012 02:30:14 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 7a9f438424efa9cfc73c25da93938d1121971bb8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7a9f438424efa9cfc73c25da93938d1121971bb8
+Commit: 0022cd46d184d1d758fea6eceec7dc1719ad3d5d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0022cd46d184d1d758fea6eceec7dc1719ad3d5d
 
-Author: Peter A. Bigot <bigotp@acm.org>
-Date:   Tue Jan 31 06:40:56 2012 -0600
+Author: Tom Rini <trini@ti.com>
+Date:   Mon Feb 13 11:40:26 2012 -0700
 
-ti-codecs-omap3530: fix for corrected ti-eula-unpack
+u-boot.inc: Move fw_env.config to main package
 
-Remove directory prefix for tar files that use TI_BIN_UNPK_CMDS that
-specifies unpacking into workdir; formerly that specification was ignored
-and these were unpacked into a package-specific subdirectory of
-${HOME}=${WORKDIR}.  Note c64xplus_deinterlacer overrides TI_BIN_UNPK_CMDS
-and does not specify workdir, so its prefix is correct.
+Now that u-boot-fw-utils is a separate recipe (in oe-core) we do not
+want to try and build the tools here.  We also want to package the
+fw_env.config file in the main package, if it exists.
 
-Signed-off-by: Peter A. Bigot <bigotp@acm.org>
-Acked-by: Roger Monk <r-monk@ti.com>
+Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Tom Rini <trini@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../codec-engine/ti-codecs-omap3530_4.00.00.00.bb  |   20 ++++++++++----------
- 1 files changed, 10 insertions(+), 10 deletions(-)
+ recipes-bsp/u-boot/u-boot.inc |    9 +--------
+ 1 files changed, 1 insertions(+), 8 deletions(-)
 
-diff --git a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb b/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-index ae218b1..ea9f389 100644
---- a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-+++ b/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-@@ -77,43 +77,43 @@ python do_unpack () {
-     bb.build.exec_func('base_do_unpack', d)
+diff --git a/recipes-bsp/u-boot/u-boot.inc b/recipes-bsp/u-boot/u-boot.inc
+index 9669ade..9303568 100644
+--- a/recipes-bsp/u-boot/u-boot.inc
++++ b/recipes-bsp/u-boot/u-boot.inc
+@@ -28,7 +28,6 @@ do_compile () {
+ 	unset CFLAGS
+ 	unset CPPFLAGS
+ 	oe_runmake ${UBOOT_MAKE_TARGET}
+-	oe_runmake tools env
+ }
  
-     bb.data.setVar("BINFILE", "omap3530_h264enc_2_01_013_production.bin", d)
--    bb.data.setVar("TARFILE", "h264enc_dm6467_1_20_00_08/omap3530_h264enc_2_01_013_production.tar", d)
-+    bb.data.setVar("TARFILE", "omap3530_h264enc_2_01_013_production.tar", d)
-     bb.build.exec_func('ti_bin_do_unpack', d)
+ do_install () {
+@@ -37,22 +36,16 @@ do_install () {
+ 	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
  
-     bb.data.setVar("BINFILE", "omap3530_h264dec_2_01_007_production.bin", d)
--    bb.data.setVar("TARFILE", "omap3530_h264dec_2_01_007_production/omap3530_h264dec_2_01_007_production.tar", d)
-+    bb.data.setVar("TARFILE", "omap3530_h264dec_2_01_007_production.tar", d)
-     bb.build.exec_func('ti_bin_do_unpack', d)
+ 	if [ -e ${WORKDIR}/fw_env.config ] ; then
+-	    install -d ${D}${base_sbindir}
+ 		install -d ${D}${sysconfdir}
+ 		install -m 644 ${WORKDIR}/fw_env.config ${D}${sysconfdir}/fw_env.config
+-#		install -m 755 ${S}/tools/env/fw_printenv ${D}${base_sbindir}/fw_printenv
+-#		install -m 755 ${S}/tools/env/fw_printenv ${D}${base_sbindir}/fw_setenv
+ 	fi
  
-     bb.data.setVar("BINFILE", "omap3530_jpegenc_02_01_01_00_production.bin", d)
--    bb.data.setVar("TARFILE", "omap3530_jpegenc_02_01_01_00_production/omap3530_jpegenc_02_01_01_00_production.tar", d)
-+    bb.data.setVar("TARFILE", "omap3530_jpegenc_02_01_01_00_production.tar", d)
-     bb.build.exec_func('ti_bin_do_unpack', d)
+ }
  
-     bb.data.setVar("BINFILE", "c64xplus_jpegdec_02_00_01_01_production.bin", d)
--    bb.data.setVar("TARFILE", "c64xplus_jpegdec_02_00_01_01_production/c64xplus_jpegdec_02_00_01_01_production.tar", d)
-+    bb.data.setVar("TARFILE", "c64xplus_jpegdec_02_00_01_01_production.tar", d)
-     bb.build.exec_func('ti_bin_do_unpack', d)
+-FILES_${PN} = "/boot"
++FILES_${PN} = "/boot ${sysconfdir}"
+ # no gnu_hash in uboot.bin, by design, so skip QA
+ INSANE_SKIP_${PN} = True
  
-     bb.data.setVar("BINFILE", "c64xplus_mpeg2dec_02_00_02_00_production.bin", d)
--    bb.data.setVar("TARFILE", "c64xplus_mpeg2dec_02_00_02_00_production/c64xplus_mpeg2dec_02_00_02_00_production.tar", d)
-+    bb.data.setVar("TARFILE", "c64xplus_mpeg2dec_02_00_02_00_production.tar", d)
-     bb.build.exec_func('ti_bin_do_unpack', d)
+-PACKAGES += "${PN}-fw-utils"
+-FILES_${PN}-fw-utils = "${sysconfdir} ${base_sbindir}"
+-
+ inherit deploy
  
-     bb.data.setVar("BINFILE", "omap3530_mpeg4enc_02_04_00_00_production.bin", d)
--    bb.data.setVar("TARFILE", "omap3530_mpeg4enc_02_04_00_00_production/omap3530_mpeg4enc_02_04_00_00_production.tar", d)
-+    bb.data.setVar("TARFILE", "omap3530_mpeg4enc_02_04_00_00_production.tar", d)
-     bb.build.exec_func('ti_bin_do_unpack', d)   
- 
-     bb.data.setVar("BINFILE", "c64xplus_mpeg4dec_02_01_00_00_production.bin", d)
--    bb.data.setVar("TARFILE", "h264enc_dm6467_1_20_00_08/c64xplus_mpeg4dec_02_01_00_00_production.tar", d)
-+    bb.data.setVar("TARFILE", "c64xplus_mpeg4dec_02_01_00_00_production.tar", d)
-     bb.build.exec_func('ti_bin_do_unpack', d)
- 
-     bb.data.setVar("BINFILE", "c64xplus_aachedec_01_30_03_00_production.bin", d)
--    bb.data.setVar("TARFILE", "c64xplus_aachedec_01_30_03_00_production/dm6446_aachedec_01_30_03_00_production.tar", d)
-+    bb.data.setVar("TARFILE", "dm6446_aachedec_01_30_03_00_production.tar", d)
-     bb.build.exec_func('ti_bin_do_unpack', d)
- 
-     bb.data.setVar("BINFILE", "c64xplus_g711_1_12_00_000_production.bin", d)
--    bb.data.setVar("TARFILE", "h264enc_dm6467_1_20_00_08/dm6446_g711enc_1_12_00_000_production.tar", d)
-+    bb.data.setVar("TARFILE", "dm6446_g711enc_1_12_00_000_production.tar", d)
-     bb.build.exec_func('ti_bin_do_unpack', d)
- 
-     bb.data.setVar("BINFILE", "c64xplus_g711_1_12_00_000_production.bin", d)
--    bb.data.setVar("TARFILE", "h264enc_dm6467_1_20_00_08/dm6446_g711dec_1_12_00_000_production.tar", d)
-+    bb.data.setVar("TARFILE", "dm6446_g711dec_1_12_00_000_production.tar", d)
-     bb.build.exec_func('ti_bin_do_unpack', d)
- 
-     bb.data.setVar("BINFILE", "c64xplus_deinterlacer_01_00_00_07_production.bin", d)
+ addtask deploy before do_package after do_compile
 
 
