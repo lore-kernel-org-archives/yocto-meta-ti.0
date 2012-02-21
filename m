@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 551A3E00749
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 564DBE0123C
 	for <meta-ti@yoctoproject.org>; Mon, 20 Feb 2012 18:26:20 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5E84B52AB7; Tue, 21 Feb 2012 02:26:19 +0000 (UTC)
+	id 49E6E52AB4; Tue, 21 Feb 2012 02:26:19 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120221022619.5E84B52AB7@arago-project.org>
+Message-Id: <20120221022619.49E6E52AB4@arago-project.org>
 Date: Tue, 21 Feb 2012 02:26:19 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Peter A. Bigot : omap3-sgx-modules: fix for corrected ti-eula-unpack
+Subject: Peter A. Bigot : ti-dmai_svn: correct path within svn checkout
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,35 +26,58 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 108e0894e8dd0124327c81d23e8491bedfb8c219
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=108e0894e8dd0124327c81d23e8491bedfb8c219
+Commit: a365e31ab237156244ff265a7c2d11153f2ef9b1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a365e31ab237156244ff265a7c2d11153f2ef9b1
 
 Author: Peter A. Bigot <bigotp@acm.org>
-Date:   Wed Feb 15 09:30:58 2012 -0600
+Date:   Tue Jan 31 06:40:57 2012 -0600
 
-omap3-sgx-modules: fix for corrected ti-eula-unpack
+ti-dmai_svn: correct path within svn checkout
+
+At r642 as currently retrieved, the contents of ${S} are subdirectories dmai
+and patches, so the subsequent attempt to run "make clean" in ${S} fails
+because there is no Makefile there.  Append /dmai to the default ${S},
+remove the now incorrect /dmai from LIC_FILES_CHKSUM, and correct the
+strippath for the patches to reflect the new starting location.
 
 Signed-off-by: Peter A. Bigot <bigotp@acm.org>
+Acked-by: Roger Monk <r-monk@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../omap3-sgx-modules_4.05.00.03.bb                |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes-ti/dmai/ti-dmai_svn.bb |    9 ++++++---
+ 1 files changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
-index 6f8d680..42a2e9a 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
-@@ -17,7 +17,8 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
-           "
- SRC_URI[md5sum] = "0e651eaa92bb91760f0b40a17697a7dc"
- SRC_URI[sha256sum] = "bfe764a8959556195545d6fff76f63a489642f345c105bbbc309a3f243c2dd0e"
--S = "${WORKDIR}/Graphics_SDK_${SGXPV}/GFX_Linux_KM"
-+TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
-+S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
+diff --git a/recipes-ti/dmai/ti-dmai_svn.bb b/recipes-ti/dmai/ti-dmai_svn.bb
+index 3c5595d..3ac7a81 100644
+--- a/recipes-ti/dmai/ti-dmai_svn.bb
++++ b/recipes-ti/dmai/ti-dmai_svn.bb
+@@ -1,11 +1,14 @@
+ require ti-dmai.inc
  
- PVRBUILD = "release"
- export KERNELDIR = "${STAGING_KERNEL_DIR}"
++# Need to descend one level more to find source
++S = "${WORKDIR}/${DMAIBRANCH}/davinci_multimedia_application_interface/dmai_${PV}/dmai"
++
+ # Hack to be able to use recent kernel headers from userspace
+ TARGET_CC_ARCH += " -D__EXPORTED_HEADERS__"
+ 
+ PV = "2_10_00_01+svnr${SRCPV}"
+ 
+-LIC_FILES_CHKSUM = "file://dmai/dmai_${PV}_License.html;md5=3302f728a5a42f97cabc26a54d7fa607"
++LIC_FILES_CHKSUM = "file://dmai_${PV}_License.html;md5=3302f728a5a42f97cabc26a54d7fa607"
+ 
+ # This package has high dependence on kernel, use kernel PR as base and append a local version
+ PR = "${MACHINE_KERNEL_PR}"
+@@ -29,7 +32,7 @@ SRCREV_omapl137       = "482"
+ SRCREV_omapl138       = "570"
+ SRCREV               ?= "UNDEFINED_SRCREV"
+ 
+-SRC_URI_append = " file://omap3530-r642-remove-include-videodev.diff;striplevel=2 \
+-                   file://r642-fix-config-bld.diff;striplevel=2 \
++SRC_URI_append = " file://omap3530-r642-remove-include-videodev.diff;striplevel=3 \
++                   file://r642-fix-config-bld.diff;striplevel=3 \
+                  "
+ 
 
 
