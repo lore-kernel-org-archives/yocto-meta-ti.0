@@ -1,37 +1,37 @@
 Return-Path: <koen@dominion.thruhere.net>
 Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
 	[209.85.212.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3D51BE00749
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2086BE00749
 	for <meta-ti@lists.yoctoproject.org>;
-	Tue, 21 Feb 2012 02:31:11 -0800 (PST)
+	Tue, 21 Feb 2012 02:31:15 -0800 (PST)
 Received: by mail-wi0-f181.google.com with SMTP id hi8so4135982wib.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Tue, 21 Feb 2012 02:31:10 -0800 (PST)
+	Tue, 21 Feb 2012 02:31:15 -0800 (PST)
 Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.180.107.99 as permitted sender)
-	client-ip=10.180.107.99; 
+	designates 10.180.14.73 as permitted sender)
+	client-ip=10.180.14.73; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.180.107.99 as
-	permitted sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.180.107.99])
-	by 10.180.107.99 with SMTP id hb3mr24687187wib.5.1329820270997
-	(num_hops = 1); Tue, 21 Feb 2012 02:31:10 -0800 (PST)
+	koen@dominion.thruhere.net designates 10.180.14.73 as permitted
+	sender) smtp.mail=koen@dominion.thruhere.net
+Received: from mr.google.com ([10.180.14.73])
+	by 10.180.14.73 with SMTP id n9mr24596871wic.16.1329820275879 (num_hops
+	= 1); Tue, 21 Feb 2012 02:31:15 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.180.107.99 with SMTP id hb3mr20530632wib.5.1329820270945;
-	Tue, 21 Feb 2012 02:31:10 -0800 (PST)
+Received: by 10.180.14.73 with SMTP id n9mr20459137wic.16.1329820275826;
+	Tue, 21 Feb 2012 02:31:15 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id q2sm21611788wiy.7.2012.02.21.02.31.09
+	by mx.google.com with ESMTPS id cs4sm53597902wib.8.2012.02.21.02.31.14
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 21 Feb 2012 02:31:10 -0800 (PST)
+	Tue, 21 Feb 2012 02:31:15 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@lists.yoctoproject.org
-Date: Tue, 21 Feb 2012 11:30:22 +0100
-Message-Id: <1329820224-28112-8-git-send-email-koen@dominion.thruhere.net>
+Date: Tue, 21 Feb 2012 11:30:23 +0100
+Message-Id: <1329820224-28112-9-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <1329820224-28112-1-git-send-email-koen@dominion.thruhere.net>
 References: <1329820224-28112-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQnxw8ggRL5Kci8DzfASvdX+xbyi0sxF54Oe0IYuvOxcnkDhaw7cWCkYRshxeWX8cJJ0/YCg
-Subject: [Beagleboard.org][PATCH v2 08/10] gadget-init: remove ehrPWM polarity workaround
+X-Gm-Message-State: ALoCoQk+dJ6DDRkgecla2sVuRpR8Wn/FD8vTNLji1vlHTahI0WpD0bZT+e0yI7xtF4XBi6cevZfo
+Subject: [Beagleboard.org][PATCH v2 09/10] cloud9-image: ship connman-test as well to manipulate interfaces using the CLI
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,41 +43,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2012 10:31:11 -0000
+X-List-Received-Date: Tue, 21 Feb 2012 10:31:16 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- recipes-ti/beagleboard/gadget-init.bb |    7 ++-----
- 1 files changed, 2 insertions(+), 5 deletions(-)
+ recipes-misc/images/cloud9-image.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/beagleboard/gadget-init.bb b/recipes-ti/beagleboard/gadget-init.bb
-index 150ff8e..016877d 100644
---- a/recipes-ti/beagleboard/gadget-init.bb
-+++ b/recipes-ti/beagleboard/gadget-init.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Units to initialize usb gadgets"
+diff --git a/recipes-misc/images/cloud9-image.bb b/recipes-misc/images/cloud9-image.bb
+index 1a7e269..b8ef3d8 100644
+--- a/recipes-misc/images/cloud9-image.bb
++++ b/recipes-misc/images/cloud9-image.bb
+@@ -29,6 +29,7 @@ IMAGE_INSTALL += " \
+ 	mplayer2 \
+ 	tslib-tests tslib-calibrate \
+ 	iproute2 canutils \
++	connman-tests \
+ "
  
--PR = "r16"
-+PR = "r18"
- 
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-@@ -35,14 +35,11 @@ do_install() {
- 
- 	install -d ${D}${bindir}
- 	install -m 0755 ${WORKDIR}/*.sh ${D}${bindir}
--
--	install -d ${D}${sysconfdir}/tmpfiles.d
--	echo "w    /sys/class/pwm/ehrpwm.1:0/polarity -    -    -    -   1" > ${D}${sysconfdir}/tmpfiles.d/lcd7.conf
- }
- 
- PACKAGES =+ "${PN}-storage ${PN}-network ${PN}-udhcpd"
- 
--FILES_${PN} = "${sysconfdir}/tmpfiles.d"
-+ALLOW_EMPTY_${PN} = "1"
- 
- FILES_${PN}-storage = "${base_libdir}/systemd/system/storage-gadget-init.service \
-                        ${base_libdir}/systemd/system/basic.target.wants/storage-gadget-init.service \
+ export IMAGE_BASENAME = "Cloud9-IDE"
 -- 
 1.7.2.5
 
