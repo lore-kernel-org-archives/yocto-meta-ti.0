@@ -1,21 +1,36 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from happy.bec-systems.com (oh-69-34-21-229.sta.embarqhsd.net
-	[69.34.21.229])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5691EE0030B
-	for <meta-ti@yoctoproject.org>; Wed, 22 Feb 2012 08:07:31 -0800 (PST)
-Received: from localhost.localdomain ([127.0.0.1] helo=happy.bec-systems.com)
-	by happy.bec-systems.com with esmtp (Exim 4.72)
-	(envelope-from <cliff.brake@gmail.com>)
-	id 1S0Ej3-0000y1-MD; Wed, 22 Feb 2012 11:07:29 -0500
-Date: Wed, 22 Feb 2012 11:07:29 -0500
-Message-Id: <E1S0Ej3-0000y1-MD@happy.bec-systems.com>
-X-Mailer: Nodemailer (0.1.13; +http://www.nodemailer.org)
-From: cliff.brake@gmail.com
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
+Return-Path: <b.hutchman@gmail.com>
+Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
+	[209.85.214.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 314C0E0059A
+	for <meta-ti@yoctoproject.org>; Thu, 23 Feb 2012 13:22:17 -0800 (PST)
+Received: by bkcjm1 with SMTP id jm1so2188200bkc.35
+	for <meta-ti@yoctoproject.org>; Thu, 23 Feb 2012 13:22:15 -0800 (PST)
+Received-SPF: pass (google.com: domain of b.hutchman@gmail.com designates
+	10.204.156.217 as permitted sender) client-ip=10.204.156.217; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of b.hutchman@gmail.com
+	designates 10.204.156.217 as permitted sender)
+	smtp.mail=b.hutchman@gmail.com;
+	dkim=pass header.i=b.hutchman@gmail.com
+Received: from mr.google.com ([10.204.156.217])
+	by 10.204.156.217 with SMTP id y25mr1563103bkw.22.1330032135832
+	(num_hops = 1); Thu, 23 Feb 2012 13:22:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=U1J9fw00v7Es5BTsEqhkeWZJgtgPKEdNM4edBvy8vWM=;
+	b=bjuXpkiI1PcwwgzCDbyFNBllLAxUGQpFdWlyIkR+fRlzSIWteXZRkmfr+0LwSjjKPG
+	L/6xb4tdrOHRUnSM8/RU23JnWQ8c2w7NQW3fS1WzE2vb+DCiK52FwxH6f+FKu214MKP+
+	wtl2q831X07o2dXp+qKlp2Nau/jvVdHrZXtOE=
 MIME-Version: 1.0
-Subject: OE Changelog for 2012-02-13 to 2012-02-20
+Received: by 10.204.156.217 with SMTP id y25mr1300791bkw.22.1330032135524;
+	Thu, 23 Feb 2012 13:22:15 -0800 (PST)
+Received: by 10.204.229.198 with HTTP; Thu, 23 Feb 2012 13:22:15 -0800 (PST)
+Date: Thu, 23 Feb 2012 16:22:15 -0500
+Message-ID: <CAFZh4h_jZENnZzytV6Jw0FD_7MWQUE=WuUgV2Syv7QMSY-YV=Q@mail.gmail.com>
+From: Brian Hutchinson <b.hutchman@gmail.com>
+To: meta-ti@yoctoproject.org
+Subject: bitbake of syslink fails
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,218 +42,367 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2012 16:07:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 23 Feb 2012 21:22:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Changelog for 2012-02-13 to 2012-02-20.  Projects included in this report:
+Hi,
 
-bitbake: git://git.openembedded.org/bitbake
-openembedded-core: git://git.openembedded.org/openembedded-core
-meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-angstrom: git://git.angstrom-distribution.org/meta-angstrom
-meta-yocto: git://git.yoctoproject.org/poky
-meta-texasinstruments: =
-git://git.angstrom-distribution.org/meta-texasinstruments
-meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
-meta-micro: git://git.openembedded.org/meta-micro
-meta-slugos: git://github.com/kraj/meta-slugos
-meta-nslu2: git://github.com/kraj/meta-nslu2
-meta-intel: git://git.yoctoproject.org/meta-intel
-meta-handheld: git://git.openembedded.org/meta-handheld
-meta-opie: git://git.openembedded.org/meta-opie
-openembedded: git://git.openembedded.org/openembedded
-meta-bug: git://github.com/buglabs/meta-bug.git
-meta-efikamx: git://github.com/kraj/meta-efikamx.git
-meta-gumstix: git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix.git
-meta-ettus: http://github.com/koenkooi/meta-ettus.git
-meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
-meta-igep: http://github.com/ebutera/meta-igep.git
-meta-netbookpro: git://github.com/tworaz/meta-netbookpro
-meta-xilinx: git://git.yoctoproject.org/meta-xilinx
-meta-chicken: git://github.com/OSSystems/meta-chicken
-meta-java: git://github.com/woglinde/meta-java
-meta-mozilla: git://github.com/OSSystems/meta-mozilla
-meta-qt3: git://git.yoctoproject.org/meta-qt3
-meta-telephony: git://gitorious.org/sysmocom-openembedded/meta-telephony.git
-meta-eldk: git://git.denx.de/eldk.git
+Hopefully this is the appropriate place to ask this ... I'm trying to
+build syslink in meta-ti with Angstrom/OE Core.
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for bitbake:
+I've downloaded ti_cgt_tms470_4.6.6_setup_linux_x86.bin and
+ti_cgt_c6000_7.2.7_setup_linux_x86.bin and placed this in my
+source/downloads directory.
 
-Caleb Crome (1):
-=20=20Fix parser hang at 0% with single-core machines
+When I do a bitbake ti-syslink I get lots of messages like these:
 
-Christopher Larson (2):
-=20=20Merge remote-tracking branch 'kergoth/hang-issue-fix'
-=20=20persist_data: survive if sqlite3 couldn't enable the shared cache
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded-core:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-openembedded:
-
-Martin Jansa (2):
-=20=20webkit-efl: resolve build error with missing eina lib when linked by =
-gold
-=20=20imagemagick: upgrade to 6.7.5 because 6.4.4 is not compatible with =
-zlib-1.2.
-
-Peter Tworek (1):
-=20=20xfce4-settings: Update to latest stable version 4.8.3.
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-angstrom:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-texasinstruments:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-smartphone:
-
-Denis 'GNUtoo' Carikli (2):
-=20=20meta-openmoko: om-gta04: add support for jffs2 images
-=20=20base-files: add fstab override for om-gta04
-
-Martin Jansa (8):
-=20=20recipes: bump PR to rebuild .la files without libz.la
-=20=20meta-shr: bump DISTRO_PR and enable gold
-=20=20meta-shr: drop DISTRO_REVISION and DISTRO_PR, they are not used in =
-oe-core :
-=20=20Merge remote-tracking branch 'contrib/shr'
-=20=20meta-nokia, meta-openmoko, u-boot: Always use gnu ld for LD
-=20=20meta-smartphone: move OLDEST_KERNEL setting from machine configs to =
-distro c
-=20=20freesmartphone: use ${S} instead of ${WORKDIR}/git/${PN} when looking =
-for .s
-=20=20Revert "polkit: disable systemd support explicitly until we switch =
-completel
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-micro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-slugos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-nslu2:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-intel:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-handheld:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-opie:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded:
-
-Henning Heinold (12):
-=20=20libbecj-bootstrap: use sort for build order of the javafiles and =
-introduce I
-=20=20jamvm-inital: rework libffi detection
-=20=20cacao-native: update hg version
-=20=20icedtea6-native: add linux kernel version 3 support
-=20=20ecj-inital: rename recipe to ecj-initial-native
-=20=20jamvm: add recipes which combines native and target
-=20=20angstrom-jalimo.conf,sane-toolchain-java.inc: use jamvm-git instead =
-of cacao
-=20=20rhino: add version 1.7r2
-=20=20ecj-bootstrap-native: update ecj script
-=20=20openjdk: backport 1.11.1 release from meta-java
-=20=20angstrom-jalimo.conf: prefer icedtea 1.11.1 for openjdk6
-=20=20openjdk-6-common.inc: fix hardcoded path for allowing to build with =
-linux 3.
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-bug:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-efikamx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ettus:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-ppc:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-igep:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-netbookpro:
-
-Peter Tworek (3):
-=20=20linux-netbookpro: Upgrade to 3.2.6.
-=20=20xserver-kdrive: Xepson use new, accelerated version of the Xserver.
-=20=20linux-netbookpro: Update to newer git snapshot.
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-xilinx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-chicken:
-
-Otavio Salvador (2):
-=20=20chicken-egg-scron: start service at runlevels 2345
-=20=20chicken_install.bbclass: use bitbake lockfiles flag
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-java:
-
-Otavio Salvador (3):
-=20=20openjdk: fix qemu target detection
-=20=20openjdk: fix i586 arch detection for JDK
-=20=20openjdk: use dynamic architecture value when packaging
-
-woglinde (2):
-=20=20Merge pull request #16 from OSSystems/master
-=20=20Merge pull request #17 from OSSystems/master
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-mozilla:
-
-Otavio Salvador (18):
-=20=20mozilla-devscripts: add 0.30
-=20=20firefox-l10n: use same firefox license but skip md5sum check for now
-=20=20firefox-l10n: use mozilla-devscripts-native to simplify code
-=20=20firefox: drop series file copied by mistake
-=20=20firefox: enable extensions default profile and use .mozilla
-=20=20scripts/firefox-gen-l10n-recipes: fix use of tmpdir
-=20=20scripts/firefox-gen-l10n-recipes: drop debug echo
-=20=20mozilla.bbclass: add support to change mozconfig at configure
-=20=20firefox: update to 10.0.1
-=20=20firefox-l10n: update to 10.0.1 packages
-=20=20firefox-addon: use mozilla-devscripts-native
-=20=20firefox-addon: add support for addons with multiple .xpi
-=20=20firefox-addon-webconverger: add
-=20=20firefox-addon-full-fullscreen: drop as it doesn't work with Firefox =
-newer th
-=20=20firefox-addon: fix installation path for addons
-=20=20firefox-addon-webconverger: fix install.rdf contributor value
-=20=20firefox-addon-webconverger: set window fullscreen
-=20=20firefox-addon-webconverger: drop fullscreen patch as it does not work
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt3:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-telephony:
-
-Holger Hans Peter Freyther (1):
-=20=20openggsn_git: Upgrade to the latest git revision
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-eldk:
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/csignal
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/numeric
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/ostream
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/xlocnum
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/stdiostream.h
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/xstddef
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/stdexcept
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/iosfwd
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/cfloat
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/cpp_inline_math.h
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/stdlib.h
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/clocale
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/fstream
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/ciso646
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/Std_Types.h
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/iterator
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/strstream.h
+WARNING:   /usr/share/ti/ti-cgt470-tree/include/ios
+ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip'
+--remove-section=3D.comment --remove-section=3D.note
+'/home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/a=
+rmv7a-angstrom-linux-gnueabi/ti-cgt6x-1_7_2_7-r4/package/usr/share/ti/ti-cg=
+t6x-tree/bin/lnk6x''
+strip command failed
+ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip'
+--remove-section=3D.comment --remove-section=3D.note
+'/home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/a=
+rmv7a-angstrom-linux-gnueabi/ti-cgt6x-1_7_2_7-r4/package/usr/share/ti/ti-cg=
+t6x-tree/bin/clist6x''
+strip command failed
+ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip'
+--remove-section=3D.comment --remove-section=3D.note
+'/home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/a=
+rmv7a-angstrom-linux-gnueabi/ti-cgt6x-1_7_2_7-r4/package/usr/share/ti/ti-cg=
+t6x-tree/bin/abs6x''
+strip command failed
+ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip'
+--remove-section=3D.comment --remove-section=3D.note
+'/home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/a=
+rmv7a-angstrom-linux-gnueabi/ti-cgt6x-1_7_2_7-r4/package/usr/share/ti/ti-cg=
+t6x-tree/bin/cmp6x''
+strip command failed
 
 
+
+
+.. and these go on for a while and then the build fails with this context b=
+elow:
+
+
+
+NOTE: package ti-syslink-2_00_00_78-r115a: task do_prepsources: Started
+ERROR: Function failed: do_prepsources (see
+/home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/be=
+agleboard-angstrom-linux-gnueabi/ti-syslink-2_00_00_78-r115a/temp/log.do_pr=
+epsources.28692
+for further information)
+ERROR: Logfile of failure stored in:
+/home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/be=
+agleboard-angstrom-linux-gnueabi/ti-syslink-2_00_00_78-r115a/temp/log.do_pr=
+epsources.28692
+Log data follows:
+| + cd /home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+work/beagleboard-angstrom-linux-gnueabi/ti-syslink-2_00_00_78-r115a/syslink=
+_2_00_00_78
+| + do_prepsources
+| + cd /home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/=
+work/beagleboard-angstrom-linux-gnueabi/ti-syslink-2_00_00_78-r115a/syslink=
+_2_00_00_78/packages//ti/syslink
+| + /home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sys=
+roots/beagleboard/usr/share/ti/ti-xdctools-tree/xdc
+--jobs=3D12 .make -PR .
+| making .make: Thu Feb 23 14:25:57 EST 2012 ...
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./buildutils/rtos/buildScripts] =3D=3D=3D=
+=3D=3D=3D=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./family/rtos/bios6/ti814x] =3D=3D=3D=3D=
+=3D=3D=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./ipc/rtos] =3D=3D=3D=3D=3D=3D=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [.] =3D=3D=3D=3D=3D=3D=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./ipc/rtos/interfaces] =3D=3D=3D=3D=3D=3D=
+=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./ipc/rtos/shMem] =3D=3D=3D=3D=3D=3D=3D=
+=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./ipc/rtos/syslinkMemMgr] =3D=3D=3D=3D=3D=
+=3D=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./ipc/rtos/syslinkMemMgr/shMemMgr] =3D=3D=
+=3D=3D=3D=3D=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./ipc/rtos/syslinkMemMgr/tilerMemMgr] =3D=
+=3D=3D=3D=3D=3D=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./ipc/rtos/syslinkMemMgr/nullMemMgr] =3D=
+=3D=3D=3D=3D=3D=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./procMgr/rtos/bios6] =3D=3D=3D=3D=3D=3D=
+=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./samples/hlos/tilerDaemon] =3D=3D=3D=3D=
+=3D=3D=3D=3D
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of
+/home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sysroot=
+s/beagleboard/usr/share/ti/ti-xdctools-tree/packages/xdc/bld/bld.js)
+...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| Warning: no config.bld file was found along the package
+path.Warning: no config.bld file was found along the package path.
+|
+|          The config.bld file specifies the location of the
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+     compiler tool-chains required to compile runtime content.
+|
+|          Without this file, the XDC tools assume no targets are to
+be         Without this file, the XDC tools assume no targets are to
+be
+|
+|          used.         used.
+|
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.Warning: no config.bld file was found along the package pat=
+h.
+|
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to
+beWarning: no config.bld file was found along the package path.
+|          used.
+|
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| js: "./package.bld", line 76: xdc.services.global.XDCException:
+xdc.PACKAGE_NOT_FOUND: can't locate the package 'ti.syslink.ipc' along
+the path: '/home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-egl=
+ibc/sysroots/beagleboard/usr/share/ti/ti-ipc-tree/packages;/home/hutch/angs=
+trom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sysroots/beagleboard/us=
+r/share/ti/ti-sysbios-tree/packages;/home/hutch/angstrom/setup-scripts/buil=
+d/tmp-angstrom_2010_x-eglibc/sysroots/beagleboard/usr/share/ti/ti-xdctools-=
+tree/packages;../../../../..;'.
+Ensure that the package path is set correctly.
+| make[1]: *** Deleting file `package.mak'
+| making package.mak (because of package.bld) ...
+| makefiles are up to date.
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./samples/rtos/frameq] =3D=3D=3D=3D=3D=3D=
+=3D=3D
+| makefiles are up to date.
+| makefiles are up to date.
+| makefiles are up to date.
+| makefiles are up to date.
+| makefiles are up to date.
+| makefiles are up to date.
+| makefiles are up to date.
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./samples/rtos/heapBufMP] =3D=3D=3D=3D=3D=
+=3D=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./samples/rtos/gateMP] =3D=3D=3D=3D=3D=3D=
+=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./samples/rtos/heapMemMP] =3D=3D=3D=3D=3D=
+=3D=3D=3D
+| makefiles are up to date.
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./samples/rtos/knlNotify] =3D=3D=3D=3D=3D=
+=3D=3D=3D
+| making package.mak (because of package.bld) ...
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./samples/rtos/listMP] =3D=3D=3D=3D=3D=3D=
+=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./samples/rtos/notify] =3D=3D=3D=3D=3D=3D=
+=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./samples/rtos/platforms/evm6472/core0] =
+=3D=3D=3D=3D=3D=3D=3D=3D
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./samples/rtos/messageQ] =3D=3D=3D=3D=3D=
+=3D=3D=3D
+| makefiles are up to date.
+| makefiles are up to date.
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./samples/rtos/platforms/evm6472/core1] =
+=3D=3D=3D=3D=3D=3D=3D=3D
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| =3D=3D=3D=3D=3D=3D=3D=3D .make [./samples/rtos/platforms/evm6472/core2] =
+=3D=3D=3D=3D=3D=3D=3D=3D
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| making package.mak (because of package.bld) ...
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| js: "./package.bld", line 76: xdc.services.global.XDCException:
+xdc.PACKAGE_NOT_FOUND: can't locate the package 'ti.syslink.ipc' along
+the path: '/home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-egl=
+ibc/sysroots/beagleboard/usr/share/ti/ti-ipc-tree/packages;/home/hutch/angs=
+trom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/sysroots/beagleboard/us=
+r/share/ti/ti-sysbios-tree/packages;/home/hutch/angstrom/setup-scripts/buil=
+d/tmp-angstrom_2010_x-eglibc/sysroots/beagleboard/usr/share/ti/ti-xdctools-=
+tree/packages;../../../../..;'.
+Ensure that the package path is set correctly.
+| make[1]: *** Deleting file `package.mak'
+| make[1]: *** No rule to make target `package.mak', neededERROR:
+Function failed: do_prepsources (see
+/home/hutch/angstrom/setup-scripts/build/tmp-angstrom_2010_x-eglibc/work/be=
+agleboard-angstrom-linux-gnueabi/ti-syslink-2_00_00_78-r115a/temp/log.do_pr=
+epsources.28692
+for further information)
+|  by `.make'.  Stop.
+| gmake: *** [samples/hlos/tilerDaemon,.make] Error 2
+| gmake: *** Waiting for unfinished jobs....
+| Warning: Target specification 'ti.targets.C64P' does not match any
+loaded target module.
+| No target modules were loaded.
+|
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| makefiles are up to date.
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| makefiles are up to date.
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| Warning: Target specification 'ti.targets.C64P' does not match any
+loaded target module.
+| No target modules were loaded.
+|
+| Warning: Target specification 'ti.targets.C64P' does not match any
+loaded target module.
+| No target modules were loaded.
+|
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| makefiles are up to date.
+| makefiles are up to date.
+| makefiles are up to date.
+| makefiles are up to date.
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| makefiles are up to date.
+| makefiles are up to date.
+| makefiles are up to date.
+| makefiles are up to date.
+| Warning: no config.bld file was found along the package path.
+|          The config.bld file specifies the location of the
+|          compiler tool-chains required to compile runtime content.
+|          Without this file, the XDC tools assume no targets are to be
+|          used.
+| makefiles are up to date.
+NOTE: package ti-syslink-2_00_00_78-r115a: task do_prepsources: Failed
+ERROR: Task 7 (/home/hutch/angstrom/setup-scripts/sources/meta-ti/recipes-t=
+i/syslink/ti-syslink_2.00.00.78.bb,
+do_prepsources) failed with exit code '1'
+Waiting for 2 active tasks to finish:
+0: ti-ipc-1_24_00_16-r0 do_package (pid 28318)
+1: ti-syslink-2_00_00_78-r115a do_make_scripts (pid 28678)
+Waiting for 1 active tasks to finish:
+0: ti-ipc-1_24_00_16-r0 do_package (pid 28318)
+NOTE: package ti-syslink-2_00_00_78-r115a: task do_make_scripts: Succeeded
+NOTE: package ti-ipc-1_24_00_16-r0: task do_package: Succeeded
+NOTE: Tasks Summary: Attempted 1188 tasks of which 1156 didn't need to
+be rerun and 1 failed.
+
+Summary: 1 task failed:
+ /home/hutch/angstrom/setup-scripts/sources/meta-ti/recipes-ti/syslink/ti-s=
+yslink_2.00.00.78.bb,
+do_prepsources
+Summary: There were 4520 WARNING messages shown.
+Summary: There were 57 ERROR messages shown, returning a non-zero exit code=
+.
+hutch@neo:~/angstrom/setup-scripts$
+
+
+
+Any idea what steps I've missed or what the problem is?
+
+Regards,
+
+Brian
 
