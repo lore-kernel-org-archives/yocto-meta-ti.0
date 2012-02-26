@@ -1,15 +1,38 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA72BE003E3
-	for <meta-ti@yoctoproject.org>; Sat, 25 Feb 2012 19:22:39 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id EDAF952092; Sun, 26 Feb 2012 03:22:38 +0000 (UTC)
+Return-Path: <ebutera@gmail.com>
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CD2C2E0074A
+	for <meta-ti@yoctoproject.org>; Sun, 26 Feb 2012 11:39:24 -0800 (PST)
+Received: by eeke49 with SMTP id e49so869394eek.35
+	for <meta-ti@yoctoproject.org>; Sun, 26 Feb 2012 11:39:23 -0800 (PST)
+Received-SPF: pass (google.com: domain of ebutera@gmail.com designates
+	10.213.10.82 as permitted sender) client-ip=10.213.10.82; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of ebutera@gmail.com
+	designates 10.213.10.82 as permitted sender)
+	smtp.mail=ebutera@gmail.com;
+	dkim=pass header.i=ebutera@gmail.com
+Received: from mr.google.com ([10.213.10.82])
+	by 10.213.10.82 with SMTP id o18mr3142489ebo.142.1330285163599
+	(num_hops = 1); Sun, 26 Feb 2012 11:39:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=xy42YST9/ocIyeEKHoNdRtMkwPCEb3j9b7KDRswei4E=;
+	b=OvBnxJF0+/UOQqMzhZgM3LU/g6RnL/1j1dWmVTc4JvyQGdG93AfvEIKZ7rKVw8OVnq
+	2bnWSS84d7ce0nK3qmpuCfEJk/nG4JYXl26HfSKZ+poltZYjk3OleGW4wA97151SpXbK
+	8nMWFxNGbbp80h61qetjulLVySZVJblnbUxz4=
+Received: by 10.213.10.82 with SMTP id o18mr2374807ebo.142.1330285163509;
+	Sun, 26 Feb 2012 11:39:23 -0800 (PST)
+Received: from localhost.localdomain ([188.11.55.70])
+	by mx.google.com with ESMTPS id v51sm48713599eef.2.2012.02.26.11.39.21
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 26 Feb 2012 11:39:22 -0800 (PST)
+Sender: Enrico Butera <ebutera@gmail.com>
+From: Enrico Butera <ebutera@users.berlios.de>
 To: meta-ti@yoctoproject.org
-Message-Id: <20120226032238.EDAF952092@arago-project.org>
-Date: Sun, 26 Feb 2012 03:22:38 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : libgles-omap3: fix S for IJ unpack changes
+Date: Sun, 26 Feb 2012 20:39:05 +0100
+Message-Id: <1330285154-14853-1-git-send-email-ebutera@users.berlios.de>
+X-Mailer: git-send-email 1.7.5.4
+Subject: [RFC PATCH 0/9] gst-ducati and its dependencies
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,49 +44,85 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Feb 2012 03:22:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 26 Feb 2012 19:39:25 -0000
 
-Module: meta-ti
-Branch: master
-Commit: a94f765b9867abefd5f0bd262b5dddb8782b3187
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a94f765b9867abefd5f0bd262b5dddb8782b3187
+This patch series add support for the ducati gstreamer plugin for omap4
+(tested on pandaboard ES).
 
-Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Fri Feb 24 13:38:03 2012 +0100
+Before you get excited: this is still NOT working. I'm posting it hoping that
+with some broader testing and help we can make it work, and to stop pestering
+Koen and Rob with hundred of questions :D
 
-libgles-omap3: fix S for IJ unpack changes
+What you get: the gst-ducati plugin and the "Notify..reroute..xem3" firmware,
+you will need a prebuilt dce app xem3 firmware because the hdvicp2 files needed
+to build it disappeared from TI site. I used the one from linaro ubuntu 11.04
+for my tests.
+This is probably the root cause of this not working: it seems that syslink is
+picky about kernel differences in userspace and xem3 builds.
+Or maybe i'm just using some wrong kernel boot param (mem...).
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Instead of copying here tons of error logs just test it and you will see, you can
+try a simple "videotestsrc ! ducati... ! fakesink" pipeline.
 
----
+I also added the kernel version i used in my tests, not because i think it should be
+the default kernel but just as a reference (no X tested, just a console-image
+with some additional packages).
 
- .../libgles/libgles-omap3_4.03.00.02.bb            |    2 +-
- .../libgles/libgles-omap3_4.05.00.03.bb            |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Read the ti-cgt470 recipe because you will have to manually download a required file.
 
-diff --git a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb b/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-index f605ec0..97a22fe 100644
---- a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-+++ b/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-@@ -26,5 +26,5 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
- SRC_URI[md5sum] = "ff8c1f2b8e4cb42f4ced6a613b081ada"
- SRC_URI[sha256sum] = "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036423458c8d75255"
- 
--S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
-+S = "${WORKDIR}"
- 
-diff --git a/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb b/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
-index 0092221..53585cf 100644
---- a/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
-+++ b/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
-@@ -22,5 +22,5 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
- SRC_URI[md5sum] = "0e651eaa92bb91760f0b40a17697a7dc"
- SRC_URI[sha256sum] = "bfe764a8959556195545d6fff76f63a489642f345c105bbbc309a3f243c2dd0e"
- 
--S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
-+S = "${WORKDIR}"
- 
+I made also some recipes for newer codec-engine and friends but they are useless
+without the hdvicp2 files and there are some problems there too, so i'll just
+keep them on hold.
+
+If TI will not make the hdvicp2 files public in some time then someone who has
+access to those files could build a dce app xem3 firmware verified to work with
+gst-ducati built with OE.
+
+Enrico Butera (9):
+  devtools cgt470: add version 4.9.1
+  libtimemmgr: add latest git version
+  syslink-omap4: add syslink for omap4 platform
+  bios-syslink: add omap4 bios syslink
+  libdce: add latest git version
+  gstreamer: add bbappends to use patched versions needed by gst-ducati
+  gst-ducati: add latest git version
+  xdais: add version 7.20.00.07
+  linux-omap4: add version 3.1 (omapzoom integration kernel-ubuntu)
+
+ .../linux/linux-omap4-3.1.0/pandaboard/defconfig   | 4387 ++++++++++++++++++++
+ recipes-kernel/linux/linux-omap4_3.1.0.bb          |   23 +
+ .../gstreamer/gst-plugins-bad_0.10.22.bbappend     |   21 +
+ .../gstreamer/gst-plugins-base_0.10.35.bbappend    |   18 +
+ .../gstreamer/gstreamer_0.10.35.bbappend           |   22 +
+ recipes-ti/devtools/ti-cgt470_4.9.1.bb             |   13 +
+ recipes-ti/gstreamer-ti/gst-ducati_git.bb          |   28 +
+ recipes-ti/includes/ti-paths.inc                   |    2 +
+ recipes-ti/libdce/libdce.inc                       |   15 +
+ recipes-ti/libdce/libdce_git.bb                    |   11 +
+ recipes-ti/syslink/ti-bios-syslink_git.bb          |   75 +
+ recipes-ti/syslink/ti-syslink-omap4.inc            |   21 +
+ recipes-ti/syslink/ti-syslink-omap4_git.bb         |   14 +
+ recipes-ti/tiler/libtimemmgr.inc                   |   15 +
+ recipes-ti/tiler/libtimemmgr_git.bb                |   14 +
+ recipes-ti/xdais/ti-xdais_7.20.00.07.bb            |   12 +
+ 16 files changed, 4691 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-omap4-3.1.0/pandaboard/defconfig
+ create mode 100644 recipes-kernel/linux/linux-omap4_3.1.0.bb
+ create mode 100644 recipes-multimedia/gstreamer/gst-plugins-bad_0.10.22.bbappend
+ create mode 100644 recipes-multimedia/gstreamer/gst-plugins-base_0.10.35.bbappend
+ create mode 100644 recipes-multimedia/gstreamer/gstreamer_0.10.35.bbappend
+ create mode 100644 recipes-ti/devtools/ti-cgt470_4.9.1.bb
+ create mode 100644 recipes-ti/gstreamer-ti/gst-ducati_git.bb
+ create mode 100644 recipes-ti/libdce/libdce.inc
+ create mode 100644 recipes-ti/libdce/libdce_git.bb
+ create mode 100644 recipes-ti/syslink/ti-bios-syslink_git.bb
+ create mode 100644 recipes-ti/syslink/ti-syslink-omap4.inc
+ create mode 100644 recipes-ti/syslink/ti-syslink-omap4_git.bb
+ create mode 100644 recipes-ti/tiler/libtimemmgr.inc
+ create mode 100644 recipes-ti/tiler/libtimemmgr_git.bb
+ create mode 100644 recipes-ti/xdais/ti-xdais_7.20.00.07.bb
+
+-- 
+1.7.5.4
 
 
