@@ -1,40 +1,41 @@
 Return-Path: <ebutera@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B947E0132F
-	for <meta-ti@yoctoproject.org>; Sun, 26 Feb 2012 11:39:35 -0800 (PST)
-Received: by mail-ee0-f48.google.com with SMTP id e49so869394eek.35
-	for <meta-ti@yoctoproject.org>; Sun, 26 Feb 2012 11:39:35 -0800 (PST)
+Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
+	[209.85.215.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8B15E013AD
+	for <meta-ti@yoctoproject.org>; Sun, 26 Feb 2012 11:39:37 -0800 (PST)
+Received: by mail-ey0-f176.google.com with SMTP id i1so236761eaa.35
+	for <meta-ti@yoctoproject.org>; Sun, 26 Feb 2012 11:39:37 -0800 (PST)
 Received-SPF: pass (google.com: domain of ebutera@gmail.com designates
-	10.14.201.8 as permitted sender) client-ip=10.14.201.8; 
+	10.213.14.205 as permitted sender) client-ip=10.213.14.205; 
 Authentication-Results: mr.google.com;
 	spf=pass (google.com: domain of ebutera@gmail.com
-	designates 10.14.201.8 as permitted sender)
+	designates 10.213.14.205 as permitted sender)
 	smtp.mail=ebutera@gmail.com;
 	dkim=pass header.i=ebutera@gmail.com
-Received: from mr.google.com ([10.14.201.8])
-	by 10.14.201.8 with SMTP id a8mr6170458eeo.106.1330285175782 (num_hops
-	= 1); Sun, 26 Feb 2012 11:39:35 -0800 (PST)
+Received: from mr.google.com ([10.213.14.205])
+	by 10.213.14.205 with SMTP id h13mr3179297eba.5.1330285177694 (num_hops
+	= 1); Sun, 26 Feb 2012 11:39:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=g4CBn5QSf3I7XPB+DDsaJbdbCvG8M1823+/YCkQYji0=;
-	b=IPbsOEvskDLJQjfrECFZX4WHfkvtWgkBmQ8qzLqgilnM+qTi/EjBEXUoQKSXnOGhml
-	7oq2hKwzOn6eWSrMVnkkXGBi7SHgEjuh0ViaE9fHcyklLjzPRfAeZKKoftr94i/S7vY/
-	2p0j9Aoo1y+lYBc+sWjqVdv76dTI02Vz/Pvlc=
-Received: by 10.14.201.8 with SMTP id a8mr4654934eeo.106.1330285175705;
-	Sun, 26 Feb 2012 11:39:35 -0800 (PST)
+	:references; bh=9f7slUQjL+G2o/MVGO5CjzRUnBRU/VQGEAawc40mE6I=;
+	b=xHAGWcnL8LIqq4MugQk3YN6inAxUuc8Sn3+jCcbeGtezBz0aBaAL5m0l5U3DoOz7b6
+	Fq+I1nqD+Giv/zX8U5HQPKBW5GleNbj84wZYVY2gECRsAXQZAA4DPOL8dN/yKrR9wpxL
+	gFMIkPZvmY+qOTWgcEsmWirK2VvU7PIDGDh4s=
+Received: by 10.213.14.205 with SMTP id h13mr2401925eba.5.1330285177610;
+	Sun, 26 Feb 2012 11:39:37 -0800 (PST)
 Received: from localhost.localdomain ([188.11.55.70])
-	by mx.google.com with ESMTPS id v51sm48713599eef.2.2012.02.26.11.39.34
+	by mx.google.com with ESMTPS id v51sm48713599eef.2.2012.02.26.11.39.35
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 26 Feb 2012 11:39:35 -0800 (PST)
+	Sun, 26 Feb 2012 11:39:36 -0800 (PST)
 Sender: Enrico Butera <ebutera@gmail.com>
 From: Enrico Butera <ebutera@users.berlios.de>
 To: meta-ti@yoctoproject.org
-Date: Sun, 26 Feb 2012 20:39:11 +0100
-Message-Id: <1330285154-14853-7-git-send-email-ebutera@users.berlios.de>
+Date: Sun, 26 Feb 2012 20:39:12 +0100
+Message-Id: <1330285154-14853-8-git-send-email-ebutera@users.berlios.de>
 X-Mailer: git-send-email 1.7.5.4
 In-Reply-To: <1330285154-14853-1-git-send-email-ebutera@users.berlios.de>
 References: <1330285154-14853-1-git-send-email-ebutera@users.berlios.de>
-Subject: [RFC PATCH 6/9] gstreamer: add bbappends to use patched versions needed by gst-ducati
+Subject: [RFC PATCH 7/9] gst-ducati: add latest git version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,97 +47,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Feb 2012 19:39:36 -0000
+X-List-Received-Date: Sun, 26 Feb 2012 19:39:38 -0000
 
 Signed-off-by: Enrico Butera <ebutera@users.berlios.de>
 ---
- .../gstreamer/gst-plugins-bad_0.10.22.bbappend     |   21 +++++++++++++++++++
- .../gstreamer/gst-plugins-base_0.10.35.bbappend    |   18 ++++++++++++++++
- .../gstreamer/gstreamer_0.10.35.bbappend           |   22 ++++++++++++++++++++
- 3 files changed, 61 insertions(+), 0 deletions(-)
- create mode 100644 recipes-multimedia/gstreamer/gst-plugins-bad_0.10.22.bbappend
- create mode 100644 recipes-multimedia/gstreamer/gst-plugins-base_0.10.35.bbappend
- create mode 100644 recipes-multimedia/gstreamer/gstreamer_0.10.35.bbappend
+ recipes-ti/gstreamer-ti/gst-ducati_git.bb |   28 ++++++++++++++++++++++++++++
+ 1 files changed, 28 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-ti/gstreamer-ti/gst-ducati_git.bb
 
-diff --git a/recipes-multimedia/gstreamer/gst-plugins-bad_0.10.22.bbappend b/recipes-multimedia/gstreamer/gst-plugins-bad_0.10.22.bbappend
+diff --git a/recipes-ti/gstreamer-ti/gst-ducati_git.bb b/recipes-ti/gstreamer-ti/gst-ducati_git.bb
 new file mode 100644
-index 0000000..d00306a
+index 0000000..0b43bca
 --- /dev/null
-+++ b/recipes-multimedia/gstreamer/gst-plugins-bad_0.10.22.bbappend
-@@ -0,0 +1,21 @@
-+COMPATIBLE_MACHINE_omap4 = "(omap4430-panda|pandaboard)"
++++ b/recipes-ti/gstreamer-ti/gst-ducati_git.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION = "GStreamer plugins for omap4 using libdce"
++HOMEPAGE = "http://gitorious.org/gstreamer-omap/gst-ducati"
++SECTION = "multimedia"
++LICENSE = "TI"
 +
-+PR = "r0"
++require recipes-multimedia/gstreamer/gst-plugins.inc
 +
-+SRC_URI = "git://gitorious.org/gstreamer-omap/gst-plugins-bad.git;protocol=git;branch=v0.10.22+ti;name=gstbad \
-+           git://anongit.freedesktop.org/gstreamer/common;protocol=git;destsuffix=git/common;name=common \
-+          "
++PR = "r1"
++PV = "gitr${SRCPV}"
 +
-+SRCREV_gstbad = "7cea5a4ca2f0c551ea816b900a88f9bb5c1deee7"
-+SRCREV_common = "46dfcea233cf6df83e3771d8a8066e87d614f893"
++# 2012/01/24: ducatimpeg4dec: don't leak input buffers
++SRCREV = "815290098b6b638bd8832709b3ad2edbf366d144"
++
++SRC_URI = "git://gitorious.org/gstreamer-omap/gst-ducati.git;protocol=git"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 +
 +S = "${WORKDIR}/git"
 +
-+EXTRA_OECONF += "--disable-pvr"
++DEPENDS = "gstreamer gst-plugins-base gst-plugins-bad libdce"
++RDEPENDS = "gstreamer gst-plugins-base gst-plugins-bad libdce"
++
++inherit autotools gettext pkgconfig
 +
 +do_configure_prepend() {
-+	# This m4 file contains nastiness which conflicts with libtool 2.2.2
-+	rm ${S}/m4/lib-link.m4 || true
++	git submodule init && git submodule update
 +	autopoint
 +}
-+
-diff --git a/recipes-multimedia/gstreamer/gst-plugins-base_0.10.35.bbappend b/recipes-multimedia/gstreamer/gst-plugins-base_0.10.35.bbappend
-new file mode 100644
-index 0000000..eabe47e
---- /dev/null
-+++ b/recipes-multimedia/gstreamer/gst-plugins-base_0.10.35.bbappend
-@@ -0,0 +1,18 @@
-+COMPATIBLE_MACHINE_omap4 = "(omap4430-panda|pandaboard)"
-+
-+SRC_URI_omap4 = "git://gitorious.org/gstreamer-omap/gst-plugins-base.git;protocol=git;branch=v0.10.35+ti;name=gstbase \
-+                 git://anongit.freedesktop.org/gstreamer/common;protocol=git;destsuffix=git/common;name=common \
-+                 file://gst-plugins-base-tremor.patch"
-+
-+PR = "r0"
-+
-+SRCREV_gstbase = "a9efac64106a2e62fcc099fbbc9f530c36a8f943"
-+SRCREV_common = "46dfcea233cf6df83e3771d8a8066e87d614f893"
-+
-+S = "${WORKDIR}/git"
-+
-+do_configure_prepend() {
-+	# This m4 file contains nastiness which conflicts with libtool 2.2.2
-+	rm -f ${S}/m4/lib-link.m4
-+	autopoint
-+}
-diff --git a/recipes-multimedia/gstreamer/gstreamer_0.10.35.bbappend b/recipes-multimedia/gstreamer/gstreamer_0.10.35.bbappend
-new file mode 100644
-index 0000000..c240979
---- /dev/null
-+++ b/recipes-multimedia/gstreamer/gstreamer_0.10.35.bbappend
-@@ -0,0 +1,22 @@
-+
-+DEFAULT_PREFERENCE_omap4 = "10"
-+
-+# 2011-07-06: basetransform: don't do unnecessary pad_alloc()
-+SRCREV = "41af019dc6333d1ab8372bd806e0f289899f1ea4"
-+
-+SRC_URI = "git://gitorious.org/gstreamer-omap/gstreamer.git;protocol=git;branch=v0.10.35+ti;name=gstreamer \
-+           git://anongit.freedesktop.org/gstreamer/common;protocol=git;destsuffix=git/common;name=common \
-+           file://check_fix.patch \
-+           file://gst-inspect-check-error.patch"
-+
-+# 2011-07-06: basetransform: don't do unnecessary pad_alloc()
-+SRCREV_gstreamer = "41af019dc6333d1ab8372bd806e0f289899f1ea4"
-+
-+SRCREV_common = "46dfcea233cf6df83e3771d8a8066e87d614f893"
-+
-+S = "${WORKDIR}/git"
-+
-+#do_configure_prepend() {
-+#	git submodule init
-+#	git submodule update
-+#}
 -- 
 1.7.5.4
 
