@@ -1,15 +1,26 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 248DBE013A3
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2012 06:12:31 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id BDD1852A8B; Mon, 27 Feb 2012 14:12:30 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20120227141230.BDD1852A8B@arago-project.org>
-Date: Mon, 27 Feb 2012 14:12:30 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : beaglebone-getting-started: update SRM to rev A5
+Return-Path: <denis@denix.org>
+Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
+	[206.46.173.1])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5F77E0074A
+	for <meta-ti@lists.yoctoproject.org>;
+	Mon, 27 Feb 2012 06:12:56 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M0200A6I257TYR4@vms173001.mailsrvcs.net> for
+	meta-ti@lists.yoctoproject.org; Mon, 27 Feb 2012 08:12:44 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 44C4020323; Mon,
+	27 Feb 2012 09:12:43 -0500 (EST)
+Date: Mon, 27 Feb 2012 09:12:43 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-id: <20120227141243.GA10713@denix.org>
+References: <1330350029-29100-1-git-send-email-koen@dominion.thruhere.net>
+MIME-version: 1.0
+In-reply-to: <1330350029-29100-1-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: [BeagleBone][PATCH v3 01/11] linux-ti33x-psp 3.2: fix ehrPWM polarity inversion
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,46 +32,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2012 14:12:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 27 Feb 2012 14:12:57 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: f5d2815cb90d80853b53e76b1472db09e09b52d0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f5d2815cb90d80853b53e76b1472db09e09b52d0
+On Mon, Feb 27, 2012 at 02:40:19PM +0100, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Tue Feb 14 05:17:57 2012 +0100
+Thanks, applied.
 
-beaglebone-getting-started: update SRM to rev A5
-
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-misc/payload/beaglebone-getting-started.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-misc/payload/beaglebone-getting-started.bb b/recipes-misc/payload/beaglebone-getting-started.bb
-index d02c749..548a9c0 100644
---- a/recipes-misc/payload/beaglebone-getting-started.bb
-+++ b/recipes-misc/payload/beaglebone-getting-started.bb
-@@ -1,13 +1,13 @@
- DESCRIPTION = "BeagleBone Getting Started Guide"
- 
--PR = "r18"
-+PR = "r19"
- 
- inherit allarch
- 
- LICENSE = "GPLv2+ & MIT & PD & others"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=603591dea023c3c75b48e07cb47ce639"
- 
--SRCREV = "9b46d33531f0c740be25bbff5d485bec522f5934"
-+SRCREV = "4750e2bdd29ce037a045149b50ad73906d26999f"
- SRC_URI = "git://github.com/jadonk/beaglebone-getting-started.git"
- 
- S = "${WORKDIR}/git"
-
+> ---
+>  recipes-kernel/linux/linux-ti33x-psp_3.2.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+> index a25d503..f2ba8e0 100644
+> --- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+> +++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+> @@ -10,8 +10,8 @@ S = "${WORKDIR}/git"
+>  MULTI_CONFIG_BASE_SUFFIX = ""
+>  
+>  BRANCH = "v3.2-staging"
+> -SRCREV = "21ef5e1fa530eb8f23bfe18650e3915d7c291ca9"
+> -MACHINE_KERNEL_PR_append = "e+gitr${SRCREV}"
+> +SRCREV = "09e9651bcf2ee8d86685f2a8075bc6557b1d3b91"
+> +MACHINE_KERNEL_PR_append = "f+gitr${SRCREV}"
+>  
+>  COMPATIBLE_MACHINE = "(ti33x)"
+>  
+> -- 
+> 1.7.2.5
+> 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+> 
 
