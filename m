@@ -1,37 +1,34 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 55921E0074A
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2012 00:50:46 -0800 (PST)
-Received: by werc1 with SMTP id c1so1406643wer.35
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2012 00:50:45 -0800 (PST)
+Received: from mail-ww0-f51.google.com (mail-ww0-f51.google.com [74.125.82.51])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A53CE0139E
+	for <meta-ti@lists.yoctoproject.org>;
+	Mon, 27 Feb 2012 05:40:35 -0800 (PST)
+Received: by wgbed3 with SMTP id ed3so1067103wgb.8
+	for <meta-ti@lists.yoctoproject.org>;
+	Mon, 27 Feb 2012 05:40:34 -0800 (PST)
 Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.180.101.37 as permitted sender)
-	client-ip=10.180.101.37; 
+	designates 10.180.86.134 as permitted sender)
+	client-ip=10.180.86.134; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.180.101.37 as
+	koen@dominion.thruhere.net designates 10.180.86.134 as
 	permitted sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.180.101.37])
-	by 10.180.101.37 with SMTP id fd5mr18743029wib.1.1330332644996
-	(num_hops = 1); Mon, 27 Feb 2012 00:50:44 -0800 (PST)
-Received: by 10.180.101.37 with SMTP id fd5mr14740985wib.1.1330332644940;
-	Mon, 27 Feb 2012 00:50:44 -0800 (PST)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id s4sm44499684wiy.5.2012.02.27.00.50.43
+Received: from mr.google.com ([10.180.86.134])
+	by 10.180.86.134 with SMTP id p6mr28021590wiz.0.1330350034102 (num_hops
+	= 1); Mon, 27 Feb 2012 05:40:34 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.180.86.134 with SMTP id p6mr22241642wiz.0.1330350034022;
+	Mon, 27 Feb 2012 05:40:34 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id bg3sm21973330wib.10.2012.02.27.05.40.32
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 27 Feb 2012 00:50:43 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1257)
+	Mon, 27 Feb 2012 05:40:32 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <EF446FF9DAC93B479C74AB9153DE173F0C0D32FF@SMUCM08V.europe.bmw.corp>
-Date: Mon, 27 Feb 2012 09:50:44 +0100
-Message-Id: <3BC330F9-CE58-4C4F-A473-B0F40D0A2777@dominion.thruhere.net>
-References: <EF446FF9DAC93B479C74AB9153DE173F0C0D32FF@SMUCM08V.europe.bmw.corp>
-To: <Christian.Schulenberg@bmw.de> <Christian.Schulenberg@bmw.de>
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQn363ROlJsBO3i9re28Y1jEorX5znFR1rW5qV9mDJaMl1+7dKswyotv2j/6HzJPznaQgPCK
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Building Yocto for Pandaboard
+To: meta-ti@lists.yoctoproject.org
+Date: Mon, 27 Feb 2012 14:40:19 +0100
+Message-Id: <1330350029-29100-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+X-Gm-Message-State: ALoCoQlSV71MQ+AztL7OdbVpH+anZkQioQlM1pF+EmFR+5ilnErekSMWz0jMkQ8Fdy/tbk90dg3g
+Subject: [BeagleBone][PATCH v3 01/11] linux-ti33x-psp 3.2: fix ehrPWM polarity inversion
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,34 +40,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2012 08:50:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 27 Feb 2012 13:40:35 -0000
 
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Op 27 feb. 2012, om 09:26 heeft <Christian.Schulenberg@bmw.de> =
-<Christian.Schulenberg@bmw.de> het volgende geschreven:
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index a25d503..f2ba8e0 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -10,8 +10,8 @@ S = "${WORKDIR}/git"
+ MULTI_CONFIG_BASE_SUFFIX = ""
+ 
+ BRANCH = "v3.2-staging"
+-SRCREV = "21ef5e1fa530eb8f23bfe18650e3915d7c291ca9"
+-MACHINE_KERNEL_PR_append = "e+gitr${SRCREV}"
++SRCREV = "09e9651bcf2ee8d86685f2a8075bc6557b1d3b91"
++MACHINE_KERNEL_PR_append = "f+gitr${SRCREV}"
+ 
+ COMPATIBLE_MACHINE = "(ti33x)"
+ 
+-- 
+1.7.2.5
 
-> I already added to following line to my local.conf:
-> =20
-> BBMASK =3D ".*/meta-ti/recipes-misc/"
-> =20
-> which helps to bypass the first build problem. The next show stopper =
-is building the boot loader (denx version of u-boot):
-> =20
-> clocks.c:415:13: internal compiler error: in decode_addr_const, at =
-varasm.c:2632
-> =20
-> This seems to be a problem with the used version of gcc. I guess there =
-are two ways to work around this: Use older version of gcc (4.5) or =
-change compiler optimization from -Os to -O0. Unfortunately, neither can =
-I find the right place to switch from gcc 4.6 to 4.5, nor the place to =
-change compiler flags.
-
-Have you read the README in the meta-ti layer yet? That explains how to =
-setup a working environment.
-
-regards,
-
-Koen=
 
