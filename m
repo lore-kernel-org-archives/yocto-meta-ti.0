@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA69BE0074A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA71DE0139E
 	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2012 06:12:30 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5183852A59; Mon, 27 Feb 2012 14:12:30 +0000 (UTC)
+	id F04A752AA1; Mon, 27 Feb 2012 14:12:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120227141230.5183852A59@arago-project.org>
-Date: Mon, 27 Feb 2012 14:12:30 +0000 (UTC)
+Message-Id: <20120227141229.F04A752AA1@arago-project.org>
+Date: Mon, 27 Feb 2012 14:12:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : beaglebone-getting-started: update to latest git
+Subject: Koen Kooi : beaglebone-tester: include Jasons debug tweaks
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,41 +26,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 72f3c75164404d2540335694827ac9a5ed98fa56
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=72f3c75164404d2540335694827ac9a5ed98fa56
+Commit: 2a67d5076dad274aa87d676bf8fe10a3789908eb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2a67d5076dad274aa87d676bf8fe10a3789908eb
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Fri Feb 10 09:41:22 2012 +0100
+Date:   Fri Feb 10 09:29:55 2012 +0100
 
-beaglebone-getting-started: update to latest git
+beaglebone-tester: include Jasons debug tweaks
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-misc/payload/beaglebone-getting-started.bb |    4 ++--
+ recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-misc/payload/beaglebone-getting-started.bb b/recipes-misc/payload/beaglebone-getting-started.bb
-index b135176..d02c749 100644
---- a/recipes-misc/payload/beaglebone-getting-started.bb
-+++ b/recipes-misc/payload/beaglebone-getting-started.bb
-@@ -1,13 +1,13 @@
- DESCRIPTION = "BeagleBone Getting Started Guide"
- 
--PR = "r17"
-+PR = "r18"
- 
+diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
+index dae9628..7a72547 100644
+--- a/recipes-ti/beagleboard/beaglebone-tester.bb
++++ b/recipes-ti/beagleboard/beaglebone-tester.bb
+@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
+ # only scripts and data
  inherit allarch
  
- LICENSE = "GPLv2+ & MIT & PD & others"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=603591dea023c3c75b48e07cb47ce639"
+-PR = "r12"
++PR = "r13"
  
--SRCREV = "5b93037d0504ab194709cf8b6dc3890fefe19fd9"
-+SRCREV = "9b46d33531f0c740be25bbff5d485bec522f5934"
- SRC_URI = "git://github.com/jadonk/beaglebone-getting-started.git"
+ SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
+           "
+-SRCREV = "0a3415705afb206694d4e873fe8228b7440213db"
++SRCREV = "dc89e2d6b2ac0238a7aa5a334d7c86d7b8613837"
  
  S = "${WORKDIR}/git"
+ 
 
 
