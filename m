@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA71DE0139E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CD756E013A3
 	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2012 06:12:30 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F04A752AA1; Mon, 27 Feb 2012 14:12:29 +0000 (UTC)
+	id 7EC7552A54; Mon, 27 Feb 2012 14:12:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120227141229.F04A752AA1@arago-project.org>
-Date: Mon, 27 Feb 2012 14:12:29 +0000 (UTC)
+Message-Id: <20120227141230.7EC7552A54@arago-project.org>
+Date: Mon, 27 Feb 2012 14:12:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : beaglebone-tester: include Jasons debug tweaks
+Subject: Koen Kooi : gadget-init: remove ehrPWM polarity workaround
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,44 +21,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2012 14:12:30 -0000
+X-List-Received-Date: Mon, 27 Feb 2012 14:12:31 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 2a67d5076dad274aa87d676bf8fe10a3789908eb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2a67d5076dad274aa87d676bf8fe10a3789908eb
+Commit: c3c095c83f498a55f65ad72195e8f05d39c84a07
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c3c095c83f498a55f65ad72195e8f05d39c84a07
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Fri Feb 10 09:29:55 2012 +0100
+Date:   Fri Feb 10 09:45:51 2012 +0100
 
-beaglebone-tester: include Jasons debug tweaks
+gadget-init: remove ehrPWM polarity workaround
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/beagleboard/gadget-init.bb |    7 ++-----
+ 1 files changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
-index dae9628..7a72547 100644
---- a/recipes-ti/beagleboard/beaglebone-tester.bb
-+++ b/recipes-ti/beagleboard/beaglebone-tester.bb
-@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
- # only scripts and data
- inherit allarch
+diff --git a/recipes-ti/beagleboard/gadget-init.bb b/recipes-ti/beagleboard/gadget-init.bb
+index 150ff8e..016877d 100644
+--- a/recipes-ti/beagleboard/gadget-init.bb
++++ b/recipes-ti/beagleboard/gadget-init.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Units to initialize usb gadgets"
  
--PR = "r12"
-+PR = "r13"
+-PR = "r16"
++PR = "r18"
  
- SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
-           "
--SRCREV = "0a3415705afb206694d4e873fe8228b7440213db"
-+SRCREV = "dc89e2d6b2ac0238a7aa5a334d7c86d7b8613837"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+@@ -35,14 +35,11 @@ do_install() {
  
- S = "${WORKDIR}/git"
+ 	install -d ${D}${bindir}
+ 	install -m 0755 ${WORKDIR}/*.sh ${D}${bindir}
+-
+-	install -d ${D}${sysconfdir}/tmpfiles.d
+-	echo "w    /sys/class/pwm/ehrpwm.1:0/polarity -    -    -    -   1" > ${D}${sysconfdir}/tmpfiles.d/lcd7.conf
+ }
  
+ PACKAGES =+ "${PN}-storage ${PN}-network ${PN}-udhcpd"
+ 
+-FILES_${PN} = "${sysconfdir}/tmpfiles.d"
++ALLOW_EMPTY_${PN} = "1"
+ 
+ FILES_${PN}-storage = "${base_libdir}/systemd/system/storage-gadget-init.service \
+                        ${base_libdir}/systemd/system/basic.target.wants/storage-gadget-init.service \
 
 
