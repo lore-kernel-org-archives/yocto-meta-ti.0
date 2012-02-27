@@ -1,26 +1,25 @@
-Return-Path: <denis@denix.org>
-Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
-	[206.46.173.1])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5F77E0074A
-	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 27 Feb 2012 06:12:56 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M0200A6I257TYR4@vms173001.mailsrvcs.net> for
-	meta-ti@lists.yoctoproject.org; Mon, 27 Feb 2012 08:12:44 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 44C4020323; Mon,
-	27 Feb 2012 09:12:43 -0500 (EST)
-Date: Mon, 27 Feb 2012 09:12:43 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34146E0059B
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2012 08:06:09 -0800 (PST)
+Received: (qmail 16621 invoked by uid 1003); 27 Feb 2012 16:06:07 -0000
+Received: from unknown (HELO ?192.168.1.104?)
+	(philip@opensdr.com@71.171.23.138)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	27 Feb 2012 16:06:07 -0000
+Message-ID: <4F4BA9EE.8030908@balister.org>
+Date: Mon, 27 Feb 2012 11:06:06 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+MIME-Version: 1.0
 To: Koen Kooi <koen@dominion.thruhere.net>
-Message-id: <20120227141243.GA10713@denix.org>
-References: <1330350029-29100-1-git-send-email-koen@dominion.thruhere.net>
-MIME-version: 1.0
-In-reply-to: <1330350029-29100-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [BeagleBone][PATCH v3 01/11] linux-ti33x-psp 3.2: fix ehrPWM polarity inversion
+References: <EF446FF9DAC93B479C74AB9153DE173F0C0D32FF@SMUCM08V.europe.bmw.corp>
+	<3BC330F9-CE58-4C4F-A473-B0F40D0A2777@dominion.thruhere.net>
+In-Reply-To: <3BC330F9-CE58-4C4F-A473-B0F40D0A2777@dominion.thruhere.net>
+X-Enigmail-Version: 1.1.2
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Building Yocto for Pandaboard
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,40 +31,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2012 14:12:57 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 27 Feb 2012 16:06:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Mon, Feb 27, 2012 at 02:40:19PM +0100, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+On 02/27/2012 03:50 AM, Koen Kooi wrote:
+> 
+> Op 27 feb. 2012, om 09:26 heeft <Christian.Schulenberg@bmw.de> <Christian.Schulenberg@bmw.de> het volgende geschreven:
+> 
+>> I already added to following line to my local.conf:
+>>  
+>> BBMASK = ".*/meta-ti/recipes-misc/"
+>>  
+>> which helps to bypass the first build problem. The next show stopper is building the boot loader (denx version of u-boot):
+>>  
+>> clocks.c:415:13: internal compiler error: in decode_addr_const, at varasm.c:2632
+>>  
+>> This seems to be a problem with the used version of gcc. I guess there are two ways to work around this: Use older version of gcc (4.5) or change compiler optimization from -Os to -O0. Unfortunately, neither can I find the right place to switch from gcc 4.6 to 4.5, nor the place to change compiler flags.
+> 
+> Have you read the README in the meta-ti layer yet? That explains how to setup a working environment.
 
-Thanks, applied.
+The README contains instructions for building Angstrom, which is not the
+right answer for everyone trying to use meta-ti.
 
-> ---
->  recipes-kernel/linux/linux-ti33x-psp_3.2.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-> index a25d503..f2ba8e0 100644
-> --- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-> +++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-> @@ -10,8 +10,8 @@ S = "${WORKDIR}/git"
->  MULTI_CONFIG_BASE_SUFFIX = ""
->  
->  BRANCH = "v3.2-staging"
-> -SRCREV = "21ef5e1fa530eb8f23bfe18650e3915d7c291ca9"
-> -MACHINE_KERNEL_PR_append = "e+gitr${SRCREV}"
-> +SRCREV = "09e9651bcf2ee8d86685f2a8075bc6557b1d3b91"
-> +MACHINE_KERNEL_PR_append = "f+gitr${SRCREV}"
->  
->  COMPATIBLE_MACHINE = "(ti33x)"
->  
-> -- 
-> 1.7.2.5
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+Philip
 
