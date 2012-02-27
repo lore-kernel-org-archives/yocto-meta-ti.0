@@ -1,36 +1,37 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f41.google.com (mail-ww0-f41.google.com [74.125.82.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 31D99E013AB
+Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
+	[74.125.82.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C3937E013AB
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 27 Feb 2012 05:40:51 -0800 (PST)
-Received: by wgbds1 with SMTP id ds1so1074515wgb.2
+	Mon, 27 Feb 2012 05:40:52 -0800 (PST)
+Received: by mail-we0-f181.google.com with SMTP id m13so468501wer.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 27 Feb 2012 05:40:50 -0800 (PST)
+	Mon, 27 Feb 2012 05:40:52 -0800 (PST)
 Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.180.95.1 as permitted sender)
-	client-ip=10.180.95.1; 
+	designates 10.180.99.65 as permitted sender)
+	client-ip=10.180.99.65; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.180.95.1 as permitted
+	koen@dominion.thruhere.net designates 10.180.99.65 as permitted
 	sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.180.95.1])
-	by 10.180.95.1 with SMTP id dg1mr28070733wib.21.1330350050429 (num_hops
-	= 1); Mon, 27 Feb 2012 05:40:50 -0800 (PST)
+Received: from mr.google.com ([10.180.99.65])
+	by 10.180.99.65 with SMTP id eo1mr18899924wib.13.1330350052542
+	(num_hops = 1); Mon, 27 Feb 2012 05:40:52 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.180.95.1 with SMTP id dg1mr22282503wib.21.1330350050364;
-	Mon, 27 Feb 2012 05:40:50 -0800 (PST)
+Received: by 10.180.99.65 with SMTP id eo1mr14862884wib.13.1330350052496;
+	Mon, 27 Feb 2012 05:40:52 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id k6sm7132076wiy.7.2012.02.27.05.40.48
+	by mx.google.com with ESMTPS id er8sm55347092wib.1.2012.02.27.05.40.51
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 27 Feb 2012 05:40:49 -0800 (PST)
+	Mon, 27 Feb 2012 05:40:51 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@lists.yoctoproject.org
-Date: Mon, 27 Feb 2012 14:40:25 +0100
-Message-Id: <1330350029-29100-7-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 27 Feb 2012 14:40:26 +0100
+Message-Id: <1330350029-29100-8-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <1330350029-29100-1-git-send-email-koen@dominion.thruhere.net>
 References: <1330350029-29100-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQnxMpLTAxq9qwl/d3plXU6i0hFgBTcAW5veFEc7auOL2QpCRNM6z4h4oSS18rT1MySuABpu
-Subject: [BeagleBone][PATCH v3 07/11] beaglebone-getting-started: update to latest git
+X-Gm-Message-State: ALoCoQm1PVKWEL1zH672zz+2jOvvmm7dAoczwFbTq4UU9xucsrLBWIuUu/zFnxcuoNTxjOfz2WqN
+Subject: [BeagleBone][PATCH v3 08/11] gadget-init: remove ehrPWM polarity workaround
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,33 +43,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2012 13:40:51 -0000
+X-List-Received-Date: Mon, 27 Feb 2012 13:40:53 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- recipes-misc/payload/beaglebone-getting-started.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/beagleboard/gadget-init.bb |    7 ++-----
+ 1 files changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-misc/payload/beaglebone-getting-started.bb b/recipes-misc/payload/beaglebone-getting-started.bb
-index b135176..d02c749 100644
---- a/recipes-misc/payload/beaglebone-getting-started.bb
-+++ b/recipes-misc/payload/beaglebone-getting-started.bb
-@@ -1,13 +1,13 @@
- DESCRIPTION = "BeagleBone Getting Started Guide"
+diff --git a/recipes-ti/beagleboard/gadget-init.bb b/recipes-ti/beagleboard/gadget-init.bb
+index 150ff8e..016877d 100644
+--- a/recipes-ti/beagleboard/gadget-init.bb
++++ b/recipes-ti/beagleboard/gadget-init.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Units to initialize usb gadgets"
  
--PR = "r17"
+-PR = "r16"
 +PR = "r18"
  
- inherit allarch
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+@@ -35,14 +35,11 @@ do_install() {
  
- LICENSE = "GPLv2+ & MIT & PD & others"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=603591dea023c3c75b48e07cb47ce639"
+ 	install -d ${D}${bindir}
+ 	install -m 0755 ${WORKDIR}/*.sh ${D}${bindir}
+-
+-	install -d ${D}${sysconfdir}/tmpfiles.d
+-	echo "w    /sys/class/pwm/ehrpwm.1:0/polarity -    -    -    -   1" > ${D}${sysconfdir}/tmpfiles.d/lcd7.conf
+ }
  
--SRCREV = "5b93037d0504ab194709cf8b6dc3890fefe19fd9"
-+SRCREV = "9b46d33531f0c740be25bbff5d485bec522f5934"
- SRC_URI = "git://github.com/jadonk/beaglebone-getting-started.git"
+ PACKAGES =+ "${PN}-storage ${PN}-network ${PN}-udhcpd"
  
- S = "${WORKDIR}/git"
+-FILES_${PN} = "${sysconfdir}/tmpfiles.d"
++ALLOW_EMPTY_${PN} = "1"
+ 
+ FILES_${PN}-storage = "${base_libdir}/systemd/system/storage-gadget-init.service \
+                        ${base_libdir}/systemd/system/basic.target.wants/storage-gadget-init.service \
 -- 
 1.7.2.5
 
