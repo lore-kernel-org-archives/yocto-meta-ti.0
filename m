@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45872E0139E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 47F04E013A5
 	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2012 06:12:30 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6105652A8A; Mon, 27 Feb 2012 14:12:29 +0000 (UTC)
+	id 9B91F52A52; Mon, 27 Feb 2012 14:12:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120227141229.6105652A8A@arago-project.org>
-Date: Mon, 27 Feb 2012 14:12:29 +0000 (UTC)
+Message-Id: <20120227141228.9B91F52A52@arago-project.org>
+Date: Mon, 27 Feb 2012 14:12:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux 3.0: update from 3.0.17 to 3.0.22
+Subject: Koen Kooi : linux-ti33x-psp 3.2: fix ehrPWM polarity inversion
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,56 +26,36 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: b43e9fc0e1d3b52636f818c2303d43202e723114
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b43e9fc0e1d3b52636f818c2303d43202e723114
+Commit: 14f31c3c5a19dde049355ced3edd121c31842460
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=14f31c3c5a19dde049355ced3edd121c31842460
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Tue Feb 21 11:10:08 2012 +0100
+Date:   Fri Feb 10 09:44:56 2012 +0100
 
-linux 3.0: update from 3.0.17 to 3.0.22
+linux-ti33x-psp 3.2: fix ehrPWM polarity inversion
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/omap3.inc    |    2 +-
- recipes-kernel/linux/linux_3.0.bb |    8 ++++----
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index f415864..b7d23af 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -3,7 +3,7 @@ SOC_FAMILY = "omap3"
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r115"
-+MACHINE_KERNEL_PR = "r116"
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index a25d503..f2ba8e0 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -10,8 +10,8 @@ S = "${WORKDIR}/git"
+ MULTI_CONFIG_BASE_SUFFIX = ""
  
- KERNEL_IMAGETYPE = "uImage"
+ BRANCH = "v3.2-staging"
+-SRCREV = "21ef5e1fa530eb8f23bfe18650e3915d7c291ca9"
+-MACHINE_KERNEL_PR_append = "e+gitr${SRCREV}"
++SRCREV = "09e9651bcf2ee8d86685f2a8075bc6557b1d3b91"
++MACHINE_KERNEL_PR_append = "f+gitr${SRCREV}"
  
-diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
-index d62c1ea..65084fb 100644
---- a/recipes-kernel/linux/linux_3.0.bb
-+++ b/recipes-kernel/linux/linux_3.0.bb
-@@ -5,12 +5,12 @@ KERNEL_IMAGETYPE = "uImage"
- 
- COMPATIBLE_MACHINE = "(beagleboard)"
- 
--PV = "3.0.17"
--# v3.0.17 tag
--SRCREV_pn-${PN} = "e9d23be2708477feeaec78e707c80441520c1ef6"
-+PV = "3.0.22"
-+# v3.0.22 tag
-+SRCREV_pn-${PN} = "a4a663513af05a98d6085d92f85c16bb64ac4050"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "a"
- 
- FILESPATH =. "${FILE_DIRNAME}/linux-3.0:${FILE_DIRNAME}/linux-3.0/${MACHINE}:"
+ COMPATIBLE_MACHINE = "(ti33x)"
  
 
 
