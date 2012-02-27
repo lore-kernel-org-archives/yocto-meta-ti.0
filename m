@@ -1,37 +1,36 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BAA5E013AB
+Received: from mail-ww0-f41.google.com (mail-ww0-f41.google.com [74.125.82.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 31D99E013AB
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 27 Feb 2012 05:40:44 -0800 (PST)
-Received: by werm13 with SMTP id m13so468501wer.26
+	Mon, 27 Feb 2012 05:40:51 -0800 (PST)
+Received: by wgbds1 with SMTP id ds1so1074515wgb.2
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 27 Feb 2012 05:40:43 -0800 (PST)
+	Mon, 27 Feb 2012 05:40:50 -0800 (PST)
 Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.180.84.170 as permitted sender)
-	client-ip=10.180.84.170; 
+	designates 10.180.95.1 as permitted sender)
+	client-ip=10.180.95.1; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.180.84.170 as
-	permitted sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.180.84.170])
-	by 10.180.84.170 with SMTP id a10mr18821825wiz.9.1330350043574
-	(num_hops = 1); Mon, 27 Feb 2012 05:40:43 -0800 (PST)
+	koen@dominion.thruhere.net designates 10.180.95.1 as permitted
+	sender) smtp.mail=koen@dominion.thruhere.net
+Received: from mr.google.com ([10.180.95.1])
+	by 10.180.95.1 with SMTP id dg1mr28070733wib.21.1330350050429 (num_hops
+	= 1); Mon, 27 Feb 2012 05:40:50 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.180.84.170 with SMTP id a10mr14814296wiz.9.1330350043526;
-	Mon, 27 Feb 2012 05:40:43 -0800 (PST)
+Received: by 10.180.95.1 with SMTP id dg1mr22282503wib.21.1330350050364;
+	Mon, 27 Feb 2012 05:40:50 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id d7sm55281764wiz.6.2012.02.27.05.40.42
+	by mx.google.com with ESMTPS id k6sm7132076wiy.7.2012.02.27.05.40.48
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 27 Feb 2012 05:40:42 -0800 (PST)
+	Mon, 27 Feb 2012 05:40:49 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@lists.yoctoproject.org
-Date: Mon, 27 Feb 2012 14:40:22 +0100
-Message-Id: <1330350029-29100-4-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 27 Feb 2012 14:40:25 +0100
+Message-Id: <1330350029-29100-7-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <1330350029-29100-1-git-send-email-koen@dominion.thruhere.net>
 References: <1330350029-29100-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQnpxDB00kVEjfXUcbu77YWEeHkYMLw3Iw4BqYB9w/hUc9TwVhFW+9dOu/IVTQISe1duUak6
-Subject: [BeagleBone][PATCH v3 04/11] linux 3.0: update from 3.0.17 to 3.0.22
+X-Gm-Message-State: ALoCoQnxMpLTAxq9qwl/d3plXU6i0hFgBTcAW5veFEc7auOL2QpCRNM6z4h4oSS18rT1MySuABpu
+Subject: [BeagleBone][PATCH v3 07/11] beaglebone-getting-started: update to latest git
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,48 +42,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2012 13:40:44 -0000
+X-List-Received-Date: Mon, 27 Feb 2012 13:40:51 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- conf/machine/include/omap3.inc    |    2 +-
- recipes-kernel/linux/linux_3.0.bb |    8 ++++----
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ recipes-misc/payload/beaglebone-getting-started.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index f415864..b7d23af 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -3,7 +3,7 @@ SOC_FAMILY = "omap3"
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r115"
-+MACHINE_KERNEL_PR = "r116"
+diff --git a/recipes-misc/payload/beaglebone-getting-started.bb b/recipes-misc/payload/beaglebone-getting-started.bb
+index b135176..d02c749 100644
+--- a/recipes-misc/payload/beaglebone-getting-started.bb
++++ b/recipes-misc/payload/beaglebone-getting-started.bb
+@@ -1,13 +1,13 @@
+ DESCRIPTION = "BeagleBone Getting Started Guide"
  
- KERNEL_IMAGETYPE = "uImage"
+-PR = "r17"
++PR = "r18"
  
-diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
-index d62c1ea..65084fb 100644
---- a/recipes-kernel/linux/linux_3.0.bb
-+++ b/recipes-kernel/linux/linux_3.0.bb
-@@ -5,12 +5,12 @@ KERNEL_IMAGETYPE = "uImage"
+ inherit allarch
  
- COMPATIBLE_MACHINE = "(beagleboard)"
+ LICENSE = "GPLv2+ & MIT & PD & others"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=603591dea023c3c75b48e07cb47ce639"
  
--PV = "3.0.17"
--# v3.0.17 tag
--SRCREV_pn-${PN} = "e9d23be2708477feeaec78e707c80441520c1ef6"
-+PV = "3.0.22"
-+# v3.0.22 tag
-+SRCREV_pn-${PN} = "a4a663513af05a98d6085d92f85c16bb64ac4050"
+-SRCREV = "5b93037d0504ab194709cf8b6dc3890fefe19fd9"
++SRCREV = "9b46d33531f0c740be25bbff5d485bec522f5934"
+ SRC_URI = "git://github.com/jadonk/beaglebone-getting-started.git"
  
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "a"
- 
- FILESPATH =. "${FILE_DIRNAME}/linux-3.0:${FILE_DIRNAME}/linux-3.0/${MACHINE}:"
- 
+ S = "${WORKDIR}/git"
 -- 
 1.7.2.5
 
