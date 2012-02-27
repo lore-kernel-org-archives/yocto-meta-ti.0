@@ -1,45 +1,37 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F1E2AE013A6
+Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
+	[74.125.82.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5CEE2E0139E
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 27 Feb 2012 05:41:00 -0800 (PST)
-Received: by mail-wi0-f181.google.com with SMTP id hi8so3288741wib.26
+	Mon, 27 Feb 2012 05:41:17 -0800 (PST)
+Received: by mail-we0-f181.google.com with SMTP id m13so468501wer.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Mon, 27 Feb 2012 05:41:00 -0800 (PST)
+	Mon, 27 Feb 2012 05:41:17 -0800 (PST)
 Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.216.131.29 as permitted sender)
-	client-ip=10.216.131.29; 
+	designates 10.180.103.97 as permitted sender)
+	client-ip=10.180.103.97; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.216.131.29 as
+	koen@dominion.thruhere.net designates 10.180.103.97 as
 	permitted sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.216.131.29])
-	by 10.216.131.29 with SMTP id l29mr7071333wei.48.1330350060729
-	(num_hops = 1); Mon, 27 Feb 2012 05:41:00 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=gamma;
-	h=mime-version:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references:x-gm-message-state;
-	bh=1FZFrjaszyeRzkVHDUSFZsGdC7iJKmGYMN3T5TRhcwE=;
-	b=jUumbAKFqSZRD1m7UQBc8w3HFZluqov3mp20T/bMGUzHR5xVW9WWNIrpcY8xrtHacf
-	EUVKQ1Yo4E4K3B2pMc9stWxYQWYcZbVTP+w79m9pKsHAZpdr0c3Lazw7g1GXaBCyA79f
-	Uula4TXzEOrxeg+NrREASk5j1jgwxbmMvks5o=
+Received: from mr.google.com ([10.180.103.97])
+	by 10.180.103.97 with SMTP id fv1mr28137431wib.17.1330350077119
+	(num_hops = 1); Mon, 27 Feb 2012 05:41:17 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.216.131.29 with SMTP id l29mr5630723wei.48.1330350060611;
-	Mon, 27 Feb 2012 05:41:00 -0800 (PST)
+Received: by 10.180.103.97 with SMTP id fv1mr22339067wib.17.1330350045603;
+	Mon, 27 Feb 2012 05:40:45 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id fl2sm55309672wib.4.2012.02.27.05.40.59
+	by mx.google.com with ESMTPS id m16sm55244985wie.9.2012.02.27.05.40.44
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 27 Feb 2012 05:40:59 -0800 (PST)
+	Mon, 27 Feb 2012 05:40:44 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@lists.yoctoproject.org
-Date: Mon, 27 Feb 2012 14:40:29 +0100
-Message-Id: <1330350029-29100-11-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 27 Feb 2012 14:40:23 +0100
+Message-Id: <1330350029-29100-5-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <1330350029-29100-1-git-send-email-koen@dominion.thruhere.net>
 References: <1330350029-29100-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQn5iEuceFtI6GZ/l04Td7bDcqBlkk6iOuo/IA748KzHmlZeX0ChcLd8LzIh/kQhzWomSrji
-Subject: [BeagleBone][PATCH v3 11/11] linux-ti33x-psp 3.2: enable PRU support for beaglebone
+X-Gm-Message-State: ALoCoQnZkIHR7PoZXyP57ihX7rcv+y5CeIm1xDkNbSB67kt0gW/cth73TVzrReDhcmnw+DQ2KTxr
+Subject: [BeagleBone][PATCH v3 05/11] u-boot 2011.09: add patch to support 'cold' AM335x silicon
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,51 +43,72 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2012 13:41:01 -0000
+X-List-Received-Date: Mon, 27 Feb 2012 13:41:17 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |    7 +++++--
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    2 +-
- 2 files changed, 6 insertions(+), 3 deletions(-)
+ ...ddr_defs-change-DDR-timings-for-15x15-EVM.patch |   30 ++++++++++++++++++++
+ recipes-bsp/u-boot/u-boot_2011.10rc.bb             |    3 +-
+ 2 files changed, 32 insertions(+), 1 deletions(-)
+ create mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0001-ddr_defs-change-DDR-timings-for-15x15-EVM.patch
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-index 07b9987..c5b80d1 100644
---- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-@@ -1,6 +1,6 @@
- #
- # Automatically generated file; DO NOT EDIT.
--# Linux/arm 3.2.0 Kernel Configuration
-+# Linux/arm 3.2.6 Kernel Configuration
- #
- CONFIG_ARM=y
- CONFIG_HAVE_PWM=y
-@@ -2894,7 +2894,10 @@ CONFIG_RTC_DRV_TWL4030=y
- CONFIG_RTC_DRV_OMAP=y
- # CONFIG_DMADEVICES is not set
- # CONFIG_AUXDISPLAY is not set
--# CONFIG_UIO is not set
-+CONFIG_UIO=m
-+CONFIG_UIO_PDRV=m
-+CONFIG_UIO_PDRV_GENIRQ=m
-+CONFIG_UIO_PRUSS=m
- CONFIG_VIRTIO=m
- CONFIG_VIRTIO_RING=m
+diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0001-ddr_defs-change-DDR-timings-for-15x15-EVM.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0001-ddr_defs-change-DDR-timings-for-15x15-EVM.patch
+new file mode 100644
+index 0000000..4563a2c
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot/2011.09git/0001-ddr_defs-change-DDR-timings-for-15x15-EVM.patch
+@@ -0,0 +1,30 @@
++From 7a3b3b04b1aed6a649d99396f914ec042968f924 Mon Sep 17 00:00:00 2001
++From: Chase Maupin <Chase.Maupin@ti.com>
++Date: Thu, 9 Feb 2012 13:09:27 -0600
++Subject: [PATCH] ddr_defs: change DDR timings for 15x15 EVM
++
++* For cold silicon the DDR timings need to be relaxed in order for
++  the device to boot with DDR at 266MHz
++* Fix proposed by James Doublesin
++
++Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
++---
++ arch/arm/include/asm/arch-ti81xx/ddr_defs.h |    2 +-
++ 1 files changed, 1 insertions(+), 1 deletions(-)
++
++diff --git a/arch/arm/include/asm/arch-ti81xx/ddr_defs.h b/arch/arm/include/asm/arch-ti81xx/ddr_defs.h
++index 6c4b422..0b7ffe7 100644
++--- a/arch/arm/include/asm/arch-ti81xx/ddr_defs.h
+++++ b/arch/arm/include/asm/arch-ti81xx/ddr_defs.h
++@@ -338,7 +338,7 @@
++ #define DDR2_RD_DQS		0x40
++ #define DDR2_PHY_FIFO_WE	0x56
++ #else
++-#define EMIF_READ_LATENCY	0x04
+++#define EMIF_READ_LATENCY	0x05
++ #define EMIF_TIM1		0x0666B3D6
++ #define EMIF_TIM2		0x143731DA
++ #define	EMIF_TIM3		0x00000347
++-- 
++1.7.0.4
++
+diff --git a/recipes-bsp/u-boot/u-boot_2011.10rc.bb b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
+index 74597f6..0102d15 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.10rc.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
+@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "(ti33x)"
+ DEFAULT_PREFERENCE_ti33x = "99"
  
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index 42a606d..36df3e6 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -11,7 +11,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
+ PV = "2011.09+git"
+-PR = "r25"
++PR = "r26"
  
- BRANCH = "v3.2-staging"
- SRCREV = "09e9651bcf2ee8d86685f2a8075bc6557b1d3b91"
--MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "c+gitr${SRCREV}"
+ # SPL build
+ UBOOT_BINARY = "u-boot.img"
+@@ -23,6 +23,7 @@ SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;br
+            file://2011.09git/0007-am335x_evm-switch-to-ext4.patch \
+            file://2011.09git/0008-HACK-am335x-evm-turn-d-cache-on-globally-turn-it-off.patch \
+            file://2011.09git/0009-am335x-evm-enable-i2c2-pinmux-for-beaglebone.patch \
++           file://2011.09git/0001-ddr_defs-change-DDR-timings-for-15x15-EVM.patch \
+           "
  
- COMPATIBLE_MACHINE = "(ti33x)"
- 
+ SRCREV = "f63b270e47f62f4d1a05b2001357e215966c6f5a"
 -- 
 1.7.2.5
 
