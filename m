@@ -1,29 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D2DC0E00596
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2012 10:56:18 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M0200L1QF9J3OD0@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 27 Feb 2012 12:56:08 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5CD4120264; Mon,
-	27 Feb 2012 13:56:07 -0500 (EST)
-Date: Mon, 27 Feb 2012 13:56:07 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: William Mills <wmills@ti.com>
-Message-id: <20120227185607.GB10713@denix.org>
-References: <EF446FF9DAC93B479C74AB9153DE173F0C0D32FF@SMUCM08V.europe.bmw.corp>
-	<3BC330F9-CE58-4C4F-A473-B0F40D0A2777@dominion.thruhere.net>
-	<4F4BA9EE.8030908@balister.org>
-	<3A03FCB1-56B0-42C4-9260-24B10EF4531E@dominion.thruhere.net>
-	<4F4BB801.3090108@ti.com>
-MIME-version: 1.0
-In-reply-to: <4F4BB801.3090108@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Building Yocto for Pandaboard
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B84F7E00749
+	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2012 20:16:40 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id A03C652A52; Tue, 28 Feb 2012 04:16:39 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120228041639.A03C652A52@arago-project.org>
+Date: Tue, 28 Feb 2012 04:16:39 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : README: describe the current dependency on Angstrom and future plans
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,26 +21,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2012 18:56:19 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 28 Feb 2012 04:16:40 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, Feb 27, 2012 at 12:06:09PM -0500, William Mills wrote:
-> >>The README contains instructions for building Angstrom, which is not the
-> >>right answer for everyone trying to use meta-ti.
-> >Since the recipe in question break with gcc 4.6 and/or binutils 2.22 *and* you need SOC_FAMILY in overrides angstrom is the only "out of the box" option. Other routes will involve heavy patching. I agree that needs to be addressed, but it doesn't change the solution *right now*.
-> >
-> >And the instructions in the README set things for 'yocto', which is what people are asking for. If they asked for 'poky', that would be a totally different thing.
-> 
-> Denis or Koen:  Before today is over please modify the README.txt to
-> describe where we are going and what is possible right now.  If
-> Angstrom is the only thing possible right now it should say that
-> until we can build with other layer stacks.  However it should also
-> say that we are working toward a solution that will build with
-> multiple layer stacks including poky.
+Module: meta-ti
+Branch: master
+Commit: cac9367c1a1f2cfc8b7cf78cd0faa9ab021da2e4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cac9367c1a1f2cfc8b7cf78cd0faa9ab021da2e4
 
-Sure, will do.
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Feb 27 23:15:13 2012 -0500
 
--- 
-Denys
+README: describe the current dependency on Angstrom and future plans
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ README |   21 ++++++++++++++++-----
+ 1 files changed, 16 insertions(+), 5 deletions(-)
+
+diff --git a/README b/README
+index c4c88ec..9bf6154 100644
+--- a/README
++++ b/README
+@@ -4,18 +4,29 @@ URI: git://git.openembedded.org/openembedded-core
+ branch: master
+ revision: HEAD
+ 
+-URI: git://git.angstrom-distribution.org/meta-angstrom
++URI: git://git.openembedded.org/meta-openembedded
+ branch: master
+ revision: HEAD
+ 
+-URI: git://git.openembedded.org/meta-openembedded
++URI: git://git.angstrom-distribution.org/meta-angstrom
+ branch: master
+ revision: HEAD
+ 
+-It is recommended to follow the instructions at http://www.angstrom-distribution.org/building-angstrom
++Currently meta-ti only works with the Angstrom distribution and hence
++requires the meta-angstrom layer. There are known issues when using
++gcc-4.6 based toolchain from OpenEmbedded-Core, thus gcc-4.5 toolchain,
++provided by meta-openembedded, is needed. It is planned to fix these
++shortcomings in the near future and allow building the base BSP part
++of meta-ti with different distributions and layer stacks, such as:
++distro-less (only with OE-Core), with Yocto/Poky, with Angstrom or
++Arago.
++
++Due to the above, it is now recommended to follow the instructions at
++http://www.angstrom-distribution.org/building-angstrom
+ 
+-This will set it up for the OpenEmbedded-core layout instead of the old
+-OpenEmbedded-dev layout. You can optionally tweak sources/layers.txt and conf/bblayers.conf to (de)select BSP layers.
++This will set it up for the OpenEmbedded-core layout instead of the
++old "Classic" OpenEmbedded-dev layout. You can optionally tweak
++sources/layers.txt and conf/bblayers.conf to (de)select BSP layers.
+ 
+ Send pull requests to meta-ti@yoctoproject.org
+ 
+
 
