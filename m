@@ -1,15 +1,32 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D8F4BE0123C
-	for <meta-ti@yoctoproject.org>; Tue, 28 Feb 2012 14:13:36 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id DAD82529BA; Tue, 28 Feb 2012 22:13:35 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20120228221335.DAD82529BA@arago-project.org>
-Date: Tue, 28 Feb 2012 22:13:35 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : matrix-tui: deprecated
+Return-Path: <denis@denix.org>
+Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
+	[206.46.173.11])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B0BB2E00749
+	for <meta-ti@lists.yoctoproject.org>;
+	Tue, 28 Feb 2012 14:39:00 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M04005TRK8KUKW0@vms173011.mailsrvcs.net> for
+	meta-ti@lists.yoctoproject.org; Tue, 28 Feb 2012 16:38:45 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5AC242016E; Tue,
+	28 Feb 2012 17:38:43 -0500 (EST)
+Date: Tue, 28 Feb 2012 17:38:43 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: "Maupin, Chase" <chase.maupin@ti.com>
+Message-id: <20120228223843.GC12073@denix.org>
+References: <1330442197-10408-1-git-send-email-koen@dominion.thruhere.net>
+	<20120228152205.GC10713@denix.org>
+	<81A0AEEA-EB5D-4C82-ABD1-D6E05E7226F1@dominion.thruhere.net>
+	<20120228181321.GD10713@denix.org>
+	<7D46E86EC0A8354091174257B2FED1012F04312C@DLEE12.ent.ti.com>
+	<20120228200230.GA12073@denix.org>
+	<7D46E86EC0A8354091174257B2FED1012F0432F2@DLEE12.ent.ti.com>
+MIME-version: 1.0
+In-reply-to: <7D46E86EC0A8354091174257B2FED1012F0432F2@DLEE12.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@lists.yoctoproject.org" <meta-ti@lists.yoctoproject.org>
+Subject: Re: [PATCH] linux-davinci: quoting fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,119 +38,134 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 22:13:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 28 Feb 2012 22:39:00 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: 827f9e9a8a8d933791966da46e9ad9d1a57b0403
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=827f9e9a8a8d933791966da46e9ad9d1a57b0403
+On Tue, Feb 28, 2012 at 08:41:44PM +0000, Maupin, Chase wrote:
+> I submitted patches to update it (minus the quotes) a while back.  Or are 
+> you talking about the quotes.  My point was that work to matrix should be 
+> done there.
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Feb 28 17:05:03 2012 -0500
+Yes, but I see the new changes first against old arago, not meta-arago.
 
-matrix-tui: deprecated
+Either way, they now should be in sync and the old copy in meta-ti finally 
+removed.
 
-Remove matrix-tui, since it has been deprecated and no longer supported.
+-- 
+Denys
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
----
-
- recipes-ti/matrix/matrix-tui.inc    |   44 -----------------------------------
- recipes-ti/matrix/matrix-tui/init   |   24 -------------------
- recipes-ti/matrix/matrix-tui_1.1.bb |    4 ---
- 3 files changed, 0 insertions(+), 72 deletions(-)
-
-diff --git a/recipes-ti/matrix/matrix-tui.inc b/recipes-ti/matrix/matrix-tui.inc
-deleted file mode 100644
-index 3be1295..0000000
---- a/recipes-ti/matrix/matrix-tui.inc
-+++ /dev/null
-@@ -1,44 +0,0 @@
--DESCRIPTION = "Matrix TUI"
--HOMEPAGE = "https://gforge.ti.com/gf/project/matrix_tui/"
--LICENSE = "BSD"
--SECTION = "multimedia"
--DEPENDS = "libxml2 zlib ncurses"
--
--INC_PR = "r7"
--
--COMPATIBLE_MACHINE = "(omapl138|omap3)"
--
--SRC_URI = "svn://gforge.ti.com/svn/matrix_tui/;module=trunk;proto=https;user=anonymous;pswd='' \
--	file://init \
--"
--
--S = "${WORKDIR}/trunk"
--
--# Do not auto-start TUI by default, uncomment otherwise
--#inherit update-rc.d
--#INITSCRIPT_NAME = "matrix-tui"
--#INITSCRIPT_PARAMS = "defaults 99"
--
--do_configure() {
--	sed -i -e 's|LIBS :=|LIBS := ${LDFLAGS} |' Release/objects.mk
--}
--
--do_compile() {
--	# don't build debug version
--	touch debug
--	export CROSS_COMPILE=${TARGET_PREFIX}
--	export TUI_INCLUDE_PATH=${STAGING_INCDIR}
--	export XML_INCLUDE_PATH=${STAGING_INCDIR}/libxml2
--	export TUI_LIB_PATH=${STAGING_LIBDIR}
--	export PLATFORM=${MACHINE}
--	make release
--}
--
--do_install() {
--	export PLATFORM=${MACHINE}
--	make DESTDIR=${D} install
--	install -d ${D}${sysconfdir}/init.d/
--	install -c -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/matrix-tui
--}
--
--FILES_${PN} += "${datadir}/matrix/*"
-diff --git a/recipes-ti/matrix/matrix-tui/init b/recipes-ti/matrix/matrix-tui/init
-deleted file mode 100755
-index e581382..0000000
---- a/recipes-ti/matrix/matrix-tui/init
-+++ /dev/null
-@@ -1,24 +0,0 @@
--#! /bin/sh
--
--matrixtui="/usr/bin/matrix_tui"
--TUI_OPTS="/usr/share/matrix/xml/matrix.xml"
--
--test -x "$matrixtui" || exit 0
--
--case "$1" in
--  start)
--    echo -n "Starting Matrix TUI application"
--    start-stop-daemon --start --quiet --background --pidfile /var/run/matrix-tui.pid --exec $matrixtui -- $TUI_OPTS
--    echo "."
--    ;;
--  stop)
--    echo -n "Stopping Matrix TUI application"
--    start-stop-daemon --stop --quiet --pidfile /var/run/matrix-tui.pid
--    echo "."
--    ;;
--  *)
--    echo "Usage: /etc/init.d/matrix-tui {start|stop}"
--    exit 1
--esac
--
--exit 0
-diff --git a/recipes-ti/matrix/matrix-tui_1.1.bb b/recipes-ti/matrix/matrix-tui_1.1.bb
-deleted file mode 100644
-index 9814d5f..0000000
---- a/recipes-ti/matrix/matrix-tui_1.1.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require matrix-tui.inc
--
--SRCREV = "37"
--PR = "${INC_PR}.4"
-
+> > -----Original Message-----
+> > From: Denys Dmytriyenko [mailto:denis@denix.org]
+> > Sent: Tuesday, February 28, 2012 2:03 PM
+> > To: Maupin, Chase
+> > Cc: Koen Kooi; meta-ti@lists.yoctoproject.org
+> > Subject: Re: [meta-ti] [PATCH] linux-davinci: quoting fixes
+> > 
+> > On Tue, Feb 28, 2012 at 07:45:56PM +0000, Maupin, Chase wrote:
+> > > Yeah, it is up to date in meta-arago so you can pull it from
+> > there.
+> > 
+> > No, it's not. It's more up to date in old arago, but I'm updating
+> > the one in
+> > meta-arago as we speak.
+> > 
+> > > We just need the patch into meta-ti to delete it since meta-arago
+> > now has
+> > > it.
+> > 
+> > I know, that is also being done now. I might even push it first,
+> > since people
+> > started experience breakage in meta-ti with the latest bitbake,
+> > while not even
+> > using matrix.
+> > 
+> > > BTW, Koen, it is in meta-arago-extras layer so you should still
+> > be able to
+> > > pull it into your angstrom builds.
+> > 
+> > --
+> > Denys
+> > 
+> > 
+> > > > -----Original Message-----
+> > > > From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> > > > bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
+> > > > Sent: Tuesday, February 28, 2012 12:13 PM
+> > > > To: Koen Kooi
+> > > > Cc: meta-ti@lists.yoctoproject.org
+> > > > Subject: Re: [meta-ti] [PATCH] linux-davinci: quoting fixes
+> > > >
+> > > > On Tue, Feb 28, 2012 at 04:58:11PM +0100, Koen Kooi wrote:
+> > > > >
+> > > > > Op 28 feb. 2012, om 16:22 heeft Denys Dmytriyenko het
+> > volgende
+> > > > geschreven:
+> > > > >
+> > > > > > On Tue, Feb 28, 2012 at 04:16:37PM +0100, Koen Kooi wrote:
+> > > > > >> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> > > > > >
+> > > > > > Thanks, I've started cleaning up missing quotes in other
+> > places
+> > > > too.
+> > > > >
+> > > > > I sent another patch to fix some more recipes, that gave up
+> > in
+> > > > the matrix dir.
+> > > >
+> > > > Yeah, matrix is the one I was fixing, but it needs to be
+> > removed
+> > > > from meta-ti
+> > > > anyway... I'll sync up the fixes from Arago.
+> > > >
+> > > > Denys
+> > > >
+> > > > > >> ---
+> > > > > >> recipes-kernel/linux/linux-davinci_git.bb |    8 ++++----
+> > > > > >> 1 files changed, 4 insertions(+), 4 deletions(-)
+> > > > > >>
+> > > > > >> diff --git a/recipes-kernel/linux/linux-davinci_git.bb
+> > > > b/recipes-kernel/linux/linux-davinci_git.bb
+> > > > > >> index 1fda1ee..e4b85d6 100644
+> > > > > >> --- a/recipes-kernel/linux/linux-davinci_git.bb
+> > > > > >> +++ b/recipes-kernel/linux/linux-davinci_git.bb
+> > > > > >> @@ -22,13 +22,13 @@ ARAGO_L1_BR  = "master"
+> > > > > >> ARAGO_L1_PV  = "2.6.32+2.6.33-rc4-${PR}+gitr${SRCREV}"
+> > > > > >> ARAGO_L1_URI = "git://arago-
+> > project.org/git/projects/linux-
+> > > > omapl1.git;protocol=git;branch=${BRANCH} "
+> > > > > >>
+> > > > > >> -SRCREV_hawkboard                  = ${ARAGO_L1_REV}
+> > > > > >> +SRCREV_hawkboard                  = "${ARAGO_L1_REV}"
+> > > > > >>
+> > > > > >> -PV_omapl138             = ${ARAGO_L1_PV}
+> > > > > >> +PV_omapl138             = "${ARAGO_L1_PV}"
+> > > > > >>
+> > > > > >> -BRANCH_omapl138         = ${ARAGO_L1_BR}
+> > > > > >> +BRANCH_omapl138         = "${ARAGO_L1_BR}"
+> > > > > >>
+> > > > > >> -SRC_URI_append_omapl138 = ${ARAGO_L1_URI}
+> > > > > >> +SRC_URI_append_omapl138 = "${ARAGO_L1_URI}"
+> > > > > >>
+> > > > > >> SRC_URI_append_omapl138 = " file://logo_linux_clut224.ppm
+> > \
+> > > > > >>                                      file://0001-ahci-ti-
+> > Fix-
+> > > > currently-harmless-typo-in-SATA-PHY.patch \
+> > > > > >> --
+> > > > > >> 1.7.2.5
+> > > > > >>
+> > > > > >> _______________________________________________
+> > > > > >> meta-ti mailing list
+> > > > > >> meta-ti@yoctoproject.org
+> > > > > >> https://lists.yoctoproject.org/listinfo/meta-ti
+> > > > > >>
+> > > > >
+> > > > _______________________________________________
+> > > > meta-ti mailing list
+> > > > meta-ti@yoctoproject.org
+> > > > https://lists.yoctoproject.org/listinfo/meta-ti
+> > >
+> 
 
