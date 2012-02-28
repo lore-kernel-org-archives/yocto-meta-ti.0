@@ -1,39 +1,54 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C36B8E00596
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2012 23:56:33 -0800 (PST)
-Received: by wgbdq13 with SMTP id dq13so902861wgb.11
-	for <meta-ti@yoctoproject.org>; Mon, 27 Feb 2012 23:56:32 -0800 (PST)
-Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.180.107.67 as permitted sender)
-	client-ip=10.180.107.67; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.180.107.67 as
-	permitted sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.180.107.67])
-	by 10.180.107.67 with SMTP id ha3mr35616451wib.8.1330415792757
-	(num_hops = 1); Mon, 27 Feb 2012 23:56:32 -0800 (PST)
-Received: by 10.180.107.67 with SMTP id ha3mr28174167wib.8.1330415792713;
-	Mon, 27 Feb 2012 23:56:32 -0800 (PST)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id fw5sm27087126wib.0.2012.02.27.23.56.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 27 Feb 2012 23:56:31 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <EF446FF9DAC93B479C74AB9153DE173F0C154A32@SMUCM08V.europe.bmw.corp>
-Date: Tue, 28 Feb 2012 08:56:26 +0100
-Message-Id: <329D2F11-A3FF-4029-8F3D-EC6A7587D138@dominion.thruhere.net>
+Return-Path: <prvs=44190348a3=christian.schulenberg@bmw.de>
+Received: from mxout38.expurgate.net (mxout38.expurgate.net [91.198.224.38])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 31419E00596
+	for <meta-ti@yoctoproject.org>; Tue, 28 Feb 2012 00:15:41 -0800 (PST)
+Received: from [127.0.0.1] (helo=localhost)
+	by relay.expurgate.net with smtp (Exim 4.77)
+	(envelope-from <prvs=44190348a3=christian.schulenberg@bmw.de>)
+	id 1S2IDk-00049k-7v; Tue, 28 Feb 2012 09:15:40 +0100
+Received: from [160.46.252.23] (helo=cmtamx05b-n.bmwgroup.com)
+	by relay.expurgate.net with esmtps (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.77) (envelope-from <Christian.Schulenberg@bmw.de>)
+	id 1S2IDj-0003AS-PR; Tue, 28 Feb 2012 09:15:39 +0100
+Received: from cmtabb6a.muc (cmtabb6a.muc [160.50.100.27])
+	by cmtamx05a-n.bmwgroup.com (8.13.8/8.13.8) with ESMTP id
+	q1S8FTNS020800
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=OK);
+	Tue, 28 Feb 2012 09:15:30 +0100
+Received: from smuch03a.europe.bmw.corp (smuch03a.muc [160.50.20.69])
+	by cmtabb6a.muc (8.13.8/8.13.8) with ESMTP id q1S8FSgR031380;
+	Tue, 28 Feb 2012 09:15:28 +0100
+Received: from SMUCM08V.europe.bmw.corp ([160.50.20.51]) by
+	smuch03a.europe.bmw.corp ([160.50.20.69]) with mapi; Tue, 28 Feb 2012
+	09:15:28 +0100
+From: <Christian.Schulenberg@bmw.de>
+To: <koen@dominion.thruhere.net>, <meta-ti@yoctoproject.org>
+Date: Tue, 28 Feb 2012 09:15:27 +0100
+Thread-Topic: [meta-ti] Building Yocto for Pandaboard
+Thread-Index: Acz17oqraX3fFu1lRaev0mZjSld7GAAAlowg
+Message-ID: <EF446FF9DAC93B479C74AB9153DE173F0C154AC2@SMUCM08V.europe.bmw.corp>
 References: <EF446FF9DAC93B479C74AB9153DE173F0C0D32FF@SMUCM08V.europe.bmw.corp>
 	<3BC330F9-CE58-4C4F-A473-B0F40D0A2777@dominion.thruhere.net>
 	<4F4BA9EE.8030908@balister.org>
 	<3A03FCB1-56B0-42C4-9260-24B10EF4531E@dominion.thruhere.net>
 	<4F4BB801.3090108@ti.com>
 	<EF446FF9DAC93B479C74AB9153DE173F0C154A32@SMUCM08V.europe.bmw.corp>
-To: meta-ti@yoctoproject.org
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQlQ7rL9P/vuYLNch08dkupi8lQcnbKVPbbjBIWFGsrmHi2qpvWs4Zu6RiGeLWPfFtoVBt1d
+	<329D2F11-A3FF-4029-8F3D-EC6A7587D138@dominion.thruhere.net>
+In-Reply-To: <329D2F11-A3FF-4029-8F3D-EC6A7587D138@dominion.thruhere.net>
+Accept-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: de-DE
+MIME-Version: 1.0
+X-Spam-Status: No, No
+X-purgate-relay-fid: relay-9b77e0
+X-purgate-sourceid: 1S2IDj-0003AS-PR
+X-purgate-Ad: Checked for spam and viruses by eXpurgate(R),
+	see www.eleven.de for details.
+X-purgate-ID: 151534::1330416940-00001906-726F6971/0-0/0-0
+X-purgate: clean
+X-purgate-type: clean
+X-purgate-relay-bid: relay-3cc1a3
 Subject: Re: Building Yocto for Pandaboard
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -46,18 +61,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 07:56:34 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Tue, 28 Feb 2012 08:15:41 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
+I'm not talking about angstrom, I'm talking about cross dependencies betwee=
+n poky and angstrom when using the meta-ti layer.
 
-Op 28 feb. 2012, om 08:52 heeft <Christian.Schulenberg@bmw.de> het =
-volgende geschreven:
+-----Urspr=FCngliche Nachricht-----
+Von: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject.=
+org] Im Auftrag von Koen Kooi
+Gesendet: Dienstag, 28. Februar 2012 08:56
+An: meta-ti@yoctoproject.org
+Betreff: Re: [meta-ti] Building Yocto for Pandaboard
 
-> Thanks a lot for your replies. Angstrom is definitely not the way I =
-want to go at the moment, because I prefer to have a clean architecture =
-in my project.
+
+Op 28 feb. 2012, om 08:52 heeft <Christian.Schulenberg@bmw.de> het volgende=
+ geschreven:
+
+> Thanks a lot for your replies. Angstrom is definitely not the way I want =
+to go at the moment, because I prefer to have a clean architecture in my pr=
+oject.
 
 What's not clean about angstrom?
 
+_______________________________________________
+meta-ti mailing list
+meta-ti@yoctoproject.org
+https://lists.yoctoproject.org/listinfo/meta-ti
 
