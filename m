@@ -1,35 +1,15 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE19AE00596
-	for <meta-ti@lists.yoctoproject.org>;
-	Tue, 28 Feb 2012 07:16:42 -0800 (PST)
-Received: by werm13 with SMTP id m13so1336547wer.26
-	for <meta-ti@lists.yoctoproject.org>;
-	Tue, 28 Feb 2012 07:16:41 -0800 (PST)
-Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.180.24.68 as permitted sender)
-	client-ip=10.180.24.68; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.180.24.68 as permitted
-	sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.180.24.68])
-	by 10.180.24.68 with SMTP id s4mr3126125wif.22.1330442201692 (num_hops
-	= 1); Tue, 28 Feb 2012 07:16:41 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.180.24.68 with SMTP id s4mr2484590wif.22.1330442201630;
-	Tue, 28 Feb 2012 07:16:41 -0800 (PST)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id gm1sm22010947wib.7.2012.02.28.07.16.40
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 28 Feb 2012 07:16:40 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: meta-ti@lists.yoctoproject.org
-Date: Tue, 28 Feb 2012 16:16:37 +0100
-Message-Id: <1330442197-10408-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-X-Gm-Message-State: ALoCoQmt4aNKwVgcKHlHe1jrydZVWfRHsHBpdQE0nPJtzKUGAXuvVItKL3ly2PKVzsGZnbiG1FSF
-Subject: [PATCH] linux-davinci: quoting fixes
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A1238E00596
+	for <meta-ti@yoctoproject.org>; Tue, 28 Feb 2012 07:19:32 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 58674529D9; Tue, 28 Feb 2012 15:19:31 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120228151931.58674529D9@arago-project.org>
+Date: Tue, 28 Feb 2012 15:19:31 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Koen Kooi : linux-davinci: quoting fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,10 +21,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2012 15:16:43 -0000
+X-List-Received-Date: Tue, 28 Feb 2012 15:19:32 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: 263ddd18798eb5ef7dc1e58dcd3e392cfca39135
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=263ddd18798eb5ef7dc1e58dcd3e392cfca39135
+
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Tue Feb 28 16:16:37 2012 +0100
+
+linux-davinci: quoting fixes
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
+
  recipes-kernel/linux/linux-davinci_git.bb |    8 ++++----
  1 files changed, 4 insertions(+), 4 deletions(-)
 
@@ -70,7 +64,5 @@ index 1fda1ee..e4b85d6 100644
  
  SRC_URI_append_omapl138 = " file://logo_linux_clut224.ppm \
                                       file://0001-ahci-ti-Fix-currently-harmless-typo-in-SATA-PHY.patch \
--- 
-1.7.2.5
 
 
