@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A63CCE00749
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A4B6BE00596
 	for <meta-ti@yoctoproject.org>; Tue, 28 Feb 2012 14:57:23 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 42623529BA; Tue, 28 Feb 2012 22:57:23 +0000 (UTC)
+	id 24055529D9; Tue, 28 Feb 2012 22:57:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120228225723.42623529BA@arago-project.org>
+Message-Id: <20120228225723.24055529D9@arago-project.org>
 Date: Tue, 28 Feb 2012 22:57:23 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Khem Raj : meta-ti: Fix quotes to make new bitbake happy
+Subject: Koen Kooi : various recipes: fix quoting to work with bitbake master
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,79 +26,100 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: c44b242d8509738df60a7cbb57f9a5f27e103fad
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c44b242d8509738df60a7cbb57f9a5f27e103fad
+Commit: caaffe1aaddb333f9457b57f4d33838e8bec2afc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=caaffe1aaddb333f9457b57f4d33838e8bec2afc
 
-Author: Khem Raj <raj.khem@gmail.com>
-Date:   Tue Feb 28 11:39:16 2012 -0800
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Tue Feb 28 16:57:35 2012 +0100
 
-meta-ti: Fix quotes to make new bitbake happy
+various recipes: fix quoting to work with bitbake master
 
 Changes from the original patch:
-* Matrix is no longer available, no fixes necessary
-* Most of the recipes-ti/ was cleaned up by Koen's earlier patch
+* Matrix is no longer available, not fixes necessary
+* INSANE_SKIP is set to "1", like in oe-core - may need to list individual QA tests
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot.inc               |    2 +-
- recipes-bsp/x-load/x-load.inc               |    2 +-
- recipes-bsp/x-load/x-load_git.bb            |    2 +-
- recipes-ti/codec-engine/ti-codec-engine.inc |    2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-ti/c6accel/ti-c6accel.inc                  |    2 +-
+ recipes-ti/dmai/ti-dmai.inc                        |    2 +-
+ recipes-ti/dsplink/ti-dsplink.inc                  |    2 +-
+ recipes-ti/gstreamer-ti/gstreamer-ti.inc           |    2 +-
+ .../local-power-manager/ti-local-power-manager.inc |    2 +-
+ recipes-ti/syslink/ti-syslink.inc                  |    2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot.inc b/recipes-bsp/u-boot/u-boot.inc
-index 9303568..720f995 100644
---- a/recipes-bsp/u-boot/u-boot.inc
-+++ b/recipes-bsp/u-boot/u-boot.inc
-@@ -44,7 +44,7 @@ do_install () {
+diff --git a/recipes-ti/c6accel/ti-c6accel.inc b/recipes-ti/c6accel/ti-c6accel.inc
+index 138072c..638c9be 100644
+--- a/recipes-ti/c6accel/ti-c6accel.inc
++++ b/recipes-ti/c6accel/ti-c6accel.inc
+@@ -84,6 +84,6 @@ do_install() {
  
- FILES_${PN} = "/boot ${sysconfdir}"
- # no gnu_hash in uboot.bin, by design, so skip QA
--INSANE_SKIP_${PN} = True
-+INSANE_SKIP_${PN} = "1"
+ PACKAGES += "ti-c6accel-apps"
+ FILES_ti-c6accel-apps = "${installdir}/c6accel-apps/*"
+-INSANE_SKIP_ti-c6accel-apps = True
++INSANE_SKIP_ti-c6accel-apps = "1"
+ RDEPENDS_ti-c6accel-apps += "ti-cmem-module ti-dsplink-module"
  
- inherit deploy
+diff --git a/recipes-ti/dmai/ti-dmai.inc b/recipes-ti/dmai/ti-dmai.inc
+index b22495a..23481b7 100644
+--- a/recipes-ti/dmai/ti-dmai.inc
++++ b/recipes-ti/dmai/ti-dmai.inc
+@@ -145,7 +145,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
-diff --git a/recipes-bsp/x-load/x-load.inc b/recipes-bsp/x-load/x-load.inc
-index c8ab3e9..7a9638b 100644
---- a/recipes-bsp/x-load/x-load.inc
-+++ b/recipes-bsp/x-load/x-load.inc
-@@ -17,7 +17,7 @@ XLOAD_USB_SYMLINK ?= "x-load-usb-${MACHINE}.bin"
- MLO_IMAGE ?= "MLO-${MACHINE}-${PV}-${PR}"
- MLO_SYMLINK ?= "MLO-${MACHINE}"
- MLO_SYMLINK_NOMACHINE ?= "MLO"
--XLOAD_LOAD_ADDRESS ?= 0x40200800
-+XLOAD_LOAD_ADDRESS ?= "0x40200800"
+ PACKAGES += "ti-dmai-apps"
+ FILES_ti-dmai-apps = "${installdir}/ti-dmai-apps/*"
+-INSANE_SKIP_ti-dmai-apps = True
++INSANE_SKIP_ti-dmai-apps = "1"
  
- do_compile () {
- 	unset LDFLAGS
-diff --git a/recipes-bsp/x-load/x-load_git.bb b/recipes-bsp/x-load/x-load_git.bb
-index 1017e38..dd8bce2 100644
---- a/recipes-bsp/x-load/x-load_git.bb
-+++ b/recipes-bsp/x-load/x-load_git.bb
-@@ -13,7 +13,7 @@ SRC_URI = "git://gitorious.org/x-loader/x-loader.git;branch=master;protocol=git
- S = "${WORKDIR}/git"
+ RDEPENDS_ti-dmai-apps_dm6446    += "ti-codecs-dm6446-server   ti-cmem-module ti-dsplink-module"
+ RDEPENDS_ti-dmai-apps_dm6467    += "ti-codecs-dm6467          ti-cmem-module ti-dsplink-module"
+diff --git a/recipes-ti/dsplink/ti-dsplink.inc b/recipes-ti/dsplink/ti-dsplink.inc
+index 9b23e5b..ce7cbf9 100644
+--- a/recipes-ti/dsplink/ti-dsplink.inc
++++ b/recipes-ti/dsplink/ti-dsplink.inc
+@@ -208,4 +208,4 @@ PACKAGES += "ti-dsplink-examples"
+ RDEPENDS_ti-dsplink-examples_append = " ti-dsplink-module"
+ RDEPENDS_ti-dsplink-examples_append_omap3 += " ti-lpm-module ti-lpm-utils"
+ FILES_ti-dsplink-examples = "${installdir}/ti-dsplink-examples/*"
+-INSANE_SKIP_ti-dsplink-examples = True
++INSANE_SKIP_ti-dsplink-examples = "1"
+diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti.inc b/recipes-ti/gstreamer-ti/gstreamer-ti.inc
+index 6a483c3..401ee26 100644
+--- a/recipes-ti/gstreamer-ti/gstreamer-ti.inc
++++ b/recipes-ti/gstreamer-ti/gstreamer-ti.inc
+@@ -41,7 +41,7 @@ PLATFORM_dm365         = "dm365"
+ PLATFORM_omapl137      = "omapl137"
+ PLATFORM_omapl138      = "omapl138"
+ PLATFORM              ?= "UNDEFINED_PLATFORM"
+-GST_TI_PLATFORM = ${PLATFORM}
++GST_TI_PLATFORM = "${PLATFORM}"
  
- XLOAD_MACHINE_beagleboard = "omap3530beagle_config"
--CONFIG_HEADER_beagleboard = 1
-+CONFIG_HEADER_beagleboard = "1"
- XLOAD_MACHINE_omap3-touchbook = "omap3530beagle_config"
+ XDC_PLATFORM_dm6446    = "ti.platforms.evmDM6446"
+ XDC_PLATFORM_dm6467    = "ti.platforms.evmDM6467"
+diff --git a/recipes-ti/local-power-manager/ti-local-power-manager.inc b/recipes-ti/local-power-manager/ti-local-power-manager.inc
+index 46ea86b..9155c76 100644
+--- a/recipes-ti/local-power-manager/ti-local-power-manager.inc
++++ b/recipes-ti/local-power-manager/ti-local-power-manager.inc
+@@ -130,4 +130,4 @@ pkg_postrm_ti-lpm-module_append () {
+ PACKAGES += "ti-lpm-utils"
+ RDEPENDS_ti-lpm-utils += "ti-lpm-module"
+ FILES_ti-lpm-utils = "${installdir}/ti-lpm-utils/*"
+-INSANE_SKIP_ti-lpm-utils = True
++INSANE_SKIP_ti-lpm-utils = "1"
+diff --git a/recipes-ti/syslink/ti-syslink.inc b/recipes-ti/syslink/ti-syslink.inc
+index d7df8c1..04c59c1 100644
+--- a/recipes-ti/syslink/ti-syslink.inc
++++ b/recipes-ti/syslink/ti-syslink.inc
+@@ -236,6 +236,6 @@ update-modules || true
+ PACKAGES =+ "ti-syslink-examples"
+ RRECOMMENDS_ti-syslink-examples_append = " ti-syslink-module"
+ FILES_ti-syslink-examples = "${installdir}/ti-syslink-examples/*"
+-INSANE_SKIP_ti-syslink-examples = True
++INSANE_SKIP_ti-syslink-examples = "1"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/recipes-ti/codec-engine/ti-codec-engine.inc b/recipes-ti/codec-engine/ti-codec-engine.inc
-index 4fb5575..15bd464 100644
---- a/recipes-ti/codec-engine/ti-codec-engine.inc
-+++ b/recipes-ti/codec-engine/ti-codec-engine.inc
-@@ -194,6 +194,6 @@ RDEPENDS_ti-codec-engine-examples_append_omap3    = " ti-dsplink-module ti-lpm-m
- RDEPENDS_ti-codec-engine-examples_append_omapl137 = " ti-dsplink-module"
- RDEPENDS_ti-codec-engine-examples_append_omapl138 = " ti-dsplink-module"
- FILES_ti-codec-engine-examples = "${installdir}/ti-codec-engine-examples/*"
--INSANE_SKIP_ti-codec-engine-examples = True
-+INSANE_SKIP_ti-codec-engine-examples = "1"
- 
- FILES_${PN}-dbg += "${installdir}/ti-codec-engine-examples/*/.debug"
+ FILES_ti-syslink-dev = "${libdir}/*"
 
 
