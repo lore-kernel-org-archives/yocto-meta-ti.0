@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4951AE0030B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 77D24E0030B
 	for <meta-ti@yoctoproject.org>; Thu,  1 Mar 2012 14:00:21 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B01E952AA0; Thu,  1 Mar 2012 22:00:20 +0000 (UTC)
+	id 08C6952AA1; Thu,  1 Mar 2012 22:00:21 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120301220020.B01E952AA0@arago-project.org>
-Date: Thu,  1 Mar 2012 22:00:20 +0000 (UTC)
+Message-Id: <20120301220021.08C6952AA1@arago-project.org>
+Date: Thu,  1 Mar 2012 22:00:21 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux 3.0: enable 'option' serial for beagleboard
+Subject: Koen Kooi : linux 3.0: update to 3.0.23
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,55 +26,53 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 05d3883a788500ea987865f4db7e547040b83bf6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=05d3883a788500ea987865f4db7e547040b83bf6
+Commit: 2dbb7f09bf1c54d505d2e84a3a614bc5ca9b89aa
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2dbb7f09bf1c54d505d2e84a3a614bc5ca9b89aa
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Tue Feb 28 20:23:46 2012 +0100
+Date:   Thu Mar  1 09:22:27 2012 +0100
 
-linux 3.0: enable 'option' serial for beagleboard
+linux 3.0: update to 3.0.23
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-3.0/beagleboard/defconfig          |    5 +++--
- recipes-kernel/linux/linux_3.0.bb                  |    2 +-
- 2 files changed, 4 insertions(+), 3 deletions(-)
+ conf/machine/include/omap3.inc    |    2 +-
+ recipes-kernel/linux/linux_3.0.bb |    8 ++++----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-3.0/beagleboard/defconfig b/recipes-kernel/linux/linux-3.0/beagleboard/defconfig
-index 5f2a7eb..5be7772 100644
---- a/recipes-kernel/linux/linux-3.0/beagleboard/defconfig
-+++ b/recipes-kernel/linux/linux-3.0/beagleboard/defconfig
-@@ -1,6 +1,6 @@
- #
- # Automatically generated make config: don't edit
--# Linux/arm 3.0.14 Kernel Configuration
-+# Linux/arm 3.0.22 Kernel Configuration
- #
- CONFIG_ARM=y
- CONFIG_HAVE_PWM=y
-@@ -2785,7 +2785,8 @@ CONFIG_USB_SERIAL_SIERRAWIRELESS=m
- # CONFIG_USB_SERIAL_TI is not set
- CONFIG_USB_SERIAL_CYBERJACK=m
- # CONFIG_USB_SERIAL_XIRCOM is not set
--# CONFIG_USB_SERIAL_OPTION is not set
-+CONFIG_USB_SERIAL_WWAN=m
-+CONFIG_USB_SERIAL_OPTION=m
- CONFIG_USB_SERIAL_OMNINET=m
- CONFIG_USB_SERIAL_OPTICON=m
- CONFIG_USB_SERIAL_VIVOPAY_SERIAL=m
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index b7d23af..8fc0903 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -3,7 +3,7 @@ SOC_FAMILY = "omap3"
+ require conf/machine/include/tune-cortexa8.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r116"
++MACHINE_KERNEL_PR = "r117"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
 diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
-index 65084fb..fac6348 100644
+index fac6348..32ef963 100644
 --- a/recipes-kernel/linux/linux_3.0.bb
 +++ b/recipes-kernel/linux/linux_3.0.bb
-@@ -10,7 +10,7 @@ PV = "3.0.22"
- SRCREV_pn-${PN} = "a4a663513af05a98d6085d92f85c16bb64ac4050"
+@@ -5,12 +5,12 @@ KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "(beagleboard)"
+ 
+-PV = "3.0.22"
+-# v3.0.22 tag
+-SRCREV_pn-${PN} = "a4a663513af05a98d6085d92f85c16bb64ac4050"
++PV = "3.0.23"
++# v3.0.23 tag
++SRCREV_pn-${PN} = "bf6a68d2a214e07f7c0d6538e00e17b826714160"
  
  # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "a"
  
  FILESPATH =. "${FILE_DIRNAME}/linux-3.0:${FILE_DIRNAME}/linux-3.0/${MACHINE}:"
  
