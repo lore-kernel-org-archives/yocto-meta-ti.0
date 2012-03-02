@@ -1,29 +1,32 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5DBCDE003E4
-	for <meta-ti@yoctoproject.org>; Fri,  2 Mar 2012 07:01:41 -0800 (PST)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 1808FF8123B; Fri,  2 Mar 2012 08:01:41 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 38024F81214;
-	Fri,  2 Mar 2012 08:01:40 -0700 (MST)
-Message-ID: <4F50E0D4.5010606@mlbassoc.com>
-Date: Fri, 02 Mar 2012 08:01:40 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0) Gecko/20120131 Thunderbird/10.0
+Return-Path: <chase.maupin@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6F8BE003E1
+	for <meta-ti@yoctoproject.org>; Fri,  2 Mar 2012 07:49:33 -0800 (PST)
+Received: from dlep26.itg.ti.com ([157.170.170.121])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q22FnUas023382;
+	Fri, 2 Mar 2012 09:49:30 -0600
+Received: from DFLE71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q22FnU0c003414;
+	Fri, 2 Mar 2012 09:49:30 -0600 (CST)
+Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
+	DFLE71.ent.ti.com ([fe80::29f6:72ad:a62e:2025%21]) with mapi id
+	14.01.0323.003; Fri, 2 Mar 2012 09:49:30 -0600
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Thread-Topic: [meta-ti] Chase Maupin : linux-ti33x-psp: add am335x-evm support
+Thread-Index: AQHM+ITmDql2EKCK3kWSgyCDscTkypZXGRyA
+Date: Fri, 2 Mar 2012 15:49:29 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1012F049DD6@DLEE12.ent.ti.com>
+References: <20120301212837.C08F852A8A@arago-project.org>
+	<50999BC3-EC35-4F51-BD1E-9F35FD9AD78C@dominion.thruhere.net>
+In-Reply-To: <50999BC3-EC35-4F51-BD1E-9F35FD9AD78C@dominion.thruhere.net>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-To: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-References: <4F50DF80.10703@mlbassoc.com>
-In-Reply-To: <4F50DF80.10703@mlbassoc.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Can't build for BeagleBone
+Subject: Re: Chase Maupin : linux-ti33x-psp: add am335x-evm support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,71 +38,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Mar 2012 15:01:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 02 Mar 2012 15:49:34 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-On 2012-03-02 07:56, Gary Thomas wrote:
-> In a freshly updated Angstrom tree:
-> OE Build Configuration:
-> BB_VERSION = "1.15.1"
-> TARGET_ARCH = "arm"
-> TARGET_OS = "linux-gnueabi"
-> MACHINE = "beaglebone"
-> DISTRO = "angstrom"
-> DISTRO_VERSION = "v2012.03-core"
-> TUNE_FEATURES = "armv7a vfp neon cortexa8"
-> TARGET_FPU = "vfp-neon"
-> meta-angstrom = "master:2129eed920364abcc4f3f72d395333a041634e26"
-> meta-oe
-> meta-efl
-> meta-gpe
-> meta-gnome
-> meta-xfce
-> meta-initramfs = "master:fdff8697ea2db6254d26510adb7d11e6352d950f"
-> meta-opie = "master:efa3892b20a4ef80274e56e5633ebd62c16f9731"
-> meta-java = "master:d430de31c167cd264be74a1d82af4b732bb915dd"
-> meta-ti = "master:2dbb7f09bf1c54d505d2e84a3a614bc5ca9b89aa"
-> meta-efikamx = "master:2c09a3a780b23448e8a6ca964256ff7f5ccba65d"
-> meta-nslu2 = "master:3d9fc951b05b4df476374b6fc3085ebac7f293ee"
-> meta-htc
-> meta-nokia
-> meta-openmoko
-> meta-palm = "master:cda19686a2a3573ce50c86733c3469d926124995"
-> meta-handheld = "master:fa1e6dcb524eb7ed29a6cd971a150d35c31e96e7"
-> meta-intel
-> meta-sugarbay
-> meta-crownbay
-> meta-emenlow
-> meta-fishriver
-> meta-jasperforest
-> meta-n450 = "master:df18b721f86f0737c0f302e49b27ea232c70e683"
-> meta = "master:d94cb18f7f17a492c7a948337d7d2d1d0785573f"
->
-> % MACHINE="beaglebone" bitbake cloud9-image
-> ...
-> | cp: cannot stat `/local/new-angstrom/sources/meta-ti/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/./configs/*': No such file or directory
-> | ERROR: Function failed: Unpack failure for URL: 'file://configs/*'. Unpack command
-> PATH="/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux/usr/bin/armv7a-angstrom-linux-gnueabi:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/beaglebone/usr/bin/crossscripts:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux/usr/sbin:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux/usr/bin:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux/sbin:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux//bin:/local/new-angstrom/sources/openembedded-core/scripts:/local/new-angstrom/sources/bitbake/bin:/usr/lib/ccache:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/gthomas/bin:/local/new-angstrom/sources/openembedded-core/scripts"
-> cp /local/new-angstrom/sources/meta-ti/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/./configs/*
-> /local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/linux-ti33x-psp-3.2-r4c+gitr09e9651bcf2ee8d86685f2a8075bc6557b1d3b91/configs/ failed
-> with return value 1
-> NOTE: package linux-ti33x-psp-3.2-r4c+gitr09e9651bcf2ee8d86685f2a8075bc6557b1d3b91: task do_unpack: Failed
->
-> Did I miss something?
->
+Koen,
 
-To be clear, I have built this before in this same tree when the
-kernel recipe was at
-   uImage-3.2-r2e+gitr21ef5e1fa530eb8f23bfe18650e3915d7c291ca9-beaglebone-20120224112658.bin
+Looks like my build was not clean.  I see now that when I clean everything =
+even the am335x-evm build will fail to find the configs.  So now the questi=
+on is why this happens.  I'm used to if the configs wasn't found in the bea=
+glebone or am335x-evm directory, you would fall back to looking in the base=
+ linux-ti33x-psp-3.2 directory.  However, it looks like this fallback does =
+not happen.  My reading of FILESPATH is that the linux/linux-ti33x-psp-3.2 =
+directory is in the FILESPATH.
 
-In my tree, I execute these steps (same tree, same login window, 8 days later):
-   % ./oebb.sh update
-   % MACHINE="beaglebone" bitbake cloud9-image
+Sincerely,
+Chase Maupin
+Software Applications
+ARM MPU
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+For support:
+Forums - http://community.ti.com/forums/
+Wiki - http://wiki.davincidsp.com/=20
+
+
+> -----Original Message-----
+> From: Koen Kooi [mailto:koen@dominion.thruhere.net]
+> Sent: Friday, March 02, 2012 8:58 AM
+> To: Maupin, Chase
+> Cc: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] Chase Maupin : linux-ti33x-psp: add am335x-
+> evm support
+>=20
+>=20
+> Op 1 mrt. 2012, om 22:28 heeft Arago Project git het volgende
+> geschreven:
+>=20
+> > Module: meta-ti
+> > Branch: master
+> > Commit: 8172b803e73126c2e336050d43251538bdc4d09b
+> > URL:    http://arago-project.org/git/meta-
+> ti.git?a=3Dcommit;h=3D8172b803e73126c2e336050d43251538bdc4d09b
+> >
+> > Author: Chase Maupin <Chase.Maupin@ti.com>
+> > Date:   Tue Feb 28 17:28:14 2012 -0600
+> >
+> > linux-ti33x-psp: add am335x-evm support
+> >
+> > * Added a defconfig file for the am335x-evm and moved the common
+> >  configs directory from the beaglebone directory to the top
+> >  of the kernel files tree.
+> >
+> > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> >
+> > ---
+> >
+> > .../linux/linux-ti33x-psp-3.2/am335x-evm/defconfig | 2640
+> ++++++++++++++++++++
+> > .../{beaglebone =3D> }/configs/empty                 |    0
+> > 2 files changed, 2640 insertions(+), 0 deletions(-)
+>=20
+> As Gary points out, this breaks the beaglebone kernel build
+>=20
+> regards,
+>=20
+> Koen
 
