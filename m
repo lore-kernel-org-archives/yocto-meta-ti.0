@@ -1,30 +1,27 @@
 Return-Path: <denis@denix.org>
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45C31E003E4
-	for <meta-ti@yoctoproject.org>; Sat,  3 Mar 2012 00:23:52 -0800 (PST)
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 15162E003E4
+	for <meta-ti@yoctoproject.org>; Sat,  3 Mar 2012 00:27:13 -0800 (PST)
 Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173021.mailsrvcs.net
+	by vms173017.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M0A00E10VBQY800@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sat, 03 Mar 2012 02:23:51 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B60B920272; Sat,
-	03 Mar 2012 03:23:50 -0500 (EST)
-Date: Sat, 03 Mar 2012 03:23:50 -0500
+	2009)) with ESMTPA id <0M0A000RLVH1TE80@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Sat, 03 Mar 2012 02:27:02 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5670F20272; Sat,
+	03 Mar 2012 03:27:00 -0500 (EST)
+Date: Sat, 03 Mar 2012 03:27:00 -0500
 From: Denys Dmytriyenko <denis@denix.org>
-To: "Maupin, Chase" <chase.maupin@ti.com>
-Message-id: <20120303082350.GF24667@denix.org>
-References: <20120301212837.C08F852A8A@arago-project.org>
-	<50999BC3-EC35-4F51-BD1E-9F35FD9AD78C@dominion.thruhere.net>
-	<7D46E86EC0A8354091174257B2FED1012F049DD6@DLEE12.ent.ti.com>
-	<351DB87E-545E-479E-8183-C5072355906C@dominion.thruhere.net>
-	<7D46E86EC0A8354091174257B2FED1012F04A6C0@DLEE12.ent.ti.com>
-	<20120302221439.GD24667@denix.org>
+To: Gary Thomas <gary@mlbassoc.com>
+Message-id: <20120303082700.GG24667@denix.org>
+References: <4F50DF80.10703@mlbassoc.com> <4F50E0D4.5010606@mlbassoc.com>
 MIME-version: 1.0
-In-reply-to: <20120302221439.GD24667@denix.org>
+In-reply-to: <4F50E0D4.5010606@mlbassoc.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Chase Maupin : linux-ti33x-psp: add am335x-evm support
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	Discussion of the angstrom distribution development
+	<angstrom-distro-devel@linuxtogo.org>
+Subject: Re: Can't build for BeagleBone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,138 +33,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2012 08:23:52 -0000
+X-List-Received-Date: Sat, 03 Mar 2012 08:27:13 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Fri, Mar 02, 2012 at 05:14:39PM -0500, Denys Dmytriyenko wrote:
-> On Fri, Mar 02, 2012 at 08:31:36PM +0000, Maupin, Chase wrote:
-> > I'll make a patch this afternoon to put configs in both directories.  Still 
-> > don't know why it isn't finding the normal configs directory and keeps 
-> > looking in the MACHINE directory.
+On Fri, Mar 02, 2012 at 08:01:40AM -0700, Gary Thomas wrote:
+> On 2012-03-02 07:56, Gary Thomas wrote:
+> >In a freshly updated Angstrom tree:
+> >OE Build Configuration:
+> >BB_VERSION = "1.15.1"
+> >TARGET_ARCH = "arm"
+> >TARGET_OS = "linux-gnueabi"
+> >MACHINE = "beaglebone"
+> >DISTRO = "angstrom"
+> >DISTRO_VERSION = "v2012.03-core"
+> >TUNE_FEATURES = "armv7a vfp neon cortexa8"
+> >TARGET_FPU = "vfp-neon"
+> >meta-angstrom = "master:2129eed920364abcc4f3f72d395333a041634e26"
+> >meta-oe
+> >meta-efl
+> >meta-gpe
+> >meta-gnome
+> >meta-xfce
+> >meta-initramfs = "master:fdff8697ea2db6254d26510adb7d11e6352d950f"
+> >meta-opie = "master:efa3892b20a4ef80274e56e5633ebd62c16f9731"
+> >meta-java = "master:d430de31c167cd264be74a1d82af4b732bb915dd"
+> >meta-ti = "master:2dbb7f09bf1c54d505d2e84a3a614bc5ca9b89aa"
+> >meta-efikamx = "master:2c09a3a780b23448e8a6ca964256ff7f5ccba65d"
+> >meta-nslu2 = "master:3d9fc951b05b4df476374b6fc3085ebac7f293ee"
+> >meta-htc
+> >meta-nokia
+> >meta-openmoko
+> >meta-palm = "master:cda19686a2a3573ce50c86733c3469d926124995"
+> >meta-handheld = "master:fa1e6dcb524eb7ed29a6cd971a150d35c31e96e7"
+> >meta-intel
+> >meta-sugarbay
+> >meta-crownbay
+> >meta-emenlow
+> >meta-fishriver
+> >meta-jasperforest
+> >meta-n450 = "master:df18b721f86f0737c0f302e49b27ea232c70e683"
+> >meta = "master:d94cb18f7f17a492c7a948337d7d2d1d0785573f"
+> >
+> >% MACHINE="beaglebone" bitbake cloud9-image
+> >...
+> >| cp: cannot stat `/local/new-angstrom/sources/meta-ti/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/./configs/*': No such file or directory
+> >| ERROR: Function failed: Unpack failure for URL: 'file://configs/*'. Unpack command
+> >PATH="/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux/usr/bin/armv7a-angstrom-linux-gnueabi:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/beaglebone/usr/bin/crossscripts:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux/usr/sbin:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux/usr/bin:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux/sbin:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux//bin:/local/new-angstrom/sources/openembedded-core/scripts:/local/new-angstrom/sources/bitbake/bin:/usr/lib/ccache:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/gthomas/bin:/local/new-angstrom/sources/openembedded-core/scripts"
+> >cp /local/new-angstrom/sources/meta-ti/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/./configs/*
+> >/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/linux-ti33x-psp-3.2-r4c+gitr09e9651bcf2ee8d86685f2a8075bc6557b1d3b91/configs/ failed
+> >with return value 1
+> >NOTE: package linux-ti33x-psp-3.2-r4c+gitr09e9651bcf2ee8d86685f2a8075bc6557b1d3b91: task do_unpack: Failed
+> >
+> >Did I miss something?
+> >
 > 
-> I've been trying to debug it and looks like it's broken in bitbake's fetcher, 
-> which is not very obvious, but it tries to unpack there and for some reason 
-> defaults to machine-specific directory. Maybe it doesn't like * in the path... 
-> I'll keep looking into it for now, but if I can't fix it, I'll push a 
-> workaround.
+> To be clear, I have built this before in this same tree when the
+> kernel recipe was at
+>   uImage-3.2-r2e+gitr21ef5e1fa530eb8f23bfe18650e3915d7c291ca9-beaglebone-20120224112658.bin
+> 
+> In my tree, I execute these steps (same tree, same login window, 8 days later):
+>   % ./oebb.sh update
+>   % MACHINE="beaglebone" bitbake cloud9-image
 
-Ok, please test the latest "fix":
+Gary,
 
-    BitBake's fetch2 unpack() seems to be picky about multi-kernel's
-    file://configs/* and defaults to only looking into machine-specific
-    location. This fixes the issue, as tested by building these platforms:
-    beaglebone, am335x-evm and am180x-evm.
-
-Seems to build those platforms, when multi-kernel configs reside in 
-machine-specific directories and outside. But more testing is definitely 
-needed.
-
-As a side note, sstate seems to be really broken, as building the first 
-machine in a clean setup works fine, but then trying to build a second machine 
-in the same setup leads to weird breakages in perl, gcc-cross-initial, 
-gcc-cross-intermediate, then binutils etc. Even though both machines are 
-armv7a and supposed to share those packages w/o rebuilding them... Cleaning 
-sstate and/or entire build takes too much time and is really painful 
-switching between platforms.
+Can you please try again after updating meta-ti? Thanks.
 
 -- 
 Denys
-
-
-> > > -----Original Message-----
-> > > From: Koen Kooi [mailto:koen@dominion.thruhere.net]
-> > > Sent: Friday, March 02, 2012 2:30 PM
-> > > To: Maupin, Chase
-> > > Cc: meta-ti@yoctoproject.org
-> > > Subject: Re: [meta-ti] Chase Maupin : linux-ti33x-psp: add am335x-
-> > > evm support
-> > > 
-> > > Any ETA on a fix? If it will take a few days I suggest reverting
-> > > the cset that moved the configs/ dir so I won't have to deal with
-> > > the weekend workers hitting this bug :)
-> > > 
-> > > regards,
-> > > 
-> > > Koen
-> > > 
-> > > Op 2 mrt. 2012, om 16:49 heeft Maupin, Chase het volgende
-> > > geschreven:
-> > > 
-> > > > Koen,
-> > > >
-> > > > Looks like my build was not clean.  I see now that when I clean
-> > > everything even the am335x-evm build will fail to find the configs.
-> > > So now the question is why this happens.  I'm used to if the
-> > > configs wasn't found in the beaglebone or am335x-evm directory, you
-> > > would fall back to looking in the base linux-ti33x-psp-3.2
-> > > directory.  However, it looks like this fallback does not happen.
-> > > My reading of FILESPATH is that the linux/linux-ti33x-psp-3.2
-> > > directory is in the FILESPATH.
-> > > >
-> > > > Sincerely,
-> > > > Chase Maupin
-> > > > Software Applications
-> > > > ARM MPU
-> > > >
-> > > > For support:
-> > > > Forums - http://community.ti.com/forums/
-> > > > Wiki - http://wiki.davincidsp.com/
-> > > >
-> > > >
-> > > >> -----Original Message-----
-> > > >> From: Koen Kooi [mailto:koen@dominion.thruhere.net]
-> > > >> Sent: Friday, March 02, 2012 8:58 AM
-> > > >> To: Maupin, Chase
-> > > >> Cc: meta-ti@yoctoproject.org
-> > > >> Subject: Re: [meta-ti] Chase Maupin : linux-ti33x-psp: add
-> > > am335x-
-> > > >> evm support
-> > > >>
-> > > >>
-> > > >> Op 1 mrt. 2012, om 22:28 heeft Arago Project git het volgende
-> > > >> geschreven:
-> > > >>
-> > > >>> Module: meta-ti
-> > > >>> Branch: master
-> > > >>> Commit: 8172b803e73126c2e336050d43251538bdc4d09b
-> > > >>> URL:    http://arago-project.org/git/meta-
-> > > >> ti.git?a=commit;h=8172b803e73126c2e336050d43251538bdc4d09b
-> > > >>>
-> > > >>> Author: Chase Maupin <Chase.Maupin@ti.com>
-> > > >>> Date:   Tue Feb 28 17:28:14 2012 -0600
-> > > >>>
-> > > >>> linux-ti33x-psp: add am335x-evm support
-> > > >>>
-> > > >>> * Added a defconfig file for the am335x-evm and moved the
-> > > common
-> > > >>> configs directory from the beaglebone directory to the top
-> > > >>> of the kernel files tree.
-> > > >>>
-> > > >>> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-> > > >>> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > > >>>
-> > > >>> ---
-> > > >>>
-> > > >>> .../linux/linux-ti33x-psp-3.2/am335x-evm/defconfig | 2640
-> > > >> ++++++++++++++++++++
-> > > >>> .../{beaglebone => }/configs/empty                 |    0
-> > > >>> 2 files changed, 2640 insertions(+), 0 deletions(-)
-> > > >>
-> > > >> As Gary points out, this breaks the beaglebone kernel build
-> > > >>
-> > > >> regards,
-> > > >>
-> > > >> Koen
-> > 
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-> > 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
 
