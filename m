@@ -1,24 +1,50 @@
-Return-Path: <denis@denix.org>
-Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
-	[206.46.173.15])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3CF2FE01363
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6C2FE0070C
 	for <meta-ti@lists.yoctoproject.org>;
-	Sat,  3 Mar 2012 05:55:40 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173015.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M0B00273AOBBHB1@vms173015.mailsrvcs.net> for
-	meta-ti@lists.yoctoproject.org; Sat, 03 Mar 2012 07:55:24 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7E88720264; Sat,
-	03 Mar 2012 08:55:23 -0500 (EST)
-Date: Sat, 03 Mar 2012 08:55:23 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-id: <20120303135523.GJ24667@denix.org>
+	Sat,  3 Mar 2012 11:01:21 -0800 (PST)
+Received: by wico1 with SMTP id o1so822586wic.26
+	for <meta-ti@lists.yoctoproject.org>;
+	Sat, 03 Mar 2012 11:01:20 -0800 (PST)
+Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
+	designates 10.216.132.30 as permitted sender)
+	client-ip=10.216.132.30; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	koen@dominion.thruhere.net designates 10.216.132.30 as
+	permitted sender) smtp.mail=koen@dominion.thruhere.net
+Received: from mr.google.com ([10.216.132.30])
+	by 10.216.132.30 with SMTP id n30mr277879wei.52.1330801280502 (num_hops
+	= 1); Sat, 03 Mar 2012 11:01:20 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=ECUaL4WgUUiMQ3+TiEbTAN3OIGPL4W96bMicqcVokhU=;
+	b=RNjZlag+AosSlMx5bYFN24gUcf94zEAj++Z1CIuwEITGQuUGWz7C6oWyWRuf2DKnxV
+	whdnFAjfV7rnPz7X1KxTvgfGBOK0Tw8QPp4rPLyUtdEzj3wOgePHReLH97d1xHSjRqnJ
+	oX/3HTRQjh7cL9Kf6bJeWj49kchC+rY8QNs6vgwRQuNzpRFeowbrR73QtePTI/KNQ5Bf
+	DJczze3yY9hmKdFdqN35+YxiZv5U8eyUigG4QZVLGbZxwscy5ZfpNo6Y5OKZgHoYhW16
+	KksYa2OM3+huXK3NpBjMWtjeMS8JZfuTiRvDKkuuHhDOkqOVuVevPSRaiJ3ESlPUTnhT
+	tOtA==
+Received: by 10.216.132.30 with SMTP id n30mr220895wei.52.1330801280437;
+	Sat, 03 Mar 2012 11:01:20 -0800 (PST)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id k6sm10880924wiy.7.2012.03.03.11.01.18
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 03 Mar 2012 11:01:19 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1257)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20120303135523.GJ24667@denix.org>
+Date: Sat, 3 Mar 2012 20:01:17 +0100
+Message-Id: <95AEAC88-7C37-41CD-B0FA-DF85BE77D2FC@dominion.thruhere.net>
 References: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
-MIME-version: 1.0
-In-reply-to: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20120303135523.GJ24667@denix.org>
+To: Denys Dmytriyenko <denis@denix.org>
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQn5L85ll2sY6tvRGLKskk3MKT9DTgYVeL8v2aNyA4feHkS1PCfzBYqq0CTY7HKm/W+NV11/
 Cc: meta-ti@lists.yoctoproject.org
 Subject: Re: [PATCH 1/3] SOC_FAMILY: add to MACHINE_OVERRIDES locally
 X-BeenThere: meta-ti@yoctoproject.org
@@ -32,108 +58,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2012 13:55:40 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
-
-On Sat, Mar 03, 2012 at 11:53:06AM +0100, Koen Kooi wrote:
-> This breaks the hard dependency on Angstrom for getting a sane set of 
-> recipes.
-> 
-> The variable name is kept the same and the actual code moved from 
-> angstrom.inc to soc-family.inc to make it clear what it is doing and how.
-
-Ah, nice workaround until/if it gets accepted upstream to OE-Core! Thanks, 
-Koen.
-
--- 
-Denys
+X-List-Received-Date: Sat, 03 Mar 2012 19:01:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
 
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  conf/machine/include/omap3.inc      |    1 +
->  conf/machine/include/omap4.inc      |    1 +
->  conf/machine/include/omapl138.inc   |    1 +
->  conf/machine/include/soc-family.inc |    3 +++
->  conf/machine/include/ti33x.inc      |    1 +
->  conf/machine/include/ti814x.inc     |    1 +
->  conf/machine/include/ti816x.inc     |    1 +
->  7 files changed, 9 insertions(+), 0 deletions(-)
->  create mode 100644 conf/machine/include/soc-family.inc
-> 
-> diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-> index 8fc0903..9cafe85 100644
-> --- a/conf/machine/include/omap3.inc
-> +++ b/conf/machine/include/omap3.inc
-> @@ -1,4 +1,5 @@
->  SOC_FAMILY = "omap3"
-> +require conf/machine/include/soc-family.inc
->  
->  require conf/machine/include/tune-cortexa8.inc
->  PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
-> diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
-> index 84b7742..a295352 100644
-> --- a/conf/machine/include/omap4.inc
-> +++ b/conf/machine/include/omap4.inc
-> @@ -1,4 +1,5 @@
->  SOC_FAMILY = "omap4"
-> +require conf/machine/include/soc-family.inc
->  
->  require conf/machine/include/tune-cortexa8.inc
->  
-> diff --git a/conf/machine/include/omapl138.inc b/conf/machine/include/omapl138.inc
-> index 4c22275..1949642 100644
-> --- a/conf/machine/include/omapl138.inc
-> +++ b/conf/machine/include/omapl138.inc
-> @@ -1 +1,2 @@
->  SOC_FAMILY = "omapl138"
-> +require conf/machine/include/soc-family.inc
-> diff --git a/conf/machine/include/soc-family.inc b/conf/machine/include/soc-family.inc
-> new file mode 100644
-> index 0000000..39ca338
-> --- /dev/null
-> +++ b/conf/machine/include/soc-family.inc
-> @@ -0,0 +1,3 @@
-> +# Add SOC_FAMILY to machine overrides so we get access to e.g. 'omap3' and 'ti335x'
-> +MACHINEOVERRIDES .= "${@['', ':${SOC_FAMILY}']['${SOC_FAMILY}' != '']}"
-> +
-> diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-> index fb8bad3..f4954f5 100644
-> --- a/conf/machine/include/ti33x.inc
-> +++ b/conf/machine/include/ti33x.inc
-> @@ -1,4 +1,5 @@
->  SOC_FAMILY = "ti33x"
-> +require conf/machine/include/soc-family.inc
->  
->  require conf/machine/include/tune-cortexa8.inc
->  PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
-> diff --git a/conf/machine/include/ti814x.inc b/conf/machine/include/ti814x.inc
-> index 23b6a1d..c53557f 100644
-> --- a/conf/machine/include/ti814x.inc
-> +++ b/conf/machine/include/ti814x.inc
-> @@ -1,4 +1,5 @@
->  SOC_FAMILY = "ti814x"
-> +require conf/machine/include/soc-family.inc
->  
->  require conf/machine/include/tune-cortexa8.inc
->  
-> diff --git a/conf/machine/include/ti816x.inc b/conf/machine/include/ti816x.inc
-> index 06cb7c0..2fe4006 100644
-> --- a/conf/machine/include/ti816x.inc
-> +++ b/conf/machine/include/ti816x.inc
-> @@ -1,4 +1,5 @@
->  SOC_FAMILY = "ti816x"
-> +require conf/machine/include/soc-family.inc
->  
->  require conf/machine/include/tune-cortexa8.inc
->  
-> -- 
-> 1.7.2.5
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+Op 3 mrt. 2012, om 14:55 heeft Denys Dmytriyenko het volgende =
+geschreven:
+
+> On Sat, Mar 03, 2012 at 11:53:06AM +0100, Koen Kooi wrote:
+>> This breaks the hard dependency on Angstrom for getting a sane set of=20=
+
+>> recipes.
+>>=20
+>> The variable name is kept the same and the actual code moved from=20
+>> angstrom.inc to soc-family.inc to make it clear what it is doing and =
+how.
+>=20
+> Ah, nice workaround until/if it gets accepted upstream to OE-Core! =
+Thanks,=20
+> Koen.
+
+The consensus at ELC was that these kind of tweaks should be done at the =
+machine level now that we have MACHINE_OVERRIDES seperated out. If a lot =
+of BSPs are going to use SOC_FAMILY we can try to push it into OE-core =
+again. But currently we wouldn't stand a chance.
+
+regards,
+
+Koen=
 
