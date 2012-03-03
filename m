@@ -1,26 +1,35 @@
-Return-Path: <denis@denix.org>
-Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
-	[206.46.173.3])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F3202E003E4
-	for <meta-ti@yoctoproject.org>; Sat,  3 Mar 2012 00:30:14 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M0A00DF4VMDN2O5@vms173003.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sat, 03 Mar 2012 02:30:14 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 894CB20272; Sat,
-	03 Mar 2012 03:30:13 -0500 (EST)
-Date: Sat, 03 Mar 2012 03:30:13 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-id: <20120303083013.GH24667@denix.org>
-References: <1330721492-16982-1-git-send-email-Chase.Maupin@ti.com>
-	<CC63D387-6DF4-4157-AA0D-601F43337F86@dominion.thruhere.net>
-MIME-version: 1.0
-In-reply-to: <CC63D387-6DF4-4157-AA0D-601F43337F86@dominion.thruhere.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] linux-ti33x-psp: place configs in MACHINE directory
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
+	[74.125.82.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F0FEE003E4
+	for <meta-ti@lists.yoctoproject.org>;
+	Sat,  3 Mar 2012 02:53:15 -0800 (PST)
+Received: by werm13 with SMTP id m13so1772420wer.26
+	for <meta-ti@lists.yoctoproject.org>;
+	Sat, 03 Mar 2012 02:53:15 -0800 (PST)
+Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
+	designates 10.180.102.100 as permitted sender)
+	client-ip=10.180.102.100; 
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of
+	koen@dominion.thruhere.net designates 10.180.102.100 as
+	permitted sender) smtp.mail=koen@dominion.thruhere.net
+Received: from mr.google.com ([10.180.102.100])
+	by 10.180.102.100 with SMTP id fn4mr385484wib.1.1330771995137 (num_hops
+	= 1); Sat, 03 Mar 2012 02:53:15 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.180.102.100 with SMTP id fn4mr303905wib.1.1330771995045;
+	Sat, 03 Mar 2012 02:53:15 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id s8sm8798451wiz.8.2012.03.03.02.53.13
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 03 Mar 2012 02:53:14 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: meta-ti@lists.yoctoproject.org
+Date: Sat,  3 Mar 2012 11:53:06 +0100
+Message-Id: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+X-Gm-Message-State: ALoCoQmFpbx7wEl78LthNhfvrigvAC3mCyVUoYJwoWFFhBSgBjpREMjI1gPcJ7YT52dEm9VIsWt+
+Subject: [PATCH 1/3] SOC_FAMILY: add to MACHINE_OVERRIDES locally
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,57 +41,91 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2012 08:30:15 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sat, 03 Mar 2012 10:53:16 -0000
 
-On Sat, Mar 03, 2012 at 09:13:00AM +0100, Koen Kooi wrote:
-> 
-> Op 2 mrt. 2012, om 21:51 heeft Chase Maupin het volgende geschreven:
-> 
-> > * create a configs directory in the MACHINE directory for both
-> >  am335x-evm and beaglebone.  This resolves an issue with the
-> >  unpack step until a root cause for not finding the shared
-> >  configs diretory can be found.
-> > 
-> > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-> 
-> Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+This breaks the hard dependency on Angstrom for getting a sane set of recipes.
 
-NAK for now, unless my fix doesn't work.
+The variable name is kept the same and the actual code moved from angstrom.inc to soc-family.inc to make it clear what it is doing and how.
 
-But either way we shouldn't have empty configs in every machine and SOC 
-directory...
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ conf/machine/include/omap3.inc      |    1 +
+ conf/machine/include/omap4.inc      |    1 +
+ conf/machine/include/omapl138.inc   |    1 +
+ conf/machine/include/soc-family.inc |    3 +++
+ conf/machine/include/ti33x.inc      |    1 +
+ conf/machine/include/ti814x.inc     |    1 +
+ conf/machine/include/ti816x.inc     |    1 +
+ 7 files changed, 9 insertions(+), 0 deletions(-)
+ create mode 100644 conf/machine/include/soc-family.inc
 
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index 8fc0903..9cafe85 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -1,4 +1,5 @@
+ SOC_FAMILY = "omap3"
++require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa8.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
+diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
+index 84b7742..a295352 100644
+--- a/conf/machine/include/omap4.inc
++++ b/conf/machine/include/omap4.inc
+@@ -1,4 +1,5 @@
+ SOC_FAMILY = "omap4"
++require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa8.inc
+ 
+diff --git a/conf/machine/include/omapl138.inc b/conf/machine/include/omapl138.inc
+index 4c22275..1949642 100644
+--- a/conf/machine/include/omapl138.inc
++++ b/conf/machine/include/omapl138.inc
+@@ -1 +1,2 @@
+ SOC_FAMILY = "omapl138"
++require conf/machine/include/soc-family.inc
+diff --git a/conf/machine/include/soc-family.inc b/conf/machine/include/soc-family.inc
+new file mode 100644
+index 0000000..39ca338
+--- /dev/null
++++ b/conf/machine/include/soc-family.inc
+@@ -0,0 +1,3 @@
++# Add SOC_FAMILY to machine overrides so we get access to e.g. 'omap3' and 'ti335x'
++MACHINEOVERRIDES .= "${@['', ':${SOC_FAMILY}']['${SOC_FAMILY}' != '']}"
++
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index fb8bad3..f4954f5 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -1,4 +1,5 @@
+ SOC_FAMILY = "ti33x"
++require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa8.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+diff --git a/conf/machine/include/ti814x.inc b/conf/machine/include/ti814x.inc
+index 23b6a1d..c53557f 100644
+--- a/conf/machine/include/ti814x.inc
++++ b/conf/machine/include/ti814x.inc
+@@ -1,4 +1,5 @@
+ SOC_FAMILY = "ti814x"
++require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa8.inc
+ 
+diff --git a/conf/machine/include/ti816x.inc b/conf/machine/include/ti816x.inc
+index 06cb7c0..2fe4006 100644
+--- a/conf/machine/include/ti816x.inc
++++ b/conf/machine/include/ti816x.inc
+@@ -1,4 +1,5 @@
+ SOC_FAMILY = "ti816x"
++require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa8.inc
+ 
 -- 
-Denys
+1.7.2.5
 
-> > ---
-> > .../{ => am335x-evm}/configs/empty                 |    0
-> > .../beaglebone}/configs/empty                      |    0
-> > 2 files changed, 0 insertions(+), 0 deletions(-)
-> > rename recipes-kernel/linux/linux-ti33x-psp-3.2/{ => am335x-evm}/configs/empty (100%)
-> > copy recipes-kernel/linux/{files => linux-ti33x-psp-3.2/beaglebone}/configs/empty (100%)
-> > 
-> > diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/configs/empty b/recipes-kernel/linux/linux-ti33x-psp-3.2/am335x-evm/configs/empty
-> > similarity index 100%
-> > rename from recipes-kernel/linux/linux-ti33x-psp-3.2/configs/empty
-> > rename to recipes-kernel/linux/linux-ti33x-psp-3.2/am335x-evm/configs/empty
-> > diff --git a/recipes-kernel/linux/files/configs/empty b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/configs/empty
-> > similarity index 100%
-> > copy from recipes-kernel/linux/files/configs/empty
-> > copy to recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/configs/empty
-> > -- 
-> > 1.7.0.4
-> > 
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
 
