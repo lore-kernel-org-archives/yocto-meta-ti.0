@@ -1,35 +1,37 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F0FEE003E4
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8911AE01363
 	for <meta-ti@lists.yoctoproject.org>;
-	Sat,  3 Mar 2012 02:53:15 -0800 (PST)
-Received: by werm13 with SMTP id m13so1772420wer.26
+	Sat,  3 Mar 2012 02:53:18 -0800 (PST)
+Received: by wico1 with SMTP id o1so652001wic.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Sat, 03 Mar 2012 02:53:15 -0800 (PST)
+	Sat, 03 Mar 2012 02:53:17 -0800 (PST)
 Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.180.102.100 as permitted sender)
-	client-ip=10.180.102.100; 
+	designates 10.180.92.34 as permitted sender)
+	client-ip=10.180.92.34; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.180.102.100 as
-	permitted sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.180.102.100])
-	by 10.180.102.100 with SMTP id fn4mr385484wib.1.1330771995137 (num_hops
-	= 1); Sat, 03 Mar 2012 02:53:15 -0800 (PST)
+	koen@dominion.thruhere.net designates 10.180.92.34 as permitted
+	sender) smtp.mail=koen@dominion.thruhere.net
+Received: from mr.google.com ([10.180.92.34])
+	by 10.180.92.34 with SMTP id cj2mr3247121wib.20.1330771997607 (num_hops
+	= 1); Sat, 03 Mar 2012 02:53:17 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.180.102.100 with SMTP id fn4mr303905wib.1.1330771995045;
-	Sat, 03 Mar 2012 02:53:15 -0800 (PST)
+Received: by 10.180.92.34 with SMTP id cj2mr2557775wib.20.1330771997386;
+	Sat, 03 Mar 2012 02:53:17 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id s8sm8798451wiz.8.2012.03.03.02.53.13
+	by mx.google.com with ESMTPS id gp8sm8812046wib.5.2012.03.03.02.53.15
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 03 Mar 2012 02:53:14 -0800 (PST)
+	Sat, 03 Mar 2012 02:53:16 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@lists.yoctoproject.org
-Date: Sat,  3 Mar 2012 11:53:06 +0100
-Message-Id: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
+Date: Sat,  3 Mar 2012 11:53:07 +0100
+Message-Id: <1330771988-13742-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
-X-Gm-Message-State: ALoCoQmFpbx7wEl78LthNhfvrigvAC3mCyVUoYJwoWFFhBSgBjpREMjI1gPcJ7YT52dEm9VIsWt+
-Subject: [PATCH 1/3] SOC_FAMILY: add to MACHINE_OVERRIDES locally
+In-Reply-To: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
+References: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQlr+2rUcbWC9QDZHNUktopqsX2Y/OVorQ2rGLAAEjxV0ZLZ6MoSqO8vpse+pJaZ/dqM4kND
+Subject: [PATCH 2/3] ti-hw-bringup-image: change require to include to make meta-angstrom a soft dependency
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,89 +43,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2012 10:53:16 -0000
+X-List-Received-Date: Sat, 03 Mar 2012 10:53:18 -0000
 
-This breaks the hard dependency on Angstrom for getting a sane set of recipes.
-
-The variable name is kept the same and the actual code moved from angstrom.inc to soc-family.inc to make it clear what it is doing and how.
+The image will be non-functional, but parsing completes with only oe-core + meta-ti
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- conf/machine/include/omap3.inc      |    1 +
- conf/machine/include/omap4.inc      |    1 +
- conf/machine/include/omapl138.inc   |    1 +
- conf/machine/include/soc-family.inc |    3 +++
- conf/machine/include/ti33x.inc      |    1 +
- conf/machine/include/ti814x.inc     |    1 +
- conf/machine/include/ti816x.inc     |    1 +
- 7 files changed, 9 insertions(+), 0 deletions(-)
- create mode 100644 conf/machine/include/soc-family.inc
+ recipes-misc/images/ti-hw-bringup-image.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 8fc0903..9cafe85 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -1,4 +1,5 @@
- SOC_FAMILY = "omap3"
-+require conf/machine/include/soc-family.inc
+diff --git a/recipes-misc/images/ti-hw-bringup-image.bb b/recipes-misc/images/ti-hw-bringup-image.bb
+index 5f7afce..2be8baf 100644
+--- a/recipes-misc/images/ti-hw-bringup-image.bb
++++ b/recipes-misc/images/ti-hw-bringup-image.bb
+@@ -1,6 +1,6 @@
+ # Image for assisting in hardware bringup
  
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
-diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
-index 84b7742..a295352 100644
---- a/conf/machine/include/omap4.inc
-+++ b/conf/machine/include/omap4.inc
-@@ -1,4 +1,5 @@
- SOC_FAMILY = "omap4"
-+require conf/machine/include/soc-family.inc
+-require recipes-images/angstrom/systemd-image.bb
++include recipes-images/angstrom/systemd-image.bb
  
- require conf/machine/include/tune-cortexa8.inc
- 
-diff --git a/conf/machine/include/omapl138.inc b/conf/machine/include/omapl138.inc
-index 4c22275..1949642 100644
---- a/conf/machine/include/omapl138.inc
-+++ b/conf/machine/include/omapl138.inc
-@@ -1 +1,2 @@
- SOC_FAMILY = "omapl138"
-+require conf/machine/include/soc-family.inc
-diff --git a/conf/machine/include/soc-family.inc b/conf/machine/include/soc-family.inc
-new file mode 100644
-index 0000000..39ca338
---- /dev/null
-+++ b/conf/machine/include/soc-family.inc
-@@ -0,0 +1,3 @@
-+# Add SOC_FAMILY to machine overrides so we get access to e.g. 'omap3' and 'ti335x'
-+MACHINEOVERRIDES .= "${@['', ':${SOC_FAMILY}']['${SOC_FAMILY}' != '']}"
-+
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index fb8bad3..f4954f5 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -1,4 +1,5 @@
- SOC_FAMILY = "ti33x"
-+require conf/machine/include/soc-family.inc
- 
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
-diff --git a/conf/machine/include/ti814x.inc b/conf/machine/include/ti814x.inc
-index 23b6a1d..c53557f 100644
---- a/conf/machine/include/ti814x.inc
-+++ b/conf/machine/include/ti814x.inc
-@@ -1,4 +1,5 @@
- SOC_FAMILY = "ti814x"
-+require conf/machine/include/soc-family.inc
- 
- require conf/machine/include/tune-cortexa8.inc
- 
-diff --git a/conf/machine/include/ti816x.inc b/conf/machine/include/ti816x.inc
-index 06cb7c0..2fe4006 100644
---- a/conf/machine/include/ti816x.inc
-+++ b/conf/machine/include/ti816x.inc
-@@ -1,4 +1,5 @@
- SOC_FAMILY = "ti816x"
-+require conf/machine/include/soc-family.inc
- 
- require conf/machine/include/tune-cortexa8.inc
+ EXTRA_MACHINE_IMAGE_INSTALL ?= ""
  
 -- 
 1.7.2.5
