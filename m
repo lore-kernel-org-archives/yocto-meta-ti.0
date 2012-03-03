@@ -1,31 +1,26 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B7C57E0132F
-	for <meta-ti@yoctoproject.org>; Sat,  3 Mar 2012 04:49:21 -0800 (PST)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 0EF7EF8121E; Sat,  3 Mar 2012 05:49:21 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id E939FF811E5;
-	Sat,  3 Mar 2012 05:49:19 -0700 (MST)
-Message-ID: <4F52134F.9060101@mlbassoc.com>
-Date: Sat, 03 Mar 2012 05:49:19 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0) Gecko/20120131 Thunderbird/10.0
-MIME-Version: 1.0
-To: Denys Dmytriyenko <denis@denix.org>
-References: <4F50DF80.10703@mlbassoc.com> <4F50E0D4.5010606@mlbassoc.com>
-	<20120303082700.GG24667@denix.org>
-In-Reply-To: <20120303082700.GG24667@denix.org>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-	Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-Subject: Re: Can't build for BeagleBone
+Return-Path: <denis@denix.org>
+Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
+	[206.46.173.15])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3CF2FE01363
+	for <meta-ti@lists.yoctoproject.org>;
+	Sat,  3 Mar 2012 05:55:40 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173015.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M0B00273AOBBHB1@vms173015.mailsrvcs.net> for
+	meta-ti@lists.yoctoproject.org; Sat, 03 Mar 2012 07:55:24 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7E88720264; Sat,
+	03 Mar 2012 08:55:23 -0500 (EST)
+Date: Sat, 03 Mar 2012 08:55:23 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-id: <20120303135523.GJ24667@denix.org>
+References: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
+MIME-version: 1.0
+In-reply-to: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@lists.yoctoproject.org
+Subject: Re: [PATCH 1/3] SOC_FAMILY: add to MACHINE_OVERRIDES locally
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,82 +32,108 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2012 12:49:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 03 Mar 2012 13:55:40 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 2012-03-03 01:27, Denys Dmytriyenko wrote:
-> On Fri, Mar 02, 2012 at 08:01:40AM -0700, Gary Thomas wrote:
->> On 2012-03-02 07:56, Gary Thomas wrote:
->>> In a freshly updated Angstrom tree:
->>> OE Build Configuration:
->>> BB_VERSION = "1.15.1"
->>> TARGET_ARCH = "arm"
->>> TARGET_OS = "linux-gnueabi"
->>> MACHINE = "beaglebone"
->>> DISTRO = "angstrom"
->>> DISTRO_VERSION = "v2012.03-core"
->>> TUNE_FEATURES = "armv7a vfp neon cortexa8"
->>> TARGET_FPU = "vfp-neon"
->>> meta-angstrom = "master:2129eed920364abcc4f3f72d395333a041634e26"
->>> meta-oe
->>> meta-efl
->>> meta-gpe
->>> meta-gnome
->>> meta-xfce
->>> meta-initramfs = "master:fdff8697ea2db6254d26510adb7d11e6352d950f"
->>> meta-opie = "master:efa3892b20a4ef80274e56e5633ebd62c16f9731"
->>> meta-java = "master:d430de31c167cd264be74a1d82af4b732bb915dd"
->>> meta-ti = "master:2dbb7f09bf1c54d505d2e84a3a614bc5ca9b89aa"
->>> meta-efikamx = "master:2c09a3a780b23448e8a6ca964256ff7f5ccba65d"
->>> meta-nslu2 = "master:3d9fc951b05b4df476374b6fc3085ebac7f293ee"
->>> meta-htc
->>> meta-nokia
->>> meta-openmoko
->>> meta-palm = "master:cda19686a2a3573ce50c86733c3469d926124995"
->>> meta-handheld = "master:fa1e6dcb524eb7ed29a6cd971a150d35c31e96e7"
->>> meta-intel
->>> meta-sugarbay
->>> meta-crownbay
->>> meta-emenlow
->>> meta-fishriver
->>> meta-jasperforest
->>> meta-n450 = "master:df18b721f86f0737c0f302e49b27ea232c70e683"
->>> meta = "master:d94cb18f7f17a492c7a948337d7d2d1d0785573f"
->>>
->>> % MACHINE="beaglebone" bitbake cloud9-image
->>> ...
->>> | cp: cannot stat `/local/new-angstrom/sources/meta-ti/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/./configs/*': No such file or directory
->>> | ERROR: Function failed: Unpack failure for URL: 'file://configs/*'. Unpack command
->>> PATH="/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux/usr/bin/armv7a-angstrom-linux-gnueabi:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/beaglebone/usr/bin/crossscripts:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux/usr/sbin:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux/usr/bin:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux/sbin:/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/sysroots/i686-linux//bin:/local/new-angstrom/sources/openembedded-core/scripts:/local/new-angstrom/sources/bitbake/bin:/usr/lib/ccache:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/gthomas/bin:/local/new-angstrom/sources/openembedded-core/scripts"
->>> cp /local/new-angstrom/sources/meta-ti/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/./configs/*
->>> /local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/linux-ti33x-psp-3.2-r4c+gitr09e9651bcf2ee8d86685f2a8075bc6557b1d3b91/configs/ failed
->>> with return value 1
->>> NOTE: package linux-ti33x-psp-3.2-r4c+gitr09e9651bcf2ee8d86685f2a8075bc6557b1d3b91: task do_unpack: Failed
->>>
->>> Did I miss something?
->>>
->>
->> To be clear, I have built this before in this same tree when the
->> kernel recipe was at
->>    uImage-3.2-r2e+gitr21ef5e1fa530eb8f23bfe18650e3915d7c291ca9-beaglebone-20120224112658.bin
->>
->> In my tree, I execute these steps (same tree, same login window, 8 days later):
->>    % ./oebb.sh update
->>    % MACHINE="beaglebone" bitbake cloud9-image
->
-> Gary,
->
-> Can you please try again after updating meta-ti? Thanks.
->
+On Sat, Mar 03, 2012 at 11:53:06AM +0100, Koen Kooi wrote:
+> This breaks the hard dependency on Angstrom for getting a sane set of 
+> recipes.
+> 
+> The variable name is kept the same and the actual code moved from 
+> angstrom.inc to soc-family.inc to make it clear what it is doing and how.
 
-Yes, this fixes that problem & I can build the kernel for BeagleBone
-
-Thanks
+Ah, nice workaround until/if it gets accepted upstream to OE-Core! Thanks, 
+Koen.
 
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Denys
+
+
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  conf/machine/include/omap3.inc      |    1 +
+>  conf/machine/include/omap4.inc      |    1 +
+>  conf/machine/include/omapl138.inc   |    1 +
+>  conf/machine/include/soc-family.inc |    3 +++
+>  conf/machine/include/ti33x.inc      |    1 +
+>  conf/machine/include/ti814x.inc     |    1 +
+>  conf/machine/include/ti816x.inc     |    1 +
+>  7 files changed, 9 insertions(+), 0 deletions(-)
+>  create mode 100644 conf/machine/include/soc-family.inc
+> 
+> diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+> index 8fc0903..9cafe85 100644
+> --- a/conf/machine/include/omap3.inc
+> +++ b/conf/machine/include/omap3.inc
+> @@ -1,4 +1,5 @@
+>  SOC_FAMILY = "omap3"
+> +require conf/machine/include/soc-family.inc
+>  
+>  require conf/machine/include/tune-cortexa8.inc
+>  PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
+> diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
+> index 84b7742..a295352 100644
+> --- a/conf/machine/include/omap4.inc
+> +++ b/conf/machine/include/omap4.inc
+> @@ -1,4 +1,5 @@
+>  SOC_FAMILY = "omap4"
+> +require conf/machine/include/soc-family.inc
+>  
+>  require conf/machine/include/tune-cortexa8.inc
+>  
+> diff --git a/conf/machine/include/omapl138.inc b/conf/machine/include/omapl138.inc
+> index 4c22275..1949642 100644
+> --- a/conf/machine/include/omapl138.inc
+> +++ b/conf/machine/include/omapl138.inc
+> @@ -1 +1,2 @@
+>  SOC_FAMILY = "omapl138"
+> +require conf/machine/include/soc-family.inc
+> diff --git a/conf/machine/include/soc-family.inc b/conf/machine/include/soc-family.inc
+> new file mode 100644
+> index 0000000..39ca338
+> --- /dev/null
+> +++ b/conf/machine/include/soc-family.inc
+> @@ -0,0 +1,3 @@
+> +# Add SOC_FAMILY to machine overrides so we get access to e.g. 'omap3' and 'ti335x'
+> +MACHINEOVERRIDES .= "${@['', ':${SOC_FAMILY}']['${SOC_FAMILY}' != '']}"
+> +
+> diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+> index fb8bad3..f4954f5 100644
+> --- a/conf/machine/include/ti33x.inc
+> +++ b/conf/machine/include/ti33x.inc
+> @@ -1,4 +1,5 @@
+>  SOC_FAMILY = "ti33x"
+> +require conf/machine/include/soc-family.inc
+>  
+>  require conf/machine/include/tune-cortexa8.inc
+>  PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+> diff --git a/conf/machine/include/ti814x.inc b/conf/machine/include/ti814x.inc
+> index 23b6a1d..c53557f 100644
+> --- a/conf/machine/include/ti814x.inc
+> +++ b/conf/machine/include/ti814x.inc
+> @@ -1,4 +1,5 @@
+>  SOC_FAMILY = "ti814x"
+> +require conf/machine/include/soc-family.inc
+>  
+>  require conf/machine/include/tune-cortexa8.inc
+>  
+> diff --git a/conf/machine/include/ti816x.inc b/conf/machine/include/ti816x.inc
+> index 06cb7c0..2fe4006 100644
+> --- a/conf/machine/include/ti816x.inc
+> +++ b/conf/machine/include/ti816x.inc
+> @@ -1,4 +1,5 @@
+>  SOC_FAMILY = "ti816x"
+> +require conf/machine/include/soc-family.inc
+>  
+>  require conf/machine/include/tune-cortexa8.inc
+>  
+> -- 
+> 1.7.2.5
+> 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+> 
 
