@@ -1,36 +1,31 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f51.google.com (mail-ww0-f51.google.com [74.125.82.51])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6AE8DE013A3
-	for <meta-ti@lists.yoctoproject.org>;
-	Sat,  3 Mar 2012 02:53:20 -0800 (PST)
-Received: by wgbed3 with SMTP id ed3so1868455wgb.8
-	for <meta-ti@lists.yoctoproject.org>;
-	Sat, 03 Mar 2012 02:53:19 -0800 (PST)
-Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.180.107.99 as permitted sender)
-	client-ip=10.180.107.99; 
-Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.180.107.99 as
-	permitted sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.180.107.99])
-	by 10.180.107.99 with SMTP id hb3mr3342329wib.5.1330771999454 (num_hops
-	= 1); Sat, 03 Mar 2012 02:53:19 -0800 (PST)
+Return-Path: <wmills@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 49F1DE003E4
+	for <meta-ti@yoctoproject.org>; Sat,  3 Mar 2012 03:16:36 -0800 (PST)
+Received: from dlep26.itg.ti.com ([157.170.170.121])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q23BGZIQ005582;
+	Sat, 3 Mar 2012 05:16:35 -0600
+Received: from DLEE74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q23BGZX7029617;
+	Sat, 3 Mar 2012 05:16:35 -0600 (CST)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Sat, 3 Mar 2012 05:16:34 -0600
+Received: from [172.24.0.30] (gtengapp01.am.dhcp.ti.com [158.218.100.228])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id q23BGXrW032552;
+	Sat, 3 Mar 2012 05:16:34 -0600
+Message-ID: <4F51FD84.7050101@ti.com>
+Date: Sat, 3 Mar 2012 06:16:20 -0500
+From: William Mills <wmills@ti.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.13) Gecko/20101208 Lightning/1.0b2 Thunderbird/3.1.7
 MIME-Version: 1.0
-Received: by 10.180.107.99 with SMTP id hb3mr2638337wib.5.1330771999361;
-	Sat, 03 Mar 2012 02:53:19 -0800 (PST)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id v4sm25420842wiy.9.2012.03.03.02.53.18
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 03 Mar 2012 02:53:18 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: meta-ti@lists.yoctoproject.org
-Date: Sat,  3 Mar 2012 11:53:08 +0100
-Message-Id: <1330771988-13742-3-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
-References: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQnxWhto2o3o4fYPh1he3v3NsngUeaysHlI7TicZm+L+R3+xyReW3UWGsJAvy1/8tHCzhEWl
-Subject: [PATCH 3/3] README: move meta-angstrom to optional layers
+To: Denys Dmytriyenko <denis@denix.org>
+References: <20120301212837.C08F852A8A@arago-project.org>	<50999BC3-EC35-4F51-BD1E-9F35FD9AD78C@dominion.thruhere.net>	<7D46E86EC0A8354091174257B2FED1012F049DD6@DLEE12.ent.ti.com>	<351DB87E-545E-479E-8183-C5072355906C@dominion.thruhere.net>	<7D46E86EC0A8354091174257B2FED1012F04A6C0@DLEE12.ent.ti.com>	<20120302221439.GD24667@denix.org>
+	<20120303082350.GF24667@denix.org>
+In-Reply-To: <20120303082350.GF24667@denix.org>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Chase Maupin : linux-ti33x-psp: add am335x-evm support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,42 +37,19 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2012 10:53:20 -0000
+X-List-Received-Date: Sat, 03 Mar 2012 11:16:36 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- README |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+On 03/03/2012 03:23 AM, Denys Dmytriyenko wrote:
+> As a side note, sstate seems to be really broken, as building the first
+> machine in a clean setup works fine, but then trying to build a second machine
+> in the same setup leads to weird breakages in perl, gcc-cross-initial,
+> gcc-cross-intermediate, then binutils etc. Even though both machines are
+> armv7a and supposed to share those packages w/o rebuilding them... Cleaning
+> sstate and/or entire build takes too much time and is really painful
+> switching between platforms.
+>
 
-diff --git a/README b/README
-index 9bf6154..918c0f1 100644
---- a/README
-+++ b/README
-@@ -1,4 +1,4 @@
--This layer depends on:
-+This layer hard depends on:
- 
- URI: git://git.openembedded.org/openembedded-core
- branch: master
-@@ -8,6 +8,8 @@ URI: git://git.openembedded.org/meta-openembedded
- branch: master
- revision: HEAD
- 
-+And optionally depends on:
-+
- URI: git://git.angstrom-distribution.org/meta-angstrom
- branch: master
- revision: HEAD
-@@ -24,7 +26,7 @@ Arago.
- Due to the above, it is now recommended to follow the instructions at
- http://www.angstrom-distribution.org/building-angstrom
- 
--This will set it up for the OpenEmbedded-core layout instead of the
-+This will set it up for the OpenEmbedded-core ('yocto') layout instead of the
- old "Classic" OpenEmbedded-dev layout. You can optionally tweak
- sources/layers.txt and conf/bblayers.conf to (de)select BSP layers.
- 
--- 
-1.7.2.5
-
+Please report this on oe-core list if you have not already.
 
