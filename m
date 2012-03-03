@@ -1,37 +1,36 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8911AE01363
+Received: from mail-ww0-f51.google.com (mail-ww0-f51.google.com [74.125.82.51])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6AE8DE013A3
 	for <meta-ti@lists.yoctoproject.org>;
-	Sat,  3 Mar 2012 02:53:18 -0800 (PST)
-Received: by wico1 with SMTP id o1so652001wic.26
+	Sat,  3 Mar 2012 02:53:20 -0800 (PST)
+Received: by wgbed3 with SMTP id ed3so1868455wgb.8
 	for <meta-ti@lists.yoctoproject.org>;
-	Sat, 03 Mar 2012 02:53:17 -0800 (PST)
+	Sat, 03 Mar 2012 02:53:19 -0800 (PST)
 Received-SPF: pass (google.com: domain of koen@dominion.thruhere.net
-	designates 10.180.92.34 as permitted sender)
-	client-ip=10.180.92.34; 
+	designates 10.180.107.99 as permitted sender)
+	client-ip=10.180.107.99; 
 Authentication-Results: mr.google.com; spf=pass (google.com: domain of
-	koen@dominion.thruhere.net designates 10.180.92.34 as permitted
-	sender) smtp.mail=koen@dominion.thruhere.net
-Received: from mr.google.com ([10.180.92.34])
-	by 10.180.92.34 with SMTP id cj2mr3247121wib.20.1330771997607 (num_hops
-	= 1); Sat, 03 Mar 2012 02:53:17 -0800 (PST)
+	koen@dominion.thruhere.net designates 10.180.107.99 as
+	permitted sender) smtp.mail=koen@dominion.thruhere.net
+Received: from mr.google.com ([10.180.107.99])
+	by 10.180.107.99 with SMTP id hb3mr3342329wib.5.1330771999454 (num_hops
+	= 1); Sat, 03 Mar 2012 02:53:19 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.180.92.34 with SMTP id cj2mr2557775wib.20.1330771997386;
-	Sat, 03 Mar 2012 02:53:17 -0800 (PST)
+Received: by 10.180.107.99 with SMTP id hb3mr2638337wib.5.1330771999361;
+	Sat, 03 Mar 2012 02:53:19 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id gp8sm8812046wib.5.2012.03.03.02.53.15
+	by mx.google.com with ESMTPS id v4sm25420842wiy.9.2012.03.03.02.53.18
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 03 Mar 2012 02:53:16 -0800 (PST)
+	Sat, 03 Mar 2012 02:53:18 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@lists.yoctoproject.org
-Date: Sat,  3 Mar 2012 11:53:07 +0100
-Message-Id: <1330771988-13742-2-git-send-email-koen@dominion.thruhere.net>
+Date: Sat,  3 Mar 2012 11:53:08 +0100
+Message-Id: <1330771988-13742-3-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
 References: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQlr+2rUcbWC9QDZHNUktopqsX2Y/OVorQ2rGLAAEjxV0ZLZ6MoSqO8vpse+pJaZ/dqM4kND
-Subject: [PATCH 2/3] ti-hw-bringup-image: change require to include to make meta-angstrom a soft dependency
+X-Gm-Message-State: ALoCoQnxWhto2o3o4fYPh1he3v3NsngUeaysHlI7TicZm+L+R3+xyReW3UWGsJAvy1/8tHCzhEWl
+Subject: [PATCH 3/3] README: move meta-angstrom to optional layers
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,26 +42,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2012 10:53:18 -0000
-
-The image will be non-functional, but parsing completes with only oe-core + meta-ti
+X-List-Received-Date: Sat, 03 Mar 2012 10:53:20 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- recipes-misc/images/ti-hw-bringup-image.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ README |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-misc/images/ti-hw-bringup-image.bb b/recipes-misc/images/ti-hw-bringup-image.bb
-index 5f7afce..2be8baf 100644
---- a/recipes-misc/images/ti-hw-bringup-image.bb
-+++ b/recipes-misc/images/ti-hw-bringup-image.bb
-@@ -1,6 +1,6 @@
- # Image for assisting in hardware bringup
+diff --git a/README b/README
+index 9bf6154..918c0f1 100644
+--- a/README
++++ b/README
+@@ -1,4 +1,4 @@
+-This layer depends on:
++This layer hard depends on:
  
--require recipes-images/angstrom/systemd-image.bb
-+include recipes-images/angstrom/systemd-image.bb
+ URI: git://git.openembedded.org/openembedded-core
+ branch: master
+@@ -8,6 +8,8 @@ URI: git://git.openembedded.org/meta-openembedded
+ branch: master
+ revision: HEAD
  
- EXTRA_MACHINE_IMAGE_INSTALL ?= ""
++And optionally depends on:
++
+ URI: git://git.angstrom-distribution.org/meta-angstrom
+ branch: master
+ revision: HEAD
+@@ -24,7 +26,7 @@ Arago.
+ Due to the above, it is now recommended to follow the instructions at
+ http://www.angstrom-distribution.org/building-angstrom
+ 
+-This will set it up for the OpenEmbedded-core layout instead of the
++This will set it up for the OpenEmbedded-core ('yocto') layout instead of the
+ old "Classic" OpenEmbedded-dev layout. You can optionally tweak
+ sources/layers.txt and conf/bblayers.conf to (de)select BSP layers.
  
 -- 
 1.7.2.5
