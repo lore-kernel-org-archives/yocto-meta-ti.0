@@ -1,33 +1,15 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from tim.rpsys.net (93-97-173-237.zone5.bethere.co.uk
-	[93.97.173.237])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BDDC6E00747
-	for <meta-ti@lists.yoctoproject.org>;
-	Sat,  3 Mar 2012 20:10:33 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q244ASfS020192;
-	Sun, 4 Mar 2012 04:10:28 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 20135-01; Sun,  4 Mar 2012 04:10:24 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q244AHgA020186
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Sun, 4 Mar 2012 04:10:20 GMT
-Message-ID: <1330834220.3949.7.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 03 Mar 2012 20:10:20 -0800
-In-Reply-To: <95AEAC88-7C37-41CD-B0FA-DF85BE77D2FC@dominion.thruhere.net>
-References: <1330771988-13742-1-git-send-email-koen@dominion.thruhere.net>
-	<20120303135523.GJ24667@denix.org>
-	<95AEAC88-7C37-41CD-B0FA-DF85BE77D2FC@dominion.thruhere.net>
-X-Mailer: Evolution 3.2.2- 
-Mime-Version: 1.0
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: meta-ti@lists.yoctoproject.org
-Subject: Re: [PATCH 1/3] SOC_FAMILY: add to MACHINE_OVERRIDES locally
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 143A8E0070C
+	for <meta-ti@yoctoproject.org>; Sat,  3 Mar 2012 21:48:41 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id EA0F4529B7; Sun,  4 Mar 2012 05:48:39 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120304054839.EA0F4529B7@arago-project.org>
+Date: Sun,  4 Mar 2012 05:48:39 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Koen Kooi : SOC_FAMILY: add to MACHINE_OVERRIDES locally
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,40 +21,102 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Mar 2012 04:10:34 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 04 Mar 2012 05:48:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Sat, 2012-03-03 at 20:01 +0100, Koen Kooi wrote:
-> Op 3 mrt. 2012, om 14:55 heeft Denys Dmytriyenko het volgende geschreven:
-> 
-> > On Sat, Mar 03, 2012 at 11:53:06AM +0100, Koen Kooi wrote:
-> >> This breaks the hard dependency on Angstrom for getting a sane set of 
-> >> recipes.
-> >> 
-> >> The variable name is kept the same and the actual code moved from 
-> >> angstrom.inc to soc-family.inc to make it clear what it is doing and how.
-> > 
-> > Ah, nice workaround until/if it gets accepted upstream to OE-Core! Thanks, 
-> > Koen.
-> 
-> The consensus at ELC was that these kind of tweaks should be done at
-> the machine level now that we have MACHINE_OVERRIDES seperated out. If
-> a lot of BSPs are going to use SOC_FAMILY we can try to push it into
-> OE-core again. But currently we wouldn't stand a chance.
+Module: meta-ti
+Branch: master
+Commit: 0d4418518a05b8f47697aa69a18a832d90eb8d87
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0d4418518a05b8f47697aa69a18a832d90eb8d87
 
-MACHINE_OVERRIDES was added to give people a generic way of extending
-overrides from a machine context. This works for various situations such
-as the "x86" override that made more sense than the previous 386|486|
-586|xxx madness as well as providing a mechanism for SOC_FAMILY and
-other uses.
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Sat Mar  3 11:53:06 2012 +0100
 
-I guess the .inc file could make it into OE-Core but I don't see much
-value in adding SOC_FAMILY directly as a standard variable at this
-point.
+SOC_FAMILY: add to MACHINE_OVERRIDES locally
 
-Cheers,
+This breaks the hard dependency on Angstrom for getting a sane set of recipes.
 
-Richard
+The variable name is kept the same and the actual code moved from angstrom.inc to soc-family.inc to make it clear what it is doing and how.
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ conf/machine/include/omap3.inc      |    1 +
+ conf/machine/include/omap4.inc      |    1 +
+ conf/machine/include/omapl138.inc   |    1 +
+ conf/machine/include/soc-family.inc |    3 +++
+ conf/machine/include/ti33x.inc      |    1 +
+ conf/machine/include/ti814x.inc     |    1 +
+ conf/machine/include/ti816x.inc     |    1 +
+ 7 files changed, 9 insertions(+), 0 deletions(-)
+
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index 8fc0903..9cafe85 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -1,4 +1,5 @@
+ SOC_FAMILY = "omap3"
++require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa8.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
+diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
+index 51e4a84..d8d7e08 100644
+--- a/conf/machine/include/omap4.inc
++++ b/conf/machine/include/omap4.inc
+@@ -1,4 +1,5 @@
+ SOC_FAMILY = "omap4"
++require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa8.inc
+ 
+diff --git a/conf/machine/include/omapl138.inc b/conf/machine/include/omapl138.inc
+index 4c22275..1949642 100644
+--- a/conf/machine/include/omapl138.inc
++++ b/conf/machine/include/omapl138.inc
+@@ -1 +1,2 @@
+ SOC_FAMILY = "omapl138"
++require conf/machine/include/soc-family.inc
+diff --git a/conf/machine/include/soc-family.inc b/conf/machine/include/soc-family.inc
+new file mode 100644
+index 0000000..39ca338
+--- /dev/null
++++ b/conf/machine/include/soc-family.inc
+@@ -0,0 +1,3 @@
++# Add SOC_FAMILY to machine overrides so we get access to e.g. 'omap3' and 'ti335x'
++MACHINEOVERRIDES .= "${@['', ':${SOC_FAMILY}']['${SOC_FAMILY}' != '']}"
++
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index f9d8f7a..550363d 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -1,4 +1,5 @@
+ SOC_FAMILY = "ti33x"
++require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa8.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+diff --git a/conf/machine/include/ti814x.inc b/conf/machine/include/ti814x.inc
+index 23b6a1d..c53557f 100644
+--- a/conf/machine/include/ti814x.inc
++++ b/conf/machine/include/ti814x.inc
+@@ -1,4 +1,5 @@
+ SOC_FAMILY = "ti814x"
++require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa8.inc
+ 
+diff --git a/conf/machine/include/ti816x.inc b/conf/machine/include/ti816x.inc
+index 06cb7c0..2fe4006 100644
+--- a/conf/machine/include/ti816x.inc
++++ b/conf/machine/include/ti816x.inc
+@@ -1,4 +1,5 @@
+ SOC_FAMILY = "ti816x"
++require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa8.inc
+ 
 
 
