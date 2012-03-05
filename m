@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EED7CE01374
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EDA79E01373
 	for <meta-ti@yoctoproject.org>; Mon,  5 Mar 2012 09:04:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4A10E52A61; Mon,  5 Mar 2012 17:04:57 +0000 (UTC)
+	id B055F529B7; Mon,  5 Mar 2012 17:04:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120305170457.4A10E52A61@arago-project.org>
-Date: Mon,  5 Mar 2012 17:04:57 +0000 (UTC)
+Message-Id: <20120305170456.B055F529B7@arago-project.org>
+Date: Mon,  5 Mar 2012 17:04:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : pandaboard: remove all traces of old 'omap4430-panda' machine
+Subject: Koen Kooi : bonescript: update to latest git
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,31 +26,48 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 43956e56dba61709a4b01bb4ed6c4a28cef19d30
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=43956e56dba61709a4b01bb4ed6c4a28cef19d30
+Commit: dfbcf63963c95a4818865a9a397dae58c0045121
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dfbcf63963c95a4818865a9a397dae58c0045121
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Mon Mar  5 08:31:21 2012 +0100
+Date:   Sun Mar  4 11:08:42 2012 +0100
 
-pandaboard: remove all traces of old 'omap4430-panda' machine
-
-It has been completely replaced with the 'pandaboard' machine config.
+bonescript: update to latest git
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/omap4430-panda.conf                   |   34 -
- recipes-bsp/u-boot/u-boot-sakoman_git.bb           |   20 -
- recipes-bsp/u-boot/u-boot_2011.06.bb               |    2 +-
- ...001-ARM-6329-1-wire-up-sys_accept4-on-ARM.patch |   51 -
- ...create-sys-fs-cgroup-to-mount-cgroupfs-on.patch |   58 -
- .../linux-omap4-2.6.35.7/omap4430-panda/defconfig  | 2785 --------------------
- .../linux/linux-omap4-3.1.0/omap4430-panda         |    1 -
- recipes-kernel/linux/linux-omap4_2.6.35.7.bb       |   19 -
- recipes-kernel/linux/linux-omap4_3.1.0.bb          |    2 +-
- 9 files changed, 2 insertions(+), 2970 deletions(-)
+ recipes-misc/payload/bonescript.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=43956e56dba61709a4b01bb4ed6c4a28cef19d30
+diff --git a/recipes-misc/payload/bonescript.bb b/recipes-misc/payload/bonescript.bb
+index 3361cb4..b1e92df 100644
+--- a/recipes-misc/payload/bonescript.bb
++++ b/recipes-misc/payload/bonescript.bb
+@@ -1,18 +1,18 @@
+ DESCRIPTION = "Scripting tools for the BeagleBoard and BeagleBone"
+ 
+-PR = "r13"
++PR = "r14"
+ 
+ inherit systemd
+ 
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=659ee0c98db2664403c769d6b9ab50eb"
+ 
+-SRC_URI = "http://dominion.thruhere.net/koen/angstrom/beaglebone/bonescript-8898f4ee4ae2548642679626a03e332a4cd43331.tar.bz2 \
++SRC_URI = "http://dominion.thruhere.net/koen/angstrom/beaglebone/bonescript-ca0f663083cea4e434864aa276d46ff79d471dff.tar.bz2 \
+            file://bonescript-git \
+            file://bone101.service \
+           "
+-SRC_URI[md5sum] = "306278a2afc10b75f4fc886918fb02b7"
+-SRC_URI[sha256sum] = "01c87e59adcc663365c664b0731f0e5a23feeae1965a5cd5edd3e89255f8a30b"
++SRC_URI[md5sum] = "2b7edd83a752eaf0be0c7488d32c7e72"
++SRC_URI[sha256sum] = "839ee1147b83924f259dc5e373d73eb0eaa6ece76322dc156a6b04113fa89a91"
+ 
+ S = "${WORKDIR}/bonescript"
+ 
+
 
