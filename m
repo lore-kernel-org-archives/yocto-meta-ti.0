@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6D0B9E0044D
-	for <meta-ti@yoctoproject.org>; Sun,  4 Mar 2012 21:57:13 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCDDDE0044D
+	for <meta-ti@yoctoproject.org>; Sun,  4 Mar 2012 21:59:41 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D32B552A86; Mon,  5 Mar 2012 05:57:12 +0000 (UTC)
+	id 60D5252A82; Mon,  5 Mar 2012 05:59:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120305055712.D32B552A86@arago-project.org>
-Date: Mon,  5 Mar 2012 05:57:12 +0000 (UTC)
+Message-Id: <20120305055941.60D5252A82@arago-project.org>
+Date: Mon,  5 Mar 2012 05:59:41 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-omap4: update to 3.1.0 (latest ti-ubuntu branch)
+Subject: Denys Dmytriyenko : soc-family.inc: it's now in OE-Core, remove locally
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,31 +21,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 05:57:13 -0000
+X-List-Received-Date: Mon, 05 Mar 2012 05:59:42 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 73de853320363a58c676a09a4d46a3f9ffa2c2ea
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=73de853320363a58c676a09a4d46a3f9ffa2c2ea
+Commit: f7965c3a335b97d5ae5795c95b86387d5c1590a5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f7965c3a335b97d5ae5795c95b86387d5c1590a5
 
-Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Fri Mar  2 14:19:58 2012 +0100
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Mar  5 00:57:36 2012 -0500
 
-linux-omap4: update to 3.1.0 (latest ti-ubuntu branch)
+soc-family.inc: it's now in OE-Core, remove locally
 
-Boot tested on Pandaboard ES/Angstrom
+The soc-family.inc file to set up SOC_FAMILY in MACHINEOVERRIDES has been
+accepted upstream to OE-Core, can remove it from meta-ti now.
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/omap4.inc                     |    2 +-
- .../linux/linux-omap4-3.1.0/omap4430-panda         |    1 +
- .../pandaboard}/defconfig                          | 2881 +++++++++++++-------
- .../{linux-omap4_3.0.0.bb => linux-omap4_3.1.0.bb} |    8 +-
- 4 files changed, 1963 insertions(+), 929 deletions(-)
+ conf/machine/include/soc-family.inc |    3 ---
+ 1 files changed, 0 insertions(+), 3 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=73de853320363a58c676a09a4d46a3f9ffa2c2ea
+diff --git a/conf/machine/include/soc-family.inc b/conf/machine/include/soc-family.inc
+deleted file mode 100644
+index 39ca338..0000000
+--- a/conf/machine/include/soc-family.inc
++++ /dev/null
+@@ -1,3 +0,0 @@
+-# Add SOC_FAMILY to machine overrides so we get access to e.g. 'omap3' and 'ti335x'
+-MACHINEOVERRIDES .= "${@['', ':${SOC_FAMILY}']['${SOC_FAMILY}' != '']}"
+-
+
 
