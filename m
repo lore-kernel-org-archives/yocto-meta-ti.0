@@ -1,25 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
-	[206.46.173.3])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB9C4E013BA
-	for <meta-ti@yoctoproject.org>; Sun,  4 Mar 2012 20:23:57 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M0E00M999JRM1P0@vms173003.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sun, 04 Mar 2012 22:23:51 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id C5E5020168; Sun,
-	04 Mar 2012 23:23:50 -0500 (EST)
-Date: Sun, 04 Mar 2012 23:23:50 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-Message-id: <20120305042350.GB14417@denix.org>
-References: <alpine.DEB.2.02.1203041620080.12952@oneiric>
-MIME-version: 1.0
-In-reply-to: <alpine.DEB.2.02.1203041620080.12952@oneiric>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: why does meta-ti layer define two pandaboard conf files?
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54FD7E013C2
+	for <meta-ti@yoctoproject.org>; Sun,  4 Mar 2012 20:37:08 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 41B7952A86; Mon,  5 Mar 2012 04:37:07 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120305043707.41B7952A86@arago-project.org>
+Date: Mon,  5 Mar 2012 04:37:07 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Koen Kooi : linux-ti33x-psp 3.2: remove patch that slipped in when regenerating SRC_URI
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,28 +21,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 04:23:58 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 05 Mar 2012 04:37:08 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Sun, Mar 04, 2012 at 04:22:39PM -0500, Robert P. J. Day wrote:
-> 
-> * omap4430-panda.conf
-> * pandaboard.conf
-> 
->   what's stranger is that the first file up there includes omap3.inc
-> (which seems weird), while the second includes omap4.inc.
+Module: meta-ti
+Branch: master
+Commit: 81f7f807d2cf11c0bf140039b786c6d8e66ea8dd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=81f7f807d2cf11c0bf140039b786c6d8e66ea8dd
 
-The reason is that the historic OE name (1) hardcodes OMAP4430 in the machine 
-name and is somewhat misleading for cases such as the new Pandaboard ES, which 
-uses OMAP4460. Hence the commit:
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Thu Mar  1 10:06:46 2012 +0100
 
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?id=03f4a9211e59eb7e5dd406e683fa1aa320ac78df
+linux-ti33x-psp 3.2: remove patch that slipped in when regenerating SRC_URI
 
-Unfortunately, this wasn't finished and used to lack some defconfigs. And it 
-definitely needs more testing and cleanup with the correct SOC_FAMILY name, 
-although it's just a name...
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
--- 
-Denys
+---
+
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index 530fb48..b2f706a 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -480,7 +480,6 @@ PATCHES_OVER_PSP = " \
+ 	file://3.2.9/0051-hwmon-max6639-Fix-PPR-register-initialization-to-set.patch \
+ 	file://3.2.9/0052-hwmon-ads1015-Fix-file-leak-in-probe-function.patch \
+ 	file://3.2.9/0053-ARM-omap-fix-oops-in-drivers-video-omap2-dss-dpi.c.patch \
+-	file://3.2.9/0054-ARM-omap-fix-oops-in-arch-arm-mach-omap2-vp.c-when-p.patch \
+ 	file://3.2.9/0055-x86-amd-Fix-L1i-and-L2-cache-sharing-information-for.patch \
+ 	file://3.2.9/0056-ath9k-stop-on-rates-with-idx-1-in-ath9k-rate-control.patch \
+ 	file://3.2.9/0057-genirq-Unmask-oneshot-irqs-when-thread-was-not-woken.patch \
+
 
