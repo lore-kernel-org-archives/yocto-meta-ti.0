@@ -1,19 +1,19 @@
 Return-Path: <rpjday@crashcourse.ca>
 Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
 	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A4DDE0074A
-	for <meta-ti@yoctoproject.org>; Mon,  5 Mar 2012 07:48:42 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 72822E0074A
+	for <meta-ti@yoctoproject.org>; Mon,  5 Mar 2012 08:39:48 -0800 (PST)
 Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
 	([99.241.91.63] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1S4a9Q-0006Ks-Pm; Mon, 05 Mar 2012 10:48:41 -0500
-Date: Mon, 5 Mar 2012 10:48:29 -0500 (EST)
+	id 1S4awt-0001Z6-A0; Mon, 05 Mar 2012 11:39:47 -0500
+Date: Mon, 5 Mar 2012 11:39:37 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@oneiric
 To: Christian.Schulenberg@bmw.de
-In-Reply-To: <EF446FF9DAC93B479C74AB9153DE173F0C2EB9CA@SMUCM08V.europe.bmw.corp>
-Message-ID: <alpine.DEB.2.02.1203051046590.2334@oneiric>
+In-Reply-To: <EF446FF9DAC93B479C74AB9153DE173F0C2806AF@SMUCM08V.europe.bmw.corp>
+Message-ID: <alpine.DEB.2.02.1203051138060.14598@oneiric>
 References: <EF446FF9DAC93B479C74AB9153DE173F0C0D32FF@SMUCM08V.europe.bmw.corp>
 	<3BC330F9-CE58-4C4F-A473-B0F40D0A2777@dominion.thruhere.net>
 	<4F4BA9EE.8030908@balister.org>
@@ -25,8 +25,6 @@ References: <EF446FF9DAC93B479C74AB9153DE173F0C0D32FF@SMUCM08V.europe.bmw.corp>
 	<EF446FF9DAC93B479C74AB9153DE173F0C280116@SMUCM08V.europe.bmw.corp>
 	<alpine.DEB.2.02.1203050730440.30632@oneiric>
 	<EF446FF9DAC93B479C74AB9153DE173F0C2806AF@SMUCM08V.europe.bmw.corp>
-	<alpine.DEB.2.02.1203051014001.6054@oneiric>
-	<EF446FF9DAC93B479C74AB9153DE173F0C2EB9CA@SMUCM08V.europe.bmw.corp>
 User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -51,161 +49,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 15:48:42 -0000
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-388940516-1330962516=:2334"
-
---8323329-388940516-1330962516=:2334
-Content-Type: TEXT/PLAIN; charset=iso-8859-1
-Content-Transfer-Encoding: QUOTED-PRINTABLE
+X-List-Received-Date: Mon, 05 Mar 2012 16:39:48 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 On Mon, 5 Mar 2012, Christian.Schulenberg@bmw.de wrote:
 
-> No, as I wrote previously, the compiler error I have belongs to the
-> source code of the bootloader (seems to be a problem with structure
-> aligning). The problem you have is in the kernel.
+> Hi,
+>
+> I'm using a Pandaboard Rev A4, so it is in fact an OMAP4430 board.
+>
+> You can change to u-boot bootloader in /meta-ti/conf/machine/omap4430-panda.conf:
 
-  i know ... my question was why you *weren't* getting that build
-error.  i'm speculating that when you switched back to gcc 4.5 to
-solve the u-boot issue, you might have avoided the perf build error as
-well.
+  i noticed that koen just submitted a sizable patch that gets rid of
+that conf file for the panda, and standardizes on the pandaboard.conf
+file (at least that's what it looked like).
 
-  i'm trying a gcc 4.5 build right now.
+  under the circumstances, it might be worth just waiting until that
+patch works its way through the system and start testing all over
+again when it hits.
 
 rday
 
->
-> -----Urspr=FCngliche Nachricht-----
-> Von: Robert P. J. Day [mailto:rpjday@crashcourse.ca]
-> Gesendet: Montag, 5. M=E4rz 2012 16:17
-> An: Schulenberg Christian, EI-42
-> Cc: meta-ti@yoctoproject.org
-> Betreff: Re: AW: [meta-ti] Building Yocto for Pandaboard
->
-> On Mon, 5 Mar 2012, Christian.Schulenberg@bmw.de wrote:
->
-> > Hi,
-> >
-> > I'm using a Pandaboard Rev A4, so it is in fact an OMAP4430 board.
-> >
-> > You can change to u-boot bootloader in /meta-ti/conf/machine/omap4430-p=
-anda.conf:
-> >
-> > #EXTRA_IMAGEDEPENDS =3D "x-load u-boot-sakoman " -> remove or comment t=
-his line out
-> > EXTRA_IMAGEDEPENDS +=3D "u-boot" -> I used this line, but because omap4=
-430-panda.conf includes omap3.inc, it should be obsolete. Same definition i=
-s in there. X-Load can be removed from omap3.inc from my point of view, bec=
-ause it's not necessary.
-> >
-> > #PREFERRED_PROVIDER_virtual/bootloader =3D "u-boot-sakoman"  -> remove =
-or comment this line out
-> > PREFERRED_PROVIDER_virtual/bootloader =3D "u-boot"
-> >
-> > Your question about gcc4.7: I haven't used this version yet.
-> >
-> > I have build core-image-base as well as core-image-basic successfully f=
-or Pandaboard. I connect to the board via the serial interface, so I don't =
-need a configured eth0 yet.
-> >
-> > Thanks for your suggestion about systemd. I will try to pull in system =
-in the next days.
->
->   without making any of the above changes (since it doesn't appear it
-> would affect what i'm doing), i'm getting a build error that goes back
-> many months:
->
-> ERROR: Function failed: do_compile_perf (see /home/rpjday/yocto/builds/om=
-ap4430_panda/tmp/work/omap4430_panda-poky-linux-gnueabi/linux-omap4-2.6.35.=
-7-r0/temp/log.do_compile_perf.29777 for further information)
-> NOTE: make -j 8 -C /home/rpjday/yocto/builds/omap4430_panda/tmp/work/omap=
-4430_panda-poky-linux-gnueabi/linux-omap4-2.6.35.7-r0/git/tools/perf CC=3Da=
-rm-poky-linux-gnueabi-gcc  -march=3Darmv7-a -fno-tree-vectorize      -mthum=
-b-interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon -mtune=3Dcortex-a8 --sysroot=
-=3D/home/rpjday/yocto/builds/omap4430_panda/tmp/sysroots/omap4430-panda LD=
-=3Darm-poky-linux-gnueabi-ld --sysroot=3D/home/rpjday/yocto/builds/omap4430=
-_panda/tmp/sysroots/omap4430-panda  prefix=3D/usr NO_NEWT=3D1 NO_DWARF=3D1
-> make: Entering directory `/home/rpjday/yocto/builds/omap4430_panda/tmp/wo=
-rk/omap4430_panda-poky-linux-gnueabi/linux-omap4-2.6.35.7-r0/git/tools/perf=
-'
-> PERF_VERSION =3D ti.ubuntu.2.6.35.993.3
-> make: Leaving directory `/home/rpjday/yocto/builds/omap4430_panda/tmp/wor=
-k/omap4430_panda-poky-linux-gnueabi/linux-omap4-2.6.35.7-r0/git/tools/perf'
-> make: Entering directory `/home/rpjday/yocto/builds/omap4430_panda/tmp/wo=
-rk/omap4430_panda-poky-linux-gnueabi/linux-omap4-2.6.35.7-r0/git/tools/perf=
-'
->     GEN common-cmds.h
->     * new build flags or prefix
-> touch .perf.dev.null
->     GEN perf-archive
->     CC builtin-annotate.o
->     CC builtin-bench.o
->     CC bench/sched-messaging.o
->     CC bench/sched-pipe.o
->     CC bench/mem-memcpy.o
->     CC builtin-diff.o
->     CC builtin-sched.o
-> bench/sched-pipe.c: In function 'bench_sched_pipe':
-> bench/sched-pipe.c:58:6: error: variable 'ret' set but not used [-Werror=
-=3Dunused-but-set-variable]
-> cc1: all warnings being treated as errors
->
-> make: *** [bench/sched-pipe.o] Error 1
-> make: *** Waiting for unfinished jobs....
->     CC builtin-buildid-list.o
-> builtin-sched.c: In function 'process_sched_event':
-> builtin-sched.c:373:12: error: variable 'delta' set but not used [-Werror=
-=3Dunused-but-set-variable]
-> builtin-sched.c: In function 'run_one_test':
-> builtin-sched.c:564:39: error: variable 'std_dev' set but not used [-Werr=
-or=3Dunused-but-set-variable]
-> builtin-sched.c: In function 'replay_switch_event':
-> builtin-sched.c:801:27: error: variable 'next' set but not used [-Werror=
-=3Dunused-but-set-variable]
-> builtin-sched.c: In function 'map_switch_event':
-> builtin-sched.c:1406:17: error: variable 'sched_out' set but not used [-W=
-error=3Dunused-but-set-variable]
-> cc1: all warnings being treated as errors
->
-> make: *** [builtin-sched.o] Error 1
-> rm .perf.dev.null
-> make: Leaving directory `/home/rpjday/yocto/builds/omap4430_panda/tmp/wor=
-k/omap4430_panda-poky-linux-gnueabi/linux-omap4-2.6.35.7-r0/git/tools/perf'
-> ERROR: oe_runmake failed
->
->
->   i'd thought that had been addressed some time back.  did you not see
-> that build error?  does that mean using a different version of gcc
-> would resolve it?
->
-> rday
->
-> --
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> Robert P. J. Day                                 Ottawa, Ontario, CANADA
->                         http://crashcourse.ca
->
-> Twitter:                                       http://twitter.com/rpjday
-> LinkedIn:                               http://ca.linkedin.com/in/rpjday
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
+-- 
 
---=20
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+========================================================================
 Robert P. J. Day                                 Ottawa, Ontario, CANADA
                         http://crashcourse.ca
 
 Twitter:                                       http://twitter.com/rpjday
 LinkedIn:                               http://ca.linkedin.com/in/rpjday
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+========================================================================
 
---8323329-388940516-1330962516=:2334--
