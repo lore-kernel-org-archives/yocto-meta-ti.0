@@ -1,32 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B6FEE013BA
-	for <meta-ti@yoctoproject.org>; Sun,  4 Mar 2012 21:12:19 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M0E002EUBS8V1U0@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sun, 04 Mar 2012 23:12:09 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2F5A620370; Mon,
-	05 Mar 2012 00:12:08 -0500 (EST)
-Date: Mon, 05 Mar 2012 00:12:08 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-Message-id: <20120305051208.GD14417@denix.org>
-References: <4F514EC8.8000606@ti.com> <4F515551.50708@mlbassoc.com>
-	<20120304061843.GN24667@denix.org>
-	<alpine.DEB.2.02.1203040716190.496@oneiric>
-	<4F5361B6.8040908@mlbassoc.com>
-	<alpine.DEB.2.02.1203041310220.20388@oneiric>
-	<20120304192728.GO24667@denix.org> <4F53C63D.1000305@mlbassoc.com>
-	<20120304200405.GP24667@denix.org>
-	<alpine.DEB.2.02.1203041618190.20150@oneiric>
-MIME-version: 1.0
-In-reply-to: <alpine.DEB.2.02.1203041618190.20150@oneiric>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [yocto] proper recipe for building for beagle xM? meta-ti?
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6D0B9E0044D
+	for <meta-ti@yoctoproject.org>; Sun,  4 Mar 2012 21:57:13 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id D32B552A86; Mon,  5 Mar 2012 05:57:12 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120305055712.D32B552A86@arago-project.org>
+Date: Mon,  5 Mar 2012 05:57:12 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Koen Kooi : linux-omap4: update to 3.1.0 (latest ti-ubuntu branch)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,33 +21,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 05:12:19 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 05 Mar 2012 05:57:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Sun, Mar 04, 2012 at 04:18:54PM -0500, Robert P. J. Day wrote:
-> On Sun, 4 Mar 2012, Denys Dmytriyenko wrote:
-> 
-> > One of the issues:
-> >
-> > https://lists.yoctoproject.org/pipermail/meta-ti/2012-February/000491.html
-> >
-> > I haven't tried if either 3.0 or a pending 3.1 update for Panda
-> > (from omapzoom/ti-ubuntu), resolve this gcc-4.6 build issue. But
-> > either way I believe there was something else with one of our
-> > components not building with gcc-4.6 - SGX or multimedia, don't
-> > remember exactly.
-> 
->   taking koen's advice to heart, should this discussion be happening
-> on the meta-ti list?
+Module: meta-ti
+Branch: master
+Commit: 73de853320363a58c676a09a4d46a3f9ffa2c2ea
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=73de853320363a58c676a09a4d46a3f9ffa2c2ea
 
-Sure, let's switch to meta-ti...
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Fri Mar  2 14:19:58 2012 +0100
 
-Here's another report of gcc-4.6 failing on u-boot, due to wrong optimization 
-used, which should be easy to fix, though:
+linux-omap4: update to 3.1.0 (latest ti-ubuntu branch)
 
-https://lists.yoctoproject.org/pipermail/meta-ti/2012-February/000614.html
+Boot tested on Pandaboard ES/Angstrom
 
--- 
-Denys
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ conf/machine/include/omap4.inc                     |    2 +-
+ .../linux/linux-omap4-3.1.0/omap4430-panda         |    1 +
+ .../pandaboard}/defconfig                          | 2881 +++++++++++++-------
+ .../{linux-omap4_3.0.0.bb => linux-omap4_3.1.0.bb} |    8 +-
+ 4 files changed, 1963 insertions(+), 929 deletions(-)
+
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=73de853320363a58c676a09a4d46a3f9ffa2c2ea
 
