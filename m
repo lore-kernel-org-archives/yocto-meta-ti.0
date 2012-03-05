@@ -1,33 +1,44 @@
-Return-Path: <denis@denix.org>
-Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
-	[206.46.173.7])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D00BE0044C
-	for <meta-ti@yoctoproject.org>; Mon,  5 Mar 2012 14:28:46 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M0F00CQLNRLH790@vms173007.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 05 Mar 2012 16:28:34 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 6C9CE2016E; Mon,
-	05 Mar 2012 17:28:33 -0500 (EST)
-Date: Mon, 05 Mar 2012 17:28:33 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-id: <20120305222833.GC2030@denix.org>
-References: <EF446FF9DAC93B479C74AB9153DE173F0C280116@SMUCM08V.europe.bmw.corp>
-	<alpine.DEB.2.02.1203050730440.30632@oneiric>
-	<EF446FF9DAC93B479C74AB9153DE173F0C2806AF@SMUCM08V.europe.bmw.corp>
-	<alpine.DEB.2.02.1203051138060.14598@oneiric>
-	<4F54ED21.9000208@mlbassoc.com> <20120305165844.GE14417@denix.org>
-	<alpine.DEB.2.02.1203051212100.15878@oneiric>
-	<AD1E46F4-9CEA-4FBA-AB1C-255FCD2E258A@dominion.thruhere.net>
-	<20120305202945.GA2030@denix.org>
-	<6BE145D6-6354-43CA-A8E9-4F06F92B8D7C@dominion.thruhere.net>
-MIME-version: 1.0
-In-reply-to: <6BE145D6-6354-43CA-A8E9-4F06F92B8D7C@dominion.thruhere.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Building Yocto for Pandaboard
+Return-Path: <jfabernathy@gmail.com>
+Received: from mail-vw0-f48.google.com (mail-vw0-f48.google.com
+	[209.85.212.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A4391E0044C
+	for <meta-ti@yoctoproject.org>; Mon,  5 Mar 2012 14:32:56 -0800 (PST)
+Received: by vbjk17 with SMTP id k17so5494528vbj.35
+	for <meta-ti@yoctoproject.org>; Mon, 05 Mar 2012 14:32:56 -0800 (PST)
+Received-SPF: pass (google.com: domain of jfabernathy@gmail.com designates
+	10.52.88.103 as permitted sender) client-ip=10.52.88.103; 
+Authentication-Results: mr.google.com;
+	spf=pass (google.com: domain of jfabernathy@gmail.com
+	designates 10.52.88.103 as permitted sender)
+	smtp.mail=jfabernathy@gmail.com;
+	dkim=pass header.i=jfabernathy@gmail.com
+Received: from mr.google.com ([10.52.88.103])
+	by 10.52.88.103 with SMTP id bf7mr38981345vdb.72.1330986776000
+	(num_hops = 1); Mon, 05 Mar 2012 14:32:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=y+zM+ORqjTYkl6ITPrBtBbZPc3EvUMXMO94k5tpsVjs=;
+	b=BoBLbq251Gv7JaACpTAooAixfo0mGUk9rx8/uRzFX6ecUv5PsNRRjgG542tJo8KNIq
+	PyzLcwurQwlqQFi/lUiJ4kSxx01KptzBEY3XtYWfFQJU4/iE1pfpk6SVlGUGW/cKXyF7
+	cxh0XDEf11Pg7PI7osWLZJVFIAMvNQvHmfKnOuG0BQv3eGZhmkKrGezcmetL8U/5ef+w
+	EQ07VY20gEYLM6fSMNZdByhFpsainlMYzgeNcEpaZJ9354fPi4GoEQHOYZx5iWcKnmB/
+	829t8t3Ch3e9u3KLdTyu4fi61mCD/kGKC8PcAexoOfjA2WUkYTJ0b9EMveKn+Z9mleQb
+	zuDw==
+Received: by 10.52.88.103 with SMTP id bf7mr33352705vdb.72.1330986775801;
+	Mon, 05 Mar 2012 14:32:55 -0800 (PST)
+Received: from [10.0.1.54] (nc-184-3-49-18.dhcp.embarqhsd.net. [184.3.49.18])
+	by mx.google.com with ESMTPS id
+	d7sm27240813vdu.15.2012.03.05.14.32.55 (version=SSLv3 cipher=OTHER);
+	Mon, 05 Mar 2012 14:32:55 -0800 (PST)
+Message-ID: <4F553F17.8000602@gmail.com>
+Date: Mon, 05 Mar 2012 17:32:55 -0500
+From: jfabernathy <jfabernathy@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.2) Gecko/20120216 Thunderbird/10.0.2
+MIME-Version: 1.0
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: building for OE pandaboard with angstrom
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,38 +50,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2012 22:28:46 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 05 Mar 2012 22:32:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 05, 2012 at 09:31:30PM +0100, Koen Kooi wrote:
-> 
-> Op 5 mrt. 2012, om 21:29 heeft Denys Dmytriyenko het volgende geschreven:
-> 
-> > On Mon, Mar 05, 2012 at 06:15:54PM +0100, Koen Kooi wrote:
-> >> 
-> >>>>> Yes, you'll also get a newer kernel (3.0.2 last I looked, not 2.6.35)
-> >>>> 
-> >>>> FYI, there is already 3.1 for Panda in meta-ti with -1 D_P...
-> >>> 
-> >>> ok, i can see the new content and i just pulled into meta-ti and
-> >>> meta-openembedded.  so, starting all over again, is there now a
-> >>> known recipe for building for the panda with a minimum of
-> >>> customziation?
-> >> 
-> >> Yes, use the setup-scripts mentioned in the wiki, zero customization needed.
-> > 
-> > Anyone else is seeing this on Panda's 3.1 kernel in do_install? Using GNU make 
-> > 3.82, but seems SECONDEXPANSION with PHONY rules don't work...
-> 
-> I'm seeing it on my fedora machines, but not in my debian machines. Tweaking 
-> the defconfig usually helps
+Since the README says that to get the complete features of the 
+pandaboard you need to follow the instructions at the angstrom link 
+provided, I tried that.  The console-image builds and boots, but the 
+systemd-gnome-image fails on a do_fetch.  Error message is below:
 
-Koen,
+| ERROR: Function failed: Fetcher failure for URL: 
+'ftp://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20111211.tar.gz'. 
+Checksum mismatch!
+| File: 
+'/home/jim/poky/setup-scripts/sources/downloads/ca-certificates_20111211.tar.gz' 
+has md5 checksum 1047c5bb332e96cac982b2eaf76e84f7 when 
+f99a90a91b23338b4df765c0d18eba73 was expected
+| File: 
+'/home/jim/poky/setup-scripts/sources/downloads/ca-certificates_20111211.tar.gz' 
+has sha256 checksum 
+73b8d9f14bd08da79cb2bbb6e8ec3c4de23f2213a2c25fbe07b720dbfc852d73 when 
+6f0633136d17ffef3ed0adfb171a00136a320f0fd79c9c75733ac02662a754a7 was 
+expected
+NOTE: package ca-certificates-20111211-r0: task do_fetch: Failed
+ERROR: Task 3064 
+(/home/jim/poky/setup-scripts/sources/meta-openembedded/meta-oe/recipes-support/ca-certificates/ca-certificates_20111211.bb, 
+do_fetch) failed with exit code '1'
 
-Can you please test if the patch I just sent fixes the issue for your Fedora, 
-but doesn't break your Debian builds? Thanks.
-
--- 
-Denys
 
