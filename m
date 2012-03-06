@@ -1,31 +1,30 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7E5BBE0132F
-	for <meta-ti@yoctoproject.org>; Tue,  6 Mar 2012 05:54:29 -0800 (PST)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 27803F81276; Tue,  6 Mar 2012 06:54:28 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 2F613F81208;
-	Tue,  6 Mar 2012 06:54:24 -0700 (MST)
-Message-ID: <4F561710.7090903@mlbassoc.com>
-Date: Tue, 06 Mar 2012 06:54:24 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
+Return-Path: <wmills@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8C1E4E0132F
+	for <meta-ti@yoctoproject.org>; Tue,  6 Mar 2012 06:08:20 -0800 (PST)
+Received: from dlep26.itg.ti.com ([157.170.170.121])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q26E8JAN016157;
+	Tue, 6 Mar 2012 08:08:19 -0600
+Received: from DLEE74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q26E8JNa014813;
+	Tue, 6 Mar 2012 08:08:19 -0600 (CST)
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Tue, 6 Mar 2012 08:08:19 -0600
+Received: from gtwmills.gt.design.ti.com (gtwmills.gt.design.ti.com
+	[158.218.100.52])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
+	q26E8ILw029435;	Tue, 6 Mar 2012 08:08:18 -0600
+Message-ID: <4F561A52.5090209@ti.com>
+Date: Tue, 6 Mar 2012 09:08:18 -0500
+From: William Mills <wmills@ti.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.18) Gecko/20110617 Thunderbird/3.1.11
 MIME-Version: 1.0
-To: Koen Kooi <koen@dominion.thruhere.net>
-References: <4F560422.8050405@mlbassoc.com>
-	<CA+2YH7uxmj86FdEbqmbrOD-W1Rii09PRhDjJ8HhoW7t20wSWDg@mail.gmail.com>
-	<4F5612AD.5040005@mlbassoc.com>
-	<CA68B4BE-E86B-4EFA-B103-65B5B6DF5F39@dominion.thruhere.net>
-In-Reply-To: <CA68B4BE-E86B-4EFA-B103-65B5B6DF5F39@dominion.thruhere.net>
+To: Denys Dmytriyenko <denis@denix.org>
+References: <20120306005241.GF2030@denix.org>
+In-Reply-To: <20120306005241.GF2030@denix.org>
 Cc: meta-ti@yoctoproject.org
-Subject: Re: meta-ti vs meta-texasinstruments
+Subject: Re: Fw: OpenEmbbedded as a test suite next steps
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,43 +36,23 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 13:54:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 06 Mar 2012 14:08:20 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 2012-03-06 06:39, Koen Kooi wrote:
->
-> Op 6 mrt. 2012, om 14:35 heeft Gary Thomas het volgende geschreven:
->
->> On 2012-03-06 06:19, Enrico wrote:
->>> On Tue, Mar 6, 2012 at 1:33 PM, Gary Thomas<gary@mlbassoc.com>   wrote:
->>>> Why are there two layers, each seemingly providing support for
->>>> TI products (boards, tools, etc)?  They have a great overlap,
->>>> but many differences...
->>>>
->>>> Shouldn't there only be one such layer?  As is, the meta-texasinstruments
->>>> one seems to be rather out of date, but I'm not sure.
->>>
->>> url of these layers? Maybe it's just an old reference in your setup
->>> that is not getting updated (previously it was called
->>> meta-texasinstruments and then it became meta-ti).
->>
->> Indeed, the meta-texasinstruments one may just be left over chaff.
->>
->> That said, where is u-boot-fw-utils (assuming not meta-texasinstruments)?
->
-> Hmm, let's look at the README and the layers it lists as requirements and take the first one, oe-core:
->
-> http://cgit.openembedded.org/openembedded-core/commit/?id=4a2543c0641f1df6d74c18cfe0c3ac3cfd50e60c
 
-Which was missed by my simple search of "fw-utils" _inside_ the recipes, not
-the recipe names themselves.
+On 03/05/2012 07:52 PM, Denys Dmytriyenko wrote:
+> All,
+>
+> Early planning stages of what's going to be a meta-linaro toolchain layer for
+> OE-Core/Yocto. Interesting stuff, we should probably pitch in for some of the
+> items there, that we can help with - such as selection of the platforms with
+> recent kernels and possibly cloud builds... Any thoughts?
+>
 
-Thanks
+Yes, absolutely, I do indeed concur wholeheartedly!
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+I was about to suggest that for kernel they just target the qemu arm 
+machine.  Does oe-core treat that as armv7?
+
 
