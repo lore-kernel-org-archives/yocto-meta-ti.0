@@ -1,43 +1,27 @@
-Return-Path: <ebutera@gmail.com>
-Received: from mail-vw0-f48.google.com (mail-vw0-f48.google.com
-	[209.85.212.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D3B17E0070C
-	for <meta-ti@yoctoproject.org>; Tue,  6 Mar 2012 05:19:17 -0800 (PST)
-Received: by vbjk17 with SMTP id k17so6157474vbj.35
-	for <meta-ti@yoctoproject.org>; Tue, 06 Mar 2012 05:19:17 -0800 (PST)
-Received-SPF: pass (google.com: domain of ebutera@gmail.com designates
-	10.52.93.18 as permitted sender) client-ip=10.52.93.18; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of ebutera@gmail.com
-	designates 10.52.93.18 as permitted sender)
-	smtp.mail=ebutera@gmail.com;
-	dkim=pass header.i=ebutera@gmail.com
-Received: from mr.google.com ([10.52.93.18])
-	by 10.52.93.18 with SMTP id cq18mr41328832vdb.40.1331039957179
-	(num_hops = 1); Tue, 06 Mar 2012 05:19:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=AlcdHX/clWEzv1umsFjSaKn6Tr7bSOnNZvgXHIml0BE=;
-	b=QK5p7EzgNDwhGRmMsNWREQNgCuCBaD2fPTeiFuN6QwPN7/c1hSL4LcU7FSDpzVgDGr
-	wINrzKQFrqDWpX3UoWtZCp1nANMCECPGJ3dv5oBsFQO+/rGQ/ugwsJdusrwxZ7SOBy7y
-	ETaD+jtPEkmZNZZv1KOkD9+/09gfwnqbxZGdnqq7Tt7rdte3vqxbKi+yQNnRG27/Bjx1
-	lq1LmOJ6DYiB0ZymPjTzbNRym4ptCYY6OYtjFE0a0SRWXFSKsKjsOu76qwQckI6b2daD
-	cpc5oxBwlrB8r85F1wo/NjaTJMj2wrSFH0HL8r1z0s3bGBxcmd5Hmmmz36QW/Q5GwbPt
-	mIkg==
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0C21E0132F
+	for <meta-ti@yoctoproject.org>; Tue,  6 Mar 2012 05:35:43 -0800 (PST)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 5B80FF81274; Tue,  6 Mar 2012 06:35:42 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 50628F81208;
+	Tue,  6 Mar 2012 06:35:41 -0700 (MST)
+Message-ID: <4F5612AD.5040005@mlbassoc.com>
+Date: Tue, 06 Mar 2012 06:35:41 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
 MIME-Version: 1.0
-Received: by 10.52.93.18 with SMTP id cq18mr35300239vdb.40.1331039957092; Tue,
-	06 Mar 2012 05:19:17 -0800 (PST)
-Sender: ebutera@gmail.com
-Received: by 10.220.157.70 with HTTP; Tue, 6 Mar 2012 05:19:17 -0800 (PST)
-In-Reply-To: <4F560422.8050405@mlbassoc.com>
+To: Enrico <ebutera@users.berlios.de>
 References: <4F560422.8050405@mlbassoc.com>
-Date: Tue, 6 Mar 2012 14:19:17 +0100
-X-Google-Sender-Auth: ExXDIkjzQlpU2r--1FElK8DSYiQ
-Message-ID: <CA+2YH7uxmj86FdEbqmbrOD-W1Rii09PRhDjJ8HhoW7t20wSWDg@mail.gmail.com>
-From: Enrico <ebutera@users.berlios.de>
-To: Gary Thomas <gary@mlbassoc.com>
+	<CA+2YH7uxmj86FdEbqmbrOD-W1Rii09PRhDjJ8HhoW7t20wSWDg@mail.gmail.com>
+In-Reply-To: <CA+2YH7uxmj86FdEbqmbrOD-W1Rii09PRhDjJ8HhoW7t20wSWDg@mail.gmail.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: meta-ti vs meta-texasinstruments
 X-BeenThere: meta-ti@yoctoproject.org
@@ -51,22 +35,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 13:19:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 06 Mar 2012 13:35:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 6, 2012 at 1:33 PM, Gary Thomas <gary@mlbassoc.com> wrote:
-> Why are there two layers, each seemingly providing support for
-> TI products (boards, tools, etc)? =A0They have a great overlap,
-> but many differences...
+On 2012-03-06 06:19, Enrico wrote:
+> On Tue, Mar 6, 2012 at 1:33 PM, Gary Thomas<gary@mlbassoc.com>  wrote:
+>> Why are there two layers, each seemingly providing support for
+>> TI products (boards, tools, etc)?  They have a great overlap,
+>> but many differences...
+>>
+>> Shouldn't there only be one such layer?  As is, the meta-texasinstruments
+>> one seems to be rather out of date, but I'm not sure.
 >
-> Shouldn't there only be one such layer? =A0As is, the meta-texasinstrumen=
-ts
-> one seems to be rather out of date, but I'm not sure.
+> url of these layers? Maybe it's just an old reference in your setup
+> that is not getting updated (previously it was called
+> meta-texasinstruments and then it became meta-ti).
 
-url of these layers? Maybe it's just an old reference in your setup
-that is not getting updated (previously it was called
-meta-texasinstruments and then it became meta-ti).
+Indeed, the meta-texasinstruments one may just be left over chaff.
 
-Enrico
+That said, where is u-boot-fw-utils (assuming not meta-texasinstruments)?
+A quick find in angstrom/sources shows
+   ./meta-ti/recipes-bsp/u-boot/u-boot_2011.12.bb:RRECOMMENDS_${PN}_beagleboard = "u-boot-fw-utils"
+   ./meta-ti/recipes-bsp/u-boot/u-boot_git.bb:RRECOMMENDS_${PN}_omap3-touchbook = "u-boot-fw-utils"
+
+   ./meta-texasinstruments/recipes-bsp/u-boot/u-boot.inc:PACKAGES += "${PN}-fw-utils"
+   ./meta-texasinstruments/recipes-bsp/u-boot/u-boot.inc:FILES_${PN}-fw-utils = "${sysconfdir} ${base_sbindir}"
+
+   ./meta-openpandora/recipes-bsp/u-boot/u-boot.inc:PACKAGES += "${PN}-fw-utils"
+   ./meta-openpandora/recipes-bsp/u-boot/u-boot.inc:FILES_${PN}-fw-utils = "${sysconfdir} ${base_sbindir}"
+   ./meta-openpandora/recipes-bsp/u-boot/u-boot.inc:INSANE_SKIP_${PN}-fw-utils = True
+
+   ./meta-efikamx/recipes-bsp/u-boot/u-boot.inc:PACKAGES += "${PN}-fw-utils"
+   ./meta-efikamx/recipes-bsp/u-boot/u-boot.inc:FILES_${PN}-fw-utils = "${sysconfdir} ${base_sbindir}"
+   ./meta-efikamx/recipes-bsp/u-boot/u-boot.inc:INSANE_SKIP_${PN}-fw-utils = "1"
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
