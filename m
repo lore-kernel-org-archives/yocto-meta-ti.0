@@ -1,42 +1,33 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
-	[209.85.214.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 66A35E0044D
-	for <meta-ti@yoctoproject.org>; Mon,  5 Mar 2012 17:29:36 -0800 (PST)
-Received: by bkcji17 with SMTP id ji17so5487303bkc.35
-	for <meta-ti@yoctoproject.org>; Mon, 05 Mar 2012 17:29:35 -0800 (PST)
-Received-SPF: pass (google.com: domain of b.hutchman@gmail.com designates
-	10.204.157.145 as permitted sender) client-ip=10.204.157.145; 
-Authentication-Results: mr.google.com;
-	spf=pass (google.com: domain of b.hutchman@gmail.com
-	designates 10.204.157.145 as permitted sender)
-	smtp.mail=b.hutchman@gmail.com;
-	dkim=pass header.i=b.hutchman@gmail.com
-Received: from mr.google.com ([10.204.157.145])
-	by 10.204.157.145 with SMTP id b17mr2650704bkx.112.1330997375165
-	(num_hops = 1); Mon, 05 Mar 2012 17:29:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=AFC0/MsUejCTXzEAjPiK+6A9RoD+hcAx+Ruj2XLCRFk=;
-	b=MJh2SGYaq2+zRRDEThf8QpV8Luetrk8uXBv08QhMy4nwOmj+0SbH0SSFmKJf17orEQ
-	05KY7zGCFK/0ofRMyFNlkKUF2DO2u52pmiKDFr7qrcaiYjm9hw74BIFbNknXM4bdJvhe
-	E6Zkj2w9ZUiApzAdhPHlHLL5O+FGr+CIdjPtP96WWVJPa3mOd4nwamnqB64Bww/XuANq
-	DZhCaOE4iLCqo4ej5M+k48UDfqkhKbBc5pgc+q8k2zCcPCc9yMW6NDueMIimakt21psc
-	GjEusCvp6doMK/s/YGKSErzi44jd5hSsRQSkeJe5p2H4h+l5aPTJjQoFU1TKEKzwrtyU
-	Bwlg==
-MIME-Version: 1.0
-Received: by 10.204.157.145 with SMTP id b17mr2033072bkx.112.1330997375066;
-	Mon, 05 Mar 2012 17:29:35 -0800 (PST)
-Received: by 10.204.229.198 with HTTP; Mon, 5 Mar 2012 17:29:35 -0800 (PST)
-In-Reply-To: <20120306005241.GF2030@denix.org>
-References: <20120306005241.GF2030@denix.org>
-Date: Mon, 5 Mar 2012 20:29:35 -0500
-Message-ID: <CAFZh4h9Xv8UKxcPe-N-Wa+yqi_qd504nx2fpAhXE5ZawFgUrMQ@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <denis@denix.org>
+Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
+	[206.46.173.7])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B3D1E0044D
+	for <meta-ti@yoctoproject.org>; Mon,  5 Mar 2012 17:39:39 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M0F00176WLID1G0@vms173007.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 05 Mar 2012 19:39:20 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id BCEFE20264; Mon,
+	05 Mar 2012 20:39:18 -0500 (EST)
+Date: Mon, 05 Mar 2012 20:39:18 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-id: <20120306013918.GG2030@denix.org>
+References: <alpine.DEB.2.02.1203050730440.30632@oneiric>
+	<EF446FF9DAC93B479C74AB9153DE173F0C2806AF@SMUCM08V.europe.bmw.corp>
+	<alpine.DEB.2.02.1203051138060.14598@oneiric>
+	<4F54ED21.9000208@mlbassoc.com> <20120305165844.GE14417@denix.org>
+	<alpine.DEB.2.02.1203051212100.15878@oneiric>
+	<AD1E46F4-9CEA-4FBA-AB1C-255FCD2E258A@dominion.thruhere.net>
+	<20120305202945.GA2030@denix.org>
+	<6BE145D6-6354-43CA-A8E9-4F06F92B8D7C@dominion.thruhere.net>
+	<20120305222833.GC2030@denix.org>
+MIME-version: 1.0
+In-reply-to: <20120305222833.GC2030@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: Fw: OpenEmbbedded as a test suite next steps
+Subject: Re: Building Yocto for Pandaboard
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,16 +39,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 01:29:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 06 Mar 2012 01:39:39 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Mon, Mar 5, 2012 at 7:52 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> We're starting with GCC and need a kernel to supply headers and to
-> boot some type of ARMv7 image.
+On Mon, Mar 05, 2012 at 05:28:33PM -0500, Denys Dmytriyenko wrote:
+> On Mon, Mar 05, 2012 at 09:31:30PM +0100, Koen Kooi wrote:
+> > 
+> > Op 5 mrt. 2012, om 21:29 heeft Denys Dmytriyenko het volgende geschreven:
+> > 
+> > > On Mon, Mar 05, 2012 at 06:15:54PM +0100, Koen Kooi wrote:
+> > >> 
+> > >>>>> Yes, you'll also get a newer kernel (3.0.2 last I looked, not 2.6.35)
+> > >>>> 
+> > >>>> FYI, there is already 3.1 for Panda in meta-ti with -1 D_P...
+> > >>> 
+> > >>> ok, i can see the new content and i just pulled into meta-ti and
+> > >>> meta-openembedded.  so, starting all over again, is there now a
+> > >>> known recipe for building for the panda with a minimum of
+> > >>> customziation?
+> > >> 
+> > >> Yes, use the setup-scripts mentioned in the wiki, zero customization needed.
+> > > 
+> > > Anyone else is seeing this on Panda's 3.1 kernel in do_install? Using GNU make 
+> > > 3.82, but seems SECONDEXPANSION with PHONY rules don't work...
+> > 
+> > I'm seeing it on my fedora machines, but not in my debian machines. Tweaking 
+> > the defconfig usually helps
+> 
+> Koen,
+> 
+> Can you please test if the patch I just sent fixes the issue for your Fedora, 
+> but doesn't break your Debian builds? Thanks.
 
-I have 3 different ARMv7 platforms I can use to test against if needed :)
+My testing so far:
 
-Regards,
+I see the previously mentioned breakage on my up-to-date Gentoo system with 
+make 3.82, but it works w/o any problems on Ubuntu 10.04 with make 3.81.
 
-Brian
+After applying the patch I sent to the list, the breakage on Gentoo is gone 
+and Ubuntu still builds fine.
+
+I'd wait for now for any other confirmations or onjections before pushing it 
+to meta-ti master. Thanks.
+
+-- 
+Denys
 
