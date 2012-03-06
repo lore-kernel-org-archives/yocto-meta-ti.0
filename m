@@ -1,30 +1,25 @@
 Return-Path: <gary@mlbassoc.com>
 Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B8E7EE0070C
-	for <meta-ti@yoctoproject.org>; Tue,  6 Mar 2012 03:57:26 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B2C08E0070C
+	for <meta-ti@yoctoproject.org>; Tue,  6 Mar 2012 04:33:39 -0800 (PST)
 Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 639EEF8121F; Tue,  6 Mar 2012 04:57:26 -0700 (MST)
+	id 6A8A7F81233; Tue,  6 Mar 2012 05:33:39 -0700 (MST)
 X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
 	hermes.chez-thomas.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
+	autolearn=ham version=3.3.2
 Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 21D56F81207;
-	Tue,  6 Mar 2012 04:57:22 -0700 (MST)
-Message-ID: <4F55FBA2.7020403@mlbassoc.com>
-Date: Tue, 06 Mar 2012 04:57:22 -0700
+	by mail.chez-thomas.org (Postfix) with ESMTP id 280E0F81207;
+	Tue,  6 Mar 2012 05:33:38 -0700 (MST)
+Message-ID: <4F560422.8050405@mlbassoc.com>
+Date: Tue, 06 Mar 2012 05:33:38 -0700
 From: Gary Thomas <gary@mlbassoc.com>
 User-Agent: Mozilla/5.0 (X11; Linux i686;
 	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
 MIME-Version: 1.0
-To: Jim Abernathy <jfabernathy@gmail.com>
-References: <4F553F17.8000602@gmail.com> <20120305225809.GE2030@denix.org>
-	<4F557675.8010207@gmail.com> <4F55F62D.3030304@mlbassoc.com>
-	<FA0761AB-98AD-41B1-9947-4F31B13B8BE0@gmail.com>
-In-Reply-To: <FA0761AB-98AD-41B1-9947-4F31B13B8BE0@gmail.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: building for OE pandaboard with angstrom
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: meta-ti vs meta-texasinstruments
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,60 +31,20 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 11:57:27 -0000
+X-List-Received-Date: Tue, 06 Mar 2012 12:33:39 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 2012-03-06 04:50, Jim Abernathy wrote:
-> Well I guess I didn't wait long enough. Apparently the first boot takes 15 minutes to completely boot to the login prompt.    I ignored the board and went back to email. And it got to a prompt eventually. I was expecting a GUI. After rebooting it came up to a GUI that looked like a gnome desktop. I still wonder about SD card differences and boot script for a Pandaboard vs. Beagleboard.
+Why are there two layers, each seemingly providing support for
+TI products (boards, tools, etc)?  They have a great overlap,
+but many differences...
 
-This is actually pretty common behaviour for Angstrom, at least
-the larger images (like systemd-gnome) - there's a lot of setup
-operations that have to be done on the board and they only happen
-the first boot.  Subsequent boots will not suffer from this.
+Shouldn't there only be one such layer?  As is, the meta-texasinstruments
+one seems to be rather out of date, but I'm not sure.
 
-> On Mar 6, 2012, at 6:34 AM, Gary Thomas<gary@mlbassoc.com>  wrote:
->
->> On 2012-03-05 19:29, jfabernathy wrote:
->>> On 03/05/2012 05:58 PM, Denys Dmytriyenko wrote:
->>>> On Mon, Mar 05, 2012 at 05:32:55PM -0500, jfabernathy wrote:
->>>>> Since the README says that to get the complete features of the
->>>>> pandaboard you need to follow the instructions at the angstrom link
->>>>> provided, I tried that. The console-image builds and boots, but the
->>>>> systemd-gnome-image fails on a do_fetch. Error message is below:
->>>>>
->>>>> | ERROR: Function failed: Fetcher failure for URL: 'ftp://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20111211.tar.gz'.
->>>>> Checksum mismatch!
->>>>> | File: '/home/jim/poky/setup-scripts/sources/downloads/ca-certificates_20111211.tar.gz'
->>>>> has md5 checksum 1047c5bb332e96cac982b2eaf76e84f7 when
->>>>> f99a90a91b23338b4df765c0d18eba73 was expected
->>>>> | File: '/home/jim/poky/setup-scripts/sources/downloads/ca-certificates_20111211.tar.gz'
->>>>> has sha256 checksum
->>>>> 73b8d9f14bd08da79cb2bbb6e8ec3c4de23f2213a2c25fbe07b720dbfc852d73
->>>>> when
->>>>> 6f0633136d17ffef3ed0adfb171a00136a320f0fd79c9c75733ac02662a754a7 was
->>>>> expected
->>>>> NOTE: package ca-certificates-20111211-r0: task do_fetch: Failed
->>>>> ERROR: Task 3064 (/home/jim/poky/setup-scripts/sources/meta-openembedded/meta-oe/recipes-support/ca-certificates/ca-certificates_20111211.bb,
->>>>> do_fetch) failed with exit code '1'
->>>> The main debian server no longer hosts 20111211 version of ca-certificates.
->>>> The update to the current 20120212 version is currently pending in meta-oe:
->>>>
->>>> http://thread.gmane.org/gmane.comp.handhelds.openembedded/50963
->>>>
->>>> Meanwhile you can locate the correct version of the tarball and place it in
->>>> your downloads/ directory...
->>>>
->>> I got the systemd-gnome-image to built this time, but the image does not completely boot. I followed the instruction in poky/README.hardware for Beagleboard to create the SDcard. I
->>> just took a chance that it would be close enough for Pandaboard. I'm guessing there are some changes to the instructions for Pandaboard. If true, where are they located??
->>
->> What do you mean "does not completely boot?"
->>
->> --
->> ------------------------------------------------------------
->> Gary Thomas                 |  Consulting for the
->> MLB Associates              |    Embedded world
->> ------------------------------------------------------------
+n.b. I stumbled across this while looking at the u-boot-fw-utils
+package which is referred to in meta-ti, but only created by
+meta-texasinstruments.
 
 -- 
 ------------------------------------------------------------
