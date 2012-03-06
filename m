@@ -1,28 +1,27 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0C21E0132F
-	for <meta-ti@yoctoproject.org>; Tue,  6 Mar 2012 05:35:43 -0800 (PST)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 5B80FF81274; Tue,  6 Mar 2012 06:35:42 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 50628F81208;
-	Tue,  6 Mar 2012 06:35:41 -0700 (MST)
-Message-ID: <4F5612AD.5040005@mlbassoc.com>
-Date: Tue, 06 Mar 2012 06:35:41 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
-MIME-Version: 1.0
-To: Enrico <ebutera@users.berlios.de>
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ww0-f54.google.com (mail-ww0-f54.google.com [74.125.82.54])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 74A51E0132F
+	for <meta-ti@yoctoproject.org>; Tue,  6 Mar 2012 05:39:09 -0800 (PST)
+Received: by wgbdq13 with SMTP id dq13so4197864wgb.11
+	for <meta-ti@yoctoproject.org>; Tue, 06 Mar 2012 05:39:08 -0800 (PST)
+Received: by 10.180.24.166 with SMTP id v6mr18730654wif.10.1331041148344;
+	Tue, 06 Mar 2012 05:39:08 -0800 (PST)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id d7sm79039815wiz.6.2012.03.06.05.39.07
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 06 Mar 2012 05:39:07 -0800 (PST)
+Mime-Version: 1.0 (Apple Message framework v1257)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <4F5612AD.5040005@mlbassoc.com>
+Date: Tue, 6 Mar 2012 14:39:03 +0100
+Message-Id: <CA68B4BE-E86B-4EFA-B103-65B5B6DF5F39@dominion.thruhere.net>
 References: <4F560422.8050405@mlbassoc.com>
 	<CA+2YH7uxmj86FdEbqmbrOD-W1Rii09PRhDjJ8HhoW7t20wSWDg@mail.gmail.com>
-In-Reply-To: <CA+2YH7uxmj86FdEbqmbrOD-W1Rii09PRhDjJ8HhoW7t20wSWDg@mail.gmail.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+	<4F5612AD.5040005@mlbassoc.com>
+To: meta-ti@yoctoproject.org
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQkydRyku3JgjUGPrwEbaW/NKQ82LG5ghksKY7kfvK1HxnaLfZeybQPgMYkw4TpY5nrAU5dx
 Subject: Re: meta-ti vs meta-texasinstruments
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -35,44 +34,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 13:35:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 06 Mar 2012 13:39:09 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On 2012-03-06 06:19, Enrico wrote:
-> On Tue, Mar 6, 2012 at 1:33 PM, Gary Thomas<gary@mlbassoc.com>  wrote:
->> Why are there two layers, each seemingly providing support for
->> TI products (boards, tools, etc)?  They have a great overlap,
->> but many differences...
->>
->> Shouldn't there only be one such layer?  As is, the meta-texasinstruments
->> one seems to be rather out of date, but I'm not sure.
->
-> url of these layers? Maybe it's just an old reference in your setup
-> that is not getting updated (previously it was called
-> meta-texasinstruments and then it became meta-ti).
 
-Indeed, the meta-texasinstruments one may just be left over chaff.
+Op 6 mrt. 2012, om 14:35 heeft Gary Thomas het volgende geschreven:
 
-That said, where is u-boot-fw-utils (assuming not meta-texasinstruments)?
-A quick find in angstrom/sources shows
-   ./meta-ti/recipes-bsp/u-boot/u-boot_2011.12.bb:RRECOMMENDS_${PN}_beagleboard = "u-boot-fw-utils"
-   ./meta-ti/recipes-bsp/u-boot/u-boot_git.bb:RRECOMMENDS_${PN}_omap3-touchbook = "u-boot-fw-utils"
+> On 2012-03-06 06:19, Enrico wrote:
+>> On Tue, Mar 6, 2012 at 1:33 PM, Gary Thomas<gary@mlbassoc.com>  =
+wrote:
+>>> Why are there two layers, each seemingly providing support for
+>>> TI products (boards, tools, etc)?  They have a great overlap,
+>>> but many differences...
+>>>=20
+>>> Shouldn't there only be one such layer?  As is, the =
+meta-texasinstruments
+>>> one seems to be rather out of date, but I'm not sure.
+>>=20
+>> url of these layers? Maybe it's just an old reference in your setup
+>> that is not getting updated (previously it was called
+>> meta-texasinstruments and then it became meta-ti).
+>=20
+> Indeed, the meta-texasinstruments one may just be left over chaff.
+>=20
+> That said, where is u-boot-fw-utils (assuming not =
+meta-texasinstruments)?
 
-   ./meta-texasinstruments/recipes-bsp/u-boot/u-boot.inc:PACKAGES += "${PN}-fw-utils"
-   ./meta-texasinstruments/recipes-bsp/u-boot/u-boot.inc:FILES_${PN}-fw-utils = "${sysconfdir} ${base_sbindir}"
+Hmm, let's look at the README and the layers it lists as requirements =
+and take the first one, oe-core:
 
-   ./meta-openpandora/recipes-bsp/u-boot/u-boot.inc:PACKAGES += "${PN}-fw-utils"
-   ./meta-openpandora/recipes-bsp/u-boot/u-boot.inc:FILES_${PN}-fw-utils = "${sysconfdir} ${base_sbindir}"
-   ./meta-openpandora/recipes-bsp/u-boot/u-boot.inc:INSANE_SKIP_${PN}-fw-utils = True
-
-   ./meta-efikamx/recipes-bsp/u-boot/u-boot.inc:PACKAGES += "${PN}-fw-utils"
-   ./meta-efikamx/recipes-bsp/u-boot/u-boot.inc:FILES_${PN}-fw-utils = "${sysconfdir} ${base_sbindir}"
-   ./meta-efikamx/recipes-bsp/u-boot/u-boot.inc:INSANE_SKIP_${PN}-fw-utils = "1"
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+=
+http://cgit.openembedded.org/openembedded-core/commit/?id=3D4a2543c0641f1d=
+f6d74c18cfe0c3ac3cfd50e60c=
 
