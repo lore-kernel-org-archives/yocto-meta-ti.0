@@ -1,24 +1,35 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ww0-f51.google.com (mail-ww0-f51.google.com [74.125.82.51])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 540F0E0044C
+Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
+	[74.125.82.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B408E0044C
 	for <meta-ti@lists.yoctoproject.org>;
-	Wed,  7 Mar 2012 00:36:29 -0800 (PST)
-Received: by wgbed3 with SMTP id ed3so4435513wgb.8
+	Wed,  7 Mar 2012 01:11:42 -0800 (PST)
+Received: by werm13 with SMTP id m13so4297420wer.26
 	for <meta-ti@lists.yoctoproject.org>;
-	Wed, 07 Mar 2012 00:36:28 -0800 (PST)
-Received: by 10.180.96.8 with SMTP id do8mr24181749wib.21.1331109387958;
-	Wed, 07 Mar 2012 00:36:27 -0800 (PST)
+	Wed, 07 Mar 2012 01:11:41 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=rolS7hON/XHGYuR3Di/bXx/3H/ZaTqVzizKvxoGcV9o=;
+	b=FQelbDFjnLGS4uGKPUy0/lAWW37+Yr5kypuXqLlv20Nw6MfFPGDAMe3CSrnAjI0UAA
+	HP3CZKZ90X3hP0B2di9TgyorlLytypCInEHL8vVm3u0qDOuTHb0fj9nSXGVWU0CQ/W7G
+	zkW3pzrzYztsTGp2g5+V4vIHFY3kCr9BEpSOgI3h3cZ+ZI245AP908KiVrMfSMcgqc5x
+	FyCHyKu1SlY8DZuUJl/CskB9BCBYBs5fguzOr8d/sSMxKGKj21x0h3dOcHVisusXlxmU
+	jmCoNuCOSfgOXrRQA9W7pRWHESZj3PGNMEWXK9AqiIDzZyKzCNMmbb9u6Zwg06nXi8Vj
+	5LuA==
+Received: by 10.216.135.234 with SMTP id u84mr541609wei.108.1331111501330;
+	Wed, 07 Mar 2012 01:11:41 -0800 (PST)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id gf3sm34230491wib.6.2012.03.07.00.36.26
+	by mx.google.com with ESMTPS id gf3sm34428439wib.6.2012.03.07.01.11.39
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 07 Mar 2012 00:36:27 -0800 (PST)
+	Wed, 07 Mar 2012 01:11:40 -0800 (PST)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@lists.yoctoproject.org
-Date: Wed,  7 Mar 2012 09:36:22 +0100
-Message-Id: <1331109382-24539-1-git-send-email-koen@dominion.thruhere.net>
+Date: Wed,  7 Mar 2012 10:11:27 +0100
+Message-Id: <1331111487-21170-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
-X-Gm-Message-State: ALoCoQkzXsHmpSg0c46eAg6cWak9jkQzjPBG99T8/YwbRhdZx4FPfZKCQJZqO3wXivUwlgLWm6mu
-Subject: [PATCH] linux-ti33x-psp 3.2: enable CONFIG_WATCHDOG_NOWAYOUT for beaglebone
+X-Gm-Message-State: ALoCoQl9pvSAUh4XYcbbYQPq7yXZmEvuWg7OmOKF55V5om+8T3sk7zhr+6RdpyZ1cs1jpx1i4pFE
+Subject: [PATCH] gadget init: don't dump info to info.txt on boot
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,41 +41,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2012 08:36:29 -0000
+X-List-Received-Date: Wed, 07 Mar 2012 09:11:42 -0000
+
+This script adds ~10s to the boot time, doesn't have error checking and prevents loading the storage gadget 3 out of 10 times.
+
+Remove it from ExecStartPre to get a fast, consistent boot. The functionality should be moved to bone101.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |    4 ++--
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/beagleboard/gadget-init.bb              |    2 +-
+ .../gadget-init/storage-gadget-init.service        |    1 -
+ 2 files changed, 1 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-index c5b80d1..782f52d 100644
---- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-@@ -1769,8 +1769,8 @@ CONFIG_SENSORS_W83627HF=m
- CONFIG_SENSORS_W83627EHF=m
- # CONFIG_THERMAL is not set
- CONFIG_WATCHDOG=y
--# CONFIG_WATCHDOG_CORE is not set
--# CONFIG_WATCHDOG_NOWAYOUT is not set
-+CONFIG_WATCHDOG_CORE=y
-+CONFIG_WATCHDOG_NOWAYOUT=y
+diff --git a/recipes-ti/beagleboard/gadget-init.bb b/recipes-ti/beagleboard/gadget-init.bb
+index 016877d..1a6a336 100644
+--- a/recipes-ti/beagleboard/gadget-init.bb
++++ b/recipes-ti/beagleboard/gadget-init.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Units to initialize usb gadgets"
  
- #
- # Watchdog Device Drivers
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index b2f706a..79a315a 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -11,7 +11,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
+-PR = "r18"
++PR = "r19"
  
- BRANCH = "v3.2-staging"
- SRCREV = "09e9651bcf2ee8d86685f2a8075bc6557b1d3b91"
--MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+diff --git a/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service b/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
+index 601e0d7..9a8513e 100644
+--- a/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
++++ b/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
+@@ -4,7 +4,6 @@ After=dev-mmcblk0p1.device
  
- COMPATIBLE_MACHINE = "(ti33x)"
+ [Service]
+ RemainAfterExit=yes
+-ExecStartPre=/usr/bin/update-image-info-on-mmcblk0p1.sh
+ ExecStart=/sbin/modprobe g_mass_storage file=/dev/mmcblk0p1 cdrom=0 stall=0 removable=1 nofua=1
+ ExecStop=/sbin/rmmod g_mass_storage
  
 -- 
 1.7.2.5
