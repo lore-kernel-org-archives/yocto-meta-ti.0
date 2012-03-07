@@ -1,25 +1,24 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F418BE004D2
-	for <meta-ti@yoctoproject.org>; Tue,  6 Mar 2012 07:02:58 -0800 (PST)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 6A7F5F81277; Tue,  6 Mar 2012 08:02:58 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 36FEAF8121F;
-	Tue,  6 Mar 2012 08:02:57 -0700 (MST)
-Message-ID: <4F562721.7010808@mlbassoc.com>
-Date: Tue, 06 Mar 2012 08:02:57 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
-MIME-Version: 1.0
-To: meta-ti@yoctoproject.org
-Subject: Can't build a working image
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ww0-f51.google.com (mail-ww0-f51.google.com [74.125.82.51])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 540F0E0044C
+	for <meta-ti@lists.yoctoproject.org>;
+	Wed,  7 Mar 2012 00:36:29 -0800 (PST)
+Received: by wgbed3 with SMTP id ed3so4435513wgb.8
+	for <meta-ti@lists.yoctoproject.org>;
+	Wed, 07 Mar 2012 00:36:28 -0800 (PST)
+Received: by 10.180.96.8 with SMTP id do8mr24181749wib.21.1331109387958;
+	Wed, 07 Mar 2012 00:36:27 -0800 (PST)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id gf3sm34230491wib.6.2012.03.07.00.36.26
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 07 Mar 2012 00:36:27 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: meta-ti@lists.yoctoproject.org
+Date: Wed,  7 Mar 2012 09:36:22 +0100
+Message-Id: <1331109382-24539-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+X-Gm-Message-State: ALoCoQkzXsHmpSg0c46eAg6cWak9jkQzjPBG99T8/YwbRhdZx4FPfZKCQJZqO3wXivUwlgLWm6mu
+Subject: [PATCH] linux-ti33x-psp 3.2: enable CONFIG_WATCHDOG_NOWAYOUT for beaglebone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,68 +30,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2012 15:02:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 07 Mar 2012 08:36:29 -0000
 
-I'll try this list since my questions on the Angstrom list seem
-to go mostly unanswered...
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |    4 ++--
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-Using a recent checkout (late 2012-03-05), building 100% from
-scratch, if I build
-   % MACHINE="beaglebone" bitbake systemd-image
-I get this when it [fails to] boot:
-
-   Starting Journal Service...
-   Failed to start Journal Service                                        [FAILED]
-   See 'systemctl status systemd-journald.service' for details.
-   Dependency failed. Aborted start of Serial Getty on ttyO0              [ ABORT]
-   Dependency failed. Aborted start of Getty on tty1                      [ ABORT]
-
-So I'm stuck - it won't come up no matter what I try and I can't
-check the logs because it doesn't come up...
-
-Any ideas what I've done wrong?
-
-OE Build Configuration:
-BB_VERSION        = "1.15.1"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "beaglebone"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "v2012.03-core"
-TUNE_FEATURES     = "armv7a vfp neon cortexa8"
-TARGET_FPU        = "vfp-neon"
-meta-angstrom     = "master:51ba0dd081af1d7de56ffc9fb318044bc3c7c47e"
-meta-oe
-meta-efl
-meta-gpe
-meta-gnome
-meta-xfce
-meta-initramfs    = "master:b5bb9a5b26d6a94d5b91aae2fae17d9b9ab6dfeb"
-meta-opie         = "master:efa3892b20a4ef80274e56e5633ebd62c16f9731"
-meta-java         = "master:d430de31c167cd264be74a1d82af4b732bb915dd"
-meta-mozilla      = "master:5737d9fa26a632a27b2aa760c0d01190f0a17d0e"
-meta-ti           = "master:43956e56dba61709a4b01bb4ed6c4a28cef19d30"
-meta-efikamx      = "master:2c09a3a780b23448e8a6ca964256ff7f5ccba65d"
-meta-nslu2        = "master:3d9fc951b05b4df476374b6fc3085ebac7f293ee"
-meta-htc
-meta-nokia
-meta-openmoko
-meta-palm         = "master:c38a39a29545b5488b77eb11d795ef5d77b46975"
-meta-handheld     = "master:fa1e6dcb524eb7ed29a6cd971a150d35c31e96e7"
-meta-intel
-meta-sugarbay
-meta-crownbay
-meta-emenlow
-meta-fishriver
-meta-jasperforest
-meta-n450         = "master:87f409827684e39484900a20531c8a14c0cb91e6"
-meta              = "master:d7b8c247227f3cc82f92292407f548927e9fde78"
-
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
+index c5b80d1..782f52d 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
+@@ -1769,8 +1769,8 @@ CONFIG_SENSORS_W83627HF=m
+ CONFIG_SENSORS_W83627EHF=m
+ # CONFIG_THERMAL is not set
+ CONFIG_WATCHDOG=y
+-# CONFIG_WATCHDOG_CORE is not set
+-# CONFIG_WATCHDOG_NOWAYOUT is not set
++CONFIG_WATCHDOG_CORE=y
++CONFIG_WATCHDOG_NOWAYOUT=y
+ 
+ #
+ # Watchdog Device Drivers
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index b2f706a..79a315a 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -11,7 +11,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
+ 
+ BRANCH = "v3.2-staging"
+ SRCREV = "09e9651bcf2ee8d86685f2a8075bc6557b1d3b91"
+-MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
+ 
+ COMPATIBLE_MACHINE = "(ti33x)"
+ 
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.7.2.5
+
 
