@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 58EA8E013A6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57B49E013A2
 	for <meta-ti@yoctoproject.org>; Wed,  7 Mar 2012 13:52:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0E2E952A5C; Wed,  7 Mar 2012 21:52:50 +0000 (UTC)
+	id E96BD529B6; Wed,  7 Mar 2012 21:52:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120307215251.0E2E952A5C@arago-project.org>
+Message-Id: <20120307215250.E96BD529B6@arago-project.org>
 Date: Wed,  7 Mar 2012 21:52:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : gadget init: don't dump info to info.txt on boot
+Subject: Koen Kooi : linux-ti33x-psp 3.2: enable CONFIG_WATCHDOG_NOWAYOUT for beaglebone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,52 +26,50 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ed29286f2b16b48206ba788f790c1082c7724bb0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ed29286f2b16b48206ba788f790c1082c7724bb0
+Commit: edc2621facf8147e02f7a3d929220106d5bd94db
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=edc2621facf8147e02f7a3d929220106d5bd94db
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Wed Mar  7 10:11:27 2012 +0100
+Date:   Wed Mar  7 09:36:22 2012 +0100
 
-gadget init: don't dump info to info.txt on boot
-
-This script adds ~10s to the boot time, doesn't have error checking and
-prevents loading the storage gadget 3 out of 10 times.
-
-Remove it from ExecStartPre to get a fast, consistent boot. The functionality
-should be moved to bone101.
+linux-ti33x-psp 3.2: enable CONFIG_WATCHDOG_NOWAYOUT for beaglebone
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/beagleboard/gadget-init.bb              |    2 +-
- .../gadget-init/storage-gadget-init.service        |    1 -
- 2 files changed, 1 insertions(+), 2 deletions(-)
+ .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |    4 ++--
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/beagleboard/gadget-init.bb b/recipes-ti/beagleboard/gadget-init.bb
-index 016877d..1a6a336 100644
---- a/recipes-ti/beagleboard/gadget-init.bb
-+++ b/recipes-ti/beagleboard/gadget-init.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Units to initialize usb gadgets"
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
+index c5b80d1..782f52d 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
+@@ -1769,8 +1769,8 @@ CONFIG_SENSORS_W83627HF=m
+ CONFIG_SENSORS_W83627EHF=m
+ # CONFIG_THERMAL is not set
+ CONFIG_WATCHDOG=y
+-# CONFIG_WATCHDOG_CORE is not set
+-# CONFIG_WATCHDOG_NOWAYOUT is not set
++CONFIG_WATCHDOG_CORE=y
++CONFIG_WATCHDOG_NOWAYOUT=y
  
--PR = "r18"
-+PR = "r19"
+ #
+ # Watchdog Device Drivers
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index b2f706a..79a315a 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -11,7 +11,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
  
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-diff --git a/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service b/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
-index 601e0d7..9a8513e 100644
---- a/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
-+++ b/recipes-ti/beagleboard/gadget-init/storage-gadget-init.service
-@@ -4,7 +4,6 @@ After=dev-mmcblk0p1.device
+ BRANCH = "v3.2-staging"
+ SRCREV = "09e9651bcf2ee8d86685f2a8075bc6557b1d3b91"
+-MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
  
- [Service]
- RemainAfterExit=yes
--ExecStartPre=/usr/bin/update-image-info-on-mmcblk0p1.sh
- ExecStart=/sbin/modprobe g_mass_storage file=/dev/mmcblk0p1 cdrom=0 stall=0 removable=1 nofua=1
- ExecStop=/sbin/rmmod g_mass_storage
+ COMPATIBLE_MACHINE = "(ti33x)"
  
 
 
