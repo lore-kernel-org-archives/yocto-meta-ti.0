@@ -1,28 +1,33 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 456E4E0030B
-	for <meta-ti@yoctoproject.org>; Thu,  8 Mar 2012 08:17:57 -0800 (PST)
-Received: by wibhq7 with SMTP id hq7so569269wib.35
-	for <meta-ti@yoctoproject.org>; Thu, 08 Mar 2012 08:17:56 -0800 (PST)
-Received: by 10.180.97.41 with SMTP id dx9mr9730302wib.9.1331223475919;
-	Thu, 08 Mar 2012 08:17:55 -0800 (PST)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id fb2sm45127278wid.3.2012.03.08.08.17.54
+Return-Path: <tom.rini@gmail.com>
+Received: from mail-iy0-f176.google.com (mail-iy0-f176.google.com
+	[209.85.210.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A186E0030B
+	for <meta-ti@yoctoproject.org>; Thu,  8 Mar 2012 11:34:08 -0800 (PST)
+Received: by iagw33 with SMTP id w33so1426952iag.35
+	for <meta-ti@yoctoproject.org>; Thu, 08 Mar 2012 11:34:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	bh=vhe4g+mt1Xzt0X2M5b3cMnGjtkh+Em03k3jEnYBjKmc=;
+	b=BTibaQgISyF7e5KQMJLaV9HWDK95JdsxwA2RTrIo52KjD4ihf8PnvDInhVYBNawx30
+	ad45pZ51bKcTeXvbimGv1QabLv1vcWpDjs09Z91DtC6PuSSinmxJGa/jhLiTbqeGpjnZ
+	NC/+bSfyrexbumEE7+vFuSqvBZMwuMMIzSvSSPTnHX1VwKp6BYTSXGMgnMyrCKOh2akh
+	Ntr2h9PtiEQghndK0UCD0nY2An315AK9oLs6OW6oNtH5pkGWDBACuLqeR5vJ1JHU+UdY
+	mdEtSu2iLYRpCzPcYZcHkOtT52zqQesEes7WaY4hdR6AQmX09mPcOxclfLB8ahV83oS8
+	sOGg==
+Received: by 10.50.154.132 with SMTP id vo4mr8453774igb.27.1331235247788;
+	Thu, 08 Mar 2012 11:34:07 -0800 (PST)
+Received: from localhost.localdomain (ip68-230-54-74.ph.ph.cox.net.
+	[68.230.54.74])
+	by mx.google.com with ESMTPS id mi10sm2419490igc.8.2012.03.08.11.34.06
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 08 Mar 2012 08:17:54 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1330986374-5746-1-git-send-email-denis@denix.org>
-Date: Thu, 8 Mar 2012 17:17:50 +0100
-Message-Id: <F760AE2B-53D2-4E8E-AA58-274F71CFC988@dominion.thruhere.net>
-References: <1330986374-5746-1-git-send-email-denis@denix.org>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQm8rBbcCBOaafzpK2bi0bSC+STVOkO7/c36yVR8pJYgGaZrdfAcRxbldFSMnIeWWiUa7Inb
-Cc: meta-ti@yoctoproject.org, Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [PATCH] linux-omap4 3.1.0: patch to workaround installing FW images w/o subdirs
+	Thu, 08 Mar 2012 11:34:06 -0800 (PST)
+Sender: Tom Rini <tom.rini@gmail.com>
+From: Tom Rini <trini@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Thu,  8 Mar 2012 12:34:00 -0700
+Message-Id: <1331235244-5173-1-git-send-email-trini@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH 0/4] IMAGE_FSTYPES fixes / improvements
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,26 +39,20 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Mar 2012 16:17:57 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 08 Mar 2012 19:34:08 -0000
 
+Hey all,
 
-Op 5 mrt. 2012, om 23:26 heeft Denys Dmytriyenko het volgende =
-geschreven:
+This short series does two things.  For 3 machines we fix a bug of using
+'?=' rather than '+=' for setting IMAGE_FSTYPES (these are all of the
+machines that have this issue today except for...) and on the 4th,
+am335x-evm we add UBI support as well.  On the first three, these are
+correct by inspection and on the fourth, I've written to and mounted
+systemd-image from NAND on my EVM (it didn't work as I was using a custom
+uImage that's not systemd-sane, and fixing that and confirming the config
+used here works is on my list).
 
-> From: Denys Dmytriyenko <denys@ti.com>
->=20
-> This fixes below error found on some distros (Gentoo and Fedora):
-> *** No rule to make target `lib/firmware/./', needed by =
-`lib/firmware/ti_3410.fw'.  Stop.
+-- 
+Tom
 
-A bit late, but:
-
-NOTE: package linux-omap4-3.1.0-r1a: task do_install: Started
-
-
-regards,
-
-Koen=
 
