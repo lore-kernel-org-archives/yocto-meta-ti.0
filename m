@@ -1,35 +1,25 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-iy0-f176.google.com (mail-iy0-f176.google.com
-	[209.85.210.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF902E00596
-	for <meta-ti@yoctoproject.org>; Thu,  8 Mar 2012 11:34:13 -0800 (PST)
-Received: by mail-iy0-f176.google.com with SMTP id w33so1426952iag.35
-	for <meta-ti@yoctoproject.org>; Thu, 08 Mar 2012 11:34:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=xE4HVmIyrQHeSBcL+/0x5giMhEaiFKtgmSE7PwVVDhs=;
-	b=RpahKt/BOCIW4Rg0uNahxUKKZ2WrMWqt4ZAi8cf1+YySUHCtXHfz03G9Wx3pPPw/yr
-	ALWZ0rPdsYNgV6xaFqwHNNAdc6uF6xbxTrbAcS8xNUsGz1XO+vEtkoH1xbwPXY/+rVvY
-	r/Fv/J2iLzU6APDQ0T/1SSxNwZpya4k6A4SY2qB2dgsG32tTH81uyDcyia1iFVyXTE53
-	TeG0U5Nq7+8bJfps2TB4xf7cl9JCofEY9+O+i7U92ddg1fyM/Nq6QoCRVCJooW50HEMm
-	nDQ8ENzS/63QMtOaVT7hV6Ryax9BUvvs5Q6BrKG91GCiMwgPyK7UaXGkWDJ7HR1IsTBG
-	fviw==
-Received: by 10.50.89.233 with SMTP id br9mr19045623igb.48.1331235251865;
-	Thu, 08 Mar 2012 11:34:11 -0800 (PST)
-Received: from localhost.localdomain (ip68-230-54-74.ph.ph.cox.net.
-	[68.230.54.74])
-	by mx.google.com with ESMTPS id mi10sm2419490igc.8.2012.03.08.11.34.10
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 08 Mar 2012 11:34:11 -0800 (PST)
-Sender: Tom Rini <tom.rini@gmail.com>
-From: Tom Rini <trini@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Thu,  8 Mar 2012 12:34:03 -0700
-Message-Id: <1331235244-5173-4-git-send-email-trini@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1331235244-5173-1-git-send-email-trini@ti.com>
+Return-Path: <denis@denix.org>
+Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
+	[206.46.173.7])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1A34E0030B
+	for <meta-ti@yoctoproject.org>; Thu,  8 Mar 2012 13:01:49 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M0L00GDO3QEEJO0@vms173007.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 08 Mar 2012 15:01:31 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id EB848200AA; Thu,
+	08 Mar 2012 16:01:25 -0500 (EST)
+Date: Thu, 08 Mar 2012 16:01:25 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Tom Rini <trini@ti.com>
+Message-id: <20120308210125.GE10587@denix.org>
 References: <1331235244-5173-1-git-send-email-trini@ti.com>
-Subject: [PATCH 3/4] omap3evm.conf: Use '+=' not '?=' in IMAGE_FSTYPES
+MIME-version: 1.0
+In-reply-to: <1331235244-5173-1-git-send-email-trini@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 0/4] IMAGE_FSTYPES fixes / improvements
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,27 +31,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Mar 2012 19:34:14 -0000
+X-List-Received-Date: Thu, 08 Mar 2012 21:01:49 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Signed-off-by: Tom Rini <trini@ti.com>
----
- conf/machine/omap3evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On Thu, Mar 08, 2012 at 12:34:00PM -0700, Tom Rini wrote:
+> Hey all,
+> 
+> This short series does two things.  For 3 machines we fix a bug of using
+> '?=' rather than '+=' for setting IMAGE_FSTYPES (these are all of the
+> machines that have this issue today except for...) and on the 4th,
+> am335x-evm we add UBI support as well.  On the first three, these are
+> correct by inspection and on the fourth, I've written to and mounted
+> systemd-image from NAND on my EVM (it didn't work as I was using a custom
+> uImage that's not systemd-sane, and fixing that and confirming the config
+> used here works is on my list).
 
-diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
-index 9cd04ed..16caf05 100644
---- a/conf/machine/omap3evm.conf
-+++ b/conf/machine/omap3evm.conf
-@@ -17,7 +17,7 @@ require conf/machine/include/omap3.inc
- 
- # Ship all kernel modules
- 
+All,
+
+Tom and I started talking on IRC and then decided to move the discussion back 
+to the mailing list for others to participate.
+
+So, basically, the proposal is to do this in our machine.conf files:
+
 -IMAGE_FSTYPES ?= "jffs2 tar.bz2"
 +IMAGE_FSTYPES += "jffs2 tar.bz2"
- EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
- 
- SERIAL_CONSOLE = "115200 ttyS0"
--- 
-1.7.0.4
 
+My response was that we shouldn't do that. The conf files that may set, append 
+or overwrite IMAGE_FSTYPES are parsed in the order of local.conf, machine.conf 
+and distro.conf. And if none of those set IMAGE_FSTYPES, bitbake.conf defaults 
+to a sane tar.gz. From end-user perspective, they expect the setting in their 
+local.conf to be obeyed. If they don't care and don't set IMAGE_FSTYPES, then 
+machine.conf will set it to supported values, i.e. jffs2 and tar.bz2 in our 
+case. Of course, distro has the last word and potentially can alter it, but in 
+most cases it shouldn't. That's how it works now and I believe it's the 
+correct behaviour. Changing it to append additional values to what user wants 
+is slightly heavy-handed, in my opinion. In other words, those are suggested 
+image types, not enforced ones.
+
+As Tom poined out, this is the same behaviour as currently used in OE-Core, 
+where qemu machines all have IMAGE_FSTYPES ?= "tar.bz2 ext3".
+
+The original issue in question may be coming from the way some setup scripts 
+pre-configure user settings in local.conf, defaulting IMAGE_FSTYPES to 
+something, that is not very suitable for the machines being used. This needs 
+to be left unset and for the end-user to decide and set specifically, IMHO.
+
+Comments, opinions?
+
+-- 
+Denys
 
