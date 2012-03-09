@@ -1,25 +1,35 @@
-Return-Path: <denis@denix.org>
-Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
-	[206.46.173.7])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1A34E0030B
-	for <meta-ti@yoctoproject.org>; Thu,  8 Mar 2012 13:01:49 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M0L00GDO3QEEJO0@vms173007.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 08 Mar 2012 15:01:31 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EB848200AA; Thu,
-	08 Mar 2012 16:01:25 -0500 (EST)
-Date: Thu, 08 Mar 2012 16:01:25 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Tom Rini <trini@ti.com>
-Message-id: <20120308210125.GE10587@denix.org>
-References: <1331235244-5173-1-git-send-email-trini@ti.com>
-MIME-version: 1.0
-In-reply-to: <1331235244-5173-1-git-send-email-trini@ti.com>
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-iy0-f176.google.com (mail-iy0-f176.google.com
+	[209.85.210.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F15FE0030B
+	for <meta-ti@yoctoproject.org>; Thu,  8 Mar 2012 22:04:26 -0800 (PST)
+Received: by iagw33 with SMTP id w33so2285213iag.35
+	for <meta-ti@yoctoproject.org>; Thu, 08 Mar 2012 22:04:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:mail-followup-to:mime-version
+	:content-type:content-disposition:user-agent;
+	bh=PZbW4jtbGmsEy5eWBWIWIw9LzjUJp6yBs2EODueS1pE=;
+	b=bqK0AdyP8AW3eD6i1BGA0N9BSNR/uKGBr48/ZC0m89FJoEzE75r69nHYL3xQIts6gB
+	v3q5jC4sdLUOkEGbv2pvpdD9Oig8WACLmYvdYum1OMKRt/gd56FmoQ5dc0FY4+n7oI4X
+	l/N4ksz2Bij+39cmulcDVNUEUS3Wt2Xk702x0my/qnOsZy0f8GMmIfw0Z7bJ60ZCHsQh
+	O6E5CsYaHeE8SOjUT2u4jWOZF+Qut9nFJDyYjlxjzZPik65Tz9EFlGlREJ8ujKmaN1Be
+	19OMZFmGW36ouHc8jWIVP1SR657v4uDtVEky0BTZdU0N5jH8VIGBtEIgsMa1+/VFzpq7
+	tFOQ==
+Received: by 10.43.53.1 with SMTP id vo1mr1429509icb.2.1331273066067;
+	Thu, 08 Mar 2012 22:04:26 -0800 (PST)
+Received: from sakrah.homelinux.org
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id cv10sm922376igc.13.2012.03.08.22.04.23
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 08 Mar 2012 22:04:24 -0800 (PST)
+Date: Thu, 8 Mar 2012 22:06:35 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: meta-ti@yoctoproject.org
+Message-ID: <20120309060635.GA10899@sakrah.homelinux.org>
+Mail-Followup-To: meta-ti@yoctoproject.org
+MIME-Version: 1.0
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 0/4] IMAGE_FSTYPES fixes / improvements
+Subject: u-boot build errors for beagleboard
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,54 +41,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Mar 2012 21:01:49 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 09 Mar 2012 06:04:26 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, Mar 08, 2012 at 12:34:00PM -0700, Tom Rini wrote:
-> Hey all,
-> 
-> This short series does two things.  For 3 machines we fix a bug of using
-> '?=' rather than '+=' for setting IMAGE_FSTYPES (these are all of the
-> machines that have this issue today except for...) and on the 4th,
-> am335x-evm we add UBI support as well.  On the first three, these are
-> correct by inspection and on the fourth, I've written to and mounted
-> systemd-image from NAND on my EVM (it didn't work as I was using a custom
-> uImage that's not systemd-sane, and fixing that and confirming the config
-> used here works is on my list).
+Hi 
 
-All,
+This is angstrom/oe-core combo has anyone seen these errors ?
+is there something bad in my env ? please let me know
 
-Tom and I started talking on IRC and then decided to move the discussion back 
-to the mailing list for others to participate.
+DISTRO=angstrom-2010.x MACHINE=beagleboard bitbake u-boot
 
-So, basically, the proposal is to do this in our machine.conf files:
-
--IMAGE_FSTYPES ?= "jffs2 tar.bz2"
-+IMAGE_FSTYPES += "jffs2 tar.bz2"
-
-My response was that we shouldn't do that. The conf files that may set, append 
-or overwrite IMAGE_FSTYPES are parsed in the order of local.conf, machine.conf 
-and distro.conf. And if none of those set IMAGE_FSTYPES, bitbake.conf defaults 
-to a sane tar.gz. From end-user perspective, they expect the setting in their 
-local.conf to be obeyed. If they don't care and don't set IMAGE_FSTYPES, then 
-machine.conf will set it to supported values, i.e. jffs2 and tar.bz2 in our 
-case. Of course, distro has the last word and potentially can alter it, but in 
-most cases it shouldn't. That's how it works now and I believe it's the 
-correct behaviour. Changing it to append additional values to what user wants 
-is slightly heavy-handed, in my opinion. In other words, those are suggested 
-image types, not enforced ones.
-
-As Tom poined out, this is the same behaviour as currently used in OE-Core, 
-where qemu machines all have IMAGE_FSTYPES ?= "tar.bz2 ext3".
-
-The original issue in question may be coming from the way some setup scripts 
-pre-configure user settings in local.conf, defaulting IMAGE_FSTYPES to 
-something, that is not very suitable for the machines being used. This needs 
-to be left unset and for the end-user to decide and set specifically, IMHO.
-
-Comments, opinions?
+ arm-angstrom-linux-gnueabi-objdump: 'board/ti/beagle/libbeagle.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'arch/arm/cpu/armv7/libarmv7.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'arch/arm/cpu/armv7/omap-common/libomap-common.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'arch/arm/cpu/armv7/omap3/libomap3.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'arch/arm/lib/libarm.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'common/libcommon.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'disk/libdisk.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/i2c/libi2c.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/misc/libmisc.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/mmc/libmmc.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/mtd/libmtd.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/mtd/nand/libnand.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/pcmcia/libpcmcia.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/power/libpower.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/rtc/librtc.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/serial/libserial.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/spi/libspi.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/usb/eth/libusb_eth.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/usb/gadget/libusb_gadget.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/usb/host/libusb_host.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/usb/musb/libusb_musb.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/usb/phy/libusb_phy.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'drivers/video/libvideo.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'fs/ext2/libext2fs.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'fs/fat/libfat.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'fs/jffs2/libjffs2.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'lib/libfdt/libfdt.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'lib/libgeneric.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'lib/zlib/libz.o': No such file
+| arm-angstrom-linux-gnueabi-objdump: 'net/libnet.o': No such file
+| arm-angstrom-linux-gnueabi-ld: arch/arm/cpu/armv7/libarmv7.o: No such file: No such file or directory
+| make: *** [u-boot] Error 1
+| ERROR: oe_runmake failed
+NOTE: package u-boot-2011.12-r5: task do_compile: Failed
+ERROR: Task 7 (/home/kraj/work/angstrom/sources/meta-ti/recipes-bsp/u-boot/u-boot_2011.12.bb, do_compile) failed with exit code '1'
 
 -- 
-Denys
+-Khem
 
