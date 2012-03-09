@@ -1,27 +1,40 @@
-Return-Path: <denis@denix.org>
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A796E013A3
-	for <meta-ti@yoctoproject.org>; Fri,  9 Mar 2012 07:02:20 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173021.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M0M00KZ3HR8LY80@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 09 Mar 2012 09:01:56 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 423C2200C6; Fri,
-	09 Mar 2012 10:01:56 -0500 (EST)
-Date: Fri, 09 Mar 2012 10:01:56 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <tom.rini@gmail.com>
+Received: from mail-iy0-f176.google.com (mail-iy0-f176.google.com
+	[209.85.210.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C2C45E013A3
+	for <meta-ti@yoctoproject.org>; Fri,  9 Mar 2012 07:54:19 -0800 (PST)
+Received: by iagw33 with SMTP id w33so3044805iag.35
+	for <meta-ti@yoctoproject.org>; Fri, 09 Mar 2012 07:54:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=FoWJI9b8V0BNo47jUFQ4eusxvRwEt6R1fmRbq1iY0xg=;
+	b=qp4+6XRfrXHcPUgtz0CfdM9XLrgHoGgf4UD2h2nvr0JPY1b490avcYMgPyWB3B6PDc
+	RBteWUZje2/Rmu2ZMIAcxcgHiaNVZ9vmgN8cBsuj/XlpLhqntIv69OBINW1KpP+0D7mo
+	Mf5LlYyKeJ/HqROhfIVuXX1ho8vS0ZLDvDYCdXFRIZ795hgb3IWwFwz7TD7bO83sgly3
+	m3fYecogrR86RCY49sJqTfY+Df6pvtBqAaRq3miDOpp6TPbBi6Z8BlX76733bJh9Hi1m
+	D8f2NErXaObLj+FduwO2drqFhI5u+Se0Oem2VvjZy5DfxFTSwLqOpQqNUzPf14mUY2BC
+	5vNw==
+Received: by 10.50.76.163 with SMTP id l3mr4083244igw.10.1331308459445;
+	Fri, 09 Mar 2012 07:54:19 -0800 (PST)
+Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
+	by mx.google.com with ESMTPS id vb4sm2224209igc.10.2012.03.09.07.54.17
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 09 Mar 2012 07:54:18 -0800 (PST)
+Sender: Tom Rini <tom.rini@gmail.com>
+Date: Fri, 9 Mar 2012 08:54:19 -0700
+From: Tom Rini <trini@ti.com>
 To: Koen Kooi <koen@dominion.thruhere.net>
-Message-id: <20120309150156.GA27573@denix.org>
+Message-ID: <20120309155419.GA11879@bill-the-cat>
 References: <1331235244-5173-1-git-send-email-trini@ti.com>
-	<20120308210125.GE10587@denix.org>
-	<EEF3E563-5B95-4864-ACB7-85101641A086@dominion.thruhere.net>
-MIME-version: 1.0
-In-reply-to: <EEF3E563-5B95-4864-ACB7-85101641A086@dominion.thruhere.net>
+	<1331235244-5173-5-git-send-email-trini@ti.com>
+	<C56154A0-7259-4B52-92BE-C29433260320@dominion.thruhere.net>
+MIME-Version: 1.0
+In-Reply-To: <C56154A0-7259-4B52-92BE-C29433260320@dominion.thruhere.net>
+Organization: Texas Instruments
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Tom Rini <trini@ti.com>, meta-ti@yoctoproject.org
-Subject: Re: [PATCH 0/4] IMAGE_FSTYPES fixes / improvements
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 4/4] am335x-evm.conf: Add 'ubi' to IMAGE_FSTYPES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,81 +46,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2012 15:02:20 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 09 Mar 2012 15:54:19 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, Mar 09, 2012 at 07:20:30AM +0100, Koen Kooi wrote:
+On Fri, Mar 09, 2012 at 07:16:22AM +0100, Koen Kooi wrote:
 > 
-> Op 8 mrt. 2012, om 22:01 heeft Denys Dmytriyenko het volgende geschreven:
+> Op 8 mrt. 2012, om 20:34 heeft Tom Rini het volgende geschreven:
 > 
-> > On Thu, Mar 08, 2012 at 12:34:00PM -0700, Tom Rini wrote:
-> >> Hey all,
-> >> 
-> >> This short series does two things.  For 3 machines we fix a bug of using
-> >> '?=' rather than '+=' for setting IMAGE_FSTYPES (these are all of the
-> >> machines that have this issue today except for...) and on the 4th,
-> >> am335x-evm we add UBI support as well.  On the first three, these are
-> >> correct by inspection and on the fourth, I've written to and mounted
-> >> systemd-image from NAND on my EVM (it didn't work as I was using a custom
-> >> uImage that's not systemd-sane, and fixing that and confirming the config
-> >> used here works is on my list).
-> > 
-> > All,
-> > 
-> > Tom and I started talking on IRC and then decided to move the discussion back 
-> > to the mailing list for others to participate.
-> > 
-> > So, basically, the proposal is to do this in our machine.conf files:
-> > 
-> > -IMAGE_FSTYPES ?= "jffs2 tar.bz2"
-> > +IMAGE_FSTYPES += "jffs2 tar.bz2"
-> > 
-> > My response was that we shouldn't do that.
+> > We also change to using '+=' not '?=' with IMAGE_FSTYPES and add the
+> > required MKUBIFS_ARGS / UBINIZE_ARGS.  These are placed next to the
+> > line that sets us to use the PSP kernel tree and reference the TI wiki
+> > for the source of our info.
 > 
-> += is the OE classic way of doing things and is IMNSHO the right thing.
+> The OE classic way of documenting is a lot better and doesn't rely on
+> wiki pages but on the submitter actually checking the output of the
+> commands. So please use the old style way of documenting the params.
 
-Not convinced:
-
-$ grep IMAGE_FSTYPES openembedded/conf/machine/*|awk '{print $2}'|sort|uniq -c
-     30 =
-      1 -
-     44 ?=
-     31 +=
-
-BTW, dash in there is a fluke coming from here:
-cm-x270.conf:#     - IMAGE_FSTYPES = "jffs2 tar cpio.gz"
-
-> > The conf files that may set, append 
-> > or overwrite IMAGE_FSTYPES are parsed in the order of local.conf, machine.conf 
-> > and distro.conf. And if none of those set IMAGE_FSTYPES, bitbake.conf defaults 
-> > to a sane tar.gz. From end-user perspective, they expect the setting in their 
-> > local.conf to be obeyed. If they don't care and don't set IMAGE_FSTYPES, then 
-> > machine.conf will set it to supported values, i.e. jffs2 and tar.bz2 in our 
-> > case. Of course, distro has the last word and potentially can alter it, but in 
-> > most cases it shouldn't. That's how it works now and I believe it's the 
-> > correct behaviour. Changing it to append additional values to what user wants 
-> > is slightly heavy-handed, in my opinion. In other words, those are suggested 
-> > image types, not enforced ones.
-> > 
-> > As Tom poined out, this is the same behaviour as currently used in OE-Core, 
-> > where qemu machines all have IMAGE_FSTYPES ?= "tar.bz2 ext3".
-> > 
-> > The original issue in question may be coming from the way some setup scripts 
-> > pre-configure user settings in local.conf, defaulting IMAGE_FSTYPES to 
-> > something, that is not very suitable for the machines being used. This needs 
-> > to be left unset and for the end-user to decide and set specifically, IMHO.
-> > 
-> > Comments, opinions?
-> 
-> See the discussion on OE-core a while back. There was a lot of handwaving 
-> done and suggested that IMAGE_FSTYPES_append_$machine = " foo" in local.conf 
-> is the right way to do this. I think it's not intuitive because you have to 
-> remember that += and _append are expanded in different points during 
-> parsing, which requires either deep bitbake knowledge or minor braindamage.
-
-Link or it never happened :)
+I disagree here.  The wiki page here has the calculations as to why the
+erase size is 126976 whereas just doing ubiattach will only print out
+the in-use value.  How about adding a line about verifying these with
+ubiattach or dmesg ?
 
 -- 
-Denys
+Tom
 
