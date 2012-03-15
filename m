@@ -1,27 +1,20 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22C4FE011D1
-	for <meta-ti@yoctoproject.org>; Thu, 15 Mar 2012 03:45:54 -0700 (PDT)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 74A22F8124A; Thu, 15 Mar 2012 04:45:53 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 97388F81249;
-	Thu, 15 Mar 2012 04:45:52 -0600 (MDT)
-Message-ID: <4F61C860.2030701@mlbassoc.com>
-Date: Thu, 15 Mar 2012 04:45:52 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
+Return-Path: <ml@communistcode.co.uk>
+Received: from tinyArch.localdomain (unknown [78.110.170.148])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24F4CE011D1
+	for <meta-ti@yoctoproject.org>; Thu, 15 Mar 2012 04:02:44 -0700 (PDT)
+Received: from [192.168.0.26] (unknown [195.171.99.130])
+	by tinyArch.localdomain (Postfix) with ESMTPSA id E1484270F5
+	for <meta-ti@yoctoproject.org>; Thu, 15 Mar 2012 10:33:01 +0000 (GMT)
+Message-ID: <4F61CC63.6000305@communistcode.co.uk>
+Date: Thu, 15 Mar 2012 11:02:59 +0000
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:11.0) Gecko/20120314 Thunderbird/11.0
 MIME-Version: 1.0
-To: Jack Mitchell <ml@communistcode.co.uk>
+To: meta-ti@yoctoproject.org
 References: <4F61C496.2070506@communistcode.co.uk>
-In-Reply-To: <4F61C496.2070506@communistcode.co.uk>
-Cc: meta-ti@yoctoproject.org
+	<4F61C860.2030701@mlbassoc.com>
+In-Reply-To: <4F61C860.2030701@mlbassoc.com>
 Subject: Re: u-boot failure
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -34,51 +27,85 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Mar 2012 10:45:54 -0000
+X-List-Received-Date: Thu, 15 Mar 2012 11:02:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 2012-03-15 04:29, Jack Mitchell wrote:
-> Trying to compile the systemd-image from Angstrom for the BeagleBone this morning and I ran into a few errors, the first one being in meta-ti and u-boot related:
+On 15/03/12 10:45, Gary Thomas wrote:
+> On 2012-03-15 04:29, Jack Mitchell wrote:
+>> Trying to compile the systemd-image from Angstrom for the BeagleBone 
+>> this morning and I ran into a few errors, the first one being in 
+>> meta-ti and u-boot related:
+>>
+>>     ERROR: Function failed: do_compile (see
+>>     
+>> /home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/temp/log.do_compile.18432 
+>> for further information)
+>>     NOTE: make CROSS_COMPILE=arm-angstrom-linux-gnueabi- all
+>>     for dir in tools examples/standalone examples/api arch/arm/cpu/armv7
+>>     
+>> /home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/arch/arm/cpu/armv7/ 
+>> ; do \
+>>     make -C $dir _depend ; done
+>>     make[1]: Entering directory 
+>> `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/tools'
+>>     make[1]: Nothing to be done for `_depend'.
+>>     make[1]: Leaving directory 
+>> `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/tools'
+>>     make[1]: Entering directory 
+>> `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/examples/standalone'
+>>     make[1]: Nothing to be done for `_depend'.
+>>     make[1]: Leaving directory 
+>> `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/examples/standalone'
+>>     make[1]: Entering directory 
+>> `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/examples/api'
+>>     make[1]: Nothing to be done for `_depend'.
+>>     make[1]: Leaving directory 
+>> `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/examples/api'
+>>     make[1]: Entering directory 
+>> `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/arch/arm/cpu/armv7'
+>>     make[1]: Nothing to be done for `_depend'.
+>>     make[1]: Leaving directory 
+>> `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/arch/arm/cpu/armv7'
+>>     make[1]: Entering directory 
+>> `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/arch/arm/cpu/armv7'
+>>     make[1]: Nothing to be done for `_depend'.
+>>     make[1]: Leaving directory 
+>> `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/arch/arm/cpu/armv7'
+>>     make -C tools all
+>>     make[1]: Entering directory 
+>> `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/tools'
+>>     *make[1]: *** No rule to make target 
+>> `/usr/lib/gcc/x86_64-unknown-linux-gnu/4.6.2/include/stddef.h', 
+>> needed by `crc32.o'. Stop.*
+>>     make[1]: Leaving directory 
+>> `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/tools'
+>>     make: *** [tools] Error 2
+>>     ERROR: oe_runmake failed
+>>
+>> Could anyone shed any light on this?
 >
->     ERROR: Function failed: do_compile (see
->     /home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/temp/log.do_compile.18432 for further information)
->     NOTE: make CROSS_COMPILE=arm-angstrom-linux-gnueabi- all
->     for dir in tools examples/standalone examples/api arch/arm/cpu/armv7
->     /home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/arch/arm/cpu/armv7/ ; do \
->     make -C $dir _depend ; done
->     make[1]: Entering directory `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/tools'
->     make[1]: Nothing to be done for `_depend'.
->     make[1]: Leaving directory `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/tools'
->     make[1]: Entering directory `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/examples/standalone'
->     make[1]: Nothing to be done for `_depend'.
->     make[1]: Leaving directory `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/examples/standalone'
->     make[1]: Entering directory `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/examples/api'
->     make[1]: Nothing to be done for `_depend'.
->     make[1]: Leaving directory `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/examples/api'
->     make[1]: Entering directory `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/arch/arm/cpu/armv7'
->     make[1]: Nothing to be done for `_depend'.
->     make[1]: Leaving directory `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/arch/arm/cpu/armv7'
->     make[1]: Entering directory `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/arch/arm/cpu/armv7'
->     make[1]: Nothing to be done for `_depend'.
->     make[1]: Leaving directory `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/arch/arm/cpu/armv7'
->     make -C tools all
->     make[1]: Entering directory `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/tools'
->     *make[1]: *** No rule to make target `/usr/lib/gcc/x86_64-unknown-linux-gnu/4.6.2/include/stddef.h', needed by `crc32.o'. Stop.*
->     make[1]: Leaving directory `/home/jack/angstrom/build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/u-boot-2011.09+git-r26/git/tools'
->     make: *** [tools] Error 2
->     ERROR: oe_runmake failed
+> What's your build host?
 >
-> Could anyone shed any light on this?
+> It looks like your host gcc has some install problems (that missing
+> file is part of the base installation, at least on Fedora)
+>
 
-What's your build host?
+Ok, I fixed it thanks for the nudge in the right direction Gary!
 
-It looks like your host gcc has some install problems (that missing
-file is part of the base installation, at least on Fedora)
+I had updated my hosts GCC inbetween builds, so I performed -c 
+cleasstate u-boot recompiled and it picked up my new GCC 4.6.3 
+libraries, rather than the non-existant 4.6.2 libraries it was 
+configured to use.
+
+Cheers!
 
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
+
 
