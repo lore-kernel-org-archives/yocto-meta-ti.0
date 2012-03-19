@@ -1,41 +1,28 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37D60E013A5
-	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2012 14:13:52 -0700 (PDT)
-Received: by wibhm17 with SMTP id hm17so3947494wib.11
-	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2012 14:13:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=l8vqwHuVC/QqlYkERfW1UEIk45FzsYX+m8REJAePyls=;
-	b=bwg+hvTwiN5mhgFAzKdC4wgZ28cCDYgU7RVEqJr+Azn/9MEoqYwHzZEnD2asGzhnNS
-	fGQK6CuCYc2p/25RIEmDxDs9M6j6zfGs5okHfn8ZyDtIa8gWmRHo/5LwWdJvnzzgjKb7
-	FKWr3T2slvzQ0krBypyx4hQoQdX6J1fC+o9es9YKMF0oaHLjqUXZonu3qLBOFG6U4PT8
-	yeZYrDOsBvoCN4JwCnCqkyg/KnwN1WFMnfw2Tep5/T2lu3BY2tTAeY7sAj4IwliDw+AE
-	a2ZvvzXIZHpwtaxGhvzUHucC6bdvk09hAo/2kuhHi2ImcGzmCRQwQE4UGUOP6SuLy8gC
-	7j2A==
-Received: by 10.180.79.135 with SMTP id j7mr22831122wix.19.1332191632043;
-	Mon, 19 Mar 2012 14:13:52 -0700 (PDT)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id ex2sm17076321wib.8.2012.03.19.14.13.51
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 19 Mar 2012 14:13:51 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <20120319210557.GF19810@bill-the-cat>
-Date: Mon, 19 Mar 2012 22:13:48 +0100
-Message-Id: <EC42051F-B39B-4B48-AC71-8BB88C00E297@dominion.thruhere.net>
+Return-Path: <denis@denix.org>
+Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
+	[206.46.173.15])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 897BAE013A5
+	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2012 14:29:28 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173015.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M1500IOPICT12F0@vms173015.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 19 Mar 2012 16:29:17 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2D97E201C0; Mon,
+	19 Mar 2012 17:29:16 -0400 (EDT)
+Date: Mon, 19 Mar 2012 17:29:16 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-id: <20120319212916.GE15554@denix.org>
 References: <F01BAC6C-9AA4-4D59-AB9B-067A9D1E9ED7@dominion.thruhere.net>
 	<20120319205854.GE19810@bill-the-cat>
 	<20120319210247.GD15554@denix.org>
 	<20120319210557.GF19810@bill-the-cat>
-To: meta-ti@yoctoproject.org
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQk1681OLpPxBMBUDJMyW/Nx0oPumPA2XKhVIbFsMFSht8cvPeokyy692x6xaOgP9XWixCkP
+	<EC42051F-B39B-4B48-AC71-8BB88C00E297@dominion.thruhere.net>
+MIME-version: 1.0
+In-reply-to: <EC42051F-B39B-4B48-AC71-8BB88C00E297@dominion.thruhere.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
 Subject: Re: release branch for meta-ti?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -48,36 +35,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2012 21:13:53 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 19 Mar 2012 21:29:28 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
+On Mon, Mar 19, 2012 at 10:13:48PM +0100, Koen Kooi wrote:
+> 
+> Op 19 mrt. 2012, om 22:05 heeft Tom Rini het volgende geschreven:
+> 
+> > On Mon, Mar 19, 2012 at 05:02:47PM -0400, Denys Dmytriyenko wrote:
+> >> On Mon, Mar 19, 2012 at 01:58:54PM -0700, Tom Rini wrote:
+> >>> On Mon, Mar 19, 2012 at 01:58:36PM +0100, Koen Kooi wrote:
+> >>>> Hi,
+> >>>> 
+> >>>> Any volunteers for maintaining a releasebranch that matches the upcoming oe-core release in ~4 weeks?
+> >>> 
+> >>> If Denys or Chase don't step-up, I'll do it.  As qualification, I do
+> >>> such a thing for oe-classic currently :)  But if either of them would
+> >>> rather, I'll defer to them.
+> >> 
+> >> We'll probably need to set meta-oe-maintenance up anyway for meta-arago to 
+> >> work with, rather than chasing changes in the master...
+> > 
+> > Yes, meta-oe will also need a maintenance release to match,
+> 
+> Working on that already :) That should hopefully avoid the usual arago forks 
+> or everything and the kitchensink.
 
-Op 19 mrt. 2012, om 22:05 heeft Tom Rini het volgende geschreven:
+Something's wrong with the above statement... :)
 
-> On Mon, Mar 19, 2012 at 05:02:47PM -0400, Denys Dmytriyenko wrote:
->> On Mon, Mar 19, 2012 at 01:58:54PM -0700, Tom Rini wrote:
->>> On Mon, Mar 19, 2012 at 01:58:36PM +0100, Koen Kooi wrote:
->>>> Hi,
->>>>=20
->>>> Any volunteers for maintaining a releasebranch that matches the =
-upcoming oe-core release in ~4 weeks?
->>>=20
->>> If Denys or Chase don't step-up, I'll do it.  As qualification, I do
->>> such a thing for oe-classic currently :)  But if either of them =
-would
->>> rather, I'll defer to them.
->>=20
->> We'll probably need to set meta-oe-maintenance up anyway for =
-meta-arago to=20
->> work with, rather than chasing changes in the master...
->=20
-> Yes, meta-oe will also need a maintenance release to match,
+Is it "meta-oe maintenance should hopefully avoid the usual arago forks...", 
+which is kind of backwards and doesn't make much sense to me :)
 
-Working on that already :) That should hopefully avoid the usual arago =
-forks or everything and the kitchensink.
+Or is it "meta-oe maintenance should help avoid the usual arago forks...", 
+which I hope is what you wanted to say... :)
 
-regards,
+BTW, it's not like we like forks or encourage people to fork, but that's how 
+people are used to work. I'm having hard time convincing people otherwise - 
+i.e. track mainline or a stable branch and submit your changes back as 
+patches. Chase is the only one who took this advise to heart and it's been 
+pleasure to work with him supporting AM-SDK since then! :)
 
-Koen=
+-- 
+Denys
 
