@@ -1,25 +1,38 @@
-Return-Path: <denis@denix.org>
-Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
-	[206.46.173.1])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 999D6E013A3
-	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2012 11:35:52 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M15003HJABCB6U0@vms173001.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 19 Mar 2012 13:35:37 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0FA562018B; Mon,
-	19 Mar 2012 14:35:35 -0400 (EDT)
-Date: Mon, 19 Mar 2012 14:35:35 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <tom.rini@gmail.com>
+Received: from mail-yw0-f48.google.com (mail-yw0-f48.google.com
+	[209.85.213.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E7018E013A5
+	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2012 13:58:58 -0700 (PDT)
+Received: by yhfq46 with SMTP id q46so7390737yhf.35
+	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2012 13:58:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=expLly2RlRXnbYXKApP9uxCM5MeYwvO0spoE/75H8jg=;
+	b=mgqQx0VZF7ni73/hTvxSj3ucnctVJpx67ZNQ4rAY4lZDumxZUZlQWjkp9g/ao6Ai79
+	wR14HQMawXLB9JNKeYFEcyPwU7DKo1IeosDYJRqF3j2hWpft7SnhHPHRfDLKftsinLXm
+	LYT5l0+Dg7J2dRglNJgyebnMnn5uMvTKJ3bxPgKxdMwAiofrrA3DdcWxgLwt3juIrWoN
+	qJ2DJAnkwU0gJjvwwbdZOMyoeSoUUNCOxDwxF7SuT+/jfbf5ivouGT2NKd34V68nnKwo
+	L9enzclbk0zArr443qmR38GapwxFtHWEG5hsHLkkw1UgyrMJuwVFWyWX43TtF0/KsCDi
+	iUwA==
+Received: by 10.60.9.102 with SMTP id y6mr15962671oea.46.1332190738407;
+	Mon, 19 Mar 2012 13:58:58 -0700 (PDT)
+Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
+	by mx.google.com with ESMTPS id h7sm10898870oeh.9.2012.03.19.13.58.56
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 19 Mar 2012 13:58:57 -0700 (PDT)
+Sender: Tom Rini <tom.rini@gmail.com>
+Date: Mon, 19 Mar 2012 13:58:54 -0700
+From: Tom Rini <trini@ti.com>
 To: Koen Kooi <koen@dominion.thruhere.net>
-Message-id: <20120319183535.GA15554@denix.org>
-References: <1332180968-8203-1-git-send-email-koen@dominion.thruhere.net>
-MIME-version: 1.0
-In-reply-to: <1332180968-8203-1-git-send-email-koen@dominion.thruhere.net>
+Message-ID: <20120319205854.GE19810@bill-the-cat>
+References: <F01BAC6C-9AA4-4D59-AB9B-067A9D1E9ED7@dominion.thruhere.net>
+MIME-Version: 1.0
+In-Reply-To: <F01BAC6C-9AA4-4D59-AB9B-067A9D1E9ED7@dominion.thruhere.net>
+Organization: Texas Instruments
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org, denys@ti.com
-Subject: Re: [PATCH] linux 3.0: Fix sprz319 erratum 2.1
+Cc: meta-ti@yoctoproject.org
+Subject: Re: release branch for meta-ti?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,279 +44,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2012 18:35:52 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 19 Mar 2012 20:58:59 -0000
+X-Groupsio-MsgNum: 814
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="R3G7APHDIzY6R/pk"
+Content-Disposition: inline
 
-On Mon, Mar 19, 2012 at 07:16:08PM +0100, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+--R3G7APHDIzY6R/pk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This is a good one, thanks! Pushed to master.
+On Mon, Mar 19, 2012 at 01:58:36PM +0100, Koen Kooi wrote:
+> Hi,
+>=20
+> Any volunteers for maintaining a releasebranch that matches the upcoming =
+oe-core release in ~4 weeks?
 
-> ---
->  recipes-kernel/linux/linux-3.0/patch.sh            |    2 +-
->  .../usb/0001-Fix-sprz319-erratum-2.1.patch         |  210 ++++++++++++++++++++
->  recipes-kernel/linux/linux_3.0.bb                  |    4 +-
->  3 files changed, 214 insertions(+), 2 deletions(-)
->  create mode 100644 recipes-kernel/linux/linux-3.0/usb/0001-Fix-sprz319-erratum-2.1.patch
-> 
-> diff --git a/recipes-kernel/linux/linux-3.0/patch.sh b/recipes-kernel/linux/linux-3.0/patch.sh
-> index dc19a9e..31bdfe1 100755
-> --- a/recipes-kernel/linux/linux-3.0/patch.sh
-> +++ b/recipes-kernel/linux/linux-3.0/patch.sh
-> @@ -13,7 +13,7 @@ git reset --hard ${TAG}
->  rm export -rf
->  
->  previous=${TAG}
-> -PATCHSET="pm-wip/voltdm pm-wip/cpufreq beagle madc sakoman sgx ulcd omap4 misc"
-> +PATCHSET="pm-wip/voltdm pm-wip/cpufreq beagle madc sakoman sgx ulcd omap4 misc usb"
->  
->  # apply patches
->  for patchset in ${PATCHSET} ; do
-> diff --git a/recipes-kernel/linux/linux-3.0/usb/0001-Fix-sprz319-erratum-2.1.patch b/recipes-kernel/linux/linux-3.0/usb/0001-Fix-sprz319-erratum-2.1.patch
-> new file mode 100644
-> index 0000000..8d65b5f
-> --- /dev/null
-> +++ b/recipes-kernel/linux/linux-3.0/usb/0001-Fix-sprz319-erratum-2.1.patch
-> @@ -0,0 +1,210 @@
-> +From cf5db5477d8d43f02f4511f3835ab4bec0dcc27c Mon Sep 17 00:00:00 2001
-> +From: Richard Watts <rrw@kynesim.co.uk>
-> +Date: Mon, 20 Feb 2012 17:58:26 +0000
-> +Subject: [PATCH] Fix sprz319 erratum 2.1
-> +
-> +There is an erratum in DM3730 which results in the
-> +EHCI USB PLL (DPLL5) not updating sufficiently frequently; this
-> +leads to USB PHY clock drift and once the clock has drifted far
-> +enough, the PHY's ULPI interface stops responding and USB
-> +drops out. This is manifested on a Beagle xM by having the attached
-> +SMSC9514 report 'Cannot enable port 2. Maybe the USB cable is bad?'
-> +or similar.
-> +
-> +The fix is to carefully adjust your DPLL5 settings so as to
-> +keep the PHY clock as close as possible to 120MHz over the long
-> +term; TI SPRZ319e gives a table of such settings and this patch
-> +applies that table to systems with a 13MHz or a 26MHz clock,
-> +thus fixing the issue (inasfar as it can be fixed) on Beagle xM
-> +and Overo Firestorm.
-> +
-> +Signed-off-by: Richard Watts <rrw@kynesim.co.uk>
-> +---
-> + arch/arm/mach-omap2/clkt_clksel.c    |   15 ++++++++
-> + arch/arm/mach-omap2/clock.h          |    7 ++++
-> + arch/arm/mach-omap2/clock3xxx.c      |   65 +++++++++++++++++++++++++++++----
-> + arch/arm/mach-omap2/clock3xxx.h      |    1 +
-> + arch/arm/mach-omap2/clock3xxx_data.c |    2 +-
-> + arch/arm/mach-omap2/dpll3xxx.c       |    2 +-
-> + 6 files changed, 82 insertions(+), 10 deletions(-)
-> +
-> +diff --git a/arch/arm/mach-omap2/clkt_clksel.c b/arch/arm/mach-omap2/clkt_clksel.c
-> +index e25364d..e378fe7 100644
-> +--- a/arch/arm/mach-omap2/clkt_clksel.c
-> ++++ b/arch/arm/mach-omap2/clkt_clksel.c
-> +@@ -460,6 +460,21 @@ int omap2_clksel_set_rate(struct clk *clk, unsigned long rate)
-> + 	return 0;
-> + }
-> + 
-> ++int omap2_clksel_force_divisor(struct clk *clk, int new_div)
-> ++{
-> ++	u32 field_val;
-> ++
-> ++	field_val = _divisor_to_clksel(clk, new_div);
-> ++	if (field_val == ~0)
-> ++		return -EINVAL;
-> ++
-> ++	_write_clksel_reg(clk, field_val);
-> ++
-> ++	clk->rate = clk->parent->rate / new_div;
-> ++
-> ++	return 0;
-> ++}
-> ++
-> + /*
-> +  * Clksel parent setting function - not passed in struct clk function
-> +  * pointer - instead, the OMAP clock code currently assumes that any
-> +diff --git a/arch/arm/mach-omap2/clock.h b/arch/arm/mach-omap2/clock.h
-> +index 8bad1c6..ac3d367 100644
-> +--- a/arch/arm/mach-omap2/clock.h
-> ++++ b/arch/arm/mach-omap2/clock.h
-> +@@ -61,6 +61,12 @@ void omap3_dpll_allow_idle(struct clk *clk);
-> + void omap3_dpll_deny_idle(struct clk *clk);
-> + u32 omap3_dpll_autoidle_read(struct clk *clk);
-> + int omap3_noncore_dpll_set_rate(struct clk *clk, unsigned long rate);
-> ++#if CONFIG_ARCH_OMAP3
-> ++int omap3_noncore_dpll_program(struct clk *clk, u16 m, u8 n, u16 freqsel);
-> ++/* If you are using this function and not on OMAP3, you are
-> ++ * Doing It Wrong(tm), so there is no stub.
-> ++ */
-> ++#endif
-> + int omap3_noncore_dpll_enable(struct clk *clk);
-> + void omap3_noncore_dpll_disable(struct clk *clk);
-> + int omap4_dpllmx_gatectrl_read(struct clk *clk);
-> +@@ -84,6 +90,7 @@ unsigned long omap2_clksel_recalc(struct clk *clk);
-> + long omap2_clksel_round_rate(struct clk *clk, unsigned long target_rate);
-> + int omap2_clksel_set_rate(struct clk *clk, unsigned long rate);
-> + int omap2_clksel_set_parent(struct clk *clk, struct clk *new_parent);
-> ++int omap2_clksel_force_divisor(struct clk *clk, int new_div);
-> + 
-> + /* clkt_iclk.c public functions */
-> + extern void omap2_clkt_iclk_allow_idle(struct clk *clk);
-> +diff --git a/arch/arm/mach-omap2/clock3xxx.c b/arch/arm/mach-omap2/clock3xxx.c
-> +index 952c3e0..d5be086 100644
-> +--- a/arch/arm/mach-omap2/clock3xxx.c
-> ++++ b/arch/arm/mach-omap2/clock3xxx.c
-> +@@ -40,6 +40,60 @@
-> + /* needed by omap3_core_dpll_m2_set_rate() */
-> + struct clk *sdrc_ick_p, *arm_fck_p;
-> + 
-> ++struct dpll_settings {
-> ++	int rate, m, n, f;
-> ++};
-> ++
-> ++
-> ++static int omap3_dpll5_apply_erratum21(struct clk *clk, struct clk *dpll5_m2)
-> ++{
-> ++	struct clk *sys_clk;
-> ++	int i, rv;
-> ++	static const struct dpll_settings precomputed[] = {
-> ++		/* From DM3730 errata (sprz319e), table 36
-> ++		* +1 is because the values in the table are register values;
-> ++		* dpll_program() will subtract one from what we give it,
-> ++		* so ...
-> ++		*/
-> ++		{ 13000000, 443+1, 5+1, 8 },
-> ++		{ 26000000, 443+1, 11+1, 8 }
-> ++	};
-> ++
-> ++	sys_clk = clk_get(NULL, "sys_ck");
-> ++
-> ++	for (i = 0 ; i < (sizeof(precomputed)/sizeof(struct dpll_settings)) ;
-> ++		++i) {
-> ++		const struct dpll_settings *d = &precomputed[i];
-> ++		if (sys_clk->rate == d->rate) {
-> ++			rv =  omap3_noncore_dpll_program(clk, d->m , d->n, 0);
-> ++			if (rv)
-> ++				return 1;
-> ++			rv =  omap2_clksel_force_divisor(dpll5_m2 , d->f);
-> ++			return 1;
-> ++		}
-> ++	}
-> ++	return 0;
-> ++}
-> ++
-> ++int omap3_dpll5_set_rate(struct clk *clk, unsigned long rate)
-> ++{
-> ++	struct clk *dpll5_m2;
-> ++	int rv;
-> ++	dpll5_m2 = clk_get(NULL, "dpll5_m2_ck");
-> ++
-> ++	if (cpu_is_omap3630() && rate == DPLL5_FREQ_FOR_USBHOST &&
-> ++		omap3_dpll5_apply_erratum21(clk, dpll5_m2)) {
-> ++		return 1;
-> ++	}
-> ++	rv = omap3_noncore_dpll_set_rate(clk, rate);
-> ++	if (rv)
-> ++		goto out;
-> ++	rv = clk_set_rate(dpll5_m2, rate);
-> ++
-> ++out:
-> ++	return rv;
-> ++}
-> ++
-> + int omap3_dpll4_set_rate(struct clk *clk, unsigned long rate)
-> + {
-> + 	/*
-> +@@ -59,19 +113,14 @@ int omap3_dpll4_set_rate(struct clk *clk, unsigned long rate)
-> + void __init omap3_clk_lock_dpll5(void)
-> + {
-> + 	struct clk *dpll5_clk;
-> +-	struct clk *dpll5_m2_clk;
-> + 
-> + 	dpll5_clk = clk_get(NULL, "dpll5_ck");
-> + 	clk_set_rate(dpll5_clk, DPLL5_FREQ_FOR_USBHOST);
-> +-	clk_enable(dpll5_clk);
-> + 
-> +-	/* Program dpll5_m2_clk divider for no division */
-> +-	dpll5_m2_clk = clk_get(NULL, "dpll5_m2_ck");
-> +-	clk_enable(dpll5_m2_clk);
-> +-	clk_set_rate(dpll5_m2_clk, DPLL5_FREQ_FOR_USBHOST);
-> ++	/* dpll5_m2_ck is now (grottily!) handled by dpll5_clk's set routine,
-> ++	 * to cope with an erratum on DM3730
-> ++	 */
-> + 
-> +-	clk_disable(dpll5_m2_clk);
-> +-	clk_disable(dpll5_clk);
-> + 	return;
-> + }
-> + 
-> +diff --git a/arch/arm/mach-omap2/clock3xxx.h b/arch/arm/mach-omap2/clock3xxx.h
-> +index 8bbeeaf..0ede513 100644
-> +--- a/arch/arm/mach-omap2/clock3xxx.h
-> ++++ b/arch/arm/mach-omap2/clock3xxx.h
-> +@@ -10,6 +10,7 @@
-> + 
-> + int omap3xxx_clk_init(void);
-> + int omap3_dpll4_set_rate(struct clk *clk, unsigned long rate);
-> ++int omap3_dpll5_set_rate(struct clk *clk, unsigned long rate);
-> + int omap3_core_dpll_m2_set_rate(struct clk *clk, unsigned long rate);
-> + void omap3_clk_lock_dpll5(void);
-> + 
-> +diff --git a/arch/arm/mach-omap2/clock3xxx_data.c b/arch/arm/mach-omap2/clock3xxx_data.c
-> +index ffd55b1..dcd7bdc 100644
-> +--- a/arch/arm/mach-omap2/clock3xxx_data.c
-> ++++ b/arch/arm/mach-omap2/clock3xxx_data.c
-> +@@ -942,7 +942,7 @@ static struct clk dpll5_ck = {
-> + 	.parent		= &sys_ck,
-> + 	.dpll_data	= &dpll5_dd,
-> + 	.round_rate	= &omap2_dpll_round_rate,
-> +-	.set_rate	= &omap3_noncore_dpll_set_rate,
-> ++	.set_rate	= &omap3_dpll5_set_rate,
-> + 	.clkdm_name	= "dpll5_clkdm",
-> + 	.recalc		= &omap3_dpll_recalc,
-> + };
-> +diff --git a/arch/arm/mach-omap2/dpll3xxx.c b/arch/arm/mach-omap2/dpll3xxx.c
-> +index f77022b..1909cd0 100644
-> +--- a/arch/arm/mach-omap2/dpll3xxx.c
-> ++++ b/arch/arm/mach-omap2/dpll3xxx.c
-> +@@ -291,7 +291,7 @@ static void _lookup_sddiv(struct clk *clk, u8 *sd_div, u16 m, u8 n)
-> +  * Program the DPLL with the supplied M, N values, and wait for the DPLL to
-> +  * lock..  Returns -EINVAL upon error, or 0 upon success.
-> +  */
-> +-static int omap3_noncore_dpll_program(struct clk *clk, u16 m, u8 n, u16 freqsel)
-> ++int omap3_noncore_dpll_program(struct clk *clk, u16 m, u8 n, u16 freqsel)
-> + {
-> + 	struct dpll_data *dd = clk->dpll_data;
-> + 	u8 dco, sd_div;
-> +-- 
-> +1.7.2.5
-> +
-> diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
-> index 32ef963..c95542e 100644
-> --- a/recipes-kernel/linux/linux_3.0.bb
-> +++ b/recipes-kernel/linux/linux_3.0.bb
-> @@ -10,7 +10,7 @@ PV = "3.0.23"
->  SRCREV_pn-${PN} = "bf6a68d2a214e07f7c0d6538e00e17b826714160"
->  
->  # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
-> -MACHINE_KERNEL_PR_append = "a"
-> +MACHINE_KERNEL_PR_append = "b"
->  
->  FILESPATH =. "${FILE_DIRNAME}/linux-3.0:${FILE_DIRNAME}/linux-3.0/${MACHINE}:"
->  
-> @@ -224,6 +224,8 @@ SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.gi
->              \
->              file://misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch \
->              \
-> +            file://usb/0001-Fix-sprz319-erratum-2.1.patch \
-> +            \
->              file://defconfig"
->  
->  SRC_URI_append_beagleboard = " file://logo_linux_clut224.ppm \
-> -- 
-> 1.7.2.5
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+If Denys or Chase don't step-up, I'll do it.  As qualification, I do
+such a thing for oe-classic currently :)  But if either of them would
+rather, I'll defer to them.
 
+--=20
+Tom
+
+--R3G7APHDIzY6R/pk
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iQIcBAEBAgAGBQJPZ54OAAoJENk4IS6UOR1WN4IP/Ar3pQrwTl6P0neWT4F2PIuS
+vzP1I8N9zrS6hmBJrrm8DcyrqoeRTnceHKsUVFBnnVrg0cNoUgswp+GVeKwk/4h8
+qgQ+UNsDgPvnegy0+0lqmJ71qEkH30Gz/CuVyPvqSCSJYJn3CBlyDD8YmwPRRKTf
+OSOu16caeN00b19Zf7bFL65t2XBxWk2MjYXdv2lbnl1/zXfCdNza4CCKDcgeeVP5
+R74OvggdzsXoBJeLaLmBF7eTS6Z3ukCJp/c0Qgvp3hyaIzF9Zu6Yhs3m0y47tJaT
+18Dq7pIUet5bovZmUo5dgLwZiKhyyiGfxjEMZI7LOtHbsjDSoMYaezVLU+cNwQg2
++KG4KEp0kWpj8F6FCoWF/MmYSj/9+JEZ8unK3o4h9QJkgPLsLVv/SjJGpiNbxNae
+sIL6pTGC79pVcRaRvVni+69fc1/RQcF/ojKXU5UE2XnwCN89jjD0PBqTp2pF1DEf
+uLfJhExgYYUM9e/sawceTXroDnHSeNH02ZYlkAmen070iGkrALbztEIVU7xsRcqF
+8ygAMTMCwlJi3rckmhh2Kaj8vfXcmY8PiBH98CORhjhd/6beWcw8se+PxrJmpARe
+UqhjXUefGnaw9fEDKCRCUTFRgzmWVqJCwmkyucdezkofXArRGWe8MljzpG/MXtbE
+ZFL3uhIWGNXiNGMqurDU
+=X1Ac
+-----END PGP SIGNATURE-----
+
+--R3G7APHDIzY6R/pk--
