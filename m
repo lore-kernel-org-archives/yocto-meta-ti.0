@@ -1,34 +1,15 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 989D6E013A5
-	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2012 11:16:14 -0700 (PDT)
-Received: by werc1 with SMTP id c1so8147211wer.35
-	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2012 11:16:13 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=LSxhofEeIYY//EMC+8SOxYMj+Z1cBcRnF8/sA37pq04=;
-	b=W6M8urFiu4s7V7stbtmtJIuNaTnTGG0Wa6QbvpUsRCsNb8uvU/0uAUmVQh1qSOUWG+
-	C+sS1wOUP7qvpLn/kXXG7MxWhPHDlykwCQXjl70AXZNOu5R41Nj4oRSq+ilPrwlPVOyU
-	I8ukOaeyAqsXqLfHNRyo9rJ+yqCainrsC9S+noqEFKkfYNoRqA6jRh0nQQLr9WLiJPmQ
-	7QUH0MGsKqMiulyQCzDuYTvn3nrrdbWB0+sh04nx/CyG0ItT9+jXORltCqcTMRcHWSRI
-	bEcrJkzns1MPtWlAqPCI2BF89kSss680iasox//Y1edqzP+ltCPQpWdJjEvqSybOSDbC
-	9Txw==
-Received: by 10.216.197.211 with SMTP id t61mr7811278wen.1.1332180973423;
-	Mon, 19 Mar 2012 11:16:13 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id k7sm44083022wia.5.2012.03.19.11.16.12
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 19 Mar 2012 11:16:12 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2BE7EE013A5
+	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2012 11:35:15 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 9218652985; Mon, 19 Mar 2012 18:35:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 19 Mar 2012 19:16:08 +0100
-Message-Id: <1332180968-8203-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-X-Gm-Message-State: ALoCoQmvJbzrhqb9hauOY9zVu6pEeZjybC5IQiJ2RsUvHndhw9bqnVQhu4eV1xmijrIDfKR/Js/3
-Cc: denys@ti.com
-Subject: [PATCH] linux 3.0: Fix sprz319 erratum 2.1
+Message-Id: <20120319183514.9218652985@arago-project.org>
+Date: Mon, 19 Mar 2012 18:35:14 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Koen Kooi : linux 3.0: Fix sprz319 erratum 2.1
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,15 +21,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2012 18:16:15 -0000
+X-List-Received-Date: Mon, 19 Mar 2012 18:35:15 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: 8f1fc028be8567c57ed7d40b1800ece37128b9ac
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8f1fc028be8567c57ed7d40b1800ece37128b9ac
+
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Mon Mar 19 19:16:08 2012 +0100
+
+linux 3.0: Fix sprz319 erratum 2.1
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
+
  recipes-kernel/linux/linux-3.0/patch.sh            |    2 +-
  .../usb/0001-Fix-sprz319-erratum-2.1.patch         |  210 ++++++++++++++++++++
  recipes-kernel/linux/linux_3.0.bb                  |    4 +-
  3 files changed, 214 insertions(+), 2 deletions(-)
- create mode 100644 recipes-kernel/linux/linux-3.0/usb/0001-Fix-sprz319-erratum-2.1.patch
 
 diff --git a/recipes-kernel/linux/linux-3.0/patch.sh b/recipes-kernel/linux/linux-3.0/patch.sh
 index dc19a9e..31bdfe1 100755
@@ -301,7 +295,5 @@ index 32ef963..c95542e 100644
              file://defconfig"
  
  SRC_URI_append_beagleboard = " file://logo_linux_clut224.ppm \
--- 
-1.7.2.5
 
 
