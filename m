@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2BE7EE013A5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2A9BEE013A3
 	for <meta-ti@yoctoproject.org>; Mon, 19 Mar 2012 11:35:15 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9218652985; Mon, 19 Mar 2012 18:35:14 +0000 (UTC)
+	id 3702E5299F; Mon, 19 Mar 2012 18:35:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120319183514.9218652985@arago-project.org>
+Message-Id: <20120319183514.3702E5299F@arago-project.org>
 Date: Mon, 19 Mar 2012 18:35:14 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux 3.0: Fix sprz319 erratum 2.1
+Subject: Koen Kooi : linux-ti335x-psp 3.2: update to v3.2.11
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,274 +26,619 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 8f1fc028be8567c57ed7d40b1800ece37128b9ac
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8f1fc028be8567c57ed7d40b1800ece37128b9ac
+Commit: ebbeb55561f15e6ebf760e5b735a92bcdcdeaca1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ebbeb55561f15e6ebf760e5b735a92bcdcdeaca1
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Mon Mar 19 19:16:08 2012 +0100
+Date:   Mon Mar 19 12:31:46 2012 +0100
 
-linux 3.0: Fix sprz319 erratum 2.1
+linux-ti335x-psp 3.2: update to v3.2.11
+
+Also add script used to generate patches and SRC_URI
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-3.0/patch.sh            |    2 +-
- .../usb/0001-Fix-sprz319-erratum-2.1.patch         |  210 ++++++++++++++++++++
- recipes-kernel/linux/linux_3.0.bb                  |    4 +-
- 3 files changed, 214 insertions(+), 2 deletions(-)
+ conf/machine/include/ti33x.inc                     |    2 +-
+ .../0001-MAINTAINERS-stable-Update-address.patch   |    6 +-
+ .../0002-Documentation-Update-stable-address.patch |    4 +-
+ ...x-an-oops-on-reading-fw_priv-fw-in-sysfs-.patch |    6 +-
+ .../0004-rt2800usb-Move-ID-out-of-unknown.patch    |    6 +-
+ ...ix-setting-of-the-pseudo-palette-for-8bpp.patch |    6 +-
+ ...ix-bug-in-calculating-requested-vram-size.patch |    6 +-
+ ...07-libertas-clean-up-scan-thread-handling.patch |    6 +-
+ .../0008-bcma-support-for-suspend-and-resume.patch |    6 +-
+ ...x-Validate-FEM-index-from-ini-file-and-FW.patch |    6 +-
+ ...eck-buffer-bound-when-processing-nvs-data.patch |    6 +-
+ .../3.2.1/0011-wl12xx-Restore-testmode-ABI.patch   |    6 +-
+ ...werpc-time-Handle-wrapping-of-decrementer.patch |    4 +-
+ ...-unpaired-probe_hcall_entry-and-probe_hca.patch |    4 +-
+ ...a-possible-data-corruption-when-receiving.patch |    4 +-
+ .../0015-IB-uverbs-Protect-QP-multicast-list.patch |    6 +-
+ .../3.2.1/0016-iwlagn-fix-TID-use-bug.patch        |    6 +-
+ .../0017-iwlagn-fix-remove-use-of-PAGE_SIZE.patch  |    4 +-
+ ...Fix-parsing-of-__print_flags-in-TP_printk.patch |    6 +-
+ ...0019-ore-Fix-crash-in-case-of-an-IO-error.patch |    6 +-
+ ...0-ore-fix-BUG_ON-too-few-sgs-when-reading.patch |    4 +-
+ ...021-ore-Must-support-none-PAGE-aligned-IO.patch |    8 +-
+ ...breakage-when-MISC_FILESYSTEMS-is-not-set.patch |    4 +-
+ ...3-reiserfs-Fix-quota-mount-option-parsing.patch |    6 +-
+ ...rce-inode-evictions-before-umount-to-avoi.patch |    6 +-
+ ...warn-from-writepage-when-readonly-inode-i.patch |    6 +-
+ ...-hv-Don-t-OOPS-when-you-cannot-init-vmbus.patch |    6 +-
+ ...s-hv-Fix-a-bug-in-vmbus_driver_unregister.patch |    6 +-
+ .../0028-USB-update-documentation-for-usbmon.patch |    6 +-
+ ...oops-related-to-user-namespace-conversion.patch |    6 +-
+ ..._serial-fix-spinlock-lockup-in-RS485-code.patch |    6 +-
+ ...fix-to-allow-mounting-a-hierarchy-by-name.patch |    6 +-
+ ...dlock-when-converting-file-from-in-ICB-on.patch |    4 +-
+ ...sb-class-cdc-acm.c-clear-dangling-pointer.patch |    6 +-
+ ...ight-fix-kernel-bug-when-loading-firmware.patch |    6 +-
+ ...rage-doesn-t-support-dynamic-id-currently.patch |    6 +-
+ .../0036-USB-pxa168-Fix-compilation-error.patch    |    6 +-
+ .../0037-USB-add-quirk-for-another-camera.patch    |    6 +-
+ .../3.2.1/0038-USB-omninet-fix-write_room.patch    |    6 +-
+ ...usb-option-add-ZD-Incorporated-HSPA-modem.patch |    6 +-
+ ...-ID-for-Multiplex-RC-serial-adapter-to-cp.patch |    6 +-
+ ...1-usb-fix-number-of-mapped-SG-DMA-entries.patch |    4 +-
+ ...0042-xhci-Properly-handle-COMP_2ND_BW_ERR.patch |    6 +-
+ .../0043-usb-ch9-fix-up-MaxStreams-helper.patch    |    4 +-
+ ...zero-delay-when-receiving-odd-mixture-of-.patch |    6 +-
+ .../0045-asix-fix-infinite-loop-in-rx_fixup.patch  |    6 +-
+ ...ng-fix-error-handling-if-slave-is-busy-v2.patch |    6 +-
+ ...-Fix-acm_tty_hangup-vs.-acm_tty_close-rac.patch |    6 +-
+ ...acl-count-validation-in-xfs_acl_from_disk.patch |    6 +-
+ .../3.2.1/0049-Linux-3.2.1.patch                   |    6 +-
+ ...k-around-unhappy-compat-problem-on-x86-64.patch |  142 +++
+ ...-Fix-autofs-compile-without-CONFIG_COMPAT.patch |   42 +
+ .../0003-compat-fix-compile-breakage-on-s390.patch |  216 +++++
+ ...event-a-machine-hang-by-checking-crtc-act.patch |   42 +
+ ...05-ARM-LPC32xx-serial.c-HW-bug-workaround.patch |   83 ++
+ ...006-ARM-LPC32xx-serial.c-Fixed-loop-limit.patch |   31 +
+ ...007-ARM-LPC32xx-irq.c-Clear-latched-event.patch |   42 +
+ ...ARM-LPC32xx-Fix-interrupt-controller-init.patch |   44 +
+ .../0009-ARM-LPC32xx-Fix-irq-on-GPI_28.patch       |   50 +
+ ...wdt-clean-up-set_memory_x-call-for-32-bit.patch |   54 ++
+ ...y-flag-completion-when-queue-is-completel.patch |   83 ++
+ ...ix-the-ldo-configure-according-to-88pm860.patch |   44 +
+ ...Enable-the-compat-keyctl-wrapper-on-s390x.patch |   50 +
+ ...m-Fix-Host-Only-Guest-Only-counting-with-.patch |  182 ++++
+ ...altek-Fix-resume-of-multiple-input-source.patch |   35 +
+ .../0016-ALSA-hda-Add-a-fake-mute-feature.patch    |  119 +++
+ ...ways-set-HP-pin-in-unsol-handler-for-STAC.patch |   34 +
+ ...ent-null-pointer-reference-on-readonly-re.patch |   65 ++
+ ...rn-EFAULT-not-EIO-on-host-side-memory-fau.patch |   48 +
+ .../3.2.10/0020-mfd-Fix-ACPI-conflict-check.patch  |   37 +
+ ...r-jack-detection-when-deciding-if-wm8994-.patch |   46 +
+ ...r-action-thread_mask-if-IRQ_ONESHOT-is-no.patch |   97 ++
+ ...023-ARM-S3C24XX-DMA-resume-regression-fix.patch |   35 +
+ ...tech-Harmony-900-from-cdc_ether-to-zaurus.patch |   61 ++
+ ...-alpha-fix-32-64-bit-bug-in-futex-support.patch |   86 ++
+ ...ci-don-t-use-dma-features-when-using-DMA-.patch |   88 ++
+ ...dhci-esdhc-imx-fix-for-mmc-cards-on-i.MX5.patch |   46 +
+ ...ake-up-waiters-when-freeing-unused-kiocbs.patch |   65 ++
+ ...rrect-unregistring-of-events-attached-to-.patch |   74 ++
+ ...t-need-to-clear-vm_mm-when-deleting-a-VMA.patch |   35 +
+ ...ntry-refcount-leak-when-opening-a-FIFO-on.patch |   64 ++
+ ...ro-initialize-count-field-in-ieee80211_tx.patch |   42 +
+ ...hw-prevent-writes-to-const-data-on-AR9160.patch |  119 +++
+ ...urn-proper-error-code-from-register_kprob.patch |   79 ++
+ .../3.2.10/0035-mm-thp-fix-BUG-on-mm-nr_ptes.patch |   99 ++
+ .../3.2.10/0036-iwlwifi-fix-key-removal.patch      |   58 ++
+ ...erpc-early-udbg-consoles-can-t-be-modules.patch |   36 +
+ ...ix-handler-function-arguments-for-zfcp-da.patch |   49 +
+ ...721-fix-queue-wrapping-bug-in-inbound-doo.patch |   49 +
+ ...Add-NOGET-quirk-for-the-AIREN-Slim-keyboa.patch |   50 +
+ ...esa-fix-final-callback-not-ignoring-input.patch |   33 +
+ ...Bump-MAX_OSD_DEVICES-from-64-to-1-048-576.patch |   52 ++
+ ...viafb-select-HW-scaling-on-VX900-for-IGA2.patch |   34 +
+ .../0044-viafb-fix-IGA1-modesetting-on-VX900.patch |   33 +
+ ...m-Check-for-bias-level-when-powering-down.patch |   54 ++
+ .../0046-ASoC-i.MX-SSI-Fix-DSP_A-format.patch      |   38 +
+ .../0047-bsg-fix-sysfs-link-remove-warning.patch   |   58 ++
+ ...8-avr32-select-generic-atomic64_t-support.patch |   37 +
+ ...o-not-save-restore-NVS-on-Asus-K54C-K54HR.patch |   47 +
+ .../3.2.10/0050-rtl8192cu-Add-new-device-IDs.patch |  108 +++
+ ...rm-i915-gen7-implement-rczunit-workaround.patch |   53 ++
+ ...5-gen7-Implement-an-L3-caching-workaround.patch |   60 ++
+ ...915-gen7-work-around-a-system-hang-on-IVB.patch |   56 ++
+ ...n7-Disable-the-RHWO-optimization-as-it-ca.patch |   54 ++
+ ...-drm-i915-fix-ELD-writing-for-SandyBridge.patch |   44 +
+ .../0056-ARM-orion-Fix-USB-phy-for-orion5x.patch   |  164 ++++
+ ...ix-Orion5x-GPIO-regression-from-MPP-clean.patch |  956 ++++++++++++++++++++
+ ...P-Panda-use-gpio_free_array-to-free-HDMI-.patch |   49 +
+ ...430SDP-Panda-rename-HPD-GPIO-to-CT_CP_HPD.patch |   68 ++
+ ...0060-OMAPDSS-remove-wrong-HDMI-HPD-muxing.patch |   58 ++
+ ...-OMAP-4430SDP-Panda-setup-HDMI-GPIO-muxes.patch |   49 +
+ ...0062-OMAP-4430SDP-Panda-add-HDMI-HPD-gpio.patch |   77 ++
+ .../3.2.10/0063-OMAPDSS-HDMI-PHY-burnout-fix.patch |  246 +++++
+ .../0064-OMAPDSS-HDMI-hot-plug-detect-fix.patch    |   43 +
+ ...errata-update-workaround-for-A9-erratum-7.patch |   51 +
+ ...perf-limit-sample_period-to-half-max_peri.patch |  163 ++++
+ ...perf-clear-overflow-flag-when-disabling-c.patch |   40 +
+ ...perf-check-that-we-have-an-event-in-the-P.patch |  103 +++
+ ...perf-fix-overflow-handling-for-xscale2-PM.patch |   87 ++
+ ...a-staging-lirc_serial-Fix-init-exit-order.patch |  143 +++
+ ...ng-lirc_serial-Free-resources-on-failure-.patch |   62 ++
+ ...ng-lirc_serial-Fix-deadlock-on-resume-fai.patch |   37 +
+ ...ng-lirc_serial-Do-not-assume-error-codes-.patch |   54 ++
+ ...fix-touchpad-detection-when-buttons-are-p.patch |   50 +
+ ..._core-Fix-maximum-number-of-POUT-alarm-at.patch |   34 +
+ ...Add-support-for-ST-Microelectronics-STTS2.patch |   89 ++
+ ...Add-support-for-AT30TS00-TS3000GB2-TSE200.patch |  153 ++++
+ ...0-Maintain-delay-parameter-in-driver-inst.patch |   62 ++
+ ...x-memory-accounting-when-sta-is-in-power-.patch |   41 +
+ ...x-frame-delivery-if-sta-is-in-powersave-m.patch |   57 ++
+ ...-kms-set-SX_MISC-in-the-r6xx-blit-code-v2.patch |   51 +
+ ...et-avoid-recursive-locking-in-usbnet_stop.patch |   61 ++
+ ...iommu_set_device_table-must-not-be-__init.patch |   33 +
+ ...-not-leak-argv-if-target-message-only-con.patch |   36 +
+ .../3.2.10/0085-dm-io-fix-discard-support.patch    |   86 ++
+ ...ix-crash-on-read-when-corrupt_bio_byte-no.patch |   71 ++
+ ...adata-remove-incorrect-close_device-on-cr.patch |  100 ++
+ ...adata-unlock-superblock-in-init_pmd-error.patch |   33 +
+ ...adata-decrement-counter-after-removing-ma.patch |   36 +
+ ...m-raid-set-MD_CHANGE_DEVS-when-rebuilding.patch |   63 ++
+ .../3.2.10/0091-dm-raid-fix-flush-support.patch    |   37 +
+ ...t-don-t-call-__init-function-from-__devin.patch |   34 +
+ .../0093-mfd-Fix-cs5535-section-mismatch.patch     |   69 ++
+ ...f-pch-rename-pch_spi_pcidev-to-pch_spi_pc.patch |   52 ++
+ .../3.2.10/0095-Linux-3.2.10.patch                 |   24 +
+ ...Test-for-jack-detection-when-deciding-if-.patch |   45 +
+ .../3.2.11/0002-Linux-3.2.11.patch                 |   24 +
+ ...mtdoops-fix-the-oops_page_used-array-size.patch |    6 +-
+ ...mtdoops-skip-reading-initially-bad-blocks.patch |    6 +-
+ ...devs-don-t-increase-open-count-on-error-p.patch |    6 +-
+ ...tresstest-bail-out-if-device-has-not-enou.patch |    6 +-
+ ...-interface.c-fix-alarm-rollover-when-day-.patch |    6 +-
+ ...dd-missing-ext4_resize_end-on-error-paths.patch |    6 +-
+ ...undefined-behavior-in-ext4_fill_flex_info.patch |    6 +-
+ ...sb-us122l-Delete-calls-to-preempt_disable.patch |    6 +-
+ ...-Fix-master-control-for-Cirrus-Logic-421X.patch |    6 +-
+ ...SA-HDA-Fix-automute-for-Cirrus-Logic-421x.patch |    6 +-
+ ...e1724-Check-for-ac97-to-avoid-kernel-oops.patch |    6 +-
+ ...dio-Avoid-flood-of-frame-active-debug-mes.patch |    6 +-
+ ...e-auto-parser-for-HP-laptops-with-cx20459.patch |    6 +-
+ ...turn-the-error-from-get_wcaps_type-for-in.patch |    6 +-
+ ...x-the-detection-of-Loopback-Mixing-contro.patch |    6 +-
+ ...x-the-lost-power-setup-of-seconary-pins-a.patch |    6 +-
+ ...kms-workaround-invalid-AVI-infoframe-chec.patch |    6 +-
+ ...n-kms-disable-writeback-on-pre-R300-asics.patch |    6 +-
+ ...disabling-PCI-bus-mastering-on-big-endian.patch |    4 +-
+ ...FS-errors-are-communicated-on-iodata-pnfs.patch |    6 +-
+ ...1-pnfs-obj-Must-return-layout-on-IO-error.patch |    6 +-
+ .../3.2.2/0022-NFS-Retry-mounting-NFSROOT.patch    |    6 +-
+ ...4.1-fix-backchannel-slotid-off-by-one-bug.patch |    6 +-
+ ...fix-recent-breakage-to-NFS-error-handling.patch |    6 +-
+ ...FSv4-include-bitmap-in-nfsv4-get-acl-data.patch |    6 +-
+ ...ression-in-handling-of-context-option-in-.patch |    6 +-
+ ...ximum-global-item-tag-report-size-to-96-b.patch |    6 +-
+ .../0028-HID-wiimote-Select-INPUT_FF_MEMLESS.patch |    6 +-
+ ...ix-missing-scrub-when-there-is-a-bit-flip.patch |    4 +-
+ ...0030-UBI-fix-use-after-free-on-error-path.patch |    6 +-
+ .../0031-PCI-Fix-PCI_EXP_TYPE_RC_EC-value.patch    |    6 +-
+ ...able-msi-interrupts-when-we-initialize-a-.patch |    6 +-
+ ...ore-CPU-non-addressable-_CRS-reserved-mem.patch |    6 +-
+ ...x86-PCI-amd-factor-out-MMCONFIG-discovery.patch |    8 +-
+ ...build-amd_bus.o-only-when-CONFIG_AMD_NB-y.patch |    6 +-
+ ...s-Release-spinlock-for-the-raid-device-li.patch |    6 +-
+ ...s-Fix-for-memory-allocation-error-for-lar.patch |    4 +-
+ ...Reject-replies-with-payload-XENSTORE_PAYL.patch |    6 +-
+ ...rform-bad-block-tests-for-WriteMostly-dev.patch |    6 +-
+ ...040-ima-free-duplicate-measurement-memory.patch |    4 +-
+ .../0041-ima-fix-invalid-memory-reference.patch    |    6 +-
+ ...ub-fix-a-possible-memleak-in-__slab_alloc.patch |    6 +-
+ ...ound-Dell-1536-1546-BIOS-MMCONFIG-bug-tha.patch |    6 +-
+ ...tting-custom-MAC-address-on-Asix-88178-de.patch |    6 +-
+ ...tting-custom-MAC-address-on-Asix-88772-de.patch |    6 +-
+ ...46-include-linux-crash_dump.h-needs-elf.h.patch |    6 +-
+ ...ix-BUG-caused-by-failure-to-check-skb-all.patch |    6 +-
+ ...x-rx-key-NULL-pointer-dereference-in-prom.patch |    6 +-
+ ...egression-in-channelwidth-switch-at-the-s.patch |    4 +-
+ ...em_cgroup_replace_page_cache-to-fix-LRU-i.patch |    4 +-
+ .../0051-x86-Fix-mmap-random-address-range.patch   |    6 +-
+ .../0052-UBI-fix-nameless-volumes-handling.patch   |    6 +-
+ .../3.2.2/0053-UBI-fix-debugging-messages.patch    |    6 +-
+ .../3.2.2/0054-UBI-make-vid_hdr-non-static.patch   |    6 +-
+ .../3.2.2/0055-UBIFS-fix-debugging-messages.patch  |    6 +-
+ ...UBIFS-make-debugging-messages-light-again.patch |    6 +-
+ ...ror-value-returned-by-several-bus-drivers.patch |    4 +-
+ ...8-mmc-core-Fix-voltage-select-in-DDR-mode.patch |    6 +-
+ ...ix-tuning-timer-incorrect-setting-when-su.patch |    6 +-
+ .../0060-mmc-sd-Fix-SDR12-timing-regression.patch  |    6 +-
+ ...2-ioctl-integer-overflow-in-video_usercop.patch |    6 +-
+ ...s-in-a-batch-should-not-be-accounted-as-a.patch |    6 +-
+ ...race-Fix-unregister-ftrace_ops-accounting.patch |    6 +-
+ ...eamline-config.pl-Simplify-backslash-line.patch |    6 +-
+ ...eamline-config.pl-Fix-parsing-Makefile-wi.patch |    6 +-
+ ...double-free-on-shutdown-of-nfsd-after-cha.patch |    6 +-
+ ...svcrpc-destroy-server-sockets-all-at-once.patch |    4 +-
+ ...-avoid-memory-corruption-on-pool-shutdown.patch |    4 +-
+ .../3.2.2/0069-nfsd4-fix-lockowner-matching.patch  |    6 +-
+ ...d-Fix-oops-when-parsing-a-0-length-export.patch |    6 +-
+ ...notify-don-t-BUG-in-fsnotify_destroy_mark.patch |    6 +-
+ ...Update-Boot-messages-for-SGI-UV2-platform.patch |    6 +-
+ ...t-Fix-handling-of-elf64-big-endian-object.patch |    6 +-
+ ...ix-integer-overflow-in-uvc_ioctl_ctrl_map.patch |    6 +-
+ ...cache-use-a-dispose-list-in-select_parent.patch |    8 +-
+ .../0076-fix-shrink_dcache_parent-livelock.patch   |    4 +-
+ ...fsblock-acquire-im_lock-in-_preload_range.patch |    6 +-
+ ...ock-don-t-spinlock-when-freeing-block_dev.patch |    6 +-
+ .../0079-pnfsblock-limit-bio-page-count.patch      |    6 +-
+ ...0211-revert-on-channel-work-optimisations.patch |   16 +-
+ ...-HID-hid-multitouch-add-another-eGalax-id.patch |    6 +-
+ ...touch-cleanup-with-eGalax-PID-definitions.patch |    4 +-
+ ...itouch-Add-egalax-ID-for-Acer-Iconia-W500.patch |    6 +-
+ ...ouch-add-support-for-the-MSI-Windpad-110W.patch |    6 +-
+ ...titouch-add-support-for-new-Hanvon-panels.patch |    6 +-
+ ...uch-add-support-of-Atmel-multitouch-panel.patch |    6 +-
+ ...0087-HID-multitouch-add-support-for-3M-32.patch |    6 +-
+ ...ltitouch-add-support-9-new-Xiroku-devices.patch |    6 +-
+ ...-fix-cputime-overflow-in-uptime_proc_show.patch |    6 +-
+ ...0090-block-add-and-use-scsi_blk_cmd_ioctl.patch |    4 +-
+ ...SCSI-passthrough-ioctls-on-partition-devi.patch |    4 +-
+ ...orward-ioctls-from-logical-volumes-to-the.patch |    4 +-
+ ...oc-clean-up-and-fix-proc-pid-mem-handling.patch |    6 +-
+ ...Use-LPIB-position-fix-for-Macbook-Pro-7-1.patch |    6 +-
+ ...oso-Xonar-DS-fix-polarity-of-front-output.patch |    6 +-
+ ...x-internal-microphone-on-Dell-Studio-16-X.patch |    6 +-
+ ...97-TOMOYO-Accept-000-as-a-valid-character.patch |    6 +-
+ ...8-intel-idle-Make-idle-driver-more-robust.patch |    6 +-
+ .../3.2.2/0099-intel_idle-fix-API-misuse.patch     |    6 +-
+ .../0100-ACPI-Store-SRAT-table-revision.patch      |    6 +-
+ ...e-SRAT-table-rev-to-use-8bit-or-32bit-PXM.patch |    6 +-
+ ...se-SRAT-table-rev-to-use-8bit-or-16-32bit.patch |    6 +-
+ ...back-the-call-to-acpi_os_validate_address.patch |    6 +-
+ ...essor-fix-acpi_get_cpuid-for-UP-processor.patch |    6 +-
+ ...ix-NULL-pointer-dereference-in-slave_dest.patch |    6 +-
+ ...t-Set-response-format-in-INQUIRY-response.patch |    6 +-
+ ...additional-sense-length-field-in-sense-da.patch |    6 +-
+ ...idate-the-mapped-core-over-suspend-resume.patch |    6 +-
+ ...-cx23885-dvb-check-if-dvb_attach-succeded.patch |    6 +-
+ ...ix-don-t-duplicate-xc4000-entry-for-radio.patch |    6 +-
+ ...umberspace-conflict-between-xc4000-and-pt.patch |    6 +-
+ ...-module-Fix-disabling-tracepoints-with-ta.patch |    6 +-
+ ...AP-correct-SYSC-register-offset-for-OMAP4.patch |    6 +-
+ ...-new-UV2-hardware-by-using-native-UV2-bro.patch |    6 +-
+ ...ix-BAU-destination-timeout-initialization.patch |    6 +-
+ .../3.2.2/0116-x86-UV2-Work-around-BAU-bug.patch   |    6 +-
+ ...fix-interpretation-of-the-rx-KeyMiss-flag.patch |    4 +-
+ ...800pci-fix-spurious-interrupts-generation.patch |    6 +-
+ ...x-endian-conversion-issue-in-discard-code.patch |    6 +-
+ ...20t-modified-the-setting-of-transfer-rate.patch |    6 +-
+ ...e-fix-off-by-one-index-into-syscall-table.patch |    6 +-
+ ...default-wsize-when-unix-extensions-are-no.patch |    6 +-
+ ...3-kprobes-initialize-before-using-a-hlist.patch |    6 +-
+ ...oc-clear_refs-do-not-clear-reserved-pages.patch |    6 +-
+ ...-ptr-dereference-in-__count_immobile_page.patch |    6 +-
+ .../3.2.2/0126-iwlagn-check-for-SMPS-mode.patch    |    6 +-
+ ...945-fix-hw-passive-scan-on-radar-channels.patch |    6 +-
+ ...SHM_UNLOCK-fix-long-unpreemptible-section.patch |    4 +-
+ ...fix-Unevictable-pages-stranded-after-swap.patch |    4 +-
+ .../3.2.2/0130-Linux-3.2.2.patch                   |    6 +-
+ ...x-buffer-alignment-regression-with-Nvidia.patch |    6 +-
+ ...x-silent-outputs-from-docking-station-jac.patch |    6 +-
+ ...tfs-Sanitize-write-counts-of-dev-ecryptfs.patch |    8 +-
+ ...tfs-Improve-metadata-read-failure-logging.patch |    6 +-
+ ...0005-eCryptfs-Make-truncate-path-killable.patch |    6 +-
+ ...6-eCryptfs-Check-inode-changes-in-setattr.patch |    6 +-
+ ...x-oops-when-printing-debug-info-in-extent.patch |    6 +-
+ ...adeon-kms-Add-an-MSI-quirk-for-Dell-RS690.patch |    6 +-
+ ...kms-move-panel-mode-setup-into-encoder-mo.patch |    4 +-
+ ...kms-rework-modeset-sequence-for-DCE41-and.patch |    6 +-
+ .../0011-drm-Fix-authentication-kernel-crash.patch |    6 +-
+ ...sing-xfs_iunlock-on-error-recovery-path-i.patch |    6 +-
+ ...M5100-register-map-cache-only-when-going-.patch |    6 +-
+ ...e-register-synchronisation-for-low-freque.patch |    6 +-
+ ...go-through-cache-when-applying-WM5100-rev.patch |    6 +-
+ ...-wm8996-Call-_POST_PMU-callback-for-CPVDD.patch |    6 +-
+ ...brcmsmac-fix-tx-queue-flush-infinite-loop.patch |    6 +-
+ ...c80211-fix-work-removal-on-deauth-request.patch |    6 +-
+ ...jbd-Issue-cache-flush-after-checkpointing.patch |    4 +-
+ ...12-make-it-work-undo-percpu-message-sched.patch |    6 +-
+ ...-sha512-reduce-stack-usage-to-safe-number.patch |    8 +-
+ ...-tpm_tis-add-delay-after-aborting-command.patch |    6 +-
+ .../0023-x86-uv-Fix-uninitialized-spinlocks.patch  |    6 +-
+ ...4-x86-uv-Fix-uv_gpa_to_soc_phys_ram-shift.patch |    6 +-
+ ...de_amd-Add-support-for-CPU-family-specifi.patch |    6 +-
+ ...sembler-constraint-to-prevent-overeager-g.patch |    4 +-
+ ...t-mute-led-polarity-for-laptops-with-bugg.patch |    6 +-
+ ...8-ALSA-hda-Fix-silent-output-on-ASUS-A6Rp.patch |    6 +-
+ ...hda-Fix-silent-output-on-Haier-W18-laptop.patch |    6 +-
+ ...per-over-missed-irq-issues-with-force-wak.patch |    6 +-
+ ...15-sdvo-always-set-positive-sync-polarity.patch |    6 +-
+ ...-enable-gen7-RC6-and-GPU-turbo-after-resu.patch |    6 +-
+ ...-at91-fix-at91rm9200-soc-subtype-handling.patch |    6 +-
+ .../0034-mach-ux500-enable-ARM-errata-764369.patch |    6 +-
+ ...proc-v7.S-remove-HARVARD_CACHE-preprocess.patch |    6 +-
+ ...ain-bitterly-about-attempts-to-remove-fil.patch |    6 +-
+ ...e-struct-xen_spinlock-to-always-fit-in-ar.patch |    6 +-
+ ...oved-redundant-calling-of-_scsih_probe_de.patch |    4 +-
+ .../0039-USB-option-Add-LG-docomo-L-02C.patch      |    6 +-
+ ...di_sio-fix-TIOCSSERIAL-baud_base-handling.patch |    6 +-
+ .../0041-USB-ftdi_sio-fix-initial-baud-rate.patch  |    6 +-
+ ...sio-add-PID-for-TI-XDS100v2-BeagleBone-A3.patch |    6 +-
+ .../0043-USB-serial-ftdi-additional-IDs.patch      |    6 +-
+ .../0044-USB-ftdi_sio-Add-more-identifiers.patch   |    6 +-
+ ...-updating-desc-length-must-be-protected-b.patch |    6 +-
+ ...-use-two-mutexes-to-allow-simultaneous-re.patch |    8 +-
+ ...-add-more-Pantech-UML190-and-UML290-ports.patch |    6 +-
+ ...dwc3-ep0-tidy-up-Pending-Request-handling.patch |    6 +-
+ ...ake-edge_remove_sysfs_attrs-the-port_remo.patch |    6 +-
+ ...0050-TTY-fix-UV-serial-console-regression.patch |    6 +-
+ ...-pl011-lock-console-writes-against-interr.patch |    6 +-
+ .../3.2.3/0052-jsm-Fixed-EEH-recovery-error.patch  |    6 +-
+ ...053-iwlwifi-fix-PCI-E-transport-inta-race.patch |    6 +-
+ ...assignment-in-vmw_framebuffer_create_hand.patch |    6 +-
+ ...tek-cr-fix-autopm-scheduling-while-atomic.patch |    6 +-
+ .../3.2.3/0056-USB-usbsevseg-fix-max-length.patch  |    6 +-
+ ...t-langwell-don-t-call-gadget-s-disconnect.patch |    6 +-
+ .../3.2.3/0058-usb-gadget-storage-endian-fix.patch |    6 +-
+ ...s-usb-host-ehci-fsl.c-add-missing-iounmap.patch |    6 +-
+ ...xhci-Fix-USB-3.0-device-restart-on-resume.patch |    6 +-
+ ...p-isoc-transfer-ring-when-TD-length-misma.patch |    6 +-
+ .../0062-usb-musb-davinci-fix-build-breakage.patch |    6 +-
+ ...71805f-Fix-clamping-of-temperature-limits.patch |    6 +-
+ ...7ehf-Disable-setting-DC-mode-for-pwm2-pwm.patch |    6 +-
+ .../0065-hwmon-sht15-fix-bad-error-code.patch      |    6 +-
+ ...-call-wake_up_all-to-allow-driver-to-shut.patch |    6 +-
+ ...-better-allocate-a-buffer-that-is-at-leas.patch |    6 +-
+ ...-Avoid-hanging-on-interface-with-no-USB_C.patch |    6 +-
+ .../3.2.3/0069-netns-fix-net_alloc_generic.patch   |    6 +-
+ ...conspicously-if-someone-uses-net_generic-.patch |    6 +-
+ ...f-Register-properly-as-a-pernet-subsystem.patch |    4 +-
+ ...fix-EPOLLET-regression-for-stream-sockets.patch |    6 +-
+ ...-fix-enslaving-in-alb-mode-when-link-down.patch |    6 +-
+ ...tp_ip-fix-possible-oops-on-packet-receive.patch |    6 +-
+ ...075-macvlan-fix-a-possible-use-after-free.patch |    6 +-
+ ...76-net-bpf_jit-fix-divide-by-0-generation.patch |    6 +-
+ ...ntroduce-missing-rcu_assign_pointer-calls.patch |    4 +-
+ ...ake-rds_sock_lock-BH-rather-than-IRQ-safe.patch |    6 +-
+ ..._trim_head-to-adjust-segment-count-with-s.patch |    6 +-
+ ...ng-remote-adress-for-md5-lookup-in-rst-pa.patch |    4 +-
+ ...CP210x-Added-USB-ID-for-the-Link-Instrume.patch |    6 +-
+ ...USB-cp210x-call-generic-open-last-in-open.patch |    6 +-
+ ...0083-USB-cp210x-fix-CP2104-baudrate-usage.patch |    6 +-
+ ...84-USB-cp210x-do-not-map-baud-rates-to-B0.patch |    6 +-
+ ...5-USB-cp210x-fix-up-set_termios-variables.patch |    6 +-
+ ...clean-up-refactor-and-document-speed-hand.patch |    8 +-
+ ...7-USB-cp210x-initialise-baud-rate-at-open.patch |    6 +-
+ ...cp210x-allow-more-baud-rates-above-1Mbaud.patch |    6 +-
+ ...ux500-no-MMC_CAP_SD_HIGHSPEED-on-Snowball.patch |    6 +-
+ .../3.2.3/0090-Linux-3.2.3.patch                   |    6 +-
+ ...-Mark-WM5100-register-map-cache-only-when.patch |    6 +-
+ ...-Don-t-go-through-cache-when-applying-WM5.patch |    6 +-
+ .../3.2.4/0003-Linux-3.2.4.patch                   |    6 +-
+ .../3.2.5/0001-PCI-Rework-ASPM-disable-code.patch  |   10 +-
+ .../3.2.5/0002-Linux-3.2.5.patch                   |    6 +-
+ ...d-fix-pipeline-break-caused-by-block-plug.patch |    6 +-
+ ...x-the-logic-to-detect-VIA-analog-low-curr.patch |    6 +-
+ ...0003-ALSA-HDA-Remove-quirk-for-Asus-N53Jq.patch |    6 +-
+ ...ply-0x0f-VREF-fix-to-all-ASUS-laptops-wit.patch |    8 +-
+ ...x-calling-cs_automic-twice-for-Cirrus-cod.patch |    6 +-
+ ...low-analog-low-current-mode-when-dynamic-.patch |    6 +-
+ ...x-duplicated-output-to-more-than-one-code.patch |    6 +-
+ ...sable-dynamic-power-control-for-VIA-as-de.patch |    6 +-
+ ...s-Enable-line-out-VMID-buffer-for-single-.patch |    6 +-
+ ...ubs-fix-wrong-bits-for-LINEOUT2-N-P-mixer.patch |    6 +-
+ ...vfp-flush-thread-hwstate-before-restoring.patch |    6 +-
+ ...1-vfp-fix-ptrace-regset-modification-race.patch |    6 +-
+ ...vfp-flush-thread-hwstate-before-copying-p.patch |    6 +-
+ ...0014-ARM-OMAP2-GPMC-fix-device-size-setup.patch |   10 +-
+ ...-vt-vt_ioctl.c-fix-KDFONTOP-32bit-compati.patch |    6 +-
+ ...016-proc-mem_release-should-check-mm-NULL.patch |    6 +-
+ .../0017-proc-unify-mem_read-and-mem_write.patch   |    6 +-
+ ...ure-mem_open-doesn-t-pin-the-target-s-mem.patch |    6 +-
+ ...ohci-add-reset-packet-quirk-for-SB-Audigy.patch |    6 +-
+ ...ire-ohci-disable-MSI-on-Ricoh-controllers.patch |    6 +-
+ ...s-SMP-vendor-specific-attribute-MADs-to-f.patch |    6 +-
+ ...ix-kernel-panic-by-always-initializing-qp.patch |    6 +-
+ ...-a-memory-leak-in-function-pre_handler_kr.patch |    6 +-
+ ...nd-bugfix-reset-the-BCH-module-when-it-is.patch |    6 +-
+ ...atmel_nand-optimize-read-write-buffer-fun.patch |    8 +-
+ ...-at_hdmac-bugfix-for-enabling-channel-irq.patch |    4 +-
+ ...xip.c-fix-race-condition-in-xip_file_faul.patch |    6 +-
+ ...on-check-pfn_valid-when-entering-a-new-MA.patch |    6 +-
+ ...e-Fix-s2disk-regression-related-to-freezi.patch |    6 +-
+ ...S-CPU-C-state-breakage-with-PM-Qos-change.patch |    6 +-
+ ...Set-DESKTOP_HEIGHT-register-to-the-frameb.patch |    6 +-
+ ...-drm-nouveau-gem-fix-fence_sync-race-oops.patch |    6 +-
+ ...kms-disable-output-polling-when-suspended.patch |    6 +-
+ ...034-drm-radeon-kms-fix-TRAVIS-panel-setup.patch |    6 +-
+ ...x-task-stack-corruption-under-__ARCH_WANT.patch |    6 +-
+ ...e-Thaw-processes-in-SNAPSHOT_CREATE_IMAGE.patch |    4 +-
+ ...e-Thaw-kernel-threads-in-SNAPSHOT_CREATE_.patch |    6 +-
+ .../0038-8139cp-fix-missing-napi_gro_flush.patch   |    6 +-
+ ...ID-buffer-as-uptodate-before-marking-it-d.patch |    6 +-
+ ...MI-hot-remove-notification-to-audio-drive.patch |    6 +-
+ ...splayPort-hot-remove-notification-to-audi.patch |    6 +-
+ .../0042-drm-i915-check-ACTHD-of-all-rings.patch   |    4 +-
+ .../0043-drm-i915-Fix-TV-Out-refresh-rate.patch    |    6 +-
+ .../3.2.6/0044-drm-i915-handle-3rd-pipe.patch      |    6 +-
+ ...nvert-force_wake_get-to-func-pointer-in-t.patch |    6 +-
+ ...otect-force_wake_-get-put-with-the-gt_loc.patch |    4 +-
+ ...finite-loop-due-to-overflow-in-ecryptfs_w.patch |    6 +-
+ ...w83627ehf-Fix-number-of-fans-for-NCT6776F.patch |    6 +-
+ ...ps-in-session-setup-code-for-null-user-mo.patch |    6 +-
+ ...-fix-usage-of-CONTRAST_CTR-in-suspend-res.patch |    6 +-
+ ...-Exclude-TAINT_FIRMWARE_WORKAROUND-from-d.patch |    6 +-
+ ...-Exclude-TAINT_OOT_MODULE-from-disabling-.patch |    6 +-
+ ...t-Fix-reject-release-handling-in-iscsit_f.patch |    6 +-
+ ...t-Fix-double-list_add-with-iscsit_alloc_b.patch |    6 +-
+ ...t-Fix-discovery-with-INADDR_ANY-and-IN6AD.patch |   10 +-
+ ...s-Fix-routing-of-input-PGAs-to-line-outpu.patch |    6 +-
+ ...s-Correct-line-input-to-line-output-2-pat.patch |    6 +-
+ ...ASoC-wm8962-Fix-word-length-configuration.patch |    6 +-
+ ...-Enabling-VMID-should-take-a-runtime-PM-r.patch |    6 +-
+ ...ASoC-wm8994-Fix-typo-in-VMID-ramp-setting.patch |    6 +-
+ ...socket-refcount-decrementing-on-each-resu.patch |    6 +-
+ ...-virtuoso-fix-exchanged-L-R-volumes-of-au.patch |    6 +-
+ ...-iommu-amd-Work-around-broken-IVRS-tables.patch |    6 +-
+ ...msm-Fix-error-handling-in-msm_iommu_unmap.patch |    6 +-
+ ...on-check-for-overlapping-nodes-during-iso.patch |    6 +-
+ .../0066-mm-fix-UP-THP-spin_is_locked-BUGs.patch   |    4 +-
+ ...correct-preempted-registration-sense-code.patch |    6 +-
+ ...w-PERSISTENT-RESERVE-IN-for-non-reservati.patch |    6 +-
+ ...ect-sense-key-for-INVALID-FIELD-IN-PARAME.patch |    6 +-
+ ...workaround-for-zero-length-control-CDB-ha.patch |    6 +-
+ ...rn-correct-ASC-for-unimplemented-VPD-page.patch |    6 +-
+ ...-INQUIRY-commands-with-EVPD-0-but-PAGE-CO.patch |    6 +-
+ ...73-Staging-asus_oled-fix-image-processing.patch |    6 +-
+ ...asus_oled-fix-NULL-ptr-crash-on-unloading.patch |    6 +-
+ ...075-staging-r8712u-Add-new-Sitecom-UsB-ID.patch |    6 +-
+ ...-r8712u-Use-asynchronous-firmware-loading.patch |    4 +-
+ ...h9.h-usb_endpoint_maxp-uses-__le16_to_cpu.patch |    6 +-
+ ...zero-fix-bug-in-loopback-autoresume-handl.patch |    6 +-
+ ...p-PCI-USB-quirk-handling-for-Netlogic-XLP.patch |    6 +-
+ ...al-add-new-PID-number-0xa951-to-the-ftdi-.patch |    6 +-
+ ...B-add-new-zte-3g-dongle-s-pid-to-option.c.patch |    6 +-
+ ...SWIZ_BITS-to-8-to-reduce-tmem-bucket-lock.patch |    6 +-
+ .../3.2.6/0083-zcache-fix-deadlock-condition.patch |    6 +-
+ ...ore-Add-missing-spin_lock_init-for-irq_lo.patch |    6 +-
+ ...-Avoid-Pstate-MSR-accesses-on-systems-sup.patch |    6 +-
+ .../0086-powernow-k8-Fix-indexing-issue.patch      |    6 +-
+ .../3.2.6/0087-Linux-3.2.6.patch                   |    6 +-
+ .../3.2.7/0001-ixgbe-fix-vf-lookup.patch           |    6 +-
+ .../3.2.7/0002-igb-fix-vf-lookup.patch             |    6 +-
+ ...Fix-an-issue-where-perf-report-fails-to-s.patch |    6 +-
+ ...Fix-perf-stack-to-non-executable-on-x86_6.patch |    6 +-
+ ...rce-explicit-bpp-selection-for-intel_dp_l.patch |    6 +-
+ ...006-drm-i915-no-lvds-quirk-for-AOpen-MP45.patch |    6 +-
+ ...-kernel-panic-during-driver-initilization.patch |    6 +-
+ ...ath9k-fix-a-WEP-crypto-related-regression.patch |    6 +-
+ ...ath9k_hw-fix-a-RTS-CTS-timeout-regression.patch |    6 +-
+ ...75375s-Fix-bit-shifting-in-f75375_write16.patch |    6 +-
+ .../0011-net-enable-TC35815-for-MIPS-again.patch   |    6 +-
+ ...ion-lower-PROP_MAX_SHIFT-to-32-on-64-bit-.patch |    6 +-
+ ...ay-prevent-integer-overflow-in-relay_open.patch |    6 +-
+ ...meout-a-single-frame-in-the-rx-reorder-bu.patch |    6 +-
+ ...ix-NULL-bdi-dev-in-trace-writeback_single.patch |    4 +-
+ ...ix-dereferencing-NULL-bdi-dev-on-trace_wr.patch |    6 +-
+ ...5s-Fix-automatic-pwm-mode-setting-for-F75.patch |    6 +-
+ ...-request-oplock-when-doing-open-on-lookup.patch |    6 +-
+ ...return-error-from-standard_receive3-after.patch |    6 +-
+ ...-sha512-Use-binary-and-instead-of-modulus.patch |    6 +-
+ ...1-crypto-sha512-Avoid-stack-bloat-on-i386.patch |    6 +-
+ ...-fix-wakeup-timer-races-with-bdi_unregist.patch |    6 +-
+ ...x0-Fix-default-inaudible-sound-on-Gateway.patch |    6 +-
+ ...x-initialization-of-secondary-capture-sou.patch |    6 +-
+ ...x-silent-speaker-output-on-Acer-Aspire-69.patch |    6 +-
+ ...ci-save-and-restore-sdioirq-when-soft-res.patch |    6 +-
+ ..._mmc-Fix-PIO-mode-with-support-of-highmem.patch |    4 +-
+ ...o-not-remap-pirqs-onto-evtchns-if-xen_hav.patch |    6 +-
+ .../0029-crypto-sha512-use-standard-ror64.patch    |    4 +-
+ .../3.2.7/0030-Linux-3.2.7.patch                   |    6 +-
+ ...-math_state_restore-isn-t-called-from-asm.patch |    4 +-
+ ...387-make-irq_fpu_usable-tests-more-robust.patch |    6 +-
+ .../0003-i387-fix-sense-of-sanity-check.patch      |    6 +-
+ ...6-64-preemption-unsafe-user-stack-save-re.patch |    4 +-
+ ...S_USEDFPU-clearing-out-of-__save_init_fpu.patch |    6 +-
+ ...ever-touch-TS_USEDFPU-directly-use-helper.patch |    6 +-
+ ...not-preload-FPU-state-at-task-switch-time.patch |    4 +-
+ ...MD-K7-K8-fpu-fxsave-fxrstor-workaround-fr.patch |    4 +-
+ ...S_USEDFPU-flag-from-thread_info-to-task_s.patch |    6 +-
+ ...roduce-FPU-state-preloading-at-context-sw.patch |    8 +-
+ .../3.2.8/0011-Linux-3.2.8.patch                   |    6 +-
+ .../0001-Security-tomoyo-add-.gitignore-file.patch |    8 +-
+ ...f-power_pmu_start-restores-incorrect-valu.patch |    8 +-
+ ...1-USB-AT91-gadget-registration-for-module.patch |    6 +-
+ ...04-drm-radeon-kms-fix-MSI-re-arm-on-rv370.patch |    6 +-
+ ...5-PCI-workaround-hard-wired-bus-number-V2.patch |    8 +-
+ .../0006-mac80211-Fix-a-rwlock-bad-magic-bug.patch |    8 +-
+ .../3.2.9/0007-ipheth-Add-iPhone-4S.patch          |    8 +-
+ ...cache-defaults-initialization-from-raw-ca.patch |    8 +-
+ ...py-up-lower-inode-attrs-after-setting-low.patch |    8 +-
+ ...t-ktime-to-tod-clock-comparator-conversio.patch |    8 +-
+ ...11-vfs-fix-d_inode_lookup-dentry-ref-leak.patch |    8 +-
+ ...PL330-fix-null-pointer-dereference-in-pl3.patch |    8 +-
+ ...a-Fix-redundant-jack-creations-for-cx5051.patch |    8 +-
+ ...mmc-core-check-for-zero-length-ioctl-data.patch |    8 +-
+ ...FSv4-Fix-an-Oops-in-the-NFSv4-getacl-code.patch |    6 +-
+ ...e-we-throw-out-bad-delegation-stateids-on.patch |    8 +-
+ .../0017-NFSv4-fix-server_scope-memory-leak.patch  |    8 +-
+ ...cache-v7-Disable-preemption-when-reading-.patch |    8 +-
+ ...M-7325-1-fix-v7-boot-with-lockdep-enabled.patch |    8 +-
+ ...9x-shorten-timer-period-for-slave-devices.patch |    8 +-
+ ...roxy-arp-respond-if-iif-rt-dst.dev-if-pri.patch |    8 +-
+ ...-netpoll_poll_dev-should-access-dev-flags.patch |    8 +-
+ .../0023-net_sched-Bug-in-netem-reordering.patch   |    8 +-
+ ...th-Enforce-minimum-size-of-VETH_INFO_PEER.patch |    8 +-
+ .../3.2.9/0025-via-velocity-S3-resume-fix.patch    |    8 +-
+ ...4-reset-flowi-parameters-on-route-connect.patch |    8 +-
+ ..._reset-binding-oif-to-iif-in-no-sock-case.patch |    8 +-
+ ...ong-order-of-ip_rt_get_source-and-update-.patch |    8 +-
+ ...ke-qdisc_skb_cb-upper-size-bound-explicit.patch |    6 +-
+ ...lying-about-hard_header_len-and-use-skb-c.patch |    8 +-
+ .../0031-gro-more-generic-L2-header-check.patch    |    8 +-
+ ...cp_sacktag_one-to-tag-ranges-not-aligned-.patch |    8 +-
+ ...ge-tcp_shifted_skb-passes-to-tcp_sacktag_.patch |    8 +-
+ ..._shifted_skb-adjustment-of-lost_cnt_hint-.patch |    8 +-
+ ...Kamstrup-VID-PIDs-to-cp210x-serial-driver.patch |    8 +-
+ ...n-cleanup-zte-3g-dongle-s-pid-in-option.c.patch |    8 +-
+ ...ti_usb_3410_5052-Add-Abbot-Diabetes-Care-.patch |    6 +-
+ ...ove-duplicate-USB-3.0-hub-feature-defines.patch |    8 +-
+ ...andoff-when-BIOS-disables-host-PCI-device.patch |    8 +-
+ ...ps-caused-by-more-USB2-ports-than-USB3-po.patch |    8 +-
+ ...Fix-encoding-for-HS-bulk-control-NAK-rate.patch |    8 +-
+ ...fail-USB3-probe-on-missing-legacy-PCI-IRQ.patch |    6 +-
+ ...43-USB-Set-hub-depth-after-USB3-hub-reset.patch |   10 +-
+ ...orage-fix-freezing-of-the-scanning-thread.patch |    6 +-
+ ...arget-Allow-control-CDBs-with-data-1-page.patch |   14 +-
+ ...SoC-wm8962-Fix-sidetone-enumeration-texts.patch |    8 +-
+ ...altek-Fix-overflow-of-vol-sw-check-bitmap.patch |    8 +-
+ ...altek-Fix-surround-output-regression-on-A.patch |    8 +-
+ ...i_mmap_mutex-for-access-to-the-VMA-prio-l.patch |    8 +-
+ ...wmon-max6639-Fix-FAN_FROM_REG-calculation.patch |    8 +-
+ ...39-Fix-PPR-register-initialization-to-set.patch |    8 +-
+ ...n-ads1015-Fix-file-leak-in-probe-function.patch |    8 +-
+ ...fix-oops-in-drivers-video-omap2-dss-dpi.c.patch |    8 +-
+ ...x-oops-in-arch-arm-mach-omap2-vp.c-when-p.patch |   74 --
+ ...L1i-and-L2-cache-sharing-information-for.patch} |    8 +-
+ ...n-rates-with-idx-1-in-ath9k-rate-control.patch} |    8 +-
+ ...k-oneshot-irqs-when-thread-was-not-woken.patch} |    8 +-
+ ...enirq-Handle-pending-irqs-in-irq_startup.patch} |    6 +-
+ ...x-Poison-overwritten-warning-caused-by-u.patch} |    8 +-
+ ...bug-in-the-SCSI-power-management-handler.patch} |    8 +-
+ ...ching-of-fwmark-templates-during-schedul.patch} |    8 +-
+ ...e.patch => 0061-jme-Fix-FIFO-flush-issue.patch} |    6 +-
+ ...-Do-not-free-all-rx-dma-descriptors-duri.patch} |    8 +-
+ ...-t-create-files-in-tmp-with-predictable-.patch} |    8 +-
+ ...fix-isr-hang-when-hw-is-unplugged-under-.patch} |    8 +-
+ ...-race-conditon-during-start-of-streaming.patch} |    8 +-
+ ...n-t-wedge-hardware-after-early-callbacks.patch} |    8 +-
+ ...s-Fix-register-write-order-when-setting-.patch} |    8 +-
+ ...uce-POLLFREE-to-flush-signalfd_wqh-befor.patch} |    6 +-
+ ...egister_pollwait-can-use-the-freed-pwq-w.patch} |    6 +-
+ ...it-paths.patch => 0070-epoll-limit-paths.patch} |    6 +-
+ ...use-copy_to_user-without-the-underscores.patch} |    8 +-
+ ...73-Linux-3.2.9.patch => 0072-Linux-3.2.9.patch} |    8 +-
+ ...-f_rndis-HACK-around-undefined-variables.patch} |    8 +-
+ ...-da8xx-fb-add-DVI-support-for-beaglebone.patch} |    8 +-
+ ...ebase-everything-onto-3.2-WARNING-MEGAPA.patch} |    8 +-
+ .../0004-more-beaglebone-merges.patch}             |    8 +-
+ .../0005-beaglebone-disable-tsadc.patch}           |    8 +-
+ ...eneral-purpose-mode-untested-with-touchs.patch} |    6 +-
+ ...c-Add-board-file-mfd-support-fix-warning.patch} |    6 +-
+ ...M335X-init-tsc-bone-style-for-new-boards.patch} |    8 +-
+ ...adc-make-stepconfig-channel-configurable.patch} |    8 +-
+ .../0010-tscadc-Trigger-through-sysfs.patch}       |    6 +-
+ ...eta-ti-Remove-debug-messages-for-meta-ti.patch} |    8 +-
+ ...-switch-to-polling-instead-of-interrupts.patch} |    8 +-
+ .../0013-beaglebone-fix-ADC-init.patch}            |    8 +-
+ .../0014-AM335x-MUX-add-ehrpwm1A.patch}            |    8 +-
+ ...nable-PWM-for-lcd-backlight-backlight-is.patch} |    8 +-
+ ...et-dto-to-max-value-of-14-to-avoid-SD-Ca.patch} |    8 +-
+ ...et-default-brightness-to-50-for-pwm-back.patch} |    8 +-
+ ...-framebuffer-driver-supporting-Adafruit-.patch} |    8 +-
+ ...19-beaglebone-use-P8_6-gpio1_3-as-w1-bus.patch} |    8 +-
+ ...dd-support-for-Towertech-TT3201-CAN-cape.patch} |   10 +-
+ ...m33xx-fix-serial-mux-warnings-for-am33xx.patch} |    9 +-
+ ...AP2-am335x-correct-McASP0-pin-mux-detail.patch} |    8 +-
+ recipes-kernel/linux/linux-ti33x-psp-3.2/patch.sh  |   38 +
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |  188 +++-
+ 597 files changed, 9001 insertions(+), 1667 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-3.0/patch.sh b/recipes-kernel/linux/linux-3.0/patch.sh
-index dc19a9e..31bdfe1 100755
---- a/recipes-kernel/linux/linux-3.0/patch.sh
-+++ b/recipes-kernel/linux/linux-3.0/patch.sh
-@@ -13,7 +13,7 @@ git reset --hard ${TAG}
- rm export -rf
- 
- previous=${TAG}
--PATCHSET="pm-wip/voltdm pm-wip/cpufreq beagle madc sakoman sgx ulcd omap4 misc"
-+PATCHSET="pm-wip/voltdm pm-wip/cpufreq beagle madc sakoman sgx ulcd omap4 misc usb"
- 
- # apply patches
- for patchset in ${PATCHSET} ; do
-diff --git a/recipes-kernel/linux/linux-3.0/usb/0001-Fix-sprz319-erratum-2.1.patch b/recipes-kernel/linux/linux-3.0/usb/0001-Fix-sprz319-erratum-2.1.patch
-new file mode 100644
-index 0000000..8d65b5f
---- /dev/null
-+++ b/recipes-kernel/linux/linux-3.0/usb/0001-Fix-sprz319-erratum-2.1.patch
-@@ -0,0 +1,210 @@
-+From cf5db5477d8d43f02f4511f3835ab4bec0dcc27c Mon Sep 17 00:00:00 2001
-+From: Richard Watts <rrw@kynesim.co.uk>
-+Date: Mon, 20 Feb 2012 17:58:26 +0000
-+Subject: [PATCH] Fix sprz319 erratum 2.1
-+
-+There is an erratum in DM3730 which results in the
-+EHCI USB PLL (DPLL5) not updating sufficiently frequently; this
-+leads to USB PHY clock drift and once the clock has drifted far
-+enough, the PHY's ULPI interface stops responding and USB
-+drops out. This is manifested on a Beagle xM by having the attached
-+SMSC9514 report 'Cannot enable port 2. Maybe the USB cable is bad?'
-+or similar.
-+
-+The fix is to carefully adjust your DPLL5 settings so as to
-+keep the PHY clock as close as possible to 120MHz over the long
-+term; TI SPRZ319e gives a table of such settings and this patch
-+applies that table to systems with a 13MHz or a 26MHz clock,
-+thus fixing the issue (inasfar as it can be fixed) on Beagle xM
-+and Overo Firestorm.
-+
-+Signed-off-by: Richard Watts <rrw@kynesim.co.uk>
-+---
-+ arch/arm/mach-omap2/clkt_clksel.c    |   15 ++++++++
-+ arch/arm/mach-omap2/clock.h          |    7 ++++
-+ arch/arm/mach-omap2/clock3xxx.c      |   65 +++++++++++++++++++++++++++++----
-+ arch/arm/mach-omap2/clock3xxx.h      |    1 +
-+ arch/arm/mach-omap2/clock3xxx_data.c |    2 +-
-+ arch/arm/mach-omap2/dpll3xxx.c       |    2 +-
-+ 6 files changed, 82 insertions(+), 10 deletions(-)
-+
-+diff --git a/arch/arm/mach-omap2/clkt_clksel.c b/arch/arm/mach-omap2/clkt_clksel.c
-+index e25364d..e378fe7 100644
-+--- a/arch/arm/mach-omap2/clkt_clksel.c
-++++ b/arch/arm/mach-omap2/clkt_clksel.c
-+@@ -460,6 +460,21 @@ int omap2_clksel_set_rate(struct clk *clk, unsigned long rate)
-+ 	return 0;
-+ }
-+ 
-++int omap2_clksel_force_divisor(struct clk *clk, int new_div)
-++{
-++	u32 field_val;
-++
-++	field_val = _divisor_to_clksel(clk, new_div);
-++	if (field_val == ~0)
-++		return -EINVAL;
-++
-++	_write_clksel_reg(clk, field_val);
-++
-++	clk->rate = clk->parent->rate / new_div;
-++
-++	return 0;
-++}
-++
-+ /*
-+  * Clksel parent setting function - not passed in struct clk function
-+  * pointer - instead, the OMAP clock code currently assumes that any
-+diff --git a/arch/arm/mach-omap2/clock.h b/arch/arm/mach-omap2/clock.h
-+index 8bad1c6..ac3d367 100644
-+--- a/arch/arm/mach-omap2/clock.h
-++++ b/arch/arm/mach-omap2/clock.h
-+@@ -61,6 +61,12 @@ void omap3_dpll_allow_idle(struct clk *clk);
-+ void omap3_dpll_deny_idle(struct clk *clk);
-+ u32 omap3_dpll_autoidle_read(struct clk *clk);
-+ int omap3_noncore_dpll_set_rate(struct clk *clk, unsigned long rate);
-++#if CONFIG_ARCH_OMAP3
-++int omap3_noncore_dpll_program(struct clk *clk, u16 m, u8 n, u16 freqsel);
-++/* If you are using this function and not on OMAP3, you are
-++ * Doing It Wrong(tm), so there is no stub.
-++ */
-++#endif
-+ int omap3_noncore_dpll_enable(struct clk *clk);
-+ void omap3_noncore_dpll_disable(struct clk *clk);
-+ int omap4_dpllmx_gatectrl_read(struct clk *clk);
-+@@ -84,6 +90,7 @@ unsigned long omap2_clksel_recalc(struct clk *clk);
-+ long omap2_clksel_round_rate(struct clk *clk, unsigned long target_rate);
-+ int omap2_clksel_set_rate(struct clk *clk, unsigned long rate);
-+ int omap2_clksel_set_parent(struct clk *clk, struct clk *new_parent);
-++int omap2_clksel_force_divisor(struct clk *clk, int new_div);
-+ 
-+ /* clkt_iclk.c public functions */
-+ extern void omap2_clkt_iclk_allow_idle(struct clk *clk);
-+diff --git a/arch/arm/mach-omap2/clock3xxx.c b/arch/arm/mach-omap2/clock3xxx.c
-+index 952c3e0..d5be086 100644
-+--- a/arch/arm/mach-omap2/clock3xxx.c
-++++ b/arch/arm/mach-omap2/clock3xxx.c
-+@@ -40,6 +40,60 @@
-+ /* needed by omap3_core_dpll_m2_set_rate() */
-+ struct clk *sdrc_ick_p, *arm_fck_p;
-+ 
-++struct dpll_settings {
-++	int rate, m, n, f;
-++};
-++
-++
-++static int omap3_dpll5_apply_erratum21(struct clk *clk, struct clk *dpll5_m2)
-++{
-++	struct clk *sys_clk;
-++	int i, rv;
-++	static const struct dpll_settings precomputed[] = {
-++		/* From DM3730 errata (sprz319e), table 36
-++		* +1 is because the values in the table are register values;
-++		* dpll_program() will subtract one from what we give it,
-++		* so ...
-++		*/
-++		{ 13000000, 443+1, 5+1, 8 },
-++		{ 26000000, 443+1, 11+1, 8 }
-++	};
-++
-++	sys_clk = clk_get(NULL, "sys_ck");
-++
-++	for (i = 0 ; i < (sizeof(precomputed)/sizeof(struct dpll_settings)) ;
-++		++i) {
-++		const struct dpll_settings *d = &precomputed[i];
-++		if (sys_clk->rate == d->rate) {
-++			rv =  omap3_noncore_dpll_program(clk, d->m , d->n, 0);
-++			if (rv)
-++				return 1;
-++			rv =  omap2_clksel_force_divisor(dpll5_m2 , d->f);
-++			return 1;
-++		}
-++	}
-++	return 0;
-++}
-++
-++int omap3_dpll5_set_rate(struct clk *clk, unsigned long rate)
-++{
-++	struct clk *dpll5_m2;
-++	int rv;
-++	dpll5_m2 = clk_get(NULL, "dpll5_m2_ck");
-++
-++	if (cpu_is_omap3630() && rate == DPLL5_FREQ_FOR_USBHOST &&
-++		omap3_dpll5_apply_erratum21(clk, dpll5_m2)) {
-++		return 1;
-++	}
-++	rv = omap3_noncore_dpll_set_rate(clk, rate);
-++	if (rv)
-++		goto out;
-++	rv = clk_set_rate(dpll5_m2, rate);
-++
-++out:
-++	return rv;
-++}
-++
-+ int omap3_dpll4_set_rate(struct clk *clk, unsigned long rate)
-+ {
-+ 	/*
-+@@ -59,19 +113,14 @@ int omap3_dpll4_set_rate(struct clk *clk, unsigned long rate)
-+ void __init omap3_clk_lock_dpll5(void)
-+ {
-+ 	struct clk *dpll5_clk;
-+-	struct clk *dpll5_m2_clk;
-+ 
-+ 	dpll5_clk = clk_get(NULL, "dpll5_ck");
-+ 	clk_set_rate(dpll5_clk, DPLL5_FREQ_FOR_USBHOST);
-+-	clk_enable(dpll5_clk);
-+ 
-+-	/* Program dpll5_m2_clk divider for no division */
-+-	dpll5_m2_clk = clk_get(NULL, "dpll5_m2_ck");
-+-	clk_enable(dpll5_m2_clk);
-+-	clk_set_rate(dpll5_m2_clk, DPLL5_FREQ_FOR_USBHOST);
-++	/* dpll5_m2_ck is now (grottily!) handled by dpll5_clk's set routine,
-++	 * to cope with an erratum on DM3730
-++	 */
-+ 
-+-	clk_disable(dpll5_m2_clk);
-+-	clk_disable(dpll5_clk);
-+ 	return;
-+ }
-+ 
-+diff --git a/arch/arm/mach-omap2/clock3xxx.h b/arch/arm/mach-omap2/clock3xxx.h
-+index 8bbeeaf..0ede513 100644
-+--- a/arch/arm/mach-omap2/clock3xxx.h
-++++ b/arch/arm/mach-omap2/clock3xxx.h
-+@@ -10,6 +10,7 @@
-+ 
-+ int omap3xxx_clk_init(void);
-+ int omap3_dpll4_set_rate(struct clk *clk, unsigned long rate);
-++int omap3_dpll5_set_rate(struct clk *clk, unsigned long rate);
-+ int omap3_core_dpll_m2_set_rate(struct clk *clk, unsigned long rate);
-+ void omap3_clk_lock_dpll5(void);
-+ 
-+diff --git a/arch/arm/mach-omap2/clock3xxx_data.c b/arch/arm/mach-omap2/clock3xxx_data.c
-+index ffd55b1..dcd7bdc 100644
-+--- a/arch/arm/mach-omap2/clock3xxx_data.c
-++++ b/arch/arm/mach-omap2/clock3xxx_data.c
-+@@ -942,7 +942,7 @@ static struct clk dpll5_ck = {
-+ 	.parent		= &sys_ck,
-+ 	.dpll_data	= &dpll5_dd,
-+ 	.round_rate	= &omap2_dpll_round_rate,
-+-	.set_rate	= &omap3_noncore_dpll_set_rate,
-++	.set_rate	= &omap3_dpll5_set_rate,
-+ 	.clkdm_name	= "dpll5_clkdm",
-+ 	.recalc		= &omap3_dpll_recalc,
-+ };
-+diff --git a/arch/arm/mach-omap2/dpll3xxx.c b/arch/arm/mach-omap2/dpll3xxx.c
-+index f77022b..1909cd0 100644
-+--- a/arch/arm/mach-omap2/dpll3xxx.c
-++++ b/arch/arm/mach-omap2/dpll3xxx.c
-+@@ -291,7 +291,7 @@ static void _lookup_sddiv(struct clk *clk, u8 *sd_div, u16 m, u8 n)
-+  * Program the DPLL with the supplied M, N values, and wait for the DPLL to
-+  * lock..  Returns -EINVAL upon error, or 0 upon success.
-+  */
-+-static int omap3_noncore_dpll_program(struct clk *clk, u16 m, u8 n, u16 freqsel)
-++int omap3_noncore_dpll_program(struct clk *clk, u16 m, u8 n, u16 freqsel)
-+ {
-+ 	struct dpll_data *dd = clk->dpll_data;
-+ 	u8 dco, sd_div;
-+-- 
-+1.7.2.5
-+
-diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
-index 32ef963..c95542e 100644
---- a/recipes-kernel/linux/linux_3.0.bb
-+++ b/recipes-kernel/linux/linux_3.0.bb
-@@ -10,7 +10,7 @@ PV = "3.0.23"
- SRCREV_pn-${PN} = "bf6a68d2a214e07f7c0d6538e00e17b826714160"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- 
- FILESPATH =. "${FILE_DIRNAME}/linux-3.0:${FILE_DIRNAME}/linux-3.0/${MACHINE}:"
- 
-@@ -224,6 +224,8 @@ SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.gi
-             \
-             file://misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch \
-             \
-+            file://usb/0001-Fix-sprz319-erratum-2.1.patch \
-+            \
-             file://defconfig"
- 
- SRC_URI_append_beagleboard = " file://logo_linux_clut224.ppm \
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=ebbeb55561f15e6ebf760e5b735a92bcdcdeaca1
 
