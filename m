@@ -1,30 +1,40 @@
-Return-Path: <marco.monguzzi@gmail.com>
-Received: from mail-vx0-f176.google.com (mail-vx0-f176.google.com
-	[209.85.220.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 69D67E00747
-	for <meta-ti@yoctoproject.org>; Wed, 21 Mar 2012 07:58:45 -0700 (PDT)
-Received: by vcbfl17 with SMTP id fl17so1777493vcb.35
-	for <meta-ti@yoctoproject.org>; Wed, 21 Mar 2012 07:58:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:cc:content-type;
-	bh=gTFmsKDo96v80kd56VkwFTmMKXm+A/8xDCXX2LiCD6c=;
-	b=CjS0n6/JGbIcE2dmd32wvQHAatphYbax5x6WEZilCao950IxZuCJFlyeZDg8e3l5x+
-	PS20FR75QsG3Kyyq1VWt2VL0i5rsx5kpwHY8Wtv0kVCtM57nqTYVtloa0txqzJMN+HON
-	mL8Xo/PGJFcXrnFFWT+vAENoUss6oAu9OPZc0MQWBCmvHkQF7QD1aVdV5LInqvEuHNpl
-	ENYkEoMPKa/Y+M1Q+aPNSZys60tLYeOECW4KL1Exb0tSGMBKh4Fdqhtkl4oAQqjx8db6
-	j44GPoigL8iJD+aoDS/VK9AGTL9OHTADDBs65JRqQlCx1WQdEmAcTsQaDU6dJlpJpmEa
-	7F5A==
-MIME-Version: 1.0
-Received: by 10.220.151.134 with SMTP id c6mr2224262vcw.30.1332341924474; Wed,
-	21 Mar 2012 07:58:44 -0700 (PDT)
-Received: by 10.220.192.6 with HTTP; Wed, 21 Mar 2012 07:58:44 -0700 (PDT)
-Date: Wed, 21 Mar 2012 15:58:44 +0100
-Message-ID: <CALKp9+Z+pk6GZR2UPwToxCLGsKw0FO-Jj4nOnXEocSfFWwZBzg@mail.gmail.com>
-From: Marco Monguzzi <marco.monguzzi@gmail.com>
-To: meta-ti@yoctoproject.org
-X-Mailman-Approved-At: Wed, 21 Mar 2012 08:01:49 -0700
-Cc: k-kooi@ti.com, denys@ti.com
-Subject: question on meta-ti for yocto
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF9A5E00747
+	for <meta-ti@yoctoproject.org>; Wed, 21 Mar 2012 08:14:36 -0700 (PDT)
+Received: by werc1 with SMTP id c1so1426212wer.35
+	for <meta-ti@yoctoproject.org>; Wed, 21 Mar 2012 08:14:35 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=sJFIfAw8maEKaaUoOkfaIqQZQ59Qmuo0YxGyVNk1fLo=;
+	b=W6wEGDymPtFSsrx+BN4vDXDah8TqXsV3SH+X9AY6QRCKE31bAv0EgE3B6DgSkX6FyK
+	v6TUNPDALqh/jPIa5mcFdAJcF2bs4g/Fx6XH2WVgSRpRidWdGX8oHNF3fNWrIlV7Ritn
+	SzRZpfB4HyriyBpfTBlZ3VwBJS96ZY5k6YmsK+TNaFiniq+CKEwB9sasl1k8+0dlouqo
+	vC2omwoGDaCmm7B2PN3XhciEWq5a6jXvWhvBjwy20/doWxx9i2qm93zdDXzzlYB2TUOK
+	YyHKibhTzL0lB45P9M/K1t1wYWc8GVRY+Wv7I8f8zt3UxyvhCYJfWdHCokPqG4F0Szhn
+	E4jQ==
+Received: by 10.180.101.136 with SMTP id fg8mr39166701wib.4.1332342874767;
+	Wed, 21 Mar 2012 08:14:34 -0700 (PDT)
+Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id ff9sm5244779wib.2.2012.03.21.08.14.33
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 21 Mar 2012 08:14:33 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1257)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <CALKp9+Z+pk6GZR2UPwToxCLGsKw0FO-Jj4nOnXEocSfFWwZBzg@mail.gmail.com>
+Date: Wed, 21 Mar 2012 16:14:31 +0100
+Message-Id: <E4FB558B-EFEA-42DF-B108-2EBB6B9B405D@dominion.thruhere.net>
+References: <CALKp9+Z+pk6GZR2UPwToxCLGsKw0FO-Jj4nOnXEocSfFWwZBzg@mail.gmail.com>
+To: Marco Monguzzi <marco.monguzzi@gmail.com>
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQlCaWysiz/IkxJnd6lklCCdkjhqs9+GsUjLlJW7/FMu2mOoJ/0gnWFXyvFZ34yhx0d8RGm2
+Cc: meta-ti@yoctoproject.org
+Subject: Re: question on meta-ti for yocto
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,76 +46,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2012 14:58:45 -0000
-Content-Type: multipart/alternative; boundary=f46d043c7ed820af6904bbc207e5
-
---f46d043c7ed820af6904bbc207e5
-Content-Type: text/plain; charset=ISO-8859-1
-
-Dear Sirs,
-
-I am dumping this mail to ask for some clarifications. I am looking closely
-to yocto as environment for
-building embedded linux distro for omap based boards.
-
-In particular, I do have AM3517 and DM3730 custom boards to support.
-
-I am seeing that TI has made available meta-ti on yocto git that looks like
-a good starting point for me.
-
-But at same time the readme.txt does spot incompatibilities with the
-current yocto structure and points
-to open embeded and angstron layers.
-
-I am confused. When do you plan full compatibility with yocto?
-
-Would the gcc-4.5 toolchain grant full compatibility with neon?
-
-I am asking this because other players such as Denx (with its own ELDK
-www.denx.de) are providing an armv7a based on gcc-4.6
-that I could test with "CFLAGS= -march=armv7-a -fno-tree-vectorize
--mthumb-interwork -mfloat-abi=softfp -mfpu=neon"
-and observe operating fine on AM3517.
-
-I am wondering what is the best way to go:
-
-- attempt integrating meta-ti with yocto for portions I need (davinci
-support for sure on DM3730)
-- or stick with meta-ti as it is and develop my own recipes for custom hw
-as meta-ti bsp.
-
-Thanks in advance for your time.
-
-Regards,
-Marco Monguzzi
-
---f46d043c7ed820af6904bbc207e5
-Content-Type: text/html; charset=ISO-8859-1
+X-List-Received-Date: Wed, 21 Mar 2012 15:14:37 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dear Sirs,<div><br></div><div>I am dumping this mail to ask for some clarif=
-ications. I am looking closely to yocto as environment for=A0</div><div>bui=
-lding embedded linux distro for omap based boards.</div><div><br></div><div=
->
-In particular, I do have AM3517 and DM3730 custom boards to support.</div><=
-div><br></div><div>I am seeing that TI has made available meta-ti on yocto =
-git that looks like a good starting point for me.</div><div><br></div><div>
-But at same time the readme.txt does spot incompatibilities with the curren=
-t yocto structure and points=A0</div><div>to open embeded and angstron laye=
-rs.</div><div><br></div><div>I am confused. When do you plan full compatibi=
-lity with yocto?</div>
-<div><br></div><div>Would the=A0gcc-4.5 toolchain grant full compatibility =
-with neon?=A0</div><div><br></div><div>I am asking this because other playe=
-rs such as Denx (with its own ELDK <a href=3D"http://www.denx.de">www.denx.=
-de</a>) are providing an armv7a based on gcc-4.6</div>
-<div>that I could test with &quot;CFLAGS=3D -march=3Darmv7-a -fno-tree-vect=
-orize -mthumb-interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon&quot;</div><div>a=
-nd observe operating fine on AM3517.</div><div><br>I am wondering what is t=
-he best way to go:</div>
-<div><br></div><div>- attempt integrating meta-ti with yocto for portions I=
- need (davinci support for sure on DM3730)</div><div>- or stick with meta-t=
-i as it is and develop my own recipes for custom hw as meta-ti bsp.</div>
-<div><br></div><div>Thanks in advance for your time.</div><div><br>Regards,=
-</div><div>Marco Monguzzi</div>
 
---f46d043c7ed820af6904bbc207e5--
+Op 21 mrt. 2012, om 15:58 heeft Marco Monguzzi het volgende geschreven:
+
+> Dear Sirs,
+>=20
+> I am dumping this mail to ask for some clarifications. I am looking =
+closely to yocto as environment for=20
+> building embedded linux distro for omap based boards.
+
+Yocto or poky? If you're after yocto, just follow the instructions in =
+the README, that will get you that using the yocto framework. If you're =
+after poky, that's something completely different.
+
+regards,
+
+Koen=
+
