@@ -1,32 +1,30 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A3FBE0070C
-	for <meta-ti@yoctoproject.org>; Wed, 21 Mar 2012 01:02:35 -0700 (PDT)
-Received: by wgbdq13 with SMTP id dq13so476796wgb.11
-	for <meta-ti@yoctoproject.org>; Wed, 21 Mar 2012 01:02:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=v2BDbzIKj8sNKp6seGFyTGS1xEpiG3XufZTXmuPg0Bo=;
-	b=OXw8Bo4T4LJFcAhBDQ74jwrsqwgCNjlVVhEMmM5wKL1zHG+yJnRHveHdxsELIrlKKx
-	dsIeinjNd4j7JJgOUa3ns8M7T/mP7vo/nLjXdBWPPg/95VZfA/o22YTa1W1oekvDu/Y2
-	0NDxrcnj8u3mm8Ds1kD2tf4SN6U2emLn2AIkK4iXZdobpbOcHIDNqv/A8flUgK6vvjQ6
-	zy9rwB2zPKotdYyfvSMvXMhFu3ajYHRfqWcEOjgIoDWrC5BYxgCb8p5mg+Qoh1BPofNe
-	FiJCXok1TDl8I5u1h7/nyYYUHVPXtmGy2izuEHUAM78SRQdZiLbuJtYCtfr7GsT2FACB
-	jsGA==
-Received: by 10.180.88.67 with SMTP id be3mr6571187wib.20.1332316954477;
-	Wed, 21 Mar 2012 01:02:34 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id l5sm2572777wia.11.2012.03.21.01.02.32
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 21 Mar 2012 01:02:33 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+Return-Path: <marco.monguzzi@gmail.com>
+Received: from mail-vx0-f176.google.com (mail-vx0-f176.google.com
+	[209.85.220.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 69D67E00747
+	for <meta-ti@yoctoproject.org>; Wed, 21 Mar 2012 07:58:45 -0700 (PDT)
+Received: by vcbfl17 with SMTP id fl17so1777493vcb.35
+	for <meta-ti@yoctoproject.org>; Wed, 21 Mar 2012 07:58:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:cc:content-type;
+	bh=gTFmsKDo96v80kd56VkwFTmMKXm+A/8xDCXX2LiCD6c=;
+	b=CjS0n6/JGbIcE2dmd32wvQHAatphYbax5x6WEZilCao950IxZuCJFlyeZDg8e3l5x+
+	PS20FR75QsG3Kyyq1VWt2VL0i5rsx5kpwHY8Wtv0kVCtM57nqTYVtloa0txqzJMN+HON
+	mL8Xo/PGJFcXrnFFWT+vAENoUss6oAu9OPZc0MQWBCmvHkQF7QD1aVdV5LInqvEuHNpl
+	ENYkEoMPKa/Y+M1Q+aPNSZys60tLYeOECW4KL1Exb0tSGMBKh4Fdqhtkl4oAQqjx8db6
+	j44GPoigL8iJD+aoDS/VK9AGTL9OHTADDBs65JRqQlCx1WQdEmAcTsQaDU6dJlpJpmEa
+	7F5A==
+MIME-Version: 1.0
+Received: by 10.220.151.134 with SMTP id c6mr2224262vcw.30.1332341924474; Wed,
+	21 Mar 2012 07:58:44 -0700 (PDT)
+Received: by 10.220.192.6 with HTTP; Wed, 21 Mar 2012 07:58:44 -0700 (PDT)
+Date: Wed, 21 Mar 2012 15:58:44 +0100
+Message-ID: <CALKp9+Z+pk6GZR2UPwToxCLGsKw0FO-Jj4nOnXEocSfFWwZBzg@mail.gmail.com>
+From: Marco Monguzzi <marco.monguzzi@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Wed, 21 Mar 2012 09:02:22 +0100
-Message-Id: <1332316942-13839-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-X-Gm-Message-State: ALoCoQkKj2RyIQSlB09omeQZVW3mXJ12N58xPxQEmCwdu3TuxbTJyRnzO2FtIoeWlcZ8/2+VuDB8
-Subject: [PATCH] linux 3.0: update to 3.0.25
+X-Mailman-Approved-At: Wed, 21 Mar 2012 08:01:49 -0700
+Cc: k-kooi@ti.com, denys@ti.com
+Subject: question on meta-ti for yocto
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,110 +36,76 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2012 08:02:36 -0000
+X-List-Received-Date: Wed, 21 Mar 2012 14:58:45 -0000
+Content-Type: multipart/alternative; boundary=f46d043c7ed820af6904bbc207e5
 
-Backport Nishants OPP/hwmod fix to get more than 600MHz out of 37xx, but don't activate it yet. 3630ES1.2 derived silicon gets misdetected:
+--f46d043c7ed820af6904bbc207e5
+Content-Type: text/plain; charset=ISO-8859-1
 
-xM revision A:
-[    0.000000] OMAP3630 ES1.0 (l2cache iva sgx neon isp 192mhz_clk )
+Dear Sirs,
 
-new xM revision C:
-[    0.000000] OMAP3630 ES1.2 (l2cache neon isp 192mhz_clk )
+I am dumping this mail to ask for some clarifications. I am looking closely
+to yocto as environment for
+building embedded linux distro for omap based boards.
 
-Since the iva hwmod is missing the OPP tables will fail and clock it back to 600MHz. But with the patch the kernel hangs in early init. This problem isn't specific to this kernel update, it just coincided with ES1.2 silicon arriving on my desk.
+In particular, I do have AM3517 and DM3730 custom boards to support.
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- conf/machine/include/omap3.inc                     |    2 +-
- ...llow-OPP-enumeration-to-continue-if-devic.patch |   43 ++++++++++++++++++++
- recipes-kernel/linux/linux_3.0.bb                  |    8 ++--
- 3 files changed, 48 insertions(+), 5 deletions(-)
- create mode 100644 recipes-kernel/linux/linux-3.0/misc/0002-OMAP2-OPP-allow-OPP-enumeration-to-continue-if-devic.patch
+I am seeing that TI has made available meta-ti on yocto git that looks like
+a good starting point for me.
 
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 9cafe85..16078db 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r117"
-+MACHINE_KERNEL_PR = "r118"
- 
- KERNEL_IMAGETYPE = "uImage"
- 
-diff --git a/recipes-kernel/linux/linux-3.0/misc/0002-OMAP2-OPP-allow-OPP-enumeration-to-continue-if-devic.patch b/recipes-kernel/linux/linux-3.0/misc/0002-OMAP2-OPP-allow-OPP-enumeration-to-continue-if-devic.patch
-new file mode 100644
-index 0000000..7019381
---- /dev/null
-+++ b/recipes-kernel/linux/linux-3.0/misc/0002-OMAP2-OPP-allow-OPP-enumeration-to-continue-if-devic.patch
-@@ -0,0 +1,43 @@
-+From c15f217f7d07c460763a092f31f61b1975a18563 Mon Sep 17 00:00:00 2001
-+From: Nishanth Menon <nm@ti.com>
-+Date: Fri, 16 Mar 2012 11:19:09 -0500
-+Subject: [PATCH 2/2] OMAP2+: OPP: allow OPP enumeration to continue if device is not present
-+
-+On platforms such as OMAP3, certain variants may not have IVA, SGX
-+or some specific component. We currently have a check to aid fixing
-+wrong population of OPP entries for issues such as typos. This however
-+causes a conflict with valid requirement where the SoC variant does
-+not actually have the module present.
-+
-+So, reduce the severity of the print to a debug statement and skip
-+registering that specific OPP, but continue down the list.
-+
-+Reported-by: Steve Sakoman <steve@sakoman.com>
-+Reported-by: Maximilian Schwerin <mvs@tigris.de>
-+Acked-by: Steve Sakoman <steve@sakoman.com>
-+Tested-by: Maximilian Schwerin <mvs@tigris.de>
-+Signed-off-by: Nishanth Menon <nm@ti.com>
-+---
-+ arch/arm/mach-omap2/opp.c |    4 ++--
-+ 1 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/arch/arm/mach-omap2/opp.c b/arch/arm/mach-omap2/opp.c
-+index ab8b35b..f111b82 100644
-+--- a/arch/arm/mach-omap2/opp.c
-++++ b/arch/arm/mach-omap2/opp.c
-+@@ -64,10 +64,10 @@ int __init omap_init_opp_table(struct omap_opp_def *opp_def,
-+ 		}
-+ 		oh = omap_hwmod_lookup(opp_def->hwmod_name);
-+ 		if (!oh || !oh->od) {
-+-			pr_warn("%s: no hwmod or odev for %s, [%d] "
-++			pr_debug("%s: no hwmod or odev for %s, [%d] "
-+ 				"cannot add OPPs.\n", __func__,
-+ 				opp_def->hwmod_name, i);
-+-			return -EINVAL;
-++			continue;
-+ 		}
-+ 		dev = &oh->od->pdev.dev;
-+ 
-+-- 
-+1.7.2.5
-+
-diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
-index c95542e..a817c1d 100644
---- a/recipes-kernel/linux/linux_3.0.bb
-+++ b/recipes-kernel/linux/linux_3.0.bb
-@@ -5,12 +5,12 @@ KERNEL_IMAGETYPE = "uImage"
- 
- COMPATIBLE_MACHINE = "(beagleboard)"
- 
--PV = "3.0.23"
--# v3.0.23 tag
--SRCREV_pn-${PN} = "bf6a68d2a214e07f7c0d6538e00e17b826714160"
-+PV = "3.0.25"
-+# v3.0.25 tag
-+SRCREV_pn-${PN} = "9bf176a3e029ae7f2dc6feae185091525a988be2"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "a"
- 
- FILESPATH =. "${FILE_DIRNAME}/linux-3.0:${FILE_DIRNAME}/linux-3.0/${MACHINE}:"
- 
--- 
-1.7.2.5
+But at same time the readme.txt does spot incompatibilities with the
+current yocto structure and points
+to open embeded and angstron layers.
 
+I am confused. When do you plan full compatibility with yocto?
 
+Would the gcc-4.5 toolchain grant full compatibility with neon?
+
+I am asking this because other players such as Denx (with its own ELDK
+www.denx.de) are providing an armv7a based on gcc-4.6
+that I could test with "CFLAGS= -march=armv7-a -fno-tree-vectorize
+-mthumb-interwork -mfloat-abi=softfp -mfpu=neon"
+and observe operating fine on AM3517.
+
+I am wondering what is the best way to go:
+
+- attempt integrating meta-ti with yocto for portions I need (davinci
+support for sure on DM3730)
+- or stick with meta-ti as it is and develop my own recipes for custom hw
+as meta-ti bsp.
+
+Thanks in advance for your time.
+
+Regards,
+Marco Monguzzi
+
+--f46d043c7ed820af6904bbc207e5
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+Dear Sirs,<div><br></div><div>I am dumping this mail to ask for some clarif=
+ications. I am looking closely to yocto as environment for=A0</div><div>bui=
+lding embedded linux distro for omap based boards.</div><div><br></div><div=
+>
+In particular, I do have AM3517 and DM3730 custom boards to support.</div><=
+div><br></div><div>I am seeing that TI has made available meta-ti on yocto =
+git that looks like a good starting point for me.</div><div><br></div><div>
+But at same time the readme.txt does spot incompatibilities with the curren=
+t yocto structure and points=A0</div><div>to open embeded and angstron laye=
+rs.</div><div><br></div><div>I am confused. When do you plan full compatibi=
+lity with yocto?</div>
+<div><br></div><div>Would the=A0gcc-4.5 toolchain grant full compatibility =
+with neon?=A0</div><div><br></div><div>I am asking this because other playe=
+rs such as Denx (with its own ELDK <a href=3D"http://www.denx.de">www.denx.=
+de</a>) are providing an armv7a based on gcc-4.6</div>
+<div>that I could test with &quot;CFLAGS=3D -march=3Darmv7-a -fno-tree-vect=
+orize -mthumb-interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon&quot;</div><div>a=
+nd observe operating fine on AM3517.</div><div><br>I am wondering what is t=
+he best way to go:</div>
+<div><br></div><div>- attempt integrating meta-ti with yocto for portions I=
+ need (davinci support for sure on DM3730)</div><div>- or stick with meta-t=
+i as it is and develop my own recipes for custom hw as meta-ti bsp.</div>
+<div><br></div><div>Thanks in advance for your time.</div><div><br>Regards,=
+</div><div>Marco Monguzzi</div>
+
+--f46d043c7ed820af6904bbc207e5--
