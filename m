@@ -1,26 +1,25 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57B7AE0059A
-	for <meta-ti@yoctoproject.org>; Wed, 21 Mar 2012 17:25:59 -0700 (PDT)
-Received: (qmail 24158 invoked by uid 1003); 22 Mar 2012 00:25:58 -0000
-Received: from unknown (HELO ?184.48.57.244?)
-	(philip@opensdr.com@184.48.57.244)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	22 Mar 2012 00:25:58 -0000
-Message-ID: <4F6A7191.5090009@balister.org>
-Date: Wed, 21 Mar 2012 18:25:53 -0600
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
-MIME-Version: 1.0
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-References: <CALKp9+Z+pk6GZR2UPwToxCLGsKw0FO-Jj4nOnXEocSfFWwZBzg@mail.gmail.com>	<E4FB558B-EFEA-42DF-B108-2EBB6B9B405D@dominion.thruhere.net>	<86ehsln0t7.fsf@coulee.tdb.com>	<ECCB2891-32C1-451D-B469-7B0B632D8641@dominion.thruhere.net>
-	<1332365246.9740.195.camel@ted>
-In-Reply-To: <1332365246.9740.195.camel@ted>
-X-Enigmail-Version: 1.1.2
-Cc: Marco Monguzzi <marco.monguzzi@gmail.com>, meta-ti@yoctoproject.org
-Subject: Re: question on meta-ti for yocto
+Return-Path: <denis@denix.org>
+Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
+	[206.46.173.5])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8BDADE0059A
+	for <meta-ti@yoctoproject.org>; Wed, 21 Mar 2012 20:16:30 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M1900FSZNQWHMT0@vms173005.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 21 Mar 2012 22:16:09 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9313F202A6; Wed,
+	21 Mar 2012 23:16:08 -0400 (EDT)
+Date: Wed, 21 Mar 2012 23:16:08 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: roystonvasey@slingshot.co.nz, arago-devel@gforge.ti.com,
+	meta-ti@yoctoproject.org
+Message-id: <20120322031608.GG6857@denix.org>
+References: <005001cd07aa$eb9e7e80$c2db7b80$@slingshot.co.nz>
+MIME-version: 1.0
+In-reply-to: <005001cd07aa$eb9e7e80$c2db7b80$@slingshot.co.nz>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [arago-devel] ti-eula-unpack
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,34 +31,74 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2012 00:25:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 Mar 2012 03:16:30 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 03/21/2012 03:27 PM, Richard Purdie wrote:
+On Thu, Mar 22, 2012 at 10:38:14AM +1300, R U Local wrote:
+> Dear List,
 > 
-> The biggest confusion factor out there at the moment is meta-ti, not
-> poky and I'd like to ask politely for people to get their act together.
+> A resent change to ti-eula-unpack.inc to test for 32 bit compatibility on 64
+> bit systems has broken the build on Ubuntu x64 11.10 machines.
+> 
+> Ubuntu created multi-arch functionality between 11.4 and 11.10. There is are
+> now /lib /lib64 and /lib32 directories and no symlinks.
+> 
+> The following patch corrects this on my system but I have no idea of its
+> effect on others.
 
-Richard,
+Thanks for the patch, but it's a wrong list - it has been discussed a few days 
+ago on meta-ti (copied here):
 
-meta-ti is the focus of the confusion at the moment because it is trying
-to support several different use cases.
+https://lists.yoctoproject.org/pipermail/meta-ti/2012-March/000804.html
 
-The confusion about poky, yocto, oe is widespread. At an SDR related
-conference earlier this month, I was asked by some of the grad student
-types what all these words mean. And I gave about the same answer as
-Koen, but worded a little more diplomatically,
+While it may fix Ubuntu 11.10, I'm still not sure about other distros. One of 
+the suggestions was to switch it to warning, so it won't stop the build if the 
+check fails, but user gets notified.
 
-Even people that should know better are making statements that add to
-the confusion. I am 99% certain Saul used the phrase "Poky build system"
-at the Yocto developer day. We laughed about it afterwards, but this
-shows how deep the confusion is.
+-- 
+Denys
 
-I know you are trying to help solve the confusion problem. But I feel
-Koen should not take all the heat for expressing his frustration. We, as
-in the Yocto Advisory Board should do a better job communicating how all
-the pieces fit together,
 
-Philip
+> diff --git a/recipes-ti/includes/ti-eula-unpack.inc
+> b/recipes-ti/includes/ti-eula-unpack.inc
+> 
+> index dcabe9d..f37f026 100644
+> 
+> --- a/recipes-ti/includes/ti-eula-unpack.inc
+> 
+> +++ b/recipes-ti/includes/ti-eula-unpack.inc
+> 
+> @@ -21,7 +21,7 @@ python ti_bin_do_unpack() {
+> 
+>  
+> 
+>      # InstallJammer requires 32bit version of glibc
+> 
+>      lib32path = '/lib'
+> 
+> -    if os.path.exists('/lib64') and ( os.path.islink('/lib64') or
+> os.path.islink('/lib') ):
+> 
+> +    if os.path.exists('/lib64') and ( os.path.islink('/lib64') or
+> os.path.islink('/lib') or os.path.exists('/lib32')):
+> 
+>         lib32path = '/lib32'
+> 
+>      if not os.path.exists('%s/libc.so.6' % lib32path):
+> 
+>         raise bb.build.FuncFailed, \
+> 
+>  
+> 
+> Cheers Mike.
+> 
+>  
+> 
+
+> _______________________________________________
+> arago-devel mailing list
+> arago-devel@gforge.ti.com
+> https://gforge.ti.com/mailman/listinfo/arago-devel
+
 
