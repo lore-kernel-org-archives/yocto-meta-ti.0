@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B224E013CB
-	for <meta-ti@yoctoproject.org>; Thu, 22 Mar 2012 13:58:28 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7A686E013CB
+	for <meta-ti@yoctoproject.org>; Thu, 22 Mar 2012 15:19:26 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C671252A5F; Thu, 22 Mar 2012 20:58:26 +0000 (UTC)
+	id E71C952A5F; Thu, 22 Mar 2012 22:19:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120322205826.C671252A5F@arago-project.org>
-Date: Thu, 22 Mar 2012 20:58:26 +0000 (UTC)
+Message-Id: <20120322221925.E71C952A5F@arago-project.org>
+Date: Thu, 22 Mar 2012 22:19:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : README: update with the latest info
+Subject: Denys Dmytriyenko : ti-eula-unpack: fix the check for 32bit glibc, make it a warning
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,87 +21,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2012 20:58:28 -0000
+X-List-Received-Date: Thu, 22 Mar 2012 22:19:26 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 62ad4edfca78151a0f2327699bfb30f164e4d0a4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=62ad4edfca78151a0f2327699bfb30f164e4d0a4
+Commit: 997bf8f58a718afaab57657d8e347bffa70d8b9f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=997bf8f58a718afaab57657d8e347bffa70d8b9f
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Mar 22 16:52:48 2012 -0400
+Date:   Thu Mar 22 18:09:43 2012 -0400
 
-README: update with the latest info
+ti-eula-unpack: fix the check for 32bit glibc, make it a warning
 
-With distro-less fixes in OE-Core, no distro dependencies are required.
-Better explain toolchain requirements and setup specific versions.
+This makes better checking for 32bit glibc on Ubuntu 11.10
+In general, change to a WARNING instead of breaking the build with an ERROR,
+to accomodate other different implementations of 32/64bit system libraries,
+as well as multiarch setups.
+Will need to come up with more robust solution later.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- README |   40 ++++++++++++++++++----------------------
- 1 files changed, 18 insertions(+), 22 deletions(-)
+ recipes-ti/includes/ti-eula-unpack.inc |    7 +++----
+ 1 files changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/README b/README
-index 9c3e5ff..9e91f8d 100644
---- a/README
-+++ b/README
-@@ -1,36 +1,32 @@
--This layer hard depends on:
-+The official OpenEmbedded/Yocto BSP layer for Texas Instruments platforms.
-+
-+This layer depends on:
+diff --git a/recipes-ti/includes/ti-eula-unpack.inc b/recipes-ti/includes/ti-eula-unpack.inc
+index dcabe9d..60f5558 100644
+--- a/recipes-ti/includes/ti-eula-unpack.inc
++++ b/recipes-ti/includes/ti-eula-unpack.inc
+@@ -21,11 +21,10 @@ python ti_bin_do_unpack() {
  
- URI: git://git.openembedded.org/openembedded-core
-+layers: meta
- branch: master
- revision: HEAD
+     # InstallJammer requires 32bit version of glibc
+     lib32path = '/lib'
+-    if os.path.exists('/lib64') and ( os.path.islink('/lib64') or os.path.islink('/lib') ):
+-       lib32path = '/lib32'
++    if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
++        lib32path = '/lib32'
+     if not os.path.exists('%s/libc.so.6' % lib32path):
+-	raise bb.build.FuncFailed, \
+-        "\nTI installer requires 32bit glibc libraries for proper operation\n\trun 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on Ubuntu/Debian"
++        bb.warn("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on Ubuntu/Debian")
  
- URI: git://git.openembedded.org/meta-openembedded
-+layers: meta-oe
- branch: master
- revision: HEAD
- 
--And optionally depends on:
--
--URI: git://git.angstrom-distribution.org/meta-angstrom
--branch: master
--revision: HEAD
-+There are known issues when using a toolchain with gcc-4.6 and binutils-2.22
-+from OpenEmbedded-Core, thus it is recommended to use meta-openembedded layer
-+with gcc-4.5 + Linaro patches and binutils-2.20.1.
- 
--Currently meta-ti only works with the Angstrom distribution and hence
--requires the meta-angstrom layer. There are known issues when using
--gcc-4.6 based toolchain from OpenEmbedded-Core, thus gcc-4.5 toolchain,
--provided by meta-openembedded, is needed. It is planned to fix these
--shortcomings in the near future and allow building the base BSP part
--of meta-ti with different distributions and layer stacks, such as:
--distro-less (only with OE-Core), with Yocto/Poky, with Angstrom or
--Arago.
-+The base BSP part of meta-ti should work with different OpenEmbedded/Yocto
-+distributions and layer stacks, such as:
-+distro-less (only with OE-Core), with Yocto/Poky, with Angstrom or Arago.
- 
--Due to the above, it is now recommended to follow the instructions at
--http://www.angstrom-distribution.org/building-angstrom
-+Please follow the recommended setup procedures of your OE distribution. When
-+using in a distro-less configuration, please add to your local.conf:
- 
--This will set it up for the OpenEmbedded-core ('yocto') layout instead
--of the old "Classic" OpenEmbedded-dev layout. You can optionally tweak
--sources/layers.txt and conf/bblayers.conf to (de)select BSP layers.
-+GCCVERSION = "4.5%"
-+BINUVERSION = "2.20.1"
- 
--Send pull requests to meta-ti@yoctoproject.org
-+Send pull requests, patches, comments or questions to meta-ti@yoctoproject.org
- 
--Main layer maintainers: Denys Dmytriyenko <denys@ti.com>
--                        Koen Kooi <k-kooi@ti.com>
-+Maintainers: Denys Dmytriyenko <denys@ti.com>
-+             Koen Kooi <koen@dominion.thruhere.net>
+     localdata = bb.data.createCopy(d)
+     bb.data.update_data(localdata)
 
 
