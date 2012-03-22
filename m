@@ -1,24 +1,24 @@
 Return-Path: <richard.purdie@linuxfoundation.org>
 Received: from tim.rpsys.net (93-97-173-237.zone5.bethere.co.uk
 	[93.97.173.237])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17770E013CB
-	for <meta-ti@yoctoproject.org>; Thu, 22 Mar 2012 12:14:23 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CBAECE013CB
+	for <meta-ti@yoctoproject.org>; Thu, 22 Mar 2012 12:39:47 -0700 (PDT)
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q2MJE6XQ018582;
-	Thu, 22 Mar 2012 19:14:06 GMT
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q2MJdSQK018768;
+	Thu, 22 Mar 2012 19:39:28 GMT
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 17761-06; Thu, 22 Mar 2012 19:14:01 +0000 (GMT)
+	id 17727-06; Thu, 22 Mar 2012 19:39:23 +0000 (GMT)
 Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q2MJDw1d018575
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q2MJdJ0X018761
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 22 Mar 2012 19:13:59 GMT
-Message-ID: <1332443641.9740.313.camel@ted>
+	Thu, 22 Mar 2012 19:39:20 GMT
+Message-ID: <1332445162.9740.323.camel@ted>
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: William Mills <wmills@ti.com>
-Date: Thu, 22 Mar 2012 19:14:01 +0000
-In-Reply-To: <4F6B6F3F.3080204@ti.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 22 Mar 2012 19:39:22 +0000
+In-Reply-To: <96D0E546-6404-4D90-ACC2-948675BC6C36@dominion.thruhere.net>
 References: <CALKp9+Z+pk6GZR2UPwToxCLGsKw0FO-Jj4nOnXEocSfFWwZBzg@mail.gmail.com>
 	<E4FB558B-EFEA-42DF-B108-2EBB6B9B405D@dominion.thruhere.net>
 	<86ehsln0t7.fsf@coulee.tdb.com>
@@ -27,11 +27,12 @@ References: <CALKp9+Z+pk6GZR2UPwToxCLGsKw0FO-Jj4nOnXEocSfFWwZBzg@mail.gmail.com>
 	<1332367838.9740.208.camel@ted>
 	<F83C8961-F16F-4D3F-AF57-8FF4414022F6@dominion.thruhere.net>
 	<20120322150716.GA13495@denix.org> <4F6B57CB.5080000@ti.com>
-	<1332437646.9740.276.camel@ted> <4F6B6F3F.3080204@ti.com>
+	<96D0E546-6404-4D90-ACC2-948675BC6C36@dominion.thruhere.net>
 X-Mailer: Evolution 3.2.2- 
 Mime-Version: 1.0
 X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: meta-ti@yoctoproject.org
+Cc: meta-ti@yoctoproject.org, "Osier-mixon,
+	Jeffrey" <jeffrey.osier-mixon@intel.com>
 Subject: Re: question on meta-ti for yocto
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -44,97 +45,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2012 19:14:24 -0000
+X-List-Received-Date: Thu, 22 Mar 2012 19:39:48 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2012-03-22 at 14:28 -0400, William Mills wrote:
-> On 03/22/2012 01:34 PM, Richard Purdie wrote:
-> > I know Bill understands this but just to be clear for the record, the
-> > only scalable way OE-Core can work is to embrace upstream latest
-> > releases as much as is practicable which is why 4.6 is currently used.
-> > If people need something different *and* step up with resources to
-> > maintain/test it, we can talk about other versions but for anything like
-> > an extra toolchain, we need people to help support it.
-> >
-> > Just to illistrate this, making a release of OE-Core/Poky currently
-> > involves testing on 5 'architectures' on virtual and real hardware with
-> > about 8 different images to test along with features like sstate,
-> > sdk/toolchain, no-gplv3, multilib and tiny. This gives a staggering test
-> > matrix.
+On Thu, 2012-03-22 at 18:23 +0100, Koen Kooi wrote:
+> Op 22 mrt. 2012, om 17:48 heeft William Mills het volgende geschreven:
+> > ---------------------------------
+> > [speaking for myself now]
+> > 
+> > I fully support base poky testing but I think we are getting
+> dangerously close to a defacto statement that the only real yocto
+> based distro is one that _only_ uses poky + a BSP layer.  I am not
+> aligned with that view.  I think oe-core and poky are a fine base but
+> many customers will need to expand on what is there with more layers.
 > 
-> Well, the test matrix would not get *any* bigger if a Linaro aligned 
-> tool chain were used for *all* ARM architecture builds.  Yes, there is 
-> work to maintain a separate toolchain recipe but we covered that above. 
->   Sure we could not support a different toolchain per BSP or Si vendor 
-> but I think if all ARM providers were aligned on one toolchain it would 
-> make sense to support it.  In fact there is an organization to get 
-> alignment of different ARM vendors: Linaro.  We even have participation 
-> of ARM vendors that are not officially part of Linaro.
+> I have sent multiple emails to the oe-core/poky/yocto lists and
+> bothered people in person about this, but the result is no answer at
+> all (emails) or "Yes, we need to address the confusion" in person, but
+> no action at all. I've found that the most successful way to get a
+> clarifying statement is to be a giant troll and send flames like I did
+> this week and in the past.
+>
+> Specific example of getting no answer:
+> https://lists.yoctoproject.org/pipermail/yocto/2012-March/007309.html
 
-I can see where you're coming from but I'd really prefer to have one
-toolchain version and patchset for OE-Core. 
+Your approach can also counterproductive as if it looks like blatant
+trolling, I try not to reply to it and I suspect others might do the
+same. You run the risk of alienating and confusing people rather than
+educating them and improving things.
 
-I'm sure if ARM changes, we'd then get requests for other patchsets for
-other platforms. It also penalises ARM vendors (or whoever) who did the
-right thing and got their code into the recent gcc.
+Whilst it might not look like much happens, I have talked with various
+people, I've also stressed the new website for Yocto needs to do a
+better job on the positioning and when I review the site content I'll be
+looking out for that. The people doing it are aware of the issues.
 
-> >> TI will continue to test with and recommend a toolchain that is closely
-> >> aligned with Linaro.  We see no reason customers should have to misalign
-> >> themselves with the ARM ecosystem just to align with poky.
-> >
-> > s/poky/upstream/
-> 
-> The point is to align with the most number of test hours and test cases 
-> run.  I still maintain that on ARM hardware the Linaro toolchain has 
-> more test hours than a plain vanilla upstream toolchain.
+I'd really love to have a magic switch I could flick where everyone
+suddenly understand things. I'm personally doing what I can and will
+continue to do so.
 
-How about using the CodeSorcery monster toolchain patches for example? I
-suspect they get more test hours too.
+You can see in this thread I've been trying to explain the positioning
+and terms and at least one thing looks like it should go to the AB and
+Advocacy people to try and move things forward. What else would you like
+to see happen?
 
-My point is I doubt we can find a solution that everyone will be happy
-with and an upstream baseline with appropriate patches seems to be the
-best middle ground we can find.
+> Yoctogenerian? And related to the email linked to above, what's the
+> route to move a yoctogenerian distro under the yocto banner?
 
-> > and with 4.7 (out today), we should have a lot of the Linaro fixes,
-> > right so this problem should start solving itself when we update to
-> > 4.7? :)
-> 
-> Yes at this instant in time and the divergence also starts today 
-> (actually a while back due to code freeze etc.)  That is why poky and 
-> any plain upstream toolchain will be an average of 6 to 12 months behind 
-> the current Linaro "best".
+A good start would be a discussion on the general yocto list. I'm not
+sure we have a procedure but if we discuss it, I can raise this at the
+Yocto AB meeting in a couple of weeks and hopefully make some kind of a
+decision and move forward.
 
-s/poky/oe-core/
-
-I'd hope that over time, ARM can get its support for new features into
-gcc in a sensible time frame so that the current gcc works well with
-production silicon and isn't 6-12 months behind. I'd like to think the
-current situation will therefore correct itself and not be a permanent
-state.
-
-> >>    I think oe-core and poky are a fine base but many customers will
-> >> need to expand on what is there with more layers.
-> >
-> > I think its fine to say poky is the way Yocto tests and validates
-> > OE-Core and is something it can release as a tested know to work base
-> > people can build off. As such, pointing people to poky as a way of
-> > testing and getting started is reasonable.
-> >
-> > I also think its fine to say that poky + a BSP layer should work without
-> > anything else.
-> 
-> We all agree and we are are getting close.
-> 
-> There is still a difference between a baseline and a recommendation.
-> 
-> Maintaining this status may be challenging.  I am going to have 0 buy-in 
-> from the developers to add workarounds into the kernel for bugs in GCC 
-> that are already fixed in the Linaro toolchain.
-
-In those cases I'd be happy to see gcc patches applied to the OE-Core
-toolchain to address the issues. We already have a pretty good track
-record of dealing with this as far as I know.
+/me hopes Jefro is taking notes of the above! ;-)
 
 Cheers,
 
