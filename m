@@ -1,38 +1,30 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from tim.rpsys.net (93-97-173-237.zone5.bethere.co.uk
-	[93.97.173.237])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CBAECE013CB
-	for <meta-ti@yoctoproject.org>; Thu, 22 Mar 2012 12:39:47 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q2MJdSQK018768;
-	Thu, 22 Mar 2012 19:39:28 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 17727-06; Thu, 22 Mar 2012 19:39:23 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q2MJdJ0X018761
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 22 Mar 2012 19:39:20 GMT
-Message-ID: <1332445162.9740.323.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 22 Mar 2012 19:39:22 +0000
-In-Reply-To: <96D0E546-6404-4D90-ACC2-948675BC6C36@dominion.thruhere.net>
-References: <CALKp9+Z+pk6GZR2UPwToxCLGsKw0FO-Jj4nOnXEocSfFWwZBzg@mail.gmail.com>
-	<E4FB558B-EFEA-42DF-B108-2EBB6B9B405D@dominion.thruhere.net>
-	<86ehsln0t7.fsf@coulee.tdb.com>
-	<ECCB2891-32C1-451D-B469-7B0B632D8641@dominion.thruhere.net>
+Return-Path: <denis@denix.org>
+Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
+	[206.46.173.15])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 88DEEE013CC
+	for <meta-ti@yoctoproject.org>; Thu, 22 Mar 2012 13:26:12 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [71.178.225.66])
+	by vms173015.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M1A00MD9ZEXC8V0@vms173015.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 22 Mar 2012 15:25:51 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id C2440201C8; Thu,
+	22 Mar 2012 16:25:45 -0400 (EDT)
+Date: Thu, 22 Mar 2012 16:25:45 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+Message-id: <20120322202545.GB13495@denix.org>
+References: <ECCB2891-32C1-451D-B469-7B0B632D8641@dominion.thruhere.net>
 	<1332365246.9740.195.camel@ted> <20120321214515.GD6857@denix.org>
 	<1332367838.9740.208.camel@ted>
 	<F83C8961-F16F-4D3F-AF57-8FF4414022F6@dominion.thruhere.net>
 	<20120322150716.GA13495@denix.org> <4F6B57CB.5080000@ti.com>
-	<96D0E546-6404-4D90-ACC2-948675BC6C36@dominion.thruhere.net>
-X-Mailer: Evolution 3.2.2- 
-Mime-Version: 1.0
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: meta-ti@yoctoproject.org, "Osier-mixon,
-	Jeffrey" <jeffrey.osier-mixon@intel.com>
+	<1332437646.9740.276.camel@ted> <4F6B6F3F.3080204@ti.com>
+	<1332443641.9740.313.camel@ted>
+MIME-version: 1.0
+In-reply-to: <1332443641.9740.313.camel@ted>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
 Subject: Re: question on meta-ti for yocto
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -45,62 +37,105 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2012 19:39:48 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 Mar 2012 20:26:12 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Thu, 2012-03-22 at 18:23 +0100, Koen Kooi wrote:
-> Op 22 mrt. 2012, om 17:48 heeft William Mills het volgende geschreven:
-> > ---------------------------------
-> > [speaking for myself now]
-> > 
-> > I fully support base poky testing but I think we are getting
-> dangerously close to a defacto statement that the only real yocto
-> based distro is one that _only_ uses poky + a BSP layer.  I am not
-> aligned with that view.  I think oe-core and poky are a fine base but
-> many customers will need to expand on what is there with more layers.
+On Thu, Mar 22, 2012 at 07:14:01PM +0000, Richard Purdie wrote:
+> On Thu, 2012-03-22 at 14:28 -0400, William Mills wrote:
+> > On 03/22/2012 01:34 PM, Richard Purdie wrote:
+> > > I know Bill understands this but just to be clear for the record, the
+> > > only scalable way OE-Core can work is to embrace upstream latest
+> > > releases as much as is practicable which is why 4.6 is currently used.
+> > > If people need something different *and* step up with resources to
+> > > maintain/test it, we can talk about other versions but for anything like
+> > > an extra toolchain, we need people to help support it.
 > 
-> I have sent multiple emails to the oe-core/poky/yocto lists and
-> bothered people in person about this, but the result is no answer at
-> all (emails) or "Yes, we need to address the confusion" in person, but
-> no action at all. I've found that the most successful way to get a
-> clarifying statement is to be a giant troll and send flames like I did
-> this week and in the past.
->
-> Specific example of getting no answer:
-> https://lists.yoctoproject.org/pipermail/yocto/2012-March/007309.html
+> > >> TI will continue to test with and recommend a toolchain that is closely
+> > >> aligned with Linaro.  We see no reason customers should have to misalign
+> > >> themselves with the ARM ecosystem just to align with poky.
+> > 
+> > The point is to align with the most number of test hours and test cases 
+> > run.  I still maintain that on ARM hardware the Linaro toolchain has 
+> > more test hours than a plain vanilla upstream toolchain.
+> 
+> > > and with 4.7 (out today), we should have a lot of the Linaro fixes,
+> > > right so this problem should start solving itself when we update to
+> > > 4.7? :)
+> > 
+> > Yes at this instant in time and the divergence also starts today 
+> > (actually a while back due to code freeze etc.)  That is why poky and 
+> > any plain upstream toolchain will be an average of 6 to 12 months behind 
+> > the current Linaro "best".
+> 
+> I'd hope that over time, ARM can get its support for new features into
+> gcc in a sensible time frame so that the current gcc works well with
+> production silicon and isn't 6-12 months behind. I'd like to think the
+> current situation will therefore correct itself and not be a permanent
+> state.
+> 
+> In those cases I'd be happy to see gcc patches applied to the OE-Core
+> toolchain to address the issues. We already have a pretty good track
+> record of dealing with this as far as I know.
 
-Your approach can also counterproductive as if it looks like blatant
-trolling, I try not to reply to it and I suspect others might do the
-same. You run the risk of alienating and confusing people rather than
-educating them and improving things.
+Well, in this discussion we keep forgetting that a toolchain is not just gcc, 
+it also contains binutils (for things like linker and assembler) as well as 
+libc (but this one tends to give some other non-technical issues... :) and I 
+know - I spent last 9 months rebuilding, repackaging and otherwise supporting 
+our internal build of gcc+linaro based toolchain)
 
-Whilst it might not look like much happens, I have talked with various
-people, I've also stressed the new website for Yocto needs to do a
-better job on the positioning and when I review the site content I'll be
-looking out for that. The people doing it are aware of the issues.
+For example, here's what happens when one of our 3.2-based kernels is being 
+built with the latest binutils-2.22 from OE-Core:
 
-I'd really love to have a magic switch I could flick where everyone
-suddenly understand things. I'm personally doing what I can and will
-continue to do so.
+==================================================
+ERROR: Function failed: do_compile (see /OE/yocto/build/arago-tmp-eglibc/work/beaglebone-oe-linux-gnueabi/linux-ti33x-psp-3.2-r0/temp/log.do_compile.430 for further information)
+ERROR: Logfile of failure stored in: /OE/yocto/build/arago-tmp-eglibc/work/beaglebone-oe-linux-gnueabi/linux-ti33x-psp-3.2-r0/temp/log.do_compile.430
+Log data follows:
+| ERROR: Function failed: do_compile (see /OE/yocto/build/arago-tmp-eglibc/work/beaglebone-oe-linux-gnueabi/linux-ti33x-psp-3.2-r0/temp/log.do_compile.430 for further information)
+| NOTE: make -j 16 -j 16 include/linux/version.h CC=arm-oe-linux-gnueabi-gcc  -mno-thumb-interwork -marm --sysroot=/OE/yocto/build/arago-tmp-eglibc/sysroots/beaglebone LD=arm-oe-linux-gnueabi-ld  --sysroot=/OE/yocto/build/arago-tmp-eglibc/sysroots/beaglebone
+|   CHK     include/linux/version.h
+| NOTE: make -j 16 -j 16 uImage CC=arm-oe-linux-gnueabi-gcc  -mno-thumb-interwork -marm --sysroot=/OE/yocto/build/arago-tmp-eglibc/sysroots/beaglebone LD=arm-oe-linux-gnueabi-ld  --sysroot=/OE/yocto/build/arago-tmp-eglibc/sysroots/beaglebone
+|   CHK     include/linux/version.h
+|   CHK     include/generated/utsrelease.h
+| make[1]: `include/generated/mach-types.h' is up to date.
+|   CALL    scripts/checksyscalls.sh
+|   CHK     include/generated/compile.h
+|   CHK     kernel/config_data.h
+|   Kernel: arch/arm/boot/Image is ready
+|   AS      arch/arm/boot/compressed/head.o
+|   AS      arch/arm/boot/compressed/piggy.lzo.o
+|   AS      arch/arm/boot/compressed/lib1funcs.o
+| arch/arm/boot/compressed/head.S: Assembler messages:
+| arch/arm/boot/compressed/head.S:127: Error: selected processor does not support requested special purpose register -- `mrs r2,cpsr'
+| arch/arm/boot/compressed/head.S:134: Error: selected processor does not support requested special purpose register -- `mrs r2,cpsr'
+| arch/arm/boot/compressed/head.S:136: Error: selected processor does not support requested special purpose register -- `msr cpsr_c,r2'
+| make[2]: *** [arch/arm/boot/compressed/head.o] Error 1
+| make[2]: *** Waiting for unfinished jobs....
+| make[1]: *** [arch/arm/boot/compressed/vmlinux] Error 2
+| make: *** [uImage] Error 2
+| ERROR: oe_runmake failed
+NOTE: package linux-ti33x-psp-3.2-r0: task do_compile: Failed
+ERROR: Task 407 (/OE/yocto/sources/meta-ti/recipes-kernel/linux/linux-ti33x-psp_3.2.bb, do_compile) failed with exit code '1'
+==================================================
 
-You can see in this thread I've been trying to explain the positioning
-and terms and at least one thing looks like it should go to the AB and
-Advocacy people to try and move things forward. What else would you like
-to see happen?
+Works fine when rolled back to binutils-2.20.1 from meta-oe. Something else in 
+our components is picky about the version of binutils...
 
-> Yoctogenerian? And related to the email linked to above, what's the
-> route to move a yoctogenerian distro under the yocto banner?
 
-A good start would be a discussion on the general yocto list. I'm not
-sure we have a procedure but if we discuss it, I can raise this at the
-Yocto AB meeting in a couple of weeks and hopefully make some kind of a
-decision and move forward.
+As Bill mentioned earlier, we closely watch Linaro's progress on creating the 
+official meta-linaro layer with their latest toolchain for ARM architecture, 
+which can be used with OE-Core/Yocto setups.
 
-/me hopes Jefro is taking notes of the above! ;-)
+But they only started this work last month, they only seem to test against 
+qemuarm targets, while at the same time being very "aggressive" - i.e. they 
+only support ARMv7+ architecture (Cortex-A8/A9/A15), plus with the release of 
+gcc-4.7 they plan to switch to that right away, moving 4.6 into maintenance 
+mode and dropping support for 4.5...
 
-Cheers,
+So, all in all, all current work will end up being supported upstream, as 
+that's everyone's goal, but when it gets there, there will always be the next 
+big thing that everyone's working on, but it's not yet available upstream...
 
-Richard
-
+-- 
+Denys
 
