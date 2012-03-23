@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1C9DBE013D6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1DF15E013DA
 	for <meta-ti@yoctoproject.org>; Thu, 22 Mar 2012 23:22:19 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CDC5252A8D; Fri, 23 Mar 2012 06:22:17 +0000 (UTC)
+	id 365B852A65; Fri, 23 Mar 2012 06:22:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120323062217.CDC5252A8D@arago-project.org>
-Date: Fri, 23 Mar 2012 06:22:17 +0000 (UTC)
+Message-Id: <20120323062218.365B852A65@arago-project.org>
+Date: Fri, 23 Mar 2012 06:22:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux 3.0: update to 3.0.25
+Subject: Denys Dmytriyenko : linux-{ti33x, omapl138}: simplify and unify handling of "tipspkernel" feature
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,120 +26,146 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: c5f7a7cb9a208a3d185b047df9eef5bd5aa06c1a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c5f7a7cb9a208a3d185b047df9eef5bd5aa06c1a
+Commit: 246cb75a970e9aab0a3974a55e72c6d90f1df151
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=246cb75a970e9aab0a3974a55e72c6d90f1df151
 
-Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Wed Mar 21 09:02:22 2012 +0100
+Author: Denys Dmytriyenko <denis@denix.org>
+Date:   Thu Mar 22 23:28:35 2012 -0400
 
-linux 3.0: update to 3.0.25
+linux-{ti33x,omapl138}: simplify and unify handling of "tipspkernel" feature
 
-Backport Nishants OPP/hwmod fix to get more than 600MHz out of 37xx, but don't
-activate it yet. 3630ES1.2 derived silicon gets misdetected:
+And move it to a separate .inc for other kernels to use.
 
-xM revision A:
-[    0.000000] OMAP3630 ES1.0 (l2cache iva sgx neon isp 192mhz_clk )
-
-new xM revision C:
-[    0.000000] OMAP3630 ES1.2 (l2cache neon isp 192mhz_clk )
-
-Since the iva hwmod is missing the OPP tables will fail and clock it back to
-600MHz. But with the patch the kernel hangs in early init. This problem isn't
-specific to this kernel update, it just coincided with ES1.2 silicon arriving
-on my desk.
-
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/omap3.inc                     |    2 +-
- ...llow-OPP-enumeration-to-continue-if-devic.patch |   43 ++++++++++++++++++++
- recipes-kernel/linux/linux_3.0.bb                  |    8 ++--
- 3 files changed, 48 insertions(+), 5 deletions(-)
+ recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb |    9 +--------
+ recipes-kernel/linux/linux-ti33x-psp_3.1.bb       |   11 ++---------
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb       |    8 +-------
+ recipes-kernel/linux/tipspkernel.inc              |   17 +++++++++++++++++
+ 4 files changed, 21 insertions(+), 24 deletions(-)
 
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 9cafe85..16078db 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r117"
-+MACHINE_KERNEL_PR = "r118"
- 
+diff --git a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
+index 6326e7b..5441675 100644
+--- a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
++++ b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
+@@ -4,6 +4,7 @@ LICENSE = "GPLv2"
  KERNEL_IMAGETYPE = "uImage"
  
-diff --git a/recipes-kernel/linux/linux-3.0/misc/0002-OMAP2-OPP-allow-OPP-enumeration-to-continue-if-devic.patch b/recipes-kernel/linux/linux-3.0/misc/0002-OMAP2-OPP-allow-OPP-enumeration-to-continue-if-devic.patch
+ require multi-kernel.inc
++require tipspkernel.inc
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -14,12 +15,6 @@ SRCREV = "v2.6.37_DAVINCIPSP_03.21.00.04"
+ 
+ COMPATIBLE_MACHINE = "(omapl138)"
+ 
+-THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}"
+-CONFIGS_PSP = "${@base_set_filespath(["${THISDIR}/${PN}-${PV}/tipspkernel"], d)}:\
+-${@base_set_filespath(["${THISDIR}/${PN}/tipspkernel"], d)}:\
+-${@base_set_filespath(["${THISDIR}/files/tipspkernel"], d)}:"
+-FILESPATH =. "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "${CONFIGS_PSP}", "", d)}"
+-
+ SRC_URI += "git://arago-project.org/git/projects/linux-davinci.git;protocol=git;branch=${BRANCH} \
+ 	file://defconfig"
+ 
+@@ -32,5 +27,3 @@ PATCHES_OVER_PSP = " \
+ 	file://0006-Add-wlan-and-BT-config-switches.patch \
+ 	file://uio_pruss.patch \
+ 	"
+-
+-SRC_URI += "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "", "${PATCHES_OVER_PSP}", d)}"
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
+index 591731c..cc30bfb 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.1.bb
+@@ -4,6 +4,7 @@ LICENSE = "GPLv2"
+ KERNEL_IMAGETYPE = "uImage"
+ 
+ require multi-kernel.inc
++require tipspkernel.inc
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -15,12 +16,6 @@ MACHINE_KERNEL_PR_append = "l+gitr${SRCREV}"
+ 
+ COMPATIBLE_MACHINE = "(ti33x)"
+ 
+-THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}"
+-CONFIGS_PSP = "${@base_set_filespath(["${THISDIR}/${PN}-${PV}/tipspkernel"], d)}:\
+-${@base_set_filespath(["${THISDIR}/${PN}/tipspkernel"], d)}:\
+-${@base_set_filespath(["${THISDIR}/files/tipspkernel"], d)}:"
+-FILESPATH =. "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "${CONFIGS_PSP}", "", d)}"
+-
+ SRC_URI += "git://github.com/beagleboard/linux.git;branch=${BRANCH} \
+ 	file://defconfig"
+ 
+@@ -61,10 +56,8 @@ PATCHES_OVER_PSP = " \
+ 	file://0034-beaglebone-really-enable-i2c2-pullups-fixes-timeouts.patch \
+ 	file://0035-beaglebone-add-structs-for-DVI-cape-LEDs.patch\
+ 	file://0036-beaglebone-update-LCD-cape-partnumber.patch \
+-    file://0037-beaglebone-compare-complete-partnumber-not-the-first.patch \
++	file://0037-beaglebone-compare-complete-partnumber-not-the-first.patch \
+ 	file://0038-omap_hsmmc-Set-dto-to-max-value-of-14-to-avoid-SD-Ca.patch \
+ 	"
+ 
+-SRC_URI += "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "", "${PATCHES_OVER_PSP}", d)}"
+ SRC_URI_append_beaglebone = " file://logo_linux_clut224.ppm"
+-
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index 0476e54..c30d1be 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -4,6 +4,7 @@ LICENSE = "GPLv2"
+ KERNEL_IMAGETYPE = "uImage"
+ 
+ require multi-kernel.inc
++require tipspkernel.inc
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -15,16 +16,9 @@ MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
+ 
+ COMPATIBLE_MACHINE = "(ti33x)"
+ 
+-THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}"
+-CONFIGS_PSP = "${@base_set_filespath(["${THISDIR}/${PN}-${PV}/tipspkernel"], d)}:\
+-${@base_set_filespath(["${THISDIR}/${PN}/tipspkernel"], d)}:\
+-${@base_set_filespath(["${THISDIR}/files/tipspkernel"], d)}:"
+-FILESPATH =. "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "${CONFIGS_PSP}", "", d)}"
+-
+ SRC_URI += "git://arago-project.org/git/projects/linux-am33x.git;protocol=http;branch=${BRANCH} \
+ 	file://defconfig"
+ 
+-SRC_URI += "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "", "${PATCHES_OVER_PSP}", d)}"
+ SRC_URI_append_beaglebone = " file://logo_linux_clut224.ppm"
+ 
+ PATCHES_OVER_PSP = " \
+diff --git a/recipes-kernel/linux/tipspkernel.inc b/recipes-kernel/linux/tipspkernel.inc
 new file mode 100644
-index 0000000..7019381
+index 0000000..c23fa57
 --- /dev/null
-+++ b/recipes-kernel/linux/linux-3.0/misc/0002-OMAP2-OPP-allow-OPP-enumeration-to-continue-if-devic.patch
-@@ -0,0 +1,43 @@
-+From c15f217f7d07c460763a092f31f61b1975a18563 Mon Sep 17 00:00:00 2001
-+From: Nishanth Menon <nm@ti.com>
-+Date: Fri, 16 Mar 2012 11:19:09 -0500
-+Subject: [PATCH 2/2] OMAP2+: OPP: allow OPP enumeration to continue if device is not present
++++ b/recipes-kernel/linux/tipspkernel.inc
+@@ -0,0 +1,17 @@
++# Include this file for kernel recipes that need to handle different defconfigs
++# and apply patches based on "tipspkernel" DISTRO_FEATURES
 +
-+On platforms such as OMAP3, certain variants may not have IVA, SGX
-+or some specific component. We currently have a check to aid fixing
-+wrong population of OPP entries for issues such as typos. This however
-+causes a conflict with valid requirement where the SoC variant does
-+not actually have the module present.
++# We don't want "tipspkernel" to be another OVERRIDE, but rather a new level of
++# FILESPATH with all the OVERRIDES applied to it
++CONFIGS_PSP = "${@base_set_filespath(["${FILE_DIRNAME}/${PF}/tipspkernel", "${FILE_DIRNAME}/${P}/tipspkernel", \
++"${FILE_DIRNAME}/${PN}/tipspkernel", "${FILE_DIRNAME}/${BP}/tipspkernel", "${FILE_DIRNAME}/${BPN}/tipspkernel", \
++"${FILE_DIRNAME}/files/tipspkernel", "${FILE_DIRNAME}/tipspkernel"], d)}:"
 +
-+So, reduce the severity of the print to a debug statement and skip
-+registering that specific OPP, but continue down the list.
++# When "tipspkernel" is ENABLED, prepend additional set of directories to FILESPATH
++FILESPATH =. "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "${CONFIGS_PSP}", "", d)}"
 +
-+Reported-by: Steve Sakoman <steve@sakoman.com>
-+Reported-by: Maximilian Schwerin <mvs@tigris.de>
-+Acked-by: Steve Sakoman <steve@sakoman.com>
-+Tested-by: Maximilian Schwerin <mvs@tigris.de>
-+Signed-off-by: Nishanth Menon <nm@ti.com>
-+---
-+ arch/arm/mach-omap2/opp.c |    4 ++--
-+ 1 files changed, 2 insertions(+), 2 deletions(-)
++# When "tipspkernel" is NOT ENABLED, append additional list of PATCHES_OVER_PSP to SRC_URI
++SRC_URI_append = "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "", "${PATCHES_OVER_PSP}", d)}"
 +
-+diff --git a/arch/arm/mach-omap2/opp.c b/arch/arm/mach-omap2/opp.c
-+index ab8b35b..f111b82 100644
-+--- a/arch/arm/mach-omap2/opp.c
-++++ b/arch/arm/mach-omap2/opp.c
-+@@ -64,10 +64,10 @@ int __init omap_init_opp_table(struct omap_opp_def *opp_def,
-+ 		}
-+ 		oh = omap_hwmod_lookup(opp_def->hwmod_name);
-+ 		if (!oh || !oh->od) {
-+-			pr_warn("%s: no hwmod or odev for %s, [%d] "
-++			pr_debug("%s: no hwmod or odev for %s, [%d] "
-+ 				"cannot add OPPs.\n", __func__,
-+ 				opp_def->hwmod_name, i);
-+-			return -EINVAL;
-++			continue;
-+ 		}
-+ 		dev = &oh->od->pdev.dev;
-+ 
-+-- 
-+1.7.2.5
-+
-diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
-index c95542e..a817c1d 100644
---- a/recipes-kernel/linux/linux_3.0.bb
-+++ b/recipes-kernel/linux/linux_3.0.bb
-@@ -5,12 +5,12 @@ KERNEL_IMAGETYPE = "uImage"
- 
- COMPATIBLE_MACHINE = "(beagleboard)"
- 
--PV = "3.0.23"
--# v3.0.23 tag
--SRCREV_pn-${PN} = "bf6a68d2a214e07f7c0d6538e00e17b826714160"
-+PV = "3.0.25"
-+# v3.0.25 tag
-+SRCREV_pn-${PN} = "9bf176a3e029ae7f2dc6feae185091525a988be2"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "a"
- 
- FILESPATH =. "${FILE_DIRNAME}/linux-3.0:${FILE_DIRNAME}/linux-3.0/${MACHINE}:"
- 
++# List additional patches to apply on top of PSP kernel, start with a space
++PATCHES_OVER_PSP = ""
 
 
