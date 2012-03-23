@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1F409E013DB
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2090CE013DF
 	for <meta-ti@yoctoproject.org>; Thu, 22 Mar 2012 23:22:19 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3EB1A52A60; Fri, 23 Mar 2012 06:22:17 +0000 (UTC)
+	id 3D59552A98; Fri, 23 Mar 2012 06:22:17 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120323062218.3EB1A52A60@arago-project.org>
+Message-Id: <20120323062218.3D59552A98@arago-project.org>
 Date: Fri, 23 Mar 2012 06:22:17 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-omap4: remove D_P = "-1" as it's the only kernel
+Subject: Denys Dmytriyenko : linux-ti81xx: delete broken symlink to dm816x-evm configs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,33 +26,29 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 0a92342b2970ad99ede78acae84060e6259017f5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0a92342b2970ad99ede78acae84060e6259017f5
+Commit: f3f64d03401e9a4acc6b23415b7e3cedecdc7904
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f3f64d03401e9a4acc6b23415b7e3cedecdc7904
 
 Author: Denys Dmytriyenko <denis@denix.org>
-Date:   Thu Mar 22 23:26:07 2012 -0400
+Date:   Thu Mar 22 23:10:54 2012 -0400
 
-linux-omap4: remove D_P = "-1" as it's the only kernel
+linux-ti81xx: delete broken symlink to dm816x-evm configs
 
 Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-omap4_3.1.0.bb |    2 --
- 1 files changed, 0 insertions(+), 2 deletions(-)
+ .../linux-ti81xx-psp-2.6.37/dm816x-evm/dm816x-evm  |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-omap4_3.1.0.bb b/recipes-kernel/linux/linux-omap4_3.1.0.bb
-index 3cc48be..c57d034 100644
---- a/recipes-kernel/linux/linux-omap4_3.1.0.bb
-+++ b/recipes-kernel/linux/linux-omap4_3.1.0.bb
-@@ -1,7 +1,5 @@
- COMPATIBLE_MACHINE = "pandaboard"
- 
--DEFAULT_PREFERENCE = "-1"
--
- require linux.inc
- 
- # The main PR is now using MACHINE_KERNEL_PR, for omap4 see conf/machine/include/omap4.inc
+diff --git a/recipes-kernel/linux/linux-ti81xx-psp-2.6.37/dm816x-evm/dm816x-evm b/recipes-kernel/linux/linux-ti81xx-psp-2.6.37/dm816x-evm/dm816x-evm
+deleted file mode 120000
+index 297a000..0000000
+--- a/recipes-kernel/linux/linux-ti81xx-psp-2.6.37/dm816x-evm/dm816x-evm
++++ /dev/null
+@@ -1 +0,0 @@
+-dm816x-evm
+\ No newline at end of file
 
 
