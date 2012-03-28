@@ -1,35 +1,35 @@
 Return-Path: <tom.rini@gmail.com>
-Received: from mail-ob0-f176.google.com (mail-ob0-f176.google.com
-	[209.85.214.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1DF81E013E3
-	for <meta-ti@yoctoproject.org>; Wed, 28 Mar 2012 11:14:51 -0700 (PDT)
-Received: by obbef5 with SMTP id ef5so2318832obb.35
-	for <meta-ti@yoctoproject.org>; Wed, 28 Mar 2012 11:14:50 -0700 (PDT)
+Received: from mail-gy0-f176.google.com (mail-gy0-f176.google.com
+	[209.85.160.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4A847E013E3
+	for <meta-ti@yoctoproject.org>; Wed, 28 Mar 2012 11:14:52 -0700 (PDT)
+Received: by mail-gy0-f176.google.com with SMTP id z10so1247338ghb.35
+	for <meta-ti@yoctoproject.org>; Wed, 28 Mar 2012 11:14:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=0CqprySTiGHjg5AUZqeRlY3xpIwQZpUAJ7FVBLL3eIM=;
-	b=yGcfTCWBUIy/byVgPZjCGsH38fX4nMe1llZZbGpBd/sxTYjQ/4GSfgKPZdJAIj2qc8
-	eJi5wwedmSsf//AEdezFAGqE1K/CF6tlJW32OsuOkRDqkrUDCFRDAiSnpT6t+ocKyHbq
-	GgmXcKqlwB9TQIk8mbmZMdssdHNqgdtS77+TIkJtVt+1t9pcWzHiZxxRy1k8yJmDBMlw
-	1Przuk2DrFOhN1auZgAIwGMZ/YUVNpwbKWZV7uzVr+f4JLgwn9aq0qsZJXt8Fkw7/1Kd
-	YIfhXKixciHnLz5VYy15vvhY0LyrmBIwe61XeOr7vGf2fe/9LnN4xA/dKsroBH+hADUt
-	eogQ==
-Received: by 10.182.119.101 with SMTP id kt5mr39513216obb.70.1332958490624;
-	Wed, 28 Mar 2012 11:14:50 -0700 (PDT)
+	:references; bh=VmNs9CkPk79qWBpdlGHSBYPVGDO/3trud+VV5SBIKkE=;
+	b=OihmNMmQ6JiMVX3ZAyHqdMlc3awuOO806+XaopCnleHC+UJI92oVSXIqv8r2OJP/sz
+	DwKr/KCC46wpAjCLJL0D5flVOhAwzKHesgzodOXo4wz1R/CQQq1ZfEjYgeDxl2tMipsx
+	+O1l9yooSh0WKfptdoMyiYZL0wSFeuaaEIQCOG3w2Zj8qZ4BFevV2JAm14Xg3R2GKeIH
+	t/h1dE49xgAtsL67p1GD890mkWMqFgkUljXNkZbaM1ZHtk+IEjxPeVHqjEad37o1IaI8
+	zRk4fGkqFEpH0lBuq4GEKGAAvAfVwBrIgAgQlLXCaWCCGRPHHwktZWGy/lfXebBIyYQD
+	2XIQ==
+Received: by 10.60.13.196 with SMTP id j4mr39599097oec.14.1332958492092;
+	Wed, 28 Mar 2012 11:14:52 -0700 (PDT)
 Received: from localhost.localdomain (ip68-230-54-74.ph.ph.cox.net.
 	[68.230.54.74])
-	by mx.google.com with ESMTPS id h5sm2962774oea.1.2012.03.28.11.14.49
+	by mx.google.com with ESMTPS id h5sm2962774oea.1.2012.03.28.11.14.50
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 28 Mar 2012 11:14:49 -0700 (PDT)
+	Wed, 28 Mar 2012 11:14:51 -0700 (PDT)
 Sender: Tom Rini <tom.rini@gmail.com>
 From: Tom Rini <trini@ti.com>
 To: meta-ti@yoctoproject.org
-Date: Wed, 28 Mar 2012 11:14:38 -0700
-Message-Id: <1332958485-967-3-git-send-email-trini@ti.com>
+Date: Wed, 28 Mar 2012 11:14:39 -0700
+Message-Id: <1332958485-967-4-git-send-email-trini@ti.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1332524217-27534-1-git-send-email-trini@ti.com>
 References: <1332524217-27534-1-git-send-email-trini@ti.com>
-Subject: [PATCH v3 03/10] omap3evm.conf: Use '=+' not '?=' in IMAGE_FSTYPES
+Subject: [PATCH v3 04/10] am335x-evm.conf: Add 'ubi' to IMAGE_FSTYPES, use '=+' in assignment
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,30 +41,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2012 18:14:51 -0000
+X-List-Received-Date: Wed, 28 Mar 2012 18:14:52 -0000
 
 As per
 http://lists.linuxtogo.org/pipermail/openembedded-core/2012-March/020053.html
-a machine conf file should use '=+' to set IMAGE_FSTYPES.
+a machine conf file should use '=+' to set IMAGE_FSTYPES.  We also add
+the required MKUBIFS_ARGS / UBINIZE_ARGS.  These are placed next to the
+line that sets us to use the PSP kernel tree and reference the TI wiki
+for the source of our info as well as dmesg / userland commands.
 
 Signed-off-by: Tom Rini <trini@ti.com>
 ---
- conf/machine/omap3evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ conf/machine/am335x-evm.conf |   23 ++++++++++++++++++++++-
+ 1 files changed, 22 insertions(+), 1 deletions(-)
 
-diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
-index 9cd04ed..6a74f11 100644
---- a/conf/machine/omap3evm.conf
-+++ b/conf/machine/omap3evm.conf
-@@ -17,7 +17,7 @@ require conf/machine/include/omap3.inc
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index eedf072..2e286a3 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -12,12 +12,33 @@ GUI_MACHINE_CLASS = "smallscreen"
  
- # Ship all kernel modules
+ require conf/machine/include/ti33x.inc
  
--IMAGE_FSTYPES ?= "jffs2 tar.bz2"
-+IMAGE_FSTYPES =+ "jffs2 tar.bz2"
- EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+-IMAGE_FSTYPES ?= "tar.bz2"
++IMAGE_FSTYPES =+ "ubi tar.bz2"
  
- SERIAL_CONSOLE = "115200 ttyS0"
+ SERIAL_CONSOLE = "115200 ttyO0"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+ 
++# UBI information.  Note that this is board and kernel specific.  Changes
++# in your kernel port may require changes in these variables.  For more
++# details about this board please see
++# http://processors.wiki.ti.com/index.php/UBIFS_Support
++
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# From dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: logical eraseblock size:    126976 bytes
++# from ubiattach stdout:
++# UBI device number 0, total 1988 LEBs
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 1988"
++
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# from dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: physical eraseblock size:   131072 bytes (128 KiB)
++# UBI: sub-page size:              512
++# UBI: VID header offset:          2048 (aligned 2048)
++UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
++
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
+ 
+ UBOOT_ARCH = "arm"
 -- 
 1.7.0.4
 
