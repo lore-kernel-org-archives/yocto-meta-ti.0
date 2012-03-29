@@ -1,29 +1,35 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from tim.rpsys.net (93-97-173-237.zone5.bethere.co.uk
-	[93.97.173.237])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CC393E0059A
-	for <meta-ti@yoctoproject.org>; Thu, 29 Mar 2012 02:54:14 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q2T9sCjD029335
-	for <meta-ti@yoctoproject.org>; Thu, 29 Mar 2012 10:54:12 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 28549-04 for <meta-ti@yoctoproject.org>;
-	Thu, 29 Mar 2012 10:54:07 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q2T9s5XB029328
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <meta-ti@yoctoproject.org>; Thu, 29 Mar 2012 10:54:06 +0100
-Message-ID: <1333014845.14983.8.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Date: Thu, 29 Mar 2012 10:54:05 +0100
-In-Reply-To: <20120329043607.18340529E8@arago-project.org>
-References: <20120329043607.18340529E8@arago-project.org>
-X-Mailer: Evolution 3.2.2- 
-Mime-Version: 1.0
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Denys Dmytriyenko : multi-kernel: fix get_kernelversion returns None for do_compileconfigs
+Return-Path: <tom.rini@gmail.com>
+Received: from mail-yw0-f48.google.com (mail-yw0-f48.google.com
+	[209.85.213.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED594E013C2
+	for <meta-ti@yoctoproject.org>; Thu, 29 Mar 2012 10:18:27 -0700 (PDT)
+Received: by yhfq46 with SMTP id q46so2112521yhf.35
+	for <meta-ti@yoctoproject.org>; Thu, 29 Mar 2012 10:18:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:subject:date:message-id:x-mailer:in-reply-to
+	:references; bh=D2ztg57kbBdVx6eUAvGkfqJzZuJMIrGyKb1Wl4M/oKQ=;
+	b=uwL1HrdDHewj6T6eA1oRP2LaSGZcx4C3FHRY8vklggqLe71Zm6xDqjo2X6wRXZy9jo
+	dc69NdwhDJPmc0PFl9gwEFVUlcJdoKIOv3QU1gDnb5asQS0fgZDy8BXzsnhcyZ/Fk9r9
+	7pB7HIRqAz+5vK/zO53zCJ7VWmDp07/iv58AlnAq1B+JxlDANq60wzaPn4TxZVGW6M+K
+	VAV85vkMbNwW+bpA4sYVFXALA4HEj6MOX5ql569PoRaao6IezxWLZXrW7xOCJRAppIQX
+	rLY4Ji2Ua7dVIFPbrXcqoSl3rsTZHTEPTd0djofXLNDV1hQhJi20eOVvTl1H75/o/vUN
+	Ddwg==
+Received: by 10.60.24.164 with SMTP id v4mr40697771oef.51.1333041507095;
+	Thu, 29 Mar 2012 10:18:27 -0700 (PDT)
+Received: from localhost.localdomain (ip68-230-54-74.ph.ph.cox.net.
+	[68.230.54.74])
+	by mx.google.com with ESMTPS id r8sm2854153oer.6.2012.03.29.10.18.21
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 29 Mar 2012 10:18:22 -0700 (PDT)
+Sender: Tom Rini <tom.rini@gmail.com>
+From: Tom Rini <trini@ti.com>
+To: meta-ti@yoctoproject.org
+Date: Thu, 29 Mar 2012 10:18:15 -0700
+Message-Id: <1333041498-18971-1-git-send-email-trini@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1332958485-967-1-git-send-email-trini@ti.com>
+References: <1332958485-967-1-git-send-email-trini@ti.com>
+Subject: [PATCH v4 1/4] am37x-evm.conf: Use '+=' not '?=' in IMAGE_FSTYPES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,86 +41,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Mar 2012 09:54:15 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Mar 2012 17:18:28 -0000
 
-On Thu, 2012-03-29 at 04:36 +0000, Arago Project git wrote:
-> Module: meta-ti
-> Branch: master
-> Commit: a0dc3b8afc592b39c7948783952cd371c693640f
-> URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a0dc3b8afc592b39c7948783952cd371c693640f
-> 
-> Author: Denys Dmytriyenko <denys@ti.com>
-> Date:   Thu Mar 29 00:25:14 2012 -0400
-> 
-> multi-kernel: fix get_kernelversion returns None for do_compileconfigs
-> 
-> The function get_kernelversion uses generated header files to extract the
-> version number. But those files are not available until do_compile, and
-> do_compileconfigs is injected before that, hence the version becomes None
-> and breaks in several places.
-> 
-> Introduce a new task do_preparekernel that calls "make prepare" in the
-> kernel tree to generate all the necessary files. It's also safer to call
-> do_configure early on.
-> 
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> 
-> ---
-> 
->  recipes-kernel/linux/linux-omap-psp_2.6.32.bb |    4 +++-
->  recipes-kernel/linux/multi-kernel.inc         |   11 +++++++++--
->  2 files changed, 12 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.32.bb b/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
-> index 212a6e3..61fc24f 100644
-> --- a/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
-> +++ b/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
-> @@ -1,5 +1,7 @@
->  require multi-kernel.inc
->  
-> +MULTI_CONFIG_BASE_SUFFIX = ""
-> +
->  DESCRIPTION = "Linux kernel for OMAP processors"
->  KERNEL_IMAGETYPE = "uImage"
->  
-> @@ -9,7 +11,7 @@ COMPATIBLE_MACHINE = "am3517-crane|beagleboard|omap3evm|am3517-evm|dm37x-evm|am3
->  SRCREV = "5fc29e7b2a76a64a739f857858ef0b98294aa155"
->  
->  # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
-> -MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
-> +MACHINE_KERNEL_PR_append = "c+gitr${SRCREV}"
->  
->  SRC_URI += "git://arago-project.org/git/projects/linux-omap3.git;protocol=git;branch=master \
->             file://0001-Revert-omap3-beagle-Fix-compile-time-errors.patch \
-> diff --git a/recipes-kernel/linux/multi-kernel.inc b/recipes-kernel/linux/multi-kernel.inc
-> index 5314454..056adb9 100644
-> --- a/recipes-kernel/linux/multi-kernel.inc
-> +++ b/recipes-kernel/linux/multi-kernel.inc
-> @@ -16,6 +16,14 @@ SRC_URI += " \
->             file://configs "
->  
->  MULTI_CONFIG_BASE_SUFFIX = "multi-config-"
-> +MODULES_IMAGE_BASE_NAME = "modules-${PV}-${PR}-${MACHINE}"
-> +
-> +do_preparekernel () {
-> +	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
-> +	oe_runmake prepare CC="${KERNEL_CC}" LD="${KERNEL_LD}"
-> +}
-> +
-> +addtask preparekernel after do_configure before do_compile
+As per
+http://lists.linuxtogo.org/pipermail/openembedded-core/2012-March/020053.html
+a machine conf file should use '+=' to set IMAGE_FSTYPES.
 
+Signed-off-by: Tom Rini <trini@ti.com>
+---
+ conf/machine/am37x-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Might I suggest putting comments in the code about why this is
-necessary? Having done this kind of thing for a while you look at it in
-a years time and wonder what you'd been taking when you added it :)
-
-I know you can look at the commit history but a comment can be easier!
-
-Cheers,
-
-Richard
-
+diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
+index e4170f4..ddb54e8 100644
+--- a/conf/machine/am37x-evm.conf
++++ b/conf/machine/am37x-evm.conf
+@@ -16,7 +16,7 @@ require conf/machine/include/omap3.inc
+ 
+ # Ship all kernel modules
+ 
+-IMAGE_FSTYPES ?= "jffs2 tar.bz2"
++IMAGE_FSTYPES += "jffs2 tar.bz2"
+ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ 
+ SERIAL_CONSOLE = "115200 ttyS0"
+-- 
+1.7.0.4
 
 
