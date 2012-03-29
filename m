@@ -1,25 +1,29 @@
-Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 73E83E0059A
-	for <meta-ti@yoctoproject.org>; Wed, 28 Mar 2012 21:40:22 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M1M00998QAUN260@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 28 Mar 2012 23:40:11 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 55E06201C7; Thu,
-	29 Mar 2012 00:40:05 -0400 (EDT)
-Date: Thu, 29 Mar 2012 00:40:05 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Marco Monguzzi <marco.monguzzi@gmail.com>
-Message-id: <20120329044005.GH32193@denix.org>
-References: <CALKp9+Y-hyv34m=KTBrnCozeu-b_-kCnwqeg5BEW6m=p+faECw@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CALKp9+Y-hyv34m=KTBrnCozeu-b_-kCnwqeg5BEW6m=p+faECw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: failure building meta-ti for am3517-evm
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from tim.rpsys.net (93-97-173-237.zone5.bethere.co.uk
+	[93.97.173.237])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CC393E0059A
+	for <meta-ti@yoctoproject.org>; Thu, 29 Mar 2012 02:54:14 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q2T9sCjD029335
+	for <meta-ti@yoctoproject.org>; Thu, 29 Mar 2012 10:54:12 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id 28549-04 for <meta-ti@yoctoproject.org>;
+	Thu, 29 Mar 2012 10:54:07 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q2T9s5XB029328
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <meta-ti@yoctoproject.org>; Thu, 29 Mar 2012 10:54:06 +0100
+Message-ID: <1333014845.14983.8.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Date: Thu, 29 Mar 2012 10:54:05 +0100
+In-Reply-To: <20120329043607.18340529E8@arago-project.org>
+References: <20120329043607.18340529E8@arago-project.org>
+X-Mailer: Evolution 3.2.2- 
+Mime-Version: 1.0
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Denys Dmytriyenko : multi-kernel: fix get_kernelversion returns None for do_compileconfigs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,29 +35,86 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Mar 2012 04:40:22 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 29 Mar 2012 09:54:15 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 26, 2012 at 02:52:25PM +0200, Marco Monguzzi wrote:
-> Hi Everyone,
+On Thu, 2012-03-29 at 04:36 +0000, Arago Project git wrote:
+> Module: meta-ti
+> Branch: master
+> Commit: a0dc3b8afc592b39c7948783952cd371c693640f
+> URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a0dc3b8afc592b39c7948783952cd371c693640f
 > 
-> according with:
+> Author: Denys Dmytriyenko <denys@ti.com>
+> Date:   Thu Mar 29 00:25:14 2012 -0400
 > 
-> http://www.angstrom-distribution.org/building-angstrom
+> multi-kernel: fix get_kernelversion returns None for do_compileconfigs
 > 
-> I attempted building meta-ti this way:
+> The function get_kernelversion uses generated header files to extract the
+> version number. But those files are not available until do_compile, and
+> do_compileconfigs is injected before that, hence the version becomes None
+> and breaks in several places.
 > 
-> MACHINE=beagleboard ./oebb.sh config am3517-evm
-> MACHINE=am3517-evm ./oebb.sh update
-> MACHINE=am3517-evm ./oebb.sh bitbake virtual/kernel
+> Introduce a new task do_preparekernel that calls "make prepare" in the
+> kernel tree to generate all the necessary files. It's also safer to call
+> do_configure early on.
 > 
-> build stops at
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 > 
-> rm: cannot remove `.../image/lib/modules/None/build': No such file or directory
+> ---
+> 
+>  recipes-kernel/linux/linux-omap-psp_2.6.32.bb |    4 +++-
+>  recipes-kernel/linux/multi-kernel.inc         |   11 +++++++++--
+>  2 files changed, 12 insertions(+), 3 deletions(-)
+> 
+> diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.32.bb b/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
+> index 212a6e3..61fc24f 100644
+> --- a/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
+> +++ b/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
+> @@ -1,5 +1,7 @@
+>  require multi-kernel.inc
+>  
+> +MULTI_CONFIG_BASE_SUFFIX = ""
+> +
+>  DESCRIPTION = "Linux kernel for OMAP processors"
+>  KERNEL_IMAGETYPE = "uImage"
+>  
+> @@ -9,7 +11,7 @@ COMPATIBLE_MACHINE = "am3517-crane|beagleboard|omap3evm|am3517-evm|dm37x-evm|am3
+>  SRCREV = "5fc29e7b2a76a64a739f857858ef0b98294aa155"
+>  
+>  # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+> -MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
+> +MACHINE_KERNEL_PR_append = "c+gitr${SRCREV}"
+>  
+>  SRC_URI += "git://arago-project.org/git/projects/linux-omap3.git;protocol=git;branch=master \
+>             file://0001-Revert-omap3-beagle-Fix-compile-time-errors.patch \
+> diff --git a/recipes-kernel/linux/multi-kernel.inc b/recipes-kernel/linux/multi-kernel.inc
+> index 5314454..056adb9 100644
+> --- a/recipes-kernel/linux/multi-kernel.inc
+> +++ b/recipes-kernel/linux/multi-kernel.inc
+> @@ -16,6 +16,14 @@ SRC_URI += " \
+>             file://configs "
+>  
+>  MULTI_CONFIG_BASE_SUFFIX = "multi-config-"
+> +MODULES_IMAGE_BASE_NAME = "modules-${PV}-${PR}-${MACHINE}"
+> +
+> +do_preparekernel () {
+> +	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
+> +	oe_runmake prepare CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+> +}
+> +
+> +addtask preparekernel after do_configure before do_compile
 
-Please try again, it should be fixed now.
 
--- 
-Denys
+Might I suggest putting comments in the code about why this is
+necessary? Having done this kind of thing for a while you look at it in
+a years time and wonder what you'd been taking when you added it :)
+
+I know you can look at the commit history but a comment can be easier!
+
+Cheers,
+
+Richard
+
+
 
