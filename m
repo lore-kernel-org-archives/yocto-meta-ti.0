@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A34FFE013D6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A499EE013D9
 	for <meta-ti@yoctoproject.org>; Thu, 29 Mar 2012 22:57:10 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2BABA52A78; Fri, 30 Mar 2012 05:57:09 +0000 (UTC)
+	id D130152A9D; Fri, 30 Mar 2012 05:57:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120330055709.2BABA52A78@arago-project.org>
+Message-Id: <20120330055709.D130152A9D@arago-project.org>
 Date: Fri, 30 Mar 2012 05:57:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Tom Rini : am37x-evm.conf: Use '+=' not '?=' in IMAGE_FSTYPES
+Subject: Tom Rini : ti814x.inc: Use '+=' not '?=' in IMAGE_FSTYPES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,13 +26,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 2b300f08cae35d065f27c0b3e4c285b61740a6a6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2b300f08cae35d065f27c0b3e4c285b61740a6a6
+Commit: 1081734754ec74f55e1e310427c20d56f3357f34
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1081734754ec74f55e1e310427c20d56f3357f34
 
 Author: Tom Rini <trini@ti.com>
-Date:   Thu Mar 29 10:18:15 2012 -0700
+Date:   Thu Mar 29 10:18:16 2012 -0700
 
-am37x-evm.conf: Use '+=' not '?=' in IMAGE_FSTYPES
+ti814x.inc: Use '+=' not '?=' in IMAGE_FSTYPES
 
 As per
 http://lists.linuxtogo.org/pipermail/openembedded-core/2012-March/020053.html
@@ -43,21 +43,21 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am37x-evm.conf |    2 +-
+ conf/machine/include/ti814x.inc |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
-index e4170f4..ddb54e8 100644
---- a/conf/machine/am37x-evm.conf
-+++ b/conf/machine/am37x-evm.conf
-@@ -16,7 +16,7 @@ require conf/machine/include/omap3.inc
+diff --git a/conf/machine/include/ti814x.inc b/conf/machine/include/ti814x.inc
+index c53557f..475a212 100644
+--- a/conf/machine/include/ti814x.inc
++++ b/conf/machine/include/ti814x.inc
+@@ -20,7 +20,7 @@ UBOOT_LOADADDRESS = "0x80008000"
+ EXTRA_IMAGEDEPENDS += "u-boot"
  
  # Ship all kernel modules
- 
 -IMAGE_FSTYPES ?= "jffs2 tar.bz2"
 +IMAGE_FSTYPES += "jffs2 tar.bz2"
- EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
- 
- SERIAL_CONSOLE = "115200 ttyS0"
+ EXTRA_IMAGECMD_jffs2 = "-lqn -e 128"
+ SERIAL_CONSOLE = "115200 ttyO0"
+ MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 ethernet"
 
 
