@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E1B2E01206
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A3D8E00596
 	for <meta-ti@yoctoproject.org>; Fri, 30 Mar 2012 16:11:27 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 531A3529B7; Fri, 30 Mar 2012 23:11:26 +0000 (UTC)
+	id DBD7B52A74; Fri, 30 Mar 2012 23:11:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120330231126.531A3529B7@arago-project.org>
-Date: Fri, 30 Mar 2012 23:11:26 +0000 (UTC)
+Message-Id: <20120330231125.DBD7B52A74@arago-project.org>
+Date: Fri, 30 Mar 2012 23:11:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-ti33x-psp 3.2: fix VGA cape partnumber
+Subject: Koen Kooi : linux-ti33x-psp 3.2: update to 3.2.13
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,76 +26,75 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: de3125ad1e262660f620b10cb0145cfdecb1dcf8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=de3125ad1e262660f620b10cb0145cfdecb1dcf8
+Commit: 7df8fc578b63662ec03ad3e69ecc6f04f7d77fb8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7df8fc578b63662ec03ad3e69ecc6f04f7d77fb8
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Wed Mar 21 14:45:13 2012 +0100
+Date:   Mon Mar 26 08:52:27 2012 -0500
 
-linux-ti33x-psp 3.2: fix VGA cape partnumber
+linux-ti33x-psp 3.2: update to 3.2.13
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...add-more-beagleboardtoys-cape-partnumbers.patch |    2 +-
- ...add-gpio-keys-for-lcd7-add-notes-for-miss.patch |    2 +-
- .../0026-beaglebone-add-gpio-keys-for-lcd.patch    |    2 +-
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ conf/machine/include/ti33x.inc                     |    2 +-
+ ...neo1973-fix-neo1973-wm8753-initialization.patch |   42 +++
+ ...altek-Apply-the-coef-setup-only-to-ALC269.patch |   56 ++++
+ .../0003-aio-fix-io_setup-io_destroy-race.patch    |   54 ++++
+ .../0004-aio-fix-the-too-late-munmap-race.patch    |   81 ++++++
+ .../0005-x86-Derandom-delay_tsc-for-64-bit.patch   |   63 +++++
+ ...pre-1.1-ASPM-quirking-when-ASPM-is-disabl.patch |   38 +++
+ ...ccdc-Fix-crash-in-HS-VS-interrupt-handler.patch |   40 +++
+ .../3.2.12/0008-rt2x00-fix-random-stalls.patch     |   99 +++++++
+ ...x-local-vs-remote-memory-events-for-NHM-W.patch |  222 +++++++++++++++
+ ...-Do-not-kmalloc-under-the-flocks-spinlock.patch |  140 ++++++++++
+ .../0011-vfs-fix-return-value-from-do_last.patch   |   34 +++
+ ...12-vfs-fix-double-put-after-complete_walk.patch |   35 +++
+ ...cer-wmi-No-wifi-rfkill-on-Lenovo-machines.patch |   77 ++++++
+ .../0014-atl1c-dont-use-highprio-tx-queue.patch    |   51 ++++
+ ...neighbour-Fixed-race-condition-at-tbl-nht.patch |   48 ++++
+ ...ec-be-careful-of-non-existing-mac-headers.patch |  144 ++++++++++
+ ...ppp-fix-ppp_mp_reconstruct-bad-seq-errors.patch |   90 ++++++
+ ...ignment-of-ip_summed-for-pre-allocated-sk.patch |   56 ++++
+ ...alse-reordering-signal-in-tcp_shifted_skb.patch |   72 +++++
+ .../0020-vmxnet3-Fix-transport-header-size.patch   |   58 ++++
+ .../0021-packetengines-fix-config-default.patch    |   33 +++
+ ...-corrupted-IP-fragments-fix-for-large-mtu.patch |   49 ++++
+ ...ragment-SACKed-skbs-in-tcp_mark_head_lost.patch |   55 ++++
+ ...-check-return-value-of-ipv6_dev_get_saddr.patch |   39 +++
+ ..._shift_skb_data-to-not-shift-SACKed-data-.patch |   89 ++++++
+ ...t-join-all-router-mcast-group-when-forwar.patch |   36 +++
+ .../0027-usb-asix-Patch-for-Sitecom-LN-031.patch   |   36 +++
+ ...ix-setting-selector-in-tps6524x-set_volta.patch |   33 +++
+ ...ULL-pointer-dereference-in-sd_revalidate_.patch |  170 ++++++++++++
+ ...fix-pointer-math-issue-getting-fw-version.patch |   34 +++
+ ...-__blkdev_get-and-add_disk-race-condition.patch |  163 +++++++++++
+ ...-freezable-workqueue-for-disk-event-polli.patch |  129 +++++++++
+ ...sparc32-Add-Av8-to-assembler-command-line.patch |   40 +++
+ ...7ehf-Fix-writing-into-fan_stop_time-for-N.patch |   35 +++
+ ...3627ehf-Fix-memory-leak-in-probe-function.patch |   53 ++++
+ ...-w83627ehf-Fix-temp2-source-for-W83627UHG.patch |   69 +++++
+ ...721-fix-bug-in-register-offset-definition.patch |  103 +++++++
+ ...t-Fix-spurious-SCL-timeouts-under-heavy-l.patch |   46 ++++
+ ...t-Fix-reservation-conflict-EBUSY-response.patch |   51 ++++
+ ...compatible-reservation-handling-CRH-1-wit.patch |  152 +++++++++++
+ ...0-Enable-interval-between-chip-accesses-f.patch |   72 +++++
+ .../3.2.12/0042-Linux-3.2.12.patch                 |   24 ++
+ ...NULL-pointer-dereference-in-nilfs_load_su.patch |   62 +++++
+ .../0002-afs-Read-of-file-returns-EBADMSG.patch    |   56 ++++
+ ...-Remote-abort-can-cause-BUG-in-rxrpc-code.patch |   68 +++++
+ ...Incorrect-use-of-snprintf-results-in-SEGV.patch |   66 +++++
+ ...perf-tools-Use-scnprintf-where-applicable.patch |  283 ++++++++++++++++++++
+ .../3.2.13/0006-tcp-fix-syncookie-regression.patch |  111 ++++++++
+ ...Don-t-dev_hold-dev-in-ip6_mc_find_dev_rcu.patch |   36 +++
+ ...-possible-il-txq-NULL-pointer-dereference.patch |   63 +++++
+ ...c-Fix-SMP-kernels-on-pre-core99-UP-machin.patch |   36 +++
+ .../3.2.13/0010-Linux-3.2.13.patch                 |   24 ++
+ recipes-kernel/linux/linux-ti33x-psp-3.2/patch.sh  |    2 +-
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |   52 ++++
+ 55 files changed, 3870 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0023-beaglebone-add-more-beagleboardtoys-cape-partnumbers.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0023-beaglebone-add-more-beagleboardtoys-cape-partnumbers.patch
-index 4c1fcfd..748386a 100644
---- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0023-beaglebone-add-more-beagleboardtoys-cape-partnumbers.patch
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0023-beaglebone-add-more-beagleboardtoys-cape-partnumbers.patch
-@@ -24,7 +24,7 @@ index 36efca1..58a0e77 100644
- +		beaglebone_tsadcpins_free = 0;
- +	}
- +	
--+	if (!strncmp("BB-BONE-VGA0-01", cape_config.partnumber, 15)) {
-++	if (!strncmp("BB-BONE-VGA-01", cape_config.partnumber, 15)) {
- +		pr_info("BeagleBone cape: initializing VGA cape\n");
- +		dvi_init(0,0);
- +	}
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0024-beaglebone-add-gpio-keys-for-lcd7-add-notes-for-miss.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0024-beaglebone-add-gpio-keys-for-lcd7-add-notes-for-miss.patch
-index f5da1ed..4d44ae0 100644
---- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0024-beaglebone-add-gpio-keys-for-lcd7-add-notes-for-miss.patch
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0024-beaglebone-add-gpio-keys-for-lcd7-add-notes-for-miss.patch
-@@ -105,7 +105,7 @@ index 58a0e77..7a2b851 100644
- +		// gpio1_28 -> button
-  	}
-  	
-- 	if (!strncmp("BB-BONE-VGA0-01", cape_config.partnumber, 15)) {
-+ 	if (!strncmp("BB-BONE-VGA-01", cape_config.partnumber, 15)) {
- @@ -1898,11 +1971,17 @@ static void beaglebone_cape_setup(struct memory_accessor *mem_acc, void *context
-  	
-  	if (!strncmp("BB-BONE-BATT-01", cape_config.partnumber, 15)) {
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0026-beaglebone-add-gpio-keys-for-lcd.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0026-beaglebone-add-gpio-keys-for-lcd.patch
-index 2a36c19..2d8270e 100644
---- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0026-beaglebone-add-gpio-keys-for-lcd.patch
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0026-beaglebone-add-gpio-keys-for-lcd.patch
-@@ -107,7 +107,7 @@ index ed2ff18..badee96 100644
- +		beaglebone_lcd3_keys_init(0,0);
-  	}
-  	
-- 	if (!strncmp("BB-BONE-VGA0-01", cape_config.partnumber, 15)) {
-+ 	if (!strncmp("BB-BONE-VGA-01", cape_config.partnumber, 15)) {
- -- 
- 1.7.2.5
- 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index e6277ce..16c0dd4 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -12,7 +12,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
- 
- BRANCH = "v3.2-staging"
- SRCREV = "09e9651bcf2ee8d86685f2a8075bc6557b1d3b91"
--MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "c+gitr${SRCREV}"
- 
- COMPATIBLE_MACHINE = "(ti33x)"
- 
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=7df8fc578b63662ec03ad3e69ecc6f04f7d77fb8
 
