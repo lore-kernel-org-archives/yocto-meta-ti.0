@@ -1,40 +1,42 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0502AE013A5
-	for <meta-ti@lists.yoctoproject.org>;
-	Fri, 30 Mar 2012 11:58:34 -0700 (PDT)
-Received: by mail-we0-f181.google.com with SMTP id m13so649240wer.26
-	for <meta-ti@lists.yoctoproject.org>;
-	Fri, 30 Mar 2012 11:58:34 -0700 (PDT)
+Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
+	[209.85.160.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7BF0DE0044D
+	for <meta-ti@yoctoproject.org>; Fri, 30 Mar 2012 15:08:56 -0700 (PDT)
+Received: by pbbjt11 with SMTP id jt11so2862524pbb.35
+	for <meta-ti@yoctoproject.org>; Fri, 30 Mar 2012 15:08:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=mime-version:from:to:cc:subject:date:message-id:x-mailer
-	:in-reply-to:references:x-gm-message-state;
-	bh=7hmHnxxXiWRdRblByisc+3JkjZC8Xxuq1pb8vVT/yIw=;
-	b=Ven8VAqA0kVti8kAM9AGbUlDAgADxTH2pqz8bgMbkaeyeojnnQ4r0V9dsl7ASGZ2Wb
-	3ueKwHDneyZfCEuhqzslVZsTPx/FNMBjJ9u9Ek9QGP0uWqAfG5aai9I5iVslRGbq5h7Q
-	14tQMzk7DW9SjkJVpqWcwvgJnBTaXFh1gXMWrxRHeYsQYpEyMdqAPEkGe3AaNjG8618Q
-	8QrEH0w6PfIBO3hENT+POEjfB/62N+e/X5ptetvYm/9YR5g+qcRD3Nfc4P7lEtZlqP4u
-	Rb568AOX3IkPPAoD5FxJbuVA24+gQNUoGiqDitwBBFjL2i4CNuVj/0VRCB7AV3xyYTXe
-	LoYQ==
-MIME-Version: 1.0
-Received: by 10.180.79.72 with SMTP id h8mr935437wix.1.1333133914551;
-	Fri, 30 Mar 2012 11:58:34 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id gg2sm13704948wib.7.2012.03.30.11.58.33
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=zGtBEbCxayaaO50Q9EbIx+IKuOuB+vXfWEGOCbcvyls=;
+	b=GsDJxWL+FjNmuTQAMkeqya7+lo5rRsVRHI8nWcgQV7FQWrH8HFxZ/4TzFOBQ0UYM08
+	oFfIInJNq1zRro7b2mdT71x5nBdKRjBnAwPf48hUde1p2s7jIVgr10mP5vn4Pgk8WlW+
+	Tos1EKrNyIba4KxjgSEESXYdzh3qcSG7LYXNgMpjE7tyyGVM8DmnVPVM0JU3XJUp/jZn
+	uI3rOagZqR3nadocLxHr1faUP1dBe6lXQzxgt9G8dn+SQDPxCUdKj9etvLbpgr0qjDRP
+	wH68q/GHX3I+biihmhUVBXp/+JP0QN87Wpki/PKdR4vSZsBK8+fri2Znv3NJhh6ZjPH8
+	f46Q==
+Received: by 10.68.230.104 with SMTP id sx8mr975692pbc.16.1333145336174;
+	Fri, 30 Mar 2012 15:08:56 -0700 (PDT)
+Received: from [10.61.32.129] ([69.38.219.78])
+	by mx.google.com with ESMTPS id q5sm3685795pbp.28.2012.03.30.15.08.54
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 30 Mar 2012 11:58:33 -0700 (PDT)
+	Fri, 30 Mar 2012 15:08:54 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1257)
 From: Koen Kooi <koen@dominion.thruhere.net>
-To: meta-ti@lists.yoctoproject.org
-Date: Fri, 30 Mar 2012 20:58:24 +0200
-Message-Id: <1333133904-14404-3-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1333133904-14404-1-git-send-email-koen@dominion.thruhere.net>
-References: <1333133904-14404-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQl71q+3Cbm0zi8Edrr90pC0Xqp/ErFqnckbzoSAqde1dy047gcxNTw0lDVFqXrfjQ4zPL/M
-Cc: denys@ti.com
-Subject: [PATCH 3/3] linux-ti33x-psp 3.2: fix VGA cape partnumber
+In-Reply-To: <20120319210557.GF19810@bill-the-cat>
+Date: Fri, 30 Mar 2012 15:09:00 -0700
+Message-Id: <788A3D57-ACFD-4CA0-820F-0DD91DCB8196@dominion.thruhere.net>
+References: <F01BAC6C-9AA4-4D59-AB9B-067A9D1E9ED7@dominion.thruhere.net>
+	<20120319205854.GE19810@bill-the-cat>
+	<20120319210247.GD15554@denix.org>
+	<20120319210557.GF19810@bill-the-cat>
+To: Tom Rini <trini@ti.com>
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQltIJ9m0bFAd7c2n/2F14QaWL3hdyHB2ZGzXerjxWA/fa9vfLnB3y2SfcG6hiQ6eCQVioeG
+Cc: meta-ti@yoctoproject.org
+Subject: Re: release branch for meta-ti?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,72 +48,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Mar 2012 18:58:35 -0000
+X-List-Received-Date: Fri, 30 Mar 2012 22:08:56 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
 
-https://github.com/angstrom-distribution/meta-ti/tree/pull20123003
+Op 19 mrt. 2012, om 14:05 heeft Tom Rini het volgende geschreven:
 
- ...add-more-beagleboardtoys-cape-partnumbers.patch |    2 +-
- ...add-gpio-keys-for-lcd7-add-notes-for-miss.patch |    2 +-
- .../0026-beaglebone-add-gpio-keys-for-lcd.patch    |    2 +-
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+> On Mon, Mar 19, 2012 at 05:02:47PM -0400, Denys Dmytriyenko wrote:
+>> On Mon, Mar 19, 2012 at 01:58:54PM -0700, Tom Rini wrote:
+>>> On Mon, Mar 19, 2012 at 01:58:36PM +0100, Koen Kooi wrote:
+>>>> Hi,
+>>>>=20
+>>>> Any volunteers for maintaining a releasebranch that matches the =
+upcoming oe-core release in ~4 weeks?
+>>>=20
+>>> If Denys or Chase don't step-up, I'll do it.  As qualification, I do
+>>> such a thing for oe-classic currently :)  But if either of them =
+would
+>>> rather, I'll defer to them.
+>>=20
+>> We'll probably need to set meta-oe-maintenance up anyway for =
+meta-arago to=20
+>> work with, rather than chasing changes in the master...
+>=20
+> Yes, meta-oe will also need a maintenance release to match
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0023-beaglebone-add-more-beagleboardtoys-cape-partnumbers.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0023-beaglebone-add-more-beagleboardtoys-cape-partnumbers.patch
-index 4c1fcfd..748386a 100644
---- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0023-beaglebone-add-more-beagleboardtoys-cape-partnumbers.patch
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0023-beaglebone-add-more-beagleboardtoys-cape-partnumbers.patch
-@@ -24,7 +24,7 @@ index 36efca1..58a0e77 100644
- +		beaglebone_tsadcpins_free = 0;
- +	}
- +	
--+	if (!strncmp("BB-BONE-VGA0-01", cape_config.partnumber, 15)) {
-++	if (!strncmp("BB-BONE-VGA-01", cape_config.partnumber, 15)) {
- +		pr_info("BeagleBone cape: initializing VGA cape\n");
- +		dvi_init(0,0);
- +	}
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0024-beaglebone-add-gpio-keys-for-lcd7-add-notes-for-miss.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0024-beaglebone-add-gpio-keys-for-lcd7-add-notes-for-miss.patch
-index f5da1ed..4d44ae0 100644
---- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0024-beaglebone-add-gpio-keys-for-lcd7-add-notes-for-miss.patch
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0024-beaglebone-add-gpio-keys-for-lcd7-add-notes-for-miss.patch
-@@ -105,7 +105,7 @@ index 58a0e77..7a2b851 100644
- +		// gpio1_28 -> button
-  	}
-  	
-- 	if (!strncmp("BB-BONE-VGA0-01", cape_config.partnumber, 15)) {
-+ 	if (!strncmp("BB-BONE-VGA-01", cape_config.partnumber, 15)) {
- @@ -1898,11 +1971,17 @@ static void beaglebone_cape_setup(struct memory_accessor *mem_acc, void *context
-  	
-  	if (!strncmp("BB-BONE-BATT-01", cape_config.partnumber, 15)) {
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0026-beaglebone-add-gpio-keys-for-lcd.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0026-beaglebone-add-gpio-keys-for-lcd.patch
-index 2a36c19..2d8270e 100644
---- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0026-beaglebone-add-gpio-keys-for-lcd.patch
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0026-beaglebone-add-gpio-keys-for-lcd.patch
-@@ -107,7 +107,7 @@ index ed2ff18..badee96 100644
- +		beaglebone_lcd3_keys_init(0,0);
-  	}
-  	
-- 	if (!strncmp("BB-BONE-VGA0-01", cape_config.partnumber, 15)) {
-+ 	if (!strncmp("BB-BONE-VGA-01", cape_config.partnumber, 15)) {
- -- 
- 1.7.2.5
- 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index e6277ce..16c0dd4 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -12,7 +12,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
- 
- BRANCH = "v3.2-staging"
- SRCREV = "09e9651bcf2ee8d86685f2a8075bc6557b1d3b91"
--MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "c+gitr${SRCREV}"
- 
- COMPATIBLE_MACHINE = "(ti33x)"
- 
--- 
-1.7.2.5
+meta-oe branch is really close to having a maintainer, what's the =
+(final) word on the meta-ti branch?
+
+regards,
+
+Koen
 
 
