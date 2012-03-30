@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A5D95E013DB
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A70ECE013DF
 	for <meta-ti@yoctoproject.org>; Thu, 29 Mar 2012 22:57:10 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id EFA8452AA0; Fri, 30 Mar 2012 05:57:09 +0000 (UTC)
+	id C718452A9A; Fri, 30 Mar 2012 05:57:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120330055709.EFA8452AA0@arago-project.org>
+Message-Id: <20120330055709.C718452A9A@arago-project.org>
 Date: Fri, 30 Mar 2012 05:57:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : multi-kernel: add a comment on the addition of preparekernel task
+Subject: Tom Rini : am335x-evm.conf: Add 'ubi' to IMAGE_FSTYPES, use '+=' in assignment
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,61 +26,67 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: c5bb2de92249f802c7a038401b696be9c636895a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c5bb2de92249f802c7a038401b696be9c636895a
+Commit: f02d5e79064f09100b430644a92fe7d2e1418bcd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f02d5e79064f09100b430644a92fe7d2e1418bcd
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Mar 30 01:54:27 2012 -0400
+Author: Tom Rini <trini@ti.com>
+Date:   Thu Mar 29 10:18:18 2012 -0700
 
-multi-kernel: add a comment on the addition of preparekernel task
+am335x-evm.conf: Add 'ubi' to IMAGE_FSTYPES, use '+=' in assignment
 
-As suggested by Richard:
-https://lists.yoctoproject.org/pipermail/meta-ti/2012-March/000869.html
-While at it, reformat the header.
+As per
+http://lists.linuxtogo.org/pipermail/openembedded-core/2012-March/020053.html
+a machine conf file should use '+=' to set IMAGE_FSTYPES.  We also add
+the required MKUBIFS_ARGS / UBINIZE_ARGS.  These are placed next to the
+line that sets us to use the PSP kernel tree and reference the TI wiki
+for the source of our info as well as dmesg / userland commands.
 
+Signed-off-by: Tom Rini <trini@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/multi-kernel.inc |   26 ++++++++++++++++++--------
- 1 files changed, 18 insertions(+), 8 deletions(-)
+ conf/machine/am335x-evm.conf |   23 ++++++++++++++++++++++-
+ 1 files changed, 22 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/multi-kernel.inc b/recipes-kernel/linux/multi-kernel.inc
-index 056adb9..04bc987 100644
---- a/recipes-kernel/linux/multi-kernel.inc
-+++ b/recipes-kernel/linux/multi-kernel.inc
-@@ -1,14 +1,24 @@
--# This .inc file allows you to build and deploy multiple sets of kernel + modules with different defconfigs
-+# This .inc file allows building and deploying multiple sets of kernel + modules
-+# with different defconfigs
- #
--# Note that this include will NOT stage anything nor create packages, since that is virtually impossible
--# Userspace should be built against the 'regular' kernel
-+# Note that this include will NOT stage anything nor create packages, since that
-+# is virtually impossible. Userspace should be built against the 'regular' kernel
- #
--# The intended usecase is for machines that have mutually exclusive drivers due to e.g. pinmuxing issues.
--# For example the LogicPD omap-l138 experimenter board can have multiple mutually exclusive expansion boards
--# like lcd, ethernet, sound, 20x2 character LCD, etc. To be able to easily test all of those you can use this .inc
-+# The intended usecase is for machines that have mutually exclusive drivers due
-+# to e.g. pinmuxing issues. For example the LogicPD omap-l138 experimenter board
-+# can have multiple mutually exclusive expansion boards like lcd, ethernet,
-+# sound, 20x2 character LCD, etc. To be able to easily test all of those you can
-+# use this .inc
- #
--# To make it easier finding the original defconfig from a running kernel, this also forcefully turns on 
--# CONFIG_IKCONFIG_PROC so people can do 'zcat /proc/config.gz' on the target.
-+# To make it easier finding the original defconfig from a running kernel, this
-+# also forcefully turns on CONFIG_IKCONFIG_PROC so people can do
-+# 'zcat /proc/config.gz' on the target.
-+#
-+# The function get_kernelversion uses generated header files to extract the
-+# version number. But those files are not available until do_compile, and
-+# do_compileconfigs is injected before that, hence the version becomes None
-+# and breaks in several places. Introduce a task do_preparekernel that calls
-+# "make prepare" in the kernel tree to generate all the necessary files.
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index eedf072..e7ddd0b 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -12,12 +12,33 @@ GUI_MACHINE_CLASS = "smallscreen"
  
- require linux.inc
+ require conf/machine/include/ti33x.inc
  
+-IMAGE_FSTYPES ?= "tar.bz2"
++IMAGE_FSTYPES += "ubi tar.bz2"
+ 
+ SERIAL_CONSOLE = "115200 ttyO0"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+ 
++# UBI information.  Note that this is board and kernel specific.  Changes
++# in your kernel port may require changes in these variables.  For more
++# details about this board please see
++# http://processors.wiki.ti.com/index.php/UBIFS_Support
++
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# From dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: logical eraseblock size:    126976 bytes
++# from ubiattach stdout:
++# UBI device number 0, total 1988 LEBs
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 1988"
++
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# from dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: physical eraseblock size:   131072 bytes (128 KiB)
++# UBI: sub-page size:              512
++# UBI: VID header offset:          2048 (aligned 2048)
++UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
++
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
+ 
+ UBOOT_ARCH = "arm"
 
 
