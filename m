@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B969E0059A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8CE25E006C7
 	for <meta-ti@yoctoproject.org>; Fri, 30 Mar 2012 16:11:27 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C0DCB52A9E; Fri, 30 Mar 2012 23:11:26 +0000 (UTC)
+	id A3A2552A57; Fri, 30 Mar 2012 23:11:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120330231126.C0DCB52A9E@arago-project.org>
-Date: Fri, 30 Mar 2012 23:11:26 +0000 (UTC)
+Message-Id: <20120330231126.A3A2552A57@arago-project.org>
+Date: Fri, 30 Mar 2012 23:11:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : README: refer to toolchain-layer in meta-openembedded
+Subject: Koen Kooi : linux-ti33x-psp 3.2: improve cape support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,44 +26,25 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: f5135a2cb76535c179fa8e442c1f8d6cd336a64d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f5135a2cb76535c179fa8e442c1f8d6cd336a64d
+Commit: a04b218eb638d7fe1835028ac4d283d0885f6173
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a04b218eb638d7fe1835028ac4d283d0885f6173
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Mar 30 19:08:35 2012 -0400
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Mon Mar 19 15:04:32 2012 +0100
 
-README: refer to toolchain-layer in meta-openembedded
+linux-ti33x-psp 3.2: improve cape support
 
-Since gcc-4.5, binutils-2.20.1 and eglibc-2.12 are now in their own
-toolchain-layer of meta-openembedded, adjust README accordingly.
-
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- README |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ ...add-more-beagleboardtoys-cape-partnumbers.patch |   53 ++++++++
+ ...add-gpio-keys-for-lcd7-add-notes-for-miss.patch |  129 ++++++++++++++++++++
+ ...25-beaglebone-add-enter-key-for-lcd7-cape.patch |   40 ++++++
+ .../0026-beaglebone-add-gpio-keys-for-lcd.patch    |  113 +++++++++++++++++
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    6 +-
+ 5 files changed, 340 insertions(+), 1 deletions(-)
 
-diff --git a/README b/README
-index 9e91f8d..352cb2e 100644
---- a/README
-+++ b/README
-@@ -8,13 +8,13 @@ branch: master
- revision: HEAD
- 
- URI: git://git.openembedded.org/meta-openembedded
--layers: meta-oe
-+layers: toolchain-layer
- branch: master
- revision: HEAD
- 
- There are known issues when using a toolchain with gcc-4.6 and binutils-2.22
--from OpenEmbedded-Core, thus it is recommended to use meta-openembedded layer
--with gcc-4.5 + Linaro patches and binutils-2.20.1.
-+from OpenEmbedded-Core, thus it is recommended to use toolchain-layer from
-+meta-openembedded with gcc-4.5 + Linaro patches and binutils-2.20.1.
- 
- The base BSP part of meta-ti should work with different OpenEmbedded/Yocto
- distributions and layer stacks, such as:
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=a04b218eb638d7fe1835028ac4d283d0885f6173
 
