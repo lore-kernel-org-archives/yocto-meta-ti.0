@@ -1,31 +1,15 @@
-Return-Path: <wmills@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2DC08E0044D
-	for <meta-ti@yoctoproject.org>; Fri, 30 Mar 2012 15:17:22 -0700 (PDT)
-Received: from dlep26.itg.ti.com ([157.170.170.121])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q2UMHL0r005356;
-	Fri, 30 Mar 2012 17:17:21 -0500
-Received: from DFLE70.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q2UMHLYB009989;
-	Fri, 30 Mar 2012 17:17:21 -0500 (CDT)
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle70.ent.ti.com
-	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
-	Fri, 30 Mar 2012 17:17:21 -0500
-Received: from gtwmills.gt.design.ti.com (gtwmills.gt.design.ti.com
-	[158.218.100.52])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	q2UMHK0O021598;	Fri, 30 Mar 2012 17:17:20 -0500
-Message-ID: <4F7630F0.8010408@ti.com>
-Date: Fri, 30 Mar 2012 18:17:20 -0400
-From: William Mills <wmills@ti.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.27) Gecko/20120216 Thunderbird/3.1.19
-MIME-Version: 1.0
-To: Koen Kooi <koen@dominion.thruhere.net>
-References: <F01BAC6C-9AA4-4D59-AB9B-067A9D1E9ED7@dominion.thruhere.net>	<20120319205854.GE19810@bill-the-cat>	<20120319210247.GD15554@denix.org>	<20120319210557.GF19810@bill-the-cat>
-	<788A3D57-ACFD-4CA0-820F-0DD91DCB8196@dominion.thruhere.net>
-In-Reply-To: <788A3D57-ACFD-4CA0-820F-0DD91DCB8196@dominion.thruhere.net>
-Cc: Tom Rini <trini@ti.com>, meta-ti@yoctoproject.org
-Subject: Re: release branch for meta-ti?
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B969E0059A
+	for <meta-ti@yoctoproject.org>; Fri, 30 Mar 2012 16:11:27 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id C0DCB52A9E; Fri, 30 Mar 2012 23:11:26 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120330231126.C0DCB52A9E@arago-project.org>
+Date: Fri, 30 Mar 2012 23:11:26 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : README: refer to toolchain-layer in meta-openembedded
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,37 +21,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Mar 2012 22:17:22 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 30 Mar 2012 23:11:27 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 03/30/2012 06:09 PM, Koen Kooi wrote:
->
-> Op 19 mrt. 2012, om 14:05 heeft Tom Rini het volgende geschreven:
->
->> On Mon, Mar 19, 2012 at 05:02:47PM -0400, Denys Dmytriyenko wrote:
->>> On Mon, Mar 19, 2012 at 01:58:54PM -0700, Tom Rini wrote:
->>>> On Mon, Mar 19, 2012 at 01:58:36PM +0100, Koen Kooi wrote:
->>>>> Hi,
->>>>>
->>>>> Any volunteers for maintaining a releasebranch that matches the upcoming oe-core release in ~4 weeks?
->>>>
->>>> If Denys or Chase don't step-up, I'll do it.  As qualification, I do
->>>> such a thing for oe-classic currently :)  But if either of them would
->>>> rather, I'll defer to them.
->>>
->>> We'll probably need to set meta-oe-maintenance up anyway for meta-arago to
->>> work with, rather than chasing changes in the master...
->>
->> Yes, meta-oe will also need a maintenance release to match
->
-> meta-oe branch is really close to having a maintainer, what's the (final) word on the meta-ti branch?
+Module: meta-ti
+Branch: master
+Commit: f5135a2cb76535c179fa8e442c1f8d6cd336a64d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f5135a2cb76535c179fa8e442c1f8d6cd336a64d
 
-I have no objection to the branch to ensure the current working 
-functionality remains working with yocto maintenance releases.
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Mar 30 19:08:35 2012 -0400
 
-However, I don't think we should actively maintain new features on both 
-branches.
+README: refer to toolchain-layer in meta-openembedded
 
-So what is the goal of the branch?
+Since gcc-4.5, binutils-2.20.1 and eglibc-2.12 are now in their own
+toolchain-layer of meta-openembedded, adjust README accordingly.
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ README |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/README b/README
+index 9e91f8d..352cb2e 100644
+--- a/README
++++ b/README
+@@ -8,13 +8,13 @@ branch: master
+ revision: HEAD
+ 
+ URI: git://git.openembedded.org/meta-openembedded
+-layers: meta-oe
++layers: toolchain-layer
+ branch: master
+ revision: HEAD
+ 
+ There are known issues when using a toolchain with gcc-4.6 and binutils-2.22
+-from OpenEmbedded-Core, thus it is recommended to use meta-openembedded layer
+-with gcc-4.5 + Linaro patches and binutils-2.20.1.
++from OpenEmbedded-Core, thus it is recommended to use toolchain-layer from
++meta-openembedded with gcc-4.5 + Linaro patches and binutils-2.20.1.
+ 
+ The base BSP part of meta-ti should work with different OpenEmbedded/Yocto
+ distributions and layer stacks, such as:
+
 
