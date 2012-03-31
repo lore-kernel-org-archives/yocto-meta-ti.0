@@ -1,32 +1,38 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0EEB6E004D2
-	for <meta-ti@yoctoproject.org>; Fri, 30 Mar 2012 19:04:43 -0700 (PDT)
-Received: by wgbdq13 with SMTP id dq13so924137wgb.11
-	for <meta-ti@yoctoproject.org>; Fri, 30 Mar 2012 19:04:42 -0700 (PDT)
+Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
+	[209.85.160.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D03A6E00596
+	for <meta-ti@yoctoproject.org>; Fri, 30 Mar 2012 20:02:32 -0700 (PDT)
+Received: by pbbjt11 with SMTP id jt11so3074808pbb.35
+	for <meta-ti@yoctoproject.org>; Fri, 30 Mar 2012 20:02:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=7ItGGff6yoGpzTsNu0bFmxSrzf3FzSCcU2mD/rEcQ9M=;
-	b=Wo8SzcmSJDKJcrKSrI5ZlQGLO73ff3RlWNBl2zRutGo/0aHj82jSQvgN8iCBVKVQKs
-	7YQSSA6roQ41V67qDQ1dXkbfacW/9Z1CK8cbo14GqErFcIC250GcMKs43zfDTYHvHAbm
-	FnvNzaRM4Gr7DGg7ahf3NLweyQ1PcwoNElK9H8N/zh89+lgXWi2l/zW7xHXGHQvnThWg
-	hXzJ4OJk0gb6giWj8usHdEbNjJ8+Wvu22ZSgZaMGbjMp9zQkSHjQVBAZu147BxSYDaar
-	v+nT4zSCYfty6GTXQ/WdtZ+NYAjZrEPfjHain3lXWsFiAKhc0zsvcIaKAZvD0IuPSGKF
-	ZNuA==
-Received: by 10.180.92.71 with SMTP id ck7mr1952051wib.21.1333159482673;
-	Fri, 30 Mar 2012 19:04:42 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id n15sm11369416wiw.6.2012.03.30.19.04.41
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=lZx47WX5oCyVyUWUzcNErj5cm8brr0FHL7D0fzTELmg=;
+	b=YlMnFRlzvNW4wRcG+gcvBohprC0J2AR0JZ+7B1U98oY7SyQcoKKKfH76b3S1zmmkan
+	M4TgK0YzcbMK31K2TK3rt0R/G7j5P0CxYomBVnlxbWu6I4SYsWe72ft4MnrxyVIkft9k
+	Wu7JI0/d0jX5OrMB7F5v8Dn9gZGAGeNmDx/eC3zSOfM+MLT9WGhdyjIjN3JSLjG47XZH
+	eoFDpAw9ryTtyoAuzb2M/wWHw1Qg28AM2qm3IHAu0d9q7+Rd8nfnjxtfywJARaMjG0Ce
+	N/yNGEVP+8hiycuDFbOH07HQveE/yrtKhEWtbHsr977+T6/g1SVeR0sVlszPK5i1lrCa
+	FOuQ==
+Received: by 10.68.233.135 with SMTP id tw7mr2026372pbc.152.1333162952596;
+	Fri, 30 Mar 2012 20:02:32 -0700 (PDT)
+Received: from [10.61.32.129] ([69.38.219.78])
+	by mx.google.com with ESMTPS id i6sm8688215pbe.18.2012.03.30.20.02.31
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 30 Mar 2012 19:04:42 -0700 (PDT)
+	Fri, 30 Mar 2012 20:02:31 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1257)
 From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1333159463-19937-1-git-send-email-koen@dominion.thruhere.net>
+Date: Fri, 30 Mar 2012 20:02:30 -0700
+Message-Id: <C51A3D6C-C990-4413-B7CE-2AD68F9D4CA4@dominion.thruhere.net>
+References: <1333159463-19937-1-git-send-email-koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Date: Sat, 31 Mar 2012 04:04:23 +0200
-Message-Id: <1333159463-19937-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-X-Gm-Message-State: ALoCoQn/YzehzeJn/xvgBIDa6flYbWGvaGt25BhgC/hmlnvpvwmHAbNatOJkhjfq7v6Vp+H2PbuN
-Subject: [RFC][PATCH] u-boot 2011.10rc: add patch to speed up ext2load
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQmgOA5q79GohLco5VxA9I9pauYhqLDhPe2eJz6ypZrVZFRDJy8PpcxO+Rj7jQdiwrFhK96d
+Subject: Re: [RFC][PATCH] u-boot 2011.10rc: add patch to speed up ext2load
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,122 +44,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Mar 2012 02:04:44 -0000
+X-List-Received-Date: Sat, 31 Mar 2012 03:02:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
 
-Please test this patch on your am335x boards, I need to run out and buy a mini usb cable because I misplaced mine during traveling this week. 
+Op 30 mrt. 2012, om 19:04 heeft Koen Kooi het volgende geschreven:
 
-Untested, but I wanted to get it out before the weekend.
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>=20
+> Please test this patch on your am335x boards, I need to run out and =
+buy a mini usb cable because I misplaced mine during traveling this =
+week.=20
 
- .../0011-ext2load-increase-read-speed.patch        |   74 ++++++++++++++++++++
- recipes-bsp/u-boot/u-boot_2011.10rc.bb             |    3 +-
- 2 files changed, 76 insertions(+), 1 deletions(-)
- create mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0011-ext2load-increase-read-speed.patch
+With the following in uEnv.txt:
 
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0011-ext2load-increase-read-speed.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0011-ext2load-increase-read-speed.patch
-new file mode 100644
-index 0000000..7d4ce87
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot/2011.09git/0011-ext2load-increase-read-speed.patch
-@@ -0,0 +1,74 @@
-+From 5d6d85e090e6ff57972e7cc9d38fa0c62be08031 Mon Sep 17 00:00:00 2001
-+From: u-boot@lakedaemon.net <u-boot@lakedaemon.net>
-+Date: Wed, 28 Mar 2012 04:37:11 +0000
-+Subject: [PATCH 11/11] ext2load: increase read speed
-+
-+This patch dramatically drops the amount of time u-boot needs to read a
-+file from an ext2 partition.  On a typical 2 to 5 MB file (kernels and
-+initrds) it goes from tens of seconds to a couple seconds.
-+
-+All we are doing here is grouping contiguous blocks into one read.
-+
-+Boot tested on Globalscale Technologies Dreamplug (Kirkwood ARM SoC)
-+with three different files.  sha1sums were calculated in Linux
-+userspace, and then confirmed after ext2load.
-+
-+Signed-off-by: Jason Cooper <u-boot@lakedaemon.net>
-+---
-+ fs/ext2/ext2fs.c |   26 ++++++++++++++++++++++++--
-+ 1 files changed, 24 insertions(+), 2 deletions(-)
-+
-+diff --git a/fs/ext2/ext2fs.c b/fs/ext2/ext2fs.c
-+index e119e13..8531db5 100644
-+--- a/fs/ext2/ext2fs.c
-++++ b/fs/ext2/ext2fs.c
-+@@ -414,7 +414,6 @@ int ext2fs_read_file
-+ 		if (blknr < 0) {
-+ 			return (-1);
-+ 		}
-+-		blknr = blknr << log2blocksize;
-+ 
-+ 		/* Last block.  */
-+ 		if (i == blockcnt - 1) {
-+@@ -432,6 +431,29 @@ int ext2fs_read_file
-+ 			blockend -= skipfirst;
-+ 		}
-+ 
-++		/* grab middle blocks in one go */
-++		if (i != pos / blocksize && i != blockcnt - 1 && blockcnt > 3) {
-++			int oldblk = blknr;
-++			int blocknxt;
-++			while (i < blockcnt - 1) {
-++				blocknxt = ext2fs_read_block(node, i + 1);
-++				if (blocknxt == (oldblk + 1)) {
-++					oldblk = blocknxt;
-++					i++;
-++				} else {
-++					blocknxt = ext2fs_read_block(node, i);
-++					break;
-++				}
-++			}
-++
-++			if (oldblk == blknr)
-++				blockend = blocksize;
-++			else
-++				blockend = (1 + blocknxt - blknr) * blocksize;
-++		}
-++
-++		blknr = blknr << log2blocksize;
-++
-+ 		/* If the block number is 0 this block is not stored on disk but
-+ 		   is zero filled instead.  */
-+ 		if (blknr) {
-+@@ -444,7 +466,7 @@ int ext2fs_read_file
-+ 		} else {
-+ 			memset (buf, 0, blocksize - skipfirst);
-+ 		}
-+-		buf += blocksize - skipfirst;
-++		buf += blockend - skipfirst;
-+ 	}
-+ 	return (len);
-+ }
-+-- 
-+1.7.2.5
-+
-diff --git a/recipes-bsp/u-boot/u-boot_2011.10rc.bb b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
-index 0102d15..8f2c137 100644
---- a/recipes-bsp/u-boot/u-boot_2011.10rc.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
-@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "(ti33x)"
- DEFAULT_PREFERENCE_ti33x = "99"
- 
- PV = "2011.09+git"
--PR = "r26"
-+PR = "r27"
- 
- # SPL build
- UBOOT_BINARY = "u-boot.img"
-@@ -24,6 +24,7 @@ SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;br
-            file://2011.09git/0008-HACK-am335x-evm-turn-d-cache-on-globally-turn-it-off.patch \
-            file://2011.09git/0009-am335x-evm-enable-i2c2-pinmux-for-beaglebone.patch \
-            file://2011.09git/0001-ddr_defs-change-DDR-timings-for-15x15-EVM.patch \
-+           file://2011.09git/0011-ext2load-increase-read-speed.patch \
-           "
- 
- SRCREV = "f63b270e47f62f4d1a05b2001357e215966c6f5a"
--- 
-1.7.2.5
+uenvcmd=3Dmmc rescan ; setenv mmc_dev 0:1 ; echo starting fatload ; run =
+mmc_load_uimage ; setenv mmc_dev mmc 0:2; echo starting ext2load ; run =
+mmc_load_uimage_ext2
 
+First run:
+
+0.40	   0	Running uenvcmd ...
+0.46	   6	starting fatload
+0.48	   1	reading uImage
+0.70	  22=09
+0.70	   0	3140296 bytes read
+0.70	   0	starting ext2load
+0.72	   1	Loading file "/boot/uImage" from mmc device 0:2 (xxa2)
+0.78	   6	3140296 bytes read
+
+Second run:
+
+0.85	   0	Running uenvcmd ...
+0.91	   6	starting fatload
+0.91	   0	reading uImage
+1.15	  23=09
+1.15	   0	3140296 bytes read
+1.15	   0	starting ext2load
+1.15	   0	Loading file "/boot/uImage" from mmc device 0:2 (xxa2)
+1.21	   6	3140296 bytes read
+
+Strangely enough ext2load seems to be faster now. More testing needed :)
+
+regards,
+
+Koen=
 
