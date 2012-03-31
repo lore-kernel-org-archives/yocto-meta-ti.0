@@ -1,38 +1,25 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
-	[209.85.160.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D03A6E00596
-	for <meta-ti@yoctoproject.org>; Fri, 30 Mar 2012 20:02:32 -0700 (PDT)
-Received: by pbbjt11 with SMTP id jt11so3074808pbb.35
-	for <meta-ti@yoctoproject.org>; Fri, 30 Mar 2012 20:02:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=lZx47WX5oCyVyUWUzcNErj5cm8brr0FHL7D0fzTELmg=;
-	b=YlMnFRlzvNW4wRcG+gcvBohprC0J2AR0JZ+7B1U98oY7SyQcoKKKfH76b3S1zmmkan
-	M4TgK0YzcbMK31K2TK3rt0R/G7j5P0CxYomBVnlxbWu6I4SYsWe72ft4MnrxyVIkft9k
-	Wu7JI0/d0jX5OrMB7F5v8Dn9gZGAGeNmDx/eC3zSOfM+MLT9WGhdyjIjN3JSLjG47XZH
-	eoFDpAw9ryTtyoAuzb2M/wWHw1Qg28AM2qm3IHAu0d9q7+Rd8nfnjxtfywJARaMjG0Ce
-	N/yNGEVP+8hiycuDFbOH07HQveE/yrtKhEWtbHsr977+T6/g1SVeR0sVlszPK5i1lrCa
-	FOuQ==
-Received: by 10.68.233.135 with SMTP id tw7mr2026372pbc.152.1333162952596;
-	Fri, 30 Mar 2012 20:02:32 -0700 (PDT)
-Received: from [10.61.32.129] ([69.38.219.78])
-	by mx.google.com with ESMTPS id i6sm8688215pbe.18.2012.03.30.20.02.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 30 Mar 2012 20:02:31 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1333159463-19937-1-git-send-email-koen@dominion.thruhere.net>
-Date: Fri, 30 Mar 2012 20:02:30 -0700
-Message-Id: <C51A3D6C-C990-4413-B7CE-2AD68F9D4CA4@dominion.thruhere.net>
-References: <1333159463-19937-1-git-send-email-koen@dominion.thruhere.net>
-To: meta-ti@yoctoproject.org
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQmgOA5q79GohLco5VxA9I9pauYhqLDhPe2eJz6ypZrVZFRDJy8PpcxO+Rj7jQdiwrFhK96d
-Subject: Re: [RFC][PATCH] u-boot 2011.10rc: add patch to speed up ext2load
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8A05E01304
+	for <meta-ti@yoctoproject.org>; Sat, 31 Mar 2012 07:27:50 -0700 (PDT)
+Received: (qmail 695 invoked by uid 1003); 31 Mar 2012 14:27:50 -0000
+Received: from unknown (HELO ?192.168.1.106?)
+	(philip@opensdr.com@71.171.25.206)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	31 Mar 2012 14:27:49 -0000
+Message-ID: <4F771465.7030708@balister.org>
+Date: Sat, 31 Mar 2012 10:27:49 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.24) Gecko/20111108 Fedora/3.1.16-1.fc14 Thunderbird/3.1.16
+MIME-Version: 1.0
+To: William Mills <wmills@ti.com>
+References: <F01BAC6C-9AA4-4D59-AB9B-067A9D1E9ED7@dominion.thruhere.net>	<20120319205854.GE19810@bill-the-cat>	<20120319210247.GD15554@denix.org>	<20120319210557.GF19810@bill-the-cat>	<788A3D57-ACFD-4CA0-820F-0DD91DCB8196@dominion.thruhere.net>
+	<4F7630F0.8010408@ti.com>
+In-Reply-To: <4F7630F0.8010408@ti.com>
+X-Enigmail-Version: 1.1.2
+Cc: Tom Rini <trini@ti.com>, meta-ti@yoctoproject.org
+Subject: Re: release branch for meta-ti?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,51 +31,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Mar 2012 03:02:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 31 Mar 2012 14:27:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
+On 03/30/2012 06:17 PM, William Mills wrote:
+> On 03/30/2012 06:09 PM, Koen Kooi wrote:
+>>
+>> Op 19 mrt. 2012, om 14:05 heeft Tom Rini het volgende geschreven:
+>>
+>>> On Mon, Mar 19, 2012 at 05:02:47PM -0400, Denys Dmytriyenko wrote:
+>>>> On Mon, Mar 19, 2012 at 01:58:54PM -0700, Tom Rini wrote:
+>>>>> On Mon, Mar 19, 2012 at 01:58:36PM +0100, Koen Kooi wrote:
+>>>>>> Hi,
+>>>>>>
+>>>>>> Any volunteers for maintaining a releasebranch that matches the
+>>>>>> upcoming oe-core release in ~4 weeks?
+>>>>>
+>>>>> If Denys or Chase don't step-up, I'll do it.  As qualification, I do
+>>>>> such a thing for oe-classic currently :)  But if either of them would
+>>>>> rather, I'll defer to them.
+>>>>
+>>>> We'll probably need to set meta-oe-maintenance up anyway for
+>>>> meta-arago to
+>>>> work with, rather than chasing changes in the master...
+>>>
+>>> Yes, meta-oe will also need a maintenance release to match
+>>
+>> meta-oe branch is really close to having a maintainer, what's the
+>> (final) word on the meta-ti branch?
+> 
+> I have no objection to the branch to ensure the current working
+> functionality remains working with yocto maintenance releases.
+> 
+> However, I don't think we should actively maintain new features on both
+> branches.
+> 
+> So what is the goal of the branch?
 
-Op 30 mrt. 2012, om 19:04 heeft Koen Kooi het volgende geschreven:
+People that ship OE based stuff to customers hate basing stuff that goes
+to customers based on layers that are under active development. We are
+much happier with layers that are getting fixes for existing problems only.
 
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->=20
-> Please test this patch on your am335x boards, I need to run out and =
-buy a mini usb cable because I misplaced mine during traveling this =
-week.=20
-
-With the following in uEnv.txt:
-
-uenvcmd=3Dmmc rescan ; setenv mmc_dev 0:1 ; echo starting fatload ; run =
-mmc_load_uimage ; setenv mmc_dev mmc 0:2; echo starting ext2load ; run =
-mmc_load_uimage_ext2
-
-First run:
-
-0.40	   0	Running uenvcmd ...
-0.46	   6	starting fatload
-0.48	   1	reading uImage
-0.70	  22=09
-0.70	   0	3140296 bytes read
-0.70	   0	starting ext2load
-0.72	   1	Loading file "/boot/uImage" from mmc device 0:2 (xxa2)
-0.78	   6	3140296 bytes read
-
-Second run:
-
-0.85	   0	Running uenvcmd ...
-0.91	   6	starting fatload
-0.91	   0	reading uImage
-1.15	  23=09
-1.15	   0	3140296 bytes read
-1.15	   0	starting ext2load
-1.15	   0	Loading file "/boot/uImage" from mmc device 0:2 (xxa2)
-1.21	   6	3140296 bytes read
-
-Strangely enough ext2load seems to be faster now. More testing needed :)
-
-regards,
-
-Koen=
+Philip
 
