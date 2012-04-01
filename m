@@ -1,35 +1,39 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-pz0-f41.google.com (mail-pz0-f41.google.com
-	[209.85.210.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E895AE01304
-	for <meta-ti@yoctoproject.org>; Sat, 31 Mar 2012 08:57:46 -0700 (PDT)
-Received: by dajx4 with SMTP id x4so791146daj.28
-	for <meta-ti@yoctoproject.org>; Sat, 31 Mar 2012 08:57:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=85eBn3O7QZ6MsVXN+hBu+y1XJdgAVoCBK4x2TqRFuiw=;
-	b=aZYP7/iJhreTURxuwuTFy0dHbewCMRJeuZNlVNgu5ku5KnOCKzOs2VIfH12qwF9PNA
-	pB7a6KCpMWQDZ4A/VTAhjfTP6v+0SalR/+aHl4YZFS2zzAC1774FcxIKnInWYzvfmk0J
-	uyoqiRsJrm7uju6Sa7kou1ZGlz2ArwM+u4FIX0SU3MzXeqetDITrBpAm6dey0+w/5JPg
-	NoDji43uMOujqnAdjmJfm1v0MGISxRPGGXrBBlboxU6Yb41wuxKIaQJygXfAGXkIbexT
-	yi/yProm5NkygTCAqGupb++n1ny5PV90X6wXuY6nmZqDyb2h9xel4I5yTqmTCBzAoV2B
-	XFmA==
-MIME-Version: 1.0
-Received: by 10.68.131.74 with SMTP id ok10mr1235591pbb.95.1333209466658; Sat,
-	31 Mar 2012 08:57:46 -0700 (PDT)
-Sender: tom.rini@gmail.com
-Received: by 10.143.68.15 with HTTP; Sat, 31 Mar 2012 08:57:46 -0700 (PDT)
-In-Reply-To: <1333152979-6679-1-git-send-email-koen@dominion.thruhere.net>
-References: <1333152979-6679-1-git-send-email-koen@dominion.thruhere.net>
-Date: Sat, 31 Mar 2012 08:57:46 -0700
-X-Google-Sender-Auth: 04JdWJDktV0Lx3yfyOisa8Zsvsc
-Message-ID: <CA+M6bXmZWgnm0gWNXymg3KGxM3_Fs9=LpOEvvDmtR43Gy6x0qQ@mail.gmail.com>
-From: Tom Rini <trini@ti.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: README: add sample git send-email commandline
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
+	[209.85.160.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB7A3E013E1
+	for <meta-ti@yoctoproject.org>; Sun,  1 Apr 2012 14:36:08 -0700 (PDT)
+Received: by pbbjt11 with SMTP id jt11so4566807pbb.35
+	for <meta-ti@yoctoproject.org>; Sun, 01 Apr 2012 14:36:08 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=GIhk5W13zrSm53M8piRAgwPKjNWM66dM5GT0Uv0lRuA=;
+	b=f3e22WUvM0qG5a/nbBRgjRkaBrcDZcj5DKJPodnCxqD1dLFu2y9HvtbbfQKcdayHx4
+	sOv8Dwygwp3/WEiKBPd1FwBmYDotZVeb6edn3feoqnOiL28kAHM1K/1eiNwuoq4COAm5
+	fTwTaB6gsF8OUEtvgpHznhQgbDCLoiiFWuxzIcrj5FnX9w/y8ZqpZ02/M150Aqs3H7eF
+	fBR23hKLSJblwNKMxnDoAWZU03o5teJF7l5PktytAFvQBEliUL8J1m6Ks0Kq3nWkLT3f
+	yOPkJsBpBW8N8kIHw98VIQJ94RrY2mTBSMAJQvN/aLNQ+IQZMtbe8KDUfVEPRpXWViF1
+	/7Zw==
+Received: by 10.68.241.194 with SMTP id wk2mr15397029pbc.131.1333316168254;
+	Sun, 01 Apr 2012 14:36:08 -0700 (PDT)
+Received: from [10.61.32.145] ([69.38.219.78])
+	by mx.google.com with ESMTPS id i8sm2767882pbi.47.2012.04.01.14.36.06
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 01 Apr 2012 14:36:06 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1257)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1333159463-19937-1-git-send-email-koen@dominion.thruhere.net>
+Date: Sun, 1 Apr 2012 14:36:04 -0700
+Message-Id: <24C53F95-E871-4184-89D9-6D73806E28DF@dominion.thruhere.net>
+References: <1333159463-19937-1-git-send-email-koen@dominion.thruhere.net>
+To: meta-ti@yoctoproject.org
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQlyvd0UmyWuZlB5w/9puachZL65HfjZ7mjE+WLLamN1vKuw+xXo7aSbdo54S1JPPvzTFliq
+Cc: Tom Rini <trini@ti.com>
+Subject: Re: [RFC][PATCH] u-boot 2011.10rc: add patch to speed up ext2load
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,34 +45,79 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Mar 2012 15:57:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 01 Apr 2012 21:36:09 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 30, 2012 at 5:16 PM, Koen Kooi <koen@dominion.thruhere.net> wro=
-te:
-> This enables me to copy/paste the right commandline instead of picking th=
-e wrong one from bash history.
->
+
+Op 30 mrt. 2012, om 19:04 heeft Koen Kooi het volgende geschreven:
+
 > Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 > ---
-> =A0README | =A0 =A02 ++
-> =A01 files changed, 2 insertions(+), 0 deletions(-)
->
-> diff --git a/README b/README
-> index 352cb2e..97439d7 100644
-> --- a/README
-> +++ b/README
-> @@ -28,5 +28,7 @@ BINUVERSION =3D "2.20.1"
->
-> =A0Send pull requests, patches, comments or questions to meta-ti@yoctopro=
-ject.org
->
-> +When sending single patches, please use something like 'git send-email -=
-1 --to meta-ti@yoctoproject.org --subject-prefix=3Dmeta-ti'
+>=20
+> Please test this patch on your am335x boards, I need to run out and =
+buy a mini usb cable because I misplaced mine during traveling this =
+week.=20
+>=20
+> Untested, but I wanted to get it out before the weekend.
 
-ML adds the prefix.  Useful for the meta-oe README tho :)
+Something funny is going on:
 
---=20
-Tom
+U-Boot# mw 0x80007fc0  ffffffff 9999
+U-Boot# md 0x80007fc0=20
+80007fc0: ffffffff ffffffff ffffffff ffffffff    ................
+80007fd0: ffffffff ffffffff ffffffff ffffffff    ................
+80007fe0: ffffffff ffffffff ffffffff ffffffff    ................
+80007ff0: ffffffff ffffffff ffffffff ffffffff    ................
+80008000: ffffffff ffffffff ffffffff ffffffff    ................
+80008010: ffffffff ffffffff ffffffff ffffffff    ................
+80008020: ffffffff ffffffff ffffffff ffffffff    ................
+80008030: ffffffff ffffffff ffffffff ffffffff    ................
+80008040: ffffffff ffffffff ffffffff ffffffff    ................
+80008050: ffffffff ffffffff ffffffff ffffffff    ................
+80008060: ffffffff ffffffff ffffffff ffffffff    ................
+80008070: ffffffff ffffffff ffffffff ffffffff    ................
+80008080: ffffffff ffffffff ffffffff ffffffff    ................
+80008090: ffffffff ffffffff ffffffff ffffffff    ................
+800080a0: ffffffff ffffffff ffffffff ffffffff    ................
+800080b0: ffffffff ffffffff ffffffff ffffffff    ................
+
+U-Boot# ext2ls mmc 0:2 /boot
+<DIR>       1024 .
+<DIR>       1024 ..
+         3135840 uImage-3.2.0+
+<SYM>         14 uImage
+              33 uEnv.txt
+         3140088 uImage-3.2.9+
+         3140296 uImage-3.2.11+
+U-Boot#=20
+
+U-Boot# run mmc_load_uimage_ext2
+Loading file "/boot/uImage" from mmc device 0:2 (xxa2)
+3140296 bytes read
+
+U-Boot# md 0x80007fc0=20
+80007fc0: 00000000 00000400 00000000 00000000    ................
+80007fd0: 00000000 00000000 00000000 00000000    ................
+80007fe0: 00000000 00000000 00000000 00000000    ................
+80007ff0: 00000000 00000000 00000000 00000000    ................
+80008000: 00000000 00000000 00000000 00000000    ................
+80008010: 00000000 00000000 00000000 00000000    ................
+80008020: 00000000 00000000 00000000 00000000    ................
+80008030: 00000000 00000000 00000000 00000000    ................
+80008040: 00000000 00000000 00000000 00000000    ................
+80008050: 00000000 00000000 00000000 00000000    ................
+80008060: 00000000 00000000 00000000 00000000    ................
+80008070: 00000000 00000000 00000000 00000000    ................
+80008080: 00000000 00000000 00000000 00000000    ................
+80008090: 00000000 00000000 00000000 00000000    ................
+800080a0: 00000000 00000000 00000000 00000000    ................
+800080b0: 00000000 00000000 00000000 00000000    ................
+U-Boot#=20
+
+So it only loads zeroes into RAM :(
+
+regards,
+
+Koen=
 
