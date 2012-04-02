@@ -1,40 +1,22 @@
-Return-Path: <koen@beagleboard.org>
-Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
-	[209.85.160.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2A62E013E1
-	for <meta-ti@yoctoproject.org>; Sun,  1 Apr 2012 15:36:21 -0700 (PDT)
-Received: by pbbjt11 with SMTP id jt11so4601366pbb.35
-	for <meta-ti@yoctoproject.org>; Sun, 01 Apr 2012 15:36:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=uwQfjFfdZSUpqDR7DCYwteSIp/yoWSi3jf2rt3a3em4=;
-	b=knNHzEqASMH05J63Gt6yKOq71qaCKpZwP0CQerRjxqDk/cwfn/PE94+5aCZeqvCONi
-	7agOnY4GPlv9K1reBiTOT4t8whEzT2VuD+Fm/Ojt83J8X1t5qzNl87gY2ZGwre55nPSK
-	STCeyD7A5Vctz47OeO61iLuUMCRgCwYFbpL01L1BwIHaiUdVQZvnEBGCwH7JRT1+3Qis
-	kRFA6WVpfnRWHJvWxuXKnB1rE2NZjDG34aLunBUborV/Wm5LW/XatJRZg0eAsnQCXwMv
-	O9NcAdeaIl7+TtX3prQ/KaoKgWbzcZP9tJrVb4zOSmHJQz8K6xvJNClh+ROHk/OKXR7f
-	YKjA==
-Received: by 10.68.189.166 with SMTP id gj6mr15645388pbc.140.1333319781698;
-	Sun, 01 Apr 2012 15:36:21 -0700 (PDT)
-Received: from [10.61.32.145] ([69.38.219.78])
-	by mx.google.com with ESMTPS id s10sm12682887pbp.14.2012.04.01.15.36.19
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 01 Apr 2012 15:36:20 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Koen Kooi <koen@beagleboard.org>
-In-Reply-To: <24C53F95-E871-4184-89D9-6D73806E28DF@dominion.thruhere.net>
-Date: Sun, 1 Apr 2012 15:36:16 -0700
-Message-Id: <6A1B6226-FD98-4DC5-B034-407C01F37F9A@beagleboard.org>
-References: <1333159463-19937-1-git-send-email-koen@dominion.thruhere.net>
-	<24C53F95-E871-4184-89D9-6D73806E28DF@dominion.thruhere.net>
-To: meta-ti@yoctoproject.org
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQmZPgNkVVHOLtKKIibDJ7Z11CKIsvoMd7h3T+Q6GmtT2rpC4bmtOCXy+Q5ttJS19Kb4umtJ
-Cc: Tom Rini <trini@ti.com>
-Subject: Re: [RFC][PATCH] u-boot 2011.10rc: add patch to speed up ext2load
+Return-Path: <russell@personaltelco.net>
+Received: from mail.tdb.com (mail.tdb.com [216.99.214.4])
+	by yocto-www.yoctoproject.org (Postfix) with SMTP id D44DFE0044A
+	for <meta-ti@yoctoproject.org>; Sun,  1 Apr 2012 21:57:06 -0700 (PDT)
+Received: (qmail 18709 invoked from network); 1 Apr 2012 21:57:06 -0700
+Received: from unknown (HELO coulee.tdb.com) (216.99.214.7)
+	by mail.tdb.com with SMTP; 1 Apr 2012 21:57:06 -0700
+Received: (qmail 18257 invoked by uid 1001); 2 Apr 2012 04:57:05 -0000
+To: Denys Dmytriyenko <denis@denix.org>
+References: <86lin21gfi.fsf@coulee.tdb.com> <20120329012237.GE32193@denix.org>
+From: Russell Senior <russell@personaltelco.net>
+Date: Sun, 01 Apr 2012 21:57:05 -0700
+In-Reply-To: <20120329012237.GE32193@denix.org> (Denys Dmytriyenko's message
+	of "Wed\, 28 Mar 2012 21\:22\:37 -0400")
+Message-ID: <86iphivihq.fsf@coulee.tdb.com>
+User-Agent: Gnus/5.101 (Gnus v5.10.10) Emacs/21.4 (gnu/linux)
+MIME-Version: 1.0
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [Angstrom-devel] Can't build cloud9 image
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,85 +28,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Apr 2012 22:36:22 -0000
+X-List-Received-Date: Mon, 02 Apr 2012 04:57:07 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+
+>>>>> "Denys" == Denys Dmytriyenko <denis@denix.org> writes:
+
+Denys> On Thu, Mar 15, 2012 at 12:17:37AM -0700, Russell Senior wrote:
+>> > Then you can't build this image.
+>> 
+>> FWIW, I added the /etc/fstab entry provide (for /dev/loop2) but I
+>> still get this at the end (from
+>> build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/cloud9-image-1.0-r0/temp/log.do_rootfs
+>> 
+>> [...]  ./media/mmc1/ ./media/union/ ./media/realroot/ loop: can't
+>> delete device /dev/loop1: Permission denied loop: can't delete
+>> device /dev/loop2: Permission denied loop: can't delete device
+>> /dev/loop3: Permission denied /dev/loop1: Permission denied
+
+Denys> Well, mine gets further (although it's not my main focus now):
+
+Yeah, that was just because i wasn't in the 'disk' group in
+/etc/groups.  Thank you to the interwebs for digging that one up for
+me.
+
+The compile is finishing for me currently, but I still can't get it to
+boot, built on debian/unstable.  The MLO I build doesn't seem to get
+recognized by my A4 beaglebone.  The ROM code spits C's at me as if
+the microSD card wasn't there.  The microSD card is okay though (an 8
+gig Kingston class 10 thing), because I can /sbin/dd the online
+angstrom cloud9 demo image[1] on it and that boots.
+
+[1] http://www.angstrom-distribution.org/demo/beaglebone/Angstrom-Cloud9-IDE-eglibc-ipk-v2012.02-core-beaglebone-2012.02.14.img.xz
 
 
-Op 1 apr. 2012, om 14:36 heeft Koen Kooi het volgende geschreven:
-
->=20
-> Op 30 mrt. 2012, om 19:04 heeft Koen Kooi het volgende geschreven:
->=20
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->> ---
->>=20
->> Please test this patch on your am335x boards, I need to run out and =
-buy a mini usb cable because I misplaced mine during traveling this =
-week.=20
->>=20
->> Untested, but I wanted to get it out before the weekend.
->=20
-> Something funny is going on:
->=20
-> U-Boot# mw 0x80007fc0  ffffffff 9999
-> U-Boot# md 0x80007fc0=20
-> 80007fc0: ffffffff ffffffff ffffffff ffffffff    ................
-> 80007fd0: ffffffff ffffffff ffffffff ffffffff    ................
-> 80007fe0: ffffffff ffffffff ffffffff ffffffff    ................
-> 80007ff0: ffffffff ffffffff ffffffff ffffffff    ................
-> 80008000: ffffffff ffffffff ffffffff ffffffff    ................
-> 80008010: ffffffff ffffffff ffffffff ffffffff    ................
-> 80008020: ffffffff ffffffff ffffffff ffffffff    ................
-> 80008030: ffffffff ffffffff ffffffff ffffffff    ................
-> 80008040: ffffffff ffffffff ffffffff ffffffff    ................
-> 80008050: ffffffff ffffffff ffffffff ffffffff    ................
-> 80008060: ffffffff ffffffff ffffffff ffffffff    ................
-> 80008070: ffffffff ffffffff ffffffff ffffffff    ................
-> 80008080: ffffffff ffffffff ffffffff ffffffff    ................
-> 80008090: ffffffff ffffffff ffffffff ffffffff    ................
-> 800080a0: ffffffff ffffffff ffffffff ffffffff    ................
-> 800080b0: ffffffff ffffffff ffffffff ffffffff    ................
->=20
-> U-Boot# ext2ls mmc 0:2 /boot
-> <DIR>       1024 .
-> <DIR>       1024 ..
->         3135840 uImage-3.2.0+
-> <SYM>         14 uImage
->              33 uEnv.txt
->         3140088 uImage-3.2.9+
->         3140296 uImage-3.2.11+
-> U-Boot#=20
->=20
-> U-Boot# run mmc_load_uimage_ext2
-> Loading file "/boot/uImage" from mmc device 0:2 (xxa2)
-> 3140296 bytes read
->=20
-> U-Boot# md 0x80007fc0=20
-> 80007fc0: 00000000 00000400 00000000 00000000    ................
-> 80007fd0: 00000000 00000000 00000000 00000000    ................
-> 80007fe0: 00000000 00000000 00000000 00000000    ................
-> 80007ff0: 00000000 00000000 00000000 00000000    ................
-> 80008000: 00000000 00000000 00000000 00000000    ................
-> 80008010: 00000000 00000000 00000000 00000000    ................
-> 80008020: 00000000 00000000 00000000 00000000    ................
-> 80008030: 00000000 00000000 00000000 00000000    ................
-> 80008040: 00000000 00000000 00000000 00000000    ................
-> 80008050: 00000000 00000000 00000000 00000000    ................
-> 80008060: 00000000 00000000 00000000 00000000    ................
-> 80008070: 00000000 00000000 00000000 00000000    ................
-> 80008080: 00000000 00000000 00000000 00000000    ................
-> 80008090: 00000000 00000000 00000000 00000000    ................
-> 800080a0: 00000000 00000000 00000000 00000000    ................
-> 800080b0: 00000000 00000000 00000000 00000000    ................
-> U-Boot#=20
->=20
-> So it only loads zeroes into RAM :(
-
-It does that with or without the speedup patch, so something else is =
-going on.
-
-regards,
-
-Koen=
+-- 
+Russell Senior, President
+russell@personaltelco.net
 
