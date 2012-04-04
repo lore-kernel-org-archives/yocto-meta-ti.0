@@ -1,22 +1,25 @@
-Return-Path: <russell@personaltelco.net>
-Received: from mail.tdb.com (mail.tdb.com [216.99.214.4])
-	by yocto-www.yoctoproject.org (Postfix) with SMTP id D44DFE0044A
-	for <meta-ti@yoctoproject.org>; Sun,  1 Apr 2012 21:57:06 -0700 (PDT)
-Received: (qmail 18709 invoked from network); 1 Apr 2012 21:57:06 -0700
-Received: from unknown (HELO coulee.tdb.com) (216.99.214.7)
-	by mail.tdb.com with SMTP; 1 Apr 2012 21:57:06 -0700
-Received: (qmail 18257 invoked by uid 1001); 2 Apr 2012 04:57:05 -0000
-To: Denys Dmytriyenko <denis@denix.org>
-References: <86lin21gfi.fsf@coulee.tdb.com> <20120329012237.GE32193@denix.org>
-From: Russell Senior <russell@personaltelco.net>
-Date: Sun, 01 Apr 2012 21:57:05 -0700
-In-Reply-To: <20120329012237.GE32193@denix.org> (Denys Dmytriyenko's message
-	of "Wed\, 28 Mar 2012 21\:22\:37 -0400")
-Message-ID: <86iphivihq.fsf@coulee.tdb.com>
-User-Agent: Gnus/5.101 (Gnus v5.10.10) Emacs/21.4 (gnu/linux)
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 277A2E0044D
+	for <meta-ti@yoctoproject.org>; Wed,  4 Apr 2012 09:06:14 -0700 (PDT)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id B15F9F8122F; Wed,  4 Apr 2012 10:06:13 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id A17AFF8122C;
+	Wed,  4 Apr 2012 10:06:12 -0600 (MDT)
+Message-ID: <4F7C7174.8090103@mlbassoc.com>
+Date: Wed, 04 Apr 2012 10:06:12 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:10.0.1) Gecko/20120216 Thunderbird/10.0.1
 MIME-Version: 1.0
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [Angstrom-devel] Can't build cloud9 image
+To: meta-ti@yoctoproject.org
+Subject: Can't build ti-dmai
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -28,40 +31,86 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2012 04:57:07 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 04 Apr 2012 16:06:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
->>>>> "Denys" == Denys Dmytriyenko <denis@denix.org> writes:
+Trying to build ti-dmai gives this error:
+ERROR: Function failed: do_install (see 
+/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/ti-dmai-1_2_10_00_01+svnr642-r118o/temp/log.do_install.21360 for further information)
+ERROR: Logfile of failure stored in: 
+/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/ti-dmai-1_2_10_00_01+svnr642-r118o/temp/log.do_install.21360
+Log data follows:
+| ERROR: Function failed: do_install (see 
+/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/ti-dmai-1_2_10_00_01+svnr642-r118o/temp/log.do_install.21360 for further information)
+| make -C ./packages/ti/sdo/dmai install
+| make[1]: Entering directory 
+`/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/ti-dmai-1_2_10_00_01+svnr642-r118o/trunk/davinci_multimedia_application_interface/dmai_2_10_00_01+svnr642/dmai/packages/ti/sdo/dmai'
+| make[1]: Nothing to be done for `install'.
+| make[1]: Leaving directory 
+`/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/ti-dmai-1_2_10_00_01+svnr642-r118o/trunk/davinci_multimedia_application_interface/dmai_2_10_00_01+svnr642/dmai/packages/ti/sdo/dmai'
+| make -C ./packages/ti/sdo/dmai/apps install
+| make[1]: Entering directory 
+`/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/ti-dmai-1_2_10_00_01+svnr642-r118o/trunk/davinci_multimedia_application_interface/dmai_2_10_00_01+svnr642/dmai/packages/ti/sdo/dmai/apps'
+|
+| Executing make in subdirectory Makefile...
+| make: Entering an unknown directory
+| make: *** Makefile: Not a directory.  Stop.
+| make: Leaving an unknown directory
+| make[1]: *** [Makefile] Error 2
+| make[1]: Leaving directory 
+`/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/ti-dmai-1_2_10_00_01+svnr642-r118o/trunk/davinci_multimedia_application_interface/dmai_2_10_00_01+svnr642/dmai/packages/ti/sdo/dmai/apps'
+| make: *** [install] Error 2
+NOTE: package ti-dmai-1_2_10_00_01+svnr642-r118o: task do_install: Failed
+ERROR: Task 3 (/local/new-angstrom/sources/meta-ti/recipes-ti/dmai/ti-dmai_svn.bb, do_install) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 1134 tasks of which 783 didn't need to be rerun and 1 failed.
 
-Denys> On Thu, Mar 15, 2012 at 12:17:37AM -0700, Russell Senior wrote:
->> > Then you can't build this image.
->> 
->> FWIW, I added the /etc/fstab entry provide (for /dev/loop2) but I
->> still get this at the end (from
->> build/tmp-angstrom_2010_x-eglibc/work/beaglebone-angstrom-linux-gnueabi/cloud9-image-1.0-r0/temp/log.do_rootfs
->> 
->> [...]  ./media/mmc1/ ./media/union/ ./media/realroot/ loop: can't
->> delete device /dev/loop1: Permission denied loop: can't delete
->> device /dev/loop2: Permission denied loop: can't delete device
->> /dev/loop3: Permission denied /dev/loop1: Permission denied
+Summary: 1 task failed:
+   /local/new-angstrom/sources/meta-ti/recipes-ti/dmai/ti-dmai_svn.bb, do_install
 
-Denys> Well, mine gets further (although it's not my main focus now):
+I'm using this configuration (up to date):
+OE Build Configuration:
+BB_VERSION        = "1.15.1"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "beagleboard"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "v2012.04-core"
+TUNE_FEATURES     = "armv7a vfp neon cortexa8"
+TARGET_FPU        = "vfp-neon"
+meta-angstrom     = "master:6e986067a5b5be696c0115c6b4395f21cb6d771a"
+meta-oe
+toolchain-layer
+meta-efl
+meta-gpe
+meta-gnome
+meta-xfce
+meta-initramfs    = "master:d248ea6ada38ba9070f45f4fd2ab107bc6ed0246"
+meta-opie         = "master:efa3892b20a4ef80274e56e5633ebd62c16f9731"
+meta-java         = "master:3e8579a967664c0e4b6f047c70f6893b72dc9573"
+meta-mozilla      = "master:5737d9fa26a632a27b2aa760c0d01190f0a17d0e"
+meta-ti           = "master:246cb75a970e9aab0a3974a55e72c6d90f1df151"
+meta-efikamx      = "master:2c09a3a780b23448e8a6ca964256ff7f5ccba65d"
+meta-nslu2        = "master:3d9fc951b05b4df476374b6fc3085ebac7f293ee"
+meta-htc
+meta-nokia
+meta-openmoko
+meta-palm         = "master:ba34166f4565b52209adea82cef196615cf82246"
+meta-handheld     = "master:df6d514ae413f131e95d0f0c6c3b6792a006d451"
+meta-intel
+meta-sugarbay
+meta-crownbay
+meta-emenlow
+meta-fishriver
+meta-jasperforest
+meta-n450         = "master:f89405e115d73426c8a6450b6e795b5885d6bdf3"
+meta              = "master:1634d736c55f767fe82a46bbb7f83c32006fece9"
 
-Yeah, that was just because i wasn't in the 'disk' group in
-/etc/groups.  Thank you to the interwebs for digging that one up for
-me.
-
-The compile is finishing for me currently, but I still can't get it to
-boot, built on debian/unstable.  The MLO I build doesn't seem to get
-recognized by my A4 beaglebone.  The ROM code spits C's at me as if
-the microSD card wasn't there.  The microSD card is okay though (an 8
-gig Kingston class 10 thing), because I can /sbin/dd the online
-angstrom cloud9 demo image[1] on it and that boots.
-
-[1] http://www.angstrom-distribution.org/demo/beaglebone/Angstrom-Cloud9-IDE-eglibc-ipk-v2012.02-core-beaglebone-2012.02.14.img.xz
-
+Any ideas/pointers?
 
 -- 
-Russell Senior, President
-russell@personaltelco.net
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
