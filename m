@@ -1,23 +1,22 @@
 Return-Path: <denis@denix.org>
-Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
-	[206.46.173.15])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D2C1CE0044A
-	for <meta-ti@yoctoproject.org>; Thu,  5 Apr 2012 12:07:35 -0700 (PDT)
+Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
+	[206.46.173.11])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A3B69E0044A
+	for <meta-ti@yoctoproject.org>; Thu,  5 Apr 2012 12:15:15 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173015.mailsrvcs.net
+	by vms173011.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M20007D1T3S4UK1@vms173015.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 05 Apr 2012 14:07:11 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id C5EB2201AE; Thu,
-	05 Apr 2012 15:07:04 -0400 (EDT)
-Date: Thu, 05 Apr 2012 15:07:04 -0400
+	2009)) with ESMTPA id <0M20006SITH1Z150@vms173011.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 05 Apr 2012 14:15:05 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id C7298201AE; Thu,
+	05 Apr 2012 15:15:01 -0400 (EDT)
+Date: Thu, 05 Apr 2012 15:15:01 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-To: Brian Hutchinson <b.hutchman@gmail.com>
-Message-id: <20120405190704.GA5144@denix.org>
+To: Russell Senior <russell@personaltelco.net>
+Message-id: <20120405191501.GB5144@denix.org>
 References: <86pqbmm4oe.fsf@coulee.tdb.com>
-	<CAFZh4h9hFiRTRhVK_BfxfhFWhmZSinKjC5NJBq=ncubqboyvBg@mail.gmail.com>
 MIME-version: 1.0
-In-reply-to: <CAFZh4h9hFiRTRhVK_BfxfhFWhmZSinKjC5NJBq=ncubqboyvBg@mail.gmail.com>
+In-reply-to: <86pqbmm4oe.fsf@coulee.tdb.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
 Subject: Re: building meta-ti + poky HOWTO?
@@ -32,24 +31,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Apr 2012 19:07:36 -0000
+X-List-Received-Date: Thu, 05 Apr 2012 19:15:15 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Thu, Apr 05, 2012 at 02:36:59PM -0400, Brian Hutchinson wrote:
-> I may be out of the loop but if you follow the yocto way of doing
-> things .... poky will produce a BeagleBoard image without having to
-> use meta-ti and I think you can use that on beaglebone.  Some one
-> correct me if I'm sending Russell in the weeds.
+On Thu, Apr 05, 2012 at 11:09:21AM -0700, Russell Senior wrote:
 > 
-> I've been able to build yocto images for BeagleBoard but haven't tried
-> them on the bone yet.
+> I have been unable to get a booting image out of Angstrom in about
+> three weeks of trying and several unanswered queries to the mailing
+> list and elsewhere.  In my continuing effort to get a build system
+> that produces an image that boots on my beaglebone, I'd like to try
+> building meta-ti with poky, just to see if that fails for me too.
 
-You shouldn't be using BeagleBoard kernel images on the BeagleBone. You might 
-get very basic ARM support, if you are lucky, but otherwise it won't work.
+As far as I remember, you are having problems with rootfs images that generate 
+an entire SD card disk image with multiple partitions, e.g. Cloud9 image. 
+There are known issues with the tools used to do that, like sometimes fdisk 
+not making the correct MBR and partition table that BootROM can boot from. So 
+far it seems to depend on the host distro and their tools. This area still 
+needs further investigation and probably the use of different tools...
 
-While both share "Beagle" in the name, they are based on different SOCs with 
-different peripherals, etc.
+But you should not be stuck on this - why don't you use the individual pieces, 
+like kernel image, rootfs and load them on SD card yourself, manually? Try 
+working around the issue...
 
 -- 
 Denys
