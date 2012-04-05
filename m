@@ -1,18 +1,32 @@
-Return-Path: <russell@personaltelco.net>
-Received: from mail.tdb.com (mail.tdb.com [216.99.214.4])
-	by yocto-www.yoctoproject.org (Postfix) with SMTP id ACEDFE0044A
-	for <meta-ti@yoctoproject.org>; Thu,  5 Apr 2012 11:09:22 -0700 (PDT)
-Received: (qmail 28986 invoked from network); 5 Apr 2012 11:09:21 -0700
-Received: from unknown (HELO coulee.tdb.com) (216.99.214.7)
-	by mail.tdb.com with SMTP; 5 Apr 2012 11:09:21 -0700
-Received: (qmail 30672 invoked by uid 1001); 5 Apr 2012 18:09:21 -0000
-To: meta-ti@yoctoproject.org
-From: Russell Senior <russell@personaltelco.net>
-Date: Thu, 05 Apr 2012 11:09:21 -0700
-Message-ID: <86pqbmm4oe.fsf@coulee.tdb.com>
-User-Agent: Gnus/5.101 (Gnus v5.10.10) Emacs/21.4 (gnu/linux)
+Return-Path: <b.hutchman@gmail.com>
+Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
+	[209.85.214.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 98A03E0044A
+	for <meta-ti@yoctoproject.org>; Thu,  5 Apr 2012 11:37:00 -0700 (PDT)
+Received: by bkcji17 with SMTP id ji17so2109719bkc.35
+	for <meta-ti@yoctoproject.org>; Thu, 05 Apr 2012 11:36:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=XCo7T2qTcfF14Rma4xbVDXEnYreRLglV2mIT5CAZF20=;
+	b=K+CsIQh2XzoR68FQ4UwfgFl08k4nlGbmxWJAkcRbIdRyrQGEAV1KdbdMj4iE/vVGfI
+	FRNED1T1Y/iZ8WHahnwpb9Dtl9z/jrF1qelu8zeIIr1nQIl4P0IVr8DpyRnFauQXPwPA
+	PYYj0QN99oPp6ib8KAdXOq1OsBYFOGntJ4Th/+nieS/zc1UjTKvDGEaIWcIMtQcJmEkG
+	rQ3h9EW1wCG+YGN8/fGXNzZSbjid3XWJPjl0Q2sOr3RId/KnYSs3tpYp5eEedNvE8cvh
+	ytoVIuZCPNJ2nXg3iT5clrh8GzDa67ApQC5ag9DklGT+js+6o70543Xm9PbLwyx+r2pV
+	5pGQ==
 MIME-Version: 1.0
-Subject: building meta-ti + poky HOWTO?
+Received: by 10.204.148.89 with SMTP id o25mr1651107bkv.52.1333651019512; Thu,
+	05 Apr 2012 11:36:59 -0700 (PDT)
+Received: by 10.204.149.195 with HTTP; Thu, 5 Apr 2012 11:36:59 -0700 (PDT)
+In-Reply-To: <86pqbmm4oe.fsf@coulee.tdb.com>
+References: <86pqbmm4oe.fsf@coulee.tdb.com>
+Date: Thu, 5 Apr 2012 14:36:59 -0400
+Message-ID: <CAFZh4h9hFiRTRhVK_BfxfhFWhmZSinKjC5NJBq=ncubqboyvBg@mail.gmail.com>
+From: Brian Hutchinson <b.hutchman@gmail.com>
+To: Russell Senior <russell@personaltelco.net>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: building meta-ti + poky HOWTO?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -24,24 +38,20 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Apr 2012 18:09:22 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 05 Apr 2012 18:37:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+I may be out of the loop but if you follow the yocto way of doing
+things .... poky will produce a BeagleBoard image without having to
+use meta-ti and I think you can use that on beaglebone.  Some one
+correct me if I'm sending Russell in the weeds.
 
-I have been unable to get a booting image out of Angstrom in about
-three weeks of trying and several unanswered queries to the mailing
-list and elsewhere.  In my continuing effort to get a build system
-that produces an image that boots on my beaglebone, I'd like to try
-building meta-ti with poky, just to see if that fails for me too.
+I've been able to build yocto images for BeagleBoard but haven't tried
+them on the bone yet.
 
-Is there a howto on combining meta-ti with poky?  Can anyone give
-me brief but specific guidance on where I need to unpack stuff and
-what configuration files I need to tweek and what those tweeks are?
+Last I checked meta-ti with poky still had some issues.
 
-Thanks!
+Regards,
 
-
--- 
-Russell Senior, President
-russell@personaltelco.net
+Brian
 
