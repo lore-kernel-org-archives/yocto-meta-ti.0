@@ -1,26 +1,26 @@
 Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 87655E0044D
-	for <meta-ti@yoctoproject.org>; Sun,  8 Apr 2012 18:40:38 -0700 (PDT)
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3AE1DE0044D
+	for <meta-ti@yoctoproject.org>; Sun,  8 Apr 2012 18:55:17 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173017.mailsrvcs.net
+	by vms173019.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M2600LV3VBAA4R0@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sun, 08 Apr 2012 20:40:27 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EB42B201CF; Sun,
-	08 Apr 2012 21:40:21 -0400 (EDT)
-Date: Sun, 08 Apr 2012 21:40:21 -0400
+	2009)) with ESMTPA id <0M2600MV6VZ88420@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Sun, 08 Apr 2012 20:54:45 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8D4F3201CF; Sun,
+	08 Apr 2012 21:54:44 -0400 (EDT)
+Date: Sun, 08 Apr 2012 21:54:44 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-To: Russell Senior <russell@personaltelco.net>
-Message-id: <20120409014021.GD10246@denix.org>
-References: <86pqbmm4oe.fsf@coulee.tdb.com> <20120405191501.GB5144@denix.org>
-	<86bon5nc3h.fsf@coulee.tdb.com> <86zkapljsw.fsf@coulee.tdb.com>
+To: Gary Thomas <gary@mlbassoc.com>
+Message-id: <20120409015444.GE10246@denix.org>
+References: <4F7C7174.8090103@mlbassoc.com> <4F7CB454.1050709@mlbassoc.com>
+	<4F7DBD63.1060105@mlbassoc.com>
 MIME-version: 1.0
-In-reply-to: <86zkapljsw.fsf@coulee.tdb.com>
+In-reply-to: <4F7DBD63.1060105@mlbassoc.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org, angstrom-distro-devel@linuxtogo.org
-Subject: Re: building meta-ti + poky HOWTO?
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Can't build ti-dmai
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,60 +32,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2012 01:40:38 -0000
+X-List-Received-Date: Mon, 09 Apr 2012 01:55:17 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Thu, Apr 05, 2012 at 06:40:15PM -0700, Russell Senior wrote:
-> >>>>> "Russell" == Russell Senior <russell@personaltelco.net> writes:
+On Thu, Apr 05, 2012 at 09:42:27AM -0600, Gary Thomas wrote:
+> On 2012-04-04 14:51, Gary Thomas wrote:
+> >On 2012-04-04 10:06, Gary Thomas wrote:
+> >>|
+> >>| Executing make in subdirectory Makefile...
+> >>| make: Entering an unknown directory
+> >>| make: *** Makefile: Not a directory. Stop.
+> >>| make: Leaving an unknown directory
+> >>| make[1]: *** [Makefile] Error 2
+> >>| make[1]: Leaving directory
+> >>`/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/ti-dmai-1_2_10_00_01+svnr642-r118o/trunk/davinci_multimedia_application_interface/dmai_2_10_00_01+svnr642/dmai/packages/ti/sdo/dmai/apps'
+> >>
+> >>
+> >
+> >This line in the Makefile is getting strange/different results:
+> >SUBDIRS = $(sort $(dir $(wildcard */)))
+> >
+> >I've found the weirdness, but I don't understand what's going on. I changed
+> >the Makefile to print $(SUBDIRS) to try and figure it out.
+> >
+> >When bitbake runs make in
+> >/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/ti-dmai-1_2_10_00_01+svnr642-r118o/trunk/davinci_multimedia_application_interface/dmai_2_10_00_01+svnr642/dmai/packages/ti/sdo/dmai/apps
+> >
+> >the result is
+> >Makefile.app/ Makefile/ Makefile~/ app_common.cfg/ app_common.tci/ audio_decode1/ audio_decode_io/ audio_decode_io1/ audio_encode1/ audio_encode_io1/ dmai.gel/ fc_common.cfg/
+> >image_decode_io/ image_decode_io1/ image_encode_io/ image_encode_io1/ speech_decode1/ speech_decode_io1/ speech_encode1/ speech_encode_io1/ video_decode_io/ video_decode_io2/
+> >video_display/ video_encode_io/ video_encode_io1/ video_encode_io_multich1/ video_loopback/ video_loopback_blend/ video_loopback_convert/ video_loopback_copy/ video_loopback_resize/
+> >
+> >the real result should be
+> >audio_decode1/ audio_decode_io/ audio_decode_io1/ audio_encode1/ audio_encode_io1/ image_decode_io/ image_decode_io1/ image_encode_io/ image_encode_io1/ speech_decode1/
+> >speech_decode_io1/ speech_encode1/ speech_encode_io1/ video_decode_io/ video_decode_io2/ video_display/ video_encode_io/ video_encode_io1/ video_encode_io_multich1/ video_loopback/
+> >video_loopback_blend/ video_loopback_convert/ video_loopback_copy/ video_loopback_resize/
+> >
+> >which I get if I execute make in that directory maually! The bitbake build
+> >is failing because files are being treated as directories (listed in $(SUBDIRS))
+> >
+> >Can someone explain this? I also had the Makefile print the
+> >value of $(MAKE) and it's always /usr/bin/make
 > 
-> Russell> [...] I have tried taking the pre-baked Angstrom image from here:
-> 
-> Russell>
-> Russell> http://www.angstrom-distribution.org/demo/beaglebone/Angstrom-Cloud9-IDE-eglibc-ipk-v2012.02-core-beaglebone-2012.02.14.img.xz
-> 
-> Russell> (which works for me), and replacing the uImage on the vfat
-> Russell> partition by copying over the existing one with one I built.
-> Russell> That boots, but the rootfs isn't aligned (different
-> Russell> kernel/module versions?).
-> 
-> With that in mind, I discovered that uEnv.txt had "quiet", so I tried
-> booting without that and got some new information:
-> 
->   Failed to start Journal Service                                        [FAILED]
->   See 'systemctl status systemd-journald.service' for details.                   
->   Started udev Coldplug all Devices                                      [  OK  ]
->   Started File System Check on Root Device                               [  OK  ]
->   Starting Remount Root FS...                                                    
->   Failed to start Remount Root FS                                        [FAILED]
->   See 'systemctl status remount-rootfs.service' for details.                     
->   Starting /tmp...                                                               
->   Starting Machine ID first boot configure...                                    
->   Starting Run pending postinsts...                                              
->   Failed to start /tmp                                                   [FAILED]
->   See 'systemctl status tmp.mount' for details.                                  
->   Dependency failed. Aborted start of Serial Getty on ttyO0              [ABORT]
->   Dependency failed. Aborted start of Getty on tty1                      [ABORT]
->   udevd[67]: timeout, giving up waiting for workers to finish
-> 
-> This looks like the same problem as here: 
-> 
->   http://lists.linuxtogo.org/pipermail/angstrom-distro-devel/2012-March/005762.html
-> 
-> That was a month ago.  Why hasn't this been fixed?  I'm running a stock/very-recent checkout.
+> It seems to be a bug (or change in behaviour) in make 3.82 which
+> is on Fedora 16.  When I use make 3.81, the build succeeds.
 
-Russell,
+Gary,
 
-It appears your kernel configuration may not have all the required options 
-enabled to work properly with latest udev and systemd, according to this post:
-http://lists.linuxtogo.org/pipermail/angstrom-distro-devel/2012-March/005793.html
+I've seen similar issues with make 3.82 here:
+http://thread.gmane.org/gmane.linux.embedded.yocto.meta-ti/9/focus=25
 
-As it was mentioned in the reply, enabling those options fixes the [FAILED] 
-issues above with the Journal Service:
-http://lists.linuxtogo.org/pipermail/angstrom-distro-devel/2012-March/005798.html
+I fixed it with this patch:
+http://thread.gmane.org/gmane.linux.embedded.yocto.meta-ti/27
 
-Also, please follow the rest of the thread for additional info:
-http://thread.gmane.org/gmane.linux.distributions.angstrom.devel/6142
+It probaly won't help with your problem though, maybe just a pointer... I 
+won't be able to look into ti-dmai issues right away, but hopefully soon. 
+Please let me know and/or send a patch if you find the solution for this 
+yourself. Thanks.
 
 -- 
 Denys
