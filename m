@@ -1,26 +1,31 @@
 Return-Path: <denis@denix.org>
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3AE1DE0044D
-	for <meta-ti@yoctoproject.org>; Sun,  8 Apr 2012 18:55:17 -0700 (PDT)
+Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
+	[206.46.173.13])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 666F0E0059A
+	for <meta-ti@yoctoproject.org>; Sun,  8 Apr 2012 19:18:56 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [71.178.225.66])
-	by vms173019.mailsrvcs.net
+	by vms173013.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M2600MV6VZ88420@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sun, 08 Apr 2012 20:54:45 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8D4F3201CF; Sun,
-	08 Apr 2012 21:54:44 -0400 (EDT)
-Date: Sun, 08 Apr 2012 21:54:44 -0400
+	2009)) with ESMTPA id <0M2600202X33FUJ0@vms173013.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Sun, 08 Apr 2012 21:18:45 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id BDA53201CF; Sun,
+	08 Apr 2012 22:18:39 -0400 (EDT)
+Date: Sun, 08 Apr 2012 22:18:39 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-To: Gary Thomas <gary@mlbassoc.com>
-Message-id: <20120409015444.GE10246@denix.org>
-References: <4F7C7174.8090103@mlbassoc.com> <4F7CB454.1050709@mlbassoc.com>
-	<4F7DBD63.1060105@mlbassoc.com>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+Message-id: <20120409021839.GF10246@denix.org>
+References: <F01BAC6C-9AA4-4D59-AB9B-067A9D1E9ED7@dominion.thruhere.net>
+	<20120319205854.GE19810@bill-the-cat>
+	<20120319210247.GD15554@denix.org>
+	<20120319210557.GF19810@bill-the-cat>
+	<788A3D57-ACFD-4CA0-820F-0DD91DCB8196@dominion.thruhere.net>
+	<4F7630F0.8010408@ti.com> <4F771465.7030708@balister.org>
+	<1333208327.18082.237.camel@ted>
 MIME-version: 1.0
-In-reply-to: <4F7DBD63.1060105@mlbassoc.com>
+In-reply-to: <1333208327.18082.237.camel@ted>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Can't build ti-dmai
+Cc: Tom Rini <trini@ti.com>, meta-ti@yoctoproject.org
+Subject: Re: release branch for meta-ti?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,64 +37,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2012 01:55:17 -0000
+X-List-Received-Date: Mon, 09 Apr 2012 02:18:56 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Thu, Apr 05, 2012 at 09:42:27AM -0600, Gary Thomas wrote:
-> On 2012-04-04 14:51, Gary Thomas wrote:
-> >On 2012-04-04 10:06, Gary Thomas wrote:
-> >>|
-> >>| Executing make in subdirectory Makefile...
-> >>| make: Entering an unknown directory
-> >>| make: *** Makefile: Not a directory. Stop.
-> >>| make: Leaving an unknown directory
-> >>| make[1]: *** [Makefile] Error 2
-> >>| make[1]: Leaving directory
-> >>`/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/ti-dmai-1_2_10_00_01+svnr642-r118o/trunk/davinci_multimedia_application_interface/dmai_2_10_00_01+svnr642/dmai/packages/ti/sdo/dmai/apps'
-> >>
-> >>
-> >
-> >This line in the Makefile is getting strange/different results:
-> >SUBDIRS = $(sort $(dir $(wildcard */)))
-> >
-> >I've found the weirdness, but I don't understand what's going on. I changed
-> >the Makefile to print $(SUBDIRS) to try and figure it out.
-> >
-> >When bitbake runs make in
-> >/local/new-angstrom/build/tmp-angstrom_2010_x-eglibc/work/beagleboard-angstrom-linux-gnueabi/ti-dmai-1_2_10_00_01+svnr642-r118o/trunk/davinci_multimedia_application_interface/dmai_2_10_00_01+svnr642/dmai/packages/ti/sdo/dmai/apps
-> >
-> >the result is
-> >Makefile.app/ Makefile/ Makefile~/ app_common.cfg/ app_common.tci/ audio_decode1/ audio_decode_io/ audio_decode_io1/ audio_encode1/ audio_encode_io1/ dmai.gel/ fc_common.cfg/
-> >image_decode_io/ image_decode_io1/ image_encode_io/ image_encode_io1/ speech_decode1/ speech_decode_io1/ speech_encode1/ speech_encode_io1/ video_decode_io/ video_decode_io2/
-> >video_display/ video_encode_io/ video_encode_io1/ video_encode_io_multich1/ video_loopback/ video_loopback_blend/ video_loopback_convert/ video_loopback_copy/ video_loopback_resize/
-> >
-> >the real result should be
-> >audio_decode1/ audio_decode_io/ audio_decode_io1/ audio_encode1/ audio_encode_io1/ image_decode_io/ image_decode_io1/ image_encode_io/ image_encode_io1/ speech_decode1/
-> >speech_decode_io1/ speech_encode1/ speech_encode_io1/ video_decode_io/ video_decode_io2/ video_display/ video_encode_io/ video_encode_io1/ video_encode_io_multich1/ video_loopback/
-> >video_loopback_blend/ video_loopback_convert/ video_loopback_copy/ video_loopback_resize/
-> >
-> >which I get if I execute make in that directory maually! The bitbake build
-> >is failing because files are being treated as directories (listed in $(SUBDIRS))
-> >
-> >Can someone explain this? I also had the Makefile print the
-> >value of $(MAKE) and it's always /usr/bin/make
+On Sat, Mar 31, 2012 at 04:38:47PM +0100, Richard Purdie wrote:
+> On Sat, 2012-03-31 at 10:27 -0400, Philip Balister wrote:
+> > On 03/30/2012 06:17 PM, William Mills wrote:
+> > > On 03/30/2012 06:09 PM, Koen Kooi wrote:
+> > > I have no objection to the branch to ensure the current working
+> > > functionality remains working with yocto maintenance releases.
+> > > 
+> > > However, I don't think we should actively maintain new features on both
+> > > branches.
+> > > 
+> > > So what is the goal of the branch?
+> > 
+> > People that ship OE based stuff to customers hate basing stuff that goes
+> > to customers based on layers that are under active development. We are
+> > much happier with layers that are getting fixes for existing problems only.
 > 
-> It seems to be a bug (or change in behaviour) in make 3.82 which
-> is on Fedora 16.  When I use make 3.81, the build succeeds.
+> I'd echo this. Whilst its nice for developers to just keep iterating on
+> continual development, it doesn't actually work for users and having
+> some kind of release/stable branch helps a lot.
+> 
+> This is why the Yocto Project is having releases and those releases are
+> being maintained with point releases containing fixes. We don't add new
+> features in the release branches.
+> 
+> I'd strongly encourage this model to various layers. I appreciate its
+> not the way OE has worked in the past and it takes a bit of work to
+> change developer mindset on this though.
 
-Gary,
+All,
 
-I've seen similar issues with make 3.82 here:
-http://thread.gmane.org/gmane.linux.embedded.yocto.meta-ti/9/focus=25
+We had few opportunities to further discuss this matter at the Yocto BSP 
+Summit and the Yocto Day at the Linux Collab during last week...
 
-I fixed it with this patch:
-http://thread.gmane.org/gmane.linux.embedded.yocto.meta-ti/27
-
-It probaly won't help with your problem though, maybe just a pointer... I 
-won't be able to look into ti-dmai issues right away, but hopefully soon. 
-Please let me know and/or send a patch if you find the solution for this 
-yourself. Thanks.
+The outcome was that we'd like to recommend for all the layers (including 
+meta-ti :) ) to apply the same tag at the same time of the Yocto release and, 
+if needed, create the corresponding maintenance branch. The current release 
+schedule of the Yocto Project is (roughly) every 6 month around April and 
+October. We still need to decide on the exact naming convention for those tags 
+and branches, which I hope will be discussed and finalized at the yocto 
+mailing list in time for the release in the coming weeks.
 
 -- 
 Denys
