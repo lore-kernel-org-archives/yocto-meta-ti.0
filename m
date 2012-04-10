@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E729E0059A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9FB1DE01374
 	for <meta-ti@yoctoproject.org>; Tue, 10 Apr 2012 13:00:50 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B9F5152A7B; Tue, 10 Apr 2012 20:00:49 +0000 (UTC)
+	id D453552A79; Tue, 10 Apr 2012 20:00:49 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120410200049.B9F5152A7B@arago-project.org>
+Message-Id: <20120410200049.D453552A79@arago-project.org>
 Date: Tue, 10 Apr 2012 20:00:49 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : u-boot 2011.10rc: fix loading from /boot by adding ext4 support
+Subject: Koen Kooi : linux-ti335x-psp 3.2: fix 3.5" cape support, turn on CONFIG_AUDIT
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,30 +26,27 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: d686d9d676f638ac9cbf31086d7933bc8107e541
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d686d9d676f638ac9cbf31086d7933bc8107e541
+Commit: d0b69390399f6fa9602d158718d8d19cf7af4a1a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d0b69390399f6fa9602d158718d8d19cf7af4a1a
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Mon Apr  9 18:06:41 2012 +0200
+Date:   Mon Apr  9 18:06:43 2012 +0200
 
-u-boot 2011.10rc: fix loading from /boot by adding ext4 support
+linux-ti335x-psp 3.2: fix 3.5" cape support, turn on CONFIG_AUDIT
 
-This patchset was pulled from u-boot patchwork and aren't final, but testing
-on beaglebone shows it to work.
+* bump MACHINE_KERNEL_PR for the CONFIG_AUDIT change
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-Acked-by: Tom Rini <trini@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../0011-ext2load-increase-read-speed.patch        |   74 +
- ...fix-ext2load-and-specify-partition-for-bo.patch |   28 +
- ...evm-load-uImage-from-boot-instead-of-VFAT.patch |   35 +
- .../2011.09git/0014-ext4fs-ls-load-support.patch   | 2362 ++++++++++++++++++++
- .../0015-am335x-switch-to-ext4-mode.patch          |   51 +
- recipes-bsp/u-boot/u-boot_2011.10rc.bb             |    7 +-
- 6 files changed, 2556 insertions(+), 1 deletions(-)
+ conf/machine/include/ti33x.inc                     |    2 +-
+ ...027-beaglebone-fix-direction-of-gpio-keys.patch |  107 +++++++++++++++++++
+ .../0028-beaglebone-fix-3.5-lcd-cape-support.patch |  109 ++++++++++++++++++++
+ .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |    7 +-
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    2 +
+ 5 files changed, 223 insertions(+), 4 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=d686d9d676f638ac9cbf31086d7933bc8107e541
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=d0b69390399f6fa9602d158718d8d19cf7af4a1a
 
