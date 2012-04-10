@@ -1,39 +1,15 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-gy0-f176.google.com (mail-gy0-f176.google.com
-	[209.85.160.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BB6C0E00596
-	for <meta-ti@yoctoproject.org>; Tue, 10 Apr 2012 12:06:36 -0700 (PDT)
-Received: by ghbz10 with SMTP id z10so126398ghb.35
-	for <meta-ti@yoctoproject.org>; Tue, 10 Apr 2012 12:06:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=Zn5AQ9kk+uXltwArG7dRBwNS2EtX7rZdEFe8KHXvYFI=;
-	b=FXq97unmxKSQuSvXcKJaqG8OnDPdiV8vMnv+FrC0J31KlCzMVRwbmg/RH7AZTGUhkD
-	YfU2RKN1ntA7vtf12cRjh5y7gXE8URUPjaZls7Tau2Vio9fXR6XhMIqYj//Em6bQ4Hyt
-	GOPym9jtTi92bIUjZPMOkZt7XWylGaJJ+6lLjqgaMfenK2z0J+J3opGd/1kPyBMg5C7s
-	wjda1D6a8OKmt5lMbmRE3I0OvFd/K1KQAQA6ky3RHOP8l0h2Z59jGYE3Okumrbli+Yvr
-	ji7ix8rdrsz5+Honw3FYQCHpjR7X3050Bl+tDsUwSIVNzSXtADe1HbHlVr8OQRaJGvyV
-	EeyA==
-Received: by 10.60.6.8 with SMTP id w8mr18494249oew.3.1334084795998;
-	Tue, 10 Apr 2012 12:06:35 -0700 (PDT)
-Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id b2sm215687obo.22.2012.04.10.12.06.34
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 10 Apr 2012 12:06:35 -0700 (PDT)
-Sender: Tom Rini <tom.rini@gmail.com>
-Date: Tue, 10 Apr 2012 12:06:38 -0700
-From: Tom Rini <trini@ti.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-ID: <20120410190638.GB24748@bill-the-cat>
-References: <1334063833-9235-1-git-send-email-eric@eukrea.com>
-	<6C2C4B59-3AD6-4C69-8534-D5E32BEACBA4@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <6C2C4B59-3AD6-4C69-8534-D5E32BEACBA4@dominion.thruhere.net>
-Organization: Texas Instruments
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] u-boot-git: add COMPATIBLE_MACHINE
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9D201E00596
+	for <meta-ti@yoctoproject.org>; Tue, 10 Apr 2012 13:00:50 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id EB9C452A70; Tue, 10 Apr 2012 20:00:49 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120410200049.EB9C452A70@arago-project.org>
+Date: Tue, 10 Apr 2012 20:00:49 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Koen Kooi : beaglebone-tester: bump SRCREV to fix PMIC test
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,55 +21,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2012 19:06:36 -0000
-X-Groupsio-MsgNum: 934
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cvVnyQ+4j833TQvp"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Apr 2012 20:00:50 -0000
+Content-Type: text/plain; charset=UTF-8
 
---cvVnyQ+4j833TQvp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Module: meta-ti
+Branch: master
+Commit: 69102ec043838f6fcba9dd0df0cc07e74700b268
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=69102ec043838f6fcba9dd0df0cc07e74700b268
 
-On Tue, Apr 10, 2012 at 03:28:41PM +0200, Koen Kooi wrote:
->=20
-> Op 10 apr. 2012, om 15:17 heeft Eric B?nard het volgende geschreven:
->=20
-> > so that an other BSP layer can also provide a u-boot_git recipe
->=20
-> ah right, we talked about this earlier and were going to namespace our ub=
-oot recipes instead. COMPATIBLE_MACHINE is just too dang hard to grasp for =
-customers adding their machine.
->=20
-> Chase, Tom, any patches q'd to rename our uboots?
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Mon Apr  9 18:06:42 2012 +0200
 
-None from me, Chase?
+beaglebone-tester: bump SRCREV to fix PMIC test
 
---=20
-Tom
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
---cvVnyQ+4j833TQvp
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
+---
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+ recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-iQIcBAEBAgAGBQJPhIS+AAoJENk4IS6UOR1WClcP/1KuPIpMHM0YJ1f2bGMHPts8
-ED+VnNXI3Izg+w7tOwyu5v3KikYFBdcVOSVliwEFxs+ka7SJvmyT7zrT1D9SV3IX
-temfy3s55PuSMFdJlN4WUZDJhFEQk8Mgq9W1TvR/auJvYxlX6KmEjdYfX39lDMrI
-6CBgJoQ6GOtZkdpy3bARrSi3b5eAMQyoQPbFVc3h4MLwd0QjTqw6ajnb46/XSPB2
-eg4+hg67eVqqoC9tQ7VASfIzlhEpWayJobZmoOuLQ7TYoFghHeRneZwjlhVvgYJk
-pjKyH5xQNWPtlLEQadGongnym3ZNKRy5C0YSCL5PtpqvT+xRaOl2LV8UgAz2egTX
-R6I/joMIxImqkkYpq5GE633Liwhiv2ypHgk7rcNDw6MwtMBv5oD0cKP2D75rhn8B
-mWcXIqgpgYy79h/fmB1ewyQfarCe1beBZpmuSGOCdeGIwO53lbBqJtyrkomx/cex
-/2nQ7BwfIWxEzsbOYq1lsfTKOY+oLieojsXZ12vCkOK3Zq0QHs7ut6iT+je/XJkJ
-0Rc6QhXV8o2f61DmrMRKBnISY6c5i1oKa3vJ5t9WMIdAzCaWf1aGvTami6LgXQuK
-YKn4bcYAw7N6oVmKEyNfybdBMU0nPTcO43mOdIYyeGojId5diJxGfQu6rIqifD5m
-BGCzEKa8vKviCtSUlrlC
-=Yg3J
------END PGP SIGNATURE-----
+diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
+index 7a72547..6bb598a 100644
+--- a/recipes-ti/beagleboard/beaglebone-tester.bb
++++ b/recipes-ti/beagleboard/beaglebone-tester.bb
+@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
+ # only scripts and data
+ inherit allarch
+ 
+-PR = "r13"
++PR = "r14"
+ 
+ SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
+           "
+-SRCREV = "dc89e2d6b2ac0238a7aa5a334d7c86d7b8613837"
++SRCREV = "1a13257030c497920243062c65068c89840d8b6e"
+ 
+ S = "${WORKDIR}/git"
+ 
 
---cvVnyQ+4j833TQvp--
+
