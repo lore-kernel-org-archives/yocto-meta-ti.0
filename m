@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9D201E00596
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E729E0059A
 	for <meta-ti@yoctoproject.org>; Tue, 10 Apr 2012 13:00:50 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id EB9C452A70; Tue, 10 Apr 2012 20:00:49 +0000 (UTC)
+	id B9F5152A7B; Tue, 10 Apr 2012 20:00:49 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120410200049.EB9C452A70@arago-project.org>
+Message-Id: <20120410200049.B9F5152A7B@arago-project.org>
 Date: Tue, 10 Apr 2012 20:00:49 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : beaglebone-tester: bump SRCREV to fix PMIC test
+Subject: Koen Kooi : u-boot 2011.10rc: fix loading from /boot by adding ext4 support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,39 +26,30 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 69102ec043838f6fcba9dd0df0cc07e74700b268
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=69102ec043838f6fcba9dd0df0cc07e74700b268
+Commit: d686d9d676f638ac9cbf31086d7933bc8107e541
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d686d9d676f638ac9cbf31086d7933bc8107e541
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Mon Apr  9 18:06:42 2012 +0200
+Date:   Mon Apr  9 18:06:41 2012 +0200
 
-beaglebone-tester: bump SRCREV to fix PMIC test
+u-boot 2011.10rc: fix loading from /boot by adding ext4 support
+
+This patchset was pulled from u-boot patchwork and aren't final, but testing
+on beaglebone shows it to work.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Acked-by: Tom Rini <trini@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../0011-ext2load-increase-read-speed.patch        |   74 +
+ ...fix-ext2load-and-specify-partition-for-bo.patch |   28 +
+ ...evm-load-uImage-from-boot-instead-of-VFAT.patch |   35 +
+ .../2011.09git/0014-ext4fs-ls-load-support.patch   | 2362 ++++++++++++++++++++
+ .../0015-am335x-switch-to-ext4-mode.patch          |   51 +
+ recipes-bsp/u-boot/u-boot_2011.10rc.bb             |    7 +-
+ 6 files changed, 2556 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
-index 7a72547..6bb598a 100644
---- a/recipes-ti/beagleboard/beaglebone-tester.bb
-+++ b/recipes-ti/beagleboard/beaglebone-tester.bb
-@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
- # only scripts and data
- inherit allarch
- 
--PR = "r13"
-+PR = "r14"
- 
- SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
-           "
--SRCREV = "dc89e2d6b2ac0238a7aa5a334d7c86d7b8613837"
-+SRCREV = "1a13257030c497920243062c65068c89840d8b6e"
- 
- S = "${WORKDIR}/git"
- 
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=d686d9d676f638ac9cbf31086d7933bc8107e541
 
