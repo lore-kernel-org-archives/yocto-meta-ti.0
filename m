@@ -1,35 +1,34 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0ACB4E013FB
-	for <meta-ti@yoctoproject.org>; Mon, 16 Apr 2012 04:53:44 -0700 (PDT)
-Received: by werc1 with SMTP id c1so4370455wer.35
-	for <meta-ti@yoctoproject.org>; Mon, 16 Apr 2012 04:53:43 -0700 (PDT)
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2D78E013FB
+	for <meta-ti@yoctoproject.org>; Mon, 16 Apr 2012 06:18:41 -0700 (PDT)
+Received: by wibhr14 with SMTP id hr14so4564326wib.11
+	for <meta-ti@yoctoproject.org>; Mon, 16 Apr 2012 06:18:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=ldXONVkaiaNCKgpQwPZIJ2wDj0wmb3eUELNUyL988CQ=;
-	b=SVp7C6/HDF6PWmgh8N2kC37EyXX9DbA1jqAtcg6U1iWpo05DXOlZhjQhPHY4v1do9L
-	qUYmT8osK3KcLPOd6WYGJi6ujzeOVbFsTUUWuRsn2JlFfRB9m72gSWIcIqKO4d7AkjVk
-	KaqnIkpUSPqwkpeRaNYRF/cTpExJ3akeLBzhd/lUqvrBREmIHUdSaaomIQMMdjSBH/fM
-	wMhNolZv7P5KtAMtaYRgEkPmeQkjMMueY0pnRfhG0kE5fHcRobjEW8QXTiVAyiE1apu9
-	e6pBCDeykZA/Q30AV5y1H54YiSbGm8KMqs2sMVILs7hZB8OOGDY7vbyLOy6f4x/TKn8B
-	cOuA==
-Received: by 10.180.86.132 with SMTP id p4mr18057478wiz.15.1334577223377;
-	Mon, 16 Apr 2012 04:53:43 -0700 (PDT)
+	bh=TzSH7IUmnR/6EcbjE3IHf6xgUYl1F0gB61LqYUeqhYU=;
+	b=eBNK0n2Y3GyXe1zgiX5jCDTufwllbTb5BieKrEh7bai0urIrCcB3snJHrO0ToaOn0H
+	EBvZptlLoLHd2+AfOzExcqjRyVRn8S1phtKNwXj+wHs/rTnpHOb4RVjTuK+3k1jsC/oi
+	O0AloFehmtDVkFcMrIE7NTFCftV+DxAJIgIBNlmFgnP2TNwwGppPpuY0lgRe4W9pbMbp
+	VH9d74siqsJVZ4ICmCvy6rlP5SV2hmShONjbN94dCr+Fm9uTsb/RAd5+oUD9N3oRPbZY
+	GYxy7UH7h5+sKQjUSIWxaTmminDRO5SyFQxJXK5q1ANKg97YTdm0yP9L5YKfjwoVvt2I
+	YI0Q==
+Received: by 10.216.45.146 with SMTP id p18mr6771092web.47.1334582320214;
+	Mon, 16 Apr 2012 06:18:40 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id
-	ev10sm19188999wid.10.2012.04.16.04.53.41
+	by mx.google.com with ESMTPS id 17sm19995323wis.0.2012.04.16.06.18.38
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 16 Apr 2012 04:53:42 -0700 (PDT)
+	Mon, 16 Apr 2012 06:18:39 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Date: Mon, 16 Apr 2012 13:53:36 +0200
-Message-Id: <1334577216-16277-1-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 16 Apr 2012 15:18:34 +0200
+Message-Id: <1334582314-13693-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
-X-Gm-Message-State: ALoCoQmMei+nRscw2gCiLfTRoG5QjvvJHT9v88DftTTigfhCGFyqPyK7/+gBZ8hx/Ilxfwaq4b1X
+X-Gm-Message-State: ALoCoQm0zhqD2onIrIV5BMpgiLrqG5kMaWA7zT+G80+PcxXoeSWLmd0Y3sAmzJ3ubr2AIwIk5F2u
 Cc: denys@ti.com
-Subject: [PATCH] libgles-omap3: fix RRECOMMENDS
+Subject: [PATCH] beaglebone-capes: userspace support for capes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,44 +40,82 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2012 11:53:45 -0000
+X-List-Received-Date: Mon, 16 Apr 2012 13:18:42 -0000
 
-The modules assignment overwrote the previous ones, leading to missing libraries.
-
-Before:
-	 Package: libgles-omap3
-	 Recommends: omap3-sgx-modules
-After:
-	 Package: libgles-omap3
-	 Recommends: omap3-sgx-modules, libgles-omap3-es8, libgles-omap3-es6, libgles-omap3-es5, libgles-omap3-es3, libgles-omap3-es2
+Not everything can be done inside the kernel yet, so have a script that does the userspace portion.
+Only the LCD3 cape is supported currently, more will follow later.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- recipes-graphics/libgles/libgles-omap3.inc |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/beagleboard/beaglebone-capes.bb         |   23 ++++++++++++++++++++
+ .../beagleboard/beaglebone-capes/cape.service      |    8 +++++++
+ recipes-ti/beagleboard/beaglebone-capes/cape.sh    |   12 ++++++++++
+ 3 files changed, 43 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-ti/beagleboard/beaglebone-capes.bb
+ create mode 100644 recipes-ti/beagleboard/beaglebone-capes/cape.service
+ create mode 100755 recipes-ti/beagleboard/beaglebone-capes/cape.sh
 
-diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-index 69254c1..fbd931f 100644
---- a/recipes-graphics/libgles/libgles-omap3.inc
-+++ b/recipes-graphics/libgles/libgles-omap3.inc
-@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum
- LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
- 
--PR = "r25"
-+PR = "r26"
- 
- COMPATIBLE_MACHINE = "(omap3|ti816x|ti33x)"
- 
-@@ -320,7 +320,7 @@ FILES_${PN}-x11trainingcourses = "${bindir}/SGX/trainingcourses/X11/*"
- RRECOMMENDS_${PN}-x11trainingcourses = "${PN}-x11wsegl"
- 
- # The libs need the kernel-modules
--RRECOMMENDS_${PN} = "omap3-sgx-modules"
-+RRECOMMENDS_${PN} += "omap3-sgx-modules"
- 
- # The initscript calls fbset, cputype calls devmem2
- RDEPENDS_${PN} += "fbset devmem2"
+diff --git a/recipes-ti/beagleboard/beaglebone-capes.bb b/recipes-ti/beagleboard/beaglebone-capes.bb
+new file mode 100644
+index 0000000..88d4a17
+--- /dev/null
++++ b/recipes-ti/beagleboard/beaglebone-capes.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "Userspace setup for beaglebone capes"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
++
++inherit allarch
++
++SRC_URI = "file://cape.service \
++           file://cape.sh \
++          "
++
++do_install() {
++	install -d ${D}${base_libdir}/systemd/system/
++	install -m 0644 ${WORKDIR}/cape.service ${D}${base_libdir}/systemd/system
++
++	install -d ${D}${base_libdir}/systemd/system/basic.target.wants
++	ln -sf ../cape.service ${D}${base_libdir}/systemd/system/basic.target.wants/
++
++	install -d ${D}${bindir}
++	install -m 0755 ${WORKDIR}/cape.sh ${D}${bindir}
++}
++
++FILES_${PN} += "${base_libdir}/systemd/system"
+diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape.service b/recipes-ti/beagleboard/beaglebone-capes/cape.service
+new file mode 100644
+index 0000000..44a2a38
+--- /dev/null
++++ b/recipes-ti/beagleboard/beaglebone-capes/cape.service
+@@ -0,0 +1,8 @@
++[Unit]
++Description=Beaglebone cape support
++
++[Service]
++ExecStart=/usr/bin/cape.sh
++
++[Install]
++WantedBy=basic.target
+diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape.sh b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
+new file mode 100755
+index 0000000..69accff
+--- /dev/null
++++ b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
+@@ -0,0 +1,12 @@
++#!/bin/sh
++for eeprom in /sys/bus/i2c/devices/3-005*/eeprom ; do
++	PARTNUMBER=$(hexdump -e '8/1 "%c"' $eeprom -s 58 -n16)
++	case $PARTNUMBER in
++		"BB-BONE-LCD3-01.")
++				echo "Turning on backlight for LCD3 cape"
++				i2cset -f -y 1 0x24 0x07 0x09
++				i2cset -f -y 1 0x24 0x08 0x60;;
++		*)
++				echo "unknown cape: $PARTNUMBER";;
++	esac
++done
 -- 
 1.7.2.5
 
