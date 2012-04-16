@@ -1,33 +1,35 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BB6DDE013A0
-	for <meta-ti@yoctoproject.org>; Mon, 16 Apr 2012 02:35:31 -0700 (PDT)
-Received: by wgbfg15 with SMTP id fg15so404703wgb.11
-	for <meta-ti@yoctoproject.org>; Mon, 16 Apr 2012 02:35:30 -0700 (PDT)
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0ACB4E013FB
+	for <meta-ti@yoctoproject.org>; Mon, 16 Apr 2012 04:53:44 -0700 (PDT)
+Received: by werc1 with SMTP id c1so4370455wer.35
+	for <meta-ti@yoctoproject.org>; Mon, 16 Apr 2012 04:53:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=cj5FyKMP2HFe42dLIS4X/tJEddJ5MJpDA6fGCAIvETw=;
-	b=A9kTfKXN0ckHtopPU5Zd7akOF+nlclbUJO7E3WEH6A8R+8IHt/EN6DFjaAAl7PW3DP
-	fxO8FVz4V4tJ/XgKhGplv58EgSbgSfvbpLHOFcerGAutkh16KYRLw+PcO4izbZAhmol3
-	QqzZYE3ec0V2qLXeUd5uH6xaZdOw6xphqvCLsVh3pJf5ACkHlPtqVTLuKOqyuDKZsJ/D
-	PghaBZ7SLpOR+8Ci+D/Fqz15rFf48oor+EQsbEDdkYKFH7wsF4RrZITWSy7Z3s7oVlHq
-	/YBfTBFrjGGzmZV5xa50IW6QtMjXB8p8D4AxVYd/R57sCL1R7dRnQ9biRXGXQAf9oRcg
-	QEBg==
-Received: by 10.180.88.199 with SMTP id bi7mr16999876wib.12.1334568930430;
-	Mon, 16 Apr 2012 02:35:30 -0700 (PDT)
+	bh=ldXONVkaiaNCKgpQwPZIJ2wDj0wmb3eUELNUyL988CQ=;
+	b=SVp7C6/HDF6PWmgh8N2kC37EyXX9DbA1jqAtcg6U1iWpo05DXOlZhjQhPHY4v1do9L
+	qUYmT8osK3KcLPOd6WYGJi6ujzeOVbFsTUUWuRsn2JlFfRB9m72gSWIcIqKO4d7AkjVk
+	KaqnIkpUSPqwkpeRaNYRF/cTpExJ3akeLBzhd/lUqvrBREmIHUdSaaomIQMMdjSBH/fM
+	wMhNolZv7P5KtAMtaYRgEkPmeQkjMMueY0pnRfhG0kE5fHcRobjEW8QXTiVAyiE1apu9
+	e6pBCDeykZA/Q30AV5y1H54YiSbGm8KMqs2sMVILs7hZB8OOGDY7vbyLOy6f4x/TKn8B
+	cOuA==
+Received: by 10.180.86.132 with SMTP id p4mr18057478wiz.15.1334577223377;
+	Mon, 16 Apr 2012 04:53:43 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id gg2sm29845987wib.7.2012.04.16.02.35.28
+	by mx.google.com with ESMTPS id
+	ev10sm19188999wid.10.2012.04.16.04.53.41
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 16 Apr 2012 02:35:29 -0700 (PDT)
+	Mon, 16 Apr 2012 04:53:42 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Date: Mon, 16 Apr 2012 11:35:21 +0200
-Message-Id: <1334568921-25278-1-git-send-email-koen@dominion.thruhere.net>
+Date: Mon, 16 Apr 2012 13:53:36 +0200
+Message-Id: <1334577216-16277-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
-X-Gm-Message-State: ALoCoQk38mNJUMg+KREMUouBWpKZfDY4Fi1CPh74Xvlf2mn2MjvttouP5hy8MKt/iiFpENjpKfAq
+X-Gm-Message-State: ALoCoQmMei+nRscw2gCiLfTRoG5QjvvJHT9v88DftTTigfhCGFyqPyK7/+gBZ8hx/Ilxfwaq4b1X
 Cc: denys@ti.com
-Subject: [PATCH] linux 3.0: update to 3.0.28
+Subject: [PATCH] libgles-omap3: fix RRECOMMENDS
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,46 +41,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2012 09:35:32 -0000
+X-List-Received-Date: Mon, 16 Apr 2012 11:53:45 -0000
 
-Runtime tested on Angstrom/beagleboard-xM
+The modules assignment overwrote the previous ones, leading to missing libraries.
+
+Before:
+	 Package: libgles-omap3
+	 Recommends: omap3-sgx-modules
+After:
+	 Package: libgles-omap3
+	 Recommends: omap3-sgx-modules, libgles-omap3-es8, libgles-omap3-es6, libgles-omap3-es5, libgles-omap3-es3, libgles-omap3-es2
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- conf/machine/include/omap3.inc    |    2 +-
- recipes-kernel/linux/linux_3.0.bb |    6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-graphics/libgles/libgles-omap3.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 16078db..9903856 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r118"
-+MACHINE_KERNEL_PR = "r119"
+diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
+index 69254c1..fbd931f 100644
+--- a/recipes-graphics/libgles/libgles-omap3.inc
++++ b/recipes-graphics/libgles/libgles-omap3.inc
+@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
+ # 'TSPA.txt' might not be the best file to md5sum
+ LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
  
- KERNEL_IMAGETYPE = "uImage"
+-PR = "r25"
++PR = "r26"
  
-diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
-index a817c1d..522a87d 100644
---- a/recipes-kernel/linux/linux_3.0.bb
-+++ b/recipes-kernel/linux/linux_3.0.bb
-@@ -5,9 +5,9 @@ KERNEL_IMAGETYPE = "uImage"
+ COMPATIBLE_MACHINE = "(omap3|ti816x|ti33x)"
  
- COMPATIBLE_MACHINE = "(beagleboard)"
+@@ -320,7 +320,7 @@ FILES_${PN}-x11trainingcourses = "${bindir}/SGX/trainingcourses/X11/*"
+ RRECOMMENDS_${PN}-x11trainingcourses = "${PN}-x11wsegl"
  
--PV = "3.0.25"
--# v3.0.25 tag
--SRCREV_pn-${PN} = "9bf176a3e029ae7f2dc6feae185091525a988be2"
-+PV = "3.0.28"
-+# v3.0.28 tag
-+SRCREV_pn-${PN} = "0527fde0639955203ad48a9fd83bd6fc35e82e07"
+ # The libs need the kernel-modules
+-RRECOMMENDS_${PN} = "omap3-sgx-modules"
++RRECOMMENDS_${PN} += "omap3-sgx-modules"
  
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
- MACHINE_KERNEL_PR_append = "a"
+ # The initscript calls fbset, cputype calls devmem2
+ RDEPENDS_${PN} += "fbset devmem2"
 -- 
 1.7.2.5
 
