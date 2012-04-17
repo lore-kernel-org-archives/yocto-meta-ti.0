@@ -1,33 +1,37 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8F07EE0044A
-	for <meta-ti@yoctoproject.org>; Tue, 17 Apr 2012 05:47:53 -0700 (PDT)
-Received: by wgbfg15 with SMTP id fg15so1432535wgb.11
-	for <meta-ti@yoctoproject.org>; Tue, 17 Apr 2012 05:47:52 -0700 (PDT)
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AA2B3E0044D
+	for <meta-ti@yoctoproject.org>; Tue, 17 Apr 2012 05:47:55 -0700 (PDT)
+Received: by wibhr14 with SMTP id hr14so489410wib.11
+	for <meta-ti@yoctoproject.org>; Tue, 17 Apr 2012 05:47:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=cj5FyKMP2HFe42dLIS4X/tJEddJ5MJpDA6fGCAIvETw=;
-	b=cYvXzq87lP8Dp9OBAElCdSzFNcFV8Eh0obMlhAeF6QTAZ1RjPUefwmnAa6lMp5cY2h
-	kq5Qgi42gwdPDaVUvz/Ho05HnRm8mOhsMAGy3Q1oSomnGma/nV1cZh/sPM9z8UumXPYj
-	QhRzPZqwhlZt89IU/ObSW3ssmM2MWipRG7maEtx+Jged8dg8+OoHmsU1v5e5f/yZ1F4W
-	J4UFKY8A+nEXVtEVqPlQL2CvdDt/2TzF0L0PZTi1qX9Lsb68ma4RzI/ExKh2vuze9r9K
-	oU9i/5CuKnrBo7H09ot7bHojbrUS5tdZ8Qai959CC+WAnnK8hyFLMx7i2yUT3KCkKclN
-	uo4Q==
-Received: by 10.180.98.8 with SMTP id ee8mr12177240wib.14.1334666872588;
-	Tue, 17 Apr 2012 05:47:52 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
+	:x-gm-message-state;
+	bh=ldXONVkaiaNCKgpQwPZIJ2wDj0wmb3eUELNUyL988CQ=;
+	b=IXXppUoZJEsPqGhfiu05fm99OEpldsblsQWUqAuSeBPAbt9w/NJrTImftXR5RtRwMI
+	5pzSJHKxKqrc6nYBttGZxTDg9ssz0L0Ywp1wLRhsiAiH0xk45IYB+oKc6dtShsZBGwWT
+	GBBRKcm861FqspsJmBk7UsU5O3+5BHX8arIHTKS7elQMwT4FrLJa0rWrw5qhaVJ+ZWRY
+	mv6wDdNqTQ2MyvX0WE1vTzuiZ1tQPEhYTGkg+yWlFa85HJVebWde/0x/eU2YBxOhy5rr
+	OyrxwkyHPAdDfk/Yez68Ek+VsAMH2X8gy5Zmv7cX3Td4Eg7/EOzRnlbEj5Bs/ODjzd+E
+	ETwQ==
+Received: by 10.180.79.72 with SMTP id h8mr7028966wix.1.1334666874855;
+	Tue, 17 Apr 2012 05:47:54 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id n20sm43052691wiw.5.2012.04.17.05.47.50
+	by mx.google.com with ESMTPS id u9sm26741228wix.0.2012.04.17.05.47.53
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 17 Apr 2012 05:47:51 -0700 (PDT)
+	Tue, 17 Apr 2012 05:47:54 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Date: Tue, 17 Apr 2012 14:47:40 +0200
-Message-Id: <1334666866-24955-1-git-send-email-koen@dominion.thruhere.net>
+Date: Tue, 17 Apr 2012 14:47:41 +0200
+Message-Id: <1334666866-24955-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
-X-Gm-Message-State: ALoCoQmaW+Oj6qejtvcWa9nkULIFtk1DqWLUPBLtlbTaVcQ+EgQ4XBA6j4pd/0MyhGVATSt+LN6F
+In-Reply-To: <1334666866-24955-1-git-send-email-koen@dominion.thruhere.net>
+References: <1334666866-24955-1-git-send-email-koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQlIoBaeIBYd2q4go5+TgC/9CpPadJSuJAcic1uVikctBwki1FEUpG5JS9wVmeB6xVT8V3De
 Cc: denys@ti.com
-Subject: [PATCH v2 1/7] linux 3.0: update to 3.0.28
+Subject: [PATCH v2 2/7] libgles-omap3: fix RRECOMMENDS
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,46 +43,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Apr 2012 12:47:53 -0000
+X-List-Received-Date: Tue, 17 Apr 2012 12:47:56 -0000
 
-Runtime tested on Angstrom/beagleboard-xM
+The modules assignment overwrote the previous ones, leading to missing libraries.
+
+Before:
+	 Package: libgles-omap3
+	 Recommends: omap3-sgx-modules
+After:
+	 Package: libgles-omap3
+	 Recommends: omap3-sgx-modules, libgles-omap3-es8, libgles-omap3-es6, libgles-omap3-es5, libgles-omap3-es3, libgles-omap3-es2
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- conf/machine/include/omap3.inc    |    2 +-
- recipes-kernel/linux/linux_3.0.bb |    6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-graphics/libgles/libgles-omap3.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 16078db..9903856 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r118"
-+MACHINE_KERNEL_PR = "r119"
+diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
+index 69254c1..fbd931f 100644
+--- a/recipes-graphics/libgles/libgles-omap3.inc
++++ b/recipes-graphics/libgles/libgles-omap3.inc
+@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
+ # 'TSPA.txt' might not be the best file to md5sum
+ LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
  
- KERNEL_IMAGETYPE = "uImage"
+-PR = "r25"
++PR = "r26"
  
-diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
-index a817c1d..522a87d 100644
---- a/recipes-kernel/linux/linux_3.0.bb
-+++ b/recipes-kernel/linux/linux_3.0.bb
-@@ -5,9 +5,9 @@ KERNEL_IMAGETYPE = "uImage"
+ COMPATIBLE_MACHINE = "(omap3|ti816x|ti33x)"
  
- COMPATIBLE_MACHINE = "(beagleboard)"
+@@ -320,7 +320,7 @@ FILES_${PN}-x11trainingcourses = "${bindir}/SGX/trainingcourses/X11/*"
+ RRECOMMENDS_${PN}-x11trainingcourses = "${PN}-x11wsegl"
  
--PV = "3.0.25"
--# v3.0.25 tag
--SRCREV_pn-${PN} = "9bf176a3e029ae7f2dc6feae185091525a988be2"
-+PV = "3.0.28"
-+# v3.0.28 tag
-+SRCREV_pn-${PN} = "0527fde0639955203ad48a9fd83bd6fc35e82e07"
+ # The libs need the kernel-modules
+-RRECOMMENDS_${PN} = "omap3-sgx-modules"
++RRECOMMENDS_${PN} += "omap3-sgx-modules"
  
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
- MACHINE_KERNEL_PR_append = "a"
+ # The initscript calls fbset, cputype calls devmem2
+ RDEPENDS_${PN} += "fbset devmem2"
 -- 
 1.7.2.5
 
