@@ -1,34 +1,42 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2D78E013FB
-	for <meta-ti@yoctoproject.org>; Mon, 16 Apr 2012 06:18:41 -0700 (PDT)
-Received: by wibhr14 with SMTP id hr14so4564326wib.11
-	for <meta-ti@yoctoproject.org>; Mon, 16 Apr 2012 06:18:40 -0700 (PDT)
+Return-Path: <koen@beagleboard.org>
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED8C7E0044A
+	for <meta-ti@yoctoproject.org>; Tue, 17 Apr 2012 00:49:07 -0700 (PDT)
+Received: by werc1 with SMTP id c1so5177126wer.35
+	for <meta-ti@yoctoproject.org>; Tue, 17 Apr 2012 00:49:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=TzSH7IUmnR/6EcbjE3IHf6xgUYl1F0gB61LqYUeqhYU=;
-	b=eBNK0n2Y3GyXe1zgiX5jCDTufwllbTb5BieKrEh7bai0urIrCcB3snJHrO0ToaOn0H
-	EBvZptlLoLHd2+AfOzExcqjRyVRn8S1phtKNwXj+wHs/rTnpHOb4RVjTuK+3k1jsC/oi
-	O0AloFehmtDVkFcMrIE7NTFCftV+DxAJIgIBNlmFgnP2TNwwGppPpuY0lgRe4W9pbMbp
-	VH9d74siqsJVZ4ICmCvy6rlP5SV2hmShONjbN94dCr+Fm9uTsb/RAd5+oUD9N3oRPbZY
-	GYxy7UH7h5+sKQjUSIWxaTmminDRO5SyFQxJXK5q1ANKg97YTdm0yP9L5YKfjwoVvt2I
-	YI0Q==
-Received: by 10.216.45.146 with SMTP id p18mr6771092web.47.1334582320214;
-	Mon, 16 Apr 2012 06:18:40 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id 17sm19995323wis.0.2012.04.16.06.18.38
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=Bpr48h0mQoIgY0W3o0U/MzlE1DB2GszmBVJx8bPa1wU=;
+	b=SaehUK4zWRAJ7dHlODvvDJn9iOQ6Z7jpH+z077RijYuv8w75RMLJlhTsoVrS0c+YHq
+	+jvsaG89kEWmvrLpoBAjuWMcFPTZkqzAohOvToS04LTCzBCRx/6lAZWPI3MkS2uovKEa
+	+YzXISxvxt7+C+McYlMD/MMmlRHsSuvgke68kLwvxIaY56qv0fboqfhFehmURSmePcKT
+	Ip0u5VLJCr8DsYMHH/m5889y4y/lWdQAvDZc/xZD1h4N9D79W4JN1/aqVbtgZn3zvO2B
+	JJ5G+n+6l6gALQ/phx4vV1CxsOqjInnm60GrKkJIOcwuy6TpHWpP4929gPnGf2yWmsaN
+	xKpQ==
+Received: by 10.216.131.34 with SMTP id l34mr8495366wei.54.1334648946906;
+	Tue, 17 Apr 2012 00:49:06 -0700 (PDT)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id ca3sm25162645wib.6.2012.04.17.00.49.05
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 16 Apr 2012 06:18:39 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: meta-ti@yoctoproject.org
-Date: Mon, 16 Apr 2012 15:18:34 +0200
-Message-Id: <1334582314-13693-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-X-Gm-Message-State: ALoCoQm0zhqD2onIrIV5BMpgiLrqG5kMaWA7zT+G80+PcxXoeSWLmd0Y3sAmzJ3ubr2AIwIk5F2u
-Cc: denys@ti.com
-Subject: [PATCH] beaglebone-capes: userspace support for capes
+	Tue, 17 Apr 2012 00:49:06 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1257)
+From: Koen Kooi <koen@beagleboard.org>
+In-Reply-To: <EB812FEE-EE00-4932-AF14-232F200EECD9@dominion.thruhere.net>
+Date: Tue, 17 Apr 2012 09:49:07 +0200
+Message-Id: <91400C8F-EED9-4BD1-93CB-709312080A49@beagleboard.org>
+References: <1334063340-21063-1-git-send-email-koen@dominion.thruhere.net>
+	<20120412200941.GF13291@denix.org>
+	<EB812FEE-EE00-4932-AF14-232F200EECD9@dominion.thruhere.net>
+To: Denys Dmytriyenko <denis@denix.org>
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQlzhgVQiDieNjBTlo+JVbMgW5Yk1gxDel9pcN4UFtLsOAfFphEmsBBX+/zh4igpvna9vvMN
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] am33x-cm3: add firmware for am33x suspend/resume
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,83 +48,90 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2012 13:18:42 -0000
+X-List-Received-Date: Tue, 17 Apr 2012 07:49:08 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Not everything can be done inside the kernel yet, so have a script that does the userspace portion.
-Only the LCD3 cape is supported currently, more will follow later.
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- recipes-ti/beagleboard/beaglebone-capes.bb         |   23 ++++++++++++++++++++
- .../beagleboard/beaglebone-capes/cape.service      |    8 +++++++
- recipes-ti/beagleboard/beaglebone-capes/cape.sh    |   12 ++++++++++
- 3 files changed, 43 insertions(+), 0 deletions(-)
- create mode 100644 recipes-ti/beagleboard/beaglebone-capes.bb
- create mode 100644 recipes-ti/beagleboard/beaglebone-capes/cape.service
- create mode 100755 recipes-ti/beagleboard/beaglebone-capes/cape.sh
+Op 12 apr. 2012, om 22:21 heeft Koen Kooi het volgende geschreven:
 
-diff --git a/recipes-ti/beagleboard/beaglebone-capes.bb b/recipes-ti/beagleboard/beaglebone-capes.bb
-new file mode 100644
-index 0000000..88d4a17
---- /dev/null
-+++ b/recipes-ti/beagleboard/beaglebone-capes.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "Userspace setup for beaglebone capes"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+
-+inherit allarch
-+
-+SRC_URI = "file://cape.service \
-+           file://cape.sh \
-+          "
-+
-+do_install() {
-+	install -d ${D}${base_libdir}/systemd/system/
-+	install -m 0644 ${WORKDIR}/cape.service ${D}${base_libdir}/systemd/system
-+
-+	install -d ${D}${base_libdir}/systemd/system/basic.target.wants
-+	ln -sf ../cape.service ${D}${base_libdir}/systemd/system/basic.target.wants/
-+
-+	install -d ${D}${bindir}
-+	install -m 0755 ${WORKDIR}/cape.sh ${D}${bindir}
-+}
-+
-+FILES_${PN} += "${base_libdir}/systemd/system"
-diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape.service b/recipes-ti/beagleboard/beaglebone-capes/cape.service
-new file mode 100644
-index 0000000..44a2a38
---- /dev/null
-+++ b/recipes-ti/beagleboard/beaglebone-capes/cape.service
-@@ -0,0 +1,8 @@
-+[Unit]
-+Description=Beaglebone cape support
-+
-+[Service]
-+ExecStart=/usr/bin/cape.sh
-+
-+[Install]
-+WantedBy=basic.target
-diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape.sh b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-new file mode 100755
-index 0000000..69accff
---- /dev/null
-+++ b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-@@ -0,0 +1,12 @@
-+#!/bin/sh
-+for eeprom in /sys/bus/i2c/devices/3-005*/eeprom ; do
-+	PARTNUMBER=$(hexdump -e '8/1 "%c"' $eeprom -s 58 -n16)
-+	case $PARTNUMBER in
-+		"BB-BONE-LCD3-01.")
-+				echo "Turning on backlight for LCD3 cape"
-+				i2cset -f -y 1 0x24 0x07 0x09
-+				i2cset -f -y 1 0x24 0x08 0x60;;
-+		*)
-+				echo "unknown cape: $PARTNUMBER";;
-+	esac
-+done
--- 
-1.7.2.5
+>=20
+> Op 12 apr. 2012, om 22:09 heeft Denys Dmytriyenko het volgende =
+geschreven:
+>=20
+>> Koen,
+>>=20
+>> I'm commenting on both of your patches together...
+>>=20
+>> am33x-cm3:
+>>> +++ b/recipes-bsp/ti/am33x-cm3_git.bb
+>>>=20
+>>> +do_install() {
+>>> +	install -d ${D}${base_libdir}/firmware
+>>> +	install -m 0644 bin/am335x-pm-firmware.bin =
+${D}${base_libdir}/firmware/
+>>> +}
+>>=20
+>>=20
+>> linux-ti33x-psp:
+>>> This fixes most PM operations: cpufreq, cpuidle and suspend. Resume =
+does not=20
+>>> work on beaglebone, but 3 out of 4 ain't bad :)
+>>>=20
+>>> The M3 firmware needed for suspend/resume is used as a binary, =
+building it=20
+>>> from source and including it from sysroots is planned for future =
+commits.
+>>>=20
+>>> +++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+>>>=20
+>>> +do_compile_prepend() {
+>>> +       cp ${WORKDIR}/am335x-pm-firmware.bin ${S}/firmware/
+>>> +}
+>>=20
+>>=20
+>> Have you looked at how it's done in Arago/AM-SDK?
+>=20
+> No, I only looked at meta-ti :)
+>=20
+>> The firmware is staged in=20
+>> the sysroots and gets picked up by the kernel:
+>>=20
+>> do_install() {
+>>   install -d ${STAGING_FIRMWARE_DIR}/am33x-cm3
+>>   install ${S}/bin/am335x-pm-firmware.bin =
+{STAGING_FIRMWARE_DIR}/am33x-cm3/
+>> }
+>>=20
+>> Where the kernel then copies it to ${S}/firmware:
+>>=20
+>> # Copy the am33x-cm3 firmware if it is available
+>> do_compile_prepend() {
+>>   if [ -e "${STAGING_FIRMWARE_DIR}/am33x-cm3/am335x-pm-firmware.bin" =
+]
+>>   then
+>>       cp "${STAGING_FIRMWARE_DIR}/am33x-cm3/am335x-pm-firmware.bin" =
+${S}/firmware"
+>>   fi
+>> }
+>>=20
+>> It's not the most elegant solution either, but at least it gets =
+around the=20
+>> need to keep the binary version of the firmware in the repository =
+with the=20
+>> kernel recipe...
+>>=20
+>> Do you want me to make similar changes to your patches? Or do you =
+have any=20
+>> arguments against this approach?
+>=20
+> Yes, you're not allowed to touch sysroots from inside do_install since =
+that will break sstate, which is why I added regular recipes first to =
+get it working and fix it properly later.
+>=20
+> It's a bit academic at this point, since you need to get lucky in the =
+silicon bingo to have suspend/resume working on am335x anyway. I can =
+disable CONFIG_SUSPEND and remove the copying bits if you want.
 
+ping=
 
