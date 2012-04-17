@@ -1,37 +1,37 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3E889E00596
-	for <meta-ti@yoctoproject.org>; Tue, 17 Apr 2012 05:47:57 -0700 (PDT)
-Received: by mail-wi0-f182.google.com with SMTP id hr14so489410wib.11
-	for <meta-ti@yoctoproject.org>; Tue, 17 Apr 2012 05:47:57 -0700 (PDT)
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 94C38E01206
+	for <meta-ti@yoctoproject.org>; Tue, 17 Apr 2012 05:48:00 -0700 (PDT)
+Received: by wibhm17 with SMTP id hm17so414551wib.11
+	for <meta-ti@yoctoproject.org>; Tue, 17 Apr 2012 05:47:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:x-gm-message-state;
-	bh=TzSH7IUmnR/6EcbjE3IHf6xgUYl1F0gB61LqYUeqhYU=;
-	b=jzy6jxKV8dAs9AC/AfIi7m2qq2JAIvjRs2J469kjo5Yr97ZPNzT5MTJ13dba3IYHlB
-	IqJD5jXVQqr/dqf6iFz6bfDcF56a1jF/uCyfEcf9rGGhFVMmN9EOGWmVD/Jvtp4O1AP6
-	xEVlrnaWXbOj3V9figpWsbN7fi5Q/uKqxrscN8sORljOK7yGBC8fpWUlDCRD387/JC6u
-	f7tlVTFwK6mTGgC4nv1ay8GjEXzC6fYBsNGnSZ8V8u5iN93j97BpDBqQL7LVM2VwaZay
-	OFhNv72UVxI4L62lp5B0p6rqjMScT1D3RWJTDl0nd9rm/q4QDeTZiFoQdChRBDdH54+/
-	zO/Q==
-Received: by 10.180.81.166 with SMTP id b6mr6986923wiy.0.1334666876669;
-	Tue, 17 Apr 2012 05:47:56 -0700 (PDT)
+	bh=tiWZEWRlu3dfrdzItpvpt6yi09YybN6gVauIDGFog1o=;
+	b=XSMFqvXYbSeW5M8in5EkKmSiturVF64w01VCRgaNyMv26JK9pdyF0tqbXd61cR8LWW
+	1agE70m0SqJpKDlqiWAiInqZ37XFiK+XedhY1Yew1i0oHc5VnqO/xg999ff7I0Phwsax
+	lInzVKdBlqmn0qZcRK5+QE/9gkqz/fnfJrTQANzTTZwGKstJQcRQXLwN7uuTxukREHPr
+	kVA3Idfz7mw3+Q6Y5WlD6ajyB5/6e5p9fqt8TSyhiQ9pP0RIMuI1F2HhMe6alyD+p0sN
+	ERc8fv8tBsX9t0MvMToe6ei5VBGrD2hXk5PJcqCbKOjX0cDZK7dNuILJWTSaUWvHu5+e
+	yynw==
+Received: by 10.180.98.8 with SMTP id ee8mr12178086wib.14.1334666879698;
+	Tue, 17 Apr 2012 05:47:59 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id h8sm43059174wix.4.2012.04.17.05.47.55
+	by mx.google.com with ESMTPS id ff2sm43046177wib.9.2012.04.17.05.47.57
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 17 Apr 2012 05:47:56 -0700 (PDT)
+	Tue, 17 Apr 2012 05:47:57 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Date: Tue, 17 Apr 2012 14:47:42 +0200
-Message-Id: <1334666866-24955-3-git-send-email-koen@dominion.thruhere.net>
+Date: Tue, 17 Apr 2012 14:47:43 +0200
+Message-Id: <1334666866-24955-4-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.2.5
 In-Reply-To: <1334666866-24955-1-git-send-email-koen@dominion.thruhere.net>
 References: <1334666866-24955-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQkkNU3JTb1CdsX9At8qjUWDqG1CDVi7+ma8jQkM7UFH2i2NNIT7ejrUSzTrKugrYSHros4x
+X-Gm-Message-State: ALoCoQlG8vpnJQQD1olct0SPJ2sG0WYzptheDLmr5Mh61Pv6HWaeTCPxifWB6ZdX9/oOCKbJH2F8
 Cc: denys@ti.com
-Subject: [PATCH v2 3/7] beaglebone-capes: userspace support for capes
+Subject: [PATCH v2 4/7] am33x-cm3: add firmware for am33x suspend/resume
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,82 +43,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Apr 2012 12:47:57 -0000
-
-Not everything can be done inside the kernel yet, so have a script that does the userspace portion.
-Only the LCD3 cape is supported currently, more will follow later.
+X-List-Received-Date: Tue, 17 Apr 2012 12:48:01 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- recipes-ti/beagleboard/beaglebone-capes.bb         |   23 ++++++++++++++++++++
- .../beagleboard/beaglebone-capes/cape.service      |    8 +++++++
- recipes-ti/beagleboard/beaglebone-capes/cape.sh    |   12 ++++++++++
- 3 files changed, 43 insertions(+), 0 deletions(-)
- create mode 100644 recipes-ti/beagleboard/beaglebone-capes.bb
- create mode 100644 recipes-ti/beagleboard/beaglebone-capes/cape.service
- create mode 100755 recipes-ti/beagleboard/beaglebone-capes/cape.sh
+ recipes-bsp/ti/am33x-cm3_git.bb |   23 +++++++++++++++++++++++
+ 1 files changed, 23 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-bsp/ti/am33x-cm3_git.bb
 
-diff --git a/recipes-ti/beagleboard/beaglebone-capes.bb b/recipes-ti/beagleboard/beaglebone-capes.bb
+diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
 new file mode 100644
-index 0000000..88d4a17
+index 0000000..247ba4d
 --- /dev/null
-+++ b/recipes-ti/beagleboard/beaglebone-capes.bb
++++ b/recipes-bsp/ti/am33x-cm3_git.bb
 @@ -0,0 +1,23 @@
-+DESCRIPTION = "Userspace setup for beaglebone capes"
++DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
++LICENSE = "TI-BSD"
++LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
 +
-+inherit allarch
++PV = "04.06.00.07"
++SRCREV = "cf07b841d6e8c5e026eecb259d143f3dff412c8e"
 +
-+SRC_URI = "file://cape.service \
-+           file://cape.sh \
-+          "
++SRC_URI = "git://arago-project.org/git/projects/am33x-cm3.git"
 +
-+do_install() {
-+	install -d ${D}${base_libdir}/systemd/system/
-+	install -m 0644 ${WORKDIR}/cape.service ${D}${base_libdir}/systemd/system
++S = "${WORKDIR}/git"
 +
-+	install -d ${D}${base_libdir}/systemd/system/basic.target.wants
-+	ln -sf ../cape.service ${D}${base_libdir}/systemd/system/basic.target.wants/
-+
-+	install -d ${D}${bindir}
-+	install -m 0755 ${WORKDIR}/cape.sh ${D}${bindir}
++do_compile() {
++	make CC="${TARGET_CC}" CROSS_COMPILE="${TARGET_PREFIX}"
 +}
 +
-+FILES_${PN} += "${base_libdir}/systemd/system"
-diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape.service b/recipes-ti/beagleboard/beaglebone-capes/cape.service
-new file mode 100644
-index 0000000..44a2a38
---- /dev/null
-+++ b/recipes-ti/beagleboard/beaglebone-capes/cape.service
-@@ -0,0 +1,8 @@
-+[Unit]
-+Description=Beaglebone cape support
++do_install() {
++	install -d ${D}${base_libdir}/firmware
++	install -m 0644 bin/am335x-pm-firmware.bin ${D}${base_libdir}/firmware/
++}
 +
-+[Service]
-+ExecStart=/usr/bin/cape.sh
++FILES_${PN} = "${base_libdir}/firmware"
 +
-+[Install]
-+WantedBy=basic.target
-diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape.sh b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-new file mode 100755
-index 0000000..69accff
---- /dev/null
-+++ b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-@@ -0,0 +1,12 @@
-+#!/bin/sh
-+for eeprom in /sys/bus/i2c/devices/3-005*/eeprom ; do
-+	PARTNUMBER=$(hexdump -e '8/1 "%c"' $eeprom -s 58 -n16)
-+	case $PARTNUMBER in
-+		"BB-BONE-LCD3-01.")
-+				echo "Turning on backlight for LCD3 cape"
-+				i2cset -f -y 1 0x24 0x07 0x09
-+				i2cset -f -y 1 0x24 0x08 0x60;;
-+		*)
-+				echo "unknown cape: $PARTNUMBER";;
-+	esac
-+done
 -- 
 1.7.2.5
 
