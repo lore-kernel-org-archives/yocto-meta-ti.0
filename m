@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BCEF1E01404
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0B85E0140E
 	for <meta-ti@yoctoproject.org>; Wed, 18 Apr 2012 10:20:30 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A9E6252A38; Wed, 18 Apr 2012 17:20:28 +0000 (UTC)
+	id 277E952975; Wed, 18 Apr 2012 17:20:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120418172028.A9E6252A38@arago-project.org>
+Message-Id: <20120418172029.277E952975@arago-project.org>
 Date: Wed, 18 Apr 2012 17:20:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux 3.0: update to 3.0.28
+Subject: Koen Kooi : libgles-omap3: fix RRECOMMENDS
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,54 +26,52 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 3a441d63e9ffddcb20615610c6d176230cdc90d0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3a441d63e9ffddcb20615610c6d176230cdc90d0
+Commit: 41053c22a786de9026b85b125554eea55d381a39
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=41053c22a786de9026b85b125554eea55d381a39
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Tue Apr 17 14:47:40 2012 +0200
+Date:   Tue Apr 17 14:47:41 2012 +0200
 
-linux 3.0: update to 3.0.28
+libgles-omap3: fix RRECOMMENDS
 
-Runtime tested on Angstrom/beagleboard-xM
+The modules assignment overwrote the previous ones, leading to missing libraries.
+
+Before:
+	 Package: libgles-omap3
+	 Recommends: omap3-sgx-modules
+After:
+	 Package: libgles-omap3
+	 Recommends: omap3-sgx-modules, libgles-omap3-es8, libgles-omap3-es6, libgles-omap3-es5, libgles-omap3-es3, libgles-omap3-es2
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/omap3.inc    |    2 +-
- recipes-kernel/linux/linux_3.0.bb |    6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-graphics/libgles/libgles-omap3.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 16078db..9903856 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r118"
-+MACHINE_KERNEL_PR = "r119"
+diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
+index 69254c1..fbd931f 100644
+--- a/recipes-graphics/libgles/libgles-omap3.inc
++++ b/recipes-graphics/libgles/libgles-omap3.inc
+@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
+ # 'TSPA.txt' might not be the best file to md5sum
+ LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
  
- KERNEL_IMAGETYPE = "uImage"
+-PR = "r25"
++PR = "r26"
  
-diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
-index a817c1d..522a87d 100644
---- a/recipes-kernel/linux/linux_3.0.bb
-+++ b/recipes-kernel/linux/linux_3.0.bb
-@@ -5,9 +5,9 @@ KERNEL_IMAGETYPE = "uImage"
+ COMPATIBLE_MACHINE = "(omap3|ti816x|ti33x)"
  
- COMPATIBLE_MACHINE = "(beagleboard)"
+@@ -320,7 +320,7 @@ FILES_${PN}-x11trainingcourses = "${bindir}/SGX/trainingcourses/X11/*"
+ RRECOMMENDS_${PN}-x11trainingcourses = "${PN}-x11wsegl"
  
--PV = "3.0.25"
--# v3.0.25 tag
--SRCREV_pn-${PN} = "9bf176a3e029ae7f2dc6feae185091525a988be2"
-+PV = "3.0.28"
-+# v3.0.28 tag
-+SRCREV_pn-${PN} = "0527fde0639955203ad48a9fd83bd6fc35e82e07"
+ # The libs need the kernel-modules
+-RRECOMMENDS_${PN} = "omap3-sgx-modules"
++RRECOMMENDS_${PN} += "omap3-sgx-modules"
  
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
- MACHINE_KERNEL_PR_append = "a"
+ # The initscript calls fbset, cputype calls devmem2
+ RDEPENDS_${PN} += "fbset devmem2"
 
 
