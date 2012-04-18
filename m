@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BBB4CE013FB
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BE3C8E01405
 	for <meta-ti@yoctoproject.org>; Wed, 18 Apr 2012 10:20:30 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 405EB529A0; Wed, 18 Apr 2012 17:20:29 +0000 (UTC)
+	id 88EC852A93; Wed, 18 Apr 2012 17:20:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120418172029.405EB529A0@arago-project.org>
+Message-Id: <20120418172029.88EC852A93@arago-project.org>
 Date: Wed, 18 Apr 2012 17:20:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : beaglebone-capes: userspace support for capes
+Subject: Koen Kooi : am33x-cm3: add firmware for am33x suspend/resume
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,87 +26,50 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: f026aa7bd09a75034b28a0aa7e750059fd2c2813
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f026aa7bd09a75034b28a0aa7e750059fd2c2813
+Commit: 62e713b1b309e9e38e2de288da8470f10c61fbc3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=62e713b1b309e9e38e2de288da8470f10c61fbc3
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Tue Apr 17 14:47:42 2012 +0200
+Date:   Tue Apr 17 14:47:43 2012 +0200
 
-beaglebone-capes: userspace support for capes
-
-Not everything can be done inside the kernel yet, so have a script that does the userspace portion.
-Only the LCD3 cape is supported currently, more will follow later.
+am33x-cm3: add firmware for am33x suspend/resume
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/beagleboard/beaglebone-capes.bb         |   23 ++++++++++++++++++++
- .../beagleboard/beaglebone-capes/cape.service      |    8 +++++++
- recipes-ti/beagleboard/beaglebone-capes/cape.sh    |   12 ++++++++++
- 3 files changed, 43 insertions(+), 0 deletions(-)
+ recipes-bsp/ti/am33x-cm3_git.bb |   23 +++++++++++++++++++++++
+ 1 files changed, 23 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/beagleboard/beaglebone-capes.bb b/recipes-ti/beagleboard/beaglebone-capes.bb
+diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
 new file mode 100644
-index 0000000..88d4a17
+index 0000000..247ba4d
 --- /dev/null
-+++ b/recipes-ti/beagleboard/beaglebone-capes.bb
++++ b/recipes-bsp/ti/am33x-cm3_git.bb
 @@ -0,0 +1,23 @@
-+DESCRIPTION = "Userspace setup for beaglebone capes"
++DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
++LICENSE = "TI-BSD"
++LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
 +
-+inherit allarch
++PV = "04.06.00.07"
++SRCREV = "cf07b841d6e8c5e026eecb259d143f3dff412c8e"
 +
-+SRC_URI = "file://cape.service \
-+           file://cape.sh \
-+          "
++SRC_URI = "git://arago-project.org/git/projects/am33x-cm3.git"
 +
-+do_install() {
-+	install -d ${D}${base_libdir}/systemd/system/
-+	install -m 0644 ${WORKDIR}/cape.service ${D}${base_libdir}/systemd/system
++S = "${WORKDIR}/git"
 +
-+	install -d ${D}${base_libdir}/systemd/system/basic.target.wants
-+	ln -sf ../cape.service ${D}${base_libdir}/systemd/system/basic.target.wants/
-+
-+	install -d ${D}${bindir}
-+	install -m 0755 ${WORKDIR}/cape.sh ${D}${bindir}
++do_compile() {
++	make CC="${TARGET_CC}" CROSS_COMPILE="${TARGET_PREFIX}"
 +}
 +
-+FILES_${PN} += "${base_libdir}/systemd/system"
-diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape.service b/recipes-ti/beagleboard/beaglebone-capes/cape.service
-new file mode 100644
-index 0000000..44a2a38
---- /dev/null
-+++ b/recipes-ti/beagleboard/beaglebone-capes/cape.service
-@@ -0,0 +1,8 @@
-+[Unit]
-+Description=Beaglebone cape support
++do_install() {
++	install -d ${D}${base_libdir}/firmware
++	install -m 0644 bin/am335x-pm-firmware.bin ${D}${base_libdir}/firmware/
++}
 +
-+[Service]
-+ExecStart=/usr/bin/cape.sh
++FILES_${PN} = "${base_libdir}/firmware"
 +
-+[Install]
-+WantedBy=basic.target
-diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape.sh b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-new file mode 100755
-index 0000000..69accff
---- /dev/null
-+++ b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-@@ -0,0 +1,12 @@
-+#!/bin/sh
-+for eeprom in /sys/bus/i2c/devices/3-005*/eeprom ; do
-+	PARTNUMBER=$(hexdump -e '8/1 "%c"' $eeprom -s 58 -n16)
-+	case $PARTNUMBER in
-+		"BB-BONE-LCD3-01.")
-+				echo "Turning on backlight for LCD3 cape"
-+				i2cset -f -y 1 0x24 0x07 0x09
-+				i2cset -f -y 1 0x24 0x08 0x60;;
-+		*)
-+				echo "unknown cape: $PARTNUMBER";;
-+	esac
-+done
 
 
