@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0B85E0140E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BF760E01408
 	for <meta-ti@yoctoproject.org>; Wed, 18 Apr 2012 10:20:30 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 277E952975; Wed, 18 Apr 2012 17:20:28 +0000 (UTC)
+	id 3C45F52AA1; Wed, 18 Apr 2012 17:20:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120418172029.277E952975@arago-project.org>
-Date: Wed, 18 Apr 2012 17:20:28 +0000 (UTC)
+Message-Id: <20120418172030.3C45F52AA1@arago-project.org>
+Date: Wed, 18 Apr 2012 17:20:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : libgles-omap3: fix RRECOMMENDS
+Subject: Koen Kooi : linux-ti33x-psp 3.2: rebase onto latest PSP
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,52 +26,79 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 41053c22a786de9026b85b125554eea55d381a39
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=41053c22a786de9026b85b125554eea55d381a39
+Commit: 415f8b2c33cc3a7d2856fa0c6063f30fcbdad442
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=415f8b2c33cc3a7d2856fa0c6063f30fcbdad442
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Tue Apr 17 14:47:41 2012 +0200
+Date:   Tue Apr 17 14:47:44 2012 +0200
 
-libgles-omap3: fix RRECOMMENDS
+linux-ti33x-psp 3.2: rebase onto latest PSP
 
-The modules assignment overwrote the previous ones, leading to missing libraries.
+This fixes most PM operations: cpufreq, cpuidle and suspend. Resume does not
+work on beaglebone, but 3 out of 4 ain't bad :)
 
-Before:
-	 Package: libgles-omap3
-	 Recommends: omap3-sgx-modules
-After:
-	 Package: libgles-omap3
-	 Recommends: omap3-sgx-modules, libgles-omap3-es8, libgles-omap3-es6, libgles-omap3-es5, libgles-omap3-es3, libgles-omap3-es2
+The M3 firmware needed for suspend/resume is used as a binary, building it
+from source and including it from sysroots is planned for future commits.
+
+Beaglebone patches have been forward ported and runtime tested.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-graphics/libgles/libgles-omap3.inc |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/include/ti33x.inc                     |    2 +-
+ ...AP-correct-SYSC-register-offset-for-OMAP4.patch |   34 --------
+ ...new-UV2-hardware-by-using-native-UV2-bro.patch} |    6 +-
+ ...x-BAU-destination-timeout-initialization.patch} |    6 +-
+ ...atch => 0115-x86-UV2-Work-around-BAU-bug.patch} |    6 +-
+ ...ix-interpretation-of-the-rx-KeyMiss-flag.patch} |    6 +-
+ ...00pci-fix-spurious-interrupts-generation.patch} |    6 +-
+ ...-endian-conversion-issue-in-discard-code.patch} |    6 +-
+ ...0t-modified-the-setting-of-transfer-rate.patch} |    6 +-
+ ...-fix-off-by-one-index-into-syscall-table.patch} |    6 +-
+ ...efault-wsize-when-unix-extensions-are-no.patch} |    6 +-
+ ...-kprobes-initialize-before-using-a-hlist.patch} |    6 +-
+ ...c-clear_refs-do-not-clear-reserved-pages.patch} |    6 +-
+ ...ptr-dereference-in-__count_immobile_page.patch} |    6 +-
+ ...patch => 0125-iwlagn-check-for-SMPS-mode.patch} |    6 +-
+ ...45-fix-hw-passive-scan-on-radar-channels.patch} |    6 +-
+ ...HM_UNLOCK-fix-long-unpreemptible-section.patch} |    8 +-
+ ...ix-Unevictable-pages-stranded-after-swap.patch} |    6 +-
+ ...30-Linux-3.2.2.patch => 0129-Linux-3.2.2.patch} |    6 +-
+ .../linux-ti33x-psp-3.2/am335x-pm-firmware.bin     |  Bin 0 -> 10732 bytes
+ ...1-f_rndis-HACK-around-undefined-variables.patch |    6 +-
+ ...2-da8xx-fb-add-DVI-support-for-beaglebone.patch |   10 +-
+ ...rebase-everything-onto-3.2-WARNING-MEGAPA.patch |   63 +++++++++-------
+ .../beaglebone/0004-more-beaglebone-merges.patch   |   48 ++++--------
+ .../beaglebone/0005-beaglebone-disable-tsadc.patch |   12 ++--
+ ...general-purpose-mode-untested-with-touchs.patch |   67 ++++++++---------
+ ...dc-Add-board-file-mfd-support-fix-warning.patch |   14 ++--
+ ...AM335X-init-tsc-bone-style-for-new-boards.patch |   10 +-
+ ...cadc-make-stepconfig-channel-configurable.patch |   14 ++--
+ .../0010-tscadc-Trigger-through-sysfs.patch        |   28 ++++---
+ ...meta-ti-Remove-debug-messages-for-meta-ti.patch |   10 +-
+ ...c-switch-to-polling-instead-of-interrupts.patch |   14 ++--
+ .../beaglebone/0013-beaglebone-fix-ADC-init.patch  |   16 ++--
+ .../beaglebone/0014-AM335x-MUX-add-ehrpwm1A.patch  |    8 +-
+ ...enable-PWM-for-lcd-backlight-backlight-is.patch |   80 +++----------------
+ ...Set-dto-to-max-value-of-14-to-avoid-SD-Ca.patch |   14 ++--
+ ...set-default-brightness-to-50-for-pwm-back.patch |   12 ++--
+ ...P-framebuffer-driver-supporting-Adafruit-.patch |    6 +-
+ ...019-beaglebone-use-P8_6-gpio1_3-as-w1-bus.patch |   20 +++---
+ ...add-support-for-Towertech-TT3201-CAN-cape.patch |   20 +++---
+ ...am33xx-fix-serial-mux-warnings-for-am33xx.patch |   40 ----------
+ ...dd-more-beagleboardtoys-cape-partnumbers.patch} |   12 ++--
+ ...MAP2-am335x-correct-McASP0-pin-mux-detail.patch |   29 -------
+ ...dd-gpio-keys-for-lcd7-add-notes-for-miss.patch} |   19 +++--
+ ...3-beaglebone-add-enter-key-for-lcd7-cape.patch} |   14 ++--
+ ...=> 0024-beaglebone-add-gpio-keys-for-lcd.patch} |   14 ++--
+ ...25-beaglebone-fix-direction-of-gpio-keys.patch} |   30 ++++----
+ ...0026-beaglebone-fix-3.5-lcd-cape-support.patch} |   20 +++---
+ .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |   30 +++++---
+ recipes-kernel/linux/linux-ti33x-psp-3.2/patch.sh  |    7 +-
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |   56 +++++++-------
+ 51 files changed, 364 insertions(+), 519 deletions(-)
 
-diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-index 69254c1..fbd931f 100644
---- a/recipes-graphics/libgles/libgles-omap3.inc
-+++ b/recipes-graphics/libgles/libgles-omap3.inc
-@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum
- LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
- 
--PR = "r25"
-+PR = "r26"
- 
- COMPATIBLE_MACHINE = "(omap3|ti816x|ti33x)"
- 
-@@ -320,7 +320,7 @@ FILES_${PN}-x11trainingcourses = "${bindir}/SGX/trainingcourses/X11/*"
- RRECOMMENDS_${PN}-x11trainingcourses = "${PN}-x11wsegl"
- 
- # The libs need the kernel-modules
--RRECOMMENDS_${PN} = "omap3-sgx-modules"
-+RRECOMMENDS_${PN} += "omap3-sgx-modules"
- 
- # The initscript calls fbset, cputype calls devmem2
- RDEPENDS_${PN} += "fbset devmem2"
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=415f8b2c33cc3a7d2856fa0c6063f30fcbdad442
 
