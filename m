@@ -1,15 +1,34 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3DA06E013A8
-	for <meta-ti@yoctoproject.org>; Wed, 18 Apr 2012 10:31:30 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id B928D52A38; Wed, 18 Apr 2012 17:31:29 +0000 (UTC)
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E73F5E013A6
+	for <meta-ti@yoctoproject.org>; Thu, 19 Apr 2012 08:33:41 -0700 (PDT)
+Received: by wibhm17 with SMTP id hm17so1641678wib.11
+	for <meta-ti@yoctoproject.org>; Thu, 19 Apr 2012 08:33:40 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=TwTIcZUyRhWqtQjFu5yTaqCqD0YsdTm2QSUw598AC7M=;
+	b=Ql9q9MG7lOgmoRQg5xnVgv3PbzaEQc8gjlX3FrjlRfya9vJ+VUOhB4Gfyv2HA34WI2
+	UCCyQeCZaZR8abm81UIolOFXsgYImDiW+Ru3sCYd27yMOAJT2vw3FdfA2xWuyGA3S982
+	fuJiPdO1OJmHCzXweTfSp3jizRo+zrRn/0+2e6BY3KbByh47lFXzq4R6H1TUdJ+VA7fA
+	3ld2aHPtVKr+GSwQo6B3n5oDnIU7IE4EICbUjjhMiRYi5Ll6qAH83D62O9e9h5E7ENud
+	uA0RV4fxKqgEzh7oLILMQaAOk2SldS2ALnYRKvPJdj+URLCEkZAjFBEkfsABkE5fZp4+
+	mPlA==
+Received: by 10.180.91.10 with SMTP id ca10mr26916961wib.17.1334849620609;
+	Thu, 19 Apr 2012 08:33:40 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id k6sm42949501wie.9.2012.04.19.08.33.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 19 Apr 2012 08:33:39 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Message-Id: <20120418173129.B928D52A38@arago-project.org>
-Date: Wed, 18 Apr 2012 17:31:29 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : omap4.inc: change to require tune-cortexa9.inc
+Date: Thu, 19 Apr 2012 17:33:33 +0200
+Message-Id: <1334849614-12816-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.2.5
+X-Gm-Message-State: ALoCoQm5UFhNXRgKfcoj4hB76rDQQmO8lymhux0YZbWe+W3Ookpgreb+23BdlrM/qjCn1rZRWTMZ
+Cc: denys@ti.com
+Subject: [PATCH 1/2] cloud9-gnome-image: same as cloud9-image, but with GNOME added to it
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,45 +40,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2012 17:31:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 19 Apr 2012 15:33:42 -0000
 
-Module: meta-ti
-Branch: master
-Commit: bb6f1bad7fce0e9217b1747138bc71de354b3a79
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bb6f1bad7fce0e9217b1747138bc71de354b3a79
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Apr 18 13:28:17 2012 -0400
-
-omap4.inc: change to require tune-cortexa9.inc
-
-As reported by Eric Bénard
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
+ recipes-misc/images/cloud9-gnome-image.bb |   19 +++++++++++++++++++
+ 1 files changed, 19 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-misc/images/cloud9-gnome-image.bb
 
- conf/machine/include/omap4.inc |    3 +--
- 1 files changed, 1 insertions(+), 2 deletions(-)
-
-diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
-index a295352..96eaae7 100644
---- a/conf/machine/include/omap4.inc
-+++ b/conf/machine/include/omap4.inc
-@@ -1,7 +1,7 @@
- SOC_FAMILY = "omap4"
- require conf/machine/include/soc-family.inc
- 
--require conf/machine/include/tune-cortexa8.inc
-+require conf/machine/include/tune-cortexa9.inc
- 
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap4"
- PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-@@ -23,4 +23,3 @@ UBOOT_ENTRYPOINT = "0x80008000"
- UBOOT_LOADADDRESS = "0x80008000"
- 
- EXTRA_IMAGEDEPENDS += "u-boot"
--
+diff --git a/recipes-misc/images/cloud9-gnome-image.bb b/recipes-misc/images/cloud9-gnome-image.bb
+new file mode 100644
+index 0000000..13638d7
+--- /dev/null
++++ b/recipes-misc/images/cloud9-gnome-image.bb
+@@ -0,0 +1,19 @@
++# Image with cloud9 ide, gfx and hw tools installed
++
++require cloud9-image.bb
++
++# SoC specific packages, mostly 3D or multimedia related
++SOCSUPPORT = ""
++SOCSUPPORT_omap3 = "xbmc libgles-omap3-x11demos gstreamer-ti omapfbplay"
++SOCSUPPORT_ti33x = "xbmc libgles-omap3-x11demos gst-ffmpeg mplayer2 beaglebone-capes"
++
++IMAGE_INSTALL += " \
++                  angstrom-task-gnome gimp abiword gedit midori epiphany firefox matchbox-terminal \
++                  ${SOCSUPPORT} \
++                  ttf-dejavu-sans ttf-dejavu-sans-mono ttf-dejavu-common \
++                  xinput-calibrator \
++                  xterm \
++                 "
++
++export IMAGE_BASENAME = "Cloud9-IDE-GNOME"
++
+-- 
+1.7.2.5
 
 
