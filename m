@@ -1,37 +1,35 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B3E8E01400
-	for <meta-ti@yoctoproject.org>; Thu, 19 Apr 2012 08:33:43 -0700 (PDT)
-Received: by wibhr14 with SMTP id hr14so1652932wib.11
-	for <meta-ti@yoctoproject.org>; Thu, 19 Apr 2012 08:33:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:x-gm-message-state;
-	bh=tMVAGogqFnoDWPK/TcoRuffbMsFgJS+bF6jA7FzwZlA=;
-	b=h/Sik0YwmM5P+U3CiGk92L9hSrzKv8SJ3DV/5mAA5U2bJVDAPjKDztuFqoCQSryiNL
-	ATHD3ACYpG3mnQNqg4tDltXx2+NEgAIVZb5RmypjXy6kaFOwI2vrmOtWR9kFvCr6IDh2
-	j9VS/6f5k3XAPXwdLALKfltS+bfIhtiVdKsvhk78PWZvKEqDArMUacTYkltZZjoSzuZ4
-	HxY0fyquYag9/QPrlBStXtm87NNM7xd5NIgb6Gk/cEc2LZAVGIBlpVY7ZFgfTVVQppqX
-	imVPaSJh3/kTWFMqJ4yDTcvTdnhwhBlnffOAbEGBXWjs+izFEA6g4/AOkCQRehP3wySn
-	u4XQ==
-Received: by 10.180.85.135 with SMTP id h7mr7689461wiz.0.1334849622578;
-	Thu, 19 Apr 2012 08:33:42 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id gg2sm9416576wib.7.2012.04.19.08.33.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 19 Apr 2012 08:33:41 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: meta-ti@yoctoproject.org
-Date: Thu, 19 Apr 2012 17:33:34 +0200
-Message-Id: <1334849614-12816-2-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.2.5
-In-Reply-To: <1334849614-12816-1-git-send-email-koen@dominion.thruhere.net>
-References: <1334849614-12816-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQkl69jti0rsqHho9MtAnFIruXA797nCLDDle0tkJuqgg6pFm0m50zH0We7w8fo6XvYK+CMy
-Cc: denys@ti.com
-Subject: [PATCH 2/2] linux-ti33x-psp 3.2: fix VGA cape detection for beaglebone
+Return-Path: <mounir.bzeouich@groupe-telnet.net>
+Received: from smtp1.acropolistelecom.net (smtp1.acropolistelecom.net
+	[217.64.48.95])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76459E013E8
+	for <meta-ti@yoctoproject.org>; Thu, 19 Apr 2012 00:41:45 -0700 (PDT)
+Received: from helium.mail.telnet.tunis
+	(147.59-64-217.rdns.acropolistelecom.net [217.64.59.147])
+	by smtp1.acropolistelecom.net (Postfix) with ESMTP id 99FA744769
+	for <meta-ti@yoctoproject.org>; Thu, 19 Apr 2012 09:41:42 +0200 (CEST)
+Received: from oxygen.mail.telnet.tunis ([192.168.1.25]) by
+	helium.mail.telnet.tunis with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 19 Apr 2012 09:41:41 +0200
+Received: from xenon.mail.telnet.tunis ([192.168.7.25]) by
+	oxygen.mail.telnet.tunis with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 19 Apr 2012 08:41:23 +0100
+Received: from xenon.mail.telnet.tunis ([::1]) by XENON.mail.telnet.tunis
+	([::1]) with mapi; Thu, 19 Apr 2012 08:41:22 +0100
+From: Mounir Bzeouich <mounir.bzeouich@groupe-telnet.net>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Date: Thu, 19 Apr 2012 08:41:20 +0100
+Thread-Topic: Using meta-ti and openembedded
+Thread-Index: Ac0d/8/Vz1g6MPTMQwC6lZIgpd9Itg==
+Message-ID: <6137DDD030B8CE43975A78BDDEB3F1F81A78F99705@XENON.mail.telnet.tunis>
+Accept-Language: fr-FR
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: fr-FR
+MIME-Version: 1.0
+X-OriginalArrivalTime: 19 Apr 2012 07:41:23.0464 (UTC)
+	FILETIME=[D1A3A080:01CD1DFF]
+X-Mailman-Approved-At: Thu, 19 Apr 2012 10:18:27 -0700
+Subject: Using meta-ti and openembedded
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,67 +41,116 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Apr 2012 15:33:44 -0000
+X-List-Received-Date: Thu, 19 Apr 2012 07:41:45 -0000
+Content-Language: fr-FR
+Content-Type: multipart/alternative;
+	boundary="_000_6137DDD030B8CE43975A78BDDEB3F1F81A78F99705XENONmailteln_"
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- ...don-t-compare-undefined-characters-it-mak.patch |   26 ++++++++++++++++++++
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    3 +-
- 2 files changed, 28 insertions(+), 1 deletions(-)
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0030-beaglebone-don-t-compare-undefined-characters-it-mak.patch
+--_000_6137DDD030B8CE43975A78BDDEB3F1F81A78F99705XENONmailteln_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0030-beaglebone-don-t-compare-undefined-characters-it-mak.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0030-beaglebone-don-t-compare-undefined-characters-it-mak.patch
-new file mode 100644
-index 0000000..48e8c53
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0030-beaglebone-don-t-compare-undefined-characters-it-mak.patch
-@@ -0,0 +1,26 @@
-+From 6e14ab85bd71ec3831169d665c4e79f646a60df8 Mon Sep 17 00:00:00 2001
-+From: Koen Kooi <koen@dominion.thruhere.net>
-+Date: Thu, 19 Apr 2012 07:55:55 +0200
-+Subject: [PATCH 30/30] beaglebone: don't compare undefined characters, it makes strncomp fail
-+
-+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-+---
-+ arch/arm/mach-omap2/board-am335xevm.c |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/arch/arm/mach-omap2/board-am335xevm.c b/arch/arm/mach-omap2/board-am335xevm.c
-+index bfcccd9..08a0425 100644
-+--- a/arch/arm/mach-omap2/board-am335xevm.c
-++++ b/arch/arm/mach-omap2/board-am335xevm.c
-+@@ -2152,7 +2152,7 @@ static void beaglebone_cape_setup(struct memory_accessor *mem_acc, void *context
-+ 		beaglebone_lcd3_keys_init(0,0);
-+ 	}
-+ 	
-+-	if (!strncmp("BB-BONE-VGA-01", cape_config.partnumber, 15)) {
-++	if (!strncmp("BB-BONE-VGA-01", cape_config.partnumber, 14)) {
-+ 		pr_info("BeagleBone cape: initializing VGA cape\n");
-+ 		dvi_init(0,0);
-+ 	}
-+-- 
-+1.7.2.5
-+
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index d3a2f2e..f560a1d 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -12,7 +12,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
- 
- BRANCH = "v3.2-staging"
- SRCREV = "e8004dad869568692ca2a45c04e8464ce48cc4d7"
--MACHINE_KERNEL_PR_append = "c+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCREV}"
- 
- COMPATIBLE_MACHINE = "(ti33x)"
- 
-@@ -825,4 +825,5 @@ PATCHES_OVER_PSP = " \
- 	file://beaglebone/0027-beaglebone-decrease-PWM-frequency-to-old-value-LCD7-.patch \
- 	file://beaglebone/0028-beaglebone-fix-ehrpwm-backlight.patch \
- 	file://beaglebone/0029-beaglebone-also-report-cape-revision.patch \
-+	file://beaglebone/0030-beaglebone-don-t-compare-undefined-characters-it-mak.patch \
- "
--- 
-1.7.2.5
+Dear Mr;
+
+We want to build an angstrom distribution for  AM335x  EVM using openEmbedd=
+ed and meta-ti, which version of bitbake we should use ?
+Did you have a tutorial describing how to integrate meta-ti in standard  Op=
+enEmbedded.
 
 
+
+Best regards;
+
+Mounir BZEOUICH
+Embedded Software Engineer
+Groupe Telnet
+TELNET TECHNOCENTRE
+Les Berges du Lac - 1053 Tunis
+T=E9l. : [+216] 71 860 233 (Ext. 1823)
+Fax : [+216] 71 860 069
+
+
+--_000_6137DDD030B8CE43975A78BDDEB3F1F81A78F99705XENONmailteln_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40"><head><meta http-equiv=3DContent-Type content=
+=3D"text/html; charset=3Diso-8859-1"><meta name=3DGenerator content=3D"Micr=
+osoft Word 12 (filtered medium)"><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+span.apple-converted-space
+	{mso-style-name:apple-converted-space;}
+span.hps
+	{mso-style-name:hps;}
+.MsoChpDefault
+	{mso-style-type:export-only;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:70.85pt 70.85pt 70.85pt 70.85pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]--></head><body lang=3DFR link=3Dblue vlink=
+=3Dpurple><div class=3DWordSection1><p class=3DMsoNormal><span lang=3DEN-US=
+>Dear Mr;<o:p></o:p></span></p><p class=3DMsoNormal><span lang=3DEN-US><o:p=
+>&nbsp;</o:p></span></p><p class=3DMsoNormal><span lang=3DEN-US>We want to =
+build an angstrom distribution for &nbsp;AM335x&nbsp; EVM using openEmbedde=
+d and meta-ti, which version of bitbake we should use ?<o:p></o:p></span></=
+p><p class=3DMsoNormal><span lang=3DEN-US>Did you have&nbsp;a&nbsp;tutorial=
+&nbsp;describing&nbsp;how to integrate&nbsp;meta-ti&nbsp;in</span><span lan=
+g=3DEN-US> </span><span lang=3DEN-US>standard</span><span lang=3DEN-US> =A0=
+</span><span lang=3DEN-US>OpenEmbedded</span>.<o:p></o:p></p><p class=3DMso=
+Normal><span class=3Dapple-converted-space><span lang=3DEN-US style=3D'font=
+-family:"Arial","sans-serif";color:#333333;background:whitesmoke'><o:p>&nbs=
+p;</o:p></span></span></p><p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbs=
+p;</o:p></span></p><p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p=
+></span></p><p class=3DMsoNormal><span lang=3DEN-US>Best regards;<o:p></o:p=
+></span></p><p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p></span=
+></p><p class=3DMsoNormal style=3D'mso-margin-top-alt:auto;mso-margin-botto=
+m-alt:auto'><b><span lang=3DEN-GB style=3D'color:teal'>Mounir BZEOUICH</spa=
+n></b><span lang=3DEN-GB style=3D'font-size:12.0pt;font-family:"Times New R=
+oman","serif"'><o:p></o:p></span></p><p class=3DMsoNormal style=3D'mso-marg=
+in-top-alt:auto;mso-margin-bottom-alt:auto'><span lang=3DEN-GB style=3D'col=
+or:navy'>Embedded Software Engineer</span><span lang=3DEN-GB><o:p></o:p></s=
+pan></p><p class=3DMsoNormal style=3D'mso-margin-top-alt:auto;mso-margin-bo=
+ttom-alt:auto'><span lang=3DEN-GB>Groupe Telnet&nbsp;<o:p></o:p></span></p>=
+<p class=3DMsoNormal style=3D'mso-margin-top-alt:auto;mso-margin-bottom-alt=
+:auto'><span style=3D'color:#333399'>TELNET TECHNOCENTRE<o:p></o:p></span><=
+/p><p class=3DMsoNormal style=3D'mso-margin-top-alt:auto;mso-margin-bottom-=
+alt:auto'><span style=3D'color:navy'>Les Berges du Lac - 1053 Tunis</span><=
+o:p></o:p></p><p class=3DMsoNormal style=3D'mso-margin-top-alt:auto;mso-mar=
+gin-bottom-alt:auto'><span style=3D'color:navy'>T=E9l. : [+216] 71 860 233 =
+(Ext. 1823)<o:p></o:p></span></p><p class=3DMsoNormal style=3D'mso-margin-t=
+op-alt:auto;mso-margin-bottom-alt:auto'><span style=3D'color:navy'>Fax : [+=
+216] 71 860 069</span><o:p></o:p></p><p class=3DMsoNormal><o:p>&nbsp;</o:p>=
+</p></div></body></html>=
+
+--_000_6137DDD030B8CE43975A78BDDEB3F1F81A78F99705XENONmailteln_--
