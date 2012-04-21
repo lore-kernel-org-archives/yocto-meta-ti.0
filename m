@@ -1,42 +1,15 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
-	[209.85.214.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CBDB0E011D1
-	for <meta-ti@yoctoproject.org>; Fri, 20 Apr 2012 06:47:37 -0700 (PDT)
-Received: by bkcji17 with SMTP id ji17so10870583bkc.35
-	for <meta-ti@yoctoproject.org>; Fri, 20 Apr 2012 06:47:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:x-enigmail-version:content-type
-	:content-transfer-encoding:x-gm-message-state;
-	bh=YyiBpwv6B0OOAlLfmD6V/d0pLXYilzLm9xzlnCxyXPk=;
-	b=dP/IHEn3g4UTO2V9UrJFqRzK2FChfyTU5EEdotrfnSE8XMe39Zq+9ggSDYX+OV3rSB
-	VUiRPkmdtVSkEqaJMN0nEP8JP0W8ptkh/3d4pDIjkvAs09fBcQiYUILWXAPbhRqga1AL
-	AcxjmlpimTUOi4iUZ72r08i4rA+4zAfZH+M5nK2UDJIcUbpLIEGJFeVgD+BwIXbjSYnv
-	jHJg1ANDAf5NYKSJb3mmpjj/V1At00QYpq8dUpX5nI3TNPJWNzvn9PypRliz6FsOK7jJ
-	aM3mYq+/juCSvu+xQFGKBw+QhjT/c4A1lsf7eL8oPw3N3EXoL/mExfDlIDFV9dyXpPb9
-	h/tA==
-Received: by 10.204.145.81 with SMTP id c17mr2034048bkv.39.1334929656419;
-	Fri, 20 Apr 2012 06:47:36 -0700 (PDT)
-Received: from fensuse.internal.dresearch-fe.de
-	(pd95cb174.dip0.t-ipconnect.de. [217.92.177.116])
-	by mx.google.com with ESMTPS id z17sm10145277bkw.12.2012.04.20.06.47.34
-	(version=SSLv3 cipher=OTHER); Fri, 20 Apr 2012 06:47:35 -0700 (PDT)
-Message-ID: <4F9168F4.50306@dresearch-fe.de>
-Date: Fri, 20 Apr 2012 15:47:32 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:11.0) Gecko/20120328 Thunderbird/11.0.1
-MIME-Version: 1.0
-To: Denys Dmytriyenko <denis@denix.org>, meta-ti@yoctoproject.org
-References: <4F910E4F.9000800@dresearch-fe.de>
-	<20120420132050.GA3783@denix.org>
-In-Reply-To: <20120420132050.GA3783@denix.org>
-X-Enigmail-Version: 1.4
-X-Gm-Message-State: ALoCoQkFpEfwVO0pBOVvOr9COYCURKUFsfeDYTdG2DWu28z3hxVdrHSnhsh15WuUH2BsRLPs4c4G
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: Re: meta-ti layer confusion
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B17F1E013E8
+	for <meta-ti@yoctoproject.org>; Fri, 20 Apr 2012 17:06:29 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 7149652A38; Sat, 21 Apr 2012 00:06:28 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120421000628.7149652A38@arago-project.org>
+Date: Sat, 21 Apr 2012 00:06:28 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Koen Kooi : linux-ti33x-psp 3.2: fix VGA cape detection for beaglebone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,49 +21,78 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2012 13:47:38 -0000
+X-List-Received-Date: Sat, 21 Apr 2012 00:06:29 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-On 20.04.2012 15:20, Denys Dmytriyenko wrote:
-> On Fri, Apr 20, 2012 at 09:20:47AM +0200, Steffen Sledz wrote:
->> Our company is working on a new TI DM814x based hardware currently.
->>
->> That's a really hard job, because the TI linux support is not really "optimal". But that's not the primary cause for my message.
->>
->> [1] lists two TI BSP layers [2],[3] each one claiming to be "The official OpenEmbedded/Yocto BSP layer for Texas Instruments platforms.".
->>
->> A look into them shows that they are not identically. At the moment they differ in two commits ([3] is ahead of [2]). In the last days these differences where much bigger.
->>
->> So what is the intention for these two "offical" layers?
->>
->> Which one should we use? And why?
->>
->> BTW: Is anyone else out there working on a TI DM814x/DM816x hardware?
->>
->> Regards,
->> Steffen
->>
->> [1] <http://www.openembedded.org/wiki/LayerIndex>
->> [2] <http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/>
->> [3] <https://github.com/Angstrom-distribution/meta-ti>
-> 
-> They are the same. Or more appropriately, there is just one official meta-ti 
-> layer, it's just mirrored in several places. The one on yoctoproject.org[2] is 
-> considered the official mirror and that's what you should use. If you are 
-> subscribed to this list, you should have seen Koen posting 2 patches for 
-> review yesterday, which he has staged to his working copy on github[3] - 
-> that's the difference in 2 commits. They shouldn't have been pushed to the 
-> master branch though, until they are accepted...
+Module: meta-ti
+Branch: master
+Commit: 2585c8864b5ba85c9aa1fe81e21e771173125b97
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2585c8864b5ba85c9aa1fe81e21e771173125b97
 
-Why are they both listed in [1]?
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Thu Apr 19 17:33:34 2012 +0200
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+linux-ti33x-psp 3.2: fix VGA cape detection for beaglebone
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ ...don-t-compare-undefined-characters-it-mak.patch |   26 ++++++++++++++++++++
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    3 +-
+ 2 files changed, 28 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0030-beaglebone-don-t-compare-undefined-characters-it-mak.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0030-beaglebone-don-t-compare-undefined-characters-it-mak.patch
+new file mode 100644
+index 0000000..48e8c53
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0030-beaglebone-don-t-compare-undefined-characters-it-mak.patch
+@@ -0,0 +1,26 @@
++From 6e14ab85bd71ec3831169d665c4e79f646a60df8 Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Thu, 19 Apr 2012 07:55:55 +0200
++Subject: [PATCH 30/30] beaglebone: don't compare undefined characters, it makes strncomp fail
++
++Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
++---
++ arch/arm/mach-omap2/board-am335xevm.c |    2 +-
++ 1 files changed, 1 insertions(+), 1 deletions(-)
++
++diff --git a/arch/arm/mach-omap2/board-am335xevm.c b/arch/arm/mach-omap2/board-am335xevm.c
++index bfcccd9..08a0425 100644
++--- a/arch/arm/mach-omap2/board-am335xevm.c
+++++ b/arch/arm/mach-omap2/board-am335xevm.c
++@@ -2152,7 +2152,7 @@ static void beaglebone_cape_setup(struct memory_accessor *mem_acc, void *context
++ 		beaglebone_lcd3_keys_init(0,0);
++ 	}
++ 	
++-	if (!strncmp("BB-BONE-VGA-01", cape_config.partnumber, 15)) {
+++	if (!strncmp("BB-BONE-VGA-01", cape_config.partnumber, 14)) {
++ 		pr_info("BeagleBone cape: initializing VGA cape\n");
++ 		dvi_init(0,0);
++ 	}
++-- 
++1.7.2.5
++
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index d3a2f2e..f560a1d 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -12,7 +12,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
+ 
+ BRANCH = "v3.2-staging"
+ SRCREV = "e8004dad869568692ca2a45c04e8464ce48cc4d7"
+-MACHINE_KERNEL_PR_append = "c+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "d+gitr${SRCREV}"
+ 
+ COMPATIBLE_MACHINE = "(ti33x)"
+ 
+@@ -825,4 +825,5 @@ PATCHES_OVER_PSP = " \
+ 	file://beaglebone/0027-beaglebone-decrease-PWM-frequency-to-old-value-LCD7-.patch \
+ 	file://beaglebone/0028-beaglebone-fix-ehrpwm-backlight.patch \
+ 	file://beaglebone/0029-beaglebone-also-report-cape-revision.patch \
++	file://beaglebone/0030-beaglebone-don-t-compare-undefined-characters-it-mak.patch \
+ "
+
 
