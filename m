@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76AF1E00596
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76ABFE0030B
 	for <meta-ti@yoctoproject.org>; Mon, 23 Apr 2012 12:39:13 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A8CC952090; Mon, 23 Apr 2012 19:39:12 +0000 (UTC)
+	id 8BFC8529DA; Mon, 23 Apr 2012 19:39:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120423193912.A8CC952090@arago-project.org>
+Message-Id: <20120423193912.8BFC8529DA@arago-project.org>
 Date: Mon, 23 Apr 2012 19:39:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : bonescript: update to latest git
+Subject: Koen Kooi : beaglebone-getting-started: updated to latest git
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,48 +26,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: a70dab6fe30ae2f784cb6fe46e612ad378a9fe9c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a70dab6fe30ae2f784cb6fe46e612ad378a9fe9c
+Commit: 2efdf23c6d1743060ef98109e6fe29f6efef8175
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2efdf23c6d1743060ef98109e6fe29f6efef8175
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Sun Apr 22 14:50:06 2012 +0200
+Date:   Sun Apr 22 14:50:05 2012 +0200
 
-bonescript: update to latest git
+beaglebone-getting-started: updated to latest git
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-misc/payload/bonescript.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-misc/payload/beaglebone-getting-started.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-misc/payload/bonescript.bb b/recipes-misc/payload/bonescript.bb
-index b1e92df..72bcab0 100644
---- a/recipes-misc/payload/bonescript.bb
-+++ b/recipes-misc/payload/bonescript.bb
-@@ -1,18 +1,18 @@
- DESCRIPTION = "Scripting tools for the BeagleBoard and BeagleBone"
+diff --git a/recipes-misc/payload/beaglebone-getting-started.bb b/recipes-misc/payload/beaglebone-getting-started.bb
+index 548a9c0..ede7b3c 100644
+--- a/recipes-misc/payload/beaglebone-getting-started.bb
++++ b/recipes-misc/payload/beaglebone-getting-started.bb
+@@ -1,13 +1,13 @@
+ DESCRIPTION = "BeagleBone Getting Started Guide"
  
--PR = "r14"
-+PR = "r15"
+-PR = "r19"
++PR = "r20"
  
- inherit systemd
+ inherit allarch
  
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=659ee0c98db2664403c769d6b9ab50eb"
+ LICENSE = "GPLv2+ & MIT & PD & others"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=603591dea023c3c75b48e07cb47ce639"
  
--SRC_URI = "http://dominion.thruhere.net/koen/angstrom/beaglebone/bonescript-ca0f663083cea4e434864aa276d46ff79d471dff.tar.bz2 \
-+SRC_URI = "http://dominion.thruhere.net/koen/angstrom/beaglebone/bonescript-6af82b41178c37644399b19039ea7e80c1dbf8ee.tar.bz2 \
-            file://bonescript-git \
-            file://bone101.service \
-           "
--SRC_URI[md5sum] = "2b7edd83a752eaf0be0c7488d32c7e72"
--SRC_URI[sha256sum] = "839ee1147b83924f259dc5e373d73eb0eaa6ece76322dc156a6b04113fa89a91"
-+SRC_URI[md5sum] = "e5e214857afbd2e59b52171e60810be2"
-+SRC_URI[sha256sum] = "e703416a63406c8b6c89fb1079406833ce6a9eb0ae1ba0a55fe3802b83186c50"
+-SRCREV = "4750e2bdd29ce037a045149b50ad73906d26999f"
++SRCREV = "7d1f070ab2e981a89db302b1b61e85562b949dac"
+ SRC_URI = "git://github.com/jadonk/beaglebone-getting-started.git"
  
- S = "${WORKDIR}/bonescript"
- 
+ S = "${WORKDIR}/git"
 
 
