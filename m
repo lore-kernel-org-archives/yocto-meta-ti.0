@@ -1,40 +1,15 @@
-Return-Path: <mounir.bzeouich@groupe-telnet.net>
-Received: from smtp1.acropolistelecom.net (smtp1.acropolistelecom.net
-	[217.64.48.95])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A20E1E0030B
-	for <meta-ti@yoctoproject.org>; Fri, 20 Apr 2012 01:09:22 -0700 (PDT)
-Received: from helium.mail.telnet.tunis
-	(147.59-64-217.rdns.acropolistelecom.net [217.64.59.147])
-	by smtp1.acropolistelecom.net (Postfix) with ESMTP id 7A37144491;
-	Fri, 20 Apr 2012 10:09:20 +0200 (CEST)
-Received: from oxygen.mail.telnet.tunis ([192.168.1.25]) by
-	helium.mail.telnet.tunis with Microsoft SMTPSVC(6.0.3790.4675); 
-	Fri, 20 Apr 2012 10:09:19 +0200
-Received: from xenon.mail.telnet.tunis ([192.168.7.25]) by
-	oxygen.mail.telnet.tunis with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 20 Apr 2012 09:09:07 +0100
-Received: from xenon.mail.telnet.tunis ([::1]) by XENON.mail.telnet.tunis
-	([::1]) with mapi; Fri, 20 Apr 2012 09:09:04 +0100
-From: Mounir Bzeouich <mounir.bzeouich@groupe-telnet.net>
-To: "Monk, Roger" <r-monk@ti.com>, Mounir Bzeouich
-	<mounir.bzeouich@groupe-telnet.net>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Date: Fri, 20 Apr 2012 09:07:46 +0100
-Thread-Topic: Using meta-ti and openembedded
-Thread-Index: Ac0d/8/Vz1g6MPTMQwC6lZIgpd9ItgAU9SwQAB4x9IA=
-Message-ID: <6137DDD030B8CE43975A78BDDEB3F1F81A78F9977A@XENON.mail.telnet.tunis>
-References: <6137DDD030B8CE43975A78BDDEB3F1F81A78F99705@XENON.mail.telnet.tunis>
-	<4C82F39BABFE6A429733A300DEBF52240B6F54F2@DNCE05.ent.ti.com>
-In-Reply-To: <4C82F39BABFE6A429733A300DEBF52240B6F54F2@DNCE05.ent.ti.com>
-Accept-Language: fr-FR
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: fr-FR
-MIME-Version: 1.0
-X-OriginalArrivalTime: 20 Apr 2012 08:09:07.0332 (UTC)
-	FILETIME=[DBCB7C40:01CD1ECC]
-X-Mailman-Approved-At: Mon, 23 Apr 2012 12:17:55 -0700
-Subject: Re: Using meta-ti and openembedded
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76AF1E00596
+	for <meta-ti@yoctoproject.org>; Mon, 23 Apr 2012 12:39:13 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id A8CC952090; Mon, 23 Apr 2012 19:39:12 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120423193912.A8CC952090@arago-project.org>
+Date: Mon, 23 Apr 2012 19:39:12 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Koen Kooi : bonescript: update to latest git
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,88 +21,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2012 08:09:22 -0000
-Content-Language: fr-FR
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 23 Apr 2012 19:39:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
+Module: meta-ti
+Branch: master
+Commit: a70dab6fe30ae2f784cb6fe46e612ad378a9fe9c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a70dab6fe30ae2f784cb6fe46e612ad378a9fe9c
 
-Good morning Mr Roger;
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Sun Apr 22 14:50:06 2012 +0200
 
+bonescript: update to latest git
 
-Many thanks for your support.
-have a nice day
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
+---
 
+ recipes-misc/payload/bonescript.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-Mounir BZEOUICH
-Embedded Software Engineer
-Groupe Telnet=A0
-TELNET TECHNOCENTRE
-Les Berges du Lac - 1053 Tunis
-T=E9l. : [+216] 71 860 233 (Ext. 1823)
-Fax : [+216] 71 860 069
-
-
------Message d'origine-----
-De=A0: Monk, Roger [mailto:r-monk@ti.com]=20
-Envoy=E9=A0: jeudi 19 avril 2012 18:43
-=C0=A0: Mounir Bzeouich; meta-ti@yoctoproject.org
-Objet=A0: RE: Using meta-ti and openembedded
-
-On Thu, Apr 19, 2012 at 08:41:20, Mounir Bzeouich wrote:
-> Subject: [meta-ti] Using meta-ti and openembedded
->
-> Dear Mr;
->
->
->
-> We want to build an angstrom distribution for  AM335x  EVM using=20
-> openEmbedded and meta-ti, which version of bitbake we should use ?
->
-> Did you have a tutorial describing how to integrate meta-ti in=20
-> standard OpenEmbedded.
->
->
-
-Hi Mounir,
-
-You should follow instructions at :-
-
-http://www.angstrom-distribution.org/building-angstrom
-
-~roger
-
->
->
->
->
->
-> Best regards;
->
->
->
-> Mounir BZEOUICH
->
-> Embedded Software Engineer
->
-> Groupe Telnet
->
-> TELNET TECHNOCENTRE
->
-> Les Berges du Lac - 1053 Tunis
->
-> T=E9l. : [+216] 71 860 233 (Ext. 1823)
->
-> Fax : [+216] 71 860 069
->
->
-
-
-
-
-Texas Instruments Limited, 800 Pavilion Drive, Northampton, NN4 7YL. Regist=
-ered in England & Wales under company number 00574102
-
+diff --git a/recipes-misc/payload/bonescript.bb b/recipes-misc/payload/bonescript.bb
+index b1e92df..72bcab0 100644
+--- a/recipes-misc/payload/bonescript.bb
++++ b/recipes-misc/payload/bonescript.bb
+@@ -1,18 +1,18 @@
+ DESCRIPTION = "Scripting tools for the BeagleBoard and BeagleBone"
+ 
+-PR = "r14"
++PR = "r15"
+ 
+ inherit systemd
+ 
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=659ee0c98db2664403c769d6b9ab50eb"
+ 
+-SRC_URI = "http://dominion.thruhere.net/koen/angstrom/beaglebone/bonescript-ca0f663083cea4e434864aa276d46ff79d471dff.tar.bz2 \
++SRC_URI = "http://dominion.thruhere.net/koen/angstrom/beaglebone/bonescript-6af82b41178c37644399b19039ea7e80c1dbf8ee.tar.bz2 \
+            file://bonescript-git \
+            file://bone101.service \
+           "
+-SRC_URI[md5sum] = "2b7edd83a752eaf0be0c7488d32c7e72"
+-SRC_URI[sha256sum] = "839ee1147b83924f259dc5e373d73eb0eaa6ece76322dc156a6b04113fa89a91"
++SRC_URI[md5sum] = "e5e214857afbd2e59b52171e60810be2"
++SRC_URI[sha256sum] = "e703416a63406c8b6c89fb1079406833ce6a9eb0ae1ba0a55fe3802b83186c50"
+ 
+ S = "${WORKDIR}/bonescript"
+ 
 
 
