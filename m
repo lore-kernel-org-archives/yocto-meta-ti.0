@@ -1,20 +1,39 @@
-Return-Path: <tf+lists.yocto@r-finger.com>
-Received: from r-finger.com (r-finger.com [178.79.160.5])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF0EEE01206
-	for <meta-ti@yoctoproject.org>; Thu, 26 Apr 2012 13:10:52 -0700 (PDT)
-Received: from [192.168.0.2] (host86-133-47-66.range86-133.btcentralplus.com
-	[86.133.47.66]) (using TLSv1 with cipher AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by r-finger.com (Postfix) with ESMTPSA id 7C7279ADE
-	for <meta-ti@yoctoproject.org>; Thu, 26 Apr 2012 21:10:51 +0100 (BST)
-Message-ID: <4F99ABC7.9080807@r-finger.com>
-Date: Thu, 26 Apr 2012 21:10:47 +0100
-From: Tomas Frydrych <tf+lists.yocto@r-finger.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.3) Gecko/20120329 Icedove/10.0.3
-MIME-Version: 1.0
-To: meta-ti@yoctoproject.org
-Subject: egl on beagleboard xM
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4BF30E00596
+	for <meta-ti@yoctoproject.org>; Thu, 26 Apr 2012 15:40:44 -0700 (PDT)
+Received: by wgbfg15 with SMTP id fg15so101609wgb.11
+	for <meta-ti@yoctoproject.org>; Thu, 26 Apr 2012 15:40:43 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=76VRWBpG4Pxb0PICEJG8a3F3+AKAhHrCeGl4HamWvGU=;
+	b=l6wiS7XUqfJngovfC8JP/f3tGYri+y/SUuscXyJjfqMQa72R5ja2qHEVAXeD1bEWi3
+	HotugDWsLCcVB+ZhOcSFRzglOOBEbMPx4z86ccVzEM5F/hZPUF6zus9ELElT/cfwBrJn
+	BVsFF+s6/amqgmC8xecELBNzD5gEk/qJtyWF1C8w0dvYWnt9ft4ziiLk+awNztDfxg7T
+	ddTRbc1+5MY62qtsLZb2q7ZRHgRBM5w3wu9r8YEK4DXSrrHzxA/m+gQ7Z5y/iT/0kw8S
+	WugWBb2uQmZqHn0H9vJ1njBe4kbvJi6ECkYKlR9UQ6OpnkNHW4mV11wQXPC6JNhQPBvW
+	a6mg==
+Received: by 10.216.143.209 with SMTP id l59mr5256764wej.87.1335480043864;
+	Thu, 26 Apr 2012 15:40:43 -0700 (PDT)
+Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id fz9sm217221wib.3.2012.04.26.15.40.39
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 26 Apr 2012 15:40:40 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1257)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <4F99ABC7.9080807@r-finger.com>
+Date: Fri, 27 Apr 2012 00:40:39 +0200
+Message-Id: <D71943B7-3840-49F0-B184-9D5666C43F19@dominion.thruhere.net>
+References: <4F99ABC7.9080807@r-finger.com>
+To: Tomas Frydrych <tf+lists.yocto@r-finger.com>
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQnRexq/vKDkawFNbHeM4TnM3dogc8qYCW8Uu33n+/JgXsbAjR52nml1icayCuroa6Wuy7sD
+Cc: meta-ti@yoctoproject.org
+Subject: Re: egl on beagleboard xM
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,70 +45,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Apr 2012 20:10:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 26 Apr 2012 22:40:45 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hi,
 
-I am trying to get native egl (i.e., without X) working on Beagleboard
-xM, but without much success. I am using libgles-omap3 (4.05.00.03) the
-kernel(s) and sgx drivers from meta-ti master; everything appears to
-start fine (i.e., no errors reported from pvr-init or dmesg), but trying
-run any of the gles tests / demos gives:
+Op 26 apr. 2012, om 22:10 heeft Tomas Frydrych het volgende geschreven:
 
-  'eglInitialize' returned egl error 'EGL_BAD_ALLOC' (0x3003)
+> Hi,
+> 
+> I am trying to get native egl (i.e., without X) working on Beagleboard
+> xM, but without much success. I am using libgles-omap3 (4.05.00.03) the
+> kernel(s) and sgx drivers from meta-ti master; everything appears to
+> start fine (i.e., no errors reported from pvr-init or dmesg), but trying
+> run any of the gles tests / demos gives:
+> 
+>  'eglInitialize' returned egl error 'EGL_BAD_ALLOC' (0x3003)
+> 
+> I have tried both linux-omap 2.6.39 and linux 3.0.8, with same results.
 
-I have tried both linux-omap 2.6.39 and linux 3.0.8, with same results.
-
-Any pointers to what the problem might be would be much appreciated,
-
-Tomas
-
-
-kernel command line:
-
-console=ttyO2,115200n8 vram=48M mpurate=auto
-omapfb.mode=dvi:1280x720MR-16@60 omapfb.debug=y omapdss.def_disp=dvi
-root=/dev/mmcblk0p2 rw rootfstype=ext3 rootwait
-
-Also tried 1024x768MR-16@60, and different vram sizes, without success.
-
-# lsmod
-
-Module                  Size  Used by
-bufferclass_ti          4696  0
-omaplfb                11014  0
-pvrsrvkm              142463  2 bufferclass_ti,omaplfb
-...
-
-# cat /proc/pvr/nodes
-
-Registered nodes
-Addr     Type     Class    Index Ref pvDev     Size Res
-db42eb00 ?9       buffer      2   1  da43ba00   28    (null)
-db42ed40 ?9       display     1   1  db77a300   52    (null)
-db42eec0 ?7       3D          0   1  db57c000    0  db572680
-
-
-# fbset -i
-
-mode "1280x720-60"
-    # D: 64.000 MHz, H: 44.444 kHz, V: 59.979Hz
-    geometry 1280 720 1280 720 16
-    timings 15625 80 48 3 13 32 5
-    rgba 5/11,6/5,5/0,0/0
-endmode
-
-Frame buffer device information:
-    Name        :omapfb
-    Address     : 0x9d000000
-    Size        : 1843200
-    Type        : PACKED PIXELS
-    Visual      : TRUECOLOR
-    XPanStep    : 1
-    YPanStep    : 1
-    YWrapStep   : 0
-    LineLength  : 2560
-
+Both of those aren't the default, so are you actually using meta-ti?!?
 
