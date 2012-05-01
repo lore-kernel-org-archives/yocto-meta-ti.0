@@ -1,37 +1,39 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-ob0-f176.google.com (mail-ob0-f176.google.com
-	[209.85.214.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BBED2E0044D
-	for <meta-ti@yoctoproject.org>; Tue,  1 May 2012 12:23:52 -0700 (PDT)
-Received: by obbef5 with SMTP id ef5so8093079obb.35
-	for <meta-ti@yoctoproject.org>; Tue, 01 May 2012 12:23:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=kfO5G1AYUH+XK12Bxyek38VXtvUi7Ep8FpIxBQTL96M=;
-	b=CM07nSRV4RW/ZTjo+XgAMpnF6UY/22aerKGlv8uNEGqmMNPsYatvFzi+eZmjCr137P
-	uON3TqvNi12UQ63r8AQmvdjJtzVbuJLMVFuCRlzeSHO5Lo4QB8GXYGNnOhvCr15+0H/j
-	qqsWN/ftFE82VjsBE5WhhMgGzjDeqT2jZyVwEFTTCliYcjyFhGZgeMuYNfM4N06bMtsf
-	SF/nlTjNyR7IytpSRibNdRrfFoJB8kH8FeA+LSKzhy+hflbV6XKOVmZ+zVlqPzvmwsQx
-	F94Yzo7bUFWUaatO7BKMH8nDOnhpR1kEX4oGOxqb5HPm679gyEbMa0mPtiuH9CDlSkxL
-	xLww==
-Received: by 10.60.172.231 with SMTP id bf7mr30718205oec.45.1335900232275;
-	Tue, 01 May 2012 12:23:52 -0700 (PDT)
-Received: from bill-the-cat (ip68-230-54-74.ph.ph.cox.net. [68.230.54.74])
-	by mx.google.com with ESMTPS id tx2sm21360445obb.8.2012.05.01.12.23.50
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 949B2E0030B
+	for <meta-ti@yoctoproject.org>; Tue,  1 May 2012 12:30:08 -0700 (PDT)
+Received: by wgbds11 with SMTP id ds11so3358670wgb.5
+	for <meta-ti@yoctoproject.org>; Tue, 01 May 2012 12:30:07 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=7k9/srfakadH19uFTzNBeu7h/f7F0LFy0enu9gnWBOM=;
+	b=J39HNkCWjxhh8LrEPyxCfrBDVEo0EEL38PSG+ORycPh+anvyO1jGlHYYN8xBMDHhuH
+	7TIroUfVKyFsz2spRbZQU0bpr3/o06YiPcyRujRRf5DhPIekpwC28kOCzszkza1J9NDV
+	TZ8kkgPVOnzjLomRx8dhyeWD7i1pZzgdgol1om2MrAao9FTaNQLyOdaAqd9cJzizL67H
+	EwK7BgHy7XeyKpm9cbYRJK7U+dlcm/GCQp2oPGUQt07YRhotEyoFgTykzwkLNxDhBFnA
+	GBIJIFgOzCsxN8sQEJtGopg0kab71372EPSvKRoebuLPVM1S34dbUSRlvfRr2PSA+M1V
+	AoDg==
+Received: by 10.180.80.104 with SMTP id q8mr7462108wix.14.1335900607525;
+	Tue, 01 May 2012 12:30:07 -0700 (PDT)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id o2sm61012812wiv.11.2012.05.01.12.30.05
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 01 May 2012 12:23:51 -0700 (PDT)
-Sender: Tom Rini <tom.rini@gmail.com>
-Date: Tue, 1 May 2012 12:23:52 -0700
-From: Tom Rini <trini@ti.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-ID: <20120501192352.GB26889@bill-the-cat>
+	Tue, 01 May 2012 12:30:06 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1257)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20120501192352.GB26889@bill-the-cat>
+Date: Tue, 1 May 2012 21:30:03 +0200
+Message-Id: <C157B16C-6127-4B10-9EA2-4FA0D2F532DB@dominion.thruhere.net>
 References: <1335899212-29869-1-git-send-email-koen@dominion.thruhere.net>
 	<1335899212-29869-5-git-send-email-koen@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <1335899212-29869-5-git-send-email-koen@dominion.thruhere.net>
-Organization: Texas Instruments
-User-Agent: Mutt/1.5.21 (2010-09-15)
+	<20120501192352.GB26889@bill-the-cat>
+To: Tom Rini <trini@ti.com>
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQnfFGudUgYyOIXOITa2KXC/cK+vWgMEVUJRI3MjZkeaorLPbdRwrHVozW4cTlNrgiDu8L8v
 Cc: meta-ti@yoctoproject.org
 Subject: Re: [RFC][PATCH 5/5] u-boot 2011.12: switch beagleboard to ext4 to match beaglebone
 X-BeenThere: meta-ti@yoctoproject.org
@@ -45,17 +47,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 May 2012 19:23:52 -0000
+X-List-Received-Date: Tue, 01 May 2012 19:30:09 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 01, 2012 at 09:06:52PM +0200, Koen Kooi wrote:
-> Also add patch to increase ext2 read speed.
-> 
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-Acked-by: Tom Rini <trini@ti.com>
+Op 1 mei 2012, om 21:23 heeft Tom Rini het volgende geschreven:
 
--- 
-Tom
+> On Tue, May 01, 2012 at 09:06:52PM +0200, Koen Kooi wrote:
+>> Also add patch to increase ext2 read speed.
+>>=20
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>=20
+> Acked-by: Tom Rini <trini@ti.com>
+
+FWIW, I'm tempted to get the latest uboot up and running before sending =
+the final patchset. Any opinions on that?
+
+regards,
+
+Koen=
 
