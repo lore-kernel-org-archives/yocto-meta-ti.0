@@ -1,34 +1,37 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6DFBDE01402
-	for <meta-ti@yoctoproject.org>; Wed,  2 May 2012 05:33:38 -0700 (PDT)
-Received: by wibhm17 with SMTP id hm17so3974080wib.11
-	for <meta-ti@yoctoproject.org>; Wed, 02 May 2012 05:33:37 -0700 (PDT)
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C893CE01409
+	for <meta-ti@yoctoproject.org>; Wed,  2 May 2012 05:33:39 -0700 (PDT)
+Received: by werc12 with SMTP id c12so414550wer.35
+	for <meta-ti@yoctoproject.org>; Wed, 02 May 2012 05:33:39 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=eYC4gGxMXKt+ahNnjpSnKcdYib85haWMJJloWPpuxws=;
-	b=WMJx/70iATvMLH8DlN9LXndmKByqAmMU1SztvI+WUCyfxsSfBBKG1/RdLPRSvufo8v
-	jrvpNwWCdLiCaQGkwOkwHoM8c/txRLuD7bjPj24J82etgVarD05MGBuZAAJLjMeLKgTf
-	po14Vw4VR8k7LoNprqHmCPoHhNxdDCyHOK5F+BNc5sXJOzD0nDjrB//zbYLdi/fcHQGF
-	udfk0onmab8mGTEu3hvDSa1RUQ7xRAuBrfVV6mtAaTfQrcZLh2ffCJ+NPw+DvKKJOAfS
-	MlVNfBA+FQj0WWfGEzl5ZMay0vJaNhpB3lddv2UAC5TyqPI7SrDuuUlQXdfepEoXFQFZ
-	EpXQ==
-Received: by 10.180.96.228 with SMTP id dv4mr9765286wib.14.1335962016809;
-	Wed, 02 May 2012 05:33:36 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
+	:x-gm-message-state;
+	bh=Mek0WQWLuXf+sTW1saUbxEATQRpM/13mS2bHTRn3KDc=;
+	b=GPu18OieQtzLv3KSwbvhFrtoIiTzDgRp9hrmIUSzENbUMil9KOIsv/BsTGGbIChOdS
+	Dx3fA0weP3I99S+xqVsNJtF1iueEbYefRjymf7LMMutnWeFLEPbTFP/k9pPme8XFFje2
+	fFXu+WhnZdj0hqeiuI9ilpjME7q2+ulaIz8ZIk7zICjYPW0HtuniHgNIJMwlvKonbHW4
+	D3Ga51R+YPz2UfcQro9EpnzS0t7Md/vaIj3TwLUgWvYHGXnoPGjLidb1dqAJGwZQHnq3
+	E6MhpwY6OsItKk1jR/cAa4An4c17sNV+4EOY8euPVVeUzw+6X40GnL/DCfAI4uQ85odj
+	kY4Q==
+Received: by 10.180.102.101 with SMTP id fn5mr13822569wib.6.1335962018968;
+	Wed, 02 May 2012 05:33:38 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id gg2sm6297855wib.7.2012.05.02.05.33.35
+	by mx.google.com with ESMTPS id n20sm6306469wiw.5.2012.05.02.05.33.37
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 May 2012 05:33:35 -0700 (PDT)
+	Wed, 02 May 2012 05:33:38 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Date: Wed,  2 May 2012 14:33:23 +0200
-Message-Id: <1335962006-27727-1-git-send-email-koen@dominion.thruhere.net>
+Date: Wed,  2 May 2012 14:33:24 +0200
+Message-Id: <1335962006-27727-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQlFzvqIXrqavhSvhVr/+jgHwadEdWTv+joALZeEqoD5TBFnkMZJtR04LO+n0mB+XwMpA/iF
+In-Reply-To: <1335962006-27727-1-git-send-email-koen@dominion.thruhere.net>
+References: <1335962006-27727-1-git-send-email-koen@dominion.thruhere.net>
+X-Gm-Message-State: ALoCoQkOl+bAKjTOICc/u3F6aml9wUbqVAihU4RF0yMC7Euc6rf9igQISZ1wikX7kZ+5wcD1YPX2
 Cc: denys@ti.com
-Subject: [PATCH 1/4] libgles-omap3: copy over all binaries and abstract install process
+Subject: [PATCH 2/4] libgles-omap3: move X related binaries into X11WSEGL subpackages to avoid dragging in libx11 and friends
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,96 +43,65 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 May 2012 12:33:38 -0000
+X-List-Received-Date: Wed, 02 May 2012 12:33:40 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- recipes-graphics/libgles/libgles-omap3.inc |   51 ++++++++++------------------
- 1 file changed, 18 insertions(+), 33 deletions(-)
+ recipes-graphics/libgles/libgles-omap3.inc |   18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-index 93cb091..c363361 100644
+index c363361..3a6ffd0 100644
 --- a/recipes-graphics/libgles/libgles-omap3.inc
 +++ b/recipes-graphics/libgles/libgles-omap3.inc
 @@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
  # 'TSPA.txt' might not be the best file to md5sum
  LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
  
--PR = "r27"
-+PR = "r28"
+-PR = "r28"
++PR = "r29"
  
  COMPATIBLE_MACHINE = "(omap3|ti816x|ti33x)"
  
-@@ -24,12 +24,12 @@ S = "${WORKDIR}/OMAP35x_Graphics_SDK_${SGXPV}"
- TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
- require ../../recipes-ti/includes/ti-eula-unpack.inc
+@@ -238,7 +238,7 @@ FILES_${PN}-blitwsegl = "${libdir}/libpvrPVR2D_BLITWSEGL.so.*"
+ FILES_${PN}-flipwsegl = "${libdir}/libpvrPVR2D_FLIPWSEGL.so.*"
+ FILES_${PN}-frontwsegl = "${libdir}/libpvrPVR2D_FRONTWSEGL.so.*"
+ FILES_${PN}-linuxfbwsegl = "${libdir}/libpvrPVR2D_LINUXFBWSEGL.so.*"
+-FILES_${PN}-x11wsegl = "${libdir}/libpvrPVR2D_X11WSEGL.so*"
++FILES_${PN}-x11wsegl = "${libdir}/libpvrPVR2D_X11WSEGL.so* ${bindir}/x* ${bindir}/*x"
+ FILES_${PN}-driwsegl = "${libdir}/libpvrPVR2D_DRIWSEGL.so*"
  
--BINLOCATION ?= "${S}/gfx_rel"
--ES2LOCATION ?= "${S}/gfx_rel_es2.x"
--ES3LOCATION ?= "${S}/gfx_rel_es3.x"
--ES5LOCATION ?= "${S}/gfx_rel_es5.x"
--ES6LOCATION ?= "${S}/gfx_rel_es6.x"
--ES8LOCATION ?= "${S}/gfx_rel_es8.x"
-+export BINLOCATION ?= "${S}/gfx_rel"
-+export ES2LOCATION ?= "${S}/gfx_rel_es2.x"
-+export ES3LOCATION ?= "${S}/gfx_rel_es3.x"
-+export ES5LOCATION ?= "${S}/gfx_rel_es5.x"
-+export ES6LOCATION ?= "${S}/gfx_rel_es6.x"
-+export ES8LOCATION ?= "${S}/gfx_rel_es8.x"
+ PACKAGES =+ "${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-flipwsegl-es2 ${PN}-flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8 ${PN}-frontwsegl-es2 ${PN}-frontwsegl-es3 ${PN}-frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8 ${PN}-linuxfbwsegl-es2 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8 ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8 ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driwsegl-es5 ${PN}-driwsegl-es6 ${PN}-driwsegl-es8"
+@@ -270,11 +270,11 @@ FILES_${PN}-linuxfbwsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_LINUXFBWSEGL.so.*"
+ FILES_${PN}-linuxfbwsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_LINUXFBWSEGL.so.*"
+ RRECOMMENDS_${PN}-linuxfbwsegl = " ${PN}-linuxfbwsegl-es2 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8"
  
- do_configure() {
- 	# Attempt to fix up the worst offenders for file permissions
-@@ -132,7 +132,8 @@ do_install () {
+-FILES_${PN}-x11wsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_X11WSEGL.so.*"
+-FILES_${PN}-x11wsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_X11WSEGL.so.*"
+-FILES_${PN}-x11wsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_X11WSEGL.so.*"
+-FILES_${PN}-x11wsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_X11WSEGL.so.*"
+-FILES_${PN}-x11wsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_X11WSEGL.so.*"
++FILES_${PN}-x11wsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES2*/x* ${bindir}/ES2*/*x"
++FILES_${PN}-x11wsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES3*/x* ${bindir}/ES3*/*x"
++FILES_${PN}-x11wsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES5*/x* ${bindir}/ES5*/*x"
++FILES_${PN}-x11wsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES6*/x* ${bindir}/ES6*/*x"
++FILES_${PN}-x11wsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES8*/x* ${bindir}/ES8*/*x"
+ RRECOMMENDS_${PN}-x11wsegl = " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8"
  
- 	install -m 0755 ${BINLOCATION}/*_test ${D}${bindir}/
- 	install -m 0755 ${BINLOCATION}/gl* ${D}${bindir}/
--	install -m 0755 ${BINLOCATION}/p[dv]* ${D}${bindir}/
-+	install -m 0755 ${BINLOCATION}/pvrsrvinit ${D}${bindir}/
-+
- 	install -m 0755 ${BINLOCATION}/xgles1test1 ${D}${bindir}/
+ FILES_${PN}-driwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_DRIWSEGL.so.*"
+@@ -286,10 +286,10 @@ RRECOMMENDS_${PN}-driwsegl = " ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driws
  
- 	install -m 0755 ${BINLOCATION}/freedesktop/kdrive/usr/X11R6_SGX/bin/Xsgx ${D}${bindir}/|| true
-@@ -172,31 +173,15 @@ do_install () {
- 	install -d ${D}${bindir}/ES3.0
- 	install -d ${D}${bindir}/ES2.0
+ CONFFILES_${PN} = "${sysconfdir}/powervr.ini"
  
--
--	if [ -e ${ES2LOCATION} ] ; then
--		cp -pPR ${ES2LOCATION}/lib*${IMGPV} ${D}${libdir}/ES2.0/
--		cp ${ES2LOCATION}/p[dv]* ${D}${bindir}/ES2.0/
--	fi
--
--	if [ -e ${ES3LOCATION} ] ; then
--		cp -pPR ${ES3LOCATION}/lib*${IMGPV} ${D}${libdir}/ES3.0/
--		cp ${ES3LOCATION}/p[dv]* ${D}${bindir}/ES3.0
--	fi
--
--	if [ -e ${ES5LOCATION} ] ; then 
--		cp -pPR ${ES5LOCATION}/lib*${IMGPV} ${D}${libdir}/ES5.0/
--		cp ${ES5LOCATION}/p[dv]* ${D}${bindir}/ES5.0/
--	fi
--
--	if [ -e ${ES6LOCATION} ] ; then
--		cp -pPR ${ES6LOCATION}/lib*${IMGPV} ${D}${libdir}/ES6.0/
--		cp ${ES6LOCATION}/p[dv]* ${D}${bindir}/ES6.0/
--	fi
--
--	if [ -e ${ES8LOCATION} ] ; then
--		cp -pPR ${ES8LOCATION}/lib*${IMGPV} ${D}${libdir}/ES8.0/
--		cp ${ES8LOCATION}/p[dv]* ${D}${bindir}/ES8.0/
--	fi
-+	for esrev in 2 3 5 6 8 ; do
-+		ESLOCATION=$(eval echo $(echo \$\{ES${esrev}LOCATION\}))
-+		if [ -e ${ESLOCATION} ] ; then
-+			cp -pPR ${ESLOCATION}/lib*${IMGPV} ${ESLOCATION}/pvr_drv.so ${ESLOCATION}/*.a ${D}${libdir}/ES${esrev}.0/
-+			for esprog in eglinfo eglinfo_x gles1test1 gles2test1 ovg_unit_test pvr2d_test pvrsrvinit services_test sgx_blit_test sgx_clipblit_test sgx_flip_test sgx_init_test sgx_render_flip_test xgles1test1 xgles2test1 xmultiegltest xovg_unit_test ; do
-+				install -m 0755 ${ESLOCATION}/$esprog ${D}${bindir}/ES${esrev}.0/ || true
-+			done
-+		fi	
-+	done
+-FILES_${PN} = "${sysconfdir} ${libdir}/lib*.so.* ${libdir}/ES*/* ${bindir}/pvrsrvinit ${bindir}/cputype ${bindir}/*/*"
++FILES_${PN} = "${sysconfdir} ${libdir}/*.so* ${bindir}/pvrsrvinit ${bindir}/cputype ${bindir}/*"
  
- 	rm ${D}${bindir}/ES*/*.h ${D}${bindir}/ES*/pdsasm ${D}${bindir}/pdsasm -f || true
- 
+ FILES_xserver-kdrive-powervrsgx = "${bindir}/Xsgx"
+-FILES_${PN}-tests = "${bindir}/*"
++FILES_${PN}-tests = "${bindir}/*test*"
+ FILES_${PN}-dbg = "${libdir}/.debug/* ${bindir}/.debug/* \
+                    ${libdir}/ES*/.debug ${bindir}/*/.debug\
+                    ${bindir}/SGX/demos/*/.debug/* \
 -- 
 1.7.10
 
