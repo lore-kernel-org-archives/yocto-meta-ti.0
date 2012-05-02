@@ -1,37 +1,37 @@
 Return-Path: <koen@dominion.thruhere.net>
 Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
 	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5882FE0140F
-	for <meta-ti@yoctoproject.org>; Wed,  2 May 2012 05:33:41 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A506E0140F
+	for <meta-ti@yoctoproject.org>; Wed,  2 May 2012 05:33:43 -0700 (PDT)
 Received: by mail-we0-f176.google.com with SMTP id c12so414550wer.35
-	for <meta-ti@yoctoproject.org>; Wed, 02 May 2012 05:33:41 -0700 (PDT)
+	for <meta-ti@yoctoproject.org>; Wed, 02 May 2012 05:33:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:x-gm-message-state;
-	bh=umZHIWOLPUAIZXv4lGY+Lh9E8rjYmCs5SbCVmV60tJo=;
-	b=jkL+I7YzoIntp6AchN22Lp6v0YzYTjsnCxVauzgrfsnK//3y4Ydor8xPAiCzZK0iJO
-	S04Bz8KraR/L6nRK4ArD75j008wb5xG4rZu64q6azodpRj5zSnsOE0SfnzY84x6HS5Bj
-	60HKaWB2ocFgb4/vo16whPWNJ4eN7xRKtg5Aq9sn1bWkAmMzH5G1bt+euxqdrJHAzsSi
-	5/6CTwARSMrmjK0uNeZS3P8fY/6xYkkjwHGPVGt0VndnGPcPbEEY3SvGyWz0nma1azOy
-	BBcaFjQQlss8yTIRcenDTAUWHwbG8YafpHWo+2Er/JrT9pvn+8fARNgOUhsdIErHCfsA
-	mfgA==
-Received: by 10.216.138.38 with SMTP id z38mr12707022wei.63.1335962020979;
-	Wed, 02 May 2012 05:33:40 -0700 (PDT)
+	bh=FUpD1JABFMbnQ010RbDGBv+B2S5Xbf2+KF6B/RQxkew=;
+	b=ZfhM32/svNpSREQCXDaRic2OQAKBM6JbLp/LyY27498iKKwmZztUD0owtkt5MGkGRf
+	y/jchORtrVLn9YnD9YzL1YChgDg0X+LqARDsDni2Md6rgMkQwSKMUoSA6DFlCdqEGa69
+	r5gCzzQVCi6cBjOplSF19iyJ2Sx/BQ8Woyb/XWio9+v5Zorw+vH8IMpM+nO12WjALzCg
+	9DZC3R1fdgH5x8tAiEwah4O2QWMcM9J5f+PxdqFlX7zfpHI2yDUcwNPRmd/FT6cV8ExX
+	o0yxsaZRRmEUtbug1vOB8iArr5uIprKctmTWul4fU5Ke8qHe86DAzm84GGzJsSvTgavl
+	ihqg==
+Received: by 10.180.94.161 with SMTP id dd1mr13773346wib.16.1335962023007;
+	Wed, 02 May 2012 05:33:43 -0700 (PDT)
 Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id gd4sm6299767wib.6.2012.05.02.05.33.39
+	by mx.google.com with ESMTPS id ff9sm43952500wib.2.2012.05.02.05.33.41
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 May 2012 05:33:40 -0700 (PDT)
+	Wed, 02 May 2012 05:33:42 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Date: Wed,  2 May 2012 14:33:25 +0200
-Message-Id: <1335962006-27727-3-git-send-email-koen@dominion.thruhere.net>
+Date: Wed,  2 May 2012 14:33:26 +0200
+Message-Id: <1335962006-27727-4-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.10
 In-Reply-To: <1335962006-27727-1-git-send-email-koen@dominion.thruhere.net>
 References: <1335962006-27727-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQm/pPD8aKxC12+hNPFOvspedcPl+unMXNrUPJO2vrxC454bdU9MJ+bPvNShFK2mIM2wvmI1
+X-Gm-Message-State: ALoCoQnlLWw6xkRRJipsreASHyPR6Wjw5xXvLUbJ6xEIW0mj5HqcVlf9t+gtinNXSOFxFuXFN9Nk
 Cc: denys@ti.com
-Subject: [PATCH 3/4] libgles-omap3: package dri files into driwsegl subpackages
+Subject: [PATCH 4/4] libgles-omap3: work around bug in opkg
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,52 +43,56 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 May 2012 12:33:41 -0000
+X-List-Received-Date: Wed, 02 May 2012 12:33:43 -0000
+
+All the EGL_BADALLOC failures that user have been reporting turn out to be a bug in opkg: http://groups.google.com/group/opkg-devel/browse_thread/thread/741d18b0ef31435e#
+
+Opkg decides to relink symlinks to the wrong files. As a workaround we check the symlink during every bootup and fix it if needed.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- recipes-graphics/libgles/libgles-omap3.inc |   14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ recipes-graphics/libgles/libgles-omap3.inc    |    2 +-
+ recipes-graphics/libgles/libgles-omap3/rc.pvr |    7 +++++++
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-index 3a6ffd0..6d8fc7a 100644
+index 6d8fc7a..2b40acc 100644
 --- a/recipes-graphics/libgles/libgles-omap3.inc
 +++ b/recipes-graphics/libgles/libgles-omap3.inc
 @@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
  # 'TSPA.txt' might not be the best file to md5sum
  LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
  
--PR = "r29"
-+PR = "r30"
+-PR = "r30"
++PR = "r31"
  
  COMPATIBLE_MACHINE = "(omap3|ti816x|ti33x)"
  
-@@ -239,7 +239,7 @@ FILES_${PN}-flipwsegl = "${libdir}/libpvrPVR2D_FLIPWSEGL.so.*"
- FILES_${PN}-frontwsegl = "${libdir}/libpvrPVR2D_FRONTWSEGL.so.*"
- FILES_${PN}-linuxfbwsegl = "${libdir}/libpvrPVR2D_LINUXFBWSEGL.so.*"
- FILES_${PN}-x11wsegl = "${libdir}/libpvrPVR2D_X11WSEGL.so* ${bindir}/x* ${bindir}/*x"
--FILES_${PN}-driwsegl = "${libdir}/libpvrPVR2D_DRIWSEGL.so*"
-+FILES_${PN}-driwsegl = "${libdir}/libpvrPVR2D_DRIWSEGL.so* ${libdir}/libsrv_um_dri*"
+diff --git a/recipes-graphics/libgles/libgles-omap3/rc.pvr b/recipes-graphics/libgles/libgles-omap3/rc.pvr
+index 07efa66..a425d75 100755
+--- a/recipes-graphics/libgles/libgles-omap3/rc.pvr
++++ b/recipes-graphics/libgles/libgles-omap3/rc.pvr
+@@ -61,6 +61,12 @@ sgxprepare () {
+ }
  
- PACKAGES =+ "${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-flipwsegl-es2 ${PN}-flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8 ${PN}-frontwsegl-es2 ${PN}-frontwsegl-es3 ${PN}-frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8 ${PN}-linuxfbwsegl-es2 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8 ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8 ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driwsegl-es5 ${PN}-driwsegl-es6 ${PN}-driwsegl-es8"
- FILES_${PN}-blitwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_BLITWSEGL.so.*"
-@@ -277,11 +277,11 @@ FILES_${PN}-x11wsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/E
- FILES_${PN}-x11wsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES8*/x* ${bindir}/ES8*/*x"
- RRECOMMENDS_${PN}-x11wsegl = " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8"
+ sgxfinish () {
++	# Fix up a bug in opkg
++	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then 
++		cd /usr/lib
++		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
++	fi
++
+ 	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
+ 		echo -n "Starting SGX fixup for"
+ 		echo " ES${ES_REVISION}.x"
+@@ -68,6 +74,7 @@ sgxfinish () {
+ 		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
+ 		echo "${ES_REVISION}" > /etc/powervr-esrev
+ 	fi
++
+ 	/usr/bin/pvrsrvinit
+ }
  
--FILES_${PN}-driwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_DRIWSEGL.so.*"
--FILES_${PN}-driwsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_DRIWSEGL.so.*"
--FILES_${PN}-driwsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_DRIWSEGL.so.*"
--FILES_${PN}-driwsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_DRIWSEGL.so.*"
--FILES_${PN}-driwsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_DRIWSEGL.so.*"
-+FILES_${PN}-driwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_DRIWSEGL.so.* ${libdir}/ES2*/libsrv_um_dri*"
-+FILES_${PN}-driwsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_DRIWSEGL.so.* ${libdir}/ES3*/libsrv_um_dri*"
-+FILES_${PN}-driwsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_DRIWSEGL.so.* ${libdir}/ES5*/libsrv_um_dri*"
-+FILES_${PN}-driwsegl-es6 = "${libdir}/ES6*/libpvrPVR2D_DRIWSEGL.so.* ${libdir}/ES6*/libsrv_um_dri*"
-+FILES_${PN}-driwsegl-es8 = "${libdir}/ES8*/libpvrPVR2D_DRIWSEGL.so.* ${libdir}/ES8*/libsrv_um_dri*"
- RRECOMMENDS_${PN}-driwsegl = " ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driwsegl-es5 ${PN}-driwsegl-es6 ${PN}-driwsegl-es8"
- 
- CONFFILES_${PN} = "${sysconfdir}/powervr.ini"
 -- 
 1.7.10
 
