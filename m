@@ -1,37 +1,40 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A506E0140F
-	for <meta-ti@yoctoproject.org>; Wed,  2 May 2012 05:33:43 -0700 (PDT)
-Received: by mail-we0-f176.google.com with SMTP id c12so414550wer.35
-	for <meta-ti@yoctoproject.org>; Wed, 02 May 2012 05:33:43 -0700 (PDT)
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90272E01402
+	for <meta-ti@yoctoproject.org>; Wed,  2 May 2012 05:50:25 -0700 (PDT)
+Received: by wibhm17 with SMTP id hm17so3986673wib.11
+	for <meta-ti@yoctoproject.org>; Wed, 02 May 2012 05:50:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer
 	:x-gm-message-state;
-	bh=FUpD1JABFMbnQ010RbDGBv+B2S5Xbf2+KF6B/RQxkew=;
-	b=ZfhM32/svNpSREQCXDaRic2OQAKBM6JbLp/LyY27498iKKwmZztUD0owtkt5MGkGRf
-	y/jchORtrVLn9YnD9YzL1YChgDg0X+LqARDsDni2Md6rgMkQwSKMUoSA6DFlCdqEGa69
-	r5gCzzQVCi6cBjOplSF19iyJ2Sx/BQ8Woyb/XWio9+v5Zorw+vH8IMpM+nO12WjALzCg
-	9DZC3R1fdgH5x8tAiEwah4O2QWMcM9J5f+PxdqFlX7zfpHI2yDUcwNPRmd/FT6cV8ExX
-	o0yxsaZRRmEUtbug1vOB8iArr5uIprKctmTWul4fU5Ke8qHe86DAzm84GGzJsSvTgavl
-	ihqg==
-Received: by 10.180.94.161 with SMTP id dd1mr13773346wib.16.1335962023007;
-	Wed, 02 May 2012 05:33:43 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id ff9sm43952500wib.2.2012.05.02.05.33.41
+	bh=7Emefb/Te3C/RcECeFs18A9SdOHuy4iIRnwpv27Ds+Y=;
+	b=e3l8dy4AkFsAi7TqoVXQ1jzZkcwJ5F+hz7/sdcB67ihVBC0BSmlz7J9EyD1UBK8+TL
+	wIXklbZPTNJGQoFt9ruHZKsuARYvi9+qmFQynODxsHXk7OEF4/OSNyFE/uCKY8dzWTjx
+	sZkO2LpLbnnuiMfQeXbOqhvjI9w5paJtKO970tGi3uKk5nQC1/R7vdVYDX8u9yftO9fh
+	aa+6mrZGqfj6hDsGLHLAVxnQ4hp5A+Tn64Hbrh5IdDqaWoEWUV40L7fim35Wyxu0JOxJ
+	raGkr9bneDs28CLTQi5haem7QmZ5gqkHwQIKi7sxlkvhUiYY4mbxOgDUNXokRSwIOWst
+	fANA==
+Received: by 10.180.88.169 with SMTP id bh9mr218256wib.5.1335963024599;
+	Wed, 02 May 2012 05:50:24 -0700 (PDT)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id k6sm44055565wie.9.2012.05.02.05.50.23
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 May 2012 05:33:42 -0700 (PDT)
+	Wed, 02 May 2012 05:50:23 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1257)
 From: Koen Kooi <koen@dominion.thruhere.net>
-To: meta-ti@yoctoproject.org
-Date: Wed,  2 May 2012 14:33:26 +0200
-Message-Id: <1335962006-27727-4-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-In-Reply-To: <1335962006-27727-1-git-send-email-koen@dominion.thruhere.net>
+In-Reply-To: <1335962006-27727-4-git-send-email-koen@dominion.thruhere.net>
+Date: Wed, 2 May 2012 14:50:11 +0200
+Message-Id: <579E347C-A5A3-428D-8D3C-AE971F82FA0E@dominion.thruhere.net>
 References: <1335962006-27727-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQnlLWw6xkRRJipsreASHyPR6Wjw5xXvLUbJ6xEIW0mj5HqcVlf9t+gtinNXSOFxFuXFN9Nk
-Cc: denys@ti.com
-Subject: [PATCH 4/4] libgles-omap3: work around bug in opkg
+	<1335962006-27727-4-git-send-email-koen@dominion.thruhere.net>
+To: meta-ti@yoctoproject.org
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQkPeFwTkNru4vXNHcBT0QmxrdHiA/quypVvNSf7nfQH02GiMYDKYi21I7WM8PMKOcMaBi+B
+Subject: Re: [PATCH 4/4] libgles-omap3: work around bug in opkg
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,57 +46,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 May 2012 12:33:43 -0000
+X-List-Received-Date: Wed, 02 May 2012 12:50:26 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-All the EGL_BADALLOC failures that user have been reporting turn out to be a bug in opkg: http://groups.google.com/group/opkg-devel/browse_thread/thread/741d18b0ef31435e#
 
-Opkg decides to relink symlinks to the wrong files. As a workaround we check the symlink during every bootup and fix it if needed.
+Op 2 mei 2012, om 14:33 heeft Koen Kooi het volgende geschreven:
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- recipes-graphics/libgles/libgles-omap3.inc    |    2 +-
- recipes-graphics/libgles/libgles-omap3/rc.pvr |    7 +++++++
- 2 files changed, 8 insertions(+), 1 deletion(-)
+> All the EGL_BADALLOC failures that user have been reporting turn out =
+to be a bug in opkg: =
+http://groups.google.com/group/opkg-devel/browse_thread/thread/741d18b0ef3=
+1435e#
+>=20
+> Opkg decides to relink symlinks to the wrong files. As a workaround we =
+check the symlink during every bootup and fix it if needed.
+>=20
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-index 6d8fc7a..2b40acc 100644
---- a/recipes-graphics/libgles/libgles-omap3.inc
-+++ b/recipes-graphics/libgles/libgles-omap3.inc
-@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum
- LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
- 
--PR = "r30"
-+PR = "r31"
- 
- COMPATIBLE_MACHINE = "(omap3|ti816x|ti33x)"
- 
-diff --git a/recipes-graphics/libgles/libgles-omap3/rc.pvr b/recipes-graphics/libgles/libgles-omap3/rc.pvr
-index 07efa66..a425d75 100755
---- a/recipes-graphics/libgles/libgles-omap3/rc.pvr
-+++ b/recipes-graphics/libgles/libgles-omap3/rc.pvr
-@@ -61,6 +61,12 @@ sgxprepare () {
- }
- 
- sgxfinish () {
-+	# Fix up a bug in opkg
-+	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then 
-+		cd /usr/lib
-+		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
-+	fi
-+
- 	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
- 		echo -n "Starting SGX fixup for"
- 		echo " ES${ES_REVISION}.x"
-@@ -68,6 +74,7 @@ sgxfinish () {
- 		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
- 		echo "${ES_REVISION}" > /etc/powervr-esrev
- 	fi
-+
- 	/usr/bin/pvrsrvinit
- }
- 
--- 
-1.7.10
+Patch 3/4 work around this problem as well, but this avoids the =
+potential problem when all packages are installed and you upgrade them. =
+Not sure of that will trigger the bug, but better safe than sorry.
+Stupid thing took 2 months to track down!
 
+regards,
+
+Koen=
 
