@@ -1,28 +1,26 @@
 Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAACAE0044A
-	for <meta-ti@yoctoproject.org>; Thu,  3 May 2012 09:21:25 -0700 (PDT)
+Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
+	[206.46.173.11])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BF81AE0044D
+	for <meta-ti@yoctoproject.org>; Thu,  3 May 2012 10:02:32 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173013.mailsrvcs.net
+	by vms173011.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M3G00HXIG3DOBD0@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 03 May 2012 11:21:13 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 666EE2016D; Thu,
-	03 May 2012 12:21:13 -0400 (EDT)
-Date: Thu, 03 May 2012 12:21:13 -0400
+	2009)) with ESMTPA id <0M3G00CGXHZLOM30@vms173011.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 03 May 2012 12:02:14 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 756552016D; Thu,
+	03 May 2012 13:02:08 -0400 (EDT)
+Date: Thu, 03 May 2012 13:02:08 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: Koen Kooi <koen@dominion.thruhere.net>
-Message-id: <20120503162113.GF2681@denix.org>
-References: <20120503004302.E49A252A70@arago-project.org>
-	<1DB7C838-80AE-47B8-9251-87253476B6F5@dominion.thruhere.net>
-	<20120503060932.GD2681@denix.org>
-	<812B90C3-8D0A-4805-9424-1C167BEF536E@dominion.thruhere.net>
+Message-id: <20120503170208.GH2681@denix.org>
+References: <1336026806-13314-1-git-send-email-denis@denix.org>
+	<73633949-8558-4D16-958F-3BCDB1165EA8@dominion.thruhere.net>
 MIME-version: 1.0
-In-reply-to: <812B90C3-8D0A-4805-9424-1C167BEF536E@dominion.thruhere.net>
+In-reply-to: <73633949-8558-4D16-958F-3BCDB1165EA8@dominion.thruhere.net>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: Denys Dmytriyenko : beaglebone: disable THUMB2_KERNEL in defconfig for newer binutils
+Subject: Re: [PATCH] omap3-sgx-modules, libgles-omap3: add version 4.06.00.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,46 +32,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2012 16:21:25 -0000
+X-List-Received-Date: Thu, 03 May 2012 17:02:32 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Thu, May 03, 2012 at 08:25:11AM +0200, Koen Kooi wrote:
+On Thu, May 03, 2012 at 09:26:51AM +0200, Koen Kooi wrote:
 > 
-> Op 3 mei 2012, om 08:09 heeft Denys Dmytriyenko het volgende geschreven:
+> Op 3 mei 2012, om 08:33 heeft Denys Dmytriyenko het volgende geschreven:
 > 
-> > On Thu, May 03, 2012 at 08:02:00AM +0200, Koen Kooi wrote:
-> >> 
-> >> Op 3 mei 2012, om 02:43 heeft Arago Project git het volgende geschreven:
-> >> 
-> >>> Module: meta-ti
-> >>> Branch: master
-> >>> Commit: 3c693c26087aa148b944166083b5336f05d1c15b
-> >>> URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c693c26087aa148b944166083b5336f05d1c15b
-> >>> 
-> >>> Author: Denys Dmytriyenko <denys@ti.com>
-> >>> Date:   Wed May  2 20:40:58 2012 -0400
-> >>> 
-> >>> beaglebone: disable THUMB2_KERNEL in defconfig for newer binutils
-> >> 
-> >> Wait, what? Can we actually send these changes for review first? T2 is 
-> >> needed to meet the boot time goal, so please revert this one!
+> > From: Denys Dmytriyenko <denys@ti.com>
 > > 
-> > Have another solution to get it building under recent binutils?
+> > * Ported from Arago
+> > * Added version 4.06.00.01 of the Graphics SDK which supports Power Management
+> >  features for the AM335x
+> > * Use a variable PLATFORM for the directory structure since newer SDKs use
+> >  LinuxARMV7 and older SDKs use LinuxOMAP3
+> > * Modifiy rc.pvr to check return of the insmod of pvrsrvkm. If this driver
+> >  fails to load the devmem2 read access can put the system in a state where
+> >  it will not come out of suspend.
 > 
-> Patch binutils or patch the kernel.
+> I keep bringing this up every few months: what's the plan to add the 
+> necessary hooks to the kernel module to export the core revision in sysfs 
+> instead of using devmem2? The kernel module knows about the right memory 
+> addressed and turns on the clocks it needs. And better: we can get rid of 
+> bogus ES revisions like 'ES8' since that's exactly the same core as 'ES6' 
+> from a userspace point of view.
 
-Like I said, do you have a solution? Do you have said patches?
-
-Since gcc-4.5 and binutils-2.20 are scheduled to be removed from 
-meta-oe/toolchain-layer in a few days, I had to fix it some way. That's the 
-best I could do under this circumstances. I can't have beaglebone broken with 
-any  oher toolchain, to only gain few milliseconds of boot time.
-
-> Changing the defconfig without even sending the patch for review is NOT the 
-> way to do it.
-
-I heard you the first time! No need to repeat it every time.
+Thanks, I will forward your questions and suggestions to the Graphics team. 
+Meanwhile, do you have any comments about the patch?
 
 -- 
 Denys
