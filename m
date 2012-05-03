@@ -1,40 +1,28 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7099CE00723
-	for <meta-ti@yoctoproject.org>; Thu,  3 May 2012 00:26:53 -0700 (PDT)
-Received: by werc12 with SMTP id c12so1256511wer.35
-	for <meta-ti@yoctoproject.org>; Thu, 03 May 2012 00:26:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=zmS8SxR0/9TRj8KqAv42DucyT23wyodAGsqxba/Pi0M=;
-	b=C2Uo9Pl7U19GbbBkS6h5rm6TwwZX3b+udst+lxkr8WM8CiSXrvUf4+QsN2lvurI4al
-	JxLh8yHTkMjcqHD2scsdmnK77+FvNiLp6CaVsnqvRd+JPUXfneUeQe6WpoI0hkfOw9J4
-	Up9iTNQBulPqfzTHrYHbfgjTy5i4+CvAcF3rimNwwZUyxzWwvr7nbOYHWtwD3Gvyn0N+
-	6+T9kWLWflxTI36f+FueaaKavddYpC4/as7cs/G27shr5IHwTeOTBr3SMD6ABOQp4KX4
-	mpbea7BaFfLgQU/lbIstphKXiVgqaQrT70xiimbMixtUCkgPpf295BmjjR4SK53HypXJ
-	askQ==
-Received: by 10.216.143.74 with SMTP id k52mr735580wej.50.1336030011903;
-	Thu, 03 May 2012 00:26:51 -0700 (PDT)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id h8sm794667wix.4.2012.05.03.00.26.50
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 03 May 2012 00:26:51 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1336026806-13314-1-git-send-email-denis@denix.org>
-Date: Thu, 3 May 2012 09:26:51 +0200
-Message-Id: <73633949-8558-4D16-958F-3BCDB1165EA8@dominion.thruhere.net>
-References: <1336026806-13314-1-git-send-email-denis@denix.org>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQmShfPYRT1JImfwLeSfJBbEG4k8M6RPbx+2crTDzsnmnZ2jjz05WC4+Zw9bsUl3lO6A5CYs
+Return-Path: <denis@denix.org>
+Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
+	[206.46.173.13])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAACAE0044A
+	for <meta-ti@yoctoproject.org>; Thu,  3 May 2012 09:21:25 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.48.117.33])
+	by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M3G00HXIG3DOBD0@vms173013.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 03 May 2012 11:21:13 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 666EE2016D; Thu,
+	03 May 2012 12:21:13 -0400 (EDT)
+Date: Thu, 03 May 2012 12:21:13 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-id: <20120503162113.GF2681@denix.org>
+References: <20120503004302.E49A252A70@arago-project.org>
+	<1DB7C838-80AE-47B8-9251-87253476B6F5@dominion.thruhere.net>
+	<20120503060932.GD2681@denix.org>
+	<812B90C3-8D0A-4805-9424-1C167BEF536E@dominion.thruhere.net>
+MIME-version: 1.0
+In-reply-to: <812B90C3-8D0A-4805-9424-1C167BEF536E@dominion.thruhere.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] omap3-sgx-modules, libgles-omap3: add version 4.06.00.01
+Subject: Re: Denys Dmytriyenko : beaglebone: disable THUMB2_KERNEL in defconfig for newer binutils
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,36 +34,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2012 07:26:53 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 03 May 2012 16:21:25 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
+On Thu, May 03, 2012 at 08:25:11AM +0200, Koen Kooi wrote:
+> 
+> Op 3 mei 2012, om 08:09 heeft Denys Dmytriyenko het volgende geschreven:
+> 
+> > On Thu, May 03, 2012 at 08:02:00AM +0200, Koen Kooi wrote:
+> >> 
+> >> Op 3 mei 2012, om 02:43 heeft Arago Project git het volgende geschreven:
+> >> 
+> >>> Module: meta-ti
+> >>> Branch: master
+> >>> Commit: 3c693c26087aa148b944166083b5336f05d1c15b
+> >>> URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c693c26087aa148b944166083b5336f05d1c15b
+> >>> 
+> >>> Author: Denys Dmytriyenko <denys@ti.com>
+> >>> Date:   Wed May  2 20:40:58 2012 -0400
+> >>> 
+> >>> beaglebone: disable THUMB2_KERNEL in defconfig for newer binutils
+> >> 
+> >> Wait, what? Can we actually send these changes for review first? T2 is 
+> >> needed to meet the boot time goal, so please revert this one!
+> > 
+> > Have another solution to get it building under recent binutils?
+> 
+> Patch binutils or patch the kernel.
 
-Op 3 mei 2012, om 08:33 heeft Denys Dmytriyenko het volgende geschreven:
+Like I said, do you have a solution? Do you have said patches?
 
-> From: Denys Dmytriyenko <denys@ti.com>
->=20
-> * Ported from Arago
-> * Added version 4.06.00.01 of the Graphics SDK which supports Power =
-Management
->  features for the AM335x
-> * Use a variable PLATFORM for the directory structure since newer SDKs =
-use
->  LinuxARMV7 and older SDKs use LinuxOMAP3
-> * Modifiy rc.pvr to check return of the insmod of pvrsrvkm. If this =
-driver
->  fails to load the devmem2 read access can put the system in a state =
-where
->  it will not come out of suspend.
+Since gcc-4.5 and binutils-2.20 are scheduled to be removed from 
+meta-oe/toolchain-layer in a few days, I had to fix it some way. That's the 
+best I could do under this circumstances. I can't have beaglebone broken with 
+any  oher toolchain, to only gain few milliseconds of boot time.
 
-I keep bringing this up every few months: what's the plan to add the =
-necessary hooks to the kernel module to export the core revision in =
-sysfs instead of using devmem2? The kernel module knows about the right =
-memory addressed and turns on the clocks it needs. And better: we can =
-get rid of bogus ES revisions like 'ES8' since that's exactly the same =
-core as 'ES6' from a userspace point of view.
+> Changing the defconfig without even sending the patch for review is NOT the 
+> way to do it.
 
-regards,
+I heard you the first time! No need to repeat it every time.
 
-Koen=
+-- 
+Denys
 
