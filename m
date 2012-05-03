@@ -1,41 +1,30 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1908CE0044D
-	for <meta-ti@yoctoproject.org>; Thu,  3 May 2012 10:20:50 -0700 (PDT)
-Received: by wibhm4 with SMTP id hm4so247645wib.5
-	for <meta-ti@yoctoproject.org>; Thu, 03 May 2012 10:20:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=AwbkZaimbXf99Fh8m/9/UkcjGYdR8yUSK52hC951BeE=;
-	b=h+AWjg6aLsgIOldaAHJqikQCmA+0i8p33B+SXWpJQdxPsPg3tDV7OmfgiJRg0yblx3
-	vFQxb0ZNf+IfFEKgGEMOzur9ryAKlvMUCmGVj2VOS4ZAHs7rNS2lktBsPjiUa0PYoIs9
-	BMAs3I3TjtqkgrdrW/6g5cdoL5DPVzfyaSQRx5Rnl63+gKYvQRc2C95OLsJcVsR+Z58T
-	9fv5HvF8TA+TvNDeH89iOmFrDo0QK/wMw6DuUIu0wkBVMsUeca5eXLOooJx5+OZbnVWC
-	X7mwuynT7C8t7y1E+TPbs1IcNT6OhB9j6UGSV60PGOXclErsdWBV2xGJsw8XaIpK0+9C
-	UKIA==
-Received: by 10.180.82.136 with SMTP id i8mr5166550wiy.19.1336065649973;
-	Thu, 03 May 2012 10:20:49 -0700 (PDT)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id ca3sm986921wib.6.2012.05.03.10.20.48
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 03 May 2012 10:20:49 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <20120503171556.GJ2681@denix.org>
-Date: Thu, 3 May 2012 19:20:47 +0200
-Message-Id: <9F436296-853B-4A02-97B4-77B491AD6D2B@dominion.thruhere.net>
-References: <1335899212-29869-1-git-send-email-koen@dominion.thruhere.net>
-	<20120503171556.GJ2681@denix.org>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQlHvdWKiZKO6HP3Nocx/wDZ0m/38z7vOSBllwpjAN8CfX51YU3/hknynJyqXcQjDAcxWHFU
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [RFC][PATCH 1/5] linux-mainline 3.2: kernel recipe based on mainline 3.2.16 with additional patches for e.g. beagleboard on top
+Return-Path: <denis@denix.org>
+Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
+	[206.46.173.15])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2F726E0044D
+	for <meta-ti@yoctoproject.org>; Thu,  3 May 2012 10:35:02 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.48.117.33])
+	by vms173015.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M3G00CXTJHJQMD0@vms173015.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 03 May 2012 12:34:32 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8F97A201AF; Thu,
+	03 May 2012 13:34:31 -0400 (EDT)
+Date: Thu, 03 May 2012 13:34:31 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-id: <20120503173431.GK2681@denix.org>
+References: <20120503004302.E49A252A70@arago-project.org>
+	<1DB7C838-80AE-47B8-9251-87253476B6F5@dominion.thruhere.net>
+	<20120503060932.GD2681@denix.org>
+	<812B90C3-8D0A-4805-9424-1C167BEF536E@dominion.thruhere.net>
+	<20120503162113.GF2681@denix.org>
+	<914CC77F-F9A0-4FCB-B112-46649335EAA3@dominion.thruhere.net>
+MIME-version: 1.0
+In-reply-to: <914CC77F-F9A0-4FCB-B112-46649335EAA3@dominion.thruhere.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Denys Dmytriyenko : beaglebone: disable THUMB2_KERNEL in defconfig for newer binutils
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,36 +36,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2012 17:20:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 03 May 2012 17:35:02 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
+
+On Thu, May 03, 2012 at 07:12:05PM +0200, Koen Kooi wrote:
+> 
+> 
+> Op 3 mei 2012 om 18:21 heeft Denys Dmytriyenko <denis@denix.org> het volgende geschreven:
+> 
+> > On Thu, May 03, 2012 at 08:25:11AM +0200, Koen Kooi wrote:
+> >> 
+> >> Op 3 mei 2012, om 08:09 heeft Denys Dmytriyenko het volgende geschreven:
+> >> 
+> >>> On Thu, May 03, 2012 at 08:02:00AM +0200, Koen Kooi wrote:
+> >>>> 
+> >>>> Op 3 mei 2012, om 02:43 heeft Arago Project git het volgende geschreven:
+> >>>> 
+> >>>>> Module: meta-ti
+> >>>>> Branch: master
+> >>>>> Commit: 3c693c26087aa148b944166083b5336f05d1c15b
+> >>>>> URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c693c26087aa148b944166083b5336f05d1c15b
+> >>>>> 
+> >>>>> Author: Denys Dmytriyenko <denys@ti.com>
+> >>>>> Date:   Wed May  2 20:40:58 2012 -0400
+> >>>>> 
+> >>>>> beaglebone: disable THUMB2_KERNEL in defconfig for newer binutils
+> >>>> 
+> >>>> Wait, what? Can we actually send these changes for review first? T2 is 
+> >>>> needed to meet the boot time goal, so please revert this one!
+> >>> 
+> >>> Have another solution to get it building under recent binutils?
+> >> 
+> >> Patch binutils or patch the kernel.
+> > 
+> > Like I said, do you have a solution? Do you have said patches?
+> > 
+> > Since gcc-4.5 and binutils-2.20 are scheduled to be removed from 
+> > meta-oe/toolchain-layer in a few days, I had to fix it some way. That's the 
+> > best I could do under this circumstances. I can't have beaglebone broken with 
+> > any  oher toolchain, to only gain few milliseconds of boot time.
+> 
+> It's in the range of half a second when I last tested it. 
+
+If you care to provide binutils-2.20 with it forever, the change can be 
+reverted.
+
+Again, your decision to drop gcc-4.5 and binutils-2.20 from meta-oe drove me 
+to push this fix.
 
 
-Op 3 mei 2012, om 19:15 heeft Denys Dmytriyenko het volgende geschreven:
+> >> Changing the defconfig without even sending the patch for review is NOT the 
+> >> way to do it.
+> > 
+> > I heard you the first time! No need to repeat it every time.
+> 
+> I'll repeat it some more if you think meta-ti should be TIs playground 
+> without regard for the beagleboard.org project. Your action put a serious 
+> dent in my belief in meta-ti.
 
-> It's a heavy patch, but my question is - how is it different from =
-linux-3.0 we=20
-> already have, besides the version upgrade to 3.2? Why is it called=20
-> linux-mainline, the old linux recipe is also mainline with beagle =
-patches.
->=20
-> Basically, I'm trying to understand 2 things here:
-> - what's the difference between this beagle patch set and the one =
-applied on=20
-> top of e.g. 3.0.28? Is it a different dev model, goals, owner or =
-anything else
+I can say exactly the same to you - do you think meta-ti should be 
+beagleboard.org's playground w/o regard for other TI goals to support 
+different platforms and toolchains?
 
-Pretty much the same, with less PM. The goal is to keep moving closer to =
-mainline and to a recent mainline version. With this update we'll be =
-using the same kernel Robert Nelson uses for his ubuntu builds.
+Anyway, it's a childish reaction and fight - you know very well it wasn't 
+a conspiracy against you and affecting boot time was incidental. Calm down, 
+react sane and eveything can be fixed and worked out.
 
-> - why the name change with -mainline suffix?
-
-To namespace it like we planned for our u-boot recipes, a number of =
-layers have linux_3.2.bb recipes that would clash :( I'm not really fond =
-of it, but that's the price we pay for all these layers.
-
-regards,
-
-Koen=
+-- 
+Denys
 
