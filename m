@@ -1,26 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E311E00723
-	for <meta-ti@yoctoproject.org>; Wed,  2 May 2012 23:09:56 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M3F00AQKNRW69W0@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 03 May 2012 01:09:37 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 56EEB2010D; Thu,
-	03 May 2012 02:09:32 -0400 (EDT)
-Date: Thu, 03 May 2012 02:09:32 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-id: <20120503060932.GD2681@denix.org>
-References: <20120503004302.E49A252A70@arago-project.org>
-	<1DB7C838-80AE-47B8-9251-87253476B6F5@dominion.thruhere.net>
-MIME-version: 1.0
-In-reply-to: <1DB7C838-80AE-47B8-9251-87253476B6F5@dominion.thruhere.net>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org, Arago Project git <git@arago-project.org>
-Subject: Re: Denys Dmytriyenko : beaglebone: disable THUMB2_KERNEL in defconfig for newer binutils
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E679E00723
+	for <meta-ti@yoctoproject.org>; Wed,  2 May 2012 23:15:03 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 0293452990; Thu,  3 May 2012 06:15:02 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120503061503.0293452990@arago-project.org>
+Date: Thu,  3 May 2012 06:15:02 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : libgles-omap3: enable for ti814x SOC family
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,30 +21,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2012 06:09:56 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 03 May 2012 06:15:03 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, May 03, 2012 at 08:02:00AM +0200, Koen Kooi wrote:
-> 
-> Op 3 mei 2012, om 02:43 heeft Arago Project git het volgende geschreven:
-> 
-> > Module: meta-ti
-> > Branch: master
-> > Commit: 3c693c26087aa148b944166083b5336f05d1c15b
-> > URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c693c26087aa148b944166083b5336f05d1c15b
-> > 
-> > Author: Denys Dmytriyenko <denys@ti.com>
-> > Date:   Wed May  2 20:40:58 2012 -0400
-> > 
-> > beaglebone: disable THUMB2_KERNEL in defconfig for newer binutils
-> 
-> Wait, what? Can we actually send these changes for review first? T2 is 
-> needed to meet the boot time goal, so please revert this one!
+Module: meta-ti
+Branch: master
+Commit: d18bb23803ff9735a5fcb049c25d79273a325323
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d18bb23803ff9735a5fcb049c25d79273a325323
 
-Have another solution to get it building under recent binutils? Especially 
-considering removal of the old one fron meta-oe/toolchain-layer?
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu May  3 02:13:57 2012 -0400
 
--- 
-Denys
+libgles-omap3: enable for ti814x SOC family
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-graphics/libgles/libgles-omap3.inc         |    2 +-
+ .../libgles/libgles-omap3_4.05.00.03.bb            |    1 +
+ 2 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
+index 664a649..6137097 100644
+--- a/recipes-graphics/libgles/libgles-omap3.inc
++++ b/recipes-graphics/libgles/libgles-omap3.inc
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
+ 
+ PR = "r31"
+ 
+-COMPATIBLE_MACHINE = "(omap3|ti816x|ti33x)"
++COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
+ 
+ DEPENDS = "virtual/libx11 libxau libxdmcp libdrm"
+ 
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb b/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
+index 53585cf..d55dd05 100644
+--- a/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
++++ b/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
+@@ -1,4 +1,5 @@
+ BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
++BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
+ BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+ BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
+ 
+
 
