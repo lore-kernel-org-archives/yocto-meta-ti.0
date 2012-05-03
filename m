@@ -1,38 +1,25 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 08D10E00723
-	for <meta-ti@yoctoproject.org>; Wed,  2 May 2012 23:02:01 -0700 (PDT)
-Received: by wgbfg15 with SMTP id fg15so1127272wgb.11
-	for <meta-ti@yoctoproject.org>; Wed, 02 May 2012 23:02:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=evLFldDt7Yh0vEtfn0/X2YjyBc3yC64An3baQp/lsog=;
-	b=aieXh/nfszU0uLxChGweUFwHWi1v4cM+FPvA0HIlTynPkP1pSddGxQS8OMaZ+GQxtS
-	TZqMUMlMcwyL0yCMybtZmENEzOSUkuPePfcF82WbsxEJzn4mI0QXYWqmowOem0xQXXa9
-	+L3ee0zL5sRUHFeMN4lArIVOLhQw7Wc7Zm2TSJQu31XprH0rhIUoRVT8snpUIs30iAk1
-	OpdlzYjkq9BYsu4uVu5Dh3mYo1FKBS4OB7w3z2xd4qRFl5YmduHVtS31WnwBg57Ydy4w
-	M47OeqIeDMgi2l5nM2QkdyHCRXLfTMdT5VkxzwpP9w/xdFn2mnd1kRJB3DZ+KbRUXHpZ
-	feFg==
-Received: by 10.180.78.9 with SMTP id x9mr2265968wiw.18.1336024920424;
-	Wed, 02 May 2012 23:02:00 -0700 (PDT)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id o2sm14976651wiv.11.2012.05.02.23.01.58
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 02 May 2012 23:01:59 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <20120503004302.E49A252A70@arago-project.org>
-Date: Thu, 3 May 2012 08:02:00 +0200
-Message-Id: <1DB7C838-80AE-47B8-9251-87253476B6F5@dominion.thruhere.net>
+Return-Path: <denis@denix.org>
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E311E00723
+	for <meta-ti@yoctoproject.org>; Wed,  2 May 2012 23:09:56 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.48.117.33])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M3F00AQKNRW69W0@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 03 May 2012 01:09:37 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 56EEB2010D; Thu,
+	03 May 2012 02:09:32 -0400 (EDT)
+Date: Thu, 03 May 2012 02:09:32 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-id: <20120503060932.GD2681@denix.org>
 References: <20120503004302.E49A252A70@arago-project.org>
-To: Arago Project git <git@arago-project.org>
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQk3AXMXqnnGFDpFpi6enaSllNBf+W/boftguifU1QyelIOUg61A7dpQKdFVhCa/4JYg1X1Z
-Cc: meta-ti@yoctoproject.org
+	<1DB7C838-80AE-47B8-9251-87253476B6F5@dominion.thruhere.net>
+MIME-version: 1.0
+In-reply-to: <1DB7C838-80AE-47B8-9251-87253476B6F5@dominion.thruhere.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org, Arago Project git <git@arago-project.org>
 Subject: Re: Denys Dmytriyenko : beaglebone: disable THUMB2_KERNEL in defconfig for newer binutils
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -45,26 +32,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2012 06:02:02 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 03 May 2012 06:09:56 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
+On Thu, May 03, 2012 at 08:02:00AM +0200, Koen Kooi wrote:
+> 
+> Op 3 mei 2012, om 02:43 heeft Arago Project git het volgende geschreven:
+> 
+> > Module: meta-ti
+> > Branch: master
+> > Commit: 3c693c26087aa148b944166083b5336f05d1c15b
+> > URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c693c26087aa148b944166083b5336f05d1c15b
+> > 
+> > Author: Denys Dmytriyenko <denys@ti.com>
+> > Date:   Wed May  2 20:40:58 2012 -0400
+> > 
+> > beaglebone: disable THUMB2_KERNEL in defconfig for newer binutils
+> 
+> Wait, what? Can we actually send these changes for review first? T2 is 
+> needed to meet the boot time goal, so please revert this one!
 
-Op 3 mei 2012, om 02:43 heeft Arago Project git het volgende geschreven:
+Have another solution to get it building under recent binutils? Especially 
+considering removal of the old one fron meta-oe/toolchain-layer?
 
-> Module: meta-ti
-> Branch: master
-> Commit: 3c693c26087aa148b944166083b5336f05d1c15b
-> URL:    =
-http://arago-project.org/git/meta-ti.git?a=3Dcommit;h=3D3c693c26087aa148b9=
-44166083b5336f05d1c15b
->=20
-> Author: Denys Dmytriyenko <denys@ti.com>
-> Date:   Wed May  2 20:40:58 2012 -0400
->=20
-> beaglebone: disable THUMB2_KERNEL in defconfig for newer binutils
-
-
-Wait, what? Can we actually send these changes for review first? T2 is =
-needed to meet the boot time goal, so please revert this one!=
+-- 
+Denys
 
