@@ -1,34 +1,35 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 914E8E0070C
-	for <meta-ti@yoctoproject.org>; Fri,  4 May 2012 01:32:13 -0700 (PDT)
-Received: by werc12 with SMTP id c12so2200306wer.35
-	for <meta-ti@yoctoproject.org>; Fri, 04 May 2012 01:32:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=8K0mIY4iWmZTtMw93sbWWwwGq3mrPQ/jVPictz1ZiZE=;
-	b=PbOrwy7jEAiCA6ajDDJ9TZ1orDnpHue6P0RJK5uzrlYvdd/c5yG8bCooGszAsaz1lY
-	VhHMI7+njgtKNNXRO1zfmJ/7YrlfaO5HUVcPhJWhqU+XauwI24l4JwTyURCRW/GpeF1R
-	jctI4FwTknYoQJIQZDUL3kXgWfGAZI4G0QJFs2AuVL+uOWvisGVCfyHcbzpeprMEJPGp
-	vugpKKCgFNkWG6miEWz9IdxAYxMUfo9crFSKCQCJe9097VMALM8pW1eX6kGZhSRXSRjU
-	jEhydA7fGf6Zed0wLAzi1Det2twBdVynSXz3j6PAbCrsLM3g8wXOXSxICFatmL0U8XF7
-	I42w==
-Received: by 10.216.200.215 with SMTP id z65mr3265284wen.35.1336120332072;
-	Fri, 04 May 2012 01:32:12 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id ex2sm12738773wib.8.2012.05.04.01.32.10
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 04 May 2012 01:32:11 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: meta-ti@yoctoproject.org
-Date: Fri,  4 May 2012 10:32:05 +0200
-Message-Id: <1336120327-27181-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQnCSzsTywMFNF0gfltqZySWUF8+AavPJ7AxTw00JLEltzNxtHQOY5Yi2K6CCG4A0Q9xEKa5
-Cc: denys@ti.com
-Subject: [PATCH 1/3] sdcard_image bbclass: make ext4 the default
+Return-Path: <s.stirtzel@googlemail.com>
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0C603E0070C
+	for <meta-ti@yoctoproject.org>; Fri,  4 May 2012 01:59:00 -0700 (PDT)
+Received: by wibhm4 with SMTP id hm4so757421wib.11
+	for <meta-ti@yoctoproject.org>; Fri, 04 May 2012 01:59:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=//qk0OXGi4n5+LQji7woHystC7v00gGBcFAPuRLwFfg=;
+	b=ndbyhkDQYqsdtU4Jhs8cHKY0icprpBwQkaUm4x1NFLYvgRYlApBKp3nA5hWoSxQ94Q
+	/bL2n4vAR6quxyiT/Lcu1wQW2zPGB7oY2ywAFOJZS6vf1ySnh/Qy3BfVZGYvNzb10knZ
+	zF0ylV5dK6J7EwKLPkRqOELIjwLH9vFo5mNzooKHHI/bvRtDsXh4gloEOxuOiRbupI4F
+	Dx7u2OKsiEnD0m6s3wr9TfpR9/MZm5Asujje5Jb4my7X7524jzRp7FBIQEOcNMf6GjTx
+	cNPOKeiEhItRzF3AxatoXSC5kglql8gkCucqOFWjCc0aoYj26LO78R3xKVbKHFsZq8eJ
+	HuWQ==
+MIME-Version: 1.0
+Received: by 10.216.141.39 with SMTP id f39mr3246567wej.90.1336121940028; Fri,
+	04 May 2012 01:59:00 -0700 (PDT)
+Received: by 10.223.159.15 with HTTP; Fri, 4 May 2012 01:58:59 -0700 (PDT)
+In-Reply-To: <579E347C-A5A3-428D-8D3C-AE971F82FA0E@dominion.thruhere.net>
+References: <1335962006-27727-1-git-send-email-koen@dominion.thruhere.net>
+	<1335962006-27727-4-git-send-email-koen@dominion.thruhere.net>
+	<579E347C-A5A3-428D-8D3C-AE971F82FA0E@dominion.thruhere.net>
+Date: Fri, 4 May 2012 10:58:59 +0200
+Message-ID: <CAGiJk9doDWSK0WWi910RM2RO5G9Gv4kCcTH-nVwYsWmREh74Lg@mail.gmail.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 4/4] libgles-omap3: work around bug in opkg
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,27 +41,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 May 2012 08:32:14 -0000
+X-List-Received-Date: Fri, 04 May 2012 08:59:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- classes/sdcard_image.bbclass |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+2012/5/2 Koen Kooi <koen@dominion.thruhere.net>:
+>
+> Op 2 mei 2012, om 14:33 heeft Koen Kooi het volgende geschreven:
+>
+>> All the EGL_BADALLOC failures that user have been reporting turn out to be a bug in opkg: http://groups.google.com/group/opkg-devel/browse_thread/thread/741d18b0ef31435e#
+>>
+>> Opkg decides to relink symlinks to the wrong files. As a workaround we check the symlink during every bootup and fix it if needed.
+>>
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>
+> Patch 3/4 work around this problem as well, but this avoids the potential problem when all packages are installed and you upgrade them. Not sure of that will trigger the bug, but better safe than sorry.
+> Stupid thing took 2 months to track down!
+>
+> regards,
+>
+> Koen
 
-diff --git a/classes/sdcard_image.bbclass b/classes/sdcard_image.bbclass
-index 519bd9a..f9b8d46 100644
---- a/classes/sdcard_image.bbclass
-+++ b/classes/sdcard_image.bbclass
-@@ -19,7 +19,7 @@ LOOPDEV_FS ?= "/dev/loop3"
- SDIMG_SIZE ?= "444" 
- 
- # FS type for rootfs
--ROOTFSTYPE ?= "ext3"
-+ROOTFSTYPE ?= "ext4"
- 
- BOOTPARTNAME_beaglebone = "BEAGLE_BONE"
- BOOTPARTNAME ?= "${MACHINE}"
+Hi,
+works great!
+
+So it wasn't low priority after all :)
+
+
 -- 
-1.7.10
-
+Regards
+Samuel
 
