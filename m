@@ -1,35 +1,25 @@
-Return-Path: <ebutera@gmail.com>
-Received: from mail-vx0-f176.google.com (mail-vc0-f176.google.com
-	[209.85.220.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4AC4DE0059A
-	for <meta-ti@yoctoproject.org>; Sun,  6 May 2012 07:17:07 -0700 (PDT)
-Received: by vcbf1 with SMTP id f1so2440373vcb.35
-	for <meta-ti@yoctoproject.org>; Sun, 06 May 2012 07:17:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=GU0/vn79AjCHPJZzG/kmvNowiMT7GaXP5QRpuzBAQI4=;
-	b=AYbjirtbwFL1qHhX6l5Mk711bmih6vk2zIz7OdEp84drLvl7w4g0pvrt9/bMSlWKCf
-	cQS+pPEd9RUcXTbjyjV3nlPNrTdWSOwXLZP1SOS/fKpR+JKqAZdBr1ZSeXBrahX5lrwQ
-	yam+IZXSMyzDA+PCjy5bHAlF8TZi7oFWS4mTtFrcAH9Yi22t9K03jpdkPSEkSeRRs4iA
-	YZYBNS/JN5OvylHi13xl/TKMgT7GByHSw6zKWXpxyjbnsajJMKLwmT3YC/4hnvktx2y/
-	d1npG+Bzt0aSfv1PgVkN/mvu43/9lmeZPYvK7ueE0RuPhgDreHwqhgndMLrk+8QASu6P
-	0qWQ==
-MIME-Version: 1.0
-Received: by 10.220.39.197 with SMTP id h5mr3828947vce.51.1336313826347; Sun,
-	06 May 2012 07:17:06 -0700 (PDT)
-Sender: ebutera@gmail.com
-Received: by 10.220.148.68 with HTTP; Sun, 6 May 2012 07:17:06 -0700 (PDT)
-In-Reply-To: <CABcw_OnmrqyWeQszZL5duTdtfM39o+x_CWayeuuogEaPi=ohMA@mail.gmail.com>
-References: <CA+2YH7srjOf900PBFzxVx8Tm4HKaxuvKzKudoo201Bh7-48o6g@mail.gmail.com>
-	<CABcw_OnmrqyWeQszZL5duTdtfM39o+x_CWayeuuogEaPi=ohMA@mail.gmail.com>
-Date: Sun, 6 May 2012 16:17:06 +0200
-X-Google-Sender-Auth: CqrwNsNHoWPHZ3YTxe9e2g00FNE
-Message-ID: <CA+2YH7v2xZxACdG=PVb0EELAEq7ykJySJnjMOWiZFiSLoj=Dbg@mail.gmail.com>
-From: Enrico <ebutera@users.berlios.de>
-To: whittenburg@gmail.com
-Cc: meta-ti@yoctoproject.org
-Subject: Re: ti-dsplink build error
+Return-Path: <denis@denix.org>
+Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
+	[206.46.173.1])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 58173E01206
+	for <meta-ti@yoctoproject.org>; Mon,  7 May 2012 08:56:08 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.48.117.33])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M3N00MCMTL0SGD0@vms173001.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 07 May 2012 10:55:49 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 4A2182009F; Mon,
+	07 May 2012 11:55:48 -0400 (EDT)
+Date: Mon, 07 May 2012 11:55:48 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-id: <20120507155548.GB10566@denix.org>
+References: <1336211713-2588-1-git-send-email-koen@dominion.thruhere.net>
+MIME-version: 1.0
+In-reply-to: <1336211713-2588-1-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org, denys@ti.com
+Subject: Re: [PATCH] ti33x.inc: add missing MACHINE_KERNEL_PR bump for the 3.2.14 -> 3.2.16 upgrade
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,19 +31,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 May 2012 14:17:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 07 May 2012 15:56:08 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Sun, May 6, 2012 at 5:11 AM, Chris Whittenburg <whittenburg@gmail.com> wrote:
-> I am having the same problem, on a ubuntu 11.10 64bit host, and adding
->
-> INHIBIT_PACKAGE_STRIP = '1'
->
-> to my angstrom-v2012.05.conf file allowed it to complete.
+On Sat, May 05, 2012 at 11:55:13AM +0200, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+> 
+> Denys, since the 3.2.16 update patch isn't in yet do you want me to squash 
+> this into that and resend as v2?
 
-Yes, i needed that for other meta-ti packages too (linux-utils,
-local-power-manager...). But i don't know what's the proper fix (i.e.
-what's the problem in package.bbclass).
+Sure, send me v2 please.
 
-Enrico
+>  conf/machine/include/ti33x.inc |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+> index c5926a8..e04da03 100644
+> --- a/conf/machine/include/ti33x.inc
+> +++ b/conf/machine/include/ti33x.inc
+> @@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
+>  require conf/machine/include/tune-cortexa8.inc
+>  PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+>  # Increase this everytime you change something in the kernel
+> -MACHINE_KERNEL_PR = "r10"
+> +MACHINE_KERNEL_PR = "r11"
+>  
+>  KERNEL_IMAGETYPE = "uImage"
+>  
+> -- 
+> 1.7.10
+> 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+> 
 
