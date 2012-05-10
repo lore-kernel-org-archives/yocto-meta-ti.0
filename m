@@ -1,28 +1,18 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from mail-lpp01m010-f48.google.com (mail-lpp01m010-f48.google.com
-	[209.85.215.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC510E013FF
-	for <meta-ti@yoctoproject.org>; Thu, 10 May 2012 14:37:02 -0700 (PDT)
-Received: by lagz14 with SMTP id z14so2036925lag.35
-	for <meta-ti@yoctoproject.org>; Thu, 10 May 2012 14:37:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=dWsEMZ7LbrtpkW0Q4xq6tD4q56Gg4RRwV4+nGKeSkxA=;
-	b=Sd+UwC4vK3zfJ0gTwHamjujniKCqbmn0yAMuBm9O2M3mb/UvfjfvDgrcWqsF6H6dkd
-	7qcfnLbhSx8MVvwGIWye8r+xTWIzocg9go967DQJt41y1qzcwgZPbzOf7YPxs3R+HrD2
-	R5oYaqV5FX0Io3VwhEvTBlvn/piB3IrovTRDHgicnUrOqXYTq6aC/0VAvzUsOURln8g+
-	eU7A/PemWP/vb8TFQDOpH5WTJjr5qAskTu3roFCBWdiknYK+fKk2CHrR2d7V0VrBotud
-	38m2Zdp+18BoviJRYcid2acOrXh3/XYMIDcv6hzqbSRh+g5KsqUCPeY6TPX2tBWlKNs9
-	JYyA==
-MIME-Version: 1.0
-Received: by 10.112.48.169 with SMTP id m9mr1536258lbn.93.1336685821941; Thu,
-	10 May 2012 14:37:01 -0700 (PDT)
-Received: by 10.112.5.231 with HTTP; Thu, 10 May 2012 14:37:01 -0700 (PDT)
-Date: Thu, 10 May 2012 17:37:01 -0400
-Message-ID: <CAOd_LFwo56FyxUxbnOcNGTAmV63Zc5X=_vb4eRhTbCHzr3Fmjw@mail.gmail.com>
+Return-Path: <cbrake@hq.bec-systems.com>
+Received: from happy.bec-systems.com (oh-69-34-21-229.sta.embarqhsd.net
+	[69.34.21.229])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83E2DE013FF
+	for <meta-ti@yoctoproject.org>; Thu, 10 May 2012 14:48:46 -0700 (PDT)
+Received: from cbrake by happy.bec-systems.com with local (Exim 4.72)
+	(envelope-from <cbrake@hq.bec-systems.com>)
+	id 1SSbE4-0007md-RO; Thu, 10 May 2012 17:48:44 -0400
 From: Cliff Brake <cliff.brake@gmail.com>
 To: meta-ti@yoctoproject.org
-Subject: u-boot patch URI's
+Date: Thu, 10 May 2012 17:48:19 -0400
+Message-Id: <1336686499-29891-1-git-send-email-cliff.brake@gmail.com>
+X-Mailer: git-send-email 1.7.1
+Cc: Cliff Brake <cbrake@bec-systems.com>
+Subject: [PATCH] u-boot 2011.12: add directory prefix to patch URIs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,17 +24,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 May 2012 21:37:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 10 May 2012 21:48:46 -0000
 
-I ran into a small problem building u-boot:
+From: Cliff Brake <cbrake@bec-systems.com>
 
-https://github.com/Angstrom-distribution/meta-ti/pull/1
 
-Thanks,
-Cliff
+Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
+---
+ recipes-bsp/u-boot/u-boot_2011.12.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
+diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
+index 39f77bd..45c64a6 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.12.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
+@@ -30,9 +30,9 @@ SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
+            ${CACHEFIX} \
+            file://2011.12/0009-Beagleboard-Correct-memory-size-on-rev-C4.patch \
+            file://2011.12/0010-OMAP3-Correct-get_sdr_cs_offset-mask.patch \
+-           file://0011-ext2load-increase-read-speed.patch \
+-           file://0012-ext4fs-ls-load-support.patch \
+-           file://0013-beagleboard-switch-mmcroots-to-ext4.patch \
++           file://2011.12/0011-ext2load-increase-read-speed.patch \
++           file://2011.12/0012-ext4fs-ls-load-support.patch \
++           file://2011.12/0013-beagleboard-switch-mmcroots-to-ext4.patch \
+            ${FWENV} \
+           "
+ 
 -- 
-=================
-http://bec-systems.com
+1.7.1
+
 
