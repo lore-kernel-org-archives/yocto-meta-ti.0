@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86109E0142A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7A26E01420
 	for <meta-ti@yoctoproject.org>; Thu, 10 May 2012 18:55:01 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2418D529A7; Fri, 11 May 2012 01:55:01 +0000 (UTC)
+	id 9EECD52AAD; Fri, 11 May 2012 01:55:01 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120511015501.2418D529A7@arago-project.org>
+Message-Id: <20120511015501.9EECD52AAD@arago-project.org>
 Date: Fri, 11 May 2012 01:55:01 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-ti33x-psp 3.2: bump SRCREV for 2 CPPI1.4 fixes
+Subject: Koen Kooi : uim: userspace app to manage wl12xx firmware loading
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,36 +26,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 12bf8f2f92dfdb7050e4cb92a9968cc94c733f7e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=12bf8f2f92dfdb7050e4cb92a9968cc94c733f7e
+Commit: 285aeaee513969ca7a79a344c75d0f590b722cb9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=285aeaee513969ca7a79a344c75d0f590b722cb9
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Tue May  8 15:10:19 2012 +0200
+Date:   Mon May  7 17:57:40 2012 +0200
 
-linux-ti33x-psp 3.2: bump SRCREV for 2 CPPI1.4 fixes
+uim: userspace app to manage wl12xx firmware loading
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-connectivity/uim/uim_git.bb |   19 +++++++++++++++++++
+ 1 files changed, 19 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index 458248e..593d6e7 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -11,8 +11,8 @@ S = "${WORKDIR}/git"
- MULTI_CONFIG_BASE_SUFFIX = ""
- 
- BRANCH = "v3.2-staging"
--SRCREV = "31944a82681a0e7ab6cc3e069c30eddc5042e3e8"
--MACHINE_KERNEL_PR_append = "f+gitr${SRCREV}"
-+SRCREV = "baaa0c0425528486efcc70b7696dd6359f10b5bd"
-+MACHINE_KERNEL_PR_append = "g+gitr${SRCREV}"
- 
- COMPATIBLE_MACHINE = "(ti33x)"
- 
+diff --git a/recipes-connectivity/uim/uim_git.bb b/recipes-connectivity/uim/uim_git.bb
+new file mode 100644
+index 0000000..c8265e9
+--- /dev/null
++++ b/recipes-connectivity/uim/uim_git.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "User Mode Initialization Manager for wl12xx devices"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://uim.c;startline=4;endline=12;md5=16a9d6e829218481f8a61797fe2be2e2"
++
++# Doesn't have a version, so we'll make one up
++PV = "0.0"
++
++SRCREV = "c73894456df5def97111cb33d2106b684b8b7959"
++SRC_URI = "git://gitorious.org/uim/uim.git"
++
++S= "${WORKDIR}/git"
++
++do_install() {
++	oe_runmake install DESTDIR=${D}
++}
++
++# connman has a plugin to handle all this
++RCONFLICTS_${PN} += "connman-plugin-tist"
++RRECOMMENDS_${PN} = "linux-firmware-wl12xx"
 
 
