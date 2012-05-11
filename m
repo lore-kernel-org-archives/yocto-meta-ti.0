@@ -1,23 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
-	[206.46.173.7])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 992FEE01402
-	for <meta-ti@yoctoproject.org>; Thu, 10 May 2012 19:41:46 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M3U00KN47H3X8C0@vms173007.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 10 May 2012 21:41:28 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 79B3920043; Thu,
-	10 May 2012 22:41:27 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0772E0044A
+	for <meta-ti@yoctoproject.org>; Thu, 10 May 2012 21:33:23 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 16FD752A6F; Fri, 11 May 2012 04:33:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Thu, 10 May 2012 22:41:20 -0400
-Message-id: <1336704080-23643-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.7.8.6
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH] linux-ti33x-psp 3.2: avoid gold linker for Thumb2 kernel
+Message-Id: <20120511043323.16FD752A6F@arago-project.org>
+Date: Fri, 11 May 2012 04:33:23 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Koen Kooi : omap3-sgx-modules, ti-staging.inc, ti-linuxutils: change PACKAGE_STRIP = "no" to the proper INHIBIT_PACKAGE_STRIP = "1"
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,38 +21,77 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2012 02:41:46 -0000
+X-List-Received-Date: Fri, 11 May 2012 04:33:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: fa87ca0b1a1890d262a591aee50f082194f45317
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fa87ca0b1a1890d262a591aee50f082194f45317
 
-BeagleBone kernel is required to be built in Thumb2 mode for fast boot.
-Gold linker is not yet perfect for this, giving an internal error:
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Thu May 10 15:45:24 2012 +0200
 
-| arm-linux-gnueabi-ld: internal error in thumb_branch_common, at .../binutils-cross-2.22-r6/binutils-2.22/gold/arm.cc:4149
+omap3-sgx-modules, ti-staging.inc, ti-linuxutils: change PACKAGE_STRIP = "no" to the proper INHIBIT_PACKAGE_STRIP = "1"
 
-While this fix can be put in generic linux.inc for all the kernels, it's
-better to test the Gold linker out as much as possible and only disable it
-for known issues, like this one (until it gets fixed, of course).
+PACKAGE_STRIP doesn't exit in oe-core (anymore)
 
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index d1dfaaf..0f44a95 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -22,6 +22,8 @@ SRC_URI += "git://arago-project.org/git/projects/linux-am33x.git;protocol=http;b
+---
+
+ .../omap3-sgx-modules_1.6.16.3977.bb               |    2 +-
+ .../omap3-sgx-modules_4.05.00.03.bb                |    2 +-
+ recipes-ti/includes/ti-staging.inc                 |    2 +-
+ recipes-ti/linuxutils/ti-linuxutils.inc            |    2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
+index f37299d..0affee1 100644
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
+@@ -26,7 +26,7 @@ S = "${WORKDIR}/Graphics_SDK_${SGXPV}/GFX_Linux_KM"
+ PVRBUILD = "release"
+ export KERNELDIR = "${STAGING_KERNEL_DIR}"
  
- SRC_URI_append_beaglebone = " file://logo_linux_clut224.ppm"
+-PACKAGE_STRIP = "no"
++INHIBIT_PACKAGE_STRIP = "1"
  
-+KERNEL_LDSUFFIX_beaglebone = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '.bfd', '', d)}"
-+
- do_compile_prepend() {
- 	cp ${WORKDIR}/am335x-pm-firmware.bin ${S}/firmware/
- }
--- 
-1.7.7
+ TI_PLATFORM_omap3 = "omap3630"
+ TI_PLATFORM_ti816x = "ti81xx"
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
+index 42a2e9a..31c7d4e 100644
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
+@@ -23,7 +23,7 @@ S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
+ PVRBUILD = "release"
+ export KERNELDIR = "${STAGING_KERNEL_DIR}"
+ 
+-PACKAGE_STRIP = "no"
++INHIBIT_PACKAGE_STRIP = "1"
+ 
+ TI_PLATFORM_omap3 = "omap3630"
+ TI_PLATFORM_ti814x = "ti81xx"
+diff --git a/recipes-ti/includes/ti-staging.inc b/recipes-ti/includes/ti-staging.inc
+index 48ee061..b588805 100644
+--- a/recipes-ti/includes/ti-staging.inc
++++ b/recipes-ti/includes/ti-staging.inc
+@@ -1,4 +1,4 @@
+-PACKAGE_STRIP = "no"
++INHIBIT_PACKAGE_STRIP = "1"
+ 
+ ALLOW_EMPTY_${PN} = "1"
+ ALLOW_EMPTY_${PN}-dev = "1"
+diff --git a/recipes-ti/linuxutils/ti-linuxutils.inc b/recipes-ti/linuxutils/ti-linuxutils.inc
+index 06b254d..dba485b 100644
+--- a/recipes-ti/linuxutils/ti-linuxutils.inc
++++ b/recipes-ti/linuxutils/ti-linuxutils.inc
+@@ -90,4 +90,4 @@ FILES_ti-irq-module = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp/irq*.ko
+ FILES_ti-linuxutils-app = "${installdir}/ti-linuxutils-app/*/*"
+ 
+ INSANE_SKIP_ti-linuxutils-app = "True"
+-PACKAGE_STRIP = "no"
++INHIBIT_PACKAGE_STRIP = "1"
 
 
