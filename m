@@ -1,25 +1,40 @@
-Return-Path: <denis@denix.org>
-Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
-	[206.46.173.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCB13E0044A
-	for <meta-ti@yoctoproject.org>; Thu, 10 May 2012 21:47:26 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M3U00CN6DB1AIM0@vms173009.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 10 May 2012 23:47:26 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id CE29E20173; Fri,
-	11 May 2012 00:47:25 -0400 (EDT)
-Date: Fri, 11 May 2012 00:47:25 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Cliff Brake <cliff.brake@gmail.com>
-Message-id: <20120511044725.GC26492@denix.org>
-References: <1336686499-29891-1-git-send-email-cliff.brake@gmail.com>
-MIME-version: 1.0
-In-reply-to: <1336686499-29891-1-git-send-email-cliff.brake@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org, Cliff Brake <cbrake@bec-systems.com>
-Subject: Re: [PATCH] u-boot 2011.12: add directory prefix to patch URIs
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A0F0E0044A
+	for <meta-ti@yoctoproject.org>; Thu, 10 May 2012 23:46:31 -0700 (PDT)
+Received: by weyr3 with SMTP id r3so236876wey.35
+	for <meta-ti@yoctoproject.org>; Thu, 10 May 2012 23:46:30 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=DVlQHpodbtt/2OPvPGZTwZh9jmkth4OPoXECfystnpw=;
+	b=Mqymn3SDC3yJRJjvFIZ7BSvAt4mDmecdwYCwjRIgfbqYRBR+Iz+5eJlesuCyV3iIcT
+	naLIzg05FOZ5BNTzVXescdDlMZOSOIt2w8VNzHrEhLW4rczeORCly2S1Q8dFnJR+Y/UQ
+	2DuQwYnhf3gluW0FssjhKE22X+6iPujEWpu9T76DcVwaqH0Hd5JUo/CAN4ItnkFg8UcO
+	Z6IIInrIAdoWmbbMUvBveevnVzovG9i2HCUlJ/c9Nmtf2uVuueG/0Lf+LKEoFCHpymHH
+	hTNy0giminBMU+VXQkvrf3psDJxK1mj5erF5w7b59e2CrZqVfjhr/BvOmi2crHashrq9
+	HSLQ==
+Received: by 10.180.104.168 with SMTP id gf8mr4575070wib.12.1336718789989;
+	Thu, 10 May 2012 23:46:29 -0700 (PDT)
+Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id h8sm13988307wix.4.2012.05.10.23.46.28
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 10 May 2012 23:46:28 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1257)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1336704080-23643-1-git-send-email-denis@denix.org>
+Date: Fri, 11 May 2012 08:46:24 +0200
+Message-Id: <F63AF365-5587-4FDC-A8CC-F47BD2E01DB8@dominion.thruhere.net>
+References: <1336704080-23643-1-git-send-email-denis@denix.org>
+To: Denys Dmytriyenko <denis@denix.org>
+X-Mailer: Apple Mail (2.1257)
+X-Gm-Message-State: ALoCoQkL4uFCnRJ/SdzDXocO+i89eSEU6QtSYHPOy2ouE39rDkeLK4odvGVxv9zkMnEOs4Vx+ndD
+Cc: meta-ti@yoctoproject.org, Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [PATCH] linux-ti33x-psp 3.2: avoid gold linker for Thumb2 kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,80 +46,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2012 04:47:26 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
-
-Cliff,
-
-Thanks for the patch. But it is already the case of proper paths being used in 
-the recipe:
-
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/diff/recipes-bsp/u-boot/u-boot_2011.12.bb?id=07913cca6cfd7f35a9bb5d6b2cca41c6b5f07ec3
-
-diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
-index 9616a05..45c64a6 100644
---- a/recipes-bsp/u-boot/u-boot_2011.12.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
-@@ -6,7 +6,7 @@ UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
- UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
- 
- PV = "2011.12"
--PR = "r7"
-+PR = "r8"
- 
- # No patches for other machines yet
- COMPATIBLE_MACHINE = "(beagleboard|pandaboard|hawkboard|am3517-evm|am37x-evm|omap3evm)"
-@@ -30,6 +30,9 @@ SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
-            ${CACHEFIX} \
-            file://2011.12/0009-Beagleboard-Correct-memory-size-on-rev-C4.patch \
-            file://2011.12/0010-OMAP3-Correct-get_sdr_cs_offset-mask.patch \
-+           file://2011.12/0011-ext2load-increase-read-speed.patch \
-+           file://2011.12/0012-ext4fs-ls-load-support.patch \
-+           file://2011.12/0013-beagleboard-switch-mmcroots-to-ext4.patch \
-            ${FWENV} \
-           "
-
-Did you happen to pick an intermediate version from Koen's WIP tree on github? 
-That's not how it was submitted and eventually went into the official tree. 
-Sorry for confusion.
-
--- 
-Denys
+X-List-Received-Date: Fri, 11 May 2012 06:46:31 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
 
-On Thu, May 10, 2012 at 05:48:19PM -0400, Cliff Brake wrote:
-> From: Cliff Brake <cbrake@bec-systems.com>
-> 
-> 
-> Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
-> ---
->  recipes-bsp/u-boot/u-boot_2011.12.bb |    6 +++---
->  1 files changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
-> index 39f77bd..45c64a6 100644
-> --- a/recipes-bsp/u-boot/u-boot_2011.12.bb
-> +++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
-> @@ -30,9 +30,9 @@ SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
->             ${CACHEFIX} \
->             file://2011.12/0009-Beagleboard-Correct-memory-size-on-rev-C4.patch \
->             file://2011.12/0010-OMAP3-Correct-get_sdr_cs_offset-mask.patch \
-> -           file://0011-ext2load-increase-read-speed.patch \
-> -           file://0012-ext4fs-ls-load-support.patch \
-> -           file://0013-beagleboard-switch-mmcroots-to-ext4.patch \
-> +           file://2011.12/0011-ext2load-increase-read-speed.patch \
-> +           file://2011.12/0012-ext4fs-ls-load-support.patch \
-> +           file://2011.12/0013-beagleboard-switch-mmcroots-to-ext4.patch \
->             ${FWENV} \
->            "
->  
-> -- 
-> 1.7.1
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+Op 11 mei 2012, om 04:41 heeft Denys Dmytriyenko het volgende =
+geschreven:
+
+> From: Denys Dmytriyenko <denys@ti.com>
+>=20
+> BeagleBone kernel is required to be built in Thumb2 mode for fast =
+boot.
+> Gold linker is not yet perfect for this, giving an internal error:
+>=20
+> | arm-linux-gnueabi-ld: internal error in thumb_branch_common, at =
+.../binutils-cross-2.22-r6/binutils-2.22/gold/arm.cc:4149
+>=20
+> While this fix can be put in generic linux.inc for all the kernels, =
+it's
+> better to test the Gold linker out as much as possible and only =
+disable it
+> for known issues, like this one (until it gets fixed, of course).
+>=20
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+Looks good to me.=
 
