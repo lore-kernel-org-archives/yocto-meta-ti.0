@@ -1,42 +1,15 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24A88E01402
-	for <meta-ti@yoctoproject.org>; Fri, 11 May 2012 05:22:31 -0700 (PDT)
-Received: by wibhn14 with SMTP id hn14so1415697wib.11
-	for <meta-ti@yoctoproject.org>; Fri, 11 May 2012 05:22:30 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=EF6EIXJpLQCUKNqvk6lXn7U2OTzSCgv/BvpGquiBk2Y=;
-	b=eB7SvDmhvpJrRliEmHY1LPmFoiQnOi7+e2BPZRgSuolc7EVyYBz5jhAQkRVsm5tRqe
-	iGEZnDkuFS08rkrEu/LNswxzHt0YDgvwWuZiPfD9rtGoMl89nAwRNY8ZYO/wscbhBLRo
-	vcOc34IspKN7zk0Ea7+HupDHHCYRBz4Ny2yZ1CEXdUBilw+ZcJ/pHRCKXU4dcEel5HuA
-	kDTzI/77QBPBnob0quhRhMuyNjD0TB5TFVSNcAB7LREVl0QTYWnHnafozhH5GPDnKcb8
-	ng1kjcLx8zh7siGgtE3xlcCaXE0dSD1JneZQ8DzaKCNcek/TPOawx/HWZl15tF7Eijt+
-	dvbg==
-Received: by 10.180.98.39 with SMTP id ef7mr7176022wib.21.1336738950790;
-	Fri, 11 May 2012 05:22:30 -0700 (PDT)
-Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id 6sm10231597wiz.1.2012.05.11.05.22.28
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 11 May 2012 05:22:29 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1257)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <CAOd_LFwCH3aCuNsUnX1JHWEyNKVREqdoNAiBZrWLWmevqNsHeQ@mail.gmail.com>
-Date: Fri, 11 May 2012 14:22:30 +0200
-Message-Id: <09CC0265-E19F-4DB9-B8A6-740969E517CD@dominion.thruhere.net>
-References: <1336686499-29891-1-git-send-email-cliff.brake@gmail.com>
-	<20120511044725.GC26492@denix.org>
-	<CAOd_LFwCH3aCuNsUnX1JHWEyNKVREqdoNAiBZrWLWmevqNsHeQ@mail.gmail.com>
-To: Cliff Brake <cliff.brake@gmail.com>
-X-Mailer: Apple Mail (2.1257)
-X-Gm-Message-State: ALoCoQk6+iaIdWoAUNyxT4xlMMCyjYms6mvgPFu50mwn191YVMBQ0EC8nXWp5kPwf3WwvORBK1MB
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] u-boot 2011.12: add directory prefix to patch URIs
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 65051E00723
+	for <meta-ti@yoctoproject.org>; Fri, 11 May 2012 10:24:02 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 779F952A60; Fri, 11 May 2012 17:23:59 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120511172400.779F952A60@arago-project.org>
+Date: Fri, 11 May 2012 17:23:59 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti33x-psp 3.2: avoid gold linker for Thumb2 kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,27 +21,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2012 12:22:32 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 11 May 2012 17:24:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
+Module: meta-ti
+Branch: master
+Commit: a623c766f2ea8e022d216d281301919ee0cdd3fb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a623c766f2ea8e022d216d281301919ee0cdd3fb
 
-Op 11 mei 2012, om 13:10 heeft Cliff Brake het volgende geschreven:
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu May 10 21:55:15 2012 -0400
 
-> Denys,
->=20
-> Thanks for the clarification -- I made the mistake of thinking the
-> meta-ti master was on Github (saw it there when Angstrom moved).
->=20
-> https://github.com/Angstrom-distribution/meta-ti
->=20
-> I notice now at the top of the above page, it says it is a mirror, but
-> it may be a good idea to mention in the README where the master repo
+linux-ti33x-psp 3.2: avoid gold linker for Thumb2 kernel
 
-The master repo is behind the TI firewall so listing that is only of use =
-if you can VPN into TI :)
+BeagleBone kernel is required to be built in Thumb2 mode for fast boot.
+Gold linker is not yet perfect for this, giving an internal error:
 
-regards,
+| arm-linux-gnueabi-ld: internal error in thumb_branch_common, at .../binutils-cross-2.22-r6/binutils-2.22/gold/arm.cc:4149
 
-Koen=
+While this fix can be put in generic linux.inc for all the kernels, it's
+better to test the Gold linker out as much as possible and only disable it
+for known issues, like this one (until it gets fixed, of course).
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index d1dfaaf..0f44a95 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -22,6 +22,8 @@ SRC_URI += "git://arago-project.org/git/projects/linux-am33x.git;protocol=http;b
+ 
+ SRC_URI_append_beaglebone = " file://logo_linux_clut224.ppm"
+ 
++KERNEL_LDSUFFIX_beaglebone = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '.bfd', '', d)}"
++
+ do_compile_prepend() {
+ 	cp ${WORKDIR}/am335x-pm-firmware.bin ${S}/firmware/
+ }
+
 
