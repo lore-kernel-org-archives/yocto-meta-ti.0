@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BAFFAE01409
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC435E0140C
 	for <meta-ti@yoctoproject.org>; Thu, 10 May 2012 18:55:00 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B429452A69; Fri, 11 May 2012 01:54:59 +0000 (UTC)
+	id 6F74852A46; Fri, 11 May 2012 01:54:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120511015459.B429452A69@arago-project.org>
+Message-Id: <20120511015459.6F74852A46@arago-project.org>
 Date: Fri, 11 May 2012 01:54:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-mainline 3.2: add ASoC fixes for beagleboard
+Subject: Koen Kooi : sdcard_image bbclass: make ext4 the default
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,23 +26,34 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 0b2c5e6de9be82d6f8362d61c52a76d504fea9d3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0b2c5e6de9be82d6f8362d61c52a76d504fea9d3
+Commit: 7b8b1fe4b8c56593faeb19413adf44d2acbd730d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7b8b1fe4b8c56593faeb19413adf44d2acbd730d
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Fri May  4 08:45:54 2012 +0200
+Date:   Fri May  4 08:40:01 2012 +0200
 
-linux-mainline 3.2: add ASoC fixes for beagleboard
+sdcard_image bbclass: make ext4 the default
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...add-MODULE_ALIAS-to-mcbsp-and-pcm-drivers.patch |   37 +
- ...onvert-per-board-modules-to-platform-driv.patch | 1119 ++++++++++++++++++++
- recipes-kernel/linux/linux-mainline_3.2.bb         |    4 +-
- 3 files changed, 1159 insertions(+), 1 deletions(-)
+ classes/sdcard_image.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=0b2c5e6de9be82d6f8362d61c52a76d504fea9d3
+diff --git a/classes/sdcard_image.bbclass b/classes/sdcard_image.bbclass
+index 519bd9a..f9b8d46 100644
+--- a/classes/sdcard_image.bbclass
++++ b/classes/sdcard_image.bbclass
+@@ -19,7 +19,7 @@ LOOPDEV_FS ?= "/dev/loop3"
+ SDIMG_SIZE ?= "444" 
+ 
+ # FS type for rootfs
+-ROOTFSTYPE ?= "ext3"
++ROOTFSTYPE ?= "ext4"
+ 
+ BOOTPARTNAME_beaglebone = "BEAGLE_BONE"
+ BOOTPARTNAME ?= "${MACHINE}"
+
 
