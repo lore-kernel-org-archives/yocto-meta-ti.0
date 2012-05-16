@@ -1,33 +1,34 @@
-Return-Path: <exosyst@gmail.com>
-Received: from mail-pz0-f48.google.com (mail-pz0-f48.google.com
-	[209.85.210.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C2B50E006C7
-	for <meta-ti@yoctoproject.org>; Wed, 16 May 2012 00:27:16 -0700 (PDT)
-Received: by dadz8 with SMTP id z8so782320dad.35
-	for <meta-ti@yoctoproject.org>; Wed, 16 May 2012 00:27:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=XrEIHSUJ1iUZcgphR166ukmY68dnkgr6WMjtw5rVAdg=;
-	b=Xq+uoOy5aWGHEmBF+Ixq73hd29+Xrzv6sVYtgNEnAW9PdphpCuS5Q3czCeTBwmDCTn
-	tSCh8dyIV8AelBuIeyReCI2OsUfWHUiJlbqhZRIUoh7pUOUrEGXX/h7QSqVk5kryw5PQ
-	fuWkD3PuWpwU7T3nHvW1CiDIn/COspXrgpQ/4HMq95+z623BBJNnfx7iAy8I7Gu2rkbp
-	myAX+leXgOC8QX2UzWpIv6SsBrsVicPL11/BMjkO2BEDNUeMzB1mq3A1IeCnDsLZi6Ct
-	VqFVRggpXMakMo41ThQs+BDACHEBzsgeagicMkm7B5XJ/mTVckauATifhdzQwIRWA26b
-	YL6Q==
-Received: by 10.68.203.40 with SMTP id kn8mr13570485pbc.162.1337153236074;
-	Wed, 16 May 2012 00:27:16 -0700 (PDT)
-MIME-Version: 1.0
-Sender: exosyst@gmail.com
-Received: by 10.68.204.162 with HTTP; Wed, 16 May 2012 00:26:55 -0700 (PDT)
-In-Reply-To: <CAN-pQATO_EjYx2g5oM5Hja-FawTOy00wOBkDFEgutwaCRh1kxQ@mail.gmail.com>
-References: <CAN-pQATO_EjYx2g5oM5Hja-FawTOy00wOBkDFEgutwaCRh1kxQ@mail.gmail.com>
-From: Nick G <exosyst+metaTI@gmail.com>
-Date: Wed, 16 May 2012 08:26:55 +0100
-X-Google-Sender-Auth: _lIJD8DXFWmairtalYjEJjzgQGc
-Message-ID: <CAN-pQAT-__u2-f6YiM307YeDUUeUOCOx9=AQ3+rZJBVU1sXSJA@mail.gmail.com>
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0268EE01206
+	for <meta-ti@yoctoproject.org>; Wed, 16 May 2012 06:27:05 -0700 (PDT)
+Received: by weyr3 with SMTP id r3so580049wey.35
+	for <meta-ti@yoctoproject.org>; Wed, 16 May 2012 06:27:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=Zch1rOQoXKTrlrNVOsndvgkgK7pSLDdwCkIKkicLZTA=;
+	b=DtvGKYuANpchc0dohv+/1Q7C/ouAjxfE9TTqb0rfg/8zBUMBwDjTYlZwWI9nkk78bR
+	TTSYupWXxeD7tBJmLYl4xvqNHc2pzvuWxw/Rd6BH5a/KDpPw2bLGUeR8ZeMw0zZsTOVg
+	zXIAbh28xD3HQCzTG8+JFK8HfJml+3O13v/8aywpRNXAPDe1MlauwWySJXB74xpy32hT
+	b65ERltXGr+sLkA21sTdowKFD/Okopu71bwYvbW0J6N2KMdK/IH5rSINtUkB5AsyoPX1
+	0cB3mi0PJgYTPjyfErrPB6A2PgzWY+JPSFv3HRVCcrb5txKjCW18bAEp70htgJEGaOG1
+	fLFw==
+Received: by 10.180.74.7 with SMTP id p7mr7955817wiv.20.1337174824572;
+	Wed, 16 May 2012 06:27:04 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id m1sm18463931wic.6.2012.05.16.06.27.03
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 16 May 2012 06:27:03 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Subject: Building issues with meta-toolchain on Beaglebone
+Date: Wed, 16 May 2012 15:27:00 +0200
+Message-Id: <1337174820-22414-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQmMckbTVTxhW8Tw6dYsDzJN4dxQYWEW1ynAmFA1NjGJG6d5csZl9PzmWF0LCUAZ7OZs0VgU
+Cc: denys@ti.com
+Subject: [PATCH] linux-ti33x-psp 3.2: make st7735fb DMA safe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,412 +40,185 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2012 07:27:16 -0000
-Content-Type: multipart/alternative; boundary=047d7b15a51da580a204c0223f7a
+X-List-Received-Date: Wed, 16 May 2012 13:27:06 -0000
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ ...rking-WIP-changes-to-make-DMA-safe-and-ad.patch |  143 ++++++++++++++++++++
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    3 +-
+ 2 files changed, 145 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0043-st7735fb-Working-WIP-changes-to-make-DMA-safe-and-ad.patch
+
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0043-st7735fb-Working-WIP-changes-to-make-DMA-safe-and-ad.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0043-st7735fb-Working-WIP-changes-to-make-DMA-safe-and-ad.patch
+new file mode 100644
+index 0000000..5e4b6b3
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0043-st7735fb-Working-WIP-changes-to-make-DMA-safe-and-ad.patch
+@@ -0,0 +1,143 @@
++From 783a66842e956b2eb9d7dc379848fbf79a370bc8 Mon Sep 17 00:00:00 2001
++From: Matt Porter <mporter@ti.com>
++Date: Wed, 28 Mar 2012 23:35:44 -0400
++Subject: [PATCH] st7735fb: Working WIP changes to make DMA safe and add
++ endian fix
++
++This removes the "from the stack" allocation of 1 byte buffers
++that was a temporary thing and isn't dma safe. Now vmallocs the
++user buffer to be deferred I/O safe and kmallocs a swapped
++shadow buffer to support the byte swabbing hack to fix userspace
++limitations.
++
++The buffer allocation and endian hack code needs some serious
++cleanup as on big endian systems if would fail miserably atm.
++However, the LE path works for the moment so people can do something
++with the driver.
++
++Signed-off-by: Matt Porter <mporter@ti.com>
++---
++ drivers/video/st7735fb.c |   49 ++++++++++++++++++++++++++++++----------------
++ include/video/st7735fb.h |    2 +
++ 2 files changed, 34 insertions(+), 17 deletions(-)
++
++diff --git a/drivers/video/st7735fb.c b/drivers/video/st7735fb.c
++index 500cc88..0931ca2 100644
++--- a/drivers/video/st7735fb.c
+++++ b/drivers/video/st7735fb.c
++@@ -145,11 +145,9 @@ static struct fb_var_screeninfo st7735fb_var __devinitdata = {
++ 
++ static int st7735_write(struct st7735fb_par *par, u8 data)
++ {
++-	u8 txbuf[2]; /* allocation from stack must go */
+++	par->buf[0] = data;
++ 
++-	txbuf[0] = data;
++-
++-	return spi_write(par->spi, &txbuf[0], 1);
+++	return spi_write(par->spi, par->buf, 1);
++ }
++ 
++ static void st7735_write_data(struct st7735fb_par *par, u8 data)
++@@ -243,16 +241,17 @@ static void st7735_reset(struct st7735fb_par *par)
++ static void st7735fb_update_display(struct st7735fb_par *par)
++ {
++ 	int ret = 0;
++-	u8 *vmem = par->info->screen_base;
++-
++-	/*
++-		TODO:
++-		Allow a subset of pages to be passed in
++-		(for deferred I/O).  Check pages against
++-		pan display settings to see if they
++-		should be updated.
++-	*/
++-	/* For now, just write the full 40KiB on each update */
+++	u16 *vmem;
+++#ifdef __LITTLE_ENDIAN
+++	int i;
+++	u16 *vmem16 = (u16 *)par->info->screen_base;
+++	vmem = par->ssbuf;
+++
+++	for (i=0; i<WIDTH*HEIGHT*BPP/8/2; i++)
+++		vmem[i] = swab16(vmem16[i]);
+++#else
+++	vmem = (u16 *)par->info->screen_base;
+++#endif
++ 
++ 	/* Set row/column data window */
++ 	st7735_set_addr_win(par, 0, 0, WIDTH-1, HEIGHT-1);
++@@ -261,7 +260,7 @@ static void st7735fb_update_display(struct st7735fb_par *par)
++ 	st7735_write_cmd(par, ST7735_RAMWR);
++ 
++ 	/* Blast framebuffer to ST7735 internal display RAM */
++-	ret = st7735_write_data_buf(par, vmem, WIDTH*HEIGHT*BPP/8);
+++	ret = st7735_write_data_buf(par, (u8 *)vmem, WIDTH*HEIGHT*BPP/8);
++ 	if (ret < 0)
++ 		pr_err("%s: spi_write failed to update display buffer\n",
++ 			par->info->fix.id);
++@@ -369,7 +368,7 @@ static struct fb_ops st7735fb_ops = {
++ };
++ 
++ static struct fb_deferred_io st7735fb_defio = {
++-	.delay		= HZ,
+++	.delay		= HZ/20,
++ 	.deferred_io	= st7735fb_deferred_io,
++ };
++ 
++@@ -395,7 +394,11 @@ static int __devinit st7735fb_probe (struct spi_device *spi)
++ 		return -EINVAL;
++ 	}
++ 
++-	vmem = vzalloc(vmem_size);
+++#ifdef __LITTLE_ENDIAN
+++	vmem = (u8 *)vmalloc(vmem_size);
+++#else
+++	vmem = (u8 *)kmalloc(vmem_size, GFP_KERNEL);
+++#endif
++ 	if (!vmem)
++ 		return retval;
++ 
++@@ -431,6 +434,14 @@ static int __devinit st7735fb_probe (struct spi_device *spi)
++ 	par->spi = spi;
++ 	par->rst = pdata->rst_gpio;
++ 	par->dc = pdata->dc_gpio;
+++	par->buf = kmalloc(1, GFP_KERNEL);
+++
+++#ifdef __LITTLE_ENDIAN
+++	/* Allocated swapped shadow buffer */
+++	par->ssbuf = kmalloc(vmem_size, GFP_KERNEL);
+++	if (!par->ssbuf)
+++		return retval;
+++#endif
++ 
++ 	retval = register_framebuffer(info);
++ 	if (retval < 0)
++@@ -457,7 +468,11 @@ fbreg_fail:
++ 	framebuffer_release(info);
++ 
++ fballoc_fail:
+++#ifdef __LITTLE_ENDIAN
++ 	vfree(vmem);
+++#else
+++	kfree(vmem);
+++#endif
++ 
++ 	return retval;
++ }
++diff --git a/include/video/st7735fb.h b/include/video/st7735fb.h
++index 250f036..e99cd05 100644
++--- a/include/video/st7735fb.h
+++++ b/include/video/st7735fb.h
++@@ -36,6 +36,8 @@ struct st7735fb_par {
++ 	struct fb_info *info;
++ 	int rst;
++ 	int dc;
+++	u16 *ssbuf;
+++	u8 *buf;
++ };
++ 
++ struct st7735fb_platform_data {
++-- 
++1.7.7.6
++
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index 05772b4..bb26c70 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -12,7 +12,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
+ 
+ BRANCH = "v3.2-staging"
+ SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
+-MACHINE_KERNEL_PR_append = "i+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "j+gitr${SRCREV}"
+ 
+ COMPATIBLE_MACHINE = "(ti33x)"
+ 
+@@ -967,5 +967,6 @@ PATCHES_OVER_PSP = " \
+ 	file://beaglebone/0038-board-am335xevm.c-Beaglebone-expose-all-pwms-through.patch \
+ 	file://beaglebone/0039-ARM-OMAP-Mux-Fixed-debugfs-mux-output-always-reporti.patch \
+ 	file://beaglebone/0040-beaglebone-export-SPI2-as-spidev-when-no-capes-are-u.patch \
++    file://beaglebone/0043-st7735fb-Working-WIP-changes-to-make-DMA-safe-and-ad.patch \
+ 	file://beaglebone/0001-arm-boot-compressed-default-asm-arch-to-armv7-a.patch \
+ "
+-- 
+1.7.10
 
---047d7b15a51da580a204c0223f7a
-Content-Type: text/plain; charset=ISO-8859-1
 
-Hey guys,
-
-
-I'm basing this on poky-denzil with the denzil branch of meta-oe and
-meta-ti checked out as well.
-I set my machine to be beaglebone and added meta-oe and meta-ti to the
-config options and managed to successfully build the core-image-minimal
-using bitbake. I now want to generate a standalone toolchain which, *I
-believe* is done with meta-toolchain (please correct me if I'm wrong).
-
-Unfortunately this fails with the rather long error I'll post below for
-search engines' sake.
-
-Is this a known bug? Is there a workaround?
-
-Thanks,
-Nick
-
-Output as follows:
-<... snip ...>
-NOTE: Running noexec task 1819 of 1830 (ID: 9,
-/media/scratch/poky-denzil-7.0/meta/recipes-core/meta/meta-toolchain.bb,
-do_package_write)
-ERROR: Function failed: do_compile (see
-/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/temp/log.do_compile.1234
-for further information)
-ERROR: Logfile of failure stored in:
-/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/temp/log.do_compile.1234
-Log data follows:
-| DEBUG: SITE files ['endian-little', 'bit-32', 'ix86-common',
-'common-linux', 'common-glibc', 'i686-linux', 'common']
-| NOTE: make
-ARCH_FLAGS_FOR_TARGET=--sysroot=/media/scratch/poky-denzil-7.0/beaglebone/tmp/sysroots/beaglebone
-all-host all-target-libgcc
-| make[1]: Entering directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libiberty'
-| make[2]: Entering directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libiberty/testsuite'
-| make[2]: Nothing to be done for `all'.
-| make[2]: Leaving directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libiberty/testsuite'
-| make[1]: Leaving directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libiberty'
-| make[1]: Entering directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/fixincludes'
-| make[1]: Nothing to be done for `all'.
-| make[1]: Leaving directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/fixincludes'
-| make[1]: Entering directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/lto-plugin'
-| make  all-am
-| make[2]: Entering directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/lto-plugin'
-| make[2]: Leaving directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/lto-plugin'
-| make[1]: Leaving directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/lto-plugin'
-| make[1]: Entering directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/intl'
-| make[1]: Nothing to be done for `all'.
-| make[1]: Leaving directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/intl'
-| make[1]: Entering directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/build-i686-linux/libiberty'
-| make[2]: Entering directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/build-i686-linux/libiberty/testsuite'
-| make[2]: Nothing to be done for `all'.
-| make[2]: Leaving directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/build-i686-linux/libiberty/testsuite'
-| make[1]: Leaving directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/build-i686-linux/libiberty'
-| make[1]: Entering directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/build-i686-linux/fixincludes'
-| make[1]: Nothing to be done for `all'.
-| make[1]: Leaving directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/build-i686-linux/fixincludes'
-| make[1]: Entering directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libcpp'
-| test -f config.h || (rm -f stamp-h1 && make stamp-h1)
-| make[1]: Leaving directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libcpp'
-| make[1]: Entering directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libdecnumber'
-| make[1]: Nothing to be done for `all'.
-| make[1]: Leaving directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libdecnumber'
-| make[1]: Entering directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/gcc'
-| make[1]: Leaving directory
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/gcc'
-| Checking multilib configuration for libgcc...
-| Configuring in arm-poky-linux-gnueabi/libgcc
-| configure: loading cache ./config.cache
-| checking for --enable-version-specific-runtime-libs... no
-| checking for a BSD-compatible install... /bin/install -c
-| checking for gawk... gawk
-| checking build system type... i686-pc-linux-gnu
-| checking host system type... arm-poky-linux-gnueabi
-| checking for arm-poky-linux-gnueabi-ar... arm-poky-linux-gnueabi-ar
-| checking for arm-poky-linux-gnueabi-lipo... arm-poky-linux-gnueabi-lipo
-| checking for arm-poky-linux-gnueabi-nm... arm-poky-linux-gnueabi-nm
-| checking for arm-poky-linux-gnueabi-ranlib...
-arm-poky-linux-gnueabi-ranlib
-| checking for arm-poky-linux-gnueabi-strip... arm-poky-linux-gnueabi-strip
-| checking whether ln -s works... yes
-| checking for arm-poky-linux-gnueabi-gcc...  arm-poky-linux-gnueabi-gcc
---sysroot=/media/scratch/poky-denzil-7.0/beaglebone/tmp/sysroots/beaglebone
---sysroot=/media/scratch/poky-denzil-7.0/beaglebone/tmp/sysroots/beaglebone
-| checking for C compiler default output file name... a.out
-| checking whether the C compiler works... yes
-| checking whether we are cross compiling... yes
-| checking for suffix of executables...
-| checking for suffix of object files... o
-| checking whether we are using the GNU C compiler... yes
-| checking whether  arm-poky-linux-gnueabi-gcc
---sysroot=/media/scratch/poky-denzil-7.0/beaglebone/tmp/sysroots/beaglebone
---sysroot=/media/scratch/poky-denzil-7.0/beaglebone/tmp/sysroots/beaglebone
-accepts -g... yes
-| checking for  arm-poky-linux-gnueabi-gcc
---sysroot=/media/scratch/poky-denzil-7.0/beaglebone/tmp/sysroots/beaglebone
---sysroot=/media/scratch/poky-denzil-7.0/beaglebone/tmp/sysroots/beaglebone
-option to accept ISO C89... none needed
-| checking how to run the C preprocessor...  arm-poky-linux-gnueabi-gcc -E
-| configure: error: in
-`/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/arm-poky-linux-gnueabi/libgcc':
-| configure: error: C preprocessor " arm-poky-linux-gnueabi-gcc -E" fails
-sanity check
-| See `config.log' for more details.
-| make: *** [configure-tarERROR: Function failed: do_compile (see
-/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/temp/log.do_compile.1234
-for further information)
-| get-libgcc] Error 1
-| ERROR: oe_runmake failed
-NOTE: package gcc-cross-canadian-arm-4.6.3+svnr184847-r25: task do_compile:
-Failed
-ERROR: Task 786 (/media/scratch/poky-denzil-7.0/meta/recipes-devtools/gcc/
-gcc-cross-canadian_4.6.bb, do_compile) failed with exit code '1'
-NOTE: Tasks Summary: Attempted 1819 tasks of which 1807 didn't need to be
-rerun and 1 failed.
-
-Summary: 1 task failed:
-  /media/scratch/poky-denzil-7.0/meta/recipes-devtools/gcc/
-gcc-cross-canadian_4.6.bb, do_compile
-Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-
---047d7b15a51da580a204c0223f7a
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div class=3D"gmail_quote">Hey guys,<br><br><br>I&#39;m basing this on poky=
--denzil with the denzil branch of meta-oe and meta-ti checked out as well.<=
-br>I set my machine to be beaglebone and added meta-oe and meta-ti to the c=
-onfig options and managed to successfully build the core-image-minimal usin=
-g bitbake. I now want to generate a standalone toolchain which, *I believe*=
- is done with meta-toolchain (please correct me if I&#39;m wrong).<br>
-
-
-<br>Unfortunately this fails with the rather long error I&#39;ll post below=
- for search engines&#39; sake.<br><br>Is this a known bug? Is there a worka=
-round?<br><br>Thanks,<br>Nick<br><br>Output as follows:<br>&lt;... snip ...=
-&gt;<br>
-
-
-NOTE: Running noexec task 1819 of 1830 (ID: 9, /media/scratch/poky-denzil-7=
-.0/meta/recipes-core/meta/<a href=3D"http://meta-toolchain.bb" target=3D"_b=
-lank">meta-toolchain.bb</a>, do_package_write)<br>ERROR: Function failed: d=
-o_compile (see /media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nati=
-vesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/temp/log.do=
-_compile.1234 for further information)<br>
-
-
-ERROR: Logfile of failure stored in: /media/scratch/poky-denzil-7.0/beagleb=
-one/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr=
-184847-r25/temp/log.do_compile.1234<br>Log data follows:<br>| DEBUG: SITE f=
-iles [&#39;endian-little&#39;, &#39;bit-32&#39;, &#39;ix86-common&#39;, &#3=
-9;common-linux&#39;, &#39;common-glibc&#39;, &#39;i686-linux&#39;, &#39;com=
-mon&#39;]<br>
-
-
-| NOTE: make ARCH_FLAGS_FOR_TARGET=3D--sysroot=3D/media/scratch/poky-denzil=
--7.0/beaglebone/tmp/sysroots/beaglebone all-host all-target-libgcc<br>| mak=
-e[1]: Entering directory `/media/scratch/poky-denzil-7.0/beaglebone/tmp/wor=
-k/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/=
-gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libiberty&#3=
-9;<br>
-
-
-| make[2]: Entering directory `/media/scratch/poky-denzil-7.0/beaglebone/tm=
-p/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847=
--r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libiber=
-ty/testsuite&#39;<br>
-
-
-| make[2]: Nothing to be done for `all&#39;.<br>| make[2]: Leaving director=
-y `/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysd=
-k-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i6=
-86-pokysdk-linux.arm-poky-linux-gnueabi/libiberty/testsuite&#39;<br>
-
-
-| make[1]: Leaving directory `/media/scratch/poky-denzil-7.0/beaglebone/tmp=
-/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-=
-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libibert=
-y&#39;<br>
-
-
-| make[1]: Entering directory `/media/scratch/poky-denzil-7.0/beaglebone/tm=
-p/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847=
--r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/fixincl=
-udes&#39;<br>
-
-
-| make[1]: Nothing to be done for `all&#39;.<br>| make[1]: Leaving director=
-y `/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysd=
-k-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i6=
-86-pokysdk-linux.arm-poky-linux-gnueabi/fixincludes&#39;<br>
-
-
-| make[1]: Entering directory `/media/scratch/poky-denzil-7.0/beaglebone/tm=
-p/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847=
--r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/lto-plu=
-gin&#39;<br>
-
-
-| make=A0 all-am<br>| make[2]: Entering directory `/media/scratch/poky-denz=
-il-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-=
-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-l=
-inux-gnueabi/lto-plugin&#39;<br>
-
-
-| make[2]: Leaving directory `/media/scratch/poky-denzil-7.0/beaglebone/tmp=
-/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-=
-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/lto-plug=
-in&#39;<br>
-
-
-| make[1]: Leaving directory `/media/scratch/poky-denzil-7.0/beaglebone/tmp=
-/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-=
-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/lto-plug=
-in&#39;<br>
-
-
-| make[1]: Entering directory `/media/scratch/poky-denzil-7.0/beaglebone/tm=
-p/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847=
--r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/intl&#3=
-9;<br>
-
-
-| make[1]: Nothing to be done for `all&#39;.<br>| make[1]: Leaving director=
-y `/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysd=
-k-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i6=
-86-pokysdk-linux.arm-poky-linux-gnueabi/intl&#39;<br>
-
-
-| make[1]: Entering directory `/media/scratch/poky-denzil-7.0/beaglebone/tm=
-p/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847=
--r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/build-i=
-686-linux/libiberty&#39;<br>
-
-
-| make[2]: Entering directory `/media/scratch/poky-denzil-7.0/beaglebone/tm=
-p/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847=
--r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/build-i=
-686-linux/libiberty/testsuite&#39;<br>
-
-
-| make[2]: Nothing to be done for `all&#39;.<br>| make[2]: Leaving director=
-y `/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysd=
-k-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i6=
-86-pokysdk-linux.arm-poky-linux-gnueabi/build-i686-linux/libiberty/testsuit=
-e&#39;<br>
-
-
-| make[1]: Leaving directory `/media/scratch/poky-denzil-7.0/beaglebone/tmp=
-/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-=
-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/build-i6=
-86-linux/libiberty&#39;<br>
-
-
-| make[1]: Entering directory `/media/scratch/poky-denzil-7.0/beaglebone/tm=
-p/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847=
--r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/build-i=
-686-linux/fixincludes&#39;<br>
-
-
-| make[1]: Nothing to be done for `all&#39;.<br>| make[1]: Leaving director=
-y `/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysd=
-k-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i6=
-86-pokysdk-linux.arm-poky-linux-gnueabi/build-i686-linux/fixincludes&#39;<b=
-r>
-
-
-| make[1]: Entering directory `/media/scratch/poky-denzil-7.0/beaglebone/tm=
-p/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847=
--r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libcpp&=
-#39;<br>
-
-
-| test -f config.h || (rm -f stamp-h1 &amp;&amp; make stamp-h1)<br>| make[1=
-]: Leaving directory `/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i6=
-86-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-=
-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libcpp&#39;<br>
-
-
-| make[1]: Entering directory `/media/scratch/poky-denzil-7.0/beaglebone/tm=
-p/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847=
--r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/libdecn=
-umber&#39;<br>
-
-
-| make[1]: Nothing to be done for `all&#39;.<br>| make[1]: Leaving director=
-y `/media/scratch/poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysd=
-k-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r25/gcc-4_6-branch/build.i6=
-86-pokysdk-linux.arm-poky-linux-gnueabi/libdecnumber&#39;<br>
-
-
-| make[1]: Entering directory `/media/scratch/poky-denzil-7.0/beaglebone/tm=
-p/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847=
--r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/gcc&#39=
-;<br>
-
-
-| make[1]: Leaving directory `/media/scratch/poky-denzil-7.0/beaglebone/tmp=
-/work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-=
-r25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/gcc&#39;=
-<br>
-
-
-| Checking multilib configuration for libgcc...<br>| Configuring in arm-pok=
-y-linux-gnueabi/libgcc<br>| configure: loading cache ./config.cache<br>| ch=
-ecking for --enable-version-specific-runtime-libs... no<br>| checking for a=
- BSD-compatible install... /bin/install -c<br>
-
-
-| checking for gawk... gawk<br>| checking build system type... i686-pc-linu=
-x-gnu<br>| checking host system type... arm-poky-linux-gnueabi<br>| checkin=
-g for arm-poky-linux-gnueabi-ar... arm-poky-linux-gnueabi-ar<br>| checking =
-for arm-poky-linux-gnueabi-lipo... arm-poky-linux-gnueabi-lipo<br>
-
-
-| checking for arm-poky-linux-gnueabi-nm... arm-poky-linux-gnueabi-nm<br>| =
-checking for arm-poky-linux-gnueabi-ranlib... arm-poky-linux-gnueabi-ranlib=
-<br>| checking for arm-poky-linux-gnueabi-strip... arm-poky-linux-gnueabi-s=
-trip<br>
-
-
-| checking whether ln -s works... yes<br>| checking for arm-poky-linux-gnue=
-abi-gcc...=A0 arm-poky-linux-gnueabi-gcc --sysroot=3D/media/scratch/poky-de=
-nzil-7.0/beaglebone/tmp/sysroots/beaglebone --sysroot=3D/media/scratch/poky=
--denzil-7.0/beaglebone/tmp/sysroots/beaglebone<br>
-
-
-| checking for C compiler default output file name... a.out<br>| checking w=
-hether the C compiler works... yes<br>| checking whether we are cross compi=
-ling... yes<br>| checking for suffix of executables...<br>| checking for su=
-ffix of object files... o<br>
-
-
-| checking whether we are using the GNU C compiler... yes<br>| checking whe=
-ther=A0 arm-poky-linux-gnueabi-gcc --sysroot=3D/media/scratch/poky-denzil-7=
-.0/beaglebone/tmp/sysroots/beaglebone --sysroot=3D/media/scratch/poky-denzi=
-l-7.0/beaglebone/tmp/sysroots/beaglebone=A0=A0 accepts -g... yes<br>
-
-
-| checking for=A0 arm-poky-linux-gnueabi-gcc --sysroot=3D/media/scratch/pok=
-y-denzil-7.0/beaglebone/tmp/sysroots/beaglebone --sysroot=3D/media/scratch/=
-poky-denzil-7.0/beaglebone/tmp/sysroots/beaglebone=A0=A0 option to accept I=
-SO C89... none needed<br>
-
-
-| checking how to run the C preprocessor...=A0 arm-poky-linux-gnueabi-gcc -=
-E<br>| configure: error: in `/media/scratch/poky-denzil-7.0/beaglebone/tmp/=
-work/i686-nativesdk-pokysdk-linux/gcc-cross-canadian-arm-4.6.3+svnr184847-r=
-25/gcc-4_6-branch/build.i686-pokysdk-linux.arm-poky-linux-gnueabi/arm-poky-=
-linux-gnueabi/libgcc&#39;:<br>
-
-
-| configure: error: C preprocessor &quot; arm-poky-linux-gnueabi-gcc -E&quo=
-t; fails sanity check<br>| See `config.log&#39; for more details.<br>| make=
-: *** [configure-tarERROR: Function failed: do_compile (see /media/scratch/=
-poky-denzil-7.0/beaglebone/tmp/work/i686-nativesdk-pokysdk-linux/gcc-cross-=
-canadian-arm-4.6.3+svnr184847-r25/temp/log.do_compile.1234 for further info=
-rmation)<br>
-
-
-| get-libgcc] Error 1<br>| ERROR: oe_runmake failed<br>NOTE: package gcc-cr=
-oss-canadian-arm-4.6.3+svnr184847-r25: task do_compile: Failed<br>ERROR: Ta=
-sk 786 (/media/scratch/poky-denzil-7.0/meta/recipes-devtools/gcc/<a href=3D=
-"http://gcc-cross-canadian_4.6.bb" target=3D"_blank">gcc-cross-canadian_4.6=
-.bb</a>, do_compile) failed with exit code &#39;1&#39;<br>
-
-
-NOTE: Tasks Summary: Attempted 1819 tasks of which 1807 didn&#39;t need to =
-be rerun and 1 failed.<br><br>Summary: 1 task failed:<br>=A0 /media/scratch=
-/poky-denzil-7.0/meta/recipes-devtools/gcc/<a href=3D"http://gcc-cross-cana=
-dian_4.6.bb" target=3D"_blank">gcc-cross-canadian_4.6.bb</a>, do_compile<br=
->
-
-
-Summary: There was 1 ERROR message shown, returning a non-zero exit code.<b=
-r><br>
-</div><br>
-
---047d7b15a51da580a204c0223f7a--
