@@ -1,41 +1,30 @@
-Return-Path: <fromm@dresearch-fe.de>
-Received: from mail-lb0-f176.google.com (mail-lb0-f176.google.com
-	[209.85.217.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0E3B3E013B7
-	for <meta-ti@yoctoproject.org>; Fri, 18 May 2012 07:55:37 -0700 (PDT)
-Received: by lboj14 with SMTP id j14so3019385lbo.35
-	for <meta-ti@yoctoproject.org>; Fri, 18 May 2012 07:55:37 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=1auNEPNNxkQhcH+BKv9LVp99DYnseNevU4GmyaZZtU8=;
-	b=JispREYe5JZAjh17EmWqC7VSRlp3QncYrCBV5PrAaSCr+KmHImXwZAdl1NRehVbDbR
-	Xvga+w0EMM62vsUvAhqsK8yvHXsw43A3dLr/MfxBE5kZQ576KaQWMK2f2K4fUAeGRBCs
-	mcPB83UN0pYWxeCk8qV/VtuKKR4kWhfCYkN5u1XhGUjV7MqzCDFj3LP2YPP1xf+ku5Ld
-	5e1KBtJxGwO1QNTCizKKQ7eS8NtEA1n9qs2Th/Yc2Ynl4+xu/C5AtS0m434COy4irIja
-	ORLFjdAA4zYek3usXgxaAHfhtoFIVI6alB3bdUAs0mD4nW68tLCItWMAd71AqeLwjG9g
-	VLZw==
-MIME-Version: 1.0
-Received: by 10.152.48.6 with SMTP id h6mr11376536lan.30.1337352936974; Fri,
-	18 May 2012 07:55:36 -0700 (PDT)
-Received: by 10.112.100.132 with HTTP; Fri, 18 May 2012 07:55:36 -0700 (PDT)
-In-Reply-To: <4C82F39BABFE6A429733A300DEBF52240B76E4EE@DNCE05.ent.ti.com>
+Return-Path: <denis@denix.org>
+Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
+	[206.46.173.11])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DDD69E013B7
+	for <meta-ti@yoctoproject.org>; Fri, 18 May 2012 14:48:44 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.48.117.33])
+	by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M4800BIWN8X7RG0@vms173011.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 18 May 2012 16:48:34 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id A264D201AE; Fri,
+	18 May 2012 17:48:33 -0400 (EDT)
+Date: Fri, 18 May 2012 17:48:33 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Thilo Fromm <fromm@dresearch-fe.de>
+Message-id: <20120518214833.GB4208@denix.org>
 References: <CADZ6=avh27wFzfty4h6ntoweX3QrLvkz=8pRgFBp8VQ7YEJ71A@mail.gmail.com>
 	<jp5gkp$2ip$1@dough.gmane.org>
 	<CADZ6=atDkyHJricwLdNqWv9aYNWXUSBVaGhQB1pC9ZTLqNYQtw@mail.gmail.com>
 	<C1FD0ECD-98B9-4D93-8351-2A19519FFF2D@dominion.thruhere.net>
 	<CADZ6=aux412Otdnf_YBJdJB1JUx2bD2sDXy7TNyaefHhq_YxtQ@mail.gmail.com>
 	<331B3AEF-9CA7-4639-A316-43DBB4A03E0D@dominion.thruhere.net>
-	<4C82F39BABFE6A429733A300DEBF52240B76E4EE@DNCE05.ent.ti.com>
-Date: Fri, 18 May 2012 16:55:36 +0200
-Message-ID: <CADZ6=avtEDxL1jHTyc218+1Qzf79w0p+YLwPiLOibN6KgC1jsQ@mail.gmail.com>
-From: Thilo Fromm <fromm@dresearch-fe.de>
-To: "Monk, Roger" <r-monk@ti.com>
-X-Gm-Message-State: ALoCoQloZR/PhCKIZapKEWKc110Vdpz+6nHkTC97Dyneo0k5HVw1dd2dD/TaYkn8OStLeUkkORwu
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+	<CADZ6=atZrjgogV7zopSvXEvev6kucn524KG-s3Au7ocQ-+Eyyw@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CADZ6=atZrjgogV7zopSvXEvev6kucn524KG-s3Au7ocQ-+Eyyw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org, openembedded-devel@lists.openembedded.org
 Subject: Re: [oe] ti81xx-psp-linux-2.6.37: broken kernel with gcc > 4.5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -48,50 +37,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2012 14:55:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 May 2012 21:48:45 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hello Roger,
+On Fri, May 18, 2012 at 04:40:25PM +0200, Thilo Fromm wrote:
+> 
+> >>>> What do you mean by Ne/Ce?
+> >>>
+> >>> Netra/Centaurus, dm81xx, c6a81xx, am38xx, am39xx or whatever TI is calling it nowadays.
+> >>
+> >> We're on a "TI DaVinci DM8148", featuring a cortex-a8 combined with a
+> >> C674x DSP.
+> >
+> > So a centaurus family SoC.
+> 
+> Thanks for the clarification :) TI didn't approach us with any of the
+> terms you mentioned. It's just DaVinci for them when they're talking
+> with us.
 
->> >>>>> sorry for the cross-post (openembedded-devel, meta-ti), I think
->> >>>>> this affects both projects one way or the other.
->> >>>>>
->> >>>>> Recently, meta-openembedded/toolchain-layer removed gcc-4.5.
->> >>>>> This means with oe-core + meta-oe you now can choose between
->> >>>>> gcc-4.6 and gcc-4.7.
->> >>>>> However, both compilers break the kernel we're using
->> >>>>> (ti81xx-psp-linux-2.6.37).
->> >>>>
->> > We're on a "TI DaVinci DM8148", featuring a cortex-a8 combined with
->> > a C674x DSP.
->>
->> So a centaurus family SoC.
->
-> Can you put some printk's in omap_mbox_register (plat-omap/mailbox.c) to =
-print the list objects, in particular the mbox->name?
+Netra and Centaurus are internal codenames for the SoC families behind those 
+part numbers Koen mentioned above. Those codenames are not publicly advertised 
+and Koen is just showing off after being on the inside... :) :-P
 
-What are you trying to do? printk-debugging? Via E-Mail? Are you
-serious? I provided a simple procedure to reproduce the issue. Please
-reproduce and fix the problem.
-
-> Would also be useful to see the same in omap_mbox_get() before the call t=
-o strcmp().
-
-Please do that, go there and take a look.
-
-We'll be using gcc-4.5 in the HidaV layer until TI fixes this mess.
-
-Regards,
-Thilo
-
---=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
-Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB 130120 B
-Ust.-IDNr. DE273952058
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
+-- 
+Denys
 
