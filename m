@@ -1,25 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
-	[206.46.173.1])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D7D96E01421
-	for <meta-ti@yoctoproject.org>; Thu, 17 May 2012 19:13:24 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M4700FKA4TTX102@vms173001.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 17 May 2012 21:13:06 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B94752009F; Thu,
-	17 May 2012 22:13:04 -0400 (EDT)
-Date: Thu, 17 May 2012 22:13:04 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Otavio Salvador <otavio@ossystems.com.br>
-Message-id: <20120518021304.GO6829@denix.org>
-References: <1337306511-1065-1-git-send-email-otavio@ossystems.com.br>
-MIME-version: 1.0
-In-reply-to: <1337306511-1065-1-git-send-email-otavio@ossystems.com.br>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] u-boot: fix fetch for 2011.12 specific patches
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 443C3E01422
+	for <meta-ti@yoctoproject.org>; Thu, 17 May 2012 20:39:26 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 5CDE852A6F; Fri, 18 May 2012 03:39:25 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120518033925.5CDE852A6F@arago-project.org>
+Date: Fri, 18 May 2012 03:39:25 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : README: no longer depend on toolchain-layer, remove references to older gcc/binutils
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,45 +21,65 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2012 02:13:25 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 18 May 2012 03:39:26 -0000
+Content-Type: text/plain; charset=UTF-8
 
-NAK - https://lists.yoctoproject.org/pipermail/meta-ti/2012-May/001111.html
+Module: meta-ti
+Branch: master
+Commit: 297460c124fbe5542272720202a538e3fb286ced
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=297460c124fbe5542272720202a538e3fb286ced
 
--- 
-Denys
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu May 17 23:36:52 2012 -0400
 
+README: no longer depend on toolchain-layer, remove references to older gcc/binutils
 
-On Thu, May 17, 2012 at 11:01:51PM -0300, Otavio Salvador wrote:
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->  recipes-bsp/u-boot/u-boot_2011.12.bb |    6 +++---
->  1 files changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
-> index 39f77bd..45c64a6 100644
-> --- a/recipes-bsp/u-boot/u-boot_2011.12.bb
-> +++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
-> @@ -30,9 +30,9 @@ SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
->             ${CACHEFIX} \
->             file://2011.12/0009-Beagleboard-Correct-memory-size-on-rev-C4.patch \
->             file://2011.12/0010-OMAP3-Correct-get_sdr_cs_offset-mask.patch \
-> -           file://0011-ext2load-increase-read-speed.patch \
-> -           file://0012-ext4fs-ls-load-support.patch \
-> -           file://0013-beagleboard-switch-mmcroots-to-ext4.patch \
-> +           file://2011.12/0011-ext2load-increase-read-speed.patch \
-> +           file://2011.12/0012-ext4fs-ls-load-support.patch \
-> +           file://2011.12/0013-beagleboard-switch-mmcroots-to-ext4.patch \
->             ${FWENV} \
->            "
->  
-> -- 
-> 1.7.2.5
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ README |   18 +++++-------------
+ 1 files changed, 5 insertions(+), 13 deletions(-)
+
+diff --git a/README b/README
+index 352cb2e..b376695 100644
+--- a/README
++++ b/README
+@@ -1,30 +1,22 @@
+ The official OpenEmbedded/Yocto BSP layer for Texas Instruments platforms.
+ 
++It is hosted on http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/ with the
++source repository at git://git.yoctoproject.org/meta-ti
++
++
+ This layer depends on:
+ 
+ URI: git://git.openembedded.org/openembedded-core
+ layers: meta
+ branch: master
+-revision: HEAD
+-
+-URI: git://git.openembedded.org/meta-openembedded
+-layers: toolchain-layer
+-branch: master
+-revision: HEAD
+ 
+-There are known issues when using a toolchain with gcc-4.6 and binutils-2.22
+-from OpenEmbedded-Core, thus it is recommended to use toolchain-layer from
+-meta-openembedded with gcc-4.5 + Linaro patches and binutils-2.20.1.
+ 
+ The base BSP part of meta-ti should work with different OpenEmbedded/Yocto
+ distributions and layer stacks, such as:
+ distro-less (only with OE-Core), with Yocto/Poky, with Angstrom or Arago.
+ 
+-Please follow the recommended setup procedures of your OE distribution. When
+-using in a distro-less configuration, please add to your local.conf:
++Please follow the recommended setup procedures of your OE distribution.
+ 
+-GCCVERSION = "4.5%"
+-BINUVERSION = "2.20.1"
+ 
+ Send pull requests, patches, comments or questions to meta-ti@yoctoproject.org
+ 
+
 
