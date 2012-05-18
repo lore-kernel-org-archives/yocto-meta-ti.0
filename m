@@ -1,35 +1,32 @@
-Return-Path: <fromm@dresearch-fe.de>
-Received: from mail-lpp01m010-f48.google.com (mail-lpp01m010-f48.google.com
-	[209.85.215.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BDB54E01422
-	for <meta-ti@yoctoproject.org>; Fri, 18 May 2012 05:53:47 -0700 (PDT)
-Received: by lagz14 with SMTP id z14so2855982lag.35
-	for <meta-ti@yoctoproject.org>; Fri, 18 May 2012 05:53:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=RhEORdNQjter+giKWX8fZoz4B/9stZlkjS8BGWolByk=;
-	b=ZUfQfYh2aF332UZ+Xo5a0U4a5/Rq8OjSNr+6MNTjdaYICoFHAM0yb0cprIfHHzWdwn
-	OLb9JgOaH2Trfu+NaXkqoAiPw43Fe468LnuiI0OSs83NvW6Kg5JKP9t7o9rdYRdz5uAx
-	1E3IC771IJYCmbfoFCvmID+vJFwn4sV1GFv8g+o/Kdu6NUXSmjNbapULlEjCEIsuYdyt
-	2+yIWkENaCDPfYWQ0k0P0SeFwi1xaDhKhOgKzqH3qIU/wxNb7AV+sHk7p29NAypcu8T/
-	UL7YWH2TJehvqacy2EaLf8PwkGB0D92KY/Fk1YvYiqcvVrG7zr4tsFfLoUS0nZlOFBzP
-	CpUw==
-MIME-Version: 1.0
-Received: by 10.152.146.129 with SMTP id tc1mr10869985lab.27.1337345626589;
-	Fri, 18 May 2012 05:53:46 -0700 (PDT)
-Received: by 10.112.100.132 with HTTP; Fri, 18 May 2012 05:53:46 -0700 (PDT)
-In-Reply-To: <jp5gkp$2ip$1@dough.gmane.org>
+Return-Path: <gleym-meta-ti@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 914A1E01422
+	for <meta-ti@yoctoproject.org>; Fri, 18 May 2012 05:55:07 -0700 (PDT)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gleym-meta-ti@m.gmane.org>) id 1SVMhz-0000P5-TV
+	for meta-ti@yoctoproject.org; Fri, 18 May 2012 14:55:03 +0200
+Received: from ip545070eb.adsl-surfen.hetnet.nl ([84.80.112.235])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00
+	for <meta-ti@yoctoproject.org>; Fri, 18 May 2012 14:55:03 +0200
+Received: from koen by ip545070eb.adsl-surfen.hetnet.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <meta-ti@yoctoproject.org>; Fri, 18 May 2012 14:55:03 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: meta-ti@yoctoproject.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 18 May 2012 14:51:28 +0200
+Message-ID: <jp5gkp$2ip$1@dough.gmane.org>
 References: <CADZ6=avh27wFzfty4h6ntoweX3QrLvkz=8pRgFBp8VQ7YEJ71A@mail.gmail.com>
-	<jp5gkp$2ip$1@dough.gmane.org>
-Date: Fri, 18 May 2012 14:53:46 +0200
-Message-ID: <CADZ6=atDkyHJricwLdNqWv9aYNWXUSBVaGhQB1pC9ZTLqNYQtw@mail.gmail.com>
-From: Thilo Fromm <fromm@dresearch-fe.de>
-To: openembedded-devel@lists.openembedded.org
-X-Gm-Message-State: ALoCoQno7Kd3vpH9oJK+s01PNxufahMpuGRyNOlqcFhpyL0ojzUU4CG6MJ4GXxFItx+FlcEM1+7U
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [oe] ti81xx-psp-linux-2.6.37: broken kernel with gcc > 4.5
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip545070eb.adsl-surfen.hetnet.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7;
+	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
+In-Reply-To: <CADZ6=avh27wFzfty4h6ntoweX3QrLvkz=8pRgFBp8VQ7YEJ71A@mail.gmail.com>
+X-Enigmail-Version: 1.4.1
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: ti81xx-psp-linux-2.6.37: broken kernel with gcc > 4.5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,36 +38,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2012 12:53:48 -0000
+X-List-Received-Date: Fri, 18 May 2012 12:55:07 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hello Koen,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
->> sorry for the cross-post (openembedded-devel, meta-ti), I think this
->> affects both projects one way or the other.
->>
->> Recently, meta-openembedded/toolchain-layer removed gcc-4.5. This means
->> with oe-core + meta-oe you now can choose between gcc-4.6 and gcc-4.7.
->> However, both compilers break the kernel we're using
->> (ti81xx-psp-linux-2.6.37).
->
-> What happens when you disable the mailbox? AIUI you shouldn't need that o=
-n
-> Ne/Ce.
+Op 18-05-12 14:33, Thilo Fromm schreef:
+> Hello *.*,
+> 
+> sorry for the cross-post (openembedded-devel, meta-ti), I think this 
+> affects both projects one way or the other.
+> 
+> Recently, meta-openembedded/toolchain-layer removed gcc-4.5. This means 
+> with oe-core + meta-oe you now can choose between gcc-4.6 and gcc-4.7. 
+> However, both compilers break the kernel we're using 
+> (ti81xx-psp-linux-2.6.37).
 
-How do I disable the mailbox? What do you mean by Ne/Ce?
+What happens when you disable the mailbox? AIUI you shouldn't need that on
+Ne/Ce.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-Regards,
-Thilo
+iQIcBAEBAgAGBQJPtkXQAAoJEHZqAkdh1vT6SYsQAJndlj4m7rIuuQdsseJYZBDj
+C2E/fXa6GkZmZNMWEBmZvdlNlw0C4phg8lGKYFzoL+DPPL4/TrvkZ6h1QU/uHUiU
+a0L41O9jI6HsnQ/dS7OzG7V+Gcgduv0gUvdc0wK+km2BtBtnR7nG4501hGd//xjZ
+D4XN+WpBsr6PL7XawXyg0cHDEbBvq/yHqy3mTkBW9/d5EdAlWjVTuj6FhaMouZQr
+fBIiEAlWl0iZsxa8VbVBFvZHJcAyS5rut1KINO7yXgdZ0Pa58nppJJ8P3DSJ8WkP
+vQzvQ6GRuU/0FdKRS/gvvQak1kEa+2vHM3y911ivlppPAdqXu6CszqMi5H5GmI27
+4JGq0MJ5h9xltz7+k3EpmriztRHnqoFyG9a4cI8NR5aTtHLc5GzXJBPQ7xKbvf2M
+xY/qy9pEtCw6SbKO9I6+oEruVS1UOl9LAG7ATFItWGm0dHw7HXp0EpNhwmo2Si5n
+Yc1OdBasCOxA7yRBxzvEtSNfeY0BiDniIAtuWpFVQ/sUY3ao+Aiz+9ATRYSXtBKb
+HtXP9pMGM9Oa9L0SADXsQbopt7M8rkgLXD6DkLBq/LMenqp5vkMP8WBqBl45g1yG
+8n8EBmohylFP+L0kSI7oHr7+zJu7EZnpUP2jsHR9+8coBTia1zfvrLSq2wZV8W/d
+WAFvJzJKWbhrNxzLYLyh
+=+Key
+-----END PGP SIGNATURE-----
 
---=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
-Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB 130120 B
-Ust.-IDNr. DE273952058
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
 
