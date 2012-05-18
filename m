@@ -1,39 +1,41 @@
-Return-Path: <fromm@dresearch-fe.de>
-Received: from mail-lpp01m010-f48.google.com (mail-lpp01m010-f48.google.com
-	[209.85.215.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3F469E013B7
-	for <meta-ti@yoctoproject.org>; Fri, 18 May 2012 07:40:26 -0700 (PDT)
-Received: by lagz14 with SMTP id z14so2983089lag.35
-	for <meta-ti@yoctoproject.org>; Fri, 18 May 2012 07:40:25 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=RuZEiwcEePV6s11MaU2LieBj3quJ9oBdO6+V1DzWk7s=;
-	b=cOircROjU2L9V7OnUdEN4loQOcNafWUqBWsRHb9duJ3yAMNaBozQCUC/qFTmXjnP2t
-	IXyF4vvA/+4BT1Y1OKjfN77etd2D5v+UbJYi3sq6vJWMwIW9rHtxU3WkihmuEBivSx1w
-	4pHd8zmSdKc+d4sOAyMKL5mIvLkmXrLr0b4sPYAUOuZJawnXRXS5PPFgHlFrH4rdN+zw
-	p5JOuhc1QUS7hishwVNgmOTOcT1YDjR4iCtI/+5xhrKnzWDcaUbTvuYoRaz1dLosIIVv
-	c52GiSEt+KuRl41x4ZbFH4ZxrDCZqMDYGu9n00T+a7GfQLY003Hd0chvPewRoYPxXizj
-	lo/Q==
-MIME-Version: 1.0
-Received: by 10.152.148.234 with SMTP id tv10mr11276915lab.41.1337352025126;
-	Fri, 18 May 2012 07:40:25 -0700 (PDT)
-Received: by 10.112.100.132 with HTTP; Fri, 18 May 2012 07:40:25 -0700 (PDT)
-In-Reply-To: <331B3AEF-9CA7-4639-A316-43DBB4A03E0D@dominion.thruhere.net>
+Return-Path: <r-monk@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07EB4E013B7
+	for <meta-ti@yoctoproject.org>; Fri, 18 May 2012 07:47:29 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q4IElOBt010617;
+	Fri, 18 May 2012 09:47:24 -0500
+Received: from DNCE71.ent.ti.com (dnce71.ent.ti.com [137.167.131.20])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q4IElOKn011172;
+	Fri, 18 May 2012 09:47:24 -0500
+Received: from DNCE05.ent.ti.com ([fe80::2868:e891:b6c7:394]) by
+	DNCE71.ent.ti.com ([fe80::3dd1:4b04:86e6:bfd0%29]) with mapi id
+	14.01.0323.003; Fri, 18 May 2012 16:47:23 +0200
+From: "Monk, Roger" <r-monk@ti.com>
+To: Thilo Fromm <fromm@dresearch-fe.de>, Koen Kooi <koen@dominion.thruhere.net>
+Thread-Topic: [meta-ti] [oe] ti81xx-psp-linux-2.6.37: broken kernel with gcc
+	> 4.5
+Thread-Index: AQHNNPVHjEiAG9HzJkacM3V/R2sPzpbPX68AgAAMOYCAAAOcAIAADVyAgAAi5RA=
+Date: Fri, 18 May 2012 14:47:23 +0000
+Message-ID: <4C82F39BABFE6A429733A300DEBF52240B76E56D@DNCE05.ent.ti.com>
 References: <CADZ6=avh27wFzfty4h6ntoweX3QrLvkz=8pRgFBp8VQ7YEJ71A@mail.gmail.com>
 	<jp5gkp$2ip$1@dough.gmane.org>
 	<CADZ6=atDkyHJricwLdNqWv9aYNWXUSBVaGhQB1pC9ZTLqNYQtw@mail.gmail.com>
 	<C1FD0ECD-98B9-4D93-8351-2A19519FFF2D@dominion.thruhere.net>
 	<CADZ6=aux412Otdnf_YBJdJB1JUx2bD2sDXy7TNyaefHhq_YxtQ@mail.gmail.com>
 	<331B3AEF-9CA7-4639-A316-43DBB4A03E0D@dominion.thruhere.net>
-Date: Fri, 18 May 2012 16:40:25 +0200
-Message-ID: <CADZ6=atZrjgogV7zopSvXEvev6kucn524KG-s3Au7ocQ-+Eyyw@mail.gmail.com>
-From: Thilo Fromm <fromm@dresearch-fe.de>
-To: Koen Kooi <koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQkCEqw0/tdILJLdR+xZHT3iCzyjLL8eK4sXWkssjDBt1jo+5T7z4CjXUdjg/eUgOPvzTHNL
-Cc: meta-ti@yoctoproject.org, openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] ti81xx-psp-linux-2.6.37: broken kernel with gcc > 4.5
+	<CADZ6=atZrjgogV7zopSvXEvev6kucn524KG-s3Au7ocQ-+Eyyw@mail.gmail.com>
+In-Reply-To: <CADZ6=atZrjgogV7zopSvXEvev6kucn524KG-s3Au7ocQ-+Eyyw@mail.gmail.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [137.167.131.83]
+x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
+MIME-Version: 1.0
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] ti81xx-psp-linux-2.6.37: broken kernel with gcc	> 4.5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,78 +47,66 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2012 14:40:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 May 2012 14:47:30 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hello Koen,
-
->>>>>> sorry for the cross-post (openembedded-devel, meta-ti), I think this
->>>>>> affects both projects one way or the other.
->>>>>>
->>>>>> Recently, meta-openembedded/toolchain-layer removed gcc-4.5. This me=
-ans
->>>>>> with oe-core + meta-oe you now can choose between gcc-4.6 and gcc-4.=
-7.
->>>>>> However, both compilers break the kernel we're using
->>>>>> (ti81xx-psp-linux-2.6.37).
->>>>>
->>>>> What happens when you disable the mailbox? AIUI you shouldn't need th=
-at on
->>>>> Ne/Ce.
->>>>
->>>> How do I disable the mailbox?
->>>
->>> In the .config
->>
->> Wait wait wait, according to drivers/staging/tidspbridge/Kconfig we
->> need OMAP_MBOX_FWK (i.e. "the mailbox") in order to use the DSP
->> bridge. Disabling it would mean cutting off our DSP. No way.
->
-> Are you actually using dspbridge? Or are you using dsplink or syslink?
-
-No, I was wrong. OMAP_MBOX_FWK is forced to "Y" in our config and I
-thought DSPBRIDGE forced this. But DSPBRIDGE isn't even active in our
-configuration. I cannot turn OMAP_MBOX_FWK off, it's forced to Y, and
-I'm currently trying to figure out which part of
-ti81xx-psp-linux-2.6.37's wicked configuration is causing this.
-
->>>> What do you mean by Ne/Ce?
->>>
->>> Netra/Centaurus, dm81xx, c6a81xx, am38xx, am39xx or whatever TI is call=
-ing it nowadays.
->>
->> We're on a "TI DaVinci DM8148", featuring a cortex-a8 combined with a
->> C674x DSP.
->
-> So a centaurus family SoC.
-
-Thanks for the clarification :) TI didn't approach us with any of the
-terms you mentioned. It's just DaVinci for them when they're talking
-with us.
-
->
->> I think the only ones left without DSPs are AM-...
->> processors. So no, the DSP bridge (and therefore mailboxing) must
->> stay.
->
-> See what I said above, I doubt you're using dspbridge.
-
-You may be right; I didn't dig into DSP communication so far. Also,
-DSPBRIDGE depends on OMAP3, which we don't have (dm8148 is a
-"OMAP2PLUS"). So I was wrong with DSPBRIDGE forcing OMAP_MBOX_FWK.
-OMAP_MBOX_FWK is just active and I can't switch it off.
-
-Regards,
-Thilo
-
---=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
-Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB 130120 B
-Ust.-IDNr. DE273952058
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
+T24gRnJpLCBNYXkgMTgsIDIwMTIgYXQgMTU6NDA6MjUsIFRoaWxvIEZyb21tIHdyb3RlOg0KPiBD
+YzogbWV0YS10aUB5b2N0b3Byb2plY3Qub3JnOw0KPiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMu
+b3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTogW21ldGEtdGldIFtvZV0gdGk4MXh4LXBz
+cC1saW51eC0yLjYuMzc6IGJyb2tlbiBrZXJuZWwNCj4gd2l0aCBnY2MgPiA0LjUNCj4NCj4gSGVs
+bG8gS29lbiwNCj4NCj4gPj4+Pj4+IHNvcnJ5IGZvciB0aGUgY3Jvc3MtcG9zdCAob3BlbmVtYmVk
+ZGVkLWRldmVsLCBtZXRhLXRpKSwgSSB0aGluaw0KPiA+Pj4+Pj4gdGhpcyBhZmZlY3RzIGJvdGgg
+cHJvamVjdHMgb25lIHdheSBvciB0aGUgb3RoZXIuDQo+ID4+Pj4+Pg0KPiA+Pj4+Pj4gUmVjZW50
+bHksIG1ldGEtb3BlbmVtYmVkZGVkL3Rvb2xjaGFpbi1sYXllciByZW1vdmVkIGdjYy00LjUuDQo+
+IFRoaXMNCj4gPj4+Pj4+IG1lYW5zIHdpdGggb2UtY29yZSArIG1ldGEtb2UgeW91IG5vdyBjYW4g
+Y2hvb3NlIGJldHdlZW4gZ2NjLTQuNg0KPiBhbmQgZ2NjLTQuNy4NCj4gPj4+Pj4+IEhvd2V2ZXIs
+IGJvdGggY29tcGlsZXJzIGJyZWFrIHRoZSBrZXJuZWwgd2UncmUgdXNpbmcNCj4gPj4+Pj4+ICh0
+aTgxeHgtcHNwLWxpbnV4LTIuNi4zNykuDQo+ID4+Pj4+DQo+ID4+Pj4+IFdoYXQgaGFwcGVucyB3
+aGVuIHlvdSBkaXNhYmxlIHRoZSBtYWlsYm94PyBBSVVJIHlvdSBzaG91bGRuJ3QNCj4gbmVlZA0K
+PiA+Pj4+PiB0aGF0IG9uIE5lL0NlLg0KPiA+Pj4+DQo+ID4+Pj4gSG93IGRvIEkgZGlzYWJsZSB0
+aGUgbWFpbGJveD8NCj4gPj4+DQo+ID4+PiBJbiB0aGUgLmNvbmZpZw0KPiA+Pg0KPiA+PiBXYWl0
+IHdhaXQgd2FpdCwgYWNjb3JkaW5nIHRvIGRyaXZlcnMvc3RhZ2luZy90aWRzcGJyaWRnZS9LY29u
+ZmlnIHdlDQo+ID4+IG5lZWQgT01BUF9NQk9YX0ZXSyAoaS5lLiAidGhlIG1haWxib3giKSBpbiBv
+cmRlciB0byB1c2UgdGhlIERTUA0KPiA+PiBicmlkZ2UuIERpc2FibGluZyBpdCB3b3VsZCBtZWFu
+IGN1dHRpbmcgb2ZmIG91ciBEU1AuIE5vIHdheS4NCj4gPg0KPiA+IEFyZSB5b3UgYWN0dWFsbHkg
+dXNpbmcgZHNwYnJpZGdlPyBPciBhcmUgeW91IHVzaW5nIGRzcGxpbmsgb3INCj4gc3lzbGluaz8N
+Cj4NCj4gTm8sIEkgd2FzIHdyb25nLiBPTUFQX01CT1hfRldLIGlzIGZvcmNlZCB0byAiWSIgaW4g
+b3VyIGNvbmZpZyBhbmQgSQ0KPiB0aG91Z2h0IERTUEJSSURHRSBmb3JjZWQgdGhpcy4gQnV0IERT
+UEJSSURHRSBpc24ndCBldmVuIGFjdGl2ZSBpbiBvdXINCj4gY29uZmlndXJhdGlvbi4gSSBjYW5u
+b3QgdHVybiBPTUFQX01CT1hfRldLIG9mZiwgaXQncyBmb3JjZWQgdG8gWSwgYW5kDQo+IEknbSBj
+dXJyZW50bHkgdHJ5aW5nIHRvIGZpZ3VyZSBvdXQgd2hpY2ggcGFydCBvZiB0aTgxeHgtcHNwLWxp
+bnV4LQ0KPiAyLjYuMzcncyB3aWNrZWQgY29uZmlndXJhdGlvbiBpcyBjYXVzaW5nIHRoaXMuDQoN
+CkNPTkZJR19TWVNMSU5LX05PVElGWSB0dXJucyB0aGlzIG9uLiAgU3lzbGluayB1c2VzIHRoZSBz
+YW1lIG1ib3ggaW5mcmFzdHJ1Y3R1cmUuDQoNCj4NCj4gPj4+PiBXaGF0IGRvIHlvdSBtZWFuIGJ5
+IE5lL0NlPw0KPiA+Pj4NCj4gPj4+IE5ldHJhL0NlbnRhdXJ1cywgZG04MXh4LCBjNmE4MXh4LCBh
+bTM4eHgsIGFtMzl4eCBvciB3aGF0ZXZlciBUSSBpcw0KPiBjYWxsaW5nIGl0IG5vd2FkYXlzLg0K
+PiA+Pg0KPiA+PiBXZSdyZSBvbiBhICJUSSBEYVZpbmNpIERNODE0OCIsIGZlYXR1cmluZyBhIGNv
+cnRleC1hOCBjb21iaW5lZCB3aXRoDQo+IGENCj4gPj4gQzY3NHggRFNQLg0KPiA+DQo+ID4gU28g
+YSBjZW50YXVydXMgZmFtaWx5IFNvQy4NCj4NCj4gVGhhbmtzIGZvciB0aGUgY2xhcmlmaWNhdGlv
+biA6KSBUSSBkaWRuJ3QgYXBwcm9hY2ggdXMgd2l0aCBhbnkgb2YgdGhlDQo+IHRlcm1zIHlvdSBt
+ZW50aW9uZWQuIEl0J3MganVzdCBEYVZpbmNpIGZvciB0aGVtIHdoZW4gdGhleSdyZSB0YWxraW5n
+DQo+IHdpdGggdXMuDQo+DQo+ID4NCj4gPj4gSSB0aGluayB0aGUgb25seSBvbmVzIGxlZnQgd2l0
+aG91dCBEU1BzIGFyZSBBTS0uLi4NCj4gPj4gcHJvY2Vzc29ycy4gU28gbm8sIHRoZSBEU1AgYnJp
+ZGdlIChhbmQgdGhlcmVmb3JlIG1haWxib3hpbmcpIG11c3QNCj4gPj4gc3RheS4NCj4gPg0KPiA+
+IFNlZSB3aGF0IEkgc2FpZCBhYm92ZSwgSSBkb3VidCB5b3UncmUgdXNpbmcgZHNwYnJpZGdlLg0K
+Pg0KPiBZb3UgbWF5IGJlIHJpZ2h0OyBJIGRpZG4ndCBkaWcgaW50byBEU1AgY29tbXVuaWNhdGlv
+biBzbyBmYXIuIEFsc28sDQo+IERTUEJSSURHRSBkZXBlbmRzIG9uIE9NQVAzLCB3aGljaCB3ZSBk
+b24ndCBoYXZlIChkbTgxNDggaXMgYQ0KPiAiT01BUDJQTFVTIikuIFNvIEkgd2FzIHdyb25nIHdp
+dGggRFNQQlJJREdFIGZvcmNpbmcgT01BUF9NQk9YX0ZXSy4NCj4gT01BUF9NQk9YX0ZXSyBpcyBq
+dXN0IGFjdGl2ZSBhbmQgSSBjYW4ndCBzd2l0Y2ggaXQgb2ZmLg0KPg0KPiBSZWdhcmRzLA0KPiBU
+aGlsbw0KPg0KPiAtLQ0KPiBEaXBsLi1JbmcgKEZIKSBUaGlsbyBGcm9tbSwgTVNjLiwgRW1iZWRk
+ZWQgU3lzdGVtcyBBcmNoaXRlY3QgRFJlc2VhcmNoDQo+IEZhaHJ6ZXVnZWxla3Ryb25payBHbWJI
+IE90dG8tU2NobWlyZ2FsLVN0ci4gMywgRC0xMDMxOSBCZXJsaW4sIEdlcm1hbnkNCj4gVGVsOiAr
+NDkgKDMwKSA1MTUgOTMyIDIyOCAgIG1haWx0bzpmcm9tbUBkcmVzZWFyY2gtZmUuZGUNCj4gRmF4
+OiArNDkgKDMwKSA1MTUgOTMyIDc3ICAgIGh0dHA6Ly93d3cuZHJlc2VhcmNoLmRlDQo+IEFtdHNn
+ZXJpY2h0OiBCZXJsaW4gQ2hhcmxvdHRlbmJ1cmcsIEhSQiAxMzAxMjAgQiBVc3QuLUlETnIuDQo+
+IERFMjczOTUyMDU4DQo+IEdlc2Now6RmdHNmw7xocmVyOiBEci4gTS4gV2ViZXIsIFcuIE3Dtmds
+ZQ0KPg0KVGV4YXMgSW5zdHJ1bWVudHMgTGltaXRlZCwgODAwIFBhdmlsaW9uIERyaXZlLCBOb3J0
+aGFtcHRvbiwgTk40IDdZTC4gUmVnaXN0ZXJlZCBpbiBFbmdsYW5kICYgV2FsZXMgdW5kZXIgY29t
+cGFueSBudW1iZXIgMDA1NzQxMDINCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18NCj4gbWV0YS10aSBtYWlsaW5nIGxpc3QNCj4gbWV0YS10aUB5b2N0b3By
+b2plY3Qub3JnDQo+IGh0dHBzOi8vbGlzdHMueW9jdG9wcm9qZWN0Lm9yZy9saXN0aW5mby9tZXRh
+LXRpDQoNCg0KDQo=
 
