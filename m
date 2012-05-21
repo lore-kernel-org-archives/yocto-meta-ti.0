@@ -1,31 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
-	[206.46.173.1])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5F055E0030B
-	for <meta-ti@yoctoproject.org>; Mon, 21 May 2012 13:47:35 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M4E00DJW4ET76F1@vms173001.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 21 May 2012 15:47:18 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 63F4B201AD; Mon,
-	21 May 2012 16:47:17 -0400 (EDT)
-Date: Mon, 21 May 2012 16:47:17 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: "Monk, Roger" <r-monk@ti.com>
-Message-id: <20120521204717.GA13482@denix.org>
-References: <1336651467-17102-1-git-send-email-koen@dominion.thruhere.net>
-	<4C82F39BABFE6A429733A300DEBF52240B755661@DNCE05.ent.ti.com>
-	<F6B9E80B-34AA-44B6-99BA-C875C3589CC1@dominion.thruhere.net>
-	<4C82F39BABFE6A429733A300DEBF52240B75582C@DNCE05.ent.ti.com>
-	<8452F6A8-6078-4C3A-80A9-96528007111B@dominion.thruhere.net>
-	<4C82F39BABFE6A429733A300DEBF52240B75598B@DNCE05.ent.ti.com>
-MIME-version: 1.0
-In-reply-to: <4C82F39BABFE6A429733A300DEBF52240B75598B@DNCE05.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "Dmytriyenko,
-	Denys" <denys@ti.com>
-Subject: Re: [PATCH] omapfbplay: import from OE classic
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C01F8E0030B
+	for <meta-ti@yoctoproject.org>; Mon, 21 May 2012 14:07:31 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 8A2F95299F; Mon, 21 May 2012 21:07:30 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120521210730.8A2F95299F@arago-project.org>
+Date: Mon, 21 May 2012 21:07:30 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Koen Kooi : beaglebone-capes: add a powerdown script as well
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,57 +21,89 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 May 2012 20:47:35 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 21 May 2012 21:07:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, May 10, 2012 at 02:23:35PM +0000, Monk, Roger wrote:
-> On Thu, May 10, 2012 at 15:20:31, Koen Kooi wrote:
-> > Subject: Re: [meta-ti] [PATCH] omapfbplay: import from OE classic
-> >
-> >
-> > Op 10 mei 2012, om 16:13 heeft Monk, Roger het volgende geschreven:
-> >
-> > > On Thu, May 10, 2012 at 15:09:36, Koen Kooi wrote:
-> > >> Subject: Re: [meta-ti] [PATCH] omapfbplay: import from OE classic
-> > >>
-> > >>
-> > >> Op 10 mei 2012, om 15:42 heeft Monk, Roger het volgende geschreven:
-> > >>
-> > >>> Hi Koen,
-> > >>>
-> > >>> Think we've still got some API incompatibility here.  I needed to
-> > >> roll
-> > >>> back to an earlier omapfbplay commit
-> > >>> (34293052c5a2ae328eac6903512e6b4ce19b5639) and patch CODEC_TYPE :-
-> > >>>
-> > >>> -        if (afc->streams[i]->codec->codec_type == CODEC_TYPE_VIDEO
-> > >> && !st)
-> > >>> +        if (afc->streams[i]->codec->codec_type ==
-> > >>> + AVMEDIA_TYPE_VIDEO && !st)
-> > >>>
-> > >>> to get this working on beagleboard-xm, so I suspect there may have
-> > >> been an API change after Aug11, or
-> > >> d03f042ecac0a231bedeadc7a6c67f0102d5505a was rebased against 0.8
-> > >> branch?  I guess we should ask Mans...
-> > >>
-> > >> We still use libav 0.7.4 in meta-oe, I suspect Mans updated to
-> > >> 0.8.x or even newer. I only build tested it, so I'm open for fixes
-> > >> that make it run :) Upgrading libav might be an option as well, but
-> > >> I'm not sure of that will get accepted for the meta-oe release branch.
-> > >
-> > > See attached for now - probably ok as reasonable known working
-> > baseline before we upgrade other bits?
-> >
-> > The patch looks good to me. Once the beaglebone a6 release it out I'll
-> > have time to look at libav. I'll need it for a customer project in
-> > that timeframe as well. Thanks for updating the patch!
-> 
-> Np! - you gave me great head-start! - I'll re-send via git send-email.
+Module: meta-ti
+Branch: master
+Commit: 185d6216110354cca80f27b76d78a46336dadfc1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=185d6216110354cca80f27b76d78a46336dadfc1
 
-BTW, do we want to have PROVIDES and PREFERRED_PROVIDER for all those 
-different variants of omapfbplay?
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Fri May 18 16:11:39 2012 +0200
 
--- 
-Denys
+beaglebone-capes: add a powerdown script as well
+
+The current powerdown script disables the PMIC backlight
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-ti/beagleboard/beaglebone-capes.bb         |    5 ++++-
+ .../beagleboard/beaglebone-capes/cape-stop.sh      |   11 +++++++++++
+ .../beagleboard/beaglebone-capes/cape.service      |    3 +++
+ 3 files changed, 18 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-ti/beagleboard/beaglebone-capes.bb b/recipes-ti/beagleboard/beaglebone-capes.bb
+index 88d4a17..f128924 100644
+--- a/recipes-ti/beagleboard/beaglebone-capes.bb
++++ b/recipes-ti/beagleboard/beaglebone-capes.bb
+@@ -3,10 +3,13 @@ DESCRIPTION = "Userspace setup for beaglebone capes"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+ 
++PR = "r1"
++
+ inherit allarch
+ 
+ SRC_URI = "file://cape.service \
+            file://cape.sh \
++           file://cape-stop.sh \
+           "
+ 
+ do_install() {
+@@ -17,7 +20,7 @@ do_install() {
+ 	ln -sf ../cape.service ${D}${base_libdir}/systemd/system/basic.target.wants/
+ 
+ 	install -d ${D}${bindir}
+-	install -m 0755 ${WORKDIR}/cape.sh ${D}${bindir}
++	install -m 0755 ${WORKDIR}/cape*.sh ${D}${bindir}
+ }
+ 
+ FILES_${PN} += "${base_libdir}/systemd/system"
+diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh b/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh
+new file mode 100755
+index 0000000..a08498d
+--- /dev/null
++++ b/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh
+@@ -0,0 +1,11 @@
++#!/bin/sh
++for eeprom in /sys/bus/i2c/devices/3-005*/eeprom ; do
++	PARTNUMBER=$(hexdump -e '8/1 "%c"' $eeprom -s 58 -n16)
++	case $PARTNUMBER in
++		"BB-BONE-LCD3-01.")
++				echo "Turning off backlight for LCD3 cape"
++				i2cset -f -y 1 0x24 0x07 0x00;;
++		*)
++				echo "unknown cape: $PARTNUMBER";;
++	esac
++done
+diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape.service b/recipes-ti/beagleboard/beaglebone-capes/cape.service
+index 44a2a38..ce0db71 100644
+--- a/recipes-ti/beagleboard/beaglebone-capes/cape.service
++++ b/recipes-ti/beagleboard/beaglebone-capes/cape.service
+@@ -2,7 +2,10 @@
+ Description=Beaglebone cape support
+ 
+ [Service]
++Type=oneshot
++RemainAfterExit=yes
+ ExecStart=/usr/bin/cape.sh
++ExecStop=/usr/bin/cape-stop.sh
+ 
+ [Install]
+ WantedBy=basic.target
+
 
