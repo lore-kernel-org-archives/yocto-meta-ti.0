@@ -1,15 +1,31 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 31A96E0030B
-	for <meta-ti@yoctoproject.org>; Mon, 21 May 2012 13:45:30 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 570105299F; Mon, 21 May 2012 20:45:30 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20120521204530.570105299F@arago-project.org>
-Date: Mon, 21 May 2012 20:45:30 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Roger Monk : omapfbplay: import from OE classic + api tweak
+Return-Path: <denis@denix.org>
+Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
+	[206.46.173.1])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5F055E0030B
+	for <meta-ti@yoctoproject.org>; Mon, 21 May 2012 13:47:35 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.48.117.33])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M4E00DJW4ET76F1@vms173001.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 21 May 2012 15:47:18 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 63F4B201AD; Mon,
+	21 May 2012 16:47:17 -0400 (EDT)
+Date: Mon, 21 May 2012 16:47:17 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: "Monk, Roger" <r-monk@ti.com>
+Message-id: <20120521204717.GA13482@denix.org>
+References: <1336651467-17102-1-git-send-email-koen@dominion.thruhere.net>
+	<4C82F39BABFE6A429733A300DEBF52240B755661@DNCE05.ent.ti.com>
+	<F6B9E80B-34AA-44B6-99BA-C875C3589CC1@dominion.thruhere.net>
+	<4C82F39BABFE6A429733A300DEBF52240B75582C@DNCE05.ent.ti.com>
+	<8452F6A8-6078-4C3A-80A9-96528007111B@dominion.thruhere.net>
+	<4C82F39BABFE6A429733A300DEBF52240B75598B@DNCE05.ent.ti.com>
+MIME-version: 1.0
+In-reply-to: <4C82F39BABFE6A429733A300DEBF52240B75598B@DNCE05.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "Dmytriyenko,
+	Denys" <denys@ti.com>
+Subject: Re: [PATCH] omapfbplay: import from OE classic
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,196 +37,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 May 2012 20:45:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 May 2012 20:47:35 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: a9eca3f6f9258cba5f30b9e9bbb0e31bc5da0d77
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a9eca3f6f9258cba5f30b9e9bbb0e31bc5da0d77
+On Thu, May 10, 2012 at 02:23:35PM +0000, Monk, Roger wrote:
+> On Thu, May 10, 2012 at 15:20:31, Koen Kooi wrote:
+> > Subject: Re: [meta-ti] [PATCH] omapfbplay: import from OE classic
+> >
+> >
+> > Op 10 mei 2012, om 16:13 heeft Monk, Roger het volgende geschreven:
+> >
+> > > On Thu, May 10, 2012 at 15:09:36, Koen Kooi wrote:
+> > >> Subject: Re: [meta-ti] [PATCH] omapfbplay: import from OE classic
+> > >>
+> > >>
+> > >> Op 10 mei 2012, om 15:42 heeft Monk, Roger het volgende geschreven:
+> > >>
+> > >>> Hi Koen,
+> > >>>
+> > >>> Think we've still got some API incompatibility here.  I needed to
+> > >> roll
+> > >>> back to an earlier omapfbplay commit
+> > >>> (34293052c5a2ae328eac6903512e6b4ce19b5639) and patch CODEC_TYPE :-
+> > >>>
+> > >>> -        if (afc->streams[i]->codec->codec_type == CODEC_TYPE_VIDEO
+> > >> && !st)
+> > >>> +        if (afc->streams[i]->codec->codec_type ==
+> > >>> + AVMEDIA_TYPE_VIDEO && !st)
+> > >>>
+> > >>> to get this working on beagleboard-xm, so I suspect there may have
+> > >> been an API change after Aug11, or
+> > >> d03f042ecac0a231bedeadc7a6c67f0102d5505a was rebased against 0.8
+> > >> branch?  I guess we should ask Mans...
+> > >>
+> > >> We still use libav 0.7.4 in meta-oe, I suspect Mans updated to
+> > >> 0.8.x or even newer. I only build tested it, so I'm open for fixes
+> > >> that make it run :) Upgrading libav might be an option as well, but
+> > >> I'm not sure of that will get accepted for the meta-oe release branch.
+> > >
+> > > See attached for now - probably ok as reasonable known working
+> > baseline before we upgrade other bits?
+> >
+> > The patch looks good to me. Once the beaglebone a6 release it out I'll
+> > have time to look at libav. I'll need it for a customer project in
+> > that timeframe as well. Thanks for updating the patch!
+> 
+> Np! - you gave me great head-start! - I'll re-send via git send-email.
 
-Author: Roger Monk <r-monk@ti.com>
-Date:   Thu May 10 15:18:27 2012 +0100
+BTW, do we want to have PROVIDES and PREFERRED_PROVIDER for all those 
+different variants of omapfbplay?
 
-omapfbplay: import from OE classic + api tweak
-
-Signed-off-by: Roger Monk <r-monk@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- ...switch-CODEC_TYPE_VIDEO-to-AVMEDIA_TYPE_V.patch |   26 +++++++++++++++
- .../files/omapfbplay-errorhandling.patch           |   34 ++++++++++++++++++++
- recipes-graphics/omapfbplay/omapfbplay-cmem_git.bb |   16 +++++++++
- recipes-graphics/omapfbplay/omapfbplay-dce_git.bb  |    7 ++++
- recipes-graphics/omapfbplay/omapfbplay-xv_git.bb   |    3 ++
- recipes-graphics/omapfbplay/omapfbplay.inc         |   33 +++++++++++++++++++
- recipes-graphics/omapfbplay/omapfbplay_git.bb      |    3 ++
- 7 files changed, 122 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-graphics/omapfbplay/files/0001-omapfbplay-switch-CODEC_TYPE_VIDEO-to-AVMEDIA_TYPE_V.patch b/recipes-graphics/omapfbplay/files/0001-omapfbplay-switch-CODEC_TYPE_VIDEO-to-AVMEDIA_TYPE_V.patch
-new file mode 100644
-index 0000000..e01fddb
---- /dev/null
-+++ b/recipes-graphics/omapfbplay/files/0001-omapfbplay-switch-CODEC_TYPE_VIDEO-to-AVMEDIA_TYPE_V.patch
-@@ -0,0 +1,26 @@
-+From 71670f4a067efc169018a9ec9321ccc9af3bbd59 Mon Sep 17 00:00:00 2001
-+From: Roger Monk <r-monk@ti.com>
-+Date: Thu, 10 May 2012 14:50:11 +0100
-+Subject: [PATCH] omapfbplay:  switch CODEC_TYPE_VIDEO to AVMEDIA_TYPE_VIDEO
-+
-+Signed-off-by: Roger Monk <r-monk@ti.com>
-+---
-+ omapfbplay.c |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/omapfbplay.c b/omapfbplay.c
-+index ad35bd5..818cf2c 100644
-+--- a/omapfbplay.c
-++++ b/omapfbplay.c
-+@@ -74,7 +74,7 @@ find_stream(AVFormatContext *afc)
-+     int i;
-+ 
-+     for (i = 0; i < afc->nb_streams; i++) {
-+-        if (afc->streams[i]->codec->codec_type == CODEC_TYPE_VIDEO && !st)
-++        if (afc->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO && !st)
-+             st = afc->streams[i];
-+         else
-+             afc->streams[i]->discard = AVDISCARD_ALL;
-+-- 
-+1.7.0.4
-+
-diff --git a/recipes-graphics/omapfbplay/files/omapfbplay-errorhandling.patch b/recipes-graphics/omapfbplay/files/omapfbplay-errorhandling.patch
-new file mode 100644
-index 0000000..7dd544f
---- /dev/null
-+++ b/recipes-graphics/omapfbplay/files/omapfbplay-errorhandling.patch
-@@ -0,0 +1,34 @@
-+From e321ae7df57ada9ecc8c155fa4e5511c96ef5db3 Mon Sep 17 00:00:00 2001
-+From: Rob Clark <rob@ti.com>
-+Date: Fri, 18 Mar 2011 12:40:51 -0500
-+Subject: [PATCH] dce: differentiate between fatal and non-fatal errors
-+
-+For streams with errors, the codec will throw back an error. But not
-+all errors are fatal.
-+---
-+ dce.c |   10 ++++++++--
-+ 1 files changed, 8 insertions(+), 2 deletions(-)
-+
-+diff --git a/dce.c b/dce.c
-+index ab7ad0a..88f175e 100644
-+--- a/dce.c
-++++ b/dce.c
-+@@ -270,8 +270,14 @@ static int dce_decode(AVPacket *p)
-+ 
-+     err = VIDDEC3_process(codec, inbufs, outbufs, in_args, out_args);
-+     if (err) {
-+-        fprintf(stderr, "VIDDEC3_process() error %d\n", err);
-+-        return -1;
-++        fprintf(stderr, "VIDDEC3_process() error %d %08x\n", err,
-++                    out_args->extendedError);
-++        /* for non-fatal errors, keep going.. a non-fatal error could
-++         * just indicate an error in the input stream which the codec
-++         * was able to conceal
-++         */
-++        if (XDM_ISFATALERROR(out_args->extendedError))
-++            return -1;
-+     }
-+ 
-+     for (i = 0; i < out_args->outputID[i]; i++) {
-+-- 
-+1.7.1
-diff --git a/recipes-graphics/omapfbplay/omapfbplay-cmem_git.bb b/recipes-graphics/omapfbplay/omapfbplay-cmem_git.bb
-new file mode 100644
-index 0000000..a0392f6
---- /dev/null
-+++ b/recipes-graphics/omapfbplay/omapfbplay-cmem_git.bb
-@@ -0,0 +1,16 @@
-+require omapfbplay.inc
-+
-+DEPENDS += "ti-linuxutils"
-+
-+require recipes-ti/includes/ti-paths.inc
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+SDMA_CFLAGS = " -I${LINUXUTILS_INSTALL_DIR}/packages/ti/sdo/linuxutils/sdma/include/"
-+CMEM_CFLAGS = " -I${LINUXUTILS_INSTALL_DIR}/packages/ti/sdo/linuxutils/cmem/include/"
-+CFLAGS += " -I. -I${STAGING_KERNEL_DIR}/include ${SDMA_CFLAGS} ${CMEM_CFLAGS}"
-+
-+export SDMA_LIBS = "-L${LINUXUTILS_INSTALL_DIR}/packages/ti/sdo/linuxutils/sdma/lib -l:sdma.a470MV"
-+export CMEM_LIBS = "-L${LINUXUTILS_INSTALL_DIR}/packages/ti/sdo/linuxutils/cmem/lib -l:cmem.a470MV"
-+
-+OMAPFBPLAYOPTS = "V4L2=y OMAPFB=y NETSYNC=y CMEM=y SDMA=y"
-diff --git a/recipes-graphics/omapfbplay/omapfbplay-dce_git.bb b/recipes-graphics/omapfbplay/omapfbplay-dce_git.bb
-new file mode 100644
-index 0000000..e70ac72
---- /dev/null
-+++ b/recipes-graphics/omapfbplay/omapfbplay-dce_git.bb
-@@ -0,0 +1,7 @@
-+require omapfbplay.inc
-+
-+DEPENDS += "libdce"
-+
-+CFLAGS += " -I. -I${STAGING_INCDIR}/dce -I${STAGING_KERNEL_DIR}/include "
-+
-+OMAPFBPLAYOPTS = "V4L2=y OMAPFB=y NETSYNC=y DCE=y"
-diff --git a/recipes-graphics/omapfbplay/omapfbplay-xv_git.bb b/recipes-graphics/omapfbplay/omapfbplay-xv_git.bb
-new file mode 100644
-index 0000000..cadf6d8
---- /dev/null
-+++ b/recipes-graphics/omapfbplay/omapfbplay-xv_git.bb
-@@ -0,0 +1,3 @@
-+require omapfbplay.inc
-+
-+OMAPFBPLAYOPTS = "V4L2=y NETSYNC=y XV=y"
-diff --git a/recipes-graphics/omapfbplay/omapfbplay.inc b/recipes-graphics/omapfbplay/omapfbplay.inc
-new file mode 100644
-index 0000000..77e2380
---- /dev/null
-+++ b/recipes-graphics/omapfbplay/omapfbplay.inc
-@@ -0,0 +1,33 @@
-+DESCRIPTION = "Simple libav-based player that uses the omapfb overlays"
-+DEPENDS = "bzip2 lame libav virtual/kernel"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://omapfbplay.c;beginline=2;endline=22;md5=05d3789ab362e6f4a9682e98100ea0fa"
-+
-+PV = "0.0+${PR}+gitr${SRCREV}"
-+
-+SRCREV = "34293052c5a2ae328eac6903512e6b4ce19b5639"
-+SRC_URI = "git://git.mansr.com/omapfbplay;protocol=git \
-+           file://omapfbplay-errorhandling.patch \
-+           file://0001-omapfbplay-switch-CODEC_TYPE_VIDEO-to-AVMEDIA_TYPE_V.patch \
-+          "
-+
-+S = "${WORKDIR}/git"
-+
-+# We want a kernel header for armv7a, but we don't want to make mplayer machine specific for that
-+STAGING_KERNEL_DIR = "${STAGING_DIR}/${MACHINE_ARCH}${TARGET_VENDOR}-${TARGET_OS}/kernel"
-+CFLAGS += " -I. -I${STAGING_KERNEL_DIR}/include "
-+
-+OMAPFBPLAYVARIANT ?= "${PN}"
-+OMAPFBPLAYOPTS ?= "V4L2=y NETSYNC=y"
-+
-+do_compile() {
-+	cp ${STAGING_KERNEL_DIR}/arch/arm/plat-omap/include/mach/omapfb.h ${S} || true
-+	cp ${STAGING_KERNEL_DIR}/include/asm-arm/arch-omap/omapfb.h ${S} || true
-+	cp ${STAGING_KERNEL_DIR}/include/linux/omapfb.h ${S} || true
-+	oe_runmake ${TARGET_ARCH}=y ${OMAPFBPLAYOPTS} -e
-+}
-+
-+do_install() {
-+	install -d ${D}/${bindir}
-+	install -m 0755 ${S}/omapfbplay ${D}/${bindir}/${OMAPFBPLAYVARIANT}
-+}
-diff --git a/recipes-graphics/omapfbplay/omapfbplay_git.bb b/recipes-graphics/omapfbplay/omapfbplay_git.bb
-new file mode 100644
-index 0000000..0d3956f
---- /dev/null
-+++ b/recipes-graphics/omapfbplay/omapfbplay_git.bb
-@@ -0,0 +1,3 @@
-+require omapfbplay.inc
-+
-+OMAPFBPLAYOPTS = "V4L2=y OMAPFB=y NETSYNC=y"
-
+-- 
+Denys
 
