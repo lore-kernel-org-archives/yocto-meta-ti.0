@@ -1,36 +1,18 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A4A22E00747
-	for <meta-ti@yoctoproject.org>; Mon, 21 May 2012 23:06:37 -0700 (PDT)
-Received: by mail-ee0-f48.google.com with SMTP id b45so1671823eek.35
-	for <meta-ti@yoctoproject.org>; Mon, 21 May 2012 23:06:37 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:x-gm-message-state;
-	bh=JucETZwY7MFbDCyH9oTouN3FbfR6Vyz4plmwLKrYr44=;
-	b=Fr1DmYAgZpFKRjWsAjqeHJp6J3Dd3ktNZs+xkgQT6zMOJr/wolybSR7owOay39tbSt
-	pTmpi0kVcLfnUen1oy5XZ+90apWMl7z9SKTENPikkWYBDgIHloRXcOQoGcWGqgW8xjnd
-	Ex2EKiijQhnMKAGw2qGKxYBIEdDsPYbSr4x+2i+0yYV4ZGqC286BWodCPrBVv9sZS6LH
-	Y6VBzakLfiqCKxmv3c7JQ+pPXY4NkYxI5WwLvsqnAHhHxrEbdQ1nuHtVWu/n5Aw+mChD
-	8VqGe2uGYSHmAr19xVXGx6BnxaRpkCK8SlvtksHKg15rbSVfTlwZF0QA0IFoIPgWJuLC
-	iocw==
-Received: by 10.14.127.78 with SMTP id c54mr4204011eei.8.1337666797165;
-	Mon, 21 May 2012 23:06:37 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id u7sm93470615eeb.7.2012.05.21.23.06.35
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 21 May 2012 23:06:36 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+Return-Path: <ml@communistcode.co.uk>
+Received: from tinyArch.localdomain (unknown [78.110.170.148])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4D2A3E0030B
+	for <meta-ti@yoctoproject.org>; Tue, 22 May 2012 08:47:15 -0700 (PDT)
+Received: from [192.168.0.18] (unknown [195.171.99.130])
+	by tinyArch.localdomain (Postfix) with ESMTPSA id 0F87948C52
+	for <meta-ti@yoctoproject.org>; Tue, 22 May 2012 16:32:01 +0100 (BST)
+Message-ID: <4FBBB531.8020401@communistcode.co.uk>
+Date: Tue, 22 May 2012 16:48:01 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:12.0) Gecko/20120430 Thunderbird/12.0.1
+MIME-Version: 1.0
 To: meta-ti@yoctoproject.org
-Date: Tue, 22 May 2012 08:06:26 +0200
-Message-Id: <1337666786-29921-3-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-In-Reply-To: <1337666786-29921-1-git-send-email-koen@dominion.thruhere.net>
-References: <1337666786-29921-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQlFGpd4WImlRA3zEuNWp//0/bTadVwCF/eq/PO6AbfUU24ooQyiiIyZeD6kcbDX6oAk27H3
-Cc: denys@ti.com
-Subject: [PATCH v2 3/3] linux-ti33x-psp 3.2: merge in 6 musb patches from PSP
+Subject: Beaglebone + Poky
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,387 +24,340 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 May 2012 06:06:38 -0000
+X-List-Received-Date: Tue, 22 May 2012 15:47:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Updating the SRCREV would require redoing all boardfile patches due to the EVM-SK changes. So cherry-pick the 6 patches we need.
+Hi,
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- ...pi41-revisit-the-teardown-path-to-fix-iso.patch |  103 ++++++++++++++++++++
- ...musb-fix-bug-in-data-toggle-sw-workaround.patch |   31 ++++++
- ...udc-core-stop-UDC-on-device-initiated-dis.patch |   41 ++++++++
- ...udc-core-fix-asymmetric-calls-in-remove_d.patch |   43 ++++++++
- ...-usb-gadget-udc-core-fix-wrong-call-order.patch |   33 +++++++
- ...udc-core-fix-incompatibility-with-dummy-h.patch |   46 +++++++++
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    8 +-
- 7 files changed, 304 insertions(+), 1 deletion(-)
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0001-usb-musb-cppi41-revisit-the-teardown-path-to-fix-iso.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0002-usb-musb-fix-bug-in-data-toggle-sw-workaround.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0003-usb-gadget-udc-core-stop-UDC-on-device-initiated-dis.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0004-usb-gadget-udc-core-fix-asymmetric-calls-in-remove_d.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0005-usb-gadget-udc-core-fix-wrong-call-order.patch
- create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0006-usb-gadget-udc-core-fix-incompatibility-with-dummy-h.patch
+I am currently trying to boot my beagleboard with a mix of 
+Poky/Meta-ti/meta-oe, I can build the image without error however when I 
+start booting the board the kernel gets to 'freeing init memory' and 
+seems to hang, although the beaglebone light is still flashing and it 
+will still accept keystrokes. Could anyone shed any light on the situation?
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0001-usb-musb-cppi41-revisit-the-teardown-path-to-fix-iso.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0001-usb-musb-cppi41-revisit-the-teardown-path-to-fix-iso.patch
-new file mode 100644
-index 0000000..dd2e19a
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0001-usb-musb-cppi41-revisit-the-teardown-path-to-fix-iso.patch
-@@ -0,0 +1,103 @@
-+From c2746810dc7bcaaae2dec493c501eb7213d14858 Mon Sep 17 00:00:00 2001
-+From: Ajay Kumar Gupta <ajay.gupta@ti.com>
-+Date: Tue, 8 May 2012 12:05:47 +0530
-+Subject: [PATCH 1/6] usb: musb: cppi41: revisit the teardown path to fix isoc
-+ issue
-+
-+Fixes the camera streaming issue when application is stopped and restarted multiple times.
-+Changes:
-+	- Disable DMAReq of TX/RX endpoints before teardown
-+	- FIFO flush only when RxPktRdy is set
-+	- Clear ReqPkt if in host mode.
-+---
-+ drivers/usb/musb/cppi41_dma.c |   42 ++++++++++++++++++++++++----------------
-+ drivers/usb/musb/musb_host.c  |    2 +-
-+ 2 files changed, 26 insertions(+), 18 deletions(-)
-+
-+diff --git a/drivers/usb/musb/cppi41_dma.c b/drivers/usb/musb/cppi41_dma.c
-+index e4d3173..4761acd 100644
-+--- a/drivers/usb/musb/cppi41_dma.c
-++++ b/drivers/usb/musb/cppi41_dma.c
-+@@ -1206,6 +1206,11 @@ static int cppi41_channel_abort(struct dma_channel *channel)
-+ 	if (cppi_ch->transmit) {
-+ 		dprintk("Tx channel teardown, cppi_ch = %p\n", cppi_ch);
-+ 
-++		/* disable the DMAreq before teardown */
-++		csr  = musb_readw(epio, MUSB_TXCSR);
-++		csr &= ~MUSB_TXCSR_DMAENAB;
-++		musb_writew(epio, MUSB_TXCSR, csr);
-++
-+ 		/* Tear down Tx DMA channel */
-+ 		usb_tx_ch_teardown(cppi_ch);
-+ 
-+@@ -1223,11 +1228,30 @@ static int cppi41_channel_abort(struct dma_channel *channel)
-+ 	} else { /* Rx */
-+ 		dprintk("Rx channel teardown, cppi_ch = %p\n", cppi_ch);
-+ 
-++		/* disable the DMAreq and remove reqpkt */
-++		csr  = musb_readw(epio, MUSB_RXCSR);
-++		dev_dbg(musb->controller,
-++			"before rx-teardown: rxcsr %x rxcount %x\n", csr,
-++			musb_readw(epio, MUSB_RXCOUNT));
-++
-++		/* For host, clear (just) ReqPkt at end of current packet(s) */
-++		if (is_host_active(cppi->musb))
-++			csr &= ~MUSB_RXCSR_H_REQPKT;
-++
-++		csr &= ~MUSB_RXCSR_DMAENAB;
-++		musb_writew(epio, MUSB_RXCSR, csr);
-++
-++
-+ 		/* Flush FIFO of the endpoint */
-+ 		csr  = musb_readw(epio, MUSB_RXCSR);
-+-		csr |= MUSB_RXCSR_FLUSHFIFO | MUSB_RXCSR_H_WZC_BITS;
-++
-++		if (csr & MUSB_RXCSR_RXPKTRDY)
-++			csr |= MUSB_RXCSR_FLUSHFIFO;
-++
-++		csr |= MUSB_RXCSR_H_WZC_BITS;
-+ 		musb_writew(epio, MUSB_RXCSR, csr);
-+ 		musb_writew(epio, MUSB_RXCSR, csr);
-++		csr  = musb_readw(epio, MUSB_RXCSR);
-+ 
-+ 		/* Issue CPPI FIFO teardown for Rx channel */
-+ 		td_reg  = musb_readl(reg_base, cppi->teardown_reg_offs);
-+@@ -1246,22 +1270,6 @@ static int cppi41_channel_abort(struct dma_channel *channel)
-+ 
-+ 		/* For host, ensure ReqPkt is never set again */
-+ 		cppi41_autoreq_update(cppi_ch, USB_NO_AUTOREQ);
-+-
-+-		/* For host, clear (just) ReqPkt at end of current packet(s) */
-+-		if (is_host_active(cppi->musb))
-+-			csr &= ~MUSB_RXCSR_H_REQPKT;
-+-		csr |= MUSB_RXCSR_H_WZC_BITS;
-+-
-+-		/* Clear DMA enable */
-+-		csr &= ~MUSB_RXCSR_DMAENAB;
-+-		musb_writew(epio, MUSB_RXCSR, csr);
-+-
-+-		/* Flush the FIFO of endpoint once again */
-+-		csr  = musb_readw(epio, MUSB_RXCSR);
-+-		csr |= MUSB_RXCSR_FLUSHFIFO | MUSB_RXCSR_H_WZC_BITS;
-+-		musb_writew(epio, MUSB_RXCSR, csr);
-+-
-+-		udelay(50);
-+ 	}
-+ 
-+ 	/*
-+diff --git a/drivers/usb/musb/musb_host.c b/drivers/usb/musb/musb_host.c
-+index d805d1b..2195633 100644
-+--- a/drivers/usb/musb/musb_host.c
-++++ b/drivers/usb/musb/musb_host.c
-+@@ -2224,7 +2224,7 @@ static int musb_cleanup_urb(struct urb *urb, struct musb_qh *qh)
-+ 	}
-+ 
-+ 	/* turn off DMA requests, discard state, stop polling ... */
-+-	if (is_in) {
-++	if (is_in && ep->epnum) {
-+ 		/* giveback saves bulk toggle */
-+ 		csr = musb_h_flush_rxfifo(ep, 0);
-+ 
-+-- 
-+1.7.7.6
-+
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0002-usb-musb-fix-bug-in-data-toggle-sw-workaround.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0002-usb-musb-fix-bug-in-data-toggle-sw-workaround.patch
-new file mode 100644
-index 0000000..dab230c
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0002-usb-musb-fix-bug-in-data-toggle-sw-workaround.patch
-@@ -0,0 +1,31 @@
-+From a9e9e758646ee41289c0030645bbdd43c711e9c1 Mon Sep 17 00:00:00 2001
-+From: Ajay Kumar Gupta <ajay.gupta@ti.com>
-+Date: Fri, 18 May 2012 14:51:15 +0530
-+Subject: [PATCH 2/6] usb: musb: fix bug in data toggle sw workaround
-+
-+Data toggle software workaround for extra IN issue introduced a bug for PIO mode
-+as data toggle is getting updated even for PIO mode which should not be done.
-+
-+Merge to:
-+usb: musb: cppi41: correct data toggle mismatch to fix extra IN token issue
-+---
-+ drivers/usb/musb/musb_host.c |    3 ++-
-+ 1 files changed, 2 insertions(+), 1 deletions(-)
-+
-+diff --git a/drivers/usb/musb/musb_host.c b/drivers/usb/musb/musb_host.c
-+index 2195633..80d83bd 100644
-+--- a/drivers/usb/musb/musb_host.c
-++++ b/drivers/usb/musb/musb_host.c
-+@@ -359,7 +359,8 @@ static inline void musb_save_toggle(struct musb_qh *qh, int is_in,
-+ 		curr_toggle = csr ? 1 : 0;
-+ 
-+ 		/* check if data toggle has gone out of sync */
-+-		if (curr_toggle == qh->hw_ep->prev_toggle) {
-++		if (is_dma_capable() && qh->hw_ep->rx_channel &&
-++				curr_toggle == qh->hw_ep->prev_toggle) {
-+ 			dev_dbg(musb->controller,
-+ 				"Data toggle same as previous (=%d) on ep%d\n",
-+ 					curr_toggle, qh->hw_ep->epnum);
-+-- 
-+1.7.7.6
-+
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0003-usb-gadget-udc-core-stop-UDC-on-device-initiated-dis.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0003-usb-gadget-udc-core-stop-UDC-on-device-initiated-dis.patch
-new file mode 100644
-index 0000000..88a1fb9
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0003-usb-gadget-udc-core-stop-UDC-on-device-initiated-dis.patch
-@@ -0,0 +1,41 @@
-+From 2eac6057134bcb77edcdc462b810465850caec23 Mon Sep 17 00:00:00 2001
-+From: Felipe Balbi <balbi@ti.com>
-+Date: Thu, 15 Mar 2012 16:37:18 +0200
-+Subject: [PATCH 3/6] usb: gadget: udc-core: stop UDC on device-initiated
-+ disconnect
-+
-+When we want to do device-initiated disconnect,
-+let's make sure we stop the UDC in order to
-+e.g. allow lower power states to be achieved by
-+turning off unnecessary clocks and/or stoping
-+PHYs.
-+
-+When reconnecting, call ->udc_start() again to
-+make sure UDC is reinitialized.
-+
-+Cc: stable@vger.kernel.org
-+Signed-off-by: Felipe Balbi <balbi@ti.com>
-+---
-+ drivers/usb/gadget/udc-core.c |    4 ++++
-+ 1 files changed, 4 insertions(+), 0 deletions(-)
-+
-+diff --git a/drivers/usb/gadget/udc-core.c b/drivers/usb/gadget/udc-core.c
-+index 0b0d12c..475c997 100644
-+--- a/drivers/usb/gadget/udc-core.c
-++++ b/drivers/usb/gadget/udc-core.c
-+@@ -359,8 +359,12 @@ static ssize_t usb_udc_softconn_store(struct device *dev,
-+ 	struct usb_udc		*udc = container_of(dev, struct usb_udc, dev);
-+ 
-+ 	if (sysfs_streq(buf, "connect")) {
-++		if (udc_is_newstyle(udc))
-++			usb_gadget_udc_start(udc->gadget, udc->driver);
-+ 		usb_gadget_connect(udc->gadget);
-+ 	} else if (sysfs_streq(buf, "disconnect")) {
-++		if (udc_is_newstyle(udc))
-++			usb_gadget_udc_stop(udc->gadget, udc->driver);
-+ 		usb_gadget_disconnect(udc->gadget);
-+ 	} else {
-+ 		dev_err(dev, "unsupported command '%s'\n", buf);
-+-- 
-+1.7.7.6
-+
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0004-usb-gadget-udc-core-fix-asymmetric-calls-in-remove_d.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0004-usb-gadget-udc-core-fix-asymmetric-calls-in-remove_d.patch
-new file mode 100644
-index 0000000..eae1c70
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0004-usb-gadget-udc-core-fix-asymmetric-calls-in-remove_d.patch
-@@ -0,0 +1,43 @@
-+From fefa8fade565b137ae3d01801196840b6ccfc98f Mon Sep 17 00:00:00 2001
-+From: Kishon Vijay Abraham I <kishon@ti.com>
-+Date: Wed, 21 Mar 2012 21:34:30 +0530
-+Subject: [PATCH 4/6] usb: gadget: udc-core: fix asymmetric calls in
-+ remove_driver
-+
-+During modprobe of gadget driver, pullup is called after
-+udc_start. In order to make the exit path symmetric when
-+removing a gadget driver, call pullup before ->udc_stop.
-+
-+This is needed to avoid issues with PM where udc_stop
-+disables the module completely (put IP in reset state,
-+cut functional and interface clocks, and so on), which
-+prevents us from accessing the IP's address space,
-+thus creating the possibility of an abort exception
-+when we try to access IP's address space after clocks
-+are off.
-+
-+Cc: stable@vger.kernel.org
-+Signed-off-by: Partha Basak <p-basak2@ti.com>
-+Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
-+Signed-off-by: Felipe Balbi <balbi@ti.com>
-+---
-+ drivers/usb/gadget/udc-core.c |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/drivers/usb/gadget/udc-core.c b/drivers/usb/gadget/udc-core.c
-+index 475c997..ec02ed0 100644
-+--- a/drivers/usb/gadget/udc-core.c
-++++ b/drivers/usb/gadget/udc-core.c
-+@@ -212,8 +212,8 @@ static void usb_gadget_remove_driver(struct usb_udc *udc)
-+ 	if (udc_is_newstyle(udc)) {
-+ 		udc->driver->disconnect(udc->gadget);
-+ 		udc->driver->unbind(udc->gadget);
-+-		usb_gadget_udc_stop(udc->gadget, udc->driver);
-+ 		usb_gadget_disconnect(udc->gadget);
-++		usb_gadget_udc_stop(udc->gadget, udc->driver);
-+ 	} else {
-+ 		usb_gadget_stop(udc->gadget, udc->driver);
-+ 	}
-+-- 
-+1.7.7.6
-+
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0005-usb-gadget-udc-core-fix-wrong-call-order.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0005-usb-gadget-udc-core-fix-wrong-call-order.patch
-new file mode 100644
-index 0000000..ae705cf
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0005-usb-gadget-udc-core-fix-wrong-call-order.patch
-@@ -0,0 +1,33 @@
-+From 7a0dcaac06bfffd4df4bf7a006c601b31acc7cb7 Mon Sep 17 00:00:00 2001
-+From: Felipe Balbi <balbi@ti.com>
-+Date: Fri, 27 Apr 2012 11:02:15 +0300
-+Subject: [PATCH 5/6] usb: gadget: udc-core: fix wrong call order
-+
-+commit 6d258a4 (usb: gadget: udc-core: stop UDC on device-initiated
-+disconnect) introduced another case of asymmetric calls when issuing
-+a device-initiated disconnect. Fix it.
-+
-+Reported-by: Ben Hutchings <ben@decadent.org.uk>
-+Signed-off-by: Felipe Balbi <balbi@ti.com>
-+---
-+ drivers/usb/gadget/udc-core.c |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/drivers/usb/gadget/udc-core.c b/drivers/usb/gadget/udc-core.c
-+index ec02ed0..3ea783d 100644
-+--- a/drivers/usb/gadget/udc-core.c
-++++ b/drivers/usb/gadget/udc-core.c
-+@@ -363,9 +363,9 @@ static ssize_t usb_udc_softconn_store(struct device *dev,
-+ 			usb_gadget_udc_start(udc->gadget, udc->driver);
-+ 		usb_gadget_connect(udc->gadget);
-+ 	} else if (sysfs_streq(buf, "disconnect")) {
-++		usb_gadget_disconnect(udc->gadget);
-+ 		if (udc_is_newstyle(udc))
-+ 			usb_gadget_udc_stop(udc->gadget, udc->driver);
-+-		usb_gadget_disconnect(udc->gadget);
-+ 	} else {
-+ 		dev_err(dev, "unsupported command '%s'\n", buf);
-+ 		return -EINVAL;
-+-- 
-+1.7.7.6
-+
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0006-usb-gadget-udc-core-fix-incompatibility-with-dummy-h.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0006-usb-gadget-udc-core-fix-incompatibility-with-dummy-h.patch
-new file mode 100644
-index 0000000..70f9398
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0006-usb-gadget-udc-core-fix-incompatibility-with-dummy-h.patch
-@@ -0,0 +1,46 @@
-+From 91cdc6fbc271e01e231dcf0e9403448aa19433fb Mon Sep 17 00:00:00 2001
-+From: Alan Stern <stern@rowland.harvard.edu>
-+Date: Thu, 26 Apr 2012 11:31:57 -0400
-+Subject: [PATCH 6/6] usb: gadget: udc-core: fix incompatibility with
-+ dummy-hcd
-+
-+This patch (as1548) fixes a recently-introduced incompatibility
-+between the UDC core and the dummy-hcd driver.  Commit
-+8ae8090c82eb407267001f75b3d256b3bd4ae691 (usb: gadget: udc-core: fix
-+asymmetric calls in remove_driver) moved the usb_gadget_udc_stop()
-+call in usb_gadget_remove_driver() below the usb_gadget_disconnect()
-+call.
-+
-+As a result, usb_gadget_disconnect() gets called at a time when the
-+gadget driver believes it has been unbound but dummy-hcd believes
-+it has not.  A nasty error ensues when dummy-hcd calls the gadget
-+driver's disconnect method a second time.
-+
-+To fix the problem, this patch moves the gadget driver's unbind
-+notification after the usb_gadget_disconnect() call.  Now nothing
-+happens between the two unbind notifications, so nothing goes wrong.
-+
-+Signed-off-by: Alan Stern <stern@rowland.harvard.edu>
-+Tested-by: Alexander Shishkin <alexander.shishkin@linux.intel.com>
-+Signed-off-by: Felipe Balbi <balbi@ti.com>
-+---
-+ drivers/usb/gadget/udc-core.c |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/drivers/usb/gadget/udc-core.c b/drivers/usb/gadget/udc-core.c
-+index 3ea783d..4e2e13e 100644
-+--- a/drivers/usb/gadget/udc-core.c
-++++ b/drivers/usb/gadget/udc-core.c
-+@@ -211,8 +211,8 @@ static void usb_gadget_remove_driver(struct usb_udc *udc)
-+ 
-+ 	if (udc_is_newstyle(udc)) {
-+ 		udc->driver->disconnect(udc->gadget);
-+-		udc->driver->unbind(udc->gadget);
-+ 		usb_gadget_disconnect(udc->gadget);
-++		udc->driver->unbind(udc->gadget);
-+ 		usb_gadget_udc_stop(udc->gadget, udc->driver);
-+ 	} else {
-+ 		usb_gadget_stop(udc->gadget, udc->driver);
-+-- 
-+1.7.7.6
-+
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index 888c7a3..82fa5eb 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -12,7 +12,7 @@ MULTI_CONFIG_BASE_SUFFIX = ""
- 
- BRANCH = "v3.2-staging"
- SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
--MACHINE_KERNEL_PR_append = "m+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "n+gitr${SRCREV}"
- 
- COMPATIBLE_MACHINE = "(ti33x)"
- 
-@@ -29,6 +29,12 @@ do_compile_prepend() {
- }
- 
- PATCHES_OVER_PSP = " \
-+	file://usb/0001-usb-musb-cppi41-revisit-the-teardown-path-to-fix-iso.patch \
-+	file://usb/0002-usb-musb-fix-bug-in-data-toggle-sw-workaround.patch \
-+	file://usb/0003-usb-gadget-udc-core-stop-UDC-on-device-initiated-dis.patch \
-+	file://usb/0004-usb-gadget-udc-core-fix-asymmetric-calls-in-remove_d.patch \
-+	file://usb/0005-usb-gadget-udc-core-fix-wrong-call-order.patch \
-+	file://usb/0006-usb-gadget-udc-core-fix-incompatibility-with-dummy-h.patch \
- 	file://3.2.1/0001-MAINTAINERS-stable-Update-address.patch \
- 	file://3.2.1/0002-Documentation-Update-stable-address.patch \
- 	file://3.2.1/0003-firmware-Fix-an-oops-on-reading-fw_priv-fw-in-sysfs-.patch \
+I am on the denzil branch for all three repositories.
+
+I have tried with USB only and USB + AC Adapter.
+
+Regards,
+Jack.
+
+U-Boot SPL 2011.09-dirty (May 22 2012 - 15:05:03)
+Texas Instruments Revision detection unimplemented
+OMAP SD/MMC: 0
+reading u-boot.img
+reading u-boot.img
+
+
+U-Boot 2011.09-dirty (May 22 2012 - 15:05:03)
+
+I2C:   ready
+DRAM:  256 MiB
+No daughter card present
+NAND:  HW ECC Hamming Code selected
+No NAND device found!!!
+0 MiB
+MMC:   OMAP SD/MMC: 0
+*** Warning - readenv() failed, using default environment
+
+Net:   cpsw
+Hit any key to stop autoboot:  0
+SD/MMC found on device 0
+reading uEnv.txt
+
+** Unable to read "uEnv.txt" from mmc 0:1 **
+Loading file "/boot/uImage" from mmc device 0:2 xxa2
+3158576 bytes read
+## Booting kernel from Legacy Image at 80007fc0 ...
+    Image Name:   Linux-3.2.16
+    Image Type:   ARM Linux Kernel Image (uncompressed)
+    Data Size:    3158512 Bytes = 3 MiB
+    Load Address: 80008000
+    Entry Point:  80008000
+    Verifying Checksum ... OK
+    XIP Kernel Image ... OK
+OK
+
+Starting kernel ...
+
+Uncompressing Linux... done, booting the kernel.
+[    0.000000] Initializing cgroup subsys cpuset
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Linux version 3.2.16 (jack@archHP) (gcc version 4.6.4 
+20120303 (prerelease) (GCC) ) #1 Tue May 22 14:53:09 BST 2012
+[    0.000000] CPU: ARMv7 Processor [413fc082] revision 2 (ARMv7), 
+cr=50c53c7d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing 
+instruction cache
+[    0.000000] Machine: am335xevm
+[    0.000000] Memory policy: ECC disabled, Data cache writeback
+[    0.000000] AM335X ES1.0 (sgx neon )
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  
+Total pages: 65024
+[    0.000000] Kernel command line: console=ttyO0,115200n8 
+root=/dev/mmcblk0p2 ro rootfstype=ext4 rootwait ip=none
+[    0.000000] PID hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.000000] Dentry cache hash table entries: 32768 (order: 5, 131072 
+bytes)
+[    0.000000] Inode-cache hash table entries: 16384 (order: 4, 65536 bytes)
+[    0.000000] allocated 1048576 bytes of page_cgroup
+[    0.000000] please try 'cgroup_disable=memory' option if you don't 
+want memory cgroups
+[    0.000000] Memory: 256MB = 256MB total
+[    0.000000] Memory: 253744k/253744k available, 8400k reserved, 0K highmem
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
+[    0.000000]     vmalloc : 0xd0800000 - 0xff000000   ( 744 MB)
+[    0.000000]     lowmem  : 0xc0000000 - 0xd0000000   ( 256 MB)
+[    0.000000]     modules : 0xbf800000 - 0xc0000000   (   8 MB)
+[    0.000000]       .text : 0xc0008000 - 0xc04279f0   (4223 kB)
+[    0.000000]       .init : 0xc0428000 - 0xc045f000   ( 220 kB)
+[    0.000000]       .data : 0xc0460000 - 0xc04b0ac0   ( 323 kB)
+[    0.000000]        .bss : 0xc04b0ae4 - 0xc04f7f0c   ( 286 kB)
+[    0.000000] NR_IRQS:410 nr_irqs:410 410
+[    0.000000] IRQ: Found an INTC at 0xfa200000 (revision 5.0) with 128 
+interrupts
+[    0.000000] Total of 128 interrupts on 1 active controller
+[    0.000000] OMAP clockevent source: GPTIMER2 at 24000000 Hz
+[    0.000000] omap_dm_timer_switch_src: Switching to HW default 
+clocksource(sys_clkin_ck) for timer1, this may impact timekeeping in low 
+power state
+[    0.000000] OMAP clocksource: GPTIMER1 at 24000000 Hz
+[    0.000000] sched_clock: 32 bits at 24MHz, resolution 41ns, wraps 
+every 178956ms
+[    0.000000] Console: colour dummy device 80x30
+[    0.000178] Calibrating delay loop... 479.23 BogoMIPS (lpj=2396160)
+[    0.056352] pid_max: default: 32768 minimum: 301
+[    0.056475] Security Framework initialized
+[    0.056531] Mount-cache hash table entries: 512
+[    0.056876] Initializing cgroup subsys cpuacct
+[    0.056914] Initializing cgroup subsys memory
+[    0.056948] Initializing cgroup subsys devices
+[    0.056959] Initializing cgroup subsys freezer
+[    0.056969] Initializing cgroup subsys blkio
+[    0.056989] Initializing cgroup subsys perf_event
+[    0.057060] CPU: Testing write buffer coherency: ok
+[    0.057915] devtmpfs: initialized
+[    0.076953] omap_hwmod: gfx: failed to hardreset
+[    0.092824] omap_hwmod: pruss: failed to hardreset
+[    0.093292] print_constraints: dummy:
+[    0.093511] NET: Registered protocol family 16
+[    0.094475] OMAP GPIO hardware version 0.1
+[    0.095426] omap_mux_init: Add partition: #1: core, flags: 0
+[    0.096614]  omap_i2c.1: alias fck already exists
+[    0.096934] hw-breakpoint: debug architecture 0x4 unsupported.
+[    0.097075]  omap2_mcspi.1: alias fck already exists
+[    0.097175]  omap2_mcspi.2: alias fck already exists
+[    0.097314]  edma.0: alias fck already exists
+[    0.097333]  edma.0: alias fck already exists
+[    0.097349]  edma.0: alias fck already exists
+[    0.105373] bio: create slab <bio-0> at 0
+[    0.106431] SCSI subsystem initialized
+[    0.107199] usbcore: registered new interface driver usbfs
+[    0.107312] usbcore: registered new interface driver hub
+[    0.107458] usbcore: registered new device driver usb
+[    0.107569] musb-ti81xx musb-ti81xx: musb0, board_mode=0x13, 
+plat_mode=0x3
+[    0.107690] musb-ti81xx musb-ti81xx: musb1, board_mode=0x13, 
+plat_mode=0x1
+[    0.126404] omap_i2c omap_i2c.1: bus 1 rev2.4.0 at 100 kHz
+[    0.127355] Advanced Linux Sound Architecture Driver Version 1.0.24.
+[    0.127858] Switching to clocksource gp timer
+[    0.137487] musb-hdrc: version 6.0, ?dma?, otg (peripheral+host)
+[    0.137645] musb-hdrc musb-hdrc.0: dma type: pio
+[    0.138227] musb-hdrc musb-hdrc.0: USB OTG mode controller at 
+d081c000 using PIO, IRQ 18
+[    0.138469] musb-hdrc musb-hdrc.1: dma type: pio
+[    0.138694] musb-hdrc musb-hdrc.1: MUSB HDRC host driver
+[    0.138757] musb-hdrc musb-hdrc.1: new USB bus registered, assigned 
+bus number 1
+[    0.138862] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+[    0.138878] usb usb1: New USB device strings: Mfr=3, Product=2, 
+SerialNumber=1
+[    0.138891] usb usb1: Product: MUSB HDRC host driver
+[    0.138902] usb usb1: Manufacturer: Linux 3.2.16 musb-hcd
+[    0.138912] usb usb1: SerialNumber: musb-hdrc.1
+[    0.139481] hub 1-0:1.0: USB hub found
+[    0.139507] hub 1-0:1.0: 1 port detected
+[    0.139920] musb-hdrc musb-hdrc.1: USB Host mode controller at 
+d081e800 using PIO, IRQ 19
+[    0.140276] NET: Registered protocol family 2
+[    0.140460] IP route cache hash table entries: 2048 (order: 1, 8192 
+bytes)
+[    0.140824] TCP established hash table entries: 8192 (order: 4, 65536 
+bytes)
+[    0.140980] TCP bind hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.141075] TCP: Hash tables configured (established 8192 bind 8192)
+[    0.141086] TCP reno registered
+[    0.141101] UDP hash table entries: 256 (order: 0, 4096 bytes)
+[    0.141124] UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+[    0.141357] NET: Registered protocol family 1
+[    0.141654] RPC: Registered named UNIX socket transport module.
+[    0.141667] RPC: Registered udp transport module.
+[    0.141676] RPC: Registered tcp transport module.
+[    0.141685] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.143218] audit: initializing netlink socket (disabled)
+[    0.143271] type=2000 audit(0.130:1): initialized
+[    0.153293] VFS: Disk quotas dquot_6.5.2
+[    0.153353] Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[    0.154308] msgmni has been set to 495
+[    0.155166] Block layer SCSI generic (bsg) driver version 0.4 loaded 
+(major 252)
+[    0.155252] io scheduler noop registered
+[    0.155264] io scheduler deadline registered
+[    0.155314] io scheduler cfq registered (default)
+[    0.156173] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[    0.157405] omap_uart.0: ttyO0 at MMIO 0x44e09000 (irq = 72) is a 
+OMAP UART0
+[    0.777300] console [ttyO0] enabled
+[    0.781446] omap_uart.1: ttyO1 at MMIO 0x48022000 (irq = 73) is a 
+OMAP UART1
+[    0.789165] omap_uart.2: ttyO2 at MMIO 0x48024000 (irq = 74) is a 
+OMAP UART2
+[    0.796835] omap_uart.3: ttyO3 at MMIO 0x481a6000 (irq = 44) is a 
+OMAP UART3
+[    0.804528] omap_uart.4: ttyO4 at MMIO 0x481a8000 (irq = 45) is a 
+OMAP UART4
+[    0.812239] omap_uart.5: ttyO5 at MMIO 0x481aa000 (irq = 46) is a 
+OMAP UART5
+[    0.820912] brd: module loaded
+[    0.827496] loop: module loaded
+[    0.830892] at24 1-0051: 32768 byte 24c256 EEPROM, writable, 64 
+bytes/write
+[    0.897896] No daughter card found
+[    0.901487] at24 1-0050: 32768 byte 24c256 EEPROM, writable, 64 
+bytes/write
+[    0.916670] Board name: A335BONE
+[    0.920045] Board version: 00A5
+[    0.923316] The board is a AM335x Beaglebone.
+[    0.928500] tps65217 1-0024: TPS65217 ID 0x7 version 1.0
+[    0.935814] print_constraints: DCDC1: 900 <--> 1800 mV at 1800 mV
+[    0.944075] print_constraints: DCDC2: 900 <--> 3300 mV at 1275 mV
+[    0.952311] print_constraints: DCDC3: 900 <--> 1500 mV at 1100 mV
+[    0.960533] print_constraints: LDO1: 1000 <--> 3300 mV at 1800 mV
+[    0.968775] print_constraints: LDO2: 900 <--> 3300 mV at 3300 mV
+[    0.976905] print_constraints: LDO3: 1800 <--> 3300 mV at 3300 mV
+[    0.985137] print_constraints: LDO4: 1800 <--> 3300 mV at 3300 mV
+[    0.992380]  omap_i2c.3: alias fck already exists
+[    1.007953] omap_i2c omap_i2c.3: bus 3 rev2.4.0 at 100 kHz
+[    1.014293]  omap_hsmmc.0: alias fck already exists
+[    1.019663] w1-gpio connected to P8_6
+[    1.026210] at24 3-0054: 32768 byte 24c256 EEPROM, writable, 64 
+bytes/write
+[    1.087901] BeagleBone cape EEPROM: could not read eeprom at address 0x54
+[    1.095018] at24 3-0055: 32768 byte 24c256 EEPROM, writable, 64 
+bytes/write
+[    1.157896] BeagleBone cape EEPROM: could not read eeprom at address 0x55
+[    1.165010] at24 3-0056: 32768 byte 24c256 EEPROM, writable, 64 
+bytes/write
+[    1.227896] BeagleBone cape EEPROM: could not read eeprom at address 0x56
+[    1.234999] at24 3-0057: 32768 byte 24c256 EEPROM, writable, 64 
+bytes/write
+[    1.297896] BeagleBone cape EEPROM: could not read eeprom at address 0x57
+[    1.304970] BeagleBone cape: exporting ADC pins to sysfs
+[    1.310942] BeagleBone cape: exporting SPI pins as spidev
+[    1.317395] SCSI Media Changer driver v0.25
+[    1.322171] CAN device driver interface
+[    1.326167] CAN bus driver for Bosch D_CAN controller 1.0
+[    1.377919] davinci_mdio davinci_mdio.0: davinci mdio revision 1.6
+[    1.384364] davinci_mdio davinci_mdio.0: detected phy mask fffffffe
+[    1.391760] davinci_mdio.0: probed
+[    1.395312] davinci_mdio davinci_mdio.0: phy[0]: device 0:00, driver 
+SMSC LAN8710/LAN8720
+[    1.404010] usbcore: registered new interface driver catc
+[    1.409653] catc: v2.8:CATC EL1210A NetMate USB Ethernet driver
+[    1.415877] usbcore: registered new interface driver kaweth
+[    1.421698] pegasus: v0.6.14 (2006/09/27), Pegasus/Pegasus II USB 
+Ethernet driver
+[    1.429575] usbcore: registered new interface driver pegasus
+[    1.435472] rtl8150: v0.6.2 (2004/08/27):rtl8150 based usb-ethernet 
+driver
+[    1.442697] usbcore: registered new interface driver rtl8150
+[    1.448676] usbcore: registered new interface driver asix
+[    1.454352] usbcore: registered new interface driver cdc_ether
+[    1.460494] usbcore: registered new interface driver dm9601
+[    1.466351] usbcore: registered new interface driver cdc_subset
+[    1.472584] usbcore: registered new interface driver zaurus
+[    1.478439] cdc_ncm: 04-Aug-2011
+[    1.481855] usbcore: registered new interface driver cdc_ncm
+[    1.487861] usbcore: registered new interface driver cdc_acm
+[    1.493775] cdc_acm: USB Abstract Control Model driver for USB modems 
+and ISDN adapters
+[    1.502202] usbcore: registered new interface driver usblp
+[    1.507985] usbcore: registered new interface driver cdc_wdm
+[    1.513940] usbcore: registered new interface driver uas
+[    1.519487] Initializing USB Mass Storage driver...
+[    1.524676] usbcore: registered new interface driver usb-storage
+[    1.530949] USB Mass Storage support registered.
+[    1.535847] usbcore: registered new interface driver libusual
+[    1.542249] mousedev: PS/2 mouse device common for all mice
+[    1.548570] dev addr = cf9cea08
+[    1.551844] pdev addr = cf9cea00
+[    1.555865] omap_rtc omap_rtc: rtc core: registered omap_rtc as rtc0
+[    1.562667] i2c /dev entries driver
+[    1.566678] Linux media interface: v0.10
+[    1.570924] lirc_dev: IR Remote Control driver registered, major 249
+[    1.577637] IR NEC protocol handler initialized
+[    1.582371] IR RC5(x) protocol handler initialized
+[    1.587361] IR RC6 protocol handler initialized
+[    1.592089] IR JVC protocol handler initialized
+[    1.596807] IR Sony protocol handler initialized
+[    1.601625] IR RC5 (streamzap) protocol handler initialized
+[    1.607430] IR MCE Keyboard/mouse protocol handler initialized
+[    1.613516] IR LIRC bridge handler initialized
+[    1.618153] Linux video capture interface: v2.00
+[    1.623094] usbcore: registered new interface driver uvcvideo
+[    1.629097] USB Video Class driver (1.1.1)
+[    1.633431] Driver for 1-wire Dallas network protocol.
+[    1.640004] OMAP Watchdog Timer Rev 0x01: initial timeout 60 sec
+[    1.647659] cpuidle: using governor ladder
+[    1.652101] cpuidle: using governor menu
+[    1.658737] usbcore: registered new interface driver usbhid
+[    1.664546] usbhid: USB HID core driver
+[    1.669451] usbcore: registered new interface driver snd-usb-audio
+[    1.676655] ALSA device list:
+[    1.679793]   No soundcards found.
+[    1.683657] TCP cubic registered
+[    1.687020] Initializing XFRM netlink socket
+[    1.691529] NET: Registered protocol family 17
+[    1.696209] NET: Registered protocol family 15
+[    1.700856] can: controller area network core (rev 20090105 abi 8)
+[    1.707384] NET: Registered protocol family 29
+[    1.712029] can: raw protocol (rev 20090105)
+[    1.716515] Registering the dns_resolver key type
+[    1.721490] VFP support v0.3: implementor 41 architecture 3 part 30 
+variant c rev 3
+[    1.729503] ThumbEE CPU extension supported.
+[    1.734014] mux: Failed to setup hwmod io irq -22
+[    1.739572] Power Management for AM33XX family
+[    1.744376] Trying to load am335x-pm-firmware.bin (60 secs timeout)
+[    1.751049] Copied the M3 firmware to UMEM
+[    1.755330] omap_hwmod: wkup_m3: wkup_m3: hwmod data error: OMAP4 
+does not support st_shift
+[    1.768463] registered taskstats version 1
+[    1.773017] Detected MACID=d4:94:a1:8b:b:68
+[    1.778320] omap_rtc omap_rtc: setting system clock to 2000-01-01 
+00:00:01 UTC (946684801)
+[    1.787592] Waiting for root device /dev/mmcblk0p2...
+[    1.828855] mmc0: host does not support reading read-only switch. 
+assuming write-enable.
+[    1.839796] mmc0: new high speed SDHC card at address 1234
+[    1.846016] mmcblk0: mmc0:1234 SA04G 3.63 GiB
+[    1.852877]  mmcblk0: p1 p2
+[    1.911841] EXT4-fs (mmcblk0p2): mounted filesystem with ordered data 
+mode. Opts: (null)
+[    1.920383] VFS: Mounted root (ext4 filesystem) readonly on device 179:2.
+[    1.930940] devtmpfs: mounted
+[    1.934373] Freeing init memory: 220K
+
 -- 
-1.7.10
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
 
 
