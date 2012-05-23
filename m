@@ -1,34 +1,33 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-yw0-f48.google.com (mail-yw0-f48.google.com
-	[209.85.213.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1C944E01396
-	for <meta-ti@yoctoproject.org>; Wed, 23 May 2012 04:15:41 -0700 (PDT)
-Received: by yhfq46 with SMTP id q46so8154600yhf.35
-	for <meta-ti@yoctoproject.org>; Wed, 23 May 2012 04:15:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=O8zjwgeKpo46TebKil/F3cKt9TBaB90OtEeeP0c1+AY=;
-	b=qvicAWJH3f/a2o94KybcWf+5Zi2zXeisPykCTdEwDF42ioAQjwuJkEeZwXn+zDBO/4
-	ASnx1p0qKWnM2QwM2sW9KBjvNIe8lPVSJb+wb02rXv7KldMuBzz7DLnRFP8ww19ygVhR
-	CuKuuK7HvS56mV8F5ygp9QZ6UbUgfIJfrb0i2XWjLPtxsUSMEsr005oR+sPgstSGLOg/
-	0JojerCzNkZbigXERYSZcHJx4bWkXZIHiCT2zbDVwV5qFEVMznCMFfil8BWXaJczUPo/
-	6xpIJCw6v7/Y+7dH3HBCKydSNt/5a9Cyw/pCUxBZsVca0v49I44HYbAJ6a7DPPTaxPBk
-	rqZQ==
-MIME-Version: 1.0
-Received: by 10.50.154.169 with SMTP id vp9mr12352467igb.53.1337771739924;
-	Wed, 23 May 2012 04:15:39 -0700 (PDT)
-Received: by 10.64.141.72 with HTTP; Wed, 23 May 2012 04:15:39 -0700 (PDT)
-In-Reply-To: <9FB288D3-4180-4AFB-9374-95A5CC27A54E@beagleboard.org>
-References: <1337645555-1805-1-git-send-email-schnitzeltony@googlemail.com>
-	<52E11F40-B7EF-41BA-B462-662DDE01C311@dominion.thruhere.net>
-	<9FB288D3-4180-4AFB-9374-95A5CC27A54E@beagleboard.org>
-Date: Wed, 23 May 2012 13:15:39 +0200
-Message-ID: <CALbNGRTjFx7X8KjaSSpcLJTNdybh7SzYDh3L+nxgNdYSgXQM2g@mail.gmail.com>
-From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6EA4EE013BB
+	for <meta-ti@yoctoproject.org>; Wed, 23 May 2012 04:57:28 -0700 (PDT)
+Received: by eekb45 with SMTP id b45so2168882eek.35
+	for <meta-ti@yoctoproject.org>; Wed, 23 May 2012 04:57:27 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=FOQSj0wL6fEyiasxZN3jhkf2zsdR7pmSfIEgn6dCZTE=;
+	b=B++GiJA63ohN1mL0f56UEmHJeMoCYbUYm0P8fLtEZm0QPHJWOQkJLyJO8JnQESJLx6
+	628uwCaSP08EA3/6hrdJAjiTHSFyEJjEc4xNZh7sdKT2nM2hbk14eMcnXzRaff2UWPBA
+	nEhBTtqlRN4+l4OeBZFQlxp08xv0/nARmnTeb9AT7WW2iSOjAmm5iq4OvvaBx15oIQSM
+	N7QP8AUXL7GOycBT6I/zI+mjwR14Cc0gWV1R5eb/CK0XTQXPIzu/4Czv2Md+cSlzFy39
+	nOumtqyTqHRcA6G+CTY3OyoMXToZjaXSnIME2ROAYXXq+HzscEXLkyC3o9NGzlibecRq
+	9P5g==
+Received: by 10.213.3.151 with SMTP id 23mr1064621ebn.76.1337774246974;
+	Wed, 23 May 2012 04:57:26 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id f16sm122073736eec.2.2012.05.23.04.57.25
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 23 May 2012 04:57:25 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] linux-mainline: Add patches to enable libertas firmware loading asynchronously
+Date: Wed, 23 May 2012 13:57:15 +0200
+Message-Id: <1337774235-9471-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQkMQX9+QBm9YoMGa4UGMOeeGCg7DFslOB6h2aCUZDZfVD/w3yzQu3se+cTEByb6dW1mAH4U
+Cc: denys@ti.com
+Subject: [PATCH] linux-mainline: update to 3.2.18
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,50 +39,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 May 2012 11:15:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 23 May 2012 11:57:28 -0000
 
-On Tue, May 22, 2012 at 7:48 AM, Koen Kooi <koen@beagleboard.org> wrote:
->
-> Op 22 mei 2012, om 07:43 heeft Koen Kooi het volgende geschreven:
->
->>
->> Op 22 mei 2012, om 02:12 heeft Andreas M=FCller het volgende geschreven:
->>
->>> When using udev >=3D177 libertas driver does not load properly the firm=
-ware [1].
->>> The patches 0001-0016 were taken from [2] and can be viewed at [3]. Pat=
-ch 0017
->>> I created to fix compiler complaining for missing symbol is_interrupt w=
-hen
->>> DEBUG set.
->>> The patch series was tested with meta-gumstix on overo with udev-175 an=
-d
->>> udev-182.
->>>
->>> [1] http://www.spinics.net/lists/linux-wireless/msg85541.html
->>> [2] git://git.kernel.org/pub/scm/linux/kernel/git/linville/wireless-nex=
-t.git
->>> [3] http://git.kernel.org/?p=3Dlinux/kernel/git/linville/wireless-next.=
-git;a=3Dhistory;f=3Ddrivers/net/wireless/libertas;hb=3DHEAD
->>>
->>> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
->>
->> Could you please add the patches to the 'upstream' of this recipe instea=
-d? https://github.com/beagleboard/kernel/tree/beagleboard-3.2
->
-> s/instead/as well/ of course. Time for coffee :)
+---
+ conf/machine/include/omap3.inc             |    2 +-
+ recipes-kernel/linux/linux-mainline_3.2.bb |    8 ++++----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-How about the following deal: You or somebody synchronizes to latest
-beagleboard.org changes ( 3.2.18 arrived yesterday ) and after that I
-will rebase/test the patches and resend them here and to
-beagleboard.org.
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index c5b1979..0f3cc36 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
+ require conf/machine/include/tune-cortexa8.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r120"
++MACHINE_KERNEL_PR = "r121"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+diff --git a/recipes-kernel/linux/linux-mainline_3.2.bb b/recipes-kernel/linux/linux-mainline_3.2.bb
+index 3dda4f8..69eb7e5 100644
+--- a/recipes-kernel/linux/linux-mainline_3.2.bb
++++ b/recipes-kernel/linux/linux-mainline_3.2.bb
+@@ -5,12 +5,12 @@ KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "(beagleboard)"
+ 
+-PV = "3.2.16"
+-# v3.2.16 tag
+-SRCREV_pn-${PN} = "b1be7dd1ec231ae751d0ce3acd0d2e5760704a6f"
++PV = "3.2.18"
++# v3.2.18 tag
++SRCREV_pn-${PN} = "52c6b95f8a2edaff98b779f15b2f4d69b61b18b9"
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+-MACHINE_KERNEL_PR_append = "d"
++MACHINE_KERNEL_PR_append = "a"
+ 
+ FILESPATH =. "${FILE_DIRNAME}/linux-mainline-3.2:${FILE_DIRNAME}/linux-mainline-3.2/${MACHINE}:"
+ 
+-- 
+1.7.10
 
-What do you think?
-
-Andreas
-
-[1] http://lists.linuxtogo.org/pipermail/angstrom-distro-devel/2012-May/006=
-122.html
 
