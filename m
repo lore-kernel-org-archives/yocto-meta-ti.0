@@ -1,40 +1,25 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 67F79E006DA
-	for <meta-ti@yoctoproject.org>; Thu, 24 May 2012 02:29:42 -0700 (PDT)
-Received: by eekb45 with SMTP id b45so2533543eek.35
-	for <meta-ti@yoctoproject.org>; Thu, 24 May 2012 02:29:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=z21LZ5vVH1GPvBqqjwEgS/koV4Cb7/nqfri2WvPKEUI=;
-	b=Ley/YsCqdsrLU2rBPQmzx1JJnzjYhpRhUScViVFQO5yUq6rXfbqInawxv5j4g3aP9a
-	GD5u7AzPuXv2axwXHwsxHM8tqV4cJQxLQgPocYQ/F9zbRJZ3iNW7qjrYOs5F4FUBpJtn
-	vdMNUMvmBOCKFngjHhgMCI+CHgbcJVc2UF2HrHr75+GPvGq/iWI0bfVrCwjTcyk4/xh0
-	HNDpIChFMuszHCkhgRWYjD8LYkXV2qIIWilSiuoBZ5TAza3HIjUV0MH2l8qcWYZ3yy00
-	6/jNasblxdWuXV2MzA5KNUO41l9HTEQhUqfOhDmmkbouRjw74lBDXs7hdRJC0FeK9EbV
-	8gaQ==
-Received: by 10.213.13.147 with SMTP id c19mr2074126eba.56.1337851781269;
-	Thu, 24 May 2012 02:29:41 -0700 (PDT)
-Received: from [172.20.0.96] (ip545070eb.adsl-surfen.hetnet.nl.
-	[84.80.112.235])
-	by mx.google.com with ESMTPS id v7sm136593423eem.6.2012.05.24.02.29.39
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 24 May 2012 02:29:40 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1278)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <CALbNGRRXZOYCqF9z7nytO2D_spToeJJw1mYggsqZq7irPeig1Q@mail.gmail.com>
-Date: Thu, 24 May 2012 11:29:38 +0200
-Message-Id: <131854CE-1297-4672-87FB-0B31D809DDC0@dominion.thruhere.net>
-References: <1337774235-9471-1-git-send-email-koen@dominion.thruhere.net>
-	<CALbNGRRXZOYCqF9z7nytO2D_spToeJJw1mYggsqZq7irPeig1Q@mail.gmail.com>
-To: =?iso-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
-X-Mailer: Apple Mail (2.1278)
-X-Gm-Message-State: ALoCoQkr0XuqmS8jwDHWth7+oSd+/PPVuTntH+MWgnK+5D5m7rveGBfyB2MNsw619fI29xP+O+br
-Cc: meta-ti@yoctoproject.org, denys@ti.com
-Subject: Re: [PATCH] linux-mainline: update to 3.2.18
+Return-Path: <ml@communistcode.co.uk>
+Received: from tinyArch.localdomain (unknown [78.110.170.148])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE724E01363
+	for <meta-ti@yoctoproject.org>; Thu, 24 May 2012 07:25:09 -0700 (PDT)
+Received: from [192.168.0.18] (unknown [195.171.99.130])
+	by tinyArch.localdomain (Postfix) with ESMTPSA id E09A140620
+	for <meta-ti@yoctoproject.org>; Thu, 24 May 2012 15:04:54 +0100 (BST)
+Message-ID: <4FBE44EE.2070909@communistcode.co.uk>
+Date: Thu, 24 May 2012 15:25:50 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:12.0) Gecko/20120430 Thunderbird/12.0.1
+MIME-Version: 1.0
+To: meta-ti@yoctoproject.org
+References: <4FBBB531.8020401@communistcode.co.uk>
+	<4FBBB786.8030501@mlbassoc.com>
+	<4FBBB8E9.1040700@communistcode.co.uk>
+	<20120522163158.GB15020@denix.org>
+	<4FBCA367.701@communistcode.co.uk> <4FBCC147.90606@mlbassoc.com>
+	<4FBCE8E4.6010208@communistcode.co.uk>
+In-Reply-To: <4FBCE8E4.6010208@communistcode.co.uk>
+Subject: Re: Beaglebone + Poky
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,64 +31,92 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2012 09:29:42 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 24 May 2012 14:25:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Thanks for pointing that out. Here it is:
+On 23/05/12 14:40, Jack Mitchell wrote:
+> On 23/05/12 11:51, Gary Thomas wrote:
+>> On 2012-05-23 02:44, Jack Mitchell wrote:
+>>> On 22/05/12 17:31, Denys Dmytriyenko wrote:
+>>>> On Tue, May 22, 2012 at 05:03:53PM +0100, Jack Mitchell wrote:
+>>>>> On 22/05/12 16:57, Gary Thomas wrote:
+>>>>>> On 2012-05-22 09:48, Jack Mitchell wrote:
+>>>>>>> Hi,
+>>>>>>>
+>>>>>>> I am currently trying to boot my beagleboard with a mix of
+>>>>>>> Poky/Meta-ti/meta-oe, I can build the image without error
+>>>>>>> however when I start booting the board the kernel gets to
+>>>>>>> 'freeing init memory' and seems to hang, although the beaglebone
+>>>>>>> light is still flashing and it will still accept keystrokes.
+>>>>>>> Could anyone shed any light on the situation?
+>>>>>>>
+>>>>>>> I am on the denzil branch for all three repositories.
+>>>>>>>
+>>>>>>> I have tried with USB only and USB + AC Adapter.
+>>>>>> What image did you use?
+>>>>> core-image-minimal - it does have a few extra programs added via
+>>>>> IMAGE_INSTALL but they are userspace only so shouldn't be affecting
+>>>>> the boot.
+>>>> Couple suggestions:
+>>>>
+>>>> 1. What's your init system? Since you have meta-oe mixed with poky, 
+>>>> check if
+>>>> there are any problems with sysvinit or systemd, in case there is 
+>>>> some mix up
+>>>> or confusion between those two...
+>>>>
+>>>> 2. Check your /etc/inittab for the correct tty used for getty, but 
+>>>> it doesn't
+>>>> look like it reaches the prompt yet...
+>>>>
+>>>
+>>> I am using Poky defaults so I assume it will be sysvinit... however 
+>>> I did see systemd being built, what would be the outline procedure 
+>>> to check that mixing of systems isn't
+>>> occurring? None of my reciepes have systemd support, but I assume 
+>>> something being pulled in from meta-oe does...
+>>>
+>>> My getty is being pushed to ttyO0, is this correct for the beaglebone?
+>>
+>> Can you put your images somewhere where I can access them?  I can give
+>> you an FTP push site if that helps?  I'd like to run through your image
+>> here on my BeagleBone.
+>>
+>> BTW, the only way meta-oe could be causing problems would be if you are
+>> using some recipe from it.  If you build exactly 'core-image-minimal' 
+>> with
+>> no extra packages, does it work for you?
+>>
+>
+> Hi Gary,
+>
+> I just tried without my addional programs to build a 
+> core-image-minimal and it still halts on the same kernel message. 
+> Something that I forgot to mention the yesterday was that I have a 
+> very high debugging level set, here is my local conf line:
+>
+> EXTRA_IMAGE_FEATURES = "debug-tweaks tools-debug tools-profile dbg-pkgs"
+>
+> Which could cause other programs to be brought in?
+>
+> Regards,
+> Jack.
+>
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Just a quick note that removing meta-oe and just porting over the 
+specific recipes that I needed fixed my problems. I still don't know 
+specifically what they were but I am inclined to say they were init 
+system related as Denys pointed out.
 
-Op 24 mei 2012, om 10:38 heeft Andreas M=FCller het volgende geschreven:
+Regards,
 
-> On Wed, May 23, 2012 at 1:57 PM, Koen Kooi =
-<koen@dominion.thruhere.net> wrote:
->> ---
->>  conf/machine/include/omap3.inc             |    2 +-
->>  recipes-kernel/linux/linux-mainline_3.2.bb |    8 ++++----
->>  2 files changed, 5 insertions(+), 5 deletions(-)
->>=20
->> diff --git a/conf/machine/include/omap3.inc =
-b/conf/machine/include/omap3.inc
->> index c5b1979..0f3cc36 100644
->> --- a/conf/machine/include/omap3.inc
->> +++ b/conf/machine/include/omap3.inc
->> @@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
->>  require conf/machine/include/tune-cortexa8.inc
->>  PREFERRED_PROVIDER_virtual/kernel =3D "linux-omap"
->>  # Increase this everytime you change something in the kernel
->> -MACHINE_KERNEL_PR =3D "r120"
->> +MACHINE_KERNEL_PR =3D "r121"
->>=20
->>  KERNEL_IMAGETYPE =3D "uImage"
->>=20
->> diff --git a/recipes-kernel/linux/linux-mainline_3.2.bb =
-b/recipes-kernel/linux/linux-mainline_3.2.bb
->> index 3dda4f8..69eb7e5 100644
->> --- a/recipes-kernel/linux/linux-mainline_3.2.bb
->> +++ b/recipes-kernel/linux/linux-mainline_3.2.bb
->> @@ -5,12 +5,12 @@ KERNEL_IMAGETYPE =3D "uImage"
->>=20
->>  COMPATIBLE_MACHINE =3D "(beagleboard)"
->>=20
->> -PV =3D "3.2.16"
->> -# v3.2.16 tag
->> -SRCREV_pn-${PN} =3D "b1be7dd1ec231ae751d0ce3acd0d2e5760704a6f"
->> +PV =3D "3.2.18"
->> +# v3.2.18 tag
->> +SRCREV_pn-${PN} =3D "52c6b95f8a2edaff98b779f15b2f4d69b61b18b9"
->>=20
->>  # The main PR is now using MACHINE_KERNEL_PR, for omap3 see =
-conf/machine/include/omap3.inc
->> -MACHINE_KERNEL_PR_append =3D "d"
->> +MACHINE_KERNEL_PR_append =3D "a"
->>=20
->>  FILESPATH =3D. =
-"${FILE_DIRNAME}/linux-mainline-3.2:${FILE_DIRNAME}/linux-mainline-3.2/${M=
-ACHINE}:"
->>=20
->> --
->> 1.7.10
-> Signed-off?
+-- 
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
 
 
