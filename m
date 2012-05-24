@@ -1,31 +1,34 @@
-Return-Path: <gleym-meta-ti@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0FEB2E0030B
-	for <meta-ti@yoctoproject.org>; Wed, 23 May 2012 08:30:12 -0700 (PDT)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gleym-meta-ti@m.gmane.org>) id 1SXDVm-00017g-Du
-	for meta-ti@yoctoproject.org; Wed, 23 May 2012 17:30:06 +0200
-Received: from static-50-52-145-66.lkvl.mn.frontiernet.net ([50.52.145.66])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00
-	for <meta-ti@yoctoproject.org>; Wed, 23 May 2012 17:30:06 +0200
-Received: from ftagius by static-50-52-145-66.lkvl.mn.frontiernet.net with
-	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <meta-ti@yoctoproject.org>; Wed, 23 May 2012 17:30:06 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
+	[209.85.215.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 62506E01304
+	for <meta-ti@yoctoproject.org>; Thu, 24 May 2012 00:57:42 -0700 (PDT)
+Received: by eaab16 with SMTP id b16so2474410eaa.35
+	for <meta-ti@yoctoproject.org>; Thu, 24 May 2012 00:57:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=ArTD5FyMxs0+YckU7ScdIbebNuRiyyXS3ef3jjKG+OY=;
+	b=HG2kuSEgi+ZSbSWABLWIFPBiIZ1t/b0LjXWfF8XDB25XRoZJJRSroRw3ZvUV/gG56e
+	rgnLc6Ofu4xD3hLmP3AjP+kAJJDEl2k0odYoij//720pfSOg55by2gIfS9QRf119DXML
+	zdb0gtUCnt8Mj6jDNAUTvmKOsayItEhK7bb39IalC+plFHpIt6/uXDzFxR+c608gTfso
+	+pLtTusymboLZpc8N3pbEbCQJgxIxEbHxfQIw8+KMnDBvoyC6zpBTboA7Z5FvNNcNmqY
+	ADNb5GXOM6eoRWTOQC4wu1QoAPl3bBnchEKujiUaQrJ0yFzFk/rJB6fS7G7KqVuf/Ti5
+	HFRg==
+Received: by 10.213.10.205 with SMTP id q13mr2033786ebq.32.1337846260803;
+	Thu, 24 May 2012 00:57:40 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id n52sm135437215eeh.9.2012.05.24.00.57.38
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 24 May 2012 00:57:39 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-From: Frank Agius <ftagius@yahoo.com>
-Date: Wed, 23 May 2012 09:02:01 -0400
-Message-ID: <jpin48$lag$1@dough.gmane.org>
-References: <CALbNGRQPZS-KUuZJO=T7C=yRkoOBTNjwYLJuCw12RV9rb+xStA@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: static-50-52-145-66.lkvl.mn.frontiernet.net
-User-Agent: Mozilla/5.0 (Windows NT 5.2; WOW64;
-	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
-In-Reply-To: <CALbNGRQPZS-KUuZJO=T7C=yRkoOBTNjwYLJuCw12RV9rb+xStA@mail.gmail.com>
-Cc: angstrom-distro-devel@linuxtogo.org
-Subject: Re: USB OTG not working for linux-mainline-3.2 (was [Angstrom-devel] Problem with usbhid kernel module)
+Date: Thu, 24 May 2012 09:57:28 +0200
+Message-Id: <1337846249-26371-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQnVTa1HyXccX9YsbYtuZkv0ZeEUVpZ08XNRKTUjdZn6OkvdGngeCLqUFUrOUY40oordDVrV
+Cc: denys@ti.com
+Subject: [PATCH 1/2] linux-ti33x-psp 3.2: sgx fix from PSP + dvi cape audio fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,102 +40,581 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 May 2012 15:30:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 24 May 2012 07:57:42 -0000
 
-On 5/23/2012 7:05 AM, Andreas Müller wrote:
-> On Wed, May 23, 2012 at 10:16 AM, Gyorgy Kovesdi<kgy@teledigit.eu>  wrote:
->> Hi,
->>
->> I have a Beagleboard C4, using it with USB keyboard and mouse.
->> Building the current version of Angstrom results a non-functional keyboard and mouse at the first boot.
->> After some digging, i found that the kernel module "usbhid" is not compiled in. It is built as a module (m), but
->> is not loaded during startup. Some weeks ago, it was compiled in (y) in the default kernel config of Beagle.
->>
->> This way the only possibility to get it working is to log in using the serial port, and set up manually.
->> I think it is related to other Beagle boards (e.g. xM), however, other people reported that it is working. Do they
->> use it other way, or do i made something wrong?
->>
->> Regards
->> Gyorgy Kovesdi
->>
->>
-> One hint first: to discuss TI-BSP issues you will have more feedback -
-> hopefully :) - on meta-ti@yoctoproject.org mailing list.
->
-> Back to topic: I have trouble getting OTG USB working in host mode and
-> think that this is the same issue as reported in [1]. Connecting to
-> USB-host interface everything works as expected - so I don't think is
-> related to usbhid.
-> AFAIK non XM Beagleboards only have an OTG port - so Gyorgy falls
-> victim on that.
-> I investigated this issue a bit: It seems the reason for this mess is
-> that the Kconfig names have changed some when between 3.0 and 3.2:
->
-> 1. In 3.0 there was a constant (CONFIG_)USB_MUSB_HDRC_HCD. This is no
-> more part of 3.2 KCONFIG but is heavily used in code
->
-> grep -r USB_MUSB_HDRC_HCD *
-> | arch/arm/mach-omap2/omap_phy_internal.c:#ifdef	CONFIG_USB_MUSB_HDRC_HCD
-> | arch/arm/mach-omap2/usb-musb.c:#elif defined(CONFIG_USB_MUSB_HDRC_HCD)
-> | arch/blackfin/mach-bf548/boards/ezkit.c:#elif
-> defined(CONFIG_USB_MUSB_HDRC_HCD)
-> | arch/blackfin/mach-bf548/boards/cm_bf548.c:#elif
-> defined(CONFIG_USB_MUSB_HDRC_HCD)
-> | arch/blackfin/mach-bf527/boards/ad7160eval.c:#elif
-> defined(CONFIG_USB_MUSB_HDRC_HCD)
-> | arch/blackfin/mach-bf527/boards/tll6527m.c:#elif
-> defined(CONFIG_USB_MUSB_HDRC_HCD)
-> | arch/blackfin/mach-bf527/boards/ezkit.c:#elif
-> defined(CONFIG_USB_MUSB_HDRC_HCD)
-> | arch/blackfin/mach-bf527/boards/ezbrd.c:#elif
-> defined(CONFIG_USB_MUSB_HDRC_HCD)
-> | arch/blackfin/mach-bf527/boards/cm_bf527.c:#elif
-> defined(CONFIG_USB_MUSB_HDRC_HCD)
->
-> Inside of arch/arm/mach-omap2/usb-musb.c there is
->
-> static struct musb_hdrc_platform_data musb_plat = {
-> #ifdef CONFIG_USB_MUSB_OTG
-> 	.mode		= MUSB_OTG,
-> #elif defined(CONFIG_USB_MUSB_HDRC_HCD)
-> 	.mode		= MUSB_HOST,
-> #elif defined(CONFIG_USB_GADGET_MUSB_HDRC)
-> 	.mode		= MUSB_PERIPHERAL,
-> #endif
->
-> So the host mode will never be activated. Strange:
-> CONFIG_USB_MUSB_HDRC_HCD is still in beagleboard's defconfig but
-> Kconfig removes it during build (see .config in build dir). Seems
-> defconfig was handmade..
->
-> 2. Same for (CONFIG_)USB_GADGET_OMAP. (I think this is unrelated to
-> host mode but yet another example):
->
-> | grep -r USB_GADGET_OMAP *
-> | arch/arm/mach-omap1/board-h2.c:#ifdef	CONFIG_USB_GADGET_OMAP
-> | arch/arm/mach-omap1/usb.c:#ifdef	CONFIG_USB_GADGET_OMAP
-> | arch/arm/mach-omap1/usb.c:#ifdef	CONFIG_USB_GADGET_OMAP
-> | arch/arm/mach-omap1/board-innovator.c:#ifdef	CONFIG_USB_GADGET_OMAP
-> | arch/arm/mach-omap1/board-h3.c:#ifdef CONFIG_USB_GADGET_OMAP
-> | arch/arm/mach-omap1/board-osk.c:#ifdef	CONFIG_USB_GADGET_OMAP
-> | arch/arm/plat-omap/usb.c:#ifdef	CONFIG_USB_GADGET_OMAP
-> | arch/arm/plat-omap/include/plat/usb.h:#ifdef	CONFIG_USB_GADGET_OMAP
-> | arch/arm/mach-omap2/usb-fs.c:#ifdef	CONFIG_USB_GADGET_OMAP
-> | arch/arm/mach-omap2/board-2430sdp.c:#ifdef  CONFIG_USB_GADGET_OMAP
-> | drivers/usb/otg/isp1301_omap.c:#elif	!defined(CONFIG_USB_GADGET_OMAP)
-> USB_GADGET_OMAP is not defined for Kconfig but used in source code
->
-> I would like to check this hypotheses but currently don't have time to..
->
+Also move more things to modules to speed up boot.
 
-This relates to usb code changes committed July 2011.  As a result of 
-these chages a gadget driver must be loaded in order for host mode to be 
-activated.  If you load a gadget driver, then host mode should be activated.
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ ...unding-FB-size-to-satisfy-SGX-buffer-requ.patch |   59 ++++++
+ .../0063-beaglebone-dvi-cape-audio-hacks.patch     |  217 ++++++++++++++++++++
+ .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |  124 +++++++----
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    4 +-
+ 4 files changed, 360 insertions(+), 44 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0062-da8xx-fb-Rounding-FB-size-to-satisfy-SGX-buffer-requ.patch
+ create mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0063-beaglebone-dvi-cape-audio-hacks.patch
 
-frank
-
-
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0062-da8xx-fb-Rounding-FB-size-to-satisfy-SGX-buffer-requ.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0062-da8xx-fb-Rounding-FB-size-to-satisfy-SGX-buffer-requ.patch
+new file mode 100644
+index 0000000..f6860cb
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0062-da8xx-fb-Rounding-FB-size-to-satisfy-SGX-buffer-requ.patch
+@@ -0,0 +1,59 @@
++From 02ad70ea366cb2946cc7d7c14ddcbd0dabf3d3ff Mon Sep 17 00:00:00 2001
++From: Aditya Nellutla <aditya.n@ti.com>
++Date: Thu, 29 Mar 2012 15:45:39 +0530
++Subject: [PATCH 62/63] da8xx-fb: Rounding FB size to satisfy SGX buffer
++ requirements
++
++In the real time use-case when SGX is used for rendering to FB buffers it has been
++observed that, the available memory from framebuffer driver is not sufficient for
++SGX under certain cases (like 16-bit WVGA resolution). SGX requires 2 swap buffers
++with each of the buffers aligned to lcm(line_length, PAGE_SIZE).
++
++Inorder to satisfy this requirement, we have two options,
++
++	- Increase number of FB buffers (LCD_NUM_BUFFERS) to 3. This is not
++	  recommended as we end up wasting huge memory in most of the cases.
++
++	- Align FB buffers to lcm(line_length, PAGE_SIZE).This ensures framebuffer
++	  size is increased to satisfy SGX requirements keeping alignment intact.
++
++This patch makes sure that FB allocates buffers aligned to above formula.
++
++Signed-off-by: Aditya Nellutla <aditya.n@ti.com>
++---
++ drivers/video/da8xx-fb.c |    5 ++++-
++ 1 files changed, 4 insertions(+), 1 deletions(-)
++
++diff --git a/drivers/video/da8xx-fb.c b/drivers/video/da8xx-fb.c
++index 86b19ac..9aaca5d 100644
++--- a/drivers/video/da8xx-fb.c
+++++ b/drivers/video/da8xx-fb.c
++@@ -34,6 +34,7 @@
++ #include <linux/slab.h>
++ #include <linux/delay.h>
++ #include <linux/pm_runtime.h>
+++#include <linux/lcm.h>
++ #include <video/da8xx-fb.h>
++ #include <asm/mach-types.h>
++ 
++@@ -1263,6 +1264,7 @@ static int __devinit fb_probe(struct platform_device *device)
++ 	struct da8xx_fb_par *par;
++ 	resource_size_t len;
++ 	int ret, i;
+++	unsigned long ulcm;
++ 
++ 	if (fb_pdata == NULL) {
++ 		dev_err(&device->dev, "Can not get platform data\n");
++@@ -1362,7 +1364,8 @@ static int __devinit fb_probe(struct platform_device *device)
++ 
++ 	/* allocate frame buffer */
++ 	par->vram_size = lcdc_info->width * lcdc_info->height * lcd_cfg->bpp;
++-	par->vram_size = PAGE_ALIGN(par->vram_size/8);
+++	ulcm = lcm((lcdc_info->width * lcd_cfg->bpp)/8, PAGE_SIZE);
+++	par->vram_size = roundup(par->vram_size/8, ulcm);
++ 	par->vram_size = par->vram_size * LCD_NUM_BUFFERS;
++ 
++ 	par->vram_virt = dma_alloc_coherent(NULL,
++-- 
++1.7.7.6
++
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0063-beaglebone-dvi-cape-audio-hacks.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0063-beaglebone-dvi-cape-audio-hacks.patch
+new file mode 100644
+index 0000000..184d168
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0063-beaglebone-dvi-cape-audio-hacks.patch
+@@ -0,0 +1,217 @@
++From 4c0991689b1e22f28d4827b218e31131f9f56be7 Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Wed, 23 May 2012 15:51:12 +0200
++Subject: [PATCH 63/63] beaglebone: dvi cape audio hacks
++
++---
++ arch/arm/mach-omap2/board-am335xevm.c |   72 ++++++++++++++++++++++++++------
++ arch/arm/mach-omap2/devices.c         |    2 +-
++ sound/soc/codecs/tlv320aic3x.c        |    2 +-
++ sound/soc/davinci/davinci-evm.c       |    7 ++-
++ 4 files changed, 64 insertions(+), 19 deletions(-)
++
++diff --git a/arch/arm/mach-omap2/board-am335xevm.c b/arch/arm/mach-omap2/board-am335xevm.c
++index e8ce381..1f2d1fd 100644
++--- a/arch/arm/mach-omap2/board-am335xevm.c
+++++ b/arch/arm/mach-omap2/board-am335xevm.c
++@@ -43,6 +43,8 @@
++ #include <linux/can/platform/mcp251x.h>
++ #include <linux/input/ti_tscadc.h>
++ 
+++#include <sound/tlv320aic3x.h>
+++
++ /* LCD controller is similar to DA850 */
++ #include <video/da8xx-fb.h>
++ 
++@@ -315,7 +317,7 @@ static struct tsc_data bone_touchscreen_data  = {
++ };
++ 
++ static u8 am335x_iis_serializer_direction1[] = {
++-	INACTIVE_MODE,	INACTIVE_MODE,	TX_MODE,	RX_MODE,
+++	INACTIVE_MODE,	INACTIVE_MODE,	RX_MODE,	TX_MODE,
++ 	INACTIVE_MODE,	INACTIVE_MODE,	INACTIVE_MODE,	INACTIVE_MODE,
++ 	INACTIVE_MODE,	INACTIVE_MODE,	INACTIVE_MODE,	INACTIVE_MODE,
++ 	INACTIVE_MODE,	INACTIVE_MODE,	INACTIVE_MODE,	INACTIVE_MODE,
++@@ -334,6 +336,19 @@ static struct snd_platform_data am335x_evm_snd_data1 = {
++ 	.rxnumevt	= 1,
++ };
++ 
+++static struct snd_platform_data bone_snd_data1 = {
+++	.tx_dma_offset	= 0x46000000,	/* McASP0*/
+++	.rx_dma_offset	= 0x46000000,
+++	.op_mode	= DAVINCI_MCASP_IIS_MODE,
+++	.num_serializer	= ARRAY_SIZE(am335x_iis_serializer_direction1),
+++	.tdm_slots	= 2,
+++	.serial_dir	= am335x_iis_serializer_direction1,
+++	.asp_chan_q	= EVENTQ_2,
+++	.version	= MCASP_VERSION_3,
+++	.txnumevt	= 1,
+++	.rxnumevt	= 1,
+++};
+++
++ static struct omap2_hsmmc_info am335x_mmc[] __initdata = {
++ 	{
++ 		.mmc            = 1,
++@@ -796,11 +811,18 @@ static struct pinmux_config mcasp1_pin_mux[] = {
++ 	{"mii1_crs.mcasp1_aclkx", OMAP_MUX_MODE4 | AM33XX_PIN_INPUT_PULLDOWN},
++ 	{"mii1_rxerr.mcasp1_fsx", OMAP_MUX_MODE4 | AM33XX_PIN_INPUT_PULLDOWN},
++ 	{"mii1_col.mcasp1_axr2", OMAP_MUX_MODE4 | AM33XX_PIN_INPUT_PULLDOWN},
++-	{"rmii1_refclk.mcasp1_axr3", OMAP_MUX_MODE4 |
++-						AM33XX_PIN_INPUT_PULLDOWN},
+++	{"rmii1_refclk.mcasp1_axr3", OMAP_MUX_MODE4 | AM33XX_PIN_INPUT_PULLDOWN},
++ 	{NULL, 0},
++ };
++ 
+++/* Module pin mux for mcasp0 */
+++static struct pinmux_config mcasp0_pin_mux[] = {
+++	{"mcasp0_aclkx.mcasp0_aclkx", OMAP_MUX_MODE0 |AM33XX_PIN_INPUT_PULLDOWN},
+++	{"mcasp0_fsx.mcasp0_fsx", OMAP_MUX_MODE0 | AM33XX_PIN_INPUT_PULLDOWN},
+++	{"mcasp0_ahclkr.mcasp0_axr2", OMAP_MUX_MODE2 | AM33XX_PIN_INPUT_PULLDOWN},
+++	{"mcasp0_ahclkx.mcasp0_axr3", OMAP_MUX_MODE2 | AM33XX_PIN_INPUT_PULLDOWN},
+++	{NULL, 0},
+++};
++ 
++ /* Module pin mux for mmc0 */
++ static struct pinmux_config mmc0_pin_mux[] = {
++@@ -1956,6 +1978,15 @@ static void evm_nand_init(int evm_id, int profile)
++ 	omap_init_elm();
++ }
++ 
+++static struct regulator_consumer_supply bone_audio_supplies[] = {
+++        /* tlv320aic3x analog supplies */
+++        REGULATOR_SUPPLY("AVDD", "3-001b"),
+++        REGULATOR_SUPPLY("DRVDD", "3-001b"),
+++        /* tlv320aic3x digital supplies */
+++        REGULATOR_SUPPLY("IOVDD", "3-001b"),
+++        REGULATOR_SUPPLY("DVDD", "3-001b"),
+++};
+++
++ /* TPS65217 voltage regulator support */
++ 
++ /* 1.8V */
++@@ -2229,6 +2260,25 @@ static void tt3201_init(int evm_id, int profile)
++ 	am33xx_d_can_init(1);
++ }
++ 
+++/* Setup McASP 1 */
+++static void mcasp1_init(int evm_id, int profile)
+++{
+++	/* Configure McASP */
+++	setup_pin_mux(mcasp1_pin_mux);
+++	am335x_register_mcasp(&am335x_evm_snd_data1, 1);
+++	return;
+++}
+++
+++/* Setup McASP 0 */
+++static void mcasp0_init(int evm_id, int profile)
+++{
+++	printk("Beaglebone cape: mcasp0 init\n");
+++	/* Configure McASP */
+++	setup_pin_mux(mcasp0_pin_mux);
+++	am335x_register_mcasp(&bone_snd_data1, 0);
+++	return;
+++}
+++
++ static const char* cape_pins[] = {
++ /*
++   From SRM RevA5.0.1:
++@@ -2567,7 +2617,8 @@ static void beaglebone_cape_setup(struct memory_accessor *mem_acc, void *context
++ 		
++ 		beaglebone_leds_free = 0;
++ 		dvileds_init(0,0);
++-		
+++		mcasp0_init(0,0);
+++	
++ 		if (!strncmp("00A1", cape_config.version, 4) || !strncmp("000A", cape_config.version, 4)) {
++ 			pr_info("BeagleBone cape: DVI init for revision A1 or older\n");
++ 			setup_pin_mux(dvia1_pin_mux);
++@@ -2715,6 +2766,9 @@ static struct at24_platform_data cape_eeprom_info = {
++ };
++ 
++ static struct i2c_board_info __initdata cape_i2c_boardinfo[] = {
+++	{
+++		I2C_BOARD_INFO("tlv320aic3x", 0x1b),
+++	},
++         {
++                 I2C_BOARD_INFO("24c256", 0x54),
++                 .platform_data  = &cape_eeprom_info,
++@@ -2741,16 +2795,6 @@ static void i2c2_init(int evm_id, int profile)
++         return;
++ }
++ 
++-
++-/* Setup McASP 1 */
++-static void mcasp1_init(int evm_id, int profile)
++-{
++-	/* Configure McASP */
++-	setup_pin_mux(mcasp1_pin_mux);
++-	am335x_register_mcasp(&am335x_evm_snd_data1, 1);
++-	return;
++-}
++-
++ static void mmc1_init(int evm_id, int profile)
++ {
++ 	setup_pin_mux(mmc1_pin_mux);
++diff --git a/arch/arm/mach-omap2/devices.c b/arch/arm/mach-omap2/devices.c
++index 9e029da..41c9b0f 100644
++--- a/arch/arm/mach-omap2/devices.c
+++++ b/arch/arm/mach-omap2/devices.c
++@@ -218,7 +218,6 @@ int __init am335x_register_mcasp(struct snd_platform_data *pdata, int ctrl_nr)
++ 			dev_name, oh->name);
++ 	return IS_ERR(pdev) ? PTR_ERR(pdev) : 0;
++ }
++-
++ #else
++ int __init am335x_register_mcasp(struct snd_platform_data *pdata, int ctrl_nr)
++ {
++@@ -234,6 +233,7 @@ struct platform_device am33xx_pcm_device = {
++ 
++ static void am33xx_init_pcm(void)
++ {
+++	printk("cape: pcm register");
++ 	platform_device_register(&am33xx_pcm_device);
++ }
++ 
++diff --git a/sound/soc/codecs/tlv320aic3x.c b/sound/soc/codecs/tlv320aic3x.c
++index d0dbac1..fc32b7f 100644
++--- a/sound/soc/codecs/tlv320aic3x.c
+++++ b/sound/soc/codecs/tlv320aic3x.c
++@@ -52,7 +52,7 @@
++ 
++ #include "tlv320aic3x.h"
++ 
++-#define AIC3X_NUM_SUPPLIES	4
+++#define AIC3X_NUM_SUPPLIES	0
++ static const char *aic3x_supply_names[AIC3X_NUM_SUPPLIES] = {
++ 	"IOVDD",	/* I/O Voltage */
++ 	"DVDD",		/* Digital Core Voltage */
++diff --git a/sound/soc/davinci/davinci-evm.c b/sound/soc/davinci/davinci-evm.c
++index f6a62c3..7ad7b37 100644
++--- a/sound/soc/davinci/davinci-evm.c
+++++ b/sound/soc/davinci/davinci-evm.c
++@@ -244,9 +244,9 @@ static struct snd_soc_dai_link da850_evm_dai = {
++ static struct snd_soc_dai_link am335x_evm_dai = {
++ 	.name = "TLV320AIC3X",
++ 	.stream_name = "AIC3X",
++-	.cpu_dai_name = "davinci-mcasp.1",
+++	.cpu_dai_name = "davinci-mcasp.0",
++ 	.codec_dai_name = "tlv320aic3x-hifi",
++-	.codec_name = "tlv320aic3x-codec.2-001b",
+++	.codec_name = "tlv320aic3x-codec.3-001b",
++ 	.platform_name = "davinci-pcm-audio",
++ 	.init = evm_aic3x_init,
++ 	.ops = &evm_ops,
++@@ -331,8 +331,9 @@ static int __init evm_init(void)
++ 		return -EINVAL;
++ 
++ 	evm_snd_device = platform_device_alloc("soc-audio", index);
++-	if (!evm_snd_device)
+++	if (!evm_snd_device) {
++ 		return -ENOMEM;
+++	}
++ 
++ 	platform_set_drvdata(evm_snd_device, evm_snd_dev_data);
++ 	ret = platform_device_add(evm_snd_device);
++-- 
++1.7.7.6
++
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
+index 315b658..c9316db 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
+@@ -1,6 +1,6 @@
+ #
+ # Automatically generated file; DO NOT EDIT.
+-# Linux/arm 3.2.14 Kernel Configuration
++# Linux/arm 3.2.18 Kernel Configuration
+ #
+ CONFIG_ARM=y
+ CONFIG_HAVE_PWM=y
+@@ -895,6 +895,9 @@ CONFIG_CFG80211_DEFAULT_PS=y
+ CONFIG_CFG80211_WEXT=y
+ CONFIG_WIRELESS_EXT_SYSFS=y
+ CONFIG_LIB80211=m
++CONFIG_LIB80211_CRYPT_WEP=m
++CONFIG_LIB80211_CRYPT_CCMP=m
++CONFIG_LIB80211_CRYPT_TKIP=m
+ # CONFIG_LIB80211_DEBUG is not set
+ CONFIG_MAC80211=m
+ CONFIG_MAC80211_HAS_RC=y
+@@ -905,7 +908,7 @@ CONFIG_MAC80211_RC_DEFAULT_PID=y
+ # CONFIG_MAC80211_RC_DEFAULT_MINSTREL is not set
+ CONFIG_MAC80211_RC_DEFAULT="pid"
+ # CONFIG_MAC80211_MESH is not set
+-# CONFIG_MAC80211_LEDS is not set
++CONFIG_MAC80211_LEDS=y
+ # CONFIG_MAC80211_DEBUGFS is not set
+ # CONFIG_MAC80211_DEBUG_MENU is not set
+ CONFIG_WIMAX=m
+@@ -1029,7 +1032,9 @@ CONFIG_EEPROM_AT24=y
+ # CONFIG_EEPROM_MAX6875 is not set
+ CONFIG_EEPROM_93CX6=m
+ # CONFIG_EEPROM_93XX46 is not set
+-# CONFIG_IWMC3200TOP is not set
++CONFIG_IWMC3200TOP=m
++# CONFIG_IWMC3200TOP_DEBUG is not set
++# CONFIG_IWMC3200TOP_DEBUGFS is not set
+ 
+ #
+ # Texas Instruments shared transport line discipline
+@@ -1204,16 +1209,16 @@ CONFIG_SLIP_SMART=y
+ #
+ # USB Network Adapters
+ #
+-CONFIG_USB_CATC=y
+-CONFIG_USB_KAWETH=y
+-CONFIG_USB_PEGASUS=y
+-CONFIG_USB_RTL8150=y
+-CONFIG_USB_USBNET=y
+-CONFIG_USB_NET_AX8817X=y
+-CONFIG_USB_NET_CDCETHER=y
++CONFIG_USB_CATC=m
++CONFIG_USB_KAWETH=m
++CONFIG_USB_PEGASUS=m
++CONFIG_USB_RTL8150=m
++CONFIG_USB_USBNET=m
++CONFIG_USB_NET_AX8817X=m
++CONFIG_USB_NET_CDCETHER=m
+ # CONFIG_USB_NET_CDC_EEM is not set
+-CONFIG_USB_NET_CDC_NCM=y
+-CONFIG_USB_NET_DM9601=y
++CONFIG_USB_NET_CDC_NCM=m
++CONFIG_USB_NET_DM9601=m
+ CONFIG_USB_NET_SMSC75XX=m
+ CONFIG_USB_NET_SMSC95XX=m
+ CONFIG_USB_NET_GL620A=m
+@@ -1221,14 +1226,14 @@ CONFIG_USB_NET_NET1080=m
+ CONFIG_USB_NET_PLUSB=m
+ CONFIG_USB_NET_MCS7830=m
+ CONFIG_USB_NET_RNDIS_HOST=m
+-CONFIG_USB_NET_CDC_SUBSET=y
++CONFIG_USB_NET_CDC_SUBSET=m
+ CONFIG_USB_ALI_M5632=y
+ CONFIG_USB_AN2720=y
+ CONFIG_USB_BELKIN=y
+ CONFIG_USB_ARMLINUX=y
+ CONFIG_USB_EPSON2888=y
+ CONFIG_USB_KC2190=y
+-CONFIG_USB_NET_ZAURUS=y
++CONFIG_USB_NET_ZAURUS=m
+ CONFIG_USB_NET_CX82310_ETH=m
+ CONFIG_USB_NET_KALMIA=m
+ CONFIG_USB_HSO=m
+@@ -1242,14 +1247,35 @@ CONFIG_AT76C50X_USB=m
+ CONFIG_USB_ZD1201=m
+ CONFIG_USB_NET_RNDIS_WLAN=m
+ CONFIG_RTL8187=m
++CONFIG_RTL8187_LEDS=y
+ # CONFIG_MAC80211_HWSIM is not set
+-# CONFIG_ATH_COMMON is not set
+-# CONFIG_B43 is not set
++CONFIG_ATH_COMMON=m
++# CONFIG_ATH_DEBUG is not set
++# CONFIG_ATH9K is not set
++# CONFIG_ATH9K_HTC is not set
++CONFIG_CARL9170=m
++CONFIG_CARL9170_LEDS=y
++CONFIG_CARL9170_WPC=y
++# CONFIG_CARL9170_HWRNG is not set
++CONFIG_ATH6KL=m
++# CONFIG_ATH6KL_DEBUG is not set
++CONFIG_B43=m
++CONFIG_B43_SSB=y
++# CONFIG_B43_SDIO is not set
++CONFIG_B43_PIO=y
++CONFIG_B43_PHY_N=y
++CONFIG_B43_PHY_LP=y
++CONFIG_B43_PHY_HT=y
++CONFIG_B43_LEDS=y
++CONFIG_B43_HWRNG=y
++# CONFIG_B43_DEBUG is not set
+ # CONFIG_B43LEGACY is not set
+ CONFIG_BRCMUTIL=m
+ CONFIG_BRCMFMAC=m
+ # CONFIG_BRCMDBG is not set
+-# CONFIG_HOSTAP is not set
++CONFIG_HOSTAP=m
++CONFIG_HOSTAP_FIRMWARE=y
++# CONFIG_HOSTAP_FIRMWARE_NVRAM is not set
+ # CONFIG_IWM is not set
+ CONFIG_LIBERTAS=m
+ CONFIG_LIBERTAS_USB=m
+@@ -1259,7 +1285,9 @@ CONFIG_LIBERTAS_DEBUG=y
+ # CONFIG_LIBERTAS_MESH is not set
+ CONFIG_P54_COMMON=m
+ CONFIG_P54_USB=m
+-# CONFIG_P54_SPI is not set
++CONFIG_P54_SPI=m
++CONFIG_P54_SPI_DEFAULT_EEPROM=y
++CONFIG_P54_LEDS=y
+ CONFIG_RT2X00=m
+ CONFIG_RT2500USB=m
+ CONFIG_RT73USB=m
+@@ -1294,7 +1322,8 @@ CONFIG_ZD1211RW=m
+ #
+ CONFIG_WIMAX_I2400M=m
+ CONFIG_WIMAX_I2400M_USB=m
+-# CONFIG_WIMAX_I2400M_SDIO is not set
++CONFIG_WIMAX_I2400M_SDIO=m
++CONFIG_WIMAX_IWMC3200_SDIO=y
+ CONFIG_WIMAX_I2400M_DEBUG_LEVEL=8
+ # CONFIG_WAN is not set
+ # CONFIG_ISDN is not set
+@@ -1800,7 +1829,12 @@ CONFIG_SSB_POSSIBLE=y
+ #
+ # Sonics Silicon Backplane
+ #
+-# CONFIG_SSB is not set
++CONFIG_SSB=m
++CONFIG_SSB_BLOCKIO=y
++CONFIG_SSB_SDIOHOST_POSSIBLE=y
++# CONFIG_SSB_SDIOHOST is not set
++# CONFIG_SSB_SILENT is not set
++# CONFIG_SSB_DEBUG is not set
+ CONFIG_BCMA_POSSIBLE=y
+ 
+ #
+@@ -1891,23 +1925,23 @@ CONFIG_VIDEO_MEDIA=m
+ #
+ # Multimedia drivers
+ #
+-CONFIG_RC_CORE=y
+-CONFIG_LIRC=y
+-CONFIG_RC_MAP=y
+-CONFIG_IR_NEC_DECODER=y
+-CONFIG_IR_RC5_DECODER=y
+-CONFIG_IR_RC6_DECODER=y
+-CONFIG_IR_JVC_DECODER=y
+-CONFIG_IR_SONY_DECODER=y
+-CONFIG_IR_RC5_SZ_DECODER=y
+-CONFIG_IR_MCE_KBD_DECODER=y
+-CONFIG_IR_LIRC_CODEC=y
++CONFIG_RC_CORE=m
++CONFIG_LIRC=m
++CONFIG_RC_MAP=m
++CONFIG_IR_NEC_DECODER=m
++CONFIG_IR_RC5_DECODER=m
++CONFIG_IR_RC6_DECODER=m
++CONFIG_IR_JVC_DECODER=m
++CONFIG_IR_SONY_DECODER=m
++CONFIG_IR_RC5_SZ_DECODER=m
++CONFIG_IR_MCE_KBD_DECODER=m
++CONFIG_IR_LIRC_CODEC=m
+ CONFIG_RC_ATI_REMOTE=m
+-# CONFIG_IR_IMON is not set
+-# CONFIG_IR_MCEUSB is not set
+-# CONFIG_IR_REDRAT3 is not set
+-# CONFIG_IR_STREAMZAP is not set
+-# CONFIG_RC_LOOPBACK is not set
++CONFIG_IR_IMON=m
++CONFIG_IR_MCEUSB=m
++CONFIG_IR_REDRAT3=m
++CONFIG_IR_STREAMZAP=m
++CONFIG_RC_LOOPBACK=m
+ CONFIG_MEDIA_ATTACH=y
+ CONFIG_MEDIA_TUNER=m
+ CONFIG_MEDIA_TUNER_CUSTOMISE=y
+@@ -1949,7 +1983,7 @@ CONFIG_VIDEO_CAPTURE_DRIVERS=y
+ # CONFIG_VIDEO_ADV_DEBUG is not set
+ # CONFIG_VIDEO_FIXED_MINOR_RANGES is not set
+ # CONFIG_VIDEO_HELPER_CHIPS_AUTO is not set
+-CONFIG_VIDEO_IR_I2C=y
++CONFIG_VIDEO_IR_I2C=m
+ 
+ #
+ # Encoders, decoders, sensors and other helper chips
+@@ -2047,7 +2081,7 @@ CONFIG_VIDEO_VIVI=m
+ # CONFIG_VIDEO_AU0828 is not set
+ # CONFIG_SOC_CAMERA is not set
+ CONFIG_V4L_USB_DRIVERS=y
+-CONFIG_USB_VIDEO_CLASS=y
++CONFIG_USB_VIDEO_CLASS=m
+ CONFIG_USB_VIDEO_CLASS_INPUT_EVDEV=y
+ CONFIG_USB_GSPCA=m
+ CONFIG_USB_M5602=m
+@@ -2588,7 +2622,7 @@ CONFIG_MUSB_PIO_ONLY=y
+ CONFIG_USB_ACM=y
+ CONFIG_USB_PRINTER=y
+ CONFIG_USB_WDM=y
+-# CONFIG_USB_TMC is not set
++CONFIG_USB_TMC=m
+ 
+ #
+ # NOTE: USB_STORAGE depends on SCSI but BLK_DEV_SD may
+@@ -3054,9 +3088,9 @@ CONFIG_AD2S1200=m
+ #
+ # Triggers - standalone
+ #
+-# CONFIG_IIO_PERIODIC_RTC_TRIGGER is not set
+-# CONFIG_IIO_GPIO_TRIGGER is not set
+-# CONFIG_IIO_SYSFS_TRIGGER is not set
++CONFIG_IIO_PERIODIC_RTC_TRIGGER=m
++CONFIG_IIO_GPIO_TRIGGER=m
++CONFIG_IIO_SYSFS_TRIGGER=m
+ CONFIG_IIO_DUMMY_EVGEN=m
+ CONFIG_IIO_SIMPLE_DUMMY=m
+ CONFIG_IIO_SIMPLE_DUMMY_EVENTS=y
+@@ -3075,7 +3109,11 @@ CONFIG_USB_ENESTORAGE=m
+ # CONFIG_SPEAKUP is not set
+ # CONFIG_TOUCHSCREEN_CLEARPAD_TM1217 is not set
+ # CONFIG_TOUCHSCREEN_SYNAPTICS_I2C_RMI4 is not set
+-# CONFIG_STAGING_MEDIA is not set
++CONFIG_STAGING_MEDIA=y
++CONFIG_DVB_AS102=m
++CONFIG_EASYCAP=m
++# CONFIG_EASYCAP_DEBUG is not set
++# CONFIG_LIRC_STAGING is not set
+ CONFIG_CLKDEV_LOOKUP=y
+ 
+ #
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index 5ab1107..710308f 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -16,7 +16,7 @@ FILESPATH =. "${FILE_DIRNAME}/${PN}-3.2:${FILE_DIRNAME}/${PN}-3.2/${MACHINE}:"
+ 
+ BRANCH = "v3.2-staging"
+ SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
+-MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
+ 
+ COMPATIBLE_MACHINE = "(ti33x)"
+ 
+@@ -1222,4 +1222,6 @@ PATCHES_OVER_PSP = " \
+ 	file://beaglebone/0059-beaglebone-fix-pin-free-thinko-this-method-doesn-t-g.patch \
+ 	file://beaglebone/0060-beaglebone-switch-RS232-cape-to-ttyO2.patch \
+ 	file://beaglebone/0061-beaglebone-make-uart2-pinmux-match-the-uart0-pinmux.patch \
++	file://beaglebone/0062-da8xx-fb-Rounding-FB-size-to-satisfy-SGX-buffer-requ.patch \
++	file://beaglebone/0063-beaglebone-dvi-cape-audio-hacks.patch \
+ "
+-- 
+1.7.10
 
 
