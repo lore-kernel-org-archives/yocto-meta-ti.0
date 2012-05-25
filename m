@@ -1,35 +1,37 @@
 Return-Path: <schnitzeltony@googlemail.com>
 Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
 	[209.85.214.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED99FE01402
-	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 02:07:56 -0700 (PDT)
-Received: by bkcjf20 with SMTP id jf20so822103bkc.35
-	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 02:07:55 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0E877E01402
+	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 02:07:57 -0700 (PDT)
+Received: by bkcjf20 with SMTP id jf20so822123bkc.35
+	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 02:07:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=H1GhzdhdHwJb44ccDzo/S2oRw7074lhJjDndKCqHYWI=;
-	b=gwp8lmBVjZdXM1o44cgrjaZtTmIZvx1THjz1HyWMz5aiJzVMC2ZF6PUzywa6JvqeoD
-	7W1lUfoNtk1RcZPsdRcOau8t6tky5cyzLfbpUEdKocDwcK2G22/QL72aefgXhfKDMWVO
-	aALqNg4KuRpzKCk13zBNXXp2LMeUNREE9kVPzTwjOE2wQes6LOXhK3vb+iPrw1CSkRCF
-	N0YDMXnvTIGv9jQ1hkHH+vAI6vIciejvIMZ/XB/li/J599FDqJD1JrEFLFjZMxTGcrBy
-	vkBovyByPXF7SF5bm5ngsuNxUOMdrR297a/RgpfbabbRSNENkHBhthr45bTloAP8O2Ck
-	wR0w==
-Received: by 10.204.152.6 with SMTP id e6mr1098894bkw.18.1337936875423;
-	Fri, 25 May 2012 02:07:55 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:mime-version:content-type:content-transfer-encoding;
+	bh=I0S8/swlC1nBMozjl+eJ3eyflKOxQFwS1OR9LP8AetI=;
+	b=QPNCVVrhMK44BQ5i8KnuST29XSwzqKIwiezPe44ntGLJl40iytzhlYg3h0rKFTuoJP
+	nPh88g7eznB8uCJ/piNOmgwYiA2TlfsnFQNhLe+mbg2od2B49TrrD0HQCB6RjxBooG3+
+	FsBGRlcoFuhqgV/LpOlHHucEY0UUJsZaB8v6U2FmbIEwhm3xLiuM8oV09IGJupg3bwE4
+	FMA9EhDcGX0OtSUcbFGfKXAdHiWiKBqxjVCtEXvodxSkafPCa16yJ4asROdYGaQGp+Jm
+	Sbg7r8bLy/MLWUuolsjSKRMwlZypMnjNhDg7WDU5HqFqFFDHm86zS5gpr+Yaf+b5ezY/
+	ENKQ==
+Received: by 10.204.128.88 with SMTP id j24mr1092913bks.89.1337936876984;
+	Fri, 25 May 2012 02:07:56 -0700 (PDT)
 Received: from localhost.localdomain (p4FDF163D.dip.t-dialin.net.
 	[79.223.22.61])
-	by mx.google.com with ESMTPS id x23sm5550692bkw.12.2012.05.25.02.07.53
+	by mx.google.com with ESMTPS id x23sm5550692bkw.12.2012.05.25.02.07.55
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 25 May 2012 02:07:54 -0700 (PDT)
+	Fri, 25 May 2012 02:07:56 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: meta-ti@yoctoproject.org
-Date: Fri, 25 May 2012 11:11:55 +0200
-Message-Id: <1337937117-3991-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Fri, 25 May 2012 11:11:56 +0200
+Message-Id: <1337937117-3991-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.4.4
+In-Reply-To: <1337937117-3991-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1337937117-3991-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [V2 0/2] linux-mainline-3.2 updates
+Subject: [V2 1/2] linux-mainline: update to 3.2.18
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,63 +43,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2012 09:07:57 -0000
+X-List-Received-Date: Fri, 25 May 2012 09:07:58 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-V1->V2
-* 0001 new: bump to 3.2.18 to synchronize to [1]
-* 0002: removed unused 0006-simple_open-automatically-convert-to-simple_open.patch
+From: Koen Kooi <koen@dominion.thruhere.net>
 
-The libertas patches were sent to
-beagleboard@googlegroups.com
-koen@dominion.thruhere.net
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ conf/machine/include/omap3.inc             |    2 +-
+ recipes-kernel/linux/linux-mainline_3.2.bb |    8 ++++----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-[1] https://github.com/beagleboard/kernel/tree/beagleboard-3.2
-
-Andreas Müller (1):
-  linux-mainline: Add patches to enable libertas firmware loading
-    asynchronously
-
-Koen Kooi (1):
-  linux-mainline: update to 3.2.18
-
- conf/machine/include/omap3.inc                     |    2 +-
- ...vert-drivers-net-to-use-module_usb_driver.patch |   80 +++
- ...t-fix-assignment-of-0-1-to-bool-variables.patch |   55 ++
- .../libertas/0003-switch-debugfs-to-umode_t.patch  |   26 +
- ...-Remove-unnecessary-k.alloc-v.alloc-OOM-m.patch |   54 ++
- ...ibertas-remove-dump_survey-implementation.patch |   80 +++
- ...bertas-remove-redundant-NULL-tests-before.patch |   95 +++
- ...ix-signedness-bug-in-lbs_auth_to_authtype.patch |   48 ++
- ...-wireless-libertas-if_usb.c-add-missing-d.patch |   35 ++
- ...libertas-Firmware-loading-simplifications.patch |  618 ++++++++++++++++++++
- .../0011-libertas-harden-up-exit-paths.patch       |   46 ++
- ...d-asynchronous-firmware-loading-capabilit.patch |  269 +++++++++
- ...IO-convert-to-asynchronous-firmware-loadi.patch |  320 ++++++++++
- ...B-convert-to-asynchronous-firmware-loadin.patch |  201 +++++++
- ...-convert-to-asynchronous-firmware-loading.patch |  154 +++++
- .../0016-libertas-add-missing-include.patch        |   30 +
- ...ve-debug-msgs-due-to-missing-in_interrupt.patch |   36 ++
- recipes-kernel/linux/linux-mainline_3.2.bb         |   26 +-
- 18 files changed, 2169 insertions(+), 6 deletions(-)
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0001-USB-convert-drivers-net-to-use-module_usb_driver.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0002-net-fix-assignment-of-0-1-to-bool-variables.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0003-switch-debugfs-to-umode_t.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0004-drivers-net-Remove-unnecessary-k.alloc-v.alloc-OOM-m.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0005-libertas-remove-dump_survey-implementation.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0007-wireless-libertas-remove-redundant-NULL-tests-before.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0008-libertas-fix-signedness-bug-in-lbs_auth_to_authtype.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0009-drivers-net-wireless-libertas-if_usb.c-add-missing-d.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0010-libertas-Firmware-loading-simplifications.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0011-libertas-harden-up-exit-paths.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0012-libertas-add-asynchronous-firmware-loading-capabilit.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0013-libertas-SDIO-convert-to-asynchronous-firmware-loadi.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0014-libertas-USB-convert-to-asynchronous-firmware-loadin.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0015-libertas-CS-convert-to-asynchronous-firmware-loading.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0016-libertas-add-missing-include.patch
- create mode 100644 recipes-kernel/linux/linux-mainline-3.2/libertas/0017-remove-debug-msgs-due-to-missing-in_interrupt.patch
-
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index c5b1979..0f3cc36 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
+ require conf/machine/include/tune-cortexa8.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r120"
++MACHINE_KERNEL_PR = "r121"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+diff --git a/recipes-kernel/linux/linux-mainline_3.2.bb b/recipes-kernel/linux/linux-mainline_3.2.bb
+index 3dda4f8..69eb7e5 100644
+--- a/recipes-kernel/linux/linux-mainline_3.2.bb
++++ b/recipes-kernel/linux/linux-mainline_3.2.bb
+@@ -5,12 +5,12 @@ KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "(beagleboard)"
+ 
+-PV = "3.2.16"
+-# v3.2.16 tag
+-SRCREV_pn-${PN} = "b1be7dd1ec231ae751d0ce3acd0d2e5760704a6f"
++PV = "3.2.18"
++# v3.2.18 tag
++SRCREV_pn-${PN} = "52c6b95f8a2edaff98b779f15b2f4d69b61b18b9"
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+-MACHINE_KERNEL_PR_append = "d"
++MACHINE_KERNEL_PR_append = "a"
+ 
+ FILESPATH =. "${FILE_DIRNAME}/linux-mainline-3.2:${FILE_DIRNAME}/linux-mainline-3.2/${MACHINE}:"
+ 
 -- 
 1.7.4.4
 
