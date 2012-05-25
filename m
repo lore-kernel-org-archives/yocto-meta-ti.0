@@ -1,34 +1,40 @@
 Return-Path: <koen@dominion.thruhere.net>
 Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
 	[209.85.215.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3A23BE01402
-	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 00:31:55 -0700 (PDT)
-Received: by eaab16 with SMTP id b16so144659eaa.35
-	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 00:31:54 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C637EE01402
+	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 00:41:47 -0700 (PDT)
+Received: by eaab16 with SMTP id b16so147541eaa.35
+	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 00:41:46 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=7j7dGX6R1k8A2xKqafMpB/ykiS/ZHpeLomGX777OMv4=;
-	b=WsOEJWBaj8QQOBeH11HSVbOX2bWzyYCQ6yFOC4IHDBclg/09Hj69DTS4TQp+ou1sVU
-	8ZE5GBvIZFsO1Wnu0MU8ilnTmsEwVoEv2recFxlQQal+nAkD3SSsH3eoPDrPrwWUgDSF
-	LglhC50ZZHk1ALblIf1Fy4il4AAMh7QROar56Z9mnWHvW9tuXRichTUjzDJVZ91IRTab
-	kZJgEvW4tWEWDBwCDHA+zinK0aDgpgaFt1iy8UMomAKXfDtFkahoXm5nbhb4traD4/gM
-	rJcWq+TNUfVh8suLiHiofIUGJ+xiQx1/Alm5lY0SKgjUy5y76tz+KpKBvTFtrmXCGix3
-	8upQ==
-Received: by 10.14.40.84 with SMTP id e60mr451763eeb.75.1337931114753;
-	Fri, 25 May 2012 00:31:54 -0700 (PDT)
-Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
-	by mx.google.com with ESMTPS id g51sm3959645eea.14.2012.05.25.00.31.53
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=LAp+pKkMTSaKd21I7GITG2Gm49hnsQHTAl6WuLeJX1M=;
+	b=JDrAfVk9BE2pd0TR+5MAWXUIZ0aSqlWc6sx4QpMEY3sTHYKPRk0MhtcIi+hnCal1JS
+	PxdjuCiB05oDxr3sR5keN9WWY5zjGcHBGA6J+b/teOwP1UEFcw9KzeMk1GQeaZ1dz1E9
+	0/3BcEK83fUFC43KOQCBM8SuCBW4lsssjacIr7g5osmUG9AzFHScpXrSUtsOP31fqOiS
+	7qCTLW9Ie3M837AJ/wuXVgfVPGHFT5/H73LTRyxSwdKjbO5HvO00Z0qYARdXH26RFIYr
+	ugkgbCRmYcTtXc3w+y/uXbyPwNCV0vscSFxzDLMuTHyV22irgY85I4K/oHlBi5MSoHGy
+	CHfg==
+Received: by 10.14.185.137 with SMTP id u9mr431128eem.219.1337931706130;
+	Fri, 25 May 2012 00:41:46 -0700 (PDT)
+Received: from [172.20.1.36] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id f16sm4100172eec.2.2012.05.25.00.41.44
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 25 May 2012 00:31:54 -0700 (PDT)
+	Fri, 25 May 2012 00:41:45 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1278)
 From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1337931107-21227-1-git-send-email-koen@dominion.thruhere.net>
+Date: Fri, 25 May 2012 09:41:42 +0200
+Message-Id: <996B6B05-9F48-48CD-ABC4-069CEE87F38C@dominion.thruhere.net>
+References: <1337931107-21227-1-git-send-email-koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Date: Fri, 25 May 2012 09:31:47 +0200
-Message-Id: <1337931107-21227-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-X-Gm-Message-State: ALoCoQnenLRfnS5Jl4jtEbOxpMsDvyjKOeafShpXFaDRqpadonVfK6yLQJk7MvpBYoJgP2rdc+xU
+X-Mailer: Apple Mail (2.1278)
+X-Gm-Message-State: ALoCoQnL2LsXL0mO+TWinwmVgMsuS6mvoijQEhShOV8G85bDO9DfaK+P4kFeaDovp8+6XlO8jdc9
 Cc: denys@ti.com
-Subject: [PATCH] ti-hw-bringup-image: disable sdcard image class
+Subject: Re: [PATCH] ti-hw-bringup-image: disable sdcard image class
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,27 +46,22 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2012 07:31:56 -0000
+X-List-Received-Date: Fri, 25 May 2012 07:41:48 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-The class breaks with the current genext2fs in oe-core.
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- recipes-misc/images/ti-hw-bringup-image.bb |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Op 25 mei 2012, om 09:31 heeft Koen Kooi het volgende geschreven:
 
-diff --git a/recipes-misc/images/ti-hw-bringup-image.bb b/recipes-misc/images/ti-hw-bringup-image.bb
-index 2be8baf..9490098 100644
---- a/recipes-misc/images/ti-hw-bringup-image.bb
-+++ b/recipes-misc/images/ti-hw-bringup-image.bb
-@@ -29,4 +29,5 @@ IMAGE_INSTALL += " \
- 
- export IMAGE_BASENAME = "TI-hw-bringup"
- 
--inherit sdcard_image
-+# This doesn't work with the current genext2fs in oe-core
-+# inherit sdcard_image
--- 
-1.7.10
+> The class breaks with the current genext2fs in oe-core.
+>=20
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
+Some more background: I have a partial rewrite of that class, Otavio has =
+a complete rewrite of it and I bet there are more patches collecting =
+dust somewhere. But I need something that works right now :)
+
+regards,
+
+Koen=
 
