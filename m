@@ -1,34 +1,34 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from tim.rpsys.net (93-97-173-237.zone5.bethere.co.uk
-	[93.97.173.237])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2C2C5E01402
-	for <meta-ti@yoctoproject.org>; Thu, 24 May 2012 23:48:27 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q4P6mPWS031448;
-	Fri, 25 May 2012 07:48:25 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 30513-02; Fri, 25 May 2012 07:48:21 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q4P6mHAF031442
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Fri, 25 May 2012 07:48:18 +0100
-Message-ID: <1337928496.8248.173.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Gary Thomas <gary@mlbassoc.com>
-Date: Fri, 25 May 2012 07:48:16 +0100
-In-Reply-To: <4FBE4DE9.30501@mlbassoc.com>
-References: <4FBBB531.8020401@communistcode.co.uk>
-	<4FBBB786.8030501@mlbassoc.com> <4FBBB8E9.1040700@communistcode.co.uk>
-	<20120522163158.GB15020@denix.org> <4FBCA367.701@communistcode.co.uk>
-	<4FBCC147.90606@mlbassoc.com> <4FBCE8E4.6010208@communistcode.co.uk>
-	<4FBE44EE.2070909@communistcode.co.uk> <4FBE4DE9.30501@mlbassoc.com>
-X-Mailer: Evolution 3.2.2- 
-Mime-Version: 1.0
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Beaglebone + Poky
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
+	[209.85.215.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3A23BE01402
+	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 00:31:55 -0700 (PDT)
+Received: by eaab16 with SMTP id b16so144659eaa.35
+	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 00:31:54 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=7j7dGX6R1k8A2xKqafMpB/ykiS/ZHpeLomGX777OMv4=;
+	b=WsOEJWBaj8QQOBeH11HSVbOX2bWzyYCQ6yFOC4IHDBclg/09Hj69DTS4TQp+ou1sVU
+	8ZE5GBvIZFsO1Wnu0MU8ilnTmsEwVoEv2recFxlQQal+nAkD3SSsH3eoPDrPrwWUgDSF
+	LglhC50ZZHk1ALblIf1Fy4il4AAMh7QROar56Z9mnWHvW9tuXRichTUjzDJVZ91IRTab
+	kZJgEvW4tWEWDBwCDHA+zinK0aDgpgaFt1iy8UMomAKXfDtFkahoXm5nbhb4traD4/gM
+	rJcWq+TNUfVh8suLiHiofIUGJ+xiQx1/Alm5lY0SKgjUy5y76tz+KpKBvTFtrmXCGix3
+	8upQ==
+Received: by 10.14.40.84 with SMTP id e60mr451763eeb.75.1337931114753;
+	Fri, 25 May 2012 00:31:54 -0700 (PDT)
+Received: from localhost (ip545070eb.adsl-surfen.hetnet.nl. [84.80.112.235])
+	by mx.google.com with ESMTPS id g51sm3959645eea.14.2012.05.25.00.31.53
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 25 May 2012 00:31:54 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: meta-ti@yoctoproject.org
+Date: Fri, 25 May 2012 09:31:47 +0200
+Message-Id: <1337931107-21227-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQnenLRfnS5Jl4jtEbOxpMsDvyjKOeafShpXFaDRqpadonVfK6yLQJk7MvpBYoJgP2rdc+xU
+Cc: denys@ti.com
+Subject: [PATCH] ti-hw-bringup-image: disable sdcard image class
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,29 +40,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2012 06:48:28 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 25 May 2012 07:31:56 -0000
 
-On Thu, 2012-05-24 at 09:04 -0600, Gary Thomas wrote:
-> I agree - there seem to be some recipes in meta-oe that don't play
-> nice with a non-systemd setup like Poky.
-> 
-> Note: I was able to boot core-image-minimal built with meta-yocto + meta-oe
-> in all configurations of EXTRA_IMAGE_FEATURES as long as 'dbg-pkgs' was
-> not specified.  As soon as I added that feature, it fails to come up just
-> as you observed.  I'm not sure why (and I'm not too motivated to research
-> more, I've already built this thing about 20 times in different ways...)
+The class breaks with the current genext2fs in oe-core.
 
-That is a useful data point to have though, thanks for mentioning it on
-the list!
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ recipes-misc/images/ti-hw-bringup-image.bb |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-I wonder if that somehow indirectly pulls in systemd itself?
-
-Cheers,
-
-Richard
-
-
+diff --git a/recipes-misc/images/ti-hw-bringup-image.bb b/recipes-misc/images/ti-hw-bringup-image.bb
+index 2be8baf..9490098 100644
+--- a/recipes-misc/images/ti-hw-bringup-image.bb
++++ b/recipes-misc/images/ti-hw-bringup-image.bb
+@@ -29,4 +29,5 @@ IMAGE_INSTALL += " \
+ 
+ export IMAGE_BASENAME = "TI-hw-bringup"
+ 
+-inherit sdcard_image
++# This doesn't work with the current genext2fs in oe-core
++# inherit sdcard_image
+-- 
+1.7.10
 
 
