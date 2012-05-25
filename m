@@ -1,22 +1,35 @@
-Return-Path: <tf+lists.yocto@r-finger.com>
-Received: from r-finger.com (r-finger.com [178.79.160.5])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7219CE01402
-	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 02:22:36 -0700 (PDT)
-Received: from [192.168.0.2] (host86-170-72-228.range86-170.btcentralplus.com
-	[86.170.72.228]) (using TLSv1 with cipher AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by r-finger.com (Postfix) with ESMTPSA id 4344A60E52
-	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 10:22:35 +0100 (BST)
-Message-ID: <4FBF4F5A.8070507@r-finger.com>
-Date: Fri, 25 May 2012 10:22:34 +0100
-From: Tomas Frydrych <tf+lists.yocto@r-finger.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.3) Gecko/20120329 Icedove/10.0.3
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3F26EE01402
+	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 04:42:15 -0700 (PDT)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 780BAF81244; Fri, 25 May 2012 05:42:14 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
+	by mail.chez-thomas.org (Postfix) with ESMTP id DC81FF8121A;
+	Fri, 25 May 2012 05:42:12 -0600 (MDT)
+Message-ID: <4FBF7014.8080609@mlbassoc.com>
+Date: Fri, 25 May 2012 05:42:12 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:12.0) Gecko/20120430 Thunderbird/12.0.1
 MIME-Version: 1.0
-To: meta-ti@yoctoproject.org
-References: <3408799.xmIZDQfG6A@linux-oxe9>
-In-Reply-To: <3408799.xmIZDQfG6A@linux-oxe9>
-Subject: Re: meta-ti and poky
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+References: <4FBBB531.8020401@communistcode.co.uk>
+	<4FBBB786.8030501@mlbassoc.com>
+	<4FBBB8E9.1040700@communistcode.co.uk>
+	<20120522163158.GB15020@denix.org>
+	<4FBCA367.701@communistcode.co.uk> <4FBCC147.90606@mlbassoc.com>
+	<4FBCE8E4.6010208@communistcode.co.uk>
+	<4FBE44EE.2070909@communistcode.co.uk>
+	<4FBE4DE9.30501@mlbassoc.com> <1337928496.8248.173.camel@ted>
+In-Reply-To: <1337928496.8248.173.camel@ted>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Beaglebone + Poky
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -28,32 +41,210 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2012 09:22:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 25 May 2012 11:42:15 -0000
+X-Groupsio-MsgNum: 1201
+Content-Type: multipart/mixed; boundary="------------040008030204090001070308"
+
+--------------040008030204090001070308
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi,
+On 2012-05-25 00:48, Richard Purdie wrote:
+> On Thu, 2012-05-24 at 09:04 -0600, Gary Thomas wrote:
+>> I agree - there seem to be some recipes in meta-oe that don't play
+>> nice with a non-systemd setup like Poky.
+>>
+>> Note: I was able to boot core-image-minimal built with meta-yocto + meta-oe
+>> in all configurations of EXTRA_IMAGE_FEATURES as long as 'dbg-pkgs' was
+>> not specified.  As soon as I added that feature, it fails to come up just
+>> as you observed.  I'm not sure why (and I'm not too motivated to research
+>> more, I've already built this thing about 20 times in different ways...)
+>
+> That is a useful data point to have though, thanks for mentioning it on
+> the list!
+>
+> I wonder if that somehow indirectly pulls in systemd itself?
 
-On 25/05/12 08:45, Gyorgy Kovesdi wrote:
-> I just cloned Poky, and have my first running yocto build for Beagleboard-C4 without any problem.
-> I tried to add meta-ti, but bitbake gives this error message for all targets:
+It does seem so.  I'm not sure what package caused it.  The attached
+list of files (anything that mentions systemd) might give a clue.
 
-FWIW, I have not been able to use meta-ti as a layer with Poky; ended up
-just picking the packages I want from there.
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
+--------------040008030204090001070308
+Content-Type: text/plain; charset=UTF-8;
+ name="bb_hangs"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="bb_hangs"
 
-> Another question is the current state of Beagleboard support here. I found some mails about it, but
-> reportedly it is not fully supported here. I see that some recipes are written for Angstrom project.
-> Is it possible to get running libgles-omap3 here? I used it for Angstrom, but it works only with 2.6 kernels .
+L3RtcC9iYl9oYW5ncy92YXIvbGliL3N5c3RlbWQKL3RtcC9iYl9oYW5ncy9iaW4vc3lzdGVtZC1h
+c2stcGFzc3dvcmQKL3RtcC9iYl9oYW5ncy9iaW4vc3lzdGVtZC10dHktYXNrLXBhc3N3b3JkLWFn
+ZW50Ci90bXAvYmJfaGFuZ3MvYmluLy5kZWJ1Zy9zeXN0ZW1kLWFzay1wYXNzd29yZAovdG1wL2Ji
+X2hhbmdzL2Jpbi8uZGVidWcvc3lzdGVtZC10dHktYXNrLXBhc3N3b3JkLWFnZW50Ci90bXAvYmJf
+aGFuZ3MvYmluLy5kZWJ1Zy9zeXN0ZW1kLXRtcGZpbGVzCi90bXAvYmJfaGFuZ3MvYmluLy5kZWJ1
+Zy9zeXN0ZW1kLW5vdGlmeQovdG1wL2JiX2hhbmdzL2Jpbi8uZGVidWcvc3lzdGVtZC1tYWNoaW5l
+LWlkLXNldHVwCi90bXAvYmJfaGFuZ3MvYmluL3N5c3RlbWQtdG1wZmlsZXMKL3RtcC9iYl9oYW5n
+cy9iaW4vc3lzdGVtZC1ub3RpZnkKL3RtcC9iYl9oYW5ncy9iaW4vc3lzdGVtZC1tYWNoaW5lLWlk
+LXNldHVwCi90bXAvYmJfaGFuZ3MvdXNyL2xpYmV4ZWMvc3lzdGVtZAovdG1wL2JiX2hhbmdzL3Vz
+ci9iaW4vc3lzdGVtZC1jZ3RvcAovdG1wL2JiX2hhbmdzL3Vzci9iaW4vc3lzdGVtZC1jYXQKL3Rt
+cC9iYl9oYW5ncy91c3IvYmluL3N5c3RlbWQtbnNwYXduCi90bXAvYmJfaGFuZ3MvdXNyL2Jpbi9z
+eXN0ZW1kLWNnbHMKL3RtcC9iYl9oYW5ncy91c3IvYmluL3N5c3RlbWQtc3RkaW8tYnJpZGdlCi90
+bXAvYmJfaGFuZ3MvdXNyL2Jpbi8uZGVidWcvc3lzdGVtZC1jZ3RvcAovdG1wL2JiX2hhbmdzL3Vz
+ci9iaW4vLmRlYnVnL3N5c3RlbWQtY2F0Ci90bXAvYmJfaGFuZ3MvdXNyL2Jpbi8uZGVidWcvc3lz
+dGVtZC1uc3Bhd24KL3RtcC9iYl9oYW5ncy91c3IvYmluLy5kZWJ1Zy9zeXN0ZW1kLWNnbHMKL3Rt
+cC9iYl9oYW5ncy91c3IvYmluLy5kZWJ1Zy9zeXN0ZW1kLXN0ZGlvLWJyaWRnZQovdG1wL2JiX2hh
+bmdzL3Vzci9zaGFyZS9zeXN0ZW1kCi90bXAvYmJfaGFuZ3MvdXNyL3NoYXJlL3BvbGtpdC0xL2Fj
+dGlvbnMvb3JnLmZyZWVkZXNrdG9wLnN5c3RlbWQxLnBvbGljeQovdG1wL2JiX2hhbmdzL3Vzci9z
+aGFyZS9kYnVzLTEvc2VydmljZXMvb3JnLmZyZWVkZXNrdG9wLnN5c3RlbWQxLnNlcnZpY2UKL3Rt
+cC9iYl9oYW5ncy91c3Ivc2hhcmUvZGJ1cy0xL3N5c3RlbS1zZXJ2aWNlcy9vcmcuZnJlZWRlc2t0
+b3Auc3lzdGVtZDEuc2VydmljZQovdG1wL2JiX2hhbmdzL3Vzci9zcmMvZGVidWcvYnVzeWJveC0x
+LjE5LjQtcjYvYnVzeWJveC0xLjE5LjQvbGliYmIvc3lzdGVtZF9zdXBwb3J0LmMKL3RtcC9iYl9o
+YW5ncy91c3Ivc3JjL2RlYnVnL3N5c3RlbWQtZ2l0LXIyNwovdG1wL2JiX2hhbmdzL3Vzci9zcmMv
+ZGVidWcvc3lzdGVtZC1naXQtcjI3L2dpdC9zcmMvc3lzdGVtZAovdG1wL2JiX2hhbmdzL3Vzci9z
+cmMvZGVidWcvcG9sa2l0LTAuMTA0LXI4L3BvbGtpdC0wLjEwNC9zcmMvcG9sa2l0L3BvbGtpdHVu
+aXhzZXNzaW9uLXN5c3RlbWQuYwovdG1wL2JiX2hhbmdzL3Vzci9zcmMvZGVidWcvcG9sa2l0LTAu
+MTA0LXI4L3BvbGtpdC0wLjEwNC9zcmMvcG9sa2l0YmFja2VuZC9wb2xraXRiYWNrZW5kc2Vzc2lv
+bm1vbml0b3Itc3lzdGVtZC5jCi90bXAvYmJfaGFuZ3MvdXNyL2xpYi90bXBmaWxlcy5kL3N5c3Rl
+bWQuY29uZgovdG1wL2JiX2hhbmdzL3Vzci9saWIvc3lzdGVtZAovdG1wL2JiX2hhbmdzL3Vzci9s
+aWIvLmRlYnVnL2xpYnN5c3RlbWQtaWQxMjguc28KL3RtcC9iYl9oYW5ncy91c3IvbGliLy5kZWJ1
+Zy9saWJzeXN0ZW1kLWpvdXJuYWwuc28KL3RtcC9iYl9oYW5ncy91c3IvbGliLy5kZWJ1Zy9saWJz
+eXN0ZW1kLWRhZW1vbi5zbwovdG1wL2JiX2hhbmdzL3Vzci9saWIvLmRlYnVnL2xpYnN5c3RlbWQt
+bG9naW4uc28KL3RtcC9iYl9oYW5ncy9ldGMvYmFzaF9jb21wbGV0aW9uLmQvc3lzdGVtZC1iYXNo
+LWNvbXBsZXRpb24uc2gKL3RtcC9iYl9oYW5ncy9ldGMveGRnL3N5c3RlbWQKL3RtcC9iYl9oYW5n
+cy9ldGMvc3lzdGVtZAovdG1wL2JiX2hhbmdzL2V0Yy9kYnVzLTEvc3lzdGVtLmQvb3JnLmZyZWVk
+ZXNrdG9wLnN5c3RlbWQxLmNvbmYKL3RtcC9iYl9oYW5ncy9saWIvbGlic3lzdGVtZC1sb2dpbi5z
+by4wCi90bXAvYmJfaGFuZ3MvbGliL2xpYnN5c3RlbWQtaWQxMjguc28uMC4wLjMKL3RtcC9iYl9o
+YW5ncy9saWIvdWRldi9ydWxlcy5kLzk5LXN5c3RlbWQucnVsZXMKL3RtcC9iYl9oYW5ncy9saWIv
+bGlic3lzdGVtZC1kYWVtb24uc28uMC4wLjEKL3RtcC9iYl9oYW5ncy9saWIvbGlic3lzdGVtZC1q
+b3VybmFsLnNvLjAuMC4zCi90bXAvYmJfaGFuZ3MvbGliL2xpYnN5c3RlbWQtaWQxMjguc28uMAov
+dG1wL2JiX2hhbmdzL2xpYi9saWJzeXN0ZW1kLWpvdXJuYWwuc28uMAovdG1wL2JiX2hhbmdzL2xp
+Yi9saWJzeXN0ZW1kLWRhZW1vbi5zby4wCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQKL3RtcC9i
+Yl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW1kLXJlbW91bnQtYXBpLXZmcwovdG1wL2JiX2hhbmdz
+L2xpYi9zeXN0ZW1kL3N5c3RlbWQtZnNjawovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3Rl
+bWQtY2dyb3Vwcy1hZ2VudAovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbWQtYmluZm10
+Ci90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtZC11cGRhdGUtdXRtcAovdG1wL2JiX2hh
+bmdzL2xpYi9zeXN0ZW1kL3N5c3RlbWQtbG9jYWxlZAovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1k
+L3N5c3RlbWQtc2h1dGRvd25kCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtZC11c2Vy
+LXNlc3Npb25zCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtZC1qb3VybmFsZAovdG1w
+L2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbWQtcXVvdGFjaGVjawovdG1wL2JiX2hhbmdzL2xp
+Yi9zeXN0ZW1kL3N5c3RlbWQtbXVsdGktc2VhdC14Ci90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQv
+c3lzdGVtZC1sb2dpbmQKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW1kLWluaXRjdGwK
+L3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW1kLW1vZHVsZXMtbG9hZAovdG1wL2JiX2hh
+bmdzL2xpYi9zeXN0ZW1kL3N5c3RlbWQtcmVhZGFoZWFkLWNvbGxlY3QKL3RtcC9iYl9oYW5ncy9s
+aWIvc3lzdGVtZC9zeXN0ZW1kLXJlcGx5LXBhc3N3b3JkCi90bXAvYmJfaGFuZ3MvbGliL3N5c3Rl
+bWQvc3lzdGVtZC1hYy1wb3dlcgovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbWQtZGV0
+ZWN0LXZpcnQKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW1kLXVhY2Nlc3MKL3RtcC9i
+Yl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW1kLXNodXRkb3duCi90bXAvYmJfaGFuZ3MvbGliL3N5
+c3RlbWQvc3lzdGVtZAovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kLy5kZWJ1Zy9zeXN0ZW1kLXJl
+bW91bnQtYXBpLXZmcwovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kLy5kZWJ1Zy9zeXN0ZW1kLWZz
+Y2sKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC8uZGVidWcvc3lzdGVtZC1jZ3JvdXBzLWFnZW50
+Ci90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvLmRlYnVnL3N5c3RlbWQtYmluZm10Ci90bXAvYmJf
+aGFuZ3MvbGliL3N5c3RlbWQvLmRlYnVnL3N5c3RlbWQtdXBkYXRlLXV0bXAKL3RtcC9iYl9oYW5n
+cy9saWIvc3lzdGVtZC8uZGVidWcvc3lzdGVtZC1sb2NhbGVkCi90bXAvYmJfaGFuZ3MvbGliL3N5
+c3RlbWQvLmRlYnVnL3N5c3RlbWQtc2h1dGRvd25kCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQv
+LmRlYnVnL3N5c3RlbWQtdXNlci1zZXNzaW9ucwovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kLy5k
+ZWJ1Zy9zeXN0ZW1kLWpvdXJuYWxkCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvLmRlYnVnL3N5
+c3RlbWQtcXVvdGFjaGVjawovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kLy5kZWJ1Zy9zeXN0ZW1k
+LW11bHRpLXNlYXQteAovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kLy5kZWJ1Zy9zeXN0ZW1kLWxv
+Z2luZAovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kLy5kZWJ1Zy9zeXN0ZW1kLWluaXRjdGwKL3Rt
+cC9iYl9oYW5ncy9saWIvc3lzdGVtZC8uZGVidWcvc3lzdGVtZC1tb2R1bGVzLWxvYWQKL3RtcC9i
+Yl9oYW5ncy9saWIvc3lzdGVtZC8uZGVidWcvc3lzdGVtZC1yZWFkYWhlYWQtY29sbGVjdAovdG1w
+L2JiX2hhbmdzL2xpYi9zeXN0ZW1kLy5kZWJ1Zy9zeXN0ZW1kLXJlcGx5LXBhc3N3b3JkCi90bXAv
+YmJfaGFuZ3MvbGliL3N5c3RlbWQvLmRlYnVnL3N5c3RlbWQtdmNvbnNvbGUtc2V0dXAKL3RtcC9i
+Yl9oYW5ncy9saWIvc3lzdGVtZC8uZGVidWcvc3lzdGVtZC1hYy1wb3dlcgovdG1wL2JiX2hhbmdz
+L2xpYi9zeXN0ZW1kLy5kZWJ1Zy9zeXN0ZW1kLWRldGVjdC12aXJ0Ci90bXAvYmJfaGFuZ3MvbGli
+L3N5c3RlbWQvLmRlYnVnL3N5c3RlbWQtdWFjY2VzcwovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1k
+Ly5kZWJ1Zy9zeXN0ZW1kLXNodXRkb3duCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvLmRlYnVn
+L3N5c3RlbWQKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC8uZGVidWcvc3lzdGVtZC1yZWFkYWhl
+YWQtcmVwbGF5Ci90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvLmRlYnVnL3N5c3RlbWQtdGltZXN0
+YW1wCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvLmRlYnVnL3N5c3RlbWQtdGltZWRhdGVkCi90
+bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvLmRlYnVnL3N5c3RlbWQtcmFuZG9tLXNlZWQKL3RtcC9i
+Yl9oYW5ncy9saWIvc3lzdGVtZC8uZGVidWcvc3lzdGVtZC1ob3N0bmFtZWQKL3RtcC9iYl9oYW5n
+cy9saWIvc3lzdGVtZC8uZGVidWcvc3lzdGVtZC1zeXNjdGwKL3RtcC9iYl9oYW5ncy9saWIvc3lz
+dGVtZC9zeXN0ZW0vc3lzdGVtZC1yZWFkYWhlYWQtY29sbGVjdC5zZXJ2aWNlCi90bXAvYmJfaGFu
+Z3MvbGliL3N5c3RlbWQvc3lzdGVtL3N5c3RlbWQtcmVhZGFoZWFkLWRvbmUudGltZXIKL3RtcC9i
+Yl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW0vc3lzdGVtZC1zaHV0ZG93bmQuc2VydmljZQovdG1w
+L2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbS9iYXNpYy50YXJnZXQud2FudHMvc3lzdGVtZC10
+bXBmaWxlcy1jbGVhbi50aW1lcgovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbS9zeXN0
+ZW1kLWFzay1wYXNzd29yZC1jb25zb2xlLnNlcnZpY2UKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVt
+ZC9zeXN0ZW0vc3lzdGVtZC1yZWFkYWhlYWQtcmVwbGF5LnNlcnZpY2UKL3RtcC9iYl9oYW5ncy9s
+aWIvc3lzdGVtZC9zeXN0ZW0vbXVsdGktdXNlci50YXJnZXQud2FudHMvc3lzdGVtZC1hc2stcGFz
+c3dvcmQtd2FsbC5wYXRoCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtL211bHRpLXVz
+ZXIudGFyZ2V0LndhbnRzL3N5c3RlbWQtbG9naW5kLnNlcnZpY2UKL3RtcC9iYl9oYW5ncy9saWIv
+c3lzdGVtZC9zeXN0ZW0vbXVsdGktdXNlci50YXJnZXQud2FudHMvc3lzdGVtZC11c2VyLXNlc3Np
+b25zLnNlcnZpY2UKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW0vcnVubGV2ZWwyLnRh
+cmdldC53YW50cy9zeXN0ZW1kLXVwZGF0ZS11dG1wLXJ1bmxldmVsLnNlcnZpY2UKL3RtcC9iYl9o
+YW5ncy9saWIvc3lzdGVtZC9zeXN0ZW0vc3lzdGVtZC11cGRhdGUtdXRtcC1zaHV0ZG93bi5zZXJ2
+aWNlCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtL3J1bmxldmVsNS50YXJnZXQud2Fu
+dHMvc3lzdGVtZC11cGRhdGUtdXRtcC1ydW5sZXZlbC5zZXJ2aWNlCi90bXAvYmJfaGFuZ3MvbGli
+L3N5c3RlbWQvc3lzdGVtL3N5c3RlbWQtYXNrLXBhc3N3b3JkLXdhbGwucGF0aAovdG1wL2JiX2hh
+bmdzL2xpYi9zeXN0ZW1kL3N5c3RlbS9zeXN0ZW1kLWJpbmZtdC5zZXJ2aWNlCi90bXAvYmJfaGFu
+Z3MvbGliL3N5c3RlbWQvc3lzdGVtL3N5c3RlbWQtdGltZWRhdGVkLnNlcnZpY2UKL3RtcC9iYl9o
+YW5ncy9saWIvc3lzdGVtZC9zeXN0ZW0vcnVubGV2ZWw0LnRhcmdldC53YW50cy9zeXN0ZW1kLXVw
+ZGF0ZS11dG1wLXJ1bmxldmVsLnNlcnZpY2UKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0
+ZW0vc3lzdGVtZC1hc2stcGFzc3dvcmQtd2FsbC5zZXJ2aWNlCi90bXAvYmJfaGFuZ3MvbGliL3N5
+c3RlbWQvc3lzdGVtL2xvY2FsLWZzLnRhcmdldC53YW50cy9zeXN0ZW1kLXJlbW91bnQtYXBpLXZm
+cy5zZXJ2aWNlCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtL3N5c3RlbWQtam91cm5h
+bGQuc29ja2V0Ci90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtL3N5c3RlbWQtbG9naW5k
+LnNlcnZpY2UKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW0vc3lzaW5pdC50YXJnZXQu
+d2FudHMvc3lzdGVtZC1iaW5mbXQuc2VydmljZQovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5
+c3RlbS9zeXNpbml0LnRhcmdldC53YW50cy9zeXN0ZW1kLW1vZHVsZXMtbG9hZC5zZXJ2aWNlCi90
+bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtL3N5c2luaXQudGFyZ2V0LndhbnRzL3N5c3Rl
+bWQtYXNrLXBhc3N3b3JkLWNvbnNvbGUucGF0aAovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5
+c3RlbS9zeXNpbml0LnRhcmdldC53YW50cy9zeXN0ZW1kLXJhbmRvbS1zZWVkLWxvYWQuc2Vydmlj
+ZQovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbS9zeXNpbml0LnRhcmdldC53YW50cy9z
+eXN0ZW1kLXN5c2N0bC5zZXJ2aWNlCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtL3N5
+c2luaXQudGFyZ2V0LndhbnRzL3N5c3RlbWQtdG1wZmlsZXMtc2V0dXAuc2VydmljZQovdG1wL2Ji
+X2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbS9zeXNpbml0LnRhcmdldC53YW50cy9zeXN0ZW1kLWpv
+dXJuYWxkLnNlcnZpY2UKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW0vc3lzdGVtZC1z
+aHV0ZG93bmQuc29ja2V0Ci90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtL3J1bmxldmVs
+My50YXJnZXQud2FudHMvc3lzdGVtZC11cGRhdGUtdXRtcC1ydW5sZXZlbC5zZXJ2aWNlCi90bXAv
+YmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtL3N5c3RlbWQtdG1wZmlsZXMtY2xlYW4udGltZXIK
+L3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW0vc3lzdGVtZC11cGRhdGUtdXRtcC1ydW5s
+ZXZlbC5zZXJ2aWNlCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtL3N5c3RlbWQtcmVt
+b3VudC1hcGktdmZzLnNlcnZpY2UKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW0vc3lz
+dGVtZC1tb2R1bGVzLWxvYWQuc2VydmljZQovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3Rl
+bS9ydW5sZXZlbDEudGFyZ2V0LndhbnRzL3N5c3RlbWQtdXBkYXRlLXV0bXAtcnVubGV2ZWwuc2Vy
+dmljZQovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbS9zeXN0ZW1kLWFzay1wYXNzd29y
+ZC1jb25zb2xlLnBhdGgKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW0vc3lzdGVtZC1y
+ZWFkYWhlYWQtZG9uZS5zZXJ2aWNlCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtL3Nv
+Y2tldHMudGFyZ2V0LndhbnRzL3N5c3RlbWQtam91cm5hbGQuc29ja2V0Ci90bXAvYmJfaGFuZ3Mv
+bGliL3N5c3RlbWQvc3lzdGVtL3NvY2tldHMudGFyZ2V0LndhbnRzL3N5c3RlbWQtc2h1dGRvd25k
+LnNvY2tldAovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbS9zb2NrZXRzLnRhcmdldC53
+YW50cy9zeXN0ZW1kLWluaXRjdGwuc29ja2V0Ci90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lz
+dGVtL3N5c3RlbWQtbG9jYWxlZC5zZXJ2aWNlCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lz
+dGVtL3N5c3RlbWQtaW5pdGN0bC5zb2NrZXQKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0
+ZW0vc3lzdGVtZC1pbml0Y3RsLnNlcnZpY2UKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0
+ZW0vc2h1dGRvd24udGFyZ2V0LndhbnRzL3N5c3RlbWQtdXBkYXRlLXV0bXAtc2h1dGRvd24uc2Vy
+dmljZQovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbS9zaHV0ZG93bi50YXJnZXQud2Fu
+dHMvc3lzdGVtZC1yYW5kb20tc2VlZC1zYXZlLnNlcnZpY2UKL3RtcC9iYl9oYW5ncy9saWIvc3lz
+dGVtZC9zeXN0ZW0vc3lzdGVtZC1yYW5kb20tc2VlZC1zYXZlLnNlcnZpY2UKL3RtcC9iYl9oYW5n
+cy9saWIvc3lzdGVtZC9zeXN0ZW0vc3lzdGVtZC1ob3N0bmFtZWQuc2VydmljZQovdG1wL2JiX2hh
+bmdzL2xpYi9zeXN0ZW1kL3N5c3RlbS9zeXN0ZW1kLXVzZXItc2Vzc2lvbnMuc2VydmljZQovdG1w
+L2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbS9zeXN0ZW1kLXJhbmRvbS1zZWVkLWxvYWQuc2Vy
+dmljZQovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbS9zeXN0ZW1kLXN5c2N0bC5zZXJ2
+aWNlCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtL3N5c3RlbWQtdG1wZmlsZXMtY2xl
+YW4uc2VydmljZQovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbS9zeXN0ZW1kLXRtcGZp
+bGVzLXNldHVwLnNlcnZpY2UKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW0vc3lzdGVt
+ZC1qb3VybmFsZC5zZXJ2aWNlCi90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtZC1yZWFk
+YWhlYWQtcmVwbGF5Ci90bXAvYmJfaGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtZC10aW1lc3RhbXAK
+L3RtcC9iYl9oYW5ncy9saWIvc3lzdGVtZC9zeXN0ZW1kLXRpbWVkYXRlZAovdG1wL2JiX2hhbmdz
+L2xpYi9zeXN0ZW1kL3N5c3RlbWQtcmFuZG9tLXNlZWQKL3RtcC9iYl9oYW5ncy9saWIvc3lzdGVt
+ZC9zeXN0ZW0tZ2VuZXJhdG9ycy9zeXN0ZW1kLWdldHR5LWdlbmVyYXRvcgovdG1wL2JiX2hhbmdz
+L2xpYi9zeXN0ZW1kL3N5c3RlbS1nZW5lcmF0b3JzLy5kZWJ1Zy9zeXN0ZW1kLWdldHR5LWdlbmVy
+YXRvcgovdG1wL2JiX2hhbmdzL2xpYi9zeXN0ZW1kL3N5c3RlbWQtaG9zdG5hbWVkCi90bXAvYmJf
+aGFuZ3MvbGliL3N5c3RlbWQvc3lzdGVtZC1zeXNjdGwKL3RtcC9iYl9oYW5ncy9saWIvLmRlYnVn
+L2xpYnN5c3RlbWQtbG9naW4uc28uMAovdG1wL2JiX2hhbmdzL2xpYi8uZGVidWcvbGlic3lzdGVt
+ZC1pZDEyOC5zby4wLjAuMwovdG1wL2JiX2hhbmdzL2xpYi8uZGVidWcvbGlic3lzdGVtZC1kYWVt
+b24uc28uMC4wLjEKL3RtcC9iYl9oYW5ncy9saWIvLmRlYnVnL2xpYnN5c3RlbWQtam91cm5hbC5z
+by4wLjAuMwovdG1wL2JiX2hhbmdzL2xpYi8uZGVidWcvbGlic3lzdGVtZC1pZDEyOC5zby4wCi90
+bXAvYmJfaGFuZ3MvbGliLy5kZWJ1Zy9saWJzeXN0ZW1kLWpvdXJuYWwuc28uMAovdG1wL2JiX2hh
+bmdzL2xpYi8uZGVidWcvbGlic3lzdGVtZC1kYWVtb24uc28uMAovdG1wL2JiX2hhbmdzL2xpYi8u
+ZGVidWcvbGlic3lzdGVtZC1sb2dpbi5zby4wLjIuMQovdG1wL2JiX2hhbmdzL2xpYi9saWJzeXN0
+ZW1kLWxvZ2luLnNvLjAuMi4xCg==
 
-I got libgles-omap3 working on an xM board with a 3.2.16 kernel (that
-is, I got the native GLES working, the DRI2 drivers do not work; I have
-not tested the X11 driver for kdrive).
-
-To get it work, I had to get packages from the arago project repo, could
-not get it work for any kernel in the angstrom meta-ti mirror. See
-https://github.com/Guacamayo/meta-guacamayo, if that is of any use (work
-in progress).
-
-Tomas
-
+--------------040008030204090001070308--
