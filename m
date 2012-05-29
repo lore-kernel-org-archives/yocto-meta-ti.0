@@ -1,35 +1,15 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (hermes.mlbassoc.com [64.234.241.98])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB59BE01408
-	for <meta-ti@yoctoproject.org>; Fri, 25 May 2012 05:06:47 -0700 (PDT)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id A5B84F811DE; Fri, 25 May 2012 06:06:47 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from hermes.chez-thomas.org (localhost.localdomain [127.0.0.1])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 85E63F811DD;
-	Fri, 25 May 2012 06:06:46 -0600 (MDT)
-Message-ID: <4FBF75D6.9000300@mlbassoc.com>
-Date: Fri, 25 May 2012 06:06:46 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:12.0) Gecko/20120430 Thunderbird/12.0.1
-MIME-Version: 1.0
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8FC7E006D9
+	for <meta-ti@yoctoproject.org>; Tue, 29 May 2012 13:51:25 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 0456352A69; Tue, 29 May 2012 20:51:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-References: <4FBBB531.8020401@communistcode.co.uk>
-	<4FBBB786.8030501@mlbassoc.com>
-	<4FBBB8E9.1040700@communistcode.co.uk>
-	<20120522163158.GB15020@denix.org>
-	<4FBCA367.701@communistcode.co.uk> <4FBCC147.90606@mlbassoc.com>
-	<4FBCE8E4.6010208@communistcode.co.uk>
-	<4FBE44EE.2070909@communistcode.co.uk>
-	<4FBE4DE9.30501@mlbassoc.com> <1337928496.8248.173.camel@ted>
-	<4FBF7014.8080609@mlbassoc.com> <4FBF70E8.5040802@r-finger.com>
-In-Reply-To: <4FBF70E8.5040802@r-finger.com>
-Subject: Re: Beaglebone + Poky
+Message-Id: <20120529205125.0456352A69@arago-project.org>
+Date: Tue, 29 May 2012 20:51:24 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Koen Kooi : linux-ti33x-psp 3.2: silence useless omap4 hwmod warning
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,47 +21,80 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2012 12:06:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 29 May 2012 20:51:26 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 2012-05-25 05:45, Tomas Frydrych wrote:
->
-> Doesn't 'bitbake -g -u depexp' say what is pulling it in?
+Module: meta-ti
+Branch: master
+Commit: 1078965795412744e1fc39ff8e0876665a79afed
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1078965795412744e1fc39ff8e0876665a79afed
 
-That's a new one for me :-)  It seems to show that the only thing that
-depends on systemd (except for systemd related packages) is polkit.
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Tue May 22 08:06:24 2012 +0200
 
-Looking at the package-depends.dot file, I can see what does it:
-   "polkit-dbg" -> "systemd"
-Which is why this only happens when you add the dbg-pkgs feature.
+linux-ti33x-psp 3.2: silence useless omap4 hwmod warning
 
-> On 25/05/12 12:42, Gary Thomas wrote:
->> On 2012-05-25 00:48, Richard Purdie wrote:
->>> On Thu, 2012-05-24 at 09:04 -0600, Gary Thomas wrote:
->>>> I agree - there seem to be some recipes in meta-oe that don't play
->>>> nice with a non-systemd setup like Poky.
->>>>
->>>> Note: I was able to boot core-image-minimal built with meta-yocto +
->>>> meta-oe
->>>> in all configurations of EXTRA_IMAGE_FEATURES as long as 'dbg-pkgs' was
->>>> not specified.  As soon as I added that feature, it fails to come up
->>>> just
->>>> as you observed.  I'm not sure why (and I'm not too motivated to
->>>> research
->>>> more, I've already built this thing about 20 times in different ways...)
->>>
->>> That is a useful data point to have though, thanks for mentioning it on
->>> the list!
->>>
->>> I wonder if that somehow indirectly pulls in systemd itself?
->>
->> It does seem so.  I'm not sure what package caused it.  The attached
->> list of files (anything that mentions systemd) might give a clue.
+This fixes the last remaining debug print shown when booting with 'quiet'
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ .../0044-omap-hwmod-silence-st_shift-error.patch   |   33 ++++++++++++++++++++
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    1 +
+ 2 files changed, 34 insertions(+), 0 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0044-omap-hwmod-silence-st_shift-error.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0044-omap-hwmod-silence-st_shift-error.patch
+new file mode 100644
+index 0000000..7991f0a
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0044-omap-hwmod-silence-st_shift-error.patch
+@@ -0,0 +1,33 @@
++From 4119ec2ea20b7ae4095049e9f192c751559fbb87 Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Wed, 16 May 2012 17:57:31 +0200
++Subject: [PATCH] omap hwmod: silence st_shift error
++
++During boot the following error is shown:
++
++	[    0.545227] omap_hwmod: wkup_m3: wkup_m3: hwmod data error: OMAP4 does not support st_shift
++
++Since this PSP tree will never run on omap4 remove the print so people will stop getting scared by it.
++
++Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
++---
++ arch/arm/mach-omap2/omap_hwmod.c |    3 ---
++ 1 files changed, 0 insertions(+), 3 deletions(-)
++
++diff --git a/arch/arm/mach-omap2/omap_hwmod.c b/arch/arm/mach-omap2/omap_hwmod.c
++index bc14f9f..a050699 100644
++--- a/arch/arm/mach-omap2/omap_hwmod.c
+++++ b/arch/arm/mach-omap2/omap_hwmod.c
++@@ -1343,9 +1343,6 @@ static int _deassert_hardreset(struct omap_hwmod *oh, const char *name)
++ 	 * Note: cpu_is_omap34xx is true for am33xx device as well.
++ 	 */
++ 	if (cpu_is_omap44xx() || cpu_is_am33xx()) {
++-		if (ohri.st_shift)
++-			pr_err("omap_hwmod: %s: %s: hwmod data error: OMAP4 does not support st_shift\n",
++-			       oh->name, name);
++ 		ret = omap4_prminst_deassert_hardreset(ohri.rst_shift,
++ 				  oh->clkdm->pwrdm.ptr->prcm_partition,
++ 				  oh->clkdm->pwrdm.ptr->prcm_offs,
++-- 
++1.7.7.6
++
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index 97c1cd0..0fe3d4f 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -968,6 +968,7 @@ PATCHES_OVER_PSP = " \
+ 	file://beaglebone/0039-ARM-OMAP-Mux-Fixed-debugfs-mux-output-always-reporti.patch \
+ 	file://beaglebone/0040-beaglebone-export-SPI2-as-spidev-when-no-capes-are-u.patch \
+     file://beaglebone/0043-st7735fb-Working-WIP-changes-to-make-DMA-safe-and-ad.patch \
++	file://beaglebone/0044-omap-hwmod-silence-st_shift-error.patch \
+ 	file://beaglebone/0001-arm-boot-compressed-default-asm-arch-to-armv7-a.patch \
+ 	file://beaglebone/0045-cpws-phy_device-demote-PHY-message-to-INFO.patch \
+ "
+
 
