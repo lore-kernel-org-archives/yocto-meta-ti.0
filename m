@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8FC7E006D9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA3BBE013B7
 	for <meta-ti@yoctoproject.org>; Tue, 29 May 2012 13:51:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0456352A69; Tue, 29 May 2012 20:51:24 +0000 (UTC)
+	id 58EBA52A88; Tue, 29 May 2012 20:51:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120529205125.0456352A69@arago-project.org>
-Date: Tue, 29 May 2012 20:51:24 +0000 (UTC)
+Message-Id: <20120529205125.58EBA52A88@arago-project.org>
+Date: Tue, 29 May 2012 20:51:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-ti33x-psp 3.2: silence useless omap4 hwmod warning
+Subject: Koen Kooi : linux-ti33x-psp 3.2: merge in 6 musb patches from PSP
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,75 +26,30 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 1078965795412744e1fc39ff8e0876665a79afed
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1078965795412744e1fc39ff8e0876665a79afed
+Commit: 0dc054072d133ba96cc799ef9ac4b9f37b69a139
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0dc054072d133ba96cc799ef9ac4b9f37b69a139
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Tue May 22 08:06:24 2012 +0200
+Date:   Tue May 22 08:06:26 2012 +0200
 
-linux-ti33x-psp 3.2: silence useless omap4 hwmod warning
+linux-ti33x-psp 3.2: merge in 6 musb patches from PSP
 
-This fixes the last remaining debug print shown when booting with 'quiet'
+Updating the SRCREV would require redoing all boardfile patches due to the
+EVM-SK changes. So cherry-pick the 6 patches we need.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../0044-omap-hwmod-silence-st_shift-error.patch   |   33 ++++++++++++++++++++
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    1 +
- 2 files changed, 34 insertions(+), 0 deletions(-)
+ ...pi41-revisit-the-teardown-path-to-fix-iso.patch |  103 ++++++++++++++++++++
+ ...musb-fix-bug-in-data-toggle-sw-workaround.patch |   31 ++++++
+ ...udc-core-stop-UDC-on-device-initiated-dis.patch |   41 ++++++++
+ ...udc-core-fix-asymmetric-calls-in-remove_d.patch |   43 ++++++++
+ ...-usb-gadget-udc-core-fix-wrong-call-order.patch |   33 ++++++
+ ...udc-core-fix-incompatibility-with-dummy-h.patch |   46 +++++++++
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    8 ++-
+ 7 files changed, 304 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0044-omap-hwmod-silence-st_shift-error.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0044-omap-hwmod-silence-st_shift-error.patch
-new file mode 100644
-index 0000000..7991f0a
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0044-omap-hwmod-silence-st_shift-error.patch
-@@ -0,0 +1,33 @@
-+From 4119ec2ea20b7ae4095049e9f192c751559fbb87 Mon Sep 17 00:00:00 2001
-+From: Koen Kooi <koen@dominion.thruhere.net>
-+Date: Wed, 16 May 2012 17:57:31 +0200
-+Subject: [PATCH] omap hwmod: silence st_shift error
-+
-+During boot the following error is shown:
-+
-+	[    0.545227] omap_hwmod: wkup_m3: wkup_m3: hwmod data error: OMAP4 does not support st_shift
-+
-+Since this PSP tree will never run on omap4 remove the print so people will stop getting scared by it.
-+
-+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-+---
-+ arch/arm/mach-omap2/omap_hwmod.c |    3 ---
-+ 1 files changed, 0 insertions(+), 3 deletions(-)
-+
-+diff --git a/arch/arm/mach-omap2/omap_hwmod.c b/arch/arm/mach-omap2/omap_hwmod.c
-+index bc14f9f..a050699 100644
-+--- a/arch/arm/mach-omap2/omap_hwmod.c
-++++ b/arch/arm/mach-omap2/omap_hwmod.c
-+@@ -1343,9 +1343,6 @@ static int _deassert_hardreset(struct omap_hwmod *oh, const char *name)
-+ 	 * Note: cpu_is_omap34xx is true for am33xx device as well.
-+ 	 */
-+ 	if (cpu_is_omap44xx() || cpu_is_am33xx()) {
-+-		if (ohri.st_shift)
-+-			pr_err("omap_hwmod: %s: %s: hwmod data error: OMAP4 does not support st_shift\n",
-+-			       oh->name, name);
-+ 		ret = omap4_prminst_deassert_hardreset(ohri.rst_shift,
-+ 				  oh->clkdm->pwrdm.ptr->prcm_partition,
-+ 				  oh->clkdm->pwrdm.ptr->prcm_offs,
-+-- 
-+1.7.7.6
-+
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index 97c1cd0..0fe3d4f 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -968,6 +968,7 @@ PATCHES_OVER_PSP = " \
- 	file://beaglebone/0039-ARM-OMAP-Mux-Fixed-debugfs-mux-output-always-reporti.patch \
- 	file://beaglebone/0040-beaglebone-export-SPI2-as-spidev-when-no-capes-are-u.patch \
-     file://beaglebone/0043-st7735fb-Working-WIP-changes-to-make-DMA-safe-and-ad.patch \
-+	file://beaglebone/0044-omap-hwmod-silence-st_shift-error.patch \
- 	file://beaglebone/0001-arm-boot-compressed-default-asm-arch-to-armv7-a.patch \
- 	file://beaglebone/0045-cpws-phy_device-demote-PHY-message-to-INFO.patch \
- "
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=0dc054072d133ba96cc799ef9ac4b9f37b69a139
 
