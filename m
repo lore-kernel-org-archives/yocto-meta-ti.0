@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2424DE013D3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 25686E01423
 	for <meta-ti@yoctoproject.org>; Wed, 30 May 2012 11:15:16 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C0EA252A46; Wed, 30 May 2012 18:15:14 +0000 (UTC)
+	id 5E46A52A77; Wed, 30 May 2012 18:15:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120530181514.C0EA252A46@arago-project.org>
-Date: Wed, 30 May 2012 18:15:14 +0000 (UTC)
+Message-Id: <20120530181515.5E46A52A77@arago-project.org>
+Date: Wed, 30 May 2012 18:15:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-ti33x-psp 3.2: i2c and cape fixes
+Subject: Koen Kooi : linux-ti33x-psp 3.2: sgx fix from PSP + dvi cape audio fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,30 +26,26 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: d9d51a11b8ff53c5ee7ef12e221479a24e071f13
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d9d51a11b8ff53c5ee7ef12e221479a24e071f13
+Commit: 1d44de8f58cdfd71c90ce078070be1b6c6574832
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1d44de8f58cdfd71c90ce078070be1b6c6574832
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Tue May 22 14:42:55 2012 +0200
+Date:   Wed May 23 16:18:16 2012 +0200
 
-linux-ti33x-psp 3.2: i2c and cape fixes
+linux-ti33x-psp 3.2: sgx fix from PSP + dvi cape audio fix
 
-* Fix I2C prescaler to run at full speed instead of 1/4 speed
-* fix led/spidev/w1 check
-* move RS232 cape to ttyO2
+Also move more things to modules to speed up boot.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...lar-fix-i2c-fixed-prescalar-setting-issue.patch |   58 +++++++++++++++
- ...lebone-annotate-default-beaglebone-pinmux.patch |   32 ++++++++
- ...fix-pin-free-thinko-this-method-doesn-t-g.patch |   78 ++++++++++++++++++++
- ...060-beaglebone-switch-RS232-cape-to-ttyO2.patch |   29 +++++++
- ...-make-uart2-pinmux-match-the-uart0-pinmux.patch |   31 ++++++++
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    7 ++-
- 6 files changed, 234 insertions(+), 1 deletions(-)
+ ...unding-FB-size-to-satisfy-SGX-buffer-requ.patch |   59 ++++++
+ .../0063-beaglebone-dvi-cape-audio-hacks.patch     |  217 ++++++++++++++++++++
+ .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |  124 ++++++++----
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    4 +-
+ 4 files changed, 360 insertions(+), 44 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=d9d51a11b8ff53c5ee7ef12e221479a24e071f13
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=1d44de8f58cdfd71c90ce078070be1b6c6574832
 
