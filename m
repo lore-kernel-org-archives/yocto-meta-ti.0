@@ -1,27 +1,23 @@
 Return-Path: <denis@denix.org>
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 05686E0143A
-	for <meta-ti@yoctoproject.org>; Wed, 30 May 2012 12:05:58 -0700 (PDT)
+Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
+	[206.46.173.15])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 33CDFE013BB
+	for <meta-ti@yoctoproject.org>; Wed, 30 May 2012 15:19:26 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173019.mailsrvcs.net
+	by vms173015.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M4U003UENPNJRN3@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 30 May 2012 14:05:48 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8847A201C2; Wed,
-	30 May 2012 15:05:47 -0400 (EDT)
-Date: Wed, 30 May 2012 15:05:47 -0400
+	2009)) with ESMTPA id <0M4U00AQ8WNOWPAB@vms173015.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 30 May 2012 17:19:11 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 8F7D920015; Wed,
+	30 May 2012 18:19:00 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-id: <20120530190547.GC10106@denix.org>
-References: <1337846249-26371-1-git-send-email-koen@dominion.thruhere.net>
-	<20120529205756.GA10106@denix.org>
-	<DFB38997-3316-4A6A-8EC3-0F5CC24FBD23@dominion.thruhere.net>
-	<20120530183659.GB10106@denix.org>
-MIME-version: 1.0
-In-reply-to: <20120530183659.GB10106@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 1/2] linux-ti33x-psp 3.2: sgx fix from PSP + dvi cape audio fix
+Date: Wed, 30 May 2012 18:18:54 -0400
+Message-id: <1338416335-4453-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.7.8.6
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH 1/2] tipspkernel: add extra level to FILESPATH with major version in the name
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,17 +29,55 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 May 2012 19:05:58 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 30 May 2012 22:19:26 -0000
 
-On Wed, May 30, 2012 at 02:36:59PM -0400, Denys Dmytriyenko wrote:
-> BTW, are there any problems with the list - I didn't see the bounced commit 
-> emails...
+From: Denys Dmytriyenko <denys@ti.com>
 
-Never mind, yoctoproject.org seems slow today - takes up to 30 minutes to 
-bounce emails to the list...
+Add PMV variable to contain major version by extracting first 2 numbers from PV
+Insert new level to FILESPATH - PN-PV-PR:PN-PV:PN-PMV:PN:files:.
+Allow keeping patches and configs generic for the series (i.e. 3.2) while
+incrementing stable releases (i.e. 3.2.18)
+Drop use of BP and BPN, as they don't change for the kernel
 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-kernel/linux/tipspkernel.inc |   19 +++++++++++++++++--
+ 1 files changed, 17 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-kernel/linux/tipspkernel.inc b/recipes-kernel/linux/tipspkernel.inc
+index c23fa57..ba93530 100644
+--- a/recipes-kernel/linux/tipspkernel.inc
++++ b/recipes-kernel/linux/tipspkernel.inc
+@@ -1,11 +1,26 @@
+ # Include this file for kernel recipes that need to handle different defconfigs
+ # and apply patches based on "tipspkernel" DISTRO_FEATURES
+ 
++def get_major_pv(p):
++	import re
++	r = re.compile("([0-9]+\.[0-9]+).*")
++	m = r.match(p);
++	if m:
++		return m.group(1)
++	return None
++
++PMV = "${@get_major_pv(d.getVar('PV', True))}"
++
++# First of all, set own FILESPATH avoiding unnecessary BP and BPN, but adding
++# extra level of major version
++FILESPATH = "${@base_set_filespath([ "${FILE_DIRNAME}/${PF}", "${FILE_DIRNAME}/${P}", "${FILE_DIRNAME}/${PN}-${PMV}", \
++"${FILE_DIRNAME}/${PN}", "${FILE_DIRNAME}/files", "${FILE_DIRNAME}" ], d)}"
++
+ # We don't want "tipspkernel" to be another OVERRIDE, but rather a new level of
+ # FILESPATH with all the OVERRIDES applied to it
+ CONFIGS_PSP = "${@base_set_filespath(["${FILE_DIRNAME}/${PF}/tipspkernel", "${FILE_DIRNAME}/${P}/tipspkernel", \
+-"${FILE_DIRNAME}/${PN}/tipspkernel", "${FILE_DIRNAME}/${BP}/tipspkernel", "${FILE_DIRNAME}/${BPN}/tipspkernel", \
+-"${FILE_DIRNAME}/files/tipspkernel", "${FILE_DIRNAME}/tipspkernel"], d)}:"
++"${FILE_DIRNAME}/${PN}-${PMV}/tipspkernel", "${FILE_DIRNAME}/${PN}/tipspkernel", "${FILE_DIRNAME}/files/tipspkernel", \
++"${FILE_DIRNAME}/tipspkernel"], d)}:"
+ 
+ # When "tipspkernel" is ENABLED, prepend additional set of directories to FILESPATH
+ FILESPATH =. "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "${CONFIGS_PSP}", "", d)}"
 -- 
-Denys
+1.7.8.6
+
 
