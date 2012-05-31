@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C1D86E006D9
-	for <meta-ti@yoctoproject.org>; Thu, 31 May 2012 15:34:01 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EACB0E006D9
+	for <meta-ti@yoctoproject.org>; Thu, 31 May 2012 16:29:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 858F65298B; Thu, 31 May 2012 22:34:00 +0000 (UTC)
+	id 72D25529AB; Thu, 31 May 2012 23:29:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120531223400.858F65298B@arago-project.org>
-Date: Thu, 31 May 2012 22:34:00 +0000 (UTC)
+Message-Id: <20120531232925.72D25529AB@arago-project.org>
+Date: Thu, 31 May 2012 23:29:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti33x-psp 3.2: set PV accordingly, when not using tipspkernel
+Subject: Koen Kooi : linux-mainline 3.2.18: build in usbhid and tsc2007 and run ' make oldconfig'
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,44 +21,84 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 May 2012 22:34:02 -0000
+X-List-Received-Date: Thu, 31 May 2012 23:29:26 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 67088ec673a440947daa4da1af9da5115a3c9ee2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=67088ec673a440947daa4da1af9da5115a3c9ee2
+Commit: 4f684c71cc3a1624bc5fa26bfe02e963ee4b22ca
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4f684c71cc3a1624bc5fa26bfe02e963ee4b22ca
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed May 30 18:14:14 2012 -0400
+Author: Koen Kooi <koen@dominion.thruhere.net>
+Date:   Tue May 29 09:42:19 2012 +0200
 
-linux-ti33x-psp 3.2: set PV accordingly, when not using tipspkernel
+linux-mainline 3.2.18: build in usbhid and tsc2007 and run 'make oldconfig'
 
-The patchset in PATCHES_OVER_PSP updates the kernel to 3.2.x, so make PV match.
-This doesn't need PR or MACHINE_KERNEL_PR bumps since both the kernel ABI and
-file locations remain the same.
-
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Acked-by: Koen Kooi <koen@circuitco.com>
 
 ---
 
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+ .../linux/linux-mainline-3.2/beagleboard/defconfig |   16 +++++-----------
+ 1 files changed, 5 insertions(+), 11 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index 38202fa..cd10044 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -10,6 +10,9 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig b/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig
+index e9a83e6..eaf9548 100644
+--- a/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig
++++ b/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig
+@@ -1,6 +1,6 @@
+ #
+ # Automatically generated file; DO NOT EDIT.
+-# Linux/arm 3.2.16 Kernel Configuration
++# Linux/arm 3.2.18 Kernel Configuration
+ #
+ CONFIG_ARM=y
+ CONFIG_SYS_SUPPORTS_APM_EMULATION=y
+@@ -461,7 +461,7 @@ CONFIG_USE_OF=y
+ CONFIG_ZBOOT_ROM_TEXT=0x0
+ CONFIG_ZBOOT_ROM_BSS=0x0
+ # CONFIG_ARM_APPENDED_DTB is not set
+-CONFIG_CMDLINE="root=/dev/mmcblk0p2 rootwait console=ttyO2,115200"
++CONFIG_CMDLINE=" debug "
+ CONFIG_CMDLINE_FROM_BOOTLOADER=y
+ # CONFIG_CMDLINE_EXTEND is not set
+ # CONFIG_CMDLINE_FORCE is not set
+@@ -1890,7 +1890,7 @@ CONFIG_TOUCHSCREEN_USB_NEXIO=y
+ CONFIG_TOUCHSCREEN_TOUCHIT213=m
+ CONFIG_TOUCHSCREEN_TSC_SERIO=m
+ CONFIG_TOUCHSCREEN_TSC2005=m
+-CONFIG_TOUCHSCREEN_TSC2007=m
++CONFIG_TOUCHSCREEN_TSC2007=y
+ CONFIG_TOUCHSCREEN_W90X900=m
+ CONFIG_TOUCHSCREEN_ST1232=m
+ CONFIG_TOUCHSCREEN_TPS6507X=m
+@@ -3012,17 +3012,11 @@ CONFIG_HIDRAW=y
+ #
+ # USB Input Devices
+ #
+-CONFIG_USB_HID=m
++CONFIG_USB_HID=y
+ CONFIG_HID_PID=y
+ CONFIG_USB_HIDDEV=y
  
- MULTI_CONFIG_BASE_SUFFIX = ""
- 
-+# the PATCHES_OVER_PSP updates it to 3.2.x, so adjust PV to match
-+PV = "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "3.2", "3.2.18", d)}"
-+
- BRANCH = "v3.2-staging"
- SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
- MACHINE_KERNEL_PR_append = "c+gitr${SRCREV}"
+ #
+-# USB HID Boot Protocol drivers
+-#
+-# CONFIG_USB_KBD is not set
+-# CONFIG_USB_MOUSE is not set
+-
+-#
+ # Special HID drivers
+ #
+ CONFIG_HID_A4TECH=m
+@@ -3915,7 +3909,7 @@ CONFIG_MSDOS_PARTITION=y
+ CONFIG_BSD_DISKLABEL=y
+ CONFIG_MINIX_SUBPARTITION=y
+ CONFIG_SOLARIS_X86_PARTITION=y
+-CONFIG_UNIXWARE_DISKLABEL=y
++# CONFIG_UNIXWARE_DISKLABEL is not set
+ CONFIG_LDM_PARTITION=y
+ # CONFIG_LDM_DEBUG is not set
+ CONFIG_SGI_PARTITION=y
 
 
