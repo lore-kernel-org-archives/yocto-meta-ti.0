@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3CCF3E006D9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3D8D5E0073F
 	for <meta-ti@yoctoproject.org>; Mon, 11 Jun 2012 14:03:16 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id AA87252AA3; Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
+	id D014E52A8F; Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120611210315.AA87252AA3@arago-project.org>
+Message-Id: <20120611210315.D014E52A8F@arago-project.org>
 Date: Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-ti33x-psp 3.2: turn on CONFIG_USB_SUSPEND to fix usb mass storage
+Subject: Koen Kooi : beaglebone-tester: bump SRCREV to fix failure reporting
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,51 +26,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 53905d1610fa91835a7f048a8647eb5c4d057ca4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=53905d1610fa91835a7f048a8647eb5c4d057ca4
+Commit: 897596f437af47cb376ddcfb39518f6cb37a7684
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=897596f437af47cb376ddcfb39518f6cb37a7684
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Thu Jun  7 17:40:45 2012 +0200
+Date:   Fri Jun  8 11:37:44 2012 +0200
 
-linux-ti33x-psp 3.2: turn on CONFIG_USB_SUSPEND to fix usb mass storage
-
-Many thanks to Arkadiusz Karas <arkkar13@googlemail.com> for figuring that out
-and sharing the info.
+beaglebone-tester: bump SRCREV to fix failure reporting
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |    2 +-
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-index f88be14..692d71a 100644
---- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-@@ -2569,7 +2569,7 @@ CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
- CONFIG_USB_DEVICEFS=y
- CONFIG_USB_DEVICE_CLASS=y
- # CONFIG_USB_DYNAMIC_MINORS is not set
--# CONFIG_USB_SUSPEND is not set
-+CONFIG_USB_SUSPEND=y
- # CONFIG_USB_OTG_WHITELIST is not set
- # CONFIG_USB_OTG_BLACKLIST_HUB is not set
- # CONFIG_USB_DWC3 is not set
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index e51de2a..3243998 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -15,7 +15,7 @@ PV = "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "3.2", "3.2.18", d)}"
+diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
+index 6bb598a..b5e3081 100644
+--- a/recipes-ti/beagleboard/beaglebone-tester.bb
++++ b/recipes-ti/beagleboard/beaglebone-tester.bb
+@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
+ # only scripts and data
+ inherit allarch
  
- BRANCH = "v3.2-staging"
- SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
--MACHINE_KERNEL_PR_append = "h+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "i+gitr${SRCREV}"
+-PR = "r14"
++PR = "r15"
  
- COMPATIBLE_MACHINE = "(ti33x)"
+ SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
+           "
+-SRCREV = "1a13257030c497920243062c65068c89840d8b6e"
++SRCREV = "3b19f1caf8c616e3f4a25abacca28b2239d3ec82"
+ 
+ S = "${WORKDIR}/git"
  
 
 
