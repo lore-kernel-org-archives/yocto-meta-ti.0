@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3CCDFE0044A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3CCF3E006D9
 	for <meta-ti@yoctoproject.org>; Mon, 11 Jun 2012 14:03:16 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7064352AA4; Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
+	id AA87252AA3; Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120611210315.7064352AA4@arago-project.org>
+Message-Id: <20120611210315.AA87252AA3@arago-project.org>
 Date: Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : beaglebone-capes: add support for weatherstation cape
+Subject: Koen Kooi : linux-ti33x-psp 3.2: turn on CONFIG_USB_SUSPEND to fix usb mass storage
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,52 +26,51 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 03092005396f548c401ebbea5bf670c31614992a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=03092005396f548c401ebbea5bf670c31614992a
+Commit: 53905d1610fa91835a7f048a8647eb5c4d057ca4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=53905d1610fa91835a7f048a8647eb5c4d057ca4
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Thu Jun  7 17:40:44 2012 +0200
+Date:   Thu Jun  7 17:40:45 2012 +0200
 
-beaglebone-capes: add support for weatherstation cape
+linux-ti33x-psp 3.2: turn on CONFIG_USB_SUSPEND to fix usb mass storage
+
+Many thanks to Arkadiusz Karas <arkkar13@googlemail.com> for figuring that out
+and sharing the info.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/beagleboard/beaglebone-capes.bb      |    2 +-
- recipes-ti/beagleboard/beaglebone-capes/cape.sh |    6 ++++++
- 2 files changed, 7 insertions(+), 1 deletions(-)
+ .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |    2 +-
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/beagleboard/beaglebone-capes.bb b/recipes-ti/beagleboard/beaglebone-capes.bb
-index 2a9f1fb..b463a89 100644
---- a/recipes-ti/beagleboard/beaglebone-capes.bb
-+++ b/recipes-ti/beagleboard/beaglebone-capes.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Userspace setup for beaglebone capes"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
+index f88be14..692d71a 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
+@@ -2569,7 +2569,7 @@ CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
+ CONFIG_USB_DEVICEFS=y
+ CONFIG_USB_DEVICE_CLASS=y
+ # CONFIG_USB_DYNAMIC_MINORS is not set
+-# CONFIG_USB_SUSPEND is not set
++CONFIG_USB_SUSPEND=y
+ # CONFIG_USB_OTG_WHITELIST is not set
+ # CONFIG_USB_OTG_BLACKLIST_HUB is not set
+ # CONFIG_USB_DWC3 is not set
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index e51de2a..3243998 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -15,7 +15,7 @@ PV = "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "3.2", "3.2.18", d)}"
  
--PR = "r2"
-+PR = "r3"
+ BRANCH = "v3.2-staging"
+ SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
+-MACHINE_KERNEL_PR_append = "h+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "i+gitr${SRCREV}"
  
- inherit allarch
+ COMPATIBLE_MACHINE = "(ti33x)"
  
-diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape.sh b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-index 61240a5..566cdf5 100755
---- a/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-+++ b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-@@ -10,6 +10,12 @@ for eeprom in /sys/bus/i2c/devices/3-005*/eeprom ; do
- 				echo "Turning on backlight for LCD4 cape"
- 				i2cset -f -y 1 0x24 0x07 0x09
- 				i2cset -f -y 1 0x24 0x08 0x60;;
-+		"BB-BONE-WTHR-01.")
-+				echo "Initializing I2C devices"
-+				echo sht21 0x40 > /sys/class/i2c-adapter/i2c-3/new_device
-+				echo bmp085 0x77 > /sys/class/i2c-adapter/i2c-3/new_device
-+				echo tsl2550 0x39 > /sys/class/i2c-adapter/i2c-3/new_device
-+				echo 1 > /sys/bus/i2c/devices/3-0039/operating_mode;;
- 		*)
- 				echo "unknown cape: $PARTNUMBER";;
- 	esac
 
 
