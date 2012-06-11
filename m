@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4C79E0044A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C60B7E006D9
 	for <meta-ti@yoctoproject.org>; Mon, 11 Jun 2012 14:03:15 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D14D2529EB; Mon, 11 Jun 2012 21:03:14 +0000 (UTC)
+	id 4C09252A92; Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120611210314.D14D2529EB@arago-project.org>
-Date: Mon, 11 Jun 2012 21:03:14 +0000 (UTC)
+Message-Id: <20120611210315.4C09252A92@arago-project.org>
+Date: Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-ti33x-psp: enable TSL2550 driver for beaglebone weatherstation cape
+Subject: Koen Kooi : beaglebone-capes: add support for 4.3" LCD cape
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,48 +26,65 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 5f7c0da7a483c59eee67cb39db231ad8486d313c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5f7c0da7a483c59eee67cb39db231ad8486d313c
+Commit: c5e5c304b86a398d65330f430330ce5f730b56c5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c5e5c304b86a398d65330f430330ce5f730b56c5
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Thu Jun  7 17:40:40 2012 +0200
+Date:   Thu Jun  7 17:40:43 2012 +0200
 
-linux-ti33x-psp: enable TSL2550 driver for beaglebone weatherstation cape
+beaglebone-capes: add support for 4.3" LCD cape
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |    2 +-
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/beagleboard/beaglebone-capes.bb         |    2 +-
+ .../beagleboard/beaglebone-capes/cape-stop.sh      |    3 +++
+ recipes-ti/beagleboard/beaglebone-capes/cape.sh    |    4 ++++
+ 3 files changed, 8 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-index c9316db..f88be14 100644
---- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-@@ -1012,7 +1012,7 @@ CONFIG_MISC_DEVICES=y
- # CONFIG_APDS9802ALS is not set
- # CONFIG_ISL29003 is not set
- # CONFIG_ISL29020 is not set
--# CONFIG_SENSORS_TSL2550 is not set
-+CONFIG_SENSORS_TSL2550=m
- # CONFIG_SENSORS_BH1780 is not set
- # CONFIG_SENSORS_BH1770 is not set
- # CONFIG_SENSORS_APDS990X is not set
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index 46a6277..e3a427b 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -15,7 +15,7 @@ PV = "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "3.2", "3.2.18", d)}"
+diff --git a/recipes-ti/beagleboard/beaglebone-capes.bb b/recipes-ti/beagleboard/beaglebone-capes.bb
+index f128924..2a9f1fb 100644
+--- a/recipes-ti/beagleboard/beaglebone-capes.bb
++++ b/recipes-ti/beagleboard/beaglebone-capes.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Userspace setup for beaglebone capes"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
  
- BRANCH = "v3.2-staging"
- SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
--MACHINE_KERNEL_PR_append = "d+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "e+gitr${SRCREV}"
+-PR = "r1"
++PR = "r2"
  
- COMPATIBLE_MACHINE = "(ti33x)"
+ inherit allarch
  
+diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh b/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh
+index a08498d..4950017 100755
+--- a/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh
++++ b/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh
+@@ -5,6 +5,9 @@ for eeprom in /sys/bus/i2c/devices/3-005*/eeprom ; do
+ 		"BB-BONE-LCD3-01.")
+ 				echo "Turning off backlight for LCD3 cape"
+ 				i2cset -f -y 1 0x24 0x07 0x00;;
++		"BB-BONE-LCD4-01.")
++				echo "Turning off backlight for LCD3 cape"
++				i2cset -f -y 1 0x24 0x07 0x00;;
+ 		*)
+ 				echo "unknown cape: $PARTNUMBER";;
+ 	esac
+diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape.sh b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
+index 69accff..61240a5 100755
+--- a/recipes-ti/beagleboard/beaglebone-capes/cape.sh
++++ b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
+@@ -6,6 +6,10 @@ for eeprom in /sys/bus/i2c/devices/3-005*/eeprom ; do
+ 				echo "Turning on backlight for LCD3 cape"
+ 				i2cset -f -y 1 0x24 0x07 0x09
+ 				i2cset -f -y 1 0x24 0x08 0x60;;
++		"BB-BONE-LCD4-01.")
++				echo "Turning on backlight for LCD4 cape"
++				i2cset -f -y 1 0x24 0x07 0x09
++				i2cset -f -y 1 0x24 0x08 0x60;;
+ 		*)
+ 				echo "unknown cape: $PARTNUMBER";;
+ 	esac
 
 
