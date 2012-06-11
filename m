@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7441E0073F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C88A2E00746
 	for <meta-ti@yoctoproject.org>; Mon, 11 Jun 2012 14:03:15 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1766F52A90; Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
+	id 79950529A7; Mon, 11 Jun 2012 21:03:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120611210315.1766F52A90@arago-project.org>
-Date: Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
+Message-Id: <20120611210314.79950529A7@arago-project.org>
+Date: Mon, 11 Jun 2012 21:03:14 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-ti33x-psp 3.2: backport PM and USB fixes from PSP
+Subject: Koen Kooi : linux-ti33x-psp 3.2: switch ADC to 16x averaging, disable 275MHz, add 4.3" LCD support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,42 +26,31 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 536748db584b77158c166c068ffe8960b0847ea5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=536748db584b77158c166c068ffe8960b0847ea5
+Commit: 3dde332e522f2c38e25e11d3bd484410a002c55e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3dde332e522f2c38e25e11d3bd484410a002c55e
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Thu Jun  7 17:40:42 2012 +0200
+Date:   Thu Jun  7 17:40:39 2012 +0200
 
-linux-ti33x-psp 3.2: backport PM and USB fixes from PSP
+linux-ti33x-psp 3.2: switch ADC to 16x averaging, disable 275MHz, add 4.3" LCD support
 
-The complete patchset will get rebased to the tip of the PSP tree soon, but the
-conflicts take a lot of time to resolve.
+* The switch to 16x averaging is done to combat the excessive noise in the
+  signal. It's still *very* bad, but the TS cursor jitter has decreased a bit
+* The OPP for 275MHz was disabled due to all the errata. Both the EMIF and MUSB
+  don't seem to like that OPP.
+* The resistive touch version of the 4.3" LCD cape is supported in 24 bit mode.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...-AM33XX-Add-missing-EMIF-register-offsets.patch |   61 +++
- ...33XX-PM-Get-rid-of-hardcoded-resume-addre.patch |   99 +++++
- ...33XX-PM-Skip-DDR-PHY-reconfiguration-in-r.patch |  397 ++++++++++++++++++
- ...AM33XX-PM-Save-and-restore-EMIF-registers.patch |  241 +++++++++++
- ...33XX-PM-Wait-correctly-for-the-PLLs-to-re.patch |   37 ++
- ...33XX-PM-Restore-the-PLLs-to-pre-suspend-s.patch |  139 +++++++
- ...-AM33XX-Update-the-sleep-code-to-handle-D.patch |  150 +++++++
- ...008-usb-musb-update-babble-workaround-fix.patch |  168 ++++++++
- ...81xx-print-the-usbss-revision-id-during-i.patch |   29 ++
- ...ppi41-enable-txfifo-empty-interrupt-logic.patch |  425 ++++++++++++++++++++
- ...ost-Flush-txfifo-only-if-TxPktRdy-bit-set.patch |   57 +++
- ...pi41-use-dsb-to-make-sure-PDs-are-updated.patch |   43 ++
- ...3-usb-musb-cppi41-fix-zero-byte-OUT-issue.patch |   46 +++
- ...-usb-musb-host-fix-for-urb-error-handling.patch |   66 +++
- ...pi41-txdma-flushfifo-fixes-during-channel.patch |   50 +++
- ...6-usb-musb-cppi41-tx-dma-completion-fixes.patch |   41 ++
- ...st-Flush-RxFIFO-only-when-RxPktRdy-is-set.patch |   30 ++
- ...-usb-musb-ti81xx-fix-role-switching-issue.patch |   65 +++
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |   20 +-
- 19 files changed, 2163 insertions(+), 1 deletions(-)
+ .../0065-ti_tscadc-switch-to-16x-averaging.patch   |   53 +++++++++++
+ ...disable-OPP-for-275MHz-due-to-silicon-err.patch |   28 ++++++
+ ...o-da8xx-fb-Add-Newhaven-LCD-Panel-details.patch |   45 +++++++++
+ ...add-support-for-the-4.3-lcd-cape-with-res.patch |   94 ++++++++++++++++++++
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    6 +-
+ 5 files changed, 225 insertions(+), 1 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=536748db584b77158c166c068ffe8960b0847ea5
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=3dde332e522f2c38e25e11d3bd484410a002c55e
 
