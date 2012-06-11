@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C60B7E006D9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7441E0073F
 	for <meta-ti@yoctoproject.org>; Mon, 11 Jun 2012 14:03:15 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4C09252A92; Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
+	id 1766F52A90; Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120611210315.4C09252A92@arago-project.org>
+Message-Id: <20120611210315.1766F52A90@arago-project.org>
 Date: Mon, 11 Jun 2012 21:03:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : beaglebone-capes: add support for 4.3" LCD cape
+Subject: Koen Kooi : linux-ti33x-psp 3.2: backport PM and USB fixes from PSP
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,70 +21,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jun 2012 21:03:15 -0000
+X-List-Received-Date: Mon, 11 Jun 2012 21:03:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: c5e5c304b86a398d65330f430330ce5f730b56c5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c5e5c304b86a398d65330f430330ce5f730b56c5
+Commit: 536748db584b77158c166c068ffe8960b0847ea5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=536748db584b77158c166c068ffe8960b0847ea5
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Thu Jun  7 17:40:43 2012 +0200
+Date:   Thu Jun  7 17:40:42 2012 +0200
 
-beaglebone-capes: add support for 4.3" LCD cape
+linux-ti33x-psp 3.2: backport PM and USB fixes from PSP
+
+The complete patchset will get rebased to the tip of the PSP tree soon, but the
+conflicts take a lot of time to resolve.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/beagleboard/beaglebone-capes.bb         |    2 +-
- .../beagleboard/beaglebone-capes/cape-stop.sh      |    3 +++
- recipes-ti/beagleboard/beaglebone-capes/cape.sh    |    4 ++++
- 3 files changed, 8 insertions(+), 1 deletions(-)
+ ...-AM33XX-Add-missing-EMIF-register-offsets.patch |   61 +++
+ ...33XX-PM-Get-rid-of-hardcoded-resume-addre.patch |   99 +++++
+ ...33XX-PM-Skip-DDR-PHY-reconfiguration-in-r.patch |  397 ++++++++++++++++++
+ ...AM33XX-PM-Save-and-restore-EMIF-registers.patch |  241 +++++++++++
+ ...33XX-PM-Wait-correctly-for-the-PLLs-to-re.patch |   37 ++
+ ...33XX-PM-Restore-the-PLLs-to-pre-suspend-s.patch |  139 +++++++
+ ...-AM33XX-Update-the-sleep-code-to-handle-D.patch |  150 +++++++
+ ...008-usb-musb-update-babble-workaround-fix.patch |  168 ++++++++
+ ...81xx-print-the-usbss-revision-id-during-i.patch |   29 ++
+ ...ppi41-enable-txfifo-empty-interrupt-logic.patch |  425 ++++++++++++++++++++
+ ...ost-Flush-txfifo-only-if-TxPktRdy-bit-set.patch |   57 +++
+ ...pi41-use-dsb-to-make-sure-PDs-are-updated.patch |   43 ++
+ ...3-usb-musb-cppi41-fix-zero-byte-OUT-issue.patch |   46 +++
+ ...-usb-musb-host-fix-for-urb-error-handling.patch |   66 +++
+ ...pi41-txdma-flushfifo-fixes-during-channel.patch |   50 +++
+ ...6-usb-musb-cppi41-tx-dma-completion-fixes.patch |   41 ++
+ ...st-Flush-RxFIFO-only-when-RxPktRdy-is-set.patch |   30 ++
+ ...-usb-musb-ti81xx-fix-role-switching-issue.patch |   65 +++
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |   20 +-
+ 19 files changed, 2163 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-ti/beagleboard/beaglebone-capes.bb b/recipes-ti/beagleboard/beaglebone-capes.bb
-index f128924..2a9f1fb 100644
---- a/recipes-ti/beagleboard/beaglebone-capes.bb
-+++ b/recipes-ti/beagleboard/beaglebone-capes.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Userspace setup for beaglebone capes"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
- 
--PR = "r1"
-+PR = "r2"
- 
- inherit allarch
- 
-diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh b/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh
-index a08498d..4950017 100755
---- a/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh
-+++ b/recipes-ti/beagleboard/beaglebone-capes/cape-stop.sh
-@@ -5,6 +5,9 @@ for eeprom in /sys/bus/i2c/devices/3-005*/eeprom ; do
- 		"BB-BONE-LCD3-01.")
- 				echo "Turning off backlight for LCD3 cape"
- 				i2cset -f -y 1 0x24 0x07 0x00;;
-+		"BB-BONE-LCD4-01.")
-+				echo "Turning off backlight for LCD3 cape"
-+				i2cset -f -y 1 0x24 0x07 0x00;;
- 		*)
- 				echo "unknown cape: $PARTNUMBER";;
- 	esac
-diff --git a/recipes-ti/beagleboard/beaglebone-capes/cape.sh b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-index 69accff..61240a5 100755
---- a/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-+++ b/recipes-ti/beagleboard/beaglebone-capes/cape.sh
-@@ -6,6 +6,10 @@ for eeprom in /sys/bus/i2c/devices/3-005*/eeprom ; do
- 				echo "Turning on backlight for LCD3 cape"
- 				i2cset -f -y 1 0x24 0x07 0x09
- 				i2cset -f -y 1 0x24 0x08 0x60;;
-+		"BB-BONE-LCD4-01.")
-+				echo "Turning on backlight for LCD4 cape"
-+				i2cset -f -y 1 0x24 0x07 0x09
-+				i2cset -f -y 1 0x24 0x08 0x60;;
- 		*)
- 				echo "unknown cape: $PARTNUMBER";;
- 	esac
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=536748db584b77158c166c068ffe8960b0847ea5
 
