@@ -1,30 +1,42 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C3A4E006D9
-	for <meta-ti@yoctoproject.org>; Mon, 11 Jun 2012 20:08:52 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q5C38ouZ005205;
-	Mon, 11 Jun 2012 22:08:50 -0500
-Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q5C38oR0020050;
-	Mon, 11 Jun 2012 22:08:50 -0500
-Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
-	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
-	14.01.0323.003; Mon, 11 Jun 2012 22:08:50 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Thread-Topic: [meta-ti] RFC: creating "extras" layer
-Thread-Index: AQHNSDkvaqxXeq/eIkOPJFR3sdD5UZb2AO4P
-Date: Tue, 12 Jun 2012 03:08:49 +0000
-Message-ID: <02A43FA9-CB23-403B-A5FB-6602C56C6BC5@ti.com>
-References: <20120612011706.GD30300@denix.org>
-In-Reply-To: <20120612011706.GD30300@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+Return-Path: <sledz@dresearch-fe.de>
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 774A1E0044A
+	for <meta-ti@yoctoproject.org>; Mon, 11 Jun 2012 22:53:42 -0700 (PDT)
+Received: by wibhm6 with SMTP id hm6so3084727wib.11
+	for <meta-ti@yoctoproject.org>; Mon, 11 Jun 2012 22:53:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding:x-gm-message-state;
+	bh=RdthxXpCc7ExbHtph82egmjP6euOpNpL3x8WhA9Oqfg=;
+	b=A9CkHQu5IYKhDrIEJaowX9AVgJCdppy65Ycp6bUaBL3L7hOpFJeI5eVWb7Ktkt7bfT
+	7Frwef59Y66/mwSCymmQsvVOvSAn3Pqb+eccNIU8JPjg6umObQQqJiBm49cAhnIL0ktz
+	aOHXsWHj/gdeu/ncRuW629DZ85DSGGKQJxd8L/l1RzEmMLv1ZPe250IfrAM80VrdONhM
+	p+XUyf6zlkPcEtgvfjIWX2wA5BzNVcsANXEgdcnY8S2kilfAzZcLA8s9Yaq4/I199kGD
+	FcHAo0HlB53vZAoBkrqPA76ecWz9N/HA3Zy0LunmYw9sDUxNjd0m77m4Q4Jz6rXLmB34
+	N2hQ==
+Received: by 10.216.145.13 with SMTP id o13mr7759363wej.95.1339480421187;
+	Mon, 11 Jun 2012 22:53:41 -0700 (PDT)
+Received: from fensuse.internal.dresearch-fe.de (zk223.dresearch-fe.de.
+	[217.92.177.116])
+	by mx.google.com with ESMTPS id eb8sm3444482wib.11.2012.06.11.22.53.39
+	(version=SSLv3 cipher=OTHER); Mon, 11 Jun 2012 22:53:39 -0700 (PDT)
+Message-ID: <4FD6D961.6030905@dresearch-fe.de>
+Date: Tue, 12 Jun 2012 07:53:37 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:12.0) Gecko/20120427 Thunderbird/12.0.1
 MIME-Version: 1.0
+To: Denys Dmytriyenko <denis@denix.org>
+References: <4FD5FD69.8030604@dresearch-fe.de>
+	<20120611212503.GB30300@denix.org>
+In-Reply-To: <20120611212503.GB30300@denix.org>
+X-Enigmail-Version: 1.4.2
+X-Gm-Message-State: ALoCoQmwtI2dXlhPYaOQ1tYekVL3zQAKF4B49IsIjY0XEpIQL9JJ2nBka14JIvBtLCABhytEkAvp
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: RFC: creating "extras" layer
+Subject: Re: Tracking of Texas Instruments DM81xx related bugs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,51 +48,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2012 03:08:52 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 12 Jun 2012 05:53:42 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Sounds like a good plan
+Hi Denys!
 
-Sincerely,
-Chase Maupin
-On Jun 11, 2012, at 3:17 PM, "Denys Dmytriyenko" <denis@denix.org> wrote:
+On 11.06.2012 23:25, Denys Dmytriyenko wrote:
+> On Mon, Jun 11, 2012 at 04:15:05PM +0200, Steffen Sledz wrote:
+>> Because Texas Instruments is not able or willing to provide a useful issue 
+>> tracker (not even for commercial customers like our company) we decided to 
+> 
+> Steffen,
+> 
+> That is because meta-ti is not a Customer Support channel. If you, as a 
+> commercial customer, have issues with TI products, please use one of the many 
+> means of contacting the official TI Customer Support:
+> http://www.ti.com/general/docs/dsnsuprt.tsp
 
-> Koen, et al,
->=20
-> This is a RFC for creating an additional "extras" layer inside meta-ti t=
-o=20
-> contain pieces and components that are either slightly outdated (i.e. ol=
-d=20
-> Davinci boards, hawk/crane etc.) or have best-effort status (TI81x, anyt=
-hing=20
-> DSP-related, etc.) or require non-standard dependencies besides OE-Core=
-=20
-> (systemd?) with the possibility of moving them back to "main" meta-ti in=
- the=20
-> future, once they become "first-class citizens", i.e. gain current and=
-=20
-> continuing support.
->=20
-> The initial split (which is still "work in progress"), following the abo=
-ve=20
-> description (except the systemd for now) can be checked at:
->=20
-> http://arago-project.org/git/?p=3Dmeta-ti.git;a=3Dshortlog;h=3Drefs/head=
-s/split
->=20
-> I do understand this is, like any other restructuring, an invasive chang=
-e, but=20
-> is required to properly position "meta-ti" and the support behind it. I'=
-m open=20
-> to a discussion and any constructive criticism - feel free to comment. T=
-hanks.
->=20
-> --=20
-> Denys
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+We tried all these other channels for half a year. We reported problems via the TI e2e forum, via our TI FAE, via our distributor. We met the TI guys at the Embedded World in Nürnberg (hi Roger!).
+
+Without any success! All we have is a switch device we sent to TI UK to reproduce a bug, which they forwarded somewhere to India, and we've never seen it again. :(
+
+This public issue tracker is our last hope to get help from TI and the community.
+
+> On the other hand, meta-ti is a community project to integrate existing 
+> components for TI "Embedded Processor" platforms into a BSP layer for 
+> OpenEmbedded-Core and Yocto Projects.
+
+Regards,
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
