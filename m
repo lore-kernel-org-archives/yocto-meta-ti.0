@@ -1,29 +1,24 @@
-Return-Path: <wmills@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DD777E0140C
-	for <meta-ti@yoctoproject.org>; Tue, 12 Jun 2012 07:22:37 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q5CEMZI9024824;
-	Tue, 12 Jun 2012 09:22:35 -0500
-Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q5CEMZjM011563;
-	Tue, 12 Jun 2012 09:22:35 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
-	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
-	Tue, 12 Jun 2012 09:22:35 -0500
-Received: from gtwmills.gt.design.ti.com (gtwmills.gt.design.ti.com
-	[158.218.102.52])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	q5CEMZIg015960;	Tue, 12 Jun 2012 09:22:35 -0500
-Message-ID: <4FD750AB.9040700@ti.com>
-Date: Tue, 12 Jun 2012 10:22:35 -0400
-From: William Mills <wmills@ti.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.27) Gecko/20120216 Thunderbird/3.1.19
-MIME-Version: 1.0
+Return-Path: <denis@denix.org>
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 20A83E0044A
+	for <meta-ti@yoctoproject.org>; Tue, 12 Jun 2012 09:47:13 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.48.117.33])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M5I00M68JY6BS27@vms173003.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 12 Jun 2012 11:46:56 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5CA5E200AC; Tue,
+	12 Jun 2012 12:46:53 -0400 (EDT)
+Date: Tue, 12 Jun 2012 12:46:53 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: Koen Kooi <koen@dominion.thruhere.net>
+Message-id: <20120612164653.GA32573@denix.org>
 References: <20120612011706.GD30300@denix.org>
 	<DD1A526D-B7EE-45D1-9DED-C2FB40897FBA@dominion.thruhere.net>
-In-Reply-To: <DD1A526D-B7EE-45D1-9DED-C2FB40897FBA@dominion.thruhere.net>
+MIME-version: 1.0
+In-reply-to: <DD1A526D-B7EE-45D1-9DED-C2FB40897FBA@dominion.thruhere.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
 Subject: Re: RFC: creating "extras" layer
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,58 +32,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2012 14:22:38 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Jun 2012 16:47:14 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 06/12/2012 09:44 AM, Koen Kooi wrote:
->
+On Tue, Jun 12, 2012 at 08:44:59AM -0500, Koen Kooi wrote:
+> 
 > Op 11 jun. 2012, om 20:17 heeft Denys Dmytriyenko het volgende geschreven:
->
->> Koen, et al,
->>
->> This is a RFC for creating an additional "extras" layer inside meta-ti to
->> contain pieces and components that are either slightly outdated (i.e. old
->> Davinci boards, hawk/crane etc.) or have best-effort status (TI81x, anything
->> DSP-related, etc.) or require non-standard dependencies besides OE-Core
->> (systemd?) with the possibility of moving them back to "main" meta-ti in the
->> future, once they become "first-class citizens", i.e. gain current and
->> continuing support.
->
+> 
+> > Koen, et al,
+> > 
+> > This is a RFC for creating an additional "extras" layer inside meta-ti to 
+> > contain pieces and components that are either slightly outdated (i.e. old 
+> > Davinci boards, hawk/crane etc.) or have best-effort status (TI81x, anything 
+> > DSP-related, etc.) or require non-standard dependencies besides OE-Core 
+> > (systemd?) with the possibility of moving them back to "main" meta-ti in the 
+> > future, once they become "first-class citizens", i.e. gain current and 
+> > continuing support.
+> 
+> If it's going to be split this way I'd like to move all beagleboard.org 
+> related things out of meta-ti and into it's own seperate repo. If the beagle 
+> recipes are demoted to 2nd class citizens we have no incentive anymore to be 
+> in meta-ti.
 
-> If it's going to be split this way I'd like to move all beagleboard.org related things out of meta-ti and into it's own seperate repo.
+Disclaimer: no beagles were harmed in the making of this film...
 
-We should do whatever makes the most sense and serves all the user's 
-use-cases.  Angstrom beagleboard is an important use case but so is 
-oe-core only on beagleboard and AM335x etc.  We also need people to 
-understand what things are being built and tested every night vs 
-something that was pretty much working when it was tried 6 months ago.
+Seriously though, none of the beagle recipes (requiring systemd or not) were 
+moved yet for several reasons:
 
-> If the beagle recipes are demoted to 2nd class citizens we have no incentive anymore to be in meta-ti.
+1. As done with some other recipes, it's possible to have systemd services w/o 
+inheriting systemd.bbclass, i.e. do it manually - I was planning on looking 
+into this option in the near future.
 
-I thought it was just the older beagleboard stuff that was moving?  Or 
-are you complaining that not every feature of your current builds are 
-available using just oe-core?
+2. There was a recent discussion about systemd work being started in OE-Core 
+and it was confirmed on today's call that the new Intel team in Romania is 
+gearing up to integrate systemd into OE-Core in the very near future.
 
-It is true that we are trying to do two things here:
-1) separate things that require layers beyond oe-core
-2) separate things that are not tested and supported to the same level
+3. And, of course, a separate systemd layer in meta-oe might help, if done 
+properly and allowing easily target both systemd and sysvinit from the same 
+recipe...
 
-It was your assertion that we did not want too many layers. 
-Unfortunately that means things that require layers beyond oe-core need 
-to be in the second layer.  Sorry if you see that as being a second 
-class citizen.
+Anyway, it is not my intention to demote beagle support to 2nd class citizens. 
+After all, beagles are the most supported platforms in meta-ti right now and a 
+very good example for other platforms to follow...
 
-There are large parts of beagleboard and beaglebone that do work with 
-only oe-core and are built and tested regularly.  Finding the right 
-place for these pieces should, I think, be the focus of the discussion.
+I hope you are not just looking for any excuse to move out of meta-ti - we 
+just need to work on a better positioning of meta-ti...
 
-As I have said before, If you want a seperate layer/repo to support the 
-specifics of Angstrom beagleboard/beaglebone _I_ think that would be fine.
-
-
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+-- 
+Denys
 
