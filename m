@@ -1,26 +1,22 @@
 Return-Path: <denis@denix.org>
-Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
-	[206.46.173.11])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BB4CCE006D9
-	for <meta-ti@yoctoproject.org>; Mon, 11 Jun 2012 15:28:34 -0700 (PDT)
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 797FEE0044A
+	for <meta-ti@yoctoproject.org>; Mon, 11 Jun 2012 18:17:44 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173011.mailsrvcs.net
+	by vms173003.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M5H0090S53BPB92@vms173011.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 11 Jun 2012 17:28:23 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id F41E52016B; Mon,
-	11 Jun 2012 18:28:22 -0400 (EDT)
-Date: Mon, 11 Jun 2012 18:28:22 -0400
+	2009)) with ESMTPA id <0M5H00MLCCWKBSU2@vms173003.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 11 Jun 2012 20:17:23 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id ED8122016B; Mon,
+	11 Jun 2012 21:17:06 -0400 (EDT)
+Date: Mon, 11 Jun 2012 21:17:06 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-To: Tomas Frydrych <tf+lists.yocto@r-finger.com>
-Message-id: <20120611222822.GC30300@denix.org>
-References: <4FD5FD69.8030604@dresearch-fe.de>
-	<20120611212503.GB30300@denix.org> <4FD668F0.8060208@r-finger.com>
+To: meta-ti@yoctoproject.org
+Message-id: <20120612011706.GD30300@denix.org>
 MIME-version: 1.0
-In-reply-to: <4FD668F0.8060208@r-finger.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Tracking of Texas Instruments DM81xx related bugs
+Subject: RFC: creating "extras" layer
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,21 +28,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jun 2012 22:28:34 -0000
+X-List-Received-Date: Tue, 12 Jun 2012 01:17:44 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Mon, Jun 11, 2012 at 10:53:52PM +0100, Tomas Frydrych wrote:
-> 
-> Hi,
-> 
-> On 11/06/12 22:25, Denys Dmytriyenko wrote:
-> > http://www.ti.com/general/docs/dsnsuprt.tsp
-> 
-> There is no mention of an issue tracker at that page though?
+Koen, et al,
 
-I don't know. I would imagine there is an issue tracker inside the Customer 
-Support department to track customer issues.
+This is a RFC for creating an additional "extras" layer inside meta-ti to 
+contain pieces and components that are either slightly outdated (i.e. old 
+Davinci boards, hawk/crane etc.) or have best-effort status (TI81x, anything 
+DSP-related, etc.) or require non-standard dependencies besides OE-Core 
+(systemd?) with the possibility of moving them back to "main" meta-ti in the 
+future, once they become "first-class citizens", i.e. gain current and 
+continuing support.
+
+The initial split (which is still "work in progress"), following the above 
+description (except the systemd for now) can be checked at:
+
+http://arago-project.org/git/?p=meta-ti.git;a=shortlog;h=refs/heads/split
+
+I do understand this is, like any other restructuring, an invasive change, but 
+is required to properly position "meta-ti" and the support behind it. I'm open 
+to a discussion and any constructive criticism - feel free to comment. Thanks.
 
 -- 
 Denys
