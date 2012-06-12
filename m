@@ -1,38 +1,29 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
-	[209.85.160.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 09BFBE0140C
-	for <meta-ti@yoctoproject.org>; Tue, 12 Jun 2012 06:44:59 -0700 (PDT)
-Received: by pbbrq8 with SMTP id rq8so934427pbb.35
-	for <meta-ti@yoctoproject.org>; Tue, 12 Jun 2012 06:44:59 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=RSVIW+E+CLClZmJh0eUtVDl+TikbKficdHxIJXb90M0=;
-	b=iH7HNTGtOAZmBWsDIsf4vHjdYGs4Vtr92YXtVHOEqkB+ezAwwgNxVrjjRyNaKOIm9N
-	xn/fDv3NFRFkLDE3STVEK0pOG7xUnVKJyf2tDLjLBH99+qqhX1yy1zPAP+YzxwoDfMnf
-	KWgFIkIiSvoKfXOx44R9x9LPG4rCi2qg7t2FUlGqGSPHDjbnGuJAHCZ3MEKPlxkND7tn
-	4NDF5u5zAw2OokahLcShORXxyicXMC5Pg+weUinyfGmXTxVUcnpuZadotvwNifNNBgPH
-	pEmcDvblKIPomEg+GtCvk6KyzDhSlEge048eO1PBDbToxUZis1CpduclXn8yaCQ7sIhN
-	STnA==
-Received: by 10.68.213.234 with SMTP id nv10mr39037383pbc.56.1339508699648;
-	Tue, 12 Jun 2012 06:44:59 -0700 (PDT)
-Received: from [192.168.129.61] (173-12-172-217-oregon.hfc.comcastbusiness.net.
-	[173.12.172.217])
-	by mx.google.com with ESMTPS id oo6sm2087781pbc.22.2012.06.12.06.44.58
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 12 Jun 2012 06:44:58 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1278)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <20120612011706.GD30300@denix.org>
-Date: Tue, 12 Jun 2012 08:44:59 -0500
-Message-Id: <DD1A526D-B7EE-45D1-9DED-C2FB40897FBA@dominion.thruhere.net>
+Return-Path: <wmills@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DD777E0140C
+	for <meta-ti@yoctoproject.org>; Tue, 12 Jun 2012 07:22:37 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q5CEMZI9024824;
+	Tue, 12 Jun 2012 09:22:35 -0500
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q5CEMZjM011563;
+	Tue, 12 Jun 2012 09:22:35 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Tue, 12 Jun 2012 09:22:35 -0500
+Received: from gtwmills.gt.design.ti.com (gtwmills.gt.design.ti.com
+	[158.218.102.52])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
+	q5CEMZIg015960;	Tue, 12 Jun 2012 09:22:35 -0500
+Message-ID: <4FD750AB.9040700@ti.com>
+Date: Tue, 12 Jun 2012 10:22:35 -0400
+From: William Mills <wmills@ti.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.27) Gecko/20120216 Thunderbird/3.1.19
+MIME-Version: 1.0
+To: Koen Kooi <koen@dominion.thruhere.net>
 References: <20120612011706.GD30300@denix.org>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Mailer: Apple Mail (2.1278)
-X-Gm-Message-State: ALoCoQld9NMCD3TFsdXQ/ZDmD06GOfyNkFFBeZQvwrpxLCqcePg0cCk30f8dSZuANd9S+seDQDJg
+	<DD1A526D-B7EE-45D1-9DED-C2FB40897FBA@dominion.thruhere.net>
+In-Reply-To: <DD1A526D-B7EE-45D1-9DED-C2FB40897FBA@dominion.thruhere.net>
 Cc: meta-ti@yoctoproject.org
 Subject: Re: RFC: creating "extras" layer
 X-BeenThere: meta-ti@yoctoproject.org
@@ -46,32 +37,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2012 13:45:00 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 12 Jun 2012 14:22:38 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
+
+On 06/12/2012 09:44 AM, Koen Kooi wrote:
+>
+> Op 11 jun. 2012, om 20:17 heeft Denys Dmytriyenko het volgende geschreven:
+>
+>> Koen, et al,
+>>
+>> This is a RFC for creating an additional "extras" layer inside meta-ti to
+>> contain pieces and components that are either slightly outdated (i.e. old
+>> Davinci boards, hawk/crane etc.) or have best-effort status (TI81x, anything
+>> DSP-related, etc.) or require non-standard dependencies besides OE-Core
+>> (systemd?) with the possibility of moving them back to "main" meta-ti in the
+>> future, once they become "first-class citizens", i.e. gain current and
+>> continuing support.
+>
+
+> If it's going to be split this way I'd like to move all beagleboard.org related things out of meta-ti and into it's own seperate repo.
+
+We should do whatever makes the most sense and serves all the user's 
+use-cases.  Angstrom beagleboard is an important use case but so is 
+oe-core only on beagleboard and AM335x etc.  We also need people to 
+understand what things are being built and tested every night vs 
+something that was pretty much working when it was tried 6 months ago.
+
+> If the beagle recipes are demoted to 2nd class citizens we have no incentive anymore to be in meta-ti.
+
+I thought it was just the older beagleboard stuff that was moving?  Or 
+are you complaining that not every feature of your current builds are 
+available using just oe-core?
+
+It is true that we are trying to do two things here:
+1) separate things that require layers beyond oe-core
+2) separate things that are not tested and supported to the same level
+
+It was your assertion that we did not want too many layers. 
+Unfortunately that means things that require layers beyond oe-core need 
+to be in the second layer.  Sorry if you see that as being a second 
+class citizen.
+
+There are large parts of beagleboard and beaglebone that do work with 
+only oe-core and are built and tested regularly.  Finding the right 
+place for these pieces should, I think, be the focus of the discussion.
+
+As I have said before, If you want a seperate layer/repo to support the 
+specifics of Angstrom beagleboard/beaglebone _I_ think that would be fine.
 
 
-Op 11 jun. 2012, om 20:17 heeft Denys Dmytriyenko het volgende =
-geschreven:
-
-> Koen, et al,
->=20
-> This is a RFC for creating an additional "extras" layer inside meta-ti =
-to=20
-> contain pieces and components that are either slightly outdated (i.e. =
-old=20
-> Davinci boards, hawk/crane etc.) or have best-effort status (TI81x, =
-anything=20
-> DSP-related, etc.) or require non-standard dependencies besides =
-OE-Core=20
-> (systemd?) with the possibility of moving them back to "main" meta-ti =
-in the=20
-> future, once they become "first-class citizens", i.e. gain current and=20=
-
-> continuing support.
-
-If it's going to be split this way I'd like to move all beagleboard.org =
-related things out of meta-ti and into it's own seperate repo. If the =
-beagle recipes are demoted to 2nd class citizens we have no incentive =
-anymore to be in meta-ti.=
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
