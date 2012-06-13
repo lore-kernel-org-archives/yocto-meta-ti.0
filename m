@@ -1,25 +1,31 @@
-Return-Path: <denis@denix.org>
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A9FEE006D9
-	for <meta-ti@yoctoproject.org>; Tue, 12 Jun 2012 10:58:31 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M5I006MAN93H533@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 12 Jun 2012 12:58:16 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 41A0C200AC; Tue,
-	12 Jun 2012 13:58:14 -0400 (EDT)
-Date: Tue, 12 Jun 2012 13:58:14 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: William Mills <wmills@ti.com>
-Message-id: <20120612175814.GC32573@denix.org>
-References: <20120612011706.GD30300@denix.org> <4FD73FC9.7010002@ti.com>
-MIME-version: 1.0
-In-reply-to: <4FD73FC9.7010002@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: RFC: creating "extras" layer
+Return-Path: <dasty82@gmail.com>
+Received: from mail-ob0-f176.google.com (mail-ob0-f176.google.com
+	[209.85.214.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B95A1E01423
+	for <meta-ti@yoctoproject.org>; Wed, 13 Jun 2012 01:48:43 -0700 (PDT)
+Received: by obbef5 with SMTP id ef5so697022obb.35
+	for <meta-ti@yoctoproject.org>; Wed, 13 Jun 2012 01:48:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=I17MFcmRUCegg4FKaFhgKKqVpJ8p3XxFTjugeSxYh64=;
+	b=z45NBW8bePxGRkYcH09raWWvK5pHD0MGjto3taHYRE9DHW6Fo340+bS676MTaTHx9S
+	Bt81B0FLlNq/3e7m7wsfvt2J6UxQGz74PJGxbo4crpCoy0cjadlGTpJxFWy5bObMNIFU
+	JlFxwKj7Cc9YA0ziowIvNHoHCNMAQtVrTQhCjlaIIHd1TOkwdjecAWFwm3kMTTgObaQC
+	DnQ7Fm+01C1CkSN59Y+7yBFMAQLcdJL0rL68Red8RieoHb3wdHaPxdedVMW8s1RnbK70
+	hc4NTF6SLq5fUDUXWJENmo0zuObFQtXIc79r+pIVBcUKbpdpBPpCrNIN2qrVy2zqRV9Z
+	qpVw==
+MIME-Version: 1.0
+Received: by 10.182.152.73 with SMTP id uw9mr23871347obb.0.1339577323018; Wed,
+	13 Jun 2012 01:48:43 -0700 (PDT)
+Sender: dasty82@gmail.com
+Received: by 10.76.1.73 with HTTP; Wed, 13 Jun 2012 01:48:42 -0700 (PDT)
+Date: Wed, 13 Jun 2012 10:48:42 +0200
+X-Google-Sender-Auth: Kgxp_eir-pQSlT5z26toVHUqzPo
+Message-ID: <CAOpW-VBsoZ1O0qxDtd=sGAmFC0KZzi4FQhzpXvQOK7ru70_UzA@mail.gmail.com>
+From: Radek Dostal <rd@radekdostal.com>
+To: meta-ti@yoctoproject.org
+Subject: BeagleBone and suspend to RAM
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,28 +37,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2012 17:58:32 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 13 Jun 2012 08:48:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Jun 12, 2012 at 09:10:33AM -0400, William Mills wrote:
-> On 06/11/2012 09:17 PM, Denys Dmytriyenko wrote:
-> >The initial split (which is still "work in progress"), following the above
-> >description (except the systemd for now) can be checked at:
-> >
-> >http://arago-project.org/git/?p=meta-ti.git;a=shortlog;h=refs/heads/split
-> 
-> I'm glad to see this work going.
-> 
-> I was surprised to see that the extra layer was embedded into the
-> existing one.  Is that right?
-> 
-> When we talked before we spoke of two layers at the top level.
+Hi Everybody,
 
-It should work fine. Making both of them at the top level kind of implies you 
-can use one or another. Since extras is always dependent on the main layer, it 
-makes sense to embed it in. Plus this way it's less namespace polluting...
+First of all thank you very much for recent patches, which fix the
+problems with suspend to RAM on beaglebone!
 
--- 
-Denys
+When using rev897596 we managed to get beaglebone to sleep, but it
+still did not wake up. In order to be able to wake it up, we had to disable
+CONFIG_THUMB2_KERNEL.
+
+Anybody has an idea what can be causing this problem? Does anybody here
+experience the same problem? Does wakeup from suspend to RAM work for
+anybody with THUMB2 enabled?
+
+We have acceptable workaround by disabling THUMB2, but knowing the
+source of the problem would be great.
+
+Thanks,
+Radek
 
