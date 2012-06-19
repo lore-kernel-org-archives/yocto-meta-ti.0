@@ -1,34 +1,35 @@
 Return-Path: <fromm@dresearch-fe.de>
-Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
-	[209.85.214.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EAA2BE01304
-	for <meta-ti@yoctoproject.org>; Tue, 19 Jun 2012 06:31:27 -0700 (PDT)
-Received: by bkcjf20 with SMTP id jf20so6636503bkc.35
-	for <meta-ti@yoctoproject.org>; Tue, 19 Jun 2012 06:31:26 -0700 (PDT)
+Received: from mail-lb0-f176.google.com (mail-lb0-f176.google.com
+	[209.85.217.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37D3CE01304
+	for <meta-ti@yoctoproject.org>; Tue, 19 Jun 2012 07:17:37 -0700 (PDT)
+Received: by lboj14 with SMTP id j14so7147380lbo.35
+	for <meta-ti@yoctoproject.org>; Tue, 19 Jun 2012 07:17:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:cc:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=VO/rLw4FIfziNGjXvd/W/vLNp6WgsL76XsKzoI6lPkc=;
-	b=W68i8quR/l37fOrk9WnN5iB87l+mrt06gE5GZV6t5cLFrCCl6GzuyHKqDYF+SEQFGB
-	4Su6RsqrllgDHWIEDoglE2JCEszLEued5anh/5TMi3tCtDFxQuqkrfNRdiFS56OTdlrz
-	NSOliFcPOM1nDlp2/dOcJErC+xtW53wYX27ZJ3ei+pbcYIovsd3fweAeLAusxLw016E6
-	ULFncQ/bW+coakNLja6PqHK6XwH3Dvh8gT/bOoGdTgn0wVWfrZfu+Xt7q/1kbznb8ELn
-	RjbkVdiANPJGwtzFIXtWQnNpZZ8kznqrUSFgIEuhNUSYqTNqEbDt17OitOgqptuiFCN4
-	92DA==
+	bh=QASY7JogwZEuGuQrC2d+VZlQRSQQsdXGOHuR7KOUeuI=;
+	b=I+JX1vv/CHEQ26RDDKLlzoKQvxUcz1rJI6fFwEZA5k/y+eI284up4G23RjMDdSzLfz
+	5QerIqpUGMEL1NcBBNYRebVs0kYSml6z9LsS79+sIQEHkvnXOnV6XhmQ2VWeS8OXrWk3
+	1GmcnZw6A6EsfFqNAUz+JjsKcVUEuuptaDaqHei6vqO9qVVtkg4aXw0nBuKiJQl1pVLu
+	F2Of1LQyPd3pRv82xbPJw8sEK6lkasgjG/pyK8mxDuk3Qtw0uU+tNM3fMHAe+A+gVmFn
+	86htLViC0II8K2pWRIj6WEv/+1a5YiiE0lNvZDzuaIUxs7Dao12OKoGLcxOo5lhNBXKU
+	ApbQ==
 MIME-Version: 1.0
-Received: by 10.152.122.9 with SMTP id lo9mr4292163lab.41.1340112685886; Tue,
-	19 Jun 2012 06:31:25 -0700 (PDT)
-Received: by 10.112.100.132 with HTTP; Tue, 19 Jun 2012 06:31:22 -0700 (PDT)
-In-Reply-To: <20120612011706.GD30300@denix.org>
-References: <20120612011706.GD30300@denix.org>
-Date: Tue, 19 Jun 2012 15:31:22 +0200
-Message-ID: <CADZ6=avUy_QP2E7cgDuU9redCXyb8JNzWhFhwMxXC10NiSSMYw@mail.gmail.com>
+Received: by 10.152.102.234 with SMTP id fr10mr18842801lab.32.1340115455614;
+	Tue, 19 Jun 2012 07:17:35 -0700 (PDT)
+Received: by 10.112.100.132 with HTTP; Tue, 19 Jun 2012 07:17:35 -0700 (PDT)
+In-Reply-To: <20120611212503.GB30300@denix.org>
+References: <4FD5FD69.8030604@dresearch-fe.de>
+	<20120611212503.GB30300@denix.org>
+Date: Tue, 19 Jun 2012 16:17:35 +0200
+Message-ID: <CADZ6=at_4q-c0rHdZeb6_sF3Q2YojkZX5We8ZORrdc1cht8H6g@mail.gmail.com>
 From: Thilo Fromm <fromm@dresearch-fe.de>
 To: Denys Dmytriyenko <denis@denix.org>
-X-Gm-Message-State: ALoCoQnXA/Ber92DBM29U2Jcgpr/9FspUaeFX1LzdSyvLVUUEO4D9gwMAnd7WwAf/bvYzyFEOtSO
-Cc: meta-ti@yoctoproject.org
-Subject: Re: RFC: creating "extras" layer
+X-Gm-Message-State: ALoCoQl1qrjqDuuYUzgPiOEqveX0P6xILMFrEoTT/iCKCPKXS+4J8s2MTXOGpDTRh863QCum2K2J
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Tracking of Texas Instruments DM81xx related bugs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,53 +41,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2012 13:31:28 -0000
+X-List-Received-Date: Tue, 19 Jun 2012 14:17:37 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 Hello Denys,
 
-> This is a RFC for creating an additional "extras" layer inside meta-ti to
-> contain pieces and components that are either slightly outdated (i.e. old
-> Davinci boards, hawk/crane etc.) or have best-effort status (TI81x, anyth=
-ing
-> DSP-related, etc.) or require non-standard dependencies besides OE-Core
-> (systemd?) with the possibility of moving them back to "main" meta-ti in =
-the
-> future, once they become "first-class citizens", i.e. gain current and
-> continuing support.
-
-Denys, did you just imply that ti81x has no current and continuing
-support? I'm just curious because our TI field application engineer
-keeps telling us that it is fully supported and will receive a kernel
-update soon.
-
-Can you please go into detail on what platforms will be supported in the fu=
-ture?
-
-> The initial split (which is still "work in progress"), following the abov=
-e
-> description (except the systemd for now) can be checked at:
+>> Because Texas Instruments is not able or willing to provide a useful iss=
+ue
+>> tracker (not even for commercial customers like our company) we decided =
+to
 >
-> http://arago-project.org/git/?p=3Dmeta-ti.git;a=3Dshortlog;h=3Drefs/heads=
-/split
+> Steffen,
 >
-> I do understand this is, like any other restructuring, an invasive change=
-, but
-> is required to properly position "meta-ti" and the support behind it. I'm=
- open
-> to a discussion and any constructive criticism - feel free to comment. Th=
-anks.
+> That is because meta-ti is not a Customer Support channel. If you, as a
+> commercial customer, have issues with TI products, please use one of the =
+many
+> means of contacting the official TI Customer Support:
+> http://www.ti.com/general/docs/dsnsuprt.tsp
 
-From a platform perspective your split makes a lot of sense imho.
-Especially if there is no active maintenance (let alone development)
-for the "extras" platforms. The euphemistic choice of naming puzzles
-me, though. I take it that by "extras" you actually mean "deprecated"
-or "unmaintained"? If so then please consider naming it that way.
-"extras" really suggests some added sugar to the "core" recipes of
-meta-ti, which doesn't really coin what you intend to do with it. If
-you need to be euphemistic please at least choose a name in the right
-context, like something along the lines of "attic", or "basement".
+Denys, you cut off Steffens quote. As he wrote we have an abysmal
+experience using all of the many means available to us of contacting
+TI as a customer. We do not consider this mailing list being another
+means of requesting support from TI. We are using the list to reach
+out to other customers in the TI developer community. We are under the
+impression that others share our experience of working with TI, and of
+making any sense with ti81xx platform "support". This thread exists
+because we think other readers of this list might be affected. So
+please understand that we are not trying to request support from the
+mailing list. We would like to address other customers of TI which had
+a similar experience, and point them to the issue tracker.
+
+> On the other hand, meta-ti is a community project to integrate existing
+> components for TI "Embedded Processor" platforms into a BSP layer for
+> OpenEmbedded-Core and Yocto Projects.
+
+If this really is true then you communicate the fact rather badly. The
+layer index at <http://www.openembedded.org/wiki/LayerIndex> states
+that meta-ti is TI's official BSP layer. "official" in this context
+means, according to openembedded.org: "Note: machine support layers
+are unofficial and not manufacturer-supported unless noted otherwise."
+meta-ti *does* note otherwise. Also, the README in meta-ti states "The
+official OpenEmbedded/Yocto BSP layer for Texas Instruments
+platforms.".
+
+That's contradictory. So what *is* meta-ti then?
 
 Regards,
 Thilo
