@@ -1,35 +1,42 @@
 Return-Path: <fromm@dresearch-fe.de>
 Received: from mail-lb0-f176.google.com (mail-lb0-f176.google.com
 	[209.85.217.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37D3CE01304
-	for <meta-ti@yoctoproject.org>; Tue, 19 Jun 2012 07:17:37 -0700 (PDT)
-Received: by lboj14 with SMTP id j14so7147380lbo.35
-	for <meta-ti@yoctoproject.org>; Tue, 19 Jun 2012 07:17:35 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4151E01423
+	for <meta-ti@yoctoproject.org>; Tue, 19 Jun 2012 07:43:27 -0700 (PDT)
+Received: by lboj14 with SMTP id j14so7183548lbo.35
+	for <meta-ti@yoctoproject.org>; Tue, 19 Jun 2012 07:43:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:cc:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=QASY7JogwZEuGuQrC2d+VZlQRSQQsdXGOHuR7KOUeuI=;
-	b=I+JX1vv/CHEQ26RDDKLlzoKQvxUcz1rJI6fFwEZA5k/y+eI284up4G23RjMDdSzLfz
-	5QerIqpUGMEL1NcBBNYRebVs0kYSml6z9LsS79+sIQEHkvnXOnV6XhmQ2VWeS8OXrWk3
-	1GmcnZw6A6EsfFqNAUz+JjsKcVUEuuptaDaqHei6vqO9qVVtkg4aXw0nBuKiJQl1pVLu
-	F2Of1LQyPd3pRv82xbPJw8sEK6lkasgjG/pyK8mxDuk3Qtw0uU+tNM3fMHAe+A+gVmFn
-	86htLViC0II8K2pWRIj6WEv/+1a5YiiE0lNvZDzuaIUxs7Dao12OKoGLcxOo5lhNBXKU
-	ApbQ==
+	bh=/peThnkzl7+mZ0PYgj4XF5iTUS9F0/+xFiyy3MOOV1k=;
+	b=mhN4n1NKB7uL41yzamIt5mk1Hj3XhLer9EzdCbj4uUCiC6Dr94mcax4tMRbKZ6abvc
+	wj7cXdNPY4ktIbHLNwxJcllnRhxyesMAcVf8qtGwpU4zPM/Fk81UDC0s9axsoO7QahMy
+	N+HDuc4MpvRWPewli5zmgWuilVXY3LTbsKbmvOECQ+wPFyYN5XgNv3QyhMoBoEeGxaZG
+	ms7gAcrKZ5ijWrZLIwOz6fpEPcu/1xUHfVCpMp136TrA2cAKnV1mc2mNEZbyXVAXqliN
+	TStKafJdwhsIT+8q4BhKF1ZGwI7V1Eu2Jzvjcpd0l/OVfKzzmu8Gal7gE38N4+fONZZN
+	Omiw==
 MIME-Version: 1.0
-Received: by 10.152.102.234 with SMTP id fr10mr18842801lab.32.1340115455614;
-	Tue, 19 Jun 2012 07:17:35 -0700 (PDT)
-Received: by 10.112.100.132 with HTTP; Tue, 19 Jun 2012 07:17:35 -0700 (PDT)
-In-Reply-To: <20120611212503.GB30300@denix.org>
-References: <4FD5FD69.8030604@dresearch-fe.de>
-	<20120611212503.GB30300@denix.org>
-Date: Tue, 19 Jun 2012 16:17:35 +0200
-Message-ID: <CADZ6=at_4q-c0rHdZeb6_sF3Q2YojkZX5We8ZORrdc1cht8H6g@mail.gmail.com>
+Received: by 10.112.26.131 with SMTP id l3mr8375220lbg.80.1340117006467; Tue,
+	19 Jun 2012 07:43:26 -0700 (PDT)
+Received: by 10.112.100.132 with HTTP; Tue, 19 Jun 2012 07:43:26 -0700 (PDT)
+In-Reply-To: <4C82F39BABFE6A429733A300DEBF52240B76E4EE@DNCE05.ent.ti.com>
+References: <CADZ6=avh27wFzfty4h6ntoweX3QrLvkz=8pRgFBp8VQ7YEJ71A@mail.gmail.com>
+	<jp5gkp$2ip$1@dough.gmane.org>
+	<CADZ6=atDkyHJricwLdNqWv9aYNWXUSBVaGhQB1pC9ZTLqNYQtw@mail.gmail.com>
+	<C1FD0ECD-98B9-4D93-8351-2A19519FFF2D@dominion.thruhere.net>
+	<CADZ6=aux412Otdnf_YBJdJB1JUx2bD2sDXy7TNyaefHhq_YxtQ@mail.gmail.com>
+	<331B3AEF-9CA7-4639-A316-43DBB4A03E0D@dominion.thruhere.net>
+	<4C82F39BABFE6A429733A300DEBF52240B76E4EE@DNCE05.ent.ti.com>
+Date: Tue, 19 Jun 2012 16:43:26 +0200
+Message-ID: <CADZ6=aspkP_NQy5j7-Jdsq0rXOmROrpt4AgCkkg_HXV=0a07VA@mail.gmail.com>
 From: Thilo Fromm <fromm@dresearch-fe.de>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Gm-Message-State: ALoCoQl1qrjqDuuYUzgPiOEqveX0P6xILMFrEoTT/iCKCPKXS+4J8s2MTXOGpDTRh863QCum2K2J
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Tracking of Texas Instruments DM81xx related bugs
+To: "Monk, Roger" <r-monk@ti.com>
+X-Gm-Message-State: ALoCoQmUHrkVyzHTDv20/ZBfZUh0H2Yqf/8hrKu7H3xv77JT/85e8YfGPDSlJKs9SuYaEYP2gM/G
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] ti81xx-psp-linux-2.6.37: broken kernel with gcc > 4.5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,51 +48,52 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2012 14:17:37 -0000
+X-List-Received-Date: Tue, 19 Jun 2012 14:43:28 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hello Denys,
+Hello Roger,
 
->> Because Texas Instruments is not able or willing to provide a useful iss=
-ue
->> tracker (not even for commercial customers like our company) we decided =
-to
+>> >>>>> sorry for the cross-post (openembedded-devel, meta-ti), I think
+>> >>>>> this affects both projects one way or the other.
+>> >>>>>
+>> >>>>> Recently, meta-openembedded/toolchain-layer removed gcc-4.5.
+>> >>>>> This means with oe-core + meta-oe you now can choose between
+>> >>>>> gcc-4.6 and gcc-4.7.
+>> >>>>> However, both compilers break the kernel we're using
+>> >>>>> (ti81xx-psp-linux-2.6.37).
+>> >>>>
+>> >>>> What happens when you disable the mailbox? AIUI you shouldn't
+>> >>>> need that on Ne/Ce.
+>> >>>
+>> >>> How do I disable the mailbox?
+>> >>
+>> >> In the .config
+>> >
+>> > Wait wait wait, according to drivers/staging/tidspbridge/Kconfig we
+>> > need OMAP_MBOX_FWK (i.e. "the mailbox") in order to use the DSP
+>> > bridge. Disabling it would mean cutting off our DSP. No way.
+>>
+>> Are you actually using dspbridge? Or are you using dsplink or syslink?
+>>
+>> >>> What do you mean by Ne/Ce?
+>> >>
+>> >> Netra/Centaurus, dm81xx, c6a81xx, am38xx, am39xx or whatever TI is
+>> calling it nowadays.
+>> >
+>> > We're on a "TI DaVinci DM8148", featuring a cortex-a8 combined with
+>> > a C674x DSP.
+>>
+>> So a centaurus family SoC.
 >
-> Steffen,
+> Can you put some printk's in omap_mbox_register (plat-omap/mailbox.c) to =
+print the list objects, in particular the mbox->name?
 >
-> That is because meta-ti is not a Customer Support channel. If you, as a
-> commercial customer, have issues with TI products, please use one of the =
-many
-> means of contacting the official TI Customer Support:
-> http://www.ti.com/general/docs/dsnsuprt.tsp
+> Would also be useful to see the same in omap_mbox_get() before the call t=
+o strcmp().
 
-Denys, you cut off Steffens quote. As he wrote we have an abysmal
-experience using all of the many means available to us of contacting
-TI as a customer. We do not consider this mailing list being another
-means of requesting support from TI. We are using the list to reach
-out to other customers in the TI developer community. We are under the
-impression that others share our experience of working with TI, and of
-making any sense with ti81xx platform "support". This thread exists
-because we think other readers of this list might be affected. So
-please understand that we are not trying to request support from the
-mailing list. We would like to address other customers of TI which had
-a similar experience, and point them to the issue tracker.
-
-> On the other hand, meta-ti is a community project to integrate existing
-> components for TI "Embedded Processor" platforms into a BSP layer for
-> OpenEmbedded-Core and Yocto Projects.
-
-If this really is true then you communicate the fact rather badly. The
-layer index at <http://www.openembedded.org/wiki/LayerIndex> states
-that meta-ti is TI's official BSP layer. "official" in this context
-means, according to openembedded.org: "Note: machine support layers
-are unofficial and not manufacturer-supported unless noted otherwise."
-meta-ti *does* note otherwise. Also, the README in meta-ti states "The
-official OpenEmbedded/Yocto BSP layer for Texas Instruments
-platforms.".
-
-That's contradictory. So what *is* meta-ti then?
+So did you put your printks in there and then run the code? Were you
+able to reproduce the issue?
 
 Regards,
 Thilo
