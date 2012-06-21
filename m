@@ -1,15 +1,35 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03B54E0142A
-	for <meta-ti@yoctoproject.org>; Thu, 21 Jun 2012 16:19:24 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 38AFE529CE; Thu, 21 Jun 2012 23:19:24 +0000 (UTC)
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-yw0-f41.google.com (mail-yw0-f41.google.com
+	[209.85.213.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DDEADE01426
+	for <meta-ti@yoctoproject.org>; Thu, 21 Jun 2012 16:34:55 -0700 (PDT)
+Received: by yhr47 with SMTP id 47so1312788yhr.28
+	for <meta-ti@yoctoproject.org>; Thu, 21 Jun 2012 16:34:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=T1ozfN2L5Pi/VCwU2GzXZk+FZJcwZtxMSozx6sUFovU=;
+	b=jUne3O4JYPmvoFvQsvBlimhSGnghVsI3eMC0XwT5GrcBAmxmZdOkSlVz7TeGqSHUoO
+	bFOrvt8soY08X7XZ9+GTRO1+wb6Z89t4JwxN6mb0XDmyPg3gFwEsly/m66ez9qaGAow3
+	k1lqi8YTq1cc3PWt92iVA+mgM+Hn4ee/oX9EEjXz/rmzDw7nwV5EWLBS1eQaV6I6lAGr
+	s7cY0/N+CDDFFuBlkaLFNTzlkTg1WntVSfzqu6xRIe1dBdzp/9atBECBDp9fgTJpy3M9
+	PJlGy+L/IEJ0Mn31jtvHnj6z0UK2uA4PduFgVIK5vAU5a4ZneHlfe5ec9iuULxULlz2i
+	yEQQ==
+MIME-Version: 1.0
+Received: by 10.50.207.3 with SMTP id ls3mr165824igc.0.1340321694806; Thu, 21
+	Jun 2012 16:34:54 -0700 (PDT)
+Received: by 10.64.9.165 with HTTP; Thu, 21 Jun 2012 16:34:54 -0700 (PDT)
+In-Reply-To: <20120621230216.GD30753@denix.org>
+References: <CALbNGRQCVUeZFX_xxVe=3ixZMm7MRt3WWB5VxemNs0Bi+qCHcQ@mail.gmail.com>
+	<20120621230216.GD30753@denix.org>
+Date: Fri, 22 Jun 2012 01:34:54 +0200
+Message-ID: <CALbNGRQ5CBSDS8zPnkem59mOjzAGDy8FHZifU_g5f9z59yOybg@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
 To: meta-ti@yoctoproject.org
-Message-Id: <20120621231924.38AFE529CE@arago-project.org>
-Date: Thu, 21 Jun 2012 23:19:24 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVyIGxpbnV4LmluYzogcmVtb3ZlIHVudXNlZCB2YXJpYWJsZSBSUFNSQw==?=
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: massive fallout after updates / was (no subject)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,39 +41,18 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jun 2012 23:19:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 21 Jun 2012 23:34:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Module: meta-ti
-Branch: master
-Commit: 30fb40ebc13614a74c2e237927c60ac43e01d1bc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=30fb40ebc13614a74c2e237927c60ac43e01d1bc
+On Fri, Jun 22, 2012 at 1:02 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+No need to understand everything: By removing require linux-tools.inc
+(the fastest patch I ever had :) I can now build again.
 
-Author: Andreas Müller <schnitzeltony@googlemail.com>
-Date:   Fri Jun 22 01:19:38 2012 +0200
+@layer maintainers: removing
 
-linux.inc: remove unused variable RPSRC
+require linux-tools.inc
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+should be taken into consideration
 
----
-
- recipes-kernel/linux/linux.inc |    2 --
- 1 files changed, 0 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linux.inc
-index 02f7cef..ac51dae 100644
---- a/recipes-kernel/linux/linux.inc
-+++ b/recipes-kernel/linux/linux.inc
-@@ -6,8 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
- 
- inherit kernel siteinfo
- 
--RPSRC = "http://www.rpsys.net/openzaurus/patches/archive"
--
- # Enable OABI compat for people stuck with obsolete userspace
- ARM_KEEP_OABI ?= "1"
- 
-
+Andreas
 
