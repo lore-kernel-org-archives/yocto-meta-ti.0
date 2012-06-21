@@ -1,26 +1,35 @@
-Return-Path: <denis@denix.org>
-Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
-	[206.46.173.1])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A24A3E01426
-	for <meta-ti@yoctoproject.org>; Thu, 21 Jun 2012 16:02:55 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M5Z00HKRPBSB75C@vms173001.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 21 Jun 2012 18:02:32 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 545AF20564; Thu,
-	21 Jun 2012 19:02:16 -0400 (EDT)
-Date: Thu, 21 Jun 2012 19:02:16 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Andreas =?iso-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
-Message-id: <20120621230216.GD30753@denix.org>
-References: <CALbNGRQCVUeZFX_xxVe=3ixZMm7MRt3WWB5VxemNs0Bi+qCHcQ@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CALbNGRQCVUeZFX_xxVe=3ixZMm7MRt3WWB5VxemNs0Bi+qCHcQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org, openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: massive fallout after updates / was (no subject)
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 12742E01426
+	for <meta-ti@yoctoproject.org>; Thu, 21 Jun 2012 16:13:11 -0700 (PDT)
+Received: by weyr3 with SMTP id r3so986338wey.35
+	for <meta-ti@yoctoproject.org>; Thu, 21 Jun 2012 16:13:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=nKbASlHO+3SSqGXeWQpTcnzXW5mT7kEpeq4W8mEzYTY=;
+	b=TdRS1r4O489mQZU/Kj6sb7MLVoVvOLvwue7/rH9p45cVFYZLbQSj9trBeDJ4UJvrlI
+	xnNGilNCYcfoUTjAr+z1KZ/HH7EaQ5P1SS+2THY+ahPV29kYxCzL5y2OF1INIQyZE5ZH
+	RFf5E8LWPUWWHWodzZ+N1iKNvCOINqZV0J630MAf7lwcDdZDc8RfH4th64Au6bVkYCmF
+	VxYpHhI2mUsVQBKwJtJLuKMFSts4ywtnHPuIp0+DIUXDCloHmny4gi7QnPxcMnIPFGsZ
+	kfU4+HciGesF3LxGbgrv6WmPu53bo0ezGlMVyP3b2ktSIuGe29WjnC8D1Q6Kk2iqllcp
+	aqZg==
+Received: by 10.216.197.4 with SMTP id s4mr15553054wen.181.1340320389951;
+	Thu, 21 Jun 2012 16:13:09 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A25C2.dip.t-dialin.net.
+	[91.10.37.194])
+	by mx.google.com with ESMTPS id k8sm93735657wia.6.2012.06.21.16.13.08
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 21 Jun 2012 16:13:09 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: meta-ti@yoctoproject.org
+Date: Fri, 22 Jun 2012 01:19:37 +0200
+Message-Id: <1340320778-912-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
+MIME-Version: 1.0
+Subject: [PATCH 1/2] linux.inc: remove require linux-tools.inc
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,53 +41,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jun 2012 23:02:55 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-disposition: inline
-Content-transfer-encoding: 8bit
+X-List-Received-Date: Thu, 21 Jun 2012 23:13:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jun 22, 2012 at 12:11:46AM +0200, Andreas Müller wrote:
-> On Thu, Jun 21, 2012 at 11:36 PM, Andreas Müller
-> <schnitzeltony@googlemail.com> wrote:
-> > after updating all my repos (angstrom+few extra layers) I get
-> 
-> The error seems to be caused by meta-ti. When removed, parsing works
-> as expected. By re-including I get now:
-> 
-> ERROR: ExpansionError during parsing
-> /home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb:
-> Failure expanding variable FILESPATH, expression was
-> ${@base_set_filespath([
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/gstreamer-ti-svnr962-r85+${MACHINE_KERNEL_PR}",
+linux-tools.inc was removed in oe-core (perf has own package) [1].
 
-Could be caused by MACHINE_KERNEL_PR being undefined... What machine you are 
-building for?
+[1] http://cgit.openembedded.org/openembedded-core/commit/?id=b485f3e0e55ad62079ed0913970ff0620f4808ea
 
+Signed-off-by: Andreas MÃ¼ller <schnitzeltony@googlemail.com>
+---
+ recipes-kernel/linux/linux.inc |    3 ---
+ 1 files changed, 0 insertions(+), 3 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linux.inc
+index 6996283..02f7cef 100644
+--- a/recipes-kernel/linux/linux.inc
++++ b/recipes-kernel/linux/linux.inc
+@@ -6,9 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ 
+ inherit kernel siteinfo
+ 
+-# Try to build & install perf
+-require recipes-kernel/linux/linux-tools.inc
+-
+ RPSRC = "http://www.rpsys.net/openzaurus/patches/archive"
+ 
+ # Enable OABI compat for people stuck with obsolete userspace
 -- 
-Denys
+1.7.4.4
 
-
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/gstreamer-ti-svnr962",
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/gstreamer-ti",
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/gstreamer-ti-svnr962",
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/gstreamer-ti",
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/files",
-> "/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti"
-> ], d)} which triggered exception SyntaxError: EOL while scanning
-> string literal (FILESPATH, line 1)
-> ERROR: No recipes available for:
->   /home/Superandy/data/oe-core/sources/meta-intel/meta-sugarbay/recipes-kernel/linux/linux-yocto_3.2.bbappend
->   /home/Superandy/data/oe-core/sources/meta-intel/meta-crownbay/recipes-kernel/linux/linux-yocto_3.2.bbappend
->   /home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/recipes-kernel/linux/linux-yocto_3.2.bbappend
->   /home/Superandy/data/oe-core/sources/meta-intel/meta-fishriver/recipes-kernel/linux/linux-yocto_3.2.bbappend
->   /home/Superandy/data/oe-core/sources/meta-intel/meta-fri2/recipes-kernel/linux/linux-yocto_3.2.bbappend
->   /home/Superandy/data/oe-core/sources/meta-intel/meta-jasperforest/recipes-kernel/linux/linux-yocto_3.2.bbappend
->   ......
-> 
-> Andreas
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
 
