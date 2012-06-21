@@ -1,46 +1,31 @@
-Return-Path: <jkridner@beagleboard.org>
-Received: from mail-yx0-f176.google.com (mail-yx0-f176.google.com
-	[209.85.213.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A9CCE013A6
-	for <meta-ti@yoctoproject.org>; Wed, 20 Jun 2012 07:11:19 -0700 (PDT)
-Received: by yenl5 with SMTP id l5so6052326yen.35
-	for <meta-ti@yoctoproject.org>; Wed, 20 Jun 2012 07:11:19 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding:x-gm-message-state;
-	bh=JKVWbpJdIIlHRw1MuFmLUz4apWWjKrCWchaJAWn+fks=;
-	b=I6R5yA9KAbL5hEp9sAAv/2B1s8kUfNyPyOmtnMgyNjMwtuI5/5WqlUBIcPVUfL2FSC
-	AGDBC06mTnQGfIjVXhdKDv2k3tux8OaQQjqzwHcBlIEVKJzLr5AxWdzzL+HtT7W2TxE3
-	1mrmnKMlqwWhOrh35gwiX3/CphD5hxfAarfWMHMfh4V1GtACIn+kjN1Ugh/wlglFe8q4
-	yC1Ud7V+hKLi0AzuOK71fAVbVX4I7/LB+FTvZRF4PPeCbV64WKWOmWJd9pv7+IZdSS7E
-	ORKd2kspPoAWMZqLvLuXCSzFWZ+rbGw9UltR02H/n8OM4p5gOtuNcLX9I25JBrTjxTT5
-	RWWA==
-Received: by 10.236.115.36 with SMTP id d24mr27261888yhh.117.1340201478937;
-	Wed, 20 Jun 2012 07:11:18 -0700 (PDT)
-Received: from mail-ob0-f176.google.com (mail-ob0-f176.google.com
-	[209.85.214.176])
-	by mx.google.com with ESMTPS id p16sm40317877ano.19.2012.06.20.07.11.17
-	(version=SSLv3 cipher=OTHER); Wed, 20 Jun 2012 07:11:17 -0700 (PDT)
-Received: by obbwd18 with SMTP id wd18so10006032obb.35
-	for <meta-ti@yoctoproject.org>; Wed, 20 Jun 2012 07:11:16 -0700 (PDT)
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-gg0-f176.google.com (mail-gg0-f176.google.com
+	[209.85.161.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 89D6BE013EB
+	for <meta-ti@yoctoproject.org>; Thu, 21 Jun 2012 15:11:47 -0700 (PDT)
+Received: by ggnk4 with SMTP id k4so1188191ggn.35
+	for <meta-ti@yoctoproject.org>; Thu, 21 Jun 2012 15:11:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=AcvlNSM710Fp6QFny1jFIAFmfhGas9RHM1gn6t8QrL8=;
+	b=CmWAXFMpA/FdY08+T0dX0kDOyJiyQz5bPdFDbRPxrwjtdBBPTH1z5iibHR3+0k6vgK
+	+bdUu5W649/hm7lIudO00CnFBId9wipxoBdMxKG7InjNBHWYgvzdCHdD+MLwPpWlthDX
+	+Cs9A+ZYkfYi5bm+oZKA/eU14EU52ws+s7ZDe/gc5VPuzbcvuTrtGgAoSqsBQTXRrGQX
+	gT3NugAbxxpn8nCSgYj6ZRggnTIQhkcts9lEojySqXL9hI7KsQY4PfYbfEpU/j6inK9r
+	/IRKm92ZT3bH3J2X2jLMvGlQJHLmL9ClCSbRzfrE7V/bwwSZddI80YhrbF3YZiwVJJXh
+	EhKA==
 MIME-Version: 1.0
-Received: by 10.182.139.2 with SMTP id qu2mr23950847obb.34.1340201476895; Wed,
-	20 Jun 2012 07:11:16 -0700 (PDT)
-Received: by 10.182.227.74 with HTTP; Wed, 20 Jun 2012 07:11:16 -0700 (PDT)
-In-Reply-To: <4FE174C1.7010601@dresearch-fe.de>
-References: <20120612011706.GD30300@denix.org>
-	<CA+2YH7sCF75itqV6o-Oc-LeUnS5LwA67HpL1F-w9jgL_GMCDzw@mail.gmail.com>
-	<4FDADD2B.7060508@dresearch-fe.de>
-	<CA+T6QPkW5+rxRWsnmatAKgAhVJMQGtN_bYqRSLPCCOA8PJdjiw@mail.gmail.com>
-	<4FE174C1.7010601@dresearch-fe.de>
-Date: Wed, 20 Jun 2012 10:11:16 -0400
-Message-ID: <CA+T6QPn4OHrR_CXdOTPJBSV-SZt77yj+fJ0DJeDqut6eJkam4Q@mail.gmail.com>
-From: Jason Kridner <jkridner@beagleboard.org>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-X-Gm-Message-State: ALoCoQngKLGX5dwXtUCL4mODIQRjbN3N1FcujddlipdVo81mKiRclGa9+/MbMEYnCcf4B55j5bKd
-Cc: meta-ti@yoctoproject.org
-Subject: Re: RFC: creating "extras" layer
+Received: by 10.42.148.196 with SMTP id s4mr14320887icv.19.1340316706603; Thu,
+	21 Jun 2012 15:11:46 -0700 (PDT)
+Received: by 10.64.9.165 with HTTP; Thu, 21 Jun 2012 15:11:46 -0700 (PDT)
+Date: Fri, 22 Jun 2012 00:11:46 +0200
+Message-ID: <CALbNGRQCVUeZFX_xxVe=3ixZMm7MRt3WWB5VxemNs0Bi+qCHcQ@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	openembedded-core@lists.openembedded.org, meta-ti@yoctoproject.org
+Subject: massive fallout after updates / was (no subject)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -52,61 +37,318 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2012 14:11:19 -0000
+X-List-Received-Date: Thu, 21 Jun 2012 22:11:47 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 20, 2012 at 2:59 AM, Steffen Sledz <sledz@dresearch-fe.de> wrot=
-e:
-> On 20.06.2012 06:37, Jason Kridner wrote:
->> On Fri, Jun 15, 2012 at 2:58 AM, Steffen Sledz <sledz@dresearch-fe.de> w=
-rote:
->>> On 13.06.2012 16:15, Enrico wrote:
->>>> ...
->>>> So the question is: are there any plans in TI to properly support its
->>>> platforms or will this continue to be a place where to drop some code,
->>>> forget about it and then move it to an extra layer?
->>>
->>> It's really a great pity that there is no (official) response from TI t=
-o this . :(
->>
->> TI has official support for BeagleBoard-xM and BeagleBone in Arago
->> (currently based on OE Classic). =A0I feel, however, that we aren't
->> doing enough to collaborate with community developers on these vendor
->> kernels/BSPs, though we are starting to catch our stride on upstream
->> contributions (TI is now the #2 semiconductor contributor to the Linux
->> kernel per [1]).
->>
->> Work will start in earnest in the next month to move this support to
->> meta-ti. =A0The current proposal seems to be an attempt to clear-up
->> responsibility and organization ahead of that effort.
->>
->> [1] http://www.remword.com/kps_result/3.4_whole.html
+On Thu, Jun 21, 2012 at 11:36 PM, Andreas M=FCller
+<schnitzeltony@googlemail.com> wrote:
+> after updating all my repos (angstrom+few extra layers) I get
 >
-> Hi Jason,
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-sugarbay/recipes-=
+kernel/linux/linux-yocto_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-crownbay/recipes-=
+kernel/linux/linux-yocto_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/recipes-k=
+ernel/linux/linux-yocto_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fishriver/recipes=
+-kernel/linux/linux-yocto_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fri2/recipes-kern=
+el/linux/linux-yocto_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-jasperforest/reci=
+pes-kernel/linux/linux-yocto_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-n450/recipes-kern=
+el/linux/linux-yocto_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-handheld/recipes-kernel/linu=
+x/linux-yocto_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-connectivity/dhcp/dhcp_4.2.3-P2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-sugarbay/recipes-=
+bsp/formfactor/formfactor_0.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-crownbay/recipes-=
+bsp/formfactor/formfactor_0.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/recipes-b=
+sp/formfactor/formfactor_0.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fishriver/recipes=
+-bsp/formfactor/formfactor_0.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fri2/recipes-bsp/=
+formfactor/formfactor_0.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-jasperforest/reci=
+pes-bsp/formfactor/formfactor_0.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-n450/recipes-bsp/=
+formfactor/formfactor_0.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-nokia/recipe=
+s-bsp/formfactor/formfactor_0.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-handheld/recipes-bsp/formfac=
+tor/formfactor_0.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-ti/recipes-bsp/formfactor/fo=
+rmfactor_0.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-nokia/recipe=
+s-multimedia/mplayer/mplayer2_git.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-openmoko/rec=
+ipes-multimedia/mplayer/mplayer2_git.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-angstrom/recipes-core/update=
+-rc.d/update-rc.d_0.7.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-sugarbay/recipes-=
+kernel/linux/linux-yocto-rt_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-crownbay/recipes-=
+kernel/linux/linux-yocto-rt_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/recipes-k=
+ernel/linux/linux-yocto-rt_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fishriver/recipes=
+-kernel/linux/linux-yocto-rt_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fri2/recipes-kern=
+el/linux/linux-yocto-rt_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-jasperforest/reci=
+pes-kernel/linux/linux-yocto-rt_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-n450/recipes-kern=
+el/linux/linux-yocto-rt_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-connectivity/wpa-supplicant/wpa-supplicant_0.7.3.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-palm/recipes=
+-bsp/x-load/x-load_git.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-gumstix/recipes-bsp/x-load/x=
+-load_git.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-angstrom/recipes-extended/zy=
+pper/zypper_git.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-sugarbay/recipes-=
+kernel/linux/linux-yocto-rt_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-crownbay/recipes-=
+kernel/linux/linux-yocto-rt_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/recipes-k=
+ernel/linux/linux-yocto-rt_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fishriver/recipes=
+-kernel/linux/linux-yocto-rt_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fri2/recipes-kern=
+el/linux/linux-yocto-rt_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-jasperforest/reci=
+pes-kernel/linux/linux-yocto-rt_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-n450/recipes-kern=
+el/linux/linux-yocto-rt_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/toolchain-layer=
+/recipes-devtools/gcc/gcc-runtime_4.6.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/recipes-q=
+t/qt4/qt4-x11-free_4.8.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-qt/qt4/qt4-x11-free_4.8.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-kde/recipes-misc-support/qt4=
+-x11-free_4.8.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fri2/recipes-bsp/=
+alsa-state/alsa-state.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-n450/recipes-bsp/=
+alsa-state/alsa-state.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-ti/recipes-bsp/alsa-state/al=
+sa-state.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-palm/recipes=
+-graphics/tslib/tslib_git.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-connectivity/openssh/openssh_6.0p1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-handheld/recipes-bsp/kexecbo=
+ot/kexecboot-klibc_git.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/recipes-g=
+nome/tasks/task-core-sdk-gmae.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/toolchain-layer=
+/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.6.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-sugarbay/recipes-=
+kernel/linux/linux-yocto_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-crownbay/recipes-=
+kernel/linux/linux-yocto_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/recipes-k=
+ernel/linux/linux-yocto_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fishriver/recipes=
+-kernel/linux/linux-yocto_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fri2/recipes-kern=
+el/linux/linux-yocto_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-jasperforest/reci=
+pes-kernel/linux/linux-yocto_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-n450/recipes-kern=
+el/linux/linux-yocto_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/toolchain-layer=
+/recipes-devtools/gcc/gcc_4.6.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-qt/tasks/task-qte-toolchain-target.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-qt/qt4/qt4-embedded_4.8.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-angstrom/recipes-core/base-f=
+iles/base-files_3.0.14.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-nokia/recipe=
+s-core/base-files/base-files_3.0.14.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-openmoko/rec=
+ipes-core/base-files/base-files_3.0.14.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-kde/recipes-misc-support/qt4=
+-native_4.8.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-ti/recipes-core/netbase/netb=
+ase_4.47.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-extended/lighttpd/lighttpd_1.4.30.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-multimedia/gstreamer/gst-ffmpeg_0.10.13.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-openmoko/rec=
+ipes-graphics/drm/libdrm_2.4.34.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-gumstix/recipes-bsp/powervr-=
+drivers/omap3-sgx-modules_4.05.00.03.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-core/dropbear/dropbear_2012.55.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/toolchain-layer=
+/recipes-devtools/gcc/gcc-cross_4.6.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-openmoko/rec=
+ipes-multimedia/mplayer/mplayer-common.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-freescale/recipes-bsp/u-boot=
+/u-boot_git.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-sugarbay/recipes-=
+core/tasks/task-core-tools-profile.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-crownbay/recipes-=
+core/tasks/task-core-tools-profile.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/recipes-c=
+ore/tasks/task-core-tools-profile.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fishriver/recipes=
+-core/tasks/task-core-tools-profile.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fri2/recipes-core=
+/tasks/task-core-tools-profile.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-jasperforest/reci=
+pes-core/tasks/task-core-tools-profile.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-n450/recipes-core=
+/tasks/task-core-tools-profile.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-sugarbay/recipes-=
+graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-crownbay/recipes-=
+graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/recipes-g=
+raphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fishriver/recipes=
+-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-fri2/recipes-grap=
+hics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-jasperforest/reci=
+pes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-n450/recipes-grap=
+hics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-htc/recipes-=
+graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-nokia/recipe=
+s-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-openmoko/rec=
+ipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-palm/recipes=
+-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-handheld/recipes-graphics/xo=
+rg-xserver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-ti/recipes-graphics/xorg-xse=
+rver/xserver-xf86-config_0.1.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-extended/cronie/cronie_1.4.8.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-nokia/recipe=
+s-core/initscripts/initscripts_1.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-openmoko/rec=
+ipes-core/initscripts/initscripts_1.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-palm/recipes=
+-core/initscripts/initscripts_1.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-gnome/gtk+/gtk-update-icon-cache-runonce.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-extended/polkit/polkit_0.104.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/toolchain-layer=
+/recipes-devtools/gcc/gcc-cross-canadian_4.6.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-nokia/recipe=
+s-graphics/xinput-calibrator/pointercal-xinput_0.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-openmoko/rec=
+ipes-graphics/xinput-calibrator/pointercal-xinput_0.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-gumstix/recipes-kernel/linux=
+/linux_3.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-handheld/recipes-kernel/linu=
+x/linux-yocto-tiny-kexecboot_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/recipes-g=
+nome/tasks/task-core-standalone-gmae-sdk-target.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-openmoko/rec=
+ipes-core/tasks/task-base.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-handheld/recipes-bsp/kexecbo=
+ot/kexecboot_git.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-nokia/recipe=
+s-core/systemd/systemd-machine-units_1.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-openmoko/rec=
+ipes-core/systemd/systemd-machine-units_1.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-gnome/reci=
+pes-gnome/gtk+/gtk+_2.24.8.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-connectivity/connman/connman_0.79.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-palm/recipes=
+-support/lvm2/lvm2_2.02.85.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-openmoko/rec=
+ipes-graphics/mesa/mesa-dri_7.11.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/toolchain-layer=
+/recipes-devtools/gcc/gcc-crosssdk-initial_4.6.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-browser/recipes-support/nspr=
+/nspr_4.8.9.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-graphics/xorg-lib/pixman_0.25.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-angstrom/recipes-core/sysvin=
+it/sysvinit_2.88dsf.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-openmoko/rec=
+ipes-navigation/gpsd/gpsd_3.4.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-bsp/keymaps/keymaps_1.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-smartphone/meta-nokia/recipe=
+s-bsp/keymaps/keymaps_1.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-handheld/recipes-bsp/keymaps=
+/keymaps_1.0.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/meta-oe/recipes=
+-core/busybox/busybox_1.19.4.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/toolchain-layer=
+/recipes-devtools/gcc/gcc-cross-intermediate_4.6.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-intel/common/recipes-kernel/=
+linux-firmware/linux-firmware_git.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/toolchain-layer=
+/recipes-devtools/gcc/gcc-crosssdk_4.6.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/toolchain-layer=
+/recipes-devtools/gcc/gcc-cross-initial_4.6.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-gumstix/recipes-kernel/linux=
+/linux-mainline_3.2.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-openembedded/toolchain-layer=
+/recipes-devtools/gcc/libgcc_4.6.bbappend
+> =A0/home/Superandy/data/oe-core/sources/meta-handheld/recipes-core/udev/u=
+dev_164.bbappend
 >
-> thanx for this answer. Just a short question? I can't see if this is your=
- personal view or an official TI statement?
-
-It is my personal view based on knowledge of Sitara Linux SDK product
-development plans.  Take a look at [2] for information on
-collaboration with TI on SDKs and for BeagleBoard-xM and BeagleBone
-support.
-
-[2] http://processors.wiki.ti.com/index.php/Sitara_Linux_Software_Developer=
-%E2%80%99s_Guide
-
-[This time hitting the reply-all button]
-
+> Strange: many recipes are available. Anybody else with similar experience=
+?
 >
-> Steffen
->
-> --
-> DResearch Fahrzeugelektronik GmbH
-> Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-> Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-> Fax: +49 30 515932-299
-> Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-> Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-> Ust.-IDNr. DE273952058
+
+The error seems to be caused by meta-ti. When removed, parsing works
+as expected. By re-including I get now:
+
+ERROR: ExpansionError during parsing
+/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/gstrea=
+mer-ti_svn.bb:
+Failure expanding variable FILESPATH, expression was
+${@base_set_filespath([
+"/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/gstre=
+amer-ti-svnr962-r85+${MACHINE_KERNEL_PR}",
+"/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/gstre=
+amer-ti-svnr962",
+"/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/gstre=
+amer-ti",
+"/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/gstre=
+amer-ti-svnr962",
+"/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/gstre=
+amer-ti",
+"/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti/files=
+",
+"/home/Superandy/data/oe-core/sources/meta-ti/recipes-ti/gstreamer-ti"
+], d)} which triggered exception SyntaxError: EOL while scanning
+string literal (FILESPATH, line 1)
+ERROR: No recipes available for:
+  /home/Superandy/data/oe-core/sources/meta-intel/meta-sugarbay/recipes-ker=
+nel/linux/linux-yocto_3.2.bbappend
+  /home/Superandy/data/oe-core/sources/meta-intel/meta-crownbay/recipes-ker=
+nel/linux/linux-yocto_3.2.bbappend
+  /home/Superandy/data/oe-core/sources/meta-intel/meta-emenlow/recipes-kern=
+el/linux/linux-yocto_3.2.bbappend
+  /home/Superandy/data/oe-core/sources/meta-intel/meta-fishriver/recipes-ke=
+rnel/linux/linux-yocto_3.2.bbappend
+  /home/Superandy/data/oe-core/sources/meta-intel/meta-fri2/recipes-kernel/=
+linux/linux-yocto_3.2.bbappend
+  /home/Superandy/data/oe-core/sources/meta-intel/meta-jasperforest/recipes=
+-kernel/linux/linux-yocto_3.2.bbappend
+  ......
+
+Andreas
 
