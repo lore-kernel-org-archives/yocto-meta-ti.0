@@ -1,27 +1,42 @@
-Return-Path: <denis@denix.org>
-Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
-	[206.46.173.5])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9EFB6E00746
-	for <meta-ti@yoctoproject.org>; Mon, 25 Jun 2012 18:18:40 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.48.117.33])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0M670039KAB38B09@vms173005.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 25 Jun 2012 20:18:39 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 4E602202D8; Mon,
-	25 Jun 2012 21:18:38 -0400 (EDT)
-Date: Mon, 25 Jun 2012 21:18:38 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Thilo Fromm <fromm@dresearch-fe.de>
-Message-id: <20120626011838.GD26125@denix.org>
-References: <4FD5FD69.8030604@dresearch-fe.de>
-	<20120611212503.GB30300@denix.org>
-	<CADZ6=at_4q-c0rHdZeb6_sF3Q2YojkZX5We8ZORrdc1cht8H6g@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CADZ6=at_4q-c0rHdZeb6_sF3Q2YojkZX5We8ZORrdc1cht8H6g@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Tracking of Texas Instruments DM81xx related bugs
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
+	[209.85.215.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F1F72E00746
+	for <meta-ti@yoctoproject.org>; Mon, 25 Jun 2012 23:26:34 -0700 (PDT)
+Received: by eaab16 with SMTP id b16so1906319eaa.35
+	for <meta-ti@yoctoproject.org>; Mon, 25 Jun 2012 23:26:33 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=Pk/6znOsvKLU8INDjH/2wNTZ/7x+ekrunM6AzoBN9Pg=;
+	b=kMtQOjcFA3LZq3ylYwgUQNteCpoE8Cvvu09fMSrUD9U8h58EJQbHg4Xb7qgNLFSSH1
+	7jrNFQjz9+jo/XBfjO534AqyVsPxw6RqmYN01kJ9lrVaG8sSioFScq0/QyKDGmZIU2KD
+	/DkaIwVw0V+13/PEol8j36o/Pr6ll7B/cIJr5AQ6f95bMhlbKlP2ohkOqPT654fmLdMo
+	A8i6egw1xMGFCEgZz6eUdIyp9I6upgCTP4y1OK4pFruZLN2PFTEfrkRiyj6z8bgQDlKy
+	aaUaew3PydyVShkQUWBaBBsCnsONmGjWttyRCrL8iZ3nVrb6qJX1WJnRhMbYNv6OSNi+
+	uG7Q==
+Received: by 10.14.48.65 with SMTP id u41mr2784740eeb.169.1340691993752;
+	Mon, 25 Jun 2012 23:26:33 -0700 (PDT)
+Received: from ?IPv6:2001:610:612::d965:f9fc:d036:3b35?
+	([2001:610:612:0:d965:f9fc:d036:3b35])
+	by mx.google.com with ESMTPS id u14sm145570136eem.4.2012.06.25.23.26.32
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 25 Jun 2012 23:26:32 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1278)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20120626000117.GA11082@edge>
+Date: Tue, 26 Jun 2012 08:26:33 +0200
+Message-Id: <5E1F862E-2C66-4ADF-A756-B742EABE5D4E@dominion.thruhere.net>
+References: <1340607432-27134-1-git-send-email-koen@dominion.thruhere.net>
+	<1340607432-27134-3-git-send-email-koen@dominion.thruhere.net>
+	<20120626000117.GA11082@edge>
+To: Denys Dmytriyenko <denys@ti.com>
+X-Mailer: Apple Mail (2.1278)
+X-Gm-Message-State: ALoCoQlmFGC71ZsPhXmmL07LFV3/BzKQuk6WfGJrs6E43Gct8eVWQyehWFmTeBKCBdwYu6MxBCAo
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 3/3] linux-ti33x-psp 3.2: update to 3.2.21, add libertas fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,34 +48,17 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jun 2012 01:18:40 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 26 Jun 2012 06:26:35 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jun 19, 2012 at 04:17:35PM +0200, Thilo Fromm wrote:
-> Hello Denys,
+
+Op 26 jun. 2012, om 02:01 heeft Denys Dmytriyenko het volgende geschreven:
+
+> Thanks, Koen.
 > 
-> > On the other hand, meta-ti is a community project to integrate existing
-> > components for TI "Embedded Processor" platforms into a BSP layer for
-> > OpenEmbedded-Core and Yocto Projects.
-> 
-> If this really is true then you communicate the fact rather badly. The
-> layer index at <http://www.openembedded.org/wiki/LayerIndex> states
-> that meta-ti is TI's official BSP layer. "official" in this context
-> means, according to openembedded.org: "Note: machine support layers
-> are unofficial and not manufacturer-supported unless noted otherwise."
-> meta-ti *does* note otherwise. Also, the README in meta-ti states "The
-> official OpenEmbedded/Yocto BSP layer for Texas Instruments
-> platforms.".
-> 
-> That's contradictory. So what *is* meta-ti then?
+> What's the plan to rebase against the latest PSP tree and drop some of the 
+> patches?
 
-Thilo,
-
-There is no contradiction. It is still official, as it is sponsored by TI. On 
-the other hand it is a community project, since it's not a commercial product. 
-Please let me know if you are still confused. Thanks.
-
--- 
-Denys
+When time and motivation align :) Or when Joel gets asked to do it :)
 
