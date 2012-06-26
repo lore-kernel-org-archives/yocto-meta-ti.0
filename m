@@ -1,30 +1,27 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A690FE00746
-	for <meta-ti@yoctoproject.org>; Mon, 25 Jun 2012 17:01:21 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q5Q01J6A014209;
-	Mon, 25 Jun 2012 19:01:19 -0500
-Received: from DFLE70.ent.ti.com (dfle70.ent.ti.com [128.247.5.40])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q5Q01JHU029277;
-	Mon, 25 Jun 2012 19:01:19 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle70.ent.ti.com
-	(128.247.5.40) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 25 Jun 2012 19:01:19 -0500
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id q5Q01Ifr018502;
-	Mon, 25 Jun 2012 19:01:18 -0500
-Date: Mon, 25 Jun 2012 20:01:17 -0400
+Return-Path: <denis@denix.org>
+Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
+	[206.46.173.5])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9EFB6E00746
+	for <meta-ti@yoctoproject.org>; Mon, 25 Jun 2012 18:18:40 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.48.117.33])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M670039KAB38B09@vms173005.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 25 Jun 2012 20:18:39 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 4E602202D8; Mon,
+	25 Jun 2012 21:18:38 -0400 (EDT)
+Date: Mon, 25 Jun 2012 21:18:38 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-ID: <20120626000117.GA11082@edge>
-References: <1340607432-27134-1-git-send-email-koen@dominion.thruhere.net>
-	<1340607432-27134-3-git-send-email-koen@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <1340607432-27134-3-git-send-email-koen@dominion.thruhere.net>
+To: Thilo Fromm <fromm@dresearch-fe.de>
+Message-id: <20120626011838.GD26125@denix.org>
+References: <4FD5FD69.8030604@dresearch-fe.de>
+	<20120611212503.GB30300@denix.org>
+	<CADZ6=at_4q-c0rHdZeb6_sF3Q2YojkZX5We8ZORrdc1cht8H6g@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CADZ6=at_4q-c0rHdZeb6_sF3Q2YojkZX5We8ZORrdc1cht8H6g@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 3/3] linux-ti33x-psp 3.2: update to 3.2.21, add libertas fixes
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Tracking of Texas Instruments DM81xx related bugs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,14 +33,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jun 2012 00:01:21 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 26 Jun 2012 01:18:40 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Thanks, Koen.
+On Tue, Jun 19, 2012 at 04:17:35PM +0200, Thilo Fromm wrote:
+> Hello Denys,
+> 
+> > On the other hand, meta-ti is a community project to integrate existing
+> > components for TI "Embedded Processor" platforms into a BSP layer for
+> > OpenEmbedded-Core and Yocto Projects.
+> 
+> If this really is true then you communicate the fact rather badly. The
+> layer index at <http://www.openembedded.org/wiki/LayerIndex> states
+> that meta-ti is TI's official BSP layer. "official" in this context
+> means, according to openembedded.org: "Note: machine support layers
+> are unofficial and not manufacturer-supported unless noted otherwise."
+> meta-ti *does* note otherwise. Also, the README in meta-ti states "The
+> official OpenEmbedded/Yocto BSP layer for Texas Instruments
+> platforms.".
+> 
+> That's contradictory. So what *is* meta-ti then?
 
-What's the plan to rebase against the latest PSP tree and drop some of the 
-patches?
+Thilo,
+
+There is no contradiction. It is still official, as it is sponsored by TI. On 
+the other hand it is a community project, since it's not a commercial product. 
+Please let me know if you are still confused. Thanks.
 
 -- 
 Denys
