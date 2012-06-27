@@ -1,31 +1,33 @@
-Return-Path: <fromm@dresearch-fe.de>
-Received: from mail-lb0-f176.google.com (mail-lb0-f176.google.com
-	[209.85.217.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D945E013E5
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jun 2012 06:26:41 -0700 (PDT)
-Received: by lboj14 with SMTP id j14so1911967lbo.35
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jun 2012 06:26:40 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding:x-gm-message-state;
-	bh=2Om5zb4Qg1HIvKHdwDTz4NOCvEstQAXEg3uXaok5SAA=;
-	b=FPMRVXM90j39Z3fVgOGlkH0RbvIOSEzUGhe5ROBGXyWsiMlR5EexrBD8bbxxvXwq/X
-	z1m90iAcNg1vDpl+jhW1dbr0M3gemCDuwSqctHRK2kcYoRPxscV5m7/ljafiAlcOpRBc
-	canofTkoWToTOdaIt3/qTOFeOY6/ANRqB8t7t7u1uv+1Me/7LFBmr8LnPyZG+VLOr+xi
-	rxGsyK07M5UR3G7yZpMB5eNO/8ds7hLr6jCgJUfgfROvdygbwspIgLmoWcBt7fxxhrZ+
-	0pFUK8ilc+2z0sO5t6fT2UitF/JlQnQS0csz4ybwH3cry8X3Xcsv8DCxSr6j5+3vU4DS
-	DCQQ==
+Return-Path: <r-monk@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAAA4E0073F
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jun 2012 07:27:39 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q5RERbWI014443;
+	Wed, 27 Jun 2012 09:27:37 -0500
+Received: from DNCE70.ent.ti.com (dnce70.ent.ti.com [137.167.131.19])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q5RERa0A032537;
+	Wed, 27 Jun 2012 09:27:37 -0500
+Received: from DNCE05.ent.ti.com ([fe80::2868:e891:b6c7:394]) by
+	DNCE70.ent.ti.com ([fe80::70c9:b447:24a2:dddc%30]) with mapi id
+	14.01.0323.003; Wed, 27 Jun 2012 16:27:36 +0200
+From: "Monk, Roger" <r-monk@ti.com>
+To: Thilo Fromm <fromm@dresearch-fe.de>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] gstreamer / ti-dmai component does not build for
+	ti8148-evm
+Thread-Index: AQHNVGiC6rJtPIlKDU+UDBzOwYtprpcOLZwQ
+Date: Wed, 27 Jun 2012 14:27:35 +0000
+Message-ID: <4C82F39BABFE6A429733A300DEBF52240B8051DB@DNCE05.ent.ti.com>
+References: <CADZ6=asseEZTzS6dz0we4-Czbr_n2Y6Pps5UsfGagh7NV04BqQ@mail.gmail.com>
+In-Reply-To: <CADZ6=asseEZTzS6dz0we4-Czbr_n2Y6Pps5UsfGagh7NV04BqQ@mail.gmail.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [137.167.131.83]
+x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
 MIME-Version: 1.0
-Received: by 10.152.102.234 with SMTP id fr10mr20885615lab.32.1340803599888;
-	Wed, 27 Jun 2012 06:26:39 -0700 (PDT)
-Received: by 10.112.100.132 with HTTP; Wed, 27 Jun 2012 06:26:39 -0700 (PDT)
-Date: Wed, 27 Jun 2012 15:26:39 +0200
-Message-ID: <CADZ6=asseEZTzS6dz0we4-Czbr_n2Y6Pps5UsfGagh7NV04BqQ@mail.gmail.com>
-From: Thilo Fromm <fromm@dresearch-fe.de>
-To: meta-ti@yoctoproject.org
-X-Gm-Message-State: ALoCoQm+WLb3f0cSgf9yYTAteCZH2twqN8r6wvBn6hwHF5gdbJPEcMBp2gMQbopdvhwANJjfHeq9
-Subject: gstreamer / ti-dmai component does not build for ti8148-evm
+Subject: Re: gstreamer / ti-dmai component does not build for	ti8148-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,74 +39,81 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jun 2012 13:26:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 27 Jun 2012 14:27:39 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi,
-
-building gstreamer for ti8148 fails becasue DMAI does not build:
-
-NOTE: Running task 982 of 1737 (ID: 185,
-/SCRATCH/maniac/hidav/meta-texasinstruments/recipes-ti/dmai/ti-dmai_svn.bb,
-do_fetch)
-NOTE: package ti-dmai-1_2_10_00_01+svnrUNDEFINED_SRCREV-r2o: task
-do_fetch: Started
-WARNING: Failed to fetch URL
-svn://gforge.ti.com/svn/dmai/;module=3DUNDEFINED_DMAIBRANCH;proto=3Dhttps;u=
-ser=3Danonymous;pswd=3D''
-ERROR: Fetcher failure: Fetch command export HOME=3D"/home/maniac";
-export SSH_AGENT_PID=3D"3382"; export
-SSH_AUTH_SOCK=3D"/tmp/keyring-qDZ2c2/ssh"; export
-GIT_CONFIG=3D"/SCRATCH/maniac/hidav/build/tmp-eglibc/sysroots/x86_64-linux/=
-etc/gitconfig";
-export PATH=3D"/SCRATCH/maniac/hidav/openembedded-core/scripts:/SCRATCH/man=
-iac/hidav/build/tmp-eglibc/sysroots/x86_64-linux/usr/bin/armv7a-angstrom-li=
-nux-gnueabi:/SCRATCH/maniac/hidav/build/tmp-eglibc/sysroots/hidav/usr/bin/c=
-rossscripts:/SCRATCH/maniac/hidav/build/tmp-eglibc/sysroots/x86_64-linux/us=
-r/sbin:/SCRATCH/maniac/hidav/build/tmp-eglibc/sysroots/x86_64-linux/usr/bin=
-:/SCRATCH/maniac/hidav/build/tmp-eglibc/sysroots/x86_64-linux/sbin:/SCRATCH=
-/maniac/hidav/build/tmp-eglibc/sysroots/x86_64-linux//bin:/SCRATCH/maniac/h=
-idav/openembedded-core/scripts:/SCRATCH/maniac/hidav/bitbake/bin/:/home/man=
-iac/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/=
-usr/bin:/sbin:/bin:/usr/games";
-/usr/bin/env svn co --username anonymous --password '' -r
-UNDEFINED_SRCREV
-https://gforge.ti.com/svn/dmai//UNDEFINED_DMAIBRANCH@UNDEFINED_SRCREV
-UNDEFINED_DMAIBRANCH could not be run:
-None
-ERROR: Function failed: Fetcher failure for URL:
-'svn://gforge.ti.com/svn/dmai/;module=3DUNDEFINED_DMAIBRANCH;proto=3Dhttps;=
-user=3Danonymous;pswd=3D'''.
-Unable to fetch URL from any source.
-ERROR: Logfile of failure stored in:
-/SCRATCH/maniac/hidav/build/tmp-eglibc/work/hidav-angstrom-linux-gnueabi/ti=
--dmai-1_2_10_00_01+svnrUNDEFINED_SRCREV-r2o/temp/log.do_fetch.11980
-NOTE: package ti-dmai-1_2_10_00_01+svnrUNDEFINED_SRCREV-r2o: task
-do_fetch: Failed
-ERROR: Task 185
-(/SCRATCH/maniac/hidav/meta-texasinstruments/recipes-ti/dmai/ti-dmai_svn.bb=
-,
-do_fetch) failed with exit code '1'
-
-
-Looking at the recipes in
-meta-texasinstruments/recipes-ti/dmai/ti-dmai[.inc | _svn.bb ] there
-are DEPENDS, DMAIPLATFORM, DMAIBRANCH and SRCREV defined for cpus
-dm6446, dm6467, dm355, dm365, omap3, omapl137, omapl138. dm814x and
-dm816x are missing. Why is that? Where can I get the corresponding
-branch and srcrev values for these platforms?
-
-Regards,
-Thilo
-
---=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228 =C2=A0 mailto:fromm@dresearch-fe.de
-Fax: +49 (30) 515 932 77 =C2=A0 =C2=A0http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB 130120 B
-Ust.-IDNr. DE273952058
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
+SGkgVGhpbG8sDQoNCkRNODF4eCBwbGF0Zm9ybXMgZG9uJ3QgdXNlIERNQUkuICBGb3IgZ3N0cmVh
+bWVyLCB0aGlzIGlzIHN0aWxsIHBhcnQgb2YgdGhlIGdzdHJlYW1lci10aSBwcm9qZWN0IChnc3Ry
+ZWFtZXIudGkuY29tKSBpbiBhIHNlcGFyYXRlIGJyYW5jaCwgd2l0aCBzb21lIGRvY3VtZW50YXRp
+b24gaGVyZSA6LQ0KDQpodHRwOi8vcHJvY2Vzc29ycy53aWtpLnRpLmNvbS9pbmRleC5waHAvRE04
+MXh4X0dzdHJlYW1lcl9QbHVnaW4NCg0KW0knbSBzdXJlIG5vdCB3aGF0IHlvdSB3YW50IHRvIGhl
+YXIuLi4uIGp1c3QgdHJ5aW5nIHRvIGxldCB5b3Uga25vdyBzdGF0dXMuLi5dLg0KDQpUaGlzIGhh
+c24ndCBiZWVuIGludGVncmF0ZWQgaW50byBtZXRhLXRpIGFuZCB3aWxsIGFsc28gcmVxdWlyZSBp
+bnRlZ3JhdGlvbiBvZiB0aGUgY29ycmVzcG9uZGluZyBjb2RlYyBzdGFjayBwaWVjZXMuICBJZiB5
+b3Ugd2FudCB0byBpbnRlZ3JhdGUgdGhpcyBpbnRvIG1ldGEtdGksIEkgd291bGQgc3VnZ2VzdCBm
+aXJzdCBsb29raW5nIGF0IHRoZSBFWlNESyAoaHR0cDovL3d3dy50aS5jb20vdG9vbC9saW51eGV6
+c2RrLWRhdmluY2kpIHdoaWNoIGhhcyBhIGtub3duIGNvbXBhdGlibGUgc2V0IG9mIGNvbXBvbmVu
+dHMgcHJlLWludGVncmF0ZWQuDQoNCn5yb2dlcg0KDQoNClRleGFzIEluc3RydW1lbnRzIExpbWl0
+ZWQsIDgwMCBQYXZpbGlvbiBEcml2ZSwgTm9ydGhhbXB0b24sIE5ONCA3WUwuIFJlZ2lzdGVyZWQg
+aW4gRW5nbGFuZCAmIFdhbGVzIHVuZGVyIGNvbXBhbnkgbnVtYmVyIDAwNTc0MTAyDQoNCi0tLS0t
+T3JpZ2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBtZXRhLXRpLWJvdW5jZXNAeW9jdG9wcm9qZWN0
+Lm9yZyBbbWFpbHRvOm1ldGEtdGktYm91bmNlc0B5b2N0b3Byb2plY3Qub3JnXSBPbiBCZWhhbGYg
+T2YgVGhpbG8gRnJvbW0NClNlbnQ6IDI3IEp1bmUgMjAxMiAxNDoyNw0KVG86IG1ldGEtdGlAeW9j
+dG9wcm9qZWN0Lm9yZw0KU3ViamVjdDogW21ldGEtdGldIGdzdHJlYW1lciAvIHRpLWRtYWkgY29t
+cG9uZW50IGRvZXMgbm90IGJ1aWxkIGZvciB0aTgxNDgtZXZtDQoNCkhpLA0KDQpidWlsZGluZyBn
+c3RyZWFtZXIgZm9yIHRpODE0OCBmYWlscyBiZWNhc3VlIERNQUkgZG9lcyBub3QgYnVpbGQ6DQoN
+Ck5PVEU6IFJ1bm5pbmcgdGFzayA5ODIgb2YgMTczNyAoSUQ6IDE4NSwgL1NDUkFUQ0gvbWFuaWFj
+L2hpZGF2L21ldGEtdGV4YXNpbnN0cnVtZW50cy9yZWNpcGVzLXRpL2RtYWkvdGktZG1haV9zdm4u
+YmIsDQpkb19mZXRjaCkNCk5PVEU6IHBhY2thZ2UgdGktZG1haS0xXzJfMTBfMDBfMDErc3ZuclVO
+REVGSU5FRF9TUkNSRVYtcjJvOiB0YXNrDQpkb19mZXRjaDogU3RhcnRlZA0KV0FSTklORzogRmFp
+bGVkIHRvIGZldGNoIFVSTA0Kc3ZuOi8vZ2ZvcmdlLnRpLmNvbS9zdm4vZG1haS87bW9kdWxlPVVO
+REVGSU5FRF9ETUFJQlJBTkNIO3Byb3RvPWh0dHBzO3VzZXI9YW5vbnltb3VzO3Bzd2Q9JycNCkVS
+Uk9SOiBGZXRjaGVyIGZhaWx1cmU6IEZldGNoIGNvbW1hbmQgZXhwb3J0IEhPTUU9Ii9ob21lL21h
+bmlhYyI7IGV4cG9ydCBTU0hfQUdFTlRfUElEPSIzMzgyIjsgZXhwb3J0IFNTSF9BVVRIX1NPQ0s9
+Ii90bXAva2V5cmluZy1xRFoyYzIvc3NoIjsgZXhwb3J0IEdJVF9DT05GSUc9Ii9TQ1JBVENIL21h
+bmlhYy9oaWRhdi9idWlsZC90bXAtZWdsaWJjL3N5c3Jvb3RzL3g4Nl82NC1saW51eC9ldGMvZ2l0
+Y29uZmlnIjsNCmV4cG9ydCBQQVRIPSIvU0NSQVRDSC9tYW5pYWMvaGlkYXYvb3BlbmVtYmVkZGVk
+LWNvcmUvc2NyaXB0czovU0NSQVRDSC9tYW5pYWMvaGlkYXYvYnVpbGQvdG1wLWVnbGliYy9zeXNy
+b290cy94ODZfNjQtbGludXgvdXNyL2Jpbi9hcm12N2EtYW5nc3Ryb20tbGludXgtZ251ZWFiaTov
+U0NSQVRDSC9tYW5pYWMvaGlkYXYvYnVpbGQvdG1wLWVnbGliYy9zeXNyb290cy9oaWRhdi91c3Iv
+YmluL2Nyb3Nzc2NyaXB0czovU0NSQVRDSC9tYW5pYWMvaGlkYXYvYnVpbGQvdG1wLWVnbGliYy9z
+eXNyb290cy94ODZfNjQtbGludXgvdXNyL3NiaW46L1NDUkFUQ0gvbWFuaWFjL2hpZGF2L2J1aWxk
+L3RtcC1lZ2xpYmMvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9iaW46L1NDUkFUQ0gvbWFuaWFj
+L2hpZGF2L2J1aWxkL3RtcC1lZ2xpYmMvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3NiaW46L1NDUkFU
+Q0gvbWFuaWFjL2hpZGF2L2J1aWxkL3RtcC1lZ2xpYmMvc3lzcm9vdHMveDg2XzY0LWxpbnV4Ly9i
+aW46L1NDUkFUQ0gvbWFuaWFjL2hpZGF2L29wZW5lbWJlZGRlZC1jb3JlL3NjcmlwdHM6L1NDUkFU
+Q0gvbWFuaWFjL2hpZGF2L2JpdGJha2UvYmluLzovaG9tZS9tYW5pYWMvYmluOi91c3IvbGliL2xp
+Z2h0ZG0vbGlnaHRkbTovdXNyL2xvY2FsL3NiaW46L3Vzci9sb2NhbC9iaW46L3Vzci9zYmluOi91
+c3IvYmluOi9zYmluOi9iaW46L3Vzci9nYW1lcyI7DQovdXNyL2Jpbi9lbnYgc3ZuIGNvIC0tdXNl
+cm5hbWUgYW5vbnltb3VzIC0tcGFzc3dvcmQgJycgLXIgVU5ERUZJTkVEX1NSQ1JFViBodHRwczov
+L2dmb3JnZS50aS5jb20vc3ZuL2RtYWkvL1VOREVGSU5FRF9ETUFJQlJBTkNIQFVOREVGSU5FRF9T
+UkNSRVYNClVOREVGSU5FRF9ETUFJQlJBTkNIIGNvdWxkIG5vdCBiZSBydW46DQpOb25lDQpFUlJP
+UjogRnVuY3Rpb24gZmFpbGVkOiBGZXRjaGVyIGZhaWx1cmUgZm9yIFVSTDoNCidzdm46Ly9nZm9y
+Z2UudGkuY29tL3N2bi9kbWFpLzttb2R1bGU9VU5ERUZJTkVEX0RNQUlCUkFOQ0g7cHJvdG89aHR0
+cHM7dXNlcj1hbm9ueW1vdXM7cHN3ZD0nJycuDQpVbmFibGUgdG8gZmV0Y2ggVVJMIGZyb20gYW55
+IHNvdXJjZS4NCkVSUk9SOiBMb2dmaWxlIG9mIGZhaWx1cmUgc3RvcmVkIGluOg0KL1NDUkFUQ0gv
+bWFuaWFjL2hpZGF2L2J1aWxkL3RtcC1lZ2xpYmMvd29yay9oaWRhdi1hbmdzdHJvbS1saW51eC1n
+bnVlYWJpL3RpLWRtYWktMV8yXzEwXzAwXzAxK3N2bnJVTkRFRklORURfU1JDUkVWLXIyby90ZW1w
+L2xvZy5kb19mZXRjaC4xMTk4MA0KTk9URTogcGFja2FnZSB0aS1kbWFpLTFfMl8xMF8wMF8wMStz
+dm5yVU5ERUZJTkVEX1NSQ1JFVi1yMm86IHRhc2sNCmRvX2ZldGNoOiBGYWlsZWQNCkVSUk9SOiBU
+YXNrIDE4NQ0KKC9TQ1JBVENIL21hbmlhYy9oaWRhdi9tZXRhLXRleGFzaW5zdHJ1bWVudHMvcmVj
+aXBlcy10aS9kbWFpL3RpLWRtYWlfc3ZuLmJiLA0KZG9fZmV0Y2gpIGZhaWxlZCB3aXRoIGV4aXQg
+Y29kZSAnMScNCg0KDQpMb29raW5nIGF0IHRoZSByZWNpcGVzIGluDQptZXRhLXRleGFzaW5zdHJ1
+bWVudHMvcmVjaXBlcy10aS9kbWFpL3RpLWRtYWlbLmluYyB8IF9zdm4uYmIgXSB0aGVyZSBhcmUg
+REVQRU5EUywgRE1BSVBMQVRGT1JNLCBETUFJQlJBTkNIIGFuZCBTUkNSRVYgZGVmaW5lZCBmb3Ig
+Y3B1cyBkbTY0NDYsIGRtNjQ2NywgZG0zNTUsIGRtMzY1LCBvbWFwMywgb21hcGwxMzcsIG9tYXBs
+MTM4LiBkbTgxNHggYW5kIGRtODE2eCBhcmUgbWlzc2luZy4gV2h5IGlzIHRoYXQ/IFdoZXJlIGNh
+biBJIGdldCB0aGUgY29ycmVzcG9uZGluZyBicmFuY2ggYW5kIHNyY3JldiB2YWx1ZXMgZm9yIHRo
+ZXNlIHBsYXRmb3Jtcz8NCg0KUmVnYXJkcywNClRoaWxvDQoNCi0tDQpEaXBsLi1JbmcgKEZIKSBU
+aGlsbyBGcm9tbSwgTVNjLiwgRW1iZWRkZWQgU3lzdGVtcyBBcmNoaXRlY3QgRFJlc2VhcmNoIEZh
+aHJ6ZXVnZWxla3Ryb25payBHbWJIIE90dG8tU2NobWlyZ2FsLVN0ci4gMywgRC0xMDMxOSBCZXJs
+aW4sIEdlcm1hbnkNClRlbDogKzQ5ICgzMCkgNTE1IDkzMiAyMjggICBtYWlsdG86ZnJvbW1AZHJl
+c2VhcmNoLWZlLmRlDQpGYXg6ICs0OSAoMzApIDUxNSA5MzIgNzcgICAgaHR0cDovL3d3dy5kcmVz
+ZWFyY2guZGUNCkFtdHNnZXJpY2h0OiBCZXJsaW4gQ2hhcmxvdHRlbmJ1cmcsIEhSQiAxMzAxMjAg
+QiBVc3QuLUlETnIuIERFMjczOTUyMDU4DQpHZXNjaMOkZnRzZsO8aHJlcjogRHIuIE0uIFdlYmVy
+LCBXLiBNw7ZnbGUNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fDQptZXRhLXRpIG1haWxpbmcgbGlzdA0KbWV0YS10aUB5b2N0b3Byb2plY3Qub3JnDQpodHRw
+czovL2xpc3RzLnlvY3RvcHJvamVjdC5vcmcvbGlzdGluZm8vbWV0YS10aQ0KDQo=
 
