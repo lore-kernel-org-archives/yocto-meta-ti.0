@@ -1,37 +1,39 @@
-Return-Path: <r-monk@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24C83E01304
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jun 2012 08:06:17 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q5RF6Epu020653;
-	Wed, 27 Jun 2012 10:06:14 -0500
-Received: from DNCE71.ent.ti.com (dnce71.ent.ti.com [137.167.131.20])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q5RF6Dh4020912;
-	Wed, 27 Jun 2012 10:06:14 -0500
-Received: from DNCE05.ent.ti.com ([fe80::2868:e891:b6c7:394]) by
-	DNCE71.ent.ti.com ([fe80::3dd1:4b04:86e6:bfd0%29]) with mapi id
-	14.01.0323.003; Wed, 27 Jun 2012 17:06:13 +0200
-From: "Monk, Roger" <r-monk@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>, "fromm@dresearch-fe.de"
-	<fromm@dresearch-fe.de>, Enrico <ebutera@users.berlios.de>
-Thread-Topic: [meta-ti] gstreamer / ti-dmai component does not build	for
-	ti8148-evm
-Thread-Index: AQHNVHNtMy0aFka/jEKzq4E77EjZGZcOQc+g
-Date: Wed, 27 Jun 2012 15:06:12 +0000
-Message-ID: <4C82F39BABFE6A429733A300DEBF52240B8056E2@DNCE05.ent.ti.com>
+Return-Path: <ebutera@gmail.com>
+Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
+	[209.85.214.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A744E0073F
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jun 2012 08:34:45 -0700 (PDT)
+Received: by bkcjf20 with SMTP id jf20so1308886bkc.35
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jun 2012 08:34:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=/juwhGJ5SNdw03Y8ya9c6G+3c+O/ryPw4t5qx6OKsQI=;
+	b=fxlv3HnfZ6XQn99SX4OqMHGgjDDz4mdPXGRk71saHwQ7qR/qayCESLSHx42mH2Ca6n
+	99R6zWVMYiAnRXpnXjiqtVU8hWI4dLJh8/mtVt88VNMojDkoVX2iOgRkctnTnKMQutxQ
+	7GsGRW9TbGHeCAravkUr0vCBFUm2ZCc9tmlHCyYR5AP0mWNq/iYZzhTMq8sh1BoJ09i+
+	A3o0DCE+eg6h1T36RUBRrwsJOylOqnD7E6taef1OlxEF4PQcbJblRO6MBDxJtQytN3Lh
+	0N9YVGobfSK6QkMyvNF5qnemqfMOAKpOgDelMWZ+7OZlxthJ4LS7pV5RiNC+AU5qFLsW
+	c3BA==
+MIME-Version: 1.0
+Received: by 10.204.151.130 with SMTP id c2mr7726129bkw.125.1340811284554;
+	Wed, 27 Jun 2012 08:34:44 -0700 (PDT)
+Sender: ebutera@gmail.com
+Received: by 10.204.18.143 with HTTP; Wed, 27 Jun 2012 08:34:44 -0700 (PDT)
+In-Reply-To: <4C82F39BABFE6A429733A300DEBF52240B8056E2@DNCE05.ent.ti.com>
 References: <CADZ6=asseEZTzS6dz0we4-Czbr_n2Y6Pps5UsfGagh7NV04BqQ@mail.gmail.com>
-	<CA+2YH7vu646k8kMUS9pYfJQ6+6s5PdvTdyxJSQewztRAaFEomg@mail.gmail.com>,
+	<CA+2YH7vu646k8kMUS9pYfJQ6+6s5PdvTdyxJSQewztRAaFEomg@mail.gmail.com>
 	<CADZ6=au5b5fKuhUm=4Nrsq2es66+u=X1aorgUgDLK8AZDA3mEg@mail.gmail.com>
 	<7B98F5B8-3C44-4919-B826-36C3A3B75319@ti.com>
-In-Reply-To: <7B98F5B8-3C44-4919-B826-36C3A3B75319@ti.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.167.131.83]
-x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
-MIME-Version: 1.0
+	<4C82F39BABFE6A429733A300DEBF52240B8056E2@DNCE05.ent.ti.com>
+Date: Wed, 27 Jun 2012 17:34:44 +0200
+X-Google-Sender-Auth: iCBI0BAltdc9T4Myp8IcmTyCIoY
+Message-ID: <CA+2YH7vyMKhpbefJRWN7CBWqj_xgkxN=LPVLjq5m1ZO0n_2s5Q@mail.gmail.com>
+From: Enrico <ebutera@users.berlios.de>
+To: "Monk, Roger" <r-monk@ti.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: gstreamer / ti-dmai component does not build	for	ti8148-evm
+Subject: Re: gstreamer / ti-dmai component does not build for ti8148-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,79 +45,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jun 2012 15:06:18 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Wed, 27 Jun 2012 15:34:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 27, 2012 at 15:44:48, Dmytriyenko, Denys wrote:
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] gstreamer / ti-dmai component does not build
-> for ti8148-evm
->
-> Sorry for top post.
->
-> gst-ducati is not part of meta-ti and it wasn't integrated yet.
-> Although someone (was it Enrico?) had previously sent unfinished
-> patches for it - you can check the archives. It didn't work for me on
-> the first try and I had no time debugging it further, so the patches
-> got postponed for now - I still have them in my Todo list though...
->
+On Wed, Jun 27, 2012 at 5:06 PM, Monk, Roger <r-monk@ti.com> wrote:
+> On Wed, Jun 27, 2012 at 15:44:48, Dmytriyenko, Denys wrote:
+>> Cc: meta-ti@yoctoproject.org
+>> Subject: Re: [meta-ti] gstreamer / ti-dmai component does not build
+>> for ti8148-evm
+>>
+>> Sorry for top post.
+>>
+>> gst-ducati is not part of meta-ti and it wasn't integrated yet.
+>> Although someone (was it Enrico?) had previously sent unfinished
+>> patches for it - you can check the archives. It didn't work for me on
+>> the first try and I had no time debugging it further, so the patches
+>> got postponed for now - I still have them in my Todo list though...
 
-But either way... DM814x doesn't use gst-ducati.   It uses gstreamer-ti, (o=
-n TI81xx branch) which is basically a gst-openmax interface.
+When i did it there was the problem that HDVICP2 sources (required to
+build the stack) disappeared from TI (public) site, will they ever
+come back?
 
-> Denys
->
->
->
->
-Texas Instruments Limited, 800 Pavilion Drive, Northampton, NN4 7YL. Regist=
-ered in England & Wales under company number 00574102
+> But either way... DM814x doesn't use gst-ducati. =A0 It uses gstreamer-ti=
+, (on TI81xx branch) which is basically a gst-openmax interface.
 
------ Reply message -----
-> From: "Thilo Fromm" <fromm@dresearch-fe.de>
-> To: "Enrico" <ebutera@users.berlios.de>
-> Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-> Subject: [meta-ti] gstreamer / ti-dmai component does not build for
-> ti8148- evm
-> Date: Wed, Jun 27, 2012 10:38
->
->
->
->
-> Hi Enrico,
->
-> >> Hi,
-> >>
-> >> building gstreamer for ti8148 fails becasue DMAI does not build:
-> >
-> > Are you sure you can use gstreamer-ti with ti8148?
->
-> Apparently I cannot.
->
-> > AFAIK for
-> > multimedia it's more like the pandaboard so you should use gst-ducati.
->
-> ... which is not part of meta-ti?
->
-> Regards,
-> Thilo
->
-> --
-> Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect DResearch
-> Fahrzeugelektronik GmbH Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-> Tel: +49 (30) 515 932 228   mailto:fromm@dresearch-fe.de
-> Fax: +49 (30) 515 932 77    http://www.dresearch.de
-> Amtsgericht: Berlin Charlottenburg, HRB 130120 B Ust.-IDNr.
-> DE273952058
-> Gesch=E4ftsf=FChrer: Dr. M. Weber, W. M=F6gle
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+Out of curiosity, can the same version be used for the pandaboard?
 
-
-
-
+Enrico
 
