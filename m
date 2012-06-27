@@ -1,33 +1,34 @@
-Return-Path: <r-monk@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAAA4E0073F
-	for <meta-ti@yoctoproject.org>; Wed, 27 Jun 2012 07:27:39 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q5RERbWI014443;
-	Wed, 27 Jun 2012 09:27:37 -0500
-Received: from DNCE70.ent.ti.com (dnce70.ent.ti.com [137.167.131.19])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q5RERa0A032537;
-	Wed, 27 Jun 2012 09:27:37 -0500
-Received: from DNCE05.ent.ti.com ([fe80::2868:e891:b6c7:394]) by
-	DNCE70.ent.ti.com ([fe80::70c9:b447:24a2:dddc%30]) with mapi id
-	14.01.0323.003; Wed, 27 Jun 2012 16:27:36 +0200
-From: "Monk, Roger" <r-monk@ti.com>
-To: Thilo Fromm <fromm@dresearch-fe.de>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] gstreamer / ti-dmai component does not build for
-	ti8148-evm
-Thread-Index: AQHNVGiC6rJtPIlKDU+UDBzOwYtprpcOLZwQ
-Date: Wed, 27 Jun 2012 14:27:35 +0000
-Message-ID: <4C82F39BABFE6A429733A300DEBF52240B8051DB@DNCE05.ent.ti.com>
-References: <CADZ6=asseEZTzS6dz0we4-Czbr_n2Y6Pps5UsfGagh7NV04BqQ@mail.gmail.com>
-In-Reply-To: <CADZ6=asseEZTzS6dz0we4-Czbr_n2Y6Pps5UsfGagh7NV04BqQ@mail.gmail.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.167.131.83]
-x-exclaimer-md-config: f9c360f5-3d1e-4c3c-8703-f45bf52eff6b
+Return-Path: <ebutera@gmail.com>
+Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
+	[209.85.214.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 16171E0073F
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jun 2012 07:33:30 -0700 (PDT)
+Received: by bkcjf20 with SMTP id jf20so1220423bkc.35
+	for <meta-ti@yoctoproject.org>; Wed, 27 Jun 2012 07:33:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=A0sWUUXs+IgZc/Q8hE0FBLLWrGw0c3GOOgVUDHK5fCU=;
+	b=GoQ4Oy+hqzCmy56X5VX1RYwO/BlEptKJZfryf7IIk0NIvTS1UPE7R73cziKXcIBG9K
+	RBcP23itjNv+ghqTIguJHijNrthNu9kcc0wzlahXaPAhnjHH44b/pRp3y1h+J+zGT3Ce
+	5utUw5pD6D3mO/YqmuUFuLAHlfvGEOHC1qdQyg9CemR/BDNjQCAVVkMEwgpGvxM9glFx
+	/q1Gp6u9oOzQmVaxBYDwXA+glLZnbc8w15YPu+YAXVc2qFxYFGKB4TXyikvI+HfN8CB9
+	Wdnal+38Rf8Yo7ZtjAlqfYxG7ErFRznWtNBgfM8FUGiauavkhMwisjThFwmEUxX1Kt47
+	lDOg==
 MIME-Version: 1.0
-Subject: Re: gstreamer / ti-dmai component does not build for	ti8148-evm
+Received: by 10.204.156.209 with SMTP id y17mr7375419bkw.113.1340807609890;
+	Wed, 27 Jun 2012 07:33:29 -0700 (PDT)
+Sender: ebutera@gmail.com
+Received: by 10.204.18.143 with HTTP; Wed, 27 Jun 2012 07:33:29 -0700 (PDT)
+In-Reply-To: <CADZ6=asseEZTzS6dz0we4-Czbr_n2Y6Pps5UsfGagh7NV04BqQ@mail.gmail.com>
+References: <CADZ6=asseEZTzS6dz0we4-Czbr_n2Y6Pps5UsfGagh7NV04BqQ@mail.gmail.com>
+Date: Wed, 27 Jun 2012 16:33:29 +0200
+X-Google-Sender-Auth: 7AOkyTbahmXMVQK62LifYgRWv8g
+Message-ID: <CA+2YH7vu646k8kMUS9pYfJQ6+6s5PdvTdyxJSQewztRAaFEomg@mail.gmail.com>
+From: Enrico <ebutera@users.berlios.de>
+To: Thilo Fromm <fromm@dresearch-fe.de>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: gstreamer / ti-dmai component does not build for ti8148-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,81 +40,18 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jun 2012 14:27:39 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 27 Jun 2012 14:33:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-SGkgVGhpbG8sDQoNCkRNODF4eCBwbGF0Zm9ybXMgZG9uJ3QgdXNlIERNQUkuICBGb3IgZ3N0cmVh
-bWVyLCB0aGlzIGlzIHN0aWxsIHBhcnQgb2YgdGhlIGdzdHJlYW1lci10aSBwcm9qZWN0IChnc3Ry
-ZWFtZXIudGkuY29tKSBpbiBhIHNlcGFyYXRlIGJyYW5jaCwgd2l0aCBzb21lIGRvY3VtZW50YXRp
-b24gaGVyZSA6LQ0KDQpodHRwOi8vcHJvY2Vzc29ycy53aWtpLnRpLmNvbS9pbmRleC5waHAvRE04
-MXh4X0dzdHJlYW1lcl9QbHVnaW4NCg0KW0knbSBzdXJlIG5vdCB3aGF0IHlvdSB3YW50IHRvIGhl
-YXIuLi4uIGp1c3QgdHJ5aW5nIHRvIGxldCB5b3Uga25vdyBzdGF0dXMuLi5dLg0KDQpUaGlzIGhh
-c24ndCBiZWVuIGludGVncmF0ZWQgaW50byBtZXRhLXRpIGFuZCB3aWxsIGFsc28gcmVxdWlyZSBp
-bnRlZ3JhdGlvbiBvZiB0aGUgY29ycmVzcG9uZGluZyBjb2RlYyBzdGFjayBwaWVjZXMuICBJZiB5
-b3Ugd2FudCB0byBpbnRlZ3JhdGUgdGhpcyBpbnRvIG1ldGEtdGksIEkgd291bGQgc3VnZ2VzdCBm
-aXJzdCBsb29raW5nIGF0IHRoZSBFWlNESyAoaHR0cDovL3d3dy50aS5jb20vdG9vbC9saW51eGV6
-c2RrLWRhdmluY2kpIHdoaWNoIGhhcyBhIGtub3duIGNvbXBhdGlibGUgc2V0IG9mIGNvbXBvbmVu
-dHMgcHJlLWludGVncmF0ZWQuDQoNCn5yb2dlcg0KDQoNClRleGFzIEluc3RydW1lbnRzIExpbWl0
-ZWQsIDgwMCBQYXZpbGlvbiBEcml2ZSwgTm9ydGhhbXB0b24sIE5ONCA3WUwuIFJlZ2lzdGVyZWQg
-aW4gRW5nbGFuZCAmIFdhbGVzIHVuZGVyIGNvbXBhbnkgbnVtYmVyIDAwNTc0MTAyDQoNCi0tLS0t
-T3JpZ2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBtZXRhLXRpLWJvdW5jZXNAeW9jdG9wcm9qZWN0
-Lm9yZyBbbWFpbHRvOm1ldGEtdGktYm91bmNlc0B5b2N0b3Byb2plY3Qub3JnXSBPbiBCZWhhbGYg
-T2YgVGhpbG8gRnJvbW0NClNlbnQ6IDI3IEp1bmUgMjAxMiAxNDoyNw0KVG86IG1ldGEtdGlAeW9j
-dG9wcm9qZWN0Lm9yZw0KU3ViamVjdDogW21ldGEtdGldIGdzdHJlYW1lciAvIHRpLWRtYWkgY29t
-cG9uZW50IGRvZXMgbm90IGJ1aWxkIGZvciB0aTgxNDgtZXZtDQoNCkhpLA0KDQpidWlsZGluZyBn
-c3RyZWFtZXIgZm9yIHRpODE0OCBmYWlscyBiZWNhc3VlIERNQUkgZG9lcyBub3QgYnVpbGQ6DQoN
-Ck5PVEU6IFJ1bm5pbmcgdGFzayA5ODIgb2YgMTczNyAoSUQ6IDE4NSwgL1NDUkFUQ0gvbWFuaWFj
-L2hpZGF2L21ldGEtdGV4YXNpbnN0cnVtZW50cy9yZWNpcGVzLXRpL2RtYWkvdGktZG1haV9zdm4u
-YmIsDQpkb19mZXRjaCkNCk5PVEU6IHBhY2thZ2UgdGktZG1haS0xXzJfMTBfMDBfMDErc3ZuclVO
-REVGSU5FRF9TUkNSRVYtcjJvOiB0YXNrDQpkb19mZXRjaDogU3RhcnRlZA0KV0FSTklORzogRmFp
-bGVkIHRvIGZldGNoIFVSTA0Kc3ZuOi8vZ2ZvcmdlLnRpLmNvbS9zdm4vZG1haS87bW9kdWxlPVVO
-REVGSU5FRF9ETUFJQlJBTkNIO3Byb3RvPWh0dHBzO3VzZXI9YW5vbnltb3VzO3Bzd2Q9JycNCkVS
-Uk9SOiBGZXRjaGVyIGZhaWx1cmU6IEZldGNoIGNvbW1hbmQgZXhwb3J0IEhPTUU9Ii9ob21lL21h
-bmlhYyI7IGV4cG9ydCBTU0hfQUdFTlRfUElEPSIzMzgyIjsgZXhwb3J0IFNTSF9BVVRIX1NPQ0s9
-Ii90bXAva2V5cmluZy1xRFoyYzIvc3NoIjsgZXhwb3J0IEdJVF9DT05GSUc9Ii9TQ1JBVENIL21h
-bmlhYy9oaWRhdi9idWlsZC90bXAtZWdsaWJjL3N5c3Jvb3RzL3g4Nl82NC1saW51eC9ldGMvZ2l0
-Y29uZmlnIjsNCmV4cG9ydCBQQVRIPSIvU0NSQVRDSC9tYW5pYWMvaGlkYXYvb3BlbmVtYmVkZGVk
-LWNvcmUvc2NyaXB0czovU0NSQVRDSC9tYW5pYWMvaGlkYXYvYnVpbGQvdG1wLWVnbGliYy9zeXNy
-b290cy94ODZfNjQtbGludXgvdXNyL2Jpbi9hcm12N2EtYW5nc3Ryb20tbGludXgtZ251ZWFiaTov
-U0NSQVRDSC9tYW5pYWMvaGlkYXYvYnVpbGQvdG1wLWVnbGliYy9zeXNyb290cy9oaWRhdi91c3Iv
-YmluL2Nyb3Nzc2NyaXB0czovU0NSQVRDSC9tYW5pYWMvaGlkYXYvYnVpbGQvdG1wLWVnbGliYy9z
-eXNyb290cy94ODZfNjQtbGludXgvdXNyL3NiaW46L1NDUkFUQ0gvbWFuaWFjL2hpZGF2L2J1aWxk
-L3RtcC1lZ2xpYmMvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9iaW46L1NDUkFUQ0gvbWFuaWFj
-L2hpZGF2L2J1aWxkL3RtcC1lZ2xpYmMvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3NiaW46L1NDUkFU
-Q0gvbWFuaWFjL2hpZGF2L2J1aWxkL3RtcC1lZ2xpYmMvc3lzcm9vdHMveDg2XzY0LWxpbnV4Ly9i
-aW46L1NDUkFUQ0gvbWFuaWFjL2hpZGF2L29wZW5lbWJlZGRlZC1jb3JlL3NjcmlwdHM6L1NDUkFU
-Q0gvbWFuaWFjL2hpZGF2L2JpdGJha2UvYmluLzovaG9tZS9tYW5pYWMvYmluOi91c3IvbGliL2xp
-Z2h0ZG0vbGlnaHRkbTovdXNyL2xvY2FsL3NiaW46L3Vzci9sb2NhbC9iaW46L3Vzci9zYmluOi91
-c3IvYmluOi9zYmluOi9iaW46L3Vzci9nYW1lcyI7DQovdXNyL2Jpbi9lbnYgc3ZuIGNvIC0tdXNl
-cm5hbWUgYW5vbnltb3VzIC0tcGFzc3dvcmQgJycgLXIgVU5ERUZJTkVEX1NSQ1JFViBodHRwczov
-L2dmb3JnZS50aS5jb20vc3ZuL2RtYWkvL1VOREVGSU5FRF9ETUFJQlJBTkNIQFVOREVGSU5FRF9T
-UkNSRVYNClVOREVGSU5FRF9ETUFJQlJBTkNIIGNvdWxkIG5vdCBiZSBydW46DQpOb25lDQpFUlJP
-UjogRnVuY3Rpb24gZmFpbGVkOiBGZXRjaGVyIGZhaWx1cmUgZm9yIFVSTDoNCidzdm46Ly9nZm9y
-Z2UudGkuY29tL3N2bi9kbWFpLzttb2R1bGU9VU5ERUZJTkVEX0RNQUlCUkFOQ0g7cHJvdG89aHR0
-cHM7dXNlcj1hbm9ueW1vdXM7cHN3ZD0nJycuDQpVbmFibGUgdG8gZmV0Y2ggVVJMIGZyb20gYW55
-IHNvdXJjZS4NCkVSUk9SOiBMb2dmaWxlIG9mIGZhaWx1cmUgc3RvcmVkIGluOg0KL1NDUkFUQ0gv
-bWFuaWFjL2hpZGF2L2J1aWxkL3RtcC1lZ2xpYmMvd29yay9oaWRhdi1hbmdzdHJvbS1saW51eC1n
-bnVlYWJpL3RpLWRtYWktMV8yXzEwXzAwXzAxK3N2bnJVTkRFRklORURfU1JDUkVWLXIyby90ZW1w
-L2xvZy5kb19mZXRjaC4xMTk4MA0KTk9URTogcGFja2FnZSB0aS1kbWFpLTFfMl8xMF8wMF8wMStz
-dm5yVU5ERUZJTkVEX1NSQ1JFVi1yMm86IHRhc2sNCmRvX2ZldGNoOiBGYWlsZWQNCkVSUk9SOiBU
-YXNrIDE4NQ0KKC9TQ1JBVENIL21hbmlhYy9oaWRhdi9tZXRhLXRleGFzaW5zdHJ1bWVudHMvcmVj
-aXBlcy10aS9kbWFpL3RpLWRtYWlfc3ZuLmJiLA0KZG9fZmV0Y2gpIGZhaWxlZCB3aXRoIGV4aXQg
-Y29kZSAnMScNCg0KDQpMb29raW5nIGF0IHRoZSByZWNpcGVzIGluDQptZXRhLXRleGFzaW5zdHJ1
-bWVudHMvcmVjaXBlcy10aS9kbWFpL3RpLWRtYWlbLmluYyB8IF9zdm4uYmIgXSB0aGVyZSBhcmUg
-REVQRU5EUywgRE1BSVBMQVRGT1JNLCBETUFJQlJBTkNIIGFuZCBTUkNSRVYgZGVmaW5lZCBmb3Ig
-Y3B1cyBkbTY0NDYsIGRtNjQ2NywgZG0zNTUsIGRtMzY1LCBvbWFwMywgb21hcGwxMzcsIG9tYXBs
-MTM4LiBkbTgxNHggYW5kIGRtODE2eCBhcmUgbWlzc2luZy4gV2h5IGlzIHRoYXQ/IFdoZXJlIGNh
-biBJIGdldCB0aGUgY29ycmVzcG9uZGluZyBicmFuY2ggYW5kIHNyY3JldiB2YWx1ZXMgZm9yIHRo
-ZXNlIHBsYXRmb3Jtcz8NCg0KUmVnYXJkcywNClRoaWxvDQoNCi0tDQpEaXBsLi1JbmcgKEZIKSBU
-aGlsbyBGcm9tbSwgTVNjLiwgRW1iZWRkZWQgU3lzdGVtcyBBcmNoaXRlY3QgRFJlc2VhcmNoIEZh
-aHJ6ZXVnZWxla3Ryb25payBHbWJIIE90dG8tU2NobWlyZ2FsLVN0ci4gMywgRC0xMDMxOSBCZXJs
-aW4sIEdlcm1hbnkNClRlbDogKzQ5ICgzMCkgNTE1IDkzMiAyMjggICBtYWlsdG86ZnJvbW1AZHJl
-c2VhcmNoLWZlLmRlDQpGYXg6ICs0OSAoMzApIDUxNSA5MzIgNzcgICAgaHR0cDovL3d3dy5kcmVz
-ZWFyY2guZGUNCkFtdHNnZXJpY2h0OiBCZXJsaW4gQ2hhcmxvdHRlbmJ1cmcsIEhSQiAxMzAxMjAg
-QiBVc3QuLUlETnIuIERFMjczOTUyMDU4DQpHZXNjaMOkZnRzZsO8aHJlcjogRHIuIE0uIFdlYmVy
-LCBXLiBNw7ZnbGUNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fDQptZXRhLXRpIG1haWxpbmcgbGlzdA0KbWV0YS10aUB5b2N0b3Byb2plY3Qub3JnDQpodHRw
-czovL2xpc3RzLnlvY3RvcHJvamVjdC5vcmcvbGlzdGluZm8vbWV0YS10aQ0KDQo=
+On Wed, Jun 27, 2012 at 3:26 PM, Thilo Fromm <fromm@dresearch-fe.de> wrote:
+> Hi,
+>
+> building gstreamer for ti8148 fails becasue DMAI does not build:
+
+Are you sure you can use gstreamer-ti with ti8148? AFAIK for
+multimedia it's more like the pandaboard so you should use gst-ducati.
+
+But wait for someone with more knowledge to answer to be sure :D
+
+Enrico
 
