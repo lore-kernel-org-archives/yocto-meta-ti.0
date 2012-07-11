@@ -1,39 +1,33 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B3937E00280
-	for <meta-ti@yoctoproject.org>; Tue, 10 Jul 2012 04:23:15 -0700 (PDT)
-Received: by werc12 with SMTP id c12so5278938wer.35
-	for <meta-ti@yoctoproject.org>; Tue, 10 Jul 2012 04:23:14 -0700 (PDT)
+Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
+	[209.85.215.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 02919E002A8
+	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2012 02:58:39 -0700 (PDT)
+Received: by eaab16 with SMTP id b16so345213eaa.35
+	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2012 02:58:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=gWcIkmMYIeTWdCQHIpOKBB0+AFk+yws8GH3p/O8Hmdk=;
-	b=lnWRnGqM6Aid48MIZpY6VhfpPruBg9lySqj38G4dGkicJyOiKvofrOavDxKkXslI7e
-	HNEJtxwd2TlG9RqdtCZnHps1J9C4+NFXq6EZiXNXhRDoFYeJjlykluj4PoWhO8QSdYwX
-	kUFPfo6lNkkImbSYnvl5xjIfIP82E2cxXPnkNbWIw8DaYjRWv2ELXRREgeufpkbtNpNQ
-	6PD3URO5F51ED4f0wAWINJk9Ipr4o5YIVF8TdW3HgOxCKwLn6UtwCM7ZwBVoqPWOm9xq
-	GbyNI8jucHENuEqwE/xvBcOeIxE90LYsyYhiDzMCET9wNC4HCQNwzvkhyvyDfAlMzyxw
-	0epQ==
-Received: by 10.180.87.232 with SMTP id bb8mr37507424wib.0.1341919394277;
-	Tue, 10 Jul 2012 04:23:14 -0700 (PDT)
-Received: from [10.47.217.41] ([188.207.95.135])
-	by mx.google.com with ESMTPS id t8sm28419346wiy.3.2012.07.10.04.23.11
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=hGDPYgjiMghRxNgUkuU5ksRVM8nfqt/E0s48tKFQwdk=;
+	b=DVlQbExILvCqGBfiwCrc9jULwdJNmVyMPUUEFpLexCSTBBjXGGmTu9XJ12XKeYejE8
+	eZtrrgL0gNdkJ8f5nk25ILeg3E/EuUe6UHlbZ7bL/o+8C+WuJQW3fTC3+NfrZzmhVFdJ
+	/TTvvoOp6Rv9feelvQ2MBHRkg4v493F6W17GHtTooI/7jDvWEpEp3R8zf/1nmaHHD+L7
+	bgjQfDHhDPoPdj4tgzhfWur/Ni9uaWtFjVNjPD0RzZcxd49xEFhkCfkjTULHneffHbSt
+	Cu2/Zr1lsJXfWcbPJusAx84G7ow/M1aP1g56GDVsYXkB+vixt9zfTLvJqc9HgszipT+8
+	16gQ==
+Received: by 10.14.127.8 with SMTP id c8mr11730213eei.148.1342000718187;
+	Wed, 11 Jul 2012 02:58:38 -0700 (PDT)
+Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
+	by mx.google.com with ESMTPS id a16sm4252274eeg.0.2012.07.11.02.58.34
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 10 Jul 2012 04:23:12 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1278)
+	Wed, 11 Jul 2012 02:58:35 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1341837336-1870-1-git-send-email-schnitzeltony@googlemail.com>
-Date: Tue, 10 Jul 2012 13:23:09 +0200
-Message-Id: <4D3CB362-039A-4891-8425-5A14A0B9C56D@dominion.thruhere.net>
-References: <1341837336-1870-1-git-send-email-schnitzeltony@googlemail.com>
-To: =?iso-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
-X-Mailer: Apple Mail (2.1278)
-X-Gm-Message-State: ALoCoQnheM13nKe6WW/8gHf5Qzmg9kKnPh2srkHEmTxMSQq+333W0vpIMfe9jRC03PXDW3XbmVec
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] netbase: follow oe-core to v5.0
+To: meta-ti@yoctoproject.org
+Date: Wed, 11 Jul 2012 11:58:24 +0200
+Message-Id: <1342000711-18346-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQlneVdoHwzKaHqIFagOypDRMjGzdTcq88kILKt9zlCn6d3KeFKJT/VkfDr2mV64X2BUOtja
+Subject: [PATCH 1/8] beaglebone-tester: bump SRCREV to fix serial console race
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,39 +39,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jul 2012 11:23:16 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 Jul 2012 09:58:40 -0000
 
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Op 9 jul. 2012, om 14:35 heeft Andreas M=FCller het volgende geschreven:
+diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
+index b5e3081..9995556 100644
+--- a/recipes-ti/beagleboard/beaglebone-tester.bb
++++ b/recipes-ti/beagleboard/beaglebone-tester.bb
+@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
+ # only scripts and data
+ inherit allarch
+ 
+-PR = "r15"
++PR = "r16"
+ 
+ SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
+           "
+-SRCREV = "3b19f1caf8c616e3f4a25abacca28b2239d3ec82"
++SRCREV = "4f6335aedf520917a0bc0c83e9c1ac1135b8a2af"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+1.7.10
 
->=20
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> ---
-> .../beagleboard/interfaces                         |    0
-> ...{netbase_4.47.bbappend =3D> netbase_5.0.bbappend} |    0
-> 2 files changed, 0 insertions(+), 0 deletions(-)
-> rename recipes-core/netbase/{netbase-4.47 =3D> =
-netbase-5.0}/beagleboard/interfaces (100%)
-> rename recipes-core/netbase/{netbase_4.47.bbappend =3D> =
-netbase_5.0.bbappend} (100%)
->=20
-> diff --git a/recipes-core/netbase/netbase-4.47/beagleboard/interfaces =
-b/recipes-core/netbase/netbase-5.0/beagleboard/interfaces
-> similarity index 100%
-> rename from recipes-core/netbase/netbase-4.47/beagleboard/interfaces
-> rename to recipes-core/netbase/netbase-5.0/beagleboard/interfaces
-> diff --git a/recipes-core/netbase/netbase_4.47.bbappend =
-b/recipes-core/netbase/netbase_5.0.bbappend
-> similarity index 100%
-> rename from recipes-core/netbase/netbase_4.47.bbappend
-> rename to recipes-core/netbase/netbase_5.0.bbappend
-
-FYI, when this goes in we really need a branch to match yocto =
-1.2/denzil/whateverfunnyname
-
-regards,
-
-Koen=
 
