@@ -1,35 +1,32 @@
 Return-Path: <koen@dominion.thruhere.net>
 Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34010E002A8
-	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2012 02:59:27 -0700 (PDT)
-Received: by mail-ee0-f48.google.com with SMTP id b45so346309eek.35
-	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2012 02:59:26 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C8A10E002A8
+	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2012 03:24:10 -0700 (PDT)
+Received: by eekb45 with SMTP id b45so355827eek.35
+	for <meta-ti@yoctoproject.org>; Wed, 11 Jul 2012 03:24:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:x-gm-message-state;
-	bh=sKeSD9cdwQEQtMjcCrz9MdDiufHtNHdhxDBErEQ/u3M=;
-	b=aKf41Ve8ilNwjErEoIa5eO2Bim87iTTD/ASjD4teagRP7uI9shwC7/OPOFe1fQCxQK
-	2giKwMIiYXtbeANVgFN9D5b9nwjHG/o6waJ8y6NMlsFEMJxfCFRc9gAmG+MLEmQEk/iC
-	bgP+5WBXk21EPMsBjIuJs6GpEFgaHmKqWehxb9qmuk2hjB+uMw5DqkanFn4dN8FrbtbM
-	906YKXPzUGsK+WAfkwoJ9afQ7CuJjerJfB1IB3YPokRH4JY6vj/ybHCFFuMK+pQb0/U9
-	oP/rcoEFYLY/HhzRUOWDEng8xAI6Dc/eEF5gAROsd5NjcUJMe1PoHPoQVI7+iJRB3sfn
-	cqEw==
-Received: by 10.14.98.205 with SMTP id v53mr2153473eef.138.1342000764984;
-	Wed, 11 Jul 2012 02:59:24 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=f14Hirf3Ie5sY7/ZPpK/fJBmNmP990UXlXj3XY5HAUU=;
+	b=DJCoF14yH7tMyWDK9+zyaiHFj+AKDoVisXkdBc2rLHcgThrzjjS/zQPbSd43rwIdp7
+	kwVeZ957yUzVSy743rnA8b8HANUTkb5VmG/ovuHf34tl0V67s7nVQAPCZtzqn58MlRoa
+	JX3fJUao9BVCcZBIHrmi2/A9/xijD4Ec6j+BCxiMcSpACCgppsyi6yaeAKSUm9prkYTK
+	sh7Tt5+IFz87tMi5kokwLvfbOBRtlF0vMSjI9kz+iyAqFb4H/K5ZTm3roU5x2EB4z5Gv
+	DkknSma/xZsWMUjzI5nYqK30+YdbHuq7Dlclt/45KlRIksZfmY38qvMK9hjfc8yyJGj+
+	a8NA==
+Received: by 10.14.37.199 with SMTP id y47mr11518558eea.111.1342002249301;
+	Wed, 11 Jul 2012 03:24:09 -0700 (PDT)
 Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
-	by mx.google.com with ESMTPS id t3sm4101161eeb.15.2012.07.11.02.59.23
+	by mx.google.com with ESMTPS id s4sm4457564eef.2.2012.07.11.03.24.07
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 11 Jul 2012 02:59:23 -0700 (PDT)
+	Wed, 11 Jul 2012 03:24:08 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Date: Wed, 11 Jul 2012 11:58:31 +0200
-Message-Id: <1342000711-18346-8-git-send-email-koen@dominion.thruhere.net>
+Date: Wed, 11 Jul 2012 12:24:02 +0200
+Message-Id: <1342002242-19003-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.10
-In-Reply-To: <1342000711-18346-1-git-send-email-koen@dominion.thruhere.net>
-References: <1342000711-18346-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQlwbVYkzR3CqRU12QTm/5noFmMNWybZOCCk5XoHyHe8mPSpMxqE8lG9Npg7V4krQCYTbMz/
-Subject: [PATCH 8/8] u-boot 2011.09+git: update to latest version of Tom Rini's tree
+X-Gm-Message-State: ALoCoQnb+ZIY0phtUmQd/3zm1A1d/wNFEIWrwUUl51amZm74rLtUko8fWzhbkBGdY9ogrJrkLqf0
+Subject: [PATCH v2 8/8] u-boot 2011.09+git: update to latest version of Tom Rini's tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,12 +38,15 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jul 2012 09:59:27 -0000
+X-List-Received-Date: Wed, 11 Jul 2012 10:24:11 -0000
 
 All patches have been rediffed and boot tested
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
+
+Resending only patch 8 because the v1 wasusing the wrong set of patches, an earlier tree was copied instead of the one in $S
+
  ...add-option-to-boot-kernel-from-boot-in-ex.patch |   26 +++++++
  ...only-do-in-kernel-dhcp-when-using-NFS-use.patch |   35 ---------
  ...ddr_defs-change-DDR-timings-for-15x15-EVM.patch |   30 -------
@@ -81,7 +81,7 @@ Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
  delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0008-HACK-am335x-evm-turn-d-cache-on-globally-turn-it-off.patch
  rename recipes-bsp/u-boot/u-boot/2011.09git/{0013-am335x-evm-load-uImage-from-boot-instead-of-VFAT.patch => 0008-am335x-evm-load-uImage-from-boot-instead-of-VFAT.patch} (71%)
  rename recipes-bsp/u-boot/u-boot/2011.09git/{0014-ext4fs-ls-load-support.patch => 0009-ext4fs-ls-load-support.patch} (99%)
- rename recipes-bsp/u-boot/u-boot/2011.09git/{0015-am335x-switch-to-ext4-mode.patch => 0010-am335x-switch-to-ext4-mode.patch} (58%)
+ rename recipes-bsp/u-boot/u-boot/2011.09git/{0015-am335x-switch-to-ext4-mode.patch => 0010-am335x-switch-to-ext4-mode.patch} (57%)
  delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0012-am335x-evm-fix-ext2load-and-specify-partition-for-bo.patch
 
 diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0001-am335x_evm-add-option-to-boot-kernel-from-boot-in-ex.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0001-am335x_evm-add-option-to-boot-kernel-from-boot-in-ex.patch
@@ -593,7 +593,7 @@ index ba86266..ee33d90 100644
  
 diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0007-am335x-evm-fix-ext2load-and-specify-partition-for-bo.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0007-am335x-evm-fix-ext2load-and-specify-partition-for-bo.patch
 new file mode 100644
-index 0000000..1092fc1
+index 0000000..ba7cf03
 --- /dev/null
 +++ b/recipes-bsp/u-boot/u-boot/2011.09git/0007-am335x-evm-fix-ext2load-and-specify-partition-for-bo.patch
 @@ -0,0 +1,30 @@
@@ -620,7 +620,7 @@ index 0000000..1092fc1
 +-	"mmc_load_uimage_ext2=ext2load ${mmc_dev} ${kloadaddr} /boot/${bootfile}\0" \
 +-	"optargs=\0" \
 ++	"mmc_load_uimage=fatload mmc ${mmc_dev}:1 ${kloadaddr} ${bootfile}\0" \
-++	"mmc_load_uimage_ext2=ext2load ${mmc_dev}:2 ${kloadaddr} /boot/${bootfile}\0" \
+++	"mmc_load_uimage_ext2=ext2load mmc ${mmc_dev}:2 ${kloadaddr} /boot/${bootfile}\0" \
 + 	"bootargs_defaults=setenv bootargs " \
 + 		"console=${console} " \
 + 		"${optargs}\0" \
@@ -775,10 +775,10 @@ index bc81c18..37ef5d4 100644
 +1.7.10
  
 diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0015-am335x-switch-to-ext4-mode.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0010-am335x-switch-to-ext4-mode.patch
-similarity index 58%
+similarity index 57%
 rename from recipes-bsp/u-boot/u-boot/2011.09git/0015-am335x-switch-to-ext4-mode.patch
 rename to recipes-bsp/u-boot/u-boot/2011.09git/0010-am335x-switch-to-ext4-mode.patch
-index 3a93289..79ceba7 100644
+index 3a93289..4511b6b 100644
 --- a/recipes-bsp/u-boot/u-boot/2011.09git/0015-am335x-switch-to-ext4-mode.patch
 +++ b/recipes-bsp/u-boot/u-boot/2011.09git/0010-am335x-switch-to-ext4-mode.patch
 @@ -1,44 +1,45 @@
@@ -810,8 +810,8 @@ index 3a93289..79ceba7 100644
 -+	"mmc_load_uimage_ext4=ext4load mmc ${mmc_dev}:2 0x80007fc0 /boot/${bootfile}\0" \
 - 	"optargs=\0" \
 + 	"mmc_load_uimage=fatload mmc ${mmc_dev}:1 ${kloadaddr} ${bootfile}\0" \
-+-	"mmc_load_uimage_ext2=ext2load ${mmc_dev}:2 ${kloadaddr} /boot/${bootfile}\0" \
-++	"mmc_load_uimage_ext4=ext4load ${mmc_dev}:2 ${kloadaddr} /boot/${bootfile}\0" \
++-	"mmc_load_uimage_ext2=ext2load mmc ${mmc_dev}:2 ${kloadaddr} /boot/${bootfile}\0" \
+++	"mmc_load_uimage_ext4=ext4load mmc ${mmc_dev}:2 ${kloadaddr} /boot/${bootfile}\0" \
   	"bootargs_defaults=setenv bootargs " \
   		"console=${console} " \
 -@@ -102,7 +103,7 @@
