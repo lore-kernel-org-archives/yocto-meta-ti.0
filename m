@@ -1,31 +1,15 @@
-Return-Path: <fromm@dresearch-fe.de>
-Received: from mail-lb0-f176.google.com (mail-lb0-f176.google.com
-	[209.85.217.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 291F1E0027D
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jul 2012 07:47:22 -0700 (PDT)
-Received: by lboj14 with SMTP id j14so5624047lbo.35
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jul 2012 07:47:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding:x-gm-message-state;
-	bh=svx2OwhtK9n2FROygy5kLobh7jFUkZPLIPiaqFcaYHU=;
-	b=h47gALYd1Q4jmLw6r0qGCJX+ifWA2mSkzlAXgWLCQRHX7rQroAvrmnmgpnyLHPPTiD
-	vlM4EEHUvUdQKXM6PhBf9t0f8Bu11zPqUn1JuJHzfQ49Pu+hWboVPugvNSymoyWY4MXA
-	jlyZe0UN8RIvqLk+1OvWpZGvFXGL0iH85H54OAREGJi6/bMKNVLKqKeEYQvx1J56KZym
-	0lujhe2WSIcclKICup1Sztb95Lxq3mEG8WNcxOa93wyilOB/zLZGuFHVgr3EglPUvHVy
-	Zd2QtCF0AIXK7ZyX5tj2xLmKREWhMDeHGqawT2HWodB64vIF8Ix1o+m2LgimE3cwbDsn
-	urIg==
-MIME-Version: 1.0
-Received: by 10.112.46.166 with SMTP id w6mr933571lbm.100.1342190842046; Fri,
-	13 Jul 2012 07:47:22 -0700 (PDT)
-Received: by 10.112.100.132 with HTTP; Fri, 13 Jul 2012 07:47:22 -0700 (PDT)
-Date: Fri, 13 Jul 2012 16:47:22 +0200
-Message-ID: <CADZ6=avGWT=-4vLVs3VOW6dx1kmuo_qyP7jdkQiroM-UXZi06A@mail.gmail.com>
-From: Thilo Fromm <fromm@dresearch-fe.de>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45223E0027D
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jul 2012 16:04:03 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 50B7D52982; Fri, 13 Jul 2012 23:04:02 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-X-Gm-Message-State: ALoCoQnhQPTZ+aRLUhd9DtY9h/gu+I02UHrK0n8iF5S3iBVJMeiWbthO0X3odAUgyzO7lSiq0I6U
-Subject: netbase-4.47 vs. -5.0 build breakage
+Message-Id: <20120713230402.50B7D52982@arago-project.org>
+Date: Fri, 13 Jul 2012 23:04:02 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVyIG5ldGJhc2U6IGZvbGxvdyBvZS1jb3JlIHRvIHY1LjA=?=
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,28 +21,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 14:47:23 -0000
+X-List-Received-Date: Fri, 13 Jul 2012 23:04:03 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-Hi guys,
+Module: meta-ti
+Branch: master
+Commit: d3ff5630a74640f46ca2ceaef1aa1baa86b9b795
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d3ff5630a74640f46ca2ceaef1aa1baa86b9b795
 
-is anything happening to fix the current build breakage against
-oe-core? oe-core moved on to netbase-5.0, meta-texasinstruments is
-still referring to netbase-4.47 with a .bbappend. Andreas M=C3=BCller
-submitted a patch on 9th of July which fixes this. Please apply the
-patch; currently the meta-ti build is broken.
+Author: Andreas Müller <schnitzeltony@googlemail.com>
+Date:   Mon Jul  9 14:35:36 2012 +0200
 
-Regards,
-Thilo
+netbase: follow oe-core to v5.0
 
---=20
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Architect
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Tel: +49 (30) 515 932 228   mailto:fromm@dresearch-fe.de
-Fax: +49 (30) 515 932 77    http://www.dresearch.de
-Amtsgericht: Berlin Charlottenburg, HRB 130120 B
-Ust.-IDNr. DE273952058
-Gesch=C3=A4ftsf=C3=BChrer: Dr. M. Weber, W. M=C3=B6gle
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ .../beagleboard/interfaces                         |    0
+ ...{netbase_4.47.bbappend => netbase_5.0.bbappend} |    0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+diff --git a/recipes-core/netbase/netbase-4.47/beagleboard/interfaces b/recipes-core/netbase/netbase-5.0/beagleboard/interfaces
+similarity index 100%
+rename from recipes-core/netbase/netbase-4.47/beagleboard/interfaces
+rename to recipes-core/netbase/netbase-5.0/beagleboard/interfaces
+diff --git a/recipes-core/netbase/netbase_4.47.bbappend b/recipes-core/netbase/netbase_5.0.bbappend
+similarity index 100%
+rename from recipes-core/netbase/netbase_4.47.bbappend
+rename to recipes-core/netbase/netbase_5.0.bbappend
+
 
