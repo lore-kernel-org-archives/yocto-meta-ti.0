@@ -1,15 +1,29 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45223E0027D
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jul 2012 16:04:03 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 50B7D52982; Fri, 13 Jul 2012 23:04:02 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20120713230402.50B7D52982@arago-project.org>
-Date: Fri, 13 Jul 2012 23:04:02 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVyIG5ldGJhc2U6IGZvbGxvdyBvZS1jb3JlIHRvIHY1LjA=?=
+Return-Path: <denys@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A159BE0027D
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jul 2012 16:30:22 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q6DNUKLc011108;
+	Fri, 13 Jul 2012 18:30:20 -0500
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q6DNUKej019476;
+	Fri, 13 Jul 2012 18:30:20 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Fri, 13 Jul 2012 18:30:20 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id q6DNUKVi022650;
+	Fri, 13 Jul 2012 18:30:20 -0500
+Date: Fri, 13 Jul 2012 19:30:19 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Thilo Fromm <fromm@dresearch-fe.de>
+Message-ID: <20120713233018.GA24499@edge>
+References: <CADZ6=avGWT=-4vLVs3VOW6dx1kmuo_qyP7jdkQiroM-UXZi06A@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CADZ6=avGWT=-4vLVs3VOW6dx1kmuo_qyP7jdkQiroM-UXZi06A@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: netbase-4.47 vs. -5.0 build breakage
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -21,35 +35,23 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2012 23:04:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 13 Jul 2012 23:30:22 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: d3ff5630a74640f46ca2ceaef1aa1baa86b9b795
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d3ff5630a74640f46ca2ceaef1aa1baa86b9b795
+On Fri, Jul 13, 2012 at 04:47:22PM +0200, Thilo Fromm wrote:
+> Hi guys,
+> 
+> is anything happening to fix the current build breakage against
+> oe-core? oe-core moved on to netbase-5.0, meta-texasinstruments is
+> still referring to netbase-4.47 with a .bbappend. Andreas M??ller
+> submitted a patch on 9th of July which fixes this. Please apply the
+> patch; currently the meta-ti build is broken.
 
-Author: Andreas Müller <schnitzeltony@googlemail.com>
-Date:   Mon Jul  9 14:35:36 2012 +0200
+Thilo,
 
-netbase: follow oe-core to v5.0
+People do have vacations, you know, hence the 4-day delay. It is now in.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- .../beagleboard/interfaces                         |    0
- ...{netbase_4.47.bbappend => netbase_5.0.bbappend} |    0
- 2 files changed, 0 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-core/netbase/netbase-4.47/beagleboard/interfaces b/recipes-core/netbase/netbase-5.0/beagleboard/interfaces
-similarity index 100%
-rename from recipes-core/netbase/netbase-4.47/beagleboard/interfaces
-rename to recipes-core/netbase/netbase-5.0/beagleboard/interfaces
-diff --git a/recipes-core/netbase/netbase_4.47.bbappend b/recipes-core/netbase/netbase_5.0.bbappend
-similarity index 100%
-rename from recipes-core/netbase/netbase_4.47.bbappend
-rename to recipes-core/netbase/netbase_5.0.bbappend
-
+--
+Denys
 
