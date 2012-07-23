@@ -1,45 +1,30 @@
-Return-Path: <maniacbug@ymail.com>
-Received: from nm14-vm1.bullet.mail.ne1.yahoo.com
-	(nm14-vm1.bullet.mail.ne1.yahoo.com [98.138.91.38])
-	by yocto-www.yoctoproject.org (Postfix) with SMTP id D2EE6E00342
-	for <meta-ti@yoctoproject.org>; Sun, 22 Jul 2012 13:15:24 -0700 (PDT)
-Received: from [98.138.90.49] by nm14.bullet.mail.ne1.yahoo.com with NNFMP;
-	22 Jul 2012 20:15:24 -0000
-Received: from [98.138.89.192] by tm2.bullet.mail.ne1.yahoo.com with NNFMP;
-	22 Jul 2012 20:15:24 -0000
-Received: from [127.0.0.1] by omp1050.mail.ne1.yahoo.com with NNFMP;
-	22 Jul 2012 20:15:24 -0000
-X-Yahoo-Newman-Property: ymail-3
-X-Yahoo-Newman-Id: 280575.857.bm@omp1050.mail.ne1.yahoo.com
-Received: (qmail 97928 invoked by uid 60001); 22 Jul 2012 20:15:24 -0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ymail.com; s=s1024;
-	t=1342988124; bh=N46h4NDR1PxKDTuLMtnGR2Aj2hAtmjyiqzNTDzk4xbI=;
-	h=X-YMail-OSG:Received:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type:Content-Transfer-Encoding;
-	b=Saz82r7wa++TiyGLQhqTnFyZYYogQcIS19rV2/RwuOJmhIYi3lolmnu8nYSqWMAKSzsXOeEoRUmq9jJ0wPas86bVttyhqmJLQRpnZXloetmoU3gU7jM+QiZTs0XxE4vrH7XB1fdivxcakyz+anAj78FQJ7TrIB0A1lSYu5eNs1o=
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=ymail.com;
-	h=X-YMail-OSG:Received:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type:Content-Transfer-Encoding;
-	b=3iC5NavMWJpSIY5yin9Qv2b3CzAYpU9QydEtBR1Csu0VDyti+m+dvNvOwnsz4ywgF7jSjkQUYwsNgcAgRuGz+IXf4CJLYzmG/54xjtO9drcZ67apYOOry9E4LWLcqeJXLWKTiY9c2dW9tPDOfJc/1t57wZoCXC+KXECU5bbBJJc=;
-X-YMail-OSG: 2stblTgVM1lMCPB.1c13d2waP8B0wLbRRgj0P4rIwfKJiPm
-	vqtKgQ9Owr3TmeElxt.NkupJcD3oijQQmF5vTyKb7YZHZ3La.yK32GiFBLEP
-	JwRXXXZ_l0VPuLF_DlqC5X9Mx29eVfs0V.N8WDcHaY5yZDTokYtTX.4yImTx
-	EfZgGFvOYvVI7b3qImLqs11X8GqTb8SIqHpP1z7fbQpcNK7SD8DYEuxRvgPC
-	qKjMMZfLQyA609wl1XzpeXZhcXCXrhNXNp4pnjYJ8va8y5T06F1oYtLWWwBI
-	oXjHuWhQhRNyy55FEPeEpaBc80HmirmX72zEv5b5DtbRi3.I4OD31WvDA7Zt
-	wiDUuAWLkJC4lYp2TFg_BZIomCj5QPxy0APkpTjBqIFPvdzsQObGMyRVluxd
-	LYztu.zcGtPVl7D4-
-Received: from [50.135.220.100] by web121603.mail.ne1.yahoo.com via HTTP;
-	Sun, 22 Jul 2012 13:15:24 PDT
-X-Mailer: YahooMailWebService/0.8.120.356233
-Message-ID: <1342988124.95264.YahooMailNeo@web121603.mail.ne1.yahoo.com>
-Date: Sun, 22 Jul 2012 13:15:24 -0700 (PDT)
-From: maniacbug <maniacbug@ymail.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Return-Path: <Vladimir_Zapolskiy@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A42F0E0034A
+	for <meta-ti@yoctoproject.org>; Mon, 23 Jul 2012 03:08:31 -0700 (PDT)
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1StFZ1-0003xH-21 from Vladimir_Zapolskiy@mentor.com 
+	for meta-ti@yoctoproject.org; Mon, 23 Jul 2012 03:08:31 -0700
+Received: from SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Mon, 23 Jul 2012 03:08:30 -0700
+Received: from eyas.fin.mentorg.com (137.202.0.76) by
+	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
+	Server (TLS) id 14.1.289.1; Mon, 23 Jul 2012 11:08:28 +0100
+From: Vladimir Zapolskiy <vladimir_zapolskiy@mentor.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 23 Jul 2012 13:08:39 +0300
+Message-ID: <1343038119-18176-1-git-send-email-vladimir_zapolskiy@mentor.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Subject: Yocto on Pandaboard FTW
+X-Originating-IP: [137.202.0.76]
+X-OriginalArrivalTime: 23 Jul 2012 10:08:30.0604 (UTC)
+	FILETIME=[1C448CC0:01CD68BB]
+Subject: [PATCH] linux-omap-psp 2.6.32: fix am37x-evm build
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
-Reply-To: maniacbug <maniacbug@ymail.com>
 List-Id: Mailing list for the meta-ti layer <meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=unsubscribe>
@@ -48,24 +33,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Jul 2012 20:15:25 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 23 Jul 2012 10:08:31 -0000
+Content-Type: text/plain
 
-Hi.=A0 Just wanted to say that I received my Pandaboard A4 in the mail yest=
-erday, and this morning core-image-minimal and core-image-sato are running =
-great, using the following configuration.=0A=0AOE Build Configuration:=0ABB=
-_VERSION=A0=A0=A0=A0=A0=A0=A0 =3D "1.15.1"=0ATARGET_ARCH=A0=A0=A0=A0=A0=A0 =
-=3D "arm"=0ATARGET_OS=A0=A0=A0=A0=A0=A0=A0=A0 =3D "linux-gnueabi"=0AMACHINE=
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =3D "pandaboard"=0ADISTRO=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0 =3D "poky"=0ADISTRO_VERSION=A0=A0=A0 =3D "1.2"=0ATUNE_FEATU=
-RES=A0=A0=A0=A0 =3D "armv7a vfp neon cortexa9"=0ATARGET_FPU=A0=A0=A0=A0=A0=
-=A0=A0 =3D "vfp-neon"=0Ameta=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =0Ameta=
--yocto=A0=A0=A0=A0=A0=A0=A0 =3D "master:cda59a9fb77544c85410cc6192e37e7c8d4=
-c6e44"=0Ameta-ti=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =3D "(nobranch):30fb40ebc136=
-14a74c2e237927c60ac43e01d1bc"=0A=0ASato came up great on my 7-inch 1280x720=
- display, and I've spent 30 minutes playing 'bridges' :)=0A=0AI noticed in =
-earlier postings that using meta-ti and poky together is still somewhat new=
- or under development.=A0 Is there anything I should test or try out to hel=
-p the effort along?=0A=0Am.b=0A
+This change removes two supplementary patches from the list of applied
+patches, the functionality of the patches isn't valuable, and the
+unmodified provided sources can't be compiled with recent toolchains.
+
+The change fixes a compilation problem with binutils-2.21 or higher:
+
+  Error: selected processor does not support ARM mode `smc #0'
+
+Signed-off-by: Vladimir Zapolskiy <vladimir_zapolskiy@mentor.com>
+---
+ recipes-kernel/linux/linux-omap-psp_2.6.32.bb |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.32.bb b/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
+index 61fc24f..a2815d0 100644
+--- a/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
++++ b/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
+@@ -51,10 +51,10 @@ SRC_URI += "git://arago-project.org/git/projects/linux-omap3.git;protocol=git;br
+            file://0035-RTC-add-support-for-backup-battery-recharge.patch \
+            file://0036-ARM-Add-prompt-for-CONFIG_ALIGNMENT_TRAP.patch \
+            file://0037-ARM-Print-warning-on-alignment-trap-in-kernel-mode.patch \
+-           file://0038-ARM-Expose-some-CPU-control-registers-via-sysfs.patch \
++           file://0038-ARM-Expose-some-CPU-control-registers-via-sysfs.patch;apply=no \
+            file://0039-ARM-Add-option-to-allow-userspace-PLE-access.patch \
+            file://0040-ARM-Add-option-to-allow-userspace-access-to-performa.patch \
+-           file://0041-ARM-Expose-some-PMON-registers-through-sysfs.patch \
++           file://0041-ARM-Expose-some-PMON-registers-through-sysfs.patch;apply=no \
+            file://0042-musb-allow-host-io-without-gadget-module.patch \
+            file://0043-MTD-silence-ecc-errors-on-mtdblock0.patch \
+            file://0044-ARM-OMAP-beagle-every-known-beagle-except-revB-uses-.patch \
+-- 
+1.7.10.4
+
 
