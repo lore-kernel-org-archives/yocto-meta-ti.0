@@ -1,27 +1,40 @@
-Return-Path: <Vladimir_Zapolskiy@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A42F0E0034A
-	for <meta-ti@yoctoproject.org>; Mon, 23 Jul 2012 03:08:31 -0700 (PDT)
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1StFZ1-0003xH-21 from Vladimir_Zapolskiy@mentor.com 
-	for meta-ti@yoctoproject.org; Mon, 23 Jul 2012 03:08:31 -0700
-Received: from SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Mon, 23 Jul 2012 03:08:30 -0700
-Received: from eyas.fin.mentorg.com (137.202.0.76) by
-	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
-	Server (TLS) id 14.1.289.1; Mon, 23 Jul 2012 11:08:28 +0100
-From: Vladimir Zapolskiy <vladimir_zapolskiy@mentor.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 23 Jul 2012 13:08:39 +0300
-Message-ID: <1343038119-18176-1-git-send-email-vladimir_zapolskiy@mentor.com>
-X-Mailer: git-send-email 1.7.10.4
-MIME-Version: 1.0
-X-Originating-IP: [137.202.0.76]
-X-OriginalArrivalTime: 23 Jul 2012 10:08:30.0604 (UTC)
-	FILETIME=[1C448CC0:01CD68BB]
-Subject: [PATCH] linux-omap-psp 2.6.32: fix am37x-evm build
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
+	[209.85.214.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A4EDE0034A
+	for <meta-ti@yoctoproject.org>; Mon, 23 Jul 2012 03:44:51 -0700 (PDT)
+Received: by bkty5 with SMTP id y5so5243618bkt.35
+	for <meta-ti@yoctoproject.org>; Mon, 23 Jul 2012 03:44:50 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=subject:mime-version:content-type:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=YkH91ue4y3LHBCdw0fFNmL+I4o8lRDe8TuH3/0tLgcU=;
+	b=RgJRizYqcQVdt/WvvQNBqxs0fEttUfZHHRdigV0mjkjtNYmDJ77ma2F5iIvuu0QGzR
+	HluFywBLnNqXtcH/e2H+ImjDt1VlY5UWbW1ML3R/ZhToY4tlwks0chX7w52we5dyqnKs
+	/vEL1w88rXi7rE1DwwOzfhyCL9TEf6qQXmrpiv5STg42NSQwMbT38KFXrmJBhuekBfDM
+	73X3NYE0AEz5Yyb7dEMQ0vjBHUST6uzCp2XnnWHs1lzozdlXYmRqgXB17njouk819o/K
+	7EnZD6q6nmoRganXkpSFWCfswgmnOijFGXGhxtbQ2+fk2jmFTyUwWQxzDRyUe8uwcvba
+	BBcQ==
+Received: by 10.205.126.13 with SMTP id gu13mr7335953bkc.79.1343040290147;
+	Mon, 23 Jul 2012 03:44:50 -0700 (PDT)
+Received: from [172.20.3.201] (ip545070eb.adsl-surfen.hetnet.nl.
+	[84.80.112.235])
+	by mx.google.com with ESMTPS id hs2sm6909410bkc.1.2012.07.23.03.44.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 23 Jul 2012 03:44:49 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1278)
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1343038119-18176-1-git-send-email-vladimir_zapolskiy@mentor.com>
+Date: Mon, 23 Jul 2012 12:44:37 +0200
+Message-Id: <624CD066-065F-4501-A422-832835670753@dominion.thruhere.net>
+References: <1343038119-18176-1-git-send-email-vladimir_zapolskiy@mentor.com>
+To: Vladimir Zapolskiy <vladimir_zapolskiy@mentor.com>
+X-Mailer: Apple Mail (2.1278)
+X-Gm-Message-State: ALoCoQk7RldbfIRa6YyWwlVVCaMUQguYAqdvJjsliQ+kQxo8I3GLQz8z9jMswl8DvhxDKrgQ0Zil
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] linux-omap-psp 2.6.32: fix am37x-evm build
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,40 +46,22 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2012 10:08:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 23 Jul 2012 10:44:51 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-This change removes two supplementary patches from the list of applied
-patches, the functionality of the patches isn't valuable, and the
-unmodified provided sources can't be compiled with recent toolchains.
 
-The change fixes a compilation problem with binutils-2.21 or higher:
+Op 23 jul. 2012, om 12:08 heeft Vladimir Zapolskiy het volgende =
+geschreven:
 
-  Error: selected processor does not support ARM mode `smc #0'
+> This change removes two supplementary patches from the list of applied
+> patches, the functionality of the patches isn't valuable, and the
+> unmodified provided sources can't be compiled with recent toolchains.
+>=20
+> The change fixes a compilation problem with binutils-2.21 or higher:
+>=20
+>  Error: selected processor does not support ARM mode `smc #0'
 
-Signed-off-by: Vladimir Zapolskiy <vladimir_zapolskiy@mentor.com>
----
- recipes-kernel/linux/linux-omap-psp_2.6.32.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.32.bb b/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
-index 61fc24f..a2815d0 100644
---- a/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
-+++ b/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
-@@ -51,10 +51,10 @@ SRC_URI += "git://arago-project.org/git/projects/linux-omap3.git;protocol=git;br
-            file://0035-RTC-add-support-for-backup-battery-recharge.patch \
-            file://0036-ARM-Add-prompt-for-CONFIG_ALIGNMENT_TRAP.patch \
-            file://0037-ARM-Print-warning-on-alignment-trap-in-kernel-mode.patch \
--           file://0038-ARM-Expose-some-CPU-control-registers-via-sysfs.patch \
-+           file://0038-ARM-Expose-some-CPU-control-registers-via-sysfs.patch;apply=no \
-            file://0039-ARM-Add-option-to-allow-userspace-PLE-access.patch \
-            file://0040-ARM-Add-option-to-allow-userspace-access-to-performa.patch \
--           file://0041-ARM-Expose-some-PMON-registers-through-sysfs.patch \
-+           file://0041-ARM-Expose-some-PMON-registers-through-sysfs.patch;apply=no \
-            file://0042-musb-allow-host-io-without-gadget-module.patch \
-            file://0043-MTD-silence-ecc-errors-on-mtdblock0.patch \
-            file://0044-ARM-OMAP-beagle-every-known-beagle-except-revB-uses-.patch \
--- 
-1.7.10.4
-
+There are already a number of patches in meta-ti to patch the kernel =
+makefiles instead of removing these patches, so please go that route.=
 
