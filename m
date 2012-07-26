@@ -1,35 +1,48 @@
-Return-Path: <jdk@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 40074E01304
-	for <meta-ti@yoctoproject.org>; Wed, 25 Jul 2012 18:57:31 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q6Q1vTfX018759;
-	Wed, 25 Jul 2012 20:57:29 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q6Q1vTta000598;
-	Wed, 25 Jul 2012 20:57:29 -0500
-Received: from DFLE34.ent.ti.com ([fe80::c12:d795:2e56:2d02]) by
-	DFLE72.ent.ti.com ([fe80::5c48:b90d:af93:5822%30]) with mapi id
-	14.01.0323.003; Wed, 25 Jul 2012 20:57:29 -0500
-From: "Kridner, Jason" <jdk@ti.com>
-To: Arago Project git <git@arago-project.org>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] Koen Kooi : u-boot 2011.09+git: update to latest
-	version of Tom Rini's tree
-Thread-Index: AQHNatICVSu6B8CUME6oPVAVVVTevA==
-Date: Thu, 26 Jul 2012 01:57:27 +0000
-Message-ID: <CC361C01.B0548%jdk@ti.com>
-In-Reply-To: <20120726013212.1F5DA52AA6@arago-project.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Microsoft-MacOutlook/14.2.3.120616
-x-originating-ip: [128.247.5.50]
+Return-Path: <maniacbug@ymail.com>
+Received: from nm25-vm4.bullet.mail.ne1.yahoo.com
+	(nm25-vm4.bullet.mail.ne1.yahoo.com [98.138.91.185])
+	by yocto-www.yoctoproject.org (Postfix) with SMTP id BF8DFE01351
+	for <meta-ti@yoctoproject.org>; Wed, 25 Jul 2012 21:15:27 -0700 (PDT)
+Received: from [98.138.90.53] by nm25.bullet.mail.ne1.yahoo.com with NNFMP;
+	26 Jul 2012 04:15:27 -0000
+Received: from [98.138.87.9] by tm6.bullet.mail.ne1.yahoo.com with NNFMP;
+	26 Jul 2012 04:15:27 -0000
+Received: from [127.0.0.1] by omp1009.mail.ne1.yahoo.com with NNFMP;
+	26 Jul 2012 04:15:27 -0000
+X-Yahoo-Newman-Property: ymail-3
+X-Yahoo-Newman-Id: 61284.81299.bm@omp1009.mail.ne1.yahoo.com
+Received: (qmail 51501 invoked by uid 60001); 26 Jul 2012 04:15:27 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ymail.com; s=s1024;
+	t=1343276127; bh=S04AiOc4/+uRFm9FUiPZdVn+omAoC5YHtGfabMh9UZQ=;
+	h=X-YMail-OSG:Received:X-Mailer:References:Message-ID:Date:From:Reply-To:Subject:To:In-Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=UQw6CeEmsilK8+Y/hpiHzNYi1akCGEzshcqrk7Nt2Jg/GtL/SQ9MuOF7dUFQhJqd1St2+FRMLbvKbXZeiY5qUVwtZyinkk/H2dku4pbsWmX0YG+RMeiorBDp2Nzzr+4PkRPLaGalOL9/LBfbqUnYex3ih6RBH9x7M13Yl1YIu8E=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=ymail.com;
+	h=X-YMail-OSG:Received:X-Mailer:References:Message-ID:Date:From:Reply-To:Subject:To:In-Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=X92l9h90xkM/T0idnbK8qvCFQtlXlz4qQ7EXR3gvUjCnsLOQmG5wZHLL+tpy968PeV49SrIBYdPbUE6FNddbm5wug6P/e94biqIFzIOn0V1nBEmoYT6y1ruLjmX9L1IyEI7tqN0TETZJo8iTA5MsSjeZ/h58AfSP4wPBz4gNv6g=;
+X-YMail-OSG: WXNunkAVM1n0mjW4LeoYiGdZuOZIOFmy04UbuCnyYk8BjZl
+	l3r5h0XdIyEBZlXDJKyCOiU6Ziseb.OG9_bM7qjUQzt7CHgz0tjNnA0w5AT1
+	64QFxATbQTT6gDVHRLDXQRppTFcv1v3g5tee4XfaftKHeN5hN.fWVI8kb07H
+	sVgYgtrLDy.UjPn1nvTSCMLeIrGGeTXphpty8t8j3XUtLVU54kag1yJQC0.Z
+	jlvf74W0awRQOAs3izHQb.OcYu5ufTIcH0oL_sixLoNmoU.sORpsNbYDDrE.
+	xuBH40IT8u41cESR8hcfJW_Aw3Wu_ACys3lLGzmbdgoes.Gm_whd3eoWpjDa
+	OSug3emEhosb6aaRbfVLLznALuTgYgPIlIfJqaNLmkqwZ1jSlavaoQZMqj7M
+	wf85bCSEJW3jSiFEo3SSuQ1fUcS.Fzekjff_7CJV5tvhq2Sh_eZg8rb6C9F5
+	v5wWj5_vYQ6BMkLSqWmSdzmmTTnu7vfqgH3z_YzN5EpJXpsdOvPKN2C7fLQM KlQ--
+Received: from [50.135.220.100] by web121604.mail.ne1.yahoo.com via HTTP;
+	Wed, 25 Jul 2012 21:15:26 PDT
+X-Mailer: YahooMailWebService/0.8.120.356233
+References: <mailman.4996.1343266334.2458.meta-ti@yoctoproject.org>
+Message-ID: <1343276126.22559.YahooMailNeo@web121604.mail.ne1.yahoo.com>
+Date: Wed, 25 Jul 2012 21:15:26 -0700 (PDT)
+From: maniacbug <maniacbug@ymail.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+In-Reply-To: <mailman.4996.1343266334.2458.meta-ti@yoctoproject.org>
 MIME-Version: 1.0
-Subject: Re: Koen Kooi : u-boot 2011.09+git: update to latest version of Tom Rini's tree
+Subject: Re: omapfbplay depends on libav
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
+Reply-To: maniacbug <maniacbug@ymail.com>
 List-Id: Mailing list for the meta-ti layer <meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=unsubscribe>
@@ -38,73 +51,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2012 01:57:31 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <FCC8F19B3915774FAC814E438714F00B@owa.mail.ti.com>
+X-List-Received-Date: Thu, 26 Jul 2012 04:15:28 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-
------Original Message-----
-From: Arago Project git <git@arago-project.org>
-Date: Wednesday, July 25, 2012 9:32 PM
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: [meta-ti] Koen Kooi : u-boot 2011.09+git: update to latest
-version	of Tom Rini's tree
-
->Module: meta-ti
->Branch: master
->Commit: e1b4ab72cfb3ea4599701d1600c44fe3c5f8ba66
->URL:   =20
->http://arago-project.org/git/meta-ti.git?a=3Dcommit;h=3De1b4ab72cfb3ea4599=
-701d
->1600c44fe3c5f8ba66
->
->Author: Koen Kooi <koen@dominion.thruhere.net>
->Date:   Wed Jul 11 11:53:27 2012 +0200
->
->u-boot 2011.09+git: update to latest version of Tom Rini's tree
-
-Aren't all of Tom's patches upstream now?  Why not pull from the latest
-u-boot release? Are we carrying any patches that would be accepted
-upstream?
-
->
->All patches have been rediffed and boot tested
->
->Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->Signed-off-by: Denys Dmytriyenko <denys@ti.com>
->
->---
->
-> ...add-option-to-boot-kernel-from-boot-in-ex.patch |   26 ++++++
-> ...only-do-in-kernel-dhcp-when-using-NFS-use.patch |   35 --------
-> ...ddr_defs-change-DDR-timings-for-15x15-EVM.patch |   30 -------
-> ...boot-kernel-from-boot-in-ext2-3-filesyste.patch |   27 -------
-> ...ch =3D> 0002-am335x_evm-set-bootdelay-to-1.patch} |   18 ++--
-> ...make-MMC-rootfs-RO-on-boot-so-fsck-works.patch} |   12 ++--
-> ....patch =3D> 0004-am335x_evm-switch-to-ext4.patch} |   14 ++--
-> ...ge-mmc_load_uimage-to-load-at-a-fixed-add.patch |   49 ------------
-> ...5x-evm-enable-i2c2-pinmux-for-beaglebone.patch} |   18 ++--
-> ...vm-Fix-bone-pmic-shut-down-over-USB-power.patch |   82
->--------------------
-> ...tch =3D> 0006-ext2load-increase-read-speed.patch} |   10 +-
-> ...fix-ext2load-and-specify-partition-for-bo.patch |   30 +++++++
-> ...-evm-turn-d-cache-on-globally-turn-it-off.patch |   46 -----------
-> ...vm-load-uImage-from-boot-instead-of-VFAT.patch} |   18 ++--
-> ...ort.patch =3D> 0009-ext4fs-ls-load-support.patch} |   12 ++--
-> ...patch =3D> 0010-am335x-switch-to-ext4-mode.patch} |   33 ++++----
-> ...fix-ext2load-and-specify-partition-for-bo.patch |   28 -------
-> recipes-bsp/u-boot/u-boot_2011.10rc.bb             |   31 +++----
-> 18 files changed, 137 insertions(+), 382 deletions(-)
->
->Diff:  =20
->http://arago-project.org/git/meta-ti.git?a=3Dcommitdiff;h=3De1b4ab72cfb3ea=
-4599
->701d1600c44fe3c5f8ba66
->_______________________________________________
->meta-ti mailing list
->meta-ti@yoctoproject.org
->https://lists.yoctoproject.org/listinfo/meta-ti
-
+> They do, it's called openembedded-core. =0A> It's exactly the same. Do no=
+t confuse oe-core with meta-oe, however=0A=0AOk, yes it is a bit confusing.=
+=A0 Thank you for helping clarify.=0A=0AIn fact, when I started building OE=
+, asking for clarification of OE issues, the response from that list was, "=
+Beginners should use Yocto."=A0 Indeed it's helpful that yocto/poky are cle=
+anly organized and well-documented.=A0 OE seems to have many more subtle nu=
+ances.=0A=0A> And I think you mean poky, not yocto.=0A=0AWell now, this app=
+ears to have been debated at length.=A0 If 'poky' is preferred here, I'm ha=
+ppy to use it.=A0 Do note, though, that /etc/issue proudly proclaims that I=
+ am running "Yocto (built by poky)". And in order to download the denzil re=
+lease from yoctoproject.org, one clicks on a link entitled, "Yocto Project"=
+.=A0 So try not to be too hard on people who think they are running Yocto o=
+n their hardware.=A0 The boundaries of Yocto and Poky are not clear and obv=
+ious.=0A=0A> Ah,=0A your intimate knowledge of libav reveals itself! Libav =
+has no specific =0AA9 optimizations, only NEON ones, so your insinuation is=
+ not based on =0Aactual facts.=0A=0AYes, it's true.=A0 I'm hopeful to achie=
+ve a running video player in this environment without intimate knowledge of=
+ libav.=A0 To my view, that's the nice thing of Linux as opposed to running=
+ bare metal: there's a wealth of software available.=A0 It should be possib=
+le to assemble a working system without intimate knowledge of every compone=
+nt.=0A=0APlus, every time we post to a list, we get a few more helpful nugg=
+ets :)=0A=0Am.b=0A
 
