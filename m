@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE795E013EB
-	for <meta-ti@yoctoproject.org>; Wed, 25 Jul 2012 18:32:12 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0F6EBE01412
+	for <meta-ti@yoctoproject.org>; Wed, 25 Jul 2012 18:32:13 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B646552A9C; Thu, 26 Jul 2012 01:32:11 +0000 (UTC)
+	id 7631852AA9; Thu, 26 Jul 2012 01:32:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120726013211.B646552A9C@arago-project.org>
-Date: Thu, 26 Jul 2012 01:32:11 +0000 (UTC)
+Message-Id: <20120726013212.7631852AA9@arago-project.org>
+Date: Thu, 26 Jul 2012 01:32:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-ti33x-psp 3.2: add camera driver for beaglebone
+Subject: Koen Kooi : linux-ti33x-psp 3.2: enable more tracing features for beaglebone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,136 +26,132 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 7955b1d946c095cd6cc65bf4f108ec87970e76fa
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7955b1d946c095cd6cc65bf4f108ec87970e76fa
+Commit: 751040122dad1e1036ff32b716e9f40be010c2b3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=751040122dad1e1036ff32b716e9f40be010c2b3
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Mon Jul  2 06:22:09 2012 +0200
+Date:   Sat Jul 14 15:38:07 2012 +0200
 
-linux-ti33x-psp 3.2: add camera driver for beaglebone
+linux-ti33x-psp 3.2: enable more tracing features for beaglebone
+
+This makes powertop 2.0 happy
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |   43 +++++++++++++-------
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    3 +-
- 2 files changed, 30 insertions(+), 16 deletions(-)
+ .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |   20 ++++++++++++++------
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    2 +-
+ 2 files changed, 15 insertions(+), 7 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-index 692d71a..8e8a1c5 100644
+index 8e8a1c5..5964380 100644
 --- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
 +++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
-@@ -1,6 +1,6 @@
+@@ -108,7 +108,7 @@ CONFIG_NET_NS=y
+ CONFIG_SCHED_AUTOGROUP=y
+ CONFIG_MM_OWNER=y
+ # CONFIG_SYSFS_DEPRECATED is not set
+-# CONFIG_RELAY is not set
++CONFIG_RELAY=y
+ CONFIG_BLK_DEV_INITRD=y
+ CONFIG_INITRAMFS_SOURCE=""
+ CONFIG_RD_GZIP=y
+@@ -144,7 +144,7 @@ CONFIG_PERF_USE_VMALLOC=y
+ # Kernel Performance Events And Counters
  #
- # Automatically generated file; DO NOT EDIT.
--# Linux/arm 3.2.18 Kernel Configuration
-+# Linux/arm 3.2.21 Kernel Configuration
+ CONFIG_PERF_EVENTS=y
+-# CONFIG_PERF_COUNTERS is not set
++CONFIG_PERF_COUNTERS=y
+ # CONFIG_DEBUG_PERF_USE_VMALLOC is not set
+ CONFIG_VM_EVENT_COUNTERS=y
+ CONFIG_COMPAT_BRK=y
+@@ -152,6 +152,7 @@ CONFIG_SLAB=y
+ # CONFIG_SLUB is not set
+ # CONFIG_SLOB is not set
+ CONFIG_PROFILING=y
++CONFIG_TRACEPOINTS=y
+ CONFIG_OPROFILE=m
+ CONFIG_HAVE_OPROFILE=y
+ # CONFIG_KPROBES is not set
+@@ -784,6 +785,7 @@ CONFIG_DNS_RESOLVER=y
+ # Network testing
  #
- CONFIG_ARM=y
- CONFIG_HAVE_PWM=y
-@@ -1408,6 +1408,7 @@ CONFIG_TOUCHSCREEN_ADS7846=y
+ # CONFIG_NET_PKTGEN is not set
++# CONFIG_NET_DROP_MONITOR is not set
+ # CONFIG_HAMRADIO is not set
+ CONFIG_CAN=y
+ CONFIG_CAN_RAW=y
+@@ -1408,7 +1410,6 @@ CONFIG_TOUCHSCREEN_ADS7846=y
  # CONFIG_TOUCHSCREEN_INEXIO is not set
  # CONFIG_TOUCHSCREEN_MK712 is not set
  # CONFIG_TOUCHSCREEN_PENMOUNT is not set
-+CONFIG_TOUCHSCREEN_EDT_FT5X06=y
+-CONFIG_TOUCHSCREEN_EDT_FT5X06=y
  # CONFIG_TOUCHSCREEN_TOUCHRIGHT is not set
  # CONFIG_TOUCHSCREEN_TOUCHWIN is not set
  CONFIG_TOUCHSCREEN_TI_TSCADC=y
-@@ -1971,13 +1972,14 @@ CONFIG_MEDIA_TUNER_MAX2165=m
- CONFIG_MEDIA_TUNER_TDA18218=m
- CONFIG_MEDIA_TUNER_TDA18212=m
- CONFIG_VIDEO_V4L2=y
--CONFIG_VIDEOBUF_GEN=m
-+CONFIG_VIDEOBUF_GEN=y
- CONFIG_VIDEOBUF_VMALLOC=m
- CONFIG_VIDEOBUF_DVB=m
- CONFIG_VIDEO_TVEEPROM=m
- CONFIG_VIDEO_TUNER=m
--CONFIG_VIDEOBUF2_CORE=m
--CONFIG_VIDEOBUF2_MEMOPS=m
-+CONFIG_VIDEOBUF2_CORE=y
-+CONFIG_VIDEOBUF2_MEMOPS=y
-+CONFIG_VIDEOBUF2_DMA_CONTIG=y
- CONFIG_VIDEOBUF2_VMALLOC=m
- CONFIG_VIDEO_CAPTURE_DRIVERS=y
- # CONFIG_VIDEO_ADV_DEBUG is not set
-@@ -2079,7 +2081,25 @@ CONFIG_VIDEO_VIVI=m
- # CONFIG_VIDEO_W9966 is not set
- # CONFIG_VIDEO_CPIA2 is not set
- # CONFIG_VIDEO_AU0828 is not set
--# CONFIG_SOC_CAMERA is not set
-+CONFIG_SOC_CAMERA=y
-+# CONFIG_SOC_CAMERA_IMX074 is not set
-+# CONFIG_SOC_CAMERA_MT9M001 is not set
-+# CONFIG_SOC_CAMERA_MT9M111 is not set
-+# CONFIG_SOC_CAMERA_MT9T031 is not set
-+CONFIG_SOC_CAMERA_MT9T112=y
-+# CONFIG_SOC_CAMERA_MT9V022 is not set
-+# CONFIG_SOC_CAMERA_RJ54N1 is not set
-+# CONFIG_SOC_CAMERA_TW9910 is not set
-+# CONFIG_SOC_CAMERA_PLATFORM is not set
-+# CONFIG_SOC_CAMERA_OV2640 is not set
-+# CONFIG_SOC_CAMERA_OV5642 is not set
-+# CONFIG_SOC_CAMERA_OV6650 is not set
-+# CONFIG_SOC_CAMERA_OV772X is not set
-+# CONFIG_SOC_CAMERA_OV9640 is not set
-+# CONFIG_SOC_CAMERA_OV9740 is not set
-+# CONFIG_VIDEO_SH_MOBILE_CSI2 is not set
-+# CONFIG_VIDEO_SH_MOBILE_CEU is not set
-+CONFIG_VIDEO_QL_CAMIF=y
- CONFIG_V4L_USB_DRIVERS=y
- CONFIG_USB_VIDEO_CLASS=m
- CONFIG_USB_VIDEO_CLASS_INPUT_EVDEV=y
-@@ -2425,19 +2445,11 @@ CONFIG_DISPLAY_SUPPORT=y
+@@ -3404,6 +3405,7 @@ CONFIG_TIMER_STATS=y
+ # CONFIG_LOCK_STAT is not set
+ # CONFIG_DEBUG_ATOMIC_SLEEP is not set
+ # CONFIG_DEBUG_LOCKING_API_SELFTESTS is not set
++CONFIG_STACKTRACE=y
+ # CONFIG_DEBUG_STACK_USAGE is not set
+ # CONFIG_DEBUG_KOBJECT is not set
+ # CONFIG_DEBUG_BUGVERBOSE is not set
+@@ -3426,23 +3428,29 @@ CONFIG_TIMER_STATS=y
+ # CONFIG_LATENCYTOP is not set
+ # CONFIG_SYSCTL_SYSCALL_CHECK is not set
+ # CONFIG_DEBUG_PAGEALLOC is not set
++CONFIG_NOP_TRACER=y
+ CONFIG_HAVE_FUNCTION_TRACER=y
+ CONFIG_HAVE_DYNAMIC_FTRACE=y
+ CONFIG_HAVE_FTRACE_MCOUNT_RECORD=y
+ CONFIG_HAVE_C_RECORDMCOUNT=y
+ CONFIG_RING_BUFFER=y
++CONFIG_EVENT_TRACING=y
++CONFIG_EVENT_POWER_TRACING_DEPRECATED=y
++CONFIG_CONTEXT_SWITCH_TRACER=y
+ CONFIG_RING_BUFFER_ALLOW_SWAP=y
++CONFIG_TRACING=y
++CONFIG_GENERIC_TRACER=y
+ CONFIG_TRACING_SUPPORT=y
+ CONFIG_FTRACE=y
+ # CONFIG_FUNCTION_TRACER is not set
+ # CONFIG_IRQSOFF_TRACER is not set
+ # CONFIG_SCHED_TRACER is not set
+-# CONFIG_ENABLE_DEFAULT_TRACERS is not set
+ CONFIG_BRANCH_PROFILE_NONE=y
+ # CONFIG_PROFILE_ANNOTATED_BRANCHES is not set
+ # CONFIG_PROFILE_ALL_BRANCHES is not set
+ # CONFIG_STACK_TRACER is not set
+-# CONFIG_BLK_DEV_IO_TRACE is not set
++CONFIG_BLK_DEV_IO_TRACE=y
++# CONFIG_FTRACE_STARTUP_TEST is not set
+ # CONFIG_RING_BUFFER_BENCHMARK is not set
+ # CONFIG_DYNAMIC_DEBUG is not set
+ # CONFIG_DMA_API_DEBUG is not set
+@@ -3588,7 +3596,7 @@ CONFIG_CRYPTO_LZO=y
+ CONFIG_CRYPTO_HW=y
+ # CONFIG_CRYPTO_DEV_OMAP_SHAM is not set
+ # CONFIG_CRYPTO_DEV_OMAP_AES is not set
+-# CONFIG_BINARY_PRINTF is not set
++CONFIG_BINARY_PRINTF=y
+ 
  #
- CONFIG_DUMMY_CONSOLE=y
- CONFIG_FRAMEBUFFER_CONSOLE=y
--# CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY is not set
-+CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY=y
- CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
--CONFIG_FONTS=y
-+# CONFIG_FONTS is not set
- CONFIG_FONT_8x8=y
- CONFIG_FONT_8x16=y
--# CONFIG_FONT_6x11 is not set
--# CONFIG_FONT_7x14 is not set
--# CONFIG_FONT_PEARL_8x8 is not set
--# CONFIG_FONT_ACORN_8x8 is not set
--# CONFIG_FONT_MINI_4x6 is not set
--# CONFIG_FONT_SUN8x16 is not set
--# CONFIG_FONT_SUN12x22 is not set
--# CONFIG_FONT_10x18 is not set
- CONFIG_LOGO=y
- # CONFIG_LOGO_LINUX_MONO is not set
- # CONFIG_LOGO_LINUX_VGA16 is not set
-@@ -2570,6 +2582,7 @@ CONFIG_USB_DEVICEFS=y
- CONFIG_USB_DEVICE_CLASS=y
- # CONFIG_USB_DYNAMIC_MINORS is not set
- CONFIG_USB_SUSPEND=y
-+# CONFIG_USB_OTG is not set
- # CONFIG_USB_OTG_WHITELIST is not set
- # CONFIG_USB_OTG_BLACKLIST_HUB is not set
- # CONFIG_USB_DWC3 is not set
+ # Library routines
 diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index ab42c44..95175cb 100644
+index 083f36a..eab3127 100644
 --- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
 +++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
 @@ -15,7 +15,7 @@ PV = "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "3.2", "3.2.21", d)}"
  
  BRANCH = "v3.2-staging"
  SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
--MACHINE_KERNEL_PR_append = "c+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCREV}"
+-MACHINE_KERNEL_PR_append = "g+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "h+gitr${SRCREV}"
  
  COMPATIBLE_MACHINE = "(ti33x)"
  
-@@ -1537,4 +1537,5 @@ PATCHES_OVER_PSP = " \
- 	file://beaglebone/0070-beaglebone-fix-buttons-spidev-clash-when-using-mcasp.patch \
- 	file://beaglebone/0071-beaglebone-fix-LCD3-led-key-overlap.patch \
- 	file://beaglebone/0072-beaglebone-fix-audio-spi-clash.patch \
-+	file://beaglebone/0073-beaglebone-add-support-for-QuickLogic-Camera-interfa.patch \
- "
 
 
