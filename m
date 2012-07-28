@@ -1,36 +1,33 @@
-Return-Path: <ebutera@gmail.com>
-Received: from mail-vb0-f48.google.com (mail-vb0-f48.google.com
-	[209.85.212.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7CD77E01351
-	for <meta-ti@yoctoproject.org>; Thu, 26 Jul 2012 06:28:55 -0700 (PDT)
-Received: by vbjk17 with SMTP id k17so1930261vbj.35
-	for <meta-ti@yoctoproject.org>; Thu, 26 Jul 2012 06:28:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=ewnYgNXPHrVaS0aOrseD2owsiSnhgI0oTs8a3vE4Q3k=;
-	b=YjIV88QelJrzAwnQF53SYfcV8G7e/MldV4c/CaVBa9FDHrUglTPG4CpwxiAjeRWzhe
-	Up2y0RxpWS1ocV7EWU+cdN64X8TQ9cUxE6LquDApSf8oqv+Cvlkug+fNdf9v2OQuZjMq
-	NGvbsJV1g1dlSIIce/O8xXIMUJippSpp+jdS6ZOwVQgjo+FOAAyj+gkbhqkxXjZKD5Tg
-	SdjaUNAuYuV/VVKVQezQ8qJVdvXc9LAZ7XwqLv6cDzYp87dXEnICYS5sOiiXv0a9MXnB
-	FMGGnWIH8GfJrWHsH8FeKAsenMZyQUNAr3HainW6gcIEqUxiU1auANrYH0IDIfxHQMve
-	zM8Q==
+Return-Path: <joshua.marinacci@nokia.com>
+Received: from mgw-da02.nokia.com (smtp.nokia.com [147.243.128.26])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0D5CFE013EB
+	for <meta-ti@yoctoproject.org>; Sat, 28 Jul 2012 12:30:45 -0700 (PDT)
+Received: from vaebh104.NOE.Nokia.com (vaebh104.europe.nokia.com
+	[10.160.244.30])
+	by mgw-da02.nokia.com (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with
+	ESMTP id q6SJUhiv017401
+	for <meta-ti@yoctoproject.org>; Sat, 28 Jul 2012 22:30:44 +0300
+Received: from smtp.mgd.nokia.com ([65.54.30.56]) by vaebh104.NOE.Nokia.com
+	over TLS secured channel with Microsoft SMTPSVC(6.0.3790.4675); 
+	Sat, 28 Jul 2012 22:31:27 +0300
+Received: from 008-AM1MPN1-072.mgdnok.nokia.com ([169.254.2.76]) by
+	008-AM1MMR1-001.mgdnok.nokia.com ([65.54.30.56]) with mapi id
+	14.02.0283.004; Sat, 28 Jul 2012 21:30:29 +0200
+From: <joshua.marinacci@nokia.com>
+To: <meta-ti@yoctoproject.org>
+Thread-Topic: Gumstix Wifi
+Thread-Index: AQHNbPdyKck16OkwMUiNLuyywd/NZg==
+Date: Sat, 28 Jul 2012 19:30:29 +0000
+Message-ID: <9D64B6CF-0B94-413C-89A4-D9A55DB38AF1@nokia.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [97.125.57.15]
 MIME-Version: 1.0
-Received: by 10.221.12.81 with SMTP id ph17mr21570456vcb.47.1343309334606;
-	Thu, 26 Jul 2012 06:28:54 -0700 (PDT)
-Sender: ebutera@gmail.com
-Received: by 10.220.32.141 with HTTP; Thu, 26 Jul 2012 06:28:54 -0700 (PDT)
-In-Reply-To: <1343243776.71726.YahooMailNeo@web121603.mail.ne1.yahoo.com>
-References: <1343187414.7556.YahooMailNeo@web121605.mail.ne1.yahoo.com>
-	<20120725051154.GC28778@edge>
-	<1343243776.71726.YahooMailNeo@web121603.mail.ne1.yahoo.com>
-Date: Thu, 26 Jul 2012 15:28:54 +0200
-X-Google-Sender-Auth: gRta8piZU8XH9PmmhSHdwRjMFsM
-Message-ID: <CA+2YH7uDvJr9i015e32tMa+y0Z+KM5JATC8NM9ChOJ++mrei6A@mail.gmail.com>
-From: Enrico <ebutera@users.sourceforge.net>
-To: maniacbug <maniacbug@ymail.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: omapfbplay depends on libav
+X-OriginalArrivalTime: 28 Jul 2012 19:31:27.0540 (UTC)
+	FILETIME=[94F4B740:01CD6CF7]
+X-Nokia-AV: Clean
+Subject: Gumstix Wifi
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,19 +39,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2012 13:28:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 28 Jul 2012 19:30:46 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <3228E8B2E9F41E4C9DB4E58F7A7A57BA@mgd.nokia.com>
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 25, 2012 at 9:16 PM, maniacbug <maniacbug@ymail.com> wrote:
-> Using Yocto, gstreamer does install gst-launch, but I do not currently possess the knowledge to "build a gstreamer pipeline", AND gst-launch is "primarily a debugging tool, you should not build applications on top of it."
->
-> I'm looking for something which I can just exec and go, "<toolname> <mediafile>.m4v"
+Hi guys. After becoming very frustrated with Gumstix' prefab images I came =
+to the  Yocto presentation at OSCON a week ago and was very impressed.  I'v=
+e started building a distro for my Gumstix Overo but have ran into a few ro=
+adblocks that I'm hoping you can help with.
 
-gst-launch playbin2 uri=file:///<mediafile>.m4v
+First, I started with the latest Yocto, meta-gumstix and meta-ti from git a=
+nd I can successfully compile and boot core-image-minimal.  Of course that =
+doesn't have networking. =20
 
-or
+Next, I tried running Hob to add networking packages.  Hob does not seem to=
+ work with meta-ti.  I can launch but when I add the meta-ti layer and choo=
+se a machine it fails with "ExpansionError during parsing %s:%s".  Of cours=
+e it is not helpful in providing which file the parsing error was in. :)
 
-ffplay <mediafile>.m4v
+Next, I tried simply adding  wpa_supplicant to the image by adding this lin=
+e to my local.conf and compiling from the command line.
 
-Enrico
+CORE_IMAGE_EXTRA_INSTALL +=3D "wpa-supplicant"
+
+
+This does work. When I boot the wpa stuff is included but I still don't hav=
+e a network driver loaded.  If I include the built modules-3.2.19-r0-overo.=
+tgz in my rootfs I can cd into the directory with all of the modules.  Howe=
+ver insmod libertas.ko fails with=20
+
+	insmod: can't insert 'libertas_tf_usb.ko': unknown symbol in module, or un=
+known parameter
+
+and modprobe fails with
+
+	modprobe: module libertas not found in modules.dep
+
+
+So, what should I do to make sure the libertas module is compiled correctly=
+, included in my kernel, and then actually used at runtime?
+
+Thank you all for your help. I'm very excited about the Yocto project.
+
+- Josh=
 
