@@ -1,33 +1,33 @@
-Return-Path: <joshua.marinacci@nokia.com>
-Received: from mgw-da02.nokia.com (smtp.nokia.com [147.243.128.26])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0D5CFE013EB
-	for <meta-ti@yoctoproject.org>; Sat, 28 Jul 2012 12:30:45 -0700 (PDT)
-Received: from vaebh104.NOE.Nokia.com (vaebh104.europe.nokia.com
-	[10.160.244.30])
-	by mgw-da02.nokia.com (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with
-	ESMTP id q6SJUhiv017401
-	for <meta-ti@yoctoproject.org>; Sat, 28 Jul 2012 22:30:44 +0300
-Received: from smtp.mgd.nokia.com ([65.54.30.56]) by vaebh104.NOE.Nokia.com
-	over TLS secured channel with Microsoft SMTPSVC(6.0.3790.4675); 
-	Sat, 28 Jul 2012 22:31:27 +0300
-Received: from 008-AM1MPN1-072.mgdnok.nokia.com ([169.254.2.76]) by
-	008-AM1MMR1-001.mgdnok.nokia.com ([65.54.30.56]) with mapi id
-	14.02.0283.004; Sat, 28 Jul 2012 21:30:29 +0200
-From: <joshua.marinacci@nokia.com>
-To: <meta-ti@yoctoproject.org>
-Thread-Topic: Gumstix Wifi
-Thread-Index: AQHNbPdyKck16OkwMUiNLuyywd/NZg==
-Date: Sat, 28 Jul 2012 19:30:29 +0000
-Message-ID: <9D64B6CF-0B94-413C-89A4-D9A55DB38AF1@nokia.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [97.125.57.15]
-MIME-Version: 1.0
-X-OriginalArrivalTime: 28 Jul 2012 19:31:27.0540 (UTC)
-	FILETIME=[94F4B740:01CD6CF7]
-X-Nokia-AV: Clean
-Subject: Gumstix Wifi
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
+	[209.85.215.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 079BBE00348
+	for <meta-ti@yoctoproject.org>; Sun, 29 Jul 2012 10:08:58 -0700 (PDT)
+Received: by eaab14 with SMTP id b14so971369eaa.35
+	for <meta-ti@yoctoproject.org>; Sun, 29 Jul 2012 10:08:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=hGDPYgjiMghRxNgUkuU5ksRVM8nfqt/E0s48tKFQwdk=;
+	b=kXl6sEWiT3xYcI72038DSVJvwKZFjxZODVXGzAozyIFtaI1FMZN2ZVkPLkY61USqD/
+	M+aVlAG8BpdWTtMsai0Ry50Ie+jCmFfl4HsCgnK5J6urfXuDRDC36VdfgC7cYB0NtMIo
+	snBSuBwLsI27WaGx7KITcDKQx8KD21ahPnXER1a1e6cuj7879WJ1xPNKZ6TTcs3U5h3l
+	ZMt9YcSypQ3DgS7Tdbem+iOERBWf3J8taob5Yu38Xf5OQmjolpa/3zzG/X1NdVA/vcLT
+	1ZliY9STUnEaurmYuWtZRjjnONbA6qnqOF6xHQo+2IZfgpzEgEkEZ2gz5gK4kcsFkqTx
+	UJjQ==
+Received: by 10.14.173.71 with SMTP id u47mr9194914eel.22.1343581736997;
+	Sun, 29 Jul 2012 10:08:56 -0700 (PDT)
+Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
+	by mx.google.com with ESMTPS id o47sm9972574eem.0.2012.07.29.10.08.53
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sun, 29 Jul 2012 10:08:55 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: meta-ti@yoctoproject.org
+Date: Sun, 29 Jul 2012 19:08:23 +0200
+Message-Id: <1343581714-20397-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQkfUVo7YsDhtEUoBgL0AlmFcSn6cfDVwCgvkembbhVvzJMWCSUBVvA1ew2E6A9FQ0iXD/vN
+Subject: [PATCH][for-denzil 01/12] beaglebone-tester: bump SRCREV to fix serial console race
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,49 +39,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Jul 2012 19:30:46 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <3228E8B2E9F41E4C9DB4E58F7A7A57BA@mgd.nokia.com>
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 29 Jul 2012 17:08:59 -0000
 
-Hi guys. After becoming very frustrated with Gumstix' prefab images I came =
-to the  Yocto presentation at OSCON a week ago and was very impressed.  I'v=
-e started building a distro for my Gumstix Overo but have ran into a few ro=
-adblocks that I'm hoping you can help with.
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-First, I started with the latest Yocto, meta-gumstix and meta-ti from git a=
-nd I can successfully compile and boot core-image-minimal.  Of course that =
-doesn't have networking. =20
+diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
+index b5e3081..9995556 100644
+--- a/recipes-ti/beagleboard/beaglebone-tester.bb
++++ b/recipes-ti/beagleboard/beaglebone-tester.bb
+@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
+ # only scripts and data
+ inherit allarch
+ 
+-PR = "r15"
++PR = "r16"
+ 
+ SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
+           "
+-SRCREV = "3b19f1caf8c616e3f4a25abacca28b2239d3ec82"
++SRCREV = "4f6335aedf520917a0bc0c83e9c1ac1135b8a2af"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+1.7.10
 
-Next, I tried running Hob to add networking packages.  Hob does not seem to=
- work with meta-ti.  I can launch but when I add the meta-ti layer and choo=
-se a machine it fails with "ExpansionError during parsing %s:%s".  Of cours=
-e it is not helpful in providing which file the parsing error was in. :)
-
-Next, I tried simply adding  wpa_supplicant to the image by adding this lin=
-e to my local.conf and compiling from the command line.
-
-CORE_IMAGE_EXTRA_INSTALL +=3D "wpa-supplicant"
-
-
-This does work. When I boot the wpa stuff is included but I still don't hav=
-e a network driver loaded.  If I include the built modules-3.2.19-r0-overo.=
-tgz in my rootfs I can cd into the directory with all of the modules.  Howe=
-ver insmod libertas.ko fails with=20
-
-	insmod: can't insert 'libertas_tf_usb.ko': unknown symbol in module, or un=
-known parameter
-
-and modprobe fails with
-
-	modprobe: module libertas not found in modules.dep
-
-
-So, what should I do to make sure the libertas module is compiled correctly=
-, included in my kernel, and then actually used at runtime?
-
-Thank you all for your help. I'm very excited about the Yocto project.
-
-- Josh=
 
