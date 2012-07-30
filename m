@@ -1,27 +1,45 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 13593E0027D
-	for <meta-ti@yoctoproject.org>; Mon, 30 Jul 2012 13:00:39 -0700 (PDT)
-Received: (qmail 7335 invoked by uid 1003); 30 Jul 2012 20:00:39 -0000
-Received: from unknown (HELO ?192.168.1.105?)
-	(philip@opensdr.com@96.240.160.48)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	30 Jul 2012 20:00:38 -0000
-Message-ID: <5016E7E5.6050801@balister.org>
-Date: Mon, 30 Jul 2012 16:00:37 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:14.0) Gecko/20120717 Thunderbird/14.0
+Return-Path: <maniacbug@ymail.com>
+Received: from nm6-vm2.bullet.mail.ne1.yahoo.com
+	(nm6-vm2.bullet.mail.ne1.yahoo.com [98.138.90.154])
+	by yocto-www.yoctoproject.org (Postfix) with SMTP id 0AECEE0027D
+	for <meta-ti@yoctoproject.org>; Mon, 30 Jul 2012 13:50:21 -0700 (PDT)
+Received: from [98.138.90.56] by nm6.bullet.mail.ne1.yahoo.com with NNFMP;
+	30 Jul 2012 20:50:20 -0000
+Received: from [98.138.89.173] by tm9.bullet.mail.ne1.yahoo.com with NNFMP;
+	30 Jul 2012 20:50:20 -0000
+Received: from [127.0.0.1] by omp1029.mail.ne1.yahoo.com with NNFMP;
+	30 Jul 2012 20:50:20 -0000
+X-Yahoo-Newman-Property: ymail-3
+X-Yahoo-Newman-Id: 581712.44614.bm@omp1029.mail.ne1.yahoo.com
+Received: (qmail 13277 invoked by uid 60001); 30 Jul 2012 20:50:20 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ymail.com; s=s1024;
+	t=1343681420; bh=60ciTmOvDUOKN1BLGtiUBoZpFO85eK3En2W3XRw+8M4=;
+	h=X-YMail-OSG:Received:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=johSia+sSRd6Z83WtB23sbHjB+G39n6NNVbL/iqjMJGxWevCE/fdj89MKJ4hI/HdFiJQwYL/uk2GKIzQUdKTCd2vYdskuzywWbW8E+ded/Oq/KlejvTn9Q9/ygc0wRDPNqDA0UMk6/lU3C+O0NHgT+6rftzm0yQe1ruLLCT7QDE=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=ymail.com;
+	h=X-YMail-OSG:Received:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=Uc9N1msyHh4VOqi/rRp93mJKyc7+Fb1t0Tyd0gycxVKcUuLicnblQa1ntPIGgsCr7VZEI6SxCPQUU6p4shp4T/kxFtXlm8Soa1Z1wd2N88PsGwOfaCoJu0vPksGqO6fKdsmdb12lQ/d2RUGG7vP6pEhVTgTWVGZ8SpyyiUPEpEg=;
+X-YMail-OSG: s.4R51gVM1mu_K20PXbk13TeDCqOks1B8H0QFdYkTxrL1vf
+	moGFfc28byJq6DpD6A9tEVuNi2.kVRAZKJulLq.tvPbtrtnZLo6XHRe2ZEn4
+	L1C_EWrUbbv.Y.rFp.ueNL1m39sQqoguo2fJyWUwyeBeg_WoYxtdhAm61x0W
+	XlIkwrJiPcCseYUK.bOu61w2dOwncwwxImcADMKvDbLjGtAh7T9JfW.AkHfw
+	QN02_hYO5zsXZVRDcD5MBhTRMto2P5oSuzt8igpmN57NoOfLJqAlw.Djg37y
+	0nVtJTK9BxO.xWh4LuLzgm_P.4IAgwrw9Jz5aJ.gRBfsLTrvDA0TX0Y4y1e8
+	F0IARcSERUmp_UpsxF0hv0mtJFYAfayo2ndcVQfJlRrgKMyKZXxiHQTW5CBm
+	ib1Hn_sfOBMsENVr9OHrupmShiWlrU3E-
+Received: from [50.135.220.100] by web121606.mail.ne1.yahoo.com via HTTP;
+	Mon, 30 Jul 2012 13:50:20 PDT
+X-Mailer: YahooMailWebService/0.8.120.356233
+Message-ID: <1343681420.8942.YahooMailNeo@web121606.mail.ne1.yahoo.com>
+Date: Mon, 30 Jul 2012 13:50:20 -0700 (PDT)
+From: maniacbug <maniacbug@ymail.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 MIME-Version: 1.0
-To: joshua.marinacci@nokia.com
-References: <9D64B6CF-0B94-413C-89A4-D9A55DB38AF1@nokia.com>
-In-Reply-To: <9D64B6CF-0B94-413C-89A4-D9A55DB38AF1@nokia.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Gumstix Wifi
+Subject: Sound on Pandaboard?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
+Reply-To: maniacbug <maniacbug@ymail.com>
 List-Id: Mailing list for the meta-ti layer <meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=unsubscribe>
@@ -30,47 +48,20 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2012 20:00:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 30 Jul 2012 20:50:22 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 07/28/2012 03:30 PM, joshua.marinacci@nokia.com wrote:
-> Hi guys. After becoming very frustrated with Gumstix' prefab images I came to the  Yocto presentation at OSCON a week ago and was very impressed.  I've started building a distro for my Gumstix Overo but have ran into a few roadblocks that I'm hoping you can help with.
-
-Remember the gumstix support here is done by community members, not 
-gumstix engineering. Please remind the gumstix people on the gumstix 
-list that it would be great if they could contribute some time to 
-testing and fixing these problems :)
-
-Philip
-
->
-> First, I started with the latest Yocto, meta-gumstix and meta-ti from git and I can successfully compile and boot core-image-minimal.  Of course that doesn't have networking.
->
-> Next, I tried running Hob to add networking packages.  Hob does not seem to work with meta-ti.  I can launch but when I add the meta-ti layer and choose a machine it fails with "ExpansionError during parsing %s:%s".  Of course it is not helpful in providing which file the parsing error was in. :)
->
-> Next, I tried simply adding  wpa_supplicant to the image by adding this line to my local.conf and compiling from the command line.
->
-> CORE_IMAGE_EXTRA_INSTALL += "wpa-supplicant"
->
->
-> This does work. When I boot the wpa stuff is included but I still don't have a network driver loaded.  If I include the built modules-3.2.19-r0-overo.tgz in my rootfs I can cd into the directory with all of the modules.  However insmod libertas.ko fails with
->
-> 	insmod: can't insert 'libertas_tf_usb.ko': unknown symbol in module, or unknown parameter
->
-> and modprobe fails with
->
-> 	modprobe: module libertas not found in modules.dep
->
->
-> So, what should I do to make sure the libertas module is compiled correctly, included in my kernel, and then actually used at runtime?
->
-> Thank you all for your help. I'm very excited about the Yocto project.
->
-> - Josh
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
->
+Hi. As mentioned before, I'm running "Yocto (Built by Poky 7.0) 1.2" on Pan=
+daboard with meta-ti. Thanks for the previous help on video, "ffplay" from =
+libav (ported from openembedded) is playing video only now (not audio).=0A=
+=0A=0AAs a simple test, I'm now trying to play an MP3 file with gaku (the S=
+ato music player). This results in 3 lines of the following per attempt:=0A=
+=0AJul 25 13:48:23 pandaboard user.warn kernel: [ 30.949951] SDP4430 Media:=
+ asoc: SDP4430 Media no valid playback route from source to sink=0A=0Aaplay=
+ gives the same result, and adds:=0A=0AALSA lib pcm_dmix.c:1018:(snd_pcm_dm=
+ix_open) unable to open slave=0Aaplay: main:682: audio open error: Invalid =
+argument=0A=0AIs there anything particular I should be setting up in meta-t=
+i to enable audio?=A0 (Or should this question be posed on the yocto list i=
+nstead?)=0A=0AThanks,=0A=0Am.b
 
