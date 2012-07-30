@@ -1,33 +1,33 @@
-Return-Path: <ebutera@gmail.com>
-Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
-	[209.85.220.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21E5FE0142E
-	for <meta-ti@yoctoproject.org>; Mon, 30 Jul 2012 01:07:51 -0700 (PDT)
-Received: by vcbfl11 with SMTP id fl11so5158983vcb.35
-	for <meta-ti@yoctoproject.org>; Mon, 30 Jul 2012 01:07:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=EbqAM1SSPpnnLPyw7X2QfgeQLIRyupe4Bnp5gcKRYfk=;
-	b=wXLRozT2ndw32K/TcM+QbuQ1QAlk/oaNR5utgbGhZtljEvJoHN4NNMllqrda/gSWsP
-	iDFpUCRBYsJfthT7DwYZoQHTzY2BOuZ+bSMvW33Na+krGyQCbks4w3T+oUWQj/aP3J7l
-	x9WoihlDOZuMW5L42yDIKSQeBn5eMttOZJjqfoeSsjN+/iCIFFInr9z9ALpFVh+8V1Sp
-	0b6Z8j33Cd6QzEzAN5iL9qIEJbc9FghLXQPC38FbnNNtPqcQjZwi4RJsAN1EmkoBANZB
-	dMACBqNClhJ2PUTPY5PGPctckg09S5uq+4nWib9570tHeq2u0+Jb50SnA8NEcjcSoIXU
-	2cKw==
-MIME-Version: 1.0
-Received: by 10.221.0.74 with SMTP id nl10mr3925448vcb.47.1343635670037; Mon,
-	30 Jul 2012 01:07:50 -0700 (PDT)
-Sender: ebutera@gmail.com
-Received: by 10.220.147.19 with HTTP; Mon, 30 Jul 2012 01:07:49 -0700 (PDT)
-In-Reply-To: <9D64B6CF-0B94-413C-89A4-D9A55DB38AF1@nokia.com>
+Return-Path: <joshua.marinacci@nokia.com>
+Received: from mgw-da02.nokia.com (smtp.nokia.com [147.243.128.26])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A043EE0027D
+	for <meta-ti@yoctoproject.org>; Mon, 30 Jul 2012 12:10:36 -0700 (PDT)
+Received: from vaebh102.NOE.Nokia.com (in-mx.nokia.com [10.160.244.23])
+	by mgw-da02.nokia.com (Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with
+	ESMTP id q6UJAPqb004267; Mon, 30 Jul 2012 22:10:26 +0300
+Received: from smtp.mgd.nokia.com ([65.54.30.61]) by vaebh102.NOE.Nokia.com
+	over TLS secured channel with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 30 Jul 2012 22:11:11 +0300
+Received: from 008-AM1MPN1-072.mgdnok.nokia.com ([169.254.2.76]) by
+	008-AM1MMR1-006.mgdnok.nokia.com ([65.54.30.61]) with mapi id
+	14.02.0283.004; Mon, 30 Jul 2012 21:10:24 +0200
+From: <joshua.marinacci@nokia.com>
+To: <ebutera@users.sourceforge.net>
+Thread-Topic: [meta-ti] Gumstix Wifi
+Thread-Index: AQHNbPdyKck16OkwMUiNLuyywd/NZpdBWVuAgAC5HQA=
+Date: Mon, 30 Jul 2012 19:10:23 +0000
+Message-ID: <40A10ADC-FEF3-4292-8C02-F50825A59D4A@nokia.com>
 References: <9D64B6CF-0B94-413C-89A4-D9A55DB38AF1@nokia.com>
-Date: Mon, 30 Jul 2012 10:07:49 +0200
-X-Google-Sender-Auth: 2MO89K41H-fqt1iCIZ3_RCG3Vis
-Message-ID: <CA+2YH7sLFSnRJ4RAUGj=V=BbGpE-3pB79sxm33O_RXCSqWC8Tw@mail.gmail.com>
-From: Enrico <ebutera@users.sourceforge.net>
-To: joshua.marinacci@nokia.com
+	<CA+2YH7sLFSnRJ4RAUGj=V=BbGpE-3pB79sxm33O_RXCSqWC8Tw@mail.gmail.com>
+In-Reply-To: <CA+2YH7sLFSnRJ4RAUGj=V=BbGpE-3pB79sxm33O_RXCSqWC8Tw@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [97.125.57.15]
+MIME-Version: 1.0
+X-OriginalArrivalTime: 30 Jul 2012 19:11:11.0086 (UTC)
+	FILETIME=[14B810E0:01CD6E87]
+X-Nokia-AV: Clean
 Cc: meta-ti@yoctoproject.org
 Subject: Re: Gumstix Wifi
 X-BeenThere: meta-ti@yoctoproject.org
@@ -41,33 +41,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2012 08:07:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 30 Jul 2012 19:10:36 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <59C2A9FF70320E42B04D3C2D0EE7CEC1@mgd.nokia.com>
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jul 28, 2012 at 9:30 PM,  <joshua.marinacci@nokia.com> wrote:
-> This does work. When I boot the wpa stuff is included but I still don't h=
-ave a network driver loaded.  If I include the built modules-3.2.19-r0-over=
-o.tgz in my rootfs I can cd into the directory with all of the modules.  Ho=
-wever insmod libertas.ko fails with
->
->         insmod: can't insert 'libertas_tf_usb.ko': unknown symbol in modu=
+Hmm. I don't see to have depmod installed.  Perhaps that is part of my prob=
+lem. What package would I need to add to the minimal-core-image to get that=
+?
+
+thanks,
+	Josh
+On Jul 30, 2012, at 1:07 AM, ext Enrico wrote:
+
+> On Sat, Jul 28, 2012 at 9:30 PM,  <joshua.marinacci@nokia.com> wrote:
+>> This does work. When I boot the wpa stuff is included but I still don't =
+have a network driver loaded.  If I include the built modules-3.2.19-r0-ove=
+ro.tgz in my rootfs I can cd into the directory with all of the modules.  H=
+owever insmod libertas.ko fails with
+>>=20
+>>        insmod: can't insert 'libertas_tf_usb.ko': unknown symbol in modu=
 le, or unknown parameter
->
-> and modprobe fails with
->
->         modprobe: module libertas not found in modules.dep
->
->
-> So, what should I do to make sure the libertas module is compiled correct=
-ly, included in my kernel, and then actually used at runtime?
+>>=20
+>> and modprobe fails with
+>>=20
+>>        modprobe: module libertas not found in modules.dep
+>>=20
+>>=20
+>> So, what should I do to make sure the libertas module is compiled correc=
+tly, included in my kernel, and then actually used at runtime?
+>=20
+> try with "depmod -a" (this must be done only once after you untar the
+> modules) before modprobe libertas.
+>=20
+> I am not sure but i think it was "modprobe libertas_sdio", try that
+> too. And of course you will need the libertas firmware
+> (sd8686....bin).
+>=20
+> Enrico
 
-try with "depmod -a" (this must be done only once after you untar the
-modules) before modprobe libertas.
-
-I am not sure but i think it was "modprobe libertas_sdio", try that
-too. And of course you will need the libertas firmware
-(sd8686....bin).
-
-Enrico
 
