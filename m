@@ -1,35 +1,35 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 79A18E01459
-	for <meta-ti@yoctoproject.org>; Sun, 29 Jul 2012 10:09:44 -0700 (PDT)
-Received: by mail-ee0-f48.google.com with SMTP id d41so1131520eek.35
-	for <meta-ti@yoctoproject.org>; Sun, 29 Jul 2012 10:09:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
-	:x-gm-message-state;
-	bh=dbpJXxyGoGqd4St6H9M9uvMw3LCp2bynccKPcbyKsD0=;
-	b=pVAii/Rny8T+Gg5o6WLyZbU8iqeGgrWNOXAvL6W72SYk58Am6F9+yYMZBzwOYS7oj7
-	hKGGmcV5KQObrjePt7gZuM0ccffBujFupBpPdrw+INjUDb4GF8uDgaVRfaVIm1w7Fl8a
-	cDw1w/lgT0hIUwfqixZs/axUZH7n4CQMK1ILNdIie6D7Feikfeu1SBKw2TddUbhNhKxr
-	DkL3Nxy3G9Ts51QtjelFcKB4WxqUk4YSidzQOI09Zu5L8HFcanCl+W8UbGH9D5fFpfYb
-	D6berbThhfga5yfc0/yAxMi2n8apWyLpo06qtNbJzSVBJ0puBUHd0B+MUZLrU1/G0DPe
-	fnig==
-Received: by 10.14.211.196 with SMTP id w44mr9020882eeo.19.1343581784081;
-	Sun, 29 Jul 2012 10:09:44 -0700 (PDT)
-Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
-	by mx.google.com with ESMTPS id g46sm21472695eep.15.2012.07.29.10.09.41
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 29 Jul 2012 10:09:43 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: meta-ti@yoctoproject.org
-Date: Sun, 29 Jul 2012 19:08:34 +0200
-Message-Id: <1343581714-20397-12-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-In-Reply-To: <1343581714-20397-1-git-send-email-koen@dominion.thruhere.net>
-References: <1343581714-20397-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQmkABIY+aOJV3LZW8UID2EjVtqfWOBM+9u8KuGweL02taBNwKEqs1nR4czWlG4THJ3sURIA
-Subject: [PATCH][for-denzil 12/12] u-boot 2011.09+git: update to latest version of Tom Rini's tree
+Return-Path: <ebutera@gmail.com>
+Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
+	[209.85.220.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21E5FE0142E
+	for <meta-ti@yoctoproject.org>; Mon, 30 Jul 2012 01:07:51 -0700 (PDT)
+Received: by vcbfl11 with SMTP id fl11so5158983vcb.35
+	for <meta-ti@yoctoproject.org>; Mon, 30 Jul 2012 01:07:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=EbqAM1SSPpnnLPyw7X2QfgeQLIRyupe4Bnp5gcKRYfk=;
+	b=wXLRozT2ndw32K/TcM+QbuQ1QAlk/oaNR5utgbGhZtljEvJoHN4NNMllqrda/gSWsP
+	iDFpUCRBYsJfthT7DwYZoQHTzY2BOuZ+bSMvW33Na+krGyQCbks4w3T+oUWQj/aP3J7l
+	x9WoihlDOZuMW5L42yDIKSQeBn5eMttOZJjqfoeSsjN+/iCIFFInr9z9ALpFVh+8V1Sp
+	0b6Z8j33Cd6QzEzAN5iL9qIEJbc9FghLXQPC38FbnNNtPqcQjZwi4RJsAN1EmkoBANZB
+	dMACBqNClhJ2PUTPY5PGPctckg09S5uq+4nWib9570tHeq2u0+Jb50SnA8NEcjcSoIXU
+	2cKw==
+MIME-Version: 1.0
+Received: by 10.221.0.74 with SMTP id nl10mr3925448vcb.47.1343635670037; Mon,
+	30 Jul 2012 01:07:50 -0700 (PDT)
+Sender: ebutera@gmail.com
+Received: by 10.220.147.19 with HTTP; Mon, 30 Jul 2012 01:07:49 -0700 (PDT)
+In-Reply-To: <9D64B6CF-0B94-413C-89A4-D9A55DB38AF1@nokia.com>
+References: <9D64B6CF-0B94-413C-89A4-D9A55DB38AF1@nokia.com>
+Date: Mon, 30 Jul 2012 10:07:49 +0200
+X-Google-Sender-Auth: 2MO89K41H-fqt1iCIZ3_RCG3Vis
+Message-ID: <CA+2YH7sLFSnRJ4RAUGj=V=BbGpE-3pB79sxm33O_RXCSqWC8Tw@mail.gmail.com>
+From: Enrico <ebutera@users.sourceforge.net>
+To: joshua.marinacci@nokia.com
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Gumstix Wifi
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,36 +41,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Jul 2012 17:09:44 -0000
+X-List-Received-Date: Mon, 30 Jul 2012 08:07:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- recipes-bsp/u-boot/u-boot_2011.10rc.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Sat, Jul 28, 2012 at 9:30 PM,  <joshua.marinacci@nokia.com> wrote:
+> This does work. When I boot the wpa stuff is included but I still don't h=
+ave a network driver loaded.  If I include the built modules-3.2.19-r0-over=
+o.tgz in my rootfs I can cd into the directory with all of the modules.  Ho=
+wever insmod libertas.ko fails with
+>
+>         insmod: can't insert 'libertas_tf_usb.ko': unknown symbol in modu=
+le, or unknown parameter
+>
+> and modprobe fails with
+>
+>         modprobe: module libertas not found in modules.dep
+>
+>
+> So, what should I do to make sure the libertas module is compiled correct=
+ly, included in my kernel, and then actually used at runtime?
 
-diff --git a/recipes-bsp/u-boot/u-boot_2011.10rc.bb b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
-index c4b4ca7..7035b4c 100644
---- a/recipes-bsp/u-boot/u-boot_2011.10rc.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
-@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "(ti33x)"
- DEFAULT_PREFERENCE_ti33x = "99"
- 
- PV = "2011.09+git"
--PR = "r28"
-+PR = "r29"
- 
- # SPL build
- UBOOT_BINARY = "u-boot.img"
-@@ -26,7 +26,7 @@ SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;br
-            file://2011.09git/0010-am335x-switch-to-ext4-mode.patch \
-           "
- 
--SRCREV = "ec687252299796639ff9bcb981804fbec7b445a4"
-+SRCREV = "dc52533ccff00a12761f793d66b39e4f6a4a3bba"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
- 
--- 
-1.7.10
+try with "depmod -a" (this must be done only once after you untar the
+modules) before modprobe libertas.
 
+I am not sure but i think it was "modprobe libertas_sdio", try that
+too. And of course you will need the libertas firmware
+(sd8686....bin).
+
+Enrico
 
