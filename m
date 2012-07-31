@@ -1,47 +1,35 @@
-Return-Path: <maniacbug@ymail.com>
-Received: from nm7-vm1.bullet.mail.ne1.yahoo.com
-	(nm7-vm1.bullet.mail.ne1.yahoo.com [98.138.90.250])
-	by yocto-www.yoctoproject.org (Postfix) with SMTP id D5230E00288
-	for <meta-ti@yoctoproject.org>; Mon, 30 Jul 2012 21:43:45 -0700 (PDT)
-Received: from [98.138.90.53] by nm7.bullet.mail.ne1.yahoo.com with NNFMP;
-	31 Jul 2012 04:43:45 -0000
-Received: from [98.138.88.234] by tm6.bullet.mail.ne1.yahoo.com with NNFMP;
-	31 Jul 2012 04:43:45 -0000
-Received: from [127.0.0.1] by omp1034.mail.ne1.yahoo.com with NNFMP;
-	31 Jul 2012 04:43:45 -0000
-X-Yahoo-Newman-Property: ymail-3
-X-Yahoo-Newman-Id: 140586.32484.bm@omp1034.mail.ne1.yahoo.com
-Received: (qmail 77133 invoked by uid 60001); 31 Jul 2012 04:43:45 -0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ymail.com; s=s1024;
-	t=1343709824; bh=Dkc9LnDlkRWv4F/gjHmGXwqMdeKlPty2zrd7tRjn5zo=;
-	h=X-YMail-OSG:Received:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
-	b=jKw5SNCQkSCEEKsotX4XEb9dgpm+wUGrZWJ3M29UiM1IpAifXoc2FUcIMEb0oCKVxvieyVvKUdY4gHYakBn6RgDejit3gLolpbxpX/3CHI7jOqZRX0Zixc7/btIsNc0eJLNalDfN0kyW6i1FF8mF1rE6miKplmF0AyHQzVD/+uk=
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=ymail.com;
-	h=X-YMail-OSG:Received:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
-	b=VeC3AxQQGxp0MfhXieOh4EJ9+dQ0+7XEmUAlcV1VQ61/acXMwdI4uREgMQBQhkWHVI5Dvk1oQBukIYj08rvTjTs067uQKBqW4H+GQ4gPPNB2S/ZDrpDmu/kU0GhIXKs2G3zNZpWI5ExtAJCAQiiB1TYcqU9dM6+X5MqWrDM/G/k=;
-X-YMail-OSG: mcqDVSoVM1mJ2Y_.F11EXdzz69QIaroOCPib_m50fOZW4FX
-	Azb5zVqfClLYBRU34pdNRKh_fqXbfHl3g.bWI6U9Zj4HkcOxUtYYE.8QHsBN
-	0Hph3T3_ND0esov0i98MpRDTH9Qs1ycQ7PONSMt2yajMHjEwqZZog8nTRgXT
-	kj_G2M.F3glCBjC81lmGjU3OZzoHMeHvhPOj94Sf21NjW0F.4qD89g2BNZTm
-	nvPi.oz6H6Ehuu4TIMXbIW9wpzekrQ4j65bRrmwG6rQCLRf2HbAb6LYZrh.g
-	wPpQvGcDWo0l1K4ZBGmpo9N6w7P_hlPiXtoq5cIpEhjlz3ZmG1YvtkvC1wl9
-	.u9yfA5dmEkbTV9tAMprdGlxFAQeHobYOZ34vxblNQfQpb6QiCAzzbfksKIK
-	K_kVraENeQFfjrkIA4kgnk33hMogDZ8_3MSgwfP4WwIuv7I6nhgxuC1pmkzp
-	QNTLHjwaB57vvTa5jZL1VbJ03I89jcZ5IQPTrOJsPB4traIivfUn_tJY1UQK
-	MN2kNdI.JEEjIyP0ZDA--
-Received: from [50.135.220.100] by web121605.mail.ne1.yahoo.com via HTTP;
-	Mon, 30 Jul 2012 21:43:44 PDT
-X-Mailer: YahooMailWebService/0.8.120.356233
-Message-ID: <1343709824.69972.YahooMailNeo@web121605.mail.ne1.yahoo.com>
-Date: Mon, 30 Jul 2012 21:43:44 -0700 (PDT)
-From: maniacbug <maniacbug@ymail.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Return-Path: <Vladimir_Zapolskiy@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B5ACE00288
+	for <meta-ti@yoctoproject.org>; Tue, 31 Jul 2012 00:34:42 -0700 (PDT)
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1Sw6yX-0003ek-EH from Vladimir_Zapolskiy@mentor.com ;
+	Tue, 31 Jul 2012 00:34:41 -0700
+Received: from SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 31 Jul 2012 00:34:27 -0700
+Received: from [172.30.2.207] (137.202.0.76) by SVR-IES-FEM-01.mgc.mentorg.com
+	(137.202.0.104) with Microsoft SMTP Server (TLS) id 14.1.289.1;
+	Tue, 31 Jul 2012 08:34:25 +0100
+Message-ID: <50178A7B.5030800@mentor.com>
+Date: Tue, 31 Jul 2012 10:34:19 +0300
+From: Vladimir Zapolskiy <vladimir_zapolskiy@mentor.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:10.0.5) Gecko/20120624 Icedove/10.0.5
 MIME-Version: 1.0
-Subject: Reporting linux-omap4 compile errors
+To: Denys Dmytriyenko <denys@ti.com>
+References: <1343126062-26998-1-git-send-email-vladimir_zapolskiy@mentor.com>
+	<5016E705.7040806@mentor.com> <20120730221049.GB23003@edge>
+In-Reply-To: <20120730221049.GB23003@edge>
+X-Originating-IP: [137.202.0.76]
+X-OriginalArrivalTime: 31 Jul 2012 07:34:27.0739 (UTC)
+	FILETIME=[EA6546B0:01CD6EEE]
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH v2] linux-omap-psp 2.6.32: fix am37x-evm failing build
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
-Reply-To: maniacbug <maniacbug@ymail.com>
 List-Id: Mailing list for the meta-ti layer <meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=unsubscribe>
@@ -50,10 +38,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2012 04:43:46 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 31 Jul 2012 07:34:42 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-One last question (for tonight). Denys, can you suggest where to send bug reports for http://dev.omapzoom.org/?p=integration/kernel-ubuntu.git ? There are some obviously broken source files, so perhaps omap4 doesn't get tested very often.
+Hi Denys,
 
-m.b
+On 31.07.2012 01:10, Denys Dmytriyenko wrote:
+> On Mon, Jul 30, 2012 at 10:56:53PM +0300, Vladimir Zapolskiy wrote:
+>> Hi,
+>>
+>> any comments about the issue? Should I firstly create a bug in
+>> http://bugzilla.yoctoproject.org, if I want to fix the problem?
+>
+> I would rather try updating it to 2.6.37 - hopefully that one doesn't have
+> this issue with recent binutils... Do you have any specific requirements to
+> stay with 2.6.32 instead? If not, 2.6.37 is what is being released as part of
+> SDK for AM37x EVM - I'll look into porting it into meta-ti...
+
+thank you in advance. There is no objection from my side about such upgrade.
+And you're right, linux-omapl138-psp-2.6.37 doesn't contain similar 
+problematic
+patches, which should be fixed or removed.
+
+With best wishes,
+Vladimir
 
