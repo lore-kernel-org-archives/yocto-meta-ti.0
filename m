@@ -1,29 +1,29 @@
 Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68124E0027B
-	for <meta-ti@yoctoproject.org>; Tue, 31 Jul 2012 13:10:52 -0700 (PDT)
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D6804E0027B
+	for <meta-ti@yoctoproject.org>; Tue, 31 Jul 2012 13:16:27 -0700 (PDT)
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q6VKAmmS030593;
-	Tue, 31 Jul 2012 15:10:48 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q6VKAmZu007374;
-	Tue, 31 Jul 2012 15:10:48 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
-	Tue, 31 Jul 2012 15:10:48 -0500
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q6VKGRoi004928;
+	Tue, 31 Jul 2012 15:16:27 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q6VKGQAe012106;
+	Tue, 31 Jul 2012 15:16:26 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.1.323.3;
+	Tue, 31 Jul 2012 15:16:26 -0500
 Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id q6VKAm2U020601;
-	Tue, 31 Jul 2012 15:10:48 -0500
-Date: Tue, 31 Jul 2012 16:10:47 -0400
+	(8.13.8/8.13.8) with ESMTP id q6VKGQq8022340;
+	Tue, 31 Jul 2012 15:16:26 -0500
+Date: Tue, 31 Jul 2012 16:16:26 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Tim Verstraete <Tim.Verstraete@medecbenelux.be>
-Message-ID: <20120731201047.GB21245@edge>
-References: <4439C3C0562087488F139C696CD862A72C188D@SBS-MEDEC.medecbenelux.local>
+To: Vladimir Zapolskiy <vladimir_zapolskiy@mentor.com>
+Message-ID: <20120731201625.GC21245@edge>
+References: <5007E1FE.3070208@mentor.com>
 MIME-Version: 1.0
-In-Reply-To: <4439C3C0562087488F139C696CD862A72C188D@SBS-MEDEC.medecbenelux.local>
+In-Reply-To: <5007E1FE.3070208@mentor.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [HOB] issue
+Cc: meta-ti@yoctoproject.org
+Subject: Re: linux-omap-psp and security code
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,28 +35,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2012 20:10:52 -0000
+X-List-Received-Date: Tue, 31 Jul 2012 20:16:28 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Tue, Jul 31, 2012 at 12:04:37PM +0000, Tim Verstraete wrote:
-> Hi,
-> 
-> When i use the HOB functionality in yocto with the meta-ti, I get an error 
-> message after about 5% with no error message in it. I can only press close.
-> 
-> I use the default layers but I do see that HOB re-arranges them into:
-> Poky/meta
-> Poky/meta-hob
-> Poky/meta-ti
-> Poky/meta-yocto
-> 
-> I see that I can build using the command line so it has to be something with 
-> HOB and not necessary something in yocto.
+This one got stuck in the moderation queue with all the spam... Just wanted to 
+comment on the third option, though.
 
-Well, HOB _is_ part of Yocto anyway. While meta-ti may be triggering the issue 
-in HOB, you better off reporting it to the main yocto mailing list - feel free 
-to copy meta-ti as well.
+On Thu, Jul 19, 2012 at 01:31:26PM +0300, Vladimir Zapolskiy wrote:
+> One more option is to fix the patch, either remove store feature of
+> /sys/devices/system/cpu/cpuN/(l2_)?aux_control files or provide
+> -march=armv7-a+sec AFLAGS in Makefile.
+
+FWIW, I previously made a similar fix for this type of issue:
+
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?id=051482e3b03ba7e2d6cecc0d8f85cc3be22dc8b2
+
+But either way it's better to update to a more recent 2.6.37 kernel for AM37x 
+anyway, which I'll work on next.
 
 -- 
 Denys
