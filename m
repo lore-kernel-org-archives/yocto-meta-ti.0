@@ -1,32 +1,30 @@
-Return-Path: <Vladimir_Zapolskiy@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B5ACE00288
-	for <meta-ti@yoctoproject.org>; Tue, 31 Jul 2012 00:34:42 -0700 (PDT)
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
-	by relay1.mentorg.com with esmtp 
-	id 1Sw6yX-0003ek-EH from Vladimir_Zapolskiy@mentor.com ;
-	Tue, 31 Jul 2012 00:34:41 -0700
-Received: from SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Tue, 31 Jul 2012 00:34:27 -0700
-Received: from [172.30.2.207] (137.202.0.76) by SVR-IES-FEM-01.mgc.mentorg.com
-	(137.202.0.104) with Microsoft SMTP Server (TLS) id 14.1.289.1;
-	Tue, 31 Jul 2012 08:34:25 +0100
-Message-ID: <50178A7B.5030800@mentor.com>
-Date: Tue, 31 Jul 2012 10:34:19 +0300
-From: Vladimir Zapolskiy <vladimir_zapolskiy@mentor.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.5) Gecko/20120624 Icedove/10.0.5
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE00CE00283
+	for <meta-ti@yoctoproject.org>; Tue, 31 Jul 2012 12:43:30 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q6VJhTS0026678;
+	Tue, 31 Jul 2012 14:43:29 -0500
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q6VJhTRG014524;
+	Tue, 31 Jul 2012 14:43:29 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Tue, 31 Jul 2012 14:43:29 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id q6VJhTf4011388;
+	Tue, 31 Jul 2012 14:43:29 -0500
+Date: Tue, 31 Jul 2012 15:43:28 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Message-ID: <20120731194328.GA21013@edge>
+References: <1343581714-20397-1-git-send-email-koen@dominion.thruhere.net>
+	<1343581714-20397-12-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <1343126062-26998-1-git-send-email-vladimir_zapolskiy@mentor.com>
-	<5016E705.7040806@mentor.com> <20120730221049.GB23003@edge>
-In-Reply-To: <20120730221049.GB23003@edge>
-X-Originating-IP: [137.202.0.76]
-X-OriginalArrivalTime: 31 Jul 2012 07:34:27.0739 (UTC)
-	FILETIME=[EA6546B0:01CD6EEE]
+In-Reply-To: <1343581714-20397-12-git-send-email-koen@dominion.thruhere.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v2] linux-omap-psp 2.6.32: fix am37x-evm failing build
+Subject: Re: [PATCH][for-denzil 12/12] u-boot 2011.09+git: update to latest version of Tom Rini's tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,29 +36,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2012 07:34:42 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 31 Jul 2012 19:43:30 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Hi Denys,
+On Sun, Jul 29, 2012 at 07:08:34PM +0200, Koen Kooi wrote:
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  recipes-bsp/u-boot/u-boot_2011.10rc.bb |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-bsp/u-boot/u-boot_2011.10rc.bb b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
+> index c4b4ca7..7035b4c 100644
+> --- a/recipes-bsp/u-boot/u-boot_2011.10rc.bb
+> +++ b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
+> @@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "(ti33x)"
+>  DEFAULT_PREFERENCE_ti33x = "99"
+>  
+>  PV = "2011.09+git"
+> -PR = "r28"
+> +PR = "r29"
+>  
+>  # SPL build
+>  UBOOT_BINARY = "u-boot.img"
+> @@ -26,7 +26,7 @@ SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;br
+>             file://2011.09git/0010-am335x-switch-to-ext4-mode.patch \
+>            "
+>  
+> -SRCREV = "ec687252299796639ff9bcb981804fbec7b445a4"
+> +SRCREV = "dc52533ccff00a12761f793d66b39e4f6a4a3bba"
 
-On 31.07.2012 01:10, Denys Dmytriyenko wrote:
-> On Mon, Jul 30, 2012 at 10:56:53PM +0300, Vladimir Zapolskiy wrote:
->> Hi,
->>
->> any comments about the issue? Should I firstly create a bug in
->> http://bugzilla.yoctoproject.org, if I want to fix the problem?
->
-> I would rather try updating it to 2.6.37 - hopefully that one doesn't have
-> this issue with recent binutils... Do you have any specific requirements to
-> stay with 2.6.32 instead? If not, 2.6.37 is what is being released as part of
-> SDK for AM37x EVM - I'll look into porting it into meta-ti...
+Should it go to the master first?
 
-thank you in advance. There is no objection from my side about such upgrade.
-And you're right, linux-omapl138-psp-2.6.37 doesn't contain similar 
-problematic
-patches, which should be fixed or removed.
+-- 
+Denys
 
-With best wishes,
-Vladimir
+
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
+>  
+> -- 
+> 1.7.10
+> 
 
