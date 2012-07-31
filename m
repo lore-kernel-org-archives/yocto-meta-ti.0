@@ -1,29 +1,23 @@
-Return-Path: <Vladimir_Zapolskiy@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E1F6E0070B
-	for <meta-ti@yoctoproject.org>; Thu, 19 Jul 2012 03:31:35 -0700 (PDT)
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1Sro18-00040D-NC from Vladimir_Zapolskiy@mentor.com ;
-	Thu, 19 Jul 2012 03:31:34 -0700
-Received: from SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 19 Jul 2012 03:31:34 -0700
-Received: from [172.30.2.241] (137.202.0.76) by SVR-IES-FEM-01.mgc.mentorg.com
-	(137.202.0.104) with Microsoft SMTP Server (TLS) id 14.1.289.1;
-	Thu, 19 Jul 2012 11:31:32 +0100
-Message-ID: <5007E1FE.3070208@mentor.com>
-Date: Thu, 19 Jul 2012 13:31:26 +0300
-From: Vladimir Zapolskiy <vladimir_zapolskiy@mentor.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:10.0.5) Gecko/20120624 Icedove/10.0.5
+Return-Path: <Tim.Verstraete@medecbenelux.be>
+Received: from mail.medecbenelux.be (mail.medecbenelux.be [81.83.14.242])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2D6FE00288
+	for <meta-ti@yoctoproject.org>; Tue, 31 Jul 2012 05:04:38 -0700 (PDT)
+Received: from SBS-MEDEC.medecbenelux.local ([fe80::1b66:a66e:3778:1407]) by
+	SBS-MEDEC.medecbenelux.local ([fe80::1b66:a66e:3778:1407%10]) with mapi
+	id 14.01.0355.002; Tue, 31 Jul 2012 14:04:37 +0200
+From: Tim Verstraete <Tim.Verstraete@medecbenelux.be>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: [HOB] issue
+Thread-Index: Ac1vFF0H3bLUIUMsSkuFiw7DqWQ7qw==
+Date: Tue, 31 Jul 2012 12:04:37 +0000
+Message-ID: <4439C3C0562087488F139C696CD862A72C188D@SBS-MEDEC.medecbenelux.local>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [2002:5153:ef2:0:812:67e5:2c33:1a19]
 MIME-Version: 1.0
-To: <meta-ti@yoctoproject.org>
-X-Originating-IP: [137.202.0.76]
-X-OriginalArrivalTime: 19 Jul 2012 10:31:34.0414 (UTC)
-	FILETIME=[AB6E32E0:01CD6599]
-X-Mailman-Approved-At: Tue, 31 Jul 2012 12:58:15 -0700
-Subject: linux-omap-psp and security code
+X-Mailman-Approved-At: Tue, 31 Jul 2012 12:58:26 -0700
+Subject: [HOB] issue
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,38 +29,118 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jul 2012 10:31:35 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 31 Jul 2012 12:04:39 -0000
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_4439C3C0562087488F139C696CD862A72C188DSBSMEDECmedecbene_"
 
-Hello,
+--_000_4439C3C0562087488F139C696CD862A72C188DSBSMEDECmedecbene_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-I have a question about linux-omap-psp-2.6.32 kernel and boards, which 
-uses this kernel, in particular about 
-0038-ARM-Expose-some-CPU-control-registers-via-sysfs.patch. The recent 
-toolchains based on binutils-2.21 or later imply more accurate handling 
-with `smc #0' instructions, which are found in the aforementioned patch. 
-The compilation of the linux-omap-psp kernel with such toolchains leads 
-to "selected processor does not support ARM mode `smc #0'" errors. The 
-patch itself adds /sys/devices/system/cpu/cpuN/ nodes providing access 
-to control register, auxiliary control register, and L2 cache auxiliary 
-control register.
+Hi,
 
-I see several possible solutions of the problem, and I'd be glad to find 
-out the best one. First of all it might have sense to remove the patch 
-completely, because its functionality is purely optional, presumably it 
-is not used by any userspace programs and therefore can be omitted. As a 
-soft alternative CONFIG_CPU_V7_SYSFS kernel option for a list of boards 
-could be disabled in default kernel config files, but I personally don't 
-like this variant, because it merely veils a problem, better to remove 
-the patch itself.
+When i use the HOB functionality in yocto with the meta-ti, I get an error =
+message after about 5% with no error message in it. I can only press close.
 
-One more option is to fix the patch, either remove store feature of 
-/sys/devices/system/cpu/cpuN/(l2_)?aux_control files or provide 
--march=armv7-a+sec AFLAGS in Makefile.
+I use the default layers but I do see that HOB re-arranges them into:
+Poky/meta
+Poky/meta-hob
+Poky/meta-ti
+Poky/meta-yocto
 
-Any suggestions and comments are appreciated.
+I see that I can build using the command line so it has to be something wit=
+h HOB and not necessary something in yocto.
 
-With best wishes,
-Vladimir
+Thank in advance,
 
+Kind regards,
+
+Tim
+
+--_000_4439C3C0562087488F139C696CD862A72C188DSBSMEDECmedecbene_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";
+	mso-fareast-language:EN-US;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri","sans-serif";
+	mso-fareast-language:EN-US;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:70.85pt 70.85pt 70.85pt 70.85pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"NL" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">Hi,<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">When i use the HOB functionalit=
+y in yocto with the meta-ti, I get an error message after about 5% with no =
+error message in it. I can only press close.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">I use the default layers but I =
+do see that HOB re-arranges them into:<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Poky/meta<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Poky/meta-hob<o:p></o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Poky/meta-ti<o:p></o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Poky/meta-yocto<o:p></o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">I see that I can build using th=
+e command line so it has to be something with HOB and not necessary somethi=
+ng in yocto.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Thank in advance,<o:p></o:p></s=
+pan></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Kind regards,<o:p></o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Tim<o:p></o:p></span></p>
+</div>
+</body>
+</html>
+
+--_000_4439C3C0562087488F139C696CD862A72C188DSBSMEDECmedecbene_--
