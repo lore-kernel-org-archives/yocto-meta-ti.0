@@ -1,40 +1,30 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
-	[209.85.160.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 71914E013BB
-	for <meta-ti@yoctoproject.org>; Wed,  1 Aug 2012 12:12:06 -0700 (PDT)
-Received: by pbbrq8 with SMTP id rq8so1788648pbb.35
-	for <meta-ti@yoctoproject.org>; Wed, 01 Aug 2012 12:12:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=lhK2w0seubrWX1hWwbdIid1ktiV5EMCugZOKh0pGSxY=;
-	b=gk5HH5GZ401IWlvcXXYaUQQ04+mHXSve+nDSfSlZUjwxvRjRPIBmTvyaIPsSukjHyQ
-	oOS90NADle0LepF75bIm0Nl439dXxe1t2ht22rM9CrfIeNM3J133uUa1z5lW63mIN/o9
-	ZKyGeDZuHvQV8zV/8eMGD0eaVqpCFjDuHyGQXZRVpNeMLMaU019M0Egb0llB4bmbwtMe
-	0QRZG5nkkFzSghDm1+NN6MYjkzLnStm1YG7LWcQnZpPw/J6Wcq1xn2L0QsSekEqAFTpF
-	zyuqookiiEzDvsAQxJNCiqx9k/BU+4mCDIuABzKe2o4RonxxVOPnoQP9Sq3wy1+HfdB1
-	5Ong==
-Received: by 10.68.203.40 with SMTP id kn8mr53854238pbc.162.1343848326024;
-	Wed, 01 Aug 2012 12:12:06 -0700 (PDT)
-Received: from bill-the-cat ([2001:470:d:eba:253d:1427:ed82:5656])
-	by mx.google.com with ESMTPS id rs4sm3123250pbc.0.2012.08.01.12.12.04
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 01 Aug 2012 12:12:05 -0700 (PDT)
-Sender: Tom Rini <tom.rini@gmail.com>
-Date: Wed, 1 Aug 2012 12:12:14 -0700
-From: Tom Rini <trini@ti.com>
-To: "Kridner, Jason" <jdk@ti.com>
-Message-ID: <20120801191214.GD16076@bill-the-cat>
-References: <20120726013212.1F5DA52AA6@arago-project.org>
-	<CC361C01.B0548%jdk@ti.com>
+Return-Path: <fcooper@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C56A9E01401
+	for <meta-ti@yoctoproject.org>; Wed,  1 Aug 2012 12:22:01 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q71JM1XH005026
+	for <meta-ti@yoctoproject.org>; Wed, 1 Aug 2012 14:22:01 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q71JM1dQ013083
+	for <meta-ti@yoctoproject.org>; Wed, 1 Aug 2012 14:22:01 -0500
+Received: from DFLE30.ent.ti.com ([fe80::648b:2220:c6fb:4e6]) by
+	DFLE72.ent.ti.com ([fe80::5c48:b90d:af93:5822%30]) with mapi id
+	14.01.0323.003; Wed, 1 Aug 2012 14:22:00 -0500
+From: "Cooper Jr., Franklin" <fcooper@ti.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: [branch: denzil] [PATCHES] Porting netbase interfaces file
+	from oe-classic
+Thread-Index: Ac1wGuiP3OkzGA8iSsah6Ah++x0jPw==
+Date: Wed, 1 Aug 2012 19:22:00 +0000
+Message-ID: <8F29D6B095ED194EA1980491A5E029710C27E7C5@DFLE30.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-In-Reply-To: <CC361C01.B0548%jdk@ti.com>
-Organization: Texas Instruments
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-	Arago Project git <git@arago-project.org>
-Subject: Re: Koen Kooi : u-boot 2011.09+git: update to latest version of Tom Rini's tree
+Cc: "Cooper Jr., Franklin" <fcooper@ti.com>
+Subject: [branch: denzil] [PATCHES] Porting netbase interfaces file from oe-classic
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,43 +36,187 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2012 19:12:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 01 Aug 2012 19:22:02 -0000
+X-Groupsio-MsgNum: 1396
+Content-Language: en-US
+Content-Type: multipart/mixed;
+	boundary="_005_8F29D6B095ED194EA1980491A5E029710C27E7C5DFLE30entticom_"
 
-On Thu, Jul 26, 2012 at 01:57:27AM +0000, Kridner, Jason wrote:
-> 
-> -----Original Message-----
-> From: Arago Project git <git@arago-project.org>
-> Date: Wednesday, July 25, 2012 9:32 PM
-> To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-> Subject: [meta-ti] Koen Kooi : u-boot 2011.09+git: update to latest
-> version	of Tom Rini's tree
-> 
-> >Module: meta-ti
-> >Branch: master
-> >Commit: e1b4ab72cfb3ea4599701d1600c44fe3c5f8ba66
-> >URL:    
-> >http://arago-project.org/git/meta-ti.git?a=commit;h=e1b4ab72cfb3ea4599701d
-> >1600c44fe3c5f8ba66
-> >
-> >Author: Koen Kooi <koen@dominion.thruhere.net>
-> >Date:   Wed Jul 11 11:53:27 2012 +0200
-> >
-> >u-boot 2011.09+git: update to latest version of Tom Rini's tree
-> 
-> Aren't all of Tom's patches upstream now?  Why not pull from the latest
-> u-boot release? Are we carrying any patches that would be accepted
-> upstream?
+--_005_8F29D6B095ED194EA1980491A5E029710C27E7C5DFLE30entticom_
+Content-Type: multipart/alternative;
+	boundary="_000_8F29D6B095ED194EA1980491A5E029710C27E7C5DFLE30entticom_"
 
-Late to the party, I know.  v2012.07 has extremely minimal support for
-am335x platforms.  With 3 series of patches (which I expect to queue up
-and push along to u-boot-arm and then u-boot proper) mainline support
-should be better, at least wrt bone, than the arago tree.  NAND and SPI
-and MMC1 won't be there, yet.  i2c, ethernet, booting kernels will be
-there.  And easier than arago eeprom programming will be there too
-(eeprom command in U-Boot for dumping memory to eeprom).
+--_000_8F29D6B095ED194EA1980491A5E029710C27E7C5DFLE30entticom_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
--- 
-Tom
+These patches are very similar to the ones I sent before  except these are =
+for the denzil branch. The denzil branch is currently using netbase 4.47 wh=
+ile the master branch is using netbase 5.0 which is why two different patch=
+ submissions are needed.
 
+Regards,
+Franklin Cooper Jr.
+Texas Instruments
+Application Engineer
+fcooper@ti.com<mailto:fcooper@ti.com>
+
+
+--_000_8F29D6B095ED194EA1980491A5E029710C27E7C5DFLE30entticom_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 12 (filtered medium)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext=3D"edit">
+  <o:idmap v:ext=3D"edit" data=3D"1" />
+ </o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">These patches are very similar to the ones I sent be=
+fore &nbsp;except these are for the denzil branch. The denzil branch is cur=
+rently using netbase 4.47 while the master branch is using netbase 5.0 whic=
+h is why two different patch submissions
+ are needed. <o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Regards,<o:p></o:p></p>
+<p class=3D"MsoNormal">Franklin Cooper Jr.<o:p></o:p></p>
+<p class=3D"MsoNormal">Texas Instruments<o:p></o:p></p>
+<p class=3D"MsoNormal">Application Engineer<o:p></o:p></p>
+<p class=3D"MsoNormal"><a href=3D"mailto:fcooper@ti.com">fcooper@ti.com</a>=
+<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_8F29D6B095ED194EA1980491A5E029710C27E7C5DFLE30entticom_--
+
+--_005_8F29D6B095ED194EA1980491A5E029710C27E7C5DFLE30entticom_
+Content-Type: application/octet-stream;
+	name="0001-netbase-Add-base-interface-file.patch"
+Content-Description: 0001-netbase-Add-base-interface-file.patch
+Content-Disposition: attachment;
+	filename="0001-netbase-Add-base-interface-file.patch"; size=2019;
+	creation-date="Wed, 01 Aug 2012 19:16:31 GMT";
+	modification-date="Wed, 01 Aug 2012 19:13:31 GMT"
+Content-Transfer-Encoding: base64
+
+RnJvbSAwZGE5YTc1MWYzNTk2YmU3MDFkNDhlMDgzOGI2MWRlZWUzZTMxMGY1IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBGcmFua2xpbiBTIENvb3BlciBKciA8ZmNvb3BlckB0aS5jb20+
+CkRhdGU6IE1vbiwgMzAgSnVsIDIwMTIgMTQ6NDg6MjIgLTA1MDAKU3ViamVjdDogW1BBVENIIDEv
+Ml0gbmV0YmFzZTogQWRkIGJhc2UgaW50ZXJmYWNlIGZpbGUKCiogQWRkIFBSX2FwcGVuZAoqIFB1
+bGwgaW4gYmFzZSBpbnRlcmZhY2UgZmlsZSBmcm9tIG9lLWNvcmUKKiBVcGRhdGUgdG8gdXNlIHRo
+ZSBuZXcgc3ludGF4IGZvciBleHRlbmRpbmcgdGhlIGZpbGUgc2VhcmNoIHBhdGgKClNpZ25lZC1v
+ZmYtYnk6IEZyYW5rbGluIFMgQ29vcGVyIEpyIDxmY29vcGVyQHRpLmNvbT4KLS0tCiByZWNpcGVz
+LWNvcmUvbmV0YmFzZS9uZXRiYXNlLTQuNDcvaW50ZXJmYWNlcyB8ICAgMzEgKysrKysrKysrKysr
+KysrKysrKysrKysrKysKIHJlY2lwZXMtY29yZS9uZXRiYXNlL25ldGJhc2VfNC40Ny5iYmFwcGVu
+ZCAgIHwgICAgNSArKy0KIDIgZmlsZXMgY2hhbmdlZCwgMzQgaW5zZXJ0aW9ucygrKSwgMiBkZWxl
+dGlvbnMoLSkKIGNyZWF0ZSBtb2RlIDEwMDY0NCByZWNpcGVzLWNvcmUvbmV0YmFzZS9uZXRiYXNl
+LTQuNDcvaW50ZXJmYWNlcwoKZGlmZiAtLWdpdCBhL3JlY2lwZXMtY29yZS9uZXRiYXNlL25ldGJh
+c2UtNC40Ny9pbnRlcmZhY2VzIGIvcmVjaXBlcy1jb3JlL25ldGJhc2UvbmV0YmFzZS00LjQ3L2lu
+dGVyZmFjZXMKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uMGFjZjRjZgotLS0g
+L2Rldi9udWxsCisrKyBiL3JlY2lwZXMtY29yZS9uZXRiYXNlL25ldGJhc2UtNC40Ny9pbnRlcmZh
+Y2VzCkBAIC0wLDAgKzEsMzEgQEAKKyMgL2V0Yy9uZXR3b3JrL2ludGVyZmFjZXMgLS0gY29uZmln
+dXJhdGlvbiBmaWxlIGZvciBpZnVwKDgpLCBpZmRvd24oOCkKKyAKKyMgVGhlIGxvb3BiYWNrIGlu
+dGVyZmFjZQorYXV0byBsbworaWZhY2UgbG8gaW5ldCBsb29wYmFjaworCisjIFdpcmVsZXNzIGlu
+dGVyZmFjZXMKK2lmYWNlIHdsYW4wIGluZXQgZGhjcAorCXdpcmVsZXNzX21vZGUgbWFuYWdlZAor
+CXdpcmVsZXNzX2Vzc2lkIGFueQorCXdwYS1kcml2ZXIgd2V4dAorCXdwYS1jb25mIC9ldGMvd3Bh
+X3N1cHBsaWNhbnQuY29uZgorCitpZmFjZSBhdG1sMCBpbmV0IGRoY3AKKworIyBXaXJlZCBvciB3
+aXJlbGVzcyBpbnRlcmZhY2VzCithdXRvIGV0aDAKK2lmYWNlIGV0aDAgaW5ldCBkaGNwCitpZmFj
+ZSBldGgxIGluZXQgZGhjcAorCisjIEV0aGVybmV0L1JORElTIGdhZGdldCAoZ19ldGhlcikKKyMg
+Li4uIG9yIG9uIGhvc3Qgc2lkZSwgdXNibmV0IGFuZCByYW5kb20gaHdhZGRyCitpZmFjZSB1c2Iw
+IGluZXQgc3RhdGljCisJYWRkcmVzcyAxOTIuMTY4LjcuMgorCW5ldG1hc2sgMjU1LjI1NS4yNTUu
+MAorCW5ldHdvcmsgMTkyLjE2OC43LjAKKwlnYXRld2F5IDE5Mi4xNjguNy4xCisKKyMgQmx1ZXRv
+b3RoIG5ldHdvcmtpbmcKK2lmYWNlIGJuZXAwIGluZXQgZGhjcAorCmRpZmYgLS1naXQgYS9yZWNp
+cGVzLWNvcmUvbmV0YmFzZS9uZXRiYXNlXzQuNDcuYmJhcHBlbmQgYi9yZWNpcGVzLWNvcmUvbmV0
+YmFzZS9uZXRiYXNlXzQuNDcuYmJhcHBlbmQKaW5kZXggNGI4ZDBlNi4uZTA1OWIyMSAxMDA2NDQK
+LS0tIGEvcmVjaXBlcy1jb3JlL25ldGJhc2UvbmV0YmFzZV80LjQ3LmJiYXBwZW5kCisrKyBiL3Jl
+Y2lwZXMtY29yZS9uZXRiYXNlL25ldGJhc2VfNC40Ny5iYmFwcGVuZApAQCAtMSwzICsxLDQgQEAK
+LVRISVNESVIgOj0gIiR7QG9zLnBhdGguZGlybmFtZShiYi5kYXRhLmdldFZhcignRklMRScsIGQs
+IFRydWUpKX0iCi1GSUxFU1BBVEggPS4gIiR7QGJhc2Vfc2V0X2ZpbGVzcGF0aChbIiR7VEhJU0RJ
+Un0vJHtQTn0iXSwgZCl9OiIKKyMgbG9vayBmb3IgZmlsZXMgaW4gdGhpcyBsYXllciBmaXJzdAor
+RklMRVNFWFRSQVBBVEhTX3ByZXBlbmQgOj0gIiR7VEhJU0RJUn0vJHtQTn0iCiAKK1BSX2FwcGVu
+ZCA9ICItdGkwIgotLSAKMS43LjAuNAoK
+
+--_005_8F29D6B095ED194EA1980491A5E029710C27E7C5DFLE30entticom_
+Content-Type: application/octet-stream;
+	name="0002-netbase-Update-interface-file.patch"
+Content-Description: 0002-netbase-Update-interface-file.patch
+Content-Disposition: attachment;
+	filename="0002-netbase-Update-interface-file.patch"; size=1363;
+	creation-date="Wed, 01 Aug 2012 19:16:31 GMT";
+	modification-date="Wed, 01 Aug 2012 19:13:31 GMT"
+Content-Transfer-Encoding: base64
+
+RnJvbSBiNjk1Y2YyNGU0ZTZhYTBkZTBmOGI4YjkwYmU5MDhkYzhkZmRmYzg5IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBGcmFua2xpbiBTIENvb3BlciBKciA8ZmNvb3BlckB0aS5jb20+
+CkRhdGU6IE1vbiwgMzAgSnVsIDIwMTIgMTU6MDE6MDAgLTA1MDAKU3ViamVjdDogW1BBVENIIDIv
+Ml0gbmV0YmFzZTogVXBkYXRlIGludGVyZmFjZSBmaWxlCgoqIFVwZGF0ZSBpbnRlcmZhY2UgZmls
+ZSBiYXNlZCBvbiBjaGFuZ2VzIG1hZGUgdG8gdGhlIGludGVyZmFjZSBmaWxlCiAgaW4gYXJhZ28K
+ClNpZ25lZC1vZmYtYnk6IEZyYW5rbGluIFMgQ29vcGVyIEpyIDxmY29vcGVyQHRpLmNvbT4KLS0t
+CiByZWNpcGVzLWNvcmUvbmV0YmFzZS9uZXRiYXNlLTQuNDcvaW50ZXJmYWNlcyB8ICAgMTIgKysr
+KysrKy0tLS0tCiAxIGZpbGVzIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKSwgNSBkZWxldGlvbnMo
+LSkKCmRpZmYgLS1naXQgYS9yZWNpcGVzLWNvcmUvbmV0YmFzZS9uZXRiYXNlLTQuNDcvaW50ZXJm
+YWNlcyBiL3JlY2lwZXMtY29yZS9uZXRiYXNlL25ldGJhc2UtNC40Ny9pbnRlcmZhY2VzCmluZGV4
+IDBhY2Y0Y2YuLjE1YmMzMWMgMTAwNjQ0Ci0tLSBhL3JlY2lwZXMtY29yZS9uZXRiYXNlL25ldGJh
+c2UtNC40Ny9pbnRlcmZhY2VzCisrKyBiL3JlY2lwZXMtY29yZS9uZXRiYXNlL25ldGJhc2UtNC40
+Ny9pbnRlcmZhY2VzCkBAIC0xMSwyMCArMTEsMjIgQEAgaWZhY2Ugd2xhbjAgaW5ldCBkaGNwCiAJ
+d3BhLWRyaXZlciB3ZXh0CiAJd3BhLWNvbmYgL2V0Yy93cGFfc3VwcGxpY2FudC5jb25mCiAKK2lm
+YWNlIHRpd2xhbjAgaW5ldCBkaGNwCisJd2lyZWxlc3NfbW9kZSBtYW5hZ2VkCisJd2lyZWxlc3Nf
+ZXNzaWQgYW55CisKIGlmYWNlIGF0bWwwIGluZXQgZGhjcAogCiAjIFdpcmVkIG9yIHdpcmVsZXNz
+IGludGVyZmFjZXMKIGF1dG8gZXRoMAogaWZhY2UgZXRoMCBpbmV0IGRoY3AKKyAgICAgICAgcHJl
+LXVwIC9iaW4vZ3JlcCAtdiAtZSAiaXA9WzAtOV1cK1wuWzAtOV1cK1wuWzAtOV1cK1wuWzAtOV1c
+KyIgL3Byb2MvY21kbGluZSA+IC9kZXYvbnVsbAorCiBpZmFjZSBldGgxIGluZXQgZGhjcAogCiAj
+IEV0aGVybmV0L1JORElTIGdhZGdldCAoZ19ldGhlcikKICMgLi4uIG9yIG9uIGhvc3Qgc2lkZSwg
+dXNibmV0IGFuZCByYW5kb20gaHdhZGRyCi1pZmFjZSB1c2IwIGluZXQgc3RhdGljCi0JYWRkcmVz
+cyAxOTIuMTY4LjcuMgotCW5ldG1hc2sgMjU1LjI1NS4yNTUuMAotCW5ldHdvcmsgMTkyLjE2OC43
+LjAKLQlnYXRld2F5IDE5Mi4xNjguNy4xCitpZmFjZSB1c2IwIGluZXQgZGhjcAogCiAjIEJsdWV0
+b290aCBuZXR3b3JraW5nCiBpZmFjZSBibmVwMCBpbmV0IGRoY3AKLS0gCjEuNy4wLjQKCg==
+
+--_005_8F29D6B095ED194EA1980491A5E029710C27E7C5DFLE30entticom_--
