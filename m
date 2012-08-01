@@ -1,30 +1,40 @@
-Return-Path: <fcooper@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5792EE013BB
-	for <meta-ti@yoctoproject.org>; Wed,  1 Aug 2012 12:07:16 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q71J7FDY003829
-	for <meta-ti@yoctoproject.org>; Wed, 1 Aug 2012 14:07:15 -0500
-Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q71J7Ffi031503
-	for <meta-ti@yoctoproject.org>; Wed, 1 Aug 2012 14:07:15 -0500
-Received: from DFLE30.ent.ti.com ([fe80::648b:2220:c6fb:4e6]) by
-	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
-	14.01.0323.003; Wed, 1 Aug 2012 14:07:15 -0500
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: [branch: master][PATCHES] Porting netbase interfaces file from
-	oe-classic
-Thread-Index: Ac1wGNivcFQPZ4euQjaH4CrcFRxxnA==
-Date: Wed, 1 Aug 2012 19:07:14 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C27E75F@DFLE30.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+Return-Path: <tom.rini@gmail.com>
+Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
+	[209.85.160.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 71914E013BB
+	for <meta-ti@yoctoproject.org>; Wed,  1 Aug 2012 12:12:06 -0700 (PDT)
+Received: by pbbrq8 with SMTP id rq8so1788648pbb.35
+	for <meta-ti@yoctoproject.org>; Wed, 01 Aug 2012 12:12:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=lhK2w0seubrWX1hWwbdIid1ktiV5EMCugZOKh0pGSxY=;
+	b=gk5HH5GZ401IWlvcXXYaUQQ04+mHXSve+nDSfSlZUjwxvRjRPIBmTvyaIPsSukjHyQ
+	oOS90NADle0LepF75bIm0Nl439dXxe1t2ht22rM9CrfIeNM3J133uUa1z5lW63mIN/o9
+	ZKyGeDZuHvQV8zV/8eMGD0eaVqpCFjDuHyGQXZRVpNeMLMaU019M0Egb0llB4bmbwtMe
+	0QRZG5nkkFzSghDm1+NN6MYjkzLnStm1YG7LWcQnZpPw/J6Wcq1xn2L0QsSekEqAFTpF
+	zyuqookiiEzDvsAQxJNCiqx9k/BU+4mCDIuABzKe2o4RonxxVOPnoQP9Sq3wy1+HfdB1
+	5Ong==
+Received: by 10.68.203.40 with SMTP id kn8mr53854238pbc.162.1343848326024;
+	Wed, 01 Aug 2012 12:12:06 -0700 (PDT)
+Received: from bill-the-cat ([2001:470:d:eba:253d:1427:ed82:5656])
+	by mx.google.com with ESMTPS id rs4sm3123250pbc.0.2012.08.01.12.12.04
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 01 Aug 2012 12:12:05 -0700 (PDT)
+Sender: Tom Rini <tom.rini@gmail.com>
+Date: Wed, 1 Aug 2012 12:12:14 -0700
+From: Tom Rini <trini@ti.com>
+To: "Kridner, Jason" <jdk@ti.com>
+Message-ID: <20120801191214.GD16076@bill-the-cat>
+References: <20120726013212.1F5DA52AA6@arago-project.org>
+	<CC361C01.B0548%jdk@ti.com>
 MIME-Version: 1.0
-Cc: "Cooper Jr., Franklin" <fcooper@ti.com>
-Subject: [branch: master][PATCHES] Porting netbase interfaces file from oe-classic
+In-Reply-To: <CC361C01.B0548%jdk@ti.com>
+Organization: Texas Instruments
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	Arago Project git <git@arago-project.org>
+Subject: Re: Koen Kooi : u-boot 2011.09+git: update to latest version of Tom Rini's tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,258 +46,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2012 19:07:16 -0000
-X-Groupsio-MsgNum: 1394
-Content-Language: en-US
-Content-Type: multipart/mixed;
-	boundary="_005_8F29D6B095ED194EA1980491A5E029710C27E75FDFLE30entticom_"
+X-List-Received-Date: Wed, 01 Aug 2012 19:12:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---_005_8F29D6B095ED194EA1980491A5E029710C27E75FDFLE30entticom_
-Content-Type: multipart/alternative;
-	boundary="_000_8F29D6B095ED194EA1980491A5E029710C27E75FDFLE30entticom_"
+On Thu, Jul 26, 2012 at 01:57:27AM +0000, Kridner, Jason wrote:
+> 
+> -----Original Message-----
+> From: Arago Project git <git@arago-project.org>
+> Date: Wednesday, July 25, 2012 9:32 PM
+> To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+> Subject: [meta-ti] Koen Kooi : u-boot 2011.09+git: update to latest
+> version	of Tom Rini's tree
+> 
+> >Module: meta-ti
+> >Branch: master
+> >Commit: e1b4ab72cfb3ea4599701d1600c44fe3c5f8ba66
+> >URL:    
+> >http://arago-project.org/git/meta-ti.git?a=commit;h=e1b4ab72cfb3ea4599701d
+> >1600c44fe3c5f8ba66
+> >
+> >Author: Koen Kooi <koen@dominion.thruhere.net>
+> >Date:   Wed Jul 11 11:53:27 2012 +0200
+> >
+> >u-boot 2011.09+git: update to latest version of Tom Rini's tree
+> 
+> Aren't all of Tom's patches upstream now?  Why not pull from the latest
+> u-boot release? Are we carrying any patches that would be accepted
+> upstream?
 
---_000_8F29D6B095ED194EA1980491A5E029710C27E75FDFLE30entticom_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Late to the party, I know.  v2012.07 has extremely minimal support for
+am335x platforms.  With 3 series of patches (which I expect to queue up
+and push along to u-boot-arm and then u-boot proper) mainline support
+should be better, at least wrt bone, than the arago tree.  NAND and SPI
+and MMC1 won't be there, yet.  i2c, ethernet, booting kernels will be
+there.  And easier than arago eeprom programming will be there too
+(eeprom command in U-Boot for dumping memory to eeprom).
 
-Attached patches are for porting the netbase interface file used in arago/o=
-e-classic to meta-ti.
+-- 
+Tom
 
-The difference between my interfaces file and the one in beagleboard direct=
-ory seems very minor. Would it be ok to combine the changes from both files=
- into a single file? The auto usb0 looks like it might be an issue if we co=
-mbined the two files. Would it make sense to append that line to the interf=
-ace file during do_install_append step only for the beagleboard platform an=
-d consolidate the rest of the differences?
-
-diff beagleboard/interfaces interfaces
-13a14,17
-> iface tiwlan0 inet dhcp
->    wireless_mode managed
->    wireless_essid any
->
-18a23,24
->         pre-up /bin/grep -v -e "ip=3D[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+" =
-/proc/cmdline > /dev/null
->
-21,22c27,28
-< # Ethernet/RNDIS gadget (g_ether) or LAN9514 on BeagleBoard xM
-< auto usb0
----
-> # Ethernet/RNDIS gadget (g_ether)
-> # ... or on host side, usbnet and random hwaddr
-
-
-Regards,
-Franklin Cooper Jr.
-Texas Instruments
-Application Engineer
-fcooper@ti.com<mailto:fcooper@ti.com>
-
-
---_000_8F29D6B095ED194EA1980491A5E029710C27E75FDFLE30entticom_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Word 12 (filtered medium)">
-<style>
-<!--
- /* Font Definitions */
- @font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:purple;
-	text-decoration:underline;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri","sans-serif";
-	color:windowtext;}
-.MsoChpDefault
-	{mso-style-type:export-only;}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
--->
-</style><!--[if gte mso 9]><xml>
- <o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
- <o:shapelayout v:ext=3D"edit">
-  <o:idmap v:ext=3D"edit" data=3D"1" />
- </o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal">Attached patches are for porting the netbase interfa=
-ce file used in arago/oe-classic to meta-ti.<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">The difference between my interfaces file and the on=
-e in beagleboard directory seems very minor. Would it be ok to combine the =
-changes from both files into a single file? The auto usb0 looks like it mig=
-ht be an issue if we combined the
- two files. Would it make sense to append that line to the interface file d=
-uring do_install_append step only for the beagleboard platform and consolid=
-ate the rest of the differences?
-<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal"><b><span style=3D"font-family:&quot;Courier New&quot=
-;">diff beagleboard/interfaces interfaces<o:p></o:p></span></b></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">13a14,17<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">&gt; iface tiwlan0 inet dhcp<o:p></o:p></span=
-></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">&gt; &nbsp;&nbsp; wireless_mode managed<o:p><=
-/o:p></span></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">&gt; &nbsp;&nbsp; wireless_essid any<o:p></o:=
-p></span></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">&gt;
-<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">18a23,24<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp; pre-up /bin/grep -v -e &quot;ip=3D[0-9]\&#43;\.[0-9]\&#43;\.[0-9]\&=
-#43;\.[0-9]\&#43;&quot; /proc/cmdline &gt; /dev/null<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">&gt;
-<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">21,22c27,28<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">&lt; # Ethernet/RNDIS gadget (g_ether) or LAN=
-9514 on BeagleBoard xM<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">&lt; auto usb0<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">---<o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">&gt; # Ethernet/RNDIS gadget (g_ether)<o:p></=
-o:p></span></p>
-<p class=3D"MsoNormal" style=3D"text-autospace:none"><span style=3D"font-fa=
-mily:&quot;Courier New&quot;">&gt; # ... or on host side, usbnet and random=
- hwaddr<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Regards,<o:p></o:p></p>
-<p class=3D"MsoNormal">Franklin Cooper Jr.<o:p></o:p></p>
-<p class=3D"MsoNormal">Texas Instruments<o:p></o:p></p>
-<p class=3D"MsoNormal">Application Engineer<o:p></o:p></p>
-<p class=3D"MsoNormal"><a href=3D"mailto:fcooper@ti.com">fcooper@ti.com</a>=
-<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-</div>
-</body>
-</html>
-
---_000_8F29D6B095ED194EA1980491A5E029710C27E75FDFLE30entticom_--
-
---_005_8F29D6B095ED194EA1980491A5E029710C27E75FDFLE30entticom_
-Content-Type: application/octet-stream;
-	name="0001-netbase-Add-base-interface-file.patch"
-Content-Description: 0001-netbase-Add-base-interface-file.patch
-Content-Disposition: attachment;
-	filename="0001-netbase-Add-base-interface-file.patch"; size=2013;
-	creation-date="Wed, 01 Aug 2012 18:46:14 GMT";
-	modification-date="Wed, 01 Aug 2012 18:49:00 GMT"
-Content-Transfer-Encoding: base64
-
-RnJvbSA5ODU1NGNiY2Q5NTIyODQzMGEzM2Y3YmZhN2QwY2ZjNzNlYmI5M2UzIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBGcmFua2xpbiBTIENvb3BlciBKciA8ZmNvb3BlckB0aS5jb20+
-CkRhdGU6IFdlZCwgMSBBdWcgMjAxMiAxMzo0Njo1MyAtMDUwMApTdWJqZWN0OiBbUEFUQ0ggMS8y
-XSBuZXRiYXNlOiBBZGQgYmFzZSBpbnRlcmZhY2UgZmlsZQoKKiBBZGQgUFJfYXBwZW5kCiogUHVs
-bCBpbiB0aGUgYmFzZSBpbnRlcmZhY2UgZmlsZSBmcm9tIG9lLWNvcmUKKiBVcGRhdGUgdG8gdXNl
-IHRoZSBuZXcgc3ludGF4IGZvciBleHRlbmRpbmcgdGhlIGZpbGUgc2VhcmNoIHBhdGgKClNpZ25l
-ZC1vZmYtYnk6IEZyYW5rbGluIFMgQ29vcGVyIEpyIDxmY29vcGVyQHRpLmNvbT4KLS0tCiByZWNp
-cGVzLWNvcmUvbmV0YmFzZS9uZXRiYXNlLTUuMC9pbnRlcmZhY2VzIHwgICAzMSArKysrKysrKysr
-KysrKysrKysrKysrKysrKysKIHJlY2lwZXMtY29yZS9uZXRiYXNlL25ldGJhc2VfNS4wLmJiYXBw
-ZW5kICAgfCAgICA1ICsrLQogMiBmaWxlcyBjaGFuZ2VkLCAzNCBpbnNlcnRpb25zKCspLCAyIGRl
-bGV0aW9ucygtKQogY3JlYXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMtY29yZS9uZXRiYXNlL25ldGJh
-c2UtNS4wL2ludGVyZmFjZXMKCmRpZmYgLS1naXQgYS9yZWNpcGVzLWNvcmUvbmV0YmFzZS9uZXRi
-YXNlLTUuMC9pbnRlcmZhY2VzIGIvcmVjaXBlcy1jb3JlL25ldGJhc2UvbmV0YmFzZS01LjAvaW50
-ZXJmYWNlcwpuZXcgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAwMDAwMDAwLi4wYWNmNGNmCi0tLSAv
-ZGV2L251bGwKKysrIGIvcmVjaXBlcy1jb3JlL25ldGJhc2UvbmV0YmFzZS01LjAvaW50ZXJmYWNl
-cwpAQCAtMCwwICsxLDMxIEBACisjIC9ldGMvbmV0d29yay9pbnRlcmZhY2VzIC0tIGNvbmZpZ3Vy
-YXRpb24gZmlsZSBmb3IgaWZ1cCg4KSwgaWZkb3duKDgpCisgCisjIFRoZSBsb29wYmFjayBpbnRl
-cmZhY2UKK2F1dG8gbG8KK2lmYWNlIGxvIGluZXQgbG9vcGJhY2sKKworIyBXaXJlbGVzcyBpbnRl
-cmZhY2VzCitpZmFjZSB3bGFuMCBpbmV0IGRoY3AKKwl3aXJlbGVzc19tb2RlIG1hbmFnZWQKKwl3
-aXJlbGVzc19lc3NpZCBhbnkKKwl3cGEtZHJpdmVyIHdleHQKKwl3cGEtY29uZiAvZXRjL3dwYV9z
-dXBwbGljYW50LmNvbmYKKworaWZhY2UgYXRtbDAgaW5ldCBkaGNwCisKKyMgV2lyZWQgb3Igd2ly
-ZWxlc3MgaW50ZXJmYWNlcworYXV0byBldGgwCitpZmFjZSBldGgwIGluZXQgZGhjcAoraWZhY2Ug
-ZXRoMSBpbmV0IGRoY3AKKworIyBFdGhlcm5ldC9STkRJUyBnYWRnZXQgKGdfZXRoZXIpCisjIC4u
-LiBvciBvbiBob3N0IHNpZGUsIHVzYm5ldCBhbmQgcmFuZG9tIGh3YWRkcgoraWZhY2UgdXNiMCBp
-bmV0IHN0YXRpYworCWFkZHJlc3MgMTkyLjE2OC43LjIKKwluZXRtYXNrIDI1NS4yNTUuMjU1LjAK
-KwluZXR3b3JrIDE5Mi4xNjguNy4wCisJZ2F0ZXdheSAxOTIuMTY4LjcuMQorCisjIEJsdWV0b290
-aCBuZXR3b3JraW5nCitpZmFjZSBibmVwMCBpbmV0IGRoY3AKKwpkaWZmIC0tZ2l0IGEvcmVjaXBl
-cy1jb3JlL25ldGJhc2UvbmV0YmFzZV81LjAuYmJhcHBlbmQgYi9yZWNpcGVzLWNvcmUvbmV0YmFz
-ZS9uZXRiYXNlXzUuMC5iYmFwcGVuZAppbmRleCA0YjhkMGU2Li5lMDU5YjIxIDEwMDY0NAotLS0g
-YS9yZWNpcGVzLWNvcmUvbmV0YmFzZS9uZXRiYXNlXzUuMC5iYmFwcGVuZAorKysgYi9yZWNpcGVz
-LWNvcmUvbmV0YmFzZS9uZXRiYXNlXzUuMC5iYmFwcGVuZApAQCAtMSwzICsxLDQgQEAKLVRISVNE
-SVIgOj0gIiR7QG9zLnBhdGguZGlybmFtZShiYi5kYXRhLmdldFZhcignRklMRScsIGQsIFRydWUp
-KX0iCi1GSUxFU1BBVEggPS4gIiR7QGJhc2Vfc2V0X2ZpbGVzcGF0aChbIiR7VEhJU0RJUn0vJHtQ
-Tn0iXSwgZCl9OiIKKyMgbG9vayBmb3IgZmlsZXMgaW4gdGhpcyBsYXllciBmaXJzdAorRklMRVNF
-WFRSQVBBVEhTX3ByZXBlbmQgOj0gIiR7VEhJU0RJUn0vJHtQTn0iCiAKK1BSX2FwcGVuZCA9ICIt
-dGkwIgotLSAKMS43LjAuNAoK
-
---_005_8F29D6B095ED194EA1980491A5E029710C27E75FDFLE30entticom_
-Content-Type: application/octet-stream;
-	name="0002-netbase-Update-interface-file.patch"
-Content-Description: 0002-netbase-Update-interface-file.patch
-Content-Disposition: attachment;
-	filename="0002-netbase-Update-interface-file.patch"; size=1357;
-	creation-date="Wed, 01 Aug 2012 18:46:14 GMT";
-	modification-date="Wed, 01 Aug 2012 18:49:00 GMT"
-Content-Transfer-Encoding: base64
-
-RnJvbSAwMzAwZWUwZjM4ZWMyMTY3MzY2YzM5MWJkMDYzMjMwZGYzZDQwOGM4IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBGcmFua2xpbiBTIENvb3BlciBKciA8ZmNvb3BlckB0aS5jb20+
-CkRhdGU6IFdlZCwgMSBBdWcgMjAxMiAxMzo0ODoxOCAtMDUwMApTdWJqZWN0OiBbUEFUQ0ggMi8y
-XSBuZXRiYXNlOiBVcGRhdGUgaW50ZXJmYWNlIGZpbGUKCiogVXBkYXRlIGludGVyZmFjZSBmaWxl
-IGJhc2VkIG9uIGNoYW5nZXMgbWFkZSB0byB0aGUgaW50ZXJmYWNlIGZpbGUKICBpbiBhcmFnbwoK
-U2lnbmVkLW9mZi1ieTogRnJhbmtsaW4gUyBDb29wZXIgSnIgPGZjb29wZXJAdGkuY29tPgotLS0K
-IHJlY2lwZXMtY29yZS9uZXRiYXNlL25ldGJhc2UtNS4wL2ludGVyZmFjZXMgfCAgIDEyICsrKysr
-KystLS0tLQogMSBmaWxlcyBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKyksIDUgZGVsZXRpb25zKC0p
-CgpkaWZmIC0tZ2l0IGEvcmVjaXBlcy1jb3JlL25ldGJhc2UvbmV0YmFzZS01LjAvaW50ZXJmYWNl
-cyBiL3JlY2lwZXMtY29yZS9uZXRiYXNlL25ldGJhc2UtNS4wL2ludGVyZmFjZXMKaW5kZXggMGFj
-ZjRjZi4uMTViYzMxYyAxMDA2NDQKLS0tIGEvcmVjaXBlcy1jb3JlL25ldGJhc2UvbmV0YmFzZS01
-LjAvaW50ZXJmYWNlcworKysgYi9yZWNpcGVzLWNvcmUvbmV0YmFzZS9uZXRiYXNlLTUuMC9pbnRl
-cmZhY2VzCkBAIC0xMSwyMCArMTEsMjIgQEAgaWZhY2Ugd2xhbjAgaW5ldCBkaGNwCiAJd3BhLWRy
-aXZlciB3ZXh0CiAJd3BhLWNvbmYgL2V0Yy93cGFfc3VwcGxpY2FudC5jb25mCiAKK2lmYWNlIHRp
-d2xhbjAgaW5ldCBkaGNwCisJd2lyZWxlc3NfbW9kZSBtYW5hZ2VkCisJd2lyZWxlc3NfZXNzaWQg
-YW55CisKIGlmYWNlIGF0bWwwIGluZXQgZGhjcAogCiAjIFdpcmVkIG9yIHdpcmVsZXNzIGludGVy
-ZmFjZXMKIGF1dG8gZXRoMAogaWZhY2UgZXRoMCBpbmV0IGRoY3AKKyAgICAgICAgcHJlLXVwIC9i
-aW4vZ3JlcCAtdiAtZSAiaXA9WzAtOV1cK1wuWzAtOV1cK1wuWzAtOV1cK1wuWzAtOV1cKyIgL3By
-b2MvY21kbGluZSA+IC9kZXYvbnVsbAorCiBpZmFjZSBldGgxIGluZXQgZGhjcAogCiAjIEV0aGVy
-bmV0L1JORElTIGdhZGdldCAoZ19ldGhlcikKICMgLi4uIG9yIG9uIGhvc3Qgc2lkZSwgdXNibmV0
-IGFuZCByYW5kb20gaHdhZGRyCi1pZmFjZSB1c2IwIGluZXQgc3RhdGljCi0JYWRkcmVzcyAxOTIu
-MTY4LjcuMgotCW5ldG1hc2sgMjU1LjI1NS4yNTUuMAotCW5ldHdvcmsgMTkyLjE2OC43LjAKLQln
-YXRld2F5IDE5Mi4xNjguNy4xCitpZmFjZSB1c2IwIGluZXQgZGhjcAogCiAjIEJsdWV0b290aCBu
-ZXR3b3JraW5nCiBpZmFjZSBibmVwMCBpbmV0IGRoY3AKLS0gCjEuNy4wLjQKCg==
-
---_005_8F29D6B095ED194EA1980491A5E029710C27E75FDFLE30entticom_--
