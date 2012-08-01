@@ -1,28 +1,30 @@
-Return-Path: <robert@linuxdevelopment.de>
-Received: from moutng.kundenserver.de (moutng.kundenserver.de [212.227.17.10])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0889DE0141D
-	for <meta-ti@yoctoproject.org>; Fri,  3 Aug 2012 03:42:54 -0700 (PDT)
-Received: from localhost.localdomain
-	(host-62-245-185-194.customer.m-online.net [93.104.205.194])
-	by mrelayeu.kundenserver.de (node=mreu0) with ESMTP (Nemesis)
-	id 0MWvXU-1TKOvR0CPs-00W0Rl; Fri, 03 Aug 2012 12:42:53 +0200
-From: Robert Woerle <robert@linuxdevelopment.de>
-To: meta-ti@yoctoproject.org
-Date: Fri,  3 Aug 2012 12:42:49 +0200
-Message-Id: <1343990569-24683-1-git-send-email-robert@linuxdevelopment.de>
-X-Mailer: git-send-email 1.7.9.5
-X-Provags-ID: V02:K0:wdTzDLLObAkimapFnHkzH8+EyNLqCgi/F4P2td9Qxwa
-	fbgnOTh+93p51XD5VfMZgM9NWPOcdKi27EW9m4NsOkBWbtNQku
-	uWoc+/ZiePGW9qD3yvZZ2uuUi5lVHYz28dz7wdCNccb6sKLU4l
-	hAkJ4Zw3wv51HQsMgA891Rk39xKANaM+AgLvMzcYt7JXkKQ8XK
-	SFpV+znSMzDYhC6dVzln+wzS3d3+0evfvO0/uJl9bTc39Hbql8
-	hwZiyZJateNxN83od/0yZerOyOzrxCBrNUTcSY9WdyVcAjutZA
-	49HcUC10+djbvK05Kx5GVR/beakUkUYo5AhcrtK+i9AHOJg2vc
-	k9E0YrfAru8hKgYPQ200nhZIUddhvvaYuB5jiTQPaxpiB/HcZv
-	b6oIkABBV49IdyoSz2+eSDYap6z5gTcMwY1zZctLxJP0Vbvv2Y 5Sf3B
-X-Mailman-Approved-At: Wed, 08 Aug 2012 10:05:47 -0700
-Cc: Robert Woerle <robert@linuxdevelopment.de>
-Subject: [PATCH] fix oe warning about wrong use of proto instead of protocol
+Return-Path: <Tim.Verstraete@medecbenelux.be>
+Received: from mail.medecbenelux.be (mail.medecbenelux.be [81.83.14.242])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D943FE0044A;
+	Wed,  1 Aug 2012 03:52:14 -0700 (PDT)
+Received: from SBS-MEDEC.medecbenelux.local ([fe80::1b66:a66e:3778:1407]) by
+	SBS-MEDEC.medecbenelux.local ([fe80::1b66:a66e:3778:1407%10]) with mapi
+	id 14.01.0355.002; Wed, 1 Aug 2012 12:52:12 +0200
+From: Tim Verstraete <Tim.Verstraete@medecbenelux.be>
+To: "Iorga, Cristian" <cristian.iorga@intel.com>, Denys Dmytriyenko
+	<denys@ti.com>
+Thread-Topic: [SPAM] - RE: [meta-ti] [HOB] issue - Email found in subject
+Thread-Index: AQHNb7zFHa2h+DpMHE2Sa3w+/uQ77JdEx7LQ
+Date: Wed, 1 Aug 2012 10:52:11 +0000
+Message-ID: <4439C3C0562087488F139C696CD862A72C1973@SBS-MEDEC.medecbenelux.local>
+References: <4439C3C0562087488F139C696CD862A72C188D@SBS-MEDEC.medecbenelux.local><20120731201047.GB21245@edge>
+	<4439C3C0562087488F139C696CD862A72C194B@SBS-MEDEC.medecbenelux.local>
+	<969F26A8BAB325438E7EB80D3C3134FB161773A6@IRSMSX102.ger.corp.intel.com>
+In-Reply-To: <969F26A8BAB325438E7EB80D3C3134FB161773A6@IRSMSX102.ger.corp.intel.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [2002:5153:ef2:0:4cfb:295e:12ae:b5bc]
+MIME-Version: 1.0
+X-Mailman-Approved-At: Wed, 08 Aug 2012 10:05:58 -0700
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
+Subject: Re: [SPAM] - RE: [HOB] issue - Email found in subject
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,27 +36,93 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2012 10:42:55 -0000
+X-List-Received-Date: Wed, 01 Aug 2012 10:52:15 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Robert Woerle <robert@linuxdevelopment.de>
----
- recipes-ti/dmai/ti-dmai.inc |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+OK. Where can I find the log file to add to the bugzilla ...
 
-diff --git a/recipes-ti/dmai/ti-dmai.inc b/recipes-ti/dmai/ti-dmai.inc
-index 23481b7..58955b5 100644
---- a/recipes-ti/dmai/ti-dmai.inc
-+++ b/recipes-ti/dmai/ti-dmai.inc
-@@ -17,7 +17,7 @@ DMAIBRANCH           ?= "UNDEFINED_DMAIBRANCH"
- 
- S = "${WORKDIR}/${DMAIBRANCH}/davinci_multimedia_application_interface/dmai_${PV}/dmai"
- 
--SRC_URI = "svn://gforge.ti.com/svn/dmai/;module=${DMAIBRANCH};proto=https;user=anonymous;pswd='' \
-+SRC_URI = "svn://gforge.ti.com/svn/dmai/;module=${DMAIBRANCH};protocol=https;user=anonymous;pswd='' \
- 		file://loadmodules-ti-dmai-dm6446_al.sh \
- 		file://loadmodules-ti-dmai-dm6467_al.sh \
- 		file://loadmodules-ti-dmai-o3530_al.sh \
--- 
-1.7.9.5
+Kind regards,
 
+Tim
+
+
+-----Original Message-----
+From: Iorga, Cristian [mailto:cristian.iorga@intel.com]=20
+Sent: woensdag 1 augustus 2012 10:08
+To: Tim Verstraete; Denys Dmytriyenko
+Cc: meta-ti@yoctoproject.org; yocto@yoctoproject.org
+Subject: [SPAM] - RE: [meta-ti] [HOB] issue - Email found in subject
+
+Hello Tim,
+
+Please fill in a bug report at bugzilla.yoctoproject.org It will be investi=
+gated later on.
+
+Regards,
+Cristian Iorga
+
+-----Original Message-----
+From: yocto-bounces@yoctoproject.org [mailto:yocto-bounces@yoctoproject.org=
+] On Behalf Of Tim Verstraete
+Sent: Wednesday, August 01, 2012 9:29 AM
+To: Denys Dmytriyenko
+Cc: meta-ti@yoctoproject.org; yocto@yoctoproject.org
+Subject: Re: [yocto] [meta-ti] [HOB] issue
+
+ Hi,
+=20
+ When i use the HOB functionality in yocto with the meta-ti, I get an  erro=
+r message after about 5% with no error message in it. I can only press clos=
+e.
+=20
+ I use the default layers but I do see that HOB re-arranges them into:
+ Poky/meta
+ Poky/meta-hob
+ Poky/meta-ti
+ Poky/meta-yocto
+=20
+ I see that I can build using the command line so it has to be  something w=
+ith HOB and not necessary something in yocto.
+
+Thanks in advance,
+
+Kind regards,
+
+Tim
+
+-----Original Message-----
+From: Denys Dmytriyenko [mailto:denys@ti.com]
+Sent: dinsdag 31 juli 2012 22:11
+To: Tim Verstraete
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [HOB] issue
+
+On Tue, Jul 31, 2012 at 12:04:37PM +0000, Tim Verstraete wrote:
+> Hi,
+>=20
+> When i use the HOB functionality in yocto with the meta-ti, I get an=20
+> error message after about 5% with no error message in it. I can only pres=
+s close.
+>=20
+> I use the default layers but I do see that HOB re-arranges them into:
+> Poky/meta
+> Poky/meta-hob
+> Poky/meta-ti
+> Poky/meta-yocto
+>=20
+> I see that I can build using the command line so it has to be=20
+> something with HOB and not necessary something in yocto.
+
+Well, HOB _is_ part of Yocto anyway. While meta-ti may be triggering the is=
+sue in HOB, you better off reporting it to the main yocto mailing list - fe=
+el free to copy meta-ti as well.
+
+--
+Denys
+_______________________________________________
+yocto mailing list
+yocto@yoctoproject.org
+https://lists.yoctoproject.org/listinfo/yocto
 
