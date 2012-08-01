@@ -1,35 +1,37 @@
 Return-Path: <schnitzeltony@googlemail.com>
 Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
 	[209.85.214.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D20CDE002A8
-	for <meta-ti@yoctoproject.org>; Wed,  1 Aug 2012 02:36:20 -0700 (PDT)
-Received: by bkty5 with SMTP id y5so3828178bkt.35
-	for <meta-ti@yoctoproject.org>; Wed, 01 Aug 2012 02:36:19 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9C34FE00345
+	for <meta-ti@yoctoproject.org>; Wed,  1 Aug 2012 02:36:22 -0700 (PDT)
+Received: by mail-bk0-f48.google.com with SMTP id y5so3828178bkt.35
+	for <meta-ti@yoctoproject.org>; Wed, 01 Aug 2012 02:36:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=MOS7b1Wa6LS8OR+WQvsmwzX1NoHd9Ixiw4hMtYI5fsU=;
-	b=ObtMrAnk+l230ZkEagWuOLyu/hKGPV/9HAHpN0u3M9E61yAZlTt8kYwmUftkkqHNej
-	0mFnyOqcIOTIxw9HYiE0bQswSf2xIiLdiIRY8HFCofeuKiFJuCaAwoRAuyxKmMOVYw4U
-	sCyscQyivh8H2V61ao+oaWPQy9o88LI4mWe5AgHmAbObeiWNCq2hBIKeboqbBNfedW2x
-	u4ivB5dMQSoW5e1i9tc6cvD/SM19S/9G8UL2lq6bOtJz06UdCBv2zDzoYvdrf4e7borl
-	C1AepGq5xWsB6xsEXXtPHmHZiH5wCb5I5HW+a27fogNwQ4KJR2mGuxCm2AdgiDRlnpdZ
-	XIsw==
-Received: by 10.204.130.10 with SMTP id q10mr6507091bks.90.1343813779779;
-	Wed, 01 Aug 2012 02:36:19 -0700 (PDT)
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references
+	:mime-version:content-type:content-transfer-encoding;
+	bh=o1BlekR7m4TSDMme+L1i1qkE+2tGOz3lvRPhcBp2m8M=;
+	b=QlsmgCTYCuIdCHr1TY55G73m2ZDBMTEOruOkLb/xAfZ49EnMX7zqfFWB/ixRuAbqXF
+	Adaz92JN+RoX8KERogrovFCC/kqLweI7OSl9k0WBYSy+0QYPGX1QMn1Crvs1bnpd6kBx
+	pM35VI6lxXV1x6k4Rjjg9l1PzyOuUVVDM5trwIRbghiAWg0H9hxBu/4DZQmbcrZWinay
+	84z8dFpPQOHG4gzOx3DNo+uSeNhHqT+V0VkePlatHeu3rM7peW7NqMdPnhpqILRRvGGR
+	x7JDTKqzadOTJAe/Jo8Nzr3Stw2pTwEAmlbUqPg2F8FvLeSdvyXgaOsECKAYthAwuPw5
+	/Y/Q==
+Received: by 10.205.118.138 with SMTP id fq10mr6755877bkc.58.1343813782271;
+	Wed, 01 Aug 2012 02:36:22 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-160-112.unitymediagroup.de.
 	[95.222.160.112])
-	by mx.google.com with ESMTPS id he8sm1279620bkc.3.2012.08.01.02.36.18
+	by mx.google.com with ESMTPS id he8sm1279620bkc.3.2012.08.01.02.36.19
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 01 Aug 2012 02:36:18 -0700 (PDT)
+	Wed, 01 Aug 2012 02:36:21 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: meta-ti@yoctoproject.org
-Date: Wed,  1 Aug 2012 11:35:46 +0200
-Message-Id: <1343813748-8318-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed,  1 Aug 2012 11:35:47 +0200
+Message-Id: <1343813748-8318-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.7.6.5
+In-Reply-To: <1343813748-8318-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1343813748-8318-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/3] gstreamer-ti: fix 'proto='-warning on recipe parsing
+Subject: [PATCH 2/3] am-sysinfo: fix 'proto='-warning on recipe parsing
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,29 +43,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2012 09:36:21 -0000
+X-List-Received-Date: Wed, 01 Aug 2012 09:36:23 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb |    2 +-
+ recipes-bsp/ti/am-sysinfo_svn.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb b/recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb
-index 3d260ed..f314a35 100644
---- a/recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb
-+++ b/recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb
-@@ -11,7 +11,7 @@ SRCREV = "962"
- # apply patches from tracker 1208 to get zero copy support.
- # https://gstreamer.ti.com/gf/project/gstreamer_ti/tracker/?action=TrackerItemEdit&tracker_item_id=1208&start=175
+diff --git a/recipes-bsp/ti/am-sysinfo_svn.bb b/recipes-bsp/ti/am-sysinfo_svn.bb
+index d4f8740..b73a884 100644
+--- a/recipes-bsp/ti/am-sysinfo_svn.bb
++++ b/recipes-bsp/ti/am-sysinfo_svn.bb
+@@ -9,7 +9,7 @@ SRCREV = "5"
+ PV = "1.0"
+ PR = "r1+svnr${SRCPV}"
  
--SRC_URI = "svn://gforge.ti.com/svn/gstreamer_ti/trunk;module=gstreamer_ti;proto=https;user=anonymous;pswd='' \
-+SRC_URI = "svn://gforge.ti.com/svn/gstreamer_ti/trunk;module=gstreamer_ti;protocol=https;user=anonymous;pswd='' \
-            file://gstreamer-ti-rc.sh \
-            file://r962-remove-include-videodev.diff \
-            file://gstti-init.service \
+-SRC_URI = "svn://gforge.ti.com/svn/am_sysinfo/;module=trunk;proto=https;user=anonymous;pswd=''"
++SRC_URI = "svn://gforge.ti.com/svn/am_sysinfo/;module=trunk;protocol=https;user=anonymous;pswd=''"
+ 
+ S = "${WORKDIR}/trunk"
+ 
 -- 
 1.7.6.5
 
