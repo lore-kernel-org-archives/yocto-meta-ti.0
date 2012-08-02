@@ -1,42 +1,30 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
-	[209.85.215.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B3D68E002A9
-	for <meta-ti@yoctoproject.org>; Thu,  2 Aug 2012 08:07:41 -0700 (PDT)
-Received: by eaab14 with SMTP id b14so2386038eaa.35
-	for <meta-ti@yoctoproject.org>; Thu, 02 Aug 2012 08:07:40 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=ydr302uMLUBD6Hpe38jKZ930482P/q2BCcFQNSIsorA=;
-	b=eRNtStuIrYzYQ+4VVjua4sVjle8pYPsk/fObmi6R4oBj8xpmtlHwCEnMlZGYIo5Sof
-	vYhVIpKaCIFCNCX2mFFMoDNE7iwdPaqbbx3kOHR/rRMmeqE3QAuMX7rKUODlfmZa54M5
-	imCu8uv8JEwKVMQ9NJ28FHiCUV8cjLPSxdlVa1phMYTvVZ+dBJj5PTF7dxOaOmqYgJOQ
-	y/4yvBmJZQ/mkKwcFLmQvvIymgiLwreaBQzkh8lfX5cgswXqeNZooDfnm7ggJZxQ61sA
-	YDSsqCdkFrtwIWUXlY1jcpTc/0tlVGJQxyVzmx3llvE5zSHV63zGeWstnKzP885fu6gq
-	4MLQ==
-Received: by 10.14.218.5 with SMTP id j5mr21684410eep.16.1343920060350;
-	Thu, 02 Aug 2012 08:07:40 -0700 (PDT)
-Received: from [172.20.0.10] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPS id t6sm18153606eeo.17.2012.08.02.08.07.37
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 02 Aug 2012 08:07:39 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.0 \(1485\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <7D46E86EC0A8354091174257B2FED10159175366@DLEE12.ent.ti.com>
-Date: Thu, 2 Aug 2012 17:07:36 +0200
-Message-Id: <307F2CD6-B16B-4EC7-A670-06361B199D00@dominion.thruhere.net>
-References: <8F29D6B095ED194EA1980491A5E029710C27E75F@DFLE30.ent.ti.com>
-	<102FAACD-FA2C-45CD-B8E8-E1BF93554183@dominion.thruhere.net>
-	<7D46E86EC0A8354091174257B2FED10159175366@DLEE12.ent.ti.com>
-To: "Maupin, Chase" <chase.maupin@ti.com>
-X-Mailer: Apple Mail (2.1485)
-X-Gm-Message-State: ALoCoQlv6UbWVdDZbjtUtqD52DVzzXNYTT6+TCM6mg+dlf/V6TPfMepj6JXvpCxaGwnk4LMpSpNd
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "Cooper Jr.,
-	Franklin" <fcooper@ti.com>
-Subject: Re: [branch: master][PATCHES] Porting netbase interfaces file from oe-classic
+Return-Path: <denys@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8EBC4E0141D
+	for <meta-ti@yoctoproject.org>; Thu,  2 Aug 2012 15:06:23 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q72M6MmX021974
+	for <meta-ti@yoctoproject.org>; Thu, 2 Aug 2012 17:06:22 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q72M6M9L011583
+	for <meta-ti@yoctoproject.org>; Thu, 2 Aug 2012 17:06:22 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
+	Thu, 2 Aug 2012 17:06:22 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id q72M6MqS012909;
+	Thu, 2 Aug 2012 17:06:22 -0500
+Date: Thu, 2 Aug 2012 18:06:22 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Tom Rini <trini@ti.com>
+Message-ID: <20120802220621.GD28560@edge>
+References: <20120726013212.1F5DA52AA6@arago-project.org>
+	<CC361C01.B0548%jdk@ti.com> <20120801191214.GD16076@bill-the-cat>
+MIME-Version: 1.0
+In-Reply-To: <20120801191214.GD16076@bill-the-cat>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Koen Kooi : u-boot 2011.09+git: update to latest version of Tom Rini's tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,42 +36,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2012 15:07:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 02 Aug 2012 22:06:23 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
+On Wed, Aug 01, 2012 at 12:12:14PM -0700, Tom Rini wrote:
+> On Thu, Jul 26, 2012 at 01:57:27AM +0000, Kridner, Jason wrote:
+> > 
+> > -----Original Message-----
+> > From: Arago Project git <git@arago-project.org>
+> > Date: Wednesday, July 25, 2012 9:32 PM
+> > To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+> > Subject: [meta-ti] Koen Kooi : u-boot 2011.09+git: update to latest
+> > version	of Tom Rini's tree
+> > 
+> > >Module: meta-ti
+> > >Branch: master
+> > >Commit: e1b4ab72cfb3ea4599701d1600c44fe3c5f8ba66
+> > >URL:    
+> > >http://arago-project.org/git/meta-ti.git?a=commit;h=e1b4ab72cfb3ea4599701d
+> > >1600c44fe3c5f8ba66
+> > >
+> > >Author: Koen Kooi <koen@dominion.thruhere.net>
+> > >Date:   Wed Jul 11 11:53:27 2012 +0200
+> > >
+> > >u-boot 2011.09+git: update to latest version of Tom Rini's tree
+> > 
+> > Aren't all of Tom's patches upstream now?  Why not pull from the latest
+> > u-boot release? Are we carrying any patches that would be accepted
+> > upstream?
+> 
+> Late to the party, I know.  v2012.07 has extremely minimal support for
+> am335x platforms.  With 3 series of patches (which I expect to queue up
+> and push along to u-boot-arm and then u-boot proper) mainline support
+> should be better, at least wrt bone, than the arago tree.  NAND and SPI
+> and MMC1 won't be there, yet.  i2c, ethernet, booting kernels will be
+> there.  And easier than arago eeprom programming will be there too
+> (eeprom command in U-Boot for dumping memory to eeprom).
 
-Op 2 aug. 2012, om 16:53 heeft "Maupin, Chase" <chase.maupin@ti.com> het =
-volgende geschreven:
+Tom,
 
->> -----Original Message-----
->> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->> bounces@yoctoproject.org] On Behalf Of Koen Kooi
->> Sent: Wednesday, August 01, 2012 10:59 PM
->> To: Cooper Jr., Franklin
->> Cc: meta-ti@yoctoproject.org
->> Subject: Re: [meta-ti] [branch: master][PATCHES] Porting netbase
->> interfaces file from oe-classic
->>=20
->> Please send patches inline to make review easier.
->>=20
->> Patch 1:
->>=20
->>> * Add PR_append
->>=20
->> Don't do that, that's what PRINC is for
->>=20
->>> * Pull in the base interface file from oe-core
->>=20
->> Completely unneeded
->=20
-> I actually prefer that the first commit move in the base file he
-> is modifying and then have the second commit make his changes.
-> It is much easier to understand what change he was making to the
-> base file and why he needing to overlay it.
+Why are you comparing to "arago u-boot"? Isn't that your tree also? :)
 
-My point is that you're now *globally* modifying basefiles for *all* =
-machines, including non-TI ones as soon as you have meta-ti in the layer =
-stack, which is unacceptable. If you really want a catch-all interfaces =
-file, put it in meta-arago.=
+-- 
+Denys
 
