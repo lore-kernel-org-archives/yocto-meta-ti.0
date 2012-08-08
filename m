@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5CB7DE013E5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5DE9FE013EB
 	for <meta-ti@yoctoproject.org>; Tue,  7 Aug 2012 19:59:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7C53152A73; Wed,  8 Aug 2012 02:59:30 +0000 (UTC)
+	id E124E52A90; Wed,  8 Aug 2012 02:59:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120808025930.7C53152A73@arago-project.org>
+Message-Id: <20120808025930.E124E52A90@arago-project.org>
 Date: Wed,  8 Aug 2012 02:59:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Roger Monk : am-sysinfo: switch 'proto' to 'protocol' in SRC_URI
+Subject: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVyIHRpLWRtYWkuaW5jOiBmaXggJ3Byb3RvPScgLXdhcm5pbmcgb24gcmVjaXBlIHBhcnNpbmc=?=
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,34 +26,34 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 297f5217bffa174bfa4226af01dfcfb692f580b0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=297f5217bffa174bfa4226af01dfcfb692f580b0
+Commit: 131d02fe360a39f3805a9281dd580e9f28d9ca53
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=131d02fe360a39f3805a9281dd580e9f28d9ca53
 
-Author: Roger Monk <r-monk@ti.com>
-Date:   Thu Jul 19 13:52:19 2012 +0100
+Author: Andreas Müller <schnitzeltony@googlemail.com>
+Date:   Wed Aug  1 11:35:48 2012 +0200
 
-am-sysinfo: switch 'proto' to 'protocol' in SRC_URI
+ti-dmai.inc: fix 'proto='-warning on recipe parsing
 
-Signed-off-by: Roger Monk <r-monk@ti.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ti/am-sysinfo_svn.bb |    2 +-
+ recipes-ti/dmai/ti-dmai.inc |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/ti/am-sysinfo_svn.bb b/recipes-bsp/ti/am-sysinfo_svn.bb
-index d4f8740..b73a884 100644
---- a/recipes-bsp/ti/am-sysinfo_svn.bb
-+++ b/recipes-bsp/ti/am-sysinfo_svn.bb
-@@ -9,7 +9,7 @@ SRCREV = "5"
- PV = "1.0"
- PR = "r1+svnr${SRCPV}"
+diff --git a/recipes-ti/dmai/ti-dmai.inc b/recipes-ti/dmai/ti-dmai.inc
+index 23481b7..58955b5 100644
+--- a/recipes-ti/dmai/ti-dmai.inc
++++ b/recipes-ti/dmai/ti-dmai.inc
+@@ -17,7 +17,7 @@ DMAIBRANCH           ?= "UNDEFINED_DMAIBRANCH"
  
--SRC_URI = "svn://gforge.ti.com/svn/am_sysinfo/;module=trunk;proto=https;user=anonymous;pswd=''"
-+SRC_URI = "svn://gforge.ti.com/svn/am_sysinfo/;module=trunk;protocol=https;user=anonymous;pswd=''"
+ S = "${WORKDIR}/${DMAIBRANCH}/davinci_multimedia_application_interface/dmai_${PV}/dmai"
  
- S = "${WORKDIR}/trunk"
- 
+-SRC_URI = "svn://gforge.ti.com/svn/dmai/;module=${DMAIBRANCH};proto=https;user=anonymous;pswd='' \
++SRC_URI = "svn://gforge.ti.com/svn/dmai/;module=${DMAIBRANCH};protocol=https;user=anonymous;pswd='' \
+ 		file://loadmodules-ti-dmai-dm6446_al.sh \
+ 		file://loadmodules-ti-dmai-dm6467_al.sh \
+ 		file://loadmodules-ti-dmai-o3530_al.sh \
 
 
