@@ -1,18 +1,40 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A72D8E013DB
-	for <meta-ti@yoctoproject.org>; Tue,  7 Aug 2012 19:59:31 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 3EC0552A92; Wed,  8 Aug 2012 02:59:31 +0000 (UTC)
+Return-Path: <ml@communistcode.co.uk>
+Received: from eumx.net (eumx.net [91.82.101.43])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 55865E0027F
+	for <meta-ti@yoctoproject.org>; Wed,  8 Aug 2012 01:50:48 -0700 (PDT)
+Received: from localhost ([127.0.0.1]:51585 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1Sz1yY-0006sU-Lg
+	for meta-ti@yoctoproject.org; Wed, 08 Aug 2012 08:50:46 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
+	:date:from:reply-to:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding; s=default;
+	bh=i8LXq0Qy6OOw84wNBydrAX8TOt8=; b=h7KfLjhwUEI3CKXxLGFRs3UkOupJ
+	uJVWDTY1GDM5liaLynxtQrug7ss09dBSI4yeFDwHcVn2bIMd/PYdSed+Z/d1nbp1
+	703OvHQwIvT0lsDD3/4LKGe8qS6G5GMUliVEFNAAZrdM/arZoy6Gg9IK2XIVi2n4
+	h7ijWqUODQAWrbk=
+Received: from [195.171.99.130] (port=47003 helo=[192.168.0.52])
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1Sz1yY-0006sR-JU
+	for meta-ti@yoctoproject.org; Wed, 08 Aug 2012 08:50:46 +0000
+Message-ID: <50222898.5080700@communistcode.co.uk>
+Date: Wed, 08 Aug 2012 09:51:36 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:14.0) Gecko/20120717 Thunderbird/14.0
+MIME-Version: 1.0
 To: meta-ti@yoctoproject.org
-Message-Id: <20120808025931.3EC0552A92@arago-project.org>
-Date: Wed,  8 Aug 2012 02:59:31 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : u-boot 2011.09+git: update to latest version of Tom Rini's tree
+References: <5020D9A0.30000@communistcode.co.uk> <20120807153016.GA8716@edge>
+	<015A9197-70E1-4195-BA85-71097586D635@dominion.thruhere.net>
+	<20120807153806.GC8716@edge> <1344354289.9756.276.camel@ted>
+	<20120807155336.GE8716@edge> <50214406.8000704@communistcode.co.uk>
+	<EE824A43-BF4B-4D06-B382-F06EB8544C4E@dominion.thruhere.net>
+In-Reply-To: <EE824A43-BF4B-4D06-B382-F06EB8544C4E@dominion.thruhere.net>
+Subject: Re: Turning off kernel config option
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
+Reply-To: ml@communistcode.co.uk
 List-Id: Mailing list for the meta-ti layer <meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=unsubscribe>
@@ -21,48 +43,80 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Aug 2012 02:59:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 08 Aug 2012 08:50:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Module: meta-ti
-Branch: master
-Commit: fc003234aae7d8a69fafe6a4cfb0118bc18d3b0b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fc003234aae7d8a69fafe6a4cfb0118bc18d3b0b
+On 07/08/12 18:41, Koen Kooi wrote:
+>
+> Op 7 aug. 2012, om 18:36 heeft Jack Mitchell <ml@communistcode.co.uk> het volgende geschreven:
+>
+>> On 07/08/2012 16:53, Denys Dmytriyenko wrote:
+>>> On Tue, Aug 07, 2012 at 04:44:49PM +0100, Richard Purdie wrote:
+>>>> On Tue, 2012-08-07 at 11:38 -0400, Denys Dmytriyenko wrote:
+>>>>> On Tue, Aug 07, 2012 at 05:32:36PM +0200, Koen Kooi wrote:
+>>>>>>
+>>>>>> Op 7 aug. 2012, om 17:30 heeft Denys Dmytriyenko <denys@ti.com> het volgende geschreven:
+>>>>>>
+>>>>>>> On Tue, Aug 07, 2012 at 10:02:24AM +0100, Jack Mitchell wrote:
+>>>>>>>> I am trying to turn of CONFIG_SPI_DEBUG in the beaglebone BSP from
+>>>>>>>> meta-ti. I am using the poky distro configuration and I have changed
+>>>>>>>> the defconfig in
+>>>>>>>> meta-ti/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
+>>>>>>>> but it still builds with CONFIG_SPI_DEBUG enabled.
+>>>>>>>
+>>>>>>> That should be the correct location, please make sure you re-do the unpack
+>>>>>>> task - if you previously built the kernel with the old defconfig, it will be
+>>>>>>> stored in the work directory and won't be copied from the repository above,
+>>>>>>> until you repeat the do_unpack task, i.e. by clenaing the build.
+>>>>>
+>>>>> BTW, no need to clean the entire build, just the kernel build:
+>>>>>
+>>>>> $ bitbake virtual/kernel -c clean
+>>>>>
+>>>>>> Or just increment PR as you're supposed to, it's an output change after all.
+>>>>>> No need to check anything if you do it properly :)
+>>>>>
+>>>>> Well, but then you are staring to change the recipe, which might be overkill
+>>>>> for a simple defconfig change you want to test. If you go that route, you may
+>>>>> want to create your own custom layer with the modified defconfig overlayed on
+>>>>> top of meta-ti and a simple .bbappend with PRINC. That way your changes will
+>>>>> be detached from meta-ti and you won't need to merge the recipe changes every
+>>>>> time meta-ti updates... Although, there's no way to bbappend the defconfig
+>>>>> itself - that's where config fragments come to play.
+>>>>
+>>>> With the recent changes to OE-Core, you can edit the defconfig, the
+>>>> system will notice the checksum change and automatically rerun the
+>>>> unpack and subsequent steps automagically.
+>>>
+>>> Richard,
+>>>
+>>> That is quite useful, thanks for the info!
+>>>
+>>>
+>>>> If the PR server is enabled, it will bump PR for you too.
+>>>
+>>> That is something I haven't looked at yet, honestly - too much Classic-OE
+>>> baggage to carry... :)
+>>>
+>>
+>> Well, this thread took off when I turned my back!
+>>
+>> Thanks for all the advice and different solutions - I found what my issue was and it is that the BeagleBone was booting using the kernel on the rootfs rather than the kernel in the fat partition as I believed. So I was only replacing the FAT partition uImage and not re-building and copying the whole rootfs.
+>>
+>> Next step is indeed to have an overlay so I can customize the kernel config a bit more, along with a patch or two I have in there.
+>
+> Please post the patches, they might be generally usefull. I don't know why spi debug is on, I'm not opposed to turning it off :)
 
-Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Thu Jul 26 12:40:43 2012 +0200
+Someone beat me to it, I'm not running the latest master so it seems I'm 
+a bit out of sync with the world.
 
-u-boot 2011.09+git: update to latest version of Tom Rini's tree
+-- 
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
 
----
-
- recipes-bsp/u-boot/u-boot_2011.10rc.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-bsp/u-boot/u-boot_2011.10rc.bb b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
-index c4b4ca7..7035b4c 100644
---- a/recipes-bsp/u-boot/u-boot_2011.10rc.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
-@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "(ti33x)"
- DEFAULT_PREFERENCE_ti33x = "99"
- 
- PV = "2011.09+git"
--PR = "r28"
-+PR = "r29"
- 
- # SPL build
- UBOOT_BINARY = "u-boot.img"
-@@ -26,7 +26,7 @@ SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;br
-            file://2011.09git/0010-am335x-switch-to-ext4-mode.patch \
-           "
- 
--SRCREV = "ec687252299796639ff9bcb981804fbec7b445a4"
-+SRCREV = "dc52533ccff00a12761f793d66b39e4f6a4a3bba"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
- 
+--
 
 
