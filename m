@@ -1,16 +1,16 @@
 Return-Path: <cliff.brake@gmail.com>
 Received: from bec-systems.com (new.bec-systems.com [74.208.70.121])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5BFF6E013F7
-	for <meta-ti@yoctoproject.org>; Mon, 20 Aug 2012 04:06:01 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 325DDE013D2
+	for <meta-ti@yoctoproject.org>; Mon, 20 Aug 2012 04:35:01 -0700 (PDT)
 Received: from oh-69-34-21-229.sta.embarqhsd.net ([69.34.21.229]
 	helo=happy.bec-systems.com)
 	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
-	id 1T3Phs-0001vh-Lp; Mon, 20 Aug 2012 06:59:45 -0400
+	id 1T3Q9z-00026B-Qt; Mon, 20 Aug 2012 07:28:46 -0400
 MIME-Version: 1.0
 X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Date: Mon, 20 Aug 2012 11:05:45 GMT
-Message-Id: <1345460745657.3fc83336@Nodemailer>
+Date: Mon, 20 Aug 2012 11:34:48 GMT
+Message-Id: <1345462488788.b2e12041@Nodemailer>
 From: cliff.brake@gmail.com
 To: openembedded-core@lists.openembedded.org,
 	openembedded-devel@lists.openembedded.org,
@@ -30,7 +30,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2012 11:06:01 -0000
+X-List-Received-Date: Mon, 20 Aug 2012 11:35:01 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -40,7 +40,6 @@ report:
 bitbake: git://git.openembedded.org/bitbake
 openembedded-core: git://git.openembedded.org/openembedded-core
 meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-yocto: git://git.yoctoproject.org/poky
 meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
 meta-micro: git://git.openembedded.org/meta-micro
 meta-slugos: git://github.com/kraj/meta-slugos
@@ -61,13 +60,13 @@ meta-chicken: git://github.com/OSSystems/meta-chicken
 meta-java: git://github.com/woglinde/meta-java
 meta-qt3: git://git.yoctoproject.org/meta-qt3
 meta-telephony: git://gitorious.org/sysmocom-openembedded/meta-telephony.git
-meta-eldk: git://git.denx.de/eldk.git
 meta-ti: git://git.yoctoproject.org/meta-ti
 meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
 meta-browser: git://github.com/OSSystems/meta-browser.git
 meta-mono: git://git.yoctoproject.org/meta-mono.git
 meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
 meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
+meta-yocto: git://git.yoctoproject.org/meta-yocto
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for bitbake:
@@ -319,247 +318,6 @@ Matthew McClintock (1):
 package=20
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-Amy Fong (1):
-=20=20openssh: openssh's init fails to restart if sshd is not running
-
-Andreas M=C3=BCller (2):
-=20=20webkit-gtk: update to 1.8.2
-=20=20wpa-supplicant: fix paths in dbus/systemd *.service files
-
-Andrei Gherzan (8):
-=20=20bitbake: bitbake: build.py: Add stampdir argument to =
-cached_mtime_noerror
-=20=20utils.py: Modify and rename distro_features_backfill python function
-=20=20bitbake.conf: Use the new form of features_backfill function
-=20=20bitbake.conf: Add MACHINE_FEATURES_BACKFILL and append to =
-MACHINE_FEATURES
-=20=20bitbake.conf: Add rtc to MACHINE_FEATURES_BACKFILL
-=20=20task-core-boot: Add busybox-hwclock if MACHINE_FEATURES contains rtc
-=20=20busybox: Package hwclock.sh initscript separately
-=20=20subversion: Inherit gettext as msgfmt is needed at compile time
-
-Andy Ross (1):
-=20=20dbus: Fix pid file in dbus init script
-
-Bj=C3=B6rn Stenberg (1):
-=20=20pigz: Update to upstream version 2.2.5
-
-Bruce Ashfield (10):
-=20=20kernel.bbclass: remove default module_autoload and module_conf values
-=20=20linux-yocto: bump version to 3.4.7
-=20=20linux-yocto/3.4: BSP, uprobes, config and cleanups
-=20=20linux-yocto: make KBRANCH the exception and not the rule
-=20=20linux-yocto/3.4: remove explicit KBRANCH designations
-=20=20linux-yocto: explicitly export KMETA to scripts
-=20=20kern-tools: fixes (branching,buildall) + cleanups (checkpoint,cleaner)
-=20=20linux-yocto-tiny: set default branch
-=20=20linux-yocto/3.0: update meta SRCREV
-=20=20linux-yocto/meta-yocto/3.4: BSP, uprobes, config and cleanups
-
-Christopher Larson (1):
-=20=20base.bbclass: allow specifying an lsb distro hook via the metadata
-
-Constantin Musca (15):
-=20=20libdrm: package update 2.4.35 -> 2.4.37
-=20=20pixman: upgrade to 0.27.2
-=20=20dri2proto: upgrade to 2.8
-=20=20glproto: upgrade to 1.4.16
-=20=20pciutils: upgrade to 3.1.10
-=20=20dbus: upgrade to 1.6.4
-=20=20ofono: upgrade to 1.10
-=20=20iproute2: upgrade to 3.5.0
-=20=20iptables: upgrade to 1.4.15
-=20=20pulseaudio: upgrade to 2.1
-=20=20gst-fluendo-mp3: upgrade to 0.10.19
-=20=20gst-fluendo-mpegdemux: upgrade to 0.10.71
-=20=20connman: upgrade to 1.4
-=20=20libxrandr: upgrade to 1.4.0
-=20=20randrproto: upgrade to 1.4.0
-
-Damien Lespiau (3):
-=20=20mesa: Add a mesa-dri-glsl-native_git recipe
-=20=20core: Prefer mesa-dri as virtual/libopengles1/2 provider
-=20=20core: Prefer mesa-dri as virtual/libopengles1/2 provider
-
-Florin Sarbu (1):
-=20=20Add MPL version 2.0 license in common-licenses dir as well as adding =
-a non-S
-
-Jackie Huang (4):
-=20=20tcl: uncomment a line that causing TCL_SRC_DIR point to the workdir.
-=20=20gdk-pixbuf: fix the postinstall script failure when no icon is =
-installed
-=20=20python: Add Upstream-Status entries for bsddb patches, no code changes
-=20=20apr-util: fix the rules.mk with path to sysroot instead of the =
-workdir of ap
-
-Kenneth Solbjerg (1):
-=20=20run-postinsts: Does not run any scripts on debian rootfs
-
-Khem Raj (4):
-=20=20chrpath.bbclass: Account for case when ORIGIN is in RPATH
-=20=20kernel.bbclass: Preserve generated headers
-=20=20unifdef-native: Correct LICENSE
-=20=20libpam: Update recipes from 1.1.5 -> 1.1.6
-
-Koen Kooi (2):
-=20=20man: fix RDEPENDS and reformat recipe
-=20=20man: make man actually work by installing custom man.config
-
-Laurentiu Palcu (3):
-=20=20populate_sdk_base.bbclass: fix SDK relocation issues
-=20=20package.bbclass: change RPATHs for cross-canadian binaries
-=20=20adt-installer: add support for relocatable SDK
-
-Marc Reilly (1):
-=20=20avahi: fix packaging of avahi-autoipd
-
-Mark Hatle (3):
-=20=20package_rpm.bbclass: Fix attemptonly install failures
-=20=20prelink: Update to latest upstream prelink
-=20=20pseudo: Fix pseudo-native rebuild when triggered by dep change
-
-Martin Jansa (2):
-=20=20bitbake.conf: store cooker logs in subdirectory of LOG_DIR
-=20=20layer.conf: add udev-extraconf to SIGGEN_EXCLUDERECIPES_ABISAFE
-
-Matthew McClintock (3):
-=20=20distutils.bbclass: fix libdir for 64-bit python modules built with =
-distutils
-=20=20perf_3.4.bb: update to build against older kernels
-=20=20cross-localedef-native_2.16.bb: fix for CentOS 5.X
-
-Mihai Lindner (1):
-=20=20sysklogd: removed tabs from syslog.conf
-
-Paul Eggleton (6):
-=20=20rpmresolve: add wrapper script to fix paths
-=20=20createrepo: add wrapper script to fix paths
-=20=20rpmresolve: improve debug output
-=20=20classes/chrpath: trigger an error if chrpath fails
-=20=20classes/chrpath: improve chrpath failure handling
-=20=20poky.conf: update distro ID string for Ubuntu 12.04.1 LTS
-
-Peter Seebach (2):
-=20=20base.bbclass: Expand PNBLACKLIST across multilibs too
-=20=20base.bbclass: Work even when there's no PNBLACKLIST entries
-
-Radek Dostal (1):
-=20=20gst-plugins-base: remove avahi from DEPENDS
-
-Radu Moisan (1):
-=20=20pango: upgrade to upstream stable 1.30.0
-
-Richard Purdie (12):
-=20=20rpmresolve: Ensure we call the rpm relocation code at init
-=20=20bitbake: knotty: Chain the WINCH signal handler in progressbar so any =
-other=20
-=20=20bitbake: bb/ui/uihelper.py: Ensure task current and total numbers are =
-update
-=20=20bitbake: build.py: Only execute mkdirhier if stampdir doesn't exist
-=20=20bitbake: knotty2: Handle long lines of text and terminal window size =
-changes
-=20=20bitbake: knotty: Fold knotty2 into knotty and make it the default
-=20=20bitbake: bin/bitbake: Remove knotty2 from the list of valid interfaces
-=20=20bitbake: really remove knotty2
-=20=20chrpath.bbclass: Ensure we only process tmpdir in paths which =
-actually conta
-=20=20bitbake: fetch2/git: Work around git confusion between foo.git and =
-foo repos
-=20=20bitbake: build.py: Correct package to recipe in TaskBase events to =
-use consi
-=20=20utility-tasks: Set T to alternate location during do_clean
-
-Robert Yang (4):
-=20=20qemu.inc: disable curl for qemu-nativesdk
-=20=20sstate-cache-management.sh: update it for the new layout
-=20=20apt-native 0.7.14: remove an extra line from apt.conf
-=20=20rootfs_deb: move the lock from WORKDIR to DEPLOY_DIR_DEB
-
-Ross Burton (13):
-=20=20classes: add gsettings.bbclass
-=20=20pimlico: Remove
-=20=20documentation: remove references to Pimlico
-=20=20distro: Remove Pimlico from distro-tracking
-=20=20gtk+: remove 2.12.7
-=20=20gtk+ remove 2.16.6
-=20=20clutter: DOLT isn't used anymore
-=20=20owl-video: patches pushed upstream, so bump srcrev
-=20=20libowl-av: patches merged upstream, bump srcrev
-=20=20mesa: enable GLES v1 and v2
-=20=20mesa-demos: fix GLES2 build
-=20=20mesa: respect x11 DISTRO_FEATURE
-=20=20mesa: enable EGL, with DRM and X11 platforms
-
-Roy.Li (2):
-=20=20qemu: backport patch to fix pl031 RTC
-=20=20subversion: two small fixes
-
-Saul Wold (37):
-=20=20watchdog: fix SRC_URI _ -> -
-=20=20rxvt-unicode: remove setting of LD_LIBRARY_PATH
-=20=20rxvt-unicode: cleanup update-alternatives deprecated code
-=20=20openssh: cleanup update-alternatives deprecated code
-=20=20mini-x-session: cleanup update-alternatives deprecated code
-=20=20console-tools: cleanup update-alternatives deprecated code
-=20=20kbd: cleanup update-alternatives deprecated code
-=20=20tinylogin: cleanup update-alternatives deprecated code
-=20=20patch: cleanup update-alternatives deprecated code
-=20=20ubootchart: cleanup update-alternatives deprecated code
-=20=20bc: cleanup update-alternatives deprecated code
-=20=20diffutils: refactor to add a common diffutils.inc
-=20=20diffutils: cleanup update-alternatives deprecated code
-=20=20findutils: refactor common code to findutils.inc
-=20=20findutils: cleanup update-alternatives deprecated code
-=20=20powertop: cleanup update-alternatives deprecated code
-=20=20mutter: cleanup update-alternatives deprecated code
-=20=20matchbox-wm-2: cleanup update-alternatives deprecated code
-=20=20matchbox-session: cleanup update-alternatives deprecated code
-=20=20metacity: cleanup update-alternatives deprecated code
-=20=20pigz: cleanup update-alternatives deprecated code
-=20=20msmtp: cleanup update-alternatives deprecated code
-=20=20mktemp: cleanup update-alternatives deprecated code
-=20=20which: cleanup update-alternatives deprecated code
-=20=20less: cleanup update-alternatives deprecated code
-=20=20shadow: cleanup update-alternatives deprecated code
-=20=20mingetty: cleanup update-alternatives deprecated code
-=20=20hdparm: cleanup update-alternatives deprecated code
-=20=20gzip: cleanup update-alternatives deprecated code
-=20=20procps: cleanup update-alternatives deprecated code
-=20=20time: cleanup update-alternatives deprecated code
-=20=20wget: cleanup update-alternatives deprecated code
-=20=20sed: cleanup update-alternatives deprecated code
-=20=20gawk: cleanup update-alternatives deprecated code
-=20=20net-tools: cleanup update-alternatives deprecated code
-=20=20libsamplerate: depends on libsdnfile
-=20=20ncurses: fix file names for update -alternatives
-
-Scott Garman (2):
-=20=20runqemu: support booting ramfs-based images
-=20=20runqemu: work with yocto-bsp created kernel filenames
-
-Scott Rifenbark (3):
-=20=20documentation/dev-manual: modified SSH server discussion for QEMU =
-Images
-=20=20documentation/dev-manual/dev-manual-common-tasks.xml: Packages dir =
-removed
-=20=20documentation/poky-ref-manual/ref-structure.xml: deleting images
-
-Wenzong Fan (2):
-=20=20at 3.1.13: get 'at' depends on 'flex-native' explicitly
-=20=20sysfsutils: install libs to base_libdir
-
-Xin Ouyang (2):
-=20=20gettext-0.18: explicitly disable acl.
-=20=20libatomics-ops: update to the latest version 7.2
-
-Yao Zhao (2):
-=20=20gstreamer: gst-ffmpeg: fix build issues for libav
-=20=20base.bbclass: fix PACKAGECONFIG handling code
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for meta-smartphone:
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
@@ -676,247 +434,6 @@ Holger Hans Peter Freyther (2):
 =20=20libosmocore: Build a 0.5.3+ version and force rebuild
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-eldk:
-
-Amy Fong (1):
-=20=20openssh: openssh's init fails to restart if sshd is not running
-
-Andreas M=C3=BCller (2):
-=20=20webkit-gtk: update to 1.8.2
-=20=20wpa-supplicant: fix paths in dbus/systemd *.service files
-
-Andrei Gherzan (8):
-=20=20bitbake: bitbake: build.py: Add stampdir argument to =
-cached_mtime_noerror
-=20=20utils.py: Modify and rename distro_features_backfill python function
-=20=20bitbake.conf: Use the new form of features_backfill function
-=20=20bitbake.conf: Add MACHINE_FEATURES_BACKFILL and append to =
-MACHINE_FEATURES
-=20=20bitbake.conf: Add rtc to MACHINE_FEATURES_BACKFILL
-=20=20task-core-boot: Add busybox-hwclock if MACHINE_FEATURES contains rtc
-=20=20busybox: Package hwclock.sh initscript separately
-=20=20subversion: Inherit gettext as msgfmt is needed at compile time
-
-Andy Ross (1):
-=20=20dbus: Fix pid file in dbus init script
-
-Bj=C3=B6rn Stenberg (1):
-=20=20pigz: Update to upstream version 2.2.5
-
-Bruce Ashfield (10):
-=20=20kernel.bbclass: remove default module_autoload and module_conf values
-=20=20linux-yocto: bump version to 3.4.7
-=20=20linux-yocto/3.4: BSP, uprobes, config and cleanups
-=20=20linux-yocto: make KBRANCH the exception and not the rule
-=20=20linux-yocto/3.4: remove explicit KBRANCH designations
-=20=20linux-yocto: explicitly export KMETA to scripts
-=20=20kern-tools: fixes (branching,buildall) + cleanups (checkpoint,cleaner)
-=20=20linux-yocto-tiny: set default branch
-=20=20linux-yocto/3.0: update meta SRCREV
-=20=20linux-yocto/meta-yocto/3.4: BSP, uprobes, config and cleanups
-
-Christopher Larson (1):
-=20=20base.bbclass: allow specifying an lsb distro hook via the metadata
-
-Constantin Musca (15):
-=20=20libdrm: package update 2.4.35 -> 2.4.37
-=20=20pixman: upgrade to 0.27.2
-=20=20dri2proto: upgrade to 2.8
-=20=20glproto: upgrade to 1.4.16
-=20=20pciutils: upgrade to 3.1.10
-=20=20dbus: upgrade to 1.6.4
-=20=20ofono: upgrade to 1.10
-=20=20iproute2: upgrade to 3.5.0
-=20=20iptables: upgrade to 1.4.15
-=20=20pulseaudio: upgrade to 2.1
-=20=20gst-fluendo-mp3: upgrade to 0.10.19
-=20=20gst-fluendo-mpegdemux: upgrade to 0.10.71
-=20=20connman: upgrade to 1.4
-=20=20libxrandr: upgrade to 1.4.0
-=20=20randrproto: upgrade to 1.4.0
-
-Damien Lespiau (3):
-=20=20mesa: Add a mesa-dri-glsl-native_git recipe
-=20=20core: Prefer mesa-dri as virtual/libopengles1/2 provider
-=20=20core: Prefer mesa-dri as virtual/libopengles1/2 provider
-
-Florin Sarbu (1):
-=20=20Add MPL version 2.0 license in common-licenses dir as well as adding =
-a non-S
-
-Jackie Huang (4):
-=20=20tcl: uncomment a line that causing TCL_SRC_DIR point to the workdir.
-=20=20gdk-pixbuf: fix the postinstall script failure when no icon is =
-installed
-=20=20python: Add Upstream-Status entries for bsddb patches, no code changes
-=20=20apr-util: fix the rules.mk with path to sysroot instead of the =
-workdir of ap
-
-Kenneth Solbjerg (1):
-=20=20run-postinsts: Does not run any scripts on debian rootfs
-
-Khem Raj (4):
-=20=20chrpath.bbclass: Account for case when ORIGIN is in RPATH
-=20=20kernel.bbclass: Preserve generated headers
-=20=20unifdef-native: Correct LICENSE
-=20=20libpam: Update recipes from 1.1.5 -> 1.1.6
-
-Koen Kooi (2):
-=20=20man: fix RDEPENDS and reformat recipe
-=20=20man: make man actually work by installing custom man.config
-
-Laurentiu Palcu (3):
-=20=20populate_sdk_base.bbclass: fix SDK relocation issues
-=20=20package.bbclass: change RPATHs for cross-canadian binaries
-=20=20adt-installer: add support for relocatable SDK
-
-Marc Reilly (1):
-=20=20avahi: fix packaging of avahi-autoipd
-
-Mark Hatle (3):
-=20=20package_rpm.bbclass: Fix attemptonly install failures
-=20=20prelink: Update to latest upstream prelink
-=20=20pseudo: Fix pseudo-native rebuild when triggered by dep change
-
-Martin Jansa (2):
-=20=20bitbake.conf: store cooker logs in subdirectory of LOG_DIR
-=20=20layer.conf: add udev-extraconf to SIGGEN_EXCLUDERECIPES_ABISAFE
-
-Matthew McClintock (3):
-=20=20distutils.bbclass: fix libdir for 64-bit python modules built with =
-distutils
-=20=20perf_3.4.bb: update to build against older kernels
-=20=20cross-localedef-native_2.16.bb: fix for CentOS 5.X
-
-Mihai Lindner (1):
-=20=20sysklogd: removed tabs from syslog.conf
-
-Paul Eggleton (6):
-=20=20rpmresolve: add wrapper script to fix paths
-=20=20createrepo: add wrapper script to fix paths
-=20=20rpmresolve: improve debug output
-=20=20classes/chrpath: trigger an error if chrpath fails
-=20=20classes/chrpath: improve chrpath failure handling
-=20=20poky.conf: update distro ID string for Ubuntu 12.04.1 LTS
-
-Peter Seebach (2):
-=20=20base.bbclass: Expand PNBLACKLIST across multilibs too
-=20=20base.bbclass: Work even when there's no PNBLACKLIST entries
-
-Radek Dostal (1):
-=20=20gst-plugins-base: remove avahi from DEPENDS
-
-Radu Moisan (1):
-=20=20pango: upgrade to upstream stable 1.30.0
-
-Richard Purdie (12):
-=20=20rpmresolve: Ensure we call the rpm relocation code at init
-=20=20bitbake: knotty: Chain the WINCH signal handler in progressbar so any =
-other=20
-=20=20bitbake: bb/ui/uihelper.py: Ensure task current and total numbers are =
-update
-=20=20bitbake: build.py: Only execute mkdirhier if stampdir doesn't exist
-=20=20bitbake: knotty2: Handle long lines of text and terminal window size =
-changes
-=20=20bitbake: knotty: Fold knotty2 into knotty and make it the default
-=20=20bitbake: bin/bitbake: Remove knotty2 from the list of valid interfaces
-=20=20bitbake: really remove knotty2
-=20=20chrpath.bbclass: Ensure we only process tmpdir in paths which =
-actually conta
-=20=20bitbake: fetch2/git: Work around git confusion between foo.git and =
-foo repos
-=20=20bitbake: build.py: Correct package to recipe in TaskBase events to =
-use consi
-=20=20utility-tasks: Set T to alternate location during do_clean
-
-Robert Yang (4):
-=20=20qemu.inc: disable curl for qemu-nativesdk
-=20=20sstate-cache-management.sh: update it for the new layout
-=20=20apt-native 0.7.14: remove an extra line from apt.conf
-=20=20rootfs_deb: move the lock from WORKDIR to DEPLOY_DIR_DEB
-
-Ross Burton (13):
-=20=20classes: add gsettings.bbclass
-=20=20pimlico: Remove
-=20=20documentation: remove references to Pimlico
-=20=20distro: Remove Pimlico from distro-tracking
-=20=20gtk+: remove 2.12.7
-=20=20gtk+ remove 2.16.6
-=20=20clutter: DOLT isn't used anymore
-=20=20owl-video: patches pushed upstream, so bump srcrev
-=20=20libowl-av: patches merged upstream, bump srcrev
-=20=20mesa: enable GLES v1 and v2
-=20=20mesa-demos: fix GLES2 build
-=20=20mesa: respect x11 DISTRO_FEATURE
-=20=20mesa: enable EGL, with DRM and X11 platforms
-
-Roy.Li (2):
-=20=20qemu: backport patch to fix pl031 RTC
-=20=20subversion: two small fixes
-
-Saul Wold (37):
-=20=20watchdog: fix SRC_URI _ -> -
-=20=20rxvt-unicode: remove setting of LD_LIBRARY_PATH
-=20=20rxvt-unicode: cleanup update-alternatives deprecated code
-=20=20openssh: cleanup update-alternatives deprecated code
-=20=20mini-x-session: cleanup update-alternatives deprecated code
-=20=20console-tools: cleanup update-alternatives deprecated code
-=20=20kbd: cleanup update-alternatives deprecated code
-=20=20tinylogin: cleanup update-alternatives deprecated code
-=20=20patch: cleanup update-alternatives deprecated code
-=20=20ubootchart: cleanup update-alternatives deprecated code
-=20=20bc: cleanup update-alternatives deprecated code
-=20=20diffutils: refactor to add a common diffutils.inc
-=20=20diffutils: cleanup update-alternatives deprecated code
-=20=20findutils: refactor common code to findutils.inc
-=20=20findutils: cleanup update-alternatives deprecated code
-=20=20powertop: cleanup update-alternatives deprecated code
-=20=20mutter: cleanup update-alternatives deprecated code
-=20=20matchbox-wm-2: cleanup update-alternatives deprecated code
-=20=20matchbox-session: cleanup update-alternatives deprecated code
-=20=20metacity: cleanup update-alternatives deprecated code
-=20=20pigz: cleanup update-alternatives deprecated code
-=20=20msmtp: cleanup update-alternatives deprecated code
-=20=20mktemp: cleanup update-alternatives deprecated code
-=20=20which: cleanup update-alternatives deprecated code
-=20=20less: cleanup update-alternatives deprecated code
-=20=20shadow: cleanup update-alternatives deprecated code
-=20=20mingetty: cleanup update-alternatives deprecated code
-=20=20hdparm: cleanup update-alternatives deprecated code
-=20=20gzip: cleanup update-alternatives deprecated code
-=20=20procps: cleanup update-alternatives deprecated code
-=20=20time: cleanup update-alternatives deprecated code
-=20=20wget: cleanup update-alternatives deprecated code
-=20=20sed: cleanup update-alternatives deprecated code
-=20=20gawk: cleanup update-alternatives deprecated code
-=20=20net-tools: cleanup update-alternatives deprecated code
-=20=20libsamplerate: depends on libsdnfile
-=20=20ncurses: fix file names for update -alternatives
-
-Scott Garman (2):
-=20=20runqemu: support booting ramfs-based images
-=20=20runqemu: work with yocto-bsp created kernel filenames
-
-Scott Rifenbark (3):
-=20=20documentation/dev-manual: modified SSH server discussion for QEMU =
-Images
-=20=20documentation/dev-manual/dev-manual-common-tasks.xml: Packages dir =
-removed
-=20=20documentation/poky-ref-manual/ref-structure.xml: deleting images
-
-Wenzong Fan (2):
-=20=20at 3.1.13: get 'at' depends on 'flex-native' explicitly
-=20=20sysfsutils: install libs to base_libdir
-
-Xin Ouyang (2):
-=20=20gettext-0.18: explicitly disable acl.
-=20=20libatomics-ops: update to the latest version 7.2
-
-Yao Zhao (2):
-=20=20gstreamer: gst-ffmpeg: fix build issues for libav
-=20=20base.bbclass: fix PACKAGECONFIG handling code
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for meta-ti:
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
@@ -936,6 +453,21 @@ Andrei Gherzan (1):
 
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Changelog for meta-kde:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+Bruce Ashfield (1):
+=20=20linux-yocto/meta-yocto/3.4: BSP, uprobes, config and cleanups
+
+Damien Lespiau (1):
+=20=20core: Prefer mesa-dri as virtual/libopengles1/2 provider
+
+Paul Eggleton (1):
+=20=20poky.conf: update distro ID string for Ubuntu 12.04.1 LTS
+
+Ross Burton (1):
+=20=20distro: Remove Pimlico from distro-tracking
 
 
 
