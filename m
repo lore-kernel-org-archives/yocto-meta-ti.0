@@ -1,37 +1,64 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5AF30E01346
-	for <meta-ti@yoctoproject.org>; Wed, 29 Aug 2012 00:43:37 -0700 (PDT)
-Received: by wgx1 with SMTP id 1so153363wgx.11
-	for <meta-ti@yoctoproject.org>; Wed, 29 Aug 2012 00:43:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=UwPP+srh+XIt4LRBm3RmjBuYhuKaFXJZVUTqsHJxGKk=;
-	b=Ercurzr+IUDycJSkpwDNptaPG81TWePPBDvtNwWwavz8LsgUCRDH//4eFq6RxEl4Rm
-	J7fkbxRFkeZXnllhaEGA5d6MeCQTVCirth7ypPDlZLNRiDzDSagD3+d1ZfMRAJpQ1NIW
-	hXC417oixQ0dXHETsEw+NDJRonYfVghqo+ZXPSZKNbl9D1A9NnC4xcZV8FtaxK5wJ6Pu
-	XW/9jNM2bamgFKTK3HAHJ0gSgUboV9PU88q7QFTSdDRhWvtBs5HMMW9fd7h63a94ufIb
-	XGMMRe5ogiuBXoRDPpYLojHzRFfQuiGFej2+DWyjQpfJTnxEMwnFa4dyPKMsdvUPII50
-	NqAw==
-Received: by 10.216.138.92 with SMTP id z70mr421119wei.68.1346226215893;
-	Wed, 29 Aug 2012 00:43:35 -0700 (PDT)
-Received: from [172.20.0.10] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPS id r9sm13740361wia.2.2012.08.29.00.43.33
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 29 Aug 2012 00:43:34 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.0 \(1486\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <503D3DFE.3020000@balister.org>
-Date: Wed, 29 Aug 2012 09:43:33 +0200
-Message-Id: <1FBDA2E9-068F-428D-B393-9F4F8A5D14C0@dominion.thruhere.net>
-References: <CALjj03XPWGLXGAeDxJzg8_ap_ai=9=CnQwms5dujL7oNsmBkCw@mail.gmail.com>
-	<503D3DFE.3020000@balister.org>
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 208EEE0074B
+	for <meta-ti@yoctoproject.org>; Wed, 29 Aug 2012 09:46:38 -0700 (PDT)
+Received: from dlep26.itg.ti.com ([157.170.170.121])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q7TGkOYp011157;
+	Wed, 29 Aug 2012 11:46:24 -0500
+Received: from DLEE74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id q7TGkOx3006536;
+	Wed, 29 Aug 2012 11:46:24 -0500 (CDT)
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 29 Aug 2012 11:46:24 -0500
+Received: from DFLE72.ent.ti.com (dlep26.itg.ti.com [157.170.170.121])	by
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q7TGkOfK004258;
+	Wed, 29 Aug 2012 11:46:24 -0500
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 29 Aug 2012 11:45:53 -0500
+Received: from DFLE72.ent.ti.com (dlep26.itg.ti.com [157.170.170.121])	by
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q7TGjrBb002451;
+	Wed, 29 Aug 2012 11:45:53 -0500
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 29 Aug 2012 11:45:53 -0500
+Received: from DFLE73.ent.ti.com (dlep26.itg.ti.com [157.170.170.121])	by
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q7TGjrtT002445;
+	Wed, 29 Aug 2012 11:45:53 -0500
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 29 Aug 2012 11:45:52 -0500
+Received: from DFLE72.ent.ti.com (dlep26.itg.ti.com [157.170.170.121])	by
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q7TGjq2o002442;
+	Wed, 29 Aug 2012 11:45:52 -0500
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 29 Aug 2012 11:45:52 -0500
+Received: from DFLE73.ent.ti.com (dlep26.itg.ti.com [157.170.170.121])	by
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q7TGjqDp002414;
+	Wed, 29 Aug 2012 11:45:52 -0500
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by dfle73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 29 Aug 2012 11:45:52 -0500
+Received: from DFLE72.ent.ti.com (dlep26.itg.ti.com [157.170.170.121])	by
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id q7TGjqug002407;
+	Wed, 29 Aug 2012 11:45:52 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 29 Aug 2012 11:45:52 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id q7TGjqbg012246;
+	Wed, 29 Aug 2012 11:45:52 -0500
+Date: Wed, 29 Aug 2012 12:45:42 -0400
+From: Denys Dmytriyenko <denys@ti.com>
 To: Philip Balister <philip@balister.org>
-X-Mailer: Apple Mail (2.1486)
-X-Gm-Message-State: ALoCoQl98+nKQxX9UJIjtMYhJgRajwBDfscdzALQSxqDfMVGPpWjaWQFaUdbmeLhB55y+ATlRqmm
+Message-ID: <20120829164541.GG23636@edge>
+References: <CALjj03XPWGLXGAeDxJzg8_ap_ai=9=CnQwms5dujL7oNsmBkCw@mail.gmail.com>
+	<503D3DFE.3020000@balister.org> <503D3E68.4020007@balister.org>
+MIME-Version: 1.0
+In-Reply-To: <503D3E68.4020007@balister.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [Gumstix-users] Yocto and Wifi for Overo
 X-BeenThere: meta-ti@yoctoproject.org
@@ -46,100 +73,100 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Aug 2012 07:43:37 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 29 Aug 2012 16:46:38 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-My crystal ball is out for repairs currently, I can't deduce what is =
-going wrong from the email you forwarded. My spare crystal ball does =
-seem to say "README needs to be read", though.
+On Tue, Aug 28, 2012 at 03:55:52PM -0600, Philip Balister wrote:
+> One item I am not sure anyone has pointed out is that meta-ti is
+> both a BSP and a SOC support layer. So people with OMAP BSP's will
+> also want to sue meta-ti to use things like dsplink.
 
-Op 28 aug. 2012, om 23:54 heeft Philip Balister <philip@balister.org> =
-het volgende geschreven:
+Isn't BSP inclusinve of SoC? :)
 
-> FYI.
->=20
->=20
-> -------- Original Message --------
-> Subject: Re: [Gumstix-users] Yocto and Wifi for Overo
-> Date: Tue, 28 Aug 2012 17:11:56 -0400
-> From: Sebasti=E1n Bas Kana <sbaskana@gmail.com>
-> Reply-To: General mailing list for gumstix users. =
-<gumstix-users@lists.sourceforge.net>
-> To: General mailing list for gumstix users. =
-<gumstix-users@lists.sourceforge.net>
->=20
-> I used meta-gumstix and had to add meta-ti, but the latter has some =
-issues
-> with licensing checksums and broken dependencies, so I removed the
-> conflicting files and had to build the core-image-minimal, as the =
-"base"
-> one fails to build the root filesystem.
->=20
-> To enable WPA Wifi I followed what is explained on this thread:
->=20
-> http://comments.gmane.org/gmane.linux.embedded.yocto.meta-ti/631
->=20
-> Is there a cleaner way to do this? Why is meta-ti broken?
->=20
-> Thank you for your help!
->=20
-> Sebasti=E1n
->=20
-> On Fri, Aug 24, 2012 at 4:48 PM, Andreas M=FCller <
-> schnitzeltony@googlemail.com> wrote:
->=20
->> On Fri, Aug 24, 2012 at 5:27 PM, Sebasti=E1n Bas Kana =
-<sbaskana@gmail.com>
->> wrote:
->> > Hi Guys,
->> >
->> > Has anyone been able to build a Wifi (WPA) enabled image for the =
-overo
->> with
->> > Yocto?
->> >
->> > I keep getting errors when I try to configure wlan0. How can I get =
-the
->> > drivers working?
->> >
->> > Thank you in advance!
->> >
->> > Sebasti=E1n
->> >
->> with meta-gumstix and networkmanager in image (e.g [1]) I have no
->> problem to connect my hidden WPA2 network and setup is easy.
->>=20
->> Andreas
->>=20
->> [1]
->> =
-http://gitorious.org/schnitzeltony-oe-meta/meta-misc/blobs/master/recipes-=
-image/xfce-base-image.bb
->>=20
->>=20
->> =
---------------------------------------------------------------------------=
-----
->> Live Security Virtual Conference
->> Exclusive live event will cover all the ways today's security and
->> threat landscape has changed and how IT managers can respond. =
-Discussions
->> will include endpoint security, mobile security and the latest in =
-malware
->> threats. http://www.accelacomm.com/jaw/sfrnl04242012/114/50122263/
->> _______________________________________________
->> gumstix-users mailing list
->> gumstix-users@lists.sourceforge.net
->> https://lists.sourceforge.net/lists/listinfo/gumstix-users
->>=20
->=20
->=20
->=20
-> <Attached Message Part.txt><Attached Message =
-Part.txt>_______________________________________________
+Denys
+
+
+> On 08/28/2012 03:54 PM, Philip Balister wrote:
+> >FYI.
+> >
+> >
+> >-------- Original Message --------
+> >Subject: Re: [Gumstix-users] Yocto and Wifi for Overo
+> >Date: Tue, 28 Aug 2012 17:11:56 -0400
+> >From: Sebasti?n Bas Kana <sbaskana@gmail.com>
+> >Reply-To: General mailing list for gumstix users.
+> ><gumstix-users@lists.sourceforge.net>
+> >To: General mailing list for gumstix users.
+> ><gumstix-users@lists.sourceforge.net>
+> >
+> >I used meta-gumstix and had to add meta-ti, but the latter has some issues
+> >with licensing checksums and broken dependencies, so I removed the
+> >conflicting files and had to build the core-image-minimal, as the "base"
+> >one fails to build the root filesystem.
+> >
+> >To enable WPA Wifi I followed what is explained on this thread:
+> >
+> >http://comments.gmane.org/gmane.linux.embedded.yocto.meta-ti/631
+> >
+> >Is there a cleaner way to do this? Why is meta-ti broken?
+> >
+> >Thank you for your help!
+> >
+> >Sebasti?n
+> >
+> >On Fri, Aug 24, 2012 at 4:48 PM, Andreas M?ller <
+> >schnitzeltony@googlemail.com> wrote:
+> >
+> >>On Fri, Aug 24, 2012 at 5:27 PM, Sebasti?n Bas Kana <sbaskana@gmail.com>
+> >>wrote:
+> >>> Hi Guys,
+> >>>
+> >>> Has anyone been able to build a Wifi (WPA) enabled image for the overo
+> >>with
+> >>> Yocto?
+> >>>
+> >>> I keep getting errors when I try to configure wlan0. How can I get the
+> >>> drivers working?
+> >>>
+> >>> Thank you in advance!
+> >>>
+> >>> Sebasti?n
+> >>>
+> >>with meta-gumstix and networkmanager in image (e.g [1]) I have no
+> >>problem to connect my hidden WPA2 network and setup is easy.
+> >>
+> >>Andreas
+> >>
+> >>[1]
+> >>http://gitorious.org/schnitzeltony-oe-meta/meta-misc/blobs/master/recipes-image/xfce-base-image.bb
+> >>
+> >>
+> >>
+> >>------------------------------------------------------------------------------
+> >>
+> >>Live Security Virtual Conference
+> >>Exclusive live event will cover all the ways today's security and
+> >>threat landscape has changed and how IT managers can respond. Discussions
+> >>will include endpoint security, mobile security and the latest in malware
+> >>threats. http://www.accelacomm.com/jaw/sfrnl04242012/114/50122263/
+> >>_______________________________________________
+> >>gumstix-users mailing list
+> >>gumstix-users@lists.sourceforge.net
+> >>https://lists.sourceforge.net/lists/listinfo/gumstix-users
+> >>
+> >
+> >
+> >
+> >
+> >
+> >_______________________________________________
+> >meta-ti mailing list
+> >meta-ti@yoctoproject.org
+> >https://lists.yoctoproject.org/listinfo/meta-ti
+> >
+> _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
 > https://lists.yoctoproject.org/listinfo/meta-ti
-
 
