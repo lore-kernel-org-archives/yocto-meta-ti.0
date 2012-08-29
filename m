@@ -1,22 +1,38 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A34CE00347
-	for <meta-ti@yoctoproject.org>; Tue, 28 Aug 2012 14:55:56 -0700 (PDT)
-Received: (qmail 16752 invoked by uid 1003); 28 Aug 2012 21:55:53 -0000
-Received: from unknown (HELO ?10.50.11.73?) (philip@opensdr.com@205.168.82.250)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	28 Aug 2012 21:55:53 -0000
-Message-ID: <503D3E68.4020007@balister.org>
-Date: Tue, 28 Aug 2012 15:55:52 -0600
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:14.0) Gecko/20120717 Thunderbird/14.0
-MIME-Version: 1.0
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5AF30E01346
+	for <meta-ti@yoctoproject.org>; Wed, 29 Aug 2012 00:43:37 -0700 (PDT)
+Received: by wgx1 with SMTP id 1so153363wgx.11
+	for <meta-ti@yoctoproject.org>; Wed, 29 Aug 2012 00:43:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=UwPP+srh+XIt4LRBm3RmjBuYhuKaFXJZVUTqsHJxGKk=;
+	b=Ercurzr+IUDycJSkpwDNptaPG81TWePPBDvtNwWwavz8LsgUCRDH//4eFq6RxEl4Rm
+	J7fkbxRFkeZXnllhaEGA5d6MeCQTVCirth7ypPDlZLNRiDzDSagD3+d1ZfMRAJpQ1NIW
+	hXC417oixQ0dXHETsEw+NDJRonYfVghqo+ZXPSZKNbl9D1A9NnC4xcZV8FtaxK5wJ6Pu
+	XW/9jNM2bamgFKTK3HAHJ0gSgUboV9PU88q7QFTSdDRhWvtBs5HMMW9fd7h63a94ufIb
+	XGMMRe5ogiuBXoRDPpYLojHzRFfQuiGFej2+DWyjQpfJTnxEMwnFa4dyPKMsdvUPII50
+	NqAw==
+Received: by 10.216.138.92 with SMTP id z70mr421119wei.68.1346226215893;
+	Wed, 29 Aug 2012 00:43:35 -0700 (PDT)
+Received: from [172.20.0.10] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPS id r9sm13740361wia.2.2012.08.29.00.43.33
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 29 Aug 2012 00:43:34 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.0 \(1486\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <503D3DFE.3020000@balister.org>
+Date: Wed, 29 Aug 2012 09:43:33 +0200
+Message-Id: <1FBDA2E9-068F-428D-B393-9F4F8A5D14C0@dominion.thruhere.net>
 References: <CALjj03XPWGLXGAeDxJzg8_ap_ai=9=CnQwms5dujL7oNsmBkCw@mail.gmail.com>
 	<503D3DFE.3020000@balister.org>
-In-Reply-To: <503D3DFE.3020000@balister.org>
+To: Philip Balister <philip@balister.org>
+X-Mailer: Apple Mail (2.1486)
+X-Gm-Message-State: ALoCoQl98+nKQxX9UJIjtMYhJgRajwBDfscdzALQSxqDfMVGPpWjaWQFaUdbmeLhB55y+ATlRqmm
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [Gumstix-users] Yocto and Wifi for Overo
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -30,92 +46,100 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Aug 2012 21:55:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 29 Aug 2012 07:43:37 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-One item I am not sure anyone has pointed out is that meta-ti is both a 
-BSP and a SOC support layer. So people with OMAP BSP's will also want to 
-sue meta-ti to use things like dsplink.
+My crystal ball is out for repairs currently, I can't deduce what is =
+going wrong from the email you forwarded. My spare crystal ball does =
+seem to say "README needs to be read", though.
 
-Philip
+Op 28 aug. 2012, om 23:54 heeft Philip Balister <philip@balister.org> =
+het volgende geschreven:
 
-On 08/28/2012 03:54 PM, Philip Balister wrote:
 > FYI.
->
->
+>=20
+>=20
 > -------- Original Message --------
 > Subject: Re: [Gumstix-users] Yocto and Wifi for Overo
 > Date: Tue, 28 Aug 2012 17:11:56 -0400
-> From: Sebastián Bas Kana <sbaskana@gmail.com>
-> Reply-To: General mailing list for gumstix users.
-> <gumstix-users@lists.sourceforge.net>
-> To: General mailing list for gumstix users.
-> <gumstix-users@lists.sourceforge.net>
->
-> I used meta-gumstix and had to add meta-ti, but the latter has some issues
+> From: Sebasti=E1n Bas Kana <sbaskana@gmail.com>
+> Reply-To: General mailing list for gumstix users. =
+<gumstix-users@lists.sourceforge.net>
+> To: General mailing list for gumstix users. =
+<gumstix-users@lists.sourceforge.net>
+>=20
+> I used meta-gumstix and had to add meta-ti, but the latter has some =
+issues
 > with licensing checksums and broken dependencies, so I removed the
-> conflicting files and had to build the core-image-minimal, as the "base"
+> conflicting files and had to build the core-image-minimal, as the =
+"base"
 > one fails to build the root filesystem.
->
+>=20
 > To enable WPA Wifi I followed what is explained on this thread:
->
+>=20
 > http://comments.gmane.org/gmane.linux.embedded.yocto.meta-ti/631
->
+>=20
 > Is there a cleaner way to do this? Why is meta-ti broken?
->
+>=20
 > Thank you for your help!
->
-> Sebastián
->
-> On Fri, Aug 24, 2012 at 4:48 PM, Andreas Müller <
+>=20
+> Sebasti=E1n
+>=20
+> On Fri, Aug 24, 2012 at 4:48 PM, Andreas M=FCller <
 > schnitzeltony@googlemail.com> wrote:
->
->> On Fri, Aug 24, 2012 at 5:27 PM, Sebastián Bas Kana <sbaskana@gmail.com>
+>=20
+>> On Fri, Aug 24, 2012 at 5:27 PM, Sebasti=E1n Bas Kana =
+<sbaskana@gmail.com>
 >> wrote:
 >> > Hi Guys,
 >> >
->> > Has anyone been able to build a Wifi (WPA) enabled image for the overo
+>> > Has anyone been able to build a Wifi (WPA) enabled image for the =
+overo
 >> with
 >> > Yocto?
 >> >
->> > I keep getting errors when I try to configure wlan0. How can I get the
+>> > I keep getting errors when I try to configure wlan0. How can I get =
+the
 >> > drivers working?
 >> >
 >> > Thank you in advance!
 >> >
->> > Sebastián
+>> > Sebasti=E1n
 >> >
 >> with meta-gumstix and networkmanager in image (e.g [1]) I have no
 >> problem to connect my hidden WPA2 network and setup is easy.
->>
+>>=20
 >> Andreas
->>
+>>=20
 >> [1]
->> http://gitorious.org/schnitzeltony-oe-meta/meta-misc/blobs/master/recipes-image/xfce-base-image.bb
->>
->>
->>
->> ------------------------------------------------------------------------------
->>
+>> =
+http://gitorious.org/schnitzeltony-oe-meta/meta-misc/blobs/master/recipes-=
+image/xfce-base-image.bb
+>>=20
+>>=20
+>> =
+--------------------------------------------------------------------------=
+----
 >> Live Security Virtual Conference
 >> Exclusive live event will cover all the ways today's security and
->> threat landscape has changed and how IT managers can respond. Discussions
->> will include endpoint security, mobile security and the latest in malware
+>> threat landscape has changed and how IT managers can respond. =
+Discussions
+>> will include endpoint security, mobile security and the latest in =
+malware
 >> threats. http://www.accelacomm.com/jaw/sfrnl04242012/114/50122263/
 >> _______________________________________________
 >> gumstix-users mailing list
 >> gumstix-users@lists.sourceforge.net
 >> https://lists.sourceforge.net/lists/listinfo/gumstix-users
->>
->
->
->
->
->
-> _______________________________________________
+>>=20
+>=20
+>=20
+>=20
+> <Attached Message Part.txt><Attached Message =
+Part.txt>_______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
 > https://lists.yoctoproject.org/listinfo/meta-ti
->
+
 
