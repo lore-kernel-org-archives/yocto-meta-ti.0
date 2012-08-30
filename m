@@ -1,36 +1,35 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
-	[209.85.215.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5DF2E01446
-	for <meta-ti@yoctoproject.org>; Thu, 30 Aug 2012 01:55:21 -0700 (PDT)
-Received: by mail-ey0-f176.google.com with SMTP id d1so500603eab.35
-	for <meta-ti@yoctoproject.org>; Thu, 30 Aug 2012 01:55:21 -0700 (PDT)
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A1BB8E01448
+	for <meta-ti@yoctoproject.org>; Thu, 30 Aug 2012 01:55:25 -0700 (PDT)
+Received: by mail-ee0-f48.google.com with SMTP id d41so650351eek.35
+	for <meta-ti@yoctoproject.org>; Thu, 30 Aug 2012 01:55:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:x-gm-message-state;
-	bh=+i5xqcCqrCS/bF6ybkNmJtgkF70+hL51o2tOSb9JLWw=;
-	b=oB3mjobjJt2kHVA8sa1A5zswkx2AR/cqT0RIaBBCX7JxoTOsjoWeWP1K6O3KhyKxuW
-	HqJVJ2Z44duZ90xlUvHs9NFSV3Sw0xLdGTa+1dqLlkjLKJiZfZ3TIWiPbZRhLOG2lwyy
-	y8DmcrWjXRNhQat+u0Xawm/9xEUiR9tyu7AOova7RcVu4rqb9pTp8HI+G8Vx+dojwLUa
-	fQzheCcm3ugida9g1U4dQjwpgvZSZhgRfjR1OpsWAVhvSlVXipYmLb4dVKBp+gekZ6J4
-	2K89/MSWxpB6nBTx/tgjmkhN9kVBIikUT7IS7Y39urskZcHVADtPWqOgwdPFDU86En+L
-	KoWA==
-Received: by 10.14.180.68 with SMTP id i44mr5558406eem.20.1346316921543;
-	Thu, 30 Aug 2012 01:55:21 -0700 (PDT)
+	bh=/x48n9jvY2qUy7r+XWH66xhPZbXhrEIQ4IwKmTOgkBM=;
+	b=Fo0vr+SFY2hCfzFf5pYhMy0mVHrHH8/9J9WxVWf2PjTGrK5JRftDvrshKkPMbGjvvK
+	jTcdHUPWotx8WigBXoS+jAV+7BwvKFXWk/MAXBvUI+1obI5HeWz7pVZ1+MuGc5YyPg0O
+	Vfw4hT8Rak7do9WvuP1dqIiflYefQ9fXIA9YBraej23kK4JJ2nxjT3OlDWt6ZSml5KGC
+	dGxCEkw2PpO6CxWdc34Ny6fFk1Ib8zN0ww7d2wUWX88lTp9MWCtTAjlhKUe2j4l//gq0
+	9Em4IshogOvDkwesae9tUfvHS9WsbV6eBnXAovDcdDa+CpWhPWPYzm6oShqSEnlGYBDD
+	e8SA==
+Received: by 10.14.5.67 with SMTP id 43mr5527844eek.15.1346316925264;
+	Thu, 30 Aug 2012 01:55:25 -0700 (PDT)
 Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
-	by mx.google.com with ESMTPS id 45sm2990741eeb.8.2012.08.30.01.55.19
+	by mx.google.com with ESMTPS id e7sm3023948eep.2.2012.08.30.01.55.22
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 30 Aug 2012 01:55:20 -0700 (PDT)
+	Thu, 30 Aug 2012 01:55:23 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Date: Thu, 30 Aug 2012 10:54:58 +0200
-Message-Id: <1346316899-11441-5-git-send-email-koen@dominion.thruhere.net>
+Date: Thu, 30 Aug 2012 10:54:59 +0200
+Message-Id: <1346316899-11441-6-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.7.10
 In-Reply-To: <1346316899-11441-1-git-send-email-koen@dominion.thruhere.net>
 References: <1346316899-11441-1-git-send-email-koen@dominion.thruhere.net>
-X-Gm-Message-State: ALoCoQkdepyK8eIRpPy0nW/Y7hK+PyZ/5nSB8SoEtw86FvCGJIOEvYqL29xpzcfynH8uvterZgiA
-Subject: [PATCH 5/6] linux-mainline: update to 3.2.28
+X-Gm-Message-State: ALoCoQm0NF5+xcD3XqD0NE5ZmiFgIiyMoSbK2DaJhbLOwZrIumCpMxdDUiTVSDtQE8NrnmN/1rNy
+Subject: [PATCH 6/6] linux-ti33x-psp 3.2: update beaglebone defconfig
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,46 +42,284 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Aug 2012 08:55:22 -0000
+X-List-Received-Date: Thu, 30 Aug 2012 08:55:26 -0000
 
+* Add more RTC modules
+* Disable cgroup controllers with a lot of overhead
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- conf/machine/include/omap3.inc             |    2 +-
- recipes-kernel/linux/linux-mainline_3.2.bb |    8 ++++----
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ .../linux/linux-ti33x-psp-3.2/beaglebone/defconfig |  128 ++++++++++----------
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    2 +-
+ 2 files changed, 65 insertions(+), 65 deletions(-)
 
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 0f3cc36..8ce0ebc 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r121"
-+MACHINE_KERNEL_PR = "r122"
+diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
+index 5964380..74b0051 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
++++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/defconfig
+@@ -1,6 +1,6 @@
+ #
+ # Automatically generated file; DO NOT EDIT.
+-# Linux/arm 3.2.21 Kernel Configuration
++# Linux/arm 3.2.28 Kernel Configuration
+ #
+ CONFIG_ARM=y
+ CONFIG_HAVE_PWM=y
+@@ -85,20 +85,16 @@ CONFIG_CGROUPS=y
+ # CONFIG_CGROUP_DEBUG is not set
+ CONFIG_CGROUP_FREEZER=y
+ CONFIG_CGROUP_DEVICE=y
+-CONFIG_CPUSETS=y
+-CONFIG_PROC_PID_CPUSET=y
++# CONFIG_CPUSETS is not set
+ CONFIG_CGROUP_CPUACCT=y
+ CONFIG_RESOURCE_COUNTERS=y
+-CONFIG_CGROUP_MEM_RES_CTLR=y
+-CONFIG_CGROUP_MEM_RES_CTLR_SWAP=y
+-CONFIG_CGROUP_MEM_RES_CTLR_SWAP_ENABLED=y
+-CONFIG_CGROUP_PERF=y
++# CONFIG_CGROUP_MEM_RES_CTLR is not set
++# CONFIG_CGROUP_PERF is not set
+ CONFIG_CGROUP_SCHED=y
+ CONFIG_FAIR_GROUP_SCHED=y
+ CONFIG_CFS_BANDWIDTH=y
+ CONFIG_RT_GROUP_SCHED=y
+-CONFIG_BLK_CGROUP=y
+-# CONFIG_DEBUG_BLK_CGROUP is not set
++# CONFIG_BLK_CGROUP is not set
+ CONFIG_NAMESPACES=y
+ CONFIG_UTS_NS=y
+ CONFIG_IPC_NS=y
+@@ -106,7 +102,6 @@ CONFIG_USER_NS=y
+ CONFIG_PID_NS=y
+ CONFIG_NET_NS=y
+ CONFIG_SCHED_AUTOGROUP=y
+-CONFIG_MM_OWNER=y
+ # CONFIG_SYSFS_DEPRECATED is not set
+ CONFIG_RELAY=y
+ CONFIG_BLK_DEV_INITRD=y
+@@ -182,7 +177,6 @@ CONFIG_LBDAF=y
+ CONFIG_BLK_DEV_BSG=y
+ # CONFIG_BLK_DEV_BSGLIB is not set
+ CONFIG_BLK_DEV_INTEGRITY=y
+-CONFIG_BLK_DEV_THROTTLING=y
  
- KERNEL_IMAGETYPE = "uImage"
+ #
+ # IO Schedulers
+@@ -190,7 +184,6 @@ CONFIG_BLK_DEV_THROTTLING=y
+ CONFIG_IOSCHED_NOOP=y
+ CONFIG_IOSCHED_DEADLINE=y
+ CONFIG_IOSCHED_CFQ=y
+-CONFIG_CFQ_GROUP_IOSCHED=y
+ # CONFIG_DEFAULT_DEADLINE is not set
+ CONFIG_DEFAULT_CFQ=y
+ # CONFIG_DEFAULT_NOOP is not set
+@@ -446,7 +439,6 @@ CONFIG_DEFAULT_MMAP_MIN_ADDR=4096
+ CONFIG_NEED_PER_CPU_KM=y
+ # CONFIG_CLEANCACHE is not set
+ CONFIG_FORCE_MAX_ZONEORDER=11
+-# CONFIG_LEDS is not set
+ CONFIG_ALIGNMENT_TRAP=y
+ # CONFIG_UACCESS_WITH_MEMCPY is not set
+ # CONFIG_SECCOMP is not set
+@@ -480,9 +472,9 @@ CONFIG_CPU_FREQ=y
+ CONFIG_CPU_FREQ_TABLE=y
+ CONFIG_CPU_FREQ_STAT=y
+ CONFIG_CPU_FREQ_STAT_DETAILS=y
+-# CONFIG_CPU_FREQ_DEFAULT_GOV_PERFORMANCE is not set
++CONFIG_CPU_FREQ_DEFAULT_GOV_PERFORMANCE=y
+ # CONFIG_CPU_FREQ_DEFAULT_GOV_POWERSAVE is not set
+-CONFIG_CPU_FREQ_DEFAULT_GOV_USERSPACE=y
++# CONFIG_CPU_FREQ_DEFAULT_GOV_USERSPACE is not set
+ # CONFIG_CPU_FREQ_DEFAULT_GOV_ONDEMAND is not set
+ # CONFIG_CPU_FREQ_DEFAULT_GOV_CONSERVATIVE is not set
+ CONFIG_CPU_FREQ_GOV_PERFORMANCE=y
+@@ -1532,6 +1524,7 @@ CONFIG_PRINTER=m
+ CONFIG_HW_RANDOM=y
+ # CONFIG_HW_RANDOM_TIMERIOMEM is not set
+ # CONFIG_HW_RANDOM_VIRTIO is not set
++# CONFIG_NVRAM is not set
+ # CONFIG_R3964 is not set
+ CONFIG_RAW_DRIVER=m
+ CONFIG_MAX_RAW_DEVS=256
+@@ -2431,6 +2424,7 @@ CONFIG_BACKLIGHT_PWM=y
+ # CONFIG_BACKLIGHT_ADP8860 is not set
+ # CONFIG_BACKLIGHT_ADP8870 is not set
+ # CONFIG_BACKLIGHT_TLC59108 is not set
++CONFIG_BACKLIGHT_TPS65217=y
  
-diff --git a/recipes-kernel/linux/linux-mainline_3.2.bb b/recipes-kernel/linux/linux-mainline_3.2.bb
-index 69344ff..bc0a145 100644
---- a/recipes-kernel/linux/linux-mainline_3.2.bb
-+++ b/recipes-kernel/linux/linux-mainline_3.2.bb
-@@ -5,12 +5,12 @@ KERNEL_IMAGETYPE = "uImage"
+ #
+ # Display device support
+@@ -2868,6 +2862,7 @@ CONFIG_LEDS_TRIGGERS=y
+ CONFIG_LEDS_TRIGGER_TIMER=y
+ CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+ CONFIG_LEDS_TRIGGER_BACKLIGHT=y
++# CONFIG_LEDS_TRIGGER_CPU is not set
+ CONFIG_LEDS_TRIGGER_GPIO=y
+ CONFIG_LEDS_TRIGGER_DEFAULT_ON=y
  
- COMPATIBLE_MACHINE = "(beagleboard)"
+@@ -2893,56 +2888,57 @@ CONFIG_RTC_INTF_DEV=y
+ #
+ # I2C RTC drivers
+ #
+-# CONFIG_RTC_DRV_DS1307 is not set
+-# CONFIG_RTC_DRV_DS1374 is not set
+-# CONFIG_RTC_DRV_DS1672 is not set
+-# CONFIG_RTC_DRV_DS3232 is not set
+-# CONFIG_RTC_DRV_MAX6900 is not set
+-# CONFIG_RTC_DRV_RS5C372 is not set
+-# CONFIG_RTC_DRV_ISL1208 is not set
+-# CONFIG_RTC_DRV_ISL12022 is not set
+-# CONFIG_RTC_DRV_X1205 is not set
+-# CONFIG_RTC_DRV_PCF8563 is not set
+-# CONFIG_RTC_DRV_PCF8583 is not set
+-# CONFIG_RTC_DRV_M41T80 is not set
+-# CONFIG_RTC_DRV_BQ32K is not set
+-CONFIG_RTC_DRV_TWL4030=y
+-# CONFIG_RTC_DRV_S35390A is not set
+-# CONFIG_RTC_DRV_FM3130 is not set
+-# CONFIG_RTC_DRV_RX8581 is not set
+-# CONFIG_RTC_DRV_RX8025 is not set
+-# CONFIG_RTC_DRV_EM3027 is not set
+-# CONFIG_RTC_DRV_RV3029C2 is not set
++CONFIG_RTC_DRV_DS1307=m
++CONFIG_RTC_DRV_DS1374=m
++CONFIG_RTC_DRV_DS1672=m
++CONFIG_RTC_DRV_DS3232=m
++CONFIG_RTC_DRV_MAX6900=m
++CONFIG_RTC_DRV_RS5C372=m
++CONFIG_RTC_DRV_ISL1208=m
++CONFIG_RTC_DRV_ISL12022=m
++CONFIG_RTC_DRV_X1205=m
++CONFIG_RTC_DRV_PCF8563=m
++CONFIG_RTC_DRV_PCF8583=m
++CONFIG_RTC_DRV_M41T80=m
++CONFIG_RTC_DRV_M41T80_WDT=y
++CONFIG_RTC_DRV_BQ32K=m
++CONFIG_RTC_DRV_TWL4030=m
++CONFIG_RTC_DRV_S35390A=m
++CONFIG_RTC_DRV_FM3130=m
++CONFIG_RTC_DRV_RX8581=m
++CONFIG_RTC_DRV_RX8025=m
++CONFIG_RTC_DRV_EM3027=m
++CONFIG_RTC_DRV_RV3029C2=m
  
--PV = "3.2.18"
--# v3.2.18 tag
--SRCREV_pn-${PN} = "52c6b95f8a2edaff98b779f15b2f4d69b61b18b9"
-+PV = "3.2.28"
-+# v3.2.28 tag
-+SRCREV_pn-${PN} = "1f873aca1c7aa7a574b276c040d304d16f1dbfa4"
+ #
+ # SPI RTC drivers
+ #
+-# CONFIG_RTC_DRV_M41T93 is not set
+-# CONFIG_RTC_DRV_M41T94 is not set
+-# CONFIG_RTC_DRV_DS1305 is not set
+-# CONFIG_RTC_DRV_DS1390 is not set
+-# CONFIG_RTC_DRV_MAX6902 is not set
+-# CONFIG_RTC_DRV_R9701 is not set
+-# CONFIG_RTC_DRV_RS5C348 is not set
+-# CONFIG_RTC_DRV_DS3234 is not set
+-# CONFIG_RTC_DRV_PCF2123 is not set
++CONFIG_RTC_DRV_M41T93=m
++CONFIG_RTC_DRV_M41T94=m
++CONFIG_RTC_DRV_DS1305=m
++CONFIG_RTC_DRV_DS1390=m
++CONFIG_RTC_DRV_MAX6902=m
++CONFIG_RTC_DRV_R9701=m
++CONFIG_RTC_DRV_RS5C348=m
++CONFIG_RTC_DRV_DS3234=m
++CONFIG_RTC_DRV_PCF2123=m
  
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "a"
+ #
+ # Platform RTC drivers
+ #
+-# CONFIG_RTC_DRV_CMOS is not set
+-# CONFIG_RTC_DRV_DS1286 is not set
+-# CONFIG_RTC_DRV_DS1511 is not set
+-# CONFIG_RTC_DRV_DS1553 is not set
+-# CONFIG_RTC_DRV_DS1742 is not set
+-# CONFIG_RTC_DRV_STK17TA8 is not set
+-# CONFIG_RTC_DRV_M48T86 is not set
+-# CONFIG_RTC_DRV_M48T35 is not set
+-# CONFIG_RTC_DRV_M48T59 is not set
+-# CONFIG_RTC_DRV_MSM6242 is not set
+-# CONFIG_RTC_DRV_BQ4802 is not set
+-# CONFIG_RTC_DRV_RP5C01 is not set
+-# CONFIG_RTC_DRV_V3020 is not set
++CONFIG_RTC_DRV_CMOS=m
++CONFIG_RTC_DRV_DS1286=m
++CONFIG_RTC_DRV_DS1511=m
++CONFIG_RTC_DRV_DS1553=m
++CONFIG_RTC_DRV_DS1742=m
++CONFIG_RTC_DRV_STK17TA8=m
++CONFIG_RTC_DRV_M48T86=m
++CONFIG_RTC_DRV_M48T35=m
++CONFIG_RTC_DRV_M48T59=m
++CONFIG_RTC_DRV_MSM6242=m
++CONFIG_RTC_DRV_BQ4802=m
++CONFIG_RTC_DRV_RP5C01=m
++CONFIG_RTC_DRV_V3020=m
  
- FILESPATH =. "${FILE_DIRNAME}/linux-mainline-3.2:${FILE_DIRNAME}/linux-mainline-3.2/${MACHINE}:"
+ #
+ # on-CPU RTC drivers
+@@ -2963,11 +2959,14 @@ CONFIG_VIRTIO_RING=m
+ # CONFIG_VIRTIO_BALLOON is not set
+ CONFIG_VIRTIO_MMIO=m
+ CONFIG_STAGING=y
+-# CONFIG_USBIP_CORE is not set
++CONFIG_USBIP_CORE=m
++CONFIG_USBIP_VHCI_HCD=m
++CONFIG_USBIP_HOST=m
++# CONFIG_USBIP_DEBUG is not set
+ CONFIG_W35UND=m
+ CONFIG_PRISM2_USB=m
+ # CONFIG_ECHO is not set
+-# CONFIG_ASUS_OLED is not set
++CONFIG_ASUS_OLED=m
+ # CONFIG_PANEL is not set
+ CONFIG_R8712U=m
+ CONFIG_RTS5139=m
+@@ -3109,8 +3108,9 @@ CONFIG_IIO_DUMMY_EVGEN=m
+ CONFIG_IIO_SIMPLE_DUMMY=m
+ CONFIG_IIO_SIMPLE_DUMMY_EVENTS=y
+ CONFIG_IIO_SIMPLE_DUMMY_BUFFER=y
+-# CONFIG_XVMALLOC is not set
+-# CONFIG_ZRAM is not set
++CONFIG_XVMALLOC=y
++CONFIG_ZRAM=m
++# CONFIG_ZRAM_DEBUG is not set
+ # CONFIG_FB_SM7XX is not set
+ # CONFIG_TIDSPBRIDGE is not set
+ CONFIG_USB_ENESTORAGE=m
+@@ -3122,7 +3122,7 @@ CONFIG_USB_ENESTORAGE=m
+ #
+ # CONFIG_SPEAKUP is not set
+ # CONFIG_TOUCHSCREEN_CLEARPAD_TM1217 is not set
+-# CONFIG_TOUCHSCREEN_SYNAPTICS_I2C_RMI4 is not set
++CONFIG_TOUCHSCREEN_SYNAPTICS_I2C_RMI4=m
+ CONFIG_STAGING_MEDIA=y
+ CONFIG_DVB_AS102=m
+ CONFIG_EASYCAP=m
+@@ -3564,9 +3564,9 @@ CONFIG_CRYPTO_SHA1=m
+ #
+ # Ciphers
+ #
+-CONFIG_CRYPTO_AES=m
++CONFIG_CRYPTO_AES=y
+ # CONFIG_CRYPTO_ANUBIS is not set
+-CONFIG_CRYPTO_ARC4=m
++CONFIG_CRYPTO_ARC4=y
+ # CONFIG_CRYPTO_BLOWFISH is not set
+ # CONFIG_CRYPTO_CAMELLIA is not set
+ # CONFIG_CRYPTO_CAST5 is not set
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index 2bc6081..4200d03 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -15,7 +15,7 @@ PV = "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "3.2", "3.2.28", d)}"
+ 
+ BRANCH = "v3.2-staging"
+ SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
+-MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
++MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
+ 
+ COMPATIBLE_MACHINE = "(ti33x)"
  
 -- 
 1.7.10
