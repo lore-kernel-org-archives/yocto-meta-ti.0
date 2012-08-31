@@ -1,31 +1,32 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6926CE002AC
-	for <meta-ti@yoctoproject.org>; Thu, 30 Aug 2012 14:15:40 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q7ULFbnn016489;
-	Thu, 30 Aug 2012 16:15:37 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q7ULFb7e019089;
-	Thu, 30 Aug 2012 16:15:37 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.1.323.3;
-	Thu, 30 Aug 2012 16:15:37 -0500
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id q7ULFbHw008147;
-	Thu, 30 Aug 2012 16:15:37 -0500
-Date: Thu, 30 Aug 2012 17:15:37 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Tomas Frydrych <tf+lists.yocto@r-finger.com>
-Message-ID: <20120830211536.GA20931@edge>
-References: <CALjj03Wphx5VuPkPxhYXsPJL9Pu-UsuFaCfxO17LVwTm-qO+mQ@mail.gmail.com>
-	<20120830174807.GB26145@edge> <503FC4F8.9020509@r-finger.com>
-	<20120830200833.GE26145@edge> <503FD378.9020003@r-finger.com>
-MIME-Version: 1.0
-In-Reply-To: <503FD378.9020003@r-finger.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Building a core-image-base
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6790CE0044A
+	for <meta-ti@yoctoproject.org>; Fri, 31 Aug 2012 00:19:40 -0700 (PDT)
+Received: by eekd41 with SMTP id d41so1133673eek.35
+	for <meta-ti@yoctoproject.org>; Fri, 31 Aug 2012 00:19:39 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
+	bh=ZfxQH3DP5CZH0ncBT9/XOTVGhy3iMevxV7DSRzILYoI=;
+	b=C3FMnA2lv7UgwYRY0SAZ+Tv1Lhvo1u129NtJJHZJaeawtlmFNkrk4C3mPEFAlLLkMC
+	YbBKNedr1BWAOLS78afyKBzwiTs/V4QaToPH2RODgz1d7dR6Vy+ftVtoYL/NEXODWgPF
+	ufQsB5FTZh6OlZn9F1R6ZoXyTNyCFkNlyWMnjETohnVb0GgdbOw/OiEn96Kzv6gvNT/z
+	/+sc4w1E//cSHY0f1vRa+RbAcJ20kO149JIerpaEetJpuuhweuoTp+zMwzTUDJqY1g8t
+	WkBDVhnay5zbuK42rtIj1zVADr6WNVLPHKc9gZt/zgMfhqLbIgD3iquYqxzFzcknnRyL
+	mlMA==
+Received: by 10.14.181.132 with SMTP id l4mr9800392eem.17.1346397578914;
+	Fri, 31 Aug 2012 00:19:38 -0700 (PDT)
+Received: from localhost (cl-267.ams-05.nl.sixxs.net. [2001:610:600:10a::2])
+	by mx.google.com with ESMTPS id u8sm10883222eel.11.2012.08.31.00.19.36
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 31 Aug 2012 00:19:37 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: meta-ti@yoctoproject.org
+Date: Fri, 31 Aug 2012 09:19:26 +0200
+Message-Id: <1346397567-21825-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+X-Gm-Message-State: ALoCoQlPKK9X77x1205rcnDpwNIw3EZidRNNEwvtZVqO7QluKdpF56A35Y4i+wbxpjc6DAQCrFz7
+Subject: [PATCH 1/2] beaglebone-tester: ship testaudio, fix depends
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,43 +39,52 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Aug 2012 21:15:40 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 31 Aug 2012 07:19:40 -0000
 
-On Thu, Aug 30, 2012 at 09:56:24PM +0100, Tomas Frydrych wrote:
-> Hi,
-> 
-> On 30/08/12 21:08, Denys Dmytriyenko wrote:
-> > For our TI SDK products and the new Arago "distribution", we are using said 
-> > "denzil" branch of meta-ti. 
-> 
-> Having a branch is great, but 'branch' and 'release' are very different
-> things; branch is a moving target, a release is a fixed point in time
-> that was tested and approved, and consequently one can have a reasonable
-> expectation (dare I say, a guarantee?), that it works. The current
-> denzil release is 7.0.1; there isn't a meta-ti commit that works with
-> this without jumping through hoops, is there? I think a BSP layer really
-> needs to have formal releases.
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ recipes-ti/beagleboard/beaglebone-tester.bb |   10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-There was a tag applied at the time of the Yocto Project release:
-
-v2012.05-yocto1.2
-
-[BTW, I'm not sure what 7.0.1 is - is it Poky versioning?]
-
-That said, meta-ti was not ready to have a formal release at the time. 
-Moreover, testing with Yocto/Poky release was not done - it was meant to be 
-used with oe-core and possibly meta-oe and be Yocto-compatible. This may sound 
-confusing, but since there's no better terminology available, that would do. 
-
-Hopefully, by the next Yocto Project 1.3 release, we'll do better testing with 
-just Yocto/Poky, but right now my focus is on bringing up the new Arago 
-distro for our SDKs, while Koen is mostly interested in Angstrom. I do 
-understand that we are getting more and more newcomers from a pure Yocto/Poky 
-environment and making sure we have a smooth experience for them with meta-ti 
-is important, but it will take some time...
-
+diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
+index 82c5a83..138fbc6 100644
+--- a/recipes-ti/beagleboard/beaglebone-tester.bb
++++ b/recipes-ti/beagleboard/beaglebone-tester.bb
+@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
+ # only scripts and data
+ inherit allarch
+ 
+-PR = "r17"
++PR = "r18"
+ 
+ SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
+           "
+-SRCREV = "c748d157b9afbb71e6eadf1dca7a787a456c0149"
++SRCREV = "168a9604e170931d9de228f0d774f4fbda58aa37"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -37,6 +37,10 @@ do_install() {
+ 	for i in ${S}/bone-tester/lib/* ; do
+ 		install -m 0755 ${i} ${D}${localstatedir}/lib/bone-tester/lib/
+ 	done
++
++	install -d ${D}${bindir}
++	install -m 0755 ${S}/testaudio ${D}${bindir}
++
+ }
+ 
+ 
+@@ -44,7 +48,7 @@ FILES_${PN} += "${base_libdir}/systemd \
+                 /boot \
+                "
+ 
+-RDEPENDS_${PN} = "iputils memtester"
++RDEPENDS_${PN} = "alsa-utils-aplay sox iputils memtester"
+ RRECOMMENDS_${PN} = "kernel-module-g-zero \
+                      kernel-module-g-mass-storage \
+                      kernel-module-g-file-storage \
 -- 
-Denys
+1.7.10
+
 
