@@ -1,33 +1,31 @@
 Return-Path: <fcooperjr27@gmail.com>
 Received: from mail-ob0-f176.google.com (mail-ob0-f176.google.com
 	[209.85.214.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3226AE002A5
-	for <meta-ti@yoctoproject.org>; Fri, 31 Aug 2012 14:54:39 -0700 (PDT)
-Received: by obbtb18 with SMTP id tb18so8256540obb.35
-	for <meta-ti@yoctoproject.org>; Fri, 31 Aug 2012 14:54:38 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3AEF9E00283
+	for <meta-ti@yoctoproject.org>; Fri, 31 Aug 2012 16:04:27 -0700 (PDT)
+Received: by obbtb18 with SMTP id tb18so8366432obb.35
+	for <meta-ti@yoctoproject.org>; Fri, 31 Aug 2012 16:04:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=R3XE89sOqjmwnjhoobqXnB8W2G3SREDCLSxAT7GCo6Q=;
-	b=P5j0uBUIWCo6ajiez9KtxX82DnH1mv/IK9c9LqnohGFuCJQKLy6RM3Bm+vWIf36lhk
-	J26pzV/Ev54/xytD5xJDe9CepVZ+L1MnITVEuc3y50bY0D1jKh5sUz1U/p4SgZ2E2gy7
-	ZeWz7GbdkNepyECmLZAjB5O/vkBtrLAwERHLHA6RMtwjsfffHEc+6/h3FTQ/NxIZoYWS
-	yJ4LaQzztDRF4iZPSnWrht+E9pJohl3WBc2gmAWPZk+j08F04bDT6U2uSTcUIFULMn8X
-	TGmoAWOgV4zIGsaf7IeXRSyVSZHhU65SMq4oUSakYSlPeaMGZo5GV6DOI+VpFA57g4mV
-	Qg/A==
-Received: by 10.182.111.74 with SMTP id ig10mr9378910obb.14.1346450078778;
-	Fri, 31 Aug 2012 14:54:38 -0700 (PDT)
-Received: from ubuntu.am.dhcp.ti.com (dragon.ti.com. [192.94.94.33])
-	by mx.google.com with ESMTPS id l10sm3789512oeb.13.2012.08.31.14.54.38
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=PWkI+CPGh2Np2LfcH7TKdTtCLqyqqFr7gGmZm+yns4M=;
+	b=Ry7i5jZ9Hcnsf92Qx1VyANIb6JUkThkB9RTQjvGvKibEnN1aKh1RWjOB0HNq2x5OPW
+	N7V9qB7/2upqyLvZJBY/RvTAacwxY2ppBq9UiZoVW8YEC5Y5JpyR88t8+FCxp2HJvx2U
+	GVA2QE+feTfpjFT39ny4cpK21NeRQUtjyZjBEQdXk73+qWT3WJKYDODyyqx+kJRn/hN9
+	eyRO+w9HdZLh2B4kiUpQ0VEVPcg04G+As84MNtlGyXxYmtVFnTsGlMYArvVYXpVkOl+P
+	pRGBQGW9tbahokQ495XWqGil7AQi083B1MbW5xyc3XaGEV2tB6mwW5TauK7U1YXnGikN
+	kJpA==
+Received: by 10.182.51.65 with SMTP id i1mr9221717obo.45.1346454266602;
+	Fri, 31 Aug 2012 16:04:26 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
+	by mx.google.com with ESMTPS id x10sm3916724oeb.8.2012.08.31.16.04.25
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 31 Aug 2012 14:54:38 -0700 (PDT)
-From: fcooperjr27@gmail.com
+	Fri, 31 Aug 2012 16:04:26 -0700 (PDT)
+From: "Franklin S. Cooper Jr" <fcooperjr27@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Fri, 31 Aug 2012 16:54:21 -0500
-Message-Id: <1346450061-6913-2-git-send-email-fcooperjr27@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1346450061-6913-1-git-send-email-fcooperjr27@gmail.com>
-References: <1346450061-6913-1-git-send-email-fcooperjr27@gmail.com>
-Subject: [master][PATCH v3] netbase: Update interfaces files
+Date: Fri, 31 Aug 2012 18:19:57 -0500
+Message-Id: <1346455197-18722-1-git-send-email-fcooper27jr@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] libgles-omap3.inc: Tweak PLATFORM variable.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,116 +38,111 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Aug 2012 21:54:39 -0000
+X-List-Received-Date: Fri, 31 Aug 2012 23:04:27 -0000
 
-From: Franklin S Cooper Jr <fcooper@ti.com>
+From: Franklin S. Cooper Jr <fcooper@ti.com>
 
-* Update interfaces files based on changes made to the interfaces file
-  in arago
+* Newer versions of libgles-omap3 utilize a different PLATFORM value. This
+  patch allows the PLATFORM variable to be easily overridden if needed.
+* Replace the hardcoded usage of LinuxOMAP3 with the PLATFORM variable.
 
-Signed-off-by: Franklin S Cooper Jr <fcooper@ti.com>
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 ---
- recipes-core/netbase/netbase-5.0/omap3/interfaces  |   12 +++++++-----
- .../netbase/netbase-5.0/omapl138/interfaces        |   12 +++++++-----
- recipes-core/netbase/netbase-5.0/ti33x/interfaces  |   12 +++++++-----
- 3 files changed, 21 insertions(+), 15 deletions(-)
+ recipes-graphics/libgles/libgles-omap3.inc |   41 ++++++++++++++-------------
+ 1 files changed, 21 insertions(+), 20 deletions(-)
 
-diff --git a/recipes-core/netbase/netbase-5.0/omap3/interfaces b/recipes-core/netbase/netbase-5.0/omap3/interfaces
-index 0acf4cf..15bc31c 100644
---- a/recipes-core/netbase/netbase-5.0/omap3/interfaces
-+++ b/recipes-core/netbase/netbase-5.0/omap3/interfaces
-@@ -11,20 +11,22 @@ iface wlan0 inet dhcp
- 	wpa-driver wext
- 	wpa-conf /etc/wpa_supplicant.conf
+diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
+index 6137097..18ee7ff 100644
+--- a/recipes-graphics/libgles/libgles-omap3.inc
++++ b/recipes-graphics/libgles/libgles-omap3.inc
+@@ -61,10 +61,11 @@ TARGET_CC_ARCH += " ${TARGET_LINK_HASH_STYLE} -Wl,-rpath-link,${BINLOCATION} -L$
+ -L${STAGING_DIR_TARGET}${libdir} -Wl,-rpath-link,${STAGING_DIR_TARGET}${libdir}"
+ PARALLEL_MAKE = ""
  
-+iface tiwlan0 inet dhcp
-+	wireless_mode managed
-+	wireless_essid any
++PLATFORM ?= "LinuxOMAP3"
 +
- iface atml0 inet dhcp
+ do_compile() {
+ 	export X11ROOT="${STAGING_DIR_HOST}/usr"
+ 	export TOOLCHAIN="${TOOLCHAIN_PATH}"
+-	export PLATFORM="LinuxOMAP3"
  
- # Wired or wireless interfaces
- auto eth0
- iface eth0 inet dhcp
-+        pre-up /bin/grep -v -e "ip=[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+" /proc/cmdline > /dev/null
-+
- iface eth1 inet dhcp
+ 	export PLAT_CC="${CC}"
+ 	export PLAT_CPP="${CXX}"
+@@ -77,23 +78,23 @@ do_compile() {
+ 	for X11BUILD in 0 1 ; do
+ 		for demo in ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Demos/* ; do
+ 			cd $demo/OGLES/Build/LinuxGeneric
+-			oe_runmake Common=1 PLATFORM=$PLATFORM X11BUILD=$X11BUILD  
+-			rm $demo/OGLES/Build/LinuxOMAP3/Release*/*.o
+-			install -m 0755 $demo/OGLES/Build/LinuxOMAP3/ReleaseX11/* ${S}/demos/x11 || true
++			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
++			rm $demo/OGLES/Build/${PLATFORM}/Release*/*.o
++			install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
+ 			sed -e s:NAME:$(basename $demo): \
+-			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES/Build/LinuxOMAP3/ReleaseX11/*): \
++			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES/Build/${PLATFORM}/ReleaseX11/*): \
+ 			     ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
+-			install -m 0755 $demo/OGLES/Build/LinuxOMAP3/ReleaseRaw/* ${S}/demos/raw || true	
++			install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
+ 		done
+ 		for demo in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Demos/* ; do
+ 			cd $demo/OGLES2/Build/LinuxGeneric
+-			oe_runmake Common=1 PLATFORM=$PLATFORM X11BUILD=$X11BUILD  
+-			rm -f $demo/OGLES2/Build/LinuxOMAP3/Release*/*.o
+-			install -m 0755 $demo/OGLES2/Build/LinuxOMAP3/ReleaseX11/* ${S}/demos/x11 || true
++			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
++			rm -f $demo/OGLES2/Build/${PLATFORM}/Release*/*.o
++			install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
+ 			sed -e s:NAME:$(basename $demo): \
+-			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES2/Build/LinuxOMAP3/ReleaseX11/*): \
++			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/*): \
+ 			     ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
+-			install -m 0755 $demo/OGLES2/Build/LinuxOMAP3/ReleaseRaw/* ${S}/demos/raw || true	
++			install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
+ 		done
+ 	done
  
- # Ethernet/RNDIS gadget (g_ether)
- # ... or on host side, usbnet and random hwaddr
--iface usb0 inet static
--	address 192.168.7.2
--	netmask 255.255.255.0
--	network 192.168.7.0
--	gateway 192.168.7.1
-+iface usb0 inet dhcp
+@@ -109,14 +110,14 @@ do_compile() {
+ 				cd $training/OGLES2/Build/LinuxGeneric
+ 			fi
  
- # Bluetooth networking
- iface bnep0 inet dhcp
-diff --git a/recipes-core/netbase/netbase-5.0/omapl138/interfaces b/recipes-core/netbase/netbase-5.0/omapl138/interfaces
-index 0acf4cf..15bc31c 100644
---- a/recipes-core/netbase/netbase-5.0/omapl138/interfaces
-+++ b/recipes-core/netbase/netbase-5.0/omapl138/interfaces
-@@ -11,20 +11,22 @@ iface wlan0 inet dhcp
- 	wpa-driver wext
- 	wpa-conf /etc/wpa_supplicant.conf
+-			if [ -e $training/OGLES2/Build/LinuxOMAP3/Makefile ] ; then
+-				cd $training/OGLES2/Build/LinuxOMAP3
++			if [ -e $training/OGLES2/Build/${PLATFORM}/Makefile ] ; then
++				cd $training/OGLES2/Build/${PLATFORM}
+ 			fi			
  
-+iface tiwlan0 inet dhcp
-+	wireless_mode managed
-+	wireless_essid any
-+
- iface atml0 inet dhcp
+-			oe_runmake Common=1 PLATFORM=$PLATFORM X11BUILD=$X11BUILD  
+-			rm -f $training/OGLES2/Build/LinuxOMAP3/Release*/*.o
+-			install -m 0755 $training/OGLES2/Build/LinuxOMAP3/ReleaseX11/* ${S}/trainingcourses/x11 || true
+-			install -m 0755 $training/OGLES2/Build/LinuxOMAP3/ReleaseRaw/* ${S}/trainingcourses/raw || true	
++			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
++			rm -f $training/OGLES2/Build/${PLATFORM}/Release*/*.o
++			install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/trainingcourses/x11 || true
++			install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/trainingcourses/raw || true
+ 		done
+ 	done
  
- # Wired or wireless interfaces
- auto eth0
- iface eth0 inet dhcp
-+        pre-up /bin/grep -v -e "ip=[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+" /proc/cmdline > /dev/null
-+
- iface eth1 inet dhcp
+@@ -137,7 +138,7 @@ do_install () {
+ 	install -m 0755 ${BINLOCATION}/xgles1test1 ${D}${bindir}/
  
- # Ethernet/RNDIS gadget (g_ether)
- # ... or on host side, usbnet and random hwaddr
--iface usb0 inet static
--	address 192.168.7.2
--	netmask 255.255.255.0
--	network 192.168.7.0
--	gateway 192.168.7.1
-+iface usb0 inet dhcp
+ 	install -m 0755 ${BINLOCATION}/freedesktop/kdrive/usr/X11R6_SGX/bin/Xsgx ${D}${bindir}/|| true
+-	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/LinuxOMAP3/lib/*X11WS* ${D}${libdir} || true
++	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/lib/*X11WS* ${D}${libdir} || true
  
- # Bluetooth networking
- iface bnep0 inet dhcp
-diff --git a/recipes-core/netbase/netbase-5.0/ti33x/interfaces b/recipes-core/netbase/netbase-5.0/ti33x/interfaces
-index 0acf4cf..15bc31c 100644
---- a/recipes-core/netbase/netbase-5.0/ti33x/interfaces
-+++ b/recipes-core/netbase/netbase-5.0/ti33x/interfaces
-@@ -11,20 +11,22 @@ iface wlan0 inet dhcp
- 	wpa-driver wext
- 	wpa-conf /etc/wpa_supplicant.conf
+ 	install -d ${D}${includedir}
+ 	cp -pPR ${S}/GFX_Linux_KM/include4 ${D}${includedir}/
+@@ -145,8 +146,8 @@ do_install () {
  
-+iface tiwlan0 inet dhcp
-+	wireless_mode managed
-+	wireless_essid any
-+
- iface atml0 inet dhcp
- 
- # Wired or wireless interfaces
- auto eth0
- iface eth0 inet dhcp
-+        pre-up /bin/grep -v -e "ip=[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+" /proc/cmdline > /dev/null
-+
- iface eth1 inet dhcp
- 
- # Ethernet/RNDIS gadget (g_ether)
- # ... or on host side, usbnet and random hwaddr
--iface usb0 inet static
--	address 192.168.7.2
--	netmask 255.255.255.0
--	network 192.168.7.0
--	gateway 192.168.7.1
-+iface usb0 inet dhcp
- 
- # Bluetooth networking
- iface bnep0 inet dhcp
+ 	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/Include/* ${D}${includedir}/
+ 	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/* ${D}${includedir}/
+-	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/LinuxOMAP3/Include/GLES/* ${D}${includedir}/GLES/ || true
+-	cp -pPr ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/LinuxOMAP3/Include/GLES/* ${D}${includedir}/GLES2/ || true
++	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES/ || true
++	cp -pPr ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES2/ || true
+ 	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/v* ${D}${includedir}/ || true
+ 	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/V* ${D}${includedir}/ || true
+ 	cp -pPr ${S}/include/*.h ${D}${includedir} || true
 -- 
 1.7.0.4
 
