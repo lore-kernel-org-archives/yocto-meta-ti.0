@@ -1,29 +1,24 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70D30E00533
-	for <meta-ti@yoctoproject.org>; Sat,  1 Sep 2012 14:33:25 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q81LXOk0014538
-	for <meta-ti@yoctoproject.org>; Sat, 1 Sep 2012 16:33:24 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q81LXOri000776
-	for <meta-ti@yoctoproject.org>; Sat, 1 Sep 2012 16:33:24 -0500
-Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
-	DFLE73.ent.ti.com ([fe80::86e:fab6:cd95:e158%28]) with mapi id
-	14.01.0323.003; Sat, 1 Sep 2012 16:33:24 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Cooper Jr., Franklin" <fcooper@ti.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] Fix image recipes in meta-ti
-Thread-Index: AQHNiIlqwFKpIXcwBU2JhvnT55RIdQ==
-Date: Sat, 1 Sep 2012 21:33:24 +0000
-Message-ID: <07A98304-6F3A-424E-820E-FCAC8B3C0039@ti.com>
+Return-Path: <denis@denix.org>
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2A4EE00533
+	for <meta-ti@yoctoproject.org>; Sat,  1 Sep 2012 15:48:24 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [72.66.25.115])
+	by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0M9P007720NQVX60@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Sat, 01 Sep 2012 17:48:06 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id B092F201AF; Sat,
+	01 Sep 2012 18:47:50 -0400 (EDT)
+Date: Sat, 01 Sep 2012 18:47:50 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: "Cooper Jr., Franklin" <fcooper@ti.com>
+Message-id: <20120901224750.GD11821@denix.org>
 References: <8F29D6B095ED194EA1980491A5E029710C2B2B46@DFLE09.ent.ti.com>
-In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C2B2B46@DFLE09.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-MIME-Version: 1.0
+MIME-version: 1.0
+In-reply-to: <8F29D6B095ED194EA1980491A5E029710C2B2B46@DFLE09.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: Fix image recipes in meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -37,154 +32,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Sep 2012 21:33:25 -0000
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_07A983046F3A424E820EFCAC8B3C0039ticom_"
+X-List-Received-Date: Sat, 01 Sep 2012 22:48:25 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
---_000_07A983046F3A424E820EFCAC8B3C0039ticom_
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+On Sat, Sep 01, 2012 at 09:07:31PM +0000, Cooper Jr., Franklin wrote:
+> When debugging issues in meta-arago I frequently try building recipes using  
+> the meta-ti,meta-oe and oe-core layers. However, I always have to remove the 
+> following recipes due to "This recipe does not have the LICENSE field set" 
+> error:
+> cloud9-gfx-image.bb
+> cloud9-gnome-image.bb
+> cloud9-image.bb
 
-Agreed for my two cents.
+FWIW, meta-arago explicitly masks those recipes, so you shouldn't be having 
+those errors or have to remove the recipes:
+http://arago-project.org/git/?p=meta-arago.git;a=blob;f=meta-arago-distro/conf/distro/arago.conf;hb=HEAD#l2
 
-Sent from my cell phone
-
------ Reply message -----
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-Date: Sat, Sep 1, 2012 4:07 pm
-Subject: [meta-ti] Fix image recipes in meta-ti
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-
-When debugging issues in meta-arago I frequently try building recipes using=
-  the meta-ti,meta-oe and oe-core layers. However, I always have to remove =
-the following recipes due to =93This recipe does not have the LICENSE field=
- set=94 error:
-cloud9-gfx-image.bb
-cloud9-gnome-image.bb
-cloud9-image.bb
-
-The issue is these recipes have an include from meta-angstrom that provides=
- this LICENSE field. Meta-ti should not have this dependency so these recip=
-es should be fixed to address this. I personally do not think cloud9 relate=
-d recipes that install  cloud9, nodejs, mplayer etc.. should even be in met=
-a-ti which is a BSP layer but that is a completely different discussion. I =
-also don=92t believe pulling in the include file that is needed from meta-a=
-ngstrom is also a reasonably solution. Either these recipes need to be fixe=
-d so that they can work in meta-ti with only a dependency on meta-oe and oe=
--core. Or remove the recipes from this layer and pull it into meta-angstrom=
- which I believe is the best option.
-Regards,
-Franklin Cooper Jr.
-Texas Instruments
-Application Engineer
-fcooper@ti.com<mailto:fcooper@ti.com>
+Also, it was discussed here just few days ago:
+https://lists.yoctoproject.org/pipermail/meta-ti/2012-August/001456.html
 
 
---_000_07A983046F3A424E820EFCAC8B3C0039ticom_
-Content-Type: text/html; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+> The issue is these recipes have an include from meta-angstrom that provides 
+> this LICENSE field. Meta-ti should not have this dependency so these recipes 
+> should be fixed to address this. I personally do not think cloud9 related 
+> recipes that install  cloud9, nodejs, mplayer etc.. should even be in 
+> meta-ti which is a BSP layer but that is a completely different discussion. 
+> I also don't believe pulling in the include file that is needed from 
+> meta-angstrom is also a reasonably solution. Either these recipes need to be 
+> fixed so that they can work in meta-ti with only a dependency on meta-oe and 
+> oe-core. Or remove the recipes from this layer and pull it into 
+> meta-angstrom which I believe is the best option.
 
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
-252">
-<style>
-<!--
-@font-face
-	{font-family:Calibri}
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif"}
-a:link, span.MsoHyperlink
-	{color:blue;
-	text-decoration:underline}
-a:visited, span.MsoHyperlinkFollowed
-	{color:purple;
-	text-decoration:underline}
-span.EmailStyle17
-	{font-family:"Calibri","sans-serif";
-	color:windowtext}
-.MsoChpDefault
-	{font-family:"Calibri","sans-serif"}
-@page WordSection1
-	{margin:1.0in 1.0in 1.0in 1.0in}
-div.WordSection1
-	{}
--->
-</style>
-</head>
-<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
-<style>
-<!--
-@font-face
-	{font-family:Calibri}
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif"}
-a:link, span.MsoHyperlink
-	{color:blue;
-	text-decoration:underline}
-a:visited, span.MsoHyperlinkFollowed
-	{color:purple;
-	text-decoration:underline}
-span.EmailStyle17
-	{font-family:"Calibri","sans-serif";
-	color:windowtext}
-.MsoChpDefault
-	{font-family:"Calibri","sans-serif"}
-@page WordSection1
-	{margin:1.0in 1.0in 1.0in 1.0in}
--->
-</style>Agreed
- for my two cents.<br>
-<br>
-Sent from my cell phone<br>
-<br>
-<div id=3D"htc_header" style=3D"">----- Reply message -----<br>
-From: &quot;Cooper Jr., Franklin&quot; &lt;fcooper@ti.com&gt;<br>
-Date: Sat, Sep 1, 2012 4:07 pm<br>
-Subject: [meta-ti] Fix image recipes in meta-ti<br>
-To: &quot;meta-ti@yoctoproject.org&quot; &lt;meta-ti@yoctoproject.org&gt;<b=
-r>
-<br>
-</div>
-<div>
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal">When debugging issues in meta-arago I frequently try=
- building recipes using&nbsp; the meta-ti,meta-oe and oe-core layers. Howev=
-er, I always have to remove the following recipes due to =93This recipe doe=
-s not have the LICENSE field set=94 error:</p>
-<p class=3D"MsoNormal">cloud9-gfx-image.bb</p>
-<p class=3D"MsoNormal">cloud9-gnome-image.bb</p>
-<p class=3D"MsoNormal">cloud9-image.bb</p>
-<p class=3D"MsoNormal">&nbsp;</p>
-<p class=3D"MsoNormal">The issue is these recipes have an include from meta=
--angstrom that provides this LICENSE field. Meta-ti should not have this de=
-pendency so these recipes should be fixed to address this. I personally do =
-not think cloud9 related recipes that
- install&nbsp; cloud9, nodejs, mplayer etc.. should even be in meta-ti whic=
-h is a BSP layer but that is a completely different discussion. I also don=
-=92t believe pulling in the include file that is needed from meta-angstrom =
-is also a reasonably solution. Either these
- recipes need to be fixed so that they can work in meta-ti with only a depe=
-ndency on meta-oe and oe-core. Or remove the recipes from this layer and pu=
-ll it into meta-angstrom which I believe is the best option.</p>
-<p class=3D"MsoNormal"></p>
-<p class=3D"MsoNormal">Regards,</p>
-<p class=3D"MsoNormal">Franklin Cooper Jr.</p>
-<p class=3D"MsoNormal">Texas Instruments</p>
-<p class=3D"MsoNormal">Application Engineer</p>
-<p class=3D"MsoNormal"><a href=3D"mailto:fcooper@ti.com">fcooper@ti.com</a>=
-</p>
-<p class=3D"MsoNormal">&nbsp;</p>
-</div>
-</div>
-</body>
-</html>
+So, what do you propose? ;) Or you just volunteering to be in the middle of 
+a flame war by raising this hard issue?
 
---_000_07A983046F3A424E820EFCAC8B3C0039ticom_--
+-- 
+Denys
+
