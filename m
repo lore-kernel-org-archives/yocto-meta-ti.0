@@ -1,34 +1,38 @@
 Return-Path: <koen@dominion.thruhere.net>
 Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
 	[209.85.212.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9FDE3E00283
-	for <meta-ti@yoctoproject.org>; Sat,  1 Sep 2012 04:50:44 -0700 (PDT)
-Received: by wibhn17 with SMTP id hn17so1998866wib.11
-	for <meta-ti@yoctoproject.org>; Sat, 01 Sep 2012 04:50:41 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ACB85E00283
+	for <meta-ti@yoctoproject.org>; Sat,  1 Sep 2012 06:11:45 -0700 (PDT)
+Received: by wibhn17 with SMTP id hn17so2033293wib.11
+	for <meta-ti@yoctoproject.org>; Sat, 01 Sep 2012 06:11:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=google.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer:x-gm-message-state;
-	bh=ApY++trkpu8txFc9x1Vj7aTAcma0xi8+oH6AxJnY+NY=;
-	b=CiBWnPkkkDtnXzdaaTEMWz6gy7tveSmSOZlVF5xztgYRoO9tFgjG1ZL2736iDNBhMJ
-	csJ9slzKJLCCFoZJk3bNfLkMu4glWQCQIMcfJp6mPREod1WsN0eX7ZUGTqI8xI7yft4/
-	8mO6QZjLpQnw9UwypJyP78WP3LP+hdaIQEpiJ5ZzOPmwfGskxb3kvWGTjiZDK1zVbDRL
-	LbnfscHmB8NvDLwVflGzL3YvPQXqhx4okfa5b9lb5KgQ44NuxdKoV1qqwZNgV0b9+w2S
-	RjMQxv2v/+BRx2sT2sIvaFyeQg0FEK1TQd8JIeMwt3/tMGdwASnUfxU1ghLudPscES5W
-	YGsA==
-Received: by 10.180.86.133 with SMTP id p5mr10799871wiz.17.1346500240771;
-	Sat, 01 Sep 2012 04:50:40 -0700 (PDT)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPS id q4sm6527622wix.9.2012.09.01.04.50.39
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=6RB3uqFHOf8Me664/pbYtRQ+xHmY14HqM/V5SDX4mAQ=;
+	b=fFgYBFni5t6+l0xhZ1YkwdAEvfmGRuLf37yCzJzmoGEoIcUzeX+neilpW1XGVx2gM7
+	EH1CGn2Fnb0hdKOtrlqDEI2dDe2ScZ06Aqtd99pyLiylGQUROhAz5HWslVAbKRgaVEex
+	s6ovPbCRna8LyPr/BvbTPQNXKlP3xS5fu4QprGd1yM0d+JbhrwNWRfVYZP6hyCwGf0wR
+	jxFsf5ZEb5NEoV8CBgCMOUFglNMLFRSguGOmFPseQEuGx7VAkKZspD8Sq7OiOnCPIWM3
+	Dgqr5gp6M0eBNk3XGAh9Kxwg+GP4IMmzyNYHvhEzQd6jdxIlja9hVHOuK67edAo+aSJe
+	p3ow==
+Received: by 10.180.74.33 with SMTP id q1mr11231128wiv.4.1346505104347;
+	Sat, 01 Sep 2012 06:11:44 -0700 (PDT)
+Received: from [172.20.0.10] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPS id t8sm6950813wiy.3.2012.09.01.06.11.42
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sat, 01 Sep 2012 04:50:39 -0700 (PDT)
+	Sat, 01 Sep 2012 06:11:43 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.0 \(1486\))
 From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1346500221-24295-1-git-send-email-koen@dominion.thruhere.net>
+Date: Sat, 1 Sep 2012 15:11:40 +0200
+Message-Id: <D5E7A137-2342-426E-981A-C0022EAE3342@dominion.thruhere.net>
+References: <1346500221-24295-1-git-send-email-koen@dominion.thruhere.net>
 To: meta-ti@yoctoproject.org
-Date: Sat,  1 Sep 2012 13:50:21 +0200
-Message-Id: <1346500221-24295-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.7.6
-X-Gm-Message-State: ALoCoQm8qc84KgqD4LftWSdqqwG+qllTo5bZ+H57nRXhW9THNzM141qBdaBoQxcHnVivihmesdJx
-Subject: [PATCH] beaglebone-tester: FTDI eeprom test, v2
+X-Mailer: Apple Mail (2.1486)
+X-Gm-Message-State: ALoCoQlU0m0eRACIohbuI/N0E9BAli06Ahbw88jJAeYLe6qVhX3DlHMwgGYVZyPK/BnimxU6Y9fw
+Subject: Re: [PATCH] beaglebone-tester: FTDI eeprom test, v2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,34 +45,16 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Sep 2012 11:50:45 -0000
+X-List-Received-Date: Sat, 01 Sep 2012 13:11:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Check descriptor instead of VID/PID
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Op 1 sep. 2012, om 13:50 heeft Koen Kooi <koen@dominion.thruhere.net> =
+het volgende geschreven:
 
-diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
-index 7512e76..66b98a4 100644
---- a/recipes-ti/beagleboard/beaglebone-tester.bb
-+++ b/recipes-ti/beagleboard/beaglebone-tester.bb
-@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
- # only scripts and data
- inherit allarch
- 
--PR = "r19"
-+PR = "r20"
- 
- SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
-           "
--SRCREV = "bb93cdaa95173eb4a772523a37fe0bf8bd62d78f"
-+SRCREV = "487a13e2e4faaafa40ba5430600e6aeecf9581a8"
- 
- S = "${WORKDIR}/git"
- 
--- 
-1.7.7.6
+> Check descriptor instead of VID/PID
 
+This applies on top of the other 2 bone-tester patches, the 'v2' in the =
+title is a bit misleading, sorry about that.=
 
