@@ -1,29 +1,30 @@
-Return-Path: <jdk@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8F79EE00533
-	for <meta-ti@yoctoproject.org>; Sat,  1 Sep 2012 14:14:44 -0700 (PDT)
+Return-Path: <fcooper@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3DA56E00533
+	for <meta-ti@yoctoproject.org>; Sat,  1 Sep 2012 14:21:13 -0700 (PDT)
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q81LEiIn006559
-	for <meta-ti@yoctoproject.org>; Sat, 1 Sep 2012 16:14:44 -0500
-Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q81LEig1016738
-	for <meta-ti@yoctoproject.org>; Sat, 1 Sep 2012 16:14:44 -0500
-Received: from DFLE12.ent.ti.com ([fe80::145d:e72a:4dbf:e0dd]) by
-	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
-	14.01.0323.003; Sat, 1 Sep 2012 16:14:43 -0500
-From: "Kridner, Jason" <jdk@ti.com>
-To: "Cooper Jr., Franklin" <fcooper@ti.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q81LLCU5014058
+	for <meta-ti@yoctoproject.org>; Sat, 1 Sep 2012 16:21:12 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q81LLCk5022984
+	for <meta-ti@yoctoproject.org>; Sat, 1 Sep 2012 16:21:12 -0500
+Received: from DFLE09.ent.ti.com ([fe80::3103:58c3:47f:860b]) by
+	DFLE73.ent.ti.com ([fe80::86e:fab6:cd95:e158%28]) with mapi id
+	14.01.0323.003; Sat, 1 Sep 2012 16:21:12 -0500
+From: "Cooper Jr., Franklin" <fcooper@ti.com>
+To: "Kridner, Jason" <jdk@ti.com>
 Thread-Topic: [meta-ti] Fix image recipes in meta-ti
-Thread-Index: AQHNiIbO21yNTP9P5kWsNbGiZYGBzA==
-Date: Sat, 1 Sep 2012 21:14:43 +0000
-Message-ID: <kkitbg3uuuda8t5puice0pub.1346534080222@email.android.com>
-References: <8F29D6B095ED194EA1980491A5E029710C2B2B46@DFLE09.ent.ti.com>
-In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C2B2B46@DFLE09.ent.ti.com>
+Thread-Index: Ac2Ig7pGwFxbqvJjRsORVyoWs1t29wALPzCA//+t/rs=
+Date: Sat, 1 Sep 2012 21:21:12 +0000
+Message-ID: <B3DA41A9-3C2F-4C4E-A414-68BA6D249EF7@ti.com>
+References: <8F29D6B095ED194EA1980491A5E029710C2B2B46@DFLE09.ent.ti.com>,
+	<kkitbg3uuuda8t5puice0pub.1346534080222@email.android.com>
+In-Reply-To: <kkitbg3uuuda8t5puice0pub.1346534080222@email.android.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 MIME-Version: 1.0
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: Fix image recipes in meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -37,22 +38,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Sep 2012 21:14:44 -0000
+X-List-Received-Date: Sat, 01 Sep 2012 21:21:13 -0000
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_kkitbg3uuuda8t5puice0pub1346534080222emailandroidcom_"
+	boundary="_000_B3DA41A93C2F4C4EA41468BA6D249EF7ticom_"
 
---_000_kkitbg3uuuda8t5puice0pub1346534080222emailandroidcom_
+--_000_B3DA41A93C2F4C4EA41468BA6D249EF7ticom_
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
+
+Unless the meta-angstrom dependency is fixed then I would see them having t=
+he same issue.
+
+On Sep 1, 2012, at 4:14 PM, "Kridner, Jason" <jdk@ti.com<mailto:jdk@ti.com>=
+> wrote:
 
 Will meta-oe take the recipes?
 
 
 -------- Original message --------
 Subject: [meta-ti] Fix image recipes in meta-ti
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+From: "Cooper Jr., Franklin" <fcooper@ti.com<mailto:fcooper@ti.com>>
+To: "meta-ti@yoctoproject.org<mailto:meta-ti@yoctoproject.org>" <meta-ti@yo=
+ctoproject.org<mailto:meta-ti@yoctoproject.org>>
 CC:
 
 
@@ -81,7 +89,7 @@ Application Engineer
 fcooper@ti.com<mailto:fcooper@ti.com>
 
 
---_000_kkitbg3uuuda8t5puice0pub1346534080222emailandroidcom_
+--_000_B3DA41A93C2F4C4EA41468BA6D249EF7ticom_
 Content-Type: text/html; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
@@ -89,7 +97,18 @@ Content-Transfer-Encoding: quoted-printable
 <head>
 <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
 252">
-<style>
+</head>
+<body bgcolor=3D"#FFFFFF">
+<div>Unless the meta-angstrom dependency is fixed then I would see them hav=
+ing the same issue.<br>
+<br>
+On Sep 1, 2012, at 4:14 PM, &quot;Kridner, Jason&quot; &lt;<a href=3D"mailt=
+o:jdk@ti.com">jdk@ti.com</a>&gt; wrote:<br>
+<br>
+</div>
+<div></div>
+<blockquote type=3D"cite">
+<div><style>
 <!--
 @font-face
 	{font-family:Calibri}
@@ -114,17 +133,19 @@ span.EmailStyle17
 div.WordSection1
 	{}
 -->
-</style>
-</head>
-<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
-Will meta-oe take the recipes?&nbsp;<br>
+</style>Will
+ meta-oe take the recipes?&nbsp;<br>
 <br>
 <br>
 -------- Original message --------<br>
 Subject: [meta-ti] Fix image recipes in meta-ti <br>
-From: &quot;Cooper Jr., Franklin&quot; &lt;fcooper@ti.com&gt; <br>
-To: &quot;meta-ti@yoctoproject.org&quot; &lt;meta-ti@yoctoproject.org&gt; <=
-br>
+From: &quot;Cooper Jr., Franklin&quot; &lt;<a href=3D"mailto:fcooper@ti.com=
+">fcooper@ti.com</a>&gt;
+<br>
+To: &quot;<a href=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.=
+org</a>&quot; &lt;<a href=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yocto=
+project.org</a>&gt;
+<br>
 CC: <br>
 <br>
 <br>
@@ -159,7 +180,9 @@ ll it into meta-angstrom which I believe is the best option.</p>
 <p class=3D"MsoNormal">&nbsp;</p>
 </div>
 </div>
+</div>
+</blockquote>
 </body>
 </html>
 
---_000_kkitbg3uuuda8t5puice0pub1346534080222emailandroidcom_--
+--_000_B3DA41A93C2F4C4EA41468BA6D249EF7ticom_--
