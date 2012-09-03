@@ -1,32 +1,38 @@
-Return-Path: <fcooperjr27@gmail.com>
-Received: from mail-ob0-f176.google.com (mail-ob0-f176.google.com
-	[209.85.214.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCE17E013A6
-	for <meta-ti@yoctoproject.org>; Mon,  3 Sep 2012 02:25:22 -0700 (PDT)
-Received: by obbtb18 with SMTP id tb18so11340348obb.35
-	for <meta-ti@yoctoproject.org>; Mon, 03 Sep 2012 02:25:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=gXgUdcCKVPjrtumr8eFk2LIVFzEVQxivR6/ER+g1hA0=;
-	b=pp33wzQw4xjiQK5ZZsK+SsPehZ8bq5Pb+wL9LNGs+PT5gdJamiW53cRJLZ94BzDdNn
-	H1JhSyzlw6zbJA3mMuO5HceqnvQLmc3UlynEPy0LRf5ONjcK7VZHs92yF2gJR2TeoWnj
-	s9vLV+heTnswzBiLfcN+WebGqujXq+8i0XDkdjD1Ws9IH1+ab8N0TsOSyQtMsFJ7pzZw
-	rLjGdpTDf/Nx3v1colE7hLt7pqpcTJ/TalufQVbGBw3oKKfRxkVKIuBbJpSr4qbAyYos
-	q0BLPa2yJAPsdQ4eP0mBwFVk1uG1ouMQSC+nKA3dSNi/WPdddNhiQbgTgVN0o/VdYjpa
-	07vw==
-Received: by 10.60.5.129 with SMTP id s1mr13347574oes.85.1346664322454;
-	Mon, 03 Sep 2012 02:25:22 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
-	by mx.google.com with ESMTPS id g8sm11298022obz.16.2012.09.03.02.25.21
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0F05E013A6
+	for <meta-ti@yoctoproject.org>; Mon,  3 Sep 2012 02:54:11 -0700 (PDT)
+Received: by eekd41 with SMTP id d41so2081262eek.35
+	for <meta-ti@yoctoproject.org>; Mon, 03 Sep 2012 02:54:10 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=rDfi1edHVgJ43v20WzKlKVhbkKYpPzGbO6DFEffS6Cs=;
+	b=kMOJBEIT/ZRfUkMVFIgSmVt2zFAPbEDKGvN09ln60653/p7NDh6x+3NSHCovK2GXQ4
+	NwfoSjyjsRO41Sa2tzPZAR91nrxrQmrPXorhz2kX9RDCo1siOSsv7GL9xuTzMtElFRQr
+	JftbPzgbmvUHJKyXInKO5RfHOllXZuw5Lbcr1M1nmHYED4iSwc1rQ9DjLNIEqys6dIg2
+	sUxEjivMi8zd+RVdoWTT0Ug/XL8d93He4n+5NHfdCRTIFAXwbf75YmtsJvNDUDGYPmbe
+	RO5qIq8/8rNkyeW4uDgRcEJm45+IV4T7jm0w2y+hACA99rEgj1l0Sc0DspV8aerUHSuj
+	JHdA==
+Received: by 10.14.212.72 with SMTP id x48mr20593966eeo.40.1346666050251;
+	Mon, 03 Sep 2012 02:54:10 -0700 (PDT)
+Received: from ?IPv6:2001:610:612::ad9f:f49a:8618:63e8?
+	([2001:610:612:0:ad9f:f49a:8618:63e8])
+	by mx.google.com with ESMTPS id i8sm34924668eeo.16.2012.09.03.02.54.07
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Sep 2012 02:25:21 -0700 (PDT)
-From: "Franklin S. Cooper Jr" <fcooperjr27@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Mon,  3 Sep 2012 04:41:49 -0500
-Message-Id: <1346665309-10837-1-git-send-email-fcooper27jr@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: "Franklin S. Cooper Jr" <fcooper27jr@gmail.com>
-Subject: [PATCH] libgles-omap3: Add new 4.06.00.02 version.
+	Mon, 03 Sep 2012 02:54:08 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.0 \(1486\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1346665189-10535-1-git-send-email-fcooper27jr@gmail.com>
+Date: Mon, 3 Sep 2012 11:54:05 +0200
+Message-Id: <F45EF99D-D3F7-4CB3-91A7-DDA8C014A727@dominion.thruhere.net>
+References: <1346665189-10535-1-git-send-email-fcooper27jr@gmail.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+X-Mailer: Apple Mail (2.1486)
+X-Gm-Message-State: ALoCoQlrz1FD0HM1PpGBYXZ0/pNR7m10Rn4kcyldpYxhRFhFKkILSPHFPFXC+7tcEcWYTMLegYNI
+Subject: Re: [PATCH v2] libgles-omap3: Pull in changes from arago to meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,60 +45,19 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Sep 2012 09:25:23 -0000
+X-List-Received-Date: Mon, 03 Sep 2012 09:54:12 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-* Add a new version of the Graphics SDK. There are a few changes in the
-  Graphics SDK that need to be investigated to determine if it impacts
-  someone who is trying to use X11. This recipe should work fine
-  for non X11 users. Therefore, the DEFAULT_PREFERENCE will be -1 until
-  it is clear that X11 users arent negatively impacted and any needed
-  changes in libgles-omap3.inc are made.
 
-Signed-off-by: Franklin S. Cooper Jr <fcooper27jr@gmail.com>
----
- .../libgles/libgles-omap3_4.06.00.02.bb            |   32 ++++++++++++++++++++
- 1 files changed, 32 insertions(+), 0 deletions(-)
- create mode 100644 recipes-graphics/libgles/libgles-omap3_4.06.00.02.bb
+Op 3 sep. 2012, om 11:39 heeft Franklin S. Cooper Jr =
+<fcooperjr27@gmail.com> het volgende geschreven:
+>=20
+> -=09
+> +    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir} || true
+> +    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/ || true
 
-diff --git a/recipes-graphics/libgles/libgles-omap3_4.06.00.02.bb b/recipes-graphics/libgles/libgles-omap3_4.06.00.02.bb
-new file mode 100644
-index 0000000..6c450a3
---- /dev/null
-+++ b/recipes-graphics/libgles/libgles-omap3_4.06.00.02.bb
-@@ -0,0 +1,32 @@
-+require libgles-omap3.inc
-+
-+# Xsgx and the OpenGL *X11WS* non longer exist. Graphcis team stated that X11WS is deprecated and DRIWSEGL should be used instead.
-+# Setting the DEFAULT_PREFERENCE to -1 until it is determined if this change affects X11 base distros.
-+DEFAULT_PREFERENCE = "-1"
-+
-+BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
-+BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
-+BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
-+BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
-+
-+PLATFORM = "LinuxARMV7"
-+
-+# download required binary distribution from:
-+# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
-+# see libgles-omap3.inc for detailed installation instructions
-+
-+SGXPV = "4_06_00_02"
-+IMGPV = "1.7.867897"
-+BINFILE = "Graphics_SDK_setuplinux_${SGXPV}.bin"
-+TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest//exports/${BINFILE} \
-+		   file://cputype \
-+		   file://rc.pvr \
-+		   file://sample.desktop \
-+		   file://99-bufferclass.rules  \
-+"
-+
-+SRC_URI[md5sum] = "62f0c378e38f8d14e9f184c3836aea21"
-+SRC_URI[sha256sum] = "71c8e154484304b3ce32d565557720a96c7ba762e72d7f1e93deeef9f3274402"
-+
-+S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
--- 
-1.7.0.4
-
+IIRC this is going to generate some file conflicts and in OE-classic we =
+pointed qt to the proper place for the includes. Has something changed =
+since then?=
 
