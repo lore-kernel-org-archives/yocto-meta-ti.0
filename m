@@ -1,44 +1,32 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ey0-f176.google.com (mail-ey0-f176.google.com
-	[209.85.215.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9C078E0049D
-	for <meta-ti@yoctoproject.org>; Sun,  2 Sep 2012 14:11:20 -0700 (PDT)
-Received: by eabd1 with SMTP id d1so1521511eab.35
-	for <meta-ti@yoctoproject.org>; Sun, 02 Sep 2012 14:11:16 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=miJGYTto0uuTYebT1/NHQjzBPseLKbI6EfijnJse84c=;
-	b=YAD+gmPLKRLUKBKUT38IukKdiIMR8Yaj59082X8edWEL2L6KSxVJdl92QKX3Y3H0ro
-	fAhUnXjXrQoLVX1pxc0/VXUVeTGl3QPDUk1X6xtLEIlUVatN7r69zIPkp3qSTbS0KCWB
-	DtdL1iGznUGRehWN/XKh5Iyi88U2t62whBo+lh6ELH2H/V57dwivy4c6N8XqKgg5qAu8
-	DcauPjC9E2fZLhCB1Pv1Sfpzq4c7/Dh6DrHbjwsgAFkVurjCmHND8WQptuPjaP0G8puV
-	yILsZwcdNNC7/yOeYCDFRBoivO5tYXt2yehs5PCtMDrbcuY9XVlpU2ZSGOnW3CiElhtI
-	I+Pg==
-Received: by 10.14.215.193 with SMTP id e41mr18793449eep.44.1346620276682;
-	Sun, 02 Sep 2012 14:11:16 -0700 (PDT)
-Received: from ?IPv6:2001:610:612::91cb:5d29:e17:5fb?
-	([2001:610:612:0:91cb:5d29:e17:5fb])
-	by mx.google.com with ESMTPS id 45sm30905905eeb.8.2012.09.02.14.11.14
+Return-Path: <fcooperjr27@gmail.com>
+Received: from mail-ob0-f176.google.com (mail-ob0-f176.google.com
+	[209.85.214.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0BDFE013A6
+	for <meta-ti@yoctoproject.org>; Mon,  3 Sep 2012 01:36:39 -0700 (PDT)
+Received: by obbtb18 with SMTP id tb18so11284134obb.35
+	for <meta-ti@yoctoproject.org>; Mon, 03 Sep 2012 01:36:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=VS+xyl1M2yh+tvu0jatAG4JSeOhh+HJZOqO7zcoQ4s4=;
+	b=j3DzksHbbOrH1b6N+YkUHo/HnDi2E5VrpEIbq585E3w3qc85aww/hS05LXgVfwlVDA
+	HsHotxaPxdw7trn/o7KDNYWPg6fj30ZAyrF3z1H7Z+xBVp6D6NoBcP9xx0ZqE0kPR6vv
+	+8zS5qtIYmoZVaLKMM/IkwStuR5t+jr+2XEQnHY21ZCjW/t9G0tpkD4eOmaLXo1X/YH3
+	4zyjQG6ACsMYhQBiVRG6b829Qmxft7frgtVeIysUeNBQQ/a00aiorAFnKpTanRMbwbab
+	tksVijdMMrtAjlOQJk2Yq/GvRR1h0wU2yQpjfO//aMF/N7d0QGiXOm9ZjOY/u8lTouKc
+	5/Rw==
+Received: by 10.182.49.102 with SMTP id t6mr13555870obn.94.1346661396701;
+	Mon, 03 Sep 2012 01:36:36 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
+	by mx.google.com with ESMTPS id bp7sm11227515obc.12.2012.09.03.01.36.35
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 02 Sep 2012 14:11:15 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.0 \(1486\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <26A1186D-E714-4AD6-BB0E-1743FB6DFA2A@ti.com>
-Date: Sun, 2 Sep 2012 23:11:13 +0200
-Message-Id: <2A0DAC13-04B3-4E44-B278-B6A22233C86D@dominion.thruhere.net>
-References: <8F29D6B095ED194EA1980491A5E029710C2B2B46@DFLE09.ent.ti.com>
-	<kkitbg3uuuda8t5puice0pub.1346534080222@email.android.com>
-	<20120901225617.GF22219@edge>
-	<B2475CE6-3C80-4BE1-BCE9-A368D5F7B7C5@dominion.thruhere.net>,
-	<8F29D6B095ED194EA1980491A5E029710C2B34AD@DFLE09.ent.ti.com>
-	<26A1186D-E714-4AD6-BB0E-1743FB6DFA2A@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-X-Mailer: Apple Mail (2.1486)
-X-Gm-Message-State: ALoCoQm6Cm+Q/Eat05m1P16w5KRSvggvo4yf1ple36O9YYaSrK5zwICJXnGylBqw0A/KISyajYLs
-Subject: Re: Fix image recipes in meta-ti
+	Mon, 03 Sep 2012 01:36:36 -0700 (PDT)
+From: "Franklin S. Cooper Jr" <fcooperjr27@gmail.com>
+To: meta-ti@yoctoproject.org
+Date: Mon,  3 Sep 2012 03:53:02 -0500
+Message-Id: <1346662382-9673-1-git-send-email-fcooper27jr@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+Cc: "Franklin S. Cooper Jr" <fcooper27jr@gmail.com>
+Subject: [PATCH] libgles-omap3: Pull in changes from arago to meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,70 +39,162 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Sep 2012 21:11:21 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 03 Sep 2012 08:36:39 -0000
 
+* Package additional include files from pvr2d and OGLES/GLES. This is required
+  when trying to build qt4-embedded-gles (currently being developed)
+* Other minor tweaks.
 
-Op 2 sep. 2012, om 21:47 heeft "Maupin, Chase" <chase.maupin@ti.com> het =
-volgende geschreven:
+Signed-off-by: Franklin S. Cooper Jr <fcooper27jr@gmail.com>
+---
+ recipes-graphics/libgles/libgles-omap3.inc    |   32 +++++++++++++-----------
+ recipes-graphics/libgles/libgles-omap3/rc.pvr |    7 +++++
+ 2 files changed, 24 insertions(+), 15 deletions(-)
 
-> I agree with Denys and Franklin here.  Meta-ti should be a straight =
-BSP layer so we should remove distro dependencies.  This is the same as =
-moving netbase changes to meta-arago.
+diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
+index 4525285..0857c46 100644
+--- a/recipes-graphics/libgles/libgles-omap3.inc
++++ b/recipes-graphics/libgles/libgles-omap3.inc
+@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
+ # 'TSPA.txt' might not be the best file to md5sum
+ LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
+ 
+-PR = "r32"
++PR = "r33"
+ 
+ COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
+ 
+@@ -15,10 +15,10 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
+ 		   file://cputype \
+ 		   file://rc.pvr \
+ 		   file://sample.desktop \
+-		   file://99-bufferclass.rules  \
++		   file://99-bufferclass.rules \
+ "
+ 
+-S = "${WORKDIR}/OMAP35x_Graphics_SDK_${SGXPV}"
++S ?= "${WORKDIR}/OMAP35x_Graphics_SDK_${SGXPV}"
+ 
+ # Logic to unpack installjammer file
+ TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
+@@ -31,11 +31,13 @@ export ES5LOCATION ?= "${S}/gfx_rel_es5.x"
+ export ES6LOCATION ?= "${S}/gfx_rel_es6.x"
+ export ES8LOCATION ?= "${S}/gfx_rel_es8.x"
+ 
++LIBGLESWINDOWSYSTEM ?= "libpvrPVR2D_FRONTWSEGL.so.1"
++
+ do_configure() {
+ 	# Attempt to fix up the worst offenders for file permissions
+ 	for i in $(find ${S} -name "*.h") $(find ${S} -name "*.c") $(find ${S} -name "Make*") ; do
+ 		chmod 0644 $i
+-	done 
++	done
+ 
+ 	# Attempt to create proper library softlinks
+ 	for sofile in $(find ${S} -name "lib*Open*.so") $(find ${S} -name "lib*srv*.so") $(find ${S} -name "lib*gl*.so") $(find ${S} -name "libpvr*.so") $(find ${S} -name "lib*GL*.so"); do
+@@ -112,7 +114,7 @@ do_compile() {
+ 
+ 			if [ -e $training/OGLES2/Build/${PLATFORM}/Makefile ] ; then
+ 				cd $training/OGLES2/Build/${PLATFORM}
+-			fi			
++			fi
+ 
+ 			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
+ 			rm -f $training/OGLES2/Build/${PLATFORM}/Release*/*.o
+@@ -120,7 +122,6 @@ do_compile() {
+ 			install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/trainingcourses/raw || true
+ 		done
+ 	done
+-
+ }
+ 
+ do_install () {
+@@ -133,8 +134,7 @@ do_install () {
+ 
+ 	install -m 0755 ${BINLOCATION}/*_test ${D}${bindir}/
+ 	install -m 0755 ${BINLOCATION}/gl* ${D}${bindir}/
+-	install -m 0755 ${BINLOCATION}/pvrsrvinit ${D}${bindir}/
+-
++	install -m 0755 ${BINLOCATION}/p[dv]* ${D}${bindir}/
+ 	install -m 0755 ${BINLOCATION}/xgles1test1 ${D}${bindir}/
+ 
+ 	install -m 0755 ${BINLOCATION}/freedesktop/kdrive/usr/X11R6_SGX/bin/Xsgx ${D}${bindir}/|| true
+@@ -152,23 +152,25 @@ do_install () {
+ 	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/V* ${D}${includedir}/ || true
+ 	cp -pPr ${S}/include/*.h ${D}${includedir} || true
+ 	cp -pPr ${S}/include/wsegl/*.h ${D}${includedir} || true
+-	
++    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir} || true
++    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/ || true
++
+ 	install -d ${D}${sysconfdir}/init.d/
+ 	cp -pP ${WORKDIR}/rc.pvr ${D}${sysconfdir}/init.d/pvr-init
+ 
+ 	install -d ${D}${sysconfdir}
+ 	echo "[default]" > ${D}${sysconfdir}/powervr.ini
+-	echo "WindowSystem=libpvrPVR2D_FRONTWSEGL.so.1" >> ${D}${sysconfdir}/powervr.ini
++	echo "WindowSystem=${LIBGLESWINDOWSYSTEM}" >> ${D}${sysconfdir}/powervr.ini
+ 
+ 	# The ES2.x, ES3.x, ES5.x and ES6.x CPUs have different SGX hardware, so we need to install multiple sets of userspace
+ 
+-	install -d ${D}${libdir}/ES8.0
++    install -d ${D}${libdir}/ES8.0
+ 	install -d ${D}${libdir}/ES6.0
+ 	install -d ${D}${libdir}/ES5.0
+ 	install -d ${D}${libdir}/ES3.0
+ 	install -d ${D}${libdir}/ES2.0
+ 
+-	install -d ${D}${bindir}/ES8.0
++    install -d ${D}${bindir}/ES8.0
+ 	install -d ${D}${bindir}/ES6.0
+ 	install -d ${D}${bindir}/ES5.0
+ 	install -d ${D}${bindir}/ES3.0
+@@ -177,7 +179,7 @@ do_install () {
+ 	for esrev in 2 3 5 6 8 ; do
+ 		ESLOCATION=$(eval echo $(echo \$\{ES${esrev}LOCATION\}))
+ 		if [ -e ${ESLOCATION} ] ; then
+-			cp -pPR ${ESLOCATION}/lib*${IMGPV} ${ESLOCATION}/pvr_drv.so ${ESLOCATION}/*.a ${D}${libdir}/ES${esrev}.0/
++			cp -pPR ${ESLOCATION}/lib*${IMGPV} ${ESLOCATION}/p[dv]* ${ESLOCATION}/*.a ${D}${libdir}/ES${esrev}.0/
+ 			for esprog in eglinfo eglinfo_x gles1test1 gles2test1 ovg_unit_test pvr2d_test pvrsrvinit services_test sgx_blit_test sgx_clipblit_test sgx_flip_test sgx_init_test sgx_render_flip_test xgles1test1 xgles2test1 xmultiegltest xovg_unit_test ; do
+ 				install -m 0755 ${ESLOCATION}/$esprog ${D}${bindir}/ES${esrev}.0/ || true
+ 			done
+@@ -287,7 +289,7 @@ RRECOMMENDS_${PN}-driwsegl = " ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driws
+ 
+ CONFFILES_${PN} = "${sysconfdir}/powervr.ini"
+ 
+-FILES_${PN} = "${sysconfdir} ${libdir}/*.so* ${bindir}/pvrsrvinit ${bindir}/cputype ${bindir}/*"
++FILES_${PN} = "${sysconfdir} ${libdir}/lib*.so.* ${bindir}/pvrsrvinit ${bindir}/cputype ${bindir}/*"
+ 
+ FILES_xserver-kdrive-powervrsgx = "${bindir}/Xsgx"
+ FILES_${PN}-tests = "${bindir}/*test*"
+@@ -335,7 +337,7 @@ INITSCRIPT_PARAMS = "start 30 5 2 . stop 40 0 1 6 ."
+ pkg_postinst_${PN}_append() {
+ rm -f $D${sysconfdir}/powervr-esrev
+ 
+-ln -sf /usr/lib/libXdmcp.so.6.0.0 /usr/lib/libXdmcp.so.0 
++ln -sf /usr/lib/libXdmcp.so.6.0.0 /usr/lib/libXdmcp.so.0
+ ln -sf /usr/lib/libXau.so.6.0.0 /usr/lib/libXau.so.0
+ }
+ 
+diff --git a/recipes-graphics/libgles/libgles-omap3/rc.pvr b/recipes-graphics/libgles/libgles-omap3/rc.pvr
+index 00cd994..e5a4cd1 100755
+--- a/recipes-graphics/libgles/libgles-omap3/rc.pvr
++++ b/recipes-graphics/libgles/libgles-omap3/rc.pvr
+@@ -42,6 +42,13 @@ fbset -vyres $(expr $YRES \* 3)
+ sgxprepare () {
+ 	echo Starting PVR
+ 	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
++
++    if [ "$?" != "0" ]
++    then
++        echo "Could not find pvrsrvkm driver"
++        exit 1
++    fi
++
+ 	modprobe omaplfb
+ 	modprobe bufferclass_ti
+ 
+-- 
+1.7.0.4
 
-I'm not sure if what you mean by this example. The current netbase patch =
-is the second try to get it into meta-ti, will there be a 3rd try?=20
-
->  There may be things in meta-ti that don't belong there and they =
-should be moved to the appropriate location
-
-And I completely agree.
-
-> I understand that you have been using meta-ti and leading the way =
-here, but that does not mean that we can't work together in this layer =
-going forward.  You may have noticed that most of the TI SDK stuff has =
-been going into meta-arago since that is where it belongs.  We are =
-trying hard not to put things in meta-ti that will force others to use =
-the arago distribution, I wouldask that we make sure the same applies =
-for Angstrom as well, or any other distribution for that matter.
-
-So show me where it is being forced. Really. There are no requires, only =
-includes. So if you mean by 'forcing' that a few warnings may scroll by =
-than, yes, it's being 'forced'. If you mean that the only way to use =
-meta-ti is by using angstrom, than no, it's not being 'forced'. So =
-instead of spreading more FUD, can you please use more precise language =
-for the problem at hand? As I said above, I agree that those images =
-don't belong in meta-ti. But funnily enough, that was not my decision. I =
-was told to keep them there. By TI.
-
-> I'm confused where the objection is to moving these recipes that rely =
-on the Angstrom layer into the actual Angstrom layer?
-
-For one, it was TI that objected to it. I don't care if some part of TI =
-is now changing course on that. I care if some other part of TI is going =
-to change course again in a few weeks. Just make a clear decision and =
-stick with it instead of not doing a thing and rekindling the same old =
-discussion every other month.
-For two: They don't belong in the angstrom layer either, they are way =
-too machine/SoC specific for that.
-
->  Let's discuss that topic and how we can structure this layer to meet =
-everyone's needs.  That would likely be more productive and save us all =
-frustration.
-
-Like I said, I have no problem at all removing all beagle, bone and =
-panda related things from meta-ti. In a previous incarnation of this =
-discussion I offered to do that and was told by TI to keep everything =
-in, both by SDO and AMBU people. So I'll offer it again now. So if you =
-don't like that proposal, make a counter proposal.
-Being an external contributor for the past 6 months has given me a good =
-sense of what works and what doesn't work and what the level of =
-(non)support the community can expect from TI. To be clear: Denys is =
-doing an awesome job managing meta-ti, someone send him some cookies.
-
-You work for TI, you get to dictate what happens in meta-ti, so make a =
-proposal. I'm only a small part of the community, I have no illusions of =
-being able to influence the direction of meta-ti. I can however look at =
-your proposal and give my opinion on it.=
 
