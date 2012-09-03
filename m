@@ -1,32 +1,38 @@
-Return-Path: <fcooperjr27@gmail.com>
-Received: from mail-ob0-f176.google.com (mail-ob0-f176.google.com
-	[209.85.214.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0BDFE013A6
-	for <meta-ti@yoctoproject.org>; Mon,  3 Sep 2012 01:36:39 -0700 (PDT)
-Received: by obbtb18 with SMTP id tb18so11284134obb.35
-	for <meta-ti@yoctoproject.org>; Mon, 03 Sep 2012 01:36:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=VS+xyl1M2yh+tvu0jatAG4JSeOhh+HJZOqO7zcoQ4s4=;
-	b=j3DzksHbbOrH1b6N+YkUHo/HnDi2E5VrpEIbq585E3w3qc85aww/hS05LXgVfwlVDA
-	HsHotxaPxdw7trn/o7KDNYWPg6fj30ZAyrF3z1H7Z+xBVp6D6NoBcP9xx0ZqE0kPR6vv
-	+8zS5qtIYmoZVaLKMM/IkwStuR5t+jr+2XEQnHY21ZCjW/t9G0tpkD4eOmaLXo1X/YH3
-	4zyjQG6ACsMYhQBiVRG6b829Qmxft7frgtVeIysUeNBQQ/a00aiorAFnKpTanRMbwbab
-	tksVijdMMrtAjlOQJk2Yq/GvRR1h0wU2yQpjfO//aMF/N7d0QGiXOm9ZjOY/u8lTouKc
-	5/Rw==
-Received: by 10.182.49.102 with SMTP id t6mr13555870obn.94.1346661396701;
-	Mon, 03 Sep 2012 01:36:36 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
-	by mx.google.com with ESMTPS id bp7sm11227515obc.12.2012.09.03.01.36.35
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7D637E013A6
+	for <meta-ti@yoctoproject.org>; Mon,  3 Sep 2012 01:44:26 -0700 (PDT)
+Received: by wibhq12 with SMTP id hq12so2867409wib.11
+	for <meta-ti@yoctoproject.org>; Mon, 03 Sep 2012 01:44:23 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=3lRVI6h0RAUERPmyFui0FQoY8ifxMK7VmDEISFUsr3w=;
+	b=K4a3mzWkoA+V4LXrTLMh5GDXR/+1KrivAYkgJTMFT0PJWbgRVdHl0B66lNYb6BATH7
+	LWiGlA14O43KZqZHsMYJVx4Q1RRxNAP2jpDoo0XJ4rNSGMVhFBGONMqPUKCGhoCR5JwF
+	iYyBqDPCx47nHS6VihE2ELY9tv9uyh19pk37Nd8x8nJ42BE1IGu/qw66MRXn12gvRRHj
+	qAEZY7GdJ+/aghruO0h9kIUUXh6FUThBltXNEsoPw2U5WjBELqmCAdRF62UmlN1zq6HF
+	OsGvYVk/mKrJDJAf9z9hBZQsPhhVz7/6fT6aMK5+qj8Md5d/E/vVSsK7abhjeVjzLi9J
+	V/mQ==
+Received: by 10.216.236.24 with SMTP id v24mr8802786weq.18.1346661862900;
+	Mon, 03 Sep 2012 01:44:22 -0700 (PDT)
+Received: from [172.20.0.10] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPS id k2sm26472199wiz.7.2012.09.03.01.44.20
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 03 Sep 2012 01:36:36 -0700 (PDT)
-From: "Franklin S. Cooper Jr" <fcooperjr27@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Mon,  3 Sep 2012 03:53:02 -0500
-Message-Id: <1346662382-9673-1-git-send-email-fcooper27jr@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-Cc: "Franklin S. Cooper Jr" <fcooper27jr@gmail.com>
-Subject: [PATCH] libgles-omap3: Pull in changes from arago to meta-ti
+	Mon, 03 Sep 2012 01:44:21 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.0 \(1486\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1346662382-9673-1-git-send-email-fcooper27jr@gmail.com>
+Date: Mon, 3 Sep 2012 10:44:18 +0200
+Message-Id: <5100579D-2BFE-4867-94CC-A7EB81D8942C@dominion.thruhere.net>
+References: <1346662382-9673-1-git-send-email-fcooper27jr@gmail.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+X-Mailer: Apple Mail (2.1486)
+X-Gm-Message-State: ALoCoQm3XHDYSTNofos6g9Bm3jplHgCzeNA3T2XEGbDNjPgDgjDZGgJDkFWAD8zIP3/2u8Bez8wR
+Subject: Re: [PATCH] libgles-omap3: Pull in changes from arago to meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,162 +45,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Sep 2012 08:36:39 -0000
+X-List-Received-Date: Mon, 03 Sep 2012 08:44:26 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-* Package additional include files from pvr2d and OGLES/GLES. This is required
-  when trying to build qt4-embedded-gles (currently being developed)
-* Other minor tweaks.
 
-Signed-off-by: Franklin S. Cooper Jr <fcooper27jr@gmail.com>
----
- recipes-graphics/libgles/libgles-omap3.inc    |   32 +++++++++++++-----------
- recipes-graphics/libgles/libgles-omap3/rc.pvr |    7 +++++
- 2 files changed, 24 insertions(+), 15 deletions(-)
+Op 3 sep. 2012, om 10:53 heeft "Franklin S. Cooper Jr" =
+<fcooperjr27@gmail.com> het volgende geschreven:
 
-diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-index 4525285..0857c46 100644
---- a/recipes-graphics/libgles/libgles-omap3.inc
-+++ b/recipes-graphics/libgles/libgles-omap3.inc
-@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum
- LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
- 
--PR = "r32"
-+PR = "r33"
- 
- COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
- 
-@@ -15,10 +15,10 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
- 		   file://cputype \
- 		   file://rc.pvr \
- 		   file://sample.desktop \
--		   file://99-bufferclass.rules  \
-+		   file://99-bufferclass.rules \
- "
- 
--S = "${WORKDIR}/OMAP35x_Graphics_SDK_${SGXPV}"
-+S ?= "${WORKDIR}/OMAP35x_Graphics_SDK_${SGXPV}"
- 
- # Logic to unpack installjammer file
- TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
-@@ -31,11 +31,13 @@ export ES5LOCATION ?= "${S}/gfx_rel_es5.x"
- export ES6LOCATION ?= "${S}/gfx_rel_es6.x"
- export ES8LOCATION ?= "${S}/gfx_rel_es8.x"
- 
-+LIBGLESWINDOWSYSTEM ?= "libpvrPVR2D_FRONTWSEGL.so.1"
-+
- do_configure() {
- 	# Attempt to fix up the worst offenders for file permissions
- 	for i in $(find ${S} -name "*.h") $(find ${S} -name "*.c") $(find ${S} -name "Make*") ; do
- 		chmod 0644 $i
--	done 
-+	done
- 
- 	# Attempt to create proper library softlinks
- 	for sofile in $(find ${S} -name "lib*Open*.so") $(find ${S} -name "lib*srv*.so") $(find ${S} -name "lib*gl*.so") $(find ${S} -name "libpvr*.so") $(find ${S} -name "lib*GL*.so"); do
-@@ -112,7 +114,7 @@ do_compile() {
- 
- 			if [ -e $training/OGLES2/Build/${PLATFORM}/Makefile ] ; then
- 				cd $training/OGLES2/Build/${PLATFORM}
--			fi			
-+			fi
- 
- 			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
- 			rm -f $training/OGLES2/Build/${PLATFORM}/Release*/*.o
-@@ -120,7 +122,6 @@ do_compile() {
- 			install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/trainingcourses/raw || true
- 		done
- 	done
--
- }
- 
- do_install () {
-@@ -133,8 +134,7 @@ do_install () {
- 
- 	install -m 0755 ${BINLOCATION}/*_test ${D}${bindir}/
- 	install -m 0755 ${BINLOCATION}/gl* ${D}${bindir}/
--	install -m 0755 ${BINLOCATION}/pvrsrvinit ${D}${bindir}/
--
-+	install -m 0755 ${BINLOCATION}/p[dv]* ${D}${bindir}/
- 	install -m 0755 ${BINLOCATION}/xgles1test1 ${D}${bindir}/
- 
- 	install -m 0755 ${BINLOCATION}/freedesktop/kdrive/usr/X11R6_SGX/bin/Xsgx ${D}${bindir}/|| true
-@@ -152,23 +152,25 @@ do_install () {
- 	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/V* ${D}${includedir}/ || true
- 	cp -pPr ${S}/include/*.h ${D}${includedir} || true
- 	cp -pPr ${S}/include/wsegl/*.h ${D}${includedir} || true
--	
-+    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir} || true
-+    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/ || true
-+
- 	install -d ${D}${sysconfdir}/init.d/
- 	cp -pP ${WORKDIR}/rc.pvr ${D}${sysconfdir}/init.d/pvr-init
- 
- 	install -d ${D}${sysconfdir}
- 	echo "[default]" > ${D}${sysconfdir}/powervr.ini
--	echo "WindowSystem=libpvrPVR2D_FRONTWSEGL.so.1" >> ${D}${sysconfdir}/powervr.ini
-+	echo "WindowSystem=${LIBGLESWINDOWSYSTEM}" >> ${D}${sysconfdir}/powervr.ini
- 
- 	# The ES2.x, ES3.x, ES5.x and ES6.x CPUs have different SGX hardware, so we need to install multiple sets of userspace
- 
--	install -d ${D}${libdir}/ES8.0
-+    install -d ${D}${libdir}/ES8.0
- 	install -d ${D}${libdir}/ES6.0
- 	install -d ${D}${libdir}/ES5.0
- 	install -d ${D}${libdir}/ES3.0
- 	install -d ${D}${libdir}/ES2.0
- 
--	install -d ${D}${bindir}/ES8.0
-+    install -d ${D}${bindir}/ES8.0
- 	install -d ${D}${bindir}/ES6.0
- 	install -d ${D}${bindir}/ES5.0
- 	install -d ${D}${bindir}/ES3.0
-@@ -177,7 +179,7 @@ do_install () {
- 	for esrev in 2 3 5 6 8 ; do
- 		ESLOCATION=$(eval echo $(echo \$\{ES${esrev}LOCATION\}))
- 		if [ -e ${ESLOCATION} ] ; then
--			cp -pPR ${ESLOCATION}/lib*${IMGPV} ${ESLOCATION}/pvr_drv.so ${ESLOCATION}/*.a ${D}${libdir}/ES${esrev}.0/
-+			cp -pPR ${ESLOCATION}/lib*${IMGPV} ${ESLOCATION}/p[dv]* ${ESLOCATION}/*.a ${D}${libdir}/ES${esrev}.0/
- 			for esprog in eglinfo eglinfo_x gles1test1 gles2test1 ovg_unit_test pvr2d_test pvrsrvinit services_test sgx_blit_test sgx_clipblit_test sgx_flip_test sgx_init_test sgx_render_flip_test xgles1test1 xgles2test1 xmultiegltest xovg_unit_test ; do
- 				install -m 0755 ${ESLOCATION}/$esprog ${D}${bindir}/ES${esrev}.0/ || true
- 			done
-@@ -287,7 +289,7 @@ RRECOMMENDS_${PN}-driwsegl = " ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driws
- 
- CONFFILES_${PN} = "${sysconfdir}/powervr.ini"
- 
--FILES_${PN} = "${sysconfdir} ${libdir}/*.so* ${bindir}/pvrsrvinit ${bindir}/cputype ${bindir}/*"
-+FILES_${PN} = "${sysconfdir} ${libdir}/lib*.so.* ${bindir}/pvrsrvinit ${bindir}/cputype ${bindir}/*"
- 
- FILES_xserver-kdrive-powervrsgx = "${bindir}/Xsgx"
- FILES_${PN}-tests = "${bindir}/*test*"
-@@ -335,7 +337,7 @@ INITSCRIPT_PARAMS = "start 30 5 2 . stop 40 0 1 6 ."
- pkg_postinst_${PN}_append() {
- rm -f $D${sysconfdir}/powervr-esrev
- 
--ln -sf /usr/lib/libXdmcp.so.6.0.0 /usr/lib/libXdmcp.so.0 
-+ln -sf /usr/lib/libXdmcp.so.6.0.0 /usr/lib/libXdmcp.so.0
- ln -sf /usr/lib/libXau.so.6.0.0 /usr/lib/libXau.so.0
- }
- 
-diff --git a/recipes-graphics/libgles/libgles-omap3/rc.pvr b/recipes-graphics/libgles/libgles-omap3/rc.pvr
-index 00cd994..e5a4cd1 100755
---- a/recipes-graphics/libgles/libgles-omap3/rc.pvr
-+++ b/recipes-graphics/libgles/libgles-omap3/rc.pvr
-@@ -42,6 +42,13 @@ fbset -vyres $(expr $YRES \* 3)
- sgxprepare () {
- 	echo Starting PVR
- 	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
-+
-+    if [ "$?" != "0" ]
-+    then
-+        echo "Could not find pvrsrvkm driver"
-+        exit 1
-+    fi
-+
- 	modprobe omaplfb
- 	modprobe bufferclass_ti
- 
--- 
-1.7.0.4
+> * Package additional include files from pvr2d and OGLES/GLES. This is =
+required
+>  when trying to build qt4-embedded-gles (currently being developed)
+> * Other minor tweaks.
+>=20
+> Signed-off-by: Franklin S. Cooper Jr <fcooper27jr@gmail.com>
+> ---
+> recipes-graphics/libgles/libgles-omap3.inc    |   32 =
++++++++++++++-----------
+> recipes-graphics/libgles/libgles-omap3/rc.pvr |    7 +++++
+> 2 files changed, 24 insertions(+), 15 deletions(-)
+>=20
+> diff --git a/recipes-graphics/libgles/libgles-omap3.inc =
+b/recipes-graphics/libgles/libgles-omap3.inc
+> do_install () {
+> @@ -133,8 +134,7 @@ do_install () {
+>=20
+> 	install -m 0755 ${BINLOCATION}/*_test ${D}${bindir}/
+> 	install -m 0755 ${BINLOCATION}/gl* ${D}${bindir}/
+> -	install -m 0755 ${BINLOCATION}/pvrsrvinit ${D}${bindir}/
+> -
+> +	install -m 0755 ${BINLOCATION}/p[dv]* ${D}${bindir}/
+> 	install -m 0755 ${BINLOCATION}/xgles1test1 ${D}${bindir}/
 
+You're reverting an older commit here without explaining why.=
 
