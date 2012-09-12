@@ -1,32 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 65445E002AC
-	for <meta-ti@yoctoproject.org>; Tue, 11 Sep 2012 10:26:46 -0700 (PDT)
-Received: by eekd41 with SMTP id d41so711945eek.35
-	for <meta-ti@yoctoproject.org>; Tue, 11 Sep 2012 10:26:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=J0MRQDrfrfElZUOBqoUrJnua9nR+T/toJIawCmKSIig=;
-	b=yWsXUmpzcCEhdvhH/gWQcnccPIKMDmsFgHe17Q1ZRShWUA8rjcIA/VwwW2XsTuDGIL
-	BTei/+8P3NEWbwYAT6RZmFjm4hXAgO3HpPnjdohmc1Mr91nHlPbWaBLP0KH3Qer/K9wq
-	wcbqr35mXAQnAujCD4JtAtCeWriMOVXFoyBYt6Q3S2t6utwhR7WnpQjqFxbkMqm4UMhu
-	Z342KEG8PgQycDKyIWRY3jRQ7Xb3TiEBEuuLNRE0b5F3Z6khHOgBjPmx35xQtwiITr4B
-	c3mRMuOMjUDT3mU7s60OBzbD/QHrlMgbkvVX++KpfGfu9XhtE0bFgEU9U+gPWZIzVA/T
-	uXUw==
-Received: by 10.14.218.134 with SMTP id k6mr26932668eep.14.1347384405108; Tue,
-	11 Sep 2012 10:26:45 -0700 (PDT)
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 921F8E00348
+	for <meta-ti@yoctoproject.org>; Wed, 12 Sep 2012 15:21:21 -0700 (PDT)
+Received: by wibhq12 with SMTP id hq12so174310wib.5
+	for <meta-ti@yoctoproject.org>; Wed, 12 Sep 2012 15:21:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=KpXzlOS9SZU++e5Lv/ybKJ9CTQgcQjvibHWFtDFFDHU=;
+	b=o534O+hQtwCS9ypkA43vDODbKcCVOXI3elHVny0Zb0XlLYgs3lQlsB10YeT3UI8it5
+	r4r5PbaNnKBJE9fIWpwlLebhknN3rgwHwNvAAJ20rwi+ce5tnPb3ne91vbWounjhw3iv
+	yMWkSkZzDxvYqCXKHC56Ir+558eM/C+7AGYgStcNeO9ka6CPUt9b3tQbxcVI9Sy5MBxC
+	6FL6n073z5ADxtII9aciFrgRxJ9jmFoFyjIJ0yQ6iEtTet2qVZFYn8QQkJY3MXDe2f1C
+	kgdW9KPHCfjB/ZUFeRAaBGP3JoaaM4E5qT0mlW//et/wlmgPisBEcu+gJf1xQyu+0hPD
+	cgBQ==
+Received: by 10.216.44.3 with SMTP id m3mr13345907web.129.1347488476357;
+	Wed, 12 Sep 2012 15:21:16 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A3A61.dip.t-dialin.net.
+	[91.10.58.97])
+	by mx.google.com with ESMTPS id t7sm15344476wix.6.2012.09.12.15.21.14
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 12 Sep 2012 15:21:15 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: meta-ti@yoctoproject.org
+Date: Thu, 13 Sep 2012 00:28:53 +0200
+Message-Id: <1347488933-11901-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.4.4
 MIME-Version: 1.0
-Received: by 10.14.2.5 with HTTP; Tue, 11 Sep 2012 10:26:14 -0700 (PDT)
-In-Reply-To: <20120911164620.GB5256@denix.org>
-References: <1347210467-19332-1-git-send-email-raj.khem@gmail.com>
-	<20120911164620.GB5256@denix.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 11 Sep 2012 10:26:14 -0700
-Message-ID: <CAMKF1sp3mhD_x6jLoZVL4o8YM5rhLPrbM7XqM9jjahmv2WkD7g@mail.gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] recipes: Use 'packagegroup' instead of 'task'
+Subject: [PATCH] mesa-xlib_*.bbappend: remove
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,46 +42,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2012 17:26:46 -0000
+X-List-Received-Date: Wed, 12 Sep 2012 22:21:22 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Sep 11, 2012 at 9:46 AM, Denys Dmytriyenko <denys@ti.com> wrote:
-> On Sun, Sep 09, 2012 at 10:07:47AM -0700, Khem Raj wrote:
->> bring recipes in sync with OE-Core, task bbclass
->> is now replaced by packagegroup.
->>
->> and task recipes are now called packagegroup_something
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  recipes-kernel/linux/multi-kernel.inc              |    2 +-
->>  recipes-misc/images/cloud9-gfx-image.bb            |    2 +-
->>  recipes-misc/images/cloud9-gnome-image.bb          |    2 +-
->>  recipes-misc/images/cloud9-image.bb                |    2 +-
->>  recipes-misc/images/ti-hw-bringup-image.bb         |    2 +-
->>  .../packagegroup-ti-drivers.bb}                    |    2 +-
->>  .../packagegroup-ti-test.bb}                       |    2 +-
->>  7 files changed, 7 insertions(+), 7 deletions(-)
->>  rename recipes-misc/{tasks/task-ti-drivers.bb => packagegroup/packagegroup-ti-drivers.bb} (96%)
->>  rename recipes-ti/{tasks/task-ti-test.bb => packagegroup/packagegroup-ti-test.bb} (92%)
->>
->> diff --git a/recipes-kernel/linux/multi-kernel.inc b/recipes-kernel/linux/multi-kernel.inc
->> index 04bc987..96d6121 100644
->> --- a/recipes-kernel/linux/multi-kernel.inc
->> +++ b/recipes-kernel/linux/multi-kernel.inc
->> @@ -117,5 +117,5 @@ do_deploy_append () {
->>
->>  }
->>
->> -do_compileconfigs[depends] += "u-boot-mkimage-native:do_populate_sysroot virtual/${TARGET_PREFIX}gcc:do_populate_sysroot virtual/${TARGET_PREFIX}gcc${KERNEL_CCSUFFIX}:do_populate_sysroot"
->> +do_compileconfigs[depends] += "u-boot-mkimage-native:do_populate_sysroot virtual/${TARGET_PREFIX}gcc:do_populate_sysroot"
->
-> Why is this changed? Isn't gcc${KERNEL_CCSUFFIX} no longer useful?
->
+oe-core removed mesa-xlib recipes
 
-this should have been a separate commit. Its needed to accompany
-http://patchwork.openembedded.org/patch/35151/
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ recipes-graphics/mesa/mesa-xlib_8.0.4.bbappend |    1 -
+ recipes-graphics/mesa/mesa-xlib_git.bbappend   |    1 -
+ 2 files changed, 0 insertions(+), 2 deletions(-)
+ delete mode 100644 recipes-graphics/mesa/mesa-xlib_8.0.4.bbappend
+ delete mode 100644 recipes-graphics/mesa/mesa-xlib_git.bbappend
 
-> --
-> Denys
+diff --git a/recipes-graphics/mesa/mesa-xlib_8.0.4.bbappend b/recipes-graphics/mesa/mesa-xlib_8.0.4.bbappend
+deleted file mode 100644
+index 164ec1b..0000000
+--- a/recipes-graphics/mesa/mesa-xlib_8.0.4.bbappend
++++ /dev/null
+@@ -1 +0,0 @@
+-require mesa-omap3-common.inc
+diff --git a/recipes-graphics/mesa/mesa-xlib_git.bbappend b/recipes-graphics/mesa/mesa-xlib_git.bbappend
+deleted file mode 100644
+index 164ec1b..0000000
+--- a/recipes-graphics/mesa/mesa-xlib_git.bbappend
++++ /dev/null
+@@ -1 +0,0 @@
+-require mesa-omap3-common.inc
+-- 
+1.7.4.4
+
 
