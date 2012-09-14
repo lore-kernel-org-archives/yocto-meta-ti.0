@@ -1,30 +1,22 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from tim.rpsys.net (93-97-173-237.zone5.bethere.co.uk
-	[93.97.173.237])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6095E01430
-	for <meta-ti@yoctoproject.org>; Fri, 14 Sep 2012 05:01:04 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q8EC10Ht011177;
-	Fri, 14 Sep 2012 13:01:00 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 10777-05; Fri, 14 Sep 2012 13:00:55 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id q8EC0nKR011171
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=NO);
-	Fri, 14 Sep 2012 13:00:52 +0100
-Message-ID: <1347624052.13596.5.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Gary Thomas <gary@mlbassoc.com>
-Date: Fri, 14 Sep 2012 13:00:52 +0100
-In-Reply-To: <505318E3.9060009@mlbassoc.com>
+Return-Path: <tf+lists.yocto@r-finger.com>
+Received: from r-finger.com (r-finger.com [178.79.160.5])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CC63CE01430
+	for <meta-ti@yoctoproject.org>; Fri, 14 Sep 2012 05:03:56 -0700 (PDT)
+Received: from [192.168.0.2] (host81-153-86-254.range81-153.btcentralplus.com
+	[81.153.86.254]) (using TLSv1 with cipher AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by r-finger.com (Postfix) with ESMTPSA id 1C9319ADE
+	for <meta-ti@yoctoproject.org>; Fri, 14 Sep 2012 13:03:42 +0100 (BST)
+Message-ID: <50531D1D.2030900@r-finger.com>
+Date: Fri, 14 Sep 2012 13:03:41 +0100
+From: Tomas Frydrych <tf+lists.yocto@r-finger.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.5) Gecko/20120624 Icedove/10.0.5
+MIME-Version: 1.0
+To: meta-ti@yoctoproject.org
 References: <20120914080805.GD26968@edge> <5053065A.4090009@r-finger.com>
-	<1347622164.9456.18.camel@ted> <505318E3.9060009@mlbassoc.com>
-X-Mailer: Evolution 3.2.3-0ubuntu6 
-Mime-Version: 1.0
-X-Virus-Scanned: amavisd-new at rpsys.net
-Cc: meta-ti@yoctoproject.org
+	<1347622164.9456.18.camel@ted>
+In-Reply-To: <1347622164.9456.18.camel@ted>
 Subject: Re: Make meta-ti comply with Yocto Project BSP requirements
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -38,52 +30,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2012 12:01:05 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 14 Sep 2012 12:03:57 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2012-09-14 at 05:45 -0600, Gary Thomas wrote:
-> On 2012-09-14 05:29, Richard Purdie wrote:
-> > On Fri, 2012-09-14 at 11:26 +0100, Tomas Frydrych wrote:
-> >> On 14/09/12 09:08, Denys Dmytriyenko wrote:
-> >>> 3. Inheriting (i.e. inherit systemd) classes from another layer, such as
-> >>> meta-systemd. This behavior breaks parsing and requires BBMASK-ing those
-> >>> problematic recipes. Although, it requires an "application" layer and not a
-> >>> "distribution" one, it's quite bad nonetheless, as it breaks parsing. High
-> >>> priority.
-> >>
-> >> I am not sure about this one; it is reasonable / necessary for a bsp
-> >> layer to provide an -initd / -systemd packages (e.g., the pvr drivers
-> >> need this, the gstreamer-ti package needs this), and as long as there is
-> >> no systemd.bbclass in oe-core, I suspect the only answer is to split the
-> >> bsp layer into -bsp, -bsp-initd and --bsp-systemd. I am not sure whether
-> >> such endless proliferation of layers is a particularly good solution?
-> >
-> > I don't think PVR modules having a dependency on some particular init
-> > system is a good thing.
-> >
-> > What we need is a good core init system architecture and then these
-> > pieces can plug into that in whatever way is appropriate.
-> >
-> > I appreciate we're not there yet however I think the overall goal of
-> > separating hardware support from "policy" is a good one. There are a few
-> > pain points we need to work through but if it was easy, we'd already
-> > have done it :)
-> >
-> > systemd support in OE-Core is being deferred to 1.4 as I want it done
-> > well and would be too rushed given where we're at in the schedule now.
+On 14/09/12 12:29, Richard Purdie wrote:
+> On Fri, 2012-09-14 at 11:26 +0100, Tomas Frydrych wrote:
+>> On 14/09/12 09:08, Denys Dmytriyenko wrote:
+>>> 3. Inheriting (i.e. inherit systemd) classes from another layer, such as 
+>>> meta-systemd. This behavior breaks parsing and requires BBMASK-ing those 
+>>> problematic recipes. Although, it requires an "application" layer and not a 
+>>> "distribution" one, it's quite bad nonetheless, as it breaks parsing. High 
+>>> priority.
+>>
+>> I am not sure about this one; it is reasonable / necessary for a bsp
+>> layer to provide an -initd / -systemd packages (e.g., the pvr drivers
+>> need this, the gstreamer-ti package needs this), and as long as there is
+>> no systemd.bbclass in oe-core, I suspect the only answer is to split the
+>> bsp layer into -bsp, -bsp-initd and --bsp-systemd. I am not sure whether
+>> such endless proliferation of layers is a particularly good solution?
 > 
-> When that does happen, I hope that it will still be possible to have
-> a distribution which uses initd.  Will that be the case, or do we all
-> have to follow down the systemd yellow brick road (which I personally
-> am not in favour of)?
+> I don't think PVR modules having a dependency on some particular init
+> system is a good thing.
+> 
+> What we need is a good core init system architecture and then these
+> pieces can plug into that in whatever way is appropriate.
 
-I want to systemd being optional with people electing to use or not use
-it...
+You could have a single bbclass that would provide the necessary
+functionality for both systems; the current two classes could just be
+aliases for it, providing backward compatibility. That would make the
+basic problem of having more than one init bbclass go away.
 
-Cheers,
+> 
+> I appreciate we're not there yet however I think the overall goal of
+> separating hardware support from "policy" is a good one. 
 
-Richard
+Yes, but we are not talking about having policy in the bsp layer, we are
+talking about the bsp layer supporting common policy types that a higher
+layer can choose to impose. I think the distinction between 'policy' and
+'policy awareness' is an important one.
 
+> There are a few
+> pain points we need to work through but if it was easy, we'd already
+> have done it :)
+> 
+> systemd support in OE-Core is being deferred to 1.4 as I want it done
+> well and would be too rushed given where we're at in the schedule now.
 
+Actually, there is a really simple fix for this specific problem, and
+that's for oe-core to include a dummy systemd.bbclass that does nothing.
+This stops the parsing from being broken, and it makes no difference if
+you are including meta-systemd.
+
+Tomas
 
