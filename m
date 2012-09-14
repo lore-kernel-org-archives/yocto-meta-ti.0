@@ -1,15 +1,22 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3969AE01430
-	for <meta-ti@yoctoproject.org>; Thu, 13 Sep 2012 23:04:04 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id EBB2A52AA0; Fri, 14 Sep 2012 06:04:03 +0000 (UTC)
+Return-Path: <denys@ti.com>
+Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
+	[206.46.173.7])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84C12E01438
+	for <meta-ti@yoctoproject.org>; Thu, 13 Sep 2012 23:13:58 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [72.66.25.115])
+	by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MAB007GRTARQWVF@vms173007.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 14 Sep 2012 01:13:40 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 9C37A2004C; Fri,
+	14 Sep 2012 02:13:39 -0400 (EDT)
+From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Message-Id: <20120914060403.EBB2A52AA0@arago-project.org>
-Date: Fri, 14 Sep 2012 06:04:03 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : beaglebone-tester: FTDI eeprom test, v2
+Date: Fri, 14 Sep 2012 02:13:37 -0400
+Message-id: <1347603217-10160-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 1.7.8.6
+Subject: [PATCH] layer.conf: lower layer priority from 10 to 6
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,46 +29,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2012 06:04:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 14 Sep 2012 06:13:58 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 9ef35da0c8ff3be8f37214e09d0fc1d4987a11fc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9ef35da0c8ff3be8f37214e09d0fc1d4987a11fc
+Lowering layer priority from 10 to 6 aligns meta-ti with other BSP layers
+and also allows distributions to override our recipes.
 
-Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Sat Sep  1 13:46:43 2012 +0200
-
-beaglebone-tester: FTDI eeprom test, v2
-
-Check descriptor instead of VID/PID
-
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ conf/layer.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
- recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
-index 7512e76..66b98a4 100644
---- a/recipes-ti/beagleboard/beaglebone-tester.bb
-+++ b/recipes-ti/beagleboard/beaglebone-tester.bb
-@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
- # only scripts and data
- inherit allarch
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 4afb4f3..faa4ac0 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -6,4 +6,4 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
  
--PR = "r19"
-+PR = "r20"
- 
- SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
-           "
--SRCREV = "bb93cdaa95173eb4a772523a37fe0bf8bd62d78f"
-+SRCREV = "487a13e2e4faaafa40ba5430600e6aeecf9581a8"
- 
- S = "${WORKDIR}/git"
- 
+ BBFILE_COLLECTIONS += "meta-ti"
+ BBFILE_PATTERN_meta-ti := "^${LAYERDIR}/"
+-BBFILE_PRIORITY_meta-ti = "10"
++BBFILE_PRIORITY_meta-ti = "6"
+-- 
+1.7.8.6
 
 
