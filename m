@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1C1BFE01438
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3969AE01430
 	for <meta-ti@yoctoproject.org>; Thu, 13 Sep 2012 23:04:04 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C6FFE52A99; Fri, 14 Sep 2012 06:04:03 +0000 (UTC)
+	id EBB2A52AA0; Fri, 14 Sep 2012 06:04:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120914060403.C6FFE52A99@arago-project.org>
+Message-Id: <20120914060403.EBB2A52AA0@arago-project.org>
 Date: Fri, 14 Sep 2012 06:04:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : beaglebone tester: bump SRCREV for FTDI test
+Subject: Koen Kooi : beaglebone-tester: FTDI eeprom test, v2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,15 +27,15 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 77c90bb7c2eed80d6030457d639d0c0707a7ea3e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=77c90bb7c2eed80d6030457d639d0c0707a7ea3e
+Commit: 9ef35da0c8ff3be8f37214e09d0fc1d4987a11fc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9ef35da0c8ff3be8f37214e09d0fc1d4987a11fc
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Fri Aug 31 09:16:45 2012 +0200
+Date:   Sat Sep  1 13:46:43 2012 +0200
 
-beaglebone tester: bump SRCREV for FTDI test
+beaglebone-tester: FTDI eeprom test, v2
 
-An extra test for the FTDI eeprom was added to catch programming errors that would break CCS.
+Check descriptor instead of VID/PID
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
@@ -46,20 +46,20 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
-index 138fbc6..7512e76 100644
+index 7512e76..66b98a4 100644
 --- a/recipes-ti/beagleboard/beaglebone-tester.bb
 +++ b/recipes-ti/beagleboard/beaglebone-tester.bb
 @@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
  # only scripts and data
  inherit allarch
  
--PR = "r18"
-+PR = "r19"
+-PR = "r19"
++PR = "r20"
  
  SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
            "
--SRCREV = "168a9604e170931d9de228f0d774f4fbda58aa37"
-+SRCREV = "bb93cdaa95173eb4a772523a37fe0bf8bd62d78f"
+-SRCREV = "bb93cdaa95173eb4a772523a37fe0bf8bd62d78f"
++SRCREV = "487a13e2e4faaafa40ba5430600e6aeecf9581a8"
  
  S = "${WORKDIR}/git"
  
