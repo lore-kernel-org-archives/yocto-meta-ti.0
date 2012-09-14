@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2EB0AE01438
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2FF07E01448
 	for <meta-ti@yoctoproject.org>; Thu, 13 Sep 2012 22:53:57 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A817D52A75; Fri, 14 Sep 2012 05:53:56 +0000 (UTC)
+	id 5EC7F52A73; Fri, 14 Sep 2012 05:53:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120914055356.A817D52A75@arago-project.org>
+Message-Id: <20120914055356.5EC7F52A73@arago-project.org>
 Date: Fri, 14 Sep 2012 05:53:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-ti335x-psp 3.2: mux orientation detect for camera sensor to gpio instead of gpmc
+Subject: Koen Kooi : linux-ti33x-psp 3.2: LCD7 A3 support, eMMC cape support, camera cape improvements
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,82 +27,25 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: f55bb66b46d0b3541a6115843026de360ec37b53
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f55bb66b46d0b3541a6115843026de360ec37b53
+Commit: e4ea426bb5e7b9dc18cd9fc1e820744c05b63561
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e4ea426bb5e7b9dc18cd9fc1e820744c05b63561
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Thu Aug 16 11:18:35 2012 +0200
+Date:   Mon Jul 30 20:41:14 2012 +0200
 
-linux-ti335x-psp 3.2: mux orientation detect for camera sensor to gpio instead of gpmc
+linux-ti33x-psp 3.2: LCD7 A3 support, eMMC cape support, camera cape improvements
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...e-mux-camera-cape-orientation-pin-to-gpio.patch |   35 ++++++++++++++++++++
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    3 +-
- 2 files changed, 37 insertions(+), 1 deletions(-)
+ .../0081-beaglebone-add-support-for-LCD7-A3.patch  |  144 +++++++++
+ ...one-add-rudimentary-support-for-eMMC-cape.patch |  111 +++++++
+ ...bone-add-extra-partnumber-for-camera-cape.patch |   26 ++
+ ...084-beaglebone-cssp_camera-driver-cleanup.patch |  324 ++++++++++++++++++++
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    6 +-
+ 5 files changed, 610 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0085-beaglebone-mux-camera-cape-orientation-pin-to-gpio.patch b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0085-beaglebone-mux-camera-cape-orientation-pin-to-gpio.patch
-new file mode 100644
-index 0000000..396b2d1
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti33x-psp-3.2/beaglebone/0085-beaglebone-mux-camera-cape-orientation-pin-to-gpio.patch
-@@ -0,0 +1,35 @@
-+From cfef44a953b640d592133ed553c1c4ba72953837 Mon Sep 17 00:00:00 2001
-+From: Koen Kooi <koen@dominion.thruhere.net>
-+Date: Wed, 15 Aug 2012 14:33:37 +0200
-+Subject: [PATCH] beaglebone: mux camera cape orientation pin to gpio
-+
-+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-+---
-+ arch/arm/mach-omap2/board-am335xevm.c |    3 ++-
-+ 1 files changed, 2 insertions(+), 1 deletions(-)
-+
-+diff --git a/arch/arm/mach-omap2/board-am335xevm.c b/arch/arm/mach-omap2/board-am335xevm.c
-+index d30c5a2..78c4bf9 100644
-+--- a/arch/arm/mach-omap2/board-am335xevm.c
-++++ b/arch/arm/mach-omap2/board-am335xevm.c
-+@@ -846,6 +846,7 @@ static struct pinmux_config gpmc_pin_mux[] = {
-+ static struct pinmux_config camera_cape_pin_mux[] = {
-+ 	{"spi0_d1.gpio0_4",    OMAP_MUX_MODE7 | AM33XX_PIN_OUTPUT },		// QL CSSP and Camera Sensor Reset
-+ 	{"spi0_cs0.gpio0_5",   OMAP_MUX_MODE7 | AM33XX_PIN_OUTPUT_PULLUP },	// 1V8 and 2V8 Power Enable
-++	{"gpmc_csn1.gpio0_30",   OMAP_MUX_MODE7 | AM33XX_PIN_INPUT},		// Sensor orientation detect: low -> frontfacing, high -> backfacing
-+ 	{NULL, 0},
-+ };
-+ 
-+@@ -2065,8 +2066,8 @@ static void cssp_gpmc_init(void)
-+ 			{ NULL, GPMC_DEVICE_NOR },
-+ 		};
-+ 
-+-	setup_pin_mux(camera_cape_pin_mux);
-+ 	setup_pin_mux(gpmc_pin_mux);
-++	setup_pin_mux(camera_cape_pin_mux);
-+ 
-+ 	omap_init_gpmc(gpmc_device, sizeof(gpmc_device));
-+ 	gpmc_cssp_init();
-+-- 
-+1.7.7.6
-+
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index 77b1680..5cbf46b 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -15,7 +15,7 @@ PV = "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "3.2", "3.2.25", d)}"
- 
- BRANCH = "v3.2-staging"
- SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
--MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
- 
- COMPATIBLE_MACHINE = "(ti33x)"
- 
-@@ -1826,4 +1826,5 @@ PATCHES_OVER_PSP = " \
- 	file://beaglebone/0082-beaglebone-add-rudimentary-support-for-eMMC-cape.patch \
- 	file://beaglebone/0083-beaglebone-add-extra-partnumber-for-camera-cape.patch \
- 	file://beaglebone/0084-beaglebone-cssp_camera-driver-cleanup.patch \
-+	file://beaglebone/0085-beaglebone-mux-camera-cape-orientation-pin-to-gpio.patch \
- "
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=e4ea426bb5e7b9dc18cd9fc1e820744c05b63561
 
