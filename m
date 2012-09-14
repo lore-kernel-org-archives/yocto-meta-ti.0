@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 05029E01430
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1C1BFE01438
 	for <meta-ti@yoctoproject.org>; Thu, 13 Sep 2012 23:04:04 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9187B52A77; Fri, 14 Sep 2012 06:04:03 +0000 (UTC)
+	id C6FFE52A99; Fri, 14 Sep 2012 06:04:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120914060403.9187B52A77@arago-project.org>
+Message-Id: <20120914060403.C6FFE52A99@arago-project.org>
 Date: Fri, 14 Sep 2012 06:04:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : beaglebone-tester: ship testaudio, fix depends
+Subject: Koen Kooi : beaglebone tester: bump SRCREV for FTDI test
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,59 +27,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: b6a95c1a240fd228cb55ce004afb130dcdf0db52
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b6a95c1a240fd228cb55ce004afb130dcdf0db52
+Commit: 77c90bb7c2eed80d6030457d639d0c0707a7ea3e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=77c90bb7c2eed80d6030457d639d0c0707a7ea3e
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Sun Aug 12 10:11:12 2012 +0200
+Date:   Fri Aug 31 09:16:45 2012 +0200
 
-beaglebone-tester: ship testaudio, fix depends
+beaglebone tester: bump SRCREV for FTDI test
+
+An extra test for the FTDI eeprom was added to catch programming errors that would break CCS.
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/beagleboard/beaglebone-tester.bb |   10 +++++++---
- 1 files changed, 7 insertions(+), 3 deletions(-)
+ recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
-index 82c5a83..138fbc6 100644
+index 138fbc6..7512e76 100644
 --- a/recipes-ti/beagleboard/beaglebone-tester.bb
 +++ b/recipes-ti/beagleboard/beaglebone-tester.bb
 @@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
  # only scripts and data
  inherit allarch
  
--PR = "r17"
-+PR = "r18"
+-PR = "r18"
++PR = "r19"
  
  SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
            "
--SRCREV = "c748d157b9afbb71e6eadf1dca7a787a456c0149"
-+SRCREV = "168a9604e170931d9de228f0d774f4fbda58aa37"
+-SRCREV = "168a9604e170931d9de228f0d774f4fbda58aa37"
++SRCREV = "bb93cdaa95173eb4a772523a37fe0bf8bd62d78f"
  
  S = "${WORKDIR}/git"
  
-@@ -37,6 +37,10 @@ do_install() {
- 	for i in ${S}/bone-tester/lib/* ; do
- 		install -m 0755 ${i} ${D}${localstatedir}/lib/bone-tester/lib/
- 	done
-+
-+	install -d ${D}${bindir}
-+	install -m 0755 ${S}/testaudio ${D}${bindir}
-+
- }
- 
- 
-@@ -44,7 +48,7 @@ FILES_${PN} += "${base_libdir}/systemd \
-                 /boot \
-                "
- 
--RDEPENDS_${PN} = "iputils memtester"
-+RDEPENDS_${PN} = "alsa-utils-aplay sox iputils memtester"
- RRECOMMENDS_${PN} = "kernel-module-g-zero \
-                      kernel-module-g-mass-storage \
-                      kernel-module-g-file-storage \
 
 
