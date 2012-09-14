@@ -1,24 +1,26 @@
 Return-Path: <denys@ti.com>
-Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
-	[206.46.173.5])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9BE2FE01430
-	for <meta-ti@yoctoproject.org>; Thu, 13 Sep 2012 23:47:30 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [72.66.25.115])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MAB00CT0UUDNIZ3@vms173005.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 14 Sep 2012 01:47:01 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id F3C5620031; Fri,
-	14 Sep 2012 02:47:00 -0400 (EDT)
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 41F9BE01430
+	for <meta-ti@yoctoproject.org>; Fri, 14 Sep 2012 01:08:09 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q8E888n9004482
+	for <meta-ti@yoctoproject.org>; Fri, 14 Sep 2012 03:08:08 -0500
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q8E888Tm008737
+	for <meta-ti@yoctoproject.org>; Fri, 14 Sep 2012 03:08:08 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Fri, 14 Sep 2012 03:08:07 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id q8E887Eo027272	for
+	<meta-ti@yoctoproject.org>; Fri, 14 Sep 2012 03:08:08 -0500
+Date: Fri, 14 Sep 2012 04:08:07 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: meta-ti@yoctoproject.org
-Date: Fri, 14 Sep 2012 02:46:51 -0400
-Message-id: <1347605211-12813-1-git-send-email-denys@ti.com>
-X-Mailer: git-send-email 1.7.8.6
-In-reply-to: <20120914064306.GC26968@edge>
-References: <20120914064306.GC26968@edge>
-Subject: [RFC: PATCH 1] ti-hw-bringup-image: fix 'no LICENSE' parsing error when meta-angstrom is not used
+To: <meta-ti@yoctoproject.org>
+Message-ID: <20120914080805.GD26968@edge>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Make meta-ti comply with Yocto Project BSP requirements
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,38 +33,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2012 06:47:30 -0000
+X-List-Received-Date: Fri, 14 Sep 2012 08:08:09 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-When meta-angstrom is not used in BBLAYERS, parsing of ti-hw-bringup-image and
-all other cloud9-*image recipes in recipes-misc/ fails with "No LICENSE field
-set" error message, as they use the base systemd-image recipe from meta-angstrom
-that sets the license.
+All,
 
-This workaround makes the recipes parse by duplicating the license info locally.
-They still cannot be built though, as the base systemd-image is not available
-w/o referencing meta-angstrom.
+One of the requirements for a BSP layer to be officially Yocto Project 
+compliant or compatible is to avoid mixing hardware suport with policy 
+configuration. Here is the corresponding commit from Richard to split 
+meta-yocto into distro and BSP pieces, as separate layers:
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-misc/images/ti-hw-bringup-image.bb |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-yocto/commit/?id=eac90e27a032ea23d9a4f35c7eef8b1940c80e22
 
-diff --git a/recipes-misc/images/ti-hw-bringup-image.bb b/recipes-misc/images/ti-hw-bringup-image.bb
-index 9490098..0590445 100644
---- a/recipes-misc/images/ti-hw-bringup-image.bb
-+++ b/recipes-misc/images/ti-hw-bringup-image.bb
-@@ -2,6 +2,10 @@
- 
- include recipes-images/angstrom/systemd-image.bb
- 
-+# Repeat the license info here, if systemd-image.bb from meta-angstrom is not available
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+
- EXTRA_MACHINE_IMAGE_INSTALL ?= ""
- 
- # Hokey-pokey workaround for MUSB bugs
+In meta-ti we have several levels of severity in violation of this requirement:
+
+1. Depending (i.e. DEPENDS/RDEPENDS) on packages from another "application" 
+layer, such as meta-oe, meta-systemd, etc. It can be argued that such 
+dependency is not on "policy configuration", plus it does not break parsing, 
+unless problematic recipes need to be built, thus mark it as lower priority 
+for now.
+
+2. Depending (again, DEPENDS/RDEPENDS) on packages from a "distribution"
+layer, such as meta-angstrom (or potentially, meta-yocto or meta-arago). This
+does not break parsing, but violates the above requirement, by depending on a 
+specific "policy configuration" layer. Medium priority.
+
+3. Inheriting (i.e. inherit systemd) classes from another layer, such as 
+meta-systemd. This behavior breaks parsing and requires BBMASK-ing those 
+problematic recipes. Although, it requires an "application" layer and not a 
+"distribution" one, it's quite bad nonetheless, as it breaks parsing. High 
+priority.
+
+4. Including (i.e. require/include) a file from a "distro" layer - again, 
+depending on a specific "policy configurtion" layer is in violation of the 
+requirement. And using "require" will even break parsing, when such layer is 
+not referenced in the BBLAYERS stack. There are also problems with "include" 
+as well, when variables like LICENSE are expected to be set by distro layer. 
+High priority.
+
+
+I'd like to start addressing these issues in the reverse order, according to 
+the priority. There is a RFC with 2 possible quick/temporary workarounds to 
+"fix" #4. Please provide feedback for those.
+
+The longer-term proper solution would be to split out offending recipes into a 
+separate layer. Nobody wants to simply remove them - we want to preserve them, 
+just put them in right place.
+
+I can create a sub-layer inside meta-ti and move the recipes there - can send 
+a patch/proposal right away. Or we can agree to host them in an outside layer -
+once they are copied there, I can remove them from meta-ti. Let's agree on 
+something.
+
+Yes, the topic of moving those recipes into a separate layer was discussed 
+here ad nauseam lately, but this email is meant to lay down the official 
+reasons for such move and follow through. Thank you for your cooperation.
+
 -- 
-1.7.8.6
-
+Denys
 
