@@ -1,38 +1,34 @@
-Return-Path: <ebutera@gmail.com>
-Received: from mail-vb0-f48.google.com (mail-vb0-f48.google.com
-	[209.85.212.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A66EAE002AB
-	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 16:27:55 -0700 (PDT)
-Received: by vbme21 with SMTP id e21so8019362vbm.35
-	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 16:27:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=XFVwk0q8zG/YA1mqo+5TkbNYJbJoQvDVqwGLGMaQ+q8=;
-	b=qrpr6EKMfYVv6ERCR3v2glCOePNWsx1SVch/6TQgSdY/XF/g4Yr8Pf/kzgWtSKMzZV
-	Y7F9wrj7wA0TTQuyXZX287HizbTpHsD3mbo53JvefT8Nx28DJZgX3a+kuMLHZugO9J46
-	8Tj85+Z6pigM+6u/o41Ur+YDZ5iCQksAOEi/VQJNTkkHXl1rn5pBw0p9S/ADRIP43Npk
-	gQ90wJ8C7ZSeKLL+sEW5BUDXorRjSqITLi2go+V7XXaYjiI701sw9j3FPhNfKih6y1up
-	S0mgqiXuDBlituH8M31xLaiwvLvKFILjQ29PzxTHeW7nPR7eLEO24DnKM0clCVp3dz7g
-	mwaA==
+Return-Path: <fcooper@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6891E0027F
+	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 16:34:13 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q8HNYBeB020176;
+	Mon, 17 Sep 2012 18:34:11 -0500
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q8HNYBWw012229;
+	Mon, 17 Sep 2012 18:34:11 -0500
+Received: from DFLE09.ent.ti.com ([fe80::3103:58c3:47f:860b]) by
+	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
+	14.01.0323.003; Mon, 17 Sep 2012 18:34:11 -0500
+From: "Cooper Jr., Franklin" <fcooper@ti.com>
+To: Koen Kooi <koen@dominion.thruhere.net>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH v2] libgles-omap3: Pull in changes from	arago
+	to meta-ti
+Thread-Index: AQHNib877mwunonD6067AuY7NH7+SZePQiGg
+Date: Mon, 17 Sep 2012 23:34:10 +0000
+Message-ID: <8F29D6B095ED194EA1980491A5E029710C2D6298@DFLE09.ent.ti.com>
+References: <1346665189-10535-1-git-send-email-fcooper27jr@gmail.com>
+	<F45EF99D-D3F7-4CB3-91A7-DDA8C014A727@dominion.thruhere.net>
+	<8F29D6B095ED194EA1980491A5E029710C2B3ED7@DFLE09.ent.ti.com>
+In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C2B3ED7@DFLE09.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-Received: by 10.58.58.144 with SMTP id r16mr8648842veq.52.1347924471332; Mon,
-	17 Sep 2012 16:27:51 -0700 (PDT)
-Sender: ebutera@gmail.com
-Received: by 10.220.226.196 with HTTP; Mon, 17 Sep 2012 16:27:51 -0700 (PDT)
-In-Reply-To: <B21EAA42-16D6-48D2-98AC-9DD07DA11FB2@dominion.thruhere.net>
-References: <20120914064306.GC26968@edge>
-	<7D46E86EC0A8354091174257B2FED101591F5F33@DLEE12.ent.ti.com>
-	<CA+2YH7vzOwfqcfhM1xu8W=LmD-UV58zLQ6=XvokrCTh1AUvMnA@mail.gmail.com>
-	<B21EAA42-16D6-48D2-98AC-9DD07DA11FB2@dominion.thruhere.net>
-Date: Tue, 18 Sep 2012 01:27:51 +0200
-X-Google-Sender-Auth: p6e2E-aX2p2Rj7ICneYB7yB4H2w
-Message-ID: <CA+2YH7ucYnJ6oEe6PtaSUh9iODUZo-qXMrrN2SNy5+bYQBfTeQ@mail.gmail.com>
-From: Enrico <ebutera@users.berlios.de>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: RFC: 2 possible workarounds for recipes-misc dependency on Angstrom
+Subject: Re: [PATCH v2] libgles-omap3: Pull in changes from	arago	to meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,30 +41,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2012 23:27:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 17 Sep 2012 23:34:13 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 17, 2012 at 10:42 PM, Koen Kooi <koen@dominion.thruhere.net> wr=
-ote:
->
->
-> Op 17 sep. 2012 om 22:36 heeft Enrico <ebutera@users.berlios.de> het volg=
-ende geschreven:
->
->> On Fri, Sep 14, 2012 at 10:06 PM, Maupin, Chase <chase.maupin@ti.com> wr=
-ote:
->>> So really I think the question is do we have an agreement on "meta-beag=
-le" or whatever it should be called, a timeline for it to be created and th=
-e recipes moved?  Let's make meta-ti be the foundation BSP that we can all =
-build on top of and nothing more or less.
->>
->> Sorry to jump into the discussion but...am i the only one that thinks
->> that having meta-beagle, meta-panda, meta-whateverTIboard is crazy?
->
-> Beagle is not a TI board
+You can ignore this patch for now while I investigate some more.
 
-Oh come on you got my point ;)
+-----Original Message-----
+From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
+.org] On Behalf Of Cooper Jr., Franklin
+Sent: Monday, September 03, 2012 5:30 AM
+To: Koen Kooi; meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [PATCH v2] libgles-omap3: Pull in changes from arago=
+ to meta-ti
 
-Enrico
+Are you referring to this commit http://cgit.openembedded.org/openembedded/=
+commit/recipes/qt4?id=3Df63289cfa7e1d96cc7f5ab845e5764f0b853a022 ?
+
+The point of that commit was to insure that the headers from the Graphics S=
+DK is being used and not a Qt version. This patch is just making sure that =
+the SXG version of the include files are available.
+
+-----Original Message-----
+From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
+.org] On Behalf Of Koen Kooi
+Sent: Monday, September 03, 2012 4:54 AM
+To: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [PATCH v2] libgles-omap3: Pull in changes from arago=
+ to meta-ti
+
+
+Op 3 sep. 2012, om 11:39 heeft Franklin S. Cooper Jr <fcooperjr27@gmail.com=
+> het volgende geschreven:
+>=20
+> -=09
+> +    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir} || true
+> +    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/ || true
+
+IIRC this is going to generate some file conflicts and in OE-classic we poi=
+nted qt to the proper place for the includes. Has something changed since t=
+hen?
+_______________________________________________
+meta-ti mailing list
+meta-ti@yoctoproject.org
+https://lists.yoctoproject.org/listinfo/meta-ti
+_______________________________________________
+meta-ti mailing list
+meta-ti@yoctoproject.org
+https://lists.yoctoproject.org/listinfo/meta-ti
 
