@@ -1,31 +1,38 @@
-Return-Path: <fcooper@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0D2DEE0027F
-	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 16:15:26 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q8HNFQk8018199;
-	Mon, 17 Sep 2012 18:15:26 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q8HNFQaa025448;
-	Mon, 17 Sep 2012 18:15:26 -0500
-Received: from DFLE09.ent.ti.com ([fe80::3103:58c3:47f:860b]) by
-	DFLE72.ent.ti.com ([fe80::5c48:b90d:af93:5822%30]) with mapi id
-	14.01.0323.003; Mon, 17 Sep 2012 18:15:26 -0500
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH] recipes: Fix ti-eula-unpack issue. Tweak sgx
-	modules and libgles recipes.
-Thread-Index: AQHNiGdZZzkxFLJPF0Wic+ETd5QIL5ePQ4AA
-Date: Mon, 17 Sep 2012 23:15:24 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C2D6243@DFLE09.ent.ti.com>
-References: <1346521503-32331-1-git-send-email-fcooper27jr@gmail.com>
-In-Reply-To: <1346521503-32331-1-git-send-email-fcooper27jr@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+Return-Path: <ebutera@gmail.com>
+Received: from mail-vb0-f48.google.com (mail-vb0-f48.google.com
+	[209.85.212.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A66EAE002AB
+	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 16:27:55 -0700 (PDT)
+Received: by vbme21 with SMTP id e21so8019362vbm.35
+	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 16:27:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=XFVwk0q8zG/YA1mqo+5TkbNYJbJoQvDVqwGLGMaQ+q8=;
+	b=qrpr6EKMfYVv6ERCR3v2glCOePNWsx1SVch/6TQgSdY/XF/g4Yr8Pf/kzgWtSKMzZV
+	Y7F9wrj7wA0TTQuyXZX287HizbTpHsD3mbo53JvefT8Nx28DJZgX3a+kuMLHZugO9J46
+	8Tj85+Z6pigM+6u/o41Ur+YDZ5iCQksAOEi/VQJNTkkHXl1rn5pBw0p9S/ADRIP43Npk
+	gQ90wJ8C7ZSeKLL+sEW5BUDXorRjSqITLi2go+V7XXaYjiI701sw9j3FPhNfKih6y1up
+	S0mgqiXuDBlituH8M31xLaiwvLvKFILjQ29PzxTHeW7nPR7eLEO24DnKM0clCVp3dz7g
+	mwaA==
 MIME-Version: 1.0
-Subject: Re: [PATCH] recipes: Fix ti-eula-unpack issue. Tweak sgx	modules and libgles recipes.
+Received: by 10.58.58.144 with SMTP id r16mr8648842veq.52.1347924471332; Mon,
+	17 Sep 2012 16:27:51 -0700 (PDT)
+Sender: ebutera@gmail.com
+Received: by 10.220.226.196 with HTTP; Mon, 17 Sep 2012 16:27:51 -0700 (PDT)
+In-Reply-To: <B21EAA42-16D6-48D2-98AC-9DD07DA11FB2@dominion.thruhere.net>
+References: <20120914064306.GC26968@edge>
+	<7D46E86EC0A8354091174257B2FED101591F5F33@DLEE12.ent.ti.com>
+	<CA+2YH7vzOwfqcfhM1xu8W=LmD-UV58zLQ6=XvokrCTh1AUvMnA@mail.gmail.com>
+	<B21EAA42-16D6-48D2-98AC-9DD07DA11FB2@dominion.thruhere.net>
+Date: Tue, 18 Sep 2012 01:27:51 +0200
+X-Google-Sender-Auth: p6e2E-aX2p2Rj7ICneYB7yB4H2w
+Message-ID: <CA+2YH7ucYnJ6oEe6PtaSUh9iODUZo-qXMrrN2SNy5+bYQBfTeQ@mail.gmail.com>
+From: Enrico <ebutera@users.berlios.de>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: RFC: 2 possible workarounds for recipes-misc dependency on Angstrom
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,194 +45,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2012 23:15:27 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 17 Sep 2012 23:27:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-ping
+On Mon, Sep 17, 2012 at 10:42 PM, Koen Kooi <koen@dominion.thruhere.net> wr=
+ote:
+>
+>
+> Op 17 sep. 2012 om 22:36 heeft Enrico <ebutera@users.berlios.de> het volg=
+ende geschreven:
+>
+>> On Fri, Sep 14, 2012 at 10:06 PM, Maupin, Chase <chase.maupin@ti.com> wr=
+ote:
+>>> So really I think the question is do we have an agreement on "meta-beag=
+le" or whatever it should be called, a timeline for it to be created and th=
+e recipes moved?  Let's make meta-ti be the foundation BSP that we can all =
+build on top of and nothing more or less.
+>>
+>> Sorry to jump into the discussion but...am i the only one that thinks
+>> that having meta-beagle, meta-panda, meta-whateverTIboard is crazy?
+>
+> Beagle is not a TI board
 
------Original Message-----
-From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
-.org] On Behalf Of Franklin S. Cooper Jr
-Sent: Saturday, September 01, 2012 12:45 PM
-To: meta-ti@yoctoproject.org
-Cc: Franklin S. Cooper Jr
-Subject: [meta-ti] [PATCH] recipes: Fix ti-eula-unpack issue. Tweak sgx mod=
-ules and libgles recipes.
+Oh come on you got my point ;)
 
-* Commit d8fc4a686262c50fd0053afa7240020909ec430b addressed an issue where
-  too many newlines characters were being sent since print by default alrea=
-dy
-  sends a newline character. This commit however resulted in bin files bein=
-g
-  installed in the WORKDIR and broke other recipes which commit
-  a94f765b9867abefd5f0bd262b5dddb8782b3187 addressed. This lead to a very
-  cluttered WORKDIR.
-* This patch updates ti-eula-unpack.inc to switch from using a print to a w=
-rite.
-  Since write doesn't automatically send newlines it is a bit more obvious =
-when
-  newlines are sent.
-* Part of the reason that bin files were being installed in the WORKDIR was
-  due to TI_BIN_UNPK_WDEXT being blank for some recipes. For instance in th=
-e
-  libgles-omap3 recipes, when the workdir command is set in TI_BIN_UNPK_CMD=
-S the
-  directory that the Graphics SDK will be installed into is
-  workdir+TI_BIN_UNPK_WDEXT. A blank TI_BIN_UNPK_WDEXT means the SDK will b=
-e
-  installed in WORKDIR. By setting TI_BIN_UNPK_WDEXT to a proper value the
-  recipes can be sure it is installed in the proper directory.
-* Determine which file to download based on the defined BINFILE and not a
-  hardcoded value. This idea was taken from arago.
-
-Signed-off-by: Franklin S. Cooper Jr <fcooper27jr@gmail.com>
----
- .../omap3-sgx-modules_1.6.16.3977.bb               |    8 ++++----
- recipes-graphics/libgles/libgles-omap3.inc         |    4 ++--
- .../libgles/libgles-omap3_4.03.00.02.bb            |    6 +++---
- .../libgles/libgles-omap3_4.05.00.03.bb            |    6 +++---
- recipes-ti/includes/ti-eula-unpack.inc             |    4 ++--
- 5 files changed, 14 insertions(+), 14 deletions(-)
-
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb b=
-/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-index 0affee1..4f9be7b 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-@@ -11,17 +11,17 @@ BINFILE :=3D "Graphics_SDK_setuplinux_${SGXPV}.bin"
-=20
- inherit module
-=20
--MACHINE_KERNEL_PR_append =3D "a"
-+MACHINE_KERNEL_PR_append =3D "b"
- PR =3D "${MACHINE_KERNEL_PR}"
-=20
--SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetco=
-ntent/gfxsdk/${SGXPV}/exports/Graphics_SDK_setuplinux_${SGXPV}.bin \
-+SRC_URI =3D=20
-+"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfx
-+sdk/${SGXPV}/exports/${BINFILE} \
-            file://Compile-fixes-for-38-kernel.patch \
-            file://kernel-30.patch \
-           "
- SRC_URI[md5sum] =3D "ff8c1f2b8e4cb42f4ced6a613b081ada"
- SRC_URI[sha256sum] =3D "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036=
-423458c8d75255"
--
--S =3D "${WORKDIR}/Graphics_SDK_${SGXPV}/GFX_Linux_KM"
-+TI_BIN_UNPK_WDEXT=3D"/Graphics_SDK_${SGXPV}"
-+S =3D "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
-=20
- PVRBUILD =3D "release"
- export KERNELDIR =3D "${STAGING_KERNEL_DIR}"
-diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/=
-libgles/libgles-omap3.inc
-index 18ee7ff..4525285 100644
---- a/recipes-graphics/libgles/libgles-omap3.inc
-+++ b/recipes-graphics/libgles/libgles-omap3.inc
-@@ -3,7 +3,7 @@ LICENSE =3D "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum  LIC_FILES_CHKSUM =3D "f=
-ile://TSPA.txt;md5=3Dc0d5d9c1e38b41677144c4e24d6ddee1"
-=20
--PR =3D "r31"
-+PR =3D "r32"
-=20
- COMPATIBLE_MACHINE =3D "(omap3|ti814x|ti816x|ti33x)"
-=20
-@@ -11,7 +11,7 @@ DEPENDS =3D "virtual/libx11 libxau libxdmcp libdrm"
-=20
- PROVIDES +=3D "virtual/egl"
-=20
--SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetco=
-ntent/gfxsdk/${SGXPV}/exports/OMAP35x_Graphics_SDK_setuplinux_${SGXPV}.bin =
-\
-+SRC_URI =3D=20
-+"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfx
-+sdk/${SGXPV}/exports/${BINFILE} \
- 		   file://cputype \
- 		   file://rc.pvr \
- 		   file://sample.desktop \
-diff --git a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb b/recipes=
--graphics/libgles/libgles-omap3_4.03.00.02.bb
-index 97a22fe..e98fe02 100644
---- a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-+++ b/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-@@ -15,8 +15,9 @@ require libgles-omap3.inc  SGXPV =3D "4_03_00_02"
- IMGPV =3D "1.6.16.3977"
- BINFILE :=3D "Graphics_SDK_setuplinux_${SGXPV}.bin"
-+TI_BIN_UNPK_WDEXT :=3D "/Graphics_SDK_${SGXPV}"
-=20
--SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetco=
-ntent/gfxsdk/${SGXPV}/exports/Graphics_SDK_setuplinux_${SGXPV}.bin \
-+SRC_URI =3D=20
-+"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfx
-+sdk/${SGXPV}/exports/${BINFILE} \
-                    file://cputype \
-                    file://rc.pvr \
-                    file://sample.desktop \ @@ -26,5 +27,4 @@ SRC_URI =3D "=
-http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
- SRC_URI[md5sum] =3D "ff8c1f2b8e4cb42f4ced6a613b081ada"
- SRC_URI[sha256sum] =3D "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036=
-423458c8d75255"
-=20
--S =3D "${WORKDIR}"
--
-+S =3D "${WORKDIR}/Graphics_SDK_${SGXPV}"
-diff --git a/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb b/recipes=
--graphics/libgles/libgles-omap3_4.05.00.03.bb
-index d55dd05..7795e2e 100644
---- a/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
-+++ b/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
-@@ -12,8 +12,9 @@ require libgles-omap3.inc  SGXPV =3D "4_05_00_03"
- IMGPV =3D "1.6.16.4117"
- BINFILE :=3D "Graphics_SDK_setuplinux_${SGXPV}.bin"
-+TI_BIN_UNPK_WDEXT :=3D "/Graphics_SDK_${SGXPV}"
-=20
--SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetco=
-ntent/gfxsdk/${SGXPV}/exports/Graphics_SDK_setuplinux_${SGXPV}.bin \
-+SRC_URI =3D=20
-+"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfx
-+sdk/${SGXPV}/exports/${BINFILE} \
-                    file://cputype \
-                    file://rc.pvr \
-                    file://sample.desktop \ @@ -23,5 +24,4 @@ SRC_URI =3D "=
-http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
- SRC_URI[md5sum] =3D "0e651eaa92bb91760f0b40a17697a7dc"
- SRC_URI[sha256sum] =3D "bfe764a8959556195545d6fff76f63a489642f345c105bbbc3=
-09a3f243c2dd0e"
-=20
--S =3D "${WORKDIR}"
--
-+S =3D "${WORKDIR}/Graphics_SDK_${SGXPV}"
-diff --git a/recipes-ti/includes/ti-eula-unpack.inc b/recipes-ti/includes/t=
-i-eula-unpack.inc
-index 60f5558..aee88f1 100644
---- a/recipes-ti/includes/ti-eula-unpack.inc
-+++ b/recipes-ti/includes/ti-eula-unpack.inc
-@@ -14,7 +14,7 @@ python do_unpack () {
-     bb.build.exec_func('ti_bin_do_unpack', d)  }
-=20
--TI_BIN_UNPK_WDEXT +=3D ""
-+TI_BIN_UNPK_WDEXT ?=3D ""
- python ti_bin_do_unpack() {
-=20
-     import os
-@@ -60,7 +60,7 @@ python ti_bin_do_unpack() {
-             wdext =3D bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
-             wdext =3D bb.data.expand(wdext, localdata)
-             cmd =3D workdir+wdext
--        print >>f, cmd
-+        f.write(cmd+'\n');
-     f.close()
-=20
-     # Expand the tarball that was created if required
---
-1.7.0.4
-
-_______________________________________________
-meta-ti mailing list
-meta-ti@yoctoproject.org
-https://lists.yoctoproject.org/listinfo/meta-ti
+Enrico
 
