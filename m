@@ -1,27 +1,31 @@
-Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 820ACE0027F
-	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 14:56:22 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [72.66.25.115])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MAI00K0VKX8KFV2@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 17 Sep 2012 16:56:03 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 930D2203CD; Mon,
-	17 Sep 2012 17:55:56 -0400 (EDT)
-Date: Mon, 17 Sep 2012 17:55:56 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Enrico <ebutera@users.berlios.de>
-Message-id: <20120917215556.GC1218@denix.org>
-References: <20120914064306.GC26968@edge>
-	<7D46E86EC0A8354091174257B2FED101591F5F33@DLEE12.ent.ti.com>
-	<CA+2YH7vzOwfqcfhM1xu8W=LmD-UV58zLQ6=XvokrCTh1AUvMnA@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CA+2YH7vzOwfqcfhM1xu8W=LmD-UV58zLQ6=XvokrCTh1AUvMnA@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: RFC: 2 possible workarounds for recipes-misc dependency on Angstrom
+Return-Path: <fcooper@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 374A8E0027F
+	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 16:13:38 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q8HNDWeV017961;
+	Mon, 17 Sep 2012 18:13:32 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q8HNDWFT023272;
+	Mon, 17 Sep 2012 18:13:32 -0500
+Received: from DFLE09.ent.ti.com ([fe80::3103:58c3:47f:860b]) by
+	DFLE72.ent.ti.com ([fe80::5c48:b90d:af93:5822%30]) with mapi id
+	14.01.0323.003; Mon, 17 Sep 2012 18:13:32 -0500
+From: "Cooper Jr., Franklin" <fcooper@ti.com>
+To: "Franklin S. Cooper Jr" <fcooperjr27@gmail.com>,
+	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti][PATCH] libgles-omap3.inc: Tweak PLATFORM variable.
+Thread-Index: AQHNh80K0X/xbAtqikiNWYTJxix9ZpePRAyw
+Date: Mon, 17 Sep 2012 23:13:31 +0000
+Message-ID: <8F29D6B095ED194EA1980491A5E029710C2D622E@DFLE09.ent.ti.com>
+References: <1346455197-18722-1-git-send-email-fcooper27jr@gmail.com>
+In-Reply-To: <1346455197-18722-1-git-send-email-fcooper27jr@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
+MIME-Version: 1.0
+Subject: Re: [PATCH] libgles-omap3.inc: Tweak PLATFORM variable.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,20 +38,156 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2012 21:56:22 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 17 Sep 2012 23:13:38 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 17, 2012 at 10:36:20PM +0200, Enrico wrote:
-> On Fri, Sep 14, 2012 at 10:06 PM, Maupin, Chase <chase.maupin@ti.com> wrote:
-> > So really I think the question is do we have an agreement on "meta-beagle" or whatever it should be called, a timeline for it to be created and the recipes moved?  Let's make meta-ti be the foundation BSP that we can all build on top of and nothing more or less.
-> 
-> Sorry to jump into the discussion but...am i the only one that thinks
-> that having meta-beagle, meta-panda, meta-whateverTIboard is crazy?
+ping
 
-Not to argue that it's better, but how is it different from meta-cedartrail, 
-meta-crownbay, meta-emenlow, meta-sugarbay and all the other Intel boards?
+-----Original Message-----
+From: Franklin S. Cooper Jr [mailto:fcooperjr27@gmail.com]=20
+Sent: Friday, August 31, 2012 6:20 PM
+To: meta-ti@yoctoproject.org
+Cc: Cooper Jr., Franklin
+Subject: [meta-ti][PATCH] libgles-omap3.inc: Tweak PLATFORM variable.
 
--- 
-Denys
+From: Franklin S. Cooper Jr <fcooper@ti.com>
+
+* Newer versions of libgles-omap3 utilize a different PLATFORM value. This
+  patch allows the PLATFORM variable to be easily overridden if needed.
+* Replace the hardcoded usage of LinuxOMAP3 with the PLATFORM variable.
+
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+---
+ recipes-graphics/libgles/libgles-omap3.inc |   41 ++++++++++++++----------=
+---
+ 1 files changed, 21 insertions(+), 20 deletions(-)
+
+diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/=
+libgles/libgles-omap3.inc
+index 6137097..18ee7ff 100644
+--- a/recipes-graphics/libgles/libgles-omap3.inc
++++ b/recipes-graphics/libgles/libgles-omap3.inc
+@@ -61,10 +61,11 @@ TARGET_CC_ARCH +=3D " ${TARGET_LINK_HASH_STYLE} -Wl,-rp=
+ath-link,${BINLOCATION} -L$  -L${STAGING_DIR_TARGET}${libdir} -Wl,-rpath-li=
+nk,${STAGING_DIR_TARGET}${libdir}"
+ PARALLEL_MAKE =3D ""
+=20
++PLATFORM ?=3D "LinuxOMAP3"
++
+ do_compile() {
+ 	export X11ROOT=3D"${STAGING_DIR_HOST}/usr"
+ 	export TOOLCHAIN=3D"${TOOLCHAIN_PATH}"
+-	export PLATFORM=3D"LinuxOMAP3"
+=20
+ 	export PLAT_CC=3D"${CC}"
+ 	export PLAT_CPP=3D"${CXX}"
+@@ -77,23 +78,23 @@ do_compile() {
+ 	for X11BUILD in 0 1 ; do
+ 		for demo in ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Demos/* ; do
+ 			cd $demo/OGLES/Build/LinuxGeneric
+-			oe_runmake Common=3D1 PLATFORM=3D$PLATFORM X11BUILD=3D$X11BUILD =20
+-			rm $demo/OGLES/Build/LinuxOMAP3/Release*/*.o
+-			install -m 0755 $demo/OGLES/Build/LinuxOMAP3/ReleaseX11/* ${S}/demos/x1=
+1 || true
++			oe_runmake Common=3D1 PLATFORM=3D${PLATFORM} X11BUILD=3D$X11BUILD
++			rm $demo/OGLES/Build/${PLATFORM}/Release*/*.o
++			install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseX11/*=20
++${S}/demos/x11 || true
+ 			sed -e s:NAME:$(basename $demo): \
+-			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES/Build/Linu=
+xOMAP3/ReleaseX11/*): \
++			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename=20
++$demo/OGLES/Build/${PLATFORM}/ReleaseX11/*): \
+ 			     ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
+-			install -m 0755 $demo/OGLES/Build/LinuxOMAP3/ReleaseRaw/* ${S}/demos/ra=
+w || true=09
++			install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseRaw/*=20
++${S}/demos/raw || true
+ 		done
+ 		for demo in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Demos/* ; do
+ 			cd $demo/OGLES2/Build/LinuxGeneric
+-			oe_runmake Common=3D1 PLATFORM=3D$PLATFORM X11BUILD=3D$X11BUILD =20
+-			rm -f $demo/OGLES2/Build/LinuxOMAP3/Release*/*.o
+-			install -m 0755 $demo/OGLES2/Build/LinuxOMAP3/ReleaseX11/* ${S}/demos/x=
+11 || true
++			oe_runmake Common=3D1 PLATFORM=3D${PLATFORM} X11BUILD=3D$X11BUILD
++			rm -f $demo/OGLES2/Build/${PLATFORM}/Release*/*.o
++			install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/*=20
++${S}/demos/x11 || true
+ 			sed -e s:NAME:$(basename $demo): \
+-			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES2/Build/Lin=
+uxOMAP3/ReleaseX11/*): \
++			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename=20
++$demo/OGLES2/Build/${PLATFORM}/ReleaseX11/*): \
+ 			     ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
+-			install -m 0755 $demo/OGLES2/Build/LinuxOMAP3/ReleaseRaw/* ${S}/demos/r=
+aw || true=09
++			install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseRaw/*=20
++${S}/demos/raw || true
+ 		done
+ 	done
+=20
+@@ -109,14 +110,14 @@ do_compile() {
+ 				cd $training/OGLES2/Build/LinuxGeneric
+ 			fi
+=20
+-			if [ -e $training/OGLES2/Build/LinuxOMAP3/Makefile ] ; then
+-				cd $training/OGLES2/Build/LinuxOMAP3
++			if [ -e $training/OGLES2/Build/${PLATFORM}/Makefile ] ; then
++				cd $training/OGLES2/Build/${PLATFORM}
+ 			fi		=09
+=20
+-			oe_runmake Common=3D1 PLATFORM=3D$PLATFORM X11BUILD=3D$X11BUILD =20
+-			rm -f $training/OGLES2/Build/LinuxOMAP3/Release*/*.o
+-			install -m 0755 $training/OGLES2/Build/LinuxOMAP3/ReleaseX11/* ${S}/tra=
+iningcourses/x11 || true
+-			install -m 0755 $training/OGLES2/Build/LinuxOMAP3/ReleaseRaw/* ${S}/tra=
+iningcourses/raw || true=09
++			oe_runmake Common=3D1 PLATFORM=3D${PLATFORM} X11BUILD=3D$X11BUILD
++			rm -f $training/OGLES2/Build/${PLATFORM}/Release*/*.o
++			install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/tr=
+ainingcourses/x11 || true
++			install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseRaw/*=20
++${S}/trainingcourses/raw || true
+ 		done
+ 	done
+=20
+@@ -137,7 +138,7 @@ do_install () {
+ 	install -m 0755 ${BINLOCATION}/xgles1test1 ${D}${bindir}/
+=20
+ 	install -m 0755 ${BINLOCATION}/freedesktop/kdrive/usr/X11R6_SGX/bin/Xsgx =
+${D}${bindir}/|| true
+-	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/LinuxOMAP3/lib=
+/*X11WS* ${D}${libdir} || true
++	cp -pPR=20
++${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/lib/*X11
++WS* ${D}${libdir} || true
+=20
+ 	install -d ${D}${includedir}
+ 	cp -pPR ${S}/GFX_Linux_KM/include4 ${D}${includedir}/ @@ -145,8 +146,8 @@=
+ do_install () {
+=20
+ 	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/Include/* ${D}=
+${includedir}/
+ 	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/* ${D}${=
+includedir}/
+-	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/LinuxOMAP3/Inclu=
+de/GLES/* ${D}${includedir}/GLES/ || true
+-	cp -pPr ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/LinuxOMAP3/Inc=
+lude/GLES/* ${D}${includedir}/GLES2/ || true
++	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/${PLATFORM}/Incl=
+ude/GLES/* ${D}${includedir}/GLES/ || true
++	cp -pPr=20
++${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/Include/
++GLES/* ${D}${includedir}/GLES2/ || true
+ 	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/v* ${D}${inc=
+ludedir}/ || true
+ 	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/V* ${D}${inc=
+ludedir}/ || true
+ 	cp -pPr ${S}/include/*.h ${D}${includedir} || true
+--
+1.7.0.4
+
 
