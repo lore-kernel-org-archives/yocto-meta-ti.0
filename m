@@ -1,33 +1,37 @@
-Return-Path: <fcooper@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9DD25E0027F
-	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 16:55:53 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q8HNtq2q022500
-	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 18:55:52 -0500
-Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q8HNtqcG030665
-	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 18:55:52 -0500
-Received: from DFLE09.ent.ti.com ([fe80::3103:58c3:47f:860b]) by
-	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
-	14.01.0323.003; Mon, 17 Sep 2012 18:55:52 -0500
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH] libgles-omap3: Add new 4.06.00.02 version.
-Thread-Index: AQHNibYfzJBNf4dGrEu8S+UEYAw/SJd4tP0A//+sdECAAc1ugIAVHZow
-Date: Mon, 17 Sep 2012 23:55:52 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C2D6306@DFLE09.ent.ti.com>
-References: <1346665309-10837-1-git-send-email-fcooper27jr@gmail.com>
-	<C65364BD-A83A-4A63-AEC3-3DAC96A979B3@dominion.thruhere.net>
-	<8F29D6B095ED194EA1980491A5E029710C2B3E93@DFLE09.ent.ti.com>
-	<81DF8557-307C-43CF-9E46-4CA3F7C41A30@dominion.thruhere.net>
-In-Reply-To: <81DF8557-307C-43CF-9E46-4CA3F7C41A30@dominion.thruhere.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+Return-Path: <ebutera@gmail.com>
+Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
+	[209.85.214.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93EBBE002AB
+	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 17:16:25 -0700 (PDT)
+Received: by bkty5 with SMTP id y5so3019964bkt.35
+	for <meta-ti@yoctoproject.org>; Mon, 17 Sep 2012 17:16:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=PDOJSqRs0Ypk45XimL3z8vczljD5/o/Dyl+LqG0kXps=;
+	b=ga6iwqBsB8lAhyq/AcEiIDZ+BX3410vlOUgEBiCZwi8fi7iF22s48M9L5xmxC1y+wy
+	cqpLSWOzsr+8y4FwhoZPbF3dlhUAC/yIoyaDe0VyEHLG8KrjVd1HpjlBktkMwSWol8vf
+	WpptOu1qjsMsTfKOYQvNMxi0vDaWL/SCEKfsqVRyslg4JvTe0QrgFUykfeYfzGmvgCS/
+	c372TVkCK2qD2DTTW0Gn4xoDIf7jIPfX1KMqLtm8PbJ5pHUidBMQwtE38cl4+EIguTnW
+	Sd6ifgNJS28nMfhSBEVmcy5FTrg0SRbJ84CEp80ABGDr+8Tm+YXcp6wt5jPYdZDEbHry
+	nNRA==
 MIME-Version: 1.0
-Subject: Re: [PATCH] libgles-omap3: Add new 4.06.00.02 version.
+Received: by 10.204.129.27 with SMTP id m27mr4979673bks.115.1347927384182;
+	Mon, 17 Sep 2012 17:16:24 -0700 (PDT)
+Sender: ebutera@gmail.com
+Received: by 10.205.41.67 with HTTP; Mon, 17 Sep 2012 17:16:24 -0700 (PDT)
+In-Reply-To: <20120917215556.GC1218@denix.org>
+References: <20120914064306.GC26968@edge>
+	<7D46E86EC0A8354091174257B2FED101591F5F33@DLEE12.ent.ti.com>
+	<CA+2YH7vzOwfqcfhM1xu8W=LmD-UV58zLQ6=XvokrCTh1AUvMnA@mail.gmail.com>
+	<20120917215556.GC1218@denix.org>
+Date: Tue, 18 Sep 2012 02:16:24 +0200
+X-Google-Sender-Auth: cpsBGIAD5vT51hT_eSaRemb_Dzg
+Message-ID: <CA+2YH7tBSPwX4aoO3xX4ArU7CX=j5jVCSK5os4Jkvp=OCL8PqA@mail.gmail.com>
+From: Enrico <ebutera@users.berlios.de>
+To: Denys Dmytriyenko <denys@ti.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: RFC: 2 possible workarounds for recipes-misc dependency on Angstrom
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,68 +44,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2012 23:55:53 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 18 Sep 2012 00:16:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-ping
+On Mon, Sep 17, 2012 at 11:55 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+> On Mon, Sep 17, 2012 at 10:36:20PM +0200, Enrico wrote:
+>> Sorry to jump into the discussion but...am i the only one that thinks
+>> that having meta-beagle, meta-panda, meta-whateverTIboard is crazy?
+>
+> Not to argue that it's better, but how is it different from meta-cedartrail,
+> meta-crownbay, meta-emenlow, meta-sugarbay and all the other Intel boards?
 
------Original Message-----
-From: Koen Kooi [mailto:koen@dominion.thruhere.net]=20
-Sent: Tuesday, September 04, 2012 3:28 AM
-To: Cooper Jr., Franklin
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [meta-ti] [PATCH] libgles-omap3: Add new 4.06.00.02 version.
+I admit i know nothing about them and why they are organized like that.
 
+But, in my experience, it's really useful to see what happens in
+boards similar to what i'm using/developing for. For example thanks to
+Koen beagle patches i learned about smartreflex and crashing dm3730,
+or a patch coming from linux-omap to enable 720mhz on 3530, or a patch
+to fix mmc timeout issues. (i know, pretty old examples!).
 
-Op 3 sep. 2012, om 12:13 heeft "Cooper Jr., Franklin" <fcooper@ti.com> het =
-volgende geschreven:
+In other words the more i know about an arch, the better it is. And
+it's easier to follow meta-ti instead of meta-beagle-that-is-not-ti,
+meta-panda, meta-whatever, expecially when i have no (direct) reason
+to use those meta layers.
 
->=20
->=20
-> -----Original Message-----
-> From: meta-ti-bounces@yoctoproject.org=20
-> [mailto:meta-ti-bounces@yoctoproject.org] On Behalf Of Koen Kooi
-> Sent: Monday, September 03, 2012 4:56 AM
-> To: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH] libgles-omap3: Add new 4.06.00.02 version.
->=20
->=20
-> Op 3 sep. 2012, om 11:41 heeft Franklin S. Cooper Jr <fcooperjr27@gmail.c=
-om> het volgende geschreven:
->=20
->> * Add a new version of the Graphics SDK. There are a few changes in=20
->> the  Graphics SDK that need to be investigated to determine if it=20
->> impacts  someone who is trying to use X11. This recipe should work=20
->> fine  for non X11 users. Therefore, the DEFAULT_PREFERENCE will be -1=20
->> until  it is clear that X11 users arent negatively impacted and any=20
->> needed  changes in libgles-omap3.inc are made.
->=20
-> What's the timeframe for such tests?
->=20
-> I plan on leaving the DEFAULT_PREFERENCE at -1 until we can ensure that X=
-11 issues are sorted out. I am not even sure if there really is an issue.. =
-All I know is libpvrPVR2D_X11WSEGL OpenGLES2 was being used in the 4.05 ver=
-sion but no longer exists in this newer version. The only version of libpvr=
-PVR2D_X11WSEGL that exist is for OpenVG. I was told by the graphics team th=
-at libpvrPVR2D_X11WSEGL is deprecated and libpvrPVR2D_DRIWSEGL should be us=
-ed instead. Is this a non issue?
+But i maintain nothing in meta-ti so it's easy for me to see it in this way.
 
-Here's my limited understanding of the wsegl stuff:
-
-X11wsegl is a 'dumb' way to make it work with x11. It will tell X11 the rec=
-t coordinates to draw a window border and nothing more. The rendering still=
- happens to the framebuffer. No context locking, nothing.
-Driwsegl uses DRI for rendering and need a proper Xorg module to work, it f=
-eatures locking and stuff so you can have multiple clients.=20
-
-Roger Monk had it working a few months ago on omap4, but I don't know what =
-he had to do to make it work. I hope it is as simple as rebuilding the sgxk=
-ernel modules with SUPPORT_XORG=3D1 (actually dri) and installing the binar=
-y Xorg module.
-
-regards,
-
-Koen
+Enrico
 
