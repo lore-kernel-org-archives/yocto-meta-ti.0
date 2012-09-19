@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 31814E002AC
-	for <meta-ti@yoctoproject.org>; Tue, 18 Sep 2012 16:58:28 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 481F4E002AB
+	for <meta-ti@yoctoproject.org>; Tue, 18 Sep 2012 17:03:27 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 35F6E52A02; Tue, 18 Sep 2012 23:58:28 +0000 (UTC)
+	id D349452A6D; Wed, 19 Sep 2012 00:03:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120918235828.35F6E52A02@arago-project.org>
-Date: Tue, 18 Sep 2012 23:58:28 +0000 (UTC)
+Message-Id: <20120919000326.D349452A6D@arago-project.org>
+Date: Wed, 19 Sep 2012 00:03:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVyIG1lc2E6IGFkZCBhcHBlbmRzIHRvIGF2b2lkIHByb3ZpZGluZyBjb25mbGljdHM=?=
+Subject: Denys Dmytriyenko : layer.conf: lower layer priority from 10 to 6
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,60 +22,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Sep 2012 23:58:33 -0000
+X-List-Received-Date: Wed, 19 Sep 2012 00:03:27 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: bef66dc21a80d237028e003abdc71c66eb0078f9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bef66dc21a80d237028e003abdc71c66eb0078f9
+Commit: cca43833635d1321e014d5025852100d05fd3e3f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cca43833635d1321e014d5025852100d05fd3e3f
 
-Author: Andreas Müller <schnitzeltony@googlemail.com>
-Date:   Tue Sep  4 18:20:57 2012 +0200
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Sep 14 00:40:55 2012 -0400
 
-mesa: add appends to avoid providing conflicts
+layer.conf: lower layer priority from 10 to 6
 
-For libgles-omap3 compatible machines mesa should only provide libgl.
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-
-Rebased to squash removal of mesa-xlib.
+Lowering layer priority from 10 to 6 aligns meta-ti with other BSP layers
+and also allows distributions to override our recipes.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-graphics/mesa/mesa-dri_8.0.4.bbappend |    1 +
- recipes-graphics/mesa/mesa-dri_git.bbappend   |    1 +
- recipes-graphics/mesa/mesa-omap3-common.inc   |    7 +++++++
- 3 files changed, 9 insertions(+), 0 deletions(-)
+ conf/layer.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend b/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
-new file mode 100644
-index 0000000..164ec1b
---- /dev/null
-+++ b/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
-@@ -0,0 +1 @@
-+require mesa-omap3-common.inc
-diff --git a/recipes-graphics/mesa/mesa-dri_git.bbappend b/recipes-graphics/mesa/mesa-dri_git.bbappend
-new file mode 100644
-index 0000000..164ec1b
---- /dev/null
-+++ b/recipes-graphics/mesa/mesa-dri_git.bbappend
-@@ -0,0 +1 @@
-+require mesa-omap3-common.inc
-diff --git a/recipes-graphics/mesa/mesa-omap3-common.inc b/recipes-graphics/mesa/mesa-omap3-common.inc
-new file mode 100644
-index 0000000..0340770
---- /dev/null
-+++ b/recipes-graphics/mesa/mesa-omap3-common.inc
-@@ -0,0 +1,7 @@
-+PRINC := "${@int(PRINC) + 1}"
-+
-+# avoid providing conflicts for libgles-omap3 compatibles
-+PROVIDES_omap3 = "virtual/libgl"
-+PROVIDES_ti814x = "virtual/libgl"
-+PROVIDES_ti816x = "virtual/libgl"
-+PROVIDES_ti33x = "virtual/libgl"
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 4afb4f3..faa4ac0 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -6,4 +6,4 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
+ 
+ BBFILE_COLLECTIONS += "meta-ti"
+ BBFILE_PATTERN_meta-ti := "^${LAYERDIR}/"
+-BBFILE_PRIORITY_meta-ti = "10"
++BBFILE_PRIORITY_meta-ti = "6"
 
 
