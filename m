@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 481F4E002AB
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9BD49E002AB
 	for <meta-ti@yoctoproject.org>; Tue, 18 Sep 2012 17:03:27 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D349452A6D; Wed, 19 Sep 2012 00:03:26 +0000 (UTC)
+	id 49C0652A8F; Wed, 19 Sep 2012 00:03:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20120919000326.D349452A6D@arago-project.org>
-Date: Wed, 19 Sep 2012 00:03:26 +0000 (UTC)
+Message-Id: <20120919000327.49C0652A8F@arago-project.org>
+Date: Wed, 19 Sep 2012 00:03:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : layer.conf: lower layer priority from 10 to 6
+Subject: Denys Dmytriyenko : ti-hw-bringup-image: remove duplicate timestamp-service , as it's in systemd-image
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,33 +27,35 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: cca43833635d1321e014d5025852100d05fd3e3f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cca43833635d1321e014d5025852100d05fd3e3f
+Commit: 7b288d7d05b803032e125f14a3a845c514728003
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7b288d7d05b803032e125f14a3a845c514728003
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Sep 14 00:40:55 2012 -0400
+Date:   Fri Sep 14 00:57:22 2012 -0400
 
-layer.conf: lower layer priority from 10 to 6
+ti-hw-bringup-image: remove duplicate timestamp-service, as it's in systemd-image
 
-Lowering layer priority from 10 to 6 aligns meta-ti with other BSP layers
-and also allows distributions to override our recipes.
+Since systemd-image from meta-angstrom already includes timestamp-service, remove
+the duplicate from ti-hw-bringup-image recipe, which uses the former as a base.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/layer.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-misc/images/ti-hw-bringup-image.bb |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 4afb4f3..faa4ac0 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -6,4 +6,4 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
+diff --git a/recipes-misc/images/ti-hw-bringup-image.bb b/recipes-misc/images/ti-hw-bringup-image.bb
+index e8dd5ed..62b4c73 100644
+--- a/recipes-misc/images/ti-hw-bringup-image.bb
++++ b/recipes-misc/images/ti-hw-bringup-image.bb
+@@ -23,7 +23,6 @@ IMAGE_INSTALL += " \
+ 	bc \
+ 	packagegroup-ti-test \
+ 	kernel-modules \
+-	timestamp-service \
+ 	${EXTRA_MACHINE_IMAGE_INSTALL} \
+ "
  
- BBFILE_COLLECTIONS += "meta-ti"
- BBFILE_PATTERN_meta-ti := "^${LAYERDIR}/"
--BBFILE_PRIORITY_meta-ti = "10"
-+BBFILE_PRIORITY_meta-ti = "6"
 
 
