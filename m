@@ -1,15 +1,28 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9BD49E002AB
-	for <meta-ti@yoctoproject.org>; Tue, 18 Sep 2012 17:03:27 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 49C0652A8F; Wed, 19 Sep 2012 00:03:27 +0000 (UTC)
+Return-Path: <ndec13@gmail.com>
+Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
+	[209.85.220.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 69ED5E002AB
+	for <meta-ti@yoctoproject.org>; Tue, 18 Sep 2012 23:16:28 -0700 (PDT)
+Received: by vcbgb22 with SMTP id gb22so982504vcb.35
+	for <meta-ti@yoctoproject.org>; Tue, 18 Sep 2012 23:16:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=UAf6+rTK3CCiqXjzG+DbcOSXfZww9aaExI7mGrpgrXY=;
+	b=NivuDwyCHvThAORA/y8X1TCFc6ylNEwsfcmDqrbdNSemteKV5MFfhav1FBAojznScE
+	JEo1XUrcotHllu3Om2kVOrud8G4cR0Pt0o3dZ4XoAGGfUzqCSuttUG8Xcjhdzf5d4gB1
+	smrqUBRWlNWIqkUdFhfQNObu2CHKna1M3YFLgWsuw9MTbpRf+Db74v3aWG/12lOIMd1Z
+	kJpsA0TBez34X5ifxsTpXh1Fbxwl+BVceQhbJ8MfHAdpQUv3kzvaonC3dbbrZ9kRawIE
+	jcu1Vu0CuP+cs5Hc5sQW2rlGNRdMkVKo34jeJOHLjZ058vQoMYaDd2pa00++66iLjx3Y
+	fhKg==
+Received: by 10.52.19.243 with SMTP id i19mr1129345vde.69.1348035385483; Tue,
+	18 Sep 2012 23:16:25 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.58.80.71 with HTTP; Tue, 18 Sep 2012 23:16:05 -0700 (PDT)
+From: Nicolas Dechesne <ndec13@gmail.com>
+Date: Wed, 19 Sep 2012 08:16:05 +0200
+Message-ID: <CAOT3mi+f4Wsaba4S3uiw1p27R585EBY4OSA8K=pPCpbATwRmcA@mail.gmail.com>
 To: meta-ti@yoctoproject.org
-Message-Id: <20120919000327.49C0652A8F@arago-project.org>
-Date: Wed, 19 Sep 2012 00:03:27 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti-hw-bringup-image: remove duplicate timestamp-service , as it's in systemd-image
+Subject: building yocto images with meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,40 +35,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Sep 2012 00:03:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 19 Sep 2012 06:16:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Module: meta-ti
-Branch: master
-Commit: 7b288d7d05b803032e125f14a3a845c514728003
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7b288d7d05b803032e125f14a3a845c514728003
+hi there,
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Sep 14 00:57:22 2012 -0400
+i was able to build a 'vanilla' yocto image using the yocto git repo.
+then i wanted to add meta-ti layer. so i have done the following:
 
-ti-hw-bringup-image: remove duplicate timestamp-service, as it's in systemd-image
+- clone git://git.yoctoproject.org/meta-ti
+- modify BBLAYERS in conf/bblayers.conf to add meta-ti
 
-Since systemd-image from meta-angstrom already includes timestamp-service, remove
-the duplicate from ti-hw-bringup-image recipe, which uses the former as a base.
+i can verify that meta-ti layer is configured properly as
+bitbake-layers show-layers shows it just fine (with priority 10).
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+However parsing recipes failed with:
 
----
+Loaded 23 entries from dependency cache.
+ERROR: ExpansionError during parsing
+/work/yocto/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager_1.24.02.09.bb:
+Failure expanding variable FILESPATH, expression was
+${@base_set_filespath([
+"/work/yocto/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager-1_1_24_02_09-${MACHINE_KERNEL_PR}e",
+"/work/yocto/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager-1_24_02_09",
+"/work/yocto/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager",
+"/work/yocto/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager-1_24_02_09",
+"/work/yocto/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager",
+"/work/yocto/meta-ti/recipes-ti/local-power-manager/files",
+"/work/yocto/meta-ti/recipes-ti/local-power-manager" ], d)} which
+triggered exception SyntaxError: EOL while scanning string literal
+(FILESPATH, line 1)
+ERROR: Command execution failed: Exited with 1
 
- recipes-misc/images/ti-hw-bringup-image.bb |    1 -
- 1 files changed, 0 insertions(+), 1 deletions(-)
+is there a particular commit in yocto that meta-ti requires?
 
-diff --git a/recipes-misc/images/ti-hw-bringup-image.bb b/recipes-misc/images/ti-hw-bringup-image.bb
-index e8dd5ed..62b4c73 100644
---- a/recipes-misc/images/ti-hw-bringup-image.bb
-+++ b/recipes-misc/images/ti-hw-bringup-image.bb
-@@ -23,7 +23,6 @@ IMAGE_INSTALL += " \
- 	bc \
- 	packagegroup-ti-test \
- 	kernel-modules \
--	timestamp-service \
- 	${EXTRA_MACHINE_IMAGE_INSTALL} \
- "
- 
+how do you guys generate vanilla yocto images with meta-ti?
 
+thx
 
