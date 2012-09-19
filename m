@@ -1,29 +1,27 @@
-Return-Path: <gizero@gmail.com>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53561E002AB
-	for <meta-ti@yoctoproject.org>; Tue, 18 Sep 2012 23:56:43 -0700 (PDT)
-Received: by wgbdt10 with SMTP id dt10so430337wgb.11
-	for <meta-ti@yoctoproject.org>; Tue, 18 Sep 2012 23:56:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=68rp5qiqHpw8Vugm7fdm7qNwqUSIAaLIeiT1SxBLVXQ=;
-	b=e4Rr28t4yRgIvVSKsYOQus9EionVzQa4WP8AhLvKL/LWjEvRemBJ8RYodOlsQmChO9
-	1qknmApNWdpzXMiXVyw2O/XDLEQ5Pb4+qa4A94oi0vZ/QaIxQGOgthsAxSL6/zFNMODz
-	OnRk8AeCY98qUfboh8REbWRVR2IdPvmtWphbEIdGhrRaRyaKhyqX3+rBIFZ/26G8G7kZ
-	GJWmzQLx0+cRy6/EwK2OUwfrJx/fOyHFHZXq023bm1+yDuANUW13ftmfWFHYdBO0DkZQ
-	3eq8jGY2ZPG3hyXr3Gz4SoGVdPdUMexxAIphgqobfB+yEqlEF5RQ7XgGxZAf6JMrqoNT
-	hYxQ==
-MIME-Version: 1.0
-Received: by 10.180.84.169 with SMTP id a9mr4643083wiz.8.1348037802241; Tue,
-	18 Sep 2012 23:56:42 -0700 (PDT)
-Received: by 10.223.181.65 with HTTP; Tue, 18 Sep 2012 23:56:42 -0700 (PDT)
-In-Reply-To: <CAOT3mi+f4Wsaba4S3uiw1p27R585EBY4OSA8K=pPCpbATwRmcA@mail.gmail.com>
-References: <CAOT3mi+f4Wsaba4S3uiw1p27R585EBY4OSA8K=pPCpbATwRmcA@mail.gmail.com>
-Date: Wed, 19 Sep 2012 08:56:42 +0200
-Message-ID: <CAC+thW1ToaaK_NgHHb4N4o6XvO2Ob4tg5aJCU-+RMw=jQcCG0Q@mail.gmail.com>
-From: Andrea Galbusera <gizero@gmail.com>
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7F6B9E01371
+	for <meta-ti@yoctoproject.org>; Wed, 19 Sep 2012 06:57:06 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q8JDv1uq032236;
+	Wed, 19 Sep 2012 08:57:01 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q8JDv0lE026864;
+	Wed, 19 Sep 2012 08:57:01 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 19 Sep 2012 08:57:00 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id q8JDv0P4012124;
+	Wed, 19 Sep 2012 08:57:00 -0500
+Date: Wed, 19 Sep 2012 09:57:00 -0400
+From: Denys Dmytriyenko <denys@ti.com>
 To: Nicolas Dechesne <ndec13@gmail.com>
+Message-ID: <20120919135659.GA589@edge>
+References: <CAOT3mi+f4Wsaba4S3uiw1p27R585EBY4OSA8K=pPCpbATwRmcA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAOT3mi+f4Wsaba4S3uiw1p27R585EBY4OSA8K=pPCpbATwRmcA@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
 Subject: Re: building yocto images with meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
@@ -38,25 +36,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Sep 2012 06:56:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 19 Sep 2012 13:57:06 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+
+On Wed, Sep 19, 2012 at 08:16:05AM +0200, Nicolas Dechesne wrote:
+> hi there,
 
 Hi Nicolas,
 
-On Wed, Sep 19, 2012 at 8:16 AM, Nicolas Dechesne <ndec13@gmail.com> wrote:
-> hi there,
->
 > i was able to build a 'vanilla' yocto image using the yocto git repo.
 > then i wanted to add meta-ti layer. so i have done the following:
->
+
+First, a little rant... :)
+
+It's unfortunate, but this still causes lots of confusion. Some purists among 
+us will say that is not Yocto, but Poky. Case in point - which "yocto" git 
+repository you cloned from http://git.yoctoproject.org/ ?
+
+Same applies to a 'vanilla' yocto image, which does not exist. It would rather 
+be useful to specify which exact image for which MACHINE you are trying to 
+build. A little bit more detail is always helpful...
+
+
+And now to the resolution part. I see you already used BBMASK as prescribed in 
+the README, since you get past the unset LICENSE error... The below error 
+happens when you build for a MACHINE that is overshadowed by another BSP 
+layer that does not define MACHINE_KERNEL_PR. This MACHINE_KERNEL_PR variable 
+is set in MACHINE definitions of meta-ti BSP layer and then used in other 
+recipes within meta-ti and different layers.
+
+In other words, you are trying to build for "beagleboard" machine, which gets 
+also defined by meta-yocto-bsp layer, besides meta-ti. The solution is simple -
+you need to move meta-ti above meta-yocto-bsp in your bblayers.conf or just 
+remove meta-yocto-bsp from the list, if you are not planning on building any 
+of the reference platforms. That way you'll get the machine definition from 
+meta-ti layer and not from meta-yocto-bsp.
+
+After that, core-image-minimal and some other images should build fine. Good 
+luck!
+
+-- 
+Denys
+
+
 > - clone git://git.yoctoproject.org/meta-ti
 > - modify BBLAYERS in conf/bblayers.conf to add meta-ti
->
+> 
 > i can verify that meta-ti layer is configured properly as
 > bitbake-layers show-layers shows it just fine (with priority 10).
->
+> 
 > However parsing recipes failed with:
->
+> 
 > Loaded 23 entries from dependency cache.
 > ERROR: ExpansionError during parsing
 > /work/yocto/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager_1.24.02.09.bb:
@@ -72,29 +103,8 @@ On Wed, Sep 19, 2012 at 8:16 AM, Nicolas Dechesne <ndec13@gmail.com> wrote:
 > triggered exception SyntaxError: EOL while scanning string literal
 > (FILESPATH, line 1)
 > ERROR: Command execution failed: Exited with 1
->
+> 
 > is there a particular commit in yocto that meta-ti requires?
-
-What version of yocto are you using? If denzil is your target, meta-ti
-repo has a corresponding denzil branch which should work fine. Having
-a look at meta-ti's README is also a good starting point since you
-might need to mask some recipes which could not be parsed without, I
-think, the meta-oe layer.
-
-I'm personally building core-image-minimal with the following commits:
-
-OE Build Configuration:
-BB_VERSION        = "1.15.2"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "wally"
-DISTRO            = "poky"
-DISTRO_VERSION    = "1.2.1"
-TUNE_FEATURES     = "armv5 dsp thumb arm926ejs"
-TARGET_FPU        = "soft"
-meta
-meta-yocto        = "denzil:65ffa7395055f7e012cb973f63f92380828eed0d"
-meta-ti           = "denzil:9c103ce85a6ecb836bcdc46137207e466846ee2e"
-
-Regards
+> 
+> how do you guys generate vanilla yocto images with meta-ti?
 
