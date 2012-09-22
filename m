@@ -1,39 +1,31 @@
-Return-Path: <ndec13@gmail.com>
-Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
-	[209.85.220.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6DA72E0141D
-	for <meta-ti@yoctoproject.org>; Fri, 21 Sep 2012 02:11:33 -0700 (PDT)
-Received: by vcbgb22 with SMTP id gb22so4536759vcb.35
-	for <meta-ti@yoctoproject.org>; Fri, 21 Sep 2012 02:11:30 -0700 (PDT)
+Return-Path: <fcooperjr27@gmail.com>
+Received: from mail-oa0-f48.google.com (mail-oa0-f48.google.com
+	[209.85.219.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7CB91E0027F
+	for <meta-ti@yoctoproject.org>; Fri, 21 Sep 2012 16:58:07 -0700 (PDT)
+Received: by oagn16 with SMTP id n16so5110107oag.35
+	for <meta-ti@yoctoproject.org>; Fri, 21 Sep 2012 16:58:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=qTrKQn9UOz86b8e+lR/CPkyBpQKN9oCmLfFgFNsgUW8=;
-	b=tmJ3ivpoBfoRhP36odc5sEIvzILvKrKohuISDhpRsYkXLfk8QRwezResbxEXiU4db1
-	vTsPeGadS0OK5jVVe2m+jOARZgHWz50N6UzuD5V1EII8Hu7jih2qUMerGxw/nse0pyEJ
-	E7YmaZH01YMyqpdhPo4XnZSQDAk+ZVNiZut8a52Ca+sagsgx2DdWUd7S2UedabLmV+H4
-	Y9k18fYaKpN1j8z8DokSi51/5WBR3dRS1+kRB2bfU/pLZozaEIm6nl+2bjqAP74Xsiyl
-	cabKvYFt6fLJffU51WsE1+HwQQdbSsnxaO3l2z9pNGtoj4TwmOkyY45kleRJEb+4Lbgx
-	98EA==
-Received: by 10.58.124.77 with SMTP id mg13mr2719488veb.39.1348218690815; Fri,
-	21 Sep 2012 02:11:30 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.58.80.71 with HTTP; Fri, 21 Sep 2012 02:11:10 -0700 (PDT)
-In-Reply-To: <D404AEB3-A46E-4313-AA43-226B38F40985@dominion.thruhere.net>
-References: <CAOT3mi+f4Wsaba4S3uiw1p27R585EBY4OSA8K=pPCpbATwRmcA@mail.gmail.com>
-	<20120919135659.GA589@edge>
-	<CAOT3miK4MM-LqDC0AFuZh3hH145qrYoxW1w27P4dXRTCR2X=hQ@mail.gmail.com>
-	<20120919162639.GC589@edge>
-	<CAOT3miK2M7e5AbYLevSqXD7vx7N_+FUY-8P6k4sFXu1Xxjd4sQ@mail.gmail.com>
-	<B0581B5571079145BA1CD78C126DBDE72E630DAF@DLEE09.ent.ti.com>
-	<CAOT3miJNVxKj_v6=w4yT5Dq0MvuXn9COkmGCtL=9u846qoSkQA@mail.gmail.com>
-	<D404AEB3-A46E-4313-AA43-226B38F40985@dominion.thruhere.net>
-From: Nicolas Dechesne <ndec13@gmail.com>
-Date: Fri, 21 Sep 2012 11:11:10 +0200
-Message-ID: <CAOT3mi+=m71+AhWtnwuadVue+P-oDgSOH6ntxm4tpuShy7KsOg@mail.gmail.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: building yocto images with meta-ti
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=ij7hk1BFnzEN9c3jkTwiB/vM9QAxMifZDxJYUTHlwZ8=;
+	b=d/N9SqazbWx11pXvIQsHL4NF1Ixq96p+qqeJNQTeF4fNEo7Q4M/fYQ8cQKv+ZpZnV/
+	jO6V/ODAHPxxAka/XETnCdynyfwVEzWvfsibRdlqJzhfacdmvmxLz647rQU1P0t0PgGT
+	QuvLHcB7HCr6ah5aEksphWCnIElB9H5aLjIjrIOI1HsFnsd9ncCwVLEo4dHovh924+RR
+	PkWVkPoM1GiQR8QKK8MMBSw/bEKgDGc4XKu5VFG4EwKTYNvG9E2fVE+vW/NBtoZm0WnY
+	KYurenIkYTHHTGfjDmeqbOGT7sBuNsnXlPqDmhYnOJzYSLSj3Ymp2zj0T0GyDj1Yxbrq
+	YYWA==
+Received: by 10.60.1.106 with SMTP id 10mr5238442oel.84.1348271880629;
+	Fri, 21 Sep 2012 16:58:00 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
+	by mx.google.com with ESMTPS id q3sm7348048oef.0.2012.09.21.16.57.58
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 21 Sep 2012 16:57:59 -0700 (PDT)
+From: "Franklin S. Cooper Jr" <fcooperjr27@gmail.com>
+To: meta-ti@yoctoproject.org
+Date: Fri, 21 Sep 2012 19:21:22 -0500
+Message-Id: <1348273282-26412-1-git-send-email-fcooper@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] bt-enable: Add bt-enable recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,22 +38,147 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Sep 2012 09:11:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 21 Sep 2012 23:58:07 -0000
 
-On Fri, Sep 21, 2012 at 10:49 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
->> Build Configuration:
->> BB_VERSION        = "1.15.3"
->> TARGET_ARCH       = "arm"
->> TARGET_OS         = "linux-gnueabi"
->> MACHINE           = "beagleboard"
->> DISTRO            = "poky"
->> DISTRO_VERSION    = "1.2+snapshot-20120921"
->> TUNE_FEATURES     = "armv7a vfp neon cortexa9"
->
-> A cortex A9 on a beagleboard, wow.
+* Port bt-enable recipe from arago.
+* Bt-enable is used to enable the BT module on the TI wl12xx
+  Wi-Fi + Bluetooth module.
 
-hehe ... yeah, i am doing funky experiments ;-)
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+---
+ ...efile-Update-makefile-to-work-well-in-SDK.patch |   80 ++++++++++++++++++++
+ recipes-bsp/bt-enable/bt-enable_1.0.bb             |   34 ++++++++
+ 2 files changed, 114 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-bsp/bt-enable/bt-enable/0001-Makefile-Update-makefile-to-work-well-in-SDK.patch
+ create mode 100644 recipes-bsp/bt-enable/bt-enable_1.0.bb
 
-i restarted a panda build right after and messed up with my copy/paste ;-)
+diff --git a/recipes-bsp/bt-enable/bt-enable/0001-Makefile-Update-makefile-to-work-well-in-SDK.patch b/recipes-bsp/bt-enable/bt-enable/0001-Makefile-Update-makefile-to-work-well-in-SDK.patch
+new file mode 100644
+index 0000000..9cb43e9
+--- /dev/null
++++ b/recipes-bsp/bt-enable/bt-enable/0001-Makefile-Update-makefile-to-work-well-in-SDK.patch
+@@ -0,0 +1,80 @@
++From a400ac3d83023a66a356d056899d6b380cb30473 Mon Sep 17 00:00:00 2001
++From: Chase Maupin <Chase.Maupin@ti.com>
++Date: Wed, 7 Mar 2012 10:51:43 -0600
++Subject: [PATCH] Makefile: Update makefile to work well in SDK
++
++* Updated the makefile to work inside the SDK as well as through
++  OE.
++* Use the kernel install target for installing the module
++
++Upstream-Status: Pending
++    * will be in next release
++
++Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
++---
++ Makefile |   45 ++++++++++++++++++++++++++++++++++++++++-----
++ 1 files changed, 40 insertions(+), 5 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index ebbcd11..b17d33e 100755
++--- a/Makefile
+++++ b/Makefile
++@@ -7,15 +7,50 @@ else
++   EXTRA_CFLAGS += -O2
++ endif	
++ 
+++-include ../../../Rules.make
+++
+++# If KERNEL_DIR is not set then use the default in Rules.make
+++KERNEL_DIR ?= ${LINUXKERNEL_INSTALL_DIR}
+++DEST_DIR ?= ${DESTDIR}
+++
+++PLATFORM ?= "unknown"
+++MACHINE_NAME ?= "unknown"
+++
+++# Use the PLATFORM value from the Rules.make if it was sourced
+++ifeq ($(PLATFORM), am335x-evm)
+++    MACHINE_NAME := "am335x"
+++endif
+++ifeq ($(PLATFORM), am180x-evm)
+++    MACHINE_NAME := "am1808"
+++endif
+++ifeq ($(PLATFORM), da850-omapl138-evm)
+++    MACHINE_NAME := "am1808"
+++endif
+++ifeq ($(PLATFORM), am37x-evm)
+++    MACHINE_NAME := "omap3evm"
+++endif
+++
+++# If CROSS_COMPILE is not set by Rules.make then set a sane default
+++CROSS_COMPILE ?= arm-arago-linux-gnueabi-
+++export CROSS_COMPILE
+++
+++# set the INSTALL_MOD_DIR so that the executables won't be placed in extra
+++INSTALL_MOD_DIR = kernel/drivers/bt_enable
+++export INSTALL_MOD_DIR
+++
++ obj-m := gpio_en.o
++ 
+++MAKE_ENV = ARCH=arm
+++
++ PWD := $(shell pwd)
++ all:
++-	pwd
++-	@echo EXTRA_CFLAGS = $(EXTRA_CFLAGS)
++-	$(MAKE) CROSS_COMPILE=$(CROSS_COMPILE) ARCH=$(ARCH) EXTRA_CFLAGS="$(EXTRA_CFLAGS)" -C $(KERNEL_DIR) M=$(PWD) modules
+++	@cp -f gpio_en_${MACHINE_NAME}.c gpio_en.c
+++	$(MAKE) EXTRA_CFLAGS="$(EXTRA_CFLAGS)" -C $(KERNEL_DIR) $(MAKE_ENV) \
+++    M=$(PWD) modules
+++
++ install:
++-	install -d ${DEST_DIR}${BASE_LIB_DIR}/modules/${KRNL_VER}/kernel/drivers/bt_enable
++-	install -m 0755 ./gpio_en.ko ${DEST_DIR}${BASE_LIB_DIR}/modules/${KRNL_VER}/kernel/drivers/bt_enable
+++	$(MAKE) EXTRA_CFLAGS="$(EXTRA_CFLAGS)" -C $(KERNEL_DIR) $(MAKE_ENV) \
+++    M=$(PWD) INSTALL_MOD_PATH="${DEST_DIR}" modules_install
+++
++ clean:
++ 	rm -rf *.o *~ core .depend .*.cmd *.ko *.mod.c .tmp_versions *.symvers
++-- 
++1.7.0.4
++
+diff --git a/recipes-bsp/bt-enable/bt-enable_1.0.bb b/recipes-bsp/bt-enable/bt-enable_1.0.bb
+new file mode 100644
+index 0000000..aae7d33
+--- /dev/null
++++ b/recipes-bsp/bt-enable/bt-enable_1.0.bb
+@@ -0,0 +1,34 @@
++DESCRIPTION = "BT GPIO Enable"
++LICENSE = "BSD"
++COMPATIBLE_MACHINE = "am37x-evm|am180x-evm|am335x-evm"
++LIC_FILES_CHKSUM = "file://gpio_en_am1808.c;beginline=1;endline=34;md5=fe94639d8f61c867d1bc4bf61473d3cd \
++                    file://gpio_en_am335x.c;beginline=1;endline=34;md5=fe94639d8f61c867d1bc4bf61473d3cd \
++                    file://gpio_en_omap3evm.c;beginline=1;endline=34;md5=fe94639d8f61c867d1bc4bf61473d3cd \
++"
++
++DEPENDS = "virtual/kernel"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++PACKAGE_STRIP = "no"
++
++inherit module
++
++MACHINE_KERNEL_PR_append = "a"
++PR = "r0+gitr${SRCREV}"
++
++SRCREV = "97c4600ff7d39f1cc6079939248cd9ed15100db4"
++
++SRC_URI = "git://github.com/TI-ECS/bt_enable.git;protocol=git \
++           file://0001-Makefile-Update-makefile-to-work-well-in-SDK.patch \
++          "
++
++S = "${WORKDIR}/git"
++
++EXTRA_OEMAKE = " \
++	KERNEL_DIR=${STAGING_KERNEL_DIR} \
++    PLATFORM=${MACHINE} \
++"
++
++do_install () {
++	oe_runmake 'DEST_DIR=${D}' install
++}
+-- 
+1.7.0.4
+
 
