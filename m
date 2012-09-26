@@ -1,39 +1,15 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 81C01E013EF
-	for <meta-ti@yoctoproject.org>; Wed, 26 Sep 2012 08:03:03 -0700 (PDT)
-Received: by wibhm2 with SMTP id hm2so706886wib.11
-	for <meta-ti@yoctoproject.org>; Wed, 26 Sep 2012 08:03:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to:x-mailer
-	:x-gm-message-state;
-	bh=AYTcHx4ZKq+SaMtRlU7cqO44jNCV/cnqACDWvQ225b0=;
-	b=YpxusWtYw6yay1NAQ61DgXuecpRrKdI2FN5RRuAbeeXeUmz2nVtyr1hYL9qvJROo7/
-	cbSeS4UxjBxZF9jHgkvqRgsioZUzdKKAsvyvFYkPDrSqwQu99t0F/qVNGgyvoVaferiT
-	jFRiyPh2h7CcVTDrlY7pMsRtw2bFf94CUsAdF6FmRXe/yPTVSbHiKg+7CNzR/frd1OgM
-	JpErps0qugKphrQhmnrFdFOp2FpO4em8kKnazVoT97b6On5r3gCJxHhhV2QSjVflID9Y
-	7YRchsUvfImJByB3rlgSdQs6zsQhOO4IqPcacWXkFPKwCbDRR5vV99P11ukYOp2Im9rU
-	DtOA==
-Received: by 10.180.87.74 with SMTP id v10mr2042062wiz.21.1348671780346;
-	Wed, 26 Sep 2012 08:03:00 -0700 (PDT)
-Received: from [172.20.0.10] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPS id dm3sm7358989wib.3.2012.09.26.08.02.58
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 26 Sep 2012 08:02:59 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.1 \(1498\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <2615887.flnt2fa7s2@travel.area51>
-Date: Wed, 26 Sep 2012 17:02:59 +0200
-Message-Id: <05707592-E35E-4853-945F-2AA6CDBA3D39@dominion.thruhere.net>
-References: <2615887.flnt2fa7s2@travel.area51>
-To: Helio Chissini de Castro <helio.chissini.de.castro@collabora.co.uk>
-X-Mailer: Apple Mail (2.1498)
-X-Gm-Message-State: ALoCoQng9cQtPWLtdWXKKKvfuKcOxLT3MzGYSiEv1fKRbLAe7SSE2KnXAfV581M5KcqhG+SlcfLH
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Generate sdcard image ?
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C888E01400
+	for <meta-ti@yoctoproject.org>; Wed, 26 Sep 2012 11:54:33 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 3C76652A5D; Wed, 26 Sep 2012 18:54:33 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20120926185433.3C76652A5D@arago-project.org>
+Date: Wed, 26 Sep 2012 18:54:33 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Franklin S. Cooper Jr : libgles-omap3.inc: Tweak PLATFORM variable.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,29 +22,122 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Sep 2012 15:03:03 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 26 Sep 2012 18:54:34 -0000
+Content-Type: text/plain; charset=UTF-8
 
+Module: meta-ti
+Branch: master
+Commit: 80cc70e50107bbc52001ad51a9f2b5a15935ce17
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=80cc70e50107bbc52001ad51a9f2b5a15935ce17
 
-Op 26 sep. 2012, om 16:41 heeft Helio Chissini de Castro =
-<helio.chissini.de.castro@collabora.co.uk> het volgende geschreven:
+Author: Franklin S. Cooper Jr <fcooper@ti.com>
+Date:   Fri Aug 31 18:19:57 2012 -0500
 
-> Hi
->=20
-> Few months ago, Ot=E1vio Salvador sent a bunch of patches to enable =
-sdcard image=20
-> generation on Yocto for Freescale.
->=20
-> We're planning to do the same for Pandaboard, but seens his patch was =
-not=20
-> accepted and we still have only tar.bz2 image created ( at least on =
-Denzil )
->=20
-> Is there any plan upstream to add it ? Otherwise we will give a shot =
-to add=20
-> support based on Ot=E1vio works and submit upstream again.
+libgles-omap3.inc: Tweak PLATFORM variable.
 
-The output produced by that patch failed to boot, that's why it wasn't =
-accepted.=
+* Newer versions of libgles-omap3 utilize a different PLATFORM value. This
+  patch allows the PLATFORM variable to be easily overridden if needed.
+* Replace the hardcoded usage of LinuxOMAP3 with the PLATFORM variable.
+
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-graphics/libgles/libgles-omap3.inc |   41 ++++++++++++++-------------
+ 1 files changed, 21 insertions(+), 20 deletions(-)
+
+diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
+index ac9d5df..b6aa382 100644
+--- a/recipes-graphics/libgles/libgles-omap3.inc
++++ b/recipes-graphics/libgles/libgles-omap3.inc
+@@ -65,10 +65,11 @@ TARGET_CC_ARCH += " ${TARGET_LINK_HASH_STYLE} -Wl,-rpath-link,${BINLOCATION} -L$
+ -L${STAGING_DIR_TARGET}${libdir} -Wl,-rpath-link,${STAGING_DIR_TARGET}${libdir}"
+ PARALLEL_MAKE = ""
+ 
++PLATFORM ?= "LinuxOMAP3"
++
+ do_compile() {
+ 	export X11ROOT="${STAGING_DIR_HOST}/usr"
+ 	export TOOLCHAIN="${TOOLCHAIN_PATH}"
+-	export PLATFORM="LinuxOMAP3"
+ 
+ 	export PLAT_CC="${CC}"
+ 	export PLAT_CPP="${CXX}"
+@@ -81,23 +82,23 @@ do_compile() {
+ 	for X11BUILD in 0 1 ; do
+ 		for demo in ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Demos/* ; do
+ 			cd $demo/OGLES/Build/LinuxGeneric
+-			oe_runmake Common=1 PLATFORM=$PLATFORM X11BUILD=$X11BUILD  
+-			rm $demo/OGLES/Build/LinuxOMAP3/Release*/*.o
+-			install -m 0755 $demo/OGLES/Build/LinuxOMAP3/ReleaseX11/* ${S}/demos/x11 || true
++			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
++			rm $demo/OGLES/Build/${PLATFORM}/Release*/*.o
++			install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
+ 			sed -e s:NAME:$(basename $demo): \
+-			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES/Build/LinuxOMAP3/ReleaseX11/*): \
++			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES/Build/${PLATFORM}/ReleaseX11/*): \
+ 			     ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
+-			install -m 0755 $demo/OGLES/Build/LinuxOMAP3/ReleaseRaw/* ${S}/demos/raw || true	
++			install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
+ 		done
+ 		for demo in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Demos/* ; do
+ 			cd $demo/OGLES2/Build/LinuxGeneric
+-			oe_runmake Common=1 PLATFORM=$PLATFORM X11BUILD=$X11BUILD  
+-			rm -f $demo/OGLES2/Build/LinuxOMAP3/Release*/*.o
+-			install -m 0755 $demo/OGLES2/Build/LinuxOMAP3/ReleaseX11/* ${S}/demos/x11 || true
++			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
++			rm -f $demo/OGLES2/Build/${PLATFORM}/Release*/*.o
++			install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
+ 			sed -e s:NAME:$(basename $demo): \
+-			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES2/Build/LinuxOMAP3/ReleaseX11/*): \
++			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/*): \
+ 			     ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
+-			install -m 0755 $demo/OGLES2/Build/LinuxOMAP3/ReleaseRaw/* ${S}/demos/raw || true	
++			install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
+ 		done
+ 	done
+ 
+@@ -113,14 +114,14 @@ do_compile() {
+ 				cd $training/OGLES2/Build/LinuxGeneric
+ 			fi
+ 
+-			if [ -e $training/OGLES2/Build/LinuxOMAP3/Makefile ] ; then
+-				cd $training/OGLES2/Build/LinuxOMAP3
++			if [ -e $training/OGLES2/Build/${PLATFORM}/Makefile ] ; then
++				cd $training/OGLES2/Build/${PLATFORM}
+ 			fi			
+ 
+-			oe_runmake Common=1 PLATFORM=$PLATFORM X11BUILD=$X11BUILD  
+-			rm -f $training/OGLES2/Build/LinuxOMAP3/Release*/*.o
+-			install -m 0755 $training/OGLES2/Build/LinuxOMAP3/ReleaseX11/* ${S}/trainingcourses/x11 || true
+-			install -m 0755 $training/OGLES2/Build/LinuxOMAP3/ReleaseRaw/* ${S}/trainingcourses/raw || true	
++			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
++			rm -f $training/OGLES2/Build/${PLATFORM}/Release*/*.o
++			install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/trainingcourses/x11 || true
++			install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/trainingcourses/raw || true
+ 		done
+ 	done
+ 
+@@ -141,7 +142,7 @@ do_install () {
+ 	install -m 0755 ${BINLOCATION}/xgles1test1 ${D}${bindir}/
+ 
+ 	install -m 0755 ${BINLOCATION}/freedesktop/kdrive/usr/X11R6_SGX/bin/Xsgx ${D}${bindir}/|| true
+-	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/LinuxOMAP3/lib/*X11WS* ${D}${libdir} || true
++	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/lib/*X11WS* ${D}${libdir} || true
+ 
+ 	install -d ${D}${includedir}
+ 	cp -pPR ${S}/GFX_Linux_KM/include4 ${D}${includedir}/
+@@ -149,8 +150,8 @@ do_install () {
+ 
+ 	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/Include/* ${D}${includedir}/
+ 	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/* ${D}${includedir}/
+-	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/LinuxOMAP3/Include/GLES/* ${D}${includedir}/GLES/ || true
+-	cp -pPr ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/LinuxOMAP3/Include/GLES/* ${D}${includedir}/GLES2/ || true
++	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES/ || true
++	cp -pPr ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES2/ || true
+ 	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/v* ${D}${includedir}/ || true
+ 	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/V* ${D}${includedir}/ || true
+ 	cp -pPr ${S}/include/*.h ${D}${includedir} || true
+
 
