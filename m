@@ -1,23 +1,38 @@
-Return-Path: <helio.chissini.de.castro@collabora.com>
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [93.93.135.160])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E88FAE00348
-	for <meta-ti@yoctoproject.org>; Wed, 26 Sep 2012 06:58:41 -0700 (PDT)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(Authenticated sender: helio) with ESMTPSA id 2E6F1603F2C
-From: Helio Chissini de Castro <helio.chissini.de.castro@collabora.com>
-To: meta-ti@yoctoproject.org
-Date: Wed, 26 Sep 2012 10:58:35 -0300
-Message-ID: <1585056.lA2uBBeeEh@travel.area51>
-Organization: Collabora
-X-Face: b:|>2MCZ=zP>gr.~Gjk[v(.\p5^X]2OY=vuF%ndlN'\JB0{DbW]/-=+r; J^QfihM=&FVsq
-	R>Us@JpB1UsJ=:>5Q`TjPUWB-(mZXWGd]Mg[.QV?+0(3K67th3DaXbEoFpyA\z){:)%zrs
-	-I~YN$gp`Y{.wn^Hq/yNWq'hX]XXz`F%b#X`|gg"X/9hD>vBCcVwLuF#-rea_=i7.d|=c?
-	P`LX~,X4Uk@vIU~aR7dEW_;
-	zGg1gsm#(Ag4eK/gh2IK=IY@EpHY,6-"76]8Z^%/Lxo@G,# sMcL8+o
-User-Agent: KMail/4.9.1 (Linux/3.5.4-1.fc17.x86_64; KDE/4.9.1; x86_64; ; )
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2777CE0027E
+	for <meta-ti@yoctoproject.org>; Thu, 27 Sep 2012 09:25:00 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id q8RGOv1r002522;
+	Thu, 27 Sep 2012 11:24:57 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q8RGOvm0023945;
+	Thu, 27 Sep 2012 11:24:57 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.1.323.3;
+	Thu, 27 Sep 2012 11:24:57 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id q8RGOuVN010449;
+	Thu, 27 Sep 2012 11:24:56 -0500
+Date: Thu, 27 Sep 2012 12:24:56 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Enrico <ebutera@users.berlios.de>
+Message-ID: <20120927162455.GA7653@edge>
+References: <506307F1.6030303@intel.com>
+	<EF446FF9DAC93B479C74AB9153DE173F111237C8@SMUCM08V.europe.bmw.corp>
+	<CA+2YH7uT8AcfDw3Ed0CzTXOH7qd_9MO4uYi8QXKxVmYpMJnzTQ@mail.gmail.com>
+	<EF446FF9DAC93B479C74AB9153DE173F1117CA4D@SMUCM08V.europe.bmw.corp>
+	<CA+2YH7vSDK0CS6Yh1pu26qygOhiKZycA0or7EXtF-Z09ntQvjw@mail.gmail.com>
+	<EF446FF9DAC93B479C74AB9153DE173F1117CBFB@SMUCM08V.europe.bmw.corp>
+	<CAMKF1sojfxBhzj-4K7j77Jdv5zhJQ9g3A2XBQ4CxkdUhy=se4g@mail.gmail.com>
+	<506479FF.8050305@mlbassoc.com>
+	<CAMKF1sp1dD7qoaQ=JpM_RmgZS65GRKcUcBka9q=0TWbtAzEVHQ@mail.gmail.com>
+	<CA+2YH7ssSvi323th0dHxP_wzB9H7he23HuhvtKNbAzb+K_n-Fg@mail.gmail.com>
 MIME-Version: 1.0
-X-Mailman-Approved-At: Thu, 27 Sep 2012 09:24:18 -0700
-Subject: Generate sdcard image ?
+In-Reply-To: <CA+2YH7ssSvi323th0dHxP_wzB9H7he23HuhvtKNbAzb+K_n-Fg@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: pandaboard not booting
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,32 +45,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Sep 2012 13:58:42 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Thu, 27 Sep 2012 16:25:00 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Hi
+On Thu, Sep 27, 2012 at 06:22:42PM +0200, Enrico wrote:
+> On Thu, Sep 27, 2012 at 6:10 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> > On Thu, Sep 27, 2012 at 9:08 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+> >> I've tried this kernel on a PandaBoard, built with both GCC-4.7.2 (latest
+> >> master)
+> >> and GCC-4.6.3 (~denzil).  Both fail during to come up.
+> >
+> > OK you can take further step back and use edison SDK which has gcc 4.5
+> > which then can _kind_ of eliminate the compiler if it fails with all 3
+> 
+> Or take a step forward and try a newer kernel ;)
 
-Few months ago, Ot=E1vio Salvador sent a bunch of patches to enable sdc=
-ard image=20
-generation on Yocto for Freescale.
+Well, the current kernel used to work at least on Pandaboard ES...
 
-We're planning to do the same for Pandaboard, but seens his patch was n=
-ot=20
-accepted and we still have only tar.bz2 image created ( at least on Den=
-zil )
-
-Is there any plan upstream to add it ? Otherwise we will give a shot to=
- add=20
-support based on Ot=E1vio works and submit upstream again.
-
-Btw, we're using meta-ti from git.yoctoproject.org denzil branch and no=
-t=20
-Angstron, if this matters.
-
-Thanks in advance
-
---=20
-Helio Chissini de Castro
-Collabora
+-- 
+Denys
 
