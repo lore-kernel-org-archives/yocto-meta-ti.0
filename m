@@ -1,26 +1,25 @@
-Return-Path: <ebutera@gmail.com>
-Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
-	[209.85.214.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 77FF4E00348
-	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2012 01:31:45 -0700 (PDT)
-Received: by bkcik5 with SMTP id ik5so3160369bkc.35
-	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2012 01:31:39 -0700 (PDT)
+Return-Path: <ndec13@gmail.com>
+Received: from mail-vb0-f48.google.com (mail-vb0-f48.google.com
+	[209.85.212.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B634E00348
+	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2012 02:01:56 -0700 (PDT)
+Received: by vbme21 with SMTP id e21so3661305vbm.35
+	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2012 02:01:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=XZ5G8kBXopYplHHwxxvz7uzm6dGxVIUmn8Gzbwyn458=;
-	b=k+gSIW9/pV9h+eixRghIRam/lwPxSWkUdCvHmwKCfTIKw4Gz+/aPQcEBABKZZg91Nn
-	x1PwvIQt6n6X0r2l3sDZGqF2d030T71du7r7TJXLmJG0gx+mMSEuHmQbHpkxS5Va7nGF
-	jgVhCYCv/90+Ua6S+um4H26DEYj5Ir5F9Vg9m/LrKaNcoYBSGkh2CM41TEE1KFWN/Edm
-	yRxJGjGNFHW1+56r5KSw9XWZQzk5WTBt4ssBqbJGklFUWQDo/eupDTAO6jKqB/OeBnV4
-	txQJUpMk36TEBc1qW0idGWGLcjR8DGDJlF/Mm5QSxreFLskcrUD9YAMQPjhl/VEn6BOG
-	T3cA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=1EH9rFWL4EX+o0tMId/epSa2K47yDyUh6b5/aE8h5+k=;
+	b=YVAO+AzYUcxovuzD1NdN6GYQ4igQA6WDgy+OosQJ40ssS4xVwrwWgbUikfDHiqepyC
+	0eJNmXXsbaRHv4b8MJigd+8uBZBgfwhcDtJFN60t0BHCcedJ5CyPQmTKjo2cte1z1NJR
+	vahNTZEIYWLHWNd8zaJn3wDt+fpDYk7J+9ZEyHmRP2jp185/wRyRTdMicx9rbjQ/nbIx
+	2p1VcHgtEiv2QlU+KUifLC645Wy605rzP4Hj2AbCKNwyIuqe0eid5iGkSNoFlMaUNEie
+	RpCQGg2YMY+ttH6UMMTwNpjyW//vifYLqIrsVF7mK1wdkKchpxQWXdkhF5jrQg/QiZP1
+	4iIA==
+Received: by 10.52.28.113 with SMTP id a17mr3016660vdh.47.1348822913632; Fri,
+	28 Sep 2012 02:01:53 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.204.148.12 with SMTP id n12mr3184156bkv.62.1348821099785; Fri,
-	28 Sep 2012 01:31:39 -0700 (PDT)
-Sender: ebutera@gmail.com
-Received: by 10.205.41.67 with HTTP; Fri, 28 Sep 2012 01:31:39 -0700 (PDT)
-In-Reply-To: <20120927212854.GB7653@edge>
+Received: by 10.58.80.71 with HTTP; Fri, 28 Sep 2012 02:01:32 -0700 (PDT)
+In-Reply-To: <CA+2YH7snHG0xoPidXO_0RrdXfoD3p8Q-aY19BG2BxecXgVVeJw@mail.gmail.com>
 References: <EF446FF9DAC93B479C74AB9153DE173F1117CA4D@SMUCM08V.europe.bmw.corp>
 	<CA+2YH7vSDK0CS6Yh1pu26qygOhiKZycA0or7EXtF-Z09ntQvjw@mail.gmail.com>
 	<EF446FF9DAC93B479C74AB9153DE173F1117CBFB@SMUCM08V.europe.bmw.corp>
@@ -31,11 +30,11 @@ References: <EF446FF9DAC93B479C74AB9153DE173F1117CA4D@SMUCM08V.europe.bmw.corp>
 	<20120927162455.GA7653@edge> <50647F76.6020109@mlbassoc.com>
 	<CAOT3miL737wkzsNdfO38VrYJMf5K57-g3_ZCQji_HV0+y56b3A@mail.gmail.com>
 	<20120927212854.GB7653@edge>
-Date: Fri, 28 Sep 2012 10:31:39 +0200
-X-Google-Sender-Auth: g8ewuKPciM8vEtwMaVF0y-si1YY
-Message-ID: <CA+2YH7snHG0xoPidXO_0RrdXfoD3p8Q-aY19BG2BxecXgVVeJw@mail.gmail.com>
-From: Enrico <ebutera@users.berlios.de>
-To: Denys Dmytriyenko <denys@ti.com>
+	<CA+2YH7snHG0xoPidXO_0RrdXfoD3p8Q-aY19BG2BxecXgVVeJw@mail.gmail.com>
+From: Nicolas Dechesne <ndec13@gmail.com>
+Date: Fri, 28 Sep 2012 11:01:32 +0200
+Message-ID: <CAOT3mi+uvBm6iM-PX+CDfA7h5F7FbaNWQkB4MAXZHth2us-Omg@mail.gmail.com>
+To: Enrico <ebutera@users.berlios.de>
 Cc: meta-ti@yoctoproject.org
 Subject: Re: pandaboard not booting
 X-BeenThere: meta-ti@yoctoproject.org
@@ -50,27 +49,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Sep 2012 08:31:45 -0000
+X-List-Received-Date: Fri, 28 Sep 2012 09:01:56 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Sep 27, 2012 at 11:28 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> On Thu, Sep 27, 2012 at 11:15:55PM +0200, Nicolas Dechesne wrote:
->> i don't think there should be any valid reason to continue with this
->> old kernel. first there isn't anyone who maintains that branch (my
->> team maintains that evil vendor tree). For Panda I would either
->> recommend to use to a more recent branch (like 3.4), in fact we might
->> even consider http://git.linaro.org/gitweb?p=landing-teams/working/ti/kernel.git
->> (branch tilt-3.4) as this is the base for our 'ubuntu' derived branch.
->> in fact for Panda, just mainline might be another option too..
+On Fri, Sep 28, 2012 at 10:31 AM, Enrico <ebutera@users.berlios.de> wrote:
+> On Thu, Sep 27, 2012 at 11:28 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+>> On Thu, Sep 27, 2012 at 11:15:55PM +0200, Nicolas Dechesne wrote:
+>>> i don't think there should be any valid reason to continue with this
+>>> old kernel. first there isn't anyone who maintains that branch (my
+>>> team maintains that evil vendor tree). For Panda I would either
+>>> recommend to use to a more recent branch (like 3.4), in fact we might
+>>> even consider http://git.linaro.org/gitweb?p=landing-teams/working/ti/kernel.git
+>>> (branch tilt-3.4) as this is the base for our 'ubuntu' derived branch.
+>>> in fact for Panda, just mainline might be another option too..
+>>
+>> Thanks, Nicolas!
+>>
+>> I'll give it a try with either of those trees and update the recipe
+>> accordingly.
 >
-> Thanks, Nicolas!
+> Using linaro tilt kernel could be useful to add support for gst-ducati
+> and friends more easily (using the dce firmware from their repository
+> instead of building it from sources).
 >
-> I'll give it a try with either of those trees and update the recipe
-> accordingly.
 
-Using linaro tilt kernel could be useful to add support for gst-ducati
-and friends more easily (using the dce firmware from their repository
-instead of building it from sources).
+that's definitely what I had in mind too...
 
-Enrico
+> Enrico
 
