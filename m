@@ -1,42 +1,35 @@
-Return-Path: <ndec13@gmail.com>
-Received: from mail-vb0-f48.google.com (mail-vb0-f48.google.com
-	[209.85.212.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE0A3E0049B
-	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2012 04:54:00 -0700 (PDT)
-Received: by vbme21 with SMTP id e21so3805887vbm.35
-	for <meta-ti@yoctoproject.org>; Fri, 28 Sep 2012 04:54:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=KYncQfSIrplkFQjuL3Ex8OCG995jN+IEJxtdlU9625o=;
-	b=q0U5vHB3V006Gn6KSMH8Pq12GvwccZYItMoBzb02tQu00VGMsQ3auXEsmCO2nbfUZO
-	5ybKVOvioJlIYsyXRzUrgt/jYaKfRGom3bl6jVB6WmRBRIeV1euSYQPx9izmcfGkrlQ1
-	uk6ghhxk5LjoiWkq+tdy4sm9giwLhVFiBbikp0bEp/CfczR6UvGKsxA3FFlmTRwsCWOp
-	LO1s5eFs4Vy7Nsu+R6v1mdUpwgjWJPiL1F17ttdniKT5/lcH3FU5LorHvwvb2fcym42E
-	bveRPe1u3JHI8etjs5k6f0ypzW1vY+5w6r/OxMzM1IyaCGjj+RoKRHfhvybe/i3knpYe
-	mdvw==
-Received: by 10.220.148.211 with SMTP id q19mr3906305vcv.55.1348833240013;
-	Fri, 28 Sep 2012 04:54:00 -0700 (PDT)
+Return-Path: <chase.maupin@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 916CFE0027E
+	for <meta-ti@yoctoproject.org>; Mon,  1 Oct 2012 13:17:51 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q91KHjRw031617;
+	Mon, 1 Oct 2012 15:17:45 -0500
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q91KHjn6032559;
+	Mon, 1 Oct 2012 15:17:45 -0500
+Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
+	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
+	14.01.0323.003; Mon, 1 Oct 2012 15:17:45 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>, "Franklin S. Cooper Jr"
+	<fcooperjr27@gmail.com>
+Thread-Topic: [meta-ti] [PATCH] u-boot_2011.09-psp04.06.00.08: Add the SDK
+	released version of u-boot
+Thread-Index: AQHNl7Aih0vGrfPLGUGnlCH5XuHBh5ek9DPA
+Date: Mon, 1 Oct 2012 20:17:44 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015923A130@DLEE12.ent.ti.com>
+References: <1348201306-12756-1-git-send-email-fcooper@ti.com>
+	<1348201306-12756-2-git-send-email-fcooper@ti.com>
+	<20120921041803.GA18493@edge>
+In-Reply-To: <20120921041803.GA18493@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-Received: by 10.58.80.71 with HTTP; Fri, 28 Sep 2012 04:53:39 -0700 (PDT)
-In-Reply-To: <EF446FF9DAC93B479C74AB9153DE173F1117D228@SMUCM08V.europe.bmw.corp>
-References: <EF446FF9DAC93B479C74AB9153DE173F1117CA4D@SMUCM08V.europe.bmw.corp>
-	<CA+2YH7vSDK0CS6Yh1pu26qygOhiKZycA0or7EXtF-Z09ntQvjw@mail.gmail.com>
-	<EF446FF9DAC93B479C74AB9153DE173F1117CBFB@SMUCM08V.europe.bmw.corp>
-	<CAMKF1sojfxBhzj-4K7j77Jdv5zhJQ9g3A2XBQ4CxkdUhy=se4g@mail.gmail.com>
-	<506479FF.8050305@mlbassoc.com>
-	<CAMKF1sp1dD7qoaQ=JpM_RmgZS65GRKcUcBka9q=0TWbtAzEVHQ@mail.gmail.com>
-	<CA+2YH7ssSvi323th0dHxP_wzB9H7he23HuhvtKNbAzb+K_n-Fg@mail.gmail.com>
-	<20120927162455.GA7653@edge> <50647F76.6020109@mlbassoc.com>
-	<CAOT3miL737wkzsNdfO38VrYJMf5K57-g3_ZCQji_HV0+y56b3A@mail.gmail.com>
-	<20120927212854.GB7653@edge>
-	<EF446FF9DAC93B479C74AB9153DE173F1117D228@SMUCM08V.europe.bmw.corp>
-From: Nicolas Dechesne <ndec13@gmail.com>
-Date: Fri, 28 Sep 2012 13:53:39 +0200
-Message-ID: <CAOT3miJcBnfy0S0QHiSWYcs8oQAcWzukH5zWW3ofbBdNiPSu-A@mail.gmail.com>
-To: Christian.Schulenberg@bmw.de
-Cc: meta-ti@yoctoproject.org
-Subject: Re: pandaboard not booting
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] u-boot_2011.09-psp04.06.00.08: Add the SDK released version of u-boot
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,62 +42,98 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Sep 2012 11:54:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 01 Oct 2012 20:17:51 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 28, 2012 at 1:03 PM,  <Christian.Schulenberg@bmw.de> wrote:
-> Hi,
->
-> could you give me some advice, what kernel version of 3.4.x to try? Or do=
- you have an idea, when a recipe for a more recent kernel could be availabl=
-e?
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 
-http://git.linaro.org/gitweb?p=3Dlanding-teams/working/ti/kernel.git
-branch: tilt-3.4
-config: omap4plus_defconfig
+Sincerely,
+Chase Maupin
+Software Applications
+ARM MPU
+e-mail: chase.maupin@ti.com
+phone: (214) 567-2950
+
+For support:
+Forums - http://community.ti.com/forums/
+Wiki - http://wiki.davincidsp.com/=20
 
 
->
-> BR,
-> Christian
->
-> -----Urspr=FCngliche Nachricht-----
-> Von: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoprojec=
-t.org] Im Auftrag von Denys Dmytriyenko
-> Gesendet: Donnerstag, 27. September 2012 23:29
-> An: Nicolas Dechesne
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Dmytriyenko, Denys
+> Sent: Thursday, September 20, 2012 11:18 PM
+> To: Franklin S. Cooper Jr
 > Cc: meta-ti@yoctoproject.org
-> Betreff: Re: [meta-ti] pandaboard not booting
->
-> On Thu, Sep 27, 2012 at 11:15:55PM +0200, Nicolas Dechesne wrote:
->> On Thu, Sep 27, 2012 at 6:31 PM, Gary Thomas <gary@mlbassoc.com> wrote:
->> > I build the Panda kernel (based on the latest TI/Ubuntu tree
->> > ti-ubuntu-3.4-1485.7 branch)
->> > all the time with the Yocto toolchain & it works just fine.
->> >
->> > I also tried the off-the-shelf 3.1.0 which worked as well.
->> >
->> > There must be something odd about the 3.1 kernel built from the
->> > linux-omap4-3.1.0
->> > recipe which is the default when built using Yocto+meta-ti
->>
->> i don't think there should be any valid reason to continue with this
->> old kernel. first there isn't anyone who maintains that branch (my
->> team maintains that evil vendor tree). For Panda I would either
->> recommend to use to a more recent branch (like 3.4), in fact we might
->> even consider http://git.linaro.org/gitweb?p=3Dlanding-teams/working/ti/=
-kernel.git
->> (branch tilt-3.4) as this is the base for our 'ubuntu' derived branch.
->> in fact for Panda, just mainline might be another option too..
->
-> Thanks, Nicolas!
->
-> I'll give it a try with either of those trees and update the recipe
-> accordingly.
->
-> --
-> Denys
+> Subject: Re: [meta-ti] [PATCH] u-boot_2011.09-psp04.06.00.08: Add
+> the SDK released version of u-boot
+>=20
+> On Thu, Sep 20, 2012 at 11:21:46PM -0500, Franklin S. Cooper Jr
+> wrote:
+> > * Add the official version of u-boot that is used by the Sitara
+> SDK.
+> >
+> > Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+> > ---
+> >  .../u-boot/u-boot_2011.09-psp04.06.00.08.bb        |   29
+> ++++++++++++++++++++
+> >  1 files changed, 29 insertions(+), 0 deletions(-)
+> >  create mode 100644 recipes-bsp/u-boot/u-boot_2011.09-
+> psp04.06.00.08.bb
+> >
+> > diff --git a/recipes-bsp/u-boot/u-boot_2011.09-
+> psp04.06.00.08.bb b/recipes-bsp/u-boot/u-boot_2011.09-
+> psp04.06.00.08.bb
+> > new file mode 100644
+> > index 0000000..cbaff76
+> > --- /dev/null
+> > +++ b/recipes-bsp/u-boot/u-boot_2011.09-psp04.06.00.08.bb
+> > @@ -0,0 +1,29 @@
+> > +# Use the version of u-boot.inc in oe-core not the meta-ti
+> version
+> > +require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
+> > +
+> > +DESCRIPTION =3D "u-boot bootloader for ARM MPU devices"
+> > +LICENSE =3D "GPLv2+"
+> > +LIC_FILES_CHKSUM =3D
+> "file://COPYING;md5=3D1707d6db1d42237583f50183a5651ecb"
+> > +
+> > +COMPATIBLE_MACHINE =3D "ti33x|am37x-evm|am3517-evm|beagleboard"
+>=20
+> Are you sure this is the right set of machines for the URL below?
+>=20
+>=20
+> > +DEFAULT_PREFERENCE =3D "-1"
+> > +
+> > +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+> > +
+> > +PR =3D "r0+gitr${SRCPV}"
+> > +
+> > +SRC_URI =3D "git://arago-project.org/git/projects/u-boot-
+> am33x.git;protocol=3Dgit;branch=3D${BRANCH}"
+> > +
+> > +BRANCH =3D "AM335XPSP_04.06.00.08"
+> > +
+> > +# Lock to the commit corresponding to TAG:
+> > +# v2011.09_AM335xPSP_04.06.00.08
+> > +SRCREV =3D "1e4626f0d5f3bb04ec974e76a5d9029875269d31"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +UBOOT_SUFFIX =3D "img"
+> > +
+> > +# Set the name of the SPL that will built so that it is also
+> packaged with u-boot.
+> > +SPL_BINARY =3D "MLO"
+> > --
+> > 1.7.0.4
+> >
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
 > _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
