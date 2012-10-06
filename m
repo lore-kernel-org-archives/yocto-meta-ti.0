@@ -1,33 +1,38 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D2075E00293
-	for <meta-ti@yoctoproject.org>; Fri,  5 Oct 2012 15:13:55 -0700 (PDT)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 8DD9CF8125A; Fri,  5 Oct 2012 16:13:55 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 69CFBF81222;
-	Fri,  5 Oct 2012 16:13:53 -0600 (MDT)
-Message-ID: <506F5BB3.3090204@mlbassoc.com>
-Date: Fri, 05 Oct 2012 16:14:11 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:15.0) Gecko/20120912 Thunderbird/15.0.1
-MIME-Version: 1.0
-To: "Maupin, Chase" <chase.maupin@ti.com>
-References: <1349465081-10787-1-git-send-email-fcooper@ti.com>
-	<506F2E82.8060906@mlbassoc.com>
-	<CA+2YH7ucY8NoMMc28fxsVav2cCg=n_6mYvama9Ox4t0ZowVizA@mail.gmail.com>
-	<6CF2DE49-0D65-4216-B374-805CE3754A17@ti.com>
-	<506F57C5.7000400@mlbassoc.com> <20121005220335.GD27533@denix.org>
-	<7D46E86EC0A8354091174257B2FED10159249A80@DLEE12.ent.ti.com>
-In-Reply-To: <7D46E86EC0A8354091174257B2FED10159249A80@DLEE12.ent.ti.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] wl12xx-firmware: Port wl12xx-firmware recipe
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 77BA6E00293
+	for <meta-ti@yoctoproject.org>; Sat,  6 Oct 2012 00:43:27 -0700 (PDT)
+Received: by mail-ee0-f48.google.com with SMTP id b45so2084808eek.35
+	for <meta-ti@yoctoproject.org>; Sat, 06 Oct 2012 00:43:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to:x-mailer
+	:x-gm-message-state;
+	bh=EgYeXS271NX465/YeLK4XlYzOuNGHfR4LThAI2PfaMI=;
+	b=kEFg4kj4/WZbZ11KuY2OSDKJa6XYGOJ4U87b2sKzP6E2O3/5Q7weegntv2BYb2XzDn
+	fx0hqYpV1GdEyubQtrHOL/m+7VX7JubylZldiBZ33dInGjKqBDR//8AGyyxoUJugpDMT
+	3vLz+qZoO0ORg6+2xduhXFAhfKa3hzeomPGgYnNkIF4Hq97GsQFpHYhf36EFqEv4RaXI
+	wUEN+e0GolAY6ra4ru/p4Uc2bjAAn2eQ//n6zr4j/CRsK5Yv2s2YYshq2vBW7BmLFr3b
+	CT3qMtnGmZtZ7xqaJwuwUuo+M0Dhl9gX2QBFOzJBvW/1yUqwiBrDdSWdyXboJyYyDvUp
+	FBXA==
+Received: by 10.14.176.66 with SMTP id a42mr16100157eem.1.1349509405997;
+	Sat, 06 Oct 2012 00:43:25 -0700 (PDT)
+Received: from [172.20.0.10] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPS id m42sm21806479eep.16.2012.10.06.00.43.19
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Sat, 06 Oct 2012 00:43:24 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.1 \(1498\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1349465262-20206-1-git-send-email-fcooper@ti.com>
+Date: Sat, 6 Oct 2012 09:43:21 +0200
+Message-Id: <D3A5DC96-05D7-4F45-8580-827F0084EE47@dominion.thruhere.net>
+References: <1349465262-20206-1-git-send-email-fcooper@ti.com>
+To: Franklin S. Cooper Jr <fcooperjr27@gmail.com>
+X-Mailer: Apple Mail (2.1498)
+X-Gm-Message-State: ALoCoQnVAf/JfwFpr+rTogjLf/CMViqy+rKlsQOflZwsai2CSpf+MqY/jBA+jqGHqFu5mP2lRFOX
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] bt-enable: Add bt-enable recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,120 +45,196 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Oct 2012 22:13:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 06 Oct 2012 07:43:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On 2012-10-05 16:09, Maupin, Chase wrote:
->> -----Original Message-----
->> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->> bounces@yoctoproject.org] On Behalf Of Dmytriyenko, Denys
->> Sent: Friday, October 05, 2012 5:04 PM
->> To: Gary Thomas
->> Cc: meta-ti@yoctoproject.org
->> Subject: Re: [meta-ti] [PATCH] wl12xx-firmware: Port wl12xx-
->> firmware recipe
->>
->> On Fri, Oct 05, 2012 at 03:57:25PM -0600, Gary Thomas wrote:
->>> On 2012-10-05 13:20, Cooper Jr., Franklin wrote:
->>>> The custom git tree is wl12xx only not all the different
->> components that linux-firmware provides. My understanding is that
->> the team that works on wl12xx should be pushing it back to linux-
->> firmware. But like I said this will contain the latest changes.
->>>
->>> I still don't think it should be separate.  If the upstream
->> (TI) stuff
->>> isn't being properly tracked (there should be an effort to make
->> this so),
->>> just add a .bbappend that fixes things.  I use these packages
->> and I don't
->>> want to have to track the "flavour of the week" to keep
->> current.
->>
->> That would require extracting individual commits from the git
->> tree and listing
->> them in .bbappend. I would not personally mind that approach, but
->> it may
->> require extra work for the wireless team. We need to check with
->> them...
->
-> Couldn't you use the bbappend to just change the SRC_URI and SRCREV?  Is the issue the recipe name changing from linux-firmware to wl12xx-firmware?
->
-> Wireless team went with their own recipe because of the issues with tracking/maintaining the patch set from their development team.  I know this may not make sense outside of TI but there is a development team in wireless making and pushing changes to mainline and then there is the integration team responsible for providing the validated code drop.  I'm not saying this is a good work flow, but the integration team pushed to get a single repo of the proper sources from the development team because the patch set was un-wieldy.
->
-> That's just a little context of what I know about how these recipes were created.  So again my question is what is the particular pain point you want to avoid?  The name of the recipe or something else?
+Why isn't this using the standard kim platformdata in the kernel? That =
+also gives you a nice rfkill interface. That's how all the wl127x boards =
+in mainline do it.
 
-My biggest concern was that currently my images use 'linux-firmware-wl12xx'
-and now, for the same but updated functionality, I need to use 'wl12xx-firmware'
-instead.  What will it be next week?  wl12xx-I-like-Maui-better??
+Op 5 okt. 2012, om 21:27 heeft Franklin S. Cooper Jr =
+<fcooperjr27@gmail.com> het volgende geschreven:
 
-Get my point?
+> * Port bt-enable recipe from arago.
+> * Bt-enable is used to enable the BT module on the TI wl12xx
+>  Wi-Fi + Bluetooth module.
+>=20
+> Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+> ---
+> Version 2 changes:
+> Loosen up COMPATIBLE_MACHINE restriction. Using generic SOC family =
+when
+> possible.
+>=20
+> ...kefile-Update-makefile-to-work-well-in-OE.patch |   78 =
+++++++++++++++++++++
+> recipes-bsp/bt-enable/bt-enable_1.0.bb             |   41 ++++++++++
+> 2 files changed, 119 insertions(+), 0 deletions(-)
+> create mode 100644 =
+recipes-bsp/bt-enable/bt-enable/0001-Makefile-Update-makefile-to-work-well=
+-in-OE.patch
+> create mode 100644 recipes-bsp/bt-enable/bt-enable_1.0.bb
+>=20
+> diff --git =
+a/recipes-bsp/bt-enable/bt-enable/0001-Makefile-Update-makefile-to-work-we=
+ll-in-OE.patch =
+b/recipes-bsp/bt-enable/bt-enable/0001-Makefile-Update-makefile-to-work-we=
+ll-in-OE.patch
+> new file mode 100644
+> index 0000000..7e6756c
+> --- /dev/null
+> +++ =
+b/recipes-bsp/bt-enable/bt-enable/0001-Makefile-Update-makefile-to-work-we=
+ll-in-OE.patch
+> @@ -0,0 +1,78 @@
+> +=46rom a400ac3d83023a66a356d056899d6b380cb30473 Mon Sep 17 00:00:00 =
+2001
+> +From: Chase Maupin <Chase.Maupin@ti.com>
+> +Date: Wed, 7 Mar 2012 10:51:43 -0600
+> +Subject: [PATCH] Makefile: Update makefile to work with OE
+> +
+> +* Updated the makefile to with OE
+> +* Use the kernel install target for installing the module
+> +
+> +Upstream-Status: Pending
+> +    * will be in next release
+> +
+> +Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> +---
+> + Makefile |   45 ++++++++++++++++++++++++++++++++++++++++-----
+> + 1 files changed, 40 insertions(+), 5 deletions(-)
+> +
+> +diff --git a/Makefile b/Makefile
+> +index ebbcd11..b17d33e 100755
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -7,15 +7,50 @@ else
+> +   EXTRA_CFLAGS +=3D -O2
+> + endif
+> +
+> ++-include ../../../Rules.make
+> ++
+> ++# If KERNEL_DIR is not set then use the default in Rules.make
+> ++KERNEL_DIR ?=3D ${LINUXKERNEL_INSTALL_DIR}
+> ++DEST_DIR ?=3D ${DESTDIR}
+> ++
+> ++PLATFORM ?=3D "unknown"
+> ++MACHINE_NAME ?=3D "unknown"
+> ++
+> ++# Use the PLATFORM value from the Rules.make if it was sourced
+> ++ifeq ($(PLATFORM), am335x-evm)
+> ++    MACHINE_NAME :=3D "am335x"
+> ++endif
+> ++ifeq ($(PLATFORM), am180x-evm)
+> ++    MACHINE_NAME :=3D "am1808"
+> ++endif
+> ++ifeq ($(PLATFORM), da850-omapl138-evm)
+> ++    MACHINE_NAME :=3D "am1808"
+> ++endif
+> ++ifeq ($(PLATFORM), am37x-evm)
+> ++    MACHINE_NAME :=3D "omap3evm"
+> ++endif
+> ++
+> ++# If CROSS_COMPILE is not set by Rules.make then set a sane default
+> ++CROSS_COMPILE ?=3D arm-arago-linux-gnueabi-
+> ++export CROSS_COMPILE
+> ++
+> ++# set the INSTALL_MOD_DIR so that the executables won't be placed in =
+extra
+> ++INSTALL_MOD_DIR =3D kernel/drivers/bt_enable
+> ++export INSTALL_MOD_DIR
+> ++
+> + obj-m :=3D gpio_en.o
+> +
+> ++MAKE_ENV =3D ARCH=3Darm
+> ++
+> + PWD :=3D $(shell pwd)
+> + all:
+> +-	pwd
+> +-	@echo EXTRA_CFLAGS =3D $(EXTRA_CFLAGS)
+> +-	$(MAKE) CROSS_COMPILE=3D$(CROSS_COMPILE) ARCH=3D$(ARCH) =
+EXTRA_CFLAGS=3D"$(EXTRA_CFLAGS)" -C $(KERNEL_DIR) M=3D$(PWD) modules
+> ++	@cp -f gpio_en_${MACHINE_NAME}.c gpio_en.c
+> ++	$(MAKE) EXTRA_CFLAGS=3D"$(EXTRA_CFLAGS)" -C $(KERNEL_DIR) =
+$(MAKE_ENV) \
+> ++    M=3D$(PWD) modules
+> ++
+> + install:
+> +-	install -d =
+${DEST_DIR}${BASE_LIB_DIR}/modules/${KRNL_VER}/kernel/drivers/bt_enable
+> +-	install -m 0755 ./gpio_en.ko =
+${DEST_DIR}${BASE_LIB_DIR}/modules/${KRNL_VER}/kernel/drivers/bt_enable
+> ++	$(MAKE) EXTRA_CFLAGS=3D"$(EXTRA_CFLAGS)" -C $(KERNEL_DIR) =
+$(MAKE_ENV) \
+> ++    M=3D$(PWD) INSTALL_MOD_PATH=3D"${DEST_DIR}" modules_install
+> ++
+> + clean:
+> +	rm -rf *.o *~ core .depend .*.cmd *.ko *.mod.c .tmp_versions =
+*.symvers
+> +--
+> +1.7.0.4
+> diff --git a/recipes-bsp/bt-enable/bt-enable_1.0.bb =
+b/recipes-bsp/bt-enable/bt-enable_1.0.bb
+> new file mode 100644
+> index 0000000..b6f1ee7
+> --- /dev/null
+> +++ b/recipes-bsp/bt-enable/bt-enable_1.0.bb
+> @@ -0,0 +1,41 @@
+> +DESCRIPTION =3D "BT GPIO Enable"
+> +LICENSE =3D "BSD"
+> +COMPATIBLE_MACHINE =3D "omap3|omapl138|da850-omapl138-evm|ti33x"
+> +LIC_FILES_CHKSUM =3D =
+"file://gpio_en_am1808.c;beginline=3D1;endline=3D34;md5=3Dfe94639d8f61c867=
+d1bc4bf61473d3cd \
+> +                    =
+file://gpio_en_am335x.c;beginline=3D1;endline=3D34;md5=3Dfe94639d8f61c867d=
+1bc4bf61473d3cd \
+> +                    =
+file://gpio_en_omap3evm.c;beginline=3D1;endline=3D34;md5=3Dfe94639d8f61c86=
+7d1bc4bf61473d3cd \
+> +"
+> +
+> +DEPENDS =3D "virtual/kernel"
+> +
+> +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+> +
+> +PACKAGE_STRIP =3D "no"
+> +
+> +inherit module
+> +
+> +MACHINE_KERNEL_PR_append =3D "a"
+> +PR =3D "r0+gitr${SRCREV}"
+> +
+> +SRCREV =3D "97c4600ff7d39f1cc6079939248cd9ed15100db4"
+> +
+> +SRC_URI =3D "git://github.com/TI-ECS/bt_enable.git;protocol=3Dgit \
+> +           =
+file://0001-Makefile-Update-makefile-to-work-well-in-OE.patch \
+> +          "
+> +
+> +PLATFORM =3D "unknown"
+> +PLATFORM_ti33x =3D "am335x-evm"
+> +PLATFORM_omap3 =3D "am37x-evm"
+> +PLATFORM_omapl138 =3D "am180x-evm"
+> +PLATFORM_da850-omapl138-evm =3D "am180x-evm"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +EXTRA_OEMAKE =3D " \
+> +	KERNEL_DIR=3D${STAGING_KERNEL_DIR} \
+> +    PLATFORM=3D${PLATFORM} \
+> +"
+> +
+> +do_install () {
+> +	oe_runmake 'DEST_DIR=3D${D}' install
+> +}
+> --=20
+> 1.7.0.4
+>=20
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
->>>> On Oct 5, 2012, at 2:09 PM, "Enrico"
->> <ebutera@users.berlios.de> wrote:
->>>>
->>>>> On Fri, Oct 5, 2012 at 9:01 PM, Gary Thomas
->> <gary@mlbassoc.com> wrote:
->>>>>> On 2012-10-05 13:24, Franklin S. Cooper Jr wrote:
->>>>>>>
->>>>>>> * Port wl12xx-firmware recipe from arago. This recipe was
->> originally
->>>>>>>    named linux-firmware in arago.
->>>>>>> * Wl12xx-firmware provides the firmware files for use with
->> the TI
->>>>>>>    Wi-Fi + Bluetooth module.
->>>>>>>
->>>>>>> Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
->>>>>>
->>>>>>
->>>>>> Why not just keep the main linux-firmware recipe up to date
->> instead of
->>>>>> duplicate
->>>>>> functionality?
->>>>>
->>>>>
->>>>> I made myself the same question at first, but the answer was
->> there:
->>>>>
->>>>>
->>>>>>> +# This recipe provides the latest firmware files for
->> wl12xx.
->>>>>>> +# Therefore, use the contents of this recipe instead of
->> the contents
->>>>>>> +# of linux-firmware-wl12xx.
->>>>>
->>>>>>> +SRC_URI = "git://github.com/TI-ECS/ti-
->> utils.git;protocol=git"
->>>>>
->>>>>
->>>>> Well one could ask why they are there and not in linux-
->> firmware git
->>>>> (not polemic, just curious).
->>>>>
->>>>> Enrico
->>>>> _______________________________________________
->>>>> meta-ti mailing list
->>>>> meta-ti@yoctoproject.org
->>>>> https://lists.yoctoproject.org/listinfo/meta-ti
->>>
->>> --
->>> ------------------------------------------------------------
->>> Gary Thomas                 |  Consulting for the
->>> MLB Associates              |    Embedded world
->>> ------------------------------------------------------------
->>> _______________________________________________
->>> meta-ti mailing list
->>> meta-ti@yoctoproject.org
->>> https://lists.yoctoproject.org/listinfo/meta-ti
->>>
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
 
