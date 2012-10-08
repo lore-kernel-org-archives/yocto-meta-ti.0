@@ -1,34 +1,31 @@
-Return-Path: <fcooper@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 963E5E00293
-	for <meta-ti@yoctoproject.org>; Sat,  6 Oct 2012 01:35:52 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q968ZnGh028973;
-	Sat, 6 Oct 2012 03:35:49 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q968ZnrM005247;
-	Sat, 6 Oct 2012 03:35:49 -0500
-Received: from DFLE09.ent.ti.com ([fe80::3103:58c3:47f:860b]) by
-	DFLE73.ent.ti.com ([fe80::86e:fab6:cd95:e158%28]) with mapi id
-	14.01.0323.003; Sat, 6 Oct 2012 03:35:49 -0500
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "Cooper Jr., Franklin" <fcooper@ti.com>
-Thread-Topic: [meta-ti] [PATCH v2] libgles-omap3: Pull in changes	from	arago
-	to meta-ti
-Thread-Index: AQHNlSz1nPrhdKhEn0errGx7KtmfiZesENEk
-Date: Sat, 6 Oct 2012 08:35:48 +0000
-Message-ID: <83AEDAE8-EB16-4B14-B2EB-C1332C5D7454@ti.com>
-References: <1346665189-10535-1-git-send-email-fcooper27jr@gmail.com>
-	<F45EF99D-D3F7-4CB3-91A7-DDA8C014A727@dominion.thruhere.net>
-	<8F29D6B095ED194EA1980491A5E029710C2B3ED7@DFLE09.ent.ti.com>,
-	<8F29D6B095ED194EA1980491A5E029710C2D6298@DFLE09.ent.ti.com>
-In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C2D6298@DFLE09.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
+	[209.85.223.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 825B0E01275;
+	Mon,  8 Oct 2012 03:54:47 -0700 (PDT)
+Received: by mail-ie0-f176.google.com with SMTP id k11so10296691iea.35
+	for <multiple recipients>; Mon, 08 Oct 2012 03:54:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:cc:content-type;
+	bh=IictIYJNGI4RfWdT4/qTeTh8a4qS42shom9wEduE8rk=;
+	b=HPUydgCkyI7O7uVPRCiOdW+6CczgMOHHAD/itXMClyb93L9fLhASR4KYnAjrhWuhdj
+	xhLW4yELqECkkKyHNS+CA2YM+S6JeVAhmHkvE/Euy92fhDXNnLxVjSbGiGz/bnEA+Ead
+	QlypEthXgRx+1qwVm8C8xUvtSslrH02KAcPTt8EJ5J/5UPDmGEG2IXc2oi3mtSDyjmw+
+	0vwJXlDI/RF8Y4SR+NhRYkBsgzpktzjwAI/WNjqzDM7t8lMWh3bB3ml0zk93ExFLseno
+	3NkrQx83pJj0/x1kCYX935hjaDbJTNm7cs8YLmZRI0IL3EkdMCCKw6XRBvhzHQr8lSQW
+	6InA==
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH v2] libgles-omap3: Pull in changes	from	arago	to meta-ti
+Received: by 10.42.18.193 with SMTP id y1mr12550393ica.0.1349693686909; Mon,
+	08 Oct 2012 03:54:46 -0700 (PDT)
+Received: by 10.64.18.13 with HTTP; Mon, 8 Oct 2012 03:54:46 -0700 (PDT)
+Date: Mon, 8 Oct 2012 12:54:46 +0200
+Message-ID: <CALbNGRRRk1HRJx4Ahk1E8AiB+MFxqa4m1y38GDhycPwgHBREag@mail.gmail.com>
+From: =?ISO-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>
+To: gumstix-users@lists.sourceforge.net
+Cc: meta-ti@yoctoproject.org, yocto@yoctoproject.org,
+	angstrom-distro-devel@linuxtogo.org
+Subject: meta-gumstix proceedings
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,94 +38,21 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Oct 2012 08:35:52 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 08 Oct 2012 10:54:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Koen,
->> +    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir} || true
->> +    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/ || true
->=20
-> IIRC this is going to generate some file conflicts and in OE-classic we p=
-ointed qt to the proper place for the includes. Has something changed since=
- then?
+Hi,
 
-Does the below answer your question?
-http://arago-project.org/git/?p=3Darago.git;a=3Dcommit;h=3D02e8c5404184d258=
-bcb8dadbdafb760bc1acb912
+as some of you might know, gumstix created an official BSP layer
+[1][2]. To avoid confusion I renamed my layer from meta-gumstix to
+meta-gumstix-community [3]. Users should either switch to the official
+meta-gumstix layer or rename meta-gumstix to meta-gumstix-community
+[3] in git configuration (users of angstrom-setup-scripts should also
+change the name in layers.txt).
 
-This is a result of change to the newer version of the graphics SDK.
+Andreas
 
->> +    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/ || true
-
-one of the files being installed here is wsegl.h. Qt can provide that file =
-but shouldn't. This is what the below patch talks about
-
-http://cgit.openembedded.org/openembedded/commit/recipes/qt4?id=3Df63289cfa=
-7e1d96cc7f5ab845e5764f0b853a022
-
-That patch does need to be submitted to oe-core. But since the qt embedded =
-gles recipe should depend on the graphics SDK the wsegl.h should already ex=
-ist which means Qt shouldn't be copying its own version.
-
->> +    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir} || true
-
-Qt can also provide pvr2d.h but once again the one from the graphics SDK sh=
-ould be used instead.
-
-From the graphics SDK point of view is there any other issues with those he=
-aders being installed?
-
-
-On Sep 17, 2012, at 6:34 PM, "Cooper Jr., Franklin" <fcooper@ti.com> wrote:
-
-> You can ignore this patch for now while I investigate some more.
->=20
-> -----Original Message-----
-> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproje=
-ct.org] On Behalf Of Cooper Jr., Franklin
-> Sent: Monday, September 03, 2012 5:30 AM
-> To: Koen Kooi; meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH v2] libgles-omap3: Pull in changes from ara=
-go to meta-ti
->=20
-> Are you referring to this commit http://cgit.openembedded.org/openembedde=
-d/commit/recipes/qt4?id=3Df63289cfa7e1d96cc7f5ab845e5764f0b853a022 ?
->=20
-> The point of that commit was to insure that the headers from the Graphics=
- SDK is being used and not a Qt version. This patch is just making sure tha=
-t the SXG version of the include files are available.
->=20
-> -----Original Message-----
-> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproje=
-ct.org] On Behalf Of Koen Kooi
-> Sent: Monday, September 03, 2012 4:54 AM
-> To: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH v2] libgles-omap3: Pull in changes from ara=
-go to meta-ti
->=20
->=20
-> Op 3 sep. 2012, om 11:39 heeft Franklin S. Cooper Jr <fcooperjr27@gmail.c=
-om> het volgende geschreven:
->>=20
->> -   =20
->> +    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir} || true
->> +    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/ || true
->=20
-> IIRC this is going to generate some file conflicts and in OE-classic we p=
-ointed qt to the proper place for the includes. Has something changed since=
- then?
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+[1] http://sourceforge.net/mailarchive/message.php?msg_id=29914700
+[2] https://github.com/gumstix/meta-gumstix
+[3] https://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community
 
