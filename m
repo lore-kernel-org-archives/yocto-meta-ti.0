@@ -1,31 +1,26 @@
-Return-Path: <fcooper@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B444BE0027E
-	for <meta-ti@yoctoproject.org>; Mon,  8 Oct 2012 08:06:39 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q98F6clI006433;
-	Mon, 8 Oct 2012 10:06:38 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q98F6c92012766;
-	Mon, 8 Oct 2012 10:06:38 -0500
-Received: from DFLE09.ent.ti.com ([fe80::3103:58c3:47f:860b]) by
-	DFLE72.ent.ti.com ([fe80::5c48:b90d:af93:5822%30]) with mapi id
-	14.01.0323.003; Mon, 8 Oct 2012 10:06:38 -0500
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "Franklin S. Cooper Jr" <fcooperjr27@gmail.com>,
-	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: [PATCH v2] bt-enable: Add bt-enable recipe
-Thread-Index: AQHNpWYKsO2ve8fva0SOSUiqB/rRpJevgXbw
-Date: Mon, 8 Oct 2012 15:06:37 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C2FF4DC@DFLE09.ent.ti.com>
-References: <1349710367-6810-1-git-send-email-fcooper@ti.com>
-In-Reply-To: <1349710367-6810-1-git-send-email-fcooper@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F8C7E01275;
+	Mon,  8 Oct 2012 04:18:27 -0700 (PDT)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 08 Oct 2012 04:18:27 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.80,553,1344236400"; d="scan'208";a="231207742"
+Received: from unknown (HELO helios.localnet) ([10.252.122.50])
+	by fmsmga001.fm.intel.com with ESMTP; 08 Oct 2012 04:18:25 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Andreas =?ISO-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 08 Oct 2012 12:18:24 +0100
+Message-ID: <7034165.eLERhWRCDa@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.9.2 (Linux/3.2.0-31-generic-pae; KDE/4.9.2; i686; ; )
+In-Reply-To: <CALbNGRRRk1HRJx4Ahk1E8AiB+MFxqa4m1y38GDhycPwgHBREag@mail.gmail.com>
+References: <CALbNGRRRk1HRJx4Ahk1E8AiB+MFxqa4m1y38GDhycPwgHBREag@mail.gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] bt-enable: Add bt-enable recipe
+X-Mailman-Approved-At: Mon, 08 Oct 2012 11:42:10 -0700
+Cc: meta-ti@yoctoproject.org, yocto@yoctoproject.org,
+	gumstix-users@lists.sourceforge.net, angstrom-distro-devel@linuxtogo.org
+Subject: Re: [yocto] meta-gumstix proceedings
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,174 +33,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2012 15:06:39 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 08 Oct 2012 11:18:27 -0000
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-If there are any other issues with the actual recipe let me know.
+Hi Andreas,
 
------Original Message-----
-From: Franklin S. Cooper Jr [mailto:fcooperjr27@gmail.com]=20
-Sent: Monday, October 08, 2012 10:33 AM
-To: meta-ti@yoctoproject.org
-Cc: Cooper Jr., Franklin
-Subject: [PATCH v2] bt-enable: Add bt-enable recipe
+On Monday 08 October 2012 12:54:46 Andreas M=FCller wrote:
+> as some of you might know, gumstix created an official BSP layer
+> [1][2]. To avoid confusion I renamed my layer from meta-gumstix to
+> meta-gumstix-community [3]. Users should either switch to the officia=
+l
+> meta-gumstix layer or rename meta-gumstix to meta-gumstix-community
+> [3] in git configuration (users of angstrom-setup-scripts should also=
 
-* Port bt-enable recipe from arago.
-* Bt-enable is used to enable the BT module on the TI wl12xx
-  Wi-Fi + Bluetooth module.
+> change the name in layers.txt).
 
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
----
-Version 2 changes:
-Update ordering based on OE Styling Guide:
-    http://www.openembedded.org/wiki/Styleguide
-Remove unneeded DEPENDS and PACKAGE_ARCH Use updated package strip syntax.
-Remove the machine da850-omapl138-evm from the recipe.
-Remove tab from oe_runmake
-Appending to EXTRA_OEMAKE instead of overriding it
+So what should we do with the layer index [4]? Do we list both? What is=
+ the=20
+delta between them, and is there a hope that there will be only one lay=
+er at=20
+some point?
 
- ...kefile-Update-makefile-to-work-well-in-OE.patch |   78 ++++++++++++++++=
-++++
- recipes-bsp/bt-enable/bt-enable_1.0.bb             |   32 ++++++++
- 2 files changed, 110 insertions(+), 0 deletions(-)  create mode 100644 rec=
-ipes-bsp/bt-enable/bt-enable/0001-Makefile-Update-makefile-to-work-well-in-=
-OE.patch
- create mode 100644 recipes-bsp/bt-enable/bt-enable_1.0.bb
+Cheers,
+Paul
 
-diff --git a/recipes-bsp/bt-enable/bt-enable/0001-Makefile-Update-makefile-=
-to-work-well-in-OE.patch b/recipes-bsp/bt-enable/bt-enable/0001-Makefile-Up=
-date-makefile-to-work-well-in-OE.patch
-new file mode 100644
-index 0000000..7e6756c
---- /dev/null
-+++ b/recipes-bsp/bt-enable/bt-enable/0001-Makefile-Update-makefile-to-w
-+++ ork-well-in-OE.patch
-@@ -0,0 +1,78 @@
-+From a400ac3d83023a66a356d056899d6b380cb30473 Mon Sep 17 00:00:00 2001
-+From: Chase Maupin <Chase.Maupin@ti.com>
-+Date: Wed, 7 Mar 2012 10:51:43 -0600
-+Subject: [PATCH] Makefile: Update makefile to work with OE
-+
-+* Updated the makefile to with OE
-+* Use the kernel install target for installing the module
-+
-+Upstream-Status: Pending
-+    * will be in next release
-+
-+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-+---
-+ Makefile |   45 ++++++++++++++++++++++++++++++++++++++++-----
-+ 1 files changed, 40 insertions(+), 5 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index ebbcd11..b17d33e 100755
-+--- a/Makefile
-++++ b/Makefile
-+@@ -7,15 +7,50 @@ else
-+   EXTRA_CFLAGS +=3D -O2
-+ endif
-+
-++-include ../../../Rules.make
-++
-++# If KERNEL_DIR is not set then use the default in Rules.make=20
-++KERNEL_DIR ?=3D ${LINUXKERNEL_INSTALL_DIR} DEST_DIR ?=3D ${DESTDIR}
-++
-++PLATFORM ?=3D "unknown"
-++MACHINE_NAME ?=3D "unknown"
-++
-++# Use the PLATFORM value from the Rules.make if it was sourced ifeq=20
-++($(PLATFORM), am335x-evm)
-++    MACHINE_NAME :=3D "am335x"
-++endif
-++ifeq ($(PLATFORM), am180x-evm)
-++    MACHINE_NAME :=3D "am1808"
-++endif
-++ifeq ($(PLATFORM), da850-omapl138-evm)
-++    MACHINE_NAME :=3D "am1808"
-++endif
-++ifeq ($(PLATFORM), am37x-evm)
-++    MACHINE_NAME :=3D "omap3evm"
-++endif
-++
-++# If CROSS_COMPILE is not set by Rules.make then set a sane default=20
-++CROSS_COMPILE ?=3D arm-arago-linux-gnueabi- export CROSS_COMPILE
-++
-++# set the INSTALL_MOD_DIR so that the executables won't be placed in=20
-++extra INSTALL_MOD_DIR =3D kernel/drivers/bt_enable export=20
-++INSTALL_MOD_DIR
-++
-+ obj-m :=3D gpio_en.o
-+
-++MAKE_ENV =3D ARCH=3Darm
-++
-+ PWD :=3D $(shell pwd)
-+ all:
-+-	pwd
-+-	@echo EXTRA_CFLAGS =3D $(EXTRA_CFLAGS)
-+-	$(MAKE) CROSS_COMPILE=3D$(CROSS_COMPILE) ARCH=3D$(ARCH) EXTRA_CFLAGS=3D"=
-$(EXTRA_CFLAGS)" -C $(KERNEL_DIR) M=3D$(PWD) modules
-++	@cp -f gpio_en_${MACHINE_NAME}.c gpio_en.c
-++	$(MAKE) EXTRA_CFLAGS=3D"$(EXTRA_CFLAGS)" -C $(KERNEL_DIR) $(MAKE_ENV) \
-++    M=3D$(PWD) modules
-++
-+ install:
-+-	install -d ${DEST_DIR}${BASE_LIB_DIR}/modules/${KRNL_VER}/kernel/drivers=
-/bt_enable
-+-	install -m 0755 ./gpio_en.ko ${DEST_DIR}${BASE_LIB_DIR}/modules/${KRNL_V=
-ER}/kernel/drivers/bt_enable
-++	$(MAKE) EXTRA_CFLAGS=3D"$(EXTRA_CFLAGS)" -C $(KERNEL_DIR) $(MAKE_ENV) \
-++    M=3D$(PWD) INSTALL_MOD_PATH=3D"${DEST_DIR}" modules_install
-++
-+ clean:
-+	rm -rf *.o *~ core .depend .*.cmd *.ko *.mod.c .tmp_versions *.symvers
-+--
-+1.7.0.4
-diff --git a/recipes-bsp/bt-enable/bt-enable_1.0.bb b/recipes-bsp/bt-enable=
-/bt-enable_1.0.bb
-new file mode 100644
-index 0000000..27d8e1d
---- /dev/null
-+++ b/recipes-bsp/bt-enable/bt-enable_1.0.bb
-@@ -0,0 +1,32 @@
-+DESCRIPTION =3D "BT GPIO Enable"
-+LICENSE =3D "BSD"
-+LIC_FILES_CHKSUM =3D "file://gpio_en_am1808.c;beginline=3D1;endline=3D34;m=
-d5=3Dfe94639d8f61c867d1bc4bf61473d3cd \
-+                    file://gpio_en_am335x.c;beginline=3D1;endline=3D34;md5=
-=3Dfe94639d8f61c867d1bc4bf61473d3cd \
-+                   =20
-+file://gpio_en_omap3evm.c;beginline=3D1;endline=3D34;md5=3Dfe94639d8f61c86=
-7d1bc4bf61473d3cd \ "
-+COMPATIBLE_MACHINE =3D "omap3|omapl138|ti33x"
-+
-+PR =3D "r0+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append =3D "a"
-+
-+SRCREV =3D "97c4600ff7d39f1cc6079939248cd9ed15100db4"
-+
-+SRC_URI =3D "git://github.com/TI-ECS/bt_enable.git;protocol=3Dgit \
-+          =20
-+file://0001-Makefile-Update-makefile-to-work-well-in-OE.patch \ "
-+
-+S =3D "${WORKDIR}/git"
-+
-+inherit module
-+
-+INHIBIT_PACKAGE_STRIP =3D "1"
-+
-+PLATFORM_ti33x =3D "am335x-evm"
-+PLATFORM_omap3 =3D "am37x-evm"
-+PLATFORM_omapl138 =3D "am180x-evm"
-+
-+EXTRA_OEMAKE +=3D "KERNEL_DIR=3D${STAGING_KERNEL_DIR} PLATFORM=3D${PLATFOR=
-M}"
-+
-+do_install () {
-+    oe_runmake 'DEST_DIR=3D${D}' install
-+}
---
-1.7.0.4
+[4] http://www.openembedded.org/wiki/LayerIndex
 
+--=20
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
