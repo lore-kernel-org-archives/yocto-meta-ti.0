@@ -1,33 +1,34 @@
 Return-Path: <ebutera@gmail.com>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B5DBE013DB
-	for <meta-ti@yoctoproject.org>; Wed, 10 Oct 2012 16:41:00 -0700 (PDT)
-Received: by mail-wg0-f54.google.com with SMTP id dt10so698739wgb.11
-	for <meta-ti@yoctoproject.org>; Wed, 10 Oct 2012 16:41:00 -0700 (PDT)
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DD977E013EF
+	for <meta-ti@yoctoproject.org>; Wed, 10 Oct 2012 16:41:08 -0700 (PDT)
+Received: by mail-wi0-f182.google.com with SMTP id hm2so1195246wib.11
+	for <meta-ti@yoctoproject.org>; Wed, 10 Oct 2012 16:41:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=Fbn+pa0GnS87gFDcHPcBWH9CaZmgE8/g2AOARHmAu/U=;
-	b=aV02qz7RtQvSZkk5deVNSVdYeB75Aibj4RUHCjD9MBvVDQmcK2Hg9XBRYmW4MnFXEP
-	am5N5eZpne6FPMSUZ8vJkeFvotKzozHfZ7yDXPZelajAMqprIQU1iJT3VTu54aiDkBC6
-	2WuaovUED+FmKEBr+hE9CIYEBhxj5Y96YEoP+8C5F/ffJ1evfbjeAmw4664JHn03pPzZ
-	7PC8c3HquXMApvaIzazsSNN3CWOvFxNWKyiaVOB09hpEaiqrHPomC9XJhzyiMTGMzT8g
-	veoZ4WaJui9vUVCQ542CzF4uRgh2Xsyou29mnHL9S8Nwmf44h/5i5zhCnrEWHdx7CiX7
-	bpfA==
-Received: by 10.216.193.158 with SMTP id k30mr15521203wen.89.1349912460168;
-	Wed, 10 Oct 2012 16:41:00 -0700 (PDT)
+	:references; bh=uYyyMZXaMsDxbtnsQ8tyJ3zl1VGH0pvxHSvfohkecWM=;
+	b=c+JgNXHSFfmzKLj1wggbXXf88IK99MrIlkfwRkbty7ZU9QcQ5985MmpvoO9bvRD2Wy
+	2AKDtiMgdCm4LZsxj1hPrUSGO8nDhI+CS7MzQBI4aIRv51XYkpoXsW1CgCA7qOlqUnBi
+	4Y2cMDdZgI2BWp+vTN1JKXgdXm4gYmZ7Eoxh2HUYXaGYkrvEsA0iJWJskUSH1MMub1is
+	zpKBy27Bvk8ZoJnVO4YloFIntC4WAu+UWh1u0cGVoHr8wCWB/RveO//jYk7TadGmUV3G
+	zDbfVpDDhvKHNMGCynF2mvzpNxoFKQHHgzfLyj6IMOQukby6XPTRBmejG4FEuHO3Odrg
+	iR0A==
+Received: by 10.180.76.69 with SMTP id i5mr16386992wiw.9.1349912463965;
+	Wed, 10 Oct 2012 16:41:03 -0700 (PDT)
 Received: from localhost.localdomain ([188.11.142.65])
-	by mx.google.com with ESMTPS id v3sm5459401wiy.5.2012.10.10.16.40.58
+	by mx.google.com with ESMTPS id v3sm5459401wiy.5.2012.10.10.16.41.01
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 10 Oct 2012 16:40:59 -0700 (PDT)
+	Wed, 10 Oct 2012 16:41:03 -0700 (PDT)
 Sender: Enrico Butera <ebutera@gmail.com>
 From: Enrico Butera <ebutera@users.berlios.de>
 To: meta-ti@yoctoproject.org
-Date: Thu, 11 Oct 2012 01:40:31 +0200
-Message-Id: <1349912433-21880-4-git-send-email-ebutera@users.berlios.de>
+Date: Thu, 11 Oct 2012 01:40:33 +0200
+Message-Id: <1349912433-21880-6-git-send-email-ebutera@users.berlios.de>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
 References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
-Subject: [PATCH 4/6] libdce: add version 1.6.5.3
+Subject: [PATCH 6/6] gst-plugin-ducati: add latest git version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,54 +41,55 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2012 23:41:00 -0000
+X-List-Received-Date: Wed, 10 Oct 2012 23:41:09 -0000
+
+Tested h264 and mpeg4 1080p encoding on pandaboard ES.
+
+Note: the bootloader must be configured WITHOUT memory holes
+(mem=... mem=...), just use all 1GB.
 
 Signed-off-by: Enrico Butera <ebutera@users.berlios.de>
 ---
- recipes-ti/dce/libdce.inc        |   14 ++++++++++++++
- recipes-ti/dce/libdce_1.6.5.3.bb |   12 ++++++++++++
- 2 files changed, 26 insertions(+)
- create mode 100644 recipes-ti/dce/libdce.inc
- create mode 100644 recipes-ti/dce/libdce_1.6.5.3.bb
+ .../gstreamer/gst-plugin-ducati_git.bb             |   30 ++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 recipes-multimedia/gstreamer/gst-plugin-ducati_git.bb
 
-diff --git a/recipes-ti/dce/libdce.inc b/recipes-ti/dce/libdce.inc
+diff --git a/recipes-multimedia/gstreamer/gst-plugin-ducati_git.bb b/recipes-multimedia/gstreamer/gst-plugin-ducati_git.bb
 new file mode 100644
-index 0000000..1caa337
+index 0000000..93ea08c
 --- /dev/null
-+++ b/recipes-ti/dce/libdce.inc
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "TI Ducati IVA-HD hardware codec acceleration API"
-+HOMEPAGE = "http://gitorious.org/ubuntu-omap/dce"
++++ b/recipes-multimedia/gstreamer/gst-plugin-ducati_git.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION = "GStreamer plugins for omap4 using libdce"
++HOMEPAGE = "http://gitorious.org/gstreamer-omap/gst-ducati"
 +SECTION = "multimedia"
 +LICENSE = "TI"
 +
 +COMPATIBLE_MACHINE = "pandaboard"
 +
-+require ../includes/ti-paths.inc
-+require ../includes/ti-staging.inc
++require recipes-multimedia/gstreamer/gst-plugins.inc
 +
-+inherit autotools
++PR = "r1"
++PV = "gitr${SRCPV}"
 +
-+DEPENDS = "libdrm"
-+RDEPENDS = "libdrm ti-firmware-ipu-dce"
-diff --git a/recipes-ti/dce/libdce_1.6.5.3.bb b/recipes-ti/dce/libdce_1.6.5.3.bb
-new file mode 100644
-index 0000000..ab721ca
---- /dev/null
-+++ b/recipes-ti/dce/libdce_1.6.5.3.bb
-@@ -0,0 +1,12 @@
-+require libdce.inc
++# 2012/09/25: ducatividenc: log extended error info, and use the correct one from _process
++SRCREV = "9f29c17f8dcbd8cf59c8ad3b00d87534b6fc4579"
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=483f94bdaf5d31cd94aa2317f9ad2684"
++SRC_URI = "git://gitorious.org/gstreamer-omap/gst-ducati.git;protocol=git"
 +
-+PV = "1.6.5.3+gitr${SRCPV}"
-+
-+# 2012/09/19: Merge remote-tracking branch 'remotes/ti/master' into upstream
-+SRCREV = "c0cf50d4dece4b8d3606f7a1e065958941b4a672"
-+
-+SRC_URI = "git://gitorious.org/ubuntu-omap/dce.git;protocol=git"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 +
 +S = "${WORKDIR}/git"
++
++DEPENDS = "gstreamer gst-plugins-base gst-plugins-bad libdrm libdce"
++RDEPENDS = "gstreamer gst-plugins-base gst-plugins-bad libdrm libdce"
++
++inherit autotools gettext pkgconfig
++
++do_configure_prepend() {
++       git submodule init && git submodule update
++       autopoint
++}
 -- 
 1.7.9.5
 
