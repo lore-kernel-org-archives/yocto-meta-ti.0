@@ -1,32 +1,31 @@
-Return-Path: <fcooper@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26102E0049F
-	for <meta-ti@yoctoproject.org>; Tue,  9 Oct 2012 20:34:37 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9A3YZC8003333
-	for <meta-ti@yoctoproject.org>; Tue, 9 Oct 2012 22:34:35 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9A3YZS4006592
-	for <meta-ti@yoctoproject.org>; Tue, 9 Oct 2012 22:34:35 -0500
-Received: from DFLE09.ent.ti.com ([fe80::3103:58c3:47f:860b]) by
-	DFLE72.ent.ti.com ([fe80::5c48:b90d:af93:5822%30]) with mapi id
-	14.01.0323.003; Tue, 9 Oct 2012 22:34:35 -0500
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH] recipes: Fix ti-eula-unpack issue. Tweak	sgx
-	modules and libgles recipes.
-Thread-Index: AQHNlSpUTSByolg95EOUKdZpclq8hJeyBb/A
-Date: Wed, 10 Oct 2012 03:34:33 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C3006DD@DFLE09.ent.ti.com>
-References: <1346521503-32331-1-git-send-email-fcooper27jr@gmail.com>
-	<8F29D6B095ED194EA1980491A5E029710C2D6243@DFLE09.ent.ti.com>
-In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C2D6243@DFLE09.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
-MIME-Version: 1.0
-Subject: Re: [PATCH] recipes: Fix ti-eula-unpack issue. Tweak	sgx	modules and libgles recipes.
+Return-Path: <fcooperjr27@gmail.com>
+Received: from mail-oa0-f48.google.com (mail-oa0-f48.google.com
+	[209.85.219.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB9B0E0070B
+	for <meta-ti@yoctoproject.org>; Tue,  9 Oct 2012 20:53:06 -0700 (PDT)
+Received: by mail-oa0-f48.google.com with SMTP id h2so95794oag.35
+	for <meta-ti@yoctoproject.org>; Tue, 09 Oct 2012 20:53:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=MZK7/TAFaDdjK3u4lGhNMqTiS44PH2oXeR72ONzt/vk=;
+	b=DnBbD16fmthP123pFIXHqoAOoGkzMEhZL1+DrYqDnnMZ1fCbo9SE4Ogmeso/hWnWS2
+	+apY9wvQPV+XMnt24cWKODdO1y5ew7Owr3iet1NLed91bWyFhHdcjlrzGJJOUtKXxbF/
+	NIQCIwYfvdAJojnNHz2qFjzTRfrRm/O+g7XVRdA60UItAeakMO/j66WaEeEAjPvxqxTs
+	QX6qRvJRJD6Uc/7noU7mwISGCB87FUFkiDMIIEJs5eCPhWk7CTOeimsPMpo9sr9STYj3
+	8R3J7SXmFVoKQX1r+6/G0udvdStgc4veDp6kbs1OcO5NbTOh3bKkkAKURwAyN6GsLpKH
+	kYAA==
+Received: by 10.182.38.65 with SMTP id e1mr4546376obk.3.1349841184230;
+	Tue, 09 Oct 2012 20:53:04 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
+	by mx.google.com with ESMTPS id h2sm234101obn.11.2012.10.09.20.53.02
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 09 Oct 2012 20:53:03 -0700 (PDT)
+From: "Franklin S. Cooper Jr" <fcooperjr27@gmail.com>
+To: meta-ti@yoctoproject.org
+Date: Tue,  9 Oct 2012 23:23:14 -0500
+Message-Id: <1349842994-17942-1-git-send-email-fcooper@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH v2] libgles-omap3: Adjust for non X11 distros
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,208 +38,363 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2012 03:34:38 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 10 Oct 2012 03:53:07 -0000
 
-ping. Any comments?
+* Non X11 base distros are unable to build this Graphics SDK.
+* This patch tweaks the libgles-omap3 include file to always build the
+  Graphics SDK in Raw mode and also build in X11 mode only if X11 is
+  apart of the DISTRO_FEATURE.
+* Create a new variable PVR_INIT that is by default set to pvrsrvinit. This is
+  needed for newer version of the Graphics SDK that replaced this file.
 
------Original Message-----
-From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
-.org] On Behalf Of Cooper Jr., Franklin
-Sent: Monday, September 17, 2012 6:15 PM
-To: meta-ti@yoctoproject.org
-Subject: Re: [meta-ti] [PATCH] recipes: Fix ti-eula-unpack issue. Tweak sgx=
- modules and libgles recipes.
-
-ping
-
------Original Message-----
-From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
-.org] On Behalf Of Franklin S. Cooper Jr
-Sent: Saturday, September 01, 2012 12:45 PM
-To: meta-ti@yoctoproject.org
-Cc: Franklin S. Cooper Jr
-Subject: [meta-ti] [PATCH] recipes: Fix ti-eula-unpack issue. Tweak sgx mod=
-ules and libgles recipes.
-
-* Commit d8fc4a686262c50fd0053afa7240020909ec430b addressed an issue where
-  too many newlines characters were being sent since print by default alrea=
-dy
-  sends a newline character. This commit however resulted in bin files bein=
-g
-  installed in the WORKDIR and broke other recipes which commit
-  a94f765b9867abefd5f0bd262b5dddb8782b3187 addressed. This lead to a very
-  cluttered WORKDIR.
-* This patch updates ti-eula-unpack.inc to switch from using a print to a w=
-rite.
-  Since write doesn't automatically send newlines it is a bit more obvious =
-when
-  newlines are sent.
-* Part of the reason that bin files were being installed in the WORKDIR was
-  due to TI_BIN_UNPK_WDEXT being blank for some recipes. For instance in th=
-e
-  libgles-omap3 recipes, when the workdir command is set in TI_BIN_UNPK_CMD=
-S the
-  directory that the Graphics SDK will be installed into is
-  workdir+TI_BIN_UNPK_WDEXT. A blank TI_BIN_UNPK_WDEXT means the SDK will b=
-e
-  installed in WORKDIR. By setting TI_BIN_UNPK_WDEXT to a proper value the
-  recipes can be sure it is installed in the proper directory.
-* Determine which file to download based on the defined BINFILE and not a
-  hardcoded value. This idea was taken from arago.
-
-Signed-off-by: Franklin S. Cooper Jr <fcooper27jr@gmail.com>
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 ---
- .../omap3-sgx-modules_1.6.16.3977.bb               |    8 ++++----
- recipes-graphics/libgles/libgles-omap3.inc         |    4 ++--
- .../libgles/libgles-omap3_4.03.00.02.bb            |    6 +++---
- .../libgles/libgles-omap3_4.05.00.03.bb            |    6 +++---
- recipes-ti/includes/ti-eula-unpack.inc             |    4 ++--
- 5 files changed, 14 insertions(+), 14 deletions(-)
+Version 2 changes:
+Added PVR_INIT variable.
+Made changes to only build and package X11 components if a X11 based distro is
+used. Raw mode components are always built and packaged even for X11 based
+distros.
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb b=
-/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-index 0affee1..4f9be7b 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-@@ -11,17 +11,17 @@ BINFILE :=3D "Graphics_SDK_setuplinux_${SGXPV}.bin"
-=20
- inherit module
-=20
--MACHINE_KERNEL_PR_append =3D "a"
-+MACHINE_KERNEL_PR_append =3D "b"
- PR =3D "${MACHINE_KERNEL_PR}"
-=20
--SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetco=
-ntent/gfxsdk/${SGXPV}/exports/Graphics_SDK_setuplinux_${SGXPV}.bin \
-+SRC_URI =3D=20
-+"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfx
-+sdk/${SGXPV}/exports/${BINFILE} \
-            file://Compile-fixes-for-38-kernel.patch \
-            file://kernel-30.patch \
-           "
- SRC_URI[md5sum] =3D "ff8c1f2b8e4cb42f4ced6a613b081ada"
- SRC_URI[sha256sum] =3D "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036=
-423458c8d75255"
--
--S =3D "${WORKDIR}/Graphics_SDK_${SGXPV}/GFX_Linux_KM"
-+TI_BIN_UNPK_WDEXT=3D"/Graphics_SDK_${SGXPV}"
-+S =3D "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
-=20
- PVRBUILD =3D "release"
- export KERNELDIR =3D "${STAGING_KERNEL_DIR}"
-diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/=
-libgles/libgles-omap3.inc
-index 18ee7ff..4525285 100644
+ recipes-graphics/libgles/libgles-omap3.inc    |  208 +++++++++++++++----------
+ recipes-graphics/libgles/libgles-omap3/rc.pvr |    7 +
+ 2 files changed, 135 insertions(+), 80 deletions(-)
+
+diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
+index 4525285..523aa52 100644
 --- a/recipes-graphics/libgles/libgles-omap3.inc
 +++ b/recipes-graphics/libgles/libgles-omap3.inc
-@@ -3,7 +3,7 @@ LICENSE =3D "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum  LIC_FILES_CHKSUM =3D "f=
-ile://TSPA.txt;md5=3Dc0d5d9c1e38b41677144c4e24d6ddee1"
-=20
--PR =3D "r31"
-+PR =3D "r32"
-=20
- COMPATIBLE_MACHINE =3D "(omap3|ti814x|ti816x|ti33x)"
-=20
-@@ -11,7 +11,7 @@ DEPENDS =3D "virtual/libx11 libxau libxdmcp libdrm"
-=20
- PROVIDES +=3D "virtual/egl"
-=20
--SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetco=
-ntent/gfxsdk/${SGXPV}/exports/OMAP35x_Graphics_SDK_setuplinux_${SGXPV}.bin =
-\
-+SRC_URI =3D=20
-+"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfx
-+sdk/${SGXPV}/exports/${BINFILE} \
- 		   file://cputype \
- 		   file://rc.pvr \
- 		   file://sample.desktop \
-diff --git a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb b/recipes=
--graphics/libgles/libgles-omap3_4.03.00.02.bb
-index 97a22fe..e98fe02 100644
---- a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-+++ b/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-@@ -15,8 +15,9 @@ require libgles-omap3.inc  SGXPV =3D "4_03_00_02"
- IMGPV =3D "1.6.16.3977"
- BINFILE :=3D "Graphics_SDK_setuplinux_${SGXPV}.bin"
-+TI_BIN_UNPK_WDEXT :=3D "/Graphics_SDK_${SGXPV}"
-=20
--SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetco=
-ntent/gfxsdk/${SGXPV}/exports/Graphics_SDK_setuplinux_${SGXPV}.bin \
-+SRC_URI =3D=20
-+"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfx
-+sdk/${SGXPV}/exports/${BINFILE} \
-                    file://cputype \
-                    file://rc.pvr \
-                    file://sample.desktop \ @@ -26,5 +27,4 @@ SRC_URI =3D "=
-http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
- SRC_URI[md5sum] =3D "ff8c1f2b8e4cb42f4ced6a613b081ada"
- SRC_URI[sha256sum] =3D "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036=
-423458c8d75255"
-=20
--S =3D "${WORKDIR}"
+@@ -3,11 +3,15 @@ LICENSE = "proprietary-binary"
+ # 'TSPA.txt' might not be the best file to md5sum
+ LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
+ 
+-PR = "r32"
++PR = "r33"
+ 
+ COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
+ 
+-DEPENDS = "virtual/libx11 libxau libxdmcp libdrm"
++X11DEPENDS = "virtual/libx11 libxau libxdmcp libdrm"
++DEPENDS = "${@base_contains('DISTRO_FEATURES', 'x11', '${X11DEPENDS}', '', d)}"
++
++export SUPPORT_XORG ?= "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
++PVR_INIT ?= "pvrsrvinit"
+ 
+ PROVIDES += "virtual/egl"
+ 
+@@ -31,11 +35,13 @@ export ES5LOCATION ?= "${S}/gfx_rel_es5.x"
+ export ES6LOCATION ?= "${S}/gfx_rel_es6.x"
+ export ES8LOCATION ?= "${S}/gfx_rel_es8.x"
+ 
++LIBGLESWINDOWSYSTEM ?= "libpvrPVR2D_FRONTWSEGL.so.1"
++
+ do_configure() {
+ 	# Attempt to fix up the worst offenders for file permissions
+ 	for i in $(find ${S} -name "*.h") $(find ${S} -name "*.c") $(find ${S} -name "Make*") ; do
+ 		chmod 0644 $i
+-	done 
++	done
+ 
+ 	# Attempt to create proper library softlinks
+ 	for sofile in $(find ${S} -name "lib*Open*.so") $(find ${S} -name "lib*srv*.so") $(find ${S} -name "lib*gl*.so") $(find ${S} -name "libpvr*.so") $(find ${S} -name "lib*GL*.so"); do
+@@ -64,62 +70,92 @@ PARALLEL_MAKE = ""
+ PLATFORM ?= "LinuxOMAP3"
+ 
+ do_compile() {
+-	export X11ROOT="${STAGING_DIR_HOST}/usr"
+ 	export TOOLCHAIN="${TOOLCHAIN_PATH}"
 -
-+S =3D "${WORKDIR}/Graphics_SDK_${SGXPV}"
-diff --git a/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb b/recipes=
--graphics/libgles/libgles-omap3_4.05.00.03.bb
-index d55dd05..7795e2e 100644
---- a/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
-+++ b/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
-@@ -12,8 +12,9 @@ require libgles-omap3.inc  SGXPV =3D "4_05_00_03"
- IMGPV =3D "1.6.16.4117"
- BINFILE :=3D "Graphics_SDK_setuplinux_${SGXPV}.bin"
-+TI_BIN_UNPK_WDEXT :=3D "/Graphics_SDK_${SGXPV}"
-=20
--SRC_URI =3D "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetco=
-ntent/gfxsdk/${SGXPV}/exports/Graphics_SDK_setuplinux_${SGXPV}.bin \
-+SRC_URI =3D=20
-+"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfx
-+sdk/${SGXPV}/exports/${BINFILE} \
-                    file://cputype \
-                    file://rc.pvr \
-                    file://sample.desktop \ @@ -23,5 +24,4 @@ SRC_URI =3D "=
-http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
- SRC_URI[md5sum] =3D "0e651eaa92bb91760f0b40a17697a7dc"
- SRC_URI[sha256sum] =3D "bfe764a8959556195545d6fff76f63a489642f345c105bbbc3=
-09a3f243c2dd0e"
-=20
--S =3D "${WORKDIR}"
+ 	export PLAT_CC="${CC}"
+ 	export PLAT_CPP="${CXX}"
+ 	export PLAR_AR="${AR}"
+ 
+-	mkdir -p ${S}/demos/raw
+-	mkdir -p ${S}/demos/x11
 -
-+S =3D "${WORKDIR}/Graphics_SDK_${SGXPV}"
-diff --git a/recipes-ti/includes/ti-eula-unpack.inc b/recipes-ti/includes/t=
-i-eula-unpack.inc
-index 60f5558..aee88f1 100644
---- a/recipes-ti/includes/ti-eula-unpack.inc
-+++ b/recipes-ti/includes/ti-eula-unpack.inc
-@@ -14,7 +14,7 @@ python do_unpack () {
-     bb.build.exec_func('ti_bin_do_unpack', d)  }
-=20
--TI_BIN_UNPK_WDEXT +=3D ""
-+TI_BIN_UNPK_WDEXT ?=3D ""
- python ti_bin_do_unpack() {
-=20
-     import os
-@@ -60,7 +60,7 @@ python ti_bin_do_unpack() {
-             wdext =3D bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
-             wdext =3D bb.data.expand(wdext, localdata)
-             cmd =3D workdir+wdext
--        print >>f, cmd
-+        f.write(cmd+'\n');
-     f.close()
-=20
-     # Expand the tarball that was created if required
---
+-	# Rebuild demos for both Raw and X11
+-	for X11BUILD in 0 1 ; do
+-		for demo in ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Demos/* ; do
+-			cd $demo/OGLES/Build/LinuxGeneric
+-			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
+-			rm $demo/OGLES/Build/${PLATFORM}/Release*/*.o
+-			install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
+-			sed -e s:NAME:$(basename $demo): \
+-			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES/Build/${PLATFORM}/ReleaseX11/*): \
+-			     ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
+-			install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
+-		done
+-		for demo in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Demos/* ; do
+-			cd $demo/OGLES2/Build/LinuxGeneric
+-			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
+-			rm -f $demo/OGLES2/Build/${PLATFORM}/Release*/*.o
+-			install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
+-			sed -e s:NAME:$(basename $demo): \
+-			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/*): \
+-			     ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
+-			install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
+-		done
+-	done
+-
+-	mkdir -p ${S}/trainingcourses/raw
+-	mkdir -p ${S}/trainingcourses/x11
++    if [ ${SUPPORT_XORG} -eq 1 ]
++    then
++        export X11ROOT="${STAGING_DIR_HOST}/usr"
++        mkdir -p ${S}/demos/x11
++        mkdir -p ${S}/trainingcourses/x11
++    fi
++
++    mkdir -p ${S}/demos/raw
++    mkdir -p ${S}/trainingcourses/raw
++
++	# Rebuild demos
++    for X11BUILD in 0 1 ; do
++        # Don't rebuild demos with X11 support for a non X11 distro
++        if [ ${SUPPORT_XORG} -eq 0 -a $X11BUILD -eq 1 ]
++        then
++            continue
++        fi
++
++	    for demo in ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Demos/* ; do
++		    cd $demo/OGLES/Build/LinuxGeneric
++		    oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
++		    rm $demo/OGLES/Build/${PLATFORM}/Release*/*.o
++
++            if [ $X11BUILD -eq 1 ]
++            then
++                install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
++                sed -e s:NAME:$(basename $demo): \
++                    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES/Build/${PLATFORM}/ReleaseX11/*): \
++                    ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
++            else
++                install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
++            fi
++	    done
++
++	    for demo in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Demos/* ; do
++		    cd $demo/OGLES2/Build/LinuxGeneric
++		    oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
++		    rm -f $demo/OGLES2/Build/${PLATFORM}/Release*/*.o
++
++            if [ $X11BUILD -eq 1 ]
++            then
++		        install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
++                sed -e s:NAME:$(basename $demo): \
++                    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/*): \
++                    ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
++            else
++                install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
++            fi
++	    done
++    done
+ 
+ 	find ${S} -name "*_org" -delete
+ 
+-	# Build OGLES2 Trainingcourses for both Raw and X11
+-	for X11BUILD in 0 1 ; do
+-		for training in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/TrainingCourse/* ; do
+-			if [ -e $training/OGLES2/Build/LinuxGeneric/Makefile ] ; then
+-				cd $training/OGLES2/Build/LinuxGeneric
+-			fi
+-
+-			if [ -e $training/OGLES2/Build/${PLATFORM}/Makefile ] ; then
+-				cd $training/OGLES2/Build/${PLATFORM}
+-			fi			
+-
+-			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
+-			rm -f $training/OGLES2/Build/${PLATFORM}/Release*/*.o
+-			install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/trainingcourses/x11 || true
+-			install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/trainingcourses/raw || true
+-		done
+-	done
++	# Build OGLES2 Trainingcourses
++    for X11BUILD in 0 1 ; do
++        # Don't rebuild training courses with X11 support for a non X11 distro
++        if [ ${SUPPORT_XORG} -eq 0 -a $X11BUILD -eq 1 ]
++        then
++            continue
++        fi
++
++	    for training in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/TrainingCourse/* ; do
++		    if [ -e $training/OGLES2/Build/LinuxGeneric/Makefile ] ; then
++			    cd $training/OGLES2/Build/LinuxGeneric
++		    fi
++
++		    if [ -e $training/OGLES2/Build/${PLATFORM}/Makefile ] ; then
++			    cd $training/OGLES2/Build/${PLATFORM}
++		    fi
++
++		    oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
++		    rm -f $training/OGLES2/Build/${PLATFORM}/Release*/*.o
++
++            if [ $X11BUILD -eq 1 ]
++            then
++		        install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/trainingcourses/x11 || true
++            else
++		        install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/trainingcourses/raw || true
++            fi
++	    done
++    done
+ 
+ }
+ 
+@@ -133,12 +169,14 @@ do_install () {
+ 
+ 	install -m 0755 ${BINLOCATION}/*_test ${D}${bindir}/
+ 	install -m 0755 ${BINLOCATION}/gl* ${D}${bindir}/
+-	install -m 0755 ${BINLOCATION}/pvrsrvinit ${D}${bindir}/
+-
+-	install -m 0755 ${BINLOCATION}/xgles1test1 ${D}${bindir}/
++	install -m 0755 ${BINLOCATION}/${PVR_INIT} ${D}${bindir}/
+ 
+-	install -m 0755 ${BINLOCATION}/freedesktop/kdrive/usr/X11R6_SGX/bin/Xsgx ${D}${bindir}/|| true
+-	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/lib/*X11WS* ${D}${libdir} || true
++    if [ ${SUPPORT_XORG} -eq 1 ]
++    then
++	    install -m 0755 ${BINLOCATION}/xgles1test1 ${D}${bindir}/
++	    install -m 0755 ${BINLOCATION}/freedesktop/kdrive/usr/X11R6_SGX/bin/Xsgx ${D}${bindir}/|| true
++	    cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/lib/*X11WS* ${D}${libdir} || true
++    fi
+ 
+ 	install -d ${D}${includedir}
+ 	cp -pPR ${S}/GFX_Linux_KM/include4 ${D}${includedir}/
+@@ -158,7 +196,7 @@ do_install () {
+ 
+ 	install -d ${D}${sysconfdir}
+ 	echo "[default]" > ${D}${sysconfdir}/powervr.ini
+-	echo "WindowSystem=libpvrPVR2D_FRONTWSEGL.so.1" >> ${D}${sysconfdir}/powervr.ini
++	echo "WindowSystem=${LIBGLESWINDOWSYSTEM}" >> ${D}${sysconfdir}/powervr.ini
+ 
+ 	# The ES2.x, ES3.x, ES5.x and ES6.x CPUs have different SGX hardware, so we need to install multiple sets of userspace
+ 
+@@ -174,11 +212,15 @@ do_install () {
+ 	install -d ${D}${bindir}/ES3.0
+ 	install -d ${D}${bindir}/ES2.0
+ 
++    shared_prog="eglinfo pvr2d_test ${PVR_INIT} services_test sgx_blit_test sgx_clipblit_test sgx_flip_test sgx_init_test sgx_render_flip_test"
++    raw_prog="gles1test1 gles2test1 ovg_unit_test"
++    x11_prog="eglinfo_x xgles1test1 xgles2test1 xmultiegltest xovg_unit_test"
++
+ 	for esrev in 2 3 5 6 8 ; do
+ 		ESLOCATION=$(eval echo $(echo \$\{ES${esrev}LOCATION\}))
+ 		if [ -e ${ESLOCATION} ] ; then
+ 			cp -pPR ${ESLOCATION}/lib*${IMGPV} ${ESLOCATION}/pvr_drv.so ${ESLOCATION}/*.a ${D}${libdir}/ES${esrev}.0/
+-			for esprog in eglinfo eglinfo_x gles1test1 gles2test1 ovg_unit_test pvr2d_test pvrsrvinit services_test sgx_blit_test sgx_clipblit_test sgx_flip_test sgx_init_test sgx_render_flip_test xgles1test1 xgles2test1 xmultiegltest xovg_unit_test ; do
++			for esprog in $shared_prog $raw_prog ${@base_contains('DISTRO_FEATURES', 'x11',"$x11_prog","",d)} ; do
+ 				install -m 0755 ${ESLOCATION}/$esprog ${D}${bindir}/ES${esrev}.0/ || true
+ 			done
+ 		fi
+@@ -190,15 +232,19 @@ do_install () {
+ 	cp ${WORKDIR}/*.desktop ${D}${prefix}/share/applications
+ 	rm ${D}${prefix}/share/applications/sample.desktop
+ 
+-	install -d ${D}${bindir}/SGX/demos/X11/
+-	install -d ${D}${bindir}/SGX/demos/Raw/
+-	install -m 0755 ${S}/demos/x11/* ${D}${bindir}/SGX/demos/X11/
+-	install -m 0755 ${S}/demos/raw/* ${D}${bindir}/SGX/demos/Raw/
++    if [ ${SUPPORT_XORG} -eq 1 ]
++    then
++	    install -d ${D}${bindir}/SGX/demos/X11/
++	    install -m 0755 ${S}/demos/x11/* ${D}${bindir}/SGX/demos/X11/
++	    install -d ${D}${bindir}/SGX/trainingcourses/X11
++        install -m 0755 ${S}/trainingcourses/x11/* ${D}${bindir}/SGX/trainingcourses/X11/
++    fi
++
++    install -d ${D}${bindir}/SGX/demos/Raw/
++    install -m 0755 ${S}/demos/raw/* ${D}${bindir}/SGX/demos/Raw/
++    install -d ${D}${bindir}/SGX/trainingcourses/Raw
++    install -m 0755 ${S}/trainingcourses/raw/* ${D}${bindir}/SGX/trainingcourses/Raw/
+ 
+-	install -d ${D}${bindir}/SGX/trainingcourses/Raw
+-	install -d ${D}${bindir}/SGX/trainingcourses/X11
+-	install -m 0755 ${S}/trainingcourses/x11/* ${D}${bindir}/SGX/trainingcourses/X11/
+-	install -m 0755 ${S}/trainingcourses/raw/* ${D}${bindir}/SGX/trainingcourses/Raw/
+ 
+ 	# Delete objects and linker scripts hidden between the headers
+ 	find ${D} -name "*.o" -delete
+@@ -209,15 +255,8 @@ do_install () {
+ 
+ }
+ 
+-PACKAGES =+ "${PN}-rawdemos \
+-             ${PN}-x11demos \
+-             ${PN}-rawtrainingcourses \
+-             ${PN}-x11trainingcourses \
+-"
+-
+-PACKAGES += "xserver-kdrive-powervrsgx \
+-             ${PN}-tests "
+-
++PACKAGES =+ "${@base_contains('DISTRO_FEATURES', 'x11',"${PN}-x11demos ${PN}-x11trainingcourses xserver-kdrive-powervrsgx" ,"", d)}  \
++            ${PN}-rawdemos ${PN}-rawtrainingcourses ${PN}-tests"
+ # Package the base libraries per silicon revision
+ PACKAGES =+ "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
+ RRECOMMENDS_${PN} += "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
+@@ -234,7 +273,9 @@ PRIVATE_LIBS_${PN}-es5 = "libGLESv2.so libIMGegl.so libsrv_um.so libOpenVG.so li
+ PRIVATE_LIBS_${PN}-es6 = "libGLESv2.so libIMGegl.so libsrv_um.so libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so libOpenVGU.so libglslcompiler.so libGLES_CM.so"
+ PRIVATE_LIBS_${PN}-es8 = "libGLESv2.so libIMGegl.so libsrv_um.so libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so libOpenVGU.so libglslcompiler.so libGLES_CM.so"
+ 
+-PACKAGES =+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl ${PN}-linuxfbwsegl ${PN}-x11wsegl ${PN}-driwsegl"
++
++PACKAGES =+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl ${PN}-linuxfbwsegl"
++PACKAGES =+ "${@base_contains('DISTRO_FEATURES', 'x11',"${PN}-x11wsegl ${PN}-driwsegl" ,"", d)}"
+ FILES_${PN}-blitwsegl = "${libdir}/libpvrPVR2D_BLITWSEGL.so.*"
+ FILES_${PN}-flipwsegl = "${libdir}/libpvrPVR2D_FLIPWSEGL.so.*"
+ FILES_${PN}-frontwsegl = "${libdir}/libpvrPVR2D_FRONTWSEGL.so.*"
+@@ -242,7 +283,10 @@ FILES_${PN}-linuxfbwsegl = "${libdir}/libpvrPVR2D_LINUXFBWSEGL.so.*"
+ FILES_${PN}-x11wsegl = "${libdir}/libpvrPVR2D_X11WSEGL.so* ${bindir}/x* ${bindir}/*x"
+ FILES_${PN}-driwsegl = "${libdir}/libpvrPVR2D_DRIWSEGL.so* ${libdir}/libsrv_um_dri*"
+ 
+-PACKAGES =+ "${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-flipwsegl-es2 ${PN}-flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8 ${PN}-frontwsegl-es2 ${PN}-frontwsegl-es3 ${PN}-frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8 ${PN}-linuxfbwsegl-es2 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8 ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8 ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driwsegl-es5 ${PN}-driwsegl-es6 ${PN}-driwsegl-es8"
++PACKAGES =+ "${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-flipwsegl-es2 ${PN}-flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8 ${PN}-frontwsegl-es2 ${PN}-frontwsegl-es3 ${PN}-frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8 ${PN}-linuxfbwsegl-es2 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8"
++
++X11_SEGL = " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8 ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driwsegl-es5 ${PN}-driwsegl-es6 ${PN}-driwsegl-es8 "
++PACKAGES =+ "${@base_contains('DISTRO_FEATURES', 'x11',"${X11_SEGL}" ,"", d)}"
+ FILES_${PN}-blitwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_BLITWSEGL.so.*"
+ FILES_${PN}-blitwsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_BLITWSEGL.so.*"
+ FILES_${PN}-blitwsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_BLITWSEGL.so.*"
+@@ -287,7 +331,7 @@ RRECOMMENDS_${PN}-driwsegl = " ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driws
+ 
+ CONFFILES_${PN} = "${sysconfdir}/powervr.ini"
+ 
+-FILES_${PN} = "${sysconfdir} ${libdir}/*.so* ${bindir}/pvrsrvinit ${bindir}/cputype ${bindir}/*"
++FILES_${PN} = "${sysconfdir} ${libdir}/*.so* ${bindir}/${PVR_INIT} ${bindir}/cputype ${bindir}/*"
+ 
+ FILES_xserver-kdrive-powervrsgx = "${bindir}/Xsgx"
+ FILES_${PN}-tests = "${bindir}/*test*"
+@@ -335,8 +379,12 @@ INITSCRIPT_PARAMS = "start 30 5 2 . stop 40 0 1 6 ."
+ pkg_postinst_${PN}_append() {
+ rm -f $D${sysconfdir}/powervr-esrev
+ 
+-ln -sf /usr/lib/libXdmcp.so.6.0.0 /usr/lib/libXdmcp.so.0 
+-ln -sf /usr/lib/libXau.so.6.0.0 /usr/lib/libXau.so.0
++if [ ${SUPPORT_XORG} -eq 1 ]
++then
++    ln -sf /usr/lib/libXdmcp.so.6.0.0 /usr/lib/libXdmcp.so.0
++    ln -sf /usr/lib/libXau.so.6.0.0 /usr/lib/libXau.so.0
++fi
++
+ }
+ 
+ pkg_postinst_${PN}-blitwsegl() {
+diff --git a/recipes-graphics/libgles/libgles-omap3/rc.pvr b/recipes-graphics/libgles/libgles-omap3/rc.pvr
+index 00cd994..e5a4cd1 100755
+--- a/recipes-graphics/libgles/libgles-omap3/rc.pvr
++++ b/recipes-graphics/libgles/libgles-omap3/rc.pvr
+@@ -42,6 +42,13 @@ fbset -vyres $(expr $YRES \* 3)
+ sgxprepare () {
+ 	echo Starting PVR
+ 	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
++
++    if [ "$?" != "0" ]
++    then
++        echo "Could not find pvrsrvkm driver"
++        exit 1
++    fi
++
+ 	modprobe omaplfb
+ 	modprobe bufferclass_ti
+ 
+-- 
 1.7.0.4
 
-_______________________________________________
-meta-ti mailing list
-meta-ti@yoctoproject.org
-https://lists.yoctoproject.org/listinfo/meta-ti
-_______________________________________________
-meta-ti mailing list
-meta-ti@yoctoproject.org
-https://lists.yoctoproject.org/listinfo/meta-ti
 
