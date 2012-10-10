@@ -1,27 +1,36 @@
-Return-Path: <denis@denix.org>
-Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
-	[206.46.173.5])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D4635E00292
-	for <meta-ti@yoctoproject.org>; Wed, 10 Oct 2012 11:06:51 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [72.66.25.115])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MBO00KDFVMHL1K0@vms173005.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 10 Oct 2012 13:06:33 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7F6E820033; Wed,
-	10 Oct 2012 14:06:17 -0400 (EDT)
-Date: Wed, 10 Oct 2012 14:06:17 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Cooper Jr., Franklin" <fcooper@ti.com>
-Message-id: <20121010180617.GC16944@denix.org>
-References: <1346521503-32331-1-git-send-email-fcooper27jr@gmail.com>
-	<8F29D6B095ED194EA1980491A5E029710C2D6243@DFLE09.ent.ti.com>
-	<8F29D6B095ED194EA1980491A5E029710C3006DD@DFLE09.ent.ti.com>
-MIME-version: 1.0
-In-reply-to: <8F29D6B095ED194EA1980491A5E029710C3006DD@DFLE09.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] recipes: Fix ti-eula-unpack issue. Tweak	sgx modules and libgles recipes.
+Return-Path: <chase.maupin@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 155B8E00292
+	for <meta-ti@yoctoproject.org>; Wed, 10 Oct 2012 12:29:29 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9AJTP4u002752;
+	Wed, 10 Oct 2012 14:29:25 -0500
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9AJTPsu004610;
+	Wed, 10 Oct 2012 14:29:25 -0500
+Received: from DLEE12.ent.ti.com ([fe80::3867:617:aab3:5956]) by
+	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
+	14.01.0323.003; Wed, 10 Oct 2012 14:29:24 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "Cooper Jr., Franklin" <fcooper@ti.com>, "Franklin S. Cooper Jr"
+	<fcooperjr27@gmail.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH 2/2][for-comments] omap3-sgx-modules:	Add
+	v4.08.00.01 of the SGX modules
+Thread-Index: AQHNpx2OKxF0fT9Cb0Sk5u5JQBafMA==
+Date: Wed, 10 Oct 2012 19:29:23 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED101592561F6@DLEE12.ent.ti.com>
+References: <1349843304-18507-1-git-send-email-fcooper@ti.com>
+	<1349843304-18507-2-git-send-email-fcooper@ti.com>,
+	<7D46E86EC0A8354091174257B2FED101592555C0@DLEE12.ent.ti.com>
+	<8F29D6B095ED194EA1980491A5E029710C300D21@DFLE09.ent.ti.com>
+In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C300D21@DFLE09.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
+MIME-Version: 1.0
+Subject: Re: [PATCH 2/2][for-comments] omap3-sgx-modules:	Add	v4.08.00.01 of the SGX modules
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,194 +43,161 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2012 18:06:52 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
-
-On Wed, Oct 10, 2012 at 03:34:33AM +0000, Cooper Jr., Franklin wrote:
-> ping. Any comments?
-
-Ok, I had to massage the patch slightly, as there were at least 2 commits to 
-libgles-omap3.inc since the one that you based your patch on... I'm doing a 
-quick build test now and if it passes, I'll push it.
-
--- 
-Denys
-
+X-List-Received-Date: Wed, 10 Oct 2012 19:29:29 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
 > -----Original Message-----
-> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject.org] On Behalf Of Cooper Jr., Franklin
-> Sent: Monday, September 17, 2012 6:15 PM
-> To: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH] recipes: Fix ti-eula-unpack issue. Tweak sgx modules and libgles recipes.
-> 
-> ping
-> 
-> -----Original Message-----
-> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject.org] On Behalf Of Franklin S. Cooper Jr
-> Sent: Saturday, September 01, 2012 12:45 PM
-> To: meta-ti@yoctoproject.org
-> Cc: Franklin S. Cooper Jr
-> Subject: [meta-ti] [PATCH] recipes: Fix ti-eula-unpack issue. Tweak sgx modules and libgles recipes.
-> 
-> * Commit d8fc4a686262c50fd0053afa7240020909ec430b addressed an issue where
->   too many newlines characters were being sent since print by default already
->   sends a newline character. This commit however resulted in bin files being
->   installed in the WORKDIR and broke other recipes which commit
->   a94f765b9867abefd5f0bd262b5dddb8782b3187 addressed. This lead to a very
->   cluttered WORKDIR.
-> * This patch updates ti-eula-unpack.inc to switch from using a print to a write.
->   Since write doesn't automatically send newlines it is a bit more obvious when
->   newlines are sent.
-> * Part of the reason that bin files were being installed in the WORKDIR was
->   due to TI_BIN_UNPK_WDEXT being blank for some recipes. For instance in the
->   libgles-omap3 recipes, when the workdir command is set in TI_BIN_UNPK_CMDS the
->   directory that the Graphics SDK will be installed into is
->   workdir+TI_BIN_UNPK_WDEXT. A blank TI_BIN_UNPK_WDEXT means the SDK will be
->   installed in WORKDIR. By setting TI_BIN_UNPK_WDEXT to a proper value the
->   recipes can be sure it is installed in the proper directory.
-> * Determine which file to download based on the defined BINFILE and not a
->   hardcoded value. This idea was taken from arago.
-> 
-> Signed-off-by: Franklin S. Cooper Jr <fcooper27jr@gmail.com>
-> ---
->  .../omap3-sgx-modules_1.6.16.3977.bb               |    8 ++++----
->  recipes-graphics/libgles/libgles-omap3.inc         |    4 ++--
->  .../libgles/libgles-omap3_4.03.00.02.bb            |    6 +++---
->  .../libgles/libgles-omap3_4.05.00.03.bb            |    6 +++---
->  recipes-ti/includes/ti-eula-unpack.inc             |    4 ++--
->  5 files changed, 14 insertions(+), 14 deletions(-)
-> 
-> diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-> index 0affee1..4f9be7b 100644
-> --- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-> +++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-> @@ -11,17 +11,17 @@ BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
->  
->  inherit module
->  
-> -MACHINE_KERNEL_PR_append = "a"
-> +MACHINE_KERNEL_PR_append = "b"
->  PR = "${MACHINE_KERNEL_PR}"
->  
-> -SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/Graphics_SDK_setuplinux_${SGXPV}.bin \
-> +SRC_URI = 
-> +"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfx
-> +sdk/${SGXPV}/exports/${BINFILE} \
->             file://Compile-fixes-for-38-kernel.patch \
->             file://kernel-30.patch \
->            "
->  SRC_URI[md5sum] = "ff8c1f2b8e4cb42f4ced6a613b081ada"
->  SRC_URI[sha256sum] = "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036423458c8d75255"
-> -
-> -S = "${WORKDIR}/Graphics_SDK_${SGXPV}/GFX_Linux_KM"
-> +TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
-> +S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
->  
->  PVRBUILD = "release"
->  export KERNELDIR = "${STAGING_KERNEL_DIR}"
-> diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-> index 18ee7ff..4525285 100644
-> --- a/recipes-graphics/libgles/libgles-omap3.inc
-> +++ b/recipes-graphics/libgles/libgles-omap3.inc
-> @@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
->  # 'TSPA.txt' might not be the best file to md5sum  LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
->  
-> -PR = "r31"
-> +PR = "r32"
->  
->  COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
->  
-> @@ -11,7 +11,7 @@ DEPENDS = "virtual/libx11 libxau libxdmcp libdrm"
->  
->  PROVIDES += "virtual/egl"
->  
-> -SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/OMAP35x_Graphics_SDK_setuplinux_${SGXPV}.bin \
-> +SRC_URI = 
-> +"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfx
-> +sdk/${SGXPV}/exports/${BINFILE} \
->  		   file://cputype \
->  		   file://rc.pvr \
->  		   file://sample.desktop \
-> diff --git a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb b/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-> index 97a22fe..e98fe02 100644
-> --- a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-> +++ b/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-> @@ -15,8 +15,9 @@ require libgles-omap3.inc  SGXPV = "4_03_00_02"
->  IMGPV = "1.6.16.3977"
->  BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
-> +TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
->  
-> -SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/Graphics_SDK_setuplinux_${SGXPV}.bin \
-> +SRC_URI = 
-> +"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfx
-> +sdk/${SGXPV}/exports/${BINFILE} \
->                     file://cputype \
->                     file://rc.pvr \
->                     file://sample.desktop \ @@ -26,5 +27,4 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
->  SRC_URI[md5sum] = "ff8c1f2b8e4cb42f4ced6a613b081ada"
->  SRC_URI[sha256sum] = "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036423458c8d75255"
->  
-> -S = "${WORKDIR}"
-> -
-> +S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
-> diff --git a/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb b/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
-> index d55dd05..7795e2e 100644
-> --- a/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
-> +++ b/recipes-graphics/libgles/libgles-omap3_4.05.00.03.bb
-> @@ -12,8 +12,9 @@ require libgles-omap3.inc  SGXPV = "4_05_00_03"
->  IMGPV = "1.6.16.4117"
->  BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
-> +TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
->  
-> -SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/Graphics_SDK_setuplinux_${SGXPV}.bin \
-> +SRC_URI = 
-> +"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfx
-> +sdk/${SGXPV}/exports/${BINFILE} \
->                     file://cputype \
->                     file://rc.pvr \
->                     file://sample.desktop \ @@ -23,5 +24,4 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
->  SRC_URI[md5sum] = "0e651eaa92bb91760f0b40a17697a7dc"
->  SRC_URI[sha256sum] = "bfe764a8959556195545d6fff76f63a489642f345c105bbbc309a3f243c2dd0e"
->  
-> -S = "${WORKDIR}"
-> -
-> +S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
-> diff --git a/recipes-ti/includes/ti-eula-unpack.inc b/recipes-ti/includes/ti-eula-unpack.inc
-> index 60f5558..aee88f1 100644
-> --- a/recipes-ti/includes/ti-eula-unpack.inc
-> +++ b/recipes-ti/includes/ti-eula-unpack.inc
-> @@ -14,7 +14,7 @@ python do_unpack () {
->      bb.build.exec_func('ti_bin_do_unpack', d)  }
->  
-> -TI_BIN_UNPK_WDEXT += ""
-> +TI_BIN_UNPK_WDEXT ?= ""
->  python ti_bin_do_unpack() {
->  
->      import os
-> @@ -60,7 +60,7 @@ python ti_bin_do_unpack() {
->              wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
->              wdext = bb.data.expand(wdext, localdata)
->              cmd = workdir+wdext
-> -        print >>f, cmd
-> +        f.write(cmd+'\n');
->      f.close()
->  
->      # Expand the tarball that was created if required
-> --
-> 1.7.0.4
-> 
+> From: Cooper Jr., Franklin
+> Sent: Wednesday, October 10, 2012 11:23 AM
+> To: Maupin, Chase; Franklin S. Cooper Jr; meta-
+> ti@yoctoproject.org
+> Subject: RE: [meta-ti] [PATCH 2/2][for-comments] omap3-sgx-
+> modules: Add v4.08.00.01 of the SGX modules
+>=20
+>=20
+> ________________________________________
+> From: meta-ti-bounces@yoctoproject.org [meta-ti-
+> bounces@yoctoproject.org] on behalf of Maupin, Chase
+> Sent: Wednesday, October 10, 2012 10:55 AM
+> To: Franklin S. Cooper Jr; meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCH 2/2][for-comments] omap3-sgx-
+> modules:     Add     v4.08.00.01 of the SGX modules
+>=20
+> > -----Original Message-----
+> > From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> > bounces@yoctoproject.org] On Behalf Of Franklin S. Cooper Jr
+> > Sent: Tuesday, October 09, 2012 11:28 PM
+> > To: meta-ti@yoctoproject.org
+> > Subject: [meta-ti] [PATCH 2/2][for-comments] omap3-sgx-modules:
+> > Add v4.08.00.01 of the SGX modules
+> >
+> > * Add version 4.08.00.01 of the SGX modules.
+> >
+> > Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+> > ---
+> >  .../omap3-sgx-modules_4.08.00.01.bb                |   55
+> > ++++++++++++++++++++
+> >  1 files changed, 55 insertions(+), 0 deletions(-)
+> >  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-
+> > modules_4.08.00.01.bb
+> >
+> > diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-
+> > modules_4.08.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-
+> > modules_4.08.00.01.bb
+> > new file mode 100644
+> > index 0000000..f45934f
+> > --- /dev/null
+> > +++ b/recipes-bsp/powervr-drivers/omap3-sgx-
+> modules_4.08.00.01.bb
+> > @@ -0,0 +1,55 @@
+> > +DESCRIPTION =3D "Kernel drivers for the PowerVR SGX chipset
+> found
+> > in the omap3 SoCs"
+> > +LICENSE =3D "GPLv2"
+> > +LIC_FILES_CHKSUM =3D
+> > "file://COPYING;md5=3Dea5743acf520dd81ca172e69f818a3d4"
+> > +
+> > +TI_BIN_UNPK_CMDS=3D"Y: qY:workdir:Y"
+> > +require ../../recipes-ti/includes/ti-eula-unpack.inc
+> > +
+> > +SGXPV =3D "4_08_00_01"
+> > +IMGPV =3D "1.7.867897"
+> > +BINFILE =3D "Graphics_SDK_setuplinux_${SGXPV}.bin"
+> > +
+> > +inherit module
+> > +
+> > +MACHINE_KERNEL_PR_append =3D "a"
+>=20
+> As we learned the other day MACHINE_KERNEL_PR adds a dependency
+> on the kernel.bbclass in meta-openembedded.  Should this check if
+> MACHINE_KERNEL_PR is defined before doing the append?
+>=20
+> Franklin: MACHINE_KERNEL_PR is used by 25+ include files,patches
+> and machine files within meta-ti as of today. With that being
+> said your change does make sense. I can add that to v2
+
+Denys,
+
+As I asked before, what should we do about MACHINE_KERNEL_PR in general for=
+ meta-ti?  I know we want to move away from meta-oe dependencies, so should=
+ we be trying to add MACHINE_KERNEL_PR to oe-core?  I see a patch for this =
+was submitted back in 2011 but not picked up (http://lists.linuxtogo.org/pi=
+permail/openembedded-core/2011-September/010193.html).  There was a lot of =
+discussion but still no conclusion.  There was talk about the autoPR making=
+ this unneeded, but I think people skipped the issue of recipes that should=
+ be re-built when the kernel changes.
+
+So for now should we leave this alone but take the question back to oe-core=
+ about why not to use this feature?
+
+>=20
+> > +PR =3D "${MACHINE_KERNEL_PR}"
+> > +
+> > +DEFAULT_PREFERENCE =3D "-1"
+> > +
+> > +SRC_URI =3D "<ti-internal-
+> > url>/Graphics_SDK_setuplinux_4_08_00_01.bin"
+> > +SRC_URI[md5sum] =3D "95b8f02923d6ea52ea104fa3d93ce1f0"
+> > +SRC_URI[sha256sum] =3D
+> >
+> "1db2d46ec3c6a97db146357841e02a95a15be658c2297dc571e6e61b32238561
+> > "
+> > +
+> > +TI_BIN_UNPK_WDEXT=3D"/Graphics_SDK_${SGXPV}"
+> > +S =3D "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
+> > +
+> > +PVRBUILD =3D "release"
+> > +export KERNELDIR =3D "${STAGING_KERNEL_DIR}"
+> > +
+> > +INHIBIT_PACKAGE_STRIP =3D "1"
+> > +
+> > +TI_PLATFORM_omap3 =3D "omap3630"
+> > +TI_PLATFORM_ti814x =3D "ti81xx"
+> > +TI_PLATFORM_ti816x =3D "ti81xx"
+> > +TI_PLATFORM_ti33x =3D "ti335x"
+> > +
+> > +MODULESLOCATION_omap3 =3D "dc_omapfb3_linux"
+> > +MODULESLOCATION_ti814x =3D "dc_ti81xx_linux"
+> > +MODULESLOCATION_ti816x =3D "dc_ti81xx_linux"
+> > +MODULESLOCATION_ti33x =3D "dc_ti335x_linux"
+> > +
+> > +export SUPPORT_XORG ?=3D "${@base_contains('DISTRO_FEATURES',
+> > 'x11', '1', '0', d)}"
+> > +
+> > +MAKE_TARGETS =3D " BUILD=3D${PVRBUILD} TI_PLATFORM=3D${TI_PLATFORM}
+> > SUPPORT_XORG=3D${SUPPORT_XORG}"
+>=20
+> What is this used for?
+>=20
+> > +
+> > +do_install() {
+> > +    mkdir -p
+> > ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+> > +    cp  ${S}/pvrsrvkm.ko \
+> > +        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko
+> \
+> > +
+> ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko
+> > \
+> > +
+> > ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+> > +
+> > +     if [ "${SUPPORT_XORG}" =3D "1" ]; then
+> > +         cp ${S}/services4/3rdparty/linux_drm/drm.ko
+> > ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+> > +     fi
+> > +}
+> > --
+> > 1.7.0.4
+> >
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
 > _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
 > https://lists.yoctoproject.org/listinfo/meta-ti
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
 
