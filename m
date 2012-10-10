@@ -1,31 +1,31 @@
 Return-Path: <fcooperjr27@gmail.com>
-Received: from mail-oa0-f48.google.com (mail-oa0-f48.google.com
-	[209.85.219.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB9B0E0070B
-	for <meta-ti@yoctoproject.org>; Tue,  9 Oct 2012 20:53:06 -0700 (PDT)
-Received: by mail-oa0-f48.google.com with SMTP id h2so95794oag.35
-	for <meta-ti@yoctoproject.org>; Tue, 09 Oct 2012 20:53:04 -0700 (PDT)
+Received: from mail-ob0-f176.google.com (mail-ob0-f176.google.com
+	[209.85.214.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0207BE0070B
+	for <meta-ti@yoctoproject.org>; Tue,  9 Oct 2012 20:58:23 -0700 (PDT)
+Received: by mail-ob0-f176.google.com with SMTP id x4so97066obh.35
+	for <meta-ti@yoctoproject.org>; Tue, 09 Oct 2012 20:58:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	bh=MZK7/TAFaDdjK3u4lGhNMqTiS44PH2oXeR72ONzt/vk=;
-	b=DnBbD16fmthP123pFIXHqoAOoGkzMEhZL1+DrYqDnnMZ1fCbo9SE4Ogmeso/hWnWS2
-	+apY9wvQPV+XMnt24cWKODdO1y5ew7Owr3iet1NLed91bWyFhHdcjlrzGJJOUtKXxbF/
-	NIQCIwYfvdAJojnNHz2qFjzTRfrRm/O+g7XVRdA60UItAeakMO/j66WaEeEAjPvxqxTs
-	QX6qRvJRJD6Uc/7noU7mwISGCB87FUFkiDMIIEJs5eCPhWk7CTOeimsPMpo9sr9STYj3
-	8R3J7SXmFVoKQX1r+6/G0udvdStgc4veDp6kbs1OcO5NbTOh3bKkkAKURwAyN6GsLpKH
-	kYAA==
-Received: by 10.182.38.65 with SMTP id e1mr4546376obk.3.1349841184230;
-	Tue, 09 Oct 2012 20:53:04 -0700 (PDT)
+	bh=VI8dF1FEFrxlDBhKL/EwVnc2XmYz5ltzABPGEUvTcoM=;
+	b=kZ2v3E/8OaX43/PAulixlkFuQIOU7Z8sfl2C7vdobJ0Vo3BCSnOe5VLPfAaoet+hnk
+	GKHkFwiJNcl/kz9eBZwI4Anl3nOogF05BobVnEnqwxdsyF79A4niDpacnoAWdgKjAOo4
+	+C/+/ysvShuo7go3uswH0JIRyOsOjV1xTYfnqHGPOvmxJEfGeOKTrgxlseiw4E2Q10OO
+	TUsbkfz4saEDa+KVLezJC4lXsOPv5HPtDybDOGzWC+WVEA52FN6LCICDEYdhe/vYiYbt
+	8rpPMvgyCAdmTuyotBr9RCwwuRHj8J6DwbYOiqWcgKmIWRuDG1NjiyE28RZme6TdpDrQ
+	BZgQ==
+Received: by 10.60.19.37 with SMTP id b5mr18385003oee.16.1349841501447;
+	Tue, 09 Oct 2012 20:58:21 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
-	by mx.google.com with ESMTPS id h2sm234101obn.11.2012.10.09.20.53.02
+	by mx.google.com with ESMTPS id f4sm252726obb.3.2012.10.09.20.58.20
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 09 Oct 2012 20:53:03 -0700 (PDT)
+	Tue, 09 Oct 2012 20:58:20 -0700 (PDT)
 From: "Franklin S. Cooper Jr" <fcooperjr27@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Tue,  9 Oct 2012 23:23:14 -0500
-Message-Id: <1349842994-17942-1-git-send-email-fcooper@ti.com>
+Date: Tue,  9 Oct 2012 23:28:23 -0500
+Message-Id: <1349843304-18507-1-git-send-email-fcooper@ti.com>
 X-Mailer: git-send-email 1.7.0.4
-Subject: [PATCH v2] libgles-omap3: Adjust for non X11 distros
+Subject: [PATCH 1/2][for-comments] libgles-omap3: Add updated Graphics SDK
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,352 +38,72 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2012 03:53:07 -0000
+X-List-Received-Date: Wed, 10 Oct 2012 03:58:24 -0000
 
-* Non X11 base distros are unable to build this Graphics SDK.
-* This patch tweaks the libgles-omap3 include file to always build the
-  Graphics SDK in Raw mode and also build in X11 mode only if X11 is
-  apart of the DISTRO_FEATURE.
-* Create a new variable PVR_INIT that is by default set to pvrsrvinit. This is
-  needed for newer version of the Graphics SDK that replaced this file.
+* Add version v4.08.00.01 of the Graphics SDK.
+* Add X11 support via DRI/DRM Xorg driver
+* Replace pvrsrvinit with pvrsrvctl (Imagination Technologies based change)
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 ---
-Version 2 changes:
-Added PVR_INIT variable.
-Made changes to only build and package X11 components if a X11 based distro is
-used. Raw mode components are always built and packaged even for X11 based
-distros.
+ .../libgles/libgles-omap3-4.08.00.01/rc.pvr        |  124 ++++++++++++++++++
+ .../libgles/libgles-omap3-4.08.00.01/rc_dri.pvr    |  136 ++++++++++++++++++++
+ .../libgles/libgles-omap3_4.08.00.01.bb            |   74 +++++++++++
+ 3 files changed, 334 insertions(+), 0 deletions(-)
+ create mode 100755 recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc.pvr
+ create mode 100755 recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc_dri.pvr
+ create mode 100644 recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb
 
- recipes-graphics/libgles/libgles-omap3.inc    |  208 +++++++++++++++----------
- recipes-graphics/libgles/libgles-omap3/rc.pvr |    7 +
- 2 files changed, 135 insertions(+), 80 deletions(-)
-
-diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-index 4525285..523aa52 100644
---- a/recipes-graphics/libgles/libgles-omap3.inc
-+++ b/recipes-graphics/libgles/libgles-omap3.inc
-@@ -3,11 +3,15 @@ LICENSE = "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum
- LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
- 
--PR = "r32"
-+PR = "r33"
- 
- COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
- 
--DEPENDS = "virtual/libx11 libxau libxdmcp libdrm"
-+X11DEPENDS = "virtual/libx11 libxau libxdmcp libdrm"
-+DEPENDS = "${@base_contains('DISTRO_FEATURES', 'x11', '${X11DEPENDS}', '', d)}"
+diff --git a/recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc.pvr b/recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc.pvr
+new file mode 100755
+index 0000000..7b5cefa
+--- /dev/null
++++ b/recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc.pvr
+@@ -0,0 +1,124 @@
++#!/bin/sh
++PATH=$PATH:/usr/sbin
 +
-+export SUPPORT_XORG ?= "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
-+PVR_INIT ?= "pvrsrvinit"
- 
- PROVIDES += "virtual/egl"
- 
-@@ -31,11 +35,13 @@ export ES5LOCATION ?= "${S}/gfx_rel_es5.x"
- export ES6LOCATION ?= "${S}/gfx_rel_es6.x"
- export ES8LOCATION ?= "${S}/gfx_rel_es8.x"
- 
-+LIBGLESWINDOWSYSTEM ?= "libpvrPVR2D_FRONTWSEGL.so.1"
-+
- do_configure() {
- 	# Attempt to fix up the worst offenders for file permissions
- 	for i in $(find ${S} -name "*.h") $(find ${S} -name "*.c") $(find ${S} -name "Make*") ; do
- 		chmod 0644 $i
--	done 
-+	done
- 
- 	# Attempt to create proper library softlinks
- 	for sofile in $(find ${S} -name "lib*Open*.so") $(find ${S} -name "lib*srv*.so") $(find ${S} -name "lib*gl*.so") $(find ${S} -name "libpvr*.so") $(find ${S} -name "lib*GL*.so"); do
-@@ -64,62 +70,92 @@ PARALLEL_MAKE = ""
- PLATFORM ?= "LinuxOMAP3"
- 
- do_compile() {
--	export X11ROOT="${STAGING_DIR_HOST}/usr"
- 	export TOOLCHAIN="${TOOLCHAIN_PATH}"
--
- 	export PLAT_CC="${CC}"
- 	export PLAT_CPP="${CXX}"
- 	export PLAR_AR="${AR}"
- 
--	mkdir -p ${S}/demos/raw
--	mkdir -p ${S}/demos/x11
--
--	# Rebuild demos for both Raw and X11
--	for X11BUILD in 0 1 ; do
--		for demo in ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Demos/* ; do
--			cd $demo/OGLES/Build/LinuxGeneric
--			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
--			rm $demo/OGLES/Build/${PLATFORM}/Release*/*.o
--			install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
--			sed -e s:NAME:$(basename $demo): \
--			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES/Build/${PLATFORM}/ReleaseX11/*): \
--			     ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
--			install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
--		done
--		for demo in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Demos/* ; do
--			cd $demo/OGLES2/Build/LinuxGeneric
--			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
--			rm -f $demo/OGLES2/Build/${PLATFORM}/Release*/*.o
--			install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
--			sed -e s:NAME:$(basename $demo): \
--			    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/*): \
--			     ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
--			install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
--		done
--	done
--
--	mkdir -p ${S}/trainingcourses/raw
--	mkdir -p ${S}/trainingcourses/x11
-+    if [ ${SUPPORT_XORG} -eq 1 ]
-+    then
-+        export X11ROOT="${STAGING_DIR_HOST}/usr"
-+        mkdir -p ${S}/demos/x11
-+        mkdir -p ${S}/trainingcourses/x11
-+    fi
-+
-+    mkdir -p ${S}/demos/raw
-+    mkdir -p ${S}/trainingcourses/raw
-+
-+	# Rebuild demos
-+    for X11BUILD in 0 1 ; do
-+        # Don't rebuild demos with X11 support for a non X11 distro
-+        if [ ${SUPPORT_XORG} -eq 0 -a $X11BUILD -eq 1 ]
-+        then
-+            continue
-+        fi
-+
-+	    for demo in ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Demos/* ; do
-+		    cd $demo/OGLES/Build/LinuxGeneric
-+		    oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
-+		    rm $demo/OGLES/Build/${PLATFORM}/Release*/*.o
-+
-+            if [ $X11BUILD -eq 1 ]
-+            then
-+                install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
-+                sed -e s:NAME:$(basename $demo): \
-+                    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES/Build/${PLATFORM}/ReleaseX11/*): \
-+                    ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
-+            else
-+                install -m 0755 $demo/OGLES/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
-+            fi
-+	    done
-+
-+	    for demo in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Demos/* ; do
-+		    cd $demo/OGLES2/Build/LinuxGeneric
-+		    oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
-+		    rm -f $demo/OGLES2/Build/${PLATFORM}/Release*/*.o
-+
-+            if [ $X11BUILD -eq 1 ]
-+            then
-+		        install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
-+                sed -e s:NAME:$(basename $demo): \
-+                    -e s:EXEC:${bindir}/SGX/demos/X11/$(basename $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/*): \
-+                    ${WORKDIR}/sample.desktop > ${WORKDIR}/$(basename $demo).desktop
-+            else
-+                install -m 0755 $demo/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
-+            fi
-+	    done
-+    done
- 
- 	find ${S} -name "*_org" -delete
- 
--	# Build OGLES2 Trainingcourses for both Raw and X11
--	for X11BUILD in 0 1 ; do
--		for training in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/TrainingCourse/* ; do
--			if [ -e $training/OGLES2/Build/LinuxGeneric/Makefile ] ; then
--				cd $training/OGLES2/Build/LinuxGeneric
--			fi
--
--			if [ -e $training/OGLES2/Build/${PLATFORM}/Makefile ] ; then
--				cd $training/OGLES2/Build/${PLATFORM}
--			fi			
--
--			oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
--			rm -f $training/OGLES2/Build/${PLATFORM}/Release*/*.o
--			install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/trainingcourses/x11 || true
--			install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/trainingcourses/raw || true
--		done
--	done
-+	# Build OGLES2 Trainingcourses
-+    for X11BUILD in 0 1 ; do
-+        # Don't rebuild training courses with X11 support for a non X11 distro
-+        if [ ${SUPPORT_XORG} -eq 0 -a $X11BUILD -eq 1 ]
-+        then
-+            continue
-+        fi
-+
-+	    for training in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/TrainingCourse/* ; do
-+		    if [ -e $training/OGLES2/Build/LinuxGeneric/Makefile ] ; then
-+			    cd $training/OGLES2/Build/LinuxGeneric
-+		    fi
-+
-+		    if [ -e $training/OGLES2/Build/${PLATFORM}/Makefile ] ; then
-+			    cd $training/OGLES2/Build/${PLATFORM}
-+		    fi
-+
-+		    oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=$X11BUILD
-+		    rm -f $training/OGLES2/Build/${PLATFORM}/Release*/*.o
-+
-+            if [ $X11BUILD -eq 1 ]
-+            then
-+		        install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/trainingcourses/x11 || true
-+            else
-+		        install -m 0755 $training/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/trainingcourses/raw || true
-+            fi
-+	    done
-+    done
- 
- }
- 
-@@ -133,12 +169,14 @@ do_install () {
- 
- 	install -m 0755 ${BINLOCATION}/*_test ${D}${bindir}/
- 	install -m 0755 ${BINLOCATION}/gl* ${D}${bindir}/
--	install -m 0755 ${BINLOCATION}/pvrsrvinit ${D}${bindir}/
--
--	install -m 0755 ${BINLOCATION}/xgles1test1 ${D}${bindir}/
-+	install -m 0755 ${BINLOCATION}/${PVR_INIT} ${D}${bindir}/
- 
--	install -m 0755 ${BINLOCATION}/freedesktop/kdrive/usr/X11R6_SGX/bin/Xsgx ${D}${bindir}/|| true
--	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/lib/*X11WS* ${D}${libdir} || true
-+    if [ ${SUPPORT_XORG} -eq 1 ]
-+    then
-+	    install -m 0755 ${BINLOCATION}/xgles1test1 ${D}${bindir}/
-+	    install -m 0755 ${BINLOCATION}/freedesktop/kdrive/usr/X11R6_SGX/bin/Xsgx ${D}${bindir}/|| true
-+	    cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/lib/*X11WS* ${D}${libdir} || true
-+    fi
- 
- 	install -d ${D}${includedir}
- 	cp -pPR ${S}/GFX_Linux_KM/include4 ${D}${includedir}/
-@@ -158,7 +196,7 @@ do_install () {
- 
- 	install -d ${D}${sysconfdir}
- 	echo "[default]" > ${D}${sysconfdir}/powervr.ini
--	echo "WindowSystem=libpvrPVR2D_FRONTWSEGL.so.1" >> ${D}${sysconfdir}/powervr.ini
-+	echo "WindowSystem=${LIBGLESWINDOWSYSTEM}" >> ${D}${sysconfdir}/powervr.ini
- 
- 	# The ES2.x, ES3.x, ES5.x and ES6.x CPUs have different SGX hardware, so we need to install multiple sets of userspace
- 
-@@ -174,11 +212,15 @@ do_install () {
- 	install -d ${D}${bindir}/ES3.0
- 	install -d ${D}${bindir}/ES2.0
- 
-+    shared_prog="eglinfo pvr2d_test ${PVR_INIT} services_test sgx_blit_test sgx_clipblit_test sgx_flip_test sgx_init_test sgx_render_flip_test"
-+    raw_prog="gles1test1 gles2test1 ovg_unit_test"
-+    x11_prog="eglinfo_x xgles1test1 xgles2test1 xmultiegltest xovg_unit_test"
-+
- 	for esrev in 2 3 5 6 8 ; do
- 		ESLOCATION=$(eval echo $(echo \$\{ES${esrev}LOCATION\}))
- 		if [ -e ${ESLOCATION} ] ; then
- 			cp -pPR ${ESLOCATION}/lib*${IMGPV} ${ESLOCATION}/pvr_drv.so ${ESLOCATION}/*.a ${D}${libdir}/ES${esrev}.0/
--			for esprog in eglinfo eglinfo_x gles1test1 gles2test1 ovg_unit_test pvr2d_test pvrsrvinit services_test sgx_blit_test sgx_clipblit_test sgx_flip_test sgx_init_test sgx_render_flip_test xgles1test1 xgles2test1 xmultiegltest xovg_unit_test ; do
-+			for esprog in $shared_prog $raw_prog ${@base_contains('DISTRO_FEATURES', 'x11',"$x11_prog","",d)} ; do
- 				install -m 0755 ${ESLOCATION}/$esprog ${D}${bindir}/ES${esrev}.0/ || true
- 			done
- 		fi
-@@ -190,15 +232,19 @@ do_install () {
- 	cp ${WORKDIR}/*.desktop ${D}${prefix}/share/applications
- 	rm ${D}${prefix}/share/applications/sample.desktop
- 
--	install -d ${D}${bindir}/SGX/demos/X11/
--	install -d ${D}${bindir}/SGX/demos/Raw/
--	install -m 0755 ${S}/demos/x11/* ${D}${bindir}/SGX/demos/X11/
--	install -m 0755 ${S}/demos/raw/* ${D}${bindir}/SGX/demos/Raw/
-+    if [ ${SUPPORT_XORG} -eq 1 ]
-+    then
-+	    install -d ${D}${bindir}/SGX/demos/X11/
-+	    install -m 0755 ${S}/demos/x11/* ${D}${bindir}/SGX/demos/X11/
-+	    install -d ${D}${bindir}/SGX/trainingcourses/X11
-+        install -m 0755 ${S}/trainingcourses/x11/* ${D}${bindir}/SGX/trainingcourses/X11/
-+    fi
-+
-+    install -d ${D}${bindir}/SGX/demos/Raw/
-+    install -m 0755 ${S}/demos/raw/* ${D}${bindir}/SGX/demos/Raw/
-+    install -d ${D}${bindir}/SGX/trainingcourses/Raw
-+    install -m 0755 ${S}/trainingcourses/raw/* ${D}${bindir}/SGX/trainingcourses/Raw/
- 
--	install -d ${D}${bindir}/SGX/trainingcourses/Raw
--	install -d ${D}${bindir}/SGX/trainingcourses/X11
--	install -m 0755 ${S}/trainingcourses/x11/* ${D}${bindir}/SGX/trainingcourses/X11/
--	install -m 0755 ${S}/trainingcourses/raw/* ${D}${bindir}/SGX/trainingcourses/Raw/
- 
- 	# Delete objects and linker scripts hidden between the headers
- 	find ${D} -name "*.o" -delete
-@@ -209,15 +255,8 @@ do_install () {
- 
- }
- 
--PACKAGES =+ "${PN}-rawdemos \
--             ${PN}-x11demos \
--             ${PN}-rawtrainingcourses \
--             ${PN}-x11trainingcourses \
--"
--
--PACKAGES += "xserver-kdrive-powervrsgx \
--             ${PN}-tests "
--
-+PACKAGES =+ "${@base_contains('DISTRO_FEATURES', 'x11',"${PN}-x11demos ${PN}-x11trainingcourses xserver-kdrive-powervrsgx" ,"", d)}  \
-+            ${PN}-rawdemos ${PN}-rawtrainingcourses ${PN}-tests"
- # Package the base libraries per silicon revision
- PACKAGES =+ "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
- RRECOMMENDS_${PN} += "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
-@@ -234,7 +273,9 @@ PRIVATE_LIBS_${PN}-es5 = "libGLESv2.so libIMGegl.so libsrv_um.so libOpenVG.so li
- PRIVATE_LIBS_${PN}-es6 = "libGLESv2.so libIMGegl.so libsrv_um.so libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so libOpenVGU.so libglslcompiler.so libGLES_CM.so"
- PRIVATE_LIBS_${PN}-es8 = "libGLESv2.so libIMGegl.so libsrv_um.so libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so libOpenVGU.so libglslcompiler.so libGLES_CM.so"
- 
--PACKAGES =+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl ${PN}-linuxfbwsegl ${PN}-x11wsegl ${PN}-driwsegl"
-+
-+PACKAGES =+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl ${PN}-linuxfbwsegl"
-+PACKAGES =+ "${@base_contains('DISTRO_FEATURES', 'x11',"${PN}-x11wsegl ${PN}-driwsegl" ,"", d)}"
- FILES_${PN}-blitwsegl = "${libdir}/libpvrPVR2D_BLITWSEGL.so.*"
- FILES_${PN}-flipwsegl = "${libdir}/libpvrPVR2D_FLIPWSEGL.so.*"
- FILES_${PN}-frontwsegl = "${libdir}/libpvrPVR2D_FRONTWSEGL.so.*"
-@@ -242,7 +283,10 @@ FILES_${PN}-linuxfbwsegl = "${libdir}/libpvrPVR2D_LINUXFBWSEGL.so.*"
- FILES_${PN}-x11wsegl = "${libdir}/libpvrPVR2D_X11WSEGL.so* ${bindir}/x* ${bindir}/*x"
- FILES_${PN}-driwsegl = "${libdir}/libpvrPVR2D_DRIWSEGL.so* ${libdir}/libsrv_um_dri*"
- 
--PACKAGES =+ "${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-flipwsegl-es2 ${PN}-flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8 ${PN}-frontwsegl-es2 ${PN}-frontwsegl-es3 ${PN}-frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8 ${PN}-linuxfbwsegl-es2 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8 ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8 ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driwsegl-es5 ${PN}-driwsegl-es6 ${PN}-driwsegl-es8"
-+PACKAGES =+ "${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-flipwsegl-es2 ${PN}-flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8 ${PN}-frontwsegl-es2 ${PN}-frontwsegl-es3 ${PN}-frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8 ${PN}-linuxfbwsegl-es2 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8"
-+
-+X11_SEGL = " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8 ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driwsegl-es5 ${PN}-driwsegl-es6 ${PN}-driwsegl-es8 "
-+PACKAGES =+ "${@base_contains('DISTRO_FEATURES', 'x11',"${X11_SEGL}" ,"", d)}"
- FILES_${PN}-blitwsegl-es2 = "${libdir}/ES2*/libpvrPVR2D_BLITWSEGL.so.*"
- FILES_${PN}-blitwsegl-es3 = "${libdir}/ES3*/libpvrPVR2D_BLITWSEGL.so.*"
- FILES_${PN}-blitwsegl-es5 = "${libdir}/ES5*/libpvrPVR2D_BLITWSEGL.so.*"
-@@ -287,7 +331,7 @@ RRECOMMENDS_${PN}-driwsegl = " ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driws
- 
- CONFFILES_${PN} = "${sysconfdir}/powervr.ini"
- 
--FILES_${PN} = "${sysconfdir} ${libdir}/*.so* ${bindir}/pvrsrvinit ${bindir}/cputype ${bindir}/*"
-+FILES_${PN} = "${sysconfdir} ${libdir}/*.so* ${bindir}/${PVR_INIT} ${bindir}/cputype ${bindir}/*"
- 
- FILES_xserver-kdrive-powervrsgx = "${bindir}/Xsgx"
- FILES_${PN}-tests = "${bindir}/*test*"
-@@ -335,8 +379,12 @@ INITSCRIPT_PARAMS = "start 30 5 2 . stop 40 0 1 6 ."
- pkg_postinst_${PN}_append() {
- rm -f $D${sysconfdir}/powervr-esrev
- 
--ln -sf /usr/lib/libXdmcp.so.6.0.0 /usr/lib/libXdmcp.so.0 
--ln -sf /usr/lib/libXau.so.6.0.0 /usr/lib/libXau.so.0
-+if [ ${SUPPORT_XORG} -eq 1 ]
++# Check if an fb device is available.  If not then just go ahead and
++# exit because we have no display.
++fbset > /dev/null 2>&1
++if [ "$?" == "1" ]
 +then
-+    ln -sf /usr/lib/libXdmcp.so.6.0.0 /usr/lib/libXdmcp.so.0
-+    ln -sf /usr/lib/libXau.so.6.0.0 /usr/lib/libXau.so.0
++    # looks like there is no display, so let's exit
++    exit 0
 +fi
 +
- }
- 
- pkg_postinst_${PN}-blitwsegl() {
-diff --git a/recipes-graphics/libgles/libgles-omap3/rc.pvr b/recipes-graphics/libgles/libgles-omap3/rc.pvr
-index 00cd994..e5a4cd1 100755
---- a/recipes-graphics/libgles/libgles-omap3/rc.pvr
-+++ b/recipes-graphics/libgles/libgles-omap3/rc.pvr
-@@ -42,6 +42,13 @@ fbset -vyres $(expr $YRES \* 3)
- sgxprepare () {
- 	echo Starting PVR
- 	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
++BITSPERPIXEL="$(fbset | grep geom | awk '{print $6}')"
++YRES="$(fbset | grep geom | awk '{print $3}')"
++
++CPUTYPE="$(cputype)"
++
++if [ "$1" = "" ]; then
++	echo PVR-INIT: Please use start, stop, or restart.
++	exit 1
++fi
++
++if [ "$1" = "stop" -o  "$1" = "restart" ]; then
++	echo Stopping PVR
++	rmmod bufferclass_ti
++	rmmod omaplfb 2>/dev/null
++	rmmod pvrsrvkm 2>/dev/null
++fi
++
++if [ "$1" = "stop" ]; then
++	exit 0
++fi
++
++# Set RGBA ordering to something the drivers like
++if [ "$BITSPERPIXEL" = "32" ] ; then
++	fbset -rgba 8/16,8/8,8/0,8/24
++fi
++
++# Try to enable triple buffering when there's enough VRAM
++fbset -vyres $(expr $YRES \* 3)
++
++sgxprepare () {
++	echo Starting PVR
++	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
 +
 +    if [ "$?" != "0" ]
 +    then
@@ -391,9 +111,301 @@ index 00cd994..e5a4cd1 100755
 +        exit 1
 +    fi
 +
- 	modprobe omaplfb
- 	modprobe bufferclass_ti
- 
++	modprobe omaplfb
++	modprobe bufferclass_ti
++
++	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
++        bc_maj=`grep "bc" /proc/devices | cut -b1,2,3`
++
++	if [ -e /dev/pvrsrvkm ] ; then
++		rm -f /dev/pvrsrvkm
++	fi
++
++	mknod /dev/pvrsrvkm c $pvr_maj 0
++	chmod 666 /dev/pvrsrvkm
++
++	touch /etc/powervr-esrev
++
++	SAVED_ESREVISION="$(cat /etc/powervr-esrev)"
++}
++
++sgxfinish () {
++	# Fix up a bug in opkg
++	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then
++		cd /usr/lib
++		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
++	fi
++
++	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
++		echo -n "Starting SGX fixup for"
++		echo " ES${ES_REVISION}.x"
++		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
++		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
++		echo "${ES_REVISION}" > /etc/powervr-esrev
++	fi
++
++	if ! /usr/bin/pvrsrvctl --start --no-module; then return; fi 
++}
++
++case $CPUTYPE in
++"OMAP3530")
++	sgxprepare
++
++	devmem2 0x48004B48 w 0x2 > /dev/null
++	devmem2 0x48004B10 w 0x1 > /dev/null
++	devmem2 0x48004B00 w 0x2 > /dev/null
++
++	ES_REVISION="$(devmem2 0x50000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++"TI33XX")
++	sgxprepare
++
++	devmem2 0x44e01104 w 0x0 > /dev/null
++	devmem2 0x44e00904 w 0x2 > /dev/null
++
++	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++"TI816x")
++	sgxprepare
++
++	devmem2 0x48180F04 w 0x0 > /dev/null
++	devmem2 0x48180900 w 0x2 > /dev/null
++	devmem2 0x48180920 w 0x2 > /dev/null
++
++	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:6: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++*)
++	echo No SGX hardware, not starting PVR
++	;;
++esac
+diff --git a/recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc_dri.pvr b/recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc_dri.pvr
+new file mode 100755
+index 0000000..dd1e942
+--- /dev/null
++++ b/recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc_dri.pvr
+@@ -0,0 +1,136 @@
++#!/bin/sh
++PATH=$PATH:/usr/sbin
++
++# Check if an fb device is available.  If not then just go ahead and
++# exit because we have no display.
++fbset > /dev/null 2>&1
++if [ "$?" == "1" ]
++then
++    # looks like there is no display, so let's exit
++    exit 0
++fi
++
++BITSPERPIXEL="$(fbset | grep geom | awk '{print $6}')"
++YRES="$(fbset | grep geom | awk '{print $3}')"
++
++CPUTYPE="$(cputype)"
++
++if [ "$1" = "" ]; then
++	echo PVR-INIT: Please use start, stop, or restart.
++	exit 1
++fi
++
++if [ "$1" = "stop" -o  "$1" = "restart" ]; then
++	echo Stopping PVR
++
++	# Stop the X Server.
++	#
++	[ -f /tmp/.X0-lock ] && read XPID < /tmp/.X0-lock && [ -n "$XPID" ] && kill $XPID && while [ -e /proc/$XPID ] ; do sleep 1; done
++
++	rmmod bufferclass_ti
++	rmmod pvrsrvkm 2>/dev/null
++    rmmod drm 2>/dev/null
++fi
++
++if [ "$1" = "stop" ]; then
++	exit 0
++fi
++
++# Set RGBA ordering to something the drivers like
++if [ "$BITSPERPIXEL" = "32" ] ; then
++	fbset -rgba 8/16,8/8,8/0,8/24
++fi
++
++# Try to enable triple buffering when there's enough VRAM
++fbset -vyres $(expr $YRES \* 3)
++
++sgxprepare () {
++	echo Starting PVR
++
++	# Start the X Server. 
++	# The X Server will load the PVR Services module.
++	#
++	/usr/local/XSGX/bin/X -verbose -config /usr/local/XSGX/etc/xorg.conf &
++
++	modprobe drm
++
++	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
++
++    if [ "$?" != "0" ]
++    then
++        echo "Could not find pvrsrvkm driver"
++        exit 1
++    fi
++
++	modprobe bufferclass_ti
++
++	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
++        bc_maj=`grep "bc" /proc/devices | cut -b1,2,3`
++
++	if [ -e /dev/pvrsrvkm ] ; then
++		rm -f /dev/pvrsrvkm
++	fi
++
++	mknod /dev/pvrsrvkm c $pvr_maj 0
++	chmod 666 /dev/pvrsrvkm
++
++	touch /etc/powervr-esrev
++
++	SAVED_ESREVISION="$(cat /etc/powervr-esrev)"
++}
++
++sgxfinish () {
++	# Fix up a bug in opkg
++	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then
++		cd /usr/lib
++		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
++	fi
++
++	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
++		echo -n "Starting SGX fixup for"
++		echo " ES${ES_REVISION}.x"
++		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
++		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
++		echo "${ES_REVISION}" > /etc/powervr-esrev
++	fi
++
++	if ! /usr/bin/pvrsrvctl --start --no-module; then return; fi 
++}
++
++case $CPUTYPE in
++"OMAP3530")
++	sgxprepare
++
++	devmem2 0x48004B48 w 0x2 > /dev/null
++	devmem2 0x48004B10 w 0x1 > /dev/null
++	devmem2 0x48004B00 w 0x2 > /dev/null
++
++	ES_REVISION="$(devmem2 0x50000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++"TI33XX")
++	sgxprepare
++
++	devmem2 0x44e01104 w 0x0 > /dev/null
++	devmem2 0x44e00904 w 0x2 > /dev/null
++
++	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++"TI816x")
++	sgxprepare
++
++	devmem2 0x48180F04 w 0x0 > /dev/null
++	devmem2 0x48180900 w 0x2 > /dev/null
++	devmem2 0x48180920 w 0x2 > /dev/null
++
++	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:6: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++*)
++	echo No SGX hardware, not starting PVR
++	;;
++esac
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb b/recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb
+new file mode 100644
+index 0000000..5a82e68
+--- /dev/null
++++ b/recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb
+@@ -0,0 +1,74 @@
++require libgles-omap3.inc
++
++DEFAULT_PREFERENCE = "-1"
++
++BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
++BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
++BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
++BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
++
++PLATFORM = "LinuxARMV7"
++PVR_INIT = "pvrsrvctl"
++
++# download required binary distribution from:
++# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
++# see libgles-omap3.inc for detailed installation instructions
++gedit 
++SGXPV = "4_08_00_01"
++IMGPV = "1.7.867897"
++BINFILE = "Graphics_SDK_setuplinux_${SGXPV}.bin"
++TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
++SRC_URI = "<ti-internal-url>/Graphics_SDK_setuplinux_4_08_00_01.bin \
++           file://cputype \
++           file://rc.pvr \
++           file://rc_dri.pvr \
++           file://sample.desktop \
++           file://99-bufferclass.rules  \
++"
++
++SRC_URI[md5sum] = "95b8f02923d6ea52ea104fa3d93ce1f0"
++SRC_URI[sha256sum] = "1db2d46ec3c6a97db146357841e02a95a15be658c2297dc571e6e61b32238561"
++
++S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
++
++LIBGLESWINDOWSYSTEM ?= "${@base_contains('DISTRO_FEATURES', 'x11',"libpvrPVR2D_DRIWSEGL.so" ,"libpvrPVR2D_FRONTWSEGL.so.1", d)}"
++
++do_configure_append() {
++
++	# Change PVR server's user mode library to point to DRI
++	for drifile in $(find ${S} -name "libsrv_um_dri.so"); do
++	if [ "$drifile" != "" ]
++	then
++		dir=$(dirname ${drifile})
++		if [ "$SUPPORT_XORG" = "1" ]
++		then
++		    mv ${dir}/libsrv_um_dri.so ${dir}/libsrv_um.so
++		else
++		    rm -rf ${dir}/libsrv_um_dri.so
++		fi
++	fi
++
++	done
++}
++
++do_install_append() {
++
++    # In this version of the graphics SDK the following directories do not exist:
++    #    /GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/pvr2d.h (doesn't exist)
++    #    /GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/GLES/egltypes.h (doesn't exist)
++    # Therefore, need to copy these files manually at the only location that they do exist
++    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir} || true
++    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/ || true
++
++    rm ${D}${sysconfdir}/init.d/pvr-init
++
++    if [ "$SUPPORT_XORG" = "1" ]; then
++	    cp -pP ${WORKDIR}/rc_dri.pvr ${D}${sysconfdir}/init.d/pvr-init
++	else
++	    cp -pP ${WORKDIR}/rc.pvr ${D}${sysconfdir}/init.d/pvr-init
++	fi
++
++}
++
++RRECOMMENDS_${PN}-x11demos = "${PN}-driwsegl"
++RRECOMMENDS_${PN}-x11trainingcourses = "${PN}-driwsegl"
 -- 
 1.7.0.4
 
