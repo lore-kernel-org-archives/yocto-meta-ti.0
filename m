@@ -1,36 +1,30 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56840E0049B
-	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 07:24:49 -0700 (PDT)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id EDD1BF8122A; Thu, 11 Oct 2012 08:24:48 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 02A3DF81225;
-	Thu, 11 Oct 2012 08:24:47 -0600 (MDT)
-Message-ID: <5076D6CC.5010303@mlbassoc.com>
-Date: Thu, 11 Oct 2012 08:25:16 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:15.0) Gecko/20120912 Thunderbird/15.0.1
+Return-Path: <jkridner@gmail.com>
+Received: from mail-la0-f48.google.com (mail-la0-f48.google.com
+	[209.85.215.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 14F7EE0027E
+	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 08:46:39 -0700 (PDT)
+Received: by mail-la0-f48.google.com with SMTP id u2so1460187lag.35
+	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 08:46:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:cc:content-type;
+	bh=UparEtsFv2wVDma/GVKZJOIDFjjnyfRgxGBziIIp8oo=;
+	b=deO7GuvF0HjWDq5VFmbJG5pu/JzscsSQfyX9UPhyKwdTP4WamqGBGphjaecisOoeQB
+	sGMzJTDp0BFEtkTO6tRBGmFw4tkqNKZCCE6RGLWO3Xqy9MUYjokOKz6f3iY8Gtic8i8/
+	XT9S0ssyj9smSZtaT9yaVJPchzx9O0fwH960O28tyqB6qFbW/U5ork4ViivUB/qcPQAm
+	kLQU+sScaQBHttM6clW1HSEASv1V+F+mbvM6nUpqlg1E83DxAGKJSBvYrkfruJ2j68To
+	gZlpqAZDgFOnhJy7T7kmjLFAQVi3WpD+IjJcxzGYnBAhpd5sC6w8J5K+cvlimSIP5Tg/
+	54PA==
 MIME-Version: 1.0
-To: Daniel Stone <daniel@fooishbar.org>
-References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
-	<1349912433-21880-5-git-send-email-ebutera@users.berlios.de>
-	<CAOT3miL8hqQ+AZWwpgAaw1KNpSDdrcik=vHgf0BQksFew9ZzbQ@mail.gmail.com>
-	<CA+2YH7tNDTLGHWr3ASFXRQ_H2L+LyDsMqO8s4pZFRbPA94fXmA@mail.gmail.com>
-	<CAOT3miLOLK-3L7Pwcp6WHEbTm_kfcY0xRUSWNCZDQ8yDNYL-wQ@mail.gmail.com>
-	<CA+2YH7s0YnPBXb8VRYW7DbjMxH7ed8u+J=q84-qC9ZzC4ULxow@mail.gmail.com>
-	<CAOT3miK8prycvqfTNSJXEnTsAtfwxhAk_FaCPX_PACxX0Zu-MQ@mail.gmail.com>
-	<5076C554.6060200@mlbassoc.com>
-	<CAPj87rMrJ4D6fnY4kw5dBkogzqjDCVPiccGzM3TpWCWkN9FzCg@mail.gmail.com>
-In-Reply-To: <CAPj87rMrJ4D6fnY4kw5dBkogzqjDCVPiccGzM3TpWCWkN9FzCg@mail.gmail.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 5/6] gstreamer: bbappend to use TI-patched versions needed for gst-plugin-ducati
+Received: by 10.112.17.169 with SMTP id p9mr193866lbd.9.1349970396634; Thu, 11
+	Oct 2012 08:46:36 -0700 (PDT)
+Received: by 10.112.144.35 with HTTP; Thu, 11 Oct 2012 08:46:36 -0700 (PDT)
+Date: Thu, 11 Oct 2012 11:46:36 -0400
+Message-ID: <CA+T6QPnq1dZOJ-D+C-FFodCBjxN5AOE_qC3dFj_Vtz86rdk0bg@mail.gmail.com>
+From: Jason Kridner <jkridner@gmail.com>
+To: meta-ti@yoctoproject.org, beagleboard@googlegroups.com
+X-Mailman-Approved-At: Thu, 11 Oct 2012 08:49:29 -0700
+Cc: Joel A Fernandes <joelagnel@ti.com>
+Subject: Introducing meta-beagleboard
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,28 +37,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Oct 2012 14:24:49 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Oct 2012 15:46:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 2012-10-11 08:08, Daniel Stone wrote:
-> Hi,
->
-> On 12 October 2012 00:10, Gary Thomas <gary@mlbassoc.com> wrote:
->> BTW, Does anyone know when OE-core or meta-openembedded will have support
->> for gstreamer-1.0?
->
-> I've got a tree which adds GStreamer 1.0 support, but have held off on
-> submitting it while Yocto's in release freeze.
+To help foster fast development, future releases of the Angstrom
+Distribution that ships with BeagleBoard.org platforms (such as
+BeagleBone and BeagleBoard-xM) will be built using meta-beagleboard,
+rather than meta-ti. While this produces the seemingly undesirable
+effect of providing yet-another-BSP for BeagleBoard.org platforms,
+collaboration in the mainline kernel and bootloaders that are the key
+elements for the BSPs has made this possible and multiple goals for
+the various BSPs has made it desirable.
 
-Maybe you could share?  I'd like to try it out soon and don't mind working
-with not-yet-pushed-to-oe-core pieces.
+The objectives for meta-beagleboard are:
+1) Provide the best possible out-of-box-experience for BeagleBoard.org platforms
+2) Enable as much add-on hardware as possible
+3) Enable public contributions to extend the experience and hardware support
+4) Deliver information to the BeagleBoard.org community regarding the
+development status
 
-Thanks
+The repository will be hosted at:
+https://github.com/beagleboard/meta-beagleboard
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+In addition to the many distributions of Linux picking up support for
+the hardware from the mainline Linux kernel or collaboratively pulling
+in-work patches from this repository (or the collaborative kernel
+repository at http://github.com/beagleboard/kernel), there are various
+OpenEmbedded BSP layers available for BeagleBoard.org platforms with
+other objectives. These BSPs can be very useful to you depending on
+your purpose and I've listed some here to position them relative to
+meta-beagleboard.
+
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/:
+* Provide a basis for building TI SDKs
+* Enable collaborative inputs from community developers seeking to
+improve the BSPs used in TI SDKs
+* Deliver BSPs that work with only oe-core required, compatible with
+meta-yocto, meta-arago and other distro layers
+* Provide a clear definition of what is supported by TI
+
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-yocto/:
+* Provide a reference for building Yocto BSPs
+* Provide a reference for utilizing a common kernel across Yocto
+reference platforms
+
+meta-beagleboard is seeking to participate in the Yocto Project and
+provide reference for the other BSPs to utilize. However, its focused
+objectives enable faster support for BeagleBoard.org platforms. Support
+for the layer will come from Koen, Joel, myself and other CircuitCo or
+TI employees supporting BeagleBoard.org---and of course any other
+people who wish to contribute to the project. Where it is simple and
+sane to do so, the components in meta-ti will simply be used.
+
+I hope you see clear value from the existence of this new layer and
+how it helps accelerate development and foster both quality and
+collaboration. Thanks for your kind support.
+
+Best regards,
+Jason Kridner
+TI and BeagleBoard.org
 
