@@ -1,25 +1,19 @@
-Return-Path: <ndec13@gmail.com>
-Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
-	[209.85.220.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 461A7E0027E
-	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 12:16:51 -0700 (PDT)
-Received: by mail-vc0-f176.google.com with SMTP id gb22so3086202vcb.35
-	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 12:16:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=N+uBL4Rv5Dv0h8Dv9OvL1yczl+JcpK/FeJh8/M+DGK8=;
-	b=ftiNe6LsIS3TobCa+a2bWqi+D+ZE4cStD9v8ImPtsOH9J/v/a43lwk1wqo3P6AfX1t
-	ezFxtJ75tjECSi7wYLZviAqb3hes9Y+kbzdie+h/UwStVsGL+c1QFPdYAsk5CGIeDahd
-	G78Mjn0PDMoreRg2i1N/iTyZuS4fImvR5E2eX0rB0yEX5ev+KWRTPlDa84XPS4SC5vhm
-	H0NsmzM/rZS0oKAZMXaF1VPUHWYzW/r2vpkvNf1QayxU+hkGb1Px/4s++qzq0vLd8cS1
-	4xoKm70FWao+cFKjHaOOQdXmtzDvU1TU2XHMbfMBWs54Nj5JbGmn8MAPg3yFc3ahryMp
-	WPJw==
-Received: by 10.58.94.109 with SMTP id db13mr1091673veb.39.1349983010295; Thu,
-	11 Oct 2012 12:16:50 -0700 (PDT)
+Return-Path: <tf+lists.yocto@r-finger.com>
+Received: from r-finger.com (r-finger.com [178.79.160.5])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB6C3E0027E
+	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 12:28:24 -0700 (PDT)
+Received: from [192.168.0.2] (host81-153-82-212.range81-153.btcentralplus.com
+	[81.153.82.212]) (using TLSv1 with cipher AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by r-finger.com (Postfix) with ESMTPSA id DB23E99A4
+	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 20:28:09 +0100 (BST)
+Message-ID: <50771DC8.3090903@r-finger.com>
+Date: Thu, 11 Oct 2012 20:28:08 +0100
+From: Tomas Frydrych <tf+lists.yocto@r-finger.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:10.0.5) Gecko/20120624 Icedove/10.0.5
 MIME-Version: 1.0
-Received: by 10.58.80.71 with HTTP; Thu, 11 Oct 2012 12:16:30 -0700 (PDT)
-In-Reply-To: <5076D6CC.5010303@mlbassoc.com>
+To: meta-ti@yoctoproject.org
 References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
 	<1349912433-21880-5-git-send-email-ebutera@users.berlios.de>
 	<CAOT3miL8hqQ+AZWwpgAaw1KNpSDdrcik=vHgf0BQksFew9ZzbQ@mail.gmail.com>
@@ -30,11 +24,8 @@ References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
 	<5076C554.6060200@mlbassoc.com>
 	<CAPj87rMrJ4D6fnY4kw5dBkogzqjDCVPiccGzM3TpWCWkN9FzCg@mail.gmail.com>
 	<5076D6CC.5010303@mlbassoc.com>
-From: Nicolas Dechesne <ndec13@gmail.com>
-Date: Thu, 11 Oct 2012 21:16:30 +0200
-Message-ID: <CAOT3mi+Ad=aB_mc11DUmybMvEcySnGUzs6rDke+-mi2ZbBtxrQ@mail.gmail.com>
-To: Gary Thomas <gary@mlbassoc.com>
-Cc: meta-ti@yoctoproject.org
+	<CAOT3mi+Ad=aB_mc11DUmybMvEcySnGUzs6rDke+-mi2ZbBtxrQ@mail.gmail.com>
+In-Reply-To: <CAOT3mi+Ad=aB_mc11DUmybMvEcySnGUzs6rDke+-mi2ZbBtxrQ@mail.gmail.com>
 Subject: Re: [PATCH 5/6] gstreamer: bbappend to use TI-patched versions needed for gst-plugin-ducati
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -48,23 +39,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Oct 2012 19:16:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 11 Oct 2012 19:28:25 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 11, 2012 at 4:25 PM, Gary Thomas <gary@mlbassoc.com> wrote:
->> I've got a tree which adds GStreamer 1.0 support, but have held off on
->> submitting it while Yocto's in release freeze.
->
->
-> Maybe you could share?  I'd like to try it out soon and don't mind working
-> with not-yet-pushed-to-oe-core pieces
+On 11/10/12 20:16, Nicolas Dechesne wrote:
+> unfortunately, the provision for that isn't really there, since the
+> gstreamer recipes don't have the 'x.y' in the name. was that discussed
+> anywhere? could we ensure that gst1.0 comes as
+> 'gstreamer1.0_1.0.0.bb'?
 
-also i think we need to make sure that we can install 0.10 and 1.0
-simultaneously, to facilitate the transition (as it's done in most
-distros), especially since gst supports that...
+I don't think there is anything at all gained by supporting
+simultaneously installing two versions of gstreamer; it makes no real
+sense on distro level. More so adding a version into a package name
+creates a world of pain and dependency hell. Would it not be enough to
+have _0.10 and _1.0 recipes alongside each other, one of which would
+have DEFAULT_PRIORITY=-1; a distro then can choose an appropriate
+version as it wants to?
 
-unfortunately, the provision for that isn't really there, since the
-gstreamer recipes don't have the 'x.y' in the name. was that discussed
-anywhere? could we ensure that gst1.0 comes as
-'gstreamer1.0_1.0.0.bb'?
+Tomas
+
 
