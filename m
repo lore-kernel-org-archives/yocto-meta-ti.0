@@ -1,37 +1,36 @@
 Return-Path: <ebutera@gmail.com>
-Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
-	[209.85.220.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0467FE00292
-	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 03:40:01 -0700 (PDT)
-Received: by mail-vc0-f176.google.com with SMTP id gb22so2285960vcb.35
-	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 03:40:01 -0700 (PDT)
+Received: from mail-vb0-f48.google.com (mail-vb0-f48.google.com
+	[209.85.212.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8F16BE00292
+	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 03:43:16 -0700 (PDT)
+Received: by mail-vb0-f48.google.com with SMTP id e21so1840272vbm.35
+	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 03:43:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=1VS0P46cWdMdT59pCjr9/lEfMN7fP7qvT6u1jnRngoE=;
-	b=VkbFHtpj3TUGbAzpiRb8ugJENKu3FP2Dng7frcIMuzlfeAc4TOFS816hCQabJO3kiK
-	df+OhdBYiMihbiEk0bWtM6P2uBhk2eAbG4AoH1+hH2XXlCiZRuwFs3rFrdJpKna2PcGl
-	dgNFMZPpRfMxqw0Z/4kRPFeADws2hME709AtswmEu6SNQtjn+tMZdDNGdFNfrhUEg7Ok
-	drqBNO8b8aS2X8gOPF3Ph9Z/PBLqEvPkZFnhiWZHBlUGypSxCfxV/sPWByy9FYFSCGnB
-	PCqntfNS5Evw6TBx1Dx/U+VJdx7H3ezVPUoDAf5/+zkwP14Ea8hqPskdLlMwpuL1jJ53
-	/0FQ==
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=ITNdpnR70aJkACtPRLkL9taINgE7y6Y3ef47dehoJb4=;
+	b=aRq+z0/i/BeKD+GtyPOlKAJHckMBzPhRHVI80m58KbZ4WpDqsdzcFifWvRElcniauN
+	yYpGCclAv1LURjlM6azu0gNB5hmqU4n9HazYOOPDqDzovfqiI5UbXTaxFrMlj0aA1FbS
+	4dot77Cc/4wQtLu4xR8qd1iCDGBWXBybulT7f5jksYLHknTRuTqo16CP/XAmgdnXpZKY
+	No9WgssbHQvDLAiK4EtGOrXEzSFvbYMcZJTwUVJv3Nv3+deexBFnUlTJoYOYmfNsNKO9
+	FtBBh8FlayHSqCm8Rni7n/97wYScCccMFY65uw/FHvIBHxd3mUVS49pP7awSL365D83V
+	hezA==
 MIME-Version: 1.0
-Received: by 10.52.88.15 with SMTP id bc15mr176438vdb.102.1349952001332; Thu,
-	11 Oct 2012 03:40:01 -0700 (PDT)
+Received: by 10.58.231.8 with SMTP id tc8mr212507vec.52.1349952196035; Thu, 11
+	Oct 2012 03:43:16 -0700 (PDT)
 Sender: ebutera@gmail.com
-Received: by 10.220.226.196 with HTTP; Thu, 11 Oct 2012 03:40:01 -0700 (PDT)
-In-Reply-To: <50767E49.7030104@ti.com>
+Received: by 10.220.226.196 with HTTP; Thu, 11 Oct 2012 03:43:15 -0700 (PDT)
+In-Reply-To: <CAOT3mi+4RSMhPhXP5KwuzE1C9eGorJXp=N=NnsxahxbWeS7Cvg@mail.gmail.com>
 References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
-	<CA+2YH7t7+XWaaf549x7JOkEpksAH6gTsZVdq=7qAZ8CYxmnmOg@mail.gmail.com>
-	<50767E49.7030104@ti.com>
-Date: Thu, 11 Oct 2012 12:40:01 +0200
-X-Google-Sender-Auth: zyse5fUqeP_xlvn9HfN7HhSxjH0
-Message-ID: <CA+2YH7tk2hAB32YXHqbf4ddmXz57QOyytG9wjUk+W1s-Ge3TSQ@mail.gmail.com>
+	<1349912433-21880-2-git-send-email-ebutera@users.berlios.de>
+	<CAOT3mi+4RSMhPhXP5KwuzE1C9eGorJXp=N=NnsxahxbWeS7Cvg@mail.gmail.com>
+Date: Thu, 11 Oct 2012 12:43:15 +0200
+X-Google-Sender-Auth: DrQp4-5YIYFcQu0ZTGu1Jz1pGdk
+Message-ID: <CA+2YH7taGAPeNSNWYSWVG+bc_RULorDWtcFViNocDSBMtMyszg@mail.gmail.com>
 From: Enrico <ebutera@users.berlios.de>
-To: =?ISO-8859-1?Q?Herv=E9_Fache?= <h-fache@ti.com>
+To: Nicolas Dechesne <ndec13@gmail.com>
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 1/6] linux-omap4: update to ti-ubuntu-3.4-1487.6
+Subject: Re: [PATCH 2/6] libdrm: enable omap experimental api support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,30 +43,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Oct 2012 10:40:02 -0000
+X-List-Received-Date: Thu, 11 Oct 2012 10:43:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 11, 2012 at 10:07 AM, Herv=E9 Fache <h-fache@ti.com> wrote:
-> Ciao Enrico,
+On Thu, Oct 11, 2012 at 10:07 AM, Nicolas Dechesne <ndec13@gmail.com> wrote:
+> On Thu, Oct 11, 2012 at 1:40 AM, Enrico Butera <ebutera@users.berlios.de> wrote:
+>> +COMPATIBLE_MACHINE = "pandaboard"
 >
-> Your patches look good so far! I shall share my tree in a bit so we can
-> help each-other.
-> Note that the configuration we use is derived from Ubuntu and is in
-> debian.ti-omap4/config/config.common.ubuntu. It creates zillions of
-> modules (> 2000), so we probably want to reduce it though, but some
-> options will be necessary for RPMsg and PM.
+> i am not familiar too much with all the features of bitbake... but it
+> seems that 'omap4' should be better for the compatibility. our current
+> position is to request all OMAP4 boards/customers to use libdrm with
+> OMAP experiemental support, that the only config we (TI) actually
+> support.
+>
+> at some point, I would be interested to see libdrm-omap +
+> xf-video-omap being used on omap3 too.. but that's outside the scope
+> of *this* patch!
+>
+> and if you want to be proactive, you can add "omap4,omap5", as that's
+> what we support on omap5 too.
 
-Salut Herv=E8,
+Actually i always wandered if omap4 could be used there, but since i
+was testing only on pandaboard i used that.
 
-i used that config just because it was the first one that worked,
-probably i took the wrong/incomplete config.common.ubuntu at first.
-
-I can modify the defconfig i used based on feedback or i can switch to
-another one and tweak it, i am open to feedback/directions.
-
-For example the current defconfig uses the performance scaling
-governor, i'd change it into ondemand.
+I will change it into "omap4|omap5" then (in this recipe and all the
+others but linux-omap4).
 
 Enrico
 
