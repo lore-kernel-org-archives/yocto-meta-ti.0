@@ -1,24 +1,26 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F8BDE0144D
-	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 06:10:18 -0700 (PDT)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id DDC8FF81225; Thu, 11 Oct 2012 07:10:17 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 32117F8121F;
-	Thu, 11 Oct 2012 07:10:16 -0600 (MDT)
-Message-ID: <5076C554.6060200@mlbassoc.com>
-Date: Thu, 11 Oct 2012 07:10:44 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:15.0) Gecko/20120912 Thunderbird/15.0.1
+Return-Path: <ebutera@gmail.com>
+Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
+	[209.85.214.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE641E0144D
+	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 06:47:36 -0700 (PDT)
+Received: by mail-bk0-f48.google.com with SMTP id ik5so939155bkc.35
+	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 06:47:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=Fiw0sg79yRZLCsGjso+P7vJ/kJsmbmDHq9k8n/gfr28=;
+	b=Yp1PKLtvCuZ5m6FH4ZyhNUJXHHAO+h7HGQ6AHBJ0Aa8u6SF1/obPKeMAnXCzqwCKNA
+	aJs/PupbN/E4ux9iJBj0afe7VMDaicl403LniqE35aMbhscK1gOfZ8zBYc50bYb4XlJZ
+	D/HGDi81IOqITbrMqxf7J6IeUiqqey/fH2W0MeBeMDslgsKeb9dhm43bKuhDjt2JsNmd
+	s2NZXBRKL3ppa8npNcgV87v/pxknCaHjicvVbGs7MA6dLTqTMa5B/EsMUBak1iC80hT1
+	Nb/lN5B/kwNGsyvETqJnspfgg06T+iyzNtyoioEYnDXl5eWst3yrZrcfuPQbfmZSgBfW
+	uWBg==
 MIME-Version: 1.0
-To: meta-ti@yoctoproject.org
+Received: by 10.204.148.146 with SMTP id p18mr366979bkv.51.1349963255644; Thu,
+	11 Oct 2012 06:47:35 -0700 (PDT)
+Sender: ebutera@gmail.com
+Received: by 10.204.145.71 with HTTP; Thu, 11 Oct 2012 06:47:35 -0700 (PDT)
+In-Reply-To: <CAOT3miK8prycvqfTNSJXEnTsAtfwxhAk_FaCPX_PACxX0Zu-MQ@mail.gmail.com>
 References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
 	<1349912433-21880-5-git-send-email-ebutera@users.berlios.de>
 	<CAOT3miL8hqQ+AZWwpgAaw1KNpSDdrcik=vHgf0BQksFew9ZzbQ@mail.gmail.com>
@@ -26,7 +28,12 @@ References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
 	<CAOT3miLOLK-3L7Pwcp6WHEbTm_kfcY0xRUSWNCZDQ8yDNYL-wQ@mail.gmail.com>
 	<CA+2YH7s0YnPBXb8VRYW7DbjMxH7ed8u+J=q84-qC9ZzC4ULxow@mail.gmail.com>
 	<CAOT3miK8prycvqfTNSJXEnTsAtfwxhAk_FaCPX_PACxX0Zu-MQ@mail.gmail.com>
-In-Reply-To: <CAOT3miK8prycvqfTNSJXEnTsAtfwxhAk_FaCPX_PACxX0Zu-MQ@mail.gmail.com>
+Date: Thu, 11 Oct 2012 15:47:35 +0200
+X-Google-Sender-Auth: dRzL2573q7-xlMnMM9JF4YINagA
+Message-ID: <CA+2YH7se1CDUB4WnRB9kXa31-WAi2iUgXaxsDHuwCPugXw_AHA@mail.gmail.com>
+From: Enrico <ebutera@users.berlios.de>
+To: Nicolas Dechesne <ndec13@gmail.com>
+Cc: meta-ti@yoctoproject.org
 Subject: Re: [PATCH 5/6] gstreamer: bbappend to use TI-patched versions needed for gst-plugin-ducati
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -40,11 +47,10 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Oct 2012 13:10:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Oct 2012 13:47:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 2012-10-11 07:00, Nicolas Dechesne wrote:
+On Thu, Oct 11, 2012 at 3:00 PM, Nicolas Dechesne <ndec13@gmail.com> wrote:
 > On Thu, Oct 11, 2012 at 2:46 PM, Enrico <ebutera@users.berlios.de> wrote:
 >> I think it depends more on what is the plan with that "forks": if they
 >> are being submitted upstream and the patch list will get smaller over
@@ -60,16 +66,10 @@ On 2012-10-11 07:00, Nicolas Dechesne wrote:
 > away until we move to gst1.0. with gst1.0, gst-ducati will run with
 > vanilla gst release
 
-Does that include the plugins as well?
+That's great, apart from the firmware blob it's now easier than omap3
+gstreamer-ti.
 
-Is there a schedule for this change?
+Let's hear from meta-ti maintainers then.
 
-BTW, Does anyone know when OE-core or meta-openembedded will have support
-for gstreamer-1.0?
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Enrico
 
