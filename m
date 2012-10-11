@@ -1,33 +1,33 @@
 Return-Path: <ndec13@gmail.com>
-Received: from mail-vb0-f48.google.com (mail-vb0-f48.google.com
-	[209.85.212.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A2C88E0027E
-	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 01:17:57 -0700 (PDT)
-Received: by mail-vb0-f48.google.com with SMTP id e21so1711588vbm.35
-	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 01:17:39 -0700 (PDT)
+Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
+	[209.85.220.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 11656E0027E
+	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 01:22:31 -0700 (PDT)
+Received: by mail-vc0-f176.google.com with SMTP id gb22so2157128vcb.35
+	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 01:22:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type;
-	bh=upgPHyC/XhLPRb7+I9bl2UrvKTJYCTd3obLagrd/ls4=;
-	b=ZRATzTWF4aJUsrMcqau5EqmahkRJALMp3zGvrrNF9bMMNmzIsKwxl0YicBe+k9c2wo
-	pewEdJWm4JOYVE+SGlnfrlByu1cAexe+CB9yFMiPn779r/cfhnswr7a9g68LlgrYQyJ6
-	fqalDbXXCcwOtcJW19kZFzeEqCzYHx6cvZPgwZdgL+FeD5jv2DRYO1sIGZcZtx9EtIyI
-	l3ZPhX4sS0DpqgbcZQ+pAfDgJVvWGp7mcqjbLrGaI1cknuVbfNVZd1zGRcC7i2aOoYOG
-	rvhJl1fdypJLIqtCyl9XBHIHSWh8JwV1aHXAYmkuAM4XgRQRjPIpO8NQ5qwXORz8kABg
-	Iq4Q==
-Received: by 10.52.100.5 with SMTP id eu5mr50305vdb.34.1349943458849; Thu, 11
-	Oct 2012 01:17:38 -0700 (PDT)
+	bh=i8WT3QpLb5gQ1BI1MCrOSsffSOKdxVK1y0gM1ADCLa0=;
+	b=Qxzxsc/sq9FcjrnlRgspJuOpaAH8jIDO/k1iI+aV4R1VhHP5bhZxpE90HNEk24NHlg
+	xVfiCjN6RGYtAphcULctIfHjSX7UDm+nZaTwGcY+avMbX1cdS+2jLpJ4IZTwyszWZ5yj
+	1E/sDbzCMrX8SEbCqdBQ+ajdNVh/zmCdrIKWJykD0XcNha7WTkAySvaDY4/tBUNZA/47
+	eYj8gpEmn4jnDALvg4VVcLm8ke8daksTYOxz2sSalA1eRf7jCON4quMUBAF7xAc0+Miu
+	IQAfc7YIEIwGzcrkvoalE5uO4ZZHGzugYjN7tdWIHEIWQeYNSNbV3rq24v3bVgby15Ru
+	Uzbg==
+Received: by 10.220.119.196 with SMTP id a4mr67064vcr.19.1349943751468; Thu,
+	11 Oct 2012 01:22:31 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.58.80.71 with HTTP; Thu, 11 Oct 2012 01:17:18 -0700 (PDT)
-In-Reply-To: <1349912433-21880-4-git-send-email-ebutera@users.berlios.de>
+Received: by 10.58.80.71 with HTTP; Thu, 11 Oct 2012 01:22:11 -0700 (PDT)
+In-Reply-To: <1349912433-21880-5-git-send-email-ebutera@users.berlios.de>
 References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
-	<1349912433-21880-4-git-send-email-ebutera@users.berlios.de>
+	<1349912433-21880-5-git-send-email-ebutera@users.berlios.de>
 From: Nicolas Dechesne <ndec13@gmail.com>
-Date: Thu, 11 Oct 2012 10:17:18 +0200
-Message-ID: <CAOT3miJo3tMK8nAc0x3o=cFBOuoMrUjvSYR61LbH9oGDsa2fvg@mail.gmail.com>
+Date: Thu, 11 Oct 2012 10:22:11 +0200
+Message-ID: <CAOT3miL8hqQ+AZWwpgAaw1KNpSDdrcik=vHgf0BQksFew9ZzbQ@mail.gmail.com>
 To: Enrico Butera <ebutera@users.berlios.de>
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 4/6] libdce: add version 1.6.5.3
+Subject: Re: [PATCH 5/6] gstreamer: bbappend to use TI-patched versions needed for gst-plugin-ducati
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,93 +40,93 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Oct 2012 08:17:57 -0000
+X-List-Received-Date: Thu, 11 Oct 2012 08:22:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
 On Thu, Oct 11, 2012 at 1:40 AM, Enrico Butera <ebutera@users.berlios.de> wrote:
+> Note: pvrvideosink is disabled because it needs pvr driver.
+>
 > Signed-off-by: Enrico Butera <ebutera@users.berlios.de>
 > ---
->  recipes-ti/dce/libdce.inc        |   14 ++++++++++++++
->  recipes-ti/dce/libdce_1.6.5.3.bb |   12 ++++++++++++
->  2 files changed, 26 insertions(+)
->  create mode 100644 recipes-ti/dce/libdce.inc
->  create mode 100644 recipes-ti/dce/libdce_1.6.5.3.bb
+>  .../gstreamer/gst-plugins-bad_0.10.23.bbappend     |   17 +++++++++++++++++
+>  .../gstreamer/gst-plugins-base_0.10.36.bbappend    |   16 ++++++++++++++++
+>  .../gstreamer/gstreamer_0.10.36.bbappend           |   13 +++++++++++++
+>  3 files changed, 46 insertions(+)
+>  create mode 100644 recipes-multimedia/gstreamer/gst-plugins-bad_0.10.23.bbappend
+>  create mode 100644 recipes-multimedia/gstreamer/gst-plugins-base_0.10.36.bbappend
+>  create mode 100644 recipes-multimedia/gstreamer/gstreamer_0.10.36.bbappend
 >
-> diff --git a/recipes-ti/dce/libdce.inc b/recipes-ti/dce/libdce.inc
+> diff --git a/recipes-multimedia/gstreamer/gst-plugins-bad_0.10.23.bbappend b/recipes-multimedia/gstreamer/gst-plugins-bad_0.10.23.bbappend
 > new file mode 100644
-> index 0000000..1caa337
+> index 0000000..06f62f9
 > --- /dev/null
-> +++ b/recipes-ti/dce/libdce.inc
-> @@ -0,0 +1,14 @@
-> +DESCRIPTION = "TI Ducati IVA-HD hardware codec acceleration API"
-> +HOMEPAGE = "http://gitorious.org/ubuntu-omap/dce"
-
-our real 'upstream' tree for libdce is here:
-http://gitorious.org/gstreamer-omap/libdce/
-
-the one you are using is our 'ubuntu package' tree where the
-'upstream' is merged along with debian/ubuntu meta data (./debian
-folder).
-
-sometimes we maintain some patches in ubuntu tree in debian/patches,
-but for libdce since we are also the real upstream, we tend to push
-all patches in upstream.
-
-so you should use the upstream tree instead, branch master. in fact
-the 'upstream' branch in the tree you use is the same as the 'master'
-branch of the upstream tree ;-)
-
-libdce tree contains both the linux side lib, and the ducati side DCE
-code for now (which can't be rebuild completely for now, as we aren't
-releasing all the bits/pieces for ducati side).
-
-we have been discussing about spliting this tree into 2 for better
-clarity, so that might happen at some point..
-
-
-> +SECTION = "multimedia"
-> +LICENSE = "TI"
+> +++ b/recipes-multimedia/gstreamer/gst-plugins-bad_0.10.23.bbappend
+> @@ -0,0 +1,17 @@
 > +
 > +COMPATIBLE_MACHINE = "pandaboard"
 
-s/pandaboard/omap4/ as on the other patch.
+s/pandaboard/omap4/
 
 > +
-> +require ../includes/ti-paths.inc
-> +require ../includes/ti-staging.inc
-
-what is this for?
-
+> +# 2012/09/26: pvrvideosink: Limit size to 1080p as it is a hardware limitation
+> +SRCREV = "3eb68bf5bcd79d490e35d29f262a0a9d84da36ff"
 > +
-> +inherit autotools
+> +SRC_URI = "git://gitorious.org/gstreamer-omap/gst-plugins-bad.git;protocol=git;branch=v0.10.23+ti"
 > +
-> +DEPENDS = "libdrm"
-> +RDEPENDS = "libdrm ti-firmware-ipu-dce"
 
-i would hope that libdrm is not needed in RDEPENDS, as it should be
-handled automagically by shlibdeps.
+i would expect that it might be cleaner to archive the patch series,
+than changing the SCR_URI... that's just my guess.
 
-> diff --git a/recipes-ti/dce/libdce_1.6.5.3.bb b/recipes-ti/dce/libdce_1.6.5.3.bb
+> +S = "${WORKDIR}/git"
+> +
+> +# TODO: add pvr drivers to enable the pvr plugin
+> +EXTRA_OECONF += " --disable-pvr"
+> +
+> +do_configure_prepend() {
+> +       git submodule init && git submodule update
+> +       autopoint
+> +}
+> diff --git a/recipes-multimedia/gstreamer/gst-plugins-base_0.10.36.bbappend b/recipes-multimedia/gstreamer/gst-plugins-base_0.10.36.bbappend
 > new file mode 100644
-> index 0000000..ab721ca
+> index 0000000..f8b5742
 > --- /dev/null
-> +++ b/recipes-ti/dce/libdce_1.6.5.3.bb
-> @@ -0,0 +1,12 @@
-> +require libdce.inc
+> +++ b/recipes-multimedia/gstreamer/gst-plugins-base_0.10.36.bbappend
+> @@ -0,0 +1,16 @@
 > +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=483f94bdaf5d31cd94aa2317f9ad2684"
+> +COMPATIBLE_MACHINE = "pandaboard"
 > +
-> +PV = "1.6.5.3+gitr${SRCPV}"
+> +# 2012/09/20: typefind: give less weight to H.263 streams when few blocks are found
+> +SRCREV = "fad32193a79b394c8e7e630b0aa739462a424fa4"
 > +
-> +# 2012/09/19: Merge remote-tracking branch 'remotes/ti/master' into upstream
-> +SRCREV = "c0cf50d4dece4b8d3606f7a1e065958941b4a672"
-> +
-> +SRC_URI = "git://gitorious.org/ubuntu-omap/dce.git;protocol=git"
-
-please use the upstream tree.
-
+> +SRC_URI = "git://gitorious.org/gstreamer-omap/gst-plugins-base.git;protocol=git;branch=v0.10.36+ti \
+> +           file://gst-plugins-base-tremor.patch \
+> +           file://configure.ac-fix-subparse-plugin.patch"
 > +
 > +S = "${WORKDIR}/git"
+> +
+> +do_configure_prepend() {
+> +       git submodule init && git submodule update
+> +       autopoint
+> +}
+> diff --git a/recipes-multimedia/gstreamer/gstreamer_0.10.36.bbappend b/recipes-multimedia/gstreamer/gstreamer_0.10.36.bbappend
+> new file mode 100644
+> index 0000000..aba1664
+> --- /dev/null
+> +++ b/recipes-multimedia/gstreamer/gstreamer_0.10.36.bbappend
+> @@ -0,0 +1,13 @@
+> +
+> +COMPATIBLE_MACHINE = "pandaboard"
+> +
+> +SRCREV = "2096b1022ad513f90639aa7a04445a2da8bc5363"
+> +
+> +SRC_URI = "git://gitorious.org/gstreamer-omap/gstreamer.git;protocol=git;branch=v0.10.36+ti"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +do_configure_prepend() {
+> +       git submodule init && git submodule update
+> +       autopoint
+> +}
 > --
 > 1.7.9.5
 >
