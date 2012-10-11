@@ -1,27 +1,37 @@
-Return-Path: <h-fache@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 55E63E0027E
-	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 01:26:02 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9B8PvEk005326;
-	Thu, 11 Oct 2012 03:25:57 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9B8PvML010143;
-	Thu, 11 Oct 2012 03:25:57 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
-	Thu, 11 Oct 2012 03:25:57 -0500
-Received: from [137.167.109.3] (unb0919861.emea.dhcp.ti.com [137.167.109.3])
-	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9B8PuYj006280;
-	Thu, 11 Oct 2012 03:25:56 -0500
-Message-ID: <50768291.8030106@ti.com>
-Date: Thu, 11 Oct 2012 10:25:53 +0200
-From: =?ISO-8859-1?Q?Herv=E9_Fache?= <h-fache@ti.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:15.0) Gecko/20121003 Thunderbird/15.0.1
+Return-Path: <ebutera@gmail.com>
+Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
+	[209.85.220.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0467FE00292
+	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 03:40:01 -0700 (PDT)
+Received: by mail-vc0-f176.google.com with SMTP id gb22so2285960vcb.35
+	for <meta-ti@yoctoproject.org>; Thu, 11 Oct 2012 03:40:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=1VS0P46cWdMdT59pCjr9/lEfMN7fP7qvT6u1jnRngoE=;
+	b=VkbFHtpj3TUGbAzpiRb8ugJENKu3FP2Dng7frcIMuzlfeAc4TOFS816hCQabJO3kiK
+	df+OhdBYiMihbiEk0bWtM6P2uBhk2eAbG4AoH1+hH2XXlCiZRuwFs3rFrdJpKna2PcGl
+	dgNFMZPpRfMxqw0Z/4kRPFeADws2hME709AtswmEu6SNQtjn+tMZdDNGdFNfrhUEg7Ok
+	drqBNO8b8aS2X8gOPF3Ph9Z/PBLqEvPkZFnhiWZHBlUGypSxCfxV/sPWByy9FYFSCGnB
+	PCqntfNS5Evw6TBx1Dx/U+VJdx7H3ezVPUoDAf5/+zkwP14Ea8hqPskdLlMwpuL1jJ53
+	/0FQ==
 MIME-Version: 1.0
-To: <meta-ti@yoctoproject.org>, Enrico Butera <ebutera@users.berlios.de>
-Subject: Personal meta-ti tree for info
+Received: by 10.52.88.15 with SMTP id bc15mr176438vdb.102.1349952001332; Thu,
+	11 Oct 2012 03:40:01 -0700 (PDT)
+Sender: ebutera@gmail.com
+Received: by 10.220.226.196 with HTTP; Thu, 11 Oct 2012 03:40:01 -0700 (PDT)
+In-Reply-To: <50767E49.7030104@ti.com>
+References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
+	<CA+2YH7t7+XWaaf549x7JOkEpksAH6gTsZVdq=7qAZ8CYxmnmOg@mail.gmail.com>
+	<50767E49.7030104@ti.com>
+Date: Thu, 11 Oct 2012 12:40:01 +0200
+X-Google-Sender-Auth: zyse5fUqeP_xlvn9HfN7HhSxjH0
+Message-ID: <CA+2YH7tk2hAB32YXHqbf4ddmXz57QOyytG9wjUk+W1s-Ge3TSQ@mail.gmail.com>
+From: Enrico <ebutera@users.berlios.de>
+To: =?ISO-8859-1?Q?Herv=E9_Fache?= <h-fache@ti.com>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 1/6] linux-omap4: update to ti-ubuntu-3.4-1487.6
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,67 +44,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Oct 2012 08:26:02 -0000
-Content-Type: multipart/alternative;
-	boundary="------------030606070100050500030602"
+X-List-Received-Date: Thu, 11 Oct 2012 10:40:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
---------------030606070100050500030602
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 8bit
+On Thu, Oct 11, 2012 at 10:07 AM, Herv=E9 Fache <h-fache@ti.com> wrote:
+> Ciao Enrico,
+>
+> Your patches look good so far! I shall share my tree in a bit so we can
+> help each-other.
+> Note that the configuration we use is derived from Ubuntu and is in
+> debian.ti-omap4/config/config.common.ubuntu. It creates zillions of
+> modules (> 2000), so we probably want to reduce it though, but some
+> options will be necessary for RPMsg and PM.
 
-Hi Enrico, list,
+Salut Herv=E8,
 
-I have posted my tree FYI here:
-https://github.com/rvfh/meta-ti/commits/master
+i used that config just because it was the first one that worked,
+probably i took the wrong/incomplete config.common.ubuntu at first.
 
-There are seven patches in there, some similar to Enrico's patches.
-There are also the following patches which may or may not be of interest:
-* xorg-driver: add xf86-video-omap recipes, already explained by Nicolas
-in a different thread
-* pandaboad: add xf86-video-omap by default in XSERVER config, goes with
-the above
-* Xorg: new config, goes with the above
-* xserver-xorg: update to 1.12.4, this was to get the rotation working,
-but it is also possible to get the patches for 1.11.x
-* domx: add recipe for 2.2, this is useless here as the corresponding
-firmware is not available - and it's not tested yet!
+I can modify the defconfig i used based on feedback or i can switch to
+another one and tweak it, i am open to feedback/directions.
 
-Regards,
-Hervé
+For example the current defconfig uses the performance scaling
+governor, i'd change it into ondemand.
 
---------------030606070100050500030602
-Content-Type: text/html; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+Enrico
 
-<html>
-  <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-  </head>
-  <body bgcolor="#FFFFFF" text="#000000">
-    Hi Enrico, list,<br>
-    <br>
-    I have posted my tree FYI here:
-    <meta http-equiv="content-type" content="text/html;
-      charset=ISO-8859-1">
-    <a href="https://github.com/rvfh/meta-ti/commits/master">https://github.com/rvfh/meta-ti/commits/master</a><br>
-    <br>
-    There are seven patches in there, some similar to Enrico's patches.
-    There are also the following patches which may or may not be of
-    interest:<br>
-    * xorg-driver: add xf86-video-omap recipes, already explained by
-    Nicolas in a different thread<br>
-    * pandaboad: add xf86-video-omap by default in XSERVER config, goes
-    with the above<br>
-    * Xorg: new config, goes with the above<br>
-    * xserver-xorg: update to 1.12.4, this was to get the rotation
-    working, but it is also possible to get the patches for 1.11.x<br>
-    * domx: add recipe for 2.2, this is useless here as the
-    corresponding firmware is not available - and it's not tested yet!<br>
-    <br>
-    Regards,<br>
-    Herv&eacute;<br>
-  </body>
-</html>
-
---------------030606070100050500030602--
