@@ -1,37 +1,36 @@
-Return-Path: <tf+lists.yocto@r-finger.com>
-Received: from r-finger.com (r-finger.com [178.79.160.5])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1E886E01467
-	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 00:37:04 -0700 (PDT)
-Received: from [192.168.0.2] (host81-153-82-212.range81-153.btcentralplus.com
-	[81.153.82.212]) (using TLSv1 with cipher AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by r-finger.com (Postfix) with ESMTPSA id 7C28D99A4
-	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 08:36:56 +0100 (BST)
-Message-ID: <5077C897.6000800@r-finger.com>
-Date: Fri, 12 Oct 2012 08:36:55 +0100
-From: Tomas Frydrych <tf+lists.yocto@r-finger.com>
+Return-Path: <ml@communistcode.co.uk>
+Received: from eumx.net (eumx.net [91.82.101.43])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 30703E01468
+	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 03:23:00 -0700 (PDT)
+Received: from localhost ([127.0.0.1]:56078 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1TMcOD-0004SN-3f
+	for meta-ti@yoctoproject.org; Fri, 12 Oct 2012 10:22:45 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
+	:date:from:reply-to:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding; s=default;
+	bh=nxuKS6PLv/0hPKkZbYSQdYkda5o=; b=PYfsxWyeohy79gfBACPWHZAfFqzb
+	OZbQx7aBx/hTdeavs2R0LDEbiCgkmdmtTYp9q54VjchJPk6Wrd9NPWwYzaLdoqt1
+	qmn2frISqNVTAdgsryNSfUJwnygJwjRYUnrCrh1yHDRzO8OAYeNQKekP7/44gnEm
+	Q91vMN4WdQqDqfc=
+Received: from [195.171.99.130] (port=42314 helo=[192.168.0.79])
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1TMcOC-0004SH-V2
+	for meta-ti@yoctoproject.org; Fri, 12 Oct 2012 10:22:45 +0000
+Message-ID: <5077EFE3.7000603@communistcode.co.uk>
+Date: Fri, 12 Oct 2012 11:24:35 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:10.0.5) Gecko/20120624 Icedove/10.0.5
+	rv:15.0) Gecko/20120910 Thunderbird/15.0.1
 MIME-Version: 1.0
-CC: meta-ti@yoctoproject.org
-References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
-	<1349912433-21880-5-git-send-email-ebutera@users.berlios.de>
-	<CAOT3miL8hqQ+AZWwpgAaw1KNpSDdrcik=vHgf0BQksFew9ZzbQ@mail.gmail.com>
-	<CA+2YH7tNDTLGHWr3ASFXRQ_H2L+LyDsMqO8s4pZFRbPA94fXmA@mail.gmail.com>
-	<CAOT3miLOLK-3L7Pwcp6WHEbTm_kfcY0xRUSWNCZDQ8yDNYL-wQ@mail.gmail.com>
-	<CA+2YH7s0YnPBXb8VRYW7DbjMxH7ed8u+J=q84-qC9ZzC4ULxow@mail.gmail.com>
-	<CAOT3miK8prycvqfTNSJXEnTsAtfwxhAk_FaCPX_PACxX0Zu-MQ@mail.gmail.com>
-	<5076C554.6060200@mlbassoc.com>
-	<CAPj87rMrJ4D6fnY4kw5dBkogzqjDCVPiccGzM3TpWCWkN9FzCg@mail.gmail.com>
-	<5076D6CC.5010303@mlbassoc.com>
-	<CAOT3mi+Ad=aB_mc11DUmybMvEcySnGUzs6rDke+-mi2ZbBtxrQ@mail.gmail.com>
-	<50771DC8.3090903@r-finger.com>
-	<CAPj87rM+i=0gEdtKC8XorawO=x5Oth7qHEp5B-JHHe4DPS279Q@mail.gmail.com>
-In-Reply-To: <CAPj87rM+i=0gEdtKC8XorawO=x5Oth7qHEp5B-JHHe4DPS279Q@mail.gmail.com>
-Subject: Re: [PATCH 5/6] gstreamer: bbappend to use TI-patched versions needed for gst-plugin-ducati
+To: meta-ti@yoctoproject.org
+References: <CA+T6QPnq1dZOJ-D+C-FFodCBjxN5AOE_qC3dFj_Vtz86rdk0bg@mail.gmail.com>
+In-Reply-To: <CA+T6QPnq1dZOJ-D+C-FFodCBjxN5AOE_qC3dFj_Vtz86rdk0bg@mail.gmail.com>
+Subject: Re: Introducing meta-beagleboard
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
+Reply-To: ml@communistcode.co.uk
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -41,28 +40,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2012 07:37:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 12 Oct 2012 10:23:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 12/10/12 00:00, Daniel Stone wrote:
->> I don't think there is anything at all gained by supporting
->> simultaneously installing two versions of gstreamer; it makes no real
->> sense on distro level. More so adding a version into a package name
->> creates a world of pain and dependency hell. Would it not be enough to
->> have _0.10 and _1.0 recipes alongside each other, one of which would
->> have DEFAULT_PRIORITY=-1; a distro then can choose an appropriate
->> version as it wants to?
-> 
-> Well, given that all the client and plugin code both needs to be
-> explicitly ported from 0.10 to 1.0, I don't see the problem tbh.
+On 11/10/12 16:46, Jason Kridner wrote:
+> To help foster fast development, future releases of the Angstrom
+> Distribution that ships with BeagleBoard.org platforms (such as
+> BeagleBone and BeagleBoard-xM) will be built using meta-beagleboard,
+> rather than meta-ti. While this produces the seemingly undesirable
+> effect of providing yet-another-BSP for BeagleBoard.org platforms,
+> collaboration in the mainline kernel and bootloaders that are the key
+> elements for the BSPs has made this possible and multiple goals for
+> the various BSPs has made it desirable.
+>
+> The objectives for meta-beagleboard are:
+> 1) Provide the best possible out-of-box-experience for BeagleBoard.org platforms
+> 2) Enable as much add-on hardware as possible
+> 3) Enable public contributions to extend the experience and hardware support
+> 4) Deliver information to the BeagleBoard.org community regarding the
+> development status
+>
+> The repository will be hosted at:
+> https://github.com/beagleboard/meta-beagleboard
 
-Keep in mind that we are not talking about desktop-like distros aspiring
-to support gazillions of packages of random provenance (because, as you
-well know, Linux is about choice!). We are talking about carefully
-crafted distros for specific HW configurations. IMO it is a poor policy
-to ship a device with two versions of anything on it, it just increases
-QA complexity.
+Great news! Will the kernel in this BSP be attempting to follow mainline 
++ public patches? I'm chomping at the bit for an easy way to build a 
+tested DT kernel with recent patches.
 
-Tomas
+-- 
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
+
 
