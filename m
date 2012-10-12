@@ -1,31 +1,27 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 32463E0027E
-	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 09:37:57 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9CGbuWj013711;
-	Fri, 12 Oct 2012 11:37:56 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9CGbuPW029816;
-	Fri, 12 Oct 2012 11:37:56 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
-	Fri, 12 Oct 2012 11:37:55 -0500
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id q9CGbsWL028740;
-	Fri, 12 Oct 2012 11:37:55 -0500
-Date: Fri, 12 Oct 2012 12:37:54 -0400
+Return-Path: <denis@denix.org>
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03674E0027E
+	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 12:12:04 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [72.66.25.115])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MBS00EXGNZ2ROA1@vms173003.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 12 Oct 2012 14:11:42 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id D914F200DD; Fri,
+	12 Oct 2012 15:11:25 -0400 (EDT)
+Date: Fri, 12 Oct 2012 15:11:25 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <20121012163753.GI26956@edge>
-References: <507836EF.8050506@ti.com> <20121012153140.GG26956@edge>
-	<50783E2F.4060204@ti.com> <20121012161944.GH26956@edge>
-	<507845D9.8040105@mlbassoc.com>
-MIME-Version: 1.0
-In-Reply-To: <507845D9.8040105@mlbassoc.com>
+To: Nicolas Dechesne <ndec13@gmail.com>
+Message-id: <20121012191125.GA32601@denix.org>
+References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
+	<1349912433-21880-2-git-send-email-ebutera@users.berlios.de>
+	<CAOT3mi+4RSMhPhXP5KwuzE1C9eGorJXp=N=NnsxahxbWeS7Cvg@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CAOT3mi+4RSMhPhXP5KwuzE1C9eGorJXp=N=NnsxahxbWeS7Cvg@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: No /sbin/init when deriving m7y own image
+Subject: Re: [PATCH 2/6] libdrm: enable omap experimental api support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,70 +34,81 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2012 16:37:57 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 12 Oct 2012 19:12:05 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Fri, Oct 12, 2012 at 10:31:21AM -0600, Gary Thomas wrote:
-> On 2012-10-12 10:19, Denys Dmytriyenko wrote:
-> >On Fri, Oct 12, 2012 at 05:58:39PM +0200, Herv? Fache wrote:
-> >>On 10/12/2012 05:31 PM, Denys Dmytriyenko wrote:
-> >>>On Fri, Oct 12, 2012 at 05:27:43PM +0200, Herv? Fache wrote:
-> >>>>Hi guys,
-> >>>>
-> >>>>I am new to Poky and have created the following recipe:
-> >>>>     require recipes-graphics/images/core-image-x11.bb
-> >>>>     IMAGE_INSTALL += "omapdrmtest"
-> >>>Can you try adding to CORE_IMAGE_EXTRA_INSTALL instead of IMAGE_INSTALL?
-> >>>
-> >>Thanks a lot, that did it!
-> >
-> >I'm glad it worked for you.
-> >
-> >But I'm still baffled why IMAGE_INSTALL didn't work. The only 2 reasons I can
-> >see for that are:
+On Thu, Oct 11, 2012 at 10:07:47AM +0200, Nicolas Dechesne wrote:
+> thanks for sending... i have the very same recipe in my local tree ,
+> so it's all good timing!
 > 
-> Most likely case is a missing separator.  Since += adds no space, omapdrmtest
-> is being glued to whatever is already in that list, making the last two
-> packages go missing.  I'll bet that this also works:
->   IMAGE_INSTALL += " omapdrmtest "
 > 
-> I always add those spaces since they are free :-)
+> On Thu, Oct 11, 2012 at 1:40 AM, Enrico Butera <ebutera@users.berlios.de> wrote:
+> > This is needed to build gst-plugin-ducati.
+> >
+> > Signed-off-by: Enrico Butera <ebutera@users.berlios.de>
+> > ---
+> >  recipes-graphics/drm/libdrm_2.4.39.bbappend |    3 +++
+> >  1 file changed, 3 insertions(+)
+> >  create mode 100644 recipes-graphics/drm/libdrm_2.4.39.bbappend
+> >
+> > diff --git a/recipes-graphics/drm/libdrm_2.4.39.bbappend b/recipes-graphics/drm/libdrm_2.4.39.bbappend
+> > new file mode 100644
+> > index 0000000..5842556
+> > --- /dev/null
+> > +++ b/recipes-graphics/drm/libdrm_2.4.39.bbappend
+> > @@ -0,0 +1,3 @@
+> > +COMPATIBLE_MACHINE = "pandaboard"
+> 
+> i am not familiar too much with all the features of bitbake... but it
+> seems that 'omap4' should be better for the compatibility. our current
+> position is to request all OMAP4 boards/customers to use libdrm with
+> OMAP experiemental support, that the only config we (TI) actually
+> support.
+> 
+> at some point, I would be interested to see libdrm-omap +
+> xf-video-omap being used on omap3 too.. but that's outside the scope
+> of *this* patch!
+> 
+> and if you want to be proactive, you can add "omap4,omap5", as that's
+> what we support on omap5 too.
+> 
+> having 'omap4' means that anyone that is making an omap4 board/machine
+> will benefit from your recipe.
 
-That's not exactly correct. You are mistaking += and =+ with .= and =. :)
+Nicolas,
 
-+= and =+ append and prepend with spaces, while .= and =. append and prepend 
-without spaces:
+Your understanding is correct. As a matter of fact, we pushed the support for 
+SOC_FAMILY used in overrides and COMPATIBLE_MACHINE into OE/Bitbake some time 
+ago, so you can now target the range of platforms based on the same SoC.
 
-http://docs.openembedded.org/bitbake/html/ch02.html#id397587
+You can do things like:
 
-Plus, there's plenty of space already in IMAGE_INSTALL, as it is handled as a 
-multi-line assignment with plenty of indentation inside core-image class...
+VAR_omap4 = "VAL"
+
+As well as:
+
+COMPATIBLE_MACHINE = "omap4"
+
+Please note, the latter one takes regular expression, so you can do 
+"omap4|omap5" or even a more weirder "omap[45]". Come to think of it, if 
+there's a recipe that is common to all OMAPs, you can do "omap?" :)
 
 -- 
 Denys
 
 
-> >1. If you made a typo and used '=' instead of '+=', which would re-assign
-> >IMAGE_INSTALL, instead of appending to it, losing its current value.
+> > +EXTRA_OECONF += "--enable-omap-experimental-api"
+> > --
+> > 1.7.9.5
 > >
-> >2. Or if you tried to append to IMAGE_INSTALL before loading the base image
-> >recipe with 'require' (effectively, swapping the 2 lines of your recipe) - in
-> >that case you'd append to an empty IMAGE_INSTALL first and inside the
-> >core-image class it uses conditional assignment to pre-set that variable with
-> >system defaults. But since you already assigned to it early on, it won't be
-> >populated with system defaults...
-> >
-> >Other than that, the example you showed above seems to work for me here...
-> >
-> 
-> -- 
-> ------------------------------------------------------------
-> Gary Thomas                 |  Consulting for the
-> MLB Associates              |    Embedded world
-> ------------------------------------------------------------
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
 > _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
 > https://lists.yoctoproject.org/listinfo/meta-ti
+> 
 
