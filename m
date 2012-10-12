@@ -1,34 +1,29 @@
-Return-Path: <ebutera@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0FB33E014A2
-	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 12:26:28 -0700 (PDT)
-Received: by mail-wi0-f182.google.com with SMTP id hm2so121651wib.11
-	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 12:26:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=RGD42iFF4cqAyot5DJGh4skatgaEK1vFdc/zzjftVpg=;
-	b=agaPJSVEMc6g6TZ+dwPeUYv32kYLE72LgT0Ddb90Q/4BCVyhV4EqZb1spgevQ7+1mF
-	oSMe71ke9UQwB5Fl1ml4W662RVBhshFMcprqy3QUSEnXxNrdiB9EztZzR5JmJ2F0soJe
-	CNMPMOLIfleF9Qoy01AZn0N/w8IkWqyN7mgMs2Z1wHlPaKLgi2NiC3dXAb9IcRZfp/PX
-	lrxcGbHEFzGioOWH21Dxp0X9aGhv3IGfWzg1pz7n/UYVHpPCBO6wQ1L5ls5UtMoRyzVk
-	IZ9z45sEW4mBN+lYrDWEauDlXLqmFAkXFieZxBEFmjp+ydi7trp6ZRLCt7U6dgsCexWH
-	P0Vw==
-Received: by 10.216.135.85 with SMTP id t63mr3097799wei.93.1350069988774;
-	Fri, 12 Oct 2012 12:26:28 -0700 (PDT)
-Received: from localhost.localdomain ([188.11.142.65])
-	by mx.google.com with ESMTPS id dm3sm5296065wib.3.2012.10.12.12.26.27
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 12 Oct 2012 12:26:28 -0700 (PDT)
-Sender: Enrico Butera <ebutera@gmail.com>
-From: Enrico Butera <ebutera@users.berlios.de>
-To: meta-ti@yoctoproject.org
-Date: Fri, 12 Oct 2012 21:26:12 +0200
-Message-Id: <1350069972-21318-6-git-send-email-ebutera@users.berlios.de>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1350069972-21318-1-git-send-email-ebutera@users.berlios.de>
-References: <1350069972-21318-1-git-send-email-ebutera@users.berlios.de>
-Subject: [PATCH v2 6/6] gst-plugin-ducati: add latest git version
+Return-Path: <denis@denix.org>
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3619AE0027E
+	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 12:30:41 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [72.66.25.115])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MBS0068VOUSOI10@vms173003.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 12 Oct 2012 14:30:29 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id BF9EC200DD; Fri,
+	12 Oct 2012 15:30:28 -0400 (EDT)
+Date: Fri, 12 Oct 2012 15:30:28 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Nicolas Dechesne <ndec13@gmail.com>
+Message-id: <20121012193028.GC32601@denix.org>
+References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
+	<1349912433-21880-4-git-send-email-ebutera@users.berlios.de>
+	<CAOT3miJo3tMK8nAc0x3o=cFBOuoMrUjvSYR61LbH9oGDsa2fvg@mail.gmail.com>
+	<CA+2YH7unzpCXz9+V2WZUEZeE-9r_yaft220BRyXkSc9eNesRCw@mail.gmail.com>
+	<CAOT3miLA-+gXGNTtL2iJAtvs61b_jWreaVBTTyTa-BRGDiviXA@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CAOT3miLA-+gXGNTtL2iJAtvs61b_jWreaVBTTyTa-BRGDiviXA@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 4/6] libdce: add version 1.6.5.3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,55 +36,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2012 19:26:29 -0000
+X-List-Received-Date: Fri, 12 Oct 2012 19:30:41 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Tested h264 and mpeg4 1080p encoding on pandaboard ES.
+On Thu, Oct 11, 2012 at 02:17:47PM +0200, Nicolas Dechesne wrote:
+> On Thu, Oct 11, 2012 at 12:53 PM, Enrico <ebutera@users.berlios.de> wrote:
+> >>> +RDEPENDS = "libdrm ti-firmware-ipu-dce"
+> >>
+> >> i would hope that libdrm is not needed in RDEPENDS, as it should be
+> >> handled automagically by shlibdeps.
+> >
+> > I really don't know, if you are sure about that i will just remove it.
+> 
+> well, i am slowly re-learning oe stuff as i have been out of if for a
+> couple of years...
 
-Note: the bootloader must be configured WITHOUT memory holes
-(mem=... mem=...), just use all 1GB.
+Hey, Nicolas, were you working with Mike Turquette back than on the Poky 
+integration for TI/WBU parts? I remember talking to him on few occasions, 
+as I was working on OpenEmbedded and Arago, trying to convince him to join 
+forces and align on OE, since Poky went on hiatus around that time... :)
 
-Signed-off-by: Enrico Butera <ebutera@users.berlios.de>
----
- .../gstreamer/gst-plugin-ducati_git.bb             |   29 ++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 recipes-multimedia/gstreamer/gst-plugin-ducati_git.bb
-
-diff --git a/recipes-multimedia/gstreamer/gst-plugin-ducati_git.bb b/recipes-multimedia/gstreamer/gst-plugin-ducati_git.bb
-new file mode 100644
-index 0000000..6d91be3
---- /dev/null
-+++ b/recipes-multimedia/gstreamer/gst-plugin-ducati_git.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "GStreamer plugins for omap4 using libdce"
-+HOMEPAGE = "http://gitorious.org/gstreamer-omap/gst-ducati"
-+SECTION = "multimedia"
-+LICENSE = "TI"
-+
-+COMPATIBLE_MACHINE = "omap4"
-+
-+require recipes-multimedia/gstreamer/gst-plugins.inc
-+
-+PR = "r1"
-+PV = "gitr${SRCPV}"
-+
-+# 2012/09/25: ducatividenc: log extended error info, and use the correct one from _process
-+SRCREV = "9f29c17f8dcbd8cf59c8ad3b00d87534b6fc4579"
-+
-+SRC_URI = "git://gitorious.org/gstreamer-omap/gst-ducati.git;protocol=git"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-+
-+S = "${WORKDIR}/git"
-+
-+DEPENDS = "gstreamer gst-plugins-base gst-plugins-bad libdrm libdce"
-+
-+inherit autotools gettext pkgconfig
-+
-+do_configure_prepend() {
-+       git submodule init && git submodule update
-+       autopoint
-+}
 -- 
-1.7.9.5
-
+Denys
 
