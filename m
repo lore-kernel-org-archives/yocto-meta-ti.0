@@ -1,29 +1,33 @@
-Return-Path: <denis@denix.org>
-Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
-	[206.46.173.3])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3619AE0027E
-	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 12:30:41 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [72.66.25.115])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MBS0068VOUSOI10@vms173003.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 12 Oct 2012 14:30:29 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id BF9EC200DD; Fri,
-	12 Oct 2012 15:30:28 -0400 (EDT)
-Date: Fri, 12 Oct 2012 15:30:28 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Nicolas Dechesne <ndec13@gmail.com>
-Message-id: <20121012193028.GC32601@denix.org>
-References: <1349912433-21880-1-git-send-email-ebutera@users.berlios.de>
-	<1349912433-21880-4-git-send-email-ebutera@users.berlios.de>
-	<CAOT3miJo3tMK8nAc0x3o=cFBOuoMrUjvSYR61LbH9oGDsa2fvg@mail.gmail.com>
-	<CA+2YH7unzpCXz9+V2WZUEZeE-9r_yaft220BRyXkSc9eNesRCw@mail.gmail.com>
-	<CAOT3miLA-+gXGNTtL2iJAtvs61b_jWreaVBTTyTa-BRGDiviXA@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAOT3miLA-+gXGNTtL2iJAtvs61b_jWreaVBTTyTa-BRGDiviXA@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Return-Path: <ndec13@gmail.com>
+Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
+	[209.85.220.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56572E0027E
+	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 13:39:34 -0700 (PDT)
+Received: by mail-vc0-f176.google.com with SMTP id gb22so4714570vcb.35
+	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 13:39:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=cYHCT6i4BQmDqNvhrM+uGYRgRScHI1aD7pZV1PhHN7E=;
+	b=ny4Bqv3kcI05BHT5rOi53pEczIbESqsch3ktgaaDs8Ierd0lZm1UrIxVzkD1ZBGZFA
+	LnKt3xMNOYASX1WQ31KJRce9hx3CBGxwV6o0qkveSMixpZ0DEwXvM84mZhssYsQPX5Qf
+	3m1Ad5rzxUMT8OOhw+ohc8b9lfMN2oouaRmzd4OJaqb1tvJTY/ilO4wTEZQKx7DUQqrU
+	VafU0h1xFSnTJ9wXdkOMG3Wi2H3lVbLtOQOc+l2YqjzXZ5c08U6aPpcD5CsX9p+5ssFq
+	mx1RjLNX5iVMk79K0lg48NGpegtvHH3kF455ZkKf+AWudheVt6VFHJsi3qghFFTMC/op
+	RcBg==
+Received: by 10.52.173.34 with SMTP id bh2mr2561480vdc.73.1350074373578; Fri,
+	12 Oct 2012 13:39:33 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.58.80.71 with HTTP; Fri, 12 Oct 2012 13:39:13 -0700 (PDT)
+In-Reply-To: <1350069972-21318-2-git-send-email-ebutera@users.berlios.de>
+References: <1350069972-21318-1-git-send-email-ebutera@users.berlios.de>
+	<1350069972-21318-2-git-send-email-ebutera@users.berlios.de>
+From: Nicolas Dechesne <ndec13@gmail.com>
+Date: Fri, 12 Oct 2012 22:39:13 +0200
+Message-ID: <CAOT3miLJbHQptJs8qnSSydrDd=PctG11jFLVKxCYqbh-LcED=A@mail.gmail.com>
+To: Enrico Butera <ebutera@users.berlios.de>
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 4/6] libdce: add version 1.6.5.3
+Subject: Re: [PATCH v2 2/6] libdrm: enable omap experimental api support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,27 +40,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2012 19:30:41 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 12 Oct 2012 20:39:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Oct 11, 2012 at 02:17:47PM +0200, Nicolas Dechesne wrote:
-> On Thu, Oct 11, 2012 at 12:53 PM, Enrico <ebutera@users.berlios.de> wrote:
-> >>> +RDEPENDS = "libdrm ti-firmware-ipu-dce"
-> >>
-> >> i would hope that libdrm is not needed in RDEPENDS, as it should be
-> >> handled automagically by shlibdeps.
-> >
-> > I really don't know, if you are sure about that i will just remove it.
-> 
-> well, i am slowly re-learning oe stuff as i have been out of if for a
-> couple of years...
+On Fri, Oct 12, 2012 at 9:26 PM, Enrico Butera <ebutera@users.berlios.de> wrote:
+> This is needed to build gst-plugin-ducati.
+>
+> Signed-off-by: Enrico Butera <ebutera@users.berlios.de>
 
-Hey, Nicolas, were you working with Mike Turquette back than on the Poky 
-integration for TI/WBU parts? I remember talking to him on few occasions, 
-as I was working on OpenEmbedded and Arago, trying to convince him to join 
-forces and align on OE, since Poky went on hiatus around that time... :)
+Acked-by: Nicolas Dechesne <n-dechesne@ti.com>
 
--- 
-Denys
+> ---
+>  recipes-graphics/drm/libdrm_2.4.39.bbappend |    3 +++
+>  1 file changed, 3 insertions(+)
+>  create mode 100644 recipes-graphics/drm/libdrm_2.4.39.bbappend
+>
+> diff --git a/recipes-graphics/drm/libdrm_2.4.39.bbappend b/recipes-graphics/drm/libdrm_2.4.39.bbappend
+> new file mode 100644
+> index 0000000..d0c1a77
+> --- /dev/null
+> +++ b/recipes-graphics/drm/libdrm_2.4.39.bbappend
+> @@ -0,0 +1,3 @@
+> +COMPATIBLE_MACHINE = "omap4|omap5"
+> +
+> +EXTRA_OECONF += "--enable-omap-experimental-api"
+> --
+> 1.7.9.5
+>
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
