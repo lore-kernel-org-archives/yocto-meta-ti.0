@@ -1,34 +1,34 @@
 Return-Path: <ebutera@gmail.com>
 Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
 	[209.85.212.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 363A7E0147E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0FB33E014A2
 	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 12:26:28 -0700 (PDT)
 Received: by mail-wi0-f182.google.com with SMTP id hm2so121651wib.11
-	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 12:26:27 -0700 (PDT)
+	for <meta-ti@yoctoproject.org>; Fri, 12 Oct 2012 12:26:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
-	:references; bh=Kjgmr7f0OvWcjXkc4d3jWzEGDTEpXE0dduc/0VeoxHI=;
-	b=xxDCKUywu8pMpWnuNaJeucVbPRZXH4ardTNOx84CC1T3YNJwV6sF3NsRhuCHO8N8md
-	SB/9NGS9wNmL9mp4BJC/qjXbg/1McMmkXpqF0Xid69xW/1QaaA8L2cHBf1QgbOrTnCF1
-	xMZTpE3lfwT94htRKzzlmb+k4u/q+46gOlRcgN3NdjStGGqnpcLSlXG/SDZqESxk4T8l
-	w4WbkPx4HEDqMo8k1lpmyOsZHGVAqzVsWDT9uhC9Yhd3HpSaYWvfsPVClhjg5eHcLQ5n
-	hcNmfSAilBlj2z6wRR5VR8B51Z6bn5dGhuJV5KCzVRvZh6m6O8CccKZOsJMp/RWBRYMN
-	hxxw==
-Received: by 10.180.99.133 with SMTP id eq5mr8096887wib.21.1350069987417;
-	Fri, 12 Oct 2012 12:26:27 -0700 (PDT)
+	:references; bh=RGD42iFF4cqAyot5DJGh4skatgaEK1vFdc/zzjftVpg=;
+	b=agaPJSVEMc6g6TZ+dwPeUYv32kYLE72LgT0Ddb90Q/4BCVyhV4EqZb1spgevQ7+1mF
+	oSMe71ke9UQwB5Fl1ml4W662RVBhshFMcprqy3QUSEnXxNrdiB9EztZzR5JmJ2F0soJe
+	CNMPMOLIfleF9Qoy01AZn0N/w8IkWqyN7mgMs2Z1wHlPaKLgi2NiC3dXAb9IcRZfp/PX
+	lrxcGbHEFzGioOWH21Dxp0X9aGhv3IGfWzg1pz7n/UYVHpPCBO6wQ1L5ls5UtMoRyzVk
+	IZ9z45sEW4mBN+lYrDWEauDlXLqmFAkXFieZxBEFmjp+ydi7trp6ZRLCt7U6dgsCexWH
+	P0Vw==
+Received: by 10.216.135.85 with SMTP id t63mr3097799wei.93.1350069988774;
+	Fri, 12 Oct 2012 12:26:28 -0700 (PDT)
 Received: from localhost.localdomain ([188.11.142.65])
-	by mx.google.com with ESMTPS id dm3sm5296065wib.3.2012.10.12.12.26.26
+	by mx.google.com with ESMTPS id dm3sm5296065wib.3.2012.10.12.12.26.27
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 12 Oct 2012 12:26:26 -0700 (PDT)
+	Fri, 12 Oct 2012 12:26:28 -0700 (PDT)
 Sender: Enrico Butera <ebutera@gmail.com>
 From: Enrico Butera <ebutera@users.berlios.de>
 To: meta-ti@yoctoproject.org
-Date: Fri, 12 Oct 2012 21:26:11 +0200
-Message-Id: <1350069972-21318-5-git-send-email-ebutera@users.berlios.de>
+Date: Fri, 12 Oct 2012 21:26:12 +0200
+Message-Id: <1350069972-21318-6-git-send-email-ebutera@users.berlios.de>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1350069972-21318-1-git-send-email-ebutera@users.berlios.de>
 References: <1350069972-21318-1-git-send-email-ebutera@users.berlios.de>
-Subject: [PATCH v2 5/6] gstreamer: bbappend to use TI-patched versions needed for gst-plugin-ducati
+Subject: [PATCH v2 6/6] gst-plugin-ducati: add latest git version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,79 +41,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Oct 2012 19:26:28 -0000
+X-List-Received-Date: Fri, 12 Oct 2012 19:26:29 -0000
 
-Note: pvrvideosink is disabled because it needs pvr driver.
+Tested h264 and mpeg4 1080p encoding on pandaboard ES.
+
+Note: the bootloader must be configured WITHOUT memory holes
+(mem=... mem=...), just use all 1GB.
 
 Signed-off-by: Enrico Butera <ebutera@users.berlios.de>
 ---
- .../gstreamer/gst-plugins-bad_0.10.23.bbappend     |   17 +++++++++++++++++
- .../gstreamer/gst-plugins-base_0.10.36.bbappend    |   16 ++++++++++++++++
- .../gstreamer/gstreamer_0.10.36.bbappend           |   13 +++++++++++++
- 3 files changed, 46 insertions(+)
- create mode 100644 recipes-multimedia/gstreamer/gst-plugins-bad_0.10.23.bbappend
- create mode 100644 recipes-multimedia/gstreamer/gst-plugins-base_0.10.36.bbappend
- create mode 100644 recipes-multimedia/gstreamer/gstreamer_0.10.36.bbappend
+ .../gstreamer/gst-plugin-ducati_git.bb             |   29 ++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 recipes-multimedia/gstreamer/gst-plugin-ducati_git.bb
 
-diff --git a/recipes-multimedia/gstreamer/gst-plugins-bad_0.10.23.bbappend b/recipes-multimedia/gstreamer/gst-plugins-bad_0.10.23.bbappend
+diff --git a/recipes-multimedia/gstreamer/gst-plugin-ducati_git.bb b/recipes-multimedia/gstreamer/gst-plugin-ducati_git.bb
 new file mode 100644
-index 0000000..21d68de
+index 0000000..6d91be3
 --- /dev/null
-+++ b/recipes-multimedia/gstreamer/gst-plugins-bad_0.10.23.bbappend
-@@ -0,0 +1,17 @@
++++ b/recipes-multimedia/gstreamer/gst-plugin-ducati_git.bb
+@@ -0,0 +1,29 @@
++DESCRIPTION = "GStreamer plugins for omap4 using libdce"
++HOMEPAGE = "http://gitorious.org/gstreamer-omap/gst-ducati"
++SECTION = "multimedia"
++LICENSE = "TI"
 +
 +COMPATIBLE_MACHINE = "omap4"
 +
-+# 2012/09/26: pvrvideosink: Limit size to 1080p as it is a hardware limitation
-+SRCREV = "3eb68bf5bcd79d490e35d29f262a0a9d84da36ff"
++require recipes-multimedia/gstreamer/gst-plugins.inc
 +
-+SRC_URI = "git://gitorious.org/gstreamer-omap/gst-plugins-bad.git;protocol=git;branch=v0.10.23+ti"
++PR = "r1"
++PV = "gitr${SRCPV}"
 +
-+S = "${WORKDIR}/git"
++# 2012/09/25: ducatividenc: log extended error info, and use the correct one from _process
++SRCREV = "9f29c17f8dcbd8cf59c8ad3b00d87534b6fc4579"
 +
-+# TODO: add pvr drivers to enable the pvr plugin
-+EXTRA_OECONF += " --disable-pvr"
++SRC_URI = "git://gitorious.org/gstreamer-omap/gst-ducati.git;protocol=git"
 +
-+do_configure_prepend() {
-+       git submodule init && git submodule update
-+       autopoint
-+}
-diff --git a/recipes-multimedia/gstreamer/gst-plugins-base_0.10.36.bbappend b/recipes-multimedia/gstreamer/gst-plugins-base_0.10.36.bbappend
-new file mode 100644
-index 0000000..f85ded6
---- /dev/null
-+++ b/recipes-multimedia/gstreamer/gst-plugins-base_0.10.36.bbappend
-@@ -0,0 +1,16 @@
-+
-+COMPATIBLE_MACHINE = "omap4"
-+
-+# 2012/09/20: typefind: give less weight to H.263 streams when few blocks are found
-+SRCREV = "fad32193a79b394c8e7e630b0aa739462a424fa4"
-+
-+SRC_URI = "git://gitorious.org/gstreamer-omap/gst-plugins-base.git;protocol=git;branch=v0.10.36+ti \
-+           file://gst-plugins-base-tremor.patch \
-+           file://configure.ac-fix-subparse-plugin.patch"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 +
 +S = "${WORKDIR}/git"
 +
-+do_configure_prepend() {
-+       git submodule init && git submodule update
-+       autopoint
-+}
-diff --git a/recipes-multimedia/gstreamer/gstreamer_0.10.36.bbappend b/recipes-multimedia/gstreamer/gstreamer_0.10.36.bbappend
-new file mode 100644
-index 0000000..8037360
---- /dev/null
-+++ b/recipes-multimedia/gstreamer/gstreamer_0.10.36.bbappend
-@@ -0,0 +1,13 @@
++DEPENDS = "gstreamer gst-plugins-base gst-plugins-bad libdrm libdce"
 +
-+COMPATIBLE_MACHINE = "omap4"
-+
-+SRCREV = "2096b1022ad513f90639aa7a04445a2da8bc5363"
-+
-+SRC_URI = "git://gitorious.org/gstreamer-omap/gstreamer.git;protocol=git;branch=v0.10.36+ti"
-+
-+S = "${WORKDIR}/git"
++inherit autotools gettext pkgconfig
 +
 +do_configure_prepend() {
 +       git submodule init && git submodule update
