@@ -1,34 +1,33 @@
-Return-Path: <h-fache@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4CB7FE002AB
-	for <meta-ti@yoctoproject.org>; Mon, 15 Oct 2012 00:24:34 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9F7OUNa010940
-	for <meta-ti@yoctoproject.org>; Mon, 15 Oct 2012 02:24:30 -0500
-Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9F7OU0t008799
-	for <meta-ti@yoctoproject.org>; Mon, 15 Oct 2012 02:24:30 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
-	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 15 Oct 2012 02:24:30 -0500
-Received: from [137.167.109.3] (unb0919861.emea.dhcp.ti.com [137.167.109.3])
-	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9F7OTVP029648;
-	Mon, 15 Oct 2012 02:24:30 -0500
-Message-ID: <507BBA32.5000206@ti.com>
-Date: Mon, 15 Oct 2012 09:24:34 +0200
-From: =?ISO-8859-1?Q?Herv=E9_Fache?= <h-fache@ti.com>
+Return-Path: <ml@communistcode.co.uk>
+Received: from eumx.net (eumx.net [91.82.101.43])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7A63E013A6
+	for <meta-ti@yoctoproject.org>; Mon, 15 Oct 2012 06:30:47 -0700 (PDT)
+Received: from localhost ([127.0.0.1]:58035 helo=eumx.net)
+	by eumx.net with esmtp (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1TNkkj-0001Hu-Rx
+	for meta-ti@yoctoproject.org; Mon, 15 Oct 2012 13:30:41 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=eumx.net; h=message-id
+	:date:from:reply-to:mime-version:to:subject:content-type
+	:content-transfer-encoding; s=default; bh=ViSKuwak+frUaz8eFISBJL
+	nVEQw=; b=SBSpTaetiWHOofo+udaMhWOW0f9GxdbN/cExBjN+W7diBTylS0PCLg
+	EtUs1ISHRt0nEVYuo4vAJgwyNWL5aGryza7l02dQNu8MDoLE37NxdslwbmAnzUcF
+	+aHoUs8BC2IDORSr6NjtFThE+G3CbbXsIklLGncB6OtYyuqllRDRM=
+Received: from [195.171.99.130] (port=39244 helo=[192.168.0.44])
+	by eumx.net with esmtpa (Exim 4.72)
+	(envelope-from <ml@communistcode.co.uk>) id 1TNkkj-0001Hr-Pl
+	for meta-ti@yoctoproject.org; Mon, 15 Oct 2012 13:30:41 +0000
+Message-ID: <507C1073.3060703@communistcode.co.uk>
+Date: Mon, 15 Oct 2012 14:32:35 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:16.0) Gecko/20121010 Thunderbird/16.0.1
+	rv:16.0) Gecko/20121012 Thunderbird/16.0.1
 MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <507836EF.8050506@ti.com> <20121012153140.GG26956@edge>
-	<50783E2F.4060204@ti.com> <20121012161944.GH26956@edge>
-In-Reply-To: <20121012161944.GH26956@edge>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: No /sbin/init when deriving m7y own image
+To: meta-ti@yoctoproject.org
+Subject: u-boot compile failure
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
+Reply-To: ml@communistcode.co.uk
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -38,43 +37,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Oct 2012 07:24:34 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 15 Oct 2012 13:30:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
+It seems that u-boot is attempting to use GCC includes from my host 
+system here. This surely isn't right is it?
 
-On 10/12/2012 06:19 PM, Denys Dmytriyenko wrote:
-> On Fri, Oct 12, 2012 at 05:58:39PM +0200, Herv? Fache wrote:
->> On 10/12/2012 05:31 PM, Denys Dmytriyenko wrote:
->>> On Fri, Oct 12, 2012 at 05:27:43PM +0200, Herv? Fache wrote:
->>>> Hi guys,
->>>>
->>>> I am new to Poky and have created the following recipe:
->>>>      require recipes-graphics/images/core-image-x11.bb
->>>>      IMAGE_INSTALL += "omapdrmtest"
->>> Can you try adding to CORE_IMAGE_EXTRA_INSTALL instead of IMAGE_INSTALL?
->>>
->> Thanks a lot, that did it!
-> I'm glad it worked for you.
->
-> But I'm still baffled why IMAGE_INSTALL didn't work. The only 2 reasons I can
-> see for that are:
->
-> 1. If you made a typo and used '=' instead of '+=', which would re-assign
-> IMAGE_INSTALL, instead of appending to it, losing its current value.
->
-> 2. Or if you tried to append to IMAGE_INSTALL before loading the base image
-> recipe with 'require' (effectively, swapping the 2 lines of your recipe) - in
-> that case you'd append to an empty IMAGE_INSTALL first and inside the
-> core-image class it uses conditional assignment to pre-set that variable with
-> system defaults. But since you already assigned to it early on, it won't be
-> populated with system defaults...
->
-> Other than that, the example you showed above seems to work for me here...
-Well, I just copied and pasted into the e-mail, so what you see it what 
-I had :-)
-And FWIW I also tried to add spaces everywhere to no avail!
+DEBUG: Executing shell function do_compile
+NOTE: make -j 9 HOSTCC=gcc  HOSTLD=ld 
+HOSTLDFLAGS=-L/home/jack/Projects/poky-r0005/R0005/tmp/sysroots/x86_64-linux/usr/lib 
+-L/home/jack/Projects/poky-r0005/R0005/tmp/sysroots/x86_64-linux/lib 
+-Wl,-rpath-link,/home/jack/Projects/poky-r0005/R0005/tmp/sysroots/x86_64-linux/usr/lib 
+-Wl,-rpath-link,/home/jack/Projects/poky-r0005/R0005/tmp/sysroots/x86_64-linux/lib 
+-Wl,-rpath,/home/jack/Projects/poky-r0005/R0005/tmp/sysroots/x86_64-linux/usr/lib 
+-Wl,-rpath,/home/jack/Projects/poky-r0005/R0005/tmp/sysroots/x86_64-linux/lib 
+-Wl,-O1 HOSTSTRIP=true tools
+make -C tools all
+make[1]: Entering directory 
+`/home/jack/Projects/poky-r0005/R0005/tmp/work/x86_64-linux/u-boot-mkimage-native-2011.06-r0/u-boot-2011.06/tools'
+make[1]: *** No rule to make target 
+`/usr/lib/gcc/x86_64-unknown-linux-gnu/4.7.1/include/stddef.h', needed 
+by `crc32.o'.  Stop.
+make[1]: Leaving directory 
+`/home/jack/Projects/poky-r0005/R0005/tmp/work/x86_64-linux/u-boot-mkimage-native-2011.06-r0/u-boot-2011.06/tools'
+make: *** [tools] Error 2
+ERROR: oe_runmake failed
+ERROR: Function failed: do_compile (see 
+/home/jack/Projects/poky-r0005/R0005/tmp/work/x86_64-linux/u-boot-mkimage-native-2011.06-r0/temp/log.do_compile.15275 
+for further information)
 
-Hervé
+-- 
+
+   Jack Mitchell (jack@embed.me.uk)
+   Embedded Systems Engineer
+   http://www.embed.me.uk
+
+--
+
 
