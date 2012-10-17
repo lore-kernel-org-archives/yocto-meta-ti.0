@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 901C5E0045D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9168FE011AF
 	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2012 13:14:00 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BFEBB52A0A; Wed, 17 Oct 2012 20:13:59 +0000 (UTC)
+	id 9BBBF52A5B; Wed, 17 Oct 2012 20:13:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20121017201359.BFEBB52A0A@arago-project.org>
+Message-Id: <20121017201359.9BBBF52A5B@arago-project.org>
 Date: Wed, 17 Oct 2012 20:13:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-ti33x-psp 3.2: LCD7 A3 support, eMMC cape support, camera cape improvements
+Subject: Roger Monk : u-boot_2011.09[.10rc]: Always use gnu ld for LD
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,26 +27,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: denzil
-Commit: eff601caffe58c3e8049140bdb02723b5cb62da4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=eff601caffe58c3e8049140bdb02723b5cb62da4
+Commit: aa61e0a12b390371610ebf422af8cdeef9a35caf
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=aa61e0a12b390371610ebf422af8cdeef9a35caf
 
-Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Mon Jul 30 20:41:14 2012 +0200
+Author: Roger Monk <r-monk@ti.com>
+Date:   Fri Aug  3 23:20:08 2012 +0100
 
-linux-ti33x-psp 3.2: LCD7 A3 support, eMMC cape support, camera cape improvements
+u-boot_2011.09[.10rc]: Always use gnu ld for LD
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+   - Pull in gnu ld patch for 2011.10rc recipe
+   - Bump PR
+
+Signed-off-by: Roger Monk <r-monk@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 
 ---
 
- .../0081-beaglebone-add-support-for-LCD7-A3.patch  |  144 +++++++++
- ...one-add-rudimentary-support-for-eMMC-cape.patch |  111 +++++++
- ...bone-add-extra-partnumber-for-camera-cape.patch |   26 ++
- ...084-beaglebone-cssp_camera-driver-cleanup.patch |  324 ++++++++++++++++++++
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |    6 +-
- 5 files changed, 610 insertions(+), 1 deletions(-)
+ recipes-bsp/u-boot/u-boot_2011.10rc.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=eff601caffe58c3e8049140bdb02723b5cb62da4
+diff --git a/recipes-bsp/u-boot/u-boot_2011.10rc.bb b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
+index 7035b4c..2cb8271 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.10rc.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.10rc.bb
+@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "(ti33x)"
+ DEFAULT_PREFERENCE_ti33x = "99"
+ 
+ PV = "2011.09+git"
+-PR = "r29"
++PR = "r30"
+ 
+ # SPL build
+ UBOOT_BINARY = "u-boot.img"
+@@ -24,6 +24,7 @@ SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;br
+            file://2011.09git/0008-am335x-evm-load-uImage-from-boot-instead-of-VFAT.patch \
+            file://2011.09git/0009-ext4fs-ls-load-support.patch \
+            file://2011.09git/0010-am335x-switch-to-ext4-mode.patch \
++           file://0001-config-Always-use-GNU-ld.patch \
+           "
+ 
+ SRCREV = "dc52533ccff00a12761f793d66b39e4f6a4a3bba"
+
 
