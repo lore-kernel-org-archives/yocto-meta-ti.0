@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26AB0E0141C
-	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2012 13:14:02 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 63F38E0045D
+	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2012 14:15:40 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id EB39F52A90; Wed, 17 Oct 2012 20:14:01 +0000 (UTC)
+	id E9DA6529EF; Wed, 17 Oct 2012 21:15:39 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20121017201401.EB39F52A90@arago-project.org>
-Date: Wed, 17 Oct 2012 20:14:01 +0000 (UTC)
+Message-Id: <20121017211539.E9DA6529EF@arago-project.org>
+Date: Wed, 17 Oct 2012 21:15:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : beaglebone-tester: FTDI eeprom test, v2
+Subject: Franklin S. Cooper Jr : linux-am335x-3.2.0-psp04.06.00.08: Add PSP v04.06. 00.08 of the Linux kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,47 +22,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Oct 2012 20:14:02 -0000
+X-List-Received-Date: Wed, 17 Oct 2012 21:15:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: denzil
-Commit: fe1242c26539a931e1307b66cbd6cb9760db0d6d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fe1242c26539a931e1307b66cbd6cb9760db0d6d
+Branch: master
+Commit: c911405cbc180ff4e0215bff6e6b9d393f819912
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c911405cbc180ff4e0215bff6e6b9d393f819912
 
-Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Sat Sep  1 13:46:43 2012 +0200
+Author: Franklin S. Cooper Jr <fcooper@ti.com>
+Date:   Fri Oct 12 00:14:45 2012 -0500
 
-beaglebone-tester: FTDI eeprom test, v2
+linux-am335x-3.2.0-psp04.06.00.08: Add PSP v04.06.00.08 of the Linux kernel
 
-Check descriptor instead of VID/PID
+* Add the PSP release version of the Linux kernel for the am335x-evm
+* Include a variable called KERNEL_PATCHES which can be used to add
+  patches on top of the PSP release of the Linux kernel. Currently used
+  to apply various patches that add functionality or fixes bugs.
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 
 ---
 
- recipes-ti/beagleboard/beaglebone-tester.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ ...odified-WLAN-enable-and-irq-to-match-boar.patch |   62 +
+ ...x-Add-crypto-driver-settings-to-defconfig.patch |  130 +
+ ...m335x-Add-pm_runtime-API-to-crypto-driver.patch |  405 ++
+ ...x-enable-pullup-on-the-WLAN-enable-pin-fo.patch |   57 +
+ ...01-am335x_evm_defconfig-turn-off-MUSB-DMA.patch |   35 +
+ ...-using-edge-triggered-interrupts-for-WLAN.patch |   35 +
+ ...x-Add-memory-addresses-for-crypto-modules.patch |   41 +
+ .../0001-am33xx-Add-SmartReflex-support.patch      | 2014 ++++++
+ .../0001-mach-omap2-pm33xx-Disable-VT-switch.patch |   71 +
+ ...date-PIO-mode-help-information-in-Kconfig.patch |   45 +
+ ...1-omap-serial-add-delay-before-suspending.patch |   42 +
+ .../0002-AM335x-OCF-Driver-for-Linux-3.patch       | 7228 ++++++++++++++++++++
+ ...-suspend-resume-routines-to-crypto-driver.patch |  147 +
+ ...Add-crypto-device-and-resource-structures.patch |  111 +
+ ...2-am33xx-Enable-CONFIG_AM33XX_SMARTREFLEX.patch |   26 +
+ ...rypto-device-and-resource-structure-for-T.patch |   60 +
+ ...d-crypto-drivers-to-Kconfig-and-Makefiles.patch |  124 +
+ ...eate-header-file-for-OMAP4-crypto-modules.patch |  213 +
+ ...m33x-Create-driver-for-TRNG-crypto-module.patch |  324 +
+ ...am33x-Create-driver-for-AES-crypto-module.patch |  971 +++
+ ...x-Create-driver-for-SHA-MD5-crypto-module.patch | 1444 ++++
+ .../linux-am335x-3.2.0-psp04.06.00.08/defconfig    | 2656 +++++++
+ .../linux/linux-am335x_3.2.0-psp04.06.00.08.bb     |   81 +
+ 23 files changed, 16322 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
-index 7512e76..66b98a4 100644
---- a/recipes-ti/beagleboard/beaglebone-tester.bb
-+++ b/recipes-ti/beagleboard/beaglebone-tester.bb
-@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
- # only scripts and data
- inherit allarch
- 
--PR = "r19"
-+PR = "r20"
- 
- SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
-           "
--SRCREV = "bb93cdaa95173eb4a772523a37fe0bf8bd62d78f"
-+SRCREV = "487a13e2e4faaafa40ba5430600e6aeecf9581a8"
- 
- S = "${WORKDIR}/git"
- 
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=c911405cbc180ff4e0215bff6e6b9d393f819912
 
