@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C25DE0045D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 555C9E01214
 	for <meta-ti@yoctoproject.org>; Wed, 17 Oct 2012 13:14:01 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E90FC52A0A; Wed, 17 Oct 2012 20:14:00 +0000 (UTC)
+	id 238EE52A6C; Wed, 17 Oct 2012 20:14:01 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20121017201400.E90FC52A0A@arago-project.org>
-Date: Wed, 17 Oct 2012 20:14:00 +0000 (UTC)
+Message-Id: <20121017201401.238EE52A6C@arago-project.org>
+Date: Wed, 17 Oct 2012 20:14:01 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Koen Kooi : linux-mainline: update to 3.2.28
+Subject: Koen Kooi : beaglebone-tester: ship testaudio, fix depends
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,56 +27,60 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: denzil
-Commit: f8f419d8dc1f0d7002b6ea71f900e43b47da4ace
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f8f419d8dc1f0d7002b6ea71f900e43b47da4ace
+Commit: 22dd38e65c8377819256c8d36ab613ae8d6b203a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=22dd38e65c8377819256c8d36ab613ae8d6b203a
 
 Author: Koen Kooi <koen@dominion.thruhere.net>
-Date:   Fri Aug 24 09:20:38 2012 +0200
+Date:   Sun Aug 12 10:11:12 2012 +0200
 
-linux-mainline: update to 3.2.28
+beaglebone-tester: ship testaudio, fix depends
 
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 
 ---
 
- conf/machine/include/omap3.inc             |    2 +-
- recipes-kernel/linux/linux-mainline_3.2.bb |    8 ++++----
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ recipes-ti/beagleboard/beaglebone-tester.bb |   10 +++++++---
+ 1 files changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 0f3cc36..8ce0ebc 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r121"
-+MACHINE_KERNEL_PR = "r122"
+diff --git a/recipes-ti/beagleboard/beaglebone-tester.bb b/recipes-ti/beagleboard/beaglebone-tester.bb
+index 82c5a83..138fbc6 100644
+--- a/recipes-ti/beagleboard/beaglebone-tester.bb
++++ b/recipes-ti/beagleboard/beaglebone-tester.bb
+@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM="file://gpl.txt;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
+ # only scripts and data
+ inherit allarch
  
- KERNEL_IMAGETYPE = "uImage"
+-PR = "r17"
++PR = "r18"
  
-diff --git a/recipes-kernel/linux/linux-mainline_3.2.bb b/recipes-kernel/linux/linux-mainline_3.2.bb
-index 69344ff..bc0a145 100644
---- a/recipes-kernel/linux/linux-mainline_3.2.bb
-+++ b/recipes-kernel/linux/linux-mainline_3.2.bb
-@@ -5,12 +5,12 @@ KERNEL_IMAGETYPE = "uImage"
+ SRC_URI = "git://github.com/koenkooi/validation-scripts.git;protocol=git \
+           "
+-SRCREV = "c748d157b9afbb71e6eadf1dca7a787a456c0149"
++SRCREV = "168a9604e170931d9de228f0d774f4fbda58aa37"
  
- COMPATIBLE_MACHINE = "(beagleboard)"
+ S = "${WORKDIR}/git"
  
--PV = "3.2.18"
--# v3.2.18 tag
--SRCREV_pn-${PN} = "52c6b95f8a2edaff98b779f15b2f4d69b61b18b9"
-+PV = "3.2.28"
-+# v3.2.28 tag
-+SRCREV_pn-${PN} = "1f873aca1c7aa7a574b276c040d304d16f1dbfa4"
+@@ -37,6 +37,10 @@ do_install() {
+ 	for i in ${S}/bone-tester/lib/* ; do
+ 		install -m 0755 ${i} ${D}${localstatedir}/lib/bone-tester/lib/
+ 	done
++
++	install -d ${D}${bindir}
++	install -m 0755 ${S}/testaudio ${D}${bindir}
++
+ }
  
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "a"
  
- FILESPATH =. "${FILE_DIRNAME}/linux-mainline-3.2:${FILE_DIRNAME}/linux-mainline-3.2/${MACHINE}:"
+@@ -44,7 +48,7 @@ FILES_${PN} += "${base_libdir}/systemd \
+                 /boot \
+                "
  
+-RDEPENDS_${PN} = "iputils memtester"
++RDEPENDS_${PN} = "alsa-utils-aplay sox iputils memtester"
+ RRECOMMENDS_${PN} = "kernel-module-g-zero \
+                      kernel-module-g-mass-storage \
+                      kernel-module-g-file-storage \
 
 
