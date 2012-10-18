@@ -1,33 +1,57 @@
-Return-Path: <ndec13@gmail.com>
-Received: from mail-vb0-f48.google.com (mail-vb0-f48.google.com
-	[209.85.212.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BDA9E0127A
-	for <meta-ti@yoctoproject.org>; Thu, 18 Oct 2012 11:41:13 -0700 (PDT)
-Received: by mail-vb0-f48.google.com with SMTP id e21so10821686vbm.35
-	for <meta-ti@yoctoproject.org>; Thu, 18 Oct 2012 11:41:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=QJxOnTLEQRxGpw8BHP+UuEP/57y8oJzNeJDXCheBo+g=;
-	b=uhOT9uDwN9Hw3cMDwy5ngccJrK1JSWarKa5n9wFpXpbc6PuXOMdgaXZwWWesRrUdM5
-	v9NWJNVYcHPULDGIlHSgNKVBcyzKppUaZndQX2YPlSvCibI2xoyi3aPpY4DeIjXaLdXt
-	ZtkwW7Ah0aoiedOZbOClOSa0O57ARHv+ad6IJzu6BLIOrybH1yhUcPE5wLoWmpJ9EW7m
-	YDwmAjNMlQ6GiAlUZF5UasphouSOgBlCWrXoak7XMN8IlHGqRJVKuHR6YhQw5tfzzUIM
-	qqB1xFmWctlUENLmKY1K/FYRscTeJUzQOH+C6UjUlwzuGu4LiTcmwrul0abBYtkSEqyH
-	nnLQ==
-Received: by 10.220.119.196 with SMTP id a4mr6983487vcr.19.1350585672177; Thu,
-	18 Oct 2012 11:41:12 -0700 (PDT)
+Return-Path: <tim.bird@am.sony.com>
+Received: from tx2outboundpool.messaging.microsoft.com
+	(tx2ehsobe005.messaging.microsoft.com [65.55.88.15])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 134C3E003D6
+	for <meta-ti@yoctoproject.org>; Thu, 18 Oct 2012 13:22:26 -0700 (PDT)
+Received: from mail233-tx2-R.bigfish.com (10.9.14.245) by
+	TX2EHSOBE009.bigfish.com (10.9.40.29) with Microsoft SMTP Server id
+	14.1.225.23; Thu, 18 Oct 2012 20:22:25 +0000
+Received: from mail233-tx2 (localhost [127.0.0.1])	by
+	mail233-tx2-R.bigfish.com (Postfix) with ESMTP id 83783D000C0	for
+	<meta-ti@yoctoproject.org>; Thu, 18 Oct 2012 20:22:25 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:160.33.194.231; KIP:(null); UIP:(null);
+	IPV:NLI; H:usculsndmail04v.am.sony.com; RD:mail04.sonyusa.com;
+	EFVD:NLI
+X-SpamScore: -1
+X-BigFish: VPS-1(zzd6eah4015Izz1202h1d1ah1d2ahzz8275dhz2fh2a8h668h839hd25hf0ah107ah1288h12a5h12a9h12bdh137ah13b6h1441h1155h)
+Received-SPF: pass (mail233-tx2: domain of am.sony.com designates
+	160.33.194.231 as permitted sender) client-ip=160.33.194.231;
+	envelope-from=tim.bird@am.sony.com;
+	helo=usculsndmail04v.am.sony.com ; .am.sony.com ; 
+Received: from mail233-tx2 (localhost.localdomain [127.0.0.1]) by mail233-tx2
+	(MessageSwitch) id 1350591743989987_14442;
+	Thu, 18 Oct 2012 20:22:23 +0000 (UTC)
+Received: from TX2EHSMHS011.bigfish.com (unknown [10.9.14.235])	by
+	mail233-tx2.bigfish.com (Postfix) with ESMTP id EDA096800AD	for
+	<meta-ti@yoctoproject.org>; Thu, 18 Oct 2012 20:22:23 +0000 (UTC)
+Received: from usculsndmail04v.am.sony.com (160.33.194.231) by
+	TX2EHSMHS011.bigfish.com (10.9.99.111) with Microsoft SMTP Server (TLS)
+	id 14.1.225.23; Thu, 18 Oct 2012 20:22:21 +0000
+Received: from usculsndmail13v.am.sony.com (usculsndmail13v.am.sony.com
+	[146.215.230.104])	by usculsndmail04v.am.sony.com
+	(Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with ESMTP id
+	q9IKMKUO015110	for
+	<meta-ti@yoctoproject.org>; Thu, 18 Oct 2012 20:22:20 GMT
+Received: from mail1x.sgo.in.sel.sony.com (mailx.bc.in.sel.sony.com
+	[43.130.1.112])	by usculsndmail13v.am.sony.com
+	(Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with ESMTP id q9IKMJOK022803
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256
+	verify=FAIL)	for
+	<meta-ti@yoctoproject.org>; Thu, 18 Oct 2012 20:22:20 GMT
+Received: from [43.135.148.222] ([43.135.148.222])	by
+	mail1x.sgo.in.sel.sony.com (Switch-3.4.2/Switch-3.4.2) with ESMTP id
+	q9IKMIVe032735	for <meta-ti@yoctoproject.org>;
+	Thu, 18 Oct 2012 20:22:19 GMT
+Message-ID: <508064FA.5050701@am.sony.com>
+Date: Thu, 18 Oct 2012 13:22:18 -0700
+From: Tim Bird <tim.bird@am.sony.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
 MIME-Version: 1.0
-Received: by 10.58.80.71 with HTTP; Thu, 18 Oct 2012 11:40:51 -0700 (PDT)
-In-Reply-To: <20121018163149.GA20902@denix.org>
-References: <20121018162306.343A752AB7@arago-project.org>
-	<50802E0E.9000206@ti.com> <20121018163149.GA20902@denix.org>
-From: Nicolas Dechesne <ndec13@gmail.com>
-Date: Thu, 18 Oct 2012 20:40:51 +0200
-Message-ID: <CAOT3miL=zqTZ2JmCfWbphJcgFW_uPzus2s0jkB+9pFiDkWkW+w@mail.gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: meta-ti@yoctoproject.org
-Subject: =?UTF-8?B?UmU6IEhlcnbDqSBGYWNoZSA6IGxpbnV4LW9tYXA0OiB1cGRhdGUgdG8gMy40IGZyb20gR0xQIDEuNi4gNiByZWxlYXNl?=
+To: <meta-ti@yoctoproject.org>
+X-OriginatorOrg: am.sony.com
+X-Mailman-Approved-At: Thu, 18 Oct 2012 13:30:04 -0700
+Subject: Dependency on packagegroup??
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,74 +64,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2012 18:41:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 18 Oct 2012 20:22:26 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 18, 2012 at 6:31 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> On Thu, Oct 18, 2012 at 06:27:58PM +0200, Herv=E9 Fache wrote:
->> In my tree, I kept the kernel and used Enrico's recent patches for
->> DCE/GST... Maybe some of them could be merged too?
->
-> Yes, I'm keeping an eye on your tree and noticed you applied Enrico's pat=
-ches.
-> As well as couple commits from Nicolas. Please let me know the status for=
- all
-> those from your perspective. I'll do some basic testing on my side, but i=
-f you
-> and Nicolas give your blessing for those changes, I'd be happy to merge t=
-hem
-> to meta-ti. Thanks.
+I'm just getting started using the meta-ti layer, and
+on my first build for a MACHINE="pandaboard", I got this error:
 
-at least for xf86-video-omap i need to make one change as I am missing
-a DEPENDS on dri2proto. it builds today because somebody else might be
-pulling that... I will refresh and send it to the list.
+$ bitbake core-image-minimal
+ERROR: ParseError at /a/home/tbird/work/yocto/meta-ti/recipes-ti/packagegroup/packagegroup-ti-test.bb:5: Could not inherit file classes/packagegroup.bbclass
+ERROR: Command execution failed: Exited with 1
 
->
-> --
-> Denys
->
->
->> On 10/18/2012 06:23 PM, Arago Project git wrote:
->> > Module: meta-ti
->> > Branch: master
->> > Commit: 4f3522a9dc7f04e2f650199d66badb08dad214c6
->> > URL:    http://arago-project.org/git/meta-ti.git?a=3Dcommit;h=3D4f3522=
-a9dc7f04e2f650199d66badb08dad214c6
->> >
->> > Author: Herv=E9 Fache <h-fache@ti.com>
->> > Date:   Fri Oct  5 14:57:42 2012 +0200
->> >
->> > linux-omap4: update to 3.4 from GLP 1.6.6 release
->> >
->> > Used Herve's version as a base with some mods from Enrico and addition=
-al fixes
->> > on top, defconfig is the validated one from GLP release.
->> >
->> > Signed-off-by: Herv=E9 Fache <h-fache@ti.com>
->> > Cc: Enrico Butera <ebutera@users.berlios.de>
->> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
->> >
->> > ---
->> >
->> >  .../linux/linux-omap4-3.4/pandaboard/defconfig     | 4152 +++++++++++=
-+++++++++
->> >  recipes-kernel/linux/linux-omap4_3.4.bb            |   17 +
->> >  2 files changed, 4169 insertions(+), 0 deletions(-)
->> >
->> > Diff:   http://arago-project.org/git/meta-ti.git?a=3Dcommitdiff;h=3D4f=
-3522a9dc7f04e2f650199d66badb08dad214c6
->> > _______________________________________________
->> > meta-ti mailing list
->> > meta-ti@yoctoproject.org
->> > https://lists.yoctoproject.org/listinfo/meta-ti
->>
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+Summary: There was 1 WARNING message shown.
+Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+
+I have my BBMASK set to "meta-ti/recipes-misc"
+
+The README says that the layer depends on
+git://git.openembedded.org/openembedded-core
+
+In looking at the dependency on packagegroups, it looks like this is only referenced in
+meta-ti/recipes-ti/packagegroup/packagegroup-ti-test.bb
+
+If I'm not interested (currently) in the test packages, can I just remove or
+rename packagegroup-ti-test.bb, or add it to BBMASK,
+rather than install the openembedded-core layer?
+
+Will this break anything?
+
+I'd like to keep my setup as minimal as possible.
+
+Thanks,
+ -- Tim
+
+=============================
+Tim Bird
+Architecture Group Chair, CE Workgroup of the Linux Foundation
+Senior Staff Engineer, Sony Network Entertainment
+=============================
+
 
