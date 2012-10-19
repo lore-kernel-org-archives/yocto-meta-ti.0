@@ -1,29 +1,29 @@
 Return-Path: <ndec13@gmail.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 99100E0049F
-	for <meta-ti@yoctoproject.org>; Fri, 19 Oct 2012 06:51:55 -0700 (PDT)
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D77D0E013F7
+	for <meta-ti@yoctoproject.org>; Fri, 19 Oct 2012 06:51:57 -0700 (PDT)
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9JDprQa019968;
-	Fri, 19 Oct 2012 08:51:53 -0500
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9JDpsBk027709
+	for <meta-ti@yoctoproject.org>; Fri, 19 Oct 2012 08:51:54 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9JDprw6005761;
-	Fri, 19 Oct 2012 08:51:53 -0500
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9JDpsRZ005793
+	for <meta-ti@yoctoproject.org>; Fri, 19 Oct 2012 08:51:54 -0500
 Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
-	Fri, 19 Oct 2012 08:51:53 -0500
+	Fri, 19 Oct 2012 08:51:54 -0500
 Received: from localhost.localdomain (lncpu06.tif.ti.com [137.167.138.194])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9JDpSv9000682;
-	Fri, 19 Oct 2012 08:51:52 -0500
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9JDpSvB000682;
+	Fri, 19 Oct 2012 08:51:54 -0500
 From: Nicolas Dechesne <ndec13@gmail.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 19 Oct 2012 15:51:24 +0200
-Message-ID: <1350654686-22868-2-git-send-email-ndec13@gmail.com>
+Date: Fri, 19 Oct 2012 15:51:26 +0200
+Message-ID: <1350654686-22868-4-git-send-email-ndec13@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1350654686-22868-1-git-send-email-ndec13@gmail.com>
 References: <1350654686-22868-1-git-send-email-ndec13@gmail.com>
 MIME-Version: 1.0
 Cc: Nicolas Dechesne <n-dechesne@ti.com>
-Subject: [PATCH 1/3] libdrm: enable omap experimental api support
+Subject: [PATCH 3/3] pandaboard: use xf86-video-omap by default in XSERVER config
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,31 +36,90 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Oct 2012 13:51:55 -0000
+X-List-Received-Date: Fri, 19 Oct 2012 13:51:58 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-From: Enrico Butera <ebutera@users.berlios.de>
+From: Nicolas Dechesne <n-dechesne@ti.com>
 
-This is needed to build gst-plugin-ducati.
+Also we need to pull in module-exa as xf86-video-omap relies
+on it, at run time.
 
-Signed-off-by: Enrico Butera <ebutera@users.berlios.de>
+And replaced the default xorg.conf for 'omap4' machine to take
+new driver into account. Do not enable HWcursor (e.g. mouse
+using DSS overlay) to keep things simple for now..
+
 Signed-off-by: Nicolas Dechesne <n-dechesne@ti.com>
 Signed-off-by: Hervé Fache <h-fache@ti.com>
 ---
- recipes-graphics/drm/libdrm_2.4.39.bbappend |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
- create mode 100644 recipes-graphics/drm/libdrm_2.4.39.bbappend
+ conf/machine/include/omap4.inc                     |    3 +-
+ .../xserver-xf86-config/omap4/xorg.conf            |   44 +++++++-------------
+ 2 files changed, 17 insertions(+), 30 deletions(-)
 
-diff --git a/recipes-graphics/drm/libdrm_2.4.39.bbappend b/recipes-graphics/drm/libdrm_2.4.39.bbappend
-new file mode 100644
-index 0000000..d0c1a77
---- /dev/null
-+++ b/recipes-graphics/drm/libdrm_2.4.39.bbappend
-@@ -0,0 +1,3 @@
-+COMPATIBLE_MACHINE = "omap4|omap5"
+diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
+index 96eaae7..ecd23c4 100644
+--- a/conf/machine/include/omap4.inc
++++ b/conf/machine/include/omap4.inc
+@@ -11,8 +11,9 @@ XSERVER = "xserver-xorg \
+            xserver-xorg-extension-dri \
+            xserver-xorg-extension-dri2 \
+            xserver-xorg-extension-glx \
++           xserver-xorg-module-exa \
+            xf86-input-evdev \
+-           xf86-video-fbdev" 
++           xf86-video-omap"
+ 
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r1"
+diff --git a/recipes-graphics/xorg-xserver/xserver-xf86-config/omap4/xorg.conf b/recipes-graphics/xorg-xserver/xserver-xf86-config/omap4/xorg.conf
+index 0d6ab43..87ded4d 100644
+--- a/recipes-graphics/xorg-xserver/xserver-xf86-config/omap4/xorg.conf
++++ b/recipes-graphics/xorg-xserver/xserver-xf86-config/omap4/xorg.conf
+@@ -1,29 +1,15 @@
+-Section "Module"                                       
+-        Load    "extmod"                                
+-        Load    "dbe"                           
+-        Load    "glx"                                           
+-        Load    "freetype"                             
+-        Load    "type1"                        
+-        Load    "record"                    
+-        Load    "dri"                       
+-EndSection                            
+-
+-Section "Monitor"                                                                    
+-        Identifier      "Builtin Default Monitor"
+-EndSection                                       
+-
+-Section "Device"                                  
+-        Identifier      "Builtin Default fbdev Device 0"
+-        Driver  "fbdev"
+-EndSection                                                
+-
+-Section "Screen"                                        
+-        Identifier      "Builtin Default fbdev Screen 0"     
+-        Device  "Builtin Default fbdev Device 0"            
+-        Monitor "Builtin Default Monitor"               
+-EndSection                                              
+-
+-Section "ServerLayout"                                 
+-        Identifier      "Builtin Default Layout"                                     
+-        Screen  "Builtin Default fbdev Screen 0"        
+-EndSection                                              
++# more /usr/share/X11/xorg.conf.d/99-omap.conf 
++# X.Org X server configuration file
 +
-+EXTRA_OECONF += "--enable-omap-experimental-api"
++Section "Device"
++        Identifier      "Video Device"
++        Driver          "omap"
++        Option          "Debug"         "false"
++        Option          "HWcursor"      "false"
++EndSection
++
++Section "Screen"
++        Identifier      "Screen"
++        Monitor         "Monitor"
++        Device          "Video Device"
++EndSection
 -- 
 1.7.0.4
 
