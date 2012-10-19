@@ -1,57 +1,27 @@
-Return-Path: <tim.bird@am.sony.com>
-Received: from co1outboundpool.messaging.microsoft.com
-	(co1ehsobe001.messaging.microsoft.com [216.32.180.184])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5AFE1E003D6
-	for <meta-ti@yoctoproject.org>; Thu, 18 Oct 2012 13:48:06 -0700 (PDT)
-Received: from mail116-co1-R.bigfish.com (10.243.78.226) by
-	CO1EHSOBE008.bigfish.com (10.243.66.71) with Microsoft SMTP Server id
-	14.1.225.23; Thu, 18 Oct 2012 20:48:05 +0000
-Received: from mail116-co1 (localhost [127.0.0.1])	by
-	mail116-co1-R.bigfish.com (Postfix) with ESMTP id C5931160286;
-	Thu, 18 Oct 2012 20:48:05 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:160.33.194.229; KIP:(null); UIP:(null);
-	IPV:NLI; H:usculsndmail02v.am.sony.com; RD:mail02.sonyusa.com;
-	EFVD:NLI
-X-SpamScore: -5
-X-BigFish: VPS-5(zzbb2dI98dI9371I1432I1447Izz1202h1d1ah1d2ahzz8275dhz2fh2a8h668h839h93fhd25hf0ah107ah1288h12a5h12a9h12bdh137ah13b6h1441h1155h)
-Received-SPF: pass (mail116-co1: domain of am.sony.com designates
-	160.33.194.229 as permitted sender) client-ip=160.33.194.229;
-	envelope-from=tim.bird@am.sony.com;
-	helo=usculsndmail02v.am.sony.com ; .am.sony.com ; 
-Received: from mail116-co1 (localhost.localdomain [127.0.0.1]) by mail116-co1
-	(MessageSwitch) id 1350593283259813_13361;
-	Thu, 18 Oct 2012 20:48:03 +0000 (UTC)
-Received: from CO1EHSMHS011.bigfish.com (unknown [10.243.78.233])	by
-	mail116-co1.bigfish.com (Postfix) with ESMTP id 33506540091;
-	Thu, 18 Oct 2012 20:48:03 +0000 (UTC)
-Received: from usculsndmail02v.am.sony.com (160.33.194.229) by
-	CO1EHSMHS011.bigfish.com (10.243.66.21) with Microsoft SMTP Server
-	(TLS) id 14.1.225.23; Thu, 18 Oct 2012 20:48:01 +0000
-Received: from usculsndmail12v.am.sony.com (usculsndmail12v.am.sony.com
-	[146.215.230.103])	by usculsndmail02v.am.sony.com
-	(Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with ESMTP id q9IKm0Vl020598;
-	Thu, 18 Oct 2012 20:48:00 GMT
-Received: from mail1x.sgo.in.sel.sony.com (mail.sgo.in.sel.sony.com
-	[43.130.1.112])	by usculsndmail12v.am.sony.com
-	(Sentrion-MTA-4.2.2/Sentrion-MTA-4.2.2) with ESMTP id q9IKlxRm008537
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Thu, 18 Oct 2012 20:48:00 GMT
-Received: from [43.135.148.222] ([43.135.148.222])	by
-	mail1x.sgo.in.sel.sony.com (Switch-3.4.2/Switch-3.4.2) with ESMTP id
-	q9IKlwCE017296;	Thu, 18 Oct 2012 20:47:58 GMT
-Message-ID: <50806AFE.90900@am.sony.com>
-Date: Thu, 18 Oct 2012 13:47:58 -0700
-From: Tim Bird <tim.bird@am.sony.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:16.0) Gecko/20121011 Thunderbird/16.0.1
+Return-Path: <ndec13@gmail.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F515E00348
+	for <meta-ti@yoctoproject.org>; Fri, 19 Oct 2012 06:51:30 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id q9JDpTbt019932
+	for <meta-ti@yoctoproject.org>; Fri, 19 Oct 2012 08:51:29 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9JDpTFR005408
+	for <meta-ti@yoctoproject.org>; Fri, 19 Oct 2012 08:51:29 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
+	Fri, 19 Oct 2012 08:51:29 -0500
+Received: from localhost.localdomain (lncpu06.tif.ti.com [137.167.138.194])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id q9JDpSv8000682;
+	Fri, 19 Oct 2012 08:51:29 -0500
+From: Nicolas Dechesne <ndec13@gmail.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 19 Oct 2012 15:51:23 +0200
+Message-ID: <1350654686-22868-1-git-send-email-ndec13@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <508064FA.5050701@am.sony.com> <20121018203413.GA25196@denix.org>
-In-Reply-To: <20121018203413.GA25196@denix.org>
-X-OriginatorOrg: am.sony.com
-X-Mailman-Approved-At: Thu, 18 Oct 2012 13:51:50 -0700
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Dependency on packagegroup??
+Cc: Nicolas Dechesne <n-dechesne@ti.com>
+Subject: [PATCH 0/3] Adding xf86-video-omap support for Pandaboard
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,58 +34,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Oct 2012 20:48:06 -0000
+X-List-Received-Date: Fri, 19 Oct 2012 13:51:30 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 10/18/2012 01:34 PM, Denys Dmytriyenko wrote:
-> On Thu, Oct 18, 2012 at 01:22:18PM -0700, Tim Bird wrote:
->> I'm just getting started using the meta-ti layer, and
->> on my first build for a MACHINE="pandaboard", I got this error:
->>
->> $ bitbake core-image-minimal
->> ERROR: ParseError at /a/home/tbird/work/yocto/meta-ti/recipes-ti/packagegroup/packagegroup-ti-test.bb:5: Could not inherit file classes/packagegroup.bbclass
->> ERROR: Command execution failed: Exited with 1
->>
->> Summary: There was 1 WARNING message shown.
->> Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
->>
->> I have my BBMASK set to "meta-ti/recipes-misc"
->>
->> The README says that the layer depends on
->> git://git.openembedded.org/openembedded-core
->>
->> In looking at the dependency on packagegroups, it looks like this is only referenced in
->> meta-ti/recipes-ti/packagegroup/packagegroup-ti-test.bb
->>
->> If I'm not interested (currently) in the test packages, can I just remove or
->> rename packagegroup-ti-test.bb, or add it to BBMASK,
->> rather than install the openembedded-core layer?
->>
->> Will this break anything?
->>
->> I'd like to keep my setup as minimal as possible.
-> 
-> Hi, Tim,
-> 
-> I think you are mixing branches and versions here. As "packagegroup" is what 
-> "task" has been renamed to in the latest OE-Core (Yocto/Poky whichever you 
-> use) - that's in the master branch. Looks like you are using either a 
-> "denzil" branch of OE-Core or a previous release of Yocto/Poky and mixing it 
-> with the "master" branch of meta-ti. If "denzil" is what you need, please use 
-> the corresponding branch in meta-ti, as "master" of meta-ti follows the same 
-> in OE-Core.
+From: Nicolas Dechesne <n-dechesne@ti.com>
 
-Looks like that was it.  I was indeed mixed up in my branches and versions!
-It's building now.
+Hi there,
 
-Thanks for the quick help!
- -- Tim
+here is a refreshed series to add support for xf86-video-omap for
+Pandaboard.
 
-=============================
-Tim Bird
-Architecture Group Chair, CE Workgroup of the Linux Foundation
-Senior Staff Engineer, Sony Network Entertainment
-=============================
+We've switched all our OMAP4 and OMAP5 support on this new X11 video
+driver, which is hosted here:
+http://cgit.freedesktop.org/xorg/driver/xf86-video-omap/
+
+that drivers requires changes in libdrm which have all been merged
+into upstream, we just need to enable the 'omap' support in libdrm
+which is still experimental.
+
+we try to restrict this to 'omap4|omap5' machines so that we don't
+impact other TI devices.
+
+this series is tested on PandaES, with:
+
+BB_VERSION        = "1.16.0"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "pandaboard"
+DISTRO            = "poky"
+DISTRO_VERSION    = "1.3+snapshot-20121018"
+TUNE_FEATURES     = "armv7a vfp neon cortexa9"
+TARGET_FPU        = "vfp-neon"
+meta
+meta-yocto        = "master:e6e2b9bd66100c078c029ca7e34829cf1dfb5490"
+meta-ti           = "master:9d5f7904444febfaeaacce88f50c5ceb700552f1"
+
+The pandaboard task list is:
+DONE: refresh OMAP4 kernel
+DONE: introduce new X11 video driver
+TODO: introduce customized Gst/gst-ducati and libdce
+TODO: add support for DRI2, SGX accelerated EXA, DRI2Video
+
+Some of these patches could certainly make their way in oe-core at
+some point.
+
+This Xf86-video-omap driver has been tested with 1.11 Xserver, but
+also locally with 1.12. With 1.12 xrandr rotation is working, as a few
+rotation related bugs were fixed indeed in 1.12, that could be
+backported in 1.11 if needed. xrandr mode setting has been tested with
+1.11 and 1.12. Multi display support should work too.
+
+
+Enrico Butera (1):
+  libdrm: enable omap experimental api support
+
+Nicolas Dechesne (2):
+  xf86-video-omap: add new recipe for OMAP4/5 X11 video driver
+  pandaboard: use xf86-video-omap by default in XSERVER config
+
+ conf/machine/include/omap4.inc                     |    3 +-
+ recipes-graphics/drm/libdrm_2.4.39.bbappend        |    3 +
+ .../xorg-driver/xf86-video-omap_git.bb             |   31 ++++++++++++++
+ .../xserver-xf86-config/omap4/xorg.conf            |   44 +++++++-------------
+ 4 files changed, 51 insertions(+), 30 deletions(-)
+ create mode 100644 recipes-graphics/drm/libdrm_2.4.39.bbappend
+ create mode 100644 recipes-graphics/xorg-driver/xf86-video-omap_git.bb
 
 
