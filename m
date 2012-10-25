@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 019FBE0127A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 00577E00655
 	for <meta-ti@yoctoproject.org>; Wed, 24 Oct 2012 18:01:43 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 295FA52ABB; Thu, 25 Oct 2012 01:01:41 +0000 (UTC)
+	id 0C27552A43; Thu, 25 Oct 2012 01:01:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20121025010142.295FA52ABB@arago-project.org>
-Date: Thu, 25 Oct 2012 01:01:41 +0000 (UTC)
+Message-Id: <20121025010142.0C27552A43@arago-project.org>
+Date: Thu, 25 Oct 2012 01:01:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Nicolas Dechesne : xf86-video-omap: add new recipe for OMAP4/ 5 X11 video driver
+Subject: Nicolas Dechesne : pandaboard: use xf86-video-omap by default in XSERVER config
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,21 +27,20 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 410dc026f2ee24a2346e7563a83f0181c79809cf
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=410dc026f2ee24a2346e7563a83f0181c79809cf
+Commit: 95e12712ddffcc7ec0789a8700137afe2e449445
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=95e12712ddffcc7ec0789a8700137afe2e449445
 
 Author: Nicolas Dechesne <n-dechesne@ti.com>
-Date:   Fri Oct 19 15:51:25 2012 +0200
+Date:   Fri Oct 19 15:51:26 2012 +0200
 
-xf86-video-omap: add new recipe for OMAP4/5 X11 video driver
+pandaboard: use xf86-video-omap by default in XSERVER config
 
-Since this component is still actively being developed, let's use
-a _git.bb recipe. We can introduce 'x.y' version later.
+Also we need to pull in module-exa as xf86-video-omap relies
+on it, at run time.
 
-Even though xf-video-omap can be combined with private/restricted
-EXA sub-driver for SGX/PVR, it can also work without it. In which
-case EXA aren't using SGX, but all standard driver features still
-work, and it is a replacement for xf-video-fbdev.
+And replaced the default xorg.conf for 'omap4' machine to take
+new driver into account. Do not enable HWcursor (e.g. mouse
+using DSS overlay) to keep things simple for now..
 
 Signed-off-by: Nicolas Dechesne <n-dechesne@ti.com>
 Signed-off-by: Hervé Fache <h-fache@ti.com>
@@ -49,45 +48,73 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../xorg-driver/xf86-video-omap_git.bb             |   31 ++++++++++++++++++++
- 1 files changed, 31 insertions(+), 0 deletions(-)
+ conf/machine/include/omap4.inc                     |    3 +-
+ .../xserver-xf86-config/omap4/xorg.conf            |   44 +++++++-------------
+ 2 files changed, 17 insertions(+), 30 deletions(-)
 
-diff --git a/recipes-graphics/xorg-driver/xf86-video-omap_git.bb b/recipes-graphics/xorg-driver/xf86-video-omap_git.bb
-new file mode 100644
-index 0000000..abe773a
---- /dev/null
-+++ b/recipes-graphics/xorg-driver/xf86-video-omap_git.bb
-@@ -0,0 +1,31 @@
-+require recipes-graphics/xorg-driver/xorg-driver-video.inc
+diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
+index 96eaae7..ecd23c4 100644
+--- a/conf/machine/include/omap4.inc
++++ b/conf/machine/include/omap4.inc
+@@ -11,8 +11,9 @@ XSERVER = "xserver-xorg \
+            xserver-xorg-extension-dri \
+            xserver-xorg-extension-dri2 \
+            xserver-xorg-extension-glx \
++           xserver-xorg-module-exa \
+            xf86-input-evdev \
+-           xf86-video-fbdev" 
++           xf86-video-omap"
+ 
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r1"
+diff --git a/recipes-graphics/xorg-xserver/xserver-xf86-config/omap4/xorg.conf b/recipes-graphics/xorg-xserver/xserver-xf86-config/omap4/xorg.conf
+index 0d6ab43..87ded4d 100644
+--- a/recipes-graphics/xorg-xserver/xserver-xf86-config/omap4/xorg.conf
++++ b/recipes-graphics/xorg-xserver/xserver-xf86-config/omap4/xorg.conf
+@@ -1,29 +1,15 @@
+-Section "Module"                                       
+-        Load    "extmod"                                
+-        Load    "dbe"                           
+-        Load    "glx"                                           
+-        Load    "freetype"                             
+-        Load    "type1"                        
+-        Load    "record"                    
+-        Load    "dri"                       
+-EndSection                            
+-
+-Section "Monitor"                                                                    
+-        Identifier      "Builtin Default Monitor"
+-EndSection                                       
+-
+-Section "Device"                                  
+-        Identifier      "Builtin Default fbdev Device 0"
+-        Driver  "fbdev"
+-EndSection                                                
+-
+-Section "Screen"                                        
+-        Identifier      "Builtin Default fbdev Screen 0"     
+-        Device  "Builtin Default fbdev Device 0"            
+-        Monitor "Builtin Default Monitor"               
+-EndSection                                              
+-
+-Section "ServerLayout"                                 
+-        Identifier      "Builtin Default Layout"                                     
+-        Screen  "Builtin Default fbdev Screen 0"        
+-EndSection                                              
++# more /usr/share/X11/xorg.conf.d/99-omap.conf 
++# X.Org X server configuration file
 +
-+SUMMARY = "X.Org X server -- TI OMAP integrated graphics chipsets driver"
++Section "Device"
++        Identifier      "Video Device"
++        Driver          "omap"
++        Option          "Debug"         "false"
++        Option          "HWcursor"      "false"
++EndSection
 +
-+DESCRIPTION = "Open-source X.org graphics driver for TI OMAP graphics \
-+Currently relies on a closed-source submodule for EXA acceleration on \
-+the following chipsets: \
-+  + OMAP3430 \
-+  + OMAP3630 \
-+  + OMAP4430 \
-+  + OMAP4460 \
-+  + OMAP5430 \
-+  + OMAP5432 \
-+\
-+NOTE: this driver is work in progress..  you probably don't want to try \
-+and use it yet.  The API/ABI between driver and kernel, and driver and \
-+acceleration submodules is not stable yet.  This driver requires the \
-+omapdrm kernel driver w/ GEM support. \
-+"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=10ce5de3b111315ea652a5f74ec0c602"
-+
-+DEPENDS += "virtual/libx11 drm xf86driproto udev"
-+
-+SRCREV = "653ccadb38c87be565df3fbf2ff24a0cbe5a5e98"
-+PR = "${INC_PR}.1"
-+PV = "0.4.2+gitr${SRCPV}"
-+
-+SRC_URI = "git://anongit.freedesktop.org/xorg/driver/xf86-video-omap;protocol=git"
-+
-+S = "${WORKDIR}/git"
++Section "Screen"
++        Identifier      "Screen"
++        Monitor         "Monitor"
++        Device          "Video Device"
++EndSection
 
 
