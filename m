@@ -1,15 +1,24 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A15E1E003DA
-	for <meta-ti@yoctoproject.org>; Tue, 30 Oct 2012 21:51:12 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 738AF52A21; Wed, 31 Oct 2012 04:51:11 +0000 (UTC)
+Return-Path: <denys@ti.com>
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 044B0E003D7
+	for <meta-ti@yoctoproject.org>; Thu,  1 Nov 2012 18:01:00 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [71.191.205.12])
+	by vms173021.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MCU00LX15H57Z01@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 01 Nov 2012 20:00:42 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id D0F0D20011; Thu,
+	01 Nov 2012 21:00:41 -0400 (EDT)
+From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Message-Id: <20121031045111.738AF52A21@arago-project.org>
-Date: Wed, 31 Oct 2012 04:51:11 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : tune-cortexa7: add tunes for ARM Cortex-A7
+Date: Thu, 01 Nov 2012 21:00:38 -0400
+Message-id: <1351818039-5698-2-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 1.7.12.4
+In-reply-to: <1351818039-5698-1-git-send-email-denys@ti.com>
+References: <1351818039-5698-1-git-send-email-denys@ti.com>
+Subject: [PATCH 1/2] conf/machine: add keystone SOC and keystone-evm machine
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,57 +31,66 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Oct 2012 04:51:12 -0000
-Content-Type: text/plain; charset=UTF-8
-
-Module: meta-ti
-Branch: master
-Commit: b4d1463c1f0e1b7c18a56ac1bf25a1c81e810037
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b4d1463c1f0e1b7c18a56ac1bf25a1c81e810037
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Oct 18 18:28:06 2012 -0400
-
-tune-cortexa7: add tunes for ARM Cortex-A7
-
-http://www.arm.com/products/processors/cortex-a/cortex-a7.php
+X-List-Received-Date: Fri, 02 Nov 2012 01:01:01 -0000
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ conf/machine/include/keystone.inc | 14 ++++++++++++++
+ conf/machine/keystone-evm.conf    | 23 +++++++++++++++++++++++
+ 2 files changed, 37 insertions(+)
+ create mode 100644 conf/machine/include/keystone.inc
+ create mode 100644 conf/machine/keystone-evm.conf
 
- conf/machine/include/tune-cortexa7.inc |   24 ++++++++++++++++++++++++
- 1 files changed, 24 insertions(+), 0 deletions(-)
-
-diff --git a/conf/machine/include/tune-cortexa7.inc b/conf/machine/include/tune-cortexa7.inc
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
 new file mode 100644
-index 0000000..8e41139
+index 0000000..1914128
 --- /dev/null
-+++ b/conf/machine/include/tune-cortexa7.inc
-@@ -0,0 +1,24 @@
-+DEFAULTTUNE ?= "cortexa7-neon"
++++ b/conf/machine/include/keystone.inc
+@@ -0,0 +1,14 @@
++SOC_FAMILY = "keystone"
++require conf/machine/include/soc-family.inc
 +
-+require conf/machine/include/arm/arch-armv7a.inc
++require conf/machine/include/tune-cortexa15.inc
++PREFERRED_PROVIDER_virtual/kernel = "linux-keystone"
++# Increase this everytime you change something in the kernel
++MACHINE_KERNEL_PR = "r1"
 +
-+TUNEVALID[cortexa7] = "Enable Cortex-A7 specific processor optimizations"
-+TUNE_CCARGS += "${@bb.utils.contains("TUNE_FEATURES", "cortexa7", "-mtune=cortex-a7", "", d)}"
++KERNEL_IMAGETYPE = "uImage"
 +
-+# Little Endian base configs
-+AVAILTUNES += "cortexa7 cortexa7t cortexa7-neon"
-+TUNE_FEATURES_tune-cortexa7 = "${TUNE_FEATURES_tune-armv7a} cortexa7"
-+TUNE_FEATURES_tune-cortexa7t = "${TUNE_FEATURES_tune-armv7at} cortexa7"
-+TUNE_FEATURES_tune-cortexa7-neon = "${TUNE_FEATURES_tune-armv7a-neon} cortexa7"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa7 = "${PACKAGE_EXTRA_ARCHS_tune-armv7a}"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa7t = "${PACKAGE_EXTRA_ARCHS_tune-armv7at}"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa7-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7a-neon}"
++UBOOT_ENTRYPOINT = "0x80008000"
++UBOOT_LOADADDRESS = "0x80008000"
 +
-+# VFP Tunes
-+AVAILTUNES += "cortexa7hf cortexa7thf cortexa7hf-neon"
-+TUNE_FEATURES_tune-cortexa7hf ?= "${TUNE_FEATURES_tune-armv7ahf} cortexa7"
-+TUNE_FEATURES_tune-cortexa7thf ?= "${TUNE_FEATURES_tune-armv7athf} cortexa7"
-+TUNE_FEATURES_tune-cortexa7hf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa7"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa7hf = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf}"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa7thf = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf}"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa7hf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf-neon}"
++EXTRA_IMAGEDEPENDS += "u-boot"
+diff --git a/conf/machine/keystone-evm.conf b/conf/machine/keystone-evm.conf
+new file mode 100644
+index 0000000..188d53c
+--- /dev/null
++++ b/conf/machine/keystone-evm.conf
+@@ -0,0 +1,23 @@
++#@TYPE: Machine
++#@NAME: Keystone 2 machine
++#@DESCRIPTION: Machine configuration for the TI Keystone 2
++
++PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
++XSERVER = "xserver-xorg \
++           xf86-input-evdev \
++           xf86-video-fbdev"
++
++GUI_MACHINE_CLASS = "bigscreen"
++
++require conf/machine/include/keystone.inc
++#EXTRA_IMAGEDEPENDS = "u-boot"
++
++PREFERRED_PROVIDER_virtual/kernel = "linux-keystone"
++
++IMAGE_FSTYPES += "tar.bz2"
++
++SERIAL_CONSOLE = "115200 ttyO0"
++
++UBOOT_MACHINE = "keystone_config"
++
++MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
+-- 
+1.7.12.4
 
 
