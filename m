@@ -1,38 +1,31 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f176.google.com (mail-ea0-f176.google.com
-	[209.85.215.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7EFE7E01447;
-	Wed, 21 Nov 2012 15:01:25 -0800 (PST)
-Received: by mail-ea0-f176.google.com with SMTP id d13so1476880eaa.35
-	for <multiple recipients>; Wed, 21 Nov 2012 15:01:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=xD4im3X7mfFtoiAmHcGi3uRhYoDb0MAqpgj3dm6J1Xg=;
-	b=jEu5dg7zJECBSpwDyOQ9OdUU7ubh+VeZbajWbnsbmTHBqKjlzydlVzvuzcuq3l8P0+
-	6OdD53ezUdjlsA7yo5pD83GQyUJFmZM38BszMafg54iWI6Glx2tTkjb/VkEZ5sOA6HFn
-	Pc1AwfLf26erYyB/PpbW9/F7hTT9DndHx8ubmyo/4z+eaKKBKk626g7Fdz79pm8OZeMI
-	1OPGgDZC6IyFWi745kkbA4fH5UUsiVtQA9J+n7p4cCye5EDfD+zVFddBuQd+volzHxs1
-	iVSPd2MSgV/SGwN8N9REEI8oDc+MLNQGyA5YI5E9dW0N7ZS82JBmwPvbgAufIUa5l7P1
-	25tw==
-Received: by 10.14.221.5 with SMTP id q5mr16243894eep.33.1353538884369;
-	Wed, 21 Nov 2012 15:01:24 -0800 (PST)
-Received: from localhost ([94.230.152.246])
-	by mx.google.com with ESMTPS id a45sm2543582eep.16.2012.11.21.15.01.23
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 21 Nov 2012 15:01:23 -0800 (PST)
-Date: Thu, 22 Nov 2012 00:01:20 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Nicolas Dechesne <ndec13@gmail.com>
-Message-ID: <20121121230120.GS12637@jama.jama.net>
-References: <CAOT3miJ73uAvR0Qij3+-q3B6K46=J5ZoFZDzW79YCSUfPbLeAA@mail.gmail.com>
+Return-Path: <Paul_Woegerer@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 834B4E00294
+	for <meta-ti@yoctoproject.org>; Tue, 13 Nov 2012 05:13:16 -0800 (PST)
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1TYGIl-0000K0-Pg from Paul_Woegerer@mentor.com ;
+	Tue, 13 Nov 2012 05:13:15 -0800
+Received: from SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 13 Nov 2012 05:13:15 -0800
+Received: from [137.202.56.138] (137.202.0.76) by
+	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
+	Server id 14.1.289.1; Tue, 13 Nov 2012 13:13:13 +0000
+Message-ID: <50A247AF.10109@mentor.com>
+Date: Tue, 13 Nov 2012 14:14:23 +0100
+From: "Woegerer, Paul" <Paul_Woegerer@mentor.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:16.0) Gecko/20121025 Thunderbird/16.0.2
 MIME-Version: 1.0
-In-Reply-To: <CAOT3miJ73uAvR0Qij3+-q3B6K46=J5ZoFZDzW79YCSUfPbLeAA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Mailman-Approved-At: Wed, 21 Nov 2012 15:32:26 -0800
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-	yocto <yocto@yoctoproject.org>
-Subject: Re: [yocto] build failure with xf86-video-omap
+To: Denys Dmytriyenko <denys@ti.com>
+References: <5077D9E9.4070207@mentor.com> <20121113015716.GE8900@denix.org>
+In-Reply-To: <20121113015716.GE8900@denix.org>
+X-OriginalArrivalTime: 13 Nov 2012 13:13:15.0675 (UTC)
+	FILETIME=[A429E6B0:01CDC1A0]
+X-Mailman-Approved-At: Wed, 21 Nov 2012 15:32:33 -0800
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] linux-omap4-3.1.0: Add sched_process_exec tracing
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,106 +38,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2012 23:01:26 -0000
-X-Groupsio-MsgNum: 1903
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ixDgnS8AC6zwmyK0"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 13 Nov 2012 13:13:16 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 8bit
 
---ixDgnS8AC6zwmyK0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 11/13/2012 02:57 AM, Denys Dmytriyenko wrote:
+> On Fri, Oct 12, 2012 at 10:50:49AM +0200, Woegerer, Paul wrote:
+>> Hi,
+>>
+>> the attached patch enables tracing of sched_process_exec events by
+>> adding upstream kernel commit:
+>> https://github.com/torvalds/linux/commit/4ff16c25e2cc48cbe6956e356c38a25ac063a64d
+>> to the linux-omap4-3.1.0 kernel recipe (tested with pandaboard).
+>>
+>> We added this to our meta-ti mirror. It would be great if this could
+>> also be upstream.
+> 
+> Paul,
+> 
+> Care to port it to the 3.4 version we now have for OMAP4?
+> 
 
-On Wed, Nov 21, 2012 at 11:52:30PM +0100, Nicolas Dechesne wrote:
-> hi ,
->=20
-> since xf86-video-omap was recently merged in oe-core and poky, i am trying
-> to remove the recipes we had staged in meta-ti trees for some weeks (
-> http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?id=3D410dc026f2=
-ee24a2346e7563a83f0181c79809cf).
-> so i was trying to build  poky/master with meta-ti/master, for pandaboard,
-> and I get build failures in xf86-video-omap [1] and [2].
->=20
-> so [1] is actually trivial, as we are missing a DEPENDS in the recipe, i
-> can send a patch in oe-core for that.
->=20
-> [2] is a bit more cryptic to me.. so I quickly tried to build with danny (
-> i just cherry picked the commit that introduced xf86-video-omap from
-> master) and this time it built fine.
+Hi Denys,
 
-Check this tread:
-http://lists.linuxtogo.org/pipermail/openembedded-core/2012-November/032012=
-=2Ehtml
-=20
-> has anyone actually tested this recipe?=20
+thanks for getting back to me. This patch is obsolete since 3.4 already
+has sched_process_exec anyway.
 
-obviously no
+Thanks again,
+Paul
 
-Cheers,
+-- 
+Paul Woegerer | SW Development Engineer
+http://go.mentor.com/sourceryanalyzer
 
-> if so I must be doing something > wrong, any hint would be helpful.
->=20
-> i also tried a build without poky, and just oe-core, and got the same
-> failure.
->=20
-> cheers
->=20
-> nicolas
->=20
-> [1] : from log_do.configure for xf86-video-omap
-> checking for XORG... no
-> configure: error: Package requirements (xorg-server >=3D 1.3 xproto
-> fontsproto libdrm >=3D 2.4.36 libdrm_omap xf86driproto  randrproto
-> renderproto videoproto xextproto) were not met:
->=20
->=20
->=20
-> No package 'xf86driproto' found
->=20
-> Consider adjusting the PKG_CONFIG_PATH environment variable if you
-> installed software in a non-standard prefix.
->=20
->=20
-> [2] : from log_do.configure for xf86-video-omap
-> checking dependency style of arm-poky-linux-gnueabi-gcc  -march=3Darmv7-a
-> -mthumb-\
-> interwork -mfloat-abi=3Dsoftfp -mfpu=3Dneon -mtune=3Dcortex-a9
-> --sysroot=3D/data/psi_omap_bu\
-> ilds_admins/ndechesne/yocto/build-poky2/tmp/sysroots/pandaboard... (cache=
-d)
-> none
-> checking for sys/ioctl.h... (cached) yes
-> checking if RANDR is defined... yes
-> checking if RENDER is defined... yes
-> checking if XV is defined... yes
-> checking if DPMSExtension is defined... yes
-> checking for XORG... yes
-> checking for ANSI C header files... (cached) yes
-> checking whether to include DRI support... checking for
-> /usr/include/xorg/dri.h...
-> configure: error: cannot check for file existence when cross compiling
-> ... and configure just
+Mentor Embedded(tm) | Prinz Eugen Straße 72/2/4, Vienna, 1040 Austria
+Nucleus® | Linux® | Android(tm) | Services | UI | Multi-OS
 
-> _______________________________________________
-> yocto mailing list
-> yocto@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/yocto
+Android is a trademark of Google Inc. Use of this trademark is subject
+to Google Permissions.
+Linux is the registered trademark of Linus Torvalds in the U.S. and
+other countries.
 
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---ixDgnS8AC6zwmyK0
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.19 (GNU/Linux)
-
-iEYEARECAAYFAlCtXUAACgkQN1Ujt2V2gBxUtACggQ7q89grk7GiSroShD++fn/3
-eCkAn2WB77qeM91Bd5Zw1yj4EOdPiye/
-=l3tc
------END PGP SIGNATURE-----
-
---ixDgnS8AC6zwmyK0--
