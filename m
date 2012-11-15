@@ -1,27 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
-	[206.46.173.1])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43FB6E00498
-	for <meta-ti@yoctoproject.org>; Thu, 15 Nov 2012 14:39:38 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.12])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MDJ008YIW9M6I40@vms173001.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 15 Nov 2012 16:39:22 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id F26022004C; Thu,
-	15 Nov 2012 17:39:21 -0500 (EST)
-Date: Thu, 15 Nov 2012 17:39:21 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Belisko Marek <marek.belisko@gmail.com>
-Message-id: <20121115223921.GA28859@denix.org>
-References: <CAAfyv35DeRd1qECdKmy9TX2EJ3Xs68C0wGFck-qxD3AH6YYLCw@mail.gmail.com>
-	<CAOT3miJQ_VscLkeWfdVXY-kMrn4AL=4wyV3yKyrm9wH0aDVFrw@mail.gmail.com>
-	<CAAfyv36w+eRju-dA0zd_L9pgLjhaQJjeYjMwMJrXBgC12ajBkg@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAAfyv36w+eRju-dA0zd_L9pgLjhaQJjeYjMwMJrXBgC12ajBkg@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: pandaboard fails to fetch 3.4 kernel
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 653ECE00498
+	for <meta-ti@yoctoproject.org>; Thu, 15 Nov 2012 14:44:54 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 003A652A6F; Thu, 15 Nov 2012 22:44:52 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20121115224453.003A652A6F@arago-project.org>
+Date: Thu, 15 Nov 2012 22:44:52 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Chase Maupin : conf/machine: Update the FSTYPES for AMSDK machines
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,42 +22,122 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Nov 2012 22:39:38 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 15 Nov 2012 22:44:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, Nov 15, 2012 at 09:37:43PM +0100, Belisko Marek wrote:
-> Hi,
-> 
-> On Thu, Nov 15, 2012 at 9:36 PM, Nicolas Dechesne <ndec13@gmail.com> wrote:
-> > On Thu, Nov 15, 2012 at 9:32 PM, Belisko Marek <marek.belisko@gmail.com> wrote:
-> >> ERROR: Function failed: Fetcher failure for URL:
-> >> 'git://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487'.
-> >> Unable to fetch URL from any source.
-> >> ERROR: Logfile of failure stored in:
-> >> /home/open-nandra/yocto/poky-danny-8.0/panda_build/tmp/work/pandaboard-poky-linux-gnueabi/linux-omap4-3.4-r0/temp/log.do_fetch.19671
-> >> ERROR: Task 681
-> >> (/home/open-nandra/yocto/meta-ti/recipes-kernel/linux/linux-omap4_3.4.bb,
-> >> do_fetch) failed with exit code '1'
-> >>
-> >
-> > are you behind a corporate firewall?
-> Nope.
-> >
-> > is it reproducible several times? it could be a weakness of our git server...
-> 100% reproducible
+Module: meta-ti
+Branch: master
+Commit: 37e525ba2cbde38f6429bc0876140fc5bceb1301
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=37e525ba2cbde38f6429bc0876140fc5bceb1301
 
-Can you do it manually:
+Author: Chase Maupin <Chase.Maupin@ti.com>
+Date:   Thu Nov 15 15:15:03 2012 -0600
 
-$ git clone git://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git
-Cloning into 'kernel-ubuntu'...
-remote: Counting objects: 2881261, done.
-remote: Compressing objects: 100% (435671/435671), done.
-remote: Total 2881261 (delta 2417385), reused 2880107 (delta 2416231)
-Receiving objects: 100% (2881261/2881261), 691.87 MiB | 1.02 MiB/s, done.
-Resolving deltas: 100% (2417385/2417385), done.
-Checking out files: 100% (33126/33126), done.
+conf/machine: Update the FSTYPES for AMSDK machines
 
--- 
-Denys
+* Updated the IMAGE_FSTYPES to ubi and tar.gz for the AMSDK
+  machine types as the base file system type.
+* This was done to speed up compression/decompression time at
+  the expense of file size.
+
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ conf/machine/am180x-evm.conf  |    2 ++
+ conf/machine/am335x-evm.conf  |    2 +-
+ conf/machine/am3517-evm.conf  |    2 +-
+ conf/machine/am37x-evm.conf   |    2 +-
+ conf/machine/am387x-evm.conf  |    2 ++
+ conf/machine/am389x-evm.conf  |    2 ++
+ conf/machine/beagleboard.conf |    2 +-
+ 7 files changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
+index fb57f6e..827885b 100644
+--- a/conf/machine/am180x-evm.conf
++++ b/conf/machine/am180x-evm.conf
+@@ -9,6 +9,8 @@ UBOOT_MACHINE = "da850evm_config"
+ UBOOT_ENTRYPOINT = "0xc0008000"
+ UBOOT_LOADADDRESS = "0xc0008000"
+ 
++IMAGE_FSTYPES += "tar.gz ubi"
++
+ MACHINE_FEATURES = "kernel26 serial ethernet"
+ 
+ SERIAL_CONSOLE = "115200 ttyS2"
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index e7ddd0b..e86c41b 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -12,7 +12,7 @@ GUI_MACHINE_CLASS = "smallscreen"
+ 
+ require conf/machine/include/ti33x.inc
+ 
+-IMAGE_FSTYPES += "ubi tar.bz2"
++IMAGE_FSTYPES += "ubi tar.gz"
+ 
+ SERIAL_CONSOLE = "115200 ttyO0"
+ 
+diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
+index b3efa9a..e817069 100644
+--- a/conf/machine/am3517-evm.conf
++++ b/conf/machine/am3517-evm.conf
+@@ -16,7 +16,7 @@ require conf/machine/include/omap3.inc
+ 
+ # Ship all kernel modules
+ 
+-IMAGE_FSTYPES += "ubi tar.bz2"
++IMAGE_FSTYPES += "ubi tar.gz"
+ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ 
+ SERIAL_CONSOLE = "115200 ttyS2"
+diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
+index ddb54e8..9a1acb4 100644
+--- a/conf/machine/am37x-evm.conf
++++ b/conf/machine/am37x-evm.conf
+@@ -16,7 +16,7 @@ require conf/machine/include/omap3.inc
+ 
+ # Ship all kernel modules
+ 
+-IMAGE_FSTYPES += "jffs2 tar.bz2"
++IMAGE_FSTYPES += "ubi tar.gz"
+ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ 
+ SERIAL_CONSOLE = "115200 ttyS0"
+diff --git a/conf/machine/am387x-evm.conf b/conf/machine/am387x-evm.conf
+index ebf9889..5d9cc8f 100644
+--- a/conf/machine/am387x-evm.conf
++++ b/conf/machine/am387x-evm.conf
+@@ -3,3 +3,5 @@
+ #@DESCRIPTION: Machine configuration for the AM389x evm
+ 
+ require conf/machine/include/ti814x.inc
++
++IMAGE_FSTYPES += "ubi tar.gz"
+diff --git a/conf/machine/am389x-evm.conf b/conf/machine/am389x-evm.conf
+index 9bfe7a7..2a84cad 100644
+--- a/conf/machine/am389x-evm.conf
++++ b/conf/machine/am389x-evm.conf
+@@ -3,3 +3,5 @@
+ #@DESCRIPTION: Machine configuration for the am389x evm
+ 
+ require conf/machine/include/ti816x.inc
++
++IMAGE_FSTYPES += "ubi tar.gz"
+diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
+index a9029d1..b3604a5 100644
+--- a/conf/machine/beagleboard.conf
++++ b/conf/machine/beagleboard.conf
+@@ -19,7 +19,7 @@ EXTRA_IMAGEDEPENDS = "u-boot"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-mainline"
+ 
+-IMAGE_FSTYPES += "tar.bz2 ubi"
++IMAGE_FSTYPES += "tar.gz ubi"
+ EXTRA_IMAGECMD_jffs2 = "-lnp "
+ 
+ # Guesswork
+
 
