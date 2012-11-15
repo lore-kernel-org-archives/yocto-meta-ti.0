@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 653ECE00498
-	for <meta-ti@yoctoproject.org>; Thu, 15 Nov 2012 14:44:54 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56D55E00498
+	for <meta-ti@yoctoproject.org>; Thu, 15 Nov 2012 14:46:14 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 003A652A6F; Thu, 15 Nov 2012 22:44:52 +0000 (UTC)
+	id 09FCB52A6F; Thu, 15 Nov 2012 22:46:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20121115224453.003A652A6F@arago-project.org>
-Date: Thu, 15 Nov 2012 22:44:52 +0000 (UTC)
+Message-Id: <20121115224614.09FCB52A6F@arago-project.org>
+Date: Thu, 15 Nov 2012 22:46:14 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Chase Maupin : conf/machine: Update the FSTYPES for AMSDK machines
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Nov 2012 22:44:54 -0000
+X-List-Received-Date: Thu, 15 Nov 2012 22:46:14 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 37e525ba2cbde38f6429bc0876140fc5bceb1301
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=37e525ba2cbde38f6429bc0876140fc5bceb1301
+Branch: denzil
+Commit: ccfaad7d7bdc436ddb1e31696edcd8ea95e5e837
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ccfaad7d7bdc436ddb1e31696edcd8ea95e5e837
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
 Date:   Thu Nov 15 15:15:03 2012 -0600
@@ -42,6 +42,7 @@ conf/machine: Update the FSTYPES for AMSDK machines
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 
 ---
 
