@@ -1,15 +1,26 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56D55E00498
-	for <meta-ti@yoctoproject.org>; Thu, 15 Nov 2012 14:46:14 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 09FCB52A6F; Thu, 15 Nov 2012 22:46:14 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20121115224614.09FCB52A6F@arago-project.org>
-Date: Thu, 15 Nov 2012 22:46:14 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : conf/machine: Update the FSTYPES for AMSDK machines
+Return-Path: <chase.maupin@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E1C8EE006B3
+	for <meta-ti@yoctoproject.org>; Fri, 16 Nov 2012 08:54:02 -0800 (PST)
+Received: from dbdp20.itg.ti.com ([172.24.170.38])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id qAGGs0rU008000
+	for <meta-ti@yoctoproject.org>; Fri, 16 Nov 2012 10:54:01 -0600
+Received: from DBDE70.ent.ti.com (localhost [127.0.0.1])
+	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id qAGGrx7A012114
+	for <meta-ti@yoctoproject.org>; Fri, 16 Nov 2012 22:24:00 +0530 (IST)
+Received: from dbdp32.itg.ti.com (172.24.170.251) by dbde70.ent.ti.com
+	(172.24.170.148) with Microsoft SMTP Server id 14.1.323.3;
+	Fri, 16 Nov 2012 22:23:59 +0530
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id qAGGrvHI032479;
+	Fri, 16 Nov 2012 22:23:58 +0530
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 16 Nov 2012 10:53:55 -0600
+Message-ID: <1353084835-13700-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Subject: [PATCH] am335x-evm: Increase UBI max size to 500MB
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,123 +33,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Nov 2012 22:46:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 16 Nov 2012 16:54:03 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: denzil
-Commit: ccfaad7d7bdc436ddb1e31696edcd8ea95e5e837
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ccfaad7d7bdc436ddb1e31696edcd8ea95e5e837
-
-Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Thu Nov 15 15:15:03 2012 -0600
-
-conf/machine: Update the FSTYPES for AMSDK machines
-
-* Updated the IMAGE_FSTYPES to ubi and tar.gz for the AMSDK
-  machine types as the base file system type.
-* This was done to speed up compression/decompression time at
-  the expense of file size.
+* Based on the EVM and beaglebone + NAND memory cape we can
+  increase the base file system size to 500MB since by default
+  there is about 504MB of space allocated to the file system
+  partition in the NAND.
+* The max size in LEBs was determined using the formula at
+  http://processors.wiki.ti.com/index.php/UBIFS_Support
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
-
 ---
+ conf/machine/am335x-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
- conf/machine/am180x-evm.conf  |    2 ++
- conf/machine/am335x-evm.conf  |    2 +-
- conf/machine/am3517-evm.conf  |    2 +-
- conf/machine/am37x-evm.conf   |    2 +-
- conf/machine/am387x-evm.conf  |    2 ++
- conf/machine/am389x-evm.conf  |    2 ++
- conf/machine/beagleboard.conf |    2 +-
- 7 files changed, 10 insertions(+), 4 deletions(-)
-
-diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
-index fb57f6e..827885b 100644
---- a/conf/machine/am180x-evm.conf
-+++ b/conf/machine/am180x-evm.conf
-@@ -9,6 +9,8 @@ UBOOT_MACHINE = "da850evm_config"
- UBOOT_ENTRYPOINT = "0xc0008000"
- UBOOT_LOADADDRESS = "0xc0008000"
- 
-+IMAGE_FSTYPES += "tar.gz ubi"
-+
- MACHINE_FEATURES = "kernel26 serial ethernet"
- 
- SERIAL_CONSOLE = "115200 ttyS2"
 diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index e7ddd0b..e86c41b 100644
+index e86c41b..69e5e78 100644
 --- a/conf/machine/am335x-evm.conf
 +++ b/conf/machine/am335x-evm.conf
-@@ -12,7 +12,7 @@ GUI_MACHINE_CLASS = "smallscreen"
+@@ -29,7 +29,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 1988"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
  
- require conf/machine/include/ti33x.inc
- 
--IMAGE_FSTYPES += "ubi tar.bz2"
-+IMAGE_FSTYPES += "ubi tar.gz"
- 
- SERIAL_CONSOLE = "115200 ttyO0"
- 
-diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
-index b3efa9a..e817069 100644
---- a/conf/machine/am3517-evm.conf
-+++ b/conf/machine/am3517-evm.conf
-@@ -16,7 +16,7 @@ require conf/machine/include/omap3.inc
- 
- # Ship all kernel modules
- 
--IMAGE_FSTYPES += "ubi tar.bz2"
-+IMAGE_FSTYPES += "ubi tar.gz"
- EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
- 
- SERIAL_CONSOLE = "115200 ttyS2"
-diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
-index ddb54e8..9a1acb4 100644
---- a/conf/machine/am37x-evm.conf
-+++ b/conf/machine/am37x-evm.conf
-@@ -16,7 +16,7 @@ require conf/machine/include/omap3.inc
- 
- # Ship all kernel modules
- 
--IMAGE_FSTYPES += "jffs2 tar.bz2"
-+IMAGE_FSTYPES += "ubi tar.gz"
- EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
- 
- SERIAL_CONSOLE = "115200 ttyS0"
-diff --git a/conf/machine/am387x-evm.conf b/conf/machine/am387x-evm.conf
-index ebf9889..5d9cc8f 100644
---- a/conf/machine/am387x-evm.conf
-+++ b/conf/machine/am387x-evm.conf
-@@ -3,3 +3,5 @@
- #@DESCRIPTION: Machine configuration for the AM389x evm
- 
- require conf/machine/include/ti814x.inc
-+
-+IMAGE_FSTYPES += "ubi tar.gz"
-diff --git a/conf/machine/am389x-evm.conf b/conf/machine/am389x-evm.conf
-index 9bfe7a7..2a84cad 100644
---- a/conf/machine/am389x-evm.conf
-+++ b/conf/machine/am389x-evm.conf
-@@ -3,3 +3,5 @@
- #@DESCRIPTION: Machine configuration for the am389x evm
- 
- require conf/machine/include/ti816x.inc
-+
-+IMAGE_FSTYPES += "ubi tar.gz"
-diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
-index a9029d1..b3604a5 100644
---- a/conf/machine/beagleboard.conf
-+++ b/conf/machine/beagleboard.conf
-@@ -19,7 +19,7 @@ EXTRA_IMAGEDEPENDS = "u-boot"
- 
- PREFERRED_PROVIDER_virtual/kernel = "linux-mainline"
- 
--IMAGE_FSTYPES += "tar.bz2 ubi"
-+IMAGE_FSTYPES += "tar.gz ubi"
- EXTRA_IMAGECMD_jffs2 = "-lnp "
- 
- # Guesswork
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
+-- 
+1.7.0.4
 
 
