@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E880E006B3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A727CE011AB
 	for <meta-ti@yoctoproject.org>; Fri, 16 Nov 2012 19:55:09 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 410D052AB5; Sat, 17 Nov 2012 03:55:09 +0000 (UTC)
+	id 5699352A9A; Sat, 17 Nov 2012 03:55:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20121117035509.410D052AB5@arago-project.org>
+Message-Id: <20121117035509.5699352A9A@arago-project.org>
 Date: Sat, 17 Nov 2012 03:55:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-keystone: add kernel for keystone SOC
+Subject: Franklin S. Cooper Jr : libgles-omap3: Adjust for non X11 distros
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,21 +27,29 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: denzil
-Commit: 41691840eab371dc3fe7e18dca4c399e8a703bca
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=41691840eab371dc3fe7e18dca4c399e8a703bca
+Commit: 8ebfd2afe9cacc8178585f300032855834dd3a0e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8ebfd2afe9cacc8178585f300032855834dd3a0e
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Nov  1 20:44:13 2012 -0400
+Author: Franklin S. Cooper Jr <fcooper@ti.com>
+Date:   Fri Nov 16 13:19:41 2012 -0600
 
-linux-keystone: add kernel for keystone SOC
+libgles-omap3: Adjust for non X11 distros
 
+* Non X11 base distros are unable to build this Graphics SDK.
+* This patch tweaks the libgles-omap3 include file to always build the
+  Graphics SDK in Raw mode and also build in X11 mode only if X11 is
+  a part of the DISTRO_FEATURE. Components are built, installed and packaged
+  based on which mode the Graphics SDK is built in.
+* Create a new variable PVR_INIT that is by default set to pvrsrvinit. This is
+  needed for newer version of the Graphics SDK that replaced this file.
+
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-keystone-3.5+3.6-rc6/defconfig     | 1012 ++++++++++++++++++++
- recipes-kernel/linux/linux-keystone_3.6.bb         |   17 +
- 2 files changed, 1029 insertions(+), 0 deletions(-)
+ recipes-graphics/libgles/libgles-omap3.inc |  139 ++++++++++++++++++----------
+ 1 files changed, 89 insertions(+), 50 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=41691840eab371dc3fe7e18dca4c399e8a703bca
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=8ebfd2afe9cacc8178585f300032855834dd3a0e
 
