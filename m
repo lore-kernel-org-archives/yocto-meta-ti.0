@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 78F5CE003D6
-	for <meta-ti@yoctoproject.org>; Fri, 16 Nov 2012 19:52:11 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E1939E003D6
+	for <meta-ti@yoctoproject.org>; Fri, 16 Nov 2012 19:55:08 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C4A0E52A9A; Sat, 17 Nov 2012 03:52:09 +0000 (UTC)
+	id E9B8752A86; Sat, 17 Nov 2012 03:55:07 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20121117035209.C4A0E52A9A@arago-project.org>
-Date: Sat, 17 Nov 2012 03:52:09 +0000 (UTC)
+Message-Id: <20121117035507.E9B8752A86@arago-project.org>
+Date: Sat, 17 Nov 2012 03:55:07 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : libgles-omap3: Adjust for non X11 distros
+Subject: Denys Dmytriyenko : tune-cortexa15: add tunes for ARM Cortex-A15
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,34 +22,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Nov 2012 03:52:11 -0000
+X-List-Received-Date: Sat, 17 Nov 2012 03:55:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 3c3a59dcc79cbcc2cd8730bc37b108e217e85860
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c3a59dcc79cbcc2cd8730bc37b108e217e85860
+Branch: denzil
+Commit: fb63adb28aaf48fb0126f3a8a27a90c7458f0650
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fb63adb28aaf48fb0126f3a8a27a90c7458f0650
 
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Fri Nov 16 13:19:41 2012 -0600
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Oct 18 18:27:27 2012 -0400
 
-libgles-omap3: Adjust for non X11 distros
+tune-cortexa15: add tunes for ARM Cortex-A15
 
-* Non X11 base distros are unable to build this Graphics SDK.
-* This patch tweaks the libgles-omap3 include file to always build the
-  Graphics SDK in Raw mode and also build in X11 mode only if X11 is
-  a part of the DISTRO_FEATURE. Components are built, installed and packaged
-  based on which mode the Graphics SDK is built in.
-* Create a new variable PVR_INIT that is by default set to pvrsrvinit. This is
-  needed for newer version of the Graphics SDK that replaced this file.
+http://www.arm.com/products/processors/cortex-a/cortex-a15.php
 
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-graphics/libgles/libgles-omap3.inc |  139 ++++++++++++++++++----------
- 1 files changed, 89 insertions(+), 50 deletions(-)
+ conf/machine/include/tune-cortexa15.inc |   24 ++++++++++++++++++++++++
+ 1 files changed, 24 insertions(+), 0 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=3c3a59dcc79cbcc2cd8730bc37b108e217e85860
+diff --git a/conf/machine/include/tune-cortexa15.inc b/conf/machine/include/tune-cortexa15.inc
+new file mode 100644
+index 0000000..690e934
+--- /dev/null
++++ b/conf/machine/include/tune-cortexa15.inc
+@@ -0,0 +1,24 @@
++DEFAULTTUNE ?= "cortexa15-neon"
++
++require conf/machine/include/arm/arch-armv7a.inc
++
++TUNEVALID[cortexa15] = "Enable Cortex-A15 specific processor optimizations"
++TUNE_CCARGS += "${@bb.utils.contains("TUNE_FEATURES", "cortexa15", "-mtune=cortex-a15", "", d)}"
++
++# Little Endian base configs
++AVAILTUNES += "cortexa15 cortexa15t cortexa15-neon"
++TUNE_FEATURES_tune-cortexa15 = "${TUNE_FEATURES_tune-armv7a} cortexa15"
++TUNE_FEATURES_tune-cortexa15t = "${TUNE_FEATURES_tune-armv7at} cortexa15"
++TUNE_FEATURES_tune-cortexa15-neon = "${TUNE_FEATURES_tune-armv7a-neon} cortexa15"
++PACKAGE_EXTRA_ARCHS_tune-cortexa15 = "${PACKAGE_EXTRA_ARCHS_tune-armv7a}"
++PACKAGE_EXTRA_ARCHS_tune-cortexa15t = "${PACKAGE_EXTRA_ARCHS_tune-armv7at}"
++PACKAGE_EXTRA_ARCHS_tune-cortexa15-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7a-neon}"
++
++# VFP Tunes
++AVAILTUNES += "cortexa15hf cortexa15thf cortexa15hf-neon"
++TUNE_FEATURES_tune-cortexa15hf ?= "${TUNE_FEATURES_tune-armv7ahf} cortexa15"
++TUNE_FEATURES_tune-cortexa15thf ?= "${TUNE_FEATURES_tune-armv7athf} cortexa15"
++TUNE_FEATURES_tune-cortexa15hf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa15"
++PACKAGE_EXTRA_ARCHS_tune-cortexa15hf = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf}"
++PACKAGE_EXTRA_ARCHS_tune-cortexa15thf = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf}"
++PACKAGE_EXTRA_ARCHS_tune-cortexa15hf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf-neon}"
+
 
