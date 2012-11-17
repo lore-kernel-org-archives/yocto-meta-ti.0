@@ -1,15 +1,22 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C02F9E006B3
-	for <meta-ti@yoctoproject.org>; Fri, 16 Nov 2012 19:55:09 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 8782052AB4; Sat, 17 Nov 2012 03:55:09 +0000 (UTC)
+Return-Path: <denys@ti.com>
+Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
+	[206.46.173.1])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4FF6AE003D6
+	for <meta-ti@yoctoproject.org>; Fri, 16 Nov 2012 19:59:16 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.191.205.12])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MDM003I35QCPC70@vms173001.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 16 Nov 2012 21:59:00 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 17BD220024; Fri,
+	16 Nov 2012 22:59:00 -0500 (EST)
+From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Message-Id: <20121117035509.8782052AB4@arago-project.org>
-Date: Sat, 17 Nov 2012 03:55:09 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : libgles-omap3: Verify pvrsrvkm module was found
+Date: Fri, 16 Nov 2012 22:58:59 -0500
+Message-id: <1353124739-28089-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 1.8.0
+Subject: [PATCH] u-boot: add version 2012.07 for keystone machines
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,61 +29,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Nov 2012 03:55:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 17 Nov 2012 03:59:16 -0000
 
-Module: meta-ti
-Branch: denzil
-Commit: 8da73dfd146226b782f6b41a9a3138a0e160b265
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8da73dfd146226b782f6b41a9a3138a0e160b265
-
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Fri Nov 16 13:19:42 2012 -0600
-
-libgles-omap3: Verify pvrsrvkm module was found
-
-* Check to see if the pvrsrvkm.ko module was found and that the insmod
-  for that module was successful.
-
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ conf/machine/keystone-evm.conf       |  2 +-
+ recipes-bsp/u-boot/u-boot_2012.07.bb | 25 +++++++++++++++++++++++++
+ 2 files changed, 26 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-bsp/u-boot/u-boot_2012.07.bb
 
- recipes-graphics/libgles/libgles-omap3.inc    |    2 +-
- recipes-graphics/libgles/libgles-omap3/rc.pvr |    7 +++++++
- 2 files changed, 8 insertions(+), 1 deletions(-)
-
-diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-index 64667e4..0f15ae6 100644
---- a/recipes-graphics/libgles/libgles-omap3.inc
-+++ b/recipes-graphics/libgles/libgles-omap3.inc
-@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum
- LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
+diff --git a/conf/machine/keystone-evm.conf b/conf/machine/keystone-evm.conf
+index 188d53c..0b6d7ab 100644
+--- a/conf/machine/keystone-evm.conf
++++ b/conf/machine/keystone-evm.conf
+@@ -18,6 +18,6 @@ IMAGE_FSTYPES += "tar.bz2"
  
--PR = "r34"
-+PR = "r35"
+ SERIAL_CONSOLE = "115200 ttyO0"
  
- COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
+-UBOOT_MACHINE = "keystone_config"
++UBOOT_MACHINE = "tci6638_evm_config"
  
-diff --git a/recipes-graphics/libgles/libgles-omap3/rc.pvr b/recipes-graphics/libgles/libgles-omap3/rc.pvr
-index 00cd994..e5a4cd1 100755
---- a/recipes-graphics/libgles/libgles-omap3/rc.pvr
-+++ b/recipes-graphics/libgles/libgles-omap3/rc.pvr
-@@ -42,6 +42,13 @@ fbset -vyres $(expr $YRES \* 3)
- sgxprepare () {
- 	echo Starting PVR
- 	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
+ MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
+diff --git a/recipes-bsp/u-boot/u-boot_2012.07.bb b/recipes-bsp/u-boot/u-boot_2012.07.bb
+new file mode 100644
+index 0000000..76dde3b
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot_2012.07.bb
+@@ -0,0 +1,25 @@
++require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
 +
-+    if [ "$?" != "0" ]
-+    then
-+        echo "Could not find pvrsrvkm driver"
-+        exit 1
-+    fi
++DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
 +
- 	modprobe omaplfb
- 	modprobe bufferclass_ti
- 
++COMPATIBLE_MACHINE = "keystone"
++
++DEFAULT_PREFERENCE = "-1"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++PR = "r0+gitr${SRCPV}"
++
++SRC_URI = "git://gtgit01.gt.design.ti.com/git/projects/u-boot-keystone.git;protocol=git;branch=${BRANCH}"
++
++BRANCH = "master"
++
++SRCREV = "6e710c61dba2665e01c900470a0a63743ff431c6"
++
++EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
++
++S = "${WORKDIR}/git"
++
++UBOOT_SUFFIX = "bin"
+-- 
+1.8.0
 
 
