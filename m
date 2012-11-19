@@ -1,15 +1,36 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6288CE00348
-	for <meta-ti@yoctoproject.org>; Sun, 18 Nov 2012 21:09:39 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 12215529A9; Mon, 19 Nov 2012 05:09:39 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20121119050939.12215529A9@arago-project.org>
-Date: Mon, 19 Nov 2012 05:09:39 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot: add version 2012.07 for keystone machines
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-vb0-f48.google.com (mail-vb0-f48.google.com
+	[209.85.212.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34316E0049F
+	for <meta-ti@yoctoproject.org>; Mon, 19 Nov 2012 08:42:29 -0800 (PST)
+Received: by mail-vb0-f48.google.com with SMTP id l22so3694682vbn.35
+	for <meta-ti@yoctoproject.org>; Mon, 19 Nov 2012 08:42:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=DS3BdVlxVEUV3uI0Z3EkU7pPmwOLCvFg9lfNFO+d554=;
+	b=x/BUXLPbkJBtxZcSrwNx+/euf90zz7EuM14UZ5EiBEGM48BvZQoWm6E3TiVIPDE378
+	frnTqRGP4nO7T/KjWqbTppkYvd/UWoZl0rUFw0wMRts0f/9qEK4J/kJUFxEBhGzzVwrk
+	Ki4xJWlKPPUh0mUmaY43Hckzdq5jwKLfnqoiWCAg+Q0dmbBlmti4AmtXnSSvfoxWZdUA
+	o9uhJf380GwDZmroZOpPG3qeg0BbgMJWG9F0aDQfuQTPWEsMaRVx5PIFoBlCDpUFoiCV
+	0nRZDvNd6zX+Z4d830H8kLEC/UcHQ3l/PyLlaFZ+5d1+QvQaBxlAi+HapzuyJNUUf/0W
+	JNpA==
+MIME-Version: 1.0
+Received: by 10.220.154.68 with SMTP id n4mr19895295vcw.22.1353343349262; Mon,
+	19 Nov 2012 08:42:29 -0800 (PST)
+Received: by 10.58.155.199 with HTTP; Mon, 19 Nov 2012 08:42:29 -0800 (PST)
+In-Reply-To: <CA+2YH7v8JzAnc=BgQ1h4n4ZJ+niVXL00+g-s+CtTnkjbV1x0gg@mail.gmail.com>
+References: <CAOd_LFxJGZ=MW6ni9Sr3PzUQruNNgf=Wzuw+nJYjO1bTxDQUZA@mail.gmail.com>
+	<20121117000555.GK7631@edge>
+	<CAOd_LFwO7qx6HFrQOuGCJCYQ7vCMVikkZ80XX=3Hd=t8qDkOQA@mail.gmail.com>
+	<CAOd_LFxd=_sjk3Vd-cnjLnrP=bT-fkya7sbqcCZCnmMjAcU=7w@mail.gmail.com>
+	<CA+2YH7v8JzAnc=BgQ1h4n4ZJ+niVXL00+g-s+CtTnkjbV1x0gg@mail.gmail.com>
+Date: Mon, 19 Nov 2012 11:42:29 -0500
+Message-ID: <CAOd_LFxPVW1Sx-4H4jhbu=40HB6_uZe6CvUOCPQe_xKTd-NsLQ@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: Enrico <ebutera@users.sourceforge.net>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: which kernel for pandaboard?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,67 +43,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Nov 2012 05:09:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 19 Nov 2012 16:42:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Module: meta-ti
-Branch: denzil
-Commit: 1fdb503d8ae79b7e014557e457fc2b04811e0786
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1fdb503d8ae79b7e014557e457fc2b04811e0786
+On Sun, Nov 18, 2012 at 7:06 AM, Enrico <ebutera@users.sourceforge.net> wrote:
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Nov 16 22:58:02 2012 -0500
+> From the boot log you attached it seems that the kernel hanged far
+> before the login prompt.
+>
+> I can send you an uImage i'm using with a similar setup to test, the
+> only difference i can see is that i have a pandabord ES.
 
-u-boot: add version 2012.07 for keystone machines
+Yes, I'd be interested in trying your kernel.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+I tried the validation image from pandaboard.org, and that seems to boot fine.
 
----
+Thanks,
+Cliff
 
- conf/machine/keystone-evm.conf       |    2 +-
- recipes-bsp/u-boot/u-boot_2012.07.bb |   23 +++++++++++++++++++++++
- 2 files changed, 24 insertions(+), 1 deletions(-)
-
-diff --git a/conf/machine/keystone-evm.conf b/conf/machine/keystone-evm.conf
-index 188d53c..0b6d7ab 100644
---- a/conf/machine/keystone-evm.conf
-+++ b/conf/machine/keystone-evm.conf
-@@ -18,6 +18,6 @@ IMAGE_FSTYPES += "tar.bz2"
- 
- SERIAL_CONSOLE = "115200 ttyO0"
- 
--UBOOT_MACHINE = "keystone_config"
-+UBOOT_MACHINE = "tci6638_evm_config"
- 
- MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
-diff --git a/recipes-bsp/u-boot/u-boot_2012.07.bb b/recipes-bsp/u-boot/u-boot_2012.07.bb
-new file mode 100644
-index 0000000..f39e60c
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot_2012.07.bb
-@@ -0,0 +1,23 @@
-+require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
-+
-+DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
-+
-+COMPATIBLE_MACHINE = "keystone"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+PR = "r0+gitr${SRCPV}"
-+
-+SRC_URI = "git://gtgit01.gt.design.ti.com/git/projects/u-boot-keystone.git;protocol=git;branch=${BRANCH}"
-+
-+BRANCH = "master"
-+
-+SRCREV = "6e710c61dba2665e01c900470a0a63743ff431c6"
-+
-+EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
-+
-+S = "${WORKDIR}/git"
-+
-+UBOOT_SUFFIX = "bin"
-
+-- 
+=================
+http://bec-systems.com
 
