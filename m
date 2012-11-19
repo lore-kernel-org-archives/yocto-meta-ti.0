@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B158E00348
-	for <meta-ti@yoctoproject.org>; Sun, 18 Nov 2012 21:07:43 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6288CE00348
+	for <meta-ti@yoctoproject.org>; Sun, 18 Nov 2012 21:09:39 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9ACE552AA2; Mon, 19 Nov 2012 05:07:41 +0000 (UTC)
+	id 12215529A9; Mon, 19 Nov 2012 05:09:39 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20121119050741.9ACE552AA2@arago-project.org>
-Date: Mon, 19 Nov 2012 05:07:41 +0000 (UTC)
+Message-Id: <20121119050939.12215529A9@arago-project.org>
+Date: Mon, 19 Nov 2012 05:09:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot: add version 2012.07 for keystone machines
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Nov 2012 05:07:43 -0000
+X-List-Received-Date: Mon, 19 Nov 2012 05:09:39 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: fe6972418ab6d2b39a0991ecbe29887b259170f6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fe6972418ab6d2b39a0991ecbe29887b259170f6
+Branch: denzil
+Commit: 1fdb503d8ae79b7e014557e457fc2b04811e0786
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1fdb503d8ae79b7e014557e457fc2b04811e0786
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Nov 16 22:58:02 2012 -0500
