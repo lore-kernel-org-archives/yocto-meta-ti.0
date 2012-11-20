@@ -1,35 +1,36 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
-	[209.85.223.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86AA0E00348
-	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 03:21:48 -0800 (PST)
-Received: by mail-ie0-f176.google.com with SMTP id 13so2435518iea.35
-	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 03:21:48 -0800 (PST)
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
+	[209.85.220.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1CBFAE0051E
+	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 06:02:14 -0800 (PST)
+Received: by mail-vc0-f176.google.com with SMTP id fl13so7418760vcb.35
+	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 06:02:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:cc:content-type;
-	bh=iukZClT6yVh9f/xDPymZiRBH90q2kwObDvIuzuk+6nA=;
-	b=Y9PBwgVBw1LTL5sVkjCfEJt0tKKXrv/s1l+o1/10I55uBiVv486IT3JEg4X81/LUPB
-	JeoxR1FJCVX9095i0Gbt4ACzUQlGGFt6ecWG3y09+nNtoeufp82rLIzye1GGpucjXI30
-	XSXj7EFvvtuDyYk9SOgFD5a+9lLwpNIM0fLR88flCOH4ykqF4Wcx76fu8fKiBoAd4XOE
-	IQNfmIhibu6Df04XNeFmnWtjDdYk6la132r1uBcxnyyKct88y877uEIo/rfjkmo9xlbI
-	RTLos6p7RdAJB6abUc2LSVqUmqODUhmfWkcF3kJX3Q40ZWFX5WPyKR/rmtBHGSzrnKUZ
-	uEJQ==
+	bh=ofTQdTf6P44jyIc9ohDHNOndPFcIWhIsSbHMYjYMooE=;
+	b=iY6Zs2t+hnIFGnPvFFBsqDKDee+86LkpG5xeOp/ZetvtzENy3KeSTQgl4lcPc3SJHH
+	N4onMtZekkndPYKAXX21zo3N4dQBvf8XrcF+11v2pT1qF4SSW/3fGSBhRCpUAY9n0CbG
+	nd9dss6YXiJCaTLTp+vzYDakKBGkkmKncH+U6vK4VnM7OJnmBEwuWe7zQjCUz+f2Wrcv
+	i2b8Scw2NatfbPK7MTs2F7BGYqmK/m+OxDPbXTCvFhf8x+xkh+trGmlMlNfRx3b7l/+I
+	ptaJk0a7J/2HnzaO00u1knYymljJGym3ALPiXyjGE0bf2fFpfAsE3wDjLF/2SePvY21v
+	M4MQ==
 MIME-Version: 1.0
-Received: by 10.50.152.137 with SMTP id uy9mr9458791igb.62.1353410508061; Tue,
-	20 Nov 2012 03:21:48 -0800 (PST)
-Received: by 10.64.171.82 with HTTP; Tue, 20 Nov 2012 03:21:47 -0800 (PST)
-In-Reply-To: <20121115223921.GA28859@denix.org>
-References: <CAAfyv35DeRd1qECdKmy9TX2EJ3Xs68C0wGFck-qxD3AH6YYLCw@mail.gmail.com>
-	<CAOT3miJQ_VscLkeWfdVXY-kMrn4AL=4wyV3yKyrm9wH0aDVFrw@mail.gmail.com>
-	<CAAfyv36w+eRju-dA0zd_L9pgLjhaQJjeYjMwMJrXBgC12ajBkg@mail.gmail.com>
-	<20121115223921.GA28859@denix.org>
-Date: Tue, 20 Nov 2012 12:21:47 +0100
-Message-ID: <CAAfyv37oJbD-DXOoEFY_PDaSYuGHVXBT8-Ft=b4Em1RvbVhNmA@mail.gmail.com>
-From: Belisko Marek <marek.belisko@gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
+Received: by 10.220.225.132 with SMTP id is4mr23504086vcb.47.1353420133947;
+	Tue, 20 Nov 2012 06:02:13 -0800 (PST)
+Received: by 10.58.155.199 with HTTP; Tue, 20 Nov 2012 06:02:13 -0800 (PST)
+In-Reply-To: <CA+2YH7v8JzAnc=BgQ1h4n4ZJ+niVXL00+g-s+CtTnkjbV1x0gg@mail.gmail.com>
+References: <CAOd_LFxJGZ=MW6ni9Sr3PzUQruNNgf=Wzuw+nJYjO1bTxDQUZA@mail.gmail.com>
+	<20121117000555.GK7631@edge>
+	<CAOd_LFwO7qx6HFrQOuGCJCYQ7vCMVikkZ80XX=3Hd=t8qDkOQA@mail.gmail.com>
+	<CAOd_LFxd=_sjk3Vd-cnjLnrP=bT-fkya7sbqcCZCnmMjAcU=7w@mail.gmail.com>
+	<CA+2YH7v8JzAnc=BgQ1h4n4ZJ+niVXL00+g-s+CtTnkjbV1x0gg@mail.gmail.com>
+Date: Tue, 20 Nov 2012 09:02:13 -0500
+Message-ID: <CAOd_LFwhgJNzxpRYjX+w32PemaqRZCOPFop0QXeiVSLqMHBhjA@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: Enrico <ebutera@users.sourceforge.net>
 Cc: meta-ti@yoctoproject.org
-Subject: Re: pandaboard fails to fetch 3.4 kernel
+Subject: Re: which kernel for pandaboard?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,57 +43,72 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2012 11:21:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 20 Nov 2012 14:02:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Nov 15, 2012 at 11:39 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> On Thu, Nov 15, 2012 at 09:37:43PM +0100, Belisko Marek wrote:
->> Hi,
+On Sun, Nov 18, 2012 at 7:06 AM, Enrico <ebutera@users.sourceforge.net> wrote:
+> On Sat, Nov 17, 2012 at 8:34 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
+>> copying mail list ...
 >>
->> On Thu, Nov 15, 2012 at 9:36 PM, Nicolas Dechesne <ndec13@gmail.com> wrote:
->> > On Thu, Nov 15, 2012 at 9:32 PM, Belisko Marek <marek.belisko@gmail.com> wrote:
->> >> ERROR: Function failed: Fetcher failure for URL:
->> >> 'git://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487'.
->> >> Unable to fetch URL from any source.
->> >> ERROR: Logfile of failure stored in:
->> >> /home/open-nandra/yocto/poky-danny-8.0/panda_build/tmp/work/pandaboard-poky-linux-gnueabi/linux-omap4-3.4-r0/temp/log.do_fetch.19671
->> >> ERROR: Task 681
->> >> (/home/open-nandra/yocto/meta-ti/recipes-kernel/linux/linux-omap4_3.4.bb,
->> >> do_fetch) failed with exit code '1'
->> >>
->> >
->> > are you behind a corporate firewall?
->> Nope.
->> >
->> > is it reproducible several times? it could be a weakness of our git server...
->> 100% reproducible
+>> On Sat, Nov 17, 2012 at 2:33 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
+>>>
+>>> On Fri, Nov 16, 2012 at 7:05 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+>>>>
+>>>> On Fri, Nov 16, 2012 at 04:56:53PM -0500, Cliff Brake wrote:
+>>>> > I'm trying to boot a recent oe-core+meta-oe+meta-angstrom+meta-ti on a
+>>>> > pandaboard.  With 3.4, I get the attached.  With 3.1, I get the below:
+>>>>
+>>>> 3.4 should work. With 3.1 there were some reports that it didn't boot,
+>>>> when
+>>>> built with recent toolchain from oe-core... What problems do you have
+>>>> with
+>>>> 3.4? Does it boot?
+>>>
+>>>
+>>> I don't get to a log-in prompt:
 >
-> Can you do it manually:
+> From the boot log you attached it seems that the kernel hanged far
+> before the login prompt.
 >
-> $ git clone git://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git
-> Cloning into 'kernel-ubuntu'...
-> remote: Counting objects: 2881261, done.
-> remote: Compressing objects: 100% (435671/435671), done.
-> remote: Total 2881261 (delta 2417385), reused 2880107 (delta 2416231)
-> Receiving objects: 100% (2881261/2881261), 691.87 MiB | 1.02 MiB/s, done.
-> Resolving deltas: 100% (2417385/2417385), done.
-> Checking out files: 100% (33126/33126), done.
-Why then it's not working in yocto? Any ideas?
->
-> --
-> Denys
+> I can send you an uImage i'm using with a similar setup to test, the
+> only difference i can see is that i have a pandabord ES.
 
-Marek
+Enrico sent me a uImage which I tried and it does the same thing:
+
+....
+[    0.000000] OMAP4430 ES2.0
+....
+[    2.950775] asoc: omap-hdmi-hifi <-> omap-hdmi-audio-dai mapping ok
+[    2.958465] u32 classifier
+[    2.961364]     Actions configured
+[    2.965332] TCP: cubic registered
+[    2.969390] NET: Registered protocol family 10
+[    2.974975] NET: Registered protocol family 17
+[    2.979858] lib80211: common routines for IEEE802.11 drivers
+[    2.986053] Registering the dns_resolver key type
+[    2.991271] VFP support v0.3: implementor 41 architecture 3 part 30
+variant 9 rev 1
+[    2.999572] ThumbEE CPU extension supported.
+[    3.004211] Registering SWP/SWPB emulation handler
+
+(stops here)
+
+As mentioned before, mainline kernels boot fine on this board, so it
+appears the meta-ti kernel has problems with at least some non-ES
+Panda boards.
+
+Enrico, can you send me a complete boot log from your system?  Perhaps
+if I can see which drivers are being initialized after the above
+message, then we can more easily narrow it down.
+
+Also, do you have the display working on your system?  If so, did you
+have to add any special kernel command line args to select the display
+format, etc?
+
+Thanks,
+Cliff
 
 -- 
-as simple and primitive as possible
--------------------------------------------------
-Marek Belisko - OPEN-NANDRA
-Freelance Developer
-
-Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-Tel: +421 915 052 184
-skype: marekwhite
-twitter: #opennandra
-web: http://open-nandra.com
+=================
+http://bec-systems.com
 
