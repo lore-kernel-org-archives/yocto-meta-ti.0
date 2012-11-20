@@ -1,31 +1,28 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D4BE4E0141C
-	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 08:24:24 -0800 (PST)
-Received: from cpebcc8100fb8db-cmbcc8100fb8d8.cpe.net.cable.rogers.com
-	([174.116.196.46]:34008 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.77) (envelope-from <rpjday@crashcourse.ca>)
-	id 1Taqca-0005VA-0m
-	for meta-ti@yoctoproject.org; Tue, 20 Nov 2012 11:24:24 -0500
-Date: Tue, 20 Nov 2012 11:24:20 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: meta-ti mailing list <meta-ti@yoctoproject.org>
-Message-ID: <alpine.DEB.2.02.1211201114100.29485@oneiric>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
+Return-Path: <ndec13@gmail.com>
+Received: from mail-qa0-f41.google.com (mail-qa0-f41.google.com
+	[209.85.216.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7199E0141C
+	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 08:50:56 -0800 (PST)
+Received: by mail-qa0-f41.google.com with SMTP id c26so1004371qad.14
+	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 08:50:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=D6yCTxcsMYoyfj1e88gm4KSoO4BCPtbGPt8SYsRk0fs=;
+	b=ZS3vl0aUUPLISpkRgF7ST0va/Gu2RXGI2OApXVKSQBnhMhHpN6VreL0h21cWFC4Oj4
+	D9y/eaR4Q6XePBk7lvkmF0mwkx6Uq1o/pCi69pcZKbv6NPZ6R+3R+h+TCrri/xT453s5
+	7n4nss1I2UuEpz5UmxhaaE6uiprIu55pMAsmZFc2ExbfaQejttJNs8TSQgWamw6txD9C
+	/kYmK6WTR99f7XcJyRzkr/yPIiorIvgQF9V1Hrg3Ij5b5RO32itdAySd0BTiIdB3bjgu
+	FyoyIgBjUrXJn0NdRkvS+mO9u3EdgQ1ylDbWOsKIx9KxYJeWBCvr8C4zGzLilL6PvzcC
+	UMmw==
+Received: by 10.229.177.72 with SMTP id bh8mr3709354qcb.10.1353430255935; Tue,
+	20 Nov 2012 08:50:55 -0800 (PST)
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: building for pandaboard fails fetching u-boot *way* into the build phase
+Received: by 10.49.121.161 with HTTP; Tue, 20 Nov 2012 08:50:35 -0800 (PST)
+From: Nicolas Dechesne <ndec13@gmail.com>
+Date: Tue, 20 Nov 2012 17:50:35 +0100
+Message-ID: <CAOT3miJT7PUO5_PRSjMwg9razGMxCzV6785Wkq2OkqO78X4pcQ@mail.gmail.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: xf86-video-omap and libdrm for OMAP
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,68 +35,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2012 16:24:25 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 20 Nov 2012 16:50:56 -0000
+Content-Type: multipart/alternative; boundary=0016369f9a74a2222204cef00991
 
+--0016369f9a74a2222204cef00991
+Content-Type: text/plain; charset=ISO-8859-1
 
-  i'm sure there's a trivial workaround/explanation for this, but i
-wanted to build the basic meta-ti based build for my panda ES, so i
-started with oe-core and added the meta-ti layer.  then, because of
-some license issues (and based on a quick google search), i added this
-to my local.conf:
+hi
 
-  BBMASK = "meta-ti/recipes-misc"
+i just noticed that the recipe for xf86-video-omap was just merged into
+poky/master, and that libdrm was updated as well (and OMAP experimental
+support was enabled too):
 
-at that point, after selecting "pandaboard" as the machine, i wanted
-to prefetch everything:
+0ed7c53 xf86-video-omap: add new recipe to follow the maintained repo
+cb758f9 libdrm: upgrade to 2.4.40
 
-$ bitbake -c fetchall core-image-minimal
+from a quick review, i believe this should supersede the recipes from
+meta-ti that got merged recently:
 
-which used solely my pre-mirror directory so that didn't take long.
+410dc02 xf86-video-omap: add new recipe for OMAP4/5 X11 video driver
+cce5a7a libdrm: enable omap experimental api support
 
-  *then*, because i allegedly had fetched everything i needed for the
-build, i edited my site.conf file and added:
+i won't be able to get that tested in the next couple of days, very likely,
+so i wanted to know:
 
-BB_NO_NETWORK = "1"
+- if anyone tested poky/master (or oe-core as this came from oe-core) on
+panda and/or beagle?
+- what is the policy in this situation? should we simply remove our recipes
+from meta-ti?
 
-which, AIUI, should be perfectly safe since i had just done a
-fetchall.  not so:
+cheers
 
-ERROR: Function failed: Network access disabled through BB_NO_NETWORK
-but access requested with command git clone --bare --mirror
-git://www.denx.de/git/u-boot.git
-/home/rpjday/y/builds/ti/panda/downloads/git2/www.denx.de.git.u-boot.git
-(for url None)
-ERROR: Logfile of failure stored in:
-/home/rpjday/y/builds/ti/panda/tmp-eglibc/work/pandaboard-oe-linux-gnueabi/u-boot-2011.12-r8/temp/log.do_fetch.29635
+nicolas
 
-hmmmmmm ...
+--0016369f9a74a2222204cef00991
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-$ bitbake -s | grep u-boot
-nativesdk-u-boot-mkimage                          :2011.06-r0
-u-boot                                            :2011.12-r8
-u-boot-fw-utils                                   :2011.06-r1
-u-boot-mkimage                                    :2011.06-r0
-u-boot-mkimage-native                             :2011.06-r0
-$
+hi<div><br></div><div>i just noticed that the recipe for xf86-video-omap wa=
+s just merged into poky/master,=A0and that libdrm was updated as well (and =
+OMAP experimental support was enabled too):</div><div><br></div><div><div>
 
-  ok, now i'm confused.  the above suggests that the version of u-boot
-to be used here is 2011.12-r8, but that was never fetched, and it's
-only now toward the end of the build that the fetch is attempted.
+0ed7c53 xf86-video-omap: add new recipe to follow the maintained repo</div>=
+</div><div><div>cb758f9 libdrm: upgrade to 2.4.40</div></div><div><br></div=
+><div>from a quick review, i believe this should=A0supersede the recipes fr=
+om meta-ti that got merged recently:</div>
 
-  can someone clarify what's happening here?  why did my "fetchall"
-operation not fetch everything the build was going to need?
+<div><br></div><div>410dc02 xf86-video-omap: add new recipe for OMAP4/5 X11=
+ video driver</div><div><div>cce5a7a libdrm: enable omap experimental api s=
+upport</div></div><div><br></div><div>i won&#39;t be able to get that teste=
+d in the next couple of days, very likely, so i wanted to know:</div>
 
-rday
+<div><br></div><div>- if anyone tested poky/master (or oe-core as this came=
+ from oe-core) on panda and/or beagle?</div><div>- what is the policy in th=
+is situation? should we simply remove our recipes from meta-ti?</div><div>
 
+<br></div><div>cheers</div><div><br></div><div>nicolas</div><div><br></div>=
+<div><br></div><div><br></div>
 
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
-
+--0016369f9a74a2222204cef00991--
