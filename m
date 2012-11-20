@@ -1,38 +1,35 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 19F23E0141C
-	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 09:55:40 -0800 (PST)
-Received: from cpebcc8100fb8db-cmbcc8100fb8d8.cpe.net.cable.rogers.com
-	([174.116.196.46]:35451 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.77) (envelope-from <rpjday@crashcourse.ca>)
-	id 1Tas2t-0001kB-Vn; Tue, 20 Nov 2012 12:55:40 -0500
-Date: Tue, 20 Nov 2012 12:55:35 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: Denys Dmytriyenko <denis@denix.org>
-In-Reply-To: <20121120174811.GB19309@denix.org>
-Message-ID: <alpine.DEB.2.02.1211201253230.27867@oneiric>
-References: <alpine.DEB.2.02.1211201114100.29485@oneiric>
-	<20121120171630.GA19309@denix.org>
-	<alpine.DEB.2.02.1211201227390.27315@oneiric>
-	<20121120174811.GB19309@denix.org>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
+Return-Path: <ebutera@gmail.com>
+Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
+	[209.85.214.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57385E0141C
+	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 10:08:31 -0800 (PST)
+Received: by mail-bk0-f48.google.com with SMTP id jc3so2756233bkc.35
+	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 10:08:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	bh=m/p46S0EFq+2C+CbocslHWJf1tuiWwGdYkpKA/ZrLBs=;
+	b=czAeXum3Zizn6RxJMwqczLZqXjO+XNIN2ZuszrnF8JA39gOirmFJQi00+x9hsA3QYm
+	1WzimWwl2qnpQmcUMGRDvVmkDCripHOqTKj5aLp2Fg14bdaQFK9G8xHbzNH8n/31x1pE
+	7O/rwe9bUNv158OpkwDkXUYZZ0uDLM61h3KRVLIIligDp/HoM8qJ2ZNBoTB/U+fP39b0
+	AJJZ3iRldcZTbxCSky3rO4k38O8XmE+qqx1IWVGWL/LMAR95BoNYmPcoOKiftpIFlnWO
+	33fxOZjYRUzLSTutYiLtw16X4M6DtNm+/qs8MDyPxgs7EYIvCUMKePNm3rG+MPl8QDxH
+	7kXQ==
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>,
-	bitbake-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: building for pandaboard fails fetching u-boot *way* into the build phase
+Received: by 10.204.9.147 with SMTP id l19mr6643506bkl.15.1353434909955; Tue,
+	20 Nov 2012 10:08:29 -0800 (PST)
+Sender: ebutera@gmail.com
+Received: by 10.204.182.136 with HTTP; Tue, 20 Nov 2012 10:08:29 -0800 (PST)
+In-Reply-To: <CAOT3mi+325AfgZqaP4D0Ky3M1T-zhdjadRDB_PsVFzgXPvv=Kw@mail.gmail.com>
+References: <CAOT3miJT7PUO5_PRSjMwg9razGMxCzV6785Wkq2OkqO78X4pcQ@mail.gmail.com>
+	<CAOT3mi+325AfgZqaP4D0Ky3M1T-zhdjadRDB_PsVFzgXPvv=Kw@mail.gmail.com>
+Date: Tue, 20 Nov 2012 19:08:29 +0100
+X-Google-Sender-Auth: rnESA6WpOL7bhrtx9KLcFg8VJ78
+Message-ID: <CA+2YH7tTZACYEngJH8AyoJxQAHJsfERdUnwQe4Z5Oxuf=g6y=g@mail.gmail.com>
+From: Enrico <ebutera@users.berlios.de>
+To: Nicolas Dechesne <ndec13@gmail.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: xf86-video-omap and libdrm for OMAP
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,97 +42,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2012 17:55:41 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 20 Nov 2012 18:08:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, 20 Nov 2012, Denys Dmytriyenko wrote:
-
-> On Tue, Nov 20, 2012 at 12:34:47PM -0500, Robert P. J. Day wrote:
-> > On Tue, 20 Nov 2012, Denys Dmytriyenko wrote:
-> >
-> > > On Tue, Nov 20, 2012 at 11:24:20AM -0500, Robert P. J. Day wrote:
-> > > >
-> > > >   i'm sure there's a trivial workaround/explanation for this, but i
-> > > > wanted to build the basic meta-ti based build for my panda ES, so i
-> > > > started with oe-core and added the meta-ti layer.  then, because of
-> > > > some license issues (and based on a quick google search), i added this
-> > > > to my local.conf:
-> > > >
-> > > >   BBMASK = "meta-ti/recipes-misc"
-> > > >
-> > > > at that point, after selecting "pandaboard" as the machine, i wanted
-> > > > to prefetch everything:
-> > > >
-> > > > $ bitbake -c fetchall core-image-minimal
-> > > >
-> > > > which used solely my pre-mirror directory so that didn't take long.
-> > > >
-> > > >   *then*, because i allegedly had fetched everything i needed for the
-> > > > build, i edited my site.conf file and added:
-> > > >
-> > > > BB_NO_NETWORK = "1"
-> > > >
-> > > > which, AIUI, should be perfectly safe since i had just done a
-> > > > fetchall.  not so:
-> > > >
-> > > > ERROR: Function failed: Network access disabled through BB_NO_NETWORK
-> > > > but access requested with command git clone --bare --mirror
-> > > > git://www.denx.de/git/u-boot.git
-> > > > /home/rpjday/y/builds/ti/panda/downloads/git2/www.denx.de.git.u-boot.git
-> > > > (for url None)
-> > > > ERROR: Logfile of failure stored in:
-> > > > /home/rpjday/y/builds/ti/panda/tmp-eglibc/work/pandaboard-oe-linux-gnueabi/u-boot-2011.12-r8/temp/log.do_fetch.29635
-> > > >
-> > > > hmmmmmm ...
-> > > >
-> > > > $ bitbake -s | grep u-boot
-> > > > nativesdk-u-boot-mkimage                          :2011.06-r0
-> > > > u-boot                                            :2011.12-r8
-> > > > u-boot-fw-utils                                   :2011.06-r1
-> > > > u-boot-mkimage                                    :2011.06-r0
-> > > > u-boot-mkimage-native                             :2011.06-r0
-> > > > $
-> > > >
-> > > >   ok, now i'm confused.  the above suggests that the version of u-boot
-> > > > to be used here is 2011.12-r8, but that was never fetched, and it's
-> > > > only now toward the end of the build that the fetch is attempted.
-> > > >
-> > > >   can someone clarify what's happening here?  why did my "fetchall"
-> > > > operation not fetch everything the build was going to need?
-> > >
-> > > Is that because u-boot is not in a standard DEPENDS/RDEPENDS
-> > > dependency tree, but rather in EXTRA_IMAGEDEPENDS list? I'm copying
-> > > bitbake and oe-core lists, as I don't think it's meta-ti specific
-> > > issue - u-boot recipe looks fine.
-> >
-> >   good question ... for which i don't know the answer.  to make sure
-> > this is reproducible, i blew everything away and started from scratch
-> > with a new panda build.  here's my bblayers.conf:
-> >
-> >   but when i do a "fetchall", i don't get u-boot_2011.12.  only when i
-> > try to build a core-image-minimal does the build fail toward the end
-> > trying to fetch u-boot_2011.12.  here's the layering info:
-> >
-> > i'm sure i'm just doing something silly, but i've never run into the
-> > situation where a "fetchall" doesn't actually fetch absolutely
-> > everything that's needed for the build.
+On Tue, Nov 20, 2012 at 6:10 PM, Nicolas Dechesne <ndec13@gmail.com> wrote:
+> well.. obviously, with the libdrm update, and our .bbappend in meta-ti
+> things are even worse than I had thought... and the tree doesn't even build
+> anymore, at least for panda, as we have:
 >
-> Try adding CORE_IMAGE_EXTRA_INSTALL="u-boot" somewhere, like local.conf and
-> if that fixes your usecase, it has to be a bug with bitbake forgetting to
-> pre-fetch machine's specific EXTRA_IMAGEDEPENDS - file a bug then.
+> COMPATIBLE_MACHINE = "omap4|omap5"
+>
+> in the .bbappend
+>
+> so now that brings another question... should we start a 'danny' branch on
+> meta-ti? if we remove the libdrm and xf86-video-omap recipes from
+> meta-ti/master, then we break meta-ti/master with poky/danny...
 
-  yup, that did it ... now bitbake is trying to fetch it.  so that's
-the problem.
+I think meta-ti should have a danny branch with the current libdrm
+2.4.39.bbappend because oe-core danny has 2.4.39 (at least for now),
+then in master it can be deleted.
 
-rday
+If 2.4.40 doesn't work (i didn't test it) then it should be fixed in
+oe-core (unless the fix is not acceptable in oe-core for some reason).
 
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+Enrico
 
