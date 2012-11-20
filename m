@@ -1,35 +1,31 @@
-Return-Path: <ebutera@gmail.com>
-Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
-	[209.85.214.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57385E0141C
-	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 10:08:31 -0800 (PST)
-Received: by mail-bk0-f48.google.com with SMTP id jc3so2756233bkc.35
-	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 10:08:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	bh=m/p46S0EFq+2C+CbocslHWJf1tuiWwGdYkpKA/ZrLBs=;
-	b=czAeXum3Zizn6RxJMwqczLZqXjO+XNIN2ZuszrnF8JA39gOirmFJQi00+x9hsA3QYm
-	1WzimWwl2qnpQmcUMGRDvVmkDCripHOqTKj5aLp2Fg14bdaQFK9G8xHbzNH8n/31x1pE
-	7O/rwe9bUNv158OpkwDkXUYZZ0uDLM61h3KRVLIIligDp/HoM8qJ2ZNBoTB/U+fP39b0
-	AJJZ3iRldcZTbxCSky3rO4k38O8XmE+qqx1IWVGWL/LMAR95BoNYmPcoOKiftpIFlnWO
-	33fxOZjYRUzLSTutYiLtw16X4M6DtNm+/qs8MDyPxgs7EYIvCUMKePNm3rG+MPl8QDxH
-	7kXQ==
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C856BE0141C
+	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 10:09:14 -0800 (PST)
+Received: from cpebcc8100fb8db-cmbcc8100fb8d8.cpe.net.cable.rogers.com
+	([174.116.196.46]:35673 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.77) (envelope-from <rpjday@crashcourse.ca>)
+	id 1TasG2-0002KO-8H
+	for meta-ti@yoctoproject.org; Tue, 20 Nov 2012 13:09:14 -0500
+Date: Tue, 20 Nov 2012 13:09:11 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: meta-ti mailing list <meta-ti@yoctoproject.org>
+Message-ID: <alpine.DEB.2.02.1211201305300.28223@oneiric>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
-Received: by 10.204.9.147 with SMTP id l19mr6643506bkl.15.1353434909955; Tue,
-	20 Nov 2012 10:08:29 -0800 (PST)
-Sender: ebutera@gmail.com
-Received: by 10.204.182.136 with HTTP; Tue, 20 Nov 2012 10:08:29 -0800 (PST)
-In-Reply-To: <CAOT3mi+325AfgZqaP4D0Ky3M1T-zhdjadRDB_PsVFzgXPvv=Kw@mail.gmail.com>
-References: <CAOT3miJT7PUO5_PRSjMwg9razGMxCzV6785Wkq2OkqO78X4pcQ@mail.gmail.com>
-	<CAOT3mi+325AfgZqaP4D0Ky3M1T-zhdjadRDB_PsVFzgXPvv=Kw@mail.gmail.com>
-Date: Tue, 20 Nov 2012 19:08:29 +0100
-X-Google-Sender-Auth: rnESA6WpOL7bhrtx9KLcFg8VJ78
-Message-ID: <CA+2YH7tTZACYEngJH8AyoJxQAHJsfERdUnwQe4Z5Oxuf=g6y=g@mail.gmail.com>
-From: Enrico <ebutera@users.berlios.de>
-To: Nicolas Dechesne <ndec13@gmail.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: xf86-video-omap and libdrm for OMAP
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: [PATCH] recipes-bsp/u-boot: Update SRC_URIs to match all others.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,28 +38,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2012 18:08:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 20 Nov 2012 18:09:15 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Tue, Nov 20, 2012 at 6:10 PM, Nicolas Dechesne <ndec13@gmail.com> wrote:
-> well.. obviously, with the libdrm update, and our .bbappend in meta-ti
-> things are even worse than I had thought... and the tree doesn't even build
-> anymore, at least for panda, as we have:
->
-> COMPATIBLE_MACHINE = "omap4|omap5"
->
-> in the .bbappend
->
-> so now that brings another question... should we start a 'danny' branch on
-> meta-ti? if we remove the libdrm and xf86-video-omap recipes from
-> meta-ti/master, then we break meta-ti/master with poky/danny...
 
-I think meta-ti should have a danny branch with the current libdrm
-2.4.39.bbappend because oe-core danny has 2.4.39 (at least for now),
-then in master it can be deleted.
+Every other u-boot git SRC_URI has a different value, so make the odd
+ones out consistent with the rest, as in:
 
-If 2.4.40 doesn't work (i didn't test it) then it should be fixed in
-oe-core (unless the fix is not acceptable in oe-core for some reason).
+-SRC_URI = "git://www.denx.de/git/u-boot.git ...
++SRC_URI = "git://git.denx.de/u-boot.git ...
 
-Enrico
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+
+---
+
+diff --git a/recipes-bsp/u-boot/u-boot_2011.06.bb b/recipes-bsp/u-boot/u-boot_2011.06.bb
+index 21f47d6..4fa8f07 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.06.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.06.bb
+@@ -3,7 +3,7 @@ require u-boot.inc
+ # No patches for other machines yet
+ COMPATIBLE_MACHINE = "(beagleboard)"
+
+-SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
++SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
+            file://2011.06/0001-OMAP3-Beagle-Pin-Mux-initialization-glitch-fix.patch \
+            file://2011.06/0002-OMAP-Remove-omapfb.debug-y-from-Beagle-and-Overo-env.patch \
+            file://2011.06/0003-OMAP3-beagle-pass-expansionboard-name-in-bootargs.patch \
+diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb b/recipes-bsp/u-boot/u-boot_2011.09.bb
+index b164c77..edacb6c 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.09.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.09.bb
+@@ -10,7 +10,7 @@ UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
+ # No patches for other machines yet
+ COMPATIBLE_MACHINE = "(beagleboard)"
+
+-SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
++SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
+            file://2011.09/0001-omap3-mem-Comment-enable_gpmc_cs_config-more.patch \
+            file://2011.09/0002-OMAP3-Update-SDRC-dram_init-to-always-call-make_cs1_.patch \
+            file://2011.09/0003-OMAP3-Add-a-helper-function-to-set-timings-in-SDRC.patch \
+diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
+index 45c64a6..137f5b5 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.12.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
+@@ -19,7 +19,7 @@ CACHEFIX_omap4 = ""
+ FWENV_beagleboard = "file://fw_env.config"
+ FWENV = ""
+
+-SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
++SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
+            file://2011.12/0001-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch \
+            file://2011.12/0002-beagleboard-add-support-for-TCT-Beacon-board.patch \
+            file://2011.12/0003-beagleboard-add-support-for-scanning-loop-through-ex.patch \
+
 
