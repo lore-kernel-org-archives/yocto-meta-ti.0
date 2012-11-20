@@ -1,31 +1,26 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C856BE0141C
-	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 10:09:14 -0800 (PST)
-Received: from cpebcc8100fb8db-cmbcc8100fb8d8.cpe.net.cable.rogers.com
-	([174.116.196.46]:35673 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.77) (envelope-from <rpjday@crashcourse.ca>)
-	id 1TasG2-0002KO-8H
-	for meta-ti@yoctoproject.org; Tue, 20 Nov 2012 13:09:14 -0500
-Date: Tue, 20 Nov 2012 13:09:11 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: meta-ti mailing list <meta-ti@yoctoproject.org>
-Message-ID: <alpine.DEB.2.02.1211201305300.28223@oneiric>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: [PATCH] recipes-bsp/u-boot: Update SRC_URIs to match all others.
+Return-Path: <denis@denix.org>
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E4AA3E0141C
+	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 10:13:58 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.191.205.12])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MDS004UATAXZEG1@vms173003.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 20 Nov 2012 12:13:47 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id C8F05201CF; Tue,
+	20 Nov 2012 13:13:45 -0500 (EST)
+Date: Tue, 20 Nov 2012 13:13:45 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Nicolas Dechesne <ndec13@gmail.com>
+Message-id: <20121120181345.GC19309@denix.org>
+References: <CAOT3miJT7PUO5_PRSjMwg9razGMxCzV6785Wkq2OkqO78X4pcQ@mail.gmail.com>
+	<CAOT3mi+325AfgZqaP4D0Ky3M1T-zhdjadRDB_PsVFzgXPvv=Kw@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CAOT3mi+325AfgZqaP4D0Ky3M1T-zhdjadRDB_PsVFzgXPvv=Kw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: xf86-video-omap and libdrm for OMAP
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,58 +33,66 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2012 18:09:15 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 20 Nov 2012 18:13:59 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
+
+On Tue, Nov 20, 2012 at 06:10:17PM +0100, Nicolas Dechesne wrote:
+> well.. obviously, with the libdrm update, and our .bbappend in meta-ti
+> things are even worse than I had thought... and the tree doesn't even build
+> anymore, at least for panda, as we have:
+> 
+> COMPATIBLE_MACHINE = "omap4|omap5"
+> 
+> in the .bbappend
+> 
+> so now that brings another question... should we start a 'danny' branch on
+> meta-ti? if we remove the libdrm and xf86-video-omap recipes from
+> meta-ti/master, then we break meta-ti/master with poky/danny...
+
+Yes, creating danny branch was on my list - was waiting for any specific 
+requirements like this one... :)
+
+-- 
+Denys
 
 
-Every other u-boot git SRC_URI has a different value, so make the odd
-ones out consistent with the rest, as in:
+> On Tue, Nov 20, 2012 at 5:50 PM, Nicolas Dechesne <ndec13@gmail.com> wrote:
+> 
+> > hi
+> >
+> > i just noticed that the recipe for xf86-video-omap was just merged into
+> > poky/master, and that libdrm was updated as well (and OMAP experimental
+> > support was enabled too):
+> >
+> > 0ed7c53 xf86-video-omap: add new recipe to follow the maintained repo
+> > cb758f9 libdrm: upgrade to 2.4.40
+> >
+> > from a quick review, i believe this should supersede the recipes from
+> > meta-ti that got merged recently:
+> >
+> > 410dc02 xf86-video-omap: add new recipe for OMAP4/5 X11 video driver
+> > cce5a7a libdrm: enable omap experimental api support
+> >
+> > i won't be able to get that tested in the next couple of days, very
+> > likely, so i wanted to know:
+> >
+> > - if anyone tested poky/master (or oe-core as this came from oe-core) on
+> > panda and/or beagle?
+> > - what is the policy in this situation? should we simply remove our
+> > recipes from meta-ti?
+> >
+> > cheers
+> >
+> > nicolas
+> >
+> >
+> >
+> >
 
--SRC_URI = "git://www.denx.de/git/u-boot.git ...
-+SRC_URI = "git://git.denx.de/u-boot.git ...
-
-Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
-
----
-
-diff --git a/recipes-bsp/u-boot/u-boot_2011.06.bb b/recipes-bsp/u-boot/u-boot_2011.06.bb
-index 21f47d6..4fa8f07 100644
---- a/recipes-bsp/u-boot/u-boot_2011.06.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.06.bb
-@@ -3,7 +3,7 @@ require u-boot.inc
- # No patches for other machines yet
- COMPATIBLE_MACHINE = "(beagleboard)"
-
--SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
-+SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
-            file://2011.06/0001-OMAP3-Beagle-Pin-Mux-initialization-glitch-fix.patch \
-            file://2011.06/0002-OMAP-Remove-omapfb.debug-y-from-Beagle-and-Overo-env.patch \
-            file://2011.06/0003-OMAP3-beagle-pass-expansionboard-name-in-bootargs.patch \
-diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb b/recipes-bsp/u-boot/u-boot_2011.09.bb
-index b164c77..edacb6c 100644
---- a/recipes-bsp/u-boot/u-boot_2011.09.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.09.bb
-@@ -10,7 +10,7 @@ UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
- # No patches for other machines yet
- COMPATIBLE_MACHINE = "(beagleboard)"
-
--SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
-+SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
-            file://2011.09/0001-omap3-mem-Comment-enable_gpmc_cs_config-more.patch \
-            file://2011.09/0002-OMAP3-Update-SDRC-dram_init-to-always-call-make_cs1_.patch \
-            file://2011.09/0003-OMAP3-Add-a-helper-function-to-set-timings-in-SDRC.patch \
-diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
-index 45c64a6..137f5b5 100644
---- a/recipes-bsp/u-boot/u-boot_2011.12.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
-@@ -19,7 +19,7 @@ CACHEFIX_omap4 = ""
- FWENV_beagleboard = "file://fw_env.config"
- FWENV = ""
-
--SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
-+SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
-            file://2011.12/0001-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch \
-            file://2011.12/0002-beagleboard-add-support-for-TCT-Beacon-board.patch \
-            file://2011.12/0003-beagleboard-add-support-for-scanning-loop-through-ex.patch \
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
 
