@@ -1,27 +1,32 @@
-Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04FA8E01423
-	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 12:48:36 -0800 (PST)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id qAKKmYmo021415;
-	Tue, 20 Nov 2012 14:48:34 -0600
-Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id qAKKmYGc027355;
-	Tue, 20 Nov 2012 14:48:34 -0600
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
-	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
-	Tue, 20 Nov 2012 14:48:33 -0600
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id qAKKmXL5017808;
-	Tue, 20 Nov 2012 14:48:33 -0600
-Date: Tue, 20 Nov 2012 15:48:33 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-Message-ID: <20121120204833.GE26674@edge>
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CC4F8E01423
+	for <meta-ti@yoctoproject.org>; Tue, 20 Nov 2012 12:49:48 -0800 (PST)
+Received: from cpebcc8100fb8db-cmbcc8100fb8d8.cpe.net.cable.rogers.com
+	([174.116.196.46]:38489 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.77) (envelope-from <rpjday@crashcourse.ca>)
+	id 1TaulP-0001Lx-VO; Tue, 20 Nov 2012 15:49:48 -0500
+Date: Tue, 20 Nov 2012 15:49:45 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: Nicolas Dechesne <ndec13@gmail.com>
+In-Reply-To: <CAOT3miKf4+VAc8cVRRd0-xoHosXBf0xJ38Sb5-cDST0JcriAzw@mail.gmail.com>
+Message-ID: <alpine.DEB.2.02.1211201549030.3482@oneiric>
 References: <alpine.DEB.2.02.1211201419330.18808@oneiric>
+	<CAOT3miKf4+VAc8cVRRd0-xoHosXBf0xJ38Sb5-cDST0JcriAzw@mail.gmail.com>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.02.1211201419330.18808@oneiric>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
 Subject: Re: there *is* no libdrm_2.4.39 in oe-core anymore, it's now 2.4.40
 X-BeenThere: meta-ti@yoctoproject.org
@@ -36,22 +41,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Nov 2012 20:48:37 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 20 Nov 2012 20:49:49 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Tue, Nov 20, 2012 at 02:20:51PM -0500, Robert P. J. Day wrote:
-> 
->   only 5 days ago, oe-core upgraded libdrm to 2.4.40, so the recent
-> meta-ti addition of libdrm_2.4.39.bbappend doesn't really do much
-> good.
+On Tue, 20 Nov 2012, Nicolas Dechesne wrote:
 
-Yes, please pay attention - here's the parallel discussion from today:
-http://thread.gmane.org/gmane.linux.embedded.yocto.meta-ti/1163
+> Yes. That is what i reported earlier today. And that's why we
+> discussed that we need to create the danny branch in meta-ti since
+> danny still uses libdrm 2.39.
+>
+> Once we create danny branch we can revert the libdrm bbappend commit
+> in master (and xf86-video-omap as well since it was merged in
+> oe-core too)
 
-And the change in OE-Core master just happened yesterday:
-http://cgit.openembedded.org/openembedded-core/commit/?id=8b100befe8dcf7523148b6fc14fa2237d07fe556
+  ah, sorry, i must have missed that.
+
+rday
 
 -- 
-Denys
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
