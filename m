@@ -1,31 +1,39 @@
-Return-Path: <Paul_Woegerer@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 834B4E00294
-	for <meta-ti@yoctoproject.org>; Tue, 13 Nov 2012 05:13:16 -0800 (PST)
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1TYGIl-0000K0-Pg from Paul_Woegerer@mentor.com ;
-	Tue, 13 Nov 2012 05:13:15 -0800
-Received: from SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Tue, 13 Nov 2012 05:13:15 -0800
-Received: from [137.202.56.138] (137.202.0.76) by
-	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
-	Server id 14.1.289.1; Tue, 13 Nov 2012 13:13:13 +0000
-Message-ID: <50A247AF.10109@mentor.com>
-Date: Tue, 13 Nov 2012 14:14:23 +0100
-From: "Woegerer, Paul" <Paul_Woegerer@mentor.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:16.0) Gecko/20121025 Thunderbird/16.0.2
+Return-Path: <ross.burton@intel.com>
+Received: from fmsmga101.fm.intel.com (mga05.intel.com [192.55.52.89])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BBA52E0141C
+	for <meta-ti@yoctoproject.org>; Wed, 21 Nov 2012 15:07:41 -0800 (PST)
+Received: from mail-ob0-f200.google.com ([209.85.214.200])
+	by mga01.intel.com with ESMTP/TLS/RC4-SHA; 21 Nov 2012 15:07:41 -0800
+Received: by mail-ob0-f200.google.com with SMTP id lz20so33692793obb.11
+	for <meta-ti@yoctoproject.org>; Wed, 21 Nov 2012 15:07:40 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:x-gm-message-state;
+	bh=vktykzcWUxYxSTJnw+QqiR5RBJiVImZebd9Cyph72/A=;
+	b=YnAJRrNozqwNXsmykNdKlrIASAHuYaaZlYzgCK3Fa313SJbp6CqHWBgd7ZYW6IiZLP
+	C5LjqW/bJuiwd1lKrJvXZe/Z4MqfLdkBlApt3hsCxDOFaHPmbBB5xSToohHchpjeznQL
+	QafNJsRxKTM9veXVJxD49T4C6COMyMoUye0C4oRa3too1oDZ9ZSMH2cIvllGY+vGoQ54
+	x5mKJLMF8zMvKN8gZDtY/CGCQaUh0emGbFgQng/gmqWv5rYLjXfuVCMZfvQ3K4h/D2RC
+	YzQogBLX8aRnPdH/pgw4YbJtwbwPQ2BT4ovkIMWUQdkM831eFB3/uaLaHLK3njn2OrTm
+	+vsA==
+Received: by 10.60.169.243 with SMTP id ah19mr17629149oec.127.1353539260386;
+	Wed, 21 Nov 2012 15:07:40 -0800 (PST)
+Received: by 10.60.169.243 with SMTP id ah19mr17629142oec.127.1353539260177;
+	Wed, 21 Nov 2012 15:07:40 -0800 (PST)
 MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <5077D9E9.4070207@mentor.com> <20121113015716.GE8900@denix.org>
-In-Reply-To: <20121113015716.GE8900@denix.org>
-X-OriginalArrivalTime: 13 Nov 2012 13:13:15.0675 (UTC)
-	FILETIME=[A429E6B0:01CDC1A0]
-X-Mailman-Approved-At: Wed, 21 Nov 2012 15:32:33 -0800
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] linux-omap4-3.1.0: Add sched_process_exec tracing
+Received: by 10.182.154.37 with HTTP; Wed, 21 Nov 2012 15:07:19 -0800 (PST)
+In-Reply-To: <CAOT3miJ73uAvR0Qij3+-q3B6K46=J5ZoFZDzW79YCSUfPbLeAA@mail.gmail.com>
+References: <CAOT3miJ73uAvR0Qij3+-q3B6K46=J5ZoFZDzW79YCSUfPbLeAA@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 21 Nov 2012 23:07:19 +0000
+Message-ID: <CAJTo0LYLf=296eEZznK7vnFTJZhAS_u1opuXdyJ=MUvRYF1Asw@mail.gmail.com>
+To: Nicolas Dechesne <ndec13@gmail.com>
+X-Gm-Message-State: ALoCoQk817V6kWt+3SVU+m6sup3pKnyN7lqy5ANcYGdyc5ZHhLWkojiNDcHClRAU2+zSfLdLnsG/yJkrlNazAO34sNUgU1SzMebwwWYmHot8hJu3eu+HTLuy7hpUUFni1kyR6TldPO9lV4EwfCvDz5z7Fy8OP4vRZQ==
+X-Mailman-Approved-At: Wed, 21 Nov 2012 15:32:46 -0800
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	yocto <yocto@yoctoproject.org>
+Subject: Re: [yocto] build failure with xf86-video-omap
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,44 +46,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Nov 2012 13:13:16 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 21 Nov 2012 23:07:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 11/13/2012 02:57 AM, Denys Dmytriyenko wrote:
-> On Fri, Oct 12, 2012 at 10:50:49AM +0200, Woegerer, Paul wrote:
->> Hi,
->>
->> the attached patch enables tracing of sched_process_exec events by
->> adding upstream kernel commit:
->> https://github.com/torvalds/linux/commit/4ff16c25e2cc48cbe6956e356c38a25ac063a64d
->> to the linux-omap4-3.1.0 kernel recipe (tested with pandaboard).
->>
->> We added this to our meta-ti mirror. It would be great if this could
->> also be upstream.
-> 
-> Paul,
-> 
-> Care to port it to the 3.4 version we now have for OMAP4?
-> 
+On 21 November 2012 22:52, Nicolas Dechesne <ndec13@gmail.com> wrote:
+> since xf86-video-omap was recently merged in oe-core and poky, i am trying
+> to remove the recipes we had staged in meta-ti trees for some weeks
+> (http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?id=410dc026f2ee24a2346e7563a83f0181c79809cf).
+> so i was trying to build  poky/master with meta-ti/master, for pandaboard,
+> and I get build failures in xf86-video-omap [1] and [2].
+>
+> so [1] is actually trivial, as we are missing a DEPENDS in the recipe, i can
+> send a patch in oe-core for that.
 
-Hi Denys,
+Please do.
 
-thanks for getting back to me. This patch is obsolete since 3.4 already
-has sched_process_exec anyway.
+> [2] is a bit more cryptic to me.. so I quickly tried to build with danny ( i
+> just cherry picked the commit that introduced xf86-video-omap from master)
+> and this time it built fine.
+>
+> has anyone actually tested this recipe? if so I must be doing something
+> wrong, any hint would be helpful.
 
-Thanks again,
-Paul
+This was discussed a few hours ago.  It's caused by a) the
+configure.ac being broken and b) the workaround for this being removed
+by me in e828faf027540bc5def8b7371a959884caad9557 (which is in master
+only).  Presumably this code was test built before that patch landed.
 
--- 
-Paul Woegerer | SW Development Engineer
-http://go.mentor.com/sourceryanalyzer
+As this is a genuine upstream bug (ARM-specific driver that doesn't
+cross-compile?!) I've just filed fdo #57386.
 
-Mentor Embedded(tm) | Prinz Eugen Straße 72/2/4, Vienna, 1040 Austria
-Nucleus® | Linux® | Android(tm) | Services | UI | Multi-OS
-
-Android is a trademark of Google Inc. Use of this trademark is subject
-to Google Permissions.
-Linux is the registered trademark of Linus Torvalds in the U.S. and
-other countries.
+Ross
 
