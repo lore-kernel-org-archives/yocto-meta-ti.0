@@ -1,42 +1,31 @@
-Return-Path: <ross.burton@intel.com>
-Received: from azsmga101.ch.intel.com (mga07.intel.com [143.182.124.22])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7C89CE00294
-	for <meta-ti@yoctoproject.org>; Wed, 21 Nov 2012 15:43:06 -0800 (PST)
-Received: from mail-ie0-f200.google.com ([209.85.223.200])
-	by mga03.intel.com with ESMTP/TLS/RC4-SHA; 21 Nov 2012 15:42:57 -0800
-Received: by mail-ie0-f200.google.com with SMTP id 10so33133807ied.11
-	for <meta-ti@yoctoproject.org>; Wed, 21 Nov 2012 15:42:57 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=google.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:x-gm-message-state;
-	bh=HLdvoDXrFkbQFeciJWhRyB9opsFFCj9RSBqWcHBBse8=;
-	b=QjxF0uGQ7KH3LnbZiUQpJrDgGO4sQoeXtSpogfqPFnbLMiEwX7Yfxnn1Jp1mjrJl40
-	KEY23FKZU8VA3IOG03ryEZHJGKlZSo1P6cyyN/QB6TK0S56qQfVTu8gtrH3qwfm3IgEs
-	6kSlMptdOvkwBCx93yJlJfI8MiJpGOdwqjgMrFI6Ktd6flMj2Ax8jlaX9J/2/94bmIzO
-	d1JglBfbdsx6yBHnWdMZxsaOsx0hz5gzylOP5OlKnwb9I7Vo9w2lj/zXN74z8MvmzPeE
-	kvs6b7ipdkAFzx5OVuTeIjw6UD2BLqug1adn1D08pO8uB8uJjWYsTvaimPPwhqxEFTvJ
-	kDLg==
-Received: by 10.60.169.76 with SMTP id ac12mr1149348oec.88.1353541376139;
-	Wed, 21 Nov 2012 15:42:56 -0800 (PST)
-Received: by 10.60.169.76 with SMTP id ac12mr1149343oec.88.1353541376087; Wed,
-	21 Nov 2012 15:42:56 -0800 (PST)
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B638AE003D6
+	for <meta-ti@yoctoproject.org>; Thu, 22 Nov 2012 04:51:05 -0800 (PST)
+Received: from cpebcc8100fb8db-cmbcc8100fb8d8.cpe.net.cable.rogers.com
+	([174.116.196.46]:47156 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.77) (envelope-from <rpjday@crashcourse.ca>)
+	id 1TbWFE-0002Rp-Tf
+	for meta-ti@yoctoproject.org; Thu, 22 Nov 2012 07:51:04 -0500
+Date: Thu, 22 Nov 2012 07:51:02 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: meta-ti mailing list <meta-ti@yoctoproject.org>
+Message-ID: <alpine.DEB.2.02.1211220746120.6470@oneiric>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
-Received: by 10.182.154.37 with HTTP; Wed, 21 Nov 2012 15:42:35 -0800 (PST)
-In-Reply-To: <CAJTo0LbCWQTs2aBBWvjeqXD-o6n48SfvBgBJCEFLN1kHtCPXiQ@mail.gmail.com>
-References: <CAOT3miJ73uAvR0Qij3+-q3B6K46=J5ZoFZDzW79YCSUfPbLeAA@mail.gmail.com>
-	<CAJTo0LYLf=296eEZznK7vnFTJZhAS_u1opuXdyJ=MUvRYF1Asw@mail.gmail.com>
-	<CAOT3miJf7yh=1c-xxfZ-sxZt4RUvufcgVTMv0Dzw=kSbz5wXaA@mail.gmail.com>
-	<CAJTo0LbCWQTs2aBBWvjeqXD-o6n48SfvBgBJCEFLN1kHtCPXiQ@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 21 Nov 2012 23:42:35 +0000
-Message-ID: <CAJTo0LZ5x=sm27TBgieofFebe84edDzUV19wbmVaBZ4ZDdyajw@mail.gmail.com>
-To: Nicolas Dechesne <ndec13@gmail.com>
-X-Gm-Message-State: ALoCoQnl1XOKEttOyLR5B3VPoEH2GGRJsbEAuvoVwRVfl+xbgNzea//rI/mlhEqriJX1WCzfDwvYb7hX8Iku2oOEFZojyskcXwR4MZVmtZ7K9EzacDHXM4HJMjPRsgNLtmHlxrxiVjj907YoQ/IyyGr3BlhVRkd1dA==
-X-Mailman-Approved-At: Wed, 21 Nov 2012 15:44:43 -0800
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, rob@ti.com,
-	yocto <yocto@yoctoproject.org>
-Subject: Re: [yocto] build failure with xf86-video-omap
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: [OT?] any affordable DM8148-based dev/eval kits?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,21 +38,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Nov 2012 23:43:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 22 Nov 2012 12:51:05 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On 21 November 2012 23:33, Burton, Ross <ross.burton@intel.com> wrote:
-> fdo - https://bugs.freedesktop.org/show_bug.cgi?id=57386
->
-> I started replacing the AC_CHECK_FILE with PKG_CHECK_EXISTS, but now
-> I'm wondering why DRI_CFLAGS DRM_CFLAGS are being used without being
-> apparently defined.  Is this configure.ac needing a bit of a clean or
-> am I misunderstanding something?
 
-Looked a bit more, looks like 99% of the DRI checking code is dead, so
-I've attached a patch to FDO #57386 which mostly deletes stuff.
+  a friend asked me about this, and i notice the meta-ti layer has
+dm814x-evm.conf for support, but that kit looks to be well over
+$2,000:
 
-(caveat: untested)
+https://estore.ti.com/TMDXEVM8148-DM814x-AM387x-Evaluation-Module-P2629.aspx
 
-Ross
+are there any more affordable eval kits based on that processor, or is
+that pretty much the entry price?  thanks.
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
