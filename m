@@ -1,29 +1,32 @@
 Return-Path: <ndec13@gmail.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 011C1E003DA
-	for <meta-ti@yoctoproject.org>; Thu, 22 Nov 2012 06:36:32 -0800 (PST)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id qAMEaWLd016542
-	for <meta-ti@yoctoproject.org>; Thu, 22 Nov 2012 08:36:32 -0600
-Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id qAMEaW9M029694
-	for <meta-ti@yoctoproject.org>; Thu, 22 Nov 2012 08:36:32 -0600
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
-	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
-	Thu, 22 Nov 2012 08:36:32 -0600
-Received: from localhost.localdomain (lncpu06.tif.ti.com [137.167.138.194])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id qAMEaG1j000479;
-	Thu, 22 Nov 2012 08:36:31 -0600
-From: Nicolas Dechesne <ndec13@gmail.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 22 Nov 2012 15:35:59 +0100
-Message-ID: <1353594959-18237-4-git-send-email-ndec13@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1353594959-18237-1-git-send-email-ndec13@gmail.com>
-References: <1353594959-18237-1-git-send-email-ndec13@gmail.com>
+Received: from mail-vb0-f48.google.com (mail-vb0-f48.google.com
+	[209.85.212.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C940DE00533
+	for <meta-ti@yoctoproject.org>; Thu, 22 Nov 2012 06:42:32 -0800 (PST)
+Received: by mail-vb0-f48.google.com with SMTP id l22so7658774vbn.35
+	for <meta-ti@yoctoproject.org>; Thu, 22 Nov 2012 06:42:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=ZBXvMgZTSpM1p9jYG2ZykWLnaaik7E1AttEk7H2xV24=;
+	b=X/kQDX2goB0K80tvb//YHipHLl7ngBajYa7dRAqW+1FBwKwt34HXK2eeWyGP746KJ0
+	JVmlz2uPh3cwcltQnnXuuRMRokeGf8XYiQJbuONvgHs6tgu6A0KutROIhquWGbdmcvpy
+	X0jZgWXBQfAtqNp1V+Y88j1yF1TLIfNqErNuDD7SOhwxiQPJrto16QelpTrExPzpDBYy
+	nX8e82qU2ulzVxINerkGtwoLj7jte6hY0adzn5Q8OxRkThYTNwbMUcrQHTWN33xJlAhD
+	9EJJDe1yHdtV+SKXll09H0B1wzwtowIDmt7cSq3zu5EpVcr+9Z0A8VIax8a7VUEwFvyd
+	vTBA==
+Received: by 10.52.95.34 with SMTP id dh2mr966065vdb.69.1353595351779; Thu, 22
+	Nov 2012 06:42:31 -0800 (PST)
 MIME-Version: 1.0
-Cc: Nicolas Dechesne <n-dechesne@ti.com>
-Subject: [PATCH 3/3] conf/machine: omap4: update configs after xorg upgrade
+Received: by 10.58.248.74 with HTTP; Thu, 22 Nov 2012 06:42:11 -0800 (PST)
+In-Reply-To: <alpine.DEB.2.02.1211211440400.4010@oneiric>
+References: <alpine.DEB.2.02.1211211440400.4010@oneiric>
+From: Nicolas Dechesne <ndec13@gmail.com>
+Date: Thu, 22 Nov 2012 15:42:11 +0100
+Message-ID: <CAOT3mi+o650Z1sRA77FkXyoKJvFcNukC279vXriAc91gu1Eeig@mail.gmail.com>
+To: "Robert P. J. Day" <rpjday@crashcourse.ca>
+Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: Re: quick online tutorial for building linux for pandaboard ES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,38 +39,21 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Nov 2012 14:36:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 22 Nov 2012 14:42:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Nicolas Dechesne <n-dechesne@ti.com>
+On Wed, Nov 21, 2012 at 8:43 PM, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
+>   nothing earth-shaking but i figured since i used OE and meta-ti to
+> build a bootable system for my pandaboard ES, i might as well share:
+>
+> http://www.crashcourse.ca/wiki/index.php/OE-Core%2C_meta-ti_and_the_PandaBoard_ES
+>
+>   i'll probably mention this on the OE and yocto lists as well.
 
-There were some changes in the xserver-xorg upstream project that need
-to be reflected here too:
- * extmod module was removed completely as it became empty;
- * DRI1, DRI2, DBE (among others) were made built-in;
+I believe you forgot to mention that you need to grab bitbake too here:
 
-(see poky rev: 5cea09e3d010d4799eab296b2a0cb83a0af09c76)
+http://www.crashcourse.ca/wiki/index.php/OE-Core%2C_meta-ti_and_the_PandaBoard_ES#The_layers
 
-Signed-off-by: Nicolas Dechesne <n-dechesne@ti.com>
----
- conf/machine/include/omap4.inc |    3 ---
- 1 files changed, 0 insertions(+), 3 deletions(-)
-
-diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
-index ecd23c4..5ee5f9d 100644
---- a/conf/machine/include/omap4.inc
-+++ b/conf/machine/include/omap4.inc
-@@ -8,9 +8,6 @@ PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
- 
- PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
- XSERVER = "xserver-xorg \
--           xserver-xorg-extension-dri \
--           xserver-xorg-extension-dri2 \
--           xserver-xorg-extension-glx \
-            xserver-xorg-module-exa \
-            xf86-input-evdev \
-            xf86-video-omap"
--- 
-1.7.0.4
-
+alternatively, you could add a pointer to
+http://www.openembedded.org/wiki/OE-Core_Standalone_Setup
 
