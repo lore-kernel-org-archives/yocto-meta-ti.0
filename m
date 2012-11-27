@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0ACAE011AF
-	for <meta-ti@yoctoproject.org>; Tue, 27 Nov 2012 08:40:48 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9514CE011AF
+	for <meta-ti@yoctoproject.org>; Tue, 27 Nov 2012 08:41:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3451B52A7B; Tue, 27 Nov 2012 16:40:47 +0000 (UTC)
+	id 5DF3252A7B; Tue, 27 Nov 2012 16:41:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20121127164047.3451B52A7B@arago-project.org>
-Date: Tue, 27 Nov 2012 16:40:47 +0000 (UTC)
+Message-Id: <20121127164152.5DF3252A7B@arago-project.org>
+Date: Tue, 27 Nov 2012 16:41:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : keystone-evm.conf: enable cpio images by default
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 16:40:48 -0000
+X-List-Received-Date: Tue, 27 Nov 2012 16:41:52 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 4cd8d3c89179798590f409c33402cd63e912081e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4cd8d3c89179798590f409c33402cd63e912081e
+Branch: denzil
+Commit: dc8fb1f25766384d7eea5c531d1416cc79d6e743
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dc8fb1f25766384d7eea5c531d1416cc79d6e743
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Nov 27 11:40:06 2012 -0500
