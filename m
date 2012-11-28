@@ -1,15 +1,25 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21677E011AF
-	for <meta-ti@yoctoproject.org>; Tue, 27 Nov 2012 08:42:37 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id E415752A7B; Tue, 27 Nov 2012 16:42:36 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20121127164236.E415752A7B@arago-project.org>
-Date: Tue, 27 Nov 2012 16:42:36 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : keystone-evm.conf: enable cpio images by default
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17E6EE00294
+	for <meta-ti@yoctoproject.org>; Wed, 28 Nov 2012 09:17:31 -0800 (PST)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 72F7DF811DA; Wed, 28 Nov 2012 10:17:30 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 111EEF81188;
+	Wed, 28 Nov 2012 10:17:29 -0700 (MST)
+Message-ID: <50B64752.6080607@mlbassoc.com>
+Date: Wed, 28 Nov 2012 10:18:10 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:16.0) Gecko/20121028 Thunderbird/16.0.2
+MIME-Version: 1.0
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Can't build recipes-graphics/xorg-xserver/xf86-video-omap_git.bb
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,38 +32,22 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Nov 2012 16:42:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 28 Nov 2012 17:17:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Module: meta-ti
-Branch: danny
-Commit: b9276bfe02a6b26858110b73ffb174453676aa4e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b9276bfe02a6b26858110b73ffb174453676aa4e
+When trying to build this recipe, I get this error:
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Nov 27 11:40:06 2012 -0500
+configure: error: Package requirements (xorg-server >= 1.3 xproto fontsproto libdrm >= 2.4.36 libdrm_omap xf86driproto  randrproto renderproto videoproto xextproto) were not met:
+No package 'libdrm_omap' found
 
-keystone-evm.conf: enable cpio images by default
+Where can I find this package?
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Thanks
 
----
-
- conf/machine/keystone-evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/conf/machine/keystone-evm.conf b/conf/machine/keystone-evm.conf
-index 0b6d7ab..5e264a8 100644
---- a/conf/machine/keystone-evm.conf
-+++ b/conf/machine/keystone-evm.conf
-@@ -14,7 +14,7 @@ require conf/machine/include/keystone.inc
- 
- PREFERRED_PROVIDER_virtual/kernel = "linux-keystone"
- 
--IMAGE_FSTYPES += "tar.bz2"
-+IMAGE_FSTYPES += "tar.bz2 cpio"
- 
- SERIAL_CONSOLE = "115200 ttyO0"
- 
-
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
