@@ -1,25 +1,29 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17E6EE00294
-	for <meta-ti@yoctoproject.org>; Wed, 28 Nov 2012 09:17:31 -0800 (PST)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 72F7DF811DA; Wed, 28 Nov 2012 10:17:30 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 111EEF81188;
-	Wed, 28 Nov 2012 10:17:29 -0700 (MST)
-Message-ID: <50B64752.6080607@mlbassoc.com>
-Date: Wed, 28 Nov 2012 10:18:10 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:16.0) Gecko/20121028 Thunderbird/16.0.2
+Return-Path: <denys@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E765CE00294
+	for <meta-ti@yoctoproject.org>; Wed, 28 Nov 2012 09:19:04 -0800 (PST)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id qASHJ3sD019018;
+	Wed, 28 Nov 2012 11:19:03 -0600
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id qASHJ3ZL014823;
+	Wed, 28 Nov 2012 11:19:03 -0600
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 28 Nov 2012 11:19:03 -0600
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id qASHJ24o020414;
+	Wed, 28 Nov 2012 11:19:03 -0600
+Date: Wed, 28 Nov 2012 12:19:02 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <20121128171902.GB7172@edge>
+References: <50B64752.6080607@mlbassoc.com>
 MIME-Version: 1.0
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Can't build recipes-graphics/xorg-xserver/xf86-video-omap_git.bb
+In-Reply-To: <50B64752.6080607@mlbassoc.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Can't build recipes-graphics/xorg-xserver/xf86-video-omap_git.bb
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,22 +36,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2012 17:17:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 28 Nov 2012 17:19:05 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-When trying to build this recipe, I get this error:
+http://thread.gmane.org/gmane.linux.embedded.yocto.meta-ti/1196
 
-configure: error: Package requirements (xorg-server >= 1.3 xproto fontsproto libdrm >= 2.4.36 libdrm_omap xf86driproto  randrproto renderproto videoproto xextproto) were not met:
-No package 'libdrm_omap' found
-
-Where can I find this package?
-
-Thanks
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+On Wed, Nov 28, 2012 at 10:18:10AM -0700, Gary Thomas wrote:
+> When trying to build this recipe, I get this error:
+> 
+> configure: error: Package requirements (xorg-server >= 1.3 xproto fontsproto libdrm >= 2.4.36 libdrm_omap xf86driproto  randrproto renderproto videoproto xextproto) were not met:
+> No package 'libdrm_omap' found
+> 
+> Where can I find this package?
+> 
+> Thanks
+> 
+> -- 
+> ------------------------------------------------------------
+> Gary Thomas                 |  Consulting for the
+> MLB Associates              |    Embedded world
+> ------------------------------------------------------------
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
