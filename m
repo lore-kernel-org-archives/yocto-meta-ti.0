@@ -1,28 +1,15 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04AF5E00294
-	for <meta-ti@yoctoproject.org>; Wed, 28 Nov 2012 09:28:52 -0800 (PST)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id A627CF811DA; Wed, 28 Nov 2012 10:28:51 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 92402F81188;
-	Wed, 28 Nov 2012 10:28:49 -0700 (MST)
-Message-ID: <50B649FB.30609@mlbassoc.com>
-Date: Wed, 28 Nov 2012 10:29:31 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:16.0) Gecko/20121028 Thunderbird/16.0.2
-MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <50B64752.6080607@mlbassoc.com> <20121128171902.GB7172@edge>
-In-Reply-To: <20121128171902.GB7172@edge>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Can't build recipes-graphics/xorg-xserver/xf86-video-omap_git.bb
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0A76E00294
+	for <meta-ti@yoctoproject.org>; Wed, 28 Nov 2012 09:30:23 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 0E77052A7B; Wed, 28 Nov 2012 17:30:22 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20121128173022.0E77052A7B@arago-project.org>
+Date: Wed, 28 Nov 2012 17:30:22 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Nicolas Dechesne : Revert "xf86-video-omap: add new recipe for OMAP4/ 5 X11 video driver"
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,31 +22,66 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Nov 2012 17:28:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 28 Nov 2012 17:30:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 2012-11-28 10:19, Denys Dmytriyenko wrote:
-> http://thread.gmane.org/gmane.linux.embedded.yocto.meta-ti/1196
+Module: meta-ti
+Branch: master
+Commit: 2b37d0ee5590e20a48758e3ee7bd8a947ba8a7bb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2b37d0ee5590e20a48758e3ee7bd8a947ba8a7bb
 
-Bottom line: I should just use the latest Poky/Yocto tree?  I just updated
-the meta-ti(master) and the quoted patches don't seem to have been applied
-(the xf86-video-omap_git.bb is still present)
+Author: Nicolas Dechesne <n-dechesne@ti.com>
+Date:   Thu Nov 22 15:35:58 2012 +0100
 
->
-> On Wed, Nov 28, 2012 at 10:18:10AM -0700, Gary Thomas wrote:
->> When trying to build this recipe, I get this error:
->>
->> configure: error: Package requirements (xorg-server >= 1.3 xproto fontsproto libdrm >= 2.4.36 libdrm_omap xf86driproto  randrproto renderproto videoproto xextproto) were not met:
->> No package 'libdrm_omap' found
->>
->> Where can I find this package?
->>
->> Thanks
+Revert "xf86-video-omap: add new recipe for OMAP4/5 X11 video driver"
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+This reverts commit 410dc026f2ee24a2346e7563a83f0181c79809cf.
+
+Because this recipe was integrated in oe-core (then poky master).
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ .../xorg-driver/xf86-video-omap_git.bb             |   31 --------------------
+ 1 files changed, 0 insertions(+), 31 deletions(-)
+
+diff --git a/recipes-graphics/xorg-driver/xf86-video-omap_git.bb b/recipes-graphics/xorg-driver/xf86-video-omap_git.bb
+deleted file mode 100644
+index abe773a..0000000
+--- a/recipes-graphics/xorg-driver/xf86-video-omap_git.bb
++++ /dev/null
+@@ -1,31 +0,0 @@
+-require recipes-graphics/xorg-driver/xorg-driver-video.inc
+-
+-SUMMARY = "X.Org X server -- TI OMAP integrated graphics chipsets driver"
+-
+-DESCRIPTION = "Open-source X.org graphics driver for TI OMAP graphics \
+-Currently relies on a closed-source submodule for EXA acceleration on \
+-the following chipsets: \
+-  + OMAP3430 \
+-  + OMAP3630 \
+-  + OMAP4430 \
+-  + OMAP4460 \
+-  + OMAP5430 \
+-  + OMAP5432 \
+-\
+-NOTE: this driver is work in progress..  you probably don't want to try \
+-and use it yet.  The API/ABI between driver and kernel, and driver and \
+-acceleration submodules is not stable yet.  This driver requires the \
+-omapdrm kernel driver w/ GEM support. \
+-"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=10ce5de3b111315ea652a5f74ec0c602"
+-
+-DEPENDS += "virtual/libx11 drm xf86driproto udev"
+-
+-SRCREV = "653ccadb38c87be565df3fbf2ff24a0cbe5a5e98"
+-PR = "${INC_PR}.1"
+-PV = "0.4.2+gitr${SRCPV}"
+-
+-SRC_URI = "git://anongit.freedesktop.org/xorg/driver/xf86-video-omap;protocol=git"
+-
+-S = "${WORKDIR}/git"
+
 
