@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0A76E00294
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C32F2E00348
 	for <meta-ti@yoctoproject.org>; Wed, 28 Nov 2012 09:30:23 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0E77052A7B; Wed, 28 Nov 2012 17:30:22 +0000 (UTC)
+	id AA2DB52A68; Wed, 28 Nov 2012 17:30:21 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20121128173022.0E77052A7B@arago-project.org>
-Date: Wed, 28 Nov 2012 17:30:22 +0000 (UTC)
+Message-Id: <20121128173021.AA2DB52A68@arago-project.org>
+Date: Wed, 28 Nov 2012 17:30:21 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Nicolas Dechesne : Revert "xf86-video-omap: add new recipe for OMAP4/ 5 X11 video driver"
+Subject: Nicolas Dechesne : Revert "libdrm: enable omap experimental api support"
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,61 +27,34 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 2b37d0ee5590e20a48758e3ee7bd8a947ba8a7bb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2b37d0ee5590e20a48758e3ee7bd8a947ba8a7bb
+Commit: 8b6f2e0f967b54b6cf4138d105e392ef1c1dd76b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8b6f2e0f967b54b6cf4138d105e392ef1c1dd76b
 
 Author: Nicolas Dechesne <n-dechesne@ti.com>
-Date:   Thu Nov 22 15:35:58 2012 +0100
+Date:   Thu Nov 22 15:35:57 2012 +0100
 
-Revert "xf86-video-omap: add new recipe for OMAP4/5 X11 video driver"
+Revert "libdrm: enable omap experimental api support"
 
-This reverts commit 410dc026f2ee24a2346e7563a83f0181c79809cf.
+This reverts commit cce5a7aea905d2e2b167ab51b132ec43ed519a12.
 
-Because this recipe was integrated in oe-core (then poky master).
+Because oe-core (then poky master) was upgraded to libdrm 2.40,
+and because OMAP experimental support was enabled there too.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../xorg-driver/xf86-video-omap_git.bb             |   31 --------------------
- 1 files changed, 0 insertions(+), 31 deletions(-)
+ recipes-graphics/drm/libdrm_2.4.39.bbappend |    3 ---
+ 1 files changed, 0 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-graphics/xorg-driver/xf86-video-omap_git.bb b/recipes-graphics/xorg-driver/xf86-video-omap_git.bb
+diff --git a/recipes-graphics/drm/libdrm_2.4.39.bbappend b/recipes-graphics/drm/libdrm_2.4.39.bbappend
 deleted file mode 100644
-index abe773a..0000000
---- a/recipes-graphics/xorg-driver/xf86-video-omap_git.bb
+index d0c1a77..0000000
+--- a/recipes-graphics/drm/libdrm_2.4.39.bbappend
 +++ /dev/null
-@@ -1,31 +0,0 @@
--require recipes-graphics/xorg-driver/xorg-driver-video.inc
+@@ -1,3 +0,0 @@
+-COMPATIBLE_MACHINE = "omap4|omap5"
 -
--SUMMARY = "X.Org X server -- TI OMAP integrated graphics chipsets driver"
--
--DESCRIPTION = "Open-source X.org graphics driver for TI OMAP graphics \
--Currently relies on a closed-source submodule for EXA acceleration on \
--the following chipsets: \
--  + OMAP3430 \
--  + OMAP3630 \
--  + OMAP4430 \
--  + OMAP4460 \
--  + OMAP5430 \
--  + OMAP5432 \
--\
--NOTE: this driver is work in progress..  you probably don't want to try \
--and use it yet.  The API/ABI between driver and kernel, and driver and \
--acceleration submodules is not stable yet.  This driver requires the \
--omapdrm kernel driver w/ GEM support. \
--"
--
--LIC_FILES_CHKSUM = "file://COPYING;md5=10ce5de3b111315ea652a5f74ec0c602"
--
--DEPENDS += "virtual/libx11 drm xf86driproto udev"
--
--SRCREV = "653ccadb38c87be565df3fbf2ff24a0cbe5a5e98"
--PR = "${INC_PR}.1"
--PV = "0.4.2+gitr${SRCPV}"
--
--SRC_URI = "git://anongit.freedesktop.org/xorg/driver/xf86-video-omap;protocol=git"
--
--S = "${WORKDIR}/git"
+-EXTRA_OECONF += "--enable-omap-experimental-api"
 
 
