@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B019E00655
-	for <meta-ti@yoctoproject.org>; Fri, 30 Nov 2012 08:34:43 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C9B4DE00655
+	for <meta-ti@yoctoproject.org>; Fri, 30 Nov 2012 08:35:19 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6138252ABD; Fri, 30 Nov 2012 16:34:43 +0000 (UTC)
+	id 8081352ABF; Fri, 30 Nov 2012 16:35:19 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20121130163443.6138252ABD@arago-project.org>
-Date: Fri, 30 Nov 2012 16:34:43 +0000 (UTC)
+Message-Id: <20121130163519.8081352ABF@arago-project.org>
+Date: Fri, 30 Nov 2012 16:35:19 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : keystone-evm: update serial port and virtual terminal settings
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2012 16:34:43 -0000
+X-List-Received-Date: Fri, 30 Nov 2012 16:35:19 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: denzil
-Commit: 370ba3ef40e30766c7235e743675dd5bca1b4d83
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=370ba3ef40e30766c7235e743675dd5bca1b4d83
+Branch: danny
+Commit: c2f1b57a6c58eb96d2824b7733681a720a48a969
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c2f1b57a6c58eb96d2824b7733681a720a48a969
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Nov 30 11:31:07 2012 -0500
