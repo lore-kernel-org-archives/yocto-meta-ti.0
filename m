@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86B32E013EB
-	for <meta-ti@yoctoproject.org>; Fri, 30 Nov 2012 08:47:11 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2AA9E00533
+	for <meta-ti@yoctoproject.org>; Mon,  3 Dec 2012 13:14:22 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5B75F52AC2; Fri, 30 Nov 2012 16:47:11 +0000 (UTC)
+	id 68F3852A93; Mon,  3 Dec 2012 21:14:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20121130164711.5B75F52AC2@arago-project.org>
-Date: Fri, 30 Nov 2012 16:47:11 +0000 (UTC)
+Message-Id: <20121203211419.68F3852A93@arago-project.org>
+Date: Mon,  3 Dec 2012 21:14:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : keystone: bump MACHINE_KERNEL_PR for previous changes
+Subject: Denys Dmytriyenko : linux-keystone: update from version 3.6-rc6 to 3.6.6
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,38 +22,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Nov 2012 16:47:11 -0000
+X-List-Received-Date: Mon, 03 Dec 2012 21:14:23 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: ff74447a23ceb8acf5da5f1fdc83a0c9d7ea7073
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ff74447a23ceb8acf5da5f1fdc83a0c9d7ea7073
+Branch: master
+Commit: 033abf668471f7312ef741be2ab53108078c6ae7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=033abf668471f7312ef741be2ab53108078c6ae7
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Nov 30 11:44:24 2012 -0500
+Date:   Mon Dec  3 15:45:01 2012 -0500
 
-keystone: bump MACHINE_KERNEL_PR for previous changes
+linux-keystone: update from version 3.6-rc6 to 3.6.6
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/keystone.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ conf/machine/include/keystone.inc                  |    3 +-
+ .../linux/linux-keystone-3.5+3.6-rc6/defconfig     | 1012 -------------
+ .../linux/linux-keystone-3.6.6/defconfig           | 1533 ++++++++++++++++++++
+ ...nux-keystone_3.6.bb => linux-keystone_3.6.6.bb} |    5 +-
+ 4 files changed, 1537 insertions(+), 1016 deletions(-)
 
-diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
-index 1914128..60550d0 100644
---- a/conf/machine/include/keystone.inc
-+++ b/conf/machine/include/keystone.inc
-@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
- require conf/machine/include/tune-cortexa15.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-keystone"
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r1"
-+MACHINE_KERNEL_PR = "r2"
- 
- KERNEL_IMAGETYPE = "uImage"
- 
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=033abf668471f7312ef741be2ab53108078c6ae7
 
