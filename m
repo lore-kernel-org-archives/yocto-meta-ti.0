@@ -1,34 +1,32 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DBF17E01458
-	for <meta-ti@yoctoproject.org>; Thu,  6 Dec 2012 05:26:43 -0800 (PST)
-Received: from cpebcc81008dd2c-cmbcc81008dd29.cpe.net.cable.rogers.com
-	([99.253.156.71]:40998 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1TgbTM-0001mg-LU; Thu, 06 Dec 2012 08:26:40 -0500
-Date: Thu, 6 Dec 2012 08:26:37 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: Gary Thomas <gary@mlbassoc.com>
-In-Reply-To: <50C09C0C.3030001@mlbassoc.com>
-Message-ID: <alpine.DEB.2.02.1212060826200.20364@oneiric>
-References: <alpine.DEB.2.02.1212060806010.20056@oneiric>
-	<50C09C0C.3030001@mlbassoc.com>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Cc: meta-ti@yoctoproject.org
-Subject: Re: why does omap3.inc include "x-load" but omap4.inc not?
+Return-Path: <pabigot@gmail.com>
+Received: from mail-ie0-f179.google.com (mail-ie0-f179.google.com
+	[209.85.223.179])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2808FE00348
+	for <meta-ti@yoctoproject.org>; Thu,  6 Dec 2012 10:04:22 -0800 (PST)
+Received: by mail-ie0-f179.google.com with SMTP id k14so10736209iea.24
+	for <meta-ti@yoctoproject.org>; Thu, 06 Dec 2012 10:04:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	bh=hBvpt7s1/xyXRiuGjAdDi5mPexW+l8aaAuXzb2BSyE0=;
+	b=Bd5/76jOeD1+30pkSJ2Pujt2DAAEhb4TsJCwtp4TldOmXxTX8jb+pSaruQ1Gyz0tgA
+	Qd6IrrXBM/nQko4qe2DBoRBWdSmrN1VFDa6nNtxZ5JqhnryxkSOfhQwNrelWlPlU06vK
+	6No/aUScSODUqrscRLa6LkYvwU8XsfLddL9x2d7wObNwcj81rDisSMRnGWqkkVso9cQM
+	ODSokLRccs/TV7gVk4FGsNJBQs70LtqndWXyUenRglP7v9t7QGa1MAGvUPsPle+GQMFQ
+	ci7esz9f+cyZEqvGp2DhG27wLDX6ajy8RdaV2vpWD2fFplFry5JyBS9oqNrdysH+QBlq
+	+crw==
+Received: by 10.50.182.166 with SMTP id ef6mr2365251igc.65.1354817061733;
+	Thu, 06 Dec 2012 10:04:21 -0800 (PST)
+Received: from llc.pab (c-66-41-60-82.hsd1.mn.comcast.net. [66.41.60.82])
+	by mx.google.com with ESMTPS id i10sm16026353igb.12.2012.12.06.10.04.19
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 06 Dec 2012 10:04:20 -0800 (PST)
+Sender: Peter Bigot <pabigot@gmail.com>
+From: "Peter A. Bigot" <pab@pabigot.com>
+To: meta-ti@yoctoproject.org
+Date: Thu,  6 Dec 2012 12:04:15 -0600
+Message-Id: <1354817055-5387-1-git-send-email-pab@pabigot.com>
+X-Mailer: git-send-email 1.7.7.6
+Subject: [PATCH][danny] linux-mainline 3.2: update beagleboard defconfig
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,38 +39,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Dec 2012 13:26:44 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 06 Dec 2012 18:04:22 -0000
 
-On Thu, 6 Dec 2012, Gary Thomas wrote:
+From: "Peter A. Bigot" <pab@pabigot.com>
 
-> On 2012-12-06 06:12, Robert P. J. Day wrote:
-> >
-> >    almost certainly a simple answer to this but in grepping through the
-> > meta-ti layer for an unrelated reason, i came across this:
-> >
-> > conf/machine/include/omap4.inc:EXTRA_IMAGEDEPENDS += "u-boot"
-> > conf/machine/include/omap3.inc:EXTRA_IMAGEDEPENDS += "u-boot x-load"
-> >
-> > which i thought was odd, since i have both a beagle and panda, and
-> > both of them use TI's x-loader.  so why would omap3.inc specifically
-> > add x-load as an extra dependency, but not omap4.inc?
->
-> Because U-Boot for the OMAP4 contains support for both MLO and
-> U-Boot using the new "SPL" mode.  Building u-boot will end up
-> building both the MLO image as well as u-boot.img
+Link the TLC59108 driver statically so ULCD7 initialization occurs
+automatically as it did before f0e2305c7e1 which removed the initialization
+from u-boot.  (Angstrom-v2012.12 does not include this module by default.)
 
-  ah, i knew there was a simple answer to that, thanks.
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+---
+ .../linux/linux-mainline-3.2/beagleboard/defconfig |    2 +-
+ recipes-kernel/linux/linux-mainline_3.2.bb         |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-rday
-
+diff --git a/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig b/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig
+index eaf9548..28f096c 100644
+--- a/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig
++++ b/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig
+@@ -2907,7 +2907,7 @@ CONFIG_BACKLIGHT_CLASS_DEVICE=y
+ CONFIG_BACKLIGHT_GENERIC=y
+ # CONFIG_BACKLIGHT_ADP8860 is not set
+ # CONFIG_BACKLIGHT_ADP8870 is not set
+-CONFIG_BACKLIGHT_TLC59108=m
++CONFIG_BACKLIGHT_TLC59108=y
+ 
+ #
+ # Display device support
+diff --git a/recipes-kernel/linux/linux-mainline_3.2.bb b/recipes-kernel/linux/linux-mainline_3.2.bb
+index bc0a145..7eafdfa 100644
+--- a/recipes-kernel/linux/linux-mainline_3.2.bb
++++ b/recipes-kernel/linux/linux-mainline_3.2.bb
+@@ -10,7 +10,7 @@ PV = "3.2.28"
+ SRCREV_pn-${PN} = "1f873aca1c7aa7a574b276c040d304d16f1dbfa4"
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ 
+ FILESPATH =. "${FILE_DIRNAME}/linux-mainline-3.2:${FILE_DIRNAME}/linux-mainline-3.2/${MACHINE}:"
+ 
 -- 
+1.7.7.6
 
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
 
