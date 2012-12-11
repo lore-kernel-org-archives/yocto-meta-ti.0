@@ -1,28 +1,29 @@
-Return-Path: <ndec13@gmail.com>
-Received: from mail-vb0-f48.google.com (mail-vb0-f48.google.com
-	[209.85.212.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DD3D5E00777
-	for <meta-ti@yoctoproject.org>; Tue, 11 Dec 2012 14:12:51 -0800 (PST)
-Received: by mail-vb0-f48.google.com with SMTP id fc21so4721791vbb.35
-	for <meta-ti@yoctoproject.org>; Tue, 11 Dec 2012 14:12:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=TT5k9AFbaXPCjeKa7pYuq+62sh/1Fe8dhzR1HFD0wio=;
-	b=N48wlWbO5WmQh7hcbb77HhbM5xWon4R6bck4L8cUv7pzW0r8ERN4XHHsxwnHjzas0n
-	Leumqbso/gh7OlpUGIaoRkGICNNAnZ/nAJztqJiwfrw1Gs8oub4enIzmtJ+nHlJt9qfJ
-	T0B7QAUTmHwh2uUgvmyUNguWrHqSeVtEJN9dHg816hptkrjo1HyJrmjLQ0mPlltEPSQE
-	ByiglVFVreEbemQ888LoMueQfQ6+895ZLifbuyp7uXhDzbllLxKCYNszhlckIgCu2RzB
-	pNrL85RshWMEePWbDMgy2F0u56ZHnV7BjI9IQZyDmdqnSg1LKdZLJnpvw9IZG4H6UrK2
-	flcA==
-Received: by 10.52.21.107 with SMTP id u11mr5541115vde.101.1355263970923; Tue,
-	11 Dec 2012 14:12:50 -0800 (PST)
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CADF4E00777
+	for <meta-ti@yoctoproject.org>; Tue, 11 Dec 2012 14:14:41 -0800 (PST)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id qBBMEeFm016682;
+	Tue, 11 Dec 2012 16:14:40 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id qBBMEesA015141;
+	Tue, 11 Dec 2012 16:14:40 -0600
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.1.323.3;
+	Tue, 11 Dec 2012 16:14:40 -0600
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id qBBMEeOe002535;
+	Tue, 11 Dec 2012 16:14:40 -0600
+Date: Tue, 11 Dec 2012 17:14:39 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Nicolas Dechesne <ndec13@gmail.com>
+Message-ID: <20121211221439.GD17542@edge>
+References: <CAOT3miLrspTsg-YTp-yaiacN7zi6zzMYghTjDH=yqXdAgGsnmA@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.58.248.74 with HTTP; Tue, 11 Dec 2012 14:12:30 -0800 (PST)
-From: Nicolas Dechesne <ndec13@gmail.com>
-Date: Tue, 11 Dec 2012 23:12:30 +0100
-Message-ID: <CAOT3miLrspTsg-YTp-yaiacN7zi6zzMYghTjDH=yqXdAgGsnmA@mail.gmail.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: meta-ti master build broken
+In-Reply-To: <CAOT3miLrspTsg-YTp-yaiacN7zi6zzMYghTjDH=yqXdAgGsnmA@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: meta-ti master build broken
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,30 +36,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2012 22:12:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 11 Dec 2012 22:14:42 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-hi,
+On Tue, Dec 11, 2012 at 11:12:30PM +0100, Nicolas Dechesne wrote:
+> hi,
+> 
+> i just noticed that meta-ti + poky/master is broken since some mesa
+> updates were merged
+> 
+> 66d92cb mesa-dri: upgrade -git version to current master
+> a63dc47 mesa: upgrade to 8.0.5
+> 
+> I suspect something along these lines should fix the problem:
+> 
+> $ git diff --cached -M
+> diff --git a/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
+> b/recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
+> similarity index 100%
+> rename from recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
+> rename to recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
+> 
+> however I can't test that right now on any plaform... so I just wanted
+> to share the information with the hope that someone can fix it quicker
+> than me.
 
-i just noticed that meta-ti + poky/master is broken since some mesa
-updates were merged
+Thanks for reporting! I'll take a look at it.
 
-66d92cb mesa-dri: upgrade -git version to current master
-a63dc47 mesa: upgrade to 8.0.5
-
-I suspect something along these lines should fix the problem:
-
-$ git diff --cached -M
-diff --git a/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
-b/recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
-similarity index 100%
-rename from recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
-rename to recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
-
-however I can't test that right now on any plaform... so I just wanted
-to share the information with the hope that someone can fix it quicker
-than me.
-
-cheers
-nico
+-- 
+Denys
 
