@@ -1,29 +1,33 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CADF4E00777
-	for <meta-ti@yoctoproject.org>; Tue, 11 Dec 2012 14:14:41 -0800 (PST)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id qBBMEeFm016682;
-	Tue, 11 Dec 2012 16:14:40 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id qBBMEesA015141;
-	Tue, 11 Dec 2012 16:14:40 -0600
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.1.323.3;
-	Tue, 11 Dec 2012 16:14:40 -0600
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id qBBMEeOe002535;
-	Tue, 11 Dec 2012 16:14:40 -0600
-Date: Tue, 11 Dec 2012 17:14:39 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Nicolas Dechesne <ndec13@gmail.com>
-Message-ID: <20121211221439.GD17542@edge>
-References: <CAOT3miLrspTsg-YTp-yaiacN7zi6zzMYghTjDH=yqXdAgGsnmA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAOT3miLrspTsg-YTp-yaiacN7zi6zzMYghTjDH=yqXdAgGsnmA@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: meta-ti master build broken
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
+	[209.85.223.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E69E7E00348
+	for <meta-ti@yoctoproject.org>; Fri, 14 Dec 2012 09:38:16 -0800 (PST)
+Received: by mail-ie0-f176.google.com with SMTP id 13so6217045iea.35
+	for <meta-ti@yoctoproject.org>; Fri, 14 Dec 2012 09:38:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	bh=svnHkJ2akqDU3XtR5P71hv4yKFUTdy+A7Ta5+t6aDDg=;
+	b=hsdwPpv+l1S6DO0MAeRnvMmH/iJzJ+s2JJIUAyCvubMz/GPAwfOsm0m6bDy0MkYDWH
+	qFlojP4u9oq3hvAl07tosnlqLDlP/YgmtvLHmmnRBnJkyn/NqyhL5p20O8r1yXXGWhQr
+	4ENE2a3fb+2RQdfpWV1EXHRcRfcHe7XoZj0zCRPzWkd47fh7ySjipxUlNuVQ2OFpdrTY
+	2GUCWvnLyzdBp5wTDNhN+4MQOp/Te7Fs6EMoihMLOIBdofqVmv8wXdYLDSALIVMJJK7C
+	Su3Lpy/E0tosWDMk7SONzUtVXguQXc6AjIaMZS7KuS/b3pui3L38g5Axfn5QBIKg3BfY
+	JPpw==
+Received: by 10.43.130.131 with SMTP id hm3mr5166604icc.25.1355506696581;
+	Fri, 14 Dec 2012 09:38:16 -0800 (PST)
+Received: from mars.hq.bec-systems.com (oh-69-34-21-229.sta.embarqhsd.net.
+	[69.34.21.229])
+	by mx.google.com with ESMTPS id gs6sm4430392igc.11.2012.12.14.09.38.15
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 14 Dec 2012 09:38:15 -0800 (PST)
+From: cliff.brake@gmail.com
+To: meta-ti@yoctoproject.org
+Date: Fri, 14 Dec 2012 12:38:08 -0500
+Message-Id: <1355506688-5738-1-git-send-email-cliff.brake@gmail.com>
+X-Mailer: git-send-email 1.8.0.2
+Cc: Cliff Brake <cbrake@bec-systems.com>
+Subject: [PATCH] mesa-dri: update to 8.0.5 to match oe-core
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,34 +40,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Dec 2012 22:14:42 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 14 Dec 2012 17:38:17 -0000
 
-On Tue, Dec 11, 2012 at 11:12:30PM +0100, Nicolas Dechesne wrote:
-> hi,
-> 
-> i just noticed that meta-ti + poky/master is broken since some mesa
-> updates were merged
-> 
-> 66d92cb mesa-dri: upgrade -git version to current master
-> a63dc47 mesa: upgrade to 8.0.5
-> 
-> I suspect something along these lines should fix the problem:
-> 
-> $ git diff --cached -M
-> diff --git a/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
-> b/recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
-> similarity index 100%
-> rename from recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
-> rename to recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
-> 
-> however I can't test that right now on any plaform... so I just wanted
-> to share the information with the hope that someone can fix it quicker
-> than me.
+From: Cliff Brake <cbrake@bec-systems.com>
 
-Thanks for reporting! I'll take a look at it.
+Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
+---
+ recipes-graphics/mesa/mesa-dri_8.0.4.bbappend | 1 -
+ recipes-graphics/mesa/mesa-dri_8.0.5.bbappend | 1 +
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ delete mode 100644 recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
+ create mode 100644 recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
 
+diff --git a/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend b/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
+deleted file mode 100644
+index 164ec1b..0000000
+--- a/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
++++ /dev/null
+@@ -1 +0,0 @@
+-require mesa-omap3-common.inc
+diff --git a/recipes-graphics/mesa/mesa-dri_8.0.5.bbappend b/recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
+new file mode 100644
+index 0000000..164ec1b
+--- /dev/null
++++ b/recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
+@@ -0,0 +1 @@
++require mesa-omap3-common.inc
 -- 
-Denys
+1.8.0.2
+
 
