@@ -1,29 +1,28 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 091F8E00294
-	for <meta-ti@yoctoproject.org>; Mon, 17 Dec 2012 16:16:59 -0800 (PST)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id qBI0GwAw032536;
-	Mon, 17 Dec 2012 18:16:59 -0600
-Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id qBI0GwP3019939;
-	Mon, 17 Dec 2012 18:16:58 -0600
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
-	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 17 Dec 2012 18:16:58 -0600
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id qBI0GwqK020215;
-	Mon, 17 Dec 2012 18:16:58 -0600
-Date: Mon, 17 Dec 2012 19:16:57 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Chris Hallinan <challinan@gmail.com>
-Message-ID: <20121218001657.GA12347@edge>
-References: <CAME0jBTzcQsaL0b9dfzc3x+kj19=6o2cQ4_4bzjLjCjyFWoVZQ@mail.gmail.com>
+Return-Path: <munoz0raul@gmail.com>
+Received: from mail-ia0-f176.google.com (mail-ia0-f176.google.com
+	[209.85.210.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA1B9E006CC
+	for <meta-ti@yoctoproject.org>; Fri, 21 Dec 2012 03:32:00 -0800 (PST)
+Received: by mail-ia0-f176.google.com with SMTP id y26so3782209iab.7
+	for <meta-ti@yoctoproject.org>; Fri, 21 Dec 2012 03:32:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=UJ2WMRGiRGDxaZpHXjFrhNdWo/meIU0jFO8xzh1cpGw=;
+	b=SEtiq9r7tTLVks2T50TPy5pQVJbRbm6ej2uGEGkQfzlggvUMUzcWhOZVVmwcAeJkiV
+	gJKi3S1FZRMcfYy4q1BhpGw8VidfCGL/Gkfndi9PiuvToq0sk0lQo9gK19fm6aibm5jT
+	9JfyLFzJzMHm3M5Cg40/AXvjSPuS086gj1ytwYu2Sb05C5TPJh2EiqDL5Lwuelfolwac
+	Te5JcnzSW8h03jaom7XozXdInXB1Cg17GiXJBOfiruqN+4EPLQCLFwCEpS0TFMzh4qhA
+	Ef1rigoVFr2P7aY3A3gs39o2Ck0WlTKWorDr62DGDi2uyPVVwYWK1ib8ukXzH6UXjeGo
+	0WgQ==
 MIME-Version: 1.0
-In-Reply-To: <CAME0jBTzcQsaL0b9dfzc3x+kj19=6o2cQ4_4bzjLjCjyFWoVZQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: omap5 support
+Received: by 10.50.184.229 with SMTP id ex5mr12858518igc.72.1356089520303;
+	Fri, 21 Dec 2012 03:32:00 -0800 (PST)
+Received: by 10.64.147.40 with HTTP; Fri, 21 Dec 2012 03:32:00 -0800 (PST)
+Date: Fri, 21 Dec 2012 09:32:00 -0200
+Message-ID: <CANmViriJz_VicoQQz=+=wan8j414yMrMJVB17rbEdB0qwCeXtg@mail.gmail.com>
+From: Raul Rosetto Munoz <munoz0raul@gmail.com>
+To: meta-ti@yoctoproject.org
+Subject: BeagleBone Video.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,30 +35,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Dec 2012 00:17:00 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 21 Dec 2012 11:32:00 -0000
+Content-Type: multipart/alternative; boundary=14dae9340ddf242ed004d15b32ab
 
-On Fri, Dec 14, 2012 at 05:48:17PM -0500, Chris Hallinan wrote:
-> I'm wondering about support in Yocto Project for omap5, in particular
-> omap5430.  I don't see any machine configurations in meta-ti, but I heard
-> someone was working on it.
-> 
-> Anyone care to elaborate?
-> 
-> Anything available to share?
+--14dae9340ddf242ed004d15b32ab
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Chris,
+Hello All,
 
-Thank you for your question.
+I want to by a beaglebone and use it to see video with this hdmi cape:
 
-In light of the recent announcement[1] to shift development from purely mobile 
-devices to embedded and industrial ones, the scope of OMAP5 support is still 
-somewhat unclear, but there are good chances it may be added to meta-ti in the 
-future - please stay tuned.
+http://circuitco.com/support/index.php?title=3DBeagleBone-HDMI_CAPE
 
-[1] http://www.zdnet.com/texas-instruments-lessens-focus-on-mobile-devices-7000004815/
+Before buy the board, I have some question that I never found the answer.
 
--- 
-Denys
+How some one can know if all the drivers features to use the best video
+performance are implemented at meta-ti?
 
+How to know which resolution are possible to use the beaglebone?
+
+Thanks For all help.
+
+--=20
+*Raul Rosetto Mu=F1oz*
+
+--14dae9340ddf242ed004d15b32ab
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hello All,</div><div><br></div><div>I want to by a be=
+aglebone and use it to see video with this hdmi cape:</div><div><br></div><=
+div><a href=3D"http://circuitco.com/support/index.php?title=3DBeagleBone-HD=
+MI_CAPE">http://circuitco.com/support/index.php?title=3DBeagleBone-HDMI_CAP=
+E</a></div>
+<div><br></div><div>Before buy the board, I have some question that I never=
+ found the answer.</div><div><br></div><div>How some one can know if all th=
+e drivers features to use the best video performance are implemented at met=
+a-ti?</div>
+<div><br></div><div>How to know which resolution are possible to use the be=
+aglebone?</div><div><br></div><div>Thanks For all help.</div><div><br></div=
+>-- <br><b>Raul Rosetto Mu=F1oz</b>
+</div>
+
+--14dae9340ddf242ed004d15b32ab--
