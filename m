@@ -1,32 +1,32 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
-	[209.85.220.43])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 19849E0072F
-	for <meta-ti@yoctoproject.org>; Tue,  8 Jan 2013 21:28:35 -0800 (PST)
-Received: by mail-pa0-f43.google.com with SMTP id fb10so796385pad.2
-	for <meta-ti@yoctoproject.org>; Tue, 08 Jan 2013 21:28:34 -0800 (PST)
+Return-Path: <ndec13@gmail.com>
+Received: from mail-qc0-f182.google.com (mail-qc0-f182.google.com
+	[209.85.216.182])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF68EE01439
+	for <meta-ti@yoctoproject.org>; Wed,  9 Jan 2013 00:02:13 -0800 (PST)
+Received: by mail-qc0-f182.google.com with SMTP id k19so1404780qcs.13
+	for <meta-ti@yoctoproject.org>; Wed, 09 Jan 2013 00:02:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=AZgJ7hTPpzCXTunnk0k4/O2ZWJDvaQkJ2WutWs0eBjg=;
-	b=HyumTjhKGhEs/xekM1HCuMf3sKcHpeO26udntHtfSwYXDT6gQjYb3+8anoai8R8GKv
-	2t+UkIFDcOYMz45iZDsR4cxExQxjTQjeYMb19V7L8llXw/HcpsXZemaklCLj3aSPJSJK
-	uIbk0ROSL4Uo4/2vZM7rTB8E0HgmSczahliwNxm7xo47yDq5eIbfOfQQY4+uOVcz742q
-	ZcwAyadaDGb1jQqPNq5BpelGyzCJapgEZ4yLWFDs2eNoz+1ICJnSLepPoGJUiKYtomDG
-	sPq6NRG4eWFBHy95nnRnqlQvphldp2UrrW1p6kj2/AU9qR9hvAhWF5VWs50sJCQ5pEqI
-	rSmg==
-X-Received: by 10.68.137.167 with SMTP id qj7mr203726607pbb.148.1357709314941; 
-	Tue, 08 Jan 2013 21:28:34 -0800 (PST)
-Received: from isis.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPS id qt3sm40947317pbb.32.2013.01.08.21.28.33
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 08 Jan 2013 21:28:34 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Tue,  8 Jan 2013 21:28:17 -0800
-Message-Id: <1357709297-11918-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [PATCH] mesa-dri: Move bbappend from 8.0.4 -> 8.0.5 to match OE-Core
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=27zb0OrN9jovOhPUJLSLlbKBNhRIK6zLXU3zxThquLg=;
+	b=CvBOUjJKrOjctAUYQBCO4MsMFSOMr2b7BTM+p+Kv2/gW8uzo+AR8CfMd4ATWfKE8nc
+	euatDQp50revKuWpY9mIoJRh3lIF+svpEicqJMFBTxlVxSdfLYhVDfZOEKpdvu9+g++D
+	Vc3SQrPguO5xB+RAfzYMn/eMChVxLsuHt//X3VlVzyDRcnNHDIQ1+DP+qc8V0Qoftmit
+	iFvnxBVMOAagqwH+//QNVqvcSDJyWXjB/00LqUYctRQjcKcsn4KoKeEF81ZMQ78YjWRl
+	Der+tnh8U07YSJ46sIonvensVDsd4bzpvY+VpBMi5OAqFkWxg51QrutUMlLmLwP1Q8Ds
+	kzNw==
+Received: by 10.49.16.9 with SMTP id b9mr57651505qed.16.1357718533251; Wed, 09
+	Jan 2013 00:02:13 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.49.127.7 with HTTP; Wed, 9 Jan 2013 00:01:52 -0800 (PST)
+In-Reply-To: <CANmVirii6vJvYyAR-a6wOHjFwoSnpqk5vSipnkXQSU6rZPVmKA@mail.gmail.com>
+References: <CANmVirii6vJvYyAR-a6wOHjFwoSnpqk5vSipnkXQSU6rZPVmKA@mail.gmail.com>
+From: Nicolas Dechesne <ndec13@gmail.com>
+Date: Wed, 9 Jan 2013 09:01:52 +0100
+Message-ID: <CAOT3miLOCbazfMvaW8E2mV3o+uJwJYoU5GZ2PCRQXQ43qSwe6Q@mail.gmail.com>
+To: Raul Rosetto Munoz <munoz0raul@gmail.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Creating simple linux for beaglebone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,31 +39,82 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2013 05:28:35 -0000
+X-List-Received-Date: Wed, 09 Jan 2013 08:02:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes-graphics/mesa/mesa-dri_8.0.4.bbappend |    1 -
- recipes-graphics/mesa/mesa-dri_8.0.5.bbappend |    1 +
- 2 files changed, 1 insertion(+), 1 deletion(-)
- delete mode 100644 recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
- create mode 100644 recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
+On Wed, Jan 9, 2013 at 2:38 AM, Raul Rosetto Munoz <munoz0raul@gmail.com> w=
+rote:
+> Hello all,
+>
+> I want to create a simples linux for beaglebone using yocto danny.
+>
+> I did all the necessary clones:
+> poky
+> meta-ti
+> meta-openembedded
+>
+> I changed all to danny branch!
+>
+> After these sets I did the poky source:
+> source poky/oe-init-build-env beaglebone-linux
+>
+> Changed the machine to beaglebone
+>
+> MACHINE ?=3D "beaglebone"
+>
+> Changed the bblayer to:
+>
+> BBLAYERS ?=3D " \
+>   /home/prjs/video0001/linux/poky/meta \
+>   /home/prjs/video0001/linux/poky/meta-yocto \
+>   /home/prjs/video0001/linux/poky/meta-yocto-bsp \
+>   /home/prjs/video0001/linux/meta-ti \
+>   /home/prjs/video0001/linux/meta-openembedded/meta-oe  \
+>   "
+>
+>
+> And finaly when I run bibake core-image-minimal
+>
+>
+>
+> munoz@munoz:/home/prjs/video0001/linux/linux-bone$ bitbake
+> core-image-minimal
+> Loading cache: 100%
+> |########################################################################=
+##########################|
+> ETA:  00:00:00
+> Loaded 4 entries from dependency cache.
+> ERROR: ParseError at
+> /home/prjs/video0001/linux/meta-ti/recipes-misc/payload/bonescript.bb:5:
+> Could not inherit file classes/systemd.bbclass
+> ERROR: This recipe does not have the LICENSE field set (cloud9-gnome-imag=
+e)
+> ERROR: Command execution failed: Exited with 1
+>
+> Summary: There were 3 ERROR messages shown, returning a non-zero exit cod=
+e.
 
-diff --git a/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend b/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
-deleted file mode 100644
-index 164ec1b..0000000
---- a/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
-+++ /dev/null
-@@ -1 +0,0 @@
--require mesa-omap3-common.inc
-diff --git a/recipes-graphics/mesa/mesa-dri_8.0.5.bbappend b/recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
-new file mode 100644
-index 0000000..164ec1b
---- /dev/null
-+++ b/recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
-@@ -0,0 +1 @@
-+require mesa-omap3-common.inc
--- 
-1.7.9.5
+you need to add
 
+BBMASK =3D "meta-ti/recipes-misc"
+
+in local.conf, as mentioned here
+http://www.crashcourse.ca/wiki/index.php/Getting_started:_OE%2C_meta-ti_and=
+_the_PandaBoard_ES.
+
+
+>
+> Some one can Help me??
+>
+> Thanks for all help
+>
+> --
+> Raul Rosetto Mu=F1oz
+>
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+>
 
