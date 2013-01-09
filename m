@@ -1,19 +1,19 @@
 Return-Path: <rpjday@crashcourse.ca>
 Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
 	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 022C1E0147A
-	for <meta-ti@yoctoproject.org>; Wed,  9 Jan 2013 02:01:14 -0800 (PST)
-Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.115.5.73]:55896 helo=crashcourse.ca)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4D53EE00770
+	for <meta-ti@yoctoproject.org>; Wed,  9 Jan 2013 03:06:25 -0800 (PST)
+Received: from cpebcc81008dd2c-cmbcc81008dd29.cpe.net.cable.rogers.com
+	([99.253.156.71]:34055 helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
 	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1TssTB-0001xS-Aj; Wed, 09 Jan 2013 05:01:13 -0500
-Date: Wed, 9 Jan 2013 05:01:09 -0500 (EST)
+	id 1TstUG-0003hB-34; Wed, 09 Jan 2013 06:06:24 -0500
+Date: Wed, 9 Jan 2013 06:06:21 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@oneiric
 To: Nicolas Dechesne <ndec13@gmail.com>
 In-Reply-To: <CAOT3miLOCbazfMvaW8E2mV3o+uJwJYoU5GZ2PCRQXQ43qSwe6Q@mail.gmail.com>
-Message-ID: <alpine.DEB.2.02.1301090459001.24380@oneiric>
+Message-ID: <alpine.DEB.2.02.1301090604340.4410@oneiric>
 References: <CANmVirii6vJvYyAR-a6wOHjFwoSnpqk5vSipnkXQSU6rZPVmKA@mail.gmail.com>
 	<CAOT3miLOCbazfMvaW8E2mV3o+uJwJYoU5GZ2PCRQXQ43qSwe6Q@mail.gmail.com>
 User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
@@ -41,7 +41,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2013 10:01:15 -0000
+X-List-Received-Date: Wed, 09 Jan 2013 11:06:25 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 On Wed, 9 Jan 2013, Nicolas Dechesne wrote:
@@ -74,36 +74,12 @@ On Wed, 9 Jan 2013, Nicolas Dechesne wrote:
 > >   /home/prjs/video0001/linux/meta-ti \
 > >   /home/prjs/video0001/linux/meta-openembedded/meta-oe  \
 > >   "
-> >
-> >
-> > And finaly when I run bibake core-image-minimal
-> >
-> >
-> >
-> > munoz@munoz:/home/prjs/video0001/linux/linux-bone$ bitbake
-> > core-image-minimal
-> > Loading cache: 100%
-> > |##################################################################################################|
-> > ETA:  00:00:00
-> > Loaded 4 entries from dependency cache.
-> > ERROR: ParseError at
-> > /home/prjs/video0001/linux/meta-ti/recipes-misc/payload/bonescript.bb:5:
-> > Could not inherit file classes/systemd.bbclass
-> > ERROR: This recipe does not have the LICENSE field set (cloud9-gnome-image)
-> > ERROR: Command execution failed: Exited with 1
-> >
-> > Summary: There were 3 ERROR messages shown, returning a non-zero exit code.
->
-> you need to add
->
-> BBMASK = "meta-ti/recipes-misc"
->
-> in local.conf, as mentioned here
-> http://www.crashcourse.ca/wiki/index.php/Getting_started:_OE%2C_meta-ti_and_the_PandaBoard_ES.
 
-  i currently don't have a specific beaglebone/meta-ti page on my wiki
--- i can easily put together one later today unless there's already an
-end-to-end recipe for that somewhere.
+  did you really need to check out all those layers?  as i read it,
+the meta-ti layer has no dependencies on anything but basic OE --
+that's all i used for creating images for my pandaboard.
+
+  am i misreading something?
 
 rday
 
