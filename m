@@ -1,28 +1,32 @@
-Return-Path: <munoz0raul@gmail.com>
-Received: from mail-ia0-f177.google.com (mail-ia0-f177.google.com
-	[209.85.210.177])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54B3BE006C2
-	for <meta-ti@yoctoproject.org>; Tue,  8 Jan 2013 17:38:31 -0800 (PST)
-Received: by mail-ia0-f177.google.com with SMTP id h8so376492iaa.8
-	for <meta-ti@yoctoproject.org>; Tue, 08 Jan 2013 17:38:31 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 19849E0072F
+	for <meta-ti@yoctoproject.org>; Tue,  8 Jan 2013 21:28:35 -0800 (PST)
+Received: by mail-pa0-f43.google.com with SMTP id fb10so796385pad.2
+	for <meta-ti@yoctoproject.org>; Tue, 08 Jan 2013 21:28:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=9Ez8HCxiV8vMZFFgPqPASIaosIyiPHrVATiPI3bHkyw=;
-	b=FNuYsWMgcDRGlpYNs/tcr051huoBzYT8M92D1T6ftC1eU9a10WClZfejpkSfxdolVr
-	KT/5ApgZNRkoIeTVeZ9YdFG5t2BVRcKZbhdLG2B6BpWD3lw3N23Zf5XPZp/fCK853SYI
-	+7PIpzmB3p184MJHmJlx3qxHYtA+zUZROJgM9n6PKwaWBtQaSLBAZ4Ys+k3GTqoj+pSE
-	PTatgiqHgGwqSsAiKtzRiJt3u+0WUw/S8rxbg103/Bo1garUcWJKKHk56vYoawFOZuC/
-	BEAPc2C6Wy2JbjPnvIs56+9vl0F3XNNNb+ErHlav5/9TviSiKT/NGoWL+jTT4MRt/RCd
-	+Jvw==
-MIME-Version: 1.0
-Received: by 10.42.130.74 with SMTP id u10mr33279098ics.9.1357695510930; Tue,
-	08 Jan 2013 17:38:30 -0800 (PST)
-Received: by 10.64.147.40 with HTTP; Tue, 8 Jan 2013 17:38:30 -0800 (PST)
-Date: Tue, 8 Jan 2013 23:38:30 -0200
-Message-ID: <CANmVirii6vJvYyAR-a6wOHjFwoSnpqk5vSipnkXQSU6rZPVmKA@mail.gmail.com>
-From: Raul Rosetto Munoz <munoz0raul@gmail.com>
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=AZgJ7hTPpzCXTunnk0k4/O2ZWJDvaQkJ2WutWs0eBjg=;
+	b=HyumTjhKGhEs/xekM1HCuMf3sKcHpeO26udntHtfSwYXDT6gQjYb3+8anoai8R8GKv
+	2t+UkIFDcOYMz45iZDsR4cxExQxjTQjeYMb19V7L8llXw/HcpsXZemaklCLj3aSPJSJK
+	uIbk0ROSL4Uo4/2vZM7rTB8E0HgmSczahliwNxm7xo47yDq5eIbfOfQQY4+uOVcz742q
+	ZcwAyadaDGb1jQqPNq5BpelGyzCJapgEZ4yLWFDs2eNoz+1ICJnSLepPoGJUiKYtomDG
+	sPq6NRG4eWFBHy95nnRnqlQvphldp2UrrW1p6kj2/AU9qR9hvAhWF5VWs50sJCQ5pEqI
+	rSmg==
+X-Received: by 10.68.137.167 with SMTP id qj7mr203726607pbb.148.1357709314941; 
+	Tue, 08 Jan 2013 21:28:34 -0800 (PST)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPS id qt3sm40947317pbb.32.2013.01.08.21.28.33
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 08 Jan 2013 21:28:34 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: meta-ti@yoctoproject.org
-Subject: Creating simple linux for beaglebone
+Date: Tue,  8 Jan 2013 21:28:17 -0800
+Message-Id: <1357709297-11918-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [PATCH] mesa-dri: Move bbappend from 8.0.4 -> 8.0.5 to match OE-Core
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,113 +39,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jan 2013 01:38:31 -0000
-Content-Type: multipart/alternative; boundary=90e6ba6e8362a463a804d2d11edf
+X-List-Received-Date: Wed, 09 Jan 2013 05:28:35 -0000
 
---90e6ba6e8362a463a804d2d11edf
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes-graphics/mesa/mesa-dri_8.0.4.bbappend |    1 -
+ recipes-graphics/mesa/mesa-dri_8.0.5.bbappend |    1 +
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ delete mode 100644 recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
+ create mode 100644 recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
 
-Hello all,
-
-I want to create a simples linux for beaglebone using yocto danny.
-
-I did all the necessary clones:
-poky
-meta-ti
-meta-openembedded
-
-I changed all to danny branch!
-
-After these sets I did the poky source:
-source poky/oe-init-build-env beaglebone-linux
-
-Changed the machine to beaglebone
-
-MACHINE ?=3D "beaglebone"
-
-Changed the bblayer to:
-
-BBLAYERS ?=3D " \
-  /home/prjs/video0001/linux/poky/meta \
-  /home/prjs/video0001/linux/poky/meta-yocto \
-  /home/prjs/video0001/linux/poky/meta-yocto-bsp \
-  /home/prjs/video0001/linux/meta-ti \
-  /home/prjs/video0001/linux/meta-openembedded/meta-oe  \
-  "
+diff --git a/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend b/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
+deleted file mode 100644
+index 164ec1b..0000000
+--- a/recipes-graphics/mesa/mesa-dri_8.0.4.bbappend
++++ /dev/null
+@@ -1 +0,0 @@
+-require mesa-omap3-common.inc
+diff --git a/recipes-graphics/mesa/mesa-dri_8.0.5.bbappend b/recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
+new file mode 100644
+index 0000000..164ec1b
+--- /dev/null
++++ b/recipes-graphics/mesa/mesa-dri_8.0.5.bbappend
+@@ -0,0 +1 @@
++require mesa-omap3-common.inc
+-- 
+1.7.9.5
 
 
-And finaly when I run bibake core-image-minimal
-
-
-
-munoz@munoz:/home/prjs/video0001/linux/linux-bone$ bitbake
-core-image-minimal
-Loading cache: 100%
-|##########################################################################=
-########################|
-ETA:  00:00:00
-Loaded 4 entries from dependency cache.
-ERROR: ParseError at
-/home/prjs/video0001/linux/meta-ti/recipes-misc/payload/bonescript.bb:5:
-Could not inherit file classes/systemd.bbclass
-ERROR: This recipe does not have the LICENSE field set (cloud9-gnome-image)
-ERROR: Command execution failed: Exited with 1
-
-Summary: There were 3 ERROR messages shown, returning a non-zero exit code.
-
-Some one can Help me??
-
-Thanks for all help
-
---=20
-*Raul Rosetto Mu=F1oz*
-
---90e6ba6e8362a463a804d2d11edf
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hello all,<br></div><div><br></div><div>I want to cre=
-ate a simples linux for beaglebone using yocto danny.</div><div><br></div><=
-div>I did all the necessary clones:</div><div>poky</div><div>meta-ti</div>
-<div>meta-openembedded</div><div><br></div><div>I changed all to danny bran=
-ch!</div><div><br></div><div>After these sets I did the poky source:</div><=
-div>source poky/oe-init-build-env beaglebone-linux</div><div><br></div>
-<div>Changed the machine to beaglebone</div><div><br></div><div><font face=
-=3D"courier new, monospace">MACHINE ?=3D &quot;beaglebone&quot;</font></div=
-><div><br></div><div>Changed the bblayer to:</div><div><br></div><div><font=
- face=3D"courier new, monospace">BBLAYERS ?=3D &quot; \</font></div>
-<div><font face=3D"courier new, monospace">=A0 /home/prjs/video0001/linux/p=
-oky/meta \</font></div><div><font face=3D"courier new, monospace">=A0 /home=
-/prjs/video0001/linux/poky/meta-yocto \</font></div><div><font face=3D"cour=
-ier new, monospace">=A0 /home/prjs/video0001/linux/poky/meta-yocto-bsp \</f=
-ont></div>
-<div><font face=3D"courier new, monospace">=A0 /home/prjs/video0001/linux/m=
-eta-ti \</font></div><div><font face=3D"courier new, monospace">=A0 /home/p=
-rjs/video0001/linux/meta-openembedded/meta-oe =A0\</font></div><div><font f=
-ace=3D"courier new, monospace">=A0 &quot;</font></div>
-<div><br></div><div><br></div><div>And finaly when I run bibake core-image-=
-minimal</div><div><br></div><div><br></div><div><br></div><div><font face=
-=3D"courier new, monospace">munoz@munoz:/home/prjs/video0001/linux/linux-bo=
-ne$ bitbake core-image-minimal</font></div>
-<div><font face=3D"courier new, monospace">Loading cache: 100% |###########=
-###########################################################################=
-############| ETA: =A000:00:00</font></div><div><font face=3D"courier new, =
-monospace">Loaded 4 entries from dependency cache.</font></div>
-<div><font face=3D"courier new, monospace">ERROR: ParseError at /home/prjs/=
-video0001/linux/meta-ti/recipes-misc/payload/<a href=3D"http://bonescript.b=
-b:5">bonescript.bb:5</a>: Could not inherit file classes/systemd.bbclass</f=
-ont></div>
-<div><font face=3D"courier new, monospace">ERROR: This recipe does not have=
- the LICENSE field set (cloud9-gnome-image)</font></div><div><font face=3D"=
-courier new, monospace">ERROR: Command execution failed: Exited with 1</fon=
-t></div>
-<div><font face=3D"courier new, monospace"><br></font></div><div><font face=
-=3D"courier new, monospace">Summary: There were 3 ERROR messages shown, ret=
-urning a non-zero exit code.</font></div><div><br></div><div>Some one can H=
-elp me??</div>
-<div><br></div><div>Thanks for all help</div><div><br></div>-- <br><b>Raul =
-Rosetto Mu=F1oz</b>
-</div>
-
---90e6ba6e8362a463a804d2d11edf--
