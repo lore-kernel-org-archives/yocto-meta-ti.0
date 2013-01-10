@@ -1,32 +1,31 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2C241E0070F
-	for <meta-ti@yoctoproject.org>; Thu, 10 Jan 2013 07:11:33 -0800 (PST)
-Received: from cpebcc81008dd2c-cmbcc81008dd29.cpe.net.cable.rogers.com
-	([99.253.156.71]:38530 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1TtJn1-0006a5-QP; Thu, 10 Jan 2013 10:11:31 -0500
-Date: Thu, 10 Jan 2013 10:11:29 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: Gary Thomas <gary@mlbassoc.com>
+Return-Path: <twoerner@gmail.com>
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A236E00720
+	for <meta-ti@yoctoproject.org>; Thu, 10 Jan 2013 14:50:30 -0800 (PST)
+Received: by mail-we0-f176.google.com with SMTP id r5so560376wey.35
+	for <meta-ti@yoctoproject.org>; Thu, 10 Jan 2013 14:50:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=H6oDe9s2+VONnTm5qq4X13pgPZVZ4mz+zFyzZhbEJ2M=;
+	b=E/WtdPqfJxnpHW2uKbVMIE15GDfQKrnzJwfGIKScGbLuLRc2OnwRM2JT2TxAFfBUNM
+	TY7ILQ6qVs6180iqbJYR2+1CT8g2l/vwHyy9GTyDyA/JiC3EPX1gDxpDffefe6nC+KWk
+	cpI+musr8ONrMFQPWuzWBafIjTXMZvM1YM7nJ+TF7fYmO2moZX7pdn+SnqDX8PIAgJda
+	kReKRJemHH9gqzLJu5ecJ/4dJo7CfzU8tFvzmUXqxexLZxBqu/SToq4GvB1nbbOWVDns
+	r/IiAnfCrB97+WP/ayCxTXjg19+2WPxIShMnJ8Z/tVunblZGYU1d/7rVvPwgKf2BWasD
+	qmdQ==
+MIME-Version: 1.0
+Received: by 10.194.9.197 with SMTP id c5mr117501920wjb.20.1357858229349; Thu,
+	10 Jan 2013 14:50:29 -0800 (PST)
+Received: by 10.227.132.205 with HTTP; Thu, 10 Jan 2013 14:50:29 -0800 (PST)
 In-Reply-To: <50EED938.8080108@mlbassoc.com>
-Message-ID: <alpine.DEB.2.02.1301101008200.7994@oneiric>
 References: <alpine.DEB.2.02.1301100943340.32462@oneiric>
 	<50EED938.8080108@mlbassoc.com>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Date: Thu, 10 Jan 2013 17:50:29 -0500
+Message-ID: <CAHUNapTODZveoW70_tdODtLyc-fiEvwkZQXTd0tQfxQUqvF9-w@mail.gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+To: Gary Thomas <gary@mlbassoc.com>
 Cc: meta-ti@yoctoproject.org
 Subject: Re: has anyone actually tested sdcard_image.bbclass?
 X-BeenThere: meta-ti@yoctoproject.org
@@ -41,94 +40,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jan 2013 15:11:33 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 10 Jan 2013 22:50:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, 10 Jan 2013, Gary Thomas wrote:
-
-> On 2013-01-10 07:48, Robert P. J. Day wrote:
-> >
-> >    testing SD card image creation under meta-ti for the first time and
-> > the first issue seems to be that this is necessary:
-> >
-> > diff --git a/classes/sdcard_image.bbclass b/classes/sdcard_image.bbclass
-> > index f9b8d46..45374e2 100644
-> > --- a/classes/sdcard_image.bbclass
-> > +++ b/classes/sdcard_image.bbclass
-> > @@ -1,4 +1,4 @@
-> > -inherit image
-> > +inherit image_types
-> >
-> >   # Add the fstypes we need
-> >   IMAGE_FSTYPES_append = " tar.bz2 sdimg"
-> >
-> >    also, even after i make that change, i get:
-> >
-> > ===== start =====
-> > ... big snip ...
-> > | /etc/fstab entries need to be created with the user flag for the
-> > loop devices like:
-> > | /dev/loop2
-> > /home/rpjday/oe/builds/ti/bone/tmp-eglibc/work/beaglebone-oe-linux-gnueabi/core-image-minimal/1.0-r0/tmp-mnt-boot
-> > vfat user 0 0
-> > | ERROR: Function failed: do_rootfs (see
-> > /home/rpjday/oe/builds/ti/bone/tmp-eglibc/work/beaglebone-oe-linux-gnueabi/core-image-minimal/1.0-r0/temp/log.do_rootfs.1938
-> > for further information)
-> > ERROR: Task 7
-> > (/home/rpjday/oe/dist/layers/oe-core/meta/recipes-core/images/core-image-minimal.bb,
-> > do_rootfs) failed with exit code '1'
-> > NOTE: Tasks Summary: Attempted 1922 tasks of which 1901 didn't need to
-> > be rerun and 1 failed.
-> > No currently running tasks (1922 of 1923)
-> >
-> > Summary: 1 task failed:
-> >
-> > /home/rpjday/oe/dist/layers/oe-core/meta/recipes-core/images/core-image-minimal.bb,
-> > do_rootfs
-> > ===== end =====
-> >
-> > but i'm willing to believe that's something i did stupidly so i'll
-> > look at it further.
-> >
-> >    thoughts?  all i did for a test was add this to local.conf:
-> >
-> > IMAGE_CLASSES += "sdcard_image"
-> >
-> > and run:
-> >
-> > $ bitbake core-image-minimal
-> >
-> > the previous build worked fine without trying to create the SD card
-> > image.
->
-> Did you look at the log to see why it failed?  Last time I tried this,
-> it required horrible set up to make it work (something I never wanted
-> to take the time to accomplish).
->
+On Thu, Jan 10, 2013 at 10:07 AM, Gary Thomas <gary@mlbassoc.com> wrote:
 > Interestingly enough, the meta-fsl-arm layer also has an SD card image
 > layout (class) which works perfectly and needs no magic to make it work.
 
-  i'm going to be testing all of the above again shortly from scratch
-to make sure it wasn't something silly i did.  but if someone wants to
-see if they can reproduce it, all i did was a standard configure using
-meta-ti layer for a beaglebone and i built a core-image-minimal.
 
-  after that worked, i added the following line to local.conf:
+Very interesting! Thanks so much for posting this information.
 
-IMAGE_CLASSES += "sdcard_image"
+The meta-ti method uses a combination of losetup, sfdisk, dd, and
+others to create its images (which is what I have traditionally used
+to create my own images). losetup (for sure and probably sfdisk too)
+requires privilege in order to work (which probably accounts for all
+the messy setup).
 
-and that caused the very same build to fail.  can anyone else confirm
-that?  i'll be digging into this as soon as i get back from coffee.
+The meta-fsl-arm method, on the other hand, uses GNU parted which
+doesn't appear to require privilege and does away with losetup and
+sfdisk.
 
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+I'm glad you posted this information as I'll now be converting my
+scripts to use parted as well.
 
