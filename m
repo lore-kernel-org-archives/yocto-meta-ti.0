@@ -1,37 +1,31 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 69A53E00720
-	for <meta-ti@yoctoproject.org>; Thu, 10 Jan 2013 17:04:59 -0800 (PST)
-Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.115.5.73]:33126 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1TtT3J-0007z8-Vd; Thu, 10 Jan 2013 20:04:58 -0500
-Date: Thu, 10 Jan 2013 20:04:54 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: Raul Rosetto Munoz <munoz0raul@gmail.com>
-In-Reply-To: <CANmVirgtDj6p65Aj5DQgYNrsEEX8hOcDzQjDUKWAbj-fSiyOtw@mail.gmail.com>
-Message-ID: <alpine.DEB.2.02.1301102003160.5477@oneiric>
-References: <CANmVirii6vJvYyAR-a6wOHjFwoSnpqk5vSipnkXQSU6rZPVmKA@mail.gmail.com>
-	<CAOT3miLOCbazfMvaW8E2mV3o+uJwJYoU5GZ2PCRQXQ43qSwe6Q@mail.gmail.com>
-	<alpine.DEB.2.02.1301090604340.4410@oneiric>
-	<CAFNBftd=+st+VnYjP+Mg7CzHh5SHv7XYc3g0mi9pq5kpBKWEkQ@mail.gmail.com>
-	<CANmVirgtDj6p65Aj5DQgYNrsEEX8hOcDzQjDUKWAbj-fSiyOtw@mail.gmail.com>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
+Return-Path: <daniel.toussaint@gmail.com>
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86C47E0120B
+	for <meta-ti@yoctoproject.org>; Thu, 10 Jan 2013 20:56:25 -0800 (PST)
+Received: by mail-wi0-f173.google.com with SMTP id hn17so1703732wib.0
+	for <meta-ti@yoctoproject.org>; Thu, 10 Jan 2013 20:56:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	bh=4C0XpBmKT3E7g8PsJ4DupNOvRBcIctLT46EUF33eIMU=;
+	b=P5W62hDCD54UjVJ61gknnCU7rI34x3z7X6ttbxSSwcdMTZ1rgTcmMumzHHnd4E+LEy
+	aSO203OE49A3y6+OQE0f+b5hAM8zcXcqppUzalkb00owd2Na0y6MYBbZnLuDf5e5H7U2
+	9EwHSQ3RkCUZfO3g++Ivq2jgzoyhGjwSB+BWO21z6s4owpnz/brnr+ARb+1EBhvExZvo
+	YeMhJJzBo6FP0zjt7xVjmXdQa0QqgmoKSkYUlWPi98/0VsvVkN1U568ePJP/6Iqde4mG
+	+KPP2u+RM4IWTJenqzoE0ZAFVt0Xi1xjhd5eAn+eIkzfUhcjorRi8AQ+OYskF4V01aqW
+	hIfA==
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Creating simple linux for beaglebone
+Received: by 10.194.179.34 with SMTP id dd2mr118640377wjc.1.1357880184473;
+	Thu, 10 Jan 2013 20:56:24 -0800 (PST)
+Sender: daniel.toussaint@gmail.com
+Received: by 10.227.27.218 with HTTP; Thu, 10 Jan 2013 20:56:24 -0800 (PST)
+Date: Fri, 11 Jan 2013 12:56:24 +0800
+X-Google-Sender-Auth: oVsv3OtA5-R9PUU7NKky_hyYgaw
+Message-ID: <CADVYk4R5fRCAK936sNECUqL9imXbKwuPafbnbZi+baiqn+GfcA@mail.gmail.com>
+From: Daniel Toussaint <daniel@dmhome.net>
+To: meta-ti@yoctoproject.org
+Subject: Inherit a kernel recipe for a custom am3517 board.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,32 +38,52 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2013 01:04:59 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Fri, 11 Jan 2013 04:56:25 -0000
+Content-Type: multipart/alternative; boundary=089e0141a0020b07b504d2fc1ee6
 
-On Thu, 10 Jan 2013, Raul Rosetto Munoz wrote:
+--089e0141a0020b07b504d2fc1ee6
+Content-Type: text/plain; charset=ISO-8859-1
 
-> Thanks all for the help
->
-> I realy forgot the line that Nicolas told us.
->
-> BBMASK = "meta-ti/recipes-misc"
+Dear List,
 
-  for my own benefit, i restructured my meta-ti wiki pages:
+I have a custom AM3517 board, currently running the latest TI PSP kernel
+with a custom board file and a couple of added drivers. The PSP kernel is
+2.6, during board bringup, however, we are going to release the board with
+a 3.x kernel.
+The goal is to have a meta-<ourlayer> , combined with the yocto project and
+meta-ti.
+My question is,  what is the sanest way to create a maintainable recipe for
+our kernel ? None of our patches have been submitted to anywhere, as the
+board is still in debugging stage.
 
-http://www.crashcourse.ca/wiki/index.php/OE_Yocto_pages#meta-ti_layer_pages
+Greetings,
 
-i'll be adding a fair bit more this weekend.
-
-rday
 
 -- 
+*Gtalk:* daniel.toussaint@gmail.com* **
+Skype*: supertoussi  *
+Cell:** +886-915-680-291*
 
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
+--089e0141a0020b07b504d2fc1ee6
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+<div dir=3D"ltr">Dear List,=A0<div><br></div><div style>I have a custom AM3=
+517 board, currently running the latest TI PSP kernel with a custom board f=
+ile and a couple of added drivers. The PSP kernel is 2.6, during board brin=
+gup, however, we are going to release the board with a 3.x kernel.=A0</div>
+<div style>The goal is to have a meta-&lt;ourlayer&gt; , combined with the =
+yocto project and meta-ti.=A0</div><div style>My question is, =A0what is th=
+e sanest way to create a maintainable recipe for our kernel ? None of our p=
+atches have been submitted to anywhere, as the board is still in debugging =
+stage.=A0</div>
+<div style><br></div><div style>Greetings,</div><div><br clear=3D"all"><div=
+><br></div>-- <br><b>Gtalk:</b> <a href=3D"mailto:daniel.toussaint@gmail.co=
+m" target=3D"_blank">daniel.toussaint@gmail.com</a><b> </b><b><br>Skype</b>=
+: <a>supertoussi=A0 </a><b><br>
+Cell:</b><i> <a href=3D"tel:%2B886-915-680-291" value=3D"+886915680291" tar=
+get=3D"_blank">+886-915-680-291</a></i><br>
+<br><br>
+</div></div>
 
+--089e0141a0020b07b504d2fc1ee6--
