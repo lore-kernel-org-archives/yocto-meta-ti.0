@@ -1,35 +1,37 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-lb0-f181.google.com (mail-lb0-f181.google.com
-	[209.85.217.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E752AE006D2
-	for <meta-ti@yoctoproject.org>; Fri, 11 Jan 2013 07:50:33 -0800 (PST)
-Received: by mail-lb0-f181.google.com with SMTP id ge1so1389540lbb.26
-	for <meta-ti@yoctoproject.org>; Fri, 11 Jan 2013 07:50:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=NCmuF9yE03ACWLfMobqUJLSjyW5FKpjbCEYL+6kZNwM=;
-	b=NbXlpxbaMtJY3bL9EFuoEI5lfrbwOTAz05W7xJoC5ab4XkhJrYBmu2LYLVIXKyUpj7
-	P5/KY2Xasmp05XidpkPKGjw2HzyfKORi5bZk4Ykw7sNcRUHlTdbzGZA+ul9gpSFBlPOR
-	/nnkZIDKa226Ggat7onhwxZC+leK4sBZnao8WtHzVkvWs9kl8/JnTXegV8VMxvgTqytY
-	WPpoEI1b4yiPcws+hRQTLI+P0e0aGPanqpPjsN7vU9GekAYoPolHNhnM8UV5NPdD2Vc/
-	54LpTrTSF0JL2Nmbu3kzzNneCZy+tzmVcaozSM5WAke+tKOkZFV7OsLQBg/3YBE2Jimp
-	pu8A==
-Received: by 10.152.144.103 with SMTP id sl7mr24204595lab.23.1357919432627;
-	Fri, 11 Jan 2013 07:50:32 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.34.10 with HTTP; Fri, 11 Jan 2013 07:50:12 -0800 (PST)
-In-Reply-To: <CAHUNapTODZveoW70_tdODtLyc-fiEvwkZQXTd0tQfxQUqvF9-w@mail.gmail.com>
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3A66EE00527
+	for <meta-ti@yoctoproject.org>; Sat, 12 Jan 2013 02:20:46 -0800 (PST)
+Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.115.5.73]:34205 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1TtyCi-0005yQ-IV; Sat, 12 Jan 2013 05:20:44 -0500
+Date: Sat, 12 Jan 2013 05:20:40 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: Chris Larson <clarson@kergoth.com>
+In-Reply-To: <CABcZANmH2DVSoaWz8Ob66QPjtt79cRjpEeQ9EuAj4uwTOU9WBA@mail.gmail.com>
+Message-ID: <alpine.DEB.2.02.1301120516390.14709@oneiric>
 References: <alpine.DEB.2.02.1301100943340.32462@oneiric>
 	<50EED938.8080108@mlbassoc.com>
-	<CAHUNapTODZveoW70_tdODtLyc-fiEvwkZQXTd0tQfxQUqvF9-w@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 11 Jan 2013 08:50:12 -0700
-X-Google-Sender-Auth: dtCDalYaYasfQWiea-lrEKy2Yf4
-Message-ID: <CABcZANnOJYe58Np5pmELOb6fFQfeLoc3uRcEreHkP0zXnjzpzA@mail.gmail.com>
-To: Trevor Woerner <twoerner@gmail.com>
-Cc: meta-ti@yoctoproject.org
+	<alpine.DEB.2.02.1301101008200.7994@oneiric>
+	<CAHUNapRvWWZNuGOfwnfAymhSoApc0_Y29CT8=S19cdBBkRvZCA@mail.gmail.com>
+	<alpine.DEB.2.02.1301110652110.10214@oneiric>
+	<CABcZANmH2DVSoaWz8Ob66QPjtt79cRjpEeQ9EuAj4uwTOU9WBA@mail.gmail.com>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
 Subject: Re: has anyone actually tested sdcard_image.bbclass?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -43,100 +45,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jan 2013 15:50:34 -0000
-Content-Type: multipart/alternative; boundary=e89a8f22bec16a55f204d3054125
+X-List-Received-Date: Sat, 12 Jan 2013 10:20:46 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
---e89a8f22bec16a55f204d3054125
-Content-Type: text/plain; charset=UTF-8
+On Fri, 11 Jan 2013, Chris Larson wrote:
 
-On Thu, Jan 10, 2013 at 3:50 PM, Trevor Woerner <twoerner@gmail.com> wrote:
-
-> On Thu, Jan 10, 2013 at 10:07 AM, Gary Thomas <gary@mlbassoc.com> wrote:
-> > Interestingly enough, the meta-fsl-arm layer also has an SD card image
-> > layout (class) which works perfectly and needs no magic to make it work.
 >
+> On Fri, Jan 11, 2013 at 5:02 AM, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
+>       IMAGE_CLASSES += "sdcard_image"
 >
-> Very interesting! Thanks so much for posting this information.
+>       but after i do that:
 >
-> The meta-ti method uses a combination of losetup, sfdisk, dd, and
-> others to create its images (which is what I have traditionally used
-> to create my own images). losetup (for sure and probably sfdisk too)
-> requires privilege in order to work (which probably accounts for all
-> the messy setup).
+>       $ bitbake-env -r core-image-minimal IMAGE_CLASSES IMAGE_FSTYPES
+>       Parsing recipes..ERROR: Error executing a python function in <code>:
+>       NameError: global name 'imagetypes_getdepends' is not defined
+>       ... huge snip here ...
 >
-> The meta-fsl-arm method, on the other hand, uses GNU parted which
-> doesn't appear to require privilege and does away with losetup and
-> sfdisk.
->
-> I'm glad you posted this information as I'll now be converting my
-> scripts to use parted as well.
+> image.bbclass defines the default IMAGE_CLASSES using ?=. Which
+> means if your distro doesn't define its own default value, you'll
+> end up with IMAGE_CLASSES only containing sdcard_image, not both
+> image_types and sdcard_image, and clearly both are required.
 
+  i don't see that happening with the raspberry pi layer.  if i
+configure for that layer sitting on top of oe-core, and just
 
-We started looking at a parted based pandaboard sdcard image creation setup
-for Mentor, but haven't completed it, so we'd be interested in seeing what
-people do in this regard. Obviously it'll all probably go away in favor of
-the image creation/deployment rework in the long term, but we need
-something in the short term.
+  $ bitbake rpi-basic-image
 
-One issue we ran into is, my panda seems to require a particular alignment
-(e.g. first partition at 63*255) based on geometry, but parted's alignment
-options are rather limited. Either one can use pyparted (but that's GPL,
-and the metadata is MIT), or use sfdisk (which has its own issues, but lets
-you specify geometry), or manually calculate the alignment (theoretical).
+this setting from the rpi layer:
+
+conf/machine/include/rpi-default-settings.inc:IMAGE_CLASSES += "sdcard_image-rpi"
+
+produces this with bitbake-env:
+
+$ bitbake-env -r rpi-basic-image IMAGE_CLASSES
+Parsing recipes..done.
+IMAGE_CLASSES=" sdcard_image-rpi"
+$
+
+  the value of IMAGE_CLASSES clearly *doesn't* include "image_types",
+but the build works fine and i get the resulting SD card image in
+tmp/deploy/images:
+
+rpi-basic-image-raspberrypi-20130112091402.rootfs.rpi-sdimg
+
+  i'm sure i'm misreading what you wrote, but you can see from the
+output of bitbake-env that there is no "image_types" in IMAGE_CLASSES
+and the build works just fine.
+
+rday
+
 -- 
-Christopher Larson
 
---e89a8f22bec16a55f204d3054125
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
 
-<div dir=3D"ltr"><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">=
-On Thu, Jan 10, 2013 at 3:50 PM, Trevor Woerner <span dir=3D"ltr">&lt;<a hr=
-ef=3D"mailto:twoerner@gmail.com" target=3D"_blank">twoerner@gmail.com</a>&g=
-t;</span> wrote:<br>
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex"><div class=3D"im">On Thu, Jan 10, 2013 at 10=
-:07 AM, Gary Thomas &lt;<a href=3D"mailto:gary@mlbassoc.com">gary@mlbassoc.=
-com</a>&gt; wrote:<br>
-
-
-&gt; Interestingly enough, the <span class=3D"il">meta</span>-fsl-arm layer=
- also has an SD card image<br>
-&gt; layout (class) which works perfectly and needs no magic to make it wor=
-k.<br>
-<br>
-<br>
-</div>Very interesting! Thanks so much for posting this information.<br>
-<br>
-The <span class=3D"il">meta</span>-<span class=3D"il">ti</span> method uses=
- a combination of losetup, sfdisk, dd, and<br>
-others to create its images (which is what I have traditionally used<br>
-to create my own images). losetup (for sure and probably sfdisk too)<br>
-requires privilege in order to work (which probably accounts for all<br>
-the messy setup).<br>
-<br>
-The <span class=3D"il">meta</span>-fsl-arm method, on the other hand, uses =
-GNU parted which<br>
-doesn&#39;t appear to require privilege and does away with losetup and<br>
-sfdisk.<br>
-<br>
-I&#39;m glad you posted this information as I&#39;ll now be converting my<b=
-r>
-scripts to use parted as well.</blockquote></div><br>We started looking at =
-a parted based pandaboard sdcard image creation setup for Mentor, but haven=
-&#39;t completed it, so we&#39;d be interested in seeing what people do in =
-this regard. Obviously it&#39;ll all probably go away in favor of the image=
- creation/deployment rework in the long term, but we need something in the =
-short term.</div>
-
-<div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">One issue w=
-e ran into is, my panda seems to require a particular alignment (e.g. first=
- partition at 63*255) based on geometry, but parted&#39;s alignment options=
- are rather limited. Either one can use pyparted (but that&#39;s GPL, and t=
-he metadata is MIT), or use sfdisk (which has its own issues, but lets you =
-specify geometry), or manually calculate the alignment (theoretical).<br>
-
--- <br>Christopher Larson</div></div>
-
---e89a8f22bec16a55f204d3054125--
