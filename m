@@ -1,40 +1,29 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5C8C8E01457
-	for <meta-ti@yoctoproject.org>; Sun, 13 Jan 2013 02:04:19 -0800 (PST)
-Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.115.5.73]:55956 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1TuKQL-0001eN-O2; Sun, 13 Jan 2013 05:04:17 -0500
-Date: Sun, 13 Jan 2013 05:04:09 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: Chris Larson <clarson@kergoth.com>
-In-Reply-To: <CABcZANkPysoW9nLpR5c36RyCOjwukWEEJq+iS9SfA=CZn3j0ng@mail.gmail.com>
-Message-ID: <alpine.DEB.2.02.1301130501590.21628@oneiric>
-References: <alpine.DEB.2.02.1301100943340.32462@oneiric>
-	<50EED938.8080108@mlbassoc.com>
-	<alpine.DEB.2.02.1301101008200.7994@oneiric>
-	<CAHUNapRvWWZNuGOfwnfAymhSoApc0_Y29CT8=S19cdBBkRvZCA@mail.gmail.com>
-	<alpine.DEB.2.02.1301110652110.10214@oneiric>
-	<CABcZANmH2DVSoaWz8Ob66QPjtt79cRjpEeQ9EuAj4uwTOU9WBA@mail.gmail.com>
-	<alpine.DEB.2.02.1301120516390.14709@oneiric>
-	<CABcZANkPysoW9nLpR5c36RyCOjwukWEEJq+iS9SfA=CZn3j0ng@mail.gmail.com>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
+Return-Path: <flavio.alves@gmail.com>
+Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
+	[209.85.223.170])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1753BE002AB
+	for <meta-ti@yoctoproject.org>; Mon, 14 Jan 2013 00:58:31 -0800 (PST)
+Received: by mail-ie0-f170.google.com with SMTP id k10so4784486iea.29
+	for <meta-ti@yoctoproject.org>; Mon, 14 Jan 2013 00:58:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=QmkUvl95CK1rSfiP0t5lmlREksJMf0zcOpFpkav9Nus=;
+	b=LKVdfusJuqeIU47NXmGinSnKeWEzJORXLk4fGVX4LUIXFl2+e7NAq7gl2+fnVizB5Z
+	eNSYbCL8d37/aVXZuvX+Fyj0m52F1N7sO7Ot0kiwqQtkGjahGCj250CuXNjZvhTxi91e
+	AP/+/QbE1jcXbdU/lZ4HV4rNgVUWhSrePCd/7FRqjhqc8XKAzoznwiOBAyrH1mRJqx0a
+	B0cXGQV97XtaiBjeAFDaUBMvSr7SIrx2b/Tka/iScQIdv+j6Fmu1/vuh+sENNrHqYZIW
+	GHylPHyKDqsGeAqTJDjvXslnEekeaeNnNlwrxLzOAD0ry0cecTt0CfTHgk4Wre4u5B+x
+	BYJA==
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: has anyone actually tested sdcard_image.bbclass?
+X-Received: by 10.50.106.227 with SMTP id gx3mr6408439igb.10.1358153911455;
+	Mon, 14 Jan 2013 00:58:31 -0800 (PST)
+Received: by 10.42.24.202 with HTTP; Mon, 14 Jan 2013 00:58:31 -0800 (PST)
+Date: Mon, 14 Jan 2013 06:58:31 -0200
+Message-ID: <CAFNBfte0i7kXGH8v7hoWdO9b==T-AQTSVJF7b1GbSovkNoowfA@mail.gmail.com>
+From: Flavio Castro Alves Filho <flavio.alves@gmail.com>
+To: meta-ti@yoctoproject.org, beagleboard@googlegroups.com
+Subject: Problems with fetch of linux-mainline with Yocto and Meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,79 +36,283 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Jan 2013 10:04:19 -0000
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1498519658-1358071455=:21628"
+X-List-Received-Date: Mon, 14 Jan 2013 08:58:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
---8323329-1498519658-1358071455=:21628
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
+Hello,
 
-On Sat, 12 Jan 2013, Chris Larson wrote:
+I'm trying to build a simple linux distro using Yocto danny and
+meta-ti layer for Beagleboard-xm an I'm unable to download the kernel
+files.
 
->
-> On Sat, Jan 12, 2013 at 3:20 AM, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
->       On Fri, 11 Jan 2013, Chris Larson wrote:
->
->       >
->       > On Fri, Jan 11, 2013 at 5:02 AM, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
->       >       IMAGE_CLASSES += "sdcard_image"
->       >
->       >       but after i do that:
->       >
->       >       $ bitbake-env -r core-image-minimal IMAGE_CLASSES IMAGE_FSTYPES
->       >       Parsing recipes..ERROR: Error executing a python function in <code>:
->       >       NameError: global name 'imagetypes_getdepends' is not defined
->       >       ... huge snip here ...
->       >
->       > image.bbclass defines the default IMAGE_CLASSES using ?=. Which
->       > means if your distro doesn't define its own default value, you'll
->       > end up with IMAGE_CLASSES only containing sdcard_image, not both
->       > image_types and sdcard_image, and clearly both are required.
->
->   i don't see that happening with the raspberry pi layer.  if i
-> configure for that layer sitting on top of oe-core, and just
->
->   $ bitbake rpi-basic-image
->
-> this setting from the rpi layer:
->
-> conf/machine/include/rpi-default-settings.inc:IMAGE_CLASSES += "sdcard_image-rpi"
->
-> produces this with bitbake-env:
->
-> $ bitbake-env -r rpi-basic-image IMAGE_CLASSES
-> Parsing recipes..done.
-> IMAGE_CLASSES=" sdcard_image-rpi"
-> $
->
->   the value of IMAGE_CLASSES clearly *doesn't* include "image_types",
-> but the build works fine and i get the resulting SD card image in
-> tmp/deploy/images:
->
-> rpi-basic-image-raspberrypi-20130112091402.rootfs.rpi-sdimg
->
->   i'm sure i'm misreading what you wrote, but you can see from the
-> output of bitbake-env that there is no "image_types" in IMAGE_CLASSES
-> and the build works just fine.
->
-> Then that class likely does an 'inherit image_types' itself, thereby
-> making the implicit dependency explicit.
+I'm using Ubuntu 12.04, Yocto danny (poky), meta-ti danny branch and
+meta-openembedded/meta-oe danny branch. I also tried using
+openembedded-core with danny branch with the same results.
 
-  so which is the *preferred* way to advise developers how to write a
-new class like that?  i realize both ways work, but if one is going to
-document this, what's the *recommended* way that would go into the OE
-style guide?  and, yes, there should be a recommended way. :-)
+My error messages are the following:
 
-rday
 
--- 
+flavio@Phi06:/home/prjs/beagle-xm/linux$ bitbake -c fetch virtual/kernel
+Parsing recipes: 100%
+|##########################################################################=
+######################################|
+Time: 00:00:39
+Parsing of 1273 .bb files complete (0 cached, 1273 parsed). 1620
+targets, 59 skipped, 7 masked, 0 errors.
 
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
+Build Configuration:
+BB_VERSION        =3D "1.16.0"
+TARGET_ARCH       =3D "arm"
+TARGET_OS         =3D "linux-gnueabi"
+MACHINE           =3D "beagleboard"
+DISTRO            =3D "poky"
+DISTRO_VERSION    =3D "1.3"
+TUNE_FEATURES     =3D "armv7a vfp neon cortexa8"
+TARGET_FPU        =3D "vfp-neon"
+meta
+meta-yocto        =3D "danny:47b0864fbd65746558d8186450c182d98bac78ca"
+meta-oe           =3D "danny:f026e96295da101bb715858bc8705de7e4a33992"
+meta-ti           =3D "danny:0a764d733691db4bf40539693fa3d93f6883baa7"
 
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing RunQueue Tasks
+WARNING: Failed to fetch URL
+git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;branc=
+h=3Dlinux-3.2.y;protocol=3Dgit,
+attempting MIRRORS if available
+ERROR: Fetcher failure: Fetch command failed with exit code 128, output:
+Cloning into bare repository
+'/home/prjs/src/git2/git.kernel.org.pub.scm.linux.kernel.git.stable.linux-s=
+table.git'...
 
---8323329-1498519658-1358071455=:21628--
+fatal: read error: Connection timed out
+fatal: early EOF
+fatal: index-pack failed
+
+ERROR: Function failed: Fetcher failure for URL:
+'git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;bran=
+ch=3Dlinux-3.2.y;protocol=3Dgit'.
+Unable to fetch URL from any source.
+ERROR: Logfile of failure stored in:
+/home/prjs/beagle-xm/linux/tmp/work/beagleboard-poky-linux-gnueabi/linux-ma=
+inline-3.2.28-r0/temp/log.do_fetch.2904
+ERROR: Task 0 (/home/prjs/beagle-xm/poky/meta-ti/recipes-kernel/linux/linux=
+-mainline_3.2.bb,
+do_fetch) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 1 tasks of which 0 didn't need to be
+rerun and 1 failed.
+
+Summary: 1 task failed:
+  /home/prjs/beagle-xm/poky/meta-ti/recipes-kernel/linux/linux-mainline_3.2=
+.bb,
+do_fetch
+Summary: There was 1 WARNING message shown.
+Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+flavio@Phi06:/home/prjs/beagle-xm/linux$
+
+The log file contains the folllowing:
+
+DEBUG: Executing python function do_fetch
+DEBUG: Executing python function base_do_fetch
+DEBUG: Trying PREMIRRORS
+DEBUG: For url ['git', 'git.kernel.org',
+'/pub/scm/linux/kernel/git/stable/linux-stable.git', '', '',
+{'protocol': 'git', 'branch': 'linux-3.2.y'}] comparing ['bzr', '.*',
+'/.*', '', '', {}] to ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/', '', '', {}]
+DEBUG: For url ['git', 'git.kernel.org',
+'/pub/scm/linux/kernel/git/stable/linux-stable.git', '', '',
+{'protocol': 'git', 'branch': 'linux-3.2.y'}] comparing ['cvs', '.*',
+'/.*', '', '', {}] to ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/', '', '', {}]
+DEBUG: For url ['git', 'git.kernel.org',
+'/pub/scm/linux/kernel/git/stable/linux-stable.git', '', '',
+{'protocol': 'git', 'branch': 'linux-3.2.y'}] comparing ['git', '.*',
+'/.*', '', '', {}] to ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/', '', '', {}]
+DEBUG: For url git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-s=
+table.git;branch=3Dlinux-3.2.y;protocol=3Dgit
+returning http://downloads.yoctoproject.org/mirror/sources/git2_git.kernel.=
+org.pub.scm.linux.kernel.git.stable.linux-stable.git.tar.gz
+DEBUG: For url ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/git2_git.kernel.org.pub.scm.linux.kernel.git.stable.linux-=
+stable.git.tar.gz',
+'', '', {}] comparing ['bzr', '.*', '/.*', '', '', {}] to ['http',
+'downloads.yoctoproject.org', '/mirror/sources/', '', '', {}]
+DEBUG: For url ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/git2_git.kernel.org.pub.scm.linux.kernel.git.stable.linux-=
+stable.git.tar.gz',
+'', '', {}] comparing ['cvs', '.*', '/.*', '', '', {}] to ['http',
+'downloads.yoctoproject.org', '/mirror/sources/', '', '', {}]
+DEBUG: For url ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/git2_git.kernel.org.pub.scm.linux.kernel.git.stable.linux-=
+stable.git.tar.gz',
+'', '', {}] comparing ['git', '.*', '/.*', '', '', {}] to ['http',
+'downloads.yoctoproject.org', '/mirror/sources/', '', '', {}]
+DEBUG: For url ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/git2_git.kernel.org.pub.scm.linux.kernel.git.stable.linux-=
+stable.git.tar.gz',
+'', '', {}] comparing ['hg', '.*', '/.*', '', '', {}] to ['http',
+'downloads.yoctoproject.org', '/mirror/sources/', '', '', {}]
+DEBUG: For url ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/git2_git.kernel.org.pub.scm.linux.kernel.git.stable.linux-=
+stable.git.tar.gz',
+'', '', {}] comparing ['osc', '.*', '/.*', '', '', {}] to ['http',
+'downloads.yoctoproject.org', '/mirror/sources/', '', '', {}]
+DEBUG: For url ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/git2_git.kernel.org.pub.scm.linux.kernel.git.stable.linux-=
+stable.git.tar.gz',
+'', '', {}] comparing ['p4', '.*', '/.*', '', '', {}] to ['http',
+'downloads.yoctoproject.org', '/mirror/sources/', '', '', {}]
+DEBUG: For url ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/git2_git.kernel.org.pub.scm.linux.kernel.git.stable.linux-=
+stable.git.tar.gz',
+'', '', {}] comparing ['svk', '.*', '/.*', '', '', {}] to ['http',
+'downloads.yoctoproject.org', '/mirror/sources/', '', '', {}]
+DEBUG: For url ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/git2_git.kernel.org.pub.scm.linux.kernel.git.stable.linux-=
+stable.git.tar.gz',
+'', '', {}] comparing ['svn', '.*', '/.*', '', '', {}] to ['http',
+'downloads.yoctoproject.org', '/mirror/sources/', '', '', {}]
+DEBUG: For url ['git', 'git.kernel.org',
+'/pub/scm/linux/kernel/git/stable/linux-stable.git', '', '',
+{'protocol': 'git', 'branch': 'linux-3.2.y'}] comparing ['hg', '.*',
+'/.*', '', '', {}] to ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/', '', '', {}]
+DEBUG: For url ['git', 'git.kernel.org',
+'/pub/scm/linux/kernel/git/stable/linux-stable.git', '', '',
+{'protocol': 'git', 'branch': 'linux-3.2.y'}] comparing ['osc', '.*',
+'/.*', '', '', {}] to ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/', '', '', {}]
+DEBUG: For url ['git', 'git.kernel.org',
+'/pub/scm/linux/kernel/git/stable/linux-stable.git', '', '',
+{'protocol': 'git', 'branch': 'linux-3.2.y'}] comparing ['p4', '.*',
+'/.*', '', '', {}] to ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/', '', '', {}]
+DEBUG: For url ['git', 'git.kernel.org',
+'/pub/scm/linux/kernel/git/stable/linux-stable.git', '', '',
+{'protocol': 'git', 'branch': 'linux-3.2.y'}] comparing ['svk', '.*',
+'/.*', '', '', {}] to ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/', '', '', {}]
+DEBUG: For url ['git', 'git.kernel.org',
+'/pub/scm/linux/kernel/git/stable/linux-stable.git', '', '',
+{'protocol': 'git', 'branch': 'linux-3.2.y'}] comparing ['svn', '.*',
+'/.*', '', '', {}] to ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/', '', '', {}]
+NOTE: fetch http://downloads.yoctoproject.org/mirror/sources/git2_git.kerne=
+l.org.pub.scm.linux.kernel.git.stable.linux-stable.git.tar.gz
+DEBUG: Fetcher accessed the network with the command /usr/bin/env wget
+-t 2 -T 30 -nv --passive-ftp --no-check-certificate -P /home/prjs/src
+'http://downloads.yoctoproject.org/mirror/sources/git2_git.kernel.org.pub.s=
+cm.linux.kernel.git.stable.linux-stable.git.tar.gz'
+DEBUG: Running export HOME=3D"/home/flavio"; export
+SSH_AGENT_PID=3D"1803"; export SSH_AUTH_SOCK=3D"/tmp/keyring-gnKUx0/ssh";
+export GIT_CONFIG=3D"/home/prjs/beagle-xm/linux/tmp/sysroots/i686-linux/etc=
+/gitconfig";
+export PATH=3D"/home/prjs/beagle-xm/poky/scripts:/home/prjs/beagle-xm/linux=
+/tmp/sysroots/i686-linux/usr/bin/armv7a-vfp-neon-poky-linux-gnueabi:/home/p=
+rjs/beagle-xm/linux/tmp/sysroots/beagleboard/usr/bin/crossscripts:/home/prj=
+s/beagle-xm/linux/tmp/sysroots/i686-linux/usr/sbin:/home/prjs/beagle-xm/lin=
+ux/tmp/sysroots/i686-linux/usr/bin:/home/prjs/beagle-xm/linux/tmp/sysroots/=
+i686-linux/sbin:/home/prjs/beagle-xm/linux/tmp/sysroots/i686-linux//bin:/ho=
+me/prjs/beagle-xm/poky/scripts:/home/prjs/beagle-xm/poky/bitbake/bin/:/usr/=
+lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin=
+:/bin:/usr/games";
+/usr/bin/env wget -t 2 -T 30 -nv --passive-ftp --no-check-certificate
+-P /home/prjs/src
+'http://downloads.yoctoproject.org/mirror/sources/git2_git.kernel.org.pub.s=
+cm.linux.kernel.git.stable.linux-stable.git.tar.gz'
+DEBUG: Mirror fetch failure for url
+http://downloads.yoctoproject.org/mirror/sources/git2_git.kernel.org.pub.sc=
+m.linux.kernel.git.stable.linux-stable.git.tar.gz
+(original url: git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-s=
+table.git;branch=3Dlinux-3.2.y;protocol=3Dgit)
+DEBUG: Fetcher failure: Fetch command failed with exit code 8, output:
+http://downloads.yoctoproject.org/mirror/sources/git2_git.kernel.org.pub.sc=
+m.linux.kernel.git.stable.linux-stable.git.tar.gz:
+2013-01-13 21:18:27 ERROR 404: Not Found.
+
+DEBUG: Trying Upstream
+DEBUG: Fetcher accessed the network with the command git clone --bare
+--mirror git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.=
+git
+/home/prjs/src/git2/git.kernel.org.pub.scm.linux.kernel.git.stable.linux-st=
+able.git
+DEBUG: Running export HOME=3D"/home/flavio"; export
+SSH_AGENT_PID=3D"1803"; export SSH_AUTH_SOCK=3D"/tmp/keyring-gnKUx0/ssh";
+export GIT_CONFIG=3D"/home/prjs/beagle-xm/linux/tmp/sysroots/i686-linux/etc=
+/gitconfig";
+export PATH=3D"/home/prjs/beagle-xm/poky/scripts:/home/prjs/beagle-xm/linux=
+/tmp/sysroots/i686-linux/usr/bin/armv7a-vfp-neon-poky-linux-gnueabi:/home/p=
+rjs/beagle-xm/linux/tmp/sysroots/beagleboard/usr/bin/crossscripts:/home/prj=
+s/beagle-xm/linux/tmp/sysroots/i686-linux/usr/sbin:/home/prjs/beagle-xm/lin=
+ux/tmp/sysroots/i686-linux/usr/bin:/home/prjs/beagle-xm/linux/tmp/sysroots/=
+i686-linux/sbin:/home/prjs/beagle-xm/linux/tmp/sysroots/i686-linux//bin:/ho=
+me/prjs/beagle-xm/poky/scripts:/home/prjs/beagle-xm/poky/bitbake/bin/:/usr/=
+lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin=
+:/bin:/usr/games";
+git clone --bare --mirror
+git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
+/home/prjs/src/git2/git.kernel.org.pub.scm.linux.kernel.git.stable.linux-st=
+able.git
+WARNING: Failed to fetch URL
+git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;branc=
+h=3Dlinux-3.2.y;protocol=3Dgit,
+attempting MIRRORS if available
+DEBUG: Fetcher failure: Fetch command failed with exit code 128, output:
+Cloning into bare repository
+'/home/prjs/src/git2/git.kernel.org.pub.scm.linux.kernel.git.stable.linux-s=
+table.git'...
+
+fatal: read error: Connection timed out
+fatal: early EOF
+fatal: index-pack failed
+
+DEBUG: Trying MIRRORS
+DEBUG: For url ['git', 'git.kernel.org',
+'/pub/scm/linux/kernel/git/stable/linux-stable.git', '', '',
+{'protocol': 'git', 'branch': 'linux-3.2.y'}] comparing ['ftp', '.*',
+'/.*', '', '', {}] to ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/', '', '', {}]
+DEBUG: For url ['git', 'git.kernel.org',
+'/pub/scm/linux/kernel/git/stable/linux-stable.git', '', '',
+{'protocol': 'git', 'branch': 'linux-3.2.y'}] comparing ['http', '.*',
+'/.*', '', '', {}] to ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/', '', '', {}]
+DEBUG: For url ['git', 'git.kernel.org',
+'/pub/scm/linux/kernel/git/stable/linux-stable.git', '', '',
+{'protocol': 'git', 'branch': 'linux-3.2.y'}] comparing ['https',
+'.*', '/.*', '', '', {}] to ['http', 'downloads.yoctoproject.org',
+'/mirror/sources/', '', '', {}]
+ERROR: Fetcher failure: Fetch command failed with exit code 128, output:
+Cloning into bare repository
+'/home/prjs/src/git2/git.kernel.org.pub.scm.linux.kernel.git.stable.linux-s=
+table.git'...
+
+fatal: read error: Connection timed out
+fatal: early EOF
+fatal: index-pack failed
+
+DEBUG: Python function base_do_fetch finished
+DEBUG: Python function do_fetch finished
+ERROR: Function failed: Fetcher failure for URL:
+'git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;bran=
+ch=3Dlinux-3.2.y;protocol=3Dgit'.
+Unable to fetch URL from any source.
+
+Does anybody have any idea of what am I doing wrong?
+
+Best regards,
+
+Flavio
+
+--
+Flavio de Castro Alves Filho
+
+flavio.alves@gmail.com
+www.linuxembarcado.com
+Twitter: http://twitter.com/#!/fraviofii
+LinkedIn profile: www.linkedin.com/in/flaviocastroalves
+
