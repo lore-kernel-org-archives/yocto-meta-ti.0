@@ -1,15 +1,26 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45CEDE006C3
-	for <meta-ti@yoctoproject.org>; Wed, 16 Jan 2013 10:06:41 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 02A4152AA3; Wed, 16 Jan 2013 18:06:40 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130116180641.02A4152AA3@arago-project.org>
-Date: Wed, 16 Jan 2013 18:06:40 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : netbase: fix file search path for 'interfaces' file
+Return-Path: <denis@denix.org>
+Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
+	[206.46.173.11])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4103AE006D7
+	for <meta-ti@yoctoproject.org>; Wed, 16 Jan 2013 10:10:32 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.191.205.12])
+	by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MGQ0034BD4Y9BG1@vms173011.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 16 Jan 2013 12:10:16 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 540402016B; Wed,
+	16 Jan 2013 13:10:10 -0500 (EST)
+Date: Wed, 16 Jan 2013 13:10:10 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Gary Thomas <gary@mlbassoc.com>
+Message-id: <20130116181010.GA19126@denix.org>
+References: <1356784589-14296-1-git-send-email-gary@mlbassoc.com>
+	<20130114233102.GB10163@denix.org> <50F6BF5E.3020705@mlbassoc.com>
+MIME-version: 1.0
+In-reply-to: <50F6BF5E.3020705@mlbassoc.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] netbase: Fix file search path for 'interfaces'
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,41 +33,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jan 2013 18:06:41 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 16 Jan 2013 18:10:32 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Module: meta-ti
-Branch: denzil
-Commit: 95e9cf6299f5bae6965fe6fc4abe3eeb631df196
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=95e9cf6299f5bae6965fe6fc4abe3eeb631df196
+On Wed, Jan 16, 2013 at 07:55:26AM -0700, Gary Thomas wrote:
+> On 2013-01-14 16:31, Denys Dmytriyenko wrote:
+> >On Sat, Dec 29, 2012 at 05:36:29AM -0700, Gary Thomas wrote:
+> >>This .bbappend file is used to override the 'interfaces' file for
+> >>certain targets.  The current version is broken in that it does not
+> >>search the correct path(s).  This patch fixes that, as well as marking
+> >>the resulting package as target specific.
+> >
+> >Thanks. There was similar patch earlier, but w/o marking resulting package as
+> >machine specific. For that matter, shouldn't the main netbase recipe in
+> >oe-core do it instead? As it comes with bunch of qemu-arch-specific interfaces
+> >files anyway, and we just add one more for beagleboard...
+> >
+> 
+> Agreed.  When I get two minutes, I'll propose a new patch for meta-ti
+> for this as well as one for OE-core.
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Jan 16 12:29:57 2013 -0500
+Actually, there is no need for an explicit PACKAGE_ARCH = MACHINE_ARCH neither 
+in bbappend nor in the main recipe in oe-core - bitbake does it automatically 
+when it detects machine-overriden files being packaged.
 
-netbase: fix file search path for 'interfaces' file
-
-This .bbappend file is used to override the 'interfaces' file for certain
-targets. The current version is broken in that it does not search the correct
-path(s).
-
-Thanks to Robert P. J. Day and Gary Thomas for spotting the issue and providing
-patches.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-core/netbase/netbase_4.47.bbappend |    4 +---
- 1 files changed, 1 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-core/netbase/netbase_4.47.bbappend b/recipes-core/netbase/netbase_4.47.bbappend
-index 4b8d0e6..5622303 100644
---- a/recipes-core/netbase/netbase_4.47.bbappend
-+++ b/recipes-core/netbase/netbase_4.47.bbappend
-@@ -1,3 +1 @@
--THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}"
--FILESPATH =. "${@base_set_filespath(["${THISDIR}/${PN}"], d)}:"
--
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
-
+-- 
+Denys
 
