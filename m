@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2AE8E006C3
-	for <meta-ti@yoctoproject.org>; Wed, 16 Jan 2013 10:02:47 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 677A9E006C3
+	for <meta-ti@yoctoproject.org>; Wed, 16 Jan 2013 10:04:35 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0C8DC52A9B; Wed, 16 Jan 2013 18:02:46 +0000 (UTC)
+	id 0BBB652A9B; Wed, 16 Jan 2013 18:04:35 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130116180247.0C8DC52A9B@arago-project.org>
-Date: Wed, 16 Jan 2013 18:02:46 +0000 (UTC)
+Message-Id: <20130116180435.0BBB652A9B@arago-project.org>
+Date: Wed, 16 Jan 2013 18:04:35 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : netbase: fix file search path for 'interfaces' file
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jan 2013 18:02:48 -0000
+X-List-Received-Date: Wed, 16 Jan 2013 18:04:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 61cfba29dcb45c6c65270d947b11bdc39965c06b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=61cfba29dcb45c6c65270d947b11bdc39965c06b
+Branch: danny
+Commit: 1e898d9b619545dadf2ececad81cd58cdf37c8cd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1e898d9b619545dadf2ececad81cd58cdf37c8cd
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Jan 16 12:29:57 2013 -0500
