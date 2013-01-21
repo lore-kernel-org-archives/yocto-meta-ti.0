@@ -1,28 +1,32 @@
-Return-Path: <fcooper@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7668FE00496
-	for <meta-ti@yoctoproject.org>; Sun, 20 Jan 2013 10:21:01 -0800 (PST)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r0KIL0Vt014975
-	for <meta-ti@yoctoproject.org>; Sun, 20 Jan 2013 12:21:00 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r0KIL0lS012039
-	for <meta-ti@yoctoproject.org>; Sun, 20 Jan 2013 12:21:00 -0600
-Received: from DFLE09.ent.ti.com ([fe80::3103:58c3:47f:860b]) by
-	DFLE72.ent.ti.com ([fe80::5c48:b90d:af93:5822%30]) with mapi id
-	14.01.0323.003; Sun, 20 Jan 2013 12:20:59 -0600
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: Issue with multi-kernel.inc
-Thread-Index: Ac33Ot8tXNBpTF00T1+WvU7rKdEOYw==
-Date: Sun, 20 Jan 2013 18:20:58 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C374AF1@DFLE09.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+Return-Path: <munoz0raul@gmail.com>
+Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
+	[209.85.223.177])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6C889E013EB;
+	Mon, 21 Jan 2013 02:00:15 -0800 (PST)
+Received: by mail-ie0-f177.google.com with SMTP id k13so9522387iea.36
+	for <multiple recipients>; Mon, 21 Jan 2013 02:00:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:content-type;
+	bh=hO8zIzbdn0uVxptye9NfJrnfnqWJlXWduAq1yhKsWHg=;
+	b=y9ZOWWPN/z1r50fHTfiNi1En25qH0F8ECSKbnQKHp123VW4KPwd5M9T/x/648Ik0lm
+	f6Cu44mm/mzV6h/a3j0EYkZo709y3DbP9VYP1sSIQ+bavv0N4oYp+eAOy07EZgZ6ljAA
+	d+ESebLUc319/IDpFHT1T+9AxdK4KwSwImrHaTeYE/K3jK9xcEZN0c9LA+7nm1seFNPR
+	084E6cK885TiLqscpVAxVMtsGfTXtYyFL5GpT6mHXeHXgiFIhQkKP3aJDzJb7cRfElth
+	BucrvO6zccDyKXEuX28VOf6c0zlHk6ILwGI63h6Cx2oLnQh9AaecXe6/pourVH75JCWN
+	SsTA==
 MIME-Version: 1.0
-Subject: Issue with multi-kernel.inc
+X-Received: by 10.50.217.129 with SMTP id oy1mr8613628igc.26.1358762414457;
+	Mon, 21 Jan 2013 02:00:14 -0800 (PST)
+Received: by 10.64.147.40 with HTTP; Mon, 21 Jan 2013 02:00:14 -0800 (PST)
+In-Reply-To: <CANmVirgp9nqu65jvhXQ3kpSEt=9roE6W8y5e65S6Kr9_2VnjHw@mail.gmail.com>
+References: <CANmVirgp9nqu65jvhXQ3kpSEt=9roE6W8y5e65S6Kr9_2VnjHw@mail.gmail.com>
+Date: Mon, 21 Jan 2013 08:00:14 -0200
+Message-ID: <CANmVirgpGqK7MtnmtoBBT9UiOK5Pn7SqG0N6XV+Gb30s9K3Nog@mail.gmail.com>
+From: Raul Rosetto Munoz <munoz0raul@gmail.com>
+To: "yocto@yoctoproject.org" <yocto@yoctoproject.org>, 
+	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Mouse Keyboard don't work at sato Beagle Image
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,165 +39,140 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jan 2013 18:21:01 -0000
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_8F29D6B095ED194EA1980491A5E029710C374AF1DFLE09entticom_"
+X-List-Received-Date: Mon, 21 Jan 2013 10:00:15 -0000
+Content-Type: multipart/alternative; boundary=14dae934052b0c433a04d3c98798
 
---_000_8F29D6B095ED194EA1980491A5E029710C374AF1DFLE09entticom_
-Content-Type: text/plain; charset="us-ascii"
+--14dae934052b0c433a04d3c98798
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-I am currently working on an bbappend for linux-omapl138-psp_2.6.37.bb for =
-the am180x-evm machine and I am having a problem with my custom defconfig n=
-ot being used. When bitbaking the recipe my defconfig is copied to the ${WO=
-RKDIR} like it is supposed to but after the kernel is built I noticed the .=
-config within ${S} was significantly different than ${WORKDIR}/defconfig. T=
-his problem was detected when the uImage I ran did not have support for opr=
-ofile even though my defconfig does include the support. I did some searchi=
-ng I found the ${S}/.config is the same as meta-ti/recipes-kernel/linux/lin=
-ux-omap138-psp-2.6.37/am180x-evm/configs/static.
+Some one have any suggestion?
 
-After some debugging I found the problems lies within compileconfigs task w=
-hich is defined in multi-kernel.inc.
+I think that is a meta-ti configuration.
 
-Compileconfigs renames ${WORKDIR}/defconfig to ${WORKDIR}/defconfig.save. T=
-hen it loops through all the defconfigs in the ${WORKDIR}/configs directory=
- and configures, compiles, install and deploys the kernel for each of the d=
-efconfigs. The final step is to restore the original defconfig file by rena=
-ming ${WORKDIR}/defconfig.save to ${WORKDIR}/defconfig. After compileconfig=
-s is done do_configure is ran using ${WORKDIR}/defconfig and the usual buil=
-d steps are completed.
+I did the same for imx53 using meta-fsl and the mouse and keyboard working
+fine!
 
-However, the problem is the patch "Multi-kernel: fix get_kernelversion retu=
-rns None for do_compileconfigs" causes compileconfigs to run after do_confi=
-gure instead of before it. Therefore, ${WORKDIR}/defconfig is never copied =
-to ${S}/.config and the kernel is never configured to use this .config. The=
- last .config used by do_compileconfigs to compile the kernel is used inste=
-ad.
-
-I thought a simple solution would be to call do_configure at the end of com=
-pileconfigs but then I get a series of
-"basename: missing operand"
-and
-make: *** No rule to make target `oldconfig`. Stop"
-
-Any suggestions on how to fix this problem? This should issue be affecting =
-anyone who is using a kernel that includes multi-kernel.inc.
-
-Regards,
-Franklin Cooper Jr.
-Texas Instruments
-Application Engineer
-fcooper@ti.com<mailto:fcooper@ti.com>
+Thanks
 
 
---_000_8F29D6B095ED194EA1980491A5E029710C374AF1DFLE09entticom_
-Content-Type: text/html; charset="us-ascii"
+2013/1/19 Raul Rosetto Munoz <munoz0raul@gmail.com>
+
+> Hello All,
+>
+> I compiled a core-image-sato for a BeagleBone and BeagleBoard.
+>
+> I'm using all layers at danny version.
+>
+> My bblayer is like this:
+>
+>
+> BBLAYERS ?=3D " \
+>   /home/prjs/video0001/linux/poky/meta \
+>   /home/prjs/video0001/linux/poky/meta-yocto \
+>   /home/prjs/video0001/linux/meta-ti \
+>   /home/prjs/video0001/linux/meta-openembedded/meta-oe  \
+>   "
+>
+> In beagleboard Im using the DVI conector to see the X, and for beaglebone
+> I'm using a DVI cape.
+>
+> At the two cases the video  working very well but for this two situation,
+> when I plug some USB keyboard or USB mouse, I see at serial console that
+> linux recognize the device, but in video interface, nothing happen.
+>
+> I dont know if is necessary create a video target for the USB devices.
+>
+> Here is a USB mouse log example:
+>
+>
+> [   74.651458] usb 1-1: USB disconnect, device number 2
+> [   79.874298] usb 1-1: new low-speed USB device number 3 using musb-hdrc
+> [   80.016906] usb 1-1: New USB device found, idVendor=3D15d9, idProduct=
+=3D0a33
+> [   80.023925] usb 1-1: New USB device strings: Mfr=3D0, Product=3D1,
+> SerialNumber=3D0
+> [   80.031402] usb 1-1: Product: USB Mouse
+> [   80.041412] input: USB Mouse as
+> /devices/platform/omap/musb-ti81xx/musb-hdrc.1/usb1/1-1/1-1:1.0/input/inp=
+ut1
+> [   80.052642] generic-usb 0003:15D9:0A33.0002: input: USB HID v1.10 Mous=
+e
+> [USB Mouse] on usb-musb-hdrc.1-1/input0
+>
+>
+> Thanks
+>
+> --
+> *Raul Rosetto Mu=F1oz*
+>
+
+
+
+--=20
+*Raul Rosetto Mu=F1oz*
+
+--14dae934052b0c433a04d3c98798
+Content-Type: text/html; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:purple;
-	text-decoration:underline;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri","sans-serif";
-	color:windowtext;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	font-family:"Calibri","sans-serif";}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal">I am currently working on an bbappend for linux-omap=
-l138-psp_2.6.37.bb for the am180x-evm machine and I am having a problem wit=
-h my custom defconfig not being used. When bitbaking the recipe my defconfi=
-g is copied to the ${WORKDIR} like
- it is supposed to but after the kernel is built I noticed the .config with=
-in ${S} was significantly different than ${WORKDIR}/defconfig. This problem=
- was detected when the uImage I ran did not have support for oprofile even =
-though my defconfig does include
- the support. I did some searching I found the ${S}/.config is the same as =
-meta-ti/recipes-kernel/linux/linux-omap138-psp-2.6.37/am180x-evm/configs/st=
-atic.<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">After some debugging I found the problems lies withi=
-n compileconfigs task which is defined in multi-kernel.inc.<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Compileconfigs renames ${WORKDIR}/defconfig to ${WOR=
-KDIR}/defconfig.save. Then it loops through all the defconfigs in the ${WOR=
-KDIR}/configs directory and configures, compiles, install and deploys the k=
-ernel for each of the defconfigs.
- The final step is to restore the original defconfig file by renaming ${WOR=
-KDIR}/defconfig.save to ${WORKDIR}/defconfig. After compileconfigs is done =
-do_configure is ran using ${WORKDIR}/defconfig and the usual build steps ar=
-e completed.<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">However, the problem is the patch &#8220;Multi-kerne=
-l: fix get_kernelversion returns None for do_compileconfigs&#8221; causes c=
-ompileconfigs to run after do_configure instead of before it. Therefore, ${=
-WORKDIR}/defconfig is never copied to ${S}/.config
- and the kernel is never configured to use this .config. The last .config u=
-sed by do_compileconfigs to compile the kernel is used instead.<o:p></o:p><=
-/p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">I thought a simple solution would be to call do_conf=
-igure at the end of compileconfigs but then I get a series of<o:p></o:p></p=
->
-<p class=3D"MsoNormal">&#8220;basename: missing operand&#8221; <o:p></o:p><=
-/p>
-<p class=3D"MsoNormal">and<o:p></o:p></p>
-<p class=3D"MsoNormal">make: *** No rule to make target `oldconfig`. Stop&#=
-8221;<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Any suggestions on how to fix this problem? This sho=
-uld issue be affecting anyone who is using a kernel that includes multi-ker=
-nel.inc.<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Regards,<o:p></o:p></p>
-<p class=3D"MsoNormal">Franklin Cooper Jr.<o:p></o:p></p>
-<p class=3D"MsoNormal">Texas Instruments<o:p></o:p></p>
-<p class=3D"MsoNormal">Application Engineer<o:p></o:p></p>
-<p class=3D"MsoNormal"><a href=3D"mailto:fcooper@ti.com">fcooper@ti.com</a>=
-<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div dir=3D"ltr"><div>Some one have any suggestion?</div><div><br></div><di=
+v>I think that is a meta-ti configuration.</div><div><br></div><div>I did t=
+he same for imx53 using meta-fsl and the mouse and keyboard working fine!</=
+div>
+<div><br></div><div>Thanks</div></div><div class=3D"gmail_extra"><br><br><d=
+iv class=3D"gmail_quote">2013/1/19 Raul Rosetto Munoz <span dir=3D"ltr">&lt=
+;<a href=3D"mailto:munoz0raul@gmail.com" target=3D"_blank">munoz0raul@gmail=
+.com</a>&gt;</span><br>
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex"><div dir=3D"ltr"><div>Hello All,<br></div><d=
+iv><br></div><div>I compiled a core-image-sato for a BeagleBone and BeagleB=
+oard.</div>
+<div><br></div><div>I&#39;m using all layers at danny version.</div><div><b=
+r></div><div>My bblayer is like this:</div>
+<div><br></div><div><br></div><div><font face=3D"courier new, monospace">BB=
+LAYERS ?=3D &quot; \</font></div><div><font face=3D"courier new, monospace"=
+>=A0 /home/prjs/video0001/linux/poky/meta \</font></div><div><font face=3D"=
+courier new, monospace">=A0 /home/prjs/video0001/linux/poky/meta-yocto \</f=
+ont></div>
+
+<div><font face=3D"courier new, monospace">=A0 /home/prjs/video0001/linux/m=
+eta-ti \</font></div><div><font face=3D"courier new, monospace">=A0 /home/p=
+rjs/video0001/linux/meta-openembedded/meta-oe =A0\</font></div><div><font f=
+ace=3D"courier new, monospace">=A0 &quot;</font></div>
+
+<div><br></div><div>In beagleboard Im using the DVI conector to see the X, =
+and for beaglebone I&#39;m using a DVI cape.</div><div><br></div><div>At th=
+e two cases the video =A0working very well but for this two situation, when=
+ I plug some USB keyboard or USB mouse, I see at serial console that linux =
+recognize the device, but in video interface, nothing happen.</div>
+
+<div><br></div><div>I dont know if is necessary create a video target for t=
+he USB devices.</div><div><br></div><div>Here is a USB mouse log example:</=
+div><div><br></div><div><br></div><div><font face=3D"courier new, monospace=
+">[ =A0 74.651458] usb 1-1: USB disconnect, device number 2</font></div>
+
+<div><font face=3D"courier new, monospace">[ =A0 79.874298] usb 1-1: new lo=
+w-speed USB device number 3 using musb-hdrc</font></div><div><font face=3D"=
+courier new, monospace">[ =A0 80.016906] usb 1-1: New USB device found, idV=
+endor=3D15d9, idProduct=3D0a33</font></div>
+
+<div><font face=3D"courier new, monospace">[ =A0 80.023925] usb 1-1: New US=
+B device strings: Mfr=3D0, Product=3D1, SerialNumber=3D0</font></div><div><=
+font face=3D"courier new, monospace">[ =A0 80.031402] usb 1-1: Product: USB=
+ Mouse</font></div>
+
+<div><font face=3D"courier new, monospace">[ =A0 80.041412] input: USB Mous=
+e as /devices/platform/omap/musb-ti81xx/musb-hdrc.1/usb1/1-1/1-1:1.0/input/=
+input1</font></div><div><font face=3D"courier new, monospace">[ =A0 80.0526=
+42] generic-usb 0003:15D9:0A33.0002: input: USB HID v1.10 Mouse [USB Mouse]=
+ on usb-musb-hdrc.1-1/input0</font></div>
+
+<div><br></div><div><br></div><div>Thanks</div><span class=3D"HOEnZb"><font=
+ color=3D"#888888"><div><br></div>-- <br><b>Raul Rosetto Mu=F1oz</b>
+</font></span></div>
+</blockquote></div><br><br clear=3D"all"><div><br></div>-- <br><b>Raul Rose=
+tto Mu=F1oz</b>
 </div>
-</body>
-</html>
 
---_000_8F29D6B095ED194EA1980491A5E029710C374AF1DFLE09entticom_--
+--14dae934052b0c433a04d3c98798--
