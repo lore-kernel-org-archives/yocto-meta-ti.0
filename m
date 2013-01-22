@@ -1,29 +1,22 @@
 Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0A76E01473
-	for <meta-ti@yoctoproject.org>; Mon, 21 Jan 2013 18:21:14 -0800 (PST)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r0M2LEAM027297
-	for <meta-ti@yoctoproject.org>; Mon, 21 Jan 2013 20:21:14 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r0M2LEn3012256
-	for <meta-ti@yoctoproject.org>; Mon, 21 Jan 2013 20:21:14 -0600
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 21 Jan 2013 20:21:13 -0600
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id r0M2LDuu002583;
-	Mon, 21 Jan 2013 20:21:13 -0600
-Date: Mon, 21 Jan 2013 21:21:12 -0500
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC858E00719
+	for <meta-ti@yoctoproject.org>; Mon, 21 Jan 2013 19:30:00 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.191.205.12])
+	by vms173021.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MH000MDYCE03C53@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 21 Jan 2013 21:30:00 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id CFF1220031; Mon,
+	21 Jan 2013 22:29:59 -0500 (EST)
 From: Denys Dmytriyenko <denys@ti.com>
-To: "Cooper Jr., Franklin" <fcooper@ti.com>
-Message-ID: <20130122022112.GJ15396@edge>
-References: <8F29D6B095ED194EA1980491A5E029710C374AF1@DFLE09.ent.ti.com>
-MIME-Version: 1.0
-In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C374AF1@DFLE09.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Issue with multi-kernel.inc
+To: meta-ti@yoctoproject.org
+Date: Mon, 21 Jan 2013 22:29:58 -0500
+Message-id: <1358825399-11222-1-git-send-email-denys@ti.com>
+X-Mailer: git-send-email 1.8.1.1
+Subject: [PATCH 1/2] u-boot: update to the latest dev release for keystone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,20 +29,75 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 02:21:15 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 22 Jan 2013 03:30:01 -0000
 
-On Sun, Jan 20, 2013 at 06:20:58PM +0000, Cooper Jr., Franklin wrote:
-> I thought a simple solution would be to call do_configure at the end of 
-> compileconfigs but then I get a series of
-> "basename: missing operand"
-> and
-> make: *** No rule to make target `oldconfig`. Stop"
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-bsp/u-boot/u-boot_2012.07.bb | 23 -----------------------
+ recipes-bsp/u-boot/u-boot_2013.01.bb | 23 +++++++++++++++++++++++
+ 2 files changed, 23 insertions(+), 23 deletions(-)
+ delete mode 100644 recipes-bsp/u-boot/u-boot_2012.07.bb
+ create mode 100644 recipes-bsp/u-boot/u-boot_2013.01.bb
 
-That's because it ends up being in deploy/ directory - try the patch I just 
-sent, it worked for me.
-
+diff --git a/recipes-bsp/u-boot/u-boot_2012.07.bb b/recipes-bsp/u-boot/u-boot_2012.07.bb
+deleted file mode 100644
+index f39e60c..0000000
+--- a/recipes-bsp/u-boot/u-boot_2012.07.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
+-
+-DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
+-LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
+-
+-COMPATIBLE_MACHINE = "keystone"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-PR = "r0+gitr${SRCPV}"
+-
+-SRC_URI = "git://gtgit01.gt.design.ti.com/git/projects/u-boot-keystone.git;protocol=git;branch=${BRANCH}"
+-
+-BRANCH = "master"
+-
+-SRCREV = "6e710c61dba2665e01c900470a0a63743ff431c6"
+-
+-EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
+-
+-S = "${WORKDIR}/git"
+-
+-UBOOT_SUFFIX = "bin"
+diff --git a/recipes-bsp/u-boot/u-boot_2013.01.bb b/recipes-bsp/u-boot/u-boot_2013.01.bb
+new file mode 100644
+index 0000000..ee443b0
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot_2013.01.bb
+@@ -0,0 +1,23 @@
++require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
++
++DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
++
++COMPATIBLE_MACHINE = "keystone"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++PR = "r1+gitr${SRCPV}"
++
++SRC_URI = "git://arago-project.org/git/projects/u-boot-keystone.git;protocol=git;branch=${BRANCH}"
++
++BRANCH = "master"
++
++SRCREV = "DEV.MCSDK-03.00.00.06"
++
++EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
++
++S = "${WORKDIR}/git"
++
++UBOOT_SUFFIX = "bin"
 -- 
-Denys
+1.8.1.1
+
 
