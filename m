@@ -1,15 +1,33 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D764CE011DB
-	for <meta-ti@yoctoproject.org>; Mon, 21 Jan 2013 19:32:14 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 2FB1652A21; Tue, 22 Jan 2013 03:32:12 +0000 (UTC)
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
+	[209.85.223.170])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED7B2E01456
+	for <meta-ti@yoctoproject.org>; Tue, 22 Jan 2013 09:13:47 -0800 (PST)
+Received: by mail-ie0-f170.google.com with SMTP id k10so12091419iea.1
+	for <meta-ti@yoctoproject.org>; Tue, 22 Jan 2013 09:13:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=7iRtXQBAvlfm3lmxUTZC5edjR+C40NZOGCiBeCd43IE=;
+	b=l4/P6c+jzNmcDp3X7JlSdUfbXEE2dbOfAbA+O+89MequOzuN7TlWLJ8v1TF+qOS4/U
+	N4niP2Wr3wuTld6ZZL+L60NVxG+UL9Y9djTLS997QUPkIjwV4y3pWMbEoXfG24XeASMs
+	RmOGuqLVsChmvHxl2yGwWLgvCplXpnlthOumES8cVJkU/w2WGM062geH4eJjlSiDSpl7
+	WeGKrh1XUitERIA2+080sI9RhPhdFVCIoagirLqfeOU9I5bdvMDq89tyOmf3Pvs5V2Ht
+	IfPGVseeqFBn6hyYtwIpyxsMxqp0ybHPUKeCV9ZnN87QW3CjwYR3eEc1M1q26mZ59cnH
+	svRA==
+X-Received: by 10.50.149.166 with SMTP id ub6mr12294268igb.57.1358874827395;
+	Tue, 22 Jan 2013 09:13:47 -0800 (PST)
+Received: from mars.hq.bec-systems.com (oh-69-34-21-229.sta.embarqhsd.net.
+	[69.34.21.229])
+	by mx.google.com with ESMTPS id rd10sm11141774igb.1.2013.01.22.09.13.44
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 22 Jan 2013 09:13:45 -0800 (PST)
+From: Cliff Brake <cliff.brake@gmail.com>
 To: meta-ti@yoctoproject.org
-Message-Id: <20130122033213.2FB1652A21@arago-project.org>
-Date: Tue, 22 Jan 2013 03:32:12 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot: update to the latest dev release for keystone
+Date: Tue, 22 Jan 2013 12:13:20 -0500
+Message-Id: <1358874800-28157-1-git-send-email-cliff.brake@gmail.com>
+X-Mailer: git-send-email 1.8.1.1
+Cc: Cliff Brake <cbrake@bec-systems.com>
+Subject: [PATCH] add extra '#' to multi-line comment
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,49 +40,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jan 2013 03:32:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 22 Jan 2013 17:13:48 -0000
 
-Module: meta-ti
-Branch: denzil
-Commit: 9f7148c2361434702ed35ad7cf12364b94550f80
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9f7148c2361434702ed35ad7cf12364b94550f80
+From: Cliff Brake <cbrake@bec-systems.com>
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Jan 21 21:37:18 2013 -0500
+Bitbake is getting more particular:
+ERROR: There is a confusing multiline, partially commented expression on
+line 27 of file /scratch/oe/oe-build-core-3/sources/meta-ti/...
+Please clarify whether this is all a comment or should be parsed.
 
-u-boot: update to the latest dev release for keystone
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
 ---
+ recipes-kernel/linux/linux_3.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
- .../{u-boot_2012.07.bb => u-boot_2013.01.bb}       |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-bsp/u-boot/u-boot_2012.07.bb b/recipes-bsp/u-boot/u-boot_2013.01.bb
-similarity index 70%
-rename from recipes-bsp/u-boot/u-boot_2012.07.bb
-rename to recipes-bsp/u-boot/u-boot_2013.01.bb
-index f39e60c..ee443b0 100644
---- a/recipes-bsp/u-boot/u-boot_2012.07.bb
-+++ b/recipes-bsp/u-boot/u-boot_2013.01.bb
-@@ -8,13 +8,13 @@ COMPATIBLE_MACHINE = "keystone"
+diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
+index 0ec0d26..d6ed98c 100644
+--- a/recipes-kernel/linux/linux_3.1.bb
++++ b/recipes-kernel/linux/linux_3.1.bb
+@@ -24,6 +24,7 @@ SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git;pro
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ # Needs refresh:
+ #            file://beagle/0003-OMAP3-beagle-HACK-add-in-1GHz-OPP.patch \
++#
  
--PR = "r0+gitr${SRCPV}"
-+PR = "r1+gitr${SRCPV}"
  
--SRC_URI = "git://gtgit01.gt.design.ti.com/git/projects/u-boot-keystone.git;protocol=git;branch=${BRANCH}"
-+SRC_URI = "git://arago-project.org/git/projects/u-boot-keystone.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH = "master"
- 
--SRCREV = "6e710c61dba2665e01c900470a0a63743ff431c6"
-+SRCREV = "DEV.MCSDK-03.00.00.06"
- 
- EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
- 
+ SRC_URI_append_beagleboard = " file://logo_linux_clut224.ppm \
+-- 
+1.8.1.1
 
 
