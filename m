@@ -1,34 +1,15 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E50CE006D2
-	for <meta-ti@yoctoproject.org>; Thu, 24 Jan 2013 10:46:18 -0800 (PST)
-Received: from cpebcc81008dd2c-cmbcc81008dd29.cpe.net.cable.rogers.com
-	([99.253.156.71]:32828 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1TyRoX-0006US-3o; Thu, 24 Jan 2013 13:46:17 -0500
-Date: Thu, 24 Jan 2013 13:46:11 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: Denys Dmytriyenko <denys@ti.com>
-In-Reply-To: <20130124184115.GC23977@denix.org>
-Message-ID: <alpine.DEB.2.02.1301241343530.5921@oneiric>
-References: <alpine.DEB.2.02.1301231543150.17865@oneiric>
-	<20130124184115.GC23977@denix.org>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: current support for zoom am1808 experimenter kit?
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4CB6CE014DC
+	for <meta-ti@yoctoproject.org>; Thu, 24 Jan 2013 11:00:41 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id ABA4F52A74; Thu, 24 Jan 2013 19:00:40 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130124190040.ABA4F52A74@arago-project.org>
+Date: Thu, 24 Jan 2013 19:00:40 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-keystone: update to the latest dev release for keystone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,44 +22,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jan 2013 18:46:18 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 24 Jan 2013 19:00:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, 24 Jan 2013, Denys Dmytriyenko wrote:
+Module: meta-ti
+Branch: master
+Commit: 5a4eff42f27c95dcd53a72a2fdb4317ea4765e3e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5a4eff42f27c95dcd53a72a2fdb4317ea4765e3e
 
-> On Wed, Jan 23, 2013 at 03:49:21PM -0500, Robert P. J. Day wrote:
->
-> >   next, just for the purposes of bringing up the board, i see the
-> > recipe for ti-hw-bringup-image.bb, but i notice that some of those
-> > image recipe files refer to angstrom components.  however, the meta-ti
-> > layer definition doesn't list meta-angstrom as a dependency.  what's
-> > the procotol for specifying layer dependencies?
->
-> You need to either have meta-angstrom in the layer stack, or use
-> another image recipe. There's been tons of heated discussions on
-> this topic, so I won't go into further details...
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Jan 21 21:38:27 2013 -0500
 
-  yup, i've run across most of that in the last couple hours of
-snooping so i have a much better idea of how those recipes work,
-thanks.
+linux-keystone: update to the latest dev release for keystone
 
-  and, predictably, i ran into the same issue jack mitchell reported a
-few days ago:
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-https://lists.yoctoproject.org/pipermail/meta-ti/2013-January/002015.html
+---
 
-so i'll kick back and watch for a resolution.
+ conf/machine/include/keystone.inc                  |    2 +-
+ .../linux/linux-keystone-3.6.6/defconfig           |  967 +++++++++++++++++---
+ recipes-kernel/linux/linux-keystone_3.6.6.bb       |    2 +-
+ 3 files changed, 832 insertions(+), 139 deletions(-)
 
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=5a4eff42f27c95dcd53a72a2fdb4317ea4765e3e
 
