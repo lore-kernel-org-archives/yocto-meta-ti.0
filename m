@@ -1,15 +1,31 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 484B8E01301
-	for <meta-ti@yoctoproject.org>; Fri, 25 Jan 2013 00:04:47 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 4121452ADE; Fri, 25 Jan 2013 08:04:46 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130125080446.4121452ADE@arago-project.org>
-Date: Fri, 25 Jan 2013 08:04:46 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Cliff Brake : linux_3.1: add extra '#' to multi-line comment
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D7FD0E00515
+	for <meta-ti@yoctoproject.org>; Fri, 25 Jan 2013 06:03:26 -0800 (PST)
+Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.115.5.73]:52709 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1TyjsM-0001Km-5F
+	for meta-ti@yoctoproject.org; Fri, 25 Jan 2013 09:03:26 -0500
+Date: Fri, 25 Jan 2013 09:03:22 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: meta-ti mailing list <meta-ti@yoctoproject.org>
+Message-ID: <alpine.DEB.2.02.1301250900140.28247@oneiric>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: some redundant recipes in ti-hw-bringup-image.bb b/c of packagegroup-ti-test.bb
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,43 +38,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jan 2013 08:04:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 25 Jan 2013 14:03:27 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Module: meta-ti
-Branch: master
-Commit: 9273b57d956aa4cbbb97b27fd8f8d2581ce247da
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9273b57d956aa4cbbb97b27fd8f8d2581ce247da
 
-Author: Cliff Brake <cbrake@bec-systems.com>
-Date:   Tue Jan 22 12:13:20 2013 -0500
+  it appears that the recipe list in ti-hw-bringup-image.bb:
 
-linux_3.1: add extra '#' to multi-line comment
+IMAGE_INSTALL += " \
+        usbutils \
+        i2c-tools \
+        alsa-utils \
+        devmem2 \
+        iw \
+        bonnie++ \
+        hdparm \
+        iozone3 \
+        iperf \
+        lmbench \
+        rt-tests \
+        evtest \
+        bc \
+        packagegroup-ti-test \
+        kernel-modules \
+        ${EXTRA_MACHINE_IMAGE_INSTALL} \
+"
 
-Bitbake is getting more particular:
-ERROR: There is a confusing multiline, partially commented expression on
-line 27 of file /scratch/oe/oe-build-core-3/sources/meta-ti/...
-Please clarify whether this is all a comment or should be parsed.
+has superfluous entries given the contents of packagegroup-ti-test.bb:
 
-Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+TEST = "\
+    bonnie++ \
+    hdparm \
+    iozone3 \
+    iperf \
+    lmbench \
+    rt-tests \
+    "
 
----
+TI_TEST = "\
+    ltp-ddt \
+    "
 
- recipes-kernel/linux/linux_3.1.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+RDEPENDS_${PN} = "\
+    ${TEST} \
+    ${TI_TEST} \
+    "
 
-diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
-index 0ec0d26..d6ed98c 100644
---- a/recipes-kernel/linux/linux_3.1.bb
-+++ b/recipes-kernel/linux/linux_3.1.bb
-@@ -24,6 +24,7 @@ SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git;pro
- 
- # Needs refresh:
- #            file://beagle/0003-OMAP3-beagle-HACK-add-in-1GHz-OPP.patch \
-+#
- 
- 
- SRC_URI_append_beagleboard = " file://logo_linux_clut224.ppm \
+  am i reading that correctly, that about a half dozen packages listed
+in the image recipe file are redundant?
 
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
