@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 051D9E01502
-	for <meta-ti@yoctoproject.org>; Thu, 24 Jan 2013 11:01:51 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45A13E006D2
+	for <meta-ti@yoctoproject.org>; Fri, 25 Jan 2013 00:04:47 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B7BE652A97; Thu, 24 Jan 2013 19:01:50 +0000 (UTC)
+	id BE7E952AE3; Fri, 25 Jan 2013 08:04:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130124190150.B7BE652A97@arago-project.org>
-Date: Thu, 24 Jan 2013 19:01:50 +0000 (UTC)
+Message-Id: <20130125080446.BE7E952AE3@arago-project.org>
+Date: Fri, 25 Jan 2013 08:04:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-keystone: update to the latest dev release for keystone
+Subject: Denys Dmytriyenko : multi-kernel.inc: drop use of KERNEL_CCSUFFIX to match oe-core
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,27 +22,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jan 2013 19:01:51 -0000
+X-List-Received-Date: Fri, 25 Jan 2013 08:04:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 47bc5e11ec9d60a388278b6551a8d70676dc1d7e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=47bc5e11ec9d60a388278b6551a8d70676dc1d7e
+Branch: master
+Commit: 9daa29790ddd699642c1689bc2cf7c77d18ed372
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9daa29790ddd699642c1689bc2cf7c77d18ed372
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Jan 21 21:38:27 2013 -0500
+Date:   Fri Jan 25 03:02:18 2013 -0500
 
-linux-keystone: update to the latest dev release for keystone
+multi-kernel.inc: drop use of KERNEL_CCSUFFIX to match oe-core
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/keystone.inc                  |    2 +-
- .../linux/linux-keystone-3.6.6/defconfig           |  967 +++++++++++++++++---
- recipes-kernel/linux/linux-keystone_3.6.6.bb       |    2 +-
- 3 files changed, 832 insertions(+), 139 deletions(-)
+ recipes-kernel/linux/multi-kernel.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=47bc5e11ec9d60a388278b6551a8d70676dc1d7e
+diff --git a/recipes-kernel/linux/multi-kernel.inc b/recipes-kernel/linux/multi-kernel.inc
+index e5ebe56..9a0c090 100644
+--- a/recipes-kernel/linux/multi-kernel.inc
++++ b/recipes-kernel/linux/multi-kernel.inc
+@@ -119,5 +119,5 @@ do_deploy_append () {
+ 
+ }
+ 
+-do_compileconfigs[depends] += "u-boot-mkimage-native:do_populate_sysroot virtual/${TARGET_PREFIX}gcc:do_populate_sysroot virtual/${TARGET_PREFIX}gcc${KERNEL_CCSUFFIX}:do_populate_sysroot"
++do_compileconfigs[depends] += "u-boot-mkimage-native:do_populate_sysroot virtual/${TARGET_PREFIX}gcc:do_populate_sysroot"
+ addtask compileconfigs after do_preparekernel before do_compile
+
 
