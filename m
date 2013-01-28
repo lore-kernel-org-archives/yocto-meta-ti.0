@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0D1FE00736
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C8B88E0072E
 	for <meta-ti@yoctoproject.org>; Mon, 28 Jan 2013 15:49:59 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 439E152AB0; Mon, 28 Jan 2013 23:49:59 +0000 (UTC)
+	id 81FE652AB3; Mon, 28 Jan 2013 23:49:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130128234959.439E152AB0@arago-project.org>
+Message-Id: <20130128234959.81FE652AB3@arago-project.org>
 Date: Mon, 28 Jan 2013 23:49:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Cliff Brake : beagleboard.conf: add additional sound modules
+Subject: Denys Dmytriyenko : multi-kernel.inc: repeat do_configure after do_compileconfigs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,34 +27,35 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: bf6acb5e0430bd0eb023772cbe08ec052da31a02
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bf6acb5e0430bd0eb023772cbe08ec052da31a02
+Commit: 61ecacbdf39397cbe8bac4fb47fa2133aed1111f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=61ecacbdf39397cbe8bac4fb47fa2133aed1111f
 
-Author: Cliff Brake <cbrake@bec-systems.com>
-Date:   Tue Jan 22 17:40:55 2013 -0500
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Jan 21 21:19:32 2013 -0500
 
-beagleboard.conf: add additional sound modules
+multi-kernel.inc: repeat do_configure after do_compileconfigs
 
-require for audio to function
+Populate default defconfig into .config and process with oldconfig target
 
-Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/beagleboard.conf |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes-kernel/linux/multi-kernel.inc |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
-index b3604a5..8f84c6c 100644
---- a/conf/machine/beagleboard.conf
-+++ b/conf/machine/beagleboard.conf
-@@ -48,4 +48,5 @@ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
- MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
+diff --git a/recipes-kernel/linux/multi-kernel.inc b/recipes-kernel/linux/multi-kernel.inc
+index 04bc987..e5ebe56 100644
+--- a/recipes-kernel/linux/multi-kernel.inc
++++ b/recipes-kernel/linux/multi-kernel.inc
+@@ -95,6 +95,8 @@ do_compileconfigs () {
  
- # For a modularized kernel we want to drag in networking, sound, rtc etc."
--MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl"
-+MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl \
-+  kernel-module-snd-soc-omap kernel-module-snd-soc-omap-mcbsp kernel-module-snd-soc-omap3beagle"
+       # Restore the regular 'defconfig'
+       cp ${WORKDIR}/defconfig.save ${WORKDIR}/defconfig
++      cd ${S}
++      do_configure
+     fi
+ }
+ 
 
 
