@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCB8EE0072E
-	for <meta-ti@yoctoproject.org>; Mon, 28 Jan 2013 15:50:00 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 899F2E0072F
+	for <meta-ti@yoctoproject.org>; Mon, 28 Jan 2013 15:51:32 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7B45152AB3; Mon, 28 Jan 2013 23:50:00 +0000 (UTC)
+	id 4C11152AB3; Mon, 28 Jan 2013 23:51:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130128235000.7B45152AB3@arago-project.org>
-Date: Mon, 28 Jan 2013 23:50:00 +0000 (UTC)
+Message-Id: <20130128235132.4C11152AB3@arago-project.org>
+Date: Mon, 28 Jan 2013 23:51:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Murali Karicheri : keystone: boot-monitor: add initial recipe
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2013 23:50:01 -0000
+X-List-Received-Date: Mon, 28 Jan 2013 23:51:32 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: e5875d90521a7d73abff000b202b8631c16a34db
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e5875d90521a7d73abff000b202b8631c16a34db
+Branch: master
+Commit: 1920403ef28a61aabceee22f4472bb98ffe48f5d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1920403ef28a61aabceee22f4472bb98ffe48f5d
 
 Author: Murali Karicheri <m-karicheri2@ti.com>
 Date:   Fri Jan 18 18:15:21 2013 -0500
