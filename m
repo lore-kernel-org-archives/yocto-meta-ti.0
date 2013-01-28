@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4B5A4E006DC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4CA00E00724
 	for <meta-ti@yoctoproject.org>; Mon, 28 Jan 2013 15:46:05 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4F20552A85; Mon, 28 Jan 2013 23:46:04 +0000 (UTC)
+	id 14FC852A46; Mon, 28 Jan 2013 23:46:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130128234604.4F20552A85@arago-project.org>
-Date: Mon, 28 Jan 2013 23:46:04 +0000 (UTC)
+Message-Id: <20130128234604.14FC852A46@arago-project.org>
+Date: Mon, 28 Jan 2013 23:46:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Murali Karicheri : keystone: boot-monitor: add initial recipe
+Subject: Cliff Brake : beagleboard.conf: add additional sound modules
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,71 +27,34 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: denzil
-Commit: d35a191a9176981babf3587e15dfaa622560e4f1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d35a191a9176981babf3587e15dfaa622560e4f1
+Commit: 3414f851ac740da23db92ab839716003e8a968a4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3414f851ac740da23db92ab839716003e8a968a4
 
-Author: Murali Karicheri <m-karicheri2@ti.com>
-Date:   Fri Jan 18 18:15:21 2013 -0500
+Author: Cliff Brake <cbrake@bec-systems.com>
+Date:   Tue Jan 22 17:40:55 2013 -0500
 
-keystone: boot-monitor: add initial recipe
+beagleboard.conf: add additional sound modules
 
-This adds recipe to build boot monitor image. Boot monitor is
-a standalone image that is loaded and executed from u-boot to
-replace the RBL provided monitor code in ARM with Linux boot
-specific code.
+require for audio to function
 
-Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/boot-monitor/boot-monitor_git.bb |   39 ++++++++++++++++++++++++++
- 1 files changed, 39 insertions(+), 0 deletions(-)
+ conf/machine/beagleboard.conf |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-new file mode 100644
-index 0000000..dc4d71e
---- /dev/null
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -0,0 +1,39 @@
-+DESCRIPTION = "Boot Monitor - TI ARM Boot monitor code"
-+EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX}"
-+
-+LICENSE = "BSD"
-+
-+BOOT_MONITOR_BINARY ?= "skern.bin"
-+BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
-+BOOT_MONITOR_MAKE_TARGET  ?= "all"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b676661788f8c0f8cdeafd2a39467cae"
-+
-+COMPATIBLE_MACHINE = "keystone-evm"
-+
-+SRC_URI = "git://gtgit01.gt.design.ti.com/git/projects/boot-monitor.git;protocol=git;branch=${BRANCH}"
-+
-+PV = "1.0"
-+PR = "r0+gitr${SRCPV}"
-+
-+BRANCH = "master"
-+
-+S = "${WORKDIR}/git"
-+
-+SRCREV = "b8014b69e8c7e981e8bc3e067a9d990e2bb603ba"
-+
-+do_compile () {
-+	unset LDFLAGS
-+	unset CFLAGS
-+	unset CPPFLAGS
-+	oe_runmake ${BOOT_MONITOR_MAKE_TARGET}
-+}
-+
-+inherit deploy
-+
-+addtask deploy before do_build after do_compile
-+
-+do_deploy () {
-+	install -d ${DEPLOYDIR}
-+	install ${S}/${BOOT_MONITOR_BINARY} ${DEPLOYDIR}/${BOOT_MONITOR_IMAGE}
-+}
+diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
+index b3604a5..8f84c6c 100644
+--- a/conf/machine/beagleboard.conf
++++ b/conf/machine/beagleboard.conf
+@@ -48,4 +48,5 @@ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+ MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
+ 
+ # For a modularized kernel we want to drag in networking, sound, rtc etc."
+-MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl"
++MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl \
++  kernel-module-snd-soc-omap kernel-module-snd-soc-omap-mcbsp kernel-module-snd-soc-omap3beagle"
 
 
