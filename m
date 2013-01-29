@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A2C27E0072F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A403AE011AB
 	for <meta-ti@yoctoproject.org>; Tue, 29 Jan 2013 11:43:10 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DB34752A57; Tue, 29 Jan 2013 19:43:09 +0000 (UTC)
+	id B35DD52A55; Tue, 29 Jan 2013 19:43:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130129194309.DB34752A57@arago-project.org>
+Message-Id: <20130129194309.B35DD52A55@arago-project.org>
 Date: Tue, 29 Jan 2013 19:43:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Murali Karicheri : keystone: update defconfig with latest for mcsdk alpha7
+Subject: Murali Karicheri : keystone: update kernel and bootloaders recipes for mcsdk alpha7 release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,21 +27,104 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: denzil
-Commit: 2ef919df5cfb48755456251836d80083abc7dce7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2ef919df5cfb48755456251836d80083abc7dce7
+Commit: 64926476aa88cb7293adcd8f232e75f088934ad1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=64926476aa88cb7293adcd8f232e75f088934ad1
 
 Author: Murali Karicheri <m-karicheri2@ti.com>
-Date:   Tue Jan 29 12:15:25 2013 -0500
+Date:   Tue Jan 29 12:14:57 2013 -0500
 
-keystone: update defconfig with latest for mcsdk alpha7
+keystone: update kernel and bootloaders recipes for mcsdk alpha7 release
 
 Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-keystone-3.6.6/defconfig           | 2038 --------------------
- 1 files changed, 0 insertions(+), 2038 deletions(-)
+ conf/machine/include/keystone.inc            |    3 ++-
+ recipes-bsp/boot-monitor/boot-monitor_git.bb |    8 ++++----
+ recipes-bsp/u-boot/u-boot_2013.01.bb         |    4 ++--
+ recipes-kernel/linux/linux-keystone_3.6.6.bb |    2 +-
+ 4 files changed, 9 insertions(+), 8 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=2ef919df5cfb48755456251836d80083abc7dce7
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index df9318a..b77bccd 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -5,7 +5,7 @@ require conf/machine/include/tune-cortexa15.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-keystone"
+ 
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r4"
++MACHINE_KERNEL_PR = "r5"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+@@ -13,3 +13,4 @@ UBOOT_ENTRYPOINT = "0x80008000"
+ UBOOT_LOADADDRESS = "0x80008000"
+ 
+ EXTRA_IMAGEDEPENDS += "u-boot"
++EXTRA_IMAGEDEPENDS += "boot-monitor"
+diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+index dc4d71e..c8a022a 100644
+--- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
++++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+@@ -7,20 +7,20 @@ BOOT_MONITOR_BINARY ?= "skern.bin"
+ BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
+ BOOT_MONITOR_MAKE_TARGET  ?= "all"
+ 
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b676661788f8c0f8cdeafd2a39467cae"
++LIC_FILES_CHKSUM = "file://COPYING;md5=25fe219a6febf6e5bb45beda1b2eb315"
+ 
+ COMPATIBLE_MACHINE = "keystone-evm"
+ 
+-SRC_URI = "git://gtgit01.gt.design.ti.com/git/projects/boot-monitor.git;protocol=git;branch=${BRANCH}"
++SRC_URI = "git://arago-project.org/git/projects/boot-monitor.git;protocol=git;branch=${BRANCH}"
+ 
+ PV = "1.0"
+-PR = "r0+gitr${SRCPV}"
++PR = "r1+gitr${SRCPV}"
+ 
+ BRANCH = "master"
+ 
+ S = "${WORKDIR}/git"
+ 
+-SRCREV = "b8014b69e8c7e981e8bc3e067a9d990e2bb603ba"
++SRCREV = "DEV.MCSDK-03.00.00.07"
+ 
+ do_compile () {
+ 	unset LDFLAGS
+diff --git a/recipes-bsp/u-boot/u-boot_2013.01.bb b/recipes-bsp/u-boot/u-boot_2013.01.bb
+index ee443b0..b9e6daf 100644
+--- a/recipes-bsp/u-boot/u-boot_2013.01.bb
++++ b/recipes-bsp/u-boot/u-boot_2013.01.bb
+@@ -8,13 +8,13 @@ COMPATIBLE_MACHINE = "keystone"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-PR = "r1+gitr${SRCPV}"
++PR = "r2+gitr${SRCPV}"
+ 
+ SRC_URI = "git://arago-project.org/git/projects/u-boot-keystone.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH = "master"
+ 
+-SRCREV = "DEV.MCSDK-03.00.00.06"
++SRCREV = "DEV.MCSDK-03.00.00.07"
+ 
+ EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
+ 
+diff --git a/recipes-kernel/linux/linux-keystone_3.6.6.bb b/recipes-kernel/linux/linux-keystone_3.6.6.bb
+index 2aa83e6..4dd5d15 100644
+--- a/recipes-kernel/linux/linux-keystone_3.6.6.bb
++++ b/recipes-kernel/linux/linux-keystone_3.6.6.bb
+@@ -7,7 +7,7 @@ MACHINE_KERNEL_PR_append = "a"
+ CORTEXA8FIXUP = "no"
+ 
+ # The tree tends to rebase, use literal stable tags
+-SRCREV = "DEV.MCSDK-03.00.00.06"
++SRCREV = "DEV.MCSDK-03.06.06.07"
+ 
+ SRC_URI = "git://arago-project.org/git/projects/linux-keystone.git;protocol=git \
+            file://defconfig \
+
 
