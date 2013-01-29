@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A403AE011AB
-	for <meta-ti@yoctoproject.org>; Tue, 29 Jan 2013 11:43:10 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03269E0072F
+	for <meta-ti@yoctoproject.org>; Tue, 29 Jan 2013 11:44:54 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B35DD52A55; Tue, 29 Jan 2013 19:43:09 +0000 (UTC)
+	id C4D6052A55; Tue, 29 Jan 2013 19:44:53 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130129194309.B35DD52A55@arago-project.org>
-Date: Tue, 29 Jan 2013 19:43:09 +0000 (UTC)
+Message-Id: <20130129194453.C4D6052A55@arago-project.org>
+Date: Tue, 29 Jan 2013 19:44:53 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Murali Karicheri : keystone: update kernel and bootloaders recipes for mcsdk alpha7 release
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jan 2013 19:43:10 -0000
+X-List-Received-Date: Tue, 29 Jan 2013 19:44:54 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: denzil
-Commit: 64926476aa88cb7293adcd8f232e75f088934ad1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=64926476aa88cb7293adcd8f232e75f088934ad1
+Branch: danny
+Commit: a1934f3d954d4d36d7651cbccc7ccb9589bdc750
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a1934f3d954d4d36d7651cbccc7ccb9589bdc750
 
 Author: Murali Karicheri <m-karicheri2@ti.com>
 Date:   Tue Jan 29 12:14:57 2013 -0500
