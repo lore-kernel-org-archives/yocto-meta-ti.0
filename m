@@ -1,31 +1,15 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2EF62E01400
-	for <meta-ti@yoctoproject.org>; Tue, 29 Jan 2013 02:19:27 -0800 (PST)
-Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.115.5.73]:55112 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1U08Hm-0008AN-DZ
-	for meta-ti@yoctoproject.org; Tue, 29 Jan 2013 05:19:26 -0500
-Date: Tue, 29 Jan 2013 05:19:22 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: meta-ti mailing list <meta-ti@yoctoproject.org>
-Message-ID: <alpine.DEB.2.02.1301290514420.13116@oneiric>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: removing vestiges of references to FILESPATHPKG
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A2C27E0072F
+	for <meta-ti@yoctoproject.org>; Tue, 29 Jan 2013 11:43:10 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id DB34752A57; Tue, 29 Jan 2013 19:43:09 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130129194309.DB34752A57@arago-project.org>
+Date: Tue, 29 Jan 2013 19:43:09 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Murali Karicheri : keystone: update defconfig with latest for mcsdk alpha7
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +22,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jan 2013 10:19:27 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 29 Jan 2013 19:43:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
+Module: meta-ti
+Branch: denzil
+Commit: 2ef919df5cfb48755456251836d80083abc7dce7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2ef919df5cfb48755456251836d80083abc7dce7
 
-  another pedantic observation -- according to
-http://www.openembedded.org/wiki/Migrating_metadata_to_OE-Core:
+Author: Murali Karicheri <m-karicheri2@ti.com>
+Date:   Tue Jan 29 12:15:25 2013 -0500
 
-"Use FILESEXTRAPATHS to extend file search path: Modifications to
-FILESPATHPKG and/or FILESPATH should be replaced by prepending to
-FILESEXTRAPATHS;..."
+keystone: update defconfig with latest for mcsdk alpha7
 
-$ grep -r FILESPATHPKG *
-recipes-bsp/x-load/x-load_git.bb:#FILESPATHPKG_prepend = "x-load-git:x-load-git/${MACHINE}"
-recipes-bsp/u-boot/u-boot_2010.06-psp.bb:FILESPATHPKG =. "u-boot-psp-git:"
-recipes-bsp/u-boot/u-boot_git.bb:FILESPATHPKG =. "u-boot-git:"
-recipes-kernel/linux/linux-omap_2.6.37.bb:FILESPATHPKG_prepend = "linux-omap-2.6.37:"
-recipes-kernel/linux/linux-omap_2.6.39.bb:FILESPATHPKG_prepend = "linux-omap-2.6.39:"
-$
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-  in any event, some of those references don't even look right -- for
-example, there is no directory "u-boot-git" so it's not clear what
-effect that middle line even has these days.
+---
 
-rday
+ .../linux/linux-keystone-3.6.6/defconfig           | 2038 --------------------
+ 1 files changed, 0 insertions(+), 2038 deletions(-)
 
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=2ef919df5cfb48755456251836d80083abc7dce7
 
