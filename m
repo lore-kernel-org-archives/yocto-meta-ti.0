@@ -1,15 +1,31 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 899F2E0072F
-	for <meta-ti@yoctoproject.org>; Mon, 28 Jan 2013 15:51:32 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 4C11152AB3; Mon, 28 Jan 2013 23:51:32 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130128235132.4C11152AB3@arago-project.org>
-Date: Mon, 28 Jan 2013 23:51:32 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Murali Karicheri : keystone: boot-monitor: add initial recipe
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0776AE01400
+	for <meta-ti@yoctoproject.org>; Tue, 29 Jan 2013 02:05:27 -0800 (PST)
+Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.115.5.73]:54945 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1U084F-0007qw-5R
+	for meta-ti@yoctoproject.org; Tue, 29 Jan 2013 05:05:27 -0500
+Date: Tue, 29 Jan 2013 05:05:23 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: meta-ti mailing list <meta-ti@yoctoproject.org>
+Message-ID: <alpine.DEB.2.02.1301290502200.12960@oneiric>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: is there a newer u-boot for omapl138?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,76 +38,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jan 2013 23:51:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 29 Jan 2013 10:05:28 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Module: meta-ti
-Branch: master
-Commit: 1920403ef28a61aabceee22f4472bb98ffe48f5d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1920403ef28a61aabceee22f4472bb98ffe48f5d
 
-Author: Murali Karicheri <m-karicheri2@ti.com>
-Date:   Fri Jan 18 18:15:21 2013 -0500
+  just got me a pdlogic zoom am1808 experimenter kit:
 
-keystone: boot-monitor: add initial recipe
+http://www.logicpd.com/products/system-on-modules/zoom-am1808/
 
-This adds recipe to build boot monitor image. Boot monitor is
-a standalone image that is loaded and executed from u-boot to
-replace the RBL provided monitor code in ARM with Linux boot
-specific code.
+and building for am108x-evm, i notice the version of u-boot that's
+pulled in is really pretty ancient:
 
-Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+SRC_URI_omapl138 = "git://arago-project.org/git/projects/u-boot-omapl1.git;protocol=http"
+SRCREV_pn-${PN}_omapl138  = "5f16b8551b125f16cd8d58f278cb25b94272fd9f"
+PV_omapl138      = "2009.11+${PR}+gitr${SRCREV}"
 
----
+  is there any obstacle in trying to update the version of u-boot for
+that particular board?
 
- recipes-bsp/boot-monitor/boot-monitor_git.bb |   39 ++++++++++++++++++++++++++
- 1 files changed, 39 insertions(+), 0 deletions(-)
+rday
 
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-new file mode 100644
-index 0000000..dc4d71e
---- /dev/null
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -0,0 +1,39 @@
-+DESCRIPTION = "Boot Monitor - TI ARM Boot monitor code"
-+EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX}"
-+
-+LICENSE = "BSD"
-+
-+BOOT_MONITOR_BINARY ?= "skern.bin"
-+BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
-+BOOT_MONITOR_MAKE_TARGET  ?= "all"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b676661788f8c0f8cdeafd2a39467cae"
-+
-+COMPATIBLE_MACHINE = "keystone-evm"
-+
-+SRC_URI = "git://gtgit01.gt.design.ti.com/git/projects/boot-monitor.git;protocol=git;branch=${BRANCH}"
-+
-+PV = "1.0"
-+PR = "r0+gitr${SRCPV}"
-+
-+BRANCH = "master"
-+
-+S = "${WORKDIR}/git"
-+
-+SRCREV = "b8014b69e8c7e981e8bc3e067a9d990e2bb603ba"
-+
-+do_compile () {
-+	unset LDFLAGS
-+	unset CFLAGS
-+	unset CPPFLAGS
-+	oe_runmake ${BOOT_MONITOR_MAKE_TARGET}
-+}
-+
-+inherit deploy
-+
-+addtask deploy before do_build after do_compile
-+
-+do_deploy () {
-+	install -d ${DEPLOYDIR}
-+	install ${S}/${BOOT_MONITOR_BINARY} ${DEPLOYDIR}/${BOOT_MONITOR_IMAGE}
-+}
+-- 
 
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
