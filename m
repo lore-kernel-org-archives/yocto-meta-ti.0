@@ -1,19 +1,19 @@
 Return-Path: <rpjday@crashcourse.ca>
 Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
 	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5C7DE00721
-	for <meta-ti@yoctoproject.org>; Wed, 30 Jan 2013 15:21:19 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5154E011AB
+	for <meta-ti@yoctoproject.org>; Thu, 31 Jan 2013 03:58:41 -0800 (PST)
 Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.115.5.73]:55230 helo=crashcourse.ca)
+	([174.115.5.73]:58026 helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
 	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1U0gxy-0008R6-Jq
-	for meta-ti@yoctoproject.org; Wed, 30 Jan 2013 18:21:18 -0500
-Date: Wed, 30 Jan 2013 18:21:15 -0500 (EST)
+	id 1U0smv-00005Z-8r
+	for meta-ti@yoctoproject.org; Thu, 31 Jan 2013 06:58:41 -0500
+Date: Thu, 31 Jan 2013 06:58:37 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@oneiric
 To: meta-ti mailing list <meta-ti@yoctoproject.org>
-Message-ID: <alpine.DEB.2.02.1301301812590.3879@oneiric>
+Message-ID: <alpine.DEB.2.02.1301310653100.25130@oneiric>
 User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -25,7 +25,7 @@ X-AntiAbuse: Sender Address Domain - crashcourse.ca
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Subject: couple issues trying to build ti-hw-bringup-image.bb for AM1808 exp kit
+Subject: objections to replacing git SRCREV tag names with actual hash IDs?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,74 +38,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jan 2013 23:21:20 -0000
+X-List-Received-Date: Thu, 31 Jan 2013 11:58:42 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-  i want to build a stock ti-hw-bringup-image.bb for am180x-evm, so if
-anyone else has done that, here are the two issues i've run into.
-first, i dropped the connman packages from the meta-angstrom layer:
+  surely, some of you saw this discussion on the oe-core list last
+night, but would there be any objection to replacing the small number
+of git SRCREV settings of tag names with their actual hash IDs?  the
+motivation should be obvious -- avoid network traffic to parse those
+tag names, even when that recipe isn't even being used in the image
+being built.
 
-diff --git a/recipes-images/angstrom/systemd-image.bb b/recipes-images/angstrom/systemd-image.bb
-index c3232d9..b1cc338 100644
---- a/recipes-images/angstrom/systemd-image.bb
-+++ b/recipes-images/angstrom/systemd-image.bb
-@@ -14,7 +14,6 @@ CONMANPKGS_libc-uclibc = ""
- IMAGE_INSTALL += " \
-        angstrom-packagegroup-boot \
-        packagegroup-basic \
--       ${CONMANPKGS} \
-        ${ROOTFS_PKGMANAGE_PKGS} \
-        timestamp-service \
- "
+  here's the entire list of SRCREV assignments in all of meta-ti, so
+you can see there are only four related to git tag names:
 
-as that was causing a failure due to a missing "ofono.service" file,
-which i didn't really care about so it was just easier to delete that
-line to get the build to finish.
+recipes-bsp/boot-monitor/boot-monitor_git.bb:SRCREV = "DEV.MCSDK-03.00.00.07"
+recipes-bsp/u-boot/u-boot_2011.09.bb:SRCREV = "fdbe8b9a2d1858ba35dd6214315563ad44d4a0e3"
+recipes-bsp/u-boot/u-boot_2011.10rc.bb:SRCREV = "dc52533ccff00a12761f793d66b39e4f6a4a3bba"
+recipes-bsp/u-boot/u-boot_2011.09-psp04.06.00.08.bb:SRCREV = "1e4626f0d5f3bb04ec974e76a5d9029875269d31"
+recipes-bsp/u-boot/u-boot_2011.06.bb:SRCREV = "b1af6f532e0d348b153d5c148369229d24af361a"
+recipes-bsp/u-boot/u-boot_2011.12.bb:SRCREV = "cba9a894fdb1cb49b60fcd1d1d6919cbd7995dd5"
+recipes-bsp/u-boot/u-boot_2013.01.bb:SRCREV = "DEV.MCSDK-03.00.00.07"
+recipes-bsp/ti/am33x-cm3_git.bb:SRCREV = "cf07b841d6e8c5e026eecb259d143f3dff412c8e"
+recipes-bsp/ti/am-sysinfo_svn.bb:SRCREV = "5"
+recipes-connectivity/uim/uim_git.bb:SRCREV = "c73894456df5def97111cb33d2106b684b8b7959"
+recipes-graphics/omapfbplay/omapfbplay.inc:SRCREV = "34293052c5a2ae328eac6903512e6b4ce19b5639"
+recipes-kernel/linux/linux-omap_2.6.37.bb:SRCREV = "fa3b4e23ec20cfc944db7cc2b30b0d82c20e4472"
+recipes-kernel/linux/linux-ti33x-psp_3.1.bb:SRCREV = "1d84d8853fa30cf3db2571a5aec572accca4e29d"
+recipes-kernel/linux/linux-ti81xx-psp_2.6.37.bb:SRCREV = "745a06cb913ad7a9ab44855aa36d8c012cd5793b"
+recipes-kernel/linux/linux-am335x_3.2.0-psp04.06.00.08.bb:SRCREV = "d7e124e8074cccf9958290e773c88a4b2b36412b"
+recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb:SRCREV = "v2.6.37_DAVINCIPSP_03.21.00.04"
+recipes-kernel/linux/linux-keystone_3.6.6.bb:SRCREV = "DEV.MCSDK-03.06.06.07"
+recipes-kernel/linux/linux-omap4_3.4.bb:SRCREV = "c34a43ec74168b892a948b45695486f1a3d700af"
+recipes-kernel/linux/linux-omap-psp_2.6.32.bb:SRCREV = "5fc29e7b2a76a64a739f857858ef0b98294aa155"
+recipes-kernel/linux/linux-ti33x-psp_3.2.bb:SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
+recipes-kernel/linux/linux-omap4_3.1.0.bb:SRCREV = "a5c60c099296fcfc0c8fa8085c40883971486512"
+recipes-misc/payload/beaglebone-getting-started.bb:SRCREV = "6c548a307c948b28a99d48fd17d9790b56182196"
+recipes-ti/beagleboard/beaglebone-tester.bb:SRCREV = "487a13e2e4faaafa40ba5430600e6aeecf9581a8"
+recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb:SRCREV = "962"
+recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb:SRCREV = "8393c892b09e0ac42b19ff1531e232478c3b1a6c"
 
-  at that point, i was so close, and then this when trying to build
-the rootfs:
+  i'm currently spending some time at a site that doesn't allow git
+access so those tag names are fatal for doing any sort of OE building.
+and only one of those appears to *prefer* to use the tag name --
 
-... snip ...
-| Configuring packagegroup-ti-test.
-| Configuring alsa-utils-aseqnet.
-| Configuring alsa-utils-aseqdump.
-| Configuring alsa-utils.
-| Collected errors:
-|  * satisfy_dependencies_for: Cannot satisfy the following dependencies for angstrom-packagegroup-boot:
-|  * 	systemd *
-|  * opkg_install_cmd: Cannot install package angstrom-packagegroup-boot.
-|  * satisfy_dependencies_for: Cannot satisfy the following dependencies for packagegroup-basic:
-|  * 	systemd * 	systemd * 	systemd *
-|  * opkg_install_cmd: Cannot install package packagegroup-basic.
-|  * satisfy_dependencies_for: Cannot satisfy the following dependencies for timestamp-service:
-|  * 	systemd *
-|  * opkg_install_cmd: Cannot install package timestamp-service.
-| ERROR: Function failed: do_rootfs (see /home/rpjday/oe/builds/ti/arago/tmp-eglibc/work/am180x_evm-oe-linux-gnueabi/ti-hw-bringup-image/1.0-r0/temp/log.do_rootfs.2444 for further information)
-ERROR: Task 7 (/home/rpjday/oe/dist/layers/meta-ti/recipes-misc/images/ti-hw-bringup-image.bb, do_rootfs) failed with exit code '1'
-NOTE: Tasks Summary: Attempted 2679 tasks of which 2678 didn't need to be rerun and 1 failed.
-No currently running tasks (2678 of 2680)
+recipes-kernel/linux/linux-keystone_3.6.6.bb:
 
-Summary: 1 task failed:
-  /home/rpjday/oe/dist/layers/meta-ti/recipes-misc/images/ti-hw-bringup-image.bb, do_rootfs
-Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-$
+# The tree tends to rebase, use literal stable tags
+SRCREV = "DEV.MCSDK-03.06.06.07"
 
-  has anyone actually built that HW bringup image?  and can explain
-how to get around what happened above?  thanks.
+  but, really, you shouldn't be rebasing published commits, anyway.
+so ... thoughts?
 
 rday
-
-p.s.  here's the relevant part of my bblayers.conf file:
-
-BBLAYERS ?= " \
-  /home/rpjday/oe/dist/layers/oe-core/meta \
-  /home/rpjday/oe/dist/layers/meta-ti \
-  /home/rpjday/oe/dist/layers/meta-angstrom \
-  /home/rpjday/oe/dist/layers/meta-openembedded/meta-systemd \
-  /home/rpjday/oe/dist/layers/meta-openembedded/meta-oe \
-  "
-
 
 -- 
 
