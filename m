@@ -1,19 +1,19 @@
 Return-Path: <rpjday@crashcourse.ca>
 Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
 	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5154E011AB
-	for <meta-ti@yoctoproject.org>; Thu, 31 Jan 2013 03:58:41 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9691BE0045D
+	for <meta-ti@yoctoproject.org>; Thu, 31 Jan 2013 15:42:32 -0800 (PST)
 Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.115.5.73]:58026 helo=crashcourse.ca)
+	([174.115.5.73]:41931 helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
 	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1U0smv-00005Z-8r
-	for meta-ti@yoctoproject.org; Thu, 31 Jan 2013 06:58:41 -0500
-Date: Thu, 31 Jan 2013 06:58:37 -0500 (EST)
+	id 1U13m3-0003Kn-B9
+	for meta-ti@yoctoproject.org; Thu, 31 Jan 2013 18:42:31 -0500
+Date: Thu, 31 Jan 2013 18:42:28 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@oneiric
 To: meta-ti mailing list <meta-ti@yoctoproject.org>
-Message-ID: <alpine.DEB.2.02.1301310653100.25130@oneiric>
+Message-ID: <alpine.DEB.2.02.1301311735390.5243@oneiric>
 User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -25,7 +25,7 @@ X-AntiAbuse: Sender Address Domain - crashcourse.ca
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Subject: objections to replacing git SRCREV tag names with actual hash IDs?
+Subject: i *really* want a bootable OE image for my pdlogic am1808 experimenter kit
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,57 +38,119 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jan 2013 11:58:42 -0000
+X-List-Received-Date: Thu, 31 Jan 2013 23:42:32 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-  surely, some of you saw this discussion on the oe-core list last
-night, but would there be any objection to replacing the small number
-of git SRCREV settings of tag names with their actual hash IDs?  the
-motivation should be obvious -- avoid network traffic to parse those
-tag names, even when that recipe isn't even being used in the image
-being built.
+  as i've mentioned recently, i've just come into possession of one of
+these:
 
-  here's the entire list of SRCREV assignments in all of meta-ti, so
-you can see there are only four related to git tag names:
+  http://www.logicpd.com/products/system-on-modules/zoom-am1808/
 
-recipes-bsp/boot-monitor/boot-monitor_git.bb:SRCREV = "DEV.MCSDK-03.00.00.07"
-recipes-bsp/u-boot/u-boot_2011.09.bb:SRCREV = "fdbe8b9a2d1858ba35dd6214315563ad44d4a0e3"
-recipes-bsp/u-boot/u-boot_2011.10rc.bb:SRCREV = "dc52533ccff00a12761f793d66b39e4f6a4a3bba"
-recipes-bsp/u-boot/u-boot_2011.09-psp04.06.00.08.bb:SRCREV = "1e4626f0d5f3bb04ec974e76a5d9029875269d31"
-recipes-bsp/u-boot/u-boot_2011.06.bb:SRCREV = "b1af6f532e0d348b153d5c148369229d24af361a"
-recipes-bsp/u-boot/u-boot_2011.12.bb:SRCREV = "cba9a894fdb1cb49b60fcd1d1d6919cbd7995dd5"
-recipes-bsp/u-boot/u-boot_2013.01.bb:SRCREV = "DEV.MCSDK-03.00.00.07"
-recipes-bsp/ti/am33x-cm3_git.bb:SRCREV = "cf07b841d6e8c5e026eecb259d143f3dff412c8e"
-recipes-bsp/ti/am-sysinfo_svn.bb:SRCREV = "5"
-recipes-connectivity/uim/uim_git.bb:SRCREV = "c73894456df5def97111cb33d2106b684b8b7959"
-recipes-graphics/omapfbplay/omapfbplay.inc:SRCREV = "34293052c5a2ae328eac6903512e6b4ce19b5639"
-recipes-kernel/linux/linux-omap_2.6.37.bb:SRCREV = "fa3b4e23ec20cfc944db7cc2b30b0d82c20e4472"
-recipes-kernel/linux/linux-ti33x-psp_3.1.bb:SRCREV = "1d84d8853fa30cf3db2571a5aec572accca4e29d"
-recipes-kernel/linux/linux-ti81xx-psp_2.6.37.bb:SRCREV = "745a06cb913ad7a9ab44855aa36d8c012cd5793b"
-recipes-kernel/linux/linux-am335x_3.2.0-psp04.06.00.08.bb:SRCREV = "d7e124e8074cccf9958290e773c88a4b2b36412b"
-recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb:SRCREV = "v2.6.37_DAVINCIPSP_03.21.00.04"
-recipes-kernel/linux/linux-keystone_3.6.6.bb:SRCREV = "DEV.MCSDK-03.06.06.07"
-recipes-kernel/linux/linux-omap4_3.4.bb:SRCREV = "c34a43ec74168b892a948b45695486f1a3d700af"
-recipes-kernel/linux/linux-omap-psp_2.6.32.bb:SRCREV = "5fc29e7b2a76a64a739f857858ef0b98294aa155"
-recipes-kernel/linux/linux-ti33x-psp_3.2.bb:SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
-recipes-kernel/linux/linux-omap4_3.1.0.bb:SRCREV = "a5c60c099296fcfc0c8fa8085c40883971486512"
-recipes-misc/payload/beaglebone-getting-started.bb:SRCREV = "6c548a307c948b28a99d48fd17d9790b56182196"
-recipes-ti/beagleboard/beaglebone-tester.bb:SRCREV = "487a13e2e4faaafa40ba5430600e6aeecf9581a8"
-recipes-ti/gstreamer-ti/gstreamer-ti_svn.bb:SRCREV = "962"
-recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb:SRCREV = "8393c892b09e0ac42b19ff1531e232478c3b1a6c"
+and i very badly would like to use OE + meta-ti to build a *very*
+simple bootable image -- no graphics, no clutter, just a simple system
+that i can populate with some HW/flash tools.
 
-  i'm currently spending some time at a site that doesn't allow git
-access so those tag names are fatal for doing any sort of OE building.
-and only one of those appears to *prefer* to use the tag name --
+  so the short question is: is there a verified recipe for building
+such a thing for precisely that board?  because i haven't been having
+a lot of luck.
 
-recipes-kernel/linux/linux-keystone_3.6.6.bb:
+  assuming the machine choice for that board is the am180x-evm, i
+first tried building the ti-hw-bringup-image, but that's broken for a
+couple systemd-related reasons so i finally gave up on it.
 
-# The tree tends to rebase, use literal stable tags
-SRCREV = "DEV.MCSDK-03.06.06.07"
+  i *did* get a successful build for OE's core-image-minimal, but it
+won't boot fully so i'm kind of stuck there, and here's where i'm
+stuck.  the SD card that comes with the kit boots nicely, and here's
+the tail end of the boot to establish a baseline to show what works:
 
-  but, really, you shouldn't be rebasing published commits, anyway.
-so ... thoughts?
+===== boot output =====
+... snip ...
+VFS: Mounted root (ext3 filesystem) on device 179:2.
+Freeing init memory: 148K
+INIT: version 2.86 booting
+Please wait: booting...
+Starting udev
+udev: starting version 141
+Remounting root file system...
+Caching udev devnodes
+Populating dev cachekjournald starting.  Commit interval 5 seconds
+EXT3-fs (mmcblk0p3): using internal journal
+EXT3-fs (mmcblk0p3): recovery complete
+EXT3-fs (mmcblk0p3): mounted filesystem with writeback data mode
+mv: cannot rename '/tmp/devices': No such file or directory
+NET: Registered protocol family 10
+logger: mount: mount point /proc/bus/usb does not exist
+ALSA: Restoring mixer settings...
+/usr/sbin/alsactl: load_state:1625: No soundcards found...
+Configuring network interfaces... eth0: attached PHY driver [SMSC
+LAN8710/LAN8720] (mii_bus:phy_addr=1:00, id=7c0f1)
+ADDRCONF(NETDEV_UP): eth0: link is not ready
+udhcpc (v1.13.2) started
+Sending discover...
+Sending discover...
+Sending discover...
+No lease, forking to background
+done.
+Setting up IP spoofing protection: rp_filter.
+Fri Apr 15 04:54:00 UTC 2011
+INIT: Entering runlevel: 5
+Starting system message bus: dbus.
+Starting Dropbear SSH server: dropbear.
+Starting telnet daemon.
+Starting syslogd/klogd: done
+Starting thttpd.
+Starting Matrix GUI application.
+
+ _____                    _____           _         _
+|  _  |___ ___ ___ ___   |  _  |___ ___  |_|___ ___| |_
+|     |  _| .'| . | . |  |   __|  _| . | | | -_|  _|  _|
+|__|__|_| |__,|_  |___|  |__|  |_| |___|_| |___|___|_|
+              |___|                    |___|
+
+Arago Project http://arago-project.org am180x-evm ttyS2
+
+Arago 2011.02 am180x-evm ttyS2
+
+am180x-evm login:
+
+===== end of boot output =====
+
+  so, clearly, it can be done.  and here's what happens when i replace
+the uImage and root filesystem on that SD card with what came from the
+core-image-minimal build:
+
+===== start =====
+... snip ...
+INIT: version 2.88 booting
+Starting udev
+Starting Bootlog daemon: bootlogd.
+Configuring network interfaces... davinci_mdio davinci_mdio.0:
+resetting idled conr
+net eth0: attached PHY driver [SMSC LAN8710/LAN8720]
+(mii_bus:phy_addr=0:00, id=7c)
+udhcpc (v1.20.2) started
+Sending discover...
+Sending discover...
+Sending discover...
+No lease, failing
+hwclock: can't open '/dev/misc/rtc': No such file or directory
+Thu Jan 31 16:02:00 UTC 2013
+hwclock: can't open '/dev/misc/rtc': No such file or directory
+
+   (hangs)
+
+  so the kernel boots, mounts the root filesystem, makes it partway in
+and hangs right after that attempted access of the real-time clock.
+
+  i had a few minutes to look further and the device_table file in the
+root filesystem refers to /dev/rtc, not to /dev/misc/rtc but i don't
+know enough to know if that would be enough to cause the boot to hang,
+or if it's something happening right after that.
+
+  in short, i would dearly love a recipe that would give me a bootable
+kernel and rootfs for this board.  should i be selecting a different
+output image?  thoughts?
 
 rday
 
