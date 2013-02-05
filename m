@@ -1,21 +1,21 @@
 Return-Path: <rpjday@crashcourse.ca>
 Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
 	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D97F9E0146C
-	for <meta-ti@yoctoproject.org>; Tue,  5 Feb 2013 01:27:37 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D1289E0146C
+	for <meta-ti@yoctoproject.org>; Tue,  5 Feb 2013 01:32:21 -0800 (PST)
 Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.115.5.73]:46452 helo=crashcourse.ca)
+	([174.115.5.73]:46454 helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
 	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1U2eoR-0008GQ-RK; Tue, 05 Feb 2013 04:27:36 -0500
-Date: Tue, 5 Feb 2013 04:27:31 -0500 (EST)
+	id 1U2et2-0008Qg-TK; Tue, 05 Feb 2013 04:32:21 -0500
+Date: Tue, 5 Feb 2013 04:32:19 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@oneiric
 To: Denys Dmytriyenko <denys@ti.com>
-In-Reply-To: <20130205050559.GC27526@denix.org>
-Message-ID: <alpine.DEB.2.02.1302050426070.6010@oneiric>
-References: <alpine.DEB.2.02.1301310653100.25130@oneiric>
-	<20130205050559.GC27526@denix.org>
+In-Reply-To: <20130205051649.GD27526@denix.org>
+Message-ID: <alpine.DEB.2.02.1302050428130.6010@oneiric>
+References: <alpine.DEB.2.02.1301301812590.3879@oneiric>
+	<20130205051649.GD27526@denix.org>
 User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -28,7 +28,7 @@ X-Source:
 X-Source-Args: 
 X-Source-Dir: 
 Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: objections to replacing git SRCREV tag names with actual hash IDs?
+Subject: Re: couple issues trying to build ti-hw-bringup-image.bb for AM1808 exp kit
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,29 +41,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2013 09:27:38 -0000
+X-List-Received-Date: Tue, 05 Feb 2013 09:32:21 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 On Tue, 5 Feb 2013, Denys Dmytriyenko wrote:
 
-> On Thu, Jan 31, 2013 at 06:58:37AM -0500, Robert P. J. Day wrote:
-> >
-> >   surely, some of you saw this discussion on the oe-core list last
-> > night, but would there be any objection to replacing the small
-> > number of git SRCREV settings of tag names with their actual hash
-> > IDs?  the motivation should be obvious -- avoid network traffic to
-> > parse those tag names, even when that recipe isn't even being used
-> > in the image being built.
+> Can the below patch help:
 >
-> Yes, I've had occasional issues with "git ls-remote" during parse
-> time on resolving those tags into commit IDs and was planning on
-> eventually replacing them.
+> https://lists.yoctoproject.org/pipermail/meta-ti/2012-September/001541.html
+>
+> Otherwise, entire recipes-misc folder of meta-ti is currently not
+> supported and may be removed in the _near_ future. Although,
+> ti-hw-bringup maybe preserved, but modified.
 
-  ... snip ...
+... snip ...
 
-  thanks, i realize that, in the grand scheme of things, this isn't a
-high priority but it definitely has an annoyance factor :-).  so i'll
-leave this with folks higher up the food chain than me.
+  i really like the idea of a bringup-related image that's stripped of
+everything but essential low-level tools, so i hope something like
+that sticks around.  i'll check if your patch solves this and let you
+know, thanks.
 
 rday
 
