@@ -1,25 +1,34 @@
-Return-Path: <denis@denix.org>
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5C17DE00736
-	for <meta-ti@yoctoproject.org>; Mon,  4 Feb 2013 21:21:15 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.12])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MHQ00HCHEVEF9O2@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 04 Feb 2013 23:21:15 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 04DEF20031; Tue,
-	05 Feb 2013 00:21:13 -0500 (EST)
-Date: Tue, 05 Feb 2013 00:21:13 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-Message-id: <20130205052113.GE27526@denix.org>
-References: <alpine.DEB.2.02.1301281719080.9332@oneiric>
-MIME-version: 1.0
-In-reply-to: <alpine.DEB.2.02.1301281719080.9332@oneiric>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D97F9E0146C
+	for <meta-ti@yoctoproject.org>; Tue,  5 Feb 2013 01:27:37 -0800 (PST)
+Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.115.5.73]:46452 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1U2eoR-0008GQ-RK; Tue, 05 Feb 2013 04:27:36 -0500
+Date: Tue, 5 Feb 2013 04:27:31 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: Denys Dmytriyenko <denys@ti.com>
+In-Reply-To: <20130205050559.GC27526@denix.org>
+Message-ID: <alpine.DEB.2.02.1302050426070.6010@oneiric>
+References: <alpine.DEB.2.02.1301310653100.25130@oneiric>
+	<20130205050559.GC27526@denix.org>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: any need to keep specifying u-boot as preferred bootloader?
+Subject: Re: objections to replacing git SRCREV tag names with actual hash IDs?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,31 +41,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2013 05:21:15 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 05 Feb 2013 09:27:38 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Mon, Jan 28, 2013 at 05:20:50PM -0500, Robert P. J. Day wrote:
-> 
-> $ grep -r "PREFERRED.*bootloader" *
-> conf/machine/am37x-evm.conf:PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-> conf/machine/am180x-evm.conf:PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-> conf/machine/am3517-evm.conf:PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-> conf/machine/omap3evm.conf:PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-> conf/machine/include/ti814x.inc:PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-> conf/machine/include/davinci.inc:PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-> conf/machine/include/omap4.inc:PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-> conf/machine/include/ti816x.inc:PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-> conf/machine/am335x-evm.conf:PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-> $
-> 
->   while it doesn't hurt, of course, any overwhelming need to repeat
-> the same thing?
+On Tue, 5 Feb 2013, Denys Dmytriyenko wrote:
 
-Well, there's no common machine file or include to set it once for all the 
-machines in meta-ti. Plus, there is a possibility some machine can have a 
-different provider for u-boot, as it's quite common for virtual/kernel...
+> On Thu, Jan 31, 2013 at 06:58:37AM -0500, Robert P. J. Day wrote:
+> >
+> >   surely, some of you saw this discussion on the oe-core list last
+> > night, but would there be any objection to replacing the small
+> > number of git SRCREV settings of tag names with their actual hash
+> > IDs?  the motivation should be obvious -- avoid network traffic to
+> > parse those tag names, even when that recipe isn't even being used
+> > in the image being built.
+>
+> Yes, I've had occasional issues with "git ls-remote" during parse
+> time on resolving those tags into commit IDs and was planning on
+> eventually replacing them.
+
+  ... snip ...
+
+  thanks, i realize that, in the grand scheme of things, this isn't a
+high priority but it definitely has an annoyance factor :-).  so i'll
+leave this with folks higher up the food chain than me.
+
+rday
 
 -- 
-Denys
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
