@@ -1,34 +1,25 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 053C3E0034C
-	for <meta-ti@yoctoproject.org>; Mon,  4 Feb 2013 17:12:15 -0800 (PST)
-Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.115.5.73]:45744 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1U2X53-0000Sj-Oy; Mon, 04 Feb 2013 20:12:14 -0500
-Date: Mon, 4 Feb 2013 20:12:05 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: "Cooper Jr., Franklin" <fcooper@ti.com>
-In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C385D25@DFLE09.ent.ti.com>
-Message-ID: <alpine.DEB.2.02.1302042010430.4687@oneiric>
+Return-Path: <denis@denix.org>
+Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
+	[206.46.173.7])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3A96CE0146A
+	for <meta-ti@yoctoproject.org>; Mon,  4 Feb 2013 20:01:11 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.191.205.12])
+	by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MHQ00AFMB4S1RT0@vms173007.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 04 Feb 2013 22:00:44 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id CD39E201B5; Mon,
+	04 Feb 2013 23:00:28 -0500 (EST)
+Date: Mon, 04 Feb 2013 23:00:28 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Robert P. J. Day" <rpjday@crashcourse.ca>
+Message-id: <20130205040028.GA27526@denix.org>
 References: <alpine.DEB.2.02.1301311735390.5243@oneiric>
 	<CABxcv=k1fECXBLowDJ1_5zjEJCnw5t9BOTH_-6e-_MLBS3xf1Q@mail.gmail.com>
 	<alpine.DEB.2.02.1302011749020.4566@oneiric>
-	<8F29D6B095ED194EA1980491A5E029710C385D25@DFLE09.ent.ti.com>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+MIME-version: 1.0
+In-reply-to: <alpine.DEB.2.02.1302011749020.4566@oneiric>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
 Subject: Re: i *really* want a bootable OE image for my pdlogic am1808 experimenter kit
 X-BeenThere: meta-ti@yoctoproject.org
@@ -43,46 +34,77 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Feb 2013 01:12:16 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 05 Feb 2013 04:01:13 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Tue, 5 Feb 2013, Cooper Jr., Franklin wrote:
+On Fri, Feb 01, 2013 at 06:51:59PM -0500, Robert P. J. Day wrote:
+> On Fri, 1 Feb 2013, Javier Martinez Canillas wrote:
+> 
+> > > hwclock: can't open '/dev/misc/rtc': No such file or directory
+> > > Thu Jan 31 16:02:00 UTC 2013
+> > > hwclock: can't open '/dev/misc/rtc': No such file or directory
+> > >
+> > >    (hangs)
+> > >
+> >
+> > Hi Robert,
+> >
+> > I don't have your board but I've seen a similar issue before caused
+> > by using a recent udev and not having enabled CONFIG_DEVTMPFS=y on
+> > your kernel config.
+> >
+> > The problem is that since udev-182, udev no longer creates device
+> > nodes under /dev and this has to be managed by the kernel devtmpfs
+> > filesystem.
+> >
+> > This means that a kernel built without devtmpfs config will not
+> > boot since there won't be any device files on /dev.
+> 
+>   that sounds vaguely familiar, i remember reading that once upon a
+> time.  which brings me back to my plaintive lament -- is there a
+> recipe i can use to build a bootable system for this board?
+> 
+>   the SD card that came with it has "arago" splashed all over it so
+> i'm going to check out the meta-arago layer(s) to see what i get.  but
+> i would *dearly* love to figure out what it takes to build a working
+> system for this in the next day or two.
 
-> Robert,
+Robert,
 
-> I am currently working on porting am180x to the latest Sitara Linux
-> SDK
-> (http://processors.wiki.ti.com/index.php/Sitara_Linux_Software_Developer%E2%80%99s_Guide).
-> Our Sitara SDK is based on the Arago distribution
-> (http://arago-project.org/git/?p=meta-arago.git;a=summary)
->
-> Meta-Arago has the following restrictions:
-> 1. We use a prebuilt toolchain for our oe-core builds (http://software-dl.ti.com/sdoemb/sdoemb_public_sw/arago_toolchain/2011_09/index_FDS.html). You probably can use the tool chain built with oe-core but you have to make a tweak to use the "internal" built tool chain instead of the expected "external" tool chain.
-> 2. Meta-Arago master is based on the latest meta-oe, meta-ti, oe-core maintenance branch. This means you will need to use meta-oe, meta-ti and oe-core danny/denzil branches for things to work without a problem. We just started work on transitioning to danny from denzil.
-> 3. My work for am18 hasn't been pushed to meta-arago or meta-ti yet. But you can see my hacks in the Sitara SDK integration branches.
->
-> http://arago-project.org/git/projects/?p=meta-arago-amsdk.git;a=summary Branch: amsdk-05.07.00.00-integration
-> http://arago-project.org/git/projects/?p=meta-ti-amsdk.git;a=summary Branch: amsdk-05.07.00.00-integration
->
-> If you build tisdk-rootfs-image (full SDK root filesystem) or
-> arago-base-image (minimal root filesystem) you should get what you
-> need to get the board booted up.
->
-> If you have issues we do have a script that configures everything
-> you need to get up and running and building with our Arago
-> distribution in no time.
+Sorry for not replying earlier - I was quite busy last week finishing up my 
+work before I went on travel this week...
 
-  cool, i'll give this a shot in the next day or two, i appreciate it.
+As of the SD card that you received with the board - it was the old Arago 
+(AMSDK) release, based on the Classic OpenEmbedded 2011.03-maintenance 
+branch. And it used udev-141.
 
-rday
+What you didn't mention in your emails, is which branch of meta-ti you are 
+trying to use. Same for oe-core. So, if it's anything latest, like "master" 
+branch, then you are probably trying to use udev-182. And as Javier above 
+said, you would need to enable DEVTMPFS config option in the defconfig.
+
+For our TI SDK products we usually stay with the stable branch and so it was 
+"denzil" for a while and just last week I pushed all the required changes to 
+finally switch to "danny". In either of those cases we are using udev-164. 
+Hence, DEVTMPFS is not required to be enabled.
+
+So, if you still want to use the latest master of oe-core and meta-ti, you'd 
+be forced to use a more recent udev-182 and hence would need to make a simple 
+change in the am180x defconfig to enable DEVTMPFS config option. I'll gladly 
+accept a patch from you, if that proves to be the (only) culprit.
+
+As of the Arago images - you are more than welcome to look into meta-arago and 
+how things are being built there (e.g. tisdk-rootfs-image), but that maybe too 
+specialized for your needs, plus make sure to realize that meta-arago "master" 
+branch now depends on "danny" of oe-core/meta-ti/meta-oe and was depending on 
+even older "denzil" just before the last week. So, you are maybe better off 
+using just the core-image-base or core-image-minimal rootfs images from 
+oe-core, depending on your needs, especially if what you need at first is to 
+bring the board up...
+
+Please let me know if this works for you or you have any other questions.
 
 -- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+Denys
 
