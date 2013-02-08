@@ -1,22 +1,33 @@
-Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 265C8E002AB
-	for <meta-ti@yoctoproject.org>; Thu,  7 Feb 2013 13:47:16 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.12])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MHV00E4WDUBI2M1@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 07 Feb 2013 15:47:00 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 3BB7120173; Thu,
-	07 Feb 2013 16:46:59 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Thu, 07 Feb 2013 16:46:38 -0500
-Message-id: <1360273598-13677-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [PATCH] am335x-evm, omap3*: drop remaining TARGET_ARCH, wrecking sstate
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 3B3CDE0034C
+	for <meta-ti@yoctoproject.org>; Fri,  8 Feb 2013 12:23:44 -0800 (PST)
+Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.115.5.73]:52417 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1U3uU2-0000Eo-RQ
+	for meta-ti@yoctoproject.org; Fri, 08 Feb 2013 15:23:42 -0500
+Date: Fri, 8 Feb 2013 15:23:39 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: meta-ti mailing list <meta-ti@yoctoproject.org>
+Message-ID: <alpine.DEB.2.02.1302081518540.3793@oneiric>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: opinion of ti's am335x starter kit?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,102 +40,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Feb 2013 21:47:17 -0000
+X-List-Received-Date: Fri, 08 Feb 2013 20:23:44 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-From: Denys Dmytriyenko <denys@ti.com>
 
-Bump MACHINE_KERNEL_PR to rebuild the correct sstate.
+  in addition to my beaglebone, i was interested in picking up a more
+complete am335x-based starter kit, and a quick google brought me to
+this:
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- conf/machine/am335x-evm.conf      | 1 -
- conf/machine/include/omap3.inc    | 3 +--
- conf/machine/include/ti33x.inc    | 2 +-
- conf/machine/omap3-touchbook.conf | 3 ---
- conf/machine/omap3evm.conf        | 2 --
- 5 files changed, 2 insertions(+), 9 deletions(-)
+  http://processors.wiki.ti.com/index.php/AM335x_Starter_Kit
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index e86c41b..762f787 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -1,7 +1,6 @@
- #@TYPE: Machine
- #@NAME: AM335x EVM
- #@DESCRIPTION: Machine configuration for the TI AM335x EVM
--TARGET_ARCH = "arm"
- 
- PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
- XSERVER = "xserver-xorg \
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 8ce0ebc..f038b0c 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r122"
-+MACHINE_KERNEL_PR = "r123"
- 
- KERNEL_IMAGETYPE = "uImage"
- 
-@@ -12,4 +12,3 @@ UBOOT_ENTRYPOINT = "0x80008000"
- UBOOT_LOADADDRESS = "0x80008000"
- 
- EXTRA_IMAGEDEPENDS += "u-boot x-load"
--
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index 223f814..713a30a 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
- require conf/machine/include/tune-cortexa8.inc
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r16"
-+MACHINE_KERNEL_PR = "r17"
- 
- KERNEL_IMAGETYPE = "uImage"
- 
-diff --git a/conf/machine/omap3-touchbook.conf b/conf/machine/omap3-touchbook.conf
-index 95d93ac..8439e0a 100644
---- a/conf/machine/omap3-touchbook.conf
-+++ b/conf/machine/omap3-touchbook.conf
-@@ -1,7 +1,6 @@
- #@TYPE: Machine
- #@NAME: Always Innovating touchbook
- #@DESCRIPTION: Machine configuration for the http://www.alwaysinnovating.com/touchbook/
--TARGET_ARCH = "arm"
- 
- PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
- XSERVER = "xserver-xorg \
-@@ -43,7 +42,5 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
- # UBI: sub-page size:              512
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
- 
--
--
- # and sdio
- MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa touchscreen"
-diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
-index 16caf05..dfedf0f 100644
---- a/conf/machine/omap3evm.conf
-+++ b/conf/machine/omap3evm.conf
-@@ -1,7 +1,6 @@
- #@TYPE: Machine
- #@NAME: OMAP3 EVM
- #@DESCRIPTION: Machine configuration for the TI OMAP3 EVM
--TARGET_ARCH = "arm"
- 
- PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
- XSERVER = "xserver-xorg \
-@@ -49,4 +48,3 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
- # UBI: physical eraseblock size:   131072 bytes (128 KiB)
- # UBI: sub-page size:              512
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
--
+a couple hundred dollars strikes me as pretty reasonable for that and
+obviously i'd want to be able to start building boot images for it
+using OE and meta-ti.
+
+  any opinions on that particular kit?  better alternatives?  i'm
+pretty sure i could get $200 worth of enlightenment out of that
+system.
+
+rday
+
 -- 
-1.8.1.2
 
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
