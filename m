@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F413E006CC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E013E006CB
 	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 15:23:26 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7297852A88; Tue, 12 Feb 2013 23:23:25 +0000 (UTC)
+	id DBB8E52AAF; Tue, 12 Feb 2013 23:23:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130212232325.7297852A88@arago-project.org>
+Message-Id: <20130212232325.DBB8E52AAF@arago-project.org>
 Date: Tue, 12 Feb 2013 23:23:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : linux-omapl138-psp_2.6.37: Add MACHINE_KERNEL_PR and fix white space issues.
+Subject: Franklin S. Cooper Jr : u-boot_2010.12-psp03.21.00.04.sdk: Add latest u-boot recipe for am180x-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,61 +27,97 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 757c0e50bf8c96e267ae37d67e0e72e2d25e2965
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=757c0e50bf8c96e267ae37d67e0e72e2d25e2965
+Commit: 201b231d721e27ac1d7a88a540b0b2fbbb86ed1e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=201b231d721e27ac1d7a88a540b0b2fbbb86ed1e
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Mon Feb 11 19:04:37 2013 -0600
+Date:   Mon Feb 11 19:04:40 2013 -0600
 
-linux-omapl138-psp_2.6.37: Add MACHINE_KERNEL_PR and fix white space issues.
-
-* Add MACHINE_KERNEL_PR variable to enable future tweaks to this recipe.
-* Convert tabs to whitespaces
+u-boot_2010.12-psp03.21.00.04.sdk: Add latest u-boot recipe for am180x-evm
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb |   20 +++++++++++---------
- 1 files changed, 11 insertions(+), 9 deletions(-)
+ ...hange-default-memory-to-not-limit-at-32MB.patch |   34 ++++++++++++++++++++
+ .../u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb    |   29 +++++++++++++++++
+ 2 files changed, 63 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
-index 5441675..ec472d7 100644
---- a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
-+++ b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
-@@ -6,6 +6,8 @@ KERNEL_IMAGETYPE = "uImage"
- require multi-kernel.inc
- require tipspkernel.inc
- 
-+MACHINE_KERNEL_PR_append = "a"
+diff --git a/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch b/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
+new file mode 100644
+index 0000000..b19575b
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
+@@ -0,0 +1,34 @@
++From df5c87c4e1be1670475eba1187301a2f7a7aca30 Mon Sep 17 00:00:00 2001
++From: Chase Maupin <Chase.Maupin@ti.com>
++Date: Wed, 22 Jun 2011 12:12:09 -0500
++Subject: [PATCH] da850evm: change default memory to not limit at 32MB
 +
- S = "${WORKDIR}/git"
- 
- MULTI_CONFIG_BASE_SUFFIX = ""
-@@ -16,14 +18,14 @@ SRCREV = "v2.6.37_DAVINCIPSP_03.21.00.04"
- COMPATIBLE_MACHINE = "(omapl138)"
- 
- SRC_URI += "git://arago-project.org/git/projects/linux-davinci.git;protocol=git;branch=${BRANCH} \
--	file://defconfig"
-+    file://defconfig"
- 
- PATCHES_OVER_PSP = " \
--	file://0001-TI-WL12xx-MMC-patches-03.21.00.04.patch \
--	file://0002-da850-Set-maximum-OPP-frequency-to-456MHz.patch \
--	file://0003-AM18xx-WL1271-Enable-BT.patch \
--	file://0004-PSP03.21.00.04.sdk-activate-wireless-extensions.patch \
--	file://0005-Davinci-da850-Add-Mistral-WL12XX-config-support-to.patch \
--	file://0006-Add-wlan-and-BT-config-switches.patch \
--	file://uio_pruss.patch \
--	"
-+    file://0001-TI-WL12xx-MMC-patches-03.21.00.04.patch \
-+    file://0002-da850-Set-maximum-OPP-frequency-to-456MHz.patch \
-+    file://0003-AM18xx-WL1271-Enable-BT.patch \
-+    file://0004-PSP03.21.00.04.sdk-activate-wireless-extensions.patch \
-+    file://0005-Davinci-da850-Add-Mistral-WL12XX-config-support-to.patch \
-+    file://0006-Add-wlan-and-BT-config-switches.patch \
-+    file://uio_pruss.patch \
-+"
++* Change the default mem= option passed to the Linux kernel to
++  not limit the memory to 32MB.
++* This change is used by AM devices that do not need to reserve
++  space for the DSP image.  By removing the mem= option we get
++  access to all of the memory on the system.
++* Limiting the memory to 32MB causes out-of-memory errors
++  when running large applications such as web browsers
++
++Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
++---
++ include/configs/da850evm.h |    2 +-
++ 1 files changed, 1 insertions(+), 1 deletions(-)
++
++diff --git a/include/configs/da850evm.h b/include/configs/da850evm.h
++index 4a1e0af..55badc9 100755
++--- a/include/configs/da850evm.h
+++++ b/include/configs/da850evm.h
++@@ -184,7 +184,7 @@
++ #define CONFIG_CMDLINE_TAG
++ #define CONFIG_REVISION_TAG
++ #define CONFIG_SETUP_MEMORY_TAGS
++-#define CONFIG_BOOTARGS		"mem=32M console=ttyS2,115200n8 root=/dev/mmcblk0p2 rw rootwait ip=off"
+++#define CONFIG_BOOTARGS		"console=ttyS2,115200n8 root=/dev/mmcblk0p2 rw rootwait ip=off"
++ #define CONFIG_BOOTCOMMAND	"if mmc rescan 0; then if fatload mmc 0 0xc0600000 boot.scr; then source 0xc0600000; else fatload mmc 0 0xc0700000 uImage; bootm c0700000; fi; else sf probe 0; sf read 0xc0700000 0x80000 0x220000; bootm 0xc0700000; fi"
++ #define CONFIG_BOOTDELAY	3
++ 
++-- 
++1.7.0.4
++
+diff --git a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb b/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
+new file mode 100644
+index 0000000..7652521
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
+@@ -0,0 +1,29 @@
++# Use the version of u-boot.inc in oe-core not the meta-ti version
++require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
++
++DESCRIPTION = "u-boot bootloader for DaVinci devices"
++
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
++
++COMPATIBLE_MACHINE = "am180x-evm"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++PR = "r0"
++
++SRC_URI = "git://arago-project.org/git/projects/u-boot-davinci.git;protocol=git;branch=${BRANCH}"
++
++# For the am180x we want to enable all the memory on the EVM, but for other
++# devices that use the DSP we do not want this change because that memory
++# is used for the DSP
++SRC_URI_append_am180x-evm = " file://0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch"
++
++BRANCH = "03.21.00.03"
++
++# Use literal tags in SRCREV, when available, instead of commit IDs
++SRCREV = "v2010.12_DAVINCIPSP_03.21.00.04"
++
++S = "${WORKDIR}/git"
++
++UBOOT_SUFFIX = "bin"
 
 
