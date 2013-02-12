@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E013E006CB
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 876CAE006DE
 	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 15:23:26 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DBB8E52AAF; Tue, 12 Feb 2013 23:23:25 +0000 (UTC)
+	id 1F38252AB3; Tue, 12 Feb 2013 23:23:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130212232325.DBB8E52AAF@arago-project.org>
-Date: Tue, 12 Feb 2013 23:23:25 +0000 (UTC)
+Message-Id: <20130212232326.1F38252AB3@arago-project.org>
+Date: Tue, 12 Feb 2013 23:23:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : u-boot_2010.12-psp03.21.00.04.sdk: Add latest u-boot recipe for am180x-evm
+Subject: Franklin S. Cooper Jr : ti-ocf-crypto-module: Port ti-ocf-crypto-module from Arago
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,97 +27,67 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 201b231d721e27ac1d7a88a540b0b2fbbb86ed1e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=201b231d721e27ac1d7a88a540b0b2fbbb86ed1e
+Commit: a0c81bbe4f97605edb3e364c2aeea7c04dc776ce
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a0c81bbe4f97605edb3e364c2aeea7c04dc776ce
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Mon Feb 11 19:04:40 2013 -0600
+Date:   Mon Feb 11 19:04:41 2013 -0600
 
-u-boot_2010.12-psp03.21.00.04.sdk: Add latest u-boot recipe for am180x-evm
+ti-ocf-crypto-module: Port ti-ocf-crypto-module from Arago
+
+* Recipe pulls in ti-ocf-crypto-module from gforge
+* For am37x, this module allows access to the crypto hardware accelerators
+  through OCF-Linux.
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...hange-default-memory-to-not-limit-at-32MB.patch |   34 ++++++++++++++++++++
- .../u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb    |   29 +++++++++++++++++
- 2 files changed, 63 insertions(+), 0 deletions(-)
+ .../ti-ocf-crypto-module_1.0.bb                    |   36 ++++++++++++++++++++
+ 1 files changed, 36 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch b/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
+diff --git a/recipes-bsp/ti-ocf-crypto-module/ti-ocf-crypto-module_1.0.bb b/recipes-bsp/ti-ocf-crypto-module/ti-ocf-crypto-module_1.0.bb
 new file mode 100644
-index 0000000..b19575b
+index 0000000..ece63d0
 --- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
-@@ -0,0 +1,34 @@
-+From df5c87c4e1be1670475eba1187301a2f7a7aca30 Mon Sep 17 00:00:00 2001
-+From: Chase Maupin <Chase.Maupin@ti.com>
-+Date: Wed, 22 Jun 2011 12:12:09 -0500
-+Subject: [PATCH] da850evm: change default memory to not limit at 32MB
++++ b/recipes-bsp/ti-ocf-crypto-module/ti-ocf-crypto-module_1.0.bb
+@@ -0,0 +1,36 @@
++DESCRIPTION = "Builds Crypto module used by OCF-Linux driver in OpenSSL example applications"
++HOMEPAGE = "https://gforge.ti.com/gf/project/arm_crypto/"
++LICENSE = "BSD & GPLv2"
++LIC_FILES_CHKSUM = "file://Makefile;beginline=1;endline=16;md5=acc0590f80e72fd64ad5c16cad8f4f76 \
++                    file://ocf_omap3_crypto.c;beginline=436;endline=438;md5=a52cad5c37c3aa3f27c6391552967304"
 +
-+* Change the default mem= option passed to the Linux kernel to
-+  not limit the memory to 32MB.
-+* This change is used by AM devices that do not need to reserve
-+  space for the DSP image.  By removing the mem= option we get
-+  access to all of the memory on the system.
-+* Limiting the memory to 32MB causes out-of-memory errors
-+  when running large applications such as web browsers
++COMPATIBLE_MACHINE = "am37x-evm|am3517-evm"
 +
-+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-+---
-+ include/configs/da850evm.h |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
++DEPENDS += "virtual/kernel"
 +
-+diff --git a/include/configs/da850evm.h b/include/configs/da850evm.h
-+index 4a1e0af..55badc9 100755
-+--- a/include/configs/da850evm.h
-++++ b/include/configs/da850evm.h
-+@@ -184,7 +184,7 @@
-+ #define CONFIG_CMDLINE_TAG
-+ #define CONFIG_REVISION_TAG
-+ #define CONFIG_SETUP_MEMORY_TAGS
-+-#define CONFIG_BOOTARGS		"mem=32M console=ttyS2,115200n8 root=/dev/mmcblk0p2 rw rootwait ip=off"
-++#define CONFIG_BOOTARGS		"console=ttyS2,115200n8 root=/dev/mmcblk0p2 rw rootwait ip=off"
-+ #define CONFIG_BOOTCOMMAND	"if mmc rescan 0; then if fatload mmc 0 0xc0600000 boot.scr; then source 0xc0600000; else fatload mmc 0 0xc0700000 uImage; bootm c0700000; fi; else sf probe 0; sf read 0xc0700000 0x80000 0x220000; bootm 0xc0700000; fi"
-+ #define CONFIG_BOOTDELAY	3
-+ 
-+-- 
-+1.7.0.4
++SRC_URI = "svn://gforge.ti.com/svn/arm_crypto/;module=trunk;protocol=https;user=anonymous;pswd=''"
 +
-diff --git a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb b/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
-new file mode 100644
-index 0000000..7652521
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
-@@ -0,0 +1,29 @@
-+# Use the version of u-boot.inc in oe-core not the meta-ti version
-+require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
++#gforge source revision
++SRCREV = "17"
 +
-+DESCRIPTION = "u-boot bootloader for DaVinci devices"
++INHIBIT_PACKAGE_STRIP = "1"
 +
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
++S = "${WORKDIR}/trunk"
 +
-+COMPATIBLE_MACHINE = "am180x-evm"
++inherit module
 +
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
++MACHINE_KERNEL_PR_append = "a+svnr${SRCPV}"
++PR = "${MACHINE_KERNEL_PR}"
 +
-+PR = "r0"
++EXTRA_OEMAKE += "KERNEL_DIR=${STAGING_KERNEL_DIR}"
 +
-+SRC_URI = "git://arago-project.org/git/projects/u-boot-davinci.git;protocol=git;branch=${BRANCH}"
++do_compile_prepend () {
++    sed -i "s/arm-none-linux-gnueabi-/${TARGET_PREFIX}/g" ${S}/Makefile
++}
 +
-+# For the am180x we want to enable all the memory on the EVM, but for other
-+# devices that use the DSP we do not want this change because that memory
-+# is used for the DSP
-+SRC_URI_append_am180x-evm = " file://0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch"
++do_install () {
++        install -d ${D}/lib/modules/${KERNEL_VERSION}/crypto/ocf/
++        install -m 0755 ${S}/ocf_omap3_cryptok.ko ${D}/lib/modules/${KERNEL_VERSION}/crypto/ocf/
++}
 +
-+BRANCH = "03.21.00.03"
-+
-+# Use literal tags in SRCREV, when available, instead of commit IDs
-+SRCREV = "v2010.12_DAVINCIPSP_03.21.00.04"
-+
-+S = "${WORKDIR}/git"
-+
-+UBOOT_SUFFIX = "bin"
++FILES_${PN} = "/lib/modules/${KERNEL_VERSION}/crypto/ocf/ocf_omap3_cryptok.ko"
 
 
