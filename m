@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 69A9CE006AD
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6CC3DE006C3
 	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 15:23:26 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id ACD4652AAE; Tue, 12 Feb 2013 23:23:25 +0000 (UTC)
+	id D585F52AB0; Tue, 12 Feb 2013 23:23:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130212232325.ACD4652AAE@arago-project.org>
+Message-Id: <20130212232325.D585F52AB0@arago-project.org>
 Date: Tue, 12 Feb 2013 23:23:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : linux-omapl138-psp: Add latest linux-omapl138 patches
+Subject: Franklin S. Cooper Jr : ti-pru-sw-edma-driver: Port PRU SW edma driver from Arago
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,44 +27,64 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: a98c0c3d2ac6ec218648b9c3d57fea7f3d6cdc00
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a98c0c3d2ac6ec218648b9c3d57fea7f3d6cdc00
+Commit: 98ad55b8eaba67d777382592df2fe9322ebe37b9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=98ad55b8eaba67d777382592df2fe9322ebe37b9
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Mon Feb 11 19:04:38 2013 -0600
+Date:   Mon Feb 11 19:04:39 2013 -0600
 
-linux-omapl138-psp: Add latest linux-omapl138 patches
+ti-pru-sw-edma-driver: Port PRU SW edma driver from Arago
 
-* Add latest patches to linux-omapl138 that were added since this recipe was
-  added to meta-ti.
-* Update to latest am180x-evm defconfig
-* Mimic the following commits from arago:
+* Add PRU SW edma driver recipe for the omapl138 machines
 
-  linux-davinci: update to add mmc patches
-
-    * Optimizations to reduce overhead on weak platforms
-
-  linux: disable DMA for MUSB
-
-    * For the am3517, am180x, and am335x devices the CPPI 4.1 DMA
-      should NOT be used for the MUSB controller.  Using this DMA
-      can cause the controller to lockup.
-    * Updated the defconfigs to set the use of PIO mode
-    * Added a patch to updated the PIO mode description to make it
-      easier to determine when it can be used.
+* This recipe builds and installs an edma driver module that supports the
+  edma user space libraries built by the ti-pru-sw-edma-library recipe.
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/davinci.inc                   |    2 +-
- ...date-PIO-mode-help-information-in-Kconfig.patch |   44 ++++
- ...mmc-davinci-Eliminate-spurious-interrupts.patch |   64 ++++++
- ...mmc-davinci-Poll-for-small-size-transfers.patch |   96 +++++++++
- .../linux-omapl138-psp-2.6.37/am180x-evm/defconfig |  224 +++++++++++++++-----
- recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb  |    7 +-
- 6 files changed, 385 insertions(+), 52 deletions(-)
+ recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb |   32 ++++++++++++++++++++++
+ 1 files changed, 32 insertions(+), 0 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=a98c0c3d2ac6ec218648b9c3d57fea7f3d6cdc00
+diff --git a/recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb b/recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb
+new file mode 100644
+index 0000000..c7fdfd1
+--- /dev/null
++++ b/recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb
+@@ -0,0 +1,32 @@
++DESCRIPTION = "Builds eDMA module used by eDMA libraries for PRU sw example applications"
++HOMEPAGE = "https://gforge.ti.com/gf/project/pru_sw/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://edmautils.c;beginline=1;endline=23;md5=312e9cb8a37a044c617c98a9e980ad1b"
++
++COMPATIBLE_MACHINE = "omapl138"
++
++INHIBIT_PACKAGE_STRIP = "1"
++
++MACHINE_KERNEL_PR_append = "a+svnr${SRCPV}"
++PR = "${MACHINE_KERNEL_PR}"
++
++SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;protocol=https;user=anonymous;pswd=''"
++
++SRCREV = "33"
++
++S = "${WORKDIR}/trunk/peripheral_lib/edma_driver/module"
++
++inherit module
++
++EXTRA_OEMAKE += "KERNEL_DIR='${STAGING_KERNEL_DIR}'"
++
++do_compile_prepend () {
++        export CCTOOL_PREFIX="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}"
++}
++
++do_install () {
++        install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/pru
++        install -m 0755 ${S}/edmautils.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/pru/
++}
++
++FILES_${PN} = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/pru/edmautils.ko"
+
 
