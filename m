@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01BC8E006C3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 44ADFE006C3
 	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 15:26:46 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 856D152AB8; Tue, 12 Feb 2013 23:26:45 +0000 (UTC)
+	id E8E9252AC0; Tue, 12 Feb 2013 23:26:45 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130212232645.856D152AB8@arago-project.org>
+Message-Id: <20130212232645.E8E9252AC0@arago-project.org>
 Date: Tue, 12 Feb 2013 23:26:45 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : ti-pru-sw-edma-driver: Port PRU SW edma driver from Arago
+Subject: Franklin S. Cooper Jr : u-boot_2010.12-psp03.21.00.04.sdk: Add latest u-boot recipe for am180x-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,64 +27,97 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: denzil
-Commit: b32bde478266ae7ae71de52dafff25dc5763b8e8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b32bde478266ae7ae71de52dafff25dc5763b8e8
+Commit: dae960a07061df7a2ff5e32dbb83feab5950d78a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dae960a07061df7a2ff5e32dbb83feab5950d78a
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Mon Feb 11 19:04:39 2013 -0600
+Date:   Mon Feb 11 19:04:40 2013 -0600
 
-ti-pru-sw-edma-driver: Port PRU SW edma driver from Arago
-
-* Add PRU SW edma driver recipe for the omapl138 machines
-
-* This recipe builds and installs an edma driver module that supports the
-  edma user space libraries built by the ti-pru-sw-edma-library recipe.
+u-boot_2010.12-psp03.21.00.04.sdk: Add latest u-boot recipe for am180x-evm
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb |   32 ++++++++++++++++++++++
- 1 files changed, 32 insertions(+), 0 deletions(-)
+ ...hange-default-memory-to-not-limit-at-32MB.patch |   34 ++++++++++++++++++++
+ .../u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb    |   29 +++++++++++++++++
+ 2 files changed, 63 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb b/recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb
+diff --git a/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch b/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
 new file mode 100644
-index 0000000..c7fdfd1
+index 0000000..b19575b
 --- /dev/null
-+++ b/recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb
-@@ -0,0 +1,32 @@
-+DESCRIPTION = "Builds eDMA module used by eDMA libraries for PRU sw example applications"
-+HOMEPAGE = "https://gforge.ti.com/gf/project/pru_sw/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://edmautils.c;beginline=1;endline=23;md5=312e9cb8a37a044c617c98a9e980ad1b"
++++ b/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
+@@ -0,0 +1,34 @@
++From df5c87c4e1be1670475eba1187301a2f7a7aca30 Mon Sep 17 00:00:00 2001
++From: Chase Maupin <Chase.Maupin@ti.com>
++Date: Wed, 22 Jun 2011 12:12:09 -0500
++Subject: [PATCH] da850evm: change default memory to not limit at 32MB
 +
-+COMPATIBLE_MACHINE = "omapl138"
++* Change the default mem= option passed to the Linux kernel to
++  not limit the memory to 32MB.
++* This change is used by AM devices that do not need to reserve
++  space for the DSP image.  By removing the mem= option we get
++  access to all of the memory on the system.
++* Limiting the memory to 32MB causes out-of-memory errors
++  when running large applications such as web browsers
 +
-+INHIBIT_PACKAGE_STRIP = "1"
++Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
++---
++ include/configs/da850evm.h |    2 +-
++ 1 files changed, 1 insertions(+), 1 deletions(-)
 +
-+MACHINE_KERNEL_PR_append = "a+svnr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
++diff --git a/include/configs/da850evm.h b/include/configs/da850evm.h
++index 4a1e0af..55badc9 100755
++--- a/include/configs/da850evm.h
+++++ b/include/configs/da850evm.h
++@@ -184,7 +184,7 @@
++ #define CONFIG_CMDLINE_TAG
++ #define CONFIG_REVISION_TAG
++ #define CONFIG_SETUP_MEMORY_TAGS
++-#define CONFIG_BOOTARGS		"mem=32M console=ttyS2,115200n8 root=/dev/mmcblk0p2 rw rootwait ip=off"
+++#define CONFIG_BOOTARGS		"console=ttyS2,115200n8 root=/dev/mmcblk0p2 rw rootwait ip=off"
++ #define CONFIG_BOOTCOMMAND	"if mmc rescan 0; then if fatload mmc 0 0xc0600000 boot.scr; then source 0xc0600000; else fatload mmc 0 0xc0700000 uImage; bootm c0700000; fi; else sf probe 0; sf read 0xc0700000 0x80000 0x220000; bootm 0xc0700000; fi"
++ #define CONFIG_BOOTDELAY	3
++ 
++-- 
++1.7.0.4
 +
-+SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;protocol=https;user=anonymous;pswd=''"
+diff --git a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb b/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
+new file mode 100644
+index 0000000..7652521
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
+@@ -0,0 +1,29 @@
++# Use the version of u-boot.inc in oe-core not the meta-ti version
++require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
 +
-+SRCREV = "33"
++DESCRIPTION = "u-boot bootloader for DaVinci devices"
 +
-+S = "${WORKDIR}/trunk/peripheral_lib/edma_driver/module"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
 +
-+inherit module
++COMPATIBLE_MACHINE = "am180x-evm"
 +
-+EXTRA_OEMAKE += "KERNEL_DIR='${STAGING_KERNEL_DIR}'"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+do_compile_prepend () {
-+        export CCTOOL_PREFIX="${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}"
-+}
++PR = "r0"
 +
-+do_install () {
-+        install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/pru
-+        install -m 0755 ${S}/edmautils.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/pru/
-+}
++SRC_URI = "git://arago-project.org/git/projects/u-boot-davinci.git;protocol=git;branch=${BRANCH}"
 +
-+FILES_${PN} = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/pru/edmautils.ko"
++# For the am180x we want to enable all the memory on the EVM, but for other
++# devices that use the DSP we do not want this change because that memory
++# is used for the DSP
++SRC_URI_append_am180x-evm = " file://0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch"
++
++BRANCH = "03.21.00.03"
++
++# Use literal tags in SRCREV, when available, instead of commit IDs
++SRCREV = "v2010.12_DAVINCIPSP_03.21.00.04"
++
++S = "${WORKDIR}/git"
++
++UBOOT_SUFFIX = "bin"
 
 
