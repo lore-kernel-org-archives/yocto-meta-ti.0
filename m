@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D1450E00496
-	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 11:55:46 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B548E00496
+	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 11:56:40 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 44DCE52A28; Tue, 12 Feb 2013 19:55:45 +0000 (UTC)
+	id D5BAD52A2E; Tue, 12 Feb 2013 19:56:39 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130212195546.44DCE52A28@arago-project.org>
-Date: Tue, 12 Feb 2013 19:55:45 +0000 (UTC)
+Message-Id: <20130212195639.D5BAD52A2E@arago-project.org>
+Date: Tue, 12 Feb 2013 19:56:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : machine config: Correct SERIAL_CONSOLE variable for am3517-evm and am37x-evm
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Feb 2013 19:55:47 -0000
+X-List-Received-Date: Tue, 12 Feb 2013 19:56:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 567d65c34db85384c8e0cda9477b1d88d3f09d74
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=567d65c34db85384c8e0cda9477b1d88d3f09d74
+Branch: danny
+Commit: e7c3920f9e0c6e096324844d69f95ebc1c465c18
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e7c3920f9e0c6e096324844d69f95ebc1c465c18
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Mon Feb 11 19:04:36 2013 -0600
