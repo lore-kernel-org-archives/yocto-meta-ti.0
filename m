@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7BBEBE00496
-	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 11:50:06 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DA764E00496
+	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 11:51:14 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9F8EA52A1D; Tue, 12 Feb 2013 19:50:05 +0000 (UTC)
+	id AF45C52A1D; Tue, 12 Feb 2013 19:51:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130212195005.9F8EA52A1D@arago-project.org>
-Date: Tue, 12 Feb 2013 19:50:05 +0000 (UTC)
+Message-Id: <20130212195114.AF45C52A1D@arago-project.org>
+Date: Tue, 12 Feb 2013 19:51:14 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : am335x-evm, omap3*: drop remaining TARGET_ARCH, wrecking sstate
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Feb 2013 19:50:06 -0000
+X-List-Received-Date: Tue, 12 Feb 2013 19:51:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: f054a7c14a3f0076b9b6c4c3116f847b7ffd3906
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f054a7c14a3f0076b9b6c4c3116f847b7ffd3906
+Branch: danny
+Commit: 353bd874f2259f160c02e361d9b924b04a898d5d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=353bd874f2259f160c02e361d9b924b04a898d5d
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Feb  7 16:44:37 2013 -0500
