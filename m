@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B50A5E006C3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9F7D6E006AD
 	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 15:25:25 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 635C252AAF; Tue, 12 Feb 2013 23:25:25 +0000 (UTC)
+	id 3A7AA52AAE; Tue, 12 Feb 2013 23:25:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130212232525.635C252AAF@arago-project.org>
+Message-Id: <20130212232525.3A7AA52AAE@arago-project.org>
 Date: Tue, 12 Feb 2013 23:25:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : linux-omapl138-psp: Add latest linux-omapl138 patches
+Subject: Franklin S. Cooper Jr : linux-omapl138-psp_2.6.37: Add MACHINE_KERNEL_PR and fix white space issues.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,44 +27,61 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: 746e85779b4417f8836239077a62045f840aa4b1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=746e85779b4417f8836239077a62045f840aa4b1
+Commit: 4689b0e62cd644bb9d4e313b19fca2ace24f517a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4689b0e62cd644bb9d4e313b19fca2ace24f517a
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Mon Feb 11 19:04:38 2013 -0600
+Date:   Mon Feb 11 19:04:37 2013 -0600
 
-linux-omapl138-psp: Add latest linux-omapl138 patches
+linux-omapl138-psp_2.6.37: Add MACHINE_KERNEL_PR and fix white space issues.
 
-* Add latest patches to linux-omapl138 that were added since this recipe was
-  added to meta-ti.
-* Update to latest am180x-evm defconfig
-* Mimic the following commits from arago:
-
-  linux-davinci: update to add mmc patches
-
-    * Optimizations to reduce overhead on weak platforms
-
-  linux: disable DMA for MUSB
-
-    * For the am3517, am180x, and am335x devices the CPPI 4.1 DMA
-      should NOT be used for the MUSB controller.  Using this DMA
-      can cause the controller to lockup.
-    * Updated the defconfigs to set the use of PIO mode
-    * Added a patch to updated the PIO mode description to make it
-      easier to determine when it can be used.
+* Add MACHINE_KERNEL_PR variable to enable future tweaks to this recipe.
+* Convert tabs to whitespaces
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/davinci.inc                   |    2 +-
- ...date-PIO-mode-help-information-in-Kconfig.patch |   44 ++++
- ...mmc-davinci-Eliminate-spurious-interrupts.patch |   64 ++++++
- ...mmc-davinci-Poll-for-small-size-transfers.patch |   96 +++++++++
- .../linux-omapl138-psp-2.6.37/am180x-evm/defconfig |  224 +++++++++++++++-----
- recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb  |    7 +-
- 6 files changed, 385 insertions(+), 52 deletions(-)
+ recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb |   20 +++++++++++---------
+ 1 files changed, 11 insertions(+), 9 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=746e85779b4417f8836239077a62045f840aa4b1
+diff --git a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
+index 5441675..ec472d7 100644
+--- a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
++++ b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
+@@ -6,6 +6,8 @@ KERNEL_IMAGETYPE = "uImage"
+ require multi-kernel.inc
+ require tipspkernel.inc
+ 
++MACHINE_KERNEL_PR_append = "a"
++
+ S = "${WORKDIR}/git"
+ 
+ MULTI_CONFIG_BASE_SUFFIX = ""
+@@ -16,14 +18,14 @@ SRCREV = "v2.6.37_DAVINCIPSP_03.21.00.04"
+ COMPATIBLE_MACHINE = "(omapl138)"
+ 
+ SRC_URI += "git://arago-project.org/git/projects/linux-davinci.git;protocol=git;branch=${BRANCH} \
+-	file://defconfig"
++    file://defconfig"
+ 
+ PATCHES_OVER_PSP = " \
+-	file://0001-TI-WL12xx-MMC-patches-03.21.00.04.patch \
+-	file://0002-da850-Set-maximum-OPP-frequency-to-456MHz.patch \
+-	file://0003-AM18xx-WL1271-Enable-BT.patch \
+-	file://0004-PSP03.21.00.04.sdk-activate-wireless-extensions.patch \
+-	file://0005-Davinci-da850-Add-Mistral-WL12XX-config-support-to.patch \
+-	file://0006-Add-wlan-and-BT-config-switches.patch \
+-	file://uio_pruss.patch \
+-	"
++    file://0001-TI-WL12xx-MMC-patches-03.21.00.04.patch \
++    file://0002-da850-Set-maximum-OPP-frequency-to-456MHz.patch \
++    file://0003-AM18xx-WL1271-Enable-BT.patch \
++    file://0004-PSP03.21.00.04.sdk-activate-wireless-extensions.patch \
++    file://0005-Davinci-da850-Add-Mistral-WL12XX-config-support-to.patch \
++    file://0006-Add-wlan-and-BT-config-switches.patch \
++    file://uio_pruss.patch \
++"
+
 
