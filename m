@@ -1,25 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
-	[206.46.173.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 10AFDE00502
-	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 11:23:23 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.12])
-	by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MI400GYWGINZDB5@vms173009.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 12 Feb 2013 13:23:22 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 92AA82008D; Tue,
-	12 Feb 2013 14:23:11 -0500 (EST)
-Date: Tue, 12 Feb 2013 14:23:11 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-Message-id: <20130212192311.GB1858@denix.org>
-References: <alpine.DEB.2.02.1302081518540.3793@oneiric>
-MIME-version: 1.0
-In-reply-to: <alpine.DEB.2.02.1302081518540.3793@oneiric>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: opinion of ti's am335x starter kit?
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7BBEBE00496
+	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 11:50:06 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 9F8EA52A1D; Tue, 12 Feb 2013 19:50:05 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130212195005.9F8EA52A1D@arago-project.org>
+Date: Tue, 12 Feb 2013 19:50:05 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : am335x-evm, omap3*: drop remaining TARGET_ARCH, wrecking sstate
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,33 +22,111 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Feb 2013 19:23:23 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 12 Feb 2013 19:50:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Fri, Feb 08, 2013 at 03:23:39PM -0500, Robert P. J. Day wrote:
-> 
->   in addition to my beaglebone, i was interested in picking up a more
-> complete am335x-based starter kit, and a quick google brought me to
-> this:
-> 
->   http://processors.wiki.ti.com/index.php/AM335x_Starter_Kit
-> 
-> a couple hundred dollars strikes me as pretty reasonable for that and
-> obviously i'd want to be able to start building boot images for it
-> using OE and meta-ti.
-> 
->   any opinions on that particular kit?  better alternatives?  i'm
-> pretty sure i could get $200 worth of enlightenment out of that
-> system.
+Module: meta-ti
+Branch: master
+Commit: f054a7c14a3f0076b9b6c4c3116f847b7ffd3906
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f054a7c14a3f0076b9b6c4c3116f847b7ffd3906
 
-I'm not sure what opinion you want... :)
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Feb  7 16:44:37 2013 -0500
 
-AM335-SK is a great kit and sits nicely between a Beaglebone and a full EVM - 
-it's slightly more expensive than Bone, but is still affordable, and it comes 
-with integrated LCD. It should be supported out of meta-ti and is part of TI's 
-official Sitara SDK products.
+am335x-evm, omap3*: drop remaining TARGET_ARCH, wrecking sstate
 
--- 
-Denys
+Bump MACHINE_KERNEL_PR to rebuild the correct sstate.
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ conf/machine/am335x-evm.conf      |    1 -
+ conf/machine/include/omap3.inc    |    3 +--
+ conf/machine/include/ti33x.inc    |    2 +-
+ conf/machine/omap3-touchbook.conf |    3 ---
+ conf/machine/omap3evm.conf        |    2 --
+ 5 files changed, 2 insertions(+), 9 deletions(-)
+
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index e86c41b..762f787 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -1,7 +1,6 @@
+ #@TYPE: Machine
+ #@NAME: AM335x EVM
+ #@DESCRIPTION: Machine configuration for the TI AM335x EVM
+-TARGET_ARCH = "arm"
+ 
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+ XSERVER = "xserver-xorg \
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index 8ce0ebc..f038b0c 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
+ require conf/machine/include/tune-cortexa8.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r122"
++MACHINE_KERNEL_PR = "r123"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+@@ -12,4 +12,3 @@ UBOOT_ENTRYPOINT = "0x80008000"
+ UBOOT_LOADADDRESS = "0x80008000"
+ 
+ EXTRA_IMAGEDEPENDS += "u-boot x-load"
+-
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 223f814..713a30a 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
+ require conf/machine/include/tune-cortexa8.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r16"
++MACHINE_KERNEL_PR = "r17"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+diff --git a/conf/machine/omap3-touchbook.conf b/conf/machine/omap3-touchbook.conf
+index 95d93ac..8439e0a 100644
+--- a/conf/machine/omap3-touchbook.conf
++++ b/conf/machine/omap3-touchbook.conf
+@@ -1,7 +1,6 @@
+ #@TYPE: Machine
+ #@NAME: Always Innovating touchbook
+ #@DESCRIPTION: Machine configuration for the http://www.alwaysinnovating.com/touchbook/
+-TARGET_ARCH = "arm"
+ 
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+ XSERVER = "xserver-xorg \
+@@ -43,7 +42,5 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
+ # UBI: sub-page size:              512
+ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+ 
+-
+-
+ # and sdio
+ MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa touchscreen"
+diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
+index 16caf05..dfedf0f 100644
+--- a/conf/machine/omap3evm.conf
++++ b/conf/machine/omap3evm.conf
+@@ -1,7 +1,6 @@
+ #@TYPE: Machine
+ #@NAME: OMAP3 EVM
+ #@DESCRIPTION: Machine configuration for the TI OMAP3 EVM
+-TARGET_ARCH = "arm"
+ 
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+ XSERVER = "xserver-xorg \
+@@ -49,4 +48,3 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
+ # UBI: physical eraseblock size:   131072 bytes (128 KiB)
+ # UBI: sub-page size:              512
+ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+-
+
 
