@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01317E006C3
-	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 15:23:27 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B50A5E006C3
+	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 15:25:25 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 46BD552AB8; Tue, 12 Feb 2013 23:23:26 +0000 (UTC)
+	id 635C252AAF; Tue, 12 Feb 2013 23:25:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130212232326.46BD552AB8@arago-project.org>
-Date: Tue, 12 Feb 2013 23:23:26 +0000 (UTC)
+Message-Id: <20130212232525.635C252AAF@arago-project.org>
+Date: Tue, 12 Feb 2013 23:25:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : u-boot_2012.04.01: Add latest u-boot recipe for am37x-evm
+Subject: Franklin S. Cooper Jr : linux-omapl138-psp: Add latest linux-omapl138 patches
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,35 +22,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Feb 2013 23:23:27 -0000
+X-List-Received-Date: Tue, 12 Feb 2013 23:25:25 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 081428db7d11b64dcc64e3e57899f64a31e41eaa
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=081428db7d11b64dcc64e3e57899f64a31e41eaa
+Branch: danny
+Commit: 746e85779b4417f8836239077a62045f840aa4b1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=746e85779b4417f8836239077a62045f840aa4b1
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Mon Feb 11 19:04:42 2013 -0600
+Date:   Mon Feb 11 19:04:38 2013 -0600
 
-u-boot_2012.04.01: Add latest u-boot recipe for am37x-evm
+linux-omapl138-psp: Add latest linux-omapl138 patches
+
+* Add latest patches to linux-omapl138 that were added since this recipe was
+  added to meta-ti.
+* Update to latest am180x-evm defconfig
+* Mimic the following commits from arago:
+
+  linux-davinci: update to add mmc patches
+
+    * Optimizations to reduce overhead on weak platforms
+
+  linux: disable DMA for MUSB
+
+    * For the am3517, am180x, and am335x devices the CPPI 4.1 DMA
+      should NOT be used for the MUSB controller.  Using this DMA
+      can cause the controller to lockup.
+    * Updated the defconfigs to set the use of PIO mode
+    * Added a patch to updated the PIO mode description to make it
+      easier to determine when it can be used.
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...3-Set-SPL-stack-size-to-8KB-image-to-54KB.patch |  172 ++++++++++++++++++++
- .../0001-OMAP3-Beagle-Set-BOOTDELAY-to-3.patch     |   31 ++++
- ...e-add-usbethaddr-setting-to-enable-networ.patch |   40 +++++
- ...dded-function-calls-to-set-volts-speed-on.patch |  146 +++++++++++++++++
- ...17evm-beagleboard-am37x-Add-CONFIG_CMD_AS.patch |   73 +++++++++
- ...2-omap3evm-Make-the-board-start-at-800MHz.patch |   36 ++++
- ...gleboard-Load-uImage-from-VFAT-by-default.patch |   34 ++++
- ...03-beagleboard-Make-xM-rev-C-go-to-800MHz.patch |   34 ++++
- ...-Load-uImage-to-the-default-kernel-linux-.patch |   57 +++++++
- recipes-bsp/u-boot/u-boot_2012.04.01.bb            |   50 ++++++
- 10 files changed, 673 insertions(+), 0 deletions(-)
+ conf/machine/include/davinci.inc                   |    2 +-
+ ...date-PIO-mode-help-information-in-Kconfig.patch |   44 ++++
+ ...mmc-davinci-Eliminate-spurious-interrupts.patch |   64 ++++++
+ ...mmc-davinci-Poll-for-small-size-transfers.patch |   96 +++++++++
+ .../linux-omapl138-psp-2.6.37/am180x-evm/defconfig |  224 +++++++++++++++-----
+ recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb  |    7 +-
+ 6 files changed, 385 insertions(+), 52 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=081428db7d11b64dcc64e3e57899f64a31e41eaa
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=746e85779b4417f8836239077a62045f840aa4b1
 
