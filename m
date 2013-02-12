@@ -1,33 +1,32 @@
-Return-Path: <ndec13@gmail.com>
-Received: from mail-vc0-f170.google.com (mail-vc0-f170.google.com
-	[209.85.220.170]) (using TLSv1 with cipher RC4-SHA (128/128 bits))
+Return-Path: <fcooperjr27@gmail.com>
+Received: from mail-oa0-f45.google.com (mail-oa0-f45.google.com
+	[209.85.219.45]) (using TLSv1 with cipher RC4-SHA (128/128 bits))
 	(No client certificate requested)
-	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id A0152E0027C
-	for <meta-ti@yoctoproject.org>; Mon, 11 Feb 2013 11:58:29 -0800 (PST)
-Received: by mail-vc0-f170.google.com with SMTP id p16so4039388vcq.15
-	for <meta-ti@yoctoproject.org>; Mon, 11 Feb 2013 11:58:28 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id E61DBE002AB
+	for <meta-ti@yoctoproject.org>; Mon, 11 Feb 2013 17:04:51 -0800 (PST)
+Received: by mail-oa0-f45.google.com with SMTP id o6so7028960oag.18
+	for <meta-ti@yoctoproject.org>; Mon, 11 Feb 2013 17:04:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=9OK5iT8XshP3pDuBJc1NysxsspBbB0gl/P61Tc0Qfao=;
-	b=yZrk5WxLI6gmV/Fe/+iNVKUGIQVIz23Vg50r/yJE4FcrMbgnQU2/qVcQf+vjJWBq7t
-	Ux7FRC1RH7h7PXtFQzVhkil4lU6NlyYbI2qtsjwhEdaTlPOstecpPVh/t3BWgYUTiVFT
-	2aQTG28llDL6hRX4eT7VaLh0seC17T/mXnJOXrVGRlA8t5fGr/s7a0H/79OvGrEFZsKt
-	sVjLQEO0dC/LXLGCI/+SnMlTvwvc7K9DS6H7aWxVsZ9PagtC1WiyX50Eucgnm/4crGBF
-	bOhYA6oKr0V1sHrG8d70Sizde8fAu3VKyD9hQSy5BM/8UM9+ewQ2NiVnt8JK1svIFymr
-	phzA==
-X-Received: by 10.52.24.98 with SMTP id t2mr17720233vdf.69.1360612708423; Mon,
-	11 Feb 2013 11:58:28 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.58.251.98 with HTTP; Mon, 11 Feb 2013 11:58:08 -0800 (PST)
-In-Reply-To: <CACMnT39zosRxQfXXoQ8Pbwwtqa2GzKqyqWj2bgU23u4SwM_ypQ@mail.gmail.com>
-References: <CACMnT39zosRxQfXXoQ8Pbwwtqa2GzKqyqWj2bgU23u4SwM_ypQ@mail.gmail.com>
-From: Nicolas Dechesne <ndec13@gmail.com>
-Date: Mon, 11 Feb 2013 20:58:08 +0100
-Message-ID: <CAOT3miKb1nEMwp03OGnyDV31O5NAWvZKiZSj7piyVJf-jQhLEg@mail.gmail.com>
-To: Jesse Dannenbring <jtdannenbring@gmail.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Error building after "mesa-dri update to 9.0.1"
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=7DZDTUN193Tw4cqVTQw5iiByXzP+ejYsBZr8d5zKEgs=;
+	b=RuujOnMM/t0Dl1q/xVLWWBG4DtyiBQpa481qtW/3xbKI7lpTJVO1ByB+YiMfDWfE6o
+	PhXCijBnDNrZvgfieUdWr9ZjTg1ELzZag1Ad+9PIVkBAZtaLo849ia2cBpCeLYSDeFQl
+	67dPVmIMl4AIcHvY0zzpT/tjXqTWLcjwKP4gko/JKqwTtBdfXocaHGdgcZgl8zY+YHZ5
+	CaJJQZu13pQQw+kzd4R+ohiClr+aSwYINxCvzr2T6TfvWYCz6m6lvu1GiGN8tcemeQIH
+	uhffbFt57/HCvl0SOdkilKe/UzU2NrNHIyL/i8oAHoHhx2SlL17h13kOUAJF5E+285Ey
+	17SQ==
+X-Received: by 10.60.169.229 with SMTP id ah5mr12412082oec.66.1360631090792;
+	Mon, 11 Feb 2013 17:04:50 -0800 (PST)
+Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
+	by mx.google.com with ESMTPS id v2sm51155307obl.10.2013.02.11.17.04.47
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Mon, 11 Feb 2013 17:04:49 -0800 (PST)
+From: fcooperjr27@gmail.com
+To: meta-ti@yoctoproject.org
+Date: Mon, 11 Feb 2013 19:04:36 -0600
+Message-Id: <1360631082-29015-1-git-send-email-fcooper@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH 1/7] machine config: Correct SERIAL_CONSOLE variable for am3517-evm and am37x-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,29 +39,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Feb 2013 19:58:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 12 Feb 2013 01:04:52 -0000
 
-On Fri, Jan 25, 2013 at 11:51 PM, Jesse Dannenbring
-<jtdannenbring@gmail.com> wrote:
-> I previously was building meta-ti without issue but I repeated the process
-> recently and found that the patch on 2013-01-10 broke my build:
->
-> bitbake -c fetchall core-image-minimal
-> Pseudo is not present but is required, building this first before the main
-> build
-> Parsing recipes: 100% |#########################################| Time:
-> 00:02:54
-> Parsing of 891 .bb files complete (0 cached, 891 parsed). 1197 targets, 64
-> skipped, 7 masked, 0 errors.
-> ERROR: No recipes available for:
->
-> /home/jesse/yocto/poky-danny-8.0/meta-ti/recipes-graphics/mesa/mesa-dri_9.0.1.bbappend
-> ERROR: Command execution failed: Exited with 1
+From: Franklin S. Cooper Jr <fcooper@ti.com>
 
-you are probably using meta-ti/master with poky/danny branch, which is
-not expected to work. if you want to use danny, then use 'danny'
-branch from meta-ti too.
+* When testing on am37x-evm I noticed that no prompt to login was ever shown
+  when connected via serial port.
+* I finally noticed that the SERIAL_CONSOLE variable was set incorrectly and
+  didn't match the value in the old Arago layer.
+* After using the values specific in the machine file in the Arago layer I was
+  able to login via serial port.
+* This has been verified on both the am37x-evm and am3517-evm.
 
-nicolas
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+---
+ conf/machine/am3517-evm.conf |    2 +-
+ conf/machine/am37x-evm.conf  |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
+index e817069..536d337 100644
+--- a/conf/machine/am3517-evm.conf
++++ b/conf/machine/am3517-evm.conf
+@@ -19,7 +19,7 @@ require conf/machine/include/omap3.inc
+ IMAGE_FSTYPES += "ubi tar.gz"
+ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ 
+-SERIAL_CONSOLE = "115200 ttyS2"
++SERIAL_CONSOLE = "115200 ttyO2"
+ USE_VT = "2"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
+diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
+index 9a1acb4..866abc5 100644
+--- a/conf/machine/am37x-evm.conf
++++ b/conf/machine/am37x-evm.conf
+@@ -19,7 +19,7 @@ require conf/machine/include/omap3.inc
+ IMAGE_FSTYPES += "ubi tar.gz"
+ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ 
+-SERIAL_CONSOLE = "115200 ttyS0"
++SERIAL_CONSOLE = "115200 ttyO0"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
+ 
+-- 
+1.7.0.4
+
 
