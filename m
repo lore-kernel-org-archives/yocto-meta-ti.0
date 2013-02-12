@@ -1,15 +1,22 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 98321E0072E
-	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 15:26:47 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 4AA6B52AC0; Tue, 12 Feb 2013 23:26:47 +0000 (UTC)
+Return-Path: <denis@denix.org>
+Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
+	[206.46.173.7])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 78B4BE006AD
+	for <meta-ti@yoctoproject.org>; Tue, 12 Feb 2013 15:38:43 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.191.205.12])
+	by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MI400K7FSC84Z53@vms173007.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 12 Feb 2013 17:38:42 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3E3612008E; Tue,
+	12 Feb 2013 18:38:31 -0500 (EST)
+Date: Tue, 12 Feb 2013 18:38:31 -0500
+From: Denys Dmytriyenko <denys@ti.com>
 To: meta-ti@yoctoproject.org
-Message-Id: <20130212232647.4AA6B52AC0@arago-project.org>
-Date: Tue, 12 Feb 2013 23:26:47 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : u-boot_2012.04.01: Add latest u-boot recipe for am37x-evm
+Message-id: <20130212233831.GD1858@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: RFC: Denzil EOL
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,35 +29,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Feb 2013 23:26:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 12 Feb 2013 23:38:43 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Module: meta-ti
-Branch: denzil
-Commit: 7f9f383521681edbc1de361c2c128f9d27a22afb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7f9f383521681edbc1de361c2c128f9d27a22afb
+All,
 
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Mon Feb 11 19:04:42 2013 -0600
+I'd like to propose the "End-of-Life" plans for "denzil" branch in meta-ti:
 
-u-boot_2012.04.01: Add latest u-boot recipe for am37x-evm
+I just pushed the final set of patches to meta-ti/denzil - no new features or 
+active development should be done in that branch. Only critical bug-fixes 
+will be allowed, if required for supporting old products. Please use "danny" 
+stable branch for your product development or even master branch for the 
+latest unstable development, that corresponds to the tip of oe-core.
 
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+For those, not familiar with Yocto Project code names:
 
----
+denzil = maintenance branch based on Yocto Project 1.2 made in Spring 2012
+danny = maintenance branch based on Yocto Project 1.3 made in Fall 2012
+master = latest development for future Yocto Project 1.4 target in Spring 2013
 
- ...3-Set-SPL-stack-size-to-8KB-image-to-54KB.patch |  172 ++++++++++++++++++++
- .../0001-OMAP3-Beagle-Set-BOOTDELAY-to-3.patch     |   31 ++++
- ...e-add-usbethaddr-setting-to-enable-networ.patch |   40 +++++
- ...dded-function-calls-to-set-volts-speed-on.patch |  146 +++++++++++++++++
- ...17evm-beagleboard-am37x-Add-CONFIG_CMD_AS.patch |   73 +++++++++
- ...2-omap3evm-Make-the-board-start-at-800MHz.patch |   36 ++++
- ...gleboard-Load-uImage-from-VFAT-by-default.patch |   34 ++++
- ...03-beagleboard-Make-xM-rev-C-go-to-800MHz.patch |   34 ++++
- ...-Load-uImage-to-the-default-kernel-linux-.patch |   57 +++++++
- recipes-bsp/u-boot/u-boot_2012.04.01.bb            |   50 ++++++
- 10 files changed, 673 insertions(+), 0 deletions(-)
-
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=7f9f383521681edbc1de361c2c128f9d27a22afb
+-- 
+Denys
 
