@@ -1,31 +1,34 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+Return-Path: <munoz0raul@gmail.com>
+Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
+	[209.85.223.169]) (using TLSv1 with cipher RC4-SHA (128/128 bits))
 	(No client certificate requested)
-	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 8F181E006C2;
-	Thu, 14 Feb 2013 08:00:33 -0800 (PST)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r1EG0V44029049;
-	Thu, 14 Feb 2013 10:00:31 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r1EG0VjR006437;
-	Thu, 14 Feb 2013 10:00:31 -0600
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
-	Thu, 14 Feb 2013 10:00:31 -0600
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id r1EG0VFV014136;
-	Thu, 14 Feb 2013 10:00:31 -0600
-Date: Thu, 14 Feb 2013 11:00:31 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Raul Rosetto Munoz <munoz0raul@gmail.com>
-Message-ID: <20130214160030.GD2539@edge>
+	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id C6308E003BC;
+	Thu, 14 Feb 2013 08:23:26 -0800 (PST)
+Received: by mail-ie0-f169.google.com with SMTP id 13so3563404iea.0
+	for <multiple recipients>; Thu, 14 Feb 2013 08:23:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:cc:content-type;
+	bh=7ohoRAlz5OX347V2WNQHY5u2FZ2ZhrafoEpRf0H2YzY=;
+	b=V3ZeJJuMb+z79AlvVsHJdbAyAJ4AP0m4sEcAtMClug+mAu/i1iTL3tTTAj7Ku9E9k+
+	fi4NLOitURcdpz3aMOJmTAztLPVhcM6qfHXolgT3OSyFnHxrVRDSrx8kRfkunzhoarPg
+	mMcR3edaonKV0rQqaLRhXMD9t6vjngQZ7I9o53sd2CTSOnVKbWRZoQbtELA+/9oU4+Sx
+	DorMZB4fIxUsnw6GQ8WLU80N8znPHa49pOzGzgVsPhwg0l7t4XRqxqJvdbMDQbKzqdpl
+	i/23ueL3PJRcIzXp0NpFIzzVXTeq/EvKxrndIQzkegMZS1HSixPqQrCWk8LzB9+ZTND6
+	iPpg==
+MIME-Version: 1.0
+X-Received: by 10.42.140.72 with SMTP id j8mr35259082icu.37.1360858995073;
+	Thu, 14 Feb 2013 08:23:15 -0800 (PST)
+Received: by 10.64.147.40 with HTTP; Thu, 14 Feb 2013 08:23:14 -0800 (PST)
+In-Reply-To: <20130214160030.GD2539@edge>
 References: <CANmViriV1_tAO+j_nTkpZjcSRD8dh2ALXwHVs1QC-9_dDmrfFA@mail.gmail.com>
 	<20130212191553.GA1858@denix.org>
 	<CANmViriOFXRsW10XWXk8vJpCEQgTgq2VGr4A+Roa0SYVz9Z2DQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CANmViriOFXRsW10XWXk8vJpCEQgTgq2VGr4A+Roa0SYVz9Z2DQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20130214160030.GD2539@edge>
+Date: Thu, 14 Feb 2013 14:23:14 -0200
+Message-ID: <CANmVirgL6Fte5cP+VTdK4aTb4sBB1AXQOq=02DtaiNnRePfwPw@mail.gmail.com>
+From: Raul Rosetto Munoz <munoz0raul@gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
 	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
 Subject: Re: Wifi Module + udev configs
@@ -41,64 +44,93 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2013 16:00:33 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 14 Feb 2013 16:23:27 -0000
+Content-Type: multipart/alternative; boundary=90e6ba6e8be8fda41404d5b1ac20
 
-There's /lib/udev/firmware which is a firmware loading helper.
+--90e6ba6e8be8fda41404d5b1ac20
+Content-Type: text/plain; charset=ISO-8859-1
 
-The actual firmware files go into /lib/firmware/ directory.
+Denys,
+There are something strange,
 
-Please make sure you have the correct packages installed with firmware for 
-your WiFi - linux-firmware-{rtl8192cu,rtl8192ce,rtl8192su}
+First there are no  linux-firmware-{rtl8192cu,rtl8192ce,rtl8192su}
+installed at rfs.
 
--- 
-Denys
+raul@phi04:.../tmp/deploy/images$ find
+/media/ed86e6a2-20c2-464e-a2f3-f28ff48983ef/lib/firmware/ -name "*8192*"
+/media/ed86e6a2-20c2-464e-a2f3-f28ff48983ef/lib/firmware/RTL8192E
+/media/ed86e6a2-20c2-464e-a2f3-f28ff48983ef/lib/firmware/rtlwifi/rtl8192sefw.bin
+/media/ed86e6a2-20c2-464e-a2f3-f28ff48983ef/lib/firmware/rtlwifi/rtl8192defw.bin
 
+Another problem is that "/lib/udev/firmware" are not installed to.
 
-On Thu, Feb 14, 2013 at 09:17:43AM -0200, Raul Rosetto Munoz wrote:
-> Yes I install this package,
-> But I think that the problem is that the binary firmware at "/lib/udev"
-> doesn't come with the build.
-> 
-> Some one know how to build the binary firmware at "/lib/udev" responsible
-> to record the firmware in wifi dongle and enable the udev rules for this
-> action.
-> 
-> Thanks for all Help
-> 
-> 
-> 2013/2/12 Denys Dmytriyenko <denys@ti.com>
-> 
-> > On Thu, Feb 07, 2013 at 06:26:46PM -0200, Raul Rosetto Munoz wrote:
-> > > Hello All,
-> > > I need to configure my yocto project to work with wifi dongle realteck
-> > > rtl8192cu.
-> > >
-> > > My first problem is that the module does not go up automatically
-> > rtl8192cu
-> > > different than Angstron distro that when I plug the dongle all modules
-> > rise.
-> > >
-> > > Another important difference is that on Angstron distro I have on
-> > /lib/udev
-> > > the "firmware" binary file.  I really was not able to install this
-> > > functionality in udev.
-> >
-> > Have you looked at linux-firmware package? rtl8192* should be well
-> > supported.
-> >
-> >
-> > > And How to make this firmware binary go to /lib/udev?
-> >
-> > By default, firmware files go into /lib/firmware
-> >
-> > --
-> > Denys
-> >
-> 
-> 
-> 
-> -- 
-> *Raul Rosetto Mu?oz*
+raul@phi04:.../tmp/deploy/images$ find
+/media/ed86e6a2-20c2-464e-a2f3-f28ff48983ef/lib/udev/ -name "*firmware*"
+raul@phi04:.../tmp/deploy/images$
 
+But I can see theses files at my "tmp/sysroots/beaglebone"
+
+raul@phi04:.../tmp/sysroots/beaglebone$ find lib/firmware/ -name "*8192*"
+lib/firmware/RTL8192E
+lib/firmware/rtlwifi/rtl8192sefw.bin
+lib/firmware/rtlwifi/rtl8192defw.bin
+lib/firmware/rtlwifi/rtl8192cfw.bin
+lib/firmware/rtlwifi/rtl8192cufw.bin
+
+raul@phi04:.../tmp/sysroots/beaglebone$ find lib/udev/ -name "*firmware*"
+lib/udev/firmware
+lib/udev/rules.d/50-firmware.rules
+
+I tryed copy this files for the sdcard but doesnt work.
+
+Do you have any suggest?
+
+Thanks for all help.
+
+--90e6ba6e8be8fda41404d5b1ac20
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Denys,</div><div>There are something strange,</div><d=
+iv><br></div><div>First there are no =A0linux-firmware-{rtl8192cu,rtl8192ce=
+,rtl8192su} installed at rfs.</div><div><br></div><div><font face=3D"&#39;c=
+ourier new&#39;, monospace">raul@phi04:.../tmp/deploy/images$ find /media/e=
+d86e6a2-20c2-464e-a2f3-f28ff48983ef/lib/firmware/ -name &quot;*8192*&quot;<=
+/font></div>
+<div><font face=3D"&#39;courier new&#39;, monospace">/media/ed86e6a2-20c2-4=
+64e-a2f3-f28ff48983ef/lib/firmware/RTL8192E</font></div><div><font face=3D"=
+&#39;courier new&#39;, monospace">/media/ed86e6a2-20c2-464e-a2f3-f28ff48983=
+ef/lib/firmware/rtlwifi/rtl8192sefw.bin</font></div>
+<div><font face=3D"&#39;courier new&#39;, monospace">/media/ed86e6a2-20c2-4=
+64e-a2f3-f28ff48983ef/lib/firmware/rtlwifi/rtl8192defw.bin</font></div><div=
+><br></div><div>Another problem is that &quot;/lib/udev/firmware&quot; are =
+not installed to.</div>
+<div><br></div><div><font face=3D"&#39;courier new&#39;, monospace">raul@ph=
+i04:.../tmp/deploy/images$ find /media/ed86e6a2-20c2-464e-a2f3-f28ff48983ef=
+/lib/udev/ -name &quot;*firmware*&quot;</font></div><div><font face=3D"&#39=
+;courier new&#39;, monospace">raul@phi04:.../tmp/deploy/images$=A0</font></=
+div>
+<div><br></div><div>But I can see theses files at my &quot;tmp/sysroots/bea=
+glebone&quot;</div><div><br></div><div><font face=3D"&#39;courier new&#39;,=
+ monospace">raul@phi04:.../tmp/sysroots/beaglebone$ find lib/firmware/ -nam=
+e &quot;*8192*&quot;</font></div>
+<div><font face=3D"&#39;courier new&#39;, monospace">lib/firmware/RTL8192E<=
+/font></div><div><font face=3D"&#39;courier new&#39;, monospace">lib/firmwa=
+re/rtlwifi/rtl8192sefw.bin</font></div><div><font face=3D"&#39;courier new&=
+#39;, monospace">lib/firmware/rtlwifi/rtl8192defw.bin</font></div>
+<div><font face=3D"&#39;courier new&#39;, monospace">lib/firmware/rtlwifi/r=
+tl8192cfw.bin</font></div><div><font face=3D"&#39;courier new&#39;, monospa=
+ce">lib/firmware/rtlwifi/rtl8192cufw.bin</font></div><div><font face=3D"&#3=
+9;courier new&#39;, monospace"><br>
+</font></div><div><font face=3D"&#39;courier new&#39;, monospace">raul@phi0=
+4:.../tmp/sysroots/beaglebone$ find lib/udev/ -name &quot;*firmware*&quot;<=
+/font></div><div><font face=3D"&#39;courier new&#39;, monospace">lib/udev/f=
+irmware</font></div>
+<div><font face=3D"&#39;courier new&#39;, monospace">lib/udev/rules.d/50-fi=
+rmware.rules</font></div><div><br></div><div>I tryed copy this files for th=
+e sdcard but doesnt work.</div><div><br></div><div>Do you have any suggest?=
+</div>
+<div><br></div><div>Thanks for all help.</div><div><br></div><div><br></div=
+><div><br></div></div>
+
+--90e6ba6e8be8fda41404d5b1ac20--
