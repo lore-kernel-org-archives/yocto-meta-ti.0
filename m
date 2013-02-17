@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0C71E0144A
-	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 13:23:36 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 587A8E0144A
+	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 13:23:45 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 54C3D52A1D; Sun, 17 Feb 2013 21:23:36 +0000 (UTC)
+	id 16E7652A1D; Sun, 17 Feb 2013 21:23:45 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130217212336.54C3D52A1D@arago-project.org>
-Date: Sun, 17 Feb 2013 21:23:36 +0000 (UTC)
+Message-Id: <20130217212345.16E7652A1D@arago-project.org>
+Date: Sun, 17 Feb 2013 21:23:45 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Chase Maupin : am335x-evm: Increase UBI max size to 500MB
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2013 21:23:36 -0000
+X-List-Received-Date: Sun, 17 Feb 2013 21:23:45 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: bbf54c833d655c5f7caba35d154f83907de5aa01
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bbf54c833d655c5f7caba35d154f83907de5aa01
+Branch: master
+Commit: 3c67c9357c8d6803d137534c6ee036cb6557c41e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c67c9357c8d6803d137534c6ee036cb6557c41e
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
 Date:   Fri Nov 16 10:53:55 2012 -0600
