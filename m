@@ -1,15 +1,25 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E8E0E01456
-	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 12:41:38 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id F184252A15; Sun, 17 Feb 2013 20:41:37 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130217204137.F184252A15@arago-project.org>
-Date: Sun, 17 Feb 2013 20:41:37 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Peter A. Bigot : linux-mainline 3.2: update beagleboard defconfig
+Return-Path: <denis@denix.org>
+Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
+	[206.46.173.1])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 71797E0144A
+	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 12:51:46 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MID008IDTXUUN52@vms173001.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Sun, 17 Feb 2013 14:51:45 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2EEAE201C7; Sun,
+	17 Feb 2013 15:51:30 -0500 (EST)
+Date: Sun, 17 Feb 2013 15:51:30 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Robert P. J. Day" <rpjday@crashcourse.ca>
+Message-id: <20130217205130.GB2174@denix.org>
+References: <alpine.DEB.2.02.1301290502200.12960@oneiric>
+MIME-version: 1.0
+In-reply-to: <alpine.DEB.2.02.1301290502200.12960@oneiric>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: Re: is there a newer u-boot for omapl138?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,57 +32,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2013 20:41:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 17 Feb 2013 20:51:46 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: 544a96c93537e58c6dfb7a81f7af805d42114233
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=544a96c93537e58c6dfb7a81f7af805d42114233
+On Tue, Jan 29, 2013 at 05:05:23AM -0500, Robert P. J. Day wrote:
+> 
+>   just got me a pdlogic zoom am1808 experimenter kit:
+> 
+> http://www.logicpd.com/products/system-on-modules/zoom-am1808/
+> 
+> and building for am108x-evm, i notice the version of u-boot that's
+> pulled in is really pretty ancient:
+> 
+> SRC_URI_omapl138 = "git://arago-project.org/git/projects/u-boot-omapl1.git;protocol=http"
+> SRCREV_pn-${PN}_omapl138  = "5f16b8551b125f16cd8d58f278cb25b94272fd9f"
+> PV_omapl138      = "2009.11+${PR}+gitr${SRCREV}"
+> 
+>   is there any obstacle in trying to update the version of u-boot for
+> that particular board?
 
-Author: Peter A. Bigot <pab@pabigot.com>
-Date:   Thu Dec  6 12:04:15 2012 -0600
+There is a slightly newer u-boot 2010.12 for omapl138:
+http://arago-project.org/git/?p=meta-ti.git;a=commitdiff;h=201b231d721e27ac1d7a88a540b0b2fbbb86ed1e
 
-linux-mainline 3.2: update beagleboard defconfig
+But currently there are no immediate plans to update it further for this 
+platform, unfortunately. If you happen to test and/or patch the latest 
+mainline u-boot for it, please let us know - I wouldn't mind adding it to 
+meta-ti as an alternative, even if it's not complete... Thanks.
 
-Link the TLC59108 driver statically so ULCD7 initialization occurs
-automatically as it did before f0e2305c7e1 which removed the initialization
-from u-boot.  (Angstrom-v2012.12 does not include this module by default.)
-
-Signed-off-by: Peter A. Bigot <pab@pabigot.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- .../linux/linux-mainline-3.2/beagleboard/defconfig |    2 +-
- recipes-kernel/linux/linux-mainline_3.2.bb         |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig b/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig
-index eaf9548..28f096c 100644
---- a/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig
-+++ b/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig
-@@ -2907,7 +2907,7 @@ CONFIG_BACKLIGHT_CLASS_DEVICE=y
- CONFIG_BACKLIGHT_GENERIC=y
- # CONFIG_BACKLIGHT_ADP8860 is not set
- # CONFIG_BACKLIGHT_ADP8870 is not set
--CONFIG_BACKLIGHT_TLC59108=m
-+CONFIG_BACKLIGHT_TLC59108=y
- 
- #
- # Display device support
-diff --git a/recipes-kernel/linux/linux-mainline_3.2.bb b/recipes-kernel/linux/linux-mainline_3.2.bb
-index bc0a145..7eafdfa 100644
---- a/recipes-kernel/linux/linux-mainline_3.2.bb
-+++ b/recipes-kernel/linux/linux-mainline_3.2.bb
-@@ -10,7 +10,7 @@ PV = "3.2.28"
- SRCREV_pn-${PN} = "1f873aca1c7aa7a574b276c040d304d16f1dbfa4"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- 
- FILESPATH =. "${FILE_DIRNAME}/linux-mainline-3.2:${FILE_DIRNAME}/linux-mainline-3.2/${MACHINE}:"
- 
-
+-- 
+Denys
 
