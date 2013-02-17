@@ -1,25 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
-	[206.46.173.1])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 71797E0144A
-	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 12:51:46 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MID008IDTXUUN52@vms173001.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sun, 17 Feb 2013 14:51:45 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2EEAE201C7; Sun,
-	17 Feb 2013 15:51:30 -0500 (EST)
-Date: Sun, 17 Feb 2013 15:51:30 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-Message-id: <20130217205130.GB2174@denix.org>
-References: <alpine.DEB.2.02.1301290502200.12960@oneiric>
-MIME-version: 1.0
-In-reply-to: <alpine.DEB.2.02.1301290502200.12960@oneiric>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: is there a newer u-boot for omapl138?
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0C71E0144A
+	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 13:23:36 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 54C3D52A1D; Sun, 17 Feb 2013 21:23:36 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130217212336.54C3D52A1D@arago-project.org>
+Date: Sun, 17 Feb 2013 21:23:36 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Chase Maupin : am335x-evm: Increase UBI max size to 500MB
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,34 +22,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2013 20:51:46 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sun, 17 Feb 2013 21:23:36 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tue, Jan 29, 2013 at 05:05:23AM -0500, Robert P. J. Day wrote:
-> 
->   just got me a pdlogic zoom am1808 experimenter kit:
-> 
-> http://www.logicpd.com/products/system-on-modules/zoom-am1808/
-> 
-> and building for am108x-evm, i notice the version of u-boot that's
-> pulled in is really pretty ancient:
-> 
-> SRC_URI_omapl138 = "git://arago-project.org/git/projects/u-boot-omapl1.git;protocol=http"
-> SRCREV_pn-${PN}_omapl138  = "5f16b8551b125f16cd8d58f278cb25b94272fd9f"
-> PV_omapl138      = "2009.11+${PR}+gitr${SRCREV}"
-> 
->   is there any obstacle in trying to update the version of u-boot for
-> that particular board?
+Module: meta-ti
+Branch: danny
+Commit: bbf54c833d655c5f7caba35d154f83907de5aa01
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bbf54c833d655c5f7caba35d154f83907de5aa01
 
-There is a slightly newer u-boot 2010.12 for omapl138:
-http://arago-project.org/git/?p=meta-ti.git;a=commitdiff;h=201b231d721e27ac1d7a88a540b0b2fbbb86ed1e
+Author: Chase Maupin <Chase.Maupin@ti.com>
+Date:   Fri Nov 16 10:53:55 2012 -0600
 
-But currently there are no immediate plans to update it further for this 
-platform, unfortunately. If you happen to test and/or patch the latest 
-mainline u-boot for it, please let us know - I wouldn't mind adding it to 
-meta-ti as an alternative, even if it's not complete... Thanks.
+am335x-evm: Increase UBI max size to 500MB
 
--- 
-Denys
+* Based on the EVM and beaglebone + NAND memory cape we can
+  increase the base file system size to 500MB since by default
+  there is about 504MB of space allocated to the file system
+  partition in the NAND.
+* The max size in LEBs was determined using the formula at
+  http://processors.wiki.ti.com/index.php/UBIFS_Support
+
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ conf/machine/am335x-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index 762f787..cd30594 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -28,7 +28,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 1988"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
+ 
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
+
 
