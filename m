@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 427D2E01454
-	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 15:17:05 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB285E0144E
+	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 15:18:26 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F3D0052A89; Sun, 17 Feb 2013 23:17:04 +0000 (UTC)
+	id 9969552A4C; Sun, 17 Feb 2013 23:18:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130217231704.F3D0052A89@arago-project.org>
-Date: Sun, 17 Feb 2013 23:17:04 +0000 (UTC)
+Message-Id: <20130217231826.9969552A4C@arago-project.org>
+Date: Sun, 17 Feb 2013 23:18:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Peter A. Bigot : libgles-omap3: ignore QA errors
+Subject: Franklin S. Cooper Jr : omap3-sgx-modules: Add v4.08.00. 01 of the SGX modules
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,82 +22,90 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2013 23:17:05 -0000
+X-List-Received-Date: Sun, 17 Feb 2013 23:18:27 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 41159b9b785873279734859cafca34507d2dd44e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=41159b9b785873279734859cafca34507d2dd44e
+Branch: master
+Commit: e71c5591718d30059560f1bb9b04921ebc44b504
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e71c5591718d30059560f1bb9b04921ebc44b504
 
-Author: Peter A. Bigot <pab@pabigot.com>
-Date:   Mon Jan 14 13:41:01 2013 -0600
+Author: Franklin S. Cooper Jr <fcooper@ti.com>
+Date:   Wed Feb  6 00:57:52 2013 -0600
 
-libgles-omap3: ignore QA errors
+omap3-sgx-modules: Add v4.08.00.01 of the SGX modules
 
-This patch allows libgles-omap3 to build on the danny branch.  The following
-warnings are not addressed:
+* Add version 4.08.00.01 of the SGX modules.
 
- WARNING: libgles-omap3: No generic license file exists for: proprietary-binary in any provider
- WARNING: QA Issue: libgles-omap3: Files/directories were installed but not shipped
-  /usr/lib/ES2.0
- WARNING: libgles-omap3: The compile log indicates that host include and/or library paths were used.
-         Please check the log '/prj/oe/omap/build-gumstix-community-danny/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/libgles-omap3-4.05.00.03-r35/temp/log.do_compile' for more information.
-
-Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-graphics/libgles/libgles-omap3.inc |   30 ++++++++++++++++++++++++++++
- 1 files changed, 30 insertions(+), 0 deletions(-)
+ .../omap3-sgx-modules_4.08.00.01.bb                |   56 ++++++++++++++++++++
+ 1 files changed, 56 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-index cb96e4f..66ebcd5 100644
---- a/recipes-graphics/libgles/libgles-omap3.inc
-+++ b/recipes-graphics/libgles/libgles-omap3.inc
-@@ -353,12 +353,42 @@ RDEPENDS_${PN} += "fbset devmem2"
- 
- #HACK! These are binaries, so we can't guarantee that LDFLAGS match :(
- INSANE_SKIP_${PN} = "ldflags dev-so"
-+INSANE_SKIP_${PN}-es3 = "ldflags dev-so staticdev"
-+INSANE_SKIP_${PN}-es5 = "ldflags dev-so staticdev"
-+INSANE_SKIP_${PN}-es6 = "ldflags dev-so staticdev"
-+INSANE_SKIP_${PN}-es8 = "ldflags dev-so staticdev"
-+INSANE_SKIP_${PN}-rawdemos = "ldflags dev-so useless-rpaths"
-+INSANE_SKIP_${PN}-x11demos = "ldflags dev-so useless-rpaths"
- INSANE_SKIP_${PN}-blitwsegl = "ldflags"
-+INSANE_SKIP_${PN}-blitwsegl-es3 = "ldflags"
-+INSANE_SKIP_${PN}-blitwsegl-es5 = "ldflags"
-+INSANE_SKIP_${PN}-blitwsegl-es6 = "ldflags"
-+INSANE_SKIP_${PN}-blitwsegl-es8 = "ldflags"
- INSANE_SKIP_${PN}-flipwsegl = "ldflags"
-+INSANE_SKIP_${PN}-flipwsegl-es3 = "ldflags"
-+INSANE_SKIP_${PN}-flipwsegl-es5 = "ldflags"
-+INSANE_SKIP_${PN}-flipwsegl-es6 = "ldflags"
-+INSANE_SKIP_${PN}-flipwsegl-es8 = "ldflags"
- INSANE_SKIP_${PN}-frontwsegl = "ldflags"
-+INSANE_SKIP_${PN}-frontwsegl-es3 = "ldflags"
-+INSANE_SKIP_${PN}-frontwsegl-es5 = "ldflags"
-+INSANE_SKIP_${PN}-frontwsegl-es6 = "ldflags"
-+INSANE_SKIP_${PN}-frontwsegl-es8 = "ldflags"
- INSANE_SKIP_${PN}-linuxfbwsegl = "ldflags"
-+INSANE_SKIP_${PN}-linuxfbwsegl-es3 = "ldflags"
-+INSANE_SKIP_${PN}-linuxfbwsegl-es5 = "ldflags"
-+INSANE_SKIP_${PN}-linuxfbwsegl-es6 = "ldflags"
-+INSANE_SKIP_${PN}-linuxfbwsegl-es8 = "ldflags"
- INSANE_SKIP_${PN}-x11wsegl = "ldflags dev-so"
-+INSANE_SKIP_${PN}-x11wsegl-es3 = "ldflags dev-so"
-+INSANE_SKIP_${PN}-x11wsegl-es5 = "ldflags dev-so"
-+INSANE_SKIP_${PN}-x11wsegl-es6 = "ldflags dev-so"
-+INSANE_SKIP_${PN}-x11wsegl-es8 = "ldflags dev-so"
- INSANE_SKIP_${PN}-driwsegl = "ldflags dev-so"
-+INSANE_SKIP_${PN}-driwsegl-es3 = "ldflags dev-so"
-+INSANE_SKIP_${PN}-driwsegl-es5 = "ldflags dev-so"
-+INSANE_SKIP_${PN}-driwsegl-es6 = "ldflags dev-so"
-+INSANE_SKIP_${PN}-driwsegl-es8 = "ldflags dev-so"
- INSANE_SKIP_${PN}-tests = "ldflags"
- INSANE_SKIP_xserver-kdrive-powervrsgx = "ldflags"
- 
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.01.bb
+new file mode 100644
+index 0000000..4885946
+--- /dev/null
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.01.bb
+@@ -0,0 +1,56 @@
++DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ea5743acf520dd81ca172e69f818a3d4"
++
++TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
++require ../../recipes-ti/includes/ti-eula-unpack.inc
++
++SGXPV = "4_08_00_01"
++IMGPV = "1.9.2139099"
++BINFILE = "Graphics_SDK_setuplinux_${SGXPV}.bin"
++
++inherit module
++
++MACHINE_KERNEL_PR_append = "a"
++PR = "${MACHINE_KERNEL_PR}"
++
++DEFAULT_PREFERENCE = "-1"
++
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE}"
++
++SRC_URI[md5sum] = "dd0d994a48ecc4293f272a1fddddf159"
++SRC_URI[sha256sum] = "fd721288c95314e0d676dd89462e1dec994e185cb608bcb8ac4a4b5809f9693a"
++
++TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
++S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
++
++PVRBUILD = "release"
++export KERNELDIR = "${STAGING_KERNEL_DIR}"
++
++INHIBIT_PACKAGE_STRIP = "1"
++
++TI_PLATFORM_omap3 = "omap3630"
++TI_PLATFORM_ti814x = "ti81xx"
++TI_PLATFORM_ti816x = "ti81xx"
++TI_PLATFORM_ti33x = "ti335x"
++
++MODULESLOCATION_omap3 = "dc_omapfb3_linux"
++MODULESLOCATION_ti814x = "dc_ti81xx_linux"
++MODULESLOCATION_ti816x = "dc_ti81xx_linux"
++MODULESLOCATION_ti33x = "dc_ti335x_linux"
++
++export SUPPORT_XORG ?= "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
++
++MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
++
++do_install() {
++    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
++    cp  ${S}/pvrsrvkm.ko \
++        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
++        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
++        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
++
++    if [ "${SUPPORT_XORG}" = "1" ]; then
++        cp ${S}/services4/3rdparty/linux_drm/drm.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
++    fi
++}
 
 
