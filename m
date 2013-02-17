@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 587A8E0144A
-	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 13:23:45 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 72B02E0144A
+	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 13:51:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 16E7652A1D; Sun, 17 Feb 2013 21:23:45 +0000 (UTC)
+	id 3BD4B52A2C; Sun, 17 Feb 2013 21:51:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130217212345.16E7652A1D@arago-project.org>
-Date: Sun, 17 Feb 2013 21:23:45 +0000 (UTC)
+Message-Id: <20130217215113.3BD4B52A2C@arago-project.org>
+Date: Sun, 17 Feb 2013 21:51:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : am335x-evm: Increase UBI max size to 500MB
+Subject: Denys Dmytriyenko : machines: set default virtual/ bootloader for remaining machines
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,46 +22,107 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2013 21:23:45 -0000
+X-List-Received-Date: Sun, 17 Feb 2013 21:51:13 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 3c67c9357c8d6803d137534c6ee036cb6557c41e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c67c9357c8d6803d137534c6ee036cb6557c41e
+Branch: danny
+Commit: ae3d571f285a073cb42691f01b0ca35b7d7895a0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ae3d571f285a073cb42691f01b0ca35b7d7895a0
 
-Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Fri Nov 16 10:53:55 2012 -0600
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sun Feb 17 16:49:28 2013 -0500
 
-am335x-evm: Increase UBI max size to 500MB
+machines: set default virtual/bootloader for remaining machines
 
-* Based on the EVM and beaglebone + NAND memory cape we can
-  increase the base file system size to 500MB since by default
-  there is about 504MB of space allocated to the file system
-  partition in the NAND.
-* The max size in LEBs was determined using the formula at
-  http://processors.wiki.ti.com/index.php/UBIFS_Support
-
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am335x-evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ conf/machine/include/davinci.inc  |    5 +----
+ conf/machine/include/keystone.inc |    2 ++
+ conf/machine/include/omap3.inc    |    5 ++++-
+ conf/machine/include/ti33x.inc    |    5 ++++-
+ 4 files changed, 11 insertions(+), 6 deletions(-)
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 762f787..cd30594 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -28,7 +28,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 1988"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
+diff --git a/conf/machine/include/davinci.inc b/conf/machine/include/davinci.inc
+index 71eca70..756a1e5 100644
+--- a/conf/machine/include/davinci.inc
++++ b/conf/machine/include/davinci.inc
+@@ -3,12 +3,11 @@ require conf/machine/include/tune-arm926ejs.inc
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r52"
  
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
+-
+ KERNEL_IMAGETYPE = "uImage"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-davinci"
+-
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
++
+ UBOOT_MACHINE = "davinci_dvevm_config"
+ 
+ UBOOT_ENTRYPOINT = "0x80008000"
+@@ -19,6 +18,4 @@ EXTRA_IMAGEDEPENDS += "u-boot"
+ SERIAL_CONSOLE ?= "115200 ttyS0"
+ EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x20000 -n"
+ 
+-#ROOT_FLASH_SIZE = "29"
+-
+ MACHINE_FEATURES = "kernel26 serial ethernet usbhost usbgadget mmc alsa"
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index b77bccd..bd447d4 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -2,7 +2,9 @@ SOC_FAMILY = "keystone"
+ require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa15.inc
++
+ PREFERRED_PROVIDER_virtual/kernel = "linux-keystone"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
+ 
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r5"
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index f038b0c..8ebbb08 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -2,12 +2,15 @@ SOC_FAMILY = "omap3"
+ require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa8.inc
+-PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
++
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r123"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
++PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
++
+ UBOOT_ENTRYPOINT = "0x80008000"
+ UBOOT_LOADADDRESS = "0x80008000"
+ 
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 713a30a..93c5042 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -2,10 +2,13 @@ SOC_FAMILY = "ti33x"
+ require conf/machine/include/soc-family.inc
+ 
+ require conf/machine/include/tune-cortexa8.inc
+-PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
++
+ # Increase this everytime you change something in the kernel
+ MACHINE_KERNEL_PR = "r17"
+ 
++PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
++
+ KERNEL_IMAGETYPE = "uImage"
+ 
+ UBOOT_ENTRYPOINT = "0x80008000"
 
 
