@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 153F8E0144A
-	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 12:41:30 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E8E0E01456
+	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 12:41:38 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id EBA6E52A15; Sun, 17 Feb 2013 20:41:29 +0000 (UTC)
+	id F184252A15; Sun, 17 Feb 2013 20:41:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130217204129.EBA6E52A15@arago-project.org>
-Date: Sun, 17 Feb 2013 20:41:29 +0000 (UTC)
+Message-Id: <20130217204137.F184252A15@arago-project.org>
+Date: Sun, 17 Feb 2013 20:41:37 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Peter A. Bigot : linux-mainline 3.2: update beagleboard defconfig
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2013 20:41:31 -0000
+X-List-Received-Date: Sun, 17 Feb 2013 20:41:38 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 44c42244aac41aab4c539995882ea189953b1001
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=44c42244aac41aab4c539995882ea189953b1001
+Branch: master
+Commit: 544a96c93537e58c6dfb7a81f7af805d42114233
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=544a96c93537e58c6dfb7a81f7af805d42114233
 
 Author: Peter A. Bigot <pab@pabigot.com>
 Date:   Thu Dec  6 12:04:15 2012 -0600
