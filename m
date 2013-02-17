@@ -1,37 +1,15 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 395DDE003BC
-	for <meta-ti@yoctoproject.org>; Thu, 14 Feb 2013 15:58:09 -0800 (PST)
-Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.115.5.73]:52700 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1U68gp-0004Fa-JQ; Thu, 14 Feb 2013 18:58:07 -0500
-Date: Thu, 14 Feb 2013 18:58:04 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: Denys Dmytriyenko <denys@ti.com>
-In-Reply-To: <20130214153042.GB9154@denix.org>
-Message-ID: <alpine.DEB.2.02.1302141855140.3478@oneiric>
-References: <20130214083555.18042x2z6gmtzu4g@crashcourse.ca>
-	<8F29D6B095ED194EA1980491A5E029710C390C2C@DFLE09.ent.ti.com>
-	<20130214153042.GB9154@denix.org>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [OT?] what is the status of the arago-project.org web site?
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 153F8E0144A
+	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 12:41:30 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id EBA6E52A15; Sun, 17 Feb 2013 20:41:29 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130217204129.EBA6E52A15@arago-project.org>
+Date: Sun, 17 Feb 2013 20:41:29 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Peter A. Bigot : linux-mainline 3.2: update beagleboard defconfig
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,35 +22,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Feb 2013 23:58:09 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sun, 17 Feb 2013 20:41:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, 14 Feb 2013, Denys Dmytriyenko wrote:
+Module: meta-ti
+Branch: danny
+Commit: 44c42244aac41aab4c539995882ea189953b1001
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=44c42244aac41aab4c539995882ea189953b1001
 
-> On Thu, Feb 14, 2013 at 02:04:33PM +0000, Cooper Jr., Franklin wrote:
-> > I would recommend posting questions to the meta-arago mailing list
-> > http://arago-project.org/cgi-bin/mailman/listinfo/meta-arago.
->
-> It doesn't matter that much. It maybe slightly less off-topic on
-> meta-arago list, but as Robert said, meta-ti is related to Arago
-> Project/meta-arago (not coupled, though) - I don't mind answering
-> this question on either list.
+Author: Peter A. Bigot <pab@pabigot.com>
+Date:   Thu Dec  6 12:04:15 2012 -0600
 
-  i mentioned it here since a number of online searches for meta-ti
-stuff ending up taking you to the arago site, and it's not immediately
-clear once you get there that a lot of that content is fairly old.
-perhaps just a sentence or two on the main page explaining the
-situation is all that's appropriate.
+linux-mainline 3.2: update beagleboard defconfig
 
-rday
+Link the TLC59108 driver statically so ULCD7 initialization occurs
+automatically as it did before f0e2305c7e1 which removed the initialization
+from u-boot.  (Angstrom-v2012.12 does not include this module by default.)
 
--- 
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
+---
 
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+ .../linux/linux-mainline-3.2/beagleboard/defconfig |    2 +-
+ recipes-kernel/linux/linux-mainline_3.2.bb         |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig b/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig
+index eaf9548..28f096c 100644
+--- a/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig
++++ b/recipes-kernel/linux/linux-mainline-3.2/beagleboard/defconfig
+@@ -2907,7 +2907,7 @@ CONFIG_BACKLIGHT_CLASS_DEVICE=y
+ CONFIG_BACKLIGHT_GENERIC=y
+ # CONFIG_BACKLIGHT_ADP8860 is not set
+ # CONFIG_BACKLIGHT_ADP8870 is not set
+-CONFIG_BACKLIGHT_TLC59108=m
++CONFIG_BACKLIGHT_TLC59108=y
+ 
+ #
+ # Display device support
+diff --git a/recipes-kernel/linux/linux-mainline_3.2.bb b/recipes-kernel/linux/linux-mainline_3.2.bb
+index bc0a145..7eafdfa 100644
+--- a/recipes-kernel/linux/linux-mainline_3.2.bb
++++ b/recipes-kernel/linux/linux-mainline_3.2.bb
+@@ -10,7 +10,7 @@ PV = "3.2.28"
+ SRCREV_pn-${PN} = "1f873aca1c7aa7a574b276c040d304d16f1dbfa4"
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ 
+ FILESPATH =. "${FILE_DIRNAME}/linux-mainline-3.2:${FILE_DIRNAME}/linux-mainline-3.2/${MACHINE}:"
+ 
+
 
