@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 72B02E0144A
-	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 13:51:13 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5180AE0144A
+	for <meta-ti@yoctoproject.org>; Sun, 17 Feb 2013 13:51:24 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3BD4B52A2C; Sun, 17 Feb 2013 21:51:13 +0000 (UTC)
+	id 1CCB152A2C; Sun, 17 Feb 2013 21:51:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130217215113.3BD4B52A2C@arago-project.org>
-Date: Sun, 17 Feb 2013 21:51:13 +0000 (UTC)
+Message-Id: <20130217215124.1CCB152A2C@arago-project.org>
+Date: Sun, 17 Feb 2013 21:51:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : machines: set default virtual/ bootloader for remaining machines
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Feb 2013 21:51:13 -0000
+X-List-Received-Date: Sun, 17 Feb 2013 21:51:24 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: ae3d571f285a073cb42691f01b0ca35b7d7895a0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ae3d571f285a073cb42691f01b0ca35b7d7895a0
+Branch: master
+Commit: 516eff31f6ac2781714701356946ad463acba1cb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=516eff31f6ac2781714701356946ad463acba1cb
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Sun Feb 17 16:49:28 2013 -0500
