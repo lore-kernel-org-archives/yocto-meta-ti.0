@@ -1,28 +1,32 @@
-Return-Path: <denis@denix.org>
-Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
-	[206.46.173.11])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CC11BE0071D
-	for <meta-ti@yoctoproject.org>; Mon, 18 Feb 2013 13:50:19 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MIF00AVMRBHR312@vms173011.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 18 Feb 2013 15:50:05 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 089D020085; Mon,
-	18 Feb 2013 16:50:04 -0500 (EST)
-Date: Mon, 18 Feb 2013 16:50:04 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Nick G <exosyst+metaTI@gmail.com>
-Message-id: <20130218215004.GE6546@denix.org>
-References: <CACMnT39zosRxQfXXoQ8Pbwwtqa2GzKqyqWj2bgU23u4SwM_ypQ@mail.gmail.com>
-	<CAOT3miKb1nEMwp03OGnyDV31O5NAWvZKiZSj7piyVJf-jQhLEg@mail.gmail.com>
-	<CAN-pQATiMWdQd_t91-8ZDVX2HUwdeoFAUfAgVfMZXB2niVB16Q@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAN-pQATiMWdQd_t91-8ZDVX2HUwdeoFAUfAgVfMZXB2niVB16Q@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-	Jesse Dannenbring <jtdannenbring@gmail.com>
-Subject: Re: Error building after "mesa-dri update to 9.0.1"
+Return-Path: <fcooperjr27@gmail.com>
+Received: from mail-ye0-f181.google.com (mail-ye0-f181.google.com
+	[209.85.213.181]) (using TLSv1 with cipher RC4-SHA (128/128 bits))
+	(No client certificate requested)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 58AE4E0034C
+	for <meta-ti@yoctoproject.org>; Mon, 18 Feb 2013 20:45:29 -0800 (PST)
+Received: by mail-ye0-f181.google.com with SMTP id m11so1163931yen.26
+	for <meta-ti@yoctoproject.org>; Mon, 18 Feb 2013 20:45:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
+	bh=aUdDeaoHC7xnmuaNvRtww40urwo+gG5NVnwuK0716BM=;
+	b=hbAtMJy5tbUhr619wZLGkERVLlvHICeYC5dnSyP4OMVVA0gKkgloRc63s/Prznz4zO
+	8SPWlL3wHn3QAsm+uaGqggb1/rJCXXCSmRqwlUs1cJRMS6Y4/KwYkbp06Hsh+9XewVoT
+	2v7Kl3qbXv4bMhHbb05HDlH6jrFzLDStjVODhvX0TfBLf5boqeJeQPBYGJDwlBDqnRJi
+	wDWAVM97FaLbCCo08GNb3lnUu5oVPGTp5NqcvqMUrZczr6os5y/jpF3HsSK5LdJMP+ic
+	uE6mApn/+3eecSzk1v8gfUnIDYG6j4H8sJ8to/va9AsDdHAtKzvr62ToJMviXKcVpF/6
+	gW/A==
+X-Received: by 10.236.150.41 with SMTP id y29mr25546953yhj.75.1361249128432;
+	Mon, 18 Feb 2013 20:45:28 -0800 (PST)
+Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
+	by mx.google.com with ESMTPS id s34sm100600004yhe.9.2013.02.18.20.45.23
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Mon, 18 Feb 2013 20:45:26 -0800 (PST)
+From: fcooperjr27@gmail.com
+To: meta-ti@yoctoproject.org
+Date: Mon, 18 Feb 2013 22:45:16 -0600
+Message-Id: <1361249116-30829-1-git-send-email-fcooper@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+Subject: [PATCH] machine configs: Add SGX to MACHINE_FEATURES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,62 +39,180 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Feb 2013 21:50:19 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 19 Feb 2013 04:45:29 -0000
 
-On Mon, Feb 18, 2013 at 09:36:50PM +0000, Nick G wrote:
-> Hey guys,
-> 
-> I'm having this same issue and I've checked out poky and meta-ti from Git
-> this evening so nothing to do with Danny.
-> Is this not the preferred method? I'm struggling to find good step-by-step
-> resources for getting going on a build for my beaglebone.
+From: Franklin S. Cooper Jr <fcooper@ti.com>
 
-Well, oe-core recently got updated to 9.0.2 already, I just pushed the fix to 
-meta-ti to sync it up.
+* Add sgx to MACHINE_FEATURES to indicate that a particular machine supports
+  sgx.
+* TI chips are available in multiple variants including some that supports sgx
+  while others do not.
+* By adding sgx as a machine feature other layers can create generic
+  packagegroups or images for a particular soc but will only include sgx
+  dependencies if the particular machine has sgx support.
 
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+---
+ conf/machine/am335x-evm.conf      |    2 +-
+ conf/machine/am3517-evm.conf      |    2 +-
+ conf/machine/am37x-evm.conf       |    2 +-
+ conf/machine/am387x-evm.conf      |    2 ++
+ conf/machine/am389x-evm.conf      |    2 ++
+ conf/machine/beagleboard.conf     |    2 +-
+ conf/machine/beaglebone.conf      |    2 +-
+ conf/machine/c6a814x-evm.conf     |    2 ++
+ conf/machine/c6a816x-evm.conf     |    2 ++
+ conf/machine/dm814x-evm.conf      |    2 ++
+ conf/machine/omap3-touchbook.conf |    2 +-
+ conf/machine/omap3evm.conf        |    2 +-
+ conf/machine/pandaboard.conf      |    2 +-
+ 13 files changed, 18 insertions(+), 8 deletions(-)
+
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index cd30594..2889358 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -43,4 +43,4 @@ PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
+ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "am335x_evm_config"
+ 
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen sgx"
+diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
+index 536d337..d9ce758 100644
+--- a/conf/machine/am3517-evm.conf
++++ b/conf/machine/am3517-evm.conf
+@@ -30,7 +30,7 @@ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "am3517_evm_config"
+ XLOAD_MACHINE = "am3517evm_config"
+ 
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen ethernet"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen ethernet sgx"
+ 
+ # NOTE: there are NAND and OneNAND versions of this board...
+ 
+diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
+index 866abc5..2d1d44d 100644
+--- a/conf/machine/am37x-evm.conf
++++ b/conf/machine/am37x-evm.conf
+@@ -29,7 +29,7 @@ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "omap3_evm_config"
+ XLOAD_MACHINE = "omap3evm_config"
+ 
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen sgx"
+ 
+ # NOTE: there are NAND and OneNAND versions of this board...
+ 
+diff --git a/conf/machine/am387x-evm.conf b/conf/machine/am387x-evm.conf
+index 5d9cc8f..b2df370 100644
+--- a/conf/machine/am387x-evm.conf
++++ b/conf/machine/am387x-evm.conf
+@@ -5,3 +5,5 @@
+ require conf/machine/include/ti814x.inc
+ 
+ IMAGE_FSTYPES += "ubi tar.gz"
++
++MACHINE_FEATURES += "sgx"
+diff --git a/conf/machine/am389x-evm.conf b/conf/machine/am389x-evm.conf
+index 2a84cad..3b2145d 100644
+--- a/conf/machine/am389x-evm.conf
++++ b/conf/machine/am389x-evm.conf
+@@ -5,3 +5,5 @@
+ require conf/machine/include/ti816x.inc
+ 
+ IMAGE_FSTYPES += "ubi tar.gz"
++
++MACHINE_FEATURES += "sgx"
+diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
+index 8f84c6c..e8b6279 100644
+--- a/conf/machine/beagleboard.conf
++++ b/conf/machine/beagleboard.conf
+@@ -45,7 +45,7 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
+ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+ 
+ # and sdio
+-MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
++MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa sgx"
+ 
+ # For a modularized kernel we want to drag in networking, sound, rtc etc."
+ MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl \
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index 3803edf..43af461 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -23,4 +23,4 @@ SERIAL_CONSOLE = "115200 ttyO0"
+ UBOOT_MACHINE = "am335x_evm_config"
+ 
+ # and sdio
+-MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
++MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa sgx"
+diff --git a/conf/machine/c6a814x-evm.conf b/conf/machine/c6a814x-evm.conf
+index b85c489..a81d7fd 100644
+--- a/conf/machine/c6a814x-evm.conf
++++ b/conf/machine/c6a814x-evm.conf
+@@ -3,3 +3,5 @@
+ #@DESCRIPTION: Machine configuration for the c6a814x evm
+ 
+ require conf/machine/include/ti814x.inc
++
++MACHINE_FEATURES += "sgx"
+diff --git a/conf/machine/c6a816x-evm.conf b/conf/machine/c6a816x-evm.conf
+index a7ab9b0..380c4b8 100644
+--- a/conf/machine/c6a816x-evm.conf
++++ b/conf/machine/c6a816x-evm.conf
+@@ -3,3 +3,5 @@
+ #@DESCRIPTION: Machine configuration for the c6a816x evm
+ 
+ require conf/machine/include/ti816x.inc
++
++MACHINE_FEATURES += "sgx"
+diff --git a/conf/machine/dm814x-evm.conf b/conf/machine/dm814x-evm.conf
+index 140dcc1..4fa1e24 100644
+--- a/conf/machine/dm814x-evm.conf
++++ b/conf/machine/dm814x-evm.conf
+@@ -3,3 +3,5 @@
+ #@DESCRIPTION: Machine configuration for the DM814x evm
+ 
+ require conf/machine/include/ti814x.inc
++
++MACHINE_FEATURES += "sgx"
+diff --git a/conf/machine/omap3-touchbook.conf b/conf/machine/omap3-touchbook.conf
+index 8439e0a..6c52d9e 100644
+--- a/conf/machine/omap3-touchbook.conf
++++ b/conf/machine/omap3-touchbook.conf
+@@ -43,4 +43,4 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
+ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+ 
+ # and sdio
+-MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa touchscreen"
++MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa touchscreen sgx"
+diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
+index dfedf0f..0719671 100644
+--- a/conf/machine/omap3evm.conf
++++ b/conf/machine/omap3evm.conf
+@@ -30,7 +30,7 @@ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "omap3_evm_config"
+ XLOAD_MACHINE = "omap3evm_config"
+ 
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen sgx"
+ 
+ # NOTE: there are NAND and OneNAND versions of this board...
+ 
+diff --git a/conf/machine/pandaboard.conf b/conf/machine/pandaboard.conf
+index 2c37b4f..3ebd6d9 100644
+--- a/conf/machine/pandaboard.conf
++++ b/conf/machine/pandaboard.conf
+@@ -13,6 +13,6 @@ IMAGE_FSTYPES += "tar.bz2"
+ SERIAL_CONSOLE = "115200 ttyO2"
+ 
+ MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
+-MACHINE_FEATURES = "kernel26 wifi bluetooth alsa apm ext2 screen touchscreen usbgadget usbhost vfat"
++MACHINE_FEATURES = "kernel26 wifi bluetooth alsa apm ext2 screen touchscreen usbgadget usbhost vfat sgx"
+ 
+ 
 -- 
-Denys
-
-
-> On 11 February 2013 19:58, Nicolas Dechesne <ndec13@gmail.com> wrote:
-> 
-> > On Fri, Jan 25, 2013 at 11:51 PM, Jesse Dannenbring
-> > <jtdannenbring@gmail.com> wrote:
-> > > I previously was building meta-ti without issue but I repeated the
-> > process
-> > > recently and found that the patch on 2013-01-10 broke my build:
-> > >
-> > > bitbake -c fetchall core-image-minimal
-> > > Pseudo is not present but is required, building this first before the
-> > main
-> > > build
-> > > Parsing recipes: 100% |#########################################| Time:
-> > > 00:02:54
-> > > Parsing of 891 .bb files complete (0 cached, 891 parsed). 1197 targets,
-> > 64
-> > > skipped, 7 masked, 0 errors.
-> > > ERROR: No recipes available for:
-> > >
-> > >
-> > /home/jesse/yocto/poky-danny-8.0/meta-ti/recipes-graphics/mesa/mesa-dri_9.0.1.bbappend
-> > > ERROR: Command execution failed: Exited with 1
-> >
-> > you are probably using meta-ti/master with poky/danny branch, which is
-> > not expected to work. if you want to use danny, then use 'danny'
-> > branch from meta-ti too.
-> >
-> > nicolas
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-> >
-
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+1.7.0.4
 
 
