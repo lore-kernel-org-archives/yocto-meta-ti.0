@@ -1,32 +1,32 @@
-Return-Path: <fcooperjr27@gmail.com>
-Received: from mail-ye0-f181.google.com (mail-ye0-f181.google.com
-	[209.85.213.181]) (using TLSv1 with cipher RC4-SHA (128/128 bits))
+Return-Path: <exosyst@gmail.com>
+Received: from mail-gg0-f181.google.com (mail-gg0-f181.google.com
+	[209.85.161.181]) (using TLSv1 with cipher RC4-SHA (128/128 bits))
 	(No client certificate requested)
-	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 58AE4E0034C
-	for <meta-ti@yoctoproject.org>; Mon, 18 Feb 2013 20:45:29 -0800 (PST)
-Received: by mail-ye0-f181.google.com with SMTP id m11so1163931yen.26
-	for <meta-ti@yoctoproject.org>; Mon, 18 Feb 2013 20:45:28 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 8EBD0E006F5
+	for <meta-ti@yoctoproject.org>; Tue, 19 Feb 2013 07:05:13 -0800 (PST)
+Received: by mail-gg0-f181.google.com with SMTP id e5so796100ggh.40
+	for <meta-ti@yoctoproject.org>; Tue, 19 Feb 2013 07:05:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:from:to:cc:subject:date:message-id:x-mailer;
-	bh=aUdDeaoHC7xnmuaNvRtww40urwo+gG5NVnwuK0716BM=;
-	b=hbAtMJy5tbUhr619wZLGkERVLlvHICeYC5dnSyP4OMVVA0gKkgloRc63s/Prznz4zO
-	8SPWlL3wHn3QAsm+uaGqggb1/rJCXXCSmRqwlUs1cJRMS6Y4/KwYkbp06Hsh+9XewVoT
-	2v7Kl3qbXv4bMhHbb05HDlH6jrFzLDStjVODhvX0TfBLf5boqeJeQPBYGJDwlBDqnRJi
-	wDWAVM97FaLbCCo08GNb3lnUu5oVPGTp5NqcvqMUrZczr6os5y/jpF3HsSK5LdJMP+ic
-	uE6mApn/+3eecSzk1v8gfUnIDYG6j4H8sJ8to/va9AsDdHAtKzvr62ToJMviXKcVpF/6
-	gW/A==
-X-Received: by 10.236.150.41 with SMTP id y29mr25546953yhj.75.1361249128432;
-	Mon, 18 Feb 2013 20:45:28 -0800 (PST)
-Received: from localhost.localdomain (dragon.ti.com. [192.94.94.33])
-	by mx.google.com with ESMTPS id s34sm100600004yhe.9.2013.02.18.20.45.23
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Mon, 18 Feb 2013 20:45:26 -0800 (PST)
-From: fcooperjr27@gmail.com
-To: meta-ti@yoctoproject.org
-Date: Mon, 18 Feb 2013 22:45:16 -0600
-Message-Id: <1361249116-30829-1-git-send-email-fcooper@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-Subject: [PATCH] machine configs: Add SGX to MACHINE_FEATURES
+	h=x-received:mime-version:sender:from:date:x-google-sender-auth
+	:message-id:subject:to:content-type;
+	bh=/GtO1zFbb5eWr+SexokFJ3EP44HLqtX6UWyqKNtp5XQ=;
+	b=EM5B8k5rskJ0bys89GhjjtCdBWXTYuyl2uCjnBT0ceLLtguYhY17Ba3VIxMGTR2VCP
+	Tdgcy3WdvqaSb4lHl/bAHguW+32BnOMMrcZk+IKBb2Rpvm7HiK02FYKzBLIGHb3dVTVu
+	oO1OIOnVPVZ4E9eVEGLwzvNRKXpx48FN4tJqbD1+kQsGcNM/fLjgT4UWUeUu8Ds3tmuh
+	Rz7bXMGKs6NhItpXJMOegVtC+nsM8ABItHVOc59KDhrzQ89OBwzzQROgx1YhgmXmQpvx
+	oAhyb7XYNqBw6Fn9lVCLQGIixQ/SnNREzj+HpZxibS20G6699f+p+8LQ9I+mSv6iZYMu
+	ViOg==
+X-Received: by 10.101.138.33 with SMTP id q33mr8678789ann.9.1361286312414;
+	Tue, 19 Feb 2013 07:05:12 -0800 (PST)
+MIME-Version: 1.0
+Sender: exosyst@gmail.com
+Received: by 10.101.187.2 with HTTP; Tue, 19 Feb 2013 07:04:52 -0800 (PST)
+From: Nick G <exosyst+metaTI@gmail.com>
+Date: Tue, 19 Feb 2013 15:04:52 +0000
+X-Google-Sender-Auth: tUyUy2NeXqjUzXjjZqt3MzlM_kQ
+Message-ID: <CAN-pQASFihdOs3W9L1i-t3niFNUWZv9t_iqyGdj0sRsRMMGAsw@mail.gmail.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: U-Boot misconfiguration
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,180 +39,61 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Feb 2013 04:45:29 -0000
+X-List-Received-Date: Tue, 19 Feb 2013 15:05:13 -0000
+Content-Type: multipart/alternative; boundary=0016e68ee34816ced004d6152b6c
 
-From: Franklin S. Cooper Jr <fcooper@ti.com>
+--0016e68ee34816ced004d6152b6c
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Add sgx to MACHINE_FEATURES to indicate that a particular machine supports
-  sgx.
-* TI chips are available in multiple variants including some that supports sgx
-  while others do not.
-* By adding sgx as a machine feature other layers can create generic
-  packagegroups or images for a particular soc but will only include sgx
-  dependencies if the particular machine has sgx support.
+Hey guys,
 
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
----
- conf/machine/am335x-evm.conf      |    2 +-
- conf/machine/am3517-evm.conf      |    2 +-
- conf/machine/am37x-evm.conf       |    2 +-
- conf/machine/am387x-evm.conf      |    2 ++
- conf/machine/am389x-evm.conf      |    2 ++
- conf/machine/beagleboard.conf     |    2 +-
- conf/machine/beaglebone.conf      |    2 +-
- conf/machine/c6a814x-evm.conf     |    2 ++
- conf/machine/c6a816x-evm.conf     |    2 ++
- conf/machine/dm814x-evm.conf      |    2 ++
- conf/machine/omap3-touchbook.conf |    2 +-
- conf/machine/omap3evm.conf        |    2 +-
- conf/machine/pandaboard.conf      |    2 +-
- 13 files changed, 18 insertions(+), 8 deletions(-)
+I mentioned this in IRC yesterday but thought it was worth making it better
+known including the workaround.
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index cd30594..2889358 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -43,4 +43,4 @@ PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
- UBOOT_ARCH = "arm"
- UBOOT_MACHINE = "am335x_evm_config"
- 
--MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen sgx"
-diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
-index 536d337..d9ce758 100644
---- a/conf/machine/am3517-evm.conf
-+++ b/conf/machine/am3517-evm.conf
-@@ -30,7 +30,7 @@ UBOOT_ARCH = "arm"
- UBOOT_MACHINE = "am3517_evm_config"
- XLOAD_MACHINE = "am3517evm_config"
- 
--MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen ethernet"
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen ethernet sgx"
- 
- # NOTE: there are NAND and OneNAND versions of this board...
- 
-diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
-index 866abc5..2d1d44d 100644
---- a/conf/machine/am37x-evm.conf
-+++ b/conf/machine/am37x-evm.conf
-@@ -29,7 +29,7 @@ UBOOT_ARCH = "arm"
- UBOOT_MACHINE = "omap3_evm_config"
- XLOAD_MACHINE = "omap3evm_config"
- 
--MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen sgx"
- 
- # NOTE: there are NAND and OneNAND versions of this board...
- 
-diff --git a/conf/machine/am387x-evm.conf b/conf/machine/am387x-evm.conf
-index 5d9cc8f..b2df370 100644
---- a/conf/machine/am387x-evm.conf
-+++ b/conf/machine/am387x-evm.conf
-@@ -5,3 +5,5 @@
- require conf/machine/include/ti814x.inc
- 
- IMAGE_FSTYPES += "ubi tar.gz"
-+
-+MACHINE_FEATURES += "sgx"
-diff --git a/conf/machine/am389x-evm.conf b/conf/machine/am389x-evm.conf
-index 2a84cad..3b2145d 100644
---- a/conf/machine/am389x-evm.conf
-+++ b/conf/machine/am389x-evm.conf
-@@ -5,3 +5,5 @@
- require conf/machine/include/ti816x.inc
- 
- IMAGE_FSTYPES += "ubi tar.gz"
-+
-+MACHINE_FEATURES += "sgx"
-diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
-index 8f84c6c..e8b6279 100644
---- a/conf/machine/beagleboard.conf
-+++ b/conf/machine/beagleboard.conf
-@@ -45,7 +45,7 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
- 
- # and sdio
--MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
-+MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa sgx"
- 
- # For a modularized kernel we want to drag in networking, sound, rtc etc."
- MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl \
-diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-index 3803edf..43af461 100644
---- a/conf/machine/beaglebone.conf
-+++ b/conf/machine/beaglebone.conf
-@@ -23,4 +23,4 @@ SERIAL_CONSOLE = "115200 ttyO0"
- UBOOT_MACHINE = "am335x_evm_config"
- 
- # and sdio
--MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
-+MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa sgx"
-diff --git a/conf/machine/c6a814x-evm.conf b/conf/machine/c6a814x-evm.conf
-index b85c489..a81d7fd 100644
---- a/conf/machine/c6a814x-evm.conf
-+++ b/conf/machine/c6a814x-evm.conf
-@@ -3,3 +3,5 @@
- #@DESCRIPTION: Machine configuration for the c6a814x evm
- 
- require conf/machine/include/ti814x.inc
-+
-+MACHINE_FEATURES += "sgx"
-diff --git a/conf/machine/c6a816x-evm.conf b/conf/machine/c6a816x-evm.conf
-index a7ab9b0..380c4b8 100644
---- a/conf/machine/c6a816x-evm.conf
-+++ b/conf/machine/c6a816x-evm.conf
-@@ -3,3 +3,5 @@
- #@DESCRIPTION: Machine configuration for the c6a816x evm
- 
- require conf/machine/include/ti816x.inc
-+
-+MACHINE_FEATURES += "sgx"
-diff --git a/conf/machine/dm814x-evm.conf b/conf/machine/dm814x-evm.conf
-index 140dcc1..4fa1e24 100644
---- a/conf/machine/dm814x-evm.conf
-+++ b/conf/machine/dm814x-evm.conf
-@@ -3,3 +3,5 @@
- #@DESCRIPTION: Machine configuration for the DM814x evm
- 
- require conf/machine/include/ti814x.inc
-+
-+MACHINE_FEATURES += "sgx"
-diff --git a/conf/machine/omap3-touchbook.conf b/conf/machine/omap3-touchbook.conf
-index 8439e0a..6c52d9e 100644
---- a/conf/machine/omap3-touchbook.conf
-+++ b/conf/machine/omap3-touchbook.conf
-@@ -43,4 +43,4 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
- 
- # and sdio
--MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa touchscreen"
-+MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa touchscreen sgx"
-diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
-index dfedf0f..0719671 100644
---- a/conf/machine/omap3evm.conf
-+++ b/conf/machine/omap3evm.conf
-@@ -30,7 +30,7 @@ UBOOT_ARCH = "arm"
- UBOOT_MACHINE = "omap3_evm_config"
- XLOAD_MACHINE = "omap3evm_config"
- 
--MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen sgx"
- 
- # NOTE: there are NAND and OneNAND versions of this board...
- 
-diff --git a/conf/machine/pandaboard.conf b/conf/machine/pandaboard.conf
-index 2c37b4f..3ebd6d9 100644
---- a/conf/machine/pandaboard.conf
-+++ b/conf/machine/pandaboard.conf
-@@ -13,6 +13,6 @@ IMAGE_FSTYPES += "tar.bz2"
- SERIAL_CONSOLE = "115200 ttyO2"
- 
- MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
--MACHINE_FEATURES = "kernel26 wifi bluetooth alsa apm ext2 screen touchscreen usbgadget usbhost vfat"
-+MACHINE_FEATURES = "kernel26 wifi bluetooth alsa apm ext2 screen touchscreen usbgadget usbhost vfat sgx"
- 
- 
--- 
-1.7.0.4
+Checking out the danny branch for both poky and meta-ti and setting the
+MACHINE to beaglebone fails to build a suitable version of uboot when
+performing a bitbake -k core-image-minimal
 
+The error output is:
+make: *** No rule to make target `am335x_evm_config'.  Stop.
+make: *** [am335x_evm_config] Error 1
 
+If you navigate to the build directory you can see that it tries to build
+u-boot-v2011.06 which I understand has no support for the am335x. The
+earliest supported build being 2011.09.
+
+To get around this you can add:
+PREFERRED_VERSION_u-boot = "2011.09+git"
+
+to your local.conf.
+
+Is there an official bugtracker to file against this and a better way to
+add the fix/workaround to the danny layer?
+
+Regards,
+Nick
+
+--0016e68ee34816ced004d6152b6c
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><div><div><div><div><div>Hey guys,<br><br>I mentioned=
+ this in IRC yesterday but thought it was worth making it better known incl=
+uding the workaround.<br><br></div>Checking out the danny branch for both p=
+oky and meta-ti and setting the MACHINE to beaglebone fails to build a suit=
+able version of uboot when performing a bitbake -k core-image-minimal<br>
+
+<br>The error output is:<br>make: *** No rule to make target `am335x_evm_co=
+nfig&#39;.=A0 Stop.<br>make: *** [am335x_evm_config] Error 1<br><br></div>I=
+f you navigate to the build directory you can see that it tries to build=A0=
+ u-boot-v2011.06 which I understand has no support for the am335x. The earl=
+iest supported build being 2011.09.<br>
+
+<br></div>To get around this you can add:<br>PREFERRED_VERSION_u-boot =3D &=
+quot;2011.09+git&quot;<br><br></div>to your local.conf.<br><br></div>Is the=
+re an official bugtracker to file against this and a better way to add the =
+fix/workaround to the danny layer?<br>
+
+<br></div>Regards,<br>Nick<br></div>
+
+--0016e68ee34816ced004d6152b6c--
