@@ -1,30 +1,33 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vb0-f41.google.com (mail-vb0-f41.google.com
-	[209.85.212.41]) (using TLSv1 with cipher RC4-SHA (128/128 bits))
+Return-Path: <fcooper@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id B1AB8E006CC
-	for <meta-ti@yoctoproject.org>; Wed, 20 Feb 2013 05:15:38 -0800 (PST)
-Received: by mail-vb0-f41.google.com with SMTP id l22so5036288vbn.28
-	for <meta-ti@yoctoproject.org>; Wed, 20 Feb 2013 05:15:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:date:message-id:subject:from:to
-	:content-type; bh=SUdPvDqhiOY6J/VASNXfWjr6rOA61KUYoce130I4cJw=;
-	b=GRopSwDVzjZ0IZJO9DCmSUFUG5NSf8QaItOWvnDbcvtunI7ZwGteGaoA4p0KkiE5oL
-	EpRy3Wi3AFChtIJ3CZMxUJ8UMnfmYQqcezs9KGgNhMOM5sVA7prZJJRr4uobIrAAHp6j
-	bl3DAeG2KPyA/m4pqGwble0QQovefwooO0c3LbbNFkXnJzOVdEPToZMPafWWsGXxx6cq
-	eIybfDTcAhXvR43/6fItriFJVYXHflSwmsQ+eBpSmmO1L0izdrBpfaHa7mAkamelN5n7
-	XYl2P2fr04g1FOH4h1GbgwXCjQ7H8x/Rw2LzkxtyVC7RKBU8h3GWJIgaDTuYEhzniVni
-	POZw==
+	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 7236CE006CC
+	for <meta-ti@yoctoproject.org>; Wed, 20 Feb 2013 05:49:37 -0800 (PST)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r1KDnZKV028055;
+	Wed, 20 Feb 2013 07:49:35 -0600
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r1KDnZPc011942;
+	Wed, 20 Feb 2013 07:49:35 -0600
+Received: from DFLE09.ent.ti.com ([fe80::3103:58c3:47f:860b]) by
+	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
+	14.01.0323.003; Wed, 20 Feb 2013 07:49:35 -0600
+From: "Cooper Jr., Franklin" <fcooper@ti.com>
+To: =?iso-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@googlemail.com>,
+	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] arago servers sane?
+Thread-Index: AQHOD2xp+SgbbQS+jk2a8wE/5ISrk5iCwt6g
+Date: Wed, 20 Feb 2013 13:49:34 +0000
+Message-ID: <8F29D6B095ED194EA1980491A5E029710C3975AE@DFLE09.ent.ti.com>
+References: <CALbNGRRkxbzvQa0Lieiknz=QS+LehASn+6-QD2qY5G-CkND7zQ@mail.gmail.com>
+In-Reply-To: <CALbNGRRkxbzvQa0Lieiknz=QS+LehASn+6-QD2qY5G-CkND7zQ@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-X-Received: by 10.52.88.237 with SMTP id bj13mr22478390vdb.75.1361366137647;
-	Wed, 20 Feb 2013 05:15:37 -0800 (PST)
-Received: by 10.52.185.168 with HTTP; Wed, 20 Feb 2013 05:15:37 -0800 (PST)
-Date: Wed, 20 Feb 2013 14:15:37 +0100
-Message-ID: <CALbNGRRkxbzvQa0Lieiknz=QS+LehASn+6-QD2qY5G-CkND7zQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: meta-ti@yoctoproject.org
-Subject: arago servers sane?
+Subject: Re: arago servers sane?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,26 +40,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Feb 2013 13:15:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 20 Feb 2013 13:49:37 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hi
+Try cloning the git repository outside of OE. If that fails then the Arago-=
+project server could be acting up.
 
-after deleting all my temp file I get during parse (?!):
-
-ERROR: ExpansionError during parsing
-/home/andreas/data/oe-core/sources/meta-ti/recipes-bsp/u-boot/u-boot_2013.01.bb:
-Failure expanding variable SRCPV,expression was
-${@bb.fetch2.get_srcrev(d)} which triggered exception FetchError:
-Fetcher failure: Fetch command failed with exit code 128, output:
-fatal: The remote end hung up unexpectedly
-
-ERROR: Command execution failed: Exited with 1
-
-I tried to browse http://arago-project.org/git/projects/ but get only
-an empty frame and the page loads forever.
-
-Any thoughts?
-
-Andreas
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Andreas M=FCller
+> Sent: Wednesday, February 20, 2013 7:16 AM
+> To: meta-ti@yoctoproject.org
+> Subject: [meta-ti] arago servers sane?
+>=20
+> Hi
+>=20
+> after deleting all my temp file I get during parse (?!):
+>=20
+> ERROR: ExpansionError during parsing
+> /home/andreas/data/oe-core/sources/meta-ti/recipes-bsp/u-boot/u-
+> boot_2013.01.bb:
+> Failure expanding variable SRCPV,expression was ${@bb.fetch2.get_srcrev(d=
+)}
+> which triggered exception FetchError:
+> Fetcher failure: Fetch command failed with exit code 128, output:
+> fatal: The remote end hung up unexpectedly
+>=20
+> ERROR: Command execution failed: Exited with 1
+>=20
+> I tried to browse http://arago-project.org/git/projects/ but get only an =
+empty
+> frame and the page loads forever.
+>=20
+> Any thoughts?
+>=20
+> Andreas
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
