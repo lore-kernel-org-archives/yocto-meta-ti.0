@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C780E00312
-	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 14:53:04 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A213E0027C
+	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 14:54:32 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 06FFA52A1D; Mon, 25 Feb 2013 22:53:02 +0000 (UTC)
+	id 3A19552A1B; Mon, 25 Feb 2013 22:54:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130225225303.06FFA52A1D@arago-project.org>
-Date: Mon, 25 Feb 2013 22:53:02 +0000 (UTC)
+Message-Id: <20130225225432.3A19552A1B@arago-project.org>
+Date: Mon, 25 Feb 2013 22:54:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : linux-omap3: Add supported kernel recipe for am37x-evm and am3517-evm
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Feb 2013 22:53:04 -0000
+X-List-Received-Date: Mon, 25 Feb 2013 22:54:32 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 9ff3bd4b3d2b9c09dc4d7315b837d3ec43d2ccdd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9ff3bd4b3d2b9c09dc4d7315b837d3ec43d2ccdd
+Branch: master
+Commit: 153b5ed063c0bc2b16b938409027794a8dad908e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=153b5ed063c0bc2b16b938409027794a8dad908e
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Sun Feb 17 16:00:31 2013 -0600
@@ -73,5 +73,5 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  .../linux/linux-omap3_2.6.37-psp04.02.00.07.bb     |  101 +
  31 files changed, 16632 insertions(+), 0 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=9ff3bd4b3d2b9c09dc4d7315b837d3ec43d2ccdd
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=153b5ed063c0bc2b16b938409027794a8dad908e
 
