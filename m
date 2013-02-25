@@ -1,36 +1,37 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
-	[209.85.215.53]) (using TLSv1 with cipher RC4-SHA (128/128 bits))
+Return-Path: <javier@dowhile0.org>
+Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
+	(using TLSv1 with cipher RC4-SHA (128/128 bits))
 	(No client certificate requested)
-	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 69F1FE00480
-	for <meta-ti@yoctoproject.org>; Sat, 23 Feb 2013 19:02:49 -0800 (PST)
-Received: by mail-la0-f53.google.com with SMTP id fr10so1690363lab.40
-	for <meta-ti@yoctoproject.org>; Sat, 23 Feb 2013 19:02:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:cc:content-type;
-	bh=XGsXZqjgMrrnitBhoVbWYG6Vsnr6I6+5SRlCFMHitXA=;
-	b=lR+89kALlT9PdTtj1YQYCwBdUteY1BiYpGRBX3QUjKXC+Th2sLvCgCqkCejjHlHV2Q
-	xD+tQjO5j1OcZ4ZzpvuSe+0usNtnHAxeWhT6jjh4ZMc2zB68qGyklqmX1pr3obKfrAQF
-	65cPtX+MJhXO1PugJGNr5n2Oh8HOw8zr+UltlTnUDrUkisgVYEzO6tBsjscd8yVjZ8+9
-	vtnQCmwuMA3sfSP6iP2ek749c0+7wvEznauDI1P3Huh2nc3XcoEZHDGA/1C7pTlDGdhE
-	XJ2WtJQ39p9P6Iggr+X1dw29axxhnsyfa2k/DCZ3giFhSDNVDf2xTQT/NEA7XS+bNMRz
-	C/iA==
+	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 7D4A5E00496
+	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 01:27:00 -0800 (PST)
+Received: by mail-wg0-f54.google.com with SMTP id fm10so2174182wgb.21
+	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 01:26:58 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:x-received:x-originating-ip:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type:x-gm-message-state;
+	bh=VmEbNxjk9+ajTHMrIvt0zaPLQUrgyTGeZFTPKuF2P1M=;
+	b=UBOmLgeQisQHvbN6RoXc5WCkl7Ir/gYNnosb4tBpNL6TOXkq7ewbJD48sJ30W8JwoL
+	g7vJy7JddfujbIFAO+zZ6Bb/yxXAkCfMicueURhSeVV1SR+AAhgW9I5dG5LVCWeAzvDS
+	J5f1ooi66mDZTv21KbwVXB8JYmjc+4QnElIuNrTUq1uTQK0qO08SebLVh9tz+Q2SNkTD
+	r5RX2PNXZ0N7YxD7f3sIYIedCgCyNKmZNC3hPd+73fBrXOrVHAWG1fXLtMVZhv3JasYk
+	GzhnQ8b2NG67utEi+PlD5SaaiURMobO2ZMU65FVIA7m9KIqax6R5D8YHkDWdi/qwYR7t
+	dxzA==
 MIME-Version: 1.0
-X-Received: by 10.112.42.162 with SMTP id p2mr2764310lbl.103.1361674967099;
-	Sat, 23 Feb 2013 19:02:47 -0800 (PST)
-Received: by 10.112.21.4 with HTTP; Sat, 23 Feb 2013 19:02:46 -0800 (PST)
-In-Reply-To: <20130224023400.GA6725@denix.org>
-References: <alpine.DEB.2.02.1301290502200.12960@oneiric>
-	<20130217205130.GB2174@denix.org>
-	<CA+M6bXnmJsD2xrwi_CbbuPW4408ph3nbPiyUv6b6F37JOgLdOQ@mail.gmail.com>
-	<20130224023400.GA6725@denix.org>
-Date: Sat, 23 Feb 2013 22:02:46 -0500
-Message-ID: <CA+M6bX=dSr=6yRpHT1j_42KW1NsTJ9A-RoDgD404vpLM8mLFVA@mail.gmail.com>
-From: Tom Rini <tom.rini@gmail.com>
+X-Received: by 10.194.109.35 with SMTP id hp3mr3575597wjb.15.1361784418052;
+	Mon, 25 Feb 2013 01:26:58 -0800 (PST)
+Received: by 10.180.124.106 with HTTP; Mon, 25 Feb 2013 01:26:57 -0800 (PST)
+X-Originating-IP: [188.77.214.59]
+In-Reply-To: <20130220185430.GE13500@edge>
+References: <CALbNGRRkxbzvQa0Lieiknz=QS+LehASn+6-QD2qY5G-CkND7zQ@mail.gmail.com>
+	<20130220185430.GE13500@edge>
+Date: Mon, 25 Feb 2013 10:26:57 +0100
+Message-ID: <CABxcv=nM3YOvsgdTZ57mfq6NRD0DP=j2izXtYqJmFT4wBk5jAw@mail.gmail.com>
+From: Javier Martinez Canillas <javier@dowhile0.org>
 To: Denys Dmytriyenko <denys@ti.com>
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: is there a newer u-boot for omapl138?
+X-Gm-Message-State: ALoCoQnOQBOpiOrMTF1hkq7qj4o5PCe2yHU/rs+mHEwyxCgGpOKoA+dt4cRJJAazZhsF7mTtXC1H
+Cc: meta-ti@yoctoproject.org
+Subject: Re: arago servers sane?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,44 +44,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Feb 2013 03:02:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 25 Feb 2013 09:27:00 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Sat, Feb 23, 2013 at 9:34 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> On Sat, Feb 23, 2013 at 08:48:09PM -0500, Tom Rini wrote:
->> On Sun, Feb 17, 2013 at 3:51 PM, Denys Dmytriyenko <denys@ti.com> wrote:
->> > On Tue, Jan 29, 2013 at 05:05:23AM -0500, Robert P. J. Day wrote:
->> >>
->> >>   just got me a pdlogic zoom am1808 experimenter kit:
->> >>
->> >> http://www.logicpd.com/products/system-on-modules/zoom-am1808/
->> >>
->> >> and building for am108x-evm, i notice the version of u-boot that's
->> >> pulled in is really pretty ancient:
->> >>
->> >> SRC_URI_omapl138 = "git://arago-project.org/git/projects/u-boot-omapl1.git;protocol=http"
->> >> SRCREV_pn-${PN}_omapl138  = "5f16b8551b125f16cd8d58f278cb25b94272fd9f"
->> >> PV_omapl138      = "2009.11+${PR}+gitr${SRCREV}"
->> >>
->> >>   is there any obstacle in trying to update the version of u-boot for
->> >> that particular board?
->> >
->> > There is a slightly newer u-boot 2010.12 for omapl138:
->> > http://arago-project.org/git/?p=meta-ti.git;a=commitdiff;h=201b231d721e27ac1d7a88a540b0b2fbbb86ed1e
->> >
->> > But currently there are no immediate plans to update it further for this
->> > platform, unfortunately. If you happen to test and/or patch the latest
->> > mainline u-boot for it, please let us know - I wouldn't mind adding it to
->> > meta-ti as an alternative, even if it's not complete... Thanks.
->>
->> Good news, mainline U-Boot works reasonably well on am1808 (build for
->> da850_am18xxevm) and a few other variations on the platform.
+On Wed, Feb 20, 2013 at 7:54 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+> Yeah, as soon as I go on travel, things start falling apart... :)
 >
-> That's great news! Should I wait for the next release tag or would the last
-> 2013.02 work already "reasonably well"?
+> For some reason git service went down, should be working now.
+>
+> --
+> Denys
+>
+>
 
-2013.01.01 is fine, as might even be the one prior to that.
+It seems the git server is down again. I'm having this error when
+trying to build an image:
 
--- 
-Tom
+$ bitbake core-image-minimal
+Loading cache: 100% |##############################################|
+ETA:  00:00:00
+Loaded 74 entries from dependency cache.
+ERROR: ExpansionError during parsing
+/home/javier/collabora/devel/yocto/meta-ti/recipes-bsp/boot-monitor/boot-monitor_git.bb:
+Failure expanding variable SRCPV, expression was
+${@bb.fetch2.get_srcrev(d)} which triggered exception FetchError:
+Fetcher failure: Fetch command failed with exit code 128, output:
+fatal: The remote end hung up unexpectedly
+
+ERROR: Command execution failed: Exited with 1
+
+Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+
+It also fails if I try to manually clone the repo:
+
+$ git clone git://arago-project.org/git/projects/boot-monitor.git
+Cloning into 'boot-monitor'...
+fatal: The remote end hung up unexpectedly
+
+Best regards,
+Javier
 
