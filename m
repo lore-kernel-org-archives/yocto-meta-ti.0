@@ -1,33 +1,37 @@
-Return-Path: <hzhang@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+Return-Path: <trini@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 73CADE0027C
-	for <meta-ti@yoctoproject.org>; Tue, 26 Feb 2013 12:15:13 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 64A31E0027C
+	for <meta-ti@yoctoproject.org>; Tue, 26 Feb 2013 12:26:07 -0800 (PST)
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r1QKFCrR023135
-	for <meta-ti@yoctoproject.org>; Tue, 26 Feb 2013 14:15:12 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r1QKFCmr022901
-	for <meta-ti@yoctoproject.org>; Tue, 26 Feb 2013 14:15:12 -0600
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.1.323.3;
-	Tue, 26 Feb 2013 14:15:12 -0600
-Received: from [158.218.103.43] (gtla0868496.am.dhcp.ti.com [158.218.103.43])
-	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r1QKFBta008905;
-	Tue, 26 Feb 2013 14:15:12 -0600
-Message-ID: <512D17CE.1010105@ti.com>
-Date: Tue, 26 Feb 2013 15:15:10 -0500
-From: Hao Zhang <hzhang@ti.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:12.0) Gecko/20120428 Thunderbird/12.0.1
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r1QKQ6hd032415
+	for <meta-ti@yoctoproject.org>; Tue, 26 Feb 2013 14:26:06 -0600
+Received: from DLEE74.ent.ti.com (dlee74.ent.ti.com [157.170.170.8])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r1QKQ6XW002887
+	for <meta-ti@yoctoproject.org>; Tue, 26 Feb 2013 14:26:06 -0600
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE74.ent.ti.com
+	(157.170.170.8) with Microsoft SMTP Server id 14.1.323.3;
+	Tue, 26 Feb 2013 14:26:06 -0600
+Received: from [172.24.52.55] (h52-55.vpn.ti.com [172.24.52.55])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r1QKQ50C012134;
+	Tue, 26 Feb 2013 14:26:05 -0600
+Message-ID: <512D1A7F.7030806@ti.com>
+Date: Tue, 26 Feb 2013 15:26:39 -0500
+From: Tom Rini <trini@ti.com>
+Organization: Texas Instruments
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
 MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <1361908130-27683-1-git-send-email-hzhang@ti.com>
-	<20130226200607.GN6725@denix.org>
-In-Reply-To: <20130226200607.GN6725@denix.org>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] keystone-evm config: add ubifs support
+To: Cyril Chemparathy <cyril@ti.com>
+References: <1361903920-16650-1-git-send-email-m-karicheri2@ti.com>
+	<512D0217.7090100@ti.com> <20130226192023.GL6725@denix.org>
+	<512D0D9F.8050705@ti.com> <512D12D0.7090804@ti.com>
+	<512D1714.6040805@ti.com>
+In-Reply-To: <512D1714.6040805@ti.com>
+X-Enigmail-Version: 1.5
+Cc: meta-ti@yoctoproject.org, ceh@ti.com
+Subject: Re: [PATCH] recipe: u-boot: update recipe for more images
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,69 +44,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2013 20:15:13 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Tue, 26 Feb 2013 20:26:07 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On 2/26/2013 3:06 PM, Denys Dmytriyenko wrote:
-> On Tue, Feb 26, 2013 at 02:48:50PM -0500, hzhang@ti.com wrote:
->> From: Hao Zhang<hzhang@ti.com>
->
-> I assume you double-checked the actual UBI ARGS values below for the Keystone.
-> Other than that looks fine to me - I'll push it shortly.
->
+On 02/26/2013 03:12 PM, Cyril Chemparathy wrote:
+> On 02/26/2013 02:53 PM, Murali Karicheri wrote:
+>> + Cyril,
+>>
+>> Cyril had worked on adding GPH format for u-boot. Want to hear from him
+>> why not used the u-boot-with-spl.bin build target.
+>>
+> 
+> Because u-boot-with-spl.bin does not wrap the spl image with a header
+> that the rom bootloader understands.
 
-Yes, I did, thanks.
+What is the header we need?  I assume it's not compatible with our
+previous headers.  And if it's just a convenience for programming the
+flash, maybe we just stick with two files, to avoid further headaches
+upstream?  It's a general rule that concatenating files would make
+programming easier, but it's a small savings on either end, yes?  This
+would also make the packaging easier since it would just be
+SPL_IMAGE_FILE (or whatever) set to u-boot-spl.gph and so forth.  Thanks!
 
->> ---
->>   conf/machine/keystone-evm.conf |   19 ++++++++++++++++++-
->>   1 file changed, 18 insertions(+), 1 deletion(-)
->>
->> diff --git a/conf/machine/keystone-evm.conf b/conf/machine/keystone-evm.conf
->> index e73d84b..3e44ddc 100644
->> --- a/conf/machine/keystone-evm.conf
->> +++ b/conf/machine/keystone-evm.conf
->> @@ -14,7 +14,7 @@ require conf/machine/include/keystone.inc
->>
->>   PREFERRED_PROVIDER_virtual/kernel = "linux-keystone"
->>
->> -IMAGE_FSTYPES += "tar.bz2 cpio"
->> +IMAGE_FSTYPES += "ubi tar.bz2 cpio"
->
-> BTW, speaking of this - do you still need uncompressed cpio? Last time we
-> talked, we were not sure if compressed cpio.gz would be sufficient.
->
->
->>   SERIAL_CONSOLE = "115200 ttyS0"
->>
->> @@ -23,3 +23,20 @@ SYSVINIT_ENABLED_GETTYS = ""
->>   UBOOT_MACHINE = "tci6638_evm_config"
->>
->>   MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
->> +# do ubiattach /dev/ubi_ctrl -m 4
->> +# From dmesg:
->> +# UBI: smallest flash I/O unit:    2048
->> +# UBI: logical eraseblock size:    126976 bytes
->> +# from ubiattach stdout:
->> +# UBI device number 0, total 857 LEBs
->> +# MKUBIFS_ARGS = "-m 2048 -e 129024 -c 857"
->> +MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 857"
->> +
->> +# do ubiattach /dev/ubi_ctrl -m 4
->> +# from dmesg:
->> +# UBI: smallest flash I/O unit:    2048
->> +# UBI: physical eraseblock size:   131072 bytes (128 KiB)
->> +# UBI: sub-page size:              2048
->> +UBINIZE_ARGS = "-m 2048 -p 128KiB -s 2048 -O 2048"
->> +
->> +
->> --
->> 1.7.9.5
->>
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
->>
-
+-- 
+Tom
 
