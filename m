@@ -1,15 +1,25 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8F7DDE00312
-	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 14:54:32 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 5F02B52A32; Mon, 25 Feb 2013 22:54:32 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130225225432.5F02B52A32@arago-project.org>
-Date: Mon, 25 Feb 2013 22:54:32 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : linux: Add kernel version 3.3.7 for beagleboard
+Return-Path: <denis@denix.org>
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A740E002AB
+	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 17:44:49 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MIT000OM0TQAK32@vms173003.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 25 Feb 2013 19:44:30 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id D244120120; Mon,
+	25 Feb 2013 20:44:14 -0500 (EST)
+Date: Mon, 25 Feb 2013 20:44:14 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: fcooperjr27@gmail.com
+Message-id: <20130226014414.GE6725@denix.org>
+References: <1361138432-18908-1-git-send-email-fcooper@ti.com>
+MIME-version: 1.0
+In-reply-to: <1361138432-18908-1-git-send-email-fcooper@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 1/2] linux-omap3: Add supported kernel recipe for am37x-evm and am3517-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,29 +32,17 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Feb 2013 22:54:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 26 Feb 2013 01:44:49 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: 3aeebece0e37425fd9e480127d1ac599c87ca750
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3aeebece0e37425fd9e480127d1ac599c87ca750
+On Sun, Feb 17, 2013 at 04:00:31PM -0600, fcooperjr27@gmail.com wrote:
+> From: Franklin S. Cooper Jr <fcooper@ti.com>
 
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Sun Feb 17 16:00:32 2013 -0600
+So, how is it different from this:
 
-linux: Add kernel version 3.3.7 for beagleboard
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?id=53dcf7977a86714cbd27f919a473dac8f6f16434
 
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- ...M-OMAP-Cleanup-Beagleboard-DVI-reset-gpio.patch |  184 +
- ...ART-Fix-incorrect-population-of-default-u.patch |  169 +
- .../linux/linux-3.3.7/beagleboard/defconfig        | 3780 ++++++++++++++++++++
- recipes-kernel/linux/linux_3.3.7.bb                |   41 +
- 4 files changed, 4174 insertions(+), 0 deletions(-)
-
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=3aeebece0e37425fd9e480127d1ac599c87ca750
+-- 
+Denys
 
