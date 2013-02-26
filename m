@@ -1,37 +1,22 @@
-Return-Path: <fcooper@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id D08D5E00312
-	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 20:05:18 -0800 (PST)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r1Q45GrT022843;
-	Mon, 25 Feb 2013 22:05:16 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r1Q45GtE016363;
-	Mon, 25 Feb 2013 22:05:16 -0600
-Received: from DFLE09.ent.ti.com ([fe80::3103:58c3:47f:860b]) by
-	DFLE73.ent.ti.com ([fe80::86e:fab6:cd95:e158%28]) with mapi id
-	14.01.0323.003; Mon, 25 Feb 2013 22:05:15 -0600
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH 1/2] linux-omap3: Add supported kernel recipe
-	for am37x-evm and am3517-evm
-Thread-Index: AQHODVo/vuwMChqXs0Kdjmqo8b/TwpiLz3AA//+kgPuAAGUmAP//t0fg
-Date: Tue, 26 Feb 2013 04:05:15 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C3AF5F0@DFLE09.ent.ti.com>
-References: <1361138432-18908-1-git-send-email-fcooper@ti.com>
-	<20130226014414.GE6725@denix.org>
-	<1062C227-A018-4C33-8071-417E7C256AA9@ti.com>
-	<20130226021845.GD17751@edge>
-In-Reply-To: <20130226021845.GD17751@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
-MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 1/2] linux-omap3: Add supported kernel recipe for am37x-evm and am3517-evm
+Return-Path: <denis@denix.org>
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 254D0E00312
+	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 20:21:24 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173021.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MIT008XT839C714@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 25 Feb 2013 22:21:10 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id C86D8200BD; Mon,
+	25 Feb 2013 23:21:09 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Mon, 25 Feb 2013 23:21:08 -0500
+Message-id: <1361852468-4352-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [PATCH] u-boot: add latest mainline release 2013.01.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,36 +29,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2013 04:05:19 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 26 Feb 2013 04:21:24 -0000
 
-Your right. The recipes are almost identical. Only tweaks I would make is s=
-witching the commit id and replacing the require linux.inc with a simple in=
-herit kernel.
-You can revert my patch if you like and I can make tweaks to the current re=
-cipe or you can delete your version. Whichever approach you prefer is fine =
-with me.
+From: Denys Dmytriyenko <denys@ti.com>
 
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Monday, February 25, 2013 8:19 PM
-> To: Cooper Jr., Franklin
-> Cc: fcooperjr27@gmail.com; meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH 1/2] linux-omap3: Add supported kernel reci=
-pe
-> for am37x-evm and am3517-evm
->=20
-> On Mon, Feb 25, 2013 at 09:16:43PM -0500, Cooper Jr., Franklin wrote:
-> > Glancing at your recipe it looks the same.
-> >
-> > I must of missed your version. The kernel hasn't changed so they
-> > should be identical. Let me double check with a quick diff
->=20
-> Please do. I only see minor diffs (commit ID vs. tag, some order diff etc=
-).
->=20
-> --
-> Denys
+Should work reasonable well for most platforms and is provided as an alternative.
+Is not enabled by default, since there are usually older versions with more
+features supported.
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-bsp/u-boot/u-boot_2013.01.01.bb | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 recipes-bsp/u-boot/u-boot_2013.01.01.bb
+
+diff --git a/recipes-bsp/u-boot/u-boot_2013.01.01.bb b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
+new file mode 100644
+index 0000000..4c460cc
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
+@@ -0,0 +1,22 @@
++require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
++
++DESCRIPTION = "Mainline u-boot bootloader"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
++
++DEFAULT_PREFERENCE = "-1"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++PR = "r1"
++
++SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
++
++BRANCH ?= "u-boot-2013.01.y"
++
++SRCREV = "e8ae0fa5edd152b2b29c470b88429be4cdcd2c46"
++
++S = "${WORKDIR}/git"
++
++UBOOT_SUFFIX = "img"
++SPL_BINARY = "MLO"
+-- 
+1.8.1.2
+
 
