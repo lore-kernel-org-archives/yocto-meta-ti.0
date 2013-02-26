@@ -1,33 +1,15 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 67695E002AB
-	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 18:18:49 -0800 (PST)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r1Q2IlOJ003278;
-	Mon, 25 Feb 2013 20:18:47 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r1Q2IlZ2008620;
-	Mon, 25 Feb 2013 20:18:47 -0600
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by dfle72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.1.323.3;
-	Mon, 25 Feb 2013 20:18:46 -0600
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id r1Q2Ikwk024832;
-	Mon, 25 Feb 2013 20:18:46 -0600
-Date: Mon, 25 Feb 2013 21:18:46 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Cooper Jr., Franklin" <fcooper@ti.com>
-Message-ID: <20130226021845.GD17751@edge>
-References: <1361138432-18908-1-git-send-email-fcooper@ti.com>
-	<20130226014414.GE6725@denix.org>
-	<1062C227-A018-4C33-8071-417E7C256AA9@ti.com>
-MIME-Version: 1.0
-In-Reply-To: <1062C227-A018-4C33-8071-417E7C256AA9@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 1/2] linux-omap3: Add supported kernel recipe for am37x-evm and am3517-evm
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4F9CE002AB
+	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 18:45:59 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 2A5F752A51; Tue, 26 Feb 2013 02:45:59 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130226024559.2A5F752A51@arago-project.org>
+Date: Tue, 26 Feb 2013 02:45:59 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Franklin S. Cooper Jr : machine configs: Add SGX to MACHINE_FEATURES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,18 +22,190 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2013 02:18:49 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 26 Feb 2013 02:46:00 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, Feb 25, 2013 at 09:16:43PM -0500, Cooper Jr., Franklin wrote:
-> Glancing at your recipe it looks the same.
-> 
-> I must of missed your version. The kernel hasn't changed so they should be 
-> identical. Let me double check with a quick diff
+Module: meta-ti
+Branch: master
+Commit: 4d99e63181c6f58b5bb41eb830c7af75b097e10e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4d99e63181c6f58b5bb41eb830c7af75b097e10e
 
-Please do. I only see minor diffs (commit ID vs. tag, some order diff etc).
+Author: Franklin S. Cooper Jr <fcooper@ti.com>
+Date:   Mon Feb 18 22:45:16 2013 -0600
 
--- 
-Denys
+machine configs: Add SGX to MACHINE_FEATURES
+
+* Add sgx to MACHINE_FEATURES to indicate that a particular machine supports
+  sgx.
+* TI chips are available in multiple variants including some that supports sgx
+  while others do not.
+* By adding sgx as a machine feature other layers can create generic
+  packagegroups or images for a particular soc but will only include sgx
+  dependencies if the particular machine has sgx support.
+
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ conf/machine/am335x-evm.conf      |    2 +-
+ conf/machine/am3517-evm.conf      |    2 +-
+ conf/machine/am37x-evm.conf       |    2 +-
+ conf/machine/am387x-evm.conf      |    2 ++
+ conf/machine/am389x-evm.conf      |    2 ++
+ conf/machine/beagleboard.conf     |    2 +-
+ conf/machine/beaglebone.conf      |    2 +-
+ conf/machine/c6a814x-evm.conf     |    2 ++
+ conf/machine/c6a816x-evm.conf     |    2 ++
+ conf/machine/dm814x-evm.conf      |    2 ++
+ conf/machine/omap3-touchbook.conf |    2 +-
+ conf/machine/omap3evm.conf        |    2 +-
+ conf/machine/pandaboard.conf      |    2 +-
+ 13 files changed, 18 insertions(+), 8 deletions(-)
+
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index cd30594..2889358 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -43,4 +43,4 @@ PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
+ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "am335x_evm_config"
+ 
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen sgx"
+diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
+index 536d337..d9ce758 100644
+--- a/conf/machine/am3517-evm.conf
++++ b/conf/machine/am3517-evm.conf
+@@ -30,7 +30,7 @@ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "am3517_evm_config"
+ XLOAD_MACHINE = "am3517evm_config"
+ 
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen ethernet"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen ethernet sgx"
+ 
+ # NOTE: there are NAND and OneNAND versions of this board...
+ 
+diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
+index 866abc5..2d1d44d 100644
+--- a/conf/machine/am37x-evm.conf
++++ b/conf/machine/am37x-evm.conf
+@@ -29,7 +29,7 @@ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "omap3_evm_config"
+ XLOAD_MACHINE = "omap3evm_config"
+ 
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen sgx"
+ 
+ # NOTE: there are NAND and OneNAND versions of this board...
+ 
+diff --git a/conf/machine/am387x-evm.conf b/conf/machine/am387x-evm.conf
+index 5d9cc8f..b2df370 100644
+--- a/conf/machine/am387x-evm.conf
++++ b/conf/machine/am387x-evm.conf
+@@ -5,3 +5,5 @@
+ require conf/machine/include/ti814x.inc
+ 
+ IMAGE_FSTYPES += "ubi tar.gz"
++
++MACHINE_FEATURES += "sgx"
+diff --git a/conf/machine/am389x-evm.conf b/conf/machine/am389x-evm.conf
+index 2a84cad..3b2145d 100644
+--- a/conf/machine/am389x-evm.conf
++++ b/conf/machine/am389x-evm.conf
+@@ -5,3 +5,5 @@
+ require conf/machine/include/ti816x.inc
+ 
+ IMAGE_FSTYPES += "ubi tar.gz"
++
++MACHINE_FEATURES += "sgx"
+diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
+index 8f84c6c..e8b6279 100644
+--- a/conf/machine/beagleboard.conf
++++ b/conf/machine/beagleboard.conf
+@@ -45,7 +45,7 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
+ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+ 
+ # and sdio
+-MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
++MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa sgx"
+ 
+ # For a modularized kernel we want to drag in networking, sound, rtc etc."
+ MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl \
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index 3803edf..43af461 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -23,4 +23,4 @@ SERIAL_CONSOLE = "115200 ttyO0"
+ UBOOT_MACHINE = "am335x_evm_config"
+ 
+ # and sdio
+-MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
++MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa sgx"
+diff --git a/conf/machine/c6a814x-evm.conf b/conf/machine/c6a814x-evm.conf
+index b85c489..a81d7fd 100644
+--- a/conf/machine/c6a814x-evm.conf
++++ b/conf/machine/c6a814x-evm.conf
+@@ -3,3 +3,5 @@
+ #@DESCRIPTION: Machine configuration for the c6a814x evm
+ 
+ require conf/machine/include/ti814x.inc
++
++MACHINE_FEATURES += "sgx"
+diff --git a/conf/machine/c6a816x-evm.conf b/conf/machine/c6a816x-evm.conf
+index a7ab9b0..380c4b8 100644
+--- a/conf/machine/c6a816x-evm.conf
++++ b/conf/machine/c6a816x-evm.conf
+@@ -3,3 +3,5 @@
+ #@DESCRIPTION: Machine configuration for the c6a816x evm
+ 
+ require conf/machine/include/ti816x.inc
++
++MACHINE_FEATURES += "sgx"
+diff --git a/conf/machine/dm814x-evm.conf b/conf/machine/dm814x-evm.conf
+index 140dcc1..4fa1e24 100644
+--- a/conf/machine/dm814x-evm.conf
++++ b/conf/machine/dm814x-evm.conf
+@@ -3,3 +3,5 @@
+ #@DESCRIPTION: Machine configuration for the DM814x evm
+ 
+ require conf/machine/include/ti814x.inc
++
++MACHINE_FEATURES += "sgx"
+diff --git a/conf/machine/omap3-touchbook.conf b/conf/machine/omap3-touchbook.conf
+index 8439e0a..6c52d9e 100644
+--- a/conf/machine/omap3-touchbook.conf
++++ b/conf/machine/omap3-touchbook.conf
+@@ -43,4 +43,4 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
+ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+ 
+ # and sdio
+-MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa touchscreen"
++MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa touchscreen sgx"
+diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
+index dfedf0f..0719671 100644
+--- a/conf/machine/omap3evm.conf
++++ b/conf/machine/omap3evm.conf
+@@ -30,7 +30,7 @@ UBOOT_ARCH = "arm"
+ UBOOT_MACHINE = "omap3_evm_config"
+ XLOAD_MACHINE = "omap3evm_config"
+ 
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen sgx"
+ 
+ # NOTE: there are NAND and OneNAND versions of this board...
+ 
+diff --git a/conf/machine/pandaboard.conf b/conf/machine/pandaboard.conf
+index 2c37b4f..3ebd6d9 100644
+--- a/conf/machine/pandaboard.conf
++++ b/conf/machine/pandaboard.conf
+@@ -13,6 +13,6 @@ IMAGE_FSTYPES += "tar.bz2"
+ SERIAL_CONSOLE = "115200 ttyO2"
+ 
+ MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
+-MACHINE_FEATURES = "kernel26 wifi bluetooth alsa apm ext2 screen touchscreen usbgadget usbhost vfat"
++MACHINE_FEATURES = "kernel26 wifi bluetooth alsa apm ext2 screen touchscreen usbgadget usbhost vfat sgx"
+ 
+ 
+
 
