@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4F9CE002AB
-	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 18:45:59 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3361CE002AB
+	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 18:46:50 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2A5F752A51; Tue, 26 Feb 2013 02:45:59 +0000 (UTC)
+	id BCC0252A51; Tue, 26 Feb 2013 02:46:49 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130226024559.2A5F752A51@arago-project.org>
-Date: Tue, 26 Feb 2013 02:45:59 +0000 (UTC)
+Message-Id: <20130226024649.BCC0252A51@arago-project.org>
+Date: Tue, 26 Feb 2013 02:46:49 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : machine configs: Add SGX to MACHINE_FEATURES
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2013 02:46:00 -0000
+X-List-Received-Date: Tue, 26 Feb 2013 02:46:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 4d99e63181c6f58b5bb41eb830c7af75b097e10e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4d99e63181c6f58b5bb41eb830c7af75b097e10e
+Branch: danny
+Commit: e851afed41ab2d29fc5f91a527a971e32c013118
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e851afed41ab2d29fc5f91a527a971e32c013118
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Mon Feb 18 22:45:16 2013 -0600
