@@ -1,22 +1,33 @@
-Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A1B01E00312
-	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 20:42:54 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MIT00DKB92XWTC6@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 25 Feb 2013 22:42:34 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id CBD26200BD; Mon,
-	25 Feb 2013 23:42:33 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Mon, 25 Feb 2013 23:42:28 -0500
-Message-id: <1361853748-24166-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.1.4
-Subject: [PATCHv2] linux-omap-psp: fix alignment issue of 2.6.37 kernel with gcc-4.7
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
+	[209.85.223.174]) (using TLSv1 with cipher RC4-SHA (128/128 bits))
+	(No client certificate requested)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTPS id 58F79E002AB
+	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 22:04:08 -0800 (PST)
+Received: by mail-ie0-f174.google.com with SMTP id k10so4004453iea.19
+	for <meta-ti@yoctoproject.org>; Mon, 25 Feb 2013 22:04:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:mime-version:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type;
+	bh=FeDuwREhDRHxmTzcIfOQM6T44Tr0mK8+R928y1eqU4Q=;
+	b=TfIIhbx+p9EuycKGbbaIlk/hphXRL1rLhTWmSENDMUnzvdPVK6d3Klcw40nRgsl7mB
+	Iwf9IdZTH2gojyaqvSuZbC465BSy3oxreQ2VNsyVt+rB7M6jCM8W/2GTLhiTrnBmRUNV
+	V7Iz1ROzx2X+a3OrzPLupSyk8F5umgfezCHE9PuBQJPyYQdYpVIm/LdU5QumwY3zg7Nf
+	KRRbFQrdejyyUQgNwd1CUI5DmJRVZGlE+jsFg3/wD6vqBpwd/wqjcpk+bSVeWsrsZXAZ
+	BpV5lHAXj5m9mkPAEqZultu9rA9pViaW8SSgNVD7PUzBR3ux5ZKF52lcIs2OvHBXgKOn
+	bZfA==
+X-Received: by 10.50.155.134 with SMTP id vw6mr4910328igb.34.1361858647558;
+	Mon, 25 Feb 2013 22:04:07 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.50.13.204 with HTTP; Mon, 25 Feb 2013 22:03:37 -0800 (PST)
+In-Reply-To: <1361850513-12048-1-git-send-email-denis@denix.org>
+References: <1361850513-12048-1-git-send-email-denis@denix.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 25 Feb 2013 22:03:37 -0800
+Message-ID: <CAMKF1spWxNHySgdtPGqnWNfJ7y4aH1ZZNkZkt4BjM1x20W6FyA@mail.gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] linux-omapl138: fix alignment issue of 2.6.37 kernel with gcc-4.7
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,81 +40,11 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Feb 2013 04:42:54 -0000
+X-List-Received-Date: Tue, 26 Feb 2013 06:04:08 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+On Mon, Feb 25, 2013 at 7:48 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> 0001-arm-fix-builds-with-gcc-4.7.patch
 
-Patch by Steve Sakoman
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
-v2 - move patch to a common location
-
- .../files/0001-arm-fix-builds-with-gcc-4.7.patch   | 26 ++++++++++++++++++++++
- recipes-kernel/linux/linux-omap-psp_2.6.37.bb      |  9 ++++++++
- 2 files changed, 35 insertions(+)
- create mode 100644 recipes-kernel/linux/files/0001-arm-fix-builds-with-gcc-4.7.patch
-
-diff --git a/recipes-kernel/linux/files/0001-arm-fix-builds-with-gcc-4.7.patch b/recipes-kernel/linux/files/0001-arm-fix-builds-with-gcc-4.7.patch
-new file mode 100644
-index 0000000..db701e2
---- /dev/null
-+++ b/recipes-kernel/linux/files/0001-arm-fix-builds-with-gcc-4.7.patch
-@@ -0,0 +1,26 @@
-+From 0d12debe917269a013f8eddd42da8d3de5e3174e Mon Sep 17 00:00:00 2001
-+From: Steve Sakoman <steve@sakoman.com>
-+Date: Thu, 24 Jan 2013 15:42:01 -0800
-+Subject: [PATCH] arm: fix builds with gcc 4.7
-+
-+new unaligned access support in GCC was triggering an alignment fault at boot
-+---
-+ arch/arm/kernel/head.S | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/arch/arm/kernel/head.S b/arch/arm/kernel/head.S
-+index 6bd82d2..56b02cd 100644
-+--- a/arch/arm/kernel/head.S
-++++ b/arch/arm/kernel/head.S
-+@@ -336,7 +336,7 @@ __secondary_data:
-+  *  r13 = *virtual* address to jump to upon completion
-+  */
-+ __enable_mmu:
-+-#ifdef CONFIG_ALIGNMENT_TRAP
-++#if defined(CONFIG_ALIGNMENT_TRAP) && __LINUX_ARM_ARCH__ < 6
-+ 	orr	r0, r0, #CR_A
-+ #else
-+ 	bic	r0, r0, #CR_A
-+-- 
-+1.8.1.2
-+
-diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-index bafeba5..9eacfc9 100644
---- a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-+++ b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-@@ -6,6 +6,10 @@ COMPATIBLE_MACHINE = "omap3"
- 
- SRCREV= "20c003f2f024d9f50f59edf9f1b8f5f035fb15b8"
- 
-+# The main PR is now using MACHINE_KERNEL_PR, for omap3 devices
-+# see conf/machine/include/omap3.inc
-+MACHINE_KERNEL_PR_append = "a"
-+
- SRC_URI = "git://arago-project.org/git/projects/linux-omap3.git;protocol=git \
-            file://defconfig"
- 
-@@ -83,6 +87,11 @@ SRC_URI += " \
-     file://0002-usb-musb-am35x-fix-role-switching-issue.patch \
- "
- 
-+# Fix alignment issue with gcc-4.7
-+SRC_URI += " \
-+    file://0001-arm-fix-builds-with-gcc-4.7.patch \
-+"
-+
- # Updated PIO mode for MUSB help description
- SRC_URI_append_am3517-evm = " file://0001-musb-update-PIO-mode-help-information-in-Kconfig.patch"
- 
--- 
-1.8.1.4
-
+where is this patch in metadata ?
 
