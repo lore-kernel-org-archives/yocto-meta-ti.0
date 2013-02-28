@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 20A80E003BC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86105E003BC
 	for <meta-ti@yoctoproject.org>; Thu, 28 Feb 2013 12:20:27 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9120D52A98; Thu, 28 Feb 2013 20:20:26 +0000 (UTC)
+	id 1986352A9A; Thu, 28 Feb 2013 20:20:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130228202026.9120D52A98@arago-project.org>
-Date: Thu, 28 Feb 2013 20:20:26 +0000 (UTC)
+Message-Id: <20130228202027.1986352A9A@arago-project.org>
+Date: Thu, 28 Feb 2013 20:20:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Hao Zhang : keystone-evm config: add ubifs support
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Thu, 28 Feb 2013 20:20:27 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: db2b57fd141826ab4f1123cbe53ea7b7020e98c0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=db2b57fd141826ab4f1123cbe53ea7b7020e98c0
+Branch: master
+Commit: a5ebeba1c708c0aef6e7af5671ac516602052284
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a5ebeba1c708c0aef6e7af5671ac516602052284
 
 Author: Hao Zhang <hzhang@ti.com>
 Date:   Tue Feb 26 14:48:50 2013 -0500
