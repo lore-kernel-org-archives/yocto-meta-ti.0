@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DE276E002AB
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF705E006F6
 	for <meta-ti@yoctoproject.org>; Thu, 28 Feb 2013 12:00:39 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 74F1B52A6F; Thu, 28 Feb 2013 20:00:38 +0000 (UTC)
+	id 69CAD52A87; Thu, 28 Feb 2013 20:00:39 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130228200038.74F1B52A6F@arago-project.org>
-Date: Thu, 28 Feb 2013 20:00:38 +0000 (UTC)
+Message-Id: <20130228200039.69CAD52A87@arago-project.org>
+Date: Thu, 28 Feb 2013 20:00:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : Revert "linux-omap3: Add supported kernel recipe for am37x-evm and am3517-evm"
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Thu, 28 Feb 2013 20:00:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 263a46fa46fc05c86673890523cea8fc37b2f3ed
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=263a46fa46fc05c86673890523cea8fc37b2f3ed
+Branch: danny
+Commit: 724db5b366d64739174566a8af52d0396f3fb6ce
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=724db5b366d64739174566a8af52d0396f3fb6ce
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Feb 28 14:57:26 2013 -0500
@@ -76,5 +76,5 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  .../linux/linux-omap3_2.6.37-psp04.02.00.07.bb     |  101 -
  31 files changed, 0 insertions(+), 16632 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=263a46fa46fc05c86673890523cea8fc37b2f3ed
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=724db5b366d64739174566a8af52d0396f3fb6ce
 
