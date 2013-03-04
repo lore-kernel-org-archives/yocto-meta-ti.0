@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D94FEE014EF
-	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 08:43:50 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 78D1EE014D4
+	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 08:43:53 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9529152A24; Mon,  4 Mar 2013 16:43:50 +0000 (UTC)
+	id 43CB752A24; Mon,  4 Mar 2013 16:43:53 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130304164350.9529152A24@arago-project.org>
-Date: Mon,  4 Mar 2013 16:43:50 +0000 (UTC)
+Message-Id: <20130304164353.43CB752A24@arago-project.org>
+Date: Mon,  4 Mar 2013 16:43:53 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot: add latest mainline release 2013.01.01
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2013 16:43:51 -0000
+X-List-Received-Date: Mon, 04 Mar 2013 16:43:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: e97da12725579312f2cca6b2d3924db097f8fa26
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e97da12725579312f2cca6b2d3924db097f8fa26
+Branch: danny
+Commit: 2e71db86256ef6d9300c3a869c8c3358507063da
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2e71db86256ef6d9300c3a869c8c3358507063da
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Feb 25 23:15:26 2013 -0500
