@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64517E014A1
-	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 08:31:17 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4CC32E014A2
+	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 08:36:31 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0D1B652A94; Mon,  4 Mar 2013 16:31:16 +0000 (UTC)
+	id 0AF5352A95; Mon,  4 Mar 2013 16:36:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130304163116.0D1B652A94@arago-project.org>
-Date: Mon,  4 Mar 2013 16:31:16 +0000 (UTC)
+Message-Id: <20130304163631.0AF5352A95@arago-project.org>
+Date: Mon,  4 Mar 2013 16:36:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: add recipe for tracking TI latest staging tree
+Subject: Denys Dmytriyenko : u-boot 2012.10: add the latest SDK 05. 06 version from meta-arago
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,75 +22,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2013 16:31:17 -0000
+X-List-Received-Date: Mon, 04 Mar 2013 16:36:31 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 3a000bd53605d35ef37b8dd571ad29d343d52f48
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3a000bd53605d35ef37b8dd571ad29d343d52f48
+Branch: master
+Commit: a80ec1d7bec835a743701a8f19c87efdaf92a6ba
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a80ec1d7bec835a743701a8f19c87efdaf92a6ba
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar  4 11:12:29 2013 -0500
+Date:   Thu Feb 28 16:52:53 2013 -0500
 
-linux-ti-staging: add recipe for tracking TI latest staging tree
+u-boot 2012.10: add the latest SDK 05.06 version from meta-arago
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_git.bb |   44 ++++++++++++++++++++++++++
- 1 files changed, 44 insertions(+), 0 deletions(-)
+ recipes-bsp/u-boot/u-boot_2012.10.bb |   32 ++++++++++++++++++++++++++++++++
+ 1 files changed, 32 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+diff --git a/recipes-bsp/u-boot/u-boot_2012.10.bb b/recipes-bsp/u-boot/u-boot_2012.10.bb
 new file mode 100644
-index 0000000..8cc7206
+index 0000000..89d646c
 --- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -0,0 +1,44 @@
-+SECTION = "kernel"
-+DESCRIPTION = "Linux kernel for TI devices"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-+KERNEL_IMAGETYPE = "uImage"
++++ b/recipes-bsp/u-boot/u-boot_2012.10.bb
+@@ -0,0 +1,32 @@
++# Use the version of u-boot.inc in oe-core not the meta-ti version
++require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
 +
-+inherit kernel
-+require recipes-kernel/linux/linux-dtb.inc
++# Reset OEMAKE. Current u-boot.inc sets -02 which breaks this version of u-boot's build.
++# This issue was fixed in oe-core master by removing the -02 statement.
++EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
 +
-+# Stage the power management firmware before building the kernel
-+DEPENDS += "am33x-cm3"
++DESCRIPTION = "u-boot bootloader for ARM MPU devices"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
 +
-+KERNEL_DEVICETREE_am335x-evm = "arch/arm/boot/dts/am335x-evm.dts"
-+KERNEL_DEVICETREE_beaglebone = "arch/arm/boot/dts/am335x-bone.dts"
++COMPATIBLE_MACHINE = "ti33x|omap3"
 +
-+COMPATIBLE_MACHINE = "ti33x"
++DEFAULT_PREFERENCE = "-1"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++PR = "r7+gitr${SRCPV}"
++
++SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH} \
++"
++
++BRANCH = "amsdk-05.06.00.00"
++
++SRCREV = "6536bfa6b7f16bb49fdea8c72959e3ed54e77a82"
 +
 +S = "${WORKDIR}/git"
 +
-+BRANCH = "ti-linux-3.8.y"
++UBOOT_SUFFIX = "img"
 +
-+SRCREV = "d26595a42220789b81a9d243e2fc0837c7776360"
-+PV = "3.8.2"
-+
-+# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+
-+SRC_URI = "git://gitorious.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH}"
-+
-+do_setup_defconfig() {
-+        :
-+}
-+
-+do_configure() {
-+    oe_runmake omap2plus_defconfig
-+}
-+
-+# Copy the am33x-cm3 firmware if it is available
-+do_compile_prepend() {
-+    if [ -e "${STAGING_DIR_HOST}/${base_libdir}/firmware/am335x-pm-firmware.bin" ]
-+    then
-+        cp "${STAGING_DIR_HOST}/${base_libdir}/firmware/am335x-pm-firmware.bin" "${S}/firmware"
-+    fi
-+}
++# Set the name of the SPL that will built so that it is also packaged with u-boot.
++SPL_BINARY = "MLO"
 
 
