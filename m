@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 78D1EE014D4
-	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 08:43:53 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42CE8E01465
+	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 09:15:24 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 43CB752A24; Mon,  4 Mar 2013 16:43:53 +0000 (UTC)
+	id CE60A52A8E; Mon,  4 Mar 2013 17:15:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130304164353.43CB752A24@arago-project.org>
-Date: Mon,  4 Mar 2013 16:43:53 +0000 (UTC)
+Message-Id: <20130304171523.CE60A52A8E@arago-project.org>
+Date: Mon,  4 Mar 2013 17:15:23 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot: add latest mainline release 2013.01.01
+Subject: Denys Dmytriyenko : linux-omap: replace use of FILESPATHPKG with FILESEXTRAPATHS
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,59 +22,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2013 16:43:53 -0000
+X-List-Received-Date: Mon, 04 Mar 2013 17:15:24 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 2e71db86256ef6d9300c3a869c8c3358507063da
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2e71db86256ef6d9300c3a869c8c3358507063da
+Branch: master
+Commit: 85120ef4cbb4642a079cd6db0f78001a85f66611
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=85120ef4cbb4642a079cd6db0f78001a85f66611
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Feb 25 23:15:26 2013 -0500
+Date:   Mon Mar  4 12:10:47 2013 -0500
 
-u-boot: add latest mainline release 2013.01.01
+linux-omap: replace use of FILESPATHPKG with FILESEXTRAPATHS
 
-* This is a pure _mainline_ version w/o any patches on top.
-* Should work reasonably well for most platforms and is provided as an
-  alternative to specialized pre-integrated and patched versions.
-* It is not enabled by default, since specialized versions usually have
-  more features and better support, although maybe slightly older.
+Thanks to Robert P. J. Day for reporting.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot_2013.01.01.bb |   22 ++++++++++++++++++++++
- 1 files changed, 22 insertions(+), 0 deletions(-)
+ recipes-kernel/linux/linux-omap_2.6.37.bb |    2 +-
+ recipes-kernel/linux/linux-omap_2.6.39.bb |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot_2013.01.01.bb b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
-new file mode 100644
-index 0000000..4c460cc
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
-@@ -0,0 +1,22 @@
-+require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
-+
-+DESCRIPTION = "Mainline u-boot bootloader"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+PR = "r1"
-+
-+SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
-+
-+BRANCH ?= "u-boot-2013.01.y"
-+
-+SRCREV = "e8ae0fa5edd152b2b29c470b88429be4cdcd2c46"
-+
-+S = "${WORKDIR}/git"
-+
-+UBOOT_SUFFIX = "img"
-+SPL_BINARY = "MLO"
+diff --git a/recipes-kernel/linux/linux-omap_2.6.37.bb b/recipes-kernel/linux/linux-omap_2.6.37.bb
+index aa7d2fc..62076fb 100644
+--- a/recipes-kernel/linux/linux-omap_2.6.37.bb
++++ b/recipes-kernel/linux/linux-omap_2.6.37.bb
+@@ -10,7 +10,7 @@ PV = "2.6.37"
+ MACHINE_KERNEL_PR_append = "c+gitr${SRCREV}"
+ SRCREV = "fa3b4e23ec20cfc944db7cc2b30b0d82c20e4472"
+ 
+-FILESPATHPKG_prepend = "linux-omap-2.6.37:"
++FILESEXTRAPATHS_prepend := "{THISDIR}/${PN}-${PV}:"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
+ 	   file://defconfig"
+diff --git a/recipes-kernel/linux/linux-omap_2.6.39.bb b/recipes-kernel/linux/linux-omap_2.6.39.bb
+index 34e24e7..ae90ad2 100644
+--- a/recipes-kernel/linux/linux-omap_2.6.39.bb
++++ b/recipes-kernel/linux/linux-omap_2.6.39.bb
+@@ -9,7 +9,7 @@ COMPATIBLE_MACHINE = "(beagleboard)"
+ SRCREV_pn-${PN} = "v2.6.39"
+ MACHINE_KERNEL_PR_append = "o"
+ 
+-FILESPATHPKG_prepend = "linux-omap-2.6.39:"
++FILESEXTRAPATHS_prepend := "{THISDIR}/${PN}-${PV}:"
+ 
+ SRC_URI += "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap.git;protocol=git \
+             file://defconfig"
 
 
