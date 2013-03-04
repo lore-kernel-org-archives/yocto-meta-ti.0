@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53F3AE014DB
-	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 08:36:35 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D94FEE014EF
+	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 08:43:50 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1539652A95; Mon,  4 Mar 2013 16:36:35 +0000 (UTC)
+	id 9529152A24; Mon,  4 Mar 2013 16:43:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130304163635.1539652A95@arago-project.org>
-Date: Mon,  4 Mar 2013 16:36:35 +0000 (UTC)
+Message-Id: <20130304164350.9529152A24@arago-project.org>
+Date: Mon,  4 Mar 2013 16:43:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot 2012.10: add the latest SDK 05. 06 version from meta-arago
+Subject: Denys Dmytriyenko : u-boot: add latest mainline release 2013.01.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,63 +22,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2013 16:36:35 -0000
+X-List-Received-Date: Mon, 04 Mar 2013 16:43:51 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: e7c7da790fdce3a0c3549121a8f0a484296a29c3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e7c7da790fdce3a0c3549121a8f0a484296a29c3
+Branch: master
+Commit: e97da12725579312f2cca6b2d3924db097f8fa26
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e97da12725579312f2cca6b2d3924db097f8fa26
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Feb 28 16:52:53 2013 -0500
+Date:   Mon Feb 25 23:15:26 2013 -0500
 
-u-boot 2012.10: add the latest SDK 05.06 version from meta-arago
+u-boot: add latest mainline release 2013.01.01
+
+* This is a pure _mainline_ version w/o any patches on top.
+* Should work reasonably well for most platforms and is provided as an
+  alternative to specialized pre-integrated and patched versions.
+* It is not enabled by default, since specialized versions usually have
+  more features and better support, although maybe slightly older.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot_2012.10.bb |   32 ++++++++++++++++++++++++++++++++
- 1 files changed, 32 insertions(+), 0 deletions(-)
+ recipes-bsp/u-boot/u-boot_2013.01.01.bb |   22 ++++++++++++++++++++++
+ 1 files changed, 22 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot_2012.10.bb b/recipes-bsp/u-boot/u-boot_2012.10.bb
+diff --git a/recipes-bsp/u-boot/u-boot_2013.01.01.bb b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
 new file mode 100644
-index 0000000..89d646c
+index 0000000..4c460cc
 --- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot_2012.10.bb
-@@ -0,0 +1,32 @@
-+# Use the version of u-boot.inc in oe-core not the meta-ti version
++++ b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
+@@ -0,0 +1,22 @@
 +require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
 +
-+# Reset OEMAKE. Current u-boot.inc sets -02 which breaks this version of u-boot's build.
-+# This issue was fixed in oe-core master by removing the -02 statement.
-+EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
-+
-+DESCRIPTION = "u-boot bootloader for ARM MPU devices"
++DESCRIPTION = "Mainline u-boot bootloader"
 +LICENSE = "GPLv2+"
 +LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
-+
-+COMPATIBLE_MACHINE = "ti33x|omap3"
 +
 +DEFAULT_PREFERENCE = "-1"
 +
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+PR = "r7+gitr${SRCPV}"
++PR = "r1"
 +
-+SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH} \
-+"
++SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
 +
-+BRANCH = "amsdk-05.06.00.00"
++BRANCH ?= "u-boot-2013.01.y"
 +
-+SRCREV = "6536bfa6b7f16bb49fdea8c72959e3ed54e77a82"
++SRCREV = "e8ae0fa5edd152b2b29c470b88429be4cdcd2c46"
 +
 +S = "${WORKDIR}/git"
 +
 +UBOOT_SUFFIX = "img"
-+
-+# Set the name of the SPL that will built so that it is also packaged with u-boot.
 +SPL_BINARY = "MLO"
 
 
