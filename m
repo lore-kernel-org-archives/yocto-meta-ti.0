@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42CE8E01465
-	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 09:15:24 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6133E014E3
+	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 09:15:28 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CE60A52A8E; Mon,  4 Mar 2013 17:15:23 +0000 (UTC)
+	id 9F3C152A8E; Mon,  4 Mar 2013 17:15:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130304171523.CE60A52A8E@arago-project.org>
-Date: Mon,  4 Mar 2013 17:15:23 +0000 (UTC)
+Message-Id: <20130304171528.9F3C152A8E@arago-project.org>
+Date: Mon,  4 Mar 2013 17:15:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-omap: replace use of FILESPATHPKG with FILESEXTRAPATHS
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2013 17:15:24 -0000
+X-List-Received-Date: Mon, 04 Mar 2013 17:15:29 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 85120ef4cbb4642a079cd6db0f78001a85f66611
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=85120ef4cbb4642a079cd6db0f78001a85f66611
+Branch: danny
+Commit: 36fde3ec4125ddf4f41375fac300e9146ed47e24
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=36fde3ec4125ddf4f41375fac300e9146ed47e24
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Mar  4 12:10:47 2013 -0500
