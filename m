@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4CC32E014A2
-	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 08:36:31 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53F3AE014DB
+	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 08:36:35 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0AF5352A95; Mon,  4 Mar 2013 16:36:30 +0000 (UTC)
+	id 1539652A95; Mon,  4 Mar 2013 16:36:35 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130304163631.0AF5352A95@arago-project.org>
-Date: Mon,  4 Mar 2013 16:36:30 +0000 (UTC)
+Message-Id: <20130304163635.1539652A95@arago-project.org>
+Date: Mon,  4 Mar 2013 16:36:35 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot 2012.10: add the latest SDK 05. 06 version from meta-arago
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Mar 2013 16:36:31 -0000
+X-List-Received-Date: Mon, 04 Mar 2013 16:36:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: a80ec1d7bec835a743701a8f19c87efdaf92a6ba
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a80ec1d7bec835a743701a8f19c87efdaf92a6ba
+Branch: danny
+Commit: e7c7da790fdce3a0c3549121a8f0a484296a29c3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e7c7da790fdce3a0c3549121a8f0a484296a29c3
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Feb 28 16:52:53 2013 -0500
