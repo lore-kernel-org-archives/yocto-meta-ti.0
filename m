@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 630D3E01498
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64517E014A1
 	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 08:31:17 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CE70352A8E; Mon,  4 Mar 2013 16:31:15 +0000 (UTC)
+	id 0D1B652A94; Mon,  4 Mar 2013 16:31:16 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130304163115.CE70352A8E@arago-project.org>
-Date: Mon,  4 Mar 2013 16:31:15 +0000 (UTC)
+Message-Id: <20130304163116.0D1B652A94@arago-project.org>
+Date: Mon,  4 Mar 2013 16:31:16 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: add recipe for tracking TI latest staging tree
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Mon, 04 Mar 2013 16:31:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 39d1a0caa79ff270d0b838cd37250f5c58195de1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=39d1a0caa79ff270d0b838cd37250f5c58195de1
+Branch: danny
+Commit: 3a000bd53605d35ef37b8dd571ad29d343d52f48
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3a000bd53605d35ef37b8dd571ad29d343d52f48
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Mar  4 11:12:29 2013 -0500
