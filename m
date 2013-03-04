@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D45CFE014C9
-	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 10:03:29 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1416CE014C9
+	for <meta-ti@yoctoproject.org>; Mon,  4 Mar 2013 10:03:30 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 974A252ABA; Mon,  4 Mar 2013 18:03:29 +0000 (UTC)
+	id B80D352ABC; Mon,  4 Mar 2013 18:03:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130304180329.974A252ABA@arago-project.org>
+Message-Id: <20130304180329.B80D352ABC@arago-project.org>
 Date: Mon,  4 Mar 2013 18:03:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : multi-kernel: match oe-core for MODULE_IMAGE_BASE_NAME, set it conditionally
+Subject: Robert P. J. Day : u-boot: unify denx.de SRC_URIs to match all others
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,64 +27,68 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: 159989762dc9e5a72b5b7017412337e6a4904b98
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=159989762dc9e5a72b5b7017412337e6a4904b98
+Commit: 814a292394b82541134a58574a742dc4e4462adc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=814a292394b82541134a58574a742dc4e4462adc
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar  4 12:26:10 2013 -0500
+Author: Robert P. J. Day <rpjday@crashcourse.ca>
+Date:   Tue Nov 20 13:09:11 2012 -0500
 
-multi-kernel: match oe-core for MODULE_IMAGE_BASE_NAME, set it conditionally
+u-boot: unify denx.de SRC_URIs to match all others
 
-Thanks to Robert P. J. Day, MODULE_IMAGE_BASE_NAME was added to oe-core - only
-~3.5 years after it got into Classic-OE and with a typo of MODULE_*, not plural
-MODULES_*, so match it here and set conditionally.
+Every other u-boot git SRC_URI has a different value, so make the odd
+ones out consistent with the rest, as in:
 
+-SRC_URI = "git://www.denx.de/git/u-boot.git ...
++SRC_URI = "git://git.denx.de/u-boot.git ...
+
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/multi-kernel.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/u-boot/u-boot_2011.06.bb |    2 +-
+ recipes-bsp/u-boot/u-boot_2011.09.bb |    2 +-
+ recipes-bsp/u-boot/u-boot_2011.12.bb |    2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/multi-kernel.inc b/recipes-kernel/linux/multi-kernel.inc
-index 9a0c090..e696c8b 100644
---- a/recipes-kernel/linux/multi-kernel.inc
-+++ b/recipes-kernel/linux/multi-kernel.inc
-@@ -26,7 +26,7 @@ SRC_URI += " \
-            file://configs "
+diff --git a/recipes-bsp/u-boot/u-boot_2011.06.bb b/recipes-bsp/u-boot/u-boot_2011.06.bb
+index 21f47d6..4fa8f07 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.06.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.06.bb
+@@ -3,7 +3,7 @@ require u-boot.inc
+ # No patches for other machines yet
+ COMPATIBLE_MACHINE = "(beagleboard)"
  
- MULTI_CONFIG_BASE_SUFFIX = "multi-config-"
--MODULES_IMAGE_BASE_NAME = "modules-${PV}-${PR}-${MACHINE}"
-+MODULE_IMAGE_BASE_NAME ?= "modules-${PE}-${PV}-${PR}-${MACHINE}-${DATETIME}"
+-SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
++SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
+            file://2011.06/0001-OMAP3-Beagle-Pin-Mux-initialization-glitch-fix.patch \
+            file://2011.06/0002-OMAP-Remove-omapfb.debug-y-from-Beagle-and-Overo-env.patch \
+            file://2011.06/0003-OMAP3-beagle-pass-expansionboard-name-in-bootargs.patch \
+diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb b/recipes-bsp/u-boot/u-boot_2011.09.bb
+index b164c77..edacb6c 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.09.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.09.bb
+@@ -10,7 +10,7 @@ UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
+ # No patches for other machines yet
+ COMPATIBLE_MACHINE = "(beagleboard)"
  
- do_preparekernel () {
- 	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
-@@ -76,7 +76,7 @@ do_compileconfigs () {
-         install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).bin
+-SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
++SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
+            file://2011.09/0001-omap3-mem-Comment-enable_gpmc_cs_config-more.patch \
+            file://2011.09/0002-OMAP3-Update-SDRC-dram_init-to-always-call-make_cs1_.patch \
+            file://2011.09/0003-OMAP3-Add-a-helper-function-to-set-timings-in-SDRC.patch \
+diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
+index 45c64a6..137f5b5 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.12.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
+@@ -19,7 +19,7 @@ CACHEFIX_omap4 = ""
+ FWENV_beagleboard = "file://fw_env.config"
+ FWENV = ""
  
-         if [ -d "${D}/lib" ]; then
--            tar --owner=root --group=root -cvzf ${DEPLOY_DIR_IMAGE}/${MODULES_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz -C ${D} lib
-+            tar --owner=root --group=root -cvzf ${DEPLOY_DIR_IMAGE}/${MODULE_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz -C ${D} lib
-         fi
-  
-         # Install the final config alongside the images
-@@ -87,7 +87,7 @@ do_compileconfigs () {
-         rm -f ${KERNEL_IMAGE_SYMLINK_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).bin
-         ln -sf ${KERNEL_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).bin ${KERNEL_IMAGE_SYMLINK_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).bin
-         rm -f modules-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz
--        ln -sf ${MODULES_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz modules-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz
-+        ln -sf ${MODULE_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz modules-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz
-         rm -f config-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).config
-         ln -sf config-${PV}-${PR}-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).config config-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).config
- 
-@@ -115,7 +115,7 @@ do_deploy_append () {
-     ln -s config-${PV}-${PR}-${MACHINE}.config config-${MACHINE}.config
- 
-     rm -f modules-${MACHINE}.tgz
--    ln -sf ${MODULES_IMAGE_BASE_NAME}.tgz modules-${MACHINE}.tgz
-+    ln -sf ${MODULE_IMAGE_BASE_NAME}.tgz modules-${MACHINE}.tgz
- 
- }
- 
+-SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git \
++SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
+            file://2011.12/0001-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch \
+            file://2011.12/0002-beagleboard-add-support-for-TCT-Beacon-board.patch \
+            file://2011.12/0003-beagleboard-add-support-for-scanning-loop-through-ex.patch \
 
 
