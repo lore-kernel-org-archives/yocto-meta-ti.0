@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0C6A5E004FE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0DADCE01484
 	for <meta-ti@yoctoproject.org>; Tue,  5 Mar 2013 14:07:12 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D04A652A8E; Tue,  5 Mar 2013 22:07:11 +0000 (UTC)
+	id EF45D52A87; Tue,  5 Mar 2013 22:07:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130305220711.D04A652A8E@arago-project.org>
+Message-Id: <20130305220711.EF45D52A87@arago-project.org>
 Date: Tue,  5 Mar 2013 22:07:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : tune-cortexa{15, 7}: update tunes files with recent changes in oe-core
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 05 Mar 2013 22:07:13 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 7d68b3bd60093b0f85b289a8a8c67495d66c9e4f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7d68b3bd60093b0f85b289a8a8c67495d66c9e4f
+Branch: master
+Commit: 26b97d32140c5bd8df3e5137b7ba334b741005d3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=26b97d32140c5bd8df3e5137b7ba334b741005d3
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Mar  4 14:50:50 2013 -0500
