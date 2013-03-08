@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70717E01588
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 700A7E01565
 	for <meta-ti@yoctoproject.org>; Fri,  8 Mar 2013 13:18:19 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8E8D452AB3; Fri,  8 Mar 2013 21:18:18 +0000 (UTC)
+	id C78B952ABB; Fri,  8 Mar 2013 21:18:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130308211818.8E8D452AB3@arago-project.org>
+Message-Id: <20130308211818.C78B952ABB@arago-project.org>
 Date: Fri,  8 Mar 2013 21:18:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : omap3, am37x, am3517, beagleboard: unify and cleanup configs
+Subject: Denys Dmytriyenko : ti33x, am335x, beaglebone: unify and cleanup configs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,177 +27,97 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: 21ffcc76147448401f1b1aa2f04ea3678958d0fd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=21ffcc76147448401f1b1aa2f04ea3678958d0fd
+Commit: 0c5a45b423d66f7914dcdfe6bbdb35c954d465e4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0c5a45b423d66f7914dcdfe6bbdb35c954d465e4
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar  5 16:24:39 2013 -0500
+Date:   Tue Mar  5 16:27:26 2013 -0500
 
-omap3, am37x, am3517, beagleboard: unify and cleanup configs
+ti33x, am335x, beaglebone: unify and cleanup configs
 
-* Centralize common/SoC settings in omap3.inc SOC_FAMILY config.
+* Centralize common/SoC settings in ti33x.inc SOC_FAMILY config.
 * Set/override uncommon specifics in machine configs.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am3517-evm.conf   |   22 ++++------------------
- conf/machine/am37x-evm.conf    |   25 ++++---------------------
- conf/machine/beagleboard.conf  |   18 ++----------------
- conf/machine/include/omap3.inc |   23 ++++++++++++++++++++++-
- conf/machine/omap3evm.conf     |   24 +++++-------------------
- 5 files changed, 37 insertions(+), 75 deletions(-)
+ conf/machine/am335x-evm.conf   |   17 ++++-------------
+ conf/machine/beaglebone.conf   |   14 ++------------
+ conf/machine/include/ti33x.inc |   19 +++++++++++++++++++
+ 3 files changed, 25 insertions(+), 25 deletions(-)
 
-diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
-index d9ce758..0151fe9 100644
---- a/conf/machine/am3517-evm.conf
-+++ b/conf/machine/am3517-evm.conf
-@@ -2,19 +2,12 @@
- #@NAME: AM3517 EVM
- #@DESCRIPTION: Machine configuration for the TI Sitara AM3517 EVM
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index 2889358..91f7e54 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -2,14 +2,12 @@
+ #@NAME: AM335x EVM
+ #@DESCRIPTION: Machine configuration for the TI AM335x EVM
  
 -PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
 -XSERVER = "xserver-xorg \
 -           xf86-input-evdev \
--           xf86-input-mouse \
--           xf86-input-tslib \
--           xf86-video-omapfb \
--           xf86-input-keyboard"
--
--GUI_MACHINE_CLASS = "smallscreen"
--
- require conf/machine/include/omap3.inc
+-           xf86-video-fbdev"
++require conf/machine/include/ti33x.inc
  
--# Ship all kernel modules
 +# Use built-in LCD by default
 +XSERVER += "xf86-input-tslib"
-+GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_FEATURES += "touchscreen ethernet"
+ GUI_MACHINE_CLASS = "smallscreen"
+-
+-require conf/machine/include/ti33x.inc
++MACHINE_FEATURES += "touchscreen"
  
  IMAGE_FSTYPES += "ubi tar.gz"
- EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
-@@ -24,16 +17,10 @@ USE_VT = "2"
  
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
- 
--PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
--
--UBOOT_ARCH = "arm"
- UBOOT_MACHINE = "am3517_evm_config"
- XLOAD_MACHINE = "am3517evm_config"
- 
--MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen ethernet sgx"
--
- # NOTE: there are NAND and OneNAND versions of this board...
--
- # do ubiattach /dev/ubi_ctrl -m 4
- # From dmesg:
- # UBI: smallest flash I/O unit:    2048
-@@ -48,4 +35,3 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
- # UBI: physical eraseblock size:   131072 bytes (128 KiB)
+@@ -37,10 +35,3 @@ MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
  # UBI: sub-page size:              512
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+ # UBI: VID header offset:          2048 (aligned 2048)
+ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
 -
-diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
-index 2d1d44d..3122e10 100644
---- a/conf/machine/am37x-evm.conf
-+++ b/conf/machine/am37x-evm.conf
-@@ -2,19 +2,12 @@
- #@NAME: AM37x EVM
- #@DESCRIPTION: Machine configuration for the TI AM37x EVM
- 
--PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
--XSERVER = "xserver-xorg \
--           xf86-input-evdev \
--           xf86-input-mouse \
--           xf86-input-tslib \
--           xf86-video-omapfb \
--           xf86-input-keyboard"
--
--GUI_MACHINE_CLASS = "smallscreen"
--
- require conf/machine/include/omap3.inc
- 
--# Ship all kernel modules
-+# Use built-in LCD by default
-+XSERVER += "xf86-input-tslib"
-+GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_FEATURES += "touchscreen ethernet"
- 
- IMAGE_FSTYPES += "ubi tar.gz"
- EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
-@@ -23,16 +16,7 @@ SERIAL_CONSOLE = "115200 ttyO0"
- 
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
- 
 -PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
 -
 -UBOOT_ARCH = "arm"
--UBOOT_MACHINE = "omap3_evm_config"
--XLOAD_MACHINE = "omap3evm_config"
+-UBOOT_MACHINE = "am335x_evm_config"
 -
 -MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen sgx"
--
- # NOTE: there are NAND and OneNAND versions of this board...
--
- # do ubiattach /dev/ubi_ctrl -m 4
- # From dmesg:
- # UBI: smallest flash I/O unit:    2048
-@@ -47,4 +31,3 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
- # UBI: physical eraseblock size:   131072 bytes (128 KiB)
- # UBI: sub-page size:              512
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
--
-diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
-index e8b6279..a65e360 100644
---- a/conf/machine/beagleboard.conf
-+++ b/conf/machine/beagleboard.conf
-@@ -2,27 +2,16 @@
- #@NAME: Beagleboard machine
- #@DESCRIPTION: Machine configuration for the http://beagleboard.org/ board 
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index 43af461..dc77dd7 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -2,25 +2,15 @@
+ #@NAME: BeagleBone machine
+ #@DESCRIPTION: Machine configuration for the http://beagleboard.org/bone board 
  
 -PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
 -XSERVER = "xserver-xorg \
 -           xf86-input-evdev \
--           xf86-input-mouse \
--           xf86-video-omapfb \
--           xf86-input-keyboard"
-+require conf/machine/include/omap3.inc
+-           xf86-video-fbdev"
++require conf/machine/include/ti33x.inc
  
  # Only has DVI connector for external screen
  GUI_MACHINE_CLASS = "bigscreen"
  
--require conf/machine/include/omap3.inc
--
--# SPL build
+-require conf/machine/include/ti33x.inc
 -EXTRA_IMAGEDEPENDS = "u-boot"
 -
- PREFERRED_PROVIDER_virtual/kernel = "linux-mainline"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
  
- IMAGE_FSTYPES += "tar.gz ubi"
--EXTRA_IMAGECMD_jffs2 = "-lnp "
-+EXTRA_IMAGECMD_jffs2 = "-lnp"
+-IMAGE_FSTYPES += "tar.bz2 "
++IMAGE_FSTYPES += "tar.bz2"
  
 -# Guesswork
- SERIAL_CONSOLE = "115200 ttyO2"
+ SERIAL_CONSOLE = "115200 ttyO0"
  
- UBOOT_MACHINE = "omap3_beagle_config"
-@@ -44,9 +33,6 @@ MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
- # UBI: sub-page size:              512
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
- 
+ UBOOT_MACHINE = "am335x_evm_config"
+-
 -# and sdio
 -MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa sgx"
--
- # For a modularized kernel we want to drag in networking, sound, rtc etc."
- MACHINE_EXTRA_RRECOMMENDS = "kernel-module-smsc95xx kernel-module-snd-soc-twl4030 kernel-module-rtc-twl \
-   kernel-module-snd-soc-omap kernel-module-snd-soc-omap-mcbsp kernel-module-snd-soc-omap3beagle"
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 8ebbb08..99f0c80 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -3,15 +3,36 @@ require conf/machine/include/soc-family.inc
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 93c5042..cf49721 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -3,15 +3,34 @@ require conf/machine/include/soc-family.inc
  
  require conf/machine/include/tune-cortexa8.inc
  
@@ -207,79 +127,30 @@ index 8ebbb08..99f0c80 100644
 +XSERVER = "xserver-xorg \
 +           xf86-input-evdev \
 +           xf86-input-mouse \
-+           xf86-video-omapfb \
++           xf86-video-fbdev \
 +           xf86-input-keyboard"
 +
 +# Default to external video, change to smallscreen for built-in LCD
 +GUI_MACHINE_CLASS = "bigscreen"
 +
  # Increase this everytime you change something in the kernel
- MACHINE_KERNEL_PR = "r123"
+ MACHINE_KERNEL_PR = "r17"
+ 
++# Default providers, may need to override for specific machines
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
  
  KERNEL_IMAGETYPE = "uImage"
  
-+# Default providers, may need to override for specific machines
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
- PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
- 
 +UBOOT_ARCH = "arm"
-+UBOOT_MACHINE = "omap3_evm_config"
-+XLOAD_MACHINE = "omap3evm_config"
++UBOOT_MACHINE = "am335x_evm_config"
 +
  UBOOT_ENTRYPOINT = "0x80008000"
  UBOOT_LOADADDRESS = "0x80008000"
  
--EXTRA_IMAGEDEPENDS += "u-boot x-load"
-+# If SPL is not used, may need to add x-load
-+EXTRA_IMAGEDEPENDS += "u-boot"
+ EXTRA_IMAGEDEPENDS += "u-boot"
 +
-+# List common SoC features, may need to add touchscreen/ethernet for specific machines
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa sgx"
-diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
-index 0719671..a793798 100644
---- a/conf/machine/omap3evm.conf
-+++ b/conf/machine/omap3evm.conf
-@@ -2,19 +2,12 @@
- #@NAME: OMAP3 EVM
- #@DESCRIPTION: Machine configuration for the TI OMAP3 EVM
- 
--PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
--XSERVER = "xserver-xorg \
--           xf86-input-evdev \
--           xf86-input-mouse \
--           xf86-input-tslib \
--           xf86-video-omapfb \
--           xf86-input-keyboard"
--
--GUI_MACHINE_CLASS = "smallscreen"
--
- require conf/machine/include/omap3.inc
- 
--# Ship all kernel modules
-+# Use built-in LCD by default
-+XSERVER += "xf86-input-tslib"
-+GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_FEATURES += "touchscreen ethernet"
- 
- IMAGE_FSTYPES += "jffs2 tar.bz2"
- EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
-@@ -24,16 +17,9 @@ USE_VT = "0"
- 
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
- 
--PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
--
--UBOOT_ARCH = "arm"
--UBOOT_MACHINE = "omap3_evm_config"
--XLOAD_MACHINE = "omap3evm_config"
--
--MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen sgx"
-+EXTRA_IMAGEDEPENDS += "x-load"
- 
- # NOTE: there are NAND and OneNAND versions of this board...
--
- # do ubiattach /dev/ubi_ctrl -m 4
- # From dmesg:
- # UBI: smallest flash I/O unit:    2048
++# List common SoC features, may need to add touchscreen for specific machines
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx"
 
 
