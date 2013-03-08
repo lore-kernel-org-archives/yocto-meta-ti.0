@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 707CCE01589
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 705A9E01587
 	for <meta-ti@yoctoproject.org>; Fri,  8 Mar 2013 13:18:19 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0D01F52AC0; Fri,  8 Mar 2013 21:18:19 +0000 (UTC)
+	id DAFB152ABC; Fri,  8 Mar 2013 21:18:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130308211819.0D01F52AC0@arago-project.org>
-Date: Fri,  8 Mar 2013 21:18:19 +0000 (UTC)
+Message-Id: <20130308211818.DAFB152ABC@arago-project.org>
+Date: Fri,  8 Mar 2013 21:18:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : keystone: unify and cleanup configs
+Subject: Denys Dmytriyenko : omap4, pandaboard: unify and cleanup configs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,73 +27,58 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: 4c7413253080f4e5eaf1d293c248f3949efe9e68
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4c7413253080f4e5eaf1d293c248f3949efe9e68
+Commit: 7251d2309b9e691188dd2e66b6468923b1dcffec
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7251d2309b9e691188dd2e66b6468923b1dcffec
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar  5 16:29:17 2013 -0500
+Date:   Tue Mar  5 16:28:30 2013 -0500
 
-keystone: unify and cleanup configs
+omap4, pandaboard: unify and cleanup configs
 
-* Centralize common/SoC settings in keystone.inc SOC_FAMILY config.
+* Centralize common/SoC settings in omap4.inc SOC_FAMILY config.
 * Set/override uncommon specifics in machine configs.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/keystone.inc |    4 ++++
- conf/machine/keystone-evm.conf    |   13 -------------
- 2 files changed, 4 insertions(+), 13 deletions(-)
+ conf/machine/include/omap4.inc |    2 ++
+ conf/machine/pandaboard.conf   |    6 +-----
+ 2 files changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
-index bd447d4..047cc18 100644
---- a/conf/machine/include/keystone.inc
-+++ b/conf/machine/include/keystone.inc
-@@ -11,8 +11,12 @@ MACHINE_KERNEL_PR = "r5"
+diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
+index ecd23c4..6e90985 100644
+--- a/conf/machine/include/omap4.inc
++++ b/conf/machine/include/omap4.inc
+@@ -20,6 +20,8 @@ MACHINE_KERNEL_PR = "r1"
  
  KERNEL_IMAGETYPE = "uImage"
  
-+UBOOT_MACHINE = "tci6638_evm_config"
++UBOOT_MACHINE = "omap4_panda_config"
 +
  UBOOT_ENTRYPOINT = "0x80008000"
  UBOOT_LOADADDRESS = "0x80008000"
  
- EXTRA_IMAGEDEPENDS += "u-boot"
- EXTRA_IMAGEDEPENDS += "boot-monitor"
-+
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat"
-diff --git a/conf/machine/keystone-evm.conf b/conf/machine/keystone-evm.conf
-index 13df843..a2c05f8 100644
---- a/conf/machine/keystone-evm.conf
-+++ b/conf/machine/keystone-evm.conf
-@@ -2,17 +2,7 @@
- #@NAME: Keystone 2 machine
- #@DESCRIPTION: Machine configuration for the TI Keystone 2
+diff --git a/conf/machine/pandaboard.conf b/conf/machine/pandaboard.conf
+index 3ebd6d9..b3d0399 100644
+--- a/conf/machine/pandaboard.conf
++++ b/conf/machine/pandaboard.conf
+@@ -4,8 +4,6 @@
  
--PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
--XSERVER = "xserver-xorg \
--           xf86-input-evdev \
--           xf86-video-fbdev"
+ require conf/machine/include/omap4.inc
+ 
+-UBOOT_MACHINE = "omap4_panda_config"
 -
--GUI_MACHINE_CLASS = "bigscreen"
+ GUI_MACHINE_CLASS = "bigscreen"
+ 
+ IMAGE_FSTYPES += "tar.bz2"
+@@ -13,6 +11,4 @@ IMAGE_FSTYPES += "tar.bz2"
+ SERIAL_CONSOLE = "115200 ttyO2"
+ 
+ MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
+-MACHINE_FEATURES = "kernel26 wifi bluetooth alsa apm ext2 screen touchscreen usbgadget usbhost vfat sgx"
 -
- require conf/machine/include/keystone.inc
--#EXTRA_IMAGEDEPENDS = "u-boot"
 -
--PREFERRED_PROVIDER_virtual/kernel = "linux-keystone"
- 
- IMAGE_FSTYPES += "ubi tar.bz2 cpio"
- 
-@@ -20,9 +10,6 @@ SERIAL_CONSOLE = "115200 ttyS0"
- 
- SYSVINIT_ENABLED_GETTYS = ""
- 
--UBOOT_MACHINE = "tci6638_evm_config"
--
--MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
- # do ubiattach /dev/ubi_ctrl -m 4
- # From dmesg:
- # UBI: smallest flash I/O unit:    2048
++MACHINE_FEATURES = "kernel26 wifi bluetooth alsa apm ext2 screen usbgadget usbhost vfat sgx"
 
 
