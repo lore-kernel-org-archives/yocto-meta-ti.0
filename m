@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6FD55E01527
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 707CCE01589
 	for <meta-ti@yoctoproject.org>; Fri,  8 Mar 2013 13:18:19 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7A0D752AB5; Fri,  8 Mar 2013 21:18:18 +0000 (UTC)
+	id 0D01F52AC0; Fri,  8 Mar 2013 21:18:19 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130308211818.7A0D752AB5@arago-project.org>
-Date: Fri,  8 Mar 2013 21:18:18 +0000 (UTC)
+Message-Id: <20130308211819.0D01F52AC0@arago-project.org>
+Date: Fri,  8 Mar 2013 21:18:19 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am180x: cleanup machine config, remove common SoC settings
+Subject: Denys Dmytriyenko : keystone: unify and cleanup configs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,35 +26,74 @@ X-List-Received-Date: Fri, 08 Mar 2013 21:18:19 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 3cb6c8fb6e05de3bc7f2ef7ddd1d5886ff69eae8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3cb6c8fb6e05de3bc7f2ef7ddd1d5886ff69eae8
+Branch: danny
+Commit: 4c7413253080f4e5eaf1d293c248f3949efe9e68
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4c7413253080f4e5eaf1d293c248f3949efe9e68
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar  5 16:29:56 2013 -0500
+Date:   Tue Mar  5 16:29:17 2013 -0500
 
-am180x: cleanup machine config, remove common SoC settings
+keystone: unify and cleanup configs
+
+* Centralize common/SoC settings in keystone.inc SOC_FAMILY config.
+* Set/override uncommon specifics in machine configs.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am180x-evm.conf |    3 ---
- 1 files changed, 0 insertions(+), 3 deletions(-)
+ conf/machine/include/keystone.inc |    4 ++++
+ conf/machine/keystone-evm.conf    |   13 -------------
+ 2 files changed, 4 insertions(+), 13 deletions(-)
 
-diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
-index 827885b..7ea25cf 100644
---- a/conf/machine/am180x-evm.conf
-+++ b/conf/machine/am180x-evm.conf
-@@ -11,9 +11,6 @@ UBOOT_LOADADDRESS = "0xc0008000"
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index bd447d4..047cc18 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -11,8 +11,12 @@ MACHINE_KERNEL_PR = "r5"
  
- IMAGE_FSTYPES += "tar.gz ubi"
+ KERNEL_IMAGETYPE = "uImage"
  
--MACHINE_FEATURES = "kernel26 serial ethernet"
++UBOOT_MACHINE = "tci6638_evm_config"
++
+ UBOOT_ENTRYPOINT = "0x80008000"
+ UBOOT_LOADADDRESS = "0x80008000"
+ 
+ EXTRA_IMAGEDEPENDS += "u-boot"
+ EXTRA_IMAGEDEPENDS += "boot-monitor"
++
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat"
+diff --git a/conf/machine/keystone-evm.conf b/conf/machine/keystone-evm.conf
+index 13df843..a2c05f8 100644
+--- a/conf/machine/keystone-evm.conf
++++ b/conf/machine/keystone-evm.conf
+@@ -2,17 +2,7 @@
+ #@NAME: Keystone 2 machine
+ #@DESCRIPTION: Machine configuration for the TI Keystone 2
+ 
+-PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+-XSERVER = "xserver-xorg \
+-           xf86-input-evdev \
+-           xf86-video-fbdev"
 -
- SERIAL_CONSOLE = "115200 ttyS2"
+-GUI_MACHINE_CLASS = "bigscreen"
+-
+ require conf/machine/include/keystone.inc
+-#EXTRA_IMAGEDEPENDS = "u-boot"
+-
+-PREFERRED_PROVIDER_virtual/kernel = "linux-keystone"
  
- PREFERRED_PROVIDER_virtual/kernel = "linux-omapl138-psp"
--PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
+ IMAGE_FSTYPES += "ubi tar.bz2 cpio"
+ 
+@@ -20,9 +10,6 @@ SERIAL_CONSOLE = "115200 ttyS0"
+ 
+ SYSVINIT_ENABLED_GETTYS = ""
+ 
+-UBOOT_MACHINE = "tci6638_evm_config"
+-
+-MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
+ # do ubiattach /dev/ubi_ctrl -m 4
+ # From dmesg:
+ # UBI: smallest flash I/O unit:    2048
 
 
