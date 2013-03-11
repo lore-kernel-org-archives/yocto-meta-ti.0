@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 51724E011AF
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5173EE0121B
 	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2013 14:36:10 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D8E3352ABB; Mon, 11 Mar 2013 21:36:09 +0000 (UTC)
+	id F0EAF52AA2; Mon, 11 Mar 2013 21:36:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130311213609.D8E3352ABB@arago-project.org>
+Message-Id: <20130311213609.F0EAF52AA2@arago-project.org>
 Date: Mon, 11 Mar 2013 21:36:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update SRCREV and bump MACHINE_KERNEL_PR
+Subject: Chase Maupin : setup-defconfig: move from meta-arago to meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,51 +26,62 @@ X-List-Received-Date: Mon, 11 Mar 2013 21:36:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 8e7a3d837e429274de4f47c783cd910a1f2e32e9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8e7a3d837e429274de4f47c783cd910a1f2e32e9
+Branch: master
+Commit: b2946775880fd6c6d7c5c9ce61b1d4b47ebe59e9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b2946775880fd6c6d7c5c9ce61b1d4b47ebe59e9
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 11 17:23:32 2013 -0400
+Author: Chase Maupin <Chase.Maupin@ti.com>
+Date:   Mon Mar 11 15:03:31 2013 -0500
 
-linux-ti-staging: update SRCREV and bump MACHINE_KERNEL_PR
+setup-defconfig: move from meta-arago to meta-ti
 
-* Update SRCREV for the recent merges in TI staging tree, still 3.8.2
-* Bump MACHINE_KERNEL_PR to trigger rebuilding out-of-tree components
+* Moved the setup-defconfig.inc file from meta-arago to meta-ti.
+  This functionality is used by the SDKs to allow the option for
+  using an in-tree configuration file for the kernel build.
+* This option was chosen to make it easy for other layers to
+  override the config with their own using the normal OE method
+  of specifying a defconfig file in their layer rather than having
+  to use some custom variable setting.
 
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/ti33x.inc               |    2 +-
- recipes-kernel/linux/linux-ti-staging_git.bb |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/setup-defconfig.inc |   26 ++++++++++++++++++++++++++
+ 1 files changed, 26 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index cf49721..f00c797 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -16,7 +16,7 @@ XSERVER = "xserver-xorg \
- GUI_MACHINE_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r17"
-+MACHINE_KERNEL_PR = "r18"
- 
- # Default providers, may need to override for specific machines
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
-diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index 9ce507b..dfef76d 100644
---- a/recipes-kernel/linux/linux-ti-staging_git.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -39,7 +39,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.8.y"
- 
--SRCREV = "d26595a42220789b81a9d243e2fc0837c7776360"
-+SRCREV = "e69f39916783a559c499e264359edea315ef44fd"
- PV = "3.8.2"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+diff --git a/recipes-kernel/linux/setup-defconfig.inc b/recipes-kernel/linux/setup-defconfig.inc
+new file mode 100644
+index 0000000..fc5e18e
+--- /dev/null
++++ b/recipes-kernel/linux/setup-defconfig.inc
+@@ -0,0 +1,26 @@
++# Check the defconfig file and see if it points to an in kernel
++# defconfig that should be used, or if it is a complete config file
++
++addtask setup_defconfig before do_configure after do_patch
++do_setup_defconfig() {
++    # Always copy the defconfig file to .config to keep consistency
++    # between the case where there is a real config and the in kernel
++    # tree config
++    cp ${WORKDIR}/defconfig ${S}/.config
++}
++
++# define our own do_configure that will:
++#   1. Check the .config file and see if string use-kernel-config= is present
++#   2. If the use-kernel-config string is present parse out the config to use
++#      and run make ${config}
++#   3. else run yes '' | oe_runmake oldconfig like the default do_configure
++#      does
++do_configure() {
++    config=`cat ${S}/.config | grep use-kernel-config | cut -d= -f2`
++    if [ "x${config}" != "x" ]
++    then
++        oe_runmake ${config}
++    else
++        yes '' | oe_runmake oldconfig
++    fi
++}
 
 
