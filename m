@@ -1,26 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
-	[206.46.173.11])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 529BDE00734
-	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2013 13:31:55 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MJI00J5NJOO5IV1@vms173011.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 11 Mar 2013 15:31:36 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 15906200A9; Mon,
-	11 Mar 2013 16:31:35 -0400 (EDT)
-Date: Mon, 11 Mar 2013 16:31:35 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Maupin, Chase" <chase.maupin@ti.com>
-Message-id: <20130311203135.GB31635@denix.org>
-References: <1363033043-21593-1-git-send-email-Chase.Maupin@ti.com>
-	<7D46E86EC0A8354091174257B2FED10159454A48@DLEE12.ent.ti.com>
-MIME-version: 1.0
-In-reply-to: <7D46E86EC0A8354091174257B2FED10159454A48@DLEE12.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 1/3] u-boot-ti-staging: Add TI staging U-Boot recipe
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9D753E00734
+	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2013 13:49:06 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 7E34652AA1; Mon, 11 Mar 2013 20:49:05 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130311204905.7E34652AA1@arago-project.org>
+Date: Mon, 11 Mar 2013 20:49:05 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : hawkboard: remove machine definition, since it' s unsupported
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,99 +22,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Mar 2013 20:31:55 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 11 Mar 2013 20:49:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, Mar 11, 2013 at 08:18:36PM +0000, Maupin, Chase wrote:
-> > -----Original Message-----
-> > From: Maupin, Chase
-> > Sent: Monday, March 11, 2013 3:17 PM
-> > To: meta-ti@yoctoproject.org
-> > Cc: Maupin, Chase
-> > Subject: [PATCH 1/3] u-boot-ti-staging: Add TI staging U-Boot
-> > recipe
-> > 
-> 
-> Denys,
-> 
-> I know you are working on something here too.  I just wanted to give you an 
-> idea of what I was using for comparison.
+Module: meta-ti
+Branch: master
+Commit: 24520543b12d8f05f8bf6ab18d3cc4dca23b6c31
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=24520543b12d8f05f8bf6ab18d3cc4dca23b6c31
 
-Thanks for the heads up! I'll try to incorporate this in my work.
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Mar  5 15:09:09 2013 -0500
 
--- 
-Denys
+hawkboard: remove machine definition, since it's unsupported
 
+There is no support for this board from meta-ti. Plus I don't have the board.
+If there's anyone willing to maintain it, please let me know.
 
-> > * Pull the TI staging U-Boot tree for use with ti33x devices and
-> >   the omap-a15 devices.
-> > * Used the PN u-boot-ti-staging to make it easy to set a
-> >   PREFERRED_PROVIDER in the machine configuration to point to
-> >   this recipe instead of the default u-boot recipe since TI
-> > devices
-> >   should point to the TI staging trees by default.
-> > 
-> > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-> > ---
-> >  ...> u-boot-ti-staging_2013.01.01-ti2013.2Q.00.bb} |   12
-> > ++++++------
-> >  1 files changed, 6 insertions(+), 6 deletions(-)
-> >  copy recipes-bsp/u-boot/{u-boot_2011.09-psp04.06.00.08.bb => u-
-> > boot-ti-staging_2013.01.01-ti2013.2Q.00.bb} (61%)
-> > 
-> > diff --git a/recipes-bsp/u-boot/u-boot_2011.09-psp04.06.00.08.bb
-> > b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01-ti2013.2Q.00.bb
-> > similarity index 61%
-> > copy from recipes-bsp/u-boot/u-boot_2011.09-psp04.06.00.08.bb
-> > copy to recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01-
-> > ti2013.2Q.00.bb
-> > index 1bd4b9e..67e1988 100644
-> > --- a/recipes-bsp/u-boot/u-boot_2011.09-psp04.06.00.08.bb
-> > +++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01-
-> > ti2013.2Q.00.bb
-> > @@ -1,11 +1,11 @@
-> >  # Use the version of u-boot.inc in oe-core not the meta-ti
-> > version
-> >  require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
-> > 
-> > -DESCRIPTION = "u-boot bootloader for ARM MPU devices"
-> > +DESCRIPTION = "u-boot bootloader for TI devices"
-> >  LICENSE = "GPLv2+"
-> >  LIC_FILES_CHKSUM =
-> > "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
-> > 
-> > -COMPATIBLE_MACHINE = "ti33x|omap3"
-> > +COMPATIBLE_MACHINE = "ti33x|omap3|omap-a15"
-> > 
-> >  DEFAULT_PREFERENCE = "-1"
-> > 
-> > @@ -13,13 +13,13 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
-> > 
-> >  PR = "r0+gitr${SRCPV}"
-> > 
-> > -SRC_URI = "git://arago-project.org/git/projects/u-boot-
-> > am33x.git;protocol=git;branch=${BRANCH}"
-> > +SRC_URI = "git://gitorious.ti.com/ti-u-boot/ti-u-
-> > boot.git;protocol=git;branch=${BRANCH}"
-> > 
-> > -BRANCH = "AM335XPSP_04.06.00.08"
-> > +BRANCH = "ti-u-boot-2013.01.01"
-> > 
-> >  # Lock to the commit corresponding to TAG:
-> > -# v2011.09_AM335xPSP_04.06.00.08
-> > -SRCREV = "1e4626f0d5f3bb04ec974e76a5d9029875269d31"
-> > +# TBD
-> > +SRCREV = "c44c35e24b1532272118c58c57f658f21b72a4dd"
-> > 
-> >  S = "${WORKDIR}/git"
-> > 
-> > --
-> > 1.7.0.4
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ conf/machine/hawkboard.conf |   29 -----------------------------
+ 1 files changed, 0 insertions(+), 29 deletions(-)
+
+diff --git a/conf/machine/hawkboard.conf b/conf/machine/hawkboard.conf
+deleted file mode 100644
+index b6e7f2d..0000000
+--- a/conf/machine/hawkboard.conf
++++ /dev/null
+@@ -1,29 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: OMAP-L138 based board
+-#@DESCRIPTION: Machine configuration for the TI Hawkboard
+-
+-require conf/machine/include/davinci.inc
+-require conf/machine/include/omapl138.inc
+-
+-UBOOT_MACHINE = "da850_omapl138_evm_config"
+-UBOOT_ENTRYPOINT = "0xc0008000"
+-UBOOT_LOADADDRESS = "0xc0008000"
+-
+-MACHINE_FEATURES = "kernel26 serial ethernet ide screen"
+-
+-# do ubiattach /dev/ubi_ctrl -m 4
+-# From dmesg:
+-# UBI: smallest flash I/O unit:    2048
+-# UBI: logical eraseblock size:    126976 bytes
+-# from ubiattach stdout:
+-# UBI device number 0, total 971 LEBs (123293696 bytes, 117.6 MiB), available 958 LEBs (121643008 bytes, 116.0 MiB), LEB size 126976 bytes (124.0 KiB)
+-MKUBIFS_ARGS = "-m 2048 -e 126976 -c 948"
+-
+-# do ubiattach /dev/ubi_ctrl -m 4
+-# from dmesg:
+-# UBI: smallest flash I/O unit:    2048
+-# UBI: physical eraseblock size:   131072 bytes (128 KiB)
+-# UBI: sub-page size:              512
+-UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+-
+-SERIAL_CONSOLE = "115200 ttyS2"
+
 
