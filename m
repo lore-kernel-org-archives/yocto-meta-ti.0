@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B661DE00738
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B7A08E0073A
 	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2013 14:36:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6DD3052AA2; Mon, 11 Mar 2013 21:36:09 +0000 (UTC)
+	id 374A752A64; Mon, 11 Mar 2013 21:36:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130311213609.6DD3052AA2@arago-project.org>
+Message-Id: <20130311213609.374A752A64@arago-project.org>
 Date: Mon, 11 Mar 2013 21:36:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : linux-ti-staging: use setup-defconfig
+Subject: Chase Maupin : setup-defconfig: move from meta-arago to meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,70 +27,61 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: aa8bdcbeff95aa562053b5b8c5541b59f3977b6a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=aa8bdcbeff95aa562053b5b8c5541b59f3977b6a
+Commit: 24111d70d662ceacf32e054c56aec30ddfb4e4fe
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=24111d70d662ceacf32e054c56aec30ddfb4e4fe
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Mon Mar 11 15:03:32 2013 -0500
+Date:   Mon Mar 11 15:03:31 2013 -0500
 
-linux-ti-staging: use setup-defconfig
+setup-defconfig: move from meta-arago to meta-ti
 
-* Use the setup-defconfig.inc functionality to specify the in
-  kernel tree defconfig file to use rather than hard coding it
-  in the do_configure step.
-* This is to make it easier to modify which configs are use by
-  other layers as well as supporting additional machines which
-  may not use omap2plus_defconfig as needed.
+* Moved the setup-defconfig.inc file from meta-arago to meta-ti.
+  This functionality is used by the SDKs to allow the option for
+  using an in-tree configuration file for the kernel build.
+* This option was chosen to make it easy for other layers to
+  override the config with their own using the normal OE method
+  of specifying a defconfig file in their layer rather than having
+  to use some custom variable setting.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging/defconfig |    1 +
- recipes-kernel/linux/linux-ti-staging_git.bb    |   15 +++++----------
- 2 files changed, 6 insertions(+), 10 deletions(-)
+ recipes-kernel/linux/setup-defconfig.inc |   26 ++++++++++++++++++++++++++
+ 1 files changed, 26 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging/defconfig b/recipes-kernel/linux/linux-ti-staging/defconfig
+diff --git a/recipes-kernel/linux/setup-defconfig.inc b/recipes-kernel/linux/setup-defconfig.inc
 new file mode 100644
-index 0000000..926b35a
+index 0000000..fc5e18e
 --- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging/defconfig
-@@ -0,0 +1 @@
-+use-kernel-config=omap2plus_defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index 8cc7206..2581409 100644
---- a/recipes-kernel/linux/linux-ti-staging_git.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -6,6 +6,7 @@ KERNEL_IMAGETYPE = "uImage"
- 
- inherit kernel
- require recipes-kernel/linux/linux-dtb.inc
-+require recipes-kernel/linux/setup-defconfig.inc
- 
- # Stage the power management firmware before building the kernel
- DEPENDS += "am33x-cm3"
-@@ -23,17 +24,11 @@ SRCREV = "d26595a42220789b81a9d243e2fc0837c7776360"
- PV = "3.8.2"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
- 
--SRC_URI = "git://gitorious.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH}"
--
--do_setup_defconfig() {
--        :
--}
--
--do_configure() {
--    oe_runmake omap2plus_defconfig
--}
-+SRC_URI = "git://gitorious.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-+           file://defconfig \
-+          "
- 
- # Copy the am33x-cm3 firmware if it is available
- do_compile_prepend() {
++++ b/recipes-kernel/linux/setup-defconfig.inc
+@@ -0,0 +1,26 @@
++# Check the defconfig file and see if it points to an in kernel
++# defconfig that should be used, or if it is a complete config file
++
++addtask setup_defconfig before do_configure after do_patch
++do_setup_defconfig() {
++    # Always copy the defconfig file to .config to keep consistency
++    # between the case where there is a real config and the in kernel
++    # tree config
++    cp ${WORKDIR}/defconfig ${S}/.config
++}
++
++# define our own do_configure that will:
++#   1. Check the .config file and see if string use-kernel-config= is present
++#   2. If the use-kernel-config string is present parse out the config to use
++#      and run make ${config}
++#   3. else run yes '' | oe_runmake oldconfig like the default do_configure
++#      does
++do_configure() {
++    config=`cat ${S}/.config | grep use-kernel-config | cut -d= -f2`
++    if [ "x${config}" != "x" ]
++    then
++        oe_runmake ${config}
++    else
++        yes '' | oe_runmake oldconfig
++    fi
++}
 
 
