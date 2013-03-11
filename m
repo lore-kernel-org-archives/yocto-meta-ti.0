@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6117E0073A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE929E0136C
 	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2013 14:36:10 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6E7D752AC1; Mon, 11 Mar 2013 21:36:10 +0000 (UTC)
+	id BF04252ABC; Mon, 11 Mar 2013 21:36:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130311213610.6E7D752AC1@arago-project.org>
+Message-Id: <20130311213610.BF04252ABC@arago-project.org>
 Date: Mon, 11 Mar 2013 21:36:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : linux-ti-staging: package all dtb files for ti33x
+Subject: Denys Dmytriyenko : linux-ti-staging: update SRCREV and bump MACHINE_KERNEL_PR
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,53 +22,55 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Mar 2013 21:36:10 -0000
+X-List-Received-Date: Mon, 11 Mar 2013 21:36:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 54d48a8dd27fa749aee4d7e2edd0ba288a7088de
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=54d48a8dd27fa749aee4d7e2edd0ba288a7088de
+Commit: 03974f7c843f521f626707161e148ec81b99bdd4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=03974f7c843f521f626707161e148ec81b99bdd4
 
-Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Mon Mar 11 15:03:34 2013 -0500
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Mar 11 17:23:32 2013 -0400
 
-linux-ti-staging: package all dtb files for ti33x
+linux-ti-staging: update SRCREV and bump MACHINE_KERNEL_PR
 
-* For the ti33x SOC_FAMILY device package the dtb files for all
-  of the am335x boards instead of just the single EVM file.
+* Update SRCREV for the recent merges in TI staging tree, still 3.8.2
+* Bump MACHINE_KERNEL_PR to trigger rebuilding out-of-tree components
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_git.bb |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+ conf/machine/include/ti33x.inc               |    2 +-
+ recipes-kernel/linux/linux-ti-staging_git.bb |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index cf49721..f00c797 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -16,7 +16,7 @@ XSERVER = "xserver-xorg \
+ GUI_MACHINE_CLASS = "bigscreen"
+ 
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r17"
++MACHINE_KERNEL_PR = "r18"
+ 
+ # Default providers, may need to override for specific machines
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
 diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index 5f4a05d..f6fa6d2 100644
+index 9ce507b..dfef76d 100644
 --- a/recipes-kernel/linux/linux-ti-staging_git.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -12,7 +12,9 @@ require recipes-kernel/linux/setup-defconfig.inc
- # for ti33x SOC_FAMILY devices
- DEPENDS_ti33x += "am33x-cm3"
+@@ -39,7 +39,7 @@ S = "${WORKDIR}/git"
  
--KERNEL_DEVICETREE_am335x-evm = "arch/arm/boot/dts/am335x-evm.dts"
-+# Default is to package all dts files for ti33x devices unless building
-+# for the specific beaglebone machine.
-+KERNEL_DEVICETREE_ti33x = "arch/arm/boot/dts/am335x-evm.dts arch/arm/boot/dts/am335x-evmsk.dts arch/arm/boot/dts/am335x-bone.dts"
- KERNEL_DEVICETREE_beaglebone = "arch/arm/boot/dts/am335x-bone.dts"
+ BRANCH = "ti-linux-3.8.y"
  
- COMPATIBLE_MACHINE = "ti33x"
-@@ -25,7 +27,7 @@ SRCREV = "d26595a42220789b81a9d243e2fc0837c7776360"
+-SRCREV = "d26595a42220789b81a9d243e2fc0837c7776360"
++SRCREV = "e69f39916783a559c499e264359edea315ef44fd"
  PV = "3.8.2"
  
  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
- 
- SRC_URI = "git://gitorious.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
 
 
