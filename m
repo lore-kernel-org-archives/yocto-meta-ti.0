@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9D753E00734
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9EDF8E00738
 	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2013 13:49:06 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7E34652AA1; Mon, 11 Mar 2013 20:49:05 +0000 (UTC)
+	id 2539452AA9; Mon, 11 Mar 2013 20:49:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130311204905.7E34652AA1@arago-project.org>
-Date: Mon, 11 Mar 2013 20:49:05 +0000 (UTC)
+Message-Id: <20130311204906.2539452AA9@arago-project.org>
+Date: Mon, 11 Mar 2013 20:49:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : hawkboard: remove machine definition, since it' s unsupported
+Subject: Denys Dmytriyenko : ti81x: remove platform configs, kernel, u-boot, since ti81x is not supported
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,58 +27,44 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 24520543b12d8f05f8bf6ab18d3cc4dca23b6c31
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=24520543b12d8f05f8bf6ab18d3cc4dca23b6c31
+Commit: c586bd9a663c6b77478b7b38ff771f6b8360edea
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c586bd9a663c6b77478b7b38ff771f6b8360edea
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar  5 15:09:09 2013 -0500
+Date:   Tue Mar  5 16:06:05 2013 -0500
 
-hawkboard: remove machine definition, since it's unsupported
+ti81x: remove platform configs, kernel, u-boot, since ti81x is not supported
 
-There is no support for this board from meta-ti. Plus I don't have the board.
-If there's anyone willing to maintain it, please let me know.
+* There is no support for these platforms from meta-ti.
+* If someone is willing to maintain them, please let us know or feel free to
+  take it to a separate layer.
+* Therefore, remove SoC and machine configs, kernel, u-boot and X11 configs
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/hawkboard.conf |   29 -----------------------------
- 1 files changed, 0 insertions(+), 29 deletions(-)
+ conf/machine/am387x-evm.conf                       |    9 -
+ conf/machine/am389x-evm.conf                       |    9 -
+ conf/machine/c6a814x-evm.conf                      |    7 -
+ conf/machine/c6a816x-evm.conf                      |    7 -
+ conf/machine/dm814x-evm.conf                       |    7 -
+ conf/machine/include/ti814x.inc                    |   26 -
+ conf/machine/include/ti816x.inc                    |   26 -
+ recipes-bsp/u-boot/u-boot_2010.06-psp.bb           |   17 -
+ .../xserver-xf86-config/ti814x/xorg.conf           |   29 -
+ .../xserver-xf86-config/ti816x/xorg.conf           |   29 -
+ ...d-code-for-disabling-the-least-significan.patch |   45 -
+ .../linux/linux-ti81xx-psp-2.6.37/am387x-evm       |    1 -
+ .../linux/linux-ti81xx-psp-2.6.37/am389x-evm       |    1 -
+ .../linux/linux-ti81xx-psp-2.6.37/c6a814x-evm      |    1 -
+ .../linux/linux-ti81xx-psp-2.6.37/c6a816x-evm      |    1 -
+ .../linux-ti81xx-psp-2.6.37/dm814x-evm/configs/psp | 1937 -----------------
+ .../linux-ti81xx-psp-2.6.37/dm814x-evm/defconfig   | 1970 -----------------
+ .../linux-ti81xx-psp-2.6.37/dm816x-evm/configs/psp | 2142 -------------------
+ .../linux-ti81xx-psp-2.6.37/dm816x-evm/defconfig   | 2202 --------------------
+ recipes-kernel/linux/linux-ti81xx-psp_2.6.37.bb    |   28 -
+ 20 files changed, 0 insertions(+), 8494 deletions(-)
 
-diff --git a/conf/machine/hawkboard.conf b/conf/machine/hawkboard.conf
-deleted file mode 100644
-index b6e7f2d..0000000
---- a/conf/machine/hawkboard.conf
-+++ /dev/null
-@@ -1,29 +0,0 @@
--#@TYPE: Machine
--#@NAME: OMAP-L138 based board
--#@DESCRIPTION: Machine configuration for the TI Hawkboard
--
--require conf/machine/include/davinci.inc
--require conf/machine/include/omapl138.inc
--
--UBOOT_MACHINE = "da850_omapl138_evm_config"
--UBOOT_ENTRYPOINT = "0xc0008000"
--UBOOT_LOADADDRESS = "0xc0008000"
--
--MACHINE_FEATURES = "kernel26 serial ethernet ide screen"
--
--# do ubiattach /dev/ubi_ctrl -m 4
--# From dmesg:
--# UBI: smallest flash I/O unit:    2048
--# UBI: logical eraseblock size:    126976 bytes
--# from ubiattach stdout:
--# UBI device number 0, total 971 LEBs (123293696 bytes, 117.6 MiB), available 958 LEBs (121643008 bytes, 116.0 MiB), LEB size 126976 bytes (124.0 KiB)
--MKUBIFS_ARGS = "-m 2048 -e 126976 -c 948"
--
--# do ubiattach /dev/ubi_ctrl -m 4
--# from dmesg:
--# UBI: smallest flash I/O unit:    2048
--# UBI: physical eraseblock size:   131072 bytes (128 KiB)
--# UBI: sub-page size:              512
--UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
--
--SERIAL_CONSOLE = "115200 ttyS2"
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=c586bd9a663c6b77478b7b38ff771f6b8360edea
 
