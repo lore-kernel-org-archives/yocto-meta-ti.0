@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0279E0073A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D67D8E00734
 	for <meta-ti@yoctoproject.org>; Mon, 11 Mar 2013 13:49:06 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BDEA852AA2; Mon, 11 Mar 2013 20:49:05 +0000 (UTC)
+	id 8AF6652AAF; Mon, 11 Mar 2013 20:49:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130311204905.BDEA852AA2@arago-project.org>
-Date: Mon, 11 Mar 2013 20:49:05 +0000 (UTC)
+Message-Id: <20130311204906.8AF6652AAF@arago-project.org>
+Date: Mon, 11 Mar 2013 20:49:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : omap3-touchbook: remove machine definition, since it' s unsupported
+Subject: Denys Dmytriyenko : hawkboard: remove machine definition, since it' s unsupported
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,72 +22,55 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Mar 2013 20:49:06 -0000
+X-List-Received-Date: Mon, 11 Mar 2013 20:49:07 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: f5b282271c7545929c47f0c9c087a9f55dc8df93
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f5b282271c7545929c47f0c9c087a9f55dc8df93
+Branch: danny
+Commit: 14a20a715c280ac268ccaa572db2b24769334c67
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=14a20a715c280ac268ccaa572db2b24769334c67
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar  5 15:13:20 2013 -0500
+Date:   Tue Mar  5 15:09:09 2013 -0500
 
-omap3-touchbook: remove machine definition, since it's unsupported
+hawkboard: remove machine definition, since it's unsupported
 
-There is no support for this device from meta-ti. Plus I don't have the device.
-If there's anyone willing to maintain it, please let me know or feel free to
-take it to a separate layer.
+There is no support for this board from meta-ti. Plus I don't have the board.
+If there's anyone willing to maintain it, please let me know.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/omap3-touchbook.conf |   46 -------------------------------------
- 1 files changed, 0 insertions(+), 46 deletions(-)
+ conf/machine/hawkboard.conf |   29 -----------------------------
+ 1 files changed, 0 insertions(+), 29 deletions(-)
 
-diff --git a/conf/machine/omap3-touchbook.conf b/conf/machine/omap3-touchbook.conf
+diff --git a/conf/machine/hawkboard.conf b/conf/machine/hawkboard.conf
 deleted file mode 100644
-index 6c52d9e..0000000
---- a/conf/machine/omap3-touchbook.conf
+index b6e7f2d..0000000
+--- a/conf/machine/hawkboard.conf
 +++ /dev/null
-@@ -1,46 +0,0 @@
+@@ -1,29 +0,0 @@
 -#@TYPE: Machine
--#@NAME: Always Innovating touchbook
--#@DESCRIPTION: Machine configuration for the http://www.alwaysinnovating.com/touchbook/
+-#@NAME: OMAP-L138 based board
+-#@DESCRIPTION: Machine configuration for the TI Hawkboard
 -
--PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
--XSERVER = "xserver-xorg \
--           xf86-input-evdev \
--           xf86-input-mouse \
--           xf86-input-tslib \
--           xf86-video-fbdev \
--           xf86-video-omapfb \
--           xf86-input-keyboard"
+-require conf/machine/include/davinci.inc
+-require conf/machine/include/omapl138.inc
 -
--# Only has DVI connector for external screen
--GUI_MACHINE_CLASS = "bigscreen"
+-UBOOT_MACHINE = "da850_omapl138_evm_config"
+-UBOOT_ENTRYPOINT = "0xc0008000"
+-UBOOT_LOADADDRESS = "0xc0008000"
 -
--require conf/machine/include/omap3.inc
--
--PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
--
--IMAGE_FSTYPES += "tar.bz2"
--EXTRA_IMAGECMD_jffs2 = "-lnp "
--
--# Guesswork
--SERIAL_CONSOLE = "115200 ttyS2"
--
--UBOOT_MACHINE = "omap3_beagle_config"
--XLOAD_MACHINE = "beagleboard_config"
+-MACHINE_FEATURES = "kernel26 serial ethernet ide screen"
 -
 -# do ubiattach /dev/ubi_ctrl -m 4
 -# From dmesg:
 -# UBI: smallest flash I/O unit:    2048
--# UBI: logical eraseblock size:    129024 bytes
+-# UBI: logical eraseblock size:    126976 bytes
 -# from ubiattach stdout:
--# UBI device number 0, total 1996 LEBs
--MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
+-# UBI device number 0, total 971 LEBs (123293696 bytes, 117.6 MiB), available 958 LEBs (121643008 bytes, 116.0 MiB), LEB size 126976 bytes (124.0 KiB)
+-MKUBIFS_ARGS = "-m 2048 -e 126976 -c 948"
 -
 -# do ubiattach /dev/ubi_ctrl -m 4
 -# from dmesg:
@@ -96,7 +79,6 @@ index 6c52d9e..0000000
 -# UBI: sub-page size:              512
 -UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
 -
--# and sdio
--MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa touchscreen sgx"
+-SERIAL_CONSOLE = "115200 ttyS2"
 
 
