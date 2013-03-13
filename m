@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB290E0071D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC64AE0121B
 	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2013 17:45:10 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CFB2C52ABC; Wed, 13 Mar 2013 00:45:09 +0000 (UTC)
+	id D6ED252A66; Wed, 13 Mar 2013 00:45:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130313004509.CFB2C52ABC@arago-project.org>
+Message-Id: <20130313004509.D6ED252A66@arago-project.org>
 Date: Wed, 13 Mar 2013 00:45:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : machines: unify all machines to produce tar. gz instead of tar.bz2 by default
@@ -26,9 +26,9 @@ X-List-Received-Date: Wed, 13 Mar 2013 00:45:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: adab80bfe50fc7739ce7f9b99db5d6cbcabeb8bd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=adab80bfe50fc7739ce7f9b99db5d6cbcabeb8bd
+Branch: master
+Commit: 4f21d3b86badd88b99d19c225292a9bfa55fbaec
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4f21d3b86badd88b99d19c225292a9bfa55fbaec
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Mar 12 17:48:57 2013 -0400
