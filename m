@@ -1,15 +1,33 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC64AE0121B
-	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2013 17:45:10 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id D6ED252A66; Wed, 13 Mar 2013 00:45:09 +0000 (UTC)
+Return-Path: <liljegren.mats2@gmail.com>
+Received: from mail-bk0-f48.google.com (mail-bk0-f48.google.com
+	[209.85.214.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 62C62E00709
+	for <meta-ti@yoctoproject.org>; Wed, 13 Mar 2013 09:23:37 -0700 (PDT)
+Received: by mail-bk0-f48.google.com with SMTP id jf20so551700bkc.7
+	for <meta-ti@yoctoproject.org>; Wed, 13 Mar 2013 09:23:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=x-received:date:from:to:subject:message-id:mime-version
+	:content-type:content-disposition:user-agent;
+	bh=y+GwBlkjSaxc8AlZ+d2q7wyZELnLC4FoVbQMEgprmXk=;
+	b=MFFl0en34wuy/ZzAcoIYYddMkzVxekN0PL3gmacLEjsIE2JWLrSp8AWypjTf7xxnk2
+	+laNQyIF62K5TxmFr7veSqp8b9PY1qvohK10N5VO/gVyjEdPCZLqWtEtrUqC4bqrbMzg
+	lpG6meBWBkcfadEw2e1PD6Pkdj+KgUXxejaKckX+2Awm5dF5ACejFmOEtV/o/LOHvAb/
+	niYzLq/QsLR8Xu4iQ2bj4nMzDTryIIB5lDZ/38Zadeyt3VKJ7YLm0cgVNnSEH23D3Avi
+	soNOJRfFeeYw0TxIywpYvQeK38c2iwRVgJXoIciruOFncicaqPr/iFhDzc4Z6Dg+F6yM
+	CuSg==
+X-Received: by 10.204.183.198 with SMTP id ch6mr7879513bkb.90.1363191815909;
+	Wed, 13 Mar 2013 09:23:35 -0700 (PDT)
+Received: from enea.se (sestofw01.enea.se. [192.36.1.252])
+	by mx.google.com with ESMTPS id o2sm6222026bkv.3.2013.03.13.09.23.34
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 13 Mar 2013 09:23:35 -0700 (PDT)
+Date: Wed, 13 Mar 2013 17:23:33 +0100
+From: Mats Liljegren <liljegren.mats2@gmail.com>
 To: meta-ti@yoctoproject.org
-Message-Id: <20130313004509.D6ED252A66@arago-project.org>
-Date: Wed, 13 Mar 2013 00:45:09 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : machines: unify all machines to produce tar. gz instead of tar.bz2 by default
+Message-ID: <20130313162332.GA17056@enea.se>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: License errors
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,80 +40,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Mar 2013 00:45:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 13 Mar 2013 16:23:37 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: 4f21d3b86badd88b99d19c225292a9bfa55fbaec
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4f21d3b86badd88b99d19c225292a9bfa55fbaec
+When I bitbake with meta-ti layer I get the following errors:
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Mar 12 17:48:57 2013 -0400
+ERROR: This recipe does not have the LICENSE field set (cloud9-image)
+ERROR: This recipe does not have the LICENSE field set (cloud9-gfx-image)
+ERROR: This recipe does not have the LICENSE field set (cloud9-gnome-image)
+ERROR: This recipe does not have the LICENSE field set (ti-hw-bringup-image)
+ERROR: Unable to parse
+/media/sdc1/fb/mlil/enea-base/poky/meta-ti/recipes-misc/images/ti-hw-bringup-image.bb: Exited with "1"--:--:--
+ERROR: Command execution failed: Exited with 1
 
-machines: unify all machines to produce tar.gz instead of tar.bz2 by default
+I use master branch for poky as well as for meta-ti.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Is there a fix for this already, or should I create a patch for it? If the
+latter, what license should I use? MIT?
 
----
-
- conf/machine/beaglebone.conf   |    2 +-
- conf/machine/keystone-evm.conf |    2 +-
- conf/machine/omap3evm.conf     |    2 +-
- conf/machine/pandaboard.conf   |    2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-index dc77dd7..f4112f5 100644
---- a/conf/machine/beaglebone.conf
-+++ b/conf/machine/beaglebone.conf
-@@ -9,7 +9,7 @@ GUI_MACHINE_CLASS = "bigscreen"
- 
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
- 
--IMAGE_FSTYPES += "tar.bz2"
-+IMAGE_FSTYPES += "tar.gz"
- 
- SERIAL_CONSOLE = "115200 ttyO0"
- 
-diff --git a/conf/machine/keystone-evm.conf b/conf/machine/keystone-evm.conf
-index a2c05f8..c878d52 100644
---- a/conf/machine/keystone-evm.conf
-+++ b/conf/machine/keystone-evm.conf
-@@ -4,7 +4,7 @@
- 
- require conf/machine/include/keystone.inc
- 
--IMAGE_FSTYPES += "ubi tar.bz2 cpio"
-+IMAGE_FSTYPES += "ubi tar.gz cpio"
- 
- SERIAL_CONSOLE = "115200 ttyS0"
- 
-diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
-index a793798..584866c 100644
---- a/conf/machine/omap3evm.conf
-+++ b/conf/machine/omap3evm.conf
-@@ -9,7 +9,7 @@ XSERVER += "xf86-input-tslib"
- GUI_MACHINE_CLASS = "smallscreen"
- MACHINE_FEATURES += "touchscreen ethernet"
- 
--IMAGE_FSTYPES += "jffs2 tar.bz2"
-+IMAGE_FSTYPES += "jffs2 tar.gz"
- EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
- 
- SERIAL_CONSOLE = "115200 ttyS0"
-diff --git a/conf/machine/pandaboard.conf b/conf/machine/pandaboard.conf
-index b3d0399..1707f80 100644
---- a/conf/machine/pandaboard.conf
-+++ b/conf/machine/pandaboard.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/omap4.inc
- 
- GUI_MACHINE_CLASS = "bigscreen"
- 
--IMAGE_FSTYPES += "tar.bz2"
-+IMAGE_FSTYPES += "tar.gz"
- 
- SERIAL_CONSOLE = "115200 ttyO2"
- 
-
+Regards
+Mats Liljegren
 
