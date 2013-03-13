@@ -1,22 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
-	[206.46.173.1])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7629BE0071D
-	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2013 14:50:48 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MJK000VYI0EXI00@vms173001.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 12 Mar 2013 16:50:43 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 3C61520033; Tue,
-	12 Mar 2013 17:50:38 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB290E0071D
+	for <meta-ti@yoctoproject.org>; Tue, 12 Mar 2013 17:45:10 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id CFB2C52ABC; Wed, 13 Mar 2013 00:45:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Tue, 12 Mar 2013 17:50:34 -0400
-Message-id: <1363125034-6501-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [PATCH] machines: unify all machines to produce tar.gz instead of tar.bz2 by default
+Message-Id: <20130313004509.CFB2C52ABC@arago-project.org>
+Date: Wed, 13 Mar 2013 00:45:09 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : machines: unify all machines to produce tar. gz instead of tar.bz2 by default
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,16 +22,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Mar 2013 21:50:48 -0000
+X-List-Received-Date: Wed, 13 Mar 2013 00:45:11 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: danny
+Commit: adab80bfe50fc7739ce7f9b99db5d6cbcabeb8bd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=adab80bfe50fc7739ce7f9b99db5d6cbcabeb8bd
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Mar 12 17:48:57 2013 -0400
+
+machines: unify all machines to produce tar.gz instead of tar.bz2 by default
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- conf/machine/beaglebone.conf   | 2 +-
- conf/machine/keystone-evm.conf | 2 +-
- conf/machine/omap3evm.conf     | 2 +-
- conf/machine/pandaboard.conf   | 2 +-
+
+ conf/machine/beaglebone.conf   |    2 +-
+ conf/machine/keystone-evm.conf |    2 +-
+ conf/machine/omap3evm.conf     |    2 +-
+ conf/machine/pandaboard.conf   |    2 +-
  4 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
@@ -93,7 +97,5 @@ index b3d0399..1707f80 100644
  
  SERIAL_CONSOLE = "115200 ttyO2"
  
--- 
-1.8.1.5
 
 
