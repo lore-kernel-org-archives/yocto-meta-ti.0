@@ -1,24 +1,24 @@
 Return-Path: <denis@denix.org>
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4DECAE01410
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 80C5AE01410
 	for <meta-ti@yoctoproject.org>; Mon, 18 Mar 2013 16:42:52 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173021.mailsrvcs.net
+	by vms173003.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MJV00MDBR7FVRY1@vms173021.mailsrvcs.net> for
+	2009)) with ESMTPA id <0MJV00J6IR7F3TJ1@vms173003.mailsrvcs.net> for
 	meta-ti@yoctoproject.org; Mon, 18 Mar 2013 18:42:52 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 8F1A521924; Mon,
-	18 Mar 2013 19:33:38 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 8B36C21BEB; Mon,
+	18 Mar 2013 19:33:41 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Mon, 18 Mar 2013 19:32:21 -0400
-Message-id: <1363649547-4693-14-git-send-email-denis@denix.org>
+Date: Mon, 18 Mar 2013 19:32:26 -0400
+Message-id: <1363649547-4693-19-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.8.1.5
 In-reply-to: <1363649547-4693-1-git-send-email-denis@denix.org>
 References: <1363649547-4693-1-git-send-email-denis@denix.org>
-Subject: [PATCH 13/19] u-boot: modify mainline version to use the new .inc file
+Subject: [PATCH 18/19] am3517-evm: switch default u-boot preference to machine-specific tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,38 +35,29 @@ X-List-Received-Date: Mon, 18 Mar 2013 23:42:52 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
+SDKs or other users of meta-ti can still use one of the other recipes for
+stability or featureset, by setting PREFERRED_PROVIDER in their config.
+
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/u-boot/u-boot_2013.01.01.bb | 9 +--------
- 1 file changed, 1 insertion(+), 8 deletions(-)
+ conf/machine/am3517-evm.conf | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/recipes-bsp/u-boot/u-boot_2013.01.01.bb b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
-index 4c460cc..e3da1f3 100644
---- a/recipes-bsp/u-boot/u-boot_2013.01.01.bb
-+++ b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
-@@ -1,13 +1,9 @@
--require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
-+require u-boot-ti.inc
+diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
+index 0151fe9..097e797 100644
+--- a/conf/machine/am3517-evm.conf
++++ b/conf/machine/am3517-evm.conf
+@@ -17,6 +17,10 @@ USE_VT = "2"
  
- DESCRIPTION = "Mainline u-boot bootloader"
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
  
- DEFAULT_PREFERENCE = "-1"
++# Support for am3517 is in the same tree as am33x
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot-am33x"
++PREFERRED_PROVIDER_u-boot = "u-boot-am33x"
++
+ UBOOT_MACHINE = "am3517_evm_config"
+ XLOAD_MACHINE = "am3517evm_config"
  
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
- PR = "r1"
- 
- SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
-@@ -16,7 +12,4 @@ BRANCH ?= "u-boot-2013.01.y"
- 
- SRCREV = "e8ae0fa5edd152b2b29c470b88429be4cdcd2c46"
- 
--S = "${WORKDIR}/git"
--
--UBOOT_SUFFIX = "img"
- SPL_BINARY = "MLO"
 -- 
 1.8.1.5
 
