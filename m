@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90685E01410
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 906A1E01465
 	for <meta-ti@yoctoproject.org>; Mon, 18 Mar 2013 11:42:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3BC7252A56; Mon, 18 Mar 2013 18:42:55 +0000 (UTC)
+	id 564C552A3B; Mon, 18 Mar 2013 18:42:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130318184255.3BC7252A56@arago-project.org>
+Message-Id: <20130318184255.564C552A3B@arago-project.org>
 Date: Mon, 18 Mar 2013 18:42:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-omap-psp: fix alignment issue of 2.6. 37 kernel with gcc-4.7
@@ -26,9 +26,9 @@ X-List-Received-Date: Mon, 18 Mar 2013 18:42:56 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 0a42d9cf21ba0edceb390a9e289d7226876d9dbe
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0a42d9cf21ba0edceb390a9e289d7226876d9dbe
+Branch: danny
+Commit: b58508753485126a1fae1c7bbb53228386ddb128
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b58508753485126a1fae1c7bbb53228386ddb128
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Feb 25 23:42:28 2013 -0500
