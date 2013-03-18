@@ -1,24 +1,24 @@
 Return-Path: <denis@denix.org>
 Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
 	[206.46.173.1])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF791E0147F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ECBE8E01481
 	for <meta-ti@yoctoproject.org>; Mon, 18 Mar 2013 16:33:57 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [108.45.150.102])
 	by vms173001.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MJV008E2QS247B2@vms173001.mailsrvcs.net> for
+	2009)) with ESMTPA id <0MJV002CIQS1APP2@vms173001.mailsrvcs.net> for
 	meta-ti@yoctoproject.org; Mon, 18 Mar 2013 18:33:42 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id C3D4920077; Mon,
-	18 Mar 2013 19:33:36 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id E8EB1204EC; Mon,
+	18 Mar 2013 19:33:34 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Mon, 18 Mar 2013 19:32:18 -0400
-Message-id: <1363649547-4693-11-git-send-email-denis@denix.org>
+Date: Mon, 18 Mar 2013 19:32:15 -0400
+Message-id: <1363649547-4693-8-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.8.1.5
 In-reply-to: <1363649547-4693-1-git-send-email-denis@denix.org>
 References: <1363649547-4693-1-git-send-email-denis@denix.org>
-Subject: [PATCH 10/19] u-boot 2011.12: modify multi-machine version for the new .inc file
+Subject: [PATCH 07/19] u-boot-am180x: modify am180x specific version to use new namespace feature
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,51 +31,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Mar 2013 23:33:57 -0000
+X-List-Received-Date: Mon, 18 Mar 2013 23:33:58 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/u-boot/u-boot_2011.12.bb | 16 +++-------------
- 1 file changed, 3 insertions(+), 13 deletions(-)
+ ...0evm-change-default-memory-to-not-limit-at-32MB.patch |  0
+ ...12-psp03.21.00.04.sdk.bb => u-boot-am180x_2010.12.bb} | 16 ++++------------
+ 2 files changed, 4 insertions(+), 12 deletions(-)
+ rename recipes-bsp/u-boot/{u-boot-2010.12-psp03.21.00.04.sdk => u-boot-am180x-2010.12}/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch (100%)
+ rename recipes-bsp/u-boot/{u-boot_2010.12-psp03.21.00.04.sdk.bb => u-boot-am180x_2010.12.bb} (51%)
 
-diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
-index 137f5b5..13cb537 100644
---- a/recipes-bsp/u-boot/u-boot_2011.12.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
-@@ -1,15 +1,10 @@
--require u-boot.inc
+diff --git a/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch b/recipes-bsp/u-boot/u-boot-am180x-2010.12/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
+similarity index 100%
+rename from recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
+rename to recipes-bsp/u-boot/u-boot-am180x-2010.12/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
+diff --git a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
+similarity index 51%
+rename from recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
+rename to recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
+index 7652521..1afc531 100644
+--- a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
++++ b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
+@@ -1,15 +1,9 @@
+-# Use the version of u-boot.inc in oe-core not the meta-ti version
+-require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
 +require u-boot-ti.inc
  
--# SPL build
--UBOOT_BINARY = "u-boot.img"
--UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
--UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
-+SPL_BINARY = "MLO"
- 
--PV = "2011.12"
- PR = "r8"
- 
--# No patches for other machines yet
--COMPATIBLE_MACHINE = "(beagleboard|pandaboard|hawkboard|am3517-evm|am37x-evm|omap3evm)"
-+COMPATIBLE_MACHINE = "(beagleboard|pandaboard|am3517-evm|am37x-evm|omap3evm)"
- 
- # Non-omap4 platforms need outer cache turned on
- CACHEFIX = "file://2011.12/0008-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.patch"
-@@ -36,12 +31,7 @@ SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
-            ${FWENV} \
-           "
- 
+-DESCRIPTION = "u-boot bootloader for DaVinci devices"
 -
- # v2011.12 tag
- SRCREV = "cba9a894fdb1cb49b60fcd1d1d6919cbd7995dd5"
+-LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
++DESCRIPTION = "u-boot bootloader for AM180x devices"
  
--LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
+ COMPATIBLE_MACHINE = "am180x-evm"
+ 
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+ PR = "r0"
+ 
+ SRC_URI = "git://arago-project.org/git/projects/u-boot-davinci.git;protocol=git;branch=${BRANCH}"
+@@ -21,9 +15,7 @@ SRC_URI_append_am180x-evm = " file://0001-da850evm-change-default-memory-to-not-
+ 
+ BRANCH = "03.21.00.03"
+ 
+-# Use literal tags in SRCREV, when available, instead of commit IDs
+-SRCREV = "v2010.12_DAVINCIPSP_03.21.00.04"
 -
 -S = "${WORKDIR}/git"
--
- RRECOMMENDS_${PN}_beagleboard = "u-boot-fw-utils"
++# v2010.12_DAVINCIPSP_03.21.00.04
++SRCREV = "1254a0b58d900b7035cfb36bf4e1b05dfbf09997"
+ 
+ UBOOT_SUFFIX = "bin"
 -- 
 1.8.1.5
 
