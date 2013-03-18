@@ -1,37 +1,31 @@
-Return-Path: <chase.maupin@ti.com>
+Return-Path: <denys@ti.com>
 Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CAC32E01410
-	for <meta-ti@yoctoproject.org>; Mon, 18 Mar 2013 11:47:14 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B4620E01410
+	for <meta-ti@yoctoproject.org>; Mon, 18 Mar 2013 11:47:57 -0700 (PDT)
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2IIlDYj015548;
-	Mon, 18 Mar 2013 13:47:13 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2IIlDdp027435;
-	Mon, 18 Mar 2013 13:47:13 -0500
-Received: from DLEE74.ent.ti.com (157.170.170.8) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server (TLS) id 14.1.323.3;
-	Mon, 18 Mar 2013 13:47:13 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
-	14.01.0323.003; Mon, 18 Mar 2013 13:47:13 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH 1/3] linux-ti-staging: update to the latest
-	merge	of 3.8.3
-Thread-Index: AQHOJAhAmGG0Ace0K0uy8os1koeiKZiryLwwgABU0QD//6xJwA==
-Date: Mon, 18 Mar 2013 18:47:13 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED10159481D49@DLEE11.ent.ti.com>
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2IIlu4M015579;
+	Mon, 18 Mar 2013 13:47:56 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2IIluj7028126;
+	Mon, 18 Mar 2013 13:47:56 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Mon, 18 Mar 2013 13:47:56 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id r2IIludO000517;
+	Mon, 18 Mar 2013 13:47:56 -0500
+Date: Mon, 18 Mar 2013 14:47:56 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Maupin, Chase" <chase.maupin@ti.com>
+Message-ID: <20130318184755.GL32759@edge>
 References: <1363632040-22025-1-git-send-email-denis@denix.org>
-	<7D46E86EC0A8354091174257B2FED10159481C2B@DLEE11.ent.ti.com>
-	<20130318184628.GK32759@edge>
-In-Reply-To: <20130318184628.GK32759@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+	<1363632040-22025-2-git-send-email-denis@denix.org>
+	<7D46E86EC0A8354091174257B2FED10159481CCE@DLEE11.ent.ti.com>
 MIME-Version: 1.0
+In-Reply-To: <7D46E86EC0A8354091174257B2FED10159481CCE@DLEE11.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 1/3] linux-ti-staging: update to the latest merge	of 3.8.3
+Subject: Re: [PATCH 2/3] am335x, beaglebone: switch default preference to ti-staging tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,86 +38,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Mar 2013 18:47:15 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 18 Mar 2013 18:47:57 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Monday, March 18, 2013 1:46 PM
-> To: Maupin, Chase
-> Cc: Denys Dmytriyenko; meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH 1/3] linux-ti-staging: update to
-> the latest merge of 3.8.3
->=20
-> On Mon, Mar 18, 2013 at 06:43:52PM +0000, Maupin, Chase wrote:
-> > > -----Original Message-----
-> > > From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> > > bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
-> > > Sent: Monday, March 18, 2013 1:41 PM
-> > > To: meta-ti@yoctoproject.org
-> > > Subject: [meta-ti] [PATCH 1/3] linux-ti-staging: update to
-> the
-> > > latest merge of 3.8.3
-> >
-> > Acked-by: Chase Maupin <chase.maupin@ti.com>
-> >
-> > Although, we may still need to do version specific (non _git)
-> versions of
-> > the recipes when there is an official release.
->=20
-> When and if we have a long-term releases of the ti-staging kernel
-> tree, we can
-> revisit this. But for now it would be too much churn to rename
-> the recipe
-> every week with every next re-merge...
+On Mon, Mar 18, 2013 at 06:45:19PM +0000, Maupin, Chase wrote:
+> > -----Original Message-----
+> > From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> > bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
+> > Sent: Monday, March 18, 2013 1:41 PM
+> > To: meta-ti@yoctoproject.org
+> > Subject: [meta-ti] [PATCH 2/3] am335x, beaglebone: switch default
+> > preference to ti-staging tree
+> > 
+> > From: Denys Dmytriyenko <denys@ti.com>
+> > 
+> > SDKs or other users of meta-ti can still use one of the older 3.2
+> > recipes for
+> > stability or featureset, by setting PREFERRED_PROVIDER in distro
+> > or local config.
+> > 
+> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > ---
+> >  conf/machine/am335x-evm.conf | 2 +-
+> >  conf/machine/beaglebone.conf | 2 +-
+> >  2 files changed, 2 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-
+> > evm.conf
+> > index 91f7e54..77dbced 100644
+> > --- a/conf/machine/am335x-evm.conf
+> > +++ b/conf/machine/am335x-evm.conf
+> > @@ -13,7 +13,7 @@ IMAGE_FSTYPES += "ubi tar.gz"
+> > 
+> >  SERIAL_CONSOLE = "115200 ttyO0"
+> > 
+> > -PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+> > +PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+> 
+> I would probably change the one in include/ti33x.inc and remove these 
+> settings from the machine conf files.  Or at least fix ti33x.inc as well.
 
-Agreed.  I think this works well for now until we get an official "release"
+Good point. I was first modifying only am335x-evm, but decided to change 
+beaglebone as well at the last second... :) Will send v2 shortly.
 
->=20
-> --
-> Denys
->=20
->=20
-> > > From: Denys Dmytriyenko <denys@ti.com>
-> > >
-> > > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > > ---
-> > >  recipes-kernel/linux/linux-ti-staging_git.bb | 6 +++---
-> > >  1 file changed, 3 insertions(+), 3 deletions(-)
-> > >
-> > > diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb
-> > > b/recipes-kernel/linux/linux-ti-staging_git.bb
-> > > index dfef76d..605fbc1 100644
-> > > --- a/recipes-kernel/linux/linux-ti-staging_git.bb
-> > > +++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-> > > @@ -39,11 +39,11 @@ S =3D "${WORKDIR}/git"
-> > >
-> > >  BRANCH =3D "ti-linux-3.8.y"
-> > >
-> > > -SRCREV =3D "e69f39916783a559c499e264359edea315ef44fd"
-> > > -PV =3D "3.8.2"
-> > > +SRCREV =3D "ed93a28fb0b1dc28cc252ee87f6fce3e07bf23fe"
-> > > +PV =3D "3.8.3"
-> > >
-> > >  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will
-> > > cause a rebuild
-> > > -MACHINE_KERNEL_PR_append =3D "d+gitr${SRCPV}"
-> > > +MACHINE_KERNEL_PR_append =3D "a+gitr${SRCPV}"
-> > >
-> > >  SRC_URI =3D "git://gitorious.ti.com/ti-linux-kernel/ti-linux-
-> > > kernel.git;protocol=3Dgit;branch=3D${BRANCH} \
-> > >             file://defconfig \
-> > > --
-> > > 1.8.1.5
-> > >
-> > > _______________________________________________
-> > > meta-ti mailing list
-> > > meta-ti@yoctoproject.org
-> > > https://lists.yoctoproject.org/listinfo/meta-ti
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
+-- 
+Denys
 
