@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 91C46E01472
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93102E0147E
 	for <meta-ti@yoctoproject.org>; Mon, 18 Mar 2013 11:42:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5CE4F52A21; Mon, 18 Mar 2013 18:42:55 +0000 (UTC)
+	id 5DF7452A47; Mon, 18 Mar 2013 18:42:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130318184255.5CE4F52A21@arago-project.org>
+Message-Id: <20130318184255.5DF7452A47@arago-project.org>
 Date: Mon, 18 Mar 2013 18:42:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-omapl138: fix alignment issue of 2.6. 37 kernel with gcc-4.7
@@ -26,9 +26,9 @@ X-List-Received-Date: Mon, 18 Mar 2013 18:42:56 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: a81353cabbda057be390fc7e9c2c47984fa0b76b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a81353cabbda057be390fc7e9c2c47984fa0b76b
+Branch: master
+Commit: d61bfa88ed3df9190ac9fd5643c27f77b34c5f01
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d61bfa88ed3df9190ac9fd5643c27f77b34c5f01
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Feb 25 22:48:33 2013 -0500
