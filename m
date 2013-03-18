@@ -1,24 +1,25 @@
 Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B5488E01481
-	for <meta-ti@yoctoproject.org>; Mon, 18 Mar 2013 16:33:44 -0700 (PDT)
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04AE5E01481
+	for <meta-ti@yoctoproject.org>; Mon, 18 Mar 2013 16:33:45 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173013.mailsrvcs.net
+	by vms173003.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MJV00DD8QRWRRG0@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 18 Mar 2013 18:33:43 -0500 (CDT)
+	2009)) with ESMTPA id <0MJV00D1AQRUF0X0@vms173003.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 18 Mar 2013 18:33:44 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id AA6ED2038E; Mon,
-	18 Mar 2013 19:33:32 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 835832016B; Mon,
+	18 Mar 2013 19:33:30 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Mon, 18 Mar 2013 19:32:12 -0400
-Message-id: <1363649547-4693-5-git-send-email-denis@denix.org>
+Date: Mon, 18 Mar 2013 19:32:10 -0400
+Message-id: <1363649547-4693-3-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.8.1.5
 In-reply-to: <1363649547-4693-1-git-send-email-denis@denix.org>
 References: <1363649547-4693-1-git-send-email-denis@denix.org>
-Subject: [PATCH 04/19] u-boot.inc: refactor local include file to base off core with TI customizations
+MIME-version: 1.0
+Subject: [PATCH 02/19] u-boot 2011.06: remove an older no longer used version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,125 +32,4171 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Mar 2013 23:33:44 -0000
+X-List-Received-Date: Mon, 18 Mar 2013 23:33:45 -0000
+Content-type: text/plain; charset=UTF-8
+Content-transfer-encoding: 8bit
 
 From: Denys Dmytriyenko <denys@ti.com>
 
-* Introduce own namespace to allow multiple instances of the same base version,
-  possibly pulled from different trees or patched/customized for specific SoC.
-* Suffix-less variant u-boot_YYYY.MM.bb is reserved for mainline versions of the
-  recipe with no or minimal patches, with broader machine selection.
-* Recipes for machine- or SoC-specific trees should use corresponding suffix -
-  either machine, SoC or the name of the tree.
-* The .inc file lets the suffixed recipes to provide virtual/bootloader, u-boot,
-  as well as generate conventional u-boot binary packages for direct run-time
-  dependencies.
-
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti.inc | 17 ++++++++++
- recipes-bsp/u-boot/u-boot.inc    | 68 ----------------------------------------
- 2 files changed, 17 insertions(+), 68 deletions(-)
- create mode 100644 recipes-bsp/u-boot/u-boot-ti.inc
- delete mode 100644 recipes-bsp/u-boot/u-boot.inc
+ ...-Beagle-Pin-Mux-initialization-glitch-fix.patch |  46 -
+ ...-omapfb.debug-y-from-Beagle-and-Overo-env.patch |  56 --
+ ...agle-pass-expansionboard-name-in-bootargs.patch |  57 --
+ ...beagleboard-add-support-for-xM-revision-C.patch |  47 -
+ ...-for-SMSC95XX-USB-2.0-10-100MBit-Ethernet.patch | 989 ---------------------
+ ...t-hardware-MAC-address-framework-to-usbne.patch | 245 -----
+ ...Add-documentation-for-USB-Host-Networking.patch | 188 ----
+ .../u-boot/2011.06/0008-dm3730-enable-dpll5.patch  |  31 -
+ ...beagleboard-enable-HUB-power-on-XM-boards.patch |  40 -
+ ...-beagleboard-turn-off-clocks-in-ehci_stop.patch |  32 -
+ .../0011-beagleboard-enable-networking.patch       |  45 -
+ ...12-beagleboard-switch-to-ttyO2-as-console.patch |  26 -
+ ...gleboard-load-kernel-from-MMC-ext-not-FAT.patch |  27 -
+ ...4-beagleboard-enable-asix-driver-and-dhcp.patch |  34 -
+ ...-hardcode-MAC-for-onboard-SMSC-and-use-uI.patch |  26 -
+ ...agleboard-decrease-bootdelay-to-2-seconds.patch |  26 -
+ ...__attribute__-packed-for-struct-ehci_hccr.patch |  58 --
+ ...sb-Some-EHCI-chipsets-are-slow-to-respond.patch |  29 -
+ .../0019-OMAP3-Add-DSS-driver-for-OMAP3.patch      | 349 --------
+ .../2011.06/0020-video-DSS-makefile-update.patch   |  30 -
+ .../0021-BeagleBoard-Configure-DVI-S-video.patch   | 170 ----
+ .../0022-BeagleBoard-config-enable-DSS.patch       |  25 -
+ ...0023-BeagleBoard-Added-userbutton-command.patch | 107 ---
+ ...ED-name-match-finding-avoiding-extraneous.patch |  44 -
+ .../0025-BeagleBoard-fix-LED-0-1-in-driver.patch   |  31 -
+ .../0026-led-added-cmd_led-to-Makefile.patch       |  29 -
+ ...led-correct-off-on-locations-in-structure.patch |  36 -
+ .../0028-BeagleBoard-config-make-mtest-run.patch   |  36 -
+ ...-config-increase-command-line-functionali.patch |  42 -
+ ...agleBoard-config-add-optargs-buddy-camera.patch |  51 --
+ .../2011.06/0031-omap4-add-support-for-gpios.patch | 306 -------
+ .../2011.06/0032-omap4-add-support-for-EHCI.patch  | 322 -------
+ .../0033-omap4_panda-add-support-for-EHCI.patch    |  97 --
+ ...nda-adding-support-for-smsc-and-tftp-boot.patch |  66 --
+ ...035-omap4_panda-use-uImage.panda-for-tftp.patch |  26 -
+ .../u-boot/u-boot/omap3-touchbook/fw_env.config    |   6 -
+ recipes-bsp/u-boot/u-boot/touchbook-config.patch   |  25 -
+ recipes-bsp/u-boot/u-boot_2011.06.bb               |  51 --
+ 38 files changed, 3851 deletions(-)
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0001-OMAP3-Beagle-Pin-Mux-initialization-glitch-fix.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0002-OMAP-Remove-omapfb.debug-y-from-Beagle-and-Overo-env.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0003-OMAP3-beagle-pass-expansionboard-name-in-bootargs.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0004-beagleboard-add-support-for-xM-revision-C.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0005-Add-support-for-SMSC95XX-USB-2.0-10-100MBit-Ethernet.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0006-Add-Ethernet-hardware-MAC-address-framework-to-usbne.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0007-Add-documentation-for-USB-Host-Networking.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0008-dm3730-enable-dpll5.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0009-beagleboard-enable-HUB-power-on-XM-boards.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0010-beagleboard-turn-off-clocks-in-ehci_stop.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0011-beagleboard-enable-networking.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0012-beagleboard-switch-to-ttyO2-as-console.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0013-beagleboard-load-kernel-from-MMC-ext-not-FAT.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0014-beagleboard-enable-asix-driver-and-dhcp.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0015-beagleboard-hardcode-MAC-for-onboard-SMSC-and-use-uI.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0016-beagleboard-decrease-bootdelay-to-2-seconds.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0017-USB-Remove-__attribute__-packed-for-struct-ehci_hccr.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0018-usb-Some-EHCI-chipsets-are-slow-to-respond.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0019-OMAP3-Add-DSS-driver-for-OMAP3.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0020-video-DSS-makefile-update.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0021-BeagleBoard-Configure-DVI-S-video.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0022-BeagleBoard-config-enable-DSS.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0023-BeagleBoard-Added-userbutton-command.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0024-Corrected-LED-name-match-finding-avoiding-extraneous.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0025-BeagleBoard-fix-LED-0-1-in-driver.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0026-led-added-cmd_led-to-Makefile.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0027-led-correct-off-on-locations-in-structure.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0028-BeagleBoard-config-make-mtest-run.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0029-BeagleBoard-config-increase-command-line-functionali.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0030-BeagleBoard-config-add-optargs-buddy-camera.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0031-omap4-add-support-for-gpios.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0032-omap4-add-support-for-EHCI.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0033-omap4_panda-add-support-for-EHCI.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0034-omap4_panda-adding-support-for-smsc-and-tftp-boot.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/2011.06/0035-omap4_panda-use-uImage.panda-for-tftp.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot/omap3-touchbook/fw_env.config
+ delete mode 100644 recipes-bsp/u-boot/u-boot/touchbook-config.patch
+ delete mode 100644 recipes-bsp/u-boot/u-boot_2011.06.bb
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-new file mode 100644
-index 0000000..968f3e4
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -0,0 +1,17 @@
-+require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
-+
-+FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot:"
-+
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+PROVIDES += "u-boot"
-+PKG_${PN} = "u-boot"
-+PKG_${PN}-dev = "u-boot-dev"
-+PKG_${PN}-dbg = "u-boot-dbg"
-+
-+S = "${WORKDIR}/git"
-+
-+UBOOT_SUFFIX = "img"
-diff --git a/recipes-bsp/u-boot/u-boot.inc b/recipes-bsp/u-boot/u-boot.inc
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0001-OMAP3-Beagle-Pin-Mux-initialization-glitch-fix.patch b/recipes-bsp/u-boot/u-boot/2011.06/0001-OMAP3-Beagle-Pin-Mux-initialization-glitch-fix.patch
 deleted file mode 100644
-index 720f995..0000000
---- a/recipes-bsp/u-boot/u-boot.inc
+index 6463a80..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0001-OMAP3-Beagle-Pin-Mux-initialization-glitch-fix.patch
 +++ /dev/null
-@@ -1,68 +0,0 @@
--DESCRIPTION = "U-Boot - the Universal Boot Loader"
--HOMEPAGE = "http://www.denx.de/wiki/U-Boot/WebHome"
--SECTION = "bootloaders"
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
+@@ -1,46 +0,0 @@
+-From 8892464287ca16f90397f159370f0d42ff6dc879 Mon Sep 17 00:00:00 2001
+-From: Bob Feretich <bob.feretich@rafresearch.com>
+-Date: Thu, 24 Feb 2011 13:16:44 +0000
+-Subject: [PATCH 01/30] OMAP3 Beagle Pin Mux initialization glitch fix
 -
--PROVIDES = "virtual/bootloader"
+-The below patch reverses the order of two segments in the board file.
+-Output pins need to have their values initialized, before they are
+-exposed to the logic outside the chip.
 -
--DEPENDS = "mtd-utils"
+-Signed-off-by: Bob Feretich <bob.feretich@rafresearch.com>
+-Cc: Wolfgang Denk <wd@denx.de>
+----
+- board/ti/beagle/beagle.c |   12 ++++++------
+- 1 files changed, 6 insertions(+), 6 deletions(-)
 -
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--PARALLEL_MAKE=""
+-diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
+-index ab50514..15d061a 100644
+---- a/board/ti/beagle/beagle.c
+-+++ b/board/ti/beagle/beagle.c
+-@@ -301,17 +301,17 @@ int misc_init_r(void)
+- 	twl4030_power_init();
+- 	twl4030_led_init(TWL4030_LED_LEDEN_LEDAON | TWL4030_LED_LEDEN_LEDBON);
+- 
+--	/* Configure GPIOs to output */
+--	writel(~(GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1), &gpio6_base->oe);
+--	writel(~(GPIO31 | GPIO30 | GPIO29 | GPIO28 | GPIO22 | GPIO21 |
+--		GPIO15 | GPIO14 | GPIO13 | GPIO12), &gpio5_base->oe);
+--
+--	/* Set GPIOs */
+-+	/* Set GPIO states before they are made outputs */
+- 	writel(GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1,
+- 		&gpio6_base->setdataout);
+- 	writel(GPIO31 | GPIO30 | GPIO29 | GPIO28 | GPIO22 | GPIO21 |
+- 		GPIO15 | GPIO14 | GPIO13 | GPIO12, &gpio5_base->setdataout);
+- 
+-+	/* Configure GPIOs to output */
+-+	writel(~(GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1), &gpio6_base->oe);
+-+	writel(~(GPIO31 | GPIO30 | GPIO29 | GPIO28 | GPIO22 | GPIO21 |
+-+		GPIO15 | GPIO14 | GPIO13 | GPIO12), &gpio5_base->oe);
+-+
+- 	dieid_num_r();
+- 
+- 	return 0;
+--- 
+-1.6.6.1
 -
--EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX}"
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0002-OMAP-Remove-omapfb.debug-y-from-Beagle-and-Overo-env.patch b/recipes-bsp/u-boot/u-boot/2011.06/0002-OMAP-Remove-omapfb.debug-y-from-Beagle-and-Overo-env.patch
+deleted file mode 100644
+index b4906ef..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0002-OMAP-Remove-omapfb.debug-y-from-Beagle-and-Overo-env.patch
++++ /dev/null
+@@ -1,56 +0,0 @@
+-From 88ee784eddb634074895d68572b896aebd10bb5d Mon Sep 17 00:00:00 2001
+-From: Steve Sakoman <steve@sakoman.com>
+-Date: Thu, 30 Dec 2010 07:19:44 +0000
+-Subject: [PATCH 02/30] OMAP: Remove omapfb.debug=y from Beagle and Overo env settings
 -
--UBOOT_MACHINE ?= "${MACHINE}_config"
--UBOOT_BINARY ?= "u-boot.bin"
--UBOOT_IMAGE ?= "u-boot-${MACHINE}-${PV}-${PR}.bin"
--UBOOT_SYMLINK ?= "u-boot-${MACHINE}.bin"
--UBOOT_MAKE_TARGET ?= "all"
+-The kernel DSS2 code is mature now, and keeping this setting hurts performance
 -
--do_configure () {
--	oe_runmake ${UBOOT_MACHINE}
--}
+-Signed-off-by: Steve Sakoman <steve@sakoman.com>
+----
+- include/configs/omap3_beagle.h |    2 --
+- include/configs/omap3_overo.h  |    2 --
+- 2 files changed, 0 insertions(+), 4 deletions(-)
 -
--do_compile () {
--	unset LDFLAGS
--	unset CFLAGS
--	unset CPPFLAGS
--	oe_runmake ${UBOOT_MAKE_TARGET}
--}
+-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+-index 9fd80ed..42575f1 100644
+---- a/include/configs/omap3_beagle.h
+-+++ b/include/configs/omap3_beagle.h
+-@@ -214,7 +214,6 @@
+- 		"mpurate=${mpurate} " \
+- 		"vram=${vram} " \
+- 		"omapfb.mode=dvi:${dvimode} " \
+--		"omapfb.debug=y " \
+- 		"omapdss.def_disp=${defaultdisplay} " \
+- 		"root=${mmcroot} " \
+- 		"rootfstype=${mmcrootfstype}\0" \
+-@@ -222,7 +221,6 @@
+- 		"mpurate=${mpurate} " \
+- 		"vram=${vram} " \
+- 		"omapfb.mode=dvi:${dvimode} " \
+--		"omapfb.debug=y " \
+- 		"omapdss.def_disp=${defaultdisplay} " \
+- 		"root=${nandroot} " \
+- 		"rootfstype=${nandrootfstype}\0" \
+-diff --git a/include/configs/omap3_overo.h b/include/configs/omap3_overo.h
+-index 242b317..0f64054 100644
+---- a/include/configs/omap3_overo.h
+-+++ b/include/configs/omap3_overo.h
+-@@ -170,7 +170,6 @@
+- 		"mpurate=${mpurate} " \
+- 		"vram=${vram} " \
+- 		"omapfb.mode=dvi:${dvimode} " \
+--		"omapfb.debug=y " \
+- 		"omapdss.def_disp=${defaultdisplay} " \
+- 		"root=${mmcroot} " \
+- 		"rootfstype=${mmcrootfstype}\0" \
+-@@ -178,7 +177,6 @@
+- 		"mpurate=${mpurate} " \
+- 		"vram=${vram} " \
+- 		"omapfb.mode=dvi:${dvimode} " \
+--		"omapfb.debug=y " \
+- 		"omapdss.def_disp=${defaultdisplay} " \
+- 		"root=${nandroot} " \
+- 		"rootfstype=${nandrootfstype}\0" \
+--- 
+-1.6.6.1
 -
--do_install () {
--	install -d ${D}/boot
--	install ${S}/${UBOOT_BINARY} ${D}/boot/${UBOOT_IMAGE}
--	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0003-OMAP3-beagle-pass-expansionboard-name-in-bootargs.patch b/recipes-bsp/u-boot/u-boot/2011.06/0003-OMAP3-beagle-pass-expansionboard-name-in-bootargs.patch
+deleted file mode 100644
+index b2e3df6..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0003-OMAP3-beagle-pass-expansionboard-name-in-bootargs.patch
++++ /dev/null
+@@ -1,57 +0,0 @@
+-From 89231bb3ed75ea6801a10d3ea618c8dc83d7e483 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Mon, 22 Nov 2010 11:51:32 +0100
+-Subject: [PATCH 03/30] OMAP3: beagle: pass expansionboard name in bootargs
 -
--	if [ -e ${WORKDIR}/fw_env.config ] ; then
--		install -d ${D}${sysconfdir}
--		install -m 644 ${WORKDIR}/fw_env.config ${D}${sysconfdir}/fw_env.config
--	fi
+----
+- include/configs/omap3_beagle.h |   13 +++++++++++++
+- 1 files changed, 13 insertions(+), 0 deletions(-)
 -
--}
+-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+-index 42575f1..d5f98da 100644
+---- a/include/configs/omap3_beagle.h
+-+++ b/include/configs/omap3_beagle.h
+-@@ -202,6 +202,7 @@
+- 	"usbtty=cdc_acm\0" \
+- 	"console=ttyS2,115200n8\0" \
+- 	"mpurate=auto\0" \
+-+	"buddy=none "\
+- 	"vram=12M\0" \
+- 	"dvimode=1024x768MR-16@60\0" \
+- 	"defaultdisplay=dvi\0" \
+-@@ -212,6 +213,7 @@
+- 	"nandrootfstype=jffs2\0" \
+- 	"mmcargs=setenv bootargs console=${console} " \
+- 		"mpurate=${mpurate} " \
+-+		"buddy=${buddy} "\
+- 		"vram=${vram} " \
+- 		"omapfb.mode=dvi:${dvimode} " \
+- 		"omapdss.def_disp=${defaultdisplay} " \
+-@@ -219,6 +221,7 @@
+- 		"rootfstype=${mmcrootfstype}\0" \
+- 	"nandargs=setenv bootargs console=${console} " \
+- 		"mpurate=${mpurate} " \
+-+		"buddy=${buddy} "\
+- 		"vram=${vram} " \
+- 		"omapfb.mode=dvi:${dvimode} " \
+- 		"omapdss.def_disp=${defaultdisplay} " \
+-@@ -227,6 +230,16 @@
+- 	"loadbootenv=fatload mmc ${mmcdev} ${loadaddr} uEnv.txt\0" \
+- 	"importbootenv=echo Importing environment from mmc ...; " \
+- 		"env import -t $loadaddr $filesize\0" \
+-+	"ramargs=setenv bootargs console=${console} " \
+-+		"${optargs} " \
+-+		"mpurate=${mpurate} " \
+-+		"buddy=${buddy} "\
+-+		"vram=${vram} " \
+-+		"omapfb.mode=dvi:${dvimode} " \
+-+		"omapdss.def_disp=${defaultdisplay} " \
+-+		"root=${ramroot} " \
+-+		"rootfstype=${ramrootfstype}\0" \
+-+	"loadramdisk=fatload mmc ${mmcdev} ${rdaddr} ramdisk.gz\0" \
+- 	"loaduimage=fatload mmc ${mmcdev} ${loadaddr} uImage\0" \
+- 	"mmcboot=echo Booting from mmc ...; " \
+- 		"run mmcargs; " \
+--- 
+-1.6.6.1
 -
--FILES_${PN} = "/boot ${sysconfdir}"
--# no gnu_hash in uboot.bin, by design, so skip QA
--INSANE_SKIP_${PN} = "1"
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0004-beagleboard-add-support-for-xM-revision-C.patch b/recipes-bsp/u-boot/u-boot/2011.06/0004-beagleboard-add-support-for-xM-revision-C.patch
+deleted file mode 100644
+index dec2839..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0004-beagleboard-add-support-for-xM-revision-C.patch
++++ /dev/null
+@@ -1,47 +0,0 @@
+-From 9890bd3e5a28645214aff9d8d311d6a5bdec6cf9 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Fri, 17 Jun 2011 09:37:37 +0200
+-Subject: [PATCH 04/30] beagleboard: add support for xM revision C
 -
--inherit deploy
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- board/ti/beagle/beagle.c |   10 ++++++++++
+- board/ti/beagle/beagle.h |    1 +
+- 2 files changed, 11 insertions(+), 0 deletions(-)
 -
--addtask deploy before do_package after do_compile
+-diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
+-index 15d061a..7768901 100644
+---- a/board/ti/beagle/beagle.c
+-+++ b/board/ti/beagle/beagle.c
+-@@ -216,6 +216,16 @@ int misc_init_r(void)
+- 					TWL4030_PM_RECEIVER_VAUX2_DEV_GRP,
+- 					TWL4030_PM_RECEIVER_DEV_GRP_P1);
+- 		break;
+-+	case REVISION_XM_C:
+-+		printf("Beagle xM Rev C\n");
+-+		setenv("beaglerev", "xMC");
+-+		MUX_BEAGLE_XM();
+-+		/* Set VAUX2 to 1.8V for EHCI PHY */
+-+		twl4030_pmrecv_vsel_cfg(TWL4030_PM_RECEIVER_VAUX2_DEDICATED,
+-+					TWL4030_PM_RECEIVER_VAUX2_VSEL_18,
+-+					TWL4030_PM_RECEIVER_VAUX2_DEV_GRP,
+-+					TWL4030_PM_RECEIVER_DEV_GRP_P1);
+-+		break;
+- 	default:
+- 		printf("Beagle unknown 0x%02x\n", get_board_revision());
+- 		MUX_BEAGLE_XM();
+-diff --git a/board/ti/beagle/beagle.h b/board/ti/beagle/beagle.h
+-index a7401b1..04247cd 100644
+---- a/board/ti/beagle/beagle.h
+-+++ b/board/ti/beagle/beagle.h
+-@@ -39,6 +39,7 @@ const omap3_sysinfo sysinfo = {
+- #define REVISION_C4	0x5
+- #define REVISION_XM_A	0x0
+- #define REVISION_XM_B	0x1
+-+#define REVISION_XM_C	0x2
+- 
+- /*
+-  * IEN  - Input Enable
+--- 
+-1.6.6.1
 -
--do_deploy () {
--	install -d ${DEPLOY_DIR_IMAGE}
--	install ${S}/${UBOOT_BINARY} ${DEPLOY_DIR_IMAGE}/${UBOOT_IMAGE}
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0005-Add-support-for-SMSC95XX-USB-2.0-10-100MBit-Ethernet.patch b/recipes-bsp/u-boot/u-boot/2011.06/0005-Add-support-for-SMSC95XX-USB-2.0-10-100MBit-Ethernet.patch
+deleted file mode 100644
+index 2c400d8..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0005-Add-support-for-SMSC95XX-USB-2.0-10-100MBit-Ethernet.patch
++++ /dev/null
+@@ -1,989 +0,0 @@
+-From 00b6a679e3c739567f1383030cd61483a15555f8 Mon Sep 17 00:00:00 2001
+-From: Simon Glass <sjg@chromium.org>
+-Date: Mon, 13 Jun 2011 13:13:09 +0000
+-Subject: [PATCH 05/30] Add support for SMSC95XX USB 2.0 10/100MBit Ethernet Adapter
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
 -
--	cd ${DEPLOY_DIR_IMAGE}
--	rm -f ${UBOOT_BINARY} ${UBOOT_SYMLINK}
--	ln -sf ${UBOOT_IMAGE} ${UBOOT_SYMLINK}
--	ln -sf ${UBOOT_IMAGE} ${UBOOT_BINARY}
+-The SMSC95XX is a USB hub with a built-in Ethernet adapter. This adds support
+-for this, using the USB host network framework.
 -
--	if [ -e ${S}/MLO ] ; then
--		install ${S}/MLO ${DEPLOY_DIR_IMAGE}/MLO-${MACHINE}-${PV}
--		rm -f ${DEPLOY_DIR_IMAGE}/MLO-${MACHINE} ${DEPLOY_DIR_IMAGE}/MLO
--		ln -sf MLO-${MACHINE}-${PV} ${DEPLOY_DIR_IMAGE}/MLO-${MACHINE}
--		ln -sf MLO-${MACHINE}-${PV} ${DEPLOY_DIR_IMAGE}/MLO
--	fi
--}
+-Changes for v2:
+-- Coding style cleanup
+-- Changed some comments as suggested
+-
+-Changes for v3:
+-- Change turbo_mode to #define
+-
+-Changes for v4:
+-- Dropped Tegra2 specific bit
+-- Fixed a few broken bits in SMSC from my testing
+-
+-Changes for v5:
+-- Code style clean-ups in SMSC
+-- Cleaned up debugging of errors in SMSC driver
+-
+-Changes for v6:
+-- Set NET_IP_ALIGN to 0 always
+-
+-Changes for v8:
+-- Add setup of SMSC write_hwaddr function
+-
+-Signed-off-by: Simon Glass <sjg@chromium.org>
+-Tested-by: Eric Bénard <eric@eukrea.com>
+----
+- drivers/usb/eth/Makefile    |    1 +
+- drivers/usb/eth/smsc95xx.c  |  879 +++++++++++++++++++++++++++++++++++++++++++
+- drivers/usb/eth/usb_ether.c |    7 +
+- include/usb_ether.h         |   13 +
+- 4 files changed, 900 insertions(+), 0 deletions(-)
+- create mode 100644 drivers/usb/eth/smsc95xx.c
+-
+-diff --git a/drivers/usb/eth/Makefile b/drivers/usb/eth/Makefile
+-index 6a5f25a..e28793d 100644
+---- a/drivers/usb/eth/Makefile
+-+++ b/drivers/usb/eth/Makefile
+-@@ -28,6 +28,7 @@ COBJS-$(CONFIG_USB_HOST_ETHER) += usb_ether.o
+- ifdef CONFIG_USB_ETHER_ASIX
+- COBJS-y += asix.o
+- endif
+-+COBJS-$(CONFIG_USB_ETHER_SMSC95XX) += smsc95xx.o
+- 
+- COBJS	:= $(COBJS-y)
+- SRCS	:= $(COBJS:.o=.c)
+-diff --git a/drivers/usb/eth/smsc95xx.c b/drivers/usb/eth/smsc95xx.c
+-new file mode 100644
+-index 0000000..97f2729
+---- /dev/null
+-+++ b/drivers/usb/eth/smsc95xx.c
+-@@ -0,0 +1,879 @@
+-+/*
+-+ * Copyright (c) 2011 The Chromium OS Authors.
+-+ * Copyright (C) 2009 NVIDIA, Corporation
+-+ * See file CREDITS for list of people who contributed to this
+-+ * project.
+-+ *
+-+ * This program is free software; you can redistribute it and/or
+-+ * modify it under the terms of the GNU General Public License as
+-+ * published by the Free Software Foundation; either version 2 of
+-+ * the License, or (at your option) any later version.
+-+ *
+-+ * This program is distributed in the hope that it will be useful,
+-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+-+ * GNU General Public License for more details.
+-+ *
+-+ * You should have received a copy of the GNU General Public License
+-+ * along with this program; if not, write to the Free Software
+-+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+-+ * MA 02111-1307 USA
+-+ */
+-+
+-+#include <common.h>
+-+#include <usb.h>
+-+#include <linux/mii.h>
+-+#include "usb_ether.h"
+-+
+-+/* SMSC LAN95xx based USB 2.0 Ethernet Devices */
+-+
+-+/* Tx command words */
+-+#define TX_CMD_A_FIRST_SEG_		0x00002000
+-+#define TX_CMD_A_LAST_SEG_		0x00001000
+-+
+-+/* Rx status word */
+-+#define RX_STS_FL_			0x3FFF0000	/* Frame Length */
+-+#define RX_STS_ES_			0x00008000	/* Error Summary */
+-+
+-+/* SCSRs */
+-+#define ID_REV				0x00
+-+
+-+#define INT_STS				0x08
+-+
+-+#define TX_CFG				0x10
+-+#define TX_CFG_ON_			0x00000004
+-+
+-+#define HW_CFG				0x14
+-+#define HW_CFG_BIR_			0x00001000
+-+#define HW_CFG_RXDOFF_			0x00000600
+-+#define HW_CFG_MEF_			0x00000020
+-+#define HW_CFG_BCE_			0x00000002
+-+#define HW_CFG_LRST_			0x00000008
+-+
+-+#define PM_CTRL				0x20
+-+#define PM_CTL_PHY_RST_			0x00000010
+-+
+-+#define AFC_CFG				0x2C
+-+
+-+/*
+-+ * Hi watermark = 15.5Kb (~10 mtu pkts)
+-+ * low watermark = 3k (~2 mtu pkts)
+-+ * backpressure duration = ~ 350us
+-+ * Apply FC on any frame.
+-+ */
+-+#define AFC_CFG_DEFAULT			0x00F830A1
+-+
+-+#define E2P_CMD				0x30
+-+#define E2P_CMD_BUSY_			0x80000000
+-+#define E2P_CMD_READ_			0x00000000
+-+#define E2P_CMD_TIMEOUT_		0x00000400
+-+#define E2P_CMD_LOADED_			0x00000200
+-+#define E2P_CMD_ADDR_			0x000001FF
+-+
+-+#define E2P_DATA			0x34
+-+
+-+#define BURST_CAP			0x38
+-+
+-+#define INT_EP_CTL			0x68
+-+#define INT_EP_CTL_PHY_INT_		0x00008000
+-+
+-+#define BULK_IN_DLY			0x6C
+-+
+-+/* MAC CSRs */
+-+#define MAC_CR				0x100
+-+#define MAC_CR_MCPAS_			0x00080000
+-+#define MAC_CR_PRMS_			0x00040000
+-+#define MAC_CR_HPFILT_			0x00002000
+-+#define MAC_CR_TXEN_			0x00000008
+-+#define MAC_CR_RXEN_			0x00000004
+-+
+-+#define ADDRH				0x104
+-+
+-+#define ADDRL				0x108
+-+
+-+#define MII_ADDR			0x114
+-+#define MII_WRITE_			0x02
+-+#define MII_BUSY_			0x01
+-+#define MII_READ_			0x00 /* ~of MII Write bit */
+-+
+-+#define MII_DATA			0x118
+-+
+-+#define FLOW				0x11C
+-+
+-+#define VLAN1				0x120
+-+
+-+#define COE_CR				0x130
+-+#define Tx_COE_EN_			0x00010000
+-+#define Rx_COE_EN_			0x00000001
+-+
+-+/* Vendor-specific PHY Definitions */
+-+#define PHY_INT_SRC			29
+-+
+-+#define PHY_INT_MASK			30
+-+#define PHY_INT_MASK_ANEG_COMP_		((u16)0x0040)
+-+#define PHY_INT_MASK_LINK_DOWN_		((u16)0x0010)
+-+#define PHY_INT_MASK_DEFAULT_		(PHY_INT_MASK_ANEG_COMP_ | \
+-+					 PHY_INT_MASK_LINK_DOWN_)
+-+
+-+/* USB Vendor Requests */
+-+#define USB_VENDOR_REQUEST_WRITE_REGISTER	0xA0
+-+#define USB_VENDOR_REQUEST_READ_REGISTER	0xA1
+-+
+-+/* Some extra defines */
+-+#define HS_USB_PKT_SIZE			512
+-+#define FS_USB_PKT_SIZE			64
+-+#define DEFAULT_HS_BURST_CAP_SIZE	(16 * 1024 + 5 * HS_USB_PKT_SIZE)
+-+#define DEFAULT_FS_BURST_CAP_SIZE	(6 * 1024 + 33 * FS_USB_PKT_SIZE)
+-+#define DEFAULT_BULK_IN_DELAY		0x00002000
+-+#define MAX_SINGLE_PACKET_SIZE		2048
+-+#define EEPROM_MAC_OFFSET		0x01
+-+#define SMSC95XX_INTERNAL_PHY_ID	1
+-+#define ETH_P_8021Q	0x8100          /* 802.1Q VLAN Extended Header  */
+-+
+-+/* local defines */
+-+#define SMSC95XX_BASE_NAME "sms"
+-+#define USB_CTRL_SET_TIMEOUT 5000
+-+#define USB_CTRL_GET_TIMEOUT 5000
+-+#define USB_BULK_SEND_TIMEOUT 5000
+-+#define USB_BULK_RECV_TIMEOUT 5000
+-+
+-+#define AX_RX_URB_SIZE 2048
+-+#define PHY_CONNECT_TIMEOUT 5000
+-+
+-+#define TURBO_MODE
+-+
+-+/* local vars */
+-+static int curr_eth_dev; /* index for name of next device detected */
+-+
+-+
+-+/*
+-+ * Smsc95xx infrastructure commands
+-+ */
+-+static int smsc95xx_write_reg(struct ueth_data *dev, u32 index, u32 data)
+-+{
+-+	int len;
+-+
+-+	cpu_to_le32s(&data);
+-+
+-+	len = usb_control_msg(dev->pusb_dev, usb_sndctrlpipe(dev->pusb_dev, 0),
+-+		USB_VENDOR_REQUEST_WRITE_REGISTER,
+-+		USB_DIR_OUT | USB_TYPE_VENDOR | USB_RECIP_DEVICE,
+-+		00, index, &data, sizeof(data), USB_CTRL_SET_TIMEOUT);
+-+	if (len != sizeof(data)) {
+-+		debug("smsc95xx_write_reg failed: index=%d, data=%d, len=%d",
+-+		      index, data, len);
+-+		return -1;
+-+	}
+-+	return 0;
+-+}
+-+
+-+static int smsc95xx_read_reg(struct ueth_data *dev, u32 index, u32 *data)
+-+{
+-+	int len;
+-+
+-+	len = usb_control_msg(dev->pusb_dev, usb_rcvctrlpipe(dev->pusb_dev, 0),
+-+		USB_VENDOR_REQUEST_READ_REGISTER,
+-+		USB_DIR_IN | USB_TYPE_VENDOR | USB_RECIP_DEVICE,
+-+		00, index, data, sizeof(data), USB_CTRL_GET_TIMEOUT);
+-+	if (len != sizeof(data)) {
+-+		debug("smsc95xx_read_reg failed: index=%d, len=%d",
+-+		      index, len);
+-+		return -1;
+-+	}
+-+
+-+	le32_to_cpus(data);
+-+	return 0;
+-+}
+-+
+-+/* Loop until the read is completed with timeout */
+-+static int smsc95xx_phy_wait_not_busy(struct ueth_data *dev)
+-+{
+-+	unsigned long start_time = get_timer(0);
+-+	u32 val;
+-+
+-+	do {
+-+		smsc95xx_read_reg(dev, MII_ADDR, &val);
+-+		if (!(val & MII_BUSY_))
+-+			return 0;
+-+	} while (get_timer(start_time) < 1 * 1000 * 1000);
+-+
+-+	return -1;
+-+}
+-+
+-+static int smsc95xx_mdio_read(struct ueth_data *dev, int phy_id, int idx)
+-+{
+-+	u32 val, addr;
+-+
+-+	/* confirm MII not busy */
+-+	if (smsc95xx_phy_wait_not_busy(dev)) {
+-+		debug("MII is busy in smsc95xx_mdio_read\n");
+-+		return -1;
+-+	}
+-+
+-+	/* set the address, index & direction (read from PHY) */
+-+	addr = (phy_id << 11) | (idx << 6) | MII_READ_;
+-+	smsc95xx_write_reg(dev, MII_ADDR, addr);
+-+
+-+	if (smsc95xx_phy_wait_not_busy(dev)) {
+-+		debug("Timed out reading MII reg %02X\n", idx);
+-+		return -1;
+-+	}
+-+
+-+	smsc95xx_read_reg(dev, MII_DATA, &val);
+-+
+-+	return (u16)(val & 0xFFFF);
+-+}
+-+
+-+static void smsc95xx_mdio_write(struct ueth_data *dev, int phy_id, int idx,
+-+				int regval)
+-+{
+-+	u32 val, addr;
+-+
+-+	/* confirm MII not busy */
+-+	if (smsc95xx_phy_wait_not_busy(dev)) {
+-+		debug("MII is busy in smsc95xx_mdio_write\n");
+-+		return;
+-+	}
+-+
+-+	val = regval;
+-+	smsc95xx_write_reg(dev, MII_DATA, val);
+-+
+-+	/* set the address, index & direction (write to PHY) */
+-+	addr = (phy_id << 11) | (idx << 6) | MII_WRITE_;
+-+	smsc95xx_write_reg(dev, MII_ADDR, addr);
+-+
+-+	if (smsc95xx_phy_wait_not_busy(dev))
+-+		debug("Timed out writing MII reg %02X\n", idx);
+-+}
+-+
+-+static int smsc95xx_eeprom_confirm_not_busy(struct ueth_data *dev)
+-+{
+-+	unsigned long start_time = get_timer(0);
+-+	u32 val;
+-+
+-+	do {
+-+		smsc95xx_read_reg(dev, E2P_CMD, &val);
+-+		if (!(val & E2P_CMD_LOADED_)) {
+-+			debug("No EEPROM present\n");
+-+			return -1;
+-+		}
+-+		if (!(val & E2P_CMD_BUSY_))
+-+			return 0;
+-+		udelay(40);
+-+	} while (get_timer(start_time) < 1 * 1000 * 1000);
+-+
+-+	debug("EEPROM is busy\n");
+-+	return -1;
+-+}
+-+
+-+static int smsc95xx_wait_eeprom(struct ueth_data *dev)
+-+{
+-+	unsigned long start_time = get_timer(0);
+-+	u32 val;
+-+
+-+	do {
+-+		smsc95xx_read_reg(dev, E2P_CMD, &val);
+-+		if (!(val & E2P_CMD_BUSY_) || (val & E2P_CMD_TIMEOUT_))
+-+			break;
+-+		udelay(40);
+-+	} while (get_timer(start_time) < 1 * 1000 * 1000);
+-+
+-+	if (val & (E2P_CMD_TIMEOUT_ | E2P_CMD_BUSY_)) {
+-+		debug("EEPROM read operation timeout\n");
+-+		return -1;
+-+	}
+-+	return 0;
+-+}
+-+
+-+static int smsc95xx_read_eeprom(struct ueth_data *dev, u32 offset, u32 length,
+-+				u8 *data)
+-+{
+-+	u32 val;
+-+	int i, ret;
+-+
+-+	ret = smsc95xx_eeprom_confirm_not_busy(dev);
+-+	if (ret)
+-+		return ret;
+-+
+-+	for (i = 0; i < length; i++) {
+-+		val = E2P_CMD_BUSY_ | E2P_CMD_READ_ | (offset & E2P_CMD_ADDR_);
+-+		smsc95xx_write_reg(dev, E2P_CMD, val);
+-+
+-+		ret = smsc95xx_wait_eeprom(dev);
+-+		if (ret < 0)
+-+			return ret;
+-+
+-+		smsc95xx_read_reg(dev, E2P_DATA, &val);
+-+		data[i] = val & 0xFF;
+-+		offset++;
+-+	}
+-+	return 0;
+-+}
+-+
+-+/*
+-+ * mii_nway_restart - restart NWay (autonegotiation) for this interface
+-+ *
+-+ * Returns 0 on success, negative on error.
+-+ */
+-+static int mii_nway_restart(struct ueth_data *dev)
+-+{
+-+	int bmcr;
+-+	int r = -1;
+-+
+-+	/* if autoneg is off, it's an error */
+-+	bmcr = smsc95xx_mdio_read(dev, dev->phy_id, MII_BMCR);
+-+
+-+	if (bmcr & BMCR_ANENABLE) {
+-+		bmcr |= BMCR_ANRESTART;
+-+		smsc95xx_mdio_write(dev, dev->phy_id, MII_BMCR, bmcr);
+-+		r = 0;
+-+	}
+-+	return r;
+-+}
+-+
+-+static int smsc95xx_phy_initialize(struct ueth_data *dev)
+-+{
+-+	smsc95xx_mdio_write(dev, dev->phy_id, MII_BMCR, BMCR_RESET);
+-+	smsc95xx_mdio_write(dev, dev->phy_id, MII_ADVERTISE,
+-+		ADVERTISE_ALL | ADVERTISE_CSMA | ADVERTISE_PAUSE_CAP |
+-+		ADVERTISE_PAUSE_ASYM);
+-+
+-+	/* read to clear */
+-+	smsc95xx_mdio_read(dev, dev->phy_id, PHY_INT_SRC);
+-+
+-+	smsc95xx_mdio_write(dev, dev->phy_id, PHY_INT_MASK,
+-+		PHY_INT_MASK_DEFAULT_);
+-+	mii_nway_restart(dev);
+-+
+-+	debug("phy initialised succesfully\n");
+-+	return 0;
+-+}
+-+
+-+static int smsc95xx_init_mac_address(struct eth_device *eth,
+-+		struct ueth_data *dev)
+-+{
+-+	/* try reading mac address from EEPROM */
+-+	if (smsc95xx_read_eeprom(dev, EEPROM_MAC_OFFSET, ETH_ALEN,
+-+			eth->enetaddr) == 0) {
+-+		if (is_valid_ether_addr(eth->enetaddr)) {
+-+			/* eeprom values are valid so use them */
+-+			debug("MAC address read from EEPROM\n");
+-+			return 0;
+-+		}
+-+	}
+-+
+-+	/*
+-+	 * No eeprom, or eeprom values are invalid. Generating a random MAC
+-+	 * address is not safe. Just return an error.
+-+	 */
+-+	return -1;
+-+}
+-+
+-+static int smsc95xx_write_hwaddr(struct eth_device *eth)
+-+{
+-+	struct ueth_data *dev = (struct ueth_data *)eth->priv;
+-+	u32 addr_lo, addr_hi;
+-+	int ret;
+-+
+-+	/* set hardware address */
+-+	debug("** %s()\n", __func__);
+-+	addr_lo = cpu_to_le32(*((u32 *)eth->enetaddr));
+-+	addr_hi = cpu_to_le16(*((u16 *)(eth->enetaddr + 4)));
+-+	ret = smsc95xx_write_reg(dev, ADDRL, addr_lo);
+-+	if (ret < 0) {
+-+		debug("Failed to write ADDRL: %d\n", ret);
+-+		return ret;
+-+	}
+-+
+-+	ret = smsc95xx_write_reg(dev, ADDRH, addr_hi);
+-+	if (ret < 0)
+-+		return ret;
+-+	debug("MAC %02x:%02x:%02x:%02x:%02x:%02x\n",
+-+		eth->enetaddr[0], eth->enetaddr[1],
+-+		eth->enetaddr[2], eth->enetaddr[3],
+-+		eth->enetaddr[4], eth->enetaddr[5]);
+-+	dev->have_hwaddr = 1;
+-+	return 0;
+-+}
+-+
+-+/* Enable or disable Tx & Rx checksum offload engines */
+-+static int smsc95xx_set_csums(struct ueth_data *dev,
+-+		int use_tx_csum, int use_rx_csum)
+-+{
+-+	u32 read_buf;
+-+	int ret = smsc95xx_read_reg(dev, COE_CR, &read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	if (use_tx_csum)
+-+		read_buf |= Tx_COE_EN_;
+-+	else
+-+		read_buf &= ~Tx_COE_EN_;
+-+
+-+	if (use_rx_csum)
+-+		read_buf |= Rx_COE_EN_;
+-+	else
+-+		read_buf &= ~Rx_COE_EN_;
+-+
+-+	ret = smsc95xx_write_reg(dev, COE_CR, read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	debug("COE_CR = 0x%08x\n", read_buf);
+-+	return 0;
+-+}
+-+
+-+static void smsc95xx_set_multicast(struct ueth_data *dev)
+-+{
+-+	/* No multicast in u-boot */
+-+	dev->mac_cr &= ~(MAC_CR_PRMS_ | MAC_CR_MCPAS_ | MAC_CR_HPFILT_);
+-+}
+-+
+-+/* starts the TX path */
+-+static void smsc95xx_start_tx_path(struct ueth_data *dev)
+-+{
+-+	u32 reg_val;
+-+
+-+	/* Enable Tx at MAC */
+-+	dev->mac_cr |= MAC_CR_TXEN_;
+-+
+-+	smsc95xx_write_reg(dev, MAC_CR, dev->mac_cr);
+-+
+-+	/* Enable Tx at SCSRs */
+-+	reg_val = TX_CFG_ON_;
+-+	smsc95xx_write_reg(dev, TX_CFG, reg_val);
+-+}
+-+
+-+/* Starts the Receive path */
+-+static void smsc95xx_start_rx_path(struct ueth_data *dev)
+-+{
+-+	dev->mac_cr |= MAC_CR_RXEN_;
+-+	smsc95xx_write_reg(dev, MAC_CR, dev->mac_cr);
+-+}
+-+
+-+/*
+-+ * Smsc95xx callbacks
+-+ */
+-+static int smsc95xx_init(struct eth_device *eth, bd_t *bd)
+-+{
+-+	int ret;
+-+	u32 write_buf;
+-+	u32 read_buf;
+-+	u32 burst_cap;
+-+	int timeout;
+-+	struct ueth_data *dev = (struct ueth_data *)eth->priv;
+-+#define TIMEOUT_RESOLUTION 50	/* ms */
+-+	int link_detected;
+-+
+-+	debug("** %s()\n", __func__);
+-+	dev->phy_id = SMSC95XX_INTERNAL_PHY_ID; /* fixed phy id */
+-+
+-+	write_buf = HW_CFG_LRST_;
+-+	ret = smsc95xx_write_reg(dev, HW_CFG, write_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	timeout = 0;
+-+	do {
+-+		ret = smsc95xx_read_reg(dev, HW_CFG, &read_buf);
+-+		if (ret < 0)
+-+			return ret;
+-+		udelay(10 * 1000);
+-+		timeout++;
+-+	} while ((read_buf & HW_CFG_LRST_) && (timeout < 100));
+-+
+-+	if (timeout >= 100) {
+-+		debug("timeout waiting for completion of Lite Reset\n");
+-+		return -1;
+-+	}
+-+
+-+	write_buf = PM_CTL_PHY_RST_;
+-+	ret = smsc95xx_write_reg(dev, PM_CTRL, write_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	timeout = 0;
+-+	do {
+-+		ret = smsc95xx_read_reg(dev, PM_CTRL, &read_buf);
+-+		if (ret < 0)
+-+			return ret;
+-+		udelay(10 * 1000);
+-+		timeout++;
+-+	} while ((read_buf & PM_CTL_PHY_RST_) && (timeout < 100));
+-+	if (timeout >= 100) {
+-+		debug("timeout waiting for PHY Reset\n");
+-+		return -1;
+-+	}
+-+	if (!dev->have_hwaddr && smsc95xx_init_mac_address(eth, dev) == 0)
+-+		dev->have_hwaddr = 1;
+-+	if (!dev->have_hwaddr) {
+-+		puts("Error: SMSC95xx: No MAC address set - set usbethaddr\n");
+-+		return -1;
+-+	}
+-+	if (smsc95xx_write_hwaddr(eth) < 0)
+-+		return -1;
+-+
+-+	ret = smsc95xx_read_reg(dev, HW_CFG, &read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+	debug("Read Value from HW_CFG : 0x%08x\n", read_buf);
+-+
+-+	read_buf |= HW_CFG_BIR_;
+-+	ret = smsc95xx_write_reg(dev, HW_CFG, read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	ret = smsc95xx_read_reg(dev, HW_CFG, &read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+	debug("Read Value from HW_CFG after writing "
+-+		"HW_CFG_BIR_: 0x%08x\n", read_buf);
+-+
+-+#ifdef TURBO_MODE
+-+	if (dev->pusb_dev->speed == USB_SPEED_HIGH) {
+-+		burst_cap = DEFAULT_HS_BURST_CAP_SIZE / HS_USB_PKT_SIZE;
+-+		dev->rx_urb_size = DEFAULT_HS_BURST_CAP_SIZE;
+-+	} else {
+-+		burst_cap = DEFAULT_FS_BURST_CAP_SIZE / FS_USB_PKT_SIZE;
+-+		dev->rx_urb_size = DEFAULT_FS_BURST_CAP_SIZE;
+-+	}
+-+#else
+-+	burst_cap = 0;
+-+	dev->rx_urb_size = MAX_SINGLE_PACKET_SIZE;
+-+#endif
+-+	debug("rx_urb_size=%ld\n", (ulong)dev->rx_urb_size);
+-+
+-+	ret = smsc95xx_write_reg(dev, BURST_CAP, burst_cap);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	ret = smsc95xx_read_reg(dev, BURST_CAP, &read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+	debug("Read Value from BURST_CAP after writing: 0x%08x\n", read_buf);
+-+
+-+	read_buf = DEFAULT_BULK_IN_DELAY;
+-+	ret = smsc95xx_write_reg(dev, BULK_IN_DLY, read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	ret = smsc95xx_read_reg(dev, BULK_IN_DLY, &read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+	debug("Read Value from BULK_IN_DLY after writing: "
+-+			"0x%08x\n", read_buf);
+-+
+-+	ret = smsc95xx_read_reg(dev, HW_CFG, &read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+	debug("Read Value from HW_CFG: 0x%08x\n", read_buf);
+-+
+-+#ifdef TURBO_MODE
+-+	read_buf |= (HW_CFG_MEF_ | HW_CFG_BCE_);
+-+#endif
+-+	read_buf &= ~HW_CFG_RXDOFF_;
+-+
+-+#define NET_IP_ALIGN 0
+-+	read_buf |= NET_IP_ALIGN << 9;
+-+
+-+	ret = smsc95xx_write_reg(dev, HW_CFG, read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	ret = smsc95xx_read_reg(dev, HW_CFG, &read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+	debug("Read Value from HW_CFG after writing: 0x%08x\n", read_buf);
+-+
+-+	write_buf = 0xFFFFFFFF;
+-+	ret = smsc95xx_write_reg(dev, INT_STS, write_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	ret = smsc95xx_read_reg(dev, ID_REV, &read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+	debug("ID_REV = 0x%08x\n", read_buf);
+-+
+-+	/* Init Tx */
+-+	write_buf = 0;
+-+	ret = smsc95xx_write_reg(dev, FLOW, write_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	read_buf = AFC_CFG_DEFAULT;
+-+	ret = smsc95xx_write_reg(dev, AFC_CFG, read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	ret = smsc95xx_read_reg(dev, MAC_CR, &dev->mac_cr);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	/* Init Rx. Set Vlan */
+-+	write_buf = (u32)ETH_P_8021Q;
+-+	ret = smsc95xx_write_reg(dev, VLAN1, write_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	/* Disable checksum offload engines */
+-+	ret = smsc95xx_set_csums(dev, 0, 0);
+-+	if (ret < 0) {
+-+		debug("Failed to set csum offload: %d\n", ret);
+-+		return ret;
+-+	}
+-+	smsc95xx_set_multicast(dev);
+-+
+-+	if (smsc95xx_phy_initialize(dev) < 0)
+-+		return -1;
+-+	ret = smsc95xx_read_reg(dev, INT_EP_CTL, &read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	/* enable PHY interrupts */
+-+	read_buf |= INT_EP_CTL_PHY_INT_;
+-+
+-+	ret = smsc95xx_write_reg(dev, INT_EP_CTL, read_buf);
+-+	if (ret < 0)
+-+		return ret;
+-+
+-+	smsc95xx_start_tx_path(dev);
+-+	smsc95xx_start_rx_path(dev);
+-+
+-+	timeout = 0;
+-+	do {
+-+		link_detected = smsc95xx_mdio_read(dev, dev->phy_id, MII_BMSR)
+-+			& BMSR_LSTATUS;
+-+		if (!link_detected) {
+-+			if (timeout == 0)
+-+				printf("Waiting for Ethernet connection... ");
+-+			udelay(TIMEOUT_RESOLUTION * 1000);
+-+			timeout += TIMEOUT_RESOLUTION;
+-+		}
+-+	} while (!link_detected && timeout < PHY_CONNECT_TIMEOUT);
+-+	if (link_detected) {
+-+		if (timeout != 0)
+-+			printf("done.\n");
+-+	} else {
+-+		printf("unable to connect.\n");
+-+		return -1;
+-+	}
+-+	return 0;
+-+}
+-+
+-+static int smsc95xx_send(struct eth_device *eth, volatile void* packet,
+-+			 int length)
+-+{
+-+	struct ueth_data *dev = (struct ueth_data *)eth->priv;
+-+	int err;
+-+	int actual_len;
+-+	u32 tx_cmd_a;
+-+	u32 tx_cmd_b;
+-+	unsigned char msg[PKTSIZE + sizeof(tx_cmd_a) + sizeof(tx_cmd_b)];
+-+
+-+	debug("** %s(), len %d, buf %#x\n", __func__, length, (int)msg);
+-+	if (length > PKTSIZE)
+-+		return -1;
+-+
+-+	tx_cmd_a = (u32)length | TX_CMD_A_FIRST_SEG_ | TX_CMD_A_LAST_SEG_;
+-+	tx_cmd_b = (u32)length;
+-+	cpu_to_le32s(&tx_cmd_a);
+-+	cpu_to_le32s(&tx_cmd_b);
+-+
+-+	/* prepend cmd_a and cmd_b */
+-+	memcpy(msg, &tx_cmd_a, sizeof(tx_cmd_a));
+-+	memcpy(msg + sizeof(tx_cmd_a), &tx_cmd_b, sizeof(tx_cmd_b));
+-+	memcpy(msg + sizeof(tx_cmd_a) + sizeof(tx_cmd_b), (void *)packet,
+-+	       length);
+-+	err = usb_bulk_msg(dev->pusb_dev,
+-+				usb_sndbulkpipe(dev->pusb_dev, dev->ep_out),
+-+				(void *)msg,
+-+				length + sizeof(tx_cmd_a) + sizeof(tx_cmd_b),
+-+				&actual_len,
+-+				USB_BULK_SEND_TIMEOUT);
+-+	debug("Tx: len = %u, actual = %u, err = %d\n",
+-+	      length + sizeof(tx_cmd_a) + sizeof(tx_cmd_b),
+-+	      actual_len, err);
+-+	return err;
+-+}
+-+
+-+static int smsc95xx_recv(struct eth_device *eth)
+-+{
+-+	struct ueth_data *dev = (struct ueth_data *)eth->priv;
+-+	static unsigned char  recv_buf[AX_RX_URB_SIZE];
+-+	unsigned char *buf_ptr;
+-+	int err;
+-+	int actual_len;
+-+	u32 packet_len;
+-+	int cur_buf_align;
+-+
+-+	debug("** %s()\n", __func__);
+-+	err = usb_bulk_msg(dev->pusb_dev,
+-+				usb_rcvbulkpipe(dev->pusb_dev, dev->ep_in),
+-+				(void *)recv_buf,
+-+				AX_RX_URB_SIZE,
+-+				&actual_len,
+-+				USB_BULK_RECV_TIMEOUT);
+-+	debug("Rx: len = %u, actual = %u, err = %d\n", AX_RX_URB_SIZE,
+-+	      actual_len, err);
+-+	if (err != 0) {
+-+		debug("Rx: failed to receive\n");
+-+		return -1;
+-+	}
+-+	if (actual_len > AX_RX_URB_SIZE) {
+-+		debug("Rx: received too many bytes %d\n", actual_len);
+-+		return -1;
+-+	}
+-+
+-+	buf_ptr = recv_buf;
+-+	while (actual_len > 0) {
+-+		/*
+-+		 * 1st 4 bytes contain the length of the actual data plus error
+-+		 * info. Extract data length.
+-+		 */
+-+		if (actual_len < sizeof(packet_len)) {
+-+			debug("Rx: incomplete packet length\n");
+-+			return -1;
+-+		}
+-+		memcpy(&packet_len, buf_ptr, sizeof(packet_len));
+-+		le32_to_cpus(&packet_len);
+-+		if (packet_len & RX_STS_ES_) {
+-+			debug("Rx: Error header=%#x", packet_len);
+-+			return -1;
+-+		}
+-+		packet_len = ((packet_len & RX_STS_FL_) >> 16);
+-+
+-+		if (packet_len > actual_len - sizeof(packet_len)) {
+-+			debug("Rx: too large packet: %d\n", packet_len);
+-+			return -1;
+-+		}
+-+
+-+		/* Notify net stack */
+-+		NetReceive(buf_ptr + sizeof(packet_len), packet_len - 4);
+-+
+-+		/* Adjust for next iteration */
+-+		actual_len -= sizeof(packet_len) + packet_len;
+-+		buf_ptr += sizeof(packet_len) + packet_len;
+-+		cur_buf_align = (int)buf_ptr - (int)recv_buf;
+-+
+-+		if (cur_buf_align & 0x03) {
+-+			int align = 4 - (cur_buf_align & 0x03);
+-+
+-+			actual_len -= align;
+-+			buf_ptr += align;
+-+		}
+-+	}
+-+	return err;
+-+}
+-+
+-+static void smsc95xx_halt(struct eth_device *eth)
+-+{
+-+	debug("** %s()\n", __func__);
+-+}
+-+
+-+/*
+-+ * SMSC probing functions
+-+ */
+-+void smsc95xx_eth_before_probe(void)
+-+{
+-+	curr_eth_dev = 0;
+-+}
+-+
+-+struct smsc95xx_dongle {
+-+	unsigned short vendor;
+-+	unsigned short product;
+-+};
+-+
+-+static const struct smsc95xx_dongle smsc95xx_dongles[] = {
+-+	{ 0x0424, 0xec00 },	/* LAN9512/LAN9514 Ethernet */
+-+	{ 0x0424, 0x9500 },	/* LAN9500 Ethernet */
+-+	{ 0x0000, 0x0000 }	/* END - Do not remove */
+-+};
+-+
+-+/* Probe to see if a new device is actually an SMSC device */
+-+int smsc95xx_eth_probe(struct usb_device *dev, unsigned int ifnum,
+-+		      struct ueth_data *ss)
+-+{
+-+	struct usb_interface *iface;
+-+	struct usb_interface_descriptor *iface_desc;
+-+	int i;
+-+
+-+	/* let's examine the device now */
+-+	iface = &dev->config.if_desc[ifnum];
+-+	iface_desc = &dev->config.if_desc[ifnum].desc;
+-+
+-+	for (i = 0; smsc95xx_dongles[i].vendor != 0; i++) {
+-+		if (dev->descriptor.idVendor == smsc95xx_dongles[i].vendor &&
+-+		    dev->descriptor.idProduct == smsc95xx_dongles[i].product)
+-+			/* Found a supported dongle */
+-+			break;
+-+	}
+-+	if (smsc95xx_dongles[i].vendor == 0)
+-+		return 0;
+-+
+-+	/* At this point, we know we've got a live one */
+-+	debug("\n\nUSB Ethernet device detected\n");
+-+	memset(ss, '\0', sizeof(struct ueth_data));
+-+
+-+	/* Initialize the ueth_data structure with some useful info */
+-+	ss->ifnum = ifnum;
+-+	ss->pusb_dev = dev;
+-+	ss->subclass = iface_desc->bInterfaceSubClass;
+-+	ss->protocol = iface_desc->bInterfaceProtocol;
+-+
+-+	/*
+-+	 * We are expecting a minimum of 3 endpoints - in, out (bulk), and int.
+-+	 * We will ignore any others.
+-+	 */
+-+	for (i = 0; i < iface_desc->bNumEndpoints; i++) {
+-+		/* is it an BULK endpoint? */
+-+		if ((iface->ep_desc[i].bmAttributes &
+-+		     USB_ENDPOINT_XFERTYPE_MASK) == USB_ENDPOINT_XFER_BULK) {
+-+			if (iface->ep_desc[i].bEndpointAddress & USB_DIR_IN)
+-+				ss->ep_in =
+-+					iface->ep_desc[i].bEndpointAddress &
+-+					USB_ENDPOINT_NUMBER_MASK;
+-+			else
+-+				ss->ep_out =
+-+					iface->ep_desc[i].bEndpointAddress &
+-+					USB_ENDPOINT_NUMBER_MASK;
+-+		}
+-+
+-+		/* is it an interrupt endpoint? */
+-+		if ((iface->ep_desc[i].bmAttributes &
+-+		    USB_ENDPOINT_XFERTYPE_MASK) == USB_ENDPOINT_XFER_INT) {
+-+			ss->ep_int = iface->ep_desc[i].bEndpointAddress &
+-+				USB_ENDPOINT_NUMBER_MASK;
+-+			ss->irqinterval = iface->ep_desc[i].bInterval;
+-+		}
+-+	}
+-+	debug("Endpoints In %d Out %d Int %d\n",
+-+		  ss->ep_in, ss->ep_out, ss->ep_int);
+-+
+-+	/* Do some basic sanity checks, and bail if we find a problem */
+-+	if (usb_set_interface(dev, iface_desc->bInterfaceNumber, 0) ||
+-+	    !ss->ep_in || !ss->ep_out || !ss->ep_int) {
+-+		debug("Problems with device\n");
+-+		return 0;
+-+	}
+-+	dev->privptr = (void *)ss;
+-+	return 1;
+-+}
+-+
+-+int smsc95xx_eth_get_info(struct usb_device *dev, struct ueth_data *ss,
+-+				struct eth_device *eth)
+-+{
+-+	debug("** %s()\n", __func__);
+-+	if (!eth) {
+-+		debug("%s: missing parameter.\n", __func__);
+-+		return 0;
+-+	}
+-+	sprintf(eth->name, "%s%d", SMSC95XX_BASE_NAME, curr_eth_dev++);
+-+	eth->init = smsc95xx_init;
+-+	eth->send = smsc95xx_send;
+-+	eth->recv = smsc95xx_recv;
+-+	eth->halt = smsc95xx_halt;
+-+	eth->write_hwaddr = smsc95xx_write_hwaddr;
+-+	eth->priv = ss;
+-+	return 1;
+-+}
+-diff --git a/drivers/usb/eth/usb_ether.c b/drivers/usb/eth/usb_ether.c
+-index 68a0883..7b55da3 100644
+---- a/drivers/usb/eth/usb_ether.c
+-+++ b/drivers/usb/eth/usb_ether.c
+-@@ -45,6 +45,13 @@ static const struct usb_eth_prob_dev prob_dev[] = {
+- 		.get_info = asix_eth_get_info,
+- 	},
+- #endif
+-+#ifdef CONFIG_USB_ETHER_SMSC95XX
+-+	{
+-+		.before_probe = smsc95xx_eth_before_probe,
+-+		.probe = smsc95xx_eth_probe,
+-+		.get_info = smsc95xx_eth_get_info,
+-+	},
+-+#endif
+- 	{ },		/* END */
+- };
+- 
+-diff --git a/include/usb_ether.h b/include/usb_ether.h
+-index 825c275..a7fb26b 100644
+---- a/include/usb_ether.h
+-+++ b/include/usb_ether.h
+-@@ -51,6 +51,11 @@ struct ueth_data {
+- 	unsigned char	irqinterval;	/* Intervall for IRQ Pipe */
+- 
+- 	/* private fields for each driver can go here if needed */
+-+#ifdef CONFIG_USB_ETHER_SMSC95XX
+-+	size_t rx_urb_size;  /* maximum USB URB size */
+-+	u32 mac_cr;  /* MAC control register value */
+-+	int have_hwaddr;  /* 1 if we have a hardware MAC address */
+-+#endif
+- };
+- 
+- /*
+-@@ -65,4 +70,12 @@ int asix_eth_get_info(struct usb_device *dev, struct ueth_data *ss,
+- 		      struct eth_device *eth);
+- #endif
+- 
+-+#ifdef CONFIG_USB_ETHER_SMSC95XX
+-+void smsc95xx_eth_before_probe(void);
+-+int smsc95xx_eth_probe(struct usb_device *dev, unsigned int ifnum,
+-+			struct ueth_data *ss);
+-+int smsc95xx_eth_get_info(struct usb_device *dev, struct ueth_data *ss,
+-+			struct eth_device *eth);
+-+#endif
+-+
+- #endif /* __USB_ETHER_H__ */
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0006-Add-Ethernet-hardware-MAC-address-framework-to-usbne.patch b/recipes-bsp/u-boot/u-boot/2011.06/0006-Add-Ethernet-hardware-MAC-address-framework-to-usbne.patch
+deleted file mode 100644
+index f38966e..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0006-Add-Ethernet-hardware-MAC-address-framework-to-usbne.patch
++++ /dev/null
+@@ -1,245 +0,0 @@
+-From f8ff7b1760739c33b1b0aa5a88d903e6e8945f1c Mon Sep 17 00:00:00 2001
+-From: Simon Glass <sjg@chromium.org>
+-Date: Mon, 13 Jun 2011 13:13:10 +0000
+-Subject: [PATCH 06/30] Add Ethernet hardware MAC address framework to usbnet
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-Built-in Ethernet adapters support setting the mac address by means of a
+-ethaddr environment variable for each interface (ethaddr, eth1addr, eth2addr).
+-
+-This adds similar support to the USB network side, using the names
+-usbethaddr, usbeth1addr, etc. They are kept separate since we don't want
+-a USB device taking the MAC address of a built-in device or vice versa.
+-
+-Changes for v2:
+-- eth_set_hwaddr -> eth_write_hwaddr
+-- tided up other users of eth_getenv_enetaddr_by_index()
+-
+-Changes for v5:
+-- Changed NULL to "eth" in eth_getenv_enetaddr_by_index() API
+-
+-Signed-off-by: Simon Glass <sjg@chromium.org>
+-Tested-by: Eric Bénard <eric@eukrea.com>
+----
+- board/davinci/common/misc.c |    2 +-
+- drivers/net/designware.c    |    2 +-
+- drivers/usb/eth/usb_ether.c |    9 +++++-
+- include/net.h               |   25 ++++++++++++++++-
+- net/eth.c                   |   64 ++++++++++++++++++++++++++-----------------
+- 5 files changed, 72 insertions(+), 30 deletions(-)
+-
+-diff --git a/board/davinci/common/misc.c b/board/davinci/common/misc.c
+-index 2bfdf23..53d6aa1 100644
+---- a/board/davinci/common/misc.c
+-+++ b/board/davinci/common/misc.c
+-@@ -101,7 +101,7 @@ void davinci_sync_env_enetaddr(uint8_t *rom_enetaddr)
+- {
+- 	uint8_t env_enetaddr[6];
+- 
+--	eth_getenv_enetaddr_by_index(0, env_enetaddr);
+-+	eth_getenv_enetaddr_by_index("eth", 0, env_enetaddr);
+- 	if (!memcmp(env_enetaddr, "\0\0\0\0\0\0", 6)) {
+- 		/* There is no MAC address in the environment, so we initialize
+- 		 * it from the value in the EEPROM. */
+-diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+-index 3f5eeb7..02ba393 100644
+---- a/drivers/net/designware.c
+-+++ b/drivers/net/designware.c
+-@@ -500,7 +500,7 @@ int designware_initialize(u32 id, ulong base_addr, u32 phy_addr)
+- 	dev->iobase = (int)base_addr;
+- 	dev->priv = priv;
+- 
+--	eth_getenv_enetaddr_by_index(id, &dev->enetaddr[0]);
+-+	eth_getenv_enetaddr_by_index("eth", id, &dev->enetaddr[0]);
+- 
+- 	priv->dev = dev;
+- 	priv->mac_regs_p = (struct eth_mac_regs *)base_addr;
+-diff --git a/drivers/usb/eth/usb_ether.c b/drivers/usb/eth/usb_ether.c
+-index 7b55da3..6565ea5 100644
+---- a/drivers/usb/eth/usb_ether.c
+-+++ b/drivers/usb/eth/usb_ether.c
+-@@ -80,6 +80,7 @@ int is_eth_dev_on_usb_host(void)
+-  */
+- static void probe_valid_drivers(struct usb_device *dev)
+- {
+-+	struct eth_device *eth;
+- 	int j;
+- 
+- 	for (j = 0; prob_dev[j].probe && prob_dev[j].get_info; j++) {
+-@@ -88,9 +89,10 @@ static void probe_valid_drivers(struct usb_device *dev)
+- 		/*
+- 		 * ok, it is a supported eth device. Get info and fill it in
+- 		 */
+-+		eth = &usb_eth[usb_max_eth_dev].eth_dev;
+- 		if (prob_dev[j].get_info(dev,
+- 			&usb_eth[usb_max_eth_dev],
+--			&usb_eth[usb_max_eth_dev].eth_dev)) {
+-+			eth)) {
+- 			/* found proper driver */
+- 			/* register with networking stack */
+- 			usb_max_eth_dev++;
+-@@ -100,7 +102,10 @@ static void probe_valid_drivers(struct usb_device *dev)
+- 			 * call since eth_current_changed (internally called)
+- 			 * relies on it
+- 			 */
+--			eth_register(&usb_eth[usb_max_eth_dev - 1].eth_dev);
+-+			eth_register(eth);
+-+			if (eth_write_hwaddr(eth, "usbeth",
+-+					usb_max_eth_dev - 1))
+-+				puts("Warning: failed to set MAC address\n");
+- 			break;
+- 			}
+- 		}
+-diff --git a/include/net.h b/include/net.h
+-index 018a744..ce54825 100644
+---- a/include/net.h
+-+++ b/include/net.h
+-@@ -128,7 +128,18 @@ extern int eth_get_dev_index (void);		/* get the device index */
+- extern void eth_parse_enetaddr(const char *addr, uchar *enetaddr);
+- extern int eth_getenv_enetaddr(char *name, uchar *enetaddr);
+- extern int eth_setenv_enetaddr(char *name, const uchar *enetaddr);
+--extern int eth_getenv_enetaddr_by_index(int index, uchar *enetaddr);
+-+
+-+/*
+-+ * Get the hardware address for an ethernet interface .
+-+ * Args:
+-+ *	base_name - base name for device (normally "eth")
+-+ *	index - device index number (0 for first)
+-+ *	enetaddr - returns 6 byte hardware address
+-+ * Returns:
+-+ *	Return true if the address is valid.
+-+ */
+-+extern int eth_getenv_enetaddr_by_index(const char *base_name, int index,
+-+					uchar *enetaddr);
+- 
+- extern int usb_eth_initialize(bd_t *bi);
+- extern int eth_init(bd_t *bis);			/* Initialize the device */
+-@@ -141,6 +152,18 @@ extern int eth_rx(void);			/* Check for received packets */
+- extern void eth_halt(void);			/* stop SCC */
+- extern char *eth_get_name(void);		/* get name of current device */
+- 
+-+/*
+-+ * Set the hardware address for an ethernet interface based on 'eth%daddr'
+-+ * environment variable (or just 'ethaddr' if eth_number is 0).
+-+ * Args:
+-+ *	base_name - base name for device (normally "eth")
+-+ *	eth_number - value of %d (0 for first device of this type)
+-+ * Returns:
+-+ *	0 is success, non-zero is error status from driver.
+-+ */
+-+int eth_write_hwaddr(struct eth_device *dev, const char *base_name,
+-+		     int eth_number);
+-+
+- #ifdef CONFIG_MCAST_TFTP
+- int eth_mcast_join( IPaddr_t mcast_addr, u8 join);
+- u32 ether_crc (size_t len, unsigned char const *p);
+-diff --git a/net/eth.c b/net/eth.c
+-index 6523834..b3ea565 100644
+---- a/net/eth.c
+-+++ b/net/eth.c
+-@@ -54,10 +54,11 @@ int eth_setenv_enetaddr(char *name, const uchar *enetaddr)
+- 	return setenv(name, buf);
+- }
+- 
+--int eth_getenv_enetaddr_by_index(int index, uchar *enetaddr)
+-+int eth_getenv_enetaddr_by_index(const char *base_name, int index,
+-+				 uchar *enetaddr)
+- {
+- 	char enetvar[32];
+--	sprintf(enetvar, index ? "eth%daddr" : "ethaddr", index);
+-+	sprintf(enetvar, index ? "%s%daddr" : "%saddr", base_name, index);
+- 	return eth_getenv_enetaddr(enetvar, enetaddr);
+- }
+- 
+-@@ -188,6 +189,38 @@ static void eth_current_changed(void)
+- #endif
+- }
+- 
+-+int eth_write_hwaddr(struct eth_device *dev, const char *base_name,
+-+		   int eth_number)
+-+{
+-+	unsigned char env_enetaddr[6];
+-+	int ret = 0;
+-+
+-+	if (!eth_getenv_enetaddr_by_index(base_name, eth_number, env_enetaddr))
+-+		return -1;
+-+
+-+	if (memcmp(env_enetaddr, "\0\0\0\0\0\0", 6)) {
+-+		if (memcmp(dev->enetaddr, "\0\0\0\0\0\0", 6) &&
+-+			memcmp(dev->enetaddr, env_enetaddr, 6)) {
+-+			printf("\nWarning: %s MAC addresses don't match:\n",
+-+				dev->name);
+-+			printf("Address in SROM is         %pM\n",
+-+				dev->enetaddr);
+-+			printf("Address in environment is  %pM\n",
+-+				env_enetaddr);
+-+		}
+-+
+-+		memcpy(dev->enetaddr, env_enetaddr, 6);
+-+	}
+-+
+-+	if (dev->write_hwaddr &&
+-+		!eth_mac_skip(eth_number) &&
+-+		is_valid_ether_addr(dev->enetaddr)) {
+-+		ret = dev->write_hwaddr(dev);
+-+	}
+-+
+-+	return ret;
+-+}
+-+
+- int eth_register(struct eth_device *dev)
+- {
+- 	struct eth_device *d;
+-@@ -208,7 +241,6 @@ int eth_register(struct eth_device *dev)
+- 
+- int eth_initialize(bd_t *bis)
+- {
+--	unsigned char env_enetaddr[6];
+- 	int eth_number = 0;
+- 
+- 	eth_devices = NULL;
+-@@ -264,27 +296,8 @@ int eth_initialize(bd_t *bis)
+- 			if (strchr(dev->name, ' '))
+- 				puts("\nWarning: eth device name has a space!\n");
+- 
+--			eth_getenv_enetaddr_by_index(eth_number, env_enetaddr);
+--
+--			if (memcmp(env_enetaddr, "\0\0\0\0\0\0", 6)) {
+--				if (memcmp(dev->enetaddr, "\0\0\0\0\0\0", 6) &&
+--				    memcmp(dev->enetaddr, env_enetaddr, 6))
+--				{
+--					printf ("\nWarning: %s MAC addresses don't match:\n",
+--						dev->name);
+--					printf ("Address in SROM is         %pM\n",
+--						dev->enetaddr);
+--					printf ("Address in environment is  %pM\n",
+--						env_enetaddr);
+--				}
+--
+--				memcpy(dev->enetaddr, env_enetaddr, 6);
+--			}
+--			if (dev->write_hwaddr &&
+--				!eth_mac_skip(eth_number) &&
+--				is_valid_ether_addr(dev->enetaddr)) {
+--				dev->write_hwaddr(dev);
+--			}
+-+			if (eth_write_hwaddr(dev, NULL, eth_number))
+-+				puts("Warning: failed to set MAC address\n");
+- 
+- 			eth_number++;
+- 			dev = dev->next;
+-@@ -359,7 +372,8 @@ int eth_init(bd_t *bis)
+- 	do {
+- 		uchar env_enetaddr[6];
+- 
+--		if (eth_getenv_enetaddr_by_index(eth_number, env_enetaddr))
+-+		if (eth_getenv_enetaddr_by_index("eth", eth_number,
+-+						 env_enetaddr))
+- 			memcpy(dev->enetaddr, env_enetaddr, 6);
+- 
+- 		++eth_number;
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0007-Add-documentation-for-USB-Host-Networking.patch b/recipes-bsp/u-boot/u-boot/2011.06/0007-Add-documentation-for-USB-Host-Networking.patch
+deleted file mode 100644
+index f2f1cec..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0007-Add-documentation-for-USB-Host-Networking.patch
++++ /dev/null
+@@ -1,188 +0,0 @@
+-From 48938b9136e85d7399b8cc831731acd26dfb2e08 Mon Sep 17 00:00:00 2001
+-From: Simon Glass <sjg@chromium.org>
+-Date: Mon, 13 Jun 2011 13:13:11 +0000
+-Subject: [PATCH 07/30] Add documentation for USB Host Networking
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-This describes what it is for, devices supported, how to enable for your
+-board in U-Boot, setting up the server, and notes about MAC addresses.
+-
+-Changes for v6:
+-- Adjust documentation file according to Wolfgang's comments
+-
+-Signed-off-by: Simon Glass <sjg@chromium.org>
+-Tested-by: Eric Bénard <eric@eukrea.com>
+----
+- doc/README.usb |  157 +++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+- 1 files changed, 156 insertions(+), 1 deletions(-)
+-
+-diff --git a/doc/README.usb b/doc/README.usb
+-index 9aa4f62..a8a4058 100644
+---- a/doc/README.usb
+-+++ b/doc/README.usb
+-@@ -79,4 +79,159 @@ CONFIG_USB_UHCI	    defines the lowlevel part.A lowlevel part must be defined
+- 		    if using CONFIG_CMD_USB
+- CONFIG_USB_KEYBOARD enables the USB Keyboard
+- CONFIG_USB_STORAGE  enables the USB storage devices
+--CONFIG_USB_HOST_ETHER	enables USB ethernet dongle support
+-+CONFIG_USB_HOST_ETHER	enables USB ethernet adapter support
+-+
+-+
+-+USB Host Networking
+-+===================
+-+
+-+If you have a supported USB Ethernet adapter you can use it in U-Boot
+-+to obtain an IP address and load a kernel from a network server.
+-+
+-+Note: USB Host Networking is not the same as making your board act as a USB
+-+client. In that case your board is pretending to be an Ethernet adapter
+-+and will appear as a network interface to an attached computer. In that
+-+case the connection is via a USB cable with the computer acting as the host.
+-+
+-+With USB Host Networking, your board is the USB host. It controls the
+-+Ethernet adapter to which it is directly connected and the connection to
+-+the outside world is your adapter's Ethernet cable. Your board becomes an
+-+independent network device, able to connect and perform network operations
+-+independently of your computer.
+-+
+-+
+-+Device support
+-+--------------
+-+
+-+Currently supported devices are listed in the drivers according to
+-+their vendor and product IDs. You can check your device by connecting it
+-+to a Linux machine and typing 'lsusb'. The drivers are in
+-+drivers/usb/eth.
+-+
+-+For example this lsusb output line shows a device with Vendor ID 0x0x95
+-+and product ID 0x7720:
+-+
+-+Bus 002 Device 010: ID 0b95:7720 ASIX Electronics Corp. AX88772
+-+
+-+If you look at drivers/usb/eth/asix.c you will see this line within the
+-+supported device list, so we know this adapter is supported.
+-+
+-+        { 0x0b95, 0x7720 },     /* Trendnet TU2-ET100 V3.0R */
+-+
+-+If your adapter is not listed there is a still a chance that it will
+-+work. Try looking up the manufacturer of the chip inside your adapter.
+-+or take the adapter apart and look for chip markings. Then add a line
+-+for your vendor/product ID into the table of the appropriate driver,
+-+build U-Boot and see if it works. If not then there might be differences
+-+between the chip in your adapter and the driver. You could try to get a
+-+datasheet for your device and add support for it to U-Boot. This is not
+-+particularly difficult - you only need to provide support for four basic
+-+functions: init, halt, send and recv.
+-+
+-+
+-+Enabling USB Host Networking
+-+----------------------------
+-+
+-+The normal U-Boot commands are used with USB networking, but you must
+-+start USB first. For example:
+-+
+-+usb start
+-+setenv bootfile /tftpboot/uImage
+-+bootp
+-+
+-+
+-+To enable USB Host Ethernet in U-Boot, your platform must of course
+-+support USB with CONFIG_CMD_USB enabled and working. You will need to
+-+add some config settings to your board header file:
+-+
+-+#define CONFIG_USB_HOST_ETHER   /* Enable USB Ethernet adapters */
+-+#define CONFIG_USB_ETHER_ASIX   /* Asix, or whatever driver(s) you want */
+-+
+-+As with built-in networking, you will also want to enable some network
+-+commands, for example:
+-+
+-+#define CONFIG_CMD_NET
+-+#define CONFIG_NET_MULTI
+-+#define CONFIG_CMD_PING
+-+#define CONFIG_CMD_DHCP
+-+
+-+and some bootp options, which tell your board to obtain its subnet,
+-+gateway IP, host name and boot path from the bootp/dhcp server. These
+-+settings should start you off:
+-+
+-+#define CONFIG_BOOTP_SUBNETMASK
+-+#define CONFIG_BOOTP_GATEWAY
+-+#define CONFIG_BOOTP_HOSTNAME
+-+#define CONFIG_BOOTP_BOOTPATH
+-+
+-+You can also set the default IP address of your board and the server
+-+as well as the default file to load when a 'bootp' command is issued.
+-+All of these can be obtained from the bootp server if not set.
+-+
+-+#define CONFIG_IPADDR           10.0.0.2  (replace with your value)
+-+#define CONFIG_SERVERIP         10.0.0.1  (replace with your value)
+-+#define CONFIG_BOOTFILE         uImage
+-+
+-+
+-+The 'usb start' command should identify the adapter something like this:
+-+
+-+CrOS> usb start
+-+(Re)start USB...
+-+USB EHCI 1.00
+-+scanning bus for devices... 3 USB Device(s) found
+-+       scanning bus for storage devices... 0 Storage Device(s) found
+-+       scanning bus for ethernet devices... 1 Ethernet Device(s) found
+-+CrOS> print ethact
+-+ethact=asx0
+-+
+-+You can see that it found an ethernet device and we can print out the
+-+device name (asx0 in this case).
+-+
+-+Then 'bootp' or 'dhcp' should use it to obtain an IP address from DHCP,
+-+perhaps something like this:
+-+
+-+CrOS> bootp
+-+Waiting for Ethernet connection... done.
+-+BOOTP broadcast 1
+-+BOOTP broadcast 2
+-+DHCP client bound to address 172.22.73.81
+-+Using asx0 device
+-+TFTP from server 172.22.72.144; our IP address is 172.22.73.81
+-+Filename '/tftpboot/uImage-sjg-seaboard-261347'.
+-+Load address: 0x40c000
+-+Loading: #################################################################
+-+         #################################################################
+-+         #################################################################
+-+         ################################################
+-+done
+-+Bytes transferred = 3557464 (364858 hex)
+-+CrOS>
+-+
+-+
+-+Another way of doing this is to issue a tftp command, which will cause the
+-+bootp to happen automatically.
+-+
+-+
+-+MAC Addresses
+-+-------------
+-+
+-+Most Ethernet dongles have a built-in MAC address which is unique in the
+-+world. This is important so that devices on the network can be
+-+distinguised from each other. MAC address conflicts are evil and
+-+generally result in strange and eratic behaviour.
+-+
+-+Some boards have USB Ethernet chips on-board, and these sometimes do not
+-+have an assigned MAC address. In this case it is up to you to assign
+-+one which is unique. You should obtain a valid MAC address from a range
+-+assigned to you before you ship the product.
+-+
+-+Built-in Ethernet adapters support setting the MAC address by means of
+-+an ethaddr environment variable for each interface (ethaddr, eth1addr,
+-+eth2addr). There is similar support on the USB network side, using the
+-+names usbethaddr, usbeth1addr, etc. They are kept separate since we
+-+don't want a USB device taking the MAC address of a built-in device or
+-+vice versa.
+-+
+-+So if your USB Ethernet chip doesn't have a MAC address available then
+-+you must set usbethaddr to a suitable MAC address. At the time of
+-+writing this functionality is only supported by the SMSC driver.
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0008-dm3730-enable-dpll5.patch b/recipes-bsp/u-boot/u-boot/2011.06/0008-dm3730-enable-dpll5.patch
+deleted file mode 100644
+index 5553c58..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0008-dm3730-enable-dpll5.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From a13358a747c33ecda28a976ed9450b9351827c2a Mon Sep 17 00:00:00 2001
+-From: Eric Benard <eric@eukrea.com>
+-Date: Fri, 10 Jun 2011 12:21:52 +0000
+-Subject: [PATCH 08/30] dm3730: enable dpll5
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-which is used to provide 120MHz to USB EHCI
+-This allows EHCI to work on BeagleBoard XM
+-
+-Signed-off-by: Eric Bénard <eric@eukrea.com>
+----
+- arch/arm/cpu/armv7/omap3/clock.c |    1 +
+- 1 files changed, 1 insertions(+), 0 deletions(-)
+-
+-diff --git a/arch/arm/cpu/armv7/omap3/clock.c b/arch/arm/cpu/armv7/omap3/clock.c
+-index 3d38d08..6a9edcf 100644
+---- a/arch/arm/cpu/armv7/omap3/clock.c
+-+++ b/arch/arm/cpu/armv7/omap3/clock.c
+-@@ -579,6 +579,7 @@ void prcm_init(void)
+- 
+- 		dpll3_init_36xx(0, clk_index);
+- 		dpll4_init_36xx(0, clk_index);
+-+		dpll5_init_34xx(0, clk_index);
+- 		iva_init_36xx(0, clk_index);
+- 		mpu_init_36xx(0, clk_index);
+- 
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0009-beagleboard-enable-HUB-power-on-XM-boards.patch b/recipes-bsp/u-boot/u-boot/2011.06/0009-beagleboard-enable-HUB-power-on-XM-boards.patch
+deleted file mode 100644
+index 9dfb34b..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0009-beagleboard-enable-HUB-power-on-XM-boards.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From 48f6f945c028a83725ab962cbff5120ac5280cd0 Mon Sep 17 00:00:00 2001
+-From: Eric Benard <eric@eukrea.com>
+-Date: Fri, 17 Jun 2011 09:24:24 +0200
+-Subject: [PATCH 09/30] beagleboard: enable HUB power on XM boards
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-LEDA needs to be at level 0 to enable HUB_3V3
+-
+-Signed-off-by: Eric Bénard <eric@eukrea.com>
+----
+- board/ti/beagle/beagle.c |   11 +++++++++--
+- 1 files changed, 9 insertions(+), 2 deletions(-)
+-
+-diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
+-index 7768901..a6ce5a8 100644
+---- a/board/ti/beagle/beagle.c
+-+++ b/board/ti/beagle/beagle.c
+-@@ -309,8 +309,15 @@ int misc_init_r(void)
+- 		setenv(expansion_config.env_var, expansion_config.env_setting);
+- 
+- 	twl4030_power_init();
+--	twl4030_led_init(TWL4030_LED_LEDEN_LEDAON | TWL4030_LED_LEDEN_LEDBON);
+--
+-+	switch (get_board_revision()) {
+-+		case REVISION_C4:
+-+		case REVISION_XM_C:
+-+			twl4030_led_init(TWL4030_LED_LEDEN_LEDAON | TWL4030_LED_LEDEN_LEDBON);
+-+			break;
+-+		default:
+-+			twl4030_led_init(TWL4030_LED_LEDEN_LEDBON);
+-+			break;
+-+	}
+- 	/* Set GPIO states before they are made outputs */
+- 	writel(GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1,
+- 		&gpio6_base->setdataout);
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0010-beagleboard-turn-off-clocks-in-ehci_stop.patch b/recipes-bsp/u-boot/u-boot/2011.06/0010-beagleboard-turn-off-clocks-in-ehci_stop.patch
+deleted file mode 100644
+index a6898aa..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0010-beagleboard-turn-off-clocks-in-ehci_stop.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 9ae080a8b4f2a580c2bf3fb790fb141e1e618ef7 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Fri, 17 Jun 2011 09:26:17 +0200
+-Subject: [PATCH 10/30] beagleboard: turn off clocks in ehci_stop
+-
+-This fixes display problems in linux
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- board/ti/beagle/beagle.c |    6 ++++++
+- 1 files changed, 6 insertions(+), 0 deletions(-)
+-
+-diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
+-index a6ce5a8..a290f89 100644
+---- a/board/ti/beagle/beagle.c
+-+++ b/board/ti/beagle/beagle.c
+-@@ -363,6 +363,12 @@ int ehci_hcd_stop(void)
+- 	pr_debug("Resetting OMAP3 EHCI\n");
+- 	omap_set_gpio_dataout(GPIO_PHY_RESET, 0);
+- 	writel(OMAP_UHH_SYSCONFIG_SOFTRESET, OMAP3_UHH_BASE + OMAP_UHH_SYSCONFIG);
+-+	/* disable USB clocks */
+-+	struct prcm *prcm_base = (struct prcm *)PRCM_BASE;
+-+	sr32(&prcm_base->iclken_usbhost, 0, 1, 0);
+-+	sr32(&prcm_base->fclken_usbhost, 0, 2, 0);
+-+	sr32(&prcm_base->iclken3_core, 2, 1, 0);
+-+	sr32(&prcm_base->fclken3_core, 2, 1, 0);
+- 	return 0;
+- }
+- 
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0011-beagleboard-enable-networking.patch b/recipes-bsp/u-boot/u-boot/2011.06/0011-beagleboard-enable-networking.patch
+deleted file mode 100644
+index 1935475..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0011-beagleboard-enable-networking.patch
++++ /dev/null
+@@ -1,45 +0,0 @@
+-From c3d4be5f60700c3e30f00818211775a2c8398e2f Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Fri, 17 Jun 2011 09:31:09 +0200
+-Subject: [PATCH 11/30] beagleboard: enable networking
+-
+----
+- include/configs/omap3_beagle.h |   10 ++++++++--
+- 1 files changed, 8 insertions(+), 2 deletions(-)
+-
+-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+-index d5f98da..2daf06d 100644
+---- a/include/configs/omap3_beagle.h
+-+++ b/include/configs/omap3_beagle.h
+-@@ -129,6 +129,10 @@
+- #define CONFIG_CMD_USB
+- #define CONFIG_USB_EHCI
+- #define CONFIG_SYS_USB_EHCI_MAX_ROOT_PORTS 3
+-+#define CONFIG_USB_HOST_ETHER
+-+#define CONFIG_USB_ETHER_SMSC95XX
+-+
+-+#define CONFIG_NET_MULTI
+- 
+- /* commands to include */
+- #include <config_cmd_default.h>
+-@@ -149,13 +153,15 @@
+- #define CONFIG_USB_STORAGE	/* USB storage support		*/
+- #define CONFIG_CMD_NAND		/* NAND support			*/
+- #define CONFIG_CMD_LED		/* LED support			*/
+-+#define CONFIG_CMD_NET      /* bootp, tftpboot, rarpboot    */
+-+#define CONFIG_CMD_NFS      /* NFS support          */
+-+#define CONFIG_CMD_PING
+-+
+- 
+- #undef CONFIG_CMD_FLASH		/* flinfo, erase, protect	*/
+- #undef CONFIG_CMD_FPGA		/* FPGA configuration Support	*/
+- #undef CONFIG_CMD_IMI		/* iminfo			*/
+- #undef CONFIG_CMD_IMLS		/* List all found images	*/
+--#undef CONFIG_CMD_NET		/* bootp, tftpboot, rarpboot	*/
+--#undef CONFIG_CMD_NFS		/* NFS support			*/
+- 
+- #define CONFIG_SYS_NO_FLASH
+- #define CONFIG_HARD_I2C			1
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0012-beagleboard-switch-to-ttyO2-as-console.patch b/recipes-bsp/u-boot/u-boot/2011.06/0012-beagleboard-switch-to-ttyO2-as-console.patch
+deleted file mode 100644
+index c25c2ad..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0012-beagleboard-switch-to-ttyO2-as-console.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From 04a20a72599d016785d751381fb1ea5112fb0de8 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Fri, 17 Jun 2011 09:32:17 +0200
+-Subject: [PATCH 12/30] beagleboard: switch to ttyO2 as console
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- include/configs/omap3_beagle.h |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+-index 2daf06d..9a161cf 100644
+---- a/include/configs/omap3_beagle.h
+-+++ b/include/configs/omap3_beagle.h
+-@@ -206,7 +206,7 @@
+- #define CONFIG_EXTRA_ENV_SETTINGS \
+- 	"loadaddr=0x82000000\0" \
+- 	"usbtty=cdc_acm\0" \
+--	"console=ttyS2,115200n8\0" \
+-+	"console=ttyO2,115200n8\0" \
+- 	"mpurate=auto\0" \
+- 	"buddy=none "\
+- 	"vram=12M\0" \
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0013-beagleboard-load-kernel-from-MMC-ext-not-FAT.patch b/recipes-bsp/u-boot/u-boot/2011.06/0013-beagleboard-load-kernel-from-MMC-ext-not-FAT.patch
+deleted file mode 100644
+index 28005be..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0013-beagleboard-load-kernel-from-MMC-ext-not-FAT.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+-From 91da655eb768b52d085fac42648e6bcf342a1f7f Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Fri, 17 Jun 2011 09:33:03 +0200
+-Subject: [PATCH 13/30] beagleboard: load kernel from MMC ext, not FAT
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- include/configs/omap3_beagle.h |    3 ++-
+- 1 files changed, 2 insertions(+), 1 deletions(-)
+-
+-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+-index 9a161cf..dbb77fb 100644
+---- a/include/configs/omap3_beagle.h
+-+++ b/include/configs/omap3_beagle.h
+-@@ -246,7 +246,8 @@
+- 		"root=${ramroot} " \
+- 		"rootfstype=${ramrootfstype}\0" \
+- 	"loadramdisk=fatload mmc ${mmcdev} ${rdaddr} ramdisk.gz\0" \
+--	"loaduimage=fatload mmc ${mmcdev} ${loadaddr} uImage\0" \
+-+	"loaduimagefat=fatload mmc ${mmcdev} ${loadaddr} uImage\0" \
+-+	"loaduimage=ext2load mmc ${mmcdev}:2 ${loadaddr} /boot/uImage\0" \
+- 	"mmcboot=echo Booting from mmc ...; " \
+- 		"run mmcargs; " \
+- 		"bootm ${loadaddr}\0" \
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0014-beagleboard-enable-asix-driver-and-dhcp.patch b/recipes-bsp/u-boot/u-boot/2011.06/0014-beagleboard-enable-asix-driver-and-dhcp.patch
+deleted file mode 100644
+index b14d227..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0014-beagleboard-enable-asix-driver-and-dhcp.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From b8f56a9f7ab18641dd0f4529333b00918d34c95d Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Fri, 17 Jun 2011 09:47:08 +0200
+-Subject: [PATCH 14/30] beagleboard: enable asix driver and dhcp
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- include/configs/omap3_beagle.h |    3 ++-
+- 1 files changed, 2 insertions(+), 1 deletions(-)
+-
+-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+-index dbb77fb..49e9dd3 100644
+---- a/include/configs/omap3_beagle.h
+-+++ b/include/configs/omap3_beagle.h
+-@@ -131,6 +131,7 @@
+- #define CONFIG_SYS_USB_EHCI_MAX_ROOT_PORTS 3
+- #define CONFIG_USB_HOST_ETHER
+- #define CONFIG_USB_ETHER_SMSC95XX
+-+#define CONFIG_USB_ETHER_ASIX
+- 
+- #define CONFIG_NET_MULTI
+- 
+-@@ -156,7 +157,7 @@
+- #define CONFIG_CMD_NET      /* bootp, tftpboot, rarpboot    */
+- #define CONFIG_CMD_NFS      /* NFS support          */
+- #define CONFIG_CMD_PING
+--
+-+#define CONFIG_CMD_DHCP
+- 
+- #undef CONFIG_CMD_FLASH		/* flinfo, erase, protect	*/
+- #undef CONFIG_CMD_FPGA		/* FPGA configuration Support	*/
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0015-beagleboard-hardcode-MAC-for-onboard-SMSC-and-use-uI.patch b/recipes-bsp/u-boot/u-boot/2011.06/0015-beagleboard-hardcode-MAC-for-onboard-SMSC-and-use-uI.patch
+deleted file mode 100644
+index 56053db..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0015-beagleboard-hardcode-MAC-for-onboard-SMSC-and-use-uI.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From 2a713d6b62248a18ee798d08bbc7850accfc2e83 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Fri, 17 Jun 2011 10:02:21 +0200
+-Subject: [PATCH 15/30] beagleboard: hardcode MAC for onboard SMSC and use uImage.beagle fot tftp
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- include/configs/omap3_beagle.h |    2 ++
+- 1 files changed, 2 insertions(+), 0 deletions(-)
+-
+-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+-index 49e9dd3..894a071 100644
+---- a/include/configs/omap3_beagle.h
+-+++ b/include/configs/omap3_beagle.h
+-@@ -207,6 +207,8 @@
+- #define CONFIG_EXTRA_ENV_SETTINGS \
+- 	"loadaddr=0x82000000\0" \
+- 	"usbtty=cdc_acm\0" \
+-+	"usbethaddr=de:ad:be:ef\0" \
+-+	"bootfile=uImage.beagle\0" \
+- 	"console=ttyO2,115200n8\0" \
+- 	"mpurate=auto\0" \
+- 	"buddy=none "\
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0016-beagleboard-decrease-bootdelay-to-2-seconds.patch b/recipes-bsp/u-boot/u-boot/2011.06/0016-beagleboard-decrease-bootdelay-to-2-seconds.patch
+deleted file mode 100644
+index 0e56fc4..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0016-beagleboard-decrease-bootdelay-to-2-seconds.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From ea8ed1da87f4612bdcbc611e6d4ccb9b7ea4d2ff Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Fri, 17 Jun 2011 10:03:06 +0200
+-Subject: [PATCH 16/30] beagleboard: decrease bootdelay to 2 seconds
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- include/configs/omap3_beagle.h |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+-index 894a071..5c32265 100644
+---- a/include/configs/omap3_beagle.h
+-+++ b/include/configs/omap3_beagle.h
+-@@ -202,7 +202,7 @@
+- 							/* partition */
+- 
+- /* Environment information */
+--#define CONFIG_BOOTDELAY		10
+-+#define CONFIG_BOOTDELAY		2
+- 
+- #define CONFIG_EXTRA_ENV_SETTINGS \
+- 	"loadaddr=0x82000000\0" \
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0017-USB-Remove-__attribute__-packed-for-struct-ehci_hccr.patch b/recipes-bsp/u-boot/u-boot/2011.06/0017-USB-Remove-__attribute__-packed-for-struct-ehci_hccr.patch
+deleted file mode 100644
+index 43312c9..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0017-USB-Remove-__attribute__-packed-for-struct-ehci_hccr.patch
++++ /dev/null
+@@ -1,58 +0,0 @@
+-From 4099bd50da694cc35c489547ad0d8a30bd99006a Mon Sep 17 00:00:00 2001
+-From: Jason Kridner <jkridner@beagleboard.org>
+-Date: Wed, 20 Apr 2011 08:54:16 -0500
+-Subject: [PATCH 17/30] USB: Remove __attribute__ ((packed)) for struct ehci_hccr and ehci_hcor
+-
+-Remove __attribute__ ((packed)) to prevent byte access to soc
+-registers in some gcc versions.
+-
+-Having patches to enable ehci for the BeagleBoard lying around for
+-several month, this one was the show-stopper.
+-
+-Credits have to go to Laine Walker-Avina <lwalkera@ieee.org> for
+-finding the problem.
+-
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+-Cc: Alexander Holler <holler@ahsoftware.de>
+-Cc: Sandeep Paulraj <s-paulraj@ti.com>
+----
+-Changes for v2:
+-* Original and v2 were provided by Alexander Holler.
+-* v1 was http://patchwork.ozlabs.org/patch/89358/
+-* v2 was http://patchwork.ozlabs.org/patch/89362/
+-
+-Changes for v3:
+-* Switched to align(4), rather than remove the attribute, per suggestion
+-  from Alexander.
+-
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- drivers/usb/host/ehci.h |    4 ++--
+- 1 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/drivers/usb/host/ehci.h b/drivers/usb/host/ehci.h
+-index 945ab64..3d0ad0c 100644
+---- a/drivers/usb/host/ehci.h
+-+++ b/drivers/usb/host/ehci.h
+-@@ -55,7 +55,7 @@ struct ehci_hccr {
+- #define HCS_N_PORTS(p)		(((p) >> 0) & 0xf)
+- 	uint32_t cr_hccparams;
+- 	uint8_t cr_hcsp_portrt[8];
+--} __attribute__ ((packed));
+-+} __attribute__ ((packed, aligned(4)));
+- 
+- struct ehci_hcor {
+- 	uint32_t or_usbcmd;
+-@@ -85,7 +85,7 @@ struct ehci_hcor {
+- #define FLAG_CF		(1 << 0)	/* true:  we'll support "high speed" */
+- 	uint32_t or_portsc[CONFIG_SYS_USB_EHCI_MAX_ROOT_PORTS];
+- 	uint32_t or_systune;
+--} __attribute__ ((packed));
+-+} __attribute__ ((packed, aligned(4)));
+- 
+- #define USBMODE		0x68		/* USB Device mode */
+- #define USBMODE_SDIS	(1 << 3)	/* Stream disable */
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0018-usb-Some-EHCI-chipsets-are-slow-to-respond.patch b/recipes-bsp/u-boot/u-boot/2011.06/0018-usb-Some-EHCI-chipsets-are-slow-to-respond.patch
+deleted file mode 100644
+index 21a1db7..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0018-usb-Some-EHCI-chipsets-are-slow-to-respond.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 7378bf55a895a957a5ea31c5fac5b53a844778d2 Mon Sep 17 00:00:00 2001
+-From: Jason Cooper <u-boot@lakedaemon.net>
+-Date: Tue, 14 Jun 2011 05:58:12 +0000
+-Subject: [PATCH 18/30] usb: Some EHCI chipsets are slow to respond.
+-
+-This fixes 'EHCI timed out on TD...' on the dreamplug board.
+-
+-Signed-off-by: Jason Cooper <u-boot@lakedaemon.net>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- include/usb.h |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/include/usb.h b/include/usb.h
+-index 53603a5..168e2b2 100644
+---- a/include/usb.h
+-+++ b/include/usb.h
+-@@ -46,7 +46,7 @@
+-  * This is the timeout to allow for submitting an urb in ms. We allow more
+-  * time for a BULK device to react - some are slow.
+-  */
+--#define USB_TIMEOUT_MS(pipe) (usb_pipebulk(pipe) ? 5000 : 100)
+-+#define USB_TIMEOUT_MS(pipe) (usb_pipebulk(pipe) ? 5000 : 500)
+- 
+- /* device request (setup) */
+- struct devrequest {
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0019-OMAP3-Add-DSS-driver-for-OMAP3.patch b/recipes-bsp/u-boot/u-boot/2011.06/0019-OMAP3-Add-DSS-driver-for-OMAP3.patch
+deleted file mode 100644
+index b8df7d7..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0019-OMAP3-Add-DSS-driver-for-OMAP3.patch
++++ /dev/null
+@@ -1,349 +0,0 @@
+-From e6e189b6062f7af6b993420b9de9656e36739e66 Mon Sep 17 00:00:00 2001
+-From: Syed Mohammed Khasim <khasim@ti.com>
+-Date: Tue, 12 Jan 2010 23:57:28 +0530
+-Subject: [PATCH 19/30] OMAP3: Add DSS driver for OMAP3
+-
+-Supports dynamic panel configuration
+-Supports dynamic tv standard selection
+-Adds support for DSS register access through generic APIs
+-
+-Incorporated DSS register access using structures.
+-
+-Previous discussions are here
+-http://www.mail-archive.com/u-boot@lists.denx.de/msg27150.html
+----
+-v2 updates:
+-  * Enable panel output for BeagleBoard
+-  * BeagleBoard: Update DVI-D orange screen frequencies for xM
+-
+-v3 updates:
+-  * Remove non-platform (OMAP3) updates
+-
+-Signed-off-by: Syed Mohammed Khasim <khasim@ti.com>
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- arch/arm/include/asm/arch-omap3/dss.h |  173 +++++++++++++++++++++++++++++++++
+- drivers/video/omap3_dss.c             |  130 +++++++++++++++++++++++++
+- 2 files changed, 303 insertions(+), 0 deletions(-)
+- create mode 100644 arch/arm/include/asm/arch-omap3/dss.h
+- create mode 100644 drivers/video/omap3_dss.c
+-
+-diff --git a/arch/arm/include/asm/arch-omap3/dss.h b/arch/arm/include/asm/arch-omap3/dss.h
+-new file mode 100644
+-index 0000000..e5e3b0d
+---- /dev/null
+-+++ b/arch/arm/include/asm/arch-omap3/dss.h
+-@@ -0,0 +1,173 @@
+-+/*
+-+ * (C) Copyright 2010
+-+ * Texas Instruments, <www.ti.com>
+-+ * Syed Mohammed Khasim <khasim@ti.com>
+-+ *
+-+ * Referred to Linux DSS driver files for OMAP3
+-+ *
+-+ * See file CREDITS for list of people who contributed to this
+-+ * project.
+-+ *
+-+ * This program is free software; you can redistribute it and/or
+-+ * modify it under the terms of the GNU General Public License as
+-+ * published by the Free Software Foundation's version 2 of
+-+ * the License.
+-+ *
+-+ * This program is distributed in the hope that it will be useful,
+-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-+ * GNU General Public License for more details.
+-+ *
+-+ * You should have received a copy of the GNU General Public License
+-+ * along with this program; if not, write to the Free Software
+-+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+-+ * MA 02111-1307 USA
+-+ */
+-+
+-+#ifndef DSS_H
+-+#define DSS_H
+-+
+-+/*
+-+ * DSS Base Registers
+-+ */
+-+#define OMAP3_DSS_BASE		0x48050040
+-+#define OMAP3_DISPC_BASE	0x48050440
+-+#define OMAP3_VENC_BASE		0x48050C00
+-+
+-+/* DSS Registers */
+-+struct dss_regs {
+-+	u32 control;				/* 0x40 */
+-+	u32 sdi_control;			/* 0x44 */
+-+	u32 pll_control;			/* 0x48 */
+-+};
+-+
+-+/* DISPC Registers */
+-+struct dispc_regs {
+-+	u32 control;				/* 0x40 */
+-+	u32 config;				/* 0x44 */
+-+	u32 reserve_2;				/* 0x48 */
+-+	u32 default_color0;			/* 0x4C */
+-+	u32 default_color1;			/* 0x50 */
+-+	u32 trans_color0;			/* 0x54 */
+-+	u32 trans_color1;			/* 0x58 */
+-+	u32 line_status;			/* 0x5C */
+-+	u32 line_number;			/* 0x60 */
+-+	u32 timing_h;				/* 0x64 */
+-+	u32 timing_v;				/* 0x68 */
+-+	u32 pol_freq;				/* 0x6C */
+-+	u32 divisor;				/* 0x70 */
+-+	u32 global_alpha;			/* 0x74 */
+-+	u32 size_dig;				/* 0x78 */
+-+	u32 size_lcd;				/* 0x7C */
+-+};
+-+
+-+/* VENC Registers */
+-+struct venc_regs {
+-+	u32 rev_id;				/* 0x00 */
+-+	u32 status;				/* 0x04 */
+-+	u32 f_control;				/* 0x08 */
+-+	u32 reserve_1;				/* 0x0C */
+-+	u32 vidout_ctrl;			/* 0x10 */
+-+	u32 sync_ctrl;				/* 0x14 */
+-+	u32 reserve_2;				/* 0x18 */
+-+	u32 llen;				/* 0x1C */
+-+	u32 flens;				/* 0x20 */
+-+	u32 hfltr_ctrl;				/* 0x24 */
+-+	u32 cc_carr_wss_carr;			/* 0x28 */
+-+	u32 c_phase;				/* 0x2C */
+-+	u32 gain_u;				/* 0x30 */
+-+	u32 gain_v;				/* 0x34 */
+-+	u32 gain_y;				/* 0x38 */
+-+	u32 black_level;			/* 0x3C */
+-+	u32 blank_level;			/* 0x40 */
+-+	u32 x_color;				/* 0x44 */
+-+	u32 m_control;				/* 0x48 */
+-+	u32 bstamp_wss_data;			/* 0x4C */
+-+	u32 s_carr;				/* 0x50 */
+-+	u32 line21;				/* 0x54 */
+-+	u32 ln_sel;				/* 0x58 */
+-+	u32 l21__wc_ctl;			/* 0x5C */
+-+	u32 htrigger_vtrigger;			/* 0x60 */
+-+	u32 savid__eavid;			/* 0x64 */
+-+	u32 flen__fal;				/* 0x68 */
+-+	u32 lal__phase_reset;			/* 0x6C */
+-+	u32 hs_int_start_stop_x;		/* 0x70 */
+-+	u32 hs_ext_start_stop_x;		/* 0x74 */
+-+	u32 vs_int_start_x;			/* 0x78 */
+-+	u32 vs_int_stop_x__vs_int_start_y;	/* 0x7C */
+-+	u32 vs_int_stop_y__vs_ext_start_x;	/* 0x80 */
+-+	u32 vs_ext_stop_x__vs_ext_start_y;	/* 0x84 */
+-+	u32 vs_ext_stop_y;			/* 0x88 */
+-+	u32 reserve_3;				/* 0x8C */
+-+	u32 avid_start_stop_x;			/* 0x90 */
+-+	u32 avid_start_stop_y;			/* 0x94 */
+-+	u32 reserve_4;				/* 0x98 */
+-+	u32 reserve_5;				/* 0x9C */
+-+	u32 fid_int_start_x__fid_int_start_y;	/* 0xA0 */
+-+	u32 fid_int_offset_y__fid_ext_start_x;	/* 0xA4 */
+-+	u32 fid_ext_start_y__fid_ext_offset_y;	/* 0xA8 */
+-+	u32 reserve_6;				/* 0xAC */
+-+	u32 tvdetgp_int_start_stop_x;		/* 0xB0 */
+-+	u32 tvdetgp_int_start_stop_y;		/* 0xB4 */
+-+	u32 gen_ctrl;				/* 0xB8 */
+-+	u32 reserve_7;				/* 0xBC */
+-+	u32 reserve_8;				/* 0xC0 */
+-+	u32 output_control;			/* 0xC4 */
+-+	u32 dac_b__dac_c;			/* 0xC8 */
+-+	u32 height_width;			/* 0xCC */
+-+};
+-+
+-+/* Few Register Offsets */
+-+#define FRAME_MODE_SHIFT			1
+-+#define TFTSTN_SHIFT				3
+-+#define DATALINES_SHIFT				8
+-+
+-+/* Enabling Display controller */
+-+#define LCD_ENABLE				1
+-+#define DIG_ENABLE				(1 << 1)
+-+#define GO_LCD					(1 << 5)
+-+#define GO_DIG					(1 << 6)
+-+#define GP_OUT0					(1 << 15)
+-+#define GP_OUT1					(1 << 16)
+-+
+-+#define DISPC_ENABLE				(LCD_ENABLE | \
+-+						 DIG_ENABLE | \
+-+						 GO_LCD | \
+-+						 GO_DIG | \
+-+						 GP_OUT0| \
+-+						 GP_OUT1)
+-+
+-+/* Configure VENC DSS Params */
+-+#define VENC_CLK_ENABLE				(1 << 3)
+-+#define DAC_DEMEN				(1 << 4)
+-+#define DAC_POWERDN				(1 << 5)
+-+#define VENC_OUT_SEL				(1 << 6)
+-+#define DIG_LPP_SHIFT				16
+-+#define VENC_DSS_CONFIG				(VENC_CLK_ENABLE | \
+-+						 DAC_DEMEN | \
+-+						 DAC_POWERDN | \
+-+						 VENC_OUT_SEL)
+-+/*
+-+ * Panel Configuration
+-+ */
+-+struct panel_config {
+-+	u32 timing_h;
+-+	u32 timing_v;
+-+	u32 pol_freq;
+-+	u32 divisor;
+-+	u32 lcd_size;
+-+	u32 panel_type;
+-+	u32 data_lines;
+-+	u32 load_mode;
+-+	u32 panel_color;
+-+};
+-+
+-+/*
+-+ * Generic DSS Functions
+-+ */
+-+void omap3_dss_venc_config(const struct venc_regs *venc_cfg,
+-+			u32 height, u32 width);
+-+void omap3_dss_panel_config(const struct panel_config *panel_cfg);
+-+void omap3_dss_enable(void);
+-+
+-+#endif /* DSS_H */
+-diff --git a/drivers/video/omap3_dss.c b/drivers/video/omap3_dss.c
+-new file mode 100644
+-index 0000000..69c705a
+---- /dev/null
+-+++ b/drivers/video/omap3_dss.c
+-@@ -0,0 +1,130 @@
+-+/*
+-+ * (C) Copyright 2010
+-+ * Texas Instruments, <www.ti.com>
+-+ * Syed Mohammed Khasim <khasim@ti.com>
+-+ *
+-+ * Referred to Linux DSS driver files for OMAP3
+-+ *
+-+ * See file CREDITS for list of people who contributed to this
+-+ * project.
+-+ *
+-+ * This program is free software; you can redistribute it and/or
+-+ * modify it under the terms of the GNU General Public License as
+-+ * published by the Free Software Foundation's version 2 of
+-+ * the License.
+-+ *
+-+ * This program is distributed in the hope that it will be useful,
+-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-+ * GNU General Public License for more details.
+-+ *
+-+ * You should have received a copy of the GNU General Public License
+-+ * along with this program; if not, write to the Free Software
+-+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+-+ * MA 02111-1307 USA
+-+ */
+-+
+-+#include <common.h>
+-+#include <asm/io.h>
+-+#include <asm/arch/dss.h>
+-+
+-+/*
+-+ * Configure VENC for a given Mode (NTSC / PAL)
+-+ */
+-+void omap3_dss_venc_config(const struct venc_regs *venc_cfg,
+-+				u32 height, u32 width)
+-+{
+-+	struct venc_regs *venc = (struct venc_regs *) OMAP3_VENC_BASE;
+-+	struct dss_regs *dss = (struct dss_regs *) OMAP3_DSS_BASE;
+-+	struct dispc_regs *dispc = (struct dispc_regs *) OMAP3_DISPC_BASE;
+-+
+-+	writel(venc_cfg->status, &venc->status);
+-+	writel(venc_cfg->f_control, &venc->f_control);
+-+	writel(venc_cfg->vidout_ctrl, &venc->vidout_ctrl);
+-+	writel(venc_cfg->sync_ctrl, &venc->sync_ctrl);
+-+	writel(venc_cfg->llen, &venc->llen);
+-+	writel(venc_cfg->flens, &venc->flens);
+-+	writel(venc_cfg->hfltr_ctrl, &venc->hfltr_ctrl);
+-+	writel(venc_cfg->cc_carr_wss_carr, &venc->cc_carr_wss_carr);
+-+	writel(venc_cfg->c_phase, &venc->c_phase);
+-+	writel(venc_cfg->gain_u, &venc->gain_u);
+-+	writel(venc_cfg->gain_v, &venc->gain_v);
+-+	writel(venc_cfg->gain_y, &venc->gain_y);
+-+	writel(venc_cfg->black_level, &venc->black_level);
+-+	writel(venc_cfg->blank_level, &venc->blank_level);
+-+	writel(venc_cfg->x_color, &venc->x_color);
+-+	writel(venc_cfg->m_control, &venc->m_control);
+-+	writel(venc_cfg->bstamp_wss_data, &venc->bstamp_wss_data);
+-+	writel(venc_cfg->s_carr, &venc->s_carr);
+-+	writel(venc_cfg->line21, &venc->line21);
+-+	writel(venc_cfg->ln_sel, &venc->ln_sel);
+-+	writel(venc_cfg->l21__wc_ctl, &venc->l21__wc_ctl);
+-+	writel(venc_cfg->htrigger_vtrigger, &venc->htrigger_vtrigger);
+-+	writel(venc_cfg->savid__eavid, &venc->savid__eavid);
+-+	writel(venc_cfg->flen__fal, &venc->flen__fal);
+-+	writel(venc_cfg->lal__phase_reset, &venc->lal__phase_reset);
+-+	writel(venc_cfg->hs_int_start_stop_x,
+-+				&venc->hs_int_start_stop_x);
+-+	writel(venc_cfg->hs_ext_start_stop_x,
+-+				&venc->hs_ext_start_stop_x);
+-+	writel(venc_cfg->vs_int_start_x, &venc->vs_int_start_x);
+-+	writel(venc_cfg->vs_int_stop_x__vs_int_start_y,
+-+			&venc->vs_int_stop_x__vs_int_start_y);
+-+	writel(venc_cfg->vs_int_stop_y__vs_ext_start_x,
+-+			&venc->vs_int_stop_y__vs_ext_start_x);
+-+	writel(venc_cfg->vs_ext_stop_x__vs_ext_start_y,
+-+			&venc->vs_ext_stop_x__vs_ext_start_y);
+-+	writel(venc_cfg->vs_ext_stop_y, &venc->vs_ext_stop_y);
+-+	writel(venc_cfg->avid_start_stop_x, &venc->avid_start_stop_x);
+-+	writel(venc_cfg->avid_start_stop_y, &venc->avid_start_stop_y);
+-+	writel(venc_cfg->fid_int_start_x__fid_int_start_y,
+-+				&venc->fid_int_start_x__fid_int_start_y);
+-+	writel(venc_cfg->fid_int_offset_y__fid_ext_start_x,
+-+				&venc->fid_int_offset_y__fid_ext_start_x);
+-+	writel(venc_cfg->fid_ext_start_y__fid_ext_offset_y,
+-+				&venc->fid_ext_start_y__fid_ext_offset_y);
+-+	writel(venc_cfg->tvdetgp_int_start_stop_x,
+-+				&venc->tvdetgp_int_start_stop_x);
+-+	writel(venc_cfg->tvdetgp_int_start_stop_y,
+-+				&venc->tvdetgp_int_start_stop_y);
+-+	writel(venc_cfg->gen_ctrl, &venc->gen_ctrl);
+-+	writel(venc_cfg->output_control, &venc->output_control);
+-+	writel(venc_cfg->dac_b__dac_c, &venc->dac_b__dac_c);
+-+
+-+	/* Configure DSS for VENC Settings */
+-+	writel(VENC_DSS_CONFIG, &dss->control);
+-+
+-+	/* Configure height and width for Digital out */
+-+	writel(((height << DIG_LPP_SHIFT) | width), &dispc->size_dig);
+-+}
+-+
+-+/*
+-+ * Configure Panel Specific Parameters
+-+ */
+-+void omap3_dss_panel_config(const struct panel_config *panel_cfg)
+-+{
+-+	struct dispc_regs *dispc = (struct dispc_regs *) OMAP3_DISPC_BASE;
+-+
+-+	writel(panel_cfg->timing_h, &dispc->timing_h);
+-+	writel(panel_cfg->timing_v, &dispc->timing_v);
+-+	writel(panel_cfg->pol_freq, &dispc->pol_freq);
+-+	writel(panel_cfg->divisor, &dispc->divisor);
+-+	writel(panel_cfg->lcd_size, &dispc->size_lcd);
+-+	writel((panel_cfg->load_mode << FRAME_MODE_SHIFT), &dispc->config);
+-+	writel(((panel_cfg->panel_type << TFTSTN_SHIFT) |
+-+		(panel_cfg->data_lines << DATALINES_SHIFT)), &dispc->control);
+-+	writel(panel_cfg->panel_color, &dispc->default_color0);
+-+}
+-+
+-+/*
+-+ * Enable LCD and DIGITAL OUT in DSS
+-+ */
+-+void omap3_dss_enable(void)
+-+{
+-+	struct dispc_regs *dispc = (struct dispc_regs *) OMAP3_DISPC_BASE;
+-+	u32 l = 0;
+-+
+-+	l = readl(&dispc->control);
+-+	l |= DISPC_ENABLE;
+-+	writel(l, &dispc->control);
+-+}
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0020-video-DSS-makefile-update.patch b/recipes-bsp/u-boot/u-boot/2011.06/0020-video-DSS-makefile-update.patch
+deleted file mode 100644
+index 045ebf6..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0020-video-DSS-makefile-update.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From ce6813c7f4006331dd661cd25178bb258d1e9469 Mon Sep 17 00:00:00 2001
+-From: Jason Kridner <jkridner@beagleboard.org>
+-Date: Tue, 19 Apr 2011 14:00:34 -0500
+-Subject: [PATCH 20/30] video: DSS makefile update
+-
+-Adding the OMAP3 DSS video driver to the Makefile.  The patch applied to
+-u-boot-ti didn't include this for some reason.
+-
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- drivers/video/Makefile |    2 ++
+- 1 files changed, 2 insertions(+), 0 deletions(-)
+-
+-diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+-index 086dc05..226684a 100644
+---- a/drivers/video/Makefile
+-+++ b/drivers/video/Makefile
+-@@ -41,6 +41,8 @@ COBJS-$(CONFIG_SED156X) += sed156x.o
+- COBJS-$(CONFIG_VIDEO_SM501) += sm501.o
+- COBJS-$(CONFIG_VIDEO_SMI_LYNXEM) += smiLynxEM.o videomodes.o
+- COBJS-$(CONFIG_VIDEO_VCXK) += bus_vcxk.o
+-+COBJS-$(CONFIG_VIDEO_OMAP3) += omap3_dss.o
+-+COBJS-y += videomodes.o
+- 
+- COBJS	:= $(COBJS-y)
+- SRCS	:= $(COBJS:.o=.c)
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0021-BeagleBoard-Configure-DVI-S-video.patch b/recipes-bsp/u-boot/u-boot/2011.06/0021-BeagleBoard-Configure-DVI-S-video.patch
+deleted file mode 100644
+index f8ab5a1..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0021-BeagleBoard-Configure-DVI-S-video.patch
++++ /dev/null
+@@ -1,170 +0,0 @@
+-From ebabfd9f1e6f712aafc2bba5ddfae530be4119ee Mon Sep 17 00:00:00 2001
+-From: Jason Kridner <jkridner@beagleboard.org>
+-Date: Tue, 19 Apr 2011 14:01:13 -0500
+-Subject: [PATCH 21/30] BeagleBoard: Configure DVI/S-video
+-
+-Based on patches from Syed Mohammed Khasim (khasim@ti.com).
+-
+-Configures the output of the BeagleBoard DVI to be orange.
+-Configures the output of the BeagleBoard S-Video to be a colorbar.
+----
+-Updates for this version
+-* Rebased on u-boot-ti.
+-
+-v3
+-* Rebased again.
+-
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- board/ti/beagle/beagle.c |   24 +++++++++++++
+- board/ti/beagle/beagle.h |   86 ++++++++++++++++++++++++++++++++++++++++++++++
+- 2 files changed, 110 insertions(+), 0 deletions(-)
+-
+-diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
+-index a290f89..39d9038 100644
+---- a/board/ti/beagle/beagle.c
+-+++ b/board/ti/beagle/beagle.c
+-@@ -164,6 +164,28 @@ unsigned int get_expansion_id(void)
+- }
+- 
+- /*
+-+ * Configure DSS to display background color on DVID
+-+ * Configure VENC to display color bar on S-Video
+-+ */
+-+void display_init(void)
+-+{
+-+	omap3_dss_venc_config(&venc_config_std_tv, VENC_HEIGHT, VENC_WIDTH);
+-+	switch (get_board_revision()) {
+-+	case REVISION_AXBX:
+-+	case REVISION_CX:
+-+	case REVISION_C4:
+-+		omap3_dss_panel_config(&dvid_cfg);
+-+		break;
+-+	case REVISION_XM_A:
+-+	case REVISION_XM_B:
+-+	case REVISION_XM_C:
+-+	default:
+-+		omap3_dss_panel_config(&dvid_cfg_xm);
+-+		break;
+-+	}
+-+}
+-+
+-+/*
+-  * Routine: misc_init_r
+-  * Description: Configure board specific parts
+-  */
+-@@ -330,6 +352,8 @@ int misc_init_r(void)
+- 		GPIO15 | GPIO14 | GPIO13 | GPIO12), &gpio5_base->oe);
+- 
+- 	dieid_num_r();
+-+	display_init();
+-+	omap3_dss_enable();
+- 
+- 	return 0;
+- }
+-diff --git a/board/ti/beagle/beagle.h b/board/ti/beagle/beagle.h
+-index 04247cd..18bfaa8 100644
+---- a/board/ti/beagle/beagle.h
+-+++ b/board/ti/beagle/beagle.h
+-@@ -23,6 +23,8 @@
+- #ifndef _BEAGLE_H_
+- #define _BEAGLE_H_
+- 
+-+#include <asm/arch/dss.h>
+-+
+- const omap3_sysinfo sysinfo = {
+- 	DDR_STACKED,
+- 	"OMAP3 Beagle board",
+-@@ -472,4 +474,88 @@ const omap3_sysinfo sysinfo = {
+- 	MUX_VAL(CP(MMC2_DAT6),      (IDIS | PTU | EN  | M4)) /*GPIO_138 BT_EN*/\
+- 	MUX_VAL(CP(MMC2_DAT7),      (IDIS | PTU | EN  | M4)) /*GPIO_139 WLAN_EN*/
+- 
+-+/*
+-+ * Display Configuration
+-+ */
+-+
+-+#define DVI_BEAGLE_ORANGE_COL		0x00FF8000
+-+#define VENC_HEIGHT			0x00ef
+-+#define VENC_WIDTH			0x027f
+-+
+-+/*
+-+ * Configure VENC in DSS for Beagle to generate Color Bar
+-+ *
+-+ * Kindly refer to OMAP TRM for definition of these values.
+-+ */
+-+static const struct venc_regs venc_config_std_tv = {
+-+	.status					= 0x0000001B,
+-+	.f_control				= 0x00000040,
+-+	.vidout_ctrl				= 0x00000000,
+-+	.sync_ctrl				= 0x00008000,
+-+	.llen					= 0x00008359,
+-+	.flens					= 0x0000020C,
+-+	.hfltr_ctrl				= 0x00000000,
+-+	.cc_carr_wss_carr			= 0x043F2631,
+-+	.c_phase				= 0x00000024,
+-+	.gain_u					= 0x00000130,
+-+	.gain_v					= 0x00000198,
+-+	.gain_y					= 0x000001C0,
+-+	.black_level				= 0x0000006A,
+-+	.blank_level				= 0x0000005C,
+-+	.x_color				= 0x00000000,
+-+	.m_control				= 0x00000001,
+-+	.bstamp_wss_data			= 0x0000003F,
+-+	.s_carr					= 0x21F07C1F,
+-+	.line21					= 0x00000000,
+-+	.ln_sel					= 0x00000015,
+-+	.l21__wc_ctl				= 0x00001400,
+-+	.htrigger_vtrigger			= 0x00000000,
+-+	.savid__eavid				= 0x069300F4,
+-+	.flen__fal				= 0x0016020C,
+-+	.lal__phase_reset			= 0x00060107,
+-+	.hs_int_start_stop_x			= 0x008D034E,
+-+	.hs_ext_start_stop_x			= 0x000F0359,
+-+	.vs_int_start_x				= 0x01A00000,
+-+	.vs_int_stop_x__vs_int_start_y		= 0x020501A0,
+-+	.vs_int_stop_y__vs_ext_start_x		= 0x01AC0024,
+-+	.vs_ext_stop_x__vs_ext_start_y		= 0x020D01AC,
+-+	.vs_ext_stop_y				= 0x00000006,
+-+	.avid_start_stop_x			= 0x03480079,
+-+	.avid_start_stop_y			= 0x02040024,
+-+	.fid_int_start_x__fid_int_start_y	= 0x0001008A,
+-+	.fid_int_offset_y__fid_ext_start_x	= 0x01AC0106,
+-+	.fid_ext_start_y__fid_ext_offset_y	= 0x01060006,
+-+	.tvdetgp_int_start_stop_x		= 0x00140001,
+-+	.tvdetgp_int_start_stop_y		= 0x00010001,
+-+	.gen_ctrl				= 0x00FF0000,
+-+	.output_control				= 0x0000000D,
+-+	.dac_b__dac_c				= 0x00000000
+-+};
+-+
+-+/*
+-+ * Configure Timings for DVI D
+-+ */
+-+static const struct panel_config dvid_cfg = {
+-+	.timing_h	= 0x0ff03f31, /* Horizantal timing */
+-+	.timing_v	= 0x01400504, /* Vertical timing */
+-+	.pol_freq	= 0x00007028, /* Pol Freq */
+-+	.divisor	= 0x00010006, /* 72Mhz Pixel Clock */
+-+	.lcd_size	= 0x02ff03ff, /* 1024x768 */
+-+	.panel_type	= 0x01, /* TFT */
+-+	.data_lines	= 0x03, /* 24 Bit RGB */
+-+	.load_mode	= 0x02, /* Frame Mode */
+-+	.panel_color	= DVI_BEAGLE_ORANGE_COL /* ORANGE */
+-+};
+-+
+-+static const struct panel_config dvid_cfg_xm = {
+-+	.timing_h	= 0x1a4024c9, /* Horizantal timing */
+-+	.timing_v	= 0x02c00509, /* Vertical timing */
+-+	.pol_freq	= 0x00007028, /* Pol Freq */
+-+	.divisor	= 0x00010001, /* 96MHz Pixel Clock */
+-+	.lcd_size	= 0x02ff03ff, /* 1024x768 */
+-+	.panel_type	= 0x01, /* TFT */
+-+	.data_lines	= 0x03, /* 24 Bit RGB */
+-+	.load_mode	= 0x02, /* Frame Mode */
+-+	.panel_color	= DVI_BEAGLE_ORANGE_COL /* ORANGE */
+-+};
+- #endif
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0022-BeagleBoard-config-enable-DSS.patch b/recipes-bsp/u-boot/u-boot/2011.06/0022-BeagleBoard-config-enable-DSS.patch
+deleted file mode 100644
+index 295d401..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0022-BeagleBoard-config-enable-DSS.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From 79b347db36d583b0fde360baa780877b3a7ae754 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Tue, 21 Jun 2011 22:18:01 +0200
+-Subject: [PATCH 22/30] BeagleBoard: config: enable DSS
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- include/configs/omap3_beagle.h |    1 +
+- 1 files changed, 1 insertions(+), 0 deletions(-)
+-
+-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+-index 5c32265..6c842ad 100644
+---- a/include/configs/omap3_beagle.h
+-+++ b/include/configs/omap3_beagle.h
+-@@ -172,6 +172,7 @@
+- #define CONFIG_SYS_I2C_BUS_SELECT	1
+- #define CONFIG_I2C_MULTI_BUS		1
+- #define CONFIG_DRIVER_OMAP34XX_I2C	1
+-+#define CONFIG_VIDEO_OMAP3	/* DSS Support			*/
+- 
+- /*
+-  * TWL4030
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0023-BeagleBoard-Added-userbutton-command.patch b/recipes-bsp/u-boot/u-boot/2011.06/0023-BeagleBoard-Added-userbutton-command.patch
+deleted file mode 100644
+index 4f91ceb..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0023-BeagleBoard-Added-userbutton-command.patch
++++ /dev/null
+@@ -1,107 +0,0 @@
+-From b6082310a74ef48b8c2c4c67092896563141a4ad Mon Sep 17 00:00:00 2001
+-From: Jason Kridner <jkridner@beagleboard.org>
+-Date: Wed, 21 Jul 2010 07:41:25 -0500
+-Subject: [PATCH 23/30] BeagleBoard: Added userbutton command
+-
+-Based on commit f1099c7c43caf5bac3bf6a65aa266fade4747072
+-    Author: Greg Turner <gregturner@ti.com>
+-    Date:   Tue May 25 09:19:06 2010 -0500
+-
+-    New u-boot command for status of USER button on BeagleBoard-xM
+-
+-         Modified bootcmd to check the staus at boot time and set
+-	 filename of the boot script.
+-
+-* Moved to a BeagleBoard specific file.
+-* Removed changes to default boot command from adding userbutton
+-  command.
+-* Made to handle pre-xM boards.
+-* Flipped polarity of the return value to avoid confusion.  Success (0)
+-  is when the button is pressed.  Failure (1) is when the button is NOT
+-  pressed.
+-* Used latest revision getting function.
+-* Used latest macros for board revision.
+---
+-v2 update:
+-* Added xM-C revision definition (optional, since it was default)
+-
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- board/ti/beagle/beagle.c |   56 ++++++++++++++++++++++++++++++++++++++++++++++
+- 1 files changed, 56 insertions(+), 0 deletions(-)
+-
+-diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
+-index 39d9038..4798194 100644
+---- a/board/ti/beagle/beagle.c
+-+++ b/board/ti/beagle/beagle.c
+-@@ -50,6 +50,7 @@ extern struct ehci_hccr *hccr;
+- extern volatile struct ehci_hcor *hcor;
+- #endif
+- #include "beagle.h"
+-+#include <command.h>
+- 
+- #define pr_debug(fmt, args...) debug(fmt, ##args)
+- 
+-@@ -477,3 +478,58 @@ int ehci_hcd_init(void)
+- }
+- 
+- #endif /* CONFIG_USB_EHCI */
+-+
+-+/*
+-+ * This command returns the status of the user button on beagle xM
+-+ * Input - none
+-+ * Returns - 	1 if button is held down
+-+ *		0 if button is not held down
+-+ */
+-+int do_userbutton (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
+-+{
+-+	int     button = 0;
+-+	int	gpio;
+-+
+-+	/*
+-+	 * pass address parameter as argv[0] (aka command name),
+-+	 * and all remaining args
+-+	 */
+-+	switch (get_board_revision()) {
+-+	case REVISION_AXBX:
+-+	case REVISION_CX:
+-+	case REVISION_C4:
+-+		gpio = 7;
+-+		break;
+-+	case REVISION_XM_A:
+-+	case REVISION_XM_B:
+-+	case REVISION_XM_C:
+-+	default:
+-+		gpio = 4;
+-+		break;
+-+	}
+-+	omap_request_gpio(gpio);
+-+	omap_set_gpio_direction(gpio, 1);
+-+	printf("The user button is currently ");
+-+	if(omap_get_gpio_datain(gpio))
+-+	{
+-+		button = 1;
+-+		printf("PRESSED.\n");
+-+	}
+-+	else
+-+	{
+-+		button = 0;
+-+		printf("NOT pressed.\n");
+-+	}
+-+
+-+	omap_free_gpio(gpio);
+-+
+-+	return !button;
+-+}
+-+
+-+/* -------------------------------------------------------------------- */
+-+
+-+U_BOOT_CMD(
+-+	userbutton, CONFIG_SYS_MAXARGS, 1,	do_userbutton,
+-+	"Return the status of the BeagleBoard USER button",
+-+	""
+-+);
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0024-Corrected-LED-name-match-finding-avoiding-extraneous.patch b/recipes-bsp/u-boot/u-boot/2011.06/0024-Corrected-LED-name-match-finding-avoiding-extraneous.patch
+deleted file mode 100644
+index 6bc3f6d..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0024-Corrected-LED-name-match-finding-avoiding-extraneous.patch
++++ /dev/null
+@@ -1,44 +0,0 @@
+-From 657f4308df123f3d2bd82c87bf667dd529d0f7c6 Mon Sep 17 00:00:00 2001
+-From: Jason Kridner <jkridner@beagleboard.org>
+-Date: Tue, 8 Mar 2011 20:42:01 -0600
+-Subject: [PATCH 24/30] Corrected LED name match finding avoiding extraneous Usage printouts
+-
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- common/cmd_led.c |    5 +++--
+- 1 files changed, 3 insertions(+), 2 deletions(-)
+-
+-diff --git a/common/cmd_led.c b/common/cmd_led.c
+-index c53195f..8b46848 100644
+---- a/common/cmd_led.c
+-+++ b/common/cmd_led.c
+-@@ -83,7 +83,7 @@ int str_onoff (char *var)
+- 
+- int do_led (cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
+- {
+--	int state, i;
+-+	int state, i, match = 0;
+- 
+- 	/* Validate arguments */
+- 	if ((argc != 3)) {
+-@@ -98,6 +98,7 @@ int do_led (cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
+- 	for (i = 0; led_commands[i].string; i++) {
+- 		if ((strcmp("all", argv[1]) == 0) ||
+- 		    (strcmp(led_commands[i].string, argv[1]) == 0)) {
+-+		    	match = 1;
+- 			if (led_commands[i].on) {
+- 				if (state) {
+- 					led_commands[i].on();
+-@@ -112,7 +113,7 @@ int do_led (cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
+- 	}
+- 
+- 	/* If we ran out of matches, print Usage */
+--	if (!led_commands[i].string && !(strcmp("all", argv[1]) == 0)) {
+-+	if (!match) {
+- 		return cmd_usage(cmdtp);
+- 	}
+- 
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0025-BeagleBoard-fix-LED-0-1-in-driver.patch b/recipes-bsp/u-boot/u-boot/2011.06/0025-BeagleBoard-fix-LED-0-1-in-driver.patch
+deleted file mode 100644
+index 92f9cdd..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0025-BeagleBoard-fix-LED-0-1-in-driver.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From c510bdc2684b5a755c4526071f1f3ca726ac1d1d Mon Sep 17 00:00:00 2001
+-From: Jason Kridner <jkridner@beagleboard.org>
+-Date: Tue, 19 Apr 2011 10:55:26 -0500
+-Subject: [PATCH 25/30] BeagleBoard: fix LED 0/1 in driver
+-
+-Fixed USR0/USR1 to be LED 0/1 respectively
+-
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- board/ti/beagle/led.c |    4 ++--
+- 1 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/board/ti/beagle/led.c b/board/ti/beagle/led.c
+-index 08f95a0..d3de51f 100644
+---- a/board/ti/beagle/led.c
+-+++ b/board/ti/beagle/led.c
+-@@ -27,8 +27,8 @@
+- static unsigned int saved_state[2] = {STATUS_LED_OFF, STATUS_LED_OFF};
+- 
+- /* GPIO pins for the LEDs */
+--#define BEAGLE_LED_USR0	149
+--#define BEAGLE_LED_USR1	150
+-+#define BEAGLE_LED_USR0	150
+-+#define BEAGLE_LED_USR1	149
+- 
+- #ifdef STATUS_LED_GREEN
+- void green_LED_off (void)
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0026-led-added-cmd_led-to-Makefile.patch b/recipes-bsp/u-boot/u-boot/2011.06/0026-led-added-cmd_led-to-Makefile.patch
+deleted file mode 100644
+index 365ae69..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0026-led-added-cmd_led-to-Makefile.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 6aac1cb7f47d7126be80df2e06042d37f1affce2 Mon Sep 17 00:00:00 2001
+-From: Jason Kridner <jkridner@beagleboard.org>
+-Date: Wed, 20 Apr 2011 18:11:38 -0500
+-Subject: [PATCH 26/30] led: added cmd_led to Makefile
+-
+-Addition of cmd_led into the Makefile wasn't included in the patch
+-applied to u-boot-ti.
+-
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- common/Makefile |    1 +
+- 1 files changed, 1 insertions(+), 0 deletions(-)
+-
+-diff --git a/common/Makefile b/common/Makefile
+-index 224b7cc..7445ccc 100644
+---- a/common/Makefile
+-+++ b/common/Makefile
+-@@ -107,6 +107,7 @@ COBJS-$(CONFIG_CMD_ITEST) += cmd_itest.o
+- COBJS-$(CONFIG_CMD_JFFS2) += cmd_jffs2.o
+- COBJS-$(CONFIG_CMD_CRAMFS) += cmd_cramfs.o
+- COBJS-$(CONFIG_CMD_LDRINFO) += cmd_ldrinfo.o
+-+COBJS-$(CONFIG_CMD_LED) += cmd_led.o
+- COBJS-$(CONFIG_CMD_LICENSE) += cmd_license.o
+- COBJS-y += cmd_load.o
+- COBJS-$(CONFIG_LOGBUFFER) += cmd_log.o
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0027-led-correct-off-on-locations-in-structure.patch b/recipes-bsp/u-boot/u-boot/2011.06/0027-led-correct-off-on-locations-in-structure.patch
+deleted file mode 100644
+index d0febf8..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0027-led-correct-off-on-locations-in-structure.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From 48393aa0119882009df057c974f0dec6051eff79 Mon Sep 17 00:00:00 2001
+-From: Jason Kridner <jkridner@beagleboard.org>
+-Date: Wed, 20 Apr 2011 18:13:49 -0500
+-Subject: [PATCH 27/30] led: correct off/on locations in structure
+-
+-Although the initialization should probably be done with names, the
+-existing implementation has these structures filled in the opposite
+-order.
+-
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+---
+-v2 changes:
+-* Corrected comment as well.
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- common/cmd_led.c |    4 ++--
+- 1 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/common/cmd_led.c b/common/cmd_led.c
+-index 8b46848..d14dd5a 100644
+---- a/common/cmd_led.c
+-+++ b/common/cmd_led.c
+-@@ -34,8 +34,8 @@
+- struct led_tbl_s {
+- 	char		*string;	/* String for use in the command */
+- 	led_id_t	mask;		/* Mask used for calling __led_set() */
+--	void		(*on)(void);	/* Optional fucntion for turning LED on */
+--	void		(*off)(void);	/* Optional fucntion for turning LED on */
+-+	void		(*off)(void);	/* Optional function for turning LED off */
+-+	void		(*on)(void);	/* Optional function for turning LED on */
+- };
+- 
+- typedef struct led_tbl_s led_tbl_t;
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0028-BeagleBoard-config-make-mtest-run.patch b/recipes-bsp/u-boot/u-boot/2011.06/0028-BeagleBoard-config-make-mtest-run.patch
+deleted file mode 100644
+index 23cdc47..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0028-BeagleBoard-config-make-mtest-run.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From 747f8f93a4e1d461340ddc04d3843d58565bab30 Mon Sep 17 00:00:00 2001
+-From: Jason Kridner <jkridner@beagleboard.org>
+-Date: Tue, 19 Apr 2011 11:58:54 -0500
+-Subject: [PATCH 28/30] BeagleBoard: config: make mtest run
+-
+-Utilize the alternate mtest and define a valid region.
+-
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- include/configs/omap3_beagle.h |    9 +++++----
+- 1 files changed, 5 insertions(+), 4 deletions(-)
+-
+-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+-index 6c842ad..3bbc235 100644
+---- a/include/configs/omap3_beagle.h
+-+++ b/include/configs/omap3_beagle.h
+-@@ -292,10 +292,11 @@
+- /* Boot Argument Buffer Size */
+- #define CONFIG_SYS_BARGSIZE		(CONFIG_SYS_CBSIZE)
+- 
+--#define CONFIG_SYS_MEMTEST_START	(OMAP34XX_SDRC_CS0)	/* memtest */
+--								/* works on */
+--#define CONFIG_SYS_MEMTEST_END		(OMAP34XX_SDRC_CS0 + \
+--					0x01F00000) /* 31MB */
+-+#define CONFIG_SYS_ALT_MEMTEST		1
+-+#define CONFIG_SYS_MEMTEST_START	(0x82000000)		/* memtest */
+-+								/* defaults */
+-+#define CONFIG_SYS_MEMTEST_END		(0x87FFFFFF) 		/* 128MB */
+-+#define CONFIG_SYS_MEMTEST_SCRATCH	(0x81000000)	/* dummy address */
+- 
+- #define CONFIG_SYS_LOAD_ADDR		(OMAP34XX_SDRC_CS0)	/* default */
+- 							/* load address */
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0029-BeagleBoard-config-increase-command-line-functionali.patch b/recipes-bsp/u-boot/u-boot/2011.06/0029-BeagleBoard-config-increase-command-line-functionali.patch
+deleted file mode 100644
+index d7e2b3a..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0029-BeagleBoard-config-increase-command-line-functionali.patch
++++ /dev/null
+@@ -1,42 +0,0 @@
+-From c75471405166cba2327680cc4e4d204f05007c54 Mon Sep 17 00:00:00 2001
+-From: Jason Kridner <jkridner@beagleboard.org>
+-Date: Tue, 19 Apr 2011 11:50:55 -0500
+-Subject: [PATCH 29/30] BeagleBoard: config: increase command-line functionality
+-
+-Enable the expression evaluator.
+-
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- include/configs/omap3_beagle.h |    5 +++--
+- 1 files changed, 3 insertions(+), 2 deletions(-)
+-
+-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+-index 3bbc235..55973fb 100644
+---- a/include/configs/omap3_beagle.h
+-+++ b/include/configs/omap3_beagle.h
+-@@ -158,6 +158,7 @@
+- #define CONFIG_CMD_NFS      /* NFS support          */
+- #define CONFIG_CMD_PING
+- #define CONFIG_CMD_DHCP
+-+#define CONFIG_CMD_SETEXPR	/* Evaluate expressions		*/
+- 
+- #undef CONFIG_CMD_FLASH		/* flinfo, erase, protect	*/
+- #undef CONFIG_CMD_FPGA		/* FPGA configuration Support	*/
+-@@ -284,11 +285,11 @@
+- #define CONFIG_SYS_HUSH_PARSER		/* use "hush" command parser */
+- #define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
+- #define CONFIG_SYS_PROMPT		"OMAP3 beagleboard.org # "
+--#define CONFIG_SYS_CBSIZE		256	/* Console I/O Buffer Size */
+-+#define CONFIG_SYS_CBSIZE		512	/* Console I/O Buffer Size */
+- /* Print Buffer Size */
+- #define CONFIG_SYS_PBSIZE		(CONFIG_SYS_CBSIZE + \
+- 					sizeof(CONFIG_SYS_PROMPT) + 16)
+--#define CONFIG_SYS_MAXARGS		16	/* max number of command args */
+-+#define CONFIG_SYS_MAXARGS		32	/* max number of command args */
+- /* Boot Argument Buffer Size */
+- #define CONFIG_SYS_BARGSIZE		(CONFIG_SYS_CBSIZE)
+- 
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0030-BeagleBoard-config-add-optargs-buddy-camera.patch b/recipes-bsp/u-boot/u-boot/2011.06/0030-BeagleBoard-config-add-optargs-buddy-camera.patch
+deleted file mode 100644
+index d8def03..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0030-BeagleBoard-config-add-optargs-buddy-camera.patch
++++ /dev/null
+@@ -1,51 +0,0 @@
+-From 0e384ea7bc94d8626c0280f7c0151f99fbc83008 Mon Sep 17 00:00:00 2001
+-From: Jason Kridner <jkridner@beagleboard.org>
+-Date: Tue, 19 Apr 2011 12:09:18 -0500
+-Subject: [PATCH 30/30] BeagleBoard: config: add optargs/buddy/camera
+-
+-buddy and camera are used to configure peripherals in the kernel at boot
+-time that cannot easily be detected by the kernel.
+-
+-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- include/configs/omap3_beagle.h |    6 ++++++
+- 1 files changed, 6 insertions(+), 0 deletions(-)
+-
+-diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+-index 55973fb..024cb9a 100644
+---- a/include/configs/omap3_beagle.h
+-+++ b/include/configs/omap3_beagle.h
+-@@ -214,6 +214,8 @@
+- 	"console=ttyO2,115200n8\0" \
+- 	"mpurate=auto\0" \
+- 	"buddy=none "\
+-+	"optargs=\0" \
+-+	"camera=none\0" \
+- 	"vram=12M\0" \
+- 	"dvimode=1024x768MR-16@60\0" \
+- 	"defaultdisplay=dvi\0" \
+-@@ -223,16 +225,20 @@
+- 	"nandroot=/dev/mtdblock4 rw\0" \
+- 	"nandrootfstype=jffs2\0" \
+- 	"mmcargs=setenv bootargs console=${console} " \
+-+		"${optargs} " \
+- 		"mpurate=${mpurate} " \
+- 		"buddy=${buddy} "\
+-+		"camera=${camera} "\
+- 		"vram=${vram} " \
+- 		"omapfb.mode=dvi:${dvimode} " \
+- 		"omapdss.def_disp=${defaultdisplay} " \
+- 		"root=${mmcroot} " \
+- 		"rootfstype=${mmcrootfstype}\0" \
+- 	"nandargs=setenv bootargs console=${console} " \
+-+		"${optargs} " \
+- 		"mpurate=${mpurate} " \
+- 		"buddy=${buddy} "\
+-+		"camera=${camera} "\
+- 		"vram=${vram} " \
+- 		"omapfb.mode=dvi:${dvimode} " \
+- 		"omapdss.def_disp=${defaultdisplay} " \
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0031-omap4-add-support-for-gpios.patch b/recipes-bsp/u-boot/u-boot/2011.06/0031-omap4-add-support-for-gpios.patch
+deleted file mode 100644
+index 26b40ca..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0031-omap4-add-support-for-gpios.patch
++++ /dev/null
+@@ -1,306 +0,0 @@
+-From b2395bf32d0475dd4a729155e94e5d1605c54362 Mon Sep 17 00:00:00 2001
+-From: Gilles Chanteperdrix <gilles.chanteperdrix@xenomai.org>
+-Date: Mon, 9 May 2011 18:04:49 -0300
+-Subject: [PATCH 31/35] omap4: add support for gpios
+-
+-Copied from omap3.
+-
+-Signed-off-by: Gilles Chanteperdrix <gilles.chanteperdrix@xenomai.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- arch/arm/cpu/armv7/omap4/Makefile      |    1 +
+- arch/arm/cpu/armv7/omap4/gpio.c        |  169 ++++++++++++++++++++++++++++++++
+- arch/arm/include/asm/arch-omap4/gpio.h |   93 +++++++++++++++++
+- 3 files changed, 263 insertions(+), 0 deletions(-)
+- create mode 100644 arch/arm/cpu/armv7/omap4/gpio.c
+- create mode 100644 arch/arm/include/asm/arch-omap4/gpio.h
+-
+-diff --git a/arch/arm/cpu/armv7/omap4/Makefile b/arch/arm/cpu/armv7/omap4/Makefile
+-index 987dc9d..c39693a 100644
+---- a/arch/arm/cpu/armv7/omap4/Makefile
+-+++ b/arch/arm/cpu/armv7/omap4/Makefile
+-@@ -29,6 +29,7 @@ SOBJS	+= lowlevel_init.o
+- 
+- COBJS	+= board.o
+- COBJS	+= mem.o
+-+COBJS	+= gpio.o
+- COBJS	+= sys_info.o
+- 
+- SRCS	:= $(SOBJS:.o=.S) $(COBJS:.o=.c)
+-diff --git a/arch/arm/cpu/armv7/omap4/gpio.c b/arch/arm/cpu/armv7/omap4/gpio.c
+-new file mode 100644
+-index 0000000..40f1d5e
+---- /dev/null
+-+++ b/arch/arm/cpu/armv7/omap4/gpio.c
+-@@ -0,0 +1,169 @@
+-+/*
+-+ * Lifted from arch/arm/cpu/armv7/omap3/gpio.c
+-+ *
+-+ * Original Copyright (c) 2009 Wind River Systems, Inc.
+-+ * Tom Rix <Tom.Rix@windriver.com>
+-+ *
+-+ * This program is free software; you can redistribute it and/or
+-+ * modify it under the terms of the GNU General Public License as
+-+ * published by the Free Software Foundation; either version 2 of
+-+ * the License, or (at your option) any later version.
+-+ *
+-+ * This program is distributed in the hope that it will be useful,
+-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-+ * GNU General Public License for more details.
+-+ *
+-+ * You should have received a copy of the GNU General Public License
+-+ * along with this program; if not, write to the Free Software
+-+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+-+ * MA 02111-1307 USA
+-+ *
+-+ * This work is derived from the linux 2.6.27 kernel source
+-+ * To fetch, use the kernel repository
+-+ * git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
+-+ * Use the v2.6.27 tag.
+-+ *
+-+ * Below is the original's header including its copyright
+-+ *
+-+ *  linux/arch/arm/plat-omap/gpio.c
+-+ *
+-+ * Support functions for OMAP GPIO
+-+ *
+-+ * Copyright (C) 2003-2005 Nokia Corporation
+-+ * Written by Juha Yrjölä <juha.yrjola@nokia.com>
+-+ *
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License version 2 as
+-+ * published by the Free Software Foundation.
+-+ */
+-+#include <common.h>
+-+#include <asm/arch/gpio.h>
+-+#include <asm/io.h>
+-+#include <asm/errno.h>
+-+
+-+/*
+-+ * OMAP44XX  specific GPIO registers
+-+ */
+-+#define OMAP44XX_GPIO1_BASE             0x4a310000
+-+#define OMAP44XX_GPIO2_BASE             0x48055000
+-+#define OMAP44XX_GPIO3_BASE             0x48057000
+-+#define OMAP44XX_GPIO4_BASE             0x48059000
+-+#define OMAP44XX_GPIO5_BASE             0x4805B000
+-+#define OMAP44XX_GPIO6_BASE             0x4805D000
+-+
+-+static const struct gpio_bank gpio_bank_44xx[6] = {
+-+	{ (void *)OMAP44XX_GPIO1_BASE },
+-+	{ (void *)OMAP44XX_GPIO2_BASE },
+-+	{ (void *)OMAP44XX_GPIO3_BASE },
+-+	{ (void *)OMAP44XX_GPIO4_BASE },
+-+	{ (void *)OMAP44XX_GPIO5_BASE },
+-+	{ (void *)OMAP44XX_GPIO6_BASE },
+-+};
+-+
+-+static struct gpio_bank *gpio_bank = &gpio_bank_44xx[0];
+-+
+-+static inline struct gpio_bank *get_gpio_bank(int gpio)
+-+{
+-+	return &gpio_bank[gpio >> 5];
+-+}
+-+
+-+static inline int get_gpio_index(int gpio)
+-+{
+-+	return gpio & 0x1f;
+-+}
+-+
+-+static inline int gpio_valid(int gpio)
+-+{
+-+	if (gpio < 0)
+-+		return -1;
+-+	if (gpio < 192)
+-+		return 0;
+-+	return -1;
+-+}
+-+
+-+static int check_gpio(int gpio)
+-+{
+-+	if (gpio_valid(gpio) < 0) {
+-+		printf("ERROR : check_gpio: invalid GPIO %d\n", gpio);
+-+		return -1;
+-+	}
+-+	return 0;
+-+}
+-+
+-+static void _set_gpio_direction(struct gpio_bank *bank, int gpio, int is_input)
+-+{
+-+	void *reg;
+-+	u32 l;
+-+
+-+	reg = bank->base + OMAP4_GPIO_OE;
+-+	l = __raw_readl(reg);
+-+	if (is_input)
+-+		l |= 1 << gpio;
+-+	else
+-+		l &= ~(1 << gpio);
+-+	__raw_writel(l, reg);
+-+}
+-+
+-+void omap_set_gpio_direction(int gpio, int is_input)
+-+{
+-+	struct gpio_bank *bank;
+-+
+-+	if (check_gpio(gpio) < 0)
+-+		return;
+-+	bank = get_gpio_bank(gpio);
+-+	_set_gpio_direction(bank, get_gpio_index(gpio), is_input);
+-+}
+-+
+-+static void _set_gpio_dataout(struct gpio_bank *bank, int gpio, int enable)
+-+{
+-+	if (enable)
+-+		__raw_writel(1 << gpio, bank->base + OMAP4_GPIO_SETDATAOUT);
+-+	else
+-+		__raw_writel(1 << gpio, bank->base + OMAP4_GPIO_CLEARDATAOUT);
+-+}
+-+
+-+void omap_set_gpio_dataout(int gpio, int enable)
+-+{
+-+	struct gpio_bank *bank;
+-+
+-+	if (check_gpio(gpio) < 0)
+-+		return;
+-+	bank = get_gpio_bank(gpio);
+-+	_set_gpio_dataout(bank, get_gpio_index(gpio), enable);
+-+}
+-+
+-+int omap_get_gpio_datain(int gpio)
+-+{
+-+	struct gpio_bank *bank;
+-+
+-+	if (check_gpio(gpio) < 0)
+-+		return -EINVAL;
+-+	bank = get_gpio_bank(gpio);
+-+	return (__raw_readl(bank->base + OMAP4_GPIO_DATAIN)
+-+		& (1 << get_gpio_index(gpio))) != 0;
+-+}
+-+
+-+static void _reset_gpio(struct gpio_bank *bank, int gpio)
+-+{
+-+	_set_gpio_direction(bank, get_gpio_index(gpio), 1);
+-+}
+-+
+-+int omap_request_gpio(int gpio)
+-+{
+-+	if (check_gpio(gpio) < 0)
+-+		return -EINVAL;
+-+
+-+	return 0;
+-+}
+-+
+-+void omap_free_gpio(int gpio)
+-+{
+-+	struct gpio_bank *bank;
+-+
+-+	if (check_gpio(gpio) < 0)
+-+		return;
+-+	bank = get_gpio_bank(gpio);
+-+
+-+	_reset_gpio(bank, gpio);
+-+}
+-diff --git a/arch/arm/include/asm/arch-omap4/gpio.h b/arch/arm/include/asm/arch-omap4/gpio.h
+-new file mode 100644
+-index 0000000..d4dbea4
+---- /dev/null
+-+++ b/arch/arm/include/asm/arch-omap4/gpio.h
+-@@ -0,0 +1,93 @@
+-+/*
+-+ * Copyright (c) 2009 Wind River Systems, Inc.
+-+ * Tom Rix <Tom.Rix@windriver.com>
+-+ *
+-+ * This program is free software; you can redistribute it and/or
+-+ * modify it under the terms of the GNU General Public License as
+-+ * published by the Free Software Foundation; either version 2 of
+-+ * the License, or (at your option) any later version.
+-+ *
+-+ * This program is distributed in the hope that it will be useful,
+-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-+ * GNU General Public License for more details.
+-+ *
+-+ * You should have received a copy of the GNU General Public License
+-+ * along with this program; if not, write to the Free Software
+-+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+-+ * MA 02111-1307 USA
+-+ *
+-+ * This work is derived from the linux 2.6.27 kernel source
+-+ * To fetch, use the kernel repository
+-+ * git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
+-+ * Use the v2.6.27 tag.
+-+ *
+-+ * Below is the original's header including its copyright
+-+ *
+-+ *  linux/arch/arm/plat-omap/gpio.c
+-+ *
+-+ * Support functions for OMAP GPIO
+-+ *
+-+ * Copyright (C) 2003-2005 Nokia Corporation
+-+ * Written by Juha Yrjölä <juha.yrjola@nokia.com>
+-+ *
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License version 2 as
+-+ * published by the Free Software Foundation.
+-+ */
+-+#ifndef _GPIO_H
+-+#define _GPIO_H
+-+
+-+#define OMAP4_GPIO_REVISION		0x0000
+-+#define OMAP4_GPIO_SYSCONFIG		0x0010
+-+#define OMAP4_GPIO_EOI			0x0020
+-+#define OMAP4_GPIO_IRQSTATUSRAW0	0x0024
+-+#define OMAP4_GPIO_IRQSTATUSRAW1	0x0028
+-+#define OMAP4_GPIO_IRQSTATUS0		0x002c
+-+#define OMAP4_GPIO_IRQSTATUS1		0x0030
+-+#define OMAP4_GPIO_IRQSTATUSSET0	0x0034
+-+#define OMAP4_GPIO_IRQSTATUSSET1	0x0038
+-+#define OMAP4_GPIO_IRQSTATUSCLR0	0x003c
+-+#define OMAP4_GPIO_IRQSTATUSCLR1	0x0040
+-+#define OMAP4_GPIO_IRQWAKEN0		0x0044
+-+#define OMAP4_GPIO_IRQWAKEN1		0x0048
+-+#define OMAP4_GPIO_SYSSTATUS		0x0114
+-+#define OMAP4_GPIO_IRQENABLE1		0x011c
+-+#define OMAP4_GPIO_WAKE_EN		0x0120
+-+#define OMAP4_GPIO_IRQSTATUS2		0x0128
+-+#define OMAP4_GPIO_IRQENABLE2		0x012c
+-+#define OMAP4_GPIO_CTRL			0x0130
+-+#define OMAP4_GPIO_OE			0x0134
+-+#define OMAP4_GPIO_DATAIN		0x0138
+-+#define OMAP4_GPIO_DATAOUT		0x013c
+-+#define OMAP4_GPIO_LEVELDETECT0		0x0140
+-+#define OMAP4_GPIO_LEVELDETECT1		0x0144
+-+#define OMAP4_GPIO_RISINGDETECT		0x0148
+-+#define OMAP4_GPIO_FALLINGDETECT	0x014c
+-+#define OMAP4_GPIO_DEBOUNCENABLE	0x0150
+-+#define OMAP4_GPIO_DEBOUNCINGTIME	0x0154
+-+#define OMAP4_GPIO_CLEARIRQENABLE1	0x0160
+-+#define OMAP4_GPIO_SETIRQENABLE1	0x0164
+-+#define OMAP4_GPIO_CLEARWKUENA		0x0180
+-+#define OMAP4_GPIO_SETWKUENA		0x0184
+-+#define OMAP4_GPIO_CLEARDATAOUT		0x0190
+-+#define OMAP4_GPIO_SETDATAOUT		0x0194
+-+
+-+struct gpio_bank {
+-+	void *base;
+-+};
+-+
+-+/* This is the interface */
+-+
+-+/* Request a gpio before using it */
+-+int omap_request_gpio(int gpio);
+-+/* Reset and free a gpio after using it */
+-+void omap_free_gpio(int gpio);
+-+/* Sets the gpio as input or output */
+-+void omap_set_gpio_direction(int gpio, int is_input);
+-+/* Set or clear a gpio output */
+-+void omap_set_gpio_dataout(int gpio, int enable);
+-+/* Get the value of a gpio input */
+-+int omap_get_gpio_datain(int gpio);
+-+
+-+#endif /* _GPIO_H_ */
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0032-omap4-add-support-for-EHCI.patch b/recipes-bsp/u-boot/u-boot/2011.06/0032-omap4-add-support-for-EHCI.patch
+deleted file mode 100644
+index 9491431..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0032-omap4-add-support-for-EHCI.patch
++++ /dev/null
+@@ -1,322 +0,0 @@
+-From a2536d64065297279726a71e0af04a5f677f675c Mon Sep 17 00:00:00 2001
+-From: Gilles Chanteperdrix <gilles.chanteperdrix@xenomai.org>
+-Date: Mon, 9 May 2011 23:04:50 +0200
+-Subject: [PATCH 32/35] omap4: add support for EHCI
+-
+-As board may need some specific support, implement inner functions
+-to be called by the boards implementaions of ehci_hcd_start,
+-ehci_hcd_stop.
+-
+-Signed-off-by: Gilles Chanteperdrix <gilles.chanteperdrix@xenomai.org>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- arch/arm/include/asm/arch-omap4/ehci.h |    8 +
+- drivers/usb/host/Makefile              |    1 +
+- drivers/usb/host/ehci-omap4.c          |  268 ++++++++++++++++++++++++++++++++
+- 3 files changed, 277 insertions(+), 0 deletions(-)
+- create mode 100644 arch/arm/include/asm/arch-omap4/ehci.h
+- create mode 100644 drivers/usb/host/ehci-omap4.c
+-
+-diff --git a/arch/arm/include/asm/arch-omap4/ehci.h b/arch/arm/include/asm/arch-omap4/ehci.h
+-new file mode 100644
+-index 0000000..fc84f6a
+---- /dev/null
+-+++ b/arch/arm/include/asm/arch-omap4/ehci.h
+-@@ -0,0 +1,8 @@
+-+#ifndef EHCI_H
+-+#define EHCI_H
+-+
+-+int omap4_ehci_hcd_init(void);
+-+
+-+int omap4_ehci_hcd_stop(void);
+-+
+-+#endif /* EHCI_H */
+-diff --git a/drivers/usb/host/Makefile b/drivers/usb/host/Makefile
+-index 51b2494..5a5b971 100644
+---- a/drivers/usb/host/Makefile
+-+++ b/drivers/usb/host/Makefile
+-@@ -46,6 +46,7 @@ COBJS-$(CONFIG_USB_EHCI_IXP4XX) += ehci-ixp.o
+- COBJS-$(CONFIG_USB_EHCI_KIRKWOOD) += ehci-kirkwood.o
+- COBJS-$(CONFIG_USB_EHCI_PCI) += ehci-pci.o
+- COBJS-$(CONFIG_USB_EHCI_VCT) += ehci-vct.o
+-+COBJS-$(CONFIG_USB_EHCI_OMAP4) += ehci-omap4.o
+- 
+- COBJS	:= $(COBJS-y)
+- SRCS	:= $(COBJS:.o=.c)
+-diff --git a/drivers/usb/host/ehci-omap4.c b/drivers/usb/host/ehci-omap4.c
+-new file mode 100644
+-index 0000000..19cd286
+---- /dev/null
+-+++ b/drivers/usb/host/ehci-omap4.c
+-@@ -0,0 +1,268 @@
+-+/*
+-+ * OMAP4 EHCI port, copied from linux/drivers/usb/host/ehci-omap.c
+-+ *
+-+ * Copyright (C) 2007-2010 Texas Instruments, Inc.
+-+ *	Author: Vikram Pandita <vikram.pandita@ti.com>
+-+ *	Author: Anand Gadiyar <gadiyar@ti.com>
+-+ */
+-+
+-+#include <common.h>
+-+#include <usb.h>
+-+#include <errno.h>
+-+#include <asm/io.h>
+-+#include <asm/arch/gpio.h>
+-+#include <asm/arch/omap4.h>
+-+#include <asm/arch/sys_proto.h>
+-+
+-+#include "ehci.h"
+-+#include "ehci-core.h"
+-+
+-+#define EHCI_BASE (OMAP44XX_L4_CORE_BASE + 0x64C00)
+-+#define UHH_BASE (OMAP44XX_L4_CORE_BASE + 0x64000)
+-+#define TLL_BASE (OMAP44XX_L4_CORE_BASE + 0x62000)
+-+
+-+/* ULPI */
+-+#define ULPI_SET(a)				(a + 1)
+-+#define ULPI_CLR(a)				(a + 2)
+-+
+-+#define ULPI_FUNC_CTRL				0x04
+-+
+-+#define ULPI_FUNC_CTRL_RESET			(1 << 5)
+-+
+-+/* TLL Register Set */
+-+#define	OMAP_USBTLL_REVISION				(0x00)
+-+#define	OMAP_USBTLL_SYSCONFIG				(0x10)
+-+#define	OMAP_USBTLL_SYSCONFIG_CACTIVITY			(1 << 8)
+-+#define	OMAP_USBTLL_SYSCONFIG_SIDLEMODE			(1 << 3)
+-+#define	OMAP_USBTLL_SYSCONFIG_ENAWAKEUP			(1 << 2)
+-+#define	OMAP_USBTLL_SYSCONFIG_SOFTRESET			(1 << 1)
+-+#define	OMAP_USBTLL_SYSCONFIG_AUTOIDLE			(1 << 0)
+-+
+-+#define	OMAP_USBTLL_SYSSTATUS				(0x14)
+-+#define	OMAP_USBTLL_SYSSTATUS_RESETDONE			(1 << 0)
+-+
+-+#define	OMAP_USBTLL_IRQSTATUS				(0x18)
+-+#define	OMAP_USBTLL_IRQENABLE				(0x1C)
+-+
+-+#define	OMAP_TLL_SHARED_CONF				(0x30)
+-+#define	OMAP_TLL_SHARED_CONF_USB_90D_DDR_EN		(1 << 6)
+-+#define	OMAP_TLL_SHARED_CONF_USB_180D_SDR_EN		(1 << 5)
+-+#define	OMAP_TLL_SHARED_CONF_USB_DIVRATION		(1 << 2)
+-+#define	OMAP_TLL_SHARED_CONF_FCLK_REQ			(1 << 1)
+-+#define	OMAP_TLL_SHARED_CONF_FCLK_IS_ON			(1 << 0)
+-+
+-+#define	OMAP_TLL_CHANNEL_CONF(num)			(0x040 + 0x004 * num)
+-+#define	OMAP_TLL_CHANNEL_CONF_ULPINOBITSTUFF		(1 << 11)
+-+#define	OMAP_TLL_CHANNEL_CONF_ULPI_ULPIAUTOIDLE		(1 << 10)
+-+#define	OMAP_TLL_CHANNEL_CONF_UTMIAUTOIDLE		(1 << 9)
+-+#define	OMAP_TLL_CHANNEL_CONF_ULPIDDRMODE		(1 << 8)
+-+#define	OMAP_TLL_CHANNEL_CONF_CHANEN			(1 << 0)
+-+
+-+#define	OMAP_TLL_ULPI_FUNCTION_CTRL(num)		(0x804 + 0x100 * num)
+-+#define	OMAP_TLL_ULPI_INTERFACE_CTRL(num)		(0x807 + 0x100 * num)
+-+#define	OMAP_TLL_ULPI_OTG_CTRL(num)			(0x80A + 0x100 * num)
+-+#define	OMAP_TLL_ULPI_INT_EN_RISE(num)			(0x80D + 0x100 * num)
+-+#define	OMAP_TLL_ULPI_INT_EN_FALL(num)			(0x810 + 0x100 * num)
+-+#define	OMAP_TLL_ULPI_INT_STATUS(num)			(0x813 + 0x100 * num)
+-+#define	OMAP_TLL_ULPI_INT_LATCH(num)			(0x814 + 0x100 * num)
+-+#define	OMAP_TLL_ULPI_DEBUG(num)			(0x815 + 0x100 * num)
+-+#define	OMAP_TLL_ULPI_SCRATCH_REGISTER(num)		(0x816 + 0x100 * num)
+-+
+-+#define OMAP_TLL_CHANNEL_COUNT				3
+-+#define OMAP_TLL_CHANNEL_1_EN_MASK			(1 << 1)
+-+#define OMAP_TLL_CHANNEL_2_EN_MASK			(1 << 2)
+-+#define OMAP_TLL_CHANNEL_3_EN_MASK			(1 << 4)
+-+
+-+/* UHH Register Set */
+-+#define	OMAP_UHH_REVISION				(0x00)
+-+#define	OMAP_UHH_SYSCONFIG				(0x10)
+-+#define	OMAP_UHH_SYSCONFIG_MIDLEMODE			(1 << 12)
+-+#define	OMAP_UHH_SYSCONFIG_CACTIVITY			(1 << 8)
+-+#define	OMAP_UHH_SYSCONFIG_SIDLEMODE			(1 << 3)
+-+#define	OMAP_UHH_SYSCONFIG_ENAWAKEUP			(1 << 2)
+-+#define	OMAP_UHH_SYSCONFIG_SOFTRESET			(1 << 1)
+-+#define	OMAP_UHH_SYSCONFIG_AUTOIDLE			(1 << 0)
+-+
+-+#define	OMAP_UHH_SYSSTATUS				(0x14)
+-+#define	OMAP_UHH_HOSTCONFIG				(0x40)
+-+#define	OMAP_UHH_HOSTCONFIG_ULPI_BYPASS			(1 << 0)
+-+#define	OMAP_UHH_HOSTCONFIG_ULPI_P1_BYPASS		(1 << 0)
+-+#define	OMAP_UHH_HOSTCONFIG_ULPI_P2_BYPASS		(1 << 11)
+-+#define	OMAP_UHH_HOSTCONFIG_ULPI_P3_BYPASS		(1 << 12)
+-+#define OMAP_UHH_HOSTCONFIG_INCR4_BURST_EN		(1 << 2)
+-+#define OMAP_UHH_HOSTCONFIG_INCR8_BURST_EN		(1 << 3)
+-+#define OMAP_UHH_HOSTCONFIG_INCR16_BURST_EN		(1 << 4)
+-+#define OMAP_UHH_HOSTCONFIG_INCRX_ALIGN_EN		(1 << 5)
+-+#define OMAP_UHH_HOSTCONFIG_P1_CONNECT_STATUS		(1 << 8)
+-+#define OMAP_UHH_HOSTCONFIG_P2_CONNECT_STATUS		(1 << 9)
+-+#define OMAP_UHH_HOSTCONFIG_P3_CONNECT_STATUS		(1 << 10)
+-+
+-+/* OMAP4-specific defines */
+-+#define OMAP4_UHH_SYSCONFIG_IDLEMODE_CLEAR		(3 << 2)
+-+#define OMAP4_UHH_SYSCONFIG_NOIDLE			(1 << 2)
+-+
+-+#define OMAP4_UHH_SYSCONFIG_STDBYMODE_CLEAR		(3 << 4)
+-+#define OMAP4_UHH_SYSCONFIG_NOSTDBY			(1 << 4)
+-+#define OMAP4_UHH_SYSCONFIG_SOFTRESET			(1 << 0)
+-+
+-+#define OMAP4_P1_MODE_CLEAR				(3 << 16)
+-+#define OMAP4_P1_MODE_TLL				(1 << 16)
+-+#define OMAP4_P1_MODE_HSIC				(3 << 16)
+-+#define OMAP4_P2_MODE_CLEAR				(3 << 18)
+-+#define OMAP4_P2_MODE_TLL				(1 << 18)
+-+#define OMAP4_P2_MODE_HSIC				(3 << 18)
+-+
+-+#define OMAP_REV2_TLL_CHANNEL_COUNT			2
+-+
+-+#define	OMAP_UHH_DEBUG_CSR				(0x44)
+-+
+-+/* EHCI Register Set */
+-+#define EHCI_INSNREG04					(0xA0)
+-+#define EHCI_INSNREG04_DISABLE_UNSUSPEND		(1 << 5)
+-+#define	EHCI_INSNREG05_ULPI				(0xA4)
+-+#define	EHCI_INSNREG05_ULPI_CONTROL_SHIFT		31
+-+#define	EHCI_INSNREG05_ULPI_PORTSEL_SHIFT		24
+-+#define	EHCI_INSNREG05_ULPI_OPSEL_SHIFT			22
+-+#define	EHCI_INSNREG05_ULPI_REGADD_SHIFT		16
+-+#define	EHCI_INSNREG05_ULPI_EXTREGADD_SHIFT		8
+-+#define	EHCI_INSNREG05_ULPI_WRDATA_SHIFT		0
+-+
+-+int omap4_ehci_hcd_init(void)
+-+{
+-+	unsigned long base = get_timer(0);
+-+	unsigned reg = 0, port = 0;
+-+	int rc;
+-+
+-+	/* USB host, with clock from external phy as port 1 UTMI clock */
+-+	sr32((void *)0x4A009358, 0, 32, 0x01000002);
+-+
+-+	/* FSUSB clk */
+-+	sr32((void *)0x4a0093d0, 0, 32, 0x2);
+-+
+-+	/* USB TLL clock */
+-+	sr32((void *)0x4a009368, 0, 32, 0x1);
+-+
+-+	/* enable the 32K, 48M optional clocks and enable the module */
+-+	sr32((void *)0x4a0093e0, 0, 32, 0x301);
+-+
+-+	/* perform TLL soft reset, and wait until reset is complete */
+-+	writel(OMAP_USBTLL_SYSCONFIG_SOFTRESET,
+-+	       TLL_BASE + OMAP_USBTLL_SYSCONFIG);
+-+
+-+	/* Wait for TLL reset to complete */
+-+	while (!(readl(TLL_BASE + OMAP_USBTLL_SYSSTATUS)
+-+		 & OMAP_USBTLL_SYSSTATUS_RESETDONE))
+-+		if (get_timer(base) > CONFIG_SYS_HZ) {
+-+			printf("OMAP4 EHCI error: timeout resetting TLL\n");
+-+			return -1;
+-+		}
+-+
+-+	writel(OMAP_USBTLL_SYSCONFIG_ENAWAKEUP |
+-+	       OMAP_USBTLL_SYSCONFIG_SIDLEMODE |
+-+	       OMAP_USBTLL_SYSCONFIG_CACTIVITY,
+-+	       TLL_BASE + OMAP_USBTLL_SYSCONFIG);
+-+
+-+	/* Put UHH in NoIdle/NoStandby mode */
+-+	reg = readl(UHH_BASE + OMAP_UHH_SYSCONFIG);
+-+	reg &= ~OMAP4_UHH_SYSCONFIG_IDLEMODE_CLEAR;
+-+	reg |= OMAP4_UHH_SYSCONFIG_NOIDLE;
+-+	reg &= ~OMAP4_UHH_SYSCONFIG_STDBYMODE_CLEAR;
+-+	reg |= OMAP4_UHH_SYSCONFIG_NOSTDBY;
+-+	writel(reg, UHH_BASE + OMAP_UHH_SYSCONFIG);
+-+
+-+	reg = readl(UHH_BASE + OMAP_UHH_HOSTCONFIG);
+-+
+-+	/* setup ULPI bypass and burst configurations */
+-+	reg |= (OMAP_UHH_HOSTCONFIG_INCR4_BURST_EN
+-+			| OMAP_UHH_HOSTCONFIG_INCR8_BURST_EN
+-+			| OMAP_UHH_HOSTCONFIG_INCR16_BURST_EN);
+-+	reg &= ~OMAP_UHH_HOSTCONFIG_INCRX_ALIGN_EN;
+-+
+-+	/* Clear port mode fields for PHY mode*/
+-+	reg &= ~OMAP4_P1_MODE_CLEAR;
+-+	reg &= ~OMAP4_P2_MODE_CLEAR;
+-+	writel(reg, UHH_BASE + OMAP_UHH_HOSTCONFIG);
+-+
+-+	/*
+-+	 * An undocumented "feature" in the OMAP3 EHCI controller,
+-+	 * causes suspended ports to be taken out of suspend when
+-+	 * the USBCMD.Run/Stop bit is cleared (for example when
+-+	 * we do ehci_bus_suspend).
+-+	 * This breaks suspend-resume if the root-hub is allowed
+-+	 * to suspend. Writing 1 to this undocumented register bit
+-+	 * disables this feature and restores normal behavior.
+-+	 */
+-+	writel(EHCI_INSNREG04_DISABLE_UNSUSPEND, EHCI_BASE + EHCI_INSNREG04);
+-+
+-+	reg = ULPI_FUNC_CTRL_RESET
+-+		/* FUNCTION_CTRL_SET register */
+-+		| (ULPI_SET(ULPI_FUNC_CTRL) << EHCI_INSNREG05_ULPI_REGADD_SHIFT)
+-+		/* Write */
+-+		| (2 << EHCI_INSNREG05_ULPI_OPSEL_SHIFT)
+-+		/* PORTn */
+-+		| ((port + 1) << EHCI_INSNREG05_ULPI_PORTSEL_SHIFT)
+-+		/* start ULPI access*/
+-+		| (1 << EHCI_INSNREG05_ULPI_CONTROL_SHIFT);
+-+
+-+	base = get_timer(0);
+-+
+-+	writel(reg, EHCI_BASE + EHCI_INSNREG05_ULPI);
+-+
+-+	/* Wait for ULPI access completion */
+-+	while ((readl(EHCI_BASE + EHCI_INSNREG05_ULPI)
+-+		& (1 << EHCI_INSNREG05_ULPI_CONTROL_SHIFT)))
+-+		if (get_timer(base) > CONFIG_SYS_HZ) {
+-+			printf("OMAP4 EHCI error: timeout resetting phy\n");
+-+			return -1;
+-+		}
+-+
+-+	hccr = (struct ehci_hccr *)(EHCI_BASE);
+-+	hcor = (struct ehci_hcor *)((uint32_t) hccr
+-+			+ HC_LENGTH(ehci_readl(&hccr->cr_capbase)));
+-+	return 0;
+-+}
+-+
+-+int omap4_ehci_hcd_stop(void)
+-+{
+-+	unsigned base = get_timer(0);
+-+
+-+	writel(OMAP4_UHH_SYSCONFIG_SOFTRESET, UHH_BASE + OMAP_UHH_SYSCONFIG);
+-+
+-+#if 0
+-+	/* We get timeout here */
+-+	while (!(readl(UHH_BASE + OMAP_UHH_SYSSTATUS) & (1 << 0)))
+-+		if (get_timer(base) > CONFIG_SYS_HZ) {
+-+			printf("OMAP4 EHCI error: reset UHH 0 timeout\n");
+-+			return -ETIMEDOUT;
+-+		}
+-+
+-+	while (!(readl(UHH_BASE + OMAP_UHH_SYSSTATUS) & (1 << 1)))
+-+		if (get_timer(base) > CONFIG_SYS_HZ) {
+-+			printf("OMAP4 EHCI error: reset UHH 1 timeout\n");
+-+			return -ETIMEDOUT;
+-+		}
+-+
+-+	while (!(readl(UHH_BASE + OMAP_UHH_SYSSTATUS) & (1 << 2)))
+-+		if (get_timer(base) > CONFIG_SYS_HZ) {
+-+			printf("OMAP4 EHCI error: reset UHH 2 timeout\n");
+-+			return -ETIMEDOUT;
+-+		}
+-+#endif
+-+
+-+
+-+	writel((1 << 1), TLL_BASE + OMAP_USBTLL_SYSCONFIG);
+-+
+-+	while (!(readl(TLL_BASE + OMAP_USBTLL_SYSSTATUS) & (1 << 0)))
+-+		if (get_timer(base) > CONFIG_SYS_HZ) {
+-+			printf("OMAP4 EHCI error: reset TLL timeout\n");
+-+			return -ETIMEDOUT;
+-+		}
+-+
+-+	/* Disable clocks */
+-+	sr32((void *)0x4a0093e0, 0, 32, 0);
+-+	sr32((void *)0x4a009368, 0, 32, 0);
+-+	sr32((void *)0x4a0093d0, 0, 32, 0);
+-+	sr32((void *)0x4A009358, 0, 32, 0);
+-+
+-+	return 0;
+-+}
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0033-omap4_panda-add-support-for-EHCI.patch b/recipes-bsp/u-boot/u-boot/2011.06/0033-omap4_panda-add-support-for-EHCI.patch
+deleted file mode 100644
+index c1c1f0f..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0033-omap4_panda-add-support-for-EHCI.patch
++++ /dev/null
+@@ -1,97 +0,0 @@
+-From 0d730b18792cdbd31ec47bd7b5793b26f884c796 Mon Sep 17 00:00:00 2001
+-From: Gilles Chanteperdrix <gilles.chanteperdrix@xenomai.org>
+-Date: Mon, 9 May 2011 23:04:51 +0200
+-Subject: [PATCH 33/35] omap4_panda: add support for EHCI
+-
+-Signed-off-by: Gilles Chanteperdrix <gilles.chanteperdrix@xenomai.org>
+-Signed-off-by: Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- board/ti/panda/Makefile     |    4 ++-
+- board/ti/panda/ehci-panda.c |   59 +++++++++++++++++++++++++++++++++++++++++++
+- 2 files changed, 62 insertions(+), 1 deletions(-)
+- create mode 100644 board/ti/panda/ehci-panda.c
+-
+-diff --git a/board/ti/panda/Makefile b/board/ti/panda/Makefile
+-index 2186403..253567c 100644
+---- a/board/ti/panda/Makefile
+-+++ b/board/ti/panda/Makefile
+-@@ -25,7 +25,9 @@ include $(TOPDIR)/config.mk
+- 
+- LIB	= $(obj)lib$(BOARD).o
+- 
+--COBJS	:= panda.o
+-+COBJS-$(CONFIG_USB_EHCI) += ehci-panda.o
+-+
+-+COBJS	:= $(COBJS-y) panda.o
+- 
+- SRCS	:= $(COBJS:.o=.c)
+- OBJS	:= $(addprefix $(obj),$(COBJS))
+-diff --git a/board/ti/panda/ehci-panda.c b/board/ti/panda/ehci-panda.c
+-new file mode 100644
+-index 0000000..b1e247c
+---- /dev/null
+-+++ b/board/ti/panda/ehci-panda.c
+-@@ -0,0 +1,59 @@
+-+/*
+-+ * OMAP4 EHCI port, copied from linux/drivers/usb/host/ehci-omap.c
+-+ *
+-+ * Copyright (C) 2007-2010 Texas Instruments, Inc.
+-+ *	Author: Vikram Pandita <vikram.pandita@ti.com>
+-+ *	Author: Anand Gadiyar <gadiyar@ti.com>
+-+ */
+-+
+-+#include <asm/arch/gpio.h>
+-+#include <asm/arch/ehci.h>
+-+
+-+#define GPIO_HUB_POWER		1
+-+#define GPIO_HUB_NRESET		62
+-+
+-+int ehci_hcd_init(void)
+-+{
+-+	unsigned long base = get_timer(0);
+-+	unsigned reg = 0, port = 0;
+-+	int rc;
+-+
+-+	/* disable the power to the usb hub prior to init */
+-+	rc = omap_request_gpio(GPIO_HUB_POWER);
+-+	if (rc < 0) {
+-+		printf("Could not request gpio %d\n", GPIO_HUB_POWER);
+-+		return rc;
+-+	}
+-+
+-+	rc = omap_request_gpio(GPIO_HUB_NRESET);
+-+	if (rc < 0) {
+-+		printf("Could not request gpio %d\n", GPIO_HUB_NRESET);
+-+		omap_free_gpio(GPIO_HUB_POWER);
+-+		return rc;
+-+	}
+-+
+-+	omap_set_gpio_direction(GPIO_HUB_POWER, 0);
+-+	omap_set_gpio_dataout(GPIO_HUB_POWER, 0);
+-+	omap_set_gpio_direction(GPIO_HUB_NRESET, 0);
+-+	omap_set_gpio_dataout(GPIO_HUB_NRESET, 0);
+-+	omap_set_gpio_dataout(GPIO_HUB_NRESET, 1);
+-+
+-+	rc = omap4_ehci_hcd_init();
+-+
+-+	if (rc < 0)
+-+		return rc;
+-+
+-+	omap_set_gpio_dataout(GPIO_HUB_POWER, 1);
+-+
+-+	return 0;
+-+}
+-+
+-+int ehci_hcd_stop(void)
+-+{
+-+	omap4_ehci_hcd_stop();
+-+
+-+	omap_set_gpio_dataout(GPIO_HUB_POWER, 0);
+-+	omap_set_gpio_dataout(GPIO_HUB_NRESET, 0);
+-+	omap_free_gpio(GPIO_HUB_POWER);
+-+	omap_free_gpio(GPIO_HUB_NRESET);
+-+}
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0034-omap4_panda-adding-support-for-smsc-and-tftp-boot.patch b/recipes-bsp/u-boot/u-boot/2011.06/0034-omap4_panda-adding-support-for-smsc-and-tftp-boot.patch
+deleted file mode 100644
+index f1ab7fe..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0034-omap4_panda-adding-support-for-smsc-and-tftp-boot.patch
++++ /dev/null
+@@ -1,66 +0,0 @@
+-From 1005120d214c98fde62dba9365e24519de001f50 Mon Sep 17 00:00:00 2001
+-From: Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>
+-Date: Thu, 19 May 2011 10:17:15 -0300
+-Subject: [PATCH 34/35] omap4_panda: adding support for smsc and tftp boot
+-
+-Signed-off-by: Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- include/configs/omap4_panda.h |   20 +++++++++++++++++++-
+- 1 files changed, 19 insertions(+), 1 deletions(-)
+-
+-diff --git a/include/configs/omap4_panda.h b/include/configs/omap4_panda.h
+-index b4e7f41..0fcdf46 100644
+---- a/include/configs/omap4_panda.h
+-+++ b/include/configs/omap4_panda.h
+-@@ -120,6 +120,19 @@
+- #define CONFIG_USB_DEVICE		1
+- #define CONFIG_USB_TTY			1
+- #define CONFIG_SYS_CONSOLE_IS_IN_ENV	1
+-+#define CONFIG_CMD_USB			1
+-+#define CONFIG_USB_STORAGE		1
+-+#define CONFIG_USB_HOST_ETHER		1
+-+#define CONFIG_USB_EHCI			1
+-+#define CONFIG_USB_EHCI_OMAP4		1
+-+#define CONFIG_USB_HOST			1
+-+#define CONFIG_USB_ETHER_SMSC95XX	1
+-+
+-+/* Ethernet */
+-+#define CONFIG_NET_MULTI		1
+-+#define CONFIG_CMD_PING			1
+-+#define CONFIG_CMD_DHCP			1
+-+#define CONFIG_BOOTFILE			"uImage"
+- 
+- /* Flash */
+- #define CONFIG_SYS_NO_FLASH	1
+-@@ -134,7 +147,6 @@
+- #define CONFIG_CMD_MMC		/* MMC support                  */
+- 
+- /* Disabled commands */
+--#undef CONFIG_CMD_NET
+- #undef CONFIG_CMD_NFS
+- #undef CONFIG_CMD_FPGA		/* FPGA configuration Support   */
+- #undef CONFIG_CMD_IMLS		/* List all found images        */
+-@@ -152,6 +164,8 @@
+- 	"console=ttyS2,115200n8\0" \
+- 	"usbtty=cdc_acm\0" \
+- 	"vram=16M\0" \
+-+	"usbethaddr=00:02:03:04:05:06\0" \
+-+	"hostname=panda\0" \
+- 	"mmcdev=0\0" \
+- 	"mmcroot=/dev/mmcblk0p2 rw\0" \
+- 	"mmcrootfstype=ext3 rootwait\0" \
+-@@ -176,6 +190,10 @@
+- 				"run mmcboot; " \
+- 			"fi; " \
+- 		"fi; " \
+-+	"fi; " \
+-+	"if usb start; then " \
+-+		"bootp; "\
+-+		"source ${loadaddr};" \
+- 	"fi"
+- 
+- #define CONFIG_AUTO_COMPLETE		1
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/2011.06/0035-omap4_panda-use-uImage.panda-for-tftp.patch b/recipes-bsp/u-boot/u-boot/2011.06/0035-omap4_panda-use-uImage.panda-for-tftp.patch
+deleted file mode 100644
+index c4d2058..0000000
+--- a/recipes-bsp/u-boot/u-boot/2011.06/0035-omap4_panda-use-uImage.panda-for-tftp.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From b2ed58548de12a9bd9b23f51ade86793ae44b74f Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Mon, 11 Jul 2011 09:47:17 +0200
+-Subject: [PATCH 35/35] omap4_panda: use uImage.panda for tftp
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- include/configs/omap4_panda.h |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/include/configs/omap4_panda.h b/include/configs/omap4_panda.h
+-index 0fcdf46..454a6b0 100644
+---- a/include/configs/omap4_panda.h
+-+++ b/include/configs/omap4_panda.h
+-@@ -132,7 +132,7 @@
+- #define CONFIG_NET_MULTI		1
+- #define CONFIG_CMD_PING			1
+- #define CONFIG_CMD_DHCP			1
+--#define CONFIG_BOOTFILE			"uImage"
+-+#define CONFIG_BOOTFILE			"uImage.panda"
+- 
+- /* Flash */
+- #define CONFIG_SYS_NO_FLASH	1
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot/omap3-touchbook/fw_env.config b/recipes-bsp/u-boot/u-boot/omap3-touchbook/fw_env.config
+deleted file mode 100644
+index a7bfec1..0000000
+--- a/recipes-bsp/u-boot/u-boot/omap3-touchbook/fw_env.config
++++ /dev/null
+@@ -1,6 +0,0 @@
+-# Configuration file for fw_(printenv/saveenv) utility.
+-# Up to two entries are valid, in this case the redundand
+-# environment sector is assumed present.
+-
+-# MTD device name	Device offset	Env. size	Flash sector size
+-/dev/mtd2		0x0000		0x20000		0x20000
+diff --git a/recipes-bsp/u-boot/u-boot/touchbook-config.patch b/recipes-bsp/u-boot/u-boot/touchbook-config.patch
+deleted file mode 100644
+index 9af49bf..0000000
+--- a/recipes-bsp/u-boot/u-boot/touchbook-config.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From eb13d25ad907314a5dd712ad7de59ca260968e61 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Sat, 8 Jan 2011 19:17:24 +0100
+-Subject: [PATCH 10/10] touchbook-config.patch
+-
+----
+- board/omap3/beagle/beagle.c |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/board/omap3/beagle/beagle.c b/board/omap3/beagle/beagle.c
+-index d5ec63e..cc6e20d 100644
+---- a/board/omap3/beagle/beagle.c
+-+++ b/board/omap3/beagle/beagle.c
+-@@ -186,7 +186,7 @@ int board_init(void)
+- 
+- 	gpmc_init(); /* in SRAM or SDRAM, finish GPMC */
+- 	/* board id for Linux */
+--	gd->bd->bi_arch_number = MACH_TYPE_OMAP3_BEAGLE;
+-+	gd->bd->bi_arch_number = 2393;
+- 	/* boot param addr */
+- 	gd->bd->bi_boot_params = (OMAP34XX_SDRC_CS0 + 0x100);
+- 
+--- 
+-1.6.6.1
+-
+diff --git a/recipes-bsp/u-boot/u-boot_2011.06.bb b/recipes-bsp/u-boot/u-boot_2011.06.bb
+deleted file mode 100644
+index 4fa8f07..0000000
+--- a/recipes-bsp/u-boot/u-boot_2011.06.bb
++++ /dev/null
+@@ -1,51 +0,0 @@
+-require u-boot.inc
+-
+-# No patches for other machines yet
+-COMPATIBLE_MACHINE = "(beagleboard)"
+-
+-SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
+-           file://2011.06/0001-OMAP3-Beagle-Pin-Mux-initialization-glitch-fix.patch \
+-           file://2011.06/0002-OMAP-Remove-omapfb.debug-y-from-Beagle-and-Overo-env.patch \
+-           file://2011.06/0003-OMAP3-beagle-pass-expansionboard-name-in-bootargs.patch \
+-           file://2011.06/0004-beagleboard-add-support-for-xM-revision-C.patch \
+-           file://2011.06/0005-Add-support-for-SMSC95XX-USB-2.0-10-100MBit-Ethernet.patch \
+-           file://2011.06/0006-Add-Ethernet-hardware-MAC-address-framework-to-usbne.patch \
+-           file://2011.06/0007-Add-documentation-for-USB-Host-Networking.patch \
+-           file://2011.06/0008-dm3730-enable-dpll5.patch \
+-           file://2011.06/0009-beagleboard-enable-HUB-power-on-XM-boards.patch \
+-           file://2011.06/0010-beagleboard-turn-off-clocks-in-ehci_stop.patch \
+-           file://2011.06/0011-beagleboard-enable-networking.patch \
+-           file://2011.06/0012-beagleboard-switch-to-ttyO2-as-console.patch \
+-           file://2011.06/0013-beagleboard-load-kernel-from-MMC-ext-not-FAT.patch \
+-           file://2011.06/0014-beagleboard-enable-asix-driver-and-dhcp.patch \
+-           file://2011.06/0015-beagleboard-hardcode-MAC-for-onboard-SMSC-and-use-uI.patch \
+-           file://2011.06/0016-beagleboard-decrease-bootdelay-to-2-seconds.patch \
+-           file://2011.06/0017-USB-Remove-__attribute__-packed-for-struct-ehci_hccr.patch \
+-           file://2011.06/0018-usb-Some-EHCI-chipsets-are-slow-to-respond.patch \
+-           file://2011.06/0019-OMAP3-Add-DSS-driver-for-OMAP3.patch \
+-           file://2011.06/0020-video-DSS-makefile-update.patch \
+-           file://2011.06/0021-BeagleBoard-Configure-DVI-S-video.patch \
+-           file://2011.06/0022-BeagleBoard-config-enable-DSS.patch \
+-           file://2011.06/0023-BeagleBoard-Added-userbutton-command.patch \
+-           file://2011.06/0024-Corrected-LED-name-match-finding-avoiding-extraneous.patch \
+-           file://2011.06/0025-BeagleBoard-fix-LED-0-1-in-driver.patch \
+-           file://2011.06/0026-led-added-cmd_led-to-Makefile.patch \
+-           file://2011.06/0027-led-correct-off-on-locations-in-structure.patch \
+-           file://2011.06/0028-BeagleBoard-config-make-mtest-run.patch \
+-           file://2011.06/0029-BeagleBoard-config-increase-command-line-functionali.patch \
+-           file://2011.06/0030-BeagleBoard-config-add-optargs-buddy-camera.patch \
+-           file://2011.06/0031-omap4-add-support-for-gpios.patch \
+-           file://2011.06/0032-omap4-add-support-for-EHCI.patch \
+-           file://2011.06/0033-omap4_panda-add-support-for-EHCI.patch \
+-           file://2011.06/0034-omap4_panda-adding-support-for-smsc-and-tftp-boot.patch \
+-           file://2011.06/0035-omap4_panda-use-uImage.panda-for-tftp.patch \
+-           file://fw_env.config \
+-          "
+-# v2011.06 tag -> b1af6f532e0d348b153d5c148369229d24af361a
+-SRCREV = "b1af6f532e0d348b153d5c148369229d24af361a"
+-PV = "2011.06"
+-PR = "r1"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
+-
+-S = "${WORKDIR}/git"
 -- 
 1.8.1.5
 
