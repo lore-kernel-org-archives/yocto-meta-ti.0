@@ -1,22 +1,22 @@
 Return-Path: <denis@denix.org>
-Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
-	[206.46.173.5])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2D2EAE01410
-	for <meta-ti@yoctoproject.org>; Mon, 18 Mar 2013 11:59:18 -0700 (PDT)
+Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
+	[206.46.173.13])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7BEC6E01465
+	for <meta-ti@yoctoproject.org>; Mon, 18 Mar 2013 12:04:51 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173005.mailsrvcs.net
+	by vms173013.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MJV004C4E2IXAS2@vms173005.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 18 Mar 2013 13:59:07 -0500 (CDT)
+	2009)) with ESMTPA id <0MJV006LNEBPET20@vms173013.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 18 Mar 2013 14:04:38 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 8C68020077; Mon,
-	18 Mar 2013 14:59:06 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 9FE9C20077; Mon,
+	18 Mar 2013 15:04:37 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Mon, 18 Mar 2013 14:59:06 -0400
-Message-id: <1363633146-22749-1-git-send-email-denis@denix.org>
+Date: Mon, 18 Mar 2013 15:04:31 -0400
+Message-id: <1363633471-23367-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.8.1.5
-Subject: [PATCHv2 2/3] ti33x: switch default preference to ti-staging tree
+Subject: [PATCHv2 1/3] linux-ti-staging: update to the latest merge of 3.8.3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,61 +29,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Mar 2013 18:59:18 -0000
+X-List-Received-Date: Mon, 18 Mar 2013 19:04:51 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
-SDKs or other users of meta-ti can still use one of the older 3.2 recipes for
-stability or featureset, by setting PREFERRED_PROVIDER in distro or local config.
+Switch to using the official git.ti.com URL instead of temp gitorious.ti.com
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
-v2 - make unified change in SOC include file
+v2 - switch from gitorious.ti.com to git.ti.com
 
- conf/machine/am335x-evm.conf   | 2 --
- conf/machine/beaglebone.conf   | 2 --
- conf/machine/include/ti33x.inc | 2 +-
- 3 files changed, 1 insertion(+), 5 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_git.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
-index 91f7e54..21e79a2 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/am335x-evm.conf
-@@ -13,8 +13,6 @@ IMAGE_FSTYPES += "ubi tar.gz"
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index dfef76d..cfd4da0 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -39,13 +39,13 @@ S = "${WORKDIR}/git"
  
- SERIAL_CONSOLE = "115200 ttyO0"
+ BRANCH = "ti-linux-3.8.y"
  
--PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
--
- # UBI information.  Note that this is board and kernel specific.  Changes
- # in your kernel port may require changes in these variables.  For more
- # details about this board please see
-diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-index f4112f5..8a83a1a 100644
---- a/conf/machine/beaglebone.conf
-+++ b/conf/machine/beaglebone.conf
-@@ -7,8 +7,6 @@ require conf/machine/include/ti33x.inc
- # Only has DVI connector for external screen
- GUI_MACHINE_CLASS = "bigscreen"
+-SRCREV = "e69f39916783a559c499e264359edea315ef44fd"
+-PV = "3.8.2"
++SRCREV = "ed93a28fb0b1dc28cc252ee87f6fce3e07bf23fe"
++PV = "3.8.3"
  
--PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
--
- IMAGE_FSTYPES += "tar.gz"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
  
- SERIAL_CONSOLE = "115200 ttyO0"
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index f00c797..62afe16 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -19,7 +19,7 @@ GUI_MACHINE_CLASS = "bigscreen"
- MACHINE_KERNEL_PR = "r18"
+-SRC_URI = "git://gitorious.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
++SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+           "
  
- # Default providers, may need to override for specific machines
--PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
-+PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
- PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
- 
- KERNEL_IMAGETYPE = "uImage"
 -- 
 1.8.1.5
 
