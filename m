@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E7823E0147A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8BA5E0147E
 	for <meta-ti@yoctoproject.org>; Mon, 18 Mar 2013 16:25:12 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1C38A52979; Mon, 18 Mar 2013 23:25:11 +0000 (UTC)
+	id A075C52A3B; Mon, 18 Mar 2013 23:25:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130318232512.1C38A52979@arago-project.org>
-Date: Mon, 18 Mar 2013 23:25:11 +0000 (UTC)
+Message-Id: <20130318232512.A075C52A3B@arago-project.org>
+Date: Mon, 18 Mar 2013 23:25:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to the latest merge of 3.8.3
+Subject: Denys Dmytriyenko : ti33x: switch default preference to ti-staging tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,46 +26,66 @@ X-List-Received-Date: Mon, 18 Mar 2013 23:25:13 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 164d09c5a646612f716aff081f27d25a62708292
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=164d09c5a646612f716aff081f27d25a62708292
+Branch: master
+Commit: 809e2d46f239b67c8d2ec953a52998b3fb7a0f40
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=809e2d46f239b67c8d2ec953a52998b3fb7a0f40
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 14:33:32 2013 -0400
+Date:   Mon Mar 18 14:34:15 2013 -0400
 
-linux-ti-staging: update to the latest merge of 3.8.3
+ti33x: switch default preference to ti-staging tree
 
-Switch to using the official git.ti.com URL instead of temp gitorious.ti.com
+SDKs or other users of meta-ti can still use one of the older 3.2 recipes for
+stability or featureset, by setting PREFERRED_PROVIDER in distro or local config.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_git.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ conf/machine/am335x-evm.conf   |    2 --
+ conf/machine/beaglebone.conf   |    2 --
+ conf/machine/include/ti33x.inc |    2 +-
+ 3 files changed, 1 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index dfef76d..cfd4da0 100644
---- a/recipes-kernel/linux/linux-ti-staging_git.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -39,13 +39,13 @@ S = "${WORKDIR}/git"
+diff --git a/conf/machine/am335x-evm.conf b/conf/machine/am335x-evm.conf
+index 91f7e54..21e79a2 100644
+--- a/conf/machine/am335x-evm.conf
++++ b/conf/machine/am335x-evm.conf
+@@ -13,8 +13,6 @@ IMAGE_FSTYPES += "ubi tar.gz"
  
- BRANCH = "ti-linux-3.8.y"
+ SERIAL_CONSOLE = "115200 ttyO0"
  
--SRCREV = "e69f39916783a559c499e264359edea315ef44fd"
--PV = "3.8.2"
-+SRCREV = "ed93a28fb0b1dc28cc252ee87f6fce3e07bf23fe"
-+PV = "3.8.3"
+-PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+-
+ # UBI information.  Note that this is board and kernel specific.  Changes
+ # in your kernel port may require changes in these variables.  For more
+ # details about this board please see
+diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
+index f4112f5..8a83a1a 100644
+--- a/conf/machine/beaglebone.conf
++++ b/conf/machine/beaglebone.conf
+@@ -7,8 +7,6 @@ require conf/machine/include/ti33x.inc
+ # Only has DVI connector for external screen
+ GUI_MACHINE_CLASS = "bigscreen"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+-PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
+-
+ IMAGE_FSTYPES += "tar.gz"
  
--SRC_URI = "git://gitorious.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-+SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
-           "
+ SERIAL_CONSOLE = "115200 ttyO0"
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index f00c797..62afe16 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -19,7 +19,7 @@ GUI_MACHINE_CLASS = "bigscreen"
+ MACHINE_KERNEL_PR = "r18"
  
+ # Default providers, may need to override for specific machines
+-PREFERRED_PROVIDER_virtual/kernel = "linux-ti33x-psp"
++PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
+ 
+ KERNEL_IMAGETYPE = "uImage"
 
 
