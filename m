@@ -1,41 +1,34 @@
-Return-Path: <grunzasr@comcast.net>
-Received: from qmta03.westchester.pa.mail.comcast.net
-	(qmta03.westchester.pa.mail.comcast.net [76.96.62.32])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D4A8BE006AD
-	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 11:08:53 -0700 (PDT)
-Received: from omta12.westchester.pa.mail.comcast.net ([76.96.62.44])
-	by qmta03.westchester.pa.mail.comcast.net with comcast
-	id DMwQ1l0040xGWP853W8txo; Tue, 19 Mar 2013 18:08:53 +0000
-Received: from [127.0.0.1] ([71.225.124.244])
-	by omta12.westchester.pa.mail.comcast.net with comcast
-	id DW8s1l0145GVvnK3YW8spt; Tue, 19 Mar 2013 18:08:53 +0000
-Message-ID: <5148A9B4.5060702@comcast.net>
-Date: Tue, 19 Mar 2013 14:08:52 -0400
-From: Steven Grunza <grunzasr@comcast.net>
-User-Agent: Mozilla/5.0 (Windows NT 5.1;
-	rv:17.0) Gecko/20130307 Thunderbird/17.0.4
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B3C6DE006AD
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 11:09:28 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2JI9Smq028784
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 13:09:28 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2JI9SCI022081
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 13:09:28 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 19 Mar 2013 13:09:28 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id r2JI9ROg022858;
+	Tue, 19 Mar 2013 13:09:27 -0500
+Date: Tue, 19 Mar 2013 14:09:27 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Cooper Jr., Franklin" <fcooper@ti.com>
+Message-ID: <20130319180927.GS32759@edge>
+References: <8F29D6B095ED194EA1980491A5E029710C3EA216@DFLE09.ent.ti.com>
+	<7D46E86EC0A8354091174257B2FED101594850C5@DLEE11.ent.ti.com>
+	<8F29D6B095ED194EA1980491A5E029710C3EA290@DFLE09.ent.ti.com>
 MIME-Version: 1.0
-CC: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-References: <514873B9.3020500@comcast.net> <20130319172138.GQ32759@edge>
-In-Reply-To: <20130319172138.GQ32759@edge>
-X-Antivirus: avast! (VPS 130319-0, 03/19/2013), Outbound message
-X-Antivirus-Status: Clean
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=comcast.net;
-	s=q20121106; t=1363716533;
-	bh=/0U+1sCaYjg/DxZqn5K/0882tY6mu1R6fCYmWu7QFCs=;
-	h=Received:Received:Message-ID:Date:From:Reply-To:MIME-Version:
-	Subject:Content-Type;
-	b=PROc+lMyZSA4+sSABez9KKI8MX7+SBcGPHVfrYgzdck0fxGpNexKyB/fAilV0Z8QK
-	tiwUk4GcleqXhL85GdrFH63wX36QWkhlOnS4oUXWYsYk6pFnAiPHJECXJLAIUZ5/of
-	TBvSvijl+xt8npxhcSQCwmD/yx7hAhIiG1Z8O5qGfp9XJiEj3d8/Jo6PWBa2ECfXvz
-	Sbds/ZWxPX6oaepW7ow7P2FmFfg30h/GQaLfClQbxbKSOo+h+FC91uIHemCzsKr2vk
-	wbFr6lBVd6x2RHByAP6McCE+B6OimMVaTWfOPFOZjkYzX0BMfFIwkadbiqpu3YyI3A
-	2/M+dikUnmEdQ==
-Subject: Re: Is this the correct list for AM3517 EVM questions?
+In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C3EA290@DFLE09.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Lastest Patches
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
-Reply-To: grunzasr@comcast.net
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -45,34 +38,118 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2013 18:08:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 Mar 2013 18:09:28 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On 3/19/2013 1:21 PM, Denys Dmytriyenko wrote:
-> On Tue, Mar 19, 2013 at 10:18:33AM -0400, Steven Grunza wrote:
->> Hello,
->>    I have a LogicPD Zoom AM3517 experimenters board.  Is this the
->> correct list to ask questions about getting Yocto-based software
->> running on this board?
-> Yes, this is one of the correct lists for asking questions about AM3517 board
-> when used with the Yocto Project. :) As this is the mailing list for meta-ti,
-> which is the official Texas Instruments BSP layer for OpenEmbedded-Core and
-> the Yocto Project, and AM3517 is currently one of the supported platforms in
-> meta-ti.
->
-Wonderful.  Can someone point me to information so that I can build a 
-system using the Yocto project and program an SD card with the necessary 
-files to boot my board into Linux?
+Ouch, can we do a proper quoting on public mailing lists, please? I do realise 
+I am top-posting here, but below looks like a one continuous blob of text to 
+me. I even think if each of your replies had been top-posted, it would have 
+looked much better than it is now... :) And "lastest", really? :)
 
-   With all of the S7 DIP switches in the off position (which the AM3517 
-Development Kits User Manual indicates is the default boot from NAND) I 
-don't get any output from the serial UART so my guess is that I've hosed 
-the NAND.
+Anyway, jokes aside, I'll try to reply to individual posts separately.
 
-   For debugging support I have a TI Stellaris LM3S8962 board which has 
-the ability to act as a JTAG debugger to external hardware.  For 
-software I have OpenOCD 0.6.1
+-- 
+Denys
 
 
+On Tue, Mar 19, 2013 at 10:17:41AM -0400, Cooper Jr., Franklin wrote:
+>     
+> 
+>     
+> 
+>    From: Maupin, Chase
+>    Sent: Tuesday, March 19, 2013 9:04 AM
+>    To: Cooper Jr., Franklin; Dmytriyenko, Denys
+>    Cc: meta-ti@yoctoproject.org
+>    Subject: RE: Lastest Patches
+> 
+>     
+> 
+>     
+> 
+>     
+> 
+>    From: meta-ti-bounces@yoctoproject.org
+>    [mailto:meta-ti-bounces@yoctoproject.org] On Behalf Of Cooper Jr.,
+>    Franklin
+>    Sent: Tuesday, March 19, 2013 8:50 AM
+>    To: Dmytriyenko, Denys
+>    Cc: meta-ti@yoctoproject.org
+>    Subject: [meta-ti] Lastest Patches
+> 
+>     
+> 
+>    I am not in favor for some of these new namespace changes for legacy
+>    recipes. There are a lot of history behind those recipes names
+>    (arago-classic) including the PSP version. Old documentation also refer to
+>    that PSP release
+>    http://processors.wiki.ti.com/index.php/DaVinci_PSP_03.21.00.04_Release_Notes
+> 
+>    Ex
+> 
+>    u-boot-am180x: modify am180x specific version to use new namespace feature
+> 
+>    --- a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
+> 
+>    +++ b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
+> 
+>     
+> 
+>    [CEM] So is your opposition the removal of the PSP version?  Sounds like
+>    we need an alignment on "release" recipe names.
+> 
+>     
+> 
+>    FC: Correct. I believe we are aligned for future recipes based on the
+>    super long email thread we recently had J. But I don't think those changes
+>    should apply to these older recipes.
+> 
+>     
+> 
+>    I don't have a problem with adding the machine name to the recipe
+>    especially if COMPATIBLE_MACHINE is set for only one machine.
+> 
+>     
+> 
+>    Also changing the ti33x PREFERRED_PROVIDER to a kernel that is still being
+>    developed (not released) is another problem.
+> 
+>    Ex:
+> 
+>    ti33x: switch default preference to ti-staging tree
+> 
+>    PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+> 
+>     
+> 
+>    [CEM] As Denys pointed out the arago.conf sets this to the old recipe for
+>    now while using an Arago distribution.  Making the default point to the
+>    kernel being developed makes it easy for people to work with that kernel
+>    and provide feedback.  Is you issue that they may not set their build to
+>    use the older kernel (i.e. not using Arago distro) and encounter issues?
+> 
+>     
+> 
+>    FC: So I did notice that Denys didn't make similar changes in meta-arago
+>    so for Arago distributions users nothing has changed. While meta-ti users
+>    weren't using our official kernel in the first place. So to answer your
+>    question yes. But it doesn't affect me so I was just pointing it out for
+>    others.
+> 
+>     
+> 
+>     
+> 
+>    Regards,
+> 
+>    Franklin Cooper Jr.
+> 
+>    Texas Instruments
+> 
+>    Application Engineer
+> 
+>    fcooper@ti.com
+> 
+>     
 
