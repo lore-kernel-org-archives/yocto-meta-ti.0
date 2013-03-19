@@ -1,39 +1,29 @@
-Return-Path: <grunzasr@comcast.net>
-Received: from qmta03.emeryville.ca.mail.comcast.net
-	(qmta03.emeryville.ca.mail.comcast.net [76.96.30.32])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54946E006C2
-	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 07:18:39 -0700 (PDT)
-Received: from omta10.emeryville.ca.mail.comcast.net ([76.96.30.28])
-	by qmta03.emeryville.ca.mail.comcast.net with comcast
-	id DQfn1l0070cQ2SLA3SJepW; Tue, 19 Mar 2013 14:18:38 +0000
-Received: from [127.0.0.1] ([71.225.124.244])
-	by omta10.emeryville.ca.mail.comcast.net with comcast
-	id DSJc1l00Z5GVvnK8WSJda4; Tue, 19 Mar 2013 14:18:38 +0000
-Message-ID: <514873B9.3020500@comcast.net>
-Date: Tue, 19 Mar 2013 10:18:33 -0400
-From: Steven Grunza <grunzasr@comcast.net>
-User-Agent: Mozilla/5.0 (Windows NT 5.1;
-	rv:17.0) Gecko/20130307 Thunderbird/17.0.4
+Return-Path: <chase.maupin@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F003DE006AD
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 08:10:48 -0700 (PDT)
+Received: from dbdp20.itg.ti.com ([172.24.170.38])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2JFAle1009483
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 10:10:47 -0500
+Received: from DBDE71.ent.ti.com (localhost [127.0.0.1])
+	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2JFAk8t005325
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 20:40:46 +0530 (IST)
+Received: from dbdp32.itg.ti.com (172.24.170.251) by DBDE71.ent.ti.com
+	(172.24.170.149) with Microsoft SMTP Server id 14.1.323.3;
+	Tue, 19 Mar 2013 20:40:46 +0530
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2JFAhYJ023846;
+	Tue, 19 Mar 2013 20:40:44 +0530
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 19 Mar 2013 10:10:40 -0500
+Message-ID: <1363705841-9610-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-X-Antivirus: avast! (VPS 130318-1, 03/18/2013), Outbound message
-X-Antivirus-Status: Clean
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=comcast.net;
-	s=q20121106; t=1363702718;
-	bh=TFMZY0kwOaBZk6kFiqyccYQBr9l3fXmx2UjAZC8bdHw=;
-	h=Received:Received:Message-ID:Date:From:Reply-To:MIME-Version:To:
-	Subject:Content-Type;
-	b=oHot9ThHHl5gJ8a/6qvo8fq32FgAa9APqD3NGm4X2zu7uGiHDRSI34ikfLjfEt/4n
-	2TKuWap/pnetgCxZc35K/V/Mxkuojoem8FjLsnsAFgVHSg3iVAgkuPLjKBaI6oYnIR
-	f5OOLE8JfaUyA5ezEEuld+KSn+k0h6Dvt+cLLS5R7Rl4vKx5rSkUBpV0XXUkVcotU9
-	cXtd0pmk07E25F4A41TKa7qQ4It0FCU/z9HMGZNjqjfiLvwyCDTRm+Ag5Imbjvch0h
-	1oqVsvlvTrqzth7j+Rpcnl4LBSa9a7VYpGL637shIAvcUkI6Z8Dc68U2ZgDF4ExN9/
-	YaA/Ls3JoZsww==
-Subject: Is this the correct list for AM3517 EVM questions?
+Subject: [PATCH 1/2] linux-ti-staging: Add OMAP5 support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
-Reply-To: grunzasr@comcast.net
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -43,14 +33,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2013 14:18:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 Mar 2013 15:10:49 -0000
+Content-Type: text/plain
 
-Hello,
-   I have a LogicPD Zoom AM3517 experimenters board.  Is this the 
-correct list to ask questions about getting Yocto-based software running 
-on this board?
+* Add the KERNEL_DEVICETREE definitions for omap5-evm
+* Add the omap-a15 SOC_FAMILY to the list of COMPATIBLE_MACHINEs
 
-Steven G
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging_git.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index cfd4da0..3ff038d 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -32,8 +32,9 @@ DEPENDS_ti33x += "am33x-cm3"
+ # for the specific beaglebone machine.
+ KERNEL_DEVICETREE_ti33x = "arch/arm/boot/dts/am335x-evm.dts arch/arm/boot/dts/am335x-evmsk.dts arch/arm/boot/dts/am335x-bone.dts"
+ KERNEL_DEVICETREE_beaglebone = "arch/arm/boot/dts/am335x-bone.dts"
++KERNEL_DEVICETREE_omap5-evm = "arch/arm/boot/dts/omap5-evm.dts"
+ 
+-COMPATIBLE_MACHINE = "ti33x"
++COMPATIBLE_MACHINE = "ti33x|omap-a15"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+1.7.0.4
+
 
