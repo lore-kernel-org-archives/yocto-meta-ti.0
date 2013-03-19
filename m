@@ -1,36 +1,29 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4A92FE0147E
-	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 04:35:44 -0700 (PDT)
+Return-Path: <fcooper@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CD78BE006CB
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 06:50:25 -0700 (PDT)
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2JBZgLs017772;
-	Tue, 19 Mar 2013 06:35:43 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2JBZg9K006057;
-	Tue, 19 Mar 2013 06:35:42 -0500
-Received: from DLEE74.ent.ti.com (157.170.170.8) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server (TLS) id 14.1.323.3;
-	Tue, 19 Mar 2013 06:35:42 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
-	14.01.0323.003; Tue, 19 Mar 2013 06:35:43 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH 08/19] u-boot-beagleboard: modify beagleboard
-	specific version to use new namespace feature
-Thread-Index: AQHOJDERwKk28TPUUE6kr9DosGLObpis4saQ
-Date: Tue, 19 Mar 2013 11:35:41 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED10159484547@DLEE11.ent.ti.com>
-References: <1363649547-4693-1-git-send-email-denis@denix.org>
-	<1363649547-4693-9-git-send-email-denis@denix.org>
-In-Reply-To: <1363649547-4693-9-git-send-email-denis@denix.org>
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2JDoP3s009578
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 08:50:25 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2JDoNY5028260
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 08:50:25 -0500
+Received: from DFLE09.ent.ti.com ([fe80::3103:58c3:47f:860b]) by
+	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
+	14.02.0342.003; Tue, 19 Mar 2013 08:50:22 -0500
+From: "Cooper Jr., Franklin" <fcooper@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: Lastest Patches
+Thread-Index: Ac4kqLM5prSbVCTZQRm7OlVfP/VQ2Q==
+Date: Tue, 19 Mar 2013 13:50:22 +0000
+Message-ID: <8F29D6B095ED194EA1980491A5E029710C3EA216@DFLE09.ent.ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-Subject: Re: [PATCH 08/19] u-boot-beagleboard: modify beagleboard specific version to use new namespace feature
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Lastest Patches
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,70 +36,155 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2013 11:35:44 -0000
+X-List-Received-Date: Tue, 19 Mar 2013 13:50:26 -0000
 Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
+Content-Type: multipart/alternative;
+	boundary="_000_8F29D6B095ED194EA1980491A5E029710C3EA216DFLE09entticom_"
+
+--_000_8F29D6B095ED194EA1980491A5E029710C3EA216DFLE09entticom_
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-> -----Original Message-----
-> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
-> Sent: Monday, March 18, 2013 6:32 PM
-> To: meta-ti@yoctoproject.org
-> Subject: [meta-ti] [PATCH 08/19] u-boot-beagleboard: modify
-> beagleboard specific version to use new namespace feature
->=20
-> From: Denys Dmytriyenko <denys@ti.com>
->=20
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> ---
->  .../{u-boot_2011.09.bb =3D> u-boot-beagleboard_2011.09.bb}      |
-> 11 ++---------
->  1 file changed, 2 insertions(+), 9 deletions(-)
->  rename recipes-bsp/u-boot/{u-boot_2011.09.bb =3D> u-boot-
-> beagleboard_2011.09.bb} (89%)
+I am not in favor for some of these new namespace changes for legacy recipe=
+s. There are a lot of history behind those recipes names (arago-classic) in=
+cluding the PSP version. Old documentation also refer to that PSP release h=
+ttp://processors.wiki.ti.com/index.php/DaVinci_PSP_03.21.00.04_Release_Note=
+s
 
-I'm wondering if this whole recipe couldn't go and be replaced with the u-b=
-oot-ti-staging recipe.
+Ex
+u-boot-am180x: modify am180x specific version to use new namespace feature
 
->=20
-> diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb b/recipes-
-> bsp/u-boot/u-boot-beagleboard_2011.09.bb
-> similarity index 89%
-> rename from recipes-bsp/u-boot/u-boot_2011.09.bb
-> rename to recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
-> index edacb6c..519df16 100644
-> --- a/recipes-bsp/u-boot/u-boot_2011.09.bb
-> +++ b/recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
-> @@ -1,11 +1,8 @@
-> -require u-boot.inc
-> +require u-boot-ti.inc
->=20
->  PR =3D "r7"
->=20
-> -# SPL build
-> -UBOOT_BINARY =3D "u-boot.img"
-> -UBOOT_IMAGE =3D "u-boot-${MACHINE}-${PV}-${PR}.img"
-> -UBOOT_SYMLINK =3D "u-boot-${MACHINE}.img"
-> +SPL_BINARY =3D "MLO"
->=20
->  # No patches for other machines yet
->  COMPATIBLE_MACHINE =3D "(beagleboard)"
-> @@ -37,7 +34,3 @@ SRC_URI =3D "git://git.denx.de/u-
-> boot.git;protocol=3Dgit \
->            "
->=20
->  SRCREV =3D "fdbe8b9a2d1858ba35dd6214315563ad44d4a0e3"
-> -
-> -LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3D1707d6db1d42237583f50183a5651ecb"
-> -
-> -S =3D "${WORKDIR}/git"
-> --
-> 1.8.1.5
->=20
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+--- a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
 
++++ b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
+
+
+I don't have a problem with adding the machine name to the recipe especiall=
+y if COMPATIBLE_MACHINE is set for only one machine.
+
+Also changing the ti33x PREFERRED_PROVIDER to a kernel that is still being =
+developed (not released) is another problem.
+
+Ex:
+
+ti33x: switch default preference to ti-staging tree
+
+PREFERRED_PROVIDER_virtual/kernel =3D "linux-ti-staging"
+
+
+Regards,
+Franklin Cooper Jr.
+Texas Instruments
+Application Engineer
+fcooper@ti.com<mailto:fcooper@ti.com>
+
+
+--_000_8F29D6B095ED194EA1980491A5E029710C3EA216DFLE09entticom_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{mso-style-priority:99;
+	mso-style-link:"Plain Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+span.PlainTextChar
+	{mso-style-name:"Plain Text Char";
+	mso-style-priority:99;
+	mso-style-link:"Plain Text";
+	font-family:"Calibri","sans-serif";}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri","sans-serif";}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">I am not in favor for some of these new namespace ch=
+anges for legacy recipes. There are a lot of history behind those recipes n=
+ames (arago-classic) including the PSP version. Old documentation also refe=
+r to that PSP release http://processors.wiki.ti.com/index.php/DaVinci_PSP_0=
+3.21.00.04_Release_Notes<o:p></o:p></p>
+<p class=3D"MsoNormal"><br>
+Ex<o:p></o:p></p>
+<p class=3D"MsoNormal">u-boot-am180x: modify am180x specific version to use=
+ new namespace feature<o:p></o:p></p>
+<p class=3D"MsoPlainText">--- a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.=
+00.04.sdk.bb<o:p></o:p></p>
+<p class=3D"MsoPlainText">&#43;&#43;&#43; b/recipes-bsp/u-boot/u-boot-am180=
+x_2010.12.bb<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">I don&#8217;t have a problem with adding the machine=
+ name to the recipe especially if COMPATIBLE_MACHINE is set for only one ma=
+chine.<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Also changing the ti33x PREFERRED_PROVIDER to a kern=
+el that is still being developed (not released) is another problem.<o:p></o=
+:p></p>
+<p class=3D"MsoNormal"><br>
+Ex:<o:p></o:p></p>
+<p class=3D"MsoPlainText">ti33x: switch default preference to ti-staging tr=
+ee<o:p></o:p></p>
+<p class=3D"MsoPlainText">PREFERRED_PROVIDER_virtual/kernel =3D &quot;linux=
+-ti-staging&quot;<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Regards,<o:p></o:p></p>
+<p class=3D"MsoNormal">Franklin Cooper Jr.<o:p></o:p></p>
+<p class=3D"MsoNormal">Texas Instruments<o:p></o:p></p>
+<p class=3D"MsoNormal">Application Engineer<o:p></o:p></p>
+<p class=3D"MsoNormal"><a href=3D"mailto:fcooper@ti.com">fcooper@ti.com</a>=
+<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_8F29D6B095ED194EA1980491A5E029710C3EA216DFLE09entticom_--
