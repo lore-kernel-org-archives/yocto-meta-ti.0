@@ -1,26 +1,27 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C80A7E006AD
-	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 14:52:03 -0700 (PDT)
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2JLq1Fv019862
-	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 16:52:02 -0500
-Received: from DBDE70.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2JLq0WO005425
-	for <meta-ti@yoctoproject.org>; Wed, 20 Mar 2013 03:22:01 +0530 (IST)
-Received: from dbdp32.itg.ti.com (172.24.170.251) by dbde70.ent.ti.com
-	(172.24.170.148) with Microsoft SMTP Server id 14.1.323.3;
-	Wed, 20 Mar 2013 03:22:00 +0530
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2JLpvWn013082;
-	Wed, 20 Mar 2013 03:21:59 +0530
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 19 Mar 2013 16:51:54 -0500
-Message-ID: <1363729914-9157-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
+Return-Path: <denys@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4255E006C3
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 15:39:32 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2JMdW54005014
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 17:39:32 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2JMdWN6003950
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 17:39:32 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 19 Mar 2013 17:39:31 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2JMdVkr009881;
+	Tue, 19 Mar 2013 17:39:31 -0500
+Date: Tue, 19 Mar 2013 18:34:47 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>, <denys@ti.com>
+Message-ID: <1079913061.59.1363732487688.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Subject: [PATCHv2 2/2] omap5-evm: Add OMAP5 EVM configuration
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-03-19_17-24-35
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,90 +34,157 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2013 21:52:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 19 Mar 2013 22:39:33 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_58_640915121.1363732487687"
 
-* Add the machine configuration for the OMAP5 EVM device.
-* Create the omap-a15.inc file to be shared with all OMAP
-  Cortex-A15 derivative devices.
+------=_Part_58_640915121.1363732487687
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
-Updated in version 2
-    * Clarified the comment to specify that the omap-a15 SOC_FAMILY
-      is for OMAP Cortex-A15 derivative devices.
+<html>
+<head>
+<title>
+Status for 03/19/13
+</title>
+</head>
+<body>
 
----
- conf/machine/include/omap-a15.inc                |   18 ++++++++++++++++++
- conf/machine/{am335x-evm.conf => omap5-evm.conf} |   20 ++++++++++++++------
- 2 files changed, 32 insertions(+), 6 deletions(-)
- create mode 100644 conf/machine/include/omap-a15.inc
- copy conf/machine/{am335x-evm.conf => omap5-evm.conf} (65%)
+<h2>Status for 03/19/13</h2>
 
-diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
-new file mode 100644
-index 0000000..3ea1a05
---- /dev/null
-+++ b/conf/machine/include/omap-a15.inc
-@@ -0,0 +1,18 @@
-+SOC_FAMILY = "omap-a15"
-+require conf/machine/include/soc-family.inc
-+
-+require conf/machine/include/tune-cortexa15.inc
-+
-+# Increase this everytime you change something in the kernel
-+MACHINE_KERNEL_PR = "r0"
-+
-+PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
-+
-+KERNEL_IMAGETYPE = "uImage"
-+
-+UBOOT_ARCH = "arm"
-+UBOOT_ENTRYPOINT = "0x80008000"
-+UBOOT_LOADADDRESS = "0x80008000"
-+
-+EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/omap5-evm.conf
-similarity index 65%
-copy from conf/machine/am335x-evm.conf
-copy to conf/machine/omap5-evm.conf
-index 21e79a2..daa5f58 100644
---- a/conf/machine/am335x-evm.conf
-+++ b/conf/machine/omap5-evm.conf
-@@ -1,13 +1,15 @@
- #@TYPE: Machine
--#@NAME: AM335x EVM
--#@DESCRIPTION: Machine configuration for the TI AM335x EVM
-+#@NAME: OMAP5 EVM
-+#@DESCRIPTION: Machine configuration for the TI OMAP5 uEVM
- 
--require conf/machine/include/ti33x.inc
-+PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-+XSERVER = "xserver-xorg \
-+           xf86-input-evdev \
-+           xf86-video-fbdev"
- 
--# Use built-in LCD by default
--XSERVER += "xf86-input-tslib"
- GUI_MACHINE_CLASS = "smallscreen"
--MACHINE_FEATURES += "touchscreen"
-+
-+require conf/machine/include/omap-a15.inc
- 
- IMAGE_FSTYPES += "ubi tar.gz"
- 
-@@ -33,3 +35,9 @@ MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
- # UBI: sub-page size:              512
- # UBI: VID header offset:          2048 (aligned 2048)
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
-+
-+UBOOT_MACHINE = "omap5_evm_config"
-+
-+# Currently removing the sgx machine feature because there is no SGX package
-+# available for omap5
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
--- 
-1.7.0.4
+<h2>BUILD_ID: build-2013-03-19_17-25-38</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=lime>PASSED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.03"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_58_640915121.1363732487687--
