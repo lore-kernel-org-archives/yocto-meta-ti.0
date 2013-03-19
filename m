@@ -1,24 +1,36 @@
-Return-Path: <denis@denix.org>
-Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
-	[206.46.173.5])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C271BE01410
-	for <meta-ti@yoctoproject.org>; Mon, 18 Mar 2013 18:35:12 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MJV00954WDRABY1@vms173005.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 18 Mar 2013 20:34:54 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 77DF8200DD; Mon,
-	18 Mar 2013 21:34:38 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Mon, 18 Mar 2013 21:34:31 -0400
-Message-id: <1363656871-8839-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.1.5
-In-reply-to: <1363649547-4693-8-git-send-email-denis@denix.org>
-References: <1363649547-4693-8-git-send-email-denis@denix.org>
-Subject: [PATCH 07v2/19] u-boot-am180x: modify am180x specific version to use new namespace feature
+Return-Path: <chase.maupin@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4A92FE0147E
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 04:35:44 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2JBZgLs017772;
+	Tue, 19 Mar 2013 06:35:43 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2JBZg9K006057;
+	Tue, 19 Mar 2013 06:35:42 -0500
+Received: from DLEE74.ent.ti.com (157.170.170.8) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server (TLS) id 14.1.323.3;
+	Tue, 19 Mar 2013 06:35:42 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
+	14.01.0323.003; Tue, 19 Mar 2013 06:35:43 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH 08/19] u-boot-beagleboard: modify beagleboard
+	specific version to use new namespace feature
+Thread-Index: AQHOJDERwKk28TPUUE6kr9DosGLObpis4saQ
+Date: Tue, 19 Mar 2013 11:35:41 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED10159484547@DLEE11.ent.ti.com>
+References: <1363649547-4693-1-git-send-email-denis@denix.org>
+	<1363649547-4693-9-git-send-email-denis@denix.org>
+In-Reply-To: <1363649547-4693-9-git-send-email-denis@denix.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
+MIME-Version: 1.0
+Subject: Re: [PATCH 08/19] u-boot-beagleboard: modify beagleboard specific version to use new namespace feature
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,62 +43,70 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2013 01:35:12 -0000
+X-List-Received-Date: Tue, 19 Mar 2013 11:35:44 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-From: Denys Dmytriyenko <denys@ti.com>
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
+> Sent: Monday, March 18, 2013 6:32 PM
+> To: meta-ti@yoctoproject.org
+> Subject: [meta-ti] [PATCH 08/19] u-boot-beagleboard: modify
+> beagleboard specific version to use new namespace feature
+>=20
+> From: Denys Dmytriyenko <denys@ti.com>
+>=20
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+>  .../{u-boot_2011.09.bb =3D> u-boot-beagleboard_2011.09.bb}      |
+> 11 ++---------
+>  1 file changed, 2 insertions(+), 9 deletions(-)
+>  rename recipes-bsp/u-boot/{u-boot_2011.09.bb =3D> u-boot-
+> beagleboard_2011.09.bb} (89%)
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
-v2 - don't remove LIC_FILES_CHKSUM, as old version had different md5 hash
+I'm wondering if this whole recipe couldn't go and be replaced with the u-b=
+oot-ti-staging recipe.
 
- ...50evm-change-default-memory-to-not-limit-at-32MB.patch |  0
- ....12-psp03.21.00.04.sdk.bb => u-boot-am180x_2010.12.bb} | 15 ++++-----------
- 2 files changed, 4 insertions(+), 11 deletions(-)
- rename recipes-bsp/u-boot/{u-boot-2010.12-psp03.21.00.04.sdk => u-boot-am180x-2010.12}/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch (100%)
- rename recipes-bsp/u-boot/{u-boot_2010.12-psp03.21.00.04.sdk.bb => u-boot-am180x_2010.12.bb} (59%)
-
-diff --git a/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch b/recipes-bsp/u-boot/u-boot-am180x-2010.12/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
-similarity index 100%
-rename from recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
-rename to recipes-bsp/u-boot/u-boot-am180x-2010.12/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
-diff --git a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
-similarity index 59%
-rename from recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
-rename to recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
-index 7652521..b2852c4 100644
---- a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
-+++ b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
-@@ -1,15 +1,10 @@
--# Use the version of u-boot.inc in oe-core not the meta-ti version
--require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
-+require u-boot-ti.inc
- 
--DESCRIPTION = "u-boot bootloader for DaVinci devices"
--
--LICENSE = "GPLv2+"
-+DESCRIPTION = "u-boot bootloader for AM180x devices"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
- 
- COMPATIBLE_MACHINE = "am180x-evm"
- 
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
- PR = "r0"
- 
- SRC_URI = "git://arago-project.org/git/projects/u-boot-davinci.git;protocol=git;branch=${BRANCH}"
-@@ -21,9 +16,7 @@ SRC_URI_append_am180x-evm = " file://0001-da850evm-change-default-memory-to-not-
- 
- BRANCH = "03.21.00.03"
- 
--# Use literal tags in SRCREV, when available, instead of commit IDs
--SRCREV = "v2010.12_DAVINCIPSP_03.21.00.04"
--
--S = "${WORKDIR}/git"
-+# v2010.12_DAVINCIPSP_03.21.00.04
-+SRCREV = "1254a0b58d900b7035cfb36bf4e1b05dfbf09997"
- 
- UBOOT_SUFFIX = "bin"
--- 
-1.8.1.5
-
+>=20
+> diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb b/recipes-
+> bsp/u-boot/u-boot-beagleboard_2011.09.bb
+> similarity index 89%
+> rename from recipes-bsp/u-boot/u-boot_2011.09.bb
+> rename to recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
+> index edacb6c..519df16 100644
+> --- a/recipes-bsp/u-boot/u-boot_2011.09.bb
+> +++ b/recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
+> @@ -1,11 +1,8 @@
+> -require u-boot.inc
+> +require u-boot-ti.inc
+>=20
+>  PR =3D "r7"
+>=20
+> -# SPL build
+> -UBOOT_BINARY =3D "u-boot.img"
+> -UBOOT_IMAGE =3D "u-boot-${MACHINE}-${PV}-${PR}.img"
+> -UBOOT_SYMLINK =3D "u-boot-${MACHINE}.img"
+> +SPL_BINARY =3D "MLO"
+>=20
+>  # No patches for other machines yet
+>  COMPATIBLE_MACHINE =3D "(beagleboard)"
+> @@ -37,7 +34,3 @@ SRC_URI =3D "git://git.denx.de/u-
+> boot.git;protocol=3Dgit \
+>            "
+>=20
+>  SRCREV =3D "fdbe8b9a2d1858ba35dd6214315563ad44d4a0e3"
+> -
+> -LIC_FILES_CHKSUM =3D
+> "file://COPYING;md5=3D1707d6db1d42237583f50183a5651ecb"
+> -
+> -S =3D "${WORKDIR}/git"
+> --
+> 1.8.1.5
+>=20
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
