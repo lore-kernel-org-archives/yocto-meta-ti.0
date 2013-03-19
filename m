@@ -1,40 +1,41 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-da0-f44.google.com (mail-da0-f44.google.com
-	[209.85.210.44])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED20EE006AD
-	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 10:43:26 -0700 (PDT)
-Received: by mail-da0-f44.google.com with SMTP id z20so450859dae.3
-	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 10:43:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:content-type:mime-version:subject:from:in-reply-to:date
-	:cc:content-transfer-encoding:message-id:references:to:x-mailer;
-	bh=jaoZkFL8mgIU3hIopwnKwj+LMelU0sYCO1fiWKVgNCs=;
-	b=IpAsx5LiWobXgGguvDWtIZTOQiXgYLGXTFWVkEpm15aNG9eFsisCXVjjTaTqQLcXAa
-	/J/aHM6Y9ZgUsXSXqKA1sIYvGaoVP8kMZMtSmAQpJeaJ/H93fCJQLwNQzK3N9QrYNXjV
-	Z4YiSeBkkdfkYsmUcPkbQ15LDWdyzmC6SLr8XWd1o1YQP7b9r62BlIEAd/7t22rvHpRV
-	bwCUasZIypR4mEwtGbZGL5d6NQuxBALcli8sw1ji/VVzzol65/EaRVbA3l5PMed0j/X5
-	SH1cR3m2ZWufLF7OfngOBtGVEESOcfdwhfxyCHrOBdMCtHqLHG41jCX2DMKUhC+GmSkN
-	TnLw==
-X-Received: by 10.68.225.195 with SMTP id rm3mr4295317pbc.188.1363715006758;
-	Tue, 19 Mar 2013 10:43:26 -0700 (PDT)
-Received: from sa-nc-ipg-172-23-0-104.static.jnpr.net (natint3.juniper.net.
-	[66.129.224.36])
-	by mx.google.com with ESMTPS id pg7sm25071757pbc.5.2013.03.19.10.43.24
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 19 Mar 2013 10:43:26 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1503\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20130319172138.GQ32759@edge>
-Date: Tue, 19 Mar 2013 10:43:26 -0700
-Message-Id: <ADC047C8-685F-4B2B-9686-00D912FCA66B@gmail.com>
+Return-Path: <grunzasr@comcast.net>
+Received: from qmta03.westchester.pa.mail.comcast.net
+	(qmta03.westchester.pa.mail.comcast.net [76.96.62.32])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D4A8BE006AD
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 11:08:53 -0700 (PDT)
+Received: from omta12.westchester.pa.mail.comcast.net ([76.96.62.44])
+	by qmta03.westchester.pa.mail.comcast.net with comcast
+	id DMwQ1l0040xGWP853W8txo; Tue, 19 Mar 2013 18:08:53 +0000
+Received: from [127.0.0.1] ([71.225.124.244])
+	by omta12.westchester.pa.mail.comcast.net with comcast
+	id DW8s1l0145GVvnK3YW8spt; Tue, 19 Mar 2013 18:08:53 +0000
+Message-ID: <5148A9B4.5060702@comcast.net>
+Date: Tue, 19 Mar 2013 14:08:52 -0400
+From: Steven Grunza <grunzasr@comcast.net>
+User-Agent: Mozilla/5.0 (Windows NT 5.1;
+	rv:17.0) Gecko/20130307 Thunderbird/17.0.4
+MIME-Version: 1.0
+CC: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 References: <514873B9.3020500@comcast.net> <20130319172138.GQ32759@edge>
-To: Denys Dmytriyenko <denys@ti.com>
-X-Mailer: Apple Mail (2.1503)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+In-Reply-To: <20130319172138.GQ32759@edge>
+X-Antivirus: avast! (VPS 130319-0, 03/19/2013), Outbound message
+X-Antivirus-Status: Clean
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=comcast.net;
+	s=q20121106; t=1363716533;
+	bh=/0U+1sCaYjg/DxZqn5K/0882tY6mu1R6fCYmWu7QFCs=;
+	h=Received:Received:Message-ID:Date:From:Reply-To:MIME-Version:
+	Subject:Content-Type;
+	b=PROc+lMyZSA4+sSABez9KKI8MX7+SBcGPHVfrYgzdck0fxGpNexKyB/fAilV0Z8QK
+	tiwUk4GcleqXhL85GdrFH63wX36QWkhlOnS4oUXWYsYk6pFnAiPHJECXJLAIUZ5/of
+	TBvSvijl+xt8npxhcSQCwmD/yx7hAhIiG1Z8O5qGfp9XJiEj3d8/Jo6PWBa2ECfXvz
+	Sbds/ZWxPX6oaepW7ow7P2FmFfg30h/GQaLfClQbxbKSOo+h+FC91uIHemCzsKr2vk
+	wbFr6lBVd6x2RHByAP6McCE+B6OimMVaTWfOPFOZjkYzX0BMfFIwkadbiqpu3YyI3A
+	2/M+dikUnmEdQ==
 Subject: Re: Is this the correct list for AM3517 EVM questions?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
+Reply-To: grunzasr@comcast.net
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -44,29 +45,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2013 17:43:27 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Mar 2013 18:08:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-
-On Mar 19, 2013, at 10:21 AM, Denys Dmytriyenko <denys@ti.com> wrote:
-
+On 3/19/2013 1:21 PM, Denys Dmytriyenko wrote:
 > On Tue, Mar 19, 2013 at 10:18:33AM -0400, Steven Grunza wrote:
 >> Hello,
->>  I have a LogicPD Zoom AM3517 experimenters board.  Is this the
+>>    I have a LogicPD Zoom AM3517 experimenters board.  Is this the
 >> correct list to ask questions about getting Yocto-based software
 >> running on this board?
->=20
-> Yes, this is one of the correct lists for asking questions about =
-AM3517 board=20
-> when used with the Yocto Project. :) As this is the mailing list for =
-meta-ti,=20
-> which is the official Texas Instruments BSP layer for =
-OpenEmbedded-Core and=20
-> the Yocto Project, and AM3517 is currently one of the supported =
-platforms in=20
+> Yes, this is one of the correct lists for asking questions about AM3517 board
+> when used with the Yocto Project. :) As this is the mailing list for meta-ti,
+> which is the official Texas Instruments BSP layer for OpenEmbedded-Core and
+> the Yocto Project, and AM3517 is currently one of the supported platforms in
 > meta-ti.
+>
+Wonderful.  Can someone point me to information so that I can build a 
+system using the Yocto project and program an SD card with the necessary 
+files to boot my board into Linux?
 
-Now question please :)
+   With all of the S7 DIP switches in the off position (which the AM3517 
+Development Kits User Manual indicates is the default boot from NAND) I 
+don't get any output from the serial UART so my guess is that I've hosed 
+the NAND.
+
+   For debugging support I have a TI Stellaris LM3S8962 board which has 
+the ability to act as a JTAG debugger to external hardware.  For 
+software I have OpenOCD 0.6.1
+
 
 
