@@ -1,27 +1,26 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4255E006C3
-	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 15:39:32 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2JMdW54005014
-	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 17:39:32 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2JMdWN6003950
-	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 17:39:32 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 19 Mar 2013 17:39:31 -0500
-Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2JMdVkr009881;
-	Tue, 19 Mar 2013 17:39:31 -0500
-Date: Tue, 19 Mar 2013 18:34:47 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>, <denys@ti.com>
-Message-ID: <1079913061.59.1363732487688.JavaMail.jenkins@puget>
+Return-Path: <fcooper@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 614BFE01468
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 19:10:40 -0700 (PDT)
+Received: from dbdp20.itg.ti.com ([172.24.170.38])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2K2Acgn009053
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 21:10:38 -0500
+Received: from DBDE71.ent.ti.com (localhost [127.0.0.1])
+	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2K2AagY024141
+	for <meta-ti@yoctoproject.org>; Wed, 20 Mar 2013 07:40:37 +0530 (IST)
+Received: from dbdp32.itg.ti.com (172.24.170.251) by DBDE71.ent.ti.com
+	(172.24.170.149) with Microsoft SMTP Server id 14.1.323.3;
+	Wed, 20 Mar 2013 07:40:36 +0530
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2K2AY4C026397;
+	Wed, 20 Mar 2013 07:40:35 +0530
+From: "Franklin S. Cooper Jr" <fcooper@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 19 Mar 2013 21:10:30 -0500
+Message-ID: <1363745431-10452-1-git-send-email-fcooper@ti.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-03-19_17-24-35
+Subject: [PATCH 1/2] omap3-sgx-modules: Add version 4.08.00.02 of the Graphics SDK kernel modules
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,157 +33,77 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Mar 2013 22:39:33 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_58_640915121.1363732487687"
+X-List-Received-Date: Wed, 20 Mar 2013 02:10:40 -0000
+Content-Type: text/plain
 
-------=_Part_58_640915121.1363732487687
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+---
+ .../omap3-sgx-modules_4.08.00.02.bb                |   56 ++++++++++++++++++++
+ 1 files changed, 56 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
 
-<html>
-<head>
-<title>
-Status for 03/19/13
-</title>
-</head>
-<body>
-
-<h2>Status for 03/19/13</h2>
-
-<h2>BUILD_ID: build-2013-03-19_17-25-38</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=lime>PASSED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
+new file mode 100644
+index 0000000..793de14
+--- /dev/null
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
+@@ -0,0 +1,56 @@
++DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ea5743acf520dd81ca172e69f818a3d4"
++
++TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
++require ../../recipes-ti/includes/ti-eula-unpack.inc
++
++SGXPV = "4_08_00_02"
++IMGPV = "1.9.2188537"
++BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
++
++inherit module
++
++MACHINE_KERNEL_PR_append = "a"
++PR = "${MACHINE_KERNEL_PR}"
++
++DEFAULT_PREFERENCE = "-1"
++
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE}"
++
++SRC_URI[md5sum] = "0efa3a38266e6f41f8cc4fad0187f0d6"
++SRC_URI[sha256sum] = "c732044b515a598e1fab661b7463aa9c53d4fa37f4980dfa85cd02b7468d0cd9"
++
++TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
++S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
++
++PVRBUILD = "release"
++export KERNELDIR = "${STAGING_KERNEL_DIR}"
++
++INHIBIT_PACKAGE_STRIP = "1"
++
++TI_PLATFORM_omap3 = "omap3630"
++TI_PLATFORM_ti814x = "ti81xx"
++TI_PLATFORM_ti816x = "ti81xx"
++TI_PLATFORM_ti33x = "ti335x"
++
++MODULESLOCATION_omap3 = "dc_omapfb3_linux"
++MODULESLOCATION_ti814x = "dc_ti81xx_linux"
++MODULESLOCATION_ti816x = "dc_ti81xx_linux"
++MODULESLOCATION_ti33x = "dc_ti335x_linux"
++
++export SUPPORT_XORG ?= "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
++
++MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
++
++do_install() {
++    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
++    cp  ${S}/pvrsrvkm.ko \
++        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
++        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
++        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
++
++    if [ "${SUPPORT_XORG}" = "1" ]; then
++        cp ${S}/services4/3rdparty/linux_drm/drm.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
++    fi
++}
+-- 
+1.7.0.4
 
 
-------=_Part_58_640915121.1363732487687--
