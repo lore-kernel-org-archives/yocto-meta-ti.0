@@ -1,26 +1,28 @@
 Return-Path: <fcooper@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 614BFE01468
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68956E01469
 	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 19:10:40 -0700 (PDT)
 Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2K2Acgn009053
-	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 21:10:38 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2K2AcGv024254
+	for <meta-ti@yoctoproject.org>; Tue, 19 Mar 2013 21:10:39 -0500
 Received: from DBDE71.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2K2AagY024141
-	for <meta-ti@yoctoproject.org>; Wed, 20 Mar 2013 07:40:37 +0530 (IST)
+	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2K2AcOX024151
+	for <meta-ti@yoctoproject.org>; Wed, 20 Mar 2013 07:40:38 +0530 (IST)
 Received: from dbdp32.itg.ti.com (172.24.170.251) by DBDE71.ent.ti.com
 	(172.24.170.149) with Microsoft SMTP Server id 14.1.323.3;
-	Wed, 20 Mar 2013 07:40:36 +0530
+	Wed, 20 Mar 2013 07:40:37 +0530
 Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2K2AY4C026397;
-	Wed, 20 Mar 2013 07:40:35 +0530
+	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2K2AY4D026397;
+	Wed, 20 Mar 2013 07:40:37 +0530
 From: "Franklin S. Cooper Jr" <fcooper@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 19 Mar 2013 21:10:30 -0500
-Message-ID: <1363745431-10452-1-git-send-email-fcooper@ti.com>
+Date: Tue, 19 Mar 2013 21:10:31 -0500
+Message-ID: <1363745431-10452-2-git-send-email-fcooper@ti.com>
 X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1363745431-10452-1-git-send-email-fcooper@ti.com>
+References: <1363745431-10452-1-git-send-email-fcooper@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2] omap3-sgx-modules: Add version 4.08.00.02 of the Graphics SDK kernel modules
+Subject: [PATCH 2/2] libgles-omap3: Add version 4.08.00.02 of the Graphics SDK
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,72 +39,369 @@ X-List-Received-Date: Wed, 20 Mar 2013 02:10:40 -0000
 Content-Type: text/plain
 
 ---
- .../omap3-sgx-modules_4.08.00.02.bb                |   56 ++++++++++++++++++++
- 1 files changed, 56 insertions(+), 0 deletions(-)
- create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
+ .../libgles/libgles-omap3-4.08.00.02/rc.pvr        |  124 ++++++++++++++++++
+ .../libgles/libgles-omap3-4.08.00.02/rc_dri.pvr    |  136 ++++++++++++++++++++
+ .../libgles/libgles-omap3_4.08.00.02.bb            |   77 +++++++++++
+ 3 files changed, 337 insertions(+), 0 deletions(-)
+ create mode 100755 recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc.pvr
+ create mode 100755 recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc_dri.pvr
+ create mode 100644 recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
-new file mode 100644
-index 0000000..793de14
+diff --git a/recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc.pvr b/recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc.pvr
+new file mode 100755
+index 0000000..7b5cefa
 --- /dev/null
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
-@@ -0,0 +1,56 @@
-+DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ea5743acf520dd81ca172e69f818a3d4"
++++ b/recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc.pvr
+@@ -0,0 +1,124 @@
++#!/bin/sh
++PATH=$PATH:/usr/sbin
 +
-+TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
-+require ../../recipes-ti/includes/ti-eula-unpack.inc
++# Check if an fb device is available.  If not then just go ahead and
++# exit because we have no display.
++fbset > /dev/null 2>&1
++if [ "$?" == "1" ]
++then
++    # looks like there is no display, so let's exit
++    exit 0
++fi
++
++BITSPERPIXEL="$(fbset | grep geom | awk '{print $6}')"
++YRES="$(fbset | grep geom | awk '{print $3}')"
++
++CPUTYPE="$(cputype)"
++
++if [ "$1" = "" ]; then
++	echo PVR-INIT: Please use start, stop, or restart.
++	exit 1
++fi
++
++if [ "$1" = "stop" -o  "$1" = "restart" ]; then
++	echo Stopping PVR
++	rmmod bufferclass_ti
++	rmmod omaplfb 2>/dev/null
++	rmmod pvrsrvkm 2>/dev/null
++fi
++
++if [ "$1" = "stop" ]; then
++	exit 0
++fi
++
++# Set RGBA ordering to something the drivers like
++if [ "$BITSPERPIXEL" = "32" ] ; then
++	fbset -rgba 8/16,8/8,8/0,8/24
++fi
++
++# Try to enable triple buffering when there's enough VRAM
++fbset -vyres $(expr $YRES \* 3)
++
++sgxprepare () {
++	echo Starting PVR
++	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
++
++    if [ "$?" != "0" ]
++    then
++        echo "Could not find pvrsrvkm driver"
++        exit 1
++    fi
++
++	modprobe omaplfb
++	modprobe bufferclass_ti
++
++	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
++        bc_maj=`grep "bc" /proc/devices | cut -b1,2,3`
++
++	if [ -e /dev/pvrsrvkm ] ; then
++		rm -f /dev/pvrsrvkm
++	fi
++
++	mknod /dev/pvrsrvkm c $pvr_maj 0
++	chmod 666 /dev/pvrsrvkm
++
++	touch /etc/powervr-esrev
++
++	SAVED_ESREVISION="$(cat /etc/powervr-esrev)"
++}
++
++sgxfinish () {
++	# Fix up a bug in opkg
++	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then
++		cd /usr/lib
++		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
++	fi
++
++	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
++		echo -n "Starting SGX fixup for"
++		echo " ES${ES_REVISION}.x"
++		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
++		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
++		echo "${ES_REVISION}" > /etc/powervr-esrev
++	fi
++
++	if ! /usr/bin/pvrsrvctl --start --no-module; then return; fi 
++}
++
++case $CPUTYPE in
++"OMAP3530")
++	sgxprepare
++
++	devmem2 0x48004B48 w 0x2 > /dev/null
++	devmem2 0x48004B10 w 0x1 > /dev/null
++	devmem2 0x48004B00 w 0x2 > /dev/null
++
++	ES_REVISION="$(devmem2 0x50000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++"TI33XX")
++	sgxprepare
++
++	devmem2 0x44e01104 w 0x0 > /dev/null
++	devmem2 0x44e00904 w 0x2 > /dev/null
++
++	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++"TI816x")
++	sgxprepare
++
++	devmem2 0x48180F04 w 0x0 > /dev/null
++	devmem2 0x48180900 w 0x2 > /dev/null
++	devmem2 0x48180920 w 0x2 > /dev/null
++
++	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:6: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++*)
++	echo No SGX hardware, not starting PVR
++	;;
++esac
+diff --git a/recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc_dri.pvr b/recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc_dri.pvr
+new file mode 100755
+index 0000000..dd1e942
+--- /dev/null
++++ b/recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc_dri.pvr
+@@ -0,0 +1,136 @@
++#!/bin/sh
++PATH=$PATH:/usr/sbin
++
++# Check if an fb device is available.  If not then just go ahead and
++# exit because we have no display.
++fbset > /dev/null 2>&1
++if [ "$?" == "1" ]
++then
++    # looks like there is no display, so let's exit
++    exit 0
++fi
++
++BITSPERPIXEL="$(fbset | grep geom | awk '{print $6}')"
++YRES="$(fbset | grep geom | awk '{print $3}')"
++
++CPUTYPE="$(cputype)"
++
++if [ "$1" = "" ]; then
++	echo PVR-INIT: Please use start, stop, or restart.
++	exit 1
++fi
++
++if [ "$1" = "stop" -o  "$1" = "restart" ]; then
++	echo Stopping PVR
++
++	# Stop the X Server.
++	#
++	[ -f /tmp/.X0-lock ] && read XPID < /tmp/.X0-lock && [ -n "$XPID" ] && kill $XPID && while [ -e /proc/$XPID ] ; do sleep 1; done
++
++	rmmod bufferclass_ti
++	rmmod pvrsrvkm 2>/dev/null
++    rmmod drm 2>/dev/null
++fi
++
++if [ "$1" = "stop" ]; then
++	exit 0
++fi
++
++# Set RGBA ordering to something the drivers like
++if [ "$BITSPERPIXEL" = "32" ] ; then
++	fbset -rgba 8/16,8/8,8/0,8/24
++fi
++
++# Try to enable triple buffering when there's enough VRAM
++fbset -vyres $(expr $YRES \* 3)
++
++sgxprepare () {
++	echo Starting PVR
++
++	# Start the X Server. 
++	# The X Server will load the PVR Services module.
++	#
++	/usr/local/XSGX/bin/X -verbose -config /usr/local/XSGX/etc/xorg.conf &
++
++	modprobe drm
++
++	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
++
++    if [ "$?" != "0" ]
++    then
++        echo "Could not find pvrsrvkm driver"
++        exit 1
++    fi
++
++	modprobe bufferclass_ti
++
++	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
++        bc_maj=`grep "bc" /proc/devices | cut -b1,2,3`
++
++	if [ -e /dev/pvrsrvkm ] ; then
++		rm -f /dev/pvrsrvkm
++	fi
++
++	mknod /dev/pvrsrvkm c $pvr_maj 0
++	chmod 666 /dev/pvrsrvkm
++
++	touch /etc/powervr-esrev
++
++	SAVED_ESREVISION="$(cat /etc/powervr-esrev)"
++}
++
++sgxfinish () {
++	# Fix up a bug in opkg
++	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then
++		cd /usr/lib
++		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
++	fi
++
++	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
++		echo -n "Starting SGX fixup for"
++		echo " ES${ES_REVISION}.x"
++		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
++		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
++		echo "${ES_REVISION}" > /etc/powervr-esrev
++	fi
++
++	if ! /usr/bin/pvrsrvctl --start --no-module; then return; fi 
++}
++
++case $CPUTYPE in
++"OMAP3530")
++	sgxprepare
++
++	devmem2 0x48004B48 w 0x2 > /dev/null
++	devmem2 0x48004B10 w 0x1 > /dev/null
++	devmem2 0x48004B00 w 0x2 > /dev/null
++
++	ES_REVISION="$(devmem2 0x50000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++"TI33XX")
++	sgxprepare
++
++	devmem2 0x44e01104 w 0x0 > /dev/null
++	devmem2 0x44e00904 w 0x2 > /dev/null
++
++	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++"TI816x")
++	sgxprepare
++
++	devmem2 0x48180F04 w 0x0 > /dev/null
++	devmem2 0x48180900 w 0x2 > /dev/null
++	devmem2 0x48180920 w 0x2 > /dev/null
++
++	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:6: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++*)
++	echo No SGX hardware, not starting PVR
++	;;
++esac
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb b/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
+new file mode 100644
+index 0000000..98cfcc5
+--- /dev/null
++++ b/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
+@@ -0,0 +1,77 @@
++require libgles-omap3.inc
++
++LICENSE = "TSPA"
++
++DEFAULT_PREFERENCE = "-1"
++
++BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
++BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
++BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
++BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
++
++PLATFORM = "LinuxARMV7"
++PVR_INIT = "pvrsrvctl"
++
++# download required binary distribution from:
++# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
++# see libgles-omap3.inc for detailed installation instructions
 +
 +SGXPV = "4_08_00_02"
 +IMGPV = "1.9.2188537"
 +BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
-+
-+inherit module
-+
-+MACHINE_KERNEL_PR_append = "a"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE}"
++TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
++           file://cputype \
++           file://rc.pvr \
++           file://rc_dri.pvr \
++           file://sample.desktop \
++           file://99-bufferclass.rules  \
++"
 +
 +SRC_URI[md5sum] = "0efa3a38266e6f41f8cc4fad0187f0d6"
 +SRC_URI[sha256sum] = "c732044b515a598e1fab661b7463aa9c53d4fa37f4980dfa85cd02b7468d0cd9"
 +
-+TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
-+S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
++S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
 +
-+PVRBUILD = "release"
-+export KERNELDIR = "${STAGING_KERNEL_DIR}"
++LIBGLESWINDOWSYSTEM ?= "${@base_contains('DISTRO_FEATURES', 'x11',"libpvrPVR2D_DRIWSEGL.so" ,"libpvrPVR2D_FRONTWSEGL.so.1", d)}"
 +
-+INHIBIT_PACKAGE_STRIP = "1"
 +
-+TI_PLATFORM_omap3 = "omap3630"
-+TI_PLATFORM_ti814x = "ti81xx"
-+TI_PLATFORM_ti816x = "ti81xx"
-+TI_PLATFORM_ti33x = "ti335x"
++do_configure_append() {
 +
-+MODULESLOCATION_omap3 = "dc_omapfb3_linux"
-+MODULESLOCATION_ti814x = "dc_ti81xx_linux"
-+MODULESLOCATION_ti816x = "dc_ti81xx_linux"
-+MODULESLOCATION_ti33x = "dc_ti335x_linux"
-+
-+export SUPPORT_XORG ?= "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
-+
-+MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
-+
-+do_install() {
-+    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+    cp  ${S}/pvrsrvkm.ko \
-+        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
-+        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
-+        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+
-+    if [ "${SUPPORT_XORG}" = "1" ]; then
-+        cp ${S}/services4/3rdparty/linux_drm/drm.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
++    # Change PVR server's user mode library to point to DRI
++    for drifile in $(find ${S} -name "libsrv_um_dri.so"); do
++    if [ "$drifile" != "" ]
++    then
++        dir=$(dirname ${drifile})
++        if [ "$SUPPORT_XORG" = "1" ]
++        then
++            mv ${dir}/libsrv_um_dri.so ${dir}/libsrv_um.so
++        else
++            rm -rf ${dir}/libsrv_um_dri.so
++        fi
 +    fi
++
++    done
 +}
++
++do_install_append() {
++
++    # In this version of the graphics SDK the following directories do not exist:
++    #    /GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/pvr2d.h (doesn't exist)
++    #    /GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/GLES/egltypes.h (doesn't exist)
++    # Therefore, need to copy these files manually at the only location that they do exist
++    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir}
++    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/
++
++    rm ${D}${sysconfdir}/init.d/pvr-init
++
++    if [ "$SUPPORT_XORG" = "1" ]; then
++        cp -pP ${WORKDIR}/rc_dri.pvr ${D}${sysconfdir}/init.d/pvr-init
++    else
++        cp -pP ${WORKDIR}/rc.pvr ${D}${sysconfdir}/init.d/pvr-init
++    fi
++
++}
++
++RRECOMMENDS_${PN}-x11demos = "${PN}-driwsegl"
++RRECOMMENDS_${PN}-x11trainingcourses = "${PN}-driwsegl"
 -- 
 1.7.0.4
 
