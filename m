@@ -1,28 +1,25 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 608B2E006D6
-	for <meta-ti@yoctoproject.org>; Fri, 22 Mar 2013 12:25:57 -0700 (PDT)
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2MJPtnE028994
-	for <meta-ti@yoctoproject.org>; Fri, 22 Mar 2013 14:25:56 -0500
-Received: from DBDE70.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2MJPtEY023418
-	for <meta-ti@yoctoproject.org>; Sat, 23 Mar 2013 00:55:55 +0530 (IST)
-Received: from dbdp32.itg.ti.com (172.24.170.251) by dbde70.ent.ti.com
-	(172.24.170.148) with Microsoft SMTP Server id 14.1.323.3;
-	Sat, 23 Mar 2013 00:55:54 +0530
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2MJPoFZ010587;
-	Sat, 23 Mar 2013 00:55:53 +0530
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 22 Mar 2013 14:25:48 -0500
-Message-ID: <1363980348-22578-2-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1363980348-22578-1-git-send-email-Chase.Maupin@ti.com>
-References: <1363980348-22578-1-git-send-email-Chase.Maupin@ti.com>
-MIME-Version: 1.0
-Subject: [PATCH 2/2] omap5-evm: Update serial console to proper value
+Return-Path: <denis@denix.org>
+Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
+	[206.46.173.5])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C9D76E01471
+	for <meta-ti@yoctoproject.org>; Fri, 22 Mar 2013 14:26:38 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MK200FHBZJIRZP1@vms173005.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 22 Mar 2013 16:26:21 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 59873200BE; Fri,
+	22 Mar 2013 17:26:06 -0400 (EDT)
+Date: Fri, 22 Mar 2013 17:26:06 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Cooper Jr., Franklin" <fcooper@ti.com>
+Message-id: <20130322212606.GB30363@denix.org>
+References: <8F29D6B095ED194EA1980491A5E029710C3EA216@DFLE09.ent.ti.com>
+MIME-version: 1.0
+In-reply-to: <8F29D6B095ED194EA1980491A5E029710C3EA216@DFLE09.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Lastest Patches
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,30 +32,74 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2013 19:25:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 22 Mar 2013 21:26:38 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-* The serial console for the OMAP5 uEVM is ttyO2 not ttyO0
+Franklin,
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
- conf/machine/omap5-evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+I put this discussion on back-burner for a bit, to let the dust settle and to 
+gather some thoughts...
 
-diff --git a/conf/machine/omap5-evm.conf b/conf/machine/omap5-evm.conf
-index daa5f58..37e6209 100644
---- a/conf/machine/omap5-evm.conf
-+++ b/conf/machine/omap5-evm.conf
-@@ -13,7 +13,7 @@ require conf/machine/include/omap-a15.inc
- 
- IMAGE_FSTYPES += "ubi tar.gz"
- 
--SERIAL_CONSOLE = "115200 ttyO0"
-+SERIAL_CONSOLE = "115200 ttyO2"
- 
- # UBI information.  Note that this is board and kernel specific.  Changes
- # in your kernel port may require changes in these variables.  For more
+
+On Tue, Mar 19, 2013 at 01:50:22PM +0000, Cooper Jr., Franklin wrote:
+> I am not in favor for some of these new namespace changes for legacy 
+> recipes. There are a lot of history behind those recipes names 
+> (arago-classic) including the PSP version. Old documentation also refer to 
+> that PSP release 
+> http://processors.wiki.ti.com/index.php/DaVinci_PSP_03.21.00.04_Release_Notes
+> 
+> Ex
+> u-boot-am180x: modify am180x specific version to use new namespace feature
+> 
+> --- a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
+> 
+> +++ b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
+> 
+> 
+> I don't have a problem with adding the machine name to the recipe especially 
+> if COMPATIBLE_MACHINE is set for only one machine.
+
+I understand your position here. I happened to have originally introduced 
+those -psp version suffixes to the recipes several years ago. These days this 
+concept is no longer relevant... Let me list few reasons:
+
+1. The internal org has changed, hence the naming - new recipes don't have 
+this same suffix.
+2. Other recipes also come from different sources and don't have -psp suffix.
+3. The recipe you mentioned above for am180x happens to be the only one left 
+with this suffix - time to unify versioning schema.
+4. Yocto principles and the concept of "rolling" releases - meaning not having 
+multiple versions of the same recipe around and using SCM for historic 
+purposes, not the metadata. In other words - there are git tags, branches and 
+even linear history for past versions, so no need to cling to them in the 
+recipes. That means if we have a newer u-boot available for am180x that works, 
+we would remove the 2010.12 as being very old one, PSP or not.
+5. With the SoC/machine in the recipe name, there's no worry to have the name 
+collision between u-boot_2010.12 for am180x and the same u-boot version for 
+another machine, so no need to keep the -psp versioning suffix for the purpose 
+of unique version.
+6. The PSP version corresponding to that release is still recorded inside the 
+recipe, as a tag/SRCREV.
+7. I know you need to set PSPREL variable for the SDK - we can still do that 
+in meta-arago as a bbappend.
+
+
+> Also changing the ti33x PREFERRED_PROVIDER to a kernel that is still being 
+> developed (not released) is another problem.
+> 
+> Ex:
+> 
+> ti33x: switch default preference to ti-staging tree
+> 
+> PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+
+As Chase mentioned, this is gearing up for the release next month and we need 
+as many people to start using and testing it, as possible, at least within 
+meta-ti.
+Again, for SDK stable releases, it can be set to an older 3.2 version - it's 
+just a matter of setting PREFERRED_PROVIDER and PREFERRED_VERSION accordingly.
+
 -- 
-1.7.0.4
-
+Denys
 
