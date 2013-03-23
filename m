@@ -1,25 +1,27 @@
-Return-Path: <denis@denix.org>
-Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
-	[206.46.173.5])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C9D76E01471
-	for <meta-ti@yoctoproject.org>; Fri, 22 Mar 2013 14:26:38 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MK200FHBZJIRZP1@vms173005.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 22 Mar 2013 16:26:21 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 59873200BE; Fri,
-	22 Mar 2013 17:26:06 -0400 (EDT)
-Date: Fri, 22 Mar 2013 17:26:06 -0400
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8F7A2E0149D
+	for <meta-ti@yoctoproject.org>; Fri, 22 Mar 2013 18:08:21 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2N18KS5020879
+	for <meta-ti@yoctoproject.org>; Fri, 22 Mar 2013 20:08:20 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2N18K5C030464
+	for <meta-ti@yoctoproject.org>; Fri, 22 Mar 2013 20:08:20 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Fri, 22 Mar 2013 20:08:20 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2N18KJ3009435	for
+	<meta-ti@yoctoproject.org>; Fri, 22 Mar 2013 20:08:20 -0500
+Date: Fri, 22 Mar 2013 21:03:31 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: "Cooper Jr., Franklin" <fcooper@ti.com>
-Message-id: <20130322212606.GB30363@denix.org>
-References: <8F29D6B095ED194EA1980491A5E029710C3EA216@DFLE09.ent.ti.com>
-MIME-version: 1.0
-In-reply-to: <8F29D6B095ED194EA1980491A5E029710C3EA216@DFLE09.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Lastest Patches
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1748804516.73.1364000611610.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-03-22_21-01-06
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,74 +34,158 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Mar 2013 21:26:38 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sat, 23 Mar 2013 01:08:21 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_72_1799150268.1364000611607"
 
-Franklin,
+------=_Part_72_1799150268.1364000611607
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-I put this discussion on back-burner for a bit, to let the dust settle and to 
-gather some thoughts...
+<html>
+<head>
+<title>
+Status for 03/22/13
+</title>
+</head>
+<body>
+
+<h2>Status for 03/22/13</h2>
+
+<h2>BUILD_ID: build-2013-03-22_21-02-09</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.03"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-On Tue, Mar 19, 2013 at 01:50:22PM +0000, Cooper Jr., Franklin wrote:
-> I am not in favor for some of these new namespace changes for legacy 
-> recipes. There are a lot of history behind those recipes names 
-> (arago-classic) including the PSP version. Old documentation also refer to 
-> that PSP release 
-> http://processors.wiki.ti.com/index.php/DaVinci_PSP_03.21.00.04_Release_Notes
-> 
-> Ex
-> u-boot-am180x: modify am180x specific version to use new namespace feature
-> 
-> --- a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
-> 
-> +++ b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
-> 
-> 
-> I don't have a problem with adding the machine name to the recipe especially 
-> if COMPATIBLE_MACHINE is set for only one machine.
-
-I understand your position here. I happened to have originally introduced 
-those -psp version suffixes to the recipes several years ago. These days this 
-concept is no longer relevant... Let me list few reasons:
-
-1. The internal org has changed, hence the naming - new recipes don't have 
-this same suffix.
-2. Other recipes also come from different sources and don't have -psp suffix.
-3. The recipe you mentioned above for am180x happens to be the only one left 
-with this suffix - time to unify versioning schema.
-4. Yocto principles and the concept of "rolling" releases - meaning not having 
-multiple versions of the same recipe around and using SCM for historic 
-purposes, not the metadata. In other words - there are git tags, branches and 
-even linear history for past versions, so no need to cling to them in the 
-recipes. That means if we have a newer u-boot available for am180x that works, 
-we would remove the 2010.12 as being very old one, PSP or not.
-5. With the SoC/machine in the recipe name, there's no worry to have the name 
-collision between u-boot_2010.12 for am180x and the same u-boot version for 
-another machine, so no need to keep the -psp versioning suffix for the purpose 
-of unique version.
-6. The PSP version corresponding to that release is still recorded inside the 
-recipe, as a tag/SRCREV.
-7. I know you need to set PSPREL variable for the SDK - we can still do that 
-in meta-arago as a bbappend.
-
-
-> Also changing the ti33x PREFERRED_PROVIDER to a kernel that is still being 
-> developed (not released) is another problem.
-> 
-> Ex:
-> 
-> ti33x: switch default preference to ti-staging tree
-> 
-> PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
-
-As Chase mentioned, this is gearing up for the release next month and we need 
-as many people to start using and testing it, as possible, at least within 
-meta-ti.
-Again, for SDK stable releases, it can be set to an older 3.2 version - it's 
-just a matter of setting PREFERRED_PROVIDER and PREFERRED_VERSION accordingly.
-
--- 
-Denys
-
+------=_Part_72_1799150268.1364000611607--
