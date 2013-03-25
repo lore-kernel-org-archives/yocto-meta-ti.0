@@ -1,27 +1,35 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EDF09E013AC
-	for <meta-ti@yoctoproject.org>; Sun, 24 Mar 2013 18:07:17 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2P17GmP024954
-	for <meta-ti@yoctoproject.org>; Sun, 24 Mar 2013 20:07:16 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2P17GcS020331
-	for <meta-ti@yoctoproject.org>; Sun, 24 Mar 2013 20:07:16 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Sun, 24 Mar 2013 20:07:16 -0500
-Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2P17Gh8009209	for
-	<meta-ti@yoctoproject.org>; Sun, 24 Mar 2013 20:07:16 -0500
-Date: Sun, 24 Mar 2013 21:02:24 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1582505747.81.1364173344692.JavaMail.jenkins@puget>
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
+	[209.85.215.174])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A540FE0140A
+	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 01:11:41 -0700 (PDT)
+Received: by mail-ea0-f174.google.com with SMTP id m14so51016eaj.19
+	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 01:11:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=x-received:from:to:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	bh=1Yl/oUp5ywyFfZDl7DmWv2z/z77OhIxAq+NeF5TJ97s=;
+	b=U/jLnukuqUCWYQDGmC4icyGWUY9f4XG2zIUcOtLwJCLGMarZ03Bay2TnbHXi1UfGqC
+	bUiT2TARzNAf7N49Md6eG2yDyiimZSsyz12uVVmTY95rwTDzBhG48s1mpnlm0wqzPinH
+	pPdr+Yo9NL/XWTwpYnNlfRh3fp5QTKAsME+J9bV0uJ5IAfuuQ3fu78qC2VtHYvm3H8D7
+	iGDkP03XsPK6sT+uKQrVe1s+qKLXNlhihsgSKPSp4LdVQDMI1woOnQ6ayPPhr0fIgX0F
+	XcoV8beQ7dfpZnVZ4+59ICx06juO7oiE2Pi9WkNi6cj1NkliH+KPEjHBj9e5o8sjMWyL
+	4WUQ==
+X-Received: by 10.14.4.69 with SMTP id 45mr31747941eei.0.1364199100126;
+	Mon, 25 Mar 2013 01:11:40 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-223-251-141.unitymediagroup.de.
+	[95.223.251.141])
+	by mx.google.com with ESMTPS id 3sm17351240eej.6.2013.03.25.01.11.38
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Mon, 25 Mar 2013 01:11:39 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: meta-ti@yoctoproject.org
+Date: Mon, 25 Mar 2013 09:09:30 +0100
+Message-Id: <1364198970-22271-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.7.6.5
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-03-24_21-01-06
+Subject: [PATCH] mesa-dri: follow oe-core's renaming to mesa
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,158 +42,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Mar 2013 01:07:18 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_80_2083563447.1364173344691"
+X-List-Received-Date: Mon, 25 Mar 2013 08:11:42 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-------=_Part_80_2083563447.1364173344691
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ ...mesa-dri_9.0.2.bbappend => mesa_9.0.2.bbappend} |    0
+ .../{mesa-dri_git.bbappend => mesa_git.bbappend}   |    0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ rename recipes-graphics/mesa/{mesa-dri_9.0.2.bbappend => mesa_9.0.2.bbappend} (100%)
+ rename recipes-graphics/mesa/{mesa-dri_git.bbappend => mesa_git.bbappend} (100%)
 
-<html>
-<head>
-<title>
-Status for 03/24/13
-</title>
-</head>
-<body>
-
-<h2>Status for 03/24/13</h2>
-
-<h2>BUILD_ID: build-2013-03-24_21-02-08</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+diff --git a/recipes-graphics/mesa/mesa-dri_9.0.2.bbappend b/recipes-graphics/mesa/mesa_9.0.2.bbappend
+similarity index 100%
+rename from recipes-graphics/mesa/mesa-dri_9.0.2.bbappend
+rename to recipes-graphics/mesa/mesa_9.0.2.bbappend
+diff --git a/recipes-graphics/mesa/mesa-dri_git.bbappend b/recipes-graphics/mesa/mesa_git.bbappend
+similarity index 100%
+rename from recipes-graphics/mesa/mesa-dri_git.bbappend
+rename to recipes-graphics/mesa/mesa_git.bbappend
+-- 
+1.7.6.5
 
 
-------=_Part_80_2083563447.1364173344691--
