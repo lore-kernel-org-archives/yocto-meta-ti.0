@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE256E0146B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE144E01423
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8C6C752AB1; Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
+	id 93C2152AAF; Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004224.8C6C752AB1@arago-project.org>
+Message-Id: <20130326004224.93C2152AAF@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : beagleboard: switch default u-boot preference to machine-specific tree
+Subject: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVyIG1lc2EtZHJpOiBmb2xsb3cgb2UtY29yZScgcyByZW5hbWluZyB0byBtZXNh?=
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,50 +27,30 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ecc2eb9d864cf95236e60e46bb0c638d2d838c3a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ecc2eb9d864cf95236e60e46bb0c638d2d838c3a
+Commit: 352bb2f0a8a6c0d92ac7498e8117f4fa6d1c12fd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=352bb2f0a8a6c0d92ac7498e8117f4fa6d1c12fd
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 18:27:45 2013 -0400
+Author: Andreas Müller <schnitzeltony@googlemail.com>
+Date:   Mon Mar 25 09:09:30 2013 +0100
 
-beagleboard: switch default u-boot preference to machine-specific tree
+mesa-dri: follow oe-core's renaming to mesa
 
-SDKs or other users of meta-ti can still use one of the other recipes for
-stability or featureset, by setting PREFERRED_PROVIDER in their config.
-
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/beagleboard.conf  |    2 ++
- conf/machine/include/omap3.inc |    2 +-
- 2 files changed, 3 insertions(+), 1 deletions(-)
+ ...mesa-dri_9.0.2.bbappend => mesa_9.0.2.bbappend} |    0
+ .../{mesa-dri_git.bbappend => mesa_git.bbappend}   |    0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
-index a65e360..f923119 100644
---- a/conf/machine/beagleboard.conf
-+++ b/conf/machine/beagleboard.conf
-@@ -8,6 +8,8 @@ require conf/machine/include/omap3.inc
- GUI_MACHINE_CLASS = "bigscreen"
- 
- PREFERRED_PROVIDER_virtual/kernel = "linux-mainline"
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-beagleboard"
-+PREFERRED_PROVIDER_u-boot = "u-boot-beagleboard"
- 
- IMAGE_FSTYPES += "tar.gz ubi"
- EXTRA_IMAGECMD_jffs2 = "-lnp"
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 99f0c80..212ebe7 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -16,7 +16,7 @@ XSERVER = "xserver-xorg \
- GUI_MACHINE_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r123"
-+MACHINE_KERNEL_PR = "r124"
- 
- KERNEL_IMAGETYPE = "uImage"
- 
+diff --git a/recipes-graphics/mesa/mesa-dri_9.0.2.bbappend b/recipes-graphics/mesa/mesa_9.0.2.bbappend
+similarity index 100%
+rename from recipes-graphics/mesa/mesa-dri_9.0.2.bbappend
+rename to recipes-graphics/mesa/mesa_9.0.2.bbappend
+diff --git a/recipes-graphics/mesa/mesa-dri_git.bbappend b/recipes-graphics/mesa/mesa_git.bbappend
+similarity index 100%
+rename from recipes-graphics/mesa/mesa-dri_git.bbappend
+rename to recipes-graphics/mesa/mesa_git.bbappend
 
 
