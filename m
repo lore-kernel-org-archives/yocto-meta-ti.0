@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 657AAE014E1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83D4DE014E4
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:27 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E995252991; Tue, 26 Mar 2013 00:42:26 +0000 (UTC)
+	id 34C4952A56; Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004226.E995252991@arago-project.org>
-Date: Tue, 26 Mar 2013 00:42:26 +0000 (UTC)
+Message-Id: <20130326004227.34C4952A56@arago-project.org>
+Date: Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-git: remove a very old no longer used version
+Subject: Denys Dmytriyenko : u-boot-ti-staging: add new recipe for TI unified staging tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,87 +27,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: f244c383933709975bc9b7ddc9f51d1c35cd7135
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f244c383933709975bc9b7ddc9f51d1c35cd7135
+Commit: 8a3f7083835f0d45d33d602f18a14dc336fd7f06
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8a3f7083835f0d45d33d602f18a14dc336fd7f06
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 17:03:17 2013 -0400
+Date:   Mon Mar 18 17:57:45 2013 -0400
 
-u-boot-git: remove a very old no longer used version
+u-boot-ti-staging: add new recipe for TI unified staging tree
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot_git.bb |   61 --------------------------------------
- 1 files changed, 0 insertions(+), 61 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb |   13 +++++++++++++
+ 1 files changed, 13 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot_git.bb b/recipes-bsp/u-boot/u-boot_git.bb
-deleted file mode 100644
-index 2b32ab8..0000000
---- a/recipes-bsp/u-boot/u-boot_git.bb
-+++ /dev/null
-@@ -1,61 +0,0 @@
--require u-boot.inc
--PR ="r68"
--
--DEFAULT_PREFERENCE = "-1"
--DEFAULT_PREFERENCE_ti814x = "-1"
--DEFAULT_PREFERENCE_ti816x = "-1"
--
--FILESPATHPKG =. "u-boot-git:"
--
--# ~ TI PSP v2009.11_OMAPPSP_03.00.01.06 (+ couple of commits)
--SRC_URI_omap3evm = "git://arago-project.org/git/projects/u-boot-omap3.git;protocol=git \
--    file://0001-omap3evm-Change-default-console-serial-port-from.patch \
--"
--SRCREV_${PN}_omap3evm = "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
--PV_omap3evm = "2009.11+${PR}+gitr${SRCREV}"
--
--# ~ TI PSP v2009.11_OMAPPSP_03.00.01.06 (+ couple of commits)
--SRC_URI_pn-${PN}_am3517-evm = "git://arago-project.org/git/projects/u-boot-omap3.git;protocol=git"
--SRCREV_pn-${PN}_am3517-evm = "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
--PV_pn-${PN}_am3517-evm = "2009.11+${PR}+gitr${SRCREV}"
--
--# ~ TI PSP v2009.11_OMAPPSP_03.00.01.06 (+ couple of commits)
--SRC_URI_am37x-evm = "git://arago-project.org/git/projects/u-boot-omap3.git;protocol=git \
--    file://0001-omap3evm-Change-default-console-serial-port-from.patch \
--"
--SRCREV_pn-${PN}_am37x-evm = "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
--PV_am37x-evm = "2009.11+${PR}+gitr${SRCREV}"
--
--SRC_URI_omap3-touchbook = "git://gitorious.org/u-boot-omap3/mainline.git;branch=omap3-dev;protocol=git \
--                 file://fw_env.config \
--                 file://dss2.patch \
--                 file://600mhz.patch \
--                 file://new-pinmux.patch \
--                 file://spi3.patch \
--                 file://spi4.patch \
--                 file://headphone.patch \
--                 file://power.patch \
--                 file://ai-logo.patch \
--                 file://mmcinit.patch \
--                 file://touchbook-config.patch \
--                 file://dont-inline-weak-symbols.patch \
--"
--SRCREV_pn-${PN}_omap3-touchbook = "d363f9cb0918a1b6b92e2e20d01543d0c4f53274"
--PV_omap3-touchbook = "2009.05+${PR}+gitr${SRCREV}"
--
--# OMAPL1 omapl137/omapl138 - PSP 3.20.0.11
--
--SRC_URI_omapl138 = "git://arago-project.org/git/projects/u-boot-omapl1.git;protocol=http"
--SRCREV_pn-${PN}_omapl138  = "5f16b8551b125f16cd8d58f278cb25b94272fd9f"
--PV_omapl138      = "2009.11+${PR}+gitr${SRCREV}"
--
--# hawkboard - master branch (hawk still .07beta)
--SRC_URI_hawkboard          = "git://arago-project.org/git/people/sekhar/u-boot-omapl1.git;protocol=git;branch=master"
--SRC_URI_hawkboard         += "file://dont-inline-weak-symbols2.patch"
--SRCREV_pn-${PN}_hawkboard           = "0d291f2f255e6d66a78b3dc2445362a96ae39a57"
--PV_hawkboard               = "2009.08+gitr${SRCREV}"
--
--
--S = "${WORKDIR}/git"
--
--RRECOMMENDS_${PN}_omap3-touchbook = "u-boot-fw-utils"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
+new file mode 100644
+index 0000000..866cf14
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
+@@ -0,0 +1,13 @@
++require u-boot-ti.inc
++
++DESCRIPTION = "u-boot bootloader for TI devices"
++
++PR = "r1"
++
++SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
++
++BRANCH ?= "ti-u-boot-2013.01.01"
++
++SRCREV = "2309e3268c52c844f8924711b4fd7a9693f5b747"
++
++SPL_BINARY = "MLO"
 
 
