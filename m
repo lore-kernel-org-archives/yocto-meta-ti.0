@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD0D0E013A3
-	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:24 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4EC6CE0140A
+	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8080552A2E; Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
+	id A17F352A6F; Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004223.8080552A2E@arago-project.org>
+Message-Id: <20130326004223.A17F352A6F@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot.inc: refactor local include file to base off core with TI customizations
+Subject: Denys Dmytriyenko : u-boot-am180x: modify am180x specific version to use new namespace feature
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,128 +27,62 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 32bb599a61429b07c4aeec89c0d764f85a62fe48
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=32bb599a61429b07c4aeec89c0d764f85a62fe48
+Commit: 1ab747c80d4937aa80fdb5ca8d773501f3787b2d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1ab747c80d4937aa80fdb5ca8d773501f3787b2d
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 17:40:59 2013 -0400
+Date:   Mon Mar 18 18:01:32 2013 -0400
 
-u-boot.inc: refactor local include file to base off core with TI customizations
-
-* Introduce own namespace to allow multiple instances of the same base version,
-  possibly pulled from different trees or patched/customized for specific SoC.
-* Suffix-less variant u-boot_YYYY.MM.bb is reserved for mainline versions of the
-  recipe with no or minimal patches, with broader machine selection.
-* Recipes for machine- or SoC-specific trees should use corresponding suffix -
-  either machine, SoC or the name of the tree.
-* The .inc file lets the suffixed recipes to provide virtual/bootloader, u-boot,
-  as well as generate conventional u-boot binary packages for direct run-time
-  dependencies.
+u-boot-am180x: modify am180x specific version to use new namespace feature
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti.inc |   17 +++++++++
- recipes-bsp/u-boot/u-boot.inc    |   68 --------------------------------------
- 2 files changed, 17 insertions(+), 68 deletions(-)
+ ...hange-default-memory-to-not-limit-at-32MB.patch |    0
+ ...03.21.00.04.sdk.bb => u-boot-am180x_2010.12.bb} |   15 ++++-----------
+ 2 files changed, 4 insertions(+), 11 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-new file mode 100644
-index 0000000..968f3e4
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -0,0 +1,17 @@
-+require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
-+
-+FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot:"
-+
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+PROVIDES += "u-boot"
-+PKG_${PN} = "u-boot"
-+PKG_${PN}-dev = "u-boot-dev"
-+PKG_${PN}-dbg = "u-boot-dbg"
-+
-+S = "${WORKDIR}/git"
-+
-+UBOOT_SUFFIX = "img"
-diff --git a/recipes-bsp/u-boot/u-boot.inc b/recipes-bsp/u-boot/u-boot.inc
-deleted file mode 100644
-index 720f995..0000000
---- a/recipes-bsp/u-boot/u-boot.inc
-+++ /dev/null
-@@ -1,68 +0,0 @@
--DESCRIPTION = "U-Boot - the Universal Boot Loader"
--HOMEPAGE = "http://www.denx.de/wiki/U-Boot/WebHome"
--SECTION = "bootloaders"
+diff --git a/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch b/recipes-bsp/u-boot/u-boot-am180x-2010.12/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
+similarity index 100%
+rename from recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
+rename to recipes-bsp/u-boot/u-boot-am180x-2010.12/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
+diff --git a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
+similarity index 59%
+rename from recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
+rename to recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
+index 7652521..b2852c4 100644
+--- a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
++++ b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
+@@ -1,15 +1,10 @@
+-# Use the version of u-boot.inc in oe-core not the meta-ti version
+-require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
++require u-boot-ti.inc
+ 
+-DESCRIPTION = "u-boot bootloader for DaVinci devices"
+-
 -LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
--
--PROVIDES = "virtual/bootloader"
--
--DEPENDS = "mtd-utils"
--
++DESCRIPTION = "u-boot bootloader for AM180x devices"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
+ 
+ COMPATIBLE_MACHINE = "am180x-evm"
+ 
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
--PARALLEL_MAKE=""
 -
--EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX}"
+ PR = "r0"
+ 
+ SRC_URI = "git://arago-project.org/git/projects/u-boot-davinci.git;protocol=git;branch=${BRANCH}"
+@@ -21,9 +16,7 @@ SRC_URI_append_am180x-evm = " file://0001-da850evm-change-default-memory-to-not-
+ 
+ BRANCH = "03.21.00.03"
+ 
+-# Use literal tags in SRCREV, when available, instead of commit IDs
+-SRCREV = "v2010.12_DAVINCIPSP_03.21.00.04"
 -
--UBOOT_MACHINE ?= "${MACHINE}_config"
--UBOOT_BINARY ?= "u-boot.bin"
--UBOOT_IMAGE ?= "u-boot-${MACHINE}-${PV}-${PR}.bin"
--UBOOT_SYMLINK ?= "u-boot-${MACHINE}.bin"
--UBOOT_MAKE_TARGET ?= "all"
--
--do_configure () {
--	oe_runmake ${UBOOT_MACHINE}
--}
--
--do_compile () {
--	unset LDFLAGS
--	unset CFLAGS
--	unset CPPFLAGS
--	oe_runmake ${UBOOT_MAKE_TARGET}
--}
--
--do_install () {
--	install -d ${D}/boot
--	install ${S}/${UBOOT_BINARY} ${D}/boot/${UBOOT_IMAGE}
--	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
--
--	if [ -e ${WORKDIR}/fw_env.config ] ; then
--		install -d ${D}${sysconfdir}
--		install -m 644 ${WORKDIR}/fw_env.config ${D}${sysconfdir}/fw_env.config
--	fi
--
--}
--
--FILES_${PN} = "/boot ${sysconfdir}"
--# no gnu_hash in uboot.bin, by design, so skip QA
--INSANE_SKIP_${PN} = "1"
--
--inherit deploy
--
--addtask deploy before do_package after do_compile
--
--do_deploy () {
--	install -d ${DEPLOY_DIR_IMAGE}
--	install ${S}/${UBOOT_BINARY} ${DEPLOY_DIR_IMAGE}/${UBOOT_IMAGE}
--
--	cd ${DEPLOY_DIR_IMAGE}
--	rm -f ${UBOOT_BINARY} ${UBOOT_SYMLINK}
--	ln -sf ${UBOOT_IMAGE} ${UBOOT_SYMLINK}
--	ln -sf ${UBOOT_IMAGE} ${UBOOT_BINARY}
--
--	if [ -e ${S}/MLO ] ; then
--		install ${S}/MLO ${DEPLOY_DIR_IMAGE}/MLO-${MACHINE}-${PV}
--		rm -f ${DEPLOY_DIR_IMAGE}/MLO-${MACHINE} ${DEPLOY_DIR_IMAGE}/MLO
--		ln -sf MLO-${MACHINE}-${PV} ${DEPLOY_DIR_IMAGE}/MLO-${MACHINE}
--		ln -sf MLO-${MACHINE}-${PV} ${DEPLOY_DIR_IMAGE}/MLO
--	fi
--}
+-S = "${WORKDIR}/git"
++# v2010.12_DAVINCIPSP_03.21.00.04
++SRCREV = "1254a0b58d900b7035cfb36bf4e1b05dfbf09997"
+ 
+ UBOOT_SUFFIX = "bin"
 
 
