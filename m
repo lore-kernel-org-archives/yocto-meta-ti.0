@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1AC00E014E6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1B8FEE014E8
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 95B7152A2E; Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
+	id D891452AA7; Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004227.95B7152A2E@arago-project.org>
+Message-Id: <20130326004227.D891452AA7@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot 2011.12: modify multi-machine version for the new .inc file
+Subject: Denys Dmytriyenko : u-boot: modify mainline version to use the new . inc file
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,56 +27,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: 11573bda76f132d356fbc1fb37b6471d13a6bcf4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=11573bda76f132d356fbc1fb37b6471d13a6bcf4
+Commit: 6b8e4763e7dddc715fcf1e0903283cc18d6e8be8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6b8e4763e7dddc715fcf1e0903283cc18d6e8be8
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 18:05:17 2013 -0400
+Date:   Mon Mar 18 18:07:53 2013 -0400
 
-u-boot 2011.12: modify multi-machine version for the new .inc file
+u-boot: modify mainline version to use the new .inc file
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot_2011.12.bb |   16 +++-------------
- 1 files changed, 3 insertions(+), 13 deletions(-)
+ recipes-bsp/u-boot/u-boot_2013.01.01.bb |    9 +--------
+ 1 files changed, 1 insertions(+), 8 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
-index 137f5b5..13cb537 100644
---- a/recipes-bsp/u-boot/u-boot_2011.12.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
-@@ -1,15 +1,10 @@
--require u-boot.inc
+diff --git a/recipes-bsp/u-boot/u-boot_2013.01.01.bb b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
+index 4c460cc..e3da1f3 100644
+--- a/recipes-bsp/u-boot/u-boot_2013.01.01.bb
++++ b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
+@@ -1,13 +1,9 @@
+-require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
 +require u-boot-ti.inc
  
--# SPL build
--UBOOT_BINARY = "u-boot.img"
--UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
--UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
-+SPL_BINARY = "MLO"
- 
--PV = "2011.12"
- PR = "r8"
- 
--# No patches for other machines yet
--COMPATIBLE_MACHINE = "(beagleboard|pandaboard|hawkboard|am3517-evm|am37x-evm|omap3evm)"
-+COMPATIBLE_MACHINE = "(beagleboard|pandaboard|am3517-evm|am37x-evm|omap3evm)"
- 
- # Non-omap4 platforms need outer cache turned on
- CACHEFIX = "file://2011.12/0008-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.patch"
-@@ -36,12 +31,7 @@ SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
-            ${FWENV} \
-           "
- 
--
- # v2011.12 tag
- SRCREV = "cba9a894fdb1cb49b60fcd1d1d6919cbd7995dd5"
- 
+ DESCRIPTION = "Mainline u-boot bootloader"
+-LICENSE = "GPLv2+"
 -LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
+ PR = "r1"
+ 
+ SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
+@@ -16,7 +12,4 @@ BRANCH ?= "u-boot-2013.01.y"
+ 
+ SRCREV = "e8ae0fa5edd152b2b29c470b88429be4cdcd2c46"
+ 
 -S = "${WORKDIR}/git"
 -
- RRECOMMENDS_${PN}_beagleboard = "u-boot-fw-utils"
+-UBOOT_SUFFIX = "img"
+ SPL_BINARY = "MLO"
 
 
