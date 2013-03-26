@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 368D1E014E1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4D479E014E3
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DF9FA52A10; Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
+	id 3709452AA9; Tue, 26 Mar 2013 00:42:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004227.DF9FA52A10@arago-project.org>
-Date: Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
+Message-Id: <20130326004228.3709452AA9@arago-project.org>
+Date: Tue, 26 Mar 2013 00:42:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti33x: switch default u-boot preference to ti-staging tree
+Subject: Denys Dmytriyenko : am3517-evm: switch default u-boot preference to machine-specific tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,13 +27,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: c67028600236bd732f3c019251abbd808c0d6abc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c67028600236bd732f3c019251abbd808c0d6abc
+Commit: 855ff4c8b011b24549cb9cc3d91d944baef603b4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=855ff4c8b011b24549cb9cc3d91d944baef603b4
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 18:09:07 2013 -0400
+Date:   Mon Mar 18 19:17:20 2013 -0400
 
-ti33x: switch default u-boot preference to ti-staging tree
+am3517-evm: switch default u-boot preference to machine-specific tree
 
 SDKs or other users of meta-ti can still use one of the other recipes for
 stability or featureset, by setting PREFERRED_PROVIDER in their config.
@@ -42,27 +42,23 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/ti33x.inc |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+ conf/machine/am3517-evm.conf |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index 62afe16..12b80c6 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -16,11 +16,12 @@ XSERVER = "xserver-xorg \
- GUI_MACHINE_CLASS = "bigscreen"
+diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
+index 0151fe9..097e797 100644
+--- a/conf/machine/am3517-evm.conf
++++ b/conf/machine/am3517-evm.conf
+@@ -17,6 +17,10 @@ USE_VT = "2"
  
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r18"
-+MACHINE_KERNEL_PR = "r19"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
  
- # Default providers, may need to override for specific machines
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
--PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
-+PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
- 
- KERNEL_IMAGETYPE = "uImage"
++# Support for am3517 is in the same tree as am33x
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot-am33x"
++PREFERRED_PROVIDER_u-boot = "u-boot-am33x"
++
+ UBOOT_MACHINE = "am3517_evm_config"
+ XLOAD_MACHINE = "am3517evm_config"
  
 
 
