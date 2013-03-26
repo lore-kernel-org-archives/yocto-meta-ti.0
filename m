@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0404CE014E3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1FF7DE014E9
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7631052A99; Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
+	id 0E03852991; Tue, 26 Mar 2013 00:42:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004227.7631052A99@arago-project.org>
-Date: Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
+Message-Id: <20130326004228.0E03852991@arago-project.org>
+Date: Tue, 26 Mar 2013 00:42:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-beagleboard: modify beagleboard specific version to use new namespace feature
+Subject: Denys Dmytriyenko : am180x: switch default u-boot preference to machine-specific tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,49 +27,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: 34063f07ec0b228ad391a93d5ed3571a9b3e3470
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=34063f07ec0b228ad391a93d5ed3571a9b3e3470
+Commit: 45b73845d59bc859418e0cd6871093cd0b5ab83b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=45b73845d59bc859418e0cd6871093cd0b5ab83b
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 18:02:47 2013 -0400
+Date:   Mon Mar 18 18:25:52 2013 -0400
 
-u-boot-beagleboard: modify beagleboard specific version to use new namespace feature
+am180x: switch default u-boot preference to machine-specific tree
+
+SDKs or other users of meta-ti can still use one of the other recipes for
+stability or featureset, by setting PREFERRED_PROVIDER in their config.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...ot_2011.09.bb => u-boot-beagleboard_2011.09.bb} |   11 ++---------
- 1 files changed, 2 insertions(+), 9 deletions(-)
+ conf/machine/am180x-evm.conf     |    2 ++
+ conf/machine/include/davinci.inc |    2 +-
+ 2 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb b/recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
-similarity index 89%
-rename from recipes-bsp/u-boot/u-boot_2011.09.bb
-rename to recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
-index edacb6c..519df16 100644
---- a/recipes-bsp/u-boot/u-boot_2011.09.bb
-+++ b/recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
-@@ -1,11 +1,8 @@
--require u-boot.inc
-+require u-boot-ti.inc
+diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
+index 7ea25cf..cff1565 100644
+--- a/conf/machine/am180x-evm.conf
++++ b/conf/machine/am180x-evm.conf
+@@ -14,3 +14,5 @@ IMAGE_FSTYPES += "tar.gz ubi"
+ SERIAL_CONSOLE = "115200 ttyS2"
  
- PR = "r7"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omapl138-psp"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot-am180x"
++PREFERRED_PROVIDER_u-boot = "u-boot-am180x"
+diff --git a/conf/machine/include/davinci.inc b/conf/machine/include/davinci.inc
+index 756a1e5..6be5eb7 100644
+--- a/conf/machine/include/davinci.inc
++++ b/conf/machine/include/davinci.inc
+@@ -1,7 +1,7 @@
+ require conf/machine/include/tune-arm926ejs.inc
  
--# SPL build
--UBOOT_BINARY = "u-boot.img"
--UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
--UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
-+SPL_BINARY = "MLO"
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r52"
++MACHINE_KERNEL_PR = "r53"
  
- # No patches for other machines yet
- COMPATIBLE_MACHINE = "(beagleboard)"
-@@ -37,7 +34,3 @@ SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
-           "
+ KERNEL_IMAGETYPE = "uImage"
  
- SRCREV = "fdbe8b9a2d1858ba35dd6214315563ad44d4a0e3"
--
--LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
--
--S = "${WORKDIR}/git"
 
 
