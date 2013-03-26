@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD6CEE013A3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ADA77E0140A
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3EC4352A99; Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
+	id 63AE852AAD; Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004224.3EC4352A99@arago-project.org>
+Message-Id: <20130326004224.63AE852AAD@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : keystone: switch default u-boot preference to machine-specific tree
+Subject: Denys Dmytriyenko : am37x-evm: switch default u-boot preference to machine-specific tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,13 +27,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 10c6e2943068003a5425763c4ad98d5c6b383dcb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=10c6e2943068003a5425763c4ad98d5c6b383dcb
+Commit: d50cf9ee400821c3c1e72166e63ab138a03c7b4b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d50cf9ee400821c3c1e72166e63ab138a03c7b4b
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 18:28:17 2013 -0400
+Date:   Mon Mar 18 18:27:11 2013 -0400
 
-keystone: switch default u-boot preference to machine-specific tree
+am37x-evm: switch default u-boot preference to machine-specific tree
 
 SDKs or other users of meta-ti can still use one of the other recipes for
 stability or featureset, by setting PREFERRED_PROVIDER in their config.
@@ -42,26 +42,21 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/keystone.inc |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+ conf/machine/am37x-evm.conf |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
-index 047cc18..72e71bf 100644
---- a/conf/machine/include/keystone.inc
-+++ b/conf/machine/include/keystone.inc
-@@ -4,10 +4,11 @@ require conf/machine/include/soc-family.inc
- require conf/machine/include/tune-cortexa15.inc
+diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
+index 3122e10..0d53d50 100644
+--- a/conf/machine/am37x-evm.conf
++++ b/conf/machine/am37x-evm.conf
+@@ -15,6 +15,8 @@ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ SERIAL_CONSOLE = "115200 ttyO0"
  
- PREFERRED_PROVIDER_virtual/kernel = "linux-keystone"
--PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-keystone"
-+PREFERRED_PROVIDER_u-boot = "u-boot-keystone"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot-am37x"
++PREFERRED_PROVIDER_u-boot = "u-boot-am37x"
  
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r5"
-+MACHINE_KERNEL_PR = "r6"
- 
- KERNEL_IMAGETYPE = "uImage"
- 
+ # NOTE: there are NAND and OneNAND versions of this board...
+ # do ubiattach /dev/ubi_ctrl -m 4
 
 
