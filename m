@@ -1,29 +1,41 @@
-Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0D7B9E0136C
-	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 13:23:39 -0700 (PDT)
-Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2QKNdHj017509
-	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 15:23:39 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2QKNdJb027942
-	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 15:23:39 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 26 Mar 2013 15:23:39 -0500
-Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2QKNdwm016467;
-	Tue, 26 Mar 2013 15:23:39 -0500
-Date: Tue, 26 Mar 2013 16:18:44 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>, <denys@ti.com>
-Message-ID: <213438441.91.1364329124808.JavaMail.jenkins@puget>
-In-Reply-To: <162237943.89.1364328257354.JavaMail.jenkins@puget>
-References: <162237943.89.1364328257354.JavaMail.jenkins@puget>
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E3E79E0136C
+	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 14:19:00 -0700 (PDT)
+Received: from cpec03f0ed08c7f-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.115.5.73]:38554 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1UKbGl-0000GD-9C; Tue, 26 Mar 2013 17:18:59 -0400
+Date: Tue, 26 Mar 2013 17:18:56 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: Steven Grunza <grunzasr@comcast.net>
+In-Reply-To: <5151F315.3040900@comcast.net>
+Message-ID: <alpine.DEB.2.02.1303261715150.3036@oneiric>
+References: <20130319172138.GQ32759@edge> <5148A9B4.5060702@comcast.net>
+	<20130319182747.GH14761@denix.org> <5149C666.7040306@comcast.net>
+	<20130320151759.GP14761@denix.org>
+	<5149F665.9090204@comcast.net> <20130320175415.GW32759@edge>
+	<5149FD74.3030906@comcast.net> <20130320182722.GX32759@edge>
+	<alpine.DEB.2.02.1303201441410.28378@oneiric>
+	<20130320185747.GY32759@edge>
+	<alpine.DEB.2.02.1303201558250.18081@oneiric>
+	<5151F315.3040900@comcast.net>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-03-26_16-12-01
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Is this the correct list for AM3517 EVM questions?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,163 +48,78 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Mar 2013 20:23:40 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_90_1740414647.1364329124807"
+X-List-Received-Date: Tue, 26 Mar 2013 21:19:01 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-225790798-1364332739=:3036"
 
-------=_Part_90_1740414647.1364329124807
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--8323329-225790798-1364332739=:3036
+Content-Type: TEXT/PLAIN; charset=KOI8-R
+Content-Transfer-Encoding: 8BIT
 
-<html>
-<head>
-<title>
-Status for 03/26/13
-</title>
-</head>
-<body>
+On Tue, 26 Mar 2013, Steven Grunza wrote:
 
-<h2>Status for 03/26/13</h2>
+... snip ...
 
-<h2>BUILD_ID: build-2013-03-26_16-13-02</h2>
+> So the build finished and I loaded the files onto my SD card.š MLO,
+> u-boot.img, and uImage onto the first partition.š I untarred the
+> root file system onto the second partition.š This is the result on
+> the serial console:
+>
+> 40X???H????????????ÓSPL 2011.12-dirty (Mar 21 2013 - 19:36:59)
+> Texas Instruments Revision detection unimplemented
+> OMAP SD/MMC: 0
+> reading u-boot.img
+> reading u-boot.img
+>
+>
+> U-Boot 2011.12-dirty (Mar 21 2013 - 19:36:59)
+>
+> AM35XX-GP ES1.0, CPU-OPP2, L3-165MHz, Max CPU Clock 600 Mhz
+> AM3517EVM Board + LPDDR/NAND
+> I2C:šš ready
+> DRAM:š 256 MiB
+> NAND:š 512 MiB
+> MMC:šš OMAP SD/MMC: 0
+> *** Warning - bad CRC, using default environment
+>
+> In:ššš serial
+> Out:šš serial
+> Err:šš serial
+> Die ID #1b7e0000000000000155daa60200c00f
+> Hit any key to stop autoboot:š 0
+> reading boot.scr
+>
+> ** Unable to read "boot.scr" from mmc 0:1 **
+> reading uImage
+>
+> 3160284 bytes read
+> Booting from mmc ...
+> ## Booting kernel from Legacy Image at 82000000 ...
+> šš Image Name:šš Linux-2.6.37
+> šš Image Type:šš ARM Linux Kernel Image (uncompressed)
+> šš Data Size:ššš 3160220 Bytes = 3 MiB
+> šš Load Address: 80008000
+> šš Entry Point:š 80008000
+> šš Verifying Checksum ... OK
+> šš Loading Kernel Image ... OK
+> OK
+>
+> Starting kernel ...
+>
+> Did I miss a step?
 
-<h2>Clean Build: false</h2>
+  that was going to be my long weekend project ... are you saying it
+just hung at that point?
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+rday
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+-- 
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
-</body>
-</html>
-
-
-------=_Part_90_1740414647.1364329124807--
+--8323329-225790798-1364332739=:3036--
