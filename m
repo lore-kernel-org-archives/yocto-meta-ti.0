@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4EC6CE0140A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E83EE013A7
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A17F352A6F; Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
+	id D89A752A9F; Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004223.A17F352A6F@arago-project.org>
+Message-Id: <20130326004223.D89A752A9F@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-am180x: modify am180x specific version to use new namespace feature
+Subject: Denys Dmytriyenko : u-boot 2011.12: modify multi-machine version for the new .inc file
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,62 +27,56 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 1ab747c80d4937aa80fdb5ca8d773501f3787b2d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1ab747c80d4937aa80fdb5ca8d773501f3787b2d
+Commit: 3b49d182d54e77a2f82d3bcb4ed3b5cb33b7fe56
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3b49d182d54e77a2f82d3bcb4ed3b5cb33b7fe56
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 18:01:32 2013 -0400
+Date:   Mon Mar 18 18:05:17 2013 -0400
 
-u-boot-am180x: modify am180x specific version to use new namespace feature
+u-boot 2011.12: modify multi-machine version for the new .inc file
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...hange-default-memory-to-not-limit-at-32MB.patch |    0
- ...03.21.00.04.sdk.bb => u-boot-am180x_2010.12.bb} |   15 ++++-----------
- 2 files changed, 4 insertions(+), 11 deletions(-)
+ recipes-bsp/u-boot/u-boot_2011.12.bb |   16 +++-------------
+ 1 files changed, 3 insertions(+), 13 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch b/recipes-bsp/u-boot/u-boot-am180x-2010.12/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
-similarity index 100%
-rename from recipes-bsp/u-boot/u-boot-2010.12-psp03.21.00.04.sdk/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
-rename to recipes-bsp/u-boot/u-boot-am180x-2010.12/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
-diff --git a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
-similarity index 59%
-rename from recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
-rename to recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
-index 7652521..b2852c4 100644
---- a/recipes-bsp/u-boot/u-boot_2010.12-psp03.21.00.04.sdk.bb
-+++ b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
+diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
+index 137f5b5..13cb537 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.12.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
 @@ -1,15 +1,10 @@
--# Use the version of u-boot.inc in oe-core not the meta-ti version
--require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
+-require u-boot.inc
 +require u-boot-ti.inc
  
--DESCRIPTION = "u-boot bootloader for DaVinci devices"
+-# SPL build
+-UBOOT_BINARY = "u-boot.img"
+-UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
+-UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
++SPL_BINARY = "MLO"
+ 
+-PV = "2011.12"
+ PR = "r8"
+ 
+-# No patches for other machines yet
+-COMPATIBLE_MACHINE = "(beagleboard|pandaboard|hawkboard|am3517-evm|am37x-evm|omap3evm)"
++COMPATIBLE_MACHINE = "(beagleboard|pandaboard|am3517-evm|am37x-evm|omap3evm)"
+ 
+ # Non-omap4 platforms need outer cache turned on
+ CACHEFIX = "file://2011.12/0008-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.patch"
+@@ -36,12 +31,7 @@ SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
+            ${FWENV} \
+           "
+ 
 -
--LICENSE = "GPLv2+"
-+DESCRIPTION = "u-boot bootloader for AM180x devices"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
+ # v2011.12 tag
+ SRCREV = "cba9a894fdb1cb49b60fcd1d1d6919cbd7995dd5"
  
- COMPATIBLE_MACHINE = "am180x-evm"
- 
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
- PR = "r0"
- 
- SRC_URI = "git://arago-project.org/git/projects/u-boot-davinci.git;protocol=git;branch=${BRANCH}"
-@@ -21,9 +16,7 @@ SRC_URI_append_am180x-evm = " file://0001-da850evm-change-default-memory-to-not-
- 
- BRANCH = "03.21.00.03"
- 
--# Use literal tags in SRCREV, when available, instead of commit IDs
--SRCREV = "v2010.12_DAVINCIPSP_03.21.00.04"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
 -
 -S = "${WORKDIR}/git"
-+# v2010.12_DAVINCIPSP_03.21.00.04
-+SRCREV = "1254a0b58d900b7035cfb36bf4e1b05dfbf09997"
- 
- UBOOT_SUFFIX = "bin"
+-
+ RRECOMMENDS_${PN}_beagleboard = "u-boot-fw-utils"
 
 
