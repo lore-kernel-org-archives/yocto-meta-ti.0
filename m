@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B205DE01423
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD0D0E013A3
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:24 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6A64452A56; Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
+	id 8080552A2E; Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004223.6A64452A56@arago-project.org>
+Message-Id: <20130326004223.8080552A2E@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot 2011.06: remove an older no longer used version
+Subject: Denys Dmytriyenko : u-boot.inc: refactor local include file to base off core with TI customizations
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,62 +22,133 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Mar 2013 00:42:24 -0000
+X-List-Received-Date: Tue, 26 Mar 2013 00:42:25 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 22a2fa4b97c7ce6dfcd1420d1cadb034c309047e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=22a2fa4b97c7ce6dfcd1420d1cadb034c309047e
+Commit: 32bb599a61429b07c4aeec89c0d764f85a62fe48
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=32bb599a61429b07c4aeec89c0d764f85a62fe48
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 17:39:10 2013 -0400
+Date:   Mon Mar 18 17:40:59 2013 -0400
 
-u-boot 2011.06: remove an older no longer used version
+u-boot.inc: refactor local include file to base off core with TI customizations
+
+* Introduce own namespace to allow multiple instances of the same base version,
+  possibly pulled from different trees or patched/customized for specific SoC.
+* Suffix-less variant u-boot_YYYY.MM.bb is reserved for mainline versions of the
+  recipe with no or minimal patches, with broader machine selection.
+* Recipes for machine- or SoC-specific trees should use corresponding suffix -
+  either machine, SoC or the name of the tree.
+* The .inc file lets the suffixed recipes to provide virtual/bootloader, u-boot,
+  as well as generate conventional u-boot binary packages for direct run-time
+  dependencies.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...-Beagle-Pin-Mux-initialization-glitch-fix.patch |   46 -
- ...-omapfb.debug-y-from-Beagle-and-Overo-env.patch |   56 --
- ...agle-pass-expansionboard-name-in-bootargs.patch |   57 --
- ...beagleboard-add-support-for-xM-revision-C.patch |   47 -
- ...-for-SMSC95XX-USB-2.0-10-100MBit-Ethernet.patch |  989 --------------------
- ...t-hardware-MAC-address-framework-to-usbne.patch |  245 -----
- ...Add-documentation-for-USB-Host-Networking.patch |  188 ----
- .../u-boot/2011.06/0008-dm3730-enable-dpll5.patch  |   31 -
- ...beagleboard-enable-HUB-power-on-XM-boards.patch |   40 -
- ...-beagleboard-turn-off-clocks-in-ehci_stop.patch |   32 -
- .../0011-beagleboard-enable-networking.patch       |   45 -
- ...12-beagleboard-switch-to-ttyO2-as-console.patch |   26 -
- ...gleboard-load-kernel-from-MMC-ext-not-FAT.patch |   27 -
- ...4-beagleboard-enable-asix-driver-and-dhcp.patch |   34 -
- ...-hardcode-MAC-for-onboard-SMSC-and-use-uI.patch |   26 -
- ...agleboard-decrease-bootdelay-to-2-seconds.patch |   26 -
- ...__attribute__-packed-for-struct-ehci_hccr.patch |   58 --
- ...sb-Some-EHCI-chipsets-are-slow-to-respond.patch |   29 -
- .../0019-OMAP3-Add-DSS-driver-for-OMAP3.patch      |  349 -------
- .../2011.06/0020-video-DSS-makefile-update.patch   |   30 -
- .../0021-BeagleBoard-Configure-DVI-S-video.patch   |  170 ----
- .../0022-BeagleBoard-config-enable-DSS.patch       |   25 -
- ...0023-BeagleBoard-Added-userbutton-command.patch |  107 ---
- ...ED-name-match-finding-avoiding-extraneous.patch |   44 -
- .../0025-BeagleBoard-fix-LED-0-1-in-driver.patch   |   31 -
- .../0026-led-added-cmd_led-to-Makefile.patch       |   29 -
- ...led-correct-off-on-locations-in-structure.patch |   36 -
- .../0028-BeagleBoard-config-make-mtest-run.patch   |   36 -
- ...-config-increase-command-line-functionali.patch |   42 -
- ...agleBoard-config-add-optargs-buddy-camera.patch |   51 -
- .../2011.06/0031-omap4-add-support-for-gpios.patch |  306 ------
- .../2011.06/0032-omap4-add-support-for-EHCI.patch  |  322 -------
- .../0033-omap4_panda-add-support-for-EHCI.patch    |   97 --
- ...nda-adding-support-for-smsc-and-tftp-boot.patch |   66 --
- ...035-omap4_panda-use-uImage.panda-for-tftp.patch |   26 -
- .../u-boot/u-boot/omap3-touchbook/fw_env.config    |    6 -
- recipes-bsp/u-boot/u-boot/touchbook-config.patch   |   25 -
- recipes-bsp/u-boot/u-boot_2011.06.bb               |   51 -
- 38 files changed, 0 insertions(+), 3851 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti.inc |   17 +++++++++
+ recipes-bsp/u-boot/u-boot.inc    |   68 --------------------------------------
+ 2 files changed, 17 insertions(+), 68 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=22a2fa4b97c7ce6dfcd1420d1cadb034c309047e
+diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+new file mode 100644
+index 0000000..968f3e4
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot-ti.inc
+@@ -0,0 +1,17 @@
++require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
++
++FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot:"
++
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++PROVIDES += "u-boot"
++PKG_${PN} = "u-boot"
++PKG_${PN}-dev = "u-boot-dev"
++PKG_${PN}-dbg = "u-boot-dbg"
++
++S = "${WORKDIR}/git"
++
++UBOOT_SUFFIX = "img"
+diff --git a/recipes-bsp/u-boot/u-boot.inc b/recipes-bsp/u-boot/u-boot.inc
+deleted file mode 100644
+index 720f995..0000000
+--- a/recipes-bsp/u-boot/u-boot.inc
++++ /dev/null
+@@ -1,68 +0,0 @@
+-DESCRIPTION = "U-Boot - the Universal Boot Loader"
+-HOMEPAGE = "http://www.denx.de/wiki/U-Boot/WebHome"
+-SECTION = "bootloaders"
+-LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
+-
+-PROVIDES = "virtual/bootloader"
+-
+-DEPENDS = "mtd-utils"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-PARALLEL_MAKE=""
+-
+-EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX}"
+-
+-UBOOT_MACHINE ?= "${MACHINE}_config"
+-UBOOT_BINARY ?= "u-boot.bin"
+-UBOOT_IMAGE ?= "u-boot-${MACHINE}-${PV}-${PR}.bin"
+-UBOOT_SYMLINK ?= "u-boot-${MACHINE}.bin"
+-UBOOT_MAKE_TARGET ?= "all"
+-
+-do_configure () {
+-	oe_runmake ${UBOOT_MACHINE}
+-}
+-
+-do_compile () {
+-	unset LDFLAGS
+-	unset CFLAGS
+-	unset CPPFLAGS
+-	oe_runmake ${UBOOT_MAKE_TARGET}
+-}
+-
+-do_install () {
+-	install -d ${D}/boot
+-	install ${S}/${UBOOT_BINARY} ${D}/boot/${UBOOT_IMAGE}
+-	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
+-
+-	if [ -e ${WORKDIR}/fw_env.config ] ; then
+-		install -d ${D}${sysconfdir}
+-		install -m 644 ${WORKDIR}/fw_env.config ${D}${sysconfdir}/fw_env.config
+-	fi
+-
+-}
+-
+-FILES_${PN} = "/boot ${sysconfdir}"
+-# no gnu_hash in uboot.bin, by design, so skip QA
+-INSANE_SKIP_${PN} = "1"
+-
+-inherit deploy
+-
+-addtask deploy before do_package after do_compile
+-
+-do_deploy () {
+-	install -d ${DEPLOY_DIR_IMAGE}
+-	install ${S}/${UBOOT_BINARY} ${DEPLOY_DIR_IMAGE}/${UBOOT_IMAGE}
+-
+-	cd ${DEPLOY_DIR_IMAGE}
+-	rm -f ${UBOOT_BINARY} ${UBOOT_SYMLINK}
+-	ln -sf ${UBOOT_IMAGE} ${UBOOT_SYMLINK}
+-	ln -sf ${UBOOT_IMAGE} ${UBOOT_BINARY}
+-
+-	if [ -e ${S}/MLO ] ; then
+-		install ${S}/MLO ${DEPLOY_DIR_IMAGE}/MLO-${MACHINE}-${PV}
+-		rm -f ${DEPLOY_DIR_IMAGE}/MLO-${MACHINE} ${DEPLOY_DIR_IMAGE}/MLO
+-		ln -sf MLO-${MACHINE}-${PV} ${DEPLOY_DIR_IMAGE}/MLO-${MACHINE}
+-		ln -sf MLO-${MACHINE}-${PV} ${DEPLOY_DIR_IMAGE}/MLO
+-	fi
+-}
+
 
