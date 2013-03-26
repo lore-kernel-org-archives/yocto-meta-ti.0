@@ -1,26 +1,15 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 804B9E0146B
-	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 08:48:14 -0700 (PDT)
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2QFmCZX013518
-	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 10:48:13 -0500
-Received: from DBDE71.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2QFmC41019559
-	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 21:18:12 +0530 (IST)
-Received: from dbdp32.itg.ti.com (172.24.170.251) by DBDE71.ent.ti.com
-	(172.24.170.149) with Microsoft SMTP Server id 14.1.323.3;
-	Tue, 26 Mar 2013 21:18:12 +0530
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2QFmAMZ022631;
-	Tue, 26 Mar 2013 21:18:11 +0530
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 26 Mar 2013 10:48:08 -0500
-Message-ID: <1364312888-588-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Subject: [PATCHv4 2/2] omap5-evm: Add OMAP5 EVM configuration
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 947CBE0123F
+	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 11:36:19 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id EC65F52A9F; Tue, 26 Mar 2013 18:36:18 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130326183618.EC65F52A9F@arago-project.org>
+Date: Tue, 26 Mar 2013 18:36:18 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Chase Maupin : omap5-evm: Add OMAP5 EVM configuration
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,25 +22,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Mar 2013 15:48:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 26 Mar 2013 18:36:19 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: danny
+Commit: 0e11ce30492573ef5f51bb5056624fe36d3e8065
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0e11ce30492573ef5f51bb5056624fe36d3e8065
+
+Author: Chase Maupin <Chase.Maupin@ti.com>
+Date:   Tue Mar 26 10:48:08 2013 -0500
+
+omap5-evm: Add OMAP5 EVM configuration
 
 * Add the machine configuration for the OMAP5 EVM device.
 * Create the omap-a15.inc file to be shared with all OMAP
   Cortex-A15 derivative devices.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
-* Updated in version 4:
-    * Moved XSERVER settings into the SOC_FAMILY include
-    * restored removal of omap-a15.inc inclusion
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
- conf/machine/include/omap-a15.inc                |   25 ++++++++++++++++++++++
- conf/machine/{am335x-evm.conf => omap5-evm.conf} |   17 ++++++++-------
- 2 files changed, 34 insertions(+), 8 deletions(-)
- create mode 100644 conf/machine/include/omap-a15.inc
- copy conf/machine/{am335x-evm.conf => omap5-evm.conf} (72%)
+
+ conf/machine/include/omap-a15.inc |   25 +++++++++++++++++++++++++
+ conf/machine/omap5-evm.conf       |   36 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 61 insertions(+), 0 deletions(-)
 
 diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
 new file mode 100644
@@ -84,41 +79,47 @@ index 0000000..fa2037a
 +           xf86-video-fbdev"
 +
 +GUI_MACHINE_CLASS = "smallscreen"
-diff --git a/conf/machine/am335x-evm.conf b/conf/machine/omap5-evm.conf
-similarity index 72%
-copy from conf/machine/am335x-evm.conf
-copy to conf/machine/omap5-evm.conf
-index 21e79a2..0504bb6 100644
---- a/conf/machine/am335x-evm.conf
+diff --git a/conf/machine/omap5-evm.conf b/conf/machine/omap5-evm.conf
+new file mode 100644
+index 0000000..0504bb6
+--- /dev/null
 +++ b/conf/machine/omap5-evm.conf
-@@ -1,13 +1,8 @@
- #@TYPE: Machine
--#@NAME: AM335x EVM
--#@DESCRIPTION: Machine configuration for the TI AM335x EVM
+@@ -0,0 +1,36 @@
++#@TYPE: Machine
 +#@NAME: OMAP5 EVM
 +#@DESCRIPTION: Machine configuration for the TI OMAP5 uEVM
- 
--require conf/machine/include/ti33x.inc
--
--# Use built-in LCD by default
--XSERVER += "xf86-input-tslib"
--GUI_MACHINE_CLASS = "smallscreen"
--MACHINE_FEATURES += "touchscreen"
++
 +require conf/machine/include/omap-a15.inc
- 
- IMAGE_FSTYPES += "ubi tar.gz"
- 
-@@ -33,3 +28,9 @@ MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
- # UBI: sub-page size:              512
- # UBI: VID header offset:          2048 (aligned 2048)
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
++
++IMAGE_FSTYPES += "ubi tar.gz"
++
++SERIAL_CONSOLE = "115200 ttyO0"
++
++# UBI information.  Note that this is board and kernel specific.  Changes
++# in your kernel port may require changes in these variables.  For more
++# details about this board please see
++# http://processors.wiki.ti.com/index.php/UBIFS_Support
++
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# From dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: logical eraseblock size:    126976 bytes
++# from ubiattach stdout:
++# UBI device number 0, total 1988 LEBs
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
++
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# from dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: physical eraseblock size:   131072 bytes (128 KiB)
++# UBI: sub-page size:              512
++# UBI: VID header offset:          2048 (aligned 2048)
++UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
 +
 +UBOOT_MACHINE = "omap5_evm_config"
 +
 +# Currently removing the sgx machine feature because there is no SGX package
 +# available for omap5
 +MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
--- 
-1.7.0.4
 
 
