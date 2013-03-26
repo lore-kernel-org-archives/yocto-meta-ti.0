@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 719D6E01460
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 71880E0144A
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1E97452AAA; Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
+	id 0431152AA9; Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004224.1E97452AAA@arago-project.org>
+Message-Id: <20130326004224.0431152AA9@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot: modify mainline version to use the new . inc file
+Subject: Denys Dmytriyenko : u-boot-am33x: modify am33x specific version to use new namespace feature
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,47 +27,82 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: a2f7ef8b645d1c51826b7eecf74634d2a1280cc4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a2f7ef8b645d1c51826b7eecf74634d2a1280cc4
+Commit: 48673d8784c36184a9e4b3d2c81cfe74d1fa9953
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=48673d8784c36184a9e4b3d2c81cfe74d1fa9953
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 18:07:53 2013 -0400
+Date:   Mon Mar 18 18:07:18 2013 -0400
 
-u-boot: modify mainline version to use the new .inc file
+u-boot-am33x: modify am33x specific version to use new namespace feature
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot_2013.01.01.bb |    9 +--------
- 1 files changed, 1 insertions(+), 8 deletions(-)
+ recipes-bsp/u-boot/u-boot-am33x_2012.10.bb |   17 ++++++++++++++
+ recipes-bsp/u-boot/u-boot_2012.10.bb       |   32 ----------------------------
+ 2 files changed, 17 insertions(+), 32 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot_2013.01.01.bb b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
-index 4c460cc..e3da1f3 100644
---- a/recipes-bsp/u-boot/u-boot_2013.01.01.bb
-+++ b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
-@@ -1,13 +1,9 @@
--require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
+diff --git a/recipes-bsp/u-boot/u-boot-am33x_2012.10.bb b/recipes-bsp/u-boot/u-boot-am33x_2012.10.bb
+new file mode 100644
+index 0000000..7320e02
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot-am33x_2012.10.bb
+@@ -0,0 +1,17 @@
 +require u-boot-ti.inc
- 
- DESCRIPTION = "Mainline u-boot bootloader"
++
++DESCRIPTION = "u-boot bootloader for ARM MPU devices"
++
++COMPATIBLE_MACHINE = "ti33x|omap3"
++
++DEFAULT_PREFERENCE = "-1"
++
++PR = "r7+gitr${SRCPV}"
++
++SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH}"
++
++BRANCH = "amsdk-05.06.00.00"
++
++SRCREV = "6536bfa6b7f16bb49fdea8c72959e3ed54e77a82"
++
++SPL_BINARY = "MLO"
+diff --git a/recipes-bsp/u-boot/u-boot_2012.10.bb b/recipes-bsp/u-boot/u-boot_2012.10.bb
+deleted file mode 100644
+index 89d646c..0000000
+--- a/recipes-bsp/u-boot/u-boot_2012.10.bb
++++ /dev/null
+@@ -1,32 +0,0 @@
+-# Use the version of u-boot.inc in oe-core not the meta-ti version
+-require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
+-
+-# Reset OEMAKE. Current u-boot.inc sets -02 which breaks this version of u-boot's build.
+-# This issue was fixed in oe-core master by removing the -02 statement.
+-EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
+-
+-DESCRIPTION = "u-boot bootloader for ARM MPU devices"
 -LICENSE = "GPLv2+"
 -LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
- 
- DEFAULT_PREFERENCE = "-1"
- 
+-
+-COMPATIBLE_MACHINE = "ti33x|omap3"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
 -PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
- PR = "r1"
- 
- SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
-@@ -16,7 +12,4 @@ BRANCH ?= "u-boot-2013.01.y"
- 
- SRCREV = "e8ae0fa5edd152b2b29c470b88429be4cdcd2c46"
- 
+-PR = "r7+gitr${SRCPV}"
+-
+-SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH} \
+-"
+-
+-BRANCH = "amsdk-05.06.00.00"
+-
+-SRCREV = "6536bfa6b7f16bb49fdea8c72959e3ed54e77a82"
+-
 -S = "${WORKDIR}/git"
 -
 -UBOOT_SUFFIX = "img"
- SPL_BINARY = "MLO"
+-
+-# Set the name of the SPL that will built so that it is also packaged with u-boot.
+-SPL_BINARY = "MLO"
 
 
