@@ -1,49 +1,30 @@
-Return-Path: <grunzasr@comcast.net>
-Received: from qmta05.westchester.pa.mail.comcast.net
-	(qmta05.westchester.pa.mail.comcast.net [76.96.62.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3E4E1E0131E
-	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 12:12:04 -0700 (PDT)
-Received: from omta04.westchester.pa.mail.comcast.net ([76.96.62.35])
-	by qmta05.westchester.pa.mail.comcast.net with comcast
-	id GBM91l00J0ldTLk55KC3dm; Tue, 26 Mar 2013 19:12:03 +0000
-Received: from [127.0.0.1] ([71.225.124.244])
-	by omta04.westchester.pa.mail.comcast.net with comcast
-	id GKC21l00d5GVvnK3QKC2eK; Tue, 26 Mar 2013 19:12:03 +0000
-Message-ID: <5151F315.3040900@comcast.net>
-Date: Tue, 26 Mar 2013 15:12:21 -0400
-From: Steven Grunza <grunzasr@comcast.net>
-User-Agent: Mozilla/5.0 (Windows NT 5.1;
-	rv:17.0) Gecko/20130307 Thunderbird/17.0.4
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF3A8E0136C
+	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 13:09:12 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2QK9CAf030138
+	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 15:09:12 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2QK9C3s012772
+	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 15:09:12 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 26 Mar 2013 15:09:11 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2QK9Bgh012757;
+	Tue, 26 Mar 2013 15:09:11 -0500
+Date: Tue, 26 Mar 2013 16:04:17 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>, <denys@ti.com>
+Message-ID: <162237943.89.1364328257354.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-References: <20130319172138.GQ32759@edge> <5148A9B4.5060702@comcast.net>
-	<20130319182747.GH14761@denix.org> <5149C666.7040306@comcast.net>
-	<20130320151759.GP14761@denix.org>
-	<5149F665.9090204@comcast.net> <20130320175415.GW32759@edge>
-	<5149FD74.3030906@comcast.net> <20130320182722.GX32759@edge>
-	<alpine.DEB.2.02.1303201441410.28378@oneiric>
-	<20130320185747.GY32759@edge>
-	<alpine.DEB.2.02.1303201558250.18081@oneiric>
-In-Reply-To: <alpine.DEB.2.02.1303201558250.18081@oneiric>
-X-Antivirus: avast! (VPS 130326-0, 03/26/2013), Outbound message
-X-Antivirus-Status: Clean
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=comcast.net;
-	s=q20121106; t=1364325123;
-	bh=DmdjF1mLQ2+hLMxngIWoFvP0RQxIyHTMSvqUmaRpy7M=;
-	h=Received:Received:Message-ID:Date:From:Reply-To:MIME-Version:To:
-	Subject:Content-Type;
-	b=BTM10cKKWnj5jga9pNH4AnOwTBhPVJhWIZSBnBhC/aA3nR4Ii4ece6PQq7PFmafZj
-	6M+zju6WMVcgZhRMP1zDGQJlGqGj4gNHOkNet2XTwISAgBe4Jllu/jCf/ywIfr9gfO
-	2sqBgcbg9LIeYZPJiVQMVrs+Hl/LkbwZmz9V+bWgTYCWrFqr3P16m8CqljGY7Eppz1
-	IhuMapU6uChBWbYlUPc9ydad6fDH3OPE7wWC3gwTANmG/7VdJLD9mBvbmut4QtK0VB
-	RUpkYHP8L0S2lIh7lvuHg0qKy+oYfnh3kZVvBD9O56usS1ckmcqC707RknX/aq98uf
-	YqBC9qDEWiXTg==
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Is this the correct list for AM3517 EVM questions?
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: FAILURE
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-03-26_16-03-13
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
-Reply-To: grunzasr@comcast.net
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -53,184 +34,157 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Mar 2013 19:12:04 -0000
-Content-Type: multipart/alternative;
-	boundary="------------040906090101010308000508"
+X-List-Received-Date: Tue, 26 Mar 2013 20:09:13 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_88_332888505.1364328257353"
 
---------------040906090101010308000508
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
-
-On 3/20/2013 3:58 PM, Robert P. J. Day wrote:
-> On Wed, 20 Mar 2013, Denys Dmytriyenko wrote:
->
->> On Wed, Mar 20, 2013 at 02:45:17PM -0400, Robert P. J. Day wrote:
->>> On Wed, 20 Mar 2013, Denys Dmytriyenko wrote:
->>>
->>> ... snip ...
->>>
->>>> If you are using poky-danny as a base, you need to use "danny"
->>>> branch of meta-ti to match the versions.
->>>    i ordered that very AM3517 exp kit this morning and, while it's
->>> in transit, i'm building a core-image-minimal for it. should i expect
->>> success if i use the absolute latest "git pull"s of everything?
->>>
->>>    i'm aware of the recipe masking issue and the mesa-dri version thing
->>> so i won't trip over that. so far, the "fetchall" worked and i'm
->>> currently on "running tasks (191 of 1591)" of the build itself.
->>>
->>>    is there any reason to think this shouldn't finish? thanks.
->> http://article.gmane.org/gmane.linux.embedded.yocto.meta-ti/1661
->
-So the build finished and I loaded the files onto my SD card.  MLO, 
-u-boot.img, and uImage onto the first partition.  I untarred the root 
-file system onto the second partition.  This is the result on the serial 
-console:
-
-40X?H?????SPL 2011.12-dirty (Mar 21 2013 - 19:36:59)
-Texas Instruments Revision detection unimplemented
-OMAP SD/MMC: 0
-reading u-boot.img
-reading u-boot.img
-
-
-U-Boot 2011.12-dirty (Mar 21 2013 - 19:36:59)
-
-AM35XX-GP ES1.0, CPU-OPP2, L3-165MHz, Max CPU Clock 600 Mhz
-AM3517EVM Board + LPDDR/NAND
-I2C:   ready
-DRAM:  256 MiB
-NAND:  512 MiB
-MMC:   OMAP SD/MMC: 0
-*** Warning - bad CRC, using default environment
-
-In:    serial
-Out:   serial
-Err:   serial
-Die ID #1b7e0000000000000155daa60200c00f
-Hit any key to stop autoboot:  0
-reading boot.scr
-
-** Unable to read "boot.scr" from mmc 0:1 **
-reading uImage
-
-3160284 bytes read
-Booting from mmc ...
-## Booting kernel from Legacy Image at 82000000 ...
-    Image Name:   Linux-2.6.37
-    Image Type:   ARM Linux Kernel Image (uncompressed)
-    Data Size:    3160220 Bytes = 3 MiB
-    Load Address: 80008000
-    Entry Point:  80008000
-    Verifying Checksum ... OK
-    Loading Kernel Image ... OK
-OK
-
-Starting kernel ...
-
-
-Did I miss a step?
-
---------------040906090101010308000508
-Content-Type: text/html; charset=ISO-8859-1
+------=_Part_88_332888505.1364328257353
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
-  <head>
-    <meta content="text/html; charset=ISO-8859-1"
-      http-equiv="Content-Type">
-  </head>
-  <body bgcolor="#FFFFFF" text="#000000">
-    <div class="moz-cite-prefix">On 3/20/2013 3:58 PM, Robert P. J. Day
-      wrote:<br>
-    </div>
-    <blockquote cite="mid:alpine.DEB.2.02.1303201558250.18081@oneiric"
-      type="cite">
-      <pre wrap="">On Wed, 20 Mar 2013, Denys Dmytriyenko wrote:
+<head>
+<title>
+Status for 03/25/13
+</title>
+</head>
+<body>
 
-</pre>
-      <blockquote type="cite">
-        <pre wrap="">On Wed, Mar 20, 2013 at 02:45:17PM -0400, Robert P. J. Day wrote:
-</pre>
-        <blockquote type="cite">
-          <pre wrap="">On Wed, 20 Mar 2013, Denys Dmytriyenko wrote:
+<h2>Status for 03/25/13</h2>
 
-... snip ...
+<h2>BUILD_ID: build-2013-03-25_21-02-09</h2>
 
-</pre>
-          <blockquote type="cite">
-            <pre wrap="">If you are using poky-danny as a base, you need to use "danny"
-branch of meta-ti to match the versions.
-</pre>
-          </blockquote>
-          <pre wrap="">
-  i ordered that very AM3517 exp kit this morning and, while it's
-in transit, i'm building a core-image-minimal for it. should i expect
-success if i use the absolute latest "git pull"s of everything?
+<h2>Clean Build: false</h2>
 
-  i'm aware of the recipe masking issue and the mesa-dri version thing
-so i won't trip over that. so far, the "fetchall" worked and i'm
-currently on "running tasks (191 of 1591)" of the build itself.
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-  is there any reason to think this shouldn't finish? thanks.
-</pre>
-        </blockquote>
-        <pre wrap="">
-<a class="moz-txt-link-freetext" href="http://article.gmane.org/gmane.linux.embedded.yocto.meta-ti/1661">http://article.gmane.org/gmane.linux.embedded.yocto.meta-ti/1661</a>
-</pre>
-      </blockquote>
-      <br>
-    </blockquote>
-    So the build finished and I loaded the files onto my SD card.&nbsp; MLO,
-    u-boot.img, and uImage onto the first partition.&nbsp; I untarred the
-    root file system onto the second partition.&nbsp; This is the result on
-    the serial console:<br>
-    <br>
-    <font face="Courier New, Courier, monospace">40X&#65533;H&#65533;&#65533;&#65533;&#65533;&#1089;SPL
-      2011.12-dirty (Mar 21 2013 - 19:36:59)<br>
-      Texas Instruments Revision detection unimplemented<br>
-      OMAP SD/MMC: 0<br>
-      reading u-boot.img<br>
-      reading u-boot.img<br>
-      <br>
-      <br>
-      U-Boot 2011.12-dirty (Mar 21 2013 - 19:36:59)<br>
-      <br>
-      AM35XX-GP ES1.0, CPU-OPP2, L3-165MHz, Max CPU Clock 600 Mhz<br>
-      AM3517EVM Board + LPDDR/NAND<br>
-      I2C:&nbsp;&nbsp; ready<br>
-      DRAM:&nbsp; 256 MiB<br>
-      NAND:&nbsp; 512 MiB<br>
-      MMC:&nbsp;&nbsp; OMAP SD/MMC: 0<br>
-      *** Warning - bad CRC, using default environment<br>
-      <br>
-      In:&nbsp;&nbsp;&nbsp; serial<br>
-      Out:&nbsp;&nbsp; serial<br>
-      Err:&nbsp;&nbsp; serial<br>
-      Die ID #1b7e0000000000000155daa60200c00f<br>
-      Hit any key to stop autoboot:&nbsp; 0 <br>
-      reading boot.scr<br>
-      <br>
-      ** Unable to read "boot.scr" from mmc 0:1 **<br>
-      reading uImage<br>
-      <br>
-      3160284 bytes read<br>
-      Booting from mmc ...<br>
-      ## Booting kernel from Legacy Image at 82000000 ...<br>
-      &nbsp;&nbsp; Image Name:&nbsp;&nbsp; Linux-2.6.37<br>
-      &nbsp;&nbsp; Image Type:&nbsp;&nbsp; ARM Linux Kernel Image (uncompressed)<br>
-      &nbsp;&nbsp; Data Size:&nbsp;&nbsp;&nbsp; 3160220 Bytes = 3 MiB<br>
-      &nbsp;&nbsp; Load Address: 80008000<br>
-      &nbsp;&nbsp; Entry Point:&nbsp; 80008000<br>
-      &nbsp;&nbsp; Verifying Checksum ... OK<br>
-      &nbsp;&nbsp; Loading Kernel Image ... OK<br>
-      OK<br>
-      <br>
-      Starting kernel ...<br>
-      <br>
-      <br>
-    </font>Did I miss a step?<br>
-  </body>
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.03"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
 </html>
 
---------------040906090101010308000508--
+
+------=_Part_88_332888505.1364328257353--
