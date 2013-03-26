@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 656C4E014DD
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5C7E7E014E9
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2B8DE52A5D; Tue, 26 Mar 2013 00:42:28 +0000 (UTC)
+	id 4FC9E52A6F; Tue, 26 Mar 2013 00:42:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004228.2B8DE52A5D@arago-project.org>
+Message-Id: <20130326004228.4FC9E52A6F@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am37x-evm: switch default u-boot preference to machine-specific tree
+Subject: Denys Dmytriyenko : beagleboard: switch default u-boot preference to machine-specific tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,13 +27,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: 6c4be0a29adbcded8ba72451c0903cb32ce97d4e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6c4be0a29adbcded8ba72451c0903cb32ce97d4e
+Commit: 6a02716519df5526f63b23b9a763bb14d33434cd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6a02716519df5526f63b23b9a763bb14d33434cd
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 18:27:11 2013 -0400
+Date:   Mon Mar 18 18:27:45 2013 -0400
 
-am37x-evm: switch default u-boot preference to machine-specific tree
+beagleboard: switch default u-boot preference to machine-specific tree
 
 SDKs or other users of meta-ti can still use one of the other recipes for
 stability or featureset, by setting PREFERRED_PROVIDER in their config.
@@ -42,21 +42,35 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am37x-evm.conf |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ conf/machine/beagleboard.conf  |    2 ++
+ conf/machine/include/omap3.inc |    2 +-
+ 2 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
-index 3122e10..0d53d50 100644
---- a/conf/machine/am37x-evm.conf
-+++ b/conf/machine/am37x-evm.conf
-@@ -15,6 +15,8 @@ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
- SERIAL_CONSOLE = "115200 ttyO0"
+diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
+index a65e360..f923119 100644
+--- a/conf/machine/beagleboard.conf
++++ b/conf/machine/beagleboard.conf
+@@ -8,6 +8,8 @@ require conf/machine/include/omap3.inc
+ GUI_MACHINE_CLASS = "bigscreen"
  
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-am37x"
-+PREFERRED_PROVIDER_u-boot = "u-boot-am37x"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-mainline"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot-beagleboard"
++PREFERRED_PROVIDER_u-boot = "u-boot-beagleboard"
  
- # NOTE: there are NAND and OneNAND versions of this board...
- # do ubiattach /dev/ubi_ctrl -m 4
+ IMAGE_FSTYPES += "tar.gz ubi"
+ EXTRA_IMAGECMD_jffs2 = "-lnp"
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index 99f0c80..212ebe7 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -16,7 +16,7 @@ XSERVER = "xserver-xorg \
+ GUI_MACHINE_CLASS = "bigscreen"
+ 
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r123"
++MACHINE_KERNEL_PR = "r124"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
 
 
