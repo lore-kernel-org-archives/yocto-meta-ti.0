@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E83EE013A7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E6DAE013A3
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D89A752A9F; Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
+	id 86F4E52A5D; Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004223.D89A752A9F@arago-project.org>
+Message-Id: <20130326004223.86F4E52A5D@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot 2011.12: modify multi-machine version for the new .inc file
+Subject: Denys Dmytriyenko : u-boot-ti-staging: add new recipe for TI unified staging tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,56 +27,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 3b49d182d54e77a2f82d3bcb4ed3b5cb33b7fe56
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3b49d182d54e77a2f82d3bcb4ed3b5cb33b7fe56
+Commit: a529d36e8a8d3b51ea944ddbd26d1c640544b47e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a529d36e8a8d3b51ea944ddbd26d1c640544b47e
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 18:05:17 2013 -0400
+Date:   Mon Mar 18 17:57:45 2013 -0400
 
-u-boot 2011.12: modify multi-machine version for the new .inc file
+u-boot-ti-staging: add new recipe for TI unified staging tree
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot_2011.12.bb |   16 +++-------------
- 1 files changed, 3 insertions(+), 13 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb |   13 +++++++++++++
+ 1 files changed, 13 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
-index 137f5b5..13cb537 100644
---- a/recipes-bsp/u-boot/u-boot_2011.12.bb
-+++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
-@@ -1,15 +1,10 @@
--require u-boot.inc
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
+new file mode 100644
+index 0000000..866cf14
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
+@@ -0,0 +1,13 @@
 +require u-boot-ti.inc
- 
--# SPL build
--UBOOT_BINARY = "u-boot.img"
--UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
--UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
++
++DESCRIPTION = "u-boot bootloader for TI devices"
++
++PR = "r1"
++
++SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
++
++BRANCH ?= "ti-u-boot-2013.01.01"
++
++SRCREV = "2309e3268c52c844f8924711b4fd7a9693f5b747"
++
 +SPL_BINARY = "MLO"
- 
--PV = "2011.12"
- PR = "r8"
- 
--# No patches for other machines yet
--COMPATIBLE_MACHINE = "(beagleboard|pandaboard|hawkboard|am3517-evm|am37x-evm|omap3evm)"
-+COMPATIBLE_MACHINE = "(beagleboard|pandaboard|am3517-evm|am37x-evm|omap3evm)"
- 
- # Non-omap4 platforms need outer cache turned on
- CACHEFIX = "file://2011.12/0008-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.patch"
-@@ -36,12 +31,7 @@ SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
-            ${FWENV} \
-           "
- 
--
- # v2011.12 tag
- SRCREV = "cba9a894fdb1cb49b60fcd1d1d6919cbd7995dd5"
- 
--LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
--
--S = "${WORKDIR}/git"
--
- RRECOMMENDS_${PN}_beagleboard = "u-boot-fw-utils"
 
 
