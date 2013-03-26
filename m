@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE144E01423
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF9B6E01481
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 93C2152AAF; Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
+	id 4B8EF52AAE; Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004224.93C2152AAF@arago-project.org>
+Message-Id: <20130326004224.4B8EF52AAE@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVyIG1lc2EtZHJpOiBmb2xsb3cgb2UtY29yZScgcyByZW5hbWluZyB0byBtZXNh?=
+Subject: Denys Dmytriyenko : am180x: switch default u-boot preference to machine-specific tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,30 +27,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 352bb2f0a8a6c0d92ac7498e8117f4fa6d1c12fd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=352bb2f0a8a6c0d92ac7498e8117f4fa6d1c12fd
+Commit: 948b5f11d352a4824653229e48fb8c346d38169b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=948b5f11d352a4824653229e48fb8c346d38169b
 
-Author: Andreas Müller <schnitzeltony@googlemail.com>
-Date:   Mon Mar 25 09:09:30 2013 +0100
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Mar 18 18:25:52 2013 -0400
 
-mesa-dri: follow oe-core's renaming to mesa
+am180x: switch default u-boot preference to machine-specific tree
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+SDKs or other users of meta-ti can still use one of the other recipes for
+stability or featureset, by setting PREFERRED_PROVIDER in their config.
+
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...mesa-dri_9.0.2.bbappend => mesa_9.0.2.bbappend} |    0
- .../{mesa-dri_git.bbappend => mesa_git.bbappend}   |    0
- 2 files changed, 0 insertions(+), 0 deletions(-)
+ conf/machine/am180x-evm.conf     |    2 ++
+ conf/machine/include/davinci.inc |    2 +-
+ 2 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-graphics/mesa/mesa-dri_9.0.2.bbappend b/recipes-graphics/mesa/mesa_9.0.2.bbappend
-similarity index 100%
-rename from recipes-graphics/mesa/mesa-dri_9.0.2.bbappend
-rename to recipes-graphics/mesa/mesa_9.0.2.bbappend
-diff --git a/recipes-graphics/mesa/mesa-dri_git.bbappend b/recipes-graphics/mesa/mesa_git.bbappend
-similarity index 100%
-rename from recipes-graphics/mesa/mesa-dri_git.bbappend
-rename to recipes-graphics/mesa/mesa_git.bbappend
+diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
+index 7ea25cf..cff1565 100644
+--- a/conf/machine/am180x-evm.conf
++++ b/conf/machine/am180x-evm.conf
+@@ -14,3 +14,5 @@ IMAGE_FSTYPES += "tar.gz ubi"
+ SERIAL_CONSOLE = "115200 ttyS2"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omapl138-psp"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot-am180x"
++PREFERRED_PROVIDER_u-boot = "u-boot-am180x"
+diff --git a/conf/machine/include/davinci.inc b/conf/machine/include/davinci.inc
+index 756a1e5..6be5eb7 100644
+--- a/conf/machine/include/davinci.inc
++++ b/conf/machine/include/davinci.inc
+@@ -1,7 +1,7 @@
+ require conf/machine/include/tune-arm926ejs.inc
+ 
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r52"
++MACHINE_KERNEL_PR = "r53"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
 
 
