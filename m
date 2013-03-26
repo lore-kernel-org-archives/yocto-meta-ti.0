@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B0CC9E0140A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B205DE01423
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:24 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3B4AA52A10; Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
+	id 6A64452A56; Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004223.3B4AA52A10@arago-project.org>
+Message-Id: <20130326004223.6A64452A56@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-git: remove a very old no longer used version
+Subject: Denys Dmytriyenko : u-boot 2011.06: remove an older no longer used version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,87 +27,57 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 90955082eeac7f5fceccf2402abb9a924be535ed
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=90955082eeac7f5fceccf2402abb9a924be535ed
+Commit: 22a2fa4b97c7ce6dfcd1420d1cadb034c309047e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=22a2fa4b97c7ce6dfcd1420d1cadb034c309047e
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 17:03:17 2013 -0400
+Date:   Mon Mar 18 17:39:10 2013 -0400
 
-u-boot-git: remove a very old no longer used version
+u-boot 2011.06: remove an older no longer used version
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot_git.bb |   61 --------------------------------------
- 1 files changed, 0 insertions(+), 61 deletions(-)
+ ...-Beagle-Pin-Mux-initialization-glitch-fix.patch |   46 -
+ ...-omapfb.debug-y-from-Beagle-and-Overo-env.patch |   56 --
+ ...agle-pass-expansionboard-name-in-bootargs.patch |   57 --
+ ...beagleboard-add-support-for-xM-revision-C.patch |   47 -
+ ...-for-SMSC95XX-USB-2.0-10-100MBit-Ethernet.patch |  989 --------------------
+ ...t-hardware-MAC-address-framework-to-usbne.patch |  245 -----
+ ...Add-documentation-for-USB-Host-Networking.patch |  188 ----
+ .../u-boot/2011.06/0008-dm3730-enable-dpll5.patch  |   31 -
+ ...beagleboard-enable-HUB-power-on-XM-boards.patch |   40 -
+ ...-beagleboard-turn-off-clocks-in-ehci_stop.patch |   32 -
+ .../0011-beagleboard-enable-networking.patch       |   45 -
+ ...12-beagleboard-switch-to-ttyO2-as-console.patch |   26 -
+ ...gleboard-load-kernel-from-MMC-ext-not-FAT.patch |   27 -
+ ...4-beagleboard-enable-asix-driver-and-dhcp.patch |   34 -
+ ...-hardcode-MAC-for-onboard-SMSC-and-use-uI.patch |   26 -
+ ...agleboard-decrease-bootdelay-to-2-seconds.patch |   26 -
+ ...__attribute__-packed-for-struct-ehci_hccr.patch |   58 --
+ ...sb-Some-EHCI-chipsets-are-slow-to-respond.patch |   29 -
+ .../0019-OMAP3-Add-DSS-driver-for-OMAP3.patch      |  349 -------
+ .../2011.06/0020-video-DSS-makefile-update.patch   |   30 -
+ .../0021-BeagleBoard-Configure-DVI-S-video.patch   |  170 ----
+ .../0022-BeagleBoard-config-enable-DSS.patch       |   25 -
+ ...0023-BeagleBoard-Added-userbutton-command.patch |  107 ---
+ ...ED-name-match-finding-avoiding-extraneous.patch |   44 -
+ .../0025-BeagleBoard-fix-LED-0-1-in-driver.patch   |   31 -
+ .../0026-led-added-cmd_led-to-Makefile.patch       |   29 -
+ ...led-correct-off-on-locations-in-structure.patch |   36 -
+ .../0028-BeagleBoard-config-make-mtest-run.patch   |   36 -
+ ...-config-increase-command-line-functionali.patch |   42 -
+ ...agleBoard-config-add-optargs-buddy-camera.patch |   51 -
+ .../2011.06/0031-omap4-add-support-for-gpios.patch |  306 ------
+ .../2011.06/0032-omap4-add-support-for-EHCI.patch  |  322 -------
+ .../0033-omap4_panda-add-support-for-EHCI.patch    |   97 --
+ ...nda-adding-support-for-smsc-and-tftp-boot.patch |   66 --
+ ...035-omap4_panda-use-uImage.panda-for-tftp.patch |   26 -
+ .../u-boot/u-boot/omap3-touchbook/fw_env.config    |    6 -
+ recipes-bsp/u-boot/u-boot/touchbook-config.patch   |   25 -
+ recipes-bsp/u-boot/u-boot_2011.06.bb               |   51 -
+ 38 files changed, 0 insertions(+), 3851 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot_git.bb b/recipes-bsp/u-boot/u-boot_git.bb
-deleted file mode 100644
-index 2b32ab8..0000000
---- a/recipes-bsp/u-boot/u-boot_git.bb
-+++ /dev/null
-@@ -1,61 +0,0 @@
--require u-boot.inc
--PR ="r68"
--
--DEFAULT_PREFERENCE = "-1"
--DEFAULT_PREFERENCE_ti814x = "-1"
--DEFAULT_PREFERENCE_ti816x = "-1"
--
--FILESPATHPKG =. "u-boot-git:"
--
--# ~ TI PSP v2009.11_OMAPPSP_03.00.01.06 (+ couple of commits)
--SRC_URI_omap3evm = "git://arago-project.org/git/projects/u-boot-omap3.git;protocol=git \
--    file://0001-omap3evm-Change-default-console-serial-port-from.patch \
--"
--SRCREV_${PN}_omap3evm = "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
--PV_omap3evm = "2009.11+${PR}+gitr${SRCREV}"
--
--# ~ TI PSP v2009.11_OMAPPSP_03.00.01.06 (+ couple of commits)
--SRC_URI_pn-${PN}_am3517-evm = "git://arago-project.org/git/projects/u-boot-omap3.git;protocol=git"
--SRCREV_pn-${PN}_am3517-evm = "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
--PV_pn-${PN}_am3517-evm = "2009.11+${PR}+gitr${SRCREV}"
--
--# ~ TI PSP v2009.11_OMAPPSP_03.00.01.06 (+ couple of commits)
--SRC_URI_am37x-evm = "git://arago-project.org/git/projects/u-boot-omap3.git;protocol=git \
--    file://0001-omap3evm-Change-default-console-serial-port-from.patch \
--"
--SRCREV_pn-${PN}_am37x-evm = "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
--PV_am37x-evm = "2009.11+${PR}+gitr${SRCREV}"
--
--SRC_URI_omap3-touchbook = "git://gitorious.org/u-boot-omap3/mainline.git;branch=omap3-dev;protocol=git \
--                 file://fw_env.config \
--                 file://dss2.patch \
--                 file://600mhz.patch \
--                 file://new-pinmux.patch \
--                 file://spi3.patch \
--                 file://spi4.patch \
--                 file://headphone.patch \
--                 file://power.patch \
--                 file://ai-logo.patch \
--                 file://mmcinit.patch \
--                 file://touchbook-config.patch \
--                 file://dont-inline-weak-symbols.patch \
--"
--SRCREV_pn-${PN}_omap3-touchbook = "d363f9cb0918a1b6b92e2e20d01543d0c4f53274"
--PV_omap3-touchbook = "2009.05+${PR}+gitr${SRCREV}"
--
--# OMAPL1 omapl137/omapl138 - PSP 3.20.0.11
--
--SRC_URI_omapl138 = "git://arago-project.org/git/projects/u-boot-omapl1.git;protocol=http"
--SRCREV_pn-${PN}_omapl138  = "5f16b8551b125f16cd8d58f278cb25b94272fd9f"
--PV_omapl138      = "2009.11+${PR}+gitr${SRCREV}"
--
--# hawkboard - master branch (hawk still .07beta)
--SRC_URI_hawkboard          = "git://arago-project.org/git/people/sekhar/u-boot-omapl1.git;protocol=git;branch=master"
--SRC_URI_hawkboard         += "file://dont-inline-weak-symbols2.patch"
--SRCREV_pn-${PN}_hawkboard           = "0d291f2f255e6d66a78b3dc2445362a96ae39a57"
--PV_hawkboard               = "2009.08+gitr${SRCREV}"
--
--
--S = "${WORKDIR}/git"
--
--RRECOMMENDS_${PN}_omap3-touchbook = "u-boot-fw-utils"
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=22a2fa4b97c7ce6dfcd1420d1cadb034c309047e
 
