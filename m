@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4E9BDE013AC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 719D6E01460
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A83455298C; Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
+	id 1E97452AAA; Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004223.A83455298C@arago-project.org>
-Date: Tue, 26 Mar 2013 00:42:23 +0000 (UTC)
+Message-Id: <20130326004224.1E97452AAA@arago-project.org>
+Date: Tue, 26 Mar 2013 00:42:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-beagleboard: modify beagleboard specific version to use new namespace feature
+Subject: Denys Dmytriyenko : u-boot: modify mainline version to use the new . inc file
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,49 +27,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 3b8880042373aaaefe6176cca6a36b8756a8b850
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3b8880042373aaaefe6176cca6a36b8756a8b850
+Commit: a2f7ef8b645d1c51826b7eecf74634d2a1280cc4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a2f7ef8b645d1c51826b7eecf74634d2a1280cc4
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 18:02:47 2013 -0400
+Date:   Mon Mar 18 18:07:53 2013 -0400
 
-u-boot-beagleboard: modify beagleboard specific version to use new namespace feature
+u-boot: modify mainline version to use the new .inc file
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...ot_2011.09.bb => u-boot-beagleboard_2011.09.bb} |   11 ++---------
- 1 files changed, 2 insertions(+), 9 deletions(-)
+ recipes-bsp/u-boot/u-boot_2013.01.01.bb |    9 +--------
+ 1 files changed, 1 insertions(+), 8 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot_2011.09.bb b/recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
-similarity index 89%
-rename from recipes-bsp/u-boot/u-boot_2011.09.bb
-rename to recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
-index edacb6c..519df16 100644
---- a/recipes-bsp/u-boot/u-boot_2011.09.bb
-+++ b/recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
-@@ -1,11 +1,8 @@
--require u-boot.inc
+diff --git a/recipes-bsp/u-boot/u-boot_2013.01.01.bb b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
+index 4c460cc..e3da1f3 100644
+--- a/recipes-bsp/u-boot/u-boot_2013.01.01.bb
++++ b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
+@@ -1,13 +1,9 @@
+-require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
 +require u-boot-ti.inc
  
- PR = "r7"
- 
--# SPL build
--UBOOT_BINARY = "u-boot.img"
--UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
--UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
-+SPL_BINARY = "MLO"
- 
- # No patches for other machines yet
- COMPATIBLE_MACHINE = "(beagleboard)"
-@@ -37,7 +34,3 @@ SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
-           "
- 
- SRCREV = "fdbe8b9a2d1858ba35dd6214315563ad44d4a0e3"
--
+ DESCRIPTION = "Mainline u-boot bootloader"
+-LICENSE = "GPLv2+"
 -LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
 -
+ PR = "r1"
+ 
+ SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
+@@ -16,7 +12,4 @@ BRANCH ?= "u-boot-2013.01.y"
+ 
+ SRCREV = "e8ae0fa5edd152b2b29c470b88429be4cdcd2c46"
+ 
 -S = "${WORKDIR}/git"
+-
+-UBOOT_SUFFIX = "img"
+ SPL_BINARY = "MLO"
 
 
