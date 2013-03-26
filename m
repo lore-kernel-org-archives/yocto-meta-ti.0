@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7286E014E1
-	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:27 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03E13E014E2
+	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5350052A5D; Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
+	id 8000052A9D; Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004227.5350052A5D@arago-project.org>
+Message-Id: <20130326004227.8000052A9D@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-keystone: modify keystone specific version to use new namespace feature
+Subject: Denys Dmytriyenko : u-boot-am33x: modify am33x specific version to use new namespace feature
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,77 +22,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Mar 2013 00:42:27 -0000
+X-List-Received-Date: Tue, 26 Mar 2013 00:42:28 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: 814aefd0c1f503d4594d6a74d1080dc6c8ac3a8b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=814aefd0c1f503d4594d6a74d1080dc6c8ac3a8b
+Commit: ae33b7ee8a0a25f937e8a2cb041ae90f8b1c0439
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ae33b7ee8a0a25f937e8a2cb041ae90f8b1c0439
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 17:59:17 2013 -0400
+Date:   Mon Mar 18 18:04:22 2013 -0400
 
-u-boot-keystone: modify keystone specific version to use new namespace feature
+u-boot-am33x: modify am33x specific version to use new namespace feature
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-keystone_2013.01.bb |   16 ++++++++++++++++
- recipes-bsp/u-boot/u-boot_2013.01.bb          |   23 -----------------------
- 2 files changed, 16 insertions(+), 23 deletions(-)
+ ...boot_2011.10rc.bb => u-boot-am33x_2011.10rc.bb} |   12 ++----------
+ 1 files changed, 2 insertions(+), 10 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-new file mode 100644
-index 0000000..788d813
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-@@ -0,0 +1,16 @@
+diff --git a/recipes-bsp/u-boot/u-boot_2011.10rc.bb b/recipes-bsp/u-boot/u-boot-am33x_2011.10rc.bb
+similarity index 82%
+rename from recipes-bsp/u-boot/u-boot_2011.10rc.bb
+rename to recipes-bsp/u-boot/u-boot-am33x_2011.10rc.bb
+index 2cb8271..d1a8236 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.10rc.bb
++++ b/recipes-bsp/u-boot/u-boot-am33x_2011.10rc.bb
+@@ -1,4 +1,4 @@
+-require u-boot.inc
 +require u-boot-ti.inc
-+
-+DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
-+
-+COMPATIBLE_MACHINE = "keystone"
-+
-+PR = "r2+gitr${SRCPV}"
-+
-+SRC_URI = "git://arago-project.org/git/projects/u-boot-keystone.git;protocol=git;branch=${BRANCH}"
-+
-+BRANCH = "master"
-+
-+# DEV.MCSDK-03.00.00.07
-+SRCREV = "82f40e857d853165310d0753e79235aefb65d7ba"
-+
-+UBOOT_SUFFIX = "bin"
-diff --git a/recipes-bsp/u-boot/u-boot_2013.01.bb b/recipes-bsp/u-boot/u-boot_2013.01.bb
-deleted file mode 100644
-index b9e6daf..0000000
---- a/recipes-bsp/u-boot/u-boot_2013.01.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
+ 
+ # No patches for other machines yet
+ COMPATIBLE_MACHINE = "(ti33x)"
+@@ -8,10 +8,7 @@ DEFAULT_PREFERENCE_ti33x = "99"
+ PV = "2011.09+git"
+ PR = "r30"
+ 
+-# SPL build
+-UBOOT_BINARY = "u-boot.img"
+-UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
+-UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
++SPL_BINARY = "MLO"
+ 
+ SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=master \
+            file://2011.09git/0001-am335x_evm-add-option-to-boot-kernel-from-boot-in-ex.patch \
+@@ -28,8 +25,3 @@ SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;br
+           "
+ 
+ SRCREV = "dc52533ccff00a12761f793d66b39e4f6a4a3bba"
 -
--DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
--LICENSE = "GPLv2+"
 -LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
--
--COMPATIBLE_MACHINE = "keystone"
--
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PR = "r2+gitr${SRCPV}"
--
--SRC_URI = "git://arago-project.org/git/projects/u-boot-keystone.git;protocol=git;branch=${BRANCH}"
--
--BRANCH = "master"
--
--SRCREV = "DEV.MCSDK-03.00.00.07"
--
--EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
 -
 -S = "${WORKDIR}/git"
 -
--UBOOT_SUFFIX = "bin"
 
 
