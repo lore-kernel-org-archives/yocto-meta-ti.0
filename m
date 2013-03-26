@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83D4DE014E4
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83898E014E3
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:27 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 34C4952A56; Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
+	id 0B80052A10; Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004227.34C4952A56@arago-project.org>
+Message-Id: <20130326004227.0B80052A10@arago-project.org>
 Date: Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: add new recipe for TI unified staging tree
+Subject: Denys Dmytriyenko : u-boot 2011.09-psp: remove an older no longer used version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,39 +27,55 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: 8a3f7083835f0d45d33d602f18a14dc336fd7f06
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8a3f7083835f0d45d33d602f18a14dc336fd7f06
+Commit: 597e23588ad4b38bd35e7b0f7427a55d43c22939
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=597e23588ad4b38bd35e7b0f7427a55d43c22939
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 17:57:45 2013 -0400
+Date:   Mon Mar 18 18:03:30 2013 -0400
 
-u-boot-ti-staging: add new recipe for TI unified staging tree
+u-boot 2011.09-psp: remove an older no longer used version
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb |   13 +++++++++++++
- 1 files changed, 13 insertions(+), 0 deletions(-)
+ .../u-boot/u-boot_2011.09-psp04.06.00.08.bb        |   29 --------------------
+ 1 files changed, 0 insertions(+), 29 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-new file mode 100644
-index 0000000..866cf14
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-@@ -0,0 +1,13 @@
-+require u-boot-ti.inc
-+
-+DESCRIPTION = "u-boot bootloader for TI devices"
-+
-+PR = "r1"
-+
-+SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
-+
-+BRANCH ?= "ti-u-boot-2013.01.01"
-+
-+SRCREV = "2309e3268c52c844f8924711b4fd7a9693f5b747"
-+
-+SPL_BINARY = "MLO"
+diff --git a/recipes-bsp/u-boot/u-boot_2011.09-psp04.06.00.08.bb b/recipes-bsp/u-boot/u-boot_2011.09-psp04.06.00.08.bb
+deleted file mode 100644
+index 1bd4b9e..0000000
+--- a/recipes-bsp/u-boot/u-boot_2011.09-psp04.06.00.08.bb
++++ /dev/null
+@@ -1,29 +0,0 @@
+-# Use the version of u-boot.inc in oe-core not the meta-ti version
+-require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
+-
+-DESCRIPTION = "u-boot bootloader for ARM MPU devices"
+-LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
+-
+-COMPATIBLE_MACHINE = "ti33x|omap3"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-PR = "r0+gitr${SRCPV}"
+-
+-SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH}"
+-
+-BRANCH = "AM335XPSP_04.06.00.08"
+-
+-# Lock to the commit corresponding to TAG:
+-# v2011.09_AM335xPSP_04.06.00.08
+-SRCREV = "1e4626f0d5f3bb04ec974e76a5d9029875269d31"
+-
+-S = "${WORKDIR}/git"
+-
+-UBOOT_SUFFIX = "img"
+-
+-# Set the name of the SPL that will built so that it is also packaged with u-boot.
+-SPL_BINARY = "MLO"
 
 
