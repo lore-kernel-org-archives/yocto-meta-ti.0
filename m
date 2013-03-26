@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1FF7DE014E9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1AC00E014E6
 	for <meta-ti@yoctoproject.org>; Mon, 25 Mar 2013 17:42:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0E03852991; Tue, 26 Mar 2013 00:42:28 +0000 (UTC)
+	id 95B7152A2E; Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130326004228.0E03852991@arago-project.org>
-Date: Tue, 26 Mar 2013 00:42:28 +0000 (UTC)
+Message-Id: <20130326004227.95B7152A2E@arago-project.org>
+Date: Tue, 26 Mar 2013 00:42:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am180x: switch default u-boot preference to machine-specific tree
+Subject: Denys Dmytriyenko : u-boot 2011.12: modify multi-machine version for the new .inc file
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,47 +27,56 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: 45b73845d59bc859418e0cd6871093cd0b5ab83b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=45b73845d59bc859418e0cd6871093cd0b5ab83b
+Commit: 11573bda76f132d356fbc1fb37b6471d13a6bcf4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=11573bda76f132d356fbc1fb37b6471d13a6bcf4
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Mar 18 18:25:52 2013 -0400
+Date:   Mon Mar 18 18:05:17 2013 -0400
 
-am180x: switch default u-boot preference to machine-specific tree
-
-SDKs or other users of meta-ti can still use one of the other recipes for
-stability or featureset, by setting PREFERRED_PROVIDER in their config.
+u-boot 2011.12: modify multi-machine version for the new .inc file
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am180x-evm.conf     |    2 ++
- conf/machine/include/davinci.inc |    2 +-
- 2 files changed, 3 insertions(+), 1 deletions(-)
+ recipes-bsp/u-boot/u-boot_2011.12.bb |   16 +++-------------
+ 1 files changed, 3 insertions(+), 13 deletions(-)
 
-diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
-index 7ea25cf..cff1565 100644
---- a/conf/machine/am180x-evm.conf
-+++ b/conf/machine/am180x-evm.conf
-@@ -14,3 +14,5 @@ IMAGE_FSTYPES += "tar.gz ubi"
- SERIAL_CONSOLE = "115200 ttyS2"
+diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
+index 137f5b5..13cb537 100644
+--- a/recipes-bsp/u-boot/u-boot_2011.12.bb
++++ b/recipes-bsp/u-boot/u-boot_2011.12.bb
+@@ -1,15 +1,10 @@
+-require u-boot.inc
++require u-boot-ti.inc
  
- PREFERRED_PROVIDER_virtual/kernel = "linux-omapl138-psp"
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-am180x"
-+PREFERRED_PROVIDER_u-boot = "u-boot-am180x"
-diff --git a/conf/machine/include/davinci.inc b/conf/machine/include/davinci.inc
-index 756a1e5..6be5eb7 100644
---- a/conf/machine/include/davinci.inc
-+++ b/conf/machine/include/davinci.inc
-@@ -1,7 +1,7 @@
- require conf/machine/include/tune-arm926ejs.inc
+-# SPL build
+-UBOOT_BINARY = "u-boot.img"
+-UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
+-UBOOT_SYMLINK = "u-boot-${MACHINE}.img"
++SPL_BINARY = "MLO"
  
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r52"
-+MACHINE_KERNEL_PR = "r53"
+-PV = "2011.12"
+ PR = "r8"
  
- KERNEL_IMAGETYPE = "uImage"
+-# No patches for other machines yet
+-COMPATIBLE_MACHINE = "(beagleboard|pandaboard|hawkboard|am3517-evm|am37x-evm|omap3evm)"
++COMPATIBLE_MACHINE = "(beagleboard|pandaboard|am3517-evm|am37x-evm|omap3evm)"
  
+ # Non-omap4 platforms need outer cache turned on
+ CACHEFIX = "file://2011.12/0008-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.patch"
+@@ -36,12 +31,7 @@ SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
+            ${FWENV} \
+           "
+ 
+-
+ # v2011.12 tag
+ SRCREV = "cba9a894fdb1cb49b60fcd1d1d6919cbd7995dd5"
+ 
+-LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
+-
+-S = "${WORKDIR}/git"
+-
+ RRECOMMENDS_${PN}_beagleboard = "u-boot-fw-utils"
 
 
