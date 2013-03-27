@@ -1,27 +1,27 @@
 Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 92F02E0146C
-	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 15:53:22 -0700 (PDT)
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C9594E01473
+	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 17:06:54 -0700 (PDT)
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2QMrL4D007824
-	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 17:53:21 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2QMrLut002854
-	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 17:53:21 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 26 Mar 2013 17:53:21 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2R06sOS031161
+	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 19:06:54 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2R06shD016377
+	for <meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 19:06:54 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 26 Mar 2013 19:06:53 -0500
 Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2QMrLhq020967	for
-	<meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 17:53:21 -0500
-Date: Tue, 26 Mar 2013 18:48:26 -0400
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2R06rLs010200	for
+	<meta-ti@yoctoproject.org>; Tue, 26 Mar 2013 19:06:53 -0500
+Date: Tue, 26 Mar 2013 20:01:59 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <785527740.93.1364338106967.JavaMail.jenkins@puget>
+Message-ID: <922516455.95.1364342519091.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-03-26_18-37-00
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-03-26_19-50-15
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,10 +34,11 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Mar 2013 22:53:22 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_92_125647763.1364338106966"
+X-List-Received-Date: Wed, 27 Mar 2013 00:06:55 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_94_1017895951.1364342519088"
 
-------=_Part_92_125647763.1364338106966
+------=_Part_94_1017895951.1364342519088
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
@@ -51,7 +52,7 @@ Status for 03/26/13
 
 <h2>Status for 03/26/13</h2>
 
-<h2>BUILD_ID: build-2013-03-26_18-38-01</h2>
+<h2>BUILD_ID: build-2013-03-26_19-51-17</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -97,47 +98,47 @@ Status for 03/26/13
     </tr>
     <tr>
         <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
         <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
         <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
         <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>am180x-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
     </tr>
     <tr>
         <td>omap5-evm</td>
-        <td bgcolor=red>FAILED</td>
+        <td bgcolor=lime>PASSED</td>
         <td bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>keystone-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
     </tr>
     <tr>
         <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
         <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>beaglebone</td>
-        <td bgcolor=red>FAILED</td>
+        <td bgcolor=lime>PASSED</td>
         <td bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>pandaboard</td>
-        <td bgcolor=red>FAILED</td>
+        <td bgcolor=lime>PASSED</td>
         <td bgcolor=yellow>SKIPPED</td>
     </tr>
 </table>
@@ -192,4 +193,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_92_125647763.1364338106966--
+------=_Part_94_1017895951.1364342519088--
