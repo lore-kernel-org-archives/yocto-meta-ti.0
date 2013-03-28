@@ -1,16 +1,23 @@
-Return-Path: <ian.wisbon@timesys.com>
-Received: from exchange07.timesys.com (exchange07.timesys.com
-	[209.114.137.116])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A311EE014C1
-	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2013 15:09:34 -0700 (PDT)
-Received: from duckworth (192.168.3.31) by exchange07.timesys.com
-	(192.168.1.221) with Microsoft SMTP Server id 8.1.436.0;
-	Thu, 28 Mar 2013 18:09:33 -0400
-Date: Thu, 28 Mar 2013 18:09:35 -0400
-From: Ian Wisbon <ian.wisbon@timesys.com>
+Return-Path: <denys@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9A8CEE014C1
+	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2013 15:11:09 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2SMB44j019105;
+	Thu, 28 Mar 2013 17:11:05 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2SMB41O016999;
+	Thu, 28 Mar 2013 17:11:04 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 28 Mar 2013 17:11:04 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id r2SMB4HW011776;
+	Thu, 28 Mar 2013 17:11:04 -0500
+Date: Thu, 28 Mar 2013 18:11:04 -0400
+From: Denys Dmytriyenko <denys@ti.com>
 To: "Maupin, Chase" <chase.maupin@ti.com>
-Message-ID: <20130328180935.049ba3f8@duckworth>
-In-Reply-To: <7D46E86EC0A8354091174257B2FED101594ADDAE@DLEE11.ent.ti.com>
+Message-ID: <20130328221103.GH23022@edge>
 References: <20130328115247.029b68ae@duckworth>
 	<7D46E86EC0A8354091174257B2FED101594ACEFA@DLEE11.ent.ti.com>
 	<20130328122753.2b957cca@duckworth>
@@ -19,9 +26,9 @@ References: <20130328115247.029b68ae@duckworth>
 	<7D46E86EC0A8354091174257B2FED101594ADCAC@DLEE11.ent.ti.com>
 	<20130328175012.7f9533b3@duckworth>
 	<7D46E86EC0A8354091174257B2FED101594ADDAE@DLEE11.ent.ti.com>
-Organization: Timesys Coporation
-X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.10; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
+In-Reply-To: <7D46E86EC0A8354091174257B2FED101594ADDAE@DLEE11.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: OMAP5: Booting build output
 X-BeenThere: meta-ti@yoctoproject.org
@@ -36,30 +43,11 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Mar 2013 22:09:34 -0000
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Mar 2013 22:11:09 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Chase,
-
-For some reason, basic arithmetic and counting from zero escaped me
-today.
-
-You are of course, correct, as the 4 port enumerates ttyUSB0-3, and the
-uEVM, then creates ttyUSB4 and ttyUSB5 - ttyUSB4 being the correct dev
-entry. That's what I get for not looking at dmesg, and, counting. Thank
-you sir. It does, in fact, load the bootloaders.
-
-I appreciate your time, and, hopefully this will serve to help others -
-sorry for the bother!
-
-Cheers,
-
-Ian
-
-On Thu, 28 Mar 2013 17:56:12 -0400
-"Maupin, Chase" <chase.maupin@ti.com> wrote:
-
+On Thu, Mar 28, 2013 at 09:56:12PM +0000, Maupin, Chase wrote:
 > 
 > > -----Original Message-----
 > > From: Ian Wisbon [mailto:ian.wisbon@timesys.com]
@@ -77,24 +65,27 @@ On Thu, 28 Mar 2013 17:56:12 -0400
 > > LED
 > > indicating debug power is lit, screen /dev/ttyUSB5 115200
 > 
-> In the dmesg output you should see two ttyUSB devices enumerated when
-> the FTDI is detected.  The first is the serial console.  I'm not sure
-> about your setup but if you have a 4 port serial adapter I would
-> expect those are ttyUSB0 - ttyUSB3.  This would make the FTDI ttyUSB4.
+> In the dmesg output you should see two ttyUSB devices enumerated when the 
+> FTDI is detected.  The first is the serial console.  I'm not sure about your 
+> setup but if you have a 4 port serial adapter I would expect those are 
+> ttyUSB0 - ttyUSB3.  This would make the FTDI ttyUSB4.
 > 
-> The first thing we need is that you can see the serial console.  In
-> some ways I wish this was like the beaglebone where you would see
-> CCCCC when no SD card is loaded to know your serial connection was
-> working :(
+> The first thing we need is that you can see the serial console.  In some 
+> ways I wish this was like the beaglebone where you would see CCCCC when no 
+> SD card is loaded to know your serial connection was working :(
 > 
-> > 
 > > Applying power, LEDs D1 and D2 light blue, but otherwise, nothing
 > > lights; I don't see a link come up either on the eth port.
 > 
-> Ethernet won't work until later kernels.  I haven't tried the one
-> Denys just updated to yet but ethernet is supposed to work there.
-> 
-> > 
+> Ethernet won't work until later kernels.  I haven't tried the one Denys just 
+> updated to yet but ethernet is supposed to work there.
+
+But with that we are hearing reports the DSS is broken... :(
+
+-- 
+Denys
+
+
 > > On Thu, 28 Mar 2013 17:42:26 -0400
 > > "Maupin, Chase" <chase.maupin@ti.com> wrote:
 > > 
@@ -166,12 +157,8 @@ On Thu, 28 Mar 2013 17:56:12 -0400
 > > Ian Wisbon
 > > Support Manager
 > > Timesys Corporation
-
-
-
---
----
-Ian Wisbon
-Support Manager
-Timesys Corporation
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
