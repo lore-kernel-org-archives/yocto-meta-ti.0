@@ -1,26 +1,22 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 25B44E014BD
-	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2013 12:07:27 -0700 (PDT)
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2SJ7PH7008434
-	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2013 14:07:26 -0500
-Received: from DBDE71.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2SJ7Nds004356
-	for <meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 00:37:24 +0530 (IST)
-Received: from dbdp32.itg.ti.com (172.24.170.251) by DBDE71.ent.ti.com
-	(172.24.170.149) with Microsoft SMTP Server id 14.1.323.3;
-	Fri, 29 Mar 2013 00:37:23 +0530
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2SJ7LXm026833;
-	Fri, 29 Mar 2013 00:37:22 +0530
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 28 Mar 2013 14:07:19 -0500
-Message-ID: <1364497639-5190-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Subject: [PATCH] linux-ti-staging: update to latest kernel sources
+Return-Path: <denis@denix.org>
+Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
+	[206.46.173.1])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B8ECFE014BD
+	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2013 12:14:42 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MKD00GPYXGI9YI1@vms173001.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 28 Mar 2013 14:14:42 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id EBD2B2004C; Thu,
+	28 Mar 2013 15:14:41 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Thu, 28 Mar 2013 15:14:35 -0400
+Message-id: <1364498075-1118-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [PATCHv2] linux-ti-staging: rename to have version in name, update to latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,22 +29,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Mar 2013 19:07:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 28 Mar 2013 19:14:42 -0000
+
+From: Denys Dmytriyenko <denys@ti.com>
 
 * Update to the latest kernel sources.  This also requires changing
   the dtb file names since the omap5 devices have changed to use
   uevm instead of panda and sevm instead of evm.
 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+v2 - merge Chase's changes to dtb files
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+ .../linux/{linux-ti-staging_git.bb => linux-ti-staging_3.8.bb}      | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename recipes-kernel/linux/{linux-ti-staging_git.bb => linux-ti-staging_3.8.bb} (91%)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+similarity index 91%
+rename from recipes-kernel/linux/linux-ti-staging_git.bb
+rename to recipes-kernel/linux/linux-ti-staging_3.8.bb
 index 081a0e6..3353792 100644
 --- a/recipes-kernel/linux/linux-ti-staging_git.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
 @@ -32,7 +32,7 @@ DEPENDS_ti33x += "am33x-cm3"
  # for the specific beaglebone machine.
  KERNEL_DEVICETREE_ti33x = "arch/arm/boot/dts/am335x-evm.dts arch/arm/boot/dts/am335x-evmsk.dts arch/arm/boot/dts/am335x-bone.dts"
@@ -73,6 +77,6 @@ index 081a0e6..3353792 100644
  SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
             file://defconfig \
 -- 
-1.7.0.4
+1.8.1.5
 
 
