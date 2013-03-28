@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 722BAE014CD
-	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2013 12:19:33 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD9BDE014BD
+	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2013 13:49:10 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0243552991; Thu, 28 Mar 2013 19:19:32 +0000 (UTC)
+	id 30FE2529B9; Thu, 28 Mar 2013 20:49:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130328191933.0243552991@arago-project.org>
-Date: Thu, 28 Mar 2013 19:19:32 +0000 (UTC)
+Message-Id: <20130328204910.30FE2529B9@arago-project.org>
+Date: Thu, 28 Mar 2013 20:49:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: rename to have version in name, update to latest
+Subject: Denys Dmytriyenko : linux-ti-staging: one more update to latest 3.8.5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,58 +22,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Mar 2013 19:19:33 -0000
+X-List-Received-Date: Thu, 28 Mar 2013 20:49:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 1735c59bb753bbd096226c46f459dce05dd7be16
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1735c59bb753bbd096226c46f459dce05dd7be16
+Branch: master
+Commit: 70c17ece82bdc293ac8b9cac5babd3b76be84819
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=70c17ece82bdc293ac8b9cac5babd3b76be84819
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Mar 28 15:01:06 2013 -0400
+Date:   Thu Mar 28 16:47:04 2013 -0400
 
-linux-ti-staging: rename to have version in name, update to latest
-
-* Update to the latest kernel sources.  This also requires changing
-  the dtb file names since the omap5 devices have changed to use
-  uevm instead of panda and sevm instead of evm.
+linux-ti-staging: one more update to latest 3.8.5
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 
 ---
 
- ...x-ti-staging_git.bb => linux-ti-staging_3.8.bb} |    6 +++---
+ recipes-kernel/linux/linux-ti-staging_3.8.bb |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-similarity index 91%
-rename from recipes-kernel/linux/linux-ti-staging_git.bb
-rename to recipes-kernel/linux/linux-ti-staging_3.8.bb
-index 081a0e6..3353792 100644
---- a/recipes-kernel/linux/linux-ti-staging_git.bb
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+index 3353792..21202f4 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-@@ -32,7 +32,7 @@ DEPENDS_ti33x += "am33x-cm3"
- # for the specific beaglebone machine.
- KERNEL_DEVICETREE_ti33x = "arch/arm/boot/dts/am335x-evm.dts arch/arm/boot/dts/am335x-evmsk.dts arch/arm/boot/dts/am335x-bone.dts"
- KERNEL_DEVICETREE_beaglebone = "arch/arm/boot/dts/am335x-bone.dts"
--KERNEL_DEVICETREE_omap5-evm = "arch/arm/boot/dts/omap5-evm.dts arch/arm/boot/dts/omap5-panda.dts"
-+KERNEL_DEVICETREE_omap5-evm = "arch/arm/boot/dts/omap5-sevm.dts arch/arm/boot/dts/omap5-uevm.dts"
- 
- COMPATIBLE_MACHINE = "ti33x|omap-a15"
- 
 @@ -40,11 +40,11 @@ S = "${WORKDIR}/git"
  
  BRANCH = "ti-linux-3.8.y"
  
--SRCREV = "a91f8e121dbe0b5fb84000d9ae14fac8880c44a7"
-+SRCREV = "a0a13c3cf6ff2ca9bf1b1c9163ba04c3c71811bd"
- PV = "3.8.4"
+-SRCREV = "a0a13c3cf6ff2ca9bf1b1c9163ba04c3c71811bd"
+-PV = "3.8.4"
++SRCREV = "f6ce51c2d6e5489262beb6f42cc39ac19e49bc9e"
++PV = "3.8.5"
  
  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
  
  SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
             file://defconfig \
