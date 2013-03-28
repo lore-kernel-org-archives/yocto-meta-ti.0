@@ -1,22 +1,35 @@
-Return-Path: <ian.wisbon@timesys.com>
-Received: from exchange07.timesys.com (exchange07.timesys.com
-	[209.114.137.116])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 38394E014C2
-	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2013 14:34:49 -0700 (PDT)
-Received: from duckworth (192.168.3.31) by exchange07.timesys.com
-	(192.168.1.221) with Microsoft SMTP Server id 8.1.436.0;
-	Thu, 28 Mar 2013 17:34:47 -0400
-Date: Thu, 28 Mar 2013 17:34:48 -0400
-From: Ian Wisbon <ian.wisbon@timesys.com>
-To: "Maupin, Chase" <chase.maupin@ti.com>
-Message-ID: <20130328173448.1e541526@duckworth>
-In-Reply-To: <7D46E86EC0A8354091174257B2FED101594AD1C3@DLEE11.ent.ti.com>
+Return-Path: <chase.maupin@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C90F1E014BD
+	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2013 14:42:30 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2SLgRjm002422;
+	Thu, 28 Mar 2013 16:42:27 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2SLgRvF015897;
+	Thu, 28 Mar 2013 16:42:27 -0500
+Received: from DLEE74.ent.ti.com (157.170.170.8) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server (TLS) id 14.2.342.3;
+	Thu, 28 Mar 2013 16:42:26 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
+	14.01.0323.003; Thu, 28 Mar 2013 16:42:27 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: Ian Wisbon <ian.wisbon@timesys.com>
+Thread-Topic: [meta-ti] OMAP5: Booting build output
+Thread-Index: AQHOK8xUwOzseCB+eESalC9uG9viSpi7RADAgABanYD//8NDIIAAkn0A//+uFRA=
+Date: Thu, 28 Mar 2013 21:42:26 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED101594ADCAC@DLEE11.ent.ti.com>
 References: <20130328115247.029b68ae@duckworth>
 	<7D46E86EC0A8354091174257B2FED101594ACEFA@DLEE11.ent.ti.com>
 	<20130328122753.2b957cca@duckworth>
 	<7D46E86EC0A8354091174257B2FED101594AD1C3@DLEE11.ent.ti.com>
-Organization: Timesys Coporation
-X-Mailer: Claws Mail 3.8.0 (GTK+ 2.24.10; x86_64-pc-linux-gnu)
+	<20130328173448.1e541526@duckworth>
+In-Reply-To: <20130328173448.1e541526@duckworth>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: OMAP5: Booting build output
@@ -32,49 +45,68 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Mar 2013 21:34:49 -0000
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Mar 2013 21:42:31 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-Chase,
+> -----Original Message-----
+> From: Ian Wisbon [mailto:ian.wisbon@timesys.com]
+> Sent: Thursday, March 28, 2013 4:35 PM
+> To: Maupin, Chase
+> Cc: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] OMAP5: Booting build output
+>=20
+> Chase,
+>=20
+> Thanks - I have mine set to the same:
+>=20
+> off-on-off-on
+>=20
+> and still no luck booting. I also tried the reverse just in case
+> I was
+> backwards/upside-down; despite the same SD card booting an OMAP4
+> Panda,
+> and replacing with OMAP5 MLO and u-boot.img, I see nothing on the
+> console whatsoever. Not even a junk character implying an
+> incorrect
+> baudrate, etc. The USBBOOT functionality seems to work, so I
+> don't
+> believe the board to be non-functional.
 
-Thanks - I have mine set to the same:
+Are you connected to ttyUSB0 or ttyUSB1?  For my board the serial is ttyUSB=
+0.
 
-off-on-off-on
-
-and still no luck booting. I also tried the reverse just in case I was
-backwards/upside-down; despite the same SD card booting an OMAP4 Panda,
-and replacing with OMAP5 MLO and u-boot.img, I see nothing on the
-console whatsoever. Not even a junk character implying an incorrect
-baudrate, etc. The USBBOOT functionality seems to work, so I don't
-believe the board to be non-functional.
-
-I'll sit tight for a while and see what else is committed. Thanks for
-your assistance!
-
-
-> > 
-> > Does the SYSBOOT switch dictate whether the SD is used for
-> > booting? If
-> > so, what is the correct setting? I've previously attempted to
-> > boot
-> > using an SD card formatted as necessary for the OMAP4 Panda, but
-> > have
-> > been unsuccessful - I assumed a similar FAT format would be
-> > required
-> > for MLO/u-boot.img
-> 
-> My sysboot switch is off on off on and I'm booting from SD.
-> 
-> You can use the same SD format at omap4.  Just replace the kerel and
-> bootloader, add the boot.scr and dtb file.
-> 
-
-Regards,
-
---
----
-Ian Wisbon
-Support Manager
-Timesys Corporation
+>=20
+> I'll sit tight for a while and see what else is committed. Thanks
+> for
+> your assistance!
+>=20
+>=20
+> > >
+> > > Does the SYSBOOT switch dictate whether the SD is used for
+> > > booting? If
+> > > so, what is the correct setting? I've previously attempted to
+> > > boot
+> > > using an SD card formatted as necessary for the OMAP4 Panda,
+> but
+> > > have
+> > > been unsuccessful - I assumed a similar FAT format would be
+> > > required
+> > > for MLO/u-boot.img
+> >
+> > My sysboot switch is off on off on and I'm booting from SD.
+> >
+> > You can use the same SD format at omap4.  Just replace the
+> kerel and
+> > bootloader, add the boot.scr and dtb file.
+> >
+>=20
+> Regards,
+>=20
+> --
+> ---
+> Ian Wisbon
+> Support Manager
+> Timesys Corporation
 
