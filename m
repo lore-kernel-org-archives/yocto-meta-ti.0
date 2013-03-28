@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70F02E014BD
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 722BAE014CD
 	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2013 12:19:33 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 719CF5298C; Thu, 28 Mar 2013 19:19:32 +0000 (UTC)
+	id 0243552991; Thu, 28 Mar 2013 19:19:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130328191932.719CF5298C@arago-project.org>
+Message-Id: <20130328191933.0243552991@arago-project.org>
 Date: Thu, 28 Mar 2013 19:19:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: rename to have version in name, update to latest
@@ -26,9 +26,9 @@ X-List-Received-Date: Thu, 28 Mar 2013 19:19:33 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 971ee4a206f512393e224b6ad6eff5fd91d6afce
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=971ee4a206f512393e224b6ad6eff5fd91d6afce
+Branch: danny
+Commit: 1735c59bb753bbd096226c46f459dce05dd7be16
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1735c59bb753bbd096226c46f459dce05dd7be16
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Mar 28 15:01:06 2013 -0400
