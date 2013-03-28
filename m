@@ -1,54 +1,30 @@
-Return-Path: <grunzasr@comcast.net>
-Received: from qmta02.emeryville.ca.mail.comcast.net
-	(qmta02.emeryville.ca.mail.comcast.net [76.96.30.24])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2299BE014A2
-	for <meta-ti@yoctoproject.org>; Wed, 27 Mar 2013 13:34:23 -0700 (PDT)
-Received: from omta10.emeryville.ca.mail.comcast.net ([76.96.30.28])
-	by qmta02.emeryville.ca.mail.comcast.net with comcast
-	id Gg7r1l0090cQ2SLA2kaN8W; Wed, 27 Mar 2013 20:34:22 +0000
-Received: from [127.0.0.1] ([71.225.124.244])
-	by omta10.emeryville.ca.mail.comcast.net with comcast
-	id GkaL1l00h5GVvnK8WkaMrm; Wed, 27 Mar 2013 20:34:22 +0000
-Message-ID: <51535802.8050804@comcast.net>
-Date: Wed, 27 Mar 2013 16:35:14 -0400
-From: Steven Grunza <grunzasr@comcast.net>
-User-Agent: Mozilla/5.0 (Windows NT 5.1;
-	rv:17.0) Gecko/20130307 Thunderbird/17.0.4
+Return-Path: <denys@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5F6E6E014A9
+	for <meta-ti@yoctoproject.org>; Wed, 27 Mar 2013 18:13:23 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2S1DLbL013782
+	for <meta-ti@yoctoproject.org>; Wed, 27 Mar 2013 20:13:22 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2S1DLdt030833
+	for <meta-ti@yoctoproject.org>; Wed, 27 Mar 2013 20:13:21 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 27 Mar 2013 20:13:21 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2S1DL8T030923	for
+	<meta-ti@yoctoproject.org>; Wed, 27 Mar 2013 20:13:21 -0500
+Date: Wed, 27 Mar 2013 21:08:25 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <310225391.101.1364432905517.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-CC: meta-ti mailing list <meta-ti@yoctoproject.org>
-References: <20130319172138.GQ32759@edge> <5148A9B4.5060702@comcast.net>
-	<20130319182747.GH14761@denix.org> <5149C666.7040306@comcast.net>
-	<20130320151759.GP14761@denix.org>
-	<5149F665.9090204@comcast.net> <20130320175415.GW32759@edge>
-	<5149FD74.3030906@comcast.net> <20130320182722.GX32759@edge>
-	<alpine.DEB.2.02.1303201441410.28378@oneiric>
-	<20130320185747.GY32759@edge>
-	<alpine.DEB.2.02.1303201558250.18081@oneiric>
-	<5151F315.3040900@comcast.net>
-	<alpine.DEB.2.02.1303261715150.3036@oneiric>
-	<5152628F.2020107@comcast.net>
-	<alpine.DEB.2.02.1303271539250.3576@oneiric>
-	<51534E4B.60502@comcast.net>
-	<alpine.DEB.2.02.1303271617180.4283@oneiric>
-In-Reply-To: <alpine.DEB.2.02.1303271617180.4283@oneiric>
-X-Antivirus: avast! (VPS 130327-0, 03/27/2013), Outbound message
-X-Antivirus-Status: Clean
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=comcast.net;
-	s=q20121106; t=1364416462;
-	bh=66DrKvOQvgsY9QJ1DyF5mGl0wWhwwJe+D6jGF6+UOwU=;
-	h=Received:Received:Message-ID:Date:From:Reply-To:MIME-Version:
-	Subject:Content-Type;
-	b=XR/OblVTWcwXuKfcWWx9WpFVj06N6b+8KS5fDF6stuOWWMsCSyRmk/jgsm+Dn6Lq1
-	/yMUk/51hnbQNb8tBHAz8k6HtsJ+diHuugZtGjFWX4LFWdUysv5LGhx09uXO4rgS8O
-	v1i/Uz6fsdZ32H/2kw3OV9xG5PhvNAnckzWwSBVqZdERRNKbwZfRCDr0mfQqa5I0Ry
-	goJV89LdgtaD130zKdf/+Hgn7zKfkCuiSeB71TImg3X0wqG4b0RMufXVXbdZ9Z6hPh
-	lubUGMqK/59Unm101yuTGevvBQoG4uIJ8Ha6x4h09HwS8+dF2N21K87WJOiTA69XH2
-	4/K/j/Z+r4/Zw==
-Subject: Re: Is this the correct list for AM3517 EVM questions?
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-03-27_21-01-06
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
-Reply-To: grunzasr@comcast.net
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -58,90 +34,163 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Mar 2013 20:34:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 28 Mar 2013 01:13:23 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_100_147596468.1364432905515"
+
+------=_Part_100_147596468.1364432905515
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 3/27/2013 4:20 PM, Robert P. J. Day wrote:
-> On Wed, 27 Mar 2013, Steven Grunza wrote:
->
->> Wow!  You got the SD card?  The kit was supposed to come with a
->> Windows CE and a Linux SD card but I didn't get either.  I was never
->> able to get LogicPD support to send me the image, either.  They just
->> kept pointing the the procedures spread all over the web on how to
->> build the code.
->    just to establish a foundation here, this is the result of booting
-> from the SD card that came with the board from logicpd:
->
-> =====start=====
-> ...
-> 218976 Bytes Read from MMC
-> Starting OS Bootloader from MMC...
-> Starting OS Bootloader...
->
->
-> U-Boot 2009.11 (Jan 22 2011 - 01:45:10)
->
-> OMAP34xx/35xx-GP ES1.0, CPU-OPP2 L3-165MHz
-> AM3517EVM Board + LPDDR/NAND
-> I2C:   ready
-> DRAM:  256 MB
-> NAND:  512 MiB
-> *** Warning - bad CRC or NAND, using default environment
->
-> In:    serial
-> Out:   serial
-> Err:   serial
-> Die ID #40be00010000000001685a2001015021
-> Net:   davinci_emac_initialize
-> Ethernet PHY: GENERIC @ 0x00
-> DaVinci EMAC
-> Hit any key to stop autoboot:  0
-> mmc1 is available
-> reading boot.scr
->
-> ** Unable to read "boot.scr" from mmc 0:1 **
-> reading uImage
->
-> 2308136 bytes read
-> Booting from mmc ...
-> ## Booting kernel from Legacy Image at 82000000 ...
->     Image Name:   Arago/2.6.32-psp03.00.01.06.sdk/
->     Image Type:   ARM Linux Kernel Image (uncompressed)
->     Data Size:    2308072 Bytes =  2.2 MB
->     Load Address: 80008000
->     Entry Point:  80008000
->     Verifying Checksum ... OK
->     Loading Kernel Image ... OK
-> OK
->
-> Starting kernel ...
->
-> Uncompressing
-> Linux.................................................................................................
-> Linux version 2.6.32 (schuyler_2@neo) (gcc version 4.3.3 (Sourcery G++
-> Lite 2009q1-203) ) #1 Tue Jan 25 16:18:32 CS1
-> CPU: ARMv7 Processor [411fc087] revision 7 (ARMv7), cr=10c53c7f
-> CPU: VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
-> Machine: OMAP3517/AM3517 EVM
-> Memory policy: ECC disabled, Data cache writeback
-> AM3517 ES3.1 (l2cache iva sgx neon isp )
-> SRAM: Mapped pa 0x40200000 to va 0xfe400000 size: 0x100000
-> Reserving 4194304 bytes SDRAM for VRAM
-> ... snip ...
->
->    and it does boot successfully (well, after i added the touchscreen
-> from one of my other kits). but clearly there's a build that works.
-> now all i have to do is figure out how to get the same result with
-> yocto and the meta-ti layer.
->
-> rday
->
-Robert,
-   Could you dd the SD card into a compressed image and send it to me?  
-I might need to setup some sort of scp drop location if it's too big to 
-email.  While I want to be able to build the code, I really need to get 
-this robot done in time for the April competition...
+<html>
+<head>
+<title>
+Status for 03/27/13
+</title>
+</head>
+<body>
 
-Steven G.
+<h2>Status for 03/27/13</h2>
 
+<h2>BUILD_ID: build-2013-03-27_21-02-08</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.03"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_100_147596468.1364432905515--
