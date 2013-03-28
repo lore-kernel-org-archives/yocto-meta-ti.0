@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD9BDE014BD
-	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2013 13:49:10 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4FEE6E014C1
+	for <meta-ti@yoctoproject.org>; Thu, 28 Mar 2013 13:49:14 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 30FE2529B9; Thu, 28 Mar 2013 20:49:10 +0000 (UTC)
+	id F2302529B9; Thu, 28 Mar 2013 20:49:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130328204910.30FE2529B9@arago-project.org>
-Date: Thu, 28 Mar 2013 20:49:10 +0000 (UTC)
+Message-Id: <20130328204913.F2302529B9@arago-project.org>
+Date: Thu, 28 Mar 2013 20:49:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: one more update to latest 3.8.5
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Mar 2013 20:49:10 -0000
+X-List-Received-Date: Thu, 28 Mar 2013 20:49:14 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 70c17ece82bdc293ac8b9cac5babd3b76be84819
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=70c17ece82bdc293ac8b9cac5babd3b76be84819
+Branch: danny
+Commit: 913f722e9ed17a45ace3c56aaaf74e3c1eada023
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=913f722e9ed17a45ace3c56aaaf74e3c1eada023
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Mar 28 16:47:04 2013 -0400
