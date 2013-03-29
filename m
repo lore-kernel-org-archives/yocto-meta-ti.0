@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68713E0136C
-	for <meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 10:35:48 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4C69CE0129D
+	for <meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 10:35:49 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 36A82529B3; Fri, 29 Mar 2013 17:35:47 +0000 (UTC)
+	id ED199529B3; Fri, 29 Mar 2013 17:35:48 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130329173547.36A82529B3@arago-project.org>
-Date: Fri, 29 Mar 2013 17:35:47 +0000 (UTC)
+Message-Id: <20130329173548.ED199529B3@arago-project.org>
+Date: Fri, 29 Mar 2013 17:35:48 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Chase Maupin : dra7xx-evm: Add DRA7xx machine type
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Mar 2013 17:35:48 -0000
+X-List-Received-Date: Fri, 29 Mar 2013 17:35:49 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 886bea2308bdd56ac7eae24436a84a7c863e72fa
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=886bea2308bdd56ac7eae24436a84a7c863e72fa
+Branch: danny
+Commit: 9f4cd9900f909ff53144b91a79a62f6929890cdc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9f4cd9900f909ff53144b91a79a62f6929890cdc
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
 Date:   Fri Mar 29 08:59:00 2013 -0500
