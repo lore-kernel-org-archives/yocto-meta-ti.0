@@ -1,26 +1,15 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A3307E01485
-	for <meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 07:37:59 -0700 (PDT)
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2TEbvG7008622
-	for <meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 09:37:58 -0500
-Received: from DBDE70.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2TEbujM001684
-	for <meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 20:07:57 +0530 (IST)
-Received: from dbdp32.itg.ti.com (172.24.170.251) by dbde70.ent.ti.com
-	(172.24.170.148) with Microsoft SMTP Server id 14.1.323.3;
-	Fri, 29 Mar 2013 20:07:56 +0530
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2TEbrX2009103;
-	Fri, 29 Mar 2013 20:07:55 +0530
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 29 Mar 2013 09:37:51 -0500
-Message-ID: <1364567871-26559-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Subject: [PATCH] linux: Use setup-defconfig in kernel recipes
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 672C2E0129D
+	for <meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 10:35:48 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 68BFF52A51; Fri, 29 Mar 2013 17:35:47 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130329173547.68BFF52A51@arago-project.org>
+Date: Fri, 29 Mar 2013 17:35:47 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Chase Maupin : linux: Use setup-defconfig in kernel recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,8 +22,18 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Mar 2013 14:37:59 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 29 Mar 2013 17:35:48 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: ca0f68d71b08de156c4424324466aab0ebc7296f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ca0f68d71b08de156c4424324466aab0ebc7296f
+
+Author: Chase Maupin <Chase.Maupin@ti.com>
+Date:   Fri Mar 29 09:37:51 2013 -0500
+
+linux: Use setup-defconfig in kernel recipes
 
 * Now that the setup-defconfig.inc file has been moved to the
   meta-ti layer the kernel recipes should include this file.
@@ -42,7 +41,10 @@ Content-Type: text/plain
   in meta-arago
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
+
  .../linux/linux-am335x_3.2.0-psp04.06.00.08.bb     |    3 ++-
  recipes-kernel/linux/linux-omap-psp_2.6.37.bb      |    3 ++-
  recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb  |    3 ++-
@@ -123,7 +125,5 @@ index 1928036..e38b6c2 100644
  
  BRANCH = "linux-3.3.y"
  SRCREV = "v3.3.7"
--- 
-1.7.0.4
 
 
