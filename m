@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 672C2E0129D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68713E0136C
 	for <meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 10:35:48 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 68BFF52A51; Fri, 29 Mar 2013 17:35:47 +0000 (UTC)
+	id 36A82529B3; Fri, 29 Mar 2013 17:35:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130329173547.68BFF52A51@arago-project.org>
+Message-Id: <20130329173547.36A82529B3@arago-project.org>
 Date: Fri, 29 Mar 2013 17:35:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : linux: Use setup-defconfig in kernel recipes
+Subject: Chase Maupin : dra7xx-evm: Add DRA7xx machine type
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,103 +27,66 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ca0f68d71b08de156c4424324466aab0ebc7296f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ca0f68d71b08de156c4424324466aab0ebc7296f
+Commit: 886bea2308bdd56ac7eae24436a84a7c863e72fa
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=886bea2308bdd56ac7eae24436a84a7c863e72fa
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Fri Mar 29 09:37:51 2013 -0500
+Date:   Fri Mar 29 08:59:00 2013 -0500
 
-linux: Use setup-defconfig in kernel recipes
+dra7xx-evm: Add DRA7xx machine type
 
-* Now that the setup-defconfig.inc file has been moved to the
-  meta-ti layer the kernel recipes should include this file.
-* This makes way to clear this inclusion from the bbappend files
-  in meta-arago
+* Add the dra7xx-evm machine type which is part of the omap-a15
+  SOC_FAMILY
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-am335x_3.2.0-psp04.06.00.08.bb     |    3 ++-
- recipes-kernel/linux/linux-omap-psp_2.6.37.bb      |    3 ++-
- recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb  |    3 ++-
- recipes-kernel/linux/linux_3.3.7.bb                |    3 ++-
- 4 files changed, 8 insertions(+), 4 deletions(-)
+ conf/machine/dra7xx-evm.conf |   36 ++++++++++++++++++++++++++++++++++++
+ 1 files changed, 36 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-am335x_3.2.0-psp04.06.00.08.bb b/recipes-kernel/linux/linux-am335x_3.2.0-psp04.06.00.08.bb
-index 49d6734..74394a6 100644
---- a/recipes-kernel/linux/linux-am335x_3.2.0-psp04.06.00.08.bb
-+++ b/recipes-kernel/linux/linux-am335x_3.2.0-psp04.06.00.08.bb
-@@ -7,6 +7,7 @@ COMPATIBLE_MACHINE = "ti33x"
- DEFAULT_PREFERENCE = "-1"
- 
- inherit kernel
-+require setup-defconfig.inc
- 
- # Stage the power management firmware before building the kernel
- DEPENDS += "am33x-cm3"
-@@ -14,7 +15,7 @@ DEPENDS += "am33x-cm3"
- KERNEL_IMAGETYPE = "uImage"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for ti33x see conf/machine/include/ti33x.inc
--MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
- 
- BRANCH = "v3.2-staging"
- 
-diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-index 9eacfc9..5d72af5 100644
---- a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-+++ b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-@@ -1,4 +1,5 @@
- require linux.inc
-+require setup-defconfig.inc
- 
- DESCRIPTION = "Linux kernel for OMAP3 EVM from PSP, based on linux-omap3 kernel"
- 
-@@ -8,7 +9,7 @@ SRCREV= "20c003f2f024d9f50f59edf9f1b8f5f035fb15b8"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 devices
- # see conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- 
- SRC_URI = "git://arago-project.org/git/projects/linux-omap3.git;protocol=git \
-            file://defconfig"
-diff --git a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
-index 0b6c50d..e4a5451 100644
---- a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
-+++ b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
-@@ -5,8 +5,9 @@ KERNEL_IMAGETYPE = "uImage"
- 
- require multi-kernel.inc
- require tipspkernel.inc
-+require setup-defconfig.inc
- 
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- 
- S = "${WORKDIR}/git"
- 
-diff --git a/recipes-kernel/linux/linux_3.3.7.bb b/recipes-kernel/linux/linux_3.3.7.bb
-index 1928036..e38b6c2 100644
---- a/recipes-kernel/linux/linux_3.3.7.bb
-+++ b/recipes-kernel/linux/linux_3.3.7.bb
-@@ -9,12 +9,13 @@ DEFAULT_PREFERENCE = "-1"
- COMPATIBLE_MACHINE = "beagleboard"
- 
- inherit kernel
-+require setup-defconfig.inc
- 
- KERNEL_IMAGETYPE = "uImage"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for beagleboard see
- # conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
- 
- BRANCH = "linux-3.3.y"
- SRCREV = "v3.3.7"
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+new file mode 100644
+index 0000000..5543891
+--- /dev/null
++++ b/conf/machine/dra7xx-evm.conf
+@@ -0,0 +1,36 @@
++#@TYPE: Machine
++#@NAME: DRA7xx EVM
++#@DESCRIPTION: Machine configuration for the TI DRA7xx EVM
++
++require conf/machine/include/omap-a15.inc
++
++IMAGE_FSTYPES += "ubi tar.gz"
++
++SERIAL_CONSOLE = "115200 ttyO2"
++
++# UBI information.  Note that this is board and kernel specific.  Changes
++# in your kernel port may require changes in these variables.  For more
++# details about this board please see
++# http://processors.wiki.ti.com/index.php/UBIFS_Support
++
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# From dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: logical eraseblock size:    126976 bytes
++# from ubiattach stdout:
++# UBI device number 0, total 1988 LEBs
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
++
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# from dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: physical eraseblock size:   131072 bytes (128 KiB)
++# UBI: sub-page size:              512
++# UBI: VID header offset:          2048 (aligned 2048)
++UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
++
++UBOOT_MACHINE = "dra7xx_evm_config"
++
++# Currently removing the sgx machine feature because there is no SGX package
++# available for omap5
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
 
 
