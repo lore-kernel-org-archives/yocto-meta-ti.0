@@ -1,15 +1,27 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 573FEE013A7
-	for <meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 10:35:49 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 056D552A51; Fri, 29 Mar 2013 17:35:49 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130329173549.056D552A51@arago-project.org>
-Date: Fri, 29 Mar 2013 17:35:49 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : linux: Use setup-defconfig in kernel recipes
+Return-Path: <denys@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8638EE0136C
+	for <meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 19:35:02 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r2U2Z1Gh000601
+	for <meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 21:35:01 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2U2Z1SZ006642
+	for <meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 21:35:01 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Fri, 29 Mar 2013 21:35:01 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r2U2Z15X016827	for
+	<meta-ti@yoctoproject.org>; Fri, 29 Mar 2013 21:35:01 -0500
+Date: Fri, 29 Mar 2013 22:30:01 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1896759027.111.1364610601737.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-03-29_21-01-06
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,108 +34,162 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Mar 2013 17:35:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 30 Mar 2013 02:35:02 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_110_74093520.1364610601736"
 
-Module: meta-ti
-Branch: danny
-Commit: f6fa9fe735c73a9d3030cd1d6f66163f8504fba1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f6fa9fe735c73a9d3030cd1d6f66163f8504fba1
+------=_Part_110_74093520.1364610601736
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Fri Mar 29 09:37:51 2013 -0500
+<html>
+<head>
+<title>
+Status for 03/29/13
+</title>
+</head>
+<body>
 
-linux: Use setup-defconfig in kernel recipes
+<h2>Status for 03/29/13</h2>
 
-* Now that the setup-defconfig.inc file has been moved to the
-  meta-ti layer the kernel recipes should include this file.
-* This makes way to clear this inclusion from the bbappend files
-  in meta-arago
+<h2>BUILD_ID: build-2013-03-29_21-02-09</h2>
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+<h2>Clean Build: false</h2>
 
----
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
- .../linux/linux-am335x_3.2.0-psp04.06.00.08.bb     |    3 ++-
- recipes-kernel/linux/linux-omap-psp_2.6.37.bb      |    3 ++-
- recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb  |    3 ++-
- recipes-kernel/linux/linux_3.3.7.bb                |    3 ++-
- 4 files changed, 8 insertions(+), 4 deletions(-)
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
 
-diff --git a/recipes-kernel/linux/linux-am335x_3.2.0-psp04.06.00.08.bb b/recipes-kernel/linux/linux-am335x_3.2.0-psp04.06.00.08.bb
-index 49d6734..74394a6 100644
---- a/recipes-kernel/linux/linux-am335x_3.2.0-psp04.06.00.08.bb
-+++ b/recipes-kernel/linux/linux-am335x_3.2.0-psp04.06.00.08.bb
-@@ -7,6 +7,7 @@ COMPATIBLE_MACHINE = "ti33x"
- DEFAULT_PREFERENCE = "-1"
- 
- inherit kernel
-+require setup-defconfig.inc
- 
- # Stage the power management firmware before building the kernel
- DEPENDS += "am33x-cm3"
-@@ -14,7 +15,7 @@ DEPENDS += "am33x-cm3"
- KERNEL_IMAGETYPE = "uImage"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for ti33x see conf/machine/include/ti33x.inc
--MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
- 
- BRANCH = "v3.2-staging"
- 
-diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-index 9eacfc9..5d72af5 100644
---- a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-+++ b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-@@ -1,4 +1,5 @@
- require linux.inc
-+require setup-defconfig.inc
- 
- DESCRIPTION = "Linux kernel for OMAP3 EVM from PSP, based on linux-omap3 kernel"
- 
-@@ -8,7 +9,7 @@ SRCREV= "20c003f2f024d9f50f59edf9f1b8f5f035fb15b8"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 devices
- # see conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- 
- SRC_URI = "git://arago-project.org/git/projects/linux-omap3.git;protocol=git \
-            file://defconfig"
-diff --git a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
-index 0b6c50d..e4a5451 100644
---- a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
-+++ b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
-@@ -5,8 +5,9 @@ KERNEL_IMAGETYPE = "uImage"
- 
- require multi-kernel.inc
- require tipspkernel.inc
-+require setup-defconfig.inc
- 
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- 
- S = "${WORKDIR}/git"
- 
-diff --git a/recipes-kernel/linux/linux_3.3.7.bb b/recipes-kernel/linux/linux_3.3.7.bb
-index 1928036..e38b6c2 100644
---- a/recipes-kernel/linux/linux_3.3.7.bb
-+++ b/recipes-kernel/linux/linux_3.3.7.bb
-@@ -9,12 +9,13 @@ DEFAULT_PREFERENCE = "-1"
- COMPATIBLE_MACHINE = "beagleboard"
- 
- inherit kernel
-+require setup-defconfig.inc
- 
- KERNEL_IMAGETYPE = "uImage"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for beagleboard see
- # conf/machine/include/omap3.inc
--MACHINE_KERNEL_PR_append = "a+gitr${SRCREV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
- 
- BRANCH = "linux-3.3.y"
- SRCREV = "v3.3.7"
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.03"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_110_74093520.1364610601736--
