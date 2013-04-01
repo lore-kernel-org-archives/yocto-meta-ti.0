@@ -1,26 +1,39 @@
 Return-Path: <chase.maupin@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE270E0051D
-	for <meta-ti@yoctoproject.org>; Mon,  1 Apr 2013 14:07:15 -0700 (PDT)
-Received: from dbdp20.itg.ti.com ([172.24.170.38])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r31L7Do4006841
-	for <meta-ti@yoctoproject.org>; Mon, 1 Apr 2013 16:07:14 -0500
-Received: from DBDE70.ent.ti.com (localhost [127.0.0.1])
-	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id r31L7Cwr008189
-	for <meta-ti@yoctoproject.org>; Tue, 2 Apr 2013 02:37:13 +0530 (IST)
-Received: from dbdp32.itg.ti.com (172.24.170.251) by dbde70.ent.ti.com
-	(172.24.170.148) with Microsoft SMTP Server id 14.1.323.3;
-	Tue, 2 Apr 2013 02:37:12 +0530
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r31L79pH006420;
-	Tue, 2 Apr 2013 02:37:11 +0530
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 1 Apr 2013 16:07:08 -0500
-Message-ID: <1364850428-22805-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8DE2E0051D
+	for <meta-ti@yoctoproject.org>; Mon,  1 Apr 2013 14:10:36 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r31LAa8M023951
+	for <meta-ti@yoctoproject.org>; Mon, 1 Apr 2013 16:10:36 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r31LAa9H010840
+	for <meta-ti@yoctoproject.org>; Mon, 1 Apr 2013 16:10:36 -0500
+Received: from DLEE74.ent.ti.com (157.170.170.8) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server (TLS) id 14.2.342.3;
+	Mon, 1 Apr 2013 16:10:36 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
+	14.01.0323.003; Mon, 1 Apr 2013 16:10:36 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "Cooper Jr., Franklin" <fcooper@ti.com>, "Dmytriyenko, Denys"
+	<denys@ti.com>
+Thread-Topic: [meta-ti] [PATCH] ti33x: remove sgx until latest kernels are
+	supported
+Thread-Index: AQHOLwIeG37C6eL//kmlEQbhXXwvDJjBreGggAB0uID//7mE4A==
+Date: Mon, 1 Apr 2013 21:10:35 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED101594B4BBD@DLEE11.ent.ti.com>
+References: <1364833567-8510-1-git-send-email-Chase.Maupin@ti.com>
+	<20130401175536.GA9892@edge>
+	<7D46E86EC0A8354091174257B2FED101594B459C@DLEE11.ent.ti.com>
+	<8F29D6B095ED194EA1980491A5E029710C418F9A@DFLE08.ent.ti.com>
+In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C418F9A@DFLE08.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-Subject: [PATCH] omap5-evm: update U-Boot machine to omap5 uevm
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] ti33x: remove sgx until latest kernels are supported
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +46,100 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Apr 2013 21:07:15 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 01 Apr 2013 21:10:37 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-* The U-Boot config to be used in the latest code has been updated
-  to use omap5_uevm instead of omap5_evm.
-* Update to the latest code to pickup this change and modify the
-  machine file as well.
+> -----Original Message-----
+> From: Cooper Jr., Franklin
+> Sent: Monday, April 01, 2013 3:21 PM
+> To: Maupin, Chase; Dmytriyenko, Denys
+> Cc: meta-ti@yoctoproject.org
+> Subject: RE: [meta-ti] [PATCH] ti33x: remove sgx until latest
+> kernels are supported
+>=20
+>=20
+>=20
+> > -----Original Message-----
+> > From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> > bounces@yoctoproject.org] On Behalf Of Maupin, Chase
+> > Sent: Monday, April 01, 2013 1:24 PM
+> > To: Dmytriyenko, Denys
+> > Cc: meta-ti@yoctoproject.org
+> > Subject: Re: [meta-ti] [PATCH] ti33x: remove sgx until latest
+> kernels are
+> > supported
+> >
+> > > -----Original Message-----
+> > > From: Dmytriyenko, Denys
+> > > Sent: Monday, April 01, 2013 12:56 PM
+> > > To: Maupin, Chase
+> > > Cc: meta-ti@yoctoproject.org
+> > > Subject: Re: [meta-ti] [PATCH] ti33x: remove sgx until latest
+> kernels
+> > > are supported
+> > >
+> > > On Mon, Apr 01, 2013 at 11:26:07AM -0500, Chase Maupin wrote:
+> > > > * Remove the sgx feature from the ti33x devices until the
+> > > update
+> > > >   to a later version of the graphics SDK and drivers
+> enables
+> > > SGX
+> > > >   support for later kernels such a v3.8
+> > >
+> > > But we still have 3.2 supported and AM-SDK is using it...
+> > >
+> >
+> > I would expect that they won't pick up this change in their
+> tree.  Is there a
+> > way to "add" it back from a distro centric conf file?
+> What is the difference between meta-arago including this change
+> compared to meta-ti? Meta-ti doesn't "use" the sgx value so I am
+> assuming your issue is that meta-arago uses this variable to
+> build a filesystem.
+>=20
+> Anyway this "sgx" value should be left in meta-ti.
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
- conf/machine/omap5-evm.conf                        |    2 +-
- recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Fair enough.  I'll either submit a patch to meta-arago to remove the compon=
+ents, or assuming your other sgx patches get picked up I'll see about updat=
+ing to the latest graphics SDK which should work with v3.8 kernels (at leas=
+t build)
 
-diff --git a/conf/machine/omap5-evm.conf b/conf/machine/omap5-evm.conf
-index 5fe3942..ba60e7c 100644
---- a/conf/machine/omap5-evm.conf
-+++ b/conf/machine/omap5-evm.conf
-@@ -29,7 +29,7 @@ MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
- # UBI: VID header offset:          2048 (aligned 2048)
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
- 
--UBOOT_MACHINE = "omap5_evm_config"
-+UBOOT_MACHINE = "omap5_uevm_config"
- 
- # Currently removing the sgx machine feature because there is no SGX package
- # available for omap5
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-index 866cf14..f6cbeee 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-@@ -8,6 +8,6 @@ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH
- 
- BRANCH ?= "ti-u-boot-2013.01.01"
- 
--SRCREV = "2309e3268c52c844f8924711b4fd7a9693f5b747"
-+SRCREV = "24043d3b0b6d54b4f73263903499fd3e63980830"
- 
- SPL_BINARY = "MLO"
--- 
-1.7.0.4
-
+>=20
+> >
+> > >
+> > > > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> > > > ---
+> > > >  conf/machine/include/ti33x.inc |    2 +-
+> > > >  1 files changed, 1 insertions(+), 1 deletions(-)
+> > > >
+> > > > diff --git a/conf/machine/include/ti33x.inc
+> > > b/conf/machine/include/ti33x.inc
+> > > > index 12b80c6..e8aa2ba 100644
+> > > > --- a/conf/machine/include/ti33x.inc
+> > > > +++ b/conf/machine/include/ti33x.inc
+> > > > @@ -34,4 +34,4 @@ UBOOT_LOADADDRESS =3D "0x80008000"
+> > > >  EXTRA_IMAGEDEPENDS +=3D "u-boot"
+> > > >
+> > > >  # List common SoC features, may need to add touchscreen
+> for
+> > > specific machines
+> > > > -MACHINE_FEATURES =3D "kernel26 apm usbgadget usbhost vfat
+> ext2
+> > > screen alsa ethernet sgx"
+> > > > +MACHINE_FEATURES =3D "kernel26 apm usbgadget usbhost vfat
+> ext2
+> > > screen alsa ethernet"
+> > > > --
+> > > > 1.7.0.4
+> > > >
+> > > > _______________________________________________
+> > > > meta-ti mailing list
+> > > > meta-ti@yoctoproject.org
+> > > > https://lists.yoctoproject.org/listinfo/meta-ti
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
 
