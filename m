@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1B9B3E014E1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1CCB8E014ED
 	for <meta-ti@yoctoproject.org>; Tue,  2 Apr 2013 12:43:12 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DB60852AA5; Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
+	id 7E9C052A48; Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130402194311.DB60852AA5@arago-project.org>
+Message-Id: <20130402194311.7E9C052A48@arago-project.org>
 Date: Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Chase Maupin : omap5-evm: update U-Boot machine to omap5 uevm
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 02 Apr 2013 19:43:13 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 7c7ee62e42aebca8c91d9a07300b53d3d05b9301
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7c7ee62e42aebca8c91d9a07300b53d3d05b9301
+Branch: danny
+Commit: 9fedd1c4d20553faad411547b6131ae38d404730
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9fedd1c4d20553faad411547b6131ae38d404730
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
 Date:   Mon Apr  1 16:07:08 2013 -0500
