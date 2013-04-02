@@ -1,37 +1,27 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ABC45E0051D
-	for <meta-ti@yoctoproject.org>; Mon,  1 Apr 2013 14:32:07 -0700 (PDT)
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D87EBE014D8
+	for <meta-ti@yoctoproject.org>; Mon,  1 Apr 2013 18:13:14 -0700 (PDT)
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r31LW7Xg004167
-	for <meta-ti@yoctoproject.org>; Mon, 1 Apr 2013 16:32:07 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r31LW7fR003309
-	for <meta-ti@yoctoproject.org>; Mon, 1 Apr 2013 16:32:07 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.02.0342.003; Mon, 1 Apr 2013 16:32:06 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH] ti33x: remove sgx until latest kernels are
-	supported
-Thread-Index: AQHOLwIeG37C6eL//kmlEQbhXXwvDJjBreGggAB0uID//7mE4IAAVPGA//+xgrA=
-Date: Mon, 1 Apr 2013 21:32:05 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED101594B4CF5@DLEE11.ent.ti.com>
-References: <1364833567-8510-1-git-send-email-Chase.Maupin@ti.com>
-	<20130401175536.GA9892@edge>
-	<7D46E86EC0A8354091174257B2FED101594B459C@DLEE11.ent.ti.com>
-	<8F29D6B095ED194EA1980491A5E029710C418F9A@DFLE08.ent.ti.com>
-	<7D46E86EC0A8354091174257B2FED101594B4BBD@DLEE11.ent.ti.com>
-	<20130401211233.GD10072@edge>
-In-Reply-To: <20130401211233.GD10072@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r321DDQi026484
+	for <meta-ti@yoctoproject.org>; Mon, 1 Apr 2013 20:13:14 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r321DDrJ009436
+	for <meta-ti@yoctoproject.org>; Mon, 1 Apr 2013 20:13:13 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Mon, 1 Apr 2013 20:13:13 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r321DDFP007376	for
+	<meta-ti@yoctoproject.org>; Mon, 1 Apr 2013 20:13:13 -0500
+Date: Mon, 1 Apr 2013 21:08:09 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <964298930.123.1364864889774.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] ti33x: remove sgx until latest kernels are supported
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-04-01_21-01-06
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,126 +34,163 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Apr 2013 21:32:07 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 02 Apr 2013 01:13:15 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_122_914146624.1364864889771"
 
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Monday, April 01, 2013 4:13 PM
-> To: Maupin, Chase
-> Cc: Cooper Jr., Franklin; meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH] ti33x: remove sgx until latest
-> kernels are supported
->=20
-> On Mon, Apr 01, 2013 at 05:10:35PM -0400, Maupin, Chase wrote:
-> > > -----Original Message-----
-> > > From: Cooper Jr., Franklin
-> > > Sent: Monday, April 01, 2013 3:21 PM
-> > > To: Maupin, Chase; Dmytriyenko, Denys
-> > > Cc: meta-ti@yoctoproject.org
-> > > Subject: RE: [meta-ti] [PATCH] ti33x: remove sgx until latest
-> > > kernels are supported
-> > >
-> > >
-> > >
-> > > > -----Original Message-----
-> > > > From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> > > > bounces@yoctoproject.org] On Behalf Of Maupin, Chase
-> > > > Sent: Monday, April 01, 2013 1:24 PM
-> > > > To: Dmytriyenko, Denys
-> > > > Cc: meta-ti@yoctoproject.org
-> > > > Subject: Re: [meta-ti] [PATCH] ti33x: remove sgx until
-> latest
-> > > kernels are
-> > > > supported
-> > > >
-> > > > > -----Original Message-----
-> > > > > From: Dmytriyenko, Denys
-> > > > > Sent: Monday, April 01, 2013 12:56 PM
-> > > > > To: Maupin, Chase
-> > > > > Cc: meta-ti@yoctoproject.org
-> > > > > Subject: Re: [meta-ti] [PATCH] ti33x: remove sgx until
-> latest
-> > > kernels
-> > > > > are supported
-> > > > >
-> > > > > On Mon, Apr 01, 2013 at 11:26:07AM -0500, Chase Maupin
-> wrote:
-> > > > > > * Remove the sgx feature from the ti33x devices until
-> the
-> > > > > update
-> > > > > >   to a later version of the graphics SDK and drivers
-> > > enables
-> > > > > SGX
-> > > > > >   support for later kernels such a v3.8
-> > > > >
-> > > > > But we still have 3.2 supported and AM-SDK is using it...
-> > > > >
-> > > >
-> > > > I would expect that they won't pick up this change in their
-> > > tree.  Is there a
-> > > > way to "add" it back from a distro centric conf file?
-> > > What is the difference between meta-arago including this
-> change
-> > > compared to meta-ti? Meta-ti doesn't "use" the sgx value so I
-> am
-> > > assuming your issue is that meta-arago uses this variable to
-> > > build a filesystem.
-> > >
-> > > Anyway this "sgx" value should be left in meta-ti.
-> >
-> > Fair enough.  I'll either submit a patch to meta-arago to
-> remove the
-> > components, or assuming your other sgx patches get picked up
-> I'll see about
-> > updating to the latest graphics SDK which should work with v3.8
-> kernels (at
-> > least build)
->=20
-> Second option would be the best - I'll give those new sgx patches
-> some
-> attention tonight...
+------=_Part_122_914146624.1364864889771
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Thanks.=20
+<html>
+<head>
+<title>
+Status for 04/01/13
+</title>
+</head>
+<body>
 
->=20
->=20
-> > > > > > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-> > > > > > ---
-> > > > > >  conf/machine/include/ti33x.inc |    2 +-
-> > > > > >  1 files changed, 1 insertions(+), 1 deletions(-)
-> > > > > >
-> > > > > > diff --git a/conf/machine/include/ti33x.inc
-> > > > > b/conf/machine/include/ti33x.inc
-> > > > > > index 12b80c6..e8aa2ba 100644
-> > > > > > --- a/conf/machine/include/ti33x.inc
-> > > > > > +++ b/conf/machine/include/ti33x.inc
-> > > > > > @@ -34,4 +34,4 @@ UBOOT_LOADADDRESS =3D "0x80008000"
-> > > > > >  EXTRA_IMAGEDEPENDS +=3D "u-boot"
-> > > > > >
-> > > > > >  # List common SoC features, may need to add
-> touchscreen
-> > > for
-> > > > > specific machines
-> > > > > > -MACHINE_FEATURES =3D "kernel26 apm usbgadget usbhost
-> vfat
-> > > ext2
-> > > > > screen alsa ethernet sgx"
-> > > > > > +MACHINE_FEATURES =3D "kernel26 apm usbgadget usbhost
-> vfat
-> > > ext2
-> > > > > screen alsa ethernet"
-> > > > > > --
-> > > > > > 1.7.0.4
-> > > > > >
-> > > > > > _______________________________________________
-> > > > > > meta-ti mailing list
-> > > > > > meta-ti@yoctoproject.org
-> > > > > > https://lists.yoctoproject.org/listinfo/meta-ti
-> > > > _______________________________________________
-> > > > meta-ti mailing list
-> > > > meta-ti@yoctoproject.org
-> > > > https://lists.yoctoproject.org/listinfo/meta-ti
+<h2>Status for 04/01/13</h2>
 
+<h2>BUILD_ID: build-2013-04-01_21-02-09</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.03"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_122_914146624.1364864889771--
