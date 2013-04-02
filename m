@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B343E01494
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B30BE01481
 	for <meta-ti@yoctoproject.org>; Tue,  2 Apr 2013 12:43:13 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2B05252A97; Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
+	id 5051852A50; Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130402194312.2B05252A97@arago-project.org>
+Message-Id: <20130402194312.5051852A50@arago-project.org>
 Date: Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : omap3-sgx-modules: Add version 4.08.00. 02 of the Graphics SDK kernel modules
+Subject: Franklin S. Cooper Jr : libgles-omap3.inc: Add tweaks needed for newer version of the Graphics SDK
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,82 +27,67 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: 372e20c5441e7fb8aebca869627410aac8b0593f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=372e20c5441e7fb8aebca869627410aac8b0593f
+Commit: 380d514d9801e52e4ab6b717bf2771055a12ea89
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=380d514d9801e52e4ab6b717bf2771055a12ea89
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Tue Mar 19 21:10:30 2013 -0500
+Date:   Tue Mar 19 21:17:47 2013 -0500
 
-omap3-sgx-modules: Add version 4.08.00.02 of the Graphics SDK kernel modules
+libgles-omap3.inc: Add tweaks needed for newer version of the Graphics SDK
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../omap3-sgx-modules_4.08.00.02.bb                |   56 ++++++++++++++++++++
- 1 files changed, 56 insertions(+), 0 deletions(-)
+ recipes-graphics/libgles/libgles-omap3.inc |   18 +++++++++---------
+ 1 files changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
-new file mode 100644
-index 0000000..793de14
---- /dev/null
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
-@@ -0,0 +1,56 @@
-+DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ea5743acf520dd81ca172e69f818a3d4"
-+
-+TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
-+require ../../recipes-ti/includes/ti-eula-unpack.inc
-+
-+SGXPV = "4_08_00_02"
-+IMGPV = "1.9.2188537"
-+BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
-+
-+inherit module
-+
-+MACHINE_KERNEL_PR_append = "a"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE}"
-+
-+SRC_URI[md5sum] = "0efa3a38266e6f41f8cc4fad0187f0d6"
-+SRC_URI[sha256sum] = "c732044b515a598e1fab661b7463aa9c53d4fa37f4980dfa85cd02b7468d0cd9"
-+
-+TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
-+S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
-+
-+PVRBUILD = "release"
-+export KERNELDIR = "${STAGING_KERNEL_DIR}"
-+
-+INHIBIT_PACKAGE_STRIP = "1"
-+
-+TI_PLATFORM_omap3 = "omap3630"
-+TI_PLATFORM_ti814x = "ti81xx"
-+TI_PLATFORM_ti816x = "ti81xx"
-+TI_PLATFORM_ti33x = "ti335x"
-+
-+MODULESLOCATION_omap3 = "dc_omapfb3_linux"
-+MODULESLOCATION_ti814x = "dc_ti81xx_linux"
-+MODULESLOCATION_ti816x = "dc_ti81xx_linux"
-+MODULESLOCATION_ti33x = "dc_ti335x_linux"
-+
-+export SUPPORT_XORG ?= "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
-+
-+MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
-+
-+do_install() {
-+    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+    cp  ${S}/pvrsrvkm.ko \
-+        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
-+        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
-+        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+
-+    if [ "${SUPPORT_XORG}" = "1" ]; then
-+        cp ${S}/services4/3rdparty/linux_drm/drm.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+    fi
-+}
+diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
+index 66ebcd5..9a90c56 100644
+--- a/recipes-graphics/libgles/libgles-omap3.inc
++++ b/recipes-graphics/libgles/libgles-omap3.inc
+@@ -181,10 +181,10 @@ do_install () {
+ 
+ 	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/Include/* ${D}${includedir}/
+ 	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/* ${D}${includedir}/
+-	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES/ || true
+-	cp -pPr ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES2/ || true
+-	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/v* ${D}${includedir}/ || true
+-	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/V* ${D}${includedir}/ || true
++	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES/ 2>/dev/null || true
++	cp -pPr ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES2/ 2>/dev/null || true
++	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/v* ${D}${includedir}/ 2>/dev/null || true
++	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/V* ${D}${includedir}/ 2>/dev/null || true
+ 	cp -pPr ${S}/include/*.h ${D}${includedir} || true
+ 	cp -pPr ${S}/include/wsegl/*.h ${D}${includedir} || true
+ 	
+@@ -218,7 +218,7 @@ do_install () {
+ 		if [ -e ${ESLOCATION} ] ; then
+ 			cp -pPR ${ESLOCATION}/lib*${IMGPV} ${ESLOCATION}/pvr_drv.so ${ESLOCATION}/*.a ${D}${libdir}/ES${esrev}.0/
+ 			for esprog in $shared_prog $raw_prog ${@base_contains('DISTRO_FEATURES', 'x11',"$x11_prog","",d)} ; do
+-				install -m 0755 ${ESLOCATION}/$esprog ${D}${bindir}/ES${esrev}.0/ || true
++				install -m 0755 ${ESLOCATION}/$esprog ${D}${bindir}/ES${esrev}.0/ 2>/dev/null || true
+ 			done
+ 		fi
+ 	done
+@@ -232,14 +232,14 @@ do_install () {
+ 	if [ ${SUPPORT_XORG} -eq 1 ] ; then
+ 		install -d ${D}${bindir}/SGX/demos/X11/
+ 		install -m 0755 ${S}/demos/x11/* ${D}${bindir}/SGX/demos/X11/
+-		install -d ${D}${bindir}/SGX/trainingcourses/X11
+-		install -m 0755 ${S}/trainingcourses/x11/* ${D}${bindir}/SGX/trainingcourses/X11/
++		install -d ${D}${bindir}/SGX/trainingcourses/X11  2>/dev/null || true
++		install -m 0755 ${S}/trainingcourses/x11/* ${D}${bindir}/SGX/trainingcourses/X11/ 2>/dev/null || true
+ 	fi
+ 
+ 	install -d ${D}${bindir}/SGX/demos/Raw/
+ 	install -m 0755 ${S}/demos/raw/* ${D}${bindir}/SGX/demos/Raw/
+-	install -d ${D}${bindir}/SGX/trainingcourses/Raw
+-	install -m 0755 ${S}/trainingcourses/raw/* ${D}${bindir}/SGX/trainingcourses/Raw/
++	install -d ${D}${bindir}/SGX/trainingcourses/Raw 2>/dev/null || true
++	install -m 0755 ${S}/trainingcourses/raw/* ${D}${bindir}/SGX/trainingcourses/Raw/ 2>/dev/null || true
+ 
+ 
+ 	# Delete objects and linker scripts hidden between the headers
 
 
