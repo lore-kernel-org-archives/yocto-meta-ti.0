@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B30BE01481
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D3C0E014D7
 	for <meta-ti@yoctoproject.org>; Tue,  2 Apr 2013 12:43:13 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5051852A50; Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
+	id 5783152A3B; Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130402194312.5051852A50@arago-project.org>
+Message-Id: <20130402194312.5783152A3B@arago-project.org>
 Date: Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : libgles-omap3.inc: Add tweaks needed for newer version of the Graphics SDK
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 02 Apr 2013 19:43:13 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 380d514d9801e52e4ab6b717bf2771055a12ea89
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=380d514d9801e52e4ab6b717bf2771055a12ea89
+Branch: master
+Commit: e377abc5f7f697ad9f70cf264b7c9c2fb44d61d8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e377abc5f7f697ad9f70cf264b7c9c2fb44d61d8
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Tue Mar 19 21:17:47 2013 -0500
