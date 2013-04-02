@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17E92E01481
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1B9B3E014E1
 	for <meta-ti@yoctoproject.org>; Tue,  2 Apr 2013 12:43:12 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1581C52A10; Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
+	id DB60852AA5; Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130402194312.1581C52A10@arago-project.org>
+Message-Id: <20130402194311.DB60852AA5@arago-project.org>
 Date: Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : omap3-sgx-modules: Add version 4.08.00. 02 of the Graphics SDK kernel modules
+Subject: Chase Maupin : omap5-evm: update U-Boot machine to omap5 uevm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,82 +27,52 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ecb90f34c4e4c005978fa72961f0b80c8053bc5b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ecb90f34c4e4c005978fa72961f0b80c8053bc5b
+Commit: 7c7ee62e42aebca8c91d9a07300b53d3d05b9301
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7c7ee62e42aebca8c91d9a07300b53d3d05b9301
 
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Tue Mar 19 21:10:30 2013 -0500
+Author: Chase Maupin <Chase.Maupin@ti.com>
+Date:   Mon Apr  1 16:07:08 2013 -0500
 
-omap3-sgx-modules: Add version 4.08.00.02 of the Graphics SDK kernel modules
+omap5-evm: update U-Boot machine to omap5 uevm
 
+* The U-Boot config to be used in the latest code has been updated
+  to use omap5_uevm instead of omap5_evm.
+* Update to the latest code to pickup this change and modify the
+  machine file as well.
+
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../omap3-sgx-modules_4.08.00.02.bb                |   56 ++++++++++++++++++++
- 1 files changed, 56 insertions(+), 0 deletions(-)
+ conf/machine/omap5-evm.conf                        |    2 +-
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
-new file mode 100644
-index 0000000..793de14
---- /dev/null
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
-@@ -0,0 +1,56 @@
-+DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ea5743acf520dd81ca172e69f818a3d4"
-+
-+TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
-+require ../../recipes-ti/includes/ti-eula-unpack.inc
-+
-+SGXPV = "4_08_00_02"
-+IMGPV = "1.9.2188537"
-+BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
-+
-+inherit module
-+
-+MACHINE_KERNEL_PR_append = "a"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE}"
-+
-+SRC_URI[md5sum] = "0efa3a38266e6f41f8cc4fad0187f0d6"
-+SRC_URI[sha256sum] = "c732044b515a598e1fab661b7463aa9c53d4fa37f4980dfa85cd02b7468d0cd9"
-+
-+TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
-+S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
-+
-+PVRBUILD = "release"
-+export KERNELDIR = "${STAGING_KERNEL_DIR}"
-+
-+INHIBIT_PACKAGE_STRIP = "1"
-+
-+TI_PLATFORM_omap3 = "omap3630"
-+TI_PLATFORM_ti814x = "ti81xx"
-+TI_PLATFORM_ti816x = "ti81xx"
-+TI_PLATFORM_ti33x = "ti335x"
-+
-+MODULESLOCATION_omap3 = "dc_omapfb3_linux"
-+MODULESLOCATION_ti814x = "dc_ti81xx_linux"
-+MODULESLOCATION_ti816x = "dc_ti81xx_linux"
-+MODULESLOCATION_ti33x = "dc_ti335x_linux"
-+
-+export SUPPORT_XORG ?= "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
-+
-+MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
-+
-+do_install() {
-+    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+    cp  ${S}/pvrsrvkm.ko \
-+        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
-+        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
-+        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+
-+    if [ "${SUPPORT_XORG}" = "1" ]; then
-+        cp ${S}/services4/3rdparty/linux_drm/drm.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+    fi
-+}
+diff --git a/conf/machine/omap5-evm.conf b/conf/machine/omap5-evm.conf
+index 5fe3942..ba60e7c 100644
+--- a/conf/machine/omap5-evm.conf
++++ b/conf/machine/omap5-evm.conf
+@@ -29,7 +29,7 @@ MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
+ # UBI: VID header offset:          2048 (aligned 2048)
+ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
+ 
+-UBOOT_MACHINE = "omap5_evm_config"
++UBOOT_MACHINE = "omap5_uevm_config"
+ 
+ # Currently removing the sgx machine feature because there is no SGX package
+ # available for omap5
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
+index 866cf14..f6cbeee 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
+@@ -8,6 +8,6 @@ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH
+ 
+ BRANCH ?= "ti-u-boot-2013.01.01"
+ 
+-SRCREV = "2309e3268c52c844f8924711b4fd7a9693f5b747"
++SRCREV = "24043d3b0b6d54b4f73263903499fd3e63980830"
+ 
+ SPL_BINARY = "MLO"
 
 
