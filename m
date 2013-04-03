@@ -1,15 +1,27 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D3C0E014D7
-	for <meta-ti@yoctoproject.org>; Tue,  2 Apr 2013 12:43:13 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 5783152A3B; Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130402194312.5783152A3B@arago-project.org>
-Date: Tue,  2 Apr 2013 19:43:11 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : libgles-omap3.inc: Add tweaks needed for newer version of the Graphics SDK
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AAF72E01513
+	for <meta-ti@yoctoproject.org>; Tue,  2 Apr 2013 18:15:07 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r331F6kI018893
+	for <meta-ti@yoctoproject.org>; Tue, 2 Apr 2013 20:15:06 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r331F6A6030806
+	for <meta-ti@yoctoproject.org>; Tue, 2 Apr 2013 20:15:06 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 2 Apr 2013 20:15:06 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r331F6xL005564	for
+	<meta-ti@yoctoproject.org>; Tue, 2 Apr 2013 20:15:06 -0500
+Date: Tue, 2 Apr 2013 21:10:01 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1162556178.127.1364951401014.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-04-02_21-01-06
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,72 +34,163 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Apr 2013 19:43:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Apr 2013 01:15:07 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_126_311324610.1364951401011"
 
-Module: meta-ti
-Branch: master
-Commit: e377abc5f7f697ad9f70cf264b7c9c2fb44d61d8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e377abc5f7f697ad9f70cf264b7c9c2fb44d61d8
+------=_Part_126_311324610.1364951401011
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Tue Mar 19 21:17:47 2013 -0500
+<html>
+<head>
+<title>
+Status for 04/02/13
+</title>
+</head>
+<body>
 
-libgles-omap3.inc: Add tweaks needed for newer version of the Graphics SDK
+<h2>Status for 04/02/13</h2>
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+<h2>BUILD_ID: build-2013-04-02_21-02-09</h2>
 
----
+<h2>Clean Build: false</h2>
 
- recipes-graphics/libgles/libgles-omap3.inc |   18 +++++++++---------
- 1 files changed, 9 insertions(+), 9 deletions(-)
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-index 66ebcd5..9a90c56 100644
---- a/recipes-graphics/libgles/libgles-omap3.inc
-+++ b/recipes-graphics/libgles/libgles-omap3.inc
-@@ -181,10 +181,10 @@ do_install () {
- 
- 	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/Include/* ${D}${includedir}/
- 	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/* ${D}${includedir}/
--	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES/ || true
--	cp -pPr ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES2/ || true
--	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/v* ${D}${includedir}/ || true
--	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/V* ${D}${includedir}/ || true
-+	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES/ 2>/dev/null || true
-+	cp -pPr ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES2/ 2>/dev/null || true
-+	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/v* ${D}${includedir}/ 2>/dev/null || true
-+	cp -pPr ${S}/GFX_Linux_SDK/OVG/SDKPackage/Builds/OVG/Include/V* ${D}${includedir}/ 2>/dev/null || true
- 	cp -pPr ${S}/include/*.h ${D}${includedir} || true
- 	cp -pPr ${S}/include/wsegl/*.h ${D}${includedir} || true
- 	
-@@ -218,7 +218,7 @@ do_install () {
- 		if [ -e ${ESLOCATION} ] ; then
- 			cp -pPR ${ESLOCATION}/lib*${IMGPV} ${ESLOCATION}/pvr_drv.so ${ESLOCATION}/*.a ${D}${libdir}/ES${esrev}.0/
- 			for esprog in $shared_prog $raw_prog ${@base_contains('DISTRO_FEATURES', 'x11',"$x11_prog","",d)} ; do
--				install -m 0755 ${ESLOCATION}/$esprog ${D}${bindir}/ES${esrev}.0/ || true
-+				install -m 0755 ${ESLOCATION}/$esprog ${D}${bindir}/ES${esrev}.0/ 2>/dev/null || true
- 			done
- 		fi
- 	done
-@@ -232,14 +232,14 @@ do_install () {
- 	if [ ${SUPPORT_XORG} -eq 1 ] ; then
- 		install -d ${D}${bindir}/SGX/demos/X11/
- 		install -m 0755 ${S}/demos/x11/* ${D}${bindir}/SGX/demos/X11/
--		install -d ${D}${bindir}/SGX/trainingcourses/X11
--		install -m 0755 ${S}/trainingcourses/x11/* ${D}${bindir}/SGX/trainingcourses/X11/
-+		install -d ${D}${bindir}/SGX/trainingcourses/X11  2>/dev/null || true
-+		install -m 0755 ${S}/trainingcourses/x11/* ${D}${bindir}/SGX/trainingcourses/X11/ 2>/dev/null || true
- 	fi
- 
- 	install -d ${D}${bindir}/SGX/demos/Raw/
- 	install -m 0755 ${S}/demos/raw/* ${D}${bindir}/SGX/demos/Raw/
--	install -d ${D}${bindir}/SGX/trainingcourses/Raw
--	install -m 0755 ${S}/trainingcourses/raw/* ${D}${bindir}/SGX/trainingcourses/Raw/
-+	install -d ${D}${bindir}/SGX/trainingcourses/Raw 2>/dev/null || true
-+	install -m 0755 ${S}/trainingcourses/raw/* ${D}${bindir}/SGX/trainingcourses/Raw/ 2>/dev/null || true
- 
- 
- 	# Delete objects and linker scripts hidden between the headers
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.03"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_126_311324610.1364951401011--
