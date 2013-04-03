@@ -1,24 +1,22 @@
 Return-Path: <denis@denix.org>
-Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
-	[206.46.173.3])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6471E0147D
-	for <meta-ti@yoctoproject.org>; Wed,  3 Apr 2013 15:47:55 -0700 (PDT)
+Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
+	[206.46.173.1])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B6D1E014B6
+	for <meta-ti@yoctoproject.org>; Wed,  3 Apr 2013 15:48:00 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173003.mailsrvcs.net
+	by vms173001.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MKP008S1BAO3BZ0@vms173003.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 03 Apr 2013 17:47:21 -0500 (CDT)
+	2009)) with ESMTPA id <0MKP006NOBAK2552@vms173001.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 03 Apr 2013 17:47:23 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id A80DA201CA; Wed,
-	03 Apr 2013 18:47:12 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 4EC342018B; Wed,
+	03 Apr 2013 18:47:08 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 03 Apr 2013 18:47:04 -0400
-Message-id: <1365029224-21885-2-git-send-email-denis@denix.org>
+Date: Wed, 03 Apr 2013 18:47:03 -0400
+Message-id: <1365029224-21885-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.8.1.5
-In-reply-to: <1365029224-21885-1-git-send-email-denis@denix.org>
-References: <1365029224-21885-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] omap-a15.inc: also set TI staging preferred provider for u-boot
+Subject: [PATCH 1/2] u-boot-ti-staging: update SRCREV for more omap5 changes, bump PR
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,27 +29,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Apr 2013 22:47:55 -0000
+X-List-Received-Date: Wed, 03 Apr 2013 22:48:00 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- conf/machine/include/omap-a15.inc | 1 +
- 1 file changed, 1 insertion(+)
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
-index 702898f..623f2df 100644
---- a/conf/machine/include/omap-a15.inc
-+++ b/conf/machine/include/omap-a15.inc
-@@ -8,6 +8,7 @@ MACHINE_KERNEL_PR = "r1"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
+index f6cbeee..cf01bd0 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
+@@ -2,12 +2,12 @@ require u-boot-ti.inc
  
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
- PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
-+PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+ DESCRIPTION = "u-boot bootloader for TI devices"
  
- KERNEL_IMAGETYPE = "uImage"
+-PR = "r1"
++PR = "r2"
  
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2013.01.01"
+ 
+-SRCREV = "24043d3b0b6d54b4f73263903499fd3e63980830"
++SRCREV = "9aab8612f643ab90df837e743f5435bba2ae68cf"
+ 
+ SPL_BINARY = "MLO"
 -- 
 1.8.1.5
 
