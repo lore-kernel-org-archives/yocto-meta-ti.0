@@ -1,30 +1,30 @@
-Return-Path: <chase.maupin@ti.com>
+Return-Path: <denys@ti.com>
 Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54CF0E014EE
-	for <meta-ti@yoctoproject.org>; Wed,  3 Apr 2013 17:38:29 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B240DE014EE
+	for <meta-ti@yoctoproject.org>; Wed,  3 Apr 2013 18:10:08 -0700 (PDT)
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r340cS6a007781
-	for <meta-ti@yoctoproject.org>; Wed, 3 Apr 2013 19:38:28 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r340cSNo025468
-	for <meta-ti@yoctoproject.org>; Wed, 3 Apr 2013 19:38:28 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.02.0342.003; Wed, 3 Apr 2013 19:38:28 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH 2/2] ti33x: Add DTB filter for building SDKs
-Thread-Index: AQHOML3+rAnXnkkAJEm+j09WaX9supjFN/cK
-Date: Thu, 4 Apr 2013 00:38:28 +0000
-Message-ID: <47BFB0D4-4FB5-4C58-A905-C12C79B8E60C@ti.com>
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r341A8N8010749
+	for <meta-ti@yoctoproject.org>; Wed, 3 Apr 2013 20:10:08 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r341A8te028345
+	for <meta-ti@yoctoproject.org>; Wed, 3 Apr 2013 20:10:08 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 3 Apr 2013 20:10:07 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id r341A718020080;
+	Wed, 3 Apr 2013 20:10:07 -0500
+Date: Wed, 3 Apr 2013 21:10:07 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Maupin, Chase" <chase.maupin@ti.com>
+Message-ID: <20130404011007.GR10072@edge>
 References: <1365008161-14609-1-git-send-email-Chase.Maupin@ti.com>
-	<1365008161-14609-2-git-send-email-Chase.Maupin@ti.com>,
+	<1365008161-14609-2-git-send-email-Chase.Maupin@ti.com>
 	<20130403225248.GE31233@denix.org>
-In-Reply-To: <20130403225248.GE31233@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+	<47BFB0D4-4FB5-4C58-A905-C12C79B8E60C@ti.com>
 MIME-Version: 1.0
+In-Reply-To: <47BFB0D4-4FB5-4C58-A905-C12C79B8E60C@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [PATCH 2/2] ti33x: Add DTB filter for building SDKs
 X-BeenThere: meta-ti@yoctoproject.org
@@ -39,52 +39,56 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Apr 2013 00:38:29 -0000
-Content-Language: en-US
+X-List-Received-Date: Thu, 04 Apr 2013 01:10:08 -0000
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-We could probably do it in the image recipe with machine overrides.  How's =
-that?
+On Wed, Apr 03, 2013 at 08:38:28PM -0400, Maupin, Chase wrote:
+> We could probably do it in the image recipe with machine overrides.  How's 
+> that?
 
-Sincerely,
-Chase Maupin
-On Apr 3, 2013, at 5:53 PM, "Dmytriyenko, Denys" <denys@ti.com> wrote:
+Seems better, as it is nicely localized. And in case it grows up on us and 
+starts being used for other purposes or by other components/recipes, we can 
+always revisit adding it to meta-ti/BSP.
 
-> On Wed, Apr 03, 2013 at 11:56:01AM -0500, Chase Maupin wrote:
->> * Add a DTB_FILTER variable to only package the am335x DTB files
->>  in the SDK.
->>=20
->> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
->> ---
->> conf/machine/include/ti33x.inc |    2 ++
->> 1 files changed, 2 insertions(+), 0 deletions(-)
->>=20
->> diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33=
-x.inc
->> index e8aa2ba..50844d1 100644
->> --- a/conf/machine/include/ti33x.inc
->> +++ b/conf/machine/include/ti33x.inc
->> @@ -25,6 +25,8 @@ PREFERRED_PROVIDER_u-boot =3D "u-boot-ti-staging"
->>=20
->> KERNEL_IMAGETYPE =3D "uImage"
->>=20
->> +DTB_FILTER =3D "am335x"
->=20
-> I'm not sure about adding a new variable to meta-ti that is only used in=
- tisdk=20
-> part of meta-arago... Any other options?
->=20
->=20
->> UBOOT_ARCH =3D "arm"
->> UBOOT_MACHINE =3D "am335x_evm_config"
->>=20
->> --=20
->> 1.7.0.4
->>=20
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
->>=20
+-- 
+Denys
+
+
+> On Apr 3, 2013, at 5:53 PM, "Dmytriyenko, Denys" <denys@ti.com> wrote:
+> 
+> > On Wed, Apr 03, 2013 at 11:56:01AM -0500, Chase Maupin wrote:
+> >> * Add a DTB_FILTER variable to only package the am335x DTB files
+> >>  in the SDK.
+> >> 
+> >> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> >> ---
+> >> conf/machine/include/ti33x.inc |    2 ++
+> >> 1 files changed, 2 insertions(+), 0 deletions(-)
+> >> 
+> >> diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+> >> index e8aa2ba..50844d1 100644
+> >> --- a/conf/machine/include/ti33x.inc
+> >> +++ b/conf/machine/include/ti33x.inc
+> >> @@ -25,6 +25,8 @@ PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+> >> 
+> >> KERNEL_IMAGETYPE = "uImage"
+> >> 
+> >> +DTB_FILTER = "am335x"
+> > 
+> > I'm not sure about adding a new variable to meta-ti that is only used in tisdk 
+> > part of meta-arago... Any other options?
+> > 
+> > 
+> >> UBOOT_ARCH = "arm"
+> >> UBOOT_MACHINE = "am335x_evm_config"
+> >> 
+> >> -- 
+> >> 1.7.0.4
+> >> 
+> >> _______________________________________________
+> >> meta-ti mailing list
+> >> meta-ti@yoctoproject.org
+> >> https://lists.yoctoproject.org/listinfo/meta-ti
+> >> 
 
