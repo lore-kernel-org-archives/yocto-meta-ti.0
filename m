@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56C34E01521
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6525CE0152C
 	for <meta-ti@yoctoproject.org>; Wed,  3 Apr 2013 17:26:08 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 297B052A35; Thu,  4 Apr 2013 00:26:08 +0000 (UTC)
+	id 379A952A3B; Thu,  4 Apr 2013 00:26:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130404002608.297B052A35@arago-project.org>
+Message-Id: <20130404002608.379A952A3B@arago-project.org>
 Date: Thu,  4 Apr 2013 00:26:08 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update SRCREV for more omap5 changes , bump PR
+Subject: Denys Dmytriyenko : omap-a15.inc: also set TI staging preferred provider for u-boot
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,39 +27,32 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: abeba37a5ff47675eebf3dc59f5018f1c53a45c0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=abeba37a5ff47675eebf3dc59f5018f1c53a45c0
+Commit: 8cf7df4efc1cfbdf161e0ee0fb1c42a4c7c85692
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8cf7df4efc1cfbdf161e0ee0fb1c42a4c7c85692
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Apr  3 18:40:07 2013 -0400
+Date:   Wed Apr  3 18:45:18 2013 -0400
 
-u-boot-ti-staging: update SRCREV for more omap5 changes, bump PR
+omap-a15.inc: also set TI staging preferred provider for u-boot
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/include/omap-a15.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-index f6cbeee..cf01bd0 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-@@ -2,12 +2,12 @@ require u-boot-ti.inc
+diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+index 702898f..623f2df 100644
+--- a/conf/machine/include/omap-a15.inc
++++ b/conf/machine/include/omap-a15.inc
+@@ -8,6 +8,7 @@ MACHINE_KERNEL_PR = "r1"
  
- DESCRIPTION = "u-boot bootloader for TI devices"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
++PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
  
--PR = "r1"
-+PR = "r2"
+ KERNEL_IMAGETYPE = "uImage"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2013.01.01"
- 
--SRCREV = "24043d3b0b6d54b4f73263903499fd3e63980830"
-+SRCREV = "9aab8612f643ab90df837e743f5435bba2ae68cf"
- 
- SPL_BINARY = "MLO"
 
 
