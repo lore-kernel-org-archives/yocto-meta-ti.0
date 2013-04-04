@@ -1,22 +1,38 @@
-Return-Path: <denis@denix.org>
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B45EE014EE
-	for <meta-ti@yoctoproject.org>; Wed,  3 Apr 2013 18:43:27 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173021.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MKP0061WJFXJUZ0@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 03 Apr 2013 20:43:26 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 0D83920173; Wed,
-	03 Apr 2013 21:43:09 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Wed, 03 Apr 2013 21:43:08 -0400
-Message-id: <1365039788-24822-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [PATCH] linux-ti-staging: update with the latest dss fixes in omap5 dts
+Return-Path: <chase.maupin@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 49399E0140A
+	for <meta-ti@yoctoproject.org>; Thu,  4 Apr 2013 04:44:20 -0700 (PDT)
+Received: from dlelxv30.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r34BiJl0017925
+	for <meta-ti@yoctoproject.org>; Thu, 4 Apr 2013 06:44:19 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r34BiJXF031323
+	for <meta-ti@yoctoproject.org>; Thu, 4 Apr 2013 06:44:19 -0500
+Received: from DLEE74.ent.ti.com (157.170.170.8) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server (TLS) id 14.2.342.3;
+	Thu, 4 Apr 2013 06:44:19 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
+	14.01.0323.003; Thu, 4 Apr 2013 06:44:19 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [meta-ti] [PATCH 2/2] ti33x: Add DTB filter for building SDKs
+Thread-Index: AQHOML3+rAnXnkkAJEm+j09WaX9supjFN/cKgABcqYCAAF1M0A==
+Date: Thu, 4 Apr 2013 11:44:17 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED101594BE6AE@DLEE11.ent.ti.com>
+References: <1365008161-14609-1-git-send-email-Chase.Maupin@ti.com>
+	<1365008161-14609-2-git-send-email-Chase.Maupin@ti.com>
+	<20130403225248.GE31233@denix.org>
+	<47BFB0D4-4FB5-4C58-A905-C12C79B8E60C@ti.com>
+	<20130404011007.GR10072@edge>
+In-Reply-To: <20130404011007.GR10072@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
+MIME-Version: 1.0
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH 2/2] ti33x: Add DTB filter for building SDKs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,34 +45,76 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Apr 2013 01:43:27 -0000
+X-List-Received-Date: Thu, 04 Apr 2013 11:44:20 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-From: Denys Dmytriyenko <denys@ti.com>
+> -----Original Message-----
+> From: Dmytriyenko, Denys
+> Sent: Wednesday, April 03, 2013 8:10 PM
+> To: Maupin, Chase
+> Cc: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCH 2/2] ti33x: Add DTB filter for
+> building SDKs
+>=20
+> On Wed, Apr 03, 2013 at 08:38:28PM -0400, Maupin, Chase wrote:
+> > We could probably do it in the image recipe with machine
+> overrides.  How's
+> > that?
+>=20
+> Seems better, as it is nicely localized. And in case it grows up
+> on us and
+> starts being used for other purposes or by other
+> components/recipes, we can
+> always revisit adding it to meta-ti/BSP.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-ti-staging_3.8.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+OK.  I'll send an update today.
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-index 21202f4..77d8e8a 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-@@ -40,11 +40,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.8.y"
- 
--SRCREV = "f6ce51c2d6e5489262beb6f42cc39ac19e49bc9e"
-+SRCREV = "881dfafeae47da3a8f5ff8c791753e4b4df8065b"
- PV = "3.8.5"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
--- 
-1.8.1.5
-
+>=20
+> --
+> Denys
+>=20
+>=20
+> > On Apr 3, 2013, at 5:53 PM, "Dmytriyenko, Denys" <denys@ti.com>
+> wrote:
+> >
+> > > On Wed, Apr 03, 2013 at 11:56:01AM -0500, Chase Maupin wrote:
+> > >> * Add a DTB_FILTER variable to only package the am335x DTB
+> files
+> > >>  in the SDK.
+> > >>
+> > >> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> > >> ---
+> > >> conf/machine/include/ti33x.inc |    2 ++
+> > >> 1 files changed, 2 insertions(+), 0 deletions(-)
+> > >>
+> > >> diff --git a/conf/machine/include/ti33x.inc
+> b/conf/machine/include/ti33x.inc
+> > >> index e8aa2ba..50844d1 100644
+> > >> --- a/conf/machine/include/ti33x.inc
+> > >> +++ b/conf/machine/include/ti33x.inc
+> > >> @@ -25,6 +25,8 @@ PREFERRED_PROVIDER_u-boot =3D "u-boot-ti-
+> staging"
+> > >>
+> > >> KERNEL_IMAGETYPE =3D "uImage"
+> > >>
+> > >> +DTB_FILTER =3D "am335x"
+> > >
+> > > I'm not sure about adding a new variable to meta-ti that is
+> only used in tisdk
+> > > part of meta-arago... Any other options?
+> > >
+> > >
+> > >> UBOOT_ARCH =3D "arm"
+> > >> UBOOT_MACHINE =3D "am335x_evm_config"
+> > >>
+> > >> --
+> > >> 1.7.0.4
+> > >>
+> > >> _______________________________________________
+> > >> meta-ti mailing list
+> > >> meta-ti@yoctoproject.org
+> > >> https://lists.yoctoproject.org/listinfo/meta-ti
+> > >>
 
