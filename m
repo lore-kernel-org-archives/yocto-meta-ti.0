@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC81FE01523
-	for <meta-ti@yoctoproject.org>; Fri,  5 Apr 2013 16:34:24 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E42ABE01528
+	for <meta-ti@yoctoproject.org>; Fri,  5 Apr 2013 16:34:26 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 869FF52AAA; Fri,  5 Apr 2013 23:34:24 +0000 (UTC)
+	id BCF8D52AAA; Fri,  5 Apr 2013 23:34:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130405233424.869FF52AAA@arago-project.org>
-Date: Fri,  5 Apr 2013 23:34:24 +0000 (UTC)
+Message-Id: <20130405233426.BCF8D52AAA@arago-project.org>
+Date: Fri,  5 Apr 2013 23:34:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Chase Maupin : ti-graphics: Add latest 4.09.00.01 version
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2013 23:34:25 -0000
+X-List-Received-Date: Fri, 05 Apr 2013 23:34:27 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: c14c386946e1ea341faeea292580e37d538d645d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c14c386946e1ea341faeea292580e37d538d645d
+Branch: danny
+Commit: aefef7fe953297263fd897d47b111fe2826a0ea2
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=aefef7fe953297263fd897d47b111fe2826a0ea2
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
 Date:   Fri Apr  5 13:28:40 2013 -0500
@@ -49,5 +49,5 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  .../libgles/libgles-omap3_4.09.00.01.bb            |   75 +++++++++++
  4 files changed, 391 insertions(+), 0 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=c14c386946e1ea341faeea292580e37d538d645d
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=aefef7fe953297263fd897d47b111fe2826a0ea2
 
