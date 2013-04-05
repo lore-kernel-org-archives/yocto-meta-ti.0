@@ -1,38 +1,27 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 49399E0140A
-	for <meta-ti@yoctoproject.org>; Thu,  4 Apr 2013 04:44:20 -0700 (PDT)
+Return-Path: <denys@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4798FE014DF
+	for <meta-ti@yoctoproject.org>; Thu,  4 Apr 2013 19:00:56 -0700 (PDT)
 Received: from dlelxv30.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r34BiJl0017925
-	for <meta-ti@yoctoproject.org>; Thu, 4 Apr 2013 06:44:19 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r34BiJXF031323
-	for <meta-ti@yoctoproject.org>; Thu, 4 Apr 2013 06:44:19 -0500
-Received: from DLEE74.ent.ti.com (157.170.170.8) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server (TLS) id 14.2.342.3;
-	Thu, 4 Apr 2013 06:44:19 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
-	14.01.0323.003; Thu, 4 Apr 2013 06:44:19 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH 2/2] ti33x: Add DTB filter for building SDKs
-Thread-Index: AQHOML3+rAnXnkkAJEm+j09WaX9supjFN/cKgABcqYCAAF1M0A==
-Date: Thu, 4 Apr 2013 11:44:17 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED101594BE6AE@DLEE11.ent.ti.com>
-References: <1365008161-14609-1-git-send-email-Chase.Maupin@ti.com>
-	<1365008161-14609-2-git-send-email-Chase.Maupin@ti.com>
-	<20130403225248.GE31233@denix.org>
-	<47BFB0D4-4FB5-4C58-A905-C12C79B8E60C@ti.com>
-	<20130404011007.GR10072@edge>
-In-Reply-To: <20130404011007.GR10072@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3520trJ024658
+	for <meta-ti@yoctoproject.org>; Thu, 4 Apr 2013 21:00:55 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv30.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3520tw8000508
+	for <meta-ti@yoctoproject.org>; Thu, 4 Apr 2013 21:00:55 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 4 Apr 2013 21:00:55 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3520tT4032119	for
+	<meta-ti@yoctoproject.org>; Thu, 4 Apr 2013 21:00:55 -0500
+Date: Thu, 4 Apr 2013 21:55:46 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <152125395.135.1365126946736.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 2/2] ti33x: Add DTB filter for building SDKs
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-04-04_21-01-06
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,76 +34,163 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Apr 2013 11:44:20 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 05 Apr 2013 02:00:56 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_134_1100774900.1365126946735"
 
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Wednesday, April 03, 2013 8:10 PM
-> To: Maupin, Chase
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH 2/2] ti33x: Add DTB filter for
-> building SDKs
->=20
-> On Wed, Apr 03, 2013 at 08:38:28PM -0400, Maupin, Chase wrote:
-> > We could probably do it in the image recipe with machine
-> overrides.  How's
-> > that?
->=20
-> Seems better, as it is nicely localized. And in case it grows up
-> on us and
-> starts being used for other purposes or by other
-> components/recipes, we can
-> always revisit adding it to meta-ti/BSP.
+------=_Part_134_1100774900.1365126946735
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-OK.  I'll send an update today.
+<html>
+<head>
+<title>
+Status for 04/04/13
+</title>
+</head>
+<body>
 
->=20
-> --
-> Denys
->=20
->=20
-> > On Apr 3, 2013, at 5:53 PM, "Dmytriyenko, Denys" <denys@ti.com>
-> wrote:
-> >
-> > > On Wed, Apr 03, 2013 at 11:56:01AM -0500, Chase Maupin wrote:
-> > >> * Add a DTB_FILTER variable to only package the am335x DTB
-> files
-> > >>  in the SDK.
-> > >>
-> > >> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-> > >> ---
-> > >> conf/machine/include/ti33x.inc |    2 ++
-> > >> 1 files changed, 2 insertions(+), 0 deletions(-)
-> > >>
-> > >> diff --git a/conf/machine/include/ti33x.inc
-> b/conf/machine/include/ti33x.inc
-> > >> index e8aa2ba..50844d1 100644
-> > >> --- a/conf/machine/include/ti33x.inc
-> > >> +++ b/conf/machine/include/ti33x.inc
-> > >> @@ -25,6 +25,8 @@ PREFERRED_PROVIDER_u-boot =3D "u-boot-ti-
-> staging"
-> > >>
-> > >> KERNEL_IMAGETYPE =3D "uImage"
-> > >>
-> > >> +DTB_FILTER =3D "am335x"
-> > >
-> > > I'm not sure about adding a new variable to meta-ti that is
-> only used in tisdk
-> > > part of meta-arago... Any other options?
-> > >
-> > >
-> > >> UBOOT_ARCH =3D "arm"
-> > >> UBOOT_MACHINE =3D "am335x_evm_config"
-> > >>
-> > >> --
-> > >> 1.7.0.4
-> > >>
-> > >> _______________________________________________
-> > >> meta-ti mailing list
-> > >> meta-ti@yoctoproject.org
-> > >> https://lists.yoctoproject.org/listinfo/meta-ti
-> > >>
+<h2>Status for 04/04/13</h2>
 
+<h2>BUILD_ID: build-2013-04-04_21-02-08</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.03"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_134_1100774900.1365126946735--
