@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA457E01506
-	for <meta-ti@yoctoproject.org>; Fri,  5 Apr 2013 11:31:45 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2E494E01509
+	for <meta-ti@yoctoproject.org>; Fri,  5 Apr 2013 11:31:46 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 16A3352AB0; Fri,  5 Apr 2013 18:31:45 +0000 (UTC)
+	id ED49B52AB1; Fri,  5 Apr 2013 18:31:45 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130405183145.16A3352AB0@arago-project.org>
+Message-Id: <20130405183145.ED49B52AB1@arago-project.org>
 Date: Fri,  5 Apr 2013 18:31:45 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: update with the latest dss fixes in omap5 dts
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Apr 2013 18:31:45 -0000
+X-List-Received-Date: Fri, 05 Apr 2013 18:31:46 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 815fde974bb031a3390f4b5501b44bab742cde8c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=815fde974bb031a3390f4b5501b44bab742cde8c
+Branch: danny
+Commit: 891eddf7a2f2c031becb40282ca7aea8bf2841d4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=891eddf7a2f2c031becb40282ca7aea8bf2841d4
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Apr  3 21:41:38 2013 -0400
