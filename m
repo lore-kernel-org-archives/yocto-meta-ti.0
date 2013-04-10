@@ -1,22 +1,26 @@
-Return-Path: <denis@denix.org>
-Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
-	[206.46.173.1])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 61ACAE01473
-	for <meta-ti@yoctoproject.org>; Wed, 10 Apr 2013 14:11:28 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0ML20027D5IFK0N0@vms173001.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 10 Apr 2013 16:11:03 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 10FFE2004B; Wed,
-	10 Apr 2013 17:11:03 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Wed, 10 Apr 2013 17:11:00 -0400
-Message-id: <1365628260-6332-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [PATCH][danny] tune-cortexa{7, 8, 9, 15}: update tunes from oe-core/master with fixes
+Return-Path: <chase.maupin@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D02F1E01471
+	for <meta-ti@yoctoproject.org>; Wed, 10 Apr 2013 14:51:52 -0700 (PDT)
+Received: from dbdp20.itg.ti.com ([172.24.170.38])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3ALpo0f026004
+	for <meta-ti@yoctoproject.org>; Wed, 10 Apr 2013 16:51:51 -0500
+Received: from DBDE71.ent.ti.com (localhost [127.0.0.1])
+	by dbdp20.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3ALpnVA010398
+	for <meta-ti@yoctoproject.org>; Thu, 11 Apr 2013 03:21:50 +0530 (IST)
+Received: from dbdp32.itg.ti.com (172.24.170.251) by DBDE71.ent.ti.com
+	(172.24.170.149) with Microsoft SMTP Server id 14.1.323.3;
+	Thu, 11 Apr 2013 03:21:49 +0530
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3ALpjgq006205;
+	Thu, 11 Apr 2013 03:21:47 +0530
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 10 Apr 2013 16:51:43 -0500
+Message-ID: <1365630704-7324-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Subject: [PATCH] setup-defconfig: allow using KERNEL_LOCALVERSION
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,137 +33,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Apr 2013 21:11:28 -0000
+X-List-Received-Date: Wed, 10 Apr 2013 21:51:53 -0000
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
+* Add capability to use KERNEL_LOCALVERSION to set an extra
+  version string in the kernel.  This mimics functionality
+  submitted to the kernel.bbclass but since this overwrites
+  the do_configure it must be added here as well.
 
-Specifically interested in hardfp+thumb+neon
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- conf/machine/include/tune-cortexa15.inc |  4 ++--
- conf/machine/include/tune-cortexa7.inc  |  4 ++--
- conf/machine/include/tune-cortexa8.inc  | 36 +++++++++++++++++++++++++++++++++
- conf/machine/include/tune-cortexa9.inc  | 36 +++++++++++++++++++++++++++++++++
- 4 files changed, 76 insertions(+), 4 deletions(-)
- create mode 100644 conf/machine/include/tune-cortexa8.inc
- create mode 100644 conf/machine/include/tune-cortexa9.inc
+ recipes-kernel/linux/setup-defconfig.inc |    6 ++++++
+ 1 files changed, 6 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/include/tune-cortexa15.inc b/conf/machine/include/tune-cortexa15.inc
-index a9a8d0d..282c54e 100644
---- a/conf/machine/include/tune-cortexa15.inc
-+++ b/conf/machine/include/tune-cortexa15.inc
-@@ -29,8 +29,8 @@ ARMPKGARCH_tune-cortexa15thf-neon = "cortexa15"
- TUNE_FEATURES_tune-cortexa15hf ?= "${TUNE_FEATURES_tune-armv7ahf} cortexa15"
- TUNE_FEATURES_tune-cortexa15thf ?= "${TUNE_FEATURES_tune-armv7athf} cortexa15"
- TUNE_FEATURES_tune-cortexa15hf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa15"
--TUNE_FEATURES_tune-cortexa15thf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa15"
-+TUNE_FEATURES_tune-cortexa15thf-neon ?= "${TUNE_FEATURES_tune-armv7athf-neon} cortexa15"
- PACKAGE_EXTRA_ARCHS_tune-cortexa15hf = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf} cortexa15hf-vfp"
- PACKAGE_EXTRA_ARCHS_tune-cortexa15thf = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf} cortexa15hf-vfp cortexa15t2hf-vfp"
- PACKAGE_EXTRA_ARCHS_tune-cortexa15hf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf-neon} cortexa15hf-vfp cortexa15hf-vfp-neon"
--PACKAGE_EXTRA_ARCHS_tune-cortexa15thf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf-neon} cortexa15hf-vfp cortexa15hf-vfp-neon cortexa15t2-vfp cortexa15t2hf-vfp-neon"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa15thf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf-neon} cortexa15hf-vfp cortexa15hf-vfp-neon cortexa15t2hf-vfp cortexa15t2hf-vfp-neon"
-diff --git a/conf/machine/include/tune-cortexa7.inc b/conf/machine/include/tune-cortexa7.inc
-index d04aed3..9898e8e 100644
---- a/conf/machine/include/tune-cortexa7.inc
-+++ b/conf/machine/include/tune-cortexa7.inc
-@@ -29,8 +29,8 @@ ARMPKGARCH_tune-cortexa7thf-neon = "cortexa7"
- TUNE_FEATURES_tune-cortexa7hf ?= "${TUNE_FEATURES_tune-armv7ahf} cortexa7"
- TUNE_FEATURES_tune-cortexa7thf ?= "${TUNE_FEATURES_tune-armv7athf} cortexa7"
- TUNE_FEATURES_tune-cortexa7hf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa7"
--TUNE_FEATURES_tune-cortexa7thf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa7"
-+TUNE_FEATURES_tune-cortexa7thf-neon ?= "${TUNE_FEATURES_tune-armv7athf-neon} cortexa7"
- PACKAGE_EXTRA_ARCHS_tune-cortexa7hf = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf} cortexa7hf-vfp"
- PACKAGE_EXTRA_ARCHS_tune-cortexa7thf = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf} cortexa7hf-vfp cortexa7t2hf-vfp"
- PACKAGE_EXTRA_ARCHS_tune-cortexa7hf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf-neon} cortexa7hf-vfp cortexa7hf-vfp-neon"
--PACKAGE_EXTRA_ARCHS_tune-cortexa7thf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf-neon} cortexa7hf-vfp cortexa7hf-vfp-neon cortexa7t2-vfp cortexa7t2hf-vfp-neon"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa7thf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf-neon} cortexa7hf-vfp cortexa7hf-vfp-neon cortexa7t2hf-vfp cortexa7t2hf-vfp-neon"
-diff --git a/conf/machine/include/tune-cortexa8.inc b/conf/machine/include/tune-cortexa8.inc
-new file mode 100644
-index 0000000..36894e4
---- /dev/null
-+++ b/conf/machine/include/tune-cortexa8.inc
-@@ -0,0 +1,36 @@
-+DEFAULTTUNE ?= "armv7a-neon"
+diff --git a/recipes-kernel/linux/setup-defconfig.inc b/recipes-kernel/linux/setup-defconfig.inc
+index fc5e18e..ed3bce2 100644
+--- a/recipes-kernel/linux/setup-defconfig.inc
++++ b/recipes-kernel/linux/setup-defconfig.inc
+@@ -1,3 +1,7 @@
++# KERNEL_LOCALVERSION can be set to add a tag to the end of the
++# kernel version string.  such as the commit id
++KERNEL_LOCALVERSION ?= ""
 +
-+require conf/machine/include/arm/arch-armv7a.inc
-+
-+TUNEVALID[cortexa8] = "Enable Cortex-A8 specific processor optimizations"
-+TUNE_CCARGS += "${@bb.utils.contains("TUNE_FEATURES", "cortexa8", "-mtune=cortex-a8", "", d)}"
-+
-+# Little Endian base configs
-+AVAILTUNES += "cortexa8 cortexa8t cortexa8-neon cortexa8t-neon"
-+ARMPKGARCH_tune-cortexa8 = "cortexa8"
-+ARMPKGARCH_tune-cortexa8t = "cortexa8"
-+ARMPKGARCH_tune-cortexa8-neon = "cortexa8"
-+ARMPKGARCH_tune-cortexa8t-neon = "cortexa8"
-+TUNE_FEATURES_tune-cortexa8 = "${TUNE_FEATURES_tune-armv7a} cortexa8"
-+TUNE_FEATURES_tune-cortexa8t = "${TUNE_FEATURES_tune-armv7at} cortexa8"
-+TUNE_FEATURES_tune-cortexa8-neon = "${TUNE_FEATURES_tune-armv7a-neon} cortexa8"
-+TUNE_FEATURES_tune-cortexa8t-neon = "${TUNE_FEATURES_tune-armv7at-neon} cortexa8"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa8 = "${PACKAGE_EXTRA_ARCHS_tune-armv7a} cortexa8-vfp"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa8t = "${PACKAGE_EXTRA_ARCHS_tune-armv7at} cortexa8-vfp cortexa8t2-vfp"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa8-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7a-neon} cortexa8-vfp cortexa8-vfp-neon"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa8t-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7at-neon} cortexa8-vfp cortexa8-vfp-neon cortexa8t2-vfp cortexa8t2-vfp-neon"
-+
-+# VFP Tunes
-+AVAILTUNES += "cortexa8hf cortexa8thf cortexa8hf-neon cortexa8thf-neon"
-+ARMPKGARCH_tune-cortexa8hf = "cortexa8"
-+ARMPKGARCH_tune-cortexa8thf = "cortexa8"
-+ARMPKGARCH_tune-cortexa8hf-neon = "cortexa8"
-+ARMPKGARCH_tune-cortexa8thf-neon = "cortexa8"
-+TUNE_FEATURES_tune-cortexa8hf ?= "${TUNE_FEATURES_tune-armv7ahf} cortexa8"
-+TUNE_FEATURES_tune-cortexa8thf ?= "${TUNE_FEATURES_tune-armv7athf} cortexa8"
-+TUNE_FEATURES_tune-cortexa8hf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa8"
-+TUNE_FEATURES_tune-cortexa8thf-neon ?= "${TUNE_FEATURES_tune-armv7athf-neon} cortexa8"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa8hf = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf} cortexa8hf-vfp"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa8thf = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf} cortexa8hf-vfp cortexa8t2hf-vfp"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa8hf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf-neon} cortexa8hf-vfp cortexa8hf-vfp-neon"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa8thf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf-neon} cortexa8hf-vfp cortexa8hf-vfp-neon cortexa8t2hf-vfp cortexa8t2hf-vfp-neon"
-diff --git a/conf/machine/include/tune-cortexa9.inc b/conf/machine/include/tune-cortexa9.inc
-new file mode 100644
-index 0000000..bac8718
---- /dev/null
-+++ b/conf/machine/include/tune-cortexa9.inc
-@@ -0,0 +1,36 @@
-+DEFAULTTUNE ?= "armv7a-neon"
-+
-+require conf/machine/include/arm/arch-armv7a.inc
-+
-+TUNEVALID[cortexa9] = "Enable Cortex-A9 specific processor optimizations"
-+TUNE_CCARGS += "${@bb.utils.contains("TUNE_FEATURES", "cortexa9", "-mtune=cortex-a9", "", d)}"
-+
-+# Little Endian base configs
-+AVAILTUNES += "cortexa9 cortexa9t cortexa9-neon cortexa9t-neon"
-+ARMPKGARCH_tune-cortexa9 = "cortexa9"
-+ARMPKGARCH_tune-cortexa9t = "cortexa9"
-+ARMPKGARCH_tune-cortexa9-neon = "cortexa9"
-+ARMPKGARCH_tune-cortexa9t-neon = "cortexa9"
-+TUNE_FEATURES_tune-cortexa9 = "${TUNE_FEATURES_tune-armv7a} cortexa9"
-+TUNE_FEATURES_tune-cortexa9t = "${TUNE_FEATURES_tune-armv7at} cortexa9"
-+TUNE_FEATURES_tune-cortexa9-neon = "${TUNE_FEATURES_tune-armv7a-neon} cortexa9"
-+TUNE_FEATURES_tune-cortexa9t-neon = "${TUNE_FEATURES_tune-armv7at-neon} cortexa9"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa9 = "${PACKAGE_EXTRA_ARCHS_tune-armv7a} cortexa9-vfp"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa9t = "${PACKAGE_EXTRA_ARCHS_tune-armv7at} cortexa9-vfp cortexa9t2-vfp"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa9-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7a-neon} cortexa9-vfp cortexa9-vfp-neon"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa9t-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7at-neon} cortexa9-vfp cortexa9-vfp-neon cortexa9t2-vfp cortexa9t2-vfp-neon"
-+
-+# VFP Tunes
-+AVAILTUNES += "cortexa9hf cortexa9thf cortexa9hf-neon cortexa9thf-neon"
-+ARMPKGARCH_tune-cortexa9hf = "cortexa9"
-+ARMPKGARCH_tune-cortexa9thf = "cortexa9"
-+ARMPKGARCH_tune-cortexa9hf-neon = "cortexa9"
-+ARMPKGARCH_tune-cortexa9thf-neon = "cortexa9"
-+TUNE_FEATURES_tune-cortexa9hf ?= "${TUNE_FEATURES_tune-armv7ahf} cortexa9"
-+TUNE_FEATURES_tune-cortexa9thf ?= "${TUNE_FEATURES_tune-armv7athf} cortexa9"
-+TUNE_FEATURES_tune-cortexa9hf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa9"
-+TUNE_FEATURES_tune-cortexa9thf-neon ?= "${TUNE_FEATURES_tune-armv7athf-neon} cortexa9"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa9hf = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf} cortexa9hf-vfp"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa9thf = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf} cortexa9hf-vfp cortexa9t2hf-vfp"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa9hf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf-neon} cortexa9hf-vfp cortexa9hf-vfp-neon"
-+PACKAGE_EXTRA_ARCHS_tune-cortexa9thf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf-neon} cortexa9hf-vfp cortexa9hf-vfp-neon cortexa9t2hf-vfp cortexa9t2hf-vfp-neon"
+ # Check the defconfig file and see if it points to an in kernel
+ # defconfig that should be used, or if it is a complete config file
+ 
+@@ -16,6 +20,8 @@ do_setup_defconfig() {
+ #   3. else run yes '' | oe_runmake oldconfig like the default do_configure
+ #      does
+ do_configure() {
++    echo ${KERNEL_LOCALVERSION} > ${B}/.scmversion
++    echo ${KERNEL_LOCALVERSION} > ${S}/.scmversion
+     config=`cat ${S}/.config | grep use-kernel-config | cut -d= -f2`
+     if [ "x${config}" != "x" ]
+     then
 -- 
-1.8.1.5
+1.7.0.4
 
 
