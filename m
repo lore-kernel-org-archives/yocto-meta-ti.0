@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D85AE013CA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E4D8E0140A
 	for <meta-ti@yoctoproject.org>; Mon, 15 Apr 2013 11:49:59 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6B12D529C0; Mon, 15 Apr 2013 18:49:57 +0000 (UTC)
+	id DC319529F2; Mon, 15 Apr 2013 18:49:58 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130415184957.6B12D529C0@arago-project.org>
-Date: Mon, 15 Apr 2013 18:49:57 +0000 (UTC)
+Message-Id: <20130415184958.DC319529F2@arago-project.org>
+Date: Mon, 15 Apr 2013 18:49:58 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : tune-cortexa{15, 7}: remove local tunes, already in oe-core/master
+Subject: Denys Dmytriyenko : tune-cortexa{7, 8, 9, 15}: update tunes from oe-core/ master with fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,106 +26,140 @@ X-List-Received-Date: Mon, 15 Apr 2013 18:50:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 59ce44ac51f5191be479e2ba46428e586cbc69c7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=59ce44ac51f5191be479e2ba46428e586cbc69c7
+Branch: danny
+Commit: 8f7d03e4a1e87c5b32c413f50e362280d8e6928a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8f7d03e4a1e87c5b32c413f50e362280d8e6928a
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Apr 10 17:05:37 2013 -0400
+Date:   Wed Apr 10 17:07:20 2013 -0400
 
-tune-cortexa{15,7}: remove local tunes, already in oe-core/master
+tune-cortexa{7,8,9,15}: update tunes from oe-core/master with fixes
+
+Specifically interested in hardfp+thumb+neon
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/tune-cortexa15.inc |   36 -------------------------------
- conf/machine/include/tune-cortexa7.inc  |   36 -------------------------------
- 2 files changed, 0 insertions(+), 72 deletions(-)
+ conf/machine/include/tune-cortexa15.inc |    4 +-
+ conf/machine/include/tune-cortexa7.inc  |    4 +-
+ conf/machine/include/tune-cortexa8.inc  |   36 +++++++++++++++++++++++++++++++
+ conf/machine/include/tune-cortexa9.inc  |   36 +++++++++++++++++++++++++++++++
+ 4 files changed, 76 insertions(+), 4 deletions(-)
 
 diff --git a/conf/machine/include/tune-cortexa15.inc b/conf/machine/include/tune-cortexa15.inc
-deleted file mode 100644
-index a9a8d0d..0000000
+index a9a8d0d..282c54e 100644
 --- a/conf/machine/include/tune-cortexa15.inc
-+++ /dev/null
-@@ -1,36 +0,0 @@
--DEFAULTTUNE ?= "armv7a-neon"
--
--require conf/machine/include/arm/arch-armv7a.inc
--
--TUNEVALID[cortexa15] = "Enable Cortex-A15 specific processor optimizations"
--TUNE_CCARGS += "${@bb.utils.contains("TUNE_FEATURES", "cortexa15", "-mtune=cortex-a15", "", d)}"
--
--# Little Endian base configs
--AVAILTUNES += "cortexa15 cortexa15t cortexa15-neon cortexa15t-neon"
--ARMPKGARCH_tune-cortexa15 = "cortexa15"
--ARMPKGARCH_tune-cortexa15t = "cortexa15"
--ARMPKGARCH_tune-cortexa15-neon = "cortexa15"
--ARMPKGARCH_tune-cortexa15t-neon = "cortexa15"
--TUNE_FEATURES_tune-cortexa15 = "${TUNE_FEATURES_tune-armv7a} cortexa15"
--TUNE_FEATURES_tune-cortexa15t = "${TUNE_FEATURES_tune-armv7at} cortexa15"
--TUNE_FEATURES_tune-cortexa15-neon = "${TUNE_FEATURES_tune-armv7a-neon} cortexa15"
--TUNE_FEATURES_tune-cortexa15t-neon = "${TUNE_FEATURES_tune-armv7at-neon} cortexa15"
--PACKAGE_EXTRA_ARCHS_tune-cortexa15 = "${PACKAGE_EXTRA_ARCHS_tune-armv7a} cortexa15-vfp"
--PACKAGE_EXTRA_ARCHS_tune-cortexa15t = "${PACKAGE_EXTRA_ARCHS_tune-armv7at} cortexa15-vfp cortexa15t2-vfp"
--PACKAGE_EXTRA_ARCHS_tune-cortexa15-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7a-neon} cortexa15-vfp cortexa15-vfp-neon"
--PACKAGE_EXTRA_ARCHS_tune-cortexa15t-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7at-neon} cortexa15-vfp cortexa15-vfp-neon cortexa15t2-vfp cortexa15t2-vfp-neon"
--
--# VFP Tunes
--AVAILTUNES += "cortexa15hf cortexa15thf cortexa15hf-neon cortexa15thf-neon"
--ARMPKGARCH_tune-cortexa15hf = "cortexa15"
--ARMPKGARCH_tune-cortexa15thf = "cortexa15"
--ARMPKGARCH_tune-cortexa15hf-neon = "cortexa15"
--ARMPKGARCH_tune-cortexa15thf-neon = "cortexa15"
--TUNE_FEATURES_tune-cortexa15hf ?= "${TUNE_FEATURES_tune-armv7ahf} cortexa15"
--TUNE_FEATURES_tune-cortexa15thf ?= "${TUNE_FEATURES_tune-armv7athf} cortexa15"
--TUNE_FEATURES_tune-cortexa15hf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa15"
++++ b/conf/machine/include/tune-cortexa15.inc
+@@ -29,8 +29,8 @@ ARMPKGARCH_tune-cortexa15thf-neon = "cortexa15"
+ TUNE_FEATURES_tune-cortexa15hf ?= "${TUNE_FEATURES_tune-armv7ahf} cortexa15"
+ TUNE_FEATURES_tune-cortexa15thf ?= "${TUNE_FEATURES_tune-armv7athf} cortexa15"
+ TUNE_FEATURES_tune-cortexa15hf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa15"
 -TUNE_FEATURES_tune-cortexa15thf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa15"
--PACKAGE_EXTRA_ARCHS_tune-cortexa15hf = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf} cortexa15hf-vfp"
--PACKAGE_EXTRA_ARCHS_tune-cortexa15thf = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf} cortexa15hf-vfp cortexa15t2hf-vfp"
--PACKAGE_EXTRA_ARCHS_tune-cortexa15hf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf-neon} cortexa15hf-vfp cortexa15hf-vfp-neon"
++TUNE_FEATURES_tune-cortexa15thf-neon ?= "${TUNE_FEATURES_tune-armv7athf-neon} cortexa15"
+ PACKAGE_EXTRA_ARCHS_tune-cortexa15hf = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf} cortexa15hf-vfp"
+ PACKAGE_EXTRA_ARCHS_tune-cortexa15thf = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf} cortexa15hf-vfp cortexa15t2hf-vfp"
+ PACKAGE_EXTRA_ARCHS_tune-cortexa15hf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf-neon} cortexa15hf-vfp cortexa15hf-vfp-neon"
 -PACKAGE_EXTRA_ARCHS_tune-cortexa15thf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf-neon} cortexa15hf-vfp cortexa15hf-vfp-neon cortexa15t2-vfp cortexa15t2hf-vfp-neon"
++PACKAGE_EXTRA_ARCHS_tune-cortexa15thf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf-neon} cortexa15hf-vfp cortexa15hf-vfp-neon cortexa15t2hf-vfp cortexa15t2hf-vfp-neon"
 diff --git a/conf/machine/include/tune-cortexa7.inc b/conf/machine/include/tune-cortexa7.inc
-deleted file mode 100644
-index d04aed3..0000000
+index d04aed3..9898e8e 100644
 --- a/conf/machine/include/tune-cortexa7.inc
-+++ /dev/null
-@@ -1,36 +0,0 @@
--DEFAULTTUNE ?= "armv7a-neon"
--
--require conf/machine/include/arm/arch-armv7a.inc
--
--TUNEVALID[cortexa7] = "Enable Cortex-A7 specific processor optimizations"
--TUNE_CCARGS += "${@bb.utils.contains("TUNE_FEATURES", "cortexa7", "-mtune=cortex-a7", "", d)}"
--
--# Little Endian base configs
--AVAILTUNES += "cortexa7 cortexa7t cortexa7-neon cortexa7t-neon"
--ARMPKGARCH_tune-cortexa7 = "cortexa7"
--ARMPKGARCH_tune-cortexa7t = "cortexa7"
--ARMPKGARCH_tune-cortexa7-neon = "cortexa7"
--ARMPKGARCH_tune-cortexa7t-neon = "cortexa7"
--TUNE_FEATURES_tune-cortexa7 = "${TUNE_FEATURES_tune-armv7a} cortexa7"
--TUNE_FEATURES_tune-cortexa7t = "${TUNE_FEATURES_tune-armv7at} cortexa7"
--TUNE_FEATURES_tune-cortexa7-neon = "${TUNE_FEATURES_tune-armv7a-neon} cortexa7"
--TUNE_FEATURES_tune-cortexa7t-neon = "${TUNE_FEATURES_tune-armv7at-neon} cortexa7"
--PACKAGE_EXTRA_ARCHS_tune-cortexa7 = "${PACKAGE_EXTRA_ARCHS_tune-armv7a} cortexa7-vfp"
--PACKAGE_EXTRA_ARCHS_tune-cortexa7t = "${PACKAGE_EXTRA_ARCHS_tune-armv7at} cortexa7-vfp cortexa7t2-vfp"
--PACKAGE_EXTRA_ARCHS_tune-cortexa7-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7a-neon} cortexa7-vfp cortexa7-vfp-neon"
--PACKAGE_EXTRA_ARCHS_tune-cortexa7t-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7at-neon} cortexa7-vfp cortexa7-vfp-neon cortexa7t2-vfp cortexa7t2-vfp-neon"
--
--# VFP Tunes
--AVAILTUNES += "cortexa7hf cortexa7thf cortexa7hf-neon cortexa7thf-neon"
--ARMPKGARCH_tune-cortexa7hf = "cortexa7"
--ARMPKGARCH_tune-cortexa7thf = "cortexa7"
--ARMPKGARCH_tune-cortexa7hf-neon = "cortexa7"
--ARMPKGARCH_tune-cortexa7thf-neon = "cortexa7"
--TUNE_FEATURES_tune-cortexa7hf ?= "${TUNE_FEATURES_tune-armv7ahf} cortexa7"
--TUNE_FEATURES_tune-cortexa7thf ?= "${TUNE_FEATURES_tune-armv7athf} cortexa7"
--TUNE_FEATURES_tune-cortexa7hf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa7"
++++ b/conf/machine/include/tune-cortexa7.inc
+@@ -29,8 +29,8 @@ ARMPKGARCH_tune-cortexa7thf-neon = "cortexa7"
+ TUNE_FEATURES_tune-cortexa7hf ?= "${TUNE_FEATURES_tune-armv7ahf} cortexa7"
+ TUNE_FEATURES_tune-cortexa7thf ?= "${TUNE_FEATURES_tune-armv7athf} cortexa7"
+ TUNE_FEATURES_tune-cortexa7hf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa7"
 -TUNE_FEATURES_tune-cortexa7thf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa7"
--PACKAGE_EXTRA_ARCHS_tune-cortexa7hf = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf} cortexa7hf-vfp"
--PACKAGE_EXTRA_ARCHS_tune-cortexa7thf = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf} cortexa7hf-vfp cortexa7t2hf-vfp"
--PACKAGE_EXTRA_ARCHS_tune-cortexa7hf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf-neon} cortexa7hf-vfp cortexa7hf-vfp-neon"
++TUNE_FEATURES_tune-cortexa7thf-neon ?= "${TUNE_FEATURES_tune-armv7athf-neon} cortexa7"
+ PACKAGE_EXTRA_ARCHS_tune-cortexa7hf = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf} cortexa7hf-vfp"
+ PACKAGE_EXTRA_ARCHS_tune-cortexa7thf = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf} cortexa7hf-vfp cortexa7t2hf-vfp"
+ PACKAGE_EXTRA_ARCHS_tune-cortexa7hf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf-neon} cortexa7hf-vfp cortexa7hf-vfp-neon"
 -PACKAGE_EXTRA_ARCHS_tune-cortexa7thf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf-neon} cortexa7hf-vfp cortexa7hf-vfp-neon cortexa7t2-vfp cortexa7t2hf-vfp-neon"
++PACKAGE_EXTRA_ARCHS_tune-cortexa7thf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf-neon} cortexa7hf-vfp cortexa7hf-vfp-neon cortexa7t2hf-vfp cortexa7t2hf-vfp-neon"
+diff --git a/conf/machine/include/tune-cortexa8.inc b/conf/machine/include/tune-cortexa8.inc
+new file mode 100644
+index 0000000..36894e4
+--- /dev/null
++++ b/conf/machine/include/tune-cortexa8.inc
+@@ -0,0 +1,36 @@
++DEFAULTTUNE ?= "armv7a-neon"
++
++require conf/machine/include/arm/arch-armv7a.inc
++
++TUNEVALID[cortexa8] = "Enable Cortex-A8 specific processor optimizations"
++TUNE_CCARGS += "${@bb.utils.contains("TUNE_FEATURES", "cortexa8", "-mtune=cortex-a8", "", d)}"
++
++# Little Endian base configs
++AVAILTUNES += "cortexa8 cortexa8t cortexa8-neon cortexa8t-neon"
++ARMPKGARCH_tune-cortexa8 = "cortexa8"
++ARMPKGARCH_tune-cortexa8t = "cortexa8"
++ARMPKGARCH_tune-cortexa8-neon = "cortexa8"
++ARMPKGARCH_tune-cortexa8t-neon = "cortexa8"
++TUNE_FEATURES_tune-cortexa8 = "${TUNE_FEATURES_tune-armv7a} cortexa8"
++TUNE_FEATURES_tune-cortexa8t = "${TUNE_FEATURES_tune-armv7at} cortexa8"
++TUNE_FEATURES_tune-cortexa8-neon = "${TUNE_FEATURES_tune-armv7a-neon} cortexa8"
++TUNE_FEATURES_tune-cortexa8t-neon = "${TUNE_FEATURES_tune-armv7at-neon} cortexa8"
++PACKAGE_EXTRA_ARCHS_tune-cortexa8 = "${PACKAGE_EXTRA_ARCHS_tune-armv7a} cortexa8-vfp"
++PACKAGE_EXTRA_ARCHS_tune-cortexa8t = "${PACKAGE_EXTRA_ARCHS_tune-armv7at} cortexa8-vfp cortexa8t2-vfp"
++PACKAGE_EXTRA_ARCHS_tune-cortexa8-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7a-neon} cortexa8-vfp cortexa8-vfp-neon"
++PACKAGE_EXTRA_ARCHS_tune-cortexa8t-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7at-neon} cortexa8-vfp cortexa8-vfp-neon cortexa8t2-vfp cortexa8t2-vfp-neon"
++
++# VFP Tunes
++AVAILTUNES += "cortexa8hf cortexa8thf cortexa8hf-neon cortexa8thf-neon"
++ARMPKGARCH_tune-cortexa8hf = "cortexa8"
++ARMPKGARCH_tune-cortexa8thf = "cortexa8"
++ARMPKGARCH_tune-cortexa8hf-neon = "cortexa8"
++ARMPKGARCH_tune-cortexa8thf-neon = "cortexa8"
++TUNE_FEATURES_tune-cortexa8hf ?= "${TUNE_FEATURES_tune-armv7ahf} cortexa8"
++TUNE_FEATURES_tune-cortexa8thf ?= "${TUNE_FEATURES_tune-armv7athf} cortexa8"
++TUNE_FEATURES_tune-cortexa8hf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa8"
++TUNE_FEATURES_tune-cortexa8thf-neon ?= "${TUNE_FEATURES_tune-armv7athf-neon} cortexa8"
++PACKAGE_EXTRA_ARCHS_tune-cortexa8hf = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf} cortexa8hf-vfp"
++PACKAGE_EXTRA_ARCHS_tune-cortexa8thf = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf} cortexa8hf-vfp cortexa8t2hf-vfp"
++PACKAGE_EXTRA_ARCHS_tune-cortexa8hf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf-neon} cortexa8hf-vfp cortexa8hf-vfp-neon"
++PACKAGE_EXTRA_ARCHS_tune-cortexa8thf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf-neon} cortexa8hf-vfp cortexa8hf-vfp-neon cortexa8t2hf-vfp cortexa8t2hf-vfp-neon"
+diff --git a/conf/machine/include/tune-cortexa9.inc b/conf/machine/include/tune-cortexa9.inc
+new file mode 100644
+index 0000000..bac8718
+--- /dev/null
++++ b/conf/machine/include/tune-cortexa9.inc
+@@ -0,0 +1,36 @@
++DEFAULTTUNE ?= "armv7a-neon"
++
++require conf/machine/include/arm/arch-armv7a.inc
++
++TUNEVALID[cortexa9] = "Enable Cortex-A9 specific processor optimizations"
++TUNE_CCARGS += "${@bb.utils.contains("TUNE_FEATURES", "cortexa9", "-mtune=cortex-a9", "", d)}"
++
++# Little Endian base configs
++AVAILTUNES += "cortexa9 cortexa9t cortexa9-neon cortexa9t-neon"
++ARMPKGARCH_tune-cortexa9 = "cortexa9"
++ARMPKGARCH_tune-cortexa9t = "cortexa9"
++ARMPKGARCH_tune-cortexa9-neon = "cortexa9"
++ARMPKGARCH_tune-cortexa9t-neon = "cortexa9"
++TUNE_FEATURES_tune-cortexa9 = "${TUNE_FEATURES_tune-armv7a} cortexa9"
++TUNE_FEATURES_tune-cortexa9t = "${TUNE_FEATURES_tune-armv7at} cortexa9"
++TUNE_FEATURES_tune-cortexa9-neon = "${TUNE_FEATURES_tune-armv7a-neon} cortexa9"
++TUNE_FEATURES_tune-cortexa9t-neon = "${TUNE_FEATURES_tune-armv7at-neon} cortexa9"
++PACKAGE_EXTRA_ARCHS_tune-cortexa9 = "${PACKAGE_EXTRA_ARCHS_tune-armv7a} cortexa9-vfp"
++PACKAGE_EXTRA_ARCHS_tune-cortexa9t = "${PACKAGE_EXTRA_ARCHS_tune-armv7at} cortexa9-vfp cortexa9t2-vfp"
++PACKAGE_EXTRA_ARCHS_tune-cortexa9-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7a-neon} cortexa9-vfp cortexa9-vfp-neon"
++PACKAGE_EXTRA_ARCHS_tune-cortexa9t-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7at-neon} cortexa9-vfp cortexa9-vfp-neon cortexa9t2-vfp cortexa9t2-vfp-neon"
++
++# VFP Tunes
++AVAILTUNES += "cortexa9hf cortexa9thf cortexa9hf-neon cortexa9thf-neon"
++ARMPKGARCH_tune-cortexa9hf = "cortexa9"
++ARMPKGARCH_tune-cortexa9thf = "cortexa9"
++ARMPKGARCH_tune-cortexa9hf-neon = "cortexa9"
++ARMPKGARCH_tune-cortexa9thf-neon = "cortexa9"
++TUNE_FEATURES_tune-cortexa9hf ?= "${TUNE_FEATURES_tune-armv7ahf} cortexa9"
++TUNE_FEATURES_tune-cortexa9thf ?= "${TUNE_FEATURES_tune-armv7athf} cortexa9"
++TUNE_FEATURES_tune-cortexa9hf-neon ?= "${TUNE_FEATURES_tune-armv7ahf-neon} cortexa9"
++TUNE_FEATURES_tune-cortexa9thf-neon ?= "${TUNE_FEATURES_tune-armv7athf-neon} cortexa9"
++PACKAGE_EXTRA_ARCHS_tune-cortexa9hf = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf} cortexa9hf-vfp"
++PACKAGE_EXTRA_ARCHS_tune-cortexa9thf = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf} cortexa9hf-vfp cortexa9t2hf-vfp"
++PACKAGE_EXTRA_ARCHS_tune-cortexa9hf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7ahf-neon} cortexa9hf-vfp cortexa9hf-vfp-neon"
++PACKAGE_EXTRA_ARCHS_tune-cortexa9thf-neon = "${PACKAGE_EXTRA_ARCHS_tune-armv7athf-neon} cortexa9hf-vfp cortexa9hf-vfp-neon cortexa9t2hf-vfp cortexa9t2hf-vfp-neon"
 
 
