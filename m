@@ -1,28 +1,26 @@
-Return-Path: <errordeveloper@gmail.com>
-Received: from mail-vc0-f175.google.com (mail-vc0-f175.google.com
-	[209.85.220.175])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6129DE014DF
-	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 01:22:59 -0700 (PDT)
-Received: by mail-vc0-f175.google.com with SMTP id lf11so2939vcb.20
-	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 01:22:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:date:message-id:subject:from:to
-	:content-type; bh=+ToSTgO5w3kzPQirG4LybrdVfIagwhb9v8fsO0n/8II=;
-	b=wt8PuhTBvRnyC7fqD+4gpshnwq7TNKJXAhvCWJgbImGCoxZKPekYvchWiBreE/jxzM
-	HFK48wIawC/j//HezIAf7b+3IqyMIrWbVzLCiKLwqYMy9NosAY44bLQpn4Dfdm6wnavz
-	QHyJKyXYmVkIBJ0OGHdctK5GQ20fVkUIuxp5akR7dkne/xXGREio0TC7SKRjGXbU8bko
-	EKRmQCC60JZv3pyZsux7WZdefc2xs54ZPxExtFrYrE+dDvlMXP8HZMD6qH4WYcJ5xQ+C
-	9IksRe3xcMXsSm2e1CPWMfPj3ggE6b4MBXV8JVYsh0XqGSFkketU6LBu/f6HYObxZtMU
-	INDQ==
+Return-Path: <chase.maupin@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 731B6E014DD
+	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 10:40:27 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3IHeQjE027427
+	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 12:40:26 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3IHeQnn009639
+	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 12:40:26 -0500
+Received: from dlelxv23.itg.ti.com (172.17.1.198) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 18 Apr 2013 12:40:25 -0500
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3IHeMNJ005409;
+	Thu, 18 Apr 2013 12:40:24 -0500
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 18 Apr 2013 12:40:20 -0500
+Message-ID: <1366306821-17167-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-X-Received: by 10.220.156.75 with SMTP id v11mr7510013vcw.1.1366273378668;
-	Thu, 18 Apr 2013 01:22:58 -0700 (PDT)
-Received: by 10.59.7.197 with HTTP; Thu, 18 Apr 2013 01:22:58 -0700 (PDT)
-Date: Thu, 18 Apr 2013 09:22:58 +0100
-Message-ID: <CAPhDKbH84Nhitv+DW6Vcaza0VCjx=T_nw+KUcreico0vBsLAwA@mail.gmail.com>
-From: Ilya Dmitrichenko <errordeveloper@gmail.com>
-To: meta-ti@yoctoproject.org
-Subject: Connection refused to git.ti.com
+Subject: [PATCH 1/2] am33x-cm3: use init script to load firmware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,81 +33,70 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Apr 2013 08:22:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 18 Apr 2013 17:40:27 -0000
+Content-Type: text/plain
 
-Hi,
+* The PM firmware is now loaded using an init script so make
+  the init script installation part of the firmware package.
+* Fix up the SRC_URI to the proper format.
 
-I am getting this message:
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ recipes-bsp/ti/am33x-cm3/init-am33x-cm3 |    6 ++++++
+ recipes-bsp/ti/am33x-cm3_git.bb         |   17 +++++++++++++++--
+ 2 files changed, 21 insertions(+), 2 deletions(-)
+ create mode 100644 recipes-bsp/ti/am33x-cm3/init-am33x-cm3
 
-Build Configuration:
-BB_VERSION        = "1.16.0"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "beaglebone"
-DISTRO            = "poky"
-DISTRO_VERSION    = "1.3.1"
-TUNE_FEATURES     = "armv7a vfp neon cortexa8"
-TARGET_FPU        = "vfp-neon"
-meta
-meta-yocto
-meta-yocto-bsp    = "danny:e2ef3200e61af33ec71e34fb7a67cbcdd68dc981"
-meta-ti           = "danny:8f7d03e4a1e87c5b32c413f50e362280d8e6928a"
+diff --git a/recipes-bsp/ti/am33x-cm3/init-am33x-cm3 b/recipes-bsp/ti/am33x-cm3/init-am33x-cm3
+new file mode 100644
+index 0000000..56c17b3
+--- /dev/null
++++ b/recipes-bsp/ti/am33x-cm3/init-am33x-cm3
+@@ -0,0 +1,6 @@
++#!/bin/sh
++
++# Load the PM CM3 firmware
++echo 1 > /sys/devices/ocp.2/44d00000.wkup_m3/firmware/am335x-pm-firmware.bin/loading
++cat /lib/firmware/am335x-pm-firmware.bin > /sys/devices/ocp.2/44d00000.wkup_m3/firmware/am335x-pm-firmware.bin/data
++echo 0 > /sys/devices/ocp.2/44d00000.wkup_m3/firmware/am335x-pm-firmware.bin/loading
+diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
+index 247ba4d..489fcdf 100644
+--- a/recipes-bsp/ti/am33x-cm3_git.bb
++++ b/recipes-bsp/ti/am33x-cm3_git.bb
+@@ -4,9 +4,18 @@ LICENSE = "TI-BSD"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
+ 
+ PV = "04.06.00.07"
++PR = "r1"
+ SRCREV = "cf07b841d6e8c5e026eecb259d143f3dff412c8e"
++BRANCH ?= "master"
+ 
+-SRC_URI = "git://arago-project.org/git/projects/am33x-cm3.git"
++INITSCRIPT_NAME = "am335x-pm-firmware-load"
++INITSCRIPT_PARAMS = "defaults 96"
++
++inherit update-rc.d
++
++SRC_URI = "git://arago-project.org/git/projects/am33x-cm3.git;protocol=git;branch=${BRANCH} \
++           file://init-am33x-cm3 \
++          "
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -17,7 +26,11 @@ do_compile() {
+ do_install() {
+ 	install -d ${D}${base_libdir}/firmware
+ 	install -m 0644 bin/am335x-pm-firmware.bin ${D}${base_libdir}/firmware/
++
++    # Install the init script to load the PM firmware at boot
++    install -d ${D}${sysconfdir}/init.d
++    install -m 0755 ${WORKDIR}/init-am33x-cm3 ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
+ }
+ 
+-FILES_${PN} = "${base_libdir}/firmware"
++FILES_${PN} += "${base_libdir}/firmware"
+ 
+-- 
+1.7.0.4
 
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing SetScene Tasks
-NOTE: Executing RunQueue Tasks
-WARNING: Failed to fetch URL
-git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=ti-linux-3.8.y,
-attempting MIRRORS if available
-ERROR: Fetcher failure: Fetch command failed with exit code 128, output:
-Cloning into bare repository
-'/home/ilya/beaglebone-dany/build/downloads/git2/git.ti.com.ti-linux-kernel.ti-linux-kernel.git'...
-
-fatal: unable to connect to git.ti.com:
-git.ti.com[0: 198.47.29.193]: errno=Connection refused
-
-
-ERROR: Function failed: Fetcher failure for URL:
-'git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=ti-linux-3.8.y'.
-Unable to fetch URL from any source.
-ERROR: Logfile of failure stored in:
-/home/ilya/beaglebone-dany/build/tmp/work/beaglebone-poky-linux-gnueabi/linux-ti-staging-3.8.5-r0/temp/log.do_fetch.2909
-ERROR: Task 669
-(/home/ilya/beaglebone-dany/meta-ti/recipes-kernel/linux/linux-ti-staging_3.8.bb,
-do_fetch) failed with exit code '1'
-NOTE: Tasks Summary: Attempted 584 tasks of which 556 didn't need to
-be rerun and 1 failed.
-Waiting for 0 running tasks to finish:
-
-Summary: 1 task failed:
-  /home/ilya/beaglebone-dany/meta-ti/recipes-kernel/linux/linux-ti-staging_3.8.bb,
-do_fetch
-Summary: There was 1 WARNING message shown.
-Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
-
-In the meantime I manage to clone this repo on another machine.
-Seems like a firewall issue, can anyone check?
-
-I have retried to bitbake this multiple times over the last 12 hours
-and did try to run git clone manually from the same machine:
-git clone git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git
-Cloning into 'ti-linux-kernel'...
-fatal: unable to connect to git.ti.com:
-git.ti.com[0: 198.47.29.193]: errno=Connection refused
-
-It worked from another machine however.
-
-Another thing I have tried is cloning a repo from elsewhere using
-git:// protocol and it worked. This protocol uses port 9418, so I
-checked connectivity using telnet. It failed to open connection for
-git.ti.com and worked fine for github.com. So port 9418 is not
-firewalled on our end.
-
-Let me whatever else you want me to test.
-
-Cheers,
---
-Ilya
 
