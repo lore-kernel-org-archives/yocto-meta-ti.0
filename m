@@ -1,15 +1,24 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0605AE014AD
-	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 12:45:36 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id A2C8A52A92; Thu, 18 Apr 2013 19:45:35 +0000 (UTC)
+Return-Path: <denis@denix.org>
+Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
+	[206.46.173.5])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 362A5E0140A
+	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 13:08:08 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MLG00507VX2EX14@vms173005.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 18 Apr 2013 15:08:05 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 2A4E7201AD; Thu,
+	18 Apr 2013 16:07:49 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20130418194535.A2C8A52A92@arago-project.org>
-Date: Thu, 18 Apr 2013 19:45:35 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : linux-ti-staging: make cm3 firmware a run-time dependency
+Date: Thu, 18 Apr 2013 16:07:47 -0400
+Message-id: <1366315667-17997-2-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.1.5
+In-reply-to: <1366315667-17997-1-git-send-email-denis@denix.org>
+References: <1366315667-17997-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/2] u-boot-ti-staging: update to the latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,64 +31,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Apr 2013 19:45:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 18 Apr 2013 20:08:08 -0000
 
-Module: meta-ti
-Branch: danny
-Commit: f8178078427d17499e1d30a52d7fb896ca4dce27
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f8178078427d17499e1d30a52d7fb896ca4dce27
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Thu Apr 18 12:40:21 2013 -0500
-
-linux-ti-staging: make cm3 firmware a run-time dependency
-
-* Make the am33x-cm3 firmware a run-time dependency instead of
-  build time since it is no longer required at build time.
-
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- recipes-kernel/linux/linux-ti-staging_3.8.bb |   16 ++++------------
- 1 files changed, 4 insertions(+), 12 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-index 77d8e8a..6cbc2df 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-@@ -24,9 +24,9 @@ do_deploy_append() {
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
+index 4659fe9..685dcd0 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
+@@ -2,12 +2,12 @@ require u-boot-ti.inc
  
--# Stage the power management firmware before building the kernel
--# for ti33x SOC_FAMILY devices
--DEPENDS_ti33x += "am33x-cm3"
-+# Add a run-time dependency for the PM firmware to be installed
-+# on the target file system.
-+RDEPENDS_ti33x += "am33x-cm3"
+ DESCRIPTION = "u-boot bootloader for TI devices"
  
- # Default is to package all dts files for ti33x devices unless building
- # for the specific beaglebone machine.
-@@ -44,16 +44,8 @@ SRCREV = "881dfafeae47da3a8f5ff8c791753e4b4df8065b"
- PV = "3.8.5"
+-PR = "r3+gitr${SRCPV}"
++PR = "r4+gitr${SRCPV}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "e+gitr${SRCPV}"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
-           "
--
--# Copy the am33x-cm3 firmware if it is available for ti33x SOC_FAMILY devices
--do_compile_prepend_ti33x() {
--    if [ -e "${STAGING_DIR_HOST}/${base_libdir}/firmware/am335x-pm-firmware.bin" ]
--    then
--        cp "${STAGING_DIR_HOST}/${base_libdir}/firmware/am335x-pm-firmware.bin" "${S}/firmware"
--    fi
--}
+ BRANCH ?= "ti-u-boot-2013.01.01"
+ 
+-SRCREV = "9aab8612f643ab90df837e743f5435bba2ae68cf"
++SRCREV = "7552b4c906b0a50fbc5225dc43ed0192618e9d5d"
+ 
+ SPL_BINARY = "MLO"
+-- 
+1.8.1.5
 
 
