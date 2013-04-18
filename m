@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24AB9E01487
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 25E31E01488
 	for <meta-ti@yoctoproject.org>; Wed, 17 Apr 2013 17:21:24 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E0DF952A65; Thu, 18 Apr 2013 00:21:22 +0000 (UTC)
+	id EE04C529AF; Thu, 18 Apr 2013 00:21:22 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130418002122.E0DF952A65@arago-project.org>
+Message-Id: <20130418002122.EE04C529AF@arago-project.org>
 Date: Thu, 18 Apr 2013 00:21:22 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Chase Maupin : setup-defconfig: allow using KERNEL_LOCALVERSION
@@ -26,9 +26,9 @@ X-List-Received-Date: Thu, 18 Apr 2013 00:21:24 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 38e3173249e1c2a4d0cf9544414560a027519bd0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=38e3173249e1c2a4d0cf9544414560a027519bd0
+Branch: danny
+Commit: 4b0d898ffdf7c186c6e02b59bb9093488a8774c7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4b0d898ffdf7c186c6e02b59bb9093488a8774c7
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
 Date:   Wed Apr 10 16:51:43 2013 -0500
