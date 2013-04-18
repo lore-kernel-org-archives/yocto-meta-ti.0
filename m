@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2376CE0140A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24AB9E01487
 	for <meta-ti@yoctoproject.org>; Wed, 17 Apr 2013 17:21:24 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F3F2652A45; Thu, 18 Apr 2013 00:21:22 +0000 (UTC)
+	id E0DF952A65; Thu, 18 Apr 2013 00:21:22 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130418002122.F3F2652A45@arago-project.org>
+Message-Id: <20130418002122.E0DF952A65@arago-project.org>
 Date: Thu, 18 Apr 2013 00:21:22 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : u-boot-ti-staging: Add SRCPV to the PR
+Subject: Chase Maupin : setup-defconfig: allow using KERNEL_LOCALVERSION
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,39 +26,48 @@ X-List-Received-Date: Thu, 18 Apr 2013 00:21:24 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 7dc90eb9e275f5f7231706a367401a694c00c035
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7dc90eb9e275f5f7231706a367401a694c00c035
+Branch: master
+Commit: 38e3173249e1c2a4d0cf9544414560a027519bd0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=38e3173249e1c2a4d0cf9544414560a027519bd0
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Wed Apr 10 16:51:44 2013 -0500
+Date:   Wed Apr 10 16:51:43 2013 -0500
 
-u-boot-ti-staging: Add SRCPV to the PR
+setup-defconfig: allow using KERNEL_LOCALVERSION
 
-* Add the SRCPV to the PR to make it clear which revision of
-  the sources are being built and to match the kernel
-  versioning.
+* Add capability to use KERNEL_LOCALVERSION to set an extra
+  version string in the kernel.  This mimics functionality
+  submitted to the kernel.bbclass but since this overwrites
+  the do_configure it must be added here as well.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-kernel/linux/setup-defconfig.inc |    6 ++++++
+ 1 files changed, 6 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-index cf01bd0..4659fe9 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
-@@ -2,7 +2,7 @@ require u-boot-ti.inc
+diff --git a/recipes-kernel/linux/setup-defconfig.inc b/recipes-kernel/linux/setup-defconfig.inc
+index fc5e18e..ed3bce2 100644
+--- a/recipes-kernel/linux/setup-defconfig.inc
++++ b/recipes-kernel/linux/setup-defconfig.inc
+@@ -1,3 +1,7 @@
++# KERNEL_LOCALVERSION can be set to add a tag to the end of the
++# kernel version string.  such as the commit id
++KERNEL_LOCALVERSION ?= ""
++
+ # Check the defconfig file and see if it points to an in kernel
+ # defconfig that should be used, or if it is a complete config file
  
- DESCRIPTION = "u-boot bootloader for TI devices"
- 
--PR = "r2"
-+PR = "r3+gitr${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
+@@ -16,6 +20,8 @@ do_setup_defconfig() {
+ #   3. else run yes '' | oe_runmake oldconfig like the default do_configure
+ #      does
+ do_configure() {
++    echo ${KERNEL_LOCALVERSION} > ${B}/.scmversion
++    echo ${KERNEL_LOCALVERSION} > ${S}/.scmversion
+     config=`cat ${S}/.config | grep use-kernel-config | cut -d= -f2`
+     if [ "x${config}" != "x" ]
+     then
 
 
