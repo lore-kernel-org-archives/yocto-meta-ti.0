@@ -1,26 +1,15 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6CCE2E0140A
-	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 11:10:07 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3IIA6ff016025
-	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 13:10:06 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3IIA54Z011113
-	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 13:10:06 -0500
-Received: from dlelxv24.itg.ti.com (172.17.1.199) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 18 Apr 2013 13:10:05 -0500
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv24.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3IIA2JB003060;
-	Thu, 18 Apr 2013 13:10:04 -0500
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 18 Apr 2013 13:10:00 -0500
-Message-ID: <1366308600-17639-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Subject: [PATCHv2 1/2] am33x-cm3: use init script to load firmware
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5C536E0146C
+	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 12:45:33 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 39C0952A8F; Thu, 18 Apr 2013 19:45:32 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130418194532.39C0952A8F@arago-project.org>
+Date: Thu, 18 Apr 2013 19:45:32 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Chase Maupin : am33x-cm3: use init script to load firmware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,22 +22,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Apr 2013 18:10:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 18 Apr 2013 19:45:33 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: 14a312f1e9d724d61d163d9872d7f6542ee180b9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=14a312f1e9d724d61d163d9872d7f6542ee180b9
+
+Author: Chase Maupin <Chase.Maupin@ti.com>
+Date:   Thu Apr 18 13:10:00 2013 -0500
+
+am33x-cm3: use init script to load firmware
 
 * The PM firmware is now loaded using an init script so make
   the init script installation part of the firmware package.
 * Fix up the SRC_URI to the proper format.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
-* Updated in version 2
-    * Fixed whitespace to use tabs instead of spaces
----
+
  recipes-bsp/ti/am33x-cm3/init-am33x-cm3 |    6 ++++++
  recipes-bsp/ti/am33x-cm3_git.bb         |   17 +++++++++++++++--
  2 files changed, 21 insertions(+), 2 deletions(-)
- create mode 100644 recipes-bsp/ti/am33x-cm3/init-am33x-cm3
 
 diff --git a/recipes-bsp/ti/am33x-cm3/init-am33x-cm3 b/recipes-bsp/ti/am33x-cm3/init-am33x-cm3
 new file mode 100644
@@ -99,7 +97,5 @@ index 247ba4d..169789e 100644
 -FILES_${PN} = "${base_libdir}/firmware"
 +FILES_${PN} += "${base_libdir}/firmware"
  
--- 
-1.7.0.4
 
 
