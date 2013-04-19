@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EF525E0148C
-	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 17:16:38 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 09665E01496
+	for <meta-ti@yoctoproject.org>; Thu, 18 Apr 2013 17:16:39 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B2C01529B9; Fri, 19 Apr 2013 00:16:38 +0000 (UTC)
+	id BA31D52981; Fri, 19 Apr 2013 00:16:38 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130419001638.B2C01529B9@arago-project.org>
+Message-Id: <20130419001638.BA31D52981@arago-project.org>
 Date: Fri, 19 Apr 2013 00:16:38 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to the latest 3.8.8
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to the latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,39 +27,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: 0bd05df9cfca6d3d09c03c768004be89550368f1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0bd05df9cfca6d3d09c03c768004be89550368f1
+Commit: 088a1dbea3ec5901a60920469f82c7a27337c6be
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=088a1dbea3ec5901a60920469f82c7a27337c6be
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Apr 18 16:04:16 2013 -0400
+Date:   Thu Apr 18 16:06:49 2013 -0400
 
-linux-ti-staging: update to the latest 3.8.8
+u-boot-ti-staging: update to the latest
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.8.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-index 6cbc2df..622fa3e 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-@@ -40,11 +40,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
+index 4659fe9..685dcd0 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb
+@@ -2,12 +2,12 @@ require u-boot-ti.inc
  
- BRANCH = "ti-linux-3.8.y"
+ DESCRIPTION = "u-boot bootloader for TI devices"
  
--SRCREV = "881dfafeae47da3a8f5ff8c791753e4b4df8065b"
--PV = "3.8.5"
-+SRCREV = "1de3616c36710b6949844738f9c63b96e307c49f"
-+PV = "3.8.8"
+-PR = "r3+gitr${SRCPV}"
++PR = "r4+gitr${SRCPV}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "e+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
+ BRANCH ?= "ti-u-boot-2013.01.01"
+ 
+-SRCREV = "9aab8612f643ab90df837e743f5435bba2ae68cf"
++SRCREV = "7552b4c906b0a50fbc5225dc43ed0192618e9d5d"
+ 
+ SPL_BINARY = "MLO"
 
 
