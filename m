@@ -1,31 +1,27 @@
 Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B4707E014F2
-	for <meta-ti@yoctoproject.org>; Fri, 19 Apr 2013 10:44:28 -0700 (PDT)
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 55606E01410
+	for <meta-ti@yoctoproject.org>; Fri, 19 Apr 2013 19:04:54 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3JHiQeD015858;
-	Fri, 19 Apr 2013 12:44:26 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3JHiPZH008874;
-	Fri, 19 Apr 2013 12:44:25 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Fri, 19 Apr 2013 12:44:25 -0500
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id r3JHiPfM027146;
-	Fri, 19 Apr 2013 12:44:25 -0500
-Date: Fri, 19 Apr 2013 13:44:25 -0400
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3K24rrh031414
+	for <meta-ti@yoctoproject.org>; Fri, 19 Apr 2013 21:04:53 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3K24rrw026727
+	for <meta-ti@yoctoproject.org>; Fri, 19 Apr 2013 21:04:53 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Fri, 19 Apr 2013 21:04:52 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3K24qwT002967	for
+	<meta-ti@yoctoproject.org>; Fri, 19 Apr 2013 21:04:52 -0500
+Date: Fri, 19 Apr 2013 21:59:21 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: "Cooper Jr., Franklin" <fcooper@ti.com>
-Message-ID: <20130419174425.GL5912@edge>
-References: <20130418194532.39C0952A8F@arago-project.org>
-	<8F29D6B095ED194EA1980491A5E029710C42A73A@DFLE08.ent.ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <202460309.27.1366423161242.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C42A73A@DFLE08.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-	Arago Project git <git@arago-project.org>
-Subject: Re: Chase Maupin : am33x-cm3: use init script to load firmware
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-04-19_21-01-45
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,121 +34,162 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Apr 2013 17:44:28 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 20 Apr 2013 02:04:54 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_26_173272463.1366423161208"
 
-On Fri, Apr 19, 2013 at 04:15:05PM +0000, Cooper Jr., Franklin wrote:
-> Is this change related to the 3.8 kernel? The patch "linux-ti-staging: make 
-> cm3 firmware a run-time dependency" implies that this is indeed a 3.8 
-> related change. This makes things a bit tricky since this breaks the 3.2 
-> kernel.
+------=_Part_26_173272463.1366423161208
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Indeed. How long do you need to support 3.2 for after AM-SDK 5.07?
+<html>
+<head>
+<title>
+Status for 04/19/13
+</title>
+</head>
+<body>
 
--- 
-Denys
+<h2>Status for 04/19/13</h2>
 
-> > -----Original Message-----
-> > From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> > bounces@yoctoproject.org] On Behalf Of Arago Project git
-> > Sent: Thursday, April 18, 2013 2:46 PM
-> > To: meta-ti@yoctoproject.org
-> > Subject: [meta-ti] Chase Maupin : am33x-cm3: use init script to load
-> > firmware
-> > 
-> > Module: meta-ti
-> > Branch: master
-> > Commit: 14a312f1e9d724d61d163d9872d7f6542ee180b9
-> > URL:    http://arago-project.org/git/meta-
-> > ti.git?a=commit;h=14a312f1e9d724d61d163d9872d7f6542ee180b9
-> > 
-> > Author: Chase Maupin <Chase.Maupin@ti.com>
-> > Date:   Thu Apr 18 13:10:00 2013 -0500
-> > 
-> > am33x-cm3: use init script to load firmware
-> > 
-> > * The PM firmware is now loaded using an init script so make
-> >   the init script installation part of the firmware package.
-> > * Fix up the SRC_URI to the proper format.
-> > 
-> > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > 
-> > ---
-> > 
-> >  recipes-bsp/ti/am33x-cm3/init-am33x-cm3 |    6 ++++++
-> >  recipes-bsp/ti/am33x-cm3_git.bb         |   17 +++++++++++++++--
-> >  2 files changed, 21 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/recipes-bsp/ti/am33x-cm3/init-am33x-cm3 b/recipes-
-> > bsp/ti/am33x-cm3/init-am33x-cm3
-> > new file mode 100644
-> > index 0000000..56c17b3
-> > --- /dev/null
-> > +++ b/recipes-bsp/ti/am33x-cm3/init-am33x-cm3
-> > @@ -0,0 +1,6 @@
-> > +#!/bin/sh
-> > +
-> > +# Load the PM CM3 firmware
-> > +echo 1 >
-> > +/sys/devices/ocp.2/44d00000.wkup_m3/firmware/am335x-pm-
-> > firmware.bin/loa
-> > +ding cat /lib/firmware/am335x-pm-firmware.bin >
-> > +/sys/devices/ocp.2/44d00000.wkup_m3/firmware/am335x-pm-
-> > firmware.bin/dat
-> > +a echo 0 >
-> > +/sys/devices/ocp.2/44d00000.wkup_m3/firmware/am335x-pm-
-> > firmware.bin/loa
-> > +ding
-> > diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-
-> > cm3_git.bb index 247ba4d..169789e 100644
-> > --- a/recipes-bsp/ti/am33x-cm3_git.bb
-> > +++ b/recipes-bsp/ti/am33x-cm3_git.bb
-> > @@ -4,9 +4,18 @@ LICENSE = "TI-BSD"
-> >  LIC_FILES_CHKSUM =
-> > "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
-> > 
-> >  PV = "04.06.00.07"
-> > +PR = "r1"
-> >  SRCREV = "cf07b841d6e8c5e026eecb259d143f3dff412c8e"
-> > +BRANCH ?= "master"
-> > 
-> > -SRC_URI = "git://arago-project.org/git/projects/am33x-cm3.git"
-> > +INITSCRIPT_NAME = "am335x-pm-firmware-load"
-> > +INITSCRIPT_PARAMS = "defaults 96"
-> > +
-> > +inherit update-rc.d
-> > +
-> > +SRC_URI = "git://arago-project.org/git/projects/am33x-
-> > cm3.git;protocol=git;branch=${BRANCH} \
-> > +           file://init-am33x-cm3 \
-> > +          "
-> > 
-> >  S = "${WORKDIR}/git"
-> > 
-> > @@ -17,7 +26,11 @@ do_compile() {
-> >  do_install() {
-> >  	install -d ${D}${base_libdir}/firmware
-> >  	install -m 0644 bin/am335x-pm-firmware.bin
-> > ${D}${base_libdir}/firmware/
-> > +
-> > +	# Install the init script to load the PM firmware at boot
-> > +	install -d ${D}${sysconfdir}/init.d
-> > +	install -m 0755 ${WORKDIR}/init-am33x-cm3
-> > +${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
-> >  }
-> > 
-> > -FILES_${PN} = "${base_libdir}/firmware"
-> > +FILES_${PN} += "${base_libdir}/firmware"
-> > 
-> > 
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+<h2>BUILD_ID: build-2013-04-19_21-02-51</h2>
 
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.04"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_26_173272463.1366423161208--
