@@ -1,16 +1,16 @@
 Return-Path: <cliff.brake@gmail.com>
 Received: from bec-systems.com (new.bec-systems.com [74.208.70.121])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B1D8E0054B
-	for <meta-ti@yoctoproject.org>; Mon, 22 Apr 2013 08:52:13 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3BE2BE0054B
+	for <meta-ti@yoctoproject.org>; Mon, 22 Apr 2013 08:56:34 -0700 (PDT)
 Received: from oh-67-76-203-50.sta.embarqhsd.net ([67.76.203.50]
 	helo=happy.bec-systems.com)
 	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
-	id 1UUJ0G-0001p7-Of; Mon, 22 Apr 2013 11:50:07 -0400
+	id 1UUJ4e-0001sq-I9; Mon, 22 Apr 2013 11:54:39 -0400
 MIME-Version: 1.0
 X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Date: Mon, 22 Apr 2013 15:51:44 GMT
-Message-Id: <1366645904494.8e912def@Nodemailer>
+Date: Mon, 22 Apr 2013 15:56:16 GMT
+Message-Id: <1366646176201.70331d59@Nodemailer>
 From: cliff.brake@gmail.com
 To: openembedded-core@lists.openembedded.org,
 	openembedded-devel@lists.openembedded.org,
@@ -31,7 +31,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Apr 2013 15:52:13 -0000
+X-List-Received-Date: Mon, 22 Apr 2013 15:56:34 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
