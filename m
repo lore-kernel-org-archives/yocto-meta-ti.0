@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ACAA1E013C3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B0444E01498
 	for <meta-ti@yoctoproject.org>; Mon, 22 Apr 2013 13:24:39 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 960A452A44; Mon, 22 Apr 2013 20:24:39 +0000 (UTC)
+	id 9319452A71; Mon, 22 Apr 2013 20:24:39 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130422202439.960A452A44@arago-project.org>
+Message-Id: <20130422202439.9319452A71@arago-project.org>
 Date: Mon, 22 Apr 2013 20:24:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : linux-am335x: Update to latest 3.2 kernel release
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Apr 2013 20:24:44 -0000
+X-List-Received-Date: Mon, 22 Apr 2013 20:24:45 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 8a6d2d49dd31c237da4189756973bd0b05f97f48
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8a6d2d49dd31c237da4189756973bd0b05f97f48
+Branch: master
+Commit: 6efc27aedc3db4db954652f5592c6d16d82f0009
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6efc27aedc3db4db954652f5592c6d16d82f0009
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Mon Apr 22 11:21:41 2013 -0500
@@ -86,5 +86,5 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  .../linux/linux-am335x-psp-3.2/defconfig           |    1 +
  37 files changed, 1174 insertions(+), 2681 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=8a6d2d49dd31c237da4189756973bd0b05f97f48
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=6efc27aedc3db4db954652f5592c6d16d82f0009
 
