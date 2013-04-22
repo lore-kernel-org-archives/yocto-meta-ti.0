@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B0444E01498
-	for <meta-ti@yoctoproject.org>; Mon, 22 Apr 2013 13:24:39 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 38F6CE014CA
+	for <meta-ti@yoctoproject.org>; Mon, 22 Apr 2013 13:24:45 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9319452A71; Mon, 22 Apr 2013 20:24:39 +0000 (UTC)
+	id CCD1E52A6C; Mon, 22 Apr 2013 20:24:39 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130422202439.9319452A71@arago-project.org>
+Message-Id: <20130422202439.CCD1E52A6C@arago-project.org>
 Date: Mon, 22 Apr 2013 20:24:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : linux-am335x: Update to latest 3.2 kernel release
+Subject: Franklin S. Cooper Jr : u-boot-am33x: Update u-boot recipe to 2013.01.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,69 +22,78 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Apr 2013 20:24:45 -0000
+X-List-Received-Date: Mon, 22 Apr 2013 20:24:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 6efc27aedc3db4db954652f5592c6d16d82f0009
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6efc27aedc3db4db954652f5592c6d16d82f0009
+Commit: b73a2e363b0fea35036017c7e9cde49f24711d14
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b73a2e363b0fea35036017c7e9cde49f24711d14
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Mon Apr 22 11:21:41 2013 -0500
+Date:   Mon Apr 22 11:21:42 2013 -0500
 
-linux-am335x: Update to latest 3.2 kernel release
+u-boot-am33x: Update u-boot recipe to 2013.01.01
 
-* Update to the latest PSP release (version 04.06.00.10) of the 3.2 kernel.
-* Rename recipe to match meta-ti kernel recipe naming convention.
-* Use in tree defconfig instead of providing a separate defconfig. These
-  defconfigs were the same anyway.
-* Add additional crypto patches that were needed to fix suspend and resume
-  issues.
+* Update to latest version of u-boot that supports the 3.2 kernel.
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux-am335x-3.2.0-psp04.06.00.08/defconfig    | 2656 --------------------
- ...0-psp04.06.00.08.bb => linux-am335x-psp-3.2.bb} |   31 +-
- ...hwmod-Convert-SHA0-crypto-device-data-to-.patch |  168 ++
- ...-ARM-OMAP2-AM335x-Update-SPI-flash-layout.patch |   40 +
- ...odified-WLAN-enable-and-irq-to-match-boar.patch |    0
- ...x-Add-crypto-driver-settings-to-defconfig.patch |   36 +-
- ...m335x-Add-pm_runtime-API-to-crypto-driver.patch |    0
- ...x-enable-pullup-on-the-WLAN-enable-pin-fo.patch |    0
- ...01-am335x_evm_defconfig-turn-off-MUSB-DMA.patch |    0
- ...-using-edge-triggered-interrupts-for-WLAN.patch |    0
- ...x-Add-memory-addresses-for-crypto-modules.patch |    0
- .../0001-am33xx-Add-SmartReflex-support.patch      |    0
- .../0001-mach-omap2-pm33xx-Disable-VT-switch.patch |    0
- ...date-PIO-mode-help-information-in-Kconfig.patch |    0
- ...1-omap-serial-add-delay-before-suspending.patch |    0
- ...emove-check-for-GP-only-device-type-in-RN.patch |   29 +
- .../0002-AM335x-OCF-Driver-for-Linux-3.patch       |    0
- .../0002-Smartreflex-limited-to-ES-1.0.patch       |   35 +
- ...-suspend-resume-routines-to-crypto-driver.patch |    0
- ...Add-crypto-device-and-resource-structures.patch |    0
- ...2-am33xx-Enable-CONFIG_AM33XX_SMARTREFLEX.patch |    0
- ...map4-sham-Use-finer-grained-PM-management.patch |   98 +
- ...rypto-device-and-resource-structure-for-T.patch |    0
- ...-omap4-sham-Add-suspend-resume-PM-support.patch |   56 +
- ...d-crypto-drivers-to-Kconfig-and-Makefiles.patch |    0
- ...ap4-sham-Don-t-use-hardcoded-base-address.patch |   45 +
- ...hwmod-Convert-AES0-crypto-device-data-to-.patch |  165 ++
- ...eate-header-file-for-OMAP4-crypto-modules.patch |    0
- ...m33x-Create-driver-for-TRNG-crypto-module.patch |    0
- ...map4-aes-User-finer-grained-PM-management.patch |  127 +
- ...am33x-Create-driver-for-AES-crypto-module.patch |    0
- ...o-omap4-aes-Add-suspend-resume-PM-support.patch |   56 +
- ...x-Create-driver-for-SHA-MD5-crypto-module.patch |    0
- ...map4-aes-Don-t-use-hardcoded-base-address.patch |   45 +
- ...xx-hwmod-Convert-RNG-device-data-to-hwmod.patch |  176 ++
- ...g-omap4-rng-Convert-to-use-pm_runtime-API.patch |   91 +
- .../linux/linux-am335x-psp-3.2/defconfig           |    1 +
- 37 files changed, 1174 insertions(+), 2681 deletions(-)
+ recipes-bsp/u-boot/u-boot-am33x_2012.10.bb    |   17 -----------------
+ recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb |   20 ++++++++++++++++++++
+ 2 files changed, 20 insertions(+), 17 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=6efc27aedc3db4db954652f5592c6d16d82f0009
+diff --git a/recipes-bsp/u-boot/u-boot-am33x_2012.10.bb b/recipes-bsp/u-boot/u-boot-am33x_2012.10.bb
+deleted file mode 100644
+index 7320e02..0000000
+--- a/recipes-bsp/u-boot/u-boot-am33x_2012.10.bb
++++ /dev/null
+@@ -1,17 +0,0 @@
+-require u-boot-ti.inc
+-
+-DESCRIPTION = "u-boot bootloader for ARM MPU devices"
+-
+-COMPATIBLE_MACHINE = "ti33x|omap3"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-PR = "r7+gitr${SRCPV}"
+-
+-SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH}"
+-
+-BRANCH = "amsdk-05.06.00.00"
+-
+-SRCREV = "6536bfa6b7f16bb49fdea8c72959e3ed54e77a82"
+-
+-SPL_BINARY = "MLO"
+diff --git a/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb
+new file mode 100644
+index 0000000..19ec34e
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb
+@@ -0,0 +1,20 @@
++require u-boot-ti.inc
++
++DESCRIPTION = "u-boot bootloader for ARM MPU devices"
++
++COMPATIBLE_MACHINE = "ti33x"
++
++DEFAULT_PREFERENCE = "-1"
++
++PR = "r5+gitr${SRCPV}"
++
++SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
++
++# This version of u-boot is meant for 3.2 kernel which doesn't support device tree.
++BRANCH = "ti-u-boot-2013.01.01-amsdk-05.07.00.00"
++
++# Commit corresponds to tag "v2013.01.01_amsdk-05.07.00.00"
++SRCREV = "8eb15a787c558fee98b0fa2a66ff0849c732edcc"
++
++# Set the name of the SPL that will built so that it is also packaged with u-boot.
++SPL_BINARY = "MLO"
+
 
