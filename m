@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB583E006F9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ADDB1E013C9
 	for <meta-ti@yoctoproject.org>; Mon, 22 Apr 2013 13:24:39 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5106752A45; Mon, 22 Apr 2013 20:24:38 +0000 (UTC)
+	id 5B59152A3E; Mon, 22 Apr 2013 20:24:38 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130422202438.5106752A45@arago-project.org>
+Message-Id: <20130422202438.5B59152A3E@arago-project.org>
 Date: Mon, 22 Apr 2013 20:24:38 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : linux-omap-psp: Update commit
@@ -26,9 +26,9 @@ X-List-Received-Date: Mon, 22 Apr 2013 20:24:44 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 22d4ea302df1883795c584ae83aa9dd13e8c8824
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=22d4ea302df1883795c584ae83aa9dd13e8c8824
+Branch: danny
+Commit: bb6646fd963c53a4386a7448c62a75990f285407
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bb6646fd963c53a4386a7448c62a75990f285407
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Mon Apr 22 11:21:40 2013 -0500
