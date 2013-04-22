@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ADDB1E013C9
-	for <meta-ti@yoctoproject.org>; Mon, 22 Apr 2013 13:24:39 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF117E01489
+	for <meta-ti@yoctoproject.org>; Mon, 22 Apr 2013 13:24:40 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5B59152A3E; Mon, 22 Apr 2013 20:24:38 +0000 (UTC)
+	id C2C7852A94; Mon, 22 Apr 2013 20:24:39 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130422202438.5B59152A3E@arago-project.org>
-Date: Mon, 22 Apr 2013 20:24:38 +0000 (UTC)
+Message-Id: <20130422202439.C2C7852A94@arago-project.org>
+Date: Mon, 22 Apr 2013 20:24:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : linux-omap-psp: Update commit
+Subject: Franklin S. Cooper Jr : u-boot-am33x: Update u-boot recipe to 2013.01.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,51 +27,73 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: bb6646fd963c53a4386a7448c62a75990f285407
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bb6646fd963c53a4386a7448c62a75990f285407
+Commit: 3b2d0910db367916fdcd5e1fcf5fb4673edbab6d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3b2d0910db367916fdcd5e1fcf5fb4673edbab6d
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Mon Apr 22 11:21:40 2013 -0500
+Date:   Mon Apr 22 11:21:42 2013 -0500
 
-linux-omap-psp: Update commit
+u-boot-am33x: Update u-boot recipe to 2013.01.01
 
-* Update to latest supported release.
+* Update to latest version of u-boot that supports the 3.2 kernel.
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/omap3.inc                |    2 +-
- recipes-kernel/linux/linux-omap-psp_2.6.37.bb |    3 ++-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ recipes-bsp/u-boot/u-boot-am33x_2012.10.bb    |   17 -----------------
+ recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb |   20 ++++++++++++++++++++
+ 2 files changed, 20 insertions(+), 17 deletions(-)
 
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index 212ebe7..c80939a 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -16,7 +16,7 @@ XSERVER = "xserver-xorg \
- GUI_MACHINE_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r124"
-+MACHINE_KERNEL_PR = "r125"
- 
- KERNEL_IMAGETYPE = "uImage"
- 
-diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-index 5d72af5..d1a6478 100644
---- a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-+++ b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-@@ -5,7 +5,8 @@ DESCRIPTION = "Linux kernel for OMAP3 EVM from PSP, based on linux-omap3 kernel"
- 
- COMPATIBLE_MACHINE = "omap3"
- 
--SRCREV= "20c003f2f024d9f50f59edf9f1b8f5f035fb15b8"
-+# SRCREV corresponds to tag v2.6.37_OMAPPSP_04.02.00.07
-+SRCREV= "adcd067326836777c049e3cb32a5b7d9d401fc31"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 devices
- # see conf/machine/include/omap3.inc
+diff --git a/recipes-bsp/u-boot/u-boot-am33x_2012.10.bb b/recipes-bsp/u-boot/u-boot-am33x_2012.10.bb
+deleted file mode 100644
+index 7320e02..0000000
+--- a/recipes-bsp/u-boot/u-boot-am33x_2012.10.bb
++++ /dev/null
+@@ -1,17 +0,0 @@
+-require u-boot-ti.inc
+-
+-DESCRIPTION = "u-boot bootloader for ARM MPU devices"
+-
+-COMPATIBLE_MACHINE = "ti33x|omap3"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-PR = "r7+gitr${SRCPV}"
+-
+-SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH}"
+-
+-BRANCH = "amsdk-05.06.00.00"
+-
+-SRCREV = "6536bfa6b7f16bb49fdea8c72959e3ed54e77a82"
+-
+-SPL_BINARY = "MLO"
+diff --git a/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb
+new file mode 100644
+index 0000000..19ec34e
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb
+@@ -0,0 +1,20 @@
++require u-boot-ti.inc
++
++DESCRIPTION = "u-boot bootloader for ARM MPU devices"
++
++COMPATIBLE_MACHINE = "ti33x"
++
++DEFAULT_PREFERENCE = "-1"
++
++PR = "r5+gitr${SRCPV}"
++
++SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
++
++# This version of u-boot is meant for 3.2 kernel which doesn't support device tree.
++BRANCH = "ti-u-boot-2013.01.01-amsdk-05.07.00.00"
++
++# Commit corresponds to tag "v2013.01.01_amsdk-05.07.00.00"
++SRCREV = "8eb15a787c558fee98b0fa2a66ff0849c732edcc"
++
++# Set the name of the SPL that will built so that it is also packaged with u-boot.
++SPL_BINARY = "MLO"
 
 
