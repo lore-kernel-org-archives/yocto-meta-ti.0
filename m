@@ -1,26 +1,15 @@
-Return-Path: <fcooper@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC84DE006F9
-	for <meta-ti@yoctoproject.org>; Mon, 22 Apr 2013 15:59:51 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3MMxp4W003950
-	for <meta-ti@yoctoproject.org>; Mon, 22 Apr 2013 17:59:51 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3MMxoaC023967
-	for <meta-ti@yoctoproject.org>; Mon, 22 Apr 2013 17:59:50 -0500
-Received: from dlelxv23.itg.ti.com (172.17.1.198) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 22 Apr 2013 17:59:50 -0500
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlelxv23.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3MMxl4k021746;
-	Mon, 22 Apr 2013 17:59:49 -0500
-From: "Franklin S. Cooper Jr" <fcooper@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 22 Apr 2013 17:59:44 -0500
-Message-ID: <1366671584-15546-1-git-send-email-fcooper@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Subject: [PATCH] am33x-cm3: Update to latest cm3 release
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4739FE013C3
+	for <meta-ti@yoctoproject.org>; Mon, 22 Apr 2013 18:37:17 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 8FDDE52A94; Tue, 23 Apr 2013 01:37:16 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130423013716.8FDDE52A94@arago-project.org>
+Date: Tue, 23 Apr 2013 01:37:16 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Franklin S. Cooper Jr : u-boot: Add am3517 u-boot recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,34 +22,70 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Apr 2013 22:59:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 23 Apr 2013 01:37:17 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: c5229011a5b1d400d24d065a41e62dd0e6b9ae7a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c5229011a5b1d400d24d065a41e62dd0e6b9ae7a
+
+Author: Franklin S. Cooper Jr <fcooper@ti.com>
+Date:   Mon Apr 22 17:31:47 2013 -0500
+
+u-boot: Add am3517 u-boot recipe
+
+* Add correct u-boot recipe for am3517.
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
----
- recipes-bsp/ti/am33x-cm3_git.bb |    8 +++++---
- 1 files changed, 5 insertions(+), 3 deletions(-)
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
-index 169789e..4829b78 100644
---- a/recipes-bsp/ti/am33x-cm3_git.bb
-+++ b/recipes-bsp/ti/am33x-cm3_git.bb
-@@ -3,9 +3,11 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
- LICENSE = "TI-BSD"
- LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
+---
+
+ conf/machine/am3517-evm.conf                |    5 ++---
+ recipes-bsp/u-boot/u-boot-am3517_2011.09.bb |   19 +++++++++++++++++++
+ 2 files changed, 21 insertions(+), 3 deletions(-)
+
+diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
+index 097e797..b9b6d17 100644
+--- a/conf/machine/am3517-evm.conf
++++ b/conf/machine/am3517-evm.conf
+@@ -17,9 +17,8 @@ USE_VT = "2"
  
--PV = "04.06.00.07"
--PR = "r1"
--SRCREV = "cf07b841d6e8c5e026eecb259d143f3dff412c8e"
-+PV = "04.06.00.10"
-+PR = "r2"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
+ 
+-# Support for am3517 is in the same tree as am33x
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-am33x"
+-PREFERRED_PROVIDER_u-boot = "u-boot-am33x"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot-am3517"
++PREFERRED_PROVIDER_u-boot = "u-boot-am3517"
+ 
+ UBOOT_MACHINE = "am3517_evm_config"
+ XLOAD_MACHINE = "am3517evm_config"
+diff --git a/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb b/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb
+new file mode 100644
+index 0000000..6321406
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb
+@@ -0,0 +1,19 @@
++require u-boot-ti.inc
 +
-+# SRCREV corresponds to tag "AM335xPSP_04.06.00.10-rc1"
-+SRCREV = "27ca4643e422245a95723de1df0247a00eada45b"
- BRANCH ?= "master"
- 
- INITSCRIPT_NAME = "am335x-pm-firmware-load"
--- 
-1.7.0.4
++DESCRIPTION = "u-boot bootloader for ARM MPU devices"
++
++COMPATIBLE_MACHINE = "omap3"
++
++DEFAULT_PREFERENCE = "-1"
++
++PR = "r0+gitr${SRCPV}"
++
++SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH}"
++
++BRANCH = "AM335XPSP_04.06.00.08"
++
++# Lock to the commit corresponding to tag "v2011.09_AM335xPSP_04.06.00.08"
++SRCREV = "1e4626f0d5f3bb04ec974e76a5d9029875269d31"
++
++# Set the name of the SPL that will built so that it is also packaged with u-boot.
++SPL_BINARY = "MLO"
 
 
