@@ -1,27 +1,26 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 00368E014E8
-	for <meta-ti@yoctoproject.org>; Tue, 23 Apr 2013 18:15:07 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3O1F6Ex007518
-	for <meta-ti@yoctoproject.org>; Tue, 23 Apr 2013 20:15:06 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3O1F6o0005882
-	for <meta-ti@yoctoproject.org>; Tue, 23 Apr 2013 20:15:06 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 23 Apr 2013 20:15:06 -0500
-Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3O1F6lD018874	for
-	<meta-ti@yoctoproject.org>; Tue, 23 Apr 2013 20:15:06 -0500
-Date: Tue, 23 Apr 2013 21:09:28 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1203690306.45.1366765768620.JavaMail.jenkins@puget>
+Return-Path: <SAbramenkova@luxoft.com>
+Received: from msk-edge-04.luxoft.com (msk-edge-04.luxoft.com
+	[213.208.171.187])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B7914E0054B
+	for <meta-ti@yoctoproject.org>; Wed, 24 Apr 2013 10:08:48 -0700 (PDT)
+Received: from MSK-HUBT-04.luxoft.com (172.30.50.90) by msk-edge-04.luxoft.com
+	(172.30.16.187) with Microsoft SMTP Server (TLS) id 8.3.213.0;
+	Wed, 24 Apr 2013 21:08:44 +0400
+Received: from MSK-MBOX-04.luxoft.com ([fe80::64f4:ed23:7673:536f]) by
+	MSK-HUBT-04.luxoft.com ([::1]) with mapi id 14.02.0342.003;
+	Wed, 24 Apr 2013 21:08:42 +0400
+From: "Abramenkova, Svetlana" <SAbramenkova@luxoft.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: Linux image for OMAP5 
+Thread-Index: Ac5BCa1E8ldHYJKoSA+jBjz0nbk5KQ==
+Date: Wed, 24 Apr 2013 17:08:42 +0000
+Message-ID: <C3024233E31E8449B5487F2C1EFB9F8ECCDE@msk-mbox-04.luxoft.com>
+Accept-Language: ru-RU, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.30.16.217]
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-04-23_21-01-44
+Subject: Linux image for OMAP5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,162 +33,94 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2013 01:15:08 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_44_417762107.1366765768618"
+X-List-Received-Date: Wed, 24 Apr 2013 17:08:49 -0000
+Content-Language: ru-RU
+Content-Type: multipart/alternative;
+	boundary="_000_C3024233E31E8449B5487F2C1EFB9F8ECCDEmskmbox04luxoftcom_"
 
-------=_Part_44_417762107.1366765768618
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--_000_C3024233E31E8449B5487F2C1EFB9F8ECCDEmskmbox04luxoftcom_
+Content-Type: text/plain; charset="koi8-r"
+Content-Transfer-Encoding: quoted-printable
 
-<html>
+Hi,
+
+I trying to create a Linux image for OMAP5 processor. I cloned meta-ti git =
+repository (git://git.yoctoproject.org/meta-ti) and tried follow steps from=
+ http://arago-project.org/wiki/index.php/Setting_Up_Build_Environment. I ma=
+de changes in setenv file for meta-ti repository(BBPATH=3D$OEBASE/meta-ti) =
+and in local configuration file for OMAP5 (MACHINE =3D "omap5-evm"). When I=
+  start to build the image getting an error:
+"FATAL: Unable to parse [] (Could not include required file conf/machine/in=
+clude/soc-family.inc)"
+It seems that I have not enough files.
+
+Could you please provide help with setting up build environment?
+
+Thanks for advance,
+Sveta
+
+________________________________
+
+This e-mail and any attachment(s) are intended only for the recipient(s) na=
+med above and others who have been specifically authorized to receive them.=
+ They may contain confidential information. If you are not the intended rec=
+ipient, please do not read this email or its attachment(s). Furthermore, yo=
+u are hereby notified that any dissemination, distribution or copying of th=
+is e-mail and any attachment(s) is strictly prohibited. If you have receive=
+d this e-mail in error, please immediately notify the sender by replying to=
+ this e-mail and then delete this e-mail and any attachment(s) or copies th=
+ereof from your system. Thank you.
+
+--_000_C3024233E31E8449B5487F2C1EFB9F8ECCDEmskmbox04luxoftcom_
+Content-Type: text/html; charset="koi8-r"
+Content-Transfer-Encoding: quoted-printable
+
+<html dir=3D"ltr">
 <head>
-<title>
-Status for 04/23/13
-</title>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dkoi8-r">
+<style id=3D"owaParaStyle" type=3D"text/css">
+<!--
+p
+	{margin-top:0;
+	margin-bottom:0}
+-->
+</style>
 </head>
 <body>
-
-<h2>Status for 04/23/13</h2>
-
-<h2>BUILD_ID: build-2013-04-23_21-02-49</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.04"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
+<div style=3D"direction:ltr; font-family:Tahoma; color:#000000; font-size:1=
+0pt">Hi,<br>
+<br>
+I trying to create a Linux image for OMAP5 processor. I cloned meta-ti git =
+repository (<a href=3D"">git://git.yoctoproject.org/meta-ti</a>) and tried =
+follow steps from http://arago-project.org/wiki/index.php/Setting_Up_Build_=
+Environment. I made changes in setenv
+ file for meta-ti repository(BBPATH=3D$OEBASE/meta-ti) and in local configu=
+ration file for OMAP5 (MACHINE =3D &quot;omap5-evm&quot;). When I&nbsp; sta=
+rt to build the image getting an error:<br>
+&quot;FATAL: Unable to parse [] (Could not include required file conf/machi=
+ne/include/soc-family.inc)&quot;<br>
+It seems that I have not enough files.<br>
+<br>
+Could you please provide help with setting up build environment?<br>
+<br>
+Thanks for advance,<br>
+Sveta<br>
+</div>
+<br>
+<hr>
+<font face=3D"Arial" color=3D"Gray" size=3D"1"><br>
+This e-mail and any attachment(s) are intended only for the recipient(s) na=
+med above and others who have been specifically authorized to receive them.=
+ They may contain confidential information. If you are not the intended rec=
+ipient, please do not read this
+ email or its attachment(s). Furthermore, you are hereby notified that any =
+dissemination, distribution or copying of this e-mail and any attachment(s)=
+ is strictly prohibited. If you have received this e-mail in error, please =
+immediately notify the sender by
+ replying to this e-mail and then delete this e-mail and any attachment(s) =
+or copies thereof from your system. Thank you.<br>
+</font>
 </body>
 </html>
 
-
-------=_Part_44_417762107.1366765768618--
+--_000_C3024233E31E8449B5487F2C1EFB9F8ECCDEmskmbox04luxoftcom_--
