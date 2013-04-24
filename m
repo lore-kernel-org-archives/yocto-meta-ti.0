@@ -1,26 +1,25 @@
-Return-Path: <SAbramenkova@luxoft.com>
-Received: from msk-edge-04.luxoft.com (msk-edge-04.luxoft.com
-	[213.208.171.187])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B7914E0054B
-	for <meta-ti@yoctoproject.org>; Wed, 24 Apr 2013 10:08:48 -0700 (PDT)
-Received: from MSK-HUBT-04.luxoft.com (172.30.50.90) by msk-edge-04.luxoft.com
-	(172.30.16.187) with Microsoft SMTP Server (TLS) id 8.3.213.0;
-	Wed, 24 Apr 2013 21:08:44 +0400
-Received: from MSK-MBOX-04.luxoft.com ([fe80::64f4:ed23:7673:536f]) by
-	MSK-HUBT-04.luxoft.com ([::1]) with mapi id 14.02.0342.003;
-	Wed, 24 Apr 2013 21:08:42 +0400
-From: "Abramenkova, Svetlana" <SAbramenkova@luxoft.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: Linux image for OMAP5 
-Thread-Index: Ac5BCa1E8ldHYJKoSA+jBjz0nbk5KQ==
-Date: Wed, 24 Apr 2013 17:08:42 +0000
-Message-ID: <C3024233E31E8449B5487F2C1EFB9F8ECCDE@msk-mbox-04.luxoft.com>
-Accept-Language: ru-RU, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.30.16.217]
-MIME-Version: 1.0
-Subject: Linux image for OMAP5
+Return-Path: <denis@denix.org>
+Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
+	[206.46.173.15])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2F0A3E014DD
+	for <meta-ti@yoctoproject.org>; Wed, 24 Apr 2013 10:30:05 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173015.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MLR00H81SL9LZ42@vms173015.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 24 Apr 2013 12:29:49 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id A3B672011D; Wed,
+	24 Apr 2013 13:29:33 -0400 (EDT)
+Date: Wed, 24 Apr 2013 13:29:33 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Abramenkova, Svetlana" <SAbramenkova@luxoft.com>
+Message-id: <20130424172933.GA30093@denix.org>
+References: <C3024233E31E8449B5487F2C1EFB9F8ECCDE@msk-mbox-04.luxoft.com>
+MIME-version: 1.0
+In-reply-to: <C3024233E31E8449B5487F2C1EFB9F8ECCDE@msk-mbox-04.luxoft.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Linux image for OMAP5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,94 +32,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2013 17:08:49 -0000
-Content-Language: ru-RU
-Content-Type: multipart/alternative;
-	boundary="_000_C3024233E31E8449B5487F2C1EFB9F8ECCDEmskmbox04luxoftcom_"
+X-List-Received-Date: Wed, 24 Apr 2013 17:30:05 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
---_000_C3024233E31E8449B5487F2C1EFB9F8ECCDEmskmbox04luxoftcom_
-Content-Type: text/plain; charset="koi8-r"
-Content-Transfer-Encoding: quoted-printable
+On Wed, Apr 24, 2013 at 05:08:42PM +0000, Abramenkova, Svetlana wrote:
+> Hi,
+> 
+> I trying to create a Linux image for OMAP5 processor. I cloned meta-ti git 
+> repository (git://git.yoctoproject.org/meta-ti) and tried follow steps from 
+> http://arago-project.org/wiki/index.php/Setting_Up_Build_Environment.
 
-Hi,
+As it says on the front page, some of the Wiki pages are outdated and are for 
+the Classic OpenEmbedded setup of Arago. So, Setting Up Build Environment is 
+marked as outdated.
 
-I trying to create a Linux image for OMAP5 processor. I cloned meta-ti git =
-repository (git://git.yoctoproject.org/meta-ti) and tried follow steps from=
- http://arago-project.org/wiki/index.php/Setting_Up_Build_Environment. I ma=
-de changes in setenv file for meta-ti repository(BBPATH=3D$OEBASE/meta-ti) =
-and in local configuration file for OMAP5 (MACHINE =3D "omap5-evm"). When I=
-  start to build the image getting an error:
-"FATAL: Unable to parse [] (Could not include required file conf/machine/in=
-clude/soc-family.inc)"
-It seems that I have not enough files.
+OMAP5 is only supported in the new OpenEmbedded-Core and Yocto Project setup 
+of Arago (or another compatible distro). Unfortunately, not all Wiki pages 
+were updated yet.
 
-Could you please provide help with setting up build environment?
+For setting things up for the new build environment, you can clone our 
+oe-layersetup repository and use one of the config files provided:
 
-Thanks for advance,
-Sveta
+$ git://arago-project.org/git/projects/oe-layersetup.git o5-build
+$ cd o5-build
+$ ./oe-layertool-setup.sh -f configs/distroless-meta-ti-config.txt
+$ cd build
+$ . conf/setenv
+$ MACHINE=omap5-evm bitbake core-image-minimal
 
-________________________________
+The above will only give you basic oe-core and meta-ti layers, but enough for 
+a minimal OMAP5 image to build.
 
-This e-mail and any attachment(s) are intended only for the recipient(s) na=
-med above and others who have been specifically authorized to receive them.=
- They may contain confidential information. If you are not the intended rec=
-ipient, please do not read this email or its attachment(s). Furthermore, yo=
-u are hereby notified that any dissemination, distribution or copying of th=
-is e-mail and any attachment(s) is strictly prohibited. If you have receive=
-d this e-mail in error, please immediately notify the sender by replying to=
- this e-mail and then delete this e-mail and any attachment(s) or copies th=
-ereof from your system. Thank you.
+Feel free to try arago-danny-config.txt instead of distroless-meta-ti-config 
+above - this way you will also get additional layers configured (meta-oe, 
+meta-linaro, meta-arago) that follows our own Arago Project distribution 
+closely.
 
---_000_C3024233E31E8449B5487F2C1EFB9F8ECCDEmskmbox04luxoftcom_
-Content-Type: text/html; charset="koi8-r"
-Content-Transfer-Encoding: quoted-printable
 
-<html dir=3D"ltr">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dkoi8-r">
-<style id=3D"owaParaStyle" type=3D"text/css">
-<!--
-p
-	{margin-top:0;
-	margin-bottom:0}
--->
-</style>
-</head>
-<body>
-<div style=3D"direction:ltr; font-family:Tahoma; color:#000000; font-size:1=
-0pt">Hi,<br>
-<br>
-I trying to create a Linux image for OMAP5 processor. I cloned meta-ti git =
-repository (<a href=3D"">git://git.yoctoproject.org/meta-ti</a>) and tried =
-follow steps from http://arago-project.org/wiki/index.php/Setting_Up_Build_=
-Environment. I made changes in setenv
- file for meta-ti repository(BBPATH=3D$OEBASE/meta-ti) and in local configu=
-ration file for OMAP5 (MACHINE =3D &quot;omap5-evm&quot;). When I&nbsp; sta=
-rt to build the image getting an error:<br>
-&quot;FATAL: Unable to parse [] (Could not include required file conf/machi=
-ne/include/soc-family.inc)&quot;<br>
-It seems that I have not enough files.<br>
-<br>
-Could you please provide help with setting up build environment?<br>
-<br>
-Thanks for advance,<br>
-Sveta<br>
-</div>
-<br>
-<hr>
-<font face=3D"Arial" color=3D"Gray" size=3D"1"><br>
-This e-mail and any attachment(s) are intended only for the recipient(s) na=
-med above and others who have been specifically authorized to receive them.=
- They may contain confidential information. If you are not the intended rec=
-ipient, please do not read this
- email or its attachment(s). Furthermore, you are hereby notified that any =
-dissemination, distribution or copying of this e-mail and any attachment(s)=
- is strictly prohibited. If you have received this e-mail in error, please =
-immediately notify the sender by
- replying to this e-mail and then delete this e-mail and any attachment(s) =
-or copies thereof from your system. Thank you.<br>
-</font>
-</body>
-</html>
+> I made changes in setenv file for meta-ti repository(BBPATH=$OEBASE/meta-ti) 
+> and in local configuration file for OMAP5 (MACHINE = "omap5-evm"). When I 
+> start to build the image getting an error:
 
---_000_C3024233E31E8449B5487F2C1EFB9F8ECCDEmskmbox04luxoftcom_--
+> "FATAL: Unable to parse [] (Could not include required file conf/machine/include/soc-family.inc)"
+> It seems that I have not enough files.
+> 
+> Could you please provide help with setting up build environment?
+
+-- 
+Denys
+
