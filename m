@@ -1,25 +1,27 @@
-Return-Path: <denis@denix.org>
-Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
-	[206.46.173.15])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2F0A3E014DD
-	for <meta-ti@yoctoproject.org>; Wed, 24 Apr 2013 10:30:05 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173015.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MLR00H81SL9LZ42@vms173015.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 24 Apr 2013 12:29:49 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id A3B672011D; Wed,
-	24 Apr 2013 13:29:33 -0400 (EDT)
-Date: Wed, 24 Apr 2013 13:29:33 -0400
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23BD1E014DD
+	for <meta-ti@yoctoproject.org>; Wed, 24 Apr 2013 18:13:41 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3P1DeG0029993
+	for <meta-ti@yoctoproject.org>; Wed, 24 Apr 2013 20:13:40 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3P1Dekt013412
+	for <meta-ti@yoctoproject.org>; Wed, 24 Apr 2013 20:13:40 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 24 Apr 2013 20:13:40 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3P1DekX031071	for
+	<meta-ti@yoctoproject.org>; Wed, 24 Apr 2013 20:13:40 -0500
+Date: Wed, 24 Apr 2013 21:08:01 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: "Abramenkova, Svetlana" <SAbramenkova@luxoft.com>
-Message-id: <20130424172933.GA30093@denix.org>
-References: <C3024233E31E8449B5487F2C1EFB9F8ECCDE@msk-mbox-04.luxoft.com>
-MIME-version: 1.0
-In-reply-to: <C3024233E31E8449B5487F2C1EFB9F8ECCDE@msk-mbox-04.luxoft.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Linux image for OMAP5
+To: <meta-ti@yoctoproject.org>
+Message-ID: <590404772.49.1366852081237.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-04-24_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,53 +34,162 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Apr 2013 17:30:05 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 25 Apr 2013 01:13:42 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_48_51144396.1366852081236"
 
-On Wed, Apr 24, 2013 at 05:08:42PM +0000, Abramenkova, Svetlana wrote:
-> Hi,
-> 
-> I trying to create a Linux image for OMAP5 processor. I cloned meta-ti git 
-> repository (git://git.yoctoproject.org/meta-ti) and tried follow steps from 
-> http://arago-project.org/wiki/index.php/Setting_Up_Build_Environment.
+------=_Part_48_51144396.1366852081236
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-As it says on the front page, some of the Wiki pages are outdated and are for 
-the Classic OpenEmbedded setup of Arago. So, Setting Up Build Environment is 
-marked as outdated.
+<html>
+<head>
+<title>
+Status for 04/24/13
+</title>
+</head>
+<body>
 
-OMAP5 is only supported in the new OpenEmbedded-Core and Yocto Project setup 
-of Arago (or another compatible distro). Unfortunately, not all Wiki pages 
-were updated yet.
+<h2>Status for 04/24/13</h2>
 
-For setting things up for the new build environment, you can clone our 
-oe-layersetup repository and use one of the config files provided:
+<h2>BUILD_ID: build-2013-04-24_21-02-48</h2>
 
-$ git://arago-project.org/git/projects/oe-layersetup.git o5-build
-$ cd o5-build
-$ ./oe-layertool-setup.sh -f configs/distroless-meta-ti-config.txt
-$ cd build
-$ . conf/setenv
-$ MACHINE=omap5-evm bitbake core-image-minimal
+<h2>Clean Build: false</h2>
 
-The above will only give you basic oe-core and meta-ti layers, but enough for 
-a minimal OMAP5 image to build.
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-Feel free to try arago-danny-config.txt instead of distroless-meta-ti-config 
-above - this way you will also get additional layers configured (meta-oe, 
-meta-linaro, meta-arago) that follows our own Arago Project distribution 
-closely.
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.04"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-> I made changes in setenv file for meta-ti repository(BBPATH=$OEBASE/meta-ti) 
-> and in local configuration file for OMAP5 (MACHINE = "omap5-evm"). When I 
-> start to build the image getting an error:
-
-> "FATAL: Unable to parse [] (Could not include required file conf/machine/include/soc-family.inc)"
-> It seems that I have not enough files.
-> 
-> Could you please provide help with setting up build environment?
-
--- 
-Denys
-
+------=_Part_48_51144396.1366852081236--
