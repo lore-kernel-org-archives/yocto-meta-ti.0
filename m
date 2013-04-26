@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7CD51E014E9
-	for <meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 14:25:03 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B5F2E0151A
+	for <meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 14:25:06 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 12FE552A57; Fri, 26 Apr 2013 21:25:03 +0000 (UTC)
+	id 32AB352A57; Fri, 26 Apr 2013 21:25:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130426212503.12FE552A57@arago-project.org>
-Date: Fri, 26 Apr 2013 21:25:03 +0000 (UTC)
+Message-Id: <20130426212506.32AB352A57@arago-project.org>
+Date: Fri, 26 Apr 2013 21:25:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-am335x-psp: fix typo in the filename to use underscore
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2013 21:25:03 -0000
+X-List-Received-Date: Fri, 26 Apr 2013 21:25:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 5e6fb2bcf1fff597ebb0334bbf4a36ab027965d2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5e6fb2bcf1fff597ebb0334bbf4a36ab027965d2
+Branch: danny
+Commit: f2afcfee588adb594bc46a36d4e4443adb1be64f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f2afcfee588adb594bc46a36d4e4443adb1be64f
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Apr 26 17:23:05 2013 -0400
