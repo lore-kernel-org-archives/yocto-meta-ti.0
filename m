@@ -1,30 +1,22 @@
-Return-Path: <wmills@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 538F1E014E4
-	for <meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 08:45:06 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3QFj3Un027793;
-	Fri, 26 Apr 2013 10:45:03 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3QFj2QQ031333;
-	Fri, 26 Apr 2013 10:45:02 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Fri, 26 Apr 2013 10:45:02 -0500
-Received: from gtwmills.gt.design.ti.com (gtwmills.gt.design.ti.com
-	[158.218.102.52])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	r3QFj2K5007919;	Fri, 26 Apr 2013 10:45:02 -0500
-Message-ID: <517AA0FE.4080005@ti.com>
-Date: Fri, 26 Apr 2013 11:45:02 -0400
-From: William Mills <wmills@ti.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.27) Gecko/20120216 Thunderbird/3.1.19
-MIME-Version: 1.0
-To: Mats Liljegren <liljegren.mats2@gmail.com>
-References: <CA+xJJ18wBM7G=Nt12yMX8KLmTZWS+SnBsXb3F4X1xgq=Y=0y0w@mail.gmail.com>
-In-Reply-To: <CA+xJJ18wBM7G=Nt12yMX8KLmTZWS+SnBsXb3F4X1xgq=Y=0y0w@mail.gmail.com>
-Cc: meta-ti <meta-ti@yoctoproject.org>, linux-omap <linux-omap@vger.kernel.org>
-Subject: Re: Full nohz on TCI6638k2k (KeyStone II)
+Return-Path: <denis@denix.org>
+Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
+	[206.46.173.7])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EF8D2E014E9
+	for <meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 13:08:26 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MLV00KLIP9C59N0@vms173007.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 26 Apr 2013 15:08:01 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 7F02E2001F; Fri,
+	26 Apr 2013 16:08:00 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Fri, 26 Apr 2013 16:07:58 -0400
+Message-id: <1367006879-12633-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.2.1
+Subject: [PATCH 1/2] linux-ti-staging: update to ti2013.04.00 release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,40 +29,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2013 15:45:06 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Apr 2013 20:08:27 -0000
 
-On 04/26/2013 03:06 AM, Mats Liljegren wrote:
-> I would like to perform a customer demo running a benchmark
-> application in full nohz mode on TCI6638k2k target, which as far as I
-> understand it is a KeyStone II architecture.
->
-> Does anyone know what the best Linux source code is to perform the
-> nohz port for this board? It should preferably be Linux 3.9 of any RC
-> level, but 3.8 should work as well.
->
-> I also need a hardware timer to be used as an interrupt source for the
-> interrupt latency measurements. Any suggestions for framework or
-> driver to use?
->
+From: Denys Dmytriyenko <denys@ti.com>
 
-Mats,
+Also, remove do_deploy_append() fix, as it's in oe-core now.
 
-The team is just now rebasing the bringup work on 3.8.4.  You can find 
-their work here:
-http://arago-project.org/git/projects/?p=linux-keystone.git;a=shortlog;h=refs/heads/release-server/master
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging_3.8.bb | 20 +++-----------------
+ 1 file changed, 3 insertions(+), 17 deletions(-)
 
-(The word "server" ~= 3.8 for this archive)
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+index 622fa3e..6fe52e2 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+@@ -6,21 +6,6 @@ KERNEL_IMAGETYPE = "uImage"
+ 
+ inherit kernel
+ 
+-# This function must be here BEFORE the require of linux-dtb.inc below.
+-# There is a "bug" in the base kernel.bbclass that after it's do_deploy
+-# step it does not return back to the ${S} directory but stays in the
+-# DEPLOY_DIR.  However, the do_deploy_append defined in linux-dtb.inc
+-# assumes that it is being run in the ${S} directory.  A patch is
+-# being submitted to fix this issue by either changing the do_deploy
+-# in the kernel.bbclass to do "cd -" as the last step or to add
+-# "cd ${S}" as the first line of do_deploy in linux-dtb.inc and this
+-# function can be removed once that change is available.
+-# If the function is not placed BEFORE the require then the change
+-# directory is not appended before the linux-dtb.inc changes.
+-do_deploy_append() {
+-    cd ${S}
+-}
+-
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
+ 
+@@ -40,11 +25,12 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.8.y"
+ 
+-SRCREV = "1de3616c36710b6949844738f9c63b96e307c49f"
++# This commit corresponds to ti2013.04.00 release tag
++SRCREV = "23e7f725a6af4ca44660c06bc3569f6ce705d1d0"
+ PV = "3.8.8"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+-- 
+1.8.2.1
 
-Please note that all the master branches are rebuilt from the feature 
-branches in the nightly build script.  I think the feature branches get 
-rebased also.  The tags of course you can count on.
-
-The A15's use the per-core archetecture timer normally.  However the SOC 
-has multiple (20) Timer64 peripherals that can be used as well if they 
-are not being used by the DSPs.  If you configure which timer64 to use 
-w/ device tree you should be fine.
-
-Bill
 
