@@ -1,27 +1,30 @@
-Return-Path: <liljegren.mats2@gmail.com>
-Received: from mail-ee0-f44.google.com (mail-ee0-f44.google.com [74.125.83.44])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 38847E014D3
-	for <meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 00:06:27 -0700 (PDT)
-Received: by mail-ee0-f44.google.com with SMTP id t10so1614646eei.3
-	for <meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 00:06:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:x-received:date:message-id:subject:from:to
-	:content-type; bh=NPRdaK4GFOaEfr0paCdNNW4DeK+fqA/vn8cuet6hDCY=;
-	b=TZdsxHe85kJDJqbhnmPqfimfQ3YBLEdCbT1eUek/JE9mYNlSpIF3F/sbt9p1O4L94p
-	qWIeO0xVNNHbrw6R9DY/0WUsgzjfLpwWPZ+OMeCBMYXh3HwFLHPVVhPGHNtclMKKrAZN
-	hegsiRFNDnKD95l4dKqDPQFhKrcmStkiy1JxcpPR3SbRuVuQgOWe5q5Z+MzhD9dSNYEX
-	oI8MD+LEe4b1zFojE/UNIdRoMRn5zv/yQMGGjJQHSZ4Zt4ABxxNd+9WZfQEk9bCbS1xQ
-	87Y9qWRBbLCCEb3njiQuDdwJUsPuTViJ7BZ6CTXz5DKlmtuq/WL0l9JjQbNS7W3+p+YY
-	lIJA==
+Return-Path: <wmills@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 538F1E014E4
+	for <meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 08:45:06 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3QFj3Un027793;
+	Fri, 26 Apr 2013 10:45:03 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3QFj2QQ031333;
+	Fri, 26 Apr 2013 10:45:02 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Fri, 26 Apr 2013 10:45:02 -0500
+Received: from gtwmills.gt.design.ti.com (gtwmills.gt.design.ti.com
+	[158.218.102.52])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
+	r3QFj2K5007919;	Fri, 26 Apr 2013 10:45:02 -0500
+Message-ID: <517AA0FE.4080005@ti.com>
+Date: Fri, 26 Apr 2013 11:45:02 -0400
+From: William Mills <wmills@ti.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.27) Gecko/20120216 Thunderbird/3.1.19
 MIME-Version: 1.0
-X-Received: by 10.15.43.73 with SMTP id w49mr84795054eev.12.1366959985983;
-	Fri, 26 Apr 2013 00:06:25 -0700 (PDT)
-Received: by 10.15.83.67 with HTTP; Fri, 26 Apr 2013 00:06:25 -0700 (PDT)
-Date: Fri, 26 Apr 2013 09:06:25 +0200
-Message-ID: <CA+xJJ18wBM7G=Nt12yMX8KLmTZWS+SnBsXb3F4X1xgq=Y=0y0w@mail.gmail.com>
-From: Mats Liljegren <liljegren.mats2@gmail.com>
-To: linux-omap <linux-omap@vger.kernel.org>, meta-ti <meta-ti@yoctoproject.org>
-Subject: Full nohz on TCI6638k2k (KeyStone II)
+To: Mats Liljegren <liljegren.mats2@gmail.com>
+References: <CA+xJJ18wBM7G=Nt12yMX8KLmTZWS+SnBsXb3F4X1xgq=Y=0y0w@mail.gmail.com>
+In-Reply-To: <CA+xJJ18wBM7G=Nt12yMX8KLmTZWS+SnBsXb3F4X1xgq=Y=0y0w@mail.gmail.com>
+Cc: meta-ti <meta-ti@yoctoproject.org>, linux-omap <linux-omap@vger.kernel.org>
+Subject: Re: Full nohz on TCI6638k2k (KeyStone II)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,20 +37,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2013 07:06:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 26 Apr 2013 15:45:06 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I would like to perform a customer demo running a benchmark
-application in full nohz mode on TCI6638k2k target, which as far as I
-understand it is a KeyStone II architecture.
+On 04/26/2013 03:06 AM, Mats Liljegren wrote:
+> I would like to perform a customer demo running a benchmark
+> application in full nohz mode on TCI6638k2k target, which as far as I
+> understand it is a KeyStone II architecture.
+>
+> Does anyone know what the best Linux source code is to perform the
+> nohz port for this board? It should preferably be Linux 3.9 of any RC
+> level, but 3.8 should work as well.
+>
+> I also need a hardware timer to be used as an interrupt source for the
+> interrupt latency measurements. Any suggestions for framework or
+> driver to use?
+>
 
-Does anyone know what the best Linux source code is to perform the
-nohz port for this board? It should preferably be Linux 3.9 of any RC
-level, but 3.8 should work as well.
+Mats,
 
-I also need a hardware timer to be used as an interrupt source for the
-interrupt latency measurements. Any suggestions for framework or
-driver to use?
+The team is just now rebasing the bringup work on 3.8.4.  You can find 
+their work here:
+http://arago-project.org/git/projects/?p=linux-keystone.git;a=shortlog;h=refs/heads/release-server/master
 
-/Mats
+(The word "server" ~= 3.8 for this archive)
+
+Please note that all the master branches are rebuilt from the feature 
+branches in the nightly build script.  I think the feature branches get 
+rebased also.  The tags of course you can count on.
+
+The A15's use the per-core archetecture timer normally.  However the SOC 
+has multiple (20) Timer64 peripherals that can be used as well if they 
+are not being used by the DSPs.  If you configure which timer64 to use 
+w/ device tree you should be fine.
+
+Bill
 
