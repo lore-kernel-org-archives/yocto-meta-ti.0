@@ -1,27 +1,27 @@
-Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90F63E01496
-	for <meta-ti@yoctoproject.org>; Thu, 25 Apr 2013 18:11:35 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3Q1BXcM023413
-	for <meta-ti@yoctoproject.org>; Thu, 25 Apr 2013 20:11:33 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3Q1BXCx017858
-	for <meta-ti@yoctoproject.org>; Thu, 25 Apr 2013 20:11:33 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 25 Apr 2013 20:11:33 -0500
-Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3Q1BXlu028253	for
-	<meta-ti@yoctoproject.org>; Thu, 25 Apr 2013 20:11:33 -0500
-Date: Thu, 25 Apr 2013 21:05:52 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1986095809.55.1366938352672.JavaMail.jenkins@puget>
+Return-Path: <liljegren.mats2@gmail.com>
+Received: from mail-ee0-f44.google.com (mail-ee0-f44.google.com [74.125.83.44])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 38847E014D3
+	for <meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 00:06:27 -0700 (PDT)
+Received: by mail-ee0-f44.google.com with SMTP id t10so1614646eei.3
+	for <meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 00:06:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:date:message-id:subject:from:to
+	:content-type; bh=NPRdaK4GFOaEfr0paCdNNW4DeK+fqA/vn8cuet6hDCY=;
+	b=TZdsxHe85kJDJqbhnmPqfimfQ3YBLEdCbT1eUek/JE9mYNlSpIF3F/sbt9p1O4L94p
+	qWIeO0xVNNHbrw6R9DY/0WUsgzjfLpwWPZ+OMeCBMYXh3HwFLHPVVhPGHNtclMKKrAZN
+	hegsiRFNDnKD95l4dKqDPQFhKrcmStkiy1JxcpPR3SbRuVuQgOWe5q5Z+MzhD9dSNYEX
+	oI8MD+LEe4b1zFojE/UNIdRoMRn5zv/yQMGGjJQHSZ4Zt4ABxxNd+9WZfQEk9bCbS1xQ
+	87Y9qWRBbLCCEb3njiQuDdwJUsPuTViJ7BZ6CTXz5DKlmtuq/WL0l9JjQbNS7W3+p+YY
+	lIJA==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-04-25_21-01-44
+X-Received: by 10.15.43.73 with SMTP id w49mr84795054eev.12.1366959985983;
+	Fri, 26 Apr 2013 00:06:25 -0700 (PDT)
+Received: by 10.15.83.67 with HTTP; Fri, 26 Apr 2013 00:06:25 -0700 (PDT)
+Date: Fri, 26 Apr 2013 09:06:25 +0200
+Message-ID: <CA+xJJ18wBM7G=Nt12yMX8KLmTZWS+SnBsXb3F4X1xgq=Y=0y0w@mail.gmail.com>
+From: Mats Liljegren <liljegren.mats2@gmail.com>
+To: linux-omap <linux-omap@vger.kernel.org>, meta-ti <meta-ti@yoctoproject.org>
+Subject: Full nohz on TCI6638k2k (KeyStone II)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,163 +34,20 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Apr 2013 01:11:35 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_54_1638936833.1366938352670"
+X-List-Received-Date: Fri, 26 Apr 2013 07:06:27 -0000
+Content-Type: text/plain; charset=UTF-8
 
-------=_Part_54_1638936833.1366938352670
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+I would like to perform a customer demo running a benchmark
+application in full nohz mode on TCI6638k2k target, which as far as I
+understand it is a KeyStone II architecture.
 
-<html>
-<head>
-<title>
-Status for 04/25/13
-</title>
-</head>
-<body>
+Does anyone know what the best Linux source code is to perform the
+nohz port for this board? It should preferably be Linux 3.9 of any RC
+level, but 3.8 should work as well.
 
-<h2>Status for 04/25/13</h2>
+I also need a hardware timer to be used as an interrupt source for the
+interrupt latency measurements. Any suggestions for framework or
+driver to use?
 
-<h2>BUILD_ID: build-2013-04-25_21-02-49</h2>
+/Mats
 
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.04"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
-
-
-------=_Part_54_1638936833.1366938352670--
