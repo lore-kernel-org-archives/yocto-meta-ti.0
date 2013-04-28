@@ -1,30 +1,29 @@
-Return-Path: <jon.szymaniak@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A663FE00310
-	for <meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 10:51:16 -0700 (PDT)
-Received: by mail-wg0-f43.google.com with SMTP id c11so3171348wgh.22
-	for <meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 10:51:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:sender:from:date:x-google-sender-auth
-	:message-id:subject:to:content-type;
-	bh=2LaDxdSkoodel8cf7U8Qhv28rvl/CV7womlj81BIjnU=;
-	b=ZTkmWHcNySInfMspPz9r5raS/adz1Bp2W9bIN3u5+JevCoU7ArFcuDaNNkwAWBuNJK
-	xa1rhyZ+jvmGrDvo+xiVRCP440zDL9b+b9nZHxXOI3NyQwfHBSMdU+MpEEB01G3zK3OP
-	Dt9IK10s00ZBk70reDN48CM2LbRO0msIyxFi8f9W17gAopBExQFA9+vTogt0FGzL5aBO
-	cgAzB4WtJnZNOV24X0FyBEiLY5cMvrm1wDfMoZRy+qxPMPnRLd1fH0mgzC0ylPpooebt
-	I3n2N8cgRi2/byuXyUMCbbYghYRY5VDKoWxAASoMO+RKOtiti9TsvAagKOZRof03gfwl
-	RrTA==
-X-Received: by 10.194.219.162 with SMTP id pp2mr13204103wjc.27.1367171475449; 
-	Sun, 28 Apr 2013 10:51:15 -0700 (PDT)
+Return-Path: <denys@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6B47E01308
+	for <meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 13:10:54 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3SKArdS027360;
+	Sun, 28 Apr 2013 15:10:53 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3SKAr1k018103;
+	Sun, 28 Apr 2013 15:10:53 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Sun, 28 Apr 2013 15:10:52 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id r3SKAq8o012228;
+	Sun, 28 Apr 2013 15:10:52 -0500
+Date: Sun, 28 Apr 2013 16:10:52 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Jon Szymaniak <jon.szymaniak+gpg@gmail.com>, <sallen@ti.com>
+Message-ID: <20130428201051.GB11072@edge>
+References: <CANge7vXRw==LjwWsXUL_sP1v05BGaGUPbr9K8HG4By6nON7kKw@mail.gmail.com>
 MIME-Version: 1.0
-Sender: jon.szymaniak@gmail.com
-Received: by 10.194.37.233 with HTTP; Sun, 28 Apr 2013 10:50:55 -0700 (PDT)
-From: Jon Szymaniak <jon.szymaniak+gpg@gmail.com>
-Date: Sun, 28 Apr 2013 13:50:55 -0400
-X-Google-Sender-Auth: D5hmfzl5PmS8ErS4TZQwQ10Dl4g
-Message-ID: <CANge7vXRw==LjwWsXUL_sP1v05BGaGUPbr9K8HG4By6nON7kKw@mail.gmail.com>
-To: meta-ti@yoctoproject.org
-Subject: linux-ti-staging fetcher failures
+In-Reply-To: <CANge7vXRw==LjwWsXUL_sP1v05BGaGUPbr9K8HG4By6nON7kKw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: linux-ti-staging fetcher failures
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,41 +36,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Apr 2013 17:51:17 -0000
-Content-Type: multipart/alternative; boundary=001a11c1b9a82430ac04db6f6a21
+X-List-Received-Date: Sun, 28 Apr 2013 20:10:54 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
---001a11c1b9a82430ac04db6f6a21
-Content-Type: text/plain; charset=ISO-8859-1
+On Sun, Apr 28, 2013 at 01:50:55PM -0400, Jon Szymaniak wrote:
+> Hi all,
+> 
+> I just wanted to inquire about the status of git.ti.com, which the
+> linux-ti-staging_3.8.bb recipe clones from.
+> 
+> I've been trying to bring up my am335xevm, and have been constantly getting
+> timeouts from git.ti.com for the last few days.  I've had no luck manually
+> cloning the kernel from this server -- is this not publicly accessible?
 
-Hi all,
+Jon,
 
-I just wanted to inquire about the status of git.ti.com, which the
-linux-ti-staging_3.8.bb recipe clones from.
+Thanks for your inquiry! Unfortunately, I also noticed that git.ti.com was not 
+accessible from outside since at least Friday. I will let our admins know, so 
+they can take a look at the problem. Sorry for the inconvenience.
 
-I've been trying to bring up my am335xevm, and have been constantly getting
-timeouts from git.ti.com for the last few days.  I've had no luck manually
-cloning the kernel from this server -- is this not publicly accessible?
+-- 
+Denys
 
-Any thoughts?
-
-Thanks!
-Jon
-
---001a11c1b9a82430ac04db6f6a21
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><div><div><div></div>Hi all,<br><br></div>I just want=
-ed to inquire about the status of <a href=3D"http://git.ti.com">git.ti.com<=
-/a>, which the <a href=3D"http://linux-ti-staging_3.8.bb">linux-ti-staging_=
-3.8.bb</a> recipe clones from.<br>
-
-<br></div>I&#39;ve been trying to bring up my am335xevm, and have been cons=
-tantly getting timeouts from <a href=3D"http://git.ti.com">git.ti.com</a> f=
-or the last few days.=A0 I&#39;ve had no luck manually cloning the kernel f=
-rom this server -- is this not publicly accessible? <br>
-
-</div><div><div><div><div><br></div><div>Any thoughts?<br></div><div><br>Th=
-anks!<br>Jon<br></div></div></div></div></div>
-
---001a11c1b9a82430ac04db6f6a21--
