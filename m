@@ -1,27 +1,27 @@
 Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A77C5E013C9
-	for <meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 18:33:38 -0700 (PDT)
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1F277E0151C
+	for <meta-ti@yoctoproject.org>; Sat, 27 Apr 2013 18:13:47 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3R1XbCR032165
-	for <meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 20:33:37 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3R1XbbU016880
-	for <meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 20:33:37 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Fri, 26 Apr 2013 20:33:37 -0500
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3S1Dj0Y006054
+	for <meta-ti@yoctoproject.org>; Sat, 27 Apr 2013 20:13:45 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3S1DjNg025093
+	for <meta-ti@yoctoproject.org>; Sat, 27 Apr 2013 20:13:45 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Sat, 27 Apr 2013 20:13:44 -0500
 Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3R1XbMK002300	for
-	<meta-ti@yoctoproject.org>; Fri, 26 Apr 2013 20:33:37 -0500
-Date: Fri, 26 Apr 2013 21:27:55 -0400
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3S1Diqs001238	for
+	<meta-ti@yoctoproject.org>; Sat, 27 Apr 2013 20:13:44 -0500
+Date: Sat, 27 Apr 2013 21:08:01 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1806134287.59.1367026075157.JavaMail.jenkins@puget>
+Message-ID: <1935468953.63.1367111281123.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-04-26_21-01-44
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-04-27_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,25 +34,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Apr 2013 01:33:38 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_58_2052016780.1367026075117"
+X-List-Received-Date: Sun, 28 Apr 2013 01:13:47 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_62_30780719.1367111281122"
 
-------=_Part_58_2052016780.1367026075117
+------=_Part_62_30780719.1367111281122
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 04/26/13
+Status for 04/27/13
 </title>
 </head>
 <body>
 
-<h2>Status for 04/26/13</h2>
+<h2>Status for 04/27/13</h2>
 
-<h2>BUILD_ID: build-2013-04-26_21-02-49</h2>
+<h2>BUILD_ID: build-2013-04-27_21-02-48</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -98,8 +97,8 @@ Status for 04/26/13
     </tr>
     <tr>
         <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
         <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>am37x-evm</td>
@@ -133,7 +132,7 @@ Status for 04/26/13
     </tr>
     <tr>
         <td>beaglebone</td>
-        <td bgcolor=red>FAILED</td>
+        <td bgcolor=lime>PASSED</td>
         <td bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
@@ -193,4 +192,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_58_2052016780.1367026075117--
+------=_Part_62_30780719.1367111281122--
