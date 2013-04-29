@@ -1,35 +1,27 @@
-Return-Path: <jon.szymaniak@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BAA00E01308
-	for <meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 19:10:14 -0700 (PDT)
-Received: by mail-wi0-f180.google.com with SMTP id h11so2278664wiv.7
-	for <meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 19:10:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=x-received:mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	bh=CL3iZ4E3AFemsqXFt53aoqjH5+xJmQ3f82TP4Q5X1Dg=;
-	b=ccB2l20mUgzyz0Ab2K4yn3a9Xwn7y6zK3hLRgRoulf6oQagylgPFVbrBDsAfGXt62G
-	0C2egQMSAPJNxJh2fK+8tgCaP6+iG0iACzgAlhqThCtLUS4yd4i+GSA5k60jGcwhJxhz
-	0dlqsAkdf4BURjxnPqth5a8rgmzxTIEcc9Jayv9DvrT0tEqcJWnZH0qjPSMKw1KPsI78
-	d6BPgBd4QLeCbxqHdioOBR3eVL3EpVZQXHE+gC5TL2UBPRltBaxM/uHoGUn+4/l0Zpzn
-	wiESyuKOqaGQLFFEQJMS2NF4FMDXMro5YiI+hA6BoLm19pSCONpDgVBuFujEWFz8tUSl
-	WrXg==
-X-Received: by 10.194.59.208 with SMTP id b16mr10140551wjr.15.1367201413402;
-	Sun, 28 Apr 2013 19:10:13 -0700 (PDT)
+Return-Path: <denys@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 74785E01308
+	for <meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 19:11:25 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3T2BOPF030119
+	for <meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 21:11:25 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3T2BOwQ030181
+	for <meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 21:11:24 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Sun, 28 Apr 2013 21:11:24 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3T2BOEj008733	for
+	<meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 21:11:24 -0500
+Date: Sun, 28 Apr 2013 22:05:39 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <2118687036.67.1367201139066.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Sender: jon.szymaniak@gmail.com
-Received: by 10.194.37.233 with HTTP; Sun, 28 Apr 2013 19:09:53 -0700 (PDT)
-In-Reply-To: <20130428201051.GB11072@edge>
-References: <CANge7vXRw==LjwWsXUL_sP1v05BGaGUPbr9K8HG4By6nON7kKw@mail.gmail.com>
-	<20130428201051.GB11072@edge>
-From: Jon Szymaniak <jon.szymaniak+gpg@gmail.com>
-Date: Sun, 28 Apr 2013 22:09:53 -0400
-X-Google-Sender-Auth: xc5qB5lgs9oKrxzu-6pWyaAN-VA
-Message-ID: <CANge7vXrkgrcOyn8Sn2wC5qXLOw2FwzVqW9QfOjs-tBLuirkxw@mail.gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: meta-ti@yoctoproject.org, sallen@ti.com
-Subject: Re: linux-ti-staging fetcher failures
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-04-28_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,38 +34,163 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Apr 2013 02:10:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 29 Apr 2013 02:11:25 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_66_1687370753.1367201139065"
 
-On Sun, Apr 28, 2013 at 4:10 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> On Sun, Apr 28, 2013 at 01:50:55PM -0400, Jon Szymaniak wrote:
->> Hi all,
->>
->> I just wanted to inquire about the status of git.ti.com, which the
->> linux-ti-staging_3.8.bb recipe clones from.
->>
->> I've been trying to bring up my am335xevm, and have been constantly getting
->> timeouts from git.ti.com for the last few days.  I've had no luck manually
->> cloning the kernel from this server -- is this not publicly accessible?
->
-> Jon,
->
-> Thanks for your inquiry! Unfortunately, I also noticed that git.ti.com was not
-> accessible from outside since at least Friday. I will let our admins know, so
-> they can take a look at the problem. Sorry for the inconvenience.
->
-> --
-> Denys
+------=_Part_66_1687370753.1367201139065
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Thank you Denys!
+<html>
+<head>
+<title>
+Status for 04/28/13
+</title>
+</head>
+<body>
 
-FWIW, a friend of mine who's a couple miles away and on the same ISP
-is able to clone the kernel and visit the git web front-end.  Nothing
-jumped out at me when comparing our traceroute/tracepath results --
-everything's largely the same. I also see that ICMP seems blocked for
-me, but not for him.
+<h2>Status for 04/28/13</h2>
 
-Strange...let me know if I can provide any useful info.
+<h2>BUILD_ID: build-2013-04-28_21-02-48</h2>
 
-- Jon
+<h2>Clean Build: false</h2>
 
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.04"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_66_1687370753.1367201139065--
