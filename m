@@ -1,29 +1,32 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DE54CE01308
-	for <meta-ti@yoctoproject.org>; Mon, 29 Apr 2013 11:16:37 -0700 (PDT)
+Return-Path: <fcooper@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE856E01308
+	for <meta-ti@yoctoproject.org>; Mon, 29 Apr 2013 11:18:59 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3TIGb9t028994
-	for <meta-ti@yoctoproject.org>; Mon, 29 Apr 2013 13:16:37 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3TIGbYs021227
-	for <meta-ti@yoctoproject.org>; Mon, 29 Apr 2013 13:16:37 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 29 Apr 2013 13:16:36 -0500
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id r3TIGa7b013561;
-	Mon, 29 Apr 2013 13:16:36 -0500
-Date: Mon, 29 Apr 2013 14:16:36 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Franklin S. Cooper Jr" <fcooper@ti.com>
-Message-ID: <20130429181635.GG27211@edge>
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3TIIx1M000343
+	for <meta-ti@yoctoproject.org>; Mon, 29 Apr 2013 13:18:59 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3TIIxNK023207
+	for <meta-ti@yoctoproject.org>; Mon, 29 Apr 2013 13:18:59 -0500
+Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
+	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
+	14.02.0342.003; Mon, 29 Apr 2013 13:18:59 -0500
+From: "Cooper Jr., Franklin" <fcooper@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [meta-ti] [PATCH 2/2] linux-am335x-psp: Correct recipe name typo
+Thread-Index: AQHOROW4oLBhrKkpBkeNjst2wWtE9Jjt1WUA//+sR3A=
+Date: Mon, 29 Apr 2013 18:18:58 +0000
+Message-ID: <8F29D6B095ED194EA1980491A5E029710C439A3B@DFLE08.ent.ti.com>
 References: <1367245658-15077-1-git-send-email-fcooper@ti.com>
 	<1367245658-15077-2-git-send-email-fcooper@ti.com>
+	<20130429181635.GG27211@edge>
+In-Reply-To: <20130429181635.GG27211@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-In-Reply-To: <1367245658-15077-2-git-send-email-fcooper@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [PATCH 2/2] linux-am335x-psp: Correct recipe name typo
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -37,28 +40,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Apr 2013 18:16:38 -0000
+X-List-Received-Date: Mon, 29 Apr 2013 18:19:00 -0000
+Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-NAK.
+What's the issue?
+I can't find 1 kernel recipe where the kernel version is a part of the PN a=
+nd not PV.
 
-On Mon, Apr 29, 2013 at 09:27:38AM -0500, Franklin S. Cooper Jr wrote:
-> Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
-> ---
->  ...x-am335x-psp-3.2.bb => linux-am335x-psp_3.2.bb} |    0
->  1 files changed, 0 insertions(+), 0 deletions(-)
->  rename recipes-kernel/linux/{linux-am335x-psp-3.2.bb => linux-am335x-psp_3.2.bb} (100%)
-> 
-> diff --git a/recipes-kernel/linux/linux-am335x-psp-3.2.bb b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-> similarity index 100%
-> rename from recipes-kernel/linux/linux-am335x-psp-3.2.bb
-> rename to recipes-kernel/linux/linux-am335x-psp_3.2.bb
-> -- 
-> 1.7.0.4
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+> -----Original Message-----
+> From: Dmytriyenko, Denys
+> Sent: Monday, April 29, 2013 1:17 PM
+> To: Cooper Jr., Franklin
+> Cc: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCH 2/2] linux-am335x-psp: Correct recipe name =
+typo
+>=20
+> NAK.
+>=20
+> On Mon, Apr 29, 2013 at 09:27:38AM -0500, Franklin S. Cooper Jr wrote:
+> > Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+> > ---
+> >  ...x-am335x-psp-3.2.bb =3D> linux-am335x-psp_3.2.bb} |    0
+> >  1 files changed, 0 insertions(+), 0 deletions(-)  rename
+> > recipes-kernel/linux/{linux-am335x-psp-3.2.bb =3D>
+> > linux-am335x-psp_3.2.bb} (100%)
+> >
+> > diff --git a/recipes-kernel/linux/linux-am335x-psp-3.2.bb
+> > b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
+> > similarity index 100%
+> > rename from recipes-kernel/linux/linux-am335x-psp-3.2.bb
+> > rename to recipes-kernel/linux/linux-am335x-psp_3.2.bb
+> > --
+> > 1.7.0.4
+> >
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
 
