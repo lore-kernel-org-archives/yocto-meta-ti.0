@@ -1,27 +1,32 @@
-Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 74785E01308
-	for <meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 19:11:25 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r3T2BOPF030119
-	for <meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 21:11:25 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r3T2BOwQ030181
-	for <meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 21:11:24 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Sun, 28 Apr 2013 21:11:24 -0500
-Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r3T2BOEj008733	for
-	<meta-ti@yoctoproject.org>; Sun, 28 Apr 2013 21:11:24 -0500
-Date: Sun, 28 Apr 2013 22:05:39 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <2118687036.67.1367201139066.JavaMail.jenkins@puget>
+Return-Path: <liljegren.mats2@gmail.com>
+Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 27AA3E00310
+	for <meta-ti@yoctoproject.org>; Mon, 29 Apr 2013 00:52:40 -0700 (PDT)
+Received: by mail-ee0-f43.google.com with SMTP id b47so1596072eek.2
+	for <meta-ti@yoctoproject.org>; Mon, 29 Apr 2013 00:52:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:x-received:in-reply-to:references:date:message-id
+	:subject:from:to:cc:content-type;
+	bh=GMvePxrqbNuCHuUzeH/dQSj8nYyFBBuVXz3ctoUGYWk=;
+	b=rGD2S8VW9qGngiQYPDsI5Qs/kRHr9Lu5NVhjUUISL/bRKekf0KBR1qMtm6rQIMRgHa
+	1B8nSeg9BinUfqwm2eJroqPBCTkmwPx2dt4q98/Oq7fzbmv7DE4CKDLs4Ndri6N2JApW
+	q3pnaPRkIH3kNkaOqE5iOy9T8GBWdEJGrN7dJi38RqClrIlz0qaQB81oAgWypQUj/dZm
+	jyBS7V3RhdINM73KbCka85e052SBumxXDUba6l1Rl9Eb9DFePpnk7Y6F5iAvz5+wAFHu
+	zg4qmJP9RewyC3K8Lm/1WKzWSinI+Mv2J6k4l00hyVja5WGI1gh0i1du7bvfJ3e7dCM4
+	bu0g==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-04-28_21-01-44
+X-Received: by 10.14.202.201 with SMTP id d49mr1661925eeo.1.1367221959834;
+	Mon, 29 Apr 2013 00:52:39 -0700 (PDT)
+Received: by 10.15.24.72 with HTTP; Mon, 29 Apr 2013 00:52:39 -0700 (PDT)
+In-Reply-To: <517AA0FE.4080005@ti.com>
+References: <CA+xJJ18wBM7G=Nt12yMX8KLmTZWS+SnBsXb3F4X1xgq=Y=0y0w@mail.gmail.com>
+	<517AA0FE.4080005@ti.com>
+Date: Mon, 29 Apr 2013 09:52:39 +0200
+Message-ID: <CA+xJJ1-bns9yGh1=zgTXn7cNivx9oL4evqN=9HN73kuq_-D3mw@mail.gmail.com>
+From: Mats Liljegren <liljegren.mats2@gmail.com>
+To: William Mills <wmills@ti.com>
+Cc: meta-ti <meta-ti@yoctoproject.org>, linux-omap <linux-omap@vger.kernel.org>
+Subject: Re: Full nohz on TCI6638k2k (KeyStone II)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,163 +39,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Apr 2013 02:11:25 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_66_1687370753.1367201139065"
+X-List-Received-Date: Mon, 29 Apr 2013 07:52:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
-------=_Part_66_1687370753.1367201139065
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+On Fri, Apr 26, 2013 at 5:45 PM, William Mills <wmills@ti.com> wrote:
+> On 04/26/2013 03:06 AM, Mats Liljegren wrote:
+>>
+>> I would like to perform a customer demo running a benchmark
+>> application in full nohz mode on TCI6638k2k target, which as far as I
+>> understand it is a KeyStone II architecture.
+>>
+>> Does anyone know what the best Linux source code is to perform the
+>> nohz port for this board? It should preferably be Linux 3.9 of any RC
+>> level, but 3.8 should work as well.
+>>
+>> I also need a hardware timer to be used as an interrupt source for the
+>> interrupt latency measurements. Any suggestions for framework or
+>> driver to use?
+>>
+>
+> Mats,
+>
+> The team is just now rebasing the bringup work on 3.8.4.  You can find their
+> work here:
+> http://arago-project.org/git/projects/?p=linux-keystone.git;a=shortlog;h=refs/heads/release-server/master
+>
+> (The word "server" ~= 3.8 for this archive)
+>
+> Please note that all the master branches are rebuilt from the feature
+> branches in the nightly build script.  I think the feature branches get
+> rebased also.  The tags of course you can count on.
+>
+> The A15's use the per-core archetecture timer normally.  However the SOC has
+> multiple (20) Timer64 peripherals that can be used as well if they are not
+> being used by the DSPs.  If you configure which timer64 to use w/ device
+> tree you should be fine.
+>
+> Bill
 
-<html>
-<head>
-<title>
-Status for 04/28/13
-</title>
-</head>
-<body>
+Thanks! I'll check it out.
 
-<h2>Status for 04/28/13</h2>
+/Mats
 
-<h2>BUILD_ID: build-2013-04-28_21-02-48</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.04"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
-
-
-------=_Part_66_1687370753.1367201139065--
