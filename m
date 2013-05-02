@@ -1,33 +1,33 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vb0-f47.google.com (mail-vb0-f47.google.com
-	[209.85.212.47])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCC87E014E0
-	for <meta-ti@yoctoproject.org>; Thu,  2 May 2013 06:53:17 -0700 (PDT)
-Received: by mail-vb0-f47.google.com with SMTP id x14so466321vbb.34
-	for <meta-ti@yoctoproject.org>; Thu, 02 May 2013 06:53:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:x-received:in-reply-to:references:date:message-id
-	:subject:from:to:cc:content-type;
-	bh=7gIpjlksOPTQdsKcA3jM9wHfQbiUZyo6uB8C9x88ySo=;
-	b=IfLEKaIaiJxq4f0IRieilS9PQtS6hkpYBD0kuU8+evsPaXAiBQcQHlASn8lnuFhWzZ
-	dQ/NO35Eambpj8cng1gT7PX0b/TuFQquM8/zFs43tS/hEN/l1ZVDDmiLihrdRwc3INdM
-	CXsGSrT/io7iZbOxt0VezvlwYPnUZ4CEPzvKxdgeMxRNsRe+GLLJqHaaofZ/Ea1Mepnx
-	2QY8DHo04jDA77gTu+QblaQ/MB5NwlPOzSR+pZHstngWY71p74A+rDqxZL/BUijE7dYo
-	j+EKCOI7js0/6+vPusqaxyyzAU6aY/siTV/nb2MR8iSXPCXHshwLw9Svc2u3nDIMWWlL
-	fXKQ==
-MIME-Version: 1.0
-X-Received: by 10.52.69.109 with SMTP id d13mr1842490vdu.75.1367502796311;
-	Thu, 02 May 2013 06:53:16 -0700 (PDT)
-Received: by 10.52.139.33 with HTTP; Thu, 2 May 2013 06:53:16 -0700 (PDT)
-In-Reply-To: <1367501964-6294-3-git-send-email-prabu@ti.com>
+Return-Path: <prabu@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17573E014E0
+	for <meta-ti@yoctoproject.org>; Thu,  2 May 2013 07:02:59 -0700 (PDT)
+Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r42E2u6o011155;
+	Thu, 2 May 2013 09:02:57 -0500
+Received: from DBDE73.ent.ti.com (dbde73.ent.ti.com [172.24.171.98])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r42E2r3a030422;
+	Thu, 2 May 2013 09:02:54 -0500
+Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
+	DBDE73.ent.ti.com ([fe80::bc19:dc43:44da:7415%27]) with mapi id
+	14.02.0342.003; Thu, 2 May 2013 22:02:52 +0800
+From: "Sundareson, Prabindh" <prabu@ti.com>
+To: =?utf-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@googlemail.com>
+Thread-Topic: [meta-ti] [PATCH 03/10] libgles-omap3: Remove unsupported core
+	build option ES2.0
+Thread-Index: AQHORzxwj9RSTQ5BFkid8Z6zOxKs4Jjx6wEg
+Date: Thu, 2 May 2013 14:02:52 +0000
+Message-ID: <321768C95D21724485BCE784F1BE98473EB08741@DBDE04.ent.ti.com>
 References: <1367501964-6294-1-git-send-email-prabu@ti.com>
 	<1367501964-6294-3-git-send-email-prabu@ti.com>
-Date: Thu, 2 May 2013 15:53:16 +0200
-Message-ID: <CALbNGRRs=v0_ZGTVvDK3FwkgYGsAXOF1qLK57mAvOERGXea=2g@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: Prabindh Sundareson <prabu@ti.com>
-Cc: meta-ti@yoctoproject.org
+	<CALbNGRRs=v0_ZGTVvDK3FwkgYGsAXOF1qLK57mAvOERGXea=2g@mail.gmail.com>
+In-Reply-To: <CALbNGRRs=v0_ZGTVvDK3FwkgYGsAXOF1qLK57mAvOERGXea=2g@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.24.170.142]
+MIME-Version: 1.0
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [PATCH 03/10] libgles-omap3: Remove unsupported core build option ES2.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -41,13 +41,22 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 May 2013 13:53:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 02 May 2013 14:02:59 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Thu, May 2, 2013 at 3:39 PM, Prabindh Sundareson <prabu@ti.com> wrote:
-> ES2.0 build option for SGX user binaries is deprecated as the
-> corresponding SOC is no longer in production
-Does this mean end of support for this hardware?
-
-Andreas
+VGhpcyByZW1vdmVzIHN1cHBvcnQgaW4gdGhlIHJlY2lwZSBmb3IgdGhlIFNHWCBjb3JlIHJldmlz
+aW9uIDEuMC4zLCB0aGF0IHRoZSBHcmFwaGljcyBTREsgc3RvcHBlZCBzdXBwb3J0aW5nIGFsbW9z
+dCAyIHllYXJzIGJhY2sgKGZyb20gcmVsZWFzZSA0LjA1LjAwLjAxIG9ud2FyZHMpLg0KDQpyZWdh
+cmRzLA0KUHJhYnUNCg0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogQW5kcmVh
+cyBNw7xsbGVyIFttYWlsdG86c2Nobml0emVsdG9ueUBnb29nbGVtYWlsLmNvbV0gDQpTZW50OiBU
+aHVyc2RheSwgTWF5IDAyLCAyMDEzIDc6MjMgUE0NClRvOiBTdW5kYXJlc29uLCBQcmFiaW5kaA0K
+Q2M6IG1ldGEtdGlAeW9jdG9wcm9qZWN0Lm9yZw0KU3ViamVjdDogUmU6IFttZXRhLXRpXSBbUEFU
+Q0ggMDMvMTBdIGxpYmdsZXMtb21hcDM6IFJlbW92ZSB1bnN1cHBvcnRlZCBjb3JlIGJ1aWxkIG9w
+dGlvbiBFUzIuMA0KDQpPbiBUaHUsIE1heSAyLCAyMDEzIGF0IDM6MzkgUE0sIFByYWJpbmRoIFN1
+bmRhcmVzb24gPHByYWJ1QHRpLmNvbT4gd3JvdGU6DQo+IEVTMi4wIGJ1aWxkIG9wdGlvbiBmb3Ig
+U0dYIHVzZXIgYmluYXJpZXMgaXMgZGVwcmVjYXRlZCBhcyB0aGUgDQo+IGNvcnJlc3BvbmRpbmcg
+U09DIGlzIG5vIGxvbmdlciBpbiBwcm9kdWN0aW9uDQpEb2VzIHRoaXMgbWVhbiBlbmQgb2Ygc3Vw
+cG9ydCBmb3IgdGhpcyBoYXJkd2FyZT8NCg0KQW5kcmVhcw0K
 
