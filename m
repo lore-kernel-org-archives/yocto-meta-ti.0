@@ -1,34 +1,33 @@
-Return-Path: <prabu@ti.com>
+Return-Path: <denys@ti.com>
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17573E014E0
-	for <meta-ti@yoctoproject.org>; Thu,  2 May 2013 07:02:59 -0700 (PDT)
-Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r42E2u6o011155;
-	Thu, 2 May 2013 09:02:57 -0500
-Received: from DBDE73.ent.ti.com (dbde73.ent.ti.com [172.24.171.98])
-	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r42E2r3a030422;
-	Thu, 2 May 2013 09:02:54 -0500
-Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
-	DBDE73.ent.ti.com ([fe80::bc19:dc43:44da:7415%27]) with mapi id
-	14.02.0342.003; Thu, 2 May 2013 22:02:52 +0800
-From: "Sundareson, Prabindh" <prabu@ti.com>
-To: =?utf-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@googlemail.com>
-Thread-Topic: [meta-ti] [PATCH 03/10] libgles-omap3: Remove unsupported core
-	build option ES2.0
-Thread-Index: AQHORzxwj9RSTQ5BFkid8Z6zOxKs4Jjx6wEg
-Date: Thu, 2 May 2013 14:02:52 +0000
-Message-ID: <321768C95D21724485BCE784F1BE98473EB08741@DBDE04.ent.ti.com>
-References: <1367501964-6294-1-git-send-email-prabu@ti.com>
-	<1367501964-6294-3-git-send-email-prabu@ti.com>
-	<CALbNGRRs=v0_ZGTVvDK3FwkgYGsAXOF1qLK57mAvOERGXea=2g@mail.gmail.com>
-In-Reply-To: <CALbNGRRs=v0_ZGTVvDK3FwkgYGsAXOF1qLK57mAvOERGXea=2g@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.24.170.142]
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07BBDE014E0
+	for <meta-ti@yoctoproject.org>; Thu,  2 May 2013 12:28:04 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r42JS37m012722;
+	Thu, 2 May 2013 14:28:03 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r42JS3rY025711;
+	Thu, 2 May 2013 14:28:03 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 2 May 2013 14:28:03 -0500
+Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
+	(8.13.8/8.13.8) with ESMTP id r42JS39K014373;
+	Thu, 2 May 2013 14:28:03 -0500
+Date: Thu, 2 May 2013 15:28:02 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Allen, Scott (ITS)" <sallen@ti.com>
+Message-ID: <20130502192802.GC2364@edge>
+References: <CANge7vXRw==LjwWsXUL_sP1v05BGaGUPbr9K8HG4By6nON7kKw@mail.gmail.com>
+	<20130428201051.GB11072@edge>
+	<CANge7vXrkgrcOyn8Sn2wC5qXLOw2FwzVqW9QfOjs-tBLuirkxw@mail.gmail.com>
+	<31331E6D91818F49B78B9920E96E64C704A3B444@DFLE08.ent.ti.com>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 03/10] libgles-omap3: Remove unsupported core build option ES2.0
+In-Reply-To: <31331E6D91818F49B78B9920E96E64C704A3B444@DFLE08.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	Jon Szymaniak <jon.szymaniak+gpg@gmail.com>
+Subject: Re: linux-ti-staging fetcher failures
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,22 +40,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 May 2013 14:02:59 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 02 May 2013 19:28:05 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-VGhpcyByZW1vdmVzIHN1cHBvcnQgaW4gdGhlIHJlY2lwZSBmb3IgdGhlIFNHWCBjb3JlIHJldmlz
-aW9uIDEuMC4zLCB0aGF0IHRoZSBHcmFwaGljcyBTREsgc3RvcHBlZCBzdXBwb3J0aW5nIGFsbW9z
-dCAyIHllYXJzIGJhY2sgKGZyb20gcmVsZWFzZSA0LjA1LjAwLjAxIG9ud2FyZHMpLg0KDQpyZWdh
-cmRzLA0KUHJhYnUNCg0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogQW5kcmVh
-cyBNw7xsbGVyIFttYWlsdG86c2Nobml0emVsdG9ueUBnb29nbGVtYWlsLmNvbV0gDQpTZW50OiBU
-aHVyc2RheSwgTWF5IDAyLCAyMDEzIDc6MjMgUE0NClRvOiBTdW5kYXJlc29uLCBQcmFiaW5kaA0K
-Q2M6IG1ldGEtdGlAeW9jdG9wcm9qZWN0Lm9yZw0KU3ViamVjdDogUmU6IFttZXRhLXRpXSBbUEFU
-Q0ggMDMvMTBdIGxpYmdsZXMtb21hcDM6IFJlbW92ZSB1bnN1cHBvcnRlZCBjb3JlIGJ1aWxkIG9w
-dGlvbiBFUzIuMA0KDQpPbiBUaHUsIE1heSAyLCAyMDEzIGF0IDM6MzkgUE0sIFByYWJpbmRoIFN1
-bmRhcmVzb24gPHByYWJ1QHRpLmNvbT4gd3JvdGU6DQo+IEVTMi4wIGJ1aWxkIG9wdGlvbiBmb3Ig
-U0dYIHVzZXIgYmluYXJpZXMgaXMgZGVwcmVjYXRlZCBhcyB0aGUgDQo+IGNvcnJlc3BvbmRpbmcg
-U09DIGlzIG5vIGxvbmdlciBpbiBwcm9kdWN0aW9uDQpEb2VzIHRoaXMgbWVhbiBlbmQgb2Ygc3Vw
-cG9ydCBmb3IgdGhpcyBoYXJkd2FyZT8NCg0KQW5kcmVhcw0K
+Thanks, Scott!
+
+On Thu, May 02, 2013 at 02:45:09PM -0400, Allen, Scott (ITS) wrote:
+> All, network team has identified a routing issue and made some corrections. 
+> Initial testing indicates this resolved the problem.
+> 
+> Please try/ test again and let me know if the problem continues.
+> 
+> -scott
+> 
+> 
+> -----Original Message-----
+> From: jon.szymaniak@gmail.com [mailto:jon.szymaniak@gmail.com] On Behalf Of Jon Szymaniak
+> Sent: Sunday, April 28, 2013 9:10 PM
+> To: Dmytriyenko, Denys
+> Cc: Allen, Scott (ITS); meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] linux-ti-staging fetcher failures
+> 
+> On Sun, Apr 28, 2013 at 4:10 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+> > On Sun, Apr 28, 2013 at 01:50:55PM -0400, Jon Szymaniak wrote:
+> >> Hi all,
+> >>
+> >> I just wanted to inquire about the status of git.ti.com, which the 
+> >> linux-ti-staging_3.8.bb recipe clones from.
+> >>
+> >> I've been trying to bring up my am335xevm, and have been constantly 
+> >> getting timeouts from git.ti.com for the last few days.  I've had no 
+> >> luck manually cloning the kernel from this server -- is this not publicly accessible?
+> >
+> > Jon,
+> >
+> > Thanks for your inquiry! Unfortunately, I also noticed that git.ti.com 
+> > was not accessible from outside since at least Friday. I will let our 
+> > admins know, so they can take a look at the problem. Sorry for the inconvenience.
+> >
+> > --
+> > Denys
+> 
+> Thank you Denys!
+> 
+> FWIW, a friend of mine who's a couple miles away and on the same ISP is able to clone the kernel and visit the git web front-end.  Nothing jumped out at me when comparing our traceroute/tracepath results -- everything's largely the same. I also see that ICMP seems blocked for me, but not for him.
+> 
+> Strange...let me know if I can provide any useful info.
+> 
+> - Jon
 
