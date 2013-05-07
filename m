@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3314EE01458
-	for <meta-ti@yoctoproject.org>; Tue,  7 May 2013 08:44:53 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57D8BE014A9
+	for <meta-ti@yoctoproject.org>; Tue,  7 May 2013 08:44:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A3E4A52A4A; Tue,  7 May 2013 15:44:52 +0000 (UTC)
+	id 27FD652A4A; Tue,  7 May 2013 15:44:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130507154452.A3E4A52A4A@arago-project.org>
-Date: Tue,  7 May 2013 15:44:52 +0000 (UTC)
+Message-Id: <20130507154456.27FD652A4A@arago-project.org>
+Date: Tue,  7 May 2013 15:44:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : am33x-cm3: Split init script into its own package
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2013 15:44:53 -0000
+X-List-Received-Date: Tue, 07 May 2013 15:44:56 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: dca9b52adc066da860c961fe704094687101d986
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dca9b52adc066da860c961fe704094687101d986
+Branch: danny
+Commit: 2091fb4ea2d570eb1787c3d3f03882edba4952f0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2091fb4ea2d570eb1787c3d3f03882edba4952f0
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Mon May  6 23:26:03 2013 -0500
