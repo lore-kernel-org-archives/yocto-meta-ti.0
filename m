@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B8863E01407
-	for <meta-ti@yoctoproject.org>; Tue,  7 May 2013 08:36:32 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE8B5E01407
+	for <meta-ti@yoctoproject.org>; Tue,  7 May 2013 08:36:33 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3A308529D4; Tue,  7 May 2013 15:36:30 +0000 (UTC)
+	id 9B1B4529D4; Tue,  7 May 2013 15:36:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130507153631.3A308529D4@arago-project.org>
-Date: Tue,  7 May 2013 15:36:30 +0000 (UTC)
+Message-Id: <20130507153633.9B1B4529D4@arago-project.org>
+Date: Tue,  7 May 2013 15:36:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: add package-specifier for RDEPENDS variable
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2013 15:36:32 -0000
+X-List-Received-Date: Tue, 07 May 2013 15:36:34 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 11e989cd264c7730f5661fe758048942537dbcbd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=11e989cd264c7730f5661fe758048942537dbcbd
+Branch: danny
+Commit: 03397a66d819c1fab116e92219fc442c55cabbd6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=03397a66d819c1fab116e92219fc442c55cabbd6
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon May  6 18:45:33 2013 -0400
