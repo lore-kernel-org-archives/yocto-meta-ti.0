@@ -1,27 +1,25 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 271A5E0027C
-	for <meta-ti@yoctoproject.org>; Mon,  6 May 2013 18:10:34 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r471AYd9012300
-	for <meta-ti@yoctoproject.org>; Mon, 6 May 2013 20:10:34 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r471AYVa026798
-	for <meta-ti@yoctoproject.org>; Mon, 6 May 2013 20:10:34 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 6 May 2013 20:10:33 -0500
-Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r471AXDs005166	for
-	<meta-ti@yoctoproject.org>; Mon, 6 May 2013 20:10:34 -0500
-Date: Mon, 6 May 2013 21:04:36 -0400
+Return-Path: <denis@denix.org>
+Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
+	[206.46.173.13])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 49A8BE00496
+	for <meta-ti@yoctoproject.org>; Mon,  6 May 2013 19:28:26 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MME00F3OPIGKW97@vms173013.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 06 May 2013 21:28:07 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2A80520091; Mon,
+	06 May 2013 22:27:51 -0400 (EDT)
+Date: Mon, 06 May 2013 22:27:51 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <41447222.105.1367888676410.JavaMail.jenkins@puget>
-MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-05-06_21-01-44
+To: "Franklin S. Cooper Jr" <fcooper@ti.com>
+Message-id: <20130507022751.GA15692@denix.org>
+References: <1367887887-1806-1-git-send-email-fcooper@ti.com>
+MIME-version: 1.0
+In-reply-to: <1367887887-1806-1-git-send-email-fcooper@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH v2] am33x-cm3: Split init script into its own package
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,163 +32,96 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2013 01:10:35 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_104_817750746.1367888676408"
+X-List-Received-Date: Tue, 07 May 2013 02:28:26 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-------=_Part_104_817750746.1367888676408
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+On Mon, May 06, 2013 at 07:51:27PM -0500, Franklin S. Cooper Jr wrote:
+> * 3.8+ kernels use an init script to load the cm3 firmware.
+> * 3.2 kernel require the cm3 firmware during compile time therefore no init
+>  script is needed.
+> * Separate the init script from the main package and place it in its own
+>   package.
+> ---
+> Changes since v1:
+> Instead of seperating the init script into its own recipe the init script is now
+> seperated into its own package.
+> 
+> Drop the patchset number since the other patch in the set isn't needed.
+> 
+>  recipes-bsp/ti/am33x-cm3_git.bb              |    9 ++++++++-
+>  recipes-kernel/linux/linux-ti-staging_3.8.bb |    4 ++--
+>  2 files changed, 10 insertions(+), 3 deletions(-)
+> 
+> diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
+> index 4829b78..cf20160 100644
+> --- a/recipes-bsp/ti/am33x-cm3_git.bb
+> +++ b/recipes-bsp/ti/am33x-cm3_git.bb
+> @@ -4,7 +4,7 @@ LICENSE = "TI-BSD"
+>  LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
+>  
+>  PV = "04.06.00.10"
+> -PR = "r2"
+> +PR = "r3"
+>  
+>  # SRCREV corresponds to tag "AM335xPSP_04.06.00.10-rc1"
+>  SRCREV = "27ca4643e422245a95723de1df0247a00eada45b"
+> @@ -15,6 +15,10 @@ INITSCRIPT_PARAMS = "defaults 96"
+>  
+>  inherit update-rc.d
+>  
+> +UPDATERCPN = "am33x-load-cm3"
+> +
+> +RDEPENDS_am33x-load-cm3 = "am33x-cm3"
+> +
+>  SRC_URI = "git://arago-project.org/git/projects/am33x-cm3.git;protocol=git;branch=${BRANCH} \
+>             file://init-am33x-cm3 \
+>            "
+> @@ -34,5 +38,8 @@ do_install() {
+>  	install -m 0755 ${WORKDIR}/init-am33x-cm3 ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
+>  }
+>  
+> +PACKAGES =+ "am33x-load-cm3"
 
-<html>
-<head>
-<title>
-Status for 05/06/13
-</title>
-</head>
-<body>
+Any specific reason for that name? I was hoping for ${PN}-init or even 
+${PN}-initscript name... Other than that looks very clean.
 
-<h2>Status for 05/06/13</h2>
-
-<h2>BUILD_ID: build-2013-05-06_21-02-46</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=red>FAILED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.04"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+-- 
+Denys
 
 
-------=_Part_104_817750746.1367888676408--
+> +
+>  FILES_${PN} += "${base_libdir}/firmware"
+>  
+> +FILES_am33x-load-cm3 = "${sysconfdir}/*"
+> diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+> index 6fe52e2..e1cae20 100644
+> --- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
+> +++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+> @@ -11,7 +11,7 @@ require recipes-kernel/linux/setup-defconfig.inc
+>  
+>  # Add a run-time dependency for the PM firmware to be installed
+>  # on the target file system.
+> -RDEPENDS_ti33x += "am33x-cm3"
+> +RDEPENDS_ti33x += "am33x-cm3 am33x-load-cm3"
+>  
+>  # Default is to package all dts files for ti33x devices unless building
+>  # for the specific beaglebone machine.
+> @@ -30,7 +30,7 @@ SRCREV = "23e7f725a6af4ca44660c06bc3569f6ce705d1d0"
+>  PV = "3.8.8"
+>  
+>  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+> -MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
+> +MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+>  
+>  SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+>             file://defconfig \
+> -- 
+> 1.7.0.4
+> 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+> 
+
