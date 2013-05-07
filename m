@@ -1,32 +1,29 @@
 Return-Path: <denys@ti.com>
 Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B2547E0127D
-	for <meta-ti@yoctoproject.org>; Tue,  7 May 2013 15:40:14 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EBB26E0127D
+	for <meta-ti@yoctoproject.org>; Tue,  7 May 2013 15:45:03 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r47MeDir009198
-	for <meta-ti@yoctoproject.org>; Tue, 7 May 2013 17:40:13 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r47MeD0j020936
-	for <meta-ti@yoctoproject.org>; Tue, 7 May 2013 17:40:13 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 7 May 2013 17:40:13 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r47MiwYF009528;
+	Tue, 7 May 2013 17:44:58 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r47MiwjX025634;
+	Tue, 7 May 2013 17:44:58 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 7 May 2013 17:44:58 -0500
 Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id r47MeDj8018318;
-	Tue, 7 May 2013 17:40:13 -0500
-Date: Tue, 7 May 2013 18:40:12 -0400
+	(8.13.8/8.13.8) with ESMTP id r47Miwju019475;
+	Tue, 7 May 2013 17:44:58 -0500
+Date: Tue, 7 May 2013 18:44:58 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: "Karicheri, Muralidharan" <m-karicheri2@ti.com>
-Message-ID: <20130507224012.GJ12982@edge>
-References: <1367961859-6243-1-git-send-email-m-karicheri2@ti.com>
-	<1367961859-6243-2-git-send-email-m-karicheri2@ti.com>
-	<20130507215205.GF12982@edge>
-	<3E54258959B69E4282D79E01AB1F32B7044ED1DE@DFLE11.ent.ti.com>
+To: <maxin.john@enea.com>
+Message-ID: <20130507224458.GK12982@edge>
+References: <1367940866-5055-1-git-send-email-maxin.john@enea.com>
 MIME-Version: 1.0
-In-Reply-To: <3E54258959B69E4282D79E01AB1F32B7044ED1DE@DFLE11.ent.ti.com>
+In-Reply-To: <1367940866-5055-1-git-send-email-maxin.john@enea.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: trini@ti.com, "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [RESEND: PATCH 2/3] keystone2: u-boot: update to add gph support
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] keystone-evm: upgrade kernel to 3.8.4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,118 +36,104 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2013 22:40:14 -0000
+X-List-Received-Date: Tue, 07 May 2013 22:45:04 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Tue, May 07, 2013 at 06:07:10PM -0400, Karicheri, Muralidharan wrote:
-> >> > -COMPATIBLE_MACHINE = "keystone"
-> >> > +COMPATIBLE_MACHINE = "keystone-evm"
-> >> 
-> >> This is also not needed - you are changing recipe compatibility from a broader
-> >> Keystone SOC to a more strict Keystone EVM. Right now it is pretty much the
-> >> same, but in the future there maybe more machines in a Keystone SOC family.
-> >> 
-> 
-> What is the dependency pulled in for keystone? generic tuning for a15 and 
-> similar. What defines "keystone" here so that I better understand the big 
-> picture?
+Maxin,
 
-Here's "keystone" SOC family:
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/conf/machine/include/keystone.inc
-
-It is included by the "keystone-evm" machine:
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/conf/machine/keystone-evm.conf
-
-The point is to group all machines based on the same SOC and be able to 
-address them all with just SOC family name, instead of listing them one by 
-one.
-
-For more real life examples see "ti33x" SOC family used by "am335x-evm" and 
-"beaglebone" machines. Or "omap3" SOC used by "am37x-evm", "am3517-evm" and 
-"beagleboard".
-
-
-> >> > -SRC_URI = "git://arago-project.org/git/projects/u-boot-
-> >> keystone.git;protocol=git;branch=${BRANCH}"
-> >> > +PR = "r3+gitr${SRCPV}"
-> >> > +
-> >> > +# for nightly switch the two below
-> >> > +#SRC_URI = "git://arago-project.org/git/projects/u-boot-
-> >> keystone.git;protocol=git;branch=${BRANCH}"
-> >> > +SRC_URI = "git://gtgit01.gt.design.ti.com/git/projects/u-boot-
-> >> keystone.git;protocol=git;branch=${BRANCH}"
-> >> 
-> >> See below about pointing SRC_URI to an internal git server.
-> >> 
-> >> 
-> >> >  BRANCH = "master"
-> >> >
-> >> > -# DEV.MCSDK-03.00.00.07
-> >> > -SRCREV = "82f40e857d853165310d0753e79235aefb65d7ba"
-> >> 
-> >> Please use the format above - it avoid unnecessary breakages when
-> >> git-ls-remote is not working...
-> 
-> Adding a commit id means every time we push something to master, I need to 
-> go and change this. This is not practical. Better point to the tip for 
-> getting the latest for nightly. What am I missing?
-
-The problem is that meta-ti is public and constantly used by many people 
-outside of TI - every time they parse the recipe, it will hit the server. If 
-you point to arago-project.org, it may bring it down, as we have seen before. 
-If you point it to your internal git server, that is not accessible from 
-outside of TI, it will break parsing for everyone and render meta-ti unusable!
-
-See my next comment for details on how to do it in meta-arago instead.
-
-
-> >> > +# for nightly switch the two below
-> >> > +#SRCREV = "DEV.MCSDK-2013-01.10"
-> >> > +SRCREV = "${AUTOREV}"
-> >> 
-> >> Same as before - please no AUTOREVs in meta-ti.
-> >> 
-> >> If you need to track daily/nightly progress from an internal git server,
-> >> please use a .bbappend in meta-arago, while keeping meta-ti pointing to a
-> >> piblic git server and using a specific commit ID. Let me know if you need
-> >> existing examples - we just released Core TI-SDK 2013.04.00 which used to
-> >> track the latest linux-ti-staging kernel by setting AUTOREV in meta-arago.
-> >> 
-> 
-> I don't know. Please give me an example or help me figure this out.
-
-Use something as simple as below, but for the kernel:
-http://arago-project.org/git/?p=meta-arago.git;a=commitdiff;h=32ec5282fd0248581d57ed2a0d66d4c47c275e8c
-
-
-> >> > +	cd ${DEPLOY_DIR_IMAGE}
-> >> > +	rm -f ${UBOOT_BINARY} ${UBOOT_SYMLINK}
-> >> > +	ln -sf ${UBOOT_IMAGE} ${UBOOT_SYMLINK}
-> >> > +	ln -sf ${UBOOT_IMAGE} ${UBOOT_BINARY}
-> >> > +	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
-> >> > +	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
-> >> > +	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
-> >> > +	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
-> >> > +	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
-> >> > +	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
-> >> > +	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
-> >> > +	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
-> >> > +	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
-> >> > +}
-> >> 
-> >> As we just spoke - let's try to generalize this format and combine it with
-> >> other similar requirements, like SPL-UART etc. There was a thread back in
-> >> February about this...
-> 
-> This is where I have disagreement. Let us restart the discussion. Who are 
-> the stake holders? Discuss it in this thread rather than using an old 
-> thread. I have copied here Carlos. I don't have bandwidth to spend too much 
-> time on this. Let us discuss it and identify what is required to be done.
-
-Sure, let's discuss. I encourage everyone to participate, especially Carlos 
-and Tom.
+Thank you for your contribution! Our developers were also working on the 
+kernel upgrade changes and I was waiting for their recipe patches to be sent 
+to the list. Sorry for any misunderstanding. Hope to see more contributions 
+from you in the future.
 
 -- 
 Denys
+
+
+On Tue, May 07, 2013 at 05:34:26PM +0200, maxin.john@enea.com wrote:
+> From: "Maxin B. John" <maxin.john@enea.com>
+> 
+> Update to latest supported kernel version for TI keystone-evm.
+> 
+> Signed-off-by: Maxin B. John <maxin.john@enea.com>
+> ---
+>  conf/machine/include/keystone.inc                               |    2 +-
+>  .../{linux-keystone-3.6.6 => linux-keystone-3.8.4}/defconfig    |    7 +++++++
+>  .../linux/{linux-keystone_3.6.6.bb => linux-keystone_3.8.4.bb}  |    2 +-
+>  3 files changed, 9 insertions(+), 2 deletions(-)
+>  rename recipes-kernel/linux/{linux-keystone-3.6.6 => linux-keystone-3.8.4}/defconfig (96%)
+>  rename recipes-kernel/linux/{linux-keystone_3.6.6.bb => linux-keystone_3.8.4.bb} (90%)
+> 
+> diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+> index 72e71bf..e14c26c 100644
+> --- a/conf/machine/include/keystone.inc
+> +++ b/conf/machine/include/keystone.inc
+> @@ -8,7 +8,7 @@ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-keystone"
+>  PREFERRED_PROVIDER_u-boot = "u-boot-keystone"
+>  
+>  # Increase this everytime you change something in the kernel
+> -MACHINE_KERNEL_PR = "r6"
+> +MACHINE_KERNEL_PR = "r7"
+>  
+>  KERNEL_IMAGETYPE = "uImage"
+>  
+> diff --git a/recipes-kernel/linux/linux-keystone-3.6.6/defconfig b/recipes-kernel/linux/linux-keystone-3.8.4/defconfig
+> similarity index 96%
+> rename from recipes-kernel/linux/linux-keystone-3.6.6/defconfig
+> rename to recipes-kernel/linux/linux-keystone-3.8.4/defconfig
+> index d326a41..d2939ef 100644
+> --- a/recipes-kernel/linux/linux-keystone-3.6.6/defconfig
+> +++ b/recipes-kernel/linux/linux-keystone-3.8.4/defconfig
+> @@ -20,6 +20,10 @@ CONFIG_MODULE_UNLOAD=y
+>  CONFIG_MODULE_FORCE_UNLOAD=y
+>  CONFIG_MODVERSIONS=y
+>  CONFIG_ARCH_KEYSTONE=y
+> +CONFIG_ARM_LPAE=y
+> +CONFIG_PCI=y
+> +CONFIG_TI_KEYSTONE_PCIE=y
+> +CONFIG_PCI_REALLOC_ENABLE_AUTO=y
+>  CONFIG_SMP=y
+>  CONFIG_ARM_ARCH_TIMER=y
+>  CONFIG_PREEMPT__LL=y
+> @@ -108,6 +112,8 @@ CONFIG_IP6_NF_IPTABLES=m
+>  CONFIG_IP_SCTP=y
+>  CONFIG_VLAN_8021Q=y
+>  CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
+> +CONFIG_DEVTMPFS=y
+> +CONFIG_DEVTMPFS_MOUNT=y
+>  CONFIG_CMA=y
+>  CONFIG_MTD=y
+>  CONFIG_MTD_TESTS=m
+> @@ -153,6 +159,7 @@ CONFIG_USB_GADGET=y
+>  CONFIG_DMADEVICES=y
+>  CONFIG_UIO=y
+>  CONFIG_UIO_PDRV=y
+> +CONFIG_VIRTIO_KEYSTONE=y
+>  CONFIG_COMMON_CLK_DEBUG=y
+>  CONFIG_REMOTEPROC_USER=y
+>  CONFIG_MEMORY=y
+> diff --git a/recipes-kernel/linux/linux-keystone_3.6.6.bb b/recipes-kernel/linux/linux-keystone_3.8.4.bb
+> similarity index 90%
+> rename from recipes-kernel/linux/linux-keystone_3.6.6.bb
+> rename to recipes-kernel/linux/linux-keystone_3.8.4.bb
+> index 4dd5d15..31138c1 100644
+> --- a/recipes-kernel/linux/linux-keystone_3.6.6.bb
+> +++ b/recipes-kernel/linux/linux-keystone_3.8.4.bb
+> @@ -7,7 +7,7 @@ MACHINE_KERNEL_PR_append = "a"
+>  CORTEXA8FIXUP = "no"
+>  
+>  # The tree tends to rebase, use literal stable tags
+> -SRCREV = "DEV.MCSDK-03.06.06.07"
+> +SRCREV = "DEV.MCSDK-03.08.04.10"
+>  
+>  SRC_URI = "git://arago-project.org/git/projects/linux-keystone.git;protocol=git \
+>             file://defconfig \
+> -- 
+> 1.7.10.4
+> 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
