@@ -1,15 +1,22 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57D8BE014A9
-	for <meta-ti@yoctoproject.org>; Tue,  7 May 2013 08:44:56 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 27FD652A4A; Tue,  7 May 2013 15:44:56 +0000 (UTC)
+Return-Path: <denis@denix.org>
+Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
+	[206.46.173.13])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 32C4EE0149A
+	for <meta-ti@yoctoproject.org>; Tue,  7 May 2013 09:02:16 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MMF008WNR6IL9M1@vms173013.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 07 May 2013 11:01:45 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 4791520088; Tue,
+	07 May 2013 12:01:30 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20130507154456.27FD652A4A@arago-project.org>
-Date: Tue,  7 May 2013 15:44:56 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : am33x-cm3: Split init script into its own package
+Date: Tue, 07 May 2013 12:01:27 -0400
+Message-id: <1367942487-22136-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.2.1
+Subject: [PATCH] am-sysinfo: remove an old outdated svn version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,87 +29,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2013 15:44:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 07 May 2013 16:02:16 -0000
 
-Module: meta-ti
-Branch: danny
-Commit: 2091fb4ea2d570eb1787c3d3f03882edba4952f0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2091fb4ea2d570eb1787c3d3f03882edba4952f0
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Mon May  6 23:26:03 2013 -0500
-
-am33x-cm3: Split init script into its own package
-
-* 3.8+ kernels use an init script to load the cm3 firmware.
-* 3.2 kernel require the cm3 firmware during compile time therefore no init
-  script is needed.
-* Separate the init script from the main package and place it in its own
-  package.
+The recipe has been moved to meta-arago-extras long time ago. Moreover, SCM has
+changed from svn to git, so this recipe is quite outdated.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/ti/am-sysinfo_svn.bb | 23 -----------------------
+ 1 file changed, 23 deletions(-)
+ delete mode 100644 recipes-bsp/ti/am-sysinfo_svn.bb
 
- recipes-bsp/ti/am33x-cm3_git.bb              |    9 ++++++++-
- recipes-kernel/linux/linux-ti-staging_3.8.bb |    4 ++--
- 2 files changed, 10 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
-index 4829b78..3549fcd 100644
---- a/recipes-bsp/ti/am33x-cm3_git.bb
-+++ b/recipes-bsp/ti/am33x-cm3_git.bb
-@@ -4,7 +4,7 @@ LICENSE = "TI-BSD"
- LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
- 
- PV = "04.06.00.10"
--PR = "r2"
-+PR = "r3"
- 
- # SRCREV corresponds to tag "AM335xPSP_04.06.00.10-rc1"
- SRCREV = "27ca4643e422245a95723de1df0247a00eada45b"
-@@ -15,6 +15,10 @@ INITSCRIPT_PARAMS = "defaults 96"
- 
- inherit update-rc.d
- 
-+UPDATERCPN = "${PN}-initscript"
-+
-+RDEPENDS_${PN}-initscript = "am33x-cm3"
-+
- SRC_URI = "git://arago-project.org/git/projects/am33x-cm3.git;protocol=git;branch=${BRANCH} \
-            file://init-am33x-cm3 \
-           "
-@@ -34,5 +38,8 @@ do_install() {
- 	install -m 0755 ${WORKDIR}/init-am33x-cm3 ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
- }
- 
-+PACKAGES =+ "${PN}-initscript"
-+
- FILES_${PN} += "${base_libdir}/firmware"
- 
-+FILES_${PN}-initscript = "${sysconfdir}/*"
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-index 6e64fc5..4b93932 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-@@ -11,7 +11,7 @@ require recipes-kernel/linux/setup-defconfig.inc
- 
- # Add a run-time dependency for the PM firmware to be installed
- # on the target file system.
--RDEPENDS_kernel-base_ti33x += "am33x-cm3"
-+RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
- 
- # Default is to package all dts files for ti33x devices unless building
- # for the specific beaglebone machine.
-@@ -30,7 +30,7 @@ SRCREV = "23e7f725a6af4ca44660c06bc3569f6ce705d1d0"
- PV = "3.8.8"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
+diff --git a/recipes-bsp/ti/am-sysinfo_svn.bb b/recipes-bsp/ti/am-sysinfo_svn.bb
+deleted file mode 100644
+index b73a884..0000000
+--- a/recipes-bsp/ti/am-sysinfo_svn.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-DESCRIPTION = "AM SysInfo"
+-HOMEPAGE = "https://gforge.ti.com/gf/project/am_sysinfo/"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://mem_util/mem_util.c;beginline=1;endline=37;md5=8aa8e714ab729cfe8177298af8a5a25d"
+-
+-SECTION = "system"
+-
+-SRCREV = "5"
+-PV = "1.0"
+-PR = "r1+svnr${SRCPV}"
+-
+-SRC_URI = "svn://gforge.ti.com/svn/am_sysinfo/;module=trunk;protocol=https;user=anonymous;pswd=''"
+-
+-S = "${WORKDIR}/trunk"
+-
+-do_compile() {
+-	${CC} ${CFLAGS} ${LDFLAGS} -o mem_util/mem_util mem_util/mem_util.c
+-}
+-
+-do_install() {
+-	install -d ${D}/${bindir}
+-	install -m 0755 ${S}/mem_util/mem_util ${D}/${bindir}
+-}
+-- 
+1.8.2.1
 
 
