@@ -1,35 +1,23 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B2A1CE0127D
-	for <meta-ti@yoctoproject.org>; Tue,  7 May 2013 16:06:37 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r47N6brq011466
-	for <meta-ti@yoctoproject.org>; Tue, 7 May 2013 18:06:37 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r47N6b2D017936
-	for <meta-ti@yoctoproject.org>; Tue, 7 May 2013 18:06:37 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 7 May 2013 18:06:35 -0500
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id r47N6Zdw026006;
-	Tue, 7 May 2013 18:06:35 -0500
-Date: Tue, 7 May 2013 19:06:34 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Karicheri, Muralidharan" <m-karicheri2@ti.com>
-Message-ID: <20130507230634.GL12982@edge>
-References: <1367961859-6243-1-git-send-email-m-karicheri2@ti.com>
-	<1367961859-6243-2-git-send-email-m-karicheri2@ti.com>
-	<20130507215205.GF12982@edge>
-	<3E54258959B69E4282D79E01AB1F32B7044ED1DE@DFLE11.ent.ti.com>
-	<20130507224012.GJ12982@edge>
-	<3E54258959B69E4282D79E01AB1F32B7044ED22D@DFLE11.ent.ti.com>
+Return-Path: <Maxin.John@enea.com>
+Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
+	by yocto-www.yoctoproject.org (Postfix) with SMTP id 47F2CE01466
+	for <meta-ti@yoctoproject.org>; Wed,  8 May 2013 01:27:50 -0700 (PDT)
+Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
+	(172.21.1.209) with Microsoft SMTP Server id 14.2.318.1; Wed, 8 May 2013
+	10:27:39 +0200
+Received: by sestofb10.enea.se (Postfix, from userid 4454)	id 8FA43288CEC;
+	Wed,  8 May 2013 10:27:43 +0200 (CEST)
+Date: Wed, 8 May 2013 10:27:43 +0200
+From: "Maxin B. John" <maxin.john@enea.com>
+To: <m-karicheri2@ti.com>
+Message-ID: <20130508082743.GA36018@sestofb10.enea.se>
 MIME-Version: 1.0
-In-Reply-To: <3E54258959B69E4282D79E01AB1F32B7044ED22D@DFLE11.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "Rini, Tom" <trini@ti.com>,
-	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [RESEND: PATCH 2/3] keystone2: u-boot: update to add gph support
+In-Reply-To: <1367961859-6243-1-git-send-email-m-karicheri2@ti.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Received-SPF: None (SESTOEX03.enea.se: maxin.john@enea.com does not
+	designate permitted sender hosts)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [RESEND: PATCH 1/3] keystone2: boot-monitor: update to pull code from tip of the master
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,84 +30,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 May 2013 23:06:37 -0000
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 08 May 2013 08:27:50 -0000
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 07, 2013 at 06:51:00PM -0400, Karicheri, Muralidharan wrote:
-> >> > >> See below about pointing SRC_URI to an internal git server.
-> >> > >>
-> >> > >>
-> >> > >> >  BRANCH = "master"
-> >> > >> >
-> >> > >> > -# DEV.MCSDK-03.00.00.07
-> >> > >> > -SRCREV = "82f40e857d853165310d0753e79235aefb65d7ba"
-> >> > >>
-> >> > >> Please use the format above - it avoid unnecessary breakages when
-> >> > >> git-ls-remote is not working...
-> >> >
-> >> > Adding a commit id means every time we push something to master, I
-> >> > need to go and change this. This is not practical. Better point to the
-> >> > tip for getting the latest for nightly. What am I missing?
-> >> 
-> >> The problem is that meta-ti is public and constantly used by many people outside of TI -
-> >> every time they parse the recipe, it will hit the server. If you point to arago-project.org, it
-> >> may bring it down, as we have seen before.
-> >> If you point it to your internal git server, that is not accessible from outside of TI, it will
-> >> break parsing for everyone and render meta-ti unusable!
-> >> 
-> >> See my next comment for details on how to do it in meta-arago instead.
-> >> 
-> >> 
-> >> > >> > +# for nightly switch the two below #SRCREV =
-> >> > >> > +"DEV.MCSDK-2013-01.10"
-> >> > >> > +SRCREV = "${AUTOREV}"
-> >> > >>
-> >> > >> Same as before - please no AUTOREVs in meta-ti.
-> >> > >>
-> >> > >> If you need to track daily/nightly progress from an internal git
-> >> > >> server, please use a .bbappend in meta-arago, while keeping meta-ti
-> >> > >> pointing to a piblic git server and using a specific commit ID. Let
-> >> > >> me know if you need existing examples - we just released Core
-> >> > >> TI-SDK 2013.04.00 which used to track the latest linux-ti-staging kernel by setting
-> >> AUTOREV in meta-arago.
-> >> > >>
-> >> >
-> >> > I don't know. Please give me an example or help me figure this out.
-> >> 
-> >> Use something as simple as below, but for the kernel:
-> >> http://arago-project.org/git/?p=meta-
-> >> arago.git;a=commitdiff;h=32ec5282fd0248581d57ed2a0d66d4c47c275e8c
-> 
-> Hao,
-> 
-> Can you make an update for this in meta-arago so that our nightly points to 
-> tip of the master or whatever branch?
-> 
-> Denys,
-> 
-> So for each of the repos, do we have to use a xxx.bbappend, where xxx is 
-> u-boot, boot-monitor and linux-keystone? So I assume the build still uses 
-> the meta-ti version of the recipe, but override the SRCREV with whatever set 
-> in xxx.bbappend?
+Hi,
 
-Murali,
+On Tue, May 07, 2013 at 05:24:17PM -0400, Murali Karicheri wrote:
+ > This patch is needed to switch between release tag (when doing release
+ > build) and tip of the master (when building nightly)
+ >=B7
+ > Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+ > ---
+ >  recipes-bsp/boot-monitor/boot-monitor_git.bb |    6 ++++--
+ >  1 file changed, 4 insertions(+), 2 deletions(-)
+ >=B7
+ > diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/=
+boot-monitor/boot-monitor_git.bb
+ > index c8a022a..a892720 100644
+ > --- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
+ > +++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+ > @@ -11,7 +11,8 @@ LIC_FILES_CHKSUM =3D"file://COPYING;md5=3D25fe219a6feb=
+f6e5bb45beda1b2eb315"
+ >=B7=B7
+ >  COMPATIBLE_MACHINE =3D "keystone-evm"
+ >=B7=B7
+ > -SRC_URI =3D "git://arago-project.org/git/projects/boot-monitor.git;prot=
+ocol=3Dgit;branch=3D${BRANCH}"
+ > +#SRC_URI =3D"git://arago-project.org/git/projects/boot-monitor.git;prot=
+ocol=3Dgit;branch=3D${BRANCH}"
+ > +SRC_URI =3D"git://gtgit01.gt.design.ti.com/git/projects/boot-monitor.gi=
+t;protocol=3Dgit;branch=3D${BRANCH}"
 
-Correct, .bbappend is the way to "append" changes to the original recipe w/o 
-modifying it.
+While attempting to clone this repo,  "git clone git://gtgit01.gt.design.ti=
+.com/git/projects/boot-monitor.git",
+I get the following error message:=20
 
-I don't know what you mean by "each of the repos", but yes, you would need to 
-place a .bbappend in meta-arago-distro for every component you develop 
-actively and for which you don't want to constantly update the recipe with the 
-new SRCREV (or BRANCH or SRC_URI etc.)
+cloning into 'boot-monitor'...
+fatal: unable to connect to gtgit01.gt.design.ti.com:
+gtgit01.gt.design.ti.com: Name or service not known
 
-By keeping meta-ti pointing to a public git tree with a specific SRCREV 
-pointing preferably to a release tag or a stable commit ID you are making sure 
-that it works for everybody. It is an official TI BSP and is distribution 
-agnostic and should be parseable and buildable by anyone out there. On the 
-other hand, meta-arago-distro is our own TI distribution and you have more 
-freedom there.
+Do this access problem has something to do with my local firewall
+settings or somebody else also face the same problem ?=20
 
--- 
-Denys
+Best Regards,
+Maxin
 
