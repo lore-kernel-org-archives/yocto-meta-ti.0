@@ -1,36 +1,32 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7F6DE0147D
-	for <meta-ti@yoctoproject.org>; Wed,  8 May 2013 05:42:29 -0700 (PDT)
+Return-Path: <chase.maupin@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 666BFE01493
+	for <meta-ti@yoctoproject.org>; Wed,  8 May 2013 06:18:21 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r48CgOZE004869;
-	Wed, 8 May 2013 07:42:24 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r48CgOAK005116;
-	Wed, 8 May 2013 07:42:24 -0500
-Received: from DLEE74.ent.ti.com (157.170.170.8) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server (TLS) id 14.2.342.3;
-	Wed, 8 May 2013 07:42:23 -0500
-Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
-	DLEE74.ent.ti.com ([fe80::a0f1:125b:e7e3:7ed8%18]) with mapi id
-	14.01.0323.003; Wed, 8 May 2013 07:42:23 -0500
-From: "Dmytriyenko, Denys" <denys@ti.com>
-To: "Karicheri, Muralidharan" <m-karicheri2@ti.com>, "maxin.john@enea.com"
-	<maxin.john@enea.com>
-Thread-Topic: [meta-ti] [RESEND: PATCH 1/3] keystone2: boot-monitor: update
-	to pull code from tip of the master
-Thread-Index: AQHOS8X7NAhrLswZLk2I2ohunZx3zpj7O21h
-Date: Wed, 8 May 2013 12:42:23 +0000
-Message-ID: <B0581B5571079145BA1CD78C126DBDE72E7D9A75@DLEE08.ent.ti.com>
-References: <1367961859-6243-1-git-send-email-m-karicheri2@ti.com>,
-	<20130508082743.GA36018@sestofb10.enea.se>
-In-Reply-To: <20130508082743.GA36018@sestofb10.enea.se>
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r48DIKMs022869
+	for <meta-ti@yoctoproject.org>; Wed, 8 May 2013 08:18:20 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r48DIKge016226
+	for <meta-ti@yoctoproject.org>; Wed, 8 May 2013 08:18:20 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
+	14.02.0342.003; Wed, 8 May 2013 08:18:20 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "Sundareson, Prabindh" <prabu@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH 01/10] libgles-omap3: Remove X11 related
+	build and	packaging
+Thread-Index: AQHORzrcEo+bQa9Qika/FgSwN3ZzGJj7TbqA
+Date: Wed, 8 May 2013 13:18:19 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED10159546F17@DLEE11.ent.ti.com>
+References: <1367501964-6294-1-git-send-email-prabu@ti.com>
+In-Reply-To: <1367501964-6294-1-git-send-email-prabu@ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [RESEND: PATCH 1/3] keystone2: boot-monitor: update to pull code from tip of the master
+Subject: Re: [PATCH 01/10] libgles-omap3: Remove X11 related build and	packaging
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,160 +39,562 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 May 2013 12:42:29 -0000
+X-List-Received-Date: Wed, 08 May 2013 13:18:21 -0000
 Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_B0581B5571079145BA1CD78C126DBDE72E7D9A75DLEE08entticom_"
-
---_000_B0581B5571079145BA1CD78C126DBDE72E7D9A75DLEE08entticom_
-Content-Type: text/plain; charset="iso-8859-1"
+Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-No
+Prabu,
 
+Overall nice job.  A couple of things I noticed.
 
-Denys
+1. You removed the sample.desktop file but did not put it back in a later r=
+ecipe.
+2. You modified the common .inc file and then added the X11 pieces back for=
+ 4.09.00.01.  This would break people using the older recipes though.  So w=
+ould it perhaps be a good idea to leave the .inc alone and then create a ne=
+w include file for newer recipe that do this split going forward?  Or would=
+ it be simpler to provide the X11 package for the older versions as well?  =
+This is just a thought and I'm hoping others will chime in here.
 
+Thanks for the patches, it is really good to see this work being done :)
 
------Original Message-----
-From: Maxin B. John [maxin.john@enea.com]
-Received: Wednesday, 08 May 2013, 4:28
-To: Karicheri, Muralidharan [m-karicheri2@ti.com]
-CC: meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]
-Subject: Re: [meta-ti] [RESEND: PATCH 1/3] keystone2: boot-monitor: update =
-to pull code from tip of the master
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Sundareson, Prabindh
+> Sent: Thursday, May 02, 2013 8:39 AM
+> To: meta-ti@yoctoproject.org
+> Subject: [meta-ti] [PATCH 01/10] libgles-omap3: Remove X11
+> related build and packaging
+>=20
+> The SGX530 driver for X11 is only buildable and testable
+> standalone
+> with the pre-built X11 package provided with the Graphics SDK.
+> This patch removes X11 build from the default recipe, to enable
+> moving X11 build to a separate recipe.
+>=20
+> This is part of a clean up of the Graphics recipe starting from
+> 4.09.00.01 version of the Graphics SDK.
+>=20
+> Signed-off-by: Prabindh Sundareson <prabu@ti.com>
+> ---
+>  recipes-graphics/libgles/libgles-omap3.inc         |  168 ++++--
+> --------------
+>  .../libgles/libgles-omap3_4.09.00.01.bb            |   43 +-----
+>  2 files changed, 30 insertions(+), 181 deletions(-)
+>=20
+> diff --git a/recipes-graphics/libgles/libgles-omap3.inc
+> b/recipes-graphics/libgles/libgles-omap3.inc
+> index 9a90c56..130dc49 100644
+> --- a/recipes-graphics/libgles/libgles-omap3.inc
+> +++ b/recipes-graphics/libgles/libgles-omap3.inc
+> @@ -7,10 +7,6 @@ PR =3D "r35"
+>=20
+>  COMPATIBLE_MACHINE =3D "(omap3|ti814x|ti816x|ti33x)"
+>=20
+> -X11DEPENDS =3D "virtual/libx11 libxau libxdmcp libdrm"
+> -DEPENDS =3D "${@base_contains('DISTRO_FEATURES', 'x11',
+> '${X11DEPENDS}', '', d)}"
+> -
+> -export SUPPORT_XORG ?=3D "${@base_contains('DISTRO_FEATURES',
+> 'x11', '1', '0', d)}"
+>  PVR_INIT ?=3D "pvrsrvinit"
+>=20
+>  PROVIDES +=3D "virtual/egl virtual/libgles1 virtual/libgles2"
+> @@ -22,7 +18,6 @@ RREPLACES_${PN}-dbg =3D "libegl-dbg"
+>  SRC_URI =3D "http://software-
+> dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV
+> }/exports/${BINFILE} \
+>  		   file://cputype \
+>  		   file://rc.pvr \
+> -		   file://sample.desktop \
+>  		   file://99-bufferclass.rules  \
+>  "
+>=20
+> @@ -79,87 +74,53 @@ do_compile() {
+>  	export PLAT_CPP=3D"${CXX}"
+>  	export PLAR_AR=3D"${AR}"
+>=20
+> -	if [ ${SUPPORT_XORG} -eq 1 ] ; then
+> -		export X11ROOT=3D"${STAGING_DIR_HOST}/usr"
+> -		mkdir -p ${S}/demos/x11
+> -		mkdir -p ${S}/trainingcourses/x11
+> -	fi
+> -
+>  	mkdir -p ${S}/demos/raw
+>  	mkdir -p ${S}/trainingcourses/raw
+>=20
+>  	# Rebuild demos
+> -	for X11BUILD in 0 1 ; do
+> -		# Don't rebuild demos with X11 support for a non X11
+> distro
+> -		if [ ${SUPPORT_XORG} -eq 0 -a $X11BUILD -eq 1 ] ;
+> then
+> -			continue
+> -		fi
+> +	for demo in ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Demos/* ;
+> do
+> +		cd $demo/OGLES/Build/LinuxGeneric
+> +		oe_runmake Common=3D1 PLATFORM=3D${PLATFORM} X11BUILD=3D0
+> +		rm $demo/OGLES/Build/${PLATFORM}/Release*/*.o
+> +
+> +		install -m 0755
+> $demo/OGLES/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
+> +	done
+> +
+> +	for demo in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Demos/* ;
+> do
+> +		cd $demo/OGLES2/Build/LinuxGeneric
+> +		oe_runmake Common=3D1 PLATFORM=3D${PLATFORM} X11BUILD=3D0
+> +		rm -f $demo/OGLES2/Build/${PLATFORM}/Release*/*.o
+>=20
+> -		for demo in
+> ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Demos/* ; do
+> -			cd $demo/OGLES/Build/LinuxGeneric
+> -			oe_runmake Common=3D1 PLATFORM=3D${PLATFORM}
+> X11BUILD=3D$X11BUILD
+> -			rm $demo/OGLES/Build/${PLATFORM}/Release*/*.o
+> -
+> -			if [ $X11BUILD -eq 1 ] ; then
+> -				install -m 0755
+> $demo/OGLES/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 || true
+> -				sed -e s:NAME:$(basename $demo): \
+> -				    -e
+> s:EXEC:${bindir}/SGX/demos/X11/$(basename
+> $demo/OGLES/Build/${PLATFORM}/ReleaseX11/*): \
+> -				    ${WORKDIR}/sample.desktop >
+> ${WORKDIR}/$(basename $demo).desktop
+> -			else
+> -				install -m 0755
+> $demo/OGLES/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw || true
+> -			fi
+> -		done
+> -
+> -		for demo in
+> ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Demos/* ; do
+> -			cd $demo/OGLES2/Build/LinuxGeneric
+> -			oe_runmake Common=3D1 PLATFORM=3D${PLATFORM}
+> X11BUILD=3D$X11BUILD
+> -			rm -f
+> $demo/OGLES2/Build/${PLATFORM}/Release*/*.o
+> -
+> -			if [ $X11BUILD -eq 1 ] ; then
+> -				install -m 0755
+> $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/* ${S}/demos/x11 ||
+> true
+> -				sed -e s:NAME:$(basename $demo): \
+> -				    -e
+> s:EXEC:${bindir}/SGX/demos/X11/$(basename
+> $demo/OGLES2/Build/${PLATFORM}/ReleaseX11/*): \
+> -				    ${WORKDIR}/sample.desktop >
+> ${WORKDIR}/$(basename $demo).desktop
+> -			else
+> -				install -m 0755
+> $demo/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw ||
+> true
+> -			fi
+> -		done
+> +		install -m 0755
+> $demo/OGLES2/Build/${PLATFORM}/ReleaseRaw/* ${S}/demos/raw ||
+> true
+>  	done
+>=20
+>  	find ${S} -name "*_org" -delete
+>=20
+>  	# Build OGLES2 Trainingcourses
+> -	for X11BUILD in 0 1 ; do
+> -		# Don't rebuild training courses with X11 support for
+> a non X11 distro
+> -		if [ ${SUPPORT_XORG} -eq 0 -a $X11BUILD -eq 1 ] ;
+> then
+> -			continue
+> +	for training in
+> ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/TrainingCourse/* ; do
+> +		if [ -e $training/OGLES2/Build/LinuxGeneric/Makefile
+> ] ; then
+> +			cd $training/OGLES2/Build/LinuxGeneric
+>  		fi
+>=20
+> -		for training in
+> ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/TrainingCourse/* ; do
+> -			if [ -e
+> $training/OGLES2/Build/LinuxGeneric/Makefile ] ; then
+> -				cd $training/OGLES2/Build/LinuxGeneric
+> -			fi
+> -
+> -			if [ -e
+> $training/OGLES2/Build/${PLATFORM}/Makefile ] ; then
+> -				cd $training/OGLES2/Build/${PLATFORM}
+> -			fi
+> +		if [ -e $training/OGLES2/Build/${PLATFORM}/Makefile ]
+> ; then
+> +			cd $training/OGLES2/Build/${PLATFORM}
+> +		fi
+>=20
+> -			oe_runmake Common=3D1 PLATFORM=3D${PLATFORM}
+> X11BUILD=3D$X11BUILD
+> -			rm -f
+> $training/OGLES2/Build/${PLATFORM}/Release*/*.o
+> +		oe_runmake Common=3D1 PLATFORM=3D${PLATFORM} X11BUILD=3D0
+> +		rm -f $training/OGLES2/Build/${PLATFORM}/Release*/*.o
+>=20
+> -			if [ $X11BUILD -eq 1 ] ; then
+> -				install -m 0755
+> $training/OGLES2/Build/${PLATFORM}/ReleaseX11/*
+> ${S}/trainingcourses/x11 || true
+> -			else
+> -				install -m 0755
+> $training/OGLES2/Build/${PLATFORM}/ReleaseRaw/*
+> ${S}/trainingcourses/raw || true
+> -			fi
+> -		done
+> +		install -m 0755
+> $training/OGLES2/Build/${PLATFORM}/ReleaseRaw/*
+> ${S}/trainingcourses/raw || true
+>  	done
+>=20
+> +
+>  }
+>=20
+>  do_install () {
+>  	install -d ${D}${libdir}
+>  	cp -pPR ${BINLOCATION}/*.so* ${D}${libdir}
+> + 	rm ${D}${libdir}/libpvrPVR2D_DRIWSEGL.so*
+> + 	rm ${D}${libdir}/libsrv_um_dri.so*
+> + 	rm ${D}${libdir}/pvr_drv.so*
+>  	install -m 0644 ${BINLOCATION}/*.a ${D}${libdir}
+>=20
+>  	install -d ${D}${bindir}/
+> @@ -169,12 +130,6 @@ do_install () {
+>  	install -m 0755 ${BINLOCATION}/gl* ${D}${bindir}/
+>  	install -m 0755 ${BINLOCATION}/${PVR_INIT} ${D}${bindir}/
+>=20
+> -	if [ ${SUPPORT_XORG} -eq 1 ] ; then
+> -		install -m 0755 ${BINLOCATION}/xgles1test1
+> ${D}${bindir}/
+> -		install -m 0755
+> ${BINLOCATION}/freedesktop/kdrive/usr/X11R6_SGX/bin/Xsgx
+> ${D}${bindir}/|| true
+> -		cp -pPR
+> ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/li
+> b/*X11WS* ${D}${libdir} || true
+> -	fi
+> -
+>  	install -d ${D}${includedir}
+>  	cp -pPR ${S}/GFX_Linux_KM/include4 ${D}${includedir}/
+>  	cp -pPR ${S}/GFX_Linux_KM/services4 ${D}${includedir}/
+> @@ -211,13 +166,12 @@ do_install () {
+>=20
+>  	shared_prog=3D"eglinfo pvr2d_test ${PVR_INIT} services_test
+> sgx_blit_test sgx_clipblit_test sgx_flip_test sgx_init_test
+> sgx_render_flip_test"
+>  	raw_prog=3D"gles1test1 gles2test1 ovg_unit_test"
+> -	x11_prog=3D"eglinfo_x xgles1test1 xgles2test1 xmultiegltest
+> xovg_unit_test"
+>=20
+>  	for esrev in 2 3 5 6 8 ; do
+>  		ESLOCATION=3D$(eval echo $(echo
+> \$\{ES${esrev}LOCATION\}))
+>  		if [ -e ${ESLOCATION} ] ; then
+>  			cp -pPR ${ESLOCATION}/lib*${IMGPV}
+> ${ESLOCATION}/pvr_drv.so ${ESLOCATION}/*.a
+> ${D}${libdir}/ES${esrev}.0/
+> -			for esprog in $shared_prog $raw_prog
+> ${@base_contains('DISTRO_FEATURES', 'x11',"$x11_prog","",d)} ; do
+> +			for esprog in $shared_prog $raw_prog ; do
+>  				install -m 0755 ${ESLOCATION}/$esprog
+> ${D}${bindir}/ES${esrev}.0/ 2>/dev/null || true
+>  			done
+>  		fi
+> @@ -225,17 +179,6 @@ do_install () {
+>=20
+>  	rm ${D}${bindir}/ES*/*.h ${D}${bindir}/ES*/pdsasm
+> ${D}${bindir}/pdsasm -f || true
+>=20
+> -	install -d ${D}${prefix}/share/applications
+> -	cp ${WORKDIR}/*.desktop ${D}${prefix}/share/applications
+> -	rm ${D}${prefix}/share/applications/sample.desktop
+> -
+> -	if [ ${SUPPORT_XORG} -eq 1 ] ; then
+> -		install -d ${D}${bindir}/SGX/demos/X11/
+> -		install -m 0755 ${S}/demos/x11/*
+> ${D}${bindir}/SGX/demos/X11/
+> -		install -d ${D}${bindir}/SGX/trainingcourses/X11
+> 2>/dev/null || true
+> -		install -m 0755 ${S}/trainingcourses/x11/*
+> ${D}${bindir}/SGX/trainingcourses/X11/ 2>/dev/null || true
+> -	fi
+> -
+>  	install -d ${D}${bindir}/SGX/demos/Raw/
+>  	install -m 0755 ${S}/demos/raw/*
+> ${D}${bindir}/SGX/demos/Raw/
+>  	install -d ${D}${bindir}/SGX/trainingcourses/Raw
+> 2>/dev/null || true
+> @@ -251,8 +194,7 @@ do_install () {
+>=20
+>  }
+>=20
+> -PACKAGES =3D+ "${@base_contains('DISTRO_FEATURES', 'x11',"${PN}-
+> x11demos ${PN}-x11trainingcourses xserver-kdrive-powervrsgx" ,"",
+> d)}  \
+> -             ${PN}-rawdemos ${PN}-rawtrainingcourses ${PN}-
+> tests"
+> +PACKAGES =3D+ "${PN}-rawdemos ${PN}-rawtrainingcourses ${PN}-
+> tests"
+>  # Package the base libraries per silicon revision
+>  PACKAGES =3D+ "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
+>  RRECOMMENDS_${PN} +=3D "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6
+> ${PN}-es8"
+> @@ -271,18 +213,14 @@ PRIVATE_LIBS_${PN}-es8 =3D "libGLESv2.so
+> libIMGegl.so libsrv_um.so libOpenVG.so li
+>=20
+>=20
+>  PACKAGES =3D+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl
+> ${PN}-linuxfbwsegl"
+> -PACKAGES =3D+ "${@base_contains('DISTRO_FEATURES', 'x11',"${PN}-
+> x11wsegl ${PN}-driwsegl" ,"", d)}"
+> +
+>  FILES_${PN}-blitwsegl =3D "${libdir}/libpvrPVR2D_BLITWSEGL.so.*"
+>  FILES_${PN}-flipwsegl =3D "${libdir}/libpvrPVR2D_FLIPWSEGL.so.*"
+>  FILES_${PN}-frontwsegl =3D "${libdir}/libpvrPVR2D_FRONTWSEGL.so.*"
+>  FILES_${PN}-linuxfbwsegl =3D
+> "${libdir}/libpvrPVR2D_LINUXFBWSEGL.so.*"
+> -FILES_${PN}-x11wsegl =3D "${libdir}/libpvrPVR2D_X11WSEGL.so*
+> ${bindir}/x* ${bindir}/*x"
+> -FILES_${PN}-driwsegl =3D "${libdir}/libpvrPVR2D_DRIWSEGL.so*
+> ${libdir}/libsrv_um_dri*"
+>=20
+>  PACKAGES =3D+ "${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-
+> blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-
+> flipwsegl-es2 ${PN}-flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-
+> flipwsegl-es6 ${PN}-flipwsegl-es8 ${PN}-frontwsegl-es2 ${PN}-
+> frontwsegl-es3 ${PN}-frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-
+> frontwsegl-es8 ${PN}-linuxfbwsegl-es2 ${PN}-linuxfbwsegl-es3
+> ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-
+> es8"
+>=20
+> -X11_SEGL =3D " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-
+> x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8 ${PN}-
+> driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driwsegl-es5 ${PN}-
+> driwsegl-es6 ${PN}-driwsegl-es8 "
+> -PACKAGES =3D+ "${@base_contains('DISTRO_FEATURES',
+> 'x11',"${X11_SEGL}" ,"", d)}"
+>  FILES_${PN}-blitwsegl-es2 =3D
+> "${libdir}/ES2*/libpvrPVR2D_BLITWSEGL.so.*"
+>  FILES_${PN}-blitwsegl-es3 =3D
+> "${libdir}/ES3*/libpvrPVR2D_BLITWSEGL.so.*"
+>  FILES_${PN}-blitwsegl-es5 =3D
+> "${libdir}/ES5*/libpvrPVR2D_BLITWSEGL.so.*"
+> @@ -311,25 +249,10 @@ FILES_${PN}-linuxfbwsegl-es6 =3D
+> "${libdir}/ES6*/libpvrPVR2D_LINUXFBWSEGL.so.*"
+>  FILES_${PN}-linuxfbwsegl-es8 =3D
+> "${libdir}/ES8*/libpvrPVR2D_LINUXFBWSEGL.so.*"
+>  RRECOMMENDS_${PN}-linuxfbwsegl =3D " ${PN}-linuxfbwsegl-es2 ${PN}-
+> linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6
+> ${PN}-linuxfbwsegl-es8"
+>=20
+> -FILES_${PN}-x11wsegl-es2 =3D
+> "${libdir}/ES2*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES2*/x*
+> ${bindir}/ES2*/*x"
+> -FILES_${PN}-x11wsegl-es3 =3D
+> "${libdir}/ES3*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES3*/x*
+> ${bindir}/ES3*/*x"
+> -FILES_${PN}-x11wsegl-es5 =3D
+> "${libdir}/ES5*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES5*/x*
+> ${bindir}/ES5*/*x"
+> -FILES_${PN}-x11wsegl-es6 =3D
+> "${libdir}/ES6*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES6*/x*
+> ${bindir}/ES6*/*x"
+> -FILES_${PN}-x11wsegl-es8 =3D
+> "${libdir}/ES8*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES8*/x*
+> ${bindir}/ES8*/*x"
+> -RRECOMMENDS_${PN}-x11wsegl =3D " ${PN}-x11wsegl-es2 ${PN}-
+> x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-
+> x11wsegl-es8"
+> -
+> -FILES_${PN}-driwsegl-es2 =3D
+> "${libdir}/ES2*/libpvrPVR2D_DRIWSEGL.so.*
+> ${libdir}/ES2*/libsrv_um_dri*"
+> -FILES_${PN}-driwsegl-es3 =3D
+> "${libdir}/ES3*/libpvrPVR2D_DRIWSEGL.so.*
+> ${libdir}/ES3*/libsrv_um_dri*"
+> -FILES_${PN}-driwsegl-es5 =3D
+> "${libdir}/ES5*/libpvrPVR2D_DRIWSEGL.so.*
+> ${libdir}/ES5*/libsrv_um_dri*"
+> -FILES_${PN}-driwsegl-es6 =3D
+> "${libdir}/ES6*/libpvrPVR2D_DRIWSEGL.so.*
+> ${libdir}/ES6*/libsrv_um_dri*"
+> -FILES_${PN}-driwsegl-es8 =3D
+> "${libdir}/ES8*/libpvrPVR2D_DRIWSEGL.so.*
+> ${libdir}/ES8*/libsrv_um_dri*"
+> -RRECOMMENDS_${PN}-driwsegl =3D " ${PN}-driwsegl-es2 ${PN}-
+> driwsegl-es3 ${PN}-driwsegl-es5 ${PN}-driwsegl-es6 ${PN}-
+> driwsegl-es8"
+> -
+>  CONFFILES_${PN} =3D "${sysconfdir}/powervr.ini"
+>=20
+>  FILES_${PN} =3D "${sysconfdir} ${libdir}/*.so*
+> ${bindir}/${PVR_INIT} ${bindir}/cputype ${bindir}/*"
+>=20
+> -FILES_xserver-kdrive-powervrsgx =3D "${bindir}/Xsgx"
+>  FILES_${PN}-tests =3D "${bindir}/*test*"
+>  FILES_${PN}-dbg =3D "${libdir}/.debug/* ${bindir}/.debug/* \
+>                     ${libdir}/ES*/.debug ${bindir}/*/.debug\
+> @@ -338,12 +261,8 @@ FILES_${PN}-dbg =3D "${libdir}/.debug/*
+> ${bindir}/.debug/* \
+>  	"
+>=20
+>  FILES_${PN}-rawdemos =3D "${bindir}/SGX/demos/Raw/*"
+> -FILES_${PN}-x11demos =3D "${bindir}/SGX/demos/X11/*
+> ${prefix}/share/applications "
+> -RRECOMMENDS_${PN}-x11demos =3D "${PN}-x11wsegl"
+>=20
+>  FILES_${PN}-rawtrainingcourses =3D
+> "${bindir}/SGX/trainingcourses/Raw/*"
+> -FILES_${PN}-x11trainingcourses =3D
+> "${bindir}/SGX/trainingcourses/X11/*"
+> -RRECOMMENDS_${PN}-x11trainingcourses =3D "${PN}-x11wsegl"
+>=20
+>  # The libs need the kernel-modules
+>  RRECOMMENDS_${PN} +=3D "omap3-sgx-modules"
+> @@ -358,7 +277,6 @@ INSANE_SKIP_${PN}-es5 =3D "ldflags dev-so
+> staticdev"
+>  INSANE_SKIP_${PN}-es6 =3D "ldflags dev-so staticdev"
+>  INSANE_SKIP_${PN}-es8 =3D "ldflags dev-so staticdev"
+>  INSANE_SKIP_${PN}-rawdemos =3D "ldflags dev-so useless-rpaths"
+> -INSANE_SKIP_${PN}-x11demos =3D "ldflags dev-so useless-rpaths"
+>  INSANE_SKIP_${PN}-blitwsegl =3D "ldflags"
+>  INSANE_SKIP_${PN}-blitwsegl-es3 =3D "ldflags"
+>  INSANE_SKIP_${PN}-blitwsegl-es5 =3D "ldflags"
+> @@ -379,18 +297,7 @@ INSANE_SKIP_${PN}-linuxfbwsegl-es3 =3D
+> "ldflags"
+>  INSANE_SKIP_${PN}-linuxfbwsegl-es5 =3D "ldflags"
+>  INSANE_SKIP_${PN}-linuxfbwsegl-es6 =3D "ldflags"
+>  INSANE_SKIP_${PN}-linuxfbwsegl-es8 =3D "ldflags"
+> -INSANE_SKIP_${PN}-x11wsegl =3D "ldflags dev-so"
+> -INSANE_SKIP_${PN}-x11wsegl-es3 =3D "ldflags dev-so"
+> -INSANE_SKIP_${PN}-x11wsegl-es5 =3D "ldflags dev-so"
+> -INSANE_SKIP_${PN}-x11wsegl-es6 =3D "ldflags dev-so"
+> -INSANE_SKIP_${PN}-x11wsegl-es8 =3D "ldflags dev-so"
+> -INSANE_SKIP_${PN}-driwsegl =3D "ldflags dev-so"
+> -INSANE_SKIP_${PN}-driwsegl-es3 =3D "ldflags dev-so"
+> -INSANE_SKIP_${PN}-driwsegl-es5 =3D "ldflags dev-so"
+> -INSANE_SKIP_${PN}-driwsegl-es6 =3D "ldflags dev-so"
+> -INSANE_SKIP_${PN}-driwsegl-es8 =3D "ldflags dev-so"
+>  INSANE_SKIP_${PN}-tests =3D "ldflags"
+> -INSANE_SKIP_xserver-kdrive-powervrsgx =3D "ldflags"
+>=20
+>  # Quality control is really poor on these SDKs, so hack around
+> the latest madness:
+>  FILES_${PN} +=3D "${libdir}/*.so "
+> @@ -404,12 +311,6 @@ INITSCRIPT_PARAMS =3D "start 30 5 2 . stop 40
+> 0 1 6 ."
+>  # Append to update-rc.d postinst
+>  pkg_postinst_${PN}_append() {
+>  rm -f $D${sysconfdir}/powervr-esrev
+> -
+> -if [ ${SUPPORT_XORG} -eq 1 ] ; then
+> -	ln -sf /usr/lib/libXdmcp.so.6.0.0 /usr/lib/libXdmcp.so.0
+> -	ln -sf /usr/lib/libXau.so.6.0.0 /usr/lib/libXau.so.0
+> -fi
+> -
+>  }
+>=20
+>  pkg_postinst_${PN}-blitwsegl() {
+> @@ -427,14 +328,3 @@ pkg_postinst_${PN}-linuxfbwsegl() {
+>  rm -f $D${sysconfdir}/powervr-esrev
+>  }
+>=20
+> -pkg_postinst_${PN}-x11wsegl() {
+> -rm -f $D${sysconfdir}/powervr-esrev
+> -
+> -echo "[default]" > $D${sysconfdir}/powervr.ini
+> -echo "WindowSystem=3DlibpvrPVR2D_X11WSEGL.so.1" >>
+> $D${sysconfdir}/powervr.ini
+> -}
+> -
+> -pkg_postinst_${PN}-driwsegl() {
+> -rm -f $D${sysconfdir}/powervr-esrev
+> -}
+> -
+> diff --git a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+> b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+> index 7c6f231..165a406 100644
+> --- a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+> +++ b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+> @@ -23,8 +23,6 @@ TI_BIN_UNPK_WDEXT :=3D "/Graphics_SDK_${SGXPV}"
+>  SRC_URI =3D "http://software-
+> dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV
+> }/exports/${BINFILE} \
+>             file://cputype \
+>             file://rc.pvr \
+> -           file://rc_dri.pvr \
+> -           file://sample.desktop \
+>             file://99-bufferclass.rules  \
+>  "
+>  SRC_URI[md5sum] =3D "bd35e9d8843aff3a2aca9d41e7db1c7d"
+> @@ -32,44 +30,5 @@ SRC_URI[sha256sum] =3D
+> "eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249
+>=20
+>  S =3D "${WORKDIR}/Graphics_SDK_${SGXPV}"
+>=20
+> -LIBGLESWINDOWSYSTEM ?=3D "${@base_contains('DISTRO_FEATURES',
+> 'x11',"libpvrPVR2D_DRIWSEGL.so" ,"libpvrPVR2D_FRONTWSEGL.so.1",
+> d)}"
+> +LIBGLESWINDOWSYSTEM ?=3D "libpvrPVR2D_FRONTWSEGL.so.1"
+>=20
+> -do_configure_append() {
+> -
+> -    # Change PVR server's user mode library to point to DRI
+> -    for drifile in $(find ${S} -name "libsrv_um_dri.so"); do
+> -    if [ "$drifile" !=3D "" ]
+> -    then
+> -        dir=3D$(dirname ${drifile})
+> -        if [ "$SUPPORT_XORG" =3D "1" ]
+> -        then
+> -            mv ${dir}/libsrv_um_dri.so ${dir}/libsrv_um.so
+> -        else
+> -            rm -rf ${dir}/libsrv_um_dri.so
+> -        fi
+> -    fi
+> -
+> -    done
+> -}
+> -
+> -do_install_append() {
+> -
+> -    # In this version of the graphics SDK the following
+> directories do not exist:
+> -    #
+> /GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/pvr2d.h
+> (doesn't exist)
+> -    #
+> /GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/GLES/egltype
+> s.h (doesn't exist)
+> -    # Therefore, need to copy these files manually at the only
+> location that they do exist
+> -    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir}
+> -    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/
+> -
+> -    rm ${D}${sysconfdir}/init.d/pvr-init
+> -
+> -    if [ "$SUPPORT_XORG" =3D "1" ]; then
+> -        cp -pP ${WORKDIR}/rc_dri.pvr
+> ${D}${sysconfdir}/init.d/pvr-init
+> -    else
+> -        cp -pP ${WORKDIR}/rc.pvr ${D}${sysconfdir}/init.d/pvr-
+> init
+> -    fi
+> -
+> -}
+> -
+> -RRECOMMENDS_${PN}-x11demos =3D "${PN}-driwsegl"
+> -RRECOMMENDS_${PN}-x11trainingcourses =3D "${PN}-driwsegl"
+> --
+> 1.7.1
+>=20
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
-Hi,
-
-On Tue, May 07, 2013 at 05:24:17PM -0400, Murali Karicheri wrote:
- > This patch is needed to switch between release tag (when doing release
- > build) and tip of the master (when building nightly)
- >=B7
- > Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
- > ---
- >  recipes-bsp/boot-monitor/boot-monitor_git.bb |    6 ++++--
- >  1 file changed, 4 insertions(+), 2 deletions(-)
- >=B7
- > diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/=
-boot-monitor/boot-monitor_git.bb
- > index c8a022a..a892720 100644
- > --- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
- > +++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
- > @@ -11,7 +11,8 @@ LIC_FILES_CHKSUM =3D"file://COPYING;md5=3D25fe219a6feb=
-f6e5bb45beda1b2eb315"
- >=B7=B7
- >  COMPATIBLE_MACHINE =3D "keystone-evm"
- >=B7=B7
- > -SRC_URI =3D "git://arago-project.org/git/projects/boot-monitor.git;prot=
-ocol=3Dgit;branch=3D${BRANCH}"
- > +#SRC_URI =3D"git://arago-project.org/git/projects/boot-monitor.git;prot=
-ocol=3Dgit;branch=3D${BRANCH}"
- > +SRC_URI =3D"git://gtgit01.gt.design.ti.com/git/projects/boot-monitor.gi=
-t;protocol=3Dgit;branch=3D${BRANCH}"
-
-While attempting to clone this repo,  "git clone git://gtgit01.gt.design.ti=
-.com/git/projects/boot-monitor.git",
-I get the following error message:
-
-cloning into 'boot-monitor'...
-fatal: unable to connect to gtgit01.gt.design.ti.com:
-gtgit01.gt.design.ti.com: Name or service not known
-
-Do this access problem has something to do with my local firewall
-settings or somebody else also face the same problem ?
-
-Best Regards,
-Maxin
-_______________________________________________
-meta-ti mailing list
-meta-ti@yoctoproject.org
-https://lists.yoctoproject.org/listinfo/meta-ti
-
---_000_B0581B5571079145BA1CD78C126DBDE72E7D9A75DLEE08entticom_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<meta name=3D"Generator" content=3D"Microsoft Exchange Server">
-<!-- converted from text --><style><!-- .EmailQuote { margin-left: 1pt; pad=
-ding-left: 4pt; border-left: #800000 2px solid; } --></style>
-</head>
-<body>
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11p=
-t; color:black">
-<span style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11=
-pt; color:black">No<br>
-<br>
-<br>
-Denys<br>
-<br>
-<br>
-<span style=3D"color:black">-----Original Message----- <br>
-<b>From:</b> Maxin B. John [maxin.john@enea.com]<br>
-<b>Received:</b> Wednesday, 08 May 2013, 4:28<br>
-<b>To:</b> Karicheri, Muralidharan [m-karicheri2@ti.com]<br>
-<b>CC:</b> meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]<br>
-<b>Subject:</b> Re: [meta-ti] [RESEND: PATCH 1/3] keystone2: boot-monitor: =
-update to pull code from tip of the master<br>
-<br>
-</span></span></div>
-<font size=3D"2"><span style=3D"font-size:10pt;">
-<div class=3D"PlainText">Hi,<br>
-<br>
-On Tue, May 07, 2013 at 05:24:17PM -0400, Murali Karicheri wrote:<br>
-&nbsp;&gt; This patch is needed to switch between release tag (when doing r=
-elease<br>
-&nbsp;&gt; build) and tip of the master (when building nightly)<br>
-&nbsp;&gt;=B7<br>
-&nbsp;&gt; Signed-off-by: Murali Karicheri &lt;m-karicheri2@ti.com&gt;<br>
-&nbsp;&gt; ---<br>
-&nbsp;&gt;&nbsp; recipes-bsp/boot-monitor/boot-monitor_git.bb |&nbsp;&nbsp;=
-&nbsp; 6 &#43;&#43;&#43;&#43;--<br>
-&nbsp;&gt;&nbsp; 1 file changed, 4 insertions(&#43;), 2 deletions(-)<br>
-&nbsp;&gt;=B7<br>
-&nbsp;&gt; diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/reci=
-pes-bsp/boot-monitor/boot-monitor_git.bb<br>
-&nbsp;&gt; index c8a022a..a892720 100644<br>
-&nbsp;&gt; --- a/recipes-bsp/boot-monitor/boot-monitor_git.bb<br>
-&nbsp;&gt; &#43;&#43;&#43; b/recipes-bsp/boot-monitor/boot-monitor_git.bb<b=
-r>
-&nbsp;&gt; @@ -11,7 &#43;11,8 @@ LIC_FILES_CHKSUM =3D&quot;<a href=3D"file:=
-//COPYING;md5=3D25fe219a6febf6e5bb45beda1b2eb315">file://COPYING;md5=3D25fe=
-219a6febf6e5bb45beda1b2eb315</a>&quot;<br>
-&nbsp;&gt;=B7=B7<br>
-&nbsp;&gt;&nbsp; COMPATIBLE_MACHINE =3D &quot;keystone-evm&quot;<br>
-&nbsp;&gt;=B7=B7<br>
-&nbsp;&gt; -SRC_URI =3D &quot;git://arago-project.org/git/projects/boot-mon=
-itor.git;protocol=3Dgit;branch=3D${BRANCH}&quot;<br>
-&nbsp;&gt; &#43;#SRC_URI =3D&quot;git://arago-project.org/git/projects/boot=
--monitor.git;protocol=3Dgit;branch=3D${BRANCH}&quot;<br>
-&nbsp;&gt; &#43;SRC_URI =3D&quot;git://gtgit01.gt.design.ti.com/git/project=
-s/boot-monitor.git;protocol=3Dgit;branch=3D${BRANCH}&quot;<br>
-<br>
-While attempting to clone this repo,&nbsp; &quot;git clone git://gtgit01.gt=
-.design.ti.com/git/projects/boot-monitor.git&quot;,<br>
-I get the following error message: <br>
-<br>
-cloning into 'boot-monitor'...<br>
-fatal: unable to connect to gtgit01.gt.design.ti.com:<br>
-gtgit01.gt.design.ti.com: Name or service not known<br>
-<br>
-Do this access problem has something to do with my local firewall<br>
-settings or somebody else also face the same problem ? <br>
-<br>
-Best Regards,<br>
-Maxin<br>
-_______________________________________________<br>
-meta-ti mailing list<br>
-meta-ti@yoctoproject.org<br>
-<a href=3D"https://lists.yoctoproject.org/listinfo/meta-ti">https://lists.y=
-octoproject.org/listinfo/meta-ti</a><br>
-</div>
-</span></font>
-</body>
-</html>
-
---_000_B0581B5571079145BA1CD78C126DBDE72E7D9A75DLEE08entticom_--
