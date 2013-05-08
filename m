@@ -1,38 +1,35 @@
-Return-Path: <m-karicheri2@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 066DBE01484
-	for <meta-ti@yoctoproject.org>; Wed,  8 May 2013 07:39:18 -0700 (PDT)
+Return-Path: <trini@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCA20E01484
+	for <meta-ti@yoctoproject.org>; Wed,  8 May 2013 08:10:27 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r48EdItv015838
-	for <meta-ti@yoctoproject.org>; Wed, 8 May 2013 09:39:18 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r48EdIQS017302
-	for <meta-ti@yoctoproject.org>; Wed, 8 May 2013 09:39:18 -0500
-Received: from DFLE11.ent.ti.com ([fe80::56d:4651:6f4f:2245]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.02.0342.003; Wed, 8 May 2013 09:39:17 -0500
-From: "Karicheri, Muralidharan" <m-karicheri2@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [RESEND: PATCH 2/3] keystone2: u-boot: update to add
-	gph support
-Thread-Index: AQHOS2k9CQkOGrahU0yP1Wpq5JMXdZj6lzmA//+tzGCAAF+lAP//rdCQgABZjgCAALAVQA==
-Date: Wed, 8 May 2013 14:39:17 +0000
-Message-ID: <3E54258959B69E4282D79E01AB1F32B7044ED5A3@DFLE11.ent.ti.com>
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r48FAQgs024855
+	for <meta-ti@yoctoproject.org>; Wed, 8 May 2013 10:10:27 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r48FAQxD027210
+	for <meta-ti@yoctoproject.org>; Wed, 8 May 2013 10:10:26 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 8 May 2013 10:10:26 -0500
+Received: from [172.24.52.134] (h52-134.vpn.ti.com [172.24.52.134])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r48FAPse025185;
+	Wed, 8 May 2013 10:10:25 -0500
+Message-ID: <518A6B05.5000707@ti.com>
+Date: Wed, 8 May 2013 11:11:01 -0400
+From: Tom Rini <trini@ti.com>
+Organization: Texas Instruments
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/17.0 Thunderbird/17.0
+MIME-Version: 1.0
+To: Denys Dmytriyenko <denys@ti.com>
 References: <1367961859-6243-1-git-send-email-m-karicheri2@ti.com>
 	<1367961859-6243-2-git-send-email-m-karicheri2@ti.com>
 	<20130507215205.GF12982@edge>
 	<3E54258959B69E4282D79E01AB1F32B7044ED1DE@DFLE11.ent.ti.com>
 	<20130507224012.GJ12982@edge>
-	<3E54258959B69E4282D79E01AB1F32B7044ED22D@DFLE11.ent.ti.com>
-	<20130507230634.GL12982@edge>
-In-Reply-To: <20130507230634.GL12982@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
-MIME-Version: 1.0
-Cc: "Rini, Tom" <trini@ti.com>,
-	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+In-Reply-To: <20130507224012.GJ12982@edge>
+X-Enigmail-Version: 1.5.1
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [RESEND: PATCH 2/3] keystone2: u-boot: update to add gph support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -46,44 +43,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 May 2013 14:39:19 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 08 May 2013 15:10:28 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
----Cut-------
->>=20
->> Murali,
->>=20
->> Correct, .bbappend is the way to "append" changes to the original recipe=
- w/o modifying it.
->>=20
->> I don't know what you mean by "each of the repos", but yes, you would ne=
-ed to place a
+On 05/07/2013 06:40 PM, Denys Dmytriyenko wrote:
+> On Tue, May 07, 2013 at 06:07:10PM -0400, Karicheri, Muralidharan wrote:
+[snip]
+>>>>> +	cd ${DEPLOY_DIR_IMAGE}
+>>>>> +	rm -f ${UBOOT_BINARY} ${UBOOT_SYMLINK}
+>>>>> +	ln -sf ${UBOOT_IMAGE} ${UBOOT_SYMLINK}
+>>>>> +	ln -sf ${UBOOT_IMAGE} ${UBOOT_BINARY}
+>>>>> +	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
+>>>>> +	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
+>>>>> +	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
+>>>>> +	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
+>>>>> +	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
+>>>>> +	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
+>>>>> +	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
+>>>>> +	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
+>>>>> +	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
+>>>>> +}
+>>>>
+>>>> As we just spoke - let's try to generalize this format and combine it with
+>>>> other similar requirements, like SPL-UART etc. There was a thread back in
+>>>> February about this...
+>>
+>> This is where I have disagreement. Let us restart the discussion. Who are 
+>> the stake holders? Discuss it in this thread rather than using an old 
+>> thread. I have copied here Carlos. I don't have bandwidth to spend too much 
+>> time on this. Let us discuss it and identify what is required to be done.
+> 
+> Sure, let's discuss. I encourage everyone to participate, especially Carlos 
+> and Tom.
 
-In this case, u-boot, boot-monitor and linux-keystone git repos. Based on y=
-ou comment, I am assuming, whatever committed to meta-ti need to point to p=
-ublic repo and for each of this, a .bbappend is to be added to override the=
- SRCREV in meta-arago to pick the nightly version from the tip.
+We should try and get the generic u-boot.inc to allow for a few
+different variables to be set by the machine.conf file, and if they are,
+copy/symlink them as needed.  I think we should try and fit the SPI
+selection into the generic u-boot-with-spl.bin framework that exists in
+u-boot today if we can, and then add some logic so that we can package
+and symlink that single file instead.
 
-Murali
-
->> .bbappend in meta-arago-distro for every component you develop actively =
-and for which
->> you don't want to constantly update the recipe with the new SRCREV (or B=
-RANCH or
->> SRC_URI etc.)
->>=20
->> By keeping meta-ti pointing to a public git tree with a specific SRCREV =
-pointing preferably
->> to a release tag or a stable commit ID you are making sure that it works=
- for everybody. It
->> is an official TI BSP and is distribution agnostic and should be parseab=
-le and buildable by
->> anyone out there. On the other hand, meta-arago-distro is our own TI dis=
-tribution and you
->> have more freedom there.
->>=20
->> --
->> Denys
+-- 
+Tom
 
