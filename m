@@ -1,37 +1,27 @@
-Return-Path: <trini@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B5732E01484
-	for <meta-ti@yoctoproject.org>; Wed,  8 May 2013 09:44:20 -0700 (PDT)
+Return-Path: <denys@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C7E9E01458
+	for <meta-ti@yoctoproject.org>; Wed,  8 May 2013 18:39:03 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r48GiKd0015509
-	for <meta-ti@yoctoproject.org>; Wed, 8 May 2013 11:44:20 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r48GiKjE027572
-	for <meta-ti@yoctoproject.org>; Wed, 8 May 2013 11:44:20 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 8 May 2013 11:44:19 -0500
-Received: from [172.24.52.134] (h52-134.vpn.ti.com [172.24.52.134])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r48GiJ0u032341;
-	Wed, 8 May 2013 11:44:19 -0500
-Message-ID: <518A8107.2090603@ti.com>
-Date: Wed, 8 May 2013 12:44:55 -0400
-From: Tom Rini <trini@ti.com>
-Organization: Texas Instruments
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r491d2CU008388
+	for <meta-ti@yoctoproject.org>; Wed, 8 May 2013 20:39:02 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r491d2gt029988
+	for <meta-ti@yoctoproject.org>; Wed, 8 May 2013 20:39:02 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 8 May 2013 20:39:02 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r491d2BC014600;
+	Wed, 8 May 2013 20:39:02 -0500
+Date: Wed, 8 May 2013 21:33:01 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>, <fcooper@ti.com>, <denys@ti.com>
+Message-ID: <2067942116.115.1368063181442.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-To: "Karicheri, Muralidharan" <m-karicheri2@ti.com>
-References: <1367961859-6243-1-git-send-email-m-karicheri2@ti.com>
-	<1367961859-6243-2-git-send-email-m-karicheri2@ti.com>
-	<20130507215205.GF12982@edge>
-	<3E54258959B69E4282D79E01AB1F32B7044ED1DE@DFLE11.ent.ti.com>
-	<20130507224012.GJ12982@edge> <518A6B05.5000707@ti.com>
-	<3E54258959B69E4282D79E01AB1F32B7044ED737@DFLE11.ent.ti.com>
-In-Reply-To: <3E54258959B69E4282D79E01AB1F32B7044ED737@DFLE11.ent.ti.com>
-X-Enigmail-Version: 1.5.1
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [RESEND: PATCH 2/3] keystone2: u-boot: update to add gph support
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-05-08_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,64 +34,163 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 May 2013 16:44:20 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
+X-List-Received-Date: Thu, 09 May 2013 01:39:03 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_114_1288486650.1368063181411"
+
+------=_Part_114_1288486650.1368063181411
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 05/08/2013 11:55 AM, Karicheri, Muralidharan wrote:
->>> -----Original Message-----
->>> From: Rini, Tom
->>> Sent: Wednesday, May 08, 2013 11:11 AM
->>> To: Dmytriyenko, Denys
->>> Cc: Karicheri, Muralidharan; Hernandez, Carlos; meta-ti@yoctoproject.org
->>> Subject: Re: [meta-ti] [RESEND: PATCH 2/3] keystone2: u-boot: update to add gph
->>> support
->>>
->>> On 05/07/2013 06:40 PM, Denys Dmytriyenko wrote:
->>>> On Tue, May 07, 2013 at 06:07:10PM -0400, Karicheri, Muralidharan wrote:
->>> [snip]
->>>>>>>> +	cd ${DEPLOY_DIR_IMAGE}
->>>>>>>> +	rm -f ${UBOOT_BINARY} ${UBOOT_SYMLINK}
->>>>>>>> +	ln -sf ${UBOOT_IMAGE} ${UBOOT_SYMLINK}
->>>>>>>> +	ln -sf ${UBOOT_IMAGE} ${UBOOT_BINARY}
->>>>>>>> +	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
->>>>>>>> +	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
->>>>>>>> +	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
->>>>>>>> +	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
->>>>>>>> +	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
->>>>>>>> +	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
->>>>>>>> +	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
->>>>>>>> +	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
->>>>>>>> +	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY} }
->>>>>>>
->>>>>>> As we just spoke - let's try to generalize this format and combine
->>>>>>> it with other similar requirements, like SPL-UART etc. There was a
->>>>>>> thread back in February about this...
->>>>>
->>>>> This is where I have disagreement. Let us restart the discussion. Who
->>>>> are the stake holders? Discuss it in this thread rather than using an
->>>>> old thread. I have copied here Carlos. I don't have bandwidth to
->>>>> spend too much time on this. Let us discuss it and identify what is required to be done.
->>>>
->>>> Sure, let's discuss. I encourage everyone to participate, especially
->>>> Carlos and Tom.
->>>
->>> We should try and get the generic u-boot.inc to allow for a few different variables to be
->>> set by the machine.conf file, and if they are, copy/symlink them as needed.  I think we
->>> should try and fit the SPI selection into the generic u-boot-with-spl.bin framework that
->>> exists in u-boot today if we can, and then add some logic so that we can package and
->>> symlink that single file instead.
-> 
-> I think we are unable to use the generic due to the specific header format requirement from RBL (Rom
-> Boot loader). So we need to live with the format. How do we handle this with the existing u-boot-spl.gph
-> formatting that we use?
+<html>
+<head>
+<title>
+Status for 05/08/13
+</title>
+</head>
+<body>
 
-I was off slightly it seems, we don't have everyone on
-u-boot-with-spl.bin, but it's u-boot-with-spl.something (bin, imx).  So
-in this case, make up the rules for a u-boot-with-spl.gph that does what
-keystone needs, and we can finish up the rest of the logic around that
-to pick up u-boot-with-spl.* and copy/link.
+<h2>Status for 05/08/13</h2>
 
--- 
-Tom
+<h2>BUILD_ID: build-2013-05-08_21-02-50</h2>
 
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.05"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_114_1288486650.1368063181411--
