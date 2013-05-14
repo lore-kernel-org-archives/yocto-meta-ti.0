@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C43E0E01366
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C5708E0137D
 	for <meta-ti@yoctoproject.org>; Tue, 14 May 2013 10:05:08 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6072E52976; Tue, 14 May 2013 17:05:07 +0000 (UTC)
+	id 56AC452A39; Tue, 14 May 2013 17:05:07 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130514170507.6072E52976@arago-project.org>
+Message-Id: <20130514170507.56AC452A39@arago-project.org>
 Date: Tue, 14 May 2013 17:05:07 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : am-sysinfo: remove an old outdated svn version
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 14 May 2013 17:05:08 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 37f543f6184ea806613b3e08f5d7f3a82e47c904
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=37f543f6184ea806613b3e08f5d7f3a82e47c904
+Branch: danny
+Commit: 9772c16b8b4e08bb58c645fdf93b67857cc21b49
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9772c16b8b4e08bb58c645fdf93b67857cc21b49
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue May  7 11:59:07 2013 -0400
