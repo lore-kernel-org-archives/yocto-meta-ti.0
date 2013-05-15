@@ -1,31 +1,34 @@
-Return-Path: <denys@ti.com>
+Return-Path: <prabu@ti.com>
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86470E01366
-	for <meta-ti@yoctoproject.org>; Tue, 14 May 2013 10:46:53 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r4EHkpKw020834
-	for <meta-ti@yoctoproject.org>; Tue, 14 May 2013 12:46:51 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r4EHkptC006950
-	for <meta-ti@yoctoproject.org>; Tue, 14 May 2013 12:46:51 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 14 May 2013 12:46:50 -0500
-Received: from localhost ([158.218.102.158])	by dlelxv22.itg.ti.com
-	(8.13.8/8.13.8) with ESMTP id r4EHko9J023838;
-	Tue, 14 May 2013 12:46:50 -0500
-Date: Tue, 14 May 2013 13:46:50 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Maupin, Chase" <chase.maupin@ti.com>
-Message-ID: <20130514174650.GB19116@edge>
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8C6ABE01366
+	for <meta-ti@yoctoproject.org>; Tue, 14 May 2013 19:48:19 -0700 (PDT)
+Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r4F2mHP8013703
+	for <meta-ti@yoctoproject.org>; Tue, 14 May 2013 21:48:18 -0500
+Received: from DBDE72.ent.ti.com (dbde72.ent.ti.com [172.24.171.97])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r4F2mEYj025796
+	for <meta-ti@yoctoproject.org>; Tue, 14 May 2013 21:48:16 -0500
+Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
+	DBDE72.ent.ti.com ([fe80::bd56:32bf:87fd:2763%27]) with mapi id
+	14.02.0342.003; Wed, 15 May 2013 10:48:14 +0800
+From: "Sundareson, Prabindh" <prabu@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>, "Maupin, Chase" <chase.maupin@ti.com>
+Thread-Topic: [meta-ti] [PATCH 01/10] libgles-omap3: Remove X11 related
+	build and	packaging
+Thread-Index: AQHOS+6EVML6Y4PytEOk+K/uMdSOn5j+G60A///KfoCABotMAIAABpUAgAEdGqA=
+Date: Wed, 15 May 2013 02:48:13 +0000
+Message-ID: <321768C95D21724485BCE784F1BE98473EB16422@DBDE04.ent.ti.com>
 References: <1367501964-6294-1-git-send-email-prabu@ti.com>
 	<7D46E86EC0A8354091174257B2FED10159546F17@DLEE11.ent.ti.com>
 	<321768C95D21724485BCE784F1BE98473EB10BED@DBDE04.ent.ti.com>
 	<7D46E86EC0A8354091174257B2FED10159554BA4@DLEE11.ent.ti.com>
-	<20130514172316.GB31835@denix.org>
+	<20130514172316.GB31835@denix.org> <20130514174650.GB19116@edge>
+In-Reply-To: <20130514174650.GB19116@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.24.170.142]
 MIME-Version: 1.0
-In-Reply-To: <20130514172316.GB31835@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [PATCH 01/10] libgles-omap3: Remove X11 related build and	packaging
 X-BeenThere: meta-ti@yoctoproject.org
@@ -40,23 +43,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 May 2013 17:46:53 -0000
+X-List-Received-Date: Wed, 15 May 2013 02:48:19 -0000
+Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Denys,
+
+Thanks for the review. I will resubmit the patch-set for review - with belo=
+w comments implemented.=20
+
+regards,
+Prabu
+
+
+-----Original Message-----
+From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
+.org] On Behalf Of Dmytriyenko, Denys
+Sent: Tuesday, May 14, 2013 11:17 PM
+To: Maupin, Chase
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [PATCH 01/10] libgles-omap3: Remove X11 related buil=
+d and packaging
 
 Prabu,
 
-I don't think I have any more comments, than for 01, 06 and 08. Will you be 
-re-submitting the entire set later? I'll go ahead and remove this set from my 
-queue as it will be "superseded". Thanks!
+I don't think I have any more comments, than for 01, 06 and 08. Will you be=
+ re-submitting the entire set later? I'll go ahead and remove this set from=
+ my queue as it will be "superseded". Thanks!
 
--- 
+--
 Denys
 
 
 On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > On Fri, May 10, 2013 at 01:27:09PM +0000, Maupin, Chase wrote:
-> > 
+> >=20
 > > >-----Original Message-----
 > > >From: Sundareson, Prabindh
 > > >Sent: Friday, May 10, 2013 4:17 AM
@@ -68,18 +90,18 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >
 > > >1) Ok, I will add it. By "later recipe", you mean the separated
 > > >x11 recipe, right ?
-> > 
+> >=20
 > > Yes sir
-> > 
+> >=20
 > > >
 > > >2) Good point - I am ok to leave the old .inc and create a new one
 > > >with the changes starting from 4.09 then. Is this ok ?
-> > 
+> >=20
 > > I'm OK with the approach.  Denys, any concern here?
-> 
+>=20
 > Sounds good - there are still some users of 4.08 out there...
-> 
-> 
+>=20
+>=20
 > > >regards,
 > > >Prabu
 > > >
@@ -141,21 +163,21 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >> index 9a90c56..130dc49 100644
 > > >> --- a/recipes-graphics/libgles/libgles-omap3.inc
 > > >> +++ b/recipes-graphics/libgles/libgles-omap3.inc
-> > >> @@ -7,10 +7,6 @@ PR = "r35"
+> > >> @@ -7,10 +7,6 @@ PR =3D "r35"
 > > >>
-> > >>  COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
+> > >>  COMPATIBLE_MACHINE =3D "(omap3|ti814x|ti816x|ti33x)"
 > > >>
-> > >> -X11DEPENDS = "virtual/libx11 libxau libxdmcp libdrm"
-> > >> -DEPENDS = "${@base_contains('DISTRO_FEATURES', 'x11',
+> > >> -X11DEPENDS =3D "virtual/libx11 libxau libxdmcp libdrm"
+> > >> -DEPENDS =3D "${@base_contains('DISTRO_FEATURES', 'x11',
 > > >> '${X11DEPENDS}', '', d)}"
 > > >> -
-> > >> -export SUPPORT_XORG ?= "${@base_contains('DISTRO_FEATURES',
+> > >> -export SUPPORT_XORG ?=3D "${@base_contains('DISTRO_FEATURES',
 > > >> 'x11', '1', '0', d)}"
-> > >>  PVR_INIT ?= "pvrsrvinit"
+> > >>  PVR_INIT ?=3D "pvrsrvinit"
 > > >>
-> > >>  PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
-> > >> @@ -22,7 +18,6 @@ RREPLACES_${PN}-dbg = "libegl-dbg"
-> > >>  SRC_URI = "http://software-
+> > >>  PROVIDES +=3D "virtual/egl virtual/libgles1 virtual/libgles2"
+> > >> @@ -22,7 +18,6 @@ RREPLACES_${PN}-dbg =3D "libegl-dbg"
+> > >>  SRC_URI =3D "http://software-
 > > >>
 > > >dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV
 > > >> }/exports/${BINFILE} \
@@ -166,11 +188,11 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >>  "
 > > >>
 > > >> @@ -79,87 +74,53 @@ do_compile() {
-> > >>  	export PLAT_CPP="${CXX}"
-> > >>  	export PLAR_AR="${AR}"
+> > >>  	export PLAT_CPP=3D"${CXX}"
+> > >>  	export PLAR_AR=3D"${AR}"
 > > >>
 > > >> -	if [ ${SUPPORT_XORG} -eq 1 ] ; then
-> > >> -		export X11ROOT="${STAGING_DIR_HOST}/usr"
+> > >> -		export X11ROOT=3D"${STAGING_DIR_HOST}/usr"
 > > >> -		mkdir -p ${S}/demos/x11
 > > >> -		mkdir -p ${S}/trainingcourses/x11
 > > >> -	fi
@@ -189,7 +211,7 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >> +	for demo in ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Demos/* ;
 > > >> do
 > > >> +		cd $demo/OGLES/Build/LinuxGeneric
-> > >> +		oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=0
+> > >> +		oe_runmake Common=3D1 PLATFORM=3D${PLATFORM} X11BUILD=3D0
 > > >> +		rm $demo/OGLES/Build/${PLATFORM}/Release*/*.o
 > > >> +
 > > >> +		install -m 0755
@@ -200,14 +222,14 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >> +	for demo in ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Demos/* ;
 > > >> do
 > > >> +		cd $demo/OGLES2/Build/LinuxGeneric
-> > >> +		oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=0
+> > >> +		oe_runmake Common=3D1 PLATFORM=3D${PLATFORM} X11BUILD=3D0
 > > >> +		rm -f $demo/OGLES2/Build/${PLATFORM}/Release*/*.o
 > > >>
 > > >> -		for demo in
 > > >> ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Demos/* ; do
 > > >> -			cd $demo/OGLES/Build/LinuxGeneric
-> > >> -			oe_runmake Common=1 PLATFORM=${PLATFORM}
-> > >> X11BUILD=$X11BUILD
+> > >> -			oe_runmake Common=3D1 PLATFORM=3D${PLATFORM}
+> > >> X11BUILD=3D$X11BUILD
 > > >> -			rm $demo/OGLES/Build/${PLATFORM}/Release*/*.o
 > > >> -
 > > >> -			if [ $X11BUILD -eq 1 ] ; then
@@ -230,8 +252,8 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >> -		for demo in
 > > >> ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Demos/* ; do
 > > >> -			cd $demo/OGLES2/Build/LinuxGeneric
-> > >> -			oe_runmake Common=1 PLATFORM=${PLATFORM}
-> > >> X11BUILD=$X11BUILD
+> > >> -			oe_runmake Common=3D1 PLATFORM=3D${PLATFORM}
+> > >> X11BUILD=3D$X11BUILD
 > > >> -			rm -f
 > > >> $demo/OGLES2/Build/${PLATFORM}/Release*/*.o
 > > >> -
@@ -288,11 +310,11 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >> +			cd $training/OGLES2/Build/${PLATFORM}
 > > >> +		fi
 > > >>
-> > >> -			oe_runmake Common=1 PLATFORM=${PLATFORM}
-> > >> X11BUILD=$X11BUILD
+> > >> -			oe_runmake Common=3D1 PLATFORM=3D${PLATFORM}
+> > >> X11BUILD=3D$X11BUILD
 > > >> -			rm -f
 > > >> $training/OGLES2/Build/${PLATFORM}/Release*/*.o
-> > >> +		oe_runmake Common=1 PLATFORM=${PLATFORM} X11BUILD=0
+> > >> +		oe_runmake Common=3D1 PLATFORM=3D${PLATFORM} X11BUILD=3D0
 > > >> +		rm -f $training/OGLES2/Build/${PLATFORM}/Release*/*.o
 > > >>
 > > >> -			if [ $X11BUILD -eq 1 ] ; then
@@ -344,15 +366,15 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >211,13
 > > >> +166,12 @@ do_install () {
 > > >>
-> > >>  	shared_prog="eglinfo pvr2d_test ${PVR_INIT} services_test
+> > >>  	shared_prog=3D"eglinfo pvr2d_test ${PVR_INIT} services_test
 > > >> sgx_blit_test sgx_clipblit_test sgx_flip_test sgx_init_test
 > > >> sgx_render_flip_test"
-> > >>  	raw_prog="gles1test1 gles2test1 ovg_unit_test"
-> > >> -	x11_prog="eglinfo_x xgles1test1 xgles2test1 xmultiegltest
+> > >>  	raw_prog=3D"gles1test1 gles2test1 ovg_unit_test"
+> > >> -	x11_prog=3D"eglinfo_x xgles1test1 xgles2test1 xmultiegltest
 > > >> xovg_unit_test"
 > > >>
 > > >>  	for esrev in 2 3 5 6 8 ; do
-> > >>  		ESLOCATION=$(eval echo $(echo
+> > >>  		ESLOCATION=3D$(eval echo $(echo
 > > >> \$\{ES${esrev}LOCATION\}))
 > > >>  		if [ -e ${ESLOCATION} ] ; then
 > > >>  			cp -pPR ${ESLOCATION}/lib*${IMGPV}
@@ -395,39 +417,39 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >>
 > > >>  }
 > > >>
-> > >> -PACKAGES =+ "${@base_contains('DISTRO_FEATURES', 'x11',"${PN}-
+> > >> -PACKAGES =3D+ "${@base_contains('DISTRO_FEATURES', 'x11',"${PN}-
 > > >> x11demos ${PN}-x11trainingcourses xserver-kdrive-powervrsgx"
 > > >,"", d)}
 > > >> \
 > > >> -             ${PN}-rawdemos ${PN}-rawtrainingcourses ${PN}-
 > > >> tests"
-> > >> +PACKAGES =+ "${PN}-rawdemos ${PN}-rawtrainingcourses ${PN}-
+> > >> +PACKAGES =3D+ "${PN}-rawdemos ${PN}-rawtrainingcourses ${PN}-
 > > >> tests"
-> > >>  # Package the base libraries per silicon revision  PACKAGES =+
+> > >>  # Package the base libraries per silicon revision  PACKAGES =3D+
 > > >> "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
-> > >>  RRECOMMENDS_${PN} += "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6
+> > >>  RRECOMMENDS_${PN} +=3D "${PN}-es2 ${PN}-es3 ${PN}-es5 ${PN}-es6
 > > >> ${PN}-es8"
-> > >> @@ -271,18 +213,14 @@ PRIVATE_LIBS_${PN}-es8 = "libGLESv2.so
+> > >> @@ -271,18 +213,14 @@ PRIVATE_LIBS_${PN}-es8 =3D "libGLESv2.so
 > > >> libIMGegl.so libsrv_um.so libOpenVG.so li
 > > >>
 > > >>
-> > >>  PACKAGES =+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl
+> > >>  PACKAGES =3D+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl
 > > >> ${PN}-linuxfbwsegl"
-> > >> -PACKAGES =+ "${@base_contains('DISTRO_FEATURES', 'x11',"${PN}-
+> > >> -PACKAGES =3D+ "${@base_contains('DISTRO_FEATURES', 'x11',"${PN}-
 > > >> x11wsegl ${PN}-driwsegl" ,"", d)}"
 > > >> +
-> > >>  FILES_${PN}-blitwsegl = "${libdir}/libpvrPVR2D_BLITWSEGL.so.*"
-> > >>  FILES_${PN}-flipwsegl = "${libdir}/libpvrPVR2D_FLIPWSEGL.so.*"
-> > >>  FILES_${PN}-frontwsegl =
+> > >>  FILES_${PN}-blitwsegl =3D "${libdir}/libpvrPVR2D_BLITWSEGL.so.*"
+> > >>  FILES_${PN}-flipwsegl =3D "${libdir}/libpvrPVR2D_FLIPWSEGL.so.*"
+> > >>  FILES_${PN}-frontwsegl =3D
 > > >"${libdir}/libpvrPVR2D_FRONTWSEGL.so.*"
-> > >>  FILES_${PN}-linuxfbwsegl =
+> > >>  FILES_${PN}-linuxfbwsegl =3D
 > > >> "${libdir}/libpvrPVR2D_LINUXFBWSEGL.so.*"
-> > >> -FILES_${PN}-x11wsegl = "${libdir}/libpvrPVR2D_X11WSEGL.so*
+> > >> -FILES_${PN}-x11wsegl =3D "${libdir}/libpvrPVR2D_X11WSEGL.so*
 > > >> ${bindir}/x* ${bindir}/*x"
-> > >> -FILES_${PN}-driwsegl = "${libdir}/libpvrPVR2D_DRIWSEGL.so*
+> > >> -FILES_${PN}-driwsegl =3D "${libdir}/libpvrPVR2D_DRIWSEGL.so*
 > > >> ${libdir}/libsrv_um_dri*"
 > > >>
-> > >>  PACKAGES =+ "${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-
+> > >>  PACKAGES =3D+ "${PN}-blitwsegl-es2 ${PN}-blitwsegl-es3 ${PN}-
 > > >> blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-
 > > >> flipwsegl-es2 ${PN}-flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-
 > > >> flipwsegl-es6 ${PN}-flipwsegl-es8 ${PN}-frontwsegl-es2 ${PN}-
@@ -436,124 +458,124 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >> ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-
 > > >linuxfbwsegl- es8"
 > > >>
-> > >> -X11_SEGL = " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-
+> > >> -X11_SEGL =3D " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-
 > > >> x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8 ${PN}-
 > > >> driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driwsegl-es5 ${PN}-
 > > >> driwsegl-es6 ${PN}-driwsegl-es8 "
-> > >> -PACKAGES =+ "${@base_contains('DISTRO_FEATURES',
+> > >> -PACKAGES =3D+ "${@base_contains('DISTRO_FEATURES',
 > > >> 'x11',"${X11_SEGL}" ,"", d)}"
-> > >>  FILES_${PN}-blitwsegl-es2 =
+> > >>  FILES_${PN}-blitwsegl-es2 =3D
 > > >> "${libdir}/ES2*/libpvrPVR2D_BLITWSEGL.so.*"
-> > >>  FILES_${PN}-blitwsegl-es3 =
+> > >>  FILES_${PN}-blitwsegl-es3 =3D
 > > >> "${libdir}/ES3*/libpvrPVR2D_BLITWSEGL.so.*"
-> > >>  FILES_${PN}-blitwsegl-es5 =
+> > >>  FILES_${PN}-blitwsegl-es5 =3D
 > > >> "${libdir}/ES5*/libpvrPVR2D_BLITWSEGL.so.*"
-> > >> @@ -311,25 +249,10 @@ FILES_${PN}-linuxfbwsegl-es6 =
+> > >> @@ -311,25 +249,10 @@ FILES_${PN}-linuxfbwsegl-es6 =3D
 > > >> "${libdir}/ES6*/libpvrPVR2D_LINUXFBWSEGL.so.*"
-> > >>  FILES_${PN}-linuxfbwsegl-es8 =
+> > >>  FILES_${PN}-linuxfbwsegl-es8 =3D
 > > >> "${libdir}/ES8*/libpvrPVR2D_LINUXFBWSEGL.so.*"
-> > >>  RRECOMMENDS_${PN}-linuxfbwsegl = " ${PN}-linuxfbwsegl-es2
+> > >>  RRECOMMENDS_${PN}-linuxfbwsegl =3D " ${PN}-linuxfbwsegl-es2
 > > >${PN}-
 > > >> linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6
 > > >> ${PN}-linuxfbwsegl-es8"
 > > >>
-> > >> -FILES_${PN}-x11wsegl-es2 =
+> > >> -FILES_${PN}-x11wsegl-es2 =3D
 > > >> "${libdir}/ES2*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES2*/x*
 > > >> ${bindir}/ES2*/*x"
-> > >> -FILES_${PN}-x11wsegl-es3 =
+> > >> -FILES_${PN}-x11wsegl-es3 =3D
 > > >> "${libdir}/ES3*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES3*/x*
 > > >> ${bindir}/ES3*/*x"
-> > >> -FILES_${PN}-x11wsegl-es5 =
+> > >> -FILES_${PN}-x11wsegl-es5 =3D
 > > >> "${libdir}/ES5*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES5*/x*
 > > >> ${bindir}/ES5*/*x"
-> > >> -FILES_${PN}-x11wsegl-es6 =
+> > >> -FILES_${PN}-x11wsegl-es6 =3D
 > > >> "${libdir}/ES6*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES6*/x*
 > > >> ${bindir}/ES6*/*x"
-> > >> -FILES_${PN}-x11wsegl-es8 =
+> > >> -FILES_${PN}-x11wsegl-es8 =3D
 > > >> "${libdir}/ES8*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES8*/x*
 > > >> ${bindir}/ES8*/*x"
-> > >> -RRECOMMENDS_${PN}-x11wsegl = " ${PN}-x11wsegl-es2 ${PN}-
+> > >> -RRECOMMENDS_${PN}-x11wsegl =3D " ${PN}-x11wsegl-es2 ${PN}-
 > > >> x11wsegl-es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-
 > > >> x11wsegl-es8"
 > > >> -
-> > >> -FILES_${PN}-driwsegl-es2 =
+> > >> -FILES_${PN}-driwsegl-es2 =3D
 > > >> "${libdir}/ES2*/libpvrPVR2D_DRIWSEGL.so.*
 > > >> ${libdir}/ES2*/libsrv_um_dri*"
-> > >> -FILES_${PN}-driwsegl-es3 =
+> > >> -FILES_${PN}-driwsegl-es3 =3D
 > > >> "${libdir}/ES3*/libpvrPVR2D_DRIWSEGL.so.*
 > > >> ${libdir}/ES3*/libsrv_um_dri*"
-> > >> -FILES_${PN}-driwsegl-es5 =
+> > >> -FILES_${PN}-driwsegl-es5 =3D
 > > >> "${libdir}/ES5*/libpvrPVR2D_DRIWSEGL.so.*
 > > >> ${libdir}/ES5*/libsrv_um_dri*"
-> > >> -FILES_${PN}-driwsegl-es6 =
+> > >> -FILES_${PN}-driwsegl-es6 =3D
 > > >> "${libdir}/ES6*/libpvrPVR2D_DRIWSEGL.so.*
 > > >> ${libdir}/ES6*/libsrv_um_dri*"
-> > >> -FILES_${PN}-driwsegl-es8 =
+> > >> -FILES_${PN}-driwsegl-es8 =3D
 > > >> "${libdir}/ES8*/libpvrPVR2D_DRIWSEGL.so.*
 > > >> ${libdir}/ES8*/libsrv_um_dri*"
-> > >> -RRECOMMENDS_${PN}-driwsegl = " ${PN}-driwsegl-es2 ${PN}-
+> > >> -RRECOMMENDS_${PN}-driwsegl =3D " ${PN}-driwsegl-es2 ${PN}-
 > > >> driwsegl-es3 ${PN}-driwsegl-es5 ${PN}-driwsegl-es6 ${PN}-
 > > >> driwsegl-es8"
 > > >> -
-> > >>  CONFFILES_${PN} = "${sysconfdir}/powervr.ini"
+> > >>  CONFFILES_${PN} =3D "${sysconfdir}/powervr.ini"
 > > >>
-> > >>  FILES_${PN} = "${sysconfdir} ${libdir}/*.so*
+> > >>  FILES_${PN} =3D "${sysconfdir} ${libdir}/*.so*
 > > >${bindir}/${PVR_INIT}
 > > >> ${bindir}/cputype ${bindir}/*"
 > > >>
-> > >> -FILES_xserver-kdrive-powervrsgx = "${bindir}/Xsgx"
-> > >>  FILES_${PN}-tests = "${bindir}/*test*"
-> > >>  FILES_${PN}-dbg = "${libdir}/.debug/* ${bindir}/.debug/* \
+> > >> -FILES_xserver-kdrive-powervrsgx =3D "${bindir}/Xsgx"
+> > >>  FILES_${PN}-tests =3D "${bindir}/*test*"
+> > >>  FILES_${PN}-dbg =3D "${libdir}/.debug/* ${bindir}/.debug/* \
 > > >>                     ${libdir}/ES*/.debug ${bindir}/*/.debug\ @@
-> > >> -338,12 +261,8 @@ FILES_${PN}-dbg = "${libdir}/.debug/*
+> > >> -338,12 +261,8 @@ FILES_${PN}-dbg =3D "${libdir}/.debug/*
 > > >> ${bindir}/.debug/* \
 > > >>  	"
 > > >>
-> > >>  FILES_${PN}-rawdemos = "${bindir}/SGX/demos/Raw/*"
-> > >> -FILES_${PN}-x11demos = "${bindir}/SGX/demos/X11/*
+> > >>  FILES_${PN}-rawdemos =3D "${bindir}/SGX/demos/Raw/*"
+> > >> -FILES_${PN}-x11demos =3D "${bindir}/SGX/demos/X11/*
 > > >> ${prefix}/share/applications "
-> > >> -RRECOMMENDS_${PN}-x11demos = "${PN}-x11wsegl"
+> > >> -RRECOMMENDS_${PN}-x11demos =3D "${PN}-x11wsegl"
 > > >>
-> > >>  FILES_${PN}-rawtrainingcourses =
+> > >>  FILES_${PN}-rawtrainingcourses =3D
 > > >> "${bindir}/SGX/trainingcourses/Raw/*"
-> > >> -FILES_${PN}-x11trainingcourses =
+> > >> -FILES_${PN}-x11trainingcourses =3D
 > > >> "${bindir}/SGX/trainingcourses/X11/*"
-> > >> -RRECOMMENDS_${PN}-x11trainingcourses = "${PN}-x11wsegl"
+> > >> -RRECOMMENDS_${PN}-x11trainingcourses =3D "${PN}-x11wsegl"
 > > >>
 > > >>  # The libs need the kernel-modules
-> > >>  RRECOMMENDS_${PN} += "omap3-sgx-modules"
-> > >> @@ -358,7 +277,6 @@ INSANE_SKIP_${PN}-es5 = "ldflags dev-so
+> > >>  RRECOMMENDS_${PN} +=3D "omap3-sgx-modules"
+> > >> @@ -358,7 +277,6 @@ INSANE_SKIP_${PN}-es5 =3D "ldflags dev-so
 > > >staticdev"
-> > >>  INSANE_SKIP_${PN}-es6 = "ldflags dev-so staticdev"
-> > >>  INSANE_SKIP_${PN}-es8 = "ldflags dev-so staticdev"
-> > >>  INSANE_SKIP_${PN}-rawdemos = "ldflags dev-so useless-rpaths"
-> > >> -INSANE_SKIP_${PN}-x11demos = "ldflags dev-so useless-rpaths"
-> > >>  INSANE_SKIP_${PN}-blitwsegl = "ldflags"
-> > >>  INSANE_SKIP_${PN}-blitwsegl-es3 = "ldflags"
-> > >>  INSANE_SKIP_${PN}-blitwsegl-es5 = "ldflags"
-> > >> @@ -379,18 +297,7 @@ INSANE_SKIP_${PN}-linuxfbwsegl-es3 =
+> > >>  INSANE_SKIP_${PN}-es6 =3D "ldflags dev-so staticdev"
+> > >>  INSANE_SKIP_${PN}-es8 =3D "ldflags dev-so staticdev"
+> > >>  INSANE_SKIP_${PN}-rawdemos =3D "ldflags dev-so useless-rpaths"
+> > >> -INSANE_SKIP_${PN}-x11demos =3D "ldflags dev-so useless-rpaths"
+> > >>  INSANE_SKIP_${PN}-blitwsegl =3D "ldflags"
+> > >>  INSANE_SKIP_${PN}-blitwsegl-es3 =3D "ldflags"
+> > >>  INSANE_SKIP_${PN}-blitwsegl-es5 =3D "ldflags"
+> > >> @@ -379,18 +297,7 @@ INSANE_SKIP_${PN}-linuxfbwsegl-es3 =3D
 > > >"ldflags"
-> > >>  INSANE_SKIP_${PN}-linuxfbwsegl-es5 = "ldflags"
-> > >>  INSANE_SKIP_${PN}-linuxfbwsegl-es6 = "ldflags"
-> > >>  INSANE_SKIP_${PN}-linuxfbwsegl-es8 = "ldflags"
-> > >> -INSANE_SKIP_${PN}-x11wsegl = "ldflags dev-so"
-> > >> -INSANE_SKIP_${PN}-x11wsegl-es3 = "ldflags dev-so"
-> > >> -INSANE_SKIP_${PN}-x11wsegl-es5 = "ldflags dev-so"
-> > >> -INSANE_SKIP_${PN}-x11wsegl-es6 = "ldflags dev-so"
-> > >> -INSANE_SKIP_${PN}-x11wsegl-es8 = "ldflags dev-so"
-> > >> -INSANE_SKIP_${PN}-driwsegl = "ldflags dev-so"
-> > >> -INSANE_SKIP_${PN}-driwsegl-es3 = "ldflags dev-so"
-> > >> -INSANE_SKIP_${PN}-driwsegl-es5 = "ldflags dev-so"
-> > >> -INSANE_SKIP_${PN}-driwsegl-es6 = "ldflags dev-so"
-> > >> -INSANE_SKIP_${PN}-driwsegl-es8 = "ldflags dev-so"
-> > >>  INSANE_SKIP_${PN}-tests = "ldflags"
-> > >> -INSANE_SKIP_xserver-kdrive-powervrsgx = "ldflags"
+> > >>  INSANE_SKIP_${PN}-linuxfbwsegl-es5 =3D "ldflags"
+> > >>  INSANE_SKIP_${PN}-linuxfbwsegl-es6 =3D "ldflags"
+> > >>  INSANE_SKIP_${PN}-linuxfbwsegl-es8 =3D "ldflags"
+> > >> -INSANE_SKIP_${PN}-x11wsegl =3D "ldflags dev-so"
+> > >> -INSANE_SKIP_${PN}-x11wsegl-es3 =3D "ldflags dev-so"
+> > >> -INSANE_SKIP_${PN}-x11wsegl-es5 =3D "ldflags dev-so"
+> > >> -INSANE_SKIP_${PN}-x11wsegl-es6 =3D "ldflags dev-so"
+> > >> -INSANE_SKIP_${PN}-x11wsegl-es8 =3D "ldflags dev-so"
+> > >> -INSANE_SKIP_${PN}-driwsegl =3D "ldflags dev-so"
+> > >> -INSANE_SKIP_${PN}-driwsegl-es3 =3D "ldflags dev-so"
+> > >> -INSANE_SKIP_${PN}-driwsegl-es5 =3D "ldflags dev-so"
+> > >> -INSANE_SKIP_${PN}-driwsegl-es6 =3D "ldflags dev-so"
+> > >> -INSANE_SKIP_${PN}-driwsegl-es8 =3D "ldflags dev-so"
+> > >>  INSANE_SKIP_${PN}-tests =3D "ldflags"
+> > >> -INSANE_SKIP_xserver-kdrive-powervrsgx =3D "ldflags"
 > > >>
 > > >>  # Quality control is really poor on these SDKs, so hack around
 > > >the
 > > >> latest madness:
-> > >>  FILES_${PN} += "${libdir}/*.so "
-> > >> @@ -404,12 +311,6 @@ INITSCRIPT_PARAMS = "start 30 5 2 . stop 40
+> > >>  FILES_${PN} +=3D "${libdir}/*.so "
+> > >> @@ -404,12 +311,6 @@ INITSCRIPT_PARAMS =3D "start 30 5 2 . stop 40
 > > >> 0 1 6 ."
 > > >>  # Append to update-rc.d postinst
 > > >>  pkg_postinst_${PN}_append() {
@@ -574,7 +596,7 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >> -rm -f $D${sysconfdir}/powervr-esrev
 > > >> -
 > > >> -echo "[default]" > $D${sysconfdir}/powervr.ini -echo
-> > >> "WindowSystem=libpvrPVR2D_X11WSEGL.so.1" >>
+> > >> "WindowSystem=3DlibpvrPVR2D_X11WSEGL.so.1" >>
 > > >> $D${sysconfdir}/powervr.ini -}
 > > >> -
 > > >> -pkg_postinst_${PN}-driwsegl() {
@@ -587,8 +609,8 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >> index 7c6f231..165a406 100644
 > > >> --- a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
 > > >> +++ b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
-> > >> @@ -23,8 +23,6 @@ TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
-> > >>  SRC_URI = "http://software-
+> > >> @@ -23,8 +23,6 @@ TI_BIN_UNPK_WDEXT :=3D "/Graphics_SDK_${SGXPV}"
+> > >>  SRC_URI =3D "http://software-
 > > >>
 > > >dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV
 > > >> }/exports/${BINFILE} \
@@ -597,25 +619,25 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >> -           file://rc_dri.pvr \
 > > >> -           file://sample.desktop \
 > > >>             file://99-bufferclass.rules  \  "
-> > >>  SRC_URI[md5sum] = "bd35e9d8843aff3a2aca9d41e7db1c7d"
-> > >> @@ -32,44 +30,5 @@ SRC_URI[sha256sum] =
+> > >>  SRC_URI[md5sum] =3D "bd35e9d8843aff3a2aca9d41e7db1c7d"
+> > >> @@ -32,44 +30,5 @@ SRC_URI[sha256sum] =3D
 > > >> "eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249
 > > >>
-> > >>  S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
+> > >>  S =3D "${WORKDIR}/Graphics_SDK_${SGXPV}"
 > > >>
-> > >> -LIBGLESWINDOWSYSTEM ?= "${@base_contains('DISTRO_FEATURES',
+> > >> -LIBGLESWINDOWSYSTEM ?=3D "${@base_contains('DISTRO_FEATURES',
 > > >> 'x11',"libpvrPVR2D_DRIWSEGL.so" ,"libpvrPVR2D_FRONTWSEGL.so.1",
 > > >d)}"
-> > >> +LIBGLESWINDOWSYSTEM ?= "libpvrPVR2D_FRONTWSEGL.so.1"
+> > >> +LIBGLESWINDOWSYSTEM ?=3D "libpvrPVR2D_FRONTWSEGL.so.1"
 > > >>
 > > >> -do_configure_append() {
 > > >> -
 > > >> -    # Change PVR server's user mode library to point to DRI
 > > >> -    for drifile in $(find ${S} -name "libsrv_um_dri.so"); do
-> > >> -    if [ "$drifile" != "" ]
+> > >> -    if [ "$drifile" !=3D "" ]
 > > >> -    then
-> > >> -        dir=$(dirname ${drifile})
-> > >> -        if [ "$SUPPORT_XORG" = "1" ]
+> > >> -        dir=3D$(dirname ${drifile})
+> > >> -        if [ "$SUPPORT_XORG" =3D "1" ]
 > > >> -        then
 > > >> -            mv ${dir}/libsrv_um_dri.so ${dir}/libsrv_um.so
 > > >> -        else
@@ -644,7 +666,7 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >> -
 > > >> -    rm ${D}${sysconfdir}/init.d/pvr-init
 > > >> -
-> > >> -    if [ "$SUPPORT_XORG" = "1" ]; then
+> > >> -    if [ "$SUPPORT_XORG" =3D "1" ]; then
 > > >> -        cp -pP ${WORKDIR}/rc_dri.pvr
 > > >> ${D}${sysconfdir}/init.d/pvr-init
 > > >> -    else
@@ -654,8 +676,8 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > >> -
 > > >> -}
 > > >> -
-> > >> -RRECOMMENDS_${PN}-x11demos = "${PN}-driwsegl"
-> > >> -RRECOMMENDS_${PN}-x11trainingcourses = "${PN}-driwsegl"
+> > >> -RRECOMMENDS_${PN}-x11demos =3D "${PN}-driwsegl"
+> > >> -RRECOMMENDS_${PN}-x11trainingcourses =3D "${PN}-driwsegl"
 > > >> --
 > > >> 1.7.1
 > > >>
@@ -667,9 +689,13 @@ On Tue, May 14, 2013 at 01:23:16PM -0400, Denys Dmytriyenko wrote:
 > > meta-ti mailing list
 > > meta-ti@yoctoproject.org
 > > https://lists.yoctoproject.org/listinfo/meta-ti
-> > 
+> >=20
 > _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
 > https://lists.yoctoproject.org/listinfo/meta-ti
+_______________________________________________
+meta-ti mailing list
+meta-ti@yoctoproject.org
+https://lists.yoctoproject.org/listinfo/meta-ti
 
