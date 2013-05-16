@@ -1,27 +1,27 @@
 Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9F318E01366
-	for <meta-ti@yoctoproject.org>; Wed, 15 May 2013 13:34:03 -0700 (PDT)
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 282B9E01472
+	for <meta-ti@yoctoproject.org>; Wed, 15 May 2013 19:11:15 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r4FKY2jm006640
-	for <meta-ti@yoctoproject.org>; Wed, 15 May 2013 15:34:02 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r4FKY2UX005397
-	for <meta-ti@yoctoproject.org>; Wed, 15 May 2013 15:34:02 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 15 May 2013 15:34:01 -0500
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r4G2BDXD001930
+	for <meta-ti@yoctoproject.org>; Wed, 15 May 2013 21:11:13 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r4G2BDSt012377
+	for <meta-ti@yoctoproject.org>; Wed, 15 May 2013 21:11:13 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 15 May 2013 21:11:12 -0500
 Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r4FKY1pa026524	for
-	<meta-ti@yoctoproject.org>; Wed, 15 May 2013 15:34:01 -0500
-Date: Wed, 15 May 2013 16:27:50 -0400
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r4G2BCN3011781	for
+	<meta-ti@yoctoproject.org>; Wed, 15 May 2013 21:11:12 -0500
+Date: Wed, 15 May 2013 22:05:01 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <922416909.141.1368649670606.JavaMail.jenkins@puget>
+Message-ID: <1733711464.145.1368669901274.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-05-15_15-40-34
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-05-15_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,10 +34,11 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 May 2013 20:34:03 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_140_6187995.1368649670602"
+X-List-Received-Date: Thu, 16 May 2013 02:11:15 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_144_1985442650.1368669901273"
 
-------=_Part_140_6187995.1368649670602
+------=_Part_144_1985442650.1368669901273
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
@@ -51,7 +52,7 @@ Status for 05/15/13
 
 <h2>Status for 05/15/13</h2>
 
-<h2>BUILD_ID: build-2013-05-15_15-41-39</h2>
+<h2>BUILD_ID: build-2013-05-15_21-02-51</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -192,4 +193,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_140_6187995.1368649670602--
+------=_Part_144_1985442650.1368669901273--
