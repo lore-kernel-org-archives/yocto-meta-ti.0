@@ -1,42 +1,27 @@
-Return-Path: <Mans.Andersson@nibe.se>
-Received: from bmail.nibe.se (bmail.nibe.co.uk [193.15.255.103])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 254D2E013A5
-	for <meta-ti@yoctoproject.org>; Mon, 27 May 2013 02:21:00 -0700 (PDT)
-X-AuditID: 0a0201f8-b7fb96d000002bc1-07-51a3257ae0ef
-Received: from mail.nibe.se (nivm100.nibe.se [10.2.0.100])
-	by bmail.nibe.se (NIBE mail) with SMTP id 8C.23.11201.A7523A15;
-	Mon, 27 May 2013 11:20:58 +0200 (CEST)
-Received: from NIVM101.nibe.se ([fe80::2db2:7275:360:31db]) by nivm100.nibe.se
-	([fe80::d0f4:a5ac:8015:ae67%16]) with mapi id 14.02.0342.003;
-	Mon, 27 May 2013 11:20:58 +0200
-From: =?iso-8859-1?Q?M=E5ns_Andersson?= <Mans.Andersson@nibe.se>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] Building and booting AM335x Starter Kit
-Thread-Index: Ac5KONvV22la6Gy5QhyLjN61KcC+xgAY0NoAAVLBsfAAaWkyAAJLhUTQ
-Date: Mon, 27 May 2013 09:20:57 +0000
-Message-ID: <9271A7A786434844A19F14A6050530257A544E7A@NIVM101.nibe.se>
-References: <9271A7A786434844A19F14A6050530257A5409FE@NIVM101.nibe.se>
-	<20130506225603.GG10607@edge>
-	<9271A7A786434844A19F14A6050530257A542AEF@NIVM101.nibe.se>
-	<20130515185357.GE20048@edge>
-In-Reply-To: <20130515185357.GE20048@edge>
-Accept-Language: en-US, sv-SE
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.21.4]
+Return-Path: <denys@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04A38E01423
+	for <meta-ti@yoctoproject.org>; Tue, 28 May 2013 18:17:43 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r4T1HeBp002654
+	for <meta-ti@yoctoproject.org>; Tue, 28 May 2013 20:17:40 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r4T1Hecw009574
+	for <meta-ti@yoctoproject.org>; Tue, 28 May 2013 20:17:40 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 28 May 2013 20:17:40 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r4T1He9p007312	for
+	<meta-ti@yoctoproject.org>; Tue, 28 May 2013 20:17:40 -0500
+Date: Tue, 28 May 2013 21:11:08 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <2100478515.173.1369789868881.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupgkeLIzCtJLcpLzFFi42LhYmJI0a1SXRxocP2ChMXW9j4WB0aP9hN9
-	bAGMUVw2Kak5mWWpRfp2CVwZpzt2sxTsqq5YefEYSwPjjsQuRg4OCQETiU2L3bsYOYFMMYkL
-	99azdTFycQgJLGaUuP9tASNIQkhgA6PEltsqIDabgIPExnnNrCC2iIClxPuP79lAbGEBO4mr
-	8xqYIOL2EjufnGOHsN0kDj6ZAVbPIqAq0fP+E5jNCxS/cWY9I8Syw4wSN67fZAZJcApoSfy4
-	vZEN5DhGAVmJvxvA6pkFxCVuPZnPBHGoiMTDi6fZIGxRiZeP/7FC2PISW9Z9Z4KoT5d48Ooq
-	1C5BiZMzn7BMYBSZhWTULCRls5CUQcT1JG5MncIGYWtLLFv4mhnCjpY4u/cCO4RtL3H7wGog
-	mwvIPsEoMXHWPKihihJTuh+yL2DkXMXIm5SbmJmjl5eZlKpXnLqJERxjjD92MM7drHmIUYCD
-	UYmH11xhcaAQa2JZcWXuIUYVoP5HG1ZfYJRiycvPS1US4U2IXhQoxJuSWFmVWpQfX1Sak1p8
-	iJGJg1OqgVF3g11IjgsTi/riilemmQv+MTzrkLefU1AqZ1+1+Sdn4g4J0SW9TSvDDbYqLjY9
-	FfzM023tt6mcZmff5n7vSz6Y1XdQ+7H4xBtcTVfCloq22heu4pYPCar46molZNtmYThj93Pb
-	XbfdeJ0v5EnLf8irCehrZC9feuH8tv2X9pSqnzrrkuZcpMRSnJFoqMVcVJwIAKgGZICbAgAA
-Subject: Re: Building and booting AM335x Starter Kit
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-05-21_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,335 +34,163 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 May 2013 09:21:02 -0000
-X-Groupsio-MsgNum: 2765
-Content-Language: en-US
+X-List-Received-Date: Wed, 29 May 2013 01:17:44 -0000
 Content-Type: multipart/mixed;
-	boundary="_002_9271A7A786434844A19F14A6050530257A544E7ANIVM101nibese_"
+	boundary="----=_Part_172_1742184359.1369789868880"
 
---_002_9271A7A786434844A19F14A6050530257A544E7ANIVM101nibese_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+------=_Part_172_1742184359.1369789868880
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-The fix for the am335x-evmsk board is quite simple. See the attached patch =
-file for more info.
+<html>
+<head>
+<title>
+Status for 05/28/13
+</title>
+</head>
+<body>
 
-// M=E5ns
+<h2>Status for 05/28/13</h2>
 
------Original Message-----
-From: Denys Dmytriyenko [mailto:denys@ti.com]=20
-Sent: den 15 maj 2013 20:54
-To: M=E5ns Andersson
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [meta-ti] Building and booting AM335x Starter Kit
+<h2>BUILD_ID: build-2013-05-21_21-02-48</h2>
 
-On Mon, May 13, 2013 at 02:38:10PM +0000, M=E5ns Andersson wrote:
-> It seems that backporting the kernel to v3.2 (linux-am335x-psp_3.2) works=
-.
-> Are there any plans for when the linux-ti-staging branch will support=20
-> this machine?
+<h2>Clean Build: false</h2>
 
-M=E5ns,
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-As our test team just confirmed, it appears to be a recent regression in th=
-e
-linux-ti-staging-3.8 kernel - it works on EVM and fails on SK. We will be l=
-ooking into this issue, thanks for reporting.
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
 
---
-Denys
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.05"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-> -----Original Message-----
-> From: Denys Dmytriyenko [mailto:denys@ti.com]=20
-> Sent: den 7 maj 2013 00:56
-> To: M=E5ns Andersson
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] Building and booting AM335x Starter Kit
->=20
-> On Mon, May 06, 2013 at 09:16:13AM +0000, M=E5ns Andersson wrote:
-> > Hi, I'm currently trying out the meta-ti layer on an AM335x EVM=20
-> > Starter Kit (not the regular am335x-evm). As far as I can see the=20
-> > meta-ti layer's machine configuration for am335x-evm should work also o=
-n the am335x-evmsk.
-> > But I'm having trouble booting the device after doing a build.
-> >=20
-> > The x-loader and u-boot stages works alright and the kernel is loaded.=
-=20
-> > But during kernel boot the system hangs with the following statement
-> > [    1.963153] Waiting for root device /dev/mmcblk0p2...
-> > I have been reading up on dtb files and how they are managed by the=20
-> > ti-staging-kernel, and as long as I can see the correct one
-> > (am335x-evmsk.dtb) are included in the kernel and have all the device=20
-> > configurations needed.
-> >=20
-> > Are there any known problems with this machine configuration, or have=20
-> > I missed some important stage? Any help or point in the right=20
-> > direction is highely appreciated. :-)
->=20
-> Hi,
->=20
-> How fresh is your copy of meta-ti? Can you please confirm the latest comm=
-it?
->=20
-> --
-> Denys
->=20
->=20
-> > Thanks,
-> > // M=E5ns
-> >=20
-> > Full kernel output:
-> > [    0.000000] Booting Linux on physical CPU 0x0
-> > [    0.000000] Linux version 3.8.8 (mans@calculon) (gcc version 4.7.2 (=
-GCC) ) #1 SMP Thu May 2 16:53:58 CEST 2013
-> > [    0.000000] CPU: ARMv7 Processor [413fc082] revision 2 (ARMv7), cr=
-=3D10c53c7d
-> > [    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing i=
-nstruction cache
-> > [    0.000000] Machine: Generic AM33XX (Flattened Device Tree), model: =
-TI AM335x EVM-SK
-> > [    0.000000] Memory policy: ECC disabled, Data cache writeback
-> > [    0.000000] AM335X ES1.0 (neon )
-> > [    0.000000] PERCPU: Embedded 9 pages/cpu @c1195000 s13440 r8192 d152=
-32 u36864
-> > [    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  =
-Total pages: 64768
-> > [    0.000000] Kernel command line: console=3DttyO0,115200n8 root=3D/de=
-v/mmcblk0p2 ro rootfstype=3Dext4 rootwait
-> > [    0.000000] PID hash table entries: 1024 (order: 0, 4096 bytes)
-> > [    0.000000] Dentry cache hash table entries: 32768 (order: 5, 131072=
- bytes)
-> > [    0.000000] Inode-cache hash table entries: 16384 (order: 4, 65536 b=
-ytes)
-> > [    0.000000] __ex_table already sorted, skipping sort
-> > [    0.000000] Memory: 255MB =3D 255MB total
-> > [    0.000000] Memory: 244384k/244384k available, 17760k reserved, 0K h=
-ighmem
-> > [    0.000000] Virtual kernel memory layout:
-> > [    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
-> > [    0.000000]     fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
-> > [    0.000000]     vmalloc : 0xd0800000 - 0xff000000   ( 744 MB)
-> > [    0.000000]     lowmem  : 0xc0000000 - 0xd0000000   ( 256 MB)
-> > [    0.000000]     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
-> > [    0.000000]     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
-> > [    0.000000]       .text : 0xc0008000 - 0xc079e87c   (7771 kB)
-> > [    0.000000]       .init : 0xc079f000 - 0xc07f8480   ( 358 kB)
-> > [    0.000000]       .data : 0xc07fa000 - 0xc08a8158   ( 697 kB)
-> > [    0.000000]        .bss : 0xc08a8158 - 0xc0e06274   (5497 kB)
-> > [    0.000000] Hierarchical RCU implementation.
-> > [    0.000000] 	RCU restricting CPUs from NR_CPUS=3D2 to nr_cpu_ids=3D1=
-.
-> > [    0.000000] NR_IRQS:16 nr_irqs:16 16
-> > [    0.000000] IRQ: Found an INTC at 0xfa200000 (revision 5.0) with 128=
- interrupts
-> > [    0.000000] Total of 128 interrupts on 1 active controller
-> > [    0.000000] OMAP clockevent source: GPTIMER2 at 24000000 Hz
-> > [    0.000000] sched_clock: 32 bits at 24MHz, resolution 41ns, wraps ev=
-ery 178956ms
-> > [    0.000000] OMAP clocksource: GPTIMER1 at 24000000 Hz
-> > [    0.000000] Console: colour dummy device 80x30
-> > [    0.000000] Lock dependency validator: Copyright (c) 2006 Red Hat, I=
-nc., Ingo Molnar
-> > [    0.000000] ... MAX_LOCKDEP_SUBCLASSES:  8
-> > [    0.000000] ... MAX_LOCK_DEPTH:          48
-> > [    0.000000] ... MAX_LOCKDEP_KEYS:        8191
-> > [    0.000000] ... CLASSHASH_SIZE:          4096
-> > [    0.000000] ... MAX_LOCKDEP_ENTRIES:     16384
-> > [    0.000000] ... MAX_LOCKDEP_CHAINS:      32768
-> > [    0.000000] ... CHAINHASH_SIZE:          16384
-> > [    0.000000]  memory used by lock dependency info: 3695 kB
-> > [    0.000000]  per task-struct memory footprint: 1152 bytes
-> > [    0.000892] Calibrating delay loop... 478.91 BogoMIPS (lpj=3D1867776=
-)
-> > [    0.085706] pid_max: default: 32768 minimum: 301
-> > [    0.086166] Security Framework initialized
-> > [    0.086325] Mount-cache hash table entries: 512
-> > [    0.098358] CPU: Testing write buffer coherency: ok
-> > [    0.099727] CPU0: thread -1, cpu 0, socket -1, mpidr 0
-> > [    0.099805] Setting up static identity map for 0x80558830 - 0x805588=
-a0
-> > [    0.102306] Brought up 1 CPUs
-> > [    0.102333] SMP: Total of 1 processors activated (478.91 BogoMIPS).
-> > [    0.105274] devtmpfs: initialized
-> > [    0.122620] omap_hwmod: debugss: _wait_target_disable failed
-> > [    0.181379] pinctrl core: initialized pinctrl subsystem
-> > [    0.186947] regulator-dummy: no parameters
-> > [    0.189120] NET: Registered protocol family 16
-> > [    0.189885] DMA: preallocated 256 KiB pool for atomic coherent alloc=
-ations
-> > [    0.191081] omap-gpmc omap-gpmc: GPMC revision 6.0
-> > [    0.209537] platform 49000000.edma: alias fck already exists
-> > [    0.209577] platform 49000000.edma: alias fck already exists
-> > [    0.209599] platform 49000000.edma: alias fck already exists
-> > [    0.214764] OMAP GPIO hardware version 0.1
-> > [    0.239110] DSS not supported on this SoC
-> > [    0.239176] No ATAGs?
-> > [    0.239192] hw-breakpoint: debug architecture 0x4 unsupported.
-> > [    0.315069] bio: create slab <bio-0> at 0
-> > [    0.356901] edma-dma-engine edma-dma-engine.0: TI EDMA DMA engine dr=
-iver
-> > [    0.358967] vbat: 5000 mV=20
-> > [    0.360587] lis3_reg: no parameters
-> > [    0.370504] SCSI subsystem initialized
-> > [    0.374083] usbcore: registered new interface driver usbfs
-> > [    0.374588] usbcore: registered new interface driver hub
-> > [    0.375796] usbcore: registered new device driver usb
-> > [    0.379055] omap_i2c 44e0b000.i2c: could not find pctldev for node /=
-pinmux@44e10800/pinmux_i2c0_pins, deferring probe
-> > [    0.379134] platform 44e0b000.i2c: Driver omap_i2c requests probe de=
-ferral
-> > [    0.386843] Switching to clocksource gp_timer
-> > [    0.514987] NET: Registered protocol family 2
-> > [    0.516871] TCP established hash table entries: 2048 (order: 2, 1638=
-4 bytes)
-> > [    0.517088] TCP bind hash table entries: 2048 (order: 4, 73728 bytes=
-)
-> > [    0.518053] TCP: Hash tables configured (established 2048 bind 2048)
-> > [    0.518279] TCP: reno registered
-> > [    0.518314] UDP hash table entries: 256 (order: 2, 20480 bytes)
-> > [    0.518579] UDP-Lite hash table entries: 256 (order: 2, 20480 bytes)
-> > [    0.519444] NET: Registered protocol family 1
-> > [    0.521182] RPC: Registered named UNIX socket transport module.
-> > [    0.521209] RPC: Registered udp transport module.
-> > [    0.521222] RPC: Registered tcp transport module.
-> > [    0.521235] RPC: Registered tcp NFSv4.1 backchannel transport module=
-.
-> > [    0.523804] NetWinder Floating Point Emulator V0.97 (double precisio=
-n)
-> > [    0.706238] VFS: Disk quotas dquot_6.5.2
-> > [    0.706507] Dquot-cache hash table entries: 1024 (order 0, 4096 byte=
-s)
-> > [    0.709492] NFS: Registering the id_resolver key type
-> > [    0.709947] Key type id_resolver registered
-> > [    0.709970] Key type id_legacy registered
-> > [    0.710112] jffs2: version 2.2. (NAND) (SUMMARY)  =A9 2001-2006 Red =
-Hat, Inc.
-> > [    0.710677] msgmni has been set to 477
-> > [    0.714052] io scheduler noop registered
-> > [    0.714078] io scheduler deadline registered
-> > [    0.714158] io scheduler cfq registered (default)
-> > [    0.718267] pinctrl-single 44e10800.pinmux: 142 pins at pa f9e10800 =
-size 568
-> > [    0.722650] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
-> > [    0.730659] 44e09000.serial: ttyO0 at MMIO 0x44e09000 (irq =3D 88) i=
-s a OMAP UART0
-> > [    1.337753] console [ttyO0] enabled
-> > [    1.345233] [drm] Initialized drm 1.1.0 20060810
-> > [    1.381945] brd: module loaded
-> > [    1.404677] loop: module loaded
-> > [    1.415196] mtdoops: mtd device (mtddev=3Dname/number) must be suppl=
-ied
-> > [    1.423531] OneNAND driver initializing
-> > [    1.433822] usbcore: registered new interface driver asix
-> > [    1.440303] usbcore: registered new interface driver cdc_ether
-> > [    1.447126] usbcore: registered new interface driver smsc95xx
-> > [    1.454006] usbcore: registered new interface driver net1080
-> > [    1.460552] usbcore: registered new interface driver cdc_subset
-> > [    1.467325] usbcore: registered new interface driver zaurus
-> > [    1.473870] usbcore: registered new interface driver cdc_ncm
-> > [    1.481582] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driv=
-er
-> > [    1.488549] ehci-omap: OMAP-EHCI Host Controller driver
-> > [    1.495407] usbcore: registered new interface driver cdc_wdm
-> > [    1.501497] Initializing USB Mass Storage driver...
-> > [    1.507211] usbcore: registered new interface driver usb-storage
-> > [    1.513607] USB Mass Storage support registered.
-> > [    1.518985] usbcore: registered new interface driver usbtest
-> > [    1.527313] mousedev: PS/2 mouse device common for all mice
-> > [    1.539037] omap_rtc 44e3e000.rtc: rtc core: registered 44e3e000.rtc=
- as rtc0
-> > [    1.548516] i2c /dev entries driver
-> > [    1.552865] Driver for 1-wire Dallas network protocol.
-> > [    1.563044] omap_wdt: OMAP Watchdog Timer Rev 0x01: initial timeout =
-60 sec
-> > [    1.576768] usbcore: registered new interface driver usbhid
-> > [    1.582806] usbhid: USB HID core driver
-> > [    1.590744] oprofile: no performance counters
-> > [    1.597491] oprofile: using timer interrupt.
-> > [    1.602913] TCP: cubic registered
-> > [    1.606475] Initializing XFRM netlink socket
-> > [    1.611083] NET: Registered protocol family 17
-> > [    1.615894] NET: Registered protocol family 15
-> > [    1.620933] Key type dns_resolver registered
-> > [    1.625607] VFP support v0.3: implementor 41 architecture 3 part 30 =
-variant c rev 3
-> > [    1.633784] mux: Failed to setup hwmod io irq -22
-> > [    1.640005] cpufreq_cpu0: failed to get cpu0 regulator
-> > [    1.647916] Power Management for AM33XX family
-> > [    1.653293] Trying to load am335x-pm-firmware.bin
-> > [    1.658068] ThumbEE CPU extension supported.
-> > [    1.672682] omap_i2c 44e0b000.i2c: bus 0 rev0.11 at 400 kHz
-> > [    1.681015] tps65910 0-002d: No interrupt support, no core IRQ
-> > [    1.695217] vrtc: 1800 mV=20
-> > [    1.698479] vrtc: supplied by vbat
-> > [    1.705640] vio: at 1500 mV=20
-> > [    1.708999] vio: supplied by vbat
-> > [    1.715840] vdd_mpu: 912 <--> 1312 mV at 1262 mV=20
-> > [    1.720918] vdd_mpu: supplied by vbat
-> > [    1.727900] vdd_core: 912 <--> 1150 mV at 1137 mV=20
-> > [    1.733182] vdd_core: supplied by vbat
-> > [    1.739881] vdd3: 5000 mV=20
-> > [    1.745230] vdig1: at 1800 mV=20
-> > [    1.748697] vdig1: supplied by vbat
-> > [    1.755399] vdig2: at 1800 mV=20
-> > [    1.758758] vdig2: supplied by vbat
-> > [    1.765275] vpll: at 1800 mV=20
-> > [    1.768517] vpll: supplied by vbat
-> > [    1.774885] vdac: at 1800 mV=20
-> > [    1.778267] vdac: supplied by vbat
-> > [    1.784590] vaux1: at 1800 mV=20
-> > [    1.788048] vaux1: supplied by vbat
-> > [    1.794551] vaux2: at 3300 mV=20
-> > [    1.797903] vaux2: supplied by vbat
-> > [    1.804415] vaux33: at 3300 mV=20
-> > [    1.807843] vaux33: supplied by vbat
-> > [    1.814396] vmmc: 1800 <--> 3300 mV at 3300 mV=20
-> > [    1.819420] vmmc: supplied by vbat
-> > [    1.887318] davinci_mdio 4a101000.mdio: davinci mdio revision 1.6
-> > [    1.893729] davinci_mdio 4a101000.mdio: detected phy mask fffffffc
-> > [    1.904187] libphy: 4a101000.mdio: probed
-> > [    1.908420] davinci_mdio 4a101000.mdio: phy[0]: device 4a101000.mdio=
-:00, driver unknown
-> > [    1.916908] davinci_mdio 4a101000.mdio: phy[1]: device 4a101000.mdio=
-:01, driver unknown
-> > [    1.925803] Random MACID =3D de:dc:71:aa:37:fa
-> > [    1.937424] input: gpio_buttons.7 as /devices/gpio_buttons.7/input/i=
-nput0
-> > [    1.947620] omap_rtc 44e3e000.rtc: setting system clock to 2000-01-0=
-1 00:00:01 UTC (946684801)
-> > [    1.963153] Waiting for root device /dev/mmcblk0p2...
-> >=20
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-
---_002_9271A7A786434844A19F14A6050530257A544E7ANIVM101nibese_
-Content-Type: application/octet-stream;
-	name="0001-Add-mmc-support-to-am335x-evmsk.patch"
-Content-Description: 0001-Add-mmc-support-to-am335x-evmsk.patch
-Content-Disposition: attachment;
-	filename="0001-Add-mmc-support-to-am335x-evmsk.patch"; size=657;
-	creation-date="Mon, 27 May 2013 09:16:51 GMT";
-	modification-date="Fri, 24 May 2013 06:41:12 GMT"
-Content-Transfer-Encoding: base64
-
-RnJvbSA0Y2RjNzU1MjZjNWYyYzg5YzZjZWViYzIzMWVkMDdmM2I1NDBkMGU4IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBNYW5zIEFuZGVyc3NvbiA8bWFucy5hbmRlcnNzb25AbmliZS5z
-ZT4KRGF0ZTogVGh1LCAyMyBNYXkgMjAxMyAwMTowMzoxMSAtMDcwMApTdWJqZWN0OiBbUEFUQ0hd
-IEFkZCBtbWMgc3VwcG9ydCB0byBhbTMzNXgtZXZtc2sKCi0tLQogYXJjaC9hcm0vYm9vdC9kdHMv
-YW0zMzV4LWV2bXNrLmR0cyB8ICAgIDUgKysrKysKIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlv
-bnMoKykKCmRpZmYgLS1naXQgYS9hcmNoL2FybS9ib290L2R0cy9hbTMzNXgtZXZtc2suZHRzIGIv
-YXJjaC9hcm0vYm9vdC9kdHMvYW0zMzV4LWV2bXNrLmR0cwppbmRleCBiN2M5ZTY4Li5hY2RiNzkw
-IDEwMDY0NAotLS0gYS9hcmNoL2FybS9ib290L2R0cy9hbTMzNXgtZXZtc2suZHRzCisrKyBiL2Fy
-Y2gvYXJtL2Jvb3QvZHRzL2FtMzM1eC1ldm1zay5kdHMKQEAgLTI4Miw2ICsyODIsMTEgQEAKIAlw
-aHlfaWQgPSA8JmRhdmluY2lfbWRpbz4sIDwxPjsKIH07CiAKKyZtbWMxIHsKKwlzdGF0dXMgPSAi
-b2theSI7CisJdm1tYy1zdXBwbHkgPSA8JnZtbWNfcmVnPjsKK307CisKICZzaGFtIHsKIAlzdGF0
-dXMgPSAib2theSI7CiB9OwotLSAKMS43LjkuNQoK
-
---_002_9271A7A786434844A19F14A6050530257A544E7ANIVM101nibese_--
+------=_Part_172_1742184359.1369789868880--
