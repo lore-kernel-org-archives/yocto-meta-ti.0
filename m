@@ -1,30 +1,27 @@
 Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 92484E01466
-	for <meta-ti@yoctoproject.org>; Wed, 29 May 2013 14:18:08 -0700 (PDT)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0710CE014DE
+	for <meta-ti@yoctoproject.org>; Wed, 29 May 2013 18:20:23 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r4TLI6ns028789
-	for <meta-ti@yoctoproject.org>; Wed, 29 May 2013 16:18:07 -0500
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r4U1KNWr031802
+	for <meta-ti@yoctoproject.org>; Wed, 29 May 2013 20:20:23 -0500
 Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r4TLI6ts006513
-	for <meta-ti@yoctoproject.org>; Wed, 29 May 2013 16:18:06 -0500
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r4U1KNrw016440
+	for <meta-ti@yoctoproject.org>; Wed, 29 May 2013 20:20:23 -0500
 Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
 	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 29 May 2013 16:18:06 -0500
-Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r4TLI6T9028007;
-	Wed, 29 May 2013 16:18:06 -0500
-Date: Wed, 29 May 2013 17:18:05 -0400
+	Wed, 29 May 2013 20:20:22 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r4U1KMCL010731	for
+	<meta-ti@yoctoproject.org>; Wed, 29 May 2013 20:20:22 -0500
+Date: Wed, 29 May 2013 21:13:49 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Prabindh Sundareson <prabu@ti.com>
-Message-ID: <20130529211805.GM4526@edge>
-References: <prabu@ti.com>
- <1368809879-27201-8-git-send-email-prabu@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <171242207.177.1369876429622.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-In-Reply-To: <1368809879-27201-8-git-send-email-prabu@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 08/10] libgles-omap3: Package files with right permission
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-05-29_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,51 +34,163 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 May 2013 21:18:08 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 30 May 2013 01:20:24 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_176_1844799199.1369876429621"
 
-On Fri, May 17, 2013 at 10:27:57PM +0530, Prabindh Sundareson wrote:
-> This patch adds the .so library files into the package, with correct
-> permissions for startup scripts.
-> 
-> This is part of a clean up of the Graphics recipe starting from
-> 4.09.00.01 version of the Graphics SDK.
-> 
-> Signed-off-by: Prabindh Sundareson <prabu@ti.com>
-> ---
->  recipes-graphics/libgles/libgles-omap3-no-x.inc |    3 +++
->  1 files changed, 3 insertions(+), 0 deletions(-)
-> 
-> diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-> index 4521d59..5bb257d 100644
-> --- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
-> +++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-> @@ -139,6 +139,7 @@ do_install () {
->  	
->  	install -d ${D}${sysconfdir}/init.d/
->  	cp -pP ${WORKDIR}/rc.pvr ${D}${sysconfdir}/init.d/pvr-init
-> +	chmod +x ${D}${sysconfdir}/init.d/pvr-init
->  
->  	install -d ${D}${sysconfdir}
->  	echo "[default]" > ${D}${sysconfdir}/powervr.ini
-> @@ -285,6 +286,8 @@ INSANE_SKIP_${PN}-linuxfbwsegl-es6 = "ldflags"
->  INSANE_SKIP_${PN}-linuxfbwsegl-es8 = "ldflags"
->  INSANE_SKIP_${PN}-tests = "ldflags"
->  
-> +FILES_${PN} += "${libdir}/*.so "
-> +FILES_${PN}-dev = "${includedir}"
+------=_Part_176_1844799199.1369876429621
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-See my comment for 7/10
+<html>
+<head>
+<title>
+Status for 05/29/13
+</title>
+</head>
+<body>
 
->  inherit update-rc.d
->  
->  INITSCRIPT_NAME = "pvr-init"
-> -- 
-> 1.7.1
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+<h2>Status for 05/29/13</h2>
 
+<h2>BUILD_ID: build-2013-05-29_21-02-47</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=red>FAILED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.05"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_176_1844799199.1369876429621--
