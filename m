@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60694E00429
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 61A2BE006C2
 	for <meta-ti@yoctoproject.org>; Tue,  4 Jun 2013 13:40:45 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 677255299C; Tue,  4 Jun 2013 20:40:44 +0000 (UTC)
+	id 78FBB52A6C; Tue,  4 Jun 2013 20:40:44 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130604204044.677255299C@arago-project.org>
+Message-Id: <20130604204044.78FBB52A6C@arago-project.org>
 Date: Tue,  4 Jun 2013 20:40:44 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : linux-ti-staging: Add dra7xx-evm support
+Subject: Chase Maupin : dra7xx-evm: Update serial console
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,48 +27,37 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: b0eb4888a4cc9d300e061e344c5dfc578390ec14
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b0eb4888a4cc9d300e061e344c5dfc578390ec14
+Commit: 64b76e0915b2dfbc989002567bebc5080351ff22
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=64b76e0915b2dfbc989002567bebc5080351ff22
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Mon Jun  3 17:11:45 2013 -0500
+Date:   Tue Jun  4 08:14:03 2013 -0500
 
-linux-ti-staging: Add dra7xx-evm support
+dra7xx-evm: Update serial console
 
-* Add the DTB entries for the dra7xx-evm machine type
-* Update to the latest git sources which have dra7xx-evm support.
-* Update the PV to match the latest source version
+* Updated the serial console to use ttyO0 which is what the
+  evm uses.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.8.bb |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+ conf/machine/dra7xx-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-index 4b93932..f62cbe2 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-@@ -18,6 +18,7 @@ RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
- KERNEL_DEVICETREE_ti33x = "arch/arm/boot/dts/am335x-evm.dts arch/arm/boot/dts/am335x-evmsk.dts arch/arm/boot/dts/am335x-bone.dts"
- KERNEL_DEVICETREE_beaglebone = "arch/arm/boot/dts/am335x-bone.dts"
- KERNEL_DEVICETREE_omap5-evm = "arch/arm/boot/dts/omap5-sevm.dts arch/arm/boot/dts/omap5-uevm.dts"
-+KERNEL_DEVICETREE_dra7xx-evm = "arch/arm/boot/dts/dra7-evm.dts"
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index 5543891..d968d3b 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/omap-a15.inc
  
- COMPATIBLE_MACHINE = "ti33x|omap-a15"
+ IMAGE_FSTYPES += "ubi tar.gz"
  
-@@ -26,8 +27,8 @@ S = "${WORKDIR}/git"
- BRANCH = "ti-linux-3.8.y"
+-SERIAL_CONSOLE = "115200 ttyO2"
++SERIAL_CONSOLE = "115200 ttyO0"
  
- # This commit corresponds to ti2013.04.00 release tag
--SRCREV = "23e7f725a6af4ca44660c06bc3569f6ce705d1d0"
--PV = "3.8.8"
-+SRCREV = "54d80897fd69e30702f3b6f115d77d37ad78f9ef"
-+PV = "3.8.13"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
+ # UBI information.  Note that this is board and kernel specific.  Changes
+ # in your kernel port may require changes in these variables.  For more
 
 
