@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 547C6E01483
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 65DC2E01409
 	for <meta-ti@yoctoproject.org>; Tue,  4 Jun 2013 13:40:47 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1DD9152A6C; Tue,  4 Jun 2013 20:40:47 +0000 (UTC)
+	id 2AC3E52A6D; Tue,  4 Jun 2013 20:40:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130604204047.1DD9152A6C@arago-project.org>
+Message-Id: <20130604204047.2AC3E52A6D@arago-project.org>
 Date: Tue,  4 Jun 2013 20:40:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : libdrm: Add support for dra7xx-evm
+Subject: Chase Maupin : dra7xx-evm: Update serial console
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,33 +27,37 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: danny
-Commit: e47e400d07bc1080eac10eb8a98a067b1fc4a8d1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e47e400d07bc1080eac10eb8a98a067b1fc4a8d1
+Commit: c49e7d4275322b43f15989b3eb15e4b21e983704
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c49e7d4275322b43f15989b3eb15e4b21e983704
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Mon Jun  3 17:11:46 2013 -0500
+Date:   Tue Jun  4 08:14:03 2013 -0500
 
-libdrm: Add support for dra7xx-evm
+dra7xx-evm: Update serial console
 
-* Change the COMPATIBLE_MACHINE setting to use omap-a15 so that
-  the dra7xx-evm machine type is also included.
+* Updated the serial console to use ttyO0 which is what the
+  evm uses.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-graphics/drm/libdrm_2.4.39.bbappend |    2 +-
+ conf/machine/dra7xx-evm.conf |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-graphics/drm/libdrm_2.4.39.bbappend b/recipes-graphics/drm/libdrm_2.4.39.bbappend
-index d0c1a77..76c7a84 100644
---- a/recipes-graphics/drm/libdrm_2.4.39.bbappend
-+++ b/recipes-graphics/drm/libdrm_2.4.39.bbappend
-@@ -1,3 +1,3 @@
--COMPATIBLE_MACHINE = "omap4|omap5"
-+COMPATIBLE_MACHINE = "omap4|omap-a15"
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index 5543891..d968d3b 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -6,7 +6,7 @@ require conf/machine/include/omap-a15.inc
  
- EXTRA_OECONF += "--enable-omap-experimental-api"
+ IMAGE_FSTYPES += "ubi tar.gz"
+ 
+-SERIAL_CONSOLE = "115200 ttyO2"
++SERIAL_CONSOLE = "115200 ttyO0"
+ 
+ # UBI information.  Note that this is board and kernel specific.  Changes
+ # in your kernel port may require changes in these variables.  For more
 
 
