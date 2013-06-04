@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 61A2BE006C2
-	for <meta-ti@yoctoproject.org>; Tue,  4 Jun 2013 13:40:45 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3A651E01409
+	for <meta-ti@yoctoproject.org>; Tue,  4 Jun 2013 13:40:47 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 78FBB52A6C; Tue,  4 Jun 2013 20:40:44 +0000 (UTC)
+	id E83BA5299C; Tue,  4 Jun 2013 20:40:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130604204044.78FBB52A6C@arago-project.org>
-Date: Tue,  4 Jun 2013 20:40:44 +0000 (UTC)
+Message-Id: <20130604204046.E83BA5299C@arago-project.org>
+Date: Tue,  4 Jun 2013 20:40:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : dra7xx-evm: Update serial console
+Subject: Chase Maupin : linux-ti-staging: Add dra7xx-evm support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,42 +22,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jun 2013 20:40:45 -0000
+X-List-Received-Date: Tue, 04 Jun 2013 20:40:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 64b76e0915b2dfbc989002567bebc5080351ff22
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=64b76e0915b2dfbc989002567bebc5080351ff22
+Branch: danny
+Commit: 3e1ab248af2417e0654197c31775bde6652b1bd4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e1ab248af2417e0654197c31775bde6652b1bd4
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Tue Jun  4 08:14:03 2013 -0500
+Date:   Mon Jun  3 17:11:45 2013 -0500
 
-dra7xx-evm: Update serial console
+linux-ti-staging: Add dra7xx-evm support
 
-* Updated the serial console to use ttyO0 which is what the
-  evm uses.
+* Add the DTB entries for the dra7xx-evm machine type
+* Update to the latest git sources which have dra7xx-evm support.
+* Update the PV to match the latest source version
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/dra7xx-evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_3.8.bb |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index 5543891..d968d3b 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/omap-a15.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+index 4b93932..f62cbe2 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+@@ -18,6 +18,7 @@ RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
+ KERNEL_DEVICETREE_ti33x = "arch/arm/boot/dts/am335x-evm.dts arch/arm/boot/dts/am335x-evmsk.dts arch/arm/boot/dts/am335x-bone.dts"
+ KERNEL_DEVICETREE_beaglebone = "arch/arm/boot/dts/am335x-bone.dts"
+ KERNEL_DEVICETREE_omap5-evm = "arch/arm/boot/dts/omap5-sevm.dts arch/arm/boot/dts/omap5-uevm.dts"
++KERNEL_DEVICETREE_dra7xx-evm = "arch/arm/boot/dts/dra7-evm.dts"
  
- IMAGE_FSTYPES += "ubi tar.gz"
+ COMPATIBLE_MACHINE = "ti33x|omap-a15"
  
--SERIAL_CONSOLE = "115200 ttyO2"
-+SERIAL_CONSOLE = "115200 ttyO0"
+@@ -26,8 +27,8 @@ S = "${WORKDIR}/git"
+ BRANCH = "ti-linux-3.8.y"
  
- # UBI information.  Note that this is board and kernel specific.  Changes
- # in your kernel port may require changes in these variables.  For more
+ # This commit corresponds to ti2013.04.00 release tag
+-SRCREV = "23e7f725a6af4ca44660c06bc3569f6ce705d1d0"
+-PV = "3.8.8"
++SRCREV = "54d80897fd69e30702f3b6f115d77d37ad78f9ef"
++PV = "3.8.13"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
 
 
