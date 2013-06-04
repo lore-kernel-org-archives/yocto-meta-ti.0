@@ -1,28 +1,15 @@
-Return-Path: <mp.rdtr@gmail.com>
-Received: from mail-oa0-f51.google.com (mail-oa0-f51.google.com
-	[209.85.219.51])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 89EFEE014A5
-	for <meta-ti@yoctoproject.org>; Tue,  4 Jun 2013 06:52:54 -0700 (PDT)
-Received: by mail-oa0-f51.google.com with SMTP id f4so165313oah.10
-	for <meta-ti@yoctoproject.org>; Tue, 04 Jun 2013 06:52:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=g1jNrW1JYAPxq+3N5zcmBnaw/Mr/Zh/8Z8gdZCSk8po=;
-	b=rBoimvlBXE0pMCjqMoEdbXWAFd1SsoUqYEImKwIe7CdHQocruhjZZk20Y2xlD3T37K
-	r46mgl1ULcyRW4cFI0jyzgOdVPQlJUkoG9bAPGtUET4n7iIeH6uj4nmQEwGPgI/5eI0M
-	qnNLfcvXsh/ubBX1yfBAVRkFUpORoyR87gcmx4CX37F0WX7272Xp8vNi2mR5dTieVKS6
-	hwIwRUgHVvoqKJTUZwd629I7/4NcaYB+mn/ycZdvI08dggHAVloncN9fTsWWc8De1wMW
-	GyQSGu1tHbLKha3JtE7mDOdf+9QpB0s+QvV8h+hkBZjNqdf4SA0h89uoUt4jozieIlrF
-	tbEA==
-MIME-Version: 1.0
-X-Received: by 10.182.80.65 with SMTP id p1mr12375875obx.42.1370353973538;
-	Tue, 04 Jun 2013 06:52:53 -0700 (PDT)
-Received: by 10.182.119.38 with HTTP; Tue, 4 Jun 2013 06:52:53 -0700 (PDT)
-Date: Tue, 4 Jun 2013 15:52:53 +0200
-Message-ID: <CAHEUgmwgz3=rC0OgQi_OZy6qLqbsORZ5cJRz=gEGzevBjWN8DQ@mail.gmail.com>
-From: Reinhard Tartler <mp.rdtr@gmail.com>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60694E00429
+	for <meta-ti@yoctoproject.org>; Tue,  4 Jun 2013 13:40:45 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 677255299C; Tue,  4 Jun 2013 20:40:44 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Subject: Touchpad problems with beagleboard + uLCD7
+Message-Id: <20130604204044.677255299C@arago-project.org>
+Date: Tue,  4 Jun 2013 20:40:44 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Chase Maupin : linux-ti-staging: Add dra7xx-evm support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,43 +22,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jun 2013 13:52:54 -0000
-Content-Type: multipart/alternative; boundary=047d7b2e44d4cf378d04de54650f
+X-List-Received-Date: Tue, 04 Jun 2013 20:40:45 -0000
+Content-Type: text/plain; charset=UTF-8
 
---047d7b2e44d4cf378d04de54650f
-Content-Type: text/plain; charset=ISO-8859-1
+Module: meta-ti
+Branch: master
+Commit: b0eb4888a4cc9d300e061e344c5dfc578390ec14
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b0eb4888a4cc9d300e061e344c5dfc578390ec14
 
-Hi,
+Author: Chase Maupin <Chase.Maupin@ti.com>
+Date:   Mon Jun  3 17:11:45 2013 -0500
 
-I'm using YOCTO with the meta-ti layer, and managed to get the uLCD7
-display working without the image being upside down.
+linux-ti-staging: Add dra7xx-evm support
 
-However, I'm still having problems with the touchscreen. While it does
-react to events, and ts_calibrate seems to operate fine, I notice that in
-X, the screen remains uncalibrated:
+* Add the DTB entries for the dra7xx-evm machine type
+* Update to the latest git sources which have dra7xx-evm support.
+* Update the PV to match the latest source version
 
- - in x-axis, the pointer moves faster than my finger on the touchscreen
- - in y-axis, the pointer moves in the opposite direction of my finger
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-presses do seem to work fine.
+---
 
-Does someone remember this problem, and could give me a hint what to do
-here?
+ recipes-kernel/linux/linux-ti-staging_3.8.bb |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
---047d7b2e44d4cf378d04de54650f
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+index 4b93932..f62cbe2 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+@@ -18,6 +18,7 @@ RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
+ KERNEL_DEVICETREE_ti33x = "arch/arm/boot/dts/am335x-evm.dts arch/arm/boot/dts/am335x-evmsk.dts arch/arm/boot/dts/am335x-bone.dts"
+ KERNEL_DEVICETREE_beaglebone = "arch/arm/boot/dts/am335x-bone.dts"
+ KERNEL_DEVICETREE_omap5-evm = "arch/arm/boot/dts/omap5-sevm.dts arch/arm/boot/dts/omap5-uevm.dts"
++KERNEL_DEVICETREE_dra7xx-evm = "arch/arm/boot/dts/dra7-evm.dts"
+ 
+ COMPATIBLE_MACHINE = "ti33x|omap-a15"
+ 
+@@ -26,8 +27,8 @@ S = "${WORKDIR}/git"
+ BRANCH = "ti-linux-3.8.y"
+ 
+ # This commit corresponds to ti2013.04.00 release tag
+-SRCREV = "23e7f725a6af4ca44660c06bc3569f6ce705d1d0"
+-PV = "3.8.8"
++SRCREV = "54d80897fd69e30702f3b6f115d77d37ad78f9ef"
++PV = "3.8.13"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
 
-<div dir=3D"ltr"><div><div><div><div>Hi,<br><br>I&#39;m using YOCTO with th=
-e meta-ti layer, and managed to get the uLCD7 display working without the i=
-mage being upside down.<br><br>However, I&#39;m still having problems with =
-the touchscreen. While it does react to events, and ts_calibrate seems to o=
-perate fine, I notice that in X, the screen remains uncalibrated:<br>
-<br></div>=A0- in x-axis, the pointer moves faster than my finger on the to=
-uchscreen<br></div>=A0- in y-axis, the pointer moves in the opposite direct=
-ion of my finger<br><br></div>presses do seem to work fine.<br><br></div>Do=
-es someone remember this problem, and could give me a hint what to do here?=
-<br>
-</div>
 
---047d7b2e44d4cf378d04de54650f--
