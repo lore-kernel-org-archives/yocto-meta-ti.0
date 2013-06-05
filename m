@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 37A5CE006C2
-	for <meta-ti@yoctoproject.org>; Wed,  5 Jun 2013 08:55:51 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C1385E01472
+	for <meta-ti@yoctoproject.org>; Wed,  5 Jun 2013 08:55:52 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 98A4152A55; Wed,  5 Jun 2013 15:55:50 +0000 (UTC)
+	id 8C6ED52A55; Wed,  5 Jun 2013 15:55:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130605155550.98A4152A55@arago-project.org>
-Date: Wed,  5 Jun 2013 15:55:50 +0000 (UTC)
+Message-Id: <20130605155552.8C6ED52A55@arago-project.org>
+Date: Wed,  5 Jun 2013 15:55:52 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot-dra7xx: add latest u-boot from the integration branch
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jun 2013 15:55:51 -0000
+X-List-Received-Date: Wed, 05 Jun 2013 15:55:52 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 88bdf2e3d90fe03e6c7b26067e5649a8d546ae9e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=88bdf2e3d90fe03e6c7b26067e5649a8d546ae9e
+Branch: danny
+Commit: 569af06fd2d930ee397f3ae38f5f41fd7eabf8ea
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=569af06fd2d930ee397f3ae38f5f41fd7eabf8ea
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Jun  4 23:15:41 2013 -0400
