@@ -1,22 +1,36 @@
-Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E343E014E2
-	for <meta-ti@yoctoproject.org>; Tue,  4 Jun 2013 20:17:08 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MNW0093CH4320Y1@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 04 Jun 2013 22:17:07 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id D2841200E2; Tue,
-	04 Jun 2013 23:16:51 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Tue, 04 Jun 2013 23:16:47 -0400
-Message-id: <1370402207-23681-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.2.1
-Subject: [PATCH] u-boot-dra7xx: add latest u-boot from the integration branch
+Return-Path: <prabu@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB45CE01505
+	for <meta-ti@yoctoproject.org>; Wed,  5 Jun 2013 04:19:59 -0700 (PDT)
+Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r55BJuAx024110
+	for <meta-ti@yoctoproject.org>; Wed, 5 Jun 2013 06:19:56 -0500
+Received: from DBDE73.ent.ti.com (dbde73.ent.ti.com [172.24.171.98])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r55BJrcE023840
+	for <meta-ti@yoctoproject.org>; Wed, 5 Jun 2013 06:19:54 -0500
+Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
+	DBDE73.ent.ti.com ([fe80::bc19:dc43:44da:7415%27]) with mapi id
+	14.02.0342.003; Wed, 5 Jun 2013 19:19:52 +0800
+From: "Sundareson, Prabindh" <prabu@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [meta-ti] [PATCH 07/10] libgles-omap3: Remove unnecessary
+	inclusion of folders into package
+Thread-Index: AQHOXLHhbvJHXre9pE6tIgQM/8LozZkdDcpw//98BQCAAIfzIIAJ8ZSA
+Date: Wed, 5 Jun 2013 11:19:52 +0000
+Message-ID: <321768C95D21724485BCE784F1BE98473EB3EED3@DBDE04.ent.ti.com>
+References: <prabu@ti.com> <1368809879-27201-7-git-send-email-prabu@ti.com>
+	<20130529211706.GL4526@edge>
+	<321768C95D21724485BCE784F1BE98473EB26C20@DBDE04.ent.ti.com>
+	<20130530032038.GO4526@edge>
+	<321768C95D21724485BCE784F1BE98473EB26C57@DBDE04.ent.ti.com>
+In-Reply-To: <321768C95D21724485BCE784F1BE98473EB26C57@DBDE04.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.24.170.142]
+MIME-Version: 1.0
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH 07/10] libgles-omap3: Remove unnecessary inclusion of folders into package
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,65 +43,121 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jun 2013 03:17:08 -0000
+X-List-Received-Date: Wed, 05 Jun 2013 11:20:00 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Denys Dmytriyenko <denys@ti.com>
+Hello Denys,
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- conf/machine/dra7xx-evm.conf                |  7 +++++--
- recipes-bsp/u-boot/u-boot-dra7xx_2013.04.bb | 16 ++++++++++++++++
- 2 files changed, 21 insertions(+), 2 deletions(-)
- create mode 100644 recipes-bsp/u-boot/u-boot-dra7xx_2013.04.bb
+Any update on below ?
 
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index d968d3b..5897a5f 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -8,6 +8,11 @@ IMAGE_FSTYPES += "ubi tar.gz"
- 
- SERIAL_CONSOLE = "115200 ttyO0"
- 
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-dra7xx"
-+PREFERRED_PROVIDER_u-boot = "u-boot-dra7xx"
-+
-+UBOOT_MACHINE = "dra7xx_evm_config"
-+
- # UBI information.  Note that this is board and kernel specific.  Changes
- # in your kernel port may require changes in these variables.  For more
- # details about this board please see
-@@ -29,8 +34,6 @@ MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
- # UBI: VID header offset:          2048 (aligned 2048)
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
- 
--UBOOT_MACHINE = "dra7xx_evm_config"
--
- # Currently removing the sgx machine feature because there is no SGX package
- # available for omap5
- MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
-diff --git a/recipes-bsp/u-boot/u-boot-dra7xx_2013.04.bb b/recipes-bsp/u-boot/u-boot-dra7xx_2013.04.bb
-new file mode 100644
-index 0000000..eb3fc05
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot-dra7xx_2013.04.bb
-@@ -0,0 +1,16 @@
-+require u-boot-ti.inc
-+
-+DESCRIPTION = "u-boot bootloader for TI devices"
-+
-+COMPATIBLE_MACHINE = "dra7xx-evm"
-+
-+PR = "r0+gitr${SRCPV}"
-+
-+SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
-+
-+BRANCH ?= "ti-u-boot-2013.04+"
-+
-+# This commit corresponds to ti2013.04.02 release tag
-+SRCREV = "e2315adf674b60132f0c5c8fe6eac5d109b81688"
-+
-+SPL_BINARY = "MLO"
--- 
-1.8.2.1
 
+>> You should probably squash those patches then.
+
+I can, with some rework. Please let me know your preference,
+
+regards,
+Prabu
+
+
+-----Original Message-----
+From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
+.org] On Behalf Of Sundareson, Prabindh
+Sent: Thursday, May 30, 2013 9:03 AM
+To: Dmytriyenko, Denys
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [PATCH 07/10] libgles-omap3: Remove unnecessary incl=
+usion of folders into package
+
+Hello Denys,
+
+>> You should probably squash those patches then.
+
+I can, with some rework. Please let me know your preference,
+
+
+>> Have you tried passing -M to git-format-patch?
+
+No. I read through the submission guidelines, and I did not see anything sp=
+ecific there. How does this help ? Or did you mean this in the context of t=
+he squashing ?
+
+regards,
+Prabu
+
+
+-----Original Message-----
+From: Dmytriyenko, Denys
+Sent: Thursday, May 30, 2013 8:51 AM
+To: Sundareson, Prabindh
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [PATCH 07/10] libgles-omap3: Remove unnecessary incl=
+usion of folders into package
+
+On Wed, May 29, 2013 at 11:18:36PM -0400, Sundareson, Prabindh wrote:
+> Denys,
+>=20
+> Thanks for reviewing,
+>=20
+> It is a simple correction. I had mistakenly removed it in the first=20
+> one, and reinstated in the next one after comparing with the original=20
+> patch-set. Is there anything missing you observe ?
+
+You should probably squash those patches then. Otherwise look fine - I just=
+ need to diff the first patch in the series against the original. Have you =
+tried passing -M to git-format-patch?
+
+--
+Denys
+
+
+> -----Original Message-----
+> From: Dmytriyenko, Denys
+> Sent: Thursday, May 30, 2013 2:47 AM
+> To: Sundareson, Prabindh
+> Cc: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCH 07/10] libgles-omap3: Remove unnecessary=20
+> inclusion of folders into package
+>=20
+> On Fri, May 17, 2013 at 10:27:56PM +0530, Prabindh Sundareson wrote:
+> > Inclusion of all .so files is not necessary for the package build.
+> >=20
+> > Signed-off-by: Prabindh Sundareson <prabu@ti.com>
+> > ---
+> >  recipes-graphics/libgles/libgles-omap3-no-x.inc |    4 ----
+> >  1 files changed, 0 insertions(+), 4 deletions(-)
+> >=20
+> > diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc
+> > b/recipes-graphics/libgles/libgles-omap3-no-x.inc
+> > index 8e5dad6..4521d59 100644
+> > --- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
+> > +++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
+> > @@ -285,10 +285,6 @@ INSANE_SKIP_${PN}-linuxfbwsegl-es6 =3D "ldflags"
+> >  INSANE_SKIP_${PN}-linuxfbwsegl-es8 =3D "ldflags"
+> >  INSANE_SKIP_${PN}-tests =3D "ldflags"
+> > =20
+> > -# Quality control is really poor on these SDKs, so hack around the lat=
+est madness:
+> > -FILES_${PN} +=3D "${libdir}/*.so "
+> > -FILES_${PN}-dev =3D "${includedir}"
+>=20
+> I'm confused - you are removing these 2 lines in 7/10 and then immediatel=
+y re-add them back in 8/10. Why?
+>=20
+>=20
+> >  inherit update-rc.d
+> > =20
+> >  INITSCRIPT_NAME =3D "pvr-init"
+> > --
+> > 1.7.1
+> >=20
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+_______________________________________________
+meta-ti mailing list
+meta-ti@yoctoproject.org
+https://lists.yoctoproject.org/listinfo/meta-ti
 
