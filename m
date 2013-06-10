@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 751B2E01538
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76546E0155E
 	for <meta-ti@yoctoproject.org>; Mon, 10 Jun 2013 08:39:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DD0945299C; Mon, 10 Jun 2013 15:39:08 +0000 (UTC)
+	id 72CD952997; Mon, 10 Jun 2013 15:39:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130610153908.DD0945299C@arago-project.org>
+Message-Id: <20130610153908.72CD952997@arago-project.org>
 Date: Mon, 10 Jun 2013 15:39:08 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Chase Maupin : u-boot-dra7xx: update to latest sources
@@ -26,9 +26,9 @@ X-List-Received-Date: Mon, 10 Jun 2013 15:39:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 428c9db65f69c5c885b014c49ddedf3130cf16f3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=428c9db65f69c5c885b014c49ddedf3130cf16f3
+Branch: master
+Commit: bfe66bdca115e79011e3205c8800f7632e4b1944
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bfe66bdca115e79011e3205c8800f7632e4b1944
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
 Date:   Mon Jun 10 08:54:34 2013 -0500
