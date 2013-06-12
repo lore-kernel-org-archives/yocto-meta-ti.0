@@ -1,27 +1,34 @@
-Return-Path: <denys@ti.com>
+Return-Path: <manishv.b@ti.com>
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 99BD9E01560
-	for <meta-ti@yoctoproject.org>; Tue, 11 Jun 2013 18:51:00 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5C1owMF014671
-	for <meta-ti@yoctoproject.org>; Tue, 11 Jun 2013 20:50:58 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5C1ow9u027641
-	for <meta-ti@yoctoproject.org>; Tue, 11 Jun 2013 20:50:58 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 11 Jun 2013 20:50:58 -0500
-Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r5C1owsS011162	for
-	<meta-ti@yoctoproject.org>; Tue, 11 Jun 2013 20:50:58 -0500
-Date: Tue, 11 Jun 2013 21:44:05 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1510174997.235.1371001445104.JavaMail.jenkins@puget>
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E4432E015BA
+	for <meta-ti@yoctoproject.org>; Tue, 11 Jun 2013 21:08:34 -0700 (PDT)
+Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5C48WMS024065
+	for <meta-ti@yoctoproject.org>; Tue, 11 Jun 2013 23:08:33 -0500
+Received: from DBDE72.ent.ti.com (dbde72.ent.ti.com [172.24.171.97])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5C48TTV015378
+	for <meta-ti@yoctoproject.org>; Tue, 11 Jun 2013 23:08:31 -0500
+Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
+	DBDE72.ent.ti.com ([fe80::bd56:32bf:87fd:2763%27]) with mapi id
+	14.02.0342.003; Wed, 12 Jun 2013 12:08:29 +0800
+From: "Vishwanathrao Badarkhe, Manish" <manishv.b@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>, "Cooper Jr., Franklin"
+	<fcooper@ti.com>
+Thread-Topic: [meta-ti] Meta-TI patches for OMAPL138
+Thread-Index: AQHOYIp1nx0HR9bFfE2beK4Oi29YXpkj0IMAgA2y3ZA=
+Date: Wed, 12 Jun 2013 04:08:28 +0000
+Message-ID: <A4887BF146CD57468F700B415D2F47015A12CD@DBDE04.ent.ti.com>
+References: <A4887BF146CD57468F700B415D2F470159EF7A@DBDE04.ent.ti.com>
+	<8F29D6B095ED194EA1980491A5E029710C492418@DFLE08.ent.ti.com>
+	<20130603185502.GD10512@edge>
+In-Reply-To: <20130603185502.GD10512@edge>
+Accept-Language: en-IN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.24.170.142]
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-06-11_21-01-44
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Meta-TI patches for OMAPL138
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,168 +41,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jun 2013 01:51:00 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_234_1833379279.1371001445101"
+X-List-Received-Date: Wed, 12 Jun 2013 04:08:37 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_234_1833379279.1371001445101
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Hi Denys
 
-<html>
-<head>
-<title>
-Status for 06/11/13
-</title>
-</head>
-<body>
+On Tue, Jun 04, 2013 at 00:25:02, Dmytriyenko, Denys wrote:
+> On Mon, Jun 03, 2013 at 06:44:59PM +0000, Cooper Jr., Franklin wrote:
+> > If you plan on adding support for an omapl138 soc/board then please do=
+=20
+> > not make changes to am18x recipes and machine.
+>=20
+> Well, am18x board does use omapl138 SOC...
+>=20
+>=20
+> > A new machine should be created for this new machine.
+>=20
+> ??? I know you meant config, but this is just funny :)
+>=20
+>=20
+> > I would take the conf/machine/am180x-evm.conf and duplicate it for=20
+> > your
+> > ompal138 board and make the necessary changes there.
+>=20
+> And I, before giving any specific recommendations, would like to understa=
+nd how and where these patches fit - what exact machine/platform is this fo=
+r and what is the product SDK this goes into? What will be the support mode=
+l for that?
+>=20
+> It does seem to conflict with Sitara AMSDK (am180x-evm based on OMAPL138 =
+SOC) that still uses 2.6.37 kernel. Once I know a little bit more about thi=
+s new PSP release 03.22.00.04 for of 3.3 kernel, I'd be able to give better=
+ recommendations on how to properly integrate your work into meta-ti layer.
 
-<h2>Status for 06/11/13</h2>
-
-<h2>BUILD_ID: build-2013-06-11_21-02-50</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.05"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+Please let me know, how to integrate my work into meta-ti layer.
 
 
-------=_Part_234_1833379279.1371001445101--
+Regards,=20
+Manish
+
