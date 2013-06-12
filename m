@@ -1,23 +1,15 @@
-Return-Path: <Sixten.Sjoestroem.Thames@enea.com>
-Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by yocto-www.yoctoproject.org (Postfix) with SMTP id E03FFE01560
-	for <meta-ti@yoctoproject.org>; Wed, 12 Jun 2013 05:33:47 -0700 (PDT)
-Received: from SESTOEX05.enea.se ([fe80::41cb:8d2e:2e90:a183]) by
-	SESTOEX03.enea.se ([fe80::6ce7:7b51:1edf:e245%17]) with mapi id
-	14.02.0318.001; Wed, 12 Jun 2013 14:33:44 +0200
-From: =?iso-8859-1?Q?Sixten_Sj=F6str=F6m_Thames?=
-	<Sixten.Sjoestroem.Thames@enea.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: System time issues with Yocto Linux on Keystone 2
-Thread-Index: Ac5naOqSbjdyRFLRQV+GcGCMTnCtLA==
-Date: Wed, 12 Jun 2013 12:33:43 +0000
-Message-ID: <B0B361514883EA47B19C4FC8275640D125B61106@sestoex05.enea.se>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.141.145]
-MIME-Version: 1.0
-Subject: System time issues with Yocto Linux on Keystone 2
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1DB4E006C2
+	for <meta-ti@yoctoproject.org>; Wed, 12 Jun 2013 09:24:57 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 09DBE52A6D; Wed, 12 Jun 2013 16:24:57 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130612162457.09DBE52A6D@arago-project.org>
+Date: Wed, 12 Jun 2013 16:24:57 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update to ti2013.04.02 release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,33 +22,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jun 2013 12:33:50 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Jun 2013 16:24:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
+Module: meta-ti
+Branch: master
+Commit: a8c949d455f3eea62d661c143457f7d66d481f8e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a8c949d455f3eea62d661c143457f7d66d481f8e
 
-I experience system time issues when I run Yocto Linux on a Keystone 2 targ=
-et.
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Jun 12 12:21:08 2013 -0400
 
-The system time increments to slow.
+linux-ti-staging: update to ti2013.04.02 release
 
-I get this message from hwclock:
-root@keystone-evm:~# hwclock
-hwclock: can't open '/dev/misc/rtc': No such file or directory
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-There is no rtc[x] device visible under /dev
+---
 
-I have been trying to fix this by changing kernel configurations regarding =
-RTC and by taking a look at the dts, but without success.
+ recipes-kernel/linux/linux-ti-staging_3.8.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-Can someone please point me in the right direction on how to solve this?
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+index 39f0e31..29ffebc 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+@@ -26,12 +26,12 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.8.y"
+ 
+-# This commit corresponds to ti2013.04.00 release tag
+-SRCREV = "e7460f2acdea5c9b766c7eb76bad5ab2ed7e566c"
++# This commit corresponds to ti2013.04.02 release tag
++SRCREV = "f3cb62a800ae37f17a3382b10d155ee02dbc83fc"
+ PV = "3.8.13"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "e+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "f+gitr${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
 
-I have tried the following kernels:
-arago-project.org.git.projects.linux-keystone.git: "DEV.MCSDK-03.08.04.10"
-arago-project.org.git.projects.linux-keystone.git: "DEV.MCSDK-03.08.04.11"
-
-Thank you,
-Sixten Sj=F6str=F6m Thames
 
