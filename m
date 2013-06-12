@@ -1,28 +1,28 @@
 Return-Path: <prabu@ti.com>
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7E2ECE015C0
-	for <meta-ti@yoctoproject.org>; Wed, 12 Jun 2013 10:23:18 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3BCB6E015B5
+	for <meta-ti@yoctoproject.org>; Wed, 12 Jun 2013 10:23:21 -0700 (PDT)
 Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5CHNHFP017346
-	for <meta-ti@yoctoproject.org>; Wed, 12 Jun 2013 12:23:17 -0500
-Received: from DBDE72.ent.ti.com (dbde72.ent.ti.com [172.24.171.97])
-	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5CHNF00004994
-	for <meta-ti@yoctoproject.org>; Wed, 12 Jun 2013 12:23:15 -0500
-Received: from dbdp32.itg.ti.com (172.24.170.251) by DBDE72.ent.ti.com
-	(172.24.171.97) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 13 Jun 2013 01:23:14 +0800
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5CHNJAg017349
+	for <meta-ti@yoctoproject.org>; Wed, 12 Jun 2013 12:23:20 -0500
+Received: from DBDE73.ent.ti.com (dbde73.ent.ti.com [172.24.171.98])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5CHNHWg005003
+	for <meta-ti@yoctoproject.org>; Wed, 12 Jun 2013 12:23:18 -0500
+Received: from dbdp32.itg.ti.com (172.24.170.251) by DBDE73.ent.ti.com
+	(172.24.171.98) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 13 Jun 2013 01:23:17 +0800
 Received: from bangubntigfx.india.ti.com (smtpvbd.itg.ti.com [172.24.170.250])
-	by dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r5CHMsO6027868;
-	Wed, 12 Jun 2013 22:53:14 +0530
+	by dbdp32.itg.ti.com (8.13.8/8.13.8) with ESMTP id r5CHMsO8027868;
+	Wed, 12 Jun 2013 22:53:17 +0530
 From: Prabindh Sundareson <prabu@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 12 Jun 2013 22:52:38 +0530
-Message-ID: <1371057762-17055-6-git-send-email-prabu@ti.com>
+Date: Wed, 12 Jun 2013 22:52:40 +0530
+Message-ID: <1371057762-17055-8-git-send-email-prabu@ti.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <Prabindh Sundareson <prabu@ti.com>
 References: <Prabindh Sundareson <prabu@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 5/9] libgles-omap3: Remove copying of unused header files
+Subject: [PATCH 7/9] libgles-omap3: Package files with right permission
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,37 +35,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jun 2013 17:23:19 -0000
+X-List-Received-Date: Wed, 12 Jun 2013 17:23:21 -0000
 Content-Type: text/plain
 
-Current recipe copies lot of headers that are unused, including
-unsupported files for OpenVG. This patch removes copying of such files.
+This patch adds correct permissions for startup script pvr-init.
+
+This is part of a clean up of the Graphics recipe starting from
+4.09.00.01 version of the Graphics SDK.
 
 Signed-off-by: Prabindh Sundareson <prabu at ti.com>
 ---
- recipes-graphics/libgles/libgles-omap3-no-x.inc |    9 +++------
- 1 files changed, 3 insertions(+), 6 deletions(-)
+ recipes-graphics/libgles/libgles-omap3-no-x.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
 diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-index 0c41d76..1704e1a 100644
+index 8e5dad6..0ddf6eb 100644
 --- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
 +++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-@@ -133,12 +133,9 @@ do_install () {
- 	cp -pPR ${S}/GFX_Linux_KM/include4 ${D}${includedir}/
- 	cp -pPR ${S}/GFX_Linux_KM/services4 ${D}${includedir}/
- 
--	cp -pPR ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/Include/* ${D}${includedir}/
--	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/* ${D}${includedir}/
--	cp -pPR ${S}/GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES/ 2>/dev/null || true
--	cp -pPr ${S}/GFX_Linux_SDK/OGLES2/SDKPackage/Builds/OGLES2/${PLATFORM}/Include/GLES/* ${D}${includedir}/GLES2/ 2>/dev/null || true
--	cp -pPr ${S}/include/*.h ${D}${includedir} || true
--	cp -pPr ${S}/include/wsegl/*.h ${D}${includedir} || true
-+	cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir}
-+	cp -pPr ${S}/include/OGLES2/* ${D}${includedir}/
-+	cp -pPr ${S}/include/wsegl/*.h ${D}${includedir}/ 
+@@ -139,6 +139,7 @@ do_install () {
  	
  	install -d ${D}${sysconfdir}/init.d/
  	cp -pP ${WORKDIR}/rc.pvr ${D}${sysconfdir}/init.d/pvr-init
++	chmod +x ${D}${sysconfdir}/init.d/pvr-init
+ 
+ 	install -d ${D}${sysconfdir}
+ 	echo "[default]" > ${D}${sysconfdir}/powervr.ini
 -- 
 1.7.1
 
