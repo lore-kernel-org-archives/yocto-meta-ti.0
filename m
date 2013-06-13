@@ -1,27 +1,32 @@
-Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C798DE01409
-	for <meta-ti@yoctoproject.org>; Wed, 12 Jun 2013 18:39:47 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5D1dkEY017319
-	for <meta-ti@yoctoproject.org>; Wed, 12 Jun 2013 20:39:46 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5D1dkfB018603
-	for <meta-ti@yoctoproject.org>; Wed, 12 Jun 2013 20:39:46 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 12 Jun 2013 20:39:46 -0500
-Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r5D1dkl6010250	for
-	<meta-ti@yoctoproject.org>; Wed, 12 Jun 2013 20:39:46 -0500
-Date: Wed, 12 Jun 2013 21:32:51 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1355896682.239.1371087171156.JavaMail.jenkins@puget>
+Return-Path: <sudhangathan@gmail.com>
+Received: from mail-qe0-f53.google.com (mail-qe0-f53.google.com
+	[209.85.128.53])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 008D2E01409
+	for <meta-ti@yoctoproject.org>; Thu, 13 Jun 2013 02:52:25 -0700 (PDT)
+Received: by mail-qe0-f53.google.com with SMTP id 1so6277491qee.26
+	for <meta-ti@yoctoproject.org>; Thu, 13 Jun 2013 02:52:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=kjOyqPZ0fcX8q6yGI/t9COdolheFGmRoCm7GvpyB8X4=;
+	b=kb74so2DorBs+IoVzOnF2uFbKxC8FGRnndGYx3GDV2YmaOAtx//yhLJXWdcMo7qydm
+	Ov/STVDOELa94yiNcBjQEgoMHNRJKB3OcPM19sYgNfFqSIQo+k99rcF4CZ+pkhSBGpf6
+	qR+SpHuWXCygH7/0FqXCmZQpRzzsWaG1XFkTXgsQql81DpF4X/zsFK1TrFlmUINLjJ7Q
+	0FOlwXGaEMCx7iSR7f8fM8rbwg8bE2qXNoA36bYCfDk9jkrZGSOr3npd8ysVZz4ygz1b
+	jJ94ftjKsJ9yHYmnV5zEO/lOhpKS1Dc1q422Z3lyd81uLwm79WPOLigV1Zt9QopiM+iY
+	GEZw==
+X-Received: by 10.229.195.2 with SMTP id ea2mr2393qcb.120.1371117144033; Thu,
+	13 Jun 2013 02:52:24 -0700 (PDT)
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-06-12_21-01-44
+Received: by 10.224.88.71 with HTTP; Thu, 13 Jun 2013 02:52:03 -0700 (PDT)
+In-Reply-To: <CAP71Wjx=WoR6MAgGpU+nVAGt2Grnk1Y88qOepDjUeyKeX027Ug@mail.gmail.com>
+References: <CANwz6nzC4O8bN92q2YCCLtmGKK1S9LwYPLyWR0VZZBY+EiAUtg@mail.gmail.com>
+	<CAMUsWmD6F_qEm95q5y92xuP5yg3sNeBm+6GnaMQGOge3CmP8xw@mail.gmail.com>
+	<CAP71Wjx=WoR6MAgGpU+nVAGt2Grnk1Y88qOepDjUeyKeX027Ug@mail.gmail.com>
+From: Sudhangathan B S <sudhangathan@gmail.com>
+Date: Thu, 13 Jun 2013 15:22:03 +0530
+Message-ID: <CAGX3a99G=JzBMJ5EB8LyD0_WuvK-2sqbGT1NUDfVi5Lm5z0G4Q@mail.gmail.com>
+To: meta-ti@yoctoproject.org
+Subject: Re: [yocto] yocto with meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,168 +39,339 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jun 2013 01:39:48 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_238_1735240306.1371087171154"
+X-List-Received-Date: Thu, 13 Jun 2013 09:52:27 -0000
+Content-Type: multipart/alternative; boundary=089e010d926450d2a004df061604
 
-------=_Part_238_1735240306.1371087171154
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--089e010d926450d2a004df061604
+Content-Type: text/plain; charset=ISO-8859-1
 
-<html>
-<head>
-<title>
-Status for 06/12/13
-</title>
-</head>
-<body>
+Hello all,
 
-<h2>Status for 06/12/13</h2>
+I'm trying to integrate meta-ti with Yocto/poky, since I need to add the
+2.6.32 kernel for the beableboard image.
 
-<h2>BUILD_ID: build-2013-06-12_21-02-49</h2>
+Can I please know how to download the correct version, i.e. i'm using
+danny-8.0, so for this, which version of the meta-ti and meta-oe should I
+download, and from where.. and also after downloading where should I put
+these folders (correct location for each)..
 
-<h2>Clean Build: false</h2>
+I downloaded the danny branch of yocto, meta-ti, meta-oe and also the danny
+branch of openembedded-core as the dependency. Is it correct.?
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+Is there is weblink that I can follow..?
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+For now, this is the error i'm getting..
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+*danny-8.0/build$ bitbake -k core-image-minimal*
+*Pseudo is not present but is required, building this first before the main
+build*
+*WARNING: Host distribution "Ubuntu 12.04.2 LTS" has not been validated
+with this version of the build system; you may possibly experience
+unexpected failures. It is recommended that you use a tested distribution.*
+*Loading cache: 100%
+|################################################################################################################################|
+ETA:  00:00:00*
+*Loaded 22 entries from dependency cache.*
+*ERROR: ExpansionError during parsing
+/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/
+ti-local-power-manager_1.24.02.09.bb: Failure expanding variable FILESPATH,
+expression was ${@base_set_filespath([
+"/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager-1_1_24_02_09-${MACHINE_KERNEL_PR}e",
+"/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager-1_24_02_09",
+"/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager",
+"/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager-1_24_02_09",
+"/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager",
+"/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/files",
+"/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager" ],
+d)} which triggered exception SyntaxError: EOL while scanning string
+literal (FILESPATH, line 1)*
+*ERROR: Command execution failed: Exited with 1*
+*
+*
+*Summary: There was 1 WARNING message shown.*
+*Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+*
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.05"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+I hope this is not version mismatch problem..!! may be yes..!
 
-</body>
-</html>
+---------------------------------
+Sudhangathan BS
+Ph:(+91) 9731-905-205
+---------------------------------
 
 
-------=_Part_238_1735240306.1371087171154--
+On Wed, Jun 5, 2013 at 11:35 AM, Nicolas Dechesne <
+nicolas.dechesne@linaro.org> wrote:
+
+>
+> On Wed, Jun 5, 2013 at 7:55 AM, Akshay Sahota <akki.sahota@gmail.com>wrote:
+>
+>> *
+>> BBMASK ?= ".*/meta-ti/recipes-(misc|bsp/formfactor|graphics/mesa)/"
+>>  #BBMASK = "meta-ti/recipes-misc meta-oe/recipes-graphics"
+>> #BBMASK = "meta-oe/recipes-devtools"
+>> #BBMASK = "meta-oe/recipes-graphics"
+>> #
+>> # Parallelism Options*...
+>>
+>>
+>> and bblayers.conf
+>>
+>> *BBLAYERS ?= " \
+>>   /home/asahota/poky-try/poky/meta \
+>>   /home/asahota/poky-try/poky/meta-yocto \
+>>   /home/asahota/poky-try/poky/meta-yocto-bsp \
+>>   /home/asahota/poky-try/poky/meta-ti \
+>>   /home/asahota/poky-try/poky/meta-openembedded/meta-oe \
+>>   "
+>> *
+>>
+>
+> i suspect you are using wrong combination of branch/version, but you don't
+> give what branch/version you are using, not cannot confirm.
+>
+>
+>> *
+>> BBLAYERS_NON_REMOVABLE ?= " \
+>>   /home/asahota/poky-try/poky/meta \
+>>   /home/asahota/poky-try/poky/meta-yocto \
+>>   "*
+>>
+>> and the output is :
+>> *$ bitbake -k core-image-minimal
+>> Pseudo is not present but is required, building this first before the
+>> main build
+>> WARNING: Host distribution "Ubuntu 12.04.2 LTS" has not been validated
+>> with this version of the build system; you may possibly experience
+>> unexpected failures. It is recommended that you use a tested distribution.
+>> ERROR: ParseError at
+>> /home/asahota/poky-try/poky/meta-openembedded/meta-oe/recipes-devtools/cloud9/
+>> cloud9_0.6.bb:11: Could not inherit file classes/systemd.bbclass
+>> *
+>>
+>
+> systemd.bbclass was introduced in 'dylan' version of Yocto (aka 1.4). are
+> you sure this is what you are using? to be it sounds like you are using
+> Yocto/danny with meta-ti and meta-oe 'master' branch (or dylan branch).
+>
+>
+> *ERROR: Command execution failed: Exited with 1
+>>
+>> Summary: There was 1 WARNING message shown.
+>> Summary: There were 2 ERROR messages shown, returning a non-zero exit
+>> code.
+>> *
+>> What is the mistake, sounds too silly.!
+>
+>
+>
+>
+> _______________________________________________
+> yocto mailing list
+> yocto@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/yocto
+>
+>
+
+--089e010d926450d2a004df061604
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hello all,<div class=3D"gmail_extra"><br></div><div class=
+=3D"gmail_extra">I&#39;m trying to integrate meta-ti with Yocto/poky, since=
+ I need to add the 2.6.32 kernel for the beableboard image.</div><div class=
+=3D"gmail_extra">
+
+
+<br></div><div class=3D"gmail_extra">Can I please know how to download the =
+correct version, i.e. i&#39;m using danny-8.0, so for this, which version o=
+f the meta-ti and meta-oe should I download, and from where.. and also afte=
+r downloading where should I put these folders (correct location for each).=
+.</div>
+
+
+<div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra" style>I dow=
+nloaded the danny branch of yocto, meta-ti, meta-oe and also the danny bran=
+ch of openembedded-core as the dependency. Is it correct.?</div><div class=
+=3D"gmail_extra">
+
+<br></div><div class=3D"gmail_extra">Is there is weblink that I can follow.=
+.?</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">For=
+ now, this is the error i&#39;m getting..</div><div class=3D"gmail_extra"><=
+br>
+</div>
+<div class=3D"gmail_extra"><div class=3D"gmail_extra"><i><font color=3D"#44=
+4444">danny-8.0/build$ bitbake -k core-image-minimal</font></i></div><div c=
+lass=3D"gmail_extra"><i><font color=3D"#444444">Pseudo is not present but i=
+s required, building this first before the main build</font></i></div>
+
+<div class=3D"gmail_extra"><i><font color=3D"#444444">WARNING: Host distrib=
+ution &quot;Ubuntu 12.04.2 LTS&quot; has not been validated with this versi=
+on of the build system; you may possibly experience unexpected failures. It=
+ is recommended that you use a tested distribution.</font></i></div>
+
+<div class=3D"gmail_extra"><i><font color=3D"#444444">Loading cache: 100% |=
+###########################################################################=
+#####################################################| ETA: =A000:00:00</fo=
+nt></i></div>
+
+<div class=3D"gmail_extra"><i><font color=3D"#444444">Loaded 22 entries fro=
+m dependency cache.</font></i></div><div class=3D"gmail_extra"><i><font col=
+or=3D"#444444">ERROR: ExpansionError during parsing /home/suan/danny-try/da=
+nny-8.0/meta-ti/recipes-ti/local-power-manager/<a href=3D"http://ti-local-p=
+ower-manager_1.24.02.09.bb">ti-local-power-manager_1.24.02.09.bb</a>: Failu=
+re expanding variable FILESPATH, expression was ${@base_set_filespath([ &qu=
+ot;/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti=
+-local-power-manager-1_1_24_02_09-${MACHINE_KERNEL_PR}e&quot;, &quot;/home/=
+suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti-local-po=
+wer-manager-1_24_02_09&quot;, &quot;/home/suan/danny-try/danny-8.0/meta-ti/=
+recipes-ti/local-power-manager/ti-local-power-manager&quot;, &quot;/home/su=
+an/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti-local-powe=
+r-manager-1_24_02_09&quot;, &quot;/home/suan/danny-try/danny-8.0/meta-ti/re=
+cipes-ti/local-power-manager/ti-local-power-manager&quot;, &quot;/home/suan=
+/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/files&quot;, &q=
+uot;/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager&q=
+uot; ], d)} which triggered exception SyntaxError: EOL while scanning strin=
+g literal (FILESPATH, line 1)</font></i></div>
+
+<div class=3D"gmail_extra"><i><font color=3D"#444444">ERROR: Command execut=
+ion failed: Exited with 1</font></i></div><div class=3D"gmail_extra"><i><fo=
+nt color=3D"#444444"><br></font></i></div><div class=3D"gmail_extra"><i><fo=
+nt color=3D"#444444">Summary: There was 1 WARNING message shown.</font></i>=
+</div>
+
+<div class=3D"gmail_extra"><i><font color=3D"#444444">Summary: There were 2=
+ ERROR messages shown, returning a non-zero exit code.</font></i></div></di=
+v><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra" style>I h=
+ope this is not version mismatch problem..!! may be yes..!</div>
+
+<div class=3D"gmail_extra"><br clear=3D"all"><div>-------------------------=
+--------<br>Sudhangathan BS<br>Ph:<a href=3D"tel:%28%2B91%29%209731-905-205=
+" value=3D"+919731905205" target=3D"_blank">(+91) 9731-905-205</a><br>
+---------------------------------</div>
+<br><br><div class=3D"gmail_quote">On Wed, Jun 5, 2013 at 11:35 AM, Nicolas=
+ Dechesne <span dir=3D"ltr">&lt;<a href=3D"mailto:nicolas.dechesne@linaro.o=
+rg" target=3D"_blank">nicolas.dechesne@linaro.org</a>&gt;</span> wrote:<br>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
+adding-left:1ex">
+
+
+
+<div dir=3D"ltr"><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">=
+<div>On Wed, Jun 5, 2013 at 7:55 AM, Akshay Sahota <span dir=3D"ltr">&lt;<a=
+ href=3D"mailto:akki.sahota@gmail.com" target=3D"_blank">akki.sahota@gmail.=
+com</a>&gt;</span> wrote:<br>
+
+
+
+
+
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
+adding-left:1ex"><div><div><div><i><div>BBMASK ?=3D &quot;.*/meta-ti/recipe=
+s-(misc|bsp/formfactor|graphics/mesa)/&quot;<br>
+
+
+
+
+
+</div>
+#BBMASK =3D &quot;meta-ti/recipes-misc meta-oe/recipes-graphics&quot;<br>#B=
+BMASK =3D &quot;meta-oe/recipes-devtools&quot;<br>#BBMASK =3D &quot;meta-oe=
+/recipes-graphics&quot;<br>#<br># Parallelism Options</i>...<br><br><br></d=
+iv>
+
+
+
+
+
+
+and bblayers.conf<br><br><i>BBLAYERS ?=3D &quot; \<br>=A0 /home/asahota/pok=
+y-try/poky/meta \<br>=A0 /home/asahota/poky-try/poky/meta-yocto \<br>=A0 /h=
+ome/asahota/poky-try/poky/meta-yocto-bsp \<br>=A0 /home/asahota/poky-try/po=
+ky/meta-ti \<br>
+
+
+
+
+
+
+=A0 /home/asahota/poky-try/poky/meta-openembedded/meta-oe \<br>=A0 &quot;<b=
+r></i></div></div></blockquote><div><br></div></div><div class=3D"gmail_ext=
+ra">i suspect you are using wrong combination of branch/version, but you do=
+n&#39;t give what branch/version you are using, not cannot confirm.</div>
+
+
+
+<div>
+
+<div>=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
+ 0.8ex;border-left-width:1px;border-left-color:rgb(204,204,204);border-left=
+-style:solid;padding-left:1ex"><div><div><i><br>BBLAYERS_NON_REMOVABLE ?=3D=
+ &quot; \<br>
+
+
+
+
+
+=A0 /home/asahota/poky-try/poky/meta \<br>=A0 /home/asahota/poky-try/poky/m=
+eta-yocto \<br>=A0 &quot;</i><br><br>
+</div>and the output is :<br><i>$ bitbake -k core-image-minimal<br>Pseudo i=
+s not present but is required, building this first before the main build<br=
+>WARNING: Host distribution &quot;Ubuntu 12.04.2 LTS&quot; has not been val=
+idated with this version of the build system; you may possibly experience u=
+nexpected failures. It is recommended that you use a tested distribution.<b=
+r>
+
+
+
+
+
+
+ERROR: ParseError at /home/asahota/poky-try/poky/meta-openembedded/meta-oe/=
+recipes-devtools/cloud9/<a href=3D"http://cloud9_0.6.bb:11" target=3D"_blan=
+k">cloud9_0.6.bb:11</a>: Could not inherit file classes/systemd.bbclass<br>
+
+
+
+
+
+</i></div></blockquote><div>=A0</div></div><div>systemd.bbclass was introdu=
+ced in &#39;dylan&#39; version of Yocto (aka 1.4). are you sure this is wha=
+t you are using? to be it sounds like you are using Yocto/danny with meta-t=
+i and meta-oe &#39;master&#39; branch (or dylan branch).=A0</div>
+
+
+
+<div>
+
+<div><br></div><div><br></div><blockquote class=3D"gmail_quote" style=3D"ma=
+rgin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-color:rgb(204,204,=
+204);border-left-style:solid;padding-left:1ex"><div><i>ERROR: Command execu=
+tion failed: Exited with 1<br>
+
+
+
+
+
+
+<br>Summary: There was 1 WARNING message shown.<br>Summary: There were 2 ER=
+ROR messages shown, returning a non-zero exit code.<br></i><br></div>What i=
+s the mistake, sounds too silly.!</blockquote></div></div><br></div><div cl=
+ass=3D"gmail_extra">
+
+
+
+
+
+<br></div></div>
+<br>_______________________________________________<br>
+yocto mailing list<br>
+<a href=3D"mailto:yocto@yoctoproject.org" target=3D"_blank">yocto@yoctoproj=
+ect.org</a><br>
+<a href=3D"https://lists.yoctoproject.org/listinfo/yocto" target=3D"_blank"=
+>https://lists.yoctoproject.org/listinfo/yocto</a><br>
+<br></blockquote></div><br></div></div>
+
+--089e010d926450d2a004df061604--
