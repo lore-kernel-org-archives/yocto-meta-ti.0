@@ -1,28 +1,27 @@
-Return-Path: <denis@denix.org>
-Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
-	[206.46.173.7])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B7F97E013DE
-	for <meta-ti@yoctoproject.org>; Thu, 13 Jun 2013 11:28:48 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MOC00CL0GN1FIM1@vms173007.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 13 Jun 2013 13:28:24 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id ED8B4200E2; Thu,
-	13 Jun 2013 14:28:12 -0400 (EDT)
-Date: Thu, 13 Jun 2013 14:28:12 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Sudhangathan B S <sudhangathan@gmail.com>
-Message-id: <20130613182812.GC11656@denix.org>
-References: <CANwz6nzC4O8bN92q2YCCLtmGKK1S9LwYPLyWR0VZZBY+EiAUtg@mail.gmail.com>
-	<CAMUsWmD6F_qEm95q5y92xuP5yg3sNeBm+6GnaMQGOge3CmP8xw@mail.gmail.com>
-	<CAP71Wjx=WoR6MAgGpU+nVAGt2Grnk1Y88qOepDjUeyKeX027Ug@mail.gmail.com>
-	<CAGX3a99G=JzBMJ5EB8LyD0_WuvK-2sqbGT1NUDfVi5Lm5z0G4Q@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAGX3a99G=JzBMJ5EB8LyD0_WuvK-2sqbGT1NUDfVi5Lm5z0G4Q@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [yocto] yocto with meta-ti
+Return-Path: <denys@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1DE12E003E3
+	for <meta-ti@yoctoproject.org>; Thu, 13 Jun 2013 18:28:14 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5E1SCSc029076
+	for <meta-ti@yoctoproject.org>; Thu, 13 Jun 2013 20:28:12 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5E1SCHF030474
+	for <meta-ti@yoctoproject.org>; Thu, 13 Jun 2013 20:28:12 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 13 Jun 2013 20:28:12 -0500
+Received: from puget.gt.design.ti.com ([158.218.102.159])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r5E1SCet000500	for
+	<meta-ti@yoctoproject.org>; Thu, 13 Jun 2013 20:28:12 -0500
+Date: Thu, 13 Jun 2013 21:21:15 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <364964076.243.1371172875563.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-06-13_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,153 +34,168 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jun 2013 18:28:49 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 14 Jun 2013 01:28:15 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_242_1160840953.1371172875562"
 
-On Thu, Jun 13, 2013 at 03:22:03PM +0530, Sudhangathan B S wrote:
-> Hello all,
-> 
-> I'm trying to integrate meta-ti with Yocto/poky, since I need to add the
-> 2.6.32 kernel for the beableboard image.
-> 
-> Can I please know how to download the correct version, i.e. i'm using
-> danny-8.0, so for this, which version of the meta-ti and meta-oe should I
-> download, and from where.. and also after downloading where should I put
-> these folders (correct location for each)..
-> 
-> I downloaded the danny branch of yocto, meta-ti, meta-oe and also the danny
-> branch of openembedded-core as the dependency. Is it correct.?
-> 
-> Is there is weblink that I can follow..?
-> 
-> For now, this is the error i'm getting..
-> 
-> *danny-8.0/build$ bitbake -k core-image-minimal*
-> *Pseudo is not present but is required, building this first before the main
-> build*
-> *WARNING: Host distribution "Ubuntu 12.04.2 LTS" has not been validated
-> with this version of the build system; you may possibly experience
-> unexpected failures. It is recommended that you use a tested distribution.*
-> *Loading cache: 100%
-> |################################################################################################################################|
-> ETA:  00:00:00*
-> *Loaded 22 entries from dependency cache.*
-> *ERROR: ExpansionError during parsing
-> /home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/
-> ti-local-power-manager_1.24.02.09.bb: Failure expanding variable FILESPATH,
-> expression was ${@base_set_filespath([
-> "/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager-1_1_24_02_09-${MACHINE_KERNEL_PR}e",
-> "/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager-1_24_02_09",
-> "/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager",
-> "/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager-1_24_02_09",
-> "/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/ti-local-power-manager",
-> "/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager/files",
-> "/home/suan/danny-try/danny-8.0/meta-ti/recipes-ti/local-power-manager" ],
-> d)} which triggered exception SyntaxError: EOL while scanning string
-> literal (FILESPATH, line 1)*
+------=_Part_242_1160840953.1371172875562
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-This error is caused by including meta-yocto-bsp and meta-ti layers that both 
-define "beagleboard" machine config. You have meta-yocto-bsp configured before 
-meta-ti in your bblayers.conf, which takes the beagleboard definition from 
-meta-yocto-bsp layer, so you can't safely use corresponding recipes from 
-meta-ti. You should swap those two layers or just drop meta-yocto-bsp 
-completely.
+<html>
+<head>
+<title>
+Status for 06/13/13
+</title>
+</head>
+<body>
 
--- 
-Denys
+<h2>Status for 06/13/13</h2>
 
-> *ERROR: Command execution failed: Exited with 1*
-> *
-> *
-> *Summary: There was 1 WARNING message shown.*
-> *Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
-> *
-> 
-> I hope this is not version mismatch problem..!! may be yes..!
-> 
-> ---------------------------------
-> Sudhangathan BS
-> Ph:(+91) 9731-905-205
-> ---------------------------------
-> 
-> 
-> On Wed, Jun 5, 2013 at 11:35 AM, Nicolas Dechesne <
-> nicolas.dechesne@linaro.org> wrote:
-> 
-> >
-> > On Wed, Jun 5, 2013 at 7:55 AM, Akshay Sahota <akki.sahota@gmail.com>wrote:
-> >
-> >> *
-> >> BBMASK ?= ".*/meta-ti/recipes-(misc|bsp/formfactor|graphics/mesa)/"
-> >>  #BBMASK = "meta-ti/recipes-misc meta-oe/recipes-graphics"
-> >> #BBMASK = "meta-oe/recipes-devtools"
-> >> #BBMASK = "meta-oe/recipes-graphics"
-> >> #
-> >> # Parallelism Options*...
-> >>
-> >>
-> >> and bblayers.conf
-> >>
-> >> *BBLAYERS ?= " \
-> >>   /home/asahota/poky-try/poky/meta \
-> >>   /home/asahota/poky-try/poky/meta-yocto \
-> >>   /home/asahota/poky-try/poky/meta-yocto-bsp \
-> >>   /home/asahota/poky-try/poky/meta-ti \
-> >>   /home/asahota/poky-try/poky/meta-openembedded/meta-oe \
-> >>   "
-> >> *
-> >>
-> >
-> > i suspect you are using wrong combination of branch/version, but you don't
-> > give what branch/version you are using, not cannot confirm.
-> >
-> >
-> >> *
-> >> BBLAYERS_NON_REMOVABLE ?= " \
-> >>   /home/asahota/poky-try/poky/meta \
-> >>   /home/asahota/poky-try/poky/meta-yocto \
-> >>   "*
-> >>
-> >> and the output is :
-> >> *$ bitbake -k core-image-minimal
-> >> Pseudo is not present but is required, building this first before the
-> >> main build
-> >> WARNING: Host distribution "Ubuntu 12.04.2 LTS" has not been validated
-> >> with this version of the build system; you may possibly experience
-> >> unexpected failures. It is recommended that you use a tested distribution.
-> >> ERROR: ParseError at
-> >> /home/asahota/poky-try/poky/meta-openembedded/meta-oe/recipes-devtools/cloud9/
-> >> cloud9_0.6.bb:11: Could not inherit file classes/systemd.bbclass
-> >> *
-> >>
-> >
-> > systemd.bbclass was introduced in 'dylan' version of Yocto (aka 1.4). are
-> > you sure this is what you are using? to be it sounds like you are using
-> > Yocto/danny with meta-ti and meta-oe 'master' branch (or dylan branch).
-> >
-> >
-> > *ERROR: Command execution failed: Exited with 1
-> >>
-> >> Summary: There was 1 WARNING message shown.
-> >> Summary: There were 2 ERROR messages shown, returning a non-zero exit
-> >> code.
-> >> *
-> >> What is the mistake, sounds too silly.!
-> >
-> >
-> >
-> >
-> > _______________________________________________
-> > yocto mailing list
-> > yocto@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/yocto
-> >
-> >
+<h2>BUILD_ID: build-2013-06-13_21-02-49</h2>
 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.05"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_242_1160840953.1371172875562--
