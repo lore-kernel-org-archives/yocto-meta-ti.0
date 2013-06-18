@@ -1,27 +1,36 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4C602E013B8
-	for <meta-ti@yoctoproject.org>; Mon, 17 Jun 2013 18:29:15 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5I1TEMO031589
-	for <meta-ti@yoctoproject.org>; Mon, 17 Jun 2013 20:29:14 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5I1TERd032396
-	for <meta-ti@yoctoproject.org>; Mon, 17 Jun 2013 20:29:14 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 17 Jun 2013 20:29:14 -0500
-Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r5I1TE65010449	for
-	<meta-ti@yoctoproject.org>; Mon, 17 Jun 2013 20:29:14 -0500
-Date: Mon, 17 Jun 2013 21:22:11 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1374243109.261.1371518531335.JavaMail.jenkins@puget>
+Return-Path: <prabu@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CA273E01483
+	for <meta-ti@yoctoproject.org>; Mon, 17 Jun 2013 19:31:56 -0700 (PDT)
+Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5I2VqHQ027854;
+	Mon, 17 Jun 2013 21:31:53 -0500
+Received: from DBDE73.ent.ti.com (dbde73.ent.ti.com [172.24.171.98])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5I2Vn2p007817;
+	Mon, 17 Jun 2013 21:31:50 -0500
+Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
+	DBDE73.ent.ti.com ([fe80::bc19:dc43:44da:7415%27]) with mapi id
+	14.02.0342.003; Tue, 18 Jun 2013 10:31:49 +0800
+From: "Sundareson, Prabindh" <prabu@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>, Prabindh Sundareson
+	<prabindh@yahoo.com>
+Thread-Topic: [meta-ti] [PATCH 06/10] libgles-omap3: Add missing RPROVIDES
+Thread-Index: AQHOUMlnxR8r9GaqmUmJLcl3AGqz/pkFHfKAgDT4iQCAAN8WIA==
+Date: Tue, 18 Jun 2013 02:31:48 +0000
+Message-ID: <321768C95D21724485BCE784F1BE98473EB50382@DBDE04.ent.ti.com>
+References: <1367501964-6294-1-git-send-email-prabu@ti.com>
+	<1367501964-6294-6-git-send-email-prabu@ti.com>
+	<20130514173131.GD31835@denix.org>
+	<1368591321.48894.YahooMailNeo@web125603.mail.ne1.yahoo.com>
+	<20130617211024.GD12618@edge>
+In-Reply-To: <20130617211024.GD12618@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.24.170.142]
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-06-17_21-01-44
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH 06/10] libgles-omap3: Add missing RPROVIDES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,168 +43,104 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jun 2013 01:29:21 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_260_558067194.1371518531334"
+X-List-Received-Date: Tue, 18 Jun 2013 02:31:57 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_260_558067194.1371518531334
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Denys,
 
-<html>
-<head>
-<title>
-Status for 06/17/13
-</title>
-</head>
-<body>
+No, these are not dlopen'ed libraries.=20
 
-<h2>Status for 06/17/13</h2>
+regards,
+Prabu
 
-<h2>BUILD_ID: build-2013-06-17_21-02-49</h2>
+-----Original Message-----
+From: Dmytriyenko, Denys=20
+Sent: Tuesday, June 18, 2013 2:40 AM
+To: Prabindh Sundareson
+Cc: Sundareson, Prabindh; meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] [PATCH 06/10] libgles-omap3: Add missing RPROVIDES
 
-<h2>Clean Build: false</h2>
+Prabu,
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+By "libraries that are dynamically loaded at runtime", do you mean shared l=
+ibraries or rather libraries loaded with dlopen() [1]? The latter one would=
+ explain why they are not automatically handled by shlib code, as it only d=
+etects shared libraries, AFAIK...
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+[1] http://tldp.org/HOWTO/Program-Library-HOWTO/dl-libraries.html
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.06"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+--
+Denys
 
 
-------=_Part_260_558067194.1371518531334--
+On Tue, May 14, 2013 at 09:15:21PM -0700, Prabindh Sundareson wrote:
+> Denys,
+>=20
+> How can this be confirmed ? Any other list to ask ?
+>=20
+>=20
+> regards
+> Prabu
+>=20
+>=20
+> ________________________________
+>  From: Denys Dmytriyenko <denys@ti.com>
+> To: Prabindh Sundareson <prabu@ti.com>=20
+> Cc: meta-ti@yoctoproject.org=20
+> Sent: Tuesday, May 14, 2013 11:01 PM
+> Subject: Re: [meta-ti] [PATCH 06/10] libgles-omap3: Add missing RPROVIDES
+> =20
+>=20
+> On Thu, May 02, 2013 at 07:09:20PM +0530, Prabindh Sundareson wrote:
+> > RPROVIDES specifies the libraries that are dynamically loaded
+> > at runtime. This patch fixes "no package provides libGLESv2.so" and
+> > similar errors that occur when including packages like qtbase.
+>=20
+> I'm still somewhat not sure about this patch. I know you had this problem=
+ with=20
+> Qt5, but I'm wondering if there's a bug with shlib handling in latest OE,=
+ as=20
+> you ususally don't need to specify shared libs in RPROVIDES...
+>=20
+>=20
+> > Signed-off-by: Prabindh Sundareson <prabu@ti.com>
+> > ---
+> >=A0 recipes-graphics/libgles/libgles-omap3.inc |=A0 =A0 1 +
+> >=A0 1 files changed, 1 insertions(+), 0 deletions(-)
+> >=20
+> > diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graph=
+ics/libgles/libgles-omap3.inc
+> > index d08a04d..c33062a 100644
+> > --- a/recipes-graphics/libgles/libgles-omap3.inc
+> > +++ b/recipes-graphics/libgles/libgles-omap3.inc
+> > @@ -201,6 +201,7 @@ PRIVATE_LIBS_${PN}-es5 =3D "libGLESv2.so libIMGegl.=
+so libsrv_um.so libpvr2d.so lib
+> >=A0 PRIVATE_LIBS_${PN}-es6 =3D "libGLESv2.so libIMGegl.so libsrv_um.so l=
+ibpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so libglslcompiler.so lib=
+GLES_CM.so"
+> >=A0 PRIVATE_LIBS_${PN}-es8 =3D "libGLESv2.so libIMGegl.so libsrv_um.so l=
+ibpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so libglslcompiler.so lib=
+GLES_CM.so"
+> >=A0=20
+> > +RPROVIDES_${PN} +=3D "libGLESv2.so libEGL.so libGLES_CM.so libpvr2d.so=
+ libIMGegl.so libsrv_init.so libsrv_um.so libsrv_um_dri.so libglslcompiler.=
+so"
+> >=A0=20
+> >=A0 PACKAGES =3D+ "${PN}-blitwsegl ${PN}-flipwsegl ${PN}-frontwsegl ${PN=
+}-linuxfbwsegl"
+> >=A0=20
+> > --=20
+> > 1.7.1
+> >=20
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+> >=20
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+
