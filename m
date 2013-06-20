@@ -1,30 +1,39 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1952CE0141B
-	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 21:39:02 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5K4d1dO020748
-	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 23:39:01 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5K4d1MV005943
-	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 23:39:01 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 19 Jun 2013 23:39:01 -0500
-Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r5K4d11t017192;
-	Wed, 19 Jun 2013 23:39:01 -0500
-Date: Thu, 20 Jun 2013 00:39:00 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Prabindh Sundareson <prabu@ti.com>
-Message-ID: <20130620043900.GQ13356@edge>
-References: <prabu@ti.com>
- <1371057762-17055-1-git-send-email-prabu@ti.com>
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-ob0-f173.google.com (mail-ob0-f173.google.com
+	[209.85.214.173])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB78BE0141B
+	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 21:46:43 -0700 (PDT)
+Received: by mail-ob0-f173.google.com with SMTP id wc20so6866993obb.32
+	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 21:46:42 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:x-gm-message-state;
+	bh=K30b9TB1CrWx26L/5jjbTtNq5hBmwPk5sTYH3XanfN8=;
+	b=J0w4HoP1uH5tfOlYDJPYr+5hRhG5klJI2pwCEUY2Sos7hftUtYcod+H8txnKN/Xy9F
+	pB/J+vxwGrP7t1sWPgBdg+IXEUpJRJCuAFtRE8iZeK79xMJjx006pJ7mrx3sX0/kRH55
+	WoGjbn/8gImTiAGN3BwDq2nKCtnYI/ovLd3MawGKeHvnNfQaAqcVZR561vd0Lb/k+od9
+	Mm1ZVEeS0RxGWliwuR/xBDCr99CVHVLFlJ6hbHmowiEU4SepPks6fAGEgH7uD2XiB4Q8
+	Ods6byWpIhzM78sy0p5NIzvU8eMuPQNsmw9CMJ9Y9XEY8jwP+tx3Xjeojee2yzmOzFSc
+	xfww==
+X-Received: by 10.182.98.135 with SMTP id ei7mr755960obb.102.1371703602692;
+	Wed, 19 Jun 2013 21:46:42 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1371057762-17055-1-git-send-email-prabu@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 0/9] Graphics SDK cleanup
+Received: by 10.76.27.165 with HTTP; Wed, 19 Jun 2013 21:46:21 -0700 (PDT)
+In-Reply-To: <321768C95D21724485BCE784F1BE98473EB53242@DBDE04.ent.ti.com>
+References: <CAP71WjxuKtkyMbb_pReEXepMKxnNyM9PmwoRc26D+gEL7b87jQ@mail.gmail.com>
+	<321768C95D21724485BCE784F1BE98473EB52D53@DBDE04.ent.ti.com>
+	<CAP71WjztrzWx6K-MNG4RQfeu0V6F45M0_0j5WP0zZjt9s9i17A@mail.gmail.com>
+	<321768C95D21724485BCE784F1BE98473EB53158@DBDE04.ent.ti.com>
+	<CAP71WjzqEVcxwpwvMc9V-106b2Qyq5uc-x2erf_B7AZXeBQ2Zw@mail.gmail.com>
+	<321768C95D21724485BCE784F1BE98473EB53242@DBDE04.ent.ti.com>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Thu, 20 Jun 2013 00:46:21 -0400
+Message-ID: <CAP71WjwHYuFPa2ieAh+WbPMnYNt2AC5rx8GP-+7U2Q-RwoOBYQ@mail.gmail.com>
+To: "Sundareson, Prabindh" <prabu@ti.com>
+X-Gm-Message-State: ALoCoQnc8QwTUY/4wgf6BWoD7Kt7s3DtNtZF3cIwRRE591OWLVIvgSPwDEW3uTs268VXc+pOYRW3
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: meta-ti + meta-qt5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,68 +46,65 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2013 04:39:03 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 20 Jun 2013 04:46:47 -0000
+Content-Type: multipart/alternative; boundary=047d7b2e4970f9dc7104df8ea179
 
-Prabu,
+--047d7b2e4970f9dc7104df8ea179
+Content-Type: text/plain; charset=ISO-8859-1
 
-There were few issues I found when testing your patches, but I've been working 
-on the fixes past few days and should have it ready to be pushed shortly.
+On Thu, Jun 20, 2013 at 12:34 AM, Sundareson, Prabindh <prabu@ti.com> wrote:
 
-Not to force you to re-send the patches again, but ligles-omap3-x11 was 
-actually missing. But even when added manually, it was causing conflicts with 
-no-X11 version, breaking the parsing for distros w/o X11. Moreover, as was 
-discussed long time ago, having both X11 and Raw variants of libraries and 
-apps built and installed together is very useful for all-inclusive distros, so 
-making those recipes conflict and replace each other is not a right way...
+> The instructions build eglfs as well (without xcb), as in the below patch.
+> Just that I cannot test it on platform due to the absence of GLES2 driver.
+>  verbose flag in the qt configuration (qt5.inc) would help debug what is
+> going wrong.****
+>
+> ** **
+>
+>
+> https://github.com/prabindh/meta-qt5/commit/c8129fb5057f9254c773f82d2fdbd85d9c56410a
+> ****
+>
+>
+yeah, i am using something similar *but* i do not have x11 in
+DISTRO_FEATURES, and i suspect you might have it, right? without X11
+feature, the x11 -dev packages are pulled/installed, and then the qtbase
+configure script will fail to 'check' for EGL.
 
-Having said all the above, I've done the necessary mods and am testing 
-building different configurations at the moment. I'll let you know if I see 
-any other issues. Thanks.
+--047d7b2e4970f9dc7104df8ea179
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
--- 
-Denys
+<div dir=3D"ltr"><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">=
+On Thu, Jun 20, 2013 at 12:34 AM, Sundareson, Prabindh <span dir=3D"ltr">&l=
+t;<a href=3D"mailto:prabu@ti.com" target=3D"_blank">prabu@ti.com</a>&gt;</s=
+pan> wrote:<br>
+
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex"><p class=3D"MsoNormal"><span style=3D"font-s=
+ize:11.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#1f=
+497d">The instructions build eglfs as well (without xcb), as in the below p=
+atch. Just that I cannot test it on platform due to the absence of GLES2 dr=
+iver. =A0verbose
+ flag in the qt configuration (qt5.inc) would help debug what is going wron=
+g.<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1f497d"><u></u>=A0<u></u></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1f497d"><a href=3D"https://github=
+.com/prabindh/meta-qt5/commit/c8129fb5057f9254c773f82d2fdbd85d9c56410a" tar=
+get=3D"_blank">https://github.com/prabindh/meta-qt5/commit/c8129fb5057f9254=
+c773f82d2fdbd85d9c56410a</a><u></u><u></u></span></p>
 
 
-On Wed, Jun 12, 2013 at 10:52:33PM +0530, Prabindh Sundareson wrote:
-> Patch-set removes unsupported features, and separates X11 and non-X11 
-> builds, and enables support for Qt5 builds. This patch-set also squashes 2 
-> commits together per discussion at 
-> https://lists.yoctoproject.org/pipermail/meta-ti/2013-May/002774.html
-> 
-> Prabindh Sundareson (9):
->   libgles-omap3: Remove X11 related build and packaging
->   omap3-sgx-modules: Remove X11 related build and packaging
->   libgles-omap3: Remove unsupported core build option ES2.0
->   libgles-omap3: Remove OpenVG references
->   libgles-omap3: Remove copying of unused header files
->   libgles-omap3: Add missing RPROVIDES
->   libgles-omap3: Package files with right permission
->   libgles-omap3-x11: Separate X11 SGX driver package into new recipe
->   omap3-sgx-modules-x11: Separate X11 SGX driver package into new
->     recipe
-> 
->  .../Compile-fixes-for-38-kernel.patch              |  346 ++++++++++++++++++++
->  .../omap3-sgx-modules-x11/kernel-30.patch          |   38 +++
->  .../omap3-sgx-modules-x11_4.09.00.01.bb            |   74 +++++
->  .../omap3-sgx-modules_4.09.00.01.bb                |    9 +-
->  recipes-graphics/libgles/libgles-omap3-no-x.inc    |  318 ++++++++++++++++++
->  .../libgles/libgles-omap3-x11-4.09.00.01/rc.pvr    |  125 +++++++
->  .../libgles-omap3-x11-4.09.00.01/rc_dri.pvr        |  137 ++++++++
->  recipes-graphics/libgles/libgles-omap3-x11.inc     |  323 ++++++++++++++++++
->  .../libgles/libgles-omap3_4.09.00.01.bb            |   45 +---
->  9 files changed, 1365 insertions(+), 50 deletions(-)
->  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-x11/Compile-fixes-for-38-kernel.patch
->  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-x11/kernel-30.patch
->  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
->  create mode 100644 recipes-graphics/libgles/libgles-omap3-no-x.inc
->  create mode 100644 recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/rc.pvr
->  create mode 100644 recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/rc_dri.pvr
->  create mode 100644 recipes-graphics/libgles/libgles-omap3-x11.inc
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+<p class=3D"MsoNormal"></p></blockquote></div><br>yeah, i am using somethin=
+g similar *but* i do not have x11 in DISTRO_FEATURES, and i suspect you mig=
+ht have it, right? without X11 feature, the x11 -dev packages are pulled/in=
+stalled, and then the qtbase configure script will fail to &#39;check&#39; =
+for EGL.</div>
 
+<div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra"><br></div><=
+/div>
+
+--047d7b2e4970f9dc7104df8ea179--
