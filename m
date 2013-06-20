@@ -1,38 +1,31 @@
-Return-Path: <prabu@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64E6AE013EC
-	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 22:03:10 -0700 (PDT)
-Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5K538qZ017359;
-	Thu, 20 Jun 2013 00:03:09 -0500
-Received: from DBDE73.ent.ti.com (dbde73.ent.ti.com [172.24.171.98])
-	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5K53557005539;
-	Thu, 20 Jun 2013 00:03:06 -0500
-Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
-	DBDE73.ent.ti.com ([fe80::bc19:dc43:44da:7415%27]) with mapi id
-	14.02.0342.003; Thu, 20 Jun 2013 13:03:05 +0800
-From: "Sundareson, Prabindh" <prabu@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>, Nicolas Dechesne
-	<nicolas.dechesne@linaro.org>
-Thread-Topic: [meta-ti] meta-ti + meta-qt5
-Thread-Index: AQHObVqT/YaZ9CP6NE+JbReVJZTnfJk92rPA//+C4ACAAIgUgP//kvWAgACKc+D//35XgAAAUI6AABDdoUA=
-Date: Thu, 20 Jun 2013 05:03:04 +0000
-Message-ID: <321768C95D21724485BCE784F1BE98473EB53340@DBDE04.ent.ti.com>
-References: <CAP71WjxuKtkyMbb_pReEXepMKxnNyM9PmwoRc26D+gEL7b87jQ@mail.gmail.com>
-	<321768C95D21724485BCE784F1BE98473EB52D53@DBDE04.ent.ti.com>
-	<CAP71WjztrzWx6K-MNG4RQfeu0V6F45M0_0j5WP0zZjt9s9i17A@mail.gmail.com>
-	<321768C95D21724485BCE784F1BE98473EB53158@DBDE04.ent.ti.com>
-	<CAP71WjzqEVcxwpwvMc9V-106b2Qyq5uc-x2erf_B7AZXeBQ2Zw@mail.gmail.com>
-	<321768C95D21724485BCE784F1BE98473EB53242@DBDE04.ent.ti.com>
-	<CAP71WjwHYuFPa2ieAh+WbPMnYNt2AC5rx8GP-+7U2Q-RwoOBYQ@mail.gmail.com>
-	<20130620045521.GR13356@edge>
-In-Reply-To: <20130620045521.GR13356@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.24.170.142]
+Return-Path: <richard.rojfors@gmail.com>
+Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
+	[209.85.215.173])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A33EE013EC
+	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 22:28:00 -0700 (PDT)
+Received: by mail-ea0-f173.google.com with SMTP id g15so3679000eak.32
+	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 22:27:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=Df1Do20CCr/+7GPfOmQkq9lvTQOVI5wt6Ac/BDkBV9c=;
+	b=G/5d1+/v/Giikn3Vm87uj90HGOLVqt2Kz0xJJ/XXERtwCIx5wgH7QuJR0aj/uR9uol
+	ggBbJSUX1Dw90D4xV6WWkDbJ/ekbYAEkArL5DW3s1REF9n2j15xvDdzaMML7OcU9cE52
+	i4LT62hHq/WGPJMz3Z6Fs6QKHkAFBNowdLKiXz32EPqi9nQIHJ49q5Bu5aZYp4VjYgYs
+	JsfiIqJYQTBbez+rG8ADE98HGWzNjlT1FgXXVcO1aOzz5qmMm9TzEcvLOZ64sKJ5xKMN
+	nnBcwUYRHX9SWyrGxcQ608ujGJf6WYfhIDMQKICn7Vx3P+omKszfP1jPe2kP0SLc/RXr
+	A/fA==
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+X-Received: by 10.14.177.196 with SMTP id d44mr5651289eem.35.1371706079420;
+	Wed, 19 Jun 2013 22:27:59 -0700 (PDT)
+Received: by 10.15.45.134 with HTTP; Wed, 19 Jun 2013 22:27:59 -0700 (PDT)
+In-Reply-To: <CAP71WjxuKtkyMbb_pReEXepMKxnNyM9PmwoRc26D+gEL7b87jQ@mail.gmail.com>
+References: <CAP71WjxuKtkyMbb_pReEXepMKxnNyM9PmwoRc26D+gEL7b87jQ@mail.gmail.com>
+Date: Thu, 20 Jun 2013 07:27:59 +0200
+Message-ID: <CAHB-PjmDm6Y61trwGWbnfLrvcB0VE79_4naU_SP3-FEzkLYKSw@mail.gmail.com>
+From: =?ISO-8859-1?Q?Richard_R=F6jfors?= <richard.rojfors@gmail.com>
+To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Cc: meta-ti@yoctoproject.org
 Subject: Re: meta-ti + meta-qt5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -46,58 +39,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2013 05:03:18 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 20 Jun 2013 05:28:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-I have validated libgles-omap3 on the AMSDK 5.07 build configuration (that =
-does not have X11 enabled), so what you faced may be a different issue on t=
-he libgles front.
-
-I would wait for the verbose log from Nicolas for the qt5 issue he faced,
-
-regards,
-Prabu
+Hi,
 
 
------Original Message-----
-From: Dmytriyenko, Denys=20
-Sent: Thursday, June 20, 2013 10:25 AM
-To: Nicolas Dechesne
-Cc: Sundareson, Prabindh; meta-ti@yoctoproject.org
-Subject: Re: [meta-ti] meta-ti + meta-qt5
+On Thu, Jun 20, 2013 at 4:04 AM, Nicolas Dechesne
+<nicolas.dechesne@linaro.org> wrote:
+>
+> hi there,
+>
+> not sure if this is the right place to ask... but since i am about to ask=
+ about QT5, OE and TI platforms, i am starting here!
+>
+> so, i read a couple of blog posts about getting Qt5 on beaglebone, howeve=
+r it's not clear to me what's the latest status is. has anybody been able t=
+o use/enable OpenGLes either with KMS, or directfb or eglfs platform driver=
+? The only thing i have seen are references to using the 'minimal' platform=
+ driver.
+>
+> if so, can i get some pointers?
 
-On Thu, Jun 20, 2013 at 12:46:21AM -0400, Nicolas Dechesne wrote:
-> On Thu, Jun 20, 2013 at 12:34 AM, Sundareson, Prabindh <prabu@ti.com> wro=
-te:
->=20
-> > The instructions build eglfs as well (without xcb), as in the below pat=
-ch.
-> > Just that I cannot test it on platform due to the absence of GLES2 driv=
-er.
-> >  verbose flag in the qt configuration (qt5.inc) would help debug=20
-> > what is going wrong.****
-> >
-> > ** **
-> >
-> >
-> > https://github.com/prabindh/meta-qt5/commit/c8129fb5057f9254c773f82d
-> > 2fdbd85d9c56410a
-> > ****
-> >
-> >
-> yeah, i am using something similar *but* i do not have x11 in=20
-> DISTRO_FEATURES, and i suspect you might have it, right? without X11=20
-> feature, the x11 -dev packages are pulled/installed, and then the=20
-> qtbase configure script will fail to 'check' for EGL.
+I use Qt5 on pandaboard, with the Qt5 kms driver. There are some
+things needed to be done in Qt5 KMS to make it link with the OMAP4 PVR
+headers. And since you don't support the hardware pointer that code
+has to be avoided.
 
-Heh, I was having similar issues with Prabu's recent libgles-omap3 patches.=
-=20
-It would try to pull x11 packages due to -dev dependencies and complain tha=
-t DISTRO_FEATURES lacks X11 setting... It's not exactly the same issue, but=
- seems related.
-
---
-Denys
+--Richard
 
