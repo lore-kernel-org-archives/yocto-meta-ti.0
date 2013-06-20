@@ -1,27 +1,30 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7C955E013BA
-	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 18:26:43 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5K1Qgwg003256
-	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 20:26:42 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5K1QgTl001575
-	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 20:26:42 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 19 Jun 2013 20:26:41 -0500
-Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r5K1Qf5l019374	for
-	<meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 20:26:41 -0500
-Date: Wed, 19 Jun 2013 21:19:35 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1780336338.269.1371691175971.JavaMail.jenkins@puget>
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 301E6E01400
+	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 19:04:50 -0700 (PDT)
+Received: by mail-wg0-f51.google.com with SMTP id e11so5005650wgh.18
+	for <meta-ti@yoctoproject.org>; Wed, 19 Jun 2013 19:04:49 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type
+	:x-gm-message-state;
+	bh=r6XKbdo1xosD9B7R7RJlII+36i7imsYurpKcs4WOC/s=;
+	b=CfIsaD7DtTMh3HfvuTA8+vJjUZ3UlqGhUskfnc8dAuuuvLWkVubmAMnSul8vAygopq
+	zXyGq+H8VBqZhzYpefHOKeMCnZIpD4XZyhEOfIKTMLRZplfkFQr94xFRFAky5vVBa0Se
+	xRVN3JcpNo9cSXAPNU8+ra67nNfpS3d+J4MtpohVLMdhpYmfJP3zxNum2EOSuO+gY+Zc
+	bDD/fqTuRwx6l5eZ3raN09y0SAc9xjj+KQjlVYTM9vU6v4OYnzfnfgaDa28sjU6uAGPy
+	iwHHfsyI4YrDxW0eG4JlpNtKzx/VZbnKNDDdqZLuMPikoSMFL4VzF1/8z45bbr0e1oc6
+	Satw==
+X-Received: by 10.180.160.144 with SMTP id xk16mr11963185wib.62.1371693889247; 
+	Wed, 19 Jun 2013 19:04:49 -0700 (PDT)
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-06-19_21-01-44
+Received: by 10.180.83.1 with HTTP; Wed, 19 Jun 2013 19:04:27 -0700 (PDT)
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Wed, 19 Jun 2013 22:04:27 -0400
+Message-ID: <CAP71WjxuKtkyMbb_pReEXepMKxnNyM9PmwoRc26D+gEL7b87jQ@mail.gmail.com>
+To: meta-ti@yoctoproject.org
+X-Gm-Message-State: ALoCoQmuJb1uF3WF2gvpuSdaCzijBNPlRQdFhNuT4WHb7tqG/6QjCT43gwplo/n0oGWFJY8nnZsz
+Subject: meta-ti + meta-qt5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,168 +37,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jun 2013 01:26:43 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_268_1576443511.1371691175971"
+X-List-Received-Date: Thu, 20 Jun 2013 02:04:51 -0000
+Content-Type: multipart/alternative; boundary=047d7b62495402720704df8c5fb8
 
-------=_Part_268_1576443511.1371691175971
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--047d7b62495402720704df8c5fb8
+Content-Type: text/plain; charset=ISO-8859-1
 
-<html>
-<head>
-<title>
-Status for 06/19/13
-</title>
-</head>
-<body>
+hi there,
 
-<h2>Status for 06/19/13</h2>
+not sure if this is the right place to ask... but since i am about to ask
+about QT5, OE and TI platforms, i am starting here!
 
-<h2>BUILD_ID: build-2013-06-19_21-02-49</h2>
+so, i read a couple of blog posts about getting Qt5 on beaglebone, however
+it's not clear to me what's the latest status is. has anybody been able to
+use/enable OpenGLes either with KMS, or directfb or eglfs platform driver?
+The only thing i have seen are references to using the 'minimal' platform
+driver.
 
-<h2>Clean Build: false</h2>
+if so, can i get some pointers?
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+thanks!
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+nicolas
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+--047d7b62495402720704df8c5fb8
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.06"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+<div dir=3D"ltr">hi there,<div><br></div><div>not sure if this is the right=
+ place to ask... but since i am about to ask about QT5, OE and TI platforms=
+, i am starting here!</div><div><br></div><div style>so, i read a couple of=
+ blog posts about getting Qt5 on beaglebone, however it&#39;s not clear to =
+me what&#39;s the latest status is. has anybody been able to use/enable Ope=
+nGLes either with KMS, or directfb or eglfs platform driver? The only thing=
+ i have seen are references to using the &#39;minimal&#39; platform driver.=
+=A0</div>
 
-</body>
-</html>
+<div style><br></div><div style>if so, can i get some pointers?</div><div s=
+tyle><br></div><div style>thanks!</div><div style><br></div><div style>nico=
+las</div></div>
 
-
-------=_Part_268_1576443511.1371691175971--
+--047d7b62495402720704df8c5fb8--
