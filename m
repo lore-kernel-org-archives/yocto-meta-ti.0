@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E9370E014E4
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E91F2E014DF
 	for <meta-ti@yoctoproject.org>; Fri, 21 Jun 2013 11:54:29 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B468752AAE; Fri, 21 Jun 2013 18:54:28 +0000 (UTC)
+	id AB53E52A95; Fri, 21 Jun 2013 18:54:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130621185428.B468752AAE@arago-project.org>
+Message-Id: <20130621185428.AB53E52A95@arago-project.org>
 Date: Fri, 21 Jun 2013 18:54:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Prabindh Sundareson : omap3-sgx-modules-x11: Separate X11 SGX driver package into new recipe
+Subject: Prabindh Sundareson : libgles-omap3-x11: Separate X11 SGX driver package into new recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,26 +27,27 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: df2d999252b17598671112f152a9ddbc079ea704
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=df2d999252b17598671112f152a9ddbc079ea704
+Commit: 086be90ce8099c5b06a443e386479cada4d4709a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=086be90ce8099c5b06a443e386479cada4d4709a
 
 Author: Prabindh Sundareson <prabu@ti.com>
-Date:   Wed Jun 12 23:10:42 2013 +0530
+Date:   Wed Jun 12 23:10:41 2013 +0530
 
-omap3-sgx-modules-x11: Separate X11 SGX driver package into new recipe
+libgles-omap3-x11: Separate X11 SGX driver package into new recipe
 
-omap3-sgx-modules now contains only non-X11 drivers. The X11 driver is
-available in the omap3-sgx-modules-x11 package.
+libgles-omap3 now contains only non-X11 drivers. The X11 driver is
+available in the libgles-omap3-x11 package. This package has
+dependency on specific kernel versions for DRM builds.
 
 Signed-off-by: Prabindh Sundareson <prabu at ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../Compile-fixes-for-38-kernel.patch              |  346 ++++++++++++++++++++
- .../omap3-sgx-modules-x11/kernel-30.patch          |   38 +++
- .../omap3-sgx-modules-x11_4.09.00.01.bb            |   74 +++++
- 3 files changed, 458 insertions(+), 0 deletions(-)
+ .../libgles/libgles-omap3-x11-4.09.00.01/rc.pvr    |  125 ++++++++
+ .../libgles-omap3-x11-4.09.00.01/rc_dri.pvr        |  137 +++++++++
+ recipes-graphics/libgles/libgles-omap3-x11.inc     |  319 ++++++++++++++++++++
+ 3 files changed, 581 insertions(+), 0 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=df2d999252b17598671112f152a9ddbc079ea704
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=086be90ce8099c5b06a443e386479cada4d4709a
 
