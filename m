@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 77D75E01409
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7A542E0140D
 	for <meta-ti@yoctoproject.org>; Fri, 21 Jun 2013 11:54:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2F87F52A55; Fri, 21 Jun 2013 18:54:28 +0000 (UTC)
+	id 13AFC52A4D; Fri, 21 Jun 2013 18:54:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130621185428.2F87F52A55@arago-project.org>
+Message-Id: <20130621185428.13AFC52A4D@arago-project.org>
 Date: Fri, 21 Jun 2013 18:54:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Prabindh Sundareson : omap3-sgx-modules: Remove X11 related build and packaging
+Subject: Prabindh Sundareson : libgles-omap3: Remove X11 related build and packaging
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,18 +27,18 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: b9d459af62de7767bcff889c21f70450e563adf9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b9d459af62de7767bcff889c21f70450e563adf9
+Commit: adb1681db776d843bbb0d644557509a73b0b89d5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=adb1681db776d843bbb0d644557509a73b0b89d5
 
 Author: Prabindh Sundareson <prabu@ti.com>
-Date:   Wed Jun 12 23:10:35 2013 +0530
+Date:   Wed Jun 12 23:10:34 2013 +0530
 
-omap3-sgx-modules: Remove X11 related build and packaging
+libgles-omap3: Remove X11 related build and packaging
 
 SGX530 driver for X11 is only buildable and testable standalone
 with the pre-built X11 package provided with the Graphics SDK.
-This patch removes X11 build from the default kernel module recipe,
-to enable moving X11 build to a separate recipe.
+This patch removes X11 build from the default recipe, to enable
+moving X11 build to a separate recipe.
 
 This is part of a clean up of the Graphics recipe starting from
 4.09.00.01 version of the Graphics SDK.
@@ -48,33 +48,9 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../omap3-sgx-modules_4.09.00.01.bb                |    9 ++-------
- 1 files changed, 2 insertions(+), 7 deletions(-)
+ recipes-graphics/libgles/libgles-omap3-no-x.inc    |  330 ++++++++++++++++++++
+ .../libgles/libgles-omap3_4.09.00.01.bb            |   46 +---
+ 2 files changed, 332 insertions(+), 44 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-index 55e427f..923e6a5 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-@@ -39,9 +39,7 @@ MODULESLOCATION_ti814x = "dc_ti81xx_linux"
- MODULESLOCATION_ti816x = "dc_ti81xx_linux"
- MODULESLOCATION_ti33x = "dc_ti335x_linux"
- 
--export SUPPORT_XORG ?= "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
--
--MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
-+MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=0"
- 
- do_install() {
-     mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-@@ -49,8 +47,5 @@ do_install() {
-         ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
-         ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
-         ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
--
--    if [ "${SUPPORT_XORG}" = "1" ]; then
--        cp ${S}/services4/3rdparty/linux_drm/drm.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
--    fi
- }
-+
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=adb1681db776d843bbb0d644557509a73b0b89d5
 
