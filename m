@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5F209E01409
-	for <meta-ti@yoctoproject.org>; Fri, 21 Jun 2013 11:15:09 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 77D75E01409
+	for <meta-ti@yoctoproject.org>; Fri, 21 Jun 2013 11:54:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 18AB652A1C; Fri, 21 Jun 2013 18:15:09 +0000 (UTC)
+	id 2F87F52A55; Fri, 21 Jun 2013 18:54:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130621181509.18AB652A1C@arago-project.org>
-Date: Fri, 21 Jun 2013 18:15:09 +0000 (UTC)
+Message-Id: <20130621185428.2F87F52A55@arago-project.org>
+Date: Fri, 21 Jun 2013 18:54:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to ti2013.04.02 release
+Subject: Prabindh Sundareson : omap3-sgx-modules: Remove X11 related build and packaging
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,45 +22,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jun 2013 18:15:12 -0000
+X-List-Received-Date: Fri, 21 Jun 2013 18:54:29 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: 5c395d6efbb01856058c58b8ebda298ec806ad6e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5c395d6efbb01856058c58b8ebda298ec806ad6e
+Branch: master
+Commit: b9d459af62de7767bcff889c21f70450e563adf9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b9d459af62de7767bcff889c21f70450e563adf9
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Jun 12 12:21:08 2013 -0400
+Author: Prabindh Sundareson <prabu@ti.com>
+Date:   Wed Jun 12 23:10:35 2013 +0530
 
-linux-ti-staging: update to ti2013.04.02 release
+omap3-sgx-modules: Remove X11 related build and packaging
 
+SGX530 driver for X11 is only buildable and testable standalone
+with the pre-built X11 package provided with the Graphics SDK.
+This patch removes X11 build from the default kernel module recipe,
+to enable moving X11 build to a separate recipe.
+
+This is part of a clean up of the Graphics recipe starting from
+4.09.00.01 version of the Graphics SDK.
+
+Signed-off-by: Prabindh Sundareson <prabu at ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.8.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ .../omap3-sgx-modules_4.09.00.01.bb                |    9 ++-------
+ 1 files changed, 2 insertions(+), 7 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-index 39f0e31..29ffebc 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-@@ -26,12 +26,12 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
+index 55e427f..923e6a5 100644
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
+@@ -39,9 +39,7 @@ MODULESLOCATION_ti814x = "dc_ti81xx_linux"
+ MODULESLOCATION_ti816x = "dc_ti81xx_linux"
+ MODULESLOCATION_ti33x = "dc_ti335x_linux"
  
- BRANCH = "ti-linux-3.8.y"
+-export SUPPORT_XORG ?= "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
+-
+-MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
++MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=0"
  
--# This commit corresponds to ti2013.04.00 release tag
--SRCREV = "e7460f2acdea5c9b766c7eb76bad5ab2ed7e566c"
-+# This commit corresponds to ti2013.04.02 release tag
-+SRCREV = "f3cb62a800ae37f17a3382b10d155ee02dbc83fc"
- PV = "3.8.13"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "e+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "f+gitr${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
+ do_install() {
+     mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+@@ -49,8 +47,5 @@ do_install() {
+         ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
+         ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
+         ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-
+-    if [ "${SUPPORT_XORG}" = "1" ]; then
+-        cp ${S}/services4/3rdparty/linux_drm/drm.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-    fi
+ }
++
 
 
