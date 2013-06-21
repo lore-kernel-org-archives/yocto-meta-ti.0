@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0A74CE01502
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 36541E01503
 	for <meta-ti@yoctoproject.org>; Fri, 21 Jun 2013 11:54:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A738F52A98; Fri, 21 Jun 2013 18:54:33 +0000 (UTC)
+	id D497C52AAF; Fri, 21 Jun 2013 18:54:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130621185433.A738F52A98@arago-project.org>
+Message-Id: <20130621185433.D497C52AAF@arago-project.org>
 Date: Fri, 21 Jun 2013 18:54:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Prabindh Sundareson : omap3-sgx-modules-x11: Separate X11 SGX driver package into new recipe
+Subject: Denys Dmytriyenko : omap3-sgx-modules: remove unnecessary patches for x11, cleanup old patch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,26 +27,22 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dylan
-Commit: 147715e937973e500d4ac4d017712ecc5fb679e8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=147715e937973e500d4ac4d017712ecc5fb679e8
+Commit: 21f9705c8be3382a92d98dbb0929475bae766845
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=21f9705c8be3382a92d98dbb0929475bae766845
 
-Author: Prabindh Sundareson <prabu@ti.com>
-Date:   Wed Jun 12 23:10:42 2013 +0530
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Jun 21 14:50:15 2013 -0400
 
-omap3-sgx-modules-x11: Separate X11 SGX driver package into new recipe
+omap3-sgx-modules: remove unnecessary patches for x11, cleanup old patch
 
-omap3-sgx-modules now contains only non-X11 drivers. The X11 driver is
-available in the omap3-sgx-modules-x11 package.
-
-Signed-off-by: Prabindh Sundareson <prabu at ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../Compile-fixes-for-38-kernel.patch              |  346 ++++++++++++++++++++
- .../omap3-sgx-modules-x11/kernel-30.patch          |   38 +++
- .../omap3-sgx-modules-x11_4.09.00.01.bb            |   74 +++++
- 3 files changed, 458 insertions(+), 0 deletions(-)
+ .../Compile-fixes-for-38-kernel.patch              |  346 --------------------
+ .../omap3-sgx-modules-x11/kernel-30.patch          |   38 ---
+ .../omap3-sgx-modules/kernel-30.patch              |   76 +++---
+ 3 files changed, 38 insertions(+), 422 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=147715e937973e500d4ac4d017712ecc5fb679e8
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=21f9705c8be3382a92d98dbb0929475bae766845
 
