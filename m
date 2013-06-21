@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34C1DE014FB
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 36193E01502
 	for <meta-ti@yoctoproject.org>; Fri, 21 Jun 2013 11:54:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id AEE7252A4D; Fri, 21 Jun 2013 18:54:33 +0000 (UTC)
+	id CA64452AAE; Fri, 21 Jun 2013 18:54:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130621185433.AEE7252A4D@arago-project.org>
+Message-Id: <20130621185433.CA64452AAE@arago-project.org>
 Date: Fri, 21 Jun 2013 18:54:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : libgles-omap3: don't RCONFLICT/ RREPLACE no-x version with x11 as it breaks non-X distros
+Subject: Denys Dmytriyenko : libgles-omap3-x11: add missing X11 version of the recipe, after it got split
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,115 +27,154 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dylan
-Commit: a6e3b7466fec563b6e9683d6d23071c5432535c9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a6e3b7466fec563b6e9683d6d23071c5432535c9
+Commit: 14671da0be5ffc45b23b37f28f15eb21928b4ca8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=14671da0be5ffc45b23b37f28f15eb21928b4ca8
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Jun 21 14:24:50 2013 -0400
+Date:   Fri Jun 21 14:32:12 2013 -0400
 
-libgles-omap3: don't RCONFLICT/RREPLACE no-x version with x11 as it breaks non-X distros
-
-* Enables building/installing both X11 and RAW libs/demos. Plus otherwise the
-  build is broken for non-X distros, as it pulls in X11 deps due to RREPLACES...
-* Fix broken DEPENDS copy/paste typo.
-* Also, clean up after the previous changes - extra empty lines, indentation, etc.
+libgles-omap3-x11: add missing X11 version of the recipe, after it got split
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../omap3-sgx-modules-x11_4.09.00.01.bb            |    1 -
- .../omap3-sgx-modules_4.09.00.01.bb                |    1 -
- recipes-graphics/libgles/libgles-omap3-no-x.inc    |    3 +-
- recipes-graphics/libgles/libgles-omap3-x11.inc     |   21 ++++++++-----------
- recipes-graphics/libgles/libgles-omap3.inc         |    1 -
- 5 files changed, 10 insertions(+), 17 deletions(-)
+ .../99-bufferclass.rules                           |    7 ++
+ .../libgles/libgles-omap3-x11-4.09.00.01/cputype   |   17 +++++
+ .../libgles-omap3-x11-4.09.00.01/sample.desktop    |    8 ++
+ .../libgles/libgles-omap3-x11_4.09.00.01.bb        |   75 ++++++++++++++++++++
+ 4 files changed, 107 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
-index 8493814..d439d83 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
-@@ -71,4 +71,3 @@ do_install() {
- 
-     cp ${S}/services4/3rdparty/linux_drm/drm.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
- }
--
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-index 923e6a5..399374d 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-@@ -48,4 +48,3 @@ do_install() {
-         ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
-         ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
- }
--
-diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-index 6d79bf6..d4cb46b 100644
---- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
-+++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-@@ -245,7 +245,7 @@ FILES_${PN}-dbg = "${libdir}/.debug/* ${bindir}/.debug/* \
-                    ${libdir}/ES*/.debug ${bindir}/*/.debug\
-                    ${bindir}/SGX/demos/*/.debug/* \
-                    ${bindir}/SGX/trainingcourses/*/.debug/* \
--	"
+diff --git a/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/99-bufferclass.rules b/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/99-bufferclass.rules
+new file mode 100644
+index 0000000..780423b
+--- /dev/null
++++ b/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/99-bufferclass.rules
+@@ -0,0 +1,7 @@
++# Give everyone access to bufferclass nodes and make a compatibility symlink for the first one
++SUBSYSTEM=="bccat", MODE="0666"
++KERNEL=="bccat0", SYMLINK+="bc_cat", MODE="0666"
++
++# Give everyone access to v4l nodes
++SUBSYSTEM=="video4linux", MODE="0666"
++
+diff --git a/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/cputype b/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/cputype
+new file mode 100755
+index 0000000..4448c30
+--- /dev/null
++++ b/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/cputype
+@@ -0,0 +1,17 @@
++#!/bin/sh
++
++machine_id() { # return the machine ID
++	awk 'BEGIN { FS=": " } /Hardware/ \
++		{ gsub(" ", "_", $2); print tolower($2) } ' </proc/cpuinfo
++}
++
++if [ "$(machine_id)" = "ti8168evm" ] ; then
++	echo TI816x
++elif [ "$(machine_id)" = "am335xevm" ] ; then
++    echo TI33XX
++else
++	devmem2 0x4800244c | \
++	grep 'Read at address' | \
++	sed -e 's/.*): //' | \
++	sed -e 's/0x00005C00/OMAP3503/' -e 's/0x00001C00/OMAP3515/' -e 's/0x00004C00/OMAP3525/' -e 's/0x00000C00/OMAP3530/' -e 's/0x00005E00/OMAP3503/' -e 's/0x00001E00/OMAP3515/' -e 's/0x00004E00/OMAP3525/' -e 's/0x00000E00/OMAP3530/' -e 's/0x00000CC0/OMAP3530/'
++fi
+diff --git a/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/sample.desktop b/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/sample.desktop
+new file mode 100644
+index 0000000..6bacac9
+--- /dev/null
++++ b/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/sample.desktop
+@@ -0,0 +1,8 @@
++[Desktop Entry]
++Name=NAME Demo
++Comment=OGLES Demo
++Exec=EXEC
++Icon=star
++Type=Application
++Categories=Graphics;
++
+diff --git a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
+new file mode 100644
+index 0000000..1c70cae
+--- /dev/null
++++ b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
+@@ -0,0 +1,75 @@
++require libgles-omap3-x11.inc
++
++LICENSE = "TSPA"
++
++DEFAULT_PREFERENCE = "-1"
++
++BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
++BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
++BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
++BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
++
++PLATFORM = "LinuxARMV7"
++PVR_INIT = "pvrsrvctl"
++
++# download required binary distribution from:
++# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
++# see libgles-omap3.inc for detailed installation instructions
++
++SGXPV = "4_09_00_01"
++IMGPV = "1.9.2188537"
++BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
++TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
++           file://cputype \
++           file://rc.pvr \
++           file://rc_dri.pvr \
++           file://sample.desktop \
++           file://99-bufferclass.rules  \
 +"
- 
- FILES_${PN}-rawdemos = "${bindir}/SGX/demos/Raw/*"
- 
-@@ -315,4 +315,3 @@ rm -f $D${sysconfdir}/powervr-esrev
- pkg_postinst_${PN}-linuxfbwsegl() {
- rm -f $D${sysconfdir}/powervr-esrev
- }
--
-diff --git a/recipes-graphics/libgles/libgles-omap3-x11.inc b/recipes-graphics/libgles/libgles-omap3-x11.inc
-index c4d0806..6621396 100644
---- a/recipes-graphics/libgles/libgles-omap3-x11.inc
-+++ b/recipes-graphics/libgles/libgles-omap3-x11.inc
-@@ -7,27 +7,24 @@ PR = "r35"
- 
- COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
- 
--X11DEPENDS = "virtual/libx11 libxau libxdmcp libdrm"
--DEPENDS = "x11"
-+DEPENDS = "virtual/libx11 libxau libxdmcp libdrm"
- 
- export SUPPORT_XORG ?= "1"
- PVR_INIT ?= "pvrsrvinit"
- 
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
- 
--RREPLACES_${PN} = "libegl libgles1 libgles2 libgles-omap3"
--RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgles-omap3-dev"
--RREPLACES_${PN}-dbg = "libegl-dbg libgles-omap3-dbg"
-+RREPLACES_${PN} = "libegl libgles1 libgles2"
-+RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
-+RREPLACES_${PN}-dbg = "libegl-dbg"
- 
--RPROVIDES_${PN} = "libegl libgles1 libgles2 libgles-omap3"
--RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgles-omap3-dev"
--RPROVIDES_${PN}-dbg = "libegl-dbg libgles-omap3-dbg"
-+RPROVIDES_${PN} = "libegl libgles1 libgles2"
-+RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
-+RPROVIDES_${PN}-dbg = "libegl-dbg"
- 
- RCONFLICTS_${PN} = "libegl libgles1 libgles2"
--RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev libgles-omap3-dev"
--RCONFLICTS_${PN}-dbg = "libegl-dbg libgles-omap3-dbg"
--
--
-+RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
-+RCONFLICTS_${PN}-dbg = "libegl-dbg"
- 
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
- 		   file://cputype \
-diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-index 9a90c56..f417b8e 100644
---- a/recipes-graphics/libgles/libgles-omap3.inc
-+++ b/recipes-graphics/libgles/libgles-omap3.inc
-@@ -437,4 +437,3 @@ echo "WindowSystem=libpvrPVR2D_X11WSEGL.so.1" >> $D${sysconfdir}/powervr.ini
- pkg_postinst_${PN}-driwsegl() {
- rm -f $D${sysconfdir}/powervr-esrev
- }
--
++SRC_URI[md5sum] = "bd35e9d8843aff3a2aca9d41e7db1c7d"
++SRC_URI[sha256sum] = "eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249247647"
++
++S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
++
++LIBGLESWINDOWSYSTEM ?= "libpvrPVR2D_DRIWSEGL.so"
++
++do_configure_append() {
++
++    # Change PVR server's user mode library to point to DRI
++    for drifile in $(find ${S} -name "libsrv_um_dri.so"); do
++    if [ "$drifile" != "" ]
++    then
++        dir=$(dirname ${drifile})
++        if [ "$SUPPORT_XORG" = "1" ]
++        then
++            mv ${dir}/libsrv_um_dri.so ${dir}/libsrv_um.so
++        else
++            rm -rf ${dir}/libsrv_um_dri.so
++        fi
++    fi
++
++    done
++}
++
++do_install_append() {
++
++    # In this version of the graphics SDK the following directories do not exist:
++    #    /GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/pvr2d.h (doesn't exist)
++    #    /GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/GLES/egltypes.h (doesn't exist)
++    # Therefore, need to copy these files manually at the only location that they do exist
++    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir}
++    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/
++
++    rm ${D}${sysconfdir}/init.d/pvr-init
++
++    if [ "$SUPPORT_XORG" = "1" ]; then
++        cp -pP ${WORKDIR}/rc_dri.pvr ${D}${sysconfdir}/init.d/pvr-init
++    else
++        cp -pP ${WORKDIR}/rc.pvr ${D}${sysconfdir}/init.d/pvr-init
++    fi
++
++}
++
++RRECOMMENDS_${PN}-x11demos = "${PN}-driwsegl"
++RRECOMMENDS_${PN}-x11trainingcourses = "${PN}-driwsegl"
 
 
