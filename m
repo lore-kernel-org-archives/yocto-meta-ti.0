@@ -1,27 +1,42 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22178E005B3
-	for <meta-ti@yoctoproject.org>; Thu, 20 Jun 2013 18:26:21 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5L1QLXR028111
-	for <meta-ti@yoctoproject.org>; Thu, 20 Jun 2013 20:26:21 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5L1QLgc017017
-	for <meta-ti@yoctoproject.org>; Thu, 20 Jun 2013 20:26:21 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 20 Jun 2013 20:26:20 -0500
-Received: from puget.gt.design.ti.com ([158.218.102.159])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r5L1QK3f001121	for
-	<meta-ti@yoctoproject.org>; Thu, 20 Jun 2013 20:26:20 -0500
-Date: Thu, 20 Jun 2013 21:19:13 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <2016699557.273.1371777553402.JavaMail.jenkins@puget>
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-oa0-f47.google.com (mail-oa0-f47.google.com
+	[209.85.219.47])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1BA69E006E9
+	for <meta-ti@yoctoproject.org>; Thu, 20 Jun 2013 21:50:56 -0700 (PDT)
+Received: by mail-oa0-f47.google.com with SMTP id m1so8787165oag.6
+	for <meta-ti@yoctoproject.org>; Thu, 20 Jun 2013 21:50:56 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:x-gm-message-state;
+	bh=Q6O0BtDwFvGRPC3wo7JXuRTP8Jzt690tNk8hhFGeUDI=;
+	b=JJAvkogEcNpmNSlS64QGSFARWaNuA2iAFL98aGA9+m5yQLIJgR4kZ3xv9Nf+p+dw3m
+	Ejvj8LUNqd390S/aTvzhlioWn6LqCW7hQsjItNFl/EKZgL0rg0cQriDIWc0BP/6S6f7+
+	B7Eu7LmQ9Rpji0YpAXNEIyshHPGNzXpZ5fL5qC2SkYPf+vRMBfCim1z+Yo91royiFPt4
+	ZONx6FoAzUheAJjWFTfMSqJwCiEsKY8A9GuZzwdJgDNBMly1rkUnMP6V8IbtGeZGnxi4
+	P+xXYOc4O6uUVLy6uLtw6fTZ1doaZmzu6viGFDCypbTnlSrJIuJ+rYM3QIm81gzcUIwZ
+	2eSg==
+X-Received: by 10.60.68.13 with SMTP id r13mr5876313oet.71.1371790256114; Thu,
+	20 Jun 2013 21:50:56 -0700 (PDT)
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-06-20_21-01-44
+Received: by 10.76.27.165 with HTTP; Thu, 20 Jun 2013 21:50:36 -0700 (PDT)
+In-Reply-To: <321768C95D21724485BCE784F1BE98473EB53340@DBDE04.ent.ti.com>
+References: <CAP71WjxuKtkyMbb_pReEXepMKxnNyM9PmwoRc26D+gEL7b87jQ@mail.gmail.com>
+	<321768C95D21724485BCE784F1BE98473EB52D53@DBDE04.ent.ti.com>
+	<CAP71WjztrzWx6K-MNG4RQfeu0V6F45M0_0j5WP0zZjt9s9i17A@mail.gmail.com>
+	<321768C95D21724485BCE784F1BE98473EB53158@DBDE04.ent.ti.com>
+	<CAP71WjzqEVcxwpwvMc9V-106b2Qyq5uc-x2erf_B7AZXeBQ2Zw@mail.gmail.com>
+	<321768C95D21724485BCE784F1BE98473EB53242@DBDE04.ent.ti.com>
+	<CAP71WjwHYuFPa2ieAh+WbPMnYNt2AC5rx8GP-+7U2Q-RwoOBYQ@mail.gmail.com>
+	<20130620045521.GR13356@edge>
+	<321768C95D21724485BCE784F1BE98473EB53340@DBDE04.ent.ti.com>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Fri, 21 Jun 2013 00:50:36 -0400
+Message-ID: <CAP71Wjx3cAmqn1=wBAPZFbT7ARw_ha0hx=WDsp9e+QaiJcQagA@mail.gmail.com>
+To: "Sundareson, Prabindh" <prabu@ti.com>
+X-Gm-Message-State: ALoCoQnsUgnTnA8cy5126PsFHtlpTFaziJtEuavsEB4Dn79rThuIIoAwl+cw32ikXgIsOm+uixhp
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: meta-ti + meta-qt5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,168 +49,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jun 2013 01:26:26 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_272_1111235467.1371777553401"
+X-List-Received-Date: Fri, 21 Jun 2013 04:50:59 -0000
+Content-Type: multipart/alternative; boundary=001a11331a76ec243e04dfa2ceb3
 
-------=_Part_272_1111235467.1371777553401
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a11331a76ec243e04dfa2ceb3
+Content-Type: text/plain; charset=ISO-8859-1
 
-<html>
-<head>
-<title>
-Status for 06/20/13
-</title>
-</head>
-<body>
+On Thu, Jun 20, 2013 at 1:03 AM, Sundareson, Prabindh <prabu@ti.com> wrote:
 
-<h2>Status for 06/20/13</h2>
+> I have validated libgles-omap3 on the AMSDK 5.07 build configuration (that
+> does not have X11 enabled), so what you faced may be a different issue on
+> the libgles front.
+>
+> I would wait for the verbose log from Nicolas for the qt5 issue he faced,
+>
 
-<h2>BUILD_ID: build-2013-06-20_21-02-45</h2>
+so, my issue was related to mesa in fact !
 
-<h2>Clean Build: false</h2>
+you can read that thread if you are interested:
+http://lists.openembedded.org/pipermail/openembedded-core/2013-June/080205.html
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+basically, i was building for qemuarm, so with mesa, and it's mesa that
+doesn't work fine if X11 is not in DISTRO.
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+thanks anyways for all the support/discussion.
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+--001a11331a76ec243e04dfa2ceb3
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.06"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+<div dir=3D"ltr"><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">=
+On Thu, Jun 20, 2013 at 1:03 AM, Sundareson, Prabindh <span dir=3D"ltr">&lt=
+;<a href=3D"mailto:prabu@ti.com" target=3D"_blank">prabu@ti.com</a>&gt;</sp=
+an> wrote:<br>
 
-</body>
-</html>
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
+adding-left:1ex"><div id=3D":16d" style=3D"overflow:hidden">I have validate=
+d libgles-omap3 on the AMSDK 5.07 build configuration (that does not have X=
+11 enabled), so what you faced may be a different issue on the libgles fron=
+t.<br>
 
 
-------=_Part_272_1111235467.1371777553401--
+<br>
+I would wait for the verbose log from Nicolas for the qt5 issue he faced,</=
+div></blockquote></div><br>so, my issue was related to mesa in fact !</div>=
+<div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra" style>you c=
+an read that thread if you are interested:=A0<a href=3D"http://lists.openem=
+bedded.org/pipermail/openembedded-core/2013-June/080205.html">http://lists.=
+openembedded.org/pipermail/openembedded-core/2013-June/080205.html</a></div=
+>
+
+<div class=3D"gmail_extra" style><br></div><div class=3D"gmail_extra" style=
+>basically, i was building for qemuarm, so with mesa, and it&#39;s mesa tha=
+t doesn&#39;t work fine if X11 is not in DISTRO.</div><div class=3D"gmail_e=
+xtra" style>
+
+<br></div><div class=3D"gmail_extra" style>thanks anyways for all the suppo=
+rt/discussion.</div><div class=3D"gmail_extra" style><br></div><div class=
+=3D"gmail_extra" style><br></div></div>
+
+--001a11331a76ec243e04dfa2ceb3--
