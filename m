@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6E03E01562
-	for <meta-ti@yoctoproject.org>; Tue, 25 Jun 2013 11:13:02 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B6DBBE01565
+	for <meta-ti@yoctoproject.org>; Tue, 25 Jun 2013 11:13:05 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1E05B52998; Tue, 25 Jun 2013 18:13:02 +0000 (UTC)
+	id 78D7C52995; Tue, 25 Jun 2013 18:13:05 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130625181302.1E05B52998@arago-project.org>
-Date: Tue, 25 Jun 2013 18:13:02 +0000 (UTC)
+Message-Id: <20130625181305.78D7C52995@arago-project.org>
+Date: Tue, 25 Jun 2013 18:13:05 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot: add support for SPL UART variant
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jun 2013 18:13:04 -0000
+X-List-Received-Date: Tue, 25 Jun 2013 18:13:05 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 32ec4417ad9152393f34f27b813714db393972c7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=32ec4417ad9152393f34f27b813714db393972c7
+Branch: danny
+Commit: 1c09e95bef33b32921f9302ce088ad0cacdde944
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1c09e95bef33b32921f9302ce088ad0cacdde944
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Jun 24 20:14:37 2013 -0400
