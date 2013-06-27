@@ -1,29 +1,32 @@
-Return-Path: <denys@ti.com>
+Return-Path: <chase.maupin@ti.com>
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BFCB8E005B3
-	for <meta-ti@yoctoproject.org>; Thu, 27 Jun 2013 07:15:39 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7939FE005B3
+	for <meta-ti@yoctoproject.org>; Thu, 27 Jun 2013 07:16:05 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5REFcCQ027584;
-	Thu, 27 Jun 2013 09:15:38 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5REFc31025448;
-	Thu, 27 Jun 2013 09:15:38 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 27 Jun 2013 09:15:38 -0500
-Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r5REFb2v001281;
-	Thu, 27 Jun 2013 09:15:37 -0500
-Date: Thu, 27 Jun 2013 10:15:36 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Sudhangathan B S <sudhangathan@gmail.com>
-Message-ID: <20130627141535.GJ28379@edge>
-References: <CAGX3a99-Luc3AVn3L-HdtNCNeaS1GiZ_FUX8D5PJWx3rAxaePw@mail.gmail.com>
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5REG5hs027906
+	for <meta-ti@yoctoproject.org>; Thu, 27 Jun 2013 09:16:05 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5REG5tn026025
+	for <meta-ti@yoctoproject.org>; Thu, 27 Jun 2013 09:16:05 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
+	14.02.0342.003; Thu, 27 Jun 2013 09:16:04 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "Heroor, Siddharth" <heroor@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH] recipes-kernel: Add GLSDK specific kernel
+	tree	for omap-a15
+Thread-Index: AQHOcz0fhFlVoPxOR0qSSl5+58/BO5lJmu9A
+Date: Thu, 27 Jun 2013 14:16:04 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015961BF43@DLEE11.ent.ti.com>
+References: <20130627134905.GA6760@ti.com>
+In-Reply-To: <20130627134905.GA6760@ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-In-Reply-To: <CAGX3a99-Luc3AVn3L-HdtNCNeaS1GiZ_FUX8D5PJWx3rAxaePw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: oe_runmake failed issue for 2.6.32 kernel
+Subject: Re: [PATCH] recipes-kernel: Add GLSDK specific kernel tree	for omap-a15
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,127 +39,118 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2013 14:15:41 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 27 Jun 2013 14:16:05 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 26, 2013 at 09:28:38AM +0530, Sudhangathan B S wrote:
-> On my way to install 2.6.32 kernel for the Beagle board image. I need this
-> kernel to work with the leopard imaging/aptina camera module/sensors. I'm
-> encountering this "oe_runmake failed" issue. I have strong feeling it is
-> Yocto or the meta-ti layers, which is not set properly. On the web i got
-> related issues, but they are too old, and were related to OE.
-> 
-> I'm using danny branch. I had downloaded meta-ti, openembedded-core, and
-> meta-oe as .zip files meant for danny branch. Thanks to Denys D@ti for
-> help. I integrated meta-ti with yocto, and also built the image with the
-> default 3.2 kernel, and further with 2.6.37 kernel too, successfully.
-> 
-> I have also included partial terminal output below.!
-> 
-> These are a few lines from
-> /home/asahota/danny-try/danny-8.0/meta-ti/conf/machine/beagleboard.conf
-> *******START
-> #@TYPE: Machine
-> #@NAME: Beagleboard machine
-> #@DESCRIPTION: Machine configuration for the http://beagleboard.org/ board
-> 
-> require conf/machine/include/omap3.inc
-> 
-> # Only has DVI connector for external screen
-> GUI_MACHINE_CLASS = "bigscreen"
-> 
-> #PREFERRED_PROVIDER_virtual/kernel = "linux-mainline"
-> PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"                <----
-> change
-> PREFERRED_VERSION_linux-omap-psp = "2.6.32"
-> PREFERRED_PROVIDER_virtual/bootloader = "u-boot-beagleboard"
-> PREFERRED_PROVIDER_u-boot = "u-boot-beagleboard"
-> 
-> IMAGE_FSTYPES += "tar.gz ubi"
-> EXTRA_IMAGECMD_jffs2 = "-lnp"
-> 
-> SERIAL_CONSOLE = "115200 ttyO2"
-> 
-> UBOOT_MACHINE = "omap3_beagle_config"
-> *******END
-> 
-> 
-> These are the FIRST few lines of my terminal output, for the command
-> bitbake core-image-sato
-> *******START
-> WARNING: Host distribution "Ubuntu 12.04.2 LTS" has not been validated with
-> this version of the build system; you may possibly experience unexpected
-> failures. It is recommended that you use a tested distribution.
-> Loading cache: 100%
-> |###################################################################################################################################|
-> ETA:  00:00:00
-> Loaded 1210 entries from dependency cache.
-> 
-> Build Configuration:
-> BB_VERSION        = "1.16.0"
-> TARGET_ARCH       = "arm"
-> TARGET_OS         = "linux-gnueabi"
-> MACHINE           = "beagleboard"
-> DISTRO            = "poky"
-> DISTRO_VERSION    = "1.3"
-> TUNE_FEATURES     = "armv7a vfp neon cortexa8"
-> TARGET_FPU        = "vfp-neon"
-> meta
-> meta-yocto
-> meta-ti
-> meta-yocto-bsp    = "<unknown>:<unknown>"
-> 
-> NOTE: Resolving any missing task queue dependencies
-> NOTE: Preparing runqueue
-> NOTE: Executing SetScene Tasks
-> *******END
-> 
-> 
-> These are the LAST few lines of my terminal output, for the command bitbake
-> -vvv core-image-sato
-> *******START
-> | include/linux/pagemap.h: In function 'fault_in_pages_readable':
-> | include/linux/pagemap.h:413:16: warning: variable 'c' set but not used
-> [-Wunused-but-set-variable]
->  |   LD      fs/ubifs/ubifs.o
-> |   LD      fs/ubifs/built-in.o
-> |   LD      fs/built-in.o
-> | ERROR: oe_runmake failed
-> | ERROR: Function failed: do_compileconfigs (see
-> /home/asahota/danny-try/danny-8.0/build/tmp/work/beagleboard-poky-linux-gnueabi/linux-omap-psp-2.6.32-r0/temp/log.do_compileconfigs.28440
-> for further information)
+>-----Original Message-----
+>From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+>bounces@yoctoproject.org] On Behalf Of Heroor, Siddharth
+>Sent: Thursday, June 27, 2013 8:49 AM
+>To: meta-ti@yoctoproject.org
+>Subject: [meta-ti] [PATCH] recipes-kernel: Add GLSDK specific
+>kernel tree for omap-a15
+>
+>* Machine compatible with only omap-a15 devices.
+>* The TI Staging tree will not be used to maintain K3.8. Instead,
+>  this new tree is set up as a production tree. Pending features
+>  for 3.8 will be implemented on this tree.
+>  - Backported features from linux mainline
+>  - Backported bug-fixes from linux mainline and linux-stable.
+>  - Features implemented by the GLSDK team which maybe product
+>    specific.
+>  This is the tree on which GLSDK kernel releases will be made.
+>* This recipe is based off the Core SDK 2013.04.02 released kernel
+>  recipe - recipes-kernel/linux/linux-ti-staging_3.8.bb
+>
+>v2:
+>    Regenerate the patch using --find-copies-harder -M
+>
+>Signed-off-by: Siddharth Heroor <heroor@ti.com>
+>cc: Mrinmayee Hingolikar <mrinmayee@ti.com>
+>---
+> .../{linux-ti-staging =3D> linux-ti-glsdk}/defconfig |    0
+> ...nux-ti-staging_3.8.bb =3D> linux-ti-glsdk_3.8.bb} |   16 ++++---
+>---------
+> 2 files changed, 4 insertions(+), 12 deletions(-)
+> copy recipes-kernel/linux/{linux-ti-staging =3D> linux-ti-
+>glsdk}/defconfig (100%)
+> copy recipes-kernel/linux/{linux-ti-staging_3.8.bb =3D> linux-ti-
+>glsdk_3.8.bb} (51%)
+>
+>diff --git a/recipes-kernel/linux/linux-ti-staging/defconfig
+>b/recipes-kernel/linux/linux-ti-glsdk/defconfig
+>similarity index 100%
+>copy from recipes-kernel/linux/linux-ti-staging/defconfig
+>copy to recipes-kernel/linux/linux-ti-glsdk/defconfig
+>diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb
+>b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+>similarity index 51%
+>copy from recipes-kernel/linux/linux-ti-staging_3.8.bb
+>copy to recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+>index 29ffebc..8d66f84 100644
+>--- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
+>+++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+>@@ -1,5 +1,5 @@
+> SECTION =3D "kernel"
+>-DESCRIPTION =3D "Linux kernel for TI devices"
+>+DESCRIPTION =3D "Linux kernel for TI devices supported by the GLSDK
+>product"
+> LICENSE =3D "GPLv2"
+> LIC_FILES_CHKSUM =3D
+>"file://COPYING;md5=3Dd7810fab7487fb0aad327b76f1be7cd7"
+> KERNEL_IMAGETYPE =3D "uImage"
+>@@ -9,22 +9,14 @@ inherit kernel
+> require recipes-kernel/linux/linux-dtb.inc
+> require recipes-kernel/linux/setup-defconfig.inc
+>
+>-# Add a run-time dependency for the PM firmware to be installed
+>-# on the target file system.
+>-RDEPENDS_kernel-base_ti33x +=3D "am33x-cm3 am33x-cm3-initscript"
+>-
+>-# Default is to package all dts files for ti33x devices unless
+>building
+>-# for the specific beaglebone machine.
+>-KERNEL_DEVICETREE_ti33x =3D "arch/arm/boot/dts/am335x-evm.dts
+>arch/arm/boot/dts/am335x-evmsk.dts arch/arm/boot/dts/am335x-
+>bone.dts"
+>-KERNEL_DEVICETREE_beaglebone =3D "arch/arm/boot/dts/am335x-
+>bone.dts"
+> KERNEL_DEVICETREE_omap5-evm =3D "arch/arm/boot/dts/omap5-sevm.dts
+>arch/arm/boot/dts/omap5-uevm.dts"
+> KERNEL_DEVICETREE_dra7xx-evm =3D "arch/arm/boot/dts/dra7-evm.dts"
+>
+>-COMPATIBLE_MACHINE =3D "ti33x|omap-a15"
+>+COMPATIBLE_MACHINE =3D "omap-a15"
 
-That is not enough backlog to see the error. You should scroll back until you 
-see the error message.
+Still missing the default preference change and the others I mentioned in r=
+eview of v1.
 
-
-> ERROR: Task 805
-> (/home/asahota/danny-try/danny-8.0/meta-ti/recipes-kernel/linux/
-> linux-omap-psp_2.6.32.bb, do_compileconfigs) failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 5104 tasks of which 5097 didn't need to be
-> rerun and 1 failed.
-> No currently running tasks (5104 of 5135)
-> 
-> Summary: 1 task failed:
->   /home/asahota/danny-try/danny-8.0/meta-ti/recipes-kernel/linux/
-> linux-omap-psp_2.6.32.bb, do_compileconfigs
-> Summary: There was 1 WARNING message shown.
-> Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-> *****END
-> 
-> I spent a lot of time tracing the error in the YP folders and files. It was
-> somewhere near kernel_do_configure. But I couldn't get where "oe_runmake"
-> is. Couldn't continue debugging.
-> 
-> ---------------------------------
-> Sudhangathan BS
-> Ph:(+91) 9731-905-205
-> ---------------------------------
-
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-
+>
+> S =3D "${WORKDIR}/git"
+>
+>-BRANCH =3D "ti-linux-3.8.y"
+>+BRANCH =3D "master"
+>
+> # This commit corresponds to ti2013.04.02 release tag
+> SRCREV =3D "f3cb62a800ae37f17a3382b10d155ee02dbc83fc"
+>@@ -33,6 +25,6 @@ PV =3D "3.8.13"
+> # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause
+>a rebuild
+> MACHINE_KERNEL_PR_append =3D "f+gitr${SRCPV}"
+>
+>-SRC_URI =3D "git://git.ti.com/ti-linux-kernel/ti-linux-
+>kernel.git;protocol=3Dgit;branch=3D${BRANCH} \
+>+SRC_URI =3D "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-
+>kernel.git;protocol=3Dgit;branch=3D${BRANCH} \
+>            file://defconfig \
+>           "
+>--
+>1.7.0.4
+>
+>_______________________________________________
+>meta-ti mailing list
+>meta-ti@yoctoproject.org
+>https://lists.yoctoproject.org/listinfo/meta-ti
 
