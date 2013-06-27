@@ -1,31 +1,29 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7939FE005B3
-	for <meta-ti@yoctoproject.org>; Thu, 27 Jun 2013 07:16:05 -0700 (PDT)
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0220BE005B3
+	for <meta-ti@yoctoproject.org>; Thu, 27 Jun 2013 07:23:20 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5REG5hs027906
-	for <meta-ti@yoctoproject.org>; Thu, 27 Jun 2013 09:16:05 -0500
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5RENKt0000921
+	for <meta-ti@yoctoproject.org>; Thu, 27 Jun 2013 09:23:20 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5REG5tn026025
-	for <meta-ti@yoctoproject.org>; Thu, 27 Jun 2013 09:16:05 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.02.0342.003; Thu, 27 Jun 2013 09:16:04 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Heroor, Siddharth" <heroor@ti.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH] recipes-kernel: Add GLSDK specific kernel
-	tree	for omap-a15
-Thread-Index: AQHOcz0fhFlVoPxOR0qSSl5+58/BO5lJmu9A
-Date: Thu, 27 Jun 2013 14:16:04 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015961BF43@DLEE11.ent.ti.com>
-References: <20130627134905.GA6760@ti.com>
-In-Reply-To: <20130627134905.GA6760@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5RENKlX002182
+	for <meta-ti@yoctoproject.org>; Thu, 27 Jun 2013 09:23:20 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 27 Jun 2013 09:23:20 -0500
+Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r5RENJp2004113;
+	Thu, 27 Jun 2013 09:23:19 -0500
+Date: Thu, 27 Jun 2013 10:23:18 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Maupin, Chase" <chase.maupin@ti.com>
+Message-ID: <20130627142318.GK28379@edge>
+References: <20130627101300.GA6299@ti.com>
+	<7D46E86EC0A8354091174257B2FED1015961B7AF@DLEE11.ent.ti.com>
 MIME-Version: 1.0
+In-Reply-To: <7D46E86EC0A8354091174257B2FED1015961B7AF@DLEE11.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [PATCH] recipes-kernel: Add GLSDK specific kernel tree	for omap-a15
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -39,118 +37,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jun 2013 14:16:05 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 27 Jun 2013 14:23:23 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
->-----Original Message-----
->From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->bounces@yoctoproject.org] On Behalf Of Heroor, Siddharth
->Sent: Thursday, June 27, 2013 8:49 AM
->To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [PATCH] recipes-kernel: Add GLSDK specific
->kernel tree for omap-a15
->
->* Machine compatible with only omap-a15 devices.
->* The TI Staging tree will not be used to maintain K3.8. Instead,
->  this new tree is set up as a production tree. Pending features
->  for 3.8 will be implemented on this tree.
->  - Backported features from linux mainline
->  - Backported bug-fixes from linux mainline and linux-stable.
->  - Features implemented by the GLSDK team which maybe product
->    specific.
->  This is the tree on which GLSDK kernel releases will be made.
->* This recipe is based off the Core SDK 2013.04.02 released kernel
->  recipe - recipes-kernel/linux/linux-ti-staging_3.8.bb
->
->v2:
->    Regenerate the patch using --find-copies-harder -M
->
->Signed-off-by: Siddharth Heroor <heroor@ti.com>
->cc: Mrinmayee Hingolikar <mrinmayee@ti.com>
->---
-> .../{linux-ti-staging =3D> linux-ti-glsdk}/defconfig |    0
-> ...nux-ti-staging_3.8.bb =3D> linux-ti-glsdk_3.8.bb} |   16 ++++---
->---------
-> 2 files changed, 4 insertions(+), 12 deletions(-)
-> copy recipes-kernel/linux/{linux-ti-staging =3D> linux-ti-
->glsdk}/defconfig (100%)
-> copy recipes-kernel/linux/{linux-ti-staging_3.8.bb =3D> linux-ti-
->glsdk_3.8.bb} (51%)
->
->diff --git a/recipes-kernel/linux/linux-ti-staging/defconfig
->b/recipes-kernel/linux/linux-ti-glsdk/defconfig
->similarity index 100%
->copy from recipes-kernel/linux/linux-ti-staging/defconfig
->copy to recipes-kernel/linux/linux-ti-glsdk/defconfig
->diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb
->b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
->similarity index 51%
->copy from recipes-kernel/linux/linux-ti-staging_3.8.bb
->copy to recipes-kernel/linux/linux-ti-glsdk_3.8.bb
->index 29ffebc..8d66f84 100644
->--- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
->+++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
->@@ -1,5 +1,5 @@
-> SECTION =3D "kernel"
->-DESCRIPTION =3D "Linux kernel for TI devices"
->+DESCRIPTION =3D "Linux kernel for TI devices supported by the GLSDK
->product"
-> LICENSE =3D "GPLv2"
-> LIC_FILES_CHKSUM =3D
->"file://COPYING;md5=3Dd7810fab7487fb0aad327b76f1be7cd7"
-> KERNEL_IMAGETYPE =3D "uImage"
->@@ -9,22 +9,14 @@ inherit kernel
-> require recipes-kernel/linux/linux-dtb.inc
-> require recipes-kernel/linux/setup-defconfig.inc
->
->-# Add a run-time dependency for the PM firmware to be installed
->-# on the target file system.
->-RDEPENDS_kernel-base_ti33x +=3D "am33x-cm3 am33x-cm3-initscript"
->-
->-# Default is to package all dts files for ti33x devices unless
->building
->-# for the specific beaglebone machine.
->-KERNEL_DEVICETREE_ti33x =3D "arch/arm/boot/dts/am335x-evm.dts
->arch/arm/boot/dts/am335x-evmsk.dts arch/arm/boot/dts/am335x-
->bone.dts"
->-KERNEL_DEVICETREE_beaglebone =3D "arch/arm/boot/dts/am335x-
->bone.dts"
-> KERNEL_DEVICETREE_omap5-evm =3D "arch/arm/boot/dts/omap5-sevm.dts
->arch/arm/boot/dts/omap5-uevm.dts"
-> KERNEL_DEVICETREE_dra7xx-evm =3D "arch/arm/boot/dts/dra7-evm.dts"
->
->-COMPATIBLE_MACHINE =3D "ti33x|omap-a15"
->+COMPATIBLE_MACHINE =3D "omap-a15"
+> >+
+> >+S = "${WORKDIR}/git"
+> >+
+> >+BRANCH = "master"
+> >+
+> >+# This commit corresponds to ti2013.04.02 release tag
+> 
+> Sorry to nit-pick here, but any reason to re-use the tag name from the 
+> linux-ti-staging tree?  The reason I ask is back to it being confusing if I 
+> have two trees with the same tag name (including version) it becomes kind of 
+> confusing.  Especially since this tree is part of the same git.ti.com 
+> project as the other one.  Thoughts?
 
-Still missing the default preference change and the others I mentioned in r=
-eview of v1.
+Currently, it's just an identical copy of our LCPD tree w/o any patches on 
+top, so it has the same tags and commit IDs...
 
->
-> S =3D "${WORKDIR}/git"
->
->-BRANCH =3D "ti-linux-3.8.y"
->+BRANCH =3D "master"
->
-> # This commit corresponds to ti2013.04.02 release tag
-> SRCREV =3D "f3cb62a800ae37f17a3382b10d155ee02dbc83fc"
->@@ -33,6 +25,6 @@ PV =3D "3.8.13"
-> # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause
->a rebuild
-> MACHINE_KERNEL_PR_append =3D "f+gitr${SRCPV}"
->
->-SRC_URI =3D "git://git.ti.com/ti-linux-kernel/ti-linux-
->kernel.git;protocol=3Dgit;branch=3D${BRANCH} \
->+SRC_URI =3D "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-
->kernel.git;protocol=3Dgit;branch=3D${BRANCH} \
->            file://defconfig \
->           "
->--
->1.7.0.4
->
->_______________________________________________
->meta-ti mailing list
->meta-ti@yoctoproject.org
->https://lists.yoctoproject.org/listinfo/meta-ti
+One can argue though, if the trees are still the same, what's the reason to 
+create a new recipe so early in advance?
+
+
+> >+SRCREV = "f3cb62a800ae37f17a3382b10d155ee02dbc83fc"
+> >+PV = "3.8.13"
+> >+
+> >+# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause
+> >a rebuild
+> >+MACHINE_KERNEL_PR_append = "f+gitr${SRCPV}"
+> 
+> Go ahead and reset your append here to a+ gitr${SRCPV}.  No need to start 
+> from f.
+> 
+> Thanks for the submission.  Overall looks pretty good, just a few things to 
+> fix up.
+
++1 keep up the good work!
+
+-- 
+Denys
 
