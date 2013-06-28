@@ -1,32 +1,28 @@
-Return-Path: <heroor@ti.com>
+Return-Path: <mrinmayee@ti.com>
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 971DFE01482
-	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 02:48:07 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5S9m7vV016587
-	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 04:48:07 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5S9m7c2009093
-	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 04:48:07 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Fri, 28 Jun 2013 04:48:07 -0500
-Received: from [172.24.158.133] (a0875592lt01.apr.dhcp.ti.com
-	[172.24.158.133])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	r5S9m5fa018741;	Fri, 28 Jun 2013 04:48:05 -0500
-Message-ID: <51CD5BD4.5010908@ti.com>
-Date: Fri, 28 Jun 2013 15:18:04 +0530
-From: Siddharth Heroor <heroor@ti.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:17.0) Gecko/20130509 Thunderbird/17.0.6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70C29E01482
+	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 04:07:56 -0700 (PDT)
+Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5SB7sv4029867
+	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 06:07:55 -0500
+Received: from DBDE72.ent.ti.com (dbde72.ent.ti.com [172.24.171.97])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5SB7pv1015437
+	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 06:07:53 -0500
+Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
+	DBDE72.ent.ti.com ([fe80::bd56:32bf:87fd:2763%27]) with mapi id
+	14.02.0342.003; Fri, 28 Jun 2013 19:07:51 +0800
+From: "Hingolikar, Mrinmayee" <mrinmayee@ti.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: [PATCH] gbm: Add TI staging tree
+Thread-Index: AQHOc++TXPMHj+VXtUyV+YLPNQ1jMplK91MQ
+Date: Fri, 28 Jun 2013 11:07:51 +0000
+Message-ID: <CF956B779D819D41BBC043B7082161D543D2B9@DBDE04.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.24.170.142]
 MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <20130627171636.GA7291@ti.com>
-	<7D46E86EC0A8354091174257B2FED1015961D1CF@DLEE11.ent.ti.com>
-	<20130627191748.GD30195@edge> <51CD548A.806@ti.com>
-In-Reply-To: <51CD548A.806@ti.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] libdrm: Add GLSDK specific staging tree for omap-a15
+Subject: [PATCH] gbm: Add TI staging tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,136 +35,56 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2013 09:48:10 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 28 Jun 2013 11:07:59 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 6/28/2013 2:46 PM, Siddharth Heroor wrote:
-> On 6/28/2013 12:47 AM, Denys Dmytriyenko wrote:
->> On Thu, Jun 27, 2013 at 05:46:43PM +0000, Maupin, Chase wrote:
->>>> -----Original Message-----
->>>> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->>>> bounces@yoctoproject.org] On Behalf Of Heroor, Siddharth
->>>> Sent: Thursday, June 27, 2013 12:17 PM
->>>> To: meta-ti@yoctoproject.org
->>>> Subject: [meta-ti] [PATCH] libdrm: Add GLSDK specific staging tree
->>>> for omap-a15
->>>>
->>>> * Override SRC_URI to use TI's tree at
->>>> https://git.ti.com/glsdk/libdrm
->>>>  This tree includes patches on top of the upstream libdrm for
->>>>  omap5 and dra7xx class of devices.
->>>>
->>>> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
->>>> Signed-off-by: Siddharth Heroor <heroor@ti.com>
->>>> ---
->>>> recipes-graphics/drm/libdrm_2.4.41.bb |   15 +++++++++++++++
->>>> 1 files changed, 15 insertions(+), 0 deletions(-)
->>>> create mode 100644 recipes-graphics/drm/libdrm_2.4.41.bb
->>>>
->>>> diff --git a/recipes-graphics/drm/libdrm_2.4.41.bb b/recipes-
->>>> graphics/drm/libdrm_2.4.41.bb
->>>> new file mode 100644
->>>> index 0000000..31f7cee
->>>> --- /dev/null
->>>> +++ b/recipes-graphics/drm/libdrm_2.4.41.bb
->>>
->>> I thought you were going to bbappend this instead of overlaying the whole 
->>> recipe.
->>
->> I was confused at first as well, but I guess it should be fine, considering 
->> there's no 2.4.41 version to bbapend anyway.
-> 
-> Sorry about that. The original code we were working on was a .bbappend
-> to override recipes-graphics/drm/libdrm_git. However, the latest version
-> in oe-core on danny is 2.4.39 and master is 2.4.45. I chose to use
-> libdrm_2.4.41.bb because that's easier to read for me :-)
-> 
->>
->>
->>>> @@ -0,0 +1,15 @@
->>>> +require recipes-graphics/drm/libdrm.inc
->>>> +
->>>> +COMPATIBLE_MACHINE = "omap-a15"
->>>> +
->>>> +DEFAULT_PREFERENCE = "-1"
->>>> +
->>>> +EXTRA_OECONF += "--enable-omap-experimental-api"
->>>> +
->>>> +SRC_URI = "git://git.ti.com/glsdk/libdrm.git;protocol=git"
->>>> +SRCREV = "3cb5405084111193cedb8796d259b56560b088f0"
->>>> +
->>>> +# Append to the PR so that a new SRCREV will cause a rebuild
->>>> +PR_append = "a+gitr${SRCPV}"
->>>
->>> I always had issue with this.  I'm not sure that this statement holds true 
->>> because whether a new SRCREV will cause a rebuild would depend on whether 
->>> that SRCREV sorts higher than the old one.  Unless something else has 
->>> changed.  This is useful though if you want to know what SRCREV was used for 
->>> a build.
->>
->> Well, if every time you update SRCREV you also increment the first letter, it 
->> will work as expected - so the comment is kind of correct... :)
->>
-> 
-> Right, I just followed the existing kernel recipes for convention. Would
-> the convention change between a kernel recipe (like
-> recipes-kernel/linux/linux-ti-staging_3.8.bb) where we have both SRCPV
-> and the first letter, compared to userspace recipes which point to git
-> trees for versions?
-> 
-> 
->>
->>> That being said if you were going to overlay this recipe the PR should be 
->>> something like
->>>
->>> PR = "${INC_PR}.0"
->>>
->>> Right now you are appending to the default since PR is not defined.  With a 
->>> bbappend you should append a -arago flag.
->>>
->>> So this comes back to why no bbappend?  Is it because the base version in 
->>> oe-core is 2.4.39 and not 2.4.41?  Can you not append the _git version of 
->>> the recipe and update the PV appropriately?
->>>
-> 
-> That's also possible but the question I have is what's the preferred
-> convention?
-> 
-> All the GLSDK trees are on git. The choice really is between having a
-> since .bbappend for each of the trees with an explicit PV and bump the
-> PV everytime we update to latest on upstream *OR* have a recipe for the
-> version and submit a new recipe when we update to latest.
 
-Sorry. My typing went haywire...
+Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+---
+ recipes-graphics/gbm/libgbm.inc    |   15 +++++++++++++++
+ recipes-graphics/gbm/libgbm_git.bb |    7 +++++++
+ 2 files changed, 22 insertions(+), 0 deletions(-)  create mode 100644 reci=
+pes-graphics/gbm/libgbm.inc  create mode 100644 recipes-graphics/gbm/libgbm=
+_git.bb
 
-What I mean is I can resubmit _git.bbappend. Its really whatever
-convention you would suggest we follow. All the recipes that we have are
-on git (except for a couple of binary blobs).
-
-Do you think we should use _git.bbappend (or _git.bb as the case maybe)?
-In that case, we only 1 recipe to maintain per software package and we
-fix the PV in it.
-
-> 
-> I can submit a v2 once I understand the expected convention to be followed.
-> 
-
-Let me know the approach to take, I'll submit new patches if required.
-
->>>> +
->>>> +S = "${WORKDIR}/git"
->>>> --
->>>> 1.7.0.4
->>>>
->>>> _______________________________________________
->>>> meta-ti mailing list
->>>> meta-ti@yoctoproject.org
->>>> https://lists.yoctoproject.org/listinfo/meta-ti
->>> _______________________________________________
->>> meta-ti mailing list
->>> meta-ti@yoctoproject.org
->>> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+diff --git a/recipes-graphics/gbm/libgbm.inc b/recipes-graphics/gbm/libgbm.=
+inc new file mode 100644 index 0000000..07591e6
+--- /dev/null
++++ b/recipes-graphics/gbm/libgbm.inc
+@@ -0,0 +1,15 @@
++SUMMARY =3D "Userspace interface for the kernel GBM services."
++DESCRIPTION =3D "This is the gbm frontend used by (for example) weston \=20
++compositor to load the GLES stack, and retrieve the backing buffer \=20
++objects behind an eglImage (created with EGL_WAYLAND_BUFFER_WL), etc.\=20
++The frontend is really just a backend loader and shim. \ The backend=20
++library must be provided by the GLES implementation."
++HOMEPAGE =3D "http://git.ti.com"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://gbm.c;beginline=3D1;endline=3D26;md5=3Db871c7=
+f2f477df29ee4c0ec437b187f7"
++PROVIDES =3D "gbm"
++
++inherit autotools pkgconfig
++
++PACKAGES =3D+ "${PN}-dev"
++FILES_${PN}-dev =3D "${libdir}/libgbm_*.so.*"
+diff --git a/recipes-graphics/gbm/libgbm_git.bb b/recipes-graphics/gbm/libg=
+bm_git.bb
+new file mode 100644
+index 0000000..d1fa38d
+--- /dev/null
++++ b/recipes-graphics/gbm/libgbm_git.bb
+@@ -0,0 +1,7 @@
++require libgbm.inc
++
++SRC_URI =3D "git://git.ti.com/glsdk/libgbm.git;protocol=3Dgit"
++
++S =3D "${WORKDIR}/git"
++
++SRCREV =3D "cb86a2f2cecd41023bf1bf12fbcf11be11220f31"
+--
+1.7.0.4
 
 
