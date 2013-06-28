@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C8C85E01408
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 125E3E014E4
 	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 10:16:59 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 66E635298D; Fri, 28 Jun 2013 17:16:59 +0000 (UTC)
+	id AA3C952995; Fri, 28 Jun 2013 17:16:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130628171659.66E635298D@arago-project.org>
+Message-Id: <20130628171659.AA3C952995@arago-project.org>
 Date: Fri, 28 Jun 2013 17:16:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Siddharth Heroor : recipes-kernel: Add GLSDK specific kernel tree for omap-a15
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2013 17:16:59 -0000
+X-List-Received-Date: Fri, 28 Jun 2013 17:17:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: ef124402251d9d9eadb177784c6c0c1371adbc16
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ef124402251d9d9eadb177784c6c0c1371adbc16
+Branch: dylan
+Commit: f31fba1c2adc388a9589a74ef757a20d91320526
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f31fba1c2adc388a9589a74ef757a20d91320526
 
 Author: Siddharth Heroor <heroor@ti.com>
 Date:   Fri Jun 28 13:15:54 2013 -0400
