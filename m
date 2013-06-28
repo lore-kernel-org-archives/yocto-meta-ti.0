@@ -1,22 +1,22 @@
 Return-Path: <chase.maupin@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5BE99E003E3
-	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 06:39:12 -0700 (PDT)
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3E39DE003E3
+	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 06:39:41 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5SDdCGi020205
-	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 08:39:12 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5SDdC1W007773
-	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 08:39:12 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5SDdeRo002477
+	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 08:39:40 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5SDdehs008180
+	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 08:39:40 -0500
 Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.02.0342.003; Fri, 28 Jun 2013 08:39:12 -0500
+	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
+	14.02.0342.003; Fri, 28 Jun 2013 08:39:40 -0500
 From: "Maupin, Chase" <chase.maupin@ti.com>
 To: "Heroor, Siddharth" <heroor@ti.com>
 Thread-Topic: [meta-ti] [PATCH] gbm: Add TI staging tree
-Thread-Index: AQHOc++TXPMHj+VXtUyV+YLPNQ1jMplK91MQgAADVpCAAAIHkIAAbp6A//+18FA=
-Date: Fri, 28 Jun 2013 13:39:08 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED10159620E1C@DLEE11.ent.ti.com>
+Thread-Index: AQHOc++TXPMHj+VXtUyV+YLPNQ1jMplK91MQgAADVpCAAAIHkIAAbp6A//+2kfA=
+Date: Fri, 28 Jun 2013 13:39:40 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED10159620E51@DLEE11.ent.ti.com>
 References: <CF956B779D819D41BBC043B7082161D543D2B9@DBDE04.ent.ti.com>
 	<A4887BF146CD57468F700B415D2F47015AAF78@DBDE04.ent.ti.com>
 	<7D46E86EC0A8354091174257B2FED10159620724@DLEE11.ent.ti.com>
@@ -41,7 +41,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2013 13:39:13 -0000
+X-List-Received-Date: Fri, 28 Jun 2013 13:39:41 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
@@ -111,10 +111,11 @@ Content-Transfer-Encoding: quoted-printable
 From what I understand this is extracted from mesa's libgbm into
 >it's
 >own package.
-
-So why not take the package from mesa?
-
 >
+
+Maybe Denys has some context here because I thought he was working with Nic=
+olas as well in the past.
+
 >>
 >>>> +HOMEPAGE =3D "http://git.ti.com"
 >>>> +LICENSE =3D "MIT"
@@ -136,10 +137,6 @@ So why not take the package from mesa?
 >Do you think we can have a virtual/libgbm in PROVIDES or put in a
 >PREFERRED_PROVIDER for libgbm to be this recipe? By default we set
 >DEFAULT_PREFERENCE =3D "-1" and override it in the branding.
-
-I think this will depend on the difference between the code and whether you=
- need a separate package for this.
-
 >
 >>
 >>>> +
