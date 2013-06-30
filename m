@@ -1,15 +1,26 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 125E3E014E4
-	for <meta-ti@yoctoproject.org>; Fri, 28 Jun 2013 10:16:59 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id AA3C952995; Fri, 28 Jun 2013 17:16:59 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130628171659.AA3C952995@arago-project.org>
-Date: Fri, 28 Jun 2013 17:16:59 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Siddharth Heroor : recipes-kernel: Add GLSDK specific kernel tree for omap-a15
+Return-Path: <heroor@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8C012E01206
+	for <meta-ti@yoctoproject.org>; Sun, 30 Jun 2013 02:54:09 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r5U9s8mS013017
+	for <meta-ti@yoctoproject.org>; Sun, 30 Jun 2013 04:54:08 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r5U9s8R4000652
+	for <meta-ti@yoctoproject.org>; Sun, 30 Jun 2013 04:54:08 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Sun, 30 Jun 2013 04:54:08 -0500
+Received: from ti.com (a0875592-linux.apr.dhcp.ti.com [172.24.145.76])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r5U9s68n017312;
+	Sun, 30 Jun 2013 04:54:07 -0500
+Date: Sun, 30 Jun 2013 15:24:06 +0530
+From: Siddharth Heroor <heroor@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <20130630095406.GA2807@ti.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: [PATCHv2] libdrm: Add GLSDK specific staging tree for omap-a15
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,85 +33,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jun 2013 17:17:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 30 Jun 2013 09:54:10 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: dylan
-Commit: f31fba1c2adc388a9589a74ef757a20d91320526
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f31fba1c2adc388a9589a74ef757a20d91320526
+* Override SRC_URI to use TI's tree at https://git.ti.com/glsdk/libdrm
+  This tree includes patches on top of the upstream libdrm for
+  omap5 and dra7xx class of devices.
 
-Author: Siddharth Heroor <heroor@ti.com>
-Date:   Fri Jun 28 13:15:54 2013 -0400
+v2 :
+* Change PR to "${INC_PR}.0" instead of using the SRCREV as per comments
+  received in v1.
+* Add missing configure options to get Kernel Mode Setting (KMS) as
+  well. This was missing in the original patch.
 
-recipes-kernel: Add GLSDK specific kernel tree for omap-a15
-
-* Machine compatible with only omap-a15 devices.
-* The TI Staging tree will not be used to maintain K3.8. Instead,
-  this new tree is set up as a production tree. Pending features
-  for 3.8 will be implemented on this tree.
-  - Backported features from linux mainline
-  - Backported bug-fixes from linux mainline and linux-stable.
-  - Features implemented by the GLSDK team which maybe product
-    specific.
-  This is the tree on which GLSDK kernel releases will be made.
-* This recipe is based off the Core SDK 2013.04.02 released kernel
-  recipe - recipes-kernel/linux/linux-ti-staging_3.8.bb
-
+Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
 Signed-off-by: Siddharth Heroor <heroor@ti.com>
-cc: Mrinmayee Hingolikar <mrinmayee@ti.com>
-Acked-by: Chase Maupin <chase.maupin@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-graphics/drm/libdrm_2.4.41.bb |   14 ++++++++++++++
+ 1 files changed, 14 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-graphics/drm/libdrm_2.4.41.bb
 
- recipes-kernel/linux/linux-ti-glsdk/defconfig |    1 +
- recipes-kernel/linux/linux-ti-glsdk_3.8.bb    |   31 +++++++++++++++++++++++++
- 2 files changed, 32 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-glsdk/defconfig b/recipes-kernel/linux/linux-ti-glsdk/defconfig
+diff --git a/recipes-graphics/drm/libdrm_2.4.41.bb b/recipes-graphics/drm/libdrm_2.4.41.bb
 new file mode 100644
-index 0000000..926b35a
+index 0000000..1d89401
 --- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-glsdk/defconfig
-@@ -0,0 +1 @@
-+use-kernel-config=omap2plus_defconfig
-diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-new file mode 100644
-index 0000000..2746188
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-@@ -0,0 +1,31 @@
-+SECTION = "kernel"
-+DESCRIPTION = "Linux kernel for TI devices supported by the GLSDK product"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-+KERNEL_IMAGETYPE = "uImage"
-+
-+inherit kernel
-+
-+require recipes-kernel/linux/linux-dtb.inc
-+require recipes-kernel/linux/setup-defconfig.inc
-+
-+KERNEL_DEVICETREE_omap5-evm = "arch/arm/boot/dts/omap5-sevm.dts arch/arm/boot/dts/omap5-uevm.dts"
-+KERNEL_DEVICETREE_dra7xx-evm = "arch/arm/boot/dts/dra7-evm.dts"
++++ b/recipes-graphics/drm/libdrm_2.4.41.bb
+@@ -0,0 +1,14 @@
++require recipes-graphics/drm/libdrm.inc
 +
 +COMPATIBLE_MACHINE = "omap-a15"
 +
 +DEFAULT_PREFERENCE = "-1"
 +
++EXTRA_OECONF += "--enable-omap-experimental-api --enable-kms"
++
++SRC_URI = "git://git.ti.com/glsdk/libdrm.git;protocol=git"
++SRCREV = "3cb5405084111193cedb8796d259b56560b088f0"
++
++PR = "${INC_PR}.0"
++
 +S = "${WORKDIR}/git"
-+
-+BRANCH = "master"
-+
-+SRCREV = "4e8193eb3b7465d7f67cd8c7e6c2ed99dad1a483"
-+PV = "3.8.13"
-+
-+# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+
-+SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-kernel.git;protocol=git;branch=${BRANCH} \
-+           file://defconfig \
-+          "
+-- 
+1.7.0.4
 
 
