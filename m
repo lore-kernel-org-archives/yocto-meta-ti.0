@@ -1,26 +1,26 @@
-Return-Path: <Hingolikar@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 259ACE01530
-	for <meta-ti@yoctoproject.org>; Mon,  1 Jul 2013 08:41:09 -0700 (PDT)
+Return-Path: <mrinmayee@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B29C6E013EC
+	for <meta-ti@yoctoproject.org>; Mon,  1 Jul 2013 08:41:51 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r61Ff8LY009267
-	for <meta-ti@yoctoproject.org>; Mon, 1 Jul 2013 10:41:08 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r61Ff8WP004138
-	for <meta-ti@yoctoproject.org>; Mon, 1 Jul 2013 10:41:08 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 1 Jul 2013 10:41:08 -0500
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r61FfokW032416
+	for <meta-ti@yoctoproject.org>; Mon, 1 Jul 2013 10:41:50 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r61FfotG005083
+	for <meta-ti@yoctoproject.org>; Mon, 1 Jul 2013 10:41:50 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Mon, 1 Jul 2013 10:41:50 -0500
 Received: from ti.com (swubn01.india.ti.com [172.24.162.214])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with SMTP id r61Ff6eE015078;
-	Mon, 1 Jul 2013 10:41:07 -0500
-Date: Mon, 1 Jul 2013 21:11:06 +0530
-From: Siddharth Heroor <Hingolikar@ti.com>, Mrinmayee <mrinmayee@ti.com>
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with SMTP id r61FfnO5015393;
+	Mon, 1 Jul 2013 10:41:49 -0500
+Date: Mon, 1 Jul 2013 21:11:48 +0530
+From: Mrinmayee Hingolikar <mrinmayee@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <20130701154106.GA934@ti.com>
+Message-ID: <20130701154148.GA1062@ti.com>
 MIME-Version: 1.0
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [PATCHv3] gbm: Add TI staging tree
+Subject: [PATCH] abefw: Firmware for OMAP5 ABE
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,70 +33,61 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jul 2013 15:41:12 -0000
+X-List-Received-Date: Mon, 01 Jul 2013 15:41:52 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-* This is the gbm frontend used by (for example) weston
-  compositor to load the GLES stack, and retrieve the
-  backing buffer objects behind an eglImage (created
-  with EGL_WAYLAND_BUFFER_WL), etc.  The frontend is really
-  just a backend loader and shim. The backend library must
-  be provided by the GLES implementation.
-* The original libgbm is actually part of mesa but in the TI
-  stack this is implemented as a separate and standalone package
-  hosted at git://git.ti.com/glsdk/libgbm.git
-* In the Danny branch, oe-core/meta/recipes-graphics/mesa
-  has 8.0.0 as its version. For the GLSDK stack, the libgbm
-  is more in line with 9.0.0 mesa. The goal is to move over
-  to mesa for libgbm in future.
-
-v2:
-* Cleaned up description and rewrote the commit.
-
-v3:
-
-* Rename as libgbm-glsdk to avoid clash with mesa-libgbm.
+* The OMAP5 Audio Backend requires a 'firmware' to enable
+  sound. This recipe installs a prebuilt firmware. This
+  part is a hack, as in the current form, the firmware
+  cannot be cross-compiled. There is a plan to fix this
+  and hopefully, this recipe is short-lived. Once the code
+  is fixed, we should have new recipes that build the firmware
+  and clean up this recipe.
 
 Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
 Signed-off-by: Siddharth Heroor <heroor@ti.com>
 ---
- recipes-graphics/gbm/libgbm-glsdk.inc      |   11 +++++++++++
- recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb |    7 +++++++
- 2 files changed, 18 insertions(+), 0 deletions(-)
- create mode 100644 recipes-graphics/gbm/libgbm-glsdk.inc
- create mode 100644 recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb
+ recipes-bsp/abefw/abefw.inc       |    8 ++++++++
+ recipes-bsp/abefw/abefw_1.0.14.bb |   14 ++++++++++++++
+ 2 files changed, 22 insertions(+), 0 deletions(-)
+ create mode 100644 recipes-bsp/abefw/abefw.inc
+ create mode 100644 recipes-bsp/abefw/abefw_1.0.14.bb
 
-diff --git a/recipes-graphics/gbm/libgbm-glsdk.inc b/recipes-graphics/gbm/libgbm-glsdk.inc
+diff --git a/recipes-bsp/abefw/abefw.inc b/recipes-bsp/abefw/abefw.inc
 new file mode 100644
-index 0000000..2f3893e
+index 0000000..4b6e9dc
 --- /dev/null
-+++ b/recipes-graphics/gbm/libgbm-glsdk.inc
-@@ -0,0 +1,11 @@
-+DESCRIPTION = "Userspace interface for the kernel GBM services."
++++ b/recipes-bsp/abefw/abefw.inc
+@@ -0,0 +1,8 @@
++SUMMARY = "Firmware for OMAP5 ABE"
 +HOMEPAGE = "http://git.ti.com"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://gbm.c;beginline=1;endline=26;md5=b871c7f2f477df29ee4c0ec437b187f7"
-+PROVIDES = "libgbm"
++LIC_FILES_CHKSUM = "file://COPYING;md5=923db086ed9463ab3215b24d87e05ec5"
 +
-+COMPATIBLE_MACHINE = "omap-a15"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+DEFAULT_PREFERENCE = "-1"
-+
-+inherit autotools pkgconfig
-diff --git a/recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb b/recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb
++COMPATIBLE_MACHINE = "omap5-evm"
+diff --git a/recipes-bsp/abefw/abefw_1.0.14.bb b/recipes-bsp/abefw/abefw_1.0.14.bb
 new file mode 100644
-index 0000000..e1e6adb
+index 0000000..df68080
 --- /dev/null
-+++ b/recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb
-@@ -0,0 +1,7 @@
-+require libgbm-glsdk.inc
++++ b/recipes-bsp/abefw/abefw_1.0.14.bb
+@@ -0,0 +1,14 @@
++require abefw.inc
 +
-+SRC_URI = "git://git.ti.com/glsdk/libgbm.git;protocol=git"
++SRC_URI = "git://git.ti.com/glsdk/abefw-omap4plus.git;protocol=git"
 +
 +S = "${WORKDIR}/git"
 +
-+SRCREV = "cb86a2f2cecd41023bf1bf12fbcf11be11220f31"
++SRCREV = "ceccc0332264e39bdc51e54f80ea7256a3886c58"
++
++do_install() {
++        mkdir -p ${D}/lib/firmware
++        cp ${S}/firmware/omap4_abe_new ${D}/lib/firmware/
++}
++
++FILES_${PN} += "/lib/firmware/omap4_abe_new"
 -- 
 1.7.0.4
 
