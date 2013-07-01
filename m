@@ -1,15 +1,26 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 66F8FE01470
-	for <meta-ti@yoctoproject.org>; Sun, 30 Jun 2013 21:55:41 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id E14CD52A4D; Mon,  1 Jul 2013 04:55:40 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130701045540.E14CD52A4D@arago-project.org>
-Date: Mon,  1 Jul 2013 04:55:40 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Siddharth Heroor : libdrm: Add GLSDK specific staging tree for omap-a15
+Return-Path: <heroor@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7046FE01569
+	for <meta-ti@yoctoproject.org>; Mon,  1 Jul 2013 01:21:42 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r618Lf7T004480
+	for <meta-ti@yoctoproject.org>; Mon, 1 Jul 2013 03:21:41 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r618Lf5N009989
+	for <meta-ti@yoctoproject.org>; Mon, 1 Jul 2013 03:21:41 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Mon, 1 Jul 2013 03:21:41 -0500
+Received: from ti.com (swubn01.india.ti.com [172.24.162.214])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with SMTP id r618LdK4026234;
+	Mon, 1 Jul 2013 03:21:40 -0500
+Date: Mon, 1 Jul 2013 13:51:39 +0530
+From: Siddharth Heroor <heroor@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <20130701082139.GA3378@ti.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: [PATCH] recipes-kernel: Update to latest fixes on the glsdk staging tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,57 +33,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jul 2013 04:55:43 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 01 Jul 2013 08:21:44 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: danny
-Commit: ac4d555544a963d85ca41477f0193490ef2d8625
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ac4d555544a963d85ca41477f0193490ef2d8625
+* Fixes for USB, SATA and enables GPU (omapdrm).
+* Fix OMAP5 LDO1 value.
 
-Author: Siddharth Heroor <heroor@ti.com>
-Date:   Sun Jun 30 15:42:06 2013 +0530
-
-libdrm: Add GLSDK specific staging tree for omap-a15
-
-* Override SRC_URI to use TI's tree at https://git.ti.com/glsdk/libdrm
-  This tree includes patches on top of the upstream libdrm for
-  omap5 and dra7xx class of devices.
-
-v2 :
-* Change PR to "${INC_PR}.0" instead of using the SRCREV as per comments
-  received in v1.
-* Add missing configure options to get Kernel Mode Setting (KMS) as
-  well. This was missing in the original patch.
-
-Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
 Signed-off-by: Siddharth Heroor <heroor@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-kernel/linux/linux-ti-glsdk_3.8.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
- recipes-graphics/drm/libdrm_2.4.41.bb |   14 ++++++++++++++
- 1 files changed, 14 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-graphics/drm/libdrm_2.4.41.bb b/recipes-graphics/drm/libdrm_2.4.41.bb
-new file mode 100644
-index 0000000..1d89401
---- /dev/null
-+++ b/recipes-graphics/drm/libdrm_2.4.41.bb
-@@ -0,0 +1,14 @@
-+require recipes-graphics/drm/libdrm.inc
-+
-+COMPATIBLE_MACHINE = "omap-a15"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+EXTRA_OECONF += "--enable-omap-experimental-api --enable-kms"
-+
-+SRC_URI = "git://git.ti.com/glsdk/libdrm.git;protocol=git"
-+SRCREV = "3cb5405084111193cedb8796d259b56560b088f0"
-+
-+PR = "${INC_PR}.0"
-+
-+S = "${WORKDIR}/git"
+diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+index 2746188..bfcaf3a 100644
+--- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+@@ -20,7 +20,7 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "master"
+ 
+-SRCREV = "4e8193eb3b7465d7f67cd8c7e6c2ed99dad1a483"
++SRCREV = "6076e6882d1d6a64b104e42e56a3eada36605cb3"
+ PV = "3.8.13"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-- 
+1.7.0.4
 
 
