@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 75A91E0140D
-	for <meta-ti@yoctoproject.org>; Sun, 30 Jun 2013 21:55:37 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 66F8FE01470
+	for <meta-ti@yoctoproject.org>; Sun, 30 Jun 2013 21:55:41 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1EDDA529E8; Mon,  1 Jul 2013 04:55:37 +0000 (UTC)
+	id E14CD52A4D; Mon,  1 Jul 2013 04:55:40 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130701045537.1EDDA529E8@arago-project.org>
-Date: Mon,  1 Jul 2013 04:55:37 +0000 (UTC)
+Message-Id: <20130701045540.E14CD52A4D@arago-project.org>
+Date: Mon,  1 Jul 2013 04:55:40 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Siddharth Heroor : libdrm: Add GLSDK specific staging tree for omap-a15
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jul 2013 04:55:42 -0000
+X-List-Received-Date: Mon, 01 Jul 2013 04:55:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: becf98b038d87dfe7b101e5b7683bc0ec085d28a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=becf98b038d87dfe7b101e5b7683bc0ec085d28a
+Branch: danny
+Commit: ac4d555544a963d85ca41477f0193490ef2d8625
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ac4d555544a963d85ca41477f0193490ef2d8625
 
 Author: Siddharth Heroor <heroor@ti.com>
 Date:   Sun Jun 30 15:42:06 2013 +0530
