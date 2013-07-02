@@ -1,29 +1,15 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2CE5E013B0
-	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 08:43:21 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r62FhKG1027579
-	for <meta-ti@yoctoproject.org>; Tue, 2 Jul 2013 10:43:20 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r62FhKxb015641
-	for <meta-ti@yoctoproject.org>; Tue, 2 Jul 2013 10:43:20 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 2 Jul 2013 10:43:20 -0500
-Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r62FhKZw008715;
-	Tue, 2 Jul 2013 10:43:20 -0500
-Date: Tue, 2 Jul 2013 11:43:20 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Siddharth Heroor <heroor@ti.com>
-Message-ID: <20130702154319.GG4941@edge>
-References: <20130701131214.GA8381@ti.com>
-MIME-Version: 1.0
-In-Reply-To: <20130701131214.GA8381@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCHv2] recipes-bsp: u-boot: Add GLSDK Staging tree
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 401D3E01206
+	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 09:02:54 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id C30DB52AB1; Tue,  2 Jul 2013 16:02:50 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130702160251.C30DB52AB1@arago-project.org>
+Date: Tue,  2 Jul 2013 16:02:50 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Franklin S. Cooper Jr : linux-am335x-psp: Update to PSP release 04.06.00.11
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,58 +22,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2013 15:43:24 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 02 Jul 2013 16:02:57 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, Jul 01, 2013 at 06:42:14PM +0530, Siddharth Heroor wrote:
-> * The GLSDK u-boot staging tree is based off the Core SDK 2013.04.02
->   release. This tree will be used to stage patches and fixes on
->   top of the Core SDK U-Boot. The GLSDK release will use this tree
->   for product development.
-> * Includes fix to OMAP5 so that QSPI is not enabled.
+Module: meta-ti
+Branch: danny
+Commit: 68c58484abe74377d905dc4407fbe286e2866a37
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=68c58484abe74377d905dc4407fbe286e2866a37
 
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?id=2eeba6ed4dcf39a68b2257377cbcdd512278881c
+Author: Franklin S. Cooper Jr <fcooper@ti.com>
+Date:   Thu Jun 27 10:57:30 2013 -0500
 
-I changed the name slightly...
+linux-am335x-psp: Update to PSP release 04.06.00.11
 
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-> v2:
-> * Fix PR to start for r0
-> 
-> Signed-off-by: Siddharth Heroor <heroor@ti.com>
-> ---
->  .../u-boot/u-boot-glsdk-staging_2013.01.01.bb      |   16 ++++++++++++++++
->  1 files changed, 16 insertions(+), 0 deletions(-)
->  create mode 100644 recipes-bsp/u-boot/u-boot-glsdk-staging_2013.01.01.bb
-> 
-> diff --git a/recipes-bsp/u-boot/u-boot-glsdk-staging_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-glsdk-staging_2013.01.01.bb
-> new file mode 100644
-> index 0000000..d60ef44
-> --- /dev/null
-> +++ b/recipes-bsp/u-boot/u-boot-glsdk-staging_2013.01.01.bb
-> @@ -0,0 +1,16 @@
-> +require u-boot-ti.inc
-> +
-> +DESCRIPTION = "u-boot bootloader for TI devices supported by the GLSDK product"
-> +
-> +PR = "r0+gitr${SRCPV}"
-> +
-> +DEFAULT_PREFERENCE = "-1"
-> +
-> +SRC_URI = "git://git.ti.com/glsdk/glsdk-u-boot.git;protocol=git;branch=${BRANCH}"
-> +
-> +BRANCH ?= "master"
-> +
-> +SRCREV = "81836e8cc84bd6523d9a4e187965dcd1633c4bc9"
-> +
-> +SPL_BINARY = "MLO"
-> +SPL_UART_BINARY = "u-boot-spl.bin"
-> -- 
-> 1.7.0.4
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+---
+
+ recipes-kernel/linux/linux-am335x-psp_3.2.bb |    5 ++---
+ 1 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-am335x-psp_3.2.bb b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
+index f55fc4c..00c4b10 100644
+--- a/recipes-kernel/linux/linux-am335x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
+@@ -15,12 +15,11 @@ DEPENDS += "am33x-cm3"
+ KERNEL_IMAGETYPE = "uImage"
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for ti33x see conf/machine/include/ti33x.inc
+-MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
+ 
+ BRANCH = "v3.2-staging"
+ 
+-# SRCREV corresponds to the commit id of tag v3.2_AM335xPSP_04.06.00.10-rc3
+-SRCREV = "18ce4a630452348b8308b922491130e8ce1e9134"
++SRCREV = "d5720d33bc7c434f9a023dbb62c795538f976b7a"
+ 
+ SRC_URI = "git://arago-project.org/git/projects/linux-am33x.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+
 
