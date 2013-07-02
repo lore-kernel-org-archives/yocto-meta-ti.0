@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D7720E01481
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D7649E01466
 	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 09:02:57 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 26DAA52AB4; Tue,  2 Jul 2013 16:02:51 +0000 (UTC)
+	id 0F922529E4; Tue,  2 Jul 2013 16:02:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130702160252.26DAA52AB4@arago-project.org>
+Message-Id: <20130702160252.0F922529E4@arago-project.org>
 Date: Tue,  2 Jul 2013 16:02:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : am33x-cm3: Add support for PG 2.1 silicon.
+Subject: Franklin S. Cooper Jr : linux-am335x-psp: Add patch to enable SR on PG 2. x boards.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,42 +26,25 @@ X-List-Received-Date: Tue, 02 Jul 2013 16:02:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 616f91bc3240605236cd0d5848480d731c887e0d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=616f91bc3240605236cd0d5848480d731c887e0d
+Branch: dylan
+Commit: fc01b1e9847df6c2db51923a27d0daabf8ec4347
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fc01b1e9847df6c2db51923a27d0daabf8ec4347
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Thu Jun 27 10:57:33 2013 -0500
+Date:   Thu Jun 27 10:57:32 2013 -0500
 
-am33x-cm3: Add support for PG 2.1 silicon.
+linux-am335x-psp: Add patch to enable SR on PG 2.x boards.
+
+* Add patch that enables Smart Reflex on new PG 2.x boards.
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ti/am33x-cm3_git.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ ...lex-support-for-ES-2.x-and-suspend-resume.patch | 1928 ++++++++++++++++++++
+ recipes-kernel/linux/linux-am335x-psp_3.2.bb       |    3 +-
+ 2 files changed, 1930 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
-index 3549fcd..9b36a9e 100644
---- a/recipes-bsp/ti/am33x-cm3_git.bb
-+++ b/recipes-bsp/ti/am33x-cm3_git.bb
-@@ -3,11 +3,11 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
- LICENSE = "TI-BSD"
- LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
- 
--PV = "04.06.00.10"
--PR = "r3"
-+PV = "04.06.00.11"
-+PR = "r4"
- 
--# SRCREV corresponds to tag "AM335xPSP_04.06.00.10-rc1"
--SRCREV = "27ca4643e422245a95723de1df0247a00eada45b"
-+# SRCREV corresponds to tag "AM335xPSP_04.06.00.11"
-+SRCREV = "750362868d914702086187096ec2c67b68eac101"
- BRANCH ?= "master"
- 
- INITSCRIPT_NAME = "am335x-pm-firmware-load"
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=fc01b1e9847df6c2db51923a27d0daabf8ec4347
 
