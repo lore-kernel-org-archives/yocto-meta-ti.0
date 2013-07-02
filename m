@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5A02E0140D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D6DD7E0141B
 	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 08:41:05 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8089352A4D; Tue,  2 Jul 2013 15:41:02 +0000 (UTC)
+	id 7F1BC529E4; Tue,  2 Jul 2013 15:41:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130702154103.8089352A4D@arago-project.org>
-Date: Tue,  2 Jul 2013 15:41:02 +0000 (UTC)
+Message-Id: <20130702154103.7F1BC529E4@arago-project.org>
+Date: Tue,  2 Jul 2013 15:41:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Siddharth Heroor : linux-ti-glsdk: update to latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 02 Jul 2013 15:41:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: c5d939ad134006e764ba2d54ee704e90d5d5ed8c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c5d939ad134006e764ba2d54ee704e90d5d5ed8c
+Branch: master
+Commit: 3075e004978b981bf6cfa6c66f84115659644395
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3075e004978b981bf6cfa6c66f84115659644395
 
 Author: Siddharth Heroor <heroor@ti.com>
 Date:   Mon Jul  1 14:09:39 2013 +0530
