@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 401D3E01206
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 415D3E013B0
 	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 09:02:54 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C30DB52AB1; Tue,  2 Jul 2013 16:02:50 +0000 (UTC)
+	id 1233A52A93; Tue,  2 Jul 2013 16:02:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130702160251.C30DB52AB1@arago-project.org>
-Date: Tue,  2 Jul 2013 16:02:50 +0000 (UTC)
+Message-Id: <20130702160252.1233A52A93@arago-project.org>
+Date: Tue,  2 Jul 2013 16:02:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : linux-am335x-psp: Update to PSP release 04.06.00.11
+Subject: Franklin S. Cooper Jr : linux-am335x-psp: Add 1 GHZ Support for BBB
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,41 +26,94 @@ X-List-Received-Date: Tue, 02 Jul 2013 16:02:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 68c58484abe74377d905dc4407fbe286e2866a37
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=68c58484abe74377d905dc4407fbe286e2866a37
+Branch: dylan
+Commit: 673f6c08c144ced3fec848b773d4a61d5313b093
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=673f6c08c144ced3fec848b773d4a61d5313b093
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Thu Jun 27 10:57:30 2013 -0500
+Date:   Thu Jun 27 10:57:35 2013 -0500
 
-linux-am335x-psp: Update to PSP release 04.06.00.11
+linux-am335x-psp: Add 1 GHZ Support for BBB
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-am335x-psp_3.2.bb |    5 ++---
- 1 files changed, 2 insertions(+), 3 deletions(-)
+ ...nable-Turbo-and-Nitro-modes-for-Beaglebon.patch |   41 ++++++++++++++++++++
+ recipes-kernel/linux/linux-am335x-psp_3.2.bb       |    6 ++-
+ 2 files changed, 45 insertions(+), 2 deletions(-)
 
+diff --git a/recipes-kernel/linux/linux-am335x-psp-3.2/0001-am335x-Re-enable-Turbo-and-Nitro-modes-for-Beaglebon.patch b/recipes-kernel/linux/linux-am335x-psp-3.2/0001-am335x-Re-enable-Turbo-and-Nitro-modes-for-Beaglebon.patch
+new file mode 100644
+index 0000000..17a87af
+--- /dev/null
++++ b/recipes-kernel/linux/linux-am335x-psp-3.2/0001-am335x-Re-enable-Turbo-and-Nitro-modes-for-Beaglebon.patch
+@@ -0,0 +1,41 @@
++From ec0ec41418ec1193e4352f1983ab29173f10f855 Mon Sep 17 00:00:00 2001
++From: Steve Kipisz <s-kipisz2@ti.com>
++Date: Wed, 5 Jun 2013 10:10:44 -0500
++Subject: [PATCH] am335x:Re-enable Turbo and Nitro modes for Beaglebone Black
++ The Beaglebone Black boards use a speed binned PG2.0 AM335x
++ that operate up to 1GHz so re-enable those modes for
++ Beaglebone Black.
++
++Signed-off-by: Steve Kipisz <s-kipisz2@ti.com>
++---
++ arch/arm/mach-omap2/board-am335xevm.c |   14 ++++++++++++++
++ 1 file changed, 14 insertions(+)
++
++diff --git a/arch/arm/mach-omap2/board-am335xevm.c b/arch/arm/mach-omap2/board-am335xevm.c
++index bac415c..47e5a9d 100644
++--- a/arch/arm/mach-omap2/board-am335xevm.c
+++++ b/arch/arm/mach-omap2/board-am335xevm.c
++@@ -2529,6 +2529,20 @@ static void am335x_evm_setup(struct memory_accessor *mem_acc, void *context)
++ 
++ 	am335x_opp_update();
++ 
+++	/*
+++	 * For now, Beaglebone Black uses PG 2.0 that are speed binned and operate
+++	 * up to 1GHz. So re-enable Turbo and Nitro modes,
+++	 */
+++	if (!strncmp("A335BNLT", config.name, 8)) {
+++		struct device *mpu_dev;
+++
+++		mpu_dev = omap_device_get_by_hwmod_name("mpu");
+++		opp_enable(mpu_dev,
+++			    AM33XX_ES2_0_OPPTURBO_FREQ);
+++		opp_enable(mpu_dev,
+++			    AM33XX_ES2_0_OPPNITRO_FREQ);
+++	}
+++
++ 	/* SmartReflex also requires board information. */
++ 	am33xx_sr_init();
++ 
++-- 
++1.7.9.5
++
 diff --git a/recipes-kernel/linux/linux-am335x-psp_3.2.bb b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-index f55fc4c..00c4b10 100644
+index 257c6de..eaf788f 100644
 --- a/recipes-kernel/linux/linux-am335x-psp_3.2.bb
 +++ b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-@@ -15,12 +15,11 @@ DEPENDS += "am33x-cm3"
+@@ -15,7 +15,7 @@ DEPENDS += "am33x-cm3"
  KERNEL_IMAGETYPE = "uImage"
  
  # The main PR is now using MACHINE_KERNEL_PR, for ti33x see conf/machine/include/ti33x.inc
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
+-MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "h+gitr${SRCPV}"
  
  BRANCH = "v3.2-staging"
  
--# SRCREV corresponds to the commit id of tag v3.2_AM335xPSP_04.06.00.10-rc3
--SRCREV = "18ce4a630452348b8308b922491130e8ce1e9134"
-+SRCREV = "d5720d33bc7c434f9a023dbb62c795538f976b7a"
+@@ -88,7 +88,9 @@ PATCHES += "file://0001-am335x-enable-pullup-on-the-WLAN-enable-pin-fo.patch"
+ PATCHES += "file://0001-ARM-OMAP2-AM335x-Update-SPI-flash-layout.patch"
  
- SRC_URI = "git://arago-project.org/git/projects/linux-am33x.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
+ # Add support for Beaglebone Black
+-PATCHES += "file://0001-am335x-Add-minimal-support-for-Beaglebone-Black.patch"
++PATCHES += "file://0001-am335x-Add-minimal-support-for-Beaglebone-Black.patch \
++            file://0001-am335x-Re-enable-Turbo-and-Nitro-modes-for-Beaglebon.patch \
++"
+ 
+ # Copy the am33x-cm3 firmware if it is available
+ do_configure_append() {
 
 
