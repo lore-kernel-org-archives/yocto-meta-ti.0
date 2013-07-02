@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6891AE01476
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 687BBE01466
 	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 09:02:58 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2DE2C52A4D; Tue,  2 Jul 2013 16:02:51 +0000 (UTC)
+	id 09F78529F7; Tue,  2 Jul 2013 16:02:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130702160252.2DE2C52A4D@arago-project.org>
-Date: Tue,  2 Jul 2013 16:02:51 +0000 (UTC)
+Message-Id: <20130702160252.09F78529F7@arago-project.org>
+Date: Tue,  2 Jul 2013 16:02:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : linux-am335x-psp: Enable USB with DMA by default
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 02 Jul 2013 16:02:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: 23506a1771d9f11875d647c1e7a7c79537831cd2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=23506a1771d9f11875d647c1e7a7c79537831cd2
+Branch: danny
+Commit: 29719b15eededd6a3f9b985d1fa2304d3aa9de77
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=29719b15eededd6a3f9b985d1fa2304d3aa9de77
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Thu Jun 27 10:57:31 2013 -0500
