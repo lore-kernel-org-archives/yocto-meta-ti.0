@@ -1,15 +1,61 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68783E0141B
-	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 09:02:58 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 6C7A952AB9; Tue,  2 Jul 2013 16:02:52 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130702160252.6C7A952AB9@arago-project.org>
-Date: Tue,  2 Jul 2013 16:02:52 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : linux-am335x-psp: Add Beaglebone Black support
+Return-Path: <will.frazer@eurotech.com>
+Received: from db8outboundpool.messaging.microsoft.com
+	(mail-db8lp0184.outbound.messaging.microsoft.com [213.199.154.184])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CA536E013B0
+	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 09:10:34 -0700 (PDT)
+Received: from mail209-db8-R.bigfish.com (10.174.8.252) by
+	DB8EHSOBE029.bigfish.com (10.174.4.92) with Microsoft SMTP Server id
+	14.1.225.23; Tue, 2 Jul 2013 16:10:33 +0000
+Received: from mail209-db8 (localhost [127.0.0.1])	by
+	mail209-db8-R.bigfish.com (Postfix) with ESMTP id 3BA3420235;
+	Tue,  2 Jul 2013 16:10:33 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:157.56.248.53; KIP:(null); UIP:(null); IPV:NLI;
+	H:AMSPRD0510HT002.eurprd05.prod.outlook.com; RD:none; EFVD:NLI
+X-SpamScore: -2
+X-BigFish: PS-2(zz98dI9371Ic85fh1432I4015Izz1f42h1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hz8dhz1d7338h17326ah18c673h1954cbh8275bh8275dhz2dh2a8h668h839hd24hf0ah1288h12a5h12bdh137ah1441h1504h1537h153bh162dh1631h1758h18e1h1946h19b5h19ceh1ad9h1b0ah1bceh1d07h1d0ch1d2eh1d3fh1de9h1dfeh1dffh1e1dh9a9j1155h)
+X-Forefront-Antispam-Report-Untrusted: SFV:NSPM;
+	SFS:(377454003)(164054003)(189002)(51704005)(199002)(24454002)(47736001)(77096001)(80022001)(47446002)(83072001)(50986001)(81542001)(15202345003)(81342001)(69226001)(4396001)(53806001)(16236675002)(63696002)(74876001)(76576001)(47976001)(54356001)(74706001)(59766001)(49866001)(76796001)(66066001)(56776001)(77982001)(65816001)(76786001)(74316001)(19300405004)(54316002)(79102001)(16601075003)(33646001)(74366001)(16406001)(1411001)(76482001)(31966008)(46102001)(51856001)(56816003)(74662001)(74502001)(24736002);
+	DIR:OUT; SFP:; SCL:1; SRVR:AMSPR05MB084;
+	H:AMSPR05MB083.eurprd05.prod.outlook.com; RD:InfoNoRecords; MX:1;
+	A:1; LANG:en; 
+Received: from mail209-db8 (localhost.localdomain [127.0.0.1]) by mail209-db8
+	(MessageSwitch) id 1372781430280513_24167;
+	Tue,  2 Jul 2013 16:10:30 +0000 (UTC)
+Received: from DB8EHSMHS022.bigfish.com (unknown [10.174.8.249])	by
+	mail209-db8.bigfish.com (Postfix) with ESMTP id 404B9480044;
+	Tue,  2 Jul 2013 16:10:30 +0000 (UTC)
+Received: from AMSPRD0510HT002.eurprd05.prod.outlook.com (157.56.248.53) by
+	DB8EHSMHS022.bigfish.com (10.174.4.32) with Microsoft SMTP Server (TLS)
+	id 14.16.227.3; Tue, 2 Jul 2013 16:10:29 +0000
+Received: from AMSPR05MB084.eurprd05.prod.outlook.com (10.242.89.152) by
+	AMSPRD0510HT002.eurprd05.prod.outlook.com (10.255.42.37) with Microsoft
+	SMTP Server (TLS) id 14.16.324.0; Tue, 2 Jul 2013 16:10:29 +0000
+Received: from AMSPR05MB083.eurprd05.prod.outlook.com (10.242.89.149) by
+	AMSPR05MB084.eurprd05.prod.outlook.com (10.242.89.152) with Microsoft
+	SMTP Server (TLS) id 15.0.702.21; Tue, 2 Jul 2013 16:10:28 +0000
+Received: from AMSPR05MB083.eurprd05.prod.outlook.com ([169.254.10.138]) by
+	AMSPR05MB083.eurprd05.prod.outlook.com ([169.254.10.138]) with mapi id
+	15.00.0702.005; Tue, 2 Jul 2013 16:10:28 +0000
+From: "Frazer, Will" <will.frazer@eurotech.com>
+To: Sudhangathan B S <sudhangathan@gmail.com>
+Thread-Topic: [meta-ti] server outage?
+Thread-Index: Ac53LWctc656SFiGSwC8veKPkU02GAAAtdCAAAImmQAAAWqvMA==
+Date: Tue, 2 Jul 2013 16:10:27 +0000
+Message-ID: <76f685e794254135a6a986ae31c68377@AMSPR05MB083.eurprd05.prod.outlook.com>
+References: <9c193827a41e4fe7b6d03c630beb4baa@AMSPR05MB083.eurprd05.prod.outlook.com>
+	<20130702142712.GD4941@edge>
+	<CAGX3a9_Mhe5V2hLVs5+jFcnro9YMWPtGniVAmcG=B+b6RP7gLg@mail.gmail.com>
+In-Reply-To: <CAGX3a9_Mhe5V2hLVs5+jFcnro9YMWPtGniVAmcG=B+b6RP7gLg@mail.gmail.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [164.40.222.34]
+x-forefront-prvs: 0895DF8FFD
+MIME-Version: 1.0
+X-OriginatorOrg: eurotech.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: server outage?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,166 +68,211 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2013 16:02:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 02 Jul 2013 16:10:37 -0000
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_76f685e794254135a6a986ae31c68377AMSPR05MB083eurprd05pro_"
 
-Module: meta-ti
-Branch: master
-Commit: 0bd76f05cd384d988148d8f512cbdc342ab697c0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0bd76f05cd384d988148d8f512cbdc342ab697c0
+--_000_76f685e794254135a6a986ae31c68377AMSPR05MB083eurprd05pro_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Thu Jun 27 10:57:34 2013 -0500
+It was both however they are both OK now.
 
-linux-am335x-psp: Add Beaglebone Black support
+Thanks,
+Will
 
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
+.org] On Behalf Of Sudhangathan B S
+Sent: 02 July 2013 16:29
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] server outage?
 
----
+Frazer probably meant the arago server, which in case it does not work, we =
+get the error while parsing, from the boot-monitor_git.bb<http://boot-monit=
+or_git.bb>..
 
- ...-Add-minimal-support-for-Beaglebone-Black.patch |  110 ++++++++++++++++++++
- recipes-kernel/linux/linux-am335x-psp_3.2.bb       |    5 +-
- 2 files changed, 114 insertions(+), 1 deletions(-)
+Now it seems to work.. It wasn't a while ago..!
 
-diff --git a/recipes-kernel/linux/linux-am335x-psp-3.2/0001-am335x-Add-minimal-support-for-Beaglebone-Black.patch b/recipes-kernel/linux/linux-am335x-psp-3.2/0001-am335x-Add-minimal-support-for-Beaglebone-Black.patch
-new file mode 100644
-index 0000000..ec83d19
---- /dev/null
-+++ b/recipes-kernel/linux/linux-am335x-psp-3.2/0001-am335x-Add-minimal-support-for-Beaglebone-Black.patch
-@@ -0,0 +1,110 @@
-+From cda956db2b54400c44cc8eb952276ecb058f57d8 Mon Sep 17 00:00:00 2001
-+From: Steve Kipisz <s-kipisz2@ti.com>
-+Date: Mon, 3 Jun 2013 04:35:51 -0500
-+Subject: [PATCH] am335x:Add minimal support for Beaglebone Black
-+
-+- Detect Beaglebone Black and do the appropriate pin mux
-+- Add pin mux for eMMC
-+
-+Signed-off-by: Steve Kipisz <s-kipisz2@ti.com>
-+---
-+ arch/arm/mach-omap2/board-am335xevm.c              |   49 ++++++++++++++++++++
-+ arch/arm/mach-omap2/include/mach/board-am335xevm.h |    1 +
-+ 2 files changed, 50 insertions(+)
-+
-+diff --git a/arch/arm/mach-omap2/board-am335xevm.c b/arch/arm/mach-omap2/board-am335xevm.c
-+index 1523f33..c4a5c05 100644
-+--- a/arch/arm/mach-omap2/board-am335xevm.c
-++++ b/arch/arm/mach-omap2/board-am335xevm.c
-+@@ -1654,6 +1654,21 @@ static void mmc1_wl12xx_init(int evm_id, int profile)
-+ 	am335x_mmc[1].ocr_mask = MMC_VDD_32_33 | MMC_VDD_33_34; /* 3V3 */
-+ }
-+ 
-++static void mmc1_emmc_init(int evm_id, int profile)
-++{
-++	setup_pin_mux(mmc1_common_pin_mux);
-++	setup_pin_mux(mmc1_dat4_7_pin_mux);
-++
-++	am335x_mmc[1].mmc = 2;
-++	am335x_mmc[1].caps = MMC_CAP_8_BIT_DATA;
-++	am335x_mmc[1].gpio_cd = -EINVAL;
-++	am335x_mmc[1].gpio_wp = -EINVAL;
-++	am335x_mmc[1].ocr_mask = MMC_VDD_32_33 | MMC_VDD_33_34; /* 3V3 */
-++
-++	/* mmc will be initialized when mmc0_init is called */
-++	return;
-++}
-++
-+ static void mmc2_wl12xx_init(int evm_id, int profile)
-+ {
-+ 	setup_pin_mux(mmc2_wl12xx_pin_mux);
-+@@ -2177,6 +2192,21 @@ static struct evm_dev_cfg beaglebone_dev_cfg[] = {
-+ 	{NULL, 0, 0},
-+ };
-+ 
-++/* Beaglebone Black */
-++static struct evm_dev_cfg beagleboneblack_dev_cfg[] = {
-++	{am335x_rtc_init, DEV_ON_BASEBOARD, PROFILE_NONE},
-++	{clkout2_enable, DEV_ON_BASEBOARD, PROFILE_NONE},
-++	{tps65217_init,	DEV_ON_BASEBOARD, PROFILE_NONE},
-++	{mii1_init,	DEV_ON_BASEBOARD, PROFILE_NONE},
-++	{usb0_init,	DEV_ON_BASEBOARD, PROFILE_NONE},
-++	{usb1_init,	DEV_ON_BASEBOARD, PROFILE_NONE},
-++	{mmc1_emmc_init,	DEV_ON_BASEBOARD, PROFILE_NONE},
-++	{mmc0_init,	DEV_ON_BASEBOARD, PROFILE_NONE},
-++	{i2c2_init,	DEV_ON_BASEBOARD, PROFILE_NONE},
-++	{sgx_init,	DEV_ON_BASEBOARD, PROFILE_NONE},
-++	{NULL, 0, 0},
-++};
-++
-+ /* EVM - Starter Kit */
-+ static struct evm_dev_cfg evm_sk_dev_cfg[] = {
-+ 	{am335x_rtc_init, DEV_ON_BASEBOARD, PROFILE_ALL},
-+@@ -2280,6 +2310,23 @@ static void setup_beaglebone(void)
-+ 	am33xx_cpsw_init(AM33XX_CPSW_MODE_MII, NULL, NULL);
-+ }
-+ 
-++/* BeagleBone Black */
-++static void setup_beagleboneblack(void)
-++{
-++	pr_info("The board is a AM335x Beaglebone Black.\n");
-++
-++	/* Beagle Bone has Micro-SD slot which doesn't have Write Protect pin */
-++	am335x_mmc[0].gpio_wp = -EINVAL;
-++
-++	_configure_device(BEAGLE_BONE_BLACK, beagleboneblack_dev_cfg,
-++				PROFILE_NONE);
-++
-++	/* TPS65217 regulator has full constraints */
-++	regulator_has_full_constraints();
-++
-++	am33xx_cpsw_init(AM33XX_CPSW_MODE_MII, NULL, NULL);
-++}
-++
-+ /* EVM - Starter Kit */
-+ static void setup_starterkit(void)
-+ {
-+@@ -2372,6 +2419,8 @@ static void am335x_evm_setup(struct memory_accessor *mem_acc, void *context)
-+ 			setup_beaglebone_old();
-+ 		else
-+ 			setup_beaglebone();
-++	} else if (!strncmp("A335BNLT", config.name, 8)) {
-++		setup_beagleboneblack();
-+ 	} else if (!strncmp("A335X_SK", config.name, 8)) {
-+ 		daughter_brd_detected = false;
-+ 		setup_starterkit();
-+diff --git a/arch/arm/mach-omap2/include/mach/board-am335xevm.h b/arch/arm/mach-omap2/include/mach/board-am335xevm.h
-+index e77d52c..915139a 100644
-+--- a/arch/arm/mach-omap2/include/mach/board-am335xevm.h
-++++ b/arch/arm/mach-omap2/include/mach/board-am335xevm.h
-+@@ -26,6 +26,7 @@
-+ #define BEAGLE_BONE_A3		3
-+ #define EVM_SK			4
-+ #define GEN_PURP_DDR3_EVM	5
-++#define BEAGLE_BONE_BLACK	6
-+ 
-+ /* REVIST : check posibility of PROFILE_(x) syntax usage */
-+ #define PROFILE_NONE	-1	/* Few EVM doesn't have profiles */
-+-- 
-+1.7.9.5
-+
-diff --git a/recipes-kernel/linux/linux-am335x-psp_3.2.bb b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-index 958bba5..257c6de 100644
---- a/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-@@ -15,7 +15,7 @@ DEPENDS += "am33x-cm3"
- KERNEL_IMAGETYPE = "uImage"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for ti33x see conf/machine/include/ti33x.inc
--MACHINE_KERNEL_PR_append = "f+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
- 
- BRANCH = "v3.2-staging"
- 
-@@ -87,6 +87,9 @@ PATCHES += "file://0001-am335x-enable-pullup-on-the-WLAN-enable-pin-fo.patch"
- # Update SPI flash layout. Increase space allocated for u-boot
- PATCHES += "file://0001-ARM-OMAP2-AM335x-Update-SPI-flash-layout.patch"
- 
-+# Add support for Beaglebone Black
-+PATCHES += "file://0001-am335x-Add-minimal-support-for-Beaglebone-Black.patch"
-+
- # Copy the am33x-cm3 firmware if it is available
- do_configure_append() {
-     if [ -e "${STAGING_DIR_HOST}/${base_libdir}/firmware/am335x-pm-firmware.bin" ]
+Thanks.
+
+---------------------------------
+Sudhangathan BS
+Ph:(+91) 9731-905-205
+---------------------------------
+
+On Tue, Jul 2, 2013 at 7:57 PM, Denys Dmytriyenko <denys@ti.com<mailto:deny=
+s@ti.com>> wrote:
+On Tue, Jul 02, 2013 at 02:08:02PM +0000, Frazer, Will wrote:
+> Hi guys,
+>       Could someone check the servers please (meta-ti etc).
+>
+> Looks like they maybe down at the moment.
+Seems to work for me:
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/
+
+--
+Denys
+_______________________________________________
+meta-ti mailing list
+meta-ti@yoctoproject.org<mailto:meta-ti@yoctoproject.org>
+https://lists.yoctoproject.org/listinfo/meta-ti
 
 
+--_000_76f685e794254135a6a986ae31c68377AMSPR05MB083eurprd05pro_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+span.hoenzb
+	{mso-style-name:hoenzb;}
+span.EmailStyle18
+	{mso-style-type:personal-reply;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri","sans-serif";
+	mso-fareast-language:EN-US;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-GB" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">It was both however they =
+are both OK now.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">Thanks,<o:p></o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">Will
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+/p>
+<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm =
+4.0pt">
+<div>
+<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"MsoNormal"><b><span lang=3D"EN-US" style=3D"font-size:10.0pt;fo=
+nt-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span =
+lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,&qu=
+ot;sans-serif&quot;"> meta-ti-bounces@yoctoproject.org [mailto:meta-ti-boun=
+ces@yoctoproject.org]
+<b>On Behalf Of </b>Sudhangathan B S<br>
+<b>Sent:</b> 02 July 2013 16:29<br>
+<b>Cc:</b> meta-ti@yoctoproject.org<br>
+<b>Subject:</b> Re: [meta-ti] server outage?<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class=3D"MsoNormal">Frazer probably meant the arago server, which in cas=
+e it does not work, we get the error while parsing, from the
+<a href=3D"http://boot-monitor_git.bb">boot-monitor_git.bb</a>..&nbsp;<o:p>=
+</o:p></p>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Now it seems to work.. It wasn't a while ago..!<o:p>=
+</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Thanks.<o:p></o:p></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><br clear=3D"all">
+<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal">---------------------------------<br>
+Sudhangathan BS<br>
+Ph:(&#43;91) 9731-905-205<br>
+---------------------------------<o:p></o:p></p>
+</div>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt"><o:p>&nbsp;</o:p></p>
+<div>
+<p class=3D"MsoNormal">On Tue, Jul 2, 2013 at 7:57 PM, Denys Dmytriyenko &l=
+t;<a href=3D"mailto:denys@ti.com" target=3D"_blank">denys@ti.com</a>&gt; wr=
+ote:<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt">On Tue, Jul 02, 2013 =
+at 02:08:02PM &#43;0000, Frazer, Will wrote:<br>
+&gt; Hi guys,<br>
+&gt; &nbsp; &nbsp; &nbsp; Could someone check the servers please (meta-ti e=
+tc).<br>
+&gt;<br>
+&gt; Looks like they maybe down at the moment.<o:p></o:p></p>
+</div>
+<p class=3D"MsoNormal">Seems to work for me:<br>
+<a href=3D"http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/" target=3D"_b=
+lank">http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/</a><br>
+<span style=3D"color:#888888"><br>
+<span class=3D"hoenzb">--</span><br>
+<span class=3D"hoenzb">Denys</span></span><o:p></o:p></p>
+<div>
+<div>
+<p class=3D"MsoNormal">_______________________________________________<br>
+meta-ti mailing list<br>
+<a href=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</a><br=
+>
+<a href=3D"https://lists.yoctoproject.org/listinfo/meta-ti" target=3D"_blan=
+k">https://lists.yoctoproject.org/listinfo/meta-ti</a><o:p></o:p></p>
+</div>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+--_000_76f685e794254135a6a986ae31c68377AMSPR05MB083eurprd05pro_--
