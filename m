@@ -1,15 +1,30 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 79304E01481
-	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 08:41:09 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 78CDB5298D; Tue,  2 Jul 2013 15:41:02 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130702154103.78CDB5298D@arago-project.org>
-Date: Tue,  2 Jul 2013 15:41:02 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Siddharth Heroor : u-boot-glsdk: add GLSDK Staging tree
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8620CE013B0
+	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 08:42:05 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r62Fg5qf023497
+	for <meta-ti@yoctoproject.org>; Tue, 2 Jul 2013 10:42:05 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r62Fg5H2014138
+	for <meta-ti@yoctoproject.org>; Tue, 2 Jul 2013 10:42:05 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 2 Jul 2013 10:42:05 -0500
+Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r62Fg5ap008292;
+	Tue, 2 Jul 2013 10:42:05 -0500
+Date: Tue, 2 Jul 2013 11:42:04 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Siddharth Heroor <heroor@ti.com>
+Message-ID: <20130702154204.GF4941@edge>
+References: <20130701082139.GA3378@ti.com>
+ <20130702153552.GE4941@edge>
+MIME-Version: 1.0
+In-Reply-To: <20130702153552.GE4941@edge>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] recipes-kernel: Update to latest fixes on the glsdk staging tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,54 +37,48 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2013 15:41:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 02 Jul 2013 15:42:08 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: danny
-Commit: e2b3670c176792426aec0e3535932e605028de24
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e2b3670c176792426aec0e3535932e605028de24
+On Tue, Jul 02, 2013 at 11:35:52AM -0400, Denys Dmytriyenko wrote:
+> On Mon, Jul 01, 2013 at 01:51:39PM +0530, Siddharth Heroor wrote:
+> > * Fixes for USB, SATA and enables GPU (omapdrm).
+> > * Fix OMAP5 LDO1 value.
+> > 
+> > Signed-off-by: Siddharth Heroor <heroor@ti.com>
+> > ---
+> >  recipes-kernel/linux/linux-ti-glsdk_3.8.bb |    2 +-
+> >  1 files changed, 1 insertions(+), 1 deletions(-)
+> > 
+> > diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+> > index 2746188..bfcaf3a 100644
+> > --- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+> > +++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+> > @@ -20,7 +20,7 @@ S = "${WORKDIR}/git"
+> >  
+> >  BRANCH = "master"
+> >  
+> > -SRCREV = "4e8193eb3b7465d7f67cd8c7e6c2ed99dad1a483"
+> > +SRCREV = "6076e6882d1d6a64b104e42e56a3eada36605cb3"
+> 
+> You forgot to bump the MACHINE_KERNEL_PR...
 
-Author: Siddharth Heroor <heroor@ti.com>
-Date:   Mon Jul  1 19:00:14 2013 +0530
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/?id=3075e004978b981bf6cfa6c66f84115659644395
 
-u-boot-glsdk: add GLSDK Staging tree
 
-* The GLSDK u-boot staging tree is based off the Core SDK 2013.04.02
-  release. This tree will be used to stage patches and fixes on
-  top of the Core SDK U-Boot. The GLSDK release will use this tree
-  for product development.
-* Includes fix to OMAP5 so that QSPI is not enabled.
-
-Signed-off-by: Siddharth Heroor <heroor@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb |   16 ++++++++++++++++
- 1 files changed, 16 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
-new file mode 100644
-index 0000000..d60ef44
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
-@@ -0,0 +1,16 @@
-+require u-boot-ti.inc
-+
-+DESCRIPTION = "u-boot bootloader for TI devices supported by the GLSDK product"
-+
-+PR = "r0+gitr${SRCPV}"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+SRC_URI = "git://git.ti.com/glsdk/glsdk-u-boot.git;protocol=git;branch=${BRANCH}"
-+
-+BRANCH ?= "master"
-+
-+SRCREV = "81836e8cc84bd6523d9a4e187965dcd1633c4bc9"
-+
-+SPL_BINARY = "MLO"
-+SPL_UART_BINARY = "u-boot-spl.bin"
-
+> >  PV = "3.8.13"
+> >  
+> >  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+> > -- 
+> > 1.7.0.4
+> > 
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
