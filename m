@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D6DD7E0141B
-	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 08:41:05 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 79304E01481
+	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 08:41:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7F1BC529E4; Tue,  2 Jul 2013 15:41:03 +0000 (UTC)
+	id 78CDB5298D; Tue,  2 Jul 2013 15:41:02 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130702154103.7F1BC529E4@arago-project.org>
-Date: Tue,  2 Jul 2013 15:41:03 +0000 (UTC)
+Message-Id: <20130702154103.78CDB5298D@arago-project.org>
+Date: Tue,  2 Jul 2013 15:41:02 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Siddharth Heroor : linux-ti-glsdk: update to latest fixes
+Subject: Siddharth Heroor : u-boot-glsdk: add GLSDK Staging tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,43 +26,50 @@ X-List-Received-Date: Tue, 02 Jul 2013 15:41:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 3075e004978b981bf6cfa6c66f84115659644395
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3075e004978b981bf6cfa6c66f84115659644395
+Branch: danny
+Commit: e2b3670c176792426aec0e3535932e605028de24
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e2b3670c176792426aec0e3535932e605028de24
 
 Author: Siddharth Heroor <heroor@ti.com>
-Date:   Mon Jul  1 14:09:39 2013 +0530
+Date:   Mon Jul  1 19:00:14 2013 +0530
 
-linux-ti-glsdk: update to latest fixes
+u-boot-glsdk: add GLSDK Staging tree
 
-* Fixes for USB, SATA and enables GPU (omapdrm).
-* Fix OMAP5 LDO1 value.
+* The GLSDK u-boot staging tree is based off the Core SDK 2013.04.02
+  release. This tree will be used to stage patches and fixes on
+  top of the Core SDK U-Boot. The GLSDK release will use this tree
+  for product development.
+* Includes fix to OMAP5 so that QSPI is not enabled.
 
 Signed-off-by: Siddharth Heroor <heroor@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-glsdk_3.8.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb |   16 ++++++++++++++++
+ 1 files changed, 16 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-index 2746188..9e3e499 100644
---- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-@@ -20,11 +20,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "master"
- 
--SRCREV = "4e8193eb3b7465d7f67cd8c7e6c2ed99dad1a483"
-+SRCREV = "6076e6882d1d6a64b104e42e56a3eada36605cb3"
- PV = "3.8.13"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
+diff --git a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
+new file mode 100644
+index 0000000..d60ef44
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
+@@ -0,0 +1,16 @@
++require u-boot-ti.inc
++
++DESCRIPTION = "u-boot bootloader for TI devices supported by the GLSDK product"
++
++PR = "r0+gitr${SRCPV}"
++
++DEFAULT_PREFERENCE = "-1"
++
++SRC_URI = "git://git.ti.com/glsdk/glsdk-u-boot.git;protocol=git;branch=${BRANCH}"
++
++BRANCH ?= "master"
++
++SRCREV = "81836e8cc84bd6523d9a4e187965dcd1633c4bc9"
++
++SPL_BINARY = "MLO"
++SPL_UART_BINARY = "u-boot-spl.bin"
 
 
