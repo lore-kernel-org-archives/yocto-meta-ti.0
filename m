@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 680C4E0140D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6894DE01481
 	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 09:02:58 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3015A52A7A; Tue,  2 Jul 2013 16:02:51 +0000 (UTC)
+	id 0714052AB3; Tue,  2 Jul 2013 16:02:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130702160252.3015A52A7A@arago-project.org>
+Message-Id: <20130702160252.0714052AB3@arago-project.org>
 Date: Tue,  2 Jul 2013 16:02:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : linux-am335x-psp: Update to PSP release 04.06.00.11
+Subject: Franklin S. Cooper Jr : am33x-cm3: Add support for PG 2.1 silicon.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,40 +27,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dylan
-Commit: 72a9e98bfc1e363808fa26009028cdaea446eeaf
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=72a9e98bfc1e363808fa26009028cdaea446eeaf
+Commit: 988bc0198862e11f1fcf2d2b75b5fcd31539edd5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=988bc0198862e11f1fcf2d2b75b5fcd31539edd5
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Thu Jun 27 10:57:30 2013 -0500
+Date:   Thu Jun 27 10:57:33 2013 -0500
 
-linux-am335x-psp: Update to PSP release 04.06.00.11
+am33x-cm3: Add support for PG 2.1 silicon.
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-am335x-psp_3.2.bb |    5 ++---
- 1 files changed, 2 insertions(+), 3 deletions(-)
+ recipes-bsp/ti/am33x-cm3_git.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-am335x-psp_3.2.bb b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-index f55fc4c..00c4b10 100644
---- a/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-@@ -15,12 +15,11 @@ DEPENDS += "am33x-cm3"
- KERNEL_IMAGETYPE = "uImage"
+diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
+index 3549fcd..9b36a9e 100644
+--- a/recipes-bsp/ti/am33x-cm3_git.bb
++++ b/recipes-bsp/ti/am33x-cm3_git.bb
+@@ -3,11 +3,11 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
+ LICENSE = "TI-BSD"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
  
- # The main PR is now using MACHINE_KERNEL_PR, for ti33x see conf/machine/include/ti33x.inc
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
+-PV = "04.06.00.10"
+-PR = "r3"
++PV = "04.06.00.11"
++PR = "r4"
  
- BRANCH = "v3.2-staging"
+-# SRCREV corresponds to tag "AM335xPSP_04.06.00.10-rc1"
+-SRCREV = "27ca4643e422245a95723de1df0247a00eada45b"
++# SRCREV corresponds to tag "AM335xPSP_04.06.00.11"
++SRCREV = "750362868d914702086187096ec2c67b68eac101"
+ BRANCH ?= "master"
  
--# SRCREV corresponds to the commit id of tag v3.2_AM335xPSP_04.06.00.10-rc3
--SRCREV = "18ce4a630452348b8308b922491130e8ce1e9134"
-+SRCREV = "d5720d33bc7c434f9a023dbb62c795538f976b7a"
- 
- SRC_URI = "git://arago-project.org/git/projects/linux-am33x.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
+ INITSCRIPT_NAME = "am335x-pm-firmware-load"
 
 
