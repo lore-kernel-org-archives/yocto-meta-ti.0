@@ -1,33 +1,32 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 63491E013B0
-	for <meta-ti@yoctoproject.org>; Tue,  2 Jul 2013 12:09:55 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r62J9teL029191
-	for <meta-ti@yoctoproject.org>; Tue, 2 Jul 2013 14:09:55 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r62J9tCs025159
-	for <meta-ti@yoctoproject.org>; Tue, 2 Jul 2013 14:09:55 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
-	14.02.0342.003; Tue, 2 Jul 2013 14:09:55 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Cooper Jr., Franklin" <fcooper@ti.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [master & danny][PATCH 2/2] u-boot: Add memory
-	alignment	fix for armv7 for am37x and am3517
-Thread-Index: AQHOd0HaXrsqJqnO9EGW4iOUxw9OdJlRwJew
-Date: Tue, 2 Jul 2013 19:09:54 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED101596306DD@DLEE11.ent.ti.com>
-References: <1372783680-32302-1-git-send-email-fcooper@ti.com>
-	<1372783680-32302-2-git-send-email-fcooper@ti.com>
-In-Reply-To: <1372783680-32302-2-git-send-email-fcooper@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+Return-Path: <eballetbo@gmail.com>
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 091FAE01479
+	for <meta-ti@yoctoproject.org>; Wed,  3 Jul 2013 07:34:29 -0700 (PDT)
+Received: by mail-wg0-f50.google.com with SMTP id k14so196015wgh.5
+	for <meta-ti@yoctoproject.org>; Wed, 03 Jul 2013 07:34:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=YEMdGxLqVqMv0k+Yo8xSP9Tx/PBTniadJGAnV2sqJv0=;
+	b=ISw0jzxrbvVMzbqbVUaJFu3X63KrGHmqk5XHBD37PWaYoveEhAzUlQnghzJp0eDs/B
+	8yY2fakx3v90Yg4DdmRSRhGEIpQbbcUV7WYx0ZPFA3p/coy7Rsi86wgAM1/7QbuW1o9C
+	lUXmaeqniOB8iUr8MYJuQkVJBdZgxAzejCSfK9NwBoGyIzbcdnreVfaMI3OGXUGnoxsy
+	F5gVckxiL4uEaW1dTBZHrnFko3mqB+iiLDfS+VfsPXM6y0WC8itOJcxF853GEHMiXQIb
+	OCeVXoaJlXtHb7d5FzgXtk7tPyJAB/siHs5pJUbPz0qp6WM+Zx7Kr7oOBCObCVDb5/bY
+	TCDw==
 MIME-Version: 1.0
-Subject: Re: [master & danny][PATCH 2/2] u-boot: Add memory alignment	fix for armv7 for am37x and am3517
+X-Received: by 10.180.76.206 with SMTP id m14mr712361wiw.38.1372861755416;
+	Wed, 03 Jul 2013 07:29:15 -0700 (PDT)
+Received: by 10.194.104.65 with HTTP; Wed, 3 Jul 2013 07:29:15 -0700 (PDT)
+In-Reply-To: <20130620043900.GQ13356@edge>
+References: <prabu@ti.com> <1371057762-17055-1-git-send-email-prabu@ti.com>
+	<20130620043900.GQ13356@edge>
+Date: Wed, 3 Jul 2013 16:29:15 +0200
+Message-ID: <CAFqH_518YDzw43QM-hRmrQt7kCVOK1n_39MGQk8Fg-DUDZpDng@mail.gmail.com>
+From: Enric Balletbo Serra <eballetbo@gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 0/9] Graphics SDK cleanup
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,196 +39,88 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jul 2013 19:09:58 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Jul 2013 14:34:30 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Couldn't you only use one copy of the patch file and place it in a more gen=
-eric directory?  Not a big issue but just asking.
+Hi all,
 
-Sincerely,
-Chase Maupin
-Integration Team Manager
-Linux Core Product Development
-e-mail: chase.maupin@ti.com
-phone: (214) 567-2950
+2013/6/20 Denys Dmytriyenko <denys@ti.com>:
+> Prabu,
+>
+> There were few issues I found when testing your patches, but I've been working
+> on the fixes past few days and should have it ready to be pushed shortly.
+>
+> Not to force you to re-send the patches again, but ligles-omap3-x11 was
+> actually missing. But even when added manually, it was causing conflicts with
+> no-X11 version, breaking the parsing for distros w/o X11. Moreover, as was
+> discussed long time ago, having both X11 and Raw variants of libraries and
+> apps built and installed together is very useful for all-inclusive distros, so
+> making those recipes conflict and replace each other is not a right way...
+>
+> Having said all the above, I've done the necessary mods and am testing
+> building different configurations at the moment. I'll let you know if I see
+> any other issues. Thanks.
+>
+> --
+> Denys
+>
+>
+> On Wed, Jun 12, 2013 at 10:52:33PM +0530, Prabindh Sundareson wrote:
+>> Patch-set removes unsupported features, and separates X11 and non-X11
+>> builds, and enables support for Qt5 builds. This patch-set also squashes 2
+>> commits together per discussion at
+>> https://lists.yoctoproject.org/pipermail/meta-ti/2013-May/002774.html
+>>
+>> Prabindh Sundareson (9):
+>>   libgles-omap3: Remove X11 related build and packaging
+>>   omap3-sgx-modules: Remove X11 related build and packaging
+>>   libgles-omap3: Remove unsupported core build option ES2.0
+>>   libgles-omap3: Remove OpenVG references
+>>   libgles-omap3: Remove copying of unused header files
+>>   libgles-omap3: Add missing RPROVIDES
+>>   libgles-omap3: Package files with right permission
+>>   libgles-omap3-x11: Separate X11 SGX driver package into new recipe
+>>   omap3-sgx-modules-x11: Separate X11 SGX driver package into new
+>>     recipe
+>>
+>>  .../Compile-fixes-for-38-kernel.patch              |  346 ++++++++++++++++++++
+>>  .../omap3-sgx-modules-x11/kernel-30.patch          |   38 +++
+>>  .../omap3-sgx-modules-x11_4.09.00.01.bb            |   74 +++++
+>>  .../omap3-sgx-modules_4.09.00.01.bb                |    9 +-
+>>  recipes-graphics/libgles/libgles-omap3-no-x.inc    |  318 ++++++++++++++++++
+>>  .../libgles/libgles-omap3-x11-4.09.00.01/rc.pvr    |  125 +++++++
+>>  .../libgles-omap3-x11-4.09.00.01/rc_dri.pvr        |  137 ++++++++
+>>  recipes-graphics/libgles/libgles-omap3-x11.inc     |  323 ++++++++++++++++++
+>>  .../libgles/libgles-omap3_4.09.00.01.bb            |   45 +---
+>>  9 files changed, 1365 insertions(+), 50 deletions(-)
+>>  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-x11/Compile-fixes-for-38-kernel.patch
+>>  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-x11/kernel-30.patch
+>>  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
+>>  create mode 100644 recipes-graphics/libgles/libgles-omap3-no-x.inc
+>>  create mode 100644 recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/rc.pvr
+>>  create mode 100644 recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/rc_dri.pvr
+>>  create mode 100644 recipes-graphics/libgles/libgles-omap3-x11.inc
+>>
+>> _______________________________________________
+>> meta-ti mailing list
+>> meta-ti@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/meta-ti
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
-For support:
-Forums - http://community.ti.com/forums/
-Wiki - http://wiki.davincidsp.com/=20
 
+Shouldn't the libgles-omap3_4.09.00.01.bb depends on libdrm ? I get
+following error trying to create a image that installs libgles-omap3
+but not libdrm.
 
->-----Original Message-----
->From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->bounces@yoctoproject.org] On Behalf Of Cooper Jr., Franklin
->Sent: Tuesday, July 02, 2013 11:48 AM
->To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [master & danny][PATCH 2/2] u-boot: Add memory
->alignment fix for armv7 for am37x and am3517
->
->* On am335x a memory alignment issue was found when using the
->Linaro toolchain.
->* A similar patch was applied for am335x that fixed this well
->documented issue.
->* Add a similar fix to am37x and am3517 since this is a generic
->armv7 issue.
->
->Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
->---
-> .../0001-armv7-Unaligned-access-fix.patch          |   30
->++++++++++++++++++++
-> recipes-bsp/u-boot/u-boot-am3517_2011.09.bb        |    5 ++-
-> .../0001-armv7-Unaligned-access-fix.patch          |   30
->++++++++++++++++++++
-> recipes-bsp/u-boot/u-boot-am37x_2012.04.01.bb      |    3 ++
-> 4 files changed, 66 insertions(+), 2 deletions(-)
-> create mode 100644 recipes-bsp/u-boot/u-boot-am3517-2011.09/0001-
->armv7-Unaligned-access-fix.patch
-> create mode 100644 recipes-bsp/u-boot/u-boot-am37x-
->2012.04.01/0001-armv7-Unaligned-access-fix.patch
->
->diff --git a/recipes-bsp/u-boot/u-boot-am3517-2011.09/0001-armv7-
->Unaligned-access-fix.patch b/recipes-bsp/u-boot/u-boot-am3517-
->2011.09/0001-armv7-Unaligned-access-fix.patch
->new file mode 100644
->index 0000000..35307ac
->--- /dev/null
->+++ b/recipes-bsp/u-boot/u-boot-am3517-2011.09/0001-armv7-
->Unaligned-access-fix.patch
->@@ -0,0 +1,30 @@
->+From 40f1e7db785f477a2aa145a3b47bd498c48ad52d Mon Sep 17 00:00:00
->2001
->+From: Steve Kipisz <s-kipisz2@ti.com>
->+Date: Fri, 14 Jun 2013 05:16:52 -0500
->+Subject: [PATCH] armv7:Unaligned access fix
->+
->+This fixes an unaligned access data abort introduced when using
->gcc 4.7
->+or higher. The Linaro toolchain uses gcc 4.7.3. This is
->documented in u-boot
->+doc/README.arm-unaligned-accesses.
->+
->+Signed-off-by: Steve Kipisz <s-kipisz2@ti.com>
->+---
->+ arch/arm/cpu/armv7/config.mk |    2 +-
->+ 1 file changed, 1 insertion(+), 1 deletion(-)
->+
->+diff --git a/arch/arm/cpu/armv7/config.mk
->b/arch/arm/cpu/armv7/config.mk
->+index 9c3e2f3..9736da8 100644
->+--- a/arch/arm/cpu/armv7/config.mk
->++++ b/arch/arm/cpu/armv7/config.mk
->+@@ -20,7 +20,7 @@
->+ # Foundation, Inc., 59 Temple Place, Suite 330, Boston,
->+ # MA 02111-1307 USA
->+ #
->+-PLATFORM_RELFLAGS +=3D -fno-common -ffixed-r8 -msoft-float
->++PLATFORM_RELFLAGS +=3D -fno-common -ffixed-r8 -msoft-float -mno-
->unaligned-access
->+
->+ # If armv7-a is not supported by GCC fall-back to armv5, which
->is
->+ # supported by more tool-chains
->+--
->+1.7.9.5
->+
->diff --git a/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb
->b/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb
->index 6321406..02019e9 100644
->--- a/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb
->+++ b/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb
->@@ -6,9 +6,10 @@ COMPATIBLE_MACHINE =3D "omap3"
->
-> DEFAULT_PREFERENCE =3D "-1"
->
->-PR =3D "r0+gitr${SRCPV}"
->+PR =3D "r1+gitr${SRCPV}"
->
->-SRC_URI =3D "git://arago-project.org/git/projects/u-boot-
->am33x.git;protocol=3Dgit;branch=3D${BRANCH}"
->+SRC_URI =3D "git://arago-project.org/git/projects/u-boot-
->am33x.git;protocol=3Dgit;branch=3D${BRANCH} \
->+           file://0001-armv7-Unaligned-access-fix.patch"
->
-> BRANCH =3D "AM335XPSP_04.06.00.08"
->
->diff --git a/recipes-bsp/u-boot/u-boot-am37x-2012.04.01/0001-
->armv7-Unaligned-access-fix.patch b/recipes-bsp/u-boot/u-boot-
->am37x-2012.04.01/0001-armv7-Unaligned-access-fix.patch
->new file mode 100644
->index 0000000..35307ac
->--- /dev/null
->+++ b/recipes-bsp/u-boot/u-boot-am37x-2012.04.01/0001-armv7-
->Unaligned-access-fix.patch
->@@ -0,0 +1,30 @@
->+From 40f1e7db785f477a2aa145a3b47bd498c48ad52d Mon Sep 17 00:00:00
->2001
->+From: Steve Kipisz <s-kipisz2@ti.com>
->+Date: Fri, 14 Jun 2013 05:16:52 -0500
->+Subject: [PATCH] armv7:Unaligned access fix
->+
->+This fixes an unaligned access data abort introduced when using
->gcc 4.7
->+or higher. The Linaro toolchain uses gcc 4.7.3. This is
->documented in u-boot
->+doc/README.arm-unaligned-accesses.
->+
->+Signed-off-by: Steve Kipisz <s-kipisz2@ti.com>
->+---
->+ arch/arm/cpu/armv7/config.mk |    2 +-
->+ 1 file changed, 1 insertion(+), 1 deletion(-)
->+
->+diff --git a/arch/arm/cpu/armv7/config.mk
->b/arch/arm/cpu/armv7/config.mk
->+index 9c3e2f3..9736da8 100644
->+--- a/arch/arm/cpu/armv7/config.mk
->++++ b/arch/arm/cpu/armv7/config.mk
->+@@ -20,7 +20,7 @@
->+ # Foundation, Inc., 59 Temple Place, Suite 330, Boston,
->+ # MA 02111-1307 USA
->+ #
->+-PLATFORM_RELFLAGS +=3D -fno-common -ffixed-r8 -msoft-float
->++PLATFORM_RELFLAGS +=3D -fno-common -ffixed-r8 -msoft-float -mno-
->unaligned-access
->+
->+ # If armv7-a is not supported by GCC fall-back to armv5, which
->is
->+ # supported by more tool-chains
->+--
->+1.7.9.5
->+
->diff --git a/recipes-bsp/u-boot/u-boot-am37x_2012.04.01.bb
->b/recipes-bsp/u-boot/u-boot-am37x_2012.04.01.bb
->index c25cf1e..1cd96b6 100644
->--- a/recipes-bsp/u-boot/u-boot-am37x_2012.04.01.bb
->+++ b/recipes-bsp/u-boot/u-boot-am37x_2012.04.01.bb
->@@ -6,6 +6,8 @@ COMPATIBLE_MACHINE =3D "am37x-evm|beagleboard"
->
-> BRANCH ?=3D "master"
->
->+PR =3D "r1+gitr${SRCPV}"
->+
-> # v2012.04.01
-> SRCREV =3D "415d386877df49eb051b85ef74fa59a16dc17c7d"
->
->@@ -33,6 +35,7 @@ SRC_URI +=3D "file://0001-omap3_beagle-add-
->usbethaddr-setting-to-enable-networ.pat
->             file://0002-omap3evm-Make-the-board-start-at-
->800MHz.patch \
->             file://0003-beagleboard-Make-xM-rev-C-go-to-
->800MHz.patch \
->             file://0001-ARM-omap3-Set-SPL-stack-size-to-8KB-
->image-to-54KB.patch \
->+            file://0001-armv7-Unaligned-access-fix.patch \
->             "
->
-> SPL_BINARY =3D "MLO"
->--
->1.7.0.4
->
->_______________________________________________
->meta-ti mailing list
->meta-ti@yoctoproject.org
->https://lists.yoctoproject.org/listinfo/meta-ti
+| Computing transaction...error: Can't install
+libgles-omap3-es5-4.09.00.01-r35@armv7a_vfp_neon: no package provides
+libdrm.so.2
+
+Adding libdrm to the image solves the problem.
+
+Cheers,
+    Enric
 
