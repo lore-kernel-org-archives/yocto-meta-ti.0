@@ -1,18 +1,18 @@
 Return-Path: <rpjday@crashcourse.ca>
 Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
 	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5FD30E013EC
-	for <meta-ti@yoctoproject.org>; Mon,  8 Jul 2013 13:50:25 -0700 (PDT)
-Received: from [174.115.5.73] (port=56385 helo=crashcourse.ca)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CDDBAE01445
+	for <meta-ti@yoctoproject.org>; Mon,  8 Jul 2013 14:25:55 -0700 (PDT)
+Received: from [174.115.5.73] (port=56642 helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
 	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1UwIO8-0004iB-7N; Mon, 08 Jul 2013 16:50:24 -0400
-Date: Mon, 8 Jul 2013 16:50:18 -0400 (EDT)
+	id 1UwIwV-0006CP-03; Mon, 08 Jul 2013 17:25:55 -0400
+Date: Mon, 8 Jul 2013 17:25:48 -0400 (EDT)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@oneiric
 To: Tom Rini <trini@ti.com>
 In-Reply-To: <51DB242D.9070900@ti.com>
-Message-ID: <alpine.DEB.2.02.1307081648420.12420@oneiric>
+Message-ID: <alpine.DEB.2.02.1307081723400.12738@oneiric>
 References: <alpine.DEB.2.02.1307070755370.23001@oneiric>
 	<20130708181457.GQ16630@bill-the-cat>
 	<alpine.DEB.2.02.1307081427240.10955@oneiric>
@@ -44,31 +44,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2013 20:50:27 -0000
+X-List-Received-Date: Mon, 08 Jul 2013 21:25:56 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Mon, 8 Jul 2013, Tom Rini wrote:
 
-> On 07/08/2013 03:38 PM, Robert P. J. Day wrote:
-... snip ...
-> >   i had time to do the following quick test. i took my working uSD
-> > card (with artifacts from the meta-beagleboard build), and simply
-> > flat-out replaced both the MLO and u-boot.img files in the FAT
-> > partition with the corresponding files from the meta-ti build, and got
-> > the error above.
-> >
-> >   i then copied back the original MLO and u-boot.img files and the
-> > boot worked just fine, so that validates that the card partitioning
-> > itself seems fine.
-> >
-> >   i'll just email you the two files in question, and you can see if
-> > you can boot to u-boot.
->
-> The files both boot for me, on Beaglebone Black and White.
+  i'm willing to follow some "official" recipe line by line to build a
+simple bootable SD card for my BBB using the meta-ti layer, just to
+see where things seem to go wrong.
 
-  then i'm baffled ... what recipe do you use to format the uSD card?
-and did you try booting with nothing but those two files on the card?
-no uImage, no uEnv.txt, etc?
+  i just started a fresh build and the first thing i got was:
+
+WARNING: Variable key FILES_${PN}-dev (${includedir}
+${FILES_SOLIBSDEV} ${libdir}/*.la ${libdir}/*.o ${libdir}/pkgconfig
+${datadir}/pkgconfig ${datadir}/aclocal ${base_libdir}/*.o
+${libdir}/${BPN}/*.la ${base_libdir}/*.la) replaces original key
+FILES_ti-ipc-dev (${libdir}/*).
+WARNING: Variable key FILES_${PN}-dev (${includedir}
+${FILES_SOLIBSDEV} ${libdir}/*.la ${libdir}/*.o ${libdir}/pkgconfig
+${datadir}/pkgconfig ${datadir}/aclocal ${base_libdir}/*.o
+${libdir}/${BPN}/*.la ${base_libdir}/*.la) replaces original key
+FILES_ti-syslink-dev (${libdir}/*).
+
+is this expected, or is this an indication of an obvious error on my
+part in terms of layer selection or something?
+
+  in any event, i'm going to take the build through to its conclusion
+and try again. open to suggestions ...
 
 rday
 
