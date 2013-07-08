@@ -1,38 +1,31 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-gg0-f182.google.com (mail-gg0-f182.google.com
-	[209.85.161.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E479E013EC
-	for <meta-ti@yoctoproject.org>; Mon,  8 Jul 2013 11:14:53 -0700 (PDT)
-Received: by mail-gg0-f182.google.com with SMTP id f1so1710636ggn.41
-	for <meta-ti@yoctoproject.org>; Mon, 08 Jul 2013 11:14:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:organization
-	:user-agent; bh=YW+FA7om2GnD64hIP17Csi0PAW/SHrANJdUxrphc/k8=;
-	b=eVh+dEKY56oSpuwNUCwYInFpH2sg/DoAtcdCoTWYy2e3bvXVFE9o9337ewy4el4/Ip
-	IO1JbPktWYfKPLOoSSDVjfB231Ixg6D1SHX7Yhh11no/Uwg3c6rxV6Gu8M7R5oA2/qN5
-	x9PoK7DjPu49vIVcV+mye4KNWNoGwuBChkIVgzNnB8tjWDUJfVB9Quw+rG2jhlB1sWfb
-	AzbWKO7CZhaRQuWVFRdR7niO/oP16UU7hjhccvhzvb6388UMHQG5lMkaBvlp+FFAgXin
-	Cu3ZoKhM5JHeDOMRNrBsQUt2nAIW6oRl4KRzIodoHy8emFNm5ch5uQ74JlFhbJ2OuCH/
-	MTkg==
-X-Received: by 10.236.115.234 with SMTP id e70mr12806885yhh.121.1373307292127; 
-	Mon, 08 Jul 2013 11:14:52 -0700 (PDT)
-Received: from bill-the-cat (cpe-065-184-250-089.ec.res.rr.com.
-	[65.184.250.89])
-	by mx.google.com with ESMTPSA id m5sm38591434yha.23.2013.07.08.11.14.50
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 08 Jul 2013 11:14:51 -0700 (PDT)
-Sender: Tom Rini <tom.rini@gmail.com>
-Date: Mon, 8 Jul 2013 14:14:57 -0400
-From: Tom Rini <trini@ti.com>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-Message-ID: <20130708181457.GQ16630@bill-the-cat>
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D3381E013EC
+	for <meta-ti@yoctoproject.org>; Mon,  8 Jul 2013 11:31:02 -0700 (PDT)
+Received: from [174.115.5.73] (port=55208 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1UwGDC-0007T5-EM; Mon, 08 Jul 2013 14:30:58 -0400
+Date: Mon, 8 Jul 2013 14:30:47 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: Tom Rini <trini@ti.com>
+In-Reply-To: <20130708181457.GQ16630@bill-the-cat>
+Message-ID: <alpine.DEB.2.02.1307081427240.10955@oneiric>
 References: <alpine.DEB.2.02.1307070755370.23001@oneiric>
+	<20130708181457.GQ16630@bill-the-cat>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.02.1307070755370.23001@oneiric>
-Organization: Texas Instruments
-User-Agent: Mutt/1.5.21 (2010-09-15)
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
 Subject: Re: proper recipe to build for BBB using the meta-ti layer?
 X-BeenThere: meta-ti@yoctoproject.org
@@ -47,28 +40,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2013 18:14:53 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 08 Jul 2013 18:31:03 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Sun, Jul 07, 2013 at 08:00:05AM -0400, Robert P. J. Day wrote:
+On Mon, 8 Jul 2013, Tom Rini wrote:
 
-> U-Boot SPL 2013.01.01 (Jul 06 2013 - 18:41:10)
-> OMAP SD/MMC: 0
-> ** Partition 1 not valid on device 0 **
-> spl: fat register err - -1
-> ### ERROR ### Please RESET the board ###
-> 
->   this is exactly the same SD card i was using with meta-beagleboard
-> generated image files. everything else about the build seemed fine.
-> can someone verify a known good recipe for this? is there
-> something different about the creation of the SD card? i'm currently
-> doing another build from scratch to see if i messed anything up.
+> On Sun, Jul 07, 2013 at 08:00:05AM -0400, Robert P. J. Day wrote:
+>
+> > U-Boot SPL 2013.01.01 (Jul 06 2013 - 18:41:10)
+> > OMAP SD/MMC: 0
+> > ** Partition 1 not valid on device 0 **
+> > spl: fat register err - -1
+> > ### ERROR ### Please RESET the board ###
+> >
+> >   this is exactly the same SD card i was using with meta-beagleboard
+> > generated image files. everything else about the build seemed fine.
+> > can someone verify a known good recipe for this? is there
+> > something different about the creation of the SD card? i'm currently
+> > doing another build from scratch to see if i messed anything up.
+>
+> Can you see if backporting
+> http://git.denx.de/?p=u-boot.git;a=commitdiff;h=9d956e0fefa39ba49250f61e3c7aa3dadafdb7fd
+> fixes the problem?  It should apply cleanly.  Thanks!
 
-Can you see if backporting
-http://git.denx.de/?p=u-boot.git;a=commitdiff;h=9d956e0fefa39ba49250f61e3c7aa3dadafdb7fd
-fixes the problem?  It should apply cleanly.  Thanks!
+  i'll give that a shot this evening and let you know. just to recap,
+i used OE and the meta-beagleboard layer to build for my BBB and
+copied to the first (bootable FAT) partition nothing but the MLO and
+u-boot.img images, and that let me boot to u-boot, which is all i was
+after.
+
+ i then did an OE build using meta-ti, copied *those* generated MLO
+and u-boot.img files to the same SD card, and promptly got the error
+above. so that would suggest that the meta-beagleboard layer has
+something equivalent to that patch, while meta-ti doesn't.
+
+  anyway, will report back with results ASAP.
+
+rday
 
 -- 
-Tom
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
