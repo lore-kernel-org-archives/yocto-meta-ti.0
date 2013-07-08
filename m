@@ -1,25 +1,57 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from bec-systems.com (u15414263.onlinehome-server.com
-	[74.208.70.121])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E8BDE01440
-	for <meta-ti@yoctoproject.org>; Mon,  8 Jul 2013 08:42:36 -0700 (PDT)
-Received: from oh-67-76-203-50.sta.embarqhsd.net ([67.76.203.50]
-	helo=happy.bec-systems.com)
-	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
-	id 1UwDVr-0008J1-La; Mon, 08 Jul 2013 11:38:12 -0400
+Return-Path: <will.frazer@eurotech.com>
+Received: from co1outboundpool.messaging.microsoft.com
+	(co1ehsobe001.messaging.microsoft.com [216.32.180.184])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 10E8EE013EC
+	for <meta-ti@yoctoproject.org>; Mon,  8 Jul 2013 10:24:45 -0700 (PDT)
+Received: from mail174-co1-R.bigfish.com (10.243.78.239) by
+	CO1EHSOBE040.bigfish.com (10.243.66.105) with Microsoft SMTP Server id
+	14.1.225.22; Mon, 8 Jul 2013 17:24:44 +0000
+Received: from mail174-co1 (localhost [127.0.0.1])	by
+	mail174-co1-R.bigfish.com (Postfix) with ESMTP id 92B021002DF	for
+	<meta-ti@yoctoproject.org>; Mon,  8 Jul 2013 17:24:44 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:157.56.248.53; KIP:(null); UIP:(null); IPV:NLI;
+	H:AMSPRD0510HT001.eurprd05.prod.outlook.com; RD:none; EFVD:NLI
+X-SpamScore: 1
+X-BigFish: PS1(z21eIzc85fhzz1f42h1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz1d7338h17326ah18c673h8275bh8275dhz2dh2a8h668h839hd24hf0ah1288h12a5h12bdh137ah1441h1504h1537h153bh162dh1631h1758h18e1h1946h19b5h19ceh1ad9h1b0ah1bceh1d07h1d0ch1d2eh1d3fh1de9h1dfeh1dffh1e1dh9a9j1155h)
+X-Forefront-Antispam-Report-Untrusted: SFV:NSPM;
+	SFS:(199002)(5423002)(189002)(51856001)(77982001)(33646001)(76576001)(80022001)(16406001)(54356001)(63696002)(49866001)(81542001)(69226001)(74316001)(47446002)(47976001)(15202345003)(47736001)(74502001)(76482001)(74876001)(56776001)(16236675002)(53806001)(79102001)(74662001)(50986001)(4396001)(54316002)(31966008)(77096001)(81342001)(76786001)(76796001)(19300405004)(74366001)(46102001)(59766001)(66066001)(83072001)(74706001)(56816003)(65816001)(24736002);
+	DIR:OUT; SFP:; SCL:1; SRVR:AMXPR05MB087;
+	H:AMXPR05MB085.eurprd05.prod.outlook.com; RD:InfoNoRecords; A:1;
+	MX:1; LANG:en; 
+Received: from mail174-co1 (localhost.localdomain [127.0.0.1]) by mail174-co1
+	(MessageSwitch) id 1373304282519264_28775;
+	Mon,  8 Jul 2013 17:24:42 +0000 (UTC)
+Received: from CO1EHSMHS017.bigfish.com (unknown [10.243.78.233])	by
+	mail174-co1.bigfish.com (Postfix) with ESMTP id 7CB935C00CA	for
+	<meta-ti@yoctoproject.org>; Mon,  8 Jul 2013 17:24:42 +0000 (UTC)
+Received: from AMSPRD0510HT001.eurprd05.prod.outlook.com (157.56.248.53) by
+	CO1EHSMHS017.bigfish.com (10.243.66.27) with Microsoft SMTP Server
+	(TLS) id 14.1.225.23; Mon, 8 Jul 2013 17:24:42 +0000
+Received: from AMXPR05MB087.eurprd05.prod.outlook.com (10.242.70.24) by
+	AMSPRD0510HT001.eurprd05.prod.outlook.com (10.255.42.36) with Microsoft
+	SMTP Server (TLS) id 14.16.329.3; Mon, 8 Jul 2013 17:24:26 +0000
+Received: from AMXPR05MB085.eurprd05.prod.outlook.com (10.242.70.17) by
+	AMXPR05MB087.eurprd05.prod.outlook.com (10.242.70.24) with Microsoft
+	SMTP Server (TLS) id 15.0.702.21; Mon, 8 Jul 2013 17:24:25 +0000
+Received: from AMXPR05MB085.eurprd05.prod.outlook.com ([169.254.8.165]) by
+	AMXPR05MB085.eurprd05.prod.outlook.com ([169.254.8.165]) with mapi id
+	15.00.0702.005; Mon, 8 Jul 2013 17:24:24 +0000
+From: "Frazer, Will" <will.frazer@eurotech.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti]  booting 2.6.32 kernel and rootfs
+Thread-Index: AQHOef+08U1Td/7tqUeS0p4q1LMjqZlbCF2g
+Date: Mon, 8 Jul 2013 17:24:24 +0000
+Message-ID: <68f4dfd4107847b8b02ec486eff4e492@AMXPR05MB085.eurprd05.prod.outlook.com>
+References: <CAGX3a9_Ykh8bUQEb3KVFah+rpHck=2V8bsjVS2yyy3_RAWhamA@mail.gmail.com>
+In-Reply-To: <CAGX3a9_Ykh8bUQEb3KVFah+rpHck=2V8bsjVS2yyy3_RAWhamA@mail.gmail.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [164.40.222.34]
+x-forefront-prvs: 09011458FC
 MIME-Version: 1.0
-X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Date: Mon, 08 Jul 2013 15:42:17 GMT
-Message-Id: <1373298137671.ff0ccee4@Nodemailer>
-From: cliff.brake@gmail.com
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
-X-Spam_score: -2.9
-X-Spam_score_int: -28
-X-Spam_bar: --
-Subject: OE Changelog since 2013-06-30 until 2013-07-07
+X-OriginatorOrg: eurotech.com
+Subject: Re: booting 2.6.32 kernel and rootfs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,427 +64,426 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2013 15:42:37 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Mon, 08 Jul 2013 17:24:48 -0000
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_68f4dfd4107847b8b02ec486eff4e492AMXPR05MB085eurprd05pro_"
+
+--_000_68f4dfd4107847b8b02ec486eff4e492AMXPR05MB085eurprd05pro_
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Changelog since 2013-06-30 until 2013-07-07.  Projects included in this =
-report:
-
-bitbake: git://git.openembedded.org/bitbake
-openembedded-core: git://git.openembedded.org/openembedded-core
-meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
-meta-arago: git://arago-project.org/git/meta-arago.git
-meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
-meta-browser: git://github.com/OSSystems/meta-browser.git
-meta-bug: git://github.com/buglabs/meta-bug.git
-meta-chicken: git://github.com/OSSystems/meta-chicken
-meta-efikamx: git://github.com/kraj/meta-efikamx.git
-meta-ettus: http://github.com/koenkooi/meta-ettus.git
-meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
-meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
-meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
-meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
-meta-gumstix: git://github.com/gumstix/meta-gumstix.git
-meta-gumstix-community: =
-git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
-meta-handheld: git://git.openembedded.org/meta-handheld
-meta-igep: http://github.com/ebutera/meta-igep.git
-meta-intel: git://git.yoctoproject.org/meta-intel
-meta-ivi: git://git.yoctoproject.org/meta-ivi
-meta-java: git://github.com/woglinde/meta-java
-meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
-meta-micro: git://git.openembedded.org/meta-micro
-meta-mono: git://git.yoctoproject.org/meta-mono.git
-meta-netbookpro: git://github.com/tworaz/meta-netbookpro
-meta-nslu2: git://github.com/kraj/meta-nslu2
-meta-opie: git://git.openembedded.org/meta-opie
-meta-qt3: git://git.yoctoproject.org/meta-qt3
-meta-qt5: git://github.com/meta-qt5/meta-qt5.git
-meta-slugos: git://github.com/kraj/meta-slugos
-meta-systemd: git://git.yoctoproject.org/meta-systemd
-meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
-meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
-meta-ti: git://git.yoctoproject.org/meta-ti
-meta-webos: git://github.com/openwebos/meta-webos.git
-meta-xilinx: git://git.yoctoproject.org/meta-xilinx
-meta-yocto: git://git.yoctoproject.org/meta-yocto
-openembedded: git://git.openembedded.org/openembedded
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for bitbake:
-
-Cristiana Voicu (1):
-=20=20hob: save button from settings called a nonexisting method
-
-Valentin Popa (1):
-=20=20HOB:Proper handle of SIGINT
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded-core:
-
-Chen Qi (4):
-=20=20udev-cache: take a read-only rootfs into consideration
-=20=20base-files: remove the unnecessary /media/xxx directories
-=20=20busybox: fix the on-target upgrade problem
-=20=20busybox: upgrade to stable 1.21.1
-
-Elizabeth Flanagan (1):
-=20=20layer.conf: Bumping LAYERVERSION_core
-
-Emilia Ciobanu (1):
-=20=20mkelfimage: switch to git repository
-
-Hongxu Jia (1):
-=20=20qt-mobility: fix build in the absence of xvideo
-
-Ionut Radu (12):
-=20=20libxext: Update from 1.3.1 to 1.3.2
-=20=20libxcursor: Update from 1.1.13 to 1.1.14
-=20=20libxinerama: Updated from 1.1.2 to 1.1.3
-=20=20libxau: Updated from 1.0.7 to 1.0.8
-=20=20libxres: Updated from 1.0.6 to 1.0.7
-=20=20libxv: Updated from 1.0.7 to 1.0.8
-=20=20libxtst: Updated from 1.2.1 to 1.2.2
-=20=20libxxf86vm: Updated from 1.1.2 to 1.1.3
-=20=20libxfixes: Updated from 5.0 to 5.0.1
-=20=20libxcb: Updated from 1.9 to 1.9.1
-=20=20apt: Updated from 0.9.8.1 to 0.9.8.2
-=20=20gpgme: Updated from 1.4.1 to 1.4.2
-
-Jackie Huang (2):
-=20=20init-ifupdown: set kernel parameters firstly
-=20=20udev-extraconf: blacklist /dev/dm-*
-
-Joe MacDonald (1):
-=20=20sstate.bbclass: Add an extra check for sstate_mirrors
-
-Jonathan Liu (3):
-=20=20qt4e.bbclass: export OE_QMAKE_QT_CONFIG
-=20=20xf86-video-modesetting: upgrade to 0.8.0
-=20=20qt4: upgrade to 4.8.5
-
-Jukka Rissanen (1):
-=20=20connman: Set the VPN client program paths
-
-Khem Raj (8):
-=20=20uclibc: Update to latest git/master version
-=20=20uclibc: Remove 0.9.33 recipes
-=20=20bison: Delete unused patch
-=20=20binutils: Backport emulation template fixes
-=20=20eglibc: Add 2.18 recipes
-=20=20eglibc: Drop libc-libm-big
-=20=20distro/conf: Drop libc-libm-big
-=20=20tcmode-default: Pin eglibc to 2.18
-
-Marc Ferland (1):
-=20=20openssh: fix initscript restart command
-
-Martin Jansa (4):
-=20=20mesa: Improve gallium PACKAGECONFIG options
-=20=20mesa: fix pipe_loader_sw build without libx11
-=20=20mesa: bump SRCREV in git recipe, refresh patches
-=20=20mesa: remove drirc file
-
-Mihai Prica (1):
-=20=20insane.bbclass: Added QA warning for shipping /usr/share/info/dir
-
-Otavio Salvador (4):
-=20=20lttng-tools: Update to 2.2.0 based release
-=20=20lttng-modules: Update to 2.2.0 based release
-=20=20lttng-ust: Update to 2.2.0 based release
-=20=20babeltrace: Update to 1.1.1 based release
-
-Paul Eggleton (16):
-=20=20python-async: add recipe
-=20=20python-smmap: add recipe
-=20=20python-gitdb: add recipe
-=20=20python-git: add recipe
-=20=20buildtools-tarball: add python-git
-=20=20packagegroup-self-hosted: add python-git
-=20=20lib/oe/lsb.py: fall back to /etc/os-release for host distro ID
-=20=20linux-firmware: be consistent with license package naming
-=20=20linux-firmware: fix ralink license file name
-=20=20python-native: add python-codecs-native to RPROVIDES
-=20=20lttng-modules: allow building without tracepoints enabled in kernel
-=20=20rpm: add wrapper for debugedit executable
-=20=20classes/package: print command output when commands fail
-=20=20ghostscript: fix patch failure with some versions of patch
-=20=20classes/insane: fix libdir check regexes
-=20=20qt4: disable qmeegographicssystemhelper
-
-Richard Purdie (1):
-=20=20qt4: Take PV increase opportunity to drop PR
-
-Riku Voipio (1):
-=20=20webkit-gtk: add aarch64 support
-
-Ross Burton (2):
-=20=20clutter: fix out-of-tree builds
-=20=20seperatebuilddir: cogl and clutter build out of tree
-
-Roy.Li (1):
-=20=20sysstat: backport a patch to fix a parallel building error
-
-Saul Wold (14):
-=20=20packagegroup-core-basic: remove hardcode udev
-=20=20udev: Add RRECOMMENDS for udev-cache to enable the cache
-=20=20local.conf.sample.extended: Add example line for enabling security =
-flags
-=20=20security_flags: Add the compiler and linker flags that enhance =
-security
-=20=20mc: Don't remove libdir and split helpers into packages
-=20=20packagegroups: Update for split mc packages
-=20=20packagegroup-core-basic: Only build libpam if it's enabled
-=20=20util-linux: disable runuser by default since it depends on PAM
-=20=20help2man: Update to 1.43.3
-=20=20boost: Update to 1.54
-=20=20dtc: Update to  1.4.0 Git Tag
-=20=20swabber: Update to latest head
-=20=20remake: Update to latest 3.82_dbg-0.9 Tag
-=20=20resolvconf: Update to 1.72
-
-Tyler Hall (2):
-=20=20terminal: Run command using a wrapper script
-=20=20TmuxRunning: handle multi-word commands
-
-victor (1):
-=20=20apr_cv_mutex_recursive=3Dyes added to apr_1.4.6.bb to make rosnodes =
-work
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-openembedded:
-
-Martin Jansa (1):
-=20=20vsftpd: add missing dependency on openssl
-
-Otavio Salvador (1):
-=20=20busybox: Follow OE-Core update to 1.12.1 version
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-angstrom:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-arago:
-
-Denys Dmytriyenko (1):
-=20=20arago-test: define system test packagegroup and image
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-beagleboard:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-browser:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-bug:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-chicken:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-efikamx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ettus:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm:
-
-Daiane Angolini (2):
-=20=20linux-imx (2.6.35.3): Add SSI3 address and AUDMUX pin fixes
-=20=20linux-imx (3.0.35): Add fix pll4 set_rate callback
-
-Otavio Salvador (5):
-=20=20imx-test.inc: Whitelist package QA warning/errors
-=20=20libfslparser: Whitelist package QA warning/errors
-=20=20imx28evk: Remove duplicated assignment of KERNEL_IMAGETYPE
-=20=20perf: Disable FPU tune for i.MX5 SoCs to workaround GCC ICE
-=20=20qt4: Follow OE-Core upgrade to 4.8.5 version
-
-Philip Craig (1):
-=20=20gpu-viv-bin-mx6q.inc: fix libEGL and libGLESv2 installation
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm-extra:
-
-Marek Vasut (2):
-=20=20linux-denx: Add linux-denx repository
-=20=20m53evk: Add DENX M53EVK support
-
-Otavio Salvador (2):
-=20=20imx6qsabrelite: Remove specific setup and turn it as an alias to =
-Nitrogen6X
-=20=20linux-wandboard: Update to 3.0.35-4.0.0 based kernel
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-ppc:
-
-Chunrong Guo (1):
-=20=20Remove 85xx NPI/Boards, P102x combo board and P1023RDS board
-
-Ting Liu (7):
-=20=20p1020rdb: update machine conf to use new -pd revision
-=20=20u-boot: not use =3D=3D to compatible with dash
-=20=20usdpaa: set MACHINE_ARCH specific, same with dependency fmc
-=20=20add custom-licenses dir for freescale EULA
-=20=20fix Freescale EULA warning
-=20=20testfloat: mark as fsl e500v2 machine only
-=20=20busybox: drop bbappend (only set PRINC) as oe-core upgrade
-
-Zhenhua Luo (12):
-=20=20linux-qoriq-sdk(-headers): upgrade to the version of sdk-1.4
-=20=20u-boot: upgrade to the version of sdk1.4
-=20=20boot-format: update SHA for sdk-1.4
-=20=20eth-config: upgrade to sha of sdk-1.4
-=20=20hv-cfg: upgrade to the SHA of sdk-1.4
-=20=20fmlib: upgrade to the SHA of sdk-1.4
-=20=20fmc: upgrade to the SHA of sdk-1.4
-=20=20fm-ucode: upgrade to the SHA of sdk-1.4
-=20=20hypervisor: upgrade to the SHA of sdk-1.4 and add hypertrk submodule
-=20=20rcw: upgrade to the version of sdk-1.4
-=20=20usdpaa: upgrade to the version of sdk-1.4
-=20=20libedit: pull in from meta-oe as it is needed by usdpaa
-
-Zongchun Yu (1):
-=20=20flib:Fix flib not found in the base feeds error
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-guacamayo:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix-community:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-handheld:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-igep:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-intel:
-
-Thibault GUITTET (1):
-=20=20lms7: handle different host setups
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ivi:
-
-Holger Behrens (2):
-=20=20common-api-c++: added CommonAPI runtime
-=20=20common-api-c++-dbus: added CommonAPI D-Bus binding
-
-Noor (2):
-=20=20poky-ivi-systemd.conf: Remove sysvinit from DISTRO_FEATURES.
-=20=20dbus: Stop removing sysv specific things.
-
-Sergey Matyukevich (1):
-=20=20connman: do not delete init scripts in bbappend
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-java:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-kde:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-micro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-mono:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-netbookpro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-nslu2:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-opie:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt3:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt5:
-
-Martin Jansa (2):
-=20=20qtwayland: Add xproto dependency together with libxkbcommon
-=20=20qmake5: Add trailing space in DEPENDS_prepend instead of =
-QT5TOOLSDEPENDS
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-slugos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-systemd:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-raspberrypi:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-smartphone:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ti:
-
-Franklin S. Cooper Jr (6):
-=20=20linux-am335x-psp: Update to PSP release 04.06.00.11
-=20=20linux-am335x-psp: Enable USB with DMA by default
-=20=20linux-am335x-psp: Add patch to enable SR on PG 2.x boards.
-=20=20am33x-cm3: Add support for PG 2.1 silicon.
-=20=20linux-am335x-psp: Add Beaglebone Black support
-=20=20linux-am335x-psp: Add 1 GHZ Support for BBB
-
-Siddharth Heroor (3):
-=20=20libdrm: Add GLSDK specific staging tree for omap-a15
-=20=20linux-ti-glsdk: update to latest fixes
-=20=20u-boot-glsdk: add GLSDK Staging tree
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-webos:
-
-Martin Jansa (2):
-=20=20boost: Limit PARALLEL_MAKE to -j 64
-=20=20gzip: Remove unneeded bbappend
-
-Mikko Levonmaa (1):
-=20=20packagegroup-webos-extended: Make keyboard-efigs configurable
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-xilinx:
-
-Sipke Vriend (1):
-=20=20Add linux-yocto 3.8 targets     Add linux-yocto-tiny and linux-yocto =
-standar
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-Chen Qi (1):
-=20=20busybox.bbappend: upgrade to 1.21.1
-
-Khem Raj (1):
-=20=20distro/conf: Drop libc-libm-big
-
-Paul Eggleton (1):
-=20=20poky.conf: move libdir QA check to WARN_QA
-
-Saul Wold (2):
-=20=20local.conf.sample.extended: Add example line for enabling security =
-flags
-=20=20Upstream_tracking: mark package as not upgradable due to PRS issues
-
-Tom Zanussi (2):
-=20=20yocto-bsp: filter out 'layer' from arch list
-=20=20yocto-kernel: enforce exact match for BBLAYERS
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded:
-
-
-
+Sounds like it is booting OK but the console is wrong.
+
+Check into why you are getting this message also
+** Unable to read "uEnv.txt" from mmc 0:1 **
+as the kernel args ought to get read from there:
+
+If they are not loaded then the defaults in the kernel will get used. You m=
+ight want to check these also.
+Not sure about your board/setup however try using /dev/ttyO0. You can test =
+this from U-Boot also by altering the env vars
+
+From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
+.org] On Behalf Of Sudhangathan B S
+Sent: 06 July 2013 05:16
+To: meta-ti@yoctoproject.org
+Subject: [meta-ti] booting 2.6.32 kernel and rootfs
+
+On my way to integrate Leopard imaging camera drivers into the beagle board=
+ image, I successfully built a minimal image with necessary camera drivers =
+in the image, this is all after I integrated meta-ti layer with yocto.
+I finally put the files in the card and powered up the beagle board.
+
+This is what i'm getting..
+
+U-Boot SPL 2011.09-01172-gfdbe8b9-dirty (Jul 05 2013 - 20:38:26)
+Texas Instruments Revision detection unimplemented
+OMAP SD/MMC: 0
+reading u-boot.img
+reading u-boot.img
+
+
+U-Boot 2011.09-01172-gfdbe8b9-dirty (Jul 05 2013 - 20:38:26)
+
+OMAP36XX/37XX-GP ES1.2, CPU-OPP2, L3-165MHz, Max CPU Clock 1 Ghz
+OMAP3 Beagle board + LPDDR/NAND
+I2C:   ready
+DRAM:  512 MiB
+WARNING: Caches not enabled
+NAND:  0 MiB
+MMC:   OMAP SD/MMC: 0
+*** Warning - readenv() failed, using default environment
+
+In:    serial
+Out:   serial
+Err:   serial
+Beagle xM Rev C
+No EEPROM on expansion board
+No EEPROM on expansion board
+Die ID #689000029ff80000016842c81202f014
+Net:   Net Initialization Skipped
+No ethernet found.
+Hit any key to stop autoboot:  0
+The user button is currently NOT pressed.
+SD/MMC found on device 0
+reading uEnv.txt
+
+** Unable to read "uEnv.txt" from mmc 0:1 **
+Loading file "/boot/uImage" from mmc device 0:2 (xxa2)
+3148568 bytes read
+Booting from mmc ...
+## Booting kernel from Legacy Image at 80200000 ...
+   Image Name:   Linux-2.6.32
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    3148504 Bytes =3D 3 MiB
+   Load Address: 80008000
+   Entry Point:  80008000
+   Verifying Checksum ... OK
+   Loading Kernel Image ... OK
+OK
+
+Starting kernel ...
+
+Uncompressing Linux........................................................=
+...........................................................................=
+......................................................................... d=
+one, booting the kernel.
+
+AND NOTHING AFTER THIS... Any clue how to proceed..?
+
+I posted in this mailing list, just because i'm using the meta-ti layer. Pl=
+ease do let me know if there is another one..!
+
+Best,
+---------------------------------
+Sudhangathan BS
+Ph:(+91) 9731-905-205
+---------------------------------
+
+--_000_68f4dfd4107847b8b02ec486eff4e492AMXPR05MB085eurprd05pro_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-reply;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri","sans-serif";
+	mso-fareast-language:EN-US;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-GB" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">Sounds like it is booting=
+ OK but the console is wrong.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">Check into why you are ge=
+tting this message also
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal">** Unable to read &quot;uEnv.txt&quot; from mmc 0:1 =
+**<o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">as the kernel args ought =
+to get read from there:<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">If they are not loaded th=
+en the defaults in the kernel will get used. You might want to check these =
+also.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">Not sure about your board=
+/setup however try using /dev/ttyO0. You can test this from U-Boot also by =
+altering the env vars<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+/p>
+<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm =
+4.0pt">
+<div>
+<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"MsoNormal"><b><span lang=3D"EN-US" style=3D"font-size:10.0pt;fo=
+nt-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span =
+lang=3D"EN-US" style=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,&qu=
+ot;sans-serif&quot;"> meta-ti-bounces@yoctoproject.org [mailto:meta-ti-boun=
+ces@yoctoproject.org]
+<b>On Behalf Of </b>Sudhangathan B S<br>
+<b>Sent:</b> 06 July 2013 05:16<br>
+<b>To:</b> meta-ti@yoctoproject.org<br>
+<b>Subject:</b> [meta-ti] booting 2.6.32 kernel and rootfs<o:p></o:p></span=
+></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class=3D"MsoNormal">On my way to integrate Leopard imaging camera driver=
+s into the beagle board image, I successfully built a minimal image with ne=
+cessary camera drivers in the image, this is all after I integrated meta-ti=
+ layer with yocto.<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal">I finally put the files in the card and powered up t=
+he beagle board.<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">This is what i'm getting..<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<div>
+<p class=3D"MsoNormal">U-Boot SPL 2011.09-01172-gfdbe8b9-dirty (Jul 05 2013=
+ - 20:38:26)<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Texas Instruments Revision detection unimplemented<o=
+:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">OMAP SD/MMC: 0<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">reading u-boot.img<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">reading u-boot.img<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">U-Boot 2011.09-01172-gfdbe8b9-dirty (Jul 05 2013 - 2=
+0:38:26)<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">OMAP36XX/37XX-GP ES1.2, CPU-OPP2, L3-165MHz, Max CPU=
+ Clock 1 Ghz<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">OMAP3 Beagle board &#43; LPDDR/NAND<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">I2C: &nbsp; ready<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">DRAM: &nbsp;512 MiB<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">WARNING: Caches not enabled<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">NAND: &nbsp;0 MiB<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">MMC: &nbsp; OMAP SD/MMC: 0<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">*** Warning - readenv() failed, using default enviro=
+nment<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">In: &nbsp; &nbsp;serial<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Out: &nbsp; serial<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Err: &nbsp; serial<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Beagle xM Rev C<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">No EEPROM on expansion board<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">No EEPROM on expansion board<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Die ID #689000029ff80000016842c81202f014<o:p></o:p><=
+/p>
+</div>
+<div>
+<p class=3D"MsoNormal">Net: &nbsp; Net Initialization Skipped<o:p></o:p></p=
+>
+</div>
+<div>
+<p class=3D"MsoNormal">No ethernet found.<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Hit any key to stop autoboot: &nbsp;0&nbsp;<o:p></o:=
+p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">The user button is currently NOT pressed.<o:p></o:p>=
+</p>
+</div>
+<div>
+<p class=3D"MsoNormal">SD/MMC found on device 0<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">reading uEnv.txt<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">** Unable to read &quot;uEnv.txt&quot; from mmc 0:1 =
+**<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Loading file &quot;/boot/uImage&quot; from mmc devic=
+e 0:2 (xxa2)<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">3148568 bytes read<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Booting from mmc ...<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">## Booting kernel from Legacy Image at 80200000 ...<=
+o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">&nbsp; &nbsp;Image Name: &nbsp; Linux-2.6.32<o:p></o=
+:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">&nbsp; &nbsp;Image Type: &nbsp; ARM Linux Kernel Ima=
+ge (uncompressed)<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">&nbsp; &nbsp;Data Size: &nbsp; &nbsp;3148504 Bytes =
+=3D 3 MiB<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">&nbsp; &nbsp;Load Address: 80008000<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">&nbsp; &nbsp;Entry Point: &nbsp;80008000<o:p></o:p><=
+/p>
+</div>
+<div>
+<p class=3D"MsoNormal">&nbsp; &nbsp;Verifying Checksum ... OK<o:p></o:p></p=
+>
+</div>
+<div>
+<p class=3D"MsoNormal">&nbsp; &nbsp;Loading Kernel Image ... OK<o:p></o:p><=
+/p>
+</div>
+<div>
+<p class=3D"MsoNormal">OK<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Starting kernel ...<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Uncompressing Linux.................................=
+...........................................................................=
+...........................................................................=
+..................... done, booting
+ the kernel.<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">AND NOTHING AFTER THIS... Any clue how to proceed..?=
+&nbsp;<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">I posted in this mailing list, just because i'm usin=
+g the meta-ti layer. Please do let me know if there is another one..!<o:p><=
+/o:p></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Best,<br clear=3D"all">
+<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal">---------------------------------<br>
+Sudhangathan BS<br>
+Ph:(&#43;91) 9731-905-205<br>
+---------------------------------<o:p></o:p></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+--_000_68f4dfd4107847b8b02ec486eff4e492AMXPR05MB085eurprd05pro_--
