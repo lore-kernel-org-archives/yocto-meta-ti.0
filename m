@@ -1,32 +1,40 @@
-Return-Path: <robertcnelson@gmail.com>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ADDDAE013EC
-	for <meta-ti@yoctoproject.org>; Mon,  8 Jul 2013 10:58:59 -0700 (PDT)
-Received: by mail-ie0-f177.google.com with SMTP id aq17so10128335iec.8
-	for <meta-ti@yoctoproject.org>; Mon, 08 Jul 2013 10:58:58 -0700 (PDT)
+Return-Path: <tom.rini@gmail.com>
+Received: from mail-gg0-f182.google.com (mail-gg0-f182.google.com
+	[209.85.161.182])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E479E013EC
+	for <meta-ti@yoctoproject.org>; Mon,  8 Jul 2013 11:14:53 -0700 (PDT)
+Received: by mail-gg0-f182.google.com with SMTP id f1so1710636ggn.41
+	for <meta-ti@yoctoproject.org>; Mon, 08 Jul 2013 11:14:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=YjPAzxayrn7VWl1iGLVLZWxHoHM+v9qSsGgZCwN6HiA=;
-	b=GynyoXU7kZqBMogUnr9DcjwdWmspjZHg60F+lrPQb7tgxEO2uYCF93sIMdGx5wX2w3
-	MbmFz7xSIoIRhESKu3aw4Fu/XmQRF4EOrqi8fmDHgCuXRzSv+/he85UruiOZhH4cfEOp
-	Tksv6I5AqVQZCUbXGWo2bE4XzT/F4TjPAuCKuevR4+vX2rOtHt886s2vjKJFR6tGcOIg
-	Savix/pfZta6yvMso92q3Z4wxvuUQOPnjqizAfduQd5RtySj0UR+Fn/by9Kp2fRSoxwt
-	j6OExNSVRhy1pa3x7TJShdQHt5YD8N/1OReIGe21GGxXhCN0PmzEXMfxCyaQGCQLSCZJ
-	ATJg==
+	h=sender:date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=YW+FA7om2GnD64hIP17Csi0PAW/SHrANJdUxrphc/k8=;
+	b=eVh+dEKY56oSpuwNUCwYInFpH2sg/DoAtcdCoTWYy2e3bvXVFE9o9337ewy4el4/Ip
+	IO1JbPktWYfKPLOoSSDVjfB231Ixg6D1SHX7Yhh11no/Uwg3c6rxV6Gu8M7R5oA2/qN5
+	x9PoK7DjPu49vIVcV+mye4KNWNoGwuBChkIVgzNnB8tjWDUJfVB9Quw+rG2jhlB1sWfb
+	AzbWKO7CZhaRQuWVFRdR7niO/oP16UU7hjhccvhzvb6388UMHQG5lMkaBvlp+FFAgXin
+	Cu3ZoKhM5JHeDOMRNrBsQUt2nAIW6oRl4KRzIodoHy8emFNm5ch5uQ74JlFhbJ2OuCH/
+	MTkg==
+X-Received: by 10.236.115.234 with SMTP id e70mr12806885yhh.121.1373307292127; 
+	Mon, 08 Jul 2013 11:14:52 -0700 (PDT)
+Received: from bill-the-cat (cpe-065-184-250-089.ec.res.rr.com.
+	[65.184.250.89])
+	by mx.google.com with ESMTPSA id m5sm38591434yha.23.2013.07.08.11.14.50
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 08 Jul 2013 11:14:51 -0700 (PDT)
+Sender: Tom Rini <tom.rini@gmail.com>
+Date: Mon, 8 Jul 2013 14:14:57 -0400
+From: Tom Rini <trini@ti.com>
+To: "Robert P. J. Day" <rpjday@crashcourse.ca>
+Message-ID: <20130708181457.GQ16630@bill-the-cat>
+References: <alpine.DEB.2.02.1307070755370.23001@oneiric>
 MIME-Version: 1.0
-X-Received: by 10.50.128.36 with SMTP id nl4mr9038166igb.38.1373306338673;
-	Mon, 08 Jul 2013 10:58:58 -0700 (PDT)
-Received: by 10.64.252.8 with HTTP; Mon, 8 Jul 2013 10:58:58 -0700 (PDT)
-In-Reply-To: <CAGX3a9_Ykh8bUQEb3KVFah+rpHck=2V8bsjVS2yyy3_RAWhamA@mail.gmail.com>
-References: <CAGX3a9_Ykh8bUQEb3KVFah+rpHck=2V8bsjVS2yyy3_RAWhamA@mail.gmail.com>
-Date: Mon, 8 Jul 2013 12:58:58 -0500
-Message-ID: <CAOCHtYgPdfsXQnmCMT0t1hETrtocmV=AEpXdH_gd6ukw-70_sg@mail.gmail.com>
-From: Robert Nelson <robertcnelson@gmail.com>
-To: Sudhangathan B S <sudhangathan@gmail.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: booting 2.6.32 kernel and rootfs
+In-Reply-To: <alpine.DEB.2.02.1307070755370.23001@oneiric>
+Organization: Texas Instruments
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: Re: proper recipe to build for BBB using the meta-ti layer?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,79 +47,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jul 2013 17:58:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 08 Jul 2013 18:14:53 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, Jul 5, 2013 at 11:16 PM, Sudhangathan B S
-<sudhangathan@gmail.com> wrote:
-> On my way to integrate Leopard imaging camera drivers into the beagle board
-> image, I successfully built a minimal image with necessary camera drivers in
-> the image, this is all after I integrated meta-ti layer with yocto.
-> I finally put the files in the card and powered up the beagle board.
->
-> This is what i'm getting..
->
-> U-Boot SPL 2011.09-01172-gfdbe8b9-dirty (Jul 05 2013 - 20:38:26)
-> Texas Instruments Revision detection unimplemented
+On Sun, Jul 07, 2013 at 08:00:05AM -0400, Robert P. J. Day wrote:
+
+> U-Boot SPL 2013.01.01 (Jul 06 2013 - 18:41:10)
 > OMAP SD/MMC: 0
-> reading u-boot.img
-> reading u-boot.img
->
->
-> U-Boot 2011.09-01172-gfdbe8b9-dirty (Jul 05 2013 - 20:38:26)
->
-> OMAP36XX/37XX-GP ES1.2, CPU-OPP2, L3-165MHz, Max CPU Clock 1 Ghz
-> OMAP3 Beagle board + LPDDR/NAND
-> I2C:   ready
-> DRAM:  512 MiB
-> WARNING: Caches not enabled
-> NAND:  0 MiB
-> MMC:   OMAP SD/MMC: 0
-> *** Warning - readenv() failed, using default environment
->
-> In:    serial
-> Out:   serial
-> Err:   serial
-> Beagle xM Rev C
-> No EEPROM on expansion board
-> No EEPROM on expansion board
-> Die ID #689000029ff80000016842c81202f014
-> Net:   Net Initialization Skipped
-> No ethernet found.
-> Hit any key to stop autoboot:  0
-> The user button is currently NOT pressed.
-> SD/MMC found on device 0
-> reading uEnv.txt
->
-> ** Unable to read "uEnv.txt" from mmc 0:1 **
-> Loading file "/boot/uImage" from mmc device 0:2 (xxa2)
-> 3148568 bytes read
-> Booting from mmc ...
-> ## Booting kernel from Legacy Image at 80200000 ...
->    Image Name:   Linux-2.6.32
->    Image Type:   ARM Linux Kernel Image (uncompressed)
->    Data Size:    3148504 Bytes = 3 MiB
->    Load Address: 80008000
->    Entry Point:  80008000
->    Verifying Checksum ... OK
->    Loading Kernel Image ... OK
-> OK
->
-> Starting kernel ...
->
-> Uncompressing
-> Linux............................................................................................................................................................................................................
-> done, booting the kernel.
->
-> AND NOTHING AFTER THIS... Any clue how to proceed..?
+> ** Partition 1 not valid on device 0 **
+> spl: fat register err - -1
+> ### ERROR ### Please RESET the board ###
+> 
+>   this is exactly the same SD card i was using with meta-beagleboard
+> generated image files. everything else about the build seemed fine.
+> can someone verify a known good recipe for this? is there
+> something different about the creation of the SD card? i'm currently
+> doing another build from scratch to see if i messed anything up.
 
-Back in the 2.6.32 days, the "omap" serial driver did not exist.. So
-if your still setting up console as /dev/ttyO2 change it to
-/dev/ttyS2..
-
-Regards,
+Can you see if backporting
+http://git.denx.de/?p=u-boot.git;a=commitdiff;h=9d956e0fefa39ba49250f61e3c7aa3dadafdb7fd
+fixes the problem?  It should apply cleanly.  Thanks!
 
 -- 
-Robert Nelson
-http://www.rcn-ee.com/
+Tom
 
