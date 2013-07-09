@@ -1,29 +1,30 @@
-Return-Path: <heroor@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3F89AE01405
-	for <meta-ti@yoctoproject.org>; Mon,  8 Jul 2013 21:15:16 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r694FFOe006031
-	for <meta-ti@yoctoproject.org>; Mon, 8 Jul 2013 23:15:15 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r694FF16029744
-	for <meta-ti@yoctoproject.org>; Mon, 8 Jul 2013 23:15:15 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 8 Jul 2013 23:15:15 -0500
-Received: from [172.24.158.133] (a0875592lt01.apr.dhcp.ti.com
-	[172.24.158.133])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
-	r694FDhW003869;	Mon, 8 Jul 2013 23:15:14 -0500
-Message-ID: <51DB8E51.5040309@ti.com>
-Date: Tue, 9 Jul 2013 09:45:13 +0530
-From: Siddharth Heroor <heroor@ti.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:17.0) Gecko/20130620 Thunderbird/17.0.7
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF044E00715
+	for <meta-ti@yoctoproject.org>; Tue,  9 Jul 2013 03:26:31 -0700 (PDT)
+Received: from [69.196.158.250] (port=45769 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1UwV7u-0004h1-3P
+	for meta-ti@yoctoproject.org; Tue, 09 Jul 2013 06:26:30 -0400
+Date: Tue, 9 Jul 2013 06:26:27 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: meta-ti mailing list <meta-ti@yoctoproject.org>
+Message-ID: <alpine.DEB.2.02.1307090624580.5445@oneiric>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
-To: <meta-ti@yoctoproject.org>
-References: <20130701154106.GA934@ti.com>
-In-Reply-To: <20130701154106.GA934@ti.com>
-Subject: Re: [PATCHv3] gbm: Add TI staging tree
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: proper way to generate the sd card image?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,74 +37,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jul 2013 04:15:22 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Jul 2013 10:26:32 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On 7/1/2013 9:11 PM, Siddharth Heroor wrote:
-> * This is the gbm frontend used by (for example) weston
->   compositor to load the GLES stack, and retrieve the
->   backing buffer objects behind an eglImage (created
->   with EGL_WAYLAND_BUFFER_WL), etc.  The frontend is really
->   just a backend loader and shim. The backend library must
->   be provided by the GLES implementation.
-> * The original libgbm is actually part of mesa but in the TI
->   stack this is implemented as a separate and standalone package
->   hosted at git://git.ti.com/glsdk/libgbm.git
-> * In the Danny branch, oe-core/meta/recipes-graphics/mesa
->   has 8.0.0 as its version. For the GLSDK stack, the libgbm
->   is more in line with 9.0.0 mesa. The goal is to move over
->   to mesa for libgbm in future.
-> 
-> v2:
-> * Cleaned up description and rewrote the commit.
-> 
-> v3:
-> 
-> * Rename as libgbm-glsdk to avoid clash with mesa-libgbm.
 
-Ping! Any updates on this patch?
+  i remember tripping up on this before -- what's the proper way to
+customize my local.conf to generate the sd card image via
+sdcard_image.bbclass? i also remember a warning that that generation
+wasn't compatible with the genext2fs in oe-core at the time, is that
+still an issue?
 
-> 
-> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
-> Signed-off-by: Siddharth Heroor <heroor@ti.com>
-> ---
->  recipes-graphics/gbm/libgbm-glsdk.inc      |   11 +++++++++++
->  recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb |    7 +++++++
->  2 files changed, 18 insertions(+), 0 deletions(-)
->  create mode 100644 recipes-graphics/gbm/libgbm-glsdk.inc
->  create mode 100644 recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb
-> 
-> diff --git a/recipes-graphics/gbm/libgbm-glsdk.inc b/recipes-graphics/gbm/libgbm-glsdk.inc
-> new file mode 100644
-> index 0000000..2f3893e
-> --- /dev/null
-> +++ b/recipes-graphics/gbm/libgbm-glsdk.inc
-> @@ -0,0 +1,11 @@
-> +DESCRIPTION = "Userspace interface for the kernel GBM services."
-> +HOMEPAGE = "http://git.ti.com"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://gbm.c;beginline=1;endline=26;md5=b871c7f2f477df29ee4c0ec437b187f7"
-> +PROVIDES = "libgbm"
-> +
-> +COMPATIBLE_MACHINE = "omap-a15"
-> +
-> +DEFAULT_PREFERENCE = "-1"
-> +
-> +inherit autotools pkgconfig
-> diff --git a/recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb b/recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb
-> new file mode 100644
-> index 0000000..e1e6adb
-> --- /dev/null
-> +++ b/recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb
-> @@ -0,0 +1,7 @@
-> +require libgbm-glsdk.inc
-> +
-> +SRC_URI = "git://git.ti.com/glsdk/libgbm.git;protocol=git"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +SRCREV = "cb86a2f2cecd41023bf1bf12fbcf11be11220f31"
-> 
+rday
 
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
