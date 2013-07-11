@@ -1,28 +1,15 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7C65E013D6
-	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 10:13:33 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r6BHDX9E024990
-	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 12:13:33 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r6BHDXCE019452
-	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 12:13:33 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 11 Jul 2013 12:13:32 -0500
-Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r6BHDWDd024061	for
-	<meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 12:13:33 -0500
-Date: Thu, 11 Jul 2013 13:13:32 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <20130711171248.GJ18647@edge>
-References: <20130710130054.GA2217@ti.com>
-MIME-Version: 1.0
-In-Reply-To: <20130710130054.GA2217@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCHv4] gbm: Add TI staging tree
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A968DE014F5
+	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 10:59:28 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 3360A52A79; Thu, 11 Jul 2013 17:59:27 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130711175927.3360A52A79@arago-project.org>
+Date: Thu, 11 Jul 2013 17:59:27 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Franklin S. Cooper Jr : u-boot-am33x: Update am335x to use latest u-boot for 3.2 kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,74 +22,56 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2013 17:13:33 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 11 Jul 2013 17:59:28 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Also a question - do you still need it in danny, besides master and dylan?
+Module: meta-ti
+Branch: master
+Commit: f7b8ea2398520ae65c6aad01a417cfb79d8c274d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f7b8ea2398520ae65c6aad01a417cfb79d8c274d
 
+Author: Franklin S. Cooper Jr <fcooper@ti.com>
+Date:   Tue Jul  2 11:47:59 2013 -0500
 
-On Wed, Jul 10, 2013 at 06:30:54PM +0530, Siddharth Heroor wrote:
-> * This is the gbm frontend used by (for example) weston
->   compositor to load the GLES stack, and retrieve the
->   backing buffer objects behind an eglImage (created
->   with EGL_WAYLAND_BUFFER_WL), etc.  The frontend is really
->   just a backend loader and shim. The backend library must
->   be provided by the GLES implementation.
-> * The original libgbm is actually part of mesa but in the TI
->   stack this is implemented as a separate and standalone package
->   hosted at git://git.ti.com/glsdk/libgbm.git
-> * In the Danny branch, oe-core/meta/recipes-graphics/mesa
->   has 8.0.0 as its version. For the GLSDK stack, the libgbm
->   is more in line with 9.0.0 mesa. The goal is to move over
->   to mesa for libgbm in future.
-> 
-> v2:
-> * Cleaned up description and rewrote the commit.
-> 
-> v3:
-> 
-> * Rename as libgbm-glsdk to avoid clash with mesa-libgbm.
-> 
-> v4:
-> 
-> *  Move into a single versioned recipe and delete .inc file
-> 
-> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
-> Signed-off-by: Siddharth Heroor <heroor@ti.com>
-> ---
->  recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb |   17 +++++++++++++++++
->  1 files changed, 17 insertions(+), 0 deletions(-)
->  create mode 100644 recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb
-> 
-> diff --git a/recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb b/recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb
-> new file mode 100644
-> index 0000000..17207a1
-> --- /dev/null
-> +++ b/recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb
-> @@ -0,0 +1,17 @@
-> +DESCRIPTION = "Userspace interface for the kernel GBM services."
-> +HOMEPAGE = "http://git.ti.com"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://gbm.c;beginline=1;endline=26;md5=b871c7f2f477df29ee4c0ec437b187f7"
-> +PROVIDES = "libgbm"
-> +
-> +COMPATIBLE_MACHINE = "omap-a15"
-> +
-> +DEFAULT_PREFERENCE = "-1"
-> +
-> +inherit autotools pkgconfig
-> +
-> +SRC_URI = "git://git.ti.com/glsdk/libgbm.git;protocol=git"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +SRCREV = "cb86a2f2cecd41023bf1bf12fbcf11be11220f31"
-> -- 
-> 1.7.0.4
-> 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+u-boot-am33x: Update am335x to use latest u-boot for 3.2 kernel
+
+Latest commit includes the following:
+* Add support for Beaglebone Black
+* Add fix for Linaro toolchain to insure NOR and RNDIS works.
+* Add workaround for Errata 1.0.24
+* Enable DDR3 power down for BBB and GP evm.
+
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+Acked-by: Chase Maupin <chase.maupin@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb |    7 +++----
+ 1 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb
+index 19ec34e..cb2e850 100644
+--- a/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb
++++ b/recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb
+@@ -6,15 +6,14 @@ COMPATIBLE_MACHINE = "ti33x"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-PR = "r5+gitr${SRCPV}"
++PR = "r6+gitr${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ # This version of u-boot is meant for 3.2 kernel which doesn't support device tree.
+-BRANCH = "ti-u-boot-2013.01.01-amsdk-05.07.00.00"
++BRANCH = "ti-u-boot-2013.01.01-amsdk-06.00.00.00"
+ 
+-# Commit corresponds to tag "v2013.01.01_amsdk-05.07.00.00"
+-SRCREV = "8eb15a787c558fee98b0fa2a66ff0849c732edcc"
++SRCREV = "540aa6fbb0c9274bda598f7e8819ed28259cad6b"
+ 
+ # Set the name of the SPL that will built so that it is also packaged with u-boot.
+ SPL_BINARY = "MLO"
+
 
