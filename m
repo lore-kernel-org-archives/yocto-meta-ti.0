@@ -1,15 +1,31 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3E24FE01546
-	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 10:59:34 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id E9B7852AAD; Thu, 11 Jul 2013 17:59:33 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130711175933.E9B7852AAD@arago-project.org>
-Date: Thu, 11 Jul 2013 17:59:33 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : u-boot: Add memory alignment fix for armv7 for am37x and am3517
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 743D0E013D6
+	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 11:36:09 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r6BIa8Kj002817;
+	Thu, 11 Jul 2013 13:36:08 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r6BIa8Sj002966;
+	Thu, 11 Jul 2013 13:36:08 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 11 Jul 2013 13:36:08 -0500
+Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r6BIa8S7023162;
+	Thu, 11 Jul 2013 13:36:08 -0500
+Date: Thu, 11 Jul 2013 14:36:07 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Brian Hutchinson <b.hutchman@gmail.com>
+Message-ID: <20130711183607.GR18647@edge>
+References: <CAFZh4h8osM3+bExMHS8zP-YU56h=hsSqjRfAC7Vo9Qu1_kze-w@mail.gmail.com>
+	<20130710164618.GD16407@edge>
+	<CAFZh4h_+1hgc9SJ1WrNgDL07Lj7JjwfHZLecf+RrWcVEyeprPQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAFZh4h_+1hgc9SJ1WrNgDL07Lj7JjwfHZLecf+RrWcVEyeprPQ@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Which machine type to use for DaVinci DM6446 and TI816x?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,107 +38,82 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2013 17:59:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 11 Jul 2013 18:36:12 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: dylan
-Commit: c8377df0b40b3fa90e9c653e7a086ccf647eac0a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c8377df0b40b3fa90e9c653e7a086ccf647eac0a
+On Wed, Jul 10, 2013 at 01:28:55PM -0400, Brian Hutchinson wrote:
+> On Wed, Jul 10, 2013 at 12:46 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+> 
+> > On Tue, Jul 09, 2013 at 11:21:13AM -0400, Brian Hutchinson wrote:
+> > > Hi,
+> >
+> > Hey, Brian,
+> >
+> > Long time no see!
+> >
+> >
+> > > I have to support DaVinci DM6446, AM1808, OMAP-L138 and C6A816x which has
+> > > turned into TI816x in later silicon releases.
+> > >
+> > > I'm trying to figure out what conf/machine to use for the above SoC's.
+> > >
+> > > In Denzil, I see am389x-evm.conf and c6a816x-evm.conf and both include
+> > the
+> > > same ti816x.inc file, but I do not see support for this machine in Danny
+> > or
+> > > Dylan (unless I'm missing something).  How should I go about using Dylan
+> > > with the ti816x?
+> >
+> > http://thread.gmane.org/gmane.linux.embedded.yocto.meta-ti/1544
+> >
+> >
+> > > For DaVinci DM6446, I don't see an obvious machine type that supports it
+> > > but I know that the DM6446, AM1808 and OMAP-L138 are all in the same
+> > ARM926
+> > > family (da850) so should I be using the am1808-evm.conf for DaVinci
+> > DM6446?
+> >
+> > DM6446 is quite different from OMAP-L138. Both AM180x and DA850 are just
+> > derivatives of OMAP-L138.
+> >
+> > Anyway, DM6446 is no longer supported, as it's a very old platform.
+> >
+> >
+> > > I've always used Arago or Angstrom for DM6446 support in the past and so
+> > > I'm not sure which .conf I should be using with meta-ti.  My gut says use
+> > > am1808-evm.conf but I thought I should ask to be sure.
+> >
+> > --
+> > Denys
+> >
+> 
+> Hey Denys,
+> 
+> Wow, I wasn't expecting support to be dropped.  I'm sure there is still a
+> bunch of people using it.  I guess I could maybe maintain it if someone
+> would give pointers on how to go about it.
+> 
+> OK, so how about this ... I use the same u-boot and kernel that I'm
+> currently using (but built with the same toolchain to build the rootfs ...
+> meta-toolchain) but use am180x-evm to build the rootfs & packages of other
+> stuff I need?  I mainly need to have the packages kept relatively up to
+> date (security patches etc.).
+> 
+> Do you see anything wrong with that approach?  Same ABI right?
 
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Tue Jul  9 14:17:36 2013 -0500
+Brian,
 
-u-boot: Add memory alignment fix for armv7 for am37x and am3517
+Unfortunately, keeping support in meta-ti is often seen as entitlement to 
+continuously forward-port features to all the new SW components - u-boot, 
+kernel, IPC, etc. But that is not true for some platforms, if there are no 
+development resources allocated to do so. So, some things get dropped due to 
+limited bandwidth, sorry.
 
-* On am335x a memory alignment issue was found when using the Linaro toolchain.
-* A similar patch was applied for am335x that fixed this well documented issue.
-* Add a similar fix to am37x and am3517 since this is a generic armv7 issue.
+Your suggestion might work and you are welcome to try it out. Please let me 
+know if you'd be interested in maintaining any of those outdated platforms 
+going forward. Thanks.
 
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-bsp/u-boot/u-boot-am3517_2011.09.bb        |    6 ++-
- recipes-bsp/u-boot/u-boot-am37x_2012.04.01.bb      |    3 ++
- .../u-boot/0001-armv7-Unaligned-access-fix.patch   |   30 ++++++++++++++++++++
- 3 files changed, 37 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb b/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb
-index 6321406..06b8cf1 100644
---- a/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb
-+++ b/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb
-@@ -6,9 +6,11 @@ COMPATIBLE_MACHINE = "omap3"
- 
- DEFAULT_PREFERENCE = "-1"
- 
--PR = "r0+gitr${SRCPV}"
-+PR = "r1+gitr${SRCPV}"
- 
--SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH}"
-+SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH} \
-+           file://0001-armv7-Unaligned-access-fix.patch \
-+"
- 
- BRANCH = "AM335XPSP_04.06.00.08"
- 
-diff --git a/recipes-bsp/u-boot/u-boot-am37x_2012.04.01.bb b/recipes-bsp/u-boot/u-boot-am37x_2012.04.01.bb
-index c25cf1e..1cd96b6 100644
---- a/recipes-bsp/u-boot/u-boot-am37x_2012.04.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-am37x_2012.04.01.bb
-@@ -6,6 +6,8 @@ COMPATIBLE_MACHINE = "am37x-evm|beagleboard"
- 
- BRANCH ?= "master"
- 
-+PR = "r1+gitr${SRCPV}"
-+
- # v2012.04.01
- SRCREV = "415d386877df49eb051b85ef74fa59a16dc17c7d"
- 
-@@ -33,6 +35,7 @@ SRC_URI += "file://0001-omap3_beagle-add-usbethaddr-setting-to-enable-networ.pat
-             file://0002-omap3evm-Make-the-board-start-at-800MHz.patch \
-             file://0003-beagleboard-Make-xM-rev-C-go-to-800MHz.patch \
-             file://0001-ARM-omap3-Set-SPL-stack-size-to-8KB-image-to-54KB.patch \
-+            file://0001-armv7-Unaligned-access-fix.patch \
-             "
- 
- SPL_BINARY = "MLO"
-diff --git a/recipes-bsp/u-boot/u-boot/0001-armv7-Unaligned-access-fix.patch b/recipes-bsp/u-boot/u-boot/0001-armv7-Unaligned-access-fix.patch
-new file mode 100644
-index 0000000..35307ac
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot/0001-armv7-Unaligned-access-fix.patch
-@@ -0,0 +1,30 @@
-+From 40f1e7db785f477a2aa145a3b47bd498c48ad52d Mon Sep 17 00:00:00 2001
-+From: Steve Kipisz <s-kipisz2@ti.com>
-+Date: Fri, 14 Jun 2013 05:16:52 -0500
-+Subject: [PATCH] armv7:Unaligned access fix
-+
-+This fixes an unaligned access data abort introduced when using gcc 4.7
-+or higher. The Linaro toolchain uses gcc 4.7.3. This is documented in u-boot
-+doc/README.arm-unaligned-accesses.
-+
-+Signed-off-by: Steve Kipisz <s-kipisz2@ti.com>
-+---
-+ arch/arm/cpu/armv7/config.mk |    2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/arch/arm/cpu/armv7/config.mk b/arch/arm/cpu/armv7/config.mk
-+index 9c3e2f3..9736da8 100644
-+--- a/arch/arm/cpu/armv7/config.mk
-++++ b/arch/arm/cpu/armv7/config.mk
-+@@ -20,7 +20,7 @@
-+ # Foundation, Inc., 59 Temple Place, Suite 330, Boston,
-+ # MA 02111-1307 USA
-+ #
-+-PLATFORM_RELFLAGS += -fno-common -ffixed-r8 -msoft-float
-++PLATFORM_RELFLAGS += -fno-common -ffixed-r8 -msoft-float -mno-unaligned-access
-+ 
-+ # If armv7-a is not supported by GCC fall-back to armv5, which is
-+ # supported by more tool-chains
-+-- 
-+1.7.9.5
-+
-
+-- 
+Denys
 
