@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 27D1DE01538
-	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 10:59:33 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 29162E0153F
+	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 10:59:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id AD27852A79; Thu, 11 Jul 2013 17:59:33 +0000 (UTC)
+	id D812552A7A; Thu, 11 Jul 2013 17:59:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130711175933.AD27852A79@arago-project.org>
+Message-Id: <20130711175933.D812552A7A@arago-project.org>
 Date: Thu, 11 Jul 2013 17:59:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : u-boot-am33x: Update am335x to use latest u-boot for 3.2 kernel
@@ -26,9 +26,9 @@ X-List-Received-Date: Thu, 11 Jul 2013 17:59:34 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 383266ca96d2f7f824d2f3c011310164a56fead4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=383266ca96d2f7f824d2f3c011310164a56fead4
+Branch: dylan
+Commit: f35d7c584914b493a381f5a1e0c9bc87d8a2a403
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f35d7c584914b493a381f5a1e0c9bc87d8a2a403
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Tue Jul  2 11:47:59 2013 -0500
