@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A822DE0140D
-	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 10:59:28 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 12AD3E013D6
+	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 10:59:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4D7A152A6A; Thu, 11 Jul 2013 17:59:27 +0000 (UTC)
+	id B8FC852A6A; Thu, 11 Jul 2013 17:59:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130711175927.4D7A152A6A@arago-project.org>
-Date: Thu, 11 Jul 2013 17:59:27 +0000 (UTC)
+Message-Id: <20130711175933.B8FC852A6A@arago-project.org>
+Date: Thu, 11 Jul 2013 17:59:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : u-boot: Add memory alignment fix for armv7 for am37x and am3517
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2013 17:59:28 -0000
+X-List-Received-Date: Thu, 11 Jul 2013 17:59:34 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 41a214e8f675ecd5fa3a1408239f32ab77c033a2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=41a214e8f675ecd5fa3a1408239f32ab77c033a2
+Branch: danny
+Commit: 5ff9feb881d43e3f3aea2113c510301b218e9d44
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5ff9feb881d43e3f3aea2113c510301b218e9d44
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Tue Jul  9 14:17:36 2013 -0500
