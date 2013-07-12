@@ -1,31 +1,30 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 743D0E013D6
-	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 11:36:09 -0700 (PDT)
+Return-Path: <heroor@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E802E013D6
+	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 21:54:39 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r6BIa8Kj002817;
-	Thu, 11 Jul 2013 13:36:08 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r6BIa8Sj002966;
-	Thu, 11 Jul 2013 13:36:08 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 11 Jul 2013 13:36:08 -0500
-Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r6BIa8S7023162;
-	Thu, 11 Jul 2013 13:36:08 -0500
-Date: Thu, 11 Jul 2013 14:36:07 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Brian Hutchinson <b.hutchman@gmail.com>
-Message-ID: <20130711183607.GR18647@edge>
-References: <CAFZh4h8osM3+bExMHS8zP-YU56h=hsSqjRfAC7Vo9Qu1_kze-w@mail.gmail.com>
-	<20130710164618.GD16407@edge>
-	<CAFZh4h_+1hgc9SJ1WrNgDL07Lj7JjwfHZLecf+RrWcVEyeprPQ@mail.gmail.com>
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r6C4sd4S020241
+	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 23:54:39 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r6C4sdh7008397
+	for <meta-ti@yoctoproject.org>; Thu, 11 Jul 2013 23:54:39 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 11 Jul 2013 23:54:38 -0500
+Received: from [172.24.158.133] (a0875592lt01.apr.dhcp.ti.com
+	[172.24.158.133])	by dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id
+	r6C4sbox032013;	Thu, 11 Jul 2013 23:54:37 -0500
+Message-ID: <51DF8C0C.9030001@ti.com>
+Date: Fri, 12 Jul 2013 10:24:36 +0530
+From: Siddharth Heroor <heroor@ti.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:17.0) Gecko/20130620 Thunderbird/17.0.7
 MIME-Version: 1.0
-In-Reply-To: <CAFZh4h_+1hgc9SJ1WrNgDL07Lj7JjwfHZLecf+RrWcVEyeprPQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+To: Denys Dmytriyenko <denys@ti.com>
+References: <20130710130054.GA2217@ti.com> <20130711171248.GJ18647@edge>
+In-Reply-To: <20130711171248.GJ18647@edge>
 Cc: meta-ti@yoctoproject.org
-Subject: Re: Which machine type to use for DaVinci DM6446 and TI816x?
+Subject: Re: [PATCHv4] gbm: Add TI staging tree
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,82 +37,86 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jul 2013 18:36:12 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 12 Jul 2013 04:54:40 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jul 10, 2013 at 01:28:55PM -0400, Brian Hutchinson wrote:
-> On Wed, Jul 10, 2013 at 12:46 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> 
-> > On Tue, Jul 09, 2013 at 11:21:13AM -0400, Brian Hutchinson wrote:
-> > > Hi,
-> >
-> > Hey, Brian,
-> >
-> > Long time no see!
-> >
-> >
-> > > I have to support DaVinci DM6446, AM1808, OMAP-L138 and C6A816x which has
-> > > turned into TI816x in later silicon releases.
-> > >
-> > > I'm trying to figure out what conf/machine to use for the above SoC's.
-> > >
-> > > In Denzil, I see am389x-evm.conf and c6a816x-evm.conf and both include
-> > the
-> > > same ti816x.inc file, but I do not see support for this machine in Danny
-> > or
-> > > Dylan (unless I'm missing something).  How should I go about using Dylan
-> > > with the ti816x?
-> >
-> > http://thread.gmane.org/gmane.linux.embedded.yocto.meta-ti/1544
-> >
-> >
-> > > For DaVinci DM6446, I don't see an obvious machine type that supports it
-> > > but I know that the DM6446, AM1808 and OMAP-L138 are all in the same
-> > ARM926
-> > > family (da850) so should I be using the am1808-evm.conf for DaVinci
-> > DM6446?
-> >
-> > DM6446 is quite different from OMAP-L138. Both AM180x and DA850 are just
-> > derivatives of OMAP-L138.
-> >
-> > Anyway, DM6446 is no longer supported, as it's a very old platform.
-> >
-> >
-> > > I've always used Arago or Angstrom for DM6446 support in the past and so
-> > > I'm not sure which .conf I should be using with meta-ti.  My gut says use
-> > > am1808-evm.conf but I thought I should ask to be sure.
-> >
-> > --
-> > Denys
-> >
-> 
-> Hey Denys,
-> 
-> Wow, I wasn't expecting support to be dropped.  I'm sure there is still a
-> bunch of people using it.  I guess I could maybe maintain it if someone
-> would give pointers on how to go about it.
-> 
-> OK, so how about this ... I use the same u-boot and kernel that I'm
-> currently using (but built with the same toolchain to build the rootfs ...
-> meta-toolchain) but use am180x-evm to build the rootfs & packages of other
-> stuff I need?  I mainly need to have the packages kept relatively up to
-> date (security patches etc.).
-> 
-> Do you see anything wrong with that approach?  Same ABI right?
+On 7/11/2013 10:43 PM, Denys Dmytriyenko wrote:
+> Also a question - do you still need it in danny, besides master and dylan?
 
-Brian,
+We will need in Danny. I'm trying to make sure we finish all our work on
+Danny. Patches would have been posted and we are only reworking them
+based on feedback. Hopefully, this should complete within a week.
 
-Unfortunately, keeping support in meta-ti is often seen as entitlement to 
-continuously forward-port features to all the new SW components - u-boot, 
-kernel, IPC, etc. But that is not true for some platforms, if there are no 
-development resources allocated to do so. So, some things get dropped due to 
-limited bandwidth, sorry.
+> 
+> 
+> On Wed, Jul 10, 2013 at 06:30:54PM +0530, Siddharth Heroor wrote:
+>> * This is the gbm frontend used by (for example) weston
+>>   compositor to load the GLES stack, and retrieve the
+>>   backing buffer objects behind an eglImage (created
+>>   with EGL_WAYLAND_BUFFER_WL), etc.  The frontend is really
+>>   just a backend loader and shim. The backend library must
+>>   be provided by the GLES implementation.
+>> * The original libgbm is actually part of mesa but in the TI
+>>   stack this is implemented as a separate and standalone package
+>>   hosted at git://git.ti.com/glsdk/libgbm.git
+>> * In the Danny branch, oe-core/meta/recipes-graphics/mesa
+>>   has 8.0.0 as its version. For the GLSDK stack, the libgbm
+>>   is more in line with 9.0.0 mesa. The goal is to move over
+>>   to mesa for libgbm in future.
+>>
+>> v2:
+>> * Cleaned up description and rewrote the commit.
+>>
+>> v3:
+>>
+>> * Rename as libgbm-glsdk to avoid clash with mesa-libgbm.
+>>
+>> v4:
+>>
+>> *  Move into a single versioned recipe and delete .inc file
+>>
+>> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+>> Signed-off-by: Siddharth Heroor <heroor@ti.com>
+>> ---
+>>  recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb |   17 +++++++++++++++++
+>>  1 files changed, 17 insertions(+), 0 deletions(-)
+>>  create mode 100644 recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb
+>>
+>> diff --git a/recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb b/recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb
+>> new file mode 100644
+>> index 0000000..17207a1
+>> --- /dev/null
+>> +++ b/recipes-graphics/gbm/libgbm-glsdk_9.0.0.bb
+>> @@ -0,0 +1,17 @@
+>> +DESCRIPTION = "Userspace interface for the kernel GBM services."
+>> +HOMEPAGE = "http://git.ti.com"
+>> +LICENSE = "MIT"
+>> +LIC_FILES_CHKSUM = "file://gbm.c;beginline=1;endline=26;md5=b871c7f2f477df29ee4c0ec437b187f7"
+>> +PROVIDES = "libgbm"
+>> +
+>> +COMPATIBLE_MACHINE = "omap-a15"
+>> +
+>> +DEFAULT_PREFERENCE = "-1"
+>> +
+>> +inherit autotools pkgconfig
+>> +
+>> +SRC_URI = "git://git.ti.com/glsdk/libgbm.git;protocol=git"
+>> +
+>> +S = "${WORKDIR}/git"
+>> +
+>> +SRCREV = "cb86a2f2cecd41023bf1bf12fbcf11be11220f31"
+>> -- 
+>> 1.7.0.4
+>>
+>> _______________________________________________
+>> meta-ti mailing list
+>> meta-ti@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/meta-ti
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+> 
 
-Your suggestion might work and you are welcome to try it out. Please let me 
-know if you'd be interested in maintaining any of those outdated platforms 
-going forward. Thanks.
-
--- 
-Denys
 
