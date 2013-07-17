@@ -1,34 +1,35 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F12BEE013A2
-	for <meta-ti@yoctoproject.org>; Wed, 17 Jul 2013 07:44:41 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r6HEidFn017995;
-	Wed, 17 Jul 2013 09:44:39 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r6HEid29028121;
-	Wed, 17 Jul 2013 09:44:39 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.02.0342.003; Wed, 17 Jul 2013 09:44:39 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Brian Hutchinson <b.hutchman@gmail.com>
-Thread-Topic: [meta-ti] Which machine type to use for DaVinci DM6446 and
-	TI816x?
-Thread-Index: AQHOgvEiWdXn0S1Jnku/HXXYrPWuq5lo8l4A
-Date: Wed, 17 Jul 2013 14:44:38 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015965C076@DLEE11.ent.ti.com>
+Return-Path: <b.hutchman@gmail.com>
+Received: from mail-oa0-f41.google.com (mail-oa0-f41.google.com
+	[209.85.219.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6C8A1E013A2
+	for <meta-ti@yoctoproject.org>; Wed, 17 Jul 2013 08:04:02 -0700 (PDT)
+Received: by mail-oa0-f41.google.com with SMTP id n10so2705584oag.0
+	for <meta-ti@yoctoproject.org>; Wed, 17 Jul 2013 08:04:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=9wuLD/nIscVZHAq21XZv36DaVQx1UIIBzqUtrEd6GH0=;
+	b=v8dfb1okbMwfIhfbJpWzf36UHlLXLWWpWc8Gx0UUJFINMX3ycu2/LPfkpIf4kVfwf2
+	fnAyauSBgfN5t6OSNf4irKnTM9J4HF5CCfpyoOizpFUTGAqJoFk87lCzkYckcxqZKpSt
+	yVyo2wfD8W7C8aUJkpQ+UZY1L+eOMcqaC68/LFZ///DPLwHj1TnpI62xqFjWJNNovyWg
+	jKLnI0hN03i7pH7BB0DesQT2YnYWdVGiUEi/5KBp4eFP3a4uoRMMHKFkVFdzLUZZ9jpy
+	PeQnMqQMWQTHojG8VNpA1dUfoLyDQ7SC0+bjn/SjVSg4ZXDoVrsLzX4FWwU49s8B0MHJ
+	vWZg==
+MIME-Version: 1.0
+X-Received: by 10.60.97.1 with SMTP id dw1mr8719323oeb.1.1374073442120; Wed,
+	17 Jul 2013 08:04:02 -0700 (PDT)
+Received: by 10.60.26.225 with HTTP; Wed, 17 Jul 2013 08:04:02 -0700 (PDT)
+In-Reply-To: <7D46E86EC0A8354091174257B2FED1015965C076@DLEE11.ent.ti.com>
 References: <CAFZh4h8osM3+bExMHS8zP-YU56h=hsSqjRfAC7Vo9Qu1_kze-w@mail.gmail.com>
 	<20130710164618.GD16407@edge>
 	<CAFZh4h-W=557rBxsehQhzpgJuxk+Z5BmKeboNk2eAGnBt8vBUQ@mail.gmail.com>
 	<7D46E86EC0A8354091174257B2FED1015965BBDC@DLEE11.ent.ti.com>
 	<CAFZh4h-eQBem7qVQnE_=Hf_bccvONrFA174Xr3AdpGw7-5dawQ@mail.gmail.com>
-In-Reply-To: <CAFZh4h-eQBem7qVQnE_=Hf_bccvONrFA174Xr3AdpGw7-5dawQ@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
-MIME-Version: 1.0
+	<7D46E86EC0A8354091174257B2FED1015965C076@DLEE11.ent.ti.com>
+Date: Wed, 17 Jul 2013 11:04:02 -0400
+Message-ID: <CAFZh4h8vtY8oEGvMTDJs0sDrdoVEK3XH-EqNSh1ptR4rpWvr5g@mail.gmail.com>
+From: Brian Hutchinson <b.hutchman@gmail.com>
+To: "Maupin, Chase" <chase.maupin@ti.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: Which machine type to use for DaVinci DM6446 and TI816x?
 X-BeenThere: meta-ti@yoctoproject.org
@@ -43,192 +44,204 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jul 2013 14:44:42 -0000
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_7D46E86EC0A8354091174257B2FED1015965C076DLEE11entticom_"
+X-List-Received-Date: Wed, 17 Jul 2013 15:04:04 -0000
+Content-Type: multipart/alternative; boundary=089e011774cd69bb2f04e1b6671a
 
---_000_7D46E86EC0A8354091174257B2FED1015965C076DLEE11entticom_
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+--089e011774cd69bb2f04e1b6671a
+Content-Type: text/plain; charset=ISO-8859-1
 
+On Wed, Jul 17, 2013 at 10:44 AM, Maupin, Chase <chase.maupin@ti.com> wrote:
 
-From: Brian Hutchinson [mailto:b.hutchman@gmail.com]
-Sent: Wednesday, July 17, 2013 8:26 AM
-To: Maupin, Chase
-Cc: Dmytriyenko, Denys; meta-ti@yoctoproject.org
-Subject: Re: [meta-ti] Which machine type to use for DaVinci DM6446 and TI8=
-16x?
+>  ** **
+>
+> *From:* Brian Hutchinson [mailto:b.hutchman@gmail.com]
+> *Sent:* Wednesday, July 17, 2013 8:26 AM
+> *To:* Maupin, Chase
+> *Cc:* Dmytriyenko, Denys; meta-ti@yoctoproject.org
+>
+> *Subject:* Re: [meta-ti] Which machine type to use for DaVinci DM6446 and
+> TI816x?****
+>
+>  ** **
+>
+> On Wed, Jul 17, 2013 at 9:14 AM, Maupin, Chase <chase.maupin@ti.com>
+> wrote:****
+>
+>   ****
+>
+> *From:* meta-ti-bounces@yoctoproject.org [mailto:
+> meta-ti-bounces@yoctoproject.org] *On Behalf Of *Brian Hutchinson
+> *Sent:* Wednesday, July 17, 2013 8:08 AM
+> *To:* Dmytriyenko, Denys
+> *Cc:* meta-ti@yoctoproject.org
+> *Subject:* Re: [meta-ti] Which machine type to use for DaVinci DM6446 and
+> TI816x?****
+>
+>  ****
+>
+> On Wed, Jul 10, 2013 at 12:46 PM, Denys Dmytriyenko <denys@ti.com> wrote:*
+> ***
+>
+>   ****
+>
+> DM6446 is quite different from OMAP-L138. Both AM180x and DA850 are just
+> derivatives of OMAP-L138.
+>
+> Anyway, DM6446 is no longer supported, as it's a very old platform.****
+>
+>
+>
+> > I've always used Arago or Angstrom for DM6446 support in the past and so
+> > I'm not sure which .conf I should be using with meta-ti.  My gut says use
+> > am1808-evm.conf but I thought I should ask to be sure.****
+>
+> --
+> Denys****
+>
+>   ****
+>
+> So how hard is it to get ti816x machine support moved up into Dylan (or
+> master)?  I've always had machine support for the branches I used in the
+> past ... now I find myself needing Dylan or even master and there is no
+> ti816x support there.****
+>
+>  ****
+>
+> Is it not there just because nobody had hardware to test it?  If so, I'm
+> game to add it with some guidance :)****
+>
+>  ****
+>
+> [CEM] Generally not too hard.  You can often start with the old arago
+> machine and move that in with some cleanup.  Then you will need to
+> move/create the bootloader and kernel recipes as well, again looking for
+> cleanup.  That should give you a basic working system.  The main issue is
+> that someone needs to be signed up to keep those recipes working and up to
+> date.  That is what is missing in most cases is a maitainer.****
+>
+>  ****
+>
+> Even better, for you use I would recommend looking at commit c586bd9a66
+> which is the one that removed these configs and then add back the pieces
+> you need.****
+>
+>  ****
+>
+> ** **
+>
+>  Thanks Chase,  I kind of figured it was a (people) bandwidth problem.
+>  At the moment I'm using a custom board based on the ti816x so I don't need
+> kernel or u-boot (already have those working for the board and since the
+> kernel for this platform was never mainlined, it doesn't have much churn)
+> but simply need packages built using all the Cortex-A8 flags.  I guess I
+> could be lazy and just build for Beagleboard or something since the ABI's
+> would be the same but I thought I would ask how to go about it the right
+> way.  Also, there have been several revs of silicon for that part and I'm
+> about to acquire the most up-to-date EVM so I could add machine support for
+> that.****
+>
+> ** **
+>
+> I'll check out that commit you mentioned and start coming up to speed on
+> what is involved.****
+>
+> ** **
+>
+> [CEM] Sure, ping if you have questions J****
+>
+>
+>
+Will do.  In the mean time ... just to kick the can further down the road
+so I can get "something" built so I can try a rootfs for my system ... I
+did a fresh clone of yocto master, meta-ti master, and meta-openembedded
+master and set machine type to beaglebone.  Bitbake of core-image-minimal
+results in:
 
-On Wed, Jul 17, 2013 at 9:14 AM, Maupin, Chase <chase.maupin@ti.com<mailto:=
-chase.maupin@ti.com>> wrote:
+hutch@neo:~/yocto_master_beaglebone/poky/build$ bitbake core-image-minimal
+WARNING: Host distribution "Debian-7.1" has not been validated with this
+version of the build system; you may possibly experience unexpected
+failures. It is recommended that you use a tested distribution.
+ERROR: This recipe does not have the LICENSE field set (ti-hw-bringup-image)
+ERROR: This recipe does not have the LICENSE field set (cloud9-gfx-image)
+ERROR: This recipe does not have the LICENSE field set (cloud9-image)
+ERROR: This recipe does not have the LICENSE field set (cloud9-gnome-image)
+ERROR: Unable to parse
+/home/hutch/yocto_master_beaglebone/poky/meta-ti/recipes-misc/images/
+ti-hw-bringup-image.bb: Exited with "1"
+                                                                       |
+ETA:  --:--:--
+ERROR: Command execution failed: Exited with 1
 
-From: meta-ti-bounces@yoctoproject.org<mailto:meta-ti-bounces@yoctoproject.=
-org> [mailto:meta-ti-bounces@yoctoproject.org<mailto:meta-ti-bounces@yoctop=
-roject.org>] On Behalf Of Brian Hutchinson
-Sent: Wednesday, July 17, 2013 8:08 AM
-To: Dmytriyenko, Denys
-Cc: meta-ti@yoctoproject.org<mailto:meta-ti@yoctoproject.org>
-Subject: Re: [meta-ti] Which machine type to use for DaVinci DM6446 and TI8=
-16x?
+Summary: There was 1 WARNING message shown.
+Summary: There were 6 ERROR messages shown, returning a non-zero exit code.
 
-On Wed, Jul 10, 2013 at 12:46 PM, Denys Dmytriyenko <denys@ti.com<mailto:de=
-nys@ti.com>> wrote:
-
-DM6446 is quite different from OMAP-L138. Both AM180x and DA850 are just
-derivatives of OMAP-L138.
-
-Anyway, DM6446 is no longer supported, as it's a very old platform.
-
-
-> I've always used Arago or Angstrom for DM6446 support in the past and so
-> I'm not sure which .conf I should be using with meta-ti.  My gut says use
-> am1808-evm.conf but I thought I should ask to be sure.
---
-Denys
-
-So how hard is it to get ti816x machine support moved up into Dylan (or mas=
-ter)?  I've always had machine support for the branches I used in the past =
-... now I find myself needing Dylan or even master and there is no ti816x s=
-upport there.
-
-Is it not there just because nobody had hardware to test it?  If so, I'm ga=
-me to add it with some guidance :)
-
-[CEM] Generally not too hard.  You can often start with the old arago machi=
-ne and move that in with some cleanup.  Then you will need to move/create t=
-he bootloader and kernel recipes as well, again looking for cleanup.  That =
-should give you a basic working system.  The main issue is that someone nee=
-ds to be signed up to keep those recipes working and up to date.  That is w=
-hat is missing in most cases is a maitainer.
-
-Even better, for you use I would recommend looking at commit c586bd9a66 whi=
-ch is the one that removed these configs and then add back the pieces you n=
-eed.
-
-
-Thanks Chase,  I kind of figured it was a (people) bandwidth problem.  At t=
-he moment I'm using a custom board based on the ti816x so I don't need kern=
-el or u-boot (already have those working for the board and since the kernel=
- for this platform was never mainlined, it doesn't have much churn) but sim=
-ply need packages built using all the Cortex-A8 flags.  I guess I could be =
-lazy and just build for Beagleboard or something since the ABI's would be t=
-he same but I thought I would ask how to go about it the right way.  Also, =
-there have been several revs of silicon for that part and I'm about to acqu=
-ire the most up-to-date EVM so I could add machine support for that.
-
-I'll check out that commit you mentioned and start coming up to speed on wh=
-at is involved.
-
-[CEM] Sure, ping if you have questions :)
-
+Guess I need to do some searching through the archives to see what this new
+LICENSE stuff is all about.
 
 Regards,
 
 Brian
 
-
---_000_7D46E86EC0A8354091174257B2FED1015965C076DLEE11entticom_
-Content-Type: text/html; charset="Windows-1252"
+--089e011774cd69bb2f04e1b6671a
+Content-Type: text/html; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
-252">
-<meta name=3D"Generator" content=3D"Microsoft Word 12 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:Wingdings;
-	panose-1:5 0 0 0 0 0 0 0 0 0;}
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-@font-face
-	{font-family:Tahoma;
-	panose-1:2 11 6 4 3 5 4 4 2 4;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	margin-bottom:.0001pt;
-	font-size:12.0pt;
-	font-family:"Times New Roman","serif";}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:purple;
-	text-decoration:underline;}
-span.EmailStyle17
-	{mso-style-type:personal-reply;
-	font-family:"Calibri","sans-serif";
-	color:#1F497D;}
-.MsoChpDefault
-	{mso-style-type:export-only;}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
-<div class=3D"WordSection1">
+On Wed, Jul 17, 2013 at 10:44 AM, Maupin, Chase <span dir=3D"ltr">&lt;<a hr=
+ef=3D"mailto:chase.maupin@ti.com" target=3D"_blank">chase.maupin@ti.com</a>=
+&gt;</span> wrote:<br><div class=3D"gmail_quote"><blockquote class=3D"gmail=
+_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
+1ex">
+
+
+
+
+
+
+<div lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div>
 <p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+libri&quot;,&quot;sans-serif&quot;;color:#1f497d"><u></u>=A0<u></u></span><=
 /p>
 <div style=3D"border:none;border-left:solid blue 1.5pt;padding:0in 0in 0in =
 4.0pt">
 <div>
-<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0in =
+<div style=3D"border:none;border-top:solid #b5c4df 1.0pt;padding:3.0pt 0in =
 0in 0in">
 <p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt;font-family:&quot=
 ;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span style=3D"font-s=
 ize:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;"> Brian Hu=
-tchinson [mailto:b.hutchman@gmail.com]
+tchinson [mailto:<a href=3D"mailto:b.hutchman@gmail.com" target=3D"_blank">=
+b.hutchman@gmail.com</a>]
 <br>
 <b>Sent:</b> Wednesday, July 17, 2013 8:26 AM<br>
 <b>To:</b> Maupin, Chase<br>
-<b>Cc:</b> Dmytriyenko, Denys; meta-ti@yoctoproject.org<br>
+<b>Cc:</b> Dmytriyenko, Denys; <a href=3D"mailto:meta-ti@yoctoproject.org" =
+target=3D"_blank">meta-ti@yoctoproject.org</a></span></p><div class=3D"im">=
+<br>
 <b>Subject:</b> Re: [meta-ti] Which machine type to use for DaVinci DM6446 =
-and TI816x?<o:p></o:p></span></p>
+and TI816x?<u></u><u></u></div><p></p>
 </div>
-</div>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div><div class=3D"im">
+<p class=3D"MsoNormal"><u></u>=A0<u></u></p>
 <p class=3D"MsoNormal">On Wed, Jul 17, 2013 at 9:14 AM, Maupin, Chase &lt;<=
 a href=3D"mailto:chase.maupin@ti.com" target=3D"_blank">chase.maupin@ti.com=
-</a>&gt; wrote:<o:p></o:p></p>
-<div>
-<blockquote style=3D"border:none;border-left:solid #CCCCCC 1.0pt;padding:0i=
+</a>&gt; wrote:<u></u><u></u></p>
+</div><div><div class=3D"im">
+<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0i=
 n 0in 0in 6.0pt;margin-left:4.8pt;margin-right:0in">
 <div>
 <div>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,&q=
-uot;sans-serif&quot;;color:#1F497D">&nbsp;</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1f497d">=A0</span><u></u><u></u><=
+/p>
 <div style=3D"border:none;border-left:solid blue 1.5pt;padding:0in 0in 0in =
 4.0pt">
 <div>
-<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0in =
+<div style=3D"border:none;border-top:solid #b5c4df 1.0pt;padding:3.0pt 0in =
 0in 0in">
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto"><b><span style=3D"font-size:10.0pt;font-family:&quot;Tahoma&quot;,=
-&quot;sans-serif&quot;">From:</span></b><span style=3D"font-size:10.0pt;fon=
-t-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt;font-family:&quot=
+;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span style=3D"font-s=
+ize:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;">
 <a href=3D"mailto:meta-ti-bounces@yoctoproject.org" target=3D"_blank">meta-=
 ti-bounces@yoctoproject.org</a> [mailto:<a href=3D"mailto:meta-ti-bounces@y=
 octoproject.org" target=3D"_blank">meta-ti-bounces@yoctoproject.org</a>]
@@ -238,162 +251,159 @@ octoproject.org" target=3D"_blank">meta-ti-bounces@yoctoproject.org</a>]
 <b>Cc:</b> <a href=3D"mailto:meta-ti@yoctoproject.org" target=3D"_blank">me=
 ta-ti@yoctoproject.org</a><br>
 <b>Subject:</b> Re: [meta-ti] Which machine type to use for DaVinci DM6446 =
-and TI816x?</span><o:p></o:p></p>
+and TI816x?</span><u></u><u></u></p>
 </div>
 </div>
 <div>
 <div>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto">&nbsp;<o:p></o:p></p>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto">On Wed, Jul 10, 2013 at 12:46 PM, Denys Dmytriyenko &lt;<a href=3D=
-"mailto:denys@ti.com" target=3D"_blank">denys@ti.com</a>&gt; wrote:<o:p></o=
-:p></p>
+<p class=3D"MsoNormal">=A0<u></u><u></u></p>
+<p class=3D"MsoNormal">On Wed, Jul 10, 2013 at 12:46 PM, Denys Dmytriyenko =
+&lt;<a href=3D"mailto:denys@ti.com" target=3D"_blank">denys@ti.com</a>&gt; =
+wrote:<u></u><u></u></p>
 </div>
 </div>
 <div>
 <div>
 <div>
-<blockquote style=3D"border:none;border-left:solid #CCCCCC 1.0pt;padding:0i=
+<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0i=
 n 0in 0in 6.0pt;margin-left:4.8pt;margin-top:5.0pt;margin-right:0in;margin-=
 bottom:5.0pt">
 <div>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;margin-bottom:12.0p=
-t">&nbsp;<o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt">=A0<u></u><u></u></p>
 </div>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto">DM6446 is quite different from OMAP-L138. Both AM180x and DA850 ar=
-e just<br>
+<p class=3D"MsoNormal">DM6446 is quite different from OMAP-L138. Both AM180=
+x and DA850 are just<br>
 derivatives of OMAP-L138.<br>
 <br>
-Anyway, DM6446 is no longer supported, as it's a very old platform.<o:p></o=
-:p></p>
+Anyway, DM6446 is no longer supported, as it&#39;s a very old platform.<u><=
+/u><u></u></p>
 <div>
 <div>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;margin-bottom:12.0p=
-t"><br>
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt"><br>
 <br>
-&gt; I've always used Arago or Angstrom for DM6446 support in the past and =
-so<br>
-&gt; I'm not sure which .conf I should be using with meta-ti. &nbsp;My gut =
-says use<br>
-&gt; am1808-evm.conf but I thought I should ask to be sure.<o:p></o:p></p>
+&gt; I&#39;ve always used Arago or Angstrom for DM6446 support in the past =
+and so<br>
+&gt; I&#39;m not sure which .conf I should be using with meta-ti. =A0My gut=
+ says use<br>
+&gt; am1808-evm.conf but I thought I should ask to be sure.<u></u><u></u></=
+p>
 </div>
 </div>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto"><span style=3D"color:#888888">--<br>
-Denys</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><span style=3D"color:#888888">--<br>
+Denys</span><u></u><u></u></p>
 </blockquote>
 <div>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto">&nbsp;<o:p></o:p></p>
+<p class=3D"MsoNormal">=A0<u></u><u></u></p>
 </div>
 <div>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto">So how hard is it to get ti816x machine support moved up into Dyla=
-n (or master)? &nbsp;I've always had machine support for the branches I use=
-d in the past ... now I find myself needing
- Dylan or even master and there is no ti816x support there.<o:p></o:p></p>
+<p class=3D"MsoNormal">So how hard is it to get ti816x machine support move=
+d up into Dylan (or master)? =A0I&#39;ve always had machine support for the=
+ branches I used in the past ... now I find myself needing
+ Dylan or even master and there is no ti816x support there.<u></u><u></u></=
+p>
 </div>
 <div>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto">&nbsp;<o:p></o:p></p>
+<p class=3D"MsoNormal">=A0<u></u><u></u></p>
 </div>
 </div>
 </div>
 <div>
 <div>
 <div>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto">Is it not there just because nobody had hardware to test it? &nbsp=
-;If so, I'm game to add it with some guidance :)<o:p></o:p></p>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,&q=
-uot;sans-serif&quot;;color:#1F497D">&nbsp;</span><o:p></o:p></p>
-</div>
-</div>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,&q=
-uot;sans-serif&quot;;color:#1F497D">[CEM] Generally not too hard.&nbsp; You=
- can often start with the old arago machine and move that in with
- some cleanup.&nbsp; Then you will need to move/create the bootloader and k=
-ernel recipes as well, again looking for cleanup.&nbsp; That should give yo=
-u a basic working system.&nbsp; The main issue is that someone needs to be =
-signed up to keep those recipes working and up
- to date.&nbsp; That is what is missing in most cases is a maitainer.</span=
-><o:p></o:p></p>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,&q=
-uot;sans-serif&quot;;color:#1F497D">&nbsp;</span><o:p></o:p></p>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,&q=
-uot;sans-serif&quot;;color:#1F497D">Even better, for you use I would recomm=
-end looking at commit c586bd9a66 which is the one that removed
- these configs and then add back the pieces you need.</span><o:p></o:p></p>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto"><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,&q=
-uot;sans-serif&quot;;color:#1F497D">&nbsp;</span><o:p></o:p></p>
-</div>
-<div>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto"><o:p>&nbsp;</o:p></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</blockquote>
-<div>
-<p class=3D"MsoNormal">Thanks Chase, &nbsp;I kind of figured it was a (peop=
-le) bandwidth problem. &nbsp;At the moment I'm using a custom board based o=
-n the ti816x so I don't need kernel or u-boot (already have those working f=
-or the board and since the kernel for this platform
- was never mainlined, it doesn't have much churn) but simply need packages =
-built using all the Cortex-A8 flags. &nbsp;I guess I could be lazy and just=
- build for Beagleboard or something since the ABI's would be the same but I=
- thought I would ask how to go about
- it the right way. &nbsp;Also, there have been several revs of silicon for =
-that part and I'm about to acquire the most up-to-date EVM so I could add m=
-achine support for that.<o:p></o:p></p>
-</div>
-<div>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-</div>
-<div>
-<p class=3D"MsoNormal">I'll check out that commit you mentioned and start c=
-oming up to speed on what is involved.<o:p></o:p></p>
+<p class=3D"MsoNormal">Is it not there just because nobody had hardware to =
+test it? =A0If so, I&#39;m game to add it with some guidance :)<u></u><u></=
+u></p>
 <p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+libri&quot;,&quot;sans-serif&quot;;color:#1f497d">=A0</span><u></u><u></u><=
+/p>
+</div>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1f497d">[CEM] Generally not too h=
+ard.=A0 You can often start with the old arago machine and move that in wit=
+h
+ some cleanup.=A0 Then you will need to move/create the bootloader and kern=
+el recipes as well, again looking for cleanup.=A0 That should give you a ba=
+sic working system.=A0 The main issue is that someone needs to be signed up=
+ to keep those recipes working and up
+ to date.=A0 That is what is missing in most cases is a maitainer.</span><u=
+></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1f497d">=A0</span><u></u><u></u><=
 /p>
 <p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1F497D">[CEM] Sure, ping if you h=
-ave questions
-</span><span style=3D"font-size:11.0pt;font-family:Wingdings;color:#1F497D"=
+libri&quot;,&quot;sans-serif&quot;;color:#1f497d">Even better, for you use =
+I would recommend looking at commit c586bd9a66 which is the one that remove=
+d
+ these configs and then add back the pieces you need.</span><u></u><u></u><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1f497d">=A0</span><u></u><u></u><=
+/p>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=A0<u></u></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</blockquote>
+<div>
+<p class=3D"MsoNormal">Thanks Chase, =A0I kind of figured it was a (people)=
+ bandwidth problem. =A0At the moment I&#39;m using a custom board based on =
+the ti816x so I don&#39;t need kernel or u-boot (already have those working=
+ for the board and since the kernel for this platform
+ was never mainlined, it doesn&#39;t have much churn) but simply need packa=
+ges built using all the Cortex-A8 flags. =A0I guess I could be lazy and jus=
+t build for Beagleboard or something since the ABI&#39;s would be the same =
+but I thought I would ask how to go about
+ it the right way. =A0Also, there have been several revs of silicon for tha=
+t part and I&#39;m about to acquire the most up-to-date EVM so I could add =
+machine support for that.<u></u><u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=A0<u></u></p>
+</div>
+</div><div><div class=3D"im">
+<p class=3D"MsoNormal">I&#39;ll check out that commit you mentioned and sta=
+rt coming up to speed on what is involved.<u></u><u></u></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1f497d"><u></u>=A0<u></u></span><=
+/p>
+</div><p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&q=
+uot;Calibri&quot;,&quot;sans-serif&quot;;color:#1f497d">[CEM] Sure, ping if=
+ you have questions
+</span><span style=3D"font-size:11.0pt;font-family:Wingdings;color:#1f497d"=
 >J</span><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,&q=
-uot;sans-serif&quot;;color:#1F497D"><o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
-/p>
-</div>
-<div>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-</div>
-<div>
-<p class=3D"MsoNormal">Regards,<o:p></o:p></p>
-</div>
-<div>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-</div>
-<div>
-<p class=3D"MsoNormal">Brian<o:p></o:p></p>
-</div>
-<div>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-</div>
-</div>
-</div>
-</div>
-</body>
-</html>
+uot;sans-serif&quot;;color:#1f497d"><u></u><u></u></span></p>
+<p class=3D"MsoNormal"><br></p></div></div></div></div></div></blockquote><=
+div><br></div><div>Will do. =A0In the mean time ... just to kick the can fu=
+rther down the road so I can get &quot;something&quot; built so I can try a=
+ rootfs for my system ... I did a fresh clone of yocto master, meta-ti mast=
+er, and meta-openembedded master and set machine type to beaglebone. =A0Bit=
+bake of core-image-minimal results in:</div>
+<div><br></div><div>hutch@neo:~/yocto_master_beaglebone/poky/build$ bitbake=
+ core-image-minimal</div><div>WARNING: Host distribution &quot;Debian-7.1&q=
+uot; has not been validated with this version of the build system; you may =
+possibly experience unexpected failures. It is recommended that you use a t=
+ested distribution.</div>
+<div>ERROR: This recipe does not have the LICENSE field set (ti-hw-bringup-=
+image)</div><div>ERROR: This recipe does not have the LICENSE field set (cl=
+oud9-gfx-image)</div><div>ERROR: This recipe does not have the LICENSE fiel=
+d set (cloud9-image)</div>
+<div>ERROR: This recipe does not have the LICENSE field set (cloud9-gnome-i=
+mage)</div><div>ERROR: Unable to parse /home/hutch/yocto_master_beaglebone/=
+poky/meta-ti/recipes-misc/images/<a href=3D"http://ti-hw-bringup-image.bb">=
+ti-hw-bringup-image.bb</a>: Exited with &quot;1&quot; =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| ETA: =A0--:--:--</div>
+<div>ERROR: Command execution failed: Exited with 1</div><div><br></div><di=
+v>Summary: There was 1 WARNING message shown.</div><div>Summary: There were=
+ 6 ERROR messages shown, returning a non-zero exit code.</div><div><br>
+</div><div>Guess I need to do some searching through the archives to see wh=
+at this new LICENSE stuff is all about.</div><div><br></div><div>Regards,</=
+div><div><br></div><div>Brian</div><div>=A0</div></div>
 
---_000_7D46E86EC0A8354091174257B2FED1015965C076DLEE11entticom_--
+--089e011774cd69bb2f04e1b6671a--
