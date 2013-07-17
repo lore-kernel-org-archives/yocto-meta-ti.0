@@ -1,33 +1,34 @@
 Return-Path: <b.hutchman@gmail.com>
-Received: from mail-oa0-f41.google.com (mail-oa0-f41.google.com
-	[209.85.219.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6C8A1E013A2
-	for <meta-ti@yoctoproject.org>; Wed, 17 Jul 2013 08:04:02 -0700 (PDT)
-Received: by mail-oa0-f41.google.com with SMTP id n10so2705584oag.0
-	for <meta-ti@yoctoproject.org>; Wed, 17 Jul 2013 08:04:02 -0700 (PDT)
+Received: from mail-ob0-f169.google.com (mail-ob0-f169.google.com
+	[209.85.214.169])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CEE40E013A2
+	for <meta-ti@yoctoproject.org>; Wed, 17 Jul 2013 08:05:31 -0700 (PDT)
+Received: by mail-ob0-f169.google.com with SMTP id up14so2426112obb.14
+	for <meta-ti@yoctoproject.org>; Wed, 17 Jul 2013 08:05:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:cc:content-type;
-	bh=9wuLD/nIscVZHAq21XZv36DaVQx1UIIBzqUtrEd6GH0=;
-	b=v8dfb1okbMwfIhfbJpWzf36UHlLXLWWpWc8Gx0UUJFINMX3ycu2/LPfkpIf4kVfwf2
-	fnAyauSBgfN5t6OSNf4irKnTM9J4HF5CCfpyoOizpFUTGAqJoFk87lCzkYckcxqZKpSt
-	yVyo2wfD8W7C8aUJkpQ+UZY1L+eOMcqaC68/LFZ///DPLwHj1TnpI62xqFjWJNNovyWg
-	jKLnI0hN03i7pH7BB0DesQT2YnYWdVGiUEi/5KBp4eFP3a4uoRMMHKFkVFdzLUZZ9jpy
-	PeQnMqQMWQTHojG8VNpA1dUfoLyDQ7SC0+bjn/SjVSg4ZXDoVrsLzX4FWwU49s8B0MHJ
-	vWZg==
+	bh=0Ba5Cg5MwyBnuv7oEXo3EzbRbV3IKuQMp/UPXyp6Tps=;
+	b=I/PjGeMvwKN6FHR9sHektrauVXxzDWtnS7d3bKJNcxTv/PgvIK5zoSrc0DoD8JT240
+	tgXPW1qdIVyOYAbj12UZLY+E0+vKBqUZF+AF/xZMqNzg6NMHGx6ztZA+bfX47twFRIKd
+	1uU0yjLx8d2bFbEvg77B594x3AQfd22V7pOY46ZVjtlab8ZRZbDOWMVeRpcfqBAmOda9
+	t9AFAsdMnUrWMX+VwYVpv9WWKiCvFxlcPCFnjAXUK1Fo7pIgX3EOJxWLVQwF4FqvTN2g
+	73QTeBeGZuYseyR1sBlFFJhdHwd1rayE98LYkVKs6jxh6AxRjiMnnLCuGTBLIiB6BCsM
+	k2Pg==
 MIME-Version: 1.0
-X-Received: by 10.60.97.1 with SMTP id dw1mr8719323oeb.1.1374073442120; Wed,
-	17 Jul 2013 08:04:02 -0700 (PDT)
-Received: by 10.60.26.225 with HTTP; Wed, 17 Jul 2013 08:04:02 -0700 (PDT)
-In-Reply-To: <7D46E86EC0A8354091174257B2FED1015965C076@DLEE11.ent.ti.com>
+X-Received: by 10.182.220.199 with SMTP id py7mr2976243obc.92.1374073530912;
+	Wed, 17 Jul 2013 08:05:30 -0700 (PDT)
+Received: by 10.60.26.225 with HTTP; Wed, 17 Jul 2013 08:05:30 -0700 (PDT)
+In-Reply-To: <CAFZh4h8vtY8oEGvMTDJs0sDrdoVEK3XH-EqNSh1ptR4rpWvr5g@mail.gmail.com>
 References: <CAFZh4h8osM3+bExMHS8zP-YU56h=hsSqjRfAC7Vo9Qu1_kze-w@mail.gmail.com>
 	<20130710164618.GD16407@edge>
 	<CAFZh4h-W=557rBxsehQhzpgJuxk+Z5BmKeboNk2eAGnBt8vBUQ@mail.gmail.com>
 	<7D46E86EC0A8354091174257B2FED1015965BBDC@DLEE11.ent.ti.com>
 	<CAFZh4h-eQBem7qVQnE_=Hf_bccvONrFA174Xr3AdpGw7-5dawQ@mail.gmail.com>
 	<7D46E86EC0A8354091174257B2FED1015965C076@DLEE11.ent.ti.com>
-Date: Wed, 17 Jul 2013 11:04:02 -0400
-Message-ID: <CAFZh4h8vtY8oEGvMTDJs0sDrdoVEK3XH-EqNSh1ptR4rpWvr5g@mail.gmail.com>
+	<CAFZh4h8vtY8oEGvMTDJs0sDrdoVEK3XH-EqNSh1ptR4rpWvr5g@mail.gmail.com>
+Date: Wed, 17 Jul 2013 11:05:30 -0400
+Message-ID: <CAFZh4h82zOzn1xW2C5o5pC7tX4mW-uO_gSTY3zdRJJ7CxtJRWw@mail.gmail.com>
 From: Brian Hutchinson <b.hutchman@gmail.com>
 To: "Maupin, Chase" <chase.maupin@ti.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
@@ -44,153 +45,166 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jul 2013 15:04:04 -0000
-Content-Type: multipart/alternative; boundary=089e011774cd69bb2f04e1b6671a
+X-List-Received-Date: Wed, 17 Jul 2013 15:05:34 -0000
+Content-Type: multipart/alternative; boundary=001a11c334aab4970f04e1b66cc9
 
---089e011774cd69bb2f04e1b6671a
+--001a11c334aab4970f04e1b66cc9
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Jul 17, 2013 at 10:44 AM, Maupin, Chase <chase.maupin@ti.com> wrote:
+On Wed, Jul 17, 2013 at 11:04 AM, Brian Hutchinson <b.hutchman@gmail.com>wrote:
 
->  ** **
+> On Wed, Jul 17, 2013 at 10:44 AM, Maupin, Chase <chase.maupin@ti.com>wrote:
 >
-> *From:* Brian Hutchinson [mailto:b.hutchman@gmail.com]
-> *Sent:* Wednesday, July 17, 2013 8:26 AM
-> *To:* Maupin, Chase
-> *Cc:* Dmytriyenko, Denys; meta-ti@yoctoproject.org
+>>  ** **
+>>
+>> *From:* Brian Hutchinson [mailto:b.hutchman@gmail.com]
+>> *Sent:* Wednesday, July 17, 2013 8:26 AM
+>> *To:* Maupin, Chase
+>> *Cc:* Dmytriyenko, Denys; meta-ti@yoctoproject.org
+>>
+>> *Subject:* Re: [meta-ti] Which machine type to use for DaVinci DM6446
+>> and TI816x?****
+>>
+>>  ** **
+>>
+>> On Wed, Jul 17, 2013 at 9:14 AM, Maupin, Chase <chase.maupin@ti.com>
+>> wrote:****
+>>
+>>   ****
+>>
+>> *From:* meta-ti-bounces@yoctoproject.org [mailto:
+>> meta-ti-bounces@yoctoproject.org] *On Behalf Of *Brian Hutchinson
+>> *Sent:* Wednesday, July 17, 2013 8:08 AM
+>> *To:* Dmytriyenko, Denys
+>> *Cc:* meta-ti@yoctoproject.org
+>> *Subject:* Re: [meta-ti] Which machine type to use for DaVinci DM6446
+>> and TI816x?****
+>>
+>>  ****
+>>
+>> On Wed, Jul 10, 2013 at 12:46 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+>> ****
+>>
+>>   ****
+>>
+>> DM6446 is quite different from OMAP-L138. Both AM180x and DA850 are just
+>> derivatives of OMAP-L138.
+>>
+>> Anyway, DM6446 is no longer supported, as it's a very old platform.****
+>>
+>>
+>>
+>> > I've always used Arago or Angstrom for DM6446 support in the past and so
+>> > I'm not sure which .conf I should be using with meta-ti.  My gut says
+>> use
+>> > am1808-evm.conf but I thought I should ask to be sure.****
+>>
+>> --
+>> Denys****
+>>
+>>   ****
+>>
+>> So how hard is it to get ti816x machine support moved up into Dylan (or
+>> master)?  I've always had machine support for the branches I used in the
+>> past ... now I find myself needing Dylan or even master and there is no
+>> ti816x support there.****
+>>
+>>  ****
+>>
+>> Is it not there just because nobody had hardware to test it?  If so, I'm
+>> game to add it with some guidance :)****
+>>
+>>  ****
+>>
+>> [CEM] Generally not too hard.  You can often start with the old arago
+>> machine and move that in with some cleanup.  Then you will need to
+>> move/create the bootloader and kernel recipes as well, again looking for
+>> cleanup.  That should give you a basic working system.  The main issue is
+>> that someone needs to be signed up to keep those recipes working and up to
+>> date.  That is what is missing in most cases is a maitainer.****
+>>
+>>  ****
+>>
+>> Even better, for you use I would recommend looking at commit c586bd9a66
+>> which is the one that removed these configs and then add back the pieces
+>> you need.****
+>>
+>>  ****
+>>
+>> ** **
+>>
+>>  Thanks Chase,  I kind of figured it was a (people) bandwidth problem.
+>>  At the moment I'm using a custom board based on the ti816x so I don't need
+>> kernel or u-boot (already have those working for the board and since the
+>> kernel for this platform was never mainlined, it doesn't have much churn)
+>> but simply need packages built using all the Cortex-A8 flags.  I guess I
+>> could be lazy and just build for Beagleboard or something since the ABI's
+>> would be the same but I thought I would ask how to go about it the right
+>> way.  Also, there have been several revs of silicon for that part and I'm
+>> about to acquire the most up-to-date EVM so I could add machine support for
+>> that.****
+>>
+>> ** **
+>>
+>> I'll check out that commit you mentioned and start coming up to speed on
+>> what is involved.****
+>>
+>> ** **
+>>
+>> [CEM] Sure, ping if you have questions J****
+>>
+>>
+>>
+> Will do.  In the mean time ... just to kick the can further down the road
+> so I can get "something" built so I can try a rootfs for my system ... I
+> did a fresh clone of yocto master, meta-ti master, and meta-openembedded
+> master and set machine type to beaglebone.  Bitbake of core-image-minimal
+> results in:
 >
-> *Subject:* Re: [meta-ti] Which machine type to use for DaVinci DM6446 and
-> TI816x?****
+> hutch@neo:~/yocto_master_beaglebone/poky/build$ bitbake core-image-minimal
+> WARNING: Host distribution "Debian-7.1" has not been validated with this
+> version of the build system; you may possibly experience unexpected
+> failures. It is recommended that you use a tested distribution.
+> ERROR: This recipe does not have the LICENSE field set
+> (ti-hw-bringup-image)
+> ERROR: This recipe does not have the LICENSE field set (cloud9-gfx-image)
+> ERROR: This recipe does not have the LICENSE field set (cloud9-image)
+> ERROR: This recipe does not have the LICENSE field set (cloud9-gnome-image)
+> ERROR: Unable to parse
+> /home/hutch/yocto_master_beaglebone/poky/meta-ti/recipes-misc/images/
+> ti-hw-bringup-image.bb: Exited with "1"
+>                                                                          |
+> ETA:  --:--:--
+> ERROR: Command execution failed: Exited with 1
 >
->  ** **
+> Summary: There was 1 WARNING message shown.
+> Summary: There were 6 ERROR messages shown, returning a non-zero exit code.
 >
-> On Wed, Jul 17, 2013 at 9:14 AM, Maupin, Chase <chase.maupin@ti.com>
-> wrote:****
+> Guess I need to do some searching through the archives to see what this
+> new LICENSE stuff is all about.
 >
->   ****
+> Regards,
 >
-> *From:* meta-ti-bounces@yoctoproject.org [mailto:
-> meta-ti-bounces@yoctoproject.org] *On Behalf Of *Brian Hutchinson
-> *Sent:* Wednesday, July 17, 2013 8:08 AM
-> *To:* Dmytriyenko, Denys
-> *Cc:* meta-ti@yoctoproject.org
-> *Subject:* Re: [meta-ti] Which machine type to use for DaVinci DM6446 and
-> TI816x?****
->
->  ****
->
-> On Wed, Jul 10, 2013 at 12:46 PM, Denys Dmytriyenko <denys@ti.com> wrote:*
-> ***
->
->   ****
->
-> DM6446 is quite different from OMAP-L138. Both AM180x and DA850 are just
-> derivatives of OMAP-L138.
->
-> Anyway, DM6446 is no longer supported, as it's a very old platform.****
+> Brian
 >
 >
->
-> > I've always used Arago or Angstrom for DM6446 support in the past and so
-> > I'm not sure which .conf I should be using with meta-ti.  My gut says use
-> > am1808-evm.conf but I thought I should ask to be sure.****
->
-> --
-> Denys****
->
->   ****
->
-> So how hard is it to get ti816x machine support moved up into Dylan (or
-> master)?  I've always had machine support for the branches I used in the
-> past ... now I find myself needing Dylan or even master and there is no
-> ti816x support there.****
->
->  ****
->
-> Is it not there just because nobody had hardware to test it?  If so, I'm
-> game to add it with some guidance :)****
->
->  ****
->
-> [CEM] Generally not too hard.  You can often start with the old arago
-> machine and move that in with some cleanup.  Then you will need to
-> move/create the bootloader and kernel recipes as well, again looking for
-> cleanup.  That should give you a basic working system.  The main issue is
-> that someone needs to be signed up to keep those recipes working and up to
-> date.  That is what is missing in most cases is a maitainer.****
->
->  ****
->
-> Even better, for you use I would recommend looking at commit c586bd9a66
-> which is the one that removed these configs and then add back the pieces
-> you need.****
->
->  ****
->
-> ** **
->
->  Thanks Chase,  I kind of figured it was a (people) bandwidth problem.
->  At the moment I'm using a custom board based on the ti816x so I don't need
-> kernel or u-boot (already have those working for the board and since the
-> kernel for this platform was never mainlined, it doesn't have much churn)
-> but simply need packages built using all the Cortex-A8 flags.  I guess I
-> could be lazy and just build for Beagleboard or something since the ABI's
-> would be the same but I thought I would ask how to go about it the right
-> way.  Also, there have been several revs of silicon for that part and I'm
-> about to acquire the most up-to-date EVM so I could add machine support for
-> that.****
->
-> ** **
->
-> I'll check out that commit you mentioned and start coming up to speed on
-> what is involved.****
->
-> ** **
->
-> [CEM] Sure, ping if you have questions J****
->
->
->
-Will do.  In the mean time ... just to kick the can further down the road
-so I can get "something" built so I can try a rootfs for my system ... I
-did a fresh clone of yocto master, meta-ti master, and meta-openembedded
-master and set machine type to beaglebone.  Bitbake of core-image-minimal
-results in:
+Ah, forgot BBMASK ... maybe that is it.
 
-hutch@neo:~/yocto_master_beaglebone/poky/build$ bitbake core-image-minimal
-WARNING: Host distribution "Debian-7.1" has not been validated with this
-version of the build system; you may possibly experience unexpected
-failures. It is recommended that you use a tested distribution.
-ERROR: This recipe does not have the LICENSE field set (ti-hw-bringup-image)
-ERROR: This recipe does not have the LICENSE field set (cloud9-gfx-image)
-ERROR: This recipe does not have the LICENSE field set (cloud9-image)
-ERROR: This recipe does not have the LICENSE field set (cloud9-gnome-image)
-ERROR: Unable to parse
-/home/hutch/yocto_master_beaglebone/poky/meta-ti/recipes-misc/images/
-ti-hw-bringup-image.bb: Exited with "1"
-                                                                       |
-ETA:  --:--:--
-ERROR: Command execution failed: Exited with 1
-
-Summary: There was 1 WARNING message shown.
-Summary: There were 6 ERROR messages shown, returning a non-zero exit code.
-
-Guess I need to do some searching through the archives to see what this new
-LICENSE stuff is all about.
-
-Regards,
-
-Brian
-
---089e011774cd69bb2f04e1b6671a
+--001a11c334aab4970f04e1b66cc9
 Content-Type: text/html; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 17, 2013 at 10:44 AM, Maupin, Chase <span dir=3D"ltr">&lt;<a hr=
-ef=3D"mailto:chase.maupin@ti.com" target=3D"_blank">chase.maupin@ti.com</a>=
-&gt;</span> wrote:<br><div class=3D"gmail_quote"><blockquote class=3D"gmail=
-_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
-1ex">
+On Wed, Jul 17, 2013 at 11:04 AM, Brian Hutchinson <span dir=3D"ltr">&lt;<a=
+ href=3D"mailto:b.hutchman@gmail.com" target=3D"_blank">b.hutchman@gmail.co=
+m</a>&gt;</span> wrote:<br><div class=3D"gmail_quote"><blockquote class=3D"=
+gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-=
+left:1ex">
+<div class=3D"HOEnZb"><div class=3D"h5">On Wed, Jul 17, 2013 at 10:44 AM, M=
+aupin, Chase <span dir=3D"ltr">&lt;<a href=3D"mailto:chase.maupin@ti.com" t=
+arget=3D"_blank">chase.maupin@ti.com</a>&gt;</span> wrote:<br></div></div><=
+div class=3D"gmail_quote">
+<div><div class=3D"h5"><blockquote class=3D"gmail_quote" style=3D"margin:0 =
+0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
 
 
 
@@ -216,17 +230,16 @@ b.hutchman@gmail.com</a>]
 <b>Sent:</b> Wednesday, July 17, 2013 8:26 AM<br>
 <b>To:</b> Maupin, Chase<br>
 <b>Cc:</b> Dmytriyenko, Denys; <a href=3D"mailto:meta-ti@yoctoproject.org" =
-target=3D"_blank">meta-ti@yoctoproject.org</a></span></p><div class=3D"im">=
-<br>
+target=3D"_blank">meta-ti@yoctoproject.org</a></span></p><div><br>
 <b>Subject:</b> Re: [meta-ti] Which machine type to use for DaVinci DM6446 =
 and TI816x?<u></u><u></u></div><p></p>
 </div>
-</div><div class=3D"im">
+</div><div>
 <p class=3D"MsoNormal"><u></u>=A0<u></u></p>
 <p class=3D"MsoNormal">On Wed, Jul 17, 2013 at 9:14 AM, Maupin, Chase &lt;<=
 a href=3D"mailto:chase.maupin@ti.com" target=3D"_blank">chase.maupin@ti.com=
 </a>&gt; wrote:<u></u><u></u></p>
-</div><div><div class=3D"im">
+</div><div><div>
 <blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0i=
 n 0in 0in 6.0pt;margin-left:4.8pt;margin-right:0in">
 <div>
@@ -365,7 +378,7 @@ machine support for that.<u></u><u></u></p>
 <div>
 <p class=3D"MsoNormal"><u></u>=A0<u></u></p>
 </div>
-</div><div><div class=3D"im">
+</div><div><div>
 <p class=3D"MsoNormal">I&#39;ll check out that commit you mentioned and sta=
 rt coming up to speed on what is involved.<u></u><u></u></p>
 <p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
@@ -378,32 +391,39 @@ uot;Calibri&quot;,&quot;sans-serif&quot;;color:#1f497d">[CEM] Sure, ping if=
 >J</span><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,&q=
 uot;sans-serif&quot;;color:#1f497d"><u></u><u></u></span></p>
 <p class=3D"MsoNormal"><br></p></div></div></div></div></div></blockquote><=
-div><br></div><div>Will do. =A0In the mean time ... just to kick the can fu=
-rther down the road so I can get &quot;something&quot; built so I can try a=
- rootfs for my system ... I did a fresh clone of yocto master, meta-ti mast=
-er, and meta-openembedded master and set machine type to beaglebone. =A0Bit=
-bake of core-image-minimal results in:</div>
+div><br></div></div></div><div>Will do. =A0In the mean time ... just to kic=
+k the can further down the road so I can get &quot;something&quot; built so=
+ I can try a rootfs for my system ... I did a fresh clone of yocto master, =
+meta-ti master, and meta-openembedded master and set machine type to beagle=
+bone. =A0Bitbake of core-image-minimal results in:</div>
+
 <div><br></div><div>hutch@neo:~/yocto_master_beaglebone/poky/build$ bitbake=
  core-image-minimal</div><div>WARNING: Host distribution &quot;Debian-7.1&q=
 uot; has not been validated with this version of the build system; you may =
 possibly experience unexpected failures. It is recommended that you use a t=
 ested distribution.</div>
+
 <div>ERROR: This recipe does not have the LICENSE field set (ti-hw-bringup-=
 image)</div><div>ERROR: This recipe does not have the LICENSE field set (cl=
 oud9-gfx-image)</div><div>ERROR: This recipe does not have the LICENSE fiel=
 d set (cloud9-image)</div>
+
 <div>ERROR: This recipe does not have the LICENSE field set (cloud9-gnome-i=
 mage)</div><div>ERROR: Unable to parse /home/hutch/yocto_master_beaglebone/=
-poky/meta-ti/recipes-misc/images/<a href=3D"http://ti-hw-bringup-image.bb">=
-ti-hw-bringup-image.bb</a>: Exited with &quot;1&quot; =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+poky/meta-ti/recipes-misc/images/<a href=3D"http://ti-hw-bringup-image.bb" =
+target=3D"_blank">ti-hw-bringup-image.bb</a>: Exited with &quot;1&quot; =A0=
  =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| ETA: =A0--:--:--</div>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| ETA: =A0-=
+-:--:--</div>
+
 <div>ERROR: Command execution failed: Exited with 1</div><div><br></div><di=
 v>Summary: There was 1 WARNING message shown.</div><div>Summary: There were=
  6 ERROR messages shown, returning a non-zero exit code.</div><div><br>
+
 </div><div>Guess I need to do some searching through the archives to see wh=
 at this new LICENSE stuff is all about.</div><div><br></div><div>Regards,</=
-div><div><br></div><div>Brian</div><div>=A0</div></div>
+div><div><br></div><div>Brian</div><div>=A0</div></div></blockquote><div>
+Ah, forgot BBMASK ... maybe that is it.=A0</div></div><br>
 
---089e011774cd69bb2f04e1b6671a--
+--001a11c334aab4970f04e1b66cc9--
