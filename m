@@ -1,39 +1,25 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-oa0-f45.google.com (mail-oa0-f45.google.com
-	[209.85.219.45])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4055AE013A2
-	for <meta-ti@yoctoproject.org>; Wed, 17 Jul 2013 08:08:59 -0700 (PDT)
-Received: by mail-oa0-f45.google.com with SMTP id j1so2650555oag.4
-	for <meta-ti@yoctoproject.org>; Wed, 17 Jul 2013 08:08:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=hnOeUzFKbRhehIaLCDRQ8LABuyzhIsjHp3dgHIOpbI0=;
-	b=exvP+cbZtguMNJJ+vUuzhvmX6bR/JeJxUIlAUNvy1zUm8gOToxO1irLBeQLILbx35l
-	d0fR4xDu1ssFJJP0a4nlFEoSyMu21Q9ph63OFRUdq9aTedKUTp/HDz9Kc5HjnGHolTgg
-	WO8RIgQTSEn8qBY2tpiH/zuftrkf8eGUKrt4557HKU7gj24eOD8lN73sBY5fCljypRhk
-	CnIdJr1rBb8GWHZtTzVLEUMJTjoaeBB4Z5kscd/mvZdb0iLqTdnNEPnx4YTpi7uaad5t
-	i6iOpZW/yeFtVuJLQ3ovk0maMIjsXQAax4clUginphIOJ1GB7npzlhJ+htiV8vSo5ZEf
-	m4eg==
+Return-Path: <cliff.brake@gmail.com>
+Received: from bec-systems.com (u15414263.onlinehome-server.com
+	[74.208.70.121])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9843EE01492
+	for <meta-ti@yoctoproject.org>; Thu, 18 Jul 2013 12:35:37 -0700 (PDT)
+Received: from oh-67-76-203-50.sta.embarqhsd.net ([67.76.203.50]
+	helo=happy.bec-systems.com)
+	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
+	id 1UztuQ-0004iz-T5; Thu, 18 Jul 2013 15:30:47 -0400
 MIME-Version: 1.0
-X-Received: by 10.60.37.74 with SMTP id w10mr8732536oej.30.1374073739207; Wed,
-	17 Jul 2013 08:08:59 -0700 (PDT)
-Received: by 10.60.26.225 with HTTP; Wed, 17 Jul 2013 08:08:59 -0700 (PDT)
-In-Reply-To: <CAFZh4h82zOzn1xW2C5o5pC7tX4mW-uO_gSTY3zdRJJ7CxtJRWw@mail.gmail.com>
-References: <CAFZh4h8osM3+bExMHS8zP-YU56h=hsSqjRfAC7Vo9Qu1_kze-w@mail.gmail.com>
-	<20130710164618.GD16407@edge>
-	<CAFZh4h-W=557rBxsehQhzpgJuxk+Z5BmKeboNk2eAGnBt8vBUQ@mail.gmail.com>
-	<7D46E86EC0A8354091174257B2FED1015965BBDC@DLEE11.ent.ti.com>
-	<CAFZh4h-eQBem7qVQnE_=Hf_bccvONrFA174Xr3AdpGw7-5dawQ@mail.gmail.com>
-	<7D46E86EC0A8354091174257B2FED1015965C076@DLEE11.ent.ti.com>
-	<CAFZh4h8vtY8oEGvMTDJs0sDrdoVEK3XH-EqNSh1ptR4rpWvr5g@mail.gmail.com>
-	<CAFZh4h82zOzn1xW2C5o5pC7tX4mW-uO_gSTY3zdRJJ7CxtJRWw@mail.gmail.com>
-Date: Wed, 17 Jul 2013 11:08:59 -0400
-Message-ID: <CAFZh4h-SD9J=7dtmBhWfcD=3ipk26HGh=i1jdjsQGPQTdzZ1og@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: "Maupin, Chase" <chase.maupin@ti.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Which machine type to use for DaVinci DM6446 and TI816x?
+X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
+Date: Thu, 18 Jul 2013 19:35:13 GMT
+Message-Id: <1374176113116.1bc6757c@Nodemailer>
+From: cliff.brake@gmail.com
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
+X-Spam_score: -2.9
+X-Spam_score_int: -28
+X-Spam_bar: --
+Subject: OE Changelog since 2013-07-07 until 2013-07-14
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,407 +32,547 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jul 2013 15:09:00 -0000
-Content-Type: multipart/alternative; boundary=089e013cc49c1ee84b04e1b679e3
-
---089e013cc49c1ee84b04e1b679e3
-Content-Type: text/plain; charset=ISO-8859-1
-
-On Wed, Jul 17, 2013 at 11:05 AM, Brian Hutchinson <b.hutchman@gmail.com>wrote:
-
-> On Wed, Jul 17, 2013 at 11:04 AM, Brian Hutchinson <b.hutchman@gmail.com>wrote:
->
->> On Wed, Jul 17, 2013 at 10:44 AM, Maupin, Chase <chase.maupin@ti.com>wrote:
->>
->>>  ** **
->>>
->>> *From:* Brian Hutchinson [mailto:b.hutchman@gmail.com]
->>> *Sent:* Wednesday, July 17, 2013 8:26 AM
->>> *To:* Maupin, Chase
->>> *Cc:* Dmytriyenko, Denys; meta-ti@yoctoproject.org
->>>
->>> *Subject:* Re: [meta-ti] Which machine type to use for DaVinci DM6446
->>> and TI816x?****
->>>
->>>  ** **
->>>
->>> On Wed, Jul 17, 2013 at 9:14 AM, Maupin, Chase <chase.maupin@ti.com>
->>> wrote:****
->>>
->>>   ****
->>>
->>> *From:* meta-ti-bounces@yoctoproject.org [mailto:
->>> meta-ti-bounces@yoctoproject.org] *On Behalf Of *Brian Hutchinson
->>> *Sent:* Wednesday, July 17, 2013 8:08 AM
->>> *To:* Dmytriyenko, Denys
->>> *Cc:* meta-ti@yoctoproject.org
->>> *Subject:* Re: [meta-ti] Which machine type to use for DaVinci DM6446
->>> and TI816x?****
->>>
->>>  ****
->>>
->>> On Wed, Jul 10, 2013 at 12:46 PM, Denys Dmytriyenko <denys@ti.com>
->>> wrote:****
->>>
->>>   ****
->>>
->>> DM6446 is quite different from OMAP-L138. Both AM180x and DA850 are just
->>> derivatives of OMAP-L138.
->>>
->>> Anyway, DM6446 is no longer supported, as it's a very old platform.****
->>>
->>>
->>>
->>> > I've always used Arago or Angstrom for DM6446 support in the past and
->>> so
->>> > I'm not sure which .conf I should be using with meta-ti.  My gut says
->>> use
->>> > am1808-evm.conf but I thought I should ask to be sure.****
->>>
->>> --
->>> Denys****
->>>
->>>   ****
->>>
->>> So how hard is it to get ti816x machine support moved up into Dylan (or
->>> master)?  I've always had machine support for the branches I used in the
->>> past ... now I find myself needing Dylan or even master and there is no
->>> ti816x support there.****
->>>
->>>  ****
->>>
->>> Is it not there just because nobody had hardware to test it?  If so, I'm
->>> game to add it with some guidance :)****
->>>
->>>  ****
->>>
->>> [CEM] Generally not too hard.  You can often start with the old arago
->>> machine and move that in with some cleanup.  Then you will need to
->>> move/create the bootloader and kernel recipes as well, again looking for
->>> cleanup.  That should give you a basic working system.  The main issue is
->>> that someone needs to be signed up to keep those recipes working and up to
->>> date.  That is what is missing in most cases is a maitainer.****
->>>
->>>  ****
->>>
->>> Even better, for you use I would recommend looking at commit c586bd9a66
->>> which is the one that removed these configs and then add back the pieces
->>> you need.****
->>>
->>>  ****
->>>
->>> ** **
->>>
->>>  Thanks Chase,  I kind of figured it was a (people) bandwidth problem.
->>>  At the moment I'm using a custom board based on the ti816x so I don't need
->>> kernel or u-boot (already have those working for the board and since the
->>> kernel for this platform was never mainlined, it doesn't have much churn)
->>> but simply need packages built using all the Cortex-A8 flags.  I guess I
->>> could be lazy and just build for Beagleboard or something since the ABI's
->>> would be the same but I thought I would ask how to go about it the right
->>> way.  Also, there have been several revs of silicon for that part and I'm
->>> about to acquire the most up-to-date EVM so I could add machine support for
->>> that.****
->>>
->>> ** **
->>>
->>> I'll check out that commit you mentioned and start coming up to speed on
->>> what is involved.****
->>>
->>> ** **
->>>
->>> [CEM] Sure, ping if you have questions J****
->>>
->>>
->>>
->> Will do.  In the mean time ... just to kick the can further down the road
->> so I can get "something" built so I can try a rootfs for my system ... I
->> did a fresh clone of yocto master, meta-ti master, and meta-openembedded
->> master and set machine type to beaglebone.  Bitbake of core-image-minimal
->> results in:
->>
->> hutch@neo:~/yocto_master_beaglebone/poky/build$ bitbake
->> core-image-minimal
->> WARNING: Host distribution "Debian-7.1" has not been validated with this
->> version of the build system; you may possibly experience unexpected
->> failures. It is recommended that you use a tested distribution.
->> ERROR: This recipe does not have the LICENSE field set
->> (ti-hw-bringup-image)
->> ERROR: This recipe does not have the LICENSE field set (cloud9-gfx-image)
->> ERROR: This recipe does not have the LICENSE field set (cloud9-image)
->> ERROR: This recipe does not have the LICENSE field set
->> (cloud9-gnome-image)
->> ERROR: Unable to parse
->> /home/hutch/yocto_master_beaglebone/poky/meta-ti/recipes-misc/images/
->> ti-hw-bringup-image.bb: Exited with "1"
->>
->>  | ETA:  --:--:--
->> ERROR: Command execution failed: Exited with 1
->>
->> Summary: There was 1 WARNING message shown.
->> Summary: There were 6 ERROR messages shown, returning a non-zero exit
->> code.
->>
->> Guess I need to do some searching through the archives to see what this
->> new LICENSE stuff is all about.
->>
->> Regards,
->>
->> Brian
->>
->>
-> Ah, forgot BBMASK ... maybe that is it.
->
-> Yep, forgot BBMASK = "meta-ti/recipes-misc".  Hate it when that happens.
- Sorry for the noise.
-
---089e013cc49c1ee84b04e1b679e3
-Content-Type: text/html; charset=ISO-8859-1
+X-List-Received-Date: Thu, 18 Jul 2013 19:35:39 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 17, 2013 at 11:05 AM, Brian Hutchinson <span dir=3D"ltr">&lt;<a=
- href=3D"mailto:b.hutchman@gmail.com" target=3D"_blank">b.hutchman@gmail.co=
-m</a>&gt;</span> wrote:<br><div class=3D"gmail_quote"><blockquote class=3D"=
-gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-=
-left:1ex">
-<div class=3D"HOEnZb"><div class=3D"h5">On Wed, Jul 17, 2013 at 11:04 AM, B=
-rian Hutchinson <span dir=3D"ltr">&lt;<a href=3D"mailto:b.hutchman@gmail.co=
-m" target=3D"_blank">b.hutchman@gmail.com</a>&gt;</span> wrote:<br></div></=
-div><div class=3D"gmail_quote">
-<div><div class=3D"h5"><blockquote class=3D"gmail_quote" style=3D"margin:0 =
-0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-<div><div>On Wed, Jul 17, 2013 at 10:44 AM, Maupin, Chase <span dir=3D"ltr"=
->&lt;<a href=3D"mailto:chase.maupin@ti.com" target=3D"_blank">chase.maupin@=
-ti.com</a>&gt;</span> wrote:<br></div></div><div class=3D"gmail_quote">
-<div><div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bord=
-er-left:1px #ccc solid;padding-left:1ex">
+Changelog since 2013-07-07 until 2013-07-14.  Projects included in this =
+report:
+
+bitbake: git://git.openembedded.org/bitbake
+openembedded-core: git://git.openembedded.org/openembedded-core
+meta-openembedded: git://git.openembedded.org/meta-openembedded
+meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
+meta-arago: git://arago-project.org/git/meta-arago.git
+meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
+meta-browser: git://github.com/OSSystems/meta-browser.git
+meta-bug: git://github.com/buglabs/meta-bug.git
+meta-chicken: git://github.com/OSSystems/meta-chicken
+meta-efikamx: git://github.com/kraj/meta-efikamx.git
+meta-ettus: http://github.com/koenkooi/meta-ettus.git
+meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
+meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
+meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
+meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
+meta-gumstix: git://github.com/gumstix/meta-gumstix.git
+meta-gumstix-community: =
+git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
+meta-handheld: git://git.openembedded.org/meta-handheld
+meta-igep: http://github.com/ebutera/meta-igep.git
+meta-intel: git://git.yoctoproject.org/meta-intel
+meta-ivi: git://git.yoctoproject.org/meta-ivi
+meta-java: git://github.com/woglinde/meta-java
+meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
+meta-micro: git://git.openembedded.org/meta-micro
+meta-mono: git://git.yoctoproject.org/meta-mono.git
+meta-netbookpro: git://github.com/tworaz/meta-netbookpro
+meta-nslu2: git://github.com/kraj/meta-nslu2
+meta-opie: git://git.openembedded.org/meta-opie
+meta-qt3: git://git.yoctoproject.org/meta-qt3
+meta-qt5: git://github.com/meta-qt5/meta-qt5.git
+meta-slugos: git://github.com/kraj/meta-slugos
+meta-systemd: git://git.yoctoproject.org/meta-systemd
+meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
+meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
+meta-ti: git://git.yoctoproject.org/meta-ti
+meta-webos: git://github.com/openwebos/meta-webos.git
+meta-xilinx: git://git.yoctoproject.org/meta-xilinx
+meta-yocto: git://git.yoctoproject.org/meta-yocto
+openembedded: git://git.openembedded.org/openembedded
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for bitbake:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded-core:
+
+Andreas Oberritter (4):
+=20=20xserver-xorg: extend packageconfig and dependencies
+=20=20cogl-1.0: put each library into its own package
+=20=20cogl-1.0: make building cogl-pango optional
+=20=20qt4-x11-free: fix post-processing of QtWebKit.pc
+
+Andrei Dinu (1):
+=20=20e2fsprogs: upgrade to 1.42.8
+
+Bernhard Guillon (1):
+=20=20populate_sdk_base.bbclass: allow $OECORE_NATIVE_SYSROOT in =
+sdk_env_script
+
+Bian Naimeng (1):
+=20=20package_rpm.bbclass: remove xx.spec before doing rpmbuild xx.src.rpm
+
+Bruce Ashfield (1):
+=20=20linux-yocto/3.4: update to v3.4.52
+
+Cristian Iorga (4):
+=20=20glib-2.0: upgrade to 2.36.3
+=20=20libogg: upgrade to 1.3.1
+=20=20xdg-utils: upgrade to 1.1.0-rc1
+=20=20dbus: upgrade to 1.6.10
+
+Darren Hart (1):
+=20=20alsa-state: Provide an empty asound.conf by default
+
+Emilia Ciobanu (1):
+=20=20distrodata.bbaclass: change in git and svn package reporting
+
+Gabriel Barbu (1):
+=20=20ethtool: add ptest
+
+Hongxu Jia (5):
+=20=20nspr: add native version
+=20=20packagegroup-core-lsb: add nss for LSB library check
+=20=20nss: add version 3.15.1
+=20=20nss: create checksum files for the nss libraries
+=20=20nss: fix incorrect shebang line of perl script
+
+Ionut Radu (8):
+=20=20libassuan: Updated from 2.1.0 to 2.1.1
+=20=20augeas: Update from 1.0.0 to 1.1.0
+=20=20libxvmc: Update from 1.0.7 to 1.0.8
+=20=20libxi: Update from 1.7.1 to 1.7.2
+=20=20libgpg-error: Updated from 1.11 to 1.12
+=20=20libxrender: Updated from 0.9.7 to 0.9.8
+=20=20libxv: Updated from 1.0.8 to 1.0.9
+=20=20ethtool: Updated from 3.9 to 3.10
+
+Jackie Huang (3):
+=20=20initscripts: overwrite default hostname.sh
+=20=20initscripts: add dmesg file to /var/log
+=20=20glib-2.0: add -march=3Di486 into CFLAGS automatically when needed.
+
+Jonathan Liu (2):
+=20=20qt4: add upstream QTBUG-31579 patch to fix polyline drawing regression
+=20=20boot-directdisk: allow specifying custom MBR disk signature
+
+Kang Kai (3):
+=20=20webkit: set COMPATIBLE_HOST for mips64
+=20=20packagegroup-core-lsb: set COMPATIBLE_HOST to mips64
+=20=20packagegroup-core-tools-profile: exclude systemtap and valgrind for =
+mips64
+
+Khem Raj (1):
+=20=20eglibc: Update 2.18 recipes to fix ppc/e500 failures
+
+Laurentiu Palcu (6):
+=20=20populate_sdk_base: fix bashism
+=20=20sysvinit: allow users in shutdown group to perform halt/reboot
+=20=20xuser-account: create separate recipe for xuser creation
+=20=20connman: remove xuser creation, RDEPEND on xuser-account
+=20=20xserver-nodm-init: remove xuser creation, RDEPEND on xuser-account
+=20=20shutdown-desktop: give entire path in Exec field
+
+Mark Hatle (1):
+=20=20qemu: QEMU fix libtool usage
+
+Martin Jansa (8):
+=20=20(lib)telepathy*: add missing dependency on libxslt-native
+=20=20gst-plugins-bad: inherit gsettings
+=20=20gst-plugins-base: add missing dependency on glib-2.0-native
+=20=20taglib: add missing dependency on zlib
+=20=20quota: inherit pkgconfig
+=20=20libpam: inherit pkgconfig
+=20=20systemtap: inherit pkgconfig
+=20=20eglibc-locale: add missing dependency on =
+virtual/${TARGET_PREFIX}binutils
+
+Mihaela Sendrea (1):
+=20=20libxml2: Add ptest
+
+Nathan Rossi (2):
+=20=20scripts/runqemu: Add support for 'qemuzynq' machine
+=20=20scripts/runqemu: Add support for 'qemumicroblaze' machine
+
+Paul Eggleton (1):
+=20=20cmake: fix configure error if system Qt installation is broken
+
+Radu Moisan (12):
+=20=20lib/oeqa/utils/qemurunner.py: class to handle qemu instance
+=20=20lib/oeqa/utils/decorators.py: decorators for test methods
+=20=20elfutils: Upgrade to v0.155
+=20=20rxvt-unicode: Upgrade to v9.18
+=20=20ed: Upgrade to v1.8
+=20=20libdmx: Upgrade to v1.1.3
+=20=20apr: Upgrade to v1.4.8
+=20=20apr-util: Upgrade to v1.5.2
+=20=20usbutils: Upgrade to v007
+=20=20iputils: Upgrade to v20121221
+=20=20diffutils: Upgrade to v3.3
+=20=20rxvt-unicode: Check existence of acinclude.m4
+
+Randy Witt (1):
+=20=20systemd: Don't enable systemd services when native.
+
+Robert Yang (3):
+=20=20package_rpm.bbclass: make DESCRIPTION support newline
+=20=20package_ipk.bbclass: make DESCRIPTION support newline
+=20=20package_deb.bbclass: make DESCRIPTION support newline
+
+Ross Burton (2):
+=20=20gtkdoc: set the default docdir to ${S}, not ${B}
+=20=20pango: drop unexplainable elfutils dependency
+
+Roy.Li (1):
+=20=20pango: remove pango-module-basic-x RRECOMMENDS
+
+Saul Wold (10):
+=20=20packagegroup-core-basic: remove libpam
+=20=20util-linux: Use PACKAGECONFIG to control pam and system config options
+=20=20man-pages: Update to 3.52
+=20=20cmake: Update to 2.8.11.2
+=20=20tzcode-native: Update to 2013d
+=20=20kconfig-frontends: Update to 3.10
+=20=20security_flags: Add addition recipes to the non pie list
+=20=20boost: backport glibc patch for new eglibc
+=20=20pciutils: Add kmod dependency
+=20=20ncurses: add xterm-256color to terminfo-base
+
+Sergey Matyukevich (1):
+=20=20powertop: fix update-alternatives link
+
+Stefan Stanacar (6):
+=20=20classes/testimage.bbclass: new class for image tests
+=20=20lib/oeqa/oetest.py: base module for all runtime unittests
+=20=20lib/oeqa/utils/sshcontrol.py: helper module for running remote =
+commands
+=20=20lib/oeqa/utils/oeqemuconsole.py: handle qemu serial console connection
+=20=20lib/oeqa/runtime: image sanity tests
+=20=20lib/oeqa/runtime: add gcc test
+
+Ting Liu (1):
+=20=20qemu: use PACKAGECONFIG to address libaio/attr/libcap dependencies
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-openembedded:
+
+Andrea Adami (1):
+=20=20initramfs-kexecboot-image: remove obsolete IMAGE_ vars
+
+Andreas M=C3=BCller (2):
+=20=20abiword: remove abiword.inc - it is of no use
+=20=20asio: fix runtime dependencies for images with dev-pkgs in =
+IMAGE_FEATURES
+
+Eric BENARD (1):
+=20=20hexedit: new recipe
+
+Jonathan Liu (9):
+=20=20openldap: remove empty /var/run directory
+=20=20networkmanager: remove /var/run from package
+=20=20cherokee: remove empty /var/run directory
+=20=20collectd: remove empty /var/run directory
+=20=20gdm: remove /var/run from package
+=20=20samba: remove /var/lock and /var/run from package
+=20=20hiawatha: remove empty /var/run directory
+=20=20qt-creator: add new recipe for version 2.7.2
+=20=20nostromo: fix installed but not shipped /run and /run/nostromo =
+warnings
+
+Khem Raj (1):
+=20=20uhd: Fix compile errors
+
+Martin Jansa (23):
+=20=20f2fs-tools: add util-linux dependency
+=20=20ruby: add missing dependency on ruby-native
+=20=20xorg-sgml-doctools: add missing dependency on util-macros
+=20=20cpufrequtils: inherit gettext
+=20=20cryptsetup: add missing dependency on libgcrypt
+=20=20gsoap: add missing dependency on zlib
+=20=20libspatialite: add missing dependency on sqlite3
+=20=20wbxml2: add missing dependency on expat
+=20=20fbida: define -I when checking jpeg version
+=20=20iso-codes: add missing dependency on gettext-native
+=20=20libetpan: explicitly disable sasl support
+=20=20llvm: Consolidate .inc files
+=20=20llvm2: don't install llvm-config to bindir
+=20=20llvm: use newer class-native overrides instead of virtclass
+=20=20llvm: split packages a bit more
+=20=20llvm3.3: Add zlib dependency and explicitly enable it
+=20=20mysql5: prevent using bundled zlib at all costs
+=20=20gypsy: add dependency on libxslt-native
+=20=20portaudio: inherit pkgconfig
+=20=20media-ctl: inherit pkgconfig
+=20=20rsyslog: inherit pkgconfig
+=20=20portaudio: explicitly disable oss, add PACKAGECONFIG for alsa and jack
+=20=20llvm3.3: Add zlib dependency and explicitly enable it
+
+Noor (1):
+=20=20gvfs: Handle samba dependency based on GPLv3 license.
+
+Otavio Salvador (1):
+=20=20lmbench: remove /run/lmbench from package
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-angstrom:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-arago:
+
+Denys Dmytriyenko (23):
+=20=20qt4-embedded/qt4-tools: update recipes and bbappends to the latest =
+version
+=20=20gdb-canadian-cross: remove overlayed recipe, as python fix is upstream
+=20=20openssl: update bbappend to the latest version
+=20=20openssh: update bbappend to the latest version
+=20=20php: update bbappend to the latest version
+=20=20freetype: update bbappend to the latest version
+=20=20gnutls: update bbappend to the latest version
+=20=20bash: remove overlayed recipe, as the fix is upstream now
+=20=20curl: update bbappend to the latest version
+=20=20pulseaudio: update bbappend to the latest version
+=20=20libav: update bbappend to the latest version
+=20=20libav: remove local tweak due to vpx being broken for hardfp
+=20=20tiff: update bbappend to the latest version
+=20=20dbus: update bbappend to the latest version
+=20=20bluez: update bbappend to the latest version
+=20=20kernel.bbclass: remove locally, as fixes are now upstream
+=20=20tisdk-image: fix RDEPENDS being package-specific
+=20=20external-arago-toolchain: move SUPPORTED file into pkg-specific path
+=20=20ti-wifi-utils: fix RDEPENDS being package-specific
+=20=20packagegroup-arago-tisdk-test-addons: remove unneeded ALLOW_EMPTY
+=20=20packagegroup-{connectivity,matrix}: remove TI/ECS specific WiFi/BT =
+pieces th
+=20=20arago-prefs: update new versions and add providers
+=20=20arago.conf: workaround curl breakage with -D and bump distro version
+
+Franklin S. Cooper Jr (6):
+=20=20u-boot-am33x: Update to latest u-boot versoin for 3.2 kernel
+=20=20linux-am335x-psp: Update to latest 3.2 release
+=20=20arago-source-ipk: Enable sourceipk for oprofile-example
+=20=20ti-tisdk-makefile: Add oprofile-example to SDK top level Makefile
+=20=20packagegroup-arago-tisdk-addons-sdk-host: Add oprofile-example =
+sources to SD
+=20=20packagegroup-arago-tisdk-addons: Only include parted utility for =
+omap-a15
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-beagleboard:
+
+Koen Kooi (7):
+=20=20linux-mainline 3.8: import GSoC ADC work, add PPS-gpio support and =
+import so
+=20=20contrib: bone-flash-tool: try harder to get eMMC controller to flush =
+its cac
+=20=20linux-mainline 3.8: fix build failure
+=20=20linux-mainline 3.8: add leds-pwm and bacon cape support
+=20=20contrib: bone-flash-tool: mount vfat async again
+=20=20contrib: bone-flash-tool: switch to new date mode for emmc-prepare =
+and fix v
+=20=20linux-mainline 3.8: add PRU rpmsg support and fix IIO mappings
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-browser:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-bug:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-chicken:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-efikamx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ettus:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm:
+
+Fabio Estevam (1):
+=20=20linux-imx (3.0.35): Update to the latest commit of 4.0.0 branch
+
+Otavio Salvador (9):
+=20=20linux-imx (3.0.35): Sync i.MX6 defconfig files
+=20=20linux-imx (3.0.35): Enable tracing support so lttng's modules are =
+build
+=20=20linux-imx (2.6.35.3): Sync i.MX5 and i.MX28 defconfig files
+=20=20linux-imx (2.6.35.3): Enable tracing support so lttng's modules are =
+build
+=20=20linux-imx (2.6.35.3): Update GIT revision to a0de0f9
+=20=20linux-imx (3.0.35): Update git revision to 08814d9
+=20=20u-boot-fslc: Update to 2013.07-rc2 release
+=20=20imx6dlsabresd: Use U-Boot 2013.07
+=20=20linux-imx (3.0.35): Remove referenced patch kept by mistake
+
+Rogerio Nunes (3):
+=20=20gst-plugins-gl: Upgrade to IMX_MMCODEC_3.0.35_4.0.0
+=20=20gst-plugins-gl: Enforce glib2 deprecated API support
+=20=20gst-plugins-gl: Package arch must match machine arch for i.MX6
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm-extra:
+
+Erik Bot=C3=B6 (1):
+=20=20linux-boundary: Updated SRCREV to pull latest changes.
+
+John Weber (1):
+=20=20linux-wandboard: Add support for non-Android kernel
+
+Otavio Salvador (2):
+=20=20broadcom-nvram-config: Add wandboard-quad as compatible machine
+=20=20wandboard-quad: Add Wandboard Quad support
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-ppc:
+
+Chunrong Guo (1):
+=20=20u-boot: append sdk version into uboot version
+
+Ting Liu (2):
+=20=20change layout to follow oe-core guidelines of recipes
+=20=20hypervisor: fix sizeof-pointer-memaccess error
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-guacamayo:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix-community:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-handheld:
+
+Andrea Adami (2):
+=20=20linux-yocto_3.8: use 'require' instead of 'include' for compliance
+=20=20linux-yocto-tiny-kexecboot_3.8: use 'require' instead of 'include' =
+for compl
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-igep:
+
+Enric Balletbo i Serra (2):
+=20=20linux_git: igep00x0: Switch to use device tree based kernel.
+=20=20u-boot_git: Latest mainline u-boot code.
+
+Enrico Butera (1):
+=20=20Merge pull request #16 from eballetbo/update-dev-packages
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-intel:
+
+Laurentiu Palcu (2):
+=20=20libva: upgrade to 1.2.1
+=20=20libva-intel-driver: upgrade to 1.2.0
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ivi:
+
+Andrei Gherzan (2):
+=20=20busybox: Sync recipe's version with upstream
+=20=20qt4: Sync recipe's version with upstream
+
+Florin Sarbu (4):
+=20=20packagegroup-specific-component-p2: Add common-api-c++ and     =
+common-api-c+
+=20=20layer-management: Update to version 1_0_1
+=20=20vexpressa9.conf: Add PREFERRED_VERSION_linux-yocto to be 3.8
+=20=20Update kernel bbappend for version 3.8
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-java:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-kde:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-micro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-mono:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-netbookpro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nslu2:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-opie:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt3:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt5:
+
+Eric BENARD (1):
+=20=20qtbase-native-5.0.2: fix compilation on Fedora 19
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-slugos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-systemd:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-raspberrypi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-smartphone:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ti:
+
+Franklin S. Cooper Jr (2):
+=20=20u-boot-am33x: Update am335x to use latest u-boot for 3.2 kernel
+=20=20u-boot: Add memory alignment fix for armv7 for am37x and am3517
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-webos:
+
+Anatolii Sakhnik (1):
+=20=20webos-image: libpbnjson=3D14
+
+Eric Blade (1):
+=20=20webos-image: luna-init=3Dv2.0.1,3
+
+Gayathri Srinivasan (1):
+=20=20webos-image: nodejs-module-webos-pmlog=3D14
+
+Maksym Shevchenko (1):
+=20=20Assign Copyright to LG Electronics, Inc.
+
+Martin Jansa (6):
+=20=20alsa-plugins: Disable a52 plugin
+=20=20luna-sysservice: Add missing dependency on libxml2 and sqlite3
+=20=20xkeyboard-config: Remove xkbcomp from RDEPENDS
+=20=20boost: Remove .bbappend, resolved in oe-core
+=20=20luna-sysmgr-common: Add dependency on binutils-cross
+=20=20webos-recipe-blacklist: Blacklist more upstream recipes
+
+Roger Stringer (1):
+=20=20webos-image: smartkey-hun=3D6
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-xilinx:
+
+Nathan Rossi (8):
+=20=20site/microblaze-common: Fix glib format configure value
+=20=20binutils: Added MicroBlaze specific patches
+=20=20gcc: Added MicroBlaze specific patches
+=20=20linux-xlnx: Change 3.8 kernel to use .scc for patches
+=20=20linux-xlnx: Resolve Packaging QA error
+=20=20gcc: Add patch to resolve MicroBlaze -mhard-float issue
+=20=20qemumicroblaze: Update TUNE_FEATURES
+=20=20Merge MicroBlaze Toolchain Enablement.
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+Bruce Ashfield (1):
+=20=20meta-yocto-bsp: update reference board SRCREVs
+
+Emilia Ciobanu (1):
+=20=20package_regex.inc: Changes in regexes
+
+Tom Zanussi (1):
+=20=20yocto-kernel: make BBLAYERS parsing more robust
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded:
 
 
 
-
-
-
-<div lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
-<div>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1f497d"><u></u>=A0<u></u></span><=
-/p>
-<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0in 0in 0in =
-4.0pt">
-<div>
-<div style=3D"border:none;border-top:solid #b5c4df 1.0pt;padding:3.0pt 0in =
-0in 0in">
-<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt;font-family:&quot=
-;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span style=3D"font-s=
-ize:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;"> Brian Hu=
-tchinson [mailto:<a href=3D"mailto:b.hutchman@gmail.com" target=3D"_blank">=
-b.hutchman@gmail.com</a>]
-<br>
-<b>Sent:</b> Wednesday, July 17, 2013 8:26 AM<br>
-<b>To:</b> Maupin, Chase<br>
-<b>Cc:</b> Dmytriyenko, Denys; <a href=3D"mailto:meta-ti@yoctoproject.org" =
-target=3D"_blank">meta-ti@yoctoproject.org</a></span></p><div><br>
-<b>Subject:</b> Re: [meta-ti] Which machine type to use for DaVinci DM6446 =
-and TI816x?<u></u><u></u></div><p></p>
-</div>
-</div><div>
-<p class=3D"MsoNormal"><u></u>=A0<u></u></p>
-<p class=3D"MsoNormal">On Wed, Jul 17, 2013 at 9:14 AM, Maupin, Chase &lt;<=
-a href=3D"mailto:chase.maupin@ti.com" target=3D"_blank">chase.maupin@ti.com=
-</a>&gt; wrote:<u></u><u></u></p>
-</div><div><div>
-<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0i=
-n 0in 0in 6.0pt;margin-left:4.8pt;margin-right:0in">
-<div>
-<div>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1f497d">=A0</span><u></u><u></u><=
-/p>
-<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0in 0in 0in =
-4.0pt">
-<div>
-<div style=3D"border:none;border-top:solid #b5c4df 1.0pt;padding:3.0pt 0in =
-0in 0in">
-<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt;font-family:&quot=
-;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span style=3D"font-s=
-ize:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;">
-<a href=3D"mailto:meta-ti-bounces@yoctoproject.org" target=3D"_blank">meta-=
-ti-bounces@yoctoproject.org</a> [mailto:<a href=3D"mailto:meta-ti-bounces@y=
-octoproject.org" target=3D"_blank">meta-ti-bounces@yoctoproject.org</a>]
-<b>On Behalf Of </b>Brian Hutchinson<br>
-<b>Sent:</b> Wednesday, July 17, 2013 8:08 AM<br>
-<b>To:</b> Dmytriyenko, Denys<br>
-<b>Cc:</b> <a href=3D"mailto:meta-ti@yoctoproject.org" target=3D"_blank">me=
-ta-ti@yoctoproject.org</a><br>
-<b>Subject:</b> Re: [meta-ti] Which machine type to use for DaVinci DM6446 =
-and TI816x?</span><u></u><u></u></p>
-</div>
-</div>
-<div>
-<div>
-<p class=3D"MsoNormal">=A0<u></u><u></u></p>
-<p class=3D"MsoNormal">On Wed, Jul 10, 2013 at 12:46 PM, Denys Dmytriyenko =
-&lt;<a href=3D"mailto:denys@ti.com" target=3D"_blank">denys@ti.com</a>&gt; =
-wrote:<u></u><u></u></p>
-</div>
-</div>
-<div>
-<div>
-<div>
-<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0i=
-n 0in 0in 6.0pt;margin-left:4.8pt;margin-top:5.0pt;margin-right:0in;margin-=
-bottom:5.0pt">
-<div>
-<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt">=A0<u></u><u></u></p>
-</div>
-<p class=3D"MsoNormal">DM6446 is quite different from OMAP-L138. Both AM180=
-x and DA850 are just<br>
-derivatives of OMAP-L138.<br>
-<br>
-Anyway, DM6446 is no longer supported, as it&#39;s a very old platform.<u><=
-/u><u></u></p>
-<div>
-<div>
-<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt"><br>
-<br>
-&gt; I&#39;ve always used Arago or Angstrom for DM6446 support in the past =
-and so<br>
-&gt; I&#39;m not sure which .conf I should be using with meta-ti. =A0My gut=
- says use<br>
-&gt; am1808-evm.conf but I thought I should ask to be sure.<u></u><u></u></=
-p>
-</div>
-</div>
-<p class=3D"MsoNormal"><span style=3D"color:#888888">--<br>
-Denys</span><u></u><u></u></p>
-</blockquote>
-<div>
-<p class=3D"MsoNormal">=A0<u></u><u></u></p>
-</div>
-<div>
-<p class=3D"MsoNormal">So how hard is it to get ti816x machine support move=
-d up into Dylan (or master)? =A0I&#39;ve always had machine support for the=
- branches I used in the past ... now I find myself needing
- Dylan or even master and there is no ti816x support there.<u></u><u></u></=
-p>
-</div>
-<div>
-<p class=3D"MsoNormal">=A0<u></u><u></u></p>
-</div>
-</div>
-</div>
-<div>
-<div>
-<div>
-<p class=3D"MsoNormal">Is it not there just because nobody had hardware to =
-test it? =A0If so, I&#39;m game to add it with some guidance :)<u></u><u></=
-u></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1f497d">=A0</span><u></u><u></u><=
-/p>
-</div>
-</div>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1f497d">[CEM] Generally not too h=
-ard.=A0 You can often start with the old arago machine and move that in wit=
-h
- some cleanup.=A0 Then you will need to move/create the bootloader and kern=
-el recipes as well, again looking for cleanup.=A0 That should give you a ba=
-sic working system.=A0 The main issue is that someone needs to be signed up=
- to keep those recipes working and up
- to date.=A0 That is what is missing in most cases is a maitainer.</span><u=
-></u><u></u></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1f497d">=A0</span><u></u><u></u><=
-/p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1f497d">Even better, for you use =
-I would recommend looking at commit c586bd9a66 which is the one that remove=
-d
- these configs and then add back the pieces you need.</span><u></u><u></u><=
-/p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1f497d">=A0</span><u></u><u></u><=
-/p>
-</div>
-<div>
-<p class=3D"MsoNormal"><u></u>=A0<u></u></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</blockquote>
-<div>
-<p class=3D"MsoNormal">Thanks Chase, =A0I kind of figured it was a (people)=
- bandwidth problem. =A0At the moment I&#39;m using a custom board based on =
-the ti816x so I don&#39;t need kernel or u-boot (already have those working=
- for the board and since the kernel for this platform
- was never mainlined, it doesn&#39;t have much churn) but simply need packa=
-ges built using all the Cortex-A8 flags. =A0I guess I could be lazy and jus=
-t build for Beagleboard or something since the ABI&#39;s would be the same =
-but I thought I would ask how to go about
- it the right way. =A0Also, there have been several revs of silicon for tha=
-t part and I&#39;m about to acquire the most up-to-date EVM so I could add =
-machine support for that.<u></u><u></u></p>
-</div>
-<div>
-<p class=3D"MsoNormal"><u></u>=A0<u></u></p>
-</div>
-</div><div><div>
-<p class=3D"MsoNormal">I&#39;ll check out that commit you mentioned and sta=
-rt coming up to speed on what is involved.<u></u><u></u></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1f497d"><u></u>=A0<u></u></span><=
-/p>
-</div><p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&q=
-uot;Calibri&quot;,&quot;sans-serif&quot;;color:#1f497d">[CEM] Sure, ping if=
- you have questions
-</span><span style=3D"font-size:11.0pt;font-family:Wingdings;color:#1f497d"=
->J</span><span style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,&q=
-uot;sans-serif&quot;;color:#1f497d"><u></u><u></u></span></p>
-<p class=3D"MsoNormal"><br></p></div></div></div></div></div></blockquote><=
-div><br></div></div></div><div>Will do. =A0In the mean time ... just to kic=
-k the can further down the road so I can get &quot;something&quot; built so=
- I can try a rootfs for my system ... I did a fresh clone of yocto master, =
-meta-ti master, and meta-openembedded master and set machine type to beagle=
-bone. =A0Bitbake of core-image-minimal results in:</div>
-
-
-<div><br></div><div>hutch@neo:~/yocto_master_beaglebone/poky/build$ bitbake=
- core-image-minimal</div><div>WARNING: Host distribution &quot;Debian-7.1&q=
-uot; has not been validated with this version of the build system; you may =
-possibly experience unexpected failures. It is recommended that you use a t=
-ested distribution.</div>
-
-
-<div>ERROR: This recipe does not have the LICENSE field set (ti-hw-bringup-=
-image)</div><div>ERROR: This recipe does not have the LICENSE field set (cl=
-oud9-gfx-image)</div><div>ERROR: This recipe does not have the LICENSE fiel=
-d set (cloud9-image)</div>
-
-
-<div>ERROR: This recipe does not have the LICENSE field set (cloud9-gnome-i=
-mage)</div><div>ERROR: Unable to parse /home/hutch/yocto_master_beaglebone/=
-poky/meta-ti/recipes-misc/images/<a href=3D"http://ti-hw-bringup-image.bb" =
-target=3D"_blank">ti-hw-bringup-image.bb</a>: Exited with &quot;1&quot; =A0=
- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| ETA: =A0-=
--:--:--</div>
-
-
-<div>ERROR: Command execution failed: Exited with 1</div><div><br></div><di=
-v>Summary: There was 1 WARNING message shown.</div><div>Summary: There were=
- 6 ERROR messages shown, returning a non-zero exit code.</div><div><br>
-
-
-</div><div>Guess I need to do some searching through the archives to see wh=
-at this new LICENSE stuff is all about.</div><div><br></div><div>Regards,</=
-div><div><br></div><div>Brian</div><div>=A0</div></div></blockquote></div>
-</div><div>
-Ah, forgot BBMASK ... maybe that is it.=A0</div></div><br></blockquote><div=
->Yep, forgot BBMASK =3D &quot;meta-ti/recipes-misc&quot;. =A0Hate it when t=
-hat happens. =A0Sorry for the noise.</div><div>=A0</div></div><br>
-
---089e013cc49c1ee84b04e1b679e3--
