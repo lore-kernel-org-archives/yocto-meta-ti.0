@@ -1,30 +1,30 @@
 Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA87CE01528
-	for <meta-ti@yoctoproject.org>; Tue, 23 Jul 2013 10:11:43 -0700 (PDT)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CEA43E01528
+	for <meta-ti@yoctoproject.org>; Tue, 23 Jul 2013 10:12:18 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r6NHBgwP003571
-	for <meta-ti@yoctoproject.org>; Tue, 23 Jul 2013 12:11:42 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r6NHBfbJ004039
-	for <meta-ti@yoctoproject.org>; Tue, 23 Jul 2013 12:11:42 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 23 Jul 2013 12:11:41 -0500
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r6NHCHHC009932
+	for <meta-ti@yoctoproject.org>; Tue, 23 Jul 2013 12:12:17 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r6NHCHnk004757
+	for <meta-ti@yoctoproject.org>; Tue, 23 Jul 2013 12:12:17 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 23 Jul 2013 12:12:17 -0500
 Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r6NHBf0E027036;
-	Tue, 23 Jul 2013 12:11:41 -0500
-Date: Tue, 23 Jul 2013 13:11:41 -0400
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r6NHCHHc027444;
+	Tue, 23 Jul 2013 12:12:17 -0500
+Date: Tue, 23 Jul 2013 13:12:16 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: "Maupin, Chase" <chase.maupin@ti.com>
-Message-ID: <20130723171141.GO31158@edge>
-References: <20130701123138.GA16101@ti.com>
-	<7D46E86EC0A8354091174257B2FED1015962B49B@DLEE11.ent.ti.com>
+Message-ID: <20130723171216.GP31158@edge>
+References: <20130701123155.GA16127@ti.com>
+	<7D46E86EC0A8354091174257B2FED1015962B52B@DLEE11.ent.ti.com>
 MIME-Version: 1.0
-In-Reply-To: <7D46E86EC0A8354091174257B2FED1015962B49B@DLEE11.ent.ti.com>
+In-Reply-To: <7D46E86EC0A8354091174257B2FED1015962B52B@DLEE11.ent.ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 1/2] recipes-bsp: Add recipe for PowerVR SGX544MP2 kernel drivers
+Subject: Re: [PATCH 2/2] libgles: Added prebuilt userspace libraries for graphics acceleration
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,125 +37,89 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jul 2013 17:11:44 -0000
+X-List-Received-Date: Tue, 23 Jul 2013 17:12:20 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
 Ping for addressing Chase's comments?
 
-On Mon, Jul 01, 2013 at 01:41:43PM +0000, Maupin, Chase wrote:
+On Mon, Jul 01, 2013 at 01:45:40PM +0000, Maupin, Chase wrote:
 > >-----Original Message-----
 > >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
 > >bounces@yoctoproject.org] On Behalf Of Hingolikar, Mrinmayee
 > >Sent: Monday, July 01, 2013 7:32 AM
 > >To: meta-ti@yoctoproject.org
-> >Subject: [meta-ti] [PATCH 1/2] recipes-bsp: Add recipe for PowerVR
-> >SGX544MP2 kernel drivers
+> >Subject: [meta-ti] [PATCH 2/2] libgles: Added prebuilt userspace
+> >libraries for graphics acceleration
 > >
-> >* The PowerVR SGX544MP2 is found on omap5 and dra7xx devices. This
-> >  recipe adds support for the PowerVR graphics subsystem.
+> >* These libraries are not distributable in source and hence
+> >  are available only as binary. They implement OpenGLES 1.x and
+> >  OpenGLES 2.x accelerated using SGX 544-MP2 found in OMAP5
+> >  class of devices.
 > >
 > >Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
 > >Signed-off-by: Siddharth Heroor <heroor@ti.com>
 > >---
-> > .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |   42
+> > .../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb     |   24
 > >++++++++++++++++++++
-> > 1 files changed, 42 insertions(+), 0 deletions(-)
-> > create mode 100644 recipes-bsp/powervr-drivers/omapdrm-
-> >pvr_1.9.2253347.bb
+> > 1 files changed, 24 insertions(+), 0 deletions(-)
+> > create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-
+> >linux_1.9.0.10.bb
 > >
-> >diff --git a/recipes-bsp/powervr-drivers/omapdrm-
-> >pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-
-> >pvr_1.9.2253347.bb
+> >diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-
+> >linux_1.9.0.10.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-
+> >linux_1.9.0.10.bb
 > >new file mode 100644
-> >index 0000000..edb2682
+> >index 0000000..d3a847d
 > >--- /dev/null
-> >+++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-> >@@ -0,0 +1,42 @@
-> >+DESCRIPTION =  "Kernel drivers for the PowerVR SGX chipset found
-> >in the omap5 SoCs"
-> >+HOMEPAGE = "http://git.ti.com"
-> >+LICENSE = "GPLv2"
-> >+
-> >+LIC_FILES_CHKSUM = "file://MIT-
-> >COPYING;md5=8c2810fa6bfdc5ae5c15a0c1ade34054"
+> >+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
+> >@@ -0,0 +1,24 @@
+> >+DESCRIPTION = "Userspace libraries for sgx"
+> >+HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
+> >+LICENSE = "TI"
+> >+DEPENDS = ""
 > 
-> I see an issue with you setting the LICENSE to GPLv2 but having the file you 
-> are checking be MIT-COPYING.  This seems wrong.
+> Why do you want to blank out the default DEPENDS?
 > 
 > >+
-> >+inherit module
+> >+SRC_URI =
+> >"http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/
+> >gfxsdk/OMAP5_1_09_00_10//exports/omap5-sgx-ddk-um-linux-
+> >${PV}.tar.gz;protocol=http"
 > >+
-> >+SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-
-> >linux.git;protocol=git"
-> >+S = "${WORKDIR}/git"
-> >+
-> >+SRCREV = "6668f4ea0bbf7e3df7f72dc2230ab8da1e748b2d"
-> >+PR = "${MACHINE_KERNEL_PR}"
-> >+
-> >+do_compile() {
-> >+    cd ${S}/eurasiacon/build/linux2/omap5430_linux
-> >+    oe_runmake KERNELDIR="${STAGING_KERNEL_DIR}"
-> >+}
+> >+LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-
+> >Manifest.doc;md5=d280df8e94bb2e7b9251c8526078eeb8"
 > 
-> I think you could do a do_compile_prepend here to perform the cd command and 
-> set EXTRA_OEMAKE to include the KERNELDIR setting.  That way you don't have 
-> to override the entire do_compile function.
+> Is the manifest truly your license file as well?
 > 
 > >+
-> >+do_install() {
-> >+    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/extra/
-> >+    cp
-> >${S}/eurasiacon/binary2_omap5430_linux_release/target/kbuild/omapd
-> >rm_pvr.ko \
-> >+    ${D}/lib/modules/${KERNEL_VERSION}/extra/
-> >+}
+> >+PR = "r1"
 > 
-> Can you not use the default do_install in the module.bbclass?  As long as 
-> your makefile can handle modules_install you should be fine here.
+> Why not start at r0?
 > 
 > >+
-> >+FILES_omapdrm-pvr =
-> >"/lib/modules/${KERNEL_VERSION}/extra/omapdrm_pvr.ko"
+> >+SRC_URI[md5sum] = "3cfb875de031098a4c1eeeaf4e442367"
 > 
-> The FILES setting in module.bbclass should pick this us out of /lib/modules
-> 
-> >+RDEPENDS_omapdrm-pvr += "update-modules"
-> 
-> This RDEPENDS is already part of module.bbclass
+> Don't you need a sha256sum too?
 > 
 > >+
-> >+pkg_postinst_omapdrm-pvr () {
-> >+#!/bin/sh
-> >+if [ -n "$D" ]; then
-> >+        exit 1
-> >+fi
+> >+S = "${WORKDIR}/${PN}-${PV}"
 > >+
-> >+depmod -a
-> >+update-modules || true
+> >+do_install () {
+> >+    oe_runmake install DESTDIR=${D}
 > >+}
 > >+
-> >+pkg_postrm_omapdrm-pvr () {
-> >+#!/bin/sh
-> >+update-modules || true
+> >+PACKAGES =+ "${PN}-${PV}"
 > 
-> Why did you need to define these functions?  The module.bbclass that you 
-> inherit already has:
+> Why do you want to make a version specific package?  Why not just leave the default PN?  You also don't define any files to be part of that package.
 > 
-> pkg_postinst_append () {
-> if [ -z "$D" ]; then
->     depmod -a
->     update-modules || true
-> fi
-> }
+> >+
+> >+FILES_${PN} =  "${bindir}/*"
+> >+FILES_${PN} += " ${libdir}/*"
+> >+FILES_${PN} +=  "${includedir}/*"
 > 
-> pkg_postrm_append () {
-> update-modules || true
-> }
+> Shouldn't many of these directories already be in the base FILES set?  Why re-set them?
 > 
-> Won't these work for you?
-> 
-> >+}
 > >--
 > >1.7.0.4
 > >
