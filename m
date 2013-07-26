@@ -1,37 +1,25 @@
-Return-Path: <chgans@googlemail.com>
-Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
-	[209.85.192.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 67BE6E014E4
-	for <meta-ti@yoctoproject.org>; Thu, 25 Jul 2013 15:45:07 -0700 (PDT)
-Received: by mail-pd0-f182.google.com with SMTP id r10so2227277pdi.27
-	for <meta-ti@yoctoproject.org>; Thu, 25 Jul 2013 15:45:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=sender:message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=hl7xRGJJV9Assg9Eo+f9xuOwtEWj92VllPLJn2IhGfs=;
-	b=Kb1hqv/Ln36wZ4QSVLIWLyHuIoMj9Nr25Yizu4Zd2NC3L7wi29ZxPO7wvgS9vSy9T+
-	Hc8ceFpo33ucpOTZmQZaOKgAc7b8OPXBcNJv2M4fVaISOVQb5tCF6+WqsbE9J/nHWDWB
-	s1jNfX5nyl3krk7XO+hxfM+FvACqeOQYe2DVt0v7BKXsI7WSjdYwv2pUL5Fww/lzKJlo
-	ZC8DI1mFN4dJQSXQJxvMZgOAFoiJ+OsZhUi10/jSRv6DYFn5DC/3pvWjVO06Pul4g8qs
-	xnCvxPsveia79HWwLpaud39c1xFeNjo1U+vaJQji/PRn1py8HFIY9SsWSN7fVJRDb4Iz
-	Eicw==
-X-Received: by 10.66.248.164 with SMTP id yn4mr52154895pac.153.1374792307247; 
-	Thu, 25 Jul 2013 15:45:07 -0700 (PDT)
-Received: from krys-red.trunet.local ([210.48.94.225])
-	by mx.google.com with ESMTPSA id ai6sm391216pad.15.2013.07.25.15.45.04
-	for <meta-ti@yoctoproject.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 25 Jul 2013 15:45:06 -0700 (PDT)
-Sender: Chris Gagneraud <chgans@googlemail.com>
-Message-ID: <51F1AA6E.4050607@gna.org>
-Date: Fri, 26 Jul 2013 10:45:02 +1200
-From: Christian Gagneraud <chgans@gna.org>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+Return-Path: <a.renault@kaptalia.com>
+Received: from moutng.kundenserver.de (moutng.kundenserver.de [212.227.17.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E93DE014E4
+	for <meta-ti@yoctoproject.org>; Fri, 26 Jul 2013 06:17:31 -0700 (PDT)
+Received: from linux-krvt.localnet ([46.18.96.158])
+	by mrelayeu.kundenserver.de (node=mreu4) with ESMTP (Nemesis)
+	id 0LeFM9-1UJyY63qfN-00q919; Fri, 26 Jul 2013 15:17:28 +0200
+From: "a.renault@kaptalia.com" <a.renault@kaptalia.com>
+To: meta-ti@yoctoproject.org
+Date: Fri, 26 Jul 2013 15:17:25 +0200
+Message-ID: <4967548.gSMLmRAeV9@linux-krvt>
+User-Agent: KMail/4.8.5 (Linux/3.4.47-2.38-desktop; KDE/4.8.5; i686; ; )
 MIME-Version: 1.0
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: [Qt5] mkspecs/devices: beagleboard == am335x ?
+X-Provags-ID: V02:K0:PawM2gMcEs11uPZswNpbgEfFd2cLS6XxbVAAWAf9bIU
+	Rkd1DpM2HBIpyr+z2HSOs0E3owAeahZIstcSAhWLSfpvbY2vMK
+	PKD5zkisLVsPiQFGV9BGC37lGnXxjh+J+2pkBLhtFU1XaBsYxG
+	cn5VlBvZs4k3g+6HbiIzugZz0CRAqG6oCrNXQYRmAHSKt2rsJS
+	aCdl+QTBf1Pv+hUpMn8IYi5LK3zLvE+6NETxfZO14rJo0kdCP0
+	9DayaAf9PdZyjcET/wpucfb/bFS9dlFSawpHOveWwb1GJ9Y3sH
+	SVL0+MLO10A2w5c7KeOhGd16xdJsy4jbcjo1dnsLSWQbD4HZ9B
+	3GTmHQ6Sayj1yoC0b18PuJSTa/BGk0ByZ1V+vXRAX
+Subject: Build core-image-minimal on tdm3730
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,29 +32,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jul 2013 22:45:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Jul 2013 13:17:32 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi there,
+Hi there, 
+I already post this message this morning on #linux-omap but I have got no 
+answer, so if you please I will test here.
 
-In qtbase sources, there are a couple of "device" definitions files, 
-according to [1], this greatly help cross-compiling qt5.
-This device file specify things for CPU and GPU optimisations. So 
-basically these files are tightly coupled with BSP providers.
+I am trying to build core-image-minimal (OpenEmbedded/yocto) for my TechNexion 
+TDM-3730 (http://www.technexion.com/index.php/products/arm-cpu-modules/ti-
+dm3730/tdm-3730) CPU : TI Sitara DM3730@1Ghz, DSP Core TMS320C64x@800Mhz and 
+POWERVG SGX 530
 
-One of them is linux-beagleboard-g++ [2], is it appropriate to use this 
-one for AM335x based platform as well?
+I read the CPU was omap3 compatible so I downloaded the meta-ti on 
+http://layers.openembedded.org/layerindex/layer/meta-ti/ and tried to put 
+"omap3evm" on the field MACHINE of local.conf.
 
-The meta-qt5 layer doesn't seem to use this feature, but if it did, 
-would this device config files help to get an optimised Qt5 build for TI 
-SoCs? Especially, would that help to get OpenGL stuff sorted out?
+The folder build/tmp-eglibc/deploy/images is now containing core-image-
+minimal.rootfs.tar.gz, uImage, u-boot.bin and MLO  but when I tried to install 
+them on my board, I have got the next issue : 
 
-Regards,
-Chris
+Error: unrecognized/unsupported machine ID (r1 = 0x00000c78). Available 
+machine support:ID (hex)	NAME 000005ff	OMAP3 EVM Please check your kernel 
+config and/or bootloader.
 
-[1] 
-http://blog.qt.digia.com/blog/2012/04/13/cross-compiling-qt-for-the-masses/
-[2] 
-https://qt.gitorious.org/qt/qtbase/trees/stable/mkspecs/devices/linux-beagleboard-g++
+I understand what happen but I don't know how to fix it. 
+
+I also tried to build with MACHINE=am37x-evm, got the same issues.
+am37x seams to be close to dm37x didn't it?
+
+Did not tried TI Sitara AM3517 EVM.
+
+Do you have any idea of what I should try to do. Did you know someone who 
+succeed to build yocto on that card? 
+I saw angstrom narcissus (http://narcissus.angstrom-distribution.org/) 
+proposing to build a rootfs for dm3730-am3715-evm but all the selected package 
+selected failed.
+
+
 
