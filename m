@@ -1,28 +1,30 @@
-Return-Path: <bmentink@gmail.com>
-Received: from mail-pd0-f181.google.com (mail-pd0-f181.google.com
-	[209.85.192.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 49D5DE01480
-	for <meta-ti@yoctoproject.org>; Fri,  9 Aug 2013 01:36:25 -0700 (PDT)
-Received: by mail-pd0-f181.google.com with SMTP id g10so298374pdj.12
-	for <meta-ti@yoctoproject.org>; Fri, 09 Aug 2013 01:36:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=FXW1NKzF5HocP1Rsvb6+jiZAZfrVVK96XVp1dfAvqkw=;
-	b=pxAhfeIo2Ldzmx+tifJ8PBKhZsTw39/GVPMyRgtE7IkU/y51dLftRSsznNKN84jiHy
-	+6IQxsSGtq643A6Al27Xq2ZP/zEMbYLUUSIN8LYJUzpkwZ3hGlnX/CNyst4fAEWrfMRg
-	EXnmjexsByzE1pzzncyL9stWg63NXN57W8d69KWzLXlNTcj+PJZCCTRS2FIaT0DMYTU4
-	WiiZcaOR6SZ31n/2oHWRoafkKb3h+IaFESCujFQcii+zWxC630bJ5FwvyPTabAlGOXxh
-	N8F6Ar7RK6s+cu44c2uGD2ZQfustD27YMRQtMy9J4hLeLBNR3fkTC2fH8WIsICosjbCN
-	1WXQ==
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 28E1DE00404
+	for <meta-ti@yoctoproject.org>; Fri,  9 Aug 2013 16:22:44 -0700 (PDT)
+Received: from [174.115.226.96] (port=45237 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1V7w14-0002kx-IG
+	for meta-ti@yoctoproject.org; Fri, 09 Aug 2013 19:22:42 -0400
+Date: Fri, 9 Aug 2013 19:22:39 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: meta-ti mailing list <meta-ti@yoctoproject.org>
+Message-ID: <alpine.DEB.2.02.1308091920590.10592@oneiric>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
-X-Received: by 10.66.136.131 with SMTP id qa3mr10342995pab.77.1376037384973;
-	Fri, 09 Aug 2013 01:36:24 -0700 (PDT)
-Received: by 10.70.23.225 with HTTP; Fri, 9 Aug 2013 01:36:24 -0700 (PDT)
-Date: Fri, 9 Aug 2013 20:36:24 +1200
-Message-ID: <CALEed8ZHVy_e2z6aVBRRj2HkwZ8gfOAEs_Rf-KYfTopn20d5Eg@mail.gmail.com>
-From: Bernard Mentink <bmentink@gmail.com>
-To: meta-ti@yoctoproject.org
-Subject: Beaglebone black not booting
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: should mesa_9.1.5.bbappend be upgraded to 9.1.6?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,30 +37,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Aug 2013 08:36:28 -0000
-Content-Type: multipart/alternative; boundary=001a113376908771ab04e37fab7d
+X-List-Received-Date: Fri, 09 Aug 2013 23:22:47 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
---001a113376908771ab04e37fab7d
-Content-Type: text/plain; charset=ISO-8859-1
 
-Hi All,
+  trying to build for beaglebone, getting:
 
-I am trying to get a Yocto + meta-ti build going for the beaglebone black,
-but it only gets partway through the kernel boot, then fails with errors
-relating to pin setup on MMC.
+ERROR: No recipes available for:
+/home/rpjday/oe/dist/layers/meta-ti/recipes-graphics/mesa/mesa_9.1.5.bbappend
+ERROR: Command execution failed: Exited with 1
 
-Is there a special target for the beaglebone black, I built using
-MACHINE=beaglebone
+should meta-ti master stay in sync with oe-core master (which has a
+recipe for 9.1.6), or is there a different combo of layers to use?
+thanks.
 
-I am building the minimal image.
+rday
 
-Thanks,
-Bernie
+-- 
 
---001a113376908771ab04e37fab7d
-Content-Type: text/html; charset=ISO-8859-1
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
 
-<div dir="ltr">Hi All,<div><br></div><div>I am trying to get a Yocto + meta-ti build going for the beaglebone black, but it only gets partway through the kernel boot, then fails with errors relating to pin setup on MMC.</div>
-<div><br></div><div>Is there a special target for the beaglebone black, I built using MACHINE=beaglebone</div><div><br></div><div>I am building the minimal image.</div><div><br></div><div>Thanks,</div><div>Bernie</div></div>
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
---001a113376908771ab04e37fab7d--
