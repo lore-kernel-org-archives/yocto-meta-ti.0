@@ -1,30 +1,28 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-ob0-f180.google.com (mail-ob0-f180.google.com
-	[209.85.214.180])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 99B20E01480
-	for <meta-ti@yoctoproject.org>; Thu,  8 Aug 2013 12:44:19 -0700 (PDT)
-Received: by mail-ob0-f180.google.com with SMTP id up14so5488921obb.39
-	for <meta-ti@yoctoproject.org>; Thu, 08 Aug 2013 12:44:19 -0700 (PDT)
+Return-Path: <bmentink@gmail.com>
+Received: from mail-pd0-f181.google.com (mail-pd0-f181.google.com
+	[209.85.192.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 49D5DE01480
+	for <meta-ti@yoctoproject.org>; Fri,  9 Aug 2013 01:36:25 -0700 (PDT)
+Received: by mail-pd0-f181.google.com with SMTP id g10so298374pdj.12
+	for <meta-ti@yoctoproject.org>; Fri, 09 Aug 2013 01:36:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=dHavp7NKNVf5ki+YV4r62Jg4T0K2KC3wwiBhrGRllQE=;
-	b=tE+XommbH/ZwdETa74Eg+GzRmpn+ajjybro4OAa0nU4HnwvZR/Ljj4h5yhyPjbvdqI
-	JAMylxRQMbPcRj9FDwZlpqECpjMoWcEssFAnjch62DGsOU84X2D+Q7dwskoV9qT4wklV
-	rPK488CEYO7bjortYlAZNQZY7aB2lCQmkny+F+wG3ZzFQtnXD/cdBpjycBsBaQx17U9l
-	vI1rPc9iJPGN7+sM76FHik8TCEuyYGI5zeJj7LdqkKWq/gY/qcGu+TNFF5aoIMLBEuAv
-	iWWSqoCs/YjOJuEEyqZwvedS3gyFvafPyywUymN4UBUVTs/D/SPwQVl0bB+u7/9mFCkl
-	E6HQ==
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=FXW1NKzF5HocP1Rsvb6+jiZAZfrVVK96XVp1dfAvqkw=;
+	b=pxAhfeIo2Ldzmx+tifJ8PBKhZsTw39/GVPMyRgtE7IkU/y51dLftRSsznNKN84jiHy
+	+6IQxsSGtq643A6Al27Xq2ZP/zEMbYLUUSIN8LYJUzpkwZ3hGlnX/CNyst4fAEWrfMRg
+	EXnmjexsByzE1pzzncyL9stWg63NXN57W8d69KWzLXlNTcj+PJZCCTRS2FIaT0DMYTU4
+	WiiZcaOR6SZ31n/2oHWRoafkKb3h+IaFESCujFQcii+zWxC630bJ5FwvyPTabAlGOXxh
+	N8F6Ar7RK6s+cu44c2uGD2ZQfustD27YMRQtMy9J4hLeLBNR3fkTC2fH8WIsICosjbCN
+	1WXQ==
 MIME-Version: 1.0
-X-Received: by 10.182.56.197 with SMTP id c5mr432159obq.51.1375991059050; Thu,
-	08 Aug 2013 12:44:19 -0700 (PDT)
-Received: by 10.60.142.41 with HTTP; Thu, 8 Aug 2013 12:44:18 -0700 (PDT)
-In-Reply-To: <CAFZh4h9NOEKpS1P+WU9r7EXCA4wUx1dQ85CZ+Z0LB5Vk-fAfPQ@mail.gmail.com>
-References: <CAFZh4h9NOEKpS1P+WU9r7EXCA4wUx1dQ85CZ+Z0LB5Vk-fAfPQ@mail.gmail.com>
-Date: Thu, 8 Aug 2013 15:44:18 -0400
-Message-ID: <CAFZh4h9BoYmsXP6tpENmA9_6_5DqEQ2X26A4vGdO+3SLawhncA@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
+X-Received: by 10.66.136.131 with SMTP id qa3mr10342995pab.77.1376037384973;
+	Fri, 09 Aug 2013 01:36:24 -0700 (PDT)
+Received: by 10.70.23.225 with HTTP; Fri, 9 Aug 2013 01:36:24 -0700 (PDT)
+Date: Fri, 9 Aug 2013 20:36:24 +1200
+Message-ID: <CALEed8ZHVy_e2z6aVBRRj2HkwZ8gfOAEs_Rf-KYfTopn20d5Eg@mail.gmail.com>
+From: Bernard Mentink <bmentink@gmail.com>
 To: meta-ti@yoctoproject.org
-Subject: Re: populate_sdk for am1808-evm image causes binutils errors (yocto master, meta-ti master, oe master) x86_64-linux-libtool: line 552: CDPATH: command not found
+Subject: Beaglebone black not booting
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,34 +35,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Aug 2013 19:44:20 -0000
-Content-Type: multipart/alternative; boundary=001a11c2578249f61004e374e2dd
+X-List-Received-Date: Fri, 09 Aug 2013 08:36:28 -0000
+Content-Type: multipart/alternative; boundary=001a113376908771ab04e37fab7d
 
---001a11c2578249f61004e374e2dd
+--001a113376908771ab04e37fab7d
 Content-Type: text/plain; charset=ISO-8859-1
 
-Update.  This looks like just some kind of bug from doing a git pull.  I
-did a fresh checkout and rebuilt everything and I didn't run into this
-problem again.
+Hi All,
 
-Sorry for the noise.  I kept my other view that had the problem so if
-anyone wants me to try anything to figure out why a git pull broke
-something then just let me know.
+I am trying to get a Yocto + meta-ti build going for the beaglebone black,
+but it only gets partway through the kernel boot, then fails with errors
+relating to pin setup on MMC.
 
-Regards,
+Is there a special target for the beaglebone black, I built using
+MACHINE=beaglebone
 
-Brian
+I am building the minimal image.
 
---001a11c2578249f61004e374e2dd
+Thanks,
+Bernie
+
+--001a113376908771ab04e37fab7d
 Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-Update. =A0This looks like just some kind of bug from doing a git pull. =A0=
-I did a fresh checkout and rebuilt everything and I didn&#39;t run into thi=
-s problem again.<div><br></div><div>Sorry for the noise. =A0I kept my other=
- view that had the problem so if anyone wants me to try anything to figure =
-out why a git pull broke something then just let me know.</div>
-<div><br></div><div>Regards,</div><div><br></div><div>Brian</div><div><br><=
-/div>
+<div dir="ltr">Hi All,<div><br></div><div>I am trying to get a Yocto + meta-ti build going for the beaglebone black, but it only gets partway through the kernel boot, then fails with errors relating to pin setup on MMC.</div>
+<div><br></div><div>Is there a special target for the beaglebone black, I built using MACHINE=beaglebone</div><div><br></div><div>I am building the minimal image.</div><div><br></div><div>Thanks,</div><div>Bernie</div></div>
 
---001a11c2578249f61004e374e2dd--
+--001a113376908771ab04e37fab7d--
