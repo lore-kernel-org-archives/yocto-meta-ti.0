@@ -1,19 +1,15 @@
-Return-Path: <kgy@teledigit.eu>
-Received: from teledigit.eu (teledigit.eu [195.56.148.37])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26B6CE0048B
-	for <meta-ti@yoctoproject.org>; Sat, 10 Aug 2013 08:31:19 -0700 (PDT)
-X-AuthUser: kgy@teledigit.eu
-Received: from kgy-pc.localnet ([46.107.59.216]:42656)
-	by teledigit.eu with [XMail 1.27 ESMTP Server]
-	id <S2BC52> for <meta-ti@yoctoproject.org> from <kgy@teledigit.eu>;
-	Sat, 10 Aug 2013 17:30:41 +0200
-From: Kovesdi Gyorgy <kgy@teledigit.eu>
-To: meta-ti mailing list <meta-ti@yoctoproject.org>
-Date: Sat, 10 Aug 2013 18:30:10 +0200
-Message-ID: <1554710.Rp68v4FIpQ@kgy-pc>
-User-Agent: KMail/4.8.5 (Linux/3.4.47-2.38-desktop; KDE/4.8.5; i686; ; )
-MIME-Version: 1.0
-Subject: Problem compiling libgles-omap3_4.09.00.01
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53F44E0048B
+	for <meta-ti@yoctoproject.org>; Sat, 10 Aug 2013 10:21:40 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 9451452A14; Sat, 10 Aug 2013 17:21:39 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130810172139.9451452A14@arago-project.org>
+Date: Sat, 10 Aug 2013 17:21:39 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : mesa: bump the version again to match oe-core
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,35 +22,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Aug 2013 15:31:24 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Sat, 10 Aug 2013 17:21:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
+Module: meta-ti
+Branch: master
+Commit: 8fc6ff04ff82daa70b8bf9a92873db2010efa3fe
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8fc6ff04ff82daa70b8bf9a92873db2010efa3fe
 
-I have no luck with libgles-omap3 too :-(
-Trying to use the recent versions of meta-ti and poky, i got the follow=
-ing=20
-error:
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Aug 10 13:20:47 2013 -0400
 
-ERROR: QA Issue: File '/usr/lib/libsrv_init.so.1.9.2188537' from libgle=
-s-omap3=20
-was already stripped, this will prevent future debugging!
-....... (a lot of other similar files are mentioned here) .......
-Summary: 1 task failed:
-  /home/kgy/work/Yocto/poky/meta-ti/recipes-graphics/libgles/libgles-
-omap3_4.09.00.01.bb, do_package
+mesa: bump the version again to match oe-core
 
-Some time ago, this kind of QA problems was treated as warnings - as fa=
-r as i=20
-remember. Currently i don't care about debugging, so it would also good=
- if i=20
-could ignore these errors or at least switch them to warning. Is it pos=
-sible?
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-Please help me to resolve it!
+---
 
-Thanx in advance
-Gy=F6rgy K=F6vesdi
+ .../{mesa_9.1.5.bbappend => mesa_9.1.6.bbappend}   |    0
+ 1 files changed, 0 insertions(+), 0 deletions(-)
+
+diff --git a/recipes-graphics/mesa/mesa_9.1.5.bbappend b/recipes-graphics/mesa/mesa_9.1.6.bbappend
+similarity index 100%
+rename from recipes-graphics/mesa/mesa_9.1.5.bbappend
+rename to recipes-graphics/mesa/mesa_9.1.6.bbappend
 
 
