@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C5636E01431
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C2ECEE0048B
 	for <meta-ti@yoctoproject.org>; Sat, 10 Aug 2013 13:57:14 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B60E952A55; Sat, 10 Aug 2013 20:57:12 +0000 (UTC)
+	id 60F8352A61; Sat, 10 Aug 2013 20:57:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130810205712.B60E952A55@arago-project.org>
-Date: Sat, 10 Aug 2013 20:57:12 +0000 (UTC)
+Message-Id: <20130810205713.60F8352A61@arago-project.org>
+Date: Sat, 10 Aug 2013 20:57:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : libdrm: restore libdrm-tests package that got missed with TI version
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Sat, 10 Aug 2013 20:57:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: danny
-Commit: 72d4c5d37decfc8591981d3c8a859af6e6e68059
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=72d4c5d37decfc8591981d3c8a859af6e6e68059
+Branch: master
+Commit: ed417f659a24499301eb8e40de06e281462f213a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ed417f659a24499301eb8e40de06e281462f213a
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Sat Aug 10 16:41:28 2013 -0400
