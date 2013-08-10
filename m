@@ -1,31 +1,33 @@
-Return-Path: <prabu@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 260E8E00406
-	for <meta-ti@yoctoproject.org>; Sat, 10 Aug 2013 03:08:19 -0700 (PDT)
-Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r7AA8CWI011034;
-	Sat, 10 Aug 2013 05:08:13 -0500
-Received: from DBDE72.ent.ti.com (dbde72.ent.ti.com [172.24.171.97])
-	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7AA89S6021840;
-	Sat, 10 Aug 2013 05:08:10 -0500
-Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
-	DBDE72.ent.ti.com ([fe80::bd56:32bf:87fd:2763%27]) with mapi id
-	14.02.0342.003; Sat, 10 Aug 2013 18:08:09 +0800
-From: "Sundareson, Prabindh" <prabu@ti.com>
-To: Kovesdi Gyorgy <kgy@teledigit.eu>, meta-ti mailing list
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] How to compile omap3-sgx-modules_4.09.00.01
-Thread-Index: AQHOlbBccpF5VfqMmEy26ID+B8qtM5mON4Ww
-Date: Sat, 10 Aug 2013 10:08:08 +0000
-Message-ID: <321768C95D21724485BCE784F1BE98473EB8E6DA@DBDE04.ent.ti.com>
-References: <1687303.zqgYtDvr2z@kgy-pc>
-In-Reply-To: <1687303.zqgYtDvr2z@kgy-pc>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.49]
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4BE3BE00408
+	for <meta-ti@yoctoproject.org>; Sat, 10 Aug 2013 03:10:10 -0700 (PDT)
+Received: from [174.115.226.96] (port=50541 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1V867d-0004jI-AJ; Sat, 10 Aug 2013 06:10:09 -0400
+Date: Sat, 10 Aug 2013 06:10:04 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@oneiric
+To: Brian Hutchinson <b.hutchman@gmail.com>
+In-Reply-To: <CAFZh4h8MZBVtwCUisoaNnBrd=Y81jZkrkhKAZUx2+JcBvTWepA@mail.gmail.com>
+Message-ID: <alpine.DEB.2.02.1308100608560.2277@oneiric>
+References: <alpine.DEB.2.02.1308091920590.10592@oneiric>
+	<CAFZh4h8MZBVtwCUisoaNnBrd=Y81jZkrkhKAZUx2+JcBvTWepA@mail.gmail.com>
+User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
-Subject: Re: How to compile omap3-sgx-modules_4.09.00.01
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - yoctoproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: Re: should mesa_9.1.5.bbappend be upgraded to 9.1.6?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +40,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Aug 2013 10:08:22 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 10 Aug 2013 10:10:14 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-191019220-1376129408=:2277"
 
-It appears you are trying to build a drm driver - correct ?
-________________________________________
-From: meta-ti-bounces@yoctoproject.org [meta-ti-bounces@yoctoproject.org] o=
-n behalf of Kovesdi Gyorgy [kgy@teledigit.eu]
-Sent: Saturday, August 10, 2013 4:28 PM
-To: meta-ti mailing list
-Subject: [meta-ti] How to compile omap3-sgx-modules_4.09.00.01
+--8323329-191019220-1376129408=:2277
+Content-Type: TEXT/PLAIN; charset=ISO-8859-1
+Content-Transfer-Encoding: 8BIT
 
-Hi,
+On Fri, 9 Aug 2013, Brian Hutchinson wrote:
 
-I tried to compile recent versions (4.08 or 4.09) of SGX modules for my
-Beagleboard-C4 using the current Yoctoproject environment (tried Poky,
-beagleboard-dylan-9.0.0, and Angstrom Linux with the same result).
+>
+>
+> On Aug 9, 2013 7:23 PM, "Robert P. J. Day" <rpjday@crashcourse.ca> wrote:
+> >
+> >
+> >   trying to build for beaglebone, getting:
+> >
+> > ERROR: No recipes available for:
+> > /home/rpjday/oe/dist/layers/meta-ti/recipes-graphics/mesa/mesa_9.1.5.bbappend
+> > ERROR: Command execution failed: Exited with 1
+> >
+> > should meta-ti master stay in sync with oe-core master (which has a
+> > recipe for 9.1.6), or is there a different combo of layers to use?
+> > thanks.
+> >
+> > rday
+> >
+>
+> Hi Robert,
+>
+> I ran into the same thing the other day.  Yes, yocto master should
+> be used with meta-ti master as far as I know.  I've ran into trouble
+> mixing branch layers before.
 
-In every case i got this error message:
+  i'm not sure what you mean by "yocto master". i'm aware of the
+meta-yocto layer, but that doesn't supply the underlying recipes. did
+you mean "poky master"? or am i missing something here?
 
-| make[3]: *** No rule to make target
-`/home/kgy/work/Yocto/poky/build/out/work/beagleboard-poky-linux-
-gnueabi/omap3-sgx-modules/4.09.00.01-
-r124a/Graphics_SDK_4_09_00_01/GFX_Linux_KM/services4/3rdparty/linux_drm/drm=
-_auth.o',
-needed by `/home/kgy/work/Yocto/poky/build/out/work/beagleboard-poky-linux-
-gnueabi/omap3-sgx-modules/4.09.00.01-
-r124a/Graphics_SDK_4_09_00_01/GFX_Linux_KM/services4/3rdparty/linux_drm/drm=
-.o'.
-Stop.
+rday
 
-Please help me to compile it!
+-- 
 
-Thanx in advance
-Gy=F6rgy K=F6vesdi
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
 
-_______________________________________________
-meta-ti mailing list
-meta-ti@yoctoproject.org
-https://lists.yoctoproject.org/listinfo/meta-ti
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
+--8323329-191019220-1376129408=:2277--
