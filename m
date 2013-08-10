@@ -1,22 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01C7EE0048B
-	for <meta-ti@yoctoproject.org>; Sat, 10 Aug 2013 13:44:43 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MRC005NQ1MINDA3@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sat, 10 Aug 2013 15:44:42 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id BE02620091; Sat,
-	10 Aug 2013 16:44:41 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C5636E01431
+	for <meta-ti@yoctoproject.org>; Sat, 10 Aug 2013 13:57:14 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id B60E952A55; Sat, 10 Aug 2013 20:57:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Sat, 10 Aug 2013 16:44:40 -0400
-Message-id: <1376167480-30946-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH] libdrm: restore libdrm-tests package that got missed with TI version
+Message-Id: <20130810205712.B60E952A55@arago-project.org>
+Date: Sat, 10 Aug 2013 20:57:12 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : libdrm: restore libdrm-tests package that got missed with TI version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,16 +22,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Aug 2013 20:44:45 -0000
+X-List-Received-Date: Sat, 10 Aug 2013 20:57:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: danny
+Commit: 72d4c5d37decfc8591981d3c8a859af6e6e68059
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=72d4c5d37decfc8591981d3c8a859af6e6e68059
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Aug 10 16:41:28 2013 -0400
+
+libdrm: restore libdrm-tests package that got missed with TI version
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- .../drm/libdrm-2.4.41/installtests-ti.patch        | 46 ++++++++++++++++++++++
- recipes-graphics/drm/libdrm_2.4.41.bb              |  8 +++-
- 2 files changed, 53 insertions(+), 1 deletion(-)
- create mode 100644 recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch
+
+ .../drm/libdrm-2.4.41/installtests-ti.patch        |   46 ++++++++++++++++++++
+ recipes-graphics/drm/libdrm_2.4.41.bb              |    8 +++-
+ 2 files changed, 53 insertions(+), 1 deletions(-)
 
 diff --git a/recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch b/recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch
 new file mode 100644
@@ -116,7 +119,5 @@ index 1d89401..0150632 100644
 +PR = "${INC_PR}.1"
  
  S = "${WORKDIR}/git"
--- 
-1.8.3.2
 
 
