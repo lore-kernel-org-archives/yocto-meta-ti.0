@@ -1,30 +1,23 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E660E00406
-	for <meta-ti@yoctoproject.org>; Sat, 10 Aug 2013 05:01:22 -0700 (PDT)
-Received: from [174.115.226.96] (port=58432 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1V87rF-00089h-Ag
-	for meta-ti@yoctoproject.org; Sat, 10 Aug 2013 08:01:21 -0400
-Date: Sat, 10 Aug 2013 08:01:17 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: meta-ti mailing list <meta-ti@yoctoproject.org>
-Message-ID: <alpine.DEB.2.02.1308100759260.16253@oneiric>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
+Return-Path: <kgy@teledigit.eu>
+Received: from teledigit.eu (teledigit.eu [195.56.148.37])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 314BEE0048B
+	for <meta-ti@yoctoproject.org>; Sat, 10 Aug 2013 07:50:02 -0700 (PDT)
+X-AuthUser: kgy@teledigit.eu
+Received: from kgy-pc.localnet ([46.107.59.216]:42333)
+	by teledigit.eu with [XMail 1.27 ESMTP Server]
+	id <S2BC4C> for <meta-ti@yoctoproject.org> from <kgy@teledigit.eu>;
+	Sat, 10 Aug 2013 16:49:25 +0200
+From: Kovesdi Gyorgy <kgy@teledigit.eu>
+To: "Sundareson, Prabindh" <prabu@ti.com>
+Date: Sat, 10 Aug 2013 17:48:52 +0200
+Message-ID: <2080630.Ym40fTraDf@kgy-pc>
+User-Agent: KMail/4.8.5 (Linux/3.4.47-2.38-desktop; KDE/4.8.5; i686; ; )
+In-Reply-To: <321768C95D21724485BCE784F1BE98473EB8E6DA@DBDE04.ent.ti.com>
+References: <1687303.zqgYtDvr2z@kgy-pc>
+	<321768C95D21724485BCE784F1BE98473EB8E6DA@DBDE04.ent.ti.com>
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: is "gadget-init" package sufficient for USB tethering operation?
+Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: Re: How to compile omap3-sgx-modules_4.09.00.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,23 +30,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Aug 2013 12:01:25 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sat, 10 Aug 2013 14:50:04 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
+> It appears you are trying to build a drm driver - correct ?
+Yes, i would need a working OpenGL on my Beagleboard-C4 with 3.x kernel=
+. (4.05=20
+works well with 2.6 but crashes with 3.x)
 
-  building for a beaglebone black, and i want the full USB tethering
-functionality you get with a BBB as shipped -- is it just the
-gadget-init package i need to add to my build?
-
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+> ________________________________________
+> From: meta-ti-bounces@yoctoproject.org [meta-ti-bounces@yoctoproject.=
+org] on
+> behalf of Kovesdi Gyorgy [kgy@teledigit.eu] Sent: Saturday, August 10=
+, 2013
+> 4:28 PM
+> To: meta-ti mailing list
+> Subject: [meta-ti] How to compile omap3-sgx-modules_4.09.00.01
+>=20
+> Hi,
+>=20
+> I tried to compile recent versions (4.08 or 4.09) of SGX modules for =
+my
+> Beagleboard-C4 using the current Yoctoproject environment (tried Poky=
+,
+> beagleboard-dylan-9.0.0, and Angstrom Linux with the same result).
+>=20
+> In every case i got this error message:
+> | make[3]: *** No rule to make target
+>=20
+> `/home/kgy/work/Yocto/poky/build/out/work/beagleboard-poky-linux-
+> gnueabi/omap3-sgx-modules/4.09.00.01-
+> r124a/Graphics_SDK_4_09_00_01/GFX_Linux_KM/services4/3rdparty/linux_d=
+rm/drm_
+> auth.o', needed by
+> `/home/kgy/work/Yocto/poky/build/out/work/beagleboard-poky-linux-
+> gnueabi/omap3-sgx-modules/4.09.00.01-
+> r124a/Graphics_SDK_4_09_00_01/GFX_Linux_KM/services4/3rdparty/linux_d=
+rm/drm.
+> o'. Stop.
+>=20
+> Please help me to compile it!
+>=20
+> Thanx in advance
+> Gy=F6rgy K=F6vesdi
+>=20
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
