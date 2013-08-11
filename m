@@ -1,28 +1,36 @@
-Return-Path: <bmentink@gmail.com>
-Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
-	[209.85.223.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D7331E013A7
-	for <meta-ti@yoctoproject.org>; Sun, 11 Aug 2013 12:03:14 -0700 (PDT)
-Received: by mail-ie0-f176.google.com with SMTP id 9so6736845iec.7
-	for <meta-ti@yoctoproject.org>; Sun, 11 Aug 2013 12:03:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=syCFGTUFVx0+kigTxf5i8wzIZ4WH4Bi499GMUZ/wR8Y=;
-	b=m/WGWE//VtZ8eB14zlXXP+iQN1EaN6Sjv0YHa4NaFEWqc6FfTCSEcsPsjnyO0dI44d
-	G0ASAiFez49LnVsOtEd1QSQ4EfIsJ3cVTSLzTTRYKqlllKZDrjupCKnV/q2HEXbeWeiZ
-	NrwqPvGwkElp8tvEPzMPMohythoFDbckZLiC+ubp3v2X2DJqb2feFukVrDmxf7Hi3bra
-	I5lNK2epg1nddd1o/AS0BOGdzES/BxEYUy4IA/v/56WzY7GKLuV/2DIvYx2AqDvKlakl
-	+Y5DCfIh+iLLR3MS7L6xI74rTN7NgJaJ0knr7kLOSVhdpdoZXyZ+kidYxg+kSHbiJYDx
-	LeWA==
-MIME-Version: 1.0
-X-Received: by 10.50.47.46 with SMTP id a14mr6554406ign.46.1376247793583; Sun,
-	11 Aug 2013 12:03:13 -0700 (PDT)
-Received: by 10.43.83.9 with HTTP; Sun, 11 Aug 2013 12:03:13 -0700 (PDT)
-Date: Mon, 12 Aug 2013 07:03:13 +1200
-Message-ID: <CALEed8ZSPE+kmVK1bJbVZRCZ1TEPE8xLuxF38jqs+geFcz=8bg@mail.gmail.com>
-From: Bernard Mentink <bmentink@gmail.com>
+Return-Path: <geiseri@geiseri.com>
+Received: from mail-qa0-f44.google.com (mail-qa0-f44.google.com
+	[209.85.216.44])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4339CE013D1
+	for <meta-ti@yoctoproject.org>; Sun, 11 Aug 2013 16:39:47 -0700 (PDT)
+Received: by mail-qa0-f44.google.com with SMTP id hu16so724732qab.17
+	for <meta-ti@yoctoproject.org>; Sun, 11 Aug 2013 16:39:47 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=BMnVdvFpFaP9MWNHIC3SL9NmPEoyslzU7B84wakwANw=;
+	b=XydvrA/D8VkcO9ORUrEGL1Nqs4I6bU/xJINaC1/Y1mcXW0rG+udcqpZgwP55wYbWVY
+	d5bV89c62T+ZWg35ZwFWhr5c6P5wLh6JgO2NqZxz8tI24I3hr9AU8td/gdIHNN9MuIp0
+	1oj4Em6MHSIfJWpiLhihgIw79IUcnPygM+qyLmWRpZTL4lNdjVUiaEoMMzM2CrqlvBAv
+	Tc94k5AYNcEZMTfEh5b7Ddc4wt59RW0TGgjMMAuSzZ67aahX0ZWs52QjNyBIir0b514O
+	kuGgYfeSO1ppUXblW4Cx9+sy2XslnHwUvGbjUMVzZeNR8QE2Xvi5zCMN/zNoR3PjnIp1
+	yMcw==
+X-Gm-Message-State: ALoCoQmRMXAY/UocFZ9jwH+HoVn3Askc09qQSJzsNo6hp1o3Pe7HREzvoccjipGwDlz7De4Dfjq/
+X-Received: by 10.224.120.202 with SMTP id e10mr22284931qar.23.1376264387034; 
+	Sun, 11 Aug 2013 16:39:47 -0700 (PDT)
+Received: from localhost.localdomain
+	(pool-96-245-43-60.phlapa.fios.verizon.net. [96.245.43.60])
+	by mx.google.com with ESMTPSA id q15sm34309900qak.5.2013.08.11.16.39.45
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 11 Aug 2013 16:39:46 -0700 (PDT)
+Sender: Ian Geiser <geiseri@geiseri.com>
+From: igeiser@devonit.com
 To: meta-ti@yoctoproject.org
-Subject: Trouble booting BeagleBone Black
+Date: Sun, 11 Aug 2013 19:41:34 -0400
+Message-Id: <1376264495-7627-1-git-send-email-igeiser@devonit.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [PATCH 1/2] Fix filespath for dylan
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,50 +43,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Aug 2013 19:03:18 -0000
-Content-Type: multipart/alternative; boundary=089e013c699cdc3c4704e3b0a837
+X-List-Received-Date: Sun, 11 Aug 2013 23:39:48 -0000
 
---089e013c699cdc3c4704e3b0a837
-Content-Type: text/plain; charset=ISO-8859-1
+From: Ian Reinhart Geiser <igeiser@devonit.com>
 
-Hi All,
+The old way of setting THISDIR in a bbappend clobbers THISDIR for
+other layers.  This change makes it use the new way that is done
+in dylan.
 
-I have just used Yocto with the meta-ti layer to build the minimal image,
-placed all the files on an SD card and tried to boot ..
-It gets a couple of seconds into the kernel and hangs on mmc pin setting,
-copy of the boot --> http://pastebin.com/0asaJ9tf
+Signed-off-by: Ian Reinhart Geiser <igeiser@devonit.com>
+---
+ recipes-bsp/formfactor/formfactor_0.0.bbappend |    5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-Question: I built for MACHINE=beaglebone but I don't know if that is for
-the while or black targets, or if there is a difference.
-I suspect the issue is with the device-tree file .. the tool built a file
-called  uImage-am335x-bone.dtb, but when the kernel tried to boot, it
-wanted a file called am335x-boneblack.dtb, so I just re-named the produced
-file to that and I got the above boot sequence ..
+diff --git a/recipes-bsp/formfactor/formfactor_0.0.bbappend b/recipes-bsp/formfactor/formfactor_0.0.bbappend
+index 4b8d0e6..491d403 100644
+--- a/recipes-bsp/formfactor/formfactor_0.0.bbappend
++++ b/recipes-bsp/formfactor/formfactor_0.0.bbappend
+@@ -1,3 +1,2 @@
+-THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}"
+-FILESPATH =. "${@base_set_filespath(["${THISDIR}/${PN}"], d)}:"
+-
++PRINC := "${@int(PRINC) + 1}"
++FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+-- 
+1.7.9.5
 
-Maybe that is the wrong thing to do? Is there a way to get the build to
-produce the am335x-boneblack.dtb file?
 
-Thanks,
-Bernie
-
---089e013c699cdc3c4704e3b0a837
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi All,<div><br></div><div style>I have just used Yocto wi=
-th the meta-ti layer to build the minimal image, placed all the files on an=
- SD card and tried to boot ..</div><div style>It gets a couple of seconds i=
-nto the kernel and hangs on mmc pin setting, copy of the boot --&gt;=A0<a h=
-ref=3D"http://pastebin.com/0asaJ9tf">http://pastebin.com/0asaJ9tf</a></div>
-<div style><br></div><div style>Question: I built for MACHINE=3Dbeaglebone =
-but I don&#39;t know if that is for the while or black targets, or if there=
- is a difference.</div><div style>I suspect the issue is with the device-tr=
-ee file .. the tool built a file called =A0uImage-am335x-bone.dtb, but when=
- the kernel tried to boot, it wanted a file called=A0am335x-boneblack.dtb, =
-so I just re-named the produced file to that and I got the above boot seque=
-nce ..</div>
-<div style><br></div><div style>Maybe that is the wrong thing to do? Is the=
-re a way to get the build to produce the=A0am335x-boneblack.dtb file?</div>=
-<div style><br></div><div style>Thanks,</div><div style>Bernie</div></div>
-
---089e013c699cdc3c4704e3b0a837--
