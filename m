@@ -1,19 +1,29 @@
-Return-Path: <pab@pabigot.com>
-Received: from p3plsmtpa09-07.prod.phx3.secureserver.net
-	(p3plsmtpa09-07.prod.phx3.secureserver.net [173.201.193.236])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86D95E013A7
-	for <meta-ti@yoctoproject.org>; Sun, 11 Aug 2013 08:41:25 -0700 (PDT)
-Received: from [192.168.65.10] ([66.41.60.82])
-	by p3plsmtpa09-07.prod.phx3.secureserver.net with 
-	id BThQ1m0021mTNtu01ThQMq; Sun, 11 Aug 2013 08:41:25 -0700
-Message-ID: <5207B0A8.9070709@pabigot.com>
-Date: Sun, 11 Aug 2013 10:41:28 -0500
-From: "Peter A. Bigot" <pab@pabigot.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130804 Thunderbird/17.0.8
+Return-Path: <denys@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CA8D8E013A7
+	for <meta-ti@yoctoproject.org>; Sun, 11 Aug 2013 11:28:01 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r7BIRtXi032145;
+	Sun, 11 Aug 2013 13:27:55 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7BIRtnW013362;
+	Sun, 11 Aug 2013 13:27:55 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Sun, 11 Aug 2013 13:27:55 -0500
+Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r7BIRtf4030459;
+	Sun, 11 Aug 2013 13:27:55 -0500
+Date: Sun, 11 Aug 2013 14:27:54 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Prathamesh P Ghanekar <prathamesh.ghanekar@igate.com>
+Message-ID: <20130811182754.GA28453@edge>
+References: <2BC3ECFBDE78594E858F96993713F3F9011FA5E2@IGTEMUMMB11.igatecorp.com>
 MIME-Version: 1.0
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: dylan gstreamer-ti on linux 3.8
+In-Reply-To: <2BC3ECFBDE78594E858F96993713F3F9011FA5E2@IGTEMUMMB11.igatecorp.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: unable to fetch a repository mentioned in SRC_URI
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,35 +36,93 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Aug 2013 15:41:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 11 Aug 2013 18:28:03 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-I'm working on a DM3730-based Gumstix Overo, trying to bring the kernel 
-up to 3.8.13 since the 3.5.x series doesn't have the V4L2 support I 
-need.  Using the dylan branch of meta-ti I can build gstreamer-ti for a 
-3.5.0 kernel, but not for 3.8.13.  The downward slide begins with 
-ti-linuxutils-2_26_01_02 building cmem which blurts:
+On Tue, Aug 06, 2013 at 11:43:08AM +0000, Prathamesh P Ghanekar wrote:
+> Hello,
+> 
+> I am trying to integrate meta-ti layer into the current yocto project. I 
+> wish to build the image for pandaboard.
+> 
+> I am adding another layer called meta-ivi in the yocto kernel which provided 
+> functionality for in-vehicle infotainment systems. In the meta-ivi layer, 
+> there is a recipe "foton-image", which builds GENIVI compliant baseline 
+> image. Also, few recipes were masked to resolve the license issue.
+> 
+> So, setting all the variables in the conf/local.conf and conf/bblayers.conf 
+> file, I build the image as follows.
+> 
+> 
+> è bitbake foton-image
+> 
+> 
+> I ended up with following error, which indicates that there's a failure in fetching the repository.
+> 
+> Here is the output log for your reference:
+> 
+> prathamesh@mintos ~/workdir/poky-dylan-9.0.1/build $ bitbake foton-image
+> Loading cache: 100% |###################################################################################################################################| ETA:  00:00:00
+> Loaded 1220 entries from dependency cache.
+> 
+> Build Configuration:
+> BB_VERSION        = "1.18.0"
+> BUILD_SYS         = "i686-linux"
+> NATIVELSBSTRING   = "LinuxMint-14"
+> TARGET_SYS        = "arm-oe-linux-gnueabi"
+> MACHINE           = "pandaboard"
+> DISTRO            = "poky-ivi-systemd"
+> DISTRO_VERSION    = "4.0.2"
+> TUNE_FEATURES     = "armv7a vfp neon"
+> TARGET_FPU        = "vfp-neon"
+> meta
+> meta-yocto
+> meta-yocto-bsp
+> meta-ivi-4.0.2    = "<unknown>:<unknown>"
+> meta-ti           = "master:c14c386946e1ea341faeea292580e37d538d645d"
+> 
+> NOTE: Resolving any missing task queue dependencies
+> NOTE: multiple providers are available for u-boot (u-boot, u-boot-ti-staging)
+> NOTE: consider defining a PREFERRED_PROVIDER entry to match u-boot
+> NOTE: Preparing runqueue
+> NOTE: Executing SetScene Tasks
+> NOTE: Executing RunQueue Tasks
+> WARNING: Failed to fetch URL git://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487<http://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487>, attempting MIRRORS if available
+> ERROR: Fetcher failure: Fetch command failed with exit code 128, output:
+> Cloning into bare repository '/home/prathamesh/workdir/poky-dylan-9.0.1/build/downloads/git2/dev.omapzoom.org.pub.scm.integration.kernel-ubuntu.git'...
+> 
+> fatal: The remote end hung up unexpectedly
+> fatal: early EOF
+> fatal: index-pack failed
 
-  warning: #warning *** not a warning *** Note: LINUX_VERSION_CODE >= 
-2.6.26 [-Wcpp]
+It seems you had your connection terminated unexpectedly... Have you tried it 
+again? Does it happen every time?
+BTW, seems to work fine here...
 
-and starts choking on lack of VM_RESERVED because linux commit 
-314e51b9851b4f4 for v3.7 replaced it with other flags.  This can be 
-patched (though I'd have to try to figure out which flag set is 
-intended), but the build then gets into trouble in 
-sdma/src/module/sdmak.c because plat/hardware.h disappeared in 
-dbc04161048, also first appearing in v3.7.
 
-At this point I noticed that linuxutils is up to 4.0.0.6 which supplies 
-only cmemk, which I think is all I need (and which I think I really do 
-need).  Great, except it uses autotools and doesn't have an 
-install_modules target so the trivial replacement recipe doesn't work.
+> ERROR: Function failed: Fetcher failure for URL: 'git://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487<http://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487>'. Unable to fetch URL from any source.
+> ERROR: Logfile of failure stored in: /home/prathamesh/workdir/poky-dylan-9.0.1/build/tmp-eglibc-eglibc/work/pandaboard-oe-linux-gnueabi/linux-omap4/3.4-r0/temp/log.do_fetch.4257
+> ERROR: Task 910 (/home/prathamesh/workdir/meta-ti/recipes-kernel/linux/linux-omap4_3.4.bb<http://linux-omap4_3.4.bb>, do_fetch) failed with exit code '1'
+> NOTE: Tasks Summary: Attempted 2323 tasks of which 2231 didn't need to be rerun and 1 failed.
+> Waiting for 0 running tasks to finish:
+> 
+> Summary: 1 task failed:
+>   /home/prathamesh/workdir/meta-ti/recipes-kernel/linux/linux-omap4_3.4.bb<http://linux-omap4_3.4.bb>, do_fetch
+> Summary: There was 1 WARNING message shown.
+> Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+> 
+> Note:
+> 1. I have successfully built the foton-image for target vexpressa9, and it 
+> boots without any errors in the qemu emulator.
+> 2. I am able to 'git clone' the above mentioned repository. If you could let 
+> me know how can I use the local repository for build process. I tried 
+> copying the repository in downloads folder, but it did not work somehow.
 
-So: What is the recommended path to get gstreamer-ti to function on a 
-DM3730 with kernel 3.8 and/or 3.10?
+You need to get a bare repository and place it into:
+downloads/git2/dev.omapzoom.org.pub.scm.integration.kernel-ubuntu.git
 
-Thanks.
-
-Peter
+-- 
+Denys
 
