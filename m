@@ -1,15 +1,19 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4242E004A0
-	for <meta-ti@yoctoproject.org>; Sat, 10 Aug 2013 13:57:14 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 2BDC352A56; Sat, 10 Aug 2013 20:57:13 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130810205713.2BDC352A56@arago-project.org>
-Date: Sat, 10 Aug 2013 20:57:13 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : libdrm: restore libdrm-tests package that got missed with TI version
+Return-Path: <pab@pabigot.com>
+Received: from p3plsmtpa09-07.prod.phx3.secureserver.net
+	(p3plsmtpa09-07.prod.phx3.secureserver.net [173.201.193.236])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86D95E013A7
+	for <meta-ti@yoctoproject.org>; Sun, 11 Aug 2013 08:41:25 -0700 (PDT)
+Received: from [192.168.65.10] ([66.41.60.82])
+	by p3plsmtpa09-07.prod.phx3.secureserver.net with 
+	id BThQ1m0021mTNtu01ThQMq; Sun, 11 Aug 2013 08:41:25 -0700
+Message-ID: <5207B0A8.9070709@pabigot.com>
+Date: Sun, 11 Aug 2013 10:41:28 -0500
+From: "Peter A. Bigot" <pab@pabigot.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130804 Thunderbird/17.0.8
+MIME-Version: 1.0
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: dylan gstreamer-ti on linux 3.8
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,102 +26,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Aug 2013 20:57:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 11 Aug 2013 15:41:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Module: meta-ti
-Branch: dylan
-Commit: cc1a67b39d8a958f86f30dae5e955b2347745063
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cc1a67b39d8a958f86f30dae5e955b2347745063
+I'm working on a DM3730-based Gumstix Overo, trying to bring the kernel 
+up to 3.8.13 since the 3.5.x series doesn't have the V4L2 support I 
+need.  Using the dylan branch of meta-ti I can build gstreamer-ti for a 
+3.5.0 kernel, but not for 3.8.13.  The downward slide begins with 
+ti-linuxutils-2_26_01_02 building cmem which blurts:
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Aug 10 16:41:28 2013 -0400
+  warning: #warning *** not a warning *** Note: LINUX_VERSION_CODE >= 
+2.6.26 [-Wcpp]
 
-libdrm: restore libdrm-tests package that got missed with TI version
+and starts choking on lack of VM_RESERVED because linux commit 
+314e51b9851b4f4 for v3.7 replaced it with other flags.  This can be 
+patched (though I'd have to try to figure out which flag set is 
+intended), but the build then gets into trouble in 
+sdma/src/module/sdmak.c because plat/hardware.h disappeared in 
+dbc04161048, also first appearing in v3.7.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+At this point I noticed that linuxutils is up to 4.0.0.6 which supplies 
+only cmemk, which I think is all I need (and which I think I really do 
+need).  Great, except it uses autotools and doesn't have an 
+install_modules target so the trivial replacement recipe doesn't work.
 
----
+So: What is the recommended path to get gstreamer-ti to function on a 
+DM3730 with kernel 3.8 and/or 3.10?
 
- .../drm/libdrm-2.4.41/installtests-ti.patch        |   46 ++++++++++++++++++++
- recipes-graphics/drm/libdrm_2.4.41.bb              |    8 +++-
- 2 files changed, 53 insertions(+), 1 deletions(-)
+Thanks.
 
-diff --git a/recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch b/recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch
-new file mode 100644
-index 0000000..ba325c0
---- /dev/null
-+++ b/recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch
-@@ -0,0 +1,46 @@
-+tests: also install tests app (adjusted for TI version)
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-+
-+diff -uNr git-orig/tests/Makefile.am git/tests/Makefile.am
-+--- git-orig/tests/Makefile.am	2013-08-10 16:26:30.000000000 -0400
-++++ git/tests/Makefile.am	2013-08-10 16:28:53.753855225 -0400
-+@@ -6,10 +6,11 @@
-+ 
-+ LDADD = $(top_builddir)/libdrm.la
-+ 
-+-check_PROGRAMS = \
-++bin_PROGRAMS = \
-+ 	dristat \
-+ 	drmstat
-+ 
-++check_PROGRAMS =
-+ dristat_LDADD = $(CLOCK_LIB)
-+ 
-+ SUBDIRS = modeprint
-+diff -uNr git-orig/tests/modeprint/Makefile.am git/tests/modeprint/Makefile.am
-+--- git-orig/tests/modeprint/Makefile.am	2013-08-10 16:26:30.000000000 -0400
-++++ git/tests/modeprint/Makefile.am	2013-08-10 16:28:53.753855225 -0400
-+@@ -2,7 +2,7 @@
-+ 	-I$(top_srcdir)/include/drm \
-+ 	-I$(top_srcdir)
-+ 
-+-noinst_PROGRAMS = \
-++bin_PROGRAMS = \
-+ 	modeprint
-+ 
-+ modeprint_SOURCES = \
-+diff -uNr git-orig/tests/modetest/Makefile.am git/tests/modetest/Makefile.am
-+--- git-orig/tests/modetest/Makefile.am	2013-08-10 16:26:30.000000000 -0400
-++++ git/tests/modetest/Makefile.am	2013-08-10 16:28:53.753855225 -0400
-+@@ -3,7 +3,7 @@
-+ 	-I$(top_srcdir)/libkms/ \
-+ 	-I$(top_srcdir)
-+ 
-+-noinst_PROGRAMS = \
-++bin_PROGRAMS = \
-+ 	modetest
-+ 
-+ modetest_SOURCES = \
-diff --git a/recipes-graphics/drm/libdrm_2.4.41.bb b/recipes-graphics/drm/libdrm_2.4.41.bb
-index 1d89401..0150632 100644
---- a/recipes-graphics/drm/libdrm_2.4.41.bb
-+++ b/recipes-graphics/drm/libdrm_2.4.41.bb
-@@ -1,5 +1,7 @@
- require recipes-graphics/drm/libdrm.inc
- 
-+FILESEXTRAPATHS_append := ":${COREBASE}/meta/recipes-graphics/drm/libdrm"
-+
- COMPATIBLE_MACHINE = "omap-a15"
- 
- DEFAULT_PREFERENCE = "-1"
-@@ -9,6 +11,10 @@ EXTRA_OECONF += "--enable-omap-experimental-api --enable-kms"
- SRC_URI = "git://git.ti.com/glsdk/libdrm.git;protocol=git"
- SRCREV = "3cb5405084111193cedb8796d259b56560b088f0"
- 
--PR = "${INC_PR}.0"
-+SRC_URI += "file://installtests-ti.patch \
-+            file://GNU_SOURCE_definition.patch \
-+           "
-+
-+PR = "${INC_PR}.1"
- 
- S = "${WORKDIR}/git"
-
+Peter
 
