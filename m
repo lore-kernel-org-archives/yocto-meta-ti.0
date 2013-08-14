@@ -1,40 +1,40 @@
 Return-Path: <chgans@googlemail.com>
-Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
-	[209.85.192.179])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B9191E00747
-	for <meta-ti@yoctoproject.org>; Wed, 14 Aug 2013 01:21:34 -0700 (PDT)
-Received: by mail-pd0-f179.google.com with SMTP id v10so5995352pde.24
-	for <meta-ti@yoctoproject.org>; Wed, 14 Aug 2013 01:21:34 -0700 (PDT)
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B334FE00747
+	for <meta-ti@yoctoproject.org>; Wed, 14 Aug 2013 01:28:27 -0700 (PDT)
+Received: by mail-pa0-f43.google.com with SMTP id hz10so9849843pad.16
+	for <meta-ti@yoctoproject.org>; Wed, 14 Aug 2013 01:28:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=sender:message-id:date:from:user-agent:mime-version:to:subject
-	:references:in-reply-to:content-type;
-	bh=37Bvy2g5xvI9y254oApiIsDjQzq/YRX6pHRclY8elFY=;
-	b=IycmMEhwNGbsDkRkiDGydR/GBzlFmhMOi9LJ66E/0DhvwKszDU6iHYcXOHv4wNrR/y
-	JPqqUUq4hev7qMcQU14cXgPbtbmTVJc5Kp+8d7+zDNQm3ci1WH8WktP/bIIWkYvnKP5P
-	fXPpJtI24BONFGzyd/S8EtNERY/M5VRrKafDJkuIQw6LXynxSVEAhW+5R5Qar5TToezT
-	h9+Rr0XDAOvsRxR6q3WjLQziIgg5Q68QwvcpHy8z0P5E/Fr003e2B4Ne2YLG6HVcj02N
-	H+ES25KzCmYQVSCaX903BkWoWLDWgk27X0LmpI6AMJbroOSu9YaB0znrLaJ4kMnrpUQj
-	uS2Q==
-X-Received: by 10.66.146.66 with SMTP id ta2mr8745749pab.11.1376468494771;
-	Wed, 14 Aug 2013 01:21:34 -0700 (PDT)
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=PrWnpq+y50/ONpXYYoMetCVeu+/ObNQlfwUd/P07aY0=;
+	b=tbIKNuSpGck7inadawbJdgG/yWjqkKLvMX0V7AsivlG/dN+tavZz5RbutrqdkKcT5M
+	6pqz2MD87St3VhrNaxhhxqOH3e5eA1sQh0uEFVVm8nbxkZpW7WR20gF16J8JDDiZCoVb
+	/GSBwZpLxexug2eE5H6htCeFmus1T0wTuKtkxGLzAs4DjU0F6M4BSexhghQOYXmH5lyU
+	CDqTsc0yMquGO8TsLQUooPNo/kWtjwhyR5rVWEQ8hc1Q4eshdgHdG5RtHXqcibDNil1J
+	FMxaOmXoXQbvXIOkqcthiGNrljZapwqwV+FZmfS41y8M4fY+91FC0LYtenobliar/H6H
+	a3wQ==
+X-Received: by 10.66.246.106 with SMTP id xv10mr8733005pac.100.1376468907181; 
+	Wed, 14 Aug 2013 01:28:27 -0700 (PDT)
 Received: from linux-z8sp.site ([121.99.34.39])
-	by mx.google.com with ESMTPSA id
-	qh10sm48713768pbb.33.2013.08.14.01.21.32
+	by mx.google.com with ESMTPSA id ia5sm8116847pbc.42.2013.08.14.01.28.24
 	for <meta-ti@yoctoproject.org>
 	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 14 Aug 2013 01:21:33 -0700 (PDT)
+	Wed, 14 Aug 2013 01:28:26 -0700 (PDT)
 Sender: Chris Gagneraud <chgans@googlemail.com>
-Message-ID: <520BE6D8.1010901@gna.org>
-Date: Thu, 15 Aug 2013 08:21:44 +1200
+Message-ID: <520BE875.8030005@gna.org>
+Date: Thu, 15 Aug 2013 08:28:37 +1200
 From: Christian Gagneraud <chgans@gna.org>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:17.0) Gecko/20130620 Thunderbird/17.0.7
 MIME-Version: 1.0
 To: meta-ti@yoctoproject.org
-References: <CALEed8ZSPE+kmVK1bJbVZRCZ1TEPE8xLuxF38jqs+geFcz=8bg@mail.gmail.com>
-In-Reply-To: <CALEed8ZSPE+kmVK1bJbVZRCZ1TEPE8xLuxF38jqs+geFcz=8bg@mail.gmail.com>
-Subject: Re: Trouble booting BeagleBone Black
+References: <2BC3ECFBDE78594E858F96993713F3F9011FA5E2@IGTEMUMMB11.igatecorp.com>
+	<20130811182754.GA28453@edge>
+In-Reply-To: <20130811182754.GA28453@edge>
+Subject: Re: unable to fetch a repository mentioned in SRC_URI
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,137 +47,99 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Aug 2013 08:21:35 -0000
-Content-Type: multipart/alternative;
-	boundary="------------020007000800010900050602"
-
---------------020007000800010900050602
+X-List-Received-Date: Wed, 14 Aug 2013 08:28:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 08/12/2013 07:03 AM, Bernard Mentink wrote:
-> Hi All,
+On 08/12/2013 06:27 AM, Denys Dmytriyenko wrote:
+> On Tue, Aug 06, 2013 at 11:43:08AM +0000, Prathamesh P Ghanekar wrote:
+>> Hello,
+>>
+>> I am trying to integrate meta-ti layer into the current yocto project. I
+>> wish to build the image for pandaboard.
+>>
+>> I am adding another layer called meta-ivi in the yocto kernel which provided
+>> functionality for in-vehicle infotainment systems. In the meta-ivi layer,
+>> there is a recipe "foton-image", which builds GENIVI compliant baseline
+>> image. Also, few recipes were masked to resolve the license issue.
+>>
+>> So, setting all the variables in the conf/local.conf and conf/bblayers.conf
+>> file, I build the image as follows.
+>>
+>>
+>> è bitbake foton-image
+>>
+>>
+>> I ended up with following error, which indicates that there's a failure in fetching the repository.
+>>
+>> Here is the output log for your reference:
+>>
+>> prathamesh@mintos ~/workdir/poky-dylan-9.0.1/build $ bitbake foton-image
+>> Loading cache: 100% |###################################################################################################################################| ETA:  00:00:00
+>> Loaded 1220 entries from dependency cache.
+>>
+>> Build Configuration:
+>> BB_VERSION        = "1.18.0"
+>> BUILD_SYS         = "i686-linux"
+>> NATIVELSBSTRING   = "LinuxMint-14"
+>> TARGET_SYS        = "arm-oe-linux-gnueabi"
+>> MACHINE           = "pandaboard"
+>> DISTRO            = "poky-ivi-systemd"
+>> DISTRO_VERSION    = "4.0.2"
+>> TUNE_FEATURES     = "armv7a vfp neon"
+>> TARGET_FPU        = "vfp-neon"
+>> meta
+>> meta-yocto
+>> meta-yocto-bsp
+>> meta-ivi-4.0.2    = "<unknown>:<unknown>"
+>> meta-ti           = "master:c14c386946e1ea341faeea292580e37d538d645d"
+>>
+>> NOTE: Resolving any missing task queue dependencies
+>> NOTE: multiple providers are available for u-boot (u-boot, u-boot-ti-staging)
+>> NOTE: consider defining a PREFERRED_PROVIDER entry to match u-boot
+>> NOTE: Preparing runqueue
+>> NOTE: Executing SetScene Tasks
+>> NOTE: Executing RunQueue Tasks
+>> WARNING: Failed to fetch URL git://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487<http://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487>, attempting MIRRORS if available
+>> ERROR: Fetcher failure: Fetch command failed with exit code 128, output:
+>> Cloning into bare repository '/home/prathamesh/workdir/poky-dylan-9.0.1/build/downloads/git2/dev.omapzoom.org.pub.scm.integration.kernel-ubuntu.git'...
+>>
+>> fatal: The remote end hung up unexpectedly
+>> fatal: early EOF
+>> fatal: index-pack failed
+> It seems you had your connection terminated unexpectedly... Have you tried it
+> again? Does it happen every time?
+> BTW, seems to work fine here...
+
+I ran into similar problems recently (strange git failure), but as I 
+didn't have strong need to build new stuff, I simply gave up straight 
+away and switched to another task.
+The only "odd" thing I have here, is a *@#$! proxy. I am located in New 
+Zealand.
+
+Chris
+
 >
-> I have just used Yocto with the meta-ti layer to build the minimal 
-> image, placed all the files on an SD card and tried to boot ..
-> It gets a couple of seconds into the kernel and hangs on mmc pin 
-> setting, copy of the boot --> http://pastebin.com/0asaJ9tf
 >
-> Question: I built for MACHINE=beaglebone but I don't know if that is 
-> for the while or black targets, or if there is a difference.
-> I suspect the issue is with the device-tree file .. the tool built a 
-> file called  uImage-am335x-bone.dtb, but when the kernel tried to 
-> boot, it wanted a file called am335x-boneblack.dtb, so I just re-named 
-> the produced file to that and I got the above boot sequence ..
-
-Hi Bernie,
-
-I did the same kind of build recently (10/15days ago, can't remember), 
-and it worked like a charm, the same build (and images) can be used on 
-all am335x boards (EVM, BB black/white, etc, but I tested only with the 
-EVM and the BB black).
-
-Basically, the bootloader detect the board it is running on and select 
-the right DTB for you, cute! ;)
-This imply that all DTB files have been installed on /boot of course, 
-but you only need one MLO, u-boot and linux image.
-
-Didn't try again since then.
-
-My 2 cents, Chris.
-
+>> ERROR: Function failed: Fetcher failure for URL: 'git://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487<http://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487>'. Unable to fetch URL from any source.
+>> ERROR: Logfile of failure stored in: /home/prathamesh/workdir/poky-dylan-9.0.1/build/tmp-eglibc-eglibc/work/pandaboard-oe-linux-gnueabi/linux-omap4/3.4-r0/temp/log.do_fetch.4257
+>> ERROR: Task 910 (/home/prathamesh/workdir/meta-ti/recipes-kernel/linux/linux-omap4_3.4.bb<http://linux-omap4_3.4.bb>, do_fetch) failed with exit code '1'
+>> NOTE: Tasks Summary: Attempted 2323 tasks of which 2231 didn't need to be rerun and 1 failed.
+>> Waiting for 0 running tasks to finish:
+>>
+>> Summary: 1 task failed:
+>>    /home/prathamesh/workdir/meta-ti/recipes-kernel/linux/linux-omap4_3.4.bb<http://linux-omap4_3.4.bb>, do_fetch
+>> Summary: There was 1 WARNING message shown.
+>> Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+>>
+>> Note:
+>> 1. I have successfully built the foton-image for target vexpressa9, and it
+>> boots without any errors in the qemu emulator.
+>> 2. I am able to 'git clone' the above mentioned repository. If you could let
+>> me know how can I use the local repository for build process. I tried
+>> copying the repository in downloads folder, but it did not work somehow.
+> You need to get a bare repository and place it into:
+> downloads/git2/dev.omapzoom.org.pub.scm.integration.kernel-ubuntu.git
 >
-> Maybe that is the wrong thing to do? Is there a way to get the build 
-> to produce the am335x-boneblack.dtb file?
->
-> Thanks,
-> Bernie
->
->
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
 
 
---------------020007000800010900050602
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta content="text/html; charset=ISO-8859-1"
-      http-equiv="Content-Type">
-  </head>
-  <body bgcolor="#FFFFFF" text="#000000">
-    <div class="moz-cite-prefix">On 08/12/2013 07:03 AM, Bernard Mentink
-      wrote:<br>
-    </div>
-    <blockquote
-cite="mid:CALEed8ZSPE+kmVK1bJbVZRCZ1TEPE8xLuxF38jqs+geFcz=8bg@mail.gmail.com"
-      type="cite">
-      <div dir="ltr">Hi All,
-        <div><br>
-        </div>
-        <div style="">I have just used Yocto with the meta-ti layer to
-          build the minimal image, placed all the files on an SD card
-          and tried to boot ..</div>
-        <div style="">It gets a couple of seconds into the kernel and
-          hangs on mmc pin setting, copy of the boot --&gt;&nbsp;<a
-            moz-do-not-send="true" href="http://pastebin.com/0asaJ9tf">http://pastebin.com/0asaJ9tf</a></div>
-        <div style=""><br>
-        </div>
-        <div style="">Question: I built for MACHINE=beaglebone but I
-          don't know if that is for the while or black targets, or if
-          there is a difference.</div>
-        <div style="">I suspect the issue is with the device-tree file
-          .. the tool built a file called &nbsp;uImage-am335x-bone.dtb, but
-          when the kernel tried to boot, it wanted a file
-          called&nbsp;am335x-boneblack.dtb, so I just re-named the produced
-          file to that and I got the above boot sequence ..</div>
-      </div>
-    </blockquote>
-    <br>
-    Hi Bernie,<br>
-    <br>
-    I did the same kind of build recently (10/15days ago, can't
-    remember), and it worked like a charm, the same build (and images)
-    can be used on all am335x boards (EVM, BB black/white, etc, but I
-    tested only with the EVM and the BB black).<br>
-    <br>
-    Basically, the bootloader detect the board it is running on and
-    select the right DTB for you, cute! ;)<br>
-    This imply that all DTB files have been installed on /boot of
-    course, but you only need one MLO, u-boot and linux image.<br>
-    <br>
-    Didn't try again since then.<br>
-    <br>
-    My 2 cents, Chris.<br>
-    <br>
-    <blockquote
-cite="mid:CALEed8ZSPE+kmVK1bJbVZRCZ1TEPE8xLuxF38jqs+geFcz=8bg@mail.gmail.com"
-      type="cite">
-      <div dir="ltr">
-        <div style=""><br>
-        </div>
-        <div style="">Maybe that is the wrong thing to do? Is there a
-          way to get the build to produce the&nbsp;am335x-boneblack.dtb file?</div>
-        <div style=""><br>
-        </div>
-        <div style="">Thanks,</div>
-        <div style="">Bernie</div>
-      </div>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <br>
-      <pre wrap="">_______________________________________________
-meta-ti mailing list
-<a class="moz-txt-link-abbreviated" href="mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</a>
-<a class="moz-txt-link-freetext" href="https://lists.yoctoproject.org/listinfo/meta-ti">https://lists.yoctoproject.org/listinfo/meta-ti</a>
-</pre>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------020007000800010900050602--
