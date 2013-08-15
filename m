@@ -1,29 +1,32 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DBD94E0144E
-	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 12:22:53 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r7FJMoHJ017380;
-	Thu, 15 Aug 2013 14:22:50 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7FJMoG5028930;
-	Thu, 15 Aug 2013 14:22:50 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 15 Aug 2013 14:22:50 -0500
-Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r7FJMntF027351;
-	Thu, 15 Aug 2013 14:22:50 -0500
-Date: Thu, 15 Aug 2013 15:22:49 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Brian Hutchinson <b.hutchman@gmail.com>
-Message-ID: <20130815192249.GH2190@edge>
+Return-Path: <b.hutchman@gmail.com>
+Received: from mail-oa0-f54.google.com (mail-oa0-f54.google.com
+	[209.85.219.54])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 674FBE01440
+	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 12:26:56 -0700 (PDT)
+Received: by mail-oa0-f54.google.com with SMTP id o6so1301029oag.41
+	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 12:26:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=TGfSzjUpeBlOp6SxL9N1RrFJ5kNVPzWLNU73EGL19U0=;
+	b=FZ27ygQzGEjFQ7NaShki1fWtyQYUqHSnY7Og3OTbAGgBFz+KOFUMaH5EhZKPsruBJo
+	l9zZ7ziSU6hvOdL+ctOmQDB8qZ+UWcY7AGHvUlgs09KObRLf+kliukf5vBMAaia5ewtd
+	61668lbtYKooj58SvnZmZDCElF+cH0CjQNAgkHZUbYB5IW3zXxP1fI6giGT0qkrqH96d
+	UwaSRaJpHha/hSLE52Tt4fdSkfP+OiUPcAUACvoDazfYJJ5YJKr3ejpBWHUBR4GvtcJ6
+	g5vCxP+PKr00Vc/A9LLwbGsu9zQv/ju84HgzdYyXfN2a5+p+vWE7u6vZqFN1lzWgHgfV
+	YiNw==
+MIME-Version: 1.0
+X-Received: by 10.60.17.229 with SMTP id r5mr15685090oed.41.1376594815864;
+	Thu, 15 Aug 2013 12:26:55 -0700 (PDT)
+Received: by 10.60.142.41 with HTTP; Thu, 15 Aug 2013 12:26:55 -0700 (PDT)
+In-Reply-To: <20130815190600.GF2190@edge>
 References: <CAFZh4h_683cetV7QjyVgBcsJ9Seooy5wiE8R-fU9L+sqJanU4g@mail.gmail.com>
 	<CABcZANkNbqisKRLHTGmRSs=mbR4VBg2TqfV+CJp54R3G2eNUng@mail.gmail.com>
-	<CAFZh4h8eAULbEJPVeMtA51gQK293bUEKPGpMxtmX2Z8kJSgJJA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAFZh4h8eAULbEJPVeMtA51gQK293bUEKPGpMxtmX2Z8kJSgJJA@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20130815190600.GF2190@edge>
+Date: Thu, 15 Aug 2013 15:26:55 -0400
+Message-ID: <CAFZh4h9xR44AvSW91eg_ecH0kR=760e5v1MC97r4hsjaB09Htw@mail.gmail.com>
+From: Brian Hutchinson <b.hutchman@gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
 	Chris Larson <clarson@kergoth.com>
 Subject: Re: Stumped. Can't get 2.6.37 TI kernel to boot when built with toolchain from denzil or Linaro gcc-linaro-arm-linux-gnueabihf-4.8-2013.07-1_linux/
@@ -39,41 +42,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 19:22:55 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 15 Aug 2013 19:26:57 -0000
+Content-Type: multipart/alternative; boundary=089e012955eeffd8a604e40174d3
 
-On Thu, Aug 15, 2013 at 03:10:24PM -0400, Brian Hutchinson wrote:
-> On Thu, Aug 15, 2013 at 12:25 PM, Chris Larson <clarson@kergoth.com> wrote:
-> 
-> >
-> > I haven't seen the panic, but I have seen a complete silent boot hang when
-> > moving from 4.6 to 4.7 or 4.8 on my OMAP5 EVM board. The gcc-linaro
-> > toolchain worked, as did a 2012.03 sourcery toolchain, but neither the
-> > 2013.05 toolchain nor the internal built yocto toolchain from 1.5/master
-> > resulted in a successful boot. I got past that issue by cherry picking
-> > these two commits from a more recent kernel:
-> >
-> > 455bd4c430b0c0a361f38e8658a0d6cb469942b5 - ARM: 7668/1: fix memset-related
-> > crashes caused by recent GCC (4.7.2) optimizations
-> > 418df63adac56841ef6b0f1fcf435bc64d4ed177 - ARM: 7670/1: fix the memset fix
-> >
-> > See also
-> > http://comments.gmane.org/gmane.comp.handhelds.openembedded.core/39864
-> >
-> I found this thread which is bang on with my problem but didn't see a
-> solution yet:
-> https://lists.yoctoproject.org/pipermail/meta-ti/2012-May/001144.html
+--089e012955eeffd8a604e40174d3
+Content-Type: text/plain; charset=ISO-8859-1
 
-Have you tried poking into the following repositories for a possible fix:
+On Thu, Aug 15, 2013 at 3:06 PM, Denys Dmytriyenko <denys@ti.com> wrote:
 
-http://arago-project.org/git/projects/?p=linux-omap3.git;a=shortlog;h=refs/heads/ti81xx-master
-http://arago-project.org/git/projects/?p=linux-dvr-rdk-dm81xx.git;a=summary
-http://arago-project.org/git/projects/?p=linux-ipnc-rdk-dm81xx.git;a=summary
+>
+> Yes, it is often a PITA to get old kernels build ...
+>
 
-There are some product-specific forks around TI81x which I don't have any 
-visibility into and hence I can't support it in meta-ti... :(
+What do you mean "old kernels"  It is from a TI PSP released not that long
+ago! Wink, wink.  I'd love to use a 3+ kernel, know where I can find one ;)
 
--- 
-Denys
+B
 
+--089e012955eeffd8a604e40174d3
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">On Thu, Aug 15, 2013 at 3:06 PM, Denys Dmytriyenko <span d=
+ir=3D"ltr">&lt;<a href=3D"mailto:denys@ti.com" target=3D"_blank">denys@ti.c=
+om</a>&gt;</span> wrote:<br><div class=3D"gmail_extra"><div class=3D"gmail_=
+quote"><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-=
+left:1px #ccc solid;padding-left:1ex">
+<div class=3D"HOEnZb"><div class=3D"h5"><br>
+</div></div>Yes, it is often a PITA to get old kernels build ...<br></block=
+quote><div><br></div><div>What do you mean &quot;old kernels&quot; =A0It is=
+ from a TI PSP released not that long ago! Wink, wink. =A0I&#39;d love to u=
+se a 3+ kernel, know where I can find one ;)</div>
+<div><br></div><div>B</div><div>=A0</div></div></div></div>
+
+--089e012955eeffd8a604e40174d3--
