@@ -1,32 +1,34 @@
 Return-Path: <b.hutchman@gmail.com>
-Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
-	[209.85.214.170])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 49F17E01440
-	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 12:10:25 -0700 (PDT)
-Received: by mail-ob0-f170.google.com with SMTP id eh20so1264793obb.1
-	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 12:10:24 -0700 (PDT)
+Received: from mail-oa0-f52.google.com (mail-oa0-f52.google.com
+	[209.85.219.52])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6D8F6E0144E
+	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 12:14:12 -0700 (PDT)
+Received: by mail-oa0-f52.google.com with SMTP id n12so1268887oag.39
+	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 12:14:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:cc:content-type;
-	bh=vYFp4gZSdUUjJL7glPAqVnnh48aFitR3mpltjhX0xaQ=;
-	b=wajmQuY9FBiHmxpR+p4xXcTe/rA2mkrKO/04M/AxSSL4VW9T6VW/oUQ6foPWkGjad3
-	mhKCteK2U/z/y+uJUmsBXhSzowtcuA+FYakqpUHUeWbotk2eQ4QemFYi4y2jhQS2ojQh
-	IUX4j/vH2o3oKb7t6Wg3FZMzRmihzVE8n6Sk/Z9A4e4DT3cXk1JXn1WClcW8WKpRbIJd
-	OTKhUsoxb41yD+qQQQ9VkqQYMJ+FsWFQfkrdfmYNZfPjHebwP16y/FNnrUn63pUTJFsl
-	3zBcJywetn4blk8D8CYZahjTMg6ic/cYhaQxmrMO/0272sYDhuWdxuJ/OoqzngCGLgu7
-	/lDw==
+	bh=fliyB3tYSHCFf9n8cIlkW/+p95IB8dZjh8ljwWkhDy8=;
+	b=zYqml86sJxdVhJIr9ovFMYRsyt/tWfoHMTG7aarz2PvWzFcDiBByj3sPt5VfffQPol
+	CXZ/+SIXxpSzxKcj5T/pc+MMjvmfNuKsTpClzS49ZyQPKMEYt/is0lpWg5DODkZm6MwM
+	F5tqY9mQuWibCl72XB391jKf1wmnCzccXrsO28fE77455WSyD+4iqBsMs43hxjI0vOIR
+	RZAjMODnMmixgL+d1c2AZco/vf/DS2y10+IwCJz9EEOlQN9XAME1l6BtzgffwiexvFAg
+	S3eCgB0ahKjIvCyfp7xgqt2746kY2+jB14075FiWsXYs+Bpo4niG/U/4TItc2MYgjUHJ
+	tsAQ==
 MIME-Version: 1.0
-X-Received: by 10.182.130.131 with SMTP id oe3mr27253250obb.34.1376593824775; 
-	Thu, 15 Aug 2013 12:10:24 -0700 (PDT)
-Received: by 10.60.142.41 with HTTP; Thu, 15 Aug 2013 12:10:24 -0700 (PDT)
-In-Reply-To: <CABcZANkNbqisKRLHTGmRSs=mbR4VBg2TqfV+CJp54R3G2eNUng@mail.gmail.com>
+X-Received: by 10.182.51.228 with SMTP id n4mr1500731obo.70.1376594052048;
+	Thu, 15 Aug 2013 12:14:12 -0700 (PDT)
+Received: by 10.60.142.41 with HTTP; Thu, 15 Aug 2013 12:14:11 -0700 (PDT)
+In-Reply-To: <20130815190600.GF2190@edge>
 References: <CAFZh4h_683cetV7QjyVgBcsJ9Seooy5wiE8R-fU9L+sqJanU4g@mail.gmail.com>
 	<CABcZANkNbqisKRLHTGmRSs=mbR4VBg2TqfV+CJp54R3G2eNUng@mail.gmail.com>
-Date: Thu, 15 Aug 2013 15:10:24 -0400
-Message-ID: <CAFZh4h8eAULbEJPVeMtA51gQK293bUEKPGpMxtmX2Z8kJSgJJA@mail.gmail.com>
+	<20130815190600.GF2190@edge>
+Date: Thu, 15 Aug 2013 15:14:11 -0400
+Message-ID: <CAFZh4h_q=heKGES0pQ=kkUJ5vnxK6PSm-OXFg58OTFx7GauANQ@mail.gmail.com>
 From: Brian Hutchinson <b.hutchman@gmail.com>
-To: Chris Larson <clarson@kergoth.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+To: Denys Dmytriyenko <denys@ti.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	Chris Larson <clarson@kergoth.com>
 Subject: Re: Stumped. Can't get 2.6.37 TI kernel to boot when built with toolchain from denzil or Linaro gcc-linaro-arm-linux-gnueabihf-4.8-2013.07-1_linux/
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -40,79 +42,68 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 19:10:27 -0000
-Content-Type: multipart/alternative; boundary=089e013cbdc4ed05de04e4013910
+X-List-Received-Date: Thu, 15 Aug 2013 19:14:13 -0000
+Content-Type: multipart/alternative; boundary=089e0158b65678ebbf04e40147db
 
---089e013cbdc4ed05de04e4013910
+--089e0158b65678ebbf04e40147db
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Aug 15, 2013 at 12:25 PM, Chris Larson <clarson@kergoth.com> wrote:
+On Thu, Aug 15, 2013 at 3:06 PM, Denys Dmytriyenko <denys@ti.com> wrote:
 
 >
-> I haven't seen the panic, but I have seen a complete silent boot hang when
-> moving from 4.6 to 4.7 or 4.8 on my OMAP5 EVM board. The gcc-linaro
-> toolchain worked, as did a 2012.03 sourcery toolchain, but neither the
-> 2013.05 toolchain nor the internal built yocto toolchain from 1.5/master
-> resulted in a successful boot. I got past that issue by cherry picking
-> these two commits from a more recent kernel:
->
-> 455bd4c430b0c0a361f38e8658a0d6cb469942b5 - ARM: 7668/1: fix memset-related
-> crashes caused by recent GCC (4.7.2) optimizations
-> 418df63adac56841ef6b0f1fcf435bc64d4ed177 - ARM: 7670/1: fix the memset fix
->
-> See also
-> http://comments.gmane.org/gmane.comp.handhelds.openembedded.core/39864
+> Yes, it is often a PITA to get old kernels build and work properly with new
+> toolchains. E.g. you are aware of the alignment issue with 4.7, right?
 >
 >
+> http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-kernel/linux/files/0001-arm-fix-builds-with-gcc-4.7.patch
 >
-I found this thread which is bang on with my problem but didn't see a
-solution yet:
+> --
+> Denys
+>
+
+No, had not come across that one yet but it sounds like it is on the right
+track after having read this thread:
 https://lists.yoctoproject.org/pipermail/meta-ti/2012-May/001144.html
+
+I'm trying to make sense of all this ... we need to keep syslink working
+too which sounds like it (mailbox) needs kernel options which may cause
+problems too.
 
 Regards,
 
-Brain
+Brian
 
---089e013cbdc4ed05de04e4013910
+--089e0158b65678ebbf04e40147db
 Content-Type: text/html; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">On Thu, Aug 15, 2013 at 12:25 PM, Chris Larson <span dir=
-=3D"ltr">&lt;<a href=3D"mailto:clarson@kergoth.com" target=3D"_blank">clars=
-on@kergoth.com</a>&gt;</span> wrote:<br><div class=3D"gmail_extra"><div cla=
-ss=3D"gmail_quote">
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
-adding-left:1ex"><div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"=
-im"><br>
-</div>I haven&#39;t seen the panic, but I have seen a complete silent boot =
-hang when moving from 4.6 to 4.7 or 4.8 on my OMAP5 EVM board. The gcc-lina=
-ro toolchain worked, as did a 2012.03 sourcery toolchain, but neither the 2=
-013.05 toolchain nor the internal built yocto toolchain from 1.5/master res=
-ulted in a successful boot. I got past that issue by cherry picking these t=
-wo commits from a more recent kernel:</div>
-
-
-<div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">455bd4c430b=
-0c0a361f38e8658a0d6cb469942b5 -=A0ARM: 7668/1: fix memset-related crashes c=
-aused by recent GCC (4.7.2) optimizations</div><div class=3D"gmail_extra">4=
-18df63adac56841ef6b0f1fcf435bc64d4ed177 -=A0ARM: 7670/1: fix the memset fix=
+<div dir=3D"ltr">On Thu, Aug 15, 2013 at 3:06 PM, Denys Dmytriyenko <span d=
+ir=3D"ltr">&lt;<a href=3D"mailto:denys@ti.com" target=3D"_blank">denys@ti.c=
+om</a>&gt;</span> wrote:<br><div class=3D"gmail_extra"><div class=3D"gmail_=
+quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
+border-left-width:1px;border-left-color:rgb(204,204,204);border-left-style:=
+solid;padding-left:1ex">
+<div class=3D""><div class=3D"h5"><br>
+</div></div>Yes, it is often a PITA to get old kernels build and work prope=
+rly with new<br>
+toolchains. E.g. you are aware of the alignment issue with 4.7, right?<br>
 <br>
+<a href=3D"http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-k=
+ernel/linux/files/0001-arm-fix-builds-with-gcc-4.7.patch" target=3D"_blank"=
+>http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-kernel/linu=
+x/files/0001-arm-fix-builds-with-gcc-4.7.patch</a><br>
 
+<span class=3D""><font color=3D"#888888"><br>
+--<br>
+Denys<br></font></span></blockquote><div><br></div><div>No, had not come ac=
+ross that one yet but it sounds like it is on the right track after having =
+read this thread:</div><div><a href=3D"https://lists.yoctoproject.org/piper=
+mail/meta-ti/2012-May/001144.html">https://lists.yoctoproject.org/pipermail=
+/meta-ti/2012-May/001144.html</a><br>
+</div><div><br></div><div>I&#39;m trying to make sense of all this ... we n=
+eed to keep syslink working too which sounds like it (mailbox) needs kernel=
+ options which may cause problems too.</div><div><br></div><div>Regards,</d=
+iv>
+<div><br></div><div>Brian</div></div><br></div></div>
 
-</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">See a=
-lso=A0<a href=3D"http://comments.gmane.org/gmane.comp.handhelds.openembedde=
-d.core/39864" target=3D"_blank">http://comments.gmane.org/gmane.comp.handhe=
-lds.openembedded.core/39864</a></div>
-
-
-
-<div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra"><br></div><=
-/div></blockquote><div><br></div><div>I found this thread which is bang on =
-with my problem but didn&#39;t see a solution yet:</div><div><a href=3D"htt=
-ps://lists.yoctoproject.org/pipermail/meta-ti/2012-May/001144.html">https:/=
-/lists.yoctoproject.org/pipermail/meta-ti/2012-May/001144.html</a></div>
-<div><br></div><div>Regards,</div><div><br></div><div>Brain=A0</div></div><=
-/div></div>
-
---089e013cbdc4ed05de04e4013910--
+--089e0158b65678ebbf04e40147db--
