@@ -1,30 +1,30 @@
 Return-Path: <b.hutchman@gmail.com>
-Received: from mail-oa0-f49.google.com (mail-oa0-f49.google.com
-	[209.85.219.49])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B12CE0073F
-	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 14:41:29 -0700 (PDT)
-Received: by mail-oa0-f49.google.com with SMTP id n10so1493081oag.22
-	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 14:41:29 -0700 (PDT)
+Received: from mail-ob0-f171.google.com (mail-ob0-f171.google.com
+	[209.85.214.171])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1FD33E01422
+	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 14:48:01 -0700 (PDT)
+Received: by mail-ob0-f171.google.com with SMTP id tb18so1410283obb.30
+	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 14:48:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:cc:content-type;
-	bh=9KURa0VJtwo71zUaHuAPw2QGeqda6/HfUbyvynwWd98=;
-	b=maeRyoU/PY2+LKgJkAHqYopzQSs/zYHzT1GN0NNQNVQx5AIbpGQp5NDBfXvCvlC/CC
-	Yu+NUGlYSxaJ9V6MU1J8MqpFfGbjAVpZ04vurS4TiQrfd65ZSkNyYYxT0ttJVooErpqE
-	hcvkj5eFHIqbHa0Gl/+/hwDHNzb/Xr7eqggXe9Gqa3mmazopP0oEcYtth8ph4Zq1dfcp
-	09CcRBEqaUKoAhSeVCbjfGHGxW6/euxeQW7Oiv/M+a+DeJGAGAlYiDOvPHjwDj55JbGt
-	9eyCKs6iA64yuiDZ8ZZs4kPvrVmxBd4HDSafpWAivQUPkaowND1IkVBH/CSYbT/Eq/Yr
-	eJFA==
+	bh=OgUc+ZjkDyT4mbn/nJgTssajEYbX58+MHktnluHJWcI=;
+	b=tA2Kn/lLqXG8Olr3eNjqZzrUntkbX/mR4HZlV7kFZuTLHYHCQ6DFvgbnQHvKxI4Dw3
+	jPuBgslumP4URaaEiK+Yzk488xTlraTT/VxrtKLfNA0NMhM8HU0JZYjwsSUdkUusA7/5
+	mDR51ZOG5dsHzUpQRq/uThF52sHJTjZAhBETfY9ByfyA4Qyr3rX2AMQPJU7Pi4/HaOIP
+	tw7IgK/dUumvZn1PB8bCRVRyAfaZH9iW7ZzpJ1D1tDGMsrw1JMuoVfvOnM7+mjQmnjoR
+	y2FpPo9m/ijY9QQOCRlBhRCJdKcoBNisD7wuXNnSd7VXB0XKOvmaOR+0RWxztAQJ4/Nq
+	omTw==
 MIME-Version: 1.0
-X-Received: by 10.60.56.3 with SMTP id w3mr16176311oep.37.1376602889420; Thu,
-	15 Aug 2013 14:41:29 -0700 (PDT)
-Received: by 10.60.142.41 with HTTP; Thu, 15 Aug 2013 14:41:29 -0700 (PDT)
+X-Received: by 10.182.51.228 with SMTP id n4mr2018059obo.70.1376603280919;
+	Thu, 15 Aug 2013 14:48:00 -0700 (PDT)
+Received: by 10.60.142.41 with HTTP; Thu, 15 Aug 2013 14:48:00 -0700 (PDT)
 In-Reply-To: <CAMKF1srWwdOs+d5EWFSYbup3hvUmBxXH+wf04msajpcVpYDiAA@mail.gmail.com>
 References: <CAFZh4h_683cetV7QjyVgBcsJ9Seooy5wiE8R-fU9L+sqJanU4g@mail.gmail.com>
 	<CAFZh4h92PbtVfz3q0nknoRNe3nHaGGNurOa-T0HSGzRinvHCsA@mail.gmail.com>
 	<CAMKF1srWwdOs+d5EWFSYbup3hvUmBxXH+wf04msajpcVpYDiAA@mail.gmail.com>
-Date: Thu, 15 Aug 2013 17:41:29 -0400
-Message-ID: <CAFZh4h-6DydrOUzER79ZyrDknFzV-vokZfFvcxOvm7ERufuhtA@mail.gmail.com>
+Date: Thu, 15 Aug 2013 17:48:00 -0400
+Message-ID: <CAFZh4h8nUmERufB+0ADCorwrZ0trb_oh7ZmADE_2-O7GTDxC9g@mail.gmail.com>
 From: Brian Hutchinson <b.hutchman@gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
@@ -41,15 +41,23 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 21:41:30 -0000
-Content-Type: multipart/alternative; boundary=001a11c20a72388ae704e4035607
+X-List-Received-Date: Thu, 15 Aug 2013 21:48:03 -0000
+Content-Type: multipart/alternative; boundary=089e0158b6568e53ba04e4036d9f
 
---001a11c20a72388ae704e4035607
+--089e0158b6568e53ba04e4036d9f
 Content-Type: text/plain; charset=ISO-8859-1
 
 On Thu, Aug 15, 2013 at 5:32 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
 >
+>
+>
+> On Thu, Aug 15, 2013 at 2:14 PM, Brian Hutchinson <b.hutchman@gmail.com>wrote:
+>
+>> Update.  Well, adding Sakoman's patch to head.S and compiling with -mno-unaligned-access
+>> didn't appear to help so far ... :(
+>>
+>>
 > If its gcc 4.8+ then you also need more patches see my fixes for beagle
 > e.g.
 >
@@ -57,23 +65,16 @@ On Thu, Aug 15, 2013 at 5:32 PM, Khem Raj <raj.khem@gmail.com> wrote:
 > https://github.com/beagleboard/meta-beagleboard/commit/87efc663c4f76d3051cecf1e2c3e2bbd461d200b
 > 
 >
-
-Hi Khem,  good to hear from you.
-
-I'll check those out.  On another machine I think I have an older Linaro
-4.7 something laying around from last time I built something (well, tried
-to.  Wanted DM6446 and learned it was dropped from OE Core) with Arago OE
-Core a while ago.  I haven't tried that version on this Cortex A8 part but
-I'm guessing I would run into the same issues as the latest (4.8) I
-downloaded today???.  I'll apply those and give it a shot and report back.
-
-Thanks!
+>
+After I apply these patches, should I still be passing EXTRA_CFLAGS=
+-mno-unaligned-access
+to make uImage?
 
 Regards,
 
 Brian
 
---001a11c20a72388ae704e4035607
+--089e0158b6568e53ba04e4036d9f
 Content-Type: text/html; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
@@ -81,12 +82,26 @@ Content-Transfer-Encoding: quoted-printable
 ">&lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmai=
 l.com</a>&gt;</span> wrote:<br><div class=3D"gmail_extra"><div class=3D"gma=
 il_quote">
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex"><div dir=3D"ltr"><div style=3D"font-family:&=
-#39;courier new&#39;,monospace;font-size:small"><br></div><div class=3D"gma=
-il_extra">
-<div class=3D"gmail_quote"><div><div>If its gcc 4.8+ then you also need mor=
-e patches see my fixes for beagle e.g.</div>
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
+adding-left:1ex"><div dir=3D"ltr"><div style=3D"font-family:&#39;courier ne=
+w&#39;,monospace;font-size:small">
+<br></div><div class=3D"gmail_extra"><br><br><div class=3D"gmail_quote"><di=
+v class=3D"im">On Thu, Aug 15, 2013 at 2:14 PM, Brian Hutchinson <span dir=
+=3D"ltr">&lt;<a href=3D"mailto:b.hutchman@gmail.com" target=3D"_blank">b.hu=
+tchman@gmail.com</a>&gt;</span> wrote:<br>
+
+
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
+adding-left:1ex"><div dir=3D"ltr">Update. =A0Well, adding Sakoman&#39;s pat=
+ch to head.S and compiling with=A0<span style=3D"white-space:pre-wrap">-mno=
+-unaligned-access didn&#39;t appear to help so far ... :(</span><div>
+
+
+<span style=3D"white-space:pre-wrap"><br></span></div></div></blockquote><d=
+iv><br></div></div><div><div>If its gcc 4.8+ then you also need more patche=
+s see my fixes for beagle e.g.</div>
 
 <div><br></div><div><a href=3D"https://github.com/beagleboard/meta-beaglebo=
 ard/commit/87efc663c4f76d3051cecf1e2c3e2bbd461d200b" target=3D"_blank">http=
@@ -94,18 +109,15 @@ s://github.com/beagleboard/meta-beagleboard/commit/87efc663c4f76d3051cecf1e=
 2c3e2bbd461d200b</a></div>
 
 
-</div></div></div></div></blockquote></div><br></div><div class=3D"gmail_ex=
-tra">Hi Khem, =A0good to hear from you.</div><div class=3D"gmail_extra"><br=
-></div><div class=3D"gmail_extra">I&#39;ll check those out. =A0On another m=
-achine I think I have an older Linaro 4.7 something laying around from last=
- time I built something (well, tried to. =A0Wanted DM6446 and learned it wa=
-s dropped from OE Core) with Arago OE Core a while ago. =A0I haven&#39;t tr=
-ied that version on this Cortex A8 part but I&#39;m guessing I would run in=
-to the same issues as the latest (4.8) I downloaded today???. =A0I&#39;ll a=
-pply those and give it a shot and report back.</div>
-<div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">Thanks!</di=
-v><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">Regards,<=
-/div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">Brian<=
-/div></div>
+</div><div><br></div></div></div></div></blockquote><div><br></div><div>Aft=
+er I apply these patches, should I still be passing EXTRA_CFLAGS=3D=A0<span=
+ style=3D"color:rgb(0,0,0);white-space:pre-wrap">-mno-unaligned-access to m=
+ake uImage?</span></div>
+<div><span style=3D"color:rgb(0,0,0);white-space:pre-wrap"><br></span></div=
+><div><span style=3D"color:rgb(0,0,0);white-space:pre-wrap">Regards,</span>=
+</div><div><span style=3D"color:rgb(0,0,0);white-space:pre-wrap"><br></span=
+></div>
+<div><span style=3D"color:rgb(0,0,0);white-space:pre-wrap">Brian</span></di=
+v></div></div></div>
 
---001a11c20a72388ae704e4035607--
+--089e0158b6568e53ba04e4036d9f--
