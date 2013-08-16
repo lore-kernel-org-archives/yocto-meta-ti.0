@@ -1,30 +1,33 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-ob0-f179.google.com (mail-ob0-f179.google.com
-	[209.85.214.179])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57B19E00406
-	for <meta-ti@yoctoproject.org>; Fri, 16 Aug 2013 14:39:49 -0700 (PDT)
-Received: by mail-ob0-f179.google.com with SMTP id fb19so2561103obc.24
-	for <meta-ti@yoctoproject.org>; Fri, 16 Aug 2013 14:39:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=X/uIxs7SKqVqUjse+M6eFhOI8Oa+Pgvf3XJruDuUYFs=;
-	b=MrLBHXSzwfGITu1DwpWfZJbO6XSRxiIOUpcLOij9heaMJZa2KbbTSj2Liq3MOA2Uln
-	fREb97K1sPH1tSCOIle3A9hWFNU0e+ZLlIalfspwvZzw+GoPw+6MSc0q1B9qNw4LA7ly
-	UbSTRZXlLb6/R036oNAAzwFYwFgJ+v06wladlu57v9S0MRmGgzTDjGrU2LhUd/4Z5ObA
-	J7vrISeMYDu0SFV9R1SPgDKZPvtk0YaY8LUg4T7YCojSA4MTnKjIylD+A/jex2sbHdOz
-	Tl8NB1aCPm/XyJkU6DwUf2V2nkk1X89G0soi+16KH+g3i85BMf6d6LhkK3Dule03jyLB
-	kJJg==
-MIME-Version: 1.0
-X-Received: by 10.182.76.38 with SMTP id h6mr1821966obw.74.1376689189348; Fri,
-	16 Aug 2013 14:39:49 -0700 (PDT)
-Received: by 10.60.142.41 with HTTP; Fri, 16 Aug 2013 14:39:49 -0700 (PDT)
-In-Reply-To: <CAFZh4h_683cetV7QjyVgBcsJ9Seooy5wiE8R-fU9L+sqJanU4g@mail.gmail.com>
+Return-Path: <chase.maupin@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2C2DCE002F9
+	for <meta-ti@yoctoproject.org>; Fri, 16 Aug 2013 14:44:18 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r7GLiH79016720;
+	Fri, 16 Aug 2013 16:44:17 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7GLiHoH021421;
+	Fri, 16 Aug 2013 16:44:17 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
+	14.02.0342.003; Fri, 16 Aug 2013 16:44:16 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: Brian Hutchinson <b.hutchman@gmail.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] Stumped. Can't get 2.6.37 TI kernel to boot when
+	built with toolchain from denzil or Linaro
+	gcc-linaro-arm-linux-gnueabihf-4.8-2013.07-1_linux/
+Thread-Index: AQHOmskpzezdMUEk10Khtdeg7fxtwpmYXcvQ
+Date: Fri, 16 Aug 2013 21:44:16 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED101596C6754@DLEE11.ent.ti.com>
 References: <CAFZh4h_683cetV7QjyVgBcsJ9Seooy5wiE8R-fU9L+sqJanU4g@mail.gmail.com>
-Date: Fri, 16 Aug 2013 17:39:49 -0400
-Message-ID: <CAFZh4h8gDV9r6PzrANuj4ZWJCnpibh5DtK4OmoYqwO_vAdY-_g@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+	<CAFZh4h8gDV9r6PzrANuj4ZWJCnpibh5DtK4OmoYqwO_vAdY-_g@mail.gmail.com>
+In-Reply-To: <CAFZh4h8gDV9r6PzrANuj4ZWJCnpibh5DtK4OmoYqwO_vAdY-_g@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
+MIME-Version: 1.0
 Subject: Re: Stumped. Can't get 2.6.37 TI kernel to boot when built with toolchain from denzil or Linaro gcc-linaro-arm-linux-gnueabihf-4.8-2013.07-1_linux/
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -38,17 +41,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Aug 2013 21:39:53 -0000
-Content-Type: multipart/alternative; boundary=047d7b4503ca18ea0104e4176e5f
+X-List-Received-Date: Fri, 16 Aug 2013 21:44:19 -0000
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_7D46E86EC0A8354091174257B2FED101596C6754DLEE11entticom_"
 
---047d7b4503ca18ea0104e4176e5f
-Content-Type: text/plain; charset=ISO-8859-1
+--_000_7D46E86EC0A8354091174257B2FED101596C6754DLEE11entticom_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-I can confirm that the Kevin Hilman mailbox patch that I posted the URL to
-on the e2e site fixes the mbox problem and my 2.6.37 kernel built with the
+Brian,
+
+Great news.  Do you want to post a patch to the kernel recipe to pull those=
+ in?
+
+From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
+.org] On Behalf Of Brian Hutchinson
+Sent: Friday, August 16, 2013 4:40 PM
+To: meta-ti@yoctoproject.org
+Subject: Re: [meta-ti] Stumped. Can't get 2.6.37 TI kernel to boot when bui=
+lt with toolchain from denzil or Linaro gcc-linaro-arm-linux-gnueabihf-4.8-=
+2013.07-1_linux/
+
+I can confirm that the Kevin Hilman mailbox patch that I posted the URL to =
+on the e2e site fixes the mbox problem and my 2.6.37 kernel built with the =
 OE Core toolchain (gcc 4.8) does in fact boot now!  I have a login prompt!
 
-So to recap.  Sakoman head.S patch, the two memset patches Khem mentioned,
+So to recap.  Sakoman head.S patch, the two memset patches Khem mentioned, =
 and this Hilman mailbox patch is what I applied.
 
 Thank you guys for putting up with me :)
@@ -57,17 +76,130 @@ Regards,
 
 Brian
 
---047d7b4503ca18ea0104e4176e5f
-Content-Type: text/html; charset=ISO-8859-1
+--_000_7D46E86EC0A8354091174257B2FED101596C6754DLEE11entticom_
+Content-Type: text/html; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">I can confirm that the Kevin Hilman mailbox patch that I p=
-osted the URL to on the e2e site fixes the mbox problem and my 2.6.37 kerne=
-l built with the OE Core toolchain (gcc 4.8) does in fact boot now! =A0I ha=
-ve a login prompt!<div>
-<br></div><div>So to recap. =A0Sakoman head.S patch, the two memset patches=
- Khem mentioned, and this Hilman mailbox patch is what I applied.<br><div><=
-br></div><div>Thank you guys for putting up with me :)</div><div><br></div>
-<div>Regards,</div><div><br></div><div>Brian</div></div></div>
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+<meta name=3D"Generator" content=3D"Microsoft Word 12 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-reply;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">Brian,<o:p></o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+/p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D">Great news.&nbsp; Do you =
+want to post a patch to the kernel recipe to pull those in?<o:p></o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
+libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
+/p>
+<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0in 0in 0in =
+4.0pt">
+<div>
+<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt;font-family:&quot=
+;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span style=3D"font-s=
+ize:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;"> meta-ti-=
+bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject.org]
+<b>On Behalf Of </b>Brian Hutchinson<br>
+<b>Sent:</b> Friday, August 16, 2013 4:40 PM<br>
+<b>To:</b> meta-ti@yoctoproject.org<br>
+<b>Subject:</b> Re: [meta-ti] Stumped. Can't get 2.6.37 TI kernel to boot w=
+hen built with toolchain from denzil or Linaro gcc-linaro-arm-linux-gnueabi=
+hf-4.8-2013.07-1_linux/<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class=3D"MsoNormal">I can confirm that the Kevin Hilman mailbox patch th=
+at I posted the URL to on the e2e site fixes the mbox problem and my 2.6.37=
+ kernel built with the OE Core toolchain (gcc 4.8) does in fact boot now! &=
+nbsp;I have a login prompt!<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">So to recap. &nbsp;Sakoman head.S patch, the two mem=
+set patches Khem mentioned, and this Hilman mailbox patch is what I applied=
+.<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Thank you guys for putting up with me :)<o:p></o:p><=
+/p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Regards,<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Brian<o:p></o:p></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
 
---047d7b4503ca18ea0104e4176e5f--
+--_000_7D46E86EC0A8354091174257B2FED101596C6754DLEE11entticom_--
