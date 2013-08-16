@@ -1,34 +1,37 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-ob0-f171.google.com (mail-ob0-f171.google.com
-	[209.85.214.171])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1FD33E01422
-	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 14:48:01 -0700 (PDT)
-Received: by mail-ob0-f171.google.com with SMTP id tb18so1410283obb.30
-	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 14:48:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=OgUc+ZjkDyT4mbn/nJgTssajEYbX58+MHktnluHJWcI=;
-	b=tA2Kn/lLqXG8Olr3eNjqZzrUntkbX/mR4HZlV7kFZuTLHYHCQ6DFvgbnQHvKxI4Dw3
-	jPuBgslumP4URaaEiK+Yzk488xTlraTT/VxrtKLfNA0NMhM8HU0JZYjwsSUdkUusA7/5
-	mDR51ZOG5dsHzUpQRq/uThF52sHJTjZAhBETfY9ByfyA4Qyr3rX2AMQPJU7Pi4/HaOIP
-	tw7IgK/dUumvZn1PB8bCRVRyAfaZH9iW7ZzpJ1D1tDGMsrw1JMuoVfvOnM7+mjQmnjoR
-	y2FpPo9m/ijY9QQOCRlBhRCJdKcoBNisD7wuXNnSd7VXB0XKOvmaOR+0RWxztAQJ4/Nq
-	omTw==
+Return-Path: <chgans@googlemail.com>
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E91EE0073F
+	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 18:59:23 -0700 (PDT)
+Received: by mail-pa0-f48.google.com with SMTP id kp13so1319626pab.35
+	for <meta-ti@yoctoproject.org>; Thu, 15 Aug 2013 18:59:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=sender:message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=OFgVLmVq8P6bda4ggKn4pbdOB96f33JPeHlk9RwIPC8=;
+	b=QRBhU1P4OCpG2tngRm0+iMf4gHQc12qZYI00pUt0u6UjzfgGlizkoymdM3U1jeH+rf
+	CI2bBqJqhxzNBWW1Xyp4FFj/7fdc5XyvfAh6deNXSEmKGLi6dHQ2P+LLQWU/Q+MbJ0qb
+	2knT0iujug+vnRMwzV85ZGELtKpElOmV4DrueW+nP0GNLKZwIp8c37sGprrRHK/n4V3F
+	g5Jm3XWNEAsgs5ljTq87qSCyssh+0oyvqelgEKQTBRBvSP3XBmyzhNNU27dxlsez7Dpi
+	d3lT2QJ9fng9+kR2ZkAEDsozalS8lAfZY8VWzkAQdv2cxoaFK7heaXYe9b4F3Jq3XADc
+	07uw==
+X-Received: by 10.66.156.229 with SMTP id wh5mr448825pab.156.1376618362666;
+	Thu, 15 Aug 2013 18:59:22 -0700 (PDT)
+Received: from [0.0.0.0] ([210.48.94.225])
+	by mx.google.com with ESMTPSA id bg3sm2582170pbb.44.2013.08.15.18.59.18
+	for <meta-ti@yoctoproject.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 15 Aug 2013 18:59:21 -0700 (PDT)
+Sender: Chris Gagneraud <chgans@googlemail.com>
+Message-ID: <520D8773.1050307@gna.org>
+Date: Fri, 16 Aug 2013 13:59:15 +1200
+From: Christian Gagneraud <chgans@gna.org>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
 MIME-Version: 1.0
-X-Received: by 10.182.51.228 with SMTP id n4mr2018059obo.70.1376603280919;
-	Thu, 15 Aug 2013 14:48:00 -0700 (PDT)
-Received: by 10.60.142.41 with HTTP; Thu, 15 Aug 2013 14:48:00 -0700 (PDT)
-In-Reply-To: <CAMKF1srWwdOs+d5EWFSYbup3hvUmBxXH+wf04msajpcVpYDiAA@mail.gmail.com>
-References: <CAFZh4h_683cetV7QjyVgBcsJ9Seooy5wiE8R-fU9L+sqJanU4g@mail.gmail.com>
-	<CAFZh4h92PbtVfz3q0nknoRNe3nHaGGNurOa-T0HSGzRinvHCsA@mail.gmail.com>
-	<CAMKF1srWwdOs+d5EWFSYbup3hvUmBxXH+wf04msajpcVpYDiAA@mail.gmail.com>
-Date: Thu, 15 Aug 2013 17:48:00 -0400
-Message-ID: <CAFZh4h8nUmERufB+0ADCorwrZ0trb_oh7ZmADE_2-O7GTDxC9g@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Stumped. Can't get 2.6.37 TI kernel to boot when built with toolchain from denzil or Linaro gcc-linaro-arm-linux-gnueabihf-4.8-2013.07-1_linux/
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Qt/TI question
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,83 +44,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Aug 2013 21:48:03 -0000
-Content-Type: multipart/alternative; boundary=089e0158b6568e53ba04e4036d9f
+X-List-Received-Date: Fri, 16 Aug 2013 01:59:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---089e0158b6568e53ba04e4036d9f
-Content-Type: text/plain; charset=ISO-8859-1
+Hi there,
 
-On Thu, Aug 15, 2013 at 5:32 PM, Khem Raj <raj.khem@gmail.com> wrote:
+This is a bot off-topic, so if you know a better mailing list for this 
+kind of things, please let me know.
 
->
->
->
-> On Thu, Aug 15, 2013 at 2:14 PM, Brian Hutchinson <b.hutchman@gmail.com>wrote:
->
->> Update.  Well, adding Sakoman's patch to head.S and compiling with -mno-unaligned-access
->> didn't appear to help so far ... :(
->>
->>
-> If its gcc 4.8+ then you also need more patches see my fixes for beagle
-> e.g.
->
->
-> https://github.com/beagleboard/meta-beagleboard/commit/87efc663c4f76d3051cecf1e2c3e2bbd461d200b
-> 
->
->
-After I apply these patches, should I still be passing EXTRA_CFLAGS=
--mno-unaligned-access
-to make uImage?
+I'm thinking about making a request on the qt-devel mailing list, and of 
+course I am willing to provide work to get this feature working.
 
-Regards,
+Qt comes with a list of supported devices [1], of which are the 
+beagleboard and the pandaboard. It would be nice to have as well the 
+beaglebone. A simple first step would be to add a mkspecs to the 
+qt-platform-mkspec project [2].
 
-Brian
+Up to know, this is all off-topic, but:
+The mkspecs simply specify compiler flags (C, CPP and LD) and point to a 
+cross-toolchain. [3] is the example for omap3430.
+I don't know who wrote that one, but it refers to a "beagle-narc-rootfs" 
+and a Code Sourcery "arm-2010q1" (I assume it is CS because of the "q1" 
+part).
 
---089e0158b6568e53ba04e4036d9f
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+And that's where meta-ti/arago could step in, because it is a 
+toolchain/rootfs provider for TI SoCs.
 
-<div dir=3D"ltr">On Thu, Aug 15, 2013 at 5:32 PM, Khem Raj <span dir=3D"ltr=
-">&lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmai=
-l.com</a>&gt;</span> wrote:<br><div class=3D"gmail_extra"><div class=3D"gma=
-il_quote">
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
-adding-left:1ex"><div dir=3D"ltr"><div style=3D"font-family:&#39;courier ne=
-w&#39;,monospace;font-size:small">
-<br></div><div class=3D"gmail_extra"><br><br><div class=3D"gmail_quote"><di=
-v class=3D"im">On Thu, Aug 15, 2013 at 2:14 PM, Brian Hutchinson <span dir=
-=3D"ltr">&lt;<a href=3D"mailto:b.hutchman@gmail.com" target=3D"_blank">b.hu=
-tchman@gmail.com</a>&gt;</span> wrote:<br>
+Right now, I'm trying to build arago/dylan SDK with gles support. If it 
+works, then the generated SDK could be used to allow building Qt4/5 out 
+of yocto via the qt-platform-mkspecs.
 
+Once this is showed to be working, a pull request could be made to 
+qt-platform-mkspecs, and start a discussion on having the beaglebone 
+added to the list of supported device and add a page on qt-project wiki 
+a bit like the one for the beagleboard[4].
 
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
-adding-left:1ex"><div dir=3D"ltr">Update. =A0Well, adding Sakoman&#39;s pat=
-ch to head.S and compiling with=A0<span style=3D"white-space:pre-wrap">-mno=
--unaligned-access didn&#39;t appear to help so far ... :(</span><div>
+Any thoughts or suggestions?
 
+Chris
 
-<span style=3D"white-space:pre-wrap"><br></span></div></div></blockquote><d=
-iv><br></div></div><div><div>If its gcc 4.8+ then you also need more patche=
-s see my fixes for beagle e.g.</div>
+[1] http://qt-project.org/wiki/Category:Devices
+[2] http://gitorious.org/qt-platform-mkspecs
+[3] 
+http://gitorious.org/qt-platform-mkspecs/qt-platform-mkspecs/blobs/master/5.0/linux-omap3430-g++/qmake.conf
+[4] http://qt-project.org/wiki/TIBeagleBoard
 
-<div><br></div><div><a href=3D"https://github.com/beagleboard/meta-beaglebo=
-ard/commit/87efc663c4f76d3051cecf1e2c3e2bbd461d200b" target=3D"_blank">http=
-s://github.com/beagleboard/meta-beagleboard/commit/87efc663c4f76d3051cecf1e=
-2c3e2bbd461d200b</a></div>
-
-
-</div><div><br></div></div></div></div></blockquote><div><br></div><div>Aft=
-er I apply these patches, should I still be passing EXTRA_CFLAGS=3D=A0<span=
- style=3D"color:rgb(0,0,0);white-space:pre-wrap">-mno-unaligned-access to m=
-ake uImage?</span></div>
-<div><span style=3D"color:rgb(0,0,0);white-space:pre-wrap"><br></span></div=
-><div><span style=3D"color:rgb(0,0,0);white-space:pre-wrap">Regards,</span>=
-</div><div><span style=3D"color:rgb(0,0,0);white-space:pre-wrap"><br></span=
-></div>
-<div><span style=3D"color:rgb(0,0,0);white-space:pre-wrap">Brian</span></di=
-v></div></div></div>
-
---089e0158b6568e53ba04e4036d9f--
