@@ -1,33 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
-	[209.85.223.172])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 136ECE0043B
-	for <meta-ti@yoctoproject.org>; Fri, 16 Aug 2013 15:00:52 -0700 (PDT)
-Received: by mail-ie0-f172.google.com with SMTP id 17so2791705iea.31
-	for <meta-ti@yoctoproject.org>; Fri, 16 Aug 2013 15:00:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=YA/iqWIxirdX7hD/Tp/82TmdSJVUmujh3Z8MziRISuQ=;
-	b=JQPSqEzUH52VEx+8mXGJpDIuIz4ukNxlUw2nIJ+u1oEr06vpHc6vN3nCyCzFuWJe6o
-	ij2R27dL72/Y90t6HreAHhDojrIqG/kDsdlUlLbVOkhQBlPY8mbfP+KVY9p8mPVhZnjO
-	c7dPYVEG15h/0YAYmS2iMSCrOeatEu8t+pjsi9UJOIPaQyplDczfbi+xzBJ/BEeQGKWL
-	I1YNmw3ZOpTUFi2p8d8JZsMTA9VBul5UJzCEMWHvecQ4CVSnHt5VFlKBkA7A+A3sb5IU
-	Hadzsth3gJy71WB2ZAlOSH00tTqE9MnP7zir+UFlRyXOqkpa0V+y5fWcGksROxYrVjYk
-	Tllw==
-X-Received: by 10.50.92.74 with SMTP id ck10mr736743igb.3.1376690452181; Fri,
-	16 Aug 2013 15:00:52 -0700 (PDT)
+Return-Path: <denys@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 96632E003E2
+	for <meta-ti@yoctoproject.org>; Sat, 17 Aug 2013 08:02:58 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r7HF2r5r006988;
+	Sat, 17 Aug 2013 10:02:53 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7HF2rfu006512;
+	Sat, 17 Aug 2013 10:02:53 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Sat, 17 Aug 2013 10:02:53 -0500
+Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r7HF2qe6026273;
+	Sat, 17 Aug 2013 10:02:53 -0500
+Date: Sat, 17 Aug 2013 11:02:52 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Christian Gagneraud <chgans@gna.org>
+Message-ID: <20130817150252.GE4931@edge>
+References: <2BC3ECFBDE78594E858F96993713F3F9011FA5E2@IGTEMUMMB11.igatecorp.com>
+	<20130811182754.GA28453@edge> <520BE875.8030005@gna.org>
+	<20130814192941.GB1027@edge>
+	<321768C95D21724485BCE784F1BE98473EB97023@DBDE04.ent.ti.com>
+	<520DA703.3030000@gna.org>
 MIME-Version: 1.0
-Received: by 10.50.216.195 with HTTP; Fri, 16 Aug 2013 15:00:21 -0700 (PDT)
-In-Reply-To: <CAFZh4h8gDV9r6PzrANuj4ZWJCnpibh5DtK4OmoYqwO_vAdY-_g@mail.gmail.com>
-References: <CAFZh4h_683cetV7QjyVgBcsJ9Seooy5wiE8R-fU9L+sqJanU4g@mail.gmail.com>
-	<CAFZh4h8gDV9r6PzrANuj4ZWJCnpibh5DtK4OmoYqwO_vAdY-_g@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 16 Aug 2013 15:00:21 -0700
-Message-ID: <CAMKF1sqjfO-Qn4+rCrwwNHs14fheficZya1zx2gK2eXnSx0s2Q@mail.gmail.com>
-To: Brian Hutchinson <b.hutchman@gmail.com>
+In-Reply-To: <520DA703.3030000@gna.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Stumped. Can't get 2.6.37 TI kernel to boot when built with toolchain from denzil or Linaro gcc-linaro-arm-linux-gnueabihf-4.8-2013.07-1_linux/
+Subject: Re: unable to fetch a repository mentioned in SRC_URI
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,69 +40,149 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Aug 2013 22:00:53 -0000
-Content-Type: multipart/alternative; boundary=047d7b10cac95e3ace04e417b904
+X-List-Received-Date: Sat, 17 Aug 2013 15:02:59 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
---047d7b10cac95e3ace04e417b904
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On Fri, Aug 16, 2013 at 04:13:55PM +1200, Christian Gagneraud wrote:
+> On 16/08/13 15:09, Sundareson, Prabindh wrote:
+> >Is this resolved - were you able to generate the image ? I seem to be having a similar issue,
+> 
+> Sorry to hijack the thread, but on top of GIT problems last time, I
+> had another similar issue this morning with SVN (svn://gcc.gnu.org/svn/gcc/branches;module=gcc-4_5-branch;protocol=http),
+> not sure if it is related, but it definitely used to work!
+> I can checkout this branch manually, but inside bitbake it fails,
+> the checkout is really done, but subversion returns with an error
+> code, I suspect that this error code should be considered a warning
+> (since the code has been checked out!).
+> It could potentially be a problem with gnome-keyring and pkcs#11
+> stuff as well (Ubuntu 13.04 "upgraded" to KUbuntu 13.04). I tried
+> the "password-stores=" option in the [auth] section of
+> ~/.subversion/config, but it didn't do the trick.
 
-On Fri, Aug 16, 2013 at 2:39 PM, Brian Hutchinson <b.hutchman@gmail.com>wro=
-te:
+Do you know the type of proxy you are using? Did you make changes to the 
+~/.subversion/servers file to specify the proxy setup?
 
-> I can confirm that the Kevin Hilman mailbox patch that I posted the URL t=
-o
-> on the e2e site fixes the mbox problem and my 2.6.37 kernel built with th=
-e
-> OE Core toolchain (gcc 4.8) does in fact boot now!  I have a login prompt=
-!
->
->
-=E2=80=8Bgood.=E2=80=8B
-
-
-
-> So to recap.  Sakoman head.S patch, the two memset patches Khem mentioned=
-,
-> and this Hilman mailbox patch is what I applied.
->
-> Thank you guys for putting up with me :)
->
-
-=E2=80=8Byou should post patches to meta-ti=E2=80=8B
-
---047d7b10cac95e3ace04e417b904
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">=
-On Fri, Aug 16, 2013 at 2:39 PM, Brian Hutchinson <span dir=3D"ltr">&lt;<a =
-href=3D"mailto:b.hutchman@gmail.com" target=3D"_blank">b.hutchman@gmail.com=
-</a>&gt;</span> wrote:<br>
-
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex"><div dir=3D"ltr">I can confirm that the Kevi=
-n Hilman mailbox patch that I posted the URL to on the e2e site fixes the m=
-box problem and my 2.6.37 kernel built with the OE Core toolchain (gcc 4.8)=
- does in fact boot now! =C2=A0I have a login prompt!<div>
+-- 
+Denys
 
 
-<br></div></div></blockquote><div><br></div><div><div style=3D"font-family:=
-&#39;courier new&#39;,monospace;font-size:small" class=3D"gmail_default">=
-=E2=80=8Bgood.=E2=80=8B</div><br></div><div>=C2=A0</div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
-ing-left:1ex">
+> >-----Original Message-----
+> >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject.org] On Behalf Of Dmytriyenko, Denys
+> >Sent: Thursday, August 15, 2013 1:00 AM
+> >To: Christian Gagneraud
+> >Cc: meta-ti@yoctoproject.org
+> >Subject: Re: [meta-ti] unable to fetch a repository mentioned in SRC_URI
+> >
+> >On Thu, Aug 15, 2013 at 08:28:37AM +1200, Christian Gagneraud wrote:
+> >>On 08/12/2013 06:27 AM, Denys Dmytriyenko wrote:
+> >>>On Tue, Aug 06, 2013 at 11:43:08AM +0000, Prathamesh P Ghanekar wrote:
+> >>>>Hello,
+> >>>>
+> >>>>I am trying to integrate meta-ti layer into the current yocto
+> >>>>project. I wish to build the image for pandaboard.
+> >>>>
+> >>>>I am adding another layer called meta-ivi in the yocto kernel which
+> >>>>provided functionality for in-vehicle infotainment systems. In the
+> >>>>meta-ivi layer, there is a recipe "foton-image", which builds GENIVI
+> >>>>compliant baseline image. Also, few recipes were masked to resolve the license issue.
+> >>>>
+> >>>>So, setting all the variables in the conf/local.conf and
+> >>>>conf/bblayers.conf file, I build the image as follows.
+> >>>>
+> >>>>
+> >>>>è bitbake foton-image
+> >>>>
+> >>>>
+> >>>>I ended up with following error, which indicates that there's a failure in fetching the repository.
+> >>>>
+> >>>>Here is the output log for your reference:
+> >>>>
+> >>>>prathamesh@mintos ~/workdir/poky-dylan-9.0.1/build $ bitbake
+> >>>>foton-image Loading cache: 100%
+> >>>>|###################################################################################################################################| ETA:  00:00:00 Loaded 1220 entries from dependency cache.
+> >>>>
+> >>>>Build Configuration:
+> >>>>BB_VERSION        = "1.18.0"
+> >>>>BUILD_SYS         = "i686-linux"
+> >>>>NATIVELSBSTRING   = "LinuxMint-14"
+> >>>>TARGET_SYS        = "arm-oe-linux-gnueabi"
+> >>>>MACHINE           = "pandaboard"
+> >>>>DISTRO            = "poky-ivi-systemd"
+> >>>>DISTRO_VERSION    = "4.0.2"
+> >>>>TUNE_FEATURES     = "armv7a vfp neon"
+> >>>>TARGET_FPU        = "vfp-neon"
+> >>>>meta
+> >>>>meta-yocto
+> >>>>meta-yocto-bsp
+> >>>>meta-ivi-4.0.2    = "<unknown>:<unknown>"
+> >>>>meta-ti           = "master:c14c386946e1ea341faeea292580e37d538d645d"
+> >>>>
+> >>>>NOTE: Resolving any missing task queue dependencies
+> >>>>NOTE: multiple providers are available for u-boot (u-boot,
+> >>>>u-boot-ti-staging)
+> >>>>NOTE: consider defining a PREFERRED_PROVIDER entry to match u-boot
+> >>>>NOTE: Preparing runqueue
+> >>>>NOTE: Executing SetScene Tasks
+> >>>>NOTE: Executing RunQueue Tasks
+> >>>>WARNING: Failed to fetch URL
+> >>>>git://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protoco
+> >>>>l=git;branch=ti-ubuntu-3.4-1487<http://dev.omapzoom.org/pub/scm/inte
+> >>>>gration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487>,
+> >>>>attempting MIRRORS if available
+> >>>>ERROR: Fetcher failure: Fetch command failed with exit code 128, output:
+> >>>>Cloning into bare repository '/home/prathamesh/workdir/poky-dylan-9.0.1/build/downloads/git2/dev.omapzoom.org.pub.scm.integration.kernel-ubuntu.git'...
+> >>>>
+> >>>>fatal: The remote end hung up unexpectedly
+> >>>>fatal: early EOF
+> >>>>fatal: index-pack failed
+> >>>It seems you had your connection terminated unexpectedly... Have you
+> >>>tried it again? Does it happen every time?
+> >>>BTW, seems to work fine here...
+> >>
+> >>I ran into similar problems recently (strange git failure), but as I
+> >>didn't have strong need to build new stuff, I simply gave up straight
+> >>away and switched to another task.
+> >>The only "odd" thing I have here, is a *@#$! proxy. I am located in
+> >>New Zealand.
+> >
+> >And some of our engineers are having weird issues with the proxy as well.
+> >Probably a moon phase... :)
+> >
+> >--
+> >Denys
+> >
+> >
+> >>>>ERROR: Function failed: Fetcher failure for URL: 'git://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487<http://dev.omapzoom.org/pub/scm/integration/kernel-ubuntu.git;protocol=git;branch=ti-ubuntu-3.4-1487>'. Unable to fetch URL from any source.
+> >>>>ERROR: Logfile of failure stored in: /home/prathamesh/workdir/poky-dylan-9.0.1/build/tmp-eglibc-eglibc/work/pandaboard-oe-linux-gnueabi/linux-omap4/3.4-r0/temp/log.do_fetch.4257
+> >>>>ERROR: Task 910 (/home/prathamesh/workdir/meta-ti/recipes-kernel/linux/linux-omap4_3.4.bb<http://linux-omap4_3.4.bb>, do_fetch) failed with exit code '1'
+> >>>>NOTE: Tasks Summary: Attempted 2323 tasks of which 2231 didn't need to be rerun and 1 failed.
+> >>>>Waiting for 0 running tasks to finish:
+> >>>>
+> >>>>Summary: 1 task failed:
+> >>>>   /home/prathamesh/workdir/meta-ti/recipes-kernel/linux/linux-omap4_3.4.bb<http://linux-omap4_3.4.bb>, do_fetch
+> >>>>Summary: There was 1 WARNING message shown.
+> >>>>Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+> >>>>
+> >>>>Note:
+> >>>>1. I have successfully built the foton-image for target vexpressa9, and it
+> >>>>boots without any errors in the qemu emulator.
+> >>>>2. I am able to 'git clone' the above mentioned repository. If you could let
+> >>>>me know how can I use the local repository for build process. I tried
+> >>>>copying the repository in downloads folder, but it did not work somehow.
+> >>>You need to get a bare repository and place it into:
+> >>>downloads/git2/dev.omapzoom.org.pub.scm.integration.kernel-ubuntu.git
+> >>>
+> >>
+> >>_______________________________________________
+> >>meta-ti mailing list
+> >>meta-ti@yoctoproject.org
+> >>https://lists.yoctoproject.org/listinfo/meta-ti
+> >_______________________________________________
+> >meta-ti mailing list
+> >meta-ti@yoctoproject.org
+> >https://lists.yoctoproject.org/listinfo/meta-ti
+> >
+> 
 
-<div dir=3D"ltr"><div></div><div>So to recap. =C2=A0Sakoman head.S patch, t=
-he two memset patches Khem mentioned, and this Hilman mailbox patch is what=
- I applied.<br><div><br></div><div>Thank you guys for putting up with me :)=
-</div>
-
-<div></div></div></div></blockquote></div><div class=3D"gmail_extra"><br></=
-div><div style=3D"font-family:&#39;courier new&#39;,monospace;font-size:sma=
-ll" class=3D"gmail_default">=E2=80=8Byou should post patches to meta-ti=E2=
-=80=8B</div><br><br>
-
-</div></div>
-
---047d7b10cac95e3ace04e417b904--
