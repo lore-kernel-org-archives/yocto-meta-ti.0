@@ -1,35 +1,29 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-ob0-f171.google.com (mail-ob0-f171.google.com
-	[209.85.214.171])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 97B00E00441
-	for <meta-ti@yoctoproject.org>; Sat, 17 Aug 2013 15:20:19 -0700 (PDT)
-Received: by mail-ob0-f171.google.com with SMTP id tb18so3371730obb.2
-	for <meta-ti@yoctoproject.org>; Sat, 17 Aug 2013 15:20:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=6sOvs6KN+3YPXkjACrkFKsAp/rZFgFwsCgdvLFyRwVo=;
-	b=P8EIiA4VWtjtj5JOgyxU6gjSxgXT8zkNwtQbFWBFxXFgBCuBl3FUKFt1WZBCMjsUEs
-	BR4rHw7oWNEf82QZQK6rg2mvkQ4U+m8sBeATrOvSFDIGyoHb8Bb2aNxXZeyS/N0LNKW7
-	PZCZO7KQWssu5LVK3x4+E/2ZFZ1Y9Ezg1J5jIB5whClBCLPelbhxXkTDzE9ztCmBP2yF
-	VbHvv9jEUyCP7NTfcLayZoyCsnXut674IBRPZU14oxwQzKmLF/BC6uttJ95mfNGUy4en
-	IXAW0KYCc/CFN/hL/V3ovs4mFgxtctEEYGu44PYl77HpGLMFFfNZDQ/EPw0W6YJpdxDA
-	6Llg==
+Return-Path: <mrinmayee@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 46BCFE0157A
+	for <meta-ti@yoctoproject.org>; Sun, 18 Aug 2013 21:55:14 -0700 (PDT)
+Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r7J4tC04027445
+	for <meta-ti@yoctoproject.org>; Sun, 18 Aug 2013 23:55:13 -0500
+Received: from DBDE72.ent.ti.com (dbde72.ent.ti.com [172.24.171.97])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7J4t9gq008458
+	for <meta-ti@yoctoproject.org>; Sun, 18 Aug 2013 23:55:11 -0500
+Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
+	DBDE72.ent.ti.com ([fe80::bd56:32bf:87fd:2763%27]) with mapi id
+	14.02.0342.003; Mon, 19 Aug 2013 12:55:09 +0800
+From: "Hingolikar, Mrinmayee" <mrinmayee@ti.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: [PATCHv2] libgles: Added prebuilt userspace libraries for
+	graphics acceleration
+Thread-Index: AQHOjEQxE6RLQjA1Q0Se/WVmrlj7R5mcF9Ng
+Date: Mon, 19 Aug 2013 04:55:09 +0000
+Message-ID: <CF956B779D819D41BBC043B7082161D54445D0@DBDE04.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.24.170.142]
 MIME-Version: 1.0
-X-Received: by 10.60.63.167 with SMTP id h7mr3128257oes.43.1376778018190; Sat,
-	17 Aug 2013 15:20:18 -0700 (PDT)
-Received: by 10.60.142.41 with HTTP; Sat, 17 Aug 2013 15:20:18 -0700 (PDT)
-Received: by 10.60.142.41 with HTTP; Sat, 17 Aug 2013 15:20:18 -0700 (PDT)
-In-Reply-To: <20130817214543.GS4931@edge>
-References: <CAFZh4h_683cetV7QjyVgBcsJ9Seooy5wiE8R-fU9L+sqJanU4g@mail.gmail.com>
-	<CAFZh4h8gDV9r6PzrANuj4ZWJCnpibh5DtK4OmoYqwO_vAdY-_g@mail.gmail.com>
-	<20130817214543.GS4931@edge>
-Date: Sat, 17 Aug 2013 18:20:18 -0400
-Message-ID: <CAFZh4h-Y8yUyZ2kLuqwRUakucYvurnYqB73zsJRYfUUHhQrJew@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Stumped. Can't get 2.6.37 TI kernel to boot when built with toolchain from denzil or Linaro gcc-linaro-arm-linux-gnueabihf-4.8-2013.07-1_linux/
+Subject: [PATCHv2] libgles: Added prebuilt userspace libraries for graphics acceleration
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,63 +36,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Aug 2013 22:20:19 -0000
-Content-Type: multipart/alternative; boundary=001a11c213a4b57a0304e42c1c10
-
---001a11c213a4b57a0304e42c1c10
-Content-Type: text/plain; charset=ISO-8859-1
-
-On Aug 17, 2013 5:45 PM, "Denys Dmytriyenko" <denys@ti.com> wrote:
->
-
-> BTW, didn't I tell you to look for a possible fix in one of those TI81x
-repos
-> on arago-project.org? :) It was right there, the third from the top!
->
->
-http://arago-project.org/git/projects/?p=linux-dvr-rdk-dm81xx.git;a=commitdiff;h=b5c066e7c670e830c322693b2c9da65508c189b2
-
-To be honest, I did look at those and did a search for 81x and scanned the
-results and didn't see it :-(
->
-
-> Congratulations, you persistence has paid off! :)
->
-> Looking forward to seeing patches from you, along with taking
-maintainership
-> of TI81x platform in meta-ti... :)
-
-Yea, that's what I'm afraid of.  I'll have no problem doing it in my
-copious spare time ;-)
-
---001a11c213a4b57a0304e42c1c10
-Content-Type: text/html; charset=ISO-8859-1
+X-List-Received-Date: Mon, 19 Aug 2013 04:55:18 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-<p dir=3D"ltr"><br>
-On Aug 17, 2013 5:45 PM, &quot;Denys Dmytriyenko&quot; &lt;<a href=3D"mailt=
-o:denys@ti.com">denys@ti.com</a>&gt; wrote:<br>
-&gt;</p>
-<p dir=3D"ltr">&gt; BTW, didn&#39;t I tell you to look for a possible fix i=
-n one of those TI81x repos<br>
-&gt; on <a href=3D"http://arago-project.org">arago-project.org</a>? :) It w=
-as right there, the third from the top!<br>
-&gt;<br>
-&gt; <a href=3D"http://arago-project.org/git/projects/?p=3Dlinux-dvr-rdk-dm=
-81xx.git;a=3Dcommitdiff;h=3Db5c066e7c670e830c322693b2c9da65508c189b2">http:=
-//arago-project.org/git/projects/?p=3Dlinux-dvr-rdk-dm81xx.git;a=3Dcommitdi=
-ff;h=3Db5c066e7c670e830c322693b2c9da65508c189b2</a></p>
 
-<p dir=3D"ltr">To be honest, I did look at those and did a search for 81x a=
-nd scanned the results and didn&#39;t see it :-( <br>
-&gt;</p>
-<p dir=3D"ltr">&gt; Congratulations, you persistence has paid off! :)<br>
-&gt;<br>
-&gt; Looking forward to seeing patches from you, along with taking maintain=
-ership<br>
-&gt; of TI81x platform in meta-ti... :)</p>
-<p dir=3D"ltr">Yea, that&#39;s what I&#39;m afraid of.=A0 I&#39;ll have no =
-problem doing it in my copious spare time ;-) <br>
-</p>
+Subject: [PATCHv2] libgles: Added prebuilt userspace libraries for graphics=
+ acceleration
 
---001a11c213a4b57a0304e42c1c10--
+* These libraries are not distributable in source and hence
+  are available only as binary. They implement OpenGLES 1.x and
+  OpenGLES 2.x accelerated using SGX 544-MP2 found in OMAP5
+  class of devices.
+
+v2:
+
+Addressed Chases's comments:
+* Updated the PR
+* Added shasum for the tarball
+* Removed redundant FILES section.
+
+Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+Signed-off-by: Siddharth Heroor <heroor@ti.com>
+---
+ .../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb     |   20 ++++++++++++++++=
+++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.1=
+0.bb
+
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb b/=
+recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
+new file mode 100644
+index 0000000..052f343
+--- /dev/null
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION =3D "Userspace libraries for sgx"
++HOMEPAGE =3D "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
++LICENSE =3D "TI"
++
++SRC_URI =3D "http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcont=
+ent/gfxsdk/OMAP5_1_09_00_10//exports/omap5-sgx-ddk-um-linux-${PV}.tar.gz;pr=
+otocol=3Dhttp"
++
++LIC_FILES_CHKSUM =3D "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=
+=3Dd280df8e94bb2e7b9251c8526078eeb8"
++
++PR =3D "r0"=20
++
++SRC_URI[md5sum] =3D "3cfb875de031098a4c1eeeaf4e442367"
++SRC_URI[shasum] =3D "773299242fc72a5837b7e17053123ad55d69723b"
++
++S =3D "${WORKDIR}/${PN}-${PV}"
++
++do_install () {
++    oe_runmake install DESTDIR=3D${D}
++}
++
++FILES_${PN} +=3D " ${libdir}/gbm/"
+--=20
+1.7.9.5
+
+
