@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3E6B3E00441
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3FAA8E00443
 	for <meta-ti@yoctoproject.org>; Mon, 19 Aug 2013 17:12:51 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6FD2B52A9D; Tue, 20 Aug 2013 00:12:50 +0000 (UTC)
+	id 6E40C5299C; Tue, 20 Aug 2013 00:12:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130820001250.6FD2B52A9D@arago-project.org>
+Message-Id: <20130820001250.6E40C5299C@arago-project.org>
 Date: Tue, 20 Aug 2013 00:12:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Valentin Cobelea : recipes-ti: fix warning " variable key FILES_${PN}-dev replaces original key"
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 20 Aug 2013 00:12:54 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: eb330517078bffa6acb4949635121e5df5a0d557
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=eb330517078bffa6acb4949635121e5df5a0d557
+Branch: dylan
+Commit: ee570b6331bab0bb741193c43723d0da5a5ead34
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ee570b6331bab0bb741193c43723d0da5a5ead34
 
 Author: Valentin Cobelea <valentin.cobelea@enea.com>
 Date:   Mon Aug 12 15:53:39 2013 +0200
