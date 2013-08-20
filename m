@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3D379E00406
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3E6B3E00441
 	for <meta-ti@yoctoproject.org>; Mon, 19 Aug 2013 17:12:51 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 689AC52099; Tue, 20 Aug 2013 00:12:50 +0000 (UTC)
+	id 6FD2B52A9D; Tue, 20 Aug 2013 00:12:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130820001250.689AC52099@arago-project.org>
-Date: Tue, 20 Aug 2013 00:12:49 +0000 (UTC)
+Message-Id: <20130820001250.6FD2B52A9D@arago-project.org>
+Date: Tue, 20 Aug 2013 00:12:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Ian Reinhart Geiser : formfactor: Fix filespath usage
+Subject: Valentin Cobelea : recipes-ti: fix warning " variable key FILES_${PN}-dev replaces original key"
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,35 +27,44 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 09d3398e80ac47df013e39d7bc513404ee6817f7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=09d3398e80ac47df013e39d7bc513404ee6817f7
+Commit: eb330517078bffa6acb4949635121e5df5a0d557
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=eb330517078bffa6acb4949635121e5df5a0d557
 
-Author: Ian Reinhart Geiser <igeiser@devonit.com>
-Date:   Sun Aug 11 19:41:34 2013 -0400
+Author: Valentin Cobelea <valentin.cobelea@enea.com>
+Date:   Mon Aug 12 15:53:39 2013 +0200
 
-formfactor: Fix filespath usage
+recipes-ti: fix warning "variable key FILES_${PN}-dev replaces original key"
 
-The old way of setting THISDIR in a bbappend clobbers THISDIR for
-other layers.  This change makes it use the new way that is done
-in dylan.
+Use properly FILES_${PN}-dev to avoid warning about replacing value with default.
 
-Signed-off-by: Ian Reinhart Geiser <igeiser@devonit.com>
+Signed-off-by: Valentin Cobelea <valentin.cobelea@enea.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/formfactor/formfactor_0.0.bbappend |    5 ++---
- 1 files changed, 2 insertions(+), 3 deletions(-)
+ recipes-ti/ipc/ti-ipc.inc         |    2 +-
+ recipes-ti/syslink/ti-syslink.inc |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/formfactor/formfactor_0.0.bbappend b/recipes-bsp/formfactor/formfactor_0.0.bbappend
-index 4b8d0e6..491d403 100644
---- a/recipes-bsp/formfactor/formfactor_0.0.bbappend
-+++ b/recipes-bsp/formfactor/formfactor_0.0.bbappend
-@@ -1,3 +1,2 @@
--THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}"
--FILESPATH =. "${@base_set_filespath(["${THISDIR}/${PN}"], d)}:"
--
-+PRINC := "${@int(PRINC) + 1}"
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index 8d1b802..7f4b919 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -33,4 +33,4 @@ do_install() {
+     install ${S}/ipc.pc ${D}/${libdir}/pkgconfig/
+ }
+ 
+-FILES_ti-ipc-dev = "${libdir}/*"
++FILES_${PN}-dev = "${libdir}/*"
+diff --git a/recipes-ti/syslink/ti-syslink.inc b/recipes-ti/syslink/ti-syslink.inc
+index 04c59c1..70289d4 100644
+--- a/recipes-ti/syslink/ti-syslink.inc
++++ b/recipes-ti/syslink/ti-syslink.inc
+@@ -238,4 +238,4 @@ RRECOMMENDS_ti-syslink-examples_append = " ti-syslink-module"
+ FILES_ti-syslink-examples = "${installdir}/ti-syslink-examples/*"
+ INSANE_SKIP_ti-syslink-examples = "1"
+ 
+-FILES_ti-syslink-dev = "${libdir}/*"
++FILES_${PN}-dev = "${libdir}/*"
 
 
