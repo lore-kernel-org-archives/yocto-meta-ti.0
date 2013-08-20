@@ -1,28 +1,34 @@
-Return-Path: <mrinmayee@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F035AE00441
-	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2013 02:33:21 -0700 (PDT)
-Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r7K9XJ4I013718
-	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2013 04:33:19 -0500
-Received: from DBDE73.ent.ti.com (dbde73.ent.ti.com [172.24.171.98])
-	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7K9XGbr026800
-	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2013 04:33:17 -0500
-Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
-	DBDE73.ent.ti.com ([fe80::bc19:dc43:44da:7415%27]) with mapi id
-	14.02.0342.003; Tue, 20 Aug 2013 17:33:16 +0800
-From: "Hingolikar, Mrinmayee" <mrinmayee@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: Timeout issue
-Thread-Index: Ac6diEvL1Ah5xnxST560O3gdUpr9Cg==
-Date: Tue, 20 Aug 2013 09:33:15 +0000
-Message-ID: <CF956B779D819D41BBC043B7082161D544493F@DBDE04.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.24.170.142]
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-oa0-f43.google.com (mail-oa0-f43.google.com
+	[209.85.219.43])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 81619E01358
+	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2013 05:07:24 -0700 (PDT)
+Received: by mail-oa0-f43.google.com with SMTP id i10so496023oag.30
+	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2013 05:07:24 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=google.com; s=20120113;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=rjOVYfb3sKRhpzojc4OyZzZjtvvuXW03B/qHglMzuY8=;
+	b=MM0pd/MWZIqVHfszhttTAC9qKEI68VSsFmVwJQb0WptRcBJ8bxsvtkZPtqVTDgvhkA
+	upCSrI1XgG2TzQIZvdv4B/sGKBaCDlY6QaYBQ0t5utjde06l6J+4g5c6GG6o9tTH+xkJ
+	dl0PrI7k9PcARi4IkuMGxHV9ztQjI/Uw3h5uQ/SVols5an0X0wzSF+R0Sc3MI0TPQTVu
+	hGqWyU91xvVppr+zmVM/NNyeBL6MsoYmQ5Hp7xlU32iFCmRro8By7B9j4m2BEafmFDIR
+	SV2h5U/OmERSVX22MD8gC5H1/nhBwazWkdLAPmMHcbb+qM3/NYsN28TP0U6I8//huu2Y
+	c8mw==
+X-Gm-Message-State: ALoCoQlBItMMipPI4tAEALbAc0WQ7UzgAnDac2O9yYJA8O4vZ+Ra1Z3LNumzbAGWvPgCuClEcjY/
+X-Received: by 10.60.52.244 with SMTP id w20mr1159886oeo.30.1377000444438;
+	Tue, 20 Aug 2013 05:07:24 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Timeout issue
+Received: by 10.76.172.4 with HTTP; Tue, 20 Aug 2013 05:07:04 -0700 (PDT)
+In-Reply-To: <CF956B779D819D41BBC043B7082161D544493F@DBDE04.ent.ti.com>
+References: <CF956B779D819D41BBC043B7082161D544493F@DBDE04.ent.ti.com>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Tue, 20 Aug 2013 14:07:04 +0200
+Message-ID: <CAP71WjyQN6a3C8qV3Wdaok4FmuX3Qic8c75X4t-PkXC7TnVp9Q@mail.gmail.com>
+To: "Hingolikar, Mrinmayee" <mrinmayee@ti.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Timeout issue
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,94 +41,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Aug 2013 09:33:23 -0000
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_CF956B779D819D41BBC043B7082161D544493FDBDE04entticom_"
+X-List-Received-Date: Tue, 20 Aug 2013 12:07:25 -0000
+Content-Type: multipart/alternative; boundary=001a1133460058b96304e45fe6ec
 
---_000_CF956B779D819D41BBC043B7082161D544493FDBDE04entticom_
-Content-Type: text/plain; charset="us-ascii"
+--001a1133460058b96304e45fe6ec
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
-Hi all,
+On Tue, Aug 20, 2013 at 11:33 AM, Hingolikar, Mrinmayee <mrinmayee@ti.com>w=
+rote:
 
-During yocto build many times the fetch times out resulting in a fetcher fa=
-ilure. The same command for fetch when run with a larger timeout for wget s=
-ucceeds.
-Where can we modify the arguments to wget so that the build doesn't halt du=
-e to a fetcher failure?
-
-Regards,
-Mrinmayee
-
-
---_000_CF956B779D819D41BBC043B7082161D544493FDBDE04entticom_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+> During yocto build many times the fetch times out resulting in a fetcher
+> failure. The same command for fetch when run with a larger timeout for wg=
+et
+> succeeds.****
 >
-<meta name=3D"Generator" content=3D"Microsoft Word 12 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:purple;
-	text-decoration:underline;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri","sans-serif";
-	color:windowtext;}
-.MsoChpDefault
-	{mso-style-type:export-only;}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal">Hi all,<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">During yocto build many times the fetch times out re=
-sulting in a fetcher failure. The same command for fetch when run with a la=
-rger timeout for wget succeeds.<o:p></o:p></p>
-<p class=3D"MsoNormal">Where can we modify the arguments to wget so that th=
-e build doesn&#8217;t halt due to a fetcher failure?<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Regards,<o:p></o:p></p>
-<p class=3D"MsoNormal">Mrinmayee<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-</div>
-</body>
-</html>
+> Where can we modify the arguments to wget so that the build doesn=92t hal=
+t
+> due to a fetcher failure?****
+>
+> ** **
+>
+>
+it's defined in meta/conf/bitbake.conf as:
 
---_000_CF956B779D819D41BBC043B7082161D544493FDBDE04entticom_--
+FETCHCMD_wget =3D "/usr/bin/env wget -t 2 -T 30 -nv --passive-ftp
+--no-check-certificate"
+
+you should be able to modify the value of that variable in any of your
+config file.
+
+--001a1133460058b96304e45fe6ec
+Content-Type: text/html; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">=
+On Tue, Aug 20, 2013 at 11:33 AM, Hingolikar, Mrinmayee <span dir=3D"ltr">&=
+lt;<a href=3D"mailto:mrinmayee@ti.com" target=3D"_blank">mrinmayee@ti.com</=
+a>&gt;</span> wrote:<br>
+
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
+adding-left:1ex"><p class=3D"">During yocto build many times the fetch time=
+s out resulting in a fetcher failure. The same command for fetch when run w=
+ith a larger timeout for wget succeeds.<u></u><u></u></p>
+
+
+<p class=3D"">Where can we modify the arguments to wget so that the build d=
+oesn=92t halt due to a fetcher failure?<u></u><u></u></p>
+<p class=3D""><u></u>=A0<u></u></p>
+<p class=3D""></p></blockquote></div><br>it&#39;s defined in meta/conf/bitb=
+ake.conf as:</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_=
+extra">FETCHCMD_wget =3D &quot;/usr/bin/env wget -t 2 -T 30 -nv --passive-f=
+tp --no-check-certificate&quot;<br>
+
+</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">you s=
+hould be able to modify the value of that variable in any of your config fi=
+le.</div><div class=3D"gmail_extra"><br></div></div>
+
+--001a1133460058b96304e45fe6ec--
