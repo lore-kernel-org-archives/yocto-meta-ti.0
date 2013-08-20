@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C06EE003E2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3D379E00406
 	for <meta-ti@yoctoproject.org>; Mon, 19 Aug 2013 17:12:51 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3535B52A87; Tue, 20 Aug 2013 00:12:50 +0000 (UTC)
+	id 689AC52099; Tue, 20 Aug 2013 00:12:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130820001250.3535B52A87@arago-project.org>
+Message-Id: <20130820001250.689AC52099@arago-project.org>
 Date: Tue, 20 Aug 2013 00:12:49 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Ian Reinhart Geiser : formfactor: Fix filespath usage
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 20 Aug 2013 00:12:54 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: acf1d6a980186321e4467b9849bb9cb8d5dd8396
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=acf1d6a980186321e4467b9849bb9cb8d5dd8396
+Branch: master
+Commit: 09d3398e80ac47df013e39d7bc513404ee6817f7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=09d3398e80ac47df013e39d7bc513404ee6817f7
 
 Author: Ian Reinhart Geiser <igeiser@devonit.com>
 Date:   Sun Aug 11 19:41:34 2013 -0400
