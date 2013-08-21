@@ -1,35 +1,35 @@
-Return-Path: <fcooper@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC0A6E00406
-	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2013 15:20:31 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r7KMKUKW027153
-	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2013 17:20:30 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7KMKU4w014697
-	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2013 17:20:30 -0500
-Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.02.0342.003; Tue, 20 Aug 2013 17:20:30 -0500
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [master][PATCH 1/2 v2] kernel.bbclass: Pull in
-	kernel.bbclass from oe-core master
-Thread-Index: AQHOndX6Lg8cgoktB0eMPe9Wg5D2Ypme0tkA//+sX4CAAH8rAP//rIxg
-Date: Tue, 20 Aug 2013 22:20:29 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C526BBB@DFLE08.ent.ti.com>
-References: <1377026431-5185-1-git-send-email-fcooper@ti.com>
-	<20130820194206.GG8481@edge>
-	<8F29D6B095ED194EA1980491A5E029710C526905@DFLE08.ent.ti.com>
-	<20130820221756.GH8481@edge>
-In-Reply-To: <20130820221756.GH8481@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+Return-Path: <b.hutchman@gmail.com>
+Received: from mail-oa0-f42.google.com (mail-oa0-f42.google.com
+	[209.85.219.42])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C8F25E00406
+	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2013 18:42:44 -0700 (PDT)
+Received: by mail-oa0-f42.google.com with SMTP id i18so2443692oag.29
+	for <meta-ti@yoctoproject.org>; Tue, 20 Aug 2013 18:42:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=4V/h7NgK2NpHATXh0zTJFJ/qcjJSel6Uzc6qDN6L8WY=;
+	b=jHaP9JvPydlOwx/lSVHwmHdXZv7V2MEt1eLnVhH5k10jLnJ+I8VJX3U6sn3MvdJQN4
+	DALOEJuBUSkMaGJuQsqZ9qpzs6Ne+MaZhT385GFCCTEsTO56usLk7irGHwEMVbEC61ok
+	v/kF7ru9sXMKnp22M8GNS/m5NDOs7P+f23CadPM5HOx1vsqiV78MPFU8yvo6IqEBCZdB
+	S+yzQxmF0p/0ByNCEsopJdzmkzYq3zoxbDZXeKZtowcCLcL3yybdQx6YIJNgMQuxz/xy
+	0X9Cnzt1xxb87yuI/O7vaUct2xjpAKYSnj9+wKANtX62C+kSbblmzPmSmPCCZAllGF4u
+	6aAw==
 MIME-Version: 1.0
+X-Received: by 10.60.54.68 with SMTP id h4mr4988734oep.74.1377049363670; Tue,
+	20 Aug 2013 18:42:43 -0700 (PDT)
+Received: by 10.60.142.41 with HTTP; Tue, 20 Aug 2013 18:42:43 -0700 (PDT)
+In-Reply-To: <CAMKF1sqb8smKgKM8wCyb5cbcdcbqphBBi0dhsZHo9j_-MMeUqg@mail.gmail.com>
+References: <CAFZh4h_683cetV7QjyVgBcsJ9Seooy5wiE8R-fU9L+sqJanU4g@mail.gmail.com>
+	<CAFZh4h8gDV9r6PzrANuj4ZWJCnpibh5DtK4OmoYqwO_vAdY-_g@mail.gmail.com>
+	<CAFZh4h8ncW+-UskiqTAOSXFyDvN5Rc+bnj=ykGfXRZYPRbbgrA@mail.gmail.com>
+	<CAMKF1sqb8smKgKM8wCyb5cbcdcbqphBBi0dhsZHo9j_-MMeUqg@mail.gmail.com>
+Date: Tue, 20 Aug 2013 21:42:43 -0400
+Message-ID: <CAFZh4h-OBDoeWFWpMLng8Uw6HEidMoWJtQvwdP9SjPwaci9O0Q@mail.gmail.com>
+From: Brian Hutchinson <b.hutchman@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [master][PATCH 1/2 v2] kernel.bbclass: Pull in kernel.bbclass from oe-core master
+Subject: Re: Stumped. Can't get 2.6.37 TI kernel to boot when built with toolchain from denzil or Linaro gcc-linaro-arm-linux-gnueabihf-4.8-2013.07-1_linux/
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,587 +42,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Aug 2013 22:20:34 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 21 Aug 2013 01:42:45 -0000
+Content-Type: multipart/alternative; boundary=089e013d061628ee5304e46b4aa4
+
+--089e013d061628ee5304e46b4aa4
+Content-Type: text/plain; charset=ISO-8859-1
+
+On Fri, Aug 16, 2013 at 5:59 PM, Khem Raj <raj.khem@gmail.com> wrote:
+
+>
+> use linux-libc-headers from 2.6.37 as well and not the 3.8 or whatever is
+> default on OE-Core branch that you are using.
+>
+
+OK, I'm in a little new territory here.  I've been attempting to add
+machine support to my oe_core + meta-ti master checkout.  I've setup the
+machine conf for c6a816x-evm and all the associated files using denzil as a
+base.  I modified the 2.6.37 recipe to use my custom boards kernel instead
+of the one from git (set SRC_URI to my .tar.bz2).  I stubbed out u-boot for
+now as it was giving me problems.
+
+First question.  I looked at my poky/meta/recipes-kernel/linux-libc-headers
+dir of a denzil checkout that last had c6a816x-evm support to use as kind
+of an example/guide.  I see recipes for linux-libc-headers_3.2.bb and
+linux-libc-headers_3.0.8.bb.  Do I need to create a recipe for 2.6.37 and
+set the SRC_URI for a 2.6.37 commit so that my rootfs packages will be
+built against headers that match the version of the kernel I'm using?  It
+looked like linux-libc-headers.inc has some kind of check to decide on
+which headers to use (3 or 2.6) but I don't quite follow how it works yet.
+
+Second question.  When I try to bitbake core-image-minimal after adding in
+my kernel (a tar.bz2), it builds but the do_package phase gets errors:
+
+Build Configuration:
+BB_VERSION        = "1.19.1"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "Debian-7.1"
+TARGET_SYS        = "arm-oe-linux-gnueabi"
+MACHINE           = "c6a816x-evm"
+DISTRO_VERSION    = "oe-core.0"
+TUNE_FEATURES     = "armv7a vfp neon"
+TARGET_FPU        = "vfp-neon"
+meta              = "master:b8952942aed77473d3b44a17112cbf6a9e83eff3"
+meta-ti           = "master:ed417f659a24499301eb8e40de06e281462f213a"
+
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+ERROR: objcopy failed with exit code 256 (cmd was
+'arm-oe-linux-gnueabi-objcopy' --only-keep-debug
+'/home/hutch/oe_core_beagleboard/oe-core/build/tmp-eglibc/work/c6a816x_evm-oe-linux-gnueabi/linux-ti81xx-psp/2.6.37-r0/package/usr/src/kernel/image/usr/src/kernel/scripts/mod/mk_elfconfig'
+'/home/hutch/oe_core_beagleboard/oe-core/build/tmp-eglibc/work/c6a816x_evm-oe-linux-gnueabi/linux-ti81xx-psp/2.6.37-r0/package/usr/src/kernel/image/usr/src/kernel/scripts/mod/.debug/mk_elfconfig'):
+arm-oe-linux-gnueabi-objcopy:/home/hutch/oe_core_beagleboard/oe-core/build/tmp-eglibc/work/c6a816x_evm-oe-linux-gnueabi/linux-ti81xx-psp/2.6.37-r0/package/usr/src/kernel/image/usr/src/kernel/scripts/mod/mk_elfconfig:
+File format not recognized
+ERROR: Function failed: split_and_strip_files
+ERROR: Logfile of failure stored in:
+/home/hutch/oe_core_beagleboard/oe-core/build/tmp-eglibc/work/c6a816x_evm-oe-linux-gnueabi/linux-ti81xx-psp/2.6.37-r0/temp/log.do_package.25280
+ERROR: Task 631
+(/home/hutch/oe_core_beagleboard/oe-core/meta-ti/recipes-kernel/linux/
+linux-ti81xx-psp_2.6.37.bb, do_package) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 1541 tasks of which 1528 didn't need to be
+rerun and 1 failed.
+Waiting for 0 running tasks to finish:
+
+Summary: 1 task failed:
+  /home/hutch/oe_core_beagleboard/oe-core/meta-ti/recipes-kernel/linux/
+linux-ti81xx-psp_2.6.37.bb, do_package
+Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+
+I did some searches of this kind of error and mostly found noise but also
+found some references to  INHIBIT_PACKAGE_STRIP but I'm not sure if that
+will fix this problem or not.
+
+So far my deploy dir has a uImage but not the rootfs tar or images. I hope
+fixing the above will get me there.
+
+Regards,
+
+Brian
+
+--089e013d061628ee5304e46b4aa4
+Content-Type: text/html; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
+On Fri, Aug 16, 2013 at 5:59 PM, Khem Raj <span dir=3D"ltr">&lt;<a href=3D"=
+mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt;</sp=
+an> wrote:<br><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" =
+style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
+<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"font-family:courier =
+new,monospace;font-size:small"><br></div><div class=3D"gmail_extra"><div cl=
+ass=3D"gmail_quote"><div><div class=3D"h5"><div><span style=3D"font-family:=
+&#39;courier new&#39;,monospace">use linux-libc-headers from 2.6.37 as well=
+ and not the 3.8 or whatever is default on OE-Core branch that you are usin=
+g.</span></div>
+</div></div></div></div></div></blockquote><div><br></div><div>OK, I&#39;m =
+in a little new territory here. =A0I&#39;ve been attempting to add machine =
+support to my oe_core + meta-ti master checkout. =A0I&#39;ve setup the mach=
+ine conf for c6a816x-evm and all the associated files using denzil as a bas=
+e. =A0I modified the 2.6.37 recipe to use my custom boards kernel instead o=
+f the one from git (set SRC_URI to my .tar.bz2). =A0I stubbed out u-boot fo=
+r now as it was giving me problems.</div>
+<div><br></div><div>First question. =A0I looked at my=A0poky/meta/recipes-k=
+ernel/linux-libc-headers dir of a denzil checkout that last had c6a816x-evm=
+ support to use as kind of an example/guide. =A0I see recipes for=A0<a href=
+=3D"http://linux-libc-headers_3.2.bb">linux-libc-headers_3.2.bb</a> and=A0<=
+a href=3D"http://linux-libc-headers_3.0.8.bb">linux-libc-headers_3.0.8.bb</=
+a>. =A0Do I need to create a recipe for 2.6.37 and set the SRC_URI for a 2.=
+6.37 commit so that my rootfs packages will be built against headers that m=
+atch the version of the kernel I&#39;m using? =A0It looked like linux-libc-=
+headers.inc has some kind of check to decide on which headers to use (3 or =
+2.6) but I don&#39;t quite follow how it works yet.</div>
+<div><br></div><div>Second question. =A0When I try to bitbake core-image-mi=
+nimal after adding in my kernel (a tar.bz2), it builds but the do_package p=
+hase gets errors:</div><div><br></div><div>Build Configuration:</div><div>
+BB_VERSION =A0 =A0 =A0 =A0=3D &quot;1.19.1&quot;</div><div>BUILD_SYS =A0 =
+=A0 =A0 =A0 =3D &quot;x86_64-linux&quot;</div><div>NATIVELSBSTRING =A0 =3D =
+&quot;Debian-7.1&quot;</div><div>TARGET_SYS =A0 =A0 =A0 =A0=3D &quot;arm-oe=
+-linux-gnueabi&quot;</div><div>MACHINE =A0 =A0 =A0 =A0 =A0 =3D &quot;c6a816=
+x-evm&quot;</div>
+<div>DISTRO_VERSION =A0 =A0=3D &quot;oe-core.0&quot;</div><div>TUNE_FEATURE=
+S =A0 =A0 =3D &quot;armv7a vfp neon&quot;</div><div>TARGET_FPU =A0 =A0 =A0 =
+=A0=3D &quot;vfp-neon&quot;</div><div>meta =A0 =A0 =A0 =A0 =A0 =A0 =A0=3D &=
+quot;master:b8952942aed77473d3b44a17112cbf6a9e83eff3&quot;</div>
+<div>meta-ti =A0 =A0 =A0 =A0 =A0 =3D &quot;master:ed417f659a24499301eb8e40d=
+e06e281462f213a&quot;</div><div><br></div><div>NOTE: Resolving any missing =
+task queue dependencies</div><div>NOTE: Preparing runqueue</div><div>NOTE: =
+Executing SetScene Tasks</div>
+<div>NOTE: Executing RunQueue Tasks</div><div>ERROR: objcopy failed with ex=
+it code 256 (cmd was &#39;arm-oe-linux-gnueabi-objcopy&#39; --only-keep-deb=
+ug &#39;/home/hutch/oe_core_beagleboard/oe-core/build/tmp-eglibc/work/c6a81=
+6x_evm-oe-linux-gnueabi/linux-ti81xx-psp/2.6.37-r0/package/usr/src/kernel/i=
+mage/usr/src/kernel/scripts/mod/mk_elfconfig&#39; &#39;/home/hutch/oe_core_=
+beagleboard/oe-core/build/tmp-eglibc/work/c6a816x_evm-oe-linux-gnueabi/linu=
+x-ti81xx-psp/2.6.37-r0/package/usr/src/kernel/image/usr/src/kernel/scripts/=
+mod/.debug/mk_elfconfig&#39;):</div>
+<div>arm-oe-linux-gnueabi-objcopy:/home/hutch/oe_core_beagleboard/oe-core/b=
+uild/tmp-eglibc/work/c6a816x_evm-oe-linux-gnueabi/linux-ti81xx-psp/2.6.37-r=
+0/package/usr/src/kernel/image/usr/src/kernel/scripts/mod/mk_elfconfig: Fil=
+e format not recognized</div>
+<div>ERROR: Function failed: split_and_strip_files</div><div>ERROR: Logfile=
+ of failure stored in: /home/hutch/oe_core_beagleboard/oe-core/build/tmp-eg=
+libc/work/c6a816x_evm-oe-linux-gnueabi/linux-ti81xx-psp/2.6.37-r0/temp/log.=
+do_package.25280</div>
+<div>ERROR: Task 631 (/home/hutch/oe_core_beagleboard/oe-core/meta-ti/recip=
+es-kernel/linux/<a href=3D"http://linux-ti81xx-psp_2.6.37.bb">linux-ti81xx-=
+psp_2.6.37.bb</a>, do_package) failed with exit code &#39;1&#39;</div><div>
+NOTE: Tasks Summary: Attempted 1541 tasks of which 1528 didn&#39;t need to =
+be rerun and 1 failed.</div><div>Waiting for 0 running tasks to finish:</di=
+v><div><br></div><div>Summary: 1 task failed:</div><div>=A0 /home/hutch/oe_=
+core_beagleboard/oe-core/meta-ti/recipes-kernel/linux/<a href=3D"http://lin=
+ux-ti81xx-psp_2.6.37.bb">linux-ti81xx-psp_2.6.37.bb</a>, do_package</div>
+<div>Summary: There were 2 ERROR messages shown, returning a non-zero exit =
+code.=A0</div><div><br></div><div>I did some searches of this kind of error=
+ and mostly found noise but also found some references to =A0<span style=3D=
+"white-space:pre-wrap">INHIBIT_PACKAGE_STRIP but I&#39;m not sure if that w=
+ill fix this problem or not.</span></div>
+<div><span style=3D"white-space:pre-wrap"><br></span></div><div><span style=
+=3D"white-space:pre-wrap">So far my deploy dir has a uImage but not the roo=
+tfs tar or images.  I hope fixing the above will get me there.</span></div>
+<div><span style=3D"white-space:pre-wrap"><br></span></div><div><span style=
+=3D"white-space:pre-wrap">Regards,</span></div><div><span style=3D"white-sp=
+ace:pre-wrap"><br></span></div><div><span style=3D"white-space:pre-wrap">Br=
+ian</span></div>
+</div>
 
-
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Tuesday, August 20, 2013 5:18 PM
-> To: Cooper Jr., Franklin
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [master][PATCH 1/2 v2] kernel.bbclass: Pull in
-> kernel.bbclass from oe-core master
->=20
-> On Tue, Aug 20, 2013 at 03:47:10PM -0400, Cooper Jr., Franklin wrote:
-> > The issue this patch set is fixing isn't an Arago distro only problem
-> > but rather a problem faced by anyone using a newer version of u-boot.
->=20
-> Yes, I understand that. But at the same time meta-ti is used much wider a=
-nd
-> overlaying a core class is very risky and not recommended. Previously we =
-also
-> had rather generic fixes applied to kernel.bbclass and still kept it in m=
-eta-arago...
-[Franklin] Ok I'll submit these to meta-arago. Makes my life easier not hav=
-ing to submit patches for two different branches anyway :)
-
->=20
-> --
-> Denys
->=20
->=20
-> > > -----Original Message-----
-> > > From: Dmytriyenko, Denys
-> > > Sent: Tuesday, August 20, 2013 2:42 PM
-> > > To: Cooper Jr., Franklin
-> > > Cc: meta-ti@yoctoproject.org
-> > > Subject: Re: [meta-ti] [master][PATCH 1/2 v2] kernel.bbclass: Pull in
-> > > kernel.bbclass from oe-core master
-> > >
-> > > Why meta-ti and not meta-arago where we've overlayed kernel.bbclass
-> several
-> > > times in the past?
-> > >
-> > > --
-> > > Denys
-> > >
-> > >
-> > > On Tue, Aug 20, 2013 at 02:20:31PM -0500, Franklin S. Cooper Jr wrote=
-:
-> > > > * Pull in kernel.bbclass from oe-core master to allow patching of t=
-he local
-> > > >   version of kernel.bbclass until upstream patch is accepted and pu=
-lled into
-> > > >   oe-core master.
-> > > >
-> > > > Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
-> > > > ---
-> > > > Version 2 changes:
-> > > > Fix commit message that mentioned dylan instead of master
-> > > >
-> > > >  classes/kernel.bbclass |  389
-> > > ++++++++++++++++++++++++++++++++++++++++++++++++
-> > > >  1 files changed, 389 insertions(+), 0 deletions(-)
-> > > >  create mode 100644 classes/kernel.bbclass
-> > > >
-> > > > diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> > > > new file mode 100644
-> > > > index 0000000..e039dfc
-> > > > --- /dev/null
-> > > > +++ b/classes/kernel.bbclass
-> > > > @@ -0,0 +1,389 @@
-> > > > +inherit linux-kernel-base module_strip kernel-module-split
-> > > > +
-> > > > +PROVIDES +=3D "virtual/kernel"
-> > > > +DEPENDS +=3D "virtual/${TARGET_PREFIX}binutils
-> > > virtual/${TARGET_PREFIX}gcc kmod-native depmodwrapper-cross"
-> > > > +
-> > > > +# we include gcc above, we dont need virtual/libc
-> > > > +INHIBIT_DEFAULT_DEPS =3D "1"
-> > > > +
-> > > > +KERNEL_IMAGETYPE ?=3D "zImage"
-> > > > +INITRAMFS_IMAGE ?=3D ""
-> > > > +INITRAMFS_TASK ?=3D ""
-> > > > +
-> > > > +python __anonymous () {
-> > > > +    kerneltype =3D d.getVar('KERNEL_IMAGETYPE', True) or ''
-> > > > +    if kerneltype =3D=3D 'uImage':
-> > > > +        depends =3D d.getVar("DEPENDS", True)
-> > > > +        depends =3D "%s u-boot-mkimage-native" % depends
-> > > > +        d.setVar("DEPENDS", depends)
-> > > > +
-> > > > +    image =3D d.getVar('INITRAMFS_IMAGE', True)
-> > > > +    if image:
-> > > > +        d.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs')
-> > > > +}
-> > > > +
-> > > > +inherit kernel-arch deploy
-> > > > +
-> > > > +PACKAGES_DYNAMIC +=3D "^kernel-module-.*"
-> > > > +PACKAGES_DYNAMIC +=3D "^kernel-image-.*"
-> > > > +PACKAGES_DYNAMIC +=3D "^kernel-firmware-.*"
-> > > > +
-> > > > +export OS =3D "${TARGET_OS}"
-> > > > +export CROSS_COMPILE =3D "${TARGET_PREFIX}"
-> > > > +
-> > > > +KERNEL_PRIORITY ?=3D "${@int(d.getVar('PV',1).split('-
-> > > ')[0].split('+')[0].split('.')[0]) * 10000 + \
-> > > > +                       int(d.getVar('PV',1).split('-')[0].split('+=
-')[0].split('.')[1]) * 100
-> + \
-> > > > +                       int(d.getVar('PV',1).split('-')[0].split('+=
-')[0].split('.')[-1])}"
-> > > > +
-> > > > +KERNEL_RELEASE ?=3D "${KERNEL_VERSION}"
-> > > > +
-> > > > +# Where built kernel lies in the kernel tree
-> > > > +KERNEL_OUTPUT ?=3D "arch/${ARCH}/boot/${KERNEL_IMAGETYPE}"
-> > > > +KERNEL_IMAGEDEST =3D "boot"
-> > > > +
-> > > > +#
-> > > > +# configuration
-> > > > +#
-> > > > +export CMDLINE_CONSOLE =3D
-> "console=3D${@d.getVar("KERNEL_CONSOLE",1)
-> > > or "ttyS0"}"
-> > > > +
-> > > > +KERNEL_VERSION =3D "${@get_kernelversion('${B}')}"
-> > > > +
-> > > > +KERNEL_LOCALVERSION ?=3D ""
-> > > > +
-> > > > +# kernels are generally machine specific
-> > > > +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-> > > > +
-> > > > +# U-Boot support
-> > > > +UBOOT_ENTRYPOINT ?=3D "20008000"
-> > > > +UBOOT_LOADADDRESS ?=3D "${UBOOT_ENTRYPOINT}"
-> > > > +
-> > > > +# Some Linux kernel configurations need additional parameters on t=
-he
-> > > command line
-> > > > +KERNEL_EXTRA_ARGS ?=3D ""
-> > > > +
-> > > > +# For the kernel, we don't want the '-e MAKEFLAGS=3D' in EXTRA_OEM=
-AKE.
-> > > > +# We don't want to override kernel Makefile variables from the
-> environment
-> > > > +EXTRA_OEMAKE =3D ""
-> > > > +
-> > > > +KERNEL_ALT_IMAGETYPE ??=3D ""
-> > > > +
-> > > > +# Define where the kernel headers are installed on the target as w=
-ell as
-> > > where
-> > > > +# they are staged.
-> > > > +KERNEL_SRC_PATH =3D "/usr/src/kernel"
-> > > > +
-> > > > +KERNEL_IMAGETYPE_FOR_MAKE =3D "${@(lambda s: s[:-3] if s[-3:] =3D=
-=3D
-> ".gz"
-> > > else s)(d.getVar('KERNEL_IMAGETYPE', True))}"
-> > > > +
-> > > > +kernel_do_compile() {
-> > > > +	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
-> > > > +	oe_runmake ${KERNEL_IMAGETYPE_FOR_MAKE}
-> > > ${KERNEL_ALT_IMAGETYPE} CC=3D"${KERNEL_CC}" LD=3D"${KERNEL_LD}"
-> > > ${KERNEL_EXTRA_ARGS}
-> > > > +	if test "${KERNEL_IMAGETYPE_FOR_MAKE}.gz" =3D
-> > > "${KERNEL_IMAGETYPE}"; then
-> > > > +		gzip -9c < "${KERNEL_IMAGETYPE_FOR_MAKE}" >
-> > > "${KERNEL_OUTPUT}"
-> > > > +	fi
-> > > > +}
-> > > > +
-> > > > +do_compile_kernelmodules() {
-> > > > +	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
-> > > > +	if (grep -q -i -e '^CONFIG_MODULES=3Dy$' .config); then
-> > > > +		oe_runmake ${PARALLEL_MAKE} modules CC=3D"${KERNEL_CC}"
-> > > LD=3D"${KERNEL_LD}" ${KERNEL_EXTRA_ARGS}
-> > > > +	else
-> > > > +		bbnote "no modules to compile"
-> > > > +	fi
-> > > > +}
-> > > > +addtask compile_kernelmodules after do_compile before do_strip
-> > > > +
-> > > > +kernel_do_install() {
-> > > > +	#
-> > > > +	# First install the modules
-> > > > +	#
-> > > > +	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
-> > > > +	if (grep -q -i -e '^CONFIG_MODULES=3Dy$' .config); then
-> > > > +		oe_runmake DEPMOD=3Decho INSTALL_MOD_PATH=3D"${D}"
-> > > modules_install
-> > > > +		rm "${D}/lib/modules/${KERNEL_VERSION}/build"
-> > > > +		rm "${D}/lib/modules/${KERNEL_VERSION}/source"
-> > > > +	else
-> > > > +		bbnote "no modules to install"
-> > > > +	fi
-> > > > +
-> > > > +	#
-> > > > +	# Install various kernel output (zImage, map file, config, module=
- support
-> > > files)
-> > > > +	#
-> > > > +	install -d ${D}/${KERNEL_IMAGEDEST}
-> > > > +	install -d ${D}/boot
-> > > > +	install -m 0644 ${KERNEL_OUTPUT}
-> > > ${D}/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}-${KERNEL_VERSION}
-> > > > +	install -m 0644 System.map ${D}/boot/System.map-
-> > > ${KERNEL_VERSION}
-> > > > +	install -m 0644 .config ${D}/boot/config-${KERNEL_VERSION}
-> > > > +	install -m 0644 vmlinux ${D}/boot/vmlinux-${KERNEL_VERSION}
-> > > > +	[ -e Module.symvers ] && install -m 0644 Module.symvers
-> > > ${D}/boot/Module.symvers-${KERNEL_VERSION}
-> > > > +	install -d ${D}${sysconfdir}/modules-load.d
-> > > > +	install -d ${D}${sysconfdir}/modprobe.d
-> > > > +
-> > > > +	#
-> > > > +	# Support for external module building - create a minimal copy of=
- the
-> > > > +	# kernel source tree.
-> > > > +	#
-> > > > +	kerneldir=3D${D}${KERNEL_SRC_PATH}
-> > > > +	install -d $kerneldir
-> > > > +
-> > > > +	#
-> > > > +	# Store the kernel version in sysroots for module-base.bbclass
-> > > > +	#
-> > > > +
-> > > > +	echo "${KERNEL_VERSION}" > $kerneldir/kernel-abiversion
-> > > > +
-> > > > +	#
-> > > > +	# Store kernel image name to allow use during image generation
-> > > > +	#
-> > > > +
-> > > > +	echo "${KERNEL_IMAGE_BASE_NAME}" >$kerneldir/kernel-image-
-> > > name
-> > > > +
-> > > > +	#
-> > > > +	# Copy the entire source tree. In case an external build director=
-y is
-> > > > +	# used, copy the build directory over first, then copy over the s=
-ource
-> > > > +	# dir. This ensures the original Makefiles are used and not the
-> > > > +	# redirecting Makefiles in the build directory.
-> > > > +	#
-> > > > +	# work and sysroots can be on different partitions, so we can't r=
-ely on
-> > > > +	# hardlinking, unfortunately.
-> > > > +	#
-> > > > +	find . -depth -not -name "*.cmd" -not -name "*.o" -not -path "./.=
-*" -
-> > > print0 | cpio --null -pdu $kerneldir
-> > > > +	cp .config $kerneldir
-> > > > +	if [ "${S}" !=3D "${B}" ]; then
-> > > > +		pwd=3D"$PWD"
-> > > > +		cd "${S}"
-> > > > +		find . -depth -not -path "./.*" -print0 | cpio --null -pdu
-> > > $kerneldir
-> > > > +		cd "$pwd"
-> > > > +	fi
-> > > > +	install -m 0644 ${KERNEL_OUTPUT} $kerneldir/${KERNEL_IMAGETYPE}
-> > > > +	install -m 0644 System.map $kerneldir/System.map-
-> > > ${KERNEL_VERSION}
-> > > > +
-> > > > +	#
-> > > > +	# Clean and remove files not needed for building modules.
-> > > > +	# Some distributions go through a lot more trouble to strip out
-> > > > +	# unecessary headers, for now, we just prune the obvious bits.
-> > > > +	#
-> > > > +	# We don't want to leave host-arch binaries in /sysroots, so
-> > > > +	# we clean the scripts dir while leaving the generated config
-> > > > +	# and include files.
-> > > > +	#
-> > > > +	oe_runmake -C $kerneldir CC=3D"${KERNEL_CC}" LD=3D"${KERNEL_LD}"
-> > > clean
-> > > > +	make -C $kerneldir _mrproper_scripts
-> > > > +	find $kerneldir -path $kerneldir/lib -prune -o -path $kerneldir/t=
-ools -
-> > > prune -o -path $kerneldir/scripts -prune -o -name "*.[csS]" -exec rm =
-'{}' \;
-> > > > +	find $kerneldir/Documentation -name "*.txt" -exec rm '{}' \;
-> > > > +
-> > > > +	# As of Linux kernel version 3.0.1, the clean target removes
-> > > > +	# arch/powerpc/lib/crtsavres.o which is present in
-> > > > +	# KBUILD_LDFLAGS_MODULE, making it required to build external
-> > > modules.
-> > > > +	if [ ${ARCH} =3D "powerpc" ]; then
-> > > > +		cp arch/powerpc/lib/crtsavres.o
-> > > $kerneldir/arch/powerpc/lib/crtsavres.o
-> > > > +	fi
-> > > > +
-> > > > +	# Necessary for building modules like compat-wireless.
-> > > > +	if [ -f include/generated/bounds.h ]; then
-> > > > +		cp include/generated/bounds.h
-> > > $kerneldir/include/generated/bounds.h
-> > > > +	fi
-> > > > +	if [ -d arch/${ARCH}/include/generated ]; then
-> > > > +		mkdir -p $kerneldir/arch/${ARCH}/include/generated/
-> > > > +		cp -fR arch/${ARCH}/include/generated/*
-> > > $kerneldir/arch/${ARCH}/include/generated/
-> > > > +	fi
-> > > > +
-> > > > +	# Remove the following binaries which cause strip or arch QA erro=
-rs
-> > > > +	# during do_package for cross-compiled platforms
-> > > > +	bin_files=3D"arch/powerpc/boot/addnote arch/powerpc/boot/hack-cof=
-f
-> > > \
-> > > > +	           arch/powerpc/boot/mktree scripts/kconfig/zconf.tab.o \
-> > > > +		   scripts/kconfig/conf.o scripts/kconfig/kxgettext.o"
-> > > > +	for entry in $bin_files; do
-> > > > +		rm -f $kerneldir/$entry
-> > > > +	done
-> > > > +
-> > > > +	# kernels <2.6.30 don't have $kerneldir/tools directory so we che=
-ck if it
-> > > exists before calling sed
-> > > > +	if [ -f $kerneldir/tools/perf/Makefile ]; then
-> > > > +		# Fix SLANG_INC for slang.h
-> > > > +		sed -i 's#-I/usr/include/slang#-I=3D/usr/include/slang#g'
-> > > $kerneldir/tools/perf/Makefile
-> > > > +	fi
-> > > > +}
-> > > > +do_install[prefuncs] +=3D "package_get_auto_pr"
-> > > > +
-> > > > +sysroot_stage_all_append() {
-> > > > +	sysroot_stage_dir ${D}${KERNEL_SRC_PATH}
-> > > ${SYSROOT_DESTDIR}${KERNEL_SRC_PATH}
-> > > > +}
-> > > > +
-> > > > +kernel_do_configure() {
-> > > > +	# fixes extra + in /lib/modules/2.6.37+
-> > > > +	# $ scripts/setlocalversion . =3D> +
-> > > > +	# $ make kernelversion =3D> 2.6.37
-> > > > +	# $ make kernelrelease =3D> 2.6.37+
-> > > > +	touch ${B}/.scmversion ${S}/.scmversion
-> > > > +
-> > > > +	# Copy defconfig to .config if .config does not exist. This allow=
-s
-> > > > +	# recipes to manage the .config themselves in do_configure_prepen=
-d().
-> > > > +	if [ -f "${WORKDIR}/defconfig" ] && [ ! -f "${B}/.config" ]; then
-> > > > +		cp "${WORKDIR}/defconfig" "${B}/.config"
-> > > > +	fi
-> > > > +	yes '' | oe_runmake oldconfig
-> > > > +
-> > > > +	if [ ! -z "${INITRAMFS_IMAGE}" ]; then
-> > > > +		for img in cpio.gz cpio.lzo cpio.lzma cpio.xz; do
-> > > > +		if [ -e "${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-
-> > > ${MACHINE}.$img" ]; then
-> > > > +			cp "${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-
-> > > ${MACHINE}.$img" initramfs.$img
-> > > > +		fi
-> > > > +		done
-> > > > +	fi
-> > > > +}
-> > > > +
-> > > > +do_configure[depends] +=3D "${INITRAMFS_TASK}"
-> > > > +
-> > > > +do_savedefconfig() {
-> > > > +	oe_runmake savedefconfig
-> > > > +}
-> > > > +do_savedefconfig[nostamp] =3D "1"
-> > > > +addtask savedefconfig after do_configure
-> > > > +
-> > > > +inherit cml1
-> > > > +
-> > > > +EXPORT_FUNCTIONS do_compile do_install do_configure
-> > > > +
-> > > > +# kernel-base becomes kernel-${KERNEL_VERSION}
-> > > > +# kernel-image becomes kernel-image-${KERNEL_VERISON}
-> > > > +PACKAGES =3D "kernel kernel-base kernel-vmlinux kernel-image kerne=
-l-dev
-> > > kernel-modules"
-> > > > +FILES_${PN} =3D ""
-> > > > +FILES_kernel-base =3D "/lib/modules/${KERNEL_VERSION}/modules.orde=
-r
-> > > /lib/modules/${KERNEL_VERSION}/modules.builtin"
-> > > > +FILES_kernel-image =3D "/boot/${KERNEL_IMAGETYPE}*"
-> > > > +FILES_kernel-dev =3D "/boot/System.map* /boot/Module.symvers*
-> > > /boot/config* ${KERNEL_SRC_PATH}"
-> > > > +FILES_kernel-vmlinux =3D "/boot/vmlinux*"
-> > > > +FILES_kernel-modules =3D ""
-> > > > +RDEPENDS_kernel =3D "kernel-base"
-> > > > +# Allow machines to override this dependency if kernel image files=
- are
-> > > > +# not wanted in images as standard
-> > > > +RDEPENDS_kernel-base ?=3D "kernel-image"
-> > > > +PKG_kernel-image =3D "kernel-image-
-> > > ${@legitimize_package_name('${KERNEL_VERSION}')}"
-> > > > +PKG_kernel-base =3D "kernel-
-> > > ${@legitimize_package_name('${KERNEL_VERSION}')}"
-> > > > +RPROVIDES_kernel-base +=3D "kernel-${KERNEL_VERSION}"
-> > > > +ALLOW_EMPTY_kernel =3D "1"
-> > > > +ALLOW_EMPTY_kernel-base =3D "1"
-> > > > +ALLOW_EMPTY_kernel-image =3D "1"
-> > > > +ALLOW_EMPTY_kernel-modules =3D "1"
-> > > > +DESCRIPTION_kernel-modules =3D "Kernel modules meta package"
-> > > > +
-> > > > +pkg_postinst_kernel-image () {
-> > > > +	update-alternatives --install
-> > > /${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}
-> > > ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} ${KERNEL_PRIORITY} || true
-> > > > +	if [ ! -e "$D/lib/modules/${KERNEL_VERSION}" ]; then
-> > > > +		mkdir -p $D/lib/modules/${KERNEL_VERSION}
-> > > > +	fi
-> > > > +	if [ -n "$D" ]; then
-> > > > +		depmodwrapper -a -b $D ${KERNEL_VERSION}
-> > > > +	else
-> > > > +		depmod -a ${KERNEL_VERSION}
-> > > > +	fi
-> > > > +}
-> > > > +
-> > > > +pkg_postrm_kernel-image () {
-> > > > +	update-alternatives --remove ${KERNEL_IMAGETYPE}
-> > > ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} || true
-> > > > +}
-> > > > +
-> > > > +PACKAGESPLITFUNCS_prepend =3D "split_kernel_packages "
-> > > > +
-> > > > +python split_kernel_packages () {
-> > > > +    do_split_packages(d, root=3D'/lib/firmware', file_regex=3D'^(.=
-*)\.bin$',
-> > > output_pattern=3D'kernel-firmware-%s', description=3D'Firmware for %s=
-',
-> > > recursive=3DTrue, extra_depends=3D'')
-> > > > +    do_split_packages(d, root=3D'/lib/firmware', file_regex=3D'^(.=
-*)\.fw$',
-> > > output_pattern=3D'kernel-firmware-%s', description=3D'Firmware for %s=
-',
-> > > recursive=3DTrue, extra_depends=3D'')
-> > > > +    do_split_packages(d, root=3D'/lib/firmware', file_regex=3D'^(.=
-*)\.cis$',
-> > > output_pattern=3D'kernel-firmware-%s', description=3D'Firmware for %s=
-',
-> > > recursive=3DTrue, extra_depends=3D'')
-> > > > +}
-> > > > +
-> > > > +do_strip() {
-> > > > +	if [ -n "${KERNEL_IMAGE_STRIP_EXTRA_SECTIONS}" ]; then
-> > > > +		if [[ "${KERNEL_IMAGETYPE}" !=3D "vmlinux" ]]; then
-> > > > +			bbwarn "image type will not be stripped (not
-> > > supported): ${KERNEL_IMAGETYPE}"
-> > > > +			return
-> > > > +		fi
-> > > > +
-> > > > +		cd ${B}
-> > > > +		headers=3D`"$CROSS_COMPILE"readelf -S ${KERNEL_OUTPUT} |
-> > > \
-> > > > +			  grep "^ \{1,\}\[[0-9 ]\{1,\}\] [^ ]" | \
-> > > > +			  sed "s/^ \{1,\}\[[0-9 ]\{1,\}\] //" | \
-> > > > +			  gawk '{print $1}'`
-> > > > +
-> > > > +		for str in ${KERNEL_IMAGE_STRIP_EXTRA_SECTIONS}; do {
-> > > > +			if [[ "$headers" !=3D *"$str"* ]]; then
-> > > > +				bbwarn "Section not found: $str";
-> > > > +			fi
-> > > > +
-> > > > +			"$CROSS_COMPILE"strip -s -R $str ${KERNEL_OUTPUT}
-> > > > +		}; done
-> > > > +
-> > > > +		bbnote "KERNEL_IMAGE_STRIP_EXTRA_SECTIONS is set,
-> > > stripping sections:" \
-> > > > +			"${KERNEL_IMAGE_STRIP_EXTRA_SECTIONS}"
-> > > > +	fi;
-> > > > +}
-> > > > +do_strip[dirs] =3D "${B}"
-> > > > +
-> > > > +addtask do_strip before do_sizecheck after do_kernel_link_vmlinux
-> > > > +
-> > > > +# Support checking the kernel size since some kernels need to resi=
-de in
-> > > partitions
-> > > > +# with a fixed length or there is a limit in transferring the kern=
-el to
-> memory
-> > > > +do_sizecheck() {
-> > > > +	if [ ! -z "${KERNEL_IMAGE_MAXSIZE}" ]; then
-> > > > +		cd ${B}
-> > > > +		size=3D`ls -lL ${KERNEL_OUTPUT} | awk '{ print $5}'`
-> > > > +		if [ $size -ge ${KERNEL_IMAGE_MAXSIZE} ]; then
-> > > > +			die "This kernel (size=3D$size >
-> > > ${KERNEL_IMAGE_MAXSIZE}) is too big for your device. Please reduce th=
-e
-> size
-> > > of the kernel by making more of it modular."
-> > > > +		fi
-> > > > +	fi
-> > > > +}
-> > > > +do_sizecheck[dirs] =3D "${B}"
-> > > > +
-> > > > +addtask sizecheck before do_install after do_strip
-> > > > +
-> > > > +KERNEL_IMAGE_BASE_NAME ?=3D "${KERNEL_IMAGETYPE}-${PKGE}-
-> > > ${PKGV}-${PKGR}-${MACHINE}-${DATETIME}"
-> > > > +# Don't include the DATETIME variable in the sstate package signat=
-ures
-> > > > +KERNEL_IMAGE_BASE_NAME[vardepsexclude] =3D "DATETIME"
-> > > > +KERNEL_IMAGE_SYMLINK_NAME ?=3D "${KERNEL_IMAGETYPE}-
-> ${MACHINE}"
-> > > > +MODULE_IMAGE_BASE_NAME ?=3D "modules-${PKGE}-${PKGV}-${PKGR}-
-> > > ${MACHINE}-${DATETIME}"
-> > > > +MODULE_IMAGE_BASE_NAME[vardepsexclude] =3D "DATETIME"
-> > > > +MODULE_TARBALL_BASE_NAME ?=3D
-> "${MODULE_IMAGE_BASE_NAME}.tgz"
-> > > > +# Don't include the DATETIME variable in the sstate package signat=
-ures
-> > > > +MODULE_TARBALL_SYMLINK_NAME ?=3D "modules-${MACHINE}.tgz"
-> > > > +MODULE_TARBALL_DEPLOY ?=3D "1"
-> > > > +
-> > > > +do_uboot_mkimage() {
-> > > > +	if test "x${KERNEL_IMAGETYPE}" =3D "xuImage" ; then
-> > > > +		if test "x${KEEPUIMAGE}" !=3D "xyes" ; then
-> > > > +			ENTRYPOINT=3D${UBOOT_ENTRYPOINT}
-> > > > +			if test -n "${UBOOT_ENTRYSYMBOL}"; then
-> > > > +				ENTRYPOINT=3D`${HOST_PREFIX}nm
-> > > ${S}/vmlinux | \
-> > > > +					awk
-> > > '$3=3D=3D"${UBOOT_ENTRYSYMBOL}" {print $1}'`
-> > > > +			fi
-> > > > +			if test -e arch/${ARCH}/boot/compressed/vmlinux ;
-> > > then
-> > > > +				${OBJCOPY} -O binary -R .note -R .comment -S
-> > > arch/${ARCH}/boot/compressed/vmlinux linux.bin
-> > > > +				uboot-mkimage -A ${UBOOT_ARCH} -O linux -
-> > > T kernel -C none -a ${UBOOT_LOADADDRESS} -e $ENTRYPOINT -n
-> > > "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin
-> > > arch/${ARCH}/boot/uImage
-> > > > +				rm -f linux.bin
-> > > > +			else
-> > > > +				${OBJCOPY} -O binary -R .note -R .comment -S
-> > > vmlinux linux.bin
-> > > > +				rm -f linux.bin.gz
-> > > > +				gzip -9 linux.bin
-> > > > +				uboot-mkimage -A ${UBOOT_ARCH} -O linux -
-> > > T kernel -C gzip -a ${UBOOT_LOADADDRESS} -e $ENTRYPOINT -n
-> > > "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz
-> > > arch/${ARCH}/boot/uImage
-> > > > +				rm -f linux.bin.gz
-> > > > +			fi
-> > > > +		fi
-> > > > +	fi
-> > > > +}
-> > > > +
-> > > > +addtask uboot_mkimage before do_install after do_compile
-> > > > +
-> > > > +kernel_do_deploy() {
-> > > > +	install -m 0644 ${KERNEL_OUTPUT}
-> > > ${DEPLOYDIR}/${KERNEL_IMAGE_BASE_NAME}.bin
-> > > > +	if [ ${MODULE_TARBALL_DEPLOY} =3D "1" ] && (grep -q -i -e
-> > > '^CONFIG_MODULES=3Dy$' .config); then
-> > > > +		mkdir -p ${D}/lib
-> > > > +		tar -cvzf ${DEPLOYDIR}/${MODULE_TARBALL_BASE_NAME} -C
-> > > ${D} lib
-> > > > +		ln -sf ${MODULE_TARBALL_BASE_NAME}
-> > > ${DEPLOYDIR}/${MODULE_TARBALL_SYMLINK_NAME}
-> > > > +	fi
-> > > > +
-> > > > +	ln -sf ${KERNEL_IMAGE_BASE_NAME}.bin
-> > > ${DEPLOYDIR}/${KERNEL_IMAGE_SYMLINK_NAME}.bin
-> > > > +	ln -sf ${KERNEL_IMAGE_BASE_NAME}.bin
-> > > ${DEPLOYDIR}/${KERNEL_IMAGETYPE}
-> > > > +
-> > > > +	cp ${COREBASE}/meta/files/deploydir_readme.txt
-> > > ${DEPLOYDIR}/README_-
-> _DO_NOT_DELETE_FILES_IN_THIS_DIRECTORY.txt
-> > > > +}
-> > > > +do_deploy[dirs] =3D "${DEPLOYDIR} ${B}"
-> > > > +do_deploy[prefuncs] +=3D "package_get_auto_pr"
-> > > > +
-> > > > +addtask deploy before do_build after do_install
-> > > > +
-> > > > +EXPORT_FUNCTIONS do_deploy
-> > > > +
-> > > > --
-> > > > 1.7.0.4
-> > > >
-> > > > _______________________________________________
-> > > > meta-ti mailing list
-> > > > meta-ti@yoctoproject.org
-> > > > https://lists.yoctoproject.org/listinfo/meta-ti
-
+--089e013d061628ee5304e46b4aa4--
