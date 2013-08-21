@@ -1,31 +1,31 @@
-Return-Path: <fcooper@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D193BE013DF
-	for <meta-ti@yoctoproject.org>; Wed, 21 Aug 2013 05:52:28 -0700 (PDT)
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3D4FCE01562
+	for <meta-ti@yoctoproject.org>; Wed, 21 Aug 2013 06:53:48 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r7LCqSRW004667
-	for <meta-ti@yoctoproject.org>; Wed, 21 Aug 2013 07:52:28 -0500
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r7LDrm72024972
+	for <meta-ti@yoctoproject.org>; Wed, 21 Aug 2013 08:53:48 -0500
 Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7LCqSsm022853
-	for <meta-ti@yoctoproject.org>; Wed, 21 Aug 2013 07:52:28 -0500
-Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.02.0342.003; Wed, 21 Aug 2013 07:52:28 -0500
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7LDrmfU006441
+	for <meta-ti@yoctoproject.org>; Wed, 21 Aug 2013 08:53:48 -0500
+Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 21 Aug 2013 08:53:47 -0500
+Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
+	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r7LDrlv0030517;
+	Wed, 21 Aug 2013 08:53:47 -0500
+Date: Wed, 21 Aug 2013 09:53:47 -0400
+From: Denys Dmytriyenko <denys@ti.com>
 To: "Hingolikar, Mrinmayee" <mrinmayee@ti.com>
-Thread-Topic: [meta-ti] [PATCHv2] abefw: Firmware for OMAP5 ABE
-Thread-Index: AQHOnm1KyZtz69Xsp0WMTJ1UpbuSOA==
-Date: Wed, 21 Aug 2013 12:52:27 +0000
-Message-ID: <11D7D156-B5DC-45EC-9D98-C65E76900235@ti.com>
-References: <1372849303-21311-1-git-send-email-mrinmayee@ti.com>,
-	<CF956B779D819D41BBC043B7082161D5444C34@DBDE04.ent.ti.com>
-In-Reply-To: <CF956B779D819D41BBC043B7082161D5444C34@DBDE04.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+Message-ID: <20130821135346.GA24491@edge>
+References: <CF956B779D819D41BBC043B7082161D544493F@DBDE04.ent.ti.com>
+	<20130820164111.GC8481@edge>
+	<CF956B779D819D41BBC043B7082161D5444B02@DBDE04.ent.ti.com>
 MIME-Version: 1.0
+In-Reply-To: <CF956B779D819D41BBC043B7082161D5444B02@DBDE04.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCHv2] abefw: Firmware for OMAP5 ABE
+Subject: Re: Timeout issue
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,79 +38,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Aug 2013 12:52:30 -0000
-Content-Language: en-US
+X-List-Received-Date: Wed, 21 Aug 2013 13:53:49 -0000
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Only one real comment below but overall looks good
+On Wed, Aug 21, 2013 at 01:21:57AM -0400, Hingolikar, Mrinmayee wrote:
+> 
+> 
+> > -----Original Message-----
+> > From: Dmytriyenko, Denys
+> > Sent: Tuesday, August 20, 2013 10:11 PM
+> > To: Hingolikar, Mrinmayee
+> > Cc: meta-ti@yoctoproject.org
+> > Subject: Re: [meta-ti] Timeout issue
+> > 
+> > On Tue, Aug 20, 2013 at 09:33:15AM +0000, Hingolikar, Mrinmayee wrote:
+> > > Hi all,
+> > >
+> > > During yocto build many times the fetch times out resulting in a
+> > > fetcher failure. The same command for fetch when run with a larger
+> > > timeout for wget succeeds.
+> > > Where can we modify the arguments to wget so that the build doesn't
+> > > halt due to a fetcher failure?
+> > 
+> > Mrinmayee,
+> > 
+> > Please also raise this issue with the IT department from your side -
+> > we've seen the proxies timing out lately for other teams and the more
+> > people complain, the faster it should get resolved... Thanks.
+> > 
+> Yes we have raised this issue with the IT department for the omapzoom server 
+> as of now. Thanks.
 
-On Aug 21, 2013, at 6:48 AM, "Hingolikar, Mrinmayee" <mrinmayee@ti.com> wro=
-te:
+This is not a problem with any specific server, it's a problem with the Proxy!
 
-> Ping for comments!
->=20
->> -----Original Message-----
->> From: Hingolikar, Mrinmayee
->> Sent: Wednesday, July 03, 2013 4:32 PM
->> To: meta-ti@yoctoproject.org
->> Cc: Hingolikar, Mrinmayee; Heroor, Siddharth
->> Subject: [PATCHv2] abefw: Firmware for OMAP5 ABE
->>=20
->> * The OMAP5 Audio Backend requires a 'firmware' to enable
->>  sound. This recipe installs a prebuilt firmware. This
->>  part is a hack, as in the current form, the firmware
->>  cannot be cross-compiled. There is a plan to fix this
->>  and hopefully, this recipe is short-lived. Once the code
->>  is fixed, we should have new recipes that build the firmware
->>  and clean up this recipe.
->>=20
->> v2:
->> * Merged contents from abefw.inc and removed abefw.inc based
->>  on review.
->>=20
->> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
->> Signed-off-by: Siddharth Heroor <heroor@ti.com>
->> ---
->> recipes-bsp/abefw/abefw_1.0.14.bb |   20 ++++++++++++++++++++
->> 1 files changed, 20 insertions(+), 0 deletions(-)  create mode 100644
->> recipes-bsp/abefw/abefw_1.0.14.bb
->>=20
->> diff --git a/recipes-bsp/abefw/abefw_1.0.14.bb b/recipes-
->> bsp/abefw/abefw_1.0.14.bb
->> new file mode 100644
->> index 0000000..8db71e4
->> --- /dev/null
->> +++ b/recipes-bsp/abefw/abefw_1.0.14.bb
->> @@ -0,0 +1,20 @@
->> +SUMMARY =3D "Firmware for OMAP5 ABE"
->> +HOMEPAGE =3D "http://git.ti.com"
-Not a big deal but probably should use the git.ti link to the actual reposi=
-tory so people can find it easier"
->> +LICENSE =3D "BSD/GPLv2"
-This should be "BSD | GPLv2"
->> +LIC_FILES_CHKSUM =3D
->> "file://COPYING;md5=3D923db086ed9463ab3215b24d87e05ec5"
->> +
->> +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
->> +COMPATIBLE_MACHINE =3D "omap5-evm"
->> +
->> +SRC_URI =3D "git://git.ti.com/glsdk/abefw-omap4plus.git;protocol=3Dgit"
->> +
->> +S =3D "${WORKDIR}/git"
->> +
->> +SRCREV =3D "ceccc0332264e39bdc51e54f80ea7256a3886c58"
->> +
->> +do_install() {
->> +        mkdir -p ${D}/lib/firmware
->> +        cp ${S}/firmware/omap4_abe_new ${D}/lib/firmware/ }
->> +
->> +FILES_${PN} +=3D "/lib/firmware/omap4_abe_new"
->> --
->> 1.7.0.4
->=20
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+-- 
+Denys
 
