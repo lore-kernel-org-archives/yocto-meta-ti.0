@@ -1,31 +1,37 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7CA6E00406
-	for <meta-ti@yoctoproject.org>; Wed, 21 Aug 2013 08:49:55 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r7LFnt6d006936
-	for <meta-ti@yoctoproject.org>; Wed, 21 Aug 2013 10:49:55 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7LFnt6O004781
-	for <meta-ti@yoctoproject.org>; Wed, 21 Aug 2013 10:49:55 -0500
-Received: from dlelxv22.itg.ti.com (172.17.1.197) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 21 Aug 2013 10:49:54 -0500
-Received: from localhost (gtudedge.gt.design.ti.com [158.218.102.158])	by
-	dlelxv22.itg.ti.com (8.13.8/8.13.8) with ESMTP id r7LFns4M004696;
-	Wed, 21 Aug 2013 10:49:55 -0500
-Date: Wed, 21 Aug 2013 11:49:54 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Maupin, Chase" <chase.maupin@ti.com>
-Message-ID: <20130821154954.GE24491@edge>
-References: <1372849303-21311-1-git-send-email-mrinmayee@ti.com>
-	<CF956B779D819D41BBC043B7082161D5444C34@DBDE04.ent.ti.com>
-	<7D46E86EC0A8354091174257B2FED101596D51CE@DLEE11.ent.ti.com>
+Return-Path: <b.hutchman@gmail.com>
+Received: from mail-ob0-f174.google.com (mail-ob0-f174.google.com
+	[209.85.214.174])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D9380E00747
+	for <meta-ti@yoctoproject.org>; Wed, 21 Aug 2013 09:51:54 -0700 (PDT)
+Received: by mail-ob0-f174.google.com with SMTP id wd6so1269815obb.5
+	for <meta-ti@yoctoproject.org>; Wed, 21 Aug 2013 09:51:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=iOVRqshYXtLmq69uAssEff5kExh16a1FEVGfJs0///E=;
+	b=Hp72qqx7pc3KTetLzDgnP4kVsO7Ru1GjDnjW0xwoqVUOzDKd5JqEUFo8EZhFw1sV4R
+	7sfkPkk+DydHs9Fk37PE+p2U85WsUB70+4rxuNSaUgn0lYm9u8fzeg+nkkb7qiN6LWUl
+	ed+b6wP0+UQOt3gyj/wBgZL8ZXVKsjUl98boXS02x4y/I4bD7HB0mmrGPzsRFcGF1jw7
+	mM8AYdfd865vdzbv3jRxzKVEjOPuzJz7768jQB2q1hCVELJda5hsdsLDNKqrMMjTtcUR
+	Ets8XdesGLq9mFX9H1xPeQ9fbhfJJNP31nAbTAw+MrmS8FZS/b+Q2uWgMn/p8HDOfcz/
+	vbgw==
 MIME-Version: 1.0
-In-Reply-To: <7D46E86EC0A8354091174257B2FED101596D51CE@DLEE11.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Received: by 10.182.181.34 with SMTP id dt2mr9095004obc.30.1377103909725;
+	Wed, 21 Aug 2013 09:51:49 -0700 (PDT)
+Received: by 10.60.142.41 with HTTP; Wed, 21 Aug 2013 09:51:49 -0700 (PDT)
+In-Reply-To: <3BD5B47E-982D-4E04-9FF8-276A83B3DFD9@gmail.com>
+References: <CAFZh4h_683cetV7QjyVgBcsJ9Seooy5wiE8R-fU9L+sqJanU4g@mail.gmail.com>
+	<CAFZh4h8gDV9r6PzrANuj4ZWJCnpibh5DtK4OmoYqwO_vAdY-_g@mail.gmail.com>
+	<CAFZh4h8ncW+-UskiqTAOSXFyDvN5Rc+bnj=ykGfXRZYPRbbgrA@mail.gmail.com>
+	<CAMKF1sqb8smKgKM8wCyb5cbcdcbqphBBi0dhsZHo9j_-MMeUqg@mail.gmail.com>
+	<CAFZh4h-OBDoeWFWpMLng8Uw6HEidMoWJtQvwdP9SjPwaci9O0Q@mail.gmail.com>
+	<3BD5B47E-982D-4E04-9FF8-276A83B3DFD9@gmail.com>
+Date: Wed, 21 Aug 2013 12:51:49 -0400
+Message-ID: <CAFZh4h9EuoLZTX5n+WZ8+1XtakUP+qSxPUVXJzz3bfS0CCXwWA@mail.gmail.com>
+From: Brian Hutchinson <b.hutchman@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCHv2] abefw: Firmware for OMAP5 ABE
+Subject: Re: Stumped. Can't get 2.6.37 TI kernel to boot when built with toolchain from denzil or Linaro gcc-linaro-arm-linux-gnueabihf-4.8-2013.07-1_linux/
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,116 +44,90 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Aug 2013 15:49:57 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 21 Aug 2013 16:51:55 -0000
+Content-Type: multipart/alternative; boundary=089e0122aa245bb09e04e477fd12
 
-On Wed, Aug 21, 2013 at 03:31:42PM +0000, Maupin, Chase wrote:
-> >-----Original Message-----
-> >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> >bounces@yoctoproject.org] On Behalf Of Hingolikar, Mrinmayee
-> >Sent: Wednesday, August 21, 2013 6:48 AM
-> >To: Hingolikar, Mrinmayee; meta-ti@yoctoproject.org
-> >Subject: Re: [meta-ti] [PATCHv2] abefw: Firmware for OMAP5 ABE
-> >
-> >Ping for comments!
-> 
-> For some reason I don't see this in my e-mails for the original post.  Sorry 
-> for the delay.
+--089e0122aa245bb09e04e477fd12
+Content-Type: text/plain; charset=ISO-8859-1
 
-You are correct - there were no v2 submissions to the list on July 3rd. We 
-only reviewed the original patch before.
+On Wed, Aug 21, 2013 at 12:11 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
+>
+> Second question.  When I try to bitbake core-image-minimal after adding in
+> my kernel (a tar.bz2), it builds but the do_package phase gets errors:
+>
+>
+> arm-oe-linux-gnueabi-objcopy:/home/hutch/oe_core_beagleboard/oe-core/build/tmp-eglibc/work/c6a816x_evm-oe-linux-gnueabi/linux-ti81xx-psp/2.6.37-r0/package/usr/src/kernel/image/usr/src/kernel/scripts/mod/mk_elfconfig:
+> File format not recognized
+>
+>
+> what is that file ? can you run it through file cmd and find out what arch
+> its targeted for ? if its a host tool then remove it from install location
+>
+>
+I don't know.  I think I'm suffering from this:
+https://lists.yoctoproject.org/pipermail/yocto/2012-July/010145.html
 
-> >> -----Original Message-----
-> >> From: Hingolikar, Mrinmayee
-> >> Sent: Wednesday, July 03, 2013 4:32 PM
-> >> To: meta-ti@yoctoproject.org
-> >> Cc: Hingolikar, Mrinmayee; Heroor, Siddharth
-> >> Subject: [PATCHv2] abefw: Firmware for OMAP5 ABE
-> >>
-> >> * The OMAP5 Audio Backend requires a 'firmware' to enable
-> >>   sound. This recipe installs a prebuilt firmware. This
-> >>   part is a hack, as in the current form, the firmware
-> >>   cannot be cross-compiled. There is a plan to fix this
-> >>   and hopefully, this recipe is short-lived. Once the code
-> >>   is fixed, we should have new recipes that build the firmware
-> >>   and clean up this recipe.
-> >>
-> >> v2:
-> >> * Merged contents from abefw.inc and removed abefw.inc based
-> >>   on review.
-> >>
-> >> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
-> >> Signed-off-by: Siddharth Heroor <heroor@ti.com>
-> >> ---
-> >>  recipes-bsp/abefw/abefw_1.0.14.bb |   20 ++++++++++++++++++++
-> >>  1 files changed, 20 insertions(+), 0 deletions(-)  create mode
-> >100644
-> >> recipes-bsp/abefw/abefw_1.0.14.bb
-> >>
-> >> diff --git a/recipes-bsp/abefw/abefw_1.0.14.bb b/recipes-
-> >> bsp/abefw/abefw_1.0.14.bb
-> >> new file mode 100644
-> >> index 0000000..8db71e4
-> >> --- /dev/null
-> >> +++ b/recipes-bsp/abefw/abefw_1.0.14.bb
-> >> @@ -0,0 +1,20 @@
-> >> +SUMMARY = "Firmware for OMAP5 ABE"
-> >> +HOMEPAGE = "http://git.ti.com"
-> >> +LICENSE = "BSD/GPLv2"
-> 
-> This seems wrong.  I thought the convention is "BSD | GPLv2" for either 
-> license or "BSD & GPLv2" if mixed license.
-> 
-> If it is mixed then you probably need 2 entries in LIC_FILES_CHKSUM, one for 
-> each license.
-> 
-> Also, does the GPLv2 use the "or later" clause such that it should be GPLv2+ 
-> ?
+... but the commit id doesn't get me anywhere when I try to see what the
+fix is.  Looks like when I tared up my kernel the make clean, make
+distclean didn't smoke all the bin files in scripts or something and my
+bitbake build machine is 64 bit while the machine I originally built the
+kernel on is 64 bit but but running 32 bit Ubuntu.  I added the
+INHIBIT_PACKAGE_STRIP
+= "1" to my .conf and that got me a bit further but then QA gave me a list
+of all the things it didn't like so now I'm finding where all of those show
+up and deleting them so hopefully that will fix it.
 
-This was already mentioned in one of the other patches.
+Regards,
 
+Brian
 
-> >> +LIC_FILES_CHKSUM =
-> >> "file://COPYING;md5=923db086ed9463ab3215b24d87e05ec5"
-> >> +
-> >> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> >> +COMPATIBLE_MACHINE = "omap5-evm"
-> >> +
-> >> +SRC_URI = "git://git.ti.com/glsdk/abefw-
-> >omap4plus.git;protocol=git"
+--089e0122aa245bb09e04e477fd12
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-The git repo itself says omap4plus - why is it limited to OMAP5 only? Can it 
-be enabled for OMAP4/Pandaboard too?
+<div dir=3D"ltr">On Wed, Aug 21, 2013 at 12:11 AM, Khem Raj <span dir=3D"lt=
+r">&lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gma=
+il.com</a>&gt;</span> wrote:<br><div class=3D"gmail_extra"><div class=3D"gm=
+ail_quote">
 
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
+adding-left:1ex"><div style=3D"word-wrap:break-word"><div><div><blockquote =
+type=3D"cite">
+<div class=3D"gmail_quote"><div><br></div>
+<div>Second question. =A0When I try to bitbake core-image-minimal after add=
+ing in my kernel (a tar.bz2), it builds but the do_package phase gets error=
+s:</div><div></div></div></blockquote><br></div><div><blockquote type=3D"ci=
+te">
 
-> Not strictly required but PR = r0 here would help remind you to bump the PR 
-> in the future.
-> 
-> >> +
-> >> +S = "${WORKDIR}/git"
-> >> +
-> >> +SRCREV = "ceccc0332264e39bdc51e54f80ea7256a3886c58"
-> >> +
-> >> +do_install() {
-> >> +        mkdir -p ${D}/lib/firmware
-> >> +        cp ${S}/firmware/omap4_abe_new ${D}/lib/firmware/ }
-> >> +
-> >> +FILES_${PN} += "/lib/firmware/omap4_abe_new"
-> 
-> I'm sure this has been discussed before, but do you see any confusion about 
-> this being omap5-evm only and yet the FW is omap4_abe_new?
-> 
-> >> --
-> >> 1.7.0.4
-> >
-> >_______________________________________________
-> >meta-ti mailing list
-> >meta-ti@yoctoproject.org
-> >https://lists.yoctoproject.org/listinfo/meta-ti
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+<div class=3D"gmail_quote"><div>arm-oe-linux-gnueabi-objcopy:/home/hutch/oe=
+_core_beagleboard/oe-core/build/tmp-eglibc/work/c6a816x_evm-oe-linux-gnueab=
+i/linux-ti81xx-psp/2.6.37-r0/package/usr/src/kernel/image/usr/src/kernel/sc=
+ripts/mod/mk_elfconfig: File format not recognized</div>
 
+</div></blockquote><br></div></div><div>what is that file ? can you run it =
+through file cmd and find out what arch its targeted for ? if its a host to=
+ol then remove it from install location</div><br></div></blockquote></div>
+
+<br></div><div class=3D"gmail_extra">I don&#39;t know. =A0I think I&#39;m s=
+uffering from this:</div><div class=3D"gmail_extra"><a href=3D"https://list=
+s.yoctoproject.org/pipermail/yocto/2012-July/010145.html">https://lists.yoc=
+toproject.org/pipermail/yocto/2012-July/010145.html</a><br>
+</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">... b=
+ut the commit id doesn&#39;t get me anywhere when I try to see what the fix=
+ is. =A0Looks like when I tared up my kernel the make clean, make distclean=
+ didn&#39;t smoke all the bin files in scripts or something and my bitbake =
+build machine is 64 bit while the machine I originally built the kernel on =
+is 64 bit but but running 32 bit Ubuntu. =A0I added the=A0<span style=3D"co=
+lor:rgb(51,51,51);font-family:Consolas,&#39;Liberation Mono&#39;,Courier,mo=
+nospace;font-size:12px;line-height:18px;white-space:pre">INHIBIT_PACKAGE_ST=
+RIP =3D &quot;1&quot;</span>=A0to my .conf and that got me a bit further bu=
+t then QA gave me a list of all the things it didn&#39;t like so now I&#39;=
+m finding where all of those show up and deleting them so hopefully that wi=
+ll fix it.</div>
+<div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">Regards,</d=
+iv><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">Brian</d=
+iv></div>
+
+--089e0122aa245bb09e04e477fd12--
