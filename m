@@ -1,32 +1,36 @@
-Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 034D2E013D1
-	for <meta-ti@yoctoproject.org>; Wed, 21 Aug 2013 19:46:18 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r7M2kHWk009702;
-	Wed, 21 Aug 2013 21:46:17 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7M2kH77023490;
-	Wed, 21 Aug 2013 21:46:17 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 21 Aug 2013 21:46:17 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r7M2kHIv010524;
-	Wed, 21 Aug 2013 21:46:17 -0500
-Date: Wed, 21 Aug 2013 22:46:16 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20130822024616.GA25063@edge>
+Return-Path: <b.hutchman@gmail.com>
+Received: from mail-ob0-f180.google.com (mail-ob0-f180.google.com
+	[209.85.214.180])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04E50E013D1
+	for <meta-ti@yoctoproject.org>; Thu, 22 Aug 2013 08:23:55 -0700 (PDT)
+Received: by mail-ob0-f180.google.com with SMTP id v19so2119876obq.25
+	for <meta-ti@yoctoproject.org>; Thu, 22 Aug 2013 08:23:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=VO3+IkmQRYjLujYhAQhYrhc9wsjoC3n3y2E3yQdDNXM=;
+	b=zbSp1zBSGwQhWa6aMy3/INmFEepv8v9MBvHy6ROsUJOfQ1UWygCrICOUOld98p3nIW
+	tNU9Rt7dLsf6+TmlJm2NXUKxKiYdBpR1P+zQX0w8w2IVRQjzbFZ0NkBVfbSBFdzrvtMx
+	zjqyuLdyVNFq+THyn5C+wI7KoLUZJQ7qNMfcHtXBki3LecrrT2+ptMa9+1V4X1O+uXIt
+	cLpbUGMvgRaqi+C+OA7YwGV2Xrk4wbf2vlqu0hniOc3e6GMxwC21Ddnpzx4v8gn6aQWa
+	jQeD6Iyr2WJdcZgoXBQRnG5DilUHTlMZsACHWpXGAhf5/W2O4fFUEiNGWSUZ7UeJ2ues
+	jt0g==
+MIME-Version: 1.0
+X-Received: by 10.182.34.194 with SMTP id b2mr14617650obj.41.1377185035243;
+	Thu, 22 Aug 2013 08:23:55 -0700 (PDT)
+Received: by 10.60.142.41 with HTTP; Thu, 22 Aug 2013 08:23:55 -0700 (PDT)
+In-Reply-To: <20130822024616.GA25063@edge>
 References: <CAFZh4h_683cetV7QjyVgBcsJ9Seooy5wiE8R-fU9L+sqJanU4g@mail.gmail.com>
 	<CAFZh4h8gDV9r6PzrANuj4ZWJCnpibh5DtK4OmoYqwO_vAdY-_g@mail.gmail.com>
 	<CAFZh4h8ncW+-UskiqTAOSXFyDvN5Rc+bnj=ykGfXRZYPRbbgrA@mail.gmail.com>
 	<CAMKF1sqb8smKgKM8wCyb5cbcdcbqphBBi0dhsZHo9j_-MMeUqg@mail.gmail.com>
 	<CAFZh4h-OBDoeWFWpMLng8Uw6HEidMoWJtQvwdP9SjPwaci9O0Q@mail.gmail.com>
 	<3BD5B47E-982D-4E04-9FF8-276A83B3DFD9@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <3BD5B47E-982D-4E04-9FF8-276A83B3DFD9@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20130822024616.GA25063@edge>
+Date: Thu, 22 Aug 2013 11:23:55 -0400
+Message-ID: <CAFZh4h9Ru3iED9ASmxqs14Pve+foh3gg15OBnVtfNR-B_b1rMQ@mail.gmail.com>
+From: Brian Hutchinson <b.hutchman@gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: Stumped. Can't get 2.6.37 TI kernel to boot when built with toolchain from denzil or Linaro gcc-linaro-arm-linux-gnueabihf-4.8-2013.07-1_linux/
 X-BeenThere: meta-ti@yoctoproject.org
@@ -41,37 +45,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Aug 2013 02:46:20 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 22 Aug 2013 15:23:58 -0000
+Content-Type: multipart/alternative; boundary=001a11c2275ed0dad704e48ae0de
 
-On Tue, Aug 20, 2013 at 09:11:57PM -0700, Khem Raj wrote:
-> 
-> > First question.  I looked at my 
-> > poky/meta/recipes-kernel/linux-libc-headers dir of a denzil checkout that 
-> > last had c6a816x-evm support to use as kind of an example/guide.  I see 
-> > recipes for linux-libc-headers_3.2.bb and linux-libc-headers_3.0.8.bb.  Do 
-> > I need to create a recipe for 2.6.37 and set the SRC_URI for a 2.6.37 
-> > commit so that my rootfs packages will be built against headers that match 
-> > the version of the kernel I'm using?  It looked like 
-> > linux-libc-headers.inc has some kind of check to decide on which headers 
-> > to use (3 or 2.6) but I don't quite follow how it works yet.
-> 
-> yes you need to add a recipe for linux-libc-headers_2.6.37…. and also make 
-> sure that your distro/machine chooses this for preferred provider for 
-> linux-libc-headers
+--001a11c2275ed0dad704e48ae0de
+Content-Type: text/plain; charset=ISO-8859-1
 
-Well, if you use Dylan (or even Danny), it has a recipe already available in 
-oe-core...
+On Wed, Aug 21, 2013 at 10:46 PM, Denys Dmytriyenko <denys@ti.com> wrote:
 
+>
+>
+> Well, if you use Dylan (or even Danny), it has a recipe already available
+> in
+> oe-core...
+>
+>
+Yes, I found this one that Khem added checksums to and used web git to
+cherry pick it out:
+http://cgit.openembedded.org/openembedded-core/commit/meta/recipes-kernel/linux-libc-headers/linux-libc-headers_2.6.37.2.bb?h=dylan&id=370e082c8bbf14c9b0f54269eb99d291d187cd40
 
-> > Second question.  When I try to bitbake core-image-minimal after adding in 
-> > my kernel (a tar.bz2), it builds but the do_package phase gets errors:
-> 
-> > arm-oe-linux-gnueabi-objcopy:/home/hutch/oe_core_beagleboard/oe-core/build/tmp-eglibc/work/c6a816x_evm-oe-linux-gnueabi/linux-ti81xx-psp/2.6.37-r0/package/usr/src/kernel/image/usr/src/kernel/scripts/mod/mk_elfconfig: 
-> > File format not recognized
-> 
-> what is that file ? can you run it through file cmd and find out what arch 
-> its targeted for ? if its a host tool then remove it from install location
+Regards,
 
+Brian
+
+p.s.  Killing all those binaries the QA caught fixed my do_package problem
+yesterday.
+
+--001a11c2275ed0dad704e48ae0de
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">On Wed, Aug 21, 2013 at 10:46 PM, Denys Dmytriyenko <span =
+dir=3D"ltr">&lt;<a href=3D"mailto:denys@ti.com" target=3D"_blank">denys@ti.=
+com</a>&gt;</span> wrote:<br><div class=3D"gmail_extra"><div class=3D"gmail=
+_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
+;border-left-width:1px;border-left-color:rgb(204,204,204);border-left-style=
+:solid;padding-left:1ex">
+<div class=3D"im"><br>
+<br>
+</div>Well, if you use Dylan (or even Danny), it has a recipe already avail=
+able in<br>
+oe-core...<br>
+<div class=3D""><div class=3D"h5"><br></div></div></blockquote><div><br></d=
+iv><div>Yes, I found this one that Khem added checksums to and used web git=
+ to cherry pick it out:</div><div><a href=3D"http://cgit.openembedded.org/o=
+penembedded-core/commit/meta/recipes-kernel/linux-libc-headers/linux-libc-h=
+eaders_2.6.37.2.bb?h=3Ddylan&amp;id=3D370e082c8bbf14c9b0f54269eb99d291d187c=
+d40">http://cgit.openembedded.org/openembedded-core/commit/meta/recipes-ker=
+nel/linux-libc-headers/linux-libc-headers_2.6.37.2.bb?h=3Ddylan&amp;id=3D37=
+0e082c8bbf14c9b0f54269eb99d291d187cd40</a><br>
+</div><div><br></div><div>Regards,</div><div><br></div><div>Brian</div><div=
+><br></div><div>p.s. =A0Killing all those binaries the QA caught fixed my d=
+o_package problem yesterday.</div><div>=A0</div></div></div></div>
+
+--001a11c2275ed0dad704e48ae0de--
