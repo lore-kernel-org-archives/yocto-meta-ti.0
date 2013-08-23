@@ -1,22 +1,24 @@
 Return-Path: <denis@denix.org>
-Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
-	[206.46.173.5])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57DE7E003D2
-	for <meta-ti@yoctoproject.org>; Fri, 23 Aug 2013 12:59:20 -0700 (PDT)
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA2A4E003FA
+	for <meta-ti@yoctoproject.org>; Fri, 23 Aug 2013 12:59:21 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173005.mailsrvcs.net
+	by vms173021.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MS000F0525ZQI40@vms173005.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 23 Aug 2013 14:59:03 -0500 (CDT)
+	2009)) with ESMTPA id <0MS00047E261JJT1@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 23 Aug 2013 14:59:05 -0500 (CDT)
 Received: from elrond.denix (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 5E41620011; Fri,
-	23 Aug 2013 15:58:47 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id AAFBF20120; Fri,
+	23 Aug 2013 15:58:49 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Fri, 23 Aug 2013 15:58:23 -0400
-Message-id: <1377287906-17115-1-git-send-email-denis@denix.org>
+Date: Fri, 23 Aug 2013 15:58:25 -0400
+Message-id: <1377287906-17115-3-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH 1/4] linux-ti-staging: add the latest integration tree in prep for 3.12 release
+In-reply-to: <1377287906-17115-1-git-send-email-denis@denix.org>
+References: <1377287906-17115-1-git-send-email-denis@denix.org>
+Subject: [PATCH 3/4] ti43x: add new SOC family for Sitara AM43xx Cortex-A9 processors
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,64 +31,59 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2013 19:59:24 -0000
+X-List-Received-Date: Fri, 23 Aug 2013 19:59:25 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging_git.bb | 42 ++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
- create mode 100644 recipes-kernel/linux/linux-ti-staging_git.bb
+ conf/machine/include/ti43x.inc | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+ create mode 100644 conf/machine/include/ti43x.inc
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
 new file mode 100644
-index 0000000..cb59dbb
+index 0000000..c9ce2bb
 --- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -0,0 +1,42 @@
-+SECTION = "kernel"
-+DESCRIPTION = "Linux kernel for TI devices"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
++++ b/conf/machine/include/ti43x.inc
+@@ -0,0 +1,37 @@
++SOC_FAMILY = "ti43x"
++require conf/machine/include/soc-family.inc
++
++require conf/machine/include/tune-cortexa9.inc
++
++PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
++
++# For built-in LCD, add xf86-input-tslib
++XSERVER = "xserver-xorg \
++           xf86-input-evdev \
++           xf86-input-mouse \
++           xf86-video-fbdev \
++           xf86-input-keyboard"
++
++# Default to external video, change to smallscreen for built-in LCD
++GUI_MACHINE_CLASS = "bigscreen"
++
++# Increase this everytime you change something in the kernel
++MACHINE_KERNEL_PR = "r0"
++
++# Default providers, may need to override for specific machines
++PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
++PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
++
 +KERNEL_IMAGETYPE = "uImage"
 +
-+inherit kernel
++UBOOT_ARCH = "arm"
++UBOOT_MACHINE = "am43xx_evm_config"
 +
-+require recipes-kernel/linux/linux-dtb.inc
-+require recipes-kernel/linux/setup-defconfig.inc
++UBOOT_ENTRYPOINT = "0x80008000"
++UBOOT_LOADADDRESS = "0x80008000"
 +
-+# Add a run-time dependency for the PM firmware to be installed
-+# on the target file system.
-+RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
++EXTRA_IMAGEDEPENDS += "u-boot"
 +
-+# Default is to package all dts files for ti33x devices unless building
-+# for the specific beaglebone machine.
-+KERNEL_DEVICETREE_ti33x = "arch/arm/boot/dts/am335x-evm.dts arch/arm/boot/dts/am335x-evmsk.dts arch/arm/boot/dts/am335x-bone.dts"
-+KERNEL_DEVICETREE_am437x-evm = "arch/arm/boot/dts/am43x-epos-evm.dts"
-+KERNEL_DEVICETREE_beaglebone = "arch/arm/boot/dts/am335x-bone.dts"
-+KERNEL_DEVICETREE_omap5-evm = "arch/arm/boot/dts/omap5-sevm.dts arch/arm/boot/dts/omap5-uevm.dts"
-+KERNEL_DEVICETREE_dra7xx-evm = "arch/arm/boot/dts/dra7-evm.dts"
-+
-+KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
-+
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+S = "${WORKDIR}/git"
-+
-+BRANCH = "ti-linux-3.12.y"
-+
-+SRCREV = "b36f4be3de1b123d8601de062e7dbfc904f305fb"
-+PV = "3.10+3.11-rc6"
-+
-+# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+
-+SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-+           file://defconfig \
-+          "
++# List common SoC features, may need to add touchscreen for specific machines
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx"
 -- 
 1.8.3.2
 
