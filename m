@@ -1,15 +1,24 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26204E00343
-	for <meta-ti@yoctoproject.org>; Fri, 23 Aug 2013 12:45:16 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id EA43152A19; Fri, 23 Aug 2013 19:45:15 +0000 (UTC)
+Return-Path: <denis@denix.org>
+Received: from vms173001pub.verizon.net (vms173001pub.verizon.net
+	[206.46.173.1])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CFE7CE003D2
+	for <meta-ti@yoctoproject.org>; Fri, 23 Aug 2013 12:59:14 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MS0001XY2629T80@vms173001.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 23 Aug 2013 14:58:51 -0500 (CDT)
+Received: from elrond.denix (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 7649620173; Fri,
+	23 Aug 2013 15:58:50 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20130823194515.EA43152A19@arago-project.org>
-Date: Fri, 23 Aug 2013 19:45:15 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : boot-monitor: use commit ID instead of tag, update to latest release
+Date: Fri, 23 Aug 2013 15:58:26 -0400
+Message-id: <1377287906-17115-4-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+In-reply-to: <1377287906-17115-1-git-send-email-denis@denix.org>
+References: <1377287906-17115-1-git-send-email-denis@denix.org>
+Subject: [PATCH 4/4] am437x-evm: add machine config for Sitara AM437x EVM
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,45 +31,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2013 19:45:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 23 Aug 2013 19:59:14 -0000
 
-Module: meta-ti
-Branch: dylan
-Commit: 89a028b124cc0bfd30e92001741f05bf11177abc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=89a028b124cc0bfd30e92001741f05bf11177abc
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Aug 23 11:03:12 2013 -0400
-
-boot-monitor: use commit ID instead of tag, update to latest release
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ conf/machine/am437x-evm.conf | 35 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+ create mode 100644 conf/machine/am437x-evm.conf
 
- recipes-bsp/boot-monitor/boot-monitor_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index c8a022a..895de6c 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -14,13 +14,13 @@ COMPATIBLE_MACHINE = "keystone-evm"
- SRC_URI = "git://arago-project.org/git/projects/boot-monitor.git;protocol=git;branch=${BRANCH}"
- 
- PV = "1.0"
--PR = "r1+gitr${SRCPV}"
-+PR = "r2+gitr${SRCREV}"
- 
- BRANCH = "master"
- 
- S = "${WORKDIR}/git"
- 
--SRCREV = "DEV.MCSDK-03.00.00.07"
-+SRCREV = "94cab20c4a4725a014d6f815704557d28fec9610"
- 
- do_compile () {
- 	unset LDFLAGS
+diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
+new file mode 100644
+index 0000000..901bfe8
+--- /dev/null
++++ b/conf/machine/am437x-evm.conf
+@@ -0,0 +1,35 @@
++#@TYPE: Machine
++#@NAME: AM437x EVM
++#@DESCRIPTION: Machine configuration for the TI AM437x EVM
++
++require conf/machine/include/ti43x.inc
++
++# Use built-in LCD by default
++XSERVER += "xf86-input-tslib"
++GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_FEATURES += "touchscreen"
++
++IMAGE_FSTYPES += "ubi tar.gz"
++
++SERIAL_CONSOLE = "115200 ttyO0"
++
++# UBI information.  Note that this is board and kernel specific.  Changes
++# in your kernel port may require changes in these variables.  For more
++# details about this board please see
++# http://processors.wiki.ti.com/index.php/UBIFS_Support
++
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# From dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: logical eraseblock size:    126976 bytes
++# from ubiattach stdout:
++# UBI device number 0, total 1988 LEBs
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
++
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# from dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: physical eraseblock size:   131072 bytes (128 KiB)
++# UBI: sub-page size:              512
++# UBI: VID header offset:          2048 (aligned 2048)
++UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
+-- 
+1.8.3.2
 
 
