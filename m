@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0359E00343
-	for <meta-ti@yoctoproject.org>; Fri, 23 Aug 2013 12:45:14 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26204E00343
+	for <meta-ti@yoctoproject.org>; Fri, 23 Aug 2013 12:45:16 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2AC7B529E8; Fri, 23 Aug 2013 19:45:14 +0000 (UTC)
+	id EA43152A19; Fri, 23 Aug 2013 19:45:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130823194514.2AC7B529E8@arago-project.org>
-Date: Fri, 23 Aug 2013 19:45:14 +0000 (UTC)
+Message-Id: <20130823194515.EA43152A19@arago-project.org>
+Date: Fri, 23 Aug 2013 19:45:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : boot-monitor: use commit ID instead of tag, update to latest release
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Aug 2013 19:45:15 -0000
+X-List-Received-Date: Fri, 23 Aug 2013 19:45:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: c3f7e586d5994f4517a9e8d8be8f04faed15218d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c3f7e586d5994f4517a9e8d8be8f04faed15218d
+Branch: dylan
+Commit: 89a028b124cc0bfd30e92001741f05bf11177abc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=89a028b124cc0bfd30e92001741f05bf11177abc
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Aug 23 11:03:12 2013 -0400
