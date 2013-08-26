@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 524FAE01549
-	for <meta-ti@yoctoproject.org>; Mon, 26 Aug 2013 07:36:34 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B9E69E01548
+	for <meta-ti@yoctoproject.org>; Mon, 26 Aug 2013 07:36:42 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CEBAD529C9; Mon, 26 Aug 2013 14:36:32 +0000 (UTC)
+	id 5EDF852AB2; Mon, 26 Aug 2013 14:36:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130826143632.CEBAD529C9@arago-project.org>
-Date: Mon, 26 Aug 2013 14:36:32 +0000 (UTC)
+Message-Id: <20130826143633.5EDF852AB2@arago-project.org>
+Date: Mon, 26 Aug 2013 14:36:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti43x: add new SOC family for Sitara AM43xx Cortex-A9 processors
+Subject: Denys Dmytriyenko : u-boot-ti-staging: add the latest integration tree in prep for 2013.10 release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,65 +26,47 @@ X-List-Received-Date: Mon, 26 Aug 2013 14:36:42 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: e75aa7f0224d7bba3e45906dc6c203d7d2b768c3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e75aa7f0224d7bba3e45906dc6c203d7d2b768c3
+Branch: dylan
+Commit: 2abe4771ea37549f3254a0848e8fa3ffa1dd854a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2abe4771ea37549f3254a0848e8fa3ffa1dd854a
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Aug 23 15:47:55 2013 -0400
+Date:   Fri Aug 23 15:47:15 2013 -0400
 
-ti43x: add new SOC family for Sitara AM43xx Cortex-A9 processors
+u-boot-ti-staging: add the latest integration tree in prep for 2013.10 release
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- conf/machine/include/ti43x.inc |   37 +++++++++++++++++++++++++++++++++++++
- 1 files changed, 37 insertions(+), 0 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_git.bb |   19 +++++++++++++++++++
+ 1 files changed, 19 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
 new file mode 100644
-index 0000000..c9ce2bb
+index 0000000..8d96aee
 --- /dev/null
-+++ b/conf/machine/include/ti43x.inc
-@@ -0,0 +1,37 @@
-+SOC_FAMILY = "ti43x"
-+require conf/machine/include/soc-family.inc
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
+@@ -0,0 +1,19 @@
++require u-boot-ti.inc
 +
-+require conf/machine/include/tune-cortexa9.inc
++DESCRIPTION = "u-boot bootloader for TI devices"
 +
-+PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
++LIC_FILES_CHKSUM = "file://Licenses/README;md5=6bc50ecab884fce80cd3ef3da8852b08"
 +
-+# For built-in LCD, add xf86-input-tslib
-+XSERVER = "xserver-xorg \
-+           xf86-input-evdev \
-+           xf86-input-mouse \
-+           xf86-video-fbdev \
-+           xf86-input-keyboard"
++PV = "2013.07+2013.10-rc1"
++PR = "r0+gitr${SRCPV}"
 +
-+# Default to external video, change to smallscreen for built-in LCD
-+GUI_MACHINE_CLASS = "bigscreen"
++DEFAULT_PREFERENCE = "-1"
 +
-+# Increase this everytime you change something in the kernel
-+MACHINE_KERNEL_PR = "r0"
++SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
 +
-+# Default providers, may need to override for specific machines
-+PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
-+PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
++BRANCH ?= "master"
 +
-+KERNEL_IMAGETYPE = "uImage"
++SRCREV = "39bc12ddc36c9e30199471da0f3a929b178a04b2"
 +
-+UBOOT_ARCH = "arm"
-+UBOOT_MACHINE = "am43xx_evm_config"
-+
-+UBOOT_ENTRYPOINT = "0x80008000"
-+UBOOT_LOADADDRESS = "0x80008000"
-+
-+EXTRA_IMAGEDEPENDS += "u-boot"
-+
-+# List common SoC features, may need to add touchscreen for specific machines
-+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx"
++SPL_BINARY = "MLO"
++SPL_UART_BINARY = "u-boot-spl.bin"
 
 
