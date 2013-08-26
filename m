@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5117FE01548
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 524FAE01549
 	for <meta-ti@yoctoproject.org>; Mon, 26 Aug 2013 07:36:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D399B52A19; Mon, 26 Aug 2013 14:36:32 +0000 (UTC)
+	id CEBAD529C9; Mon, 26 Aug 2013 14:36:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130826143632.D399B52A19@arago-project.org>
+Message-Id: <20130826143632.CEBAD529C9@arago-project.org>
 Date: Mon, 26 Aug 2013 14:36:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: add the latest integration tree in prep for 2013.10 release
+Subject: Denys Dmytriyenko : ti43x: add new SOC family for Sitara AM43xx Cortex-A9 processors
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,46 +27,64 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 66df71869c092e341a0e32099ddb6a5a457084e0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=66df71869c092e341a0e32099ddb6a5a457084e0
+Commit: e75aa7f0224d7bba3e45906dc6c203d7d2b768c3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e75aa7f0224d7bba3e45906dc6c203d7d2b768c3
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Aug 23 15:47:15 2013 -0400
+Date:   Fri Aug 23 15:47:55 2013 -0400
 
-u-boot-ti-staging: add the latest integration tree in prep for 2013.10 release
+ti43x: add new SOC family for Sitara AM43xx Cortex-A9 processors
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_git.bb |   19 +++++++++++++++++++
- 1 files changed, 19 insertions(+), 0 deletions(-)
+ conf/machine/include/ti43x.inc |   37 +++++++++++++++++++++++++++++++++++++
+ 1 files changed, 37 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
 new file mode 100644
-index 0000000..8d96aee
+index 0000000..c9ce2bb
 --- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
-@@ -0,0 +1,19 @@
-+require u-boot-ti.inc
++++ b/conf/machine/include/ti43x.inc
+@@ -0,0 +1,37 @@
++SOC_FAMILY = "ti43x"
++require conf/machine/include/soc-family.inc
 +
-+DESCRIPTION = "u-boot bootloader for TI devices"
++require conf/machine/include/tune-cortexa9.inc
 +
-+LIC_FILES_CHKSUM = "file://Licenses/README;md5=6bc50ecab884fce80cd3ef3da8852b08"
++PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
 +
-+PV = "2013.07+2013.10-rc1"
-+PR = "r0+gitr${SRCPV}"
++# For built-in LCD, add xf86-input-tslib
++XSERVER = "xserver-xorg \
++           xf86-input-evdev \
++           xf86-input-mouse \
++           xf86-video-fbdev \
++           xf86-input-keyboard"
 +
-+DEFAULT_PREFERENCE = "-1"
++# Default to external video, change to smallscreen for built-in LCD
++GUI_MACHINE_CLASS = "bigscreen"
 +
-+SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
++# Increase this everytime you change something in the kernel
++MACHINE_KERNEL_PR = "r0"
 +
-+BRANCH ?= "master"
++# Default providers, may need to override for specific machines
++PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
++PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
++PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
 +
-+SRCREV = "39bc12ddc36c9e30199471da0f3a929b178a04b2"
++KERNEL_IMAGETYPE = "uImage"
 +
-+SPL_BINARY = "MLO"
-+SPL_UART_BINARY = "u-boot-spl.bin"
++UBOOT_ARCH = "arm"
++UBOOT_MACHINE = "am43xx_evm_config"
++
++UBOOT_ENTRYPOINT = "0x80008000"
++UBOOT_LOADADDRESS = "0x80008000"
++
++EXTRA_IMAGEDEPENDS += "u-boot"
++
++# List common SoC features, may need to add touchscreen for specific machines
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx"
 
 
