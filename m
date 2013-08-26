@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B9E69E01548
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B9D9DE013DE
 	for <meta-ti@yoctoproject.org>; Mon, 26 Aug 2013 07:36:42 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5EDF852AB2; Mon, 26 Aug 2013 14:36:33 +0000 (UTC)
+	id 8E78052A8E; Mon, 26 Aug 2013 14:36:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130826143633.5EDF852AB2@arago-project.org>
+Message-Id: <20130826143633.8E78052A8E@arago-project.org>
 Date: Mon, 26 Aug 2013 14:36:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: add the latest integration tree in prep for 2013.10 release
+Subject: Denys Dmytriyenko : am437x-evm: add machine config for Sitara AM437x EVM
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,46 +27,62 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dylan
-Commit: 2abe4771ea37549f3254a0848e8fa3ffa1dd854a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2abe4771ea37549f3254a0848e8fa3ffa1dd854a
+Commit: e9e944715a109323c44ccff208e3451717e4ab15
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e9e944715a109323c44ccff208e3451717e4ab15
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Aug 23 15:47:15 2013 -0400
+Date:   Fri Aug 23 15:48:53 2013 -0400
 
-u-boot-ti-staging: add the latest integration tree in prep for 2013.10 release
+am437x-evm: add machine config for Sitara AM437x EVM
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_git.bb |   19 +++++++++++++++++++
- 1 files changed, 19 insertions(+), 0 deletions(-)
+ conf/machine/am437x-evm.conf |   35 +++++++++++++++++++++++++++++++++++
+ 1 files changed, 35 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
+diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
 new file mode 100644
-index 0000000..8d96aee
+index 0000000..901bfe8
 --- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
-@@ -0,0 +1,19 @@
-+require u-boot-ti.inc
++++ b/conf/machine/am437x-evm.conf
+@@ -0,0 +1,35 @@
++#@TYPE: Machine
++#@NAME: AM437x EVM
++#@DESCRIPTION: Machine configuration for the TI AM437x EVM
 +
-+DESCRIPTION = "u-boot bootloader for TI devices"
++require conf/machine/include/ti43x.inc
 +
-+LIC_FILES_CHKSUM = "file://Licenses/README;md5=6bc50ecab884fce80cd3ef3da8852b08"
++# Use built-in LCD by default
++XSERVER += "xf86-input-tslib"
++GUI_MACHINE_CLASS = "smallscreen"
++MACHINE_FEATURES += "touchscreen"
 +
-+PV = "2013.07+2013.10-rc1"
-+PR = "r0+gitr${SRCPV}"
++IMAGE_FSTYPES += "ubi tar.gz"
 +
-+DEFAULT_PREFERENCE = "-1"
++SERIAL_CONSOLE = "115200 ttyO0"
 +
-+SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
++# UBI information.  Note that this is board and kernel specific.  Changes
++# in your kernel port may require changes in these variables.  For more
++# details about this board please see
++# http://processors.wiki.ti.com/index.php/UBIFS_Support
 +
-+BRANCH ?= "master"
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# From dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: logical eraseblock size:    126976 bytes
++# from ubiattach stdout:
++# UBI device number 0, total 1988 LEBs
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
 +
-+SRCREV = "39bc12ddc36c9e30199471da0f3a929b178a04b2"
-+
-+SPL_BINARY = "MLO"
-+SPL_UART_BINARY = "u-boot-spl.bin"
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# from dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: physical eraseblock size:   131072 bytes (128 KiB)
++# UBI: sub-page size:              512
++# UBI: VID header offset:          2048 (aligned 2048)
++UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
 
 
