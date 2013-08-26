@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4D5ECE01307
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4EA38E01358
 	for <meta-ti@yoctoproject.org>; Mon, 26 Aug 2013 07:36:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D8FF3529E4; Mon, 26 Aug 2013 14:36:32 +0000 (UTC)
+	id AA95B52A6C; Mon, 26 Aug 2013 14:36:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130826143632.D8FF3529E4@arago-project.org>
+Message-Id: <20130826143632.AA95B52A6C@arago-project.org>
 Date: Mon, 26 Aug 2013 14:36:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am437x-evm: add machine config for Sitara AM437x EVM
+Subject: Denys Dmytriyenko : linux-ti-staging: add the latest integration tree in prep for 3.12 release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,62 +27,69 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 7144d488e7ce068ce1c4618d593d26e0e29e7798
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7144d488e7ce068ce1c4618d593d26e0e29e7798
+Commit: 2550014973c27721a128692ae75ab24d5cd94a57
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2550014973c27721a128692ae75ab24d5cd94a57
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Aug 23 15:48:53 2013 -0400
+Date:   Fri Aug 23 15:46:07 2013 -0400
 
-am437x-evm: add machine config for Sitara AM437x EVM
+linux-ti-staging: add the latest integration tree in prep for 3.12 release
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- conf/machine/am437x-evm.conf |   35 +++++++++++++++++++++++++++++++++++
- 1 files changed, 35 insertions(+), 0 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_git.bb |   42 ++++++++++++++++++++++++++
+ 1 files changed, 42 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
 new file mode 100644
-index 0000000..901bfe8
+index 0000000..cb59dbb
 --- /dev/null
-+++ b/conf/machine/am437x-evm.conf
-@@ -0,0 +1,35 @@
-+#@TYPE: Machine
-+#@NAME: AM437x EVM
-+#@DESCRIPTION: Machine configuration for the TI AM437x EVM
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -0,0 +1,42 @@
++SECTION = "kernel"
++DESCRIPTION = "Linux kernel for TI devices"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
++KERNEL_IMAGETYPE = "uImage"
 +
-+require conf/machine/include/ti43x.inc
++inherit kernel
 +
-+# Use built-in LCD by default
-+XSERVER += "xf86-input-tslib"
-+GUI_MACHINE_CLASS = "smallscreen"
-+MACHINE_FEATURES += "touchscreen"
++require recipes-kernel/linux/linux-dtb.inc
++require recipes-kernel/linux/setup-defconfig.inc
 +
-+IMAGE_FSTYPES += "ubi tar.gz"
++# Add a run-time dependency for the PM firmware to be installed
++# on the target file system.
++RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
 +
-+SERIAL_CONSOLE = "115200 ttyO0"
++# Default is to package all dts files for ti33x devices unless building
++# for the specific beaglebone machine.
++KERNEL_DEVICETREE_ti33x = "arch/arm/boot/dts/am335x-evm.dts arch/arm/boot/dts/am335x-evmsk.dts arch/arm/boot/dts/am335x-bone.dts"
++KERNEL_DEVICETREE_am437x-evm = "arch/arm/boot/dts/am43x-epos-evm.dts"
++KERNEL_DEVICETREE_beaglebone = "arch/arm/boot/dts/am335x-bone.dts"
++KERNEL_DEVICETREE_omap5-evm = "arch/arm/boot/dts/omap5-sevm.dts arch/arm/boot/dts/omap5-uevm.dts"
++KERNEL_DEVICETREE_dra7xx-evm = "arch/arm/boot/dts/dra7-evm.dts"
 +
-+# UBI information.  Note that this is board and kernel specific.  Changes
-+# in your kernel port may require changes in these variables.  For more
-+# details about this board please see
-+# http://processors.wiki.ti.com/index.php/UBIFS_Support
++KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 +
-+# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
-+# From dmesg:
-+# UBI: smallest flash I/O unit:    2048
-+# UBI: logical eraseblock size:    126976 bytes
-+# from ubiattach stdout:
-+# UBI device number 0, total 1988 LEBs
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
 +
-+# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
-+# from dmesg:
-+# UBI: smallest flash I/O unit:    2048
-+# UBI: physical eraseblock size:   131072 bytes (128 KiB)
-+# UBI: sub-page size:              512
-+# UBI: VID header offset:          2048 (aligned 2048)
-+UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
++DEFAULT_PREFERENCE = "-1"
++
++S = "${WORKDIR}/git"
++
++BRANCH = "ti-linux-3.12.y"
++
++SRCREV = "b36f4be3de1b123d8601de062e7dbfc904f305fb"
++PV = "3.10+3.11-rc6"
++
++# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++
++SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
++           file://defconfig \
++          "
 
 
