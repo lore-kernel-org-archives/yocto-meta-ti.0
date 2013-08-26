@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4FD95E013DE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5117FE01548
 	for <meta-ti@yoctoproject.org>; Mon, 26 Aug 2013 07:36:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 55C7952AB1; Mon, 26 Aug 2013 14:36:33 +0000 (UTC)
+	id D399B52A19; Mon, 26 Aug 2013 14:36:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130826143633.55C7952AB1@arago-project.org>
-Date: Mon, 26 Aug 2013 14:36:33 +0000 (UTC)
+Message-Id: <20130826143632.D399B52A19@arago-project.org>
+Date: Mon, 26 Aug 2013 14:36:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: add the latest integration tree in prep for 3.12 release
+Subject: Denys Dmytriyenko : u-boot-ti-staging: add the latest integration tree in prep for 2013.10 release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,70 +26,47 @@ X-List-Received-Date: Mon, 26 Aug 2013 14:36:42 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: c652f49c33f71139e38905842b816aa98c2ea2ee
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c652f49c33f71139e38905842b816aa98c2ea2ee
+Branch: master
+Commit: 66df71869c092e341a0e32099ddb6a5a457084e0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=66df71869c092e341a0e32099ddb6a5a457084e0
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Aug 23 15:46:07 2013 -0400
+Date:   Fri Aug 23 15:47:15 2013 -0400
 
-linux-ti-staging: add the latest integration tree in prep for 3.12 release
+u-boot-ti-staging: add the latest integration tree in prep for 2013.10 release
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_git.bb |   42 ++++++++++++++++++++++++++
- 1 files changed, 42 insertions(+), 0 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_git.bb |   19 +++++++++++++++++++
+ 1 files changed, 19 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
 new file mode 100644
-index 0000000..cb59dbb
+index 0000000..8d96aee
 --- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -0,0 +1,42 @@
-+SECTION = "kernel"
-+DESCRIPTION = "Linux kernel for TI devices"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-+KERNEL_IMAGETYPE = "uImage"
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
+@@ -0,0 +1,19 @@
++require u-boot-ti.inc
 +
-+inherit kernel
++DESCRIPTION = "u-boot bootloader for TI devices"
 +
-+require recipes-kernel/linux/linux-dtb.inc
-+require recipes-kernel/linux/setup-defconfig.inc
++LIC_FILES_CHKSUM = "file://Licenses/README;md5=6bc50ecab884fce80cd3ef3da8852b08"
 +
-+# Add a run-time dependency for the PM firmware to be installed
-+# on the target file system.
-+RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
-+
-+# Default is to package all dts files for ti33x devices unless building
-+# for the specific beaglebone machine.
-+KERNEL_DEVICETREE_ti33x = "arch/arm/boot/dts/am335x-evm.dts arch/arm/boot/dts/am335x-evmsk.dts arch/arm/boot/dts/am335x-bone.dts"
-+KERNEL_DEVICETREE_am437x-evm = "arch/arm/boot/dts/am43x-epos-evm.dts"
-+KERNEL_DEVICETREE_beaglebone = "arch/arm/boot/dts/am335x-bone.dts"
-+KERNEL_DEVICETREE_omap5-evm = "arch/arm/boot/dts/omap5-sevm.dts arch/arm/boot/dts/omap5-uevm.dts"
-+KERNEL_DEVICETREE_dra7xx-evm = "arch/arm/boot/dts/dra7-evm.dts"
-+
-+KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
-+
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
++PV = "2013.07+2013.10-rc1"
++PR = "r0+gitr${SRCPV}"
 +
 +DEFAULT_PREFERENCE = "-1"
 +
-+S = "${WORKDIR}/git"
++SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
 +
-+BRANCH = "ti-linux-3.12.y"
++BRANCH ?= "master"
 +
-+SRCREV = "b36f4be3de1b123d8601de062e7dbfc904f305fb"
-+PV = "3.10+3.11-rc6"
++SRCREV = "39bc12ddc36c9e30199471da0f3a929b178a04b2"
 +
-+# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+
-+SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-+           file://defconfig \
-+          "
++SPL_BINARY = "MLO"
++SPL_UART_BINARY = "u-boot-spl.bin"
 
 
