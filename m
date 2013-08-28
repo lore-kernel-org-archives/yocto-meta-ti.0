@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AA497E0144E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB83CE01570
 	for <meta-ti@yoctoproject.org>; Wed, 28 Aug 2013 07:53:46 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5464F52A61; Wed, 28 Aug 2013 14:53:42 +0000 (UTC)
+	id CA4605299D; Wed, 28 Aug 2013 14:53:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130828145343.5464F52A61@arago-project.org>
+Message-Id: <20130828145343.CA4605299D@arago-project.org>
 Date: Wed, 28 Aug 2013 14:53:42 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : ti43x: disable sgx for now
@@ -26,9 +26,9 @@ X-List-Received-Date: Wed, 28 Aug 2013 14:53:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: bbc9ae0c90f7f40b1775220892d6cd9cca9cb517
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bbc9ae0c90f7f40b1775220892d6cd9cca9cb517
+Branch: master
+Commit: a378dd0edc7470d3cb4a10e2ca1c5aadb2f011c7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a378dd0edc7470d3cb4a10e2ca1c5aadb2f011c7
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Aug 28 10:52:23 2013 -0400
