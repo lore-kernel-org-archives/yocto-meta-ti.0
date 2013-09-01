@@ -1,29 +1,29 @@
 Return-Path: <denys@ti.com>
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9BE8BE0049C
-	for <meta-ti@yoctoproject.org>; Sat, 31 Aug 2013 20:15:30 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 754D0E0049C
+	for <meta-ti@yoctoproject.org>; Sat, 31 Aug 2013 20:20:44 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r813FTuH007755
-	for <meta-ti@yoctoproject.org>; Sat, 31 Aug 2013 22:15:29 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r813FTHk008752
-	for <meta-ti@yoctoproject.org>; Sat, 31 Aug 2013 22:15:29 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Sat, 31 Aug 2013 22:15:29 -0500
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r813Kh1R010484
+	for <meta-ti@yoctoproject.org>; Sat, 31 Aug 2013 22:20:43 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r813KhRF015016
+	for <meta-ti@yoctoproject.org>; Sat, 31 Aug 2013 22:20:43 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Sat, 31 Aug 2013 22:20:43 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r813FSaT005033	for
-	<meta-ti@yoctoproject.org>; Sat, 31 Aug 2013 22:15:28 -0500
-Date: Sat, 31 Aug 2013 23:15:28 -0400
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r813KhsM008319	for
+	<meta-ti@yoctoproject.org>; Sat, 31 Aug 2013 22:20:43 -0500
+Date: Sat, 31 Aug 2013 23:20:43 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <20130901031528.GA18322@edge>
+Message-ID: <20130901032042.GB18322@edge>
 References: <1378005180-30928-1-git-send-email-denis@denix.org>
-	<1378005180-30928-5-git-send-email-denis@denix.org>
+	<1378005180-30928-2-git-send-email-denis@denix.org>
 MIME-Version: 1.0
-In-Reply-To: <1378005180-30928-5-git-send-email-denis@denix.org>
+In-Reply-To: <1378005180-30928-2-git-send-email-denis@denix.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 5/5] libgles-omap3, omap3-sgx-modules: remove old 4.03.00.02 version
+Subject: Re: [PATCH 2/5] ompa3-sgx-modules-x11: fix some build failures with latest versions
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,115 +36,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Sep 2013 03:15:30 -0000
+X-List-Received-Date: Sun, 01 Sep 2013 03:20:44 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-BTW, consider this an RFC for removing the next 4.05.00.03 version as well - I 
-know some people are still using it, so please speak up.
-
--- 
-Denys
-
-
-On Sat, Aug 31, 2013 at 11:13:00PM -0400, Denys Dmytriyenko wrote:
+On Sat, Aug 31, 2013 at 11:12:57PM -0400, Denys Dmytriyenko wrote:
 > From: Denys Dmytriyenko <denys@ti.com>
 > 
+> * Do not hardcode kernel source location and name.
+> * Fix some discrepancies between GFX SDK versions as related to DRM.
+
+Also, I have couple more fixes pending for resolving build issues when 
+building against recent kernels...
+
+
 > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 > ---
->  .../omap3-sgx-modules_1.6.16.3977.bb               | 45 ----------------------
->  .../libgles/libgles-omap3_4.03.00.02.bb            | 30 ---------------
->  2 files changed, 75 deletions(-)
->  delete mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
->  delete mode 100644 recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
+>  recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 > 
-> diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-> deleted file mode 100644
-> index 4f9be7b..0000000
-> --- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-> +++ /dev/null
-> @@ -1,45 +0,0 @@
-> -DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
-> -LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=21228a42e27d1d104b31a83f7c9da935"
-> -
-> -TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
-> -require ../../recipes-ti/includes/ti-eula-unpack.inc
-> -
-> -SGXPV = "4_03_00_02"
-> -IMGPV = "1.6.16.3977"
-> -BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
-> -
-> -inherit module
-> -
-> -MACHINE_KERNEL_PR_append = "b"
-> -PR = "${MACHINE_KERNEL_PR}"
-> -
-> -SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
-> -           file://Compile-fixes-for-38-kernel.patch \
-> -           file://kernel-30.patch \
-> -          "
-> -SRC_URI[md5sum] = "ff8c1f2b8e4cb42f4ced6a613b081ada"
-> -SRC_URI[sha256sum] = "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036423458c8d75255"
-> -TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
-> -S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
-> -
-> -PVRBUILD = "release"
-> -export KERNELDIR = "${STAGING_KERNEL_DIR}"
-> -
-> -INHIBIT_PACKAGE_STRIP = "1"
-> -
-> -TI_PLATFORM_omap3 = "omap3630"
-> -TI_PLATFORM_ti816x = "ti81xx"
-> -
-> -MODULESLOCATION_omap3 = "dc_omap3430_linux"
-> -MODULESLOCATION_ti816x = "dc_ti81xx_linux"
-> -
-> -MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM}"
-> -
-> -do_install() {
-> -	mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-> -	cp ${S}/pvrsrvkm.ko \
-> -	   ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
-> -	   ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
-> -	   ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-> -}
-> diff --git a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb b/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-> deleted file mode 100644
-> index e98fe02..0000000
-> --- a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-> +++ /dev/null
-> @@ -1,30 +0,0 @@
-> -BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
-> -BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
-> -
-> -ES2LOCATION = "${S}/gfx_rel_es2.x"
-> -ES3LOCATION = "${S}/gfx_rel_es3.x"
-> -ES5LOCATION = "${S}/gfx_rel_es5.x"
-> -ES6LOCATION = "${S}/gfx_rel_es6.x"
-> -
-> -require libgles-omap3.inc
-> -
-> -# download required binary distribution from:
-> -# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
-> -# see libgles-omap3.inc for detailed installation instructions
-> -
-> -SGXPV = "4_03_00_02"
-> -IMGPV = "1.6.16.3977"
-> -BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
-> -TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
-> -
-> -SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
-> -                   file://cputype \
-> -                   file://rc.pvr \
-> -                   file://sample.desktop \
-> -                   file://99-bufferclass.rules  \
-> -"
-> -
-> -SRC_URI[md5sum] = "ff8c1f2b8e4cb42f4ced6a613b081ada"
-> -SRC_URI[sha256sum] = "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036423458c8d75255"
-> -
-> -S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
+> diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
+> index d439d83..9134e61 100644
+> --- a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
+> +++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
+> @@ -11,7 +11,7 @@ BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
+>  
+>  inherit module
+>  
+> -MACHINE_KERNEL_PR_append = "a"
+> +MACHINE_KERNEL_PR_append = "b"
+>  PR = "${MACHINE_KERNEL_PR}"
+>  
+>  DEFAULT_PREFERENCE = "-1"
+> @@ -48,16 +48,16 @@ do_compile() {
+>  	export PLAT_CC="${CC}"
+>  	export PLAT_CPP="${CXX}"
+>  	export PLAR_AR="${AR}"
+> -	for kernelver in ${WORKDIR}/../../linux-ti-staging/* ; do
+> +	for kernelver in ${WORKDIR}/../../${PREFERRED_PROVIDER_virtual/kernel}/* ; do
+>  		cp -f $kernelver/git/drivers/gpu/drm/*.c ${S}/services4/3rdparty/linux_drm/
+>  	done
+>  	if [ $(echo -e "${KERNEL_VERSION}\n3.3" | sort --version-sort | head -1) = "3.3" ] ; then
+>  		cp -f ${S}/services4/3rdparty/linux_drm/Kbuild_3.3 \
+> -			${S}/services4/3rdparty/linux_drm/Kbuild
+> +			${S}/services4/3rdparty/linux_drm/Kbuild || true
+>  	else 
+>  		if [ $(echo -e "${KERNEL_VERSION}\n3.2" | sort --version-sort | head -1) = "3.2" ] ; then
+>  			cp -f ${S}/services4/3rdparty/linux_drm/Kbuild_3.2 \
+> -				${S}/services4/3rdparty/linux_drm/Kbuild
+> +				${S}/services4/3rdparty/linux_drm/Kbuild || true
+>  		fi
+>  	fi
+>  	oe_runmake BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}
 > -- 
 > 1.8.3.2
 > 
