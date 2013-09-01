@@ -1,22 +1,24 @@
 Return-Path: <denis@denix.org>
 Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
 	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 50AB0E0049C
-	for <meta-ti@yoctoproject.org>; Sat, 31 Aug 2013 20:13:07 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6DC34E00596
+	for <meta-ti@yoctoproject.org>; Sat, 31 Aug 2013 20:13:12 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [108.45.150.102])
 	by vms173021.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MSF00D72FLUH810@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sat, 31 Aug 2013 22:13:06 -0500 (CDT)
+	2009)) with ESMTPA id <0MSF00K2GFLU2870@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Sat, 31 Aug 2013 22:13:07 -0500 (CDT)
 Received: from elrond.denix (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id F1A322004C; Sat,
-	31 Aug 2013 23:13:05 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id B74A820091; Sat,
+	31 Aug 2013 23:13:06 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Sat, 31 Aug 2013 23:12:56 -0400
-Message-id: <1378005180-30928-1-git-send-email-denis@denix.org>
+Date: Sat, 31 Aug 2013 23:12:57 -0400
+Message-id: <1378005180-30928-2-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH 1/5] libgles-omap3: fix some conflicts between X11 and Raw versions
+In-reply-to: <1378005180-30928-1-git-send-email-denis@denix.org>
+References: <1378005180-30928-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/5] ompa3-sgx-modules-x11: fix some build failures with latest versions
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,99 +35,47 @@ X-List-Received-Date: Sun, 01 Sep 2013 03:13:12 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
-* Properly define all PROVIDES, RPROVIDES, RCONFLICTS and RREPLACES variables.
-* Skip X11 recipe altogether in non-X11 distros to avoid broken dependencies
-  for missing X libraries.
+* Do not hardcode kernel source location and name.
+* Fix some discrepancies between GFX SDK versions as related to DRM.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-graphics/libgles/libgles-omap3-no-x.inc | 14 ++++++++++++--
- recipes-graphics/libgles/libgles-omap3-x11.inc  | 17 ++++++++++++-----
- 2 files changed, 24 insertions(+), 7 deletions(-)
+ recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-index d4cb46b..727c422 100644
---- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
-+++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-@@ -3,7 +3,9 @@ LICENSE = "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum
- LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
+index d439d83..9134e61 100644
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
+@@ -11,7 +11,7 @@ BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
  
--PR = "r35"
-+PR = "r36"
-+
-+EXCLUDE_FROM_WORLD = "1"
+ inherit module
  
- COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
  
-@@ -13,7 +15,15 @@ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
- 
- RREPLACES_${PN} = "libegl libgles1 libgles2"
- RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
--RREPLACES_${PN}-dbg = "libegl-dbg"
-+RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
-+
-+RPROVIDES_${PN} = "libegl libgles1 libgles2"
-+RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
-+RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
-+
-+RCONFLICTS_${PN} = "libegl libgles1 libgles2"
-+RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
-+RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
- 
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
- 		   file://cputype \
-diff --git a/recipes-graphics/libgles/libgles-omap3-x11.inc b/recipes-graphics/libgles/libgles-omap3-x11.inc
-index 6621396..abe6e6f 100644
---- a/recipes-graphics/libgles/libgles-omap3-x11.inc
-+++ b/recipes-graphics/libgles/libgles-omap3-x11.inc
-@@ -3,7 +3,9 @@ LICENSE = "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum
- LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
- 
--PR = "r35"
-+PR = "r36"
-+
-+EXCLUDE_FROM_WORLD = "1"
- 
- COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
- 
-@@ -12,19 +14,19 @@ DEPENDS = "virtual/libx11 libxau libxdmcp libdrm"
- export SUPPORT_XORG ?= "1"
- PVR_INIT ?= "pvrsrvinit"
- 
--PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
-+PROVIDES += "libgles-omap3 virtual/egl virtual/libgles1 virtual/libgles2"
- 
- RREPLACES_${PN} = "libegl libgles1 libgles2"
- RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
--RREPLACES_${PN}-dbg = "libegl-dbg"
-+RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
- 
- RPROVIDES_${PN} = "libegl libgles1 libgles2"
- RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
--RPROVIDES_${PN}-dbg = "libegl-dbg"
-+RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
- 
- RCONFLICTS_${PN} = "libegl libgles1 libgles2"
- RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
--RCONFLICTS_${PN}-dbg = "libegl-dbg"
-+RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
- 
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
- 		   file://cputype \
-@@ -47,6 +49,11 @@ export ES8LOCATION ?= "${S}/gfx_rel_es8.x"
- 
- LIBGLESWINDOWSYSTEM ?= "libpvrPVR2D_DRIWSEGL.so"
- 
-+python __anonymous() {
-+    if "x11" not in d.getVar("DISTRO_FEATURES", True).split():
-+        raise bb.parse.SkipPackage("Recipe is x11-specific, skipping")
-+}
-+
- do_configure() {
- 	# Attempt to fix up the worst offenders for file permissions
- 	for i in $(find ${S} -name "*.h") $(find ${S} -name "*.c") $(find ${S} -name "Make*") ; do
+ DEFAULT_PREFERENCE = "-1"
+@@ -48,16 +48,16 @@ do_compile() {
+ 	export PLAT_CC="${CC}"
+ 	export PLAT_CPP="${CXX}"
+ 	export PLAR_AR="${AR}"
+-	for kernelver in ${WORKDIR}/../../linux-ti-staging/* ; do
++	for kernelver in ${WORKDIR}/../../${PREFERRED_PROVIDER_virtual/kernel}/* ; do
+ 		cp -f $kernelver/git/drivers/gpu/drm/*.c ${S}/services4/3rdparty/linux_drm/
+ 	done
+ 	if [ $(echo -e "${KERNEL_VERSION}\n3.3" | sort --version-sort | head -1) = "3.3" ] ; then
+ 		cp -f ${S}/services4/3rdparty/linux_drm/Kbuild_3.3 \
+-			${S}/services4/3rdparty/linux_drm/Kbuild
++			${S}/services4/3rdparty/linux_drm/Kbuild || true
+ 	else 
+ 		if [ $(echo -e "${KERNEL_VERSION}\n3.2" | sort --version-sort | head -1) = "3.2" ] ; then
+ 			cp -f ${S}/services4/3rdparty/linux_drm/Kbuild_3.2 \
+-				${S}/services4/3rdparty/linux_drm/Kbuild
++				${S}/services4/3rdparty/linux_drm/Kbuild || true
+ 		fi
+ 	fi
+ 	oe_runmake BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}
 -- 
 1.8.3.2
 
