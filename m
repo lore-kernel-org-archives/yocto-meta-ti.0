@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2225EE013D1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22247E01358
 	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 10:08:14 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 80A3F52A89; Tue,  3 Sep 2013 17:08:12 +0000 (UTC)
+	id 8B36452A8B; Tue,  3 Sep 2013 17:08:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130903170812.80A3F52A89@arago-project.org>
+Message-Id: <20130903170812.8B36452A8B@arago-project.org>
 Date: Tue,  3 Sep 2013 17:08:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ompa3-sgx-modules-x11: fix some build failures with latest versions
+Subject: Denys Dmytriyenko : libgles-omap3-x11: do not fail if pvr-init is not yet installed
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,57 +27,34 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dylan
-Commit: 87fe2c465320940ba8bea67be35d6cb0632338a9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=87fe2c465320940ba8bea67be35d6cb0632338a9
+Commit: 9bf0bc5611181fc9b458b917ebeaf5af70930a47
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9bf0bc5611181fc9b458b917ebeaf5af70930a47
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Aug 31 22:00:57 2013 -0400
+Date:   Sat Aug 31 22:03:57 2013 -0400
 
-ompa3-sgx-modules-x11: fix some build failures with latest versions
-
-* Do not hardcode kernel source location and name.
-* Fix some discrepancies between GFX SDK versions as related to DRM.
+libgles-omap3-x11: do not fail if pvr-init is not yet installed
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- .../omap3-sgx-modules-x11_4.09.00.01.bb            |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ .../libgles/libgles-omap3-x11_4.09.00.01.bb        |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
-index d439d83..9134e61 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
-@@ -11,7 +11,7 @@ BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
+diff --git a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
+index 1c70cae..b7e6ce0 100644
+--- a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
+@@ -61,7 +61,7 @@ do_install_append() {
+     cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir}
+     cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/
  
- inherit module
+-    rm ${D}${sysconfdir}/init.d/pvr-init
++    rm -f ${D}${sysconfdir}/init.d/pvr-init
  
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
- DEFAULT_PREFERENCE = "-1"
-@@ -48,16 +48,16 @@ do_compile() {
- 	export PLAT_CC="${CC}"
- 	export PLAT_CPP="${CXX}"
- 	export PLAR_AR="${AR}"
--	for kernelver in ${WORKDIR}/../../linux-ti-staging/* ; do
-+	for kernelver in ${WORKDIR}/../../${PREFERRED_PROVIDER_virtual/kernel}/* ; do
- 		cp -f $kernelver/git/drivers/gpu/drm/*.c ${S}/services4/3rdparty/linux_drm/
- 	done
- 	if [ $(echo -e "${KERNEL_VERSION}\n3.3" | sort --version-sort | head -1) = "3.3" ] ; then
- 		cp -f ${S}/services4/3rdparty/linux_drm/Kbuild_3.3 \
--			${S}/services4/3rdparty/linux_drm/Kbuild
-+			${S}/services4/3rdparty/linux_drm/Kbuild || true
- 	else 
- 		if [ $(echo -e "${KERNEL_VERSION}\n3.2" | sort --version-sort | head -1) = "3.2" ] ; then
- 			cp -f ${S}/services4/3rdparty/linux_drm/Kbuild_3.2 \
--				${S}/services4/3rdparty/linux_drm/Kbuild
-+				${S}/services4/3rdparty/linux_drm/Kbuild || true
- 		fi
- 	fi
- 	oe_runmake BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}
+     if [ "$SUPPORT_XORG" = "1" ]; then
+         cp -pP ${WORKDIR}/rc_dri.pvr ${D}${sysconfdir}/init.d/pvr-init
 
 
