@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AC4C8E01419
-	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 10:08:09 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2225EE013D1
+	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 10:08:14 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 88BC952A86; Tue,  3 Sep 2013 17:08:09 +0000 (UTC)
+	id 80A3F52A89; Tue,  3 Sep 2013 17:08:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130903170809.88BC952A86@arago-project.org>
-Date: Tue,  3 Sep 2013 17:08:09 +0000 (UTC)
+Message-Id: <20130903170812.80A3F52A89@arago-project.org>
+Date: Tue,  3 Sep 2013 17:08:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : libgles-omap3, omap3-sgx-modules: remove old 4.03.00. 02 version
+Subject: Denys Dmytriyenko : ompa3-sgx-modules-x11: fix some build failures with latest versions
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,109 +26,58 @@ X-List-Received-Date: Tue, 03 Sep 2013 17:08:14 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: cb6f542fe85ca6d5afa2ff2c49f3af042e95d949
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cb6f542fe85ca6d5afa2ff2c49f3af042e95d949
+Branch: dylan
+Commit: 87fe2c465320940ba8bea67be35d6cb0632338a9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=87fe2c465320940ba8bea67be35d6cb0632338a9
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Aug 31 23:11:32 2013 -0400
+Date:   Sat Aug 31 22:00:57 2013 -0400
 
-libgles-omap3, omap3-sgx-modules: remove old 4.03.00.02 version
+ompa3-sgx-modules-x11: fix some build failures with latest versions
+
+* Do not hardcode kernel source location and name.
+* Fix some discrepancies between GFX SDK versions as related to DRM.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- .../omap3-sgx-modules_1.6.16.3977.bb               |   45 --------------------
- .../libgles/libgles-omap3_4.03.00.02.bb            |   30 -------------
- 2 files changed, 0 insertions(+), 75 deletions(-)
+ .../omap3-sgx-modules-x11_4.09.00.01.bb            |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-deleted file mode 100644
-index 4f9be7b..0000000
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-+++ /dev/null
-@@ -1,45 +0,0 @@
--DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=21228a42e27d1d104b31a83f7c9da935"
--
--TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
--require ../../recipes-ti/includes/ti-eula-unpack.inc
--
--SGXPV = "4_03_00_02"
--IMGPV = "1.6.16.3977"
--BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
--
--inherit module
--
--MACHINE_KERNEL_PR_append = "b"
--PR = "${MACHINE_KERNEL_PR}"
--
--SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
--           file://Compile-fixes-for-38-kernel.patch \
--           file://kernel-30.patch \
--          "
--SRC_URI[md5sum] = "ff8c1f2b8e4cb42f4ced6a613b081ada"
--SRC_URI[sha256sum] = "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036423458c8d75255"
--TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
--S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
--
--PVRBUILD = "release"
--export KERNELDIR = "${STAGING_KERNEL_DIR}"
--
--INHIBIT_PACKAGE_STRIP = "1"
--
--TI_PLATFORM_omap3 = "omap3630"
--TI_PLATFORM_ti816x = "ti81xx"
--
--MODULESLOCATION_omap3 = "dc_omap3430_linux"
--MODULESLOCATION_ti816x = "dc_ti81xx_linux"
--
--MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM}"
--
--do_install() {
--	mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
--	cp ${S}/pvrsrvkm.ko \
--	   ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
--	   ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
--	   ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
--}
-diff --git a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb b/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-deleted file mode 100644
-index e98fe02..0000000
---- a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
--BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
--
--ES2LOCATION = "${S}/gfx_rel_es2.x"
--ES3LOCATION = "${S}/gfx_rel_es3.x"
--ES5LOCATION = "${S}/gfx_rel_es5.x"
--ES6LOCATION = "${S}/gfx_rel_es6.x"
--
--require libgles-omap3.inc
--
--# download required binary distribution from:
--# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
--# see libgles-omap3.inc for detailed installation instructions
--
--SGXPV = "4_03_00_02"
--IMGPV = "1.6.16.3977"
--BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
--TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
--
--SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
--                   file://cputype \
--                   file://rc.pvr \
--                   file://sample.desktop \
--                   file://99-bufferclass.rules  \
--"
--
--SRC_URI[md5sum] = "ff8c1f2b8e4cb42f4ced6a613b081ada"
--SRC_URI[sha256sum] = "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036423458c8d75255"
--
--S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
+index d439d83..9134e61 100644
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
+@@ -11,7 +11,7 @@ BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
+ 
+ inherit module
+ 
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ DEFAULT_PREFERENCE = "-1"
+@@ -48,16 +48,16 @@ do_compile() {
+ 	export PLAT_CC="${CC}"
+ 	export PLAT_CPP="${CXX}"
+ 	export PLAR_AR="${AR}"
+-	for kernelver in ${WORKDIR}/../../linux-ti-staging/* ; do
++	for kernelver in ${WORKDIR}/../../${PREFERRED_PROVIDER_virtual/kernel}/* ; do
+ 		cp -f $kernelver/git/drivers/gpu/drm/*.c ${S}/services4/3rdparty/linux_drm/
+ 	done
+ 	if [ $(echo -e "${KERNEL_VERSION}\n3.3" | sort --version-sort | head -1) = "3.3" ] ; then
+ 		cp -f ${S}/services4/3rdparty/linux_drm/Kbuild_3.3 \
+-			${S}/services4/3rdparty/linux_drm/Kbuild
++			${S}/services4/3rdparty/linux_drm/Kbuild || true
+ 	else 
+ 		if [ $(echo -e "${KERNEL_VERSION}\n3.2" | sort --version-sort | head -1) = "3.2" ] ; then
+ 			cp -f ${S}/services4/3rdparty/linux_drm/Kbuild_3.2 \
+-				${S}/services4/3rdparty/linux_drm/Kbuild
++				${S}/services4/3rdparty/linux_drm/Kbuild || true
+ 		fi
+ 	fi
+ 	oe_runmake BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}
 
 
