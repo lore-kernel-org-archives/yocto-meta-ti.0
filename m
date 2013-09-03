@@ -1,31 +1,30 @@
 Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2BCDFE00715
-	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 10:42:29 -0700 (PDT)
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 67808E00734
+	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 10:46:40 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r83HgSCJ015281
-	for <meta-ti@yoctoproject.org>; Tue, 3 Sep 2013 12:42:28 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r83HgS1l005469
-	for <meta-ti@yoctoproject.org>; Tue, 3 Sep 2013 12:42:28 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 3 Sep 2013 12:42:28 -0500
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r83HkdKF023277
+	for <meta-ti@yoctoproject.org>; Tue, 3 Sep 2013 12:46:39 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r83HkdTw010964
+	for <meta-ti@yoctoproject.org>; Tue, 3 Sep 2013 12:46:39 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 3 Sep 2013 12:46:38 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r83HgSrv026275	for
-	<meta-ti@yoctoproject.org>; Tue, 3 Sep 2013 12:42:28 -0500
-Date: Tue, 3 Sep 2013 13:42:27 -0400
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id r83HkcL2009473	for
+	<meta-ti@yoctoproject.org>; Tue, 3 Sep 2013 12:46:38 -0500
+Date: Tue, 3 Sep 2013 13:46:38 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Message-ID: <20130903174227.GF22235@edge>
-References: <1372849303-21311-1-git-send-email-mrinmayee@ti.com>
-	<CF956B779D819D41BBC043B7082161D5444C34@DBDE04.ent.ti.com>
-	<7D46E86EC0A8354091174257B2FED101596D51CE@DLEE11.ent.ti.com>
-	<20130821154954.GE24491@edge>
+Message-ID: <20130903174638.GH22235@edge>
+References: <CF956B779D819D41BBC043B7082161D54445D0@DBDE04.ent.ti.com>
+	<7D46E86EC0A8354091174257B2FED101596CBD7C@DLEE11.ent.ti.com>
+	<20130819154524.GC7460@edge>
 MIME-Version: 1.0
-In-Reply-To: <20130821154954.GE24491@edge>
+In-Reply-To: <20130819154524.GC7460@edge>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCHv2] abefw: Firmware for OMAP5 ABE
+Subject: Re: [PATCHv2] libgles: Added prebuilt userspace libraries for graphics acceleration
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,115 +37,91 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 17:42:31 -0000
+X-List-Received-Date: Tue, 03 Sep 2013 17:46:41 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
 Mrinmayee,
 
-Ping. Do you have an ETA for addressing the comments below? Thanks.
+Ping on this one too.
 
 
-On Wed, Aug 21, 2013 at 11:49:54AM -0400, Denys Dmytriyenko wrote:
-> On Wed, Aug 21, 2013 at 03:31:42PM +0000, Maupin, Chase wrote:
+On Mon, Aug 19, 2013 at 11:45:24AM -0400, Denys Dmytriyenko wrote:
+> On Mon, Aug 19, 2013 at 03:09:55PM +0000, Maupin, Chase wrote:
 > > >-----Original Message-----
 > > >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
 > > >bounces@yoctoproject.org] On Behalf Of Hingolikar, Mrinmayee
-> > >Sent: Wednesday, August 21, 2013 6:48 AM
-> > >To: Hingolikar, Mrinmayee; meta-ti@yoctoproject.org
-> > >Subject: Re: [meta-ti] [PATCHv2] abefw: Firmware for OMAP5 ABE
+> > >Sent: Sunday, August 18, 2013 11:55 PM
+> > >To: meta-ti@yoctoproject.org
+> > >Subject: [meta-ti] [PATCHv2] libgles: Added prebuilt userspace
+> > >libraries for graphics acceleration
 > > >
-> > >Ping for comments!
+> > >
+> > >Subject: [PATCHv2] libgles: Added prebuilt userspace libraries for
+> > >graphics acceleration
+> > >
+> > >* These libraries are not distributable in source and hence
+> > >  are available only as binary. They implement OpenGLES 1.x and
+> > >  OpenGLES 2.x accelerated using SGX 544-MP2 found in OMAP5
+> > >  class of devices.
+> > >
+> > >v2:
+> > >
+> > >Addressed Chases's comments:
+> > >* Updated the PR
+> > >* Added shasum for the tarball
+> > >* Removed redundant FILES section.
+> > >
+> > >Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+> > >Signed-off-by: Siddharth Heroor <heroor@ti.com>
+> > >---
+> > > .../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb     |   20
+> > >++++++++++++++++++++
+> > > 1 file changed, 20 insertions(+)
+> > > create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-
+> > >linux_1.9.0.10.bb
+> > >
+> > >diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-
+> > >linux_1.9.0.10.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-
+> > >linux_1.9.0.10.bb
+> > >new file mode 100644
+> > >index 0000000..052f343
+> > >--- /dev/null
+> > >+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
+> > >@@ -0,0 +1,20 @@
+> > >+DESCRIPTION = "Userspace libraries for sgx"
+> > >+HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
+> > >+LICENSE = "TI"
+> > >+
+> > >+SRC_URI =
+> > >"http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/
+> > >gfxsdk/OMAP5_1_09_00_10//exports/omap5-sgx-ddk-um-linux-
+> > >${PV}.tar.gz;protocol=http"
+> > >+
+> > >+LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-
+> > >Manifest.doc;md5=d280df8e94bb2e7b9251c8526078eeb8"
+> > >+
+> > >+PR = "r0"
+> > >+
+> > >+SRC_URI[md5sum] = "3cfb875de031098a4c1eeeaf4e442367"
+> > >+SRC_URI[shasum] = "773299242fc72a5837b7e17053123ad55d69723b"
 > > 
-> > For some reason I don't see this in my e-mails for the original post.  Sorry 
-> > for the delay.
+> > This should be a sha256sum.  So your checksum is too small and you need to specify SRC_URI[sh256sum]
 > 
-> You are correct - there were no v2 submissions to the list on July 3rd. We 
-> only reviewed the original patch before.
-> 
-> 
-> > >> -----Original Message-----
-> > >> From: Hingolikar, Mrinmayee
-> > >> Sent: Wednesday, July 03, 2013 4:32 PM
-> > >> To: meta-ti@yoctoproject.org
-> > >> Cc: Hingolikar, Mrinmayee; Heroor, Siddharth
-> > >> Subject: [PATCHv2] abefw: Firmware for OMAP5 ABE
-> > >>
-> > >> * The OMAP5 Audio Backend requires a 'firmware' to enable
-> > >>   sound. This recipe installs a prebuilt firmware. This
-> > >>   part is a hack, as in the current form, the firmware
-> > >>   cannot be cross-compiled. There is a plan to fix this
-> > >>   and hopefully, this recipe is short-lived. Once the code
-> > >>   is fixed, we should have new recipes that build the firmware
-> > >>   and clean up this recipe.
-> > >>
-> > >> v2:
-> > >> * Merged contents from abefw.inc and removed abefw.inc based
-> > >>   on review.
-> > >>
-> > >> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
-> > >> Signed-off-by: Siddharth Heroor <heroor@ti.com>
-> > >> ---
-> > >>  recipes-bsp/abefw/abefw_1.0.14.bb |   20 ++++++++++++++++++++
-> > >>  1 files changed, 20 insertions(+), 0 deletions(-)  create mode
-> > >100644
-> > >> recipes-bsp/abefw/abefw_1.0.14.bb
-> > >>
-> > >> diff --git a/recipes-bsp/abefw/abefw_1.0.14.bb b/recipes-
-> > >> bsp/abefw/abefw_1.0.14.bb
-> > >> new file mode 100644
-> > >> index 0000000..8db71e4
-> > >> --- /dev/null
-> > >> +++ b/recipes-bsp/abefw/abefw_1.0.14.bb
-> > >> @@ -0,0 +1,20 @@
-> > >> +SUMMARY = "Firmware for OMAP5 ABE"
-> > >> +HOMEPAGE = "http://git.ti.com"
-> > >> +LICENSE = "BSD/GPLv2"
-> > 
-> > This seems wrong.  I thought the convention is "BSD | GPLv2" for either 
-> > license or "BSD & GPLv2" if mixed license.
-> > 
-> > If it is mixed then you probably need 2 entries in LIC_FILES_CHKSUM, one for 
-> > each license.
-> > 
-> > Also, does the GPLv2 use the "or later" clause such that it should be GPLv2+ 
-> > ?
-> 
-> This was already mentioned in one of the other patches.
+> You can also just run a recipe once through bitbake and it will tell you there 
+> are no checksums and provide a handy cut and paste lines to populate them.
 > 
 > 
-> > >> +LIC_FILES_CHKSUM =
-> > >> "file://COPYING;md5=923db086ed9463ab3215b24d87e05ec5"
-> > >> +
-> > >> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> > >> +COMPATIBLE_MACHINE = "omap5-evm"
-> > >> +
-> > >> +SRC_URI = "git://git.ti.com/glsdk/abefw-
-> > >omap4plus.git;protocol=git"
-> 
-> The git repo itself says omap4plus - why is it limited to OMAP5 only? Can it 
-> be enabled for OMAP4/Pandaboard too?
-> 
-> 
-> > Not strictly required but PR = r0 here would help remind you to bump the PR 
-> > in the future.
-> > 
-> > >> +
-> > >> +S = "${WORKDIR}/git"
-> > >> +
-> > >> +SRCREV = "ceccc0332264e39bdc51e54f80ea7256a3886c58"
-> > >> +
-> > >> +do_install() {
-> > >> +        mkdir -p ${D}/lib/firmware
-> > >> +        cp ${S}/firmware/omap4_abe_new ${D}/lib/firmware/ }
-> > >> +
-> > >> +FILES_${PN} += "/lib/firmware/omap4_abe_new"
-> > 
-> > I'm sure this has been discussed before, but do you see any confusion about 
-> > this being omap5-evm only and yet the FW is omap4_abe_new?
-> > 
-> > >> --
-> > >> 1.7.0.4
+> > >+
+> > >+S = "${WORKDIR}/${PN}-${PV}"
+> > >+
+> > >+do_install () {
+> > >+    oe_runmake install DESTDIR=${D}
+> > >+}
+> > >+
+> > >+FILES_${PN} += " ${libdir}/gbm/"
+> > >--
+> > >1.7.9.5
 > > >
 > > >_______________________________________________
 > > >meta-ti mailing list
