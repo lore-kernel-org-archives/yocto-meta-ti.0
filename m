@@ -1,33 +1,33 @@
 Return-Path: <chase.maupin@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EF46EE00715
-	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 08:19:27 -0700 (PDT)
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F47CE013DA
+	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 08:19:47 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r83FJR6I009542;
-	Tue, 3 Sep 2013 10:19:27 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r83FJRU6027496;
-	Tue, 3 Sep 2013 10:19:27 -0500
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r83FJjOQ032318;
+	Tue, 3 Sep 2013 10:19:45 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r83FJjeC027748;
+	Tue, 3 Sep 2013 10:19:45 -0500
 Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.02.0342.003; Tue, 3 Sep 2013 10:19:27 -0500
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.02.0342.003; Tue, 3 Sep 2013 10:19:45 -0500
 From: "Maupin, Chase" <chase.maupin@ti.com>
 To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
 	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH 2/5] ompa3-sgx-modules-x11: fix some build
-	failures with latest versions
-Thread-Index: AQHOpsFI48YInVEtyECnEZqckywz4pm0JGuQ
-Date: Tue, 3 Sep 2013 15:19:26 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED10159701277@DLEE11.ent.ti.com>
+Thread-Topic: [meta-ti] [PATCH 3/5] libgles-omap3-x11: do not fail if
+	pvr-init is not yet installed
+Thread-Index: AQHOpsFJrqcZomwtxEOckVQxs+7hdpm0JIDQ
+Date: Tue, 3 Sep 2013 15:19:44 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED101597012A9@DLEE11.ent.ti.com>
 References: <1378005180-30928-1-git-send-email-denis@denix.org>
-	<1378005180-30928-2-git-send-email-denis@denix.org>
-In-Reply-To: <1378005180-30928-2-git-send-email-denis@denix.org>
+	<1378005180-30928-3-git-send-email-denis@denix.org>
+In-Reply-To: <1378005180-30928-3-git-send-email-denis@denix.org>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/5] ompa3-sgx-modules-x11: fix some build failures with latest versions
+Subject: Re: [PATCH 3/5] libgles-omap3-x11: do not fail if pvr-init is not yet installed
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,7 +40,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 15:19:28 -0000
+X-List-Received-Date: Tue, 03 Sep 2013 15:19:48 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
@@ -52,66 +52,32 @@ Acked-by: Chase Maupin <chase.maupin@ti.com>
 >bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
 >Sent: Saturday, August 31, 2013 10:13 PM
 >To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [PATCH 2/5] ompa3-sgx-modules-x11: fix some
->build failures with latest versions
+>Subject: [meta-ti] [PATCH 3/5] libgles-omap3-x11: do not fail if
+>pvr-init is not yet installed
 >
 >From: Denys Dmytriyenko <denys@ti.com>
 >
->* Do not hardcode kernel source location and name.
->* Fix some discrepancies between GFX SDK versions as related to
->DRM.
->
 >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 >---
-> recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb |
->8 ++++----
-> 1 file changed, 4 insertions(+), 4 deletions(-)
+> recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb | 2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
 >
->diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-
->x11_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules-
+>diff --git a/recipes-graphics/libgles/libgles-omap3-
+>x11_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3-
 >x11_4.09.00.01.bb
->index d439d83..9134e61 100644
->--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules-
->x11_4.09.00.01.bb
->+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-
->x11_4.09.00.01.bb
->@@ -11,7 +11,7 @@ BINFILE =3D
->"Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
+>index 1c70cae..b7e6ce0 100644
+>--- a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
+>+++ b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
+>@@ -61,7 +61,7 @@ do_install_append() {
+>     cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir}
+>     cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/
 >
-> inherit module
+>-    rm ${D}${sysconfdir}/init.d/pvr-init
+>+    rm -f ${D}${sysconfdir}/init.d/pvr-init
 >
->-MACHINE_KERNEL_PR_append =3D "a"
->+MACHINE_KERNEL_PR_append =3D "b"
-> PR =3D "${MACHINE_KERNEL_PR}"
->
-> DEFAULT_PREFERENCE =3D "-1"
->@@ -48,16 +48,16 @@ do_compile() {
-> 	export PLAT_CC=3D"${CC}"
-> 	export PLAT_CPP=3D"${CXX}"
-> 	export PLAR_AR=3D"${AR}"
->-	for kernelver in ${WORKDIR}/../../linux-ti-staging/* ; do
->+	for kernelver in
->${WORKDIR}/../../${PREFERRED_PROVIDER_virtual/kernel}/* ; do
-> 		cp -f $kernelver/git/drivers/gpu/drm/*.c
->${S}/services4/3rdparty/linux_drm/
-> 	done
-> 	if [ $(echo -e "${KERNEL_VERSION}\n3.3" | sort --version-
->sort | head -1) =3D "3.3" ] ; then
-> 		cp -f ${S}/services4/3rdparty/linux_drm/Kbuild_3.3 \
->-			${S}/services4/3rdparty/linux_drm/Kbuild
->+			${S}/services4/3rdparty/linux_drm/Kbuild || true
-> 	else
-> 		if [ $(echo -e "${KERNEL_VERSION}\n3.2" | sort --
->version-sort | head -1) =3D "3.2" ] ; then
-> 			cp -f
->${S}/services4/3rdparty/linux_drm/Kbuild_3.2 \
->-				${S}/services4/3rdparty/linux_drm/Kbuild
->+				${S}/services4/3rdparty/linux_drm/Kbuild
->|| true
-> 		fi
-> 	fi
-> 	oe_runmake BUILD=3D${PVRBUILD} TI_PLATFORM=3D${TI_PLATFORM}
->SUPPORT_XORG=3D${SUPPORT_XORG}
+>     if [ "$SUPPORT_XORG" =3D "1" ]; then
+>         cp -pP ${WORKDIR}/rc_dri.pvr
+>${D}${sysconfdir}/init.d/pvr-init
 >--
 >1.8.3.2
 >
