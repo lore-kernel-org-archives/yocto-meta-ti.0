@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21CBFE00715
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22289E01419
 	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 10:08:14 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 68DEA52A87; Tue,  3 Sep 2013 17:08:12 +0000 (UTC)
+	id A458952A8D; Tue,  3 Sep 2013 17:08:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130903170812.68DEA52A87@arago-project.org>
+Message-Id: <20130903170812.A458952A8D@arago-project.org>
 Date: Tue,  3 Sep 2013 17:08:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : libgles-omap3: fix some conflicts between X11 and Raw versions
+Subject: Denys Dmytriyenko : libgles-omap3: introduce INC_PR
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,109 +27,76 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dylan
-Commit: ae4f09067c552a25730a5019b2f5e7d016ef75b5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ae4f09067c552a25730a5019b2f5e7d016ef75b5
+Commit: 9be75edbe0cb7ab50c506cb191f4cc022491a856
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9be75edbe0cb7ab50c506cb191f4cc022491a856
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Aug 31 21:56:47 2013 -0400
+Date:   Sat Aug 31 22:09:34 2013 -0400
 
-libgles-omap3: fix some conflicts between X11 and Raw versions
-
-* Properly define all PROVIDES, RPROVIDES, RCONFLICTS and RREPLACES variables.
-* Skip X11 recipe altogether in non-X11 distros to avoid broken dependencies
-  for missing X libraries.
+libgles-omap3: introduce INC_PR
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- recipes-graphics/libgles/libgles-omap3-no-x.inc |   14 ++++++++++++--
- recipes-graphics/libgles/libgles-omap3-x11.inc  |   17 ++++++++++++-----
- 2 files changed, 24 insertions(+), 7 deletions(-)
+ recipes-graphics/libgles/libgles-omap3-no-x.inc    |    2 +-
+ recipes-graphics/libgles/libgles-omap3-x11.inc     |    2 +-
+ .../libgles/libgles-omap3-x11_4.09.00.01.bb        |    2 ++
+ .../libgles/libgles-omap3_4.09.00.01.bb            |    2 ++
+ 4 files changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-index d4cb46b..727c422 100644
+index 727c422..83873d7 100644
 --- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
 +++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-@@ -3,7 +3,9 @@ LICENSE = "proprietary-binary"
+@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
  # 'TSPA.txt' might not be the best file to md5sum
  LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
  
--PR = "r35"
-+PR = "r36"
-+
-+EXCLUDE_FROM_WORLD = "1"
+-PR = "r36"
++INC_PR = "r37"
  
- COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
+ EXCLUDE_FROM_WORLD = "1"
  
-@@ -13,7 +15,15 @@ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
- 
- RREPLACES_${PN} = "libegl libgles1 libgles2"
- RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
--RREPLACES_${PN}-dbg = "libegl-dbg"
-+RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
-+
-+RPROVIDES_${PN} = "libegl libgles1 libgles2"
-+RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
-+RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
-+
-+RCONFLICTS_${PN} = "libegl libgles1 libgles2"
-+RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
-+RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
- 
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
- 		   file://cputype \
 diff --git a/recipes-graphics/libgles/libgles-omap3-x11.inc b/recipes-graphics/libgles/libgles-omap3-x11.inc
-index 6621396..abe6e6f 100644
+index abe6e6f..106a9bc 100644
 --- a/recipes-graphics/libgles/libgles-omap3-x11.inc
 +++ b/recipes-graphics/libgles/libgles-omap3-x11.inc
-@@ -3,7 +3,9 @@ LICENSE = "proprietary-binary"
+@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
  # 'TSPA.txt' might not be the best file to md5sum
  LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
  
--PR = "r35"
-+PR = "r36"
+-PR = "r36"
++INC_PR = "r37"
+ 
+ EXCLUDE_FROM_WORLD = "1"
+ 
+diff --git a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
+index b7e6ce0..6b9c561 100644
+--- a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
+@@ -2,6 +2,8 @@ require libgles-omap3-x11.inc
+ 
+ LICENSE = "TSPA"
+ 
++PR = "${INC_PR}.0"
 +
-+EXCLUDE_FROM_WORLD = "1"
+ DEFAULT_PREFERENCE = "-1"
  
- COMPATIBLE_MACHINE = "(omap3|ti814x|ti816x|ti33x)"
+ BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+index b68b4c3..a4da2f9 100644
+--- a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+@@ -2,6 +2,8 @@ require libgles-omap3-no-x.inc
  
-@@ -12,19 +14,19 @@ DEPENDS = "virtual/libx11 libxau libxdmcp libdrm"
- export SUPPORT_XORG ?= "1"
- PVR_INIT ?= "pvrsrvinit"
+ LICENSE = "TSPA"
  
--PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
-+PROVIDES += "libgles-omap3 virtual/egl virtual/libgles1 virtual/libgles2"
- 
- RREPLACES_${PN} = "libegl libgles1 libgles2"
- RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
--RREPLACES_${PN}-dbg = "libegl-dbg"
-+RREPLACES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
- 
- RPROVIDES_${PN} = "libegl libgles1 libgles2"
- RPROVIDES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
--RPROVIDES_${PN}-dbg = "libegl-dbg"
-+RPROVIDES_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
- 
- RCONFLICTS_${PN} = "libegl libgles1 libgles2"
- RCONFLICTS_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
--RCONFLICTS_${PN}-dbg = "libegl-dbg"
-+RCONFLICTS_${PN}-dbg = "libegl-dbg libgles1-dbg libgles2-dbg"
- 
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
- 		   file://cputype \
-@@ -47,6 +49,11 @@ export ES8LOCATION ?= "${S}/gfx_rel_es8.x"
- 
- LIBGLESWINDOWSYSTEM ?= "libpvrPVR2D_DRIWSEGL.so"
- 
-+python __anonymous() {
-+    if "x11" not in d.getVar("DISTRO_FEATURES", True).split():
-+        raise bb.parse.SkipPackage("Recipe is x11-specific, skipping")
-+}
++PR = "${INC_PR}.0"
 +
- do_configure() {
- 	# Attempt to fix up the worst offenders for file permissions
- 	for i in $(find ${S} -name "*.h") $(find ${S} -name "*.c") $(find ${S} -name "Make*") ; do
+ DEFAULT_PREFERENCE = "-1"
+ 
+ BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
 
 
