@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A9DA2E01358
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB195E013D1
 	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 10:08:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7005B52A7C; Tue,  3 Sep 2013 17:08:09 +0000 (UTC)
+	id 3A1D1529FE; Tue,  3 Sep 2013 17:08:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130903170809.7005B52A7C@arago-project.org>
+Message-Id: <20130903170809.3A1D1529FE@arago-project.org>
 Date: Tue,  3 Sep 2013 17:08:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : libgles-omap3: introduce INC_PR
+Subject: Denys Dmytriyenko : ompa3-sgx-modules-x11: fix some build failures with latest versions
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,76 +27,57 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 9e07040a0b73f4ea11ff4441e1046269ddc9bc05
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9e07040a0b73f4ea11ff4441e1046269ddc9bc05
+Commit: dc3f0f5c74ca11081a4267c14cbb3ba5b4b0f016
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dc3f0f5c74ca11081a4267c14cbb3ba5b4b0f016
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Aug 31 22:09:34 2013 -0400
+Date:   Sat Aug 31 22:00:57 2013 -0400
 
-libgles-omap3: introduce INC_PR
+ompa3-sgx-modules-x11: fix some build failures with latest versions
+
+* Do not hardcode kernel source location and name.
+* Fix some discrepancies between GFX SDK versions as related to DRM.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- recipes-graphics/libgles/libgles-omap3-no-x.inc    |    2 +-
- recipes-graphics/libgles/libgles-omap3-x11.inc     |    2 +-
- .../libgles/libgles-omap3-x11_4.09.00.01.bb        |    2 ++
- .../libgles/libgles-omap3_4.09.00.01.bb            |    2 ++
- 4 files changed, 6 insertions(+), 2 deletions(-)
+ .../omap3-sgx-modules-x11_4.09.00.01.bb            |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-index 727c422..83873d7 100644
---- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
-+++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum
- LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
+index d439d83..9134e61 100644
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
+@@ -11,7 +11,7 @@ BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
  
--PR = "r36"
-+INC_PR = "r37"
+ inherit module
  
- EXCLUDE_FROM_WORLD = "1"
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
  
-diff --git a/recipes-graphics/libgles/libgles-omap3-x11.inc b/recipes-graphics/libgles/libgles-omap3-x11.inc
-index abe6e6f..106a9bc 100644
---- a/recipes-graphics/libgles/libgles-omap3-x11.inc
-+++ b/recipes-graphics/libgles/libgles-omap3-x11.inc
-@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
- # 'TSPA.txt' might not be the best file to md5sum
- LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
- 
--PR = "r36"
-+INC_PR = "r37"
- 
- EXCLUDE_FROM_WORLD = "1"
- 
-diff --git a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
-index b7e6ce0..6b9c561 100644
---- a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
-+++ b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
-@@ -2,6 +2,8 @@ require libgles-omap3-x11.inc
- 
- LICENSE = "TSPA"
- 
-+PR = "${INC_PR}.0"
-+
  DEFAULT_PREFERENCE = "-1"
- 
- BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
-diff --git a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
-index b68b4c3..a4da2f9 100644
---- a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
-+++ b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
-@@ -2,6 +2,8 @@ require libgles-omap3-no-x.inc
- 
- LICENSE = "TSPA"
- 
-+PR = "${INC_PR}.0"
-+
- DEFAULT_PREFERENCE = "-1"
- 
- BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
+@@ -48,16 +48,16 @@ do_compile() {
+ 	export PLAT_CC="${CC}"
+ 	export PLAT_CPP="${CXX}"
+ 	export PLAR_AR="${AR}"
+-	for kernelver in ${WORKDIR}/../../linux-ti-staging/* ; do
++	for kernelver in ${WORKDIR}/../../${PREFERRED_PROVIDER_virtual/kernel}/* ; do
+ 		cp -f $kernelver/git/drivers/gpu/drm/*.c ${S}/services4/3rdparty/linux_drm/
+ 	done
+ 	if [ $(echo -e "${KERNEL_VERSION}\n3.3" | sort --version-sort | head -1) = "3.3" ] ; then
+ 		cp -f ${S}/services4/3rdparty/linux_drm/Kbuild_3.3 \
+-			${S}/services4/3rdparty/linux_drm/Kbuild
++			${S}/services4/3rdparty/linux_drm/Kbuild || true
+ 	else 
+ 		if [ $(echo -e "${KERNEL_VERSION}\n3.2" | sort --version-sort | head -1) = "3.2" ] ; then
+ 			cp -f ${S}/services4/3rdparty/linux_drm/Kbuild_3.2 \
+-				${S}/services4/3rdparty/linux_drm/Kbuild
++				${S}/services4/3rdparty/linux_drm/Kbuild || true
+ 		fi
+ 	fi
+ 	oe_runmake BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}
 
 
