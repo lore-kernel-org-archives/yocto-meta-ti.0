@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A8A19E00734
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A9DA2E01358
 	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 10:08:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 56AA252A6D; Tue,  3 Sep 2013 17:08:09 +0000 (UTC)
+	id 7005B52A7C; Tue,  3 Sep 2013 17:08:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130903170809.56AA252A6D@arago-project.org>
+Message-Id: <20130903170809.7005B52A7C@arago-project.org>
 Date: Tue,  3 Sep 2013 17:08:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : libgles-omap3-x11: do not fail if pvr-init is not yet installed
+Subject: Denys Dmytriyenko : libgles-omap3: introduce INC_PR
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,34 +27,76 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 2b3f2c2939e2abea1513df5218d31d9949011bca
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2b3f2c2939e2abea1513df5218d31d9949011bca
+Commit: 9e07040a0b73f4ea11ff4441e1046269ddc9bc05
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9e07040a0b73f4ea11ff4441e1046269ddc9bc05
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Aug 31 22:03:57 2013 -0400
+Date:   Sat Aug 31 22:09:34 2013 -0400
 
-libgles-omap3-x11: do not fail if pvr-init is not yet installed
+libgles-omap3: introduce INC_PR
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- .../libgles/libgles-omap3-x11_4.09.00.01.bb        |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-graphics/libgles/libgles-omap3-no-x.inc    |    2 +-
+ recipes-graphics/libgles/libgles-omap3-x11.inc     |    2 +-
+ .../libgles/libgles-omap3-x11_4.09.00.01.bb        |    2 ++
+ .../libgles/libgles-omap3_4.09.00.01.bb            |    2 ++
+ 4 files changed, 6 insertions(+), 2 deletions(-)
 
+diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
+index 727c422..83873d7 100644
+--- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
++++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
+@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
+ # 'TSPA.txt' might not be the best file to md5sum
+ LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
+ 
+-PR = "r36"
++INC_PR = "r37"
+ 
+ EXCLUDE_FROM_WORLD = "1"
+ 
+diff --git a/recipes-graphics/libgles/libgles-omap3-x11.inc b/recipes-graphics/libgles/libgles-omap3-x11.inc
+index abe6e6f..106a9bc 100644
+--- a/recipes-graphics/libgles/libgles-omap3-x11.inc
++++ b/recipes-graphics/libgles/libgles-omap3-x11.inc
+@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
+ # 'TSPA.txt' might not be the best file to md5sum
+ LIC_FILES_CHKSUM = "file://TSPA.txt;md5=c0d5d9c1e38b41677144c4e24d6ddee1"
+ 
+-PR = "r36"
++INC_PR = "r37"
+ 
+ EXCLUDE_FROM_WORLD = "1"
+ 
 diff --git a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
-index 1c70cae..b7e6ce0 100644
+index b7e6ce0..6b9c561 100644
 --- a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
 +++ b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
-@@ -61,7 +61,7 @@ do_install_append() {
-     cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir}
-     cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/
+@@ -2,6 +2,8 @@ require libgles-omap3-x11.inc
  
--    rm ${D}${sysconfdir}/init.d/pvr-init
-+    rm -f ${D}${sysconfdir}/init.d/pvr-init
+ LICENSE = "TSPA"
  
-     if [ "$SUPPORT_XORG" = "1" ]; then
-         cp -pP ${WORKDIR}/rc_dri.pvr ${D}${sysconfdir}/init.d/pvr-init
++PR = "${INC_PR}.0"
++
+ DEFAULT_PREFERENCE = "-1"
+ 
+ BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+index b68b4c3..a4da2f9 100644
+--- a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+@@ -2,6 +2,8 @@ require libgles-omap3-no-x.inc
+ 
+ LICENSE = "TSPA"
+ 
++PR = "${INC_PR}.0"
++
+ DEFAULT_PREFERENCE = "-1"
+ 
+ BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
 
 
