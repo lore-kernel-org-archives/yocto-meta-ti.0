@@ -1,34 +1,31 @@
-Return-Path: <fcooper@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4CD72E00715
-	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 10:29:02 -0700 (PDT)
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2BCDFE00715
+	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 10:42:29 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r83HT18F013296;
-	Tue, 3 Sep 2013 12:29:01 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r83HT0Cu019378;
-	Tue, 3 Sep 2013 12:29:00 -0500
-Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.02.0342.003; Tue, 3 Sep 2013 12:29:00 -0500
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: Tasslehoff Kjappfot <tasskjapp@gmail.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH 5/5] libgles-omap3, omap3-sgx-modules: remove
-	old 4.03.00.02 version
-Thread-Index: AQHOpsFK5j5twB2ZCkG4LvwuoiWfDJmwiVMAgAImvACAAZdysA==
-Date: Tue, 3 Sep 2013 17:29:00 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C544A11@DFLE08.ent.ti.com>
-References: <1378005180-30928-1-git-send-email-denis@denix.org>
-	<1378005180-30928-5-git-send-email-denis@denix.org>
-	<20130901031528.GA18322@edge> <52247F4E.6030404@gmail.com>
-In-Reply-To: <52247F4E.6030404@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r83HgSCJ015281
+	for <meta-ti@yoctoproject.org>; Tue, 3 Sep 2013 12:42:28 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r83HgS1l005469
+	for <meta-ti@yoctoproject.org>; Tue, 3 Sep 2013 12:42:28 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 3 Sep 2013 12:42:28 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r83HgSrv026275	for
+	<meta-ti@yoctoproject.org>; Tue, 3 Sep 2013 12:42:28 -0500
+Date: Tue, 3 Sep 2013 13:42:27 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Message-ID: <20130903174227.GF22235@edge>
+References: <1372849303-21311-1-git-send-email-mrinmayee@ti.com>
+	<CF956B779D819D41BBC043B7082161D5444C34@DBDE04.ent.ti.com>
+	<7D46E86EC0A8354091174257B2FED101596D51CE@DLEE11.ent.ti.com>
+	<20130821154954.GE24491@edge>
 MIME-Version: 1.0
-Subject: Re: [PATCH 5/5] libgles-omap3, omap3-sgx-modules: remove old 4.03.00.02 version
+In-Reply-To: <20130821154954.GE24491@edge>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCHv2] abefw: Firmware for OMAP5 ABE
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,38 +38,124 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 17:29:05 -0000
-Content-Language: en-US
+X-List-Received-Date: Tue, 03 Sep 2013 17:42:31 -0000
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+Mrinmayee,
+
+Ping. Do you have an ETA for addressing the comments below? Thanks.
 
 
-
-> -----Original Message-----
-> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> bounces@yoctoproject.org] On Behalf Of Tasslehoff Kjappfot
-> Sent: Monday, September 02, 2013 7:07 AM
-> To: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH 5/5] libgles-omap3, omap3-sgx-modules: remo=
-ve
-> old 4.03.00.02 version
->=20
-> On 09/01/2013 05:15 AM, Denys Dmytriyenko wrote:
-> > BTW, consider this an RFC for removing the next 4.05.00.03 version as
-> > well - I know some people are still using it, so please speak up.
-> >
->=20
-> We're using 4.05.00.03 for our OMAP3530 board, because that is the latest=
- one
-> we've tried that actually works :)
->=20
-> Last time I tried newer versions there were "instant lockup" problems.
-> Are any of the newer versions compatible with OMAP3530 now?
-[Franklin] The Graphics SDK was validated on am3517  using a 2.6.37 kernel.=
- I've successfully used 04.08.00.02 without any problems. What kernel versi=
-on are you using?
->=20
-> - Tasslehoff
+On Wed, Aug 21, 2013 at 11:49:54AM -0400, Denys Dmytriyenko wrote:
+> On Wed, Aug 21, 2013 at 03:31:42PM +0000, Maupin, Chase wrote:
+> > >-----Original Message-----
+> > >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> > >bounces@yoctoproject.org] On Behalf Of Hingolikar, Mrinmayee
+> > >Sent: Wednesday, August 21, 2013 6:48 AM
+> > >To: Hingolikar, Mrinmayee; meta-ti@yoctoproject.org
+> > >Subject: Re: [meta-ti] [PATCHv2] abefw: Firmware for OMAP5 ABE
+> > >
+> > >Ping for comments!
+> > 
+> > For some reason I don't see this in my e-mails for the original post.  Sorry 
+> > for the delay.
+> 
+> You are correct - there were no v2 submissions to the list on July 3rd. We 
+> only reviewed the original patch before.
+> 
+> 
+> > >> -----Original Message-----
+> > >> From: Hingolikar, Mrinmayee
+> > >> Sent: Wednesday, July 03, 2013 4:32 PM
+> > >> To: meta-ti@yoctoproject.org
+> > >> Cc: Hingolikar, Mrinmayee; Heroor, Siddharth
+> > >> Subject: [PATCHv2] abefw: Firmware for OMAP5 ABE
+> > >>
+> > >> * The OMAP5 Audio Backend requires a 'firmware' to enable
+> > >>   sound. This recipe installs a prebuilt firmware. This
+> > >>   part is a hack, as in the current form, the firmware
+> > >>   cannot be cross-compiled. There is a plan to fix this
+> > >>   and hopefully, this recipe is short-lived. Once the code
+> > >>   is fixed, we should have new recipes that build the firmware
+> > >>   and clean up this recipe.
+> > >>
+> > >> v2:
+> > >> * Merged contents from abefw.inc and removed abefw.inc based
+> > >>   on review.
+> > >>
+> > >> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+> > >> Signed-off-by: Siddharth Heroor <heroor@ti.com>
+> > >> ---
+> > >>  recipes-bsp/abefw/abefw_1.0.14.bb |   20 ++++++++++++++++++++
+> > >>  1 files changed, 20 insertions(+), 0 deletions(-)  create mode
+> > >100644
+> > >> recipes-bsp/abefw/abefw_1.0.14.bb
+> > >>
+> > >> diff --git a/recipes-bsp/abefw/abefw_1.0.14.bb b/recipes-
+> > >> bsp/abefw/abefw_1.0.14.bb
+> > >> new file mode 100644
+> > >> index 0000000..8db71e4
+> > >> --- /dev/null
+> > >> +++ b/recipes-bsp/abefw/abefw_1.0.14.bb
+> > >> @@ -0,0 +1,20 @@
+> > >> +SUMMARY = "Firmware for OMAP5 ABE"
+> > >> +HOMEPAGE = "http://git.ti.com"
+> > >> +LICENSE = "BSD/GPLv2"
+> > 
+> > This seems wrong.  I thought the convention is "BSD | GPLv2" for either 
+> > license or "BSD & GPLv2" if mixed license.
+> > 
+> > If it is mixed then you probably need 2 entries in LIC_FILES_CHKSUM, one for 
+> > each license.
+> > 
+> > Also, does the GPLv2 use the "or later" clause such that it should be GPLv2+ 
+> > ?
+> 
+> This was already mentioned in one of the other patches.
+> 
+> 
+> > >> +LIC_FILES_CHKSUM =
+> > >> "file://COPYING;md5=923db086ed9463ab3215b24d87e05ec5"
+> > >> +
+> > >> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> > >> +COMPATIBLE_MACHINE = "omap5-evm"
+> > >> +
+> > >> +SRC_URI = "git://git.ti.com/glsdk/abefw-
+> > >omap4plus.git;protocol=git"
+> 
+> The git repo itself says omap4plus - why is it limited to OMAP5 only? Can it 
+> be enabled for OMAP4/Pandaboard too?
+> 
+> 
+> > Not strictly required but PR = r0 here would help remind you to bump the PR 
+> > in the future.
+> > 
+> > >> +
+> > >> +S = "${WORKDIR}/git"
+> > >> +
+> > >> +SRCREV = "ceccc0332264e39bdc51e54f80ea7256a3886c58"
+> > >> +
+> > >> +do_install() {
+> > >> +        mkdir -p ${D}/lib/firmware
+> > >> +        cp ${S}/firmware/omap4_abe_new ${D}/lib/firmware/ }
+> > >> +
+> > >> +FILES_${PN} += "/lib/firmware/omap4_abe_new"
+> > 
+> > I'm sure this has been discussed before, but do you see any confusion about 
+> > this being omap5-evm only and yet the FW is omap4_abe_new?
+> > 
+> > >> --
+> > >> 1.7.0.4
+> > >
+> > >_______________________________________________
+> > >meta-ti mailing list
+> > >meta-ti@yoctoproject.org
+> > >https://lists.yoctoproject.org/listinfo/meta-ti
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
 > _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
