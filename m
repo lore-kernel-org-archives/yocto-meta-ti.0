@@ -1,15 +1,34 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 220EFE00734
-	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 10:08:14 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id AB55D52A76; Tue,  3 Sep 2013 17:08:12 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130903170812.AB55D52A76@arago-project.org>
-Date: Tue,  3 Sep 2013 17:08:12 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : libgles-omap3, omap3-sgx-modules: remove old 4.03.00. 02 version
+Return-Path: <fcooper@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4CD72E00715
+	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 10:29:02 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r83HT18F013296;
+	Tue, 3 Sep 2013 12:29:01 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r83HT0Cu019378;
+	Tue, 3 Sep 2013 12:29:00 -0500
+Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.02.0342.003; Tue, 3 Sep 2013 12:29:00 -0500
+From: "Cooper Jr., Franklin" <fcooper@ti.com>
+To: Tasslehoff Kjappfot <tasskjapp@gmail.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH 5/5] libgles-omap3, omap3-sgx-modules: remove
+	old 4.03.00.02 version
+Thread-Index: AQHOpsFK5j5twB2ZCkG4LvwuoiWfDJmwiVMAgAImvACAAZdysA==
+Date: Tue, 3 Sep 2013 17:29:00 +0000
+Message-ID: <8F29D6B095ED194EA1980491A5E029710C544A11@DFLE08.ent.ti.com>
+References: <1378005180-30928-1-git-send-email-denis@denix.org>
+	<1378005180-30928-5-git-send-email-denis@denix.org>
+	<20130901031528.GA18322@edge> <52247F4E.6030404@gmail.com>
+In-Reply-To: <52247F4E.6030404@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
+MIME-Version: 1.0
+Subject: Re: [PATCH 5/5] libgles-omap3, omap3-sgx-modules: remove old 4.03.00.02 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,113 +41,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2013 17:08:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 03 Sep 2013 17:29:05 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Module: meta-ti
-Branch: dylan
-Commit: 84576bfff1207eabe9479ab20fcdcc45a9d28763
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=84576bfff1207eabe9479ab20fcdcc45a9d28763
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Aug 31 23:11:32 2013 -0400
 
-libgles-omap3, omap3-sgx-modules: remove old 4.03.00.02 version
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- .../omap3-sgx-modules_1.6.16.3977.bb               |   45 --------------------
- .../libgles/libgles-omap3_4.03.00.02.bb            |   30 -------------
- 2 files changed, 0 insertions(+), 75 deletions(-)
-
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-deleted file mode 100644
-index 4f9be7b..0000000
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_1.6.16.3977.bb
-+++ /dev/null
-@@ -1,45 +0,0 @@
--DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=21228a42e27d1d104b31a83f7c9da935"
--
--TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
--require ../../recipes-ti/includes/ti-eula-unpack.inc
--
--SGXPV = "4_03_00_02"
--IMGPV = "1.6.16.3977"
--BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
--
--inherit module
--
--MACHINE_KERNEL_PR_append = "b"
--PR = "${MACHINE_KERNEL_PR}"
--
--SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
--           file://Compile-fixes-for-38-kernel.patch \
--           file://kernel-30.patch \
--          "
--SRC_URI[md5sum] = "ff8c1f2b8e4cb42f4ced6a613b081ada"
--SRC_URI[sha256sum] = "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036423458c8d75255"
--TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
--S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
--
--PVRBUILD = "release"
--export KERNELDIR = "${STAGING_KERNEL_DIR}"
--
--INHIBIT_PACKAGE_STRIP = "1"
--
--TI_PLATFORM_omap3 = "omap3630"
--TI_PLATFORM_ti816x = "ti81xx"
--
--MODULESLOCATION_omap3 = "dc_omap3430_linux"
--MODULESLOCATION_ti816x = "dc_ti81xx_linux"
--
--MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM}"
--
--do_install() {
--	mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
--	cp ${S}/pvrsrvkm.ko \
--	   ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
--	   ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
--	   ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
--}
-diff --git a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb b/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-deleted file mode 100644
-index e98fe02..0000000
---- a/recipes-graphics/libgles/libgles-omap3_4.03.00.02.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
--BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
--
--ES2LOCATION = "${S}/gfx_rel_es2.x"
--ES3LOCATION = "${S}/gfx_rel_es3.x"
--ES5LOCATION = "${S}/gfx_rel_es5.x"
--ES6LOCATION = "${S}/gfx_rel_es6.x"
--
--require libgles-omap3.inc
--
--# download required binary distribution from:
--# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
--# see libgles-omap3.inc for detailed installation instructions
--
--SGXPV = "4_03_00_02"
--IMGPV = "1.6.16.3977"
--BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
--TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
--
--SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
--                   file://cputype \
--                   file://rc.pvr \
--                   file://sample.desktop \
--                   file://99-bufferclass.rules  \
--"
--
--SRC_URI[md5sum] = "ff8c1f2b8e4cb42f4ced6a613b081ada"
--SRC_URI[sha256sum] = "cdb0bd3964e107733d632aa8224e0537b05c1ffac34befc036423458c8d75255"
--
--S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
-
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Tasslehoff Kjappfot
+> Sent: Monday, September 02, 2013 7:07 AM
+> To: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCH 5/5] libgles-omap3, omap3-sgx-modules: remo=
+ve
+> old 4.03.00.02 version
+>=20
+> On 09/01/2013 05:15 AM, Denys Dmytriyenko wrote:
+> > BTW, consider this an RFC for removing the next 4.05.00.03 version as
+> > well - I know some people are still using it, so please speak up.
+> >
+>=20
+> We're using 4.05.00.03 for our OMAP3530 board, because that is the latest=
+ one
+> we've tried that actually works :)
+>=20
+> Last time I tried newer versions there were "instant lockup" problems.
+> Are any of the newer versions compatible with OMAP3530 now?
+[Franklin] The Graphics SDK was validated on am3517  using a 2.6.37 kernel.=
+ I've successfully used 04.08.00.02 without any problems. What kernel versi=
+on are you using?
+>=20
+> - Tasslehoff
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
