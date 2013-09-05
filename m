@@ -1,40 +1,34 @@
-Return-Path: <tasskjapp@gmail.com>
-Received: from mail-la0-f49.google.com (mail-la0-f49.google.com
-	[209.85.215.49])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A841DE013AB
-	for <meta-ti@yoctoproject.org>; Tue,  3 Sep 2013 22:39:52 -0700 (PDT)
-Received: by mail-la0-f49.google.com with SMTP id ev20so5316239lab.8
-	for <meta-ti@yoctoproject.org>; Tue, 03 Sep 2013 22:39:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=V5ktgSA4l09wlkf3ssWbStk9yFmlqse1o88X0J0z+Ag=;
-	b=CZTSMULRwiPcBiWGLph+2q50+5vf8/jioLUC9YDPnasrpT9grz+JYX5Qm59qqYRSG+
-	k+V7WqsVAjdJw7HINixXwMJC72/W1cAJVVKPATOOxHkRt9VLSdVgMXDITpvWoP+UoOaW
-	CUGChI3W1yEkuJsugVQ8pgcHSqp5Mssu2Spb45q+urWUH55iLymFC1qCLhdlQUAfi7sz
-	BAEcs+rz/XA7OUn2E3gRgrzbwCqmKiiAPRvegjwQR97Z4eM5gqp0V93irWjbG0M0IPo8
-	efmG2/OqTW3FIuModA/b5ga/rl0tJ6j9jqddIwD5aA41ds/ijDKYIgmK3qRhAsIGnCBO
-	wknA==
-X-Received: by 10.152.19.97 with SMTP id d1mr310101lae.34.1378273190680;
-	Tue, 03 Sep 2013 22:39:50 -0700 (PDT)
-Received: from [192.168.0.209] ([77.40.182.98])
-	by mx.google.com with ESMTPSA id f17sm9704441lbo.12.1969.12.31.16.00.00
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 03 Sep 2013 22:39:49 -0700 (PDT)
-Message-ID: <5226C7A4.3050203@gmail.com>
-Date: Wed, 04 Sep 2013 07:39:48 +0200
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130803 Thunderbird/17.0.8
+Return-Path: <mrinmayee@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56653E01415
+	for <meta-ti@yoctoproject.org>; Wed,  4 Sep 2013 22:14:37 -0700 (PDT)
+Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r855EZC6007185
+	for <meta-ti@yoctoproject.org>; Thu, 5 Sep 2013 00:14:35 -0500
+Received: from DBDE73.ent.ti.com (dbde73.ent.ti.com [172.24.171.98])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r855EVdF011583
+	for <meta-ti@yoctoproject.org>; Thu, 5 Sep 2013 00:14:33 -0500
+Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
+	DBDE73.ent.ti.com ([fe80::bc19:dc43:44da:7415%27]) with mapi id
+	14.02.0342.003; Thu, 5 Sep 2013 13:14:31 +0800
+From: "Hingolikar, Mrinmayee" <mrinmayee@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCHv2] libgles: Added prebuilt userspace
+	libraries for graphics acceleration
+Thread-Index: AQHOjEQxE6RLQjA1Q0Se/WVmrlj7R5mcF9NggACroAD//4QkAIAXtNgAgALYPYA=
+Date: Thu, 5 Sep 2013 05:14:30 +0000
+Message-ID: <CF956B779D819D41BBC043B7082161D5451C23@DBDE04.ent.ti.com>
+References: <CF956B779D819D41BBC043B7082161D54445D0@DBDE04.ent.ti.com>
+	<7D46E86EC0A8354091174257B2FED101596CBD7C@DLEE11.ent.ti.com>
+	<20130819154524.GC7460@edge> <20130903174638.GH22235@edge>
+In-Reply-To: <20130903174638.GH22235@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.24.170.142]
 MIME-Version: 1.0
-To: "Cooper Jr., Franklin" <fcooper@ti.com>
-References: <1378005180-30928-1-git-send-email-denis@denix.org>
-	<1378005180-30928-5-git-send-email-denis@denix.org>
-	<20130901031528.GA18322@edge> <52247F4E.6030404@gmail.com>
-	<8F29D6B095ED194EA1980491A5E029710C544A11@DFLE08.ent.ti.com>
-In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C544A11@DFLE08.ent.ti.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 5/5] libgles-omap3, omap3-sgx-modules: remove old 4.03.00.02 version
+Subject: Re: [PATCHv2] libgles: Added prebuilt userspace libraries for graphics acceleration
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,44 +41,123 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Sep 2013 05:39:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Sep 2013 05:14:40 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 09/03/2013 07:29 PM, Cooper Jr., Franklin wrote:
->
->
->> -----Original Message-----
->> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->> bounces@yoctoproject.org] On Behalf Of Tasslehoff Kjappfot
->> Sent: Monday, September 02, 2013 7:07 AM
->> To: meta-ti@yoctoproject.org
->> Subject: Re: [meta-ti] [PATCH 5/5] libgles-omap3, omap3-sgx-modules: remove
->> old 4.03.00.02 version
->>
->> On 09/01/2013 05:15 AM, Denys Dmytriyenko wrote:
->>> BTW, consider this an RFC for removing the next 4.05.00.03 version as
->>> well - I know some people are still using it, so please speak up.
->>>
->>
->> We're using 4.05.00.03 for our OMAP3530 board, because that is the latest one
->> we've tried that actually works :)
->>
->> Last time I tried newer versions there were "instant lockup" problems.
->> Are any of the newer versions compatible with OMAP3530 now?
-> [Franklin] The Graphics SDK was validated on am3517  using a 2.6.37 kernel. I've successfully used 04.08.00.02 without any problems. What kernel version are you using?
->>
->> - Tasslehoff
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
+Hi,
 
-We're using 2.6.39. When I had the issues I asked on #beagle, and among 
-the responses was there currently was a problem with "instant lockup on 
-omap3530 ES3.x", and that "hopefully the 1.7 based ddk will fix it". 
-That was about a year ago. I'm not sure if what I tested on then was a 
-4.08.x.x version.
+I had sent a v3 patch for this earlier. Resending it if missed.
 
-- Tasslehoff
+Regards,
+Mrinmayee
+
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Dmytriyenko, Denys
+> Sent: Tuesday, September 03, 2013 11:17 PM
+> To: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCHv2] libgles: Added prebuilt userspace
+> libraries for graphics acceleration
+>=20
+> Mrinmayee,
+>=20
+> Ping on this one too.
+>=20
+>=20
+> On Mon, Aug 19, 2013 at 11:45:24AM -0400, Denys Dmytriyenko wrote:
+> > On Mon, Aug 19, 2013 at 03:09:55PM +0000, Maupin, Chase wrote:
+> > > >-----Original Message-----
+> > > >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> > > >bounces@yoctoproject.org] On Behalf Of Hingolikar, Mrinmayee
+> > > >Sent: Sunday, August 18, 2013 11:55 PM
+> > > >To: meta-ti@yoctoproject.org
+> > > >Subject: [meta-ti] [PATCHv2] libgles: Added prebuilt userspace
+> > > >libraries for graphics acceleration
+> > > >
+> > > >
+> > > >Subject: [PATCHv2] libgles: Added prebuilt userspace libraries for
+> > > >graphics acceleration
+> > > >
+> > > >* These libraries are not distributable in source and hence
+> > > >  are available only as binary. They implement OpenGLES 1.x and
+> > > >  OpenGLES 2.x accelerated using SGX 544-MP2 found in OMAP5
+> > > >  class of devices.
+> > > >
+> > > >v2:
+> > > >
+> > > >Addressed Chases's comments:
+> > > >* Updated the PR
+> > > >* Added shasum for the tarball
+> > > >* Removed redundant FILES section.
+> > > >
+> > > >Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+> > > >Signed-off-by: Siddharth Heroor <heroor@ti.com>
+> > > >---
+> > > > .../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb     |   20
+> > > >++++++++++++++++++++
+> > > > 1 file changed, 20 insertions(+)
+> > > > create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-
+> > > >linux_1.9.0.10.bb
+> > > >
+> > > >diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-
+> > > >linux_1.9.0.10.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-
+> > > >linux_1.9.0.10.bb
+> > > >new file mode 100644
+> > > >index 0000000..052f343
+> > > >--- /dev/null
+> > > >+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
+> > > >@@ -0,0 +1,20 @@
+> > > >+DESCRIPTION =3D "Userspace libraries for sgx"
+> > > >+HOMEPAGE =3D "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
+> > > >+LICENSE =3D "TI"
+> > > >+
+> > > >+SRC_URI =3D
+> > > >"http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/
+> > > >gfxsdk/OMAP5_1_09_00_10//exports/omap5-sgx-ddk-um-linux-
+> > > >${PV}.tar.gz;protocol=3Dhttp"
+> > > >+
+> > > >+LIC_FILES_CHKSUM =3D "file://OMAP5-Linux-Graphics-DDK-UM-
+> > > >Manifest.doc;md5=3Dd280df8e94bb2e7b9251c8526078eeb8"
+> > > >+
+> > > >+PR =3D "r0"
+> > > >+
+> > > >+SRC_URI[md5sum] =3D "3cfb875de031098a4c1eeeaf4e442367"
+> > > >+SRC_URI[shasum] =3D "773299242fc72a5837b7e17053123ad55d69723b"
+> > >
+> > > This should be a sha256sum.  So your checksum is too small and you
+> > > need to specify SRC_URI[sh256sum]
+> >
+> > You can also just run a recipe once through bitbake and it will tell
+> > you there are no checksums and provide a handy cut and paste lines to
+> populate them.
+> >
+> >
+> > > >+
+> > > >+S =3D "${WORKDIR}/${PN}-${PV}"
+> > > >+
+> > > >+do_install () {
+> > > >+    oe_runmake install DESTDIR=3D${D} }
+> > > >+
+> > > >+FILES_${PN} +=3D " ${libdir}/gbm/"
+> > > >--
+> > > >1.7.9.5
+> > > >
+> > > >_______________________________________________
+> > > >meta-ti mailing list
+> > > >meta-ti@yoctoproject.org
+> > > >https://lists.yoctoproject.org/listinfo/meta-ti
+> > > _______________________________________________
+> > > meta-ti mailing list
+> > > meta-ti@yoctoproject.org
+> > > https://lists.yoctoproject.org/listinfo/meta-ti
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
