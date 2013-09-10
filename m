@@ -1,32 +1,22 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA314E01554
-	for <meta-ti@yoctoproject.org>; Thu,  5 Sep 2013 04:44:13 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r85BiDkp019849
-	for <meta-ti@yoctoproject.org>; Thu, 5 Sep 2013 06:44:13 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id r85BiCDS023896
-	for <meta-ti@yoctoproject.org>; Thu, 5 Sep 2013 06:44:12 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
-	14.02.0342.003; Thu, 5 Sep 2013 06:44:12 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Hingolikar, Mrinmayee" <mrinmayee@ti.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCHv3] libgles: Added prebuilt userspace
-	libraries for graphics acceleration
-Thread-Index: AQHOnmPlaQN+5orR/kKK6WzlP0oCpJm2sNcwgABsG8A=
-Date: Thu, 5 Sep 2013 11:44:12 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015970890B@DLEE11.ent.ti.com>
-References: <CF956B779D819D41BBC043B7082161D5451C2A@DBDE04.ent.ti.com>
-In-Reply-To: <CF956B779D819D41BBC043B7082161D5451C2A@DBDE04.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
-MIME-Version: 1.0
-Subject: Re: [PATCHv3] libgles: Added prebuilt userspace libraries for graphics acceleration
+Return-Path: <denis@denix.org>
+Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
+	[206.46.173.13])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ACBF3E0156C
+	for <meta-ti@yoctoproject.org>; Mon,  9 Sep 2013 19:02:24 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MSW00GC40AYJTE5@vms173013.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 09 Sep 2013 21:02:02 -0500 (CDT)
+Received: from elrond.denix (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id C49CB20011; Mon,
+	09 Sep 2013 22:01:46 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Mon, 09 Sep 2013 22:01:46 -0400
+Message-id: <1378778506-1004-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH] ti-ocf-crypto-module: let module.bbclass package modules automatically
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,86 +29,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2013 11:44:16 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 10 Sep 2013 02:02:24 -0000
 
+From: Denys Dmytriyenko <denys@ti.com>
 
->-----Original Message-----
->From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->bounces@yoctoproject.org] On Behalf Of Hingolikar, Mrinmayee
->Sent: Thursday, September 05, 2013 12:15 AM
->To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [PATCHv3] libgles: Added prebuilt userspace
->libraries for graphics acceleration
->
->
->* These libraries are not distributable in source and hence
->  are available only as binary. They implement OpenGLES 1.x and
->  OpenGLES 2.x accelerated using SGX 544-MP2 found in OMAP5
->  class of devices.
->
->v2:
->
->Addressed Chases's comments:
->* Updated the PR
->* Added shasum for the tarball
->* Removed redundant FILES section
->
->v3:
->*Replaced shasum by sha256sum
->
->Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
->---
-> .../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb     |   20
->++++++++++++++++++++
-> 1 file changed, 20 insertions(+)
-> create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-
->linux_1.9.0.10.bb
->
->diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-
->linux_1.9.0.10.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-
->linux_1.9.0.10.bb
->new file mode 100644
->index 0000000..15d5be0
->--- /dev/null
->+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
->@@ -0,0 +1,20 @@
->+DESCRIPTION =3D "Userspace libraries for sgx"
->+HOMEPAGE =3D "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
->+LICENSE =3D "TI"
->+
->+SRC_URI =3D
->"http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/
->gfxsdk/OMAP5_1_09_00_10//exports/omap5-sgx-ddk-um-linux-
->${PV}.tar.gz;protocol=3Dhttp"
->+
->+LIC_FILES_CHKSUM =3D "file://OMAP5-Linux-Graphics-DDK-UM-
->Manifest.doc;md5=3Dd280df8e94bb2e7b9251c8526078eeb8"
+The new method is to automatically package modules into kernel-module-<modname>
+and make the custom name depend on the standard unified one. Messing with
+FILES_${PN} usually causes problems, so avoid it and let module.bbclass do
+it's magic.
 
-I still have a question about a manifest acting as a license file.  Also is=
- the LICENSE value of "TI" cleared through OSRB?
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-bsp/ti-ocf-crypto-module/ti-ocf-crypto-module_1.0.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
->+
->+PR =3D "r0"
->+
->+SRC_URI[md5sum] =3D "3cfb875de031098a4c1eeeaf4e442367"
->+SRC_URI[sha256sum] =3D
->"20b849088c0fd3ee5dd6bad8ddf16fb2b3267aa053cf3488c762fbc72f22489a"
->+
->+S =3D "${WORKDIR}/${PN}-${PV}"
->+
->+do_install () {
->+    oe_runmake install DESTDIR=3D${D}
->+}
->+
->+FILES_${PN} +=3D " ${libdir}/gbm/"
->--
->1.7.9.5
->
->_______________________________________________
->meta-ti mailing list
->meta-ti@yoctoproject.org
->https://lists.yoctoproject.org/listinfo/meta-ti
+diff --git a/recipes-bsp/ti-ocf-crypto-module/ti-ocf-crypto-module_1.0.bb b/recipes-bsp/ti-ocf-crypto-module/ti-ocf-crypto-module_1.0.bb
+index ece63d0..ad1d5ef 100644
+--- a/recipes-bsp/ti-ocf-crypto-module/ti-ocf-crypto-module_1.0.bb
++++ b/recipes-bsp/ti-ocf-crypto-module/ti-ocf-crypto-module_1.0.bb
+@@ -19,7 +19,7 @@ S = "${WORKDIR}/trunk"
+ 
+ inherit module
+ 
+-MACHINE_KERNEL_PR_append = "a+svnr${SRCPV}"
++MACHINE_KERNEL_PR_append = "b+svnr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ EXTRA_OEMAKE += "KERNEL_DIR=${STAGING_KERNEL_DIR}"
+@@ -32,5 +32,3 @@ do_install () {
+         install -d ${D}/lib/modules/${KERNEL_VERSION}/crypto/ocf/
+         install -m 0755 ${S}/ocf_omap3_cryptok.ko ${D}/lib/modules/${KERNEL_VERSION}/crypto/ocf/
+ }
+-
+-FILES_${PN} = "/lib/modules/${KERNEL_VERSION}/crypto/ocf/ocf_omap3_cryptok.ko"
+-- 
+1.8.3.2
+
 
