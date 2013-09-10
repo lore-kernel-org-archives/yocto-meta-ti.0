@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF593E005A3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D097DE013B0
 	for <meta-ti@yoctoproject.org>; Tue, 10 Sep 2013 10:42:12 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F167752A19; Tue, 10 Sep 2013 17:42:10 +0000 (UTC)
+	id DE6B152A68; Tue, 10 Sep 2013 17:42:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130910174210.F167752A19@arago-project.org>
+Message-Id: <20130910174210.DE6B152A68@arago-project.org>
 Date: Tue, 10 Sep 2013 17:42:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : ti-ocf-crypto-module: let module. bbclass package modules automatically
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 10 Sep 2013 17:42:14 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: f3c7afb5a3f762894fb0476081d862cb3d54e2dd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f3c7afb5a3f762894fb0476081d862cb3d54e2dd
+Branch: dylan
+Commit: e2748c6cb20bb9cbeecb9aecd8ecb3061787cdab
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e2748c6cb20bb9cbeecb9aecd8ecb3061787cdab
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Sep  9 21:57:18 2013 -0400
