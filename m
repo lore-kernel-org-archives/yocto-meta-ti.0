@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 32394E005B3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 33699E01404
 	for <meta-ti@yoctoproject.org>; Thu, 12 Sep 2013 08:25:20 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F13E852A65; Thu, 12 Sep 2013 15:25:19 +0000 (UTC)
+	id BE0A4529E4; Thu, 12 Sep 2013 15:25:19 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130912152519.F13E852A65@arago-project.org>
+Message-Id: <20130912152519.BE0A4529E4@arago-project.org>
 Date: Thu, 12 Sep 2013 15:25:19 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : ti-pru-sw-edma-driver: let module. bbclass package modules automatically
@@ -26,9 +26,9 @@ X-List-Received-Date: Thu, 12 Sep 2013 15:25:22 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: ed4ebd0b7c7a4fe24601144f03c4ecb438128698
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ed4ebd0b7c7a4fe24601144f03c4ecb438128698
+Branch: dylan
+Commit: c517bb704348de8386d2f76c9fa4154f3aaf9382
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c517bb704348de8386d2f76c9fa4154f3aaf9382
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Sep 11 22:18:27 2013 -0400
