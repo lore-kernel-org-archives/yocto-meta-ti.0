@@ -1,22 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B90BE0122C
-	for <meta-ti@yoctoproject.org>; Wed, 11 Sep 2013 19:20:45 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MSZ0044NQHQCPT1@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 11 Sep 2013 21:20:30 -0500 (CDT)
-Received: from elrond.denix (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 7611D20426; Wed,
-	11 Sep 2013 22:20:14 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 32394E005B3
+	for <meta-ti@yoctoproject.org>; Thu, 12 Sep 2013 08:25:20 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id F13E852A65; Thu, 12 Sep 2013 15:25:19 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Wed, 11 Sep 2013 22:20:13 -0400
-Message-id: <1378952413-6388-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH] ti-pru-sw-edma-driver: let module.bbclass package modules automatically
+Message-Id: <20130912152519.F13E852A65@arago-project.org>
+Date: Thu, 12 Sep 2013 15:25:19 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : ti-pru-sw-edma-driver: let module. bbclass package modules automatically
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,9 +22,18 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2013 02:20:47 -0000
+X-List-Received-Date: Thu, 12 Sep 2013 15:25:22 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: ed4ebd0b7c7a4fe24601144f03c4ecb438128698
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ed4ebd0b7c7a4fe24601144f03c4ecb438128698
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Sep 11 22:18:27 2013 -0400
+
+ti-pru-sw-edma-driver: let module.bbclass package modules automatically
 
 The new method is to automatically package modules into kernel-module-<modname>
 and make the custom name depend on the standard unified one. Messing with
@@ -39,9 +41,11 @@ FILES_${PN} usually causes problems, so avoid it and let module.bbclass do
 it's magic.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+
+ recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb |    4 +---
+ 1 files changed, 1 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb b/recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb
 index c7fdfd1..1a418d7 100644
@@ -62,7 +66,5 @@ index c7fdfd1..1a418d7 100644
  }
 -
 -FILES_${PN} = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/pru/edmautils.ko"
--- 
-1.8.3.2
 
 
