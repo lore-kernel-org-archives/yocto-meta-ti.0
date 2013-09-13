@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1918DE0158B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1A501E0158F
 	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2013 09:08:38 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 79ED952AA8; Fri, 13 Sep 2013 16:08:37 +0000 (UTC)
+	id 9B69252AAC; Fri, 13 Sep 2013 16:08:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130913160837.79ED952AA8@arago-project.org>
+Message-Id: <20130913160837.9B69252AAC@arago-project.org>
 Date: Fri, 13 Sep 2013 16:08:37 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : omap3-sgx-modules: add automatic selection between softfp and hardfp binaries
+Subject: Denys Dmytriyenko : libgles-omap3: add automatic selection between softfp and hardfp binaries
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,13 +27,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: bb8ab63ea937951ef4e53b60237319df9bd7822b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bb8ab63ea937951ef4e53b60237319df9bd7822b
+Commit: 499fba5e6c634c061d377971a73d1e0116676257
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=499fba5e6c634c061d377971a73d1e0116676257
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Sep 12 21:23:01 2013 -0400
+Date:   Thu Sep 12 21:34:47 2013 -0400
 
-omap3-sgx-modules: add automatic selection between softfp and hardfp binaries
+libgles-omap3: add automatic selection between softfp and hardfp binaries
 
 This is based on the work by Franklin Cooper, with following changes:
 * Cleanup and simplify the logic
@@ -55,28 +55,36 @@ Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- .../omap3-sgx-modules-x11_4.09.00.01.bb            |   18 ++++++++++++++----
- .../omap3-sgx-modules_4.09.00.01.bb                |   20 ++++++++++++++++----
- 2 files changed, 30 insertions(+), 8 deletions(-)
+ .../libgles/libgles-omap3-x11_4.09.00.01.bb        |   23 +++++++++++++++----
+ .../libgles/libgles-omap3_4.09.00.01.bb            |   23 +++++++++++++++----
+ 2 files changed, 36 insertions(+), 10 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
-index 9134e61..fd79818 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
-@@ -7,19 +7,29 @@ require ../../recipes-ti/includes/ti-eula-unpack.inc
+diff --git a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
+index 6b9c561..df84f9b 100644
+--- a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
+@@ -2,11 +2,11 @@ require libgles-omap3-x11.inc
+ 
+ LICENSE = "TSPA"
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
++BINLOCATION_omap3 = "${S}/gfx_rel_es3.x"
+ BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+ BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
+ BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
+@@ -20,8 +20,20 @@ PVR_INIT = "pvrsrvctl"
  
  SGXPV = "4_09_00_01"
  IMGPV = "1.9.2188537"
 -BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
- 
- inherit module
- 
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- PR = "${MACHINE_KERNEL_PR}"
- 
- DEFAULT_PREFERENCE = "-1"
- 
++
+ TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
++
 +# Select the corresponding hardfp/softfp filename and checksums based on tune flags
 +BINFILE_SOFTFP = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
 +MD5SUM_SOFTFP = "bd35e9d8843aff3a2aca9d41e7db1c7d"
@@ -88,33 +96,47 @@ index 9134e61..fd79818 100644
 +
 +BINFILE = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${BINFILE_HARDFP}', '${BINFILE_SOFTFP}', d)}"
 +
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE}"
- 
+ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
+            file://cputype \
+            file://rc.pvr \
+@@ -29,8 +41,9 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
+            file://sample.desktop \
+            file://99-bufferclass.rules  \
+ "
 -SRC_URI[md5sum] = "bd35e9d8843aff3a2aca9d41e7db1c7d"
 -SRC_URI[sha256sum] = "eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249247647"
++
 +SRC_URI[md5sum] = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
 +SRC_URI[sha256sum] = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}', d)}"
  
- TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
- S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-index 399374d..1c8718c 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-@@ -7,19 +7,29 @@ require ../../recipes-ti/includes/ti-eula-unpack.inc
+ S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
+ 
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+index a4da2f9..6899cfc 100644
+--- a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+@@ -2,11 +2,11 @@ require libgles-omap3-no-x.inc
+ 
+ LICENSE = "TSPA"
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
++BINLOCATION_omap3 = "${S}/gfx_rel_es3.x"
+ BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+ BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
+ BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
+@@ -20,15 +20,28 @@ PVR_INIT = "pvrsrvctl"
  
  SGXPV = "4_09_00_01"
  IMGPV = "1.9.2188537"
 -BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
- 
- inherit module
- 
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
- DEFAULT_PREFERENCE = "-1"
- 
++
+ TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
++
 +# Select the corresponding hardfp/softfp filename and checksums based on tune flags
 +BINFILE_SOFTFP = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
 +MD5SUM_SOFTFP = "bd35e9d8843aff3a2aca9d41e7db1c7d"
@@ -126,23 +148,18 @@ index 399374d..1c8718c 100644
 +
 +BINFILE = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${BINFILE_HARDFP}', '${BINFILE_SOFTFP}', d)}"
 +
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE}"
- 
+ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
+            file://cputype \
+            file://rc.pvr \
+            file://99-bufferclass.rules  \
+ "
 -SRC_URI[md5sum] = "bd35e9d8843aff3a2aca9d41e7db1c7d"
 -SRC_URI[sha256sum] = "eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249247647"
++
 +SRC_URI[md5sum] = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
 +SRC_URI[sha256sum] = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}', d)}"
  
- TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
- S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
-@@ -41,6 +51,8 @@ MODULESLOCATION_ti33x = "dc_ti335x_linux"
+ S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
  
- MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=0"
- 
-+MAKE_TARGETS_append_ti33x = " PM_RUNTIME=1"
-+
- do_install() {
-     mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-     cp  ${S}/pvrsrvkm.ko \
 
 
