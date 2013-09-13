@@ -1,33 +1,32 @@
 Return-Path: <chase.maupin@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E9A40E0155F
-	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2013 05:10:31 -0700 (PDT)
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 806B8E0155F
+	for <meta-ti@yoctoproject.org>; Fri, 13 Sep 2013 05:12:22 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8DCAU0i028646;
-	Fri, 13 Sep 2013 07:10:30 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8DCCLqX031636;
+	Fri, 13 Sep 2013 07:12:21 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8DCAToY006851;
-	Fri, 13 Sep 2013 07:10:29 -0500
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8DCCLxb008901;
+	Fri, 13 Sep 2013 07:12:21 -0500
 Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
 	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.02.0342.003; Fri, 13 Sep 2013 07:10:29 -0500
+	14.02.0342.003; Fri, 13 Sep 2013 07:12:21 -0500
 From: "Maupin, Chase" <chase.maupin@ti.com>
 To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
 	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH 2/2] libgles-omap3: add automatic selection
-	between softfp and hardfp binaries
-Thread-Index: AQHOsDDfPwfSA3x5TEudIUXjvSQqaZnDlATQ
-Date: Fri, 13 Sep 2013 12:10:29 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015972722F@DLEE11.ent.ti.com>
+Thread-Topic: [meta-ti] [PATCH 1/2] omap3-sgx-modules: add automatic
+	selection between softfp and hardfp binaries
+Thread-Index: AQHOsDDsU0KI7Zq5ukK7uWVXLSUpf5nDlF0A
+Date: Fri, 13 Sep 2013 12:12:20 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015972726C@DLEE11.ent.ti.com>
 References: <1379042687-25413-1-git-send-email-denis@denix.org>
-	<1379042687-25413-2-git-send-email-denis@denix.org>
-In-Reply-To: <1379042687-25413-2-git-send-email-denis@denix.org>
+In-Reply-To: <1379042687-25413-1-git-send-email-denis@denix.org>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/2] libgles-omap3: add automatic selection between softfp and hardfp binaries
+Subject: Re: [PATCH 1/2] omap3-sgx-modules: add automatic selection between softfp and hardfp binaries
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,20 +39,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2013 12:10:32 -0000
+X-List-Received-Date: Fri, 13 Sep 2013 12:12:23 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-Acked-by: Chase Maupin <chase.maupin@ti.com>
+You added a MAKE_TARGETS for PM_RUNTIME but I don't see a note saying why i=
+n the commit message.
 
+Aside from that
+
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 >-----Original Message-----
 >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
 >bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
 >Sent: Thursday, September 12, 2013 10:25 PM
 >To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [PATCH 2/2] libgles-omap3: add automatic
+>Subject: [meta-ti] [PATCH 1/2] omap3-sgx-modules: add automatic
 >selection between softfp and hardfp binaries
 >
 >From: Denys Dmytriyenko <denys@ti.com>
@@ -80,40 +83,35 @@ Acked-by: Chase Maupin <chase.maupin@ti.com>
 >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 >Cc: Franklin S. Cooper Jr <fcooper@ti.com>
 >---
-> .../libgles/libgles-omap3-x11_4.09.00.01.bb        | 23
->+++++++++++++++++-----
-> .../libgles/libgles-omap3_4.09.00.01.bb            | 23
->+++++++++++++++++-----
-> 2 files changed, 36 insertions(+), 10 deletions(-)
+> .../omap3-sgx-modules-x11_4.09.00.01.bb              | 18
+>++++++++++++++----
+> .../powervr-drivers/omap3-sgx-modules_4.09.00.01.bb  | 20
+>++++++++++++++++----
+> 2 files changed, 30 insertions(+), 8 deletions(-)
 >
->diff --git a/recipes-graphics/libgles/libgles-omap3-
->x11_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3-
+>diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-
+>x11_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules-
 >x11_4.09.00.01.bb
->index 6b9c561..df84f9b 100644
->--- a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
->+++ b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
->@@ -2,11 +2,11 @@ require libgles-omap3-x11.inc
->
-> LICENSE =3D "TSPA"
->
->-PR =3D "${INC_PR}.0"
->+PR =3D "${INC_PR}.1"
->
-> DEFAULT_PREFERENCE =3D "-1"
->
->-BINLOCATION_omap3  =3D "${S}/gfx_rel_es3.x"
->+BINLOCATION_omap3 =3D "${S}/gfx_rel_es3.x"
-> BINLOCATION_ti816x =3D "${S}/gfx_rel_es6.x"
-> BINLOCATION_ti814x =3D "${S}/gfx_rel_es6.x"
-> BINLOCATION_ti33x =3D "${S}/gfx_rel_es8.x"
->@@ -20,8 +20,20 @@ PVR_INIT =3D "pvrsrvctl"
+>index 9134e61..fd79818 100644
+>--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules-
+>x11_4.09.00.01.bb
+>+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-
+>x11_4.09.00.01.bb
+>@@ -7,19 +7,29 @@ require ../../recipes-ti/includes/ti-eula-
+>unpack.inc
 >
 > SGXPV =3D "4_09_00_01"
 > IMGPV =3D "1.9.2188537"
 >-BINFILE =3D "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
->+
-> TI_BIN_UNPK_WDEXT :=3D "/Graphics_SDK_${SGXPV}"
->+
+>
+> inherit module
+>
+>-MACHINE_KERNEL_PR_append =3D "b"
+>+MACHINE_KERNEL_PR_append =3D "c"
+> PR =3D "${MACHINE_KERNEL_PR}"
+>
+> DEFAULT_PREFERENCE =3D "-1"
+>
 >+# Select the corresponding hardfp/softfp filename and checksums
 >based on tune flags
 >+BINFILE_SOFTFP =3D
@@ -133,18 +131,11 @@ Acked-by: Chase Maupin <chase.maupin@ti.com>
 >+
 > SRC_URI =3D "http://software-
 >dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}
->/exports/${BINFILE} \
->            file://cputype \
->            file://rc.pvr \
->@@ -29,8 +41,9 @@ SRC_URI =3D "http://software-
->dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
->            file://sample.desktop \
->            file://99-bufferclass.rules  \
-> "
+>/exports/${BINFILE}"
+>
 >-SRC_URI[md5sum] =3D "bd35e9d8843aff3a2aca9d41e7db1c7d"
 >-SRC_URI[sha256sum] =3D
 >"eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249247647"
->+
 >+SRC_URI[md5sum] =3D "${@base_contains('TUNE_FEATURES',
 >'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}',
 >d)}"
@@ -152,35 +143,29 @@ Acked-by: Chase Maupin <chase.maupin@ti.com>
 >'callconvention-hard', '${SHA256SUM_HARDFP}',
 >'${SHA256SUM_SOFTFP}', d)}"
 >
-> S =3D "${WORKDIR}/Graphics_SDK_${SGXPV}"
->
->diff --git a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
->b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
->index a4da2f9..6899cfc 100644
->--- a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
->+++ b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
->@@ -2,11 +2,11 @@ require libgles-omap3-no-x.inc
->
-> LICENSE =3D "TSPA"
->
->-PR =3D "${INC_PR}.0"
->+PR =3D "${INC_PR}.1"
->
-> DEFAULT_PREFERENCE =3D "-1"
->
->-BINLOCATION_omap3  =3D "${S}/gfx_rel_es3.x"
->+BINLOCATION_omap3 =3D "${S}/gfx_rel_es3.x"
-> BINLOCATION_ti816x =3D "${S}/gfx_rel_es6.x"
-> BINLOCATION_ti814x =3D "${S}/gfx_rel_es6.x"
-> BINLOCATION_ti33x =3D "${S}/gfx_rel_es8.x"
->@@ -20,15 +20,28 @@ PVR_INIT =3D "pvrsrvctl"
+> TI_BIN_UNPK_WDEXT=3D"/Graphics_SDK_${SGXPV}"
+> S =3D "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
+>diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-
+>modules_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-
+>modules_4.09.00.01.bb
+>index 399374d..1c8718c 100644
+>--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
+>+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
+>@@ -7,19 +7,29 @@ require ../../recipes-ti/includes/ti-eula-
+>unpack.inc
 >
 > SGXPV =3D "4_09_00_01"
 > IMGPV =3D "1.9.2188537"
 >-BINFILE =3D "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
->+
-> TI_BIN_UNPK_WDEXT :=3D "/Graphics_SDK_${SGXPV}"
->+
+>
+> inherit module
+>
+>-MACHINE_KERNEL_PR_append =3D "a"
+>+MACHINE_KERNEL_PR_append =3D "b"
+> PR =3D "${MACHINE_KERNEL_PR}"
+>
+> DEFAULT_PREFERENCE =3D "-1"
+>
 >+# Select the corresponding hardfp/softfp filename and checksums
 >based on tune flags
 >+BINFILE_SOFTFP =3D
@@ -200,15 +185,11 @@ Acked-by: Chase Maupin <chase.maupin@ti.com>
 >+
 > SRC_URI =3D "http://software-
 >dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}
->/exports/${BINFILE} \
->            file://cputype \
->            file://rc.pvr \
->            file://99-bufferclass.rules  \
-> "
+>/exports/${BINFILE}"
+>
 >-SRC_URI[md5sum] =3D "bd35e9d8843aff3a2aca9d41e7db1c7d"
 >-SRC_URI[sha256sum] =3D
 >"eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249247647"
->+
 >+SRC_URI[md5sum] =3D "${@base_contains('TUNE_FEATURES',
 >'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}',
 >d)}"
@@ -216,8 +197,19 @@ Acked-by: Chase Maupin <chase.maupin@ti.com>
 >'callconvention-hard', '${SHA256SUM_HARDFP}',
 >'${SHA256SUM_SOFTFP}', d)}"
 >
-> S =3D "${WORKDIR}/Graphics_SDK_${SGXPV}"
+> TI_BIN_UNPK_WDEXT=3D"/Graphics_SDK_${SGXPV}"
+> S =3D "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
+>@@ -41,6 +51,8 @@ MODULESLOCATION_ti33x =3D "dc_ti335x_linux"
 >
+> MAKE_TARGETS =3D " BUILD=3D${PVRBUILD} TI_PLATFORM=3D${TI_PLATFORM}
+>SUPPORT_XORG=3D0"
+>
+>+MAKE_TARGETS_append_ti33x =3D " PM_RUNTIME=3D1"
+>+
+> do_install() {
+>     mkdir -p
+>${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+>     cp  ${S}/pvrsrvkm.ko \
 >--
 >1.8.3.2
 >
