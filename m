@@ -1,22 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
-	[206.46.173.3])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A31D2E015A4
-	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2013 14:10:40 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MT800BJMLH9KTC1@vms173003.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 16 Sep 2013 16:10:22 -0500 (CDT)
-Received: from elrond.denix (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 9256D20091; Mon,
-	16 Sep 2013 17:10:21 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6ABA9E015A8
+	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2013 15:05:44 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 27886529D3; Mon, 16 Sep 2013 22:05:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 16 Sep 2013 17:10:20 -0400
-Message-id: <1379365820-6369-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH] ligles-omap3, omap3-sgx-modules: correct checksum assignment
+Message-Id: <20130916220543.27886529D3@arago-project.org>
+Date: Mon, 16 Sep 2013 22:05:42 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : ligles-omap3, omap3-sgx-modules: correct checksum assignment
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,20 +22,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2013 21:10:40 -0000
+X-List-Received-Date: Mon, 16 Sep 2013 22:05:45 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: dylan
+Commit: c187c2c590a2557e58c1d4cf47584aa98695aabc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c187c2c590a2557e58c1d4cf47584aa98695aabc
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Sep 16 17:06:35 2013 -0400
+
+ligles-omap3, omap3-sgx-modules: correct checksum assignment
 
 Checksums are handled as var attributes and require immediate expansion,
 so use := operation as in the original patches, that got lost in the update.
 Otherwise do_fetch will fail to validate the checksums.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb | 6 +++---
- recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb     | 6 +++---
- recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb        | 6 +++---
- recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb            | 6 +++---
+
+ .../omap3-sgx-modules-x11_4.09.00.01.bb            |    6 +++---
+ .../omap3-sgx-modules_4.09.00.01.bb                |    6 +++---
+ .../libgles/libgles-omap3-x11_4.09.00.01.bb        |    6 +++---
+ .../libgles/libgles-omap3_4.09.00.01.bb            |    6 +++---
  4 files changed, 12 insertions(+), 12 deletions(-)
 
 diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
@@ -141,7 +145,5 @@ index 6899cfc..d094b5c 100644
  
  S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
  
--- 
-1.8.3.2
 
 
