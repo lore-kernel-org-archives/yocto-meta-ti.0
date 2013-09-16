@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6ABA9E015A8
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BFA0E015AA
 	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2013 15:05:44 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 27886529D3; Mon, 16 Sep 2013 22:05:42 +0000 (UTC)
+	id C708252998; Mon, 16 Sep 2013 22:05:43 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130916220543.27886529D3@arago-project.org>
-Date: Mon, 16 Sep 2013 22:05:42 +0000 (UTC)
+Message-Id: <20130916220543.C708252998@arago-project.org>
+Date: Mon, 16 Sep 2013 22:05:43 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : ligles-omap3, omap3-sgx-modules: correct checksum assignment
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Mon, 16 Sep 2013 22:05:45 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: c187c2c590a2557e58c1d4cf47584aa98695aabc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c187c2c590a2557e58c1d4cf47584aa98695aabc
+Branch: master
+Commit: 384f3c57d3263cece1c156ffc3be83598ef83a19
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=384f3c57d3263cece1c156ffc3be83598ef83a19
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Sep 16 17:06:35 2013 -0400
