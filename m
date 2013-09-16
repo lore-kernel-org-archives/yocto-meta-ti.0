@@ -1,34 +1,31 @@
-Return-Path: <prabu@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D8BD7E014EA
-	for <meta-ti@yoctoproject.org>; Sun, 15 Sep 2013 19:33:18 -0700 (PDT)
-Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8G2XFix005883
-	for <meta-ti@yoctoproject.org>; Sun, 15 Sep 2013 21:33:16 -0500
-Received: from DBDE73.ent.ti.com (dbde73.ent.ti.com [172.24.171.98])
-	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8G2XCtD020726
-	for <meta-ti@yoctoproject.org>; Sun, 15 Sep 2013 21:33:14 -0500
-Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
-	DBDE73.ent.ti.com ([fe80::bc19:dc43:44da:7415%27]) with mapi id
-	14.02.0342.003; Mon, 16 Sep 2013 10:33:12 +0800
-From: "Sundareson, Prabindh" <prabu@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>, "Maupin, Chase" <chase.maupin@ti.com>
-Thread-Topic: [meta-ti] [PATCH 1/2] omap3-sgx-modules: add automatic
-	selection between softfp and hardfp binaries
-Thread-Index: AQHOsDDtMsKKWAKGXkKLiwImX2+MH5nDDn8AgABBVQCABFlXwA==
-Date: Mon, 16 Sep 2013 02:33:11 +0000
-Message-ID: <321768C95D21724485BCE784F1BE98473EBCCB81@DBDE04.ent.ti.com>
-References: <1379042687-25413-1-git-send-email-denis@denix.org>
-	<7D46E86EC0A8354091174257B2FED1015972726C@DLEE11.ent.ti.com>
-	<20130913160610.GB13687@edge>
-In-Reply-To: <20130913160610.GB13687@edge>
+Return-Path: <Noor_Ahsan@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5831E014EA
+	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2013 01:30:42 -0700 (PDT)
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1VLUCg-0005CS-3o from Noor_Ahsan@mentor.com 
+	for meta-ti@yoctoproject.org; Mon, 16 Sep 2013 01:30:42 -0700
+Received: from SVR-IES-FEM-05.mgc.mentorg.com ([137.202.0.112]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Mon, 16 Sep 2013 01:30:41 -0700
+Received: from EU-MBX-01.mgc.mentorg.com ([169.254.1.178]) by
+	SVR-IES-FEM-05.mgc.mentorg.com ([137.202.0.112]) with mapi id
+	14.02.0247.003; Mon, 16 Sep 2013 09:30:40 +0100
+From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: build errors for beangleboard
+Thread-Index: Ac6ytodc6aFynDzxR42NID7HebQ6Fg==
+Date: Mon, 16 Sep 2013 08:30:39 +0000
+Message-ID: <365E1805BC95084CBE82381A0B869994DE507B25@EU-MBX-01.mgc.mentorg.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [172.24.170.142]
+x-originating-ip: [137.202.0.76]
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 1/2] omap3-sgx-modules: add automatic selection between softfp and hardfp binaries
+X-OriginalArrivalTime: 16 Sep 2013 08:30:41.0839 (UTC)
+	FILETIME=[07B513F0:01CEB2B7]
+Subject: build errors for beangleboard
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,217 +38,156 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2013 02:33:21 -0000
+X-List-Received-Date: Mon, 16 Sep 2013 08:30:44 -0000
 Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_365E1805BC95084CBE82381A0B869994DE507B25EUMBX01mgcmento_"
+
+--_000_365E1805BC95084CBE82381A0B869994DE507B25EUMBX01mgcmento_
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Hello Denys, Chase,
+Hello,
 
-Does the below reference help ?
+I was using meta-ti master branch with master branch of Yocto. While buildi=
+ng beagleboard I faced following issue
 
-http://processors.wiki.ti.com/index.php/SGXDbg#pvrsrvkm.2C_omaplfb_modules_=
-not_inserted_.26_getting_SrvInit_failed_message
+ERROR: Nothing RPROVIDES 'u-boot-fw-utils' (but /home/noor/SB/master_extern=
+al/meta-ti/recipes-bsp/u-boot/u-boot_2011.12.bb RDEPENDS on or otherwise re=
+quires it)
 
-http://processors.wiki.ti.com/index.php/SGXDbg#SGX_drivers_not_inserted_suc=
-cessfully_.26_observing_sysfs:_cannot_create_duplicate_filename_.27.2Fbus.2=
-Fplatform.2Fdevices.2Fpvrsrvkm.27_message
+Do we have its fix available on master?
 
-regards,
-Prabu
+Noor
 
------Original Message-----
-From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
-.org] On Behalf Of Dmytriyenko, Denys
-Sent: Friday, September 13, 2013 9:36 PM
-To: Maupin, Chase
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [meta-ti] [PATCH 1/2] omap3-sgx-modules: add automatic selecti=
-on between softfp and hardfp binaries
+Noor Ahsan | Engineering Manager Mentor Embedded Linux & Hypervisor
+Mentor Embedded<http://www.mentor.com/embedded>(tm) |5-6-7-8th floors 105  =
+B2 Gulberg III, Ali Tower
+MM Alam Road, Lahore
+P +92 42 36099196 | M +92 300 4448444
+Nucleus<http://www.mentor.com/embedded-software/nucleus/>(r) | Linux<http:/=
+/www.mentor.com/embedded-software/linux/>(r) | Android<http://www.mentor.co=
+m/embedded-software/android/>(tm) | Services<http://www.mentor.com/embedded=
+-software/services/> | UI<http://www.mentor.com/embedded-software/inflexion=
+/> | Multi-OS<http://www.mentor.com/embedded-software/multicore-multi-os>
 
-On Fri, Sep 13, 2013 at 12:12:20PM +0000, Maupin, Chase wrote:
-> You added a MAKE_TARGETS for PM_RUNTIME but I don't see a note saying=20
-> why in the commit message.
-
-Yeah, I noticed that too in the original patch - I remember Prabu was expla=
-ining when this var needs to be set and when doesn't, based on the kernel a=
-nd gfx sdk versions, but don't remember all the details...
+Android is a trademark of Google Inc. Use of this trademark is subject to G=
+oogle Permissions.
+Linux is the registered trademark of Linus Torvalds in the U.S. and other c=
+ountries.
 
 
-> Aside from that
->=20
-> Acked-by: Chase Maupin <chase.maupin@ti.com>
->=20
-> >-----Original Message-----
-> >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-=20
-> >bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
-> >Sent: Thursday, September 12, 2013 10:25 PM
-> >To: meta-ti@yoctoproject.org
-> >Subject: [meta-ti] [PATCH 1/2] omap3-sgx-modules: add automatic=20
-> >selection between softfp and hardfp binaries
-> >
-> >From: Denys Dmytriyenko <denys@ti.com>
-> >
-> >This is based on the work by Franklin Cooper, with following
-> >changes:
-> >* Cleanup and simplify the logic
-> >* Reduce the number of Python calls
-> >* Expand support from Raw to X11 variant
-> >
-> >The original description:
-> >* The Graphics SDK includes some binaries that are prebuilt.
-> >* These prebuilt binaries come in two versions of the Graphics SDK.=20
-> >By default
-> >  the prebuilt binaries are built using a softfp toolchain. A=20
-> >separate hardfp
-> >  Graphics SDK exist that contains binaries that are prebuilt with a=20
-> >hardfp
-> >  toolchain.
-> >* Add support for both by checking to see if the toolchain used in=20
-> >the OE build
-> >  is using a hardfp or softfp toolchain.
-> >
-> >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> >Cc: Franklin S. Cooper Jr <fcooper@ti.com>
-> >---
-> > .../omap3-sgx-modules-x11_4.09.00.01.bb              | 18
-> >++++++++++++++----
-> > .../powervr-drivers/omap3-sgx-modules_4.09.00.01.bb  | 20
-> >++++++++++++++++----
-> > 2 files changed, 30 insertions(+), 8 deletions(-)
-> >
-> >diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-
-> >x11_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules-
-> >x11_4.09.00.01.bb
-> >index 9134e61..fd79818 100644
-> >--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules-
-> >x11_4.09.00.01.bb
-> >+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-
-> >x11_4.09.00.01.bb
-> >@@ -7,19 +7,29 @@ require ../../recipes-ti/includes/ti-eula-
-> >unpack.inc
-> >
-> > SGXPV =3D "4_09_00_01"
-> > IMGPV =3D "1.9.2188537"
-> >-BINFILE =3D "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
-> >
-> > inherit module
-> >
-> >-MACHINE_KERNEL_PR_append =3D "b"
-> >+MACHINE_KERNEL_PR_append =3D "c"
-> > PR =3D "${MACHINE_KERNEL_PR}"
-> >
-> > DEFAULT_PREFERENCE =3D "-1"
-> >
-> >+# Select the corresponding hardfp/softfp filename and checksums
-> >based on tune flags
-> >+BINFILE_SOFTFP =3D
-> >"Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
-> >+MD5SUM_SOFTFP =3D "bd35e9d8843aff3a2aca9d41e7db1c7d"
-> >+SHA256SUM_SOFTFP =3D
-> >"eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249247647"
-> >+
-> >+BINFILE_HARDFP =3D
-> >"Graphics_SDK_setuplinux_${SGXPV}_hardfp_minimal_demos.bin"
-> >+MD5SUM_HARDFP =3D "c9f656dce062d1ab10afffd4dfb71b67"
-> >+SHA256SUM_HARDFP =3D
-> >"dbfeba8e1298f139495816334edec1455e6b49b1e11bd1b2aa0a888e5788bb6b"
-> >+
-> >+BINFILE =3D "${@base_contains('TUNE_FEATURES', 'callconvention-
-> >hard', '${BINFILE_HARDFP}', '${BINFILE_SOFTFP}', d)}"
-> >+
-> > SRC_URI =3D "http://software-
-> >dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}
-> >/exports/${BINFILE}"
-> >
-> >-SRC_URI[md5sum] =3D "bd35e9d8843aff3a2aca9d41e7db1c7d"
-> >-SRC_URI[sha256sum] =3D
-> >"eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249247647"
-> >+SRC_URI[md5sum] =3D "${@base_contains('TUNE_FEATURES',
-> >'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
-> >+SRC_URI[sha256sum] =3D "${@base_contains('TUNE_FEATURES',
-> >'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}',=20
-> >d)}"
-> >
-> > TI_BIN_UNPK_WDEXT=3D"/Graphics_SDK_${SGXPV}"
-> > S =3D "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
-> >diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-
-> >modules_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-
-> >modules_4.09.00.01.bb
-> >index 399374d..1c8718c 100644
-> >--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-> >+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-> >@@ -7,19 +7,29 @@ require ../../recipes-ti/includes/ti-eula-
-> >unpack.inc
-> >
-> > SGXPV =3D "4_09_00_01"
-> > IMGPV =3D "1.9.2188537"
-> >-BINFILE =3D "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
-> >
-> > inherit module
-> >
-> >-MACHINE_KERNEL_PR_append =3D "a"
-> >+MACHINE_KERNEL_PR_append =3D "b"
-> > PR =3D "${MACHINE_KERNEL_PR}"
-> >
-> > DEFAULT_PREFERENCE =3D "-1"
-> >
-> >+# Select the corresponding hardfp/softfp filename and checksums
-> >based on tune flags
-> >+BINFILE_SOFTFP =3D
-> >"Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
-> >+MD5SUM_SOFTFP =3D "bd35e9d8843aff3a2aca9d41e7db1c7d"
-> >+SHA256SUM_SOFTFP =3D
-> >"eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249247647"
-> >+
-> >+BINFILE_HARDFP =3D
-> >"Graphics_SDK_setuplinux_${SGXPV}_hardfp_minimal_demos.bin"
-> >+MD5SUM_HARDFP =3D "c9f656dce062d1ab10afffd4dfb71b67"
-> >+SHA256SUM_HARDFP =3D
-> >"dbfeba8e1298f139495816334edec1455e6b49b1e11bd1b2aa0a888e5788bb6b"
-> >+
-> >+BINFILE =3D "${@base_contains('TUNE_FEATURES', 'callconvention-
-> >hard', '${BINFILE_HARDFP}', '${BINFILE_SOFTFP}', d)}"
-> >+
-> > SRC_URI =3D "http://software-
-> >dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}
-> >/exports/${BINFILE}"
-> >
-> >-SRC_URI[md5sum] =3D "bd35e9d8843aff3a2aca9d41e7db1c7d"
-> >-SRC_URI[sha256sum] =3D
-> >"eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249247647"
-> >+SRC_URI[md5sum] =3D "${@base_contains('TUNE_FEATURES',
-> >'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
-> >+SRC_URI[sha256sum] =3D "${@base_contains('TUNE_FEATURES',
-> >'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}',=20
-> >d)}"
-> >
-> > TI_BIN_UNPK_WDEXT=3D"/Graphics_SDK_${SGXPV}"
-> > S =3D "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
-> >@@ -41,6 +51,8 @@ MODULESLOCATION_ti33x =3D "dc_ti335x_linux"
-> >
-> > MAKE_TARGETS =3D " BUILD=3D${PVRBUILD} TI_PLATFORM=3D${TI_PLATFORM}=20
-> >SUPPORT_XORG=3D0"
-> >
-> >+MAKE_TARGETS_append_ti33x =3D " PM_RUNTIME=3D1"
-> >+
-> > do_install() {
-> >     mkdir -p
-> >${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-> >     cp  ${S}/pvrsrvkm.ko \
-> >--
-> >1.8.3.2
-> >
-> >_______________________________________________
-> >meta-ti mailing list
-> >meta-ti@yoctoproject.org
-> >https://lists.yoctoproject.org/listinfo/meta-ti
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-_______________________________________________
-meta-ti mailing list
-meta-ti@yoctoproject.org
-https://lists.yoctoproject.org/listinfo/meta-ti
 
+--_000_365E1805BC95084CBE82381A0B869994DE507B25EUMBX01mgcmento_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri","sans-serif";}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">Hello,<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">I was using meta-ti master branch with master branch=
+ of Yocto. While building beagleboard I faced following issue<o:p></o:p></p=
+>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">ERROR: Nothing RPROVIDES 'u-boot-fw-utils' (but /hom=
+e/noor/SB/master_external/meta-ti/recipes-bsp/u-boot/u-boot_2011.12.bb RDEP=
+ENDS on or otherwise requires it)<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Do we have its fix available on master?<o:p></o:p></=
+p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Noor<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt">Noor Ahsan</span=
+></b><span style=3D"font-size:10.0pt">
+<span style=3D"color:#595959">| Engineering Manager Mentor Embedded Linux &=
+amp; Hypervisor</span><span style=3D"color:#7F7F7F"><o:p></o:p></span></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt"><a href=3D"http://w=
+ww.mentor.com/embedded"><span style=3D"color:blue">Mentor Embedded</span></=
+a>&#8482;
+<span style=3D"color:#595959">|5-6-7-8<sup>th</sup> floors 105&nbsp; B2 Gul=
+berg III, Ali Tower<o:p></o:p></span></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#595959">MM Al=
+am Road, Lahore</span><span style=3D"font-size:10.0pt;color:#7F7F7F"><o:p><=
+/o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;color:#595959">P &#4=
+3;92 42 36099196 | M &#43;92 300 4448444<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt"><a href=3D"http://w=
+ww.mentor.com/embedded-software/nucleus/"><span style=3D"color:blue">Nucleu=
+s</span></a>&reg;<span style=3D"color:#76923C"> |
+</span><a href=3D"http://www.mentor.com/embedded-software/linux/"><span sty=
+le=3D"color:blue">Linux</span></a>&reg;<span style=3D"color:#76923C"> |
+</span><a href=3D"http://www.mentor.com/embedded-software/android/"><span s=
+tyle=3D"color:blue">Android</span></a>&#8482;<span style=3D"color:#76923C">=
+ |
+</span><a href=3D"http://www.mentor.com/embedded-software/services/"><span =
+style=3D"color:blue">Services</span></a>
+<span style=3D"color:#76923C">| </span><a href=3D"http://www.mentor.com/emb=
+edded-software/inflexion/"><span style=3D"color:blue">UI</span></a>
+<span style=3D"color:#76923C">| </span><a href=3D"http://www.mentor.com/emb=
+edded-software/multicore-multi-os"><span style=3D"color:blue">Multi-OS</spa=
+n></a><span style=3D"color:#76923C"><o:p></o:p></span></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.0pt;color:#1F497D"><o:p>&=
+nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.0pt;color:#7F7F7F">Androi=
+d is a trademark of Google Inc. Use of this trademark is subject to Google =
+Permissions.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:7.0pt;color:#7F7F7F">Linux =
+is the registered trademark of Linus Torvalds in the U.S. and other countri=
+es.</span><span style=3D"font-size:7.0pt"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_365E1805BC95084CBE82381A0B869994DE507B25EUMBX01mgcmento_--
