@@ -1,15 +1,23 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BFA0E015AA
-	for <meta-ti@yoctoproject.org>; Mon, 16 Sep 2013 15:05:44 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id C708252998; Mon, 16 Sep 2013 22:05:43 +0000 (UTC)
+Return-Path: <denis@denix.org>
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68A3CE015FD
+	for <meta-ti@yoctoproject.org>; Fri, 20 Sep 2013 13:56:28 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MTF00D3FZHE2ZT1@vms173003.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 20 Sep 2013 15:56:12 -0500 (CDT)
+Received: from elrond.denix (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id AD11520120; Fri,
+	20 Sep 2013 16:56:02 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20130916220543.C708252998@arago-project.org>
-Date: Mon, 16 Sep 2013 22:05:43 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ligles-omap3, omap3-sgx-modules: correct checksum assignment
+Date: Fri, 20 Sep 2013 16:56:01 -0400
+Message-id: <1379710561-16000-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Cc: Dan Murphy <DMurphy@ti.com>
+Subject: [PATCH] linux-ti-staging: bump to 3.12-rc1 with platform-base and PMIC merged
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,128 +30,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2013 22:05:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 20 Sep 2013 20:56:29 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 384f3c57d3263cece1c156ffc3be83598ef83a19
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=384f3c57d3263cece1c156ffc3be83598ef83a19
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Sep 16 17:06:35 2013 -0400
-
-ligles-omap3, omap3-sgx-modules: correct checksum assignment
-
-Checksums are handled as var attributes and require immediate expansion,
-so use := operation as in the original patches, that got lost in the update.
-Otherwise do_fetch will fail to validate the checksums.
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Cc: Dan Murphy <DMurphy@ti.com>
 ---
+ recipes-kernel/linux/linux-ti-staging_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- .../omap3-sgx-modules-x11_4.09.00.01.bb            |    6 +++---
- .../omap3-sgx-modules_4.09.00.01.bb                |    6 +++---
- .../libgles/libgles-omap3-x11_4.09.00.01.bb        |    6 +++---
- .../libgles/libgles-omap3_4.09.00.01.bb            |    6 +++---
- 4 files changed, 12 insertions(+), 12 deletions(-)
-
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
-index fd79818..14f1860 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-x11_4.09.00.01.bb
-@@ -10,7 +10,7 @@ IMGPV = "1.9.2188537"
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index 7d84cc4..694a164 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -31,11 +31,11 @@ S = "${WORKDIR}/git"
  
- inherit module
+ BRANCH = "ti-linux-3.12.y"
  
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "d"
- PR = "${MACHINE_KERNEL_PR}"
+-SRCREV = "b36f4be3de1b123d8601de062e7dbfc904f305fb"
+-PV = "3.10+3.11-rc6"
++SRCREV = "351da8b4c2ff277b2d816a2108ada357a63fadbe"
++PV = "3.11+3.12-rc1"
  
- DEFAULT_PREFERENCE = "-1"
-@@ -28,8 +28,8 @@ BINFILE = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${BINFILE_H
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
  
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE}"
- 
--SRC_URI[md5sum] = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
--SRC_URI[sha256sum] = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}', d)}"
-+SRC_URI[md5sum] := "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
-+SRC_URI[sha256sum] := "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}', d)}"
- 
- TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
- S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-index 1c8718c..4b97bbc 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-@@ -10,7 +10,7 @@ IMGPV = "1.9.2188537"
- 
- inherit module
- 
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- PR = "${MACHINE_KERNEL_PR}"
- 
- DEFAULT_PREFERENCE = "-1"
-@@ -28,8 +28,8 @@ BINFILE = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${BINFILE_H
- 
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE}"
- 
--SRC_URI[md5sum] = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
--SRC_URI[sha256sum] = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}', d)}"
-+SRC_URI[md5sum] := "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
-+SRC_URI[sha256sum] := "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}', d)}"
- 
- TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
- S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
-diff --git a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
-index df84f9b..f7b9d66 100644
---- a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
-+++ b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
-@@ -2,7 +2,7 @@ require libgles-omap3-x11.inc
- 
- LICENSE = "TSPA"
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- 
- DEFAULT_PREFERENCE = "-1"
- 
-@@ -42,8 +42,8 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
-            file://99-bufferclass.rules  \
- "
- 
--SRC_URI[md5sum] = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
--SRC_URI[sha256sum] = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}', d)}"
-+SRC_URI[md5sum] := "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
-+SRC_URI[sha256sum] := "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}', d)}"
- 
- S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
- 
-diff --git a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
-index 6899cfc..d094b5c 100644
---- a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
-+++ b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
-@@ -2,7 +2,7 @@ require libgles-omap3-no-x.inc
- 
- LICENSE = "TSPA"
- 
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- 
- DEFAULT_PREFERENCE = "-1"
- 
-@@ -40,8 +40,8 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
-            file://99-bufferclass.rules  \
- "
- 
--SRC_URI[md5sum] = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
--SRC_URI[sha256sum] = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}', d)}"
-+SRC_URI[md5sum] := "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
-+SRC_URI[sha256sum] := "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}', d)}"
- 
- S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
- 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+-- 
+1.8.3.2
 
 
