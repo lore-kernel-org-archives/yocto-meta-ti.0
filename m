@@ -1,30 +1,15 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6018EE01618
-	for <meta-ti@yoctoproject.org>; Mon, 23 Sep 2013 06:23:47 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8NDNhqx032651;
-	Mon, 23 Sep 2013 08:23:43 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8NDNhcD020702;
-	Mon, 23 Sep 2013 08:23:43 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 23 Sep 2013 08:23:43 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8NDNhp2021145;
-	Mon, 23 Sep 2013 08:23:43 -0500
-Date: Mon, 23 Sep 2013 09:23:42 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Leonid Iziumtsev <leonid.iziumtsev@globallogic.com>
-Message-ID: <20130923132342.GA3456@edge>
-References: <CAAtecJGYGsuMf807WCQ4c4Qt6LaE=39gEMXeKE_Z64eYZv4KXg@mail.gmail.com>
-	<CAAtecJHF87AjpXtDQo0U5n_ah28SJF__m1xcqHbvFOLqvOaDcw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAAtecJHF87AjpXtDQo0U5n_ah28SJF__m1xcqHbvFOLqvOaDcw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: omap5: 3d graphics hardware acceleration build
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53307E01493
+	for <meta-ti@yoctoproject.org>; Mon, 23 Sep 2013 10:57:15 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 7C4C2529A0; Mon, 23 Sep 2013 17:57:14 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20130923175714.7C4C2529A0@arago-project.org>
+Date: Mon, 23 Sep 2013 17:57:14 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: bump to 3. 12-rc1 with platform-base and PMIC merged
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,32 +22,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2013 13:23:48 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 23 Sep 2013 17:57:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, Sep 23, 2013 at 01:15:11PM +0300, Leonid Iziumtsev wrote:
-> Hi all,
-> 
-> Pardon me if this list is not the right place to ask the questions and if
-> so, please poing me to the right one.
-> 
-> I'm developer in Panasonic Inc. Currently working with OAMP5 (pandaboard
-> uevm) I'm trying to get build with 3D graphics hardware acceleration using
-> DirectFB (no X support recurred). In future hopefully going run some Qt
-> based UI.
-> In search I came across "meta-ti" layer.
-> 
-> I'm new in yocto based build system so don't
-> completely understand: is it what I was looking for? Will it allow me to
-> get build with proper graphic support?
+Module: meta-ti
+Branch: master
+Commit: 69723eef85419d45ceba2b0f85496ad1491d97a4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=69723eef85419d45ceba2b0f85496ad1491d97a4
 
-Leonid,
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Sep 20 15:22:24 2013 -0400
 
-Yes, this is the correct layer for OMAP5 uEVM support. But 3D Graphics is not 
-yet available - there were some patches being developed, but they haven't been 
-finalized yet.
+linux-ti-staging: bump to 3.12-rc1 with platform-base and PMIC merged
 
--- 
-Denys
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Cc: Dan Murphy <DMurphy@ti.com>
+
+---
+
+ recipes-kernel/linux/linux-ti-staging_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index 7d84cc4..694a164 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -31,11 +31,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.12.y"
+ 
+-SRCREV = "b36f4be3de1b123d8601de062e7dbfc904f305fb"
+-PV = "3.10+3.11-rc6"
++SRCREV = "351da8b4c2ff277b2d816a2108ada357a63fadbe"
++PV = "3.11+3.12-rc1"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+
 
