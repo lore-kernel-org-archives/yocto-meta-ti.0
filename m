@@ -1,34 +1,45 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ob0-f181.google.com (mail-ob0-f181.google.com
-	[209.85.214.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21394E015FD
-	for <meta-ti@yoctoproject.org>; Fri, 20 Sep 2013 16:18:01 -0700 (PDT)
-Received: by mail-ob0-f181.google.com with SMTP id gq1so1325366obb.26
-	for <meta-ti@yoctoproject.org>; Fri, 20 Sep 2013 16:18:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+Return-Path: <leonid.iziumtsev@globallogic.com>
+Received: from exprod5og109.obsmtp.com (exprod5og109.obsmtp.com [64.18.0.188])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34707E015FA
+	for <meta-ti@yoctoproject.org>; Mon, 23 Sep 2013 03:15:13 -0700 (PDT)
+Received: from mail-lb0-f171.google.com ([209.85.217.171]) (using TLSv1) by
+	exprod5ob109.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKUkAUsH8fWdPZATNunbZ0b/0C0qWiGI9y@postini.com;
+	Mon, 23 Sep 2013 03:15:16 PDT
+Received: by mail-lb0-f171.google.com with SMTP id u14so2511734lbd.16
+	for <meta-ti@yoctoproject.org>; Mon, 23 Sep 2013 03:15:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=globallogic.com; s=google;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=hbvgCsWfTNlSKgeCGWM7mNMYd4X8xQT2attHaHVuIag=;
-	b=jMmeaVX8npFpqYHO0Zwe8YgQMRMMVeYmKwS1WnQWhXPfUtxHcg9C4cstmnOaNB8RQg
-	O0/rzkhSUVhA2kzbCscRxnCMOJangRqz9UEwWIMXFq+Gmp/HCih+uj+Mp8/zCfRJz1y7
-	n94AGBtfXTGXosXGga9viEiy34Mnas1m2Tf34tnac5eChnXGFS4n/d6Ly3gPx6aja8Wy
-	yw/kU3b224RciQ5jzHfdDeun26hZuWIxzwhFjyVdXAHTqV7XKnO8FwONTpd+tlWHlCKM
-	q9wbsLGiz6KCxJSA2Ak8Svexndl4hofNdVxOa/bfodOAKBFpk41goVLnYQu1UJAZ7kxh
-	kxNg==
+	:content-type; bh=sEUwU9NLI3XhCmrbth/pkfHSK5h3S7YwHtfKzXb8IHY=;
+	b=KlqrwjWWyyHDhBAldSRRxyy8rJ3PQZdTpYrQKY437D9d910A/5vkseQPofyEyfWMPH
+	WrzRy708V8BsbEg5mOpg7L2soFClWsGzIHonhLxa6jU36nJMNffW7ztUO7qTkvf+8aCj
+	zf1pUlk57WYZD8ApjKRbVXEeATFiU5v7MJGLk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=sEUwU9NLI3XhCmrbth/pkfHSK5h3S7YwHtfKzXb8IHY=;
+	b=Lb8BPGnkWqkriAbOWCdWEmtr77oj9SBa0GIEdukZjXt4pZLb3ErbBxefVeDKiu1Lxa
+	fAI9q7Rpep3lbjfXZiRb3QiI6Yz2rShouXvypIsikMwFWZtoWWQ0Hyg4E0rUrKReSVFI
+	+VKrvvQBCeEdn3IBF65ATaPz+HKLIl0bQYTPlFRqn28FKFOXVTa7H5w1GFHoMZjSAlcN
+	iTLLC68Lc7jOM1qs38Z7Ugo5GbivH/V3OtR5OdKJ/nvjT7vsL17/xHb2QSk1UntsEAVp
+	ifVWGen4/RSDClGILk2oSoFdkKygZHWLixIAIREWfR/y8K7usIjom02jt9owb4/34GNF
+	zo9A==
+X-Gm-Message-State: ALoCoQkfRp0LLSTHw/RhSHHqygyApJygDFsrVZtYjsNoMWbgZPTyCPD8KOX8Xp2/BZo1un61haU0BAcF6yu+5SznbTPEvFzZMTIfoF0gFVtofnkQ/OpPIS5AdfbMLj1VvoAPhKvJipBAt5+diVOW+ug2HOt5Vu7RlFh58cMocUTTdAKRV1M//GQ=
+X-Received: by 10.112.181.100 with SMTP id dv4mr1146633lbc.34.1379931311516;
+	Mon, 23 Sep 2013 03:15:11 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.60.78.227 with SMTP id e3mr7952453oex.5.1379719080997; Fri,
-	20 Sep 2013 16:18:00 -0700 (PDT)
-Received: by 10.60.77.41 with HTTP; Fri, 20 Sep 2013 16:18:00 -0700 (PDT)
-In-Reply-To: <1hnmpuqwd05i99mkxx408jea.1379715079255@email.android.com>
-References: <1379710561-16000-1-git-send-email-denis@denix.org>
-	<8F29D6B095ED194EA1980491A5E029710C5583FF@DFLE08.ent.ti.com>
-	<1hnmpuqwd05i99mkxx408jea.1379715079255@email.android.com>
-Date: Fri, 20 Sep 2013 16:18:00 -0700
-Message-ID: <CAMKF1srsBr00ymSAjEhDuquXuZ8tdeN_cyUc28pTuFM=oKUyxA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: "Murphy, Dan" <dmurphy@ti.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] linux-ti-staging: bump to 3.12-rc1 with platform-base and PMIC merged
+X-Received: by 10.112.181.100 with SMTP id dv4mr1146614lbc.34.1379931311232;
+	Mon, 23 Sep 2013 03:15:11 -0700 (PDT)
+Received: by 10.114.177.136 with HTTP; Mon, 23 Sep 2013 03:15:11 -0700 (PDT)
+In-Reply-To: <CAAtecJGYGsuMf807WCQ4c4Qt6LaE=39gEMXeKE_Z64eYZv4KXg@mail.gmail.com>
+References: <CAAtecJGYGsuMf807WCQ4c4Qt6LaE=39gEMXeKE_Z64eYZv4KXg@mail.gmail.com>
+Date: Mon, 23 Sep 2013 13:15:11 +0300
+Message-ID: <CAAtecJHF87AjpXtDQo0U5n_ah28SJF__m1xcqHbvFOLqvOaDcw@mail.gmail.com>
+From: Leonid Iziumtsev <leonid.iziumtsev@globallogic.com>
+To: meta-ti@yoctoproject.org
+Subject: omap5: 3d graphics hardware acceleration build
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,139 +52,60 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2013 23:18:02 -0000
-Content-Type: multipart/alternative; boundary=089e0111bca4b6c72904e6d8e10d
+X-List-Received-Date: Mon, 23 Sep 2013 10:15:17 -0000
+Content-Type: multipart/alternative; boundary=001a11c36cde9edf2304e70a4b62
 
---089e0111bca4b6c72904e6d8e10d
-Content-Type: text/plain; charset=UTF-8
+--001a11c36cde9edf2304e70a4b62
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Friday, September 20, 2013, Murphy, Dan <dmurphy@ti.com> wrote:
-> You should auto rev this branch.  It can change at any hour.  And so much
-can be added.
->
-it should be used with caution
-autorev would impede folks who disable bitbake to fetch from www and use
-internal mirror for srcs
+Hi all,
 
-> Dan
->
-> "Cooper Jr., Franklin" <fcooper@ti.com> wrote:
->
->
->> -----Original Message-----
->> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->> bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
->> Sent: Friday, September 20, 2013 3:56 PM
->> To: meta-ti@yoctoproject.org
->> Cc: Murphy, Dan
->> Subject: [meta-ti] [PATCH] linux-ti-staging: bump to 3.12-rc1 with
-platform-base
->> and PMIC merged
->>
->> From: Denys Dmytriyenko <denys@ti.com>
->>
->> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
->> Cc: Dan Murphy <DMurphy@ti.com>
->> ---
->>  recipes-kernel/linux/linux-ti-staging_git.bb | 6 +++---
->>  1 file changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-
->> kernel/linux/linux-ti-staging_git.bb
->> index 7d84cc4..694a164 100644
->> --- a/recipes-kernel/linux/linux-ti-staging_git.bb
->> +++ b/recipes-kernel/linux/linux-ti-staging_git.bb
->> @@ -31,11 +31,11 @@ S = "${WORKDIR}/git"
->>
->>  BRANCH = "ti-linux-3.12.y"
->>
->> -SRCREV = "b36f4be3de1b123d8601de062e7dbfc904f305fb"
->> -PV = "3.10+3.11-rc6"
->> +SRCREV = "351da8b4c2ff277b2d816a2108ada357a63fadbe"
->> +PV = "3.11+3.12-rc1"
-> [Franklin] What does the 3.11+ mean?
->>
->>  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a
->> rebuild -MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
->> +MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
->>
->>  SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-
->> kernel.git;protocol=git;branch=${BRANCH} \
->>             file://defconfig \
->> --
->> 1.8.3.2
->>
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
->
+Pardon me if this list is not the right place to ask the questions and if
+so, please poing me to the right one.
 
---089e0111bca4b6c72904e6d8e10d
-Content-Type: text/html; charset=UTF-8
+I'm developer in Panasonic Inc. Currently working with OAMP5 (pandaboard
+uevm) I'm trying to get build with 3D graphics hardware acceleration using
+DirectFB (no X support recurred). In future hopefully going run some Qt
+based UI.
+In search I came across "meta-ti" layer.
+
+I'm new in yocto based build system so don't
+completely understand: is it what I was looking for? Will it allow me to
+get build with proper graphic support?
+
+Regards,
+Leonid
+ <http://www.globallogic.com/email_disclaimer.txt>
+
+--001a11c36cde9edf2304e70a4b62
+Content-Type: text/html; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-<br><br>On Friday, September 20, 2013, Murphy, Dan &lt;<a href=3D"mailto:dm=
-urphy@ti.com">dmurphy@ti.com</a>&gt; wrote:<br>&gt; You should auto rev thi=
-s branch. =C2=A0It can change at any hour. =C2=A0And so much can be added.<=
-br>&gt;<br>
-it should be used with caution<br>autorev would impede folks who disable bi=
-tbake to fetch from www and use internal mirror for srcs<br><br>&gt; Dan<br=
->&gt;<br>&gt; &quot;Cooper Jr., Franklin&quot; &lt;<a href=3D"mailto:fcoope=
-r@ti.com">fcooper@ti.com</a>&gt; wrote:<br>
-&gt;<br>&gt;<br>&gt;&gt; -----Original Message-----<br>&gt;&gt; From: <a hr=
-ef=3D"mailto:meta-ti-bounces@yoctoproject.org">meta-ti-bounces@yoctoproject=
-.org</a> [mailto:<a href=3D"mailto:meta-ti-">meta-ti-</a><br>&gt;&gt; <a hr=
-ef=3D"mailto:bounces@yoctoproject.org">bounces@yoctoproject.org</a>] On Beh=
-alf Of Denys Dmytriyenko<br>
-&gt;&gt; Sent: Friday, September 20, 2013 3:56 PM<br>&gt;&gt; To: <a href=
-=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</a><br>&gt;&g=
-t; Cc: Murphy, Dan<br>&gt;&gt; Subject: [meta-ti] [PATCH] linux-ti-staging:=
- bump to 3.12-rc1 with platform-base<br>
-&gt;&gt; and PMIC merged<br>&gt;&gt;<br>&gt;&gt; From: Denys Dmytriyenko &l=
-t;<a href=3D"mailto:denys@ti.com">denys@ti.com</a>&gt;<br>&gt;&gt;<br>&gt;&=
-gt; Signed-off-by: Denys Dmytriyenko &lt;<a href=3D"mailto:denys@ti.com">de=
-nys@ti.com</a>&gt;<br>
-&gt;&gt; Cc: Dan Murphy &lt;<a href=3D"mailto:DMurphy@ti.com">DMurphy@ti.co=
-m</a>&gt;<br>&gt;&gt; ---<br>&gt;&gt; =C2=A0recipes-kernel/linux/<a href=3D=
-"http://linux-ti-staging_git.bb">linux-ti-staging_git.bb</a> | 6 +++---<br>=
-&gt;&gt; =C2=A01 file changed, 3 insertions(+), 3 deletions(-)<br>
-&gt;&gt;<br>&gt;&gt; diff --git a/recipes-kernel/linux/<a href=3D"http://li=
-nux-ti-staging_git.bb">linux-ti-staging_git.bb</a> b/recipes-<br>&gt;&gt; k=
-ernel/linux/<a href=3D"http://linux-ti-staging_git.bb">linux-ti-staging_git=
-.bb</a><br>
-&gt;&gt; index 7d84cc4..694a164 100644<br>&gt;&gt; --- a/recipes-kernel/lin=
-ux/<a href=3D"http://linux-ti-staging_git.bb">linux-ti-staging_git.bb</a><b=
-r>&gt;&gt; +++ b/recipes-kernel/linux/<a href=3D"http://linux-ti-staging_gi=
-t.bb">linux-ti-staging_git.bb</a><br>
-&gt;&gt; @@ -31,11 +31,11 @@ S =3D &quot;${WORKDIR}/git&quot;<br>&gt;&gt;<b=
-r>&gt;&gt; =C2=A0BRANCH =3D &quot;ti-linux-3.12.y&quot;<br>&gt;&gt;<br>&gt;=
-&gt; -SRCREV =3D &quot;b36f4be3de1b123d8601de062e7dbfc904f305fb&quot;<br>&g=
-t;&gt; -PV =3D &quot;3.10+3.11-rc6&quot;<br>
-&gt;&gt; +SRCREV =3D &quot;351da8b4c2ff277b2d816a2108ada357a63fadbe&quot;<b=
-r>&gt;&gt; +PV =3D &quot;3.11+3.12-rc1&quot;<br>&gt; [Franklin] What does t=
-he 3.11+ mean?<br>&gt;&gt;<br>&gt;&gt; =C2=A0# Append to the MACHINE_KERNEL=
-_PR so that a new SRCREV will cause a<br>
-&gt;&gt; rebuild -MACHINE_KERNEL_PR_append =3D &quot;b+gitr${SRCPV}&quot;<b=
-r>&gt;&gt; +MACHINE_KERNEL_PR_append =3D &quot;a+gitr${SRCPV}&quot;<br>&gt;=
-&gt;<br>&gt;&gt; =C2=A0SRC_URI =3D &quot;git://<a href=3D"http://git.ti.com=
-/ti-linux-kernel/ti-linux-">git.ti.com/ti-linux-kernel/ti-linux-</a><br>
-&gt;&gt; kernel.git;protocol=3Dgit;branch=3D${BRANCH} \<br>&gt;&gt; =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://defconfig \<br>&gt;&gt; --<br>&gt=
-;&gt; 1.8.3.2<br>&gt;&gt;<br>&gt;&gt; _____________________________________=
-__________<br>&gt;&gt; meta-ti mailing list<br>
-&gt;&gt; <a href=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.o=
-rg</a><br>&gt;&gt; <a href=3D"https://lists.yoctoproject.org/listinfo/meta-=
-ti">https://lists.yoctoproject.org/listinfo/meta-ti</a><br>&gt; ___________=
-____________________________________<br>
-&gt; meta-ti mailing list<br>&gt; <a href=3D"mailto:meta-ti@yoctoproject.or=
-g">meta-ti@yoctoproject.org</a><br>&gt; <a href=3D"https://lists.yoctoproje=
-ct.org/listinfo/meta-ti">https://lists.yoctoproject.org/listinfo/meta-ti</a=
-><br>
-&gt;
+<div dir=3D"ltr">Hi all,<br><div class=3D"gmail_quote"><div dir=3D"ltr"><di=
+v><div><div><font size=3D"-1"><br>Pardon me if this list is not the right p=
+lace to ask the questions and if so, please poing me to the right one.<br><=
+br>I&#39;m developer in Panasonic Inc. Currently working with OAMP5 (pandab=
+oard uevm) I&#39;m trying to get build with 3D graphics hardware accelerati=
+on using DirectFB (no X support recurred). In future hopefully going run so=
+me Qt based UI.<br>
 
---089e0111bca4b6c72904e6d8e10d--
+In search I came across &quot;meta-ti&quot; layer. <br></font></div><font s=
+ize=3D"-1"><br></font><font size=3D"-1">I&#39;m new in yocto based build sy=
+stem so don&#39;t<br>completely understand: is it what I was looking for? W=
+ill it allow me to get build with proper graphic support?</font><br>
+
+<br></div><div>Regards,<br></div><div>Leonid<br></div><div><div><font size=
+=3D"-1"><span style=3D"vertical-align:baseline;font-variant:normal;font-sty=
+le:normal;font-size:11px;background-color:transparent;text-decoration:none;=
+font-family:Arial;font-weight:normal"></span></font>
+</div></div></div></div>
+</div><font size=3D"-1"><a href=3D"http://www.globallogic.com/email_disclai=
+mer.txt" target=3D"_blank"><span style=3D"font-size:11px;font-family:Arial;=
+color:#1155cc;background-color:transparent;font-weight:normal;font-style:no=
+rmal;font-variant:normal;text-decoration:underline;vertical-align:baseline"=
+></span></a><span style=3D"vertical-align:baseline;font-variant:normal;font=
+-style:normal;font-size:11px;background-color:transparent;text-decoration:n=
+one;font-family:Arial;font-weight:normal"></span></font>
+</div>
+
+--001a11c36cde9edf2304e70a4b62--
