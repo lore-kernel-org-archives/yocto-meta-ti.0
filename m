@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53307E01493
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5470BE0155D
 	for <meta-ti@yoctoproject.org>; Mon, 23 Sep 2013 10:57:15 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7C4C2529A0; Mon, 23 Sep 2013 17:57:14 +0000 (UTC)
+	id 6A15F52AA0; Mon, 23 Sep 2013 17:57:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130923175714.7C4C2529A0@arago-project.org>
+Message-Id: <20130923175714.6A15F52AA0@arago-project.org>
 Date: Mon, 23 Sep 2013 17:57:14 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: bump to 3. 12-rc1 with platform-base and PMIC merged
@@ -26,9 +26,9 @@ X-List-Received-Date: Mon, 23 Sep 2013 17:57:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 69723eef85419d45ceba2b0f85496ad1491d97a4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=69723eef85419d45ceba2b0f85496ad1491d97a4
+Branch: dylan
+Commit: a27001ce6d4d4e8e1fa4bf2c54fdc82b79bb6006
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a27001ce6d4d4e8e1fa4bf2c54fdc82b79bb6006
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Sep 20 15:22:24 2013 -0400
