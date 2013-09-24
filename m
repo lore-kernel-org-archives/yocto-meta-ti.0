@@ -1,33 +1,34 @@
 Return-Path: <chase.maupin@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 08691E0153B
-	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 06:52:21 -0700 (PDT)
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E989DE0153B
+	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 06:53:28 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8ODqK9f013030;
-	Tue, 24 Sep 2013 08:52:20 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8ODqKiM014969;
-	Tue, 24 Sep 2013 08:52:20 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8ODrRVR019626;
+	Tue, 24 Sep 2013 08:53:27 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8ODrRCr016504;
+	Tue, 24 Sep 2013 08:53:27 -0500
 Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.02.0342.003; Tue, 24 Sep 2013 08:52:20 -0500
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.02.0342.003; Tue, 24 Sep 2013 08:53:27 -0500
 From: "Maupin, Chase" <chase.maupin@ti.com>
 To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
 	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH 3/4] linux-ti-staging: make 3.12-rc the
-	default for supported platforms, drop omap5-sevm.dtb
-Thread-Index: AQHOuM2922bOAf+Py0q8tmpSHYYcYpnU6PBA
-Date: Tue, 24 Sep 2013 13:52:19 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015974757E@DLEE11.ent.ti.com>
+Thread-Topic: [meta-ti] [PATCH 4/4] ti33x, ti43x, omap-a15: switch
+	KERNEL_IMAGETYPE to zImage by default
+Thread-Index: AQHOuM213RcAyZqKrUOSsIsh27dC5pnU6Qeg
+Date: Tue, 24 Sep 2013 13:53:26 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015974763D@DLEE11.ent.ti.com>
 References: <1379989631-8098-1-git-send-email-denis@denix.org>
-	<1379989631-8098-3-git-send-email-denis@denix.org>
-In-Reply-To: <1379989631-8098-3-git-send-email-denis@denix.org>
+	<1379989631-8098-4-git-send-email-denis@denix.org>
+In-Reply-To: <1379989631-8098-4-git-send-email-denis@denix.org>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-Subject: Re: [PATCH 3/4] linux-ti-staging: make 3.12-rc the default for supported platforms, drop omap5-sevm.dtb
+Cc: "Rini, Tom" <trini@ti.com>
+Subject: Re: [PATCH 4/4] ti33x, ti43x, omap-a15: switch KERNEL_IMAGETYPE to zImage by default
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,56 +41,81 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2013 13:52:22 -0000
+X-List-Received-Date: Tue, 24 Sep 2013 13:53:31 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-Acked-by: Chase Maupin <chase.maupin@ti.com>
+As Franklin mentioned let's hold this one off until the change to use zImag=
+e has been pushed for am335x, or at least split this into only supporting t=
+i43x and omap-a15 for now and do am335x later.
 
 >-----Original Message-----
 >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
 >bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
 >Sent: Monday, September 23, 2013 9:27 PM
 >To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [PATCH 3/4] linux-ti-staging: make 3.12-rc the
->default for supported platforms, drop omap5-sevm.dtb
+>Cc: Rini, Tom
+>Subject: [meta-ti] [PATCH 4/4] ti33x, ti43x, omap-a15: switch
+>KERNEL_IMAGETYPE to zImage by default
 >
 >From: Denys Dmytriyenko <denys@ti.com>
 >
->* DTB for OMAP5 sEVM was removed upstream, drop it from the recipe
->* Don't mask the default preference to be picked up normally by
->supported machines
+>* To be used with latest u-boot, that prefers zImage over uImage
 >
 >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+>Cc: Tom Rini <trini@ti.com>
 >---
-> recipes-kernel/linux/linux-ti-staging_git.bb | 4 +---
-> 1 file changed, 1 insertion(+), 3 deletions(-)
+> conf/machine/include/omap-a15.inc | 2 +-
+> conf/machine/include/ti33x.inc    | 2 +-
+> conf/machine/include/ti43x.inc    | 2 +-
+> 3 files changed, 3 insertions(+), 3 deletions(-)
 >
->diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb
->b/recipes-kernel/linux/linux-ti-staging_git.bb
->index d3d11d2..e903215 100644
->--- a/recipes-kernel/linux/linux-ti-staging_git.bb
->+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
->@@ -17,15 +17,13 @@ RDEPENDS_kernel-base_ti33x +=3D "am33x-cm3
->am33x-cm3-initscript"
-> KERNEL_DEVICETREE_ti33x =3D "am335x-evm.dtb am335x-evmsk.dtb
->am335x-bone.dtb"
-> KERNEL_DEVICETREE_am437x-evm =3D "am43x-epos-evm.dtb"
-> KERNEL_DEVICETREE_beaglebone =3D "am335x-bone.dtb"
->-KERNEL_DEVICETREE_omap5-evm =3D "omap5-sevm.dtb omap5-uevm.dtb"
->+KERNEL_DEVICETREE_omap5-evm =3D "omap5-uevm.dtb"
-> KERNEL_DEVICETREE_dra7xx-evm =3D "dra7-evm.dtb"
+>diff --git a/conf/machine/include/omap-a15.inc
+>b/conf/machine/include/omap-a15.inc
+>index 623f2df..aba122a 100644
+>--- a/conf/machine/include/omap-a15.inc
+>+++ b/conf/machine/include/omap-a15.inc
+>@@ -10,7 +10,7 @@ PREFERRED_PROVIDER_virtual/kernel =3D "linux-ti-
+>staging"
+> PREFERRED_PROVIDER_virtual/bootloader =3D "u-boot-ti-staging"
+> PREFERRED_PROVIDER_u-boot =3D "u-boot-ti-staging"
 >
-> KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT}"
+>-KERNEL_IMAGETYPE =3D "uImage"
+>+KERNEL_IMAGETYPE =3D "zImage"
 >
-> COMPATIBLE_MACHINE =3D "ti33x|ti43x|omap-a15"
+> UBOOT_ARCH =3D "arm"
+> UBOOT_ENTRYPOINT =3D "0x80008000"
+>diff --git a/conf/machine/include/ti33x.inc
+>b/conf/machine/include/ti33x.inc
+>index 12b80c6..7f02042 100644
+>--- a/conf/machine/include/ti33x.inc
+>+++ b/conf/machine/include/ti33x.inc
+>@@ -23,7 +23,7 @@ PREFERRED_PROVIDER_virtual/kernel =3D "linux-ti-
+>staging"
+> PREFERRED_PROVIDER_virtual/bootloader =3D "u-boot-ti-staging"
+> PREFERRED_PROVIDER_u-boot =3D "u-boot-ti-staging"
 >
->-DEFAULT_PREFERENCE =3D "-1"
->-
-> S =3D "${WORKDIR}/git"
+>-KERNEL_IMAGETYPE =3D "uImage"
+>+KERNEL_IMAGETYPE =3D "zImage"
 >
-> BRANCH =3D "ti-linux-3.12.y"
+> UBOOT_ARCH =3D "arm"
+> UBOOT_MACHINE =3D "am335x_evm_config"
+>diff --git a/conf/machine/include/ti43x.inc
+>b/conf/machine/include/ti43x.inc
+>index 62da105..adb66e3 100644
+>--- a/conf/machine/include/ti43x.inc
+>+++ b/conf/machine/include/ti43x.inc
+>@@ -23,7 +23,7 @@ PREFERRED_PROVIDER_virtual/kernel =3D "linux-ti-
+>staging"
+> PREFERRED_PROVIDER_virtual/bootloader =3D "u-boot-ti-staging"
+> PREFERRED_PROVIDER_u-boot =3D "u-boot-ti-staging"
+>
+>-KERNEL_IMAGETYPE =3D "uImage"
+>+KERNEL_IMAGETYPE =3D "zImage"
+>
+> UBOOT_ARCH =3D "arm"
+> UBOOT_MACHINE =3D "am43xx_evm_config"
 >--
 >1.8.3.2
 >
