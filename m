@@ -1,32 +1,32 @@
-Return-Path: <fcooper@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D64BE015E1
-	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 06:02:27 -0700 (PDT)
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 034EEE015E3
+	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 06:16:29 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8OD2Oin013639;
-	Tue, 24 Sep 2013 08:02:24 -0500
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8ODGSRw008829;
+	Tue, 24 Sep 2013 08:16:28 -0500
 Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8OD2OW1010028;
-	Tue, 24 Sep 2013 08:02:24 -0500
-Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8ODGSZD029632;
+	Tue, 24 Sep 2013 08:16:28 -0500
+Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
 	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.02.0342.003; Tue, 24 Sep 2013 08:02:24 -0500
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>, "denis@denix.org" <denis@denix.org>, 
-	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+	14.02.0342.003; Tue, 24 Sep 2013 08:16:28 -0500
+From: "Dmytriyenko, Denys" <denys@ti.com>
+To: "denis@denix.org" <denis@denix.org>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>, "Cooper Jr., Franklin" <fcooper@ti.com>
 Thread-Topic: [meta-ti] [PATCH 1/4] linux*: don't force KERNEL_IMAGETYPE
 	from recipes, let machine config set it
-Thread-Index: AQHOuM29vOGDmgXwS0mi8rOrIj4k4pnU1T9AgABXFID//60pkA==
-Date: Tue, 24 Sep 2013 13:02:23 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C55C293@DFLE08.ent.ti.com>
+Thread-Index: AQHOuM2h2MMCF3B8x06MUu6g6eFhYZnVKoEA//+uARiAAFZSgP//sB61
+Date: Tue, 24 Sep 2013 13:16:27 +0000
+Message-ID: <B0581B5571079145BA1CD78C126DBDE72E8AFEE4@DLEE08.ent.ti.com>
 References: <1379989631-8098-1-git-send-email-denis@denix.org>,
 	<8F29D6B095ED194EA1980491A5E029710C55C1D9@DFLE08.ent.ti.com>
-	<B0581B5571079145BA1CD78C126DBDE72E8AFDD6@DLEE08.ent.ti.com>
-In-Reply-To: <B0581B5571079145BA1CD78C126DBDE72E8AFDD6@DLEE08.ent.ti.com>
+	<B0581B5571079145BA1CD78C126DBDE72E8AFDD6@DLEE08.ent.ti.com>,
+	<8F29D6B095ED194EA1980491A5E029710C55C293@DFLE08.ent.ti.com>
+In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C55C293@DFLE08.ent.ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
 Subject: Re: [PATCH 1/4] linux*: don't force KERNEL_IMAGETYPE from recipes, let machine config set it
 X-BeenThere: meta-ti@yoctoproject.org
@@ -41,18 +41,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2013 13:02:30 -0000
+X-List-Received-Date: Tue, 24 Sep 2013 13:16:30 -0000
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_8F29D6B095ED194EA1980491A5E029710C55C293DFLE08entticom_"
+	boundary="_000_B0581B5571079145BA1CD78C126DBDE72E8AFEE4DLEE08entticom_"
 
---_000_8F29D6B095ED194EA1980491A5E029710C55C293DFLE08entticom_
-Content-Type: text/plain; charset="us-ascii"
+--_000_B0581B5571079145BA1CD78C126DBDE72E8AFEE4DLEE08entticom_
+Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-But what happens to the 335x 3.2 kernel recipe? I am ok with the machine's =
-setting the default KERNEL_IMAGE but to unbreak similar recipes the KERNEL_=
-IMAGE would need to be overridden.
+But it is rather specific to u-boot, not the kernel...
+
+
+Denys
+
+
+-----Original Message-----
+From: Cooper Jr., Franklin [fcooper@ti.com]
+Received: Tuesday, 24 Sep 2013, 9:02
+To: Dmytriyenko, Denys [denys@ti.com]; denis@denix.org [denis@denix.org]; m=
+eta-ti@yoctoproject.org [meta-ti@yoctoproject.org]
+Subject: RE: [meta-ti] [PATCH 1/4] linux*: don't force KERNEL_IMAGETYPE fro=
+m recipes, let machine config set it
+
+But what happens to the 335x 3.2 kernel recipe? I am ok with the machine=92=
+s setting the default KERNEL_IMAGE but to unbreak similar recipes the KERNE=
+L_IMAGE would need to be overridden.
 
 From: Dmytriyenko, Denys
 Sent: Tuesday, September 24, 2013 7:53 AM
@@ -320,102 +334,99 @@ meta-ti mailing list
 meta-ti@yoctoproject.org<mailto:meta-ti@yoctoproject.org>
 https://lists.yoctoproject.org/listinfo/meta-ti
 
---_000_8F29D6B095ED194EA1980491A5E029710C55C293DFLE08entticom_
-Content-Type: text/html; charset="us-ascii"
+--_000_B0581B5571079145BA1CD78C126DBDE72E8AFEE4DLEE08entticom_
+Content-Type: text/html; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
+<html>
 <head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
-<style><!--
-/* Font Definitions */
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+<style>
+<!--
 @font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
+	{font-family:Calibri}
 @font-face
-	{font-family:Tahoma;
-	panose-1:2 11 6 4 3 5 4 4 2 4;}
-/* Style Definitions */
+	{font-family:Tahoma}
 p.MsoNormal, li.MsoNormal, div.MsoNormal
 	{margin:0in;
 	margin-bottom:.0001pt;
 	font-size:12.0pt;
-	font-family:"Times New Roman","serif";}
+	font-family:"Times New Roman","serif"}
 a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
+	{color:blue;
+	text-decoration:underline}
 a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:purple;
-	text-decoration:underline;}
+	{color:purple;
+	text-decoration:underline}
 p.emailquote, li.emailquote, div.emailquote
-	{mso-style-name:emailquote;
-	mso-margin-top-alt:auto;
-	margin-right:0in;
-	mso-margin-bottom-alt:auto;
+	{margin-right:0in;
 	margin-left:1.0pt;
 	border:none;
 	padding:0in;
 	font-size:12.0pt;
-	font-family:"Times New Roman","serif";}
+	font-family:"Times New Roman","serif"}
 span.EmailStyle18
-	{mso-style-type:personal-reply;
-	font-family:"Calibri","sans-serif";
-	color:#1F497D;}
+	{font-family:"Calibri","sans-serif";
+	color:#1F497D}
 .MsoChpDefault
-	{mso-style-type:export-only;
-	font-size:10.0pt;}
+	{font-size:10.0pt}
 @page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
+	{margin:1.0in 1.0in 1.0in 1.0in}
 div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
+	{}
+-->
+</style>
 </head>
 <body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1F497D">But what happens to the 3=
-35x 3.2 kernel recipe? I am ok with the machine&#8217;s setting the default=
- KERNEL_IMAGE but to unbreak similar recipes the KERNEL_IMAGE
- would need to be overridden.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;font-family:&quot;Ca=
-libri&quot;,&quot;sans-serif&quot;;color:#1F497D"><o:p>&nbsp;</o:p></span><=
-/p>
-<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0in 0in 0in =
-4.0pt">
+<span style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11=
+pt; color:black">But it is rather specific to u-boot, not the kernel...<br>
+<br>
+<br>
+Denys<br>
+<br>
+<br>
+<span style=3D"color:black">-----Original Message----- <br>
+<b>From:</b> Cooper Jr., Franklin [fcooper@ti.com]<br>
+<b>Received:</b> Tuesday, 24 Sep 2013, 9:02<br>
+<b>To:</b> Dmytriyenko, Denys [denys@ti.com]; denis@denix.org [denis@denix.=
+org]; meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]<br>
+<b>Subject:</b> RE: [meta-ti] [PATCH 1/4] linux*: don't force KERNEL_IMAGET=
+YPE from recipes, let machine config set it<br>
+<br>
+</span></span>
 <div>
-<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0in =
-0in 0in">
-<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt;font-family:&quot=
-;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span style=3D"font-s=
-ize:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;"> Dmytriye=
-nko, Denys
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt; font-family:&quot;C=
+alibri&quot;,&quot;sans-serif&quot;; color:#1F497D">But what happens to the=
+ 335x 3.2 kernel recipe? I am ok with the machine=92s setting the default K=
+ERNEL_IMAGE but to unbreak similar recipes the KERNEL_IMAGE
+ would need to be overridden.</span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt; font-family:&quot;C=
+alibri&quot;,&quot;sans-serif&quot;; color:#1F497D">&nbsp;</span></p>
+<div style=3D"border:none; border-left:solid blue 1.5pt; padding:0in 0in 0i=
+n 4.0pt">
+<div>
+<div style=3D"border:none; border-top:solid #B5C4DF 1.0pt; padding:3.0pt 0i=
+n 0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt; font-family:&quo=
+t;Tahoma&quot;,&quot;sans-serif&quot;">From:</span></b><span style=3D"font-=
+size:10.0pt; font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;"> Dmytri=
+yenko, Denys
 <br>
 <b>Sent:</b> Tuesday, September 24, 2013 7:53 AM<br>
 <b>To:</b> denis@denix.org; meta-ti@yoctoproject.org; Cooper Jr., Franklin<=
 br>
 <b>Subject:</b> RE: [meta-ti] [PATCH 1/4] linux*: don't force KERNEL_IMAGET=
-YPE from recipes, let machine config set it<o:p></o:p></span></p>
+YPE from recipes, let machine config set it</span></p>
 </div>
 </div>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">&nbsp;</p>
 <div>
 <p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt"><span style=3D"font-s=
-ize:11.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:bla=
-ck">All machines set their kernel image types. The default is uImage. Only =
-those with newer u-boot and 3.12 kernel by default change
+ize:11.0pt; font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;; color:b=
+lack">All machines set their kernel image types. The default is uImage. Onl=
+y those with newer u-boot and 3.12 kernel by default change
  to zImage. The old ones are still uImage.<br>
 <br>
 <br>
@@ -429,7 +440,7 @@ Denys<br>
 octoproject.org">
 meta-ti@yoctoproject.org</a> [meta-ti@yoctoproject.org]<br>
 <b>Subject:</b> Re: [meta-ti] [PATCH 1/4] linux*: don't force KERNEL_IMAGET=
-YPE from recipes, let machine config set it<o:p></o:p></span></p>
+YPE from recipes, let machine config set it</span></p>
 </div>
 <div>
 <p class=3D"MsoNormal"><span style=3D"font-size:10.0pt">Since the uImage -&=
@@ -713,11 +724,12 @@ meta-ti mailing list<br>
 <a href=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</a><br=
 >
 <a href=3D"https://lists.yoctoproject.org/listinfo/meta-ti">https://lists.y=
-octoproject.org/listinfo/meta-ti</a><o:p></o:p></span></p>
+octoproject.org/listinfo/meta-ti</a></span></p>
+</div>
 </div>
 </div>
 </div>
 </body>
 </html>
 
---_000_8F29D6B095ED194EA1980491A5E029710C55C293DFLE08entticom_--
+--_000_B0581B5571079145BA1CD78C126DBDE72E8AFEE4DLEE08entticom_--
