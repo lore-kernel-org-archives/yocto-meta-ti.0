@@ -1,36 +1,26 @@
-Return-Path: <trini@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D7EA1E0153B
-	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 07:03:14 -0700 (PDT)
+Return-Path: <fcooper@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04268E0153B
+	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 07:14:24 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8OE3EqH014385
-	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 09:03:14 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8OE3EQd032639
-	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 09:03:14 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 24 Sep 2013 09:03:14 -0500
-Received: from [172.24.52.224] (dbdp20.itg.ti.com [172.24.170.38])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8OE3AQD009546;
-	Tue, 24 Sep 2013 09:03:11 -0500
-Message-ID: <52419B9E.9010702@ti.com>
-Date: Tue, 24 Sep 2013 10:03:10 -0400
-From: Tom Rini <trini@ti.com>
-Organization: Texas Instruments
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/17.0 Thunderbird/17.0
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8OEENl8022287
+	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 09:14:23 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8OEEN6V014898
+	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 09:14:23 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 24 Sep 2013 09:14:23 -0500
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8OEEJEE011487;
+	Tue, 24 Sep 2013 09:14:21 -0500
+From: "Franklin S. Cooper Jr" <fcooper@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 24 Sep 2013 09:57:01 -0500
+Message-ID: <1380034621-4413-1-git-send-email-fcooper@ti.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-To: "Maupin, Chase" <chase.maupin@ti.com>
-References: <1379989631-8098-1-git-send-email-denis@denix.org>
-	<1379989631-8098-4-git-send-email-denis@denix.org>
-	<78C276BE-E2AF-46CF-9931-4247D6182123@ti.com>	<20130924043924.GJ4390@edge>
-	<52418D00.8060904@ti.com>
-	<7D46E86EC0A8354091174257B2FED10159747465@DLEE11.ent.ti.com>
-In-Reply-To: <7D46E86EC0A8354091174257B2FED10159747465@DLEE11.ent.ti.com>
-X-Enigmail-Version: 1.5.2
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 4/4] ti33x, ti43x, omap-a15: switch KERNEL_IMAGETYPE to zImage by default
+Subject: [PATCH] linux: Inherit new machine_kernel_pr class
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,61 +33,91 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2013 14:03:15 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Sep 2013 14:14:25 -0000
+Content-Type: text/plain
 
-On 09/24/2013 09:49 AM, Maupin, Chase wrote:
->> -----Original Message-----
->> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->> bounces@yoctoproject.org] On Behalf Of Rini, Tom
->> Sent: Tuesday, September 24, 2013 8:01 AM
->> To: Dmytriyenko, Denys
->> Cc: meta-ti@yoctoproject.org
->> Subject: Re: [meta-ti] [PATCH 4/4] ti33x, ti43x, omap-a15: switch
->> KERNEL_IMAGETYPE to zImage by default
->>
->> On 09/24/2013 12:39 AM, Denys Dmytriyenko wrote:
->>> On Tue, Sep 24, 2013 at 03:36:47AM +0000, Cooper Jr., Franklin
->> wrote:
->>>> What is the benefit of this switch?
->>>>
->>>> Although outdated a lot of posts talking about uImage vs zImage
->> seems to
->>>> favor uImage due to additional functionality that it provides.
->>>
->>> I guess this is a more generic question addressed to Tom...
->>
->> There are two sides to it.  On the zImage side, it's what the
->> kernel
->> produces normally, without needing other tools, so it's vastly
->> preferred
->> by the majority of kernel developers.  On the production side,
->> uImages
->> provide useful things like a checksums and the ability to detect
->> overlaps.  If we enabled FIT images, we could go so far as to
->> allow for
->> cryptographically signed images and configurations (what FIT calls
->> a
->> kernel+fdt(+optional ramdisk)).
->>
->> For community oriented things like this, zImage is best and for
->> production, it's up to the designer on what's important and what's
->> not.
-> 
-> A key point is that either can still be used with new u-boots.  Tom,
-> I think you were saying there is a way if the AMSDK wants to for it
-> to fall back to uImage if zImage is not found.
+* MACHINE_KERNEL_PR was originally defined in the kernel class located in
+  meta-oe which overrode the version of the class in oe-core.
+* Some time ago kernel.bbclass was removed from meta-oe and a separate class
+  machine_kernel_pr was created to add support for MACHINE_KERNEL_PR.
+* Since this variable is used significantly in both meta-ti and meta-arago make
+  sure all the kernel recipes directly or indirectly inherit this new class.
 
-Right, so we can have more complex boot logic than we do today, coming
-in from uEnv.txt even if we want, rather than patching.  To have a
-complex (and thus fragile) "try everything":
-fallbackload=\
-if load $loadaddr 0 uImage; then run mmcloados;fi \
-if load $loadaddr $bootpart $bootdir/$bootfile; then ... copy/paste
-mmcloados logic, but with bootz not boot; fi
-uenvcmd=run fallbackload
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+---
+ recipes-kernel/linux/linux-am335x-psp_3.2.bb |    2 +-
+ recipes-kernel/linux/linux-ti-glsdk_3.8.bb   |    2 +-
+ recipes-kernel/linux/linux-ti-staging_3.8.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_git.bb |    2 +-
+ recipes-kernel/linux/linux.inc               |    2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
 
+diff --git a/recipes-kernel/linux/linux-am335x-psp_3.2.bb b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
+index eaf788f..cf1b2dd 100644
+--- a/recipes-kernel/linux/linux-am335x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
+@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "ti33x"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-inherit kernel
++inherit kernel machine_kernel_pr
+ require setup-defconfig.inc
+ 
+ # Stage the power management firmware before building the kernel
+diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+index 5fd17f8..d7aebea 100644
+--- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ KERNEL_IMAGETYPE = "uImage"
+ 
+-inherit kernel
++inherit kernel machine_kernel_pr
+ 
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+index fd7b671..f832b54 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ KERNEL_IMAGETYPE = "uImage"
+ 
+-inherit kernel
++inherit kernel machine_kernel_pr
+ 
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index 694a164..50253ea 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ KERNEL_IMAGETYPE = "uImage"
+ 
+-inherit kernel
++inherit kernel machine_kernel_pr
+ 
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
+diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linux.inc
+index ac51dae..e0d414c 100644
+--- a/recipes-kernel/linux/linux.inc
++++ b/recipes-kernel/linux/linux.inc
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ 
+-inherit kernel siteinfo
++inherit kernel siteinfo machine_kernel_pr
+ 
+ # Enable OABI compat for people stuck with obsolete userspace
+ ARM_KEEP_OABI ?= "1"
 -- 
-Tom
+1.7.0.4
+
 
