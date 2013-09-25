@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 73CEEE01622
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 73C84E01621
 	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 13:57:48 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 98FB2529E7; Wed, 25 Sep 2013 20:57:39 +0000 (UTC)
+	id 93A7B52A8B; Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130925205739.98FB2529E7@arago-project.org>
-Date: Wed, 25 Sep 2013 20:57:39 +0000 (UTC)
+Message-Id: <20130925205739.93A7B52A8B@arago-project.org>
+Date: Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: fix missing kernel image in /boot
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to the latest 2013. 10-rc2 and make it the default
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,58 +27,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dylan
-Commit: 4fb79a828fe5c8d2df389ec8c422d7085d4c05a2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4fb79a828fe5c8d2df389ec8c422d7085d4c05a2
+Commit: 124465369fc4cfebe9fec89aa49fac2e13b4be91
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=124465369fc4cfebe9fec89aa49fac2e13b4be91
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Sep 25 14:49:14 2013 -0400
+Date:   Mon Sep 23 22:15:06 2013 -0400
 
-linux-ti-staging: fix missing kernel image in /boot
-
-We rely on kernel-base having run-time dependency on kernel-image, which
-normally would pull uImage/zImage into /boot directory of rootfs.
-Thanks to Chase for pointing me in the right direction by noticing that our
-addition of cm3 firmware breaks that dependency for ti33x.
-The reason for that is RDEPENDS is being conditionally assigned with ?=
-in kernel.bbclass and using += with machine-override clears that value due
-to the order of processing. Hence _append should be used instead of += to
-process it after the machine-override takes place.
+u-boot-ti-staging: update to the latest 2013.10-rc2 and make it the default
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Acked-by: Chase Maupin <chase.maupin@ti.com>
 Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.8.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_git.bb |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_git.bb |    6 ++----
+ 1 files changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-index fd7b671..833fb48 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-@@ -11,7 +11,7 @@ require recipes-kernel/linux/setup-defconfig.inc
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
+index 8d96aee..8c005b4 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
+@@ -4,16 +4,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
- # Add a run-time dependency for the PM firmware to be installed
- # on the target file system.
--RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
-+RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=6bc50ecab884fce80cd3ef3da8852b08"
  
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
-diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index e903215..778ea7f 100644
---- a/recipes-kernel/linux/linux-ti-staging_git.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -10,7 +10,7 @@ require recipes-kernel/linux/setup-defconfig.inc
+-PV = "2013.07+2013.10-rc1"
++PV = "2013.07+2013.10-rc2"
+ PR = "r0+gitr${SRCPV}"
  
- # Add a run-time dependency for the PM firmware to be installed
- # on the target file system.
--RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
-+RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
+-DEFAULT_PREFERENCE = "-1"
+-
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
+ BRANCH ?= "master"
+ 
+-SRCREV = "39bc12ddc36c9e30199471da0f3a929b178a04b2"
++SRCREV = "fb18fa95a14ae875ef0a5421cd9fecc00c7c3a4c"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
