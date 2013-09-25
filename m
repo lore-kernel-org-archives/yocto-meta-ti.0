@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 73E4BE01624
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E66AFE0162C
 	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 13:57:48 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7637E52A86; Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
+	id A9C7E52AAF; Wed, 25 Sep 2013 20:57:39 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130925205739.7637E52A86@arago-project.org>
-Date: Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
+Message-Id: <20130925205739.A9C7E52AAF@arago-project.org>
+Date: Wed, 25 Sep 2013 20:57:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ti43x, omap-a15: switch KERNEL_IMAGETYPE to zImage by default
+Subject: Denys Dmytriyenko : linux-ti-staging: fix missing kernel image in /boot
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,52 +26,59 @@ X-List-Received-Date: Wed, 25 Sep 2013 20:57:49 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: f75224052b4877de9b83f449e371499c36d73afd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f75224052b4877de9b83f449e371499c36d73afd
+Branch: master
+Commit: 7b4870a30d8a151be5683adb97bb319b615afc81
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7b4870a30d8a151be5683adb97bb319b615afc81
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Sep 23 22:19:02 2013 -0400
+Date:   Wed Sep 25 14:49:14 2013 -0400
 
-ti43x, omap-a15: switch KERNEL_IMAGETYPE to zImage by default
+linux-ti-staging: fix missing kernel image in /boot
 
-* To be used with latest u-boot, that prefers zImage over uImage
-* ti33x will follow as soon as u-boot changes its default for that platform
+We rely on kernel-base having run-time dependency on kernel-image, which
+normally would pull uImage/zImage into /boot directory of rootfs.
+Thanks to Chase for pointing me in the right direction by noticing that our
+addition of cm3 firmware breaks that dependency for ti33x.
+The reason for that is RDEPENDS is being conditionally assigned with ?=
+in kernel.bbclass and using += with machine-override clears that value due
+to the order of processing. Hence _append should be used instead of += to
+process it after the machine-override takes place.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Cc: Tom Rini <trini@ti.com>
+Acked-by: Chase Maupin <chase.maupin@ti.com>
+Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
 
 ---
 
- conf/machine/include/omap-a15.inc |    2 +-
- conf/machine/include/ti43x.inc    |    2 +-
+ recipes-kernel/linux/linux-ti-staging_3.8.bb |    2 +-
+ recipes-kernel/linux/linux-ti-staging_git.bb |    2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
-index 623f2df..aba122a 100644
---- a/conf/machine/include/omap-a15.inc
-+++ b/conf/machine/include/omap-a15.inc
-@@ -10,7 +10,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
- PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
- PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+index fd7b671..833fb48 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+@@ -11,7 +11,7 @@ require recipes-kernel/linux/setup-defconfig.inc
  
--KERNEL_IMAGETYPE = "uImage"
-+KERNEL_IMAGETYPE = "zImage"
+ # Add a run-time dependency for the PM firmware to be installed
+ # on the target file system.
+-RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
++RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
  
- UBOOT_ARCH = "arm"
- UBOOT_ENTRYPOINT = "0x80008000"
-diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
-index 62da105..adb66e3 100644
---- a/conf/machine/include/ti43x.inc
-+++ b/conf/machine/include/ti43x.inc
-@@ -23,7 +23,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
- PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
- PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index e903215..778ea7f 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -10,7 +10,7 @@ require recipes-kernel/linux/setup-defconfig.inc
  
--KERNEL_IMAGETYPE = "uImage"
-+KERNEL_IMAGETYPE = "zImage"
+ # Add a run-time dependency for the PM firmware to be installed
+ # on the target file system.
+-RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
++RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
  
- UBOOT_ARCH = "arm"
- UBOOT_MACHINE = "am43xx_evm_config"
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
 
 
