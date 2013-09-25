@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 92114E01609
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9348DE0160A
 	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 15:51:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7476A529E7; Wed, 25 Sep 2013 22:51:55 +0000 (UTC)
+	id 58C17529B0; Wed, 25 Sep 2013 22:51:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130925225155.7476A529E7@arago-project.org>
+Message-Id: <20130925225155.58C17529B0@arago-project.org>
 Date: Wed, 25 Sep 2013 22:51:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : linux: Inherit new machine_kernel_pr class
@@ -26,9 +26,9 @@ X-List-Received-Date: Wed, 25 Sep 2013 22:51:56 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 1450f1938007bede786160c501c8fd268b661c5e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1450f1938007bede786160c501c8fd268b661c5e
+Branch: dylan
+Commit: 6c1ab34c88edc127ff2835d87b48f4b10fe8ba0b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6c1ab34c88edc127ff2835d87b48f4b10fe8ba0b
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Tue Sep 24 09:57:01 2013 -0500
