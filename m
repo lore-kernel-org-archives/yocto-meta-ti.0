@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC426E01622
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EFEAFE01625
 	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 13:57:40 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 273E452AAE; Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
+	id 8346652A1C; Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130925205739.273E452AAE@arago-project.org>
+Message-Id: <20130925205738.8346652A1C@arago-project.org>
 Date: Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: make 3. 12-rc the default for supported platforms, drop omap5-sevm.dtb
+Subject: Denys Dmytriyenko : linux*: don't force KERNEL_IMAGETYPE from recipes, let machine config set it
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,47 +26,156 @@ X-List-Received-Date: Wed, 25 Sep 2013 20:57:48 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: d2a65d09c8fac409f9a02d56c7ec7df141aee8cf
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d2a65d09c8fac409f9a02d56c7ec7df141aee8cf
+Branch: master
+Commit: 2173296d1204855427a55067b67d9908c43c0418
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2173296d1204855427a55067b67d9908c43c0418
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Sep 23 22:16:11 2013 -0400
+Date:   Mon Sep 23 21:04:06 2013 -0400
 
-linux-ti-staging: make 3.12-rc the default for supported platforms, drop omap5-sevm.dtb
+linux*: don't force KERNEL_IMAGETYPE from recipes, let machine config set it
 
-* DTB for OMAP5 sEVM was removed upstream, drop it from the recipe
-* Don't mask the default preference to be picked up normally by supported machines
+Some kernel versions (and corresponding u-boot) may still need to set uImage,
+as preferred image type, since the machine config changes preference to zImage
+for newer kernels - keep that for ti33x and omap-a15 stuck on 3.2 and 3.8.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
-Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_git.bb |    4 +---
- 1 files changed, 1 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-davinci_git.bb         |    1 -
+ recipes-kernel/linux/linux-mainline_3.2.bb        |    1 -
+ recipes-kernel/linux/linux-omap-psp_2.6.32.bb     |    1 -
+ recipes-kernel/linux/linux-omap_2.6.37.bb         |    1 -
+ recipes-kernel/linux/linux-omap_2.6.39.bb         |    1 -
+ recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb |    1 -
+ recipes-kernel/linux/linux-ti-staging_git.bb      |    1 -
+ recipes-kernel/linux/linux_3.0.bb                 |    1 -
+ recipes-kernel/linux/linux_3.1.bb                 |    1 -
+ recipes-kernel/linux/linux_3.3.7.bb               |    2 --
+ 10 files changed, 0 insertions(+), 11 deletions(-)
 
+diff --git a/recipes-kernel/linux/linux-davinci_git.bb b/recipes-kernel/linux/linux-davinci_git.bb
+index e4b85d6..03eeb46 100644
+--- a/recipes-kernel/linux/linux-davinci_git.bb
++++ b/recipes-kernel/linux/linux-davinci_git.bb
+@@ -1,7 +1,6 @@
+ require multi-kernel.inc
+ 
+ DESCRIPTION = "Linux kernel for DaVinci processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "hawkboard"
+ 
+diff --git a/recipes-kernel/linux/linux-mainline_3.2.bb b/recipes-kernel/linux/linux-mainline_3.2.bb
+index 7eafdfa..7b4a2a2 100644
+--- a/recipes-kernel/linux/linux-mainline_3.2.bb
++++ b/recipes-kernel/linux/linux-mainline_3.2.bb
+@@ -1,7 +1,6 @@
+ require linux.inc
+ 
+ DESCRIPTION = "Linux kernel for TI processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "(beagleboard)"
+ 
+diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.32.bb b/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
+index 61fc24f..9f7c472 100644
+--- a/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
++++ b/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
+@@ -3,7 +3,6 @@ require multi-kernel.inc
+ MULTI_CONFIG_BASE_SUFFIX = ""
+ 
+ DESCRIPTION = "Linux kernel for OMAP processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "am3517-crane|beagleboard|omap3evm|am3517-evm|dm37x-evm|am37x-evm|omap3-touchbook|overo"
+ 
+diff --git a/recipes-kernel/linux/linux-omap_2.6.37.bb b/recipes-kernel/linux/linux-omap_2.6.37.bb
+index 62076fb..0a14cc8 100644
+--- a/recipes-kernel/linux/linux-omap_2.6.37.bb
++++ b/recipes-kernel/linux/linux-omap_2.6.37.bb
+@@ -1,7 +1,6 @@
+ require multi-kernel.inc
+ 
+ DESCRIPTION = "Linux kernel for OMAP processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "(beagleboard|overo|omap3evm|omap3-touchbook)"
+ 
+diff --git a/recipes-kernel/linux/linux-omap_2.6.39.bb b/recipes-kernel/linux/linux-omap_2.6.39.bb
+index ae90ad2..430fa09 100644
+--- a/recipes-kernel/linux/linux-omap_2.6.39.bb
++++ b/recipes-kernel/linux/linux-omap_2.6.39.bb
+@@ -1,7 +1,6 @@
+ require linux.inc
+ 
+ DESCRIPTION = "Linux kernel for OMAP processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "(beagleboard)"
+ 
+diff --git a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
+index e4a5451..a138fb6 100644
+--- a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
++++ b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
+@@ -1,7 +1,6 @@
+ SECTION = "kernel"
+ DESCRIPTION = "Linux kernel for OMAPL1 machines from PSP, based on linux-davinci kernel"
+ LICENSE = "GPLv2"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ require multi-kernel.inc
+ require tipspkernel.inc
 diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index d3d11d2..e903215 100644
+index 694a164..d3d11d2 100644
 --- a/recipes-kernel/linux/linux-ti-staging_git.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -17,15 +17,13 @@ RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
- KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb"
- KERNEL_DEVICETREE_am437x-evm = "am43x-epos-evm.dtb"
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb"
--KERNEL_DEVICETREE_omap5-evm = "omap5-sevm.dtb omap5-uevm.dtb"
-+KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
- KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
+@@ -2,7 +2,6 @@ SECTION = "kernel"
+ DESCRIPTION = "Linux kernel for TI devices"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+-KERNEL_IMAGETYPE = "uImage"
  
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+ inherit kernel
  
- COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
+index 522a87d..3aae2ca 100644
+--- a/recipes-kernel/linux/linux_3.0.bb
++++ b/recipes-kernel/linux/linux_3.0.bb
+@@ -1,7 +1,6 @@
+ require linux.inc
  
--DEFAULT_PREFERENCE = "-1"
+ DESCRIPTION = "Linux kernel for TI processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "(beagleboard)"
+ 
+diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
+index d6ed98c..110d26c 100644
+--- a/recipes-kernel/linux/linux_3.1.bb
++++ b/recipes-kernel/linux/linux_3.1.bb
+@@ -3,7 +3,6 @@ require linux.inc
+ COMPATIBLE_MACHINE = "beagleboard"
+ 
+ DESCRIPTION = "Linux kernel for TI processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ DEFAULT_PREFERENCE = "-99"
+ 
+diff --git a/recipes-kernel/linux/linux_3.3.7.bb b/recipes-kernel/linux/linux_3.3.7.bb
+index e38b6c2..aca5c53 100644
+--- a/recipes-kernel/linux/linux_3.3.7.bb
++++ b/recipes-kernel/linux/linux_3.3.7.bb
+@@ -11,8 +11,6 @@ COMPATIBLE_MACHINE = "beagleboard"
+ inherit kernel
+ require setup-defconfig.inc
+ 
+-KERNEL_IMAGETYPE = "uImage"
 -
- S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.12.y"
+ # The main PR is now using MACHINE_KERNEL_PR, for beagleboard see
+ # conf/machine/include/omap3.inc
+ MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
 
 
