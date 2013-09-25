@@ -1,32 +1,37 @@
-Return-Path: <fcooper@ti.com>
+Return-Path: <chase.maupin@ti.com>
 Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B56FE01595
-	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 07:22:40 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 024D9E01600
+	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 06:43:23 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8OEMdmN023186
-	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 09:22:40 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8OEMdwN025936
-	for <meta-ti@yoctoproject.org>; Tue, 24 Sep 2013 09:22:39 -0500
-Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
-	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
-	14.02.0342.003; Tue, 24 Sep 2013 09:22:39 -0500
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH] linux: Inherit new machine_kernel_pr class
-Thread-Index: AQHOuTBeR9vgcDugtEm/WXropoBz1JnVRDMA//+sQ2A=
-Date: Tue, 24 Sep 2013 14:22:38 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C55C510@DFLE08.ent.ti.com>
-References: <1380034621-4413-1-git-send-email-fcooper@ti.com>
-	<20130924142137.GM4390@edge>
-In-Reply-To: <20130924142137.GM4390@edge>
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8PDhM29009208
+	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 08:43:22 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8PDhLSx002313;
+	Wed, 25 Sep 2013 08:43:21 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
+	14.02.0342.003; Wed, 25 Sep 2013 08:43:21 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "Muddegowda, Deepak" <x0171695@ti.com>, "Srinivasan, Nageswari"
+	<nageswari@ti.com>, "Heroor, Siddharth" <heroor@ti.com>, "Cooper Jr.,
+	Franklin" <fcooper@ti.com>, "Dmytriyenko, Denys" <denys@ti.com>, "Mankad,
+	Maulik Ojas" <maulik@ti.com>, "epos_dev@list.ti.com - Internal mailing list
+	for EPOS dev team (May contain non-TIers)" <epos_dev@list.ti.com>,
+	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti patch v3  1/3] am43xx : Added machine config for
+	am437x EPOS machine
+Thread-Index: AQHOuexWdI1uDOZqYUqXEnUaERVH0ZnWdi8Q
+Date: Wed, 25 Sep 2013 13:43:20 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015974D5A7@DLEE11.ent.ti.com>
+References: <1380112791-22545-1-git-send-email-x0171695@ti.com>
+	<1380112791-22545-2-git-send-email-x0171695@ti.com>
+In-Reply-To: <1380112791-22545-2-git-send-email-x0171695@ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] linux: Inherit new machine_kernel_pr class
+Subject: Re: [meta-ti patch v3 1/3] am43xx : Added machine config for am437x EPOS machine
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,130 +44,91 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2013 14:22:40 -0000
+X-List-Received-Date: Wed, 25 Sep 2013 13:43:24 -0000
 Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-From my search the other kernels either include linux.inc or multi-kernel.i=
-nc which includes linux.inc.
+>-----Original Message-----
+>From: Muddegowda, Deepak
+>Sent: Wednesday, September 25, 2013 7:40 AM
+>To: Srinivasan, Nageswari; Maupin, Chase; Heroor, Siddharth;
+>Cooper Jr., Franklin; Dmytriyenko, Denys; Mankad, Maulik Ojas;
+>Muddegowda, Deepak; epos_dev@list.ti.com - Internal mailing list
+>for EPOS dev team (May contain non-TIers); meta-
+>ti@yoctoproject.org
+>Subject: [meta-ti patch v3 1/3] am43xx : Added machine config for
+>am437x EPOS machine
+>
+>As this belongs to the ti43x SOC_FAMILY inluding the
+>ti43x`s include.
+>
+>Signed-off-by: Deepak M <x0171695@ti.com>
+>---
+>v3 :
+>1. Changed the machine name to am437x-epos-evm
+>2. Changed the UBOOT_MACHINE
+>3. Adding the meta-ti@yoctoproject.org list for review.
+>
+> conf/machine/am437x-epos-evm.conf | 38
+>++++++++++++++++++++++++++++++++++++++
+> 1 file changed, 38 insertions(+)
+> create mode 100644 conf/machine/am437x-epos-evm.conf
+>
+>diff --git a/conf/machine/am437x-epos-evm.conf
+>b/conf/machine/am437x-epos-evm.conf
+>new file mode 100644
+>index 0000000..a9adf7e
+>--- /dev/null
+>+++ b/conf/machine/am437x-epos-evm.conf
+>@@ -0,0 +1,38 @@
+>+#@TYPE: Machine
+>+#@NAME: AM43xx EVM
+>+#@DESCRIPTION: Machine configuration for the TI AM43xx EVM
+>+
+>+require conf/machine/include/ti43x.inc
+>+
+>+# Use built-in LCD by default
+>+XSERVER +=3D "xf86-input-tslib"
+>+GUI_MACHINE_CLASS =3D "smallscreen"
+>+MACHINE_FEATURES +=3D "touchscreen"
 
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Tuesday, September 24, 2013 9:22 AM
-> To: Cooper Jr., Franklin
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH] linux: Inherit new machine_kernel_pr class
->=20
-> Right, I've been meaning to add this too, so I agree with the change.
-> The only question is - why only those kernels and not others? Are all the=
- others
-> covered by linux.inc?
->=20
-> --
-> Denys
->=20
->=20
-> On Tue, Sep 24, 2013 at 09:57:01AM -0500, Franklin S. Cooper Jr wrote:
-> > * MACHINE_KERNEL_PR was originally defined in the kernel class located =
-in
-> >   meta-oe which overrode the version of the class in oe-core.
-> > * Some time ago kernel.bbclass was removed from meta-oe and a separate
-> class
-> >   machine_kernel_pr was created to add support for MACHINE_KERNEL_PR.
-> > * Since this variable is used significantly in both meta-ti and meta-ar=
-ago make
-> >   sure all the kernel recipes directly or indirectly inherit this new c=
-lass.
-> >
-> > Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
-> > ---
-> >  recipes-kernel/linux/linux-am335x-psp_3.2.bb |    2 +-
-> >  recipes-kernel/linux/linux-ti-glsdk_3.8.bb   |    2 +-
-> >  recipes-kernel/linux/linux-ti-staging_3.8.bb |    2 +-
-> >  recipes-kernel/linux/linux-ti-staging_git.bb |    2 +-
-> >  recipes-kernel/linux/linux.inc               |    2 +-
-> >  5 files changed, 5 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/recipes-kernel/linux/linux-am335x-psp_3.2.bb b/recipes-
-> kernel/linux/linux-am335x-psp_3.2.bb
-> > index eaf788f..cf1b2dd 100644
-> > --- a/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-> > +++ b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-> > @@ -6,7 +6,7 @@ COMPATIBLE_MACHINE =3D "ti33x"
-> >
-> >  DEFAULT_PREFERENCE =3D "-1"
-> >
-> > -inherit kernel
-> > +inherit kernel machine_kernel_pr
-> >  require setup-defconfig.inc
-> >
-> >  # Stage the power management firmware before building the kernel
-> > diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-
-> kernel/linux/linux-ti-glsdk_3.8.bb
-> > index 5fd17f8..d7aebea 100644
-> > --- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-> > +++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-> > @@ -4,7 +4,7 @@ LICENSE =3D "GPLv2"
-> >  LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3Dd7810fab7487fb0aad327b76f1be7cd7"
-> >  KERNEL_IMAGETYPE =3D "uImage"
-> >
-> > -inherit kernel
-> > +inherit kernel machine_kernel_pr
-> >
-> >  require recipes-kernel/linux/linux-dtb.inc
-> >  require recipes-kernel/linux/setup-defconfig.inc
-> > diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-
-> kernel/linux/linux-ti-staging_3.8.bb
-> > index fd7b671..f832b54 100644
-> > --- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
-> > +++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-> > @@ -4,7 +4,7 @@ LICENSE =3D "GPLv2"
-> >  LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3Dd7810fab7487fb0aad327b76f1be7cd7"
-> >  KERNEL_IMAGETYPE =3D "uImage"
-> >
-> > -inherit kernel
-> > +inherit kernel machine_kernel_pr
-> >
-> >  require recipes-kernel/linux/linux-dtb.inc
-> >  require recipes-kernel/linux/setup-defconfig.inc
-> > diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-
-> kernel/linux/linux-ti-staging_git.bb
-> > index 694a164..50253ea 100644
-> > --- a/recipes-kernel/linux/linux-ti-staging_git.bb
-> > +++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-> > @@ -4,7 +4,7 @@ LICENSE =3D "GPLv2"
-> >  LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3Dd7810fab7487fb0aad327b76f1be7cd7"
-> >  KERNEL_IMAGETYPE =3D "uImage"
-> >
-> > -inherit kernel
-> > +inherit kernel machine_kernel_pr
-> >
-> >  require recipes-kernel/linux/linux-dtb.inc
-> >  require recipes-kernel/linux/setup-defconfig.inc
-> > diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linu=
-x.inc
-> > index ac51dae..e0d414c 100644
-> > --- a/recipes-kernel/linux/linux.inc
-> > +++ b/recipes-kernel/linux/linux.inc
-> > @@ -4,7 +4,7 @@ LICENSE =3D "GPLv2"
-> >
-> >  LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3Dd7810fab7487fb0aad327b76f1be7cd7"
-> >
-> > -inherit kernel siteinfo
-> > +inherit kernel siteinfo machine_kernel_pr
-> >
-> >  # Enable OABI compat for people stuck with obsolete userspace
-> >  ARM_KEEP_OABI ?=3D "1"
-> > --
-> > 1.7.0.4
-> >
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
+Denys, input on these lines above?
+
+>+
+>+IMAGE_FSTYPES +=3D "ubi tar.gz"
+>+
+>+SERIAL_CONSOLE =3D "115200 ttyO0"
+>+
+>+# UBI information.  Note that this is board and kernel specific.
+>Changes
+>+# in your kernel port may require changes in these variables.
+>For more
+>+# details about this board please see
+>+# http://processors.wiki.ti.com/index.php/UBIFS_Support
+>+
+>+# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+>+# From dmesg:
+>+# UBI: smallest flash I/O unit:    2048
+>+# UBI: logical eraseblock size:    126976 bytes
+>+# from ubiattach stdout:
+>+# UBI device number 0, total 1988 LEBs
+>+MKUBIFS_ARGS =3D "-F -m 2048 -e 126976 -c 3836"
+>+
+>+# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+>+# from dmesg:
+>+# UBI: smallest flash I/O unit:    2048
+>+# UBI: physical eraseblock size:   131072 bytes (128 KiB)
+>+# UBI: sub-page size:              512
+>+# UBI: VID header offset:          2048 (aligned 2048)
+>+UBINIZE_ARGS =3D "-m 2048 -p 128KiB -s 512 -O 2048"
+>+
+>+UBOOT_MACHINE =3D "am43xx_evm"
+
+Maybe a silly question but why the change in UBOOT_MACHINE?
+
+>+PPA_PROJ =3D "hyperseam"
+>--
+>1.8.1
+
 
