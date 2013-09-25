@@ -1,16 +1,16 @@
 Return-Path: <chase.maupin@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E17C1E01600
-	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 06:44:24 -0700 (PDT)
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 707A8E01600
+	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 06:45:05 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8PDiNP4029151
-	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 08:44:23 -0500
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8PDj5Ob006277
+	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 08:45:05 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8PDiNre003380;
-	Wed, 25 Sep 2013 08:44:23 -0500
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8PDj4fF004278;
+	Wed, 25 Sep 2013 08:45:04 -0500
 Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
 	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.02.0342.003; Wed, 25 Sep 2013 08:44:23 -0500
+	14.02.0342.003; Wed, 25 Sep 2013 08:45:04 -0500
 From: "Maupin, Chase" <chase.maupin@ti.com>
 To: "Muddegowda, Deepak" <x0171695@ti.com>, "Srinivasan, Nageswari"
 	<nageswari@ti.com>, "Heroor, Siddharth" <heroor@ti.com>, "Cooper Jr.,
@@ -18,19 +18,19 @@ To: "Muddegowda, Deepak" <x0171695@ti.com>, "Srinivasan, Nageswari"
 	Maulik Ojas" <maulik@ti.com>, "epos_dev@list.ti.com - Internal mailing list
 	for EPOS dev team (May contain non-TIers)" <epos_dev@list.ti.com>,
 	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti patch v3  2/3] am43xx: Added the u-boot recipe
-Thread-Index: AQHOuexVks3Mn1NgHUCZgBZXX98MhpnWdqfQ
-Date: Wed, 25 Sep 2013 13:44:23 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015974D61C@DLEE11.ent.ti.com>
+Thread-Topic: [meta-ti patch v3  3/3] am43xx: Added the kernel recipe
+Thread-Index: AQHOuexWgWm8jhuWlkSH/SvwBRHVY5nWdvfw
+Date: Wed, 25 Sep 2013 13:45:03 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015974D65F@DLEE11.ent.ti.com>
 References: <1380112791-22545-1-git-send-email-x0171695@ti.com>
-	<1380112791-22545-3-git-send-email-x0171695@ti.com>
-In-Reply-To: <1380112791-22545-3-git-send-email-x0171695@ti.com>
+	<1380112791-22545-4-git-send-email-x0171695@ti.com>
+In-Reply-To: <1380112791-22545-4-git-send-email-x0171695@ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-Subject: Re: [meta-ti patch v3 2/3] am43xx: Added the u-boot recipe
+Subject: Re: [meta-ti patch v3 3/3] am43xx: Added the kernel recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,10 +43,12 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Sep 2013 13:44:27 -0000
+X-List-Received-Date: Wed, 25 Sep 2013 13:45:06 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
+
+Same question as u-boot recipe about temporary.
 
 >-----Original Message-----
 >From: Muddegowda, Deepak
@@ -56,58 +58,69 @@ Content-Transfer-Encoding: quoted-printable
 >Muddegowda, Deepak; epos_dev@list.ti.com - Internal mailing list
 >for EPOS dev team (May contain non-TIers); meta-
 >ti@yoctoproject.org
->Subject: [meta-ti patch v3 2/3] am43xx: Added the u-boot recipe
->
->Added the LIC_FILES_CHKSUM in the recipe as the default
->checksum was pointing to the COPYING file which is moved to the
->Licenses/gpl-2.0.txt in the current source.
+>Subject: [meta-ti patch v3 3/3] am43xx: Added the kernel recipe
 >
 >Signed-off-by: Deepak M <x0171695@ti.com>
 >---
 >v3:
->1. Changed the u-boot recipe name from u-boot-aegis to u-boot-
->am43xx.
->2. Using externel source link.
+>1. Changed the kernel recipe name to linux-am43xx
+>2. Using the external source link
 >
-> recipes-bsp/u-boot/u-boot-am43xx_2013.10.bb | 20
->++++++++++++++++++++
-> 1 file changed, 20 insertions(+)
-> create mode 100644 recipes-bsp/u-boot/u-boot-am43xx_2013.10.bb
+> recipes-kernel/linux/linux-am43xx/defconfig |  1 +
+> recipes-kernel/linux/linux-am43xx_3.12.bb   | 31
+>+++++++++++++++++++++++++++++
+> 2 files changed, 32 insertions(+)
+> create mode 100644 recipes-kernel/linux/linux-am43xx/defconfig
+> create mode 100644 recipes-kernel/linux/linux-am43xx_3.12.bb
 >
->diff --git a/recipes-bsp/u-boot/u-boot-am43xx_2013.10.bb
->b/recipes-bsp/u-boot/u-boot-am43xx_2013.10.bb
-
-My assumption is this is a temporary recipe correct?  Once the unified u-bo=
-ot recipe in is place you can then just append what you need on top right?
-
+>diff --git a/recipes-kernel/linux/linux-am43xx/defconfig
+>b/recipes-kernel/linux/linux-am43xx/defconfig
 >new file mode 100644
->index 0000000..58eb99a
+>index 0000000..926b35a
 >--- /dev/null
->+++ b/recipes-bsp/u-boot/u-boot-am43xx_2013.10.bb
->@@ -0,0 +1,20 @@
->+require u-boot-ti.inc
->+
->+DESCRIPTION =3D "u-boot bootloader for ARM MPU devices"
->+LIC_FILES_CHKSUM =3D "file://Licenses/gpl-
->2.0.txt;md5=3Db234ee4d69f5fce4486a80fdaf4a4263"
+>+++ b/recipes-kernel/linux/linux-am43xx/defconfig
+>@@ -0,0 +1 @@
+>+use-kernel-config=3Domap2plus_defconfig
+>diff --git a/recipes-kernel/linux/linux-am43xx_3.12.bb b/recipes-
+>kernel/linux/linux-am43xx_3.12.bb
+>new file mode 100644
+>index 0000000..a4b0700
+>--- /dev/null
+>+++ b/recipes-kernel/linux/linux-am43xx_3.12.bb
+>@@ -0,0 +1,31 @@
+>+SECTION =3D "kernel"
+>+DESCRIPTION =3D "Linux kernel for TI33x devices from PSP"
+>+LICENSE =3D "GPLv2"
+>+LIC_FILES_CHKSUM =3D
+>"file://COPYING;md5=3Dd7810fab7487fb0aad327b76f1be7cd7"
 >+COMPATIBLE_MACHINE =3D "am437x-epos-evm"
 >+
 >+DEFAULT_PREFERENCE =3D "-1"
 >+
->+PV =3D "2013.10"
->+PR =3D "r0+gitr${SRCPV}"
+>+inherit kernel
+>+require recipes-kernel/linux/linux-dtb.inc
+>+require setup-defconfig.inc
 >+
->+BRANCH =3D "v2013.10-rc2+"
+>+KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT}"
 >+
->+SRC_URI =3D "git://git.ti.com/~lokesh/ti-u-boot/u-boot-
->dev.git;protocol=3Dgit;branch=3D${BRANCH}"
+>+KERNEL_IMAGETYPE =3D "uImage"
+>+KERNEL_DEVICETREE =3D "am43x-epos-evm.dtb"
 >+
->+# Lock to the commit corresponding
->+SRCREV =3D "6514cf76a52ecce9b03ede098683a7eea97e2bce"
+>+KERNEL_DTB =3D "arch/arm/boot/dts/am43x-epos-evm.dtb"
 >+
->+# Set the name of the SPL that will built so that it is also
->packaged with u-boot.
->+SPL_BINARY =3D "MLO"
+>+
+>+# The main PR is now using MACHINE_KERNEL_PR,
+>+PR =3D "r1+gitr${SRCPV}"
+>+
+>+BRANCH   =3D "linux-3.12.y"
+>+
+>+SRC_URI =3D "git://git.ti.com/ti-linux-kernel/ti-linux-
+>kernel.git;BRANCH=3D${BRANCH};protocol=3Dssh \
+>+           file://defconfig \
+>+"
+>+
+>+SRCREV =3D "272b98c6455f00884f0350f775c5342358ebb73f"
+>+S =3D "${WORKDIR}/git"
 >--
 >1.8.1
 
