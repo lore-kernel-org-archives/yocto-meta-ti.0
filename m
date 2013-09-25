@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EFEAFE01625
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EEB9CE01624
 	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 13:57:40 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8346652A1C; Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
+	id E279F5299B; Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130925205738.8346652A1C@arago-project.org>
+Message-Id: <20130925205738.E279F5299B@arago-project.org>
 Date: Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux*: don't force KERNEL_IMAGETYPE from recipes, let machine config set it
@@ -26,9 +26,9 @@ X-List-Received-Date: Wed, 25 Sep 2013 20:57:48 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 2173296d1204855427a55067b67d9908c43c0418
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2173296d1204855427a55067b67d9908c43c0418
+Branch: dylan
+Commit: 3cd1ddb25e770c677509193222f21957be55ce0c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3cd1ddb25e770c677509193222f21957be55ce0c
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Sep 23 21:04:06 2013 -0400
