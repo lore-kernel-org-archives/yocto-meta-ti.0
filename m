@@ -1,38 +1,22 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7EB6E01602
-	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 06:47:49 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8PDlmWK014983
-	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 08:47:48 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8PDlmGP007843;
-	Wed, 25 Sep 2013 08:47:48 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.02.0342.003; Wed, 25 Sep 2013 08:47:48 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Muddegowda, Deepak" <x0171695@ti.com>, "Srinivasan, Nageswari"
-	<nageswari@ti.com>, "Heroor, Siddharth" <heroor@ti.com>, "Cooper Jr.,
-	Franklin" <fcooper@ti.com>, "Dmytriyenko, Denys" <denys@ti.com>, "Mankad,
-	Maulik Ojas" <maulik@ti.com>, "epos_dev@list.ti.com - Internal mailing list
-	for EPOS dev team (May contain non-TIers)" <epos_dev@list.ti.com>,
-	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti patch v3  2/3] am43xx: Added the u-boot recipe
-Thread-Index: AQHOuexVks3Mn1NgHUCZgBZXX98MhpnWdqfQgABUkoD//6xgAA==
-Date: Wed, 25 Sep 2013 13:47:48 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015974D711@DLEE11.ent.ti.com>
-References: <1380112791-22545-1-git-send-email-x0171695@ti.com>
-	<1380112791-22545-3-git-send-email-x0171695@ti.com>
-	<7D46E86EC0A8354091174257B2FED1015974D61C@DLEE11.ent.ti.com>
-	<16D38216B6B8BA4B9AF9DBFC3760F38D3F14DDC5@DBDE04.ent.ti.com>
-In-Reply-To: <16D38216B6B8BA4B9AF9DBFC3760F38D3F14DDC5@DBDE04.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
-MIME-Version: 1.0
-Subject: Re: [meta-ti patch v3 2/3] am43xx: Added the u-boot recipe
+Return-Path: <denis@denix.org>
+Received: from vms173015pub.verizon.net (vms173015pub.verizon.net
+	[206.46.173.15])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 87807E01601
+	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 11:20:24 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173015.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MTP000ZP1LA2N41@vms173015.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 25 Sep 2013 13:20:04 -0500 (CDT)
+Received: from elrond.denix (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id C90C5200BD; Wed,
+	25 Sep 2013 14:19:58 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Wed, 25 Sep 2013 14:19:58 -0400
+Message-id: <1380133198-27770-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCHv2 1/4] linux*: don't force KERNEL_IMAGETYPE from recipes, let machine config set it
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,110 +29,152 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Sep 2013 13:47:49 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 25 Sep 2013 18:20:26 -0000
 
->-----Original Message-----
->From: Muddegowda, Deepak
->Sent: Wednesday, September 25, 2013 8:46 AM
->To: Maupin, Chase; Srinivasan, Nageswari; Heroor, Siddharth;
->Cooper Jr., Franklin; Dmytriyenko, Denys; Mankad, Maulik Ojas;
->epos_dev@list.ti.com - Internal mailing list for EPOS dev team
->(May contain non-TIers); meta-ti@yoctoproject.org
->Subject: RE: [meta-ti patch v3 2/3] am43xx: Added the u-boot
->recipe
->
->
->
->> -----Original Message-----
->> From: Maupin, Chase
->> Sent: Wednesday, September 25, 2013 7:14 PM
->> To: Muddegowda, Deepak; Srinivasan, Nageswari; Heroor,
->Siddharth;
->> Cooper Jr., Franklin; Dmytriyenko, Denys; Mankad, Maulik Ojas;
->> epos_dev@list.ti.com - Internal mailing list for EPOS dev team
->(May
->> contain non-TIers); meta-ti@yoctoproject.org
->> Subject: RE: [meta-ti patch v3 2/3] am43xx: Added the u-boot
->recipe
->>
->> >-----Original Message-----
->> >From: Muddegowda, Deepak
->> >Sent: Wednesday, September 25, 2013 7:40 AM
->> >To: Srinivasan, Nageswari; Maupin, Chase; Heroor, Siddharth;
->Cooper
->> >Jr., Franklin; Dmytriyenko, Denys; Mankad, Maulik Ojas;
->Muddegowda,
->> >Deepak; epos_dev@list.ti.com - Internal mailing list for EPOS
->dev team
->> >(May contain non-TIers); meta- ti@yoctoproject.org
->> >Subject: [meta-ti patch v3 2/3] am43xx: Added the u-boot recipe
->> >
->> >Added the LIC_FILES_CHKSUM in the recipe as the default
->checksum was
->> >pointing to the COPYING file which is moved to the
->Licenses/gpl-
->> 2.0.txt
->> >in the current source.
->> >
->> >Signed-off-by: Deepak M <x0171695@ti.com>
->> >---
->> >v3:
->> >1. Changed the u-boot recipe name from u-boot-aegis to u-boot-
->am43xx.
->> >2. Using externel source link.
->> >
->> > recipes-bsp/u-boot/u-boot-am43xx_2013.10.bb | 20
->> >++++++++++++++++++++
->> > 1 file changed, 20 insertions(+)
->> > create mode 100644 recipes-bsp/u-boot/u-boot-am43xx_2013.10.bb
->> >
->> >diff --git a/recipes-bsp/u-boot/u-boot-am43xx_2013.10.bb
->> >b/recipes-bsp/u-boot/u-boot-am43xx_2013.10.bb
->>
->> My assumption is this is a temporary recipe correct?  Once the
->unified
->> u-boot recipe in is place you can then just append what you need
->on top
->> right?
->[Muddegowda, Deepak] Not exactly temporary, may change the SRC_URI
->in future that=92s it.
+From: Denys Dmytriyenko <denys@ti.com>
 
-OK.  Now my question is why?  If you are given a base u-boot recipe that su=
-pports am43xx devices why would you define your own instead of appending?
+Some kernel versions (and corresponding u-boot) may still need to set uImage,
+as preferred image type, since the machine config changes preference to zImage
+for newer kernels - keep that for ti33x and omap-a15 stuck on 3.2 and 3.8.
 
->>
->> >new file mode 100644
->> >index 0000000..58eb99a
->> >--- /dev/null
->> >+++ b/recipes-bsp/u-boot/u-boot-am43xx_2013.10.bb
->> >@@ -0,0 +1,20 @@
->> >+require u-boot-ti.inc
->> >+
->> >+DESCRIPTION =3D "u-boot bootloader for ARM MPU devices"
->> >+LIC_FILES_CHKSUM =3D "file://Licenses/gpl-
->> >2.0.txt;md5=3Db234ee4d69f5fce4486a80fdaf4a4263"
->> >+COMPATIBLE_MACHINE =3D "am437x-epos-evm"
->> >+
->> >+DEFAULT_PREFERENCE =3D "-1"
->> >+
->> >+PV =3D "2013.10"
->> >+PR =3D "r0+gitr${SRCPV}"
->> >+
->> >+BRANCH =3D "v2013.10-rc2+"
->> >+
->> >+SRC_URI =3D "git://git.ti.com/~lokesh/ti-u-boot/u-boot-
->> >dev.git;protocol=3Dgit;branch=3D${BRANCH}"
->> >+
->> >+# Lock to the commit corresponding
->> >+SRCREV =3D "6514cf76a52ecce9b03ede098683a7eea97e2bce"
->> >+
->> >+# Set the name of the SPL that will built so that it is also
->> >packaged with u-boot.
->> >+SPL_BINARY =3D "MLO"
->> >--
->> >1.8.1
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+v2 - don't change 3.2 and 3.8 kernels for ti33x and omap-a15, still needing uImage
+
+ recipes-kernel/linux/linux-davinci_git.bb         | 1 -
+ recipes-kernel/linux/linux-mainline_3.2.bb        | 1 -
+ recipes-kernel/linux/linux-omap-psp_2.6.32.bb     | 1 -
+ recipes-kernel/linux/linux-omap_2.6.37.bb         | 1 -
+ recipes-kernel/linux/linux-omap_2.6.39.bb         | 1 -
+ recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb | 1 -
+ recipes-kernel/linux/linux-ti-staging_git.bb      | 1 -
+ recipes-kernel/linux/linux_3.0.bb                 | 1 -
+ recipes-kernel/linux/linux_3.1.bb                 | 1 -
+ recipes-kernel/linux/linux_3.3.7.bb               | 2 --
+ 10 files changed, 11 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-davinci_git.bb b/recipes-kernel/linux/linux-davinci_git.bb
+index e4b85d6..03eeb46 100644
+--- a/recipes-kernel/linux/linux-davinci_git.bb
++++ b/recipes-kernel/linux/linux-davinci_git.bb
+@@ -1,7 +1,6 @@
+ require multi-kernel.inc
+ 
+ DESCRIPTION = "Linux kernel for DaVinci processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "hawkboard"
+ 
+diff --git a/recipes-kernel/linux/linux-mainline_3.2.bb b/recipes-kernel/linux/linux-mainline_3.2.bb
+index 7eafdfa..7b4a2a2 100644
+--- a/recipes-kernel/linux/linux-mainline_3.2.bb
++++ b/recipes-kernel/linux/linux-mainline_3.2.bb
+@@ -1,7 +1,6 @@
+ require linux.inc
+ 
+ DESCRIPTION = "Linux kernel for TI processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "(beagleboard)"
+ 
+diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.32.bb b/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
+index 61fc24f..9f7c472 100644
+--- a/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
++++ b/recipes-kernel/linux/linux-omap-psp_2.6.32.bb
+@@ -3,7 +3,6 @@ require multi-kernel.inc
+ MULTI_CONFIG_BASE_SUFFIX = ""
+ 
+ DESCRIPTION = "Linux kernel for OMAP processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "am3517-crane|beagleboard|omap3evm|am3517-evm|dm37x-evm|am37x-evm|omap3-touchbook|overo"
+ 
+diff --git a/recipes-kernel/linux/linux-omap_2.6.37.bb b/recipes-kernel/linux/linux-omap_2.6.37.bb
+index 62076fb..0a14cc8 100644
+--- a/recipes-kernel/linux/linux-omap_2.6.37.bb
++++ b/recipes-kernel/linux/linux-omap_2.6.37.bb
+@@ -1,7 +1,6 @@
+ require multi-kernel.inc
+ 
+ DESCRIPTION = "Linux kernel for OMAP processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "(beagleboard|overo|omap3evm|omap3-touchbook)"
+ 
+diff --git a/recipes-kernel/linux/linux-omap_2.6.39.bb b/recipes-kernel/linux/linux-omap_2.6.39.bb
+index ae90ad2..430fa09 100644
+--- a/recipes-kernel/linux/linux-omap_2.6.39.bb
++++ b/recipes-kernel/linux/linux-omap_2.6.39.bb
+@@ -1,7 +1,6 @@
+ require linux.inc
+ 
+ DESCRIPTION = "Linux kernel for OMAP processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "(beagleboard)"
+ 
+diff --git a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
+index e4a5451..a138fb6 100644
+--- a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
++++ b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
+@@ -1,7 +1,6 @@
+ SECTION = "kernel"
+ DESCRIPTION = "Linux kernel for OMAPL1 machines from PSP, based on linux-davinci kernel"
+ LICENSE = "GPLv2"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ require multi-kernel.inc
+ require tipspkernel.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index 694a164..d3d11d2 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -2,7 +2,6 @@ SECTION = "kernel"
+ DESCRIPTION = "Linux kernel for TI devices"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ inherit kernel
+ 
+diff --git a/recipes-kernel/linux/linux_3.0.bb b/recipes-kernel/linux/linux_3.0.bb
+index 522a87d..3aae2ca 100644
+--- a/recipes-kernel/linux/linux_3.0.bb
++++ b/recipes-kernel/linux/linux_3.0.bb
+@@ -1,7 +1,6 @@
+ require linux.inc
+ 
+ DESCRIPTION = "Linux kernel for TI processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ COMPATIBLE_MACHINE = "(beagleboard)"
+ 
+diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
+index d6ed98c..110d26c 100644
+--- a/recipes-kernel/linux/linux_3.1.bb
++++ b/recipes-kernel/linux/linux_3.1.bb
+@@ -3,7 +3,6 @@ require linux.inc
+ COMPATIBLE_MACHINE = "beagleboard"
+ 
+ DESCRIPTION = "Linux kernel for TI processors"
+-KERNEL_IMAGETYPE = "uImage"
+ 
+ DEFAULT_PREFERENCE = "-99"
+ 
+diff --git a/recipes-kernel/linux/linux_3.3.7.bb b/recipes-kernel/linux/linux_3.3.7.bb
+index e38b6c2..aca5c53 100644
+--- a/recipes-kernel/linux/linux_3.3.7.bb
++++ b/recipes-kernel/linux/linux_3.3.7.bb
+@@ -11,8 +11,6 @@ COMPATIBLE_MACHINE = "beagleboard"
+ inherit kernel
+ require setup-defconfig.inc
+ 
+-KERNEL_IMAGETYPE = "uImage"
+-
+ # The main PR is now using MACHINE_KERNEL_PR, for beagleboard see
+ # conf/machine/include/omap3.inc
+ MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
+-- 
+1.8.3.2
 
 
