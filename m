@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 73C84E01621
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 73DA8E01623
 	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 13:57:48 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 93A7B52A8B; Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
+	id 5C5D4529E2; Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130925205739.93A7B52A8B@arago-project.org>
+Message-Id: <20130925205739.5C5D4529E2@arago-project.org>
 Date: Wed, 25 Sep 2013 20:57:38 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update to the latest 2013. 10-rc2 and make it the default
+Subject: Denys Dmytriyenko : linux-ti-staging: make 3. 12-rc the default for supported platforms, drop omap5-sevm.dtb
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,14 +26,17 @@ X-List-Received-Date: Wed, 25 Sep 2013 20:57:49 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: 124465369fc4cfebe9fec89aa49fac2e13b4be91
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=124465369fc4cfebe9fec89aa49fac2e13b4be91
+Branch: master
+Commit: f472c8dca139f061db03c8ccad5857587461627e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f472c8dca139f061db03c8ccad5857587461627e
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Sep 23 22:15:06 2013 -0400
+Date:   Mon Sep 23 22:16:11 2013 -0400
 
-u-boot-ti-staging: update to the latest 2013.10-rc2 and make it the default
+linux-ti-staging: make 3.12-rc the default for supported platforms, drop omap5-sevm.dtb
+
+* DTB for OMAP5 sEVM was removed upstream, drop it from the recipe
+* Don't mask the default preference to be picked up normally by supported machines
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
@@ -41,31 +44,29 @@ Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_git.bb |    6 ++----
- 1 files changed, 2 insertions(+), 4 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_git.bb |    4 +---
+ 1 files changed, 1 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
-index 8d96aee..8c005b4 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
-@@ -4,16 +4,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index d3d11d2..e903215 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -17,15 +17,13 @@ RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
+ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb"
+ KERNEL_DEVICETREE_am437x-evm = "am43x-epos-evm.dtb"
+ KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb"
+-KERNEL_DEVICETREE_omap5-evm = "omap5-sevm.dtb omap5-uevm.dtb"
++KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
+ KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=6bc50ecab884fce80cd3ef3da8852b08"
+ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
  
--PV = "2013.07+2013.10-rc1"
-+PV = "2013.07+2013.10-rc2"
- PR = "r0+gitr${SRCPV}"
+ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
  
 -DEFAULT_PREFERENCE = "-1"
 -
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
  
- BRANCH ?= "master"
- 
--SRCREV = "39bc12ddc36c9e30199471da0f3a929b178a04b2"
-+SRCREV = "fb18fa95a14ae875ef0a5421cd9fecc00c7c3a4c"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+ BRANCH = "ti-linux-3.12.y"
 
 
