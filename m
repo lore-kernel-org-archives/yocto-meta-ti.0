@@ -1,15 +1,26 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E66AFE0162C
-	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 13:57:48 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id A9C7E52AAF; Wed, 25 Sep 2013 20:57:39 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130925205739.A9C7E52AAF@arago-project.org>
-Date: Wed, 25 Sep 2013 20:57:39 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: fix missing kernel image in /boot
+Return-Path: <fcooper@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8785BE01621
+	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 15:17:23 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8PMHNj5029771
+	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 17:17:23 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8PMHMi8022556
+	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 17:17:22 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 25 Sep 2013 17:17:22 -0500
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8PMHJ0s007353;
+	Wed, 25 Sep 2013 17:17:20 -0500
+From: "Franklin S. Cooper Jr" <fcooper@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 25 Sep 2013 18:00:26 -0500
+Message-ID: <1380150026-16483-1-git-send-email-fcooper@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Subject: [dylan][PATCH] linux-ti-staging_git: Mimic patch "Correct post(inst|rm) package association"
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,63 +33,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Sep 2013 20:57:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 25 Sep 2013 22:17:24 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: master
-Commit: 7b4870a30d8a151be5683adb97bb319b615afc81
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7b4870a30d8a151be5683adb97bb319b615afc81
+* Mimic the patch
+  kernel.bbclass: Correct post(inst|rm) package association
+* This patch ensures that a proper symlink is created that satisfies U-boot's
+  requirement of having the kernel image in the rootfs.
+* This patch is already apart of oe-core master and needs to be added to oe-core
+  dylan.
+* A patch to do this has already been submitted:
+  http://lists.openembedded.org/pipermail/openembedded-core/2013-September/084755.html
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Sep 25 14:49:14 2013 -0400
-
-linux-ti-staging: fix missing kernel image in /boot
-
-We rely on kernel-base having run-time dependency on kernel-image, which
-normally would pull uImage/zImage into /boot directory of rootfs.
-Thanks to Chase for pointing me in the right direction by noticing that our
-addition of cm3 firmware breaks that dependency for ti33x.
-The reason for that is RDEPENDS is being conditionally assigned with ?=
-in kernel.bbclass and using += with machine-override clears that value due
-to the order of processing. Hence _append should be used instead of += to
-process it after the machine-override takes place.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Acked-by: Chase Maupin <chase.maupin@ti.com>
-Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
-
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 ---
+ recipes-kernel/linux/linux-ti-staging_git.bb |   15 ++++++++++++++-
+ 1 files changed, 14 insertions(+), 1 deletions(-)
 
- recipes-kernel/linux/linux-ti-staging_3.8.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_git.bb |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-index fd7b671..833fb48 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-@@ -11,7 +11,7 @@ require recipes-kernel/linux/setup-defconfig.inc
- 
- # Add a run-time dependency for the PM firmware to be installed
- # on the target file system.
--RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
-+RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
- 
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
 diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index e903215..778ea7f 100644
+index b75e650..6bdf9e3 100644
 --- a/recipes-kernel/linux/linux-ti-staging_git.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -10,7 +10,7 @@ require recipes-kernel/linux/setup-defconfig.inc
+@@ -32,8 +32,21 @@ SRCREV = "351da8b4c2ff277b2d816a2108ada357a63fadbe"
+ PV = "3.11+3.12-rc1"
  
- # Add a run-time dependency for the PM firmware to be installed
- # on the target file system.
--RDEPENDS_kernel-base_ti33x += "am33x-cm3 am33x-cm3-initscript"
-+RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
  
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+           "
++
++# The below code mimics patch 
++# "kernel.bbclass: Correct post(inst|rm) package association" which is included
++# in oe-core master. Once the patch has been pushed into dylan the below code
++# can be removed.
++
++pkg_postinst_kernel-image_append () {
++	update-alternatives --install /${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} ${KERNEL_PRIORITY} || true
++}
++
++pkg_postrm_kernel-image () {
++	update-alternatives --remove ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} || true
++}
+-- 
+1.7.0.4
 
 
