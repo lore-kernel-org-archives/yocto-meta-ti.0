@@ -1,15 +1,33 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9348DE0160A
-	for <meta-ti@yoctoproject.org>; Wed, 25 Sep 2013 15:51:56 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 58C17529B0; Wed, 25 Sep 2013 22:51:55 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20130925225155.58C17529B0@arago-project.org>
-Date: Wed, 25 Sep 2013 22:51:55 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : linux: Inherit new machine_kernel_pr class
+Return-Path: <chase.maupin@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4AECBE01605
+	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 04:59:33 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8QBxWhm028606;
+	Thu, 26 Sep 2013 06:59:32 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8QBxWs2009137;
+	Thu, 26 Sep 2013 06:59:32 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
+	14.02.0342.003; Thu, 26 Sep 2013 06:59:32 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCHv2 4/4] ti43x, omap-a15: switch
+	KERNEL_IMAGETYPE to zImage by default
+Thread-Index: AQHOuiiC3IT+0pc+/U6vCmij1/fHb5nX61Tg
+Date: Thu, 26 Sep 2013 11:59:32 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED101597510CF@DLEE11.ent.ti.com>
+References: <1380138591-17071-1-git-send-email-denis@denix.org>
+In-Reply-To: <1380138591-17071-1-git-send-email-denis@denix.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
+MIME-Version: 1.0
+Cc: "Rini, Tom" <trini@ti.com>
+Subject: Re: [PATCHv2 4/4] ti43x, omap-a15: switch KERNEL_IMAGETYPE to zImage by default
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,102 +40,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Sep 2013 22:51:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 26 Sep 2013 11:59:36 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-Module: meta-ti
-Branch: dylan
-Commit: 6c1ab34c88edc127ff2835d87b48f4b10fe8ba0b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6c1ab34c88edc127ff2835d87b48f4b10fe8ba0b
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Tue Sep 24 09:57:01 2013 -0500
 
-linux: Inherit new machine_kernel_pr class
-
-* MACHINE_KERNEL_PR was originally defined in the kernel class located in
-  meta-oe which overrode the version of the class in oe-core.
-* Some time ago kernel.bbclass was removed from meta-oe and a separate class
-  machine_kernel_pr was created to add support for MACHINE_KERNEL_PR.
-* Since this variable is used significantly in both meta-ti and meta-arago make
-  sure all the kernel recipes directly or indirectly inherit this new class.
-
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-kernel/linux/linux-am335x-psp_3.2.bb |    2 +-
- recipes-kernel/linux/linux-ti-glsdk_3.8.bb   |    2 +-
- recipes-kernel/linux/linux-ti-staging_3.8.bb |    2 +-
- recipes-kernel/linux/linux-ti-staging_git.bb |    2 +-
- recipes-kernel/linux/linux.inc               |    2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-am335x-psp_3.2.bb b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-index eaf788f..cf1b2dd 100644
---- a/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "ti33x"
- 
- DEFAULT_PREFERENCE = "-1"
- 
--inherit kernel
-+inherit kernel machine_kernel_pr
- require setup-defconfig.inc
- 
- # Stage the power management firmware before building the kernel
-diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-index 5fd17f8..d7aebea 100644
---- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
- KERNEL_IMAGETYPE = "uImage"
- 
--inherit kernel
-+inherit kernel machine_kernel_pr
- 
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-index 833fb48..8e6d198 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
- KERNEL_IMAGETYPE = "uImage"
- 
--inherit kernel
-+inherit kernel machine_kernel_pr
- 
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
-diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index 778ea7f..b75e650 100644
---- a/recipes-kernel/linux/linux-ti-staging_git.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Linux kernel for TI devices"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
- 
--inherit kernel
-+inherit kernel machine_kernel_pr
- 
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
-diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linux.inc
-index ac51dae..e0d414c 100644
---- a/recipes-kernel/linux/linux.inc
-+++ b/recipes-kernel/linux/linux.inc
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
- 
--inherit kernel siteinfo
-+inherit kernel siteinfo machine_kernel_pr
- 
- # Enable OABI compat for people stuck with obsolete userspace
- ARM_KEEP_OABI ?= "1"
-
+>-----Original Message-----
+>From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+>bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
+>Sent: Wednesday, September 25, 2013 2:50 PM
+>To: meta-ti@yoctoproject.org
+>Cc: Rini, Tom
+>Subject: [meta-ti] [PATCHv2 4/4] ti43x, omap-a15: switch
+>KERNEL_IMAGETYPE to zImage by default
+>
+>From: Denys Dmytriyenko <denys@ti.com>
+>
+>* To be used with latest u-boot, that prefers zImage over uImage
+>* ti33x will follow as soon as u-boot changes its default for that
+>platform
+>
+>Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+>Cc: Tom Rini <trini@ti.com>
+>---
+>v2 - don't change the default for ti33x yet, wait for u-boot
+>
+> conf/machine/include/omap-a15.inc | 2 +-
+> conf/machine/include/ti43x.inc    | 2 +-
+> 2 files changed, 2 insertions(+), 2 deletions(-)
+>
+>diff --git a/conf/machine/include/omap-a15.inc
+>b/conf/machine/include/omap-a15.inc
+>index 623f2df..aba122a 100644
+>--- a/conf/machine/include/omap-a15.inc
+>+++ b/conf/machine/include/omap-a15.inc
+>@@ -10,7 +10,7 @@ PREFERRED_PROVIDER_virtual/kernel =3D "linux-ti-
+>staging"
+> PREFERRED_PROVIDER_virtual/bootloader =3D "u-boot-ti-staging"
+> PREFERRED_PROVIDER_u-boot =3D "u-boot-ti-staging"
+>
+>-KERNEL_IMAGETYPE =3D "uImage"
+>+KERNEL_IMAGETYPE =3D "zImage"
+>
+> UBOOT_ARCH =3D "arm"
+> UBOOT_ENTRYPOINT =3D "0x80008000"
+>diff --git a/conf/machine/include/ti43x.inc
+>b/conf/machine/include/ti43x.inc
+>index 62da105..adb66e3 100644
+>--- a/conf/machine/include/ti43x.inc
+>+++ b/conf/machine/include/ti43x.inc
+>@@ -23,7 +23,7 @@ PREFERRED_PROVIDER_virtual/kernel =3D "linux-ti-
+>staging"
+> PREFERRED_PROVIDER_virtual/bootloader =3D "u-boot-ti-staging"
+> PREFERRED_PROVIDER_u-boot =3D "u-boot-ti-staging"
+>
+>-KERNEL_IMAGETYPE =3D "uImage"
+>+KERNEL_IMAGETYPE =3D "zImage"
+>
+> UBOOT_ARCH =3D "arm"
+> UBOOT_MACHINE =3D "am43xx_evm_config"
+>--
+>1.8.3.2
+>
+>_______________________________________________
+>meta-ti mailing list
+>meta-ti@yoctoproject.org
+>https://lists.yoctoproject.org/listinfo/meta-ti
 
