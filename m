@@ -1,23 +1,23 @@
 Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 545D7E015DA
-	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 06:55:06 -0700 (PDT)
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 206BEE015DA
+	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 06:57:14 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8QDt5Ar001467
-	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 08:55:05 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8QDt3JC009890;
-	Thu, 26 Sep 2013 08:55:03 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 26 Sep 2013 08:55:03 -0500
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8QDvD5b031910
+	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 08:57:13 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8QDvDjk013308;
+	Thu, 26 Sep 2013 08:57:13 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 26 Sep 2013 08:57:13 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8QDt2l2001387;
-	Thu, 26 Sep 2013 08:55:03 -0500
-Date: Thu, 26 Sep 2013 09:55:02 -0400
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8QDvD1E011186;
+	Thu, 26 Sep 2013 08:57:13 -0500
+Date: Thu, 26 Sep 2013 09:57:12 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: Deepak M <x0171695@ti.com>
-Message-ID: <20130926135502.GJ14528@edge>
+Message-ID: <20130926135712.GK14528@edge>
 References: <1380112791-22545-1-git-send-email-x0171695@ti.com>
 	<1380112791-22545-4-git-send-email-x0171695@ti.com>
 	<20130926135039.GH14528@edge>
@@ -39,12 +39,9 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2013 13:55:07 -0000
+X-List-Received-Date: Thu, 26 Sep 2013 13:57:15 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-
-And BTW, you need to subscribe to meta-ti list in order to post to it...
-
 
 On Thu, Sep 26, 2013 at 09:50:39AM -0400, Denys Dmytriyenko wrote:
 > On Wed, Sep 25, 2013 at 06:09:50PM +0530, Deepak M wrote:
@@ -102,6 +99,13 @@ On Thu, Sep 26, 2013 at 09:50:39AM -0400, Denys Dmytriyenko wrote:
 > > +BRANCH   = "linux-3.12.y"
 > > +
 > > +SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;BRANCH=${BRANCH};protocol=ssh \
+
+Any reason to use upstream linux-3.12.y branch instead of our integration 
+ti-linux-3.12.y one? And we do have a recipe for that already:
+
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-kernel/linux/linux-ti-staging_git.bb
+
+
 > > +           file://defconfig \
 > > +"
 > > +
