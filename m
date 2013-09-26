@@ -1,33 +1,22 @@
-Return-Path: <heroor@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6EFDBE01646
-	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 08:50:06 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8QFo5Y6022116
-	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 10:50:05 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8QFo5gm012400
-	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 10:50:05 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 26 Sep 2013 10:50:05 -0500
-Received: from [172.24.81.205] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8QFo2lo031425;
-	Thu, 26 Sep 2013 10:50:03 -0500
-Message-ID: <524457A9.8060908@ti.com>
-Date: Thu, 26 Sep 2013 21:20:01 +0530
-From: Siddharth Heroor <heroor@ti.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:17.0) Gecko/20130620 Thunderbird/17.0.7
-MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <1380138591-17071-1-git-send-email-denis@denix.org>
-	<7D46E86EC0A8354091174257B2FED101597510CF@DLEE11.ent.ti.com>
-	<52444CFB.2000807@ti.com> <20130926153525.GR14528@edge>
-In-Reply-To: <20130926153525.GR14528@edge>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "Rini,
-	Tom" <trini@ti.com>
-Subject: Re: [PATCHv2 4/4] ti43x, omap-a15: switch KERNEL_IMAGETYPE to zImage by default
+Return-Path: <denis@denix.org>
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C55F0E01645
+	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 09:37:18 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.45.150.102])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MTQ00JEORHIHYT2@vms173003.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 26 Sep 2013 11:37:00 -0500 (CDT)
+Received: from elrond.denix (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 49AFB2008E; Thu,
+	26 Sep 2013 12:36:54 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Thu, 26 Sep 2013 12:36:52 -0400
+Message-id: <1380213412-16982-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH] Revert "linux: Inherit new machine_kernel_pr class"
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,37 +29,89 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2013 15:50:07 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 26 Sep 2013 16:37:18 -0000
 
-On 9/26/2013 9:05 PM, Denys Dmytriyenko wrote:
-> On Thu, Sep 26, 2013 at 08:34:27PM +0530, Siddharth Heroor wrote:
->> On 9/26/2013 5:29 PM, Maupin, Chase wrote:
->>> Acked-by: Chase Maupin <chase.maupin@ti.com>
->>
->> Just a question - is it possible to override the KERNEL_IMAGETYPE in a
->> branding.inc file? In general, we want to move to zImage for GLSDK but
->> some customers who might want to stay on uImage as they ramp.
-> 
-> It won't be very easy to do from a branding file. That's why I had to rev 
-> the other patch to keep GLSDK 3.8 and AMSDK 3.2 kernel recipes on uImage, but 
-> switch other platforms to zImage which already have recent enough u-boot...
-> 
-> When you have a new kernel/u-boot that prefers zImage (like the new 
-> linux-ti-staging_git.bb we have for 3.12 integration), you can set the image 
-> type to zImage in the kernel recipe, or rather not specify it at all, since 
-> it will be picked up from machine config.
-> 
-> In other words, after the setting in the machine config, you have one more 
-> option to override it in a specific kernel recipe. That way if your branding 
-> selects latest kernel/u-boot combo, you get zImage by default from the machine 
-> config. But if branding selects 3.2 kernel with early u-boot, it gets 
-> overwritten back to uImage...
-> 
+From: Denys Dmytriyenko <denys@ti.com>
 
-Got it.
+This adds a new mandatory dependency on meta-openembedded layer. While we are
+still trying to resolve an existing optional dependency, not bring a new one.
+The MACHINE_KERNEL_PR requirement will need to be handled differently.
 
-Thanks,
-Sid
+This reverts commit 6c1ab34c88edc127ff2835d87b48f4b10fe8ba0b.
+---
+ recipes-kernel/linux/linux-am335x-psp_3.2.bb | 2 +-
+ recipes-kernel/linux/linux-ti-glsdk_3.8.bb   | 2 +-
+ recipes-kernel/linux/linux-ti-staging_3.8.bb | 2 +-
+ recipes-kernel/linux/linux-ti-staging_git.bb | 2 +-
+ recipes-kernel/linux/linux.inc               | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-am335x-psp_3.2.bb b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
+index cf1b2dd..eaf788f 100644
+--- a/recipes-kernel/linux/linux-am335x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
+@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE = "ti33x"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-inherit kernel machine_kernel_pr
++inherit kernel
+ require setup-defconfig.inc
+ 
+ # Stage the power management firmware before building the kernel
+diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+index d7aebea..5fd17f8 100644
+--- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ KERNEL_IMAGETYPE = "uImage"
+ 
+-inherit kernel machine_kernel_pr
++inherit kernel
+ 
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+index 8e6d198..833fb48 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ KERNEL_IMAGETYPE = "uImage"
+ 
+-inherit kernel machine_kernel_pr
++inherit kernel
+ 
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index b75e650..778ea7f 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Linux kernel for TI devices"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ 
+-inherit kernel machine_kernel_pr
++inherit kernel
+ 
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
+diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linux.inc
+index e0d414c..ac51dae 100644
+--- a/recipes-kernel/linux/linux.inc
++++ b/recipes-kernel/linux/linux.inc
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ 
+-inherit kernel siteinfo machine_kernel_pr
++inherit kernel siteinfo
+ 
+ # Enable OABI compat for people stuck with obsolete userspace
+ ARM_KEEP_OABI ?= "1"
+-- 
+1.8.3.2
+
 
