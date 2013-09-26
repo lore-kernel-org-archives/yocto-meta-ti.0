@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EBA8FE01508
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ECE2EE015D6
 	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 10:26:35 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7B231529E2; Thu, 26 Sep 2013 17:26:34 +0000 (UTC)
+	id A70DA529E7; Thu, 26 Sep 2013 17:26:34 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130926172634.7B231529E2@arago-project.org>
+Message-Id: <20130926172634.A70DA529E7@arago-project.org>
 Date: Thu, 26 Sep 2013 17:26:34 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : Revert "linux: Inherit new machine_kernel_pr class"
@@ -26,12 +26,12 @@ X-List-Received-Date: Thu, 26 Sep 2013 17:26:38 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: 9e595df2976144c996ec3abc20db8f6dc08d7f0f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9e595df2976144c996ec3abc20db8f6dc08d7f0f
+Branch: master
+Commit: 4b78ad59dfa280989181f6775668b3b7e5d2c419
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4b78ad59dfa280989181f6775668b3b7e5d2c419
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Sep 26 12:32:16 2013 -0400
+Date:   Thu Sep 26 12:35:40 2013 -0400
 
 Revert "linux: Inherit new machine_kernel_pr class"
 
@@ -39,7 +39,7 @@ This adds a new mandatory dependency on meta-openembedded layer. While we are
 still trying to resolve an existing optional dependency, not bring a new one.
 The MACHINE_KERNEL_PR requirement will need to be handled differently.
 
-This reverts commit 6c1ab34c88edc127ff2835d87b48f4b10fe8ba0b.
+This reverts commit 1450f1938007bede786160c501c8fd268b661c5e.
 
 ---
 
