@@ -1,32 +1,32 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 206BEE015DA
-	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 06:57:14 -0700 (PDT)
+Return-Path: <heroor@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DEFD0E01632
+	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 08:04:33 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8QDvD5b031910
-	for <meta-ti@yoctoproject.org>; Thu, 26 Sep 2013 08:57:13 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8QDvDjk013308;
-	Thu, 26 Sep 2013 08:57:13 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 26 Sep 2013 08:57:13 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8QDvD1E011186;
-	Thu, 26 Sep 2013 08:57:13 -0500
-Date: Thu, 26 Sep 2013 09:57:12 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Deepak M <x0171695@ti.com>
-Message-ID: <20130926135712.GK14528@edge>
-References: <1380112791-22545-1-git-send-email-x0171695@ti.com>
-	<1380112791-22545-4-git-send-email-x0171695@ti.com>
-	<20130926135039.GH14528@edge>
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r8QF4WCn016157;
+	Thu, 26 Sep 2013 10:04:32 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8QF4WI1012114;
+	Thu, 26 Sep 2013 10:04:32 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 26 Sep 2013 10:04:32 -0500
+Received: from [172.24.81.142] (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r8QF4StY002031;
+	Thu, 26 Sep 2013 10:04:29 -0500
+Message-ID: <52444CFB.2000807@ti.com>
+Date: Thu, 26 Sep 2013 20:34:27 +0530
+From: Siddharth Heroor <heroor@ti.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:17.0) Gecko/20130620 Thunderbird/17.0.7
 MIME-Version: 1.0
-In-Reply-To: <20130926135039.GH14528@edge>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org, maulik@ti.com, epos_dev@list.ti.com,
-	nageswari@ti.com
-Subject: Re: [meta-ti patch v3 3/3] am43xx: Added the kernel recipe
+To: "Maupin, Chase" <chase.maupin@ti.com>
+References: <1380138591-17071-1-git-send-email-denis@denix.org>
+	<7D46E86EC0A8354091174257B2FED101597510CF@DLEE11.ent.ti.com>
+In-Reply-To: <7D46E86EC0A8354091174257B2FED101597510CF@DLEE11.ent.ti.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "Rini,
+	Tom" <trini@ti.com>
+Subject: Re: [PATCHv2 4/4] ti43x, omap-a15: switch KERNEL_IMAGETYPE to zImage by default
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,83 +39,88 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2013 13:57:15 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 26 Sep 2013 15:04:34 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Sep 26, 2013 at 09:50:39AM -0400, Denys Dmytriyenko wrote:
-> On Wed, Sep 25, 2013 at 06:09:50PM +0530, Deepak M wrote:
-> > Signed-off-by: Deepak M <x0171695@ti.com>
-> > ---
-> > v3:
-> > 1. Changed the kernel recipe name to linux-am43xx
-> > 2. Using the external source link
-> > 
-> >  recipes-kernel/linux/linux-am43xx/defconfig |  1 +
-> >  recipes-kernel/linux/linux-am43xx_3.12.bb   | 31 +++++++++++++++++++++++++++++
-> >  2 files changed, 32 insertions(+)
-> >  create mode 100644 recipes-kernel/linux/linux-am43xx/defconfig
-> >  create mode 100644 recipes-kernel/linux/linux-am43xx_3.12.bb
-> 
-> Again, 3.12 is not yet released, you can't call your recipe with 3.12.
+On 9/26/2013 5:29 PM, Maupin, Chase wrote:
+> Acked-by: Chase Maupin <chase.maupin@ti.com>
+
+Just a question - is it possible to override the KERNEL_IMAGETYPE in a
+branding.inc file? In general, we want to move to zImage for GLSDK but
+some customers who might want to stay on uImage as they ramp.
+
+Otherwise, no comments.
+
+Acked-by: Siddharth Heroor <heroor@ti.com>
+
 > 
 > 
-> > diff --git a/recipes-kernel/linux/linux-am43xx/defconfig b/recipes-kernel/linux/linux-am43xx/defconfig
-> > new file mode 100644
-> > index 0000000..926b35a
-> > --- /dev/null
-> > +++ b/recipes-kernel/linux/linux-am43xx/defconfig
-> > @@ -0,0 +1 @@
-> > +use-kernel-config=omap2plus_defconfig
-> > diff --git a/recipes-kernel/linux/linux-am43xx_3.12.bb b/recipes-kernel/linux/linux-am43xx_3.12.bb
-> > new file mode 100644
-> > index 0000000..a4b0700
-> > --- /dev/null
-> > +++ b/recipes-kernel/linux/linux-am43xx_3.12.bb
-> > @@ -0,0 +1,31 @@
-> > +SECTION = "kernel"
-> > +DESCRIPTION = "Linux kernel for TI33x devices from PSP"
-> > +LICENSE = "GPLv2"
-> > +LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-> > +COMPATIBLE_MACHINE = "am437x-epos-evm"
-> > +
-> > +DEFAULT_PREFERENCE = "-1"
-> > +
-> > +inherit kernel
-> > +require recipes-kernel/linux/linux-dtb.inc
-> > +require setup-defconfig.inc
-> > +
-> > +KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
-> > +
-> > +KERNEL_IMAGETYPE = "uImage"
-> > +KERNEL_DEVICETREE = "am43x-epos-evm.dtb"
-> > +
-> > +KERNEL_DTB = "arch/arm/boot/dts/am43x-epos-evm.dtb"
-> > +
-> > +
-> > +# The main PR is now using MACHINE_KERNEL_PR,
-> > +PR = "r1+gitr${SRCPV}"
-> > +
-> > +BRANCH   = "linux-3.12.y"
-> > +
-> > +SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;BRANCH=${BRANCH};protocol=ssh \
-
-Any reason to use upstream linux-3.12.y branch instead of our integration 
-ti-linux-3.12.y one? And we do have a recipe for that already:
-
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-kernel/linux/linux-ti-staging_git.bb
-
-
-> > +           file://defconfig \
-> > +"
-> > +
-> > +SRCREV = "272b98c6455f00884f0350f775c5342358ebb73f"
-> > +S = "${WORKDIR}/git"
-> > -- 
-> > 1.8.1
-> > 
+>> -----Original Message-----
+>> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+>> bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
+>> Sent: Wednesday, September 25, 2013 2:50 PM
+>> To: meta-ti@yoctoproject.org
+>> Cc: Rini, Tom
+>> Subject: [meta-ti] [PATCHv2 4/4] ti43x, omap-a15: switch
+>> KERNEL_IMAGETYPE to zImage by default
+>>
+>> From: Denys Dmytriyenko <denys@ti.com>
+>>
+>> * To be used with latest u-boot, that prefers zImage over uImage
+>> * ti33x will follow as soon as u-boot changes its default for that
+>> platform
+>>
+>> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+>> Cc: Tom Rini <trini@ti.com>
+>> ---
+>> v2 - don't change the default for ti33x yet, wait for u-boot
+>>
+>> conf/machine/include/omap-a15.inc | 2 +-
+>> conf/machine/include/ti43x.inc    | 2 +-
+>> 2 files changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/conf/machine/include/omap-a15.inc
+>> b/conf/machine/include/omap-a15.inc
+>> index 623f2df..aba122a 100644
+>> --- a/conf/machine/include/omap-a15.inc
+>> +++ b/conf/machine/include/omap-a15.inc
+>> @@ -10,7 +10,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-
+>> staging"
+>> PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+>> PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+>>
+>> -KERNEL_IMAGETYPE = "uImage"
+>> +KERNEL_IMAGETYPE = "zImage"
+>>
+>> UBOOT_ARCH = "arm"
+>> UBOOT_ENTRYPOINT = "0x80008000"
+>> diff --git a/conf/machine/include/ti43x.inc
+>> b/conf/machine/include/ti43x.inc
+>> index 62da105..adb66e3 100644
+>> --- a/conf/machine/include/ti43x.inc
+>> +++ b/conf/machine/include/ti43x.inc
+>> @@ -23,7 +23,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-
+>> staging"
+>> PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+>> PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
+>>
+>> -KERNEL_IMAGETYPE = "uImage"
+>> +KERNEL_IMAGETYPE = "zImage"
+>>
+>> UBOOT_ARCH = "arm"
+>> UBOOT_MACHINE = "am43xx_evm_config"
+>> --
+>> 1.8.3.2
+>>
+>> _______________________________________________
+>> meta-ti mailing list
+>> meta-ti@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/meta-ti
 > _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
 > https://lists.yoctoproject.org/listinfo/meta-ti
+> 
+
 
