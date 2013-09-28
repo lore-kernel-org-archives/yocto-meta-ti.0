@@ -1,24 +1,22 @@
 Return-Path: <denis@denix.org>
 Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
 	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C2DF0E01669
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED8F4E0166D
 	for <meta-ti@yoctoproject.org>; Sat, 28 Sep 2013 15:54:41 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [108.45.150.102])
 	by vms173013.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MTU006BQYAPT9A0@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sat, 28 Sep 2013 17:54:25 -0500 (CDT)
+	2009)) with ESMTPA id <0MTU002MGYAAD8A0@vms173013.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Sat, 28 Sep 2013 17:54:27 -0500 (CDT)
 Received: from elrond.denix (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 0B689200F4; Sat,
-	28 Sep 2013 18:54:22 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id AE0932004C; Sat,
+	28 Sep 2013 18:54:09 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Sat, 28 Sep 2013 18:54:05 -0400
-Message-id: <1380408845-18316-9-git-send-email-denis@denix.org>
+Date: Sat, 28 Sep 2013 18:53:57 -0400
+Message-id: <1380408845-18316-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.8.3.2
-In-reply-to: <1380408845-18316-1-git-send-email-denis@denix.org>
-References: <1380408845-18316-1-git-send-email-denis@denix.org>
-Subject: [PATCH 8/8] linux: set PR from MACHINE_KERNEL_PR, bypass machine_kernel_pr.bbclass from meta-oe
+Subject: [PATCH 0/8] linux: various cleanups and updates to kernel recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,178 +29,1081 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Sep 2013 22:54:41 -0000
+X-List-Received-Date: Sat, 28 Sep 2013 22:54:42 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
-Essentially, machine_kernel_pr.bbclass does this one line assignment, but
-introduces a new unnecessary dependency on meta-openembedded/meta-oe layer.
+This series cleans up some old recipes that are no longer used and maintained.
+As well as updates them to the latest versions and fixes the MACHINE_KERNEL_PR
+dependency.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-am335x-psp_3.2.bb      | 1 +
- recipes-kernel/linux/linux-keystone_3.8.4.bb      | 1 +
- recipes-kernel/linux/linux-mainline_3.2.bb        | 1 +
- recipes-kernel/linux/linux-omap-psp_2.6.37.bb     | 1 +
- recipes-kernel/linux/linux-omap4_3.4.bb           | 1 +
- recipes-kernel/linux/linux-omap_2.6.37.bb         | 3 +++
- recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb | 1 +
- recipes-kernel/linux/linux-ti-glsdk_3.8.bb        | 1 +
- recipes-kernel/linux/linux-ti-staging_3.8.bb      | 1 +
- recipes-kernel/linux/linux-ti-staging_git.bb      | 1 +
- recipes-kernel/linux/linux-ti33x-psp_3.2.bb       | 2 ++
- recipes-kernel/linux/linux_3.3.7.bb               | 1 +
- 12 files changed, 15 insertions(+)
+Denys Dmytriyenko (8):
+  linux-omap-2.6.39: remove old beagleboard-specific and not supported
+    kernel
+  linux-3.0: remove old beagleboard-specific 3.0 and 3.1rc kernel
+    recipes
+  linux-omap4-3.1.0: remove old pandaboard-specific kernel
+  linux-davinci 2.6.32: remove old hawkboard-specific kernel
+  linux-omap-psp-2.6.32: remove old linux-omap3 PSP kernel
+  linux-keystone: update from 3.6.6 to 3.8.4
+  linux-ti-staging: update to 3.12-rc2 with rpmsg, connectivity, audio
+    and display merged
+  linux: set PR from MACHINE_KERNEL_PR, bypass machine_kernel_pr.bbclass
+    from meta-oe
 
-diff --git a/recipes-kernel/linux/linux-am335x-psp_3.2.bb b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-index eaf788f..9d08a86 100644
---- a/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
-@@ -16,6 +16,7 @@ KERNEL_IMAGETYPE = "uImage"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for ti33x see conf/machine/include/ti33x.inc
- MACHINE_KERNEL_PR_append = "h+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
- 
- BRANCH = "v3.2-staging"
- 
-diff --git a/recipes-kernel/linux/linux-keystone_3.8.4.bb b/recipes-kernel/linux/linux-keystone_3.8.4.bb
-index 989fde9..d176f14 100644
---- a/recipes-kernel/linux/linux-keystone_3.8.4.bb
-+++ b/recipes-kernel/linux/linux-keystone_3.8.4.bb
-@@ -21,6 +21,7 @@ SRCREV = "20a48dc5309c4434650baef2b6072b5f1016f946"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
- 
- SRC_URI = "git://arago-project.org/git/projects/linux-keystone.git;protocol=git;branch=${BRANCH}\
-            file://defconfig\
-diff --git a/recipes-kernel/linux/linux-mainline_3.2.bb b/recipes-kernel/linux/linux-mainline_3.2.bb
-index 7b4a2a2..7398d9a 100644
---- a/recipes-kernel/linux/linux-mainline_3.2.bb
-+++ b/recipes-kernel/linux/linux-mainline_3.2.bb
-@@ -10,6 +10,7 @@ SRCREV_pn-${PN} = "1f873aca1c7aa7a574b276c040d304d16f1dbfa4"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
- MACHINE_KERNEL_PR_append = "b"
-+PR = "${MACHINE_KERNEL_PR}"
- 
- FILESPATH =. "${FILE_DIRNAME}/linux-mainline-3.2:${FILE_DIRNAME}/linux-mainline-3.2/${MACHINE}:"
- 
-diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-index d1a6478..8333cc8 100644
---- a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-+++ b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
-@@ -11,6 +11,7 @@ SRCREV= "adcd067326836777c049e3cb32a5b7d9d401fc31"
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 devices
- # see conf/machine/include/omap3.inc
- MACHINE_KERNEL_PR_append = "b"
-+PR = "${MACHINE_KERNEL_PR}"
- 
- SRC_URI = "git://arago-project.org/git/projects/linux-omap3.git;protocol=git \
-            file://defconfig"
-diff --git a/recipes-kernel/linux/linux-omap4_3.4.bb b/recipes-kernel/linux/linux-omap4_3.4.bb
-index 1928060..449e4eb 100644
---- a/recipes-kernel/linux/linux-omap4_3.4.bb
-+++ b/recipes-kernel/linux/linux-omap4_3.4.bb
-@@ -4,6 +4,7 @@ require linux.inc
- 
- # The main PR is now using MACHINE_KERNEL_PR, for omap4 see conf/machine/include/omap4.inc
- MACHINE_KERNEL_PR_append = "a"
-+PR = "${MACHINE_KERNEL_PR}"
- 
- CORTEXA8FIXUP = "no"
- 
-diff --git a/recipes-kernel/linux/linux-omap_2.6.37.bb b/recipes-kernel/linux/linux-omap_2.6.37.bb
-index 0a14cc8..1bbdde1 100644
---- a/recipes-kernel/linux/linux-omap_2.6.37.bb
-+++ b/recipes-kernel/linux/linux-omap_2.6.37.bb
-@@ -6,7 +6,10 @@ COMPATIBLE_MACHINE = "(beagleboard|overo|omap3evm|omap3-touchbook)"
- 
- # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
- PV = "2.6.37"
-+
- MACHINE_KERNEL_PR_append = "c+gitr${SRCREV}"
-+PR = "${MACHINE_KERNEL_PR}"
-+
- SRCREV = "fa3b4e23ec20cfc944db7cc2b30b0d82c20e4472"
- 
- FILESEXTRAPATHS_prepend := "{THISDIR}/${PN}-${PV}:"
-diff --git a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
-index a138fb6..199499a 100644
---- a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
-+++ b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
-@@ -7,6 +7,7 @@ require tipspkernel.inc
- require setup-defconfig.inc
- 
- MACHINE_KERNEL_PR_append = "c"
-+PR = "${MACHINE_KERNEL_PR}"
- 
- S = "${WORKDIR}/git"
- 
-diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-index 5fd17f8..291e852 100644
---- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-@@ -25,6 +25,7 @@ PV = "3.8.13"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-index 833fb48..80b94f6 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
-@@ -32,6 +32,7 @@ PV = "3.8.13"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
-diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index b28667e..5b0c260 100644
---- a/recipes-kernel/linux/linux-ti-staging_git.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -33,6 +33,7 @@ PV = "3.11+3.12-rc2"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
-diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-index 4200d03..1602e3f 100644
---- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-+++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
-@@ -15,7 +15,9 @@ PV = "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "3.2", "3.2.28", d)}"
- 
- BRANCH = "v3.2-staging"
- SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
-+
- MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
-+PR = "${MACHINE_KERNEL_PR}"
- 
- COMPATIBLE_MACHINE = "(ti33x)"
- 
-diff --git a/recipes-kernel/linux/linux_3.3.7.bb b/recipes-kernel/linux/linux_3.3.7.bb
-index aca5c53..f6d2172 100644
---- a/recipes-kernel/linux/linux_3.3.7.bb
-+++ b/recipes-kernel/linux/linux_3.3.7.bb
-@@ -14,6 +14,7 @@ require setup-defconfig.inc
- # The main PR is now using MACHINE_KERNEL_PR, for beagleboard see
- # conf/machine/include/omap3.inc
- MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
-+PR = "${MACHINE_KERNEL_PR}"
- 
- BRANCH = "linux-3.3.y"
- SRCREV = "v3.3.7"
+ ...OMAP3-beagle-add-support-for-expansionboa.patch |   340 -
+ ...0002-HACK-OMAP3-beagle-switch-to-GPTIMER1.patch |    26 -
+ .../0003-OMAP3-beagle-HACK-add-in-1GHz-OPP.patch   |    31 -
+ .../linux/linux-3.0+3.1rc/beagleboard/defconfig    |  3517 -
+ .../linux/linux-3.0+3.1rc/fixes/vout.patch         |    79 -
+ ...01-Enabling-Hwmon-driver-for-twl4030-madc.patch |    46 -
+ .../madc/0002-mfd-twl-core-enable-madc-clock.patch |    54 -
+ recipes-kernel/linux/linux-3.0+3.1rc/patch.sh      |    27 -
+ ...001-ARM-L2-Add-and-export-outer_clean_all.patch |    67 -
+ ...e-add-support-for-beagleboard-xM-revision.patch |   196 -
+ ...OMAP3-beagle-add-support-for-expansionboa.patch |   340 -
+ ...0003-HACK-OMAP3-beagle-switch-to-GPTIMER1.patch |    26 -
+ .../0004-OMAP3-beagle-HACK-add-in-1GHz-OPP.patch   |    31 -
+ ...5-omap3-Add-basic-support-for-720MHz-part.patch |   202 -
+ ...eagleboard-make-wilink-init-look-more-lik.patch |    32 -
+ ...Set-dto-to-max-value-of-14-to-avoid-SD-Ca.patch |    33 -
+ ...add-cpu-id-register-to-MAC-address-helper.patch |    89 -
+ ...BeagleBoard-Fix-up-random-or-missing-MAC-.patch |   156 -
+ ...eagleboard-fix-mmc-write-protect-pin-when.patch |    26 -
+ ...d-reinstate-usage-of-hi-speed-PLL-divider.patch |    29 -
+ .../linux/linux-3.0/beagleboard/defconfig          |  3604 -
+ ...3630-PRM-add-ABB-PRM-register-definitions.patch |    93 -
+ ...P3-PM-VP-generalize-PRM-interrupt-helpers.patch |   263 -
+ ...P3-PRM-add-tranxdone-IRQ-handlers-for-ABB.patch |   202 -
+ ...P3-ABB-Adaptive-Body-Bias-structures-data.patch |   240 -
+ ...-OMAP3-OPP-add-ABB-data-to-voltage-tables.patch |   194 -
+ ...3-Voltage-add-ABB-data-to-voltage-domains.patch |    83 -
+ ...3-ABB-initialization-transition-functions.patch |   274 -
+ ...-OMAP3-Voltage-add-ABB-to-voltage-scaling.patch |   114 -
+ ...01-Enabling-Hwmon-driver-for-twl4030-madc.patch |    46 -
+ .../madc/0002-mfd-twl-core-enable-madc-clock.patch |    54 -
+ ...Undef-before-redefining-__attribute_const.patch |    31 -
+ ...llow-OPP-enumeration-to-continue-if-devic.patch |    43 -
+ ...nking-error-in-twl-common.c-for-OMAP2-3-4.patch |   129 -
+ recipes-kernel/linux/linux-3.0/patch.sh            |    29 -
+ ...-introduce-function-to-free-cpufreq-table.patch |    84 -
+ ...q-ensure-driver-initializes-after-cpufreq.patch |    28 -
+ ...PUfreq-ensure-policy-is-fully-initialized.patch |    32 -
+ .../0004-OMAP3-PM-CPUFreq-driver-for-OMAP3.patch   |   264 -
+ ...AP-PM-CPUFREQ-Fix-conditional-compilation.patch |    33 -
+ ...-cpufreq-fixup-after-new-OPP-layer-merged.patch |    34 -
+ ...q-Split-OMAP1-and-OMAP2PLUS-CPUfreq-drive.patch |   673 -
+ ...cpufreq-Add-SMP-support-to-cater-OMAP4430.patch |   171 -
+ ...pufreq-Fix-typo-when-attempting-to-set-mp.patch |    30 -
+ ...P2-cpufreq-move-clk-name-decision-to-init.patch |    64 -
+ ...-cpufreq-deny-initialization-if-no-mpudev.patch |    64 -
+ ...012-OMAP2-cpufreq-dont-support-freq_table.patch |   129 -
+ ...3-OMAP2-cpufreq-only-supports-OPP-library.patch |    46 -
+ ...-OMAP2-cpufreq-put-clk-if-cpu_init-failed.patch |    61 -
+ .../0015-OMAP2-cpufreq-fix-freq_table-leak.patch   |    90 -
+ ...eq-Remove-superfluous-check-in-target-for.patch |    58 -
+ ...ufreq-notify-even-with-bad-boot-frequency.patch |    48 -
+ ...req-Enable-all-CPUs-in-shared-policy-mask.patch |    42 -
+ ...eq-update-lpj-with-reference-value-to-avo.patch |   121 -
+ ...egulator-supply-definitions-in-mach-omap2.patch |  1083 -
+ ...style-supply.dev-assignments-common-in-hs.patch |   160 -
+ ...parate-init_irq-functions-to-avoid-cpu_is.patch |   802 -
+ ...parate-timer-init-functions-to-avoid-cpu_.patch |   689 -
+ ...05-omap-Move-dmtimer-defines-to-dmtimer.h.patch |   287 -
+ ...-subset-of-dmtimer-functions-into-inline-.patch |   323 -
+ ...7-omap2-Use-dmtimer-macros-for-clockevent.patch |   279 -
+ .../0008-omap2-Remove-gptimer_wakeup-for-now.patch |   177 -
+ ...OMAP3-SR-make-notify-independent-of-class.patch |    47 -
+ ...010-OMAP3-SR-disable-interrupt-by-default.patch |    36 -
+ ...1-OMAP3-SR-enable-disable-SR-only-on-need.patch |    40 -
+ .../0012-OMAP3-SR-fix-cosmetic-indentation.patch   |    48 -
+ ...ve-clocksource-and-timesource-and-initial.patch |   125 -
+ ...-omap2-Use-dmtimer-macros-for-clocksource.patch |   163 -
+ ...p2-Remove-omap2_gp_clockevent_set_gptimer.patch |   240 -
+ ...e-timer-gp.c-into-timer.c-to-combine-time.patch |   737 -
+ .../0017-omap-cleanup-NAND-platform-data.patch     |   165 -
+ ...omap-board-omap3evm-Fix-compilation-error.patch |    40 -
+ .../0019-omap-mcbsp-Drop-SPI-mode-support.patch    |   311 -
+ ...map-mcbsp-Drop-in-driver-transfer-support.patch |   548 -
+ .../voltdm/0021-omap2-fix-build-regression.patch   |    29 -
+ ...w-twl-common-for-common-TWL-configuration.patch |   200 -
+ ...common-twl6030-configuration-to-twl-commo.patch |   601 -
+ ...ve-common-twl-configuration-to-twl-common.patch |   827 -
+ ...common-regulator-configuration-to-twl-com.patch |   924 -
+ ...mcbsp-Remove-rx_-tx_word_length-variables.patch |    45 -
+ .../0027-omap-mcbsp-Remove-port-number-enums.patch |    68 -
+ .../0028-OMAP-dmtimer-add-missing-include.patch    |    31 -
+ ...P2-hwmod-Fix-smart-standby-wakeup-support.patch |   130 -
+ ...4-hwmod-data-Add-MSTANDBY_SMART_WKUP-flag.patch |    61 -
+ ...-Enable-module-in-shutdown-to-access-sysc.patch |    37 -
+ ...-Do-not-write-the-enawakeup-bit-if-SYSC_H.patch |    65 -
+ ...wmod-Remove-_populate_mpu_rt_base-warning.patch |    33 -
+ ...4-OMAP2-hwmod-Fix-the-HW-reset-management.patch |    87 -
+ ...-OMAP-hwmod-Add-warnings-if-enable-failed.patch |    30 -
+ ...-Move-pr_debug-to-improve-the-readability.patch |    95 -
+ ...use-a-null-structure-record-to-terminate-.patch |  3529 -
+ ...share-identical-omap_hwmod_addr_space-arr.patch |  1958 -
+ ...use-a-terminator-record-with-omap_hwmod_m.patch |  2904 -
+ ...share-identical-omap_hwmod_mpu_irqs-array.patch |  1815 -
+ ...use-a-terminator-record-with-omap_hwmod_d.patch |  1382 -
+ ...share-identical-omap_hwmod_dma_info-array.patch |   935 -
+ ...share-identical-omap_hwmod_class-omap_hwm.patch |  1730 -
+ ...-data-Fix-L3-interconnect-data-order-and-.patch |   116 -
+ ...-OMAP4-hwmod-data-Remove-un-needed-parens.patch |    42 -
+ .../0046-OMAP4-hwmod-data-Fix-bad-alignement.patch |   218 -
+ ...-data-Align-interconnect-format-with-regu.patch |   154 -
+ ...48-OMAP4-clock-data-Add-sddiv-to-USB-DPLL.patch |    31 -
+ ...-data-Remove-usb_host_fs-clkdev-with-NULL.patch |    48 -
+ ...-data-Re-order-some-clock-nodes-and-struc.patch |   229 -
+ ...ck-data-Fix-max-mult-and-div-for-USB-DPLL.patch |   143 -
+ ...OMAP4-prcm-Fix-errors-in-few-defines-name.patch |   256 -
+ ...MAP4-prm-Remove-wrong-clockdomain-offsets.patch |    50 -
+ ...54-OMAP4-powerdomain-data-Fix-indentation.patch |   109 -
+ ...move-RESTORE-macros-to-avoid-access-from-.patch |  1523 -
+ ...6-OMAP4-prcm_mpu-Fix-indent-in-few-macros.patch |   111 -
+ ...domain-data-Fix-data-order-and-wrong-name.patch |   294 -
+ ...evice-replace-_find_by_pdev-with-to_omap_.patch |    84 -
+ ...OMAP-PM-remove-OMAP_PM_NONE-config-option.patch |    63 -
+ ...-data-Remove-McASP2-McASP3-and-MMC6-clock.patch |   178 -
+ ...MAP4-clock-data-Remove-UNIPRO-clock-nodes.patch |    99 -
+ ...62-OMAP4-hwmod-data-Modify-DSS-opt-clocks.patch |   153 -
+ ...itialise-sleep_switch-to-a-non-valid-valu.patch |    39 -
+ ...domain-data-Fix-core-mem-states-and-missi.patch |    68 -
+ ...-data-Keep-GPMC-clocks-always-enabled-and.patch |    45 -
+ ...domain-data-Remove-unsupported-MPU-powerd.patch |    44 -
+ ...AP4-hwmod-data-Change-DSS-main_clk-scheme.patch |   163 -
+ ...et-hwmod-flags-to-only-allow-16-bit-acces.patch |   133 -
+ ...ncrease-omap_i2c_dev_attr-flags-from-u8-t.patch |    46 -
+ ...AP2-Introduce-I2C-IP-versioning-constants.patch |    61 -
+ ...MAP2-create-omap-I2C-functionality-flags-.patch |    51 -
+ ...ag-all-OMAP2-hwmod-defintions-with-I2C-IP.patch |    77 -
+ ...dd-correct-functionality-flags-to-all-oma.patch |   146 -
+ ...d-fix-the-i2c-reset-timeout-during-bootup.patch |   286 -
+ ...evice-Create-clkdev-entry-for-hwmod-main_.patch |   437 -
+ ...-data-Add-missing-divider-selection-for-a.patch |   292 -
+ ...AP4-hwmod-data-Add-clock-domain-attribute.patch |   724 -
+ ...OMAP2-hwmod-Init-clkdm-field-at-boot-time.patch |    86 -
+ ...-Replace-CLKCTRL-absolute-address-with-of.patch |   976 -
+ ...hwmod-Wait-the-idle-status-to-be-disabled.patch |   153 -
+ ...-Replace-RSTCTRL-absolute-address-with-of.patch |   459 -
+ ...eplace-warm-reset-API-with-the-offset-bas.patch |   125 -
+ ...083-OMAP4-prm-Remove-deprecated-functions.patch |    81 -
+ ...wmod-data-Add-PRM-context-register-offset.patch |   630 -
+ ...-data-Add-modulemode-entry-in-omap_hwmod-.patch |   503 -
+ ...m-Add-two-new-APIs-for-modulemode-control.patch |    88 -
+ ...-Introduce-the-module-control-in-hwmod-co.patch |   129 -
+ ...omain-Remove-redundant-call-to-pwrdm_wait.patch |    30 -
+ ...domain-Add-2-APIs-to-control-clockdomain-.patch |   231 -
+ ...0090-OMAP2-clockdomain-add-clkdm_in_hwsup.patch |   141 -
+ ...P2-PM-idle-clkdms-only-if-already-in-idle.patch |    53 -
+ ...domain-Add-per-clkdm-lock-to-prevent-conc.patch |   264 -
+ ...-allow-per-SoC-clock-init-code-to-prevent.patch |   123 -
+ ...-Follow-the-recommended-PRCM-module-enabl.patch |   173 -
+ ...bugfs-node-to-show-the-summary-of-all-clo.patch |    84 -
+ ...hwmod-remove-unused-voltagedomain-pointer.patch |    30 -
+ ...ge-move-PRCM-mod-offets-into-VC-VP-struct.patch |   577 -
+ ...ge-move-prm_irqst_reg-from-VP-into-voltag.patch |   203 -
+ ...ge-start-towards-a-new-voltagedomain-laye.patch |   986 -
+ ...ltage-rename-mpu-voltagedomain-to-mpu_iva.patch |    82 -
+ ...MAP3-voltagedomain-data-add-wakeup-domain.patch |    37 -
+ ...oltage-add-scalable-flag-to-voltagedomain.patch |    93 -
+ ...domain-add-voltagedomain-to-struct-powerd.patch |    51 -
+ ...oltage-domains-and-connect-to-powerdomain.patch |   138 -
+ ...MAP3-powerdomain-data-add-voltage-domains.patch |   161 -
+ ...MAP4-powerdomain-data-add-voltage-domains.patch |   177 -
+ ...domain-add-voltage-domain-lookup-during-r.patch |    89 -
+ ...ge-keep-track-of-powerdomains-in-each-vol.patch |   200 -
+ ...ge-split-voltage-controller-VC-code-into-.patch |   666 -
+ ...ge-move-VC-into-struct-voltagedomain-misc.patch |   544 -
+ ...ge-enable-VC-bypass-scale-method-when-VC-.patch |    37 -
+ ...ge-split-out-voltage-processor-VP-code-in.patch |   874 -
+ ...pport-PMICs-with-separate-voltage-and-com.patch |   109 -
+ ...RM-VP-functions-for-checking-clearing-VP-.patch |   375 -
+ ...place-transaction-done-check-clear-with-V.patch |   142 -
+ ...M-add-register-access-functions-for-VC-VP.patch |   119 -
+ ...ge-convert-to-PRM-register-access-functio.patch |   627 -
+ ...C-cleanup-i2c-slave-address-configuration.patch |   145 -
+ ...eanup-PMIC-register-address-configuration.patch |   185 -
+ ...pass-use-fields-from-VC-struct-instead-of.patch |    42 -
+ ...-cleanup-voltage-setup-time-configuration.patch |   227 -
+ ...ve-on-onlp-ret-off-command-configuration-.patch |    83 -
+ ...AP3-VC-abstract-out-channel-configuration.patch |   267 -
+ ...ge-domain-move-PMIC-struct-from-vdd_info-.patch |   394 -
+ ...ke-I2C-config-programmable-with-PMIC-spec.patch |   221 -
+ ...-handle-mutant-channel-config-for-OMAP4-M.patch |   168 -
+ ...e-last-nominal-voltage-setting-to-get-cur.patch |    31 -
+ ...eanup-move-VP-instance-into-voltdm-misc.-.patch |   643 -
+ ...voltage-remove-unneeded-debugfs-interface.patch |   317 -
+ ...ruct-omap_vp_common-replace-shift-with-__.patch |   214 -
+ ...ve-SoC-specific-sys-clock-rate-retreival-.patch |   184 -
+ ...ve-timing-calculation-config-into-VP-init.patch |    94 -
+ ...eate-VP-helper-function-for-updating-erro.patch |   107 -
+ ...0134-OMAP3-VP-remove-omap_vp_runtime_data.patch |   170 -
+ ...ve-voltage-scale-function-pointer-into-st.patch |   134 -
+ ...6-OMAP-VP-Explicitly-mask-VPVOLTAGE-field.patch |    81 -
+ ...P3-VP-update_errorgain-return-error-if-VP.patch |    29 -
+ ...P3-VP-remove-unused-omap_vp_get_curr_volt.patch |    70 -
+ ...mbine-setting-init-voltage-into-common-fu.patch |   141 -
+ ...ge-rename-scale-and-reset-functions-using.patch |   141 -
+ ...ge-move-rename-curr_volt-from-vdd_info-in.patch |   106 -
+ ...AP3-voltdm-final-removal-of-omap_vdd_info.patch |   282 -
+ ...ge-rename-omap_voltage_get_nom_volt-voltd.patch |    91 -
+ ...ge-update-nominal-voltage-in-voltdm_scale.patch |    49 -
+ ...PM-TWL6030-fix-voltage-conversion-formula.patch |    85 -
+ ...AP4-PM-TWL6030-fix-uv-to-voltage-for-0x39.patch |    37 -
+ ...7-OMAP4-PM-TWL6030-address-0V-conversions.patch |    38 -
+ ...-OMAP4-PM-TWL6030-fix-ON-RET-OFF-voltages.patch |    71 -
+ .../0149-OMAP4-PM-TWL6030-add-cmd-register.patch   |    56 -
+ ...isplay-single-block-read-console-messages.patch |    28 -
+ ...-omap_device-activate-dectivate-latency-m.patch |    49 -
+ ...dd-bootarg-for-selecting-svideo-or-compos.patch |    75 -
+ ...iminate-noisey-uncorrectable-error-messag.patch |    28 -
+ .../sakoman/0005-video-add-timings-for-hd720.patch |    27 -
+ ...-smsc911x-return-ENODEV-if-device-is-not-.patch |    29 -
+ ...ut-touchscreen-ads7846-return-ENODEV-if-d.patch |    45 -
+ ...08-Revert-omap2_mcspi-Flush-posted-writes.patch |    27 -
+ ...-threaded-IRQ-remove-IRQ-enable-in-interr.patch |    57 -
+ ...0-rtc-twl-Fix-registration-vs.-init-order.patch |   122 -
+ ...Enable-audio-capture-by-default-for-twl40.patch |    27 -
+ ...odecs-twl4030-Turn-on-mic-bias-by-default.patch |    25 -
+ ...l4030-move-clock-input-selection-prior-to.patch |    39 -
+ ...l-add-support-for-backup-battery-recharge.patch |    57 -
+ ...001-ARM-L2-Add-and-export-outer_clean_all.patch |    67 -
+ ...ix-build-break-caused-by-update_mode-remo.patch |    44 -
+ ...-beagleboard-add-bbtoys-ulcd-lite-support.patch |   235 -
+ ...eagleboard-add-support-for-loopthrough-ex.patch |    61 -
+ ...add-initial-support-for-WS2801-controller.patch |   242 -
+ .../usb/0001-Fix-sprz319-erratum-2.1.patch         |   210 -
+ recipes-kernel/linux/linux-am335x-psp_3.2.bb       |     1 +
+ ...001-ARM-6329-1-wire-up-sys_accept4-on-ARM.patch |    51 -
+ ...i-Fix-currently-harmless-typo-in-SATA-PHY.patch |    26 -
+ ...create-sys-fs-cgroup-to-mount-cgroupfs-on.patch |    58 -
+ ...ci-ti-Update-SATA-PHY-configuration-RXCDR.patch |    29 -
+ ...001-board-da850-hawk-Disable-NAND-SUBPAGE.patch |    27 -
+ .../linux/linux-davinci/hawkboard/configs/stock    |  2630 -
+ .../linux/linux-davinci/hawkboard/defconfig        |  2659 -
+ .../linux-davinci/hawkboard/logo_linux_clut224.ppm | 51363 -----------
+ .../patch-2.6.33rc4-psp-to-hawkboard.patch         |  2775 -
+ ...0001-board-da850-evm-Disable-NAND-SUBPAGE.patch |    29 -
+ .../0001-uio_pruss1-Core-driver-addition.patch     |   334 -
+ .../0002-uio_pruss2-Platform-changes.patch         |   243 -
+ ...uio_pruss3-Workarounds-put-into-core-code.patch |    45 -
+ .../omapl138/configs/da850_omapl138_defconfig      |  1876 -
+ .../configs/da850_omapl138_defconfig_mmcpm_stats   |  1917 -
+ .../configs/da850_omapl138_defconfig_nandnommc     |  1886 -
+ .../configs/da850_omapl138_defconfig_uivideocap    |  1874 -
+ .../configs/da850_omapl138_defconfig_uivideocapdis |  1874 -
+ .../linux/linux-davinci/omapl138/defconfig         |  1951 -
+ .../linux-davinci/omapl138/logo_linux_clut224.ppm  | 21763 -----
+ .../linux/linux-davinci/update-mach-types.patch    |   160 -
+ recipes-kernel/linux/linux-davinci_git.bb          |    56 -
+ .../linux/linux-keystone-3.6.6/defconfig           |   188 -
+ .../linux/linux-keystone-3.8.4/defconfig           |     1 +
+ recipes-kernel/linux/linux-keystone_3.6.6.bb       |    16 -
+ recipes-kernel/linux/linux-keystone_3.8.4.bb       |    28 +
+ recipes-kernel/linux/linux-mainline_3.2.bb         |     1 +
+ ...e-add-support-for-beagleboard-xM-revision.patch |   117 -
+ ...P3-beagle-add-support-for-expansionboards.patch |   359 -
+ .../0003-OMAP3-beagle-add-MADC-support.patch       |    36 -
+ ...eagle-add-regulators-for-camera-interface.patch |    88 -
+ .../0005-OMAP3-beagle-HACK-add-in-1GHz-OPP.patch   |    31 -
+ .../beagle/0006-OMAP3-BEAGLE-fix-RTC.patch         |    27 -
+ ...mc-Adjust-dto-to-eliminate-timeout-errors.patch |    33 -
+ ...ap3-beagle-Use-GPTIMERi-1-for-clockevents.patch |    42 -
+ .../linux-omap-2.6.39/beagleboard/configs/stock    |  3490 -
+ .../linux/linux-omap-2.6.39/beagleboard/defconfig  |  3517 -
+ ...d-driver-for-Aptina-Micron-mt9p031-sensor.patch |   859 -
+ .../0002-v4l-Add-mt9v032-sensor-driver.patch       |   853 -
+ ...-for-mt9p031-LI-5M03-module-in-Beagleboar.patch |   162 -
+ ...ap-usbhs-crash-when-rmmoding-ehci-or-ohci.patch |    67 -
+ ...-omap_usbhs_alloc_children-error-handling.patch |    50 -
+ ...003-mfd-Add-omap-usbhs-runtime-PM-support.patch |   245 -
+ ...b-ehci-and-ohci-hwmod-structures-for-omap.patch |   406 -
+ ...005-arm-omap-usb-register-hwmods-of-usbhs.patch |   160 -
+ ...b-device-name-change-for-the-clk-names-of.patch |   123 -
+ ...Suspend-and-resume-support-of-ehci-and-oh.patch |   165 -
+ ...-Correct-the-warning-print-during-script-.patch |    36 -
+ ...-Modifying-the-macro-name-Main_Ref-to-all.patch |    61 -
+ ...FD-TWL4030-power-scripts-for-OMAP3-boards.patch |   705 -
+ .../0011-MFD-TWL4030-TWL-version-checking.patch    |   164 -
+ ...TWL4030-workaround-changes-for-Erratum-27.patch |   341 -
+ ...TWL4030-optimizing-resource-configuration.patch |   184 -
+ ...-Enable-DMA-mode1-RX-for-USB-Mass-Storage.patch |   121 -
+ ...-NFS-Revert-NFSROOT-default-mount-options.patch |    13 -
+ .../0001-OMAP2-cpufreq-free-up-table-on-exit.patch |    38 -
+ ...MAP2-cpufreq-handle-invalid-cpufreq-table.patch |    44 -
+ .../0003-OMAP2-cpufreq-minor-comment-cleanup.patch |    33 -
+ ...eq-use-clk_init_cpufreq_table-if-OPPs-not.patch |    48 -
+ ...pufreq-use-cpufreq_frequency_table_target.patch |    78 -
+ .../0006-OMAP2-cpufreq-fix-freq_table-leak.patch   |   100 -
+ ...q-helpers-for-walking-the-frequency-table.patch |   134 -
+ .../0002-cpufreq-introduce-hotplug-governor.patch  |   879 -
+ ...q-ensure-driver-initializes-after-cpufreq.patch |    27 -
+ ...PUfreq-ensure-policy-is-fully-initialized.patch |    31 -
+ .../0003-OMAP3-PM-CPUFreq-driver-for-OMAP3.patch   |   263 -
+ ...AP-PM-CPUFREQ-Fix-conditional-compilation.patch |    32 -
+ ...-cpufreq-fixup-after-new-OPP-layer-merged.patch |    33 -
+ ...q-Split-OMAP1-and-OMAP2PLUS-CPUfreq-drive.patch |   669 -
+ ...cpufreq-Add-SMP-support-to-cater-OMAP4430.patch |   170 -
+ ...pufreq-Fix-typo-when-attempting-to-set-mp.patch |    29 -
+ ...-clockdomain-Add-an-api-to-read-idle-mode.patch |    77 -
+ ...kdomain-Add-SoC-support-for-clkdm_is_idle.patch |    86 -
+ ...itialise-sleep_switch-to-a-non-valid-valu.patch |    35 -
+ ...P2-PM-idle-clkdms-only-if-already-in-idle.patch |    50 -
+ ...hwmod-Follow-the-recomended-PRCM-sequence.patch |    46 -
+ ...6-OMAP-Serial-Check-wk_st-only-if-present.patch |    33 -
+ ...age-remove-spurious-pr_notice-for-debugfs.patch |    30 -
+ ...OMAP4-PM-remove-redundant-ifdef-CONFIG_PM.patch |    41 -
+ ...reflex-fix-sr_late_init-error-path-in-pro.patch |    30 -
+ ...AP3-smartreflex-request-the-memory-region.patch |    36 -
+ ...artreflex-fix-ioremap-leak-on-probe-error.patch |    66 -
+ ...reflex-delete-instance-from-sr_list-on-pr.patch |    29 -
+ ...reflex-delete-debugfs-entries-on-probe-er.patch |    48 -
+ ...uidle-remove-useless-SDP-specific-timings.patch |    57 -
+ ...OMAP3-SR-make-notify-independent-of-class.patch |    48 -
+ ...010-OMAP3-SR-disable-interrupt-by-default.patch |    37 -
+ ...1-OMAP3-SR-enable-disable-SR-only-on-need.patch |    41 -
+ .../0012-OMAP3-SR-fix-cosmetic-indentation.patch   |    49 -
+ ...01-OMAP-DSS2-DSI-fix-use_sys_clk-highfreq.patch |    33 -
+ .../0002-OMAP-DSS2-DSI-fix-dsi_dump_clocks.patch   |    49 -
+ ...SS2-Fix-Return-correct-lcd-clock-source-f.patch |    43 -
+ .../0004-OMAP-DSS-DSI-Fix-DSI-PLL-power-bug.patch  |    64 -
+ ...-OMAP-DSS2-fix-panel-Kconfig-dependencies.patch |    61 -
+ ...dd-bootarg-for-selecting-svideo-or-compos.patch |    75 -
+ .../sakoman/0007-video-add-timings-for-hd720.patch |    27 -
+ ...-smsc911x-return-ENODEV-if-device-is-not-.patch |    29 -
+ ...ut-touchscreen-ads7846-return-ENODEV-if-d.patch |    47 -
+ ...10-Revert-omap2_mcspi-Flush-posted-writes.patch |    25 -
+ ...p_hsmmc-improve-interrupt-synchronisation.patch |   482 -
+ ...SDIO-cards-off-to-save-power.-Doing-so-wi.patch |    51 -
+ ...13-Enable-the-use-of-SDIO-card-interrupts.patch |   288 -
+ ...Enable-audio-capture-by-default-for-twl40.patch |    27 -
+ ...odecs-twl4030-Turn-on-mic-bias-by-default.patch |    25 -
+ ...C-add-support-for-backup-battery-recharge.patch |    55 -
+ ...mc-twl4030-move-clock-input-selection-pri.patch |    39 -
+ ...wer-off-support-for-the-TWL4030-companion.patch |   103 -
+ ...RM-OMAP-Add-twl4030-madc-support-to-Overo.patch |    33 -
+ ...20-Enabling-Hwmon-driver-for-twl4030-madc.patch |    46 -
+ .../0021-mfd-twl-core-enable-madc-clock.patch      |    54 -
+ ...0022-rtc-twl-Switch-to-using-threaded-irq.patch |    25 -
+ ...tomatically-set-musb-mode-in-platform-dat.patch |    49 -
+ ...mc-Adjust-dto-to-eliminate-timeout-errors.patch |    28 -
+ .../0025-omap-Fix-mtd-subpage-read-alignment.patch |    95 -
+ ...ap2-Force-all-buffer-reads-to-u32-alignme.patch |    35 -
+ ...-nand-fix-subpage-ecc-issue-with-prefetch.patch |    63 -
+ .../0028-OMAP-Overo-Add-support-for-spidev.patch   |    46 -
+ ...029-unionfs-Add-support-for-unionfs-2.5.9.patch | 11494 ---
+ ...-omap_device-activate-latency-messages-fr.patch |    34 -
+ .../sakoman/0031-omap-overo-Add-opp-init.patch     |   105 -
+ ...2-omap3-Add-basic-support-for-720MHz-part.patch |   202 -
+ .../0001-Added-Crane-Board-support.patch           |  5237 --
+ ...BeagleBoard-Adjust-USER-button-pin-for-xM.patch |    28 -
+ ...board-print-expansionboard-name-detected-.patch |    51 -
+ ....1.6-kernel-source-patched-with-OCF-Linux.patch | 88333 -------------------
+ ...vert-omap3-beagle-Fix-compile-time-errors.patch |    67 -
+ ...create-sys-fs-cgroup-to-mount-cgroupfs-on.patch |    58 -
+ ...board-add-support-for-TinCanTools-Trainer.patch |    55 -
+ ...touchbook-make-it-build-against-TI-linux-.patch |    61 -
+ ...d-support-for-TCT-Zippy-to-Beagle-board-f.patch |   135 -
+ ...MAP-Make-beagle-u-boot-partition-writable.patch |    24 -
+ .../0005-board-omap3-beagle-add-DSS2-support.patch |   200 -
+ ...beagle-prepare-for-DM3730-based-Beagleboa.patch |   103 -
+ ...agleboard-Add-infrastructure-to-do-fixups.patch |   172 -
+ ...agleboard-pre-export-GPIOs-to-userspace-w.patch |    57 -
+ ...agleboard-initialize-ds1307-and-eeprom-on.patch |    76 -
+ ...010-ARM-OMAP-update-beagleboard-defconfig.patch |  3323 -
+ ...able-audio-capture-by-default-for-twl4030.patch |    27 -
+ ...ap2-proper-fix-for-subpage-read-ECC-error.patch |    35 -
+ ...-DSS2-Enable-Pre-Multiplied-Alpha-Support.patch |    44 -
+ ...otarg-for-selecting-svideo-or-composite-f.patch |    75 -
+ ...-add-some-more-from-Leopard-imaging-patch.patch |   133 -
+ ...vero-Add-support-for-second-ethernet-port.patch |   110 -
+ ...-smsc911x-return-ENODEV-if-device-is-not-.patch |    29 -
+ ...ut-touchscreen-ads7846-return-ENODEV-if-d.patch |    53 -
+ .../0019-drivers-mfd-add-twl4030-madc-driver.patch |   601 -
+ ...OMAP-Add-missing-twl4030-madc-header-file.patch |   149 -
+ ...RM-OMAP-Add-twl4030-madc-support-to-Overo.patch |    32 -
+ ...M-OMAP-Add-twl4030-madc-support-to-Beagle.patch |    35 -
+ ...usb-add-vendor-device-ID-for-Ceiva-Wirele.patch |    25 -
+ ...isplay-single-block-read-console-messages.patch |    28 -
+ ...mc-twl4030-move-clock-input-selection-pri.patch |    47 -
+ ...-add-PM-code-and-sync-with-http-www.sakom.patch |   373 -
+ ...0-madc-adjust-for-twl4030-twl-api-changes.patch |    85 -
+ ...e-add-support-for-Samsung-lte430wq-f0c-pa.patch |   161 -
+ ...Add-support-for-LG-Philips-LB035Q02-panel.patch |   254 -
+ ...-width-which-improves-SD-card-s-peformanc.patch |    32 -
+ ...-support-to-sync-the-VFP-state-of-the-cur.patch |   109 -
+ ...serve-the-HW-context-when-calling-signal-.patch |   211 -
+ ...h-SGX-clocks-to-200MHz-on-DM37xx-OMAP36xx.patch |    27 -
+ .../0034-modedb.c-add-proper-720p60-mode.patch     |    27 -
+ ...C-add-support-for-backup-battery-recharge.patch |    55 -
+ ...-ARM-Add-prompt-for-CONFIG_ALIGNMENT_TRAP.patch |    29 -
+ ...-warning-on-alignment-trap-in-kernel-mode.patch |    31 -
+ ...pose-some-CPU-control-registers-via-sysfs.patch |   202 -
+ ...-Add-option-to-allow-userspace-PLE-access.patch |    48 -
+ ...ion-to-allow-userspace-access-to-performa.patch |    49 -
+ ...-Expose-some-PMON-registers-through-sysfs.patch |    41 -
+ ...-musb-allow-host-io-without-gadget-module.patch |    90 -
+ .../0043-MTD-silence-ecc-errors-on-mtdblock0.patch |    59 -
+ ...agle-every-known-beagle-except-revB-uses-.patch |    34 -
+ ...agle-add-support-for-beagleFPGA-expansion.patch |    70 -
+ ...ix-serial-console-corruption-during-cpuid.patch |    57 -
+ ...nly-try-to-idle-IVA-subsys-when-CONFIG_PM.patch |    37 -
+ ...048-HACK-try-to-poweron-stuff-on-xM-rev-A.patch |    60 -
+ .../linux-omap-psp-2.6.32/am3517-crane/defconfig   |  2139 -
+ .../linux-omap-psp-2.6.32/am3517-evm/configs/stock |  2151 -
+ .../linux-omap-psp-2.6.32/am3517-evm/defconfig     |  2151 -
+ .../linux-omap-psp-2.6.32/am37x-evm/defconfig      |  2045 -
+ .../0001-omap-Beagle-revision-detection.patch      |   135 -
+ ...-only-Cx-boards-use-pin-23-for-write-prot.patch |    35 -
+ ...ap-Beagle-no-gpio_wp-pin-connection-on-xM.patch |    33 -
+ ...omap3-beaglexm-fix-EHCI-power-up-GPIO-dir.patch |    42 -
+ .../0005-omap3-beaglexm-fix-DVI-reset-GPIO.patch   |    48 -
+ .../0006-omap3-beaglexm-fix-power-on-of-DVI.patch  |    92 -
+ ...beagleboard-hack-in-support-from-xM-rev-C.patch |    61 -
+ ...agle-cleaned-up-board-revision-conditions.patch |   153 -
+ .../beagleboard/configs/cpuidle                    |  3053 -
+ .../beagleboard/configs/cpuidle-gether             |  3051 -
+ .../linux-omap-psp-2.6.32/beagleboard/defconfig    |  3071 -
+ .../beagleboard/logo_linux_clut224.ppm             | 73147 ---------------
+ ...st-stab-at-merging-sensor-driver-based-on.patch |  2394 -
+ .../0002-mt9t111-Fix-all-checkpatch-errors.patch   |   398 -
+ .../0003-mt9t111-Pass-v4l2_int_device-data.patch   |    40 -
+ .../cam/0004-omap3beagle-Add-camera-support.patch  |   352 -
+ ...005-TEMP-omap3beagle-camera-Add-defconfig.patch |  3070 -
+ ...3beagle-camera-Add-support-for-regulators.patch |   238 -
+ ...0007-TEMP-omap3beagle-cam-Enable-OMAP_MUX.patch |    37 -
+ ...eagle-camera-Fix-null-pointer-dereference.patch |    54 -
+ ...vert-TEMP-omap3beagle-cam-Enable-OMAP_MUX.patch |    42 -
+ ...p3beagle-camera-Change-arch-late_initcall.patch |    25 -
+ ...-camera-Move-i2c-registration-to-the-main.patch |   107 -
+ ...ake-camera-code-build-if-MT9T111-is-built.patch |    38 -
+ ...ap3beagle-camera-Force-mode0-in-cam_xclka.patch |    41 -
+ ...-Add-capability-to-change-rate-of-dpll4_m.patch |    33 -
+ ...G-omap3beagle-camera-Force-mode0-in-cam_x.patch |    41 -
+ ...p3beagle-camera-Fix-wrong-XCLKA-selection.patch |    30 -
+ ...t-CAM_MCLK-to-172.8-MHz-allows-exact-9.6-.patch |    91 -
+ ...-Fix-Moved-MCLK-setting-to-the-board-file.patch |   209 -
+ ...019-omap3isp-core-Do-smarter-MCLK-setting.patch |    47 -
+ ...0-omap3beagle-camera-set-mclk-for-mt9t111.patch |    36 -
+ .../cam/0021-mt9t111-Fix-max-supported-xclk.patch  |    28 -
+ ...ap3beagle-camera-Clarify-regulators-names.patch |   103 -
+ ...3-omap3beagle-camera-Fix-powerup-sequence.patch |   103 -
+ ...4-omap3beagle-camera-Change-vaux4-to-1.8v.patch |    32 -
+ ...-camera-Rename-regulators-to-match-actual.patch |   110 -
+ ...-camera-Complement-remainig-sensor-hw-con.patch |    37 -
+ ...-detect-function-retval-and-cleanup-print.patch |    48 -
+ ...e-camera-Set-padconf-settings-in-cam-init.patch |    66 -
+ ...-camera-only-register-camera-driver-for-3.patch |    31 -
+ ...11-Work-in-progress-for-camera-enablement.patch |    53 -
+ ...XM-Cam-Add-support-for-MT9V113-VGA-Sensor.patch |  2441 -
+ ...MT9V113-Fixed-sensor-nitialization-issues.patch |   294 -
+ .../cam/0033-mt9v113-Fix-wrong-active-widths.patch |    29 -
+ ...x-Wrong-check-on-non-interlaced-sensor-on.patch |    34 -
+ ...-Fix-bad-YUV_BT-checks-in-datapath_config.patch |    45 -
+ ...p-Set-vd_pol-to-0-by-default-on-all-cases.patch |    35 -
+ ...isp-ccdc-Set-datalines-to-10-for-YUV_SYNC.patch |    29 -
+ ...p3beagle-camera-Fix-parallel-i-f-settings.patch |    43 -
+ ...-camera-Clean-up-Remove-unneccessary-code.patch |   118 -
+ ...-Clean-Up-Remove-unneccessary-code-printf.patch |   390 -
+ ...Min-Max-clk-input-changed-as-per-the-spec.patch |    54 -
+ ...-omap3beagle-camera-Further-clode-cleanup.patch |   237 -
+ ...Settings-from-Aptima-used-to-increase-FPS.patch |   135 -
+ ...44-mt9v113-AE-param-tuned-to-get-28-30FPS.patch |    33 -
+ ...5-omap3beagle-camera-Cleanup-of-boardfile.patch |   161 -
+ ...map3beagle-camera-Cleanup-regulator-usage.patch |   172 -
+ ...3beagle-camera-Bring-back-mt9t111-support.patch |   251 -
+ ...-REMOVE-v4l2-Delete-MT9T111-sensor-driver.patch |  2402 -
+ ...3670-soc-camera-Add-mt9t112-camera-driver.patch |  1285 -
+ ...mt9t112-modify-exiting-conditions-from-st.patch |    31 -
+ ...igrate-from-soc_camera-to-v4l2-int-device.patch |   934 -
+ ...52-mt9t112-Add-more-info-to-public-header.patch |    29 -
+ .../0053-mt9t112-Fix-null-pointer-kernel-bug.patch |    84 -
+ ...EBUG-omap3beagle-Add-MT9T112-to-defconfig.patch |    26 -
+ ...-camera-Change-MT9T111-references-to-new-.patch |   207 -
+ ...4xxcam-Fix-multi-pixel-format-negotiation.patch |    26 -
+ ...3beagle-camera-Bring-back-mt9t111-support.patch |    43 -
+ ...0058-mt9t112-Do-init_camera-every-powerup.patch |    57 -
+ ...agle-camera-Switch-flag-for-no-sensor-ISP.patch |    26 -
+ .../cam/0060-mt9t112-Add-back-3MP-basesize.patch   |    37 -
+ ...9t112-Prepare-for-24MHz-EXTCLK-and-30-fps.patch |    63 -
+ ...gle-camera-Prepare-24MHz-xclk-for-mt9t112.patch |    62 -
+ ...rect-register-settings-for-mt9t111-sensor.patch |   109 -
+ .../0064-mt9t112-Remove-smart-size-selection.patch |   188 -
+ ...emove-bogus-Kconfig-depend-on-PCI-and-add.patch |    38 -
+ ...12-Add-Context-selection-to-configuration.patch |    96 -
+ .../0067-mt9t112-Disable-JPEG-in-Context-B.patch   |    32 -
+ ...12-Make-context-B-stream-unlimited-frames.patch |    30 -
+ ...69-mt9t112-Fix-pll-p-dividers-abstraction.patch |    58 -
+ ...t9t112-Adjust-50-60Hz-flickering-settings.patch |    51 -
+ ...gger-autofocus-at-the-end-of-context-swit.patch |    35 -
+ ...eagle-camera-Fix-dual-sensor-registration.patch |    43 -
+ .../0073-mt9v113-Fix-State-variable-handling.patch |    68 -
+ ...-Move-sensor-rest-to-after-applying-power.patch |    65 -
+ .../cam/0075-omap3beagle-Add-camera-bootarg.patch  |   108 -
+ ...ort-driver-from-https-github.com-Aptina-B.patch |  1547 -
+ ...beagle-import-li5m03-driver-from-https-gi.patch |   294 -
+ .../linux-omap-psp-2.6.32/dm37x-evm/defconfig      |  2024 -
+ .../0001-ARM-OMAP-add-spi-platform-devices.patch   |    62 -
+ .../0002-MMA7455L-accelerometer-driver.patch       |   683 -
+ ...27x00_battery-remove-error-message-output.patch |    53 -
+ .../0004-bq27x00_battery-add-charged-gpio.patch    |    65 -
+ .../0005-adf7846-add-more-debugging.patch          |    99 -
+ .../0006-ads7846-read-max-mix-x-y-from-pdata.patch |    35 -
+ .../0007-ads7846-add-settling-delay-to-pdata.patch |    59 -
+ ...-Translate-X-Y-coordinates-for-the-video-.patch |    99 -
+ ...aling-checks-when-rotation-is-90-or-270-d.patch |    52 -
+ .../0010-add-touchbook-hid-driver.patch            |   339 -
+ ...ke-backlight-controls-accessible-to-users.patch |    25 -
+ ...-t-error-out-when-there-s-no-pendown-gpio.patch |    30 -
+ .../0013-ASoC-add-driver-for-omap3-touchbook.patch |   350 -
+ .../0014-backlight-add-PWM-support.patch           |   126 -
+ ...t-TWL4030-BCI-driver-from-2.6.29-to-2.6.3.patch |  1367 -
+ ...ARM-OMAP-omap3-touchbook-update-boardfile.patch |   620 -
+ ...OMAP-add-800MHz-OPP-and-remove-125MHz-one.patch |    48 -
+ .../omap3-touchbook/defconfig                      |  3043 -
+ .../linux/linux-omap-psp-2.6.32/omap3evm/defconfig |  3088 -
+ .../linux/linux-omap-psp-2.6.32/overo/defconfig    |  2467 -
+ .../linux/linux-omap-psp-2.6.32/porches.patch      |    55 -
+ recipes-kernel/linux/linux-omap-psp_2.6.32.bb      |   213 -
+ recipes-kernel/linux/linux-omap-psp_2.6.37.bb      |     1 +
+ ...inst-fix-install-breakage-for-FW-images-r.patch |    30 -
+ .../linux-omap4-3.1.0/add_exec_tracepoint.patch    |   109 -
+ .../linux/linux-omap4-3.1.0/pandaboard/defconfig   |  4402 -
+ recipes-kernel/linux/linux-omap4_3.1.0.bb          |    19 -
+ recipes-kernel/linux/linux-omap4_3.4.bb            |     1 +
+ recipes-kernel/linux/linux-omap_2.6.37.bb          |     3 +
+ recipes-kernel/linux/linux-omap_2.6.39.bb          |   123 -
+ recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb  |     1 +
+ recipes-kernel/linux/linux-ti-glsdk_3.8.bb         |     1 +
+ recipes-kernel/linux/linux-ti-staging_3.8.bb       |     1 +
+ recipes-kernel/linux/linux-ti-staging_git.bb       |     5 +-
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |     2 +
+ recipes-kernel/linux/linux_3.0.bb                  |   234 -
+ recipes-kernel/linux/linux_3.1.bb                  |    33 -
+ recipes-kernel/linux/linux_3.3.7.bb                |     1 +
+ 531 files changed, 45 insertions(+), 417168 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-3.0+3.1rc/beagle/0001-UNFINISHED-OMAP3-beagle-add-support-for-expansionboa.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0+3.1rc/beagle/0002-HACK-OMAP3-beagle-switch-to-GPTIMER1.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0+3.1rc/beagle/0003-OMAP3-beagle-HACK-add-in-1GHz-OPP.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0+3.1rc/beagleboard/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-3.0+3.1rc/fixes/vout.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0+3.1rc/madc/0001-Enabling-Hwmon-driver-for-twl4030-madc.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0+3.1rc/madc/0002-mfd-twl-core-enable-madc-clock.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0+3.1rc/patch.sh
+ delete mode 100644 recipes-kernel/linux/linux-3.0+3.1rc/sgx/0001-ARM-L2-Add-and-export-outer_clean_all.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/beagle/0001-OMAP3-beagle-add-support-for-beagleboard-xM-revision.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/beagle/0002-UNFINISHED-OMAP3-beagle-add-support-for-expansionboa.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/beagle/0003-HACK-OMAP3-beagle-switch-to-GPTIMER1.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/beagle/0004-OMAP3-beagle-HACK-add-in-1GHz-OPP.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/beagle/0005-omap3-Add-basic-support-for-720MHz-part.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/beagle/0006-ARM-OMAP2-beagleboard-make-wilink-init-look-more-lik.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/beagle/0007-omap_hsmmc-Set-dto-to-max-value-of-14-to-avoid-SD-Ca.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/beagle/0008-OMAP2-add-cpu-id-register-to-MAC-address-helper.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/beagle/0009-HACK-OMAP2-BeagleBoard-Fix-up-random-or-missing-MAC-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/beagle/0010-ARM-OMAP2-beagleboard-fix-mmc-write-protect-pin-when.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/beagle/0011-beagleboard-reinstate-usage-of-hi-speed-PLL-divider.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/beagleboard/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-3.0/bias/0001-OMAP3630-PRM-add-ABB-PRM-register-definitions.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/bias/0002-OMAP3-PM-VP-generalize-PRM-interrupt-helpers.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/bias/0003-OMAP3-PRM-add-tranxdone-IRQ-handlers-for-ABB.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/bias/0004-OMAP3-ABB-Adaptive-Body-Bias-structures-data.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/bias/0005-OMAP3-OPP-add-ABB-data-to-voltage-tables.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/bias/0006-OMAP3-Voltage-add-ABB-data-to-voltage-domains.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/bias/0007-OMAP3-ABB-initialization-transition-functions.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/bias/0008-OMAP3-Voltage-add-ABB-to-voltage-scaling.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/madc/0001-Enabling-Hwmon-driver-for-twl4030-madc.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/madc/0002-mfd-twl-core-enable-madc-clock.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/misc/0001-compiler.h-Undef-before-redefining-__attribute_const.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/misc/0002-OMAP2-OPP-allow-OPP-enumeration-to-continue-if-devic.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/omap4/0001-OMAP-Fix-linking-error-in-twl-common.c-for-OMAP2-3-4.patch
+ delete mode 100755 recipes-kernel/linux/linux-3.0/patch.sh
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0001-PM-OPP-introduce-function-to-free-cpufreq-table.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0002-OMAP-CPUfreq-ensure-driver-initializes-after-cpufreq.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0003-OMAP-CPUfreq-ensure-policy-is-fully-initialized.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0004-OMAP3-PM-CPUFreq-driver-for-OMAP3.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0005-OMAP-PM-CPUFREQ-Fix-conditional-compilation.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0006-cpufreq-fixup-after-new-OPP-layer-merged.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0007-OMAP-cpufreq-Split-OMAP1-and-OMAP2PLUS-CPUfreq-drive.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0008-OMAP2PLUS-cpufreq-Add-SMP-support-to-cater-OMAP4430.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0009-OMAP2PLUS-cpufreq-Fix-typo-when-attempting-to-set-mp.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0010-OMAP2-cpufreq-move-clk-name-decision-to-init.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0011-OMAP2-cpufreq-deny-initialization-if-no-mpudev.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0012-OMAP2-cpufreq-dont-support-freq_table.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0013-OMAP2-cpufreq-only-supports-OPP-library.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0014-OMAP2-cpufreq-put-clk-if-cpu_init-failed.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0015-OMAP2-cpufreq-fix-freq_table-leak.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0016-OMAP2-CPUfreq-Remove-superfluous-check-in-target-for.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0017-OMAP2-cpufreq-notify-even-with-bad-boot-frequency.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0018-OMAP2-cpufreq-Enable-all-CPUs-in-shared-policy-mask.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/cpufreq/0019-OMAP2-CPUfreq-update-lpj-with-reference-value-to-avo.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0001-cleanup-regulator-supply-definitions-in-mach-omap2.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0002-Remove-old-style-supply.dev-assignments-common-in-hs.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0003-omap-Use-separate-init_irq-functions-to-avoid-cpu_is.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0004-omap-Set-separate-timer-init-functions-to-avoid-cpu_.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0005-omap-Move-dmtimer-defines-to-dmtimer.h.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0006-omap-Make-a-subset-of-dmtimer-functions-into-inline-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0007-omap2-Use-dmtimer-macros-for-clockevent.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0008-omap2-Remove-gptimer_wakeup-for-now.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0009-OMAP3-SR-make-notify-independent-of-class.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0010-OMAP3-SR-disable-interrupt-by-default.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0011-OMAP3-SR-enable-disable-SR-only-on-need.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0012-OMAP3-SR-fix-cosmetic-indentation.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0013-omap2-Reserve-clocksource-and-timesource-and-initial.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0014-omap2-Use-dmtimer-macros-for-clocksource.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0015-omap2-Remove-omap2_gp_clockevent_set_gptimer.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0016-omap2-Rename-timer-gp.c-into-timer.c-to-combine-time.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0017-omap-cleanup-NAND-platform-data.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0018-omap-board-omap3evm-Fix-compilation-error.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0019-omap-mcbsp-Drop-SPI-mode-support.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0020-omap-mcbsp-Drop-in-driver-transfer-support.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0021-omap2-fix-build-regression.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0022-OMAP-New-twl-common-for-common-TWL-configuration.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0023-OMAP4-Move-common-twl6030-configuration-to-twl-commo.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0024-OMAP3-Move-common-twl-configuration-to-twl-common.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0025-OMAP3-Move-common-regulator-configuration-to-twl-com.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0026-omap-mcbsp-Remove-rx_-tx_word_length-variables.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0027-omap-mcbsp-Remove-port-number-enums.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0028-OMAP-dmtimer-add-missing-include.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0029-OMAP2-hwmod-Fix-smart-standby-wakeup-support.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0030-OMAP4-hwmod-data-Add-MSTANDBY_SMART_WKUP-flag.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0031-OMAP2-hwmod-Enable-module-in-shutdown-to-access-sysc.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0032-OMAP2-hwmod-Do-not-write-the-enawakeup-bit-if-SYSC_H.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0033-OMAP2-hwmod-Remove-_populate_mpu_rt_base-warning.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0034-OMAP2-hwmod-Fix-the-HW-reset-management.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0035-OMAP-hwmod-Add-warnings-if-enable-failed.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0036-OMAP-hwmod-Move-pr_debug-to-improve-the-readability.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0037-omap_hwmod-use-a-null-structure-record-to-terminate-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0038-omap_hwmod-share-identical-omap_hwmod_addr_space-arr.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0039-omap_hwmod-use-a-terminator-record-with-omap_hwmod_m.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0040-omap_hwmod-share-identical-omap_hwmod_mpu_irqs-array.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0041-omap_hwmod-use-a-terminator-record-with-omap_hwmod_d.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0042-omap_hwmod-share-identical-omap_hwmod_dma_info-array.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0043-omap_hwmod-share-identical-omap_hwmod_class-omap_hwm.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0044-OMAP4-hwmod-data-Fix-L3-interconnect-data-order-and-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0045-OMAP4-hwmod-data-Remove-un-needed-parens.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0046-OMAP4-hwmod-data-Fix-bad-alignement.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0047-OMAP4-hwmod-data-Align-interconnect-format-with-regu.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0048-OMAP4-clock-data-Add-sddiv-to-USB-DPLL.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0049-OMAP4-clock-data-Remove-usb_host_fs-clkdev-with-NULL.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0050-OMAP4-clock-data-Re-order-some-clock-nodes-and-struc.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0051-OMAP4-clock-data-Fix-max-mult-and-div-for-USB-DPLL.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0052-OMAP4-prcm-Fix-errors-in-few-defines-name.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0053-OMAP4-prm-Remove-wrong-clockdomain-offsets.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0054-OMAP4-powerdomain-data-Fix-indentation.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0055-OMAP4-cm-Remove-RESTORE-macros-to-avoid-access-from-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0056-OMAP4-prcm_mpu-Fix-indent-in-few-macros.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0057-OMAP4-clockdomain-data-Fix-data-order-and-wrong-name.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0058-OMAP-omap_device-replace-_find_by_pdev-with-to_omap_.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0059-OMAP-PM-remove-OMAP_PM_NONE-config-option.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0060-OMAP4-clock-data-Remove-McASP2-McASP3-and-MMC6-clock.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0061-OMAP4-clock-data-Remove-UNIPRO-clock-nodes.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0062-OMAP4-hwmod-data-Modify-DSS-opt-clocks.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0063-OMAP2-PM-Initialise-sleep_switch-to-a-non-valid-valu.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0064-OMAP4-powerdomain-data-Fix-core-mem-states-and-missi.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0065-OMAP4-clock-data-Keep-GPMC-clocks-always-enabled-and.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0066-OMAP4-powerdomain-data-Remove-unsupported-MPU-powerd.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0067-OMAP4-hwmod-data-Change-DSS-main_clk-scheme.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0068-I2C-OMAP2-Set-hwmod-flags-to-only-allow-16-bit-acces.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0069-I2C-OMAP2-increase-omap_i2c_dev_attr-flags-from-u8-t.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0070-I2C-OMAP2-Introduce-I2C-IP-versioning-constants.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0071-I2C-OMAP1-OMAP2-create-omap-I2C-functionality-flags-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0072-I2C-OMAP2-Tag-all-OMAP2-hwmod-defintions-with-I2C-IP.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0073-I2C-OMAP2-add-correct-functionality-flags-to-all-oma.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0074-OMAP-hwmod-fix-the-i2c-reset-timeout-during-bootup.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0075-OMAP-omap_device-Create-clkdev-entry-for-hwmod-main_.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0076-OMAP4-clock-data-Add-missing-divider-selection-for-a.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0077-OMAP4-hwmod-data-Add-clock-domain-attribute.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0078-OMAP2-hwmod-Init-clkdm-field-at-boot-time.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0079-OMAP4-hwmod-Replace-CLKCTRL-absolute-address-with-of.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0080-OMAP-hwmod-Wait-the-idle-status-to-be-disabled.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0081-OMAP4-hwmod-Replace-RSTCTRL-absolute-address-with-of.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0082-OMAP4-prm-Replace-warm-reset-API-with-the-offset-bas.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0083-OMAP4-prm-Remove-deprecated-functions.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0084-OMAP4-hwmod-data-Add-PRM-context-register-offset.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0085-OMAP4-hwmod-data-Add-modulemode-entry-in-omap_hwmod-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0086-OMAP4-cm-Add-two-new-APIs-for-modulemode-control.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0087-OMAP4-hwmod-Introduce-the-module-control-in-hwmod-co.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0088-OMAP-clockdomain-Remove-redundant-call-to-pwrdm_wait.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0089-OMAP2-clockdomain-Add-2-APIs-to-control-clockdomain-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0090-OMAP2-clockdomain-add-clkdm_in_hwsup.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0091-OMAP2-PM-idle-clkdms-only-if-already-in-idle.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0092-OMAP2-clockdomain-Add-per-clkdm-lock-to-prevent-conc.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0093-OMAP2-clock-allow-per-SoC-clock-init-code-to-prevent.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0094-OMAP2-hwmod-Follow-the-recommended-PRCM-module-enabl.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0095-OMAP-Add-debugfs-node-to-show-the-summary-of-all-clo.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0096-OMAP2-hwmod-remove-unused-voltagedomain-pointer.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0097-OMAP2-voltage-move-PRCM-mod-offets-into-VC-VP-struct.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0098-OMAP2-voltage-move-prm_irqst_reg-from-VP-into-voltag.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0099-OMAP2-voltage-start-towards-a-new-voltagedomain-laye.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0100-OMAP3-voltage-rename-mpu-voltagedomain-to-mpu_iva.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0101-OMAP3-voltagedomain-data-add-wakeup-domain.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0102-OMAP3-voltage-add-scalable-flag-to-voltagedomain.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0103-OMAP2-powerdomain-add-voltagedomain-to-struct-powerd.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0104-OMAP2-add-voltage-domains-and-connect-to-powerdomain.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0105-OMAP3-powerdomain-data-add-voltage-domains.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0106-OMAP4-powerdomain-data-add-voltage-domains.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0107-OMAP2-powerdomain-add-voltage-domain-lookup-during-r.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0108-OMAP2-voltage-keep-track-of-powerdomains-in-each-vol.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0109-OMAP2-voltage-split-voltage-controller-VC-code-into-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0110-OMAP2-voltage-move-VC-into-struct-voltagedomain-misc.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0111-OMAP2-voltage-enable-VC-bypass-scale-method-when-VC-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0112-OMAP2-voltage-split-out-voltage-processor-VP-code-in.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0113-OMAP2-VC-support-PMICs-with-separate-voltage-and-com.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0114-OMAP2-add-PRM-VP-functions-for-checking-clearing-VP-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0115-OMAP3-VP-replace-transaction-done-check-clear-with-V.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0116-OMAP2-PRM-add-register-access-functions-for-VC-VP.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0117-OMAP3-voltage-convert-to-PRM-register-access-functio.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0118-OMAP3-VC-cleanup-i2c-slave-address-configuration.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0119-OMAP3-VC-cleanup-PMIC-register-address-configuration.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0120-OMAP3-VC-bypass-use-fields-from-VC-struct-instead-of.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0121-OMAP3-VC-cleanup-voltage-setup-time-configuration.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0122-OMAP3-VC-move-on-onlp-ret-off-command-configuration-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0123-OMAP3-VC-abstract-out-channel-configuration.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0124-OMAP3-voltage-domain-move-PMIC-struct-from-vdd_info-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0125-OMAP3-VC-make-I2C-config-programmable-with-PMIC-spec.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0126-OMAP3-PM-VC-handle-mutant-channel-config-for-OMAP4-M.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0127-OMAP3-VC-use-last-nominal-voltage-setting-to-get-cur.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0128-OMAP3-VP-cleanup-move-VP-instance-into-voltdm-misc.-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0129-OMAP3-voltage-remove-unneeded-debugfs-interface.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0130-OMAP3-VP-struct-omap_vp_common-replace-shift-with-__.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0131-OMAP3-VP-move-SoC-specific-sys-clock-rate-retreival-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0132-OMAP3-VP-move-timing-calculation-config-into-VP-init.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0133-OMAP3-VP-create-VP-helper-function-for-updating-erro.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0134-OMAP3-VP-remove-omap_vp_runtime_data.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0135-OMAP3-VP-move-voltage-scale-function-pointer-into-st.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0136-OMAP-VP-Explicitly-mask-VPVOLTAGE-field.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0137-OMAP3-VP-update_errorgain-return-error-if-VP.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0138-OMAP3-VP-remove-unused-omap_vp_get_curr_volt.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0139-OMAP3-VP-combine-setting-init-voltage-into-common-fu.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0140-OMAP3-voltage-rename-scale-and-reset-functions-using.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0141-OMAP3-voltage-move-rename-curr_volt-from-vdd_info-in.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0142-OMAP3-voltdm-final-removal-of-omap_vdd_info.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0143-OMAP3-voltage-rename-omap_voltage_get_nom_volt-voltd.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0144-OMAP3-voltage-update-nominal-voltage-in-voltdm_scale.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0145-OMAP4-PM-TWL6030-fix-voltage-conversion-formula.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0146-OMAP4-PM-TWL6030-fix-uv-to-voltage-for-0x39.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0147-OMAP4-PM-TWL6030-address-0V-conversions.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0148-OMAP4-PM-TWL6030-fix-ON-RET-OFF-voltages.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/pm-wip/voltdm/0149-OMAP4-PM-TWL6030-add-cmd-register.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0001-mmc-don-t-display-single-block-read-console-messages.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0002-omap-Change-omap_device-activate-dectivate-latency-m.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0003-OMAP-DSS2-add-bootarg-for-selecting-svideo-or-compos.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0004-mtd-nand-Eliminate-noisey-uncorrectable-error-messag.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0005-video-add-timings-for-hd720.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0006-drivers-net-smsc911x-return-ENODEV-if-device-is-not-.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0007-drivers-input-touchscreen-ads7846-return-ENODEV-if-d.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0008-Revert-omap2_mcspi-Flush-posted-writes.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0009-rtc-twl-Use-threaded-IRQ-remove-IRQ-enable-in-interr.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0010-rtc-twl-Fix-registration-vs.-init-order.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0011-soc-codecs-Enable-audio-capture-by-default-for-twl40.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0012-soc-codecs-twl4030-Turn-on-mic-bias-by-default.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0013-omap-mmc-twl4030-move-clock-input-selection-prior-to.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sakoman/0014-rtc-twl-add-support-for-backup-battery-recharge.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/sgx/0001-ARM-L2-Add-and-export-outer_clean_all.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/ulcd/0001-OMAP_VOUT-Fix-build-break-caused-by-update_mode-remo.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/ulcd/0002-WIP-omap-beagleboard-add-bbtoys-ulcd-lite-support.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/ulcd/0003-ARM-OMAP2-beagleboard-add-support-for-loopthrough-ex.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/ulcd/0004-LEDS-add-initial-support-for-WS2801-controller.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.0/usb/0001-Fix-sprz319-erratum-2.1.patch
+ delete mode 100644 recipes-kernel/linux/linux-davinci/0001-ARM-6329-1-wire-up-sys_accept4-on-ARM.patch
+ delete mode 100644 recipes-kernel/linux/linux-davinci/0001-ahci-ti-Fix-currently-harmless-typo-in-SATA-PHY.patch
+ delete mode 100644 recipes-kernel/linux/linux-davinci/0001-cgroupfs-create-sys-fs-cgroup-to-mount-cgroupfs-on.patch
+ delete mode 100644 recipes-kernel/linux/linux-davinci/0002-ahci-ti-Update-SATA-PHY-configuration-RXCDR.patch
+ delete mode 100644 recipes-kernel/linux/linux-davinci/hawkboard/0001-board-da850-hawk-Disable-NAND-SUBPAGE.patch
+ delete mode 100644 recipes-kernel/linux/linux-davinci/hawkboard/configs/stock
+ delete mode 100644 recipes-kernel/linux/linux-davinci/hawkboard/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-davinci/hawkboard/logo_linux_clut224.ppm
+ delete mode 100644 recipes-kernel/linux/linux-davinci/hawkboard/patch-2.6.33rc4-psp-to-hawkboard.patch
+ delete mode 100644 recipes-kernel/linux/linux-davinci/omapl138/0001-board-da850-evm-Disable-NAND-SUBPAGE.patch
+ delete mode 100755 recipes-kernel/linux/linux-davinci/omapl138/0001-uio_pruss1-Core-driver-addition.patch
+ delete mode 100755 recipes-kernel/linux/linux-davinci/omapl138/0002-uio_pruss2-Platform-changes.patch
+ delete mode 100755 recipes-kernel/linux/linux-davinci/omapl138/0003-uio_pruss3-Workarounds-put-into-core-code.patch
+ delete mode 100644 recipes-kernel/linux/linux-davinci/omapl138/configs/da850_omapl138_defconfig
+ delete mode 100644 recipes-kernel/linux/linux-davinci/omapl138/configs/da850_omapl138_defconfig_mmcpm_stats
+ delete mode 100644 recipes-kernel/linux/linux-davinci/omapl138/configs/da850_omapl138_defconfig_nandnommc
+ delete mode 100644 recipes-kernel/linux/linux-davinci/omapl138/configs/da850_omapl138_defconfig_uivideocap
+ delete mode 100644 recipes-kernel/linux/linux-davinci/omapl138/configs/da850_omapl138_defconfig_uivideocapdis
+ delete mode 100644 recipes-kernel/linux/linux-davinci/omapl138/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-davinci/omapl138/logo_linux_clut224.ppm
+ delete mode 100644 recipes-kernel/linux/linux-davinci/update-mach-types.patch
+ delete mode 100644 recipes-kernel/linux/linux-davinci_git.bb
+ delete mode 100644 recipes-kernel/linux/linux-keystone-3.6.6/defconfig
+ create mode 100644 recipes-kernel/linux/linux-keystone-3.8.4/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-keystone_3.6.6.bb
+ create mode 100644 recipes-kernel/linux/linux-keystone_3.8.4.bb
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/beagle/0001-OMAP3-beagle-add-support-for-beagleboard-xM-revision.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/beagle/0002-OMAP3-beagle-add-support-for-expansionboards.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/beagle/0003-OMAP3-beagle-add-MADC-support.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/beagle/0004-OMAP3-beagle-add-regulators-for-camera-interface.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/beagle/0005-OMAP3-beagle-HACK-add-in-1GHz-OPP.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/beagle/0006-OMAP3-BEAGLE-fix-RTC.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/beagle/0007-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/beagle/0007-omap3-beagle-Use-GPTIMERi-1-for-clockevents.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/beagleboard/configs/stock
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/beagleboard/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/camera/0001-Add-driver-for-Aptina-Micron-mt9p031-sensor.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/camera/0002-v4l-Add-mt9v032-sensor-driver.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/camera/0003-Add-support-for-mt9p031-LI-5M03-module-in-Beagleboar.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0001-mfd-Fix-omap-usbhs-crash-when-rmmoding-ehci-or-ohci.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0002-mfd-Fix-omap_usbhs_alloc_children-error-handling.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0003-mfd-Add-omap-usbhs-runtime-PM-support.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0004-arm-omap-usb-ehci-and-ohci-hwmod-structures-for-omap.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0005-arm-omap-usb-register-hwmods-of-usbhs.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0006-arm-omap-usb-device-name-change-for-the-clk-names-of.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0007-mfd-global-Suspend-and-resume-support-of-ehci-and-oh.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0008-MFD-TWL4030-Correct-the-warning-print-during-script-.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0009-MFD-TWL4030-Modifying-the-macro-name-Main_Ref-to-all.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0010-MFD-TWL4030-power-scripts-for-OMAP3-boards.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0011-MFD-TWL4030-TWL-version-checking.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0012-MFD-TWL4030-workaround-changes-for-Erratum-27.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/mfd/0013-MFD-TWL4030-optimizing-resource-configuration.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/musb/0001-usb-musb-Enable-DMA-mode1-RX-for-USB-Mass-Storage.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/net/0001-NFS-Revert-NFSROOT-default-mount-options.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq-fixes/0001-OMAP2-cpufreq-free-up-table-on-exit.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq-fixes/0002-OMAP2-cpufreq-handle-invalid-cpufreq-table.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq-fixes/0003-OMAP2-cpufreq-minor-comment-cleanup.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq-fixes/0004-OMAP2-cpufreq-use-clk_init_cpufreq_table-if-OPPs-not.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq-fixes/0005-OMAP2-cpufreq-use-cpufreq_frequency_table_target.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq-fixes/0006-OMAP2-cpufreq-fix-freq_table-leak.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq-hotplug/0001-cpufreq-helpers-for-walking-the-frequency-table.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq-hotplug/0002-cpufreq-introduce-hotplug-governor.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq/0001-OMAP-CPUfreq-ensure-driver-initializes-after-cpufreq.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq/0002-OMAP-CPUfreq-ensure-policy-is-fully-initialized.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq/0003-OMAP3-PM-CPUFreq-driver-for-OMAP3.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq/0004-OMAP-PM-CPUFREQ-Fix-conditional-compilation.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq/0005-cpufreq-fixup-after-new-OPP-layer-merged.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq/0006-OMAP-cpufreq-Split-OMAP1-and-OMAP2PLUS-CPUfreq-drive.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq/0007-OMAP2PLUS-cpufreq-Add-SMP-support-to-cater-OMAP4430.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpufreq/0008-OMAP2PLUS-cpufreq-Fix-typo-when-attempting-to-set-mp.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpuidle/0001-OMAP2-clockdomain-Add-an-api-to-read-idle-mode.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpuidle/0002-OMAP2-clockdomain-Add-SoC-support-for-clkdm_is_idle.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpuidle/0003-OMAP2-PM-Initialise-sleep_switch-to-a-non-valid-valu.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpuidle/0004-OMAP2-PM-idle-clkdms-only-if-already-in-idle.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpuidle/0005-OMAP2-hwmod-Follow-the-recomended-PRCM-sequence.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm-wip-cpuidle/0006-OMAP-Serial-Check-wk_st-only-if-present.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm/0001-OMAP3-voltage-remove-spurious-pr_notice-for-debugfs.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm/0002-OMAP4-PM-remove-redundant-ifdef-CONFIG_PM.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm/0003-OMAP3-smartreflex-fix-sr_late_init-error-path-in-pro.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm/0004-OMAP3-smartreflex-request-the-memory-region.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm/0005-OMAP3-smartreflex-fix-ioremap-leak-on-probe-error.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm/0006-OMAP3-smartreflex-delete-instance-from-sr_list-on-pr.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm/0007-OMAP3-smartreflex-delete-debugfs-entries-on-probe-er.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm/0008-OMAP3-cpuidle-remove-useless-SDP-specific-timings.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm/0009-OMAP3-SR-make-notify-independent-of-class.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm/0010-OMAP3-SR-disable-interrupt-by-default.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm/0011-OMAP3-SR-enable-disable-SR-only-on-need.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/pm/linux-omap-2.6.39-ti-pm/0012-OMAP3-SR-fix-cosmetic-indentation.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0001-OMAP-DSS2-DSI-fix-use_sys_clk-highfreq.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0002-OMAP-DSS2-DSI-fix-dsi_dump_clocks.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0003-OMAP2PLUS-DSS2-Fix-Return-correct-lcd-clock-source-f.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0004-OMAP-DSS-DSI-Fix-DSI-PLL-power-bug.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0005-OMAP-DSS2-fix-panel-Kconfig-dependencies.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0006-OMAP-DSS2-add-bootarg-for-selecting-svideo-or-compos.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0007-video-add-timings-for-hd720.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0008-drivers-net-smsc911x-return-ENODEV-if-device-is-not-.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0009-drivers-input-touchscreen-ads7846-return-ENODEV-if-d.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0010-Revert-omap2_mcspi-Flush-posted-writes.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0011-Revert-omap_hsmmc-improve-interrupt-synchronisation.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0012-Don-t-turn-SDIO-cards-off-to-save-power.-Doing-so-wi.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0013-Enable-the-use-of-SDIO-card-interrupts.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0014-soc-codecs-Enable-audio-capture-by-default-for-twl40.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0015-soc-codecs-twl4030-Turn-on-mic-bias-by-default.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0016-RTC-add-support-for-backup-battery-recharge.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0017-ARM-OMAP2-mmc-twl4030-move-clock-input-selection-pri.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0018-Add-power-off-support-for-the-TWL4030-companion.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0019-ARM-OMAP-Add-twl4030-madc-support-to-Overo.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0020-Enabling-Hwmon-driver-for-twl4030-madc.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0021-mfd-twl-core-enable-madc-clock.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0022-rtc-twl-Switch-to-using-threaded-irq.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0023-ARM-OMAP-automatically-set-musb-mode-in-platform-dat.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0024-omap-mmc-Adjust-dto-to-eliminate-timeout-errors.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0025-omap-Fix-mtd-subpage-read-alignment.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0026-mtd-nand-omap2-Force-all-buffer-reads-to-u32-alignme.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0027-omap-nand-fix-subpage-ecc-issue-with-prefetch.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0028-OMAP-Overo-Add-support-for-spidev.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0029-unionfs-Add-support-for-unionfs-2.5.9.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0030-omap-Change-omap_device-activate-latency-messages-fr.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0031-omap-overo-Add-opp-init.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-2.6.39/sakoman/0032-omap3-Add-basic-support-for-720MHz-part.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0001-Added-Crane-Board-support.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0001-BeagleBoard-Adjust-USER-button-pin-for-xM.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0001-OMAP3-craneboard-print-expansionboard-name-detected-.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0001-PSP-3.0.1.6-kernel-source-patched-with-OCF-Linux.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0001-Revert-omap3-beagle-Fix-compile-time-errors.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0001-cgroupfs-create-sys-fs-cgroup-to-mount-cgroupfs-on.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0002-OMAP3-craneboard-add-support-for-TinCanTools-Trainer.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0002-board-omap3touchbook-make-it-build-against-TI-linux-.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0003-ARM-OMAP-add-support-for-TCT-Zippy-to-Beagle-board-f.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0004-ARM-OMAP-Make-beagle-u-boot-partition-writable.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0005-board-omap3-beagle-add-DSS2-support.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0006-board-omap3beagle-prepare-for-DM3730-based-Beagleboa.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0007-ARM-OMAP-beagleboard-Add-infrastructure-to-do-fixups.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0008-ARM-OMAP-beagleboard-pre-export-GPIOs-to-userspace-w.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0009-ARM-OMAP-beagleboard-initialize-ds1307-and-eeprom-on.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0010-ARM-OMAP-update-beagleboard-defconfig.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0011-ASoC-enable-audio-capture-by-default-for-twl4030.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0012-MTD-NAND-omap2-proper-fix-for-subpage-read-ECC-error.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0013-OMAP3630-DSS2-Enable-Pre-Multiplied-Alpha-Support.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0014-DSS2-add-bootarg-for-selecting-svideo-or-composite-f.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0015-ISP-add-some-more-from-Leopard-imaging-patch.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0016-ARM-OMAP-Overo-Add-support-for-second-ethernet-port.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0017-drivers-net-smsc911x-return-ENODEV-if-device-is-not-.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0018-drivers-input-touchscreen-ads7846-return-ENODEV-if-d.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0019-drivers-mfd-add-twl4030-madc-driver.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0020-ARM-OMAP-Add-missing-twl4030-madc-header-file.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0021-ARM-OMAP-Add-twl4030-madc-support-to-Overo.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0022-ARM-OMAP-Add-twl4030-madc-support-to-Beagle.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0023-netdev-rt73usb-add-vendor-device-ID-for-Ceiva-Wirele.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0024-mmc-don-t-display-single-block-read-console-messages.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0025-ARM-OMAP2-mmc-twl4030-move-clock-input-selection-pri.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0026-board-overo-add-PM-code-and-sync-with-http-www.sakom.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0027-twl4030-madc-adjust-for-twl4030-twl-api-changes.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0028-OMAP-DSS2-Re-add-support-for-Samsung-lte430wq-f0c-pa.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0029-OMAP-DSS2-Add-support-for-LG-Philips-LB035Q02-panel.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0030-Fix-for-bus-width-which-improves-SD-card-s-peformanc.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0031-ARM-VFP-add-support-to-sync-the-VFP-state-of-the-cur.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0032-ARM-VFP-preserve-the-HW-context-when-calling-signal-.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0033-Switch-SGX-clocks-to-200MHz-on-DM37xx-OMAP36xx.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0034-modedb.c-add-proper-720p60-mode.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0035-RTC-add-support-for-backup-battery-recharge.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0036-ARM-Add-prompt-for-CONFIG_ALIGNMENT_TRAP.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0037-ARM-Print-warning-on-alignment-trap-in-kernel-mode.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0038-ARM-Expose-some-CPU-control-registers-via-sysfs.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0039-ARM-Add-option-to-allow-userspace-PLE-access.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0040-ARM-Add-option-to-allow-userspace-access-to-performa.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0041-ARM-Expose-some-PMON-registers-through-sysfs.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0042-musb-allow-host-io-without-gadget-module.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0043-MTD-silence-ecc-errors-on-mtdblock0.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0044-ARM-OMAP-beagle-every-known-beagle-except-revB-uses-.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0045-ARM-OMAP-beagle-add-support-for-beagleFPGA-expansion.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0046-attemp-to-fix-serial-console-corruption-during-cpuid.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0047-clock34xx-only-try-to-idle-IVA-subsys-when-CONFIG_PM.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/0048-HACK-try-to-poweron-stuff-on-xM-rev-A.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/am3517-crane/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/am3517-evm/configs/stock
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/am3517-evm/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/am37x-evm/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/beagleboard-xmc/0001-omap-Beagle-revision-detection.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/beagleboard-xmc/0002-omap-Beagle-only-Cx-boards-use-pin-23-for-write-prot.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/beagleboard-xmc/0003-omap-Beagle-no-gpio_wp-pin-connection-on-xM.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/beagleboard-xmc/0004-omap3-beaglexm-fix-EHCI-power-up-GPIO-dir.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/beagleboard-xmc/0005-omap3-beaglexm-fix-DVI-reset-GPIO.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/beagleboard-xmc/0006-omap3-beaglexm-fix-power-on-of-DVI.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/beagleboard-xmc/0007-beagleboard-hack-in-support-from-xM-rev-C.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/beagleboard-xmc/0008-omap3-beagle-cleaned-up-board-revision-conditions.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/beagleboard/configs/cpuidle
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/beagleboard/configs/cpuidle-gether
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/beagleboard/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/beagleboard/logo_linux_clut224.ppm
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0001-mt9t111-first-stab-at-merging-sensor-driver-based-on.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0002-mt9t111-Fix-all-checkpatch-errors.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0003-mt9t111-Pass-v4l2_int_device-data.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0004-omap3beagle-Add-camera-support.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0005-TEMP-omap3beagle-camera-Add-defconfig.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0006-omap3beagle-camera-Add-support-for-regulators.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0007-TEMP-omap3beagle-cam-Enable-OMAP_MUX.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0008-omap3beagle-camera-Fix-null-pointer-dereference.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0009-Revert-TEMP-omap3beagle-cam-Enable-OMAP_MUX.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0010-omap3beagle-camera-Change-arch-late_initcall.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0011-omap3beagle-camera-Move-i2c-registration-to-the-main.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0012-ARM-OMAP3-make-camera-code-build-if-MT9T111-is-built.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0013-DEBUG-omap3beagle-camera-Force-mode0-in-cam_xclka.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0014-OMAP3-CLOCK-Add-capability-to-change-rate-of-dpll4_m.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0015-Revert-DEBUG-omap3beagle-camera-Force-mode0-in-cam_x.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0016-omap3beagle-camera-Fix-wrong-XCLKA-selection.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0017-omap3isp-set-CAM_MCLK-to-172.8-MHz-allows-exact-9.6-.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0018-Fix-Moved-MCLK-setting-to-the-board-file.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0019-omap3isp-core-Do-smarter-MCLK-setting.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0020-omap3beagle-camera-set-mclk-for-mt9t111.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0021-mt9t111-Fix-max-supported-xclk.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0022-omap3beagle-camera-Clarify-regulators-names.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0023-omap3beagle-camera-Fix-powerup-sequence.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0024-omap3beagle-camera-Change-vaux4-to-1.8v.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0025-omap3beagle-camera-Rename-regulators-to-match-actual.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0026-omap3beagle-camera-Complement-remainig-sensor-hw-con.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0027-mt9t111-Fix-detect-function-retval-and-cleanup-print.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0028-omap3beagle-camera-Set-padconf-settings-in-cam-init.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0029-omap3beagle-camera-only-register-camera-driver-for-3.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0030-WIP-mt9t111-Work-in-progress-for-camera-enablement.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0031-BeagleXM-Cam-Add-support-for-MT9V113-VGA-Sensor.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0032-MT9V113-Fixed-sensor-nitialization-issues.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0033-mt9v113-Fix-wrong-active-widths.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0034-omap3isp-Fix-Wrong-check-on-non-interlaced-sensor-on.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0035-omap3isp-Fix-bad-YUV_BT-checks-in-datapath_config.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0036-omap3isp-Set-vd_pol-to-0-by-default-on-all-cases.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0037-omap3isp-ccdc-Set-datalines-to-10-for-YUV_SYNC.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0038-omap3beagle-camera-Fix-parallel-i-f-settings.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0039-omap3beagle-camera-Clean-up-Remove-unneccessary-code.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0040-mt9v113-Clean-Up-Remove-unneccessary-code-printf.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0041-MT9V113-Min-Max-clk-input-changed-as-per-the-spec.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0042-omap3beagle-camera-Further-clode-cleanup.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0043-mt9v113-Settings-from-Aptima-used-to-increase-FPS.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0044-mt9v113-AE-param-tuned-to-get-28-30FPS.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0045-omap3beagle-camera-Cleanup-of-boardfile.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0046-omap3beagle-camera-Cleanup-regulator-usage.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0047-omap3beagle-camera-Bring-back-mt9t111-support.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0048-REMOVE-v4l2-Delete-MT9T111-sensor-driver.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0049-V4L-DVB-13670-soc-camera-Add-mt9t112-camera-driver.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0050-soc-camera-mt9t112-modify-exiting-conditions-from-st.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0051-mt9t112-Migrate-from-soc_camera-to-v4l2-int-device.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0052-mt9t112-Add-more-info-to-public-header.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0053-mt9t112-Fix-null-pointer-kernel-bug.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0054-DEBUG-omap3beagle-Add-MT9T112-to-defconfig.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0055-omap3beagle-camera-Change-MT9T111-references-to-new-.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0056-omap34xxcam-Fix-multi-pixel-format-negotiation.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0057-SQUASH-omap3beagle-camera-Bring-back-mt9t111-support.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0058-mt9t112-Do-init_camera-every-powerup.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0059-omap3beagle-camera-Switch-flag-for-no-sensor-ISP.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0060-mt9t112-Add-back-3MP-basesize.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0061-mt9t112-Prepare-for-24MHz-EXTCLK-and-30-fps.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0062-omap3beagle-camera-Prepare-24MHz-xclk-for-mt9t112.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0063-mt9t112-Correct-register-settings-for-mt9t111-sensor.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0064-mt9t112-Remove-smart-size-selection.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0065-rtl8192su-remove-bogus-Kconfig-depend-on-PCI-and-add.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0066-mt9t112-Add-Context-selection-to-configuration.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0067-mt9t112-Disable-JPEG-in-Context-B.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0068-mt9t112-Make-context-B-stream-unlimited-frames.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0069-mt9t112-Fix-pll-p-dividers-abstraction.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0070-mt9t112-Adjust-50-60Hz-flickering-settings.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0071-mt9t112-Trigger-autofocus-at-the-end-of-context-swit.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0072-omap3beagle-camera-Fix-dual-sensor-registration.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0073-mt9v113-Fix-State-variable-handling.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0074-Move-sensor-rest-to-after-applying-power.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/0075-omap3beagle-Add-camera-bootarg.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/5m03/0001-mt9p031-import-driver-from-https-github.com-Aptina-B.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/cam/5m03/0002-board-omap3beagle-import-li5m03-driver-from-https-gi.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/dm37x-evm/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0001-ARM-OMAP-add-spi-platform-devices.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0002-MMA7455L-accelerometer-driver.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0003-bq27x00_battery-remove-error-message-output.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0004-bq27x00_battery-add-charged-gpio.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0005-adf7846-add-more-debugging.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0006-ads7846-read-max-mix-x-y-from-pdata.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0007-ads7846-add-settling-delay-to-pdata.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0008-DSS2-OMAPFB-Translate-X-Y-coordinates-for-the-video-.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0009-DSS2-Fix-scaling-checks-when-rotation-is-90-or-270-d.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0010-add-touchbook-hid-driver.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0011-Make-backlight-controls-accessible-to-users.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0012-ads7846-don-t-error-out-when-there-s-no-pendown-gpio.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0013-ASoC-add-driver-for-omap3-touchbook.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0014-backlight-add-PWM-support.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0015-Forward-port-TWL4030-BCI-driver-from-2.6.29-to-2.6.3.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0016-ARM-OMAP-omap3-touchbook-update-boardfile.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/0017-ARM-OMAP-add-800MHz-OPP-and-remove-125MHz-one.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3-touchbook/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/omap3evm/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/overo/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp-2.6.32/porches.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap-psp_2.6.32.bb
+ delete mode 100644 recipes-kernel/linux/linux-omap4-3.1.0/0001-Makefile.fwinst-fix-install-breakage-for-FW-images-r.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap4-3.1.0/add_exec_tracepoint.patch
+ delete mode 100644 recipes-kernel/linux/linux-omap4-3.1.0/pandaboard/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-omap4_3.1.0.bb
+ delete mode 100644 recipes-kernel/linux/linux-omap_2.6.39.bb
+ delete mode 100644 recipes-kernel/linux/linux_3.0.bb
+ delete mode 100644 recipes-kernel/linux/linux_3.1.bb
+
 -- 
 1.8.3.2
 
