@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A5383E01685
-	for <meta-ti@yoctoproject.org>; Mon, 30 Sep 2013 13:37:30 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A402FE01684
+	for <meta-ti@yoctoproject.org>; Mon, 30 Sep 2013 13:37:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2784752A98; Mon, 30 Sep 2013 20:37:30 +0000 (UTC)
+	id 83BBD52A9F; Mon, 30 Sep 2013 20:37:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130930203730.2784752A98@arago-project.org>
-Date: Mon, 30 Sep 2013 20:37:30 +0000 (UTC)
+Message-Id: <20130930203731.83BBD52A9F@arago-project.org>
+Date: Mon, 30 Sep 2013 20:37:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-omap4-3.1.0: remove old pandaboard-specific kernel
+Subject: Denys Dmytriyenko : linux-davinci 2.6.32: remove old hawkboard-specific kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,25 +27,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: c08098f04de69a66b5aff68fc3255c57cd63f9fc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c08098f04de69a66b5aff68fc3255c57cd63f9fc
+Commit: 9f4e9c44f4d6a46ee3273bf80dad2ff5bdad0aa9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9f4e9c44f4d6a46ee3273bf80dad2ff5bdad0aa9
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Sep 28 16:29:28 2013 -0400
+Date:   Sat Sep 28 16:31:19 2013 -0400
 
-linux-omap4-3.1.0: remove old pandaboard-specific kernel
+linux-davinci 2.6.32: remove old hawkboard-specific kernel
 
-Pandaboard is supported by newer 3.4+ kernel recipes.
+* Hawkboard platform is not supported in meta-ti.
+* Since there no new revs of the kernel, the old recipe can be picked up from
+  Danny or Denzil.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
 
 ---
 
- ...inst-fix-install-breakage-for-FW-images-r.patch |   30 -
- .../linux-omap4-3.1.0/add_exec_tracepoint.patch    |  109 -
- .../linux/linux-omap4-3.1.0/pandaboard/defconfig   | 4402 --------------------
- recipes-kernel/linux/linux-omap4_3.1.0.bb          |   19 -
- 4 files changed, 0 insertions(+), 4560 deletions(-)
+ ...001-ARM-6329-1-wire-up-sys_accept4-on-ARM.patch |   51 -
+ ...i-Fix-currently-harmless-typo-in-SATA-PHY.patch |   26 -
+ ...create-sys-fs-cgroup-to-mount-cgroupfs-on.patch |   58 -
+ ...ci-ti-Update-SATA-PHY-configuration-RXCDR.patch |   29 -
+ ...001-board-da850-hawk-Disable-NAND-SUBPAGE.patch |   27 -
+ .../linux/linux-davinci/hawkboard/configs/stock    | 2630 -
+ .../linux/linux-davinci/hawkboard/defconfig        | 2659 -
+ .../linux-davinci/hawkboard/logo_linux_clut224.ppm |51363 --------------------
+ .../patch-2.6.33rc4-psp-to-hawkboard.patch         | 2775 --
+ ...0001-board-da850-evm-Disable-NAND-SUBPAGE.patch |   29 -
+ .../0001-uio_pruss1-Core-driver-addition.patch     |  334 -
+ .../0002-uio_pruss2-Platform-changes.patch         |  243 -
+ ...uio_pruss3-Workarounds-put-into-core-code.patch |   45 -
+ .../omapl138/configs/da850_omapl138_defconfig      | 1876 -
+ .../configs/da850_omapl138_defconfig_mmcpm_stats   | 1917 -
+ .../configs/da850_omapl138_defconfig_nandnommc     | 1886 -
+ .../configs/da850_omapl138_defconfig_uivideocap    | 1874 -
+ .../configs/da850_omapl138_defconfig_uivideocapdis | 1874 -
+ .../linux/linux-davinci/omapl138/defconfig         | 1951 -
+ .../linux-davinci/omapl138/logo_linux_clut224.ppm  |21763 ---------
+ .../linux/linux-davinci/update-mach-types.patch    |  160 -
+ recipes-kernel/linux/linux-davinci_git.bb          |   56 -
+ 22 files changed, 0 insertions(+), 93626 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=c08098f04de69a66b5aff68fc3255c57cd63f9fc
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=9f4e9c44f4d6a46ee3273bf80dad2ff5bdad0aa9
 
