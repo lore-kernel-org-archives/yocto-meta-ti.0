@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2EF49E01682
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 44EC3E01684
 	for <meta-ti@yoctoproject.org>; Mon, 30 Sep 2013 13:37:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D778C52AB2; Mon, 30 Sep 2013 20:37:33 +0000 (UTC)
+	id 5106752AAF; Mon, 30 Sep 2013 20:37:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130930203733.D778C52AB2@arago-project.org>
+Message-Id: <20130930203733.5106752AAF@arago-project.org>
 Date: Mon, 30 Sep 2013 20:37:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-omap-2.6.39: remove old beagleboard-specific and not supported kernel
+Subject: Denys Dmytriyenko : linux-keystone: update from 3.6.6 to 3.8.4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,118 +26,280 @@ X-List-Received-Date: Mon, 30 Sep 2013 20:37:34 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: 06afc3984d8e30e1c64db65373aa8e1378d44c16
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=06afc3984d8e30e1c64db65373aa8e1378d44c16
+Branch: master
+Commit: a44d61576ae038c8f8ca38a9800bfad137bf3886
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a44d61576ae038c8f8ca38a9800bfad137bf3886
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Sep 28 15:54:37 2013 -0400
+Date:   Sat Sep 28 18:05:48 2013 -0400
 
-linux-omap-2.6.39: remove old beagleboard-specific and not supported kernel
-
-Beagleboard is supported by newer 3.x kernel recipes.
+linux-keystone: update from 3.6.6 to 3.8.4
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
 
 ---
 
- ...e-add-support-for-beagleboard-xM-revision.patch |  117 -
- ...P3-beagle-add-support-for-expansionboards.patch |  359 -
- .../0003-OMAP3-beagle-add-MADC-support.patch       |   36 -
- ...eagle-add-regulators-for-camera-interface.patch |   88 -
- .../0005-OMAP3-beagle-HACK-add-in-1GHz-OPP.patch   |   31 -
- .../beagle/0006-OMAP3-BEAGLE-fix-RTC.patch         |   27 -
- ...mc-Adjust-dto-to-eliminate-timeout-errors.patch |   33 -
- ...ap3-beagle-Use-GPTIMERi-1-for-clockevents.patch |   42 -
- .../linux-omap-2.6.39/beagleboard/configs/stock    | 3490 ------
- .../linux/linux-omap-2.6.39/beagleboard/defconfig  | 3517 ------
- ...d-driver-for-Aptina-Micron-mt9p031-sensor.patch |  859 --
- .../0002-v4l-Add-mt9v032-sensor-driver.patch       |  853 --
- ...-for-mt9p031-LI-5M03-module-in-Beagleboar.patch |  162 -
- ...ap-usbhs-crash-when-rmmoding-ehci-or-ohci.patch |   67 -
- ...-omap_usbhs_alloc_children-error-handling.patch |   50 -
- ...003-mfd-Add-omap-usbhs-runtime-PM-support.patch |  245 -
- ...b-ehci-and-ohci-hwmod-structures-for-omap.patch |  406 -
- ...005-arm-omap-usb-register-hwmods-of-usbhs.patch |  160 -
- ...b-device-name-change-for-the-clk-names-of.patch |  123 -
- ...Suspend-and-resume-support-of-ehci-and-oh.patch |  165 -
- ...-Correct-the-warning-print-during-script-.patch |   36 -
- ...-Modifying-the-macro-name-Main_Ref-to-all.patch |   61 -
- ...FD-TWL4030-power-scripts-for-OMAP3-boards.patch |  705 --
- .../0011-MFD-TWL4030-TWL-version-checking.patch    |  164 -
- ...TWL4030-workaround-changes-for-Erratum-27.patch |  341 -
- ...TWL4030-optimizing-resource-configuration.patch |  184 -
- ...-Enable-DMA-mode1-RX-for-USB-Mass-Storage.patch |  121 -
- ...-NFS-Revert-NFSROOT-default-mount-options.patch |   13 -
- .../0001-OMAP2-cpufreq-free-up-table-on-exit.patch |   38 -
- ...MAP2-cpufreq-handle-invalid-cpufreq-table.patch |   44 -
- .../0003-OMAP2-cpufreq-minor-comment-cleanup.patch |   33 -
- ...eq-use-clk_init_cpufreq_table-if-OPPs-not.patch |   48 -
- ...pufreq-use-cpufreq_frequency_table_target.patch |   78 -
- .../0006-OMAP2-cpufreq-fix-freq_table-leak.patch   |  100 -
- ...q-helpers-for-walking-the-frequency-table.patch |  134 -
- .../0002-cpufreq-introduce-hotplug-governor.patch  |  879 --
- ...q-ensure-driver-initializes-after-cpufreq.patch |   27 -
- ...PUfreq-ensure-policy-is-fully-initialized.patch |   31 -
- .../0003-OMAP3-PM-CPUFreq-driver-for-OMAP3.patch   |  263 -
- ...AP-PM-CPUFREQ-Fix-conditional-compilation.patch |   32 -
- ...-cpufreq-fixup-after-new-OPP-layer-merged.patch |   33 -
- ...q-Split-OMAP1-and-OMAP2PLUS-CPUfreq-drive.patch |  669 --
- ...cpufreq-Add-SMP-support-to-cater-OMAP4430.patch |  170 -
- ...pufreq-Fix-typo-when-attempting-to-set-mp.patch |   29 -
- ...-clockdomain-Add-an-api-to-read-idle-mode.patch |   77 -
- ...kdomain-Add-SoC-support-for-clkdm_is_idle.patch |   86 -
- ...itialise-sleep_switch-to-a-non-valid-valu.patch |   35 -
- ...P2-PM-idle-clkdms-only-if-already-in-idle.patch |   50 -
- ...hwmod-Follow-the-recomended-PRCM-sequence.patch |   46 -
- ...6-OMAP-Serial-Check-wk_st-only-if-present.patch |   33 -
- ...age-remove-spurious-pr_notice-for-debugfs.patch |   30 -
- ...OMAP4-PM-remove-redundant-ifdef-CONFIG_PM.patch |   41 -
- ...reflex-fix-sr_late_init-error-path-in-pro.patch |   30 -
- ...AP3-smartreflex-request-the-memory-region.patch |   36 -
- ...artreflex-fix-ioremap-leak-on-probe-error.patch |   66 -
- ...reflex-delete-instance-from-sr_list-on-pr.patch |   29 -
- ...reflex-delete-debugfs-entries-on-probe-er.patch |   48 -
- ...uidle-remove-useless-SDP-specific-timings.patch |   57 -
- ...OMAP3-SR-make-notify-independent-of-class.patch |   48 -
- ...010-OMAP3-SR-disable-interrupt-by-default.patch |   37 -
- ...1-OMAP3-SR-enable-disable-SR-only-on-need.patch |   41 -
- .../0012-OMAP3-SR-fix-cosmetic-indentation.patch   |   49 -
- ...01-OMAP-DSS2-DSI-fix-use_sys_clk-highfreq.patch |   33 -
- .../0002-OMAP-DSS2-DSI-fix-dsi_dump_clocks.patch   |   49 -
- ...SS2-Fix-Return-correct-lcd-clock-source-f.patch |   43 -
- .../0004-OMAP-DSS-DSI-Fix-DSI-PLL-power-bug.patch  |   64 -
- ...-OMAP-DSS2-fix-panel-Kconfig-dependencies.patch |   61 -
- ...dd-bootarg-for-selecting-svideo-or-compos.patch |   75 -
- .../sakoman/0007-video-add-timings-for-hd720.patch |   27 -
- ...-smsc911x-return-ENODEV-if-device-is-not-.patch |   29 -
- ...ut-touchscreen-ads7846-return-ENODEV-if-d.patch |   47 -
- ...10-Revert-omap2_mcspi-Flush-posted-writes.patch |   25 -
- ...p_hsmmc-improve-interrupt-synchronisation.patch |  482 -
- ...SDIO-cards-off-to-save-power.-Doing-so-wi.patch |   51 -
- ...13-Enable-the-use-of-SDIO-card-interrupts.patch |  288 -
- ...Enable-audio-capture-by-default-for-twl40.patch |   27 -
- ...odecs-twl4030-Turn-on-mic-bias-by-default.patch |   25 -
- ...C-add-support-for-backup-battery-recharge.patch |   55 -
- ...mc-twl4030-move-clock-input-selection-pri.patch |   39 -
- ...wer-off-support-for-the-TWL4030-companion.patch |  103 -
- ...RM-OMAP-Add-twl4030-madc-support-to-Overo.patch |   33 -
- ...20-Enabling-Hwmon-driver-for-twl4030-madc.patch |   46 -
- .../0021-mfd-twl-core-enable-madc-clock.patch      |   54 -
- ...0022-rtc-twl-Switch-to-using-threaded-irq.patch |   25 -
- ...tomatically-set-musb-mode-in-platform-dat.patch |   49 -
- ...mc-Adjust-dto-to-eliminate-timeout-errors.patch |   28 -
- .../0025-omap-Fix-mtd-subpage-read-alignment.patch |   95 -
- ...ap2-Force-all-buffer-reads-to-u32-alignme.patch |   35 -
- ...-nand-fix-subpage-ecc-issue-with-prefetch.patch |   63 -
- .../0028-OMAP-Overo-Add-support-for-spidev.patch   |   46 -
- ...029-unionfs-Add-support-for-unionfs-2.5.9.patch |11494 --------------------
- ...-omap_device-activate-latency-messages-fr.patch |   34 -
- .../sakoman/0031-omap-overo-Add-opp-init.patch     |  105 -
- ...2-omap3-Add-basic-support-for-720MHz-part.patch |  202 -
- recipes-kernel/linux/linux-omap_2.6.39.bb          |  123 -
- 95 files changed, 0 insertions(+), 29857 deletions(-)
+ .../linux/linux-keystone-3.6.6/defconfig           |  188 --------------------
+ .../linux/linux-keystone-3.8.4/defconfig           |    1 +
+ recipes-kernel/linux/linux-keystone_3.6.6.bb       |   16 --
+ recipes-kernel/linux/linux-keystone_3.8.4.bb       |   27 +++
+ 4 files changed, 28 insertions(+), 204 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=06afc3984d8e30e1c64db65373aa8e1378d44c16
+diff --git a/recipes-kernel/linux/linux-keystone-3.6.6/defconfig b/recipes-kernel/linux/linux-keystone-3.6.6/defconfig
+deleted file mode 100644
+index d326a41..0000000
+--- a/recipes-kernel/linux/linux-keystone-3.6.6/defconfig
++++ /dev/null
+@@ -1,188 +0,0 @@
+-CONFIG_EXPERIMENTAL=y
+-# CONFIG_SWAP is not set
+-CONFIG_POSIX_MQUEUE=y
+-CONFIG_HIGH_RES_TIMERS=y
+-CONFIG_IKCONFIG=y
+-CONFIG_IKCONFIG_PROC=y
+-CONFIG_LOG_BUF_SHIFT=14
+-CONFIG_BLK_DEV_INITRD=y
+-CONFIG_SYSCTL_SYSCALL=y
+-CONFIG_KALLSYMS_ALL=y
+-# CONFIG_ELF_CORE is not set
+-# CONFIG_BASE_FULL is not set
+-CONFIG_EMBEDDED=y
+-CONFIG_PROFILING=y
+-CONFIG_OPROFILE=y
+-CONFIG_KPROBES=y
+-CONFIG_MODULES=y
+-CONFIG_MODULE_FORCE_LOAD=y
+-CONFIG_MODULE_UNLOAD=y
+-CONFIG_MODULE_FORCE_UNLOAD=y
+-CONFIG_MODVERSIONS=y
+-CONFIG_ARCH_KEYSTONE=y
+-CONFIG_SMP=y
+-CONFIG_ARM_ARCH_TIMER=y
+-CONFIG_PREEMPT__LL=y
+-CONFIG_AEABI=y
+-CONFIG_HIGHMEM=y
+-CONFIG_VFP=y
+-CONFIG_NEON=y
+-# CONFIG_SUSPEND is not set
+-CONFIG_PM_RUNTIME=y
+-CONFIG_NET=y
+-CONFIG_PACKET=y
+-CONFIG_UNIX=y
+-CONFIG_UNIX_DIAG=y
+-CONFIG_XFRM_USER=y
+-CONFIG_XFRM_SUB_POLICY=y
+-CONFIG_XFRM_STATISTICS=y
+-CONFIG_NET_KEY=y
+-CONFIG_NET_KEY_MIGRATE=y
+-CONFIG_INET=y
+-CONFIG_IP_MULTICAST=y
+-CONFIG_IP_ADVANCED_ROUTER=y
+-CONFIG_IP_MULTIPLE_TABLES=y
+-CONFIG_IP_ROUTE_MULTIPATH=y
+-CONFIG_IP_ROUTE_VERBOSE=y
+-CONFIG_IP_PNP=y
+-CONFIG_IP_PNP_DHCP=y
+-CONFIG_IP_PNP_BOOTP=y
+-CONFIG_NET_IPIP=y
+-CONFIG_NET_IPGRE_DEMUX=y
+-CONFIG_NET_IPGRE=y
+-CONFIG_IP_MROUTE=y
+-CONFIG_IP_MROUTE_MULTIPLE_TABLES=y
+-CONFIG_IP_PIMSM_V2=y
+-CONFIG_INET_AH=y
+-CONFIG_INET_IPCOMP=y
+-CONFIG_IPV6=y
+-CONFIG_INET6_XFRM_MODE_TRANSPORT=m
+-CONFIG_INET6_XFRM_MODE_TUNNEL=m
+-CONFIG_INET6_XFRM_MODE_BEET=m
+-CONFIG_IPV6_SIT=m
+-CONFIG_IPV6_MULTIPLE_TABLES=y
+-CONFIG_IPV6_SUBTREES=y
+-CONFIG_IPV6_MROUTE=y
+-CONFIG_IPV6_PIMSM_V2=y
+-CONFIG_NETFILTER=y
+-CONFIG_NF_CONNTRACK=y
+-CONFIG_NF_CT_NETLINK=y
+-CONFIG_NETFILTER_XT_TARGET_CLASSIFY=y
+-CONFIG_NETFILTER_XT_TARGET_CONNMARK=y
+-CONFIG_NETFILTER_XT_TARGET_IDLETIMER=y
+-CONFIG_NETFILTER_XT_TARGET_MARK=y
+-CONFIG_NETFILTER_XT_MATCH_COMMENT=y
+-CONFIG_NETFILTER_XT_MATCH_CONNBYTES=y
+-CONFIG_NETFILTER_XT_MATCH_CONNLIMIT=y
+-CONFIG_NETFILTER_XT_MATCH_CONNMARK=y
+-CONFIG_NETFILTER_XT_MATCH_CONNTRACK=y
+-CONFIG_NETFILTER_XT_MATCH_CPU=y
+-CONFIG_NETFILTER_XT_MATCH_IPRANGE=y
+-CONFIG_NETFILTER_XT_MATCH_LENGTH=y
+-CONFIG_NETFILTER_XT_MATCH_MAC=y
+-CONFIG_NETFILTER_XT_MATCH_MARK=y
+-CONFIG_NETFILTER_XT_MATCH_MULTIPORT=y
+-CONFIG_NETFILTER_XT_MATCH_PKTTYPE=y
+-CONFIG_NETFILTER_XT_MATCH_STATE=y
+-CONFIG_NF_CONNTRACK_IPV4=y
+-CONFIG_IP_NF_IPTABLES=y
+-CONFIG_IP_NF_MATCH_AH=y
+-CONFIG_IP_NF_MATCH_ECN=y
+-CONFIG_IP_NF_MATCH_TTL=y
+-CONFIG_IP_NF_FILTER=y
+-CONFIG_IP_NF_TARGET_REJECT=y
+-CONFIG_IP_NF_TARGET_ULOG=y
+-CONFIG_NF_NAT=y
+-CONFIG_IP_NF_TARGET_MASQUERADE=y
+-CONFIG_IP_NF_TARGET_NETMAP=y
+-CONFIG_IP_NF_TARGET_REDIRECT=y
+-CONFIG_IP_NF_MANGLE=y
+-CONFIG_IP_NF_TARGET_CLUSTERIP=y
+-CONFIG_IP_NF_TARGET_ECN=y
+-CONFIG_IP_NF_TARGET_TTL=y
+-CONFIG_IP_NF_RAW=y
+-CONFIG_IP_NF_ARPTABLES=y
+-CONFIG_IP_NF_ARPFILTER=y
+-CONFIG_IP_NF_ARP_MANGLE=y
+-CONFIG_IP6_NF_IPTABLES=m
+-CONFIG_IP_SCTP=y
+-CONFIG_VLAN_8021Q=y
+-CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
+-CONFIG_CMA=y
+-CONFIG_MTD=y
+-CONFIG_MTD_TESTS=m
+-CONFIG_MTD_CMDLINE_PARTS=y
+-CONFIG_MTD_CHAR=y
+-CONFIG_MTD_BLOCK=y
+-CONFIG_MTD_PLATRAM=y
+-CONFIG_MTD_M25P80=y
+-CONFIG_MTD_NAND=y
+-CONFIG_MTD_NAND_DAVINCI=y
+-CONFIG_MTD_UBI=y
+-CONFIG_PROC_DEVICETREE=y
+-CONFIG_BLK_DEV_LOOP=y
+-CONFIG_EEPROM_AT24=y
+-CONFIG_SCSI=y
+-CONFIG_BLK_DEV_SD=y
+-CONFIG_CHR_DEV_SG=y
+-CONFIG_NETDEVICES=y
+-CONFIG_TI_DAVINCI_MDIO=y
+-CONFIG_MARVELL_PHY=y
+-CONFIG_SERIAL_8250=y
+-CONFIG_SERIAL_8250_CONSOLE=y
+-CONFIG_SERIAL_OF_PLATFORM=y
+-# CONFIG_HW_RANDOM is not set
+-CONFIG_I2C=y
+-# CONFIG_I2C_COMPAT is not set
+-CONFIG_I2C_CHARDEV=y
+-CONFIG_I2C_DAVINCI=y
+-CONFIG_SPI=y
+-CONFIG_SPI_DAVINCI=y
+-CONFIG_SPI_SPIDEV=y
+-CONFIG_GPIO_SYSFS=y
+-# CONFIG_HWMON is not set
+-CONFIG_WATCHDOG=y
+-CONFIG_DAVINCI_WATCHDOG=y
+-CONFIG_USB=y
+-CONFIG_USB_DEBUG=y
+-CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
+-CONFIG_USB_DWC3=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_USB_GADGET=y
+-CONFIG_DMADEVICES=y
+-CONFIG_UIO=y
+-CONFIG_UIO_PDRV=y
+-CONFIG_COMMON_CLK_DEBUG=y
+-CONFIG_REMOTEPROC_USER=y
+-CONFIG_MEMORY=y
+-CONFIG_MSDOS_FS=y
+-CONFIG_VFAT_FS=y
+-CONFIG_NTFS_FS=y
+-CONFIG_TMPFS=y
+-CONFIG_JFFS2_FS=y
+-CONFIG_JFFS2_FS_WBUF_VERIFY=y
+-CONFIG_UBIFS_FS=y
+-CONFIG_CRAMFS=y
+-CONFIG_NFS_FS=y
+-CONFIG_NFS_V3_ACL=y
+-CONFIG_ROOT_NFS=y
+-CONFIG_NFSD=y
+-CONFIG_NFSD_V3=y
+-CONFIG_NFSD_V3_ACL=y
+-CONFIG_NLS_CODEPAGE_437=y
+-CONFIG_NLS_ISO8859_1=y
+-CONFIG_PRINTK_TIME=y
+-CONFIG_DEBUG_SHIRQ=y
+-CONFIG_DEBUG_INFO=y
+-CONFIG_DEBUG_USER=y
+-CONFIG_CRYPTO_USER=y
+-CONFIG_CRYPTO_NULL=y
+-CONFIG_CRYPTO_AUTHENC=y
+-CONFIG_CRYPTO_CBC=y
+-CONFIG_CRYPTO_CTR=y
+-CONFIG_CRYPTO_XCBC=y
+-CONFIG_CRYPTO_DES=y
+-CONFIG_CRYPTO_ANSI_CPRNG=y
+-CONFIG_CRYPTO_USER_API_HASH=y
+-CONFIG_CRYPTO_USER_API_SKCIPHER=y
+diff --git a/recipes-kernel/linux/linux-keystone-3.8.4/defconfig b/recipes-kernel/linux/linux-keystone-3.8.4/defconfig
+new file mode 100644
+index 0000000..04e6b17
+--- /dev/null
++++ b/recipes-kernel/linux/linux-keystone-3.8.4/defconfig
+@@ -0,0 +1 @@
++use-kernel-config=keystone2_defconfig
+diff --git a/recipes-kernel/linux/linux-keystone_3.6.6.bb b/recipes-kernel/linux/linux-keystone_3.6.6.bb
+deleted file mode 100644
+index 4dd5d15..0000000
+--- a/recipes-kernel/linux/linux-keystone_3.6.6.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-COMPATIBLE_MACHINE = "keystone"
+-
+-require linux.inc
+-
+-MACHINE_KERNEL_PR_append = "a"
+-
+-CORTEXA8FIXUP = "no"
+-
+-# The tree tends to rebase, use literal stable tags
+-SRCREV = "DEV.MCSDK-03.06.06.07"
+-
+-SRC_URI = "git://arago-project.org/git/projects/linux-keystone.git;protocol=git \
+-           file://defconfig \
+-           "
+-
+-S = "${WORKDIR}/git"
+diff --git a/recipes-kernel/linux/linux-keystone_3.8.4.bb b/recipes-kernel/linux/linux-keystone_3.8.4.bb
+new file mode 100644
+index 0000000..989fde9
+--- /dev/null
++++ b/recipes-kernel/linux/linux-keystone_3.8.4.bb
+@@ -0,0 +1,27 @@
++SECTION = "kernel"
++DESCRIPTION = "Linux kernel for TI Keystone devices"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
++
++inherit kernel
++
++require recipes-kernel/linux/linux-dtb.inc
++require recipes-kernel/linux/setup-defconfig.inc
++
++KERNEL_DEVICETREE_keystone-evm = "k2hk-evm.dtb"
++
++COMPATIBLE_MACHINE = "keystone"
++
++S = "${WORKDIR}/git"
++
++BRANCH = "sept-2013/master"
++
++# This commit corresponds to K2_LINUX_03.08.04_13.09 tag
++SRCREV = "20a48dc5309c4434650baef2b6072b5f1016f946"
++
++# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++
++SRC_URI = "git://arago-project.org/git/projects/linux-keystone.git;protocol=git;branch=${BRANCH}\
++           file://defconfig\
++          "
+
 
