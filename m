@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 44EC3E01684
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 451DEE01685
 	for <meta-ti@yoctoproject.org>; Mon, 30 Sep 2013 13:37:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5106752AAF; Mon, 30 Sep 2013 20:37:33 +0000 (UTC)
+	id DBEFB52A48; Mon, 30 Sep 2013 20:37:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20130930203733.5106752AAF@arago-project.org>
+Message-Id: <20130930203733.DBEFB52A48@arago-project.org>
 Date: Mon, 30 Sep 2013 20:37:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-keystone: update from 3.6.6 to 3.8.4
+Subject: Denys Dmytriyenko : linux: set PR from MACHINE_KERNEL_PR, bypass machine_kernel_pr.bbclass from meta-oe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,279 +27,183 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: a44d61576ae038c8f8ca38a9800bfad137bf3886
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a44d61576ae038c8f8ca38a9800bfad137bf3886
+Commit: 9c36e6c7573c3e68c5816dd04f3dd43f485b0550
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9c36e6c7573c3e68c5816dd04f3dd43f485b0550
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Sep 28 18:05:48 2013 -0400
+Date:   Sat Sep 28 18:12:03 2013 -0400
 
-linux-keystone: update from 3.6.6 to 3.8.4
+linux: set PR from MACHINE_KERNEL_PR, bypass machine_kernel_pr.bbclass from meta-oe
+
+Essentially, machine_kernel_pr.bbclass does this one line assignment, but
+introduces a new unnecessary dependency on meta-openembedded/meta-oe layer.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-keystone-3.6.6/defconfig           |  188 --------------------
- .../linux/linux-keystone-3.8.4/defconfig           |    1 +
- recipes-kernel/linux/linux-keystone_3.6.6.bb       |   16 --
- recipes-kernel/linux/linux-keystone_3.8.4.bb       |   27 +++
- 4 files changed, 28 insertions(+), 204 deletions(-)
+ recipes-kernel/linux/linux-am335x-psp_3.2.bb      |    1 +
+ recipes-kernel/linux/linux-keystone_3.8.4.bb      |    1 +
+ recipes-kernel/linux/linux-mainline_3.2.bb        |    1 +
+ recipes-kernel/linux/linux-omap-psp_2.6.37.bb     |    1 +
+ recipes-kernel/linux/linux-omap4_3.4.bb           |    1 +
+ recipes-kernel/linux/linux-omap_2.6.37.bb         |    3 +++
+ recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb |    1 +
+ recipes-kernel/linux/linux-ti-glsdk_3.8.bb        |    1 +
+ recipes-kernel/linux/linux-ti-staging_3.8.bb      |    1 +
+ recipes-kernel/linux/linux-ti-staging_git.bb      |    1 +
+ recipes-kernel/linux/linux-ti33x-psp_3.2.bb       |    2 ++
+ recipes-kernel/linux/linux_3.3.7.bb               |    1 +
+ 12 files changed, 15 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-keystone-3.6.6/defconfig b/recipes-kernel/linux/linux-keystone-3.6.6/defconfig
-deleted file mode 100644
-index d326a41..0000000
---- a/recipes-kernel/linux/linux-keystone-3.6.6/defconfig
-+++ /dev/null
-@@ -1,188 +0,0 @@
--CONFIG_EXPERIMENTAL=y
--# CONFIG_SWAP is not set
--CONFIG_POSIX_MQUEUE=y
--CONFIG_HIGH_RES_TIMERS=y
--CONFIG_IKCONFIG=y
--CONFIG_IKCONFIG_PROC=y
--CONFIG_LOG_BUF_SHIFT=14
--CONFIG_BLK_DEV_INITRD=y
--CONFIG_SYSCTL_SYSCALL=y
--CONFIG_KALLSYMS_ALL=y
--# CONFIG_ELF_CORE is not set
--# CONFIG_BASE_FULL is not set
--CONFIG_EMBEDDED=y
--CONFIG_PROFILING=y
--CONFIG_OPROFILE=y
--CONFIG_KPROBES=y
--CONFIG_MODULES=y
--CONFIG_MODULE_FORCE_LOAD=y
--CONFIG_MODULE_UNLOAD=y
--CONFIG_MODULE_FORCE_UNLOAD=y
--CONFIG_MODVERSIONS=y
--CONFIG_ARCH_KEYSTONE=y
--CONFIG_SMP=y
--CONFIG_ARM_ARCH_TIMER=y
--CONFIG_PREEMPT__LL=y
--CONFIG_AEABI=y
--CONFIG_HIGHMEM=y
--CONFIG_VFP=y
--CONFIG_NEON=y
--# CONFIG_SUSPEND is not set
--CONFIG_PM_RUNTIME=y
--CONFIG_NET=y
--CONFIG_PACKET=y
--CONFIG_UNIX=y
--CONFIG_UNIX_DIAG=y
--CONFIG_XFRM_USER=y
--CONFIG_XFRM_SUB_POLICY=y
--CONFIG_XFRM_STATISTICS=y
--CONFIG_NET_KEY=y
--CONFIG_NET_KEY_MIGRATE=y
--CONFIG_INET=y
--CONFIG_IP_MULTICAST=y
--CONFIG_IP_ADVANCED_ROUTER=y
--CONFIG_IP_MULTIPLE_TABLES=y
--CONFIG_IP_ROUTE_MULTIPATH=y
--CONFIG_IP_ROUTE_VERBOSE=y
--CONFIG_IP_PNP=y
--CONFIG_IP_PNP_DHCP=y
--CONFIG_IP_PNP_BOOTP=y
--CONFIG_NET_IPIP=y
--CONFIG_NET_IPGRE_DEMUX=y
--CONFIG_NET_IPGRE=y
--CONFIG_IP_MROUTE=y
--CONFIG_IP_MROUTE_MULTIPLE_TABLES=y
--CONFIG_IP_PIMSM_V2=y
--CONFIG_INET_AH=y
--CONFIG_INET_IPCOMP=y
--CONFIG_IPV6=y
--CONFIG_INET6_XFRM_MODE_TRANSPORT=m
--CONFIG_INET6_XFRM_MODE_TUNNEL=m
--CONFIG_INET6_XFRM_MODE_BEET=m
--CONFIG_IPV6_SIT=m
--CONFIG_IPV6_MULTIPLE_TABLES=y
--CONFIG_IPV6_SUBTREES=y
--CONFIG_IPV6_MROUTE=y
--CONFIG_IPV6_PIMSM_V2=y
--CONFIG_NETFILTER=y
--CONFIG_NF_CONNTRACK=y
--CONFIG_NF_CT_NETLINK=y
--CONFIG_NETFILTER_XT_TARGET_CLASSIFY=y
--CONFIG_NETFILTER_XT_TARGET_CONNMARK=y
--CONFIG_NETFILTER_XT_TARGET_IDLETIMER=y
--CONFIG_NETFILTER_XT_TARGET_MARK=y
--CONFIG_NETFILTER_XT_MATCH_COMMENT=y
--CONFIG_NETFILTER_XT_MATCH_CONNBYTES=y
--CONFIG_NETFILTER_XT_MATCH_CONNLIMIT=y
--CONFIG_NETFILTER_XT_MATCH_CONNMARK=y
--CONFIG_NETFILTER_XT_MATCH_CONNTRACK=y
--CONFIG_NETFILTER_XT_MATCH_CPU=y
--CONFIG_NETFILTER_XT_MATCH_IPRANGE=y
--CONFIG_NETFILTER_XT_MATCH_LENGTH=y
--CONFIG_NETFILTER_XT_MATCH_MAC=y
--CONFIG_NETFILTER_XT_MATCH_MARK=y
--CONFIG_NETFILTER_XT_MATCH_MULTIPORT=y
--CONFIG_NETFILTER_XT_MATCH_PKTTYPE=y
--CONFIG_NETFILTER_XT_MATCH_STATE=y
--CONFIG_NF_CONNTRACK_IPV4=y
--CONFIG_IP_NF_IPTABLES=y
--CONFIG_IP_NF_MATCH_AH=y
--CONFIG_IP_NF_MATCH_ECN=y
--CONFIG_IP_NF_MATCH_TTL=y
--CONFIG_IP_NF_FILTER=y
--CONFIG_IP_NF_TARGET_REJECT=y
--CONFIG_IP_NF_TARGET_ULOG=y
--CONFIG_NF_NAT=y
--CONFIG_IP_NF_TARGET_MASQUERADE=y
--CONFIG_IP_NF_TARGET_NETMAP=y
--CONFIG_IP_NF_TARGET_REDIRECT=y
--CONFIG_IP_NF_MANGLE=y
--CONFIG_IP_NF_TARGET_CLUSTERIP=y
--CONFIG_IP_NF_TARGET_ECN=y
--CONFIG_IP_NF_TARGET_TTL=y
--CONFIG_IP_NF_RAW=y
--CONFIG_IP_NF_ARPTABLES=y
--CONFIG_IP_NF_ARPFILTER=y
--CONFIG_IP_NF_ARP_MANGLE=y
--CONFIG_IP6_NF_IPTABLES=m
--CONFIG_IP_SCTP=y
--CONFIG_VLAN_8021Q=y
--CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
--CONFIG_CMA=y
--CONFIG_MTD=y
--CONFIG_MTD_TESTS=m
--CONFIG_MTD_CMDLINE_PARTS=y
--CONFIG_MTD_CHAR=y
--CONFIG_MTD_BLOCK=y
--CONFIG_MTD_PLATRAM=y
--CONFIG_MTD_M25P80=y
--CONFIG_MTD_NAND=y
--CONFIG_MTD_NAND_DAVINCI=y
--CONFIG_MTD_UBI=y
--CONFIG_PROC_DEVICETREE=y
--CONFIG_BLK_DEV_LOOP=y
--CONFIG_EEPROM_AT24=y
--CONFIG_SCSI=y
--CONFIG_BLK_DEV_SD=y
--CONFIG_CHR_DEV_SG=y
--CONFIG_NETDEVICES=y
--CONFIG_TI_DAVINCI_MDIO=y
--CONFIG_MARVELL_PHY=y
--CONFIG_SERIAL_8250=y
--CONFIG_SERIAL_8250_CONSOLE=y
--CONFIG_SERIAL_OF_PLATFORM=y
--# CONFIG_HW_RANDOM is not set
--CONFIG_I2C=y
--# CONFIG_I2C_COMPAT is not set
--CONFIG_I2C_CHARDEV=y
--CONFIG_I2C_DAVINCI=y
--CONFIG_SPI=y
--CONFIG_SPI_DAVINCI=y
--CONFIG_SPI_SPIDEV=y
--CONFIG_GPIO_SYSFS=y
--# CONFIG_HWMON is not set
--CONFIG_WATCHDOG=y
--CONFIG_DAVINCI_WATCHDOG=y
--CONFIG_USB=y
--CONFIG_USB_DEBUG=y
--CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
--CONFIG_USB_DWC3=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_STORAGE=y
--CONFIG_USB_GADGET=y
--CONFIG_DMADEVICES=y
--CONFIG_UIO=y
--CONFIG_UIO_PDRV=y
--CONFIG_COMMON_CLK_DEBUG=y
--CONFIG_REMOTEPROC_USER=y
--CONFIG_MEMORY=y
--CONFIG_MSDOS_FS=y
--CONFIG_VFAT_FS=y
--CONFIG_NTFS_FS=y
--CONFIG_TMPFS=y
--CONFIG_JFFS2_FS=y
--CONFIG_JFFS2_FS_WBUF_VERIFY=y
--CONFIG_UBIFS_FS=y
--CONFIG_CRAMFS=y
--CONFIG_NFS_FS=y
--CONFIG_NFS_V3_ACL=y
--CONFIG_ROOT_NFS=y
--CONFIG_NFSD=y
--CONFIG_NFSD_V3=y
--CONFIG_NFSD_V3_ACL=y
--CONFIG_NLS_CODEPAGE_437=y
--CONFIG_NLS_ISO8859_1=y
--CONFIG_PRINTK_TIME=y
--CONFIG_DEBUG_SHIRQ=y
--CONFIG_DEBUG_INFO=y
--CONFIG_DEBUG_USER=y
--CONFIG_CRYPTO_USER=y
--CONFIG_CRYPTO_NULL=y
--CONFIG_CRYPTO_AUTHENC=y
--CONFIG_CRYPTO_CBC=y
--CONFIG_CRYPTO_CTR=y
--CONFIG_CRYPTO_XCBC=y
--CONFIG_CRYPTO_DES=y
--CONFIG_CRYPTO_ANSI_CPRNG=y
--CONFIG_CRYPTO_USER_API_HASH=y
--CONFIG_CRYPTO_USER_API_SKCIPHER=y
-diff --git a/recipes-kernel/linux/linux-keystone-3.8.4/defconfig b/recipes-kernel/linux/linux-keystone-3.8.4/defconfig
-new file mode 100644
-index 0000000..04e6b17
---- /dev/null
-+++ b/recipes-kernel/linux/linux-keystone-3.8.4/defconfig
-@@ -0,0 +1 @@
-+use-kernel-config=keystone2_defconfig
-diff --git a/recipes-kernel/linux/linux-keystone_3.6.6.bb b/recipes-kernel/linux/linux-keystone_3.6.6.bb
-deleted file mode 100644
-index 4dd5d15..0000000
---- a/recipes-kernel/linux/linux-keystone_3.6.6.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--COMPATIBLE_MACHINE = "keystone"
--
--require linux.inc
--
--MACHINE_KERNEL_PR_append = "a"
--
--CORTEXA8FIXUP = "no"
--
--# The tree tends to rebase, use literal stable tags
--SRCREV = "DEV.MCSDK-03.06.06.07"
--
--SRC_URI = "git://arago-project.org/git/projects/linux-keystone.git;protocol=git \
--           file://defconfig \
--           "
--
--S = "${WORKDIR}/git"
+diff --git a/recipes-kernel/linux/linux-am335x-psp_3.2.bb b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
+index eaf788f..9d08a86 100644
+--- a/recipes-kernel/linux/linux-am335x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-am335x-psp_3.2.bb
+@@ -16,6 +16,7 @@ KERNEL_IMAGETYPE = "uImage"
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for ti33x see conf/machine/include/ti33x.inc
+ MACHINE_KERNEL_PR_append = "h+gitr${SRCPV}"
++PR = "${MACHINE_KERNEL_PR}"
+ 
+ BRANCH = "v3.2-staging"
+ 
 diff --git a/recipes-kernel/linux/linux-keystone_3.8.4.bb b/recipes-kernel/linux/linux-keystone_3.8.4.bb
-new file mode 100644
-index 0000000..989fde9
---- /dev/null
+index 989fde9..d176f14 100644
+--- a/recipes-kernel/linux/linux-keystone_3.8.4.bb
 +++ b/recipes-kernel/linux/linux-keystone_3.8.4.bb
-@@ -0,0 +1,27 @@
-+SECTION = "kernel"
-+DESCRIPTION = "Linux kernel for TI Keystone devices"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+@@ -21,6 +21,7 @@ SRCREV = "20a48dc5309c4434650baef2b6072b5f1016f946"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++PR = "${MACHINE_KERNEL_PR}"
+ 
+ SRC_URI = "git://arago-project.org/git/projects/linux-keystone.git;protocol=git;branch=${BRANCH}\
+            file://defconfig\
+diff --git a/recipes-kernel/linux/linux-mainline_3.2.bb b/recipes-kernel/linux/linux-mainline_3.2.bb
+index 7b4a2a2..7398d9a 100644
+--- a/recipes-kernel/linux/linux-mainline_3.2.bb
++++ b/recipes-kernel/linux/linux-mainline_3.2.bb
+@@ -10,6 +10,7 @@ SRCREV_pn-${PN} = "1f873aca1c7aa7a574b276c040d304d16f1dbfa4"
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+ MACHINE_KERNEL_PR_append = "b"
++PR = "${MACHINE_KERNEL_PR}"
+ 
+ FILESPATH =. "${FILE_DIRNAME}/linux-mainline-3.2:${FILE_DIRNAME}/linux-mainline-3.2/${MACHINE}:"
+ 
+diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
+index d1a6478..8333cc8 100644
+--- a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
++++ b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
+@@ -11,6 +11,7 @@ SRCREV= "adcd067326836777c049e3cb32a5b7d9d401fc31"
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 devices
+ # see conf/machine/include/omap3.inc
+ MACHINE_KERNEL_PR_append = "b"
++PR = "${MACHINE_KERNEL_PR}"
+ 
+ SRC_URI = "git://arago-project.org/git/projects/linux-omap3.git;protocol=git \
+            file://defconfig"
+diff --git a/recipes-kernel/linux/linux-omap4_3.4.bb b/recipes-kernel/linux/linux-omap4_3.4.bb
+index 1928060..449e4eb 100644
+--- a/recipes-kernel/linux/linux-omap4_3.4.bb
++++ b/recipes-kernel/linux/linux-omap4_3.4.bb
+@@ -4,6 +4,7 @@ require linux.inc
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for omap4 see conf/machine/include/omap4.inc
+ MACHINE_KERNEL_PR_append = "a"
++PR = "${MACHINE_KERNEL_PR}"
+ 
+ CORTEXA8FIXUP = "no"
+ 
+diff --git a/recipes-kernel/linux/linux-omap_2.6.37.bb b/recipes-kernel/linux/linux-omap_2.6.37.bb
+index 0a14cc8..1bbdde1 100644
+--- a/recipes-kernel/linux/linux-omap_2.6.37.bb
++++ b/recipes-kernel/linux/linux-omap_2.6.37.bb
+@@ -6,7 +6,10 @@ COMPATIBLE_MACHINE = "(beagleboard|overo|omap3evm|omap3-touchbook)"
+ 
+ # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
+ PV = "2.6.37"
 +
-+inherit kernel
+ MACHINE_KERNEL_PR_append = "c+gitr${SRCREV}"
++PR = "${MACHINE_KERNEL_PR}"
 +
-+require recipes-kernel/linux/linux-dtb.inc
-+require recipes-kernel/linux/setup-defconfig.inc
+ SRCREV = "fa3b4e23ec20cfc944db7cc2b30b0d82c20e4472"
+ 
+ FILESEXTRAPATHS_prepend := "{THISDIR}/${PN}-${PV}:"
+diff --git a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
+index a138fb6..199499a 100644
+--- a/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
++++ b/recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb
+@@ -7,6 +7,7 @@ require tipspkernel.inc
+ require setup-defconfig.inc
+ 
+ MACHINE_KERNEL_PR_append = "c"
++PR = "${MACHINE_KERNEL_PR}"
+ 
+ S = "${WORKDIR}/git"
+ 
+diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+index 5fd17f8..291e852 100644
+--- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+@@ -25,6 +25,7 @@ PV = "3.8.13"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
++PR = "${MACHINE_KERNEL_PR}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-kernel.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.8.bb b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+index 833fb48..80b94f6 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.8.bb
+@@ -32,6 +32,7 @@ PV = "3.8.13"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
++PR = "${MACHINE_KERNEL_PR}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index a91d101..8267afa 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -33,6 +33,7 @@ PV = "3.11+3.12-rc3"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++PR = "${MACHINE_KERNEL_PR}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+diff --git a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+index 4200d03..1602e3f 100644
+--- a/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
++++ b/recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+@@ -15,7 +15,9 @@ PV = "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "3.2", "3.2.28", d)}"
+ 
+ BRANCH = "v3.2-staging"
+ SRCREV = "720e07b4c1f687b61b147b31c698cb6816d72f01"
 +
-+KERNEL_DEVICETREE_keystone-evm = "k2hk-evm.dtb"
-+
-+COMPATIBLE_MACHINE = "keystone"
-+
-+S = "${WORKDIR}/git"
-+
-+BRANCH = "sept-2013/master"
-+
-+# This commit corresponds to K2_LINUX_03.08.04_13.09 tag
-+SRCREV = "20a48dc5309c4434650baef2b6072b5f1016f946"
-+
-+# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+
-+SRC_URI = "git://arago-project.org/git/projects/linux-keystone.git;protocol=git;branch=${BRANCH}\
-+           file://defconfig\
-+          "
+ MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
++PR = "${MACHINE_KERNEL_PR}"
+ 
+ COMPATIBLE_MACHINE = "(ti33x)"
+ 
+diff --git a/recipes-kernel/linux/linux_3.3.7.bb b/recipes-kernel/linux/linux_3.3.7.bb
+index aca5c53..f6d2172 100644
+--- a/recipes-kernel/linux/linux_3.3.7.bb
++++ b/recipes-kernel/linux/linux_3.3.7.bb
+@@ -14,6 +14,7 @@ require setup-defconfig.inc
+ # The main PR is now using MACHINE_KERNEL_PR, for beagleboard see
+ # conf/machine/include/omap3.inc
+ MACHINE_KERNEL_PR_append = "b+gitr${SRCREV}"
++PR = "${MACHINE_KERNEL_PR}"
+ 
+ BRANCH = "linux-3.3.y"
+ SRCREV = "v3.3.7"
 
 
