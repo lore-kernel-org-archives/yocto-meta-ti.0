@@ -1,49 +1,29 @@
-Return-Path: <prvs=9823299e3=Christopher.Pow@honeywell.com>
-Received: from de08ip008.honeywell.com (de08ip008.honeywell.com [199.61.24.27])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E0B0E0161F
-	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 11:42:24 -0700 (PDT)
-Received-SPF: Neutral (de08ip008.honeywell.com: domain of
-	Christopher.Pow@honeywell.com does not assert whether or not
-	10.216.34.42 is permitted sender) identity=mailfrom;
-	client-ip=10.216.34.42; receiver=de08ip008.honeywell.com;
-	envelope-from="Christopher.Pow@honeywell.com";
-	x-sender="Christopher.Pow@honeywell.com";
-	x-conformance=spf_only; x-record-type="v=spf1"
-Received-SPF: None (de08ip008.honeywell.com: no sender
-	authenticity information available from domain of
-	postmaster@de08ex5002.global.ds.honeywell.com) identity=helo;
-	client-ip=10.216.34.42; receiver=de08ip008.honeywell.com;
-	envelope-from="Christopher.Pow@honeywell.com";
-	x-sender="postmaster@de08ex5002.global.ds.honeywell.com";
-	x-conformance=spf_only
-X-SBRS: None
-X-SenderGroup: Relay_to_Internet
-X-MailFlowPolicy: $Relay
-X-Attachment_Filename: 
-X-Attachment_Filesize: None
-X-IronPort-AV: E=Sophos;i="4.90,1034,1371106800"; 
-	d="scan'208,217";a="27713223"
-Received: from unknown (HELO de08ex5002.global.ds.honeywell.com)
-	([10.216.34.42])
-	by de08ip008.honeywell.com with ESMTP; 04 Oct 2013 11:42:23 -0700
-Received: from DE08EX3002.global.ds.honeywell.com ([169.254.2.219]) by
-	de08ex5002.global.ds.honeywell.com ([10.216.14.57]) with mapi id
-	14.02.0309.002; Fri, 4 Oct 2013 14:42:23 -0400
-From: "Pow, Christopher (SWCOE)" <Christopher.Pow@honeywell.com>
-To: bmentink <bmentink@gmail.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] User space drivers
-Thread-Index: AQHOwTBBHdhW2QcEQkCvj8R6LV2hnJnk37GQ
-Date: Fri, 4 Oct 2013 18:42:22 +0000
-Message-ID: <7B8A37CE7777314D9B931CDD3BA8C83B1BA4C507@de08ex3002.global.ds.honeywell.com>
+Return-Path: <denys@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6499E0163D
+	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 11:46:49 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r94Ikl2s030710;
+	Fri, 4 Oct 2013 13:46:47 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r94IklMD012461;
+	Fri, 4 Oct 2013 13:46:47 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Fri, 4 Oct 2013 13:46:47 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r94Ikkuj016892;
+	Fri, 4 Oct 2013 13:46:47 -0500
+Date: Fri, 4 Oct 2013 14:46:45 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Pow, Christopher (SWCOE)" <Christopher.Pow@honeywell.com>
+Message-ID: <20131004184645.GB3672@edge>
 References: <tw8uf8cbqu0w8kxjs3nsu24x.1380911274107@email.android.com>
-In-Reply-To: <tw8uf8cbqu0w8kxjs3nsu24x.1380911274107@email.android.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [146.167.150.131]
+	<7B8A37CE7777314D9B931CDD3BA8C83B1BA4C507@de08ex3002.global.ds.honeywell.com>
 MIME-Version: 1.0
-X-CFilter-Loop: Forwarded
+In-Reply-To: <7B8A37CE7777314D9B931CDD3BA8C83B1BA4C507@de08ex3002.global.ds.honeywell.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: User space drivers
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -57,139 +37,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2013 18:42:25 -0000
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_7B8A37CE7777314D9B931CDD3BA8C83B1BA4C507de08ex3002globa_"
-
---_000_7B8A37CE7777314D9B931CDD3BA8C83B1BA4C507de08ex3002globa_
+X-List-Received-Date: Fri, 04 Oct 2013 18:46:51 -0000
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-TGludXggZG9jdW1lbnRhdGlvbiBpcyB2ZXJ5IGNsZWFyIG9uIGhvdyB0byBpbnRlcmFjdCB3aXRo
-IEdQSU8gZnJvbSB1c2VyIHNwYWNlIGFwcGxpY2F0aW9uIGFuZCBldmVuIHVzZSB0aGVtIGFzIGlu
-dGVycnVwdHMuICBSZWZlciB0byBEb2N1bWVudGF0aW9uL2dwaW8udHh0LCBzZWN0aW9uIOKAnFN5
-c2ZzIEludGVyZmFjZSBmb3IgVXNlcnNwYWNlIChPUFRJT05BTCnigJ0g4oCTIGFsc28gbWFrZSBz
-dXJlIHlvdSBlbmFibGUgdGhlIHN5c2ZzIHBvcnRpb24gb2YgZ3Bpb2xpYiBpbiBtZW51Y29uZmln
-IChDT05GSUdfR1BJT19TWVNGUykuDQoNCkNocmlzdG9waGVyIFMuIFBvdw0KU2VuaW9yIEVuZ2lu
-ZWVyLCBTeXN0ZW1zDQpIb25leXdlbGwgU1dDT0UgLSBSVE9TDQpvOjYxMi05NTEtNTg1MiBjOjYx
-Mi05MTAtMTI3MQ0KDQoiVGhlIG51bWJlciB5b3UgaGF2ZSBkaWFsZWQgaXMgaW1hZ2luYXJ5LiAg
-UGxlYXNlIHJvdGF0ZSB5b3VyIHBob25lIDkwIGRlZ3JlZXMgYW5kIHRyeSBhZ2Fpbi4iDQoNCkZy
-b206IG1ldGEtdGktYm91bmNlc0B5b2N0b3Byb2plY3Qub3JnIFttYWlsdG86bWV0YS10aS1ib3Vu
-Y2VzQHlvY3RvcHJvamVjdC5vcmddIE9uIEJlaGFsZiBPZiBibWVudGluaw0KU2VudDogRnJpZGF5
-LCBPY3RvYmVyIDA0LCAyMDEzIDE6MjggUE0NClRvOiBtZXRhLXRpQHlvY3RvcHJvamVjdC5vcmcN
-ClN1YmplY3Q6IFttZXRhLXRpXSBVc2VyIHNwYWNlIGRyaXZlcnMNCg0KDQpIaSBhbGwsDQoNCkkg
-YW0gd2FudGluZyB0byBpbXBsZW1lbnQgYSB1c2VyIHNwYWNlIGRyaXZlciBjb21wbGV0ZSB3aXRo
-IGludGVycnVwdCBpbiB5b2N0by4NCkkgc2VlIHRoYXQgdGhlcmUgaXMgYSBzYW1wbGUgZ2VuZXJp
-YyBwbGF0Zm9ybSBkcml2ZXIgaW4gdGhlIGtlcm5lbCwgYnV0IG5vdCBzdXJlIGhvdyB0byB1c2Ug
-aXQuDQoNClNheSBpIHdhbnQgdG8gdGFsayB0byBHUElPIElzIGl0IHNpbXBseSBhIG1hdHRlciBv
-ZiBwb2ludGluZyB0aGUgLmR0cyBlbnRyeSBmb3IgdGhlIGRyaXZlciB0byB0aGUgdWlvIGRyaXZl
-cj8NCg0KQW55IHBvaW50ZXJzIHdvdWxkIGJlIHZlcnkgaGVscGZ1bCAuLg0KDQpDaGVlcnMsDQpC
-ZXJuaWUNCg0KDQoNClNlbnQgZnJvbSBTYW1zdW5nIHRhYmxldA0K
+Also, you may find this project interesting:
 
---_000_7B8A37CE7777314D9B931CDD3BA8C83B1BA4C507de08ex3002globa_
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: base64
+https://github.com/jackmitch/libsoc
 
-PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
-bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
-YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
-cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
-VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
-Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
-ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTIgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
-PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
-IkNhbWJyaWEgTWF0aCI7DQoJcGFub3NlLTE6MiA0IDUgMyA1IDQgNiAzIDIgNDt9DQpAZm9udC1m
-YWNlDQoJe2ZvbnQtZmFtaWx5OkNhbGlicmk7DQoJcGFub3NlLTE6MiAxNSA1IDIgMiAyIDQgMyAy
-IDQ7fQ0KQGZvbnQtZmFjZQ0KCXtmb250LWZhbWlseTpUYWhvbWE7DQoJcGFub3NlLTE6MiAxMSA2
-IDQgMyA1IDQgNCAyIDQ7fQ0KLyogU3R5bGUgRGVmaW5pdGlvbnMgKi8NCnAuTXNvTm9ybWFsLCBs
-aS5Nc29Ob3JtYWwsIGRpdi5Nc29Ob3JtYWwNCgl7bWFyZ2luOjBpbjsNCgltYXJnaW4tYm90dG9t
-Oi4wMDAxcHQ7DQoJZm9udC1zaXplOjEyLjBwdDsNCglmb250LWZhbWlseToiVGltZXMgTmV3IFJv
-bWFuIiwic2VyaWYiO30NCmE6bGluaywgc3Bhbi5Nc29IeXBlcmxpbmsNCgl7bXNvLXN0eWxlLXBy
-aW9yaXR5Ojk5Ow0KCWNvbG9yOmJsdWU7DQoJdGV4dC1kZWNvcmF0aW9uOnVuZGVybGluZTt9DQph
-OnZpc2l0ZWQsIHNwYW4uTXNvSHlwZXJsaW5rRm9sbG93ZWQNCgl7bXNvLXN0eWxlLXByaW9yaXR5
-Ojk5Ow0KCWNvbG9yOnB1cnBsZTsNCgl0ZXh0LWRlY29yYXRpb246dW5kZXJsaW5lO30NCnByZQ0K
-CXttc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJbXNvLXN0eWxlLWxpbms6IkhUTUwgUHJlZm9ybWF0
-dGVkIENoYXIiOw0KCW1hcmdpbjowaW47DQoJbWFyZ2luLWJvdHRvbTouMDAwMXB0Ow0KCWZvbnQt
-c2l6ZToxMC4wcHQ7DQoJZm9udC1mYW1pbHk6IkNvdXJpZXIgTmV3Ijt9DQpzcGFuLkVtYWlsU3R5
-bGUxNw0KCXttc28tc3R5bGUtdHlwZTpwZXJzb25hbC1yZXBseTsNCglmb250LWZhbWlseToiQ2Fs
-aWJyaSIsInNhbnMtc2VyaWYiOw0KCWNvbG9yOiMxRjQ5N0Q7fQ0Kc3Bhbi5IVE1MUHJlZm9ybWF0
-dGVkQ2hhcg0KCXttc28tc3R5bGUtbmFtZToiSFRNTCBQcmVmb3JtYXR0ZWQgQ2hhciI7DQoJbXNv
-LXN0eWxlLXByaW9yaXR5Ojk5Ow0KCW1zby1zdHlsZS1saW5rOiJIVE1MIFByZWZvcm1hdHRlZCI7
-DQoJZm9udC1mYW1pbHk6IkNvdXJpZXIgTmV3Ijt9DQouTXNvQ2hwRGVmYXVsdA0KCXttc28tc3R5
-bGUtdHlwZTpleHBvcnQtb25seTsNCglmb250LXNpemU6MTAuMHB0O30NCkBwYWdlIFdvcmRTZWN0
-aW9uMQ0KCXtzaXplOjguNWluIDExLjBpbjsNCgltYXJnaW46MS4waW4gMS4waW4gMS4waW4gMS4w
-aW47fQ0KZGl2LldvcmRTZWN0aW9uMQ0KCXtwYWdlOldvcmRTZWN0aW9uMTt9DQotLT48L3N0eWxl
-PjwhLS1baWYgZ3RlIG1zbyA5XT48eG1sPg0KPG86c2hhcGVkZWZhdWx0cyB2OmV4dD0iZWRpdCIg
-c3BpZG1heD0iMTAyNiIgLz4NCjwveG1sPjwhW2VuZGlmXS0tPjwhLS1baWYgZ3RlIG1zbyA5XT48
-eG1sPg0KPG86c2hhcGVsYXlvdXQgdjpleHQ9ImVkaXQiPg0KPG86aWRtYXAgdjpleHQ9ImVkaXQi
-IGRhdGE9IjEiIC8+DQo8L286c2hhcGVsYXlvdXQ+PC94bWw+PCFbZW5kaWZdLS0+DQo8L2hlYWQ+
-DQo8Ym9keSBsYW5nPSJFTi1VUyIgbGluaz0iYmx1ZSIgdmxpbms9InB1cnBsZSI+DQo8ZGl2IGNs
-YXNzPSJXb3JkU2VjdGlvbjEiPg0KPHByZT48c3BhbiBzdHlsZT0iZm9udC1zaXplOjExLjBwdDtm
-b250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVvdDs7Y29s
-b3I6IzFGNDk3RCI+TGludXggZG9jdW1lbnRhdGlvbiBpcyB2ZXJ5IGNsZWFyIG9uIGhvdyB0byBp
-bnRlcmFjdCB3aXRoIEdQSU8gZnJvbSB1c2VyIHNwYWNlIGFwcGxpY2F0aW9uIGFuZCBldmVuIHVz
-ZSB0aGVtIGFzIGludGVycnVwdHMuJm5ic3A7IFJlZmVyIHRvIERvY3VtZW50YXRpb24vZ3Bpby50
-eHQsIHNlY3Rpb24g4oCcU3lzZnMgSW50ZXJmYWNlIGZvciBVc2Vyc3BhY2UgKE9QVElPTkFMKeKA
-nSDigJMgYWxzbyBtYWtlIHN1cmUgeW91IGVuYWJsZSB0aGUgc3lzZnMgcG9ydGlvbiBvZiBncGlv
-bGliIGluIG1lbnVjb25maWcgKENPTkZJR19HUElPX1NZU0ZTKS48bzpwPjwvbzpwPjwvc3Bhbj48
-L3ByZT4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTEuMHB0
-O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7c2Fucy1zZXJpZiZxdW90Oztj
-b2xvcjojMUY0OTdEIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8ZGl2Pg0KPHAgY2xh
-c3M9Ik1zb05vcm1hbCI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTo4LjBwdDtmb250LWZhbWlseTom
-cXVvdDtDb3VyaWVyIE5ldyZxdW90Oztjb2xvcjojMUY0OTdEIj5DaHJpc3RvcGhlciBTLiBQb3c8
-bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0i
-Zm9udC1zaXplOjguMHB0O2ZvbnQtZmFtaWx5OiZxdW90O0NvdXJpZXIgTmV3JnF1b3Q7O2NvbG9y
-OiMxRjQ5N0QiPlNlbmlvciBFbmdpbmVlciwgU3lzdGVtczxvOnA+PC9vOnA+PC9zcGFuPjwvcD4N
-CjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6OC4wcHQ7Zm9udC1m
-YW1pbHk6JnF1b3Q7Q291cmllciBOZXcmcXVvdDs7Y29sb3I6IzFGNDk3RCI+SG9uZXl3ZWxsIFNX
-Q09FIC0gUlRPUzxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxz
-cGFuIHN0eWxlPSJmb250LXNpemU6OC4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q291cmllciBOZXcm
-cXVvdDs7Y29sb3I6IzFGNDk3RCI+bzo2MTItOTUxLTU4NTIgYzo2MTItOTEwLTEyNzE8bzpwPjwv
-bzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1z
-aXplOjguMHB0O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7c2Fucy1zZXJp
-ZiZxdW90Oztjb2xvcjojMUY0OTdEIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8cCBj
-bGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjguMHB0O2ZvbnQtZmFtaWx5
-OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7c2Fucy1zZXJpZiZxdW90Oztjb2xvcjojMUY0OTdE
-Ij4mcXVvdDtUaGUgbnVtYmVyIHlvdSBoYXZlIGRpYWxlZCBpcyBpbWFnaW5hcnkuJm5ic3A7IFBs
-ZWFzZSByb3RhdGUgeW91ciBwaG9uZSA5MCBkZWdyZWVzIGFuZCB0cnkgYWdhaW4uJnF1b3Q7PG86
-cD48L286cD48L3NwYW4+PC9wPg0KPC9kaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBz
-dHlsZT0iZm9udC1zaXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZx
-dW90O3NhbnMtc2VyaWYmcXVvdDs7Y29sb3I6IzFGNDk3RCI+PG86cD4mbmJzcDs8L286cD48L3Nw
-YW4+PC9wPg0KPGRpdj4NCjxkaXYgc3R5bGU9ImJvcmRlcjpub25lO2JvcmRlci10b3A6c29saWQg
-I0I1QzRERiAxLjBwdDtwYWRkaW5nOjMuMHB0IDBpbiAwaW4gMGluIj4NCjxwIGNsYXNzPSJNc29O
-b3JtYWwiPjxiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTAuMHB0O2ZvbnQtZmFtaWx5OiZxdW90
-O1RhaG9tYSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7Ij5Gcm9tOjwvc3Bhbj48L2I+PHNw
-YW4gc3R5bGU9ImZvbnQtc2l6ZToxMC4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7VGFob21hJnF1b3Q7
-LCZxdW90O3NhbnMtc2VyaWYmcXVvdDsiPiBtZXRhLXRpLWJvdW5jZXNAeW9jdG9wcm9qZWN0Lm9y
-ZyBbbWFpbHRvOm1ldGEtdGktYm91bmNlc0B5b2N0b3Byb2plY3Qub3JnXQ0KPGI+T24gQmVoYWxm
-IE9mIDwvYj5ibWVudGluazxicj4NCjxiPlNlbnQ6PC9iPiBGcmlkYXksIE9jdG9iZXIgMDQsIDIw
-MTMgMToyOCBQTTxicj4NCjxiPlRvOjwvYj4gbWV0YS10aUB5b2N0b3Byb2plY3Qub3JnPGJyPg0K
-PGI+U3ViamVjdDo8L2I+IFttZXRhLXRpXSBVc2VyIHNwYWNlIGRyaXZlcnM8bzpwPjwvbzpwPjwv
-c3Bhbj48L3A+DQo8L2Rpdj4NCjwvZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJz
-cDs8L286cD48L3A+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286
-cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj5IaSBhbGwsPG86cD48
-L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNw
-OzwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPkkgYW0gd2Fu
-dGluZyB0byBpbXBsZW1lbnQgYSB1c2VyIHNwYWNlIGRyaXZlciBjb21wbGV0ZSB3aXRoIGludGVy
-cnVwdCBpbiB5b2N0by48bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJN
-c29Ob3JtYWwiPkkgc2VlIHRoYXQgdGhlcmUgaXMgYSBzYW1wbGUgZ2VuZXJpYyBwbGF0Zm9ybSBk
-cml2ZXIgaW4gdGhlIGtlcm5lbCwgYnV0IG5vdCBzdXJlIGhvdyB0byB1c2UgaXQuPG86cD48L286
-cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNwOzwv
-bzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPlNheSBpIHdhbnQg
-dG8gdGFsayB0byBHUElPIElzIGl0IHNpbXBseSBhIG1hdHRlciBvZiBwb2ludGluZyB0aGUgLmR0
-cyBlbnRyeSBmb3IgdGhlIGRyaXZlciB0byB0aGUgdWlvIGRyaXZlcj88bzpwPjwvbzpwPjwvcD4N
-CjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9w
-Pg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+QW55IHBvaW50ZXJzIHdvdWxk
-IGJlIHZlcnkgaGVscGZ1bCAuLjxvOnA+PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xh
-c3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBj
-bGFzcz0iTXNvTm9ybWFsIj5DaGVlcnMsPG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8
-cCBjbGFzcz0iTXNvTm9ybWFsIj5CZXJuaWU8bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4N
-CjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2
-Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8L2Rpdj4NCjxk
-aXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjwvZGl2Pg0K
-PGRpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj5TZW50IGZyb20gU2Ftc3VuZyB0YWJs
-ZXQ8bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPC9kaXY+DQo8L2Rpdj4NCjwvYm9keT4NCjwvaHRt
-bD4NCg==
+-- 
+Denys
 
---_000_7B8A37CE7777314D9B931CDD3BA8C83B1BA4C507de08ex3002globa_--
+
+On Fri, Oct 04, 2013 at 06:42:22PM +0000, Pow, Christopher (SWCOE) wrote:
+> Linux documentation is very clear on how to interact with GPIO from user 
+> space application and even use them as interrupts.  Refer to 
+> Documentation/gpio.txt, section “Sysfs Interface for Userspace (OPTIONAL)” – 
+> also make sure you enable the sysfs portion of gpiolib in menuconfig 
+> (CONFIG_GPIO_SYSFS).
+> 
+> Hi all,
+> 
+> I am wanting to implement a user space driver complete with interrupt in 
+> yocto. I see that there is a sample generic platform driver in the kernel, 
+> but not sure how to use it.
+> 
+> Say i want to talk to GPIO Is it simply a matter of pointing the .dts entry 
+> for the driver to the uio driver?
+> 
+> Any pointers would be very helpful ..
+
