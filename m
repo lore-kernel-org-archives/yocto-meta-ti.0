@@ -1,15 +1,45 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03D06E0161F
-	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 12:15:14 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id A18F1529B0; Fri,  4 Oct 2013 19:15:13 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20131004191513.A18F1529B0@arago-project.org>
-Date: Fri,  4 Oct 2013 19:15:13 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : linux-ti-staging_git: Mimic patch "Correct post( inst|rm) package association"
+Return-Path: <rstreif@linuxfoundation.org>
+Received: from mail-ea0-f171.google.com (mail-ea0-f171.google.com
+	[209.85.215.171])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1E23EE0163D
+	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 14:00:46 -0700 (PDT)
+Received: by mail-ea0-f171.google.com with SMTP id n15so2059184ead.16
+	for <meta-ti@yoctoproject.org>; Fri, 04 Oct 2013 14:00:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=Zj2IlCypTuiaXo+IPIkHMR50KURanbNejmVXY1FXHio=;
+	b=AEQRme6PQZI0oEtoFWEkvAVjYxtHudmqphOuNM0mgeh3oNATplVMtszZWiUP8B4NMM
+	xjEhoMAJOsF/VqazPVl7QF9ZsEeLrCA2gGuEzw6T3bukiEfCfXDUcnxmpaIuo47lAj4X
+	CdN16cVZs7eqf/69Y9k95Qb79F/Gdwgg4opK4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=Zj2IlCypTuiaXo+IPIkHMR50KURanbNejmVXY1FXHio=;
+	b=fBgCTriy08b3JmPUoBdYauCy0x88rpVvQmgMtRr3h+8Z7kWYBkyiBSY/1ySTxzDfP3
+	OC/oxTIjS8yWvKi0cTLCuWT12o6xQRZh26fqCM+6Z25uNlQ7u4YytqUUCx+8CclyzDRg
+	6QcYCzBk1JylRB7acndDe1iKJLmg6EtDJTmf4lDutAc9eO+6BLxtCHgh1Aq6gpJXSfwT
+	O8V0eBeUA3RucMXHjjr/yjOpgBOjMOySdMufyA4L7+yWHf4Wr3u73fIaYRdmhO/HlYIc
+	Tb7rSfHN1fI/oBIE50VnATLfsY5G8Ym240El9lkYVKWaTbKp4w9KP4qJ8/1PGKARwy+O
+	yVQQ==
+X-Gm-Message-State: ALoCoQlz9/cHc/58tnAz/LEtxbBEMx0iG0uI6Gs00vs1iqo5Il8WuEq0o1GFsIDhCrqz203uOYfQ
+MIME-Version: 1.0
+X-Received: by 10.14.183.2 with SMTP id p2mr24788691eem.44.1380920444684; Fri,
+	04 Oct 2013 14:00:44 -0700 (PDT)
+Received: by 10.223.131.3 with HTTP; Fri, 4 Oct 2013 14:00:44 -0700 (PDT)
+In-Reply-To: <20131004182321.GA3672@edge>
+References: <CA+gsK-r2ve9es_X1OAOp5jd5w-zWzqWUBNxH0AhkvW55uGwM2A@mail.gmail.com>
+	<20131004053354.GB2673@edge>
+	<CA+gsK-o6a6SbQnq9T2derscYRJ+8gS=4COTkeeP+TRjbFDkT9g@mail.gmail.com>
+	<20131004182321.GA3672@edge>
+Date: Fri, 4 Oct 2013 14:00:44 -0700
+Message-ID: <CA+gsK-ofzwiKXqVCQ-=_kcvZJu+aaWqa07-DgVYTh91VB70OvQ@mail.gmail.com>
+From: Rudolf Streif <rstreif@linuxfoundation.org>
+To: Denys Dmytriyenko <denys@ti.com>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Buidling for am335x_evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,61 +52,108 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2013 19:15:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 04 Oct 2013 21:00:47 -0000
+Content-Type: multipart/alternative; boundary=047d7b343dc491c67504e7f09862
 
-Module: meta-ti
-Branch: dylan
-Commit: c9a63ed5f4d1857249115690d775bd9e4d43ce8e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c9a63ed5f4d1857249115690d775bd9e4d43ce8e
+--047d7b343dc491c67504e7f09862
+Content-Type: text/plain; charset=ISO-8859-1
 
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Wed Sep 25 18:00:26 2013 -0500
+Thanks, Denys. I appreciate your help.
 
-linux-ti-staging_git: Mimic patch "Correct post(inst|rm) package association"
-
-* Mimic the patch kernel.bbclass: Correct post(inst|rm) package association
-* This patch ensures that a proper symlink is created that satisfies U-boot's
-  requirement of having the kernel image in the rootfs.
-* This patch is already part of oe-core master and needs to be added to oe-core
-  dylan.
-* It can be reverted from meta-ti once it is pushed to oe-core/dylan
-
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-kernel/linux/linux-ti-staging_git.bb |   15 ++++++++++++++-
- 1 files changed, 14 insertions(+), 1 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index 80ebde8..34d4e82 100644
---- a/recipes-kernel/linux/linux-ti-staging_git.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-@@ -35,9 +35,22 @@ SRCREV = "e34b95baedccea12af9c0e81be77ed0a18ddae82"
- PV = "3.11+3.12-rc3"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
-           "
-+
-+# The below code mimics patch 
-+# "kernel.bbclass: Correct post(inst|rm) package association" which is included
-+# in oe-core master. Once the patch has been pushed into dylan the below code
-+# can be removed.
-+
-+pkg_postinst_kernel-image_append () {
-+	update-alternatives --install /${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} ${KERNEL_PRIORITY} || true
-+}
-+
-+pkg_postrm_kernel-image () {
-+	update-alternatives --remove ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} || true
-+}
+FAT boot partition is no longer preferred place for kernel images and DTB
+> files - U-boot now wants to see them in /boot directory of the rootfs.
+>
+> That is actually a good thing. But I assume one will still need the FAT
+partition for MLO and u-boot itself. Unfortunately, the do_rootfs task does
+not put dtb or kernel into /boot yet.
 
 
+> Ok, let's debug why you are not getting any DTB files produced. There
+> should
+> be at least 3 of them for the case of am335x-evm, as it covers EVM, EVM-SK
+> and
+> BeagleBone.
+>
+> They are not created. I changed the machine to beaglebone to test. No
+dtb's created although the build process finishes without errors.
+
+
+> Can you show me your bblayers.conf file, please?
+>
+
+Of course:
+
+# LAYER_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+LCONF_VERSION = "6"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+  /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/poky/meta \
+  /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/poky/meta-yocto \
+
+/run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/poky/meta-yocto-bsp
+\
+  /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/bsp/meta-ti \
+  "
+BBLAYERS_NON_REMOVABLE ?= " \
+  /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/poky/meta \
+  /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/poky/meta-yocto \
+  "
+
+
+Cheers,
+Rudi
+
+--047d7b343dc491c67504e7f09862
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Thanks, Denys. I appreciate your help.<div class=3D"gmail_=
+extra"><br><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" sty=
+le=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-color:rgb(=
+204,204,204);border-left-style:solid;padding-left:1ex">
+FAT boot partition is no longer preferred place for kernel images and DTB<b=
+r>
+files - U-boot now wants to see them in /boot directory of the rootfs.<br>
+<br></blockquote><div>That is actually a good thing. But I assume one will =
+still need the FAT partition for MLO and u-boot itself. Unfortunately, the =
+do_rootfs task does not put dtb or kernel into /boot yet.</div><div>=A0</di=
+v>
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
+adding-left:1ex">
+Ok, let&#39;s debug why you are not getting any DTB files produced. There s=
+hould<br>
+be at least 3 of them for the case of am335x-evm, as it covers EVM, EVM-SK =
+and<br>
+BeagleBone.<br>
+<br></blockquote><div>They are not created. I changed the machine to beagle=
+bone to test. No dtb&#39;s created although the build process finishes with=
+out errors.</div><div>=A0</div><blockquote class=3D"gmail_quote" style=3D"m=
+argin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-color:rgb(204,204=
+,204);border-left-style:solid;padding-left:1ex">
+
+Can you show me your bblayers.conf file, please?<br></blockquote><div><br><=
+/div><div>Of course:</div><div><br></div><div># LAYER_CONF_VERSION is incre=
+ased each time build/conf/bblayers.conf</div><div># changes incompatibly</d=
+iv>
+<div>LCONF_VERSION =3D &quot;6&quot;</div><div><br></div><div>BBPATH =3D &q=
+uot;${TOPDIR}&quot;</div><div>BBFILES ?=3D &quot;&quot;</div><div><br></div=
+><div>BBLAYERS ?=3D &quot; \</div><div>=A0 /run/media/rudi/WDPassport-1T/de=
+velop/yocto/yocto-dylan/poky/meta \</div>
+<div>=A0 /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/poky/meta-=
+yocto \</div><div>=A0 /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dyl=
+an/poky/meta-yocto-bsp \</div><div>=A0 /run/media/rudi/WDPassport-1T/develo=
+p/yocto/yocto-dylan/bsp/meta-ti \</div>
+<div>=A0 &quot;</div><div>BBLAYERS_NON_REMOVABLE ?=3D &quot; \</div><div>=
+=A0 /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/poky/meta \</di=
+v><div>=A0 /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/poky/met=
+a-yocto \</div>
+<div>=A0 &quot;</div><div>=A0</div><div><br></div><div>Cheers,</div><div>Ru=
+di=A0</div></div>
+</div></div>
+
+--047d7b343dc491c67504e7f09862--
