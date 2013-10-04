@@ -1,37 +1,18 @@
-Return-Path: <bmentink@gmail.com>
-Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
-	[209.85.220.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A053E016B7
-	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 11:33:06 -0700 (PDT)
-Received: by mail-pa0-f41.google.com with SMTP id bj1so4539499pad.14
-	for <meta-ti@yoctoproject.org>; Fri, 04 Oct 2013 11:33:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:subject:message-id:importance:from:to:reply-to:mime-version
-	:content-type; bh=6Q/eTqIs0STvehDA4kxbouzMF8jeEw8rwnuMJP0/Y64=;
-	b=xwmCquy5z5gl1q9hPYDEPs4ERUVnTkaIOF7C5uC+l5LN7lYQfXJFK00y6obfRPnOEO
-	ffqV68OgtAI7xGBJwu2rXj/sY4ncj2NnVThsjH7N8vAanMmEC2iZcJvD4su4rvavqPFO
-	z94p48eCRpxQ1XmvLI2/yZhQCJdzAnzxpa//gQTQ5aACbrOOSidsobhlTxbNxTEXGHNm
-	ex8vSxB9TgnkmplS1BalIpL71WIRbnd95eWcUp4/mhtfz3w6fD/x0+slt5ObDkc8xelj
-	JsGHoAhMDlD2MxUdzBid3ej1xDDDQqbXSnQqx5owwW4S7bC8kTDC50K6mFvd6YNjbK9I
-	J5oA==
-X-Received: by 10.66.179.143 with SMTP id dg15mr17284808pac.52.1380911586544; 
-	Fri, 04 Oct 2013 11:33:06 -0700 (PDT)
-Received: from [192.168.1.74] (182.249.69.111.dynamic.snap.net.nz.
-	[111.69.249.182]) by mx.google.com with ESMTPSA id
-	go4sm16240508pbb.15.1969.12.31.16.00.00
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 04 Oct 2013 11:33:05 -0700 (PDT)
-Date: Sat, 05 Oct 2013 07:27:54 +1300
-Message-ID: <tw8uf8cbqu0w8kxjs3nsu24x.1380911274107@email.android.com>
-Importance: normal
-From: bmentink <bmentink@gmail.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-MIME-Version: 1.0
-Subject: User space drivers
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 844EFE0161F
+	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 11:42:08 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 415B25296F; Fri,  4 Oct 2013 18:42:08 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20131004184208.415B25296F@arago-project.org>
+Date: Fri,  4 Oct 2013 18:42:08 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to the latest 2013.10-rc4, README changed slightly
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
-Reply-To: bmentink <bmentink@gmail.com>
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -41,38 +22,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2013 18:33:07 -0000
-Content-Type: multipart/alternative;
-	boundary="--_com.android.email_8601667852737280"
+X-List-Received-Date: Fri, 04 Oct 2013 18:42:09 -0000
+Content-Type: text/plain; charset=UTF-8
 
-----_com.android.email_8601667852737280
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
+Module: meta-ti
+Branch: dylan
+Commit: 6b9525bd0921d505c95e79cb15cb7c18534931cb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6b9525bd0921d505c95e79cb15cb7c18534931cb
 
-CkhpIGFsbCwKCkkgYW0gd2FudGluZyB0byBpbXBsZW1lbnQgYSB1c2VyIHNwYWNlIGRyaXZlciBj
-b21wbGV0ZSB3aXRoIGludGVycnVwdCBpbiB5b2N0by4KSSBzZWUgdGhhdCB0aGVyZSBpcyBhIHNh
-bXBsZSBnZW5lcmljIHBsYXRmb3JtIGRyaXZlciBpbiB0aGUga2VybmVsLCBidXQgbm90IHN1cmUg
-aG93IHRvIHVzZSBpdC4KClNheSBpIHdhbnQgdG8gdGFsayB0byBHUElPIElzIGl0IHNpbXBseSBh
-IG1hdHRlciBvZiBwb2ludGluZyB0aGUgLmR0cyBlbnRyeSBmb3IgdGhlIGRyaXZlciB0byB0aGUg
-dWlvIGRyaXZlcj8KCkFueSBwb2ludGVycyB3b3VsZCBiZSB2ZXJ5IGhlbHBmdWwgLi4KCkNoZWVy
-cywKQmVybmllCgoKClNlbnQgZnJvbSBTYW1zdW5nIHRhYmxldA==
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Oct  2 16:09:17 2013 -0400
 
-----_com.android.email_8601667852737280
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: base64
+u-boot-ti-staging: update to the latest 2013.10-rc4, README changed slightly
 
-PGh0bWw+PGhlYWQ+PG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1UeXBlIiBjb250ZW50PSJ0ZXh0
-L2h0bWw7IGNoYXJzZXQ9VVRGLTgiPjwvaGVhZD48Ym9keSA+PGRpdj48YnI+PC9kaXY+PGRpdj5I
-aSBhbGwsPC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5JIGFtIHdhbnRpbmcgdG8gaW1wbGVtZW50
-IGEgdXNlciBzcGFjZSBkcml2ZXIgY29tcGxldGUgd2l0aCBpbnRlcnJ1cHQgaW4geW9jdG8uPC9k
-aXY+PGRpdj5JIHNlZSB0aGF0IHRoZXJlIGlzIGEgc2FtcGxlIGdlbmVyaWMgcGxhdGZvcm0gZHJp
-dmVyIGluIHRoZSBrZXJuZWwsIGJ1dCBub3Qgc3VyZSBob3cgdG8gdXNlIGl0LjwvZGl2PjxkaXY+
-PGJyPjwvZGl2PjxkaXY+U2F5IGkgd2FudCB0byB0YWxrIHRvIEdQSU8gSXMgaXQgc2ltcGx5IGEg
-bWF0dGVyIG9mIHBvaW50aW5nIHRoZSAuZHRzIGVudHJ5IGZvciB0aGUgZHJpdmVyIHRvIHRoZSB1
-aW8gZHJpdmVyPzwvZGl2PjxkaXY+PGJyPjwvZGl2PjxkaXY+QW55IHBvaW50ZXJzIHdvdWxkIGJl
-IHZlcnkgaGVscGZ1bCAuLjwvZGl2PjxkaXY+PGJyPjwvZGl2PjxkaXY+Q2hlZXJzLDwvZGl2Pjxk
-aXY+QmVybmllPC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj48YnI+PC9k
-aXY+PGRpdj48ZGl2IHN0eWxlPSJmb250LXNpemU6MTAwJSI+U2VudCBmcm9tIFNhbXN1bmcgdGFi
-bGV0PC9kaXY+PC9kaXY+IDwvYm9keT48L2h0bWw+
+* Bump the SRCREV for 2013.10-rc4 pre-release
+* The Licenses/README file has been changed with new licenses added, but the
+  general license hasn't changed from GPLv2, so re-hash the file
 
-----_com.android.email_8601667852737280--
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Cc: Tom Rini <trini@ti.com>
+
+---
+
+ recipes-bsp/u-boot/u-boot-ti-staging_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
+index 8c005b4..a5882b0 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
+@@ -2,16 +2,16 @@ require u-boot-ti.inc
+ 
+ DESCRIPTION = "u-boot bootloader for TI devices"
+ 
+-LIC_FILES_CHKSUM = "file://Licenses/README;md5=6bc50ecab884fce80cd3ef3da8852b08"
++LIC_FILES_CHKSUM = "file://Licenses/README;md5=bc069111b5e5b1ed8bed98ae73b596ec"
+ 
+-PV = "2013.07+2013.10-rc2"
++PV = "2013.07+2013.10-rc4"
+ PR = "r0+gitr${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "master"
+ 
+-SRCREV = "fb18fa95a14ae875ef0a5421cd9fecc00c7c3a4c"
++SRCREV = "0c5274e6f3231a3a28dafc1204b3f71a3534c520"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
+
+
