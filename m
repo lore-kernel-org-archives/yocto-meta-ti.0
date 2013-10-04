@@ -1,30 +1,15 @@
-Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6499E0163D
-	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 11:46:49 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r94Ikl2s030710;
-	Fri, 4 Oct 2013 13:46:47 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r94IklMD012461;
-	Fri, 4 Oct 2013 13:46:47 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Fri, 4 Oct 2013 13:46:47 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r94Ikkuj016892;
-	Fri, 4 Oct 2013 13:46:47 -0500
-Date: Fri, 4 Oct 2013 14:46:45 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Pow, Christopher (SWCOE)" <Christopher.Pow@honeywell.com>
-Message-ID: <20131004184645.GB3672@edge>
-References: <tw8uf8cbqu0w8kxjs3nsu24x.1380911274107@email.android.com>
-	<7B8A37CE7777314D9B931CDD3BA8C83B1BA4C507@de08ex3002.global.ds.honeywell.com>
-MIME-Version: 1.0
-In-Reply-To: <7B8A37CE7777314D9B931CDD3BA8C83B1BA4C507@de08ex3002.global.ds.honeywell.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: User space drivers
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03D06E0161F
+	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 12:15:14 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id A18F1529B0; Fri,  4 Oct 2013 19:15:13 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20131004191513.A18F1529B0@arago-project.org>
+Date: Fri,  4 Oct 2013 19:15:13 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Franklin S. Cooper Jr : linux-ti-staging_git: Mimic patch "Correct post( inst|rm) package association"
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,34 +22,61 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2013 18:46:51 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 04 Oct 2013 19:15:15 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Also, you may find this project interesting:
+Module: meta-ti
+Branch: dylan
+Commit: c9a63ed5f4d1857249115690d775bd9e4d43ce8e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c9a63ed5f4d1857249115690d775bd9e4d43ce8e
 
-https://github.com/jackmitch/libsoc
+Author: Franklin S. Cooper Jr <fcooper@ti.com>
+Date:   Wed Sep 25 18:00:26 2013 -0500
 
--- 
-Denys
+linux-ti-staging_git: Mimic patch "Correct post(inst|rm) package association"
 
+* Mimic the patch kernel.bbclass: Correct post(inst|rm) package association
+* This patch ensures that a proper symlink is created that satisfies U-boot's
+  requirement of having the kernel image in the rootfs.
+* This patch is already part of oe-core master and needs to be added to oe-core
+  dylan.
+* It can be reverted from meta-ti once it is pushed to oe-core/dylan
 
-On Fri, Oct 04, 2013 at 06:42:22PM +0000, Pow, Christopher (SWCOE) wrote:
-> Linux documentation is very clear on how to interact with GPIO from user 
-> space application and even use them as interrupts.  Refer to 
-> Documentation/gpio.txt, section “Sysfs Interface for Userspace (OPTIONAL)” – 
-> also make sure you enable the sysfs portion of gpiolib in menuconfig 
-> (CONFIG_GPIO_SYSFS).
-> 
-> Hi all,
-> 
-> I am wanting to implement a user space driver complete with interrupt in 
-> yocto. I see that there is a sample generic platform driver in the kernel, 
-> but not sure how to use it.
-> 
-> Say i want to talk to GPIO Is it simply a matter of pointing the .dts entry 
-> for the driver to the uio driver?
-> 
-> Any pointers would be very helpful ..
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-kernel/linux/linux-ti-staging_git.bb |   15 ++++++++++++++-
+ 1 files changed, 14 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index 80ebde8..34d4e82 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -35,9 +35,22 @@ SRCREV = "e34b95baedccea12af9c0e81be77ed0a18ddae82"
+ PV = "3.11+3.12-rc3"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+           "
++
++# The below code mimics patch 
++# "kernel.bbclass: Correct post(inst|rm) package association" which is included
++# in oe-core master. Once the patch has been pushed into dylan the below code
++# can be removed.
++
++pkg_postinst_kernel-image_append () {
++	update-alternatives --install /${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} ${KERNEL_PRIORITY} || true
++}
++
++pkg_postrm_kernel-image () {
++	update-alternatives --remove ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} || true
++}
+
 
