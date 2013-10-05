@@ -1,47 +1,28 @@
-Return-Path: <rstreif@linuxfoundation.org>
-Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
-	[209.85.215.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B1A9E01642
-	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 17:32:17 -0700 (PDT)
-Received: by mail-ea0-f181.google.com with SMTP id d10so2075974eaj.26
-	for <meta-ti@yoctoproject.org>; Fri, 04 Oct 2013 17:32:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linuxfoundation.org; s=google;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=fW0fYhWxEwBSadBXJj7TuVZvQAVT5b6bLOxd/CPNLng=;
-	b=QTA0ExpMlr8ultkdgxYJEJFimOKBVgKRoEdw0ujj4R/0p9lxsHcgvDnx5bophiH3Gs
-	9bV+mPn5WzZhiZYjXzYdXX5ZAojvF5ih+JhejWo3xQyT+Ok2kgO/9EIWtbB613ni62kV
-	UAr50yiQ7gbl9Fur3SfQja8BsAl7oEgvHInAA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=fW0fYhWxEwBSadBXJj7TuVZvQAVT5b6bLOxd/CPNLng=;
-	b=Myfbo59RrCLN/PcvNkUD+1G+3oAz7USiRRchDsJG69IQ0tudlRPe/hYWj0EZIzK92b
-	FOOAHE0HgIJf/S7uaI+8Po21Q28jVX2h1acppftAEX/O1MDoFWQJEkLAluo2PaSRKKOv
-	DzdzVPJEzVx0C7FSPlD+OUUJgKLwLfeJt5bhfbQdO1n0BQIIH3ytnCE4lvm5qkAxYZvC
-	kH/eT8DAdPgbeGquiZCkC3UXbG0OD4mZDiR346yg3+BhI+LrtkSO62L0GyizgBX9AfOb
-	CfyumdeC//bB0Ssy0Gyam8qCaeBUO40OCg7PMziguut3L27by1g1mrdS2fa9ROma4RFv
-	X+MA==
-X-Gm-Message-State: ALoCoQnoAAJJoCiMHXbgfUxm0aXMjfYIRhH2sUOfmWflDePaNd53aUdwqZOPaeZ/FcuY8bqUg7M4
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB037E01661
+	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 19:53:04 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r952r4gj019662
+	for <meta-ti@yoctoproject.org>; Fri, 4 Oct 2013 21:53:04 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r952r4UC025496
+	for <meta-ti@yoctoproject.org>; Fri, 4 Oct 2013 21:53:04 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Fri, 4 Oct 2013 21:53:03 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	r952r2Cl000370	for <meta-ti@yoctoproject.org>;
+	Fri, 4 Oct 2013 21:53:03 -0500
+Date: Fri, 4 Oct 2013 22:43:09 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1122087678.765.1380940989783.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-X-Received: by 10.14.214.136 with SMTP id c8mr25695395eep.6.1380933136238;
-	Fri, 04 Oct 2013 17:32:16 -0700 (PDT)
-Received: by 10.223.131.3 with HTTP; Fri, 4 Oct 2013 17:32:16 -0700 (PDT)
-In-Reply-To: <20131004215047.GD3672@edge>
-References: <CA+gsK-r2ve9es_X1OAOp5jd5w-zWzqWUBNxH0AhkvW55uGwM2A@mail.gmail.com>
-	<20131004053354.GB2673@edge>
-	<CA+gsK-o6a6SbQnq9T2derscYRJ+8gS=4COTkeeP+TRjbFDkT9g@mail.gmail.com>
-	<20131004182321.GA3672@edge>
-	<CA+gsK-ofzwiKXqVCQ-=_kcvZJu+aaWqa07-DgVYTh91VB70OvQ@mail.gmail.com>
-	<20131004215047.GD3672@edge>
-Date: Fri, 4 Oct 2013 17:32:16 -0700
-Message-ID: <CA+gsK-rqwXrV1WjWx0pttqpxMkkM29cBwYMHvEaXdDDVcuW0tw@mail.gmail.com>
-From: Rudolf Streif <rstreif@linuxfoundation.org>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Buidling for am335x_evm
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-10-04_21-01-46
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -54,20 +35,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Oct 2013 00:32:18 -0000
-Content-Type: multipart/alternative; boundary=047d7b6243200b6b7a04e7f38d85
+X-List-Received-Date: Sat, 05 Oct 2013 02:53:06 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_764_1513667720.1380940989727"
 
---047d7b6243200b6b7a04e7f38d85
-Content-Type: text/plain; charset=ISO-8859-1
+------=_Part_764_1513667720.1380940989727
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Thanks, Denys. That did the trick.
+<html>
+<head>
+<title>
+Status for 10/04/13
+</title>
+</head>
+<body>
 
-Rudi
+<h2>Status for 10/04/13</h2>
 
---047d7b6243200b6b7a04e7f38d85
-Content-Type: text/html; charset=ISO-8859-1
+<h2>BUILD_ID: build-2013-10-04_21-04-18</h2>
 
-<div dir="ltr">Thanks, Denys. That did the trick.<div><br></div><div>Rudi</div><div class="gmail_extra"><br><br>
-</div></div>
+<h2>Clean Build: false</h2>
 
---047d7b6243200b6b7a04e7f38d85--
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td bgcolor=lime>PASSED</td>
+        <td bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.10"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_764_1513667720.1380940989727--
