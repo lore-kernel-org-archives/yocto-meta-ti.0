@@ -1,28 +1,47 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB037E01661
-	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 19:53:04 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r952r4gj019662
-	for <meta-ti@yoctoproject.org>; Fri, 4 Oct 2013 21:53:04 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r952r4UC025496
-	for <meta-ti@yoctoproject.org>; Fri, 4 Oct 2013 21:53:04 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Fri, 4 Oct 2013 21:53:03 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	r952r2Cl000370	for <meta-ti@yoctoproject.org>;
-	Fri, 4 Oct 2013 21:53:03 -0500
-Date: Fri, 4 Oct 2013 22:43:09 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1122087678.765.1380940989783.JavaMail.jenkins@puget>
+Return-Path: <rstreif@linuxfoundation.org>
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85C27E0059A
+	for <meta-ti@yoctoproject.org>; Sat,  5 Oct 2013 09:46:31 -0700 (PDT)
+Received: by mail-ee0-f46.google.com with SMTP id c13so2370961eek.19
+	for <meta-ti@yoctoproject.org>; Sat, 05 Oct 2013 09:46:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=XuhGBAWILAOnaRqAoX7ZECi0FH3wbnoHfh1plP6F/cs=;
+	b=WbCuDQhcwLFvkYkFEQnl8FN3rGR9DIl7JTzQvjDsJsbjHltN+7alX9BBtz6ralokN1
+	4GDbBZJky0Lim1wZ4TKWIpGNuARkpWXUONfIdLVJAZGLSCFwV8ILkY+7BtFC/wMysUFp
+	HDR1SKWpqe2hssg03u6UkK6u1AKIIkQ+3Jt8s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=XuhGBAWILAOnaRqAoX7ZECi0FH3wbnoHfh1plP6F/cs=;
+	b=BC+4lHHkv6MQN0PkLHe0lsNj/TjsJODTpPCLe7Fv+r04RnCqrMsZbdg578m7iY4kTi
+	mOAi2rDZhoruEMOBgXJ9i0sg1/rCmj8nkN6BZ8or+Ot/gcZRQ7F0guLZXUCSnz9fus52
+	YSZr5P5jwqJOuLOWgJocsNh713C2XlLVAC6e9TUa1Tv3kwOGHM4hkx4Trm0uVmDdIsbZ
+	SiWEQzSooWM3iy/Q7t2yN43rXCaJw/pMszJn+DJbXqO4DvtEDfQpns6B+x4TiqoQVFyV
+	xPZu4mG+AthBIQAqwGHtnZVcvL7y7m0HbLFqt6ggxVlIZ52K/hXY5pTAaEDPdBEZE9ws
+	MKbg==
+X-Gm-Message-State: ALoCoQl9z0Txjf9Q1ef/7ig46KCHthaDpX228vE3a9TDYc5nVPdOaS6DZJHvfNqEwOjyeiFEEpyD
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-10-04_21-01-46
+X-Received: by 10.15.98.9 with SMTP id bi9mr182348eeb.67.1380991589612; Sat,
+	05 Oct 2013 09:46:29 -0700 (PDT)
+Received: by 10.223.131.3 with HTTP; Sat, 5 Oct 2013 09:46:29 -0700 (PDT)
+In-Reply-To: <CA+gsK-rqwXrV1WjWx0pttqpxMkkM29cBwYMHvEaXdDDVcuW0tw@mail.gmail.com>
+References: <CA+gsK-r2ve9es_X1OAOp5jd5w-zWzqWUBNxH0AhkvW55uGwM2A@mail.gmail.com>
+	<20131004053354.GB2673@edge>
+	<CA+gsK-o6a6SbQnq9T2derscYRJ+8gS=4COTkeeP+TRjbFDkT9g@mail.gmail.com>
+	<20131004182321.GA3672@edge>
+	<CA+gsK-ofzwiKXqVCQ-=_kcvZJu+aaWqa07-DgVYTh91VB70OvQ@mail.gmail.com>
+	<20131004215047.GD3672@edge>
+	<CA+gsK-rqwXrV1WjWx0pttqpxMkkM29cBwYMHvEaXdDDVcuW0tw@mail.gmail.com>
+Date: Sat, 5 Oct 2013 09:46:29 -0700
+Message-ID: <CA+gsK-o7xrHme-VAZvXooFEBid=hcc25dmwhc+2GcreJ0D=xVg@mail.gmail.com>
+From: Rudolf Streif <rstreif@linuxfoundation.org>
+To: Denys Dmytriyenko <denys@ti.com>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Buidling for am335x_evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +54,114 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Oct 2013 02:53:06 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_764_1513667720.1380940989727"
+X-List-Received-Date: Sat, 05 Oct 2013 16:46:34 -0000
+Content-Type: multipart/alternative; boundary=089e01681470233bee04e80129eb
 
-------=_Part_764_1513667720.1380940989727
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--089e01681470233bee04e80129eb
+Content-Type: text/plain; charset=ISO-8859-1
 
-<html>
-<head>
-<title>
-Status for 10/04/13
-</title>
-</head>
-<body>
+Hi Denys,
 
-<h2>Status for 10/04/13</h2>
+I guess I have to follow up on this. Everything builds now and with
+core-image-base the kernel image is installed into /boot. The fdt is not
+however. I used the Beaglebone in this case because it's a known board to
+me and I have been able to boot it successfully with my own Beaglebone BSP
+many time.
 
-<h2>BUILD_ID: build-2013-10-04_21-04-18</h2>
+This is what I did on a preformatted SD card with partition 0 with FAT and
+partition 1 with ext4 with the images built using the meta-ti layer:
 
-<h2>Clean Build: false</h2>
+   1. sudo cp MLO-beaglebone /run/media/rudi/BEAGBOOT/MLO
+   2. sudo cp u-boot-beaglebone.img /run/media/rudi/BEAGBOOT/u-boot.img
+   3. sudo tar x -C /run/media/rudi/beagroot1/ -f
+   core-image-base-beaglebone.tar.gz
+   4. sudo tar x -C /run/media/rudi/beagroot1/ -f
+   modules--3.11+3.12-rc3-r19a+gitrAUTOINC+f7579525de9f1d6086c407a6980f4f1c1c574256-beaglebone-20131005020051.tgz
+   5. cp uImage-am335x-bone.dtb
+   /run/media/rudi/beagroot1/boot/am335x-bone.dtb
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+For step 5 one of course has to know that the u-boot environment expects an
+fdt with the name am335x-bone.dtb in /boot.
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
+The u-boot bootcmd is set to
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+bootcmd=run findfdt; run mmcboot;setenv mmcdev 1; setenv bootpart 1:2; run
+mmcboot;run nandboot;
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.10"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+findfdt finds and sets the fdtfile variable correctly to am335x-bone.dtb.
 
-</body>
-</html>
+mmcboot eventually runs mmcloados which is set to:
+
+mmcloados=run mmcargs; if test ${boot_fdt} = yes || test ${boot_fdt} = try;
+then if run loadfdt; then bootm ${loadaddr} - ${fdtaddr}; else if test
+${boot_fdt} = try; then bootm; else echo WARN: Cannot load the DT; fi; fi;
+else bootm; fi;
+
+That's the default. It loads the fdt correctly but it never loads the
+kernel image. There is no command that executes loaduimage which is set to:
+
+loaduimage=load mmc ${bootpart} ${loadaddr} ${bootdir}/${bootfile}
 
 
-------=_Part_764_1513667720.1380940989727--
+Now, I executed all these steps manually and loaded the fdt and the kernel
+image, etc and eventually ran bootm. u-boots loads and decompresses the
+kernel and then it stops at "Starting kernel..." Probably a device tree
+issue.
+
+
+There are two issues:
+
+   1. u-boot environment does not load the kernel image. I can get around
+   that.
+   2. Device tree does not seem to match the kernel image but that's only a
+   guess at this point.
+
+Thanks,
+Rudi
+
+--089e01681470233bee04e80129eb
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi Denys,</div><div><br></div>I guess I have to follo=
+w up on this. Everything builds now and with core-image-base the kernel ima=
+ge is installed into /boot. The fdt is not however. I used the Beaglebone i=
+n this case because it&#39;s a known board to me and I have been able to bo=
+ot it successfully with my own Beaglebone BSP many time.<div>
+<br></div><div>This is what I did on a preformatted SD card with partition =
+0 with FAT and partition 1 with ext4 with the images built using the meta-t=
+i layer:<div><ol><li>sudo cp MLO-beaglebone /run/media/rudi/BEAGBOOT/MLO<br=
+>
+</li><li>sudo cp u-boot-beaglebone.img /run/media/rudi/BEAGBOOT/u-boot.img<=
+br></li><li>sudo tar x -C /run/media/rudi/beagroot1/ -f core-image-base-bea=
+glebone.tar.gz<br></li><li>sudo tar x -C /run/media/rudi/beagroot1/ -f modu=
+les--3.11+3.12-rc3-r19a+gitrAUTOINC+f7579525de9f1d6086c407a6980f4f1c1c57425=
+6-beaglebone-20131005020051.tgz<br>
+</li><li>cp uImage-am335x-bone.dtb /run/media/rudi/beagroot1/boot/am335x-bo=
+ne.dtb<br></li></ol><div>For step 5 one of course has to know that the u-bo=
+ot environment expects an fdt with the name am335x-bone.dtb in /boot.</div>
+</div></div><div><br></div><div>The u-boot bootcmd is set to</div><div><br>=
+</div><div>bootcmd=3Drun findfdt; run mmcboot;setenv mmcdev 1; setenv bootp=
+art 1:2; run mmcboot;run nandboot;</div><div><br></div><div>findfdt finds a=
+nd sets the fdtfile variable correctly to am335x-bone.dtb.</div>
+<div><br></div><div>mmcboot eventually runs mmcloados which is set to:</div=
+><div><br></div><div><div>mmcloados=3Drun mmcargs; if test ${boot_fdt} =3D =
+yes || test ${boot_fdt} =3D try; then if run loadfdt; then bootm ${loadaddr=
+} - ${fdtaddr}; else if test ${boot_fdt} =3D try; then bootm; else echo WAR=
+N: Cannot load the DT; fi; fi; else bootm; fi;</div>
+</div><div><br></div><div>That&#39;s the default. It loads the fdt correctl=
+y but it never loads the kernel image. There is no command that executes lo=
+aduimage which is set to:</div><div><br></div><div>loaduimage=3Dload mmc ${=
+bootpart} ${loadaddr} ${bootdir}/${bootfile}<br>
+</div><div><br></div><div><br></div><div>Now, I executed all these steps ma=
+nually and loaded the fdt and the kernel image, etc and eventually ran boot=
+m. u-boots loads and decompresses the kernel and then it stops at &quot;Sta=
+rting kernel...&quot; Probably a device tree issue.</div>
+<div><br></div><div><br></div><div>There are two issues:</div><div><ol><li>=
+u-boot environment does not load the kernel image. I can get around that.</=
+li><li>Device tree does not seem to match the kernel image but that&#39;s o=
+nly a guess at this point.</li>
+</ol><div>Thanks,</div></div><div>Rudi</div><div><br></div><div><br></div><=
+/div>
+
+--089e01681470233bee04e80129eb--
