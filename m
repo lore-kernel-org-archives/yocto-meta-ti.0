@@ -1,31 +1,45 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4B469E0044C
-	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 14:50:49 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r94LomW1007831;
-	Fri, 4 Oct 2013 16:50:48 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r94LomrH006225;
-	Fri, 4 Oct 2013 16:50:48 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Fri, 4 Oct 2013 16:50:47 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r94Lol7t013798;
-	Fri, 4 Oct 2013 16:50:47 -0500
-Date: Fri, 4 Oct 2013 17:50:47 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Rudolf Streif <rstreif@linuxfoundation.org>
-Message-ID: <20131004215047.GD3672@edge>
+Return-Path: <rstreif@linuxfoundation.org>
+Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
+	[209.85.215.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B1A9E01642
+	for <meta-ti@yoctoproject.org>; Fri,  4 Oct 2013 17:32:17 -0700 (PDT)
+Received: by mail-ea0-f181.google.com with SMTP id d10so2075974eaj.26
+	for <meta-ti@yoctoproject.org>; Fri, 04 Oct 2013 17:32:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=fW0fYhWxEwBSadBXJj7TuVZvQAVT5b6bLOxd/CPNLng=;
+	b=QTA0ExpMlr8ultkdgxYJEJFimOKBVgKRoEdw0ujj4R/0p9lxsHcgvDnx5bophiH3Gs
+	9bV+mPn5WzZhiZYjXzYdXX5ZAojvF5ih+JhejWo3xQyT+Ok2kgO/9EIWtbB613ni62kV
+	UAr50yiQ7gbl9Fur3SfQja8BsAl7oEgvHInAA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=fW0fYhWxEwBSadBXJj7TuVZvQAVT5b6bLOxd/CPNLng=;
+	b=Myfbo59RrCLN/PcvNkUD+1G+3oAz7USiRRchDsJG69IQ0tudlRPe/hYWj0EZIzK92b
+	FOOAHE0HgIJf/S7uaI+8Po21Q28jVX2h1acppftAEX/O1MDoFWQJEkLAluo2PaSRKKOv
+	DzdzVPJEzVx0C7FSPlD+OUUJgKLwLfeJt5bhfbQdO1n0BQIIH3ytnCE4lvm5qkAxYZvC
+	kH/eT8DAdPgbeGquiZCkC3UXbG0OD4mZDiR346yg3+BhI+LrtkSO62L0GyizgBX9AfOb
+	CfyumdeC//bB0Ssy0Gyam8qCaeBUO40OCg7PMziguut3L27by1g1mrdS2fa9ROma4RFv
+	X+MA==
+X-Gm-Message-State: ALoCoQnoAAJJoCiMHXbgfUxm0aXMjfYIRhH2sUOfmWflDePaNd53aUdwqZOPaeZ/FcuY8bqUg7M4
+MIME-Version: 1.0
+X-Received: by 10.14.214.136 with SMTP id c8mr25695395eep.6.1380933136238;
+	Fri, 04 Oct 2013 17:32:16 -0700 (PDT)
+Received: by 10.223.131.3 with HTTP; Fri, 4 Oct 2013 17:32:16 -0700 (PDT)
+In-Reply-To: <20131004215047.GD3672@edge>
 References: <CA+gsK-r2ve9es_X1OAOp5jd5w-zWzqWUBNxH0AhkvW55uGwM2A@mail.gmail.com>
 	<20131004053354.GB2673@edge>
 	<CA+gsK-o6a6SbQnq9T2derscYRJ+8gS=4COTkeeP+TRjbFDkT9g@mail.gmail.com>
 	<20131004182321.GA3672@edge>
 	<CA+gsK-ofzwiKXqVCQ-=_kcvZJu+aaWqa07-DgVYTh91VB70OvQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CA+gsK-ofzwiKXqVCQ-=_kcvZJu+aaWqa07-DgVYTh91VB70OvQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20131004215047.GD3672@edge>
+Date: Fri, 4 Oct 2013 17:32:16 -0700
+Message-ID: <CA+gsK-rqwXrV1WjWx0pttqpxMkkM29cBwYMHvEaXdDDVcuW0tw@mail.gmail.com>
+From: Rudolf Streif <rstreif@linuxfoundation.org>
+To: Denys Dmytriyenko <denys@ti.com>
 Cc: meta-ti@yoctoproject.org
 Subject: Re: Buidling for am335x_evm
 X-BeenThere: meta-ti@yoctoproject.org
@@ -40,103 +54,20 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2013 21:50:50 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 05 Oct 2013 00:32:18 -0000
+Content-Type: multipart/alternative; boundary=047d7b6243200b6b7a04e7f38d85
 
-On Fri, Oct 04, 2013 at 02:00:44PM -0700, Rudolf Streif wrote:
-> Thanks, Denys. I appreciate your help.
+--047d7b6243200b6b7a04e7f38d85
+Content-Type: text/plain; charset=ISO-8859-1
 
-You are very welcome.
+Thanks, Denys. That did the trick.
 
+Rudi
 
-> > FAT boot partition is no longer preferred place for kernel images and DTB
-> > files - U-boot now wants to see them in /boot directory of the rootfs.
-> >
-> That is actually a good thing. But I assume one will still need the FAT
-> partition for MLO and u-boot itself.
+--047d7b6243200b6b7a04e7f38d85
+Content-Type: text/html; charset=ISO-8859-1
 
-Correct, you still need FAT boot partition for MLO and u-boot.
+<div dir="ltr">Thanks, Denys. That did the trick.<div><br></div><div>Rudi</div><div class="gmail_extra"><br><br>
+</div></div>
 
-
-> Unfortunately, the do_rootfs task does not put dtb or kernel into /boot yet.
-
-You are just using the wrong image :)
-core-image-minimal is not installing any kernel modules, hence no kernel 
-image and no kernel device trees.
-Kernel image being pulled by default into /boot was there for long time. And I 
-pushed the patch earlier today for pulling device trees into /boot. But that 
-only happens when your image installs anything from the kernel, which 
-core-image-minimal doesn't do. Try core-image-base instead.
-
-
-> > Ok, let's debug why you are not getting any DTB files produced. There
-> > should
-> > be at least 3 of them for the case of am335x-evm, as it covers EVM, EVM-SK
-> > and
-> > BeagleBone.
-> >
-> They are not created. I changed the machine to beaglebone to test. No
-> dtb's created although the build process finishes without errors.
-
-The machine is not the problem - the problem is the layer setup, as I 
-suspected... See below.
-If you build for beaglebone, you'll only get DTB for beaglebone. If you build 
-for am335x-evm, you'll get 3 DTBs for EVM, EVM-SK and beaglebone, as I 
-mentioned before.
-
-
-> > Can you show me your bblayers.conf file, please?
-> >
-> 
-> Of course:
-> 
-> # LAYER_CONF_VERSION is increased each time build/conf/bblayers.conf
-> # changes incompatibly
-> LCONF_VERSION = "6"
-> 
-> BBPATH = "${TOPDIR}"
-> BBFILES ?= ""
-> 
-> BBLAYERS ?= " \
->   /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/poky/meta \
->   /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/poky/meta-yocto \
-> 
-> /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/poky/meta-yocto-bsp \
->   /run/media/rudi/WDPassport-1T/develop/yocto/yocto-dylan/bsp/meta-ti \
->   "
-
-So, I see the problem here - you placed meta-ti layer at the very bottom, 
-which prevents it from overriding any files in other layers. Specifically, 
-meta-ti has a newer linux-dtb.inc to handle in-tree compilation of DTBs and 
-the new syntax, which happened recently around 3.10-3.12 timeframe...
-
-The way you set it up, you are not using linux-dtb.inc from meta-ti, but 
-instead using an old one from oe-core (poky/meta in your case). This 
-particular file has been updated in the master branch of OE-Core and Poky, but 
-not in Dylan, because Poky/Dylan was frozen on 3.8, like you said before.
-We needed the newer one in Dylan, because we have 3.12 in there as well as in 
-the master.
-
-So, the solution is to have meta-ti before meta. I'm also wondering why you 
-have meta-yocto and meta-yocto-bsp after meta, but I will leave that to Poky 
-maintainers... Also, if you have meta-yocto-bsp before meta-ti, you will have 
-issues with beagleboard machine and recipes in meta-ti, as both those BSP 
-layers define beagleboard machine. But you don't seem to use beagleboard now. 
-BTW, meta-yocto-bsp is a reference BSP, you don't need it if you have real BSP
-
-So, I usually compose layer stack as follows:
-* Distro
-* Apps
-* BSP
-* Core
-
-This way you have the most flexibility overriding different things in higher 
-layers from their originals in lower core layers.
-
-In your case, Distro = meta-yocto, Apps is empty, BSP is meta-ti _and_ 
-meta-yocto-bsp, and Core is meta. Try switching them around.
-
--- 
-Denys
-
+--047d7b6243200b6b7a04e7f38d85--
