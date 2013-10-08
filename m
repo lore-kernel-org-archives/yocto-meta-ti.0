@@ -1,20 +1,28 @@
-Return-Path: <Valentin.Cobelea@enea.com>
-Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by yocto-www.yoctoproject.org (Postfix) with SMTP id 3DFC4E0168B
-	for <meta-ti@yoctoproject.org>; Tue,  8 Oct 2013 02:16:14 -0700 (PDT)
-Received: from localhost.enea.se (192.168.14.198) by smtp.enea.com
-	(172.21.1.209) with Microsoft SMTP Server id 14.2.318.1; Tue, 8 Oct 2013
-	11:16:09 +0200
-Message-ID: <5253CD58.4060300@enea.com>
-Date: Tue, 8 Oct 2013 12:16:08 +0300
-From: Vali Cobelea <valentin.cobelea@enea.com>
-Organization: ENEA
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130923 Thunderbird/17.0.9
+Return-Path: <joaohf@gmail.com>
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 268C0E01664
+	for <meta-ti@yoctoproject.org>; Tue,  8 Oct 2013 07:19:35 -0700 (PDT)
+Received: by mail-wi0-f182.google.com with SMTP id ez12so6696042wid.9
+	for <meta-ti@yoctoproject.org>; Tue, 08 Oct 2013 07:19:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=PlXQMfhgh4q6YraAJMOnEcGyXL3mufIDq5ClMl560lc=;
+	b=wFfFROXpXL5C7pznQrMcEtqR0St0mnTR+ZMxLYoxuybzJjR+PVN/ceQuDEXwcTjZJd
+	pQprf43DTpgkCkdRYYRsAXCoWKrjw3IqRqLmL0cedDXRWLTkdUIkxJzaJ2tfAvOZQ41d
+	7BPx7zXHiyqMXZDNYgyrn09U9shShpEydNk8XBr42254bx+77xhtkBS6ZMSpYHBGBTaH
+	rFj6vpzpEM88NE2KIhf4RgEE+LNMEDzWVC3KMDJ2ROPmxKIqI+rdQwpwCypZMUhVQLpB
+	Nm2IHw05az9+M0KNUSEInrBN/Jj1xoMdppsrHGnKv7DSMztesp7vNmcmkwtDLNo68RI3
+	773w==
 MIME-Version: 1.0
-To: <meta-ti@yoctoproject.org>
-X-Originating-IP: [192.168.14.198]
-Subject: Real-time / hardware clock issues
+X-Received: by 10.180.86.230 with SMTP id s6mr1871159wiz.64.1381241973863;
+	Tue, 08 Oct 2013 07:19:33 -0700 (PDT)
+Received: by 10.216.90.132 with HTTP; Tue, 8 Oct 2013 07:19:33 -0700 (PDT)
+Date: Tue, 8 Oct 2013 11:19:33 -0300
+Message-ID: <CANFVK7-d1f6e=cdjTAUjKm0EWws_QybYroAmgwfkXZsccBgYyQ@mail.gmail.com>
+From: =?UTF-8?Q?Jo=C3=A3o_Henrique_Freitas?= <joaohf@gmail.com>
+To: meta-ti@yoctoproject.org
+Subject: (No subject)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,170 +35,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2013 09:16:16 -0000
-Content-Type: multipart/alternative;
-	boundary="------------060503000000040506010806"
+X-List-Received-Date: Tue, 08 Oct 2013 14:19:36 -0000
+Content-Type: multipart/alternative; boundary=f46d04428624337bf204e83b752b
 
---------------060503000000040506010806
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+--f46d04428624337bf204e83b752b
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi guys,
+Hello,
 
-We've encountered an issue whit the Keystone 2 target regarding the 
-real-time / hardware clock.
-The problem first appears during the boot process, as shown below in the 
-log. Seems that the rtc device (eg. rtc0) is not present.
+I am new to TI boards.
 
-...
+Could I use meta-ti (master) and yocto (1.5, dora) ? Any issue combining
+these two versions?
 
-[    0.592146] 8021q: 802.1Q VLAN Support v1.8
-[    0.592817] sctp: Hash tables configured (established 16384 bind 16384)
-[    0.593721] NET: Registered protocol family 40
-[    0.594339] VFP support v0.3: implementor 41 architecture 4 part 30 variant f rev 0
-[    0.595360] Registering SWP/SWPB emulation handler
-*[    0.596230] drivers/rtc/hctosys.c: unable to open rtc device (rtc0)*
-[    0.597856] keystone-netcp 2090000.netcp: initializing cpsw version 1.3 (1) SGMII identification value 0x4ed1
-[    0.599351] keystone-netcp 2090000.netcp: Created a cpsw ale engine
-[    0.600184] keystone-netcp 2090000.netcp: initialized cpsw ale revision 1.3
-[    0.610193] keystone-netcp 2090000.netcp: Using Packet Accelerator Firmware version 0x01030008
-[    0.611338] keystone-netcp 2090000.netcp: pa_clk_rate(204800000 HZ),mult(20000),shift(12)
+My target platform is am3517-evm.
 
-...
+Thanks.
+--=20
+Jo=C3=A3o Henrique Ferreira de Freitas - joaohf_at_gmail.com
+Campinas-SP-Brasil
 
-root@keystone-evm:~# ls -al /dev/misc/rtc
-ls: /dev/misc/rtc: No such file or directory
+--f46d04428624337bf204e83b752b
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-root@keystone-evm:~# ls -al /dev/rtc0
-ls: /dev/rtc0: No such file or directory
+<div dir=3D"ltr"><div><div>Hello,<br><br></div><div>I am new to TI boards.<=
+br></div><div><br></div>Could I use meta-ti (master) and yocto (1.5, dora) =
+? Any issue combining these two versions? <br><br></div>My target platform =
+is am3517-evm.<br>
+<div><br clear=3D"all"><div><div><div>Thanks.<br></div><div>-- <br><div dir=
+=3D"ltr">Jo=C3=A3o Henrique Ferreira de Freitas - <a href=3D"http://joaohf_=
+at_gmail.com" target=3D"_blank">joaohf_at_gmail.com</a><br>Campinas-SP-Bras=
+il</div>
+</div></div></div></div></div>
 
-
-Another issue, linked to the rt/hw clock and maybe to the above problem, 
-can be seen while running the 'date' command, in the sense that if you 
-run the command several times for *at least* 4-5 seconds, the command 
-will output *only* a time change (the seconds will increment only once 
-during the 4-5 seconds of 'date' command run one after another).
-
-Was this problem reproduced by anyone else ?
-Could this be
-#1. a kernel missing configuration (the following are missing from the 
-.config, adding them and rebuilding the kernel did not solved any of the 
-issues):
-
-CONFIG_RTC_CLASS=y
-CONFIG_RTC_HCTOSYS=y
-CONFIG_RTC_HCTOSYS_DEVICE="rtc0"
-CONFIG_RTC_INTF_SYSFS=y
-CONFIG_RTC_INTF_PROC=y
-CONFIG_RTC_INTF_DEV=y
-
-#2. or a clock frequency:
-in arch/arm/boot/dts/k2hk-evm.dts we should then add the 
-'clock-frequency' to a proper value:
-
-                 timer {
-                         compatible = "arm,armv7-timer";
-                         interrupts = <1 13 0xf08 1 14 0xf08>;
-+                        clock-frequency = <134221720>;
-                 };
-
-#3. or a hardware problem ?
-
-
-We are not sure on the cause of this rt/hw clock issue yet; any 
-advice/input would help us a lot.
-
-Thank you,
-Valentin
-
---------------060503000000040506010806
-Content-Type: text/html; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-  </head>
-  <body bgcolor="#FFFFFF" text="#000000">
-    Hi guys,<br>
-    <br>
-    We've encountered an issue whit the Keystone 2 target regarding the
-    real-time / hardware clock.<br>
-    The problem first appears during the boot process, as shown below in
-    the log. Seems that the rtc device (eg. rtc0) is not present.<br>
-    <br>
-    <meta http-equiv="content-type" content="text/html;
-      charset=ISO-8859-1">
-    ...<br>
-    <meta http-equiv="content-type" content="text/html;
-      charset=ISO-8859-1">
-    <pre style="color: rgb(0, 0, 0); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; word-wrap: break-word; white-space: pre-wrap;">[    0.592146] 8021q: 802.1Q VLAN Support v1.8
-[    0.592817] sctp: Hash tables configured (established 16384 bind 16384)
-[    0.593721] NET: Registered protocol family 40
-[    0.594339] VFP support v0.3: implementor 41 architecture 4 part 30 variant f rev 0
-[    0.595360] Registering SWP/SWPB emulation handler
-<b>[    0.596230] drivers/rtc/hctosys.c: unable to open rtc device (rtc0)</b>
-[    0.597856] keystone-netcp 2090000.netcp: initializing cpsw version 1.3 (1) SGMII identification value 0x4ed1
-[    0.599351] keystone-netcp 2090000.netcp: Created a cpsw ale engine
-[    0.600184] keystone-netcp 2090000.netcp: initialized cpsw ale revision 1.3
-[    0.610193] keystone-netcp 2090000.netcp: Using Packet Accelerator Firmware version 0x01030008
-[    0.611338] keystone-netcp 2090000.netcp: pa_clk_rate(204800000 HZ),mult(20000),shift(12)
-</pre>
-    ...<br>
-    <br>
-    <meta http-equiv="content-type" content="text/html;
-      charset=ISO-8859-1">
-    root@keystone-evm:~# ls -al /dev/misc/rtc<br>
-    ls: /dev/misc/rtc: No such file or directory<br>
-    <br>
-    root@keystone-evm:~# ls -al /dev/rtc0<br>
-    ls: /dev/rtc0: No such file or directory<br>
-    <br>
-    <br>
-    Another issue, linked to the rt/hw clock and maybe to the above
-    problem, can be seen while running the 'date' command, in the sense
-    that if you run the command several times for *at least* 4-5
-    seconds, the command will output *only* a time change (the seconds
-    will increment only once during the 4-5 seconds of 'date' command
-    run one after another).<br>
-    <br>
-    Was this problem reproduced by anyone else ?<br>
-    Could this be<br>
-    #1. a kernel missing configuration (the following are missing from
-    the .config, adding them and rebuilding the kernel did not solved
-    any of the issues):<br>
-    <br>
-    <meta http-equiv="content-type" content="text/html;
-      charset=ISO-8859-1">
-    CONFIG_RTC_CLASS=y<br>
-    CONFIG_RTC_HCTOSYS=y<br>
-    CONFIG_RTC_HCTOSYS_DEVICE="rtc0"<br>
-    CONFIG_RTC_INTF_SYSFS=y<br>
-    CONFIG_RTC_INTF_PROC=y<br>
-    CONFIG_RTC_INTF_DEV=y<br>
-    <br>
-    #2. or a clock frequency:<br>
-    <meta http-equiv="content-type" content="text/html;
-      charset=ISO-8859-1">
-    in arch/arm/boot/dts/k2hk-evm.dts we should then add the
-    'clock-frequency' to a proper value:<br>
-    <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; timer {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; compatible = "arm,armv7-timer";<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; interrupts = &lt;1 13 0xf08 1 14 0xf08&gt;;<br>
-    +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; clock-frequency = &lt;134221720&gt;;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };<br>
-    <br>
-    #3. or a hardware problem ?<br>
-    <br>
-    <br>
-    We are not sure on the cause of this rt/hw clock issue yet; any
-    advice/input would help us a lot.<br>
-    <br>
-    Thank you,<br>
-    Valentin<br>
-  </body>
-</html>
-
---------------060503000000040506010806--
+--f46d04428624337bf204e83b752b--
