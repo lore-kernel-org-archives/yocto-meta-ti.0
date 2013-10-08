@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 35CCCE0167D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 370F3E01684
 	for <meta-ti@yoctoproject.org>; Tue,  8 Oct 2013 09:19:41 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3A3B352A65; Tue,  8 Oct 2013 16:19:41 +0000 (UTC)
+	id 6DD1752A67; Tue,  8 Oct 2013 16:19:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131008161941.3A3B352A65@arago-project.org>
+Message-Id: <20131008161941.6DD1752A67@arago-project.org>
 Date: Tue,  8 Oct 2013 16:19:41 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: bump to 3.12-rc4 with latest merges
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 08 Oct 2013 16:19:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: 1e928b703d8cde289ea08bfa3452e6f80483b441
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1e928b703d8cde289ea08bfa3452e6f80483b441
+Branch: master
+Commit: b4f33a5a409c9f7ffcd439cd50322729fd11ca2c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b4f33a5a409c9f7ffcd439cd50322729fd11ca2c
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Oct  7 14:04:46 2013 -0400
@@ -43,7 +43,7 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  1 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index 34d4e82..44b0b83 100644
+index 80ebde8..18ec70d 100644
 --- a/recipes-kernel/linux/linux-ti-staging_git.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_git.bb
 @@ -31,11 +31,11 @@ S = "${WORKDIR}/git"
@@ -56,7 +56,7 @@ index 34d4e82..44b0b83 100644
 +PV = "3.11+3.12-rc4"
  
  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
 +MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
  PR = "${MACHINE_KERNEL_PR}"
  
