@@ -1,28 +1,15 @@
-Return-Path: <joaohf@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 268C0E01664
-	for <meta-ti@yoctoproject.org>; Tue,  8 Oct 2013 07:19:35 -0700 (PDT)
-Received: by mail-wi0-f182.google.com with SMTP id ez12so6696042wid.9
-	for <meta-ti@yoctoproject.org>; Tue, 08 Oct 2013 07:19:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=PlXQMfhgh4q6YraAJMOnEcGyXL3mufIDq5ClMl560lc=;
-	b=wFfFROXpXL5C7pznQrMcEtqR0St0mnTR+ZMxLYoxuybzJjR+PVN/ceQuDEXwcTjZJd
-	pQprf43DTpgkCkdRYYRsAXCoWKrjw3IqRqLmL0cedDXRWLTkdUIkxJzaJ2tfAvOZQ41d
-	7BPx7zXHiyqMXZDNYgyrn09U9shShpEydNk8XBr42254bx+77xhtkBS6ZMSpYHBGBTaH
-	rFj6vpzpEM88NE2KIhf4RgEE+LNMEDzWVC3KMDJ2ROPmxKIqI+rdQwpwCypZMUhVQLpB
-	Nm2IHw05az9+M0KNUSEInrBN/Jj1xoMdppsrHGnKv7DSMztesp7vNmcmkwtDLNo68RI3
-	773w==
-MIME-Version: 1.0
-X-Received: by 10.180.86.230 with SMTP id s6mr1871159wiz.64.1381241973863;
-	Tue, 08 Oct 2013 07:19:33 -0700 (PDT)
-Received: by 10.216.90.132 with HTTP; Tue, 8 Oct 2013 07:19:33 -0700 (PDT)
-Date: Tue, 8 Oct 2013 11:19:33 -0300
-Message-ID: <CANFVK7-d1f6e=cdjTAUjKm0EWws_QybYroAmgwfkXZsccBgYyQ@mail.gmail.com>
-From: =?UTF-8?Q?Jo=C3=A3o_Henrique_Freitas?= <joaohf@gmail.com>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 35CCCE0167D
+	for <meta-ti@yoctoproject.org>; Tue,  8 Oct 2013 09:19:41 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 3A3B352A65; Tue,  8 Oct 2013 16:19:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Subject: (No subject)
+Message-Id: <20131008161941.3A3B352A65@arago-project.org>
+Date: Tue,  8 Oct 2013 16:19:41 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: bump to 3.12-rc4 with latest merges
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,39 +22,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2013 14:19:36 -0000
-Content-Type: multipart/alternative; boundary=f46d04428624337bf204e83b752b
-
---f46d04428624337bf204e83b752b
+X-List-Received-Date: Tue, 08 Oct 2013 16:19:43 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Module: meta-ti
+Branch: dylan
+Commit: 1e928b703d8cde289ea08bfa3452e6f80483b441
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1e928b703d8cde289ea08bfa3452e6f80483b441
 
-I am new to TI boards.
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Oct  7 14:04:46 2013 -0400
 
-Could I use meta-ti (master) and yocto (1.5, dora) ? Any issue combining
-these two versions?
+linux-ti-staging: bump to 3.12-rc4 with latest merges
 
-My target platform is am3517-evm.
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-Thanks.
---=20
-Jo=C3=A3o Henrique Ferreira de Freitas - joaohf_at_gmail.com
-Campinas-SP-Brasil
+---
 
---f46d04428624337bf204e83b752b
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+ recipes-kernel/linux/linux-ti-staging_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-<div dir=3D"ltr"><div><div>Hello,<br><br></div><div>I am new to TI boards.<=
-br></div><div><br></div>Could I use meta-ti (master) and yocto (1.5, dora) =
-? Any issue combining these two versions? <br><br></div>My target platform =
-is am3517-evm.<br>
-<div><br clear=3D"all"><div><div><div>Thanks.<br></div><div>-- <br><div dir=
-=3D"ltr">Jo=C3=A3o Henrique Ferreira de Freitas - <a href=3D"http://joaohf_=
-at_gmail.com" target=3D"_blank">joaohf_at_gmail.com</a><br>Campinas-SP-Bras=
-il</div>
-</div></div></div></div></div>
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index 34d4e82..44b0b83 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -31,11 +31,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.12.y"
+ 
+-SRCREV = "e34b95baedccea12af9c0e81be77ed0a18ddae82"
+-PV = "3.11+3.12-rc3"
++SRCREV = "cfb43bb45e51e2cbff47d62fa348de6a30147f41"
++PV = "3.11+3.12-rc4"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
 
---f46d04428624337bf204e83b752b--
+
