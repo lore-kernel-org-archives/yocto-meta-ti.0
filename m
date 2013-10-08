@@ -1,25 +1,22 @@
 Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23C64E016A3
-	for <meta-ti@yoctoproject.org>; Tue,  8 Oct 2013 14:38:55 -0700 (PDT)
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D262E016A7
+	for <meta-ti@yoctoproject.org>; Tue,  8 Oct 2013 14:47:36 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173013.mailsrvcs.net
+	by vms173003.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MUD002VUDFX2XD0@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 08 Oct 2013 16:38:37 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9625C200F4; Tue,
-	08 Oct 2013 17:38:21 -0400 (EDT)
-Date: Tue, 08 Oct 2013 17:38:21 -0400
+	2009)) with ESMTPA id <0MUD006K0DURRXQ0@vms173003.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 08 Oct 2013 16:47:20 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id D222A20091; Tue,
+	08 Oct 2013 17:47:14 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
-To: Mike Lewis <mikelewis@alphalem.com>
-Message-id: <20131008213821.GB26051@denix.org>
-References: <5254797B.5020605@alphalem.com>
-MIME-version: 1.0
-In-reply-to: <5254797B.5020605@alphalem.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: BeagleBone Black rootfs/boot dir empty
+To: meta-ti@yoctoproject.org
+Date: Tue, 08 Oct 2013 17:47:14 -0400
+Message-id: <1381268834-29065-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH] linux-ti-staging: merged PM, platform & connectivity, install boneblack DTB
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,28 +29,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2013 21:38:56 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 08 Oct 2013 21:47:39 -0000
 
-On Tue, Oct 08, 2013 at 02:30:35PM -0700, Mike Lewis wrote:
-> Hi,
-> 
-> I'm trying to boot a poky-dylan core-image-basic image using meta-ti
-> on my BBB and u-boot is complaining about two things (so far):
-> missing boot/uImage and missing boot/am335x-boneblack.dtb. Here's
-> the log:
-> 
-> http://pastebin.com/Aw4SzxxR
-> 
-> I copied uImage from partition 1 to partition 2/boot, so hopefully
-> that's fine. But bitbake isn't producing the device tree file
-> anywhere. Is there a fix for this somewhere or a recipe that I can
-> modify to populate the partition 2 /boot dir?
+From: Denys Dmytriyenko <denys@ti.com>
 
-It was just discussed in all the detail couple days ago:
-http://thread.gmane.org/gmane.linux.embedded.yocto.meta-ti/2726
+* The PM for TI part was merged in
+* Platform and connectivity got updated
+* Since we now have separate DTB for BeagleBone Black, install it too
 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging_git.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index 44b0b83..c731443 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -17,9 +17,9 @@ RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
+ 
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+-KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb"
++KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
+ KERNEL_DEVICETREE_am437x-evm = "am43x-epos-evm.dtb"
+-KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb"
++KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
+ KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
+ KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
+ 
+@@ -31,11 +31,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.12.y"
+ 
+-SRCREV = "cfb43bb45e51e2cbff47d62fa348de6a30147f41"
++SRCREV = "6c33548b82709198a16b751d6092037556fc4c05"
+ PV = "3.11+3.12-rc4"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
 -- 
-Denys
+1.8.3.2
+
 
