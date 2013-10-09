@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A88DE0073F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BD18E011C5
 	for <meta-ti@yoctoproject.org>; Wed,  9 Oct 2013 10:30:01 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 58A1C52A92; Wed,  9 Oct 2013 17:30:00 +0000 (UTC)
+	id CDC6752A94; Wed,  9 Oct 2013 17:29:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131009173000.58A1C52A92@arago-project.org>
-Date: Wed,  9 Oct 2013 17:30:00 +0000 (UTC)
+Message-Id: <20131009172959.CDC6752A94@arago-project.org>
+Date: Wed,  9 Oct 2013 17:29:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: merged PM, platform & connectivity, install boneblack DTB
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Wed, 09 Oct 2013 17:30:05 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: acdd0cba6dc0208e9d875168e93ff76e9ce4e756
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=acdd0cba6dc0208e9d875168e93ff76e9ce4e756
+Branch: dylan
+Commit: db99578a19e911b646ef4b802715234fe32c25de
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=db99578a19e911b646ef4b802715234fe32c25de
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Oct  8 17:43:35 2013 -0400
@@ -47,7 +47,7 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  1 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index 18ec70d..85bf34d 100644
+index 44b0b83..ce7c810 100644
 --- a/recipes-kernel/linux/linux-ti-staging_git.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_git.bb
 @@ -17,9 +17,9 @@ RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
