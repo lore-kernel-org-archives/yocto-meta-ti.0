@@ -1,27 +1,31 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68EBEE011C5
-	for <meta-ti@yoctoproject.org>; Wed,  9 Oct 2013 11:09:05 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r99I93KQ011907;
-	Wed, 9 Oct 2013 13:09:03 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r99I930S031360;
-	Wed, 9 Oct 2013 13:09:03 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 9 Oct 2013 13:09:03 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id r99I935g013868;
-	Wed, 9 Oct 2013 13:09:03 -0500
-Date: Wed, 9 Oct 2013 14:09:02 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Brian Hutchinson <b.hutchman@gmail.com>
-Message-ID: <20131009180902.GB15357@edge>
-References: <CAFZh4h9H3bTQveLafJY-3rCz-qy=dqhVq36CTqFt4RCPqJWDcQ@mail.gmail.com>
+Return-Path: <b.hutchman@gmail.com>
+Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
+	[209.85.215.174])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCB0BE011C5
+	for <meta-ti@yoctoproject.org>; Wed,  9 Oct 2013 11:35:04 -0700 (PDT)
+Received: by mail-ea0-f174.google.com with SMTP id z15so623205ead.19
+	for <meta-ti@yoctoproject.org>; Wed, 09 Oct 2013 11:35:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=Tj93fc5QJLS4ndwzK434BH0PoM4pAOFVsS85XjOIiEY=;
+	b=P8OJK+4Vy1nk4P8kkTawioAnqFPwCPcTkhXb5k4L9i0ipA+CwWKR89lOiih9eQisIT
+	8r/lDPbBRbrXBHdRpKB0zqKwSdITAXKbXMVKJpQ9W60ZHjyEr1XL1xtte+JkH5jD9Udw
+	7mrwFTt2BSO6tQozAty1NfJmlPx07bp1W2qlhIPPzf4wQuzoMFy0KQcF6LeW5LLeAmRO
+	Eu33uJ8mj4PvMuVYcUvXc44yBc5bNwa6HmlVnhySQGdof5QO5G/HSMh84IL9tD6had4x
+	PYMi+gnOs5b7gPrUxqbjtZPzRBQnBqE77k3XpQdfU6N361jHrKeqOtTbgIHCFaaiiRwS
+	zSng==
 MIME-Version: 1.0
-In-Reply-To: <CAFZh4h9H3bTQveLafJY-3rCz-qy=dqhVq36CTqFt4RCPqJWDcQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Received: by 10.14.95.137 with SMTP id p9mr4800497eef.73.1381343703412; Wed,
+	09 Oct 2013 11:35:03 -0700 (PDT)
+Received: by 10.223.144.205 with HTTP; Wed, 9 Oct 2013 11:35:03 -0700 (PDT)
+In-Reply-To: <20131009180902.GB15357@edge>
+References: <CAFZh4h9H3bTQveLafJY-3rCz-qy=dqhVq36CTqFt4RCPqJWDcQ@mail.gmail.com>
+	<20131009180902.GB15357@edge>
+Date: Wed, 9 Oct 2013 14:35:03 -0400
+Message-ID: <CAFZh4h-js9LVTCbWXYp3q7zU9QfSNncGDUPtw3uj1dkrYLvHhw@mail.gmail.com>
+From: Brian Hutchinson <b.hutchman@gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: Kernel recipe that works with OECore + meta-ti fails with Poky + meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
@@ -36,116 +40,180 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2013 18:09:06 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 09 Oct 2013 18:35:07 -0000
+Content-Type: multipart/alternative; boundary=001a11c3e86cc1451504e85324ef
 
-On Wed, Oct 09, 2013 at 09:10:49AM -0400, Brian Hutchinson wrote:
-> Hi,
-> 
-> I recently was able to get a master checkout of OECore + meta-ti to build
-> my custom board kernel using linux-ti81xx-psp_2.6.37.bb.  I tried to make
-> the same modifications to a master yocto + meta-ti checkout and when I try
-> to build, bitbake absolutely takes forever to build
+--001a11c3e86cc1451504e85324ef
+Content-Type: text/plain; charset=ISO-8859-1
 
-I have 2 questions:
+On Wed, Oct 9, 2013 at 2:09 PM, Denys Dmytriyenko <denys@ti.com> wrote:
 
-1. Which bitbake you use when building oe-core+meta-ti? Since Poky comes with 
-own copy of bitbake, you may want to compare them.
+> I have 2 questions:
+>
+> 1. Which bitbake you use when building oe-core+meta-ti? Since Poky comes
+> with
+> own copy of bitbake, you may want to compare them.
+>
+> 2. Not that it would affect packaging, but where in bblayer.conf did you
+> add
+> meta-ti?
+>
+> And one more suggestion - you may want to compare classes between oe-core
+> and
+> poky/meta to see if there are any big differences, especially in the
+> packaging
+> area...
+>
+> --
+> Denys
+>
 
-2. Not that it would affect packaging, but where in bblayer.conf did you add 
-meta-ti?
+Hey Denys,
 
-And one more suggestion - you may want to compare classes between oe-core and 
-poky/meta to see if there are any big differences, especially in the packaging 
-area...
+I'll look up the versions here in a sec.  I'm about to kill a build that
+has been running for about 3hrs stuck again on just:
 
--- 
-Denys
+NOTE: Preparing runqueue
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+Currently 1 running tasks (1633 of 2770):
+0: linux-ti81xx-psp-2.6.37-r0 do_package (pid 11284)
 
+I researched some of the error messages I got last time and discovered the
+SKIP_FILEDEPS flag so I put that in my linux-ti81xx-psp_2.6.37.bb recipe to
+see if that would maybe make a difference.  So far when I look at
+log.do_package it has done:
 
-> linux-ti81xx-psp_2.6.37.bb and it gets stuck on the do_package.  I finally
-> just let it go (hours and hours on a very fast modern machine) and it looks
-> like it finally just gave up the ghost and ran out of memory or something.
-> I've never seen anything like it.  Anyone seen anything like this before:
-> 
-> Build Configuration:
-> BB_VERSION        = "1.20.0"
-> BUILD_SYS         = "x86_64-linux"
-> NATIVELSBSTRING   = "Debian-7.1"
-> TARGET_SYS        = "arm-poky-linux-gnueabi"
-> MACHINE           = "c6a816x-evm"
-> DISTRO            = "poky"
-> DISTRO_VERSION    = "1.5"
-> TUNE_FEATURES     = "armv7a vfp neon"
-> TARGET_FPU        = "vfp-neon"
-> meta
-> meta-yocto
-> meta-yocto-bsp    = "master:104166c804e9068d85ccdaa887a33df72c8aeb85"
-> meta-ti           = "master:9c36e6c7573c3e68c5816dd04f3dd43f485b0550"
-> meta-oe
-> meta-networking
-> meta-webserver    = "master:8aafddccb03f54923927e9d1c8c80223baf581de"
-> 
-> NOTE: Preparing runqueue
-> NOTE: Executing SetScene Tasks
-> NOTE: Executing RunQueue Tasks
-> ERROR: Error executing a python function in
-> /home/hutch/yocto_master_wcs_10_4_2013/poky/meta-ti/recipes-kernel/linux/
-> linux-ti81xx-psp_2.6.37.bb:
-> 
-> The stack trace of python calls that resulted in this exception/failure was:
-> File: 'package_do_filedeps', lineno: 56, function:
-> <module>
-> 
->      0052:    for pkg in provides_files:
->      0053:        d.setVar("FILERPROVIDESFLIST_" + pkg, "
-> ".join(provides_files[pkg]))
->      0054:
->      0055:
->  *** 0056:package_do_filedeps(d)
->      0057:
-> File: 'package_do_filedeps', lineno: 25, function: package_do_filedeps
->      0021:
->      0022:    import multiprocessing
->      0023:    nproc = multiprocessing.cpu_count()
->      0024:    pool =  bb.utils.multiprocessingpool(nproc)
->  *** 0025:    processed = list(pool.imap(oe.package.filedeprunner, pkglist))
->      0026:    pool.close()
->      0027:    pool.join()
->      0028:
->      0029:    provides_files = {}
-> File: '/usr/lib/python2.7/multiprocessing/pool.py', lineno: 653, function:
-> next
->      0649:
->      0650:        success, value = item
->      0651:        if success:
->      0652:            return value
->  *** 0653:        raise value
->      0654:
->      0655:    __next__ = next                    # XXX
->      0656:
->      0657:    def _set(self, i, obj):
-> Exception: OSError: [Errno 12] Cannot allocate memory
-> 
-> ERROR: Function failed: package_do_filedeps
-> ERROR: Logfile of failure stored in:
-> /home/hutch/yocto_master_wcs_10_4_2013/poky/build/tmp/work/c6a816x_evm-poky-linux-gnueabi/linux-ti81xx-psp/2.6.37-r0/temp/log.do_package.12766
-> ERROR: Task 200
-> (/home/hutch/yocto_master_wcs_10_4_2013/poky/meta-ti/recipes-kernel/linux/
-> linux-ti81xx-psp_2.6.37.bb, do_package) failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 2756 tasks of which 2752 didn't need to be
-> rerun and 1 failed.
-> No currently running tasks (2023 of 2770)
-> 
-> Summary: 1 task failed:
->   /home/hutch/yocto_master_wcs_10_4_2013/poky/meta-ti/recipes-kernel/linux/
-> linux-ti81xx-psp_2.6.37.bb, do_package
-> Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+DEBUG: Executing python function sstate_task_prefunc
+DEBUG: Python function sstate_task_prefunc finished
+DEBUG: Executing python function do_package
+DEBUG: Executing python function package_get_auto_pr
+DEBUG: Python function package_get_auto_pr finished
+DEBUG: Executing python function perform_packagecopy
+DEBUG: Python function perform_packagecopy finished
+DEBUG: Executing python function split_and_strip_files
+DEBUG: Python function split_and_strip_files finished
+DEBUG: Executing python function fixup_perms
+DEBUG: Python function fixup_perms finished
+DEBUG: Executing python function split_kernel_packages
+DEBUG: Python function split_kernel_packages finished
+DEBUG: Executing python function split_kernel_module_packages
+DEBUG: Python function split_kernel_module_packages finished
+DEBUG: Executing python function package_do_split_locales
+DEBUG: No locale files in this package
+DEBUG: Python function package_do_split_locales finished
+DEBUG: Executing python function populate_packages
 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+... but it has been stuck there for quite a while and I think something is
+probably dead again.  I do a ps and see some decafbad so that probably
+isn't good ... and I've been getting plenty of caffeine today :)
 
+hutch@neo:~/yocto_master_wcs_10_4_2013/poky/meta-ti/recipes-kernel/linux$
+ps aux | grep -i wcs
+hutch    11198  0.0  1.0 140408 82788 pts/3    S+   11:02   0:08 python
+/home/hutch/yocto_master_wcs_10_4_2013/poky/bitbake/bin/bitbake
+core-image-wcs
+hutch    11199  0.0  0.1 179204 14960 pts/3    Sl+  11:02   0:00 python
+/home/hutch/yocto_master_wcs_10_4_2013/poky/bitbake/bin/bitbake
+core-image-wcs
+hutch    11206  3.0  3.7 414052 305136 pts/3   Sl+  11:02   6:08 python
+/home/hutch/yocto_master_wcs_10_4_2013/poky/bitbake/bin/bitbake
+core-image-wcs
+hutch    11280  0.0  1.5 161308 123588 pts/3   S+   11:03   0:02 python
+/home/hutch/yocto_master_wcs_10_4_2013/poky/bitbake/bin/bitbake-worker
+decafbad
+hutch    11282  0.0  1.5 163604 123760 pts/3   S+   11:03   0:03 python
+/home/hutch/yocto_master_wcs_10_4_2013/poky/bitbake/bin/bitbake-worker
+decafbad
+hutch    11284 83.2 13.6 1163748 1121848 pts/3 R    11:03 169:13 python
+/home/hutch/yocto_master_wcs_10_4_2013/poky/bitbake/bin/bitbake-worker
+decafbad
+hutch    11286  9.9 13.7 1138824 1130740 ?     Ss   11:03  20:09
+/home/hutch/yocto_master_wcs_10_4_2013/poky/build/tmp/sysroots/x86_64-linux/usr/bin/pseudo
+-d
+hutch    11696  0.0  0.0   7828   860 pts/20   S+   14:26   0:00 grep -i wcs
 
+--001a11c3e86cc1451504e85324ef
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On W=
+ed, Oct 9, 2013 at 2:09 PM, Denys Dmytriyenko <span dir=3D"ltr">&lt;<a href=
+=3D"mailto:denys@ti.com" target=3D"_blank">denys@ti.com</a>&gt;</span> wrot=
+e:<br><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;b=
+order-left:1px solid rgb(204,204,204);padding-left:1ex">
+I have 2 questions:<br>
+<br>
+1. Which bitbake you use when building oe-core+meta-ti? Since Poky comes wi=
+th<br>
+own copy of bitbake, you may want to compare them.<br>
+<br>
+2. Not that it would affect packaging, but where in bblayer.conf did you ad=
+d<br>
+meta-ti?<br>
+<br>
+And one more suggestion - you may want to compare classes between oe-core a=
+nd<br>
+poky/meta to see if there are any big differences, especially in the packag=
+ing<br>
+area...<br>
+<br>
+--<br>
+Denys<br></blockquote></div><br></div><div class=3D"gmail_extra">Hey Denys,=
+<br><br></div><div class=3D"gmail_extra">I&#39;ll look up the versions here=
+ in a sec.=A0 I&#39;m about to kill a build that has been running for about=
+ 3hrs stuck again on just:<br>
+<br>NOTE: Preparing runqueue<br>NOTE: Executing SetScene Tasks<br>NOTE: Exe=
+cuting RunQueue Tasks<br>Currently 1 running tasks (1633 of 2770):<br>0: li=
+nux-ti81xx-psp-2.6.37-r0 do_package (pid 11284)<br><br></div><div class=3D"=
+gmail_extra">
+I researched some of the error messages I got last time and discovered the =
+SKIP_FILEDEPS flag so I put that in my  <a href=3D"http://linux-ti81xx-psp_=
+2.6.37.bb" target=3D"_blank">linux-ti81xx-psp_2.6.37.bb</a> recipe to see i=
+f that would maybe make a difference.=A0 So far when I look at log.do_packa=
+ge it has done:<br>
+<br>DEBUG: Executing python function sstate_task_prefunc<br>DEBUG: Python f=
+unction sstate_task_prefunc finished<br>DEBUG: Executing python function do=
+_package<br>DEBUG: Executing python function package_get_auto_pr<br>DEBUG: =
+Python function package_get_auto_pr finished<br>
+DEBUG: Executing python function perform_packagecopy<br>DEBUG: Python funct=
+ion perform_packagecopy finished<br>DEBUG: Executing python function split_=
+and_strip_files<br>DEBUG: Python function split_and_strip_files finished<br=
+>
+DEBUG: Executing python function fixup_perms<br>DEBUG: Python function fixu=
+p_perms finished<br>DEBUG: Executing python function split_kernel_packages<=
+br>DEBUG: Python function split_kernel_packages finished<br>DEBUG: Executin=
+g python function split_kernel_module_packages<br>
+DEBUG: Python function split_kernel_module_packages finished<br>DEBUG: Exec=
+uting python function package_do_split_locales<br>DEBUG: No locale files in=
+ this package<br>DEBUG: Python function package_do_split_locales finished<b=
+r>
+DEBUG: Executing python function populate_packages<br><br></div><div class=
+=3D"gmail_extra">... but it has been stuck there for quite a while and I th=
+ink something is probably dead again.=A0 I do a ps and see some decafbad so=
+ that probably isn&#39;t good ... and I&#39;ve been getting plenty of caffe=
+ine today :)<br>
+<br>hutch@neo:~/yocto_master_wcs_10_4_2013/poky/meta-ti/recipes-kernel/linu=
+x$ ps aux | grep -i wcs<br>hutch=A0=A0=A0 11198=A0 0.0=A0 1.0 140408 82788 =
+pts/3=A0=A0=A0 S+=A0=A0 11:02=A0=A0 0:08 python /home/hutch/yocto_master_wc=
+s_10_4_2013/poky/bitbake/bin/bitbake core-image-wcs<br>
+hutch=A0=A0=A0 11199=A0 0.0=A0 0.1 179204 14960 pts/3=A0=A0=A0 Sl+=A0 11:02=
+=A0=A0 0:00 python /home/hutch/yocto_master_wcs_10_4_2013/poky/bitbake/bin/=
+bitbake core-image-wcs<br>hutch=A0=A0=A0 11206=A0 3.0=A0 3.7 414052 305136 =
+pts/3=A0=A0 Sl+=A0 11:02=A0=A0 6:08 python /home/hutch/yocto_master_wcs_10_=
+4_2013/poky/bitbake/bin/bitbake core-image-wcs<br>
+hutch=A0=A0=A0 11280=A0 0.0=A0 1.5 161308 123588 pts/3=A0=A0 S+=A0=A0 11:03=
+=A0=A0 0:02 python /home/hutch/yocto_master_wcs_10_4_2013/poky/bitbake/bin/=
+bitbake-worker decafbad<br>hutch=A0=A0=A0 11282=A0 0.0=A0 1.5 163604 123760=
+ pts/3=A0=A0 S+=A0=A0 11:03=A0=A0 0:03 python /home/hutch/yocto_master_wcs_=
+10_4_2013/poky/bitbake/bin/bitbake-worker decafbad<br>
+hutch=A0=A0=A0 11284 83.2 13.6 1163748 1121848 pts/3 R=A0=A0=A0 11:03 169:1=
+3 python /home/hutch/yocto_master_wcs_10_4_2013/poky/bitbake/bin/bitbake-wo=
+rker decafbad<br>hutch=A0=A0=A0 11286=A0 9.9 13.7 1138824 1130740 ?=A0=A0=
+=A0=A0 Ss=A0=A0 11:03=A0 20:09 /home/hutch/yocto_master_wcs_10_4_2013/poky/=
+build/tmp/sysroots/x86_64-linux/usr/bin/pseudo -d<br>
+hutch=A0=A0=A0 11696=A0 0.0=A0 0.0=A0=A0 7828=A0=A0 860 pts/20=A0=A0 S+=A0=
+=A0 14:26=A0=A0 0:00 grep -i wcs<br></div><div class=3D"gmail_extra"><br></=
+div></div>
+
+--001a11c3e86cc1451504e85324ef--
