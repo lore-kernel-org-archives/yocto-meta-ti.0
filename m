@@ -1,27 +1,32 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BEAC9E016A7
-	for <meta-ti@yoctoproject.org>; Tue,  8 Oct 2013 18:38:17 -0700 (PDT)
+Return-Path: <chase.maupin@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4D86E016C5
+	for <meta-ti@yoctoproject.org>; Wed,  9 Oct 2013 05:06:25 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r991cG6E016212
-	for <meta-ti@yoctoproject.org>; Tue, 8 Oct 2013 20:38:16 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r991cGOn016870
-	for <meta-ti@yoctoproject.org>; Tue, 8 Oct 2013 20:38:16 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 8 Oct 2013 20:38:15 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	r991cFlh016683;	Tue, 8 Oct 2013 20:38:15 -0500
-Date: Tue, 8 Oct 2013 21:28:16 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>, <denys@ti.com>
-Message-ID: <217129400.783.1381282096154.JavaMail.jenkins@puget>
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r99C6O8p004778;
+	Wed, 9 Oct 2013 07:06:24 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r99C6NJp003059;
+	Wed, 9 Oct 2013 07:06:23 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
+	14.02.0342.003; Wed, 9 Oct 2013 07:06:23 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH] linux-ti-staging: merged PM, platform &
+	connectivity, install boneblack DTB
+Thread-Index: AQHOxHAJxJ3WNSnM+kamF44qK66ZM5nsRvYQ
+Date: Wed, 9 Oct 2013 12:06:22 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED101597957E4@DLEE11.ent.ti.com>
+References: <1381268834-29065-1-git-send-email-denis@denix.org>
+In-Reply-To: <1381268834-29065-1-git-send-email-denis@denix.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-10-08_21-01-44
+Subject: Re: [PATCH] linux-ti-staging: merged PM, platform & connectivity, install boneblack DTB
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,169 +39,76 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2013 01:38:17 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_782_104174895.1381282096151"
+X-List-Received-Date: Wed, 09 Oct 2013 12:06:27 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_782_104174895.1381282096151
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 
-<html>
-<head>
-<title>
-Status for 10/08/13
-</title>
-</head>
-<body>
+>-----Original Message-----
+>From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+>bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
+>Sent: Tuesday, October 08, 2013 4:47 PM
+>To: meta-ti@yoctoproject.org
+>Subject: [meta-ti] [PATCH] linux-ti-staging: merged PM, platform &
+>connectivity, install boneblack DTB
+>
+>From: Denys Dmytriyenko <denys@ti.com>
+>
+>* The PM for TI part was merged in
+>* Platform and connectivity got updated
+>* Since we now have separate DTB for BeagleBone Black, install it
+>too
+>
+>Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+>---
+> recipes-kernel/linux/linux-ti-staging_git.bb | 8 ++++----
+> 1 file changed, 4 insertions(+), 4 deletions(-)
+>
+>diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb
+>b/recipes-kernel/linux/linux-ti-staging_git.bb
+>index 44b0b83..c731443 100644
+>--- a/recipes-kernel/linux/linux-ti-staging_git.bb
+>+++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+>@@ -17,9 +17,9 @@ RDEPENDS_kernel-base_append_ti33x =3D " am33x-cm3
+>am33x-cm3-initscript"
+>
+> # Default is to package all dtb files for ti33x devices unless
+>building
+> # for the specific beaglebone machine.
+>-KERNEL_DEVICETREE_ti33x =3D "am335x-evm.dtb am335x-evmsk.dtb
+>am335x-bone.dtb"
+>+KERNEL_DEVICETREE_ti33x =3D "am335x-evm.dtb am335x-evmsk.dtb
+>am335x-bone.dtb am335x-boneblack.dtb"
+> KERNEL_DEVICETREE_am437x-evm =3D "am43x-epos-evm.dtb"
+>-KERNEL_DEVICETREE_beaglebone =3D "am335x-bone.dtb"
+>+KERNEL_DEVICETREE_beaglebone =3D "am335x-bone.dtb am335x-
+>boneblack.dtb"
+> KERNEL_DEVICETREE_omap5-evm =3D "omap5-uevm.dtb"
+> KERNEL_DEVICETREE_dra7xx-evm =3D "dra7-evm.dtb"
+>
+>@@ -31,11 +31,11 @@ S =3D "${WORKDIR}/git"
+>
+> BRANCH =3D "ti-linux-3.12.y"
+>
+>-SRCREV =3D "cfb43bb45e51e2cbff47d62fa348de6a30147f41"
+>+SRCREV =3D "6c33548b82709198a16b751d6092037556fc4c05"
+> PV =3D "3.11+3.12-rc4"
+>
+> # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause
+>a rebuild
+>-MACHINE_KERNEL_PR_append =3D "a+gitr${SRCPV}"
+>+MACHINE_KERNEL_PR_append =3D "b+gitr${SRCPV}"
+> PR =3D "${MACHINE_KERNEL_PR}"
+>
+> SRC_URI =3D "git://git.ti.com/ti-linux-kernel/ti-linux-
+>kernel.git;protocol=3Dgit;branch=3D${BRANCH} \
+>--
+>1.8.3.2
+>
+>_______________________________________________
+>meta-ti mailing list
+>meta-ti@yoctoproject.org
+>https://lists.yoctoproject.org/listinfo/meta-ti
 
-<h2>Status for 10/08/13</h2>
-
-<h2>BUILD_ID: build-2013-10-08_21-02-54</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td bgcolor=lime>PASSED</td>
-        <td bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.10"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
-
-
-------=_Part_782_104174895.1381282096151--
