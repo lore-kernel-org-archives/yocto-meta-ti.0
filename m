@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6237BE0163D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6386AE01652
 	for <meta-ti@yoctoproject.org>; Thu, 10 Oct 2013 09:18:54 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7FB825299B; Thu, 10 Oct 2013 16:18:54 +0000 (UTC)
+	id 6A68D529A8; Thu, 10 Oct 2013 16:18:54 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131010161854.7FB825299B@arago-project.org>
+Message-Id: <20131010161854.6A68D529A8@arago-project.org>
 Date: Thu, 10 Oct 2013 16:18:54 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : ti33x: switch KERNEL_IMAGETYPE to zImage by default
@@ -26,9 +26,9 @@ X-List-Received-Date: Thu, 10 Oct 2013 16:18:55 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 6903f2aba8e1c159ef14dcd216d6c7832e409f28
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6903f2aba8e1c159ef14dcd216d6c7832e409f28
+Branch: dylan
+Commit: a46b7207a3312fd1f3b8d8b1a2814963f7c9f669
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a46b7207a3312fd1f3b8d8b1a2814963f7c9f669
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Oct  9 17:59:18 2013 -0400
