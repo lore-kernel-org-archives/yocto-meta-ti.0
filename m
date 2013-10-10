@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DA86DE01652
-	for <meta-ti@yoctoproject.org>; Thu, 10 Oct 2013 15:49:19 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F0684E01653
+	for <meta-ti@yoctoproject.org>; Thu, 10 Oct 2013 15:49:20 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8510E529B0; Thu, 10 Oct 2013 22:49:18 +0000 (UTC)
+	id B7BC652A64; Thu, 10 Oct 2013 22:49:20 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131010224918.8510E529B0@arago-project.org>
-Date: Thu, 10 Oct 2013 22:49:18 +0000 (UTC)
+Message-Id: <20131010224920.B7BC652A64@arago-project.org>
+Date: Thu, 10 Oct 2013 22:49:20 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : linux-ti-staging: Switch DTB from using machine name to soc family name
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Thu, 10 Oct 2013 22:49:21 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 5a74c8a01bae0351229d153783ca7adb5fc6becc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5a74c8a01bae0351229d153783ca7adb5fc6becc
+Branch: dylan
+Commit: 07001d91159bf252097de88bec0fad20d57351dc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=07001d91159bf252097de88bec0fad20d57351dc
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Wed Oct  9 14:58:15 2013 -0500
@@ -47,7 +47,7 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index 85bf34d..01ba1da 100644
+index ce7c810..875df82 100644
 --- a/recipes-kernel/linux/linux-ti-staging_git.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_git.bb
 @@ -18,7 +18,7 @@ RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
