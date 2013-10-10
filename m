@@ -1,28 +1,15 @@
-Return-Path: <bmentink@gmail.com>
-Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
-	[209.85.223.171])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB701E01652
-	for <meta-ti@yoctoproject.org>; Thu, 10 Oct 2013 13:42:19 -0700 (PDT)
-Received: by mail-ie0-f171.google.com with SMTP id at1so6298524iec.16
-	for <meta-ti@yoctoproject.org>; Thu, 10 Oct 2013 13:42:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=YiqIhPy/9xL1hrSDVzSZL8WrqbJMGXn9PuvFJyhq0pA=;
-	b=0Y6jG6JBTbu2GKoVYjscQlKr8P4Xj6j7ywqXdSMFKM97b1WiPz6zdfle6Y5LESzTpJ
-	65sfKFu9F2DKXfQpqEONYTaNIHbiviC5Bcar0m5wIrej4gkyKrSHCb88R/A7sjsOgZle
-	PdJsg1SZ8Yw7EwQQ4zuQ4kIfLtaT14/PEnS95PEpc1aO2wDquSLoa+JFsUVx7E2ZW3NP
-	J14UnPDF4CCGiXbK8llU8y1wlt75fK94HpQ+NQujiEfI+bSBrwN4xgeKWn+yFdh9pj7K
-	YB8JmzoUIP9h2pXthjVecKF08BqGt1YkOt2d/ilCsc8OnM9WPmGimJf8wSqv3cu/vOzK
-	fhSA==
-MIME-Version: 1.0
-X-Received: by 10.50.136.200 with SMTP id qc8mr106693igb.52.1381437738338;
-	Thu, 10 Oct 2013 13:42:18 -0700 (PDT)
-Received: by 10.43.83.9 with HTTP; Thu, 10 Oct 2013 13:42:18 -0700 (PDT)
-Date: Fri, 11 Oct 2013 09:42:18 +1300
-Message-ID: <CALEed8Zi5wEX53+Fx4G0hXUpPwFX-feSbt+Vyu1CAvVUMDuV2A@mail.gmail.com>
-From: Bernard Mentink <bmentink@gmail.com>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DA86DE01652
+	for <meta-ti@yoctoproject.org>; Thu, 10 Oct 2013 15:49:19 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 8510E529B0; Thu, 10 Oct 2013 22:49:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Subject: Loading CAN modules on boot
+Message-Id: <20131010224918.8510E529B0@arago-project.org>
+Date: Thu, 10 Oct 2013 22:49:18 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Franklin S. Cooper Jr : linux-ti-staging: Switch DTB from using machine name to soc family name
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,57 +22,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Oct 2013 20:42:20 -0000
-Content-Type: multipart/alternative; boundary=089e0122a812ac55dc04e869098b
+X-List-Received-Date: Thu, 10 Oct 2013 22:49:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
---089e0122a812ac55dc04e869098b
-Content-Type: text/plain; charset=ISO-8859-1
+Module: meta-ti
+Branch: master
+Commit: 5a74c8a01bae0351229d153783ca7adb5fc6becc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5a74c8a01bae0351229d153783ca7adb5fc6becc
 
-Hi All,
+Author: Franklin S. Cooper Jr <fcooper@ti.com>
+Date:   Wed Oct  9 14:58:15 2013 -0500
 
-I am having trouble getting can modules loaded on boot on my Beaglebone
-Black.
+linux-ti-staging: Switch DTB from using machine name to soc family name
 
-I can get the can device to show if I load the following modules in this
-order:
+* Use SOC family value for am437x instead of machine name for DTB files.
+* This mimics the current approach taken for am335x.
 
-can-dev.ko
-c_can.ko
-c_can_platform.ko  and
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-can.ko
-can_raw.ko
+---
 
-I do not know how to get these modules loaded at boot.
+ recipes-kernel/linux/linux-ti-staging_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-I tried re-configuring my kernel to have them built-in, but that did not
-work.
-I placed a defconfig file in my layer with the changes but it does not seem
-to get picked up as it should according to the yocto docs. The .config on
-the build directory is still the old one.
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
+index 85bf34d..01ba1da 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_git.bb
+@@ -18,7 +18,7 @@ RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
+-KERNEL_DEVICETREE_am437x-evm = "am43x-epos-evm.dtb"
++KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb"
+ KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
+ KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
+ KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
+@@ -35,7 +35,7 @@ SRCREV = "04faa81d0573686847c8c74f4c67c8a69c13ce9f"
+ PV = "3.11+3.12-rc4"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
 
-Any idea's?
 
-Thanks,
-Bernie
-
---089e0122a812ac55dc04e869098b
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi All,<div><br></div><div>I am having trouble getting can=
- modules loaded on boot on my Beaglebone Black.</div><div><br></div><div>I =
-can get the can device to show if I load the following modules in this orde=
-r:</div>
-<div><br></div><div>can-dev.ko</div><div>c_can.ko</div><div>c_can_platform.=
-ko =A0and</div><div><br></div><div>can.ko</div><div>can_raw.ko</div><div><b=
-r></div><div>I do not know how to get these modules loaded at boot.</div>
-<div><br></div><div>I tried re-configuring my kernel to have them built-in,=
- but that did not work.</div><div>I placed a defconfig file in my layer wit=
-h the changes but it does not seem to get picked up as it should according =
-to the yocto docs. The .config on the build directory is still the old one.=
-</div>
-<div><br></div><div>Any idea&#39;s?</div><div><br></div><div>Thanks,</div><=
-div>Bernie</div></div>
-
---089e0122a812ac55dc04e869098b--
