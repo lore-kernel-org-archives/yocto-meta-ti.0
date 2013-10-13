@@ -1,30 +1,28 @@
-Return-Path: <bmentink@gmail.com>
-Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
-	[209.85.223.174])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8DD0FE01373
-	for <meta-ti@yoctoproject.org>; Sat, 12 Oct 2013 14:14:17 -0700 (PDT)
-Received: by mail-ie0-f174.google.com with SMTP id qd12so5633173ieb.5
-	for <meta-ti@yoctoproject.org>; Sat, 12 Oct 2013 14:14:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Z8GZ+JGirU+BliOHcb8KCtzRhEue52nsyKxfBscmvks=;
-	b=ThKaeiiICaQnzrqrXMZ+W8tbybG+ULsTEdI8Q0XZgrS3HNtCOsdSDUN1FAZSOnD442
-	ZwQxwdTF+FeOlWm5IlPW8O164GlXSr+A79ftmhxnQ/QVSP5MkHX9/bj9hzTU/p0G6CQM
-	wNzL/eNV6ora7YsK8MCCk4bW2ZepcYh+xZ+c+YwW69qReJuacHBUoTrCbgwzxF12+p5J
-	HKQrlKW3p5DGfC5iRyBp5MrFnpPRkHAjOz94KLyjHQ/xcaFLUKAzFkfQtATlOTwadqFZ
-	4DQnEaaLOmjCSroBE6IRiRvxtMC6VpXxel5sOJySNCNfOpe/+zAz/GgiEX0xodW7vh2p
-	KxOw==
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 79804E01643
+	for <meta-ti@yoctoproject.org>; Sat, 12 Oct 2013 18:13:40 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9D1DcX6006025
+	for <meta-ti@yoctoproject.org>; Sat, 12 Oct 2013 20:13:38 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9D1Dc12026524
+	for <meta-ti@yoctoproject.org>; Sat, 12 Oct 2013 20:13:38 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Sat, 12 Oct 2013 20:13:38 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	r9D1DbWD001098	for <meta-ti@yoctoproject.org>; Sat, 12 Oct 2013 20:13:38
+	-0500
+Date: Sat, 12 Oct 2013 21:03:32 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1569063257.803.1381626212473.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-X-Received: by 10.50.115.100 with SMTP id jn4mr7669549igb.9.1381612456408;
-	Sat, 12 Oct 2013 14:14:16 -0700 (PDT)
-Received: by 10.43.83.9 with HTTP; Sat, 12 Oct 2013 14:14:16 -0700 (PDT)
-In-Reply-To: <CALEed8Zi5wEX53+Fx4G0hXUpPwFX-feSbt+Vyu1CAvVUMDuV2A@mail.gmail.com>
-References: <CALEed8Zi5wEX53+Fx4G0hXUpPwFX-feSbt+Vyu1CAvVUMDuV2A@mail.gmail.com>
-Date: Sun, 13 Oct 2013 10:14:16 +1300
-Message-ID: <CALEed8aSvq53twM3bm1QsyBA8xMWMJXi0=eLnuzd_YWMUckdeQ@mail.gmail.com>
-From: Bernard Mentink <bmentink@gmail.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Loading CAN modules on boot
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-10-12_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,129 +35,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Oct 2013 21:14:18 -0000
-Content-Type: multipart/alternative; boundary=089e0116057caf872704e891b730
+X-List-Received-Date: Sun, 13 Oct 2013 01:13:47 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_802_1239876414.1381626212471"
 
---089e0116057caf872704e891b730
-Content-Type: text/plain; charset=ISO-8859-1
+------=_Part_802_1239876414.1381626212471
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi All,
+<html>
+<head>
+<title>
+Status for 10/12/13
+</title>
+</head>
+<body>
 
-I am having trouble getting can modules loaded on boot on my Beaglebone
-Black.
+<h2>Status for 10/12/13</h2>
 
-I can get the can device to show if I load the following modules in this
-order:
+<h2>BUILD_ID: build-2013-10-12_21-02-50</h2>
 
-can-dev.ko
-c_can.ko
-c_can_platform.ko  and
+<h2>Clean Build: false</h2>
 
-can.ko
-can_raw.ko
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-I do not know how to get these modules loaded at boot.
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
 
-I tried re-configuring my kernel to have them built-in, but that did not
-work.
-I placed a defconfig file in my layer with the changes but it does not seem
-to get picked up as it should according to the yocto docs. The .config on
-the build directory is still the old one.
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
 
-Any idea's?
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.10"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
 
-Thanks,
-Bernie
+</body>
+</html>
 
 
-On Fri, Oct 11, 2013 at 9:42 AM, Bernard Mentink <bmentink@gmail.com> wrote:
-
-> Hi All,
->
-> I am having trouble getting can modules loaded on boot on my Beaglebone
-> Black.
->
-> I can get the can device to show if I load the following modules in this
-> order:
->
-> can-dev.ko
-> c_can.ko
-> c_can_platform.ko  and
->
-> can.ko
-> can_raw.ko
->
-> I do not know how to get these modules loaded at boot.
->
-> I tried re-configuring my kernel to have them built-in, but that did not
-> work.
-> I placed a defconfig file in my layer with the changes but it does not
-> seem to get picked up as it should according to the yocto docs. The .config
-> on the build directory is still the old one.
->
-> Any idea's?
->
-> Thanks,
-> Bernie
->
-
---089e0116057caf872704e891b730
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-family:arial,sans-serif;font-size:13px=
-">Hi All,</span><div style=3D"font-family:arial,sans-serif;font-size:13px">=
-<br></div><div style=3D"font-family:arial,sans-serif;font-size:13px">I am h=
-aving trouble getting can modules loaded on boot on my Beaglebone Black.</d=
-iv>
-<div style=3D"font-family:arial,sans-serif;font-size:13px"><br></div><div s=
-tyle=3D"font-family:arial,sans-serif;font-size:13px">I can get the can devi=
-ce to show if I load the following modules in this order:</div><div style=
-=3D"font-family:arial,sans-serif;font-size:13px">
-<br></div><div style=3D"font-family:arial,sans-serif;font-size:13px">can-de=
-v.ko</div><div style=3D"font-family:arial,sans-serif;font-size:13px">c_can.=
-ko</div><div style=3D"font-family:arial,sans-serif;font-size:13px">c_can_pl=
-atform.ko =A0and</div>
-<div style=3D"font-family:arial,sans-serif;font-size:13px"><br></div><div s=
-tyle=3D"font-family:arial,sans-serif;font-size:13px">can.ko</div><div style=
-=3D"font-family:arial,sans-serif;font-size:13px">can_raw.ko</div><div style=
-=3D"font-family:arial,sans-serif;font-size:13px">
-<br></div><div style=3D"font-family:arial,sans-serif;font-size:13px">I do n=
-ot know how to get these modules loaded at boot.</div><div style=3D"font-fa=
-mily:arial,sans-serif;font-size:13px"><br></div><div style=3D"font-family:a=
-rial,sans-serif;font-size:13px">
-I tried re-configuring my kernel to have them built-in, but that did not wo=
-rk.</div><div style=3D"font-family:arial,sans-serif;font-size:13px">I place=
-d a defconfig file in my layer with the changes but it does not seem to get=
- picked up as it should according to the yocto docs. The .config on the bui=
-ld directory is still the old one.</div>
-<div style=3D"font-family:arial,sans-serif;font-size:13px"><br></div><div s=
-tyle=3D"font-family:arial,sans-serif;font-size:13px">Any idea&#39;s?</div><=
-div style=3D"font-family:arial,sans-serif;font-size:13px"><br></div><div st=
-yle=3D"font-family:arial,sans-serif;font-size:13px">
-Thanks,</div><div style=3D"font-family:arial,sans-serif;font-size:13px">Ber=
-nie</div></div><div class=3D"gmail_extra"><br><br><div class=3D"gmail_quote=
-">On Fri, Oct 11, 2013 at 9:42 AM, Bernard Mentink <span dir=3D"ltr">&lt;<a=
- href=3D"mailto:bmentink@gmail.com" target=3D"_blank">bmentink@gmail.com</a=
->&gt;</span> wrote:<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex"><div dir=3D"ltr">Hi All,<div><br></div><div>=
-I am having trouble getting can modules loaded on boot on my Beaglebone Bla=
-ck.</div>
-<div><br></div><div>I can get the can device to show if I load the followin=
-g modules in this order:</div>
-<div><br></div><div>can-dev.ko</div><div>c_can.ko</div><div>c_can_platform.=
-ko =A0and</div><div><br></div><div>can.ko</div><div>can_raw.ko</div><div><b=
-r></div><div>I do not know how to get these modules loaded at boot.</div>
-
-<div><br></div><div>I tried re-configuring my kernel to have them built-in,=
- but that did not work.</div><div>I placed a defconfig file in my layer wit=
-h the changes but it does not seem to get picked up as it should according =
-to the yocto docs. The .config on the build directory is still the old one.=
-</div>
-
-<div><br></div><div>Any idea&#39;s?</div><div><br></div><div>Thanks,</div><=
-div>Bernie</div></div>
-</blockquote></div><br></div>
-
---089e0116057caf872704e891b730--
+------=_Part_802_1239876414.1381626212471--
