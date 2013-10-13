@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8BEEFE0167C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D27DE016F4
 	for <meta-ti@yoctoproject.org>; Sun, 13 Oct 2013 14:57:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6355052972; Sun, 13 Oct 2013 21:57:25 +0000 (UTC)
+	id 5F2D8529BD; Sun, 13 Oct 2013 21:57:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131013215725.6355052972@arago-project.org>
+Message-Id: <20131013215725.5F2D8529BD@arago-project.org>
 Date: Sun, 13 Oct 2013 21:57:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : machine conf: Set correct default ubi volume name for 335x and 437x
@@ -26,9 +26,9 @@ X-List-Received-Date: Sun, 13 Oct 2013 21:57:31 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 466575a7e7312b57c4b43241d16894dea8692049
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=466575a7e7312b57c4b43241d16894dea8692049
+Branch: dylan
+Commit: 76beabe375650b65b2da0c5bcf5bb3b3517fbf3b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=76beabe375650b65b2da0c5bcf5bb3b3517fbf3b
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Fri Oct 11 17:02:03 2013 -0500
