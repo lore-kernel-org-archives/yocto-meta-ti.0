@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9373FE01691
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 94BE8E016A1
 	for <meta-ti@yoctoproject.org>; Mon, 14 Oct 2013 09:33:54 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1A973529D3; Mon, 14 Oct 2013 16:33:51 +0000 (UTC)
+	id CD3B7529E3; Mon, 14 Oct 2013 16:33:53 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131014163351.1A973529D3@arago-project.org>
-Date: Mon, 14 Oct 2013 16:33:51 +0000 (UTC)
+Message-Id: <20131014163353.CD3B7529E3@arago-project.org>
+Date: Mon, 14 Oct 2013 16:33:53 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : recipes: cruft removal and seasonal cleanup
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Mon, 14 Oct 2013 16:33:54 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: b3df09902da0d2469a02e9975d404e26c4c5ec0e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b3df09902da0d2469a02e9975d404e26c4c5ec0e
+Branch: dylan
+Commit: d486c82e498fab1d1d25747c10fca68f5a95b451
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d486c82e498fab1d1d25747c10fca68f5a95b451
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Sun Oct 13 18:25:19 2013 -0400
