@@ -1,35 +1,28 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-ea0-f172.google.com (mail-ea0-f172.google.com
-	[209.85.215.172])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 55597E016F4
-	for <meta-ti@yoctoproject.org>; Sun, 13 Oct 2013 17:36:38 -0700 (PDT)
-Received: by mail-ea0-f172.google.com with SMTP id r16so3040516ead.17
-	for <meta-ti@yoctoproject.org>; Sun, 13 Oct 2013 17:36:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=UYzqrqM+O2/vn8TAVI/K9285SJPwNdCGkXb/ICPyfk8=;
-	b=UUuYxDYW8a8XnB54Ga4AKg2NKACkwmILEJA26BqN7htnRt1cKTkxZ3IQuv0yZPBQIX
-	wlo0TkzERrGLpUgsXtKA3uTyEYnrvSVdiABBmJQfp3JJcPXYXoKPpAx/777G9p0xZ2yq
-	Uktcn1qZmMqkkdOnWti0/XhC4To6//GYhOLlQIZyI5B+VLBek1L68qKF3cm8LbkmVDFQ
-	cyUz7AaP8p5M5H2EzIP2iCbSzU1VWcKIIvVH/OzM1ptWpfA518EIHNhA4iwBvwCprnYC
-	q2wUfZ4L/q6KJGUdC5pn7sjAnW+QCGeZw18uu1K2N+ICvKbb7NVFGMIGXRrPbAPu49im
-	WyVg==
+Return-Path: <denys@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5C8CE016F4
+	for <meta-ti@yoctoproject.org>; Sun, 13 Oct 2013 18:13:55 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9E1DrPT031456
+	for <meta-ti@yoctoproject.org>; Sun, 13 Oct 2013 20:13:53 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9E1DrWl017046
+	for <meta-ti@yoctoproject.org>; Sun, 13 Oct 2013 20:13:53 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Sun, 13 Oct 2013 20:13:53 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	r9E1DrJx028277	for <meta-ti@yoctoproject.org>; Sun, 13 Oct 2013 20:13:53
+	-0500
+Date: Sun, 13 Oct 2013 21:03:46 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <212462809.807.1381712626369.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-X-Received: by 10.14.218.197 with SMTP id k45mr51883477eep.32.1381710996521;
-	Sun, 13 Oct 2013 17:36:36 -0700 (PDT)
-Received: by 10.223.144.205 with HTTP; Sun, 13 Oct 2013 17:36:36 -0700 (PDT)
-In-Reply-To: <20131014002057.GD27046@denix.org>
-References: <CAFZh4h9H3bTQveLafJY-3rCz-qy=dqhVq36CTqFt4RCPqJWDcQ@mail.gmail.com>
-	<20131009180902.GB15357@edge>
-	<CAFZh4h8zkeU6JysvkAuHDPMES9NdQFPkbxxXPPcOQwO61r32PQ@mail.gmail.com>
-	<20131014002057.GD27046@denix.org>
-Date: Sun, 13 Oct 2013 20:36:36 -0400
-Message-ID: <CAFZh4h-aqYiZFtvj4n-PpHonUA6M1f2b8xspV7cAffMEEdJJGQ@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Kernel recipe that works with OECore + meta-ti fails with Poky + meta-ti
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-10-13_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,57 +35,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2013 00:36:39 -0000
-Content-Type: multipart/alternative; boundary=047d7b603af4214a0504e8a8a946
+X-List-Received-Date: Mon, 14 Oct 2013 01:13:56 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_806_1449088148.1381712626369"
 
---047d7b603af4214a0504e8a8a946
-Content-Type: text/plain; charset=ISO-8859-1
+------=_Part_806_1449088148.1381712626369
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Sun, Oct 13, 2013 at 8:20 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+<html>
+<head>
+<title>
+Status for 10/13/13
+</title>
+</head>
+<body>
 
-> On Wed, Oct 09, 2013 at 03:15:17PM -0400, Brian Hutchinson wrote:
-> > The other problem I saw was in OECore, I added the linux-libc-headers for
-> > 2.6.37.2 so packages would be built with headers that matched my TI PSP
-> > based kernel and I was able to get that to work.
->
-> BTW, we do have it in meta-arago-extras, if you want to use it:
->
->
-> http://arago-project.org/git/?p=meta-arago.git;a=blob;f=meta-arago-extras/recipes-kernel/linux-libc-headers/linux-libc-headers_2.6.37.2.bb;hb=HEAD
->
+<h2>Status for 10/13/13</h2>
 
-I stole it from somewhere.  It was Khem & Hillman's  patch I believe.
+<h2>BUILD_ID: build-2013-10-13_21-02-51</h2>
 
-Regards,
+<h2>Clean Build: false</h2>
 
-Brian
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
---047d7b603af4214a0504e8a8a946
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
 
-<div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On S=
-un, Oct 13, 2013 at 8:20 PM, Denys Dmytriyenko <span dir=3D"ltr">&lt;<a hre=
-f=3D"mailto:denys@ti.com" target=3D"_blank">denys@ti.com</a>&gt;</span> wro=
-te:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-=
-left:1px #ccc solid;padding-left:1ex">
-<div class=3D"im">On Wed, Oct 09, 2013 at 03:15:17PM -0400, Brian Hutchinso=
-n wrote:<br>
-</div><div class=3D"im">&gt; The other problem I saw was in OECore, I added=
- the linux-libc-headers for<br>
-&gt; 2.6.37.2 so packages would be built with headers that matched my TI PS=
-P<br>
-&gt; based kernel and I was able to get that to work.<br>
-<br>
-</div>BTW, we do have it in meta-arago-extras, if you want to use it:<br>
-<br>
-<a href=3D"http://arago-project.org/git/?p=3Dmeta-arago.git;a=3Dblob;f=3Dme=
-ta-arago-extras/recipes-kernel/linux-libc-headers/linux-libc-headers_2.6.37=
-.2.bb;hb=3DHEAD" target=3D"_blank">http://arago-project.org/git/?p=3Dmeta-a=
-rago.git;a=3Dblob;f=3Dmeta-arago-extras/recipes-kernel/linux-libc-headers/l=
-inux-libc-headers_2.6.37.2.bb;hb=3DHEAD</a><br>
-</blockquote><div><br></div><div>I stole it from somewhere.=A0 It was Khem =
-&amp; Hillman&#39;s=A0 patch I believe. <br><br></div><div>Regards,<br><br>=
-Brian</div><br></div><br></div></div>
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
 
---047d7b603af4214a0504e8a8a946--
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.10"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_806_1449088148.1381712626369--
