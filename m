@@ -1,31 +1,29 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7AA52E016E8
-	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 05:39:53 -0700 (PDT)
+Return-Path: <denys@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BB6BAE016E2
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 06:07:37 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9ICdqmY020708
-	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 07:39:52 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9ICdq7A025677
-	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 07:39:52 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
-	14.02.0342.003; Fri, 18 Oct 2013 07:39:52 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Hingolikar, Mrinmayee" <mrinmayee@ti.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCHv3] abefw: Firmware for OMAP4 and OMAP5 ABE
-Thread-Index: AQHOy/rKHsc2GMw3VkWgh1lWAhkZJZn6Zijw
-Date: Fri, 18 Oct 2013 12:39:52 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED101597C18F5@DLEE11.ent.ti.com>
-References: <20131018120834.GA3408@ti.com>
-In-Reply-To: <20131018120834.GA3408@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9ID7a2U029514
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 08:07:36 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9ID7aA0032464
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 08:07:36 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Fri, 18 Oct 2013 08:07:36 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9ID7aRM021018;
+	Fri, 18 Oct 2013 08:07:36 -0500
+Date: Fri, 18 Oct 2013 09:07:35 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Chase Maupin <Chase.Maupin@ti.com>
+Message-ID: <20131018130735.GA32736@edge>
+References: <1382099263-18561-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
-Subject: Re: [PATCHv3] abefw: Firmware for OMAP4 and OMAP5 ABE
+In-Reply-To: <1382099263-18561-1-git-send-email-Chase.Maupin@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCHv2] u-boot-ti-staging: update to 2013.10 release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,82 +36,60 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2013 12:39:55 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Oct 2013 13:07:39 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
->-----Original Message-----
->From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->bounces@yoctoproject.org] On Behalf Of Hingolikar, Mrinmayee
->Sent: Friday, October 18, 2013 7:09 AM
->To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [PATCHv3] abefw: Firmware for OMAP4 and OMAP5
->ABE
->
-> * The OMAP5 Audio Backend requires a 'firmware' to enable
->  sound. This recipe installs a prebuilt firmware. This
->  part is a hack, as in the current form, the firmware
->  cannot be cross-compiled. There is a plan to fix this
->  and hopefully, this recipe is short-lived. Once the code
->  is fixed, we should have new recipes that build the firmware
->  and clean up this recipe.
->
-> v2:
-> * Merged contents from abefw.inc and removed abefw.inc based
->  on review.
->
-> v3:
-> * Corrected license to BSD or GPLv2
-> * Add pandaboard as COMPATIBLE_MACHINE
-> * Add PR
->
->Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
->---
-> recipes-bsp/abefw/abefw_1.0.14.bb |   23 +++++++++++++++++++++++
-> 1 file changed, 23 insertions(+)
-> create mode 100644 recipes-bsp/abefw/abefw_1.0.14.bb
->
->diff --git a/recipes-bsp/abefw/abefw_1.0.14.bb b/recipes-
->bsp/abefw/abefw_1.0.14.bb
->new file mode 100644
->index 0000000..302bdcd
->--- /dev/null
->+++ b/recipes-bsp/abefw/abefw_1.0.14.bb
->@@ -0,0 +1,23 @@
->+SUMMARY =3D "Firmware for OMAP4 and OMAP5 ABE"
->+HOMEPAGE =3D "http://git.ti.com"
->+LICENSE =3D "BSD | GPLv2"
->+LIC_FILES_CHKSUM =3D
->"file://COPYING;md5=3D923db086ed9463ab3215b24d87e05ec5"
->+
->+PACKAGE_ARCH =3D "${MACHINE_ARCH}"
->+
->+COMPATIBLE_MACHINE =3D "pandaboard|omap5-evm"
->+
->+SRC_URI =3D "git://git.ti.com/glsdk/abefw-
->omap4plus.git;protocol=3Dgit"
->+
->+S =3D "${WORKDIR}/git"
->+
->+SRCREV =3D "ceccc0332264e39bdc51e54f80ea7256a3886c58"
+Ack, will push today.
 
-Seems OK but I would like this to be ?=3D
-
->+
->+PR =3D "r0"
->+
->+do_install() {
->+        mkdir -p ${D}/lib/firmware
->+        cp ${S}/firmware/omap4_abe_new ${D}/lib/firmware/
->+}
->+
->+FILES_${PN} +=3D "/lib/firmware/omap4_abe_new"
->--
->1.7.9.5
->
->_______________________________________________
->meta-ti mailing list
->meta-ti@yoctoproject.org
->https://lists.yoctoproject.org/listinfo/meta-ti
+On Fri, Oct 18, 2013 at 07:27:43AM -0500, Chase Maupin wrote:
+> * Update the U-Boot LICENSE md5sum for the new release.
+> 
+> * Update the PV for the new U-Boot release
+> 
+> * Add the SRCREV that points to the 2013.10 release
+> 
+> * Use the ti-u-boot-2013.10 branch
+> 
+> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> ---
+> * Updated in version 2
+>     * Changed BRANCH to ti-u-boot-2013.10
+> ---
+>  recipes-bsp/u-boot/u-boot-ti-staging_git.bb |    9 +++++----
+>  1 files changed, 5 insertions(+), 4 deletions(-)
+> 
+> diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
+> index a5882b0..ab6b038 100644
+> --- a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
+> +++ b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
+> @@ -2,16 +2,17 @@ require u-boot-ti.inc
+>  
+>  DESCRIPTION = "u-boot bootloader for TI devices"
+>  
+> -LIC_FILES_CHKSUM = "file://Licenses/README;md5=bc069111b5e5b1ed8bed98ae73b596ec"
+> +LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+>  
+> -PV = "2013.07+2013.10-rc4"
+> +PV = "2013.10"
+>  PR = "r0+gitr${SRCPV}"
+>  
+>  SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+>  
+> -BRANCH ?= "master"
+> +BRANCH ?= "ti-u-boot-2013.10"
+>  
+> -SRCREV = "0c5274e6f3231a3a28dafc1204b3f71a3534c520"
+> +# Corresponds to 2013.10
+> +SRCREV = "183acb700378a8cfc5d50a01a65de93fb2c24586"
+>  
+>  SPL_BINARY = "MLO"
+>  SPL_UART_BINARY = "u-boot-spl.bin"
+> -- 
+> 1.7.0.4
+> 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
