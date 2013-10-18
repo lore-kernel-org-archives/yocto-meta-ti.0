@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC6C3E01653
-	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 09:22:20 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC695E0162F
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 09:22:19 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E527052A8B; Fri, 18 Oct 2013 16:22:19 +0000 (UTC)
+	id 137FD52A77; Fri, 18 Oct 2013 16:22:19 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131018162219.E527052A8B@arago-project.org>
+Message-Id: <20131018162219.137FD52A77@arago-project.org>
 Date: Fri, 18 Oct 2013 16:22:19 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Chase Maupin : u-boot-ti-staging: update to 2013.10 release
@@ -26,9 +26,9 @@ X-List-Received-Date: Fri, 18 Oct 2013 16:22:20 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 3f3bad888972776b4740f7210e709b74362631f5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3f3bad888972776b4740f7210e709b74362631f5
+Branch: dylan
+Commit: 6d0651e0ac9d268b60133f950b28b76cfbd9d941
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6d0651e0ac9d268b60133f950b28b76cfbd9d941
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
 Date:   Fri Oct 18 07:27:43 2013 -0500
