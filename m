@@ -1,28 +1,33 @@
-Return-Path: <denys@ti.com>
+Return-Path: <mrinmayee@ti.com>
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E903E016D7
-	for <meta-ti@yoctoproject.org>; Thu, 17 Oct 2013 18:13:48 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E214E016E0
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 03:29:23 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9I1DlYh023132
-	for <meta-ti@yoctoproject.org>; Thu, 17 Oct 2013 20:13:47 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9I1DkC5004492
-	for <meta-ti@yoctoproject.org>; Thu, 17 Oct 2013 20:13:47 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 17 Oct 2013 20:13:46 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	r9I1Dkul005733	for <meta-ti@yoctoproject.org>; Thu, 17 Oct 2013 20:13:46
-	-0500
-Date: Thu, 17 Oct 2013 21:03:33 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1530189579.823.1382058213170.JavaMail.jenkins@puget>
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9IATMh7030960
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 05:29:22 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9IATMP0017343
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 05:29:22 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Fri, 18 Oct 2013 05:29:22 -0500
+Received: from [172.24.156.117] (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9IATL0L003277	for
+	<meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 05:29:21 -0500
+Message-ID: <52610D81.1020809@ti.com>
+Date: Fri, 18 Oct 2013 15:59:21 +0530
+From: Mrinmayee Hingolikar <mrinmayee@ti.com>
+Organization: Texas Instruments
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:17.0) Gecko/20130620 Thunderbird/17.0.7
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-10-17_21-01-44
+To: <meta-ti@yoctoproject.org>
+References: <1372849303-21311-1-git-send-email-mrinmayee@ti.com>
+	<CF956B779D819D41BBC043B7082161D5444C34@DBDE04.ent.ti.com>
+	<7D46E86EC0A8354091174257B2FED101596D51CE@DLEE11.ent.ti.com>
+	<20130821154954.GE24491@edge> <20130903174227.GF22235@edge>
+In-Reply-To: <20130903174227.GF22235@edge>
+Subject: Re: [PATCHv2] abefw: Firmware for OMAP5 ABE
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +40,132 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2013 01:13:48 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_822_106270548.1382058213150"
-
-------=_Part_822_106270548.1382058213150
-Content-Type: text/html; charset="UTF-8"
+X-List-Received-Date: Fri, 18 Oct 2013 10:29:24 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
 Content-Transfer-Encoding: 7bit
 
-<html>
-<head>
-<title>
-Status for 10/17/13
-</title>
-</head>
-<body>
-
-<h2>Status for 10/17/13</h2>
-
-<h2>BUILD_ID: build-2013-10-17_21-02-51</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.10"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+On 9/3/2013 11:12 PM, Denys Dmytriyenko wrote:
+> Mrinmayee,
+>
+> Ping. Do you have an ETA for addressing the comments below? Thanks.
+Sorry for the delayed response. I am sending the v3 for this patch
+addressing all the comments.
+>
+>
+> On Wed, Aug 21, 2013 at 11:49:54AM -0400, Denys Dmytriyenko wrote:
+>> On Wed, Aug 21, 2013 at 03:31:42PM +0000, Maupin, Chase wrote:
+>>>> -----Original Message-----
+>>>> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+>>>> bounces@yoctoproject.org] On Behalf Of Hingolikar, Mrinmayee
+>>>> Sent: Wednesday, August 21, 2013 6:48 AM
+>>>> To: Hingolikar, Mrinmayee; meta-ti@yoctoproject.org
+>>>> Subject: Re: [meta-ti] [PATCHv2] abefw: Firmware for OMAP5 ABE
+>>>>
+>>>> Ping for comments!
+>>> For some reason I don't see this in my e-mails for the original post.  Sorry 
+>>> for the delay.
+>> You are correct - there were no v2 submissions to the list on July 3rd. We 
+>> only reviewed the original patch before.
+>>
+>>
+>>>>> -----Original Message-----
+>>>>> From: Hingolikar, Mrinmayee
+>>>>> Sent: Wednesday, July 03, 2013 4:32 PM
+>>>>> To: meta-ti@yoctoproject.org
+>>>>> Cc: Hingolikar, Mrinmayee; Heroor, Siddharth
+>>>>> Subject: [PATCHv2] abefw: Firmware for OMAP5 ABE
+>>>>>
+>>>>> * The OMAP5 Audio Backend requires a 'firmware' to enable
+>>>>>   sound. This recipe installs a prebuilt firmware. This
+>>>>>   part is a hack, as in the current form, the firmware
+>>>>>   cannot be cross-compiled. There is a plan to fix this
+>>>>>   and hopefully, this recipe is short-lived. Once the code
+>>>>>   is fixed, we should have new recipes that build the firmware
+>>>>>   and clean up this recipe.
+>>>>>
+>>>>> v2:
+>>>>> * Merged contents from abefw.inc and removed abefw.inc based
+>>>>>   on review.
+>>>>>
+>>>>> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+>>>>> Signed-off-by: Siddharth Heroor <heroor@ti.com>
+>>>>> ---
+>>>>>  recipes-bsp/abefw/abefw_1.0.14.bb |   20 ++++++++++++++++++++
+>>>>>  1 files changed, 20 insertions(+), 0 deletions(-)  create mode
+>>>> 100644
+>>>>> recipes-bsp/abefw/abefw_1.0.14.bb
+>>>>>
+>>>>> diff --git a/recipes-bsp/abefw/abefw_1.0.14.bb b/recipes-
+>>>>> bsp/abefw/abefw_1.0.14.bb
+>>>>> new file mode 100644
+>>>>> index 0000000..8db71e4
+>>>>> --- /dev/null
+>>>>> +++ b/recipes-bsp/abefw/abefw_1.0.14.bb
+>>>>> @@ -0,0 +1,20 @@
+>>>>> +SUMMARY = "Firmware for OMAP5 ABE"
+>>>>> +HOMEPAGE = "http://git.ti.com"
+>>>>> +LICENSE = "BSD/GPLv2"
+>>> This seems wrong.  I thought the convention is "BSD | GPLv2" for either 
+>>> license or "BSD & GPLv2" if mixed license.
+>>>
+>>> If it is mixed then you probably need 2 entries in LIC_FILES_CHKSUM, one for 
+>>> each license.
+>>>
+>>> Also, does the GPLv2 use the "or later" clause such that it should be GPLv2+ 
+>>> ?
+>> This was already mentioned in one of the other patches.
+>>
+>>
+>>>>> +LIC_FILES_CHKSUM =
+>>>>> "file://COPYING;md5=923db086ed9463ab3215b24d87e05ec5"
+>>>>> +
+>>>>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+>>>>> +COMPATIBLE_MACHINE = "omap5-evm"
+>>>>> +
+>>>>> +SRC_URI = "git://git.ti.com/glsdk/abefw-
+>>>> omap4plus.git;protocol=git"
+>> The git repo itself says omap4plus - why is it limited to OMAP5 only? Can it 
+>> be enabled for OMAP4/Pandaboard too?
+>>
+>>
+>>> Not strictly required but PR = r0 here would help remind you to bump the PR 
+>>> in the future.
+>>>
+>>>>> +
+>>>>> +S = "${WORKDIR}/git"
+>>>>> +
+>>>>> +SRCREV = "ceccc0332264e39bdc51e54f80ea7256a3886c58"
+>>>>> +
+>>>>> +do_install() {
+>>>>> +        mkdir -p ${D}/lib/firmware
+>>>>> +        cp ${S}/firmware/omap4_abe_new ${D}/lib/firmware/ }
+>>>>> +
+>>>>> +FILES_${PN} += "/lib/firmware/omap4_abe_new"
+>>> I'm sure this has been discussed before, but do you see any confusion about 
+>>> this being omap5-evm only and yet the FW is omap4_abe_new?
+>>>
+>>>>> --
+>>>>> 1.7.0.4
+>>>> _______________________________________________
+>>>> meta-ti mailing list
+>>>> meta-ti@yoctoproject.org
+>>>> https://lists.yoctoproject.org/listinfo/meta-ti
+>>> _______________________________________________
+>>> meta-ti mailing list
+>>> meta-ti@yoctoproject.org
+>>> https://lists.yoctoproject.org/listinfo/meta-ti
+>> _______________________________________________
+>> meta-ti mailing list
+>> meta-ti@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/meta-ti
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
 
-------=_Part_822_106270548.1382058213150--
+-- 
+Regards,
+Mrinmayee
+
+
