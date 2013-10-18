@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24092E0162F
-	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 09:47:16 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF32EE0167D
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 09:47:23 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3116452972; Fri, 18 Oct 2013 16:47:16 +0000 (UTC)
+	id 31C1352972; Fri, 18 Oct 2013 16:47:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131018164716.3116452972@arago-project.org>
-Date: Fri, 18 Oct 2013 16:47:16 +0000 (UTC)
+Message-Id: <20131018164723.31C1352972@arago-project.org>
+Date: Fri, 18 Oct 2013 16:47:23 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: update to 3. 12-rc5 and latest merges of feature trees
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2013 16:47:17 -0000
+X-List-Received-Date: Fri, 18 Oct 2013 16:47:26 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: c11504664990f007c3903d349e7cc135a904f8e2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c11504664990f007c3903d349e7cc135a904f8e2
+Branch: dylan
+Commit: f61008a20340373247ebfd8f381e377b21f11afe
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f61008a20340373247ebfd8f381e377b21f11afe
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Oct 18 12:25:30 2013 -0400
@@ -43,7 +43,7 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  1 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_git.bb
-index 01ba1da..57628df 100644
+index f26b223..57628df 100644
 --- a/recipes-kernel/linux/linux-ti-staging_git.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_git.bb
 @@ -31,11 +31,11 @@ S = "${WORKDIR}/git"
@@ -56,7 +56,7 @@ index 01ba1da..57628df 100644
 +PV = "3.11+3.12-rc5"
  
  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+-MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
 +MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
  PR = "${MACHINE_KERNEL_PR}"
  
