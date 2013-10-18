@@ -1,31 +1,31 @@
 Return-Path: <chase.maupin@ti.com>
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43F0FE016E2
-	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 05:38:01 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8CDC3E016E2
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 05:38:02 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9ICc1MH006222
-	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 07:38:01 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9ICc1qJ023718
-	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 07:38:01 -0500
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9ICc2gN006231
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 07:38:02 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9ICc2mY023849
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 07:38:02 -0500
 Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
-	14.02.0342.003; Fri, 18 Oct 2013 07:38:01 -0500
+	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
+	14.02.0342.003; Fri, 18 Oct 2013 07:38:02 -0500
 From: "Maupin, Chase" <chase.maupin@ti.com>
 To: "Hingolikar, Mrinmayee" <mrinmayee@ti.com>, "meta-ti@yoctoproject.org"
 	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH] linux-ti-glsdk: Update to latest fixes
-Thread-Index: AQHOy/qcyyOtUsqTBEK61JFV5zlbaZn6ZbNw
-Date: Fri, 18 Oct 2013 12:38:00 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED101597C1821@DLEE11.ent.ti.com>
-References: <20131018120716.GA3238@ti.com>
-In-Reply-To: <20131018120716.GA3238@ti.com>
+Thread-Topic: [meta-ti] [PATCH] u-boot-glsdk: Update to latest fixes
+Thread-Index: AQHOy/q7JBppMSCgn0Ci85kXtQvIEJn6ZXmQ
+Date: Fri, 18 Oct 2013 12:38:01 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED101597C1828@DLEE11.ent.ti.com>
+References: <20131018120809.GA3385@ti.com>
+In-Reply-To: <20131018120809.GA3385@ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-Subject: Re: [PATCH] linux-ti-glsdk: Update to latest fixes
+Subject: Re: [PATCH] u-boot-glsdk: Update to latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,54 +46,53 @@ Content-Transfer-Encoding: quoted-printable
 >-----Original Message-----
 >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
 >bounces@yoctoproject.org] On Behalf Of Hingolikar, Mrinmayee
->Sent: Friday, October 18, 2013 7:07 AM
+>Sent: Friday, October 18, 2013 7:08 AM
 >To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [PATCH] linux-ti-glsdk: Update to latest fixes
+>Subject: [meta-ti] [PATCH] u-boot-glsdk: Update to latest fixes
 >
-> * Kernel source migration from git.ti.com to omapzoom.org
-> * Add support for VIP and VPE
-> * Add wilink/wlan support
-> * Enable rpmsg/remoteproc driver for multimedia
+> * Migration of u-boot code to omapzoom.org. The development tree
+>is shared
+
+Same question.  Why a need to move to omapzoom?
+
+>   with the Android team.
+> * Enable UART boot mode for dra7xx
+> * Add VIP,VPE and Ethernet crossbar setting for dra7xx
+> * Add SPL API, QSPI, and serial flash support of dra7xx
 >
 >Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
 >---
-> recipes-kernel/linux/linux-ti-glsdk_3.8.bb |    8 ++++----
-> 1 file changed, 4 insertions(+), 4 deletions(-)
+> recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb |    6 +++---
+> 1 file changed, 3 insertions(+), 3 deletions(-)
 >
->diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-
->kernel/linux/linux-ti-glsdk_3.8.bb
->index 9e3e499..82ae16e 100644
->--- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
->+++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
->@@ -18,14 +18,14 @@ DEFAULT_PREFERENCE =3D "-1"
+>diff --git a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
+>b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
+>index d60ef44..4dde4e3 100644
+>--- a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
+>+++ b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
+>@@ -6,11 +6,11 @@ PR =3D "r0+gitr${SRCPV}"
 >
-> S =3D "${WORKDIR}/git"
+> DEFAULT_PREFERENCE =3D "-1"
 >
->-BRANCH =3D "master"
->+BRANCH =3D "p-ti-glsdk-3.8.y"
+>-SRC_URI =3D "git://git.ti.com/glsdk/glsdk-u-
+>boot.git;protocol=3Dgit;branch=3D${BRANCH}"
+>+SRC_URI =3D "git://git.omapzoom.org/repo/u-
+>boot.git;protocol=3Dgit;branch=3D${BRANCH}"
+>
+>-BRANCH ?=3D "master"
+>+BRANCH =3D "p-ti-u-boot-2013.04"
 
-Use ?=3D
+Why remove the optional setting?
 
 >
->-SRCREV =3D "6076e6882d1d6a64b104e42e56a3eada36605cb3"
->+SRCREV =3D "cc16f99176bf083829c028f9af5b8eb560debcc1"
+>-SRCREV =3D "81836e8cc84bd6523d9a4e187965dcd1633c4bc9"
+>+SRCREV =3D "76447484441a4b8e00840a2bde74e66dbac9e631"
 
-Use ?=3D
+Should be ?=3D
 
-> PV =3D "3.8.13"
 >
-> # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause
->a rebuild
->-MACHINE_KERNEL_PR_append =3D "b+gitr${SRCPV}"
->+MACHINE_KERNEL_PR_append =3D "c+gitr${SRCPV}"
->
->-SRC_URI =3D "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-
->kernel.git;protocol=3Dgit;branch=3D${BRANCH} \
->+SRC_URI =3D
->"git://git.omapzoom.org/kernel/omap.git;protocol=3Dgit;branch=3D${BRAN
->CH} \
->            file://defconfig \
->           "
+> SPL_BINARY =3D "MLO"
+> SPL_UART_BINARY =3D "u-boot-spl.bin"
 >--
 >1.7.9.5
 >
