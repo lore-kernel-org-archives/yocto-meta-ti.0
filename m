@@ -1,26 +1,26 @@
-Return-Path: <chase.maupin@ti.com>
+Return-Path: <mrinmayee@ti.com>
 Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3EDE6E016E4
-	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 04:37:14 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 97B29E016E5
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 05:07:18 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9IBbCfc022186
-	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 06:37:12 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9IC7ICb024366
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 07:07:18 -0500
 Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9IBbCD7008112
-	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 06:37:12 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9IC7Ioj013973
+	for <meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 07:07:18 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
 	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Fri, 18 Oct 2013 06:37:12 -0500
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9IBb95Q020225;
-	Fri, 18 Oct 2013 06:37:11 -0500
-From: Chase Maupin <Chase.Maupin@ti.com>
+	Fri, 18 Oct 2013 07:07:18 -0500
+Received: from ti.com (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9IC7G3H022017	for
+	<meta-ti@yoctoproject.org>; Fri, 18 Oct 2013 07:07:17 -0500
+Date: Fri, 18 Oct 2013 17:37:16 +0530
+From: Mrinmayee Hingolikar <mrinmayee@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 18 Oct 2013 07:27:43 -0500
-Message-ID: <1382099263-18561-1-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
+Message-ID: <20131018120716.GA3238@ti.com>
 MIME-Version: 1.0
-Subject: [PATCHv2] u-boot-ti-staging: update to 2013.10 release
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: [PATCH] linux-ti-glsdk: Update to latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,52 +33,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2013 11:37:18 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 18 Oct 2013 12:07:21 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-* Update the U-Boot LICENSE md5sum for the new release.
+ * Kernel source migration from git.ti.com to omapzoom.org
+ * Add support for VIP and VPE
+ * Add wilink/wlan support
+ * Enable rpmsg/remoteproc driver for multimedia
 
-* Update the PV for the new U-Boot release
-
-* Add the SRCREV that points to the 2013.10 release
-
-* Use the ti-u-boot-2013.10 branch
-
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
 ---
-* Updated in version 2
-    * Changed BRANCH to ti-u-boot-2013.10
----
- recipes-bsp/u-boot/u-boot-ti-staging_git.bb |    9 +++++----
- 1 files changed, 5 insertions(+), 4 deletions(-)
+ recipes-kernel/linux/linux-ti-glsdk_3.8.bb |    8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
-index a5882b0..ab6b038 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_git.bb
-@@ -2,16 +2,17 @@ require u-boot-ti.inc
+diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+index 9e3e499..82ae16e 100644
+--- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
++++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+@@ -18,14 +18,14 @@ DEFAULT_PREFERENCE = "-1"
  
- DESCRIPTION = "u-boot bootloader for TI devices"
+ S = "${WORKDIR}/git"
  
--LIC_FILES_CHKSUM = "file://Licenses/README;md5=bc069111b5e5b1ed8bed98ae73b596ec"
-+LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+-BRANCH = "master"
++BRANCH = "p-ti-glsdk-3.8.y"
  
--PV = "2013.07+2013.10-rc4"
-+PV = "2013.10"
- PR = "r0+gitr${SRCPV}"
+-SRCREV = "6076e6882d1d6a64b104e42e56a3eada36605cb3"
++SRCREV = "cc16f99176bf083829c028f9af5b8eb560debcc1"
+ PV = "3.8.13"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
  
--BRANCH ?= "master"
-+BRANCH ?= "ti-u-boot-2013.10"
- 
--SRCREV = "0c5274e6f3231a3a28dafc1204b3f71a3534c520"
-+# Corresponds to 2013.10
-+SRCREV = "183acb700378a8cfc5d50a01a65de93fb2c24586"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+-SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-kernel.git;protocol=git;branch=${BRANCH} \
++SRC_URI = "git://git.omapzoom.org/kernel/omap.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+           "
 -- 
-1.7.0.4
+1.7.9.5
 
 
