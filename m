@@ -1,30 +1,44 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E9900E0043A
-	for <meta-ti@yoctoproject.org>; Sat, 19 Oct 2013 09:53:24 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9JGrGQp022095;
-	Sat, 19 Oct 2013 11:53:16 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9JGrGwM015219;
-	Sat, 19 Oct 2013 11:53:16 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Sat, 19 Oct 2013 11:53:16 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9JGrGbY018688;
-	Sat, 19 Oct 2013 11:53:16 -0500
-Date: Sat, 19 Oct 2013 12:53:15 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-Message-ID: <20131019165314.GL2127@edge>
-References: <alpine.DEB.2.02.1310190646210.20906@oneiric>
-	<alpine.DEB.2.02.1310190717170.9159@oneiric>
+Return-Path: <rstreif@linuxfoundation.org>
+Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C767EE012F0
+	for <meta-ti@yoctoproject.org>; Sat, 19 Oct 2013 11:53:23 -0700 (PDT)
+Received: by mail-ee0-f49.google.com with SMTP id d41so2724960eek.36
+	for <meta-ti@yoctoproject.org>; Sat, 19 Oct 2013 11:53:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=SCPxgJwml2MZZmHVU4ZGilSy1rmVvUk++d+XUpNAk34=;
+	b=gKKbXBDxWwUEye6/Q4r4F2k8V/dtuoyg33z4+fv09MywtiECjHixPK4oPSVOoy6pOz
+	RHAoybKMYrfQOfO8Ep99lPeGJceTe1FPdOoEv17JAbrg3o5pYVx7+fufRjOvmC+FPT+8
+	4dKrfYB6cakdU1F4DmRNav04gbcD72ZcSWKho=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=SCPxgJwml2MZZmHVU4ZGilSy1rmVvUk++d+XUpNAk34=;
+	b=eyJN+OjbaWj+azREWBwGXtPiAS0TakaQYHGv8BpYocAn7nhLXu1Xw4dxcKpY1ap9Rc
+	P4LGo828LC9SxqsRuW0EPyd1nw4MFvg9I74kFe5SgAWH81wAKwrSDgLP1I34MLoBbyRc
+	5mPuTNRk6uJ23VcSBL2voKe8aAcnOcADhuPp1es3U/2rkWoXHpJxx2XqskXalH9lMFZo
+	t9Vx/XWo+ENRNK97AFsIw4B9lIBgZO78rfkgW/xjQwsxc6o0HZV0/Xoh3QoGwlAZjCfd
+	b1FGaEjf/4iwSERPW1ZUTLKdklHrYLq/Xebq4k/7Pe54+D6rhBsVi614fKVXzNuXoSG3
+	L2hg==
+X-Gm-Message-State: ALoCoQkIJXpWIQJMBgksP/uxCr9cjLDjET+OcleA5s3DshrQrDvXNhU6M9NqUJ9FmlY0uLkpZOuw
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.02.1310190717170.9159@oneiric>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: using yocto and meta-ti to build for beaglebone black?
+X-Received: by 10.15.77.132 with SMTP id p4mr816971eey.95.1382208802280; Sat,
+	19 Oct 2013 11:53:22 -0700 (PDT)
+Received: by 10.223.147.133 with HTTP; Sat, 19 Oct 2013 11:53:22 -0700 (PDT)
+In-Reply-To: <20131019023954.GK2127@edge>
+References: <CA+gsK-p49VYtzviOwgtzssxxXnAS4Eku0Y95bsFL5LvT+v=9Sw@mail.gmail.com>
+	<20131017214528.GC30989@edge>
+	<CA+gsK-qKLdXTq1PJEmXLp0d5n5wEYf+6Na+pFj+UwnWLO_dt2g@mail.gmail.com>
+	<20131019023954.GK2127@edge>
+Date: Sat, 19 Oct 2013 11:53:22 -0700
+Message-ID: <CA+gsK-q8W-wAP-rBhy7RgHUddsbdE_SaNOgyfFQ+zj2ksSidKw@mail.gmail.com>
+From: Rudolf Streif <rstreif@linuxfoundation.org>
+To: Denys Dmytriyenko <denys@ti.com>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: AM335x EVM and core-image-sato
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,50 +51,137 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Oct 2013 16:53:27 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 19 Oct 2013 18:53:26 -0000
+Content-Type: multipart/alternative; boundary=001a11c326aeaa695d04e91c9050
 
-On Sat, Oct 19, 2013 at 07:22:31AM -0400, Robert P. J. Day wrote:
-> On Sat, 19 Oct 2013, Robert P. J. Day wrote:
-> 
-> >
-> >   a couple quick questions. first, as an example for a tutorial, i
-> > want to show using yocto and meta-ti to build a simple
-> > (core-image-minimal?) for a BBB. it seems simple enough -- i just
-> > configured a new build directory, added the meta-ti layer, set MACHINE
-> > to "beaglebone" and it's cranking away on all 8 cores as we speak.
-> >
-> >   i'm well aware of the recent u-boot uImage->zImage switch, which
-> > makes me happy. :-) so as long as i get valid artifacts dumped into
-> > the images/ directory when this is over, i figure i can take it from
-> > there. as i'm using the master branch for everything (oe-core,
-> > meta-ti), should this just work?
-> >
-> >   also, i just noticed the meta-ti recipe for "x-load". isn't this
-> > just for generating the "MLO" file required by a number of TI boards
-> > that u-boot takes care of these days? what's the relationship between
-> > those two? is x-load just for TI machines for which u-boot doesn't
-> > generate an appropriate MLO file?
+--001a11c326aeaa695d04e91c9050
+Content-Type: text/plain; charset=ISO-8859-1
 
-x-load is deprecated. It's kept for old platforms only.
+Thanks, Denys.
 
 
->   at risk of adding another question to this earlier post, my build of
-> a core-image-minimal worked, and among other generated artifacts in
-> images/beaglebone/, i have the files:
-> 
->  * MLO -> MLO-beaglebone-2013.10-r0+gitrAUTOINC+183acb7003
->  * u-boot-spl.bin-beaglebone-2013.10-r0+gitrAUTOINC+183acb7003
-> 
-> which are very close in size. i'm used to just installing the MLO
-> file, so what's the difference here? what am i supposed to do with the
-> "spl" file?
+Have you tried the latest update to 3.12-rc5? That combination seems to be
+> building and booting fine, according to our automated reports:
+>
+> http://article.gmane.org/gmane.linux.embedded.yocto.meta-arago/1245
+>
+> Yes, I tried 3.12-rc3 which worked, 3.12-rc4 which did not, as well as
+3.12-rc5 which does not work either.
 
-The second one is SPL/UART:
 
-http://processors.wiki.ti.com/index.php/AM335x_U-Boot_User's_Guide#Boot_Over_UART
 
--- 
-Denys
+>
+> > One step forward, two steps back. Pulled again, and this time build fails
+> > because branch ti-linux-312.y is not available
+> The branch was and is called ti-linux-3.12.y and it hasn't changed since
+> the
+> beginning of 3.12 integration and is still there:
+>
+>
+> http://git.ti.com/gitweb/?p=ti-linux-kernel/ti-linux-kernel.git;a=shortlog;h=refs/heads/ti-linux-3.12.y
+>
+>
+> Fetcher failed on it during the day yesterday. But it worked again at
+night. Maybe a glitch. Although the Gitorious web frontend responds with an
+error message when trying to explore the branch tree.
 
+
+>  If you want to use meta-ti master,
+> then the corresponding commit ID is
+> c11504664990f007c3903d349e7cc135a904f8e2.
+>
+>  I used the master branch and the exact commit you mentioned above. See
+[1]. I will try again.
+
+Thanks,
+Rudi
+
+
+
+[1]
+Build Configuration:
+BB_VERSION        = "1.21.0"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "Fedora-18"
+TARGET_SYS        = "arm-poky-linux-gnueabi"
+MACHINE           = "am335x-evm"
+DISTRO            = "poky"
+DISTRO_VERSION    = "1.5+snapshot-20131019"
+TUNE_FEATURES     = "armv7a vfp neon"
+TARGET_FPU        = "vfp-neon"
+meta-yocto        = "master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4"
+meta-ti           = "master:c11504664990f007c3903d349e7cc135a904f8e2"
+meta-oe           = "master:f8903f53db717294d63a8d79b5ef7ca34b3c189e"
+meta              = "master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4"
+
+--001a11c326aeaa695d04e91c9050
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Thanks, Denys.<div class=3D"gmail_extra"><br><br><div clas=
+s=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
+ 0px 0.8ex;border-left-width:1px;border-left-color:rgb(204,204,204);border-=
+left-style:solid;padding-left:1ex">
+Have you tried the latest update to 3.12-rc5? That combination seems to be<=
+br>
+building and booting fine, according to our automated reports:<br>
+<br>
+<a href=3D"http://article.gmane.org/gmane.linux.embedded.yocto.meta-arago/1=
+245" target=3D"_blank">http://article.gmane.org/gmane.linux.embedded.yocto.=
+meta-arago/1245</a><br>
+<div class=3D"im"><br></div></blockquote><div>Yes, I tried 3.12-rc3 which w=
+orked, 3.12-rc4 which did not, as well as 3.12-rc5 which does not work eith=
+er.</div><div><br></div><div>=A0</div><blockquote class=3D"gmail_quote" sty=
+le=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-color:rgb(=
+204,204,204);border-left-style:solid;padding-left:1ex">
+<div class=3D"im">
+<br>
+&gt; One step forward, two steps back. Pulled again, and this time build fa=
+ils<br>
+&gt; because branch ti-linux-312.y is not available<br>
+</div>The branch was and is called ti-linux-3.12.y and it hasn&#39;t change=
+d since the<br>
+beginning of 3.12 integration and is still there:<br>
+<br>
+<a href=3D"http://git.ti.com/gitweb/?p=3Dti-linux-kernel/ti-linux-kernel.gi=
+t;a=3Dshortlog;h=3Drefs/heads/ti-linux-3.12.y" target=3D"_blank">http://git=
+.ti.com/gitweb/?p=3Dti-linux-kernel/ti-linux-kernel.git;a=3Dshortlog;h=3Dre=
+fs/heads/ti-linux-3.12.y</a><br>
+
+<div class=3D"im"><br>
+<br></div></blockquote><div>Fetcher failed on it during the day yesterday. =
+But it worked again at night. Maybe a glitch. Although the Gitorious web fr=
+ontend responds with an error message when trying to explore the branch tre=
+e.</div>
+<div>=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
+ 0.8ex;border-left-width:1px;border-left-color:rgb(204,204,204);border-left=
+-style:solid;padding-left:1ex"><div class=3D"im"><span style=3D"color:rgb(3=
+4,34,34)">=A0If you want to use meta-ti master,</span><br>
+</div>
+then the corresponding commit ID is c11504664990f007c3903d349e7cc135a904f8e=
+2.<br>
+<span class=3D""><font color=3D"#888888"><br></font></span></blockquote><di=
+v>=A0I used the master branch and the exact commit you mentioned above. See=
+ [1]. I will try again.</div><div><br></div><div>Thanks,</div><div>Rudi</di=
+v>
+<div><br></div><div><br></div><div><br></div><div>[1]</div><div><div>Build =
+Configuration:</div><div>BB_VERSION =A0 =A0 =A0 =A0=3D &quot;1.21.0&quot;</=
+div><div>BUILD_SYS =A0 =A0 =A0 =A0 =3D &quot;x86_64-linux&quot;</div><div>N=
+ATIVELSBSTRING =A0 =3D &quot;Fedora-18&quot;</div>
+<div>TARGET_SYS =A0 =A0 =A0 =A0=3D &quot;arm-poky-linux-gnueabi&quot;</div>=
+<div>MACHINE =A0 =A0 =A0 =A0 =A0 =3D &quot;am335x-evm&quot;</div><div>DISTR=
+O =A0 =A0 =A0 =A0 =A0 =A0=3D &quot;poky&quot;</div><div>DISTRO_VERSION =A0 =
+=A0=3D &quot;1.5+snapshot-20131019&quot;</div>
+<div>TUNE_FEATURES =A0 =A0 =3D &quot;armv7a vfp neon&quot;</div><div>TARGET=
+_FPU =A0 =A0 =A0 =A0=3D &quot;vfp-neon&quot;</div><div>meta-yocto =A0 =A0 =
+=A0 =A0=3D &quot;master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4&quot;</div=
+><div>meta-ti =A0 =A0 =A0 =A0 =A0 =3D &quot;master:c11504664990f007c3903d34=
+9e7cc135a904f8e2&quot;</div>
+<div>meta-oe =A0 =A0 =A0 =A0 =A0 =3D &quot;master:f8903f53db717294d63a8d79b=
+5ef7ca34b3c189e&quot;</div><div>meta =A0 =A0 =A0 =A0 =A0 =A0 =A0=3D &quot;m=
+aster:9a1dce10bdc9254bb38e0e54199f23ae55e209a4&quot; =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0</div>
+</div></div>
+</div></div>
+
+--001a11c326aeaa695d04e91c9050--
