@@ -1,44 +1,28 @@
-Return-Path: <rstreif@linuxfoundation.org>
-Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C767EE012F0
-	for <meta-ti@yoctoproject.org>; Sat, 19 Oct 2013 11:53:23 -0700 (PDT)
-Received: by mail-ee0-f49.google.com with SMTP id d41so2724960eek.36
-	for <meta-ti@yoctoproject.org>; Sat, 19 Oct 2013 11:53:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linuxfoundation.org; s=google;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=SCPxgJwml2MZZmHVU4ZGilSy1rmVvUk++d+XUpNAk34=;
-	b=gKKbXBDxWwUEye6/Q4r4F2k8V/dtuoyg33z4+fv09MywtiECjHixPK4oPSVOoy6pOz
-	RHAoybKMYrfQOfO8Ep99lPeGJceTe1FPdOoEv17JAbrg3o5pYVx7+fufRjOvmC+FPT+8
-	4dKrfYB6cakdU1F4DmRNav04gbcD72ZcSWKho=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=SCPxgJwml2MZZmHVU4ZGilSy1rmVvUk++d+XUpNAk34=;
-	b=eyJN+OjbaWj+azREWBwGXtPiAS0TakaQYHGv8BpYocAn7nhLXu1Xw4dxcKpY1ap9Rc
-	P4LGo828LC9SxqsRuW0EPyd1nw4MFvg9I74kFe5SgAWH81wAKwrSDgLP1I34MLoBbyRc
-	5mPuTNRk6uJ23VcSBL2voKe8aAcnOcADhuPp1es3U/2rkWoXHpJxx2XqskXalH9lMFZo
-	t9Vx/XWo+ENRNK97AFsIw4B9lIBgZO78rfkgW/xjQwsxc6o0HZV0/Xoh3QoGwlAZjCfd
-	b1FGaEjf/4iwSERPW1ZUTLKdklHrYLq/Xebq4k/7Pe54+D6rhBsVi614fKVXzNuXoSG3
-	L2hg==
-X-Gm-Message-State: ALoCoQkIJXpWIQJMBgksP/uxCr9cjLDjET+OcleA5s3DshrQrDvXNhU6M9NqUJ9FmlY0uLkpZOuw
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84C06E01719
+	for <meta-ti@yoctoproject.org>; Sat, 19 Oct 2013 18:13:51 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9K1DoCi011293
+	for <meta-ti@yoctoproject.org>; Sat, 19 Oct 2013 20:13:50 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9K1DolQ009920
+	for <meta-ti@yoctoproject.org>; Sat, 19 Oct 2013 20:13:50 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
+	Sat, 19 Oct 2013 20:13:50 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	r9K1DoVJ019665	for <meta-ti@yoctoproject.org>; Sat, 19 Oct 2013 20:13:50
+	-0500
+Date: Sat, 19 Oct 2013 21:03:33 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <764107895.835.1382231013859.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-X-Received: by 10.15.77.132 with SMTP id p4mr816971eey.95.1382208802280; Sat,
-	19 Oct 2013 11:53:22 -0700 (PDT)
-Received: by 10.223.147.133 with HTTP; Sat, 19 Oct 2013 11:53:22 -0700 (PDT)
-In-Reply-To: <20131019023954.GK2127@edge>
-References: <CA+gsK-p49VYtzviOwgtzssxxXnAS4Eku0Y95bsFL5LvT+v=9Sw@mail.gmail.com>
-	<20131017214528.GC30989@edge>
-	<CA+gsK-qKLdXTq1PJEmXLp0d5n5wEYf+6Na+pFj+UwnWLO_dt2g@mail.gmail.com>
-	<20131019023954.GK2127@edge>
-Date: Sat, 19 Oct 2013 11:53:22 -0700
-Message-ID: <CA+gsK-q8W-wAP-rBhy7RgHUddsbdE_SaNOgyfFQ+zj2ksSidKw@mail.gmail.com>
-From: Rudolf Streif <rstreif@linuxfoundation.org>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: AM335x EVM and core-image-sato
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-10-19_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,137 +35,168 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Oct 2013 18:53:26 -0000
-Content-Type: multipart/alternative; boundary=001a11c326aeaa695d04e91c9050
+X-List-Received-Date: Sun, 20 Oct 2013 01:13:54 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_834_10139544.1382231013858"
 
---001a11c326aeaa695d04e91c9050
-Content-Type: text/plain; charset=ISO-8859-1
+------=_Part_834_10139544.1382231013858
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Thanks, Denys.
+<html>
+<head>
+<title>
+Status for 10/19/13
+</title>
+</head>
+<body>
+
+<h2>Status for 10/19/13</h2>
+
+<h2>BUILD_ID: build-2013-10-19_21-02-51</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.10"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-Have you tried the latest update to 3.12-rc5? That combination seems to be
-> building and booting fine, according to our automated reports:
->
-> http://article.gmane.org/gmane.linux.embedded.yocto.meta-arago/1245
->
-> Yes, I tried 3.12-rc3 which worked, 3.12-rc4 which did not, as well as
-3.12-rc5 which does not work either.
-
-
-
->
-> > One step forward, two steps back. Pulled again, and this time build fails
-> > because branch ti-linux-312.y is not available
-> The branch was and is called ti-linux-3.12.y and it hasn't changed since
-> the
-> beginning of 3.12 integration and is still there:
->
->
-> http://git.ti.com/gitweb/?p=ti-linux-kernel/ti-linux-kernel.git;a=shortlog;h=refs/heads/ti-linux-3.12.y
->
->
-> Fetcher failed on it during the day yesterday. But it worked again at
-night. Maybe a glitch. Although the Gitorious web frontend responds with an
-error message when trying to explore the branch tree.
-
-
->  If you want to use meta-ti master,
-> then the corresponding commit ID is
-> c11504664990f007c3903d349e7cc135a904f8e2.
->
->  I used the master branch and the exact commit you mentioned above. See
-[1]. I will try again.
-
-Thanks,
-Rudi
-
-
-
-[1]
-Build Configuration:
-BB_VERSION        = "1.21.0"
-BUILD_SYS         = "x86_64-linux"
-NATIVELSBSTRING   = "Fedora-18"
-TARGET_SYS        = "arm-poky-linux-gnueabi"
-MACHINE           = "am335x-evm"
-DISTRO            = "poky"
-DISTRO_VERSION    = "1.5+snapshot-20131019"
-TUNE_FEATURES     = "armv7a vfp neon"
-TARGET_FPU        = "vfp-neon"
-meta-yocto        = "master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4"
-meta-ti           = "master:c11504664990f007c3903d349e7cc135a904f8e2"
-meta-oe           = "master:f8903f53db717294d63a8d79b5ef7ca34b3c189e"
-meta              = "master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4"
-
---001a11c326aeaa695d04e91c9050
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Thanks, Denys.<div class=3D"gmail_extra"><br><br><div clas=
-s=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
- 0px 0.8ex;border-left-width:1px;border-left-color:rgb(204,204,204);border-=
-left-style:solid;padding-left:1ex">
-Have you tried the latest update to 3.12-rc5? That combination seems to be<=
-br>
-building and booting fine, according to our automated reports:<br>
-<br>
-<a href=3D"http://article.gmane.org/gmane.linux.embedded.yocto.meta-arago/1=
-245" target=3D"_blank">http://article.gmane.org/gmane.linux.embedded.yocto.=
-meta-arago/1245</a><br>
-<div class=3D"im"><br></div></blockquote><div>Yes, I tried 3.12-rc3 which w=
-orked, 3.12-rc4 which did not, as well as 3.12-rc5 which does not work eith=
-er.</div><div><br></div><div>=A0</div><blockquote class=3D"gmail_quote" sty=
-le=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-color:rgb(=
-204,204,204);border-left-style:solid;padding-left:1ex">
-<div class=3D"im">
-<br>
-&gt; One step forward, two steps back. Pulled again, and this time build fa=
-ils<br>
-&gt; because branch ti-linux-312.y is not available<br>
-</div>The branch was and is called ti-linux-3.12.y and it hasn&#39;t change=
-d since the<br>
-beginning of 3.12 integration and is still there:<br>
-<br>
-<a href=3D"http://git.ti.com/gitweb/?p=3Dti-linux-kernel/ti-linux-kernel.gi=
-t;a=3Dshortlog;h=3Drefs/heads/ti-linux-3.12.y" target=3D"_blank">http://git=
-.ti.com/gitweb/?p=3Dti-linux-kernel/ti-linux-kernel.git;a=3Dshortlog;h=3Dre=
-fs/heads/ti-linux-3.12.y</a><br>
-
-<div class=3D"im"><br>
-<br></div></blockquote><div>Fetcher failed on it during the day yesterday. =
-But it worked again at night. Maybe a glitch. Although the Gitorious web fr=
-ontend responds with an error message when trying to explore the branch tre=
-e.</div>
-<div>=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left-width:1px;border-left-color:rgb(204,204,204);border-left=
--style:solid;padding-left:1ex"><div class=3D"im"><span style=3D"color:rgb(3=
-4,34,34)">=A0If you want to use meta-ti master,</span><br>
-</div>
-then the corresponding commit ID is c11504664990f007c3903d349e7cc135a904f8e=
-2.<br>
-<span class=3D""><font color=3D"#888888"><br></font></span></blockquote><di=
-v>=A0I used the master branch and the exact commit you mentioned above. See=
- [1]. I will try again.</div><div><br></div><div>Thanks,</div><div>Rudi</di=
-v>
-<div><br></div><div><br></div><div><br></div><div>[1]</div><div><div>Build =
-Configuration:</div><div>BB_VERSION =A0 =A0 =A0 =A0=3D &quot;1.21.0&quot;</=
-div><div>BUILD_SYS =A0 =A0 =A0 =A0 =3D &quot;x86_64-linux&quot;</div><div>N=
-ATIVELSBSTRING =A0 =3D &quot;Fedora-18&quot;</div>
-<div>TARGET_SYS =A0 =A0 =A0 =A0=3D &quot;arm-poky-linux-gnueabi&quot;</div>=
-<div>MACHINE =A0 =A0 =A0 =A0 =A0 =3D &quot;am335x-evm&quot;</div><div>DISTR=
-O =A0 =A0 =A0 =A0 =A0 =A0=3D &quot;poky&quot;</div><div>DISTRO_VERSION =A0 =
-=A0=3D &quot;1.5+snapshot-20131019&quot;</div>
-<div>TUNE_FEATURES =A0 =A0 =3D &quot;armv7a vfp neon&quot;</div><div>TARGET=
-_FPU =A0 =A0 =A0 =A0=3D &quot;vfp-neon&quot;</div><div>meta-yocto =A0 =A0 =
-=A0 =A0=3D &quot;master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4&quot;</div=
-><div>meta-ti =A0 =A0 =A0 =A0 =A0 =3D &quot;master:c11504664990f007c3903d34=
-9e7cc135a904f8e2&quot;</div>
-<div>meta-oe =A0 =A0 =A0 =A0 =A0 =3D &quot;master:f8903f53db717294d63a8d79b=
-5ef7ca34b3c189e&quot;</div><div>meta =A0 =A0 =A0 =A0 =A0 =A0 =A0=3D &quot;m=
-aster:9a1dce10bdc9254bb38e0e54199f23ae55e209a4&quot; =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0</div>
-</div></div>
-</div></div>
-
---001a11c326aeaa695d04e91c9050--
+------=_Part_834_10139544.1382231013858--
