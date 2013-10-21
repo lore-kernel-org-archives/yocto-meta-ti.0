@@ -1,31 +1,31 @@
 Return-Path: <chase.maupin@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D6583E0173A
-	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 07:32:12 -0700 (PDT)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6F19E0169B
+	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 07:32:24 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9LEWBZi018236
-	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 09:32:11 -0500
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9LEWNrR008659
+	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 09:32:23 -0500
 Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9LEWBsZ031361
-	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 09:32:11 -0500
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9LEWMtF031683
+	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 09:32:23 -0500
 Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
 	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.02.0342.003; Mon, 21 Oct 2013 09:32:10 -0500
+	14.02.0342.003; Mon, 21 Oct 2013 09:32:23 -0500
 From: "Maupin, Chase" <chase.maupin@ti.com>
 To: "Hingolikar, Mrinmayee" <mrinmayee@ti.com>, "meta-ti@yoctoproject.org"
 	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCHv4] abefw: Firmware for OMAP4 and OMAP5 ABE
-Thread-Index: AQHOzl1i9p4B91YvgUurQHW08PYyZ5n/N+Yw
-Date: Mon, 21 Oct 2013 14:32:10 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED101597CA8AF@DLEE11.ent.ti.com>
-References: <20131021125923.GA6037@ti.com>
-In-Reply-To: <20131021125923.GA6037@ti.com>
+Thread-Topic: [meta-ti] [PATCHv2] linux-ti-glsdk: Update to latest fixes
+Thread-Index: AQHOzl2D2MYIppPyGUe5Kl4JHrH0gZn/N/RA
+Date: Mon, 21 Oct 2013 14:32:21 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED101597CA8D3@DLEE11.ent.ti.com>
+References: <20131021130016.GA6062@ti.com>
+In-Reply-To: <20131021130016.GA6062@ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-Subject: Re: [PATCHv4] abefw: Firmware for OMAP4 and OMAP5 ABE
+Subject: Re: [PATCHv2] linux-ti-glsdk: Update to latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,78 +38,68 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Oct 2013 14:32:15 -0000
+X-List-Received-Date: Mon, 21 Oct 2013 14:32:25 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
 Acked-by: Chase Maupin <chase.maupin@ti.com>
 
-
 >-----Original Message-----
 >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
 >bounces@yoctoproject.org] On Behalf Of Hingolikar, Mrinmayee
->Sent: Monday, October 21, 2013 7:59 AM
+>Sent: Monday, October 21, 2013 8:00 AM
 >To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [PATCHv4] abefw: Firmware for OMAP4 and OMAP5
->ABE
+>Subject: [meta-ti] [PATCHv2] linux-ti-glsdk: Update to latest
+>fixes
 >
-> * The OMAP5 Audio Backend requires a 'firmware' to enable
->  sound. This recipe installs a prebuilt firmware. This
->  part is a hack, as in the current form, the firmware
->  cannot be cross-compiled. There is a plan to fix this
->  and hopefully, this recipe is short-lived. Once the code
->  is fixed, we should have new recipes that build the firmware
->  and clean up this recipe.
+>v1:
+> * Kernel source migration from git.ti.com to omapzoom.org. The
+>development
+>   tree is shared between the Linux and Android teams.This enables
+>a common
+>   kernel development platform for both the teams for better
+>alignment.
+> * Add support for VIP and VPE
+> * Add wilink/wlan support
+> * Enable rpmsg/remoteproc driver for multimedia
 >
-> v2:
-> * Merged contents from abefw.inc and removed abefw.inc based
->  on review.
+>v2:
+> * Add conditional assignment for BRANCH and SRCREV
 >
-> v3:
-> * Corrected license to BSD or GPLv2
-> * Add pandaboard as COMPATIBLE_MACHINE
-> * Add PR
->
-> v4:
-> * Added conditional assignment (?=3D) for SRCREV
+>Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
 >---
-> recipes-bsp/abefw/abefw_1.0.14.bb |   23 +++++++++++++++++++++++
-> 1 file changed, 23 insertions(+)
-> create mode 100644 recipes-bsp/abefw/abefw_1.0.14.bb
+> recipes-kernel/linux/linux-ti-glsdk_3.8.bb |    8 ++++----
+> 1 file changed, 4 insertions(+), 4 deletions(-)
 >
->diff --git a/recipes-bsp/abefw/abefw_1.0.14.bb b/recipes-
->bsp/abefw/abefw_1.0.14.bb
->new file mode 100644
->index 0000000..834e5d8
->--- /dev/null
->+++ b/recipes-bsp/abefw/abefw_1.0.14.bb
->@@ -0,0 +1,23 @@
->+SUMMARY =3D "Firmware for OMAP4 and OMAP5 ABE"
->+HOMEPAGE =3D "http://git.ti.com"
->+LICENSE =3D "BSD | GPLv2"
->+LIC_FILES_CHKSUM =3D
->"file://COPYING;md5=3D923db086ed9463ab3215b24d87e05ec5"
->+
->+PACKAGE_ARCH =3D "${MACHINE_ARCH}"
->+
->+COMPATIBLE_MACHINE =3D "pandaboard|omap5-evm"
->+
->+SRC_URI =3D "git://git.ti.com/glsdk/abefw-
->omap4plus.git;protocol=3Dgit"
->+
->+S =3D "${WORKDIR}/git"
->+
->+SRCREV ?=3D "ceccc0332264e39bdc51e54f80ea7256a3886c58"
->+
->+PR =3D "r0"
->+
->+do_install() {
->+        mkdir -p ${D}/lib/firmware
->+        cp ${S}/firmware/omap4_abe_new ${D}/lib/firmware/
->+}
->+
->+FILES_${PN} +=3D "/lib/firmware/omap4_abe_new"
+>diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-
+>kernel/linux/linux-ti-glsdk_3.8.bb
+>index 9e3e499..35d55df 100644
+>--- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+>+++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+>@@ -18,14 +18,14 @@ DEFAULT_PREFERENCE =3D "-1"
+>
+> S =3D "${WORKDIR}/git"
+>
+>-BRANCH =3D "master"
+>+BRANCH ?=3D "p-ti-glsdk-3.8.y"
+>
+>-SRCREV =3D "6076e6882d1d6a64b104e42e56a3eada36605cb3"
+>+SRCREV ?=3D "cc16f99176bf083829c028f9af5b8eb560debcc1"
+> PV =3D "3.8.13"
+>
+> # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause
+>a rebuild
+>-MACHINE_KERNEL_PR_append =3D "b+gitr${SRCPV}"
+>+MACHINE_KERNEL_PR_append =3D "c+gitr${SRCPV}"
+>
+>-SRC_URI =3D "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-
+>kernel.git;protocol=3Dgit;branch=3D${BRANCH} \
+>+SRC_URI =3D
+>"git://git.omapzoom.org/kernel/omap.git;protocol=3Dgit;branch=3D${BRAN
+>CH} \
+>            file://defconfig \
+>           "
 >--
 >1.7.9.5
 >
