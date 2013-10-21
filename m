@@ -1,26 +1,26 @@
 Return-Path: <mrinmayee@ti.com>
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E0308E0172F
-	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 05:56:44 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E96F3E01732
+	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 05:59:25 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9LCuiNr007754
-	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 07:56:44 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9LCuhE2022728
-	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 07:56:43 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 21 Oct 2013 07:56:43 -0500
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9LCxPtg007945
+	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 07:59:25 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9LCxPbQ026236
+	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 07:59:25 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Mon, 21 Oct 2013 07:59:25 -0500
 Received: from ti.com (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9LCugBt014610	for
-	<meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 07:56:43 -0500
-Date: Mon, 21 Oct 2013 18:26:42 +0530
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9LCxNQ5011998	for
+	<meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 07:59:24 -0500
+Date: Mon, 21 Oct 2013 18:29:23 +0530
 From: Mrinmayee Hingolikar <mrinmayee@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <20131021125642.GA5975@ti.com>
+Message-ID: <20131021125923.GA6037@ti.com>
 MIME-Version: 1.0
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [PATCHv2] u-boot-glsdk: Update to latest fixes
+Subject: [PATCHv4] abefw: Firmware for OMAP4 and OMAP5 ABE
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,45 +33,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Oct 2013 12:56:45 -0000
+X-List-Received-Date: Mon, 21 Oct 2013 12:59:26 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
- * Migration of u-boot code to omapzoom.org. The development tree is shared
-   between the Linux and Android teams.This enables a common u-boot development
-   platform for both the teams for better alignment.
- * Enable UART boot mode for dra7xx
- * Add VIP,VPE and Ethernet crossbar setting for dra7xx
- * Add SPL API, QSPI, and serial flash support of dra7xx
+ * The OMAP5 Audio Backend requires a 'firmware' to enable
+  sound. This recipe installs a prebuilt firmware. This
+  part is a hack, as in the current form, the firmware
+  cannot be cross-compiled. There is a plan to fix this
+  and hopefully, this recipe is short-lived. Once the code
+  is fixed, we should have new recipes that build the firmware
+  and clean up this recipe.
 
-v2:
+ v2:
+ * Merged contents from abefw.inc and removed abefw.inc based
+  on review.
 
- * Update to conditional assignment for BRANCH and SRCREV
+ v3:
+ * Corrected license to BSD or GPLv2
+ * Add pandaboard as COMPATIBLE_MACHINE
+ * Add PR
 
-Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+ v4:
+ * Added conditional assignment (?=) for SRCREV
 ---
- recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/abefw/abefw_1.0.14.bb |   23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 recipes-bsp/abefw/abefw_1.0.14.bb
 
-diff --git a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
-index d60ef44..1805020 100644
---- a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
-@@ -6,11 +6,11 @@ PR = "r0+gitr${SRCPV}"
- 
- DEFAULT_PREFERENCE = "-1"
- 
--SRC_URI = "git://git.ti.com/glsdk/glsdk-u-boot.git;protocol=git;branch=${BRANCH}"
-+SRC_URI = "git://git.omapzoom.org/repo/u-boot.git;protocol=git;branch=${BRANCH}"
- 
--BRANCH ?= "master"
-+BRANCH ?= "p-ti-u-boot-2013.04"
- 
--SRCREV = "81836e8cc84bd6523d9a4e187965dcd1633c4bc9"
-+SRCREV ?= "76447484441a4b8e00840a2bde74e66dbac9e631"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+diff --git a/recipes-bsp/abefw/abefw_1.0.14.bb b/recipes-bsp/abefw/abefw_1.0.14.bb
+new file mode 100644
+index 0000000..834e5d8
+--- /dev/null
++++ b/recipes-bsp/abefw/abefw_1.0.14.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "Firmware for OMAP4 and OMAP5 ABE"
++HOMEPAGE = "http://git.ti.com"
++LICENSE = "BSD | GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=923db086ed9463ab3215b24d87e05ec5"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++COMPATIBLE_MACHINE = "pandaboard|omap5-evm"
++
++SRC_URI = "git://git.ti.com/glsdk/abefw-omap4plus.git;protocol=git"
++
++S = "${WORKDIR}/git"
++
++SRCREV ?= "ceccc0332264e39bdc51e54f80ea7256a3886c58"
++
++PR = "r0"
++
++do_install() {
++        mkdir -p ${D}/lib/firmware
++        cp ${S}/firmware/omap4_abe_new ${D}/lib/firmware/
++}
++
++FILES_${PN} += "/lib/firmware/omap4_abe_new"
 -- 
 1.7.9.5
 
