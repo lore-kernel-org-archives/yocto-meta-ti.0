@@ -1,42 +1,38 @@
-Return-Path: <rstreif@linuxfoundation.org>
-Received: from mail-ea0-f171.google.com (mail-ea0-f171.google.com
-	[209.85.215.171])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 780EDE0172B
-	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 10:18:31 -0700 (PDT)
-Received: by mail-ea0-f171.google.com with SMTP id n15so4378526ead.16
-	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 10:18:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linuxfoundation.org; s=google;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=Rw0qERhcluvD5xqYhbrRNThJX5DMwsCjsxHk51HKjAs=;
-	b=TJZJOTJV5A9uBO9HLCtpa59ZwNjr1/kPPuZSHaSKRjGV5PeIpn4NyG5WgsrzavQcwd
-	JZtOTcakgR8rAIh/kUtgggnhjm/FaYOdfE29lGhuq1b9aN8q1npjs6ld/5gyX94QNbCo
-	vdkdZB90jaK+a7r5ZCEHhHlSxgQDRO1mN0Hdw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=Rw0qERhcluvD5xqYhbrRNThJX5DMwsCjsxHk51HKjAs=;
-	b=ax9eYatg8jEEvAPrBDxY6g88RBZI+pgmriWucR6PA+kYRx1kDVSrieiIqo3GJC0MdR
-	qvSBfdfLhjTkCvRR8XxhYpOiwOc3+/SjgQm49HcqBFxSKrL2xjeWJYB1HdQdQ0ifkwIQ
-	0ovZVFN8lTqBhys+ZavHZWf02eiRmQyvpqG+LXFVURdFtxVOm0SnX4pEokUTeDuS6cOf
-	+4sV+e+Uy+DxUBQwS/s8AJrM/awmiG47rA/dnCaV2K3AJu1PLBfmFqi5w29ZuF738gYL
-	dhMp+I6od1Po6Xi8WGFYw2epoOaiJmkpUe2VtGH3DsCt8ASiMOWhOK/TjVdCr5HieUXU
-	neXA==
-X-Gm-Message-State: ALoCoQlH59nCdXTdnC06Llks+pKq26HSuUCq+WhEoPmeYXWD6Fwj0H4nuzPMmgR5wzPlsdb/DPgU
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E77D6E01742
+	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 12:36:24 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9MJaLjC019927;
+	Tue, 22 Oct 2013 14:36:21 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9MJaLf2025749;
+	Tue, 22 Oct 2013 14:36:21 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 22 Oct 2013 14:36:21 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9MJaLZB021612;
+	Tue, 22 Oct 2013 14:36:21 -0500
+Date: Tue, 22 Oct 2013 15:36:21 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Rudolf Streif <rstreif@linuxfoundation.org>
+Message-ID: <20131022193620.GB9301@edge>
+References: <20131017214528.GC30989@edge>
+	<CA+gsK-qKLdXTq1PJEmXLp0d5n5wEYf+6Na+pFj+UwnWLO_dt2g@mail.gmail.com>
+	<20131019023954.GK2127@edge>
+	<CA+gsK-q8W-wAP-rBhy7RgHUddsbdE_SaNOgyfFQ+zj2ksSidKw@mail.gmail.com>
+	<CA+gsK-owJQGEhzv9tgmiF+fORTErYVbQUhcoQ3BVLA+p3a+9Qw@mail.gmail.com>
+	<CA+gsK-qaWVUGPe7fW62V+tH0F3GVZHHXGD_+LHQX7hiE7VcZRg@mail.gmail.com>
+	<20131021211522.GA26549@denix.org>
+	<CA+gsK-q6=AXpMNQOJYK47W_JJvhbi=YT7sdUOrjYVxC0aMDqBA@mail.gmail.com>
+	<20131021231859.GA7779@edge>
+	<CA+gsK-rx6conDzh=Zxk5zu7=KT=it=wZE8ZBGPaxUwhoKGuyOg@mail.gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.14.107.133 with SMTP id o5mr372613eeg.110.1382462309933;
-	Tue, 22 Oct 2013 10:18:29 -0700 (PDT)
-Received: by 10.223.147.133 with HTTP; Tue, 22 Oct 2013 10:18:29 -0700 (PDT)
-In-Reply-To: <7D1F292BE8E4CC4F93079C1A7A58D5622B9FF5C3@USNYGRMBX4.raymondcorp.local>
-References: <7D1F292BE8E4CC4F93079C1A7A58D5622B9FF5C3@USNYGRMBX4.raymondcorp.local>
-Date: Tue, 22 Oct 2013 18:18:29 +0100
-Message-ID: <CA+gsK-pNkDYCcecOftuopRu9XnxK3Xr9ZbSU23yekqQEczCYeg@mail.gmail.com>
-From: Rudolf Streif <rstreif@linuxfoundation.org>
-To: Vanderpool Josh <Joshua.Vanderpool@raymondcorp.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: AM335x-SK kernel panic with Poky(master), meta-ti(master) core-image-base
+In-Reply-To: <CA+gsK-rx6conDzh=Zxk5zu7=KT=it=wZE8ZBGPaxUwhoKGuyOg@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: AM335x EVM and core-image-sato
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,163 +45,217 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Oct 2013 17:18:33 -0000
-Content-Type: multipart/alternative; boundary=001a11c2a068e634a504e95796a4
+X-List-Received-Date: Tue, 22 Oct 2013 19:36:25 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
---001a11c2a068e634a504e95796a4
-Content-Type: text/plain; charset=ISO-8859-1
+Huh, I'm wondering if 1.2 is still supported... There were 2.0 and 2.1 
+versions of the silicon and I believe those are the latest ones. Need to 
+double-check that.
 
-Hi Josh,
-
-I am seeing the exact same problem with my am335x-evmsk and the latest
-meta-ti with 3.12-rc5 kernel. I posted it on this mailing list [1].
-
-This problem looks like the one posted here [2].
-
-The bad news is I don't have a solution for it. The good news is that Denys
-and I are attending the same conference and I keep harassing him about it.
-:)
-
-Cheers,
-Rudi
+Denys
 
 
-[1]
-https://lists.yoctoproject.org/pipermail/meta-ti/2013-October/003519.html
-[2] http://permalink.gmane.org/gmane.linux.ports.arm.omap/96044
+On Tue, Oct 22, 2013 at 08:57:51AM +0100, Rudolf Streif wrote:
+> Where do I find the PG version of the board? The barcode sticker on the
+> board says rev 1.2.
+> 
+> 
+> On Tue, Oct 22, 2013 at 12:19 AM, Denys Dmytriyenko <denys@ti.com> wrote:
+> 
+> > Now I'm just wondering what PG version of the board you've got, if it
+> > fails in
+> > the same way with our 3.8 kernel and a known good set of 3.12 images...
+> >
+> >
+> > On Mon, Oct 21, 2013 at 11:19:35PM +0100, Rudolf Streif wrote:
+> > > Thanks, Denys.
+> > >
+> > > Interesting point about gcc. It's version 4.8.1 which is the default for
+> > > poky master. Which is what I used all along.
+> > >
+> > > Thanks for sending your binaries. They fail too with the exact same
+> > > problem. See attached log. I found [1] on gmane which exactly describes
+> > the
+> > > problem I am seeing.
+> > >
+> > > If that is the case then I was wondering why my earlier builds with
+> > > 3.12-rc3 actually worked. And I tried them again and they are now failing
+> > > too. Of course I don't know anything about the specifics of the gpio and
+> > > the timers on the chip but it looks like a weird hardware initialization
+> > > condition. And I don't know if the proposed patch in [1] was ever
+> > > incorporated in your kernel tree.
+> > >
+> > > I don't think it's the hardware (or at least not alone) because the SD
+> > that
+> > > ships with it with the 3.2 kernel works just fine.
+> > >
+> > > Cheers,
+> > > Rudi
+> > >
+> > >
+> > > [1]  http://permalink.gmane.org/gmane.linux.ports.arm.omap/96044
+> > >
+> > >
+> > > On Mon, Oct 21, 2013 at 10:15 PM, Denys Dmytriyenko <denis@denix.org>
+> > wrote:
+> > >
+> > > > Rudi,
+> > > >
+> > > > As we discussed earlier today, let my send you my binaries for the
+> > kernel
+> > > > and
+> > > > u-boot to try on your board. I just wanted to ask you about the
+> > toolchain
+> > > > that
+> > > > you used to build yours. In our builds we use Linaro gcc-4.7 hardfp
+> > > > toolchain
+> > > > and I vaguely remember hearing about some problems with the recent
+> > gcc-4.8
+> > > > toolchain from oe-core... I'm wondering if you are having the same
+> > issue.
+> > > >
+> > > > --
+> > > > Denys
+> > > >
+> > > >
+> > > > On Mon, Oct 21, 2013 at 10:42:35AM -0700, Rudolf Streif wrote:
+> > > > > Since the 3.12-rc5 kernel does not work I decided to give the 3.8
+> > kernel
+> > > > a
+> > > > > try. The issue with this one is that the linux-ti-staging_3.8.bbrecipe
+> > > > > explicitly sets KERNEL_IMAGETYPE="uImage". However, the u-boot
+> > > > environment
+> > > > > has now moved on to using zImage which consequently means u-boot
+> > will not
+> > > > > find the kernel file.
+> > > > >
+> > > > > I do not know why KERNEL_IMAGETYPE = "uImage" was hacked into the
+> > > > > linux-ti-staging_3.8.bb recipe but whoever did it did not think
+> > about
+> > > > > u-boot. Does zImage not work with 3.8? I did not try it but it should
+> > > > > normally have no effect. Since there is no dependency of the u-boot
+> > > > recipes
+> > > > > on the kernel image types changes to the kernel image type for newer
+> > > > > versions of the kernel then automatically means that it must be
+> > changed
+> > > > for
+> > > > > the previous versions too.
+> > > > >
+> > > > > I mocked around with the u-boot environment and booted the 3.8 uImage
+> > > > > kernel. To my surprise the 3.8 kernel from the TI staging repository
+> > > > fails
+> > > > > with the exact same problem and stops booting with a kernel not
+> > syncing
+> > > > > message during the init calls. Apparently a patch must have been
+> > applied
+> > > > to
+> > > > > the kernel repo that breaks it. It has nothing possibly to do with
+> > the
+> > > > > build system.
+> > > > >
+> > > > > I would appreciate any hints to get this kernel built and boot on the
+> > > > board.
+> > > > >
+> > > > > Thanks,
+> > > > > Rudi
+> > > > >
+> > > > >
+> > > > > On Mon, Oct 21, 2013 at 1:16 AM, Rudolf Streif
+> > > > > <rstreif@linuxfoundation.org>wrote:
+> > > > >
+> > > > > > Denys,
+> > > > > >
+> > > > > > I recompiled the 3.12-rc5 kernel again but it still stalls during
+> > > > > > initialization. I attached the boot log. I don't know much about
+> > the
+> > > > > > platform details but maybe that's an issue you know about.
+> > > > > >
+> > > > > > Thanks,
+> > > > > > Rudi
+> > > > > >
+> > > > > >
+> > > > > >
+> > > > > >>
+> > > > > >> [1]
+> > > > > >> Build Configuration:
+> > > > > >> BB_VERSION        = "1.21.0"
+> > > > > >> BUILD_SYS         = "x86_64-linux"
+> > > > > >> NATIVELSBSTRING   = "Fedora-18"
+> > > > > >> TARGET_SYS        = "arm-poky-linux-gnueabi"
+> > > > > >> MACHINE           = "am335x-evm"
+> > > > > >> DISTRO            = "poky"
+> > > > > >> DISTRO_VERSION    = "1.5+snapshot-20131019"
+> > > > > >> TUNE_FEATURES     = "armv7a vfp neon"
+> > > > > >> TARGET_FPU        = "vfp-neon"
+> > > > > >> meta-yocto        =
+> > "master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4"
+> > > > > >> meta-ti           =
+> > "master:c11504664990f007c3903d349e7cc135a904f8e2"
+> > > > > >> meta-oe           =
+> > "master:f8903f53db717294d63a8d79b5ef7ca34b3c189e"
+> > > > > >> meta              =
+> > "master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4"
+> > > > > >>
+> > > > > >>
+> > > > > >
+> > > > > >
+> > > > > >
+> > > > > >
+> > > > > >
+> > > > >
+> > > > >
+> > > > > --
+> > > > > --
+> > > > > *Rudolf J. Streif*
+> > > > > Director of Embedded Solutions
+> > > > > The Linux Foundation
+> > > > >
+> > > > > rudolf.streif@linux.com
+> > > > > Phone: +1.619.537.6646
+> > > > > Skype: rudolfstreif
+> > > > > PGP: RSA 2048/2048 D6E7D28B
+> > > > >
+> > > > > Linux Foundation Events Schedule:  events.linuxfoundation.org
+> > > > > Linux Foundation Training Schedule: training.linuxfoundation.org
+> > > >
+> > > > > _______________________________________________
+> > > > > meta-ti mailing list
+> > > > > meta-ti@yoctoproject.org
+> > > > > https://lists.yoctoproject.org/listinfo/meta-ti
+> > > >
+> > > >
+> > >
+> > >
+> > > --
+> > > --
+> > > *Rudolf J. Streif*
+> > > Director of Embedded Solutions
+> > > The Linux Foundation
+> > >
+> > > rudolf.streif@linux.com
+> > > Phone: +1.619.537.6646
+> > > Skype: rudolfstreif
+> > > PGP: RSA 2048/2048 D6E7D28B
+> > >
+> > > Linux Foundation Events Schedule:  events.linuxfoundation.org
+> > > Linux Foundation Training Schedule: training.linuxfoundation.org
+> >
+> >
+> >
+> 
+> 
+> -- 
+> -- 
+> *Rudolf J. Streif*
+> Director of Embedded Solutions
+> The Linux Foundation
+> 
+> rudolf.streif@linux.com
+> Phone: +1.619.537.6646
+> Skype: rudolfstreif
+> PGP: RSA 2048/2048 D6E7D28B
+> 
+> Linux Foundation Events Schedule:  events.linuxfoundation.org
+> Linux Foundation Training Schedule: training.linuxfoundation.org
 
-
-On Tue, Oct 22, 2013 at 5:28 PM, Vanderpool Josh <
-Joshua.Vanderpool@raymondcorp.com> wrote:
-
-> I am having a similar issue as Rudi.
-> Attached is the bootLog.
->
->
-> Build Configuration:
-> BB_VERSION        = "1.21.0"
-> BUILD_SYS         = "x86_64-linux"
-> NATIVELSBSTRING   = "Ubuntu-12.04"
-> TARGET_SYS        = "arm-poky-linux-gnueabi"
-> MACHINE           = "am335x-evm"
-> DISTRO            = "poky"
-> DISTRO_VERSION    = "1.5+snapshot-20131022"
-> TUNE_FEATURES     = "armv7a vfp neon"
-> TARGET_FPU        = "vfp-neon"
-> meta
-> meta-yocto        = "master:505114c13d29799a25379f7ce720d632616d8776"
-> meta-ti           = "master:c11504664990f007c3903d349e7cc135a904f8e2"
-> meta-qt5          = "master:84cd4be2491895b0c3a0af64e4c83d58910d1f6c"
->
-> Josh Vanderpool
-> Electrical Engineer
-> Control Systems
-> The Raymond Corporation
-> 20 South Canal Street
-> Greene, New York 13778-0130
-> Phone: 607-656-2617
-> Fax: 607-656-4845
-> joshua.vanderpool@raymondcorp.com
-> http://www.raymondcorp.com
->
->
-> Confidentiality Notice:
->
-> The preceding e-mail message (including any attachments) contains
-> information that may be confidential, protected by applicable legal
-> privileges, or constitute non-public information. It is intended to be
-> conveyed only to the designated recipient(s). If you are not an intended
-> recipient of this message, please notify the sender by replying to this
-> message and then delete it from your system. Use, dissemination,
-> distribution or reproduction of this message by unintended recipients is
-> not authorized and may be unlawful.
->
->
->
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
->
->
-
---001a11c2a068e634a504e95796a4
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi Josh,<div><br></div><div>I am seeing the exact same pro=
-blem with my am335x-evmsk and the latest meta-ti with 3.12-rc5 kernel. I po=
-sted it on this mailing list [1].</div><div><br></div><div>This problem loo=
-ks like the one posted here [2].</div>
-<div><br></div><div>The bad news is I don&#39;t have a solution for it. The=
- good news is that Denys and I are attending the same conference and I keep=
- harassing him about it. :)</div><div><br></div><div>Cheers,</div><div>
-Rudi</div><div><br></div><div><br></div><div>[1]=A0<a href=3D"https://lists=
-.yoctoproject.org/pipermail/meta-ti/2013-October/003519.html">https://lists=
-.yoctoproject.org/pipermail/meta-ti/2013-October/003519.html</a></div><div>
-[2]=A0<a href=3D"http://permalink.gmane.org/gmane.linux.ports.arm.omap/9604=
-4">http://permalink.gmane.org/gmane.linux.ports.arm.omap/96044</a></div><di=
-v class=3D"gmail_extra"><br><br><div class=3D"gmail_quote">On Tue, Oct 22, =
-2013 at 5:28 PM, Vanderpool Josh <span dir=3D"ltr">&lt;<a href=3D"mailto:Jo=
-shua.Vanderpool@raymondcorp.com" target=3D"_blank">Joshua.Vanderpool@raymon=
-dcorp.com</a>&gt;</span> wrote:<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex">I am having a similar issue as Rudi.<br>
-Attached is the bootLog.<br>
-<br>
-<br>
-Build Configuration:<br>
-BB_VERSION =A0 =A0 =A0 =A0=3D &quot;1.21.0&quot;<br>
-BUILD_SYS =A0 =A0 =A0 =A0 =3D &quot;x86_64-linux&quot;<br>
-NATIVELSBSTRING =A0 =3D &quot;Ubuntu-12.04&quot;<br>
-TARGET_SYS =A0 =A0 =A0 =A0=3D &quot;arm-poky-linux-gnueabi&quot;<br>
-MACHINE =A0 =A0 =A0 =A0 =A0 =3D &quot;am335x-evm&quot;<br>
-DISTRO =A0 =A0 =A0 =A0 =A0 =A0=3D &quot;poky&quot;<br>
-DISTRO_VERSION =A0 =A0=3D &quot;1.5+snapshot-20131022&quot;<br>
-TUNE_FEATURES =A0 =A0 =3D &quot;armv7a vfp neon&quot;<br>
-TARGET_FPU =A0 =A0 =A0 =A0=3D &quot;vfp-neon&quot;<br>
-meta<br>
-meta-yocto =A0 =A0 =A0 =A0=3D &quot;master:505114c13d29799a25379f7ce720d632=
-616d8776&quot;<br>
-meta-ti =A0 =A0 =A0 =A0 =A0 =3D &quot;master:c11504664990f007c3903d349e7cc1=
-35a904f8e2&quot;<br>
-meta-qt5 =A0 =A0 =A0 =A0 =A0=3D &quot;master:84cd4be2491895b0c3a0af64e4c83d=
-58910d1f6c&quot;<br>
-<br>
-Josh Vanderpool<br>
-Electrical Engineer<br>
-Control Systems<br>
-The Raymond Corporation<br>
-20 South Canal Street<br>
-Greene, New York 13778-0130<br>
-Phone: 607-656-2617<br>
-Fax: 607-656-4845<br>
-<a href=3D"mailto:joshua.vanderpool@raymondcorp.com">joshua.vanderpool@raym=
-ondcorp.com</a><br>
-<a href=3D"http://www.raymondcorp.com" target=3D"_blank">http://www.raymond=
-corp.com</a><br>
-<br>
-<br>
-Confidentiality Notice:<br>
-<br>
-The preceding e-mail message (including any attachments) contains informati=
-on that may be confidential, protected by applicable legal privileges, or c=
-onstitute non-public information. It is intended to be conveyed only to the=
- designated recipient(s). If you are not an intended recipient of this mess=
-age, please notify the sender by replying to this message and then delete i=
-t from your system. Use, dissemination, distribution or reproduction of thi=
-s message by unintended recipients is<br>
-
-not authorized and may be unlawful.<br>
-<br>
-<br>
-<br>_______________________________________________<br>
-meta-ti mailing list<br>
-<a href=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</a><br=
->
-<a href=3D"https://lists.yoctoproject.org/listinfo/meta-ti" target=3D"_blan=
-k">https://lists.yoctoproject.org/listinfo/meta-ti</a><br>
-<br></blockquote></div><br>
-</div></div>
-
---001a11c2a068e634a504e95796a4--
