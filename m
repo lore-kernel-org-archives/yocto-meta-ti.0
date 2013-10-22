@@ -1,37 +1,32 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D585DE01742
-	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 12:37:35 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9MJbXgJ028141;
-	Tue, 22 Oct 2013 14:37:33 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9MJbXm3026985;
-	Tue, 22 Oct 2013 14:37:33 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 22 Oct 2013 14:37:32 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9MJbWN4022153;
-	Tue, 22 Oct 2013 14:37:32 -0500
-Date: Tue, 22 Oct 2013 15:37:32 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Rudolf Streif <rstreif@linuxfoundation.org>
-Message-ID: <20131022193732.GC9301@edge>
-References: <CA+gsK-p49VYtzviOwgtzssxxXnAS4Eku0Y95bsFL5LvT+v=9Sw@mail.gmail.com>
-	<20131017214528.GC30989@edge>
-	<CA+gsK-qKLdXTq1PJEmXLp0d5n5wEYf+6Na+pFj+UwnWLO_dt2g@mail.gmail.com>
-	<20131019023954.GK2127@edge>
-	<CA+gsK-q8W-wAP-rBhy7RgHUddsbdE_SaNOgyfFQ+zj2ksSidKw@mail.gmail.com>
-	<CA+gsK-owJQGEhzv9tgmiF+fORTErYVbQUhcoQ3BVLA+p3a+9Qw@mail.gmail.com>
-	<CA+gsK-qaWVUGPe7fW62V+tH0F3GVZHHXGD_+LHQX7hiE7VcZRg@mail.gmail.com>
-	<20131021211522.GA26549@denix.org>
-	<CA+gsK-q6=AXpMNQOJYK47W_JJvhbi=YT7sdUOrjYVxC0aMDqBA@mail.gmail.com>
+Return-Path: <Joshua.Vanderpool@raymondcorp.com>
+Received: from smtp.raymondcorp.com (smtp.raymondcorp.com [24.97.209.121])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EAB3EE01742
+	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 12:52:16 -0700 (PDT)
+Received: from usnygrcas1.raymondcorp.local (nothing.attdns.com
+	[130.1.155.194] (may be forged))
+	by smtp.raymondcorp.com (8.14.3/8.14.3) with ESMTP id r9MJqFSl013912
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 14:52:16 -0500
+Received: from USNYGRMBX4.raymondcorp.local ([169.254.4.106]) by usnygrcas1
+	([130.1.155.198]) with mapi id 14.03.0158.001; Tue, 22 Oct 2013 15:52:15
+	-0400
+From: Vanderpool Josh <Joshua.Vanderpool@raymondcorp.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: AM335x-SK kernel panic with Poky(master), meta-ti(master)
+	core-image-base
+Thread-Index: AQHOz2A0knrytU1jG0OKE/IlDrI4uA==
+Date: Tue, 22 Oct 2013 19:52:13 +0000
+Message-ID: <7D1F292BE8E4CC4F93079C1A7A58D5622B9FF6D7@USNYGRMBX4.raymondcorp.local>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [130.1.155.203]
 MIME-Version: 1.0
-In-Reply-To: <CA+gsK-q6=AXpMNQOJYK47W_JJvhbi=YT7sdUOrjYVxC0aMDqBA@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: AM335x EVM and core-image-sato
+X-MessageScreenMessageID: 1382471536.214677.1642.2317156362
+X-MessageScreenContentScore: Score of 0 assigned to Content
+X-MessageScreenUCEScore: Score of 0 assigned to UCE
+X-MessageScreen: Analyzed by IntelliReach MessageScreen(tm)
+Subject: Re: AM335x-SK kernel panic with Poky(master), meta-ti(master) core-image-base
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,169 +39,184 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Oct 2013 19:37:36 -0000
+X-List-Received-Date: Tue, 22 Oct 2013 19:52:19 -0000
+Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-And just to double-check here as well - you did try all the binaries I sent 
-you, including MLO, u-boot, zImage and DTB, right?
+Thanks for the links Rudi, I looked for the file referenced in [2] "arch/=
+arm/mach-omap2/cclock33xx_data.c" to see if the patch works but...
 
-Denys
+There is no cclock33xx_data.c rather there is in tmp/work/am335x_evm-poky=
+-linux-gnueabi/linux-ti-staging/3.11+3.12-rc5-r20a+gitrAUTOINC+eb765a394c=
+/git/arch/arm/mach-omap2/cclock3xxx_data.c.
+
+however a search I found tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/linu=
+x-libc-headers/3.10-r0/linux-3.10/arch/arm/mach-omap2/cclock33xx_data.c
+
+So it appears there is mis-match as the patch is in the 3.10 files that r=
+e in the armv7a-vfp-neon-poky-linux-gnueabi directory?
+
+So is this something that is just lost from the 3.12-rc5 kernel and shoul=
+dn't the linux-linc-headers be the version being built?
+
+Unfortunately being inexperienced with the project I am at a loss at how =
+to fix this but hope this help point someone to the solution.
+
+Regards,
+Josh
+
+________________________________________
+From: meta-ti-bounces@yoctoproject.org [meta-ti-bounces@yoctoproject.org]=
+ on behalf of meta-ti-request@yoctoproject.org [meta-ti-request@yoctoproj=
+ect.org]
+Sent: Tuesday, October 22, 2013 3:00 PM
+To: meta-ti@yoctoproject.org
+Subject: meta-ti Digest, Vol 25, Issue 35
+
+Send meta-ti mailing list submissions to
+        meta-ti@yoctoproject.org
+
+To subscribe or unsubscribe via the World Wide Web, visit
+        https://lists.yoctoproject.org/listinfo/meta-ti
+or, via email, send a message with subject or body 'help' to
+        meta-ti-request@yoctoproject.org
+
+You can reach the person managing the list at
+        meta-ti-owner@yoctoproject.org
+
+When replying, please edit your Subject line so it is more specific
+than "Re: Contents of meta-ti digest..."
 
 
-On Mon, Oct 21, 2013 at 11:19:35PM +0100, Rudolf Streif wrote:
-> Thanks, Denys.
-> 
-> Interesting point about gcc. It's version 4.8.1 which is the default for
-> poky master. Which is what I used all along.
-> 
-> Thanks for sending your binaries. They fail too with the exact same
-> problem. See attached log. I found [1] on gmane which exactly describes the
-> problem I am seeing.
-> 
-> If that is the case then I was wondering why my earlier builds with
-> 3.12-rc3 actually worked. And I tried them again and they are now failing
-> too. Of course I don't know anything about the specifics of the gpio and
-> the timers on the chip but it looks like a weird hardware initialization
-> condition. And I don't know if the proposed patch in [1] was ever
-> incorporated in your kernel tree.
-> 
-> I don't think it's the hardware (or at least not alone) because the SD that
-> ships with it with the 3.2 kernel works just fine.
-> 
-> Cheers,
-> Rudi
-> 
-> 
-> [1]  http://permalink.gmane.org/gmane.linux.ports.arm.omap/96044
-> 
-> 
-> On Mon, Oct 21, 2013 at 10:15 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> 
-> > Rudi,
-> >
-> > As we discussed earlier today, let my send you my binaries for the kernel
-> > and
-> > u-boot to try on your board. I just wanted to ask you about the toolchain
-> > that
-> > you used to build yours. In our builds we use Linaro gcc-4.7 hardfp
-> > toolchain
-> > and I vaguely remember hearing about some problems with the recent gcc-4.8
-> > toolchain from oe-core... I'm wondering if you are having the same issue.
-> >
-> > --
-> > Denys
-> >
-> >
-> > On Mon, Oct 21, 2013 at 10:42:35AM -0700, Rudolf Streif wrote:
-> > > Since the 3.12-rc5 kernel does not work I decided to give the 3.8 kernel
-> > a
-> > > try. The issue with this one is that the linux-ti-staging_3.8.bb recipe
-> > > explicitly sets KERNEL_IMAGETYPE="uImage". However, the u-boot
-> > environment
-> > > has now moved on to using zImage which consequently means u-boot will not
-> > > find the kernel file.
-> > >
-> > > I do not know why KERNEL_IMAGETYPE = "uImage" was hacked into the
-> > > linux-ti-staging_3.8.bb recipe but whoever did it did not think about
-> > > u-boot. Does zImage not work with 3.8? I did not try it but it should
-> > > normally have no effect. Since there is no dependency of the u-boot
-> > recipes
-> > > on the kernel image types changes to the kernel image type for newer
-> > > versions of the kernel then automatically means that it must be changed
-> > for
-> > > the previous versions too.
-> > >
-> > > I mocked around with the u-boot environment and booted the 3.8 uImage
-> > > kernel. To my surprise the 3.8 kernel from the TI staging repository
-> > fails
-> > > with the exact same problem and stops booting with a kernel not syncing
-> > > message during the init calls. Apparently a patch must have been applied
-> > to
-> > > the kernel repo that breaks it. It has nothing possibly to do with the
-> > > build system.
-> > >
-> > > I would appreciate any hints to get this kernel built and boot on the
-> > board.
-> > >
-> > > Thanks,
-> > > Rudi
-> > >
-> > >
-> > > On Mon, Oct 21, 2013 at 1:16 AM, Rudolf Streif
-> > > <rstreif@linuxfoundation.org>wrote:
-> > >
-> > > > Denys,
-> > > >
-> > > > I recompiled the 3.12-rc5 kernel again but it still stalls during
-> > > > initialization. I attached the boot log. I don't know much about the
-> > > > platform details but maybe that's an issue you know about.
-> > > >
-> > > > Thanks,
-> > > > Rudi
-> > > >
-> > > >
-> > > >
-> > > >>
-> > > >> [1]
-> > > >> Build Configuration:
-> > > >> BB_VERSION        = "1.21.0"
-> > > >> BUILD_SYS         = "x86_64-linux"
-> > > >> NATIVELSBSTRING   = "Fedora-18"
-> > > >> TARGET_SYS        = "arm-poky-linux-gnueabi"
-> > > >> MACHINE           = "am335x-evm"
-> > > >> DISTRO            = "poky"
-> > > >> DISTRO_VERSION    = "1.5+snapshot-20131019"
-> > > >> TUNE_FEATURES     = "armv7a vfp neon"
-> > > >> TARGET_FPU        = "vfp-neon"
-> > > >> meta-yocto        = "master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4"
-> > > >> meta-ti           = "master:c11504664990f007c3903d349e7cc135a904f8e2"
-> > > >> meta-oe           = "master:f8903f53db717294d63a8d79b5ef7ca34b3c189e"
-> > > >> meta              = "master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4"
-> > > >>
-> > > >>
-> > > >
-> > > >
-> > > >
-> > > >
-> > > >
-> > >
-> > >
-> > > --
-> > > --
-> > > *Rudolf J. Streif*
-> > > Director of Embedded Solutions
-> > > The Linux Foundation
-> > >
-> > > rudolf.streif@linux.com
-> > > Phone: +1.619.537.6646
-> > > Skype: rudolfstreif
-> > > PGP: RSA 2048/2048 D6E7D28B
-> > >
-> > > Linux Foundation Events Schedule:  events.linuxfoundation.org
-> > > Linux Foundation Training Schedule: training.linuxfoundation.org
-> >
-> > > _______________________________________________
-> > > meta-ti mailing list
-> > > meta-ti@yoctoproject.org
-> > > https://lists.yoctoproject.org/listinfo/meta-ti
-> >
-> >
-> 
-> 
-> -- 
-> -- 
-> *Rudolf J. Streif*
-> Director of Embedded Solutions
-> The Linux Foundation
-> 
-> rudolf.streif@linux.com
-> Phone: +1.619.537.6646
-> Skype: rudolfstreif
-> PGP: RSA 2048/2048 D6E7D28B
-> 
-> Linux Foundation Events Schedule:  events.linuxfoundation.org
-> Linux Foundation Training Schedule: training.linuxfoundation.org
+Today's Topics:
+
+   1. Re: AM335x-SK kernel panic with Poky(master), meta-ti(master)
+      core-image-base (Rudolf Streif)
+
+
+----------------------------------------------------------------------
+
+Message: 1
+Date: Tue, 22 Oct 2013 18:18:29 +0100
+From: Rudolf Streif <rstreif@linuxfoundation.org>
+To: Vanderpool Josh <Joshua.Vanderpool@raymondcorp.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [meta-ti] AM335x-SK kernel panic with Poky(master),
+        meta-ti(master) core-image-base
+Message-ID:
+        <CA+gsK-pNkDYCcecOftuopRu9XnxK3Xr9ZbSU23yekqQEczCYeg@mail.gmail.c=
+om>
+Content-Type: text/plain; charset=3D"iso-8859-1"
+
+Hi Josh,
+
+I am seeing the exact same problem with my am335x-evmsk and the latest
+meta-ti with 3.12-rc5 kernel. I posted it on this mailing list [1].
+
+This problem looks like the one posted here [2].
+
+The bad news is I don't have a solution for it. The good news is that Den=
+ys
+and I are attending the same conference and I keep harassing him about it=
+=2E
+:)
+
+Cheers,
+Rudi
+
+
+[1]
+https://lists.yoctoproject.org/pipermail/meta-ti/2013-October/003519.html=
+
+[2] http://permalink.gmane.org/gmane.linux.ports.arm.omap/96044
+
+
+On Tue, Oct 22, 2013 at 5:28 PM, Vanderpool Josh <
+Joshua.Vanderpool@raymondcorp.com> wrote:
+
+> I am having a similar issue as Rudi.
+> Attached is the bootLog.
+>
+>
+> Build Configuration:
+> BB_VERSION        =3D "1.21.0"
+> BUILD_SYS         =3D "x86_64-linux"
+> NATIVELSBSTRING   =3D "Ubuntu-12.04"
+> TARGET_SYS        =3D "arm-poky-linux-gnueabi"
+> MACHINE           =3D "am335x-evm"
+> DISTRO            =3D "poky"
+> DISTRO_VERSION    =3D "1.5+snapshot-20131022"
+> TUNE_FEATURES     =3D "armv7a vfp neon"
+> TARGET_FPU        =3D "vfp-neon"
+> meta
+> meta-yocto        =3D "master:505114c13d29799a25379f7ce720d632616d8776"=
+
+> meta-ti           =3D "master:c11504664990f007c3903d349e7cc135a904f8e2"=
+
+> meta-qt5          =3D "master:84cd4be2491895b0c3a0af64e4c83d58910d1f6c"=
+
+>
+> Josh Vanderpool
+> Electrical Engineer
+> Control Systems
+> The Raymond Corporation
+> 20 South Canal Street
+> Greene, New York 13778-0130
+> Phone: 607-656-2617
+> Fax: 607-656-4845
+> joshua.vanderpool@raymondcorp.com
+> http://www.raymondcorp.com
+>
+>
+> Confidentiality Notice:
+>
+> The preceding e-mail message (including any attachments) contains
+> information that may be confidential, protected by applicable legal
+> privileges, or constitute non-public information. It is intended to be
+> conveyed only to the designated recipient(s). If you are not an intende=
+d
+> recipient of this message, please notify the sender by replying to this=
+
+> message and then delete it from your system. Use, dissemination,
+> distribution or reproduction of this message by unintended recipients i=
+s
+> not authorized and may be unlawful.
+>
+>
+>
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://lists.yoctoproject.org/pipermail/meta-ti/attachments/2013102=
+2/34dc4b0c/attachment-0001.html>
+
+------------------------------
+
+_______________________________________________
+meta-ti mailing list
+meta-ti@yoctoproject.org
+https://lists.yoctoproject.org/listinfo/meta-ti
+
+
+End of meta-ti Digest, Vol 25, Issue 35
+***************************************
+Confidentiality Notice:
+
+The preceding e-mail message (including any attachments) contains informa=
+tion that may be confidential, protected by applicable legal privileges, =
+or constitute non-public information. It is intended to be conveyed only =
+to the designated recipient(s). If you are not an intended recipient of t=
+his message, please notify the sender by replying to this message and the=
+n delete it from your system. Use, dissemination, distribution or reprodu=
+ction of this message by unintended recipients is=20
+not authorized and may be unlawful.
+
 
 
 
