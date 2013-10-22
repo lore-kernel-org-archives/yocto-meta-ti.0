@@ -1,37 +1,28 @@
 Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7D0FCE01722
-	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 16:19:03 -0700 (PDT)
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68B2EE01726
+	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 18:13:55 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9LNJ1e9027587;
-	Mon, 21 Oct 2013 18:19:01 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9LNJ1Ku003377;
-	Mon, 21 Oct 2013 18:19:01 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 21 Oct 2013 18:19:01 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9LNJ09j020563;
-	Mon, 21 Oct 2013 18:19:01 -0500
-Date: Mon, 21 Oct 2013 19:19:00 -0400
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9M1DsSc015205
+	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 20:13:54 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9M1DsKl015085
+	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 20:13:54 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Mon, 21 Oct 2013 20:13:53 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	r9M1DrEj021419	for <meta-ti@yoctoproject.org>; Mon, 21 Oct 2013 20:13:53
+	-0500
+Date: Mon, 21 Oct 2013 21:03:33 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Rudolf Streif <rstreif@linuxfoundation.org>
-Message-ID: <20131021231859.GA7779@edge>
-References: <CA+gsK-p49VYtzviOwgtzssxxXnAS4Eku0Y95bsFL5LvT+v=9Sw@mail.gmail.com>
-	<20131017214528.GC30989@edge>
-	<CA+gsK-qKLdXTq1PJEmXLp0d5n5wEYf+6Na+pFj+UwnWLO_dt2g@mail.gmail.com>
-	<20131019023954.GK2127@edge>
-	<CA+gsK-q8W-wAP-rBhy7RgHUddsbdE_SaNOgyfFQ+zj2ksSidKw@mail.gmail.com>
-	<CA+gsK-owJQGEhzv9tgmiF+fORTErYVbQUhcoQ3BVLA+p3a+9Qw@mail.gmail.com>
-	<CA+gsK-qaWVUGPe7fW62V+tH0F3GVZHHXGD_+LHQX7hiE7VcZRg@mail.gmail.com>
-	<20131021211522.GA26549@denix.org>
-	<CA+gsK-q6=AXpMNQOJYK47W_JJvhbi=YT7sdUOrjYVxC0aMDqBA@mail.gmail.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1939834312.843.1382403813656.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-In-Reply-To: <CA+gsK-q6=AXpMNQOJYK47W_JJvhbi=YT7sdUOrjYVxC0aMDqBA@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: AM335x EVM and core-image-sato
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-10-21_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,167 +35,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Oct 2013 23:19:04 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 22 Oct 2013 01:13:56 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_842_1773351454.1382403813655"
 
-Now I'm just wondering what PG version of the board you've got, if it fails in 
-the same way with our 3.8 kernel and a known good set of 3.12 images...
+------=_Part_842_1773351454.1382403813655
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+<head>
+<title>
+Status for 10/21/13
+</title>
+</head>
+<body>
+
+<h2>Status for 10/21/13</h2>
+
+<h2>BUILD_ID: build-2013-10-21_21-02-51</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.10"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-On Mon, Oct 21, 2013 at 11:19:35PM +0100, Rudolf Streif wrote:
-> Thanks, Denys.
-> 
-> Interesting point about gcc. It's version 4.8.1 which is the default for
-> poky master. Which is what I used all along.
-> 
-> Thanks for sending your binaries. They fail too with the exact same
-> problem. See attached log. I found [1] on gmane which exactly describes the
-> problem I am seeing.
-> 
-> If that is the case then I was wondering why my earlier builds with
-> 3.12-rc3 actually worked. And I tried them again and they are now failing
-> too. Of course I don't know anything about the specifics of the gpio and
-> the timers on the chip but it looks like a weird hardware initialization
-> condition. And I don't know if the proposed patch in [1] was ever
-> incorporated in your kernel tree.
-> 
-> I don't think it's the hardware (or at least not alone) because the SD that
-> ships with it with the 3.2 kernel works just fine.
-> 
-> Cheers,
-> Rudi
-> 
-> 
-> [1]  http://permalink.gmane.org/gmane.linux.ports.arm.omap/96044
-> 
-> 
-> On Mon, Oct 21, 2013 at 10:15 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> 
-> > Rudi,
-> >
-> > As we discussed earlier today, let my send you my binaries for the kernel
-> > and
-> > u-boot to try on your board. I just wanted to ask you about the toolchain
-> > that
-> > you used to build yours. In our builds we use Linaro gcc-4.7 hardfp
-> > toolchain
-> > and I vaguely remember hearing about some problems with the recent gcc-4.8
-> > toolchain from oe-core... I'm wondering if you are having the same issue.
-> >
-> > --
-> > Denys
-> >
-> >
-> > On Mon, Oct 21, 2013 at 10:42:35AM -0700, Rudolf Streif wrote:
-> > > Since the 3.12-rc5 kernel does not work I decided to give the 3.8 kernel
-> > a
-> > > try. The issue with this one is that the linux-ti-staging_3.8.bb recipe
-> > > explicitly sets KERNEL_IMAGETYPE="uImage". However, the u-boot
-> > environment
-> > > has now moved on to using zImage which consequently means u-boot will not
-> > > find the kernel file.
-> > >
-> > > I do not know why KERNEL_IMAGETYPE = "uImage" was hacked into the
-> > > linux-ti-staging_3.8.bb recipe but whoever did it did not think about
-> > > u-boot. Does zImage not work with 3.8? I did not try it but it should
-> > > normally have no effect. Since there is no dependency of the u-boot
-> > recipes
-> > > on the kernel image types changes to the kernel image type for newer
-> > > versions of the kernel then automatically means that it must be changed
-> > for
-> > > the previous versions too.
-> > >
-> > > I mocked around with the u-boot environment and booted the 3.8 uImage
-> > > kernel. To my surprise the 3.8 kernel from the TI staging repository
-> > fails
-> > > with the exact same problem and stops booting with a kernel not syncing
-> > > message during the init calls. Apparently a patch must have been applied
-> > to
-> > > the kernel repo that breaks it. It has nothing possibly to do with the
-> > > build system.
-> > >
-> > > I would appreciate any hints to get this kernel built and boot on the
-> > board.
-> > >
-> > > Thanks,
-> > > Rudi
-> > >
-> > >
-> > > On Mon, Oct 21, 2013 at 1:16 AM, Rudolf Streif
-> > > <rstreif@linuxfoundation.org>wrote:
-> > >
-> > > > Denys,
-> > > >
-> > > > I recompiled the 3.12-rc5 kernel again but it still stalls during
-> > > > initialization. I attached the boot log. I don't know much about the
-> > > > platform details but maybe that's an issue you know about.
-> > > >
-> > > > Thanks,
-> > > > Rudi
-> > > >
-> > > >
-> > > >
-> > > >>
-> > > >> [1]
-> > > >> Build Configuration:
-> > > >> BB_VERSION        = "1.21.0"
-> > > >> BUILD_SYS         = "x86_64-linux"
-> > > >> NATIVELSBSTRING   = "Fedora-18"
-> > > >> TARGET_SYS        = "arm-poky-linux-gnueabi"
-> > > >> MACHINE           = "am335x-evm"
-> > > >> DISTRO            = "poky"
-> > > >> DISTRO_VERSION    = "1.5+snapshot-20131019"
-> > > >> TUNE_FEATURES     = "armv7a vfp neon"
-> > > >> TARGET_FPU        = "vfp-neon"
-> > > >> meta-yocto        = "master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4"
-> > > >> meta-ti           = "master:c11504664990f007c3903d349e7cc135a904f8e2"
-> > > >> meta-oe           = "master:f8903f53db717294d63a8d79b5ef7ca34b3c189e"
-> > > >> meta              = "master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4"
-> > > >>
-> > > >>
-> > > >
-> > > >
-> > > >
-> > > >
-> > > >
-> > >
-> > >
-> > > --
-> > > --
-> > > *Rudolf J. Streif*
-> > > Director of Embedded Solutions
-> > > The Linux Foundation
-> > >
-> > > rudolf.streif@linux.com
-> > > Phone: +1.619.537.6646
-> > > Skype: rudolfstreif
-> > > PGP: RSA 2048/2048 D6E7D28B
-> > >
-> > > Linux Foundation Events Schedule:  events.linuxfoundation.org
-> > > Linux Foundation Training Schedule: training.linuxfoundation.org
-> >
-> > > _______________________________________________
-> > > meta-ti mailing list
-> > > meta-ti@yoctoproject.org
-> > > https://lists.yoctoproject.org/listinfo/meta-ti
-> >
-> >
-> 
-> 
-> -- 
-> -- 
-> *Rudolf J. Streif*
-> Director of Embedded Solutions
-> The Linux Foundation
-> 
-> rudolf.streif@linux.com
-> Phone: +1.619.537.6646
-> Skype: rudolfstreif
-> PGP: RSA 2048/2048 D6E7D28B
-> 
-> Linux Foundation Events Schedule:  events.linuxfoundation.org
-> Linux Foundation Training Schedule: training.linuxfoundation.org
-
-
-
+------=_Part_842_1773351454.1382403813655--
