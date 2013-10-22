@@ -1,33 +1,26 @@
-Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 88643E01742
-	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 13:16:55 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [96.231.138.104])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MV300CJJ705FB30@vms173013.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 22 Oct 2013 15:16:54 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id E3E8A200AC; Tue,
-	22 Oct 2013 16:16:52 -0400 (EDT)
-Date: Tue, 22 Oct 2013 16:16:52 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Rudolf Streif <rstreif@linuxfoundation.org>, meta-ti@yoctoproject.org
-Message-id: <20131022201652.GB404@denix.org>
-References: <CA+gsK-qKLdXTq1PJEmXLp0d5n5wEYf+6Na+pFj+UwnWLO_dt2g@mail.gmail.com>
-	<20131019023954.GK2127@edge>
-	<CA+gsK-q8W-wAP-rBhy7RgHUddsbdE_SaNOgyfFQ+zj2ksSidKw@mail.gmail.com>
-	<CA+gsK-owJQGEhzv9tgmiF+fORTErYVbQUhcoQ3BVLA+p3a+9Qw@mail.gmail.com>
-	<CA+gsK-qaWVUGPe7fW62V+tH0F3GVZHHXGD_+LHQX7hiE7VcZRg@mail.gmail.com>
-	<20131021211522.GA26549@denix.org>
-	<CA+gsK-q6=AXpMNQOJYK47W_JJvhbi=YT7sdUOrjYVxC0aMDqBA@mail.gmail.com>
-	<20131021231859.GA7779@edge>
-	<CA+gsK-rx6conDzh=Zxk5zu7=KT=it=wZE8ZBGPaxUwhoKGuyOg@mail.gmail.com>
-	<20131022193620.GB9301@edge>
-MIME-version: 1.0
-In-reply-to: <20131022193620.GB9301@edge>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: AM335x EVM and core-image-sato
+Return-Path: <chase.maupin@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BEA02E01743
+	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 13:20:09 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9MKK5gt000426
+	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 15:20:06 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9MKK5JU019617
+	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 15:20:05 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 22 Oct 2013 15:20:05 -0500
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9MKK2KY017105;
+	Tue, 22 Oct 2013 15:20:03 -0500
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 22 Oct 2013 16:12:02 -0500
+Message-ID: <1382476322-15188-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Subject: [PATCH] dra7xx-evm: remove u-boot preferred provider
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,237 +33,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Oct 2013 20:17:02 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 22 Oct 2013 20:20:11 -0000
+Content-Type: text/plain
 
-Hey, Rudi,
+* Now the DRA7xx support is fully merged into upstream u-boot
+  then we can remove setting the PREFERRED_PROVIDER for
+  u-boot and virtual/bootloader to u-boot-dra7xx and instead
+  pick up the default setting from the omap-a15.inc file.
 
-Just one more quick check about your board - are you sure yours is an EVM? Or 
-is it an SK-EVM i.e. a "Starter Kit"? Basically, what color is the PCB of your 
-board - is it green (EVM) or purple (SK)?
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ conf/machine/dra7xx-evm.conf |    3 ---
+ 1 files changed, 0 insertions(+), 3 deletions(-)
 
-For example, here's the EVM:
-https://plus.google.com/u/0/110579591067038943673/posts/SLB35o1JgBu
-
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index 5897a5f..14253cf 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -8,9 +8,6 @@ IMAGE_FSTYPES += "ubi tar.gz"
+ 
+ SERIAL_CONSOLE = "115200 ttyO0"
+ 
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-dra7xx"
+-PREFERRED_PROVIDER_u-boot = "u-boot-dra7xx"
+-
+ UBOOT_MACHINE = "dra7xx_evm_config"
+ 
+ # UBI information.  Note that this is board and kernel specific.  Changes
 -- 
-Denys
+1.7.0.4
 
-
-
-On Tue, Oct 22, 2013 at 03:36:21PM -0400, Denys Dmytriyenko wrote:
-> Huh, I'm wondering if 1.2 is still supported... There were 2.0 and 2.1 
-> versions of the silicon and I believe those are the latest ones. Need to 
-> double-check that.
-> 
-> Denys
-> 
-> 
-> On Tue, Oct 22, 2013 at 08:57:51AM +0100, Rudolf Streif wrote:
-> > Where do I find the PG version of the board? The barcode sticker on the
-> > board says rev 1.2.
-> > 
-> > 
-> > On Tue, Oct 22, 2013 at 12:19 AM, Denys Dmytriyenko <denys@ti.com> wrote:
-> > 
-> > > Now I'm just wondering what PG version of the board you've got, if it
-> > > fails in
-> > > the same way with our 3.8 kernel and a known good set of 3.12 images...
-> > >
-> > >
-> > > On Mon, Oct 21, 2013 at 11:19:35PM +0100, Rudolf Streif wrote:
-> > > > Thanks, Denys.
-> > > >
-> > > > Interesting point about gcc. It's version 4.8.1 which is the default for
-> > > > poky master. Which is what I used all along.
-> > > >
-> > > > Thanks for sending your binaries. They fail too with the exact same
-> > > > problem. See attached log. I found [1] on gmane which exactly describes
-> > > the
-> > > > problem I am seeing.
-> > > >
-> > > > If that is the case then I was wondering why my earlier builds with
-> > > > 3.12-rc3 actually worked. And I tried them again and they are now failing
-> > > > too. Of course I don't know anything about the specifics of the gpio and
-> > > > the timers on the chip but it looks like a weird hardware initialization
-> > > > condition. And I don't know if the proposed patch in [1] was ever
-> > > > incorporated in your kernel tree.
-> > > >
-> > > > I don't think it's the hardware (or at least not alone) because the SD
-> > > that
-> > > > ships with it with the 3.2 kernel works just fine.
-> > > >
-> > > > Cheers,
-> > > > Rudi
-> > > >
-> > > >
-> > > > [1]  http://permalink.gmane.org/gmane.linux.ports.arm.omap/96044
-> > > >
-> > > >
-> > > > On Mon, Oct 21, 2013 at 10:15 PM, Denys Dmytriyenko <denis@denix.org>
-> > > wrote:
-> > > >
-> > > > > Rudi,
-> > > > >
-> > > > > As we discussed earlier today, let my send you my binaries for the
-> > > kernel
-> > > > > and
-> > > > > u-boot to try on your board. I just wanted to ask you about the
-> > > toolchain
-> > > > > that
-> > > > > you used to build yours. In our builds we use Linaro gcc-4.7 hardfp
-> > > > > toolchain
-> > > > > and I vaguely remember hearing about some problems with the recent
-> > > gcc-4.8
-> > > > > toolchain from oe-core... I'm wondering if you are having the same
-> > > issue.
-> > > > >
-> > > > > --
-> > > > > Denys
-> > > > >
-> > > > >
-> > > > > On Mon, Oct 21, 2013 at 10:42:35AM -0700, Rudolf Streif wrote:
-> > > > > > Since the 3.12-rc5 kernel does not work I decided to give the 3.8
-> > > kernel
-> > > > > a
-> > > > > > try. The issue with this one is that the linux-ti-staging_3.8.bbrecipe
-> > > > > > explicitly sets KERNEL_IMAGETYPE="uImage". However, the u-boot
-> > > > > environment
-> > > > > > has now moved on to using zImage which consequently means u-boot
-> > > will not
-> > > > > > find the kernel file.
-> > > > > >
-> > > > > > I do not know why KERNEL_IMAGETYPE = "uImage" was hacked into the
-> > > > > > linux-ti-staging_3.8.bb recipe but whoever did it did not think
-> > > about
-> > > > > > u-boot. Does zImage not work with 3.8? I did not try it but it should
-> > > > > > normally have no effect. Since there is no dependency of the u-boot
-> > > > > recipes
-> > > > > > on the kernel image types changes to the kernel image type for newer
-> > > > > > versions of the kernel then automatically means that it must be
-> > > changed
-> > > > > for
-> > > > > > the previous versions too.
-> > > > > >
-> > > > > > I mocked around with the u-boot environment and booted the 3.8 uImage
-> > > > > > kernel. To my surprise the 3.8 kernel from the TI staging repository
-> > > > > fails
-> > > > > > with the exact same problem and stops booting with a kernel not
-> > > syncing
-> > > > > > message during the init calls. Apparently a patch must have been
-> > > applied
-> > > > > to
-> > > > > > the kernel repo that breaks it. It has nothing possibly to do with
-> > > the
-> > > > > > build system.
-> > > > > >
-> > > > > > I would appreciate any hints to get this kernel built and boot on the
-> > > > > board.
-> > > > > >
-> > > > > > Thanks,
-> > > > > > Rudi
-> > > > > >
-> > > > > >
-> > > > > > On Mon, Oct 21, 2013 at 1:16 AM, Rudolf Streif
-> > > > > > <rstreif@linuxfoundation.org>wrote:
-> > > > > >
-> > > > > > > Denys,
-> > > > > > >
-> > > > > > > I recompiled the 3.12-rc5 kernel again but it still stalls during
-> > > > > > > initialization. I attached the boot log. I don't know much about
-> > > the
-> > > > > > > platform details but maybe that's an issue you know about.
-> > > > > > >
-> > > > > > > Thanks,
-> > > > > > > Rudi
-> > > > > > >
-> > > > > > >
-> > > > > > >
-> > > > > > >>
-> > > > > > >> [1]
-> > > > > > >> Build Configuration:
-> > > > > > >> BB_VERSION        = "1.21.0"
-> > > > > > >> BUILD_SYS         = "x86_64-linux"
-> > > > > > >> NATIVELSBSTRING   = "Fedora-18"
-> > > > > > >> TARGET_SYS        = "arm-poky-linux-gnueabi"
-> > > > > > >> MACHINE           = "am335x-evm"
-> > > > > > >> DISTRO            = "poky"
-> > > > > > >> DISTRO_VERSION    = "1.5+snapshot-20131019"
-> > > > > > >> TUNE_FEATURES     = "armv7a vfp neon"
-> > > > > > >> TARGET_FPU        = "vfp-neon"
-> > > > > > >> meta-yocto        =
-> > > "master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4"
-> > > > > > >> meta-ti           =
-> > > "master:c11504664990f007c3903d349e7cc135a904f8e2"
-> > > > > > >> meta-oe           =
-> > > "master:f8903f53db717294d63a8d79b5ef7ca34b3c189e"
-> > > > > > >> meta              =
-> > > "master:9a1dce10bdc9254bb38e0e54199f23ae55e209a4"
-> > > > > > >>
-> > > > > > >>
-> > > > > > >
-> > > > > > >
-> > > > > > >
-> > > > > > >
-> > > > > > >
-> > > > > >
-> > > > > >
-> > > > > > --
-> > > > > > --
-> > > > > > *Rudolf J. Streif*
-> > > > > > Director of Embedded Solutions
-> > > > > > The Linux Foundation
-> > > > > >
-> > > > > > rudolf.streif@linux.com
-> > > > > > Phone: +1.619.537.6646
-> > > > > > Skype: rudolfstreif
-> > > > > > PGP: RSA 2048/2048 D6E7D28B
-> > > > > >
-> > > > > > Linux Foundation Events Schedule:  events.linuxfoundation.org
-> > > > > > Linux Foundation Training Schedule: training.linuxfoundation.org
-> > > > >
-> > > > > > _______________________________________________
-> > > > > > meta-ti mailing list
-> > > > > > meta-ti@yoctoproject.org
-> > > > > > https://lists.yoctoproject.org/listinfo/meta-ti
-> > > > >
-> > > > >
-> > > >
-> > > >
-> > > > --
-> > > > --
-> > > > *Rudolf J. Streif*
-> > > > Director of Embedded Solutions
-> > > > The Linux Foundation
-> > > >
-> > > > rudolf.streif@linux.com
-> > > > Phone: +1.619.537.6646
-> > > > Skype: rudolfstreif
-> > > > PGP: RSA 2048/2048 D6E7D28B
-> > > >
-> > > > Linux Foundation Events Schedule:  events.linuxfoundation.org
-> > > > Linux Foundation Training Schedule: training.linuxfoundation.org
-> > >
-> > >
-> > >
-> > 
-> > 
-> > -- 
-> > -- 
-> > *Rudolf J. Streif*
-> > Director of Embedded Solutions
-> > The Linux Foundation
-> > 
-> > rudolf.streif@linux.com
-> > Phone: +1.619.537.6646
-> > Skype: rudolfstreif
-> > PGP: RSA 2048/2048 D6E7D28B
-> > 
-> > Linux Foundation Events Schedule:  events.linuxfoundation.org
-> > Linux Foundation Training Schedule: training.linuxfoundation.org
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
 
