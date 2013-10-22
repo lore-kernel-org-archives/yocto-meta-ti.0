@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 50BF6E01742
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 51FDFE01744
 	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 13:27:35 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C5C6A529CC; Tue, 22 Oct 2013 20:27:34 +0000 (UTC)
+	id DF643529AF; Tue, 22 Oct 2013 20:27:34 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131022202734.C5C6A529CC@arago-project.org>
+Message-Id: <20131022202734.DF643529AF@arago-project.org>
 Date: Tue, 22 Oct 2013 20:27:34 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Chase Maupin : dra7xx-evm: remove u-boot preferred provider
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 22 Oct 2013 20:27:37 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: b4349f859654efcbca3be3c8376205db7f7175f8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b4349f859654efcbca3be3c8376205db7f7175f8
+Branch: master
+Commit: fe3eb57f580b945e63779114245e148a1bb6e4cb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fe3eb57f580b945e63779114245e148a1bb6e4cb
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
 Date:   Tue Oct 22 16:12:02 2013 -0500
