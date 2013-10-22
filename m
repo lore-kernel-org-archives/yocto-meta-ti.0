@@ -1,25 +1,32 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from bec-systems.com (u15414263.onlinehome-server.com
-	[74.208.70.121])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 33AD0E01736
-	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 04:37:12 -0700 (PDT)
-Received: from oh-67-76-203-50.sta.embarqhsd.net ([67.76.203.50]
-	helo=happy.bec-systems.com)
-	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
-	id 1VYa94-0001Um-7z; Tue, 22 Oct 2013 07:29:16 -0400
+Return-Path: <Joshua.Vanderpool@raymondcorp.com>
+Received: from smtp.raymondcorp.com (unknown [24.97.209.121])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BAB41E0173E
+	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 09:28:22 -0700 (PDT)
+Received: from usnygrcas1.raymondcorp.local (nothing.attdns.com
+	[130.1.155.194] (may be forged))
+	by smtp.raymondcorp.com (8.14.3/8.14.3) with ESMTP id r9MGS96D013078
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Tue, 22 Oct 2013 11:28:09 -0500
+Received: from USNYGRMBX4.raymondcorp.local ([169.254.4.106]) by usnygrcas1
+	([130.1.155.198]) with mapi id 14.03.0158.001; Tue, 22 Oct 2013 12:28:09
+	-0400
+From: Vanderpool Josh <Joshua.Vanderpool@raymondcorp.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: AM335x-SK kernel panic with Poky(master), meta-ti(master)
+	core-image-base
+Thread-Index: AQHOz0Oxw1rXVS1feEG58zdAqyGAwQ==
+Date: Tue, 22 Oct 2013 16:28:07 +0000
+Message-ID: <7D1F292BE8E4CC4F93079C1A7A58D5622B9FF5C3@USNYGRMBX4.raymondcorp.local>
+Accept-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+x-originating-ip: [130.1.155.203]
 MIME-Version: 1.0
-X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Date: Tue, 22 Oct 2013 11:36:52 GMT
-Message-Id: <1382441812408.352b9d56@Nodemailer>
-From: cliff.brake@gmail.com
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
-X-Spam_score: -2.9
-X-Spam_score_int: -28
-X-Spam_bar: --
-Subject: OE Changelog since 2013-10-13 until 2013-10-20
+X-MessageScreenMessageID: 1382459289.735246.1642.1969078288
+X-MessageScreenContentScore: Score of 0 assigned to Content
+X-MessageScreenUCEScore: Score of 0 assigned to UCE
+X-MessageScreen: Analyzed by IntelliReach MessageScreen(tm)
+Subject: AM335x-SK kernel panic with Poky(master), meta-ti(master) core-image-base
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,682 +39,365 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Oct 2013 11:37:15 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Tue, 22 Oct 2013 16:28:24 -0000
+X-Groupsio-MsgNum: 3563
+Content-Language: en-US
+Content-Type: multipart/mixed;
+	boundary="_002_7D1F292BE8E4CC4F93079C1A7A58D5622B9FF5C3USNYGRMBX4raymo_"
+
+--_002_7D1F292BE8E4CC4F93079C1A7A58D5622B9FF5C3USNYGRMBX4raymo_
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Changelog since 2013-10-13 until 2013-10-20.  Projects included in this =
-report:
-
-bitbake: git://git.openembedded.org/bitbake
-openembedded-core: git://git.openembedded.org/openembedded-core
-meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
-meta-arago: git://arago-project.org/git/meta-arago.git
-meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
-meta-browser: git://github.com/OSSystems/meta-browser.git
-meta-bug: git://github.com/buglabs/meta-bug.git
-meta-chicken: git://github.com/OSSystems/meta-chicken
-meta-efikamx: git://github.com/kraj/meta-efikamx.git
-meta-ettus: http://github.com/koenkooi/meta-ettus.git
-meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
-meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
-meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
-meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
-meta-gumstix: git://github.com/gumstix/meta-gumstix.git
-meta-gumstix-community: =
-git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
-meta-handheld: git://git.openembedded.org/meta-handheld
-meta-igep: http://github.com/ebutera/meta-igep.git
-meta-intel: git://git.yoctoproject.org/meta-intel
-meta-ivi: git://git.yoctoproject.org/meta-ivi
-meta-java: git://github.com/woglinde/meta-java
-meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
-meta-micro: git://git.openembedded.org/meta-micro
-meta-mono: git://git.yoctoproject.org/meta-mono.git
-meta-netbookpro: git://github.com/tworaz/meta-netbookpro
-meta-nslu2: git://github.com/kraj/meta-nslu2
-meta-opie: git://git.openembedded.org/meta-opie
-meta-qt3: git://git.yoctoproject.org/meta-qt3
-meta-qt5: git://github.com/meta-qt5/meta-qt5.git
-meta-slugos: git://github.com/kraj/meta-slugos
-meta-systemd: git://git.yoctoproject.org/meta-systemd
-meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
-meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
-meta-ti: git://git.yoctoproject.org/meta-ti
-meta-webos: git://github.com/openwebos/meta-webos.git
-meta-xilinx: git://git.yoctoproject.org/meta-xilinx
-meta-yocto: git://git.yoctoproject.org/meta-yocto
-openembedded: git://git.openembedded.org/openembedded
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for bitbake:
-
-Alexandru DAMIAN (3):
-=20=20toaster: add toaster code to bitbake
-=20=20toaster: adding frameworks for the Simple UI
-=20=20toaster: add Toaster UI interface
-
-Cristiana Voicu (1):
-=20=20hob: Hob should ask for ports only when Manual proxy is selected
-
-Olof Johansson (1):
-=20=20monitordisk: lower inode check warning to note
-
-Paul Eggleton (1):
-=20=20siggen: handle recipe path changes in siginfo files
-
-Richard Purdie (4):
-=20=20bitbake: Update post 1.20 to development version
-=20=20cooker/command: Add error state for the server and use for pre_serve =
-errors
-=20=20bitbake: bitbake: bb: Drop deprecated functions
-=20=20utils: Don't show stack traces for BBHandledException
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded-core:
-
-Anders Roxell (1):
-=20=20ltp: update to new release 20130904
-
-Bruce Ashfield (1):
-=20=20kernel: restore scripts in the sysroot
-
-Chase Maupin (1):
-=20=20udev: update local rules for new touchscreen device
-
-Chen Qi (1):
-=20=20device_table-minimal.txt: change group of /dev/hda back to disk
-
-Cristiana Voicu (1):
-=20=20separatebuilddir: remove entries for imake and xorg-cf-files
-
-Darren Hart (2):
-=20=20wic: Force lba off for FAT16 partitions
-=20=20wic: Check for external modules
-
-David Nystr=C3=B6m (9):
-=20=20beecrypt: Add nativesdk in BBCLASSEXTEND
-=20=20popt: Add nativesdk in BBCLASSEXTEND
-=20=20icu: Add nativesdk in BBCLASSEXTEND
-=20=20attr: Add nativesdk in BBCLASSEXTEND
-=20=20acl: Add nativesdk in BBCLASSEXTEND
-=20=20rpmresolve: Add nativesdk in BBCLASSEXTEND
-=20=20smartpm: Add nativesdk in BBCLASSEXTEND
-=20=20ossp-uuid: Add nativesdk in BBCLASSEXTEND
-=20=20file: Add nativesdk in BBCLASSEXTEND
-
-Diego Rondini (1):
-=20=20libav: Add libswscale to PACKAGES_DYNAMIC
-
-Felipe F. Tonello (1):
-=20=20update-rc: Stop and remove service if updating package
-
-Jack Mitchell (2):
-=20=20grub: add patch to support 256 byte inodes
-=20=20crond: remove UID check in init script
-
-Jeffrey C Honig (1):
-=20=20initscripts: insure checkroot.sh runs before anything writing to the =
-file
-
-Jonathan Liu (1):
-=20=20qt4: add upstream QTBUG-31579 patch for QPainter regression
-
-Laurentiu Palcu (10):
-=20=20byacc: upgrade to 20130925
-=20=20xkeyboard-config: upgrade to 2.10.1
-=20=20xauth: upgrade to 1.0.8
-=20=20xf86-input-evdev: upgrade to 2.8.2
-=20=20libdrm: upgrade to 2.4.47
-=20=20xset: upgrade to 1.2.3
-=20=20xf86-video-intel: upgrade to 2.21.15
-=20=20xinput: upgrade to 1.6.1
-=20=20xprop: upgrade to 1.2.2
-=20=20xf86-video-fbdev: upgrade to 0.4.4
-
-Marko Lindqvist (2):
-=20=20automake: unhardcode version number
-=20=20automake: update to upstream version 1.13.4
-
-Martin Jansa (3):
-=20=20matchbox-wm: Add dependency on libxfixes and libxcursor
-=20=20telepathy-mission-control: Add PACKAGECONFIG for upower and =
-connectivity
-=20=20bitbake.conf: Remove double slash from PATH_prepend and PKG_CONFIG_DIR
-
-Maxin B. John (1):
-=20=20sqlite3: update to version 3.8.0.1
-
-Muhammad Shakeel (3):
-=20=20sysvinit-inittab: Fix getting tty device name from SERIAL_CONSOLES =
-entries
-=20=20connman: Remove obsolete configurations from EXTRA_OECONF
-=20=20connman: Upgrade to v1.18
-
-Nobuhiro Iwamatsu (1):
-=20=20kernel.bbclass: unset LDFLAGS when run devshell in kernel recipe
-
-Otavio Salvador (1):
-=20=20uboot-config.bbclass: Raise an error for unknown configs
-
-Paul Eggleton (1):
-=20=20classes/package: handle filenames containing wildcards
-
-Qiang Chen (1):
-=20=20openssh: fix sshd status command error prompt
-
-Richard Purdie (3):
-=20=20libarchive: Add -native version needed for pixz
-=20=20nativesdk: Fix pn check
-=20=20cross-canadian: Fix SHLIBSDIR when using multilib
-
-Riku Voipio (1):
-=20=20glib-2.0: fix build on Aarch64
-
-Ross Burton (19):
-=20=20xorg-lib-common: fix malloc0returnsnull usage
-=20=20gtk+: remove unused configure options
-=20=20libmatchbox: remove unused configure options
-=20=20pango: fix x11 DISTRO_FEATURE check
-=20=20libxt: remove unused configure option
-=20=20insane: configure option checking
-=20=20libsm: upgrade to 1.2.2
-=20=20libxmu: upgrade to 1.1.2
-=20=20libxpm: upgrade to 3.5.11
-=20=20xf86-video-vesa: upgrade to 2.3.3
-=20=20gnome-desktop-testing: add
-=20=20glib-2.0: upgrade to 2.28.0
-=20=20atk: upgrade to 2.10.0.
-=20=20at-spi2-core: upgrade to 2.10.0.
-=20=20at-spi2-gtk: upgrade to 2.10.0
-=20=20glib-networking: upgrade to 2.38.0 and PACKAGECONFIGise
-=20=20bitbake.conf: add WARN_QA and ERROR_QA to the hash whitelist
-=20=20update-rcd.bbclass: fix host/target test
-=20=20cairo: add explicit dependency on zlib
-
-Saul Wold (24):
-=20=20cups: upgrade to 1.6.4
-=20=20desktop-file-utils-native: upgrade to 0.22
-=20=20libbsd: upgrade to 0.6.0
-=20=20man-pages: upgrade to 3.54
-=20=20rsync: upgrade to 3.1.0
-=20=20util-macros: upgrade to 1.17.1
-=20=20file: Update to 5.15
-=20=20tzcode: Update to 2013g
-=20=20tzdata: Update to 2013g
-=20=20lsbinitscripts: Update to 9.50
-=20=20libpng: Update to 1.6.6
-=20=20sqlite3: update to 3.8.0.2
-=20=20kconfig-frontends: Update to 3.11.0.0
-=20=20busybox: Add depmod (adds 2240 bytes)
-=20=20local.conf.sample.extended: Add some additional comments for security =
-flags
-=20=20sysstat: upgrade to 10.1.7
-=20=20xz: Add nativesdk for Python3 nativesdk dependency
-=20=20kmod: Add patch to fix seperate build dir of ptest
-=20=20kmod: Update to Rev 15 via git
-=20=20check: add check recipe for kbd to use for creating unit tests
-=20=20kbd: Update to 2.0.0
-=20=20base-passwd: upgrade to 3.5.28
-=20=20ca-certificates: Clarify in Description that certs are Debian based
-=20=20packagegroup-core-basic: libuser has a hard depenency on libpam
-
-Stefan Stanacar (1):
-=20=20lib/oeqa/runtime: build kernel module on target test
-
-Ting Liu (2):
-=20=20kmod-native: use bswap to work on older Linux hosts
-=20=20perf: flag __SANE_USERSPACE_TYPES__ to include int-ll64.h for =
-powerpc64
-
-Tom Zanussi (5):
-=20=20wic: check for build artifacts
-=20=20wic: check passed-in build artifact directories
-=20=20wic: Check for the existence/correctness of build artifacts
-=20=20wic: Initialize return values in find_artifacts()
-=20=20wic: add pseudo to the populate-extfs step
-
-Valentin Popa (1):
-=20=20image types: split live into iso and hddimg
-
-Victor Kamensky (1):
-=20=20classes: add aarch64_be target
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-openembedded:
-
-Andreas M=C3=BCller (8):
-=20=20qt-creator: add qt4-plugin-sqldriver-sqlite to RRECOMMENDS_${PN}
-=20=20xfce4-settings: set correct version
-=20=20xfce4-settings: add exo-native to DEPENDS
-=20=20xfce4-weather-plugin: add libsoup-2.4 to DEPENDS
-=20=20xfwm4: add exo-native to DEPENDS
-=20=20xfce4-icon-theme: add xfce4-dev-tools-native to DEPENDS
-=20=20orbit2: fix build after automake 1.13.4 update
-=20=20connman: follow oe-core to 1.18
-
-Andreas Oberritter (2):
-=20=20autofs: pass systemd directory to configure
-=20=20autofs: change DESCRIPTION to SUMMARY
-
-Carlos Rafael Giani (1):
-=20=20orc: update to version 0.4.18
-
-Chunrong Guo (3):
-=20=20libhugetlbfs: install static 4G-edge testcases
-=20=20libhugetlbfs: not use hard coded path in run_tests.py
-=20=20libhugetlbfs: install perl lib to directory perl instead of perl5
-
-Cliff Brake (2):
-=20=20libraw1394: add recipe
-=20=20libdc1394: add recipe
-
-David Turgeon (1):
-=20=20tftpd-hpa: fix premature exit
-
-Fathi Boudra (3):
-=20=20python-numpy: add config files for armeb architecture
-=20=20libjpeg-turbo: update to 1.3.0 release (svn r988)
-=20=20libjpeg-turbo: fix variables spacing
-
-Felipe F. Tonello (2):
-=20=20Revert "gypsy: Added init script"
-=20=20ofono: libqofono: Added libqofono recipe
-
-Hongxu Jia (4):
-=20=20mariadb: update libdir for libtool
-=20=20mariadb: fix warning while invoking 'mysql_install_db' on target
-=20=20mariadb: fix do_configure failed while multilib is used
-=20=20mariadb: Add mysql5 to RPROVIDES for backwards compatibility
-
-Jack Mitchell (3):
-=20=20libsoc: update to 0.4
-=20=20libestr: add 0.1.6
-=20=20rsyslog: update to 7.4.4
-
-Joe Slater (1):
-=20=20xdebug: update to version 2.2.3
-
-Khem Raj (4):
-=20=20libmikmod: Upgrade libmikmod_3.2.0.bb -> libmikmod_3.3.2.bb
-=20=20libgnomeui: Depend on libgnome-keyring not gnome-keyring
-=20=20libqofono: Use BPN instead of PN in SRC_URI
-=20=20opencv: Upgrade to latest on 2.4 branch
-
-Koen Kooi (4):
-=20=20image-magick: update to latest patchset
-=20=20gdm: delete broken .desktop files
-=20=20gdm 2.32.2: don't install broken gdm-autologin PAM file
-=20=20python-pip: add 1.3.1
-
-Roy Li (1):
-=20=20vsftpd: use quotes to wrap variable
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-angstrom:
-
-Andreas M=C3=BCller (2):
-=20=20angstrom.inc: add opengl to DISTRO_FEATURES for all machines
-=20=20set mesa-gl as default provider for virtual/libgl
-
-Khem Raj (2):
-=20=20Revert "packagegroup-gnome: add gnome-applets"
-=20=20angstrom: Override OE-Core for  virtual/libgl PREFERRED_PROVIDER
-
-Koen Kooi (37):
-=20=20systemd-image: fix u-a, include systemd-analyze
-=20=20packagegroup-gnome: include missing gsettings files
-=20=20packagegroup-gnome-apps: include cheese and abiword
-=20=20angstrom: really backfill sysvinit this time
-=20=20angstrom-gnome-icon-theme-enable: add SUMMARY
-=20=20angstrom: add a switch to completely disable support for sysv scripts
-=20=20tweaks: add gconf-sanity for providing =
-/usr/libexec/gconf-sanity-check-2
-=20=20systemd-gnome-image: add xinput-calibrator
-=20=20development-gnome-image: a GNOME2 image with dev tools installed
-=20=20development-gnome-image: add more tools
-=20=20development-gnome-image: fix vimrc typo
-=20=20development-gnome-image: add more filesystem tools
-=20=20fixmac: a udev rule to generate a random MAC address when needed for =
-eth* de
-=20=20connman: add angstrom specific settings
-=20=20images: add connman-angstrom-settings to connman based images
-=20=20angstrom-version: enhance lsb_release
-=20=20angstrom-version: more lsb_release improvements
-=20=20libgnome: update wallpaper to include yocto compatible logo
-=20=20libgnome: move Yocto Compatible logo up a bit in the Angstrom =
-wallpaper
-=20=20angstrom-gdm-autologin-hack: add SUMMARY
-=20=20gconf-sanity: allow empty ${PN}
-=20=20connman: add bbappend for network settings
-=20=20systemd-image: drag in fixmac by default
-=20=20gconf-sanity: update to match new libexec layout
-=20=20systemd-image: include cpufreq-tweaks
-=20=20packagegroup-gnome: add gnome-applets
-=20=20packagegroup-gnome: add gnome-common-schemas
-=20=20GNOME2 updates: drop gconf-sanity, replace xfce4-terminal with =
-gnome-termina
-=20=20systemd: add bbappend to install a custom journald.conf
-=20=20connman: match bbappend to updated oe-core version (1.17)
-=20=20cpufreq-tweaks: tweak cpufreq governor after boot
-=20=20angstrom v2013.12: prefer openssh-sshd as ssh daemon
-=20=20arm-defaults: switch pandaboard to cortexa8hf as well
-=20=20arm-defaults: fix panda default tune
-=20=20README: add branching checklist
-=20=20angstrom next: add openssh-ssh client to default install
-=20=20connman: update bbappend to 1.18 to match oe-core
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-arago:
-
-Chase Maupin (8):
-=20=20meta-toolchain-arago: copy relocate_sdk from COREBASE
-=20=20arago-core-tisdk-image: Add AM437x DTB filter
-=20=20ti-tisdk-makefile: Add AM437x support
-=20=20matrix-gui-apps-git: Update for AM437x
-=20=20packagegroup crypto: Add AM437x support
-=20=20udev: fix touchscreen detection rule
-=20=20matrix-gui-crypto-demos: Add am437x support
-=20=20packagegroup-arago-base: Add mtd-utils-ubifs
-
-Chen Qi (1):
-=20=20busybox: configure system user id to range from 100 to 999
-
-Denys Dmytriyenko (17):
-=20=20ti-crypto-examples: remove empty no longer used bbappend
-=20=20chrpath.bbclass: remove local copy, as dylan now has all the fixes
-=20=20relocate_sdk.py: remove local copy, as dylan now has all the fixes
-=20=20init-ifupdown: move init and interfaces files from netbase to new =
-init-ifupd
-=20=20gst-ffmpeg: move to gstreamer directory to match upstream location
-=20=20gettext: remove local bbappend that got merged upstream
-=20=20libjpeg-turbo: update local bbappend with upstreamed fixes removed
-=20=20python-m2crypto: remove since upstream meta-oe has newer version
-=20=20README: update dependency information for dylan base
-=20=20qtwebkit-examples: fix pushed upstream, remove locally
-=20=20qtwebkit: update bbappend to 5.1.1
-=20=20qtbase: update bbappend to 5.1.1, explicitly enable linuxfb
-=20=20qt-tstat: fix Makefile to support build outside of source, i.e. ${S} =
-!=3D ${B}
-=20=20qt-provider: expand with extra dependency variables for qtsvg and =
-qtscript
-=20=20qtbase: update bbappend to disable eglfs/gles for now
-=20=20qt-tstat: update recipe to be Qt4 and Qt5 compatible
-=20=20arago-qt5-test-image: replace matrix-browser with qt-tstat demo
-
-Franklin S. Cooper Jr (4):
-=20=20ti-tisdk-makefile: Hardcode PLATFORM_ARCH variable
-=20=20ti-tisdk-makefile: Speed up building of kernel and u-boot
-=20=20tisdk-install: Set MAKE_JOBS variable during SDK installation
-=20=20ti-tisdk-makefile: Pass in LOADADDR for Linux kernel
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-beagleboard:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-browser:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-bug:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-chicken:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-efikamx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ettus:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm:
-
-Christoph Settgast (1):
-=20=20qtbase: update to version 5.1.1
-
-Daiane Angolini (5):
-=20=20imx-audio: Drop redundant package
-=20=20alsa-state: Add default state values for mx5/mx6/mxs
-=20=20imx-lib: Move from 11.09.01 to 11.09.02
-=20=20imx-vpu: Add imx-vpu version 11.09.02
-=20=20imx-test: Add dependency on imx-vpu
-
-Khem Raj (1):
-=20=20machines: Add PREFERRED_PROVIDER for virtual/bootloader
-
-Otavio Salvador (2):
-=20=20u-boot-fslc: Update to 2013.10 based release
-=20=20linux-fslc: Update to 3.12-rc5 based release
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm-extra:
-
-Eric Nelson (2):
-=20=20u-boot-boundary: update PV to reflect U-Boot version
-=20=20imx6qsabrelite: Set MACHINEOVERRIDES to nitrogen6x
-
-Otavio Salvador (1):
-=20=20gk802: Remove board support
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-ppc:
-
-Chunrong Guo (1):
-=20=20linux-qoriq-sdk : add config fragments
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-guacamayo:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix-community:
-
-Andreas M=C3=BCller (2):
-=20=20card-part.sh: make card partition work for latest fedora
-=20=20udev-udisks-rules-overo: hide boot volume with label 'BOOT'
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-handheld:
-
-Andrea Adami (42):
-=20=20linux-2.6.29: remove recipe, h3600 now prefers linux-yocto
-=20=20hx4700.conf: update config and prefer linux-yocto
-=20=20linux-yocto: initial commit of hx4700 defconfig
-=20=20linux-3.0.1: remove recipe, hx4700 now prefers linux-yocto
-=20=20linux-yocto-handhelds.inc: add missing bootlogo for hx4700
-=20=20hx4700.conf: standardize the iwmmxt extra packaging
-=20=20formfactor: add configuration for IPAQ with 3.5" screen
-=20=20formfactor: add configuration for IPAQ with 3.8" screen
-=20=20formfactor: add configuration for IPAQ with 4" screen
-=20=20formfactor: refresh machconfig for Zaurus devices
-=20=20meta-handheld: remove TARGET_ARCH from machine configurations
-=20=20meta-handheld: remove obsolete refs to kdrive
-=20=20meta-handheld: remove obsolete refs to kernel26 MACHINE_FEATURE
-=20=20formfactor: h3600: set DISPLAY_BPP=3D16 even for 12bit LCD
-=20=20formfactor: add ben-nanonote machconfig
-=20=20formfactor: add config for IPAQ rx1950 and rx3000
-=20=20formfactor: add config for jornada 56x, 6xx, 7xx
-=20=20formfactor: add configurations for Motorola with 2.4" and 2.5" LCD
-=20=20formfactor: add simpad configuration
-=20=20formfactor: add configurations for PALM devices
-=20=20formfactor: standardize the comments about real dpi size
-=20=20zaurus.inc: append 'qvga' to MACHINE_FEATURES for collie and poodle
-=20=20meta-handheld: ipaq: add qvga MACHINE_FEATURE
-=20=20jornada56x.conf: add qvga to MACHINE_FEATURES
-=20=20meta-handheld: add qvga to MACHINE_FEATURES for Motorola
-=20=20ben-nanonote.conf: add qvga to MACHINE_FEATURES
-=20=20meta-handheld: remove MACHINE_GUI* and MACHINE_DISPLAY* vars
-=20=20linux_3.1: explicit qvga instead of LOGO_SIZE
-=20=20linux.inc: remove LOGO_SIZE logic. BTW old linux.inc is deprecated.
-=20=20formfactor: h1940: unset framebuffer rotation
-=20=20meta-handheld: remove deprecated ROOT_FLASH_SIZE and =
-VOLATILE_STORAGE_SIZE
-=20=20h3800.conf: fix MACHINE_FEATURES
-=20=20zaurus: readd specific bits to each machine
-=20=20zaurus.inc: remove code for JFFS2 now split in machine configuration
-=20=20meta-handheld: use explicit ERASEBLOCKSIZE and remove the variable
-=20=20spitz.conf: reorder and add full example for SL-C3000
-=20=20zaurus: simplify JFFS2 creation using code in image_fstype.bbclass
-=20=20meta-handheld: use code in image_types.bbclass for JFFS2
-=20=20motorola-ezx-base.inc: remove MACHINE_CLASS and MODUTILS vars
-=20=20motorola-ezx-base.inc: reorder and remove old comments about iwmmxt
-=20=20motorola-ezx-base.inc: remove -n from EXTRA_IMAGECMD_jffs2
-=20=20zaurus: readd sum.jffs2 imagetype
-
-Paul Eggleton (2):
-=20=20tune-sh3.inc: drop in favour of OE-Core file
-=20=20Restore MACHINE_GUI_CLASS and MACHINE_DISPLAY_WIDTH_PIXELS / =
-HEIGHT_PIXELS
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-igep:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-intel:
-
-Nitin A Kamble (14):
-=20=20emenlow: Enable 3.10 kernel recipe
-=20=20emenlow: update default kernel to v3.10
-=20=20fri2: Enable 3.10 kernel recipe
-=20=20fri2: update default kernel to v3.10
-=20=20sys940x: Enable 3.10 kernel recipe
-=20=20sys940x: update default kernel to v3.10
-=20=20chiefriver: linux-yocto_3.10: update srcrevs
-=20=20jasperforest: linux-yocto_3.10: update srcrevs
-=20=20nuc: linux-yocto_3.10: update srcrevs
-=20=20sugarbay: linux-yocto_3.10: update srcrevs
-=20=20crownbay-noemgd: linux-yocto_3.10: update srcrevs
-=20=20emenlow-noemgd: linux-yocto_3.10: update srcrevs
-=20=20fri2-noemgd: linux-yocto_3.10: update srcrevs
-=20=20sys940x-noemgd: linux-yocto_3.10: update srcrevs
-
-Ong Boon Leong (2):
-=20=20meta-crystalforest: update linux-yocto_3.8 kernel to 3.8.13
-=20=20meta-crystalforest: remove xserver-xf86-config
-
-Tom Zanussi (3):
-=20=20crownbay: Add linux-yocto_3.10 support
-=20=20crownbay: Switch to linux-yocto-3.10
-=20=20meta-intel/meta-isg: new area for ISG BSPs
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ivi:
-
-Florin Sarbu (1):
-=20=20node-state-manager: Update to version 1.2.0.0
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-java:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-kde:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-micro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-mono:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-netbookpro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-nslu2:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-opie:
-
-Paul Eggleton (2):
-=20=20opie-pics: use MACHINE_GUI_CLASS instead of older GUI_MACHINE_CLASS
-=20=20opie-taskbar-images: drop PIXMAP_SIZE
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt3:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt5:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-slugos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-systemd:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-raspberrypi:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-smartphone:
-
-Martin Jansa (3):
-=20=20android-tools: Add zlib, openssl dependency
-
-Simon Busch (4):
-=20=20meta-android: initramfs-android-image: create as replacement for the =
-chroot-
-=20=20meta-android: kernel_android: use initramfs-android-image instead of =
-chroot-
-=20=20meta-android: libhybris: bump SRCREV
-=20=20meta-android: android-system: prevent android from remounting rootfs =
-read-on
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ti:
-
-Chase Maupin (1):
-=20=20u-boot-ti-staging: update to 2013.10 release
-
-Denys Dmytriyenko (2):
-=20=20recipes: cruft removal and seasonal cleanup
-=20=20linux-ti-staging: update to 3.12-rc5 and latest merges of feature =
-trees
-
-Franklin S. Cooper Jr (1):
-=20=20machine conf: Set correct default ubi volume name for 335x and 437x
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-webos:
-
-Ed Chejlava (3):
-=20=20upstart: Fix memory leak by turning off logging
-=20=20libnih: Fix upstart crash on power-up
-=20=20Upstart: Fix memory leak by turning off logging
-
-Gayathri Srinivasan (1):
-=20=20webos-image: activitymanager=3D117
-
-Mark Bessey (1):
-=20=20nodejs: Remove mksnapshot from emulator builds
-
-Martin Jansa (5):
-=20=20nodejs: Fix build with long path to native sysroot, part II
-=20=20nodejs: Fix build for qemux86-64
-=20=20valgrind: Add ${TCLIBC}-dbg to RRECOMMENDS also for x86
-=20=20recipes: Update WEBOS_VERSION to use SHA-1 of annotated tags
-=20=20buildhistory: Generate installed-package-file-sizes.txt
-
-Sangwoo Kang (1):
-=20=20webos-image: db8=3D89
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-xilinx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-Richard Purdie (1):
-=20=20poky: Update Version post release
-
-Saul Wold (2):
-=20=20package-regex: Tweak python-docutils so it works correctly
-=20=20local.conf.sample.extended: Add some additional comments for security =
-flags
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded:
-
-
-
+I am having a similar issue as Rudi. =20
+Attached is the bootLog.
+
+
+Build Configuration:
+BB_VERSION        =3D "1.21.0"
+BUILD_SYS         =3D "x86_64-linux"
+NATIVELSBSTRING   =3D "Ubuntu-12.04"
+TARGET_SYS        =3D "arm-poky-linux-gnueabi"
+MACHINE           =3D "am335x-evm"
+DISTRO            =3D "poky"
+DISTRO_VERSION    =3D "1.5+snapshot-20131022"
+TUNE_FEATURES     =3D "armv7a vfp neon"
+TARGET_FPU        =3D "vfp-neon"
+meta             =20
+meta-yocto        =3D "master:505114c13d29799a25379f7ce720d632616d8776"
+meta-ti           =3D "master:c11504664990f007c3903d349e7cc135a904f8e2"
+meta-qt5          =3D "master:84cd4be2491895b0c3a0af64e4c83d58910d1f6c"
+
+Josh Vanderpool
+Electrical Engineer
+Control Systems
+The Raymond Corporation
+20 South Canal Street
+Greene, New York 13778-0130
+Phone: 607-656-2617
+Fax: 607-656-4845
+joshua.vanderpool@raymondcorp.com
+http://www.raymondcorp.com
+=20
+
+Confidentiality Notice:
+
+The preceding e-mail message (including any attachments) contains informa=
+tion that may be confidential, protected by applicable legal privileges, =
+or constitute non-public information. It is intended to be conveyed only =
+to the designated recipient(s). If you are not an intended recipient of t=
+his message, please notify the sender by replying to this message and the=
+n delete it from your system. Use, dissemination, distribution or reprodu=
+ction of this message by unintended recipients is=20
+not authorized and may be unlawful.
+
+
+
+--_002_7D1F292BE8E4CC4F93079C1A7A58D5622B9FF5C3USNYGRMBX4raymo_
+Content-Type: application/octet-stream; name="bootLog"
+Content-Description: bootLog
+Content-Disposition: attachment; filename="bootLog"; size=16940;
+	creation-date="Tue, 22 Oct 2013 16:21:44 GMT";
+	modification-date="Tue, 22 Oct 2013 16:21:44 GMT"
+Content-Transfer-Encoding: base64
+
+DQpVLUJvb3QgU1BMIDIwMTMuMTAgKE9jdCAxOCAyMDEzIC0gMTM6Mzg6MzQpDQpyZWFkaW5nIGFy
+Z3MNCnNwbDogZXJyb3IgcmVhZGluZyBpbWFnZSBhcmdzLCBlcnIgLSAtMQ0KcmVhZGluZyB1LWJv
+b3QuaW1nDQpyZWFkaW5nIHUtYm9vdC5pbWcNCg0KDQpVLUJvb3QgMjAxMy4xMCAoT2N0IDE4IDIw
+MTMgLSAxMzozODozNCkNCg0KSTJDOiAgIHJlYWR5DQpEUkFNOiAgMjU2IE1pQg0KV0FSTklORzog
+Q2FjaGVzIG5vdCBlbmFibGVkDQpOQU5EOiAgMCBNaUINCk1NQzogICBPTUFQIFNEL01NQzogMCwg
+T01BUCBTRC9NTUM6IDENCioqKiBXYXJuaW5nIC0gcmVhZGVudigpIGZhaWxlZCwgdXNpbmcgZGVm
+YXVsdCBlbnZpcm9ubWVudA0KDQpOZXQ6ICAgPGV0aGFkZHI+IG5vdCBzZXQuIFZhbGlkYXRpbmcg
+Zmlyc3QgRS1mdXNlIE1BQw0KY3BzdywgdXNiX2V0aGVyDQpIaXQgYW55IGtleSB0byBzdG9wIGF1
+dG9ib290OiAgMSAICAggMCANCm1tYzAgaXMgY3VycmVudCBkZXZpY2UNClNEL01NQyBmb3VuZCBv
+biBkZXZpY2UgMA0KcmVhZGluZyB1RW52LnR4dA0KKiogVW5hYmxlIHRvIHJlYWQgZmlsZSB1RW52
+LnR4dCAqKg0KNDUyNDM1MiBieXRlcyByZWFkIGluIDUxMyBtcyAoOC40IE1pQi9zKQ0KMzUyMjUg
+Ynl0ZXMgcmVhZCBpbiA1MyBtcyAoNjQ4LjQgS2lCL3MpDQpLZXJuZWwgaW1hZ2UgQCAweDgwMjAw
+MDAwIFsgMHgwMDAwMDAgLSAweDQ1MDk0MCBdDQojIyBGbGF0dGVuZWQgRGV2aWNlIFRyZWUgYmxv
+YiBhdCA4MGY4MDAwMA0KICAgQm9vdGluZyB1c2luZyB0aGUgZmR0IGJsb2IgYXQgMHg4MGY4MDAw
+MA0KICAgVXNpbmcgRGV2aWNlIFRyZWUgaW4gcGxhY2UgYXQgODBmODAwMDAsIGVuZCA4MGY4Yjk5
+OA0KDQpTdGFydGluZyBrZXJuZWwgLi4uDQoNClsgICAgMC4wMDAwMDBdIEJvb3RpbmcgTGludXgg
+b24gcGh5c2ljYWwgQ1BVIDB4MA0KWyAgICAwLjAwMDAwMF0gTGludXggdmVyc2lvbiAzLjEyLjAt
+cmM1IChqb3NodWFAdWJ1bnR1KSAoZ2NjIHZlcnNpb24gNC44LjEgKEdDQykgKSAjMSBTTVAgRnJp
+IE9jdCAxOCAxMzowNDoyOSBQRFQgMjAxMw0KWyAgICAwLjAwMDAwMF0gQ1BVOiBBUk12NyBQcm9j
+ZXNzb3IgWzQxM2ZjMDgyXSByZXZpc2lvbiAyIChBUk12NyksIGNyPTEwYzUzYzdkDQpbICAgIDAu
+MDAwMDAwXSBDUFU6IFBJUFQgLyBWSVBUIG5vbmFsaWFzaW5nIGRhdGEgY2FjaGUsIFZJUFQgYWxp
+YXNpbmcgaW5zdHJ1Y3Rpb24gY2FjaGUNClsgICAgMC4wMDAwMDBdIE1hY2hpbmU6IEdlbmVyaWMg
+QU0zM1hYIChGbGF0dGVuZWQgRGV2aWNlIFRyZWUpLCBtb2RlbDogVEkgQU0zMzV4IEVWTS1TSw0K
+WyAgICAwLjAwMDAwMF0gY21hOiBDTUE6IHJlc2VydmVkIDE2IE1pQiBhdCA4ZTgwMDAwMA0KWyAg
+ICAwLjAwMDAwMF0gTWVtb3J5IHBvbGljeTogRUNDIGRpc2FibGVkLCBEYXRhIGNhY2hlIHdyaXRl
+YmFjaw0KWyAgICAwLjAwMDAwMF0gQ1BVOiBBbGwgQ1BVKHMpIHN0YXJ0ZWQgaW4gU1ZDIG1vZGUu
+DQpbICAgIDAuMDAwMDAwXSBBTTMzNVggRVMxLjAgKHNneCBuZW9uICkNClsgICAgMC4wMDAwMDBd
+IFBFUkNQVTogRW1iZWRkZWQgOSBwYWdlcy9jcHUgQGMxMTlkMDAwIHMxNDY1NiByODE5MiBkMTQw
+MTYgdTM2ODY0DQpbICAgIDAuMDAwMDAwXSBCdWlsdCAxIHpvbmVsaXN0cyBpbiBab25lIG9yZGVy
+LCBtb2JpbGl0eSBncm91cGluZyBvbi4gIFRvdGFsIHBhZ2VzOiA2NDUxMg0KWyAgICAwLjAwMDAw
+MF0gS2VybmVsIGNvbW1hbmQgbGluZTogY29uc29sZT10dHlPMCwxMTUyMDBuOCByb290PS9kZXYv
+bW1jYmxrMHAyIHJvIHJvb3Rmc3R5cGU9ZXh0NCByb290d2FpdA0KWyAgICAwLjAwMDAwMF0gUElE
+IGhhc2ggdGFibGUgZW50cmllczogMTAyNCAob3JkZXI6IDAsIDQwOTYgYnl0ZXMpDQpbICAgIDAu
+MDAwMDAwXSBEZW50cnkgY2FjaGUgaGFzaCB0YWJsZSBlbnRyaWVzOiAzMjc2OCAob3JkZXI6IDUs
+IDEzMTA3MiBieXRlcykNClsgICAgMC4wMDAwMDBdIElub2RlLWNhY2hlIGhhc2ggdGFibGUgZW50
+cmllczogMTYzODQgKG9yZGVyOiA0LCA2NTUzNiBieXRlcykNClsgICAgMC4wMDAwMDBdIE1lbW9y
+eTogMjI2NDYwSy8yNjAwOTZLIGF2YWlsYWJsZSAoNTg3N0sga2VybmVsIGNvZGUsIDY3OUsgcndk
+YXRhLCAyMjY0SyByb2RhdGEsIDQxOEsgaW5pdCwgNTUyOEsgYnNzLCAzMzYzNksgcmVzZXJ2ZWQs
+IDBLIGhpZ2htZW0pDQpbICAgIDAuMDAwMDAwXSBWaXJ0dWFsIGtlcm5lbCBtZW1vcnkgbGF5b3V0
+Og0KWyAgICAwLjAwMDAwMF0gICAgIHZlY3RvciAgOiAweGZmZmYwMDAwIC0gMHhmZmZmMTAwMCAg
+ICggICA0IGtCKQ0KWyAgICAwLjAwMDAwMF0gICAgIGZpeG1hcCAgOiAweGZmZjAwMDAwIC0gMHhm
+ZmZlMDAwMCAgICggODk2IGtCKQ0KWyAgICAwLjAwMDAwMF0gICAgIHZtYWxsb2MgOiAweGQwODAw
+MDAwIC0gMHhmZjAwMDAwMCAgICggNzQ0IE1CKQ0KWyAgICAwLjAwMDAwMF0gICAgIGxvd21lbSAg
+OiAweGMwMDAwMDAwIC0gMHhkMDAwMDAwMCAgICggMjU2IE1CKQ0KWyAgICAwLjAwMDAwMF0gICAg
+IHBrbWFwICAgOiAweGJmZTAwMDAwIC0gMHhjMDAwMDAwMCAgICggICAyIE1CKQ0KWyAgICAwLjAw
+MDAwMF0gICAgIG1vZHVsZXMgOiAweGJmMDAwMDAwIC0gMHhiZmUwMDAwMCAgICggIDE0IE1CKQ0K
+WyAgICAwLjAwMDAwMF0gICAgICAgLnRleHQgOiAweGMwMDA4MDAwIC0gMHhjMDdmYjg2YyAgICg4
+MTQzIGtCKQ0KWyAgICAwLjAwMDAwMF0gICAgICAgLmluaXQgOiAweGMwN2ZjMDAwIC0gMHhjMDg2
+NDk0MCAgICggNDE5IGtCKQ0KWyAgICAwLjAwMDAwMF0gICAgICAgLmRhdGEgOiAweGMwODY2MDAw
+IC0gMHhjMDkwZmUyMCAgICggNjgwIGtCKQ0KWyAgICAwLjAwMDAwMF0gICAgICAgIC5ic3MgOiAw
+eGMwOTBmZTIwIC0gMHhjMGU3NjA2MCAgICg1NTI5IGtCKQ0KWyAgICAwLjAwMDAwMF0gSGllcmFy
+Y2hpY2FsIFJDVSBpbXBsZW1lbnRhdGlvbi4NClsgICAgMC4wMDAwMDBdIAlSQ1UgcmVzdHJpY3Rp
+bmcgQ1BVcyBmcm9tIE5SX0NQVVM9MiB0byBucl9jcHVfaWRzPTEuDQpbICAgIDAuMDAwMDAwXSBO
+Ul9JUlFTOjE2IG5yX2lycXM6MTYgMTYNClsgICAgMC4wMDAwMDBdIElSUTogRm91bmQgYW4gSU5U
+QyBhdCAweGZhMjAwMDAwIChyZXZpc2lvbiA1LjApIHdpdGggMTI4IGludGVycnVwdHMNClsgICAg
+MC4wMDAwMDBdIFRvdGFsIG9mIDEyOCBpbnRlcnJ1cHRzIG9uIDEgYWN0aXZlIGNvbnRyb2xsZXIN
+ClsgICAgMC4wMDAwMDBdIE9NQVAgY2xvY2tldmVudCBzb3VyY2U6IHRpbWVyMiBhdCAyNDAwMDAw
+MCBIeg0KWyAgICAwLjAwMDAwMF0gc2NoZWRfY2xvY2s6IDMyIGJpdHMgYXQgMjRNSHosIHJlc29s
+dXRpb24gNDFucywgd3JhcHMgZXZlcnkgMTc4OTU2bXMNClsgICAgMC4wMDAwMDBdIE9NQVAgY2xv
+Y2tzb3VyY2U6IHRpbWVyMSBhdCAyNDAwMDAwMCBIeg0KWyAgICAwLjAwMDAwMF0gQ29uc29sZTog
+Y29sb3VyIGR1bW15IGRldmljZSA4MHgzMA0KWyAgICAwLjAwMDAwMF0gTG9jayBkZXBlbmRlbmN5
+IHZhbGlkYXRvcjogQ29weXJpZ2h0IChjKSAyMDA2IFJlZCBIYXQsIEluYy4sIEluZ28gTW9sbmFy
+DQpbICAgIDAuMDAwMDAwXSAuLi4gTUFYX0xPQ0tERVBfU1VCQ0xBU1NFUzogIDgNClsgICAgMC4w
+MDAwMDBdIC4uLiBNQVhfTE9DS19ERVBUSDogICAgICAgICAgNDgNClsgICAgMC4wMDAwMDBdIC4u
+LiBNQVhfTE9DS0RFUF9LRVlTOiAgICAgICAgODE5MQ0KWyAgICAwLjAwMDAwMF0gLi4uIENMQVNT
+SEFTSF9TSVpFOiAgICAgICAgICA0MDk2DQpbICAgIDAuMDAwMDAwXSAuLi4gTUFYX0xPQ0tERVBf
+RU5UUklFUzogICAgIDE2Mzg0DQpbICAgIDAuMDAwMDAwXSAuLi4gTUFYX0xPQ0tERVBfQ0hBSU5T
+OiAgICAgIDMyNzY4DQpbICAgIDAuMDAwMDAwXSAuLi4gQ0hBSU5IQVNIX1NJWkU6ICAgICAgICAg
+IDE2Mzg0DQpbICAgIDAuMDAwMDAwXSAgbWVtb3J5IHVzZWQgYnkgbG9jayBkZXBlbmRlbmN5IGlu
+Zm86IDM2OTUga0INClsgICAgMC4wMDAwMDBdICBwZXIgdGFzay1zdHJ1Y3QgbWVtb3J5IGZvb3Rw
+cmludDogMTE1MiBieXRlcw0KWyAgICAwLjAwMTIwMF0gQ2FsaWJyYXRpbmcgZGVsYXkgbG9vcC4u
+LiA0NzYuNzcgQm9nb01JUFMgKGxwaj0yMzgzODcyKQ0KWyAgICAwLjEwOTQyOV0gcGlkX21heDog
+ZGVmYXVsdDogMzI3NjggbWluaW11bTogMzAxDQpbICAgIDAuMTA5OTM4XSBTZWN1cml0eSBGcmFt
+ZXdvcmsgaW5pdGlhbGl6ZWQNClsgICAgMC4xMTAwOTFdIE1vdW50LWNhY2hlIGhhc2ggdGFibGUg
+ZW50cmllczogNTEyDQpbICAgIDAuMTM4OTI0XSBDUFU6IFRlc3Rpbmcgd3JpdGUgYnVmZmVyIGNv
+aGVyZW5jeTogb2sNClsgICAgMC4xNDA2NDldIENQVTA6IHRocmVhZCAtMSwgY3B1IDAsIHNvY2tl
+dCAtMSwgbXBpZHIgMA0KWyAgICAwLjE0MDczNV0gU2V0dGluZyB1cCBzdGF0aWMgaWRlbnRpdHkg
+bWFwIGZvciAweGMwNTk1MTY4IC0gMHhjMDU5NTFkOA0KWyAgICAwLjE0NDE3NF0gQnJvdWdodCB1
+cCAxIENQVXMNClsgICAgMC4xNDQxOTZdIFNNUDogVG90YWwgb2YgMSBwcm9jZXNzb3JzIGFjdGl2
+YXRlZC4NClsgICAgMC4xNDQyMDldIENQVTogQWxsIENQVShzKSBzdGFydGVkIGluIFNWQyBtb2Rl
+Lg0KWyAgICAwLjE0NzQ4NF0gZGV2dG1wZnM6IGluaXRpYWxpemVkDQpbICAgIDAuMTU4NzUyXSBW
+RlAgc3VwcG9ydCB2MC4zOiBpbXBsZW1lbnRvciA0MSBhcmNoaXRlY3R1cmUgMyBwYXJ0IDMwIHZh
+cmlhbnQgYyByZXYgMw0KWyAgICAwLjI0MDY5OF0gb21hcF9od21vZDogZGVidWdzczogX3dhaXRf
+dGFyZ2V0X2Rpc2FibGUgZmFpbGVkDQpbICAgIDAuMjQ2NTM5XSBwaW5jdHJsIGNvcmU6IGluaXRp
+YWxpemVkIHBpbmN0cmwgc3Vic3lzdGVtDQpbICAgIDAuMjUxNzg2XSByZWd1bGF0b3ItZHVtbXk6
+IG5vIHBhcmFtZXRlcnMNClsgICAgMC4yNTU3NDBdIE5FVDogUmVnaXN0ZXJlZCBwcm90b2NvbCBm
+YW1pbHkgMTYNClsgICAgMC4yNjMwNjhdIERNQTogcHJlYWxsb2NhdGVkIDI1NiBLaUIgcG9vbCBm
+b3IgYXRvbWljIGNvaGVyZW50IGFsbG9jYXRpb25zDQpbICAgIDAuMjgwMDA0XSBwbGF0Zm9ybSBt
+cHUuMTogRklYTUU6IGNsb2NrLW5hbWUgJ2ZjaycgRE9FUyBOT1QgZXhpc3QgaW4gZHQhDQpbICAg
+IDAuMjgzNDc5XSBwbGF0Zm9ybSA0OTAwMDAwMC5lZG1hOiBGSVhNRTogY2xvY2stbmFtZSAnZmNr
+JyBET0VTIE5PVCBleGlzdCBpbiBkdCENClsgICAgMC4yODg4ODVdIE9NQVAgR1BJTyBoYXJkd2Fy
+ZSB2ZXJzaW9uIDAuMQ0KWyAgICAwLjMwMzI4M10gcGxhdGZvcm0gNDgwNjAwMDAubW1jOiBGSVhN
+RTogY2xvY2stbmFtZSAnZmNrJyBET0VTIE5PVCBleGlzdCBpbiBkdCENClsgICAgMC4zMTkwOTZd
+IHBsYXRmb3JtIDQ4MDNjMDAwLm1jYXNwOiBGSVhNRTogY2xvY2stbmFtZSAnZmNrJyBET0VTIE5P
+VCBleGlzdCBpbiBkdCENClsgICAgMC4zMjM5NDhdIERTUyBub3Qgc3VwcG9ydGVkIG9uIHRoaXMg
+U29DDQpbICAgIDAuMzIzOTgwXSBObyBBVEFHcz8NClsgICAgMC4zMjM5OTVdIGh3LWJyZWFrcG9p
+bnQ6IGRlYnVnIGFyY2hpdGVjdHVyZSAweDQgdW5zdXBwb3J0ZWQuDQpbICAgIDAuNDA0ODU3XSBi
+aW86IGNyZWF0ZSBzbGFiIDxiaW8tMD4gYXQgMA0KWyAgICAwLjQ1MTgyMF0gZWRtYS1kbWEtZW5n
+aW5lIGVkbWEtZG1hLWVuZ2luZS4wOiBUSSBFRE1BIERNQSBlbmdpbmUgZHJpdmVyDQpbICAgIDAu
+NDU0MTk4XSB2YmF0OiA1MDAwIG1WIA0KWyAgICAwLjQ1NTQ5Nl0gbGlzM19yZWc6IG5vIHBhcmFt
+ZXRlcnMNClsgICAgMC40NjQ3MDJdIFNDU0kgc3Vic3lzdGVtIGluaXRpYWxpemVkDQpbICAgIDAu
+NDY4OTEwXSB1c2Jjb3JlOiByZWdpc3RlcmVkIG5ldyBpbnRlcmZhY2UgZHJpdmVyIHVzYmZzDQpb
+ICAgIDAuNDY5NDI3XSB1c2Jjb3JlOiByZWdpc3RlcmVkIG5ldyBpbnRlcmZhY2UgZHJpdmVyIGh1
+Yg0KWyAgICAwLjQ3MDU2MV0gdXNiY29yZTogcmVnaXN0ZXJlZCBuZXcgZGV2aWNlIGRyaXZlciB1
+c2INClsgICAgMC40NzM0MzJdIG9tYXBfaTJjIDQ0ZTBiMDAwLmkyYzogY291bGQgbm90IGZpbmQg
+cGN0bGRldiBmb3Igbm9kZSAvcGlubXV4QDQ0ZTEwODAwL3Bpbm11eF9pMmMwX3BpbnMsIGRlZmVy
+cmluZyBwcm9iZQ0KWyAgICAwLjQ3MzQ4NF0gcGxhdGZvcm0gNDRlMGIwMDAuaTJjOiBEcml2ZXIg
+b21hcF9pMmMgcmVxdWVzdHMgcHJvYmUgZGVmZXJyYWwNClsgICAgMC40ODMxNjJdIFN3aXRjaGVk
+IHRvIGNsb2Nrc291cmNlIHRpbWVyMQ0KWyAgICAwLjY0ODY5Ml0gTkVUOiBSZWdpc3RlcmVkIHBy
+b3RvY29sIGZhbWlseSAyDQpbICAgIDAuNjUwODY3XSBUQ1AgZXN0YWJsaXNoZWQgaGFzaCB0YWJs
+ZSBlbnRyaWVzOiAyMDQ4IChvcmRlcjogMiwgMTYzODQgYnl0ZXMpDQpbICAgIDAuNjUxMDg0XSBU
+Q1AgYmluZCBoYXNoIHRhYmxlIGVudHJpZXM6IDIwNDggKG9yZGVyOiA0LCA3MzcyOCBieXRlcykN
+ClsgICAgMC42NTIwMzJdIFRDUDogSGFzaCB0YWJsZXMgY29uZmlndXJlZCAoZXN0YWJsaXNoZWQg
+MjA0OCBiaW5kIDIwNDgpDQpbICAgIDAuNjUyMjcxXSBUQ1A6IHJlbm8gcmVnaXN0ZXJlZA0KWyAg
+ICAwLjY1MjMwM10gVURQIGhhc2ggdGFibGUgZW50cmllczogMjU2IChvcmRlcjogMiwgMjA0ODAg
+Ynl0ZXMpDQpbICAgIDAuNjUyNTY1XSBVRFAtTGl0ZSBoYXNoIHRhYmxlIGVudHJpZXM6IDI1NiAo
+b3JkZXI6IDIsIDIwNDgwIGJ5dGVzKQ0KWyAgICAwLjY1NDIxOV0gTkVUOiBSZWdpc3RlcmVkIHBy
+b3RvY29sIGZhbWlseSAxDQpbICAgIDAuNjU2NDQxXSBSUEM6IFJlZ2lzdGVyZWQgbmFtZWQgVU5J
+WCBzb2NrZXQgdHJhbnNwb3J0IG1vZHVsZS4NClsgICAgMC42NTY0NjldIFJQQzogUmVnaXN0ZXJl
+ZCB1ZHAgdHJhbnNwb3J0IG1vZHVsZS4NClsgICAgMC42NTY0ODJdIFJQQzogUmVnaXN0ZXJlZCB0
+Y3AgdHJhbnNwb3J0IG1vZHVsZS4NClsgICAgMC42NTY0OTRdIFJQQzogUmVnaXN0ZXJlZCB0Y3Ag
+TkZTdjQuMSBiYWNrY2hhbm5lbCB0cmFuc3BvcnQgbW9kdWxlLg0KWyAgICAwLjY1OTE1OF0gTmV0
+V2luZGVyIEZsb2F0aW5nIFBvaW50IEVtdWxhdG9yIFYwLjk3IChkb3VibGUgcHJlY2lzaW9uKQ0K
+WyAgICAwLjY2MDQ4N10gUE06IExvYWRpbmcgYW0zMzV4LXBtLWZpcm13YXJlLmJpbg0KWyAgICAw
+Ljg2MjE2OF0gVkZTOiBEaXNrIHF1b3RhcyBkcXVvdF82LjUuMg0KWyAgICAwLjg2MjQ2Nl0gRHF1
+b3QtY2FjaGUgaGFzaCB0YWJsZSBlbnRyaWVzOiAxMDI0IChvcmRlciAwLCA0MDk2IGJ5dGVzKQ0K
+WyAgICAwLjg2NTczM10gTkZTOiBSZWdpc3RlcmluZyB0aGUgaWRfcmVzb2x2ZXIga2V5IHR5cGUN
+ClsgICAgMC44NjYyNjVdIEtleSB0eXBlIGlkX3Jlc29sdmVyIHJlZ2lzdGVyZWQNClsgICAgMC44
+NjYyODddIEtleSB0eXBlIGlkX2xlZ2FjeSByZWdpc3RlcmVkDQpbICAgIDAuODY2NDMxXSBqZmZz
+MjogdmVyc2lvbiAyLjIuIChOQU5EKSAoU1VNTUFSWSkgIMKpIDIwMDEtMjAwNiBSZWQgSGF0LCBJ
+bmMuDQpbICAgIDAuODY2OTc5XSBtc2dtbmkgaGFzIGJlZW4gc2V0IHRvIDQ3NA0KWyAgICAwLjg3
+MzQ5Ml0gaW8gc2NoZWR1bGVyIG5vb3AgcmVnaXN0ZXJlZA0KWyAgICAwLjg3MzUyNF0gaW8gc2No
+ZWR1bGVyIGRlYWRsaW5lIHJlZ2lzdGVyZWQNClsgICAgMC44NzM2MDJdIGlvIHNjaGVkdWxlciBj
+ZnEgcmVnaXN0ZXJlZCAoZGVmYXVsdCkNClsgICAgMC44Nzc5MTldIHBpbmN0cmwtc2luZ2xlIDQ0
+ZTEwODAwLnBpbm11eDogMTQyIHBpbnMgYXQgcGEgZjllMTA4MDAgc2l6ZSA1NjgNClsgICAgMC45
+MDQ4MjNdIENvbnNvbGU6IHN3aXRjaGluZyB0byBjb2xvdXIgZnJhbWUgYnVmZmVyIGRldmljZSA2
+MHgzNA0KWyAgICAwLjkxMzU4MV0gU2VyaWFsOiA4MjUwLzE2NTUwIGRyaXZlciwgNCBwb3J0cywg
+SVJRIHNoYXJpbmcgZW5hYmxlZA0KWyAgICAwLjkyMjU2M10gNDRlMDkwMDAuc2VyaWFsOiB0dHlP
+MCBhdCBNTUlPIDB4NDRlMDkwMDAgKGlycSA9IDg4LCBiYXNlX2JhdWQgPSAzMDAwMDAwKSBpcyBh
+IE9NQVAgVUFSVDANClsgICAgMS41NzA5NzldIGNvbnNvbGUgW3R0eU8wXSBlbmFibGVkDQpbICAg
+IDEuNTgwOTgyXSBvbWFwX3JuZyA0ODMxMDAwMC5ybmc6IE9NQVAgUmFuZG9tIE51bWJlciBHZW5l
+cmF0b3IgdmVyLiAyMA0KWyAgICAxLjYyMjQ1NF0gYnJkOiBtb2R1bGUgbG9hZGVkDQpbICAgIDEu
+NjQ2ODM0XSBsb29wOiBtb2R1bGUgbG9hZGVkDQpbICAgIDEuNjU5OTQ5XSBtdGRvb3BzOiBtdGQg
+ZGV2aWNlIChtdGRkZXY9bmFtZS9udW1iZXIpIG11c3QgYmUgc3VwcGxpZWQNClsgICAgMS42Nzg5
+MDddIHVzYmNvcmU6IHJlZ2lzdGVyZWQgbmV3IGludGVyZmFjZSBkcml2ZXIgYXNpeA0KWyAgICAx
+LjY4NTM5NF0gdXNiY29yZTogcmVnaXN0ZXJlZCBuZXcgaW50ZXJmYWNlIGRyaXZlciBheDg4MTc5
+XzE3OGENClsgICAgMS42OTIyOTddIHVzYmNvcmU6IHJlZ2lzdGVyZWQgbmV3IGludGVyZmFjZSBk
+cml2ZXIgY2RjX2V0aGVyDQpbICAgIDEuNjk5NjA2XSB1c2Jjb3JlOiByZWdpc3RlcmVkIG5ldyBp
+bnRlcmZhY2UgZHJpdmVyIHI4MTV4DQpbICAgIDEuNzA2NTI1XSB1c2Jjb3JlOiByZWdpc3RlcmVk
+IG5ldyBpbnRlcmZhY2UgZHJpdmVyIHNtc2M5NXh4DQpbICAgIDEuNzEzMjY5XSB1c2Jjb3JlOiBy
+ZWdpc3RlcmVkIG5ldyBpbnRlcmZhY2UgZHJpdmVyIG5ldDEwODANClsgICAgMS43MTk3NDldIHVz
+YmNvcmU6IHJlZ2lzdGVyZWQgbmV3IGludGVyZmFjZSBkcml2ZXIgY2RjX3N1YnNldA0KWyAgICAx
+LjcyNjYxN10gdXNiY29yZTogcmVnaXN0ZXJlZCBuZXcgaW50ZXJmYWNlIGRyaXZlciB6YXVydXMN
+ClsgICAgMS43MzMyNzhdIHVzYmNvcmU6IHJlZ2lzdGVyZWQgbmV3IGludGVyZmFjZSBkcml2ZXIg
+Y2RjX25jbQ0KWyAgICAxLjc0MzIzN10gZWhjaV9oY2Q6IFVTQiAyLjAgJ0VuaGFuY2VkJyBIb3N0
+IENvbnRyb2xsZXIgKEVIQ0kpIERyaXZlcg0KWyAgICAxLjc1MDI0OV0gZWhjaS1vbWFwOiBPTUFQ
+LUVIQ0kgSG9zdCBDb250cm9sbGVyIGRyaXZlcg0KWyAgICAxLjc1Nzg5Ml0gdXNiY29yZTogcmVn
+aXN0ZXJlZCBuZXcgaW50ZXJmYWNlIGRyaXZlciBjZGNfd2RtDQpbICAgIDEuNzY0ODg5XSB1c2Jj
+b3JlOiByZWdpc3RlcmVkIG5ldyBpbnRlcmZhY2UgZHJpdmVyIHVzYi1zdG9yYWdlDQpbICAgIDEu
+NzcxNzM0XSB1c2Jjb3JlOiByZWdpc3RlcmVkIG5ldyBpbnRlcmZhY2UgZHJpdmVyIHVzYnRlc3QN
+ClsgICAgMS43ODIzODFdIG1vdXNlZGV2OiBQUy8yIG1vdXNlIGRldmljZSBjb21tb24gZm9yIGFs
+bCBtaWNlDQpbICAgIDEuNzk1OTc1XSBvbWFwX3J0YyA0NGUzZTAwMC5ydGM6IHJ0YyBjb3JlOiBy
+ZWdpc3RlcmVkIDQ0ZTNlMDAwLnJ0YyBhcyBydGMwDQpbICAgIDEuODAzNzM2XSA0NGUzZTAwMC5y
+dGM6IGFscmVhZHkgcnVubmluZw0KWyAgICAxLjgwOTc2NV0gaTJjIC9kZXYgZW50cmllcyBkcml2
+ZXINClsgICAgMS44MTQxNjVdIERyaXZlciBmb3IgMS13aXJlIERhbGxhcyBuZXR3b3JrIHByb3Rv
+Y29sLg0KWyAgICAxLjgyNTc3N10gb21hcF93ZHQ6IE9NQVAgV2F0Y2hkb2cgVGltZXIgUmV2IDB4
+MDE6IGluaXRpYWwgdGltZW91dCA2MCBzZWMNClsgICAgMS44MzgzMTZdIGVkbWEtZG1hLWVuZ2lu
+ZSBlZG1hLWRtYS1lbmdpbmUuMDogYWxsb2NhdGVkIGNoYW5uZWwgZm9yIDA6MjUNClsgICAgMS44
+NDU3ODZdIGVkbWEtZG1hLWVuZ2luZSBlZG1hLWRtYS1lbmdpbmUuMDogYWxsb2NhdGVkIGNoYW5u
+ZWwgZm9yIDA6MjQNClsgICAgMS44NTMxNDJdIG9tYXBfaHNtbWMgNDgwNjAwMDAubW1jOiB2bW1j
+IHJlZ3VsYXRvciBtaXNzaW5nDQpbICAgIDEuODU5MzYwXSBlZG1hLWRtYS1lbmdpbmUgZWRtYS1k
+bWEtZW5naW5lLjA6IGZyZWVpbmcgY2hhbm5lbCBmb3IgMjQNClsgICAgMS44NjYyMzJdIGVkbWEt
+ZG1hLWVuZ2luZSBlZG1hLWRtYS1lbmdpbmUuMDogZnJlZWluZyBjaGFubmVsIGZvciAyNQ0KWyAg
+ICAxLjg3MzE3MV0gcGxhdGZvcm0gNDgwNjAwMDAubW1jOiBEcml2ZXIgb21hcF9oc21tYyByZXF1
+ZXN0cyBwcm9iZSBkZWZlcnJhbA0KWyAgICAxLjg4ODAyMF0gbGVkdHJpZy1jcHU6IHJlZ2lzdGVy
+ZWQgdG8gaW5kaWNhdGUgYWN0aXZpdHkgb24gQ1BVcw0KWyAgICAxLjg5NTE4Nl0gZWRtYS1kbWEt
+ZW5naW5lIGVkbWEtZG1hLWVuZ2luZS4wOiBhbGxvY2F0ZWQgY2hhbm5lbCBmb3IgMDozNg0KWyAg
+ICAxLjkwMjQzNV0gb21hcC1zaGFtIDUzMTAwMDAwLnNoYW06IGh3IGFjY2VsIG9uIE9NQVAgcmV2
+IDQuMw0KWyAgICAxLjkxMzM2M10gb21hcC1hZXMgNTM1MDAwMDAuYWVzOiBPTUFQIEFFUyBodyBh
+Y2NlbCByZXY6IDMuMg0KWyAgICAxLjkxOTUxNF0gZWRtYS1kbWEtZW5naW5lIGVkbWEtZG1hLWVu
+Z2luZS4wOiBhbGxvY2F0ZWQgY2hhbm5lbCBmb3IgMDo1DQpbICAgIDEuOTI2NjU3XSBlZG1hLWRt
+YS1lbmdpbmUgZWRtYS1kbWEtZW5naW5lLjA6IGFsbG9jYXRlZCBjaGFubmVsIGZvciAwOjYNClsg
+ICAgMS45MzgxMTVdIHVzYmNvcmU6IHJlZ2lzdGVyZWQgbmV3IGludGVyZmFjZSBkcml2ZXIgdXNi
+aGlkDQpbICAgIDEuOTQ0MjEzXSB1c2JoaWQ6IFVTQiBISUQgY29yZSBkcml2ZXINClsgICAgMS45
+NTUwOTldIG9wcm9maWxlOiBubyBwZXJmb3JtYW5jZSBjb3VudGVycw0KWyAgICAxLjk2MjMwMV0g
+b3Byb2ZpbGU6IHVzaW5nIHRpbWVyIGludGVycnVwdC4NClsgICAgMS45Njc4ODRdIFRDUDogY3Vi
+aWMgcmVnaXN0ZXJlZA0KWyAgICAxLjk3MTM4Nl0gSW5pdGlhbGl6aW5nIFhGUk0gbmV0bGluayBz
+b2NrZXQNClsgICAgMS45NzYxMTFdIE5FVDogUmVnaXN0ZXJlZCBwcm90b2NvbCBmYW1pbHkgMTcN
+ClsgICAgMS45ODA4ODhdIE5FVDogUmVnaXN0ZXJlZCBwcm90b2NvbCBmYW1pbHkgMTUNClsgICAg
+MS45ODYwNTRdIEtleSB0eXBlIGRuc19yZXNvbHZlciByZWdpc3RlcmVkDQpbICAgIDEuOTkxOTY0
+XSBjcHUgY3B1MDogY3B1MCByZWd1bGF0b3Igbm90IHJlYWR5LCByZXRyeQ0KWyAgICAxLjk5NzU0
+Nl0gcGxhdGZvcm0gY3B1ZnJlcS1jcHUwLjA6IERyaXZlciBjcHVmcmVxLWNwdTAgcmVxdWVzdHMg
+cHJvYmUgZGVmZXJyYWwNClsgICAgMi4wMDU4NzNdIFRodW1iRUUgQ1BVIGV4dGVuc2lvbiBzdXBw
+b3J0ZWQuDQpbICAgIDIuMDI0MTU1XSB0cHM2NTkxMCAwLTAwMmQ6IE5vIGludGVycnVwdCBzdXBw
+b3J0LCBubyBjb3JlIElSUQ0KWyAgICAyLjAzODY5OF0gdnJ0YzogMTgwMCBtViANClsgICAgMi4w
+NDIyOTldIHZydGM6IHN1cHBsaWVkIGJ5IHZiYXQNClsgICAgMi4wNTExMDBdIHZpbzogYXQgMTUw
+MCBtViANClsgICAgMi4wNTQ1NzVdIHZpbzogc3VwcGxpZWQgYnkgdmJhdA0KWyAgICAyLjA2MTQ2
+NF0gdmRkX21wdTogOTEyIDwtLT4gMTMxMiBtViBhdCAxMTM3IG1WIA0KWyAgICAyLjA2NjgxMF0g
+dmRkX21wdTogc3VwcGxpZWQgYnkgdmJhdA0KWyAgICAyLjA3NDEwMl0gdmRkX2NvcmU6IDkxMiA8
+LS0+IDExNTAgbVYgYXQgMTEzNyBtViANClsgICAgMi4wNzkzMzldIHZkZF9jb3JlOiBzdXBwbGll
+ZCBieSB2YmF0DQpbICAgIDIuMDg2MDc3XSB2ZGQzOiA1MDAwIG1WIA0KWyAgICAyLjA5MTYzNl0g
+dmRpZzE6IGF0IDE4MDAgbVYgDQpbICAgIDIuMDk1MTg2XSB2ZGlnMTogc3VwcGxpZWQgYnkgdmJh
+dA0KWyAgICAyLjEwMTc2MF0gdmRpZzI6IGF0IDE4MDAgbVYgDQpbICAgIDIuMTA1MzExXSB2ZGln
+Mjogc3VwcGxpZWQgYnkgdmJhdA0KWyAgICAyLjExMjAxNF0gdnBsbDogYXQgMTgwMCBtViANClsg
+ICAgMi4xMTU0OTFdIHZwbGw6IHN1cHBsaWVkIGJ5IHZiYXQNClsgICAgMi4xMjIwNTBdIHZkYWM6
+IGF0IDE4MDAgbVYgDQpbICAgIDIuMTI1NDk1XSB2ZGFjOiBzdXBwbGllZCBieSB2YmF0DQpbICAg
+IDIuMTMyMDc0XSB2YXV4MTogYXQgMTgwMCBtViANClsgICAgMi4xMzU2MDldIHZhdXgxOiBzdXBw
+bGllZCBieSB2YmF0DQpbICAgIDIuMTQyMjI1XSB2YXV4MjogYXQgMzMwMCBtViANClsgICAgMi4x
+NDU3NzNdIHZhdXgyOiBzdXBwbGllZCBieSB2YmF0DQpbICAgIDIuMTUyMzYwXSB2YXV4MzM6IGF0
+IDMzMDAgbVYgDQpbICAgIDIuMTU1OTkwXSB2YXV4MzM6IHN1cHBsaWVkIGJ5IHZiYXQNClsgICAg
+Mi4xNjI2NjVdIHZtbWM6IDE4MDAgPC0tPiAzMzAwIG1WIGF0IDMzMDAgbVYgDQpbICAgIDIuMTY3
+NzU5XSB2bW1jOiBzdXBwbGllZCBieSB2YmF0DQpbICAgIDIuMTc3MTI1XSBvbWFwX2kyYyA0NGUw
+YjAwMC5pMmM6IGJ1cyAwIHJldjAuMTEgYXQgNDAwIGtIeg0KWyAgICAyLjE4NDY5NF0gZWRtYS1k
+bWEtZW5naW5lIGVkbWEtZG1hLWVuZ2luZS4wOiBhbGxvY2F0ZWQgY2hhbm5lbCBmb3IgMDoyNQ0K
+WyAgICAyLjE5MTg3N10gZWRtYS1kbWEtZW5naW5lIGVkbWEtZG1hLWVuZ2luZS4wOiBhbGxvY2F0
+ZWQgY2hhbm5lbCBmb3IgMDoyNA0KWyAgICAyLjIwMDQ3N10gb21hcF9oc21tYyA0ODA2MDAwMC5t
+bWM6IHBpbnMgYXJlIG5vdCBjb25maWd1cmVkIGZyb20gdGhlIGRyaXZlcg0KWyAgICAyLjMxMzE1
+NV0gZGF2aW5jaV9tZGlvIDRhMTAxMDAwLm1kaW86IGRhdmluY2kgbWRpbyByZXZpc2lvbiAxLjYN
+ClsgICAgMi4zMTk2MDJdIGRhdmluY2lfbWRpbyA0YTEwMTAwMC5tZGlvOiBkZXRlY3RlZCBwaHkg
+bWFzayBmZmZmZmZmYw0KWyAgICAyLjMzMTUwOF0gbGlicGh5OiA0YTEwMTAwMC5tZGlvOiBwcm9i
+ZWQNClsgICAgMi4zMzU4ODddIGRhdmluY2lfbWRpbyA0YTEwMTAwMC5tZGlvOiBwaHlbMF06IGRl
+dmljZSA0YTEwMTAwMC5tZGlvOjAwLCBkcml2ZXIgQXRoZXJvcyA4MDMxIGV0aGVybmV0DQpbICAg
+IDIuMzQ2MDU5XSBkYXZpbmNpX21kaW8gNGExMDEwMDAubWRpbzogcGh5WzFdOiBkZXZpY2UgNGEx
+MDEwMDAubWRpbzowMSwgZHJpdmVyIEF0aGVyb3MgODAzMSBldGhlcm5ldA0KWyAgICAyLjM1NjIy
+M10gRGV0ZWN0ZWQgTUFDSUQgPSBkNDo5NDphMTo4Mzo0ZDphNw0KWyAgICAyLjM2NzUwNl0gVW5o
+YW5kbGVkIGZhdWx0OiBleHRlcm5hbCBhYm9ydCBvbiBub24tbGluZWZldGNoICgweDEwMjgpIGF0
+IDB4ZmExYWMxNTANClsgICAgMi4zNzU1NzZdIEludGVybmFsIGVycm9yOiA6IDEwMjggWyMxXSBT
+TVAgQVJNDQpbICAgIDIuMzgwMzQwXSBNb2R1bGVzIGxpbmtlZCBpbjoNClsgICAgMi4zODM1NzBd
+IENQVTogMCBQSUQ6IDEgQ29tbTogc3dhcHBlci8wIE5vdCB0YWludGVkIDMuMTIuMC1yYzUgIzEN
+ClsgICAgMi4zOTAxNTldIHRhc2s6IGNlMDgxNDQwIHRpOiBjZTA4MjAwMCB0YXNrLnRpOiBjZTA4
+MjAwMA0KWyAgICAyLjM5NTg0OV0gUEMgaXMgYXQgZ3Bpb19kZWJvdW5jZSsweDc4LzB4MTJjDQpb
+ICAgIDIuNDAwNDQ2XSBMUiBpcyBhdCBfcmF3X3NwaW5fdW5sb2NrX2lycXJlc3RvcmUrMHg0MC8w
+eDQ0DQpbICAgIDIuNDA2MjE1XSBwYyA6IFs8YzAyZjg5OTQ+XSAgICBsciA6IFs8YzA1OGY0Y2M+
+XSAgICBwc3I6IDYwMDAwMTkzDQpbICAgIDIuNDA2MjE1XSBzcCA6IGNlMDgzZGUwICBpcCA6IGNl
+MDgyMDEwICBmcCA6IGMwNDViZmY4DQpbICAgIDIuNDE4Mjc5XSByMTA6IGNlMzM2YzFjICByOSA6
+IDAwMDAwMDAyICByOCA6IDIwMDAwMTEzDQpbICAgIDIuNDIzNzY3XSByNyA6IDAwMDAwMGEwICBy
+NiA6IDAwMDAwMDA0ICByNSA6IGNlMTUwYzY4ICByNCA6IGNlMTUwYzg4DQpbICAgIDIuNDMwNjIy
+XSByMyA6IGZhMWFjMTUwICByMiA6IGZhMWFjMDAwICByMSA6IGNlMDgzZGI4ICByMCA6IDAwMDAw
+MDAwDQpbICAgIDIuNDM3NDgwXSBGbGFnczogblpDdiAgSVJRcyBvZmYgIEZJUXMgb24gIE1vZGUg
+U1ZDXzMyICBJU0EgQVJNICBTZWdtZW50IGtlcm5lbA0KWyAgICAyLjQ0NTI1MF0gQ29udHJvbDog
+MTBjNTM4N2QgIFRhYmxlOiA4MDAwNDAxOSAgREFDOiAwMDAwMDAxNw0KWyAgICAyLjQ1MTI4NV0g
+UHJvY2VzcyBzd2FwcGVyLzAgKHBpZDogMSwgc3RhY2sgbGltaXQgPSAweGNlMDgyMjQ4KQ0KWyAg
+ICAyLjQ1NzU5N10gU3RhY2s6ICgweGNlMDgzZGUwIHRvIDB4Y2UwODQwMDApDQpbICAgIDIuNDYy
+MTgxXSAzZGUwOiBjMDJmODkxYyBjZTE1MGM4OCAwMDAwMDAwNiBhMDAwMDExMyAwMDAwMDAwMCAw
+MDAwMTM4OCBjZTMzMzBlOCBjMDJmNjE4MA0KWyAgICAyLjQ3MDc3OV0gM2UwMDogY2UzMzZjNDQg
+MDAwMDAwMDUgYzBmODdmYjAgMDAwMDAwMDEgY2UzMzMwZjAgYzA0NWI4MjggY2UzMzMwNTAgMDAw
+MDAwMDENClsgICAgMi40NzkzNzhdIDNlMjA6IDAwMDAwMDAzIGNlMzM5ODAwIGNlMzM2YzAwIDAw
+MDAwMDAwIGNlMzMzMDAwIGNlMTRlNDEwIGNlMTRlNDAwIGNlMzMzMDUwDQpbICAgIDIuNDg3OTc2
+XSAzZTQwOiBjZTE0ZmRiMCAwMDAwMDAwMCBjZTE0ZTQxMCBjMGU2MzJmNCBjZTE0ZTQxMCAwMDAw
+MDAwMCAwMDAwMDAwMCBjMDhmNDdkMA0KWyAgICAyLjQ5NjU3NV0gM2U2MDogMDAwMDAwYmQgY2Uw
+ODIwMjggMDAwMDAwMDAgYzAzNTMzMWMgYzAzNTMzMDQgYzAzNTIxMTQgY2UxNGU0MTAgYzA4ZjQ3
+ZDANClsgICAgMi41MDUxNzRdIDNlODA6IGNlMTRlNDQ0IDAwMDAwMDAwIGMwODM3OThjIGMwMzUy
+MzA4IDAwMDAwMDAwIGMwOGY0N2QwIGMwMzUyMjc0IGMwMzUwNTk4DQpbICAgIDIuNTEzNzcwXSAz
+ZWEwOiBjZTAyYTJhOCBjZTBmMzcxMCBjMDhmNDdkMCBjMDhlMjE0OCBjZTMzNWNjMCBjMDM1MTg5
+OCBjMDcxZWVmNCBjMDhmNDdkMA0KWyAgICAyLjUyMjM2Nl0gM2VjMDogMDAwMDAwMDcgYzA4ZjQ3
+ZDAgMDAwMDAwMDcgYzA5MGZlNDAgYzA5MGZlNDAgYzAzNTI4ZTAgMDAwMDAwMDAgYzA4NjBhNzQN
+ClsgICAgMi41MzA5NjFdIDNlZTA6IDAwMDAwMDA3IGMwMDA4ODQ4IDAwMDAwMDA0IGMwOGMzOTQ0
+IGMwOGMzOTQ0IDYwMDAwMTEzIGMwMmQzNzAwIDAwMDAwMDAwDQpbICAgIDIuNTM5NTU3XSAzZjAw
+OiBjMDhjMzk0MCAwMDAwMDAwMCAwMDAwMDAwMCBjMDU4ZjM5NCAwMDAwMDAwMiBjZTA4MjAzOCBj
+MTE5YTJmZSBjMDVkYzRlOA0KWyAgICAyLjU0ODE1Ml0gM2YyMDogMDAwMDAwYmQgYzAwNjQ3MTAg
+YzA3Y2IzNTAgMDAwMDAwMDcgYzExOWEzMDYgMDAwMDAwMDcgNjAwMDAxMTMgYzA4NjBhNzQNClsg
+ICAgMi41NTY3NDZdIDNmNDA6IDAwMDAwMDA3IGMwOTBmZTQwIGMwOTBmZTQwIGMwN2ZjNTBjIDAw
+MDAwMGJkIGMwODQ1ZDMwIGMwODQ1ZDI4IGMwN2ZjYmJjDQpbICAgIDIuNTY1MzQyXSAzZjYwOiAw
+MDAwMDAwNyAwMDAwMDAwNyBjMDdmYzUwYyAwMDAwMDAwMCBjMDA3MTBhYyA3YjZiOTliZiA5OGZk
+ZWVmZSAwMDAwMDAwMA0KWyAgICAyLjU3MzkzNl0gM2Y4MDogYzA1ODRiNTAgMDAwMDAwMDAgMDAw
+MDAwMDAgMDAwMDAwMDAgMDAwMDAwMDAgMDAwMDAwMDAgMDAwMDAwMDAgYzA1ODRiNTgNClsgICAg
+Mi41ODI1MzBdIDNmYTA6IGNlMDgwYTQwIDAwMDAwMDAwIGMwNTg0YjUwIGMwMDEzYmM4IDAwMDAw
+MDAwIDAwMDAwMDAwIDAwMDAwMDAwIDAwMDAwMDAwDQpbICAgIDIuNTkxMTI1XSAzZmMwOiAwMDAw
+MDAwMCAwMDAwMDAwMCAwMDAwMDAwMCAwMDAwMDAwMCAwMDAwMDAwMCAwMDAwMDAwMCAwMDAwMDAw
+MCAwMDAwMDAwMA0KWyAgICAyLjU5OTcyM10gM2ZlMDogMDAwMDAwMDAgMDAwMDAwMDAgMDAwMDAw
+MDAgMDAwMDAwMDAgMDAwMDAwMTMgMDAwMDAwMDAgN2VjZjAzN2YgNzY5ZGY3ZTcNClsgICAgMi42
+MDgzNDJdIFs8YzAyZjg5OTQ+XSAoZ3Bpb19kZWJvdW5jZSsweDc4LzB4MTJjKSBmcm9tIFs8YzAy
+ZjYxODA+XSAoZ3Bpb19zZXRfZGVib3VuY2UrMHg5NC8weDExOCkNClsgICAgMi42MTc5NTJdIFs8
+YzAyZjYxODA+XSAoZ3Bpb19zZXRfZGVib3VuY2UrMHg5NC8weDExOCkgZnJvbSBbPGMwNDViODI4
+Pl0gKGdwaW9fa2V5c19wcm9iZSsweDNjNC8weDdjNCkNClsgICAgMi42Mjc4NDVdIFs8YzA0NWI4
+Mjg+XSAoZ3Bpb19rZXlzX3Byb2JlKzB4M2M0LzB4N2M0KSBmcm9tIFs8YzAzNTMzMWM+XSAocGxh
+dGZvcm1fZHJ2X3Byb2JlKzB4MTgvMHgxYykNClsgICAgMi42Mzc3MjRdIFs8YzAzNTMzMWM+XSAo
+cGxhdGZvcm1fZHJ2X3Byb2JlKzB4MTgvMHgxYykgZnJvbSBbPGMwMzUyMTE0Pl0gKGRyaXZlcl9w
+cm9iZV9kZXZpY2UrMHgxMDgvMHgyMjQpDQpbICAgIDIuNjQ3OTY3XSBbPGMwMzUyMTE0Pl0gKGRy
+aXZlcl9wcm9iZV9kZXZpY2UrMHgxMDgvMHgyMjQpIGZyb20gWzxjMDM1MjMwOD5dIChfX2RyaXZl
+cl9hdHRhY2grMHg5NC8weDk4KQ0KWyAgICAyLjY1NzkzNl0gWzxjMDM1MjMwOD5dIChfX2RyaXZl
+cl9hdHRhY2grMHg5NC8weDk4KSBmcm9tIFs8YzAzNTA1OTg+XSAoYnVzX2Zvcl9lYWNoX2Rldisw
+eDYwLzB4OTQpDQpbICAgIDIuNjY3NDQ4XSBbPGMwMzUwNTk4Pl0gKGJ1c19mb3JfZWFjaF9kZXYr
+MHg2MC8weDk0KSBmcm9tIFs8YzAzNTE4OTg+XSAoYnVzX2FkZF9kcml2ZXIrMHgxZDQvMHgyODQp
+DQpbICAgIDIuNjc3MDU0XSBbPGMwMzUxODk4Pl0gKGJ1c19hZGRfZHJpdmVyKzB4MWQ0LzB4Mjg0
+KSBmcm9tIFs8YzAzNTI4ZTA+XSAoZHJpdmVyX3JlZ2lzdGVyKzB4NzgvMHhmOCkNClsgICAgMi42
+ODY1NjldIFs8YzAzNTI4ZTA+XSAoZHJpdmVyX3JlZ2lzdGVyKzB4NzgvMHhmOCkgZnJvbSBbPGMw
+MDA4ODQ4Pl0gKGRvX29uZV9pbml0Y2FsbCsweGU4LzB4MTRjKQ0KWyAgICAyLjY5NjA5MF0gWzxj
+MDAwODg0OD5dIChkb19vbmVfaW5pdGNhbGwrMHhlOC8weDE0YykgZnJvbSBbPGMwN2ZjYmJjPl0g
+KGtlcm5lbF9pbml0X2ZyZWVhYmxlKzB4MTA0LzB4MWM4KQ0KWyAgICAyLjcwNjI1NF0gWzxjMDdm
+Y2JiYz5dIChrZXJuZWxfaW5pdF9mcmVlYWJsZSsweDEwNC8weDFjOCkgZnJvbSBbPGMwNTg0YjU4
+Pl0gKGtlcm5lbF9pbml0KzB4OC8weDE1MCkNClsgICAgMi43MTU5NjJdIFs8YzA1ODRiNTg+XSAo
+a2VybmVsX2luaXQrMHg4LzB4MTUwKSBmcm9tIFs8YzAwMTNiYzg+XSAocmV0X2Zyb21fZm9yaysw
+eDE0LzB4MmMpDQpbICAgIDIuNzI0ODM0XSBDb2RlOiBlNTk0MzA5YyBlNTE0MjA3MCBlMWQzMzFi
+ZSBlMDgyMzAwMyAoZTU5MzIwMDApIA0KWyAgICAyLjczMTI1M10gLS0tWyBlbmQgdHJhY2UgMWM5
+ZjE2MDUwNTc1YTE4NyBdLS0tDQpbICAgIDIuNzM2NDE4XSBLZXJuZWwgcGFuaWMgLSBub3Qgc3lu
+Y2luZzogQXR0ZW1wdGVkIHRvIGtpbGwgaW5pdCEgZXhpdGNvZGU9MHgwMDAwMDAwYg0KWyAgICAy
+LjczNjQxOF0gDQo=
+
+--_002_7D1F292BE8E4CC4F93079C1A7A58D5622B9FF5C3USNYGRMBX4raymo_--
