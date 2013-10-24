@@ -1,31 +1,33 @@
 Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2011E0175F
-	for <meta-ti@yoctoproject.org>; Thu, 24 Oct 2013 05:10:32 -0700 (PDT)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D49C2E0175F
+	for <meta-ti@yoctoproject.org>; Thu, 24 Oct 2013 05:14:21 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9OCAVBt019461
-	for <meta-ti@yoctoproject.org>; Thu, 24 Oct 2013 07:10:31 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9OCAV9U012570
-	for <meta-ti@yoctoproject.org>; Thu, 24 Oct 2013 07:10:31 -0500
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9OCEJ2F029008;
+	Thu, 24 Oct 2013 07:14:19 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9OCEJgE017726;
+	Thu, 24 Oct 2013 07:14:19 -0500
 Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
-	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
-	14.02.0342.003; Thu, 24 Oct 2013 07:10:31 -0500
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.02.0342.003; Thu, 24 Oct 2013 07:14:19 -0500
 From: "Dmytriyenko, Denys" <denys@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "Hingolikar,
-	Mrinmayee" <mrinmayee@ti.com>
-Thread-Topic: [meta-ti] [PATCHv4] libgles: Added prebuilt userspace
-	libraries for graphics acceleration
-Thread-Index: AQHO0HyQtgbaplfr3USot9pyO5plLZoDwxjk
-Date: Thu, 24 Oct 2013 12:10:30 +0000
-Message-ID: <B0581B5571079145BA1CD78C126DBDE72E90691E@DLEE08.ent.ti.com>
-References: <20131024054708.GA8184@ti.com>
-In-Reply-To: <20131024054708.GA8184@ti.com>
+To: "gary@mlbassoc.com" <gary@mlbassoc.com>, "schnitzeltony@googlemail.com"
+	<schnitzeltony@googlemail.com>
+Thread-Topic: [meta-ti] [PATCH] mesa appends: remove PROVIDES
+Thread-Index: AQHO0JudvYEtme+8VUOoZCBDqMP9LZoECXEAgAAHYAD//7MY2Q==
+Date: Thu, 24 Oct 2013 12:14:18 +0000
+Message-ID: <B0581B5571079145BA1CD78C126DBDE72E906A57@DLEE08.ent.ti.com>
+References: <1382606978-9914-1-git-send-email-schnitzeltony@googlemail.com>
+	<5269031E.4040504@mlbassoc.com>,
+	<CALbNGRQHT73Zg4u+4b7sg8AONfxy--hsXoPejz2sY8pthX-T_Q@mail.gmail.com>
+In-Reply-To: <CALbNGRQHT73Zg4u+4b7sg8AONfxy--hsXoPejz2sY8pthX-T_Q@mail.gmail.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 MIME-Version: 1.0
-Subject: Re: [PATCHv4] libgles: Added prebuilt userspace libraries for graphics acceleration
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] mesa appends: remove PROVIDES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,102 +40,61 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Oct 2013 12:10:33 -0000
+X-List-Received-Date: Thu, 24 Oct 2013 12:14:22 -0000
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_B0581B5571079145BA1CD78C126DBDE72E90691EDLEE08entticom_"
+	boundary="_000_B0581B5571079145BA1CD78C126DBDE72E906A57DLEE08entticom_"
 
---_000_B0581B5571079145BA1CD78C126DBDE72E90691EDLEE08entticom_
-Content-Type: text/plain; charset="us-ascii"
+--_000_B0581B5571079145BA1CD78C126DBDE72E906A57DLEE08entticom_
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-1. Patch changes usually should not go into the main description - separate=
- them with --- sign.
-2. Do you need COMPATIBLE_MACHINE here for cortex-a15?
+Thanks, I'll have to look at it once I'm back from ELCE...
 
 
 Denys
 
 
 -----Original Message-----
-From: Hingolikar, Mrinmayee [mrinmayee@ti.com]
-Received: Thursday, 24 Oct 2013, 6:47
-To: meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]
-Subject: [meta-ti] [PATCHv4] libgles: Added prebuilt userspace libraries fo=
-r graphics acceleration
+From: Andreas M=FCller [schnitzeltony@googlemail.com]
+Received: Thursday, 24 Oct 2013, 12:49
+To: Gary Thomas [gary@mlbassoc.com]
+CC: meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]
+Subject: Re: [meta-ti] [PATCH] mesa appends: remove PROVIDES
 
-These libraries are not distributable in source and hence
- are available only as binary. They implement OpenGLES 1.x and
- OpenGLES 2.x accelerated using SGX 544-MP2 found in OMAP5
- class of devices.
+On Thu, Oct 24, 2013 at 1:23 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+> On 2013-10-24 03:29, Andreas M=FCller wrote:
+>>
+>> These came in when mesa was reworked. Nowadays they are useless and what
+>> they try to do achieve is wrong: provider for virtual/libgsl should be
+>> mesa-gl. The appends were left in to avoid backward revision trouble in
+>> package feeds.
+>
+>
+> If this is the correct solution, I think these .bbappend files should be
+> removed completely.  They don't change anything and keeping them just to
+> retain the PRINC is useless because as is one cannot even build a system
+> which uses virtual/mesa, e.g. one using the X11 server.  In addition, the
+> main mesa recipe is about to be updated so they'll need changing again ve=
+ry
+> soon.
+>
+So let's kick them out as soon as mesa is updated
 
-v2:
-
-Addressed Chases's comments:
- * Updated the PR
- * Added shasum for the tarball
- * Removed redundant FILES section
-
-v3:
- * Replaced shasum by sha256sum
-
-v4:
- * Corrected license information to "TSPA"
-
-Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
----
- .../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb     |   20 ++++++++++++++++=
-++++
- 1 file changed, 20 insertions(+)
- create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.1=
-0.bb
-
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb b/=
-recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
-new file mode 100644
-index 0000000..5e21bd5
---- /dev/null
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
-@@ -0,0 +1,20 @@
-+DESCRIPTION =3D "Userspace libraries for sgx"
-+HOMEPAGE =3D "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
-+LICENSE =3D "TSPA"
-+
-+SRC_URI =3D "http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcont=
-ent/gfxsdk/OMAP5_1_09_00_10//exports/${PN}-${PV}.tar.gz;protocol=3Dhttp"
-+
-+LIC_FILES_CHKSUM =3D "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=
-=3Dd280df8e94bb2e7b9251c8526078eeb8"
-+
-+PR =3D "r0"
-+
-+SRC_URI[md5sum] =3D "3cfb875de031098a4c1eeeaf4e442367"
-+SRC_URI[sha256sum] =3D "20b849088c0fd3ee5dd6bad8ddf16fb2b3267aa053cf3488c7=
-62fbc72f22489a"
-+
-+S =3D "${WORKDIR}/${PN}-${PV}"
-+
-+do_install () {
-+    oe_runmake install DESTDIR=3D${D}
-+}
-+
-+FILES_${PN} +=3D "${libdir}/gbm/"
---
-1.7.9.5
-
+Andreas
 _______________________________________________
 meta-ti mailing list
 meta-ti@yoctoproject.org
 https://lists.yoctoproject.org/listinfo/meta-ti
 
---_000_B0581B5571079145BA1CD78C126DBDE72E90691EDLEE08entticom_
-Content-Type: text/html; charset="us-ascii"
+--_000_B0581B5571079145BA1CD78C126DBDE72E906A57DLEE08entticom_
+Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
 <html>
 <head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
 <meta name=3D"Generator" content=3D"Microsoft Exchange Server">
 <!-- converted from text --><style><!-- .EmailQuote { margin-left: 1pt; pad=
 ding-left: 4pt; border-left: #800000 2px solid; } --></style>
@@ -142,92 +103,50 @@ ding-left: 4pt; border-left: #800000 2px solid; } --></style>
 <div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11p=
 t; color:black">
 <span style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11=
-pt; color:black">1. Patch changes usually should not go into the main descr=
-iption - separate them with --- sign.<br>
-2. Do you need COMPATIBLE_MACHINE here for cortex-a15?<br>
+pt; color:black">Thanks, I'll have to look at it once I'm back from ELCE...=
+<br>
 <br>
 <br>
 Denys<br>
 <br>
 <br>
 <span style=3D"color:black">-----Original Message----- <br>
-<b>From:</b> Hingolikar, Mrinmayee [mrinmayee@ti.com]<br>
-<b>Received:</b> Thursday, 24 Oct 2013, 6:47<br>
-<b>To:</b> meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]<br>
-<b>Subject:</b> [meta-ti] [PATCHv4] libgles: Added prebuilt userspace libra=
-ries for graphics acceleration<br>
+<b>From:</b> Andreas M=FCller [schnitzeltony@googlemail.com]<br>
+<b>Received:</b> Thursday, 24 Oct 2013, 12:49<br>
+<b>To:</b> Gary Thomas [gary@mlbassoc.com]<br>
+<b>CC:</b> meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]<br>
+<b>Subject:</b> Re: [meta-ti] [PATCH] mesa appends: remove PROVIDES<br>
 <br>
 </span></span></div>
 <font size=3D"2"><span style=3D"font-size:10pt;">
-<div class=3D"PlainText">These libraries are not distributable in source an=
-d hence<br>
-&nbsp;are available only as binary. They implement OpenGLES 1.x and<br>
-&nbsp;OpenGLES 2.x accelerated using SGX 544-MP2 found in OMAP5<br>
-&nbsp;class of devices.<br>
+<div class=3D"PlainText">On Thu, Oct 24, 2013 at 1:23 PM, Gary Thomas &lt;g=
+ary@mlbassoc.com&gt; wrote:<br>
+&gt; On 2013-10-24 03:29, Andreas M=FCller wrote:<br>
+&gt;&gt;<br>
+&gt;&gt; These came in when mesa was reworked. Nowadays they are useless an=
+d what<br>
+&gt;&gt; they try to do achieve is wrong: provider for virtual/libgsl shoul=
+d be<br>
+&gt;&gt; mesa-gl. The appends were left in to avoid backward revision troub=
+le in<br>
+&gt;&gt; package feeds.<br>
+&gt;<br>
+&gt;<br>
+&gt; If this is the correct solution, I think these .bbappend files should =
+be<br>
+&gt; removed completely.&nbsp; They don't change anything and keeping them =
+just to<br>
+&gt; retain the PRINC is useless because as is one cannot even build a syst=
+em<br>
+&gt; which uses virtual/mesa, e.g. one using the X11 server.&nbsp; In addit=
+ion, the<br>
+&gt; main mesa recipe is about to be updated so they'll need changing again=
+ very<br>
+&gt; soon.<br>
+&gt;<br>
+So let's kick them out as soon as mesa is updated<br>
 <br>
-v2:<br>
-<br>
-Addressed Chases's comments:<br>
-&nbsp;* Updated the PR<br>
-&nbsp;* Added shasum for the tarball<br>
-&nbsp;* Removed redundant FILES section<br>
-<br>
-v3:<br>
-&nbsp;* Replaced shasum by sha256sum<br>
-<br>
-v4:<br>
-&nbsp;* Corrected license information to &quot;TSPA&quot;<br>
-<br>
-Signed-off-by: Mrinmayee Hingolikar &lt;mrinmayee@ti.com&gt;<br>
----<br>
-&nbsp;.../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb&nbsp;&nbsp;&nbsp;&nbsp=
-; |&nbsp;&nbsp; 20 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&=
-#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;<br>
-&nbsp;1 file changed, 20 insertions(&#43;)<br>
-&nbsp;create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.=
-9.0.10.bb<br>
-<br>
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb b/=
-recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb<br>
-new file mode 100644<br>
-index 0000000..5e21bd5<br>
---- /dev/null<br>
-&#43;&#43;&#43; b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.=
-bb<br>
-@@ -0,0 &#43;1,20 @@<br>
-&#43;DESCRIPTION =3D &quot;Userspace libraries for sgx&quot;<br>
-&#43;HOMEPAGE =3D &quot;<a href=3D"http://downloads.ti.com/dsps/dsps_public=
-_sw/gfxsdk">http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk</a>&quot;<br=
->
-&#43;LICENSE =3D &quot;TSPA&quot;<br>
-&#43;<br>
-&#43;SRC_URI =3D &quot;<a href=3D"http://downloads.ti.com/dsps/dsps_public_=
-sw/sdo_sb/targetcontent/gfxsdk/OMAP5_1_09_00_10//exports/${PN}-${PV}.tar.gz=
-;protocol=3Dhttp">http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/target=
-content/gfxsdk/OMAP5_1_09_00_10//exports/${PN}-${PV}.tar.gz;protocol=3Dhttp=
-</a>&quot;<br>
-&#43;<br>
-&#43;LIC_FILES_CHKSUM =3D &quot;<a href=3D"file://OMAP5-Linux-Graphics-DDK-=
-UM-Manifest.doc;md5=3Dd280df8e94bb2e7b9251c8526078eeb8">file://OMAP5-Linux-=
-Graphics-DDK-UM-Manifest.doc;md5=3Dd280df8e94bb2e7b9251c8526078eeb8</a>&quo=
-t;<br>
-&#43;<br>
-&#43;PR =3D &quot;r0&quot; <br>
-&#43;<br>
-&#43;SRC_URI[md5sum] =3D &quot;3cfb875de031098a4c1eeeaf4e442367&quot;<br>
-&#43;SRC_URI[sha256sum] =3D &quot;20b849088c0fd3ee5dd6bad8ddf16fb2b3267aa05=
-3cf3488c762fbc72f22489a&quot;<br>
-&#43;<br>
-&#43;S =3D &quot;${WORKDIR}/${PN}-${PV}&quot;<br>
-&#43;<br>
-&#43;do_install () {<br>
-&#43;&nbsp;&nbsp;&nbsp; oe_runmake install DESTDIR=3D${D}<br>
-&#43;}<br>
-&#43;<br>
-&#43;FILES_${PN} &#43;=3D &quot;${libdir}/gbm/&quot;<br>
--- <br>
-1.7.9.5<br>
-<br>
+Andreas<br>
 _______________________________________________<br>
 meta-ti mailing list<br>
 meta-ti@yoctoproject.org<br>
@@ -238,4 +157,4 @@ octoproject.org/listinfo/meta-ti</a><br>
 </body>
 </html>
 
---_000_B0581B5571079145BA1CD78C126DBDE72E90691EDLEE08entticom_--
+--_000_B0581B5571079145BA1CD78C126DBDE72E906A57DLEE08entticom_--
