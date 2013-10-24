@@ -1,26 +1,37 @@
-Return-Path: <mrinmayee@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E61D1E0175B
-	for <meta-ti@yoctoproject.org>; Wed, 23 Oct 2013 22:47:10 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9O5lA5t030264
-	for <meta-ti@yoctoproject.org>; Thu, 24 Oct 2013 00:47:10 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9O5lAjq008337
-	for <meta-ti@yoctoproject.org>; Thu, 24 Oct 2013 00:47:10 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 24 Oct 2013 00:47:10 -0500
-Received: from ti.com (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9O5l8cO014628	for
-	<meta-ti@yoctoproject.org>; Thu, 24 Oct 2013 00:47:09 -0500
-Date: Thu, 24 Oct 2013 11:17:08 +0530
-From: Mrinmayee Hingolikar <mrinmayee@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <20131024054708.GA8184@ti.com>
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vb0-f48.google.com (mail-vb0-f48.google.com
+	[209.85.212.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B416FE0175B
+	for <meta-ti@yoctoproject.org>; Thu, 24 Oct 2013 00:43:35 -0700 (PDT)
+Received: by mail-vb0-f48.google.com with SMTP id w16so1055942vbf.21
+	for <meta-ti@yoctoproject.org>; Thu, 24 Oct 2013 00:43:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=SNkQZib9oa/BRMyIaNyPa0dQujp99lpoxyDbas0afWo=;
+	b=anMAjIVooJ0yz75d5dtbZvi0OkgqxqtkPzYntC+aVPQQpBawlsQYwjr48T7nQvi/0o
+	F+dcBb802+v4lB4D44O8mvcD6xzEUhuz9RCtB3tICTZwjZkByi4faEBIhX/uSheMXCyg
+	EG4dyWeXWBdhCiM3fjRI6k0ua6zsoDQJgb08AdjooSpqfTNUC8LVqlwG0CNvcD8VCGpQ
+	e6h+f7TZpQ2DcdF+athdsP2c+tXuqHt71hAOv4m9rBonynxwBUQfux9d64BXt6S/y9f5
+	fRPFAVky8piRnVkHx/rl7sNTF+dY2cuo/YkVak3+hxw06iPhXzlNA1u4kGJzJQPmXRZ/
+	/3GA==
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [PATCHv4] libgles: Added prebuilt userspace libraries for graphics acceleration
+X-Received: by 10.58.180.227 with SMTP id dr3mr187236vec.36.1382600614221;
+	Thu, 24 Oct 2013 00:43:34 -0700 (PDT)
+Received: by 10.52.184.103 with HTTP; Thu, 24 Oct 2013 00:43:34 -0700 (PDT)
+In-Reply-To: <52687085.9060605@mlbassoc.com>
+References: <5267D269.2020701@mlbassoc.com>
+	<CAJTo0LYaqs00v5XUf+wRtaKytZy1-8VDuPcEyawYU8UXxzPUGw@mail.gmail.com>
+	<526803BD.8010106@mlbassoc.com> <526804E7.3020406@mlbassoc.com>
+	<52687085.9060605@mlbassoc.com>
+Date: Thu, 24 Oct 2013 09:43:34 +0200
+Message-ID: <CALbNGRS_eqkx5D4jsYqPb3KgPV3rcgpHy5NZBFuipBgXdxocXg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Gary Thomas <gary@mlbassoc.com>
+Cc: meta-ti@yoctoproject.org, "Burton, Ross" <ross.burton@intel.com>,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Mesa mess
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,61 +44,84 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Oct 2013 05:47:14 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 24 Oct 2013 07:43:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
- These libraries are not distributable in source and hence
- are available only as binary. They implement OpenGLES 1.x and
- OpenGLES 2.x accelerated using SGX 544-MP2 found in OMAP5
- class of devices.
+On Thu, Oct 24, 2013 at 2:57 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+> On 2013-10-23 11:18, Gary Thomas wrote:
+>>
+>> On 2013-10-23 11:13, Gary Thomas wrote:
+>>>
+>>> On 2013-10-23 08:07, Burton, Ross wrote:
+>>>>
+>>>> On 23 October 2013 14:43, Gary Thomas <gary@mlbassoc.com> wrote:
+>>>>>
+>>>>> With the current master (Poky ffb440c37c), I can't build anything
+>>>>> with a virtual/mesa requirement.  This seems to bring in both mesa
+>>>>> and mesa-gl, which fight to the death, killing the build :-(
+>>>>
+>>>>
+>>>> Presumably you want just mesa-gl?
+>>>>
+>>>> I guess your distro is setting a preferred provider for
+>>>> virtual/something to mesa-gl, and something else is pulling in mesa,
+>>>> probably through a default.  Can you check that all of the
+>>>> mesa-related virtual/* lines are set in your distro, my hunch is that
+>>>> you don't have virtual/mesa set to mesa-gl.
+>>
+>>
+>> I also compared all of the PREFERRED_PROVIDERs between my build and a
+>> stock
+>> poky build and they are identical.
+>>
+>>>>
+>>>> If the distro looks right then try using depexp to see what is pulling
+>>>> in mesa when it shouldn't be?
+>>>
+>>>
+>>> I looked through this and nothing was obvious.  According to depmod,
+>>> neither
+>>> mesa nor mesa-gl have any direct "reverse depends", i.e. packages that
+>>> depend
+>>> on them.  As far as I can see, it's just coming from the xserver-xorg
+>>> dependency
+>>> on virtual/mesa.
+>>>
+>>> Which led me to another experiment which I truly do not understand.  I
+>>> removed
+>>> the mesa-gl recipe and now when I try to build 'virtual/mesa' I get a
+>>> message
+>>> that there is no provider :-(  However, I *can* build mesa with no
+>>> problems.
+>>> I also checked it against the other PROVIDES from mesa.inc and all of
+>>> them
+>>> except for virtual/mesa work.  How can this possibly be?
+>>
+>>
+>> To be clear, 'bitbake virtual/libgl' (or any of its friends except
+>> virtual/mesa)
+>> will cause 'mesa' to be built, but 'bitbake virtual/mesa' fails.
+>>
+>
+> I found the cause :-)  In addition to OE-core, I am using meta-ti on an
+> OMAP3 target.
+> In meta-ti, there is this line:
+>   meta-ti/recipes-graphics/mesa/mesa-omap3-common.inc:PROVIDES_omap3 =
+> "virtual/libgl"
+> I added virtual/mesa to this list and it now builds again.  I'm not sure
+> that this is
+> 100% correct though.
+>
+>
+I am struggling for the same issue and removed the PROVIDES because
+they are not correct any more: for omap3 we need mesa-gl as PROVIDER
+for libgl. Same for virtual/mesa.
 
-v2:
+But still: Seems something is broken with virtual/libgl*. I working on
+a bsp-layer [1] and maybe I did something wrong there but building
+virtual/libgles2 builds mesa whatever I try...
 
-Addressed Chases's comments:
- * Updated the PR
- * Added shasum for the tarball
- * Removed redundant FILES section
+Andreas
 
-v3:
- * Replaced shasum by sha256sum
-
-v4:
- * Corrected license information to "TSPA"
-
-Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
----
- .../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb     |   20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
-
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
-new file mode 100644
-index 0000000..5e21bd5
---- /dev/null
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
-@@ -0,0 +1,20 @@
-+DESCRIPTION = "Userspace libraries for sgx"
-+HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
-+LICENSE = "TSPA"
-+
-+SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/OMAP5_1_09_00_10//exports/${PN}-${PV}.tar.gz;protocol=http"
-+
-+LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=d280df8e94bb2e7b9251c8526078eeb8"
-+
-+PR = "r0" 
-+
-+SRC_URI[md5sum] = "3cfb875de031098a4c1eeeaf4e442367"
-+SRC_URI[sha256sum] = "20b849088c0fd3ee5dd6bad8ddf16fb2b3267aa053cf3488c762fbc72f22489a"
-+
-+S = "${WORKDIR}/${PN}-${PV}"
-+
-+do_install () {
-+    oe_runmake install DESTDIR=${D}
-+}
-+
-+FILES_${PN} += "${libdir}/gbm/"
--- 
-1.7.9.5
-
+[1] git://gitorious.org/schnitzeltony-oe-meta/meta-toradex-community.git
 
