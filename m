@@ -1,27 +1,29 @@
 Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DBC9FE0176D
-	for <meta-ti@yoctoproject.org>; Fri, 25 Oct 2013 04:11:26 -0700 (PDT)
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A1B79E0176D
+	for <meta-ti@yoctoproject.org>; Fri, 25 Oct 2013 04:14:50 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9PBBOWB002394;
-	Fri, 25 Oct 2013 06:11:24 -0500
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9PBElNU023551;
+	Fri, 25 Oct 2013 06:14:47 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9PBBO3S031127;
-	Fri, 25 Oct 2013 06:11:24 -0500
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9PBEl8B002964;
+	Fri, 25 Oct 2013 06:14:47 -0500
 Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
 	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.02.0342.003; Fri, 25 Oct 2013 06:11:24 -0500
+	14.02.0342.003; Fri, 25 Oct 2013 06:14:47 -0500
 From: "Dmytriyenko, Denys" <denys@ti.com>
-To: "v.vogelhuber@DigitalEndoscopy.de" <v.vogelhuber@DigitalEndoscopy.de>
+To: "v.vogelhuber@DigitalEndoscopy.de" <v.vogelhuber@DigitalEndoscopy.de>,
+	"Dmytriyenko, Denys" <denys@ti.com>
 Thread-Topic: [meta-ti] State of dylan branch in meta-ti
-Thread-Index: AQHO0WrLjJLZimUBo0iOPxf4qwwcAJoFSGaAgABJ3gD//60gR4AAVoqA//+tHso=
-Date: Fri, 25 Oct 2013 11:11:23 +0000
-Message-ID: <B0581B5571079145BA1CD78C126DBDE72E908923@DLEE08.ent.ti.com>
+Thread-Index: AQHO0WrLjJLZimUBo0iOPxf4qwwcAJoFSGaAgABJ3gD//60gR4AAVoqA//+tHsqAAADxRQ==
+Date: Fri, 25 Oct 2013 11:14:46 +0000
+Message-ID: <B0581B5571079145BA1CD78C126DBDE72E908970@DLEE08.ent.ti.com>
 References: <526A4413.2090801@digitalendoscopy.de>
 	<20131025103033.GA13772@edge>,<526A4E00.2030505@digitalendoscopy.de>
 	<B0581B5571079145BA1CD78C126DBDE72E908892@DLEE08.ent.ti.com>,
-	<526A5113.5080905@digitalendoscopy.de>
-In-Reply-To: <526A5113.5080905@digitalendoscopy.de>
+	<526A5113.5080905@digitalendoscopy.de>,
+	<B0581B5571079145BA1CD78C126DBDE72E908923@DLEE08.ent.ti.com>
+In-Reply-To: <B0581B5571079145BA1CD78C126DBDE72E908923@DLEE08.ent.ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
@@ -40,14 +42,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2013 11:11:32 -0000
+X-List-Received-Date: Fri, 25 Oct 2013 11:14:50 -0000
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_B0581B5571079145BA1CD78C126DBDE72E908923DLEE08entticom_"
+	boundary="_000_B0581B5571079145BA1CD78C126DBDE72E908970DLEE08entticom_"
 
---_000_B0581B5571079145BA1CD78C126DBDE72E908923DLEE08entticom_
+--_000_B0581B5571079145BA1CD78C126DBDE72E908970DLEE08entticom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+
+For example:
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/recipes-bsp/ti-ocf=
+-crypto-module/ti-ocf-crypto-module_1.0.bb?id=3Df3c7afb5a3f762894fb0476081d=
+862cb3d54e2dd
+
+
+Denys
+
+
+-----Original Message-----
+From: Dmytriyenko, Denys [denys@ti.com]
+Received: Friday, 25 Oct 2013, 12:11
+To: v.vogelhuber@DigitalEndoscopy.de [v.vogelhuber@DigitalEndoscopy.de]
+CC: meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]
+Subject: Re: [meta-ti] State of dylan branch in meta-ti
 
 Because they don't have to be called that. The only extra thing the new cla=
 ss does is sets up the dependencies. So even when a custom module name is u=
@@ -152,7 +170,7 @@ splinkk.ko module result in an error.
 
 
 
---_000_B0581B5571079145BA1CD78C126DBDE72E908923DLEE08entticom_
+--_000_B0581B5571079145BA1CD78C126DBDE72E908970DLEE08entticom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -163,10 +181,29 @@ Content-Transfer-Encoding: quoted-printable
 </head>
 <body bgcolor=3D"#FFFFFF">
 <span style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11=
-pt; color:black">Because they don't have to be called that. The only extra =
-thing the new class does is sets up the dependencies. So even when a custom=
- module name is used, it will work
- fine.<br>
+pt; color:black">For example:<br>
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/recipes-bsp/ti-ocf=
+-crypto-module/ti-ocf-crypto-module_1.0.bb?id=3Df3c7afb5a3f762894fb0476081d=
+862cb3d54e2dd<br>
+<br>
+<br>
+Denys<br>
+<br>
+<br>
+<span style=3D"color:black">-----Original Message----- <br>
+<b>From:</b> Dmytriyenko, Denys [denys@ti.com]<br>
+<b>Received:</b> Friday, 25 Oct 2013, 12:11<br>
+<b>To:</b> v.vogelhuber@DigitalEndoscopy.de [v.vogelhuber@DigitalEndoscopy.=
+de]<br>
+<b>CC:</b> meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]<br>
+<b>Subject:</b> Re: [meta-ti] State of dylan branch in meta-ti<br>
+<br>
+</span></span>
+<div><span style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-si=
+ze:11pt; color:black">Because they don't have to be called that. The only e=
+xtra thing the new class does is sets up the dependencies. So even when a c=
+ustom module name is used, it will
+ work fine.<br>
 <br>
 <br>
 Denys<br>
@@ -302,7 +339,8 @@ only the dsplinkk.ko module result in an error.
 <div class=3D"moz-signature"><br>
 </div>
 </div>
+</div>
 </body>
 </html>
 
---_000_B0581B5571079145BA1CD78C126DBDE72E908923DLEE08entticom_--
+--_000_B0581B5571079145BA1CD78C126DBDE72E908970DLEE08entticom_--
