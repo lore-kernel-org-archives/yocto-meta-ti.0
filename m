@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22D29E01790
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 240EAE0179A
 	for <meta-ti@yoctoproject.org>; Tue, 29 Oct 2013 10:45:17 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 63BE252A56; Tue, 29 Oct 2013 17:45:16 +0000 (UTC)
+	id 5134752A66; Tue, 29 Oct 2013 17:45:16 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131029174516.63BE252A56@arago-project.org>
+Message-Id: <20131029174516.5134752A66@arago-project.org>
 Date: Tue, 29 Oct 2013 17:45:16 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : am33x-cm3: update PM firmware for AM335x to 05.00.00.00
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 29 Oct 2013 17:45:20 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 693b976e2b33a6a5d9f13c29a356b16832c05cd1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=693b976e2b33a6a5d9f13c29a356b16832c05cd1
+Branch: dylan
+Commit: 9f888be5ef30de5acf6cd479a3c0cc945ad1cdc9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9f888be5ef30de5acf6cd479a3c0cc945ad1cdc9
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Oct 29 12:18:57 2013 -0400
