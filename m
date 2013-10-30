@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42B5EE017B6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42B28E0175F
 	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 07:42:38 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 77D56529D3; Wed, 30 Oct 2013 14:42:35 +0000 (UTC)
+	id 7A24D529E3; Wed, 30 Oct 2013 14:42:36 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131030144235.77D56529D3@arago-project.org>
-Date: Wed, 30 Oct 2013 14:42:35 +0000 (UTC)
+Message-Id: <20131030144236.7A24D529E3@arago-project.org>
+Date: Wed, 30 Oct 2013 14:42:36 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: update to 3. 12-rc7 and latest merges of feature trees
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Wed, 30 Oct 2013 14:42:39 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: 7e054d1277cfe3b8d59725930cd42177cef1d9f0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7e054d1277cfe3b8d59725930cd42177cef1d9f0
+Branch: master
+Commit: 2035209f3e834c5e7d07b6c91f6a5700f17c54e3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2035209f3e834c5e7d07b6c91f6a5700f17c54e3
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Oct 29 17:11:53 2013 -0400
