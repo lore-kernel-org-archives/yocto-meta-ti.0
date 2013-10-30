@@ -1,29 +1,29 @@
 Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 666CBE017B9
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 16:08:09 -0700 (PDT)
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3017AE017B9
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 16:12:26 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9UN885o010631
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 18:08:08 -0500
-Received: from DFLE72.ent.ti.com ([128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9UN88JJ019844
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 18:08:08 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 30 Oct 2013 18:08:08 -0500
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9UNCPFf023830
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 18:12:25 -0500
+Received: from DLEE71.ent.ti.com ([157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9UNCP0C025949
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 18:12:25 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 30 Oct 2013 18:12:25 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9UN88CO007422;
-	Wed, 30 Oct 2013 18:08:08 -0500
-Date: Wed, 30 Oct 2013 19:08:08 -0400
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9UNCOjw025157;
+	Wed, 30 Oct 2013 18:12:25 -0500
+Date: Wed, 30 Oct 2013 19:12:24 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: Mrinmayee Hingolikar <mrinmayee@ti.com>
-Message-ID: <20131030230808.GC24696@edge>
-References: <20131021125642.GA5975@ti.com>
+Message-ID: <20131030231224.GD24696@edge>
+References: <20131021130016.GA6062@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <20131021125642.GA5975@ti.com>
+In-Reply-To: <20131021130016.GA6062@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCHv2] u-boot-glsdk: Update to latest fixes
+Subject: Re: [PATCHv2] linux-ti-glsdk: Update to latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,58 +36,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2013 23:08:12 -0000
+X-List-Received-Date: Wed, 30 Oct 2013 23:12:29 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Mon, Oct 21, 2013 at 06:26:42PM +0530, Mrinmayee Hingolikar wrote:
->  * Migration of u-boot code to omapzoom.org. The development tree is shared
->    between the Linux and Android teams.This enables a common u-boot development
->    platform for both the teams for better alignment.
->  * Enable UART boot mode for dra7xx
->  * Add VIP,VPE and Ethernet crossbar setting for dra7xx
->  * Add SPL API, QSPI, and serial flash support of dra7xx
+On Mon, Oct 21, 2013 at 06:30:16PM +0530, Mrinmayee Hingolikar wrote:
+> v1:
+>  * Kernel source migration from git.ti.com to omapzoom.org. The development
+>    tree is shared between the Linux and Android teams.This enables a common
+>    kernel development platform for both the teams for better alignment.
+>  * Add support for VIP and VPE
+>  * Add wilink/wlan support
+>  * Enable rpmsg/remoteproc driver for multimedia
 > 
 > v2:
-> 
->  * Update to conditional assignment for BRANCH and SRCREV
+>  * Add conditional assignment for BRANCH and SRCREV
 
-Well, I guess I missed why it was necessary... I would understand BRANCH, but 
-not SRCREV... BTW, patch revision history should be hidden and not go into the 
-main description, so should appear after the --- delimiter.
+I'm not sure why this was needed, but I can take it.
 
 
 > Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
 > ---
->  recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb |    6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  recipes-kernel/linux/linux-ti-glsdk_3.8.bb |    8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 > 
-> diff --git a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
-> index d60ef44..1805020 100644
-> --- a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
-> +++ b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
-> @@ -6,11 +6,11 @@ PR = "r0+gitr${SRCPV}"
+> diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+> index 9e3e499..35d55df 100644
+> --- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+> +++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+> @@ -18,14 +18,14 @@ DEFAULT_PREFERENCE = "-1"
 >  
->  DEFAULT_PREFERENCE = "-1"
+>  S = "${WORKDIR}/git"
 >  
-> -SRC_URI = "git://git.ti.com/glsdk/glsdk-u-boot.git;protocol=git;branch=${BRANCH}"
-> +SRC_URI = "git://git.omapzoom.org/repo/u-boot.git;protocol=git;branch=${BRANCH}"
+> -BRANCH = "master"
+> +BRANCH ?= "p-ti-glsdk-3.8.y"
 >  
-> -BRANCH ?= "master"
-> +BRANCH ?= "p-ti-u-boot-2013.04"
+> -SRCREV = "6076e6882d1d6a64b104e42e56a3eada36605cb3"
+> +SRCREV ?= "cc16f99176bf083829c028f9af5b8eb560debcc1"
+>  PV = "3.8.13"
 >  
-> -SRCREV = "81836e8cc84bd6523d9a4e187965dcd1633c4bc9"
-> +SRCREV ?= "76447484441a4b8e00840a2bde74e66dbac9e631"
-
-One thing is missing - PR bump. You are updating source tree and the commit ID 
-is lower than the previous one, hence if you would try to share the build 
-where the old package exists, you may end up with the image that contains the 
-old package and not the new one. Although, symlink in deploy would probably be 
-correct...
-
-
->  SPL_BINARY = "MLO"
->  SPL_UART_BINARY = "u-boot-spl.bin"
+>  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+> -MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
+> +MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+>  
+> -SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-kernel.git;protocol=git;branch=${BRANCH} \
+> +SRC_URI = "git://git.omapzoom.org/kernel/omap.git;protocol=git;branch=${BRANCH} \
+>             file://defconfig \
+>            "
 > -- 
 > 1.7.9.5
 > 
