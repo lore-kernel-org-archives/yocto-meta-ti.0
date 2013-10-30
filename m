@@ -1,32 +1,29 @@
 Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 82694E01775
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 13:04:03 -0700 (PDT)
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 666CBE017B9
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 16:08:09 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9UK3xkM026885;
-	Wed, 30 Oct 2013 15:03:59 -0500
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9UN885o010631
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 18:08:08 -0500
 Received: from DFLE72.ent.ti.com ([128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9UK3xg6022264;
-	Wed, 30 Oct 2013 15:03:59 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9UN88JJ019844
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 18:08:08 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 30 Oct 2013 15:03:59 -0500
+	Wed, 30 Oct 2013 18:08:08 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9UK3xeA013434;
-	Wed, 30 Oct 2013 15:03:59 -0500
-Date: Wed, 30 Oct 2013 16:03:58 -0400
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9UN88CO007422;
+	Wed, 30 Oct 2013 18:08:08 -0500
+Date: Wed, 30 Oct 2013 19:08:08 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Russ Dill <Russ.Dill@ti.com>
-Message-ID: <20131030200358.GH23669@edge>
-References: <1383063875-10561-1-git-send-email-denis@denix.org>
-	<F23EC138-76C4-4E07-B875-1DBA58309C19@ti.com>
-	<526FF335.2000400@ti.com> <527046C7.1080406@ti.com>
+To: Mrinmayee Hingolikar <mrinmayee@ti.com>
+Message-ID: <20131030230808.GC24696@edge>
+References: <20131021125642.GA5975@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <527046C7.1080406@ti.com>
+In-Reply-To: <20131021125642.GA5975@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-	Dave Gerlach <d-gerlach@ti.com>
-Subject: Re: [PATCH] am33x-cm3: update PM firmware for AM335x to 05.00.00.00
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCHv2] u-boot-glsdk: Update to latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,71 +36,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2013 20:04:03 -0000
+X-List-Received-Date: Wed, 30 Oct 2013 23:08:12 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Tue, Oct 29, 2013 at 11:37:43PM +0000, Russ Dill wrote:
-> You may now also refer to 1628306779c05ee45f09d1d3131e722ddd3a5e2e as
-> v05.00.00.00
-
-Thanks, I'll update the comment :) Will there be any changes to the branch 
-name?
-
-
-> On 10/29/2013 05:41 PM, Dave Gerlach wrote:
-> > Looks fine to me
-> > 
-> > Acked-by: Dave Gerlach <d-gerlach@ti.com>
-> > 
-> > 
-> > On 10/29/2013 12:38 PM, Maupin, Chase wrote:
-> >> Ack
-> >>
-> >> Sent from my iPhone
-> >>
-> >>> On Oct 29, 2013, at 9:25 AM, "Denys Dmytriyenko" <denis@denix.org>
-> >>> wrote:
-> >>>
-> >>> From: Denys Dmytriyenko <denys@ti.com>
-> >>>
-> >>> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> >>> Cc: Dave Gerlach <d-gerlach@ti.com>
-> >>> Cc: Chase Maupin <chase.maupin@ti.com>
-> >>> Cc: Carlos Hernandez <ceh@ti.com>
-> >>> Cc: Russ Dill <Russ.Dill@ti.com>
-> >>> ---
-> >>> recipes-bsp/ti/am33x-cm3_git.bb | 10 +++++-----
-> >>> 1 file changed, 5 insertions(+), 5 deletions(-)
-> >>>
-> >>> diff --git a/recipes-bsp/ti/am33x-cm3_git.bb
-> >>> b/recipes-bsp/ti/am33x-cm3_git.bb
-> >>> index 9b36a9e..3be46b6 100644
-> >>> --- a/recipes-bsp/ti/am33x-cm3_git.bb
-> >>> +++ b/recipes-bsp/ti/am33x-cm3_git.bb
-> >>> @@ -3,12 +3,12 @@ DESCRIPTION = "Cortex-M3 binary blob for
-> >>> suspend-resume"
-> >>> LICENSE = "TI-BSD"
-> >>> LIC_FILES_CHKSUM =
-> >>> "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
-> >>>
-> >>> -PV = "04.06.00.11"
-> >>> -PR = "r4"
-> >>> +PV = "05.00.00.00"
-> >>> +PR = "r0"
-> >>>
-> >>> -# SRCREV corresponds to tag "AM335xPSP_04.06.00.11"
-> >>> -SRCREV = "750362868d914702086187096ec2c67b68eac101"
-> >>> -BRANCH ?= "master"
-> >>> +# SRCREV corresponds to the tip of next3 branch
-> >>> +SRCREV = "1628306779c05ee45f09d1d3131e722ddd3a5e2e"
-> >>> +BRANCH ?= "next3"
-> >>>
-> >>> INITSCRIPT_NAME = "am335x-pm-firmware-load"
-> >>> INITSCRIPT_PARAMS = "defaults 96"
-> >>> -- 
-> >>> 1.8.3.2
-> >>>
-> > 
+On Mon, Oct 21, 2013 at 06:26:42PM +0530, Mrinmayee Hingolikar wrote:
+>  * Migration of u-boot code to omapzoom.org. The development tree is shared
+>    between the Linux and Android teams.This enables a common u-boot development
+>    platform for both the teams for better alignment.
+>  * Enable UART boot mode for dra7xx
+>  * Add VIP,VPE and Ethernet crossbar setting for dra7xx
+>  * Add SPL API, QSPI, and serial flash support of dra7xx
 > 
+> v2:
+> 
+>  * Update to conditional assignment for BRANCH and SRCREV
+
+Well, I guess I missed why it was necessary... I would understand BRANCH, but 
+not SRCREV... BTW, patch revision history should be hidden and not go into the 
+main description, so should appear after the --- delimiter.
+
+
+> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+> ---
+>  recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb |    6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
+> index d60ef44..1805020 100644
+> --- a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
+> +++ b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
+> @@ -6,11 +6,11 @@ PR = "r0+gitr${SRCPV}"
+>  
+>  DEFAULT_PREFERENCE = "-1"
+>  
+> -SRC_URI = "git://git.ti.com/glsdk/glsdk-u-boot.git;protocol=git;branch=${BRANCH}"
+> +SRC_URI = "git://git.omapzoom.org/repo/u-boot.git;protocol=git;branch=${BRANCH}"
+>  
+> -BRANCH ?= "master"
+> +BRANCH ?= "p-ti-u-boot-2013.04"
+>  
+> -SRCREV = "81836e8cc84bd6523d9a4e187965dcd1633c4bc9"
+> +SRCREV ?= "76447484441a4b8e00840a2bde74e66dbac9e631"
+
+One thing is missing - PR bump. You are updating source tree and the commit ID 
+is lower than the previous one, hence if you would try to share the build 
+where the old package exists, you may end up with the image that contains the 
+old package and not the new one. Although, symlink in deploy would probably be 
+correct...
+
+
+>  SPL_BINARY = "MLO"
+>  SPL_UART_BINARY = "u-boot-spl.bin"
+> -- 
+> 1.7.9.5
+> 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
