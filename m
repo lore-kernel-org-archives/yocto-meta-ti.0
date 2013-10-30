@@ -1,32 +1,32 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-ea0-f177.google.com (mail-ea0-f177.google.com
-	[209.85.215.177])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 28EC0E0175F
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 07:47:20 -0700 (PDT)
-Received: by mail-ea0-f177.google.com with SMTP id f15so700703eak.8
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 07:47:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=zkAzPIL5mPD+Lq1gg/ppKumrPtmgrpajwbwluOomYRc=;
-	b=z8ITFaswKHvO+rUy/78GAKIdSvJxFxerSO3fXyUn80uzsMNtLrGORmeSJw8QRi8OLb
-	EwXJu+Ls0HDorzk+nDk4dfLzU7XD1+a6n537jm79T9Nf+EVjD76ET9lkaojG+Y4CQrbb
-	8w+Jvbx3eSqiwyI5e8lT634UPkfHGEhEGxo4GNq/a4J5F/6MyE6UK4cLP18Yby2lAkLc
-	Th661URwEmxPyOVZje4voFHqePowSw+YI9inPrdjsQT6tWAQDuBgfA4rJBnDWzW6SD80
-	epxcgA+Y8gJOZCJUanPyb/LL+Pt1KZRGR0Ygmr/hq+wnugGQ4Aioj04MlLCxaKbq6L84
-	luxA==
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 82694E01775
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 13:04:03 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9UK3xkM026885;
+	Wed, 30 Oct 2013 15:03:59 -0500
+Received: from DFLE72.ent.ti.com ([128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9UK3xg6022264;
+	Wed, 30 Oct 2013 15:03:59 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 30 Oct 2013 15:03:59 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9UK3xeA013434;
+	Wed, 30 Oct 2013 15:03:59 -0500
+Date: Wed, 30 Oct 2013 16:03:58 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Russ Dill <Russ.Dill@ti.com>
+Message-ID: <20131030200358.GH23669@edge>
+References: <1383063875-10561-1-git-send-email-denis@denix.org>
+	<F23EC138-76C4-4E07-B875-1DBA58309C19@ti.com>
+	<526FF335.2000400@ti.com> <527046C7.1080406@ti.com>
 MIME-Version: 1.0
-X-Received: by 10.14.108.200 with SMTP id q48mr694005eeg.105.1383144440046;
-	Wed, 30 Oct 2013 07:47:20 -0700 (PDT)
-Received: by 10.223.170.195 with HTTP; Wed, 30 Oct 2013 07:47:19 -0700 (PDT)
-In-Reply-To: <20131030144235.77D56529D3@arago-project.org>
-References: <20131030144235.77D56529D3@arago-project.org>
-Date: Wed, 30 Oct 2013 10:47:19 -0400
-Message-ID: <CAFZh4h_-_qNH9EWDqwXVxnws2_BOrD95v7ckErK4HtoyOQN3rA@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: Arago Project git <git@arago-project.org>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Denys Dmytriyenko : linux-ti-staging: update to 3. 12-rc7 and latest merges of feature trees
+In-Reply-To: <527046C7.1080406@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	Dave Gerlach <d-gerlach@ti.com>
+Subject: Re: [PATCH] am33x-cm3: update PM firmware for AM335x to 05.00.00.00
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,125 +39,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2013 14:47:23 -0000
-Content-Type: multipart/alternative; boundary=001a11c1b33c05a70f04e9f66985
+X-List-Received-Date: Wed, 30 Oct 2013 20:04:03 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
---001a11c1b33c05a70f04e9f66985
-Content-Type: text/plain; charset=ISO-8859-1
+On Tue, Oct 29, 2013 at 11:37:43PM +0000, Russ Dill wrote:
+> You may now also refer to 1628306779c05ee45f09d1d3131e722ddd3a5e2e as
+> v05.00.00.00
 
-On Wed, Oct 30, 2013 at 10:42 AM, Arago Project git
-<git@arago-project.org>wrote:
+Thanks, I'll update the comment :) Will there be any changes to the branch 
+name?
 
-> Module: meta-ti
-> Branch: dylan
-> Commit: 7e054d1277cfe3b8d59725930cd42177cef1d9f0
-> URL:
-> http://arago-project.org/git/meta-ti.git?a=commit;h=7e054d1277cfe3b8d59725930cd42177cef1d9f0
->
-> Author: Denys Dmytriyenko <denys@ti.com>
-> Date:   Tue Oct 29 17:11:53 2013 -0400
->
-> linux-ti-staging: update to 3.12-rc7 and latest merges of feature trees
->
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
->
-> ---
->
->  recipes-kernel/linux/linux-ti-staging_git.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes-kernel/linux/linux-ti-staging_git.bbb/recipes-kernel/linux/
-> linux-ti-staging_git.bb
-> index ec86506..a1188e9 100644
-> --- a/recipes-kernel/linux/linux-ti-staging_git.bb
-> +++ b/recipes-kernel/linux/linux-ti-staging_git.bb
-> @@ -31,8 +31,8 @@ S = "${WORKDIR}/git"
->
->  BRANCH = "ti-linux-3.12.y"
->
-> -SRCREV = "eb765a394c625083399b956322451eb6872f16dc"
-> -PV = "3.11+3.12-rc5"
-> +SRCREV = "836c92478128790c75b832d21d1b3ab839fa3ca7"
-> +PV = "3.11+3.12-rc7"
->
->  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a
-> rebuild
->  MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
->
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
->
 
-Excellent!  I'll give it a try.
+> On 10/29/2013 05:41 PM, Dave Gerlach wrote:
+> > Looks fine to me
+> > 
+> > Acked-by: Dave Gerlach <d-gerlach@ti.com>
+> > 
+> > 
+> > On 10/29/2013 12:38 PM, Maupin, Chase wrote:
+> >> Ack
+> >>
+> >> Sent from my iPhone
+> >>
+> >>> On Oct 29, 2013, at 9:25 AM, "Denys Dmytriyenko" <denis@denix.org>
+> >>> wrote:
+> >>>
+> >>> From: Denys Dmytriyenko <denys@ti.com>
+> >>>
+> >>> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> >>> Cc: Dave Gerlach <d-gerlach@ti.com>
+> >>> Cc: Chase Maupin <chase.maupin@ti.com>
+> >>> Cc: Carlos Hernandez <ceh@ti.com>
+> >>> Cc: Russ Dill <Russ.Dill@ti.com>
+> >>> ---
+> >>> recipes-bsp/ti/am33x-cm3_git.bb | 10 +++++-----
+> >>> 1 file changed, 5 insertions(+), 5 deletions(-)
+> >>>
+> >>> diff --git a/recipes-bsp/ti/am33x-cm3_git.bb
+> >>> b/recipes-bsp/ti/am33x-cm3_git.bb
+> >>> index 9b36a9e..3be46b6 100644
+> >>> --- a/recipes-bsp/ti/am33x-cm3_git.bb
+> >>> +++ b/recipes-bsp/ti/am33x-cm3_git.bb
+> >>> @@ -3,12 +3,12 @@ DESCRIPTION = "Cortex-M3 binary blob for
+> >>> suspend-resume"
+> >>> LICENSE = "TI-BSD"
+> >>> LIC_FILES_CHKSUM =
+> >>> "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
+> >>>
+> >>> -PV = "04.06.00.11"
+> >>> -PR = "r4"
+> >>> +PV = "05.00.00.00"
+> >>> +PR = "r0"
+> >>>
+> >>> -# SRCREV corresponds to tag "AM335xPSP_04.06.00.11"
+> >>> -SRCREV = "750362868d914702086187096ec2c67b68eac101"
+> >>> -BRANCH ?= "master"
+> >>> +# SRCREV corresponds to the tip of next3 branch
+> >>> +SRCREV = "1628306779c05ee45f09d1d3131e722ddd3a5e2e"
+> >>> +BRANCH ?= "next3"
+> >>>
+> >>> INITSCRIPT_NAME = "am335x-pm-firmware-load"
+> >>> INITSCRIPT_PARAMS = "defaults 96"
+> >>> -- 
+> >>> 1.8.3.2
+> >>>
+> > 
+> 
 
-B
-
---001a11c1b33c05a70f04e9f66985
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On W=
-ed, Oct 30, 2013 at 10:42 AM, Arago Project git <span dir=3D"ltr">&lt;<a hr=
-ef=3D"mailto:git@arago-project.org" target=3D"_blank">git@arago-project.org=
-</a>&gt;</span> wrote:<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex">Module: meta-ti<br>
-Branch: dylan<br>
-Commit: 7e054d1277cfe3b8d59725930cd42177cef1d9f0<br>
-URL: =A0 =A0<a href=3D"http://arago-project.org/git/meta-ti.git?a=3Dcommit;=
-h=3D7e054d1277cfe3b8d59725930cd42177cef1d9f0" target=3D"_blank">http://arag=
-o-project.org/git/meta-ti.git?a=3Dcommit;h=3D7e054d1277cfe3b8d59725930cd421=
-77cef1d9f0</a><br>
-
-<br>
-Author: Denys Dmytriyenko &lt;<a href=3D"mailto:denys@ti.com">denys@ti.com<=
-/a>&gt;<br>
-Date: =A0 Tue Oct 29 17:11:53 2013 -0400<br>
-<br>
-linux-ti-staging: update to 3.12-rc7 and latest merges of feature trees<br>
-<br>
-Signed-off-by: Denys Dmytriyenko &lt;<a href=3D"mailto:denys@ti.com">denys@=
-ti.com</a>&gt;<br>
-<br>
----<br>
-<br>
-=A0recipes-kernel/linux/<a href=3D"http://linux-ti-staging_git.bb" target=
-=3D"_blank">linux-ti-staging_git.bb</a> | =A0 =A04 ++--<br>
-=A01 files changed, 2 insertions(+), 2 deletions(-)<br>
-<br>
-diff --git a/recipes-kernel/linux/<a href=3D"http://linux-ti-staging_git.bb=
-" target=3D"_blank">linux-ti-staging_git.bb</a> b/recipes-kernel/linux/<a h=
-ref=3D"http://linux-ti-staging_git.bb" target=3D"_blank">linux-ti-staging_g=
-it.bb</a><br>
-
-index ec86506..a1188e9 100644<br>
---- a/recipes-kernel/linux/<a href=3D"http://linux-ti-staging_git.bb" targe=
-t=3D"_blank">linux-ti-staging_git.bb</a><br>
-+++ b/recipes-kernel/linux/<a href=3D"http://linux-ti-staging_git.bb" targe=
-t=3D"_blank">linux-ti-staging_git.bb</a><br>
-@@ -31,8 +31,8 @@ S =3D &quot;${WORKDIR}/git&quot;<br>
-<br>
-=A0BRANCH =3D &quot;ti-linux-3.12.y&quot;<br>
-<br>
--SRCREV =3D &quot;eb765a394c625083399b956322451eb6872f16dc&quot;<br>
--PV =3D &quot;3.11+3.12-rc5&quot;<br>
-+SRCREV =3D &quot;836c92478128790c75b832d21d1b3ab839fa3ca7&quot;<br>
-+PV =3D &quot;3.11+3.12-rc7&quot;<br>
-<br>
-=A0# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebu=
-ild<br>
-=A0MACHINE_KERNEL_PR_append =3D &quot;a+gitr${SRCPV}&quot;<br>
-<br>
-_______________________________________________<br>
-meta-ti mailing list<br>
-<a href=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</a><br=
->
-<a href=3D"https://lists.yoctoproject.org/listinfo/meta-ti" target=3D"_blan=
-k">https://lists.yoctoproject.org/listinfo/meta-ti</a><br>
-</blockquote></div><br></div><div class=3D"gmail_extra">Excellent!=A0 I&#39=
-;ll give it a try.<br><br></div><div class=3D"gmail_extra">B<br><br></div><=
-/div>
-
---001a11c1b33c05a70f04e9f66985--
