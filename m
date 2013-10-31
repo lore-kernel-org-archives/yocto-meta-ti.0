@@ -1,31 +1,32 @@
-Return-Path: <heroor@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3E744E017BC
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 01:53:17 -0700 (PDT)
+Return-Path: <chase.maupin@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7BDBFE017CE
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 06:44:47 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9V8rGX7002604;
-	Thu, 31 Oct 2013 03:53:16 -0500
-Received: from DLEE71.ent.ti.com ([157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9V8rGZx010642;
-	Thu, 31 Oct 2013 03:53:16 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 31 Oct 2013 03:53:16 -0500
-Received: from [172.24.158.58] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9V8rEsZ026572;
-	Thu, 31 Oct 2013 03:53:15 -0500
-Message-ID: <52721A7A.9090307@ti.com>
-Date: Thu, 31 Oct 2013 14:23:14 +0530
-From: Siddharth Heroor <heroor@ti.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.0
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9VDikYc018347
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 08:44:46 -0500
+Received: from DFLE73.ent.ti.com ([128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9VDikQM029117
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 08:44:46 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.02.0342.003; Thu, 31 Oct 2013 08:44:46 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>, "Hingolikar, Mrinmayee"
+	<mrinmayee@ti.com>
+Thread-Topic: [meta-ti] [PATCHv2] linux-ti-glsdk: Update to latest fixes
+Thread-Index: AQHO1cWKU3CZ7e7uBkepem9EVGAzO5oO0uNA
+Date: Thu, 31 Oct 2013 13:44:45 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED101597EF4ED@DLEE11.ent.ti.com>
+References: <20131021130016.GA6062@ti.com> <20131030231224.GD24696@edge>
+In-Reply-To: <20131030231224.GD24696@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-To: Kai <skmaillist@gmail.com>
-References: <CAEhSjjtXtwx_Tbi6=_S38h1V5OAvPvShAWA6ehgdUN0htPcFjA@mail.gmail.com>	<52720EA6.8000108@ti.com>
-	<CAEhSjjuOZUt=eNH+As_1dGPi_AgPtUrS+GmR2=32Q24qA=TG+g@mail.gmail.com>
-In-Reply-To: <CAEhSjjuOZUt=eNH+As_1dGPi_AgPtUrS+GmR2=32Q24qA=TG+g@mail.gmail.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Compile kernel with 4.8 toolchain
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCHv2] linux-ti-glsdk: Update to latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,62 +39,87 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2013 08:53:20 -0000
-Content-Type: multipart/alternative;
-	boundary="------------050702030701010003020800"
+X-List-Received-Date: Thu, 31 Oct 2013 13:44:50 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
---------------050702030701010003020800
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
 
-On 10/31/2013 2:06 PM, Kai wrote:
-> 4.8 toolchain is part of customer's requirement.
+>-----Original Message-----
+>From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+>bounces@yoctoproject.org] On Behalf Of Dmytriyenko, Denys
+>Sent: Wednesday, October 30, 2013 6:12 PM
+>To: Hingolikar, Mrinmayee
+>Cc: meta-ti@yoctoproject.org
+>Subject: Re: [meta-ti] [PATCHv2] linux-ti-glsdk: Update to latest
+>fixes
 >
-> It seems the kernel with 4.8 toolchain fails at very early stage, have 
-> you met anything like this when you get 4.7 Linaro toolchain work with 
-> 3.8.x kernel? maybe some configurations or build parameters are needed.
+>On Mon, Oct 21, 2013 at 06:30:16PM +0530, Mrinmayee Hingolikar
+>wrote:
+>> v1:
+>>  * Kernel source migration from git.ti.com to omapzoom.org. The
+>development
+>>    tree is shared between the Linux and Android teams.This
+>enables a common
+>>    kernel development platform for both the teams for better
+>alignment.
+>>  * Add support for VIP and VPE
+>>  * Add wilink/wlan support
+>>  * Enable rpmsg/remoteproc driver for multimedia
+>>
+>> v2:
+>>  * Add conditional assignment for BRANCH and SRCREV
+>
+>I'm not sure why this was needed, but I can take it.
 
-You could try to turn on DEBUG_LL and other DEBUG_* options to see if 
-that helps in identifying the cause.
+My fault.  I like the BRANCH obviously, but I also like setting SRCREV for =
+when it is overriden.  I know it probably isn't a big deal but a ?=3D is a =
+flag for me that someone else may override this in an append.
 
---
-Sid
+>
+>
+>> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+>> ---
+>>  recipes-kernel/linux/linux-ti-glsdk_3.8.bb |    8 ++++----
+>>  1 file changed, 4 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+>b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+>> index 9e3e499..35d55df 100644
+>> --- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+>> +++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+>> @@ -18,14 +18,14 @@ DEFAULT_PREFERENCE =3D "-1"
+>>
+>>  S =3D "${WORKDIR}/git"
+>>
+>> -BRANCH =3D "master"
+>> +BRANCH ?=3D "p-ti-glsdk-3.8.y"
+>>
+>> -SRCREV =3D "6076e6882d1d6a64b104e42e56a3eada36605cb3"
+>> +SRCREV ?=3D "cc16f99176bf083829c028f9af5b8eb560debcc1"
+>>  PV =3D "3.8.13"
+>>
+>>  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will
+>cause a rebuild
+>> -MACHINE_KERNEL_PR_append =3D "b+gitr${SRCPV}"
+>> +MACHINE_KERNEL_PR_append =3D "c+gitr${SRCPV}"
+>>
+>> -SRC_URI =3D "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-
+>kernel.git;protocol=3Dgit;branch=3D${BRANCH} \
+>> +SRC_URI =3D
+>"git://git.omapzoom.org/kernel/omap.git;protocol=3Dgit;branch=3D${BRAN
+>CH} \
+>>             file://defconfig \
+>>            "
+>> --
+>> 1.7.9.5
+>>
+>> _______________________________________________
+>> meta-ti mailing list
+>> meta-ti@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/meta-ti
+>_______________________________________________
+>meta-ti mailing list
+>meta-ti@yoctoproject.org
+>https://lists.yoctoproject.org/listinfo/meta-ti
 
-
---------------050702030701010003020800
-Content-Type: text/html; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta content="text/html; charset=ISO-8859-1"
-      http-equiv="Content-Type">
-  </head>
-  <body bgcolor="#FFFFFF" text="#000000">
-    <div class="moz-cite-prefix">On 10/31/2013 2:06 PM, Kai wrote:<br>
-    </div>
-    <blockquote
-cite="mid:CAEhSjjuOZUt=eNH+As_1dGPi_AgPtUrS+GmR2=32Q24qA=TG+g@mail.gmail.com"
-      type="cite">
-      <meta http-equiv="Content-Type" content="text/html;
-        charset=ISO-8859-1">
-      <div dir="ltr">4.8 toolchain is part of customer's requirement.
-        <div><br>
-        </div>
-        <div>It seems the kernel with 4.8 toolchain fails at very early
-          stage, have you met anything like this when you get 4.7 Linaro
-          toolchain work with 3.8.x kernel? maybe some configurations or
-          build parameters are needed.</div>
-      </div>
-    </blockquote>
-    <br>
-    You could try to turn on DEBUG_LL and other DEBUG_* options to see
-    if that helps in identifying the cause. <br>
-    <br>
-    --<br>
-    Sid<br>
-    <br>
-  </body>
-</html>
-
---------------050702030701010003020800--
