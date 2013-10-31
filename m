@@ -1,29 +1,31 @@
-Return-Path: <heroor@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 74E72E017BB
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 01:02:48 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9V82mS5005586
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 03:02:48 -0500
-Received: from DLEE71.ent.ti.com ([157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9V82mbs007827
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 03:02:48 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 31 Oct 2013 03:02:47 -0500
-Received: from [172.24.158.58] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9V82kCw015540	for
-	<meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 03:02:47 -0500
-Message-ID: <52720EA6.8000108@ti.com>
-Date: Thu, 31 Oct 2013 13:32:46 +0530
-From: Siddharth Heroor <heroor@ti.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.0
+Return-Path: <mrinmayee@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 16262E017BB
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 01:14:32 -0700 (PDT)
+Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9V8EUve005721
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 03:14:31 -0500
+Received: from DBDE72.ent.ti.com (dbdmailx.itg.ti.com [172.24.171.97])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9V8ESD2015049
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 03:14:29 -0500
+Received: from DBDE04.ent.ti.com ([fe80::21ac:d9f:f810:c8e7]) by
+	DBDE72.ent.ti.com ([fe80::bd56:32bf:87fd:2763%27]) with mapi id
+	14.02.0342.003; Thu, 31 Oct 2013 16:14:28 +0800
+From: "Hingolikar, Mrinmayee" <mrinmayee@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [meta-ti] [PATCHv2] linux-ti-glsdk: Update to latest fixes
+Thread-Index: AQHOzl2EGuUpA8ox10GbglEaEEOr75oNaCQAgAEdeiA=
+Date: Thu, 31 Oct 2013 08:14:27 +0000
+Message-ID: <CF956B779D819D41BBC043B7082161D545C363@DBDE04.ent.ti.com>
+References: <20131021130016.GA6062@ti.com> <20131030231224.GD24696@edge>
+In-Reply-To: <20131030231224.GD24696@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.24.170.142]
 MIME-Version: 1.0
-To: <meta-ti@yoctoproject.org>
-References: <CAEhSjjtXtwx_Tbi6=_S38h1V5OAvPvShAWA6ehgdUN0htPcFjA@mail.gmail.com>
-In-Reply-To: <CAEhSjjtXtwx_Tbi6=_S38h1V5OAvPvShAWA6ehgdUN0htPcFjA@mail.gmail.com>
-Subject: Re: Compile kernel with 4.8 toolchain
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCHv2] linux-ti-glsdk: Update to latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,88 +38,79 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2013 08:02:51 -0000
-Content-Type: multipart/alternative;
-	boundary="------------000704070203060002050408"
+X-List-Received-Date: Thu, 31 Oct 2013 08:14:33 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
---------------000704070203060002050408
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+Can you please pull in this patch?
 
-On 10/31/2013 12:32 PM, Kai wrote:
-> Hi,
->
-> I am trying to compile linux-ti-glsdk kenel with Linaro 4.8 cross 
-> compile toolchain, but it cannot boot on OMAP5432 EVM board, no any 
-> log from serial port, 4.7 version toolchain is OK. Who has been 
-> succeeded with building glsdk kernel with 4.8 Linaro toolchain?
+> -----Original Message-----
+> From: Dmytriyenko, Denys
+> Sent: Thursday, October 31, 2013 4:42 AM
+> To: Hingolikar, Mrinmayee
+> Cc: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCHv2] linux-ti-glsdk: Update to latest fixes
+>=20
+> On Mon, Oct 21, 2013 at 06:30:16PM +0530, Mrinmayee Hingolikar wrote:
+> > v1:
+> >  * Kernel source migration from git.ti.com to omapzoom.org. The
+> development
+> >    tree is shared between the Linux and Android teams.This enables a
+> common
+> >    kernel development platform for both the teams for better
+> alignment.
+> >  * Add support for VIP and VPE
+> >  * Add wilink/wlan support
+> >  * Enable rpmsg/remoteproc driver for multimedia
+> >
+> > v2:
+> >  * Add conditional assignment for BRANCH and SRCREV
+>=20
+> I'm not sure why this was needed, but I can take it.
+>=20
+>=20
+> > Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+> > ---
+> >  recipes-kernel/linux/linux-ti-glsdk_3.8.bb |    8 ++++----
+> >  1 file changed, 4 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+> > b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+> > index 9e3e499..35d55df 100644
+> > --- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+> > +++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
+> > @@ -18,14 +18,14 @@ DEFAULT_PREFERENCE =3D "-1"
+> >
+> >  S =3D "${WORKDIR}/git"
+> >
+> > -BRANCH =3D "master"
+> > +BRANCH ?=3D "p-ti-glsdk-3.8.y"
+> >
+> > -SRCREV =3D "6076e6882d1d6a64b104e42e56a3eada36605cb3"
+> > +SRCREV ?=3D "cc16f99176bf083829c028f9af5b8eb560debcc1"
+> >  PV =3D "3.8.13"
+> >
+> >  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a
+> > rebuild -MACHINE_KERNEL_PR_append =3D "b+gitr${SRCPV}"
+> > +MACHINE_KERNEL_PR_append =3D "c+gitr${SRCPV}"
+> >
+> > -SRC_URI =3D
+> > "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-
+> kernel.git;protocol=3Dg
+> > it;branch=3D${BRANCH} \
+> > +SRC_URI =3D
+> >
+> +"git://git.omapzoom.org/kernel/omap.git;protocol=3Dgit;branch=3D${BRANCH=
+}
+> > +\
+> >             file://defconfig \
+> >            "
+> > --
+> > 1.7.9.5
+> >
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
 
-Sorry, we (inside the GLSDK team) haven't tried 4.8 but we have been 
-testing with the Linaro 4.7 toolchain only. Any reason for choosing 4.8?
-
->
-> Thanks,
-> Kai
->
->
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-
-
---------------000704070203060002050408
-Content-Type: text/html; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta content="text/html; charset=ISO-8859-1"
-      http-equiv="Content-Type">
-  </head>
-  <body bgcolor="#FFFFFF" text="#000000">
-    <div class="moz-cite-prefix">On 10/31/2013 12:32 PM, Kai wrote:<br>
-    </div>
-    <blockquote
-cite="mid:CAEhSjjtXtwx_Tbi6=_S38h1V5OAvPvShAWA6ehgdUN0htPcFjA@mail.gmail.com"
-      type="cite">
-      <meta http-equiv="Content-Type" content="text/html;
-        charset=ISO-8859-1">
-      <div dir="ltr">Hi,
-        <div><br>
-        </div>
-        <div>I am trying to compile linux-ti-glsdk kenel with Linaro 4.8
-          cross compile toolchain, but it cannot boot on OMAP5432 EVM
-          board, no any log from serial port, 4.7 version toolchain is
-          OK. Who has been succeeded with building glsdk kernel with 4.8
-          Linaro toolchain?</div>
-      </div>
-    </blockquote>
-    <br>
-    Sorry, we (inside the GLSDK team) haven't tried 4.8 but we have been
-    testing with the Linaro 4.7 toolchain only. Any reason for choosing
-    4.8? <br>
-    <br>
-    <blockquote
-cite="mid:CAEhSjjtXtwx_Tbi6=_S38h1V5OAvPvShAWA6ehgdUN0htPcFjA@mail.gmail.com"
-      type="cite">
-      <div dir="ltr">
-        <div><br>
-        </div>
-        <div>Thanks,</div>
-        <div>Kai</div>
-      </div>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <br>
-      <pre wrap="">_______________________________________________
-meta-ti mailing list
-<a class="moz-txt-link-abbreviated" href="mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</a>
-<a class="moz-txt-link-freetext" href="https://lists.yoctoproject.org/listinfo/meta-ti">https://lists.yoctoproject.org/listinfo/meta-ti</a>
-</pre>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------000704070203060002050408--
