@@ -1,32 +1,22 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
-	[209.85.223.174])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01A0EE017D2
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 09:50:20 -0700 (PDT)
-Received: by mail-ie0-f174.google.com with SMTP id qd12so5339726ieb.19
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 09:50:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=TktkusjaG2FcHKneL4BwOtro9QDUsLNc1B1Nr7UZ9M0=;
-	b=RzXj9fD5Z+nl2ZgY+9WgPNCYklJCRrMpCTH+bK1g150SMIUlNA9MYF6pltPiKFH+rV
-	MJ9YJcGsGvXy1CqkBJksiipbVAhv42LGqLeMzUxP87dQSKUImH9fQAo+HuKOcfVZL5/S
-	YHTaSKN57cSXKjvL0MV1K8wdk6zemWCKv/PgX263KjXXPcRvasCWp+oMucSad4nQ38xm
-	FzmRbVgvl0g6n24qvr6ESlBCNeFmph5mVgJbmwYobvQziUnm4eQAHDe5+MlCaIlUVQyZ
-	HjxSpi855g4+V8WVhJQb6RYMZWVw8Ky+SwTa3YQQYw/+gn7k2J5E4KmQttPkPKHDHKpJ
-	HQwQ==
-X-Received: by 10.50.22.67 with SMTP id b3mr185311igf.39.1383238219873; Thu,
-	31 Oct 2013 09:50:19 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.50.219.195 with HTTP; Thu, 31 Oct 2013 09:49:49 -0700 (PDT)
-In-Reply-To: <CAEhSjjtXtwx_Tbi6=_S38h1V5OAvPvShAWA6ehgdUN0htPcFjA@mail.gmail.com>
-References: <CAEhSjjtXtwx_Tbi6=_S38h1V5OAvPvShAWA6ehgdUN0htPcFjA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 31 Oct 2013 09:49:49 -0700
-Message-ID: <CAMKF1spv2KN5Udchrm-y5fFxHMJnaSw9YrhVERHB0mPN5JPQsA@mail.gmail.com>
-To: Kai <skmaillist@gmail.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Compile kernel with 4.8 toolchain
+Return-Path: <denis@denix.org>
+Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
+	[206.46.173.7])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A3A39E017D3
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 10:09:29 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [96.231.138.104])
+	by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MVJ003A8MAX1RK0@vms173007.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 31 Oct 2013 12:09:13 -0500 (CDT)
+Received: from elrond.denix (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 8127F2001F; Thu,
+	31 Oct 2013 13:08:57 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Thu, 31 Oct 2013 13:08:57 -0400
+Message-id: <1383239337-31186-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH] am33x-cm3: update to specify correct tag and branch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,16 +29,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2013 16:50:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 31 Oct 2013 17:09:29 -0000
 
-On Thu, Oct 31, 2013 at 12:02 AM, Kai <skmaillist@gmail.com> wrote:
-> I am trying to compile linux-ti-glsdk kenel with Linaro 4.8 cross compile
-> toolchain, but it cannot boot on OMAP5432 EVM board, no any log from serial
-> port, 4.7 version toolchain is OK. Who has been succeeded with building
-> glsdk kernel with 4.8 Linaro toolchain?
+From: Denys Dmytriyenko <denys@ti.com>
 
-Try backporting some of the patches that we did for beagleboard
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-bsp/ti/am33x-cm3_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-https://github.com/koenkooi/meta-beagleboard/commit/87efc663c4f76d3051cecf1e2c3e2bbd461d200b
+diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
+index 3be46b6..cfde2cf 100644
+--- a/recipes-bsp/ti/am33x-cm3_git.bb
++++ b/recipes-bsp/ti/am33x-cm3_git.bb
+@@ -4,11 +4,11 @@ LICENSE = "TI-BSD"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
+ 
+ PV = "05.00.00.00"
+-PR = "r0"
++PR = "r1"
+ 
+-# SRCREV corresponds to the tip of next3 branch
++# SRCREV corresponds to tag v05.00.00.00
+ SRCREV = "1628306779c05ee45f09d1d3131e722ddd3a5e2e"
+-BRANCH ?= "next3"
++BRANCH ?= "master"
+ 
+ INITSCRIPT_NAME = "am335x-pm-firmware-load"
+ INITSCRIPT_PARAMS = "defaults 96"
+-- 
+1.8.3.2
+
 
