@@ -1,28 +1,35 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4D34FE017BC
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 19:12:53 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9V2CqMW026765
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 21:12:52 -0500
-Received: from DLEE71.ent.ti.com ([157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9V2Cq3m029248
-	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 21:12:52 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 30 Oct 2013 21:12:52 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	r9V2Cq60000756	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 21:12:52
-	-0500
-Date: Wed, 30 Oct 2013 22:02:18 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <2010817416.877.1383184938367.JavaMail.jenkins@puget>
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
+	[209.85.223.172])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 36C4AE017BD
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 20:57:03 -0700 (PDT)
+Received: by mail-ie0-f172.google.com with SMTP id tp5so4025407ieb.17
+	for <meta-ti@yoctoproject.org>; Wed, 30 Oct 2013 20:57:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=ydMCXj4XhfLlMho9LdCgsdBtse1iGS9iM+lHP3BS+UI=;
+	b=cJFM4+saAG+g8rgrJacmKCoVM2G2ZSSZnARRdwUJutLQUEucAv/L2yl9LOIbzGnIfO
+	QpJIKvp5qD+Jp4fxaX70GQKRy632PEHe+/hGBOd0mNFrnC7bE6bwiMlXHLfB8AJQSTNv
+	7D+4+O8wnMYUZRJNzGgnydhNfPwLr37tYJnPerGGoWQl4pcmJN09d9keWsYx0mg0ZpHH
+	NGBLF2gubgreVVBTpELsOfeg/i7wj4Ld/alq2lholpfOpSLsgY48wmKan30v0/WzVik8
+	1WG/eI127In/MIB+TQRrTgF73CEjKqOLSncTpv4mB6fZ2OE2/hgurGkbdHyImBHQIKRD
+	HfkQ==
+X-Received: by 10.43.143.76 with SMTP id jl12mr50590icc.82.1383191822632; Wed,
+	30 Oct 2013 20:57:02 -0700 (PDT)
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-10-30_21-01-44
+Received: by 10.50.219.195 with HTTP; Wed, 30 Oct 2013 20:56:31 -0700 (PDT)
+In-Reply-To: <B0581B5571079145BA1CD78C126DBDE72E906A57@DLEE08.ent.ti.com>
+References: <1382606978-9914-1-git-send-email-schnitzeltony@googlemail.com>
+	<5269031E.4040504@mlbassoc.com>
+	<CALbNGRQHT73Zg4u+4b7sg8AONfxy--hsXoPejz2sY8pthX-T_Q@mail.gmail.com>
+	<B0581B5571079145BA1CD78C126DBDE72E906A57@DLEE08.ent.ti.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 30 Oct 2013 20:56:31 -0700
+Message-ID: <CAMKF1srTwEHJqGRmxXRY0M=yXYGxUFV5qE4TXbn88LVsdadB6A@mail.gmail.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] mesa appends: remove PROVIDES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +42,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2013 02:13:02 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_876_144247776.1383184938366"
+X-List-Received-Date: Thu, 31 Oct 2013 03:57:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_876_144247776.1383184938366
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+ping. I am also waiting on this patch or similar getting in into meta-ti
 
-<html>
-<head>
-<title>
-Status for 10/30/13
-</title>
-</head>
-<body>
+On Thu, Oct 24, 2013 at 5:14 AM, Dmytriyenko, Denys <denys@ti.com> wrote:
+> Thanks, I'll have to look at it once I'm back from ELCE...
+>
+>
+> Denys
+>
+>
+>
+> -----Original Message-----
+> From: Andreas M=C3=BCller [schnitzeltony@googlemail.com]
+> Received: Thursday, 24 Oct 2013, 12:49
+> To: Gary Thomas [gary@mlbassoc.com]
+> CC: meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]
+> Subject: Re: [meta-ti] [PATCH] mesa appends: remove PROVIDES
+>
+> On Thu, Oct 24, 2013 at 1:23 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+>> On 2013-10-24 03:29, Andreas M=C3=BCller wrote:
+>>>
+>>> These came in when mesa was reworked. Nowadays they are useless and wha=
+t
+>>> they try to do achieve is wrong: provider for virtual/libgsl should be
+>>> mesa-gl. The appends were left in to avoid backward revision trouble in
+>>> package feeds.
+>>
+>>
+>> If this is the correct solution, I think these .bbappend files should be
+>> removed completely.  They don't change anything and keeping them just to
+>> retain the PRINC is useless because as is one cannot even build a system
+>> which uses virtual/mesa, e.g. one using the X11 server.  In addition, th=
+e
+>> main mesa recipe is about to be updated so they'll need changing again
+>> very
+>> soon.
+>>
+> So let's kick them out as soon as mesa is updated
+>
+> Andreas
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+>
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+>
 
-<h2>Status for 10/30/13</h2>
-
-<h2>BUILD_ID: build-2013-10-30_21-02-51</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.10"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
-
-
-------=_Part_876_144247776.1383184938366--
