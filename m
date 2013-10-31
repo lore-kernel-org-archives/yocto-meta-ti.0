@@ -1,32 +1,32 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7BDBFE017CE
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 06:44:47 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id r9VDikYc018347
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 08:44:46 -0500
-Received: from DFLE73.ent.ti.com ([128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id r9VDikQM029117
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 08:44:46 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.02.0342.003; Thu, 31 Oct 2013 08:44:46 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>, "Hingolikar, Mrinmayee"
-	<mrinmayee@ti.com>
-Thread-Topic: [meta-ti] [PATCHv2] linux-ti-glsdk: Update to latest fixes
-Thread-Index: AQHO1cWKU3CZ7e7uBkepem9EVGAzO5oO0uNA
-Date: Thu, 31 Oct 2013 13:44:45 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED101597EF4ED@DLEE11.ent.ti.com>
-References: <20131021130016.GA6062@ti.com> <20131030231224.GD24696@edge>
-In-Reply-To: <20131030231224.GD24696@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
+	[209.85.223.174])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01A0EE017D2
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 09:50:20 -0700 (PDT)
+Received: by mail-ie0-f174.google.com with SMTP id qd12so5339726ieb.19
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 09:50:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=TktkusjaG2FcHKneL4BwOtro9QDUsLNc1B1Nr7UZ9M0=;
+	b=RzXj9fD5Z+nl2ZgY+9WgPNCYklJCRrMpCTH+bK1g150SMIUlNA9MYF6pltPiKFH+rV
+	MJ9YJcGsGvXy1CqkBJksiipbVAhv42LGqLeMzUxP87dQSKUImH9fQAo+HuKOcfVZL5/S
+	YHTaSKN57cSXKjvL0MV1K8wdk6zemWCKv/PgX263KjXXPcRvasCWp+oMucSad4nQ38xm
+	FzmRbVgvl0g6n24qvr6ESlBCNeFmph5mVgJbmwYobvQziUnm4eQAHDe5+MlCaIlUVQyZ
+	HjxSpi855g4+V8WVhJQb6RYMZWVw8Ky+SwTa3YQQYw/+gn7k2J5E4KmQttPkPKHDHKpJ
+	HQwQ==
+X-Received: by 10.50.22.67 with SMTP id b3mr185311igf.39.1383238219873; Thu,
+	31 Oct 2013 09:50:19 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.50.219.195 with HTTP; Thu, 31 Oct 2013 09:49:49 -0700 (PDT)
+In-Reply-To: <CAEhSjjtXtwx_Tbi6=_S38h1V5OAvPvShAWA6ehgdUN0htPcFjA@mail.gmail.com>
+References: <CAEhSjjtXtwx_Tbi6=_S38h1V5OAvPvShAWA6ehgdUN0htPcFjA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 31 Oct 2013 09:49:49 -0700
+Message-ID: <CAMKF1spv2KN5Udchrm-y5fFxHMJnaSw9YrhVERHB0mPN5JPQsA@mail.gmail.com>
+To: Kai <skmaillist@gmail.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCHv2] linux-ti-glsdk: Update to latest fixes
+Subject: Re: Compile kernel with 4.8 toolchain
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,87 +39,16 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2013 13:44:50 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 31 Oct 2013 16:50:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On Thu, Oct 31, 2013 at 12:02 AM, Kai <skmaillist@gmail.com> wrote:
+> I am trying to compile linux-ti-glsdk kenel with Linaro 4.8 cross compile
+> toolchain, but it cannot boot on OMAP5432 EVM board, no any log from serial
+> port, 4.7 version toolchain is OK. Who has been succeeded with building
+> glsdk kernel with 4.8 Linaro toolchain?
 
->-----Original Message-----
->From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->bounces@yoctoproject.org] On Behalf Of Dmytriyenko, Denys
->Sent: Wednesday, October 30, 2013 6:12 PM
->To: Hingolikar, Mrinmayee
->Cc: meta-ti@yoctoproject.org
->Subject: Re: [meta-ti] [PATCHv2] linux-ti-glsdk: Update to latest
->fixes
->
->On Mon, Oct 21, 2013 at 06:30:16PM +0530, Mrinmayee Hingolikar
->wrote:
->> v1:
->>  * Kernel source migration from git.ti.com to omapzoom.org. The
->development
->>    tree is shared between the Linux and Android teams.This
->enables a common
->>    kernel development platform for both the teams for better
->alignment.
->>  * Add support for VIP and VPE
->>  * Add wilink/wlan support
->>  * Enable rpmsg/remoteproc driver for multimedia
->>
->> v2:
->>  * Add conditional assignment for BRANCH and SRCREV
->
->I'm not sure why this was needed, but I can take it.
+Try backporting some of the patches that we did for beagleboard
 
-My fault.  I like the BRANCH obviously, but I also like setting SRCREV for =
-when it is overriden.  I know it probably isn't a big deal but a ?=3D is a =
-flag for me that someone else may override this in an append.
-
->
->
->> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
->> ---
->>  recipes-kernel/linux/linux-ti-glsdk_3.8.bb |    8 ++++----
->>  1 file changed, 4 insertions(+), 4 deletions(-)
->>
->> diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
->b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
->> index 9e3e499..35d55df 100644
->> --- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
->> +++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
->> @@ -18,14 +18,14 @@ DEFAULT_PREFERENCE =3D "-1"
->>
->>  S =3D "${WORKDIR}/git"
->>
->> -BRANCH =3D "master"
->> +BRANCH ?=3D "p-ti-glsdk-3.8.y"
->>
->> -SRCREV =3D "6076e6882d1d6a64b104e42e56a3eada36605cb3"
->> +SRCREV ?=3D "cc16f99176bf083829c028f9af5b8eb560debcc1"
->>  PV =3D "3.8.13"
->>
->>  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will
->cause a rebuild
->> -MACHINE_KERNEL_PR_append =3D "b+gitr${SRCPV}"
->> +MACHINE_KERNEL_PR_append =3D "c+gitr${SRCPV}"
->>
->> -SRC_URI =3D "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-
->kernel.git;protocol=3Dgit;branch=3D${BRANCH} \
->> +SRC_URI =3D
->"git://git.omapzoom.org/kernel/omap.git;protocol=3Dgit;branch=3D${BRAN
->CH} \
->>             file://defconfig \
->>            "
->> --
->> 1.7.9.5
->>
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
->_______________________________________________
->meta-ti mailing list
->meta-ti@yoctoproject.org
->https://lists.yoctoproject.org/listinfo/meta-ti
+https://github.com/koenkooi/meta-beagleboard/commit/87efc663c4f76d3051cecf1e2c3e2bbd461d200b
 
