@@ -1,27 +1,33 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E842EE017D5
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 18:14:12 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id rA11EBsX003739
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 20:14:11 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id rA11EBW5015279
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 20:14:11 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 31 Oct 2013 20:14:11 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	rA11EBCN029879;	Thu, 31 Oct 2013 20:14:11 -0500
-Date: Thu, 31 Oct 2013 21:03:35 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>, <Chase.Maupin@ti.com>
-Message-ID: <575308522.881.1383267815816.JavaMail.jenkins@puget>
+Return-Path: <skmaillist@gmail.com>
+Received: from mail-ob0-f171.google.com (mail-ob0-f171.google.com
+	[209.85.214.171])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54881E017D5
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 23:41:01 -0700 (PDT)
+Received: by mail-ob0-f171.google.com with SMTP id wn1so4139678obc.2
+	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 23:41:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=ahMo+ghtpp2sjwwJXhpJyYoq5xdGWD7WuFVfwe/UhLw=;
+	b=Rob72olvdp5AbeJE1//IcSDG93llPA1dsRoT57szDGhjzaKl7RR2IdS6q0fnSJUs+4
+	OET9COd2dZ8QDsrIAIENv4WUgTcNQ4k25NTjeV1qbdp4c38HqslZqs7/EPlisdKf9E1N
+	yCJNSUe9sG7Ggg40n9HlPgdmN0z83OpcV/lOTjn+xJSTaqMmu+/a0ZVL6sBJCbkLAQYD
+	WuiF9GBNpsHnMDxVJIwk9c3gL5G8mHXPtxCA9VAP18trr0+mAzBkQtN7KFpm7rLqVKZX
+	ghXgeYGQxxRj8GZi2/mNK1B3LF6hGtd4Q++zh3wK3J3GK58QSdzkEfmw1xrSralsRlmO
+	lPLA==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-10-31_21-01-44
+X-Received: by 10.60.65.227 with SMTP id a3mr1324386oet.13.1383288060507; Thu,
+	31 Oct 2013 23:41:00 -0700 (PDT)
+Received: by 10.76.114.52 with HTTP; Thu, 31 Oct 2013 23:41:00 -0700 (PDT)
+In-Reply-To: <CAMKF1spv2KN5Udchrm-y5fFxHMJnaSw9YrhVERHB0mPN5JPQsA@mail.gmail.com>
+References: <CAEhSjjtXtwx_Tbi6=_S38h1V5OAvPvShAWA6ehgdUN0htPcFjA@mail.gmail.com>
+	<CAMKF1spv2KN5Udchrm-y5fFxHMJnaSw9YrhVERHB0mPN5JPQsA@mail.gmail.com>
+Date: Fri, 1 Nov 2013 14:41:00 +0800
+Message-ID: <CAEhSjjvEBT4yuJj9Qy_KO9DM6KBrKPvMBHPHeb7tkbbtx8V6=g@mail.gmail.com>
+From: Kai <skmaillist@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Compile kernel with 4.8 toolchain
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,169 +40,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2013 01:14:13 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_880_1949351145.1383267815812"
+X-List-Received-Date: Fri, 01 Nov 2013 06:41:02 -0000
+Content-Type: multipart/alternative; boundary=001a11c2570077fc4204ea17d924
 
-------=_Part_880_1949351145.1383267815812
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a11c2570077fc4204ea17d924
+Content-Type: text/plain; charset=ISO-8859-1
 
-<html>
-<head>
-<title>
-Status for 10/31/13
-</title>
-</head>
-<body>
+0003-ARM-7668-1-fix-memset-related-crashes-caused-by-rece.patch
+0004-ARM-7670-1-fix-the-memset-fix.patch
 
-<h2>Status for 10/31/13</h2>
+With the two patches, kernel can boot successfully which compiled with 4.8
+toolchain.
 
-<h2>BUILD_ID: build-2013-10-31_21-02-52</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.10"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+Thanks.
 
 
-------=_Part_880_1949351145.1383267815812--
+On Fri, Nov 1, 2013 at 12:49 AM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> On Thu, Oct 31, 2013 at 12:02 AM, Kai <skmaillist@gmail.com> wrote:
+> > I am trying to compile linux-ti-glsdk kenel with Linaro 4.8 cross compile
+> > toolchain, but it cannot boot on OMAP5432 EVM board, no any log from
+> serial
+> > port, 4.7 version toolchain is OK. Who has been succeeded with building
+> > glsdk kernel with 4.8 Linaro toolchain?
+>
+> Try backporting some of the patches that we did for beagleboard
+>
+>
+> https://github.com/koenkooi/meta-beagleboard/commit/87efc663c4f76d3051cecf1e2c3e2bbd461d200b
+>
+
+--001a11c2570077fc4204ea17d924
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">0003-ARM-7668-1-fix-memset-related-crashes-caused-by-rece.=
+patch<br><div>0004-ARM-7670-1-fix-the-memset-fix.patch<br></div><div><br></=
+div><div>With the two patches, kernel can boot successfully which compiled =
+with 4.8 toolchain.</div>
+<div><br></div><div>Thanks.</div></div><div class=3D"gmail_extra"><br><br><=
+div class=3D"gmail_quote">On Fri, Nov 1, 2013 at 12:49 AM, Khem Raj <span d=
+ir=3D"ltr">&lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.=
+khem@gmail.com</a>&gt;</span> wrote:<br>
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex"><div class=3D"HOEnZb"><div class=3D"h5">On T=
+hu, Oct 31, 2013 at 12:02 AM, Kai &lt;<a href=3D"mailto:skmaillist@gmail.co=
+m">skmaillist@gmail.com</a>&gt; wrote:<br>
+
+&gt; I am trying to compile linux-ti-glsdk kenel with Linaro 4.8 cross comp=
+ile<br>
+&gt; toolchain, but it cannot boot on OMAP5432 EVM board, no any log from s=
+erial<br>
+&gt; port, 4.7 version toolchain is OK. Who has been succeeded with buildin=
+g<br>
+&gt; glsdk kernel with 4.8 Linaro toolchain?<br>
+<br>
+</div></div>Try backporting some of the patches that we did for beagleboard=
+<br>
+<br>
+<a href=3D"https://github.com/koenkooi/meta-beagleboard/commit/87efc663c4f7=
+6d3051cecf1e2c3e2bbd461d200b" target=3D"_blank">https://github.com/koenkooi=
+/meta-beagleboard/commit/87efc663c4f76d3051cecf1e2c3e2bbd461d200b</a><br>
+</blockquote></div><br></div>
+
+--001a11c2570077fc4204ea17d924--
