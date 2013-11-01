@@ -1,33 +1,28 @@
-Return-Path: <skmaillist@gmail.com>
-Received: from mail-ob0-f171.google.com (mail-ob0-f171.google.com
-	[209.85.214.171])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54881E017D5
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 23:41:01 -0700 (PDT)
-Received: by mail-ob0-f171.google.com with SMTP id wn1so4139678obc.2
-	for <meta-ti@yoctoproject.org>; Thu, 31 Oct 2013 23:41:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=ahMo+ghtpp2sjwwJXhpJyYoq5xdGWD7WuFVfwe/UhLw=;
-	b=Rob72olvdp5AbeJE1//IcSDG93llPA1dsRoT57szDGhjzaKl7RR2IdS6q0fnSJUs+4
-	OET9COd2dZ8QDsrIAIENv4WUgTcNQ4k25NTjeV1qbdp4c38HqslZqs7/EPlisdKf9E1N
-	yCJNSUe9sG7Ggg40n9HlPgdmN0z83OpcV/lOTjn+xJSTaqMmu+/a0ZVL6sBJCbkLAQYD
-	WuiF9GBNpsHnMDxVJIwk9c3gL5G8mHXPtxCA9VAP18trr0+mAzBkQtN7KFpm7rLqVKZX
-	ghXgeYGQxxRj8GZi2/mNK1B3LF6hGtd4Q++zh3wK3J3GK58QSdzkEfmw1xrSralsRlmO
-	lPLA==
+Return-Path: <anders@chargestorm.se>
+Received: from STOEXHUB02.domain01.net (STOEXHUB02.domain01.net
+	[83.145.59.143])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 45821E017D5
+	for <meta-ti@yoctoproject.org>; Fri,  1 Nov 2013 01:47:19 -0700 (PDT)
+Received: from ad.chargestorm.se (213.114.79.21) by stoexhub02.domain01.net
+	(10.12.10.2) with Microsoft SMTP Server (TLS) id 8.3.279.1;
+	Fri, 1 Nov 2013 09:46:58 +0100
+Date: Fri, 1 Nov 2013 09:46:57 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Message-ID: <20131101084656.GB6346@ad.chargestorm.se>
+Mail-Followup-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+References: <20131025080849.GB8552@ad.chargestorm.se>
+	<20131029200127.GM22054@edge>
 MIME-Version: 1.0
-X-Received: by 10.60.65.227 with SMTP id a3mr1324386oet.13.1383288060507; Thu,
-	31 Oct 2013 23:41:00 -0700 (PDT)
-Received: by 10.76.114.52 with HTTP; Thu, 31 Oct 2013 23:41:00 -0700 (PDT)
-In-Reply-To: <CAMKF1spv2KN5Udchrm-y5fFxHMJnaSw9YrhVERHB0mPN5JPQsA@mail.gmail.com>
-References: <CAEhSjjtXtwx_Tbi6=_S38h1V5OAvPvShAWA6ehgdUN0htPcFjA@mail.gmail.com>
-	<CAMKF1spv2KN5Udchrm-y5fFxHMJnaSw9YrhVERHB0mPN5JPQsA@mail.gmail.com>
-Date: Fri, 1 Nov 2013 14:41:00 +0800
-Message-ID: <CAEhSjjvEBT4yuJj9Qy_KO9DM6KBrKPvMBHPHeb7tkbbtx8V6=g@mail.gmail.com>
-From: Kai <skmaillist@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Compile kernel with 4.8 toolchain
+In-Reply-To: <20131029200127.GM22054@edge>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-GFI-SMTP-Submission: 1
+Subject: Re: meta-ti/arago support for TI8148
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,67 +35,65 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2013 06:41:02 -0000
-Content-Type: multipart/alternative; boundary=001a11c2570077fc4204ea17d924
+X-List-Received-Date: Fri, 01 Nov 2013 08:47:20 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
---001a11c2570077fc4204ea17d924
-Content-Type: text/plain; charset=ISO-8859-1
+* Denys Dmytriyenko <denys@ti.com> [131029 21:01]:
+> On Fri, Oct 25, 2013 at 10:08:49AM +0200, Anders Darander wrote:
+> > Hi,
 
-0003-ARM-7668-1-fix-memset-related-crashes-caused-by-rece.patch
-0004-ARM-7670-1-fix-the-memset-fix.patch
+> > I've got a customer using a dm8148 SoC, and though I'm not yet tasked
+> > with helping them with the build system (I've got some lower level task
+> > I'm helping them with), I suspect that it's just a matter of time before
+> > they ask me to help setup their build environment.
 
-With the two patches, kernel can boot successfully which compiled with 4.8
-toolchain.
+> > I know that there was a commit in ~April that removed TI8148 from
+> > meta-ti, stated that this machine were no longer supported. However,
+> > from that commit message I can't really conclude whether it was
+> > supported and working up until that, or if it had been non-functioning
+> > for quite some time.
 
-Thanks.
+> > Has there been working support for TI8184 in meta-ti (i.e. after the
+> > move to a oe-core based setup)? Or is the last supported version found
+> > elsewhere?
 
+> > To summarise my question; what's the latest version that
+> > supports/supported the TI8184? meta-ti, meta-arago, arago, or where?
+> > I'd be happy for any pointers regarding this. 
 
-On Fri, Nov 1, 2013 at 12:49 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> Anders,
 
-> On Thu, Oct 31, 2013 at 12:02 AM, Kai <skmaillist@gmail.com> wrote:
-> > I am trying to compile linux-ti-glsdk kenel with Linaro 4.8 cross compile
-> > toolchain, but it cannot boot on OMAP5432 EVM board, no any log from
-> serial
-> > port, 4.7 version toolchain is OK. Who has been succeeded with building
-> > glsdk kernel with 4.8 Linaro toolchain?
->
-> Try backporting some of the patches that we did for beagleboard
->
->
-> https://github.com/koenkooi/meta-beagleboard/commit/87efc663c4f76d3051cecf1e2c3e2bbd461d200b
->
+> The last supported kernel version for TI8148 was 2.6.37. There was still some 
+> work being done to fix reported issues (look around arago-project.org repos), 
+> but no new versions were planned or worked on. 
 
---001a11c2570077fc4204ea17d924
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Sure, I didn't expect any newer kernel then 2.6.37. (As that was
+customary for most vendors at that point in time).
 
-<div dir=3D"ltr">0003-ARM-7668-1-fix-memset-related-crashes-caused-by-rece.=
-patch<br><div>0004-ARM-7670-1-fix-the-memset-fix.patch<br></div><div><br></=
-div><div>With the two patches, kernel can boot successfully which compiled =
-with 4.8 toolchain.</div>
-<div><br></div><div>Thanks.</div></div><div class=3D"gmail_extra"><br><br><=
-div class=3D"gmail_quote">On Fri, Nov 1, 2013 at 12:49 AM, Khem Raj <span d=
-ir=3D"ltr">&lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.=
-khem@gmail.com</a>&gt;</span> wrote:<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex"><div class=3D"HOEnZb"><div class=3D"h5">On T=
-hu, Oct 31, 2013 at 12:02 AM, Kai &lt;<a href=3D"mailto:skmaillist@gmail.co=
-m">skmaillist@gmail.com</a>&gt; wrote:<br>
+> One of the biggest reasons to remove the support from meta-ti/danny
+> was due to everyone expecting to get it updated to 3.x (which wasn't
+> happening) and also because we were starting to see more and more
+> incompatibilities between 2.6.37 kernel and new toolchains and new
+> userspace system tools, like udev/systemd etc.
 
-&gt; I am trying to compile linux-ti-glsdk kenel with Linaro 4.8 cross comp=
-ile<br>
-&gt; toolchain, but it cannot boot on OMAP5432 EVM board, no any log from s=
-erial<br>
-&gt; port, 4.7 version toolchain is OK. Who has been succeeded with buildin=
-g<br>
-&gt; glsdk kernel with 4.8 Linaro toolchain?<br>
-<br>
-</div></div>Try backporting some of the patches that we did for beagleboard=
-<br>
-<br>
-<a href=3D"https://github.com/koenkooi/meta-beagleboard/commit/87efc663c4f7=
-6d3051cecf1e2c3e2bbd461d200b" target=3D"_blank">https://github.com/koenkooi=
-/meta-beagleboard/commit/87efc663c4f76d3051cecf1e2c3e2bbd461d200b</a><br>
-</blockquote></div><br></div>
+Fair enough.
 
---001a11c2570077fc4204ea17d924--
+I was only hoping that someone could point to a release / src-rev in
+meta-arago that should have been working. (It be nice to work using
+something oe-core based).
+
+> So, your best bet would be to either start with a corresponding EzSDK for that 
+> platform, or try to match toolchain and userspace that was available around 
+> the time 2.6.37 was relevant...
+
+Ok, then I guess that the best bet would be to look at the arago
+project, prior to the move to oe-core / Yocto based arago...
+
+Cheers,
+Anders
+
+-- 
+Anders Darander
+ChargeStorm AB / eStorm AB
+
