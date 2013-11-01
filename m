@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E829BE0166B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E95E0E01691
 	for <meta-ti@yoctoproject.org>; Fri,  1 Nov 2013 13:15:30 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2723252A8F; Fri,  1 Nov 2013 20:15:29 +0000 (UTC)
+	id 1476552A94; Fri,  1 Nov 2013 20:15:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131101201530.2723252A8F@arago-project.org>
-Date: Fri,  1 Nov 2013 20:15:29 +0000 (UTC)
+Message-Id: <20131101201530.1476552A94@arago-project.org>
+Date: Fri,  1 Nov 2013 20:15:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Mrinmayee Hingolikar : linux-ti-glsdk: Update to latest fixes
+Subject: Denys Dmytriyenko : am33x-cm3: update to specify correct tag and branch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,54 +26,40 @@ X-List-Received-Date: Fri, 01 Nov 2013 20:15:34 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: 400dc74ceb551281cedd2e3ed0d30af2e3cf5e9b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=400dc74ceb551281cedd2e3ed0d30af2e3cf5e9b
+Branch: master
+Commit: 058a386cd13397ae0d27583381636f2c641cdb9e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=058a386cd13397ae0d27583381636f2c641cdb9e
 
-Author: Mrinmayee Hingolikar <mrinmayee@ti.com>
-Date:   Mon Oct 21 18:48:16 2013 +0530
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Oct 31 13:08:19 2013 -0400
 
-linux-ti-glsdk: Update to latest fixes
+am33x-cm3: update to specify correct tag and branch
 
-* Kernel source migration from git.ti.com to omapzoom.org. The development
-  tree is shared between the Linux and Android teams.This enables a common
-  kernel development platform for both the teams for better alignment.
-* Add support for VIP and VPE
-* Add wilink/wlan support
-* Enable rpmsg/remoteproc driver for multimedia
-
-Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
-Acked-by: Chase Maupin <chase.maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-glsdk_3.8.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/ti/am33x-cm3_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-index 291e852..a843272 100644
---- a/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-+++ b/recipes-kernel/linux/linux-ti-glsdk_3.8.bb
-@@ -18,15 +18,15 @@ DEFAULT_PREFERENCE = "-1"
+diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
+index 3be46b6..cfde2cf 100644
+--- a/recipes-bsp/ti/am33x-cm3_git.bb
++++ b/recipes-bsp/ti/am33x-cm3_git.bb
+@@ -4,11 +4,11 @@ LICENSE = "TI-BSD"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
  
- S = "${WORKDIR}/git"
+ PV = "05.00.00.00"
+-PR = "r0"
++PR = "r1"
  
--BRANCH = "master"
-+BRANCH ?= "p-ti-glsdk-3.8.y"
+-# SRCREV corresponds to the tip of next3 branch
++# SRCREV corresponds to tag v05.00.00.00
+ SRCREV = "1628306779c05ee45f09d1d3131e722ddd3a5e2e"
+-BRANCH ?= "next3"
++BRANCH ?= "master"
  
--SRCREV = "6076e6882d1d6a64b104e42e56a3eada36605cb3"
-+SRCREV ?= "cc16f99176bf083829c028f9af5b8eb560debcc1"
- PV = "3.8.13"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
--SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-3-8-y-kernel.git;protocol=git;branch=${BRANCH} \
-+SRC_URI = "git://git.omapzoom.org/kernel/omap.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
-           "
+ INITSCRIPT_NAME = "am335x-pm-firmware-load"
+ INITSCRIPT_PARAMS = "defaults 96"
 
 
