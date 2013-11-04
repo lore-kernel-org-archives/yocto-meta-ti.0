@@ -1,30 +1,22 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 180C5E016DC
-	for <meta-ti@yoctoproject.org>; Mon,  4 Nov 2013 10:05:01 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id rA4I4xpm017692;
-	Mon, 4 Nov 2013 12:04:59 -0600
-Received: from DFLE72.ent.ti.com ([128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id rA4I4xR2020445;
-	Mon, 4 Nov 2013 12:04:59 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 4 Nov 2013 12:04:59 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id rA4I4xjV029920;
-	Mon, 4 Nov 2013 12:04:59 -0600
-Date: Mon, 4 Nov 2013 13:04:58 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <20131104180458.GU24696@edge>
-References: <1383587507-2528-1-git-send-email-denis@denix.org>
-	<5277DFB1.7070507@mlbassoc.com>
-MIME-Version: 1.0
-In-Reply-To: <5277DFB1.7070507@mlbassoc.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] mesa: update bbappend to 9.2.2 to match oe-core
+Return-Path: <denis@denix.org>
+Received: from vms173005pub.verizon.net (vms173005pub.verizon.net
+	[206.46.173.5])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 925CBE016DC
+	for <meta-ti@yoctoproject.org>; Mon,  4 Nov 2013 11:42:19 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [96.231.138.104])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MVR000J782D9ZZ0@vms173005.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 04 Nov 2013 13:42:13 -0600 (CST)
+Received: from elrond.denix (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 2D2C22004C; Mon,
+	04 Nov 2013 14:42:13 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Mon, 04 Nov 2013 14:42:12 -0500
+Message-id: <1383594132-14499-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH] mesa: remove local bbappends, as now mesa-gl provides virtual/libgl
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,33 +29,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Nov 2013 18:05:02 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 04 Nov 2013 19:42:22 -0000
 
-On Mon, Nov 04, 2013 at 10:56:01AM -0700, Gary Thomas wrote:
-> On 2013-11-04 10:51, Denys Dmytriyenko wrote:
-> >From: Denys Dmytriyenko <denys@ti.com>
-> >
-> >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> >---
-> >  recipes-graphics/mesa/{mesa_9.1.6.bbappend => mesa_9.2.2.bbappend} | 0
-> >  1 file changed, 0 insertions(+), 0 deletions(-)
-> >  rename recipes-graphics/mesa/{mesa_9.1.6.bbappend => mesa_9.2.2.bbappend} (100%)
-> >
-> >diff --git a/recipes-graphics/mesa/mesa_9.1.6.bbappend b/recipes-graphics/mesa/mesa_9.2.2.bbappend
-> >similarity index 100%
-> >rename from recipes-graphics/mesa/mesa_9.1.6.bbappend
-> >rename to recipes-graphics/mesa/mesa_9.2.2.bbappend
-> >
-> 
-> I thought these were just going to be dropped since they aren't
-> correct (can't build mesa on OMAP3 because of incorrect provides)
-> as discussed previously?
+From: Denys Dmytriyenko <denys@ti.com>
 
-Correct, that should follow soon, once I finish the validation - I'm slightly 
-behind on that task as I was sick last week and had limited capacity...
+With the recent introduction of mesa-gl, there is no longer a need to override
+main mesa PROVIDES list to avoid conflicts with libgles-omap3, remove bbappends
 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-graphics/mesa/mesa-omap3-common.inc | 7 -------
+ recipes-graphics/mesa/mesa_9.1.6.bbappend   | 1 -
+ recipes-graphics/mesa/mesa_git.bbappend     | 1 -
+ 3 files changed, 9 deletions(-)
+ delete mode 100644 recipes-graphics/mesa/mesa-omap3-common.inc
+ delete mode 100644 recipes-graphics/mesa/mesa_9.1.6.bbappend
+ delete mode 100644 recipes-graphics/mesa/mesa_git.bbappend
+
+diff --git a/recipes-graphics/mesa/mesa-omap3-common.inc b/recipes-graphics/mesa/mesa-omap3-common.inc
+deleted file mode 100644
+index 0340770..0000000
+--- a/recipes-graphics/mesa/mesa-omap3-common.inc
++++ /dev/null
+@@ -1,7 +0,0 @@
+-PRINC := "${@int(PRINC) + 1}"
+-
+-# avoid providing conflicts for libgles-omap3 compatibles
+-PROVIDES_omap3 = "virtual/libgl"
+-PROVIDES_ti814x = "virtual/libgl"
+-PROVIDES_ti816x = "virtual/libgl"
+-PROVIDES_ti33x = "virtual/libgl"
+diff --git a/recipes-graphics/mesa/mesa_9.1.6.bbappend b/recipes-graphics/mesa/mesa_9.1.6.bbappend
+deleted file mode 100644
+index 164ec1b..0000000
+--- a/recipes-graphics/mesa/mesa_9.1.6.bbappend
++++ /dev/null
+@@ -1 +0,0 @@
+-require mesa-omap3-common.inc
+diff --git a/recipes-graphics/mesa/mesa_git.bbappend b/recipes-graphics/mesa/mesa_git.bbappend
+deleted file mode 100644
+index 164ec1b..0000000
+--- a/recipes-graphics/mesa/mesa_git.bbappend
++++ /dev/null
+@@ -1 +0,0 @@
+-require mesa-omap3-common.inc
 -- 
-Denys
+1.8.3.2
+
 
