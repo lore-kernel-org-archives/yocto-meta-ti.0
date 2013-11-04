@@ -1,26 +1,29 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 89B47E016D8
-	for <meta-ti@yoctoproject.org>; Mon,  4 Nov 2013 09:55:57 -0800 (PST)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id B4D4DF81204; Mon,  4 Nov 2013 10:55:56 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id C2F16F81202;
-	Mon,  4 Nov 2013 10:55:54 -0700 (MST)
-Message-ID: <5277DFB1.7070507@mlbassoc.com>
-Date: Mon, 04 Nov 2013 10:56:01 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
-MIME-Version: 1.0
-To: meta-ti@yoctoproject.org
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 180C5E016DC
+	for <meta-ti@yoctoproject.org>; Mon,  4 Nov 2013 10:05:01 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id rA4I4xpm017692;
+	Mon, 4 Nov 2013 12:04:59 -0600
+Received: from DFLE72.ent.ti.com ([128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id rA4I4xR2020445;
+	Mon, 4 Nov 2013 12:04:59 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Mon, 4 Nov 2013 12:04:59 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id rA4I4xjV029920;
+	Mon, 4 Nov 2013 12:04:59 -0600
+Date: Mon, 4 Nov 2013 13:04:58 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <20131104180458.GU24696@edge>
 References: <1383587507-2528-1-git-send-email-denis@denix.org>
-In-Reply-To: <1383587507-2528-1-git-send-email-denis@denix.org>
+	<5277DFB1.7070507@mlbassoc.com>
+MIME-Version: 1.0
+In-Reply-To: <5277DFB1.7070507@mlbassoc.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
 Subject: Re: [PATCH] mesa: update bbappend to 9.2.2 to match oe-core
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -34,32 +37,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Nov 2013 17:55:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 04 Nov 2013 18:05:02 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On 2013-11-04 10:51, Denys Dmytriyenko wrote:
-> From: Denys Dmytriyenko <denys@ti.com>
->
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> ---
->   recipes-graphics/mesa/{mesa_9.1.6.bbappend => mesa_9.2.2.bbappend} | 0
->   1 file changed, 0 insertions(+), 0 deletions(-)
->   rename recipes-graphics/mesa/{mesa_9.1.6.bbappend => mesa_9.2.2.bbappend} (100%)
->
-> diff --git a/recipes-graphics/mesa/mesa_9.1.6.bbappend b/recipes-graphics/mesa/mesa_9.2.2.bbappend
-> similarity index 100%
-> rename from recipes-graphics/mesa/mesa_9.1.6.bbappend
-> rename to recipes-graphics/mesa/mesa_9.2.2.bbappend
->
+On Mon, Nov 04, 2013 at 10:56:01AM -0700, Gary Thomas wrote:
+> On 2013-11-04 10:51, Denys Dmytriyenko wrote:
+> >From: Denys Dmytriyenko <denys@ti.com>
+> >
+> >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> >---
+> >  recipes-graphics/mesa/{mesa_9.1.6.bbappend => mesa_9.2.2.bbappend} | 0
+> >  1 file changed, 0 insertions(+), 0 deletions(-)
+> >  rename recipes-graphics/mesa/{mesa_9.1.6.bbappend => mesa_9.2.2.bbappend} (100%)
+> >
+> >diff --git a/recipes-graphics/mesa/mesa_9.1.6.bbappend b/recipes-graphics/mesa/mesa_9.2.2.bbappend
+> >similarity index 100%
+> >rename from recipes-graphics/mesa/mesa_9.1.6.bbappend
+> >rename to recipes-graphics/mesa/mesa_9.2.2.bbappend
+> >
+> 
+> I thought these were just going to be dropped since they aren't
+> correct (can't build mesa on OMAP3 because of incorrect provides)
+> as discussed previously?
 
-I thought these were just going to be dropped since they aren't
-correct (can't build mesa on OMAP3 because of incorrect provides)
-as discussed previously?
+Correct, that should follow soon, once I finish the validation - I'm slightly 
+behind on that task as I was sick last week and had limited capacity...
 
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Denys
 
