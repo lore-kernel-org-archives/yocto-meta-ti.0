@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B5BA8E0174E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C814AE01757
 	for <meta-ti@yoctoproject.org>; Tue,  5 Nov 2013 10:37:58 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5E6A152A4C; Tue,  5 Nov 2013 18:37:58 +0000 (UTC)
+	id 868AC52A79; Tue,  5 Nov 2013 18:37:58 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131105183758.5E6A152A4C@arago-project.org>
+Message-Id: <20131105183758.868AC52A79@arago-project.org>
 Date: Tue,  5 Nov 2013 18:37:58 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : layer.conf: prepend instead of append to sort before oe-core in BBPATH
+Subject: Denys Dmytriyenko : linux-ti-staging: update with the final 3.12 release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,34 +27,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dylan
-Commit: dabd83e96fe99d0c3d1a88be4d1637831526d217
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dabd83e96fe99d0c3d1a88be4d1637831526d217
+Commit: b4d07f3b7c7114289e987a50e479a8bd76723b1f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b4d07f3b7c7114289e987a50e479a8bd76723b1f
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Nov  4 15:00:32 2013 -0500
+Date:   Mon Nov  4 19:29:32 2013 -0500
 
-layer.conf: prepend instead of append to sort before oe-core in BBPATH
-
-This helps avoid bblayers.conf ordering issues, when temporarily overriding
-files from oe-core in meta-ti.
+linux-ti-staging: update with the final 3.12 release
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/layer.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ ...-ti-staging_git.bb => linux-ti-staging_3.12.bb} |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index faa4ac0..e39bd85 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -1,5 +1,5 @@
- # We have a conf and classes directory, append to BBPATH
--BBPATH .= ":${LAYERDIR}"
-+BBPATH =. "${LAYERDIR}:"
+diff --git a/recipes-kernel/linux/linux-ti-staging_git.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+similarity index 95%
+rename from recipes-kernel/linux/linux-ti-staging_git.bb
+rename to recipes-kernel/linux/linux-ti-staging_3.12.bb
+index a1188e9..3abc2f4 100644
+--- a/recipes-kernel/linux/linux-ti-staging_git.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -31,8 +31,8 @@ S = "${WORKDIR}/git"
  
- # We have a recipes directory, add to BBFILES
- BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
+ BRANCH = "ti-linux-3.12.y"
+ 
+-SRCREV = "836c92478128790c75b832d21d1b3ab839fa3ca7"
+-PV = "3.11+3.12-rc7"
++SRCREV = "6a59302de4852678ccde5008ce531075c9b683d9"
++PV = "3.12"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
 
 
