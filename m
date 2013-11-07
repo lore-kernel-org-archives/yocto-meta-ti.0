@@ -1,33 +1,33 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
-	[209.85.220.45])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9EEE5E017F9
-	for <meta-ti@yoctoproject.org>; Wed,  6 Nov 2013 20:53:34 -0800 (PST)
-Received: by mail-pa0-f45.google.com with SMTP id kp14so40411pab.32
-	for <meta-ti@yoctoproject.org>; Wed, 06 Nov 2013 20:53:34 -0800 (PST)
+Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
+	[209.85.223.174])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A584AE017FA
+	for <meta-ti@yoctoproject.org>; Wed,  6 Nov 2013 20:56:26 -0800 (PST)
+Received: by mail-ie0-f174.google.com with SMTP id qd12so57894ieb.19
+	for <meta-ti@yoctoproject.org>; Wed, 06 Nov 2013 20:56:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=MYRKDmhK3MjaU8I+El30V/oeVzlTUh4pRGTvbfsa3y8=;
-	b=Y6ccw6AbEFrp/1pNxb2W3SiGcoHyMBF44x37/t13grgKk7N8yfBhwkdDq5Pu73nBGG
-	dqksIY+LPXNQOGIeVwNDRFyAZIevYhcnITkKQdMd49JTSXsIsGIxAETPXc11MRjjEatP
-	ng9cBJQTQTTz7dqh3R63H78RNzmZzoX3D6owEhWMoLYJBEbNGuqre+0J2OxR4iBwoNOp
-	plcFnJxmyZFO+upXy0LmRb/B4A9j3kSFlYAz0nZgroGmPM7yn3lIeWcgR8HaDl8vO2LJ
-	5X7VzUbRbQjoZvJJqfQfGVw5ZpEc6nPQitSUlBwp2jSc1ED29ZA6K0ksbwxyyf2eT4lk
-	tZhw==
-X-Received: by 10.66.152.11 with SMTP id uu11mr7619629pab.124.1383800014455;
-	Wed, 06 Nov 2013 20:53:34 -0800 (PST)
-Received: from haswell.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id
-	sy10sm2866299pac.15.2013.11.06.20.53.33 for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 06 Nov 2013 20:53:33 -0800 (PST)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=bBfDwsUADBf/GksWAk5mVZJphUpinh+MOidQFpDTLDk=;
+	b=dpvts6AeLeA7ZM9FRXjVbBTAI+PpjmouoYrcbS4+F61SHyX2OMPo9nw9vfUXqcElUW
+	VGdofbnMx+ce3GHFDh5Z/efYza5H3l/lFfSZ9xOSOfZ2/Pe5Tmlm0CHwuBR9kPhywHZh
+	0iVvZ6LCiUQMVavom+ylrgRrQtq0WNXTCSvjdge9PT2bhCiQ1FizsUvJYGYvVVGJ7DSC
+	QcUoMGf5IStlE/hYe90VZFbiY2haLjeJvYDUAscT0v0EdlvsxqqDQNCBESrageNfbqKr
+	FHRij98gKXEjecheCLEvjLRjBck0tcAd9ErNykBq6faik0rlrBIKlJK/KVmZ2ow/DQdB
+	kCmQ==
+X-Received: by 10.50.26.36 with SMTP id i4mr683135igg.33.1383800185360; Wed,
+	06 Nov 2013 20:56:25 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.50.79.167 with HTTP; Wed, 6 Nov 2013 20:55:55 -0800 (PST)
+In-Reply-To: <7D46E86EC0A8354091174257B2FED101597FE834@DLEE11.ent.ti.com>
+References: <1383791126-22557-1-git-send-email-raj.khem@gmail.com>
+	<7D46E86EC0A8354091174257B2FED101597FE834@DLEE11.ent.ti.com>
 From: Khem Raj <raj.khem@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Wed,  6 Nov 2013 20:52:48 -0800
-Message-Id: <1383799968-18869-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH] omap3-sgx-modules: Enable is only for relevant machines
+Date: Wed, 6 Nov 2013 20:55:55 -0800
+Message-ID: <CAMKF1spDWuAjV6Uf=XWBUUYM=f+C+nDzt_7iePjUfktTQ44OkA@mail.gmail.com>
+To: "Maupin, Chase" <chase.maupin@ti.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] adjust BBPATH to be a good citizen of layer world
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -40,36 +40,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2013 04:53:37 -0000
+X-List-Received-Date: Thu, 07 Nov 2013 04:56:27 -0000
+Content-Type: text/plain; charset=UTF-8
 
-When layers is parsed in multi-bsp layer distros and
-a non-omap/non-arm machine is used this causes parse
-failures
+On Wed, Nov 6, 2013 at 8:29 PM, Maupin, Chase <chase.maupin@ti.com> wrote:
+> This seems like a reversal of http://arago-project.org/git/meta-ti.git?a=commit;h=dabd83e96fe99d0c3d1a88be4d1637831526d217
+>
+> Looks like there may be a need to cover the different use cases and understand what each person is trying to do :)
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb | 7 +++++++
- 1 file changed, 7 insertions(+)
+ah I see what caused this all pain. So now meta-ti is odd ball out.
+this patch should have never gone in.
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
-index 31c7d4e..79b73cb 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
-@@ -10,6 +10,13 @@ BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
- 
- inherit module
- 
-+COMPATIBLE_HOST_omap3 = ".*"
-+COMPATIBLE_HOST_omap4 = ".*"
-+COMPATIBLE_HOST_ti814x = ".*"
-+COMPATIBLE_HOST_ti816x = ".*"
-+COMPATIBLE_HOST_ti33x = ".*"
-+COMPATIBLE_HOST ?= "(none)"
-+
- MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
--- 
-1.8.3.2
-
+>>-----Original Message-----
+>>From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+>>bounces@yoctoproject.org] On Behalf Of Khem Raj
+>>Sent: Thursday, November 07, 2013 7:55 AM
+>>To: meta-ti@yoctoproject.org
+>>Subject: [meta-ti] [PATCH] adjust BBPATH to be a good citizen of
+>>layer world
+>>
+>>Currently, meta-ti appears as first path in BBPATH
+>>rest of layers append so lets do the same
+>>
+>>helps distros with multiple BSP layers to include meta-ti
+>>
+>>Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>---
+>> conf/layer.conf | 2 +-
+>> 1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>>diff --git a/conf/layer.conf b/conf/layer.conf
+>>index e39bd85..faa4ac0 100644
+>>--- a/conf/layer.conf
+>>+++ b/conf/layer.conf
+>>@@ -1,5 +1,5 @@
+>> # We have a conf and classes directory, append to BBPATH
+>>-BBPATH =. "${LAYERDIR}:"
+>>+BBPATH .= ":${LAYERDIR}"
+>>
+>> # We have a recipes directory, add to BBFILES
+>> BBFILES += "${LAYERDIR}/recipes*/*/*.bb
+>>${LAYERDIR}/recipes*/*/*.bbappend"
+>>--
+>>1.8.3.2
+>>
+>>_______________________________________________
+>>meta-ti mailing list
+>>meta-ti@yoctoproject.org
+>>https://lists.yoctoproject.org/listinfo/meta-ti
 
