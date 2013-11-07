@@ -1,32 +1,33 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 27015E017F9
-	for <meta-ti@yoctoproject.org>; Wed,  6 Nov 2013 20:29:20 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id rA74TJnT005781;
-	Wed, 6 Nov 2013 22:29:19 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id rA74TJPh015678;
-	Wed, 6 Nov 2013 22:29:19 -0600
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.02.0342.003; Wed, 6 Nov 2013 22:29:19 -0600
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Khem Raj <raj.khem@gmail.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH] adjust BBPATH to be a good citizen of layer
-	world
-Thread-Index: AQHO22DqV9rrhPGlTECPE2PZ6Hzoj5oZLNtw
-Date: Thu, 7 Nov 2013 04:29:18 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED101597FE834@DLEE11.ent.ti.com>
-References: <1383791126-22557-1-git-send-email-raj.khem@gmail.com>
-In-Reply-To: <1383791126-22557-1-git-send-email-raj.khem@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
-MIME-Version: 1.0
-Subject: Re: [PATCH] adjust BBPATH to be a good citizen of layer world
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
+	[209.85.220.45])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9EEE5E017F9
+	for <meta-ti@yoctoproject.org>; Wed,  6 Nov 2013 20:53:34 -0800 (PST)
+Received: by mail-pa0-f45.google.com with SMTP id kp14so40411pab.32
+	for <meta-ti@yoctoproject.org>; Wed, 06 Nov 2013 20:53:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=MYRKDmhK3MjaU8I+El30V/oeVzlTUh4pRGTvbfsa3y8=;
+	b=Y6ccw6AbEFrp/1pNxb2W3SiGcoHyMBF44x37/t13grgKk7N8yfBhwkdDq5Pu73nBGG
+	dqksIY+LPXNQOGIeVwNDRFyAZIevYhcnITkKQdMd49JTSXsIsGIxAETPXc11MRjjEatP
+	ng9cBJQTQTTz7dqh3R63H78RNzmZzoX3D6owEhWMoLYJBEbNGuqre+0J2OxR4iBwoNOp
+	plcFnJxmyZFO+upXy0LmRb/B4A9j3kSFlYAz0nZgroGmPM7yn3lIeWcgR8HaDl8vO2LJ
+	5X7VzUbRbQjoZvJJqfQfGVw5ZpEc6nPQitSUlBwp2jSc1ED29ZA6K0ksbwxyyf2eT4lk
+	tZhw==
+X-Received: by 10.66.152.11 with SMTP id uu11mr7619629pab.124.1383800014455;
+	Wed, 06 Nov 2013 20:53:34 -0800 (PST)
+Received: from haswell.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPSA id
+	sy10sm2866299pac.15.2013.11.06.20.53.33 for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 06 Nov 2013 20:53:33 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: meta-ti@yoctoproject.org
+Date: Wed,  6 Nov 2013 20:52:48 -0800
+Message-Id: <1383799968-18869-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH] omap3-sgx-modules: Enable is only for relevant machines
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,52 +40,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2013 04:29:23 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Nov 2013 04:53:37 -0000
 
-This seems like a reversal of http://arago-project.org/git/meta-ti.git?a=3D=
-commit;h=3Ddabd83e96fe99d0c3d1a88be4d1637831526d217
+When layers is parsed in multi-bsp layer distros and
+a non-omap/non-arm machine is used this causes parse
+failures
 
-Looks like there may be a need to cover the different use cases and underst=
-and what each person is trying to do :)
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
->-----Original Message-----
->From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->bounces@yoctoproject.org] On Behalf Of Khem Raj
->Sent: Thursday, November 07, 2013 7:55 AM
->To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [PATCH] adjust BBPATH to be a good citizen of
->layer world
->
->Currently, meta-ti appears as first path in BBPATH
->rest of layers append so lets do the same
->
->helps distros with multiple BSP layers to include meta-ti
->
->Signed-off-by: Khem Raj <raj.khem@gmail.com>
->---
-> conf/layer.conf | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->
->diff --git a/conf/layer.conf b/conf/layer.conf
->index e39bd85..faa4ac0 100644
->--- a/conf/layer.conf
->+++ b/conf/layer.conf
->@@ -1,5 +1,5 @@
-> # We have a conf and classes directory, append to BBPATH
->-BBPATH =3D. "${LAYERDIR}:"
->+BBPATH .=3D ":${LAYERDIR}"
->
-> # We have a recipes directory, add to BBFILES
-> BBFILES +=3D "${LAYERDIR}/recipes*/*/*.bb
->${LAYERDIR}/recipes*/*/*.bbappend"
->--
->1.8.3.2
->
->_______________________________________________
->meta-ti mailing list
->meta-ti@yoctoproject.org
->https://lists.yoctoproject.org/listinfo/meta-ti
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
+index 31c7d4e..79b73cb 100644
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
+@@ -10,6 +10,13 @@ BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
+ 
+ inherit module
+ 
++COMPATIBLE_HOST_omap3 = ".*"
++COMPATIBLE_HOST_omap4 = ".*"
++COMPATIBLE_HOST_ti814x = ".*"
++COMPATIBLE_HOST_ti816x = ".*"
++COMPATIBLE_HOST_ti33x = ".*"
++COMPATIBLE_HOST ?= "(none)"
++
+ MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+-- 
+1.8.3.2
+
 
