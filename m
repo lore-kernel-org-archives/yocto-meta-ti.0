@@ -1,22 +1,25 @@
-Return-Path: <jithin.raj@nestgroup.net>
-Received: from mxout-tvm.nestgroup.net (mxout-tvm.nestgroup.net
-	[115.248.23.134])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A9B91E0172C
-	for <meta-ti@yoctoproject.org>; Tue, 12 Nov 2013 03:07:36 -0800 (PST)
-Received: from mail-3.tvm.nestgroup.net ([192.168.192.79])
-	by mxout-tvm.nestgroup.net (8.13.1/8.13.1) with ESMTP id rACAxKSv016806
-	for <meta-ti@yoctoproject.org>; Tue, 12 Nov 2013 16:29:21 +0530
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+Return-Path: <cliff.brake@gmail.com>
+Received: from bec-systems.com (u15414263.onlinehome-server.com
+	[74.208.70.121])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6338CE0178E
+	for <meta-ti@yoctoproject.org>; Tue, 12 Nov 2013 06:18:26 -0800 (PST)
+Received: from oh-67-76-203-50.sta.embarqhsd.net ([67.76.203.50]
+	helo=happy.bec-systems.com)
+	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
+	id 1VgEex-0003QP-9X; Tue, 12 Nov 2013 09:09:48 -0500
 MIME-Version: 1.0
-Date: Tue, 12 Nov 2013 16:37:28 +0530
-Message-ID: <245245F712CBF74D865D90E99497849F063C52F7@mail-3.tvm.nestgroup.net>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [meta-ti] - eglinitialize error
-Thread-Index: Ac7fl1/i8V//Lm0WRY2BVIkqjFJt6w==
-From: "Jithin Raj" <jithin.raj@nestgroup.net>
-To: <meta-ti@yoctoproject.org>
-Subject: - eglinitialize error
+X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
+Date: Tue, 12 Nov 2013 14:18:07 GMT
+Message-Id: <1384265887546.a449205c@Nodemailer>
+From: cliff.brake@gmail.com
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
+X-Spam_score: -2.9
+X-Spam_score_int: -28
+X-Spam_bar: --
+Subject: OE Changelog since 2013-11-03 until 2013-11-10
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,165 +32,391 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Nov 2013 11:07:38 -0000
-Content-class: urn:content-classes:message
-Content-Type: multipart/alternative;
-	boundary="----_=_NextPart_001_01CEDF97.61587B0C"
-
-------_=_NextPart_001_01CEDF97.61587B0C
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Tue, 12 Nov 2013 14:18:27 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Changelog since 2013-11-03 until 2013-11-10.  Projects included in this =
+report:
 
-=20
+bitbake: git://git.openembedded.org/bitbake
+openembedded-core: git://git.openembedded.org/openembedded-core
+meta-openembedded: git://git.openembedded.org/meta-openembedded
+meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
+meta-arago: git://arago-project.org/git/meta-arago.git
+meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
+meta-browser: git://github.com/OSSystems/meta-browser.git
+meta-bug: git://github.com/buglabs/meta-bug.git
+meta-chicken: git://github.com/OSSystems/meta-chicken
+meta-efikamx: git://github.com/kraj/meta-efikamx.git
+meta-ettus: http://github.com/koenkooi/meta-ettus.git
+meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
+meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
+meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
+meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
+meta-gumstix: git://github.com/gumstix/meta-gumstix.git
+meta-gumstix-community: =
+git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
+meta-handheld: git://git.openembedded.org/meta-handheld
+meta-igep: http://github.com/ebutera/meta-igep.git
+meta-intel: git://git.yoctoproject.org/meta-intel
+meta-ivi: git://git.yoctoproject.org/meta-ivi
+meta-java: git://github.com/woglinde/meta-java
+meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
+meta-micro: git://git.openembedded.org/meta-micro
+meta-mono: git://git.yoctoproject.org/meta-mono.git
+meta-netbookpro: git://github.com/tworaz/meta-netbookpro
+meta-nslu2: git://github.com/kraj/meta-nslu2
+meta-opie: git://git.openembedded.org/meta-opie
+meta-qt3: git://git.yoctoproject.org/meta-qt3
+meta-qt5: git://github.com/meta-qt5/meta-qt5.git
+meta-slugos: git://github.com/kraj/meta-slugos
+meta-systemd: git://git.yoctoproject.org/meta-systemd
+meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
+meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
+meta-ti: git://git.yoctoproject.org/meta-ti
+meta-webos: git://github.com/openwebos/meta-webos.git
+meta-xilinx: git://git.yoctoproject.org/meta-xilinx
+meta-yocto: git://git.yoctoproject.org/meta-yocto
+openembedded: git://git.openembedded.org/openembedded
 
-I am trying to build some graphics application for Pandaboard
-("01_HelloAPI" from PowerVR SDK). I have generated the image (kernel and
-file system) with the help of meta-ti, meta-ivi (5.0) and poky.=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for bitbake:
 
-=20
+Alexandru DAMIAN (1):
+=20=20toaster: fix target package information
 
-While executing the application am getting "EGL Initialising error".
-Please find the log below.
+Gary Thomas (1):
+=20=20depexp: Improve wording on requirements
 
-=20
+Valentin Popa (1):
+=20=20HOB: HIG compliant message dialogs
 
-LibEGL warning: DRI2: failed to open omap (search paths /usr/lib/dri)
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded-core:
 
-LibEGL warning: DRI2: failed to open swrast(search paths /usr/lib/dri)
+Alex J Lennon (1):
+=20=20sqlite3: Add support for column metadata API
 
-LibEGL warning: GLX: failed to open GLX
+Alexandru DAMIAN (1):
+=20=20toaster: add class to dump toaster-tracked data
 
-Error: eglInitialize() failed.
+Belen Barros Pena (1):
+=20=20documentation.conf: update contents
 
-=20
+Bruce Ashfield (5):
+=20=20linux-yocto-3.10: bump to 3.10.17 and -rt11
+=20=20linux-yocto/3.10: haswell-wc and crystalforest support
+=20=20linux-yocto/3.8: add crystalforest bsp legacy block drivers =
+configurations
+=20=20linux-yocto/3.10: common-pc: add missing dependencies for BRCMSMAC
+=20=20linux-yocto/3.10: fix qemuarm boot and spurious mips build warning
 
-Experts please suggest.
+Carlos Rafael Giani (1):
+=20=20orc: version 0.4.18 migrated from meta-oe
 
-=20
+Chen Qi (4):
+=20=20iproute2: de-bash its scripts to remove the bash dependency
+=20=20extrausers.bbclass: avoid infinite loop
+=20=20bootlogd: create log file if not present
+=20=20sysvinit: adjust boot sequence and remove hack from udev
 
-Meta-ti -> master version
+Chris Patterson (1):
+=20=20qemu: upgrade to 1.6.1
 
-Meta-ivi -> 5.0
+Cristiana Voicu (1):
+=20=20liburcu: upgrade to 0.8.0
 
-Kernel version -> 3.4.11
+Felipe F. Tonello (1):
+=20=20package.bbclass: Fix split_and_strip_files when file has single quote =
+(')
 
-=20
+Jonathan Liu (2):
+=20=20eglibc_2.18.bb: accept make versions 4.0 and greater
+=20=20eglibc_2.17.bb: accept make versions 4.0 and greater
 
-Thanks in advance.
+Khem Raj (2):
+=20=20cross-canadian: Let cross-canadian packages build for uclibc
+=20=20kbd: Fix stdarg related errors on uclibc
 
-=20
+Laurentiu Palcu (7):
+=20=20python-setuptools: upgrade to 1.1.7
+=20=20xf86-input-keyboard: upgrade to 1.8.0
+=20=20xtrans: upgrade to 1.3.0
+=20=20git: upgrade to 1.8.4.2
+=20=20xz: upgrade to 5.1.3alpha
+=20=20diffstat: upgrade to 1.58
+=20=20python-pycurl: upgrade to 7.19.0.2
 
-=20
+Lu Chong (4):
+=20=20ppp: Add two structures in if_pppol2tp.h
+=20=20makedevs: several fixes
+=20=20ppp: Fix compilation errors in Makefile
+=20=20avahi: fix avahi status command error prompt
 
-Thanks & regards
+Martin Jansa (1):
+=20=20db: Fix build with high PARALLEL_MAKE
 
-Jithin
+Paul Eggleton (2):
+=20=20zisofs-tools-native: fix meta fields
+=20=20zisofs-tools-native: add missing DEPENDS on zlib-native
 
-=20
+Peter Seebach (2):
+=20=20binutils: Use alternatives for the binutils-symlinks package.
+=20=20binutils: Drop binutils-symlinks
 
-***** Confidentiality Statement/Disclaimer *****
+Richard Purdie (7):
+=20=20image_types: Improve dependency handling between types (and use for =
+sum.jffs
+=20=20toolchain-scripts/meta-environment: Merge =
+toolchain_create_sdk_env_script an
+=20=20toolchain-scripts: Drop darwin8 code
+=20=20package_rpm: Remove need for locking
+=20=20package_deb/package_ipk: Cleanup control file handling/races
+=20=20toolchain-scripts/meta-environment: Further cleanup code duplication
+=20=20lib/oe/sstatesig: Ensure packagegroups don't continually rebuild
 
-This message and any attachments is intended for the sole use of the inte=
-nded recipient. It may contain confidential information. Any unauthorized=
- use, dissemination or modification is strictly prohibited. If you are no=
-t the intended recipient, please notify the sender immediately then delet=
-e it from all your systems, and do not copy, use or print. Internet commu=
-nications are not secure and it is the responsibility of the recipient to=
- make sure that it is virus/malicious code exempt.
-The company/sender cannot be responsible for any unauthorized alterations=
- or modifications made to the contents. If you require any form of confir=
-mation of the contents, please contact the company/sender. The company/se=
-nder is not liable for any errors or omissions in the content of this mes=
-sage.
+Ross Burton (6):
+=20=20cogl: upgrade to 1.16.0
+=20=20clutter: upgrade
+=20=20wayland: upgrade to 1.3.0
+=20=20weston: upgrade to 1.3.0
+=20=20weston-init: start weston on a new VT
+=20=20xserver-xorg: upgrade to 1.14.4
+
+Roy Li (1):
+=20=20eglibc-locale: Does not create {localedir} if the toolchain has no =
+files und
+
+Saul Wold (4):
+=20=20mdadm: Disable the RUN_DIR check
+=20=20kbd: upgrade to 2.0.1
+=20=20nspr: Update to 4.10.1
+=20=20binutils: remove embedspu
+
+Stefan Stanacar (2):
+=20=20lib/oeqa: add oeTest superclass
+=20=20lib/oeqa/utils: sshcontrol: make timeout depend on output
+
+Xufeng Zhang (1):
+=20=20kernel.bbclass: Delay rm_work to run after do_bundle_initramfs
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-openembedded:
+
+Andreas M=C3=BCller (1):
+=20=20gnome-disk-utility: create an extra package for gdu libraries
+
+Bruce Ashfield (2):
+=20=20netcf: move from meta-virtualization to meta-networking
+=20=20dnsmasq: uprev to 2.6.3
+
+Joe MacDonald (2):
+=20=20autofs: correct QA issues with orphaned systemd files
+=20=20crda: correct QA issues with sbindir
+
+Martin Jansa (1):
+=20=20xserver-common: start Xsession when starting Xserver
+
+Patrick Patat (1):
+=20=20libao: add missing plugin to packages list
+
+Roy Li (1):
+=20=20quagga: backport a patch from 0.99.22 to fix "no ip address" command
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-angstrom:
+
+Khem Raj (1):
+=20=20angstrom-next: Pin qemu to 1.6.1 now
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-arago:
+
+Denys Dmytriyenko (1):
+=20=20linux-ti-staging: update bbappend for the final 3.12 version
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-beagleboard:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-browser:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-bug:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-chicken:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-efikamx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ettus:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm:
+
+Lauren Post (4):
+=20=20libfslcodec: Update to 3.0.9
+=20=20libfslvpuwrap: Update to 1.0.40
+=20=20libfslparser: Update to 3.0.9
+=20=20gst-fsl-plugin: Update to 3.0.9
+
+Otavio Salvador (7):
+=20=20imx-vpu (3.10.9-1.0.0): Use imx-vpu.inc to avoid code duplication
+=20=20imx-vpu (3.10.9-1.0.0): Fix build system to use OE build flags
+=20=20gst-fsl-plugin.inc: Fix runtime dependencies for special/excluded
+=20=20gst-fsl-plugin, gst-plugins-base: Move to gstreamer subdir
+=20=20gst-fsl-plugin: Fix checking for include headers in multiple paths
+=20=20imx-lib.inc: Don't use sysroot/uapi extra include
+=20=20linux-fslc: Update to revision 83ccff683
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm-extra:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-ppc:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-guacamayo:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix-community:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-handheld:
+
+Andrea Adami (6):
+=20=20linux-yocto: remove POWER_SUPPLY_DEBUG as default
+=20=20linux-yocto: collie: set MTD geometry
+=20=20linux-yocto: collie: revert jedec_probe patch
+=20=20linux-yocto: collie: force CFI detection (temporary HACK)
+=20=20linux-yocto: collie: resize MTD to SZ_16M
+=20=20linux-yocto: collie: force flash unlock on boot
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-igep:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-intel:
+
+Chang, Rebecca Swee Fun (1):
+=20=20meta-crystalforest: update linux-yocto_3.10 to support latest commit  =
+   fro
+
+Ong Boon Leong (1):
+=20=20meta-tlk: enable for linux-yocto_3.10
+
+Richard Purdie (1):
+=20=20mesa: Update bbappend from 9.1.6 to 9.2.2
+
+Ross Burton (5):
+=20=20libva: merge -dev and -dbg packages
+=20=20libva: disable dummy driver
+=20=20libva: remove redundant PROVIDES
+=20=20libva: enable Wayland
+=20=20gstreamer-vaapi: upgrade to 0.4.3
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ivi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-java:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-kde:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-micro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-mono:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-netbookpro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nslu2:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-opie:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt3:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt5:
+
+Iktwo Sh (1):
+=20=20qtx11extras: Add recipe
+
+Kristofer Hansson Aspman (1):
+=20=20qtconnectivity: Add recipe.
+
+Martin Jansa (4):
+=20=20cmake: Rename and update .bbappend to match new version from oe-core
+=20=20maliit-framework-qt5: Add missing dependency on qtbase
+=20=20maliit-framework-qt5: Add missing dependency on qtdeclarative
+=20=20qtwayland: Fix Project ERROR: Module v8 has no public API
+
+Nicolas Dechesne (1):
+=20=20qtwebkit-examples: add missing RDEPENDS for qmlplugins
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-slugos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-systemd:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-raspberrypi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-smartphone:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ti:
+
+Denys Dmytriyenko (3):
+=20=20mesa: remove local bbappends, as now mesa-gl provides virtual/libgl
+=20=20layer.conf: prepend instead of append to sort before oe-core in BBPATH
+=20=20linux-ti-staging: update with the final 3.12 release
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-webos:
+
+Alekseyev Oleksandr (2):
+=20=20webos-image: luna-service2=3D160
+=20=20webos-image: Enable tracepoints for luna-service2
+
+Anatolii Sakhnik (1):
+=20=20webos-image: libpbnjson=3D24,v2.1.1
+
+Hongjeon Ha (1):
+=20=20webos-image: pmloglib=3D42
+
+Maksym Sditanov (1):
+=20=20webos-image: db8=3D94
+
+Premalatha MVS (1):
+=20=20webos-image: sleepd=3D22
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-xilinx:
+
+Sipke Vriend (2):
+=20=20recipes-kernel:linux-xlnx: Update SRCREV for linux-xlnx_3.8
+=20=20recipes-kernel:linux-yocto: Adjust xlnx_3.8 patch file.
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded:
 
 
-------_=_NextPart_001_01CEDF97.61587B0C
-Content-Type: text/html;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
 
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-mi=
-crosoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:wo=
-rd" xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D=
-"http://www.w3.org/TR/REC-html40"><head><META HTTP-EQUIV=3D"Content-Type"=
- CONTENT=3D"text/html; charset=3Dus-ascii"><meta name=3DGenerator content=
-=3D"Microsoft Word 12 (filtered medium)"><style><!--
-/* Font Definitions */
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:purple;
-	text-decoration:underline;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri","sans-serif";
-	color:windowtext;}
-=2EMsoChpDefault
-	{mso-style-type:export-only;}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]--></head><body lang=3DEN-US link=3Dblue v=
-link=3Dpurple><div class=3DWordSection1><p class=3DMsoNormal>Hi,<o:p></o:=
-p></p><p class=3DMsoNormal><o:p>&nbsp;</o:p></p><p class=3DMsoNormal>I am=
- trying to build some graphics application for Pandaboard (&quot;01_Hello=
-API&quot; from PowerVR SDK). I have generated the image (kernel and file =
-system) with the help of meta-ti, meta-ivi (5.0) and poky. <o:p></o:p></p=
-><p class=3DMsoNormal><o:p>&nbsp;</o:p></p><p class=3DMsoNormal>While exe=
-cuting the application am getting &#8220;<b>EGL Initialising error</b>&#8=
-221;. Please find the log below.<o:p></o:p></p><p class=3DMsoNormal><o:p>=
-&nbsp;</o:p></p><p class=3DMsoNormal><b>LibEGL warning: DRI2: failed to o=
-pen omap (search paths /usr/lib/dri)<o:p></o:p></b></p><p class=3DMsoNorm=
-al><b>LibEGL warning: DRI2: failed to open swrast(search paths /usr/lib/d=
-ri)<o:p></o:p></b></p><p class=3DMsoNormal><b>LibEGL warning: GLX: failed=
- to open GLX<o:p></o:p></b></p><p class=3DMsoNormal><b>Error: eglInitiali=
-ze() failed.<o:p></o:p></b></p><p class=3DMsoNormal><o:p>&nbsp;</o:p></p>=
-<p class=3DMsoNormal>Experts please suggest.<o:p></o:p></p><p class=3DMso=
-Normal><o:p>&nbsp;</o:p></p><p class=3DMsoNormal>Meta-ti -&gt; master ver=
-sion<o:p></o:p></p><p class=3DMsoNormal>Meta-ivi -&gt; 5.0<o:p></o:p></p>=
-<p class=3DMsoNormal>Kernel version -&gt; 3.4.11<o:p></o:p></p><p class=3D=
-MsoNormal><o:p>&nbsp;</o:p></p><p class=3DMsoNormal>Thanks in advance.<o:=
-p></o:p></p><p class=3DMsoNormal><o:p>&nbsp;</o:p></p><p class=3DMsoNorma=
-l><o:p>&nbsp;</o:p></p><p class=3DMsoNormal><b><span style=3D'color:black=
-'>Thanks &amp; regards<o:p></o:p></span></b></p><p class=3DMsoNormal><b><=
-span style=3D'color:black'>Jithin<o:p></o:p></span></b></p><p class=3DMso=
-Normal><o:p>&nbsp;</o:p></p></div><DIV>&nbsp;</DIV>***** Confidentiality =
-Statement/Disclaimer *****<br><br>This message and any attachments is int=
-ended for the sole use of the intended recipient. It may contain confiden=
-tial information. Any unauthorized use, dissemination or modification is =
-strictly prohibited. If you are not the intended recipient, please notify=
- the sender immediately then delete it from all your systems, and do not =
-copy, use or print. Internet communications are not secure and it is the =
-responsibility of the recipient to make sure that it is virus/malicious c=
-ode exempt.<br>The company/sender cannot be responsible for any unauthori=
-zed alterations or modifications made to the contents. If you require any=
- form of confirmation of the contents, please contact the company/sender.=
- The company/sender is not liable for any errors or omissions in the cont=
-ent of this message.<br></body></html>
-
-------_=_NextPart_001_01CEDF97.61587B0C--
