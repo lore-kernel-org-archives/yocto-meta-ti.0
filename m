@@ -1,32 +1,28 @@
-Return-Path: <richard.rojfors@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 298A1E004E5
-	for <meta-ti@yoctoproject.org>; Tue, 19 Nov 2013 01:32:30 -0800 (PST)
-Received: by mail-ee0-f42.google.com with SMTP id e52so3129084eek.29
-	for <meta-ti@yoctoproject.org>; Tue, 19 Nov 2013 01:32:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=YhIZK/AEmoP981VWuFhTsJGgkwcmCjpcVs0mrDR9Lps=;
-	b=qjqejNuLUbVeOdd99nBJkkPdfTHjW2jEcryhfBoiGZsaQoIXdE9RvMO6/ENWrCLfL2
-	FaIRR8NwRGezowlHi1xAkXPUPova+JkiHNo0B1VuRUUdg1IUkqYNBbEVBuJAlukD0pno
-	nYaE6JE5aMs1Rw7MYVkCVmaa3OPsBEfw4CmzqARu5Sd4bXmFGFUxFiEwfWcW08kCqoU0
-	ZgOAc9pPTnOQGr7Lr8llDxESIXlgKUNSpIXcj7HVEhPkwsqfXQ34du7sHC45rILfYNJf
-	bDQScJqWpVlGW7M1uKUwuttN9TNIIkmGvHgP0hx0z8e8KzYUoVcHtERyu0OUq5j963eX
-	zxLA==
+Return-Path: <fcooper@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 607D6E00543
+	for <meta-ti@yoctoproject.org>; Tue, 19 Nov 2013 07:58:09 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id rAJFw9Q2007889
+	for <meta-ti@yoctoproject.org>; Tue, 19 Nov 2013 09:58:09 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id rAJFw9xf020441
+	for <meta-ti@yoctoproject.org>; Tue, 19 Nov 2013 09:58:09 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 19 Nov 2013 09:58:09 -0600
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id rAJFw359006410;
+	Tue, 19 Nov 2013 09:58:07 -0600
+From: "Franklin S. Cooper Jr" <fcooper@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 19 Nov 2013 10:59:09 -0600
+Message-ID: <1384880351-6571-2-git-send-email-fcooper@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1384880351-6571-1-git-send-email-fcooper@ti.com>
+References: <1384880351-6571-1-git-send-email-fcooper@ti.com>
 MIME-Version: 1.0
-X-Received: by 10.14.88.132 with SMTP id a4mr1620254eef.60.1384853549194; Tue,
-	19 Nov 2013 01:32:29 -0800 (PST)
-Received: by 10.15.101.1 with HTTP; Tue, 19 Nov 2013 01:32:29 -0800 (PST)
-In-Reply-To: <20131119060652.GN19813@edge>
-References: <245245F712CBF74D865D90E99497849F0642BFF8@mail-3.tvm.nestgroup.net>
-	<20131119060652.GN19813@edge>
-Date: Tue, 19 Nov 2013 10:32:29 +0100
-Message-ID: <CAHB-PjneUhnw6=GNUaJiFkr7LzCPMBsY8gmTJHTPhpEV=XG7Lw@mail.gmail.com>
-From: =?ISO-8859-1?Q?Richard_R=F6jfors?= <richard.rojfors@gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: pandaboard/omap4 support
+Subject: [PATCH 2/4] libgles-omap3: Add new 5.00.00.01 Graphics SDK alpha release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,60 +35,281 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Nov 2013 09:32:31 -0000
-Content-Type: multipart/alternative; boundary=001a11c1ba04dda44f04eb845787
+X-List-Received-Date: Tue, 19 Nov 2013 15:58:10 -0000
+Content-Type: text/plain
 
---001a11c1ba04dda44f04eb845787
-Content-Type: text/plain; charset=ISO-8859-1
+* A new Graphics SDK that support 3.12 kernel for am335x
+* This Graphics SDK also adds initial support for AM43x
 
-On Tue, Nov 19, 2013 at 7:06 AM, Denys Dmytriyenko <denys@ti.com> wrote:
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+---
+ .../rc.pvr                                         |   28 +++++++++++++------
+ .../rc_dri.pvr                                     |   28 ++++++++++++-------
+ ...08.00.02.bb => libgles-omap3-x11_5.00.00.01.bb} |   29 +++++++++++++------
+ ...3_4.09.00.01.bb => libgles-omap3_5.00.00.01.bb} |   24 +++++++---------
+ 4 files changed, 68 insertions(+), 41 deletions(-)
+ copy recipes-graphics/libgles/{libgles-omap3-x11-4.09.00.01 => libgles-omap3-5.00.00.01}/rc.pvr (87%)
+ mode change 100644 => 100755
+ copy recipes-graphics/libgles/{libgles-omap3-x11-4.09.00.01 => libgles-omap3-5.00.00.01}/rc_dri.pvr (88%)
+ mode change 100644 => 100755
+ copy recipes-graphics/libgles/{libgles-omap3_4.08.00.02.bb => libgles-omap3-x11_5.00.00.01.bb} (72%)
+ copy recipes-graphics/libgles/{libgles-omap3_4.09.00.01.bb => libgles-omap3_5.00.00.01.bb} (42%)
 
->
-> No graphics for omap4+ (yet) in meta-ti. There are recipes being worked out
-> though.
->
+diff --git a/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/rc.pvr b/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc.pvr
+old mode 100644
+new mode 100755
+similarity index 87%
+copy from recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/rc.pvr
+copy to recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc.pvr
+index 590d06c..830d602
+--- a/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/rc.pvr
++++ b/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc.pvr
+@@ -41,13 +41,20 @@ fbset -vyres $(expr $YRES \* 3)
+ 
+ sgxprepare () {
+ 	echo Starting PVR
+-	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
+ 
+-    if [ "$?" != "0" ]
+-    then
+-        echo "Could not find pvrsrvkm driver"
+-        exit 1
+-    fi
++	lsmod | grep pvrsrvkm > /dev/null
++
++
++	if [ "$?" != "0" ]
++	then
++		insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
++
++		if [ "$?" != "0" ]
++		then
++			echo "Could not find pvrsrvkm driver"
++			exit 1
++		fi
++	fi
+ 
+ 	modprobe omaplfb
+ 	modprobe bufferclass_ti
+@@ -100,8 +107,12 @@ case $CPUTYPE in
+ "TI33XX")
+ 	sgxprepare
+ 
+-	devmem2 0x44e01104 w 0x0 > /dev/null
+-	devmem2 0x44e00904 w 0x2 > /dev/null
++	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
++"TI43XX")
++	sgxprepare
+ 
+ 	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+ 
+@@ -122,4 +133,3 @@ case $CPUTYPE in
+ 	echo No SGX hardware, not starting PVR
+ 	;;
+ esac
+-
+diff --git a/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/rc_dri.pvr b/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc_dri.pvr
+old mode 100644
+new mode 100755
+similarity index 88%
+copy from recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/rc_dri.pvr
+copy to recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc_dri.pvr
+index bc44937..847e7a9
+--- a/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/rc_dri.pvr
++++ b/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc_dri.pvr
+@@ -54,13 +54,18 @@ sgxprepare () {
+ 
+ 	modprobe drm
+ 
+-	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
++	lsmod | grep pvrsrvkm > /dev/null
+ 
+-    if [ "$?" != "0" ]
+-    then
+-        echo "Could not find pvrsrvkm driver"
+-        exit 1
+-    fi
++	if [ "$?" != "0" ]
++	then
++		insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
++
++		if [ "$?" != "0" ]
++		then
++			echo "Could not find pvrsrvkm driver"
++			exit 1
++		fi
++	fi
+ 
+ 	modprobe bufferclass_ti
+ 
+@@ -112,13 +117,17 @@ case $CPUTYPE in
+ "TI33XX")
+ 	sgxprepare
+ 
+-	devmem2 0x44e01104 w 0x0 > /dev/null
+-	devmem2 0x44e00904 w 0x2 > /dev/null
+-
+ 	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+ 
+ 	sgxfinish
+ 	;;
++"TI43XX")
++	sgxprepare
++
++    ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
++
++	sgxfinish
++	;;
+ "TI816x")
+ 	sgxprepare
+ 
+@@ -134,4 +143,3 @@ case $CPUTYPE in
+ 	echo No SGX hardware, not starting PVR
+ 	;;
+ esac
+-
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb b/recipes-graphics/libgles/libgles-omap3-x11_5.00.00.01.bb
+similarity index 72%
+copy from recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
+copy to recipes-graphics/libgles/libgles-omap3-x11_5.00.00.01.bb
+index e57ba42..df53306 100644
+--- a/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
++++ b/recipes-graphics/libgles/libgles-omap3-x11_5.00.00.01.bb
+@@ -1,13 +1,16 @@
+-require libgles-omap3.inc
++require libgles-omap3-x11.inc
+ 
+ LICENSE = "TSPA"
+ 
++PR = "${INC_PR}.0"
++
+ DEFAULT_PREFERENCE = "-1"
+ 
+-BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
++BINLOCATION_omap3 = "${S}/gfx_rel_es3.x"
+ BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+ BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
+ BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
++BINLOCATION_ti43x = "${S}/gfx_rel_es9.x"
+ 
+ PLATFORM = "LinuxARMV7"
+ PVR_INIT = "pvrsrvctl"
+@@ -16,11 +19,19 @@ PVR_INIT = "pvrsrvctl"
+ # http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
+ # see libgles-omap3.inc for detailed installation instructions
+ 
+-SGXPV = "4_08_00_02"
++SGXPV = "5_00_00_01"
+ IMGPV = "1.9.2188537"
+-BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
++
+ TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
++
++BINFILE_HARDFP = "Graphics_SDK_setuplinux_${SGXPV}_hardfp_minimal_demos_alpha.bin "
++MD5SUM_HARDFP = "ae6125d7f8a313ea5c02afded893052d"
++SHA256SUM_HARDFP = "c2782a2f85024741722b936ec9dca66b858ae8561aa71b693f11e12d8c0385e0"
++
++# For now we only have hardfp version
++BINFILE := "${BINFILE_HARDFP}"
++
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/gfxsdk/${SGXPV}/exports/${BINFILE} \
+            file://cputype \
+            file://rc.pvr \
+            file://rc_dri.pvr \
+@@ -28,12 +39,12 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
+            file://99-bufferclass.rules  \
+ "
+ 
+-SRC_URI[md5sum] = "0efa3a38266e6f41f8cc4fad0187f0d6"
+-SRC_URI[sha256sum] = "c732044b515a598e1fab661b7463aa9c53d4fa37f4980dfa85cd02b7468d0cd9"
++SRC_URI[md5sum] := "${MD5SUM_HARDFP}"
++SRC_URI[sha256sum] := "${SHA256SUM_HARDFP}"
+ 
+ S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
+ 
+-LIBGLESWINDOWSYSTEM ?= "${@base_contains('DISTRO_FEATURES', 'x11',"libpvrPVR2D_DRIWSEGL.so" ,"libpvrPVR2D_FRONTWSEGL.so.1", d)}"
++LIBGLESWINDOWSYSTEM ?= "libpvrPVR2D_DRIWSEGL.so"
+ 
+ do_configure_append() {
+ 
+@@ -62,7 +73,7 @@ do_install_append() {
+     cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir}
+     cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/
+ 
+-    rm ${D}${sysconfdir}/init.d/pvr-init
++    rm -f ${D}${sysconfdir}/init.d/pvr-init
+ 
+     if [ "$SUPPORT_XORG" = "1" ]; then
+         cp -pP ${WORKDIR}/rc_dri.pvr ${D}${sysconfdir}/init.d/pvr-init
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
+similarity index 42%
+copy from recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+copy to recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
+index d094b5c..de6ba55 100644
+--- a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
+@@ -2,7 +2,7 @@ require libgles-omap3-no-x.inc
+ 
+ LICENSE = "TSPA"
+ 
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.0"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+@@ -10,6 +10,7 @@ BINLOCATION_omap3 = "${S}/gfx_rel_es3.x"
+ BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+ BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
+ BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
++BINLOCATION_ti43x = "${S}/gfx_rel_es9.x"
+ 
+ PLATFORM = "LinuxARMV7"
+ PVR_INIT = "pvrsrvctl"
+@@ -18,30 +19,27 @@ PVR_INIT = "pvrsrvctl"
+ # http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
+ # see libgles-omap3.inc for detailed installation instructions
+ 
+-SGXPV = "4_09_00_01"
++SGXPV = "5_00_00_01"
+ IMGPV = "1.9.2188537"
+ 
+ TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
+ 
+-# Select the corresponding hardfp/softfp filename and checksums based on tune flags
+-BINFILE_SOFTFP = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
+-MD5SUM_SOFTFP = "bd35e9d8843aff3a2aca9d41e7db1c7d"
+-SHA256SUM_SOFTFP = "eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249247647"
+ 
+-BINFILE_HARDFP = "Graphics_SDK_setuplinux_${SGXPV}_hardfp_minimal_demos.bin"
+-MD5SUM_HARDFP = "c9f656dce062d1ab10afffd4dfb71b67"
+-SHA256SUM_HARDFP = "dbfeba8e1298f139495816334edec1455e6b49b1e11bd1b2aa0a888e5788bb6b"
++BINFILE_HARDFP = "Graphics_SDK_setuplinux_${SGXPV}_alpha_hardfp_minimal_demos.bin"
++MD5SUM_HARDFP = "ae6125d7f8a313ea5c02afded893052d"
++SHA256SUM_HARDFP = "c2782a2f85024741722b936ec9dca66b858ae8561aa71b693f11e12d8c0385e0"
+ 
+-BINFILE = "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${BINFILE_HARDFP}', '${BINFILE_SOFTFP}', d)}"
++# For now we only have hardfp version
++BINFILE := "${BINFILE_HARDFP}"
+ 
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/gfxsdk/${SGXPV}/exports/${BINFILE} \
+            file://cputype \
+            file://rc.pvr \
+            file://99-bufferclass.rules  \
+ "
+ 
+-SRC_URI[md5sum] := "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}', d)}"
+-SRC_URI[sha256sum] := "${@base_contains('TUNE_FEATURES', 'callconvention-hard', '${SHA256SUM_HARDFP}', '${SHA256SUM_SOFTFP}', d)}"
++SRC_URI[md5sum] := "${MD5SUM_HARDFP}"
++SRC_URI[sha256sum] := "${SHA256SUM_HARDFP}"
+ 
+ S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
+ 
+-- 
+1.7.0.4
 
-Good news, finally!
 
-I hope this will be something like what was last released in the Ubuntu
-PPA? Meaning it does not need X.
-
-Will you link the userspace against a more recent wayland than in the
-Ubuntu ppa?
-
-Will this work with recent kernels, like 3.12? (This would mean forward
-porting the userspace connector stuff to the non-staging omapdrm)
-
-When will this happen?
-
-I have done this myself but since the TI community effort disappeared for
-OMAP4 I had to use a 3.4 kernel from the Ubuntu PPA.
-
---Richard
-
---001a11c1ba04dda44f04eb845787
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On T=
-ue, Nov 19, 2013 at 7:06 AM, Denys Dmytriyenko <span dir=3D"ltr">&lt;<a hre=
-f=3D"mailto:denys@ti.com" target=3D"_blank">denys@ti.com</a>&gt;</span> wro=
-te:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-=
-left:1px #ccc solid;padding-left:1ex">
-<div class=3D"im"><br>
-</div>No graphics for omap4+ (yet) in meta-ti. There are recipes being work=
-ed out<br>
-though.<br></blockquote><div><br></div><div>Good news, finally!</div><div><=
-br></div><div>I hope this will be something like what was last released in =
-the Ubuntu PPA? Meaning it does not need X.</div><div><br></div><div>Will y=
-ou link the userspace against a more recent wayland than in the Ubuntu ppa?=
-</div>
-<div><br></div><div>Will this work with recent kernels, like 3.12? (This wo=
-uld mean forward porting the userspace connector stuff to the non-staging o=
-mapdrm)</div><div><br></div><div>When will this happen?</div><div><br></div=
->
-<div>I have done this myself but since the TI community effort disappeared =
-for OMAP4 I had to use a 3.4 kernel from the Ubuntu PPA.</div><div><br></di=
-v><div>--Richard</div></div></div></div>
-
---001a11c1ba04dda44f04eb845787--
