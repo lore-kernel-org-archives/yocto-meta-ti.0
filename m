@@ -1,32 +1,33 @@
 Return-Path: <chase.maupin@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3894AE00507
-	for <meta-ti@yoctoproject.org>; Tue, 19 Nov 2013 12:21:08 -0800 (PST)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21A7EE00546
+	for <meta-ti@yoctoproject.org>; Tue, 19 Nov 2013 12:21:17 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id rAJKL8OE000446
-	for <meta-ti@yoctoproject.org>; Tue, 19 Nov 2013 14:21:08 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id rAJKL7DQ024862
-	for <meta-ti@yoctoproject.org>; Tue, 19 Nov 2013 14:21:07 -0600
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id rAJKLHxd015628
+	for <meta-ti@yoctoproject.org>; Tue, 19 Nov 2013 14:21:17 -0600
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id rAJKLG65024919
+	for <meta-ti@yoctoproject.org>; Tue, 19 Nov 2013 14:21:16 -0600
 Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
-	14.02.0342.003; Tue, 19 Nov 2013 14:21:07 -0600
+	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
+	14.02.0342.003; Tue, 19 Nov 2013 14:21:16 -0600
 From: "Maupin, Chase" <chase.maupin@ti.com>
 To: "Cooper Jr., Franklin" <fcooper@ti.com>, "meta-ti@yoctoproject.org"
 	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH 1/4] libgles-omap3: Add support for AM43x in
-	common libgles-omap3 include files
-Thread-Index: AQHO5UA3FY5sjgSYhU2O7rRVQ6Uq8pos/zpg
-Date: Tue, 19 Nov 2013 20:21:07 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED10159839E9A@DLEE11.ent.ti.com>
+Thread-Topic: [meta-ti] [PATCH 2/4] libgles-omap3: Add new 5.00.00.01
+	Graphics	SDK alpha release
+Thread-Index: AQHO5UAtSz/jYwoXlUypP5VE9RYI35os/0Ug
+Date: Tue, 19 Nov 2013 20:21:16 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED10159839EA3@DLEE11.ent.ti.com>
 References: <1384880351-6571-1-git-send-email-fcooper@ti.com>
-In-Reply-To: <1384880351-6571-1-git-send-email-fcooper@ti.com>
+	<1384880351-6571-2-git-send-email-fcooper@ti.com>
+In-Reply-To: <1384880351-6571-2-git-send-email-fcooper@ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/4] libgles-omap3: Add support for AM43x in	common libgles-omap3 include files
+Subject: Re: [PATCH 2/4] libgles-omap3: Add new 5.00.00.01 Graphics	SDK alpha release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,7 +40,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Nov 2013 20:21:12 -0000
+X-List-Received-Date: Tue, 19 Nov 2013 20:21:19 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
@@ -51,400 +52,335 @@ Acked-by: Chase Maupin <chase.maupin@ti.com>
 >bounces@yoctoproject.org] On Behalf Of Cooper Jr., Franklin
 >Sent: Tuesday, November 19, 2013 10:59 AM
 >To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [PATCH 1/4] libgles-omap3: Add support for
->AM43x in common libgles-omap3 include files
+>Subject: [meta-ti] [PATCH 2/4] libgles-omap3: Add new 5.00.00.01
+>Graphics SDK alpha release
+>
+>* A new Graphics SDK that support 3.12 kernel for am335x
+>* This Graphics SDK also adds initial support for AM43x
 >
 >Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 >---
-> recipes-graphics/libgles/libgles-omap3-no-x.inc |   34
->++++++++++++++++-------
-> recipes-graphics/libgles/libgles-omap3-x11.inc  |   26
->++++++++++++-----
-> 2 files changed, 42 insertions(+), 18 deletions(-)
+> .../rc.pvr                                         |   28
+>+++++++++++++------
+> .../rc_dri.pvr                                     |   28
+>++++++++++++-------
+> ...08.00.02.bb =3D> libgles-omap3-x11_5.00.00.01.bb} |   29
+>+++++++++++++------
+> ...3_4.09.00.01.bb =3D> libgles-omap3_5.00.00.01.bb} |   24
+>+++++++---------
+> 4 files changed, 68 insertions(+), 41 deletions(-)
+> copy recipes-graphics/libgles/{libgles-omap3-x11-4.09.00.01 =3D>
+>libgles-omap3-5.00.00.01}/rc.pvr (87%)
+> mode change 100644 =3D> 100755
+> copy recipes-graphics/libgles/{libgles-omap3-x11-4.09.00.01 =3D>
+>libgles-omap3-5.00.00.01}/rc_dri.pvr (88%)
+> mode change 100644 =3D> 100755
+> copy recipes-graphics/libgles/{libgles-omap3_4.08.00.02.bb =3D>
+>libgles-omap3-x11_5.00.00.01.bb} (72%)
+> copy recipes-graphics/libgles/{libgles-omap3_4.09.00.01.bb =3D>
+>libgles-omap3_5.00.00.01.bb} (42%)
 >
->diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc
->b/recipes-graphics/libgles/libgles-omap3-no-x.inc
->index 83873d7..1449233 100644
->--- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
->+++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
->@@ -3,11 +3,11 @@ LICENSE =3D "proprietary-binary"
-> # 'TSPA.txt' might not be the best file to md5sum
-> LIC_FILES_CHKSUM =3D
->"file://TSPA.txt;md5=3Dc0d5d9c1e38b41677144c4e24d6ddee1"
+>diff --git a/recipes-graphics/libgles/libgles-omap3-x11-
+>4.09.00.01/rc.pvr b/recipes-graphics/libgles/libgles-omap3-
+>5.00.00.01/rc.pvr
+>old mode 100644
+>new mode 100755
+>similarity index 87%
+>copy from recipes-graphics/libgles/libgles-omap3-x11-
+>4.09.00.01/rc.pvr
+>copy to recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc.pvr
+>index 590d06c..830d602
+>--- a/recipes-graphics/libgles/libgles-omap3-x11-4.09.00.01/rc.pvr
+>+++ b/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc.pvr
+>@@ -41,13 +41,20 @@ fbset -vyres $(expr $YRES \* 3)
 >
->-INC_PR =3D "r37"
->+INC_PR =3D "r38"
+> sgxprepare () {
+> 	echo Starting PVR
+>-	insmod $(busybox find /lib/modules/$(uname -r) -name
+>"pvrsrvkm.ko")
 >
-> EXCLUDE_FROM_WORLD =3D "1"
->
->-COMPATIBLE_MACHINE =3D "(omap3|ti814x|ti816x|ti33x)"
->+COMPATIBLE_MACHINE =3D "(omap3|ti814x|ti816x|ti33x|ti43x)"
->
-> PVR_INIT ?=3D "pvrsrvinit"
->
->@@ -42,6 +42,7 @@ export ES3LOCATION ?=3D "${S}/gfx_rel_es3.x"
-> export ES5LOCATION ?=3D "${S}/gfx_rel_es5.x"
-> export ES6LOCATION ?=3D "${S}/gfx_rel_es6.x"
-> export ES8LOCATION ?=3D "${S}/gfx_rel_es8.x"
->+export ES9LOCATION ?=3D "${S}/gfx_rel_es9.x"
->
-> LIBGLESWINDOWSYSTEM ?=3D "libpvrPVR2D_FRONTWSEGL.so.1"
->
->@@ -157,11 +158,13 @@ do_install () {
->
-> 	#Create different folders for ease of installing into
->different platforms with different display drivers/ SGX core
->
->+	install -d ${D}${libdir}/ES9.0
-> 	install -d ${D}${libdir}/ES8.0
-> 	install -d ${D}${libdir}/ES6.0
-> 	install -d ${D}${libdir}/ES5.0
-> 	install -d ${D}${libdir}/ES3.0
->
->+	install -d ${D}${bindir}/ES9.0
-> 	install -d ${D}${bindir}/ES8.0
-> 	install -d ${D}${bindir}/ES6.0
-> 	install -d ${D}${bindir}/ES5.0
->@@ -170,7 +173,7 @@ do_install () {
-> 	shared_prog=3D"eglinfo pvr2d_test ${PVR_INIT} services_test
->sgx_blit_test sgx_clipblit_test sgx_flip_test sgx_init_test
->sgx_render_flip_test"
-> 	raw_prog=3D"gles1test1 gles2test1"
->
->-	for esrev in 3 5 6 8 ; do
->+	for esrev in 3 5 6 8 9 ; do
-> 		ESLOCATION=3D$(eval echo $(echo
->\$\{ES${esrev}LOCATION\}))
-> 		if [ -e ${ESLOCATION} ] ; then
-> 			cp -pPR ${ESLOCATION}/lib*${IMGPV}
->${ESLOCATION}/pvr_drv.so ${ESLOCATION}/*.a
->${D}${libdir}/ES${esrev}.0/
->@@ -199,18 +202,21 @@ do_install () {
->
-> PACKAGES =3D+ "${PN}-rawdemos ${PN}-rawtrainingcourses ${PN}-tests"
-> # Package the base libraries per silicon revision
->-PACKAGES =3D+ "${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
->-RRECOMMENDS_${PN} +=3D "${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
->+PACKAGES =3D+ "${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8 ${PN}-es9"
->+RRECOMMENDS_${PN} +=3D "${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8
->${PN}-es9"
-> FILES_${PN}-es3 =3D "${libdir}/ES3*/* ${bindir}/ES3*/*"
-> FILES_${PN}-es5 =3D "${libdir}/ES5*/* ${bindir}/ES5*/*"
-> FILES_${PN}-es6 =3D "${libdir}/ES6*/* ${bindir}/ES6*/*"
-> FILES_${PN}-es8 =3D "${libdir}/ES8*/* ${bindir}/ES8*/*"
->+FILES_${PN}-es9 =3D "${libdir}/ES9*/* ${bindir}/ES9*/*"
->
-> # Stop shlib code from picking a subpackage
-> PRIVATE_LIBS_${PN}-es3 =3D "libGLESv2.so libIMGegl.so libsrv_um.so
->libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so
->libglslcompiler.so libGLES_CM.so"
-> PRIVATE_LIBS_${PN}-es5 =3D "libGLESv2.so libIMGegl.so libsrv_um.so
->libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so
->libglslcompiler.so libGLES_CM.so"
-> PRIVATE_LIBS_${PN}-es6 =3D "libGLESv2.so libIMGegl.so libsrv_um.so
->libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so
->libglslcompiler.so libGLES_CM.so"
-> PRIVATE_LIBS_${PN}-es8 =3D "libGLESv2.so libIMGegl.so libsrv_um.so
->libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so
->libglslcompiler.so libGLES_CM.so"
->+PRIVATE_LIBS_${PN}-es9 =3D "libGLESv2.so libIMGegl.so libsrv_um.so
->libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so
->libglslcompiler.so libGLES_CM.so"
+>-    if [ "$?" !=3D "0" ]
+>-    then
+>-        echo "Could not find pvrsrvkm driver"
+>-        exit 1
+>-    fi
+>+	lsmod | grep pvrsrvkm > /dev/null
 >+
+>+
+>+	if [ "$?" !=3D "0" ]
+>+	then
+>+		insmod $(busybox find /lib/modules/$(uname -r) -name
+>"pvrsrvkm.ko")
+>+
+>+		if [ "$?" !=3D "0" ]
+>+		then
+>+			echo "Could not find pvrsrvkm driver"
+>+			exit 1
+>+		fi
+>+	fi
 >
-> RPROVIDES_${PN} +=3D "libGLESv2.so libEGL.so libGLES_CM.so
->libpvr2d.so libIMGegl.so libsrv_init.so libsrv_um.so
->libsrv_um_dri.so libglslcompiler.so"
+> 	modprobe omaplfb
+> 	modprobe bufferclass_ti
+>@@ -100,8 +107,12 @@ case $CPUTYPE in
+> "TI33XX")
+> 	sgxprepare
 >
->@@ -220,31 +226,35 @@ FILES_${PN}-flipwsegl =3D
->"${libdir}/libpvrPVR2D_FLIPWSEGL.so.*"
-> FILES_${PN}-frontwsegl =3D "${libdir}/libpvrPVR2D_FRONTWSEGL.so.*"
-> FILES_${PN}-linuxfbwsegl =3D
->"${libdir}/libpvrPVR2D_LINUXFBWSEGL.so.*"
+>-	devmem2 0x44e01104 w 0x0 > /dev/null
+>-	devmem2 0x44e00904 w 0x2 > /dev/null
+>+	ES_REVISION=3D"$(devmem2 0x56000014 | sed -e s:0x00010205:8: |
+>tail -n1 | awk -F': ' '{print $2}')"
+>+
+>+	sgxfinish
+>+	;;
+>+"TI43XX")
+>+	sgxprepare
 >
->-PACKAGES =3D+ "${PN}-blitwsegl-es3 ${PN}-blitwsegl-es5 ${PN}-
->blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-flipwsegl-es3 ${PN}-
->flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8 ${PN}-
->frontwsegl-es3 ${PN}-frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-
->frontwsegl-es8 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5
->${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8"
->+PACKAGES =3D+ "${PN}-blitwsegl-es3 ${PN}-blitwsegl-es5 ${PN}-
->blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-blitwsegl-es9 ${PN}-
->flipwsegl-es3 ${PN}-flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-
->flipwsegl-es8 ${PN}-flipwsegl-es9 ${PN}-frontwsegl-es3 ${PN}-
->frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8 ${PN}-
->frontwsegl-es9 ${PN}-linuxfbwsegl-es3 ${PN}-linuxfbwsegl-es5
->${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8 ${PN}-linuxfbwsegl-
->es9"
+> 	ES_REVISION=3D"$(devmem2 0x56000014 | sed -e s:0x00010205:8: |
+>tail -n1 | awk -F': ' '{print $2}')"
 >
-> FILES_${PN}-blitwsegl-es3 =3D
->"${libdir}/ES3*/libpvrPVR2D_BLITWSEGL.so.*"
-> FILES_${PN}-blitwsegl-es5 =3D
->"${libdir}/ES5*/libpvrPVR2D_BLITWSEGL.so.*"
-> FILES_${PN}-blitwsegl-es6 =3D
->"${libdir}/ES6*/libpvrPVR2D_BLITWSEGL.so.*"
-> FILES_${PN}-blitwsegl-es8 =3D
->"${libdir}/ES8*/libpvrPVR2D_BLITWSEGL.so.*"
->-RRECOMMENDS_${PN}-blitwsegl =3D " ${PN}-blitwsegl-es3 ${PN}-
->blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8"
->+FILES_${PN}-blitwsegl-es9 =3D
->"${libdir}/ES9*/libpvrPVR2D_BLITWSEGL.so.*"
->+RRECOMMENDS_${PN}-blitwsegl =3D " ${PN}-blitwsegl-es3 ${PN}-
->blitwsegl-es5 ${PN}-blitwsegl-es6 ${PN}-blitwsegl-es8 ${PN}-
->blitwsegl-es9"
+>@@ -122,4 +133,3 @@ case $CPUTYPE in
+> 	echo No SGX hardware, not starting PVR
+> 	;;
+> esac
+>-
+>diff --git a/recipes-graphics/libgles/libgles-omap3-x11-
+>4.09.00.01/rc_dri.pvr b/recipes-graphics/libgles/libgles-omap3-
+>5.00.00.01/rc_dri.pvr
+>old mode 100644
+>new mode 100755
+>similarity index 88%
+>copy from recipes-graphics/libgles/libgles-omap3-x11-
+>4.09.00.01/rc_dri.pvr
+>copy to recipes-graphics/libgles/libgles-omap3-
+>5.00.00.01/rc_dri.pvr
+>index bc44937..847e7a9
+>--- a/recipes-graphics/libgles/libgles-omap3-x11-
+>4.09.00.01/rc_dri.pvr
+>+++ b/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc_dri.pvr
+>@@ -54,13 +54,18 @@ sgxprepare () {
 >
-> FILES_${PN}-flipwsegl-es3 =3D
->"${libdir}/ES3*/libpvrPVR2D_FLIPWSEGL.so.*"
-> FILES_${PN}-flipwsegl-es5 =3D
->"${libdir}/ES5*/libpvrPVR2D_FLIPWSEGL.so.*"
-> FILES_${PN}-flipwsegl-es6 =3D
->"${libdir}/ES6*/libpvrPVR2D_FLIPWSEGL.so.*"
-> FILES_${PN}-flipwsegl-es8 =3D
->"${libdir}/ES8*/libpvrPVR2D_FLIPWSEGL.so.*"
->-RRECOMMENDS_${PN}-flipwsegl =3D " ${PN}-flipwsegl-es3 ${PN}-
->flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8"
->+FILES_${PN}-flipwsegl-es9 =3D
->"${libdir}/ES8*/libpvrPVR2D_FLIPWSEGL.so.*"
->+RRECOMMENDS_${PN}-flipwsegl =3D " ${PN}-flipwsegl-es3 ${PN}-
->flipwsegl-es5 ${PN}-flipwsegl-es6 ${PN}-flipwsegl-es8 ${PN}-
->flipwsegl-es9"
+> 	modprobe drm
 >
-> FILES_${PN}-frontwsegl-es3 =3D
->"${libdir}/ES3*/libpvrPVR2D_FRONTWSEGL.so.*"
-> FILES_${PN}-frontwsegl-es5 =3D
->"${libdir}/ES5*/libpvrPVR2D_FRONTWSEGL.so.*"
-> FILES_${PN}-frontwsegl-es6 =3D
->"${libdir}/ES6*/libpvrPVR2D_FRONTWSEGL.so.*"
-> FILES_${PN}-frontwsegl-es8 =3D
->"${libdir}/ES8*/libpvrPVR2D_FRONTWSEGL.so.*"
->-RRECOMMENDS_${PN}-frontwsegl =3D " ${PN}-frontwsegl-es3 ${PN}-
->frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8"
->+FILES_${PN}-frontwsegl-es9 =3D
->"${libdir}/ES9*/libpvrPVR2D_FRONTWSEGL.so.*"
->+RRECOMMENDS_${PN}-frontwsegl =3D " ${PN}-frontwsegl-es3 ${PN}-
->frontwsegl-es5 ${PN}-frontwsegl-es6 ${PN}-frontwsegl-es8 ${PN}-
->frontwsegl-es9"
+>-	insmod $(busybox find /lib/modules/$(uname -r) -name
+>"pvrsrvkm.ko")
+>+	lsmod | grep pvrsrvkm > /dev/null
 >
-> FILES_${PN}-linuxfbwsegl-es3 =3D
->"${libdir}/ES3*/libpvrPVR2D_LINUXFBWSEGL.so.*"
-> FILES_${PN}-linuxfbwsegl-es5 =3D
->"${libdir}/ES5*/libpvrPVR2D_LINUXFBWSEGL.so.*"
-> FILES_${PN}-linuxfbwsegl-es6 =3D
->"${libdir}/ES6*/libpvrPVR2D_LINUXFBWSEGL.so.*"
-> FILES_${PN}-linuxfbwsegl-es8 =3D
->"${libdir}/ES8*/libpvrPVR2D_LINUXFBWSEGL.so.*"
->-RRECOMMENDS_${PN}-linuxfbwsegl =3D " ${PN}-linuxfbwsegl-es3 ${PN}-
->linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8"
->+FILES_${PN}-linuxfbwsegl-es9 =3D
->"${libdir}/ES9*/libpvrPVR2D_LINUXFBWSEGL.so.*"
->+RRECOMMENDS_${PN}-linuxfbwsegl =3D " ${PN}-linuxfbwsegl-es3 ${PN}-
->linuxfbwsegl-es5 ${PN}-linuxfbwsegl-es6 ${PN}-linuxfbwsegl-es8
->${PN}-linuxfbwsegl-es9"
+>-    if [ "$?" !=3D "0" ]
+>-    then
+>-        echo "Could not find pvrsrvkm driver"
+>-        exit 1
+>-    fi
+>+	if [ "$?" !=3D "0" ]
+>+	then
+>+		insmod $(busybox find /lib/modules/$(uname -r) -name
+>"pvrsrvkm.ko")
+>+
+>+		if [ "$?" !=3D "0" ]
+>+		then
+>+			echo "Could not find pvrsrvkm driver"
+>+			exit 1
+>+		fi
+>+	fi
 >
-> CONFFILES_${PN} =3D "${sysconfdir}/powervr.ini"
+> 	modprobe bufferclass_ti
 >
->@@ -279,21 +289,25 @@ INSANE_SKIP_${PN}-blitwsegl-es3 =3D "ldflags"
-> INSANE_SKIP_${PN}-blitwsegl-es5 =3D "ldflags"
-> INSANE_SKIP_${PN}-blitwsegl-es6 =3D "ldflags"
-> INSANE_SKIP_${PN}-blitwsegl-es8 =3D "ldflags"
->+INSANE_SKIP_${PN}-blitwsegl-es9 =3D "ldflags"
-> INSANE_SKIP_${PN}-flipwsegl =3D "ldflags"
-> INSANE_SKIP_${PN}-flipwsegl-es3 =3D "ldflags"
-> INSANE_SKIP_${PN}-flipwsegl-es5 =3D "ldflags"
-> INSANE_SKIP_${PN}-flipwsegl-es6 =3D "ldflags"
-> INSANE_SKIP_${PN}-flipwsegl-es8 =3D "ldflags"
->+INSANE_SKIP_${PN}-flipwsegl-es9 =3D "ldflags"
-> INSANE_SKIP_${PN}-frontwsegl =3D "ldflags"
-> INSANE_SKIP_${PN}-frontwsegl-es3 =3D "ldflags"
-> INSANE_SKIP_${PN}-frontwsegl-es5 =3D "ldflags"
-> INSANE_SKIP_${PN}-frontwsegl-es6 =3D "ldflags"
-> INSANE_SKIP_${PN}-frontwsegl-es8 =3D "ldflags"
->+INSANE_SKIP_${PN}-frontwsegl-es9 =3D "ldflags"
-> INSANE_SKIP_${PN}-linuxfbwsegl =3D "ldflags"
-> INSANE_SKIP_${PN}-linuxfbwsegl-es3 =3D "ldflags"
-> INSANE_SKIP_${PN}-linuxfbwsegl-es5 =3D "ldflags"
-> INSANE_SKIP_${PN}-linuxfbwsegl-es6 =3D "ldflags"
-> INSANE_SKIP_${PN}-linuxfbwsegl-es8 =3D "ldflags"
->+INSANE_SKIP_${PN}-linuxfbwsegl-es9 =3D "ldflags"
-> INSANE_SKIP_${PN}-tests =3D "ldflags"
+>@@ -112,13 +117,17 @@ case $CPUTYPE in
+> "TI33XX")
+> 	sgxprepare
 >
-> # Quality control is really poor on these SDKs, so hack around
->the latest madness:
->diff --git a/recipes-graphics/libgles/libgles-omap3-x11.inc
->b/recipes-graphics/libgles/libgles-omap3-x11.inc
->index 106a9bc..76ef5b3 100644
->--- a/recipes-graphics/libgles/libgles-omap3-x11.inc
->+++ b/recipes-graphics/libgles/libgles-omap3-x11.inc
->@@ -3,11 +3,11 @@ LICENSE =3D "proprietary-binary"
-> # 'TSPA.txt' might not be the best file to md5sum
-> LIC_FILES_CHKSUM =3D
->"file://TSPA.txt;md5=3Dc0d5d9c1e38b41677144c4e24d6ddee1"
+>-	devmem2 0x44e01104 w 0x0 > /dev/null
+>-	devmem2 0x44e00904 w 0x2 > /dev/null
+>-
+> 	ES_REVISION=3D"$(devmem2 0x56000014 | sed -e s:0x00010205:8: |
+>tail -n1 | awk -F': ' '{print $2}')"
 >
->-INC_PR =3D "r37"
->+INC_PR =3D "r38"
+> 	sgxfinish
+> 	;;
+>+"TI43XX")
+>+	sgxprepare
+>+
+>+    ES_REVISION=3D"$(devmem2 0x56000014 | sed -e s:0x00010205:8: |
+>tail -n1 | awk -F': ' '{print $2}')"
+>+
+>+	sgxfinish
+>+	;;
+> "TI816x")
+> 	sgxprepare
 >
-> EXCLUDE_FROM_WORLD =3D "1"
+>@@ -134,4 +143,3 @@ case $CPUTYPE in
+> 	echo No SGX hardware, not starting PVR
+> 	;;
+> esac
+>-
+>diff --git a/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
+>b/recipes-graphics/libgles/libgles-omap3-x11_5.00.00.01.bb
+>similarity index 72%
+>copy from recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
+>copy to recipes-graphics/libgles/libgles-omap3-x11_5.00.00.01.bb
+>index e57ba42..df53306 100644
+>--- a/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
+>+++ b/recipes-graphics/libgles/libgles-omap3-x11_5.00.00.01.bb
+>@@ -1,13 +1,16 @@
+>-require libgles-omap3.inc
+>+require libgles-omap3-x11.inc
 >
->-COMPATIBLE_MACHINE =3D "(omap3|ti814x|ti816x|ti33x)"
->+COMPATIBLE_MACHINE =3D "(omap3|ti814x|ti816x|ti33x|ti43x)"
+> LICENSE =3D "TSPA"
 >
-> DEPENDS =3D "virtual/libx11 libxau libxdmcp libdrm"
+>+PR =3D "${INC_PR}.0"
+>+
+> DEFAULT_PREFERENCE =3D "-1"
 >
->@@ -46,6 +46,7 @@ export ES3LOCATION ?=3D "${S}/gfx_rel_es3.x"
-> export ES5LOCATION ?=3D "${S}/gfx_rel_es5.x"
-> export ES6LOCATION ?=3D "${S}/gfx_rel_es6.x"
-> export ES8LOCATION ?=3D "${S}/gfx_rel_es8.x"
->+export ES9LOCATION ?=3D "${S}/gfx_rel_es9.x"
+>-BINLOCATION_omap3  =3D "${S}/gfx_rel_es3.x"
+>+BINLOCATION_omap3 =3D "${S}/gfx_rel_es3.x"
+> BINLOCATION_ti816x =3D "${S}/gfx_rel_es6.x"
+> BINLOCATION_ti814x =3D "${S}/gfx_rel_es6.x"
+> BINLOCATION_ti33x =3D "${S}/gfx_rel_es8.x"
+>+BINLOCATION_ti43x =3D "${S}/gfx_rel_es9.x"
 >
-> LIBGLESWINDOWSYSTEM ?=3D "libpvrPVR2D_DRIWSEGL.so"
+> PLATFORM =3D "LinuxARMV7"
+> PVR_INIT =3D "pvrsrvctl"
+>@@ -16,11 +19,19 @@ PVR_INIT =3D "pvrsrvctl"
+> # http://software-
+>dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/i
+>ndex_FDS.html
+> # see libgles-omap3.inc for detailed installation instructions
 >
->@@ -174,11 +175,13 @@ do_install () {
+>-SGXPV =3D "4_08_00_02"
+>+SGXPV =3D "5_00_00_01"
+> IMGPV =3D "1.9.2188537"
+>-BINFILE =3D "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
+>+
+> TI_BIN_UNPK_WDEXT :=3D "/Graphics_SDK_${SGXPV}"
+>-SRC_URI =3D "http://software-
+>dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}
+>/exports/${BINFILE} \
+>+
+>+BINFILE_HARDFP =3D
+>"Graphics_SDK_setuplinux_${SGXPV}_hardfp_minimal_demos_alpha.bin "
+>+MD5SUM_HARDFP =3D "ae6125d7f8a313ea5c02afded893052d"
+>+SHA256SUM_HARDFP =3D
+>"c2782a2f85024741722b936ec9dca66b858ae8561aa71b693f11e12d8c0385e0"
+>+
+>+# For now we only have hardfp version
+>+BINFILE :=3D "${BINFILE_HARDFP}"
+>+
+>+SRC_URI =3D "http://software-
+>dl.ti.com/dsps/dsps_public_sw/gfxsdk/${SGXPV}/exports/${BINFILE} \
+>            file://cputype \
+>            file://rc.pvr \
+>            file://rc_dri.pvr \
+>@@ -28,12 +39,12 @@ SRC_URI =3D "http://software-
+>dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf
+>            file://99-bufferclass.rules  \
+> "
 >
-> 	# The ES3.x, ES5.x and ES6.x CPUs have different SGX
->hardware, so we need to install multiple sets of userspace
+>-SRC_URI[md5sum] =3D "0efa3a38266e6f41f8cc4fad0187f0d6"
+>-SRC_URI[sha256sum] =3D
+>"c732044b515a598e1fab661b7463aa9c53d4fa37f4980dfa85cd02b7468d0cd9"
+>+SRC_URI[md5sum] :=3D "${MD5SUM_HARDFP}"
+>+SRC_URI[sha256sum] :=3D "${SHA256SUM_HARDFP}"
 >
->+	install -d ${D}${libdir}/ES9.0
-> 	install -d ${D}${libdir}/ES8.0
-> 	install -d ${D}${libdir}/ES6.0
-> 	install -d ${D}${libdir}/ES5.0
-> 	install -d ${D}${libdir}/ES3.0
+> S =3D "${WORKDIR}/Graphics_SDK_${SGXPV}"
 >
->+	install -d ${D}${bindir}/ES9.0
-> 	install -d ${D}${bindir}/ES8.0
-> 	install -d ${D}${bindir}/ES6.0
-> 	install -d ${D}${bindir}/ES5.0
->@@ -186,7 +189,7 @@ do_install () {
+>-LIBGLESWINDOWSYSTEM ?=3D "${@base_contains('DISTRO_FEATURES',
+>'x11',"libpvrPVR2D_DRIWSEGL.so" ,"libpvrPVR2D_FRONTWSEGL.so.1",
+>d)}"
+>+LIBGLESWINDOWSYSTEM ?=3D "libpvrPVR2D_DRIWSEGL.so"
 >
-> 	x11_prog=3D"eglinfo_x xgles1test1 xgles2test1 xmultiegltest"
+> do_configure_append() {
 >
->-	for esrev in 3 5 6 8 ; do
->+	for esrev in 3 5 6 8 9; do
-> 		ESLOCATION=3D$(eval echo $(echo
->\$\{ES${esrev}LOCATION\}))
-> 		if [ -e ${ESLOCATION} ] ; then
-> 			cp -pPR ${ESLOCATION}/lib*${IMGPV}
->${ESLOCATION}/pvr_drv.so ${ESLOCATION}/*.a
->${D}${libdir}/ES${esrev}.0/
->@@ -219,38 +222,42 @@ do_install () {
-> PACKAGES =3D+ "${PN}-x11demos ${PN}-x11trainingcourses xserver-
->kdrive-powervrsgx"
+>@@ -62,7 +73,7 @@ do_install_append() {
+>     cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir}
+>     cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/
 >
-> # Package the base libraries per silicon revision
->-PACKAGES =3D+ "${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
->-RRECOMMENDS_${PN} +=3D "${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8"
->+PACKAGES =3D+ "${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8 ${PN}-es9"
->+RRECOMMENDS_${PN} +=3D "${PN}-es3 ${PN}-es5 ${PN}-es6 ${PN}-es8
->${PN}-es9"
-> FILES_${PN}-es3 =3D "${libdir}/ES3*/* ${bindir}/ES3*/*"
-> FILES_${PN}-es5 =3D "${libdir}/ES5*/* ${bindir}/ES5*/*"
-> FILES_${PN}-es6 =3D "${libdir}/ES6*/* ${bindir}/ES6*/*"
-> FILES_${PN}-es8 =3D "${libdir}/ES8*/* ${bindir}/ES8*/*"
->+FILES_${PN}-es9 =3D "${libdir}/ES9*/* ${bindir}/ES9*/*"
+>-    rm ${D}${sysconfdir}/init.d/pvr-init
+>+    rm -f ${D}${sysconfdir}/init.d/pvr-init
 >
-> # Stop shlib code from picking a subpackage
-> PRIVATE_LIBS_${PN}-es3 =3D "libGLESv2.so libIMGegl.so libsrv_um.so
->libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so
->libOpenVGU.so libglslcompiler.so libGLES_CM.so"
-> PRIVATE_LIBS_${PN}-es5 =3D "libGLESv2.so libIMGegl.so libsrv_um.so
->libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so
->libOpenVGU.so libglslcompiler.so libGLES_CM.so"
-> PRIVATE_LIBS_${PN}-es6 =3D "libGLESv2.so libIMGegl.so libsrv_um.so
->libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so
->libOpenVGU.so libglslcompiler.so libGLES_CM.so"
-> PRIVATE_LIBS_${PN}-es8 =3D "libGLESv2.so libIMGegl.so libsrv_um.so
->libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so
->libOpenVGU.so libglslcompiler.so libGLES_CM.so"
->+PRIVATE_LIBS_${PN}-es9 =3D "libGLESv2.so libIMGegl.so libsrv_um.so
->libOpenVG.so libpvr2d.so libsrv_init.so libEGL.so libsrv_um_dri.so
->libOpenVGU.so libglslcompiler.so libGLES_CM.so"
+>     if [ "$SUPPORT_XORG" =3D "1" ]; then
+>         cp -pP ${WORKDIR}/rc_dri.pvr
+>${D}${sysconfdir}/init.d/pvr-init
+>diff --git a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+>b/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
+>similarity index 42%
+>copy from recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+>copy to recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
+>index d094b5c..de6ba55 100644
+>--- a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+>+++ b/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
+>@@ -2,7 +2,7 @@ require libgles-omap3-no-x.inc
 >
-> PACKAGES =3D+ "${PN}-x11wsegl ${PN}-driwsegl"
-> FILES_${PN}-x11wsegl =3D "${libdir}/libpvrPVR2D_X11WSEGL.so*
->${bindir}/x* ${bindir}/*x"
-> FILES_${PN}-driwsegl =3D "${libdir}/libpvrPVR2D_DRIWSEGL.so*
->${libdir}/libsrv_um_dri*"
+> LICENSE =3D "TSPA"
 >
->-X11_SEGL =3D " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-
->x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8 ${PN}-driwsegl-
->es2 ${PN}-driwsegl-es3 ${PN}-driwsegl-es5 ${PN}-driwsegl-es6
->${PN}-driwsegl-es8 "
->+X11_SEGL =3D " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-es3 ${PN}-
->x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8 ${PN}-x11wsegl-
->es9 ${PN}-driwsegl-es2 ${PN}-driwsegl-es3 ${PN}-driwsegl-es5
->${PN}-driwsegl-es6 ${PN}-driwsegl-es8 ${PN}-driwsegl-es9"
-> PACKAGES =3D+ "${X11_SEGL}"
-> FILES_${PN}-x11wsegl-es2 =3D
->"${libdir}/ES2*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES2*/x*
->${bindir}/ES2*/*x"
-> FILES_${PN}-x11wsegl-es3 =3D
->"${libdir}/ES3*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES3*/x*
->${bindir}/ES3*/*x"
-> FILES_${PN}-x11wsegl-es5 =3D
->"${libdir}/ES5*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES5*/x*
->${bindir}/ES5*/*x"
-> FILES_${PN}-x11wsegl-es6 =3D
->"${libdir}/ES6*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES6*/x*
->${bindir}/ES6*/*x"
-> FILES_${PN}-x11wsegl-es8 =3D
->"${libdir}/ES8*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES8*/x*
->${bindir}/ES8*/*x"
->-RRECOMMENDS_${PN}-x11wsegl =3D " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-
->es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8"
->+FILES_${PN}-x11wsegl-es9 =3D
->"${libdir}/ES9*/libpvrPVR2D_X11WSEGL.so.* ${bindir}/ES9*/x*
->${bindir}/ES9*/*x"
->+RRECOMMENDS_${PN}-x11wsegl =3D " ${PN}-x11wsegl-es2 ${PN}-x11wsegl-
->es3 ${PN}-x11wsegl-es5 ${PN}-x11wsegl-es6 ${PN}-x11wsegl-es8
->${PN}-x11wsegl-es9"
+>-PR =3D "${INC_PR}.2"
+>+PR =3D "${INC_PR}.0"
 >
-> FILES_${PN}-driwsegl-es2 =3D
->"${libdir}/ES2*/libpvrPVR2D_DRIWSEGL.so.*
->${libdir}/ES2*/libsrv_um_dri*"
-> FILES_${PN}-driwsegl-es3 =3D
->"${libdir}/ES3*/libpvrPVR2D_DRIWSEGL.so.*
->${libdir}/ES3*/libsrv_um_dri*"
-> FILES_${PN}-driwsegl-es5 =3D
->"${libdir}/ES5*/libpvrPVR2D_DRIWSEGL.so.*
->${libdir}/ES5*/libsrv_um_dri*"
-> FILES_${PN}-driwsegl-es6 =3D
->"${libdir}/ES6*/libpvrPVR2D_DRIWSEGL.so.*
->${libdir}/ES6*/libsrv_um_dri*"
-> FILES_${PN}-driwsegl-es8 =3D
->"${libdir}/ES8*/libpvrPVR2D_DRIWSEGL.so.*
->${libdir}/ES8*/libsrv_um_dri*"
->-RRECOMMENDS_${PN}-driwsegl =3D " ${PN}-driwsegl-es2 ${PN}-driwsegl-
->es3 ${PN}-driwsegl-es5 ${PN}-driwsegl-es6 ${PN}-driwsegl-es8"
->+FILES_${PN}-driwsegl-es9 =3D
->"${libdir}/ES9*/libpvrPVR2D_DRIWSEGL.so.*
->${libdir}/ES9*/libsrv_um_dri*"
->+RRECOMMENDS_${PN}-driwsegl =3D " ${PN}-driwsegl-es2 ${PN}-driwsegl-
->es3 ${PN}-driwsegl-es5 ${PN}-driwsegl-es6 ${PN}-driwsegl-es8
->${PN}-driwsegl-es9"
+> DEFAULT_PREFERENCE =3D "-1"
 >
-> CONFFILES_${PN} =3D "${sysconfdir}/powervr.ini"
+>@@ -10,6 +10,7 @@ BINLOCATION_omap3 =3D "${S}/gfx_rel_es3.x"
+> BINLOCATION_ti816x =3D "${S}/gfx_rel_es6.x"
+> BINLOCATION_ti814x =3D "${S}/gfx_rel_es6.x"
+> BINLOCATION_ti33x =3D "${S}/gfx_rel_es8.x"
+>+BINLOCATION_ti43x =3D "${S}/gfx_rel_es9.x"
 >
->@@ -282,17 +289,20 @@ INSANE_SKIP_${PN}-es3 =3D "ldflags dev-so
->staticdev"
-> INSANE_SKIP_${PN}-es5 =3D "ldflags dev-so staticdev"
-> INSANE_SKIP_${PN}-es6 =3D "ldflags dev-so staticdev"
-> INSANE_SKIP_${PN}-es8 =3D "ldflags dev-so staticdev"
->+INSANE_SKIP_${PN}-es9 =3D "ldflags dev-so staticdev"
-> INSANE_SKIP_${PN}-x11demos =3D "ldflags dev-so useless-rpaths"
-> INSANE_SKIP_${PN}-x11wsegl =3D "ldflags dev-so"
-> INSANE_SKIP_${PN}-x11wsegl-es3 =3D "ldflags dev-so"
-> INSANE_SKIP_${PN}-x11wsegl-es5 =3D "ldflags dev-so"
-> INSANE_SKIP_${PN}-x11wsegl-es6 =3D "ldflags dev-so"
-> INSANE_SKIP_${PN}-x11wsegl-es8 =3D "ldflags dev-so"
->+INSANE_SKIP_${PN}-x11wsegl-es9 =3D "ldflags dev-so"
-> INSANE_SKIP_${PN}-driwsegl =3D "ldflags dev-so"
-> INSANE_SKIP_${PN}-driwsegl-es3 =3D "ldflags dev-so"
-> INSANE_SKIP_${PN}-driwsegl-es5 =3D "ldflags dev-so"
-> INSANE_SKIP_${PN}-driwsegl-es6 =3D "ldflags dev-so"
-> INSANE_SKIP_${PN}-driwsegl-es8 =3D "ldflags dev-so"
->+INSANE_SKIP_${PN}-driwsegl-es9 =3D "ldflags dev-so"
-> INSANE_SKIP_${PN}-tests =3D "ldflags"
-> INSANE_SKIP_xserver-kdrive-powervrsgx =3D "ldflags"
-> INSANE_SKIP_${PN}-dev =3D "ldflags dev-so"
+> PLATFORM =3D "LinuxARMV7"
+> PVR_INIT =3D "pvrsrvctl"
+>@@ -18,30 +19,27 @@ PVR_INIT =3D "pvrsrvctl"
+> # http://software-
+>dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/i
+>ndex_FDS.html
+> # see libgles-omap3.inc for detailed installation instructions
+>
+>-SGXPV =3D "4_09_00_01"
+>+SGXPV =3D "5_00_00_01"
+> IMGPV =3D "1.9.2188537"
+>
+> TI_BIN_UNPK_WDEXT :=3D "/Graphics_SDK_${SGXPV}"
+>
+>-# Select the corresponding hardfp/softfp filename and checksums
+>based on tune flags
+>-BINFILE_SOFTFP =3D
+>"Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
+>-MD5SUM_SOFTFP =3D "bd35e9d8843aff3a2aca9d41e7db1c7d"
+>-SHA256SUM_SOFTFP =3D
+>"eb37f75ddde4640b09e760fa86e689beb394330ecdf68786188c34f249247647"
+>
+>-BINFILE_HARDFP =3D
+>"Graphics_SDK_setuplinux_${SGXPV}_hardfp_minimal_demos.bin"
+>-MD5SUM_HARDFP =3D "c9f656dce062d1ab10afffd4dfb71b67"
+>-SHA256SUM_HARDFP =3D
+>"dbfeba8e1298f139495816334edec1455e6b49b1e11bd1b2aa0a888e5788bb6b"
+>+BINFILE_HARDFP =3D
+>"Graphics_SDK_setuplinux_${SGXPV}_alpha_hardfp_minimal_demos.bin"
+>+MD5SUM_HARDFP =3D "ae6125d7f8a313ea5c02afded893052d"
+>+SHA256SUM_HARDFP =3D
+>"c2782a2f85024741722b936ec9dca66b858ae8561aa71b693f11e12d8c0385e0"
+>
+>-BINFILE =3D "${@base_contains('TUNE_FEATURES', 'callconvention-
+>hard', '${BINFILE_HARDFP}', '${BINFILE_SOFTFP}', d)}"
+>+# For now we only have hardfp version
+>+BINFILE :=3D "${BINFILE_HARDFP}"
+>
+>-SRC_URI =3D "http://software-
+>dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}
+>/exports/${BINFILE} \
+>+SRC_URI =3D "http://software-
+>dl.ti.com/dsps/dsps_public_sw/gfxsdk/${SGXPV}/exports/${BINFILE} \
+>            file://cputype \
+>            file://rc.pvr \
+>            file://99-bufferclass.rules  \
+> "
+>
+>-SRC_URI[md5sum] :=3D "${@base_contains('TUNE_FEATURES',
+>'callconvention-hard', '${MD5SUM_HARDFP}', '${MD5SUM_SOFTFP}',
+>d)}"
+>-SRC_URI[sha256sum] :=3D "${@base_contains('TUNE_FEATURES',
+>'callconvention-hard', '${SHA256SUM_HARDFP}',
+>'${SHA256SUM_SOFTFP}', d)}"
+>+SRC_URI[md5sum] :=3D "${MD5SUM_HARDFP}"
+>+SRC_URI[sha256sum] :=3D "${SHA256SUM_HARDFP}"
+>
+> S =3D "${WORKDIR}/Graphics_SDK_${SGXPV}"
+>
 >--
 >1.7.0.4
 >
