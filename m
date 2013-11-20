@@ -1,34 +1,26 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vb0-f54.google.com (mail-vb0-f54.google.com
-	[209.85.212.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70DFCE00543
-	for <meta-ti@yoctoproject.org>; Wed, 20 Nov 2013 00:26:03 -0800 (PST)
-Received: by mail-vb0-f54.google.com with SMTP id p6so3206769vbe.41
-	for <meta-ti@yoctoproject.org>; Wed, 20 Nov 2013 00:26:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=dgEegX3NOSnD+t2LOt74MMegkKLSwt09HJr/gd+JtPw=;
-	b=RTs6FG9o+a2gUrXCu9AMnLXtWch2FGI8Ju2oyA6kWEn//gkLBl17H4IaWVoT6g7qgw
-	IAE2g2ds5hLtNTQuZlV1+4PYxnZG07Yatjxz8oWDVy8VnoF9rb90O/jwN6KD+Jv0OjSF
-	KTla+zylaiI90GMWjGm83WHLFrPu1mOq1J+pnUmWnBPF7XdX3oAxRcrstxwGJU+1hBeg
-	Ms435IZRTmB3ZtltZrvhyerWgR0qPsTGUKI6m83mn1PZ8zt9Lay3jOfVNtXeT1aC0Vrm
-	Hd2CYmIKIif+WFGXOfNXq4+b61tDbVKHq+Vz4j5/IHnFywTsCDABgfLt39zjQ//Rrbdk
-	UlaQ==
+Return-Path: <mrinmayee@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B0FCE0055C
+	for <meta-ti@yoctoproject.org>; Wed, 20 Nov 2013 02:38:55 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id rAKAcs8I004938
+	for <meta-ti@yoctoproject.org>; Wed, 20 Nov 2013 04:38:54 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id rAKAcs5J010742
+	for <meta-ti@yoctoproject.org>; Wed, 20 Nov 2013 04:38:54 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 20 Nov 2013 04:38:54 -0600
+Received: from ti.com (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id rAKAcqSB032524	for
+	<meta-ti@yoctoproject.org>; Wed, 20 Nov 2013 04:38:53 -0600
+Date: Wed, 20 Nov 2013 16:08:52 +0530
+From: Mrinmayee Hingolikar <mrinmayee@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <20131120103852.GA20454@ti.com>
 MIME-Version: 1.0
-X-Received: by 10.58.255.233 with SMTP id at9mr13086887ved.20.1384935963001;
-	Wed, 20 Nov 2013 00:26:03 -0800 (PST)
-Received: by 10.52.106.202 with HTTP; Wed, 20 Nov 2013 00:26:02 -0800 (PST)
-In-Reply-To: <1384880351-6571-2-git-send-email-fcooper@ti.com>
-References: <1384880351-6571-1-git-send-email-fcooper@ti.com>
-	<1384880351-6571-2-git-send-email-fcooper@ti.com>
-Date: Wed, 20 Nov 2013 09:26:02 +0100
-Message-ID: <CALbNGRTJ2N1gGdmuKKcC0VrtmG=TuMayC7YuTdR19TC6oCJQSA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "Franklin S. Cooper Jr" <fcooper@ti.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 2/4] libgles-omap3: Add new 5.00.00.01 Graphics SDK alpha release
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: [PATCH] ti: libdce: Library for invoking the hw accelerated codec on IVA-HD.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,28 +33,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2013 08:26:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 20 Nov 2013 10:38:57 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On Tue, Nov 19, 2013 at 5:59 PM, Franklin S. Cooper Jr <fcooper@ti.com> wrote:
-> * A new Graphics SDK that support 3.12 kernel for am335x
-> * This Graphics SDK also adds initial support for AM43x
->
-> Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
-> ---
->  .../rc.pvr                                         |   28 +++++++++++++------
->  .../rc_dri.pvr                                     |   28 ++++++++++++-------
->  ...08.00.02.bb => libgles-omap3-x11_5.00.00.01.bb} |   29 +++++++++++++------
->  ...3_4.09.00.01.bb => libgles-omap3_5.00.00.01.bb} |   24 +++++++---------
->  4 files changed, 68 insertions(+), 41 deletions(-)
->  copy recipes-graphics/libgles/{libgles-omap3-x11-4.09.00.01 => libgles-omap3-5.00.00.01}/rc.pvr (87%)
->  mode change 100644 => 100755
->  copy recipes-graphics/libgles/{libgles-omap3-x11-4.09.00.01 => libgles-omap3-5.00.00.01}/rc_dri.pvr (88%)
->  mode change 100644 => 100755
->  copy recipes-graphics/libgles/{libgles-omap3_4.08.00.02.bb => libgles-omap3-x11_5.00.00.01.bb} (72%)
-X drivers are not supported - right [1] ?
+Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+---
+ recipes-ti/libdce/libdce_git.bb |   14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 recipes-ti/libdce/libdce_git.bb
 
-[1] http://processors.wiki.ti.com/index.php/RN_5_00_00_01_alpha#What_is_not_supported
+diff --git a/recipes-ti/libdce/libdce_git.bb b/recipes-ti/libdce/libdce_git.bb
+new file mode 100644
+index 0000000..fcb9984
+--- /dev/null
++++ b/recipes-ti/libdce/libdce_git.bb
+@@ -0,0 +1,14 @@
++inherit autotools pkgconfig
++
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://libdce.h;beginline=1;endline=31;md5=0a398cf815b8b5f31f552266cd453dae"
++
++PR = "r0"
++
++DEPENDS = "libdrm ti-ipc"
++
++SRC_URI = "git://git.ti.com/glsdk/libdce2.git;protocol=git"
++SRCREV = "0aa6627d59a2a7c4837a40fe67f610b3318d23c1"
++
++S = "${WORKDIR}/git"
++EXTRA_OECONF += "IPC_HEADERS=${STAGING_DIR_TARGET}/usr/include/ti/ipc/mm"
+-- 
+1.7.9.5
 
-Andreas
 
