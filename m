@@ -1,28 +1,26 @@
-Return-Path: <fcooper@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4C409E006D9
-	for <meta-ti@yoctoproject.org>; Fri, 22 Nov 2013 06:58:50 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id rAMEwnuf011718
-	for <meta-ti@yoctoproject.org>; Fri, 22 Nov 2013 08:58:49 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id rAMEwn85023610
-	for <meta-ti@yoctoproject.org>; Fri, 22 Nov 2013 08:58:49 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Fri, 22 Nov 2013 08:58:49 -0600
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id rAMEwfgZ019338;
-	Fri, 22 Nov 2013 08:58:47 -0600
-From: "Franklin S. Cooper Jr" <fcooper@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 22 Nov 2013 10:00:47 -0600
-Message-ID: <1385136047-15830-3-git-send-email-fcooper@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1385136047-15830-1-git-send-email-fcooper@ti.com>
+Return-Path: <denis@denix.org>
+Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
+	[206.46.173.9])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 234C8E006E3
+	for <meta-ti@yoctoproject.org>; Fri, 22 Nov 2013 07:02:59 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [96.231.138.104])
+	by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MWO00L1D73YQ850@vms173009.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 22 Nov 2013 09:02:40 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id A4C582004B; Fri,
+	22 Nov 2013 10:02:19 -0500 (EST)
+Date: Fri, 22 Nov 2013 10:02:19 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: "Franklin S. Cooper Jr" <fcooper@ti.com>
+Message-id: <20131122150219.GE32354@denix.org>
 References: <1385136047-15830-1-git-send-email-fcooper@ti.com>
-MIME-Version: 1.0
-Subject: [PATCH 3/3] machine config: Use Graphics SDK 05.00.00.01 by default on AM335x and AM43x
+	<1385136047-15830-2-git-send-email-fcooper@ti.com>
+MIME-version: 1.0
+In-reply-to: <1385136047-15830-2-git-send-email-fcooper@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 2/3] linux-ti-staging_3.12: Pull in commit that includes SGX DT patches
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,49 +33,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Nov 2013 14:58:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 22 Nov 2013 15:03:02 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-* The latest Graphics SDK is required for the 3.12 kernel being used by AM335x
-  and AM43x machines.
-* Set the preferred version to insure that the proper version of the graphics
-  sdk is being used.
+That's in my tree already
 
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
----
- conf/machine/include/ti33x.inc |    3 +++
- conf/machine/include/ti43x.inc |    3 +++
- 2 files changed, 6 insertions(+), 0 deletions(-)
-
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index af340d2..8cdf580 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -23,6 +23,9 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
- PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
- PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
- 
-+PREFERRED_VERSION_libgles-omap3 = "5.00.00.01"
-+PREFERRED_VERSION_omap3-sgx-modules = "5.00.00.01"
-+
- KERNEL_IMAGETYPE = "zImage"
- 
- UBOOT_ARCH = "arm"
-diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
-index d9bfd25..948fd99 100644
---- a/conf/machine/include/ti43x.inc
-+++ b/conf/machine/include/ti43x.inc
-@@ -23,6 +23,9 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
- PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
- PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
- 
-+PREFERRED_VERSION_libgles-omap3 = "5.00.00.01"
-+PREFERRED_VERSION_omap3-sgx-modules = "5.00.00.01"
-+
- KERNEL_IMAGETYPE = "zImage"
- 
- UBOOT_ARCH = "arm"
--- 
-1.7.0.4
-
+On Fri, Nov 22, 2013 at 10:00:46AM -0600, Franklin S. Cooper Jr wrote:
+> * Update the kernel git tree to use the latest commit.
+> * The latest commit pulls in necessary patches to add SGX DT entry for AM43x and
+>   AM335x.
+> * These patches are required to properly support the latest Graphics SDK.
+> 
+> Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+> ---
+>  recipes-kernel/linux/linux-ti-staging_3.12.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+> index 3abc2f4..ebdefa8 100644
+> --- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
+> +++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+> @@ -31,11 +31,11 @@ S = "${WORKDIR}/git"
+>  
+>  BRANCH = "ti-linux-3.12.y"
+>  
+> -SRCREV = "6a59302de4852678ccde5008ce531075c9b683d9"
+> +SRCREV = "95cb8e7d94bdbc6cd26b6d2ab074343a8dd81b7a"
+>  PV = "3.12"
+>  
+>  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+> -MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+> +MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
+>  PR = "${MACHINE_KERNEL_PR}"
+>  
+>  SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+> -- 
+> 1.7.0.4
+> 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+> 
 
