@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 454CCE006E7
-	for <meta-ti@yoctoproject.org>; Fri, 22 Nov 2013 11:06:20 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 59B1DE006E7
+	for <meta-ti@yoctoproject.org>; Fri, 22 Nov 2013 11:08:36 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3A04B52A0B; Fri, 22 Nov 2013 19:06:20 +0000 (UTC)
+	id 35F7A529ED; Fri, 22 Nov 2013 19:08:36 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131122190620.3A04B52A0B@arago-project.org>
-Date: Fri, 22 Nov 2013 19:06:20 +0000 (UTC)
+Message-Id: <20131122190836.35F7A529ED@arago-project.org>
+Date: Fri, 22 Nov 2013 19:08:36 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: 3.12.1, SGX DT, fixes in audio/ display, connectivity, pm, etc.
+Subject: Franklin S. Cooper Jr : ti43x.inc: Add SGX as MACHINE_FEATURES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,40 +22,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Nov 2013 19:06:28 -0000
+X-List-Received-Date: Fri, 22 Nov 2013 19:08:36 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: c7320f2271b7f19d3e97647a3727ff3f1856fe1d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c7320f2271b7f19d3e97647a3727ff3f1856fe1d
+Branch: master
+Commit: 6f1ab0fe37a4f044b04777ff0efc96b7fe0d100f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6f1ab0fe37a4f044b04777ff0efc96b7fe0d100f
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Nov 22 13:55:22 2013 -0500
+Author: Franklin S. Cooper Jr <fcooper@ti.com>
+Date:   Fri Nov 22 10:00:45 2013 -0600
 
-linux-ti-staging: 3.12.1, SGX DT, fixes in audio/display, connectivity, pm, etc.
+ti43x.inc: Add SGX as MACHINE_FEATURES
 
+* New Graphics SDK with am43x support has been added.
+
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.12.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/include/ti43x.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 3abc2f4..dd93168 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -31,8 +31,8 @@ S = "${WORKDIR}/git"
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+index 12f569e..d9bfd25 100644
+--- a/conf/machine/include/ti43x.inc
++++ b/conf/machine/include/ti43x.inc
+@@ -38,4 +38,4 @@ UBI_VOLNAME = "rootfs"
+ EXTRA_IMAGEDEPENDS += "u-boot"
  
- BRANCH = "ti-linux-3.12.y"
- 
--SRCREV = "6a59302de4852678ccde5008ce531075c9b683d9"
--PV = "3.12"
-+SRCREV = "95cb8e7d94bdbc6cd26b6d2ab074343a8dd81b7a"
-+PV = "3.12.1"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+ # List common SoC features, may need to add touchscreen for specific machines
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx"
 
 
