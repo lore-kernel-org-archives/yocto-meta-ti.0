@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 31F88E006B9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3323EE006BE
 	for <meta-ti@yoctoproject.org>; Thu, 21 Nov 2013 20:29:47 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CE10E52A79; Fri, 22 Nov 2013 04:29:46 +0000 (UTC)
+	id 9AF1B52A6A; Fri, 22 Nov 2013 04:29:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131122042946.CE10E52A79@arago-project.org>
+Message-Id: <20131122042946.9AF1B52A6A@arago-project.org>
 Date: Fri, 22 Nov 2013 04:29:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Mrinmayee Hingolikar : libgles: added OMAP5 libs for graphics acceleration
+Subject: Mrinmayee Hingolikar : u-boot-glsdk: update to latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,58 +27,52 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 8ade2a489adf4f0594db7c26839e06fd3c2f74c8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8ade2a489adf4f0594db7c26839e06fd3c2f74c8
+Commit: 5d0302db82fb9be4c164d718e6172d4ada4de551
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5d0302db82fb9be4c164d718e6172d4ada4de551
 
 Author: Mrinmayee Hingolikar <mrinmayee@ti.com>
-Date:   Thu Oct 24 11:35:08 2013 +0530
+Date:   Mon Oct 21 18:44:42 2013 +0530
 
-libgles: added OMAP5 libs for graphics acceleration
+u-boot-glsdk: update to latest fixes
 
-These libraries are not distributable in source and hence
-are available only as binary. They implement OpenGLES 1.x and
-OpenGLES 2.x accelerated using SGX 544-MP2 found in OMAP5
-class of devices.
+* Migration of u-boot code to omapzoom.org. The development tree is shared
+  between the Linux and Android teams.This enables a common u-boot development
+  platform for both the teams for better alignment.
+* Enable UART boot mode for dra7xx
+* Add VIP,VPE and Ethernet crossbar setting for dra7xx
+* Add SPL API, QSPI, and serial flash support of dra7xx
 
 Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb     |   26 ++++++++++++++++++++
- 1 files changed, 26 insertions(+), 0 deletions(-)
+ recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
-new file mode 100644
-index 0000000..8a03cd2
---- /dev/null
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
-@@ -0,0 +1,26 @@
-+DESCRIPTION = "Userspace libraries for omap5 sgx"
-+HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
-+LICENSE = "TSPA"
-+LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=d280df8e94bb2e7b9251c8526078eeb8"
-+
-+COMPATIBLE_MACHINE = "omap-a15"
-+
-+INHIBIT_PACKAGE_STRIP = "1"
-+
-+SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/OMAP5_1_09_00_10//exports/${PN}-${PV}.tar.gz;protocol=http"
-+
-+PR = "r0"
-+
-+SRC_URI[md5sum] = "3cfb875de031098a4c1eeeaf4e442367"
-+SRC_URI[sha256sum] = "20b849088c0fd3ee5dd6bad8ddf16fb2b3267aa053cf3488c762fbc72f22489a"
-+
-+S = "${WORKDIR}/${PN}-${PV}"
-+
-+do_install () {
-+    oe_runmake install DESTDIR=${D}
-+}
-+
-+FILES_${PN} += "${libdir}/gbm/"
-+
-+INSANE_SKIP_${PN} = "useless-rpaths"
-+INSANE_SKIP_${PN}-dev = "useless-rpaths"
+diff --git a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
+index d60ef44..07df497 100644
+--- a/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
++++ b/recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb
+@@ -2,15 +2,15 @@ require u-boot-ti.inc
+ 
+ DESCRIPTION = "u-boot bootloader for TI devices supported by the GLSDK product"
+ 
+-PR = "r0+gitr${SRCPV}"
++PR = "r1+gitr${SRCPV}"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-SRC_URI = "git://git.ti.com/glsdk/glsdk-u-boot.git;protocol=git;branch=${BRANCH}"
++SRC_URI = "git://git.omapzoom.org/repo/u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+-BRANCH ?= "master"
++BRANCH ?= "p-ti-u-boot-2013.04"
+ 
+-SRCREV = "81836e8cc84bd6523d9a4e187965dcd1633c4bc9"
++SRCREV = "76447484441a4b8e00840a2bde74e66dbac9e631"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
