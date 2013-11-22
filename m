@@ -1,29 +1,22 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5D38E006E6
-	for <meta-ti@yoctoproject.org>; Fri, 22 Nov 2013 11:38:49 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id rAMJcmps010059;
-	Fri, 22 Nov 2013 13:38:48 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id rAMJcld1025534;
-	Fri, 22 Nov 2013 13:38:48 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Fri, 22 Nov 2013 13:38:47 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id rAMJcl4w024664;
-	Fri, 22 Nov 2013 13:38:47 -0600
-Date: Fri, 22 Nov 2013 14:38:46 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Pow, Christopher (SWCOE)" <Christopher.Pow@honeywell.com>
-Message-ID: <20131122193846.GE690@edge>
-References: <7B8A37CE7777314D9B931CDD3BA8C83B1BA8BB34@de08ex3002.global.ds.honeywell.com>
-MIME-Version: 1.0
-In-Reply-To: <7B8A37CE7777314D9B931CDD3BA8C83B1BA8BB34@de08ex3002.global.ds.honeywell.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: unsubscribe
+Return-Path: <denis@denix.org>
+Received: from vms173007pub.verizon.net (vms173007pub.verizon.net
+	[206.46.173.7])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0D0AE006EB
+	for <meta-ti@yoctoproject.org>; Fri, 22 Nov 2013 13:36:35 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [96.231.138.104])
+	by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MWO009XRPCAHG40@vms173007.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 22 Nov 2013 15:36:16 -0600 (CST)
+Received: from elrond.denix (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 839CF20011; Fri,
+	22 Nov 2013 16:36:10 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Fri, 22 Nov 2013 16:36:08 -0500
+Message-id: <1385156168-2204-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH] omapdrm-pvr: fix the license definition
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,15 +29,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Nov 2013 19:38:50 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 22 Nov 2013 21:36:35 -0000
 
-On Fri, Nov 22, 2013 at 07:35:47PM +0000, Pow, Christopher (SWCOE) wrote:
+From: Denys Dmytriyenko <denys@ti.com>
 
-Sorry to see you go. To unsubscribe from the list, please use:
-https://lists.yoctoproject.org/listinfo/meta-ti
+From the README file:
 
+You may use, distribute and copy this software under the terms of the MIT
+license.  Details of this license can be found in the file "MIT-COPYING".
+
+Alternatively, you may use, distribute and copy this software under the terms
+of the GNU General Public License version 2.  The full GNU General Public
+License version 2 can be found in the file "GPL-COPYING".
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+index 24aadd5..a129e60 100644
+--- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
++++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+@@ -1,15 +1,17 @@
+ DESCRIPTION =  "Kernel drivers for the PowerVR SGX chipset found in the omap5 SoCs"
+ HOMEPAGE = "http://git.ti.com"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://MIT-COPYING;md5=8c2810fa6bfdc5ae5c15a0c1ade34054"
++LICENSE = "MIT | GPLv2"
++LIC_FILES_CHKSUM = "file://README;beginline=13;endline=22;md5=74506d9b8e5edbce66c2747c50fcef12"
+ 
+ inherit module
+ 
++MACHINE_KERNEL_PR_append = "a"
++PR = "${MACHINE_KERNEL_PR}"
++
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git"
+ S = "${WORKDIR}/git"
+ 
+ SRCREV = "86a4ffae3458c51f0a58e44b17b7a4fd92d2b8c6"
+-PR = "${MACHINE_KERNEL_PR}"
+ 
+ EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}"'
+ 
 -- 
-Denys
+1.8.3.2
+
 
