@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4408FE006E6
-	for <meta-ti@yoctoproject.org>; Fri, 22 Nov 2013 11:06:19 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 454CCE006E7
+	for <meta-ti@yoctoproject.org>; Fri, 22 Nov 2013 11:06:20 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 67ECA529ED; Fri, 22 Nov 2013 19:06:19 +0000 (UTC)
+	id 3A04B52A0B; Fri, 22 Nov 2013 19:06:20 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131122190619.67ECA529ED@arago-project.org>
-Date: Fri, 22 Nov 2013 19:06:19 +0000 (UTC)
+Message-Id: <20131122190620.3A04B52A0B@arago-project.org>
+Date: Fri, 22 Nov 2013 19:06:20 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: 3.12.1, SGX DT, fixes in audio/ display, connectivity, pm, etc.
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Fri, 22 Nov 2013 19:06:28 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: d6dc5d7bd137ebef4ed1786d8257f2b06ba29029
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d6dc5d7bd137ebef4ed1786d8257f2b06ba29029
+Branch: dylan
+Commit: c7320f2271b7f19d3e97647a3727ff3f1856fe1d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c7320f2271b7f19d3e97647a3727ff3f1856fe1d
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Nov 22 13:55:22 2013 -0500
