@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 29320E006AD
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2C5B7E006BE
 	for <meta-ti@yoctoproject.org>; Thu, 21 Nov 2013 19:03:48 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1BA2052A76; Fri, 22 Nov 2013 03:03:48 +0000 (UTC)
+	id 34EA252A79; Fri, 22 Nov 2013 03:03:48 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131122030348.1BA2052A76@arago-project.org>
+Message-Id: <20131122030348.34EA252A79@arago-project.org>
 Date: Fri, 22 Nov 2013 03:03:48 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : omap3-sgx-modules: add new Graphics SDK 05.00.00. 01 alpha release
+Subject: Denys Dmytriyenko : libgles-omap3: update cputype to support 3. 12 and AM43x device
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,99 +27,70 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: e1351fa79908e257baf6f22082ca23d992d537fc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e1351fa79908e257baf6f22082ca23d992d537fc
+Commit: cc4221a10045c333fe558a49b50edd62bb443b5f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cc4221a10045c333fe558a49b50edd62bb443b5f
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Nov 21 20:41:38 2013 -0500
+Date:   Thu Nov 21 21:03:16 2013 -0500
 
-omap3-sgx-modules: add new Graphics SDK 05.00.00.01 alpha release
-
-* Initial support for AM43x platform
-* 3.12 kernel support for AM335x & AM43x
+libgles-omap3: update cputype to support 3.12 and AM43x device
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../omap3-sgx-modules_5.00.00.01.bb                |   69 ++++++++++++++++++++
- 1 files changed, 69 insertions(+), 0 deletions(-)
+ recipes-graphics/libgles/libgles-omap3/cputype     |   18 +++++++++++++-----
+ .../libgles/libgles-omap3_5.00.00.01.bb            |    2 +-
+ 2 files changed, 14 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.00.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.00.00.01.bb
-new file mode 100644
-index 0000000..4a5def2
---- /dev/null
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.00.00.01.bb
-@@ -0,0 +1,69 @@
-+DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://GPL-COPYING;md5=60422928ba677faaa13d6ab5f5baaa1e"
-+
-+TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
-+require ../../recipes-ti/includes/ti-eula-unpack.inc
-+
-+SGXPV = "5_00_00_01"
-+IMGPV = "1.10.2359475"
-+
-+inherit module
-+
-+MACHINE_KERNEL_PR_append = "a"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+BINFILE_HARDFP = "Graphics_SDK_setuplinux_${SGXPV}_alpha_hardfp_minimal_demos.bin"
-+MD5SUM_HARDFP = "ae6125d7f8a313ea5c02afded893052d"
-+SHA256SUM_HARDFP = "c2782a2f85024741722b936ec9dca66b858ae8561aa71b693f11e12d8c0385e0"
-+
-+# For now we only have hardfp version
-+python __anonymous() {
-+    tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
-+    if not tunes:
-+        return
-+    pkgn = bb.data.getVar("PN", d, 1)
-+    pkgv = bb.data.getVar("PV", d, 1)
-+    if "callconvention-hard" not in tunes:
-+        bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
-+        raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+diff --git a/recipes-graphics/libgles/libgles-omap3/cputype b/recipes-graphics/libgles/libgles-omap3/cputype
+index 4448c30..35268a8 100755
+--- a/recipes-graphics/libgles/libgles-omap3/cputype
++++ b/recipes-graphics/libgles/libgles-omap3/cputype
+@@ -1,17 +1,25 @@
+ #!/bin/sh
+ 
+-machine_id() { # return the machine ID
++legacy_machine_id() { # return the machine ID
+ 	awk 'BEGIN { FS=": " } /Hardware/ \
+ 		{ gsub(" ", "_", $2); print tolower($2) } ' </proc/cpuinfo
+ }
+ 
+-if [ "$(machine_id)" = "ti8168evm" ] ; then
++machine_id() { # return the machine ID
++	cat /proc/cpuinfo | grep Hardware | awk -F" " '{ print $4 }'
 +}
 +
-+BINFILE := "${BINFILE_HARDFP}"
-+
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/gfxsdk/${SGXPV}/exports/${BINFILE}"
-+
-+SRC_URI[md5sum] := "${MD5SUM_HARDFP}"
-+SRC_URI[sha256sum] := "${SHA256SUM_HARDFP}"
-+
-+TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
-+S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
-+
-+PVRBUILD = "release"
-+export KERNELDIR = "${STAGING_KERNEL_DIR}"
-+
-+INHIBIT_PACKAGE_STRIP = "1"
-+
-+TI_PLATFORM_omap3 = "omap3630"
-+TI_PLATFORM_ti814x = "ti81xx"
-+TI_PLATFORM_ti816x = "ti81xx"
-+TI_PLATFORM_ti33x = "ti335x"
-+TI_PLATFORM_ti43x = "ti43xx"
-+
-+MODULESLOCATION_omap3 = "dc_omapfb3_linux"
-+MODULESLOCATION_ti814x = "dc_ti81xx_linux"
-+MODULESLOCATION_ti816x = "dc_ti81xx_linux"
-+MODULESLOCATION_ti33x = "dc_ti335x_linux"
-+MODULESLOCATION_ti43x = "dc_ti43xx_linux"
-+
-+MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
-+
-+do_install() {
-+    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+    cp  ${S}/pvrsrvkm.ko \
-+        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
-+        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
-+        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+}
++if [ "$(machine_id)" = "ti8168evm" -o "$(legacy_machine_id)" = "ti8168evm" ] ; then
+ 	echo TI816x
+-elif [ "$(machine_id)" = "am335xevm" ] ; then
+-    echo TI33XX
++elif [ "$(machine_id)" = "AM33XX" -o "$(legacy_machine_id)" = "am335xevm" ] ; then
++	echo TI33XX
++elif [ "$(machine_id)" = "AM43" ] ; then
++	echo TI43XX
+ else
+ 	devmem2 0x4800244c | \
+ 	grep 'Read at address' | \
+ 	sed -e 's/.*): //' | \
+-	sed -e 's/0x00005C00/OMAP3503/' -e 's/0x00001C00/OMAP3515/' -e 's/0x00004C00/OMAP3525/' -e 's/0x00000C00/OMAP3530/' -e 's/0x00005E00/OMAP3503/' -e 's/0x00001E00/OMAP3515/' -e 's/0x00004E00/OMAP3525/' -e 's/0x00000E00/OMAP3530/' -e 's/0x00000CC0/OMAP3530/'
++	sed -e 's/0x00005C00/OMAP3503/' -e 's/0x00001C00/OMAP3515/' -e 's/0x00004C00/OMAP3525/' -e 's/0x00000C00/OMAP3530/' \
++		-e 's/0x00005E00/OMAP3503/' -e 's/0x00001E00/OMAP3515/' -e 's/0x00004E00/OMAP3525/' -e 's/0x00000E00/OMAP3530/' \
++		-e 's/0x00000CC0/OMAP3530/'
+ fi
+diff --git a/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb b/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
+index be09ffa..7af67eb 100644
+--- a/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
+@@ -2,7 +2,7 @@ require libgles-omap3-no-x.inc
+ 
+ LICENSE = "TSPA"
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
 
 
