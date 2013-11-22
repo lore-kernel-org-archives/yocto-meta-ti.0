@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3323EE006BE
-	for <meta-ti@yoctoproject.org>; Thu, 21 Nov 2013 20:29:47 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD3FFE006B9
+	for <meta-ti@yoctoproject.org>; Thu, 21 Nov 2013 20:29:53 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9AF1B52A6A; Fri, 22 Nov 2013 04:29:46 +0000 (UTC)
+	id 5708F52A6A; Fri, 22 Nov 2013 04:29:53 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131122042946.9AF1B52A6A@arago-project.org>
-Date: Fri, 22 Nov 2013 04:29:46 +0000 (UTC)
+Message-Id: <20131122042953.5708F52A6A@arago-project.org>
+Date: Fri, 22 Nov 2013 04:29:53 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Mrinmayee Hingolikar : u-boot-glsdk: update to latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Nov 2013 04:29:48 -0000
+X-List-Received-Date: Fri, 22 Nov 2013 04:29:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 5d0302db82fb9be4c164d718e6172d4ada4de551
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5d0302db82fb9be4c164d718e6172d4ada4de551
+Branch: dylan
+Commit: d6b47b7cd7e80ff7c55882fd358e9af5f0fc744c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d6b47b7cd7e80ff7c55882fd358e9af5f0fc744c
 
 Author: Mrinmayee Hingolikar <mrinmayee@ti.com>
 Date:   Mon Oct 21 18:44:42 2013 +0530
