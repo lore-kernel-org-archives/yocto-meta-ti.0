@@ -1,31 +1,27 @@
-Return-Path: <10bec062@nirmauni.ac.in>
-Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
-	[209.85.214.170])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D091E00744
-	for <meta-ti@yoctoproject.org>; Sun, 24 Nov 2013 02:37:19 -0800 (PST)
-Received: by mail-ob0-f170.google.com with SMTP id wp18so3116414obc.29
-	for <meta-ti@yoctoproject.org>; Sun, 24 Nov 2013 02:37:18 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=WoXlPjyeaTVjAslUzvDF5Mf/3sp8TlK5/S4NfrUHeLs=;
-	b=OmdojqaLtH68wRCy3zKjDZTqnBD9DzlsyAb0fuw0UFXPFNpskvtO3k0YMy4Vlknlp5
-	VggF4Pzb9IA8dfk5e0/MVaftGAXuGTeYvBQv4S2x5MWOaWL04SNxFS/YbzdFCwfAx0i0
-	7UNmxHWi0hNiM3GbTCdcxiLkxs+y9wR+QQkGhPPXelLUGvOph5cKJIQegTM0MM8vuEVL
-	KZmIFIh66m9mGnaBqNfWIhKhBct8pcbF2pyNPfV+FQ6MMMckbmgmMlVlYvG+9nYkTWRb
-	oBjeXFLycufGIma8CyFMmpjYvh/pqwM17OtJKYJoRtDCI+YaseQy/rdzLF2HCDo3y34L
-	WDRg==
-X-Gm-Message-State: ALoCoQlY7WmVOyEgCs8PgHJY+q54rHQwHGU3PZViAUdrM5ZJC5KwErFQ4udX/fsVMAL5P+CRifsX
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E50E5E00748
+	for <meta-ti@yoctoproject.org>; Sun, 24 Nov 2013 04:39:45 -0800 (PST)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id CE8EEF81211; Sun, 24 Nov 2013 05:39:42 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 1C73AF8120F;
+	Sun, 24 Nov 2013 05:39:42 -0700 (MST)
+Message-ID: <5291F3A3.10907@mlbassoc.com>
+Date: Sun, 24 Nov 2013 05:40:03 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.1.1
 MIME-Version: 1.0
-X-Received: by 10.60.47.228 with SMTP id g4mr19598811oen.10.1385289438305;
-	Sun, 24 Nov 2013 02:37:18 -0800 (PST)
-Received: by 10.182.29.193 with HTTP; Sun, 24 Nov 2013 02:37:18 -0800 (PST)
-Date: Sun, 24 Nov 2013 16:07:18 +0530
-Message-ID: <CA+Oc-6bFBx24LrgWfdxUhxtB+H6GsakiSKyb6Zs-7KmY_WSQOQ@mail.gmail.com>
-From: MITUL VEKARIYA <10bec062@nirmauni.ac.in>
 To: meta-ti@yoctoproject.org
-Subject: Porting Arago to custom hardware
+References: <CA+Oc-6bFBx24LrgWfdxUhxtB+H6GsakiSKyb6Zs-7KmY_WSQOQ@mail.gmail.com>
+In-Reply-To: <CA+Oc-6bFBx24LrgWfdxUhxtB+H6GsakiSKyb6Zs-7KmY_WSQOQ@mail.gmail.com>
+Subject: Re: Porting Arago to custom hardware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,20 +34,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Nov 2013 10:37:21 -0000
-Content-Type: multipart/alternative; boundary=001a11c2fcf6e1b0ae04ebe9d48f
+X-List-Received-Date: Sun, 24 Nov 2013 12:39:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---001a11c2fcf6e1b0ae04ebe9d48f
-Content-Type: text/plain; charset=ISO-8859-1
+On 2013-11-24 03:37, MITUL VEKARIYA wrote:
+> Hi everybody
+> I want to build custom hardware for my application.
+> Can you provide steps - how to port Arago for other microprocessor?
 
-Hi everybody
-I want to build custom hardware for my application.
-Can you provide steps - how to port Arago for other microprocessor?
-Thanks
+What other microprocessor?
 
---001a11c2fcf6e1b0ae04ebe9d48f
-Content-Type: text/html; charset=ISO-8859-1
+Since Arago is [now] based on Yocto, probably the best starting
+point would be the Yocto documentation.
+   https://www.yoctoproject.org/documentation
 
-<div dir="ltr">Hi everybody<div>I want to build custom hardware for my application.</div><div>Can you provide steps - how to port Arago for other microprocessor?</div><div>Thanks</div></div>
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
---001a11c2fcf6e1b0ae04ebe9d48f--
