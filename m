@@ -1,28 +1,31 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 70272E00744
-	for <meta-ti@yoctoproject.org>; Sat, 23 Nov 2013 20:12:48 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id rAO4Cl49023848
-	for <meta-ti@yoctoproject.org>; Sat, 23 Nov 2013 22:12:47 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id rAO4ClUx013010
-	for <meta-ti@yoctoproject.org>; Sat, 23 Nov 2013 22:12:47 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Sat, 23 Nov 2013 22:12:47 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	rAO4Cler002777	for <meta-ti@yoctoproject.org>; Sat, 23 Nov 2013 22:12:47
-	-0600
-Date: Sat, 23 Nov 2013 23:01:35 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1005075526.983.1385265695870.JavaMail.jenkins@puget>
+Return-Path: <10bec062@nirmauni.ac.in>
+Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
+	[209.85.214.170])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D091E00744
+	for <meta-ti@yoctoproject.org>; Sun, 24 Nov 2013 02:37:19 -0800 (PST)
+Received: by mail-ob0-f170.google.com with SMTP id wp18so3116414obc.29
+	for <meta-ti@yoctoproject.org>; Sun, 24 Nov 2013 02:37:18 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=WoXlPjyeaTVjAslUzvDF5Mf/3sp8TlK5/S4NfrUHeLs=;
+	b=OmdojqaLtH68wRCy3zKjDZTqnBD9DzlsyAb0fuw0UFXPFNpskvtO3k0YMy4Vlknlp5
+	VggF4Pzb9IA8dfk5e0/MVaftGAXuGTeYvBQv4S2x5MWOaWL04SNxFS/YbzdFCwfAx0i0
+	7UNmxHWi0hNiM3GbTCdcxiLkxs+y9wR+QQkGhPPXelLUGvOph5cKJIQegTM0MM8vuEVL
+	KZmIFIh66m9mGnaBqNfWIhKhBct8pcbF2pyNPfV+FQ6MMMckbmgmMlVlYvG+9nYkTWRb
+	oBjeXFLycufGIma8CyFMmpjYvh/pqwM17OtJKYJoRtDCI+YaseQy/rdzLF2HCDo3y34L
+	WDRg==
+X-Gm-Message-State: ALoCoQlY7WmVOyEgCs8PgHJY+q54rHQwHGU3PZViAUdrM5ZJC5KwErFQ4udX/fsVMAL5P+CRifsX
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-11-23_21-24-35
+X-Received: by 10.60.47.228 with SMTP id g4mr19598811oen.10.1385289438305;
+	Sun, 24 Nov 2013 02:37:18 -0800 (PST)
+Received: by 10.182.29.193 with HTTP; Sun, 24 Nov 2013 02:37:18 -0800 (PST)
+Date: Sun, 24 Nov 2013 16:07:18 +0530
+Message-ID: <CA+Oc-6bFBx24LrgWfdxUhxtB+H6GsakiSKyb6Zs-7KmY_WSQOQ@mail.gmail.com>
+From: MITUL VEKARIYA <10bec062@nirmauni.ac.in>
+To: meta-ti@yoctoproject.org
+Subject: Porting Arago to custom hardware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,168 +38,20 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Nov 2013 04:12:50 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_982_9898335.1385265695813"
+X-List-Received-Date: Sun, 24 Nov 2013 10:37:21 -0000
+Content-Type: multipart/alternative; boundary=001a11c2fcf6e1b0ae04ebe9d48f
 
-------=_Part_982_9898335.1385265695813
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a11c2fcf6e1b0ae04ebe9d48f
+Content-Type: text/plain; charset=ISO-8859-1
 
-<html>
-<head>
-<title>
-Status for 11/23/13
-</title>
-</head>
-<body>
+Hi everybody
+I want to build custom hardware for my application.
+Can you provide steps - how to port Arago for other microprocessor?
+Thanks
 
-<h2>Status for 11/23/13</h2>
+--001a11c2fcf6e1b0ae04ebe9d48f
+Content-Type: text/html; charset=ISO-8859-1
 
-<h2>BUILD_ID: build-2013-11-23_21-25-36</h2>
+<div dir="ltr">Hi everybody<div>I want to build custom hardware for my application.</div><div>Can you provide steps - how to port Arago for other microprocessor?</div><div>Thanks</div></div>
 
-<h2>Clean Build: true</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.10"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="true"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
-
-
-------=_Part_982_9898335.1385265695813--
+--001a11c2fcf6e1b0ae04ebe9d48f--
