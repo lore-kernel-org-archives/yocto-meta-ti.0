@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54726E006AD
-	for <meta-ti@yoctoproject.org>; Mon, 25 Nov 2013 06:46:39 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A8BA1E0074F
+	for <meta-ti@yoctoproject.org>; Mon, 25 Nov 2013 06:46:34 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D158352998; Mon, 25 Nov 2013 14:46:38 +0000 (UTC)
+	id E238252990; Mon, 25 Nov 2013 14:46:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131125144638.D158352998@arago-project.org>
-Date: Mon, 25 Nov 2013 14:46:38 +0000 (UTC)
+Message-Id: <20131125144633.E238252990@arago-project.org>
+Date: Mon, 25 Nov 2013 14:46:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : omapdrm-pvr: fix the license definition
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Nov 2013 14:46:40 -0000
+X-List-Received-Date: Mon, 25 Nov 2013 14:46:41 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: 7923a087619503fe6004b7c0a6ce85c4486cd2ae
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7923a087619503fe6004b7c0a6ce85c4486cd2ae
+Branch: master
+Commit: fa822379adc9d912b2ac6f8cb94c2b41f53299d0
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fa822379adc9d912b2ac6f8cb94c2b41f53299d0
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Nov 22 16:32:52 2013 -0500
