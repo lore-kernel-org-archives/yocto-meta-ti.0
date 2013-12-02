@@ -1,28 +1,21 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A08BFE0077B
-	for <meta-ti@yoctoproject.org>; Sun,  1 Dec 2013 18:15:01 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id rB22F0UJ018880
-	for <meta-ti@yoctoproject.org>; Sun, 1 Dec 2013 20:15:00 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id rB22F0E9022522
-	for <meta-ti@yoctoproject.org>; Sun, 1 Dec 2013 20:15:00 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Sun, 1 Dec 2013 20:14:59 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	rB22Expu020050	for <meta-ti@yoctoproject.org>;
-	Sun, 1 Dec 2013 20:14:59 -0600
-Date: Sun, 1 Dec 2013 21:03:35 -0500
-From: Denys Dmytriyenko <denys@ti.com>
+Return-Path: <Tudor.Florea@enea.com>
+Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
+	by yocto-www.yoctoproject.org (Postfix) with SMTP id 3B980E007B6
+	for <meta-ti@yoctoproject.org>; Mon,  2 Dec 2013 06:33:13 -0800 (PST)
+Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
+	(172.21.1.209) with Microsoft SMTP Server id 14.3.158.1; Mon, 2 Dec 2013
+	15:33:07 +0100
+Received: by sestofb10.enea.se (Postfix, from userid 4200)	id ED49F28508B;
+	Mon,  2 Dec 2013 15:33:07 +0100 (CET)
+From: Tudor Florea <tudor.florea@enea.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1172341732.1019.1385949815933.JavaMail.jenkins@puget>
+Date: Mon, 2 Dec 2013 15:33:06 +0100
+Message-ID: <1385994786-41789-1-git-send-email-tudor.florea@enea.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-12-01_21-01-44
+Received-SPF: None (SESTOEX03.enea.se: tudor.florea@enea.com does not
+	designate permitted sender hosts)
+Subject: [PATCH] Do not use fixed MAC address in dts file
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +28,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Dec 2013 02:15:06 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_1018_447400730.1385949815785"
+X-List-Received-Date: Mon, 02 Dec 2013 14:33:16 -0000
+Content-Type: text/plain
 
-------=_Part_1018_447400730.1385949815785
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-
-<html>
-<head>
-<title>
-Status for 12/01/13
-</title>
-</head>
-<body>
-
-<h2>Status for 12/01/13</h2>
-
-<h2>BUILD_ID: build-2013-12-01_21-02-52</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.10"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+Do not use fixed MAC address in dts file to avoid duplicate MAC
+address in the same LAN segment
 
 
-------=_Part_1018_447400730.1385949815785--
+Signed-off-by: Tudor Florea <tudor.florea@enea.com>
+---
+ .../avoid_duplicate_mac_addr.patch                 |   30 ++++++++++++++++++++
+ recipes-kernel/linux/linux-keystone_3.8.4.bb       |    1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 recipes-kernel/linux/linux-keystone-3.8.4/avoid_duplicate_mac_addr.patch
+
+diff --git a/recipes-kernel/linux/linux-keystone-3.8.4/avoid_duplicate_mac_addr.patch b/recipes-kernel/linux/linux-keystone-3.8.4/avoid_duplicate_mac_addr.patch
+new file mode 100644
+index 0000000..d29b76c
+--- /dev/null
++++ b/recipes-kernel/linux/linux-keystone-3.8.4/avoid_duplicate_mac_addr.patch
+@@ -0,0 +1,30 @@
++diff --git a/arch/arm/boot/dts/k2hk-evm.dts b/arch/arm/boot/dts/k2hk-evm.dts
++index 50e7fe6..ae46287 100644
++--- a/arch/arm/boot/dts/k2hk-evm.dts
+++++ b/arch/arm/boot/dts/k2hk-evm.dts
++@@ -2462,7 +2462,7 @@
++ 					rx-channel = "netrx1";
++ 					rx-queue-depth = <128 128 0 0>;
++ 					rx-buffer-size = <1500 4096 0 0>;
++					efuse-mac = <0>;
++-					local-mac-address = [02 18 31 7e 3e 6f];
+++					/*local-mac-address = [02 18 31 7e 3e 6f]; */
++ 				};
++ 			};
++ 
++@@ -2721,13 +2721,13 @@
++ 					rx-channel = "xgerx0";
++ 					rx-queue-depth = <128 0 0 0>;
++ 					rx-buffer-size = <1500 0 0 0>;
++-					local-mac-address = [02 18 31 7e 3e 5e]; /*+++FIXME*/
+++					/* local-mac-address = [02 18 31 7e 3e 5e]; */
++ 				};
++ 				interface-1 {
++ 					rx-channel = "xgerx1";
++ 					rx-queue-depth = <128 128 0 0>;
++ 					rx-buffer-size = <1500 4096 0 0>;
++-					local-mac-address = [02 18 31 7e 3e 5f]; /*+++FIXME*/
+++					/* local-mac-address = [02 18 31 7e 3e 5f]; */
++ 				};
++ 			};
++ 
+diff --git a/recipes-kernel/linux/linux-keystone_3.8.4.bb b/recipes-kernel/linux/linux-keystone_3.8.4.bb
+index 709ef8f..17c3b1b 100644
+--- a/recipes-kernel/linux/linux-keystone_3.8.4.bb
++++ b/recipes-kernel/linux/linux-keystone_3.8.4.bb
+@@ -26,4 +26,5 @@ PR = "${MACHINE_KERNEL_PR}"
+ SRC_URI = "git://arago-project.org/git/projects/linux-keystone.git;protocol=git;branch=${BRANCH}\
+            file://defconfig\
+            file://libtraceevent-Remove-hard-coded-include-to-usr-local-include-in-Makefile.patch\
++           file://avoid_duplicate_mac_addr.patch\
+           "
+-- 
+1.7.10.4
+
+
