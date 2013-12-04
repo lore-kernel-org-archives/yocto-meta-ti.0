@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4EDB8E00783
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 501F9E00784
 	for <meta-ti@yoctoproject.org>; Wed,  4 Dec 2013 12:04:30 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3A0F252AB5; Wed,  4 Dec 2013 20:04:29 +0000 (UTC)
+	id 3CF1652AB4; Wed,  4 Dec 2013 20:04:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131204200429.3A0F252AB5@arago-project.org>
+Message-Id: <20131204200429.3CF1652AB4@arago-project.org>
 Date: Wed,  4 Dec 2013 20:04:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : libgles-omap3, omap3-sgx-modules: swap around DEFAULT_PREFERENCE setting
@@ -26,9 +26,9 @@ X-List-Received-Date: Wed, 04 Dec 2013 20:04:33 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: 67499500f22740f18aaa668384fefa296c9ab736
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=67499500f22740f18aaa668384fefa296c9ab736
+Branch: master
+Commit: e95731b49d36bc055c141fde1f66c13c2938e23d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e95731b49d36bc055c141fde1f66c13c2938e23d
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Dec  2 16:12:19 2013 -0500
