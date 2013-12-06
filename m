@@ -1,28 +1,28 @@
 Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B4976E00798
-	for <meta-ti@yoctoproject.org>; Wed,  4 Dec 2013 18:15:21 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id rB52FKsl016840
-	for <meta-ti@yoctoproject.org>; Wed, 4 Dec 2013 20:15:20 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id rB52FKqp020096
-	for <meta-ti@yoctoproject.org>; Wed, 4 Dec 2013 20:15:20 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 4 Dec 2013 20:15:19 -0600
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60502E0079E
+	for <meta-ti@yoctoproject.org>; Thu,  5 Dec 2013 20:00:40 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id rB640dLH026560
+	for <meta-ti@yoctoproject.org>; Thu, 5 Dec 2013 22:00:39 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id rB640cSn003334
+	for <meta-ti@yoctoproject.org>; Thu, 5 Dec 2013 22:00:39 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 5 Dec 2013 22:00:38 -0600
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	rB52FJJc003765	for <meta-ti@yoctoproject.org>;
-	Wed, 4 Dec 2013 20:15:19 -0600
-Date: Wed, 4 Dec 2013 21:03:51 -0500
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	rB640cKd023676	for <meta-ti@yoctoproject.org>;
+	Thu, 5 Dec 2013 22:00:38 -0600
+Date: Thu, 5 Dec 2013 22:49:08 -0500
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <2096745150.1033.1386209031144.JavaMail.jenkins@puget>
+Message-ID: <250140848.1037.1386301748371.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2013-12-04_21-01-44
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-12-05_21-01-44
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,25 +35,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Dec 2013 02:15:24 -0000
+X-List-Received-Date: Fri, 06 Dec 2013 04:00:45 -0000
 Content-Type: multipart/mixed;
-	boundary="----=_Part_1032_1072141640.1386209031143"
+	boundary="----=_Part_1036_43074441.1386301748370"
 
-------=_Part_1032_1072141640.1386209031143
+------=_Part_1036_43074441.1386301748370
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 12/04/13
+Status for 12/05/13
 </title>
 </head>
 <body>
 
-<h2>Status for 12/04/13</h2>
+<h2>Status for 12/05/13</h2>
 
-<h2>BUILD_ID: build-2013-12-04_21-02-51</h2>
+<h2>BUILD_ID: build-2013-12-05_21-02-51</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -114,8 +114,8 @@ Status for 12/04/13
     </tr>
     <tr>
         <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>omap5-evm</td>
@@ -200,4 +200,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_1032_1072141640.1386209031143--
+------=_Part_1036_43074441.1386301748370--
