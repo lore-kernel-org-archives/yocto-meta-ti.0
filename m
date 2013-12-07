@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5229CE00777
-	for <meta-ti@yoctoproject.org>; Sat,  7 Dec 2013 13:41:24 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53637E007C8
+	for <meta-ti@yoctoproject.org>; Sat,  7 Dec 2013 13:41:27 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 26F9B5299E; Sat,  7 Dec 2013 21:41:23 +0000 (UTC)
+	id 8B09A52A65; Sat,  7 Dec 2013 21:41:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131207214123.26F9B5299E@arago-project.org>
-Date: Sat,  7 Dec 2013 21:41:23 +0000 (UTC)
+Message-Id: <20131207214127.8B09A52A65@arago-project.org>
+Date: Sat,  7 Dec 2013 21:41:27 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: update to 3.12. 2 plus fixes in connectivity, pm, rpmsg etc.
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Sat, 07 Dec 2013 21:41:31 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 24e01a72680009bb5ec13834198f154b1da5d5c8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=24e01a72680009bb5ec13834198f154b1da5d5c8
+Branch: dylan
+Commit: 802a01fd247e8ae892ddfa133eb8258102205f4d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=802a01fd247e8ae892ddfa133eb8258102205f4d
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Dec  4 15:06:07 2013 -0500
