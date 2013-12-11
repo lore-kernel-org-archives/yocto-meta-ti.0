@@ -1,24 +1,24 @@
 Return-Path: <denis@denix.org>
 Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
 	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7AEEEE007D8
-	for <meta-ti@yoctoproject.org>; Wed, 11 Dec 2013 10:35:33 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9706DE007D9
+	for <meta-ti@yoctoproject.org>; Wed, 11 Dec 2013 10:35:34 -0800 (PST)
 Received: from gandalf.denix.org ([unknown] [96.231.138.104])
 	by vms173017.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MXN00CULNMTYRC0@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 11 Dec 2013 12:35:18 -0600 (CST)
+	2009)) with ESMTPA id <0MXN00FNMNMU0PB0@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 11 Dec 2013 12:35:19 -0600 (CST)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 312352016B; Wed,
+	by gandalf.denix.org (Postfix) with ESMTP id E234C20264; Wed,
 	11 Dec 2013 13:35:17 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 11 Dec 2013 13:35:07 -0500
-Message-id: <1386786908-6652-3-git-send-email-denis@denix.org>
+Date: Wed, 11 Dec 2013 13:35:08 -0500
+Message-id: <1386786908-6652-4-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.8.3.2
 In-reply-to: <1386786908-6652-1-git-send-email-denis@denix.org>
 References: <1386786908-6652-1-git-send-email-denis@denix.org>
-Subject: [PATCH 3/4] linux-ti-staging: update to 3.12.4 with more fixes for release
+Subject: [PATCH 4/4] u-boot-ti-staging: update with more fixes for release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,33 +37,31 @@ From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging_3.12.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 8965941..129d67a 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -14,6 +14,7 @@ RDEPENDS_kernel-base += "kernel-devicetree"
- # Add a run-time dependency for the PM firmware to be installed
- # on the target file system.
- RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
-+RDEPENDS_kernel-base_append_ti43x = " am33x-cm3 am33x-cm3-initscript"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+index ab6b038..80688f4 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+@@ -5,14 +5,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
  
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
-@@ -31,8 +32,9 @@ S = "${WORKDIR}/git"
+ PV = "2013.10"
+-PR = "r0+gitr${SRCPV}"
++PR = "r1+gitr${SRCPV}"
  
- BRANCH = "ti-linux-3.12.y"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--SRCREV = "c077af8403a538e129164081cbe7527f22bb56b6"
--PV = "3.12.2"
+ BRANCH ?= "ti-u-boot-2013.10"
+ 
+-# Corresponds to 2013.10
+-SRCREV = "183acb700378a8cfc5d50a01a65de93fb2c24586"
 +# Corresponds to ti2013.12.00 release
-+SRCREV = "3b9c905e7ddbdf94ddaee40c5b8e9745a72afc6b"
-+PV = "3.12.4"
++SRCREV = "4c677486ec4897c90272aac77f8156c15ca27ce2"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 -- 
 1.8.3.2
 
