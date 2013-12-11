@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BE421E007DA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BF724E007DB
 	for <meta-ti@yoctoproject.org>; Wed, 11 Dec 2013 15:49:46 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 662EA529BF; Wed, 11 Dec 2013 23:49:45 +0000 (UTC)
+	id 91812529C3; Wed, 11 Dec 2013 23:49:45 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131211234945.662EA529BF@arago-project.org>
+Message-Id: <20131211234945.91812529C3@arago-project.org>
 Date: Wed, 11 Dec 2013 23:49:45 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am437x-evm.conf: update UBI values specific to AM437x NAND
+Subject: Denys Dmytriyenko : am33x-cm3: update to v05.00.00.01 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,54 +27,40 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 5cde1e9e094b72e88a007bb0b1b53d627fe33903
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5cde1e9e094b72e88a007bb0b1b53d627fe33903
+Commit: ea8dc988e3595fa408e64864b4fac84127680b1c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ea8dc988e3595fa408e64864b4fac84127680b1c
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Dec 11 13:18:50 2013 -0500
+Date:   Wed Dec 11 13:28:23 2013 -0500
 
-am437x-evm.conf: update UBI values specific to AM437x NAND
+am33x-cm3: update to v05.00.00.01 version
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am437x-evm.conf |   22 +++++++++++-----------
- 1 files changed, 11 insertions(+), 11 deletions(-)
+ recipes-bsp/ti/am33x-cm3_git.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
-index 901bfe8..266f1fd 100644
---- a/conf/machine/am437x-evm.conf
-+++ b/conf/machine/am437x-evm.conf
-@@ -18,18 +18,18 @@ SERIAL_CONSOLE = "115200 ttyO0"
- # details about this board please see
- # http://processors.wiki.ti.com/index.php/UBIFS_Support
+diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
+index cfde2cf..260db16 100644
+--- a/recipes-bsp/ti/am33x-cm3_git.bb
++++ b/recipes-bsp/ti/am33x-cm3_git.bb
+@@ -3,11 +3,11 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
+ LICENSE = "TI-BSD"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
  
--# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
-+# do ubiattach /dev/ubi_ctrl -m 11 -O 4096
- # From dmesg:
--# UBI: smallest flash I/O unit:    2048
--# UBI: logical eraseblock size:    126976 bytes
-+# UBI: smallest flash I/O unit:    4096
-+# UBI: logical eraseblock size:    253952 bytes
- # from ubiattach stdout:
--# UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
-+# UBI device number 0, total 994 LEBs
-+MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 994"
+-PV = "05.00.00.00"
+-PR = "r1"
++PV = "05.00.00.01"
++PR = "r0"
  
--# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
-+# do ubiattach /dev/ubi_ctrl -m 11 -O 4096
- # from dmesg:
--# UBI: smallest flash I/O unit:    2048
--# UBI: physical eraseblock size:   131072 bytes (128 KiB)
--# UBI: sub-page size:              512
--# UBI: VID header offset:          2048 (aligned 2048)
--UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
-+# UBI: smallest flash I/O unit:    4096
-+# UBI: physical eraseblock size:   262144 bytes (256 KiB)
-+# UBI: sub-page size:              4096
-+# UBI: VID header offset:          4096 (aligned 4096)
-+UBINIZE_ARGS = "-m 4096 -p 256KiB -s 4096 -O 4096"
+-# SRCREV corresponds to tag v05.00.00.00
+-SRCREV = "1628306779c05ee45f09d1d3131e722ddd3a5e2e"
++# SRCREV corresponds to tag v05.00.00.01
++SRCREV = "40cb75b9dd9ba15c6de1c15cbb7cce8f1a6588b8"
+ BRANCH ?= "master"
+ 
+ INITSCRIPT_NAME = "am335x-pm-firmware-load"
 
 
