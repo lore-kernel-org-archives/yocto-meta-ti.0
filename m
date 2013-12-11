@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD06BE007D9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BE421E007DA
 	for <meta-ti@yoctoproject.org>; Wed, 11 Dec 2013 15:49:46 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2A68052A83; Wed, 11 Dec 2013 23:49:46 +0000 (UTC)
+	id 662EA529BF; Wed, 11 Dec 2013 23:49:45 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131211234946.2A68052A83@arago-project.org>
-Date: Wed, 11 Dec 2013 23:49:46 +0000 (UTC)
+Message-Id: <20131211234945.662EA529BF@arago-project.org>
+Date: Wed, 11 Dec 2013 23:49:45 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : am437x-evm.conf: update UBI values specific to AM437x NAND
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Wed, 11 Dec 2013 23:49:51 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: 7d91b3d793ce6a96d04748c473d41cae948e2292
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7d91b3d793ce6a96d04748c473d41cae948e2292
+Branch: master
+Commit: 5cde1e9e094b72e88a007bb0b1b53d627fe33903
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5cde1e9e094b72e88a007bb0b1b53d627fe33903
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Dec 11 13:18:50 2013 -0500
