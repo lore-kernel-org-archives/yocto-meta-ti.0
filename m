@@ -1,24 +1,24 @@
 Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9706DE007D9
-	for <meta-ti@yoctoproject.org>; Wed, 11 Dec 2013 10:35:34 -0800 (PST)
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60875E007DC
+	for <meta-ti@yoctoproject.org>; Wed, 11 Dec 2013 10:35:36 -0800 (PST)
 Received: from gandalf.denix.org ([unknown] [96.231.138.104])
-	by vms173017.mailsrvcs.net
+	by vms173023.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MXN00FNMNMU0PB0@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 11 Dec 2013 12:35:19 -0600 (CST)
+	2009)) with ESMTPA id <0MXN005SENMSB8OT@vms173023.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 11 Dec 2013 12:35:17 -0600 (CST)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id E234C20264; Wed,
-	11 Dec 2013 13:35:17 -0500 (EST)
+	by gandalf.denix.org (Postfix) with ESMTP id 6CAF820264; Wed,
+	11 Dec 2013 13:35:16 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 11 Dec 2013 13:35:08 -0500
-Message-id: <1386786908-6652-4-git-send-email-denis@denix.org>
+Date: Wed, 11 Dec 2013 13:35:06 -0500
+Message-id: <1386786908-6652-2-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.8.3.2
 In-reply-to: <1386786908-6652-1-git-send-email-denis@denix.org>
 References: <1386786908-6652-1-git-send-email-denis@denix.org>
-Subject: [PATCH 4/4] u-boot-ti-staging: update with more fixes for release
+Subject: [PATCH 2/4] am33x-cm3: update to v05.00.00.01 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,37 +31,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Dec 2013 18:35:34 -0000
+X-List-Received-Date: Wed, 11 Dec 2013 18:35:39 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/ti/am33x-cm3_git.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-index ab6b038..80688f4 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-@@ -5,14 +5,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
+index cfde2cf..260db16 100644
+--- a/recipes-bsp/ti/am33x-cm3_git.bb
++++ b/recipes-bsp/ti/am33x-cm3_git.bb
+@@ -3,11 +3,11 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
+ LICENSE = "TI-BSD"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
  
- PV = "2013.10"
--PR = "r0+gitr${SRCPV}"
-+PR = "r1+gitr${SRCPV}"
+-PV = "05.00.00.00"
+-PR = "r1"
++PV = "05.00.00.01"
++PR = "r0"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+-# SRCREV corresponds to tag v05.00.00.00
+-SRCREV = "1628306779c05ee45f09d1d3131e722ddd3a5e2e"
++# SRCREV corresponds to tag v05.00.00.01
++SRCREV = "40cb75b9dd9ba15c6de1c15cbb7cce8f1a6588b8"
+ BRANCH ?= "master"
  
- BRANCH ?= "ti-u-boot-2013.10"
- 
--# Corresponds to 2013.10
--SRCREV = "183acb700378a8cfc5d50a01a65de93fb2c24586"
-+# Corresponds to ti2013.12.00 release
-+SRCREV = "4c677486ec4897c90272aac77f8156c15ca27ce2"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+ INITSCRIPT_NAME = "am335x-pm-firmware-load"
 -- 
 1.8.3.2
 
