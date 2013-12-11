@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA9D9E007D5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BBD6BE007D7
 	for <meta-ti@yoctoproject.org>; Wed, 11 Dec 2013 15:49:46 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9B103529CB; Wed, 11 Dec 2013 23:49:45 +0000 (UTC)
+	id 98F1A5299C; Wed, 11 Dec 2013 23:49:45 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131211234945.9B103529CB@arago-project.org>
+Message-Id: <20131211234945.98F1A5299C@arago-project.org>
 Date: Wed, 11 Dec 2013 23:49:45 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 3.12. 4 with more fixes for release
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with more fixes for release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,44 +27,42 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: e705228ff3986282b5851f7fd7b96672c4c22876
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e705228ff3986282b5851f7fd7b96672c4c22876
+Commit: e22a920b73f387330a44626c2bee373f89da80c9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e22a920b73f387330a44626c2bee373f89da80c9
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Dec  9 13:37:16 2013 -0500
+Date:   Wed Dec 11 13:08:48 2013 -0500
 
-linux-ti-staging: update to 3.12.4 with more fixes for release
+u-boot-ti-staging: update with more fixes for release
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.12.bb |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 8965941..129d67a 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -14,6 +14,7 @@ RDEPENDS_kernel-base += "kernel-devicetree"
- # Add a run-time dependency for the PM firmware to be installed
- # on the target file system.
- RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
-+RDEPENDS_kernel-base_append_ti43x = " am33x-cm3 am33x-cm3-initscript"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+index ab6b038..80688f4 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+@@ -5,14 +5,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
  
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
-@@ -31,8 +32,9 @@ S = "${WORKDIR}/git"
+ PV = "2013.10"
+-PR = "r0+gitr${SRCPV}"
++PR = "r1+gitr${SRCPV}"
  
- BRANCH = "ti-linux-3.12.y"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--SRCREV = "c077af8403a538e129164081cbe7527f22bb56b6"
--PV = "3.12.2"
+ BRANCH ?= "ti-u-boot-2013.10"
+ 
+-# Corresponds to 2013.10
+-SRCREV = "183acb700378a8cfc5d50a01a65de93fb2c24586"
 +# Corresponds to ti2013.12.00 release
-+SRCREV = "3b9c905e7ddbdf94ddaee40c5b8e9745a72afc6b"
-+PV = "3.12.4"
++SRCREV = "4c677486ec4897c90272aac77f8156c15ca27ce2"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
