@@ -1,22 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 66481E007DA
-	for <meta-ti@yoctoproject.org>; Wed, 11 Dec 2013 10:35:41 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [96.231.138.104])
-	by vms173025.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MXN00JD2NMSBK10@vms173025.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 11 Dec 2013 12:35:16 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id EC1DD2016B; Wed,
-	11 Dec 2013 13:35:15 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA9D9E007D5
+	for <meta-ti@yoctoproject.org>; Wed, 11 Dec 2013 15:49:46 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 9B103529CB; Wed, 11 Dec 2013 23:49:45 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Wed, 11 Dec 2013 13:35:05 -0500
-Message-id: <1386786908-6652-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH 1/4] am437x-evm.conf: update UBI values specific to AM437x NAND
+Message-Id: <20131211234945.9B103529CB@arago-project.org>
+Date: Wed, 11 Dec 2013 23:49:45 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 3.12. 4 with more fixes for release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,50 +22,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Dec 2013 18:35:42 -0000
+X-List-Received-Date: Wed, 11 Dec 2013 23:49:50 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: e705228ff3986282b5851f7fd7b96672c4c22876
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e705228ff3986282b5851f7fd7b96672c4c22876
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Dec  9 13:37:16 2013 -0500
+
+linux-ti-staging: update to 3.12.4 with more fixes for release
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- conf/machine/am437x-evm.conf | 22 +++++++++++-----------
- 1 file changed, 11 insertions(+), 11 deletions(-)
 
-diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
-index 901bfe8..266f1fd 100644
---- a/conf/machine/am437x-evm.conf
-+++ b/conf/machine/am437x-evm.conf
-@@ -18,18 +18,18 @@ SERIAL_CONSOLE = "115200 ttyO0"
- # details about this board please see
- # http://processors.wiki.ti.com/index.php/UBIFS_Support
+---
+
+ recipes-kernel/linux/linux-ti-staging_3.12.bb |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index 8965941..129d67a 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -14,6 +14,7 @@ RDEPENDS_kernel-base += "kernel-devicetree"
+ # Add a run-time dependency for the PM firmware to be installed
+ # on the target file system.
+ RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
++RDEPENDS_kernel-base_append_ti43x = " am33x-cm3 am33x-cm3-initscript"
  
--# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
-+# do ubiattach /dev/ubi_ctrl -m 11 -O 4096
- # From dmesg:
--# UBI: smallest flash I/O unit:    2048
--# UBI: logical eraseblock size:    126976 bytes
-+# UBI: smallest flash I/O unit:    4096
-+# UBI: logical eraseblock size:    253952 bytes
- # from ubiattach stdout:
--# UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
-+# UBI device number 0, total 994 LEBs
-+MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 994"
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+@@ -31,8 +32,9 @@ S = "${WORKDIR}/git"
  
--# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
-+# do ubiattach /dev/ubi_ctrl -m 11 -O 4096
- # from dmesg:
--# UBI: smallest flash I/O unit:    2048
--# UBI: physical eraseblock size:   131072 bytes (128 KiB)
--# UBI: sub-page size:              512
--# UBI: VID header offset:          2048 (aligned 2048)
--UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
-+# UBI: smallest flash I/O unit:    4096
-+# UBI: physical eraseblock size:   262144 bytes (256 KiB)
-+# UBI: sub-page size:              4096
-+# UBI: VID header offset:          4096 (aligned 4096)
-+UBINIZE_ARGS = "-m 4096 -p 256KiB -s 4096 -O 4096"
--- 
-1.8.3.2
+ BRANCH = "ti-linux-3.12.y"
+ 
+-SRCREV = "c077af8403a538e129164081cbe7527f22bb56b6"
+-PV = "3.12.2"
++# Corresponds to ti2013.12.00 release
++SRCREV = "3b9c905e7ddbdf94ddaee40c5b8e9745a72afc6b"
++PV = "3.12.4"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
 
 
