@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E57CEE007FD
-	for <meta-ti@yoctoproject.org>; Fri, 13 Dec 2013 23:42:01 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D9B95E007FD
+	for <meta-ti@yoctoproject.org>; Fri, 13 Dec 2013 23:42:08 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9D37E52A16; Sat, 14 Dec 2013 07:42:00 +0000 (UTC)
+	id A260F52A16; Sat, 14 Dec 2013 07:42:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131214074200.9D37E52A16@arago-project.org>
-Date: Sat, 14 Dec 2013 07:42:00 +0000 (UTC)
+Message-Id: <20131214074208.A260F52A16@arago-project.org>
+Date: Sat, 14 Dec 2013 07:42:08 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Chase Maupin : am33x-cm3: Add support for ti43x devices
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Dec 2013 07:42:04 -0000
+X-List-Received-Date: Sat, 14 Dec 2013 07:42:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: be7a5b8c579417ae03598c8415fa2fc573a7cd9a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=be7a5b8c579417ae03598c8415fa2fc573a7cd9a
+Branch: dylan
+Commit: c7237350bc745061dc9d8d3e8d55302893209b0d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c7237350bc745061dc9d8d3e8d55302893209b0d
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
 Date:   Thu Dec 12 18:12:54 2013 -0600
