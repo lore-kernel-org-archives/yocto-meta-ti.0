@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC898E007F7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EDE43E007F8
 	for <meta-ti@yoctoproject.org>; Tue, 17 Dec 2013 18:52:34 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E9CBA52A4A; Wed, 18 Dec 2013 02:52:31 +0000 (UTC)
+	id EEB6B52A4C; Wed, 18 Dec 2013 02:52:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131218025231.E9CBA52A4A@arago-project.org>
+Message-Id: <20131218025231.EEB6B52A4C@arago-project.org>
 Date: Wed, 18 Dec 2013 02:52:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot-ti-staging: update with am43x dtb relocation fix
@@ -26,9 +26,9 @@ X-List-Received-Date: Wed, 18 Dec 2013 02:52:38 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dylan
-Commit: 3e172af0614a30bab075637039ea90468d362432
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e172af0614a30bab075637039ea90468d362432
+Branch: master
+Commit: 27b1d08a4e0eab1e904c20aa857fbccc6655226a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=27b1d08a4e0eab1e904c20aa857fbccc6655226a
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Dec 17 20:26:22 2013 -0500
