@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD1FDE007F7
-	for <meta-ti@yoctoproject.org>; Wed, 18 Dec 2013 10:07:10 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BE4E4E007F8
+	for <meta-ti@yoctoproject.org>; Wed, 18 Dec 2013 10:07:13 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CF6C152A20; Wed, 18 Dec 2013 18:07:09 +0000 (UTC)
+	id 3068452A4A; Wed, 18 Dec 2013 18:07:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20131218180709.CF6C152A20@arago-project.org>
-Date: Wed, 18 Dec 2013 18:07:09 +0000 (UTC)
+Message-Id: <20131218180713.3068452A4A@arago-project.org>
+Date: Wed, 18 Dec 2013 18:07:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: update with fix for remoteproc/ DT conflict
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Wed, 18 Dec 2013 18:07:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 85c35541100affcdc47bb72619a59ce1c0d0ef85
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=85c35541100affcdc47bb72619a59ce1c0d0ef85
+Branch: dylan
+Commit: 3d32a8e70192660c0bfe49d4475d3d619e4712dd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3d32a8e70192660c0bfe49d4475d3d619e4712dd
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Dec 18 11:54:17 2013 -0500
