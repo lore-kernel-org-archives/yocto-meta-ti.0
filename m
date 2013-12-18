@@ -1,29 +1,15 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 80DDAE007F7
-	for <meta-ti@yoctoproject.org>; Wed, 18 Dec 2013 09:42:26 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id rBIHgPHf025353;
-	Wed, 18 Dec 2013 11:42:25 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id rBIHgPuK004168;
-	Wed, 18 Dec 2013 11:42:25 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 18 Dec 2013 11:42:24 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id rBIHgOUB030347;
-	Wed, 18 Dec 2013 11:42:24 -0600
-Date: Wed, 18 Dec 2013 12:42:24 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Johnson Thomas <johnsonthomas@nanometrics.ca>
-Message-ID: <20131218174223.GT24180@edge>
-References: <CAL58Aehin5=s1tCLoonZScAQvq2Hp7nwb8zzc4TBpXTSVWfp+Q@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAL58Aehin5=s1tCLoonZScAQvq2Hp7nwb8zzc4TBpXTSVWfp+Q@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Latest version of Poky compatible with meta-ti
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD1FDE007F7
+	for <meta-ti@yoctoproject.org>; Wed, 18 Dec 2013 10:07:10 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id CF6C152A20; Wed, 18 Dec 2013 18:07:09 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20131218180709.CF6C152A20@arago-project.org>
+Date: Wed, 18 Dec 2013 18:07:09 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update with fix for remoteproc/ DT conflict
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,28 +22,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Dec 2013 17:42:29 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 18 Dec 2013 18:07:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, Dec 18, 2013 at 12:36:29PM -0500, Johnson Thomas wrote:
-> Hi all.
-> 
-> I have a Yocto project consisting of Poky (Danny-8.0.2), meta-ti (tag:
-> ti2013.04.00) and a custom BSP layer. I was looking at upgrading the Poky
-> version to maybe 9.0 or even 10.0. I was wondering, what is the latest
-> version of Poky that is compatible with meta-ti layer?. Also, is it
-> recommended to use the "Danny" branch as a stable version for meta-ti layer?
+Module: meta-ti
+Branch: master
+Commit: 85c35541100affcdc47bb72619a59ce1c0d0ef85
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=85c35541100affcdc47bb72619a59ce1c0d0ef85
 
-Hi,
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Dec 18 11:54:17 2013 -0500
 
-Danny branch is quite old and hasn't been updated in long time (although you 
-are using an older tag from meta-ti/danny). Currently active branches in 
-meta-ti are dylan and master (dora and later). That would correspond to Poky 
-releases version 9 and version 10. We are still using Dylan for our stable 
-releases, but should be switching to Dora soon. So, you can use either Dylan 
-or master from meta-ti, but I won't recommentd staying with Danny.
+linux-ti-staging: update with fix for remoteproc/DT conflict
 
--- 
-Denys
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-kernel/linux/linux-ti-staging_3.12.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index f2eed95..cb3eabc 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -33,11 +33,11 @@ S = "${WORKDIR}/git"
+ BRANCH = "ti-linux-3.12.y"
+ 
+ # Corresponds to ti2013.12.00 release
+-SRCREV = "6279006c8da4f160949ea919e1e41bdb49dfba06"
++SRCREV = "dfea149efb32485f17bb7440eb326549c8f647e2"
+ PV = "3.12.4"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+
 
