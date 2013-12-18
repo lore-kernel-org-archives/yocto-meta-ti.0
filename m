@@ -1,38 +1,29 @@
-Return-Path: <johnsonthomas@nanometrics.ca>
-Received: from mail-ve0-f169.google.com (mail-ve0-f169.google.com
-	[209.85.128.169])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B882BE007F7
-	for <meta-ti@yoctoproject.org>; Wed, 18 Dec 2013 09:36:30 -0800 (PST)
-Received: by mail-ve0-f169.google.com with SMTP id c14so5610497vea.28
-	for <meta-ti@yoctoproject.org>; Wed, 18 Dec 2013 09:36:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=nanometrics.ca; s=google;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=neiGYp8Phetc+H8yHgy74dP5u2jldg0HgJAOA5ZsGkE=;
-	b=EeTsBW1mU68wYpxFb+9ydSFt2pL5+CUTI7TgrWte8L21UgVmaFbY72XbnN2AOdxgz1
-	VALmR9LwuGBcFnvtXFUn9k8KvFz3rZUjwijzOlN+MjSFlN3gNdxOBY9/R2NaIOzLMq3W
-	CH9qz+WB+yiG/Pnq7GOMxJrigWm3qYu4sjdQ4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=neiGYp8Phetc+H8yHgy74dP5u2jldg0HgJAOA5ZsGkE=;
-	b=Gmdsi77CjRntVlk1LBI1yBWYBPs1nqXG1ftQngz+N/GJB18438KYGAfuq2ZaO87ZRv
-	Y7W8ngsJFYfOaP1I66dSoVqP2FKeFZtlHxTD8Cpc8rAlsXVMhta014gnS8E8NEEuGEVt
-	Mhebec3swJM9d4TUGaBzqxoGUz3a/YcNppK5JlM6xqjV8cMT3zIxjjX/zihwnMRVnoaV
-	E5E+R3iLlW1KaGlsP/+bst1hTQLU/N7yY9eLVpbb7GJe/uwnkH+htrxJGw1kut+RYY2b
-	hkfokmRKUF8Ddlcy7gNNw+U8AbYNyWfIM2JUVfIw6Sgdjaj45IdLJooLPgcI8S39fWfo
-	lrWg==
-X-Gm-Message-State: ALoCoQlmR5KvLpUjpxU+rPg8fIZcUsN/zHohZCYj1uejVn+MmCKVvLwTFkm4SvtevdRcJX9VlzUZ
+Return-Path: <denys@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 80DDAE007F7
+	for <meta-ti@yoctoproject.org>; Wed, 18 Dec 2013 09:42:26 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id rBIHgPHf025353;
+	Wed, 18 Dec 2013 11:42:25 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id rBIHgPuK004168;
+	Wed, 18 Dec 2013 11:42:25 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 18 Dec 2013 11:42:24 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id rBIHgOUB030347;
+	Wed, 18 Dec 2013 11:42:24 -0600
+Date: Wed, 18 Dec 2013 12:42:24 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Johnson Thomas <johnsonthomas@nanometrics.ca>
+Message-ID: <20131218174223.GT24180@edge>
+References: <CAL58Aehin5=s1tCLoonZScAQvq2Hp7nwb8zzc4TBpXTSVWfp+Q@mail.gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.221.60.134 with SMTP id ws6mr781413vcb.44.1387388190031;
-	Wed, 18 Dec 2013 09:36:30 -0800 (PST)
-Received: by 10.52.34.197 with HTTP; Wed, 18 Dec 2013 09:36:29 -0800 (PST)
-Date: Wed, 18 Dec 2013 12:36:29 -0500
-Message-ID: <CAL58Aehin5=s1tCLoonZScAQvq2Hp7nwb8zzc4TBpXTSVWfp+Q@mail.gmail.com>
-From: Johnson Thomas <johnsonthomas@nanometrics.ca>
-To: meta-ti@yoctoproject.org, jamesnuss <jamesnuss@nanometrics.ca>
-Subject: Latest version of Poky compatible with meta-ti
+In-Reply-To: <CAL58Aehin5=s1tCLoonZScAQvq2Hp7nwb8zzc4TBpXTSVWfp+Q@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Latest version of Poky compatible with meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,38 +36,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Dec 2013 17:36:34 -0000
-Content-Type: multipart/alternative; boundary=001a113393a43b953504edd27cb4
+X-List-Received-Date: Wed, 18 Dec 2013 17:42:29 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
---001a113393a43b953504edd27cb4
-Content-Type: text/plain; charset=ISO-8859-1
+On Wed, Dec 18, 2013 at 12:36:29PM -0500, Johnson Thomas wrote:
+> Hi all.
+> 
+> I have a Yocto project consisting of Poky (Danny-8.0.2), meta-ti (tag:
+> ti2013.04.00) and a custom BSP layer. I was looking at upgrading the Poky
+> version to maybe 9.0 or even 10.0. I was wondering, what is the latest
+> version of Poky that is compatible with meta-ti layer?. Also, is it
+> recommended to use the "Danny" branch as a stable version for meta-ti layer?
 
-Hi all.
+Hi,
 
-I have a Yocto project consisting of Poky (Danny-8.0.2), meta-ti (tag:
-ti2013.04.00) and a custom BSP layer. I was looking at upgrading the Poky
-version to maybe 9.0 or even 10.0. I was wondering, what is the latest
-version of Poky that is compatible with meta-ti layer?. Also, is it
-recommended to use the "Danny" branch as a stable version for meta-ti layer?
+Danny branch is quite old and hasn't been updated in long time (although you 
+are using an older tag from meta-ti/danny). Currently active branches in 
+meta-ti are dylan and master (dora and later). That would correspond to Poky 
+releases version 9 and version 10. We are still using Dylan for our stable 
+releases, but should be switching to Dora soon. So, you can use either Dylan 
+or master from meta-ti, but I won't recommentd staying with Danny.
 
-Thanks,
-Johnson Thomas
+-- 
+Denys
 
---001a113393a43b953504edd27cb4
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-family:arial,sans-serif;font-size:13px=
-">Hi all.</span><div style=3D"font-family:arial,sans-serif;font-size:13px">=
-<br></div><div style=3D"font-family:arial,sans-serif;font-size:13px">I have=
- a Yocto project consisting of Poky (Danny-8.0.2), meta-ti (tag: ti2013.04.=
-00) and a custom BSP layer. I was looking at upgrading the Poky version to =
-maybe 9.0 or even 10.0. I was wondering, what is the latest version of Poky=
- that is compatible with meta-ti layer?. Also, is it recommended to use the=
- &quot;Danny&quot; branch as a stable version for meta-ti layer?</div>
-<div style=3D"font-family:arial,sans-serif;font-size:13px"><br></div><div s=
-tyle=3D"font-family:arial,sans-serif;font-size:13px">Thanks,</div><div styl=
-e=3D"font-family:arial,sans-serif;font-size:13px">Johnson Thomas</div></div=
->
-
---001a113393a43b953504edd27cb4--
