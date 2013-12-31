@@ -1,35 +1,28 @@
-Return-Path: <linuxpark@gmail.com>
-Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
-	[209.85.220.43])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1C330E0044A
-	for <meta-ti@yoctoproject.org>; Mon, 30 Dec 2013 01:08:04 -0800 (PST)
-Received: by mail-pa0-f43.google.com with SMTP id bj1so11424543pad.16
-	for <meta-ti@yoctoproject.org>; Mon, 30 Dec 2013 01:08:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type; bh=K9GlEqT62+z7oKGS0cV5X/P+DlAZXtc8zWKL6vRmI94=;
-	b=s5l2S/jG9z2LkHqhQwdajq/XtGIpG5UKe32WrVJanVXYOetIPKGHmMb7+duJDJLzLV
-	kQPjCqwL4lgcrsf0AklrqXm3FBjzq9E/YeCdqw2oAp6c8Bw36Cpj8KVMHkTXc2AniH0P
-	U7D7ka1spzrDRkWn8h8B3tMoTZKgS2yZJ+pUmdE1eoDhUIEymgSFtmB0JASYNiAKF+tI
-	XaDGacCsmlSBLLw1kWR1c1noWovJSflhLSt9AICAcd0obNNjoikCMi77PKRkj6XSc14I
-	qKB4UIIbZgqcFRzPOJB7Ydv8Tyv6kzH35dv8y9adcGmG30xs76HUnsNh4fUU357gpGHb
-	Vftg==
-X-Received: by 10.69.18.234 with SMTP id gp10mr66559373pbd.105.1388394484119; 
-	Mon, 30 Dec 2013 01:08:04 -0800 (PST)
-Received: from [119.194.249.49] ([119.194.249.49])
-	by mx.google.com with ESMTPSA id
-	id1sm14494247pbc.11.2013.12.30.01.08.02
-	for <meta-ti@yoctoproject.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 30 Dec 2013 01:08:03 -0800 (PST)
-Message-ID: <52C1B8CF.7080109@gmail.com>
-Date: Tue, 31 Dec 2013 03:17:51 +0900
-From: JeHo Park <linuxpark@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
+Return-Path: <denys@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DE8CCE0080C
+	for <meta-ti@yoctoproject.org>; Mon, 30 Dec 2013 18:14:30 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id rBV2EShx017668
+	for <meta-ti@yoctoproject.org>; Mon, 30 Dec 2013 20:14:28 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id rBV2ESZ6007078
+	for <meta-ti@yoctoproject.org>; Mon, 30 Dec 2013 20:14:28 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Mon, 30 Dec 2013 20:14:28 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	rBV2ESRf031992	for <meta-ti@yoctoproject.org>; Mon, 30 Dec 2013 20:14:28
+	-0600
+Date: Mon, 30 Dec 2013 21:02:19 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1925391160.77.1388455339290.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-To: meta-ti@yoctoproject.org
-Subject: i want to know what git branch i have to download ?
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2013-12-30_21-00-24
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,58 +35,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Dec 2013 09:08:07 -0000
-Content-Type: multipart/alternative;
-	boundary="------------060308040002070500040507"
+X-List-Received-Date: Tue, 31 Dec 2013 02:14:31 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_76_1733485366.1388455339289"
 
---------------060308040002070500040507
-Content-Type: text/plain; charset=EUC-KR
-Content-Transfer-Encoding: 7bit
-
-hellow everyone !
-i am newbies for this project
-i have the dm368evm board so i applied ti sdk 4.0.2 -
-http://www.ti.com/tool/linuxdvsdk-dm36x
-but the performance of video, h.264 and audio, aac was so poor ..
-especially, load of cpu was over 50% :(
-
-so i wonder whether i can get some new version of bsp and filesystem for
-my dm368evm board from this arago project or not ??
-if it is possible, i want to know which branch i have to download using
-the git ?
-
-previously thanks ~
-
-
-
---------------060308040002070500040507
-Content-Type: text/html; charset=EUC-KR
+------=_Part_76_1733485366.1388455339289
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
-  <head>
+<head>
+<title>
+Status for 12/30/13
+</title>
+</head>
+<body>
 
-    <meta http-equiv="content-type" content="text/html; charset=EUC-KR">
-  </head>
-  <body bgcolor="#FFFFFF" text="#000000">
-    hellow everyone !<br>
-    i am&nbsp; newbies for this project<br>
-    &nbsp;i have the dm368evm board so i applied ti sdk 4.0.2 -
-    <meta http-equiv="content-type" content="text/html; charset=EUC-KR">
-    <a href="http://www.ti.com/tool/linuxdvsdk-dm36x">http://www.ti.com/tool/linuxdvsdk-dm36x</a>
-    <br>
-    but the performance of video, h.264 and audio, aac was so poor ..
-    especially, load of cpu was over 50%&nbsp; :(<br>
-    <br>
-    so i wonder whether i can get some new version of bsp and filesystem
-    for my dm368evm board from this arago project or not ??<br>
-    if it is possible, i want to know which branch i have to download
-    using the git ? <br>
-    <br>
-    previously thanks ~<br>
-    <br>
-    <br>
-  </body>
+<h2>Status for 12/30/13</h2>
+
+<h2>BUILD_ID: build-2013-12-30_21-01-33</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.10"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
 </html>
 
---------------060308040002070500040507--
+
+------=_Part_76_1733485366.1388455339289--
