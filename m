@@ -1,36 +1,38 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
-	[209.85.215.178])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6DE67E00817
-	for <meta-ti@yoctoproject.org>; Wed,  8 Jan 2014 06:53:39 -0800 (PST)
-Received: by mail-ea0-f178.google.com with SMTP id d10so893601eaj.9
-	for <meta-ti@yoctoproject.org>; Wed, 08 Jan 2014 06:53:38 -0800 (PST)
+Received: from mail-ea0-f176.google.com (mail-ea0-f176.google.com
+	[209.85.215.176])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 842B6E00817
+	for <meta-ti@yoctoproject.org>; Wed,  8 Jan 2014 06:53:40 -0800 (PST)
+Received: by mail-ea0-f176.google.com with SMTP id h14so865709eaj.35
+	for <meta-ti@yoctoproject.org>; Wed, 08 Jan 2014 06:53:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=A7+9jmijUnXeY7Y0qRiDOM/CXolSLIzWy8FzlhI1FXw=;
-	b=HQGanIBTxrq/sXx4ckqrXIbQgJKEYZCJXLGC/yyH74++4mpd7W1woMbzqjM7MsRcW3
-	S10fU9YHv01YfNX0+91KdJVjUZp2v1eFMClAn2cD0Yi9bUaKiZqOaFwI/Xdt9nsJMd3s
-	JSxzRlPPniG/0E0firKVl4FD9TecFujdTpagu6zlcj8rK+HnID5lhAUkfbzPJGP//SdX
-	UOZ4aAMbVBDVXe3n3ze6zyDMFHqBXaKBVPLeHbxPXPxFtfblM0F66f2kQkTxS0FtenD+
-	Ifo+xK5Ffb8fsv8AxtkvsNZiJWXlrsKUm2J3JarAWza0b9EiDtxjFZnz9a+eMhNva4w3
-	xvLQ==
-X-Received: by 10.15.41.140 with SMTP id s12mr46370205eev.50.1389192816488;
-	Wed, 08 Jan 2014 06:53:36 -0800 (PST)
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=zR+degHlmvyWvgXFsSVs59YzrOfIBO+x2sehyex7Sdw=;
+	b=LDEVPgdW3w6Uzp3bjjTnzEUkmdFPRSG/zQyBxNxAVdzAyJ3/Un8VuKUxGt7EcRUJca
+	WoiFgPKbzXqpMXvJZ9YH44UEEZ/lEa5BG/rn25BnL5AN3iuz7FkpadwIK1f57TocdnNN
+	Bkp/oo6mz2dqvO6JGfp0LM7oWDb0c0iR4WmCPcZlLmrkrtAnHHdHYnbfSs3bT9+cKRcE
+	MQpPBs3FZZ9uxUB48uXgpL7RypVyFfPR6hKzXLybduktYbyZo/IxumdTD+1JUEo9sm5C
+	fnN7p4Fidl98F5WFNqBIVf8rVneZPneVzwNKyZtCd1WDhI4NKaDGJWtKSTyiVqK5A+B5
+	ALqw==
+X-Received: by 10.14.5.194 with SMTP id 42mr13924964eel.100.1389192817685;
+	Wed, 08 Jan 2014 06:53:37 -0800 (PST)
 Received: from localhost.localdomain (ip-109-91-251-248.unitymediagroup.de.
 	[109.91.251.248])
-	by mx.google.com with ESMTPSA id 4sm190160501eed.14.2014.01.08.06.53.35
+	by mx.google.com with ESMTPSA id 4sm190160501eed.14.2014.01.08.06.53.36
 	for <meta-ti@yoctoproject.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 Jan 2014 06:53:35 -0800 (PST)
+	Wed, 08 Jan 2014 06:53:37 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: meta-ti@yoctoproject.org
-Date: Wed,  8 Jan 2014 15:53:27 +0100
-Message-Id: <1389192808-16423-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed,  8 Jan 2014 15:53:28 +0100
+Message-Id: <1389192808-16423-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1389192808-16423-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1389192808-16423-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2] gadget-init: update oe-core's LICENSE checksum
+Subject: [PATCH 2/2] beaglebone-capes: update oe-core's LICENSE checksum
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,28 +45,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jan 2014 14:53:42 -0000
+X-List-Received-Date: Wed, 08 Jan 2014 14:53:43 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- recipes-ti/beagleboard/gadget-init.bb | 2 +-
+ recipes-ti/beagleboard/beaglebone-capes.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-ti/beagleboard/gadget-init.bb b/recipes-ti/beagleboard/gadget-init.bb
-index 1a6a336..8b899c5 100644
---- a/recipes-ti/beagleboard/gadget-init.bb
-+++ b/recipes-ti/beagleboard/gadget-init.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Units to initialize usb gadgets"
- PR = "r19"
+diff --git a/recipes-ti/beagleboard/beaglebone-capes.bb b/recipes-ti/beagleboard/beaglebone-capes.bb
+index ae9132e..e74033a 100644
+--- a/recipes-ti/beagleboard/beaglebone-capes.bb
++++ b/recipes-ti/beagleboard/beaglebone-capes.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Userspace setup for beaglebone capes"
  
  LICENSE = "MIT"
 -LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 +LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
  
- COMPATIBLE_MACHINE = "(ti33x)"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ PR = "r4"
+ 
 -- 
 1.8.3.1
 
