@@ -1,28 +1,55 @@
-Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1BB8FE00861
-	for <meta-ti@yoctoproject.org>; Thu, 23 Jan 2014 19:55:17 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0O3tGgU026795
-	for <meta-ti@yoctoproject.org>; Thu, 23 Jan 2014 21:55:16 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0O3tGNk015390
-	for <meta-ti@yoctoproject.org>; Thu, 23 Jan 2014 21:55:16 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 23 Jan 2014 21:55:15 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s0O3tFI2030595	for <meta-ti@yoctoproject.org>; Thu, 23 Jan 2014 21:55:15
-	-0600
-Date: Thu, 23 Jan 2014 22:42:29 -0500
-From: Denys Dmytriyenko <denys@ti.com>
+Return-Path: <ashok.palaniswamy@lntinfotech.com>
+Received: from p01c12o144.mxlogic.net (p01c12o144.mxlogic.net [208.65.145.67])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B91F0E00868
+	for <meta-ti@yoctoproject.org>; Sun, 12 Jan 2014 21:18:57 -0800 (PST)
+Received: from unknown [202.54.134.175] (EHLO
+	chninmsedge01.chennaiodc.lntinfotech.com)
+	by p01c12o144.mxlogic.net(mxl_mta-7.2.2-0) over TLS secured channel
+	with ESMTP id b3773d25.0.158807.00-384.387392.p01c12o144.mxlogic.net
+	(envelope-from <ashok.palaniswamy@lntinfotech.com>); 
+	Sun, 12 Jan 2014 22:19:06 -0700 (MST)
+X-MXL-Hash: 52d3774a5ab0b548-cb651889f5930fb0a2a97502d7fead4f445ca323
+Received: from chninmsedge01.chennaiodc.lntinfotech.com (172.29.23.55) by
+	chninmsedge01.chennaiodc.lntinfotech.com (172.29.23.10) with Microsoft
+	SMTP Server id 8.2.176.0; Mon, 13 Jan 2014 10:46:17 +0530
+Received: from CHNDSSMGR.chennaiodc.lntinfotech.com ([127.0.0.1]) by
+	chninmsedge01.chennaiodc.lntinfotech.com with Microsoft
+	SMTPSVC(6.0.3790.4675);	 Mon, 13 Jan 2014 10:48:49 +0530
+Received: from chninmshtcas02.chennaiodc.lntinfotech.com ([172.29.23.3]) by
+	CHNDSSMGR.chennaiodc.lntinfotech.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 13 Jan 2014 10:48:49 +0530
+Received: from POWINMSSCRDR.pwiodc.lntinfotech.com (172.29.23.17) by
+	chninmshtcas02.chennaiodc.lntinfotech.com (172.29.23.3) with Microsoft
+	SMTP Server (TLS) id 8.2.176.0; Mon, 13 Jan 2014 10:48:49 +0530
+Received: from CHNINMSMBX01.chennaiodc.lntinfotech.com ([169.254.1.127]) by
+	POWINMSSCRDR.pwiodc.lntinfotech.com ([172.29.23.17]) with mapi;
+	Mon, 13 Jan 2014 10:48:49 +0530
+From: Ashok Palaniswamy <Ashok.Palaniswamy@lntinfotech.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1876248265.175.1390534949198.JavaMail.jenkins@puget>
+Date: Mon, 13 Jan 2014 10:48:48 +0530
+Thread-Topic: How to build Yocto project for AM3517EVM
+Thread-Index: AQHPEB7wpf32Q8FTIkGDxnfgECr9YQ==
+Message-ID: <127A5335E8FA314589D708E59E33891D2F5AD5D043@CHNINMSMBX01.chennaiodc.lntinfotech.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+Importance: normal
+Priority: normal
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.3790.4913
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-01-23_21-00-24
+X-OriginalArrivalTime: 13 Jan 2014 05:18:49.0488 (UTC)
+	FILETIME=[F0F7F900:01CF101E]
+X-AnalysisOut: [v=2.0 cv=fthrkiEf c=1 sm=1 a=LrHhkUKorLktj/F6MHbgQw==:17 a]
+X-AnalysisOut: [=7zWe_ivwxWwA:10 a=MHmriYiyTdgA:10 a=BLceEmwcHowA:10 a=Ikc]
+X-AnalysisOut: [TkHD0fZMA:10 a=tP0R5P8-AAAA:8 a=8LsZ6xR87z0A:10 a=EsvbMRzz]
+X-AnalysisOut: [AAAA:8 a=hv683PU7cdheZiY09MQA:9 a=QEXdDO2ut3YA:10 a=5wWboV]
+X-AnalysisOut: [6KwKgA:10]
+X-Spam: [F=0.2000000000; CM=0.500; S=0.200(2010122901)]
+X-MAIL-FROM: <ashok.palaniswamy@lntinfotech.com>
+X-SOURCE-IP: [202.54.134.175]
+X-Mailman-Approved-At: Fri, 24 Jan 2014 14:25:34 -0800
+Subject: How to build Yocto project for AM3517EVM
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +62,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2014 03:55:25 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_174_1093594413.1390534949158"
+X-List-Received-Date: Mon, 13 Jan 2014 05:19:06 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Class: urn:content-classes:message
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_174_1093594413.1390534949158
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Hi All.
 
-<html>
-<head>
-<title>
-Status for 01/23/14
-</title>
-</head>
-<body>
+I am working for AM3517 based custom board. We are planning to use yocto =
+for our development. Please let me know how to build yocto for AM3517evm =
+board.
 
-<h2>Status for 01/23/14</h2>
+Is there any wiki or steps by step to build yocto project for AM3517evm =
+?
 
-<h2>BUILD_ID: build-2014-01-23_21-01-32</h2>
+Thanks,
+P.Ashok.
 
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.10"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+The contents of this e-mail and any attachment(s) may contain =
+confidential or privileged information for the intended recipient(s). =
+Unintended recipients are prohibited from taking action on the basis of =
+information in this e-mail and  using or disseminating the information,  =
+and must notify the sender and delete it from their system. L&T Infotech =
+will not accept responsibility or liability for the accuracy or =
+completeness of, or the presence of any virus or disabling code in this =
+e-mail"
+*************************************************************************=
+=0D
+ This email and attachments have been scanned for=0D
+ potential proprietary or sensitive information leakage.=0D
+ Websense Data Security, Protecting Your Information from the Inside =
+Out.=0D
+ www.websense.com=0D
+ =
+*************************************************************************=
 
 
-------=_Part_174_1093594413.1390534949158--
