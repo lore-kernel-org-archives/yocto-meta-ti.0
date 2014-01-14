@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4BCF6E00840
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5086FE00862
 	for <meta-ti@yoctoproject.org>; Tue, 14 Jan 2014 12:42:58 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 02A1552A55; Tue, 14 Jan 2014 20:42:57 +0000 (UTC)
+	id 0BFEF52A69; Tue, 14 Jan 2014 20:42:58 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140114204258.02A1552A55@arago-project.org>
-Date: Tue, 14 Jan 2014 20:42:57 +0000 (UTC)
+Message-Id: <20140114204258.0BFEF52A69@arago-project.org>
+Date: Tue, 14 Jan 2014 20:42:58 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : vpe-vpdma: Package for VPE DMA FW and test app
+Subject: Chase Maupin : linux-ti-staging: Add dependency for VPE firmware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,59 +27,53 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dylan
-Commit: c0de04584082d127643389bf529a60335c3bb52b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c0de04584082d127643389bf529a60335c3bb52b
+Commit: 6493ace69006d8edf2f3d292ad2d1cbefa430bf4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6493ace69006d8edf2f3d292ad2d1cbefa430bf4
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Mon Jan 13 17:33:05 2014 -0600
+Date:   Mon Jan 13 17:33:06 2014 -0600
 
-vpe-vpdma: Package for VPE DMA FW and test app
+linux-ti-staging: Add dependency for VPE firmware
 
-* This recipe will create the firmware and test application
-  packages.
+* The VPE firmware should only be added for the dra7xx-evm
+  machine type since that is the device with the VPE IP.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ti/vpe-vpdma_git.bb |   29 +++++++++++++++++++++++++++++
- 1 files changed, 29 insertions(+), 0 deletions(-)
+ conf/machine/include/omap-a15.inc             |    2 +-
+ recipes-kernel/linux/linux-ti-staging_3.12.bb |    4 ++++
+ 2 files changed, 5 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/ti/vpe-vpdma_git.bb b/recipes-bsp/ti/vpe-vpdma_git.bb
-new file mode 100644
-index 0000000..d506791
---- /dev/null
-+++ b/recipes-bsp/ti/vpe-vpdma_git.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "VPE VPDMA firmware and test program"
+diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+index 308b2e4..b0a0e74 100644
+--- a/conf/machine/include/omap-a15.inc
++++ b/conf/machine/include/omap-a15.inc
+@@ -4,7 +4,7 @@ require conf/machine/include/soc-family.inc
+ require conf/machine/include/tune-cortexa15.inc
+ 
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r2"
++MACHINE_KERNEL_PR = "r3"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index cb3eabc..7d5439e 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -16,6 +16,10 @@ RDEPENDS_kernel-base += "kernel-devicetree"
+ RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
+ RDEPENDS_kernel-base_append_ti43x = " am33x-cm3 am33x-cm3-initscript"
+ 
++# Add a run-time dependency for the VPE VPDMA firmware to be installed
++# on the target file system.
++RDEPENDS_kernel-base_append_dra7xx-evm = " vpe-vpdma-fw"
 +
-+DEPENDS += "virtual/kernel"
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
-+
-+COMPATIBLE_MACHINE = "dra7xx-evm"
-+
-+PV = "1b8"
-+PR = "r0"
-+
-+SRCREV = "24a5487ec13bf560f0e7fb24a9d4747f9f358be2"
-+BRANCH ?= "master"
-+
-+SRC_URI = "git://git.ti.com/vpe_tests/vpe_tests.git;protocol=git;branch=${BRANCH}"
-+
-+S = "${WORKDIR}/git"
-+
-+# The test application needs additional include headers from the kernel
-+EXTRA_OEMAKE = 'KDIR="${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include"'
-+
-+do_install() {
-+    oe_runmake DESTDIR="${D}" install
-+}
-+
-+# Separate the firmware into it's own package.
-+PACKAGES =+ "${PN}-fw"
-+FILES_${PN}-fw += "${base_libdir}/firmware"
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
 
 
