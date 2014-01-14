@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E789E00861
-	for <meta-ti@yoctoproject.org>; Tue, 14 Jan 2014 12:42:54 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4BCF6E00840
+	for <meta-ti@yoctoproject.org>; Tue, 14 Jan 2014 12:42:58 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1342B52A69; Tue, 14 Jan 2014 20:42:53 +0000 (UTC)
+	id 02A1552A55; Tue, 14 Jan 2014 20:42:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140114204253.1342B52A69@arago-project.org>
-Date: Tue, 14 Jan 2014 20:42:53 +0000 (UTC)
+Message-Id: <20140114204258.02A1552A55@arago-project.org>
+Date: Tue, 14 Jan 2014 20:42:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Chase Maupin : vpe-vpdma: Package for VPE DMA FW and test app
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jan 2014 20:42:57 -0000
+X-List-Received-Date: Tue, 14 Jan 2014 20:42:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 5253225aaa53f935efe72f5701ccc504a42b957d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5253225aaa53f935efe72f5701ccc504a42b957d
+Branch: dylan
+Commit: c0de04584082d127643389bf529a60335c3bb52b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c0de04584082d127643389bf529a60335c3bb52b
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
 Date:   Mon Jan 13 17:33:05 2014 -0600
