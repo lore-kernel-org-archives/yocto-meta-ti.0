@@ -1,28 +1,32 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2CD7EE0075B
-	for <meta-ti@yoctoproject.org>; Mon, 13 Jan 2014 18:15:05 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0E2F4xS013439
-	for <meta-ti@yoctoproject.org>; Mon, 13 Jan 2014 20:15:04 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0E2F4Me015909
-	for <meta-ti@yoctoproject.org>; Mon, 13 Jan 2014 20:15:04 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 13 Jan 2014 20:15:03 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s0E2F3VV003888	for <meta-ti@yoctoproject.org>; Mon, 13 Jan 2014 20:15:03
-	-0600
-Date: Mon, 13 Jan 2014 21:02:32 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <213899013.133.1389664952979.JavaMail.jenkins@puget>
+Return-Path: <Joshua.Vanderpool@raymondcorp.com>
+Received: from smtp.raymondcorp.com (smtp.raymondcorp.com [24.97.209.121])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 61A1EE0079B
+	for <meta-ti@yoctoproject.org>; Tue, 14 Jan 2014 03:22:58 -0800 (PST)
+Received: from usnygrcas1.raymondcorp.local (nothing.attdns.com
+	[130.1.155.194] (may be forged))
+	by smtp.raymondcorp.com (8.14.3/8.14.3) with ESMTP id s0EBMvDk022868
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Tue, 14 Jan 2014 05:22:58 -0600
+Received: from USNYGRMBX4.raymondcorp.local ([169.254.4.152]) by usnygrcas1
+	([130.1.155.198]) with mapi id 14.03.0158.001; Tue, 14 Jan 2014 06:22:57
+	-0500
+From: Vanderpool Josh <Joshua.Vanderpool@raymondcorp.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: meta-ti Digest, Vol 28, Issue 14
+Thread-Index: AQHPEJoPUOkw1Xoq1UqikinCJOBQwQ==
+Date: Tue, 14 Jan 2014 11:22:57 +0000
+Message-ID: <7D1F292BE8E4CC4F93079C1A7A58D5622BA339FB@USNYGRMBX4.raymondcorp.local>
+References: <mailman.5.1389643201.11936.meta-ti@yoctoproject.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [192.168.150.131]
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-01-13_21-00-24
+X-MessageScreenMessageID: 1389698578.165151.1642.2706604042
+X-MessageScreenContentScore: Score of 0 assigned to Content
+X-MessageScreenUCEScore: Score of 0 assigned to UCE
+X-MessageScreen: Analyzed by IntelliReach MessageScreen(tm)
+Subject: Re: meta-ti Digest, Vol 28, Issue 14
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +39,177 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jan 2014 02:15:06 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_132_814949997.1389664952976"
+X-List-Received-Date: Tue, 14 Jan 2014 11:23:02 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_132_814949997.1389664952976
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+On 01/13/2014 03:00 PM, meta-ti-request@yoctoproject.org wrote:=0A=
+> Send meta-ti mailing list submissions to=0A=
+> 	meta-ti@yoctoproject.org=0A=
+>=0A=
+> To subscribe or unsubscribe via the World Wide Web, visit=0A=
+> 	https://lists.yoctoproject.org/listinfo/meta-ti=0A=
+> or, via email, send a message with subject or body 'help' to=0A=
+> 	meta-ti-request@yoctoproject.org=0A=
+>=0A=
+> You can reach the person managing the list at=0A=
+> 	meta-ti-owner@yoctoproject.org=0A=
+>=0A=
+> When replying, please edit your Subject line so it is more specific=0A=
+> than "Re: Contents of meta-ti digest..."=0A=
+>=0A=
+>=0A=
+> Today's Topics:=0A=
+>=0A=
+>    1. USB keyboard not recognized with poky build AM335x-SK=0A=
+>       (Vanderpool Josh)=0A=
+>    2. Re: USB keyboard not recognized with poky build AM335x-SK=0A=
+>       (Denys Dmytriyenko)=0A=
+>=0A=
+>=0A=
+> ----------------------------------------------------------------------=0A=
+>=0A=
+> Message: 1=0A=
+> Date: Mon, 13 Jan 2014 19:26:19 +0000=0A=
+> From: Vanderpool Josh <Joshua.Vanderpool@raymondcorp.com>=0A=
+> To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>=0A=
+> Subject: [meta-ti] USB keyboard not recognized with poky build=0A=
+> 	AM335x-SK=0A=
+> Message-ID:=0A=
+> 	<7D1F292BE8E4CC4F93079C1A7A58D5622BA337F7@USNYGRMBX4.raymondcorp.local=
+>=0A=
+> 	=0A=
+> Content-Type: text/plain; charset=3D"us-ascii"=0A=
+>=0A=
+> bitbake -e core-image-basic | grep 'DISTRO_FEATURES=3D'=0A=
+> DISTRO_FEATURES=3D"alsa argp bluetooth ext2 irda largefile pcmcia=0A=
+> usbgadget usbhost wifi xattr nfs zeroconf pci 3g nfc x11 ipv4 ipv6=0A=
+> libc-backtrace libc-big-macros libc-bsd libc-cxx-tests libc-catgets=0A=
+> libc-charsets libc-crypt         libc-crypt-ufc libc-db-aliases=0A=
+> libc-envz libc-fcvt libc-fmtmsg libc-fstab libc-ftraverse            =0A=
+>         libc-getlogin libc-idn libc-inet-anl libc-libm libc-locales=0A=
+> libc-locale-code                     libc-memusage libc-nis=0A=
+> libc-nsswitch libc-rcmd libc-rtld-debug libc-spawn libc-streams=0A=
+> libc-sunrpc                     libc-utmp libc-utmpx libc-wordexp=0A=
+> libc-posix-clang-wchar libc-posix-regexp libc-posix-regexp-glibc    =0A=
+> libc-posix-wchar-io largefile opengl ptest multiarch wayland pulseaudio=
+=0A=
+> sysvinit"=0A=
+> POKY_DEFAULT_DISTRO_FEATURES=3D"largefile opengl ptest multiarch waylan=
+d"=0A=
+>=0A=
+> Build Configuration:=0A=
+> BB_VERSION        =3D "1.21.1"=0A=
+> BUILD_SYS         =3D "x86_64-linux"=0A=
+> NATIVELSBSTRING   =3D "Ubuntu-12.04"=0A=
+> TARGET_SYS        =3D "arm-poky-linux-gnueabi"=0A=
+> MACHINE           =3D "am335x-evm"=0A=
+> DISTRO            =3D "poky"=0A=
+> DISTRO_VERSION    =3D "1.5+snapshot-20140113"=0A=
+> TUNE_FEATURES     =3D "armv7a vfp neon callconvention-hard cortexa8"=0A=
+> TARGET_FPU        =3D "vfp-neon"=0A=
+> meta             =0A=
+> meta-yocto        =3D "master:005af45191ded6185c618c708181b31281e43092"=
+=0A=
+> meta-ti           =3D "master:85c35541100affcdc47bb72619a59ce1c0d0ef85"=
+=0A=
+> meta-qt5          =3D "master:72ca958ebfb61640c614ec865196d68fba2576c2"=
+=0A=
+> meta-ruby         =3D "master:4e7073b2ebee64f669b688fde3c1200589d8cb04"=
+=0A=
+>=0A=
+>=0A=
+> Confidentiality Notice:=0A=
+>=0A=
+> The preceding e-mail message (including any attachments) contains infor=
+mation that may be confidential, protected by applicable legal privileges=
+, or constitute non-public information. It is intended to be conveyed onl=
+y to the designated recipient(s). If you are not an intended recipient of=
+ this message, please notify the sender by replying to this message and t=
+hen delete it from your system. Use, dissemination, distribution or repro=
+duction of this message by unintended recipients is =0A=
+> not authorized and may be unlawful.=0A=
+>=0A=
+>=0A=
+>=0A=
+>=0A=
+>=0A=
+> ------------------------------=0A=
+>=0A=
+> Message: 2=0A=
+> Date: Mon, 13 Jan 2014 14:31:23 -0500=0A=
+> From: Denys Dmytriyenko <denys@ti.com>=0A=
+> To: Vanderpool Josh <Joshua.Vanderpool@raymondcorp.com>=0A=
+> Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>=0A=
+> Subject: Re: [meta-ti] USB keyboard not recognized with poky build=0A=
+> 	AM335x-SK=0A=
+> Message-ID: <20140113193123.GA5631@edge>=0A=
+> Content-Type: text/plain; charset=3D"us-ascii"=0A=
+>=0A=
+> On Mon, Jan 13, 2014 at 07:26:19PM +0000, Vanderpool Josh wrote:=0A=
+>> bitbake -e core-image-basic | grep 'DISTRO_FEATURES=3D'=0A=
+>> DISTRO_FEATURES=3D"alsa argp bluetooth ext2 irda largefile pcmcia=0A=
+>> usbgadget usbhost wifi xattr nfs zeroconf pci 3g nfc x11 ipv4 ipv6=0A=
+>> libc-backtrace libc-big-macros libc-bsd libc-cxx-tests libc-catgets=0A=
+>> libc-charsets libc-crypt         libc-crypt-ufc libc-db-aliases=0A=
+>> libc-envz libc-fcvt libc-fmtmsg libc-fstab libc-ftraverse            =0A=
+>>         libc-getlogin libc-idn libc-inet-anl libc-libm libc-locales=0A=
+>> libc-locale-code                     libc-memusage libc-nis=0A=
+>> libc-nsswitch libc-rcmd libc-rtld-debug libc-spawn libc-streams=0A=
+>> libc-sunrpc                     libc-utmp libc-utmpx libc-wordexp=0A=
+>> libc-posix-clang-wchar libc-posix-regexp libc-posix-regexp-glibc    =0A=
+>> libc-posix-wchar-io largefile opengl ptest multiarch wayland pulseaudi=
+o=0A=
+>> sysvinit"=0A=
+>> POKY_DEFAULT_DISTRO_FEATURES=3D"largefile opengl ptest multiarch wayla=
+nd"=0A=
+>>=0A=
+>> Build Configuration:=0A=
+>> BB_VERSION        =3D "1.21.1"=0A=
+>> BUILD_SYS         =3D "x86_64-linux"=0A=
+>> NATIVELSBSTRING   =3D "Ubuntu-12.04"=0A=
+>> TARGET_SYS        =3D "arm-poky-linux-gnueabi"=0A=
+>> MACHINE           =3D "am335x-evm"=0A=
+>> DISTRO            =3D "poky"=0A=
+>> DISTRO_VERSION    =3D "1.5+snapshot-20140113"=0A=
+>> TUNE_FEATURES     =3D "armv7a vfp neon callconvention-hard cortexa8"=0A=
+>> TARGET_FPU        =3D "vfp-neon"=0A=
+>> meta             =0A=
+>> meta-yocto        =3D "master:005af45191ded6185c618c708181b31281e43092=
+"=0A=
+>> meta-ti           =3D "master:85c35541100affcdc47bb72619a59ce1c0d0ef85=
+"=0A=
+>> meta-qt5          =3D "master:72ca958ebfb61640c614ec865196d68fba2576c2=
+"=0A=
+>> meta-ruby         =3D "master:4e7073b2ebee64f669b688fde3c1200589d8cb04=
+"=0A=
+> Thanks.=0A=
+> Can you please double-check that you are using 3.12.4 version of the ke=
+rnel on =0A=
+> your SK board?=0A=
+>=0A=
+Poky (Yocto Project Reference Distro) 1.5+snapshot-20140113 am335x-evm=0A=
+/dev/ttyO0=0A=
+=0A=
+am335x-evm login: root=0A=
+root@am335x-evm:~# uname -a=0A=
+Linux am335x-evm 3.12.4 #1 SMP PREEMPT Fri Dec 27 12:46:50 EST 2013=0A=
+armv7l GNU/Linux=0A=
+root@am335x-evm:~#=0A=
+=0A=
 
-<html>
-<head>
-<title>
-Status for 01/13/14
-</title>
-</head>
-<body>
+Confidentiality Notice:
 
-<h2>Status for 01/13/14</h2>
-
-<h2>BUILD_ID: build-2014-01-13_21-01-35</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.10"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+The preceding e-mail message (including any attachments) contains informa=
+tion that may be confidential, protected by applicable legal privileges, =
+or constitute non-public information. It is intended to be conveyed only =
+to the designated recipient(s). If you are not an intended recipient of t=
+his message, please notify the sender by replying to this message and the=
+n delete it from your system. Use, dissemination, distribution or reprodu=
+ction of this message by unintended recipients is=20
+not authorized and may be unlawful.
 
 
-------=_Part_132_814949997.1389664952976--
+
+
