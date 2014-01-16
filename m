@@ -1,32 +1,32 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2240E00870
-	for <meta-ti@yoctoproject.org>; Thu, 16 Jan 2014 06:11:40 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0GEBdHT002234;
-	Thu, 16 Jan 2014 08:11:39 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0GEBcT0000872;
-	Thu, 16 Jan 2014 08:11:38 -0600
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.02.0342.003; Thu, 16 Jan 2014 08:11:38 -0600
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH] vpe-vpdma: update SRCREV and pass CROSS_COMPILE
-Thread-Index: AQHPEjctUonR7ZbwUk+4Gp5MwRhOk5qGXK8QgABnHQCAAKFScA==
-Date: Thu, 16 Jan 2014 14:11:37 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED101598FCB79@DLEE11.ent.ti.com>
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2D7FE0085A
+	for <meta-ti@yoctoproject.org>; Thu, 16 Jan 2014 11:25:35 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0GJPXG1024886;
+	Thu, 16 Jan 2014 13:25:33 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0GJPXCw026065;
+	Thu, 16 Jan 2014 13:25:33 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 16 Jan 2014 13:25:32 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0GJPXX6028104;
+	Thu, 16 Jan 2014 13:25:33 -0600
+Date: Thu, 16 Jan 2014 14:25:32 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Maupin, Chase" <chase.maupin@ti.com>
+Message-ID: <20140116192532.GJ12727@edge>
 References: <1389820588-17906-1-git-send-email-denis@denix.org>
 	<7D46E86EC0A8354091174257B2FED101598FA0D1@DLEE11.ent.ti.com>
 	<20140115223333.GF12727@edge>
-In-Reply-To: <20140115223333.GF12727@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+	<7D46E86EC0A8354091174257B2FED101598FCB79@DLEE11.ent.ti.com>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+In-Reply-To: <7D46E86EC0A8354091174257B2FED101598FCB79@DLEE11.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	Archit Taneja <archit@ti.com>
 Subject: Re: [PATCH] vpe-vpdma: update SRCREV and pass CROSS_COMPILE
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -40,100 +40,91 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jan 2014 14:11:49 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 Jan 2014 19:25:47 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
->-----Original Message-----
->From: Dmytriyenko, Denys
->Sent: Wednesday, January 15, 2014 4:34 PM
->To: Maupin, Chase
->Cc: Denys Dmytriyenko; meta-ti@yoctoproject.org
->Subject: Re: [meta-ti] [PATCH] vpe-vpdma: update SRCREV and pass
->CROSS_COMPILE
->
->On Wed, Jan 15, 2014 at 10:25:01PM +0000, Maupin, Chase wrote:
->> >-----Original Message-----
->> >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->> >bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
->> >Sent: Wednesday, January 15, 2014 3:16 PM
->> >To: meta-ti@yoctoproject.org
->> >Subject: [meta-ti] [PATCH] vpe-vpdma: update SRCREV and pass
->> >CROSS_COMPILE
->> >
->> >From: Denys Dmytriyenko <denys@ti.com>
->> >
->> >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
->> >---
->> > recipes-bsp/ti/vpe-vpdma_git.bb | 6 +++---
->> > 1 file changed, 3 insertions(+), 3 deletions(-)
->> >
->> >diff --git a/recipes-bsp/ti/vpe-vpdma_git.bb b/recipes-
->bsp/ti/vpe-
->> >vpdma_git.bb
->> >index d506791..fb3012a 100644
->> >--- a/recipes-bsp/ti/vpe-vpdma_git.bb
->> >+++ b/recipes-bsp/ti/vpe-vpdma_git.bb
->> >@@ -8,9 +8,9 @@ LIC_FILES_CHKSUM =3D
->> >"file://COPYING;md5=3D74d2f71d8898c54e3d1c9d0058c484aa"
->> > COMPATIBLE_MACHINE =3D "dra7xx-evm"
->> >
->> > PV =3D "1b8"
->> >-PR =3D "r0"
->> >+PR =3D "r1"
->> >
->> >-SRCREV =3D "24a5487ec13bf560f0e7fb24a9d4747f9f358be2"
->> >+SRCREV =3D "e3d8db1aa935775f9d196ad7428e0cd9864a36ca"
->> > BRANCH ?=3D "master"
->> >
->> > SRC_URI =3D
->>
->>"git://git.ti.com/vpe_tests/vpe_tests.git;protocol=3Dgit;branch=3D${B
->R
->> >ANCH}"
->> >@@ -18,7 +18,7 @@ SRC_URI =3D
->>
->>"git://git.ti.com/vpe_tests/vpe_tests.git;protocol=3Dgit;branch=3D${B
->R
->> >ANCH
->> > S =3D "${WORKDIR}/git"
->> >
->> > # The test application needs additional include headers from
->the
->> >kernel
->> >-EXTRA_OEMAKE =3D 'KDIR=3D"${STAGING_KERNEL_DIR}/include/uapi -
->> >I${STAGING_KERNEL_DIR}/include"'
->> >+EXTRA_OEMAKE =3D 'CROSS_COMPILE=3D"${TARGET_PREFIX}"
->> >KDIR=3D"${STAGING_KERNEL_DIR}/include/uapi -
->> >I${STAGING_KERNEL_DIR}/include"'
->>
->> Shouldn't the setting of CC in OE already take care of this?  Or
->did the rebase affect the Makefile?
->
->I believe it has been affected by this commit:
->http://git.ti.com/gitweb/?p=3Dvpe_tests/vpe_tests.git;a=3Dcommitdiff;h
->=3De3d8db1aa935775f9d196ad7428e0cd9864a36ca
->
->It overrides CC in the Makefile and the simplest way is to pass
->CROSS_COMPILE.
+On Thu, Jan 16, 2014 at 09:11:37AM -0500, Maupin, Chase wrote:
+> >-----Original Message-----
+> >From: Dmytriyenko, Denys
+> >Sent: Wednesday, January 15, 2014 4:34 PM
+> >To: Maupin, Chase
+> >Cc: Denys Dmytriyenko; meta-ti@yoctoproject.org
+> >Subject: Re: [meta-ti] [PATCH] vpe-vpdma: update SRCREV and pass
+> >CROSS_COMPILE
+> >
+> >On Wed, Jan 15, 2014 at 10:25:01PM +0000, Maupin, Chase wrote:
+> >> >-----Original Message-----
+> >> >From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> >> >bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
+> >> >Sent: Wednesday, January 15, 2014 3:16 PM
+> >> >To: meta-ti@yoctoproject.org
+> >> >Subject: [meta-ti] [PATCH] vpe-vpdma: update SRCREV and pass
+> >> >CROSS_COMPILE
+> >> >
+> >> >From: Denys Dmytriyenko <denys@ti.com>
+> >> >
+> >> >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> >> >---
+> >> > recipes-bsp/ti/vpe-vpdma_git.bb | 6 +++---
+> >> > 1 file changed, 3 insertions(+), 3 deletions(-)
+> >> >
+> >> >diff --git a/recipes-bsp/ti/vpe-vpdma_git.bb b/recipes-
+> >bsp/ti/vpe-
+> >> >vpdma_git.bb
+> >> >index d506791..fb3012a 100644
+> >> >--- a/recipes-bsp/ti/vpe-vpdma_git.bb
+> >> >+++ b/recipes-bsp/ti/vpe-vpdma_git.bb
+> >> >@@ -8,9 +8,9 @@ LIC_FILES_CHKSUM =
+> >> >"file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
+> >> > COMPATIBLE_MACHINE = "dra7xx-evm"
+> >> >
+> >> > PV = "1b8"
+> >> >-PR = "r0"
+> >> >+PR = "r1"
+> >> >
+> >> >-SRCREV = "24a5487ec13bf560f0e7fb24a9d4747f9f358be2"
+> >> >+SRCREV = "e3d8db1aa935775f9d196ad7428e0cd9864a36ca"
+> >> > BRANCH ?= "master"
+> >> >
+> >> > SRC_URI =
+> >>
+> >>"git://git.ti.com/vpe_tests/vpe_tests.git;protocol=git;branch=${B
+> >R
+> >> >ANCH}"
+> >> >@@ -18,7 +18,7 @@ SRC_URI =
+> >>
+> >>"git://git.ti.com/vpe_tests/vpe_tests.git;protocol=git;branch=${B
+> >R
+> >> >ANCH
+> >> > S = "${WORKDIR}/git"
+> >> >
+> >> > # The test application needs additional include headers from
+> >the
+> >> >kernel
+> >> >-EXTRA_OEMAKE = 'KDIR="${STAGING_KERNEL_DIR}/include/uapi -
+> >> >I${STAGING_KERNEL_DIR}/include"'
+> >> >+EXTRA_OEMAKE = 'CROSS_COMPILE="${TARGET_PREFIX}"
+> >> >KDIR="${STAGING_KERNEL_DIR}/include/uapi -
+> >> >I${STAGING_KERNEL_DIR}/include"'
+> >>
+> >> Shouldn't the setting of CC in OE already take care of this?  Or
+> >did the rebase affect the Makefile?
+> >
+> >I believe it has been affected by this commit:
+> >http://git.ti.com/gitweb/?p=vpe_tests/vpe_tests.git;a=commitdiff;h
+> >=e3d8db1aa935775f9d196ad7428e0cd9864a36ca
+> >
+> >It overrides CC in the Makefile and the simplest way is to pass
+> >CROSS_COMPILE.
+> 
+> Ah.  The commit I was on used CC ?= .... so you didn't have to pass CROSS_COMPILE.  Thanks.
 
-Ah.  The commit I was on used CC ?=3D .... so you didn't have to pass CROSS=
-_COMPILE.  Thanks.
+So, I'll be pushing this change shortly.
 
->
->
->> > do_install() {
->> >     oe_runmake DESTDIR=3D"${D}" install
->> >--
->> >1.8.3.2
->> >
->> >_______________________________________________
->> >meta-ti mailing list
->> >meta-ti@yoctoproject.org
->> >https://lists.yoctoproject.org/listinfo/meta-ti
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
+Going forward, can we try to avoid rebases - I don't believe it was even 
+necessary here...
+
+-- 
+Denys
 
