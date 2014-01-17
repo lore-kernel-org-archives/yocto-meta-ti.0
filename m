@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 89666E00824
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8826BE00820
 	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 09:47:33 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2921C52A72; Fri, 17 Jan 2014 17:47:33 +0000 (UTC)
+	id DC899529BF; Fri, 17 Jan 2014 17:47:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140117174733.2921C52A72@arago-project.org>
-Date: Fri, 17 Jan 2014 17:47:33 +0000 (UTC)
+Message-Id: <20140117174732.DC899529BF@arago-project.org>
+Date: Fri, 17 Jan 2014 17:47:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : am33x-cm3: clarify when initscripts are needed
+Subject: Denys Dmytriyenko : vpe-vpdma: update SRCREV and pass CROSS_COMPILE
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,35 +27,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 31fc390ec5cf8929182d0f44066814d8034935e2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=31fc390ec5cf8929182d0f44066814d8034935e2
+Commit: 1305132ed62ddbe53e04d5a841d8b5552b7f8974
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1305132ed62ddbe53e04d5a841d8b5552b7f8974
 
-Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Fri Jan 17 11:40:20 2014 -0600
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Jan 15 16:16:28 2014 -0500
 
-am33x-cm3: clarify when initscripts are needed
+vpe-vpdma: update SRCREV and pass CROSS_COMPILE
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ti/am33x-cm3_git.bb |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+ recipes-bsp/ti/vpe-vpdma_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
-index 75b6c73..1e99595 100644
---- a/recipes-bsp/ti/am33x-cm3_git.bb
-+++ b/recipes-bsp/ti/am33x-cm3_git.bb
-@@ -13,6 +13,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- SRCREV = "40cb75b9dd9ba15c6de1c15cbb7cce8f1a6588b8"
+diff --git a/recipes-bsp/ti/vpe-vpdma_git.bb b/recipes-bsp/ti/vpe-vpdma_git.bb
+index d506791..fb3012a 100644
+--- a/recipes-bsp/ti/vpe-vpdma_git.bb
++++ b/recipes-bsp/ti/vpe-vpdma_git.bb
+@@ -8,9 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
+ COMPATIBLE_MACHINE = "dra7xx-evm"
+ 
+ PV = "1b8"
+-PR = "r0"
++PR = "r1"
+ 
+-SRCREV = "24a5487ec13bf560f0e7fb24a9d4747f9f358be2"
++SRCREV = "e3d8db1aa935775f9d196ad7428e0cd9864a36ca"
  BRANCH ?= "master"
  
-+# This init script is only used for older kernels that do not support
-+# hotplug of the firmware.  Newer kernels do not require the initscript
-+# package.
- INITSCRIPT_NAME = "am335x-pm-firmware-load"
- INITSCRIPT_PARAMS = "defaults 96"
+ SRC_URI = "git://git.ti.com/vpe_tests/vpe_tests.git;protocol=git;branch=${BRANCH}"
+@@ -18,7 +18,7 @@ SRC_URI = "git://git.ti.com/vpe_tests/vpe_tests.git;protocol=git;branch=${BRANCH
+ S = "${WORKDIR}/git"
  
+ # The test application needs additional include headers from the kernel
+-EXTRA_OEMAKE = 'KDIR="${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include"'
++EXTRA_OEMAKE = 'CROSS_COMPILE="${TARGET_PREFIX}" KDIR="${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include"'
+ 
+ do_install() {
+     oe_runmake DESTDIR="${D}" install
 
 
