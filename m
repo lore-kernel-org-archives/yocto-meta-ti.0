@@ -1,28 +1,15 @@
-Return-Path: <chase.maupin@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BB37E0086B
-	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 08:18:46 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0HGIkIj008118
-	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 10:18:46 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0HGIkVU030156
-	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 10:18:46 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Fri, 17 Jan 2014 10:18:45 -0600
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0HGIbwj021359;
-	Fri, 17 Jan 2014 10:18:44 -0600
-From: Chase Maupin <Chase.Maupin@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 17 Jan 2014 11:40:21 -0600
-Message-ID: <1389980421-26720-3-git-send-email-Chase.Maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1389980421-26720-1-git-send-email-Chase.Maupin@ti.com>
-References: <1389980421-26720-1-git-send-email-Chase.Maupin@ti.com>
-MIME-Version: 1.0
-Subject: [PATCH 3/3] linux-ti-staging: remove initscript dependency
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86EF1E0081B
+	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 09:47:33 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 0F7F652A69; Fri, 17 Jan 2014 17:47:33 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20140117174733.0F7F652A69@arago-project.org>
+Date: Fri, 17 Jan 2014 17:47:33 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Chase Maupin : omap-a15: set the UBI_VOLNAME to match u-boot default
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,76 +22,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jan 2014 16:18:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 17 Jan 2014 17:47:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* Remove the RDEPENDS for the am33x-cm3-initscript package since
-  the latest kernel source use the hotplug functionality to load
-  the firmware.
-* Updated the SRCREV to the latest kernel sources which include
-  the hotplug fix.
-* Bump the MACHINE_KERNEL_PR for the am335x and am437x devices
-  which are affected.
+Module: meta-ti
+Branch: master
+Commit: 04166046edb85840144b443ff10114ed0e940cbc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=04166046edb85840144b443ff10114ed0e940cbc
+
+Author: Chase Maupin <Chase.Maupin@ti.com>
+Date:   Fri Jan 17 11:40:19 2014 -0600
+
+omap-a15: set the UBI_VOLNAME to match u-boot default
+
+* By setting the UBI_VOLNAME variable the default name for the
+  UBI rootfs will match the default used by u-boot so images
+  built through OpenEmbedded will work with out-of-box u-boot.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
----
- conf/machine/include/ti33x.inc                |    2 +-
- conf/machine/include/ti43x.inc                |    2 +-
- recipes-kernel/linux/linux-ti-staging_3.12.bb |    7 +++----
- 3 files changed, 5 insertions(+), 6 deletions(-)
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index af340d2..17b968d 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -16,7 +16,7 @@ XSERVER = "xserver-xorg \
- GUI_MACHINE_CLASS = "bigscreen"
+---
+
+ conf/machine/include/omap-a15.inc |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+index b0a0e74..dcf973e 100644
+--- a/conf/machine/include/omap-a15.inc
++++ b/conf/machine/include/omap-a15.inc
+@@ -24,3 +24,7 @@ XSERVER = "xserver-xorg \
+            xf86-video-fbdev"
  
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r20"
-+MACHINE_KERNEL_PR = "r21"
- 
- # Default providers, may need to override for specific machines
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
-diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
-index d9bfd25..8913380 100644
---- a/conf/machine/include/ti43x.inc
-+++ b/conf/machine/include/ti43x.inc
-@@ -16,7 +16,7 @@ XSERVER = "xserver-xorg \
- GUI_MACHINE_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r1"
-+MACHINE_KERNEL_PR = "r2"
- 
- # Default providers, may need to override for specific machines
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 7d5439e..2d9f813 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -13,8 +13,8 @@ RDEPENDS_kernel-base += "kernel-devicetree"
- 
- # Add a run-time dependency for the PM firmware to be installed
- # on the target file system.
--RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
--RDEPENDS_kernel-base_append_ti43x = " am33x-cm3 am33x-cm3-initscript"
-+RDEPENDS_kernel-base_append_ti33x = " am33x-cm3"
-+RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
- 
- # Add a run-time dependency for the VPE VPDMA firmware to be installed
- # on the target file system.
-@@ -36,8 +36,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.12.y"
- 
--# Corresponds to ti2013.12.00 release
--SRCREV = "dfea149efb32485f17bb7440eb326549c8f647e2"
-+SRCREV = "b0f3ccd18d39c375491519ba285babf152eab9d8"
- PV = "3.12.4"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--- 
-1.7.0.4
+ GUI_MACHINE_CLASS = "smallscreen"
++
++# Use the expected value of the ubifs filesystem's volume name in the kernel
++# and u-boot.
++UBI_VOLNAME = "rootfs"
 
 
