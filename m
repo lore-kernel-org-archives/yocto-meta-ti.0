@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86EF1E0081B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 89666E00824
 	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 09:47:33 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0F7F652A69; Fri, 17 Jan 2014 17:47:33 +0000 (UTC)
+	id 2921C52A72; Fri, 17 Jan 2014 17:47:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140117174733.0F7F652A69@arago-project.org>
+Message-Id: <20140117174733.2921C52A72@arago-project.org>
 Date: Fri, 17 Jan 2014 17:47:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : omap-a15: set the UBI_VOLNAME to match u-boot default
+Subject: Chase Maupin : am33x-cm3: clarify when initscripts are needed
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,37 +27,35 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 04166046edb85840144b443ff10114ed0e940cbc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=04166046edb85840144b443ff10114ed0e940cbc
+Commit: 31fc390ec5cf8929182d0f44066814d8034935e2
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=31fc390ec5cf8929182d0f44066814d8034935e2
 
 Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Fri Jan 17 11:40:19 2014 -0600
+Date:   Fri Jan 17 11:40:20 2014 -0600
 
-omap-a15: set the UBI_VOLNAME to match u-boot default
-
-* By setting the UBI_VOLNAME variable the default name for the
-  UBI rootfs will match the default used by u-boot so images
-  built through OpenEmbedded will work with out-of-box u-boot.
+am33x-cm3: clarify when initscripts are needed
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/omap-a15.inc |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
+ recipes-bsp/ti/am33x-cm3_git.bb |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
-index b0a0e74..dcf973e 100644
---- a/conf/machine/include/omap-a15.inc
-+++ b/conf/machine/include/omap-a15.inc
-@@ -24,3 +24,7 @@ XSERVER = "xserver-xorg \
-            xf86-video-fbdev"
+diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
+index 75b6c73..1e99595 100644
+--- a/recipes-bsp/ti/am33x-cm3_git.bb
++++ b/recipes-bsp/ti/am33x-cm3_git.bb
+@@ -13,6 +13,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ SRCREV = "40cb75b9dd9ba15c6de1c15cbb7cce8f1a6588b8"
+ BRANCH ?= "master"
  
- GUI_MACHINE_CLASS = "smallscreen"
-+
-+# Use the expected value of the ubifs filesystem's volume name in the kernel
-+# and u-boot.
-+UBI_VOLNAME = "rootfs"
++# This init script is only used for older kernels that do not support
++# hotplug of the firmware.  Newer kernels do not require the initscript
++# package.
+ INITSCRIPT_NAME = "am335x-pm-firmware-load"
+ INITSCRIPT_PARAMS = "defaults 96"
+ 
 
 
