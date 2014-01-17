@@ -1,35 +1,26 @@
-Return-Path: <samuli.piippo@gmail.com>
-Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
-	[209.85.215.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 022EFE00867
-	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 05:57:49 -0800 (PST)
-Received: by mail-ea0-f182.google.com with SMTP id r15so938515ead.27
-	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 05:57:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=DsE60lcEgpxXSRTZaP2l2xIN3bHlr4QjzKPyts295uk=;
-	b=I5uQyEaBwb+qQ+aBUxG42l9GDjvOAw8bCC6o9jLR2lQTMsWmROrNqwQ+VzhjMB1jhZ
-	keOHbNr0AMn4PmYNoj/FwWal5qCbPrQflSJNGZeSgHEKUHlpYm7R43wCr2H1M0sc2rx3
-	67VwmakrrQA6ceNRKP3T6mA5Rxtp7uxGAxKUvPVU0dp2T0YFNSbSvJs1CHilpuSHrieP
-	oh2X8n7h+a/poyafwLiWtdL+Hw8eVta3DHl8AUhrbIk/aTrNdvvKaMV73r8jY1iNPUZr
-	4DSYOJ4+qANDw560AAgt1NpZdlk/Quc3EuiMrPh3mVuTNIAk714q7SqDzhfo2yUNsKG6
-	J5KA==
-X-Received: by 10.15.36.65 with SMTP id h41mr2764996eev.0.1389967068390;
-	Fri, 17 Jan 2014 05:57:48 -0800 (PST)
-Received: from [10.9.5.71] ([91.217.248.11])
-	by mx.google.com with ESMTPSA id k41sm3140128eey.0.2014.01.17.05.57.47
-	for <meta-ti@yoctoproject.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 17 Jan 2014 05:57:47 -0800 (PST)
-Message-ID: <52D936DC.2090806@gmail.com>
-Date: Fri, 17 Jan 2014 15:57:48 +0200
-From: Samuli Piippo <samuli.piippo@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+Return-Path: <Samuli.Piippo@digia.com>
+Received: from smtp1.digia.com (smtp1.digia.com [82.118.214.156])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2E4B4E0086D
+	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 06:03:06 -0800 (PST)
+Received: from smtp1.digia.com (unknown [127.0.0.1])
+	by IMSVA80 (Postfix) with ESMTP id 92DAF37005B
+	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 16:03:04 +0200 (EET)
+Received: from IT-EXCAS01-HKI.it.local (unknown [10.9.52.70])
+	(using TLSv1 with cipher AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	by smtp1.digia.com (Postfix) with ESMTP id 854AE370050
+	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 16:03:04 +0200 (EET)
+Received: from piippo.it.local (10.9.5.71) by IT-EXCAS01-HKI.it.local
+	(10.9.52.75) with Microsoft SMTP Server (TLS) id 14.2.283.3;
+	Fri, 17 Jan 2014 16:03:03 +0200
+From: Samuli Piippo <samuli.piippo@digia.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 17 Jan 2014 16:02:58 +0200
+Message-ID: <1389967378-12001-1-git-send-email-samuli.piippo@digia.com>
+X-Mailer: git-send-email 1.8.3.2
 MIME-Version: 1.0
-To: meta-ti@yoctoproject.org
-Subject: usb problems with BeagleBone Black
+X-Originating-IP: [10.9.5.71]
+Subject: [PATCH] libgles-omap3: add missing INSANE_SKIP for es9
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,20 +33,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jan 2014 13:57:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 17 Jan 2014 14:03:07 -0000
+Content-Type: text/plain
 
-Hi,
+es9 package was missing INSANE_SKIP used for other esX packages.
 
-I've been trying to get BeagleBone Black to work with poky image, but
-there seems to be some issues with USB.
-No usb devices are detected by kernel and e.g., 'lsusb' return error
-'unable to initialize libusb: -99'
+Signed-off-by: Samuli Piippo <samuli.piippo@digia.com>
+---
+ recipes-graphics/libgles/libgles-omap3-no-x.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-Anyone know if USB is supposed to work on BBB with current meta-ti layer?
+diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
+index 3df0fdc..60bcad5 100644
+--- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
++++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
+@@ -283,6 +283,7 @@ INSANE_SKIP_${PN}-es3 = "ldflags dev-so staticdev"
+ INSANE_SKIP_${PN}-es5 = "ldflags dev-so staticdev"
+ INSANE_SKIP_${PN}-es6 = "ldflags dev-so staticdev"
+ INSANE_SKIP_${PN}-es8 = "ldflags dev-so staticdev"
++INSANE_SKIP_${PN}-es9 = "ldflags dev-so staticdev"
+ INSANE_SKIP_${PN}-rawdemos = "ldflags dev-so useless-rpaths"
+ INSANE_SKIP_${PN}-blitwsegl = "ldflags"
+ INSANE_SKIP_${PN}-blitwsegl-es3 = "ldflags"
+-- 
+1.8.3.2
 
-I'm using yocto from dora branch and meta-ti from master.
-
--samuli
 
