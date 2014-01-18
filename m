@@ -1,15 +1,28 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84C3EE0087C
-	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 09:47:38 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 5712C52A8B; Fri, 17 Jan 2014 17:47:38 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20140117174738.5712C52A8B@arago-project.org>
-Date: Fri, 17 Jan 2014 17:47:38 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Chase Maupin : linux-ti-staging: remove initscript dependency
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3E6CEE00820
+	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 18:31:39 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0I2VcVL026455
+	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 20:31:38 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0I2VcSP014620
+	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 20:31:38 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Fri, 17 Jan 2014 20:31:37 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s0I2VbRI032709	for <meta-ti@yoctoproject.org>; Fri, 17 Jan 2014 20:31:37
+	-0600
+Date: Fri, 17 Jan 2014 21:19:00 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <556455684.149.1390011540687.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-01-17_21-00-24
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,87 +35,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jan 2014 17:47:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 18 Jan 2014 02:31:48 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_148_1815953955.1390011540604"
 
-Module: meta-ti
-Branch: dylan
-Commit: 5e6aed54ecdb9caa56e91e13b050c616432ac2dc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5e6aed54ecdb9caa56e91e13b050c616432ac2dc
+------=_Part_148_1815953955.1390011540604
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Author: Chase Maupin <Chase.Maupin@ti.com>
-Date:   Fri Jan 17 11:40:21 2014 -0600
+<html>
+<head>
+<title>
+Status for 01/17/14
+</title>
+</head>
+<body>
 
-linux-ti-staging: remove initscript dependency
+<h2>Status for 01/17/14</h2>
 
-* Remove the RDEPENDS for the am33x-cm3-initscript package since
-  the latest kernel source use the hotplug functionality to load
-  the firmware.
-* Updated the SRCREV to the latest kernel sources which include
-  the hotplug fix.
-* Bump the MACHINE_KERNEL_PR for the am335x and am437x devices
-  which are affected.
+<h2>BUILD_ID: build-2014-01-17_21-01-39</h2>
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+<h2>Clean Build: false</h2>
 
----
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
- conf/machine/include/ti33x.inc                |    2 +-
- conf/machine/include/ti43x.inc                |    2 +-
- recipes-kernel/linux/linux-ti-staging_3.12.bb |    7 +++----
- 3 files changed, 5 insertions(+), 6 deletions(-)
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
 
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index af340d2..17b968d 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -16,7 +16,7 @@ XSERVER = "xserver-xorg \
- GUI_MACHINE_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r20"
-+MACHINE_KERNEL_PR = "r21"
- 
- # Default providers, may need to override for specific machines
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
-diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
-index d9bfd25..8913380 100644
---- a/conf/machine/include/ti43x.inc
-+++ b/conf/machine/include/ti43x.inc
-@@ -16,7 +16,7 @@ XSERVER = "xserver-xorg \
- GUI_MACHINE_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r1"
-+MACHINE_KERNEL_PR = "r2"
- 
- # Default providers, may need to override for specific machines
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 7d5439e..2d9f813 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -13,8 +13,8 @@ RDEPENDS_kernel-base += "kernel-devicetree"
- 
- # Add a run-time dependency for the PM firmware to be installed
- # on the target file system.
--RDEPENDS_kernel-base_append_ti33x = " am33x-cm3 am33x-cm3-initscript"
--RDEPENDS_kernel-base_append_ti43x = " am33x-cm3 am33x-cm3-initscript"
-+RDEPENDS_kernel-base_append_ti33x = " am33x-cm3"
-+RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
- 
- # Add a run-time dependency for the VPE VPDMA firmware to be installed
- # on the target file system.
-@@ -36,8 +36,7 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.12.y"
- 
--# Corresponds to ti2013.12.00 release
--SRCREV = "dfea149efb32485f17bb7440eb326549c8f647e2"
-+SRCREV = "b0f3ccd18d39c375491519ba285babf152eab9d8"
- PV = "3.12.4"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2013.10"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_148_1815953955.1390011540604--
