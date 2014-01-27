@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E94E8E006E3
-	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 13:37:05 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA998E006E5
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 13:37:06 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9221752A63; Mon, 27 Jan 2014 21:37:02 +0000 (UTC)
+	id 07E4152A7C; Mon, 27 Jan 2014 21:37:05 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140127213702.9221752A63@arago-project.org>
-Date: Mon, 27 Jan 2014 21:37:02 +0000 (UTC)
+Message-Id: <20140127213706.07E4152A7C@arago-project.org>
+Date: Mon, 27 Jan 2014 21:37:05 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : cmem: adding new recipe for cmem
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Mon, 27 Jan 2014 21:37:08 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: b17cf2d6f1d9107eff707b1f88a8f7bc1a5d2aab
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b17cf2d6f1d9107eff707b1f88a8f7bc1a5d2aab
+Branch: dylan
+Commit: f97d0f5b24a4adbdb6795b75e8677f0e5689fd49
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f97d0f5b24a4adbdb6795b75e8677f0e5689fd49
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Wed Dec 18 18:54:39 2013 -0500
