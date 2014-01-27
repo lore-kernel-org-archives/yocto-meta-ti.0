@@ -1,24 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 00A6DE006BE
-	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 11:43:38 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N0200KIQS4N6QB0@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 27 Jan 2014 13:43:36 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id A20D3200AC; Mon,
-	27 Jan 2014 14:43:35 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 521A3E006D9
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 11:52:04 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 4F6EB52AA5; Mon, 27 Jan 2014 19:52:04 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 27 Jan 2014 14:43:33 -0500
-Message-id: <1390851813-27883-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-In-reply-to: <1387410879-23769-1-git-send-email-sam.nelson@ti.com>
-References: <1387410879-23769-1-git-send-email-sam.nelson@ti.com>
-Subject: [PATCH] cmem: adding new recipe for cmem
+Message-Id: <20140127195204.4F6EB52AA5@arago-project.org>
+Date: Mon, 27 Jan 2014 19:52:04 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update to stable 3.12.9, other bugfixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,79 +22,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2014 19:43:41 -0000
+X-List-Received-Date: Mon, 27 Jan 2014 19:52:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Sam Nelson <sam.nelson@ti.com>
+Module: meta-ti
+Branch: dylan
+Commit: 7f2773454b349d2a4d5a9601e6a524c40b664f73
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7f2773454b349d2a4d5a9601e6a524c40b664f73
 
-cmem module provides user space contiguous memory allocation
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Jan 27 13:47:17 2014 -0500
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+linux-ti-staging: update to stable 3.12.9, other bugfixes
+
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-bsp/cmem/cmem-mod_git.bb | 12 ++++++++++++
- recipes-bsp/cmem/cmem.inc        | 12 ++++++++++++
- recipes-bsp/cmem/cmem_git.bb     | 13 +++++++++++++
- 3 files changed, 37 insertions(+)
- create mode 100644 recipes-bsp/cmem/cmem-mod_git.bb
- create mode 100644 recipes-bsp/cmem/cmem.inc
- create mode 100644 recipes-bsp/cmem/cmem_git.bb
 
-diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
-new file mode 100644
-index 0000000..2bdf9c0
---- /dev/null
-+++ b/recipes-bsp/cmem/cmem-mod_git.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
-+
-+include cmem.inc
-+
-+# This package builds a kernel module, use kernel PR as base and append a local
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+inherit module
-+
-+EXTRA_OEMAKE += '-f lu.mak KERNEL_INSTALL_DIR="${STAGING_KERNEL_DIR}" TOOLCHAIN_PREFIX="${TOOLCHAIN_PREFIX}" EXEC_DIR="${D}/lib/modules/${KERNEL_VERSION}/extra"'
-+MAKE_TARGETS = "module"
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-new file mode 100644
-index 0000000..7927839
---- /dev/null
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -0,0 +1,12 @@
-+HOMEPAGE = "http://processors.wiki.ti.com/index.php/Category:CMEM"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=b86138d4028fb8310b3b983024edc620"
-+
-+BRANCH ?= "master"
-+# This corresponds to version 4.00.01.08
-+SRCREV = "0b68dfe9f155a1978cdb2178e052dc0d6f1e705b"
-+
-+SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
-+
-+S = "${WORKDIR}/git"
-diff --git a/recipes-bsp/cmem/cmem_git.bb b/recipes-bsp/cmem/cmem_git.bb
-new file mode 100644
-index 0000000..bab9238
---- /dev/null
-+++ b/recipes-bsp/cmem/cmem_git.bb
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "The cmem component supports contiguous memory allocation from userspace"
-+
-+include cmem.inc
-+
-+RDEPENDS_${PN} = "cmem-mod"
-+
-+PR = "r0+gitr${SRCPV}"
-+
-+PACKAGES =+ "${PN}-test"
-+
-+FILES_${PN}-test = "${bindir}/*"
-+
-+inherit autotools
--- 
-1.8.3.2
+---
+
+ recipes-kernel/linux/linux-ti-staging_3.12.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index ab7b44b..a0c8aec 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -36,8 +36,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.12.y"
+ 
+-SRCREV = "af17c0c3a9f2f787f731e6124766443f8343be17"
+-PV = "3.12.8"
++SRCREV = "ae99216c5588fc0f9f6a48cb3da47c15f19e6415"
++PV = "3.12.9"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
 
 
