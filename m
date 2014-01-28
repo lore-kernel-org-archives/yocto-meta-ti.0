@@ -1,28 +1,29 @@
 Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 506ECE005B4
-	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 19:43:07 -0800 (PST)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5EB45E006F7
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 19:50:21 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0S3h7XC030510
-	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 21:43:07 -0600
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0S3oLjZ005419
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 21:50:21 -0600
 Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0S3h7UG008111
-	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 21:43:07 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0S3oLEo012637
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 21:50:21 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
 	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 27 Jan 2014 21:43:06 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s0S3h6jN007322	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 21:43:06
-	-0600
-Date: Mon, 27 Jan 2014 22:30:14 -0500
+	Mon, 27 Jan 2014 21:50:20 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0S3oKiS009541;
+	Mon, 27 Jan 2014 21:50:20 -0600
+Date: Mon, 27 Jan 2014 22:50:20 -0500
 From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1494230312.191.1390879814123.JavaMail.jenkins@puget>
+To: Sam Nelson <sam.nelson@ti.com>
+Message-ID: <20140128035020.GB6814@edge>
+References: <1390880491-24176-1-git-send-email-sam.nelson@ti.com>
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-01-27_21-00-24
+In-Reply-To: <1390880491-24176-1-git-send-email-sam.nelson@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] u-boot-keystone: Update keystone u-boot to latest version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +36,118 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jan 2014 03:43:08 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_190_1989133823.1390879814122"
+X-List-Received-Date: Tue, 28 Jan 2014 03:50:24 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-------=_Part_190_1989133823.1390879814122
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+On Mon, Jan 27, 2014 at 10:41:31PM -0500, Sam Nelson wrote:
+> - Update license and checksum
+> - Update source URL
+> - Added SPI Nor binaries and deployed images
+> - Update script to configure, compile, install, deploy
+> 
+> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> ---
+>  recipes-bsp/u-boot/u-boot-keystone_2013.01.bb |   75 +++++++++++++++++++++++--
+>  1 file changed, 71 insertions(+), 4 deletions(-)
+> 
+> diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+> index 788d813..d225cea 100644
+> --- a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+> +++ b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+> @@ -1,16 +1,83 @@
+>  require u-boot-ti.inc
+>  
+>  DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
+> +LICENSE = "GPLv2+"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb"
+>  
+>  COMPATIBLE_MACHINE = "keystone"
+>  
+> -PR = "r2+gitr${SRCPV}"
+> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+>  
+> -SRC_URI = "git://arago-project.org/git/projects/u-boot-keystone.git;protocol=git;branch=${BRANCH}"
+> +PR = "r3+gitr${SRCPV}"
+> +
+> +# for nightly switch the two below
+> +SRC_URI = "git://git.ti.com/keystone-linux/u-boot.git;protocol=git;branch=${BRANCH}"
+>  
+>  BRANCH = "master"
+>  
+> -# DEV.MCSDK-03.00.00.07
+> -SRCREV = "82f40e857d853165310d0753e79235aefb65d7ba"
+> +#Tag "K2_UBOOT_2013-01_13.12"
+> +SRCREV = "e4b19a8d418e35bf2bd63eba485afd5d9e436188"
+> +
+> +EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
+> +
+> +S = "${WORKDIR}/git"
+>  
+>  UBOOT_SUFFIX = "bin"
+> +
+> +UBOOT_MAKE_TARGET = "u-boot-spi.gph"
+> +# SPI NOR Flash binaries
+> +UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
+> +UBOOT_SPI_BINARY = "u-boot.img"
+> +UBOOT_SPI_GPH_BINARY = "u-boot-spi.gph"
+> +# SPI NOR Flash deployed images
+> +UBOOT_SPI_SPL_IMAGE = "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
+> +UBOOT_SPI_SPL_SYMLINK = "u-boot-spl-${MACHINE}.bin"
+> +UBOOT_SPI_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
+> +UBOOT_SPI_SYMLINK = "u-boot-${MACHINE}.img"
+> +UBOOT_SPI_GPH_IMAGE = "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
+> +UBOOT_SPI_GPH_SYMLINK = "u-boot-spi-${MACHINE}.gph"
+> +
+> +do_configure () {
+> +	oe_runmake ${UBOOT_MACHINE}
+> +}
+> +
+> +do_compile () {
+> +	unset LDFLAGS
+> +	unset CFLAGS
+> +	unset CPPFLAGS
+> +	oe_runmake ${UBOOT_MAKE_TARGET}
+> +}
+> +
+> +do_install () {
+> +	install -d ${D}/boot
+> +	install ${S}/${UBOOT_BINARY} ${D}/boot/${UBOOT_IMAGE}
+> +	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
+> +	install ${S}/${UBOOT_SPI_BINARY} ${D}/boot/${UBOOT_SPI_IMAGE}
+> +	install ${S}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
+> +	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
+> +	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
+> +	ln -sf ${UBOOT_SPI_IMAGE} ${D}/boot/${UBOOT_SPI_BINARY}
+> +	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
+> +}
+> +
+> +do_deploy () {
+> +	install -d ${DEPLOY_DIR_IMAGE}
+> +	install ${S}/${UBOOT_BINARY} ${DEPLOY_DIR_IMAGE}/${UBOOT_IMAGE}
+> +	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOY_DIR_IMAGE}/${UBOOT_SPI_SPL_IMAGE}
+> +	install ${S}/${UBOOT_SPI_BINARY} ${DEPLOY_DIR_IMAGE}/${UBOOT_SPI_IMAGE}
+> +	install ${S}/${UBOOT_SPI_GPH_BINARY} ${DEPLOY_DIR_IMAGE}/${UBOOT_SPI_GPH_IMAGE}
+> +
+> +	cd ${DEPLOY_DIR_IMAGE}
+> +	rm -f ${UBOOT_BINARY} ${UBOOT_SYMLINK}
+> +	ln -sf ${UBOOT_IMAGE} ${UBOOT_SYMLINK}
+> +	ln -sf ${UBOOT_IMAGE} ${UBOOT_BINARY}
+> +	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
+> +	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
+> +	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
+> +	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
+> +	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
+> +	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
+> +	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
+> +	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
+> +	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
+> +}
 
-<html>
-<head>
-<title>
-Status for 01/27/14
-</title>
-</head>
-<body>
+Most of the above logic is already provided by the standard u-boot.inc - it 
+shouldn't be hard to extend it to support your special formats instead of 
+re-implementing everything from scratch...
 
-<h2>Status for 01/27/14</h2>
+-- 
+Denys
 
-<h2>BUILD_ID: build-2014-01-27_21-01-32</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2013.10"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
-
-
-------=_Part_190_1989133823.1390879814122--
