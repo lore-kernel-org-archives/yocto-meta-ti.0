@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 14950E003FA
-	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 17:13:25 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03BF0E003FA
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 17:13:33 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DAAC6529BC; Tue, 28 Jan 2014 01:13:24 +0000 (UTC)
+	id 9DDC8529BC; Tue, 28 Jan 2014 01:13:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140128011324.DAAC6529BC@arago-project.org>
-Date: Tue, 28 Jan 2014 01:13:24 +0000 (UTC)
+Message-Id: <20140128011332.9DDC8529BC@arago-project.org>
+Date: Tue, 28 Jan 2014 01:13:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : boot-monitor: keystone-evm: update to latest version
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jan 2014 01:13:26 -0000
+X-List-Received-Date: Tue, 28 Jan 2014 01:13:33 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: bb88de3462480930c3b27138fd670a57beb9156e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bb88de3462480930c3b27138fd670a57beb9156e
+Branch: dylan
+Commit: 5d77a6c878c1d1e5b77aa7d1aecc33989ef8bd5d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5d77a6c878c1d1e5b77aa7d1aecc33989ef8bd5d
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Mon Jan 27 19:49:56 2014 -0500
