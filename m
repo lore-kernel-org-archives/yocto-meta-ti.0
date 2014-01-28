@@ -1,15 +1,26 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA998E006E5
-	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 13:37:06 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 07E4152A7C; Mon, 27 Jan 2014 21:37:05 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20140127213706.07E4152A7C@arago-project.org>
-Date: Mon, 27 Jan 2014 21:37:05 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : cmem: adding new recipe for cmem
+Return-Path: <sam.nelson@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C5C0E006D3
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 16:41:18 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0S0fFE4021981
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 18:41:15 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0S0fFqF021300
+	for <meta-ti@yoctoproject.org>; Mon, 27 Jan 2014 18:41:15 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Mon, 27 Jan 2014 18:41:14 -0600
+Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s0S0fEeQ015566;	Mon, 27 Jan 2014 18:41:14 -0600
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 27 Jan 2014 19:41:11 -0500
+Message-ID: <1390869671-10709-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [PATCH] boot-monitor: keystone-evm: update to latest version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,85 +33,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2014 21:37:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 28 Jan 2014 00:41:19 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: dylan
-Commit: f97d0f5b24a4adbdb6795b75e8677f0e5689fd49
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f97d0f5b24a4adbdb6795b75e8677f0e5689fd49
-
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Dec 18 18:54:39 2013 -0500
-
-cmem: adding new recipe for cmem
-
-cmem module provides user space contiguous memory allocation
+- Update SRC URL
+- Update Revision string
+- Update SRCREV commit id
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/boot-monitor/boot-monitor_git.bb |    7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
- recipes-bsp/cmem/cmem-mod_git.bb |   12 ++++++++++++
- recipes-bsp/cmem/cmem.inc        |   12 ++++++++++++
- recipes-bsp/cmem/cmem_git.bb     |   13 +++++++++++++
- 3 files changed, 37 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
-new file mode 100644
-index 0000000..2bdf9c0
---- /dev/null
-+++ b/recipes-bsp/cmem/cmem-mod_git.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
-+
-+include cmem.inc
-+
-+# This package builds a kernel module, use kernel PR as base and append a local
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+inherit module
-+
-+EXTRA_OEMAKE += '-f lu.mak KERNEL_INSTALL_DIR="${STAGING_KERNEL_DIR}" TOOLCHAIN_PREFIX="${TOOLCHAIN_PREFIX}" EXEC_DIR="${D}/lib/modules/${KERNEL_VERSION}/extra"'
-+MAKE_TARGETS = "module"
-diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-new file mode 100644
-index 0000000..7927839
---- /dev/null
-+++ b/recipes-bsp/cmem/cmem.inc
-@@ -0,0 +1,12 @@
-+HOMEPAGE = "http://processors.wiki.ti.com/index.php/Category:CMEM"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=b86138d4028fb8310b3b983024edc620"
-+
-+BRANCH ?= "master"
-+# This corresponds to version 4.00.01.08
-+SRCREV = "0b68dfe9f155a1978cdb2178e052dc0d6f1e705b"
-+
-+SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
-+
-+S = "${WORKDIR}/git"
-diff --git a/recipes-bsp/cmem/cmem_git.bb b/recipes-bsp/cmem/cmem_git.bb
-new file mode 100644
-index 0000000..b633d74
---- /dev/null
-+++ b/recipes-bsp/cmem/cmem_git.bb
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "The cmem component supports contiguous memory allocation from userspace"
-+
-+include cmem.inc
-+
-+RDEPENDS_${PN} = "cmem-mod"
-+
-+PR = "r0+gitr${SRCPV}"
-+
-+PACKAGES =+ "${PN}-test"
-+
-+FILES_${PN}-test = "${bindir}/*"
-+
-+inherit autotools
+diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+index 895de6c..47527be 100644
+--- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
++++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+@@ -11,16 +11,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=25fe219a6febf6e5bb45beda1b2eb315"
+ 
+ COMPATIBLE_MACHINE = "keystone-evm"
+ 
+-SRC_URI = "git://arago-project.org/git/projects/boot-monitor.git;protocol=git;branch=${BRANCH}"
++SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
+ 
+ PV = "1.0"
+-PR = "r2+gitr${SRCREV}"
++PR = "r2+gitr${SRCPV}"
+ 
+ BRANCH = "master"
+ 
+ S = "${WORKDIR}/git"
+ 
+-SRCREV = "94cab20c4a4725a014d6f815704557d28fec9610"
++#Tag "K2_BM_13.11"
++SRCREV = "ba597d183423971e63295cdd59d3c90245e9170a"
+ 
+ do_compile () {
+ 	unset LDFLAGS
+-- 
+1.7.9.5
 
 
