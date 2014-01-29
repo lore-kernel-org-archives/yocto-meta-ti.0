@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2AFF6E007BD
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 29C73E007B9
 	for <meta-ti@yoctoproject.org>; Wed, 29 Jan 2014 14:45:19 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B9846529C3; Wed, 29 Jan 2014 22:45:18 +0000 (UTC)
+	id AF49752A38; Wed, 29 Jan 2014 22:45:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140129224518.B9846529C3@arago-project.org>
+Message-Id: <20140129224518.AF49752A38@arago-project.org>
 Date: Wed, 29 Jan 2014 22:45:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVyIGJlYWdsZWJvbmUtY2FwZXM6IHVwZGF0ZSBvZS1jb3JlJyBzIExJQ0VOU0UgY2hlY2tzdW0=?=
+Subject: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVyIGdhZGdldC1pbml0OiB1cGRhdGUgb2UtY29yZScgcyBMSUNFTlNFIGNoZWNrc3Vt?=
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,34 +27,34 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ff6a6b61f5d82cd0d3aded65f484605291241a3e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ff6a6b61f5d82cd0d3aded65f484605291241a3e
+Commit: 2da692a83ca49ee004cac18690987a7f26e2ad63
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2da692a83ca49ee004cac18690987a7f26e2ad63
 
 Author: Andreas Müller <schnitzeltony@googlemail.com>
-Date:   Wed Jan  8 15:53:28 2014 +0100
+Date:   Wed Jan  8 15:53:27 2014 +0100
 
-beaglebone-capes: update oe-core's LICENSE checksum
+gadget-init: update oe-core's LICENSE checksum
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/beagleboard/beaglebone-capes.bb |    2 +-
+ recipes-ti/beagleboard/gadget-init.bb |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-ti/beagleboard/beaglebone-capes.bb b/recipes-ti/beagleboard/beaglebone-capes.bb
-index ae9132e..e74033a 100644
---- a/recipes-ti/beagleboard/beaglebone-capes.bb
-+++ b/recipes-ti/beagleboard/beaglebone-capes.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Userspace setup for beaglebone capes"
+diff --git a/recipes-ti/beagleboard/gadget-init.bb b/recipes-ti/beagleboard/gadget-init.bb
+index 1a6a336..8b899c5 100644
+--- a/recipes-ti/beagleboard/gadget-init.bb
++++ b/recipes-ti/beagleboard/gadget-init.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Units to initialize usb gadgets"
+ PR = "r19"
  
  LICENSE = "MIT"
 -LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 +LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
  
- PR = "r4"
- 
+ COMPATIBLE_MACHINE = "(ti33x)"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
