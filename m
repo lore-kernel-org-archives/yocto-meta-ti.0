@@ -1,28 +1,26 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 41133E004A1
-	for <meta-ti@yoctoproject.org>; Thu, 30 Jan 2014 19:08:18 -0800 (PST)
+Return-Path: <sam.nelson@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6F79E004D9
+	for <meta-ti@yoctoproject.org>; Thu, 30 Jan 2014 21:23:20 -0800 (PST)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0V38GXN023059
-	for <meta-ti@yoctoproject.org>; Thu, 30 Jan 2014 21:08:16 -0600
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0V5NITx011199
+	for <meta-ti@yoctoproject.org>; Thu, 30 Jan 2014 23:23:19 -0600
 Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0V38Gqd027311
-	for <meta-ti@yoctoproject.org>; Thu, 30 Jan 2014 21:08:16 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0V5NIY6010071
+	for <meta-ti@yoctoproject.org>; Thu, 30 Jan 2014 23:23:18 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
 	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 30 Jan 2014 21:08:16 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s0V38GDL031238	for <meta-ti@yoctoproject.org>; Thu, 30 Jan 2014 21:08:16
-	-0600
-Date: Thu, 30 Jan 2014 21:55:18 -0500
-From: Denys Dmytriyenko <denys@ti.com>
+	Thu, 30 Jan 2014 23:23:18 -0600
+Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s0V5NIYf002095;	Thu, 30 Jan 2014 23:23:18 -0600
+From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1023856397.209.1391136918932.JavaMail.jenkins@puget>
+Date: Fri, 31 Jan 2014 00:23:09 -0500
+Message-ID: <1391145789-9460-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-01-30_21-00-24
+Subject: [PATCH v2] linux-keystone: Create recipe for linux-keystone kernel version 3.10
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +33,80 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2014 03:08:24 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_208_1708771504.1391136918931"
+X-List-Received-Date: Fri, 31 Jan 2014 05:23:25 -0000
+Content-Type: text/plain
 
-------=_Part_208_1708771504.1391136918931
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+- Updated Source URL & version
+- Added device tree file
 
-<html>
-<head>
-<title>
-Status for 01/30/14
-</title>
-</head>
-<body>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 
-<h2>Status for 01/30/14</h2>
+-----
+Changes from last patch
+Renamed recipe from 3.10--> 3.10.10
+Removed directory path from dtb file
+Removed do_deploy_append
+----
+---
+ .../defconfig                                      |    0
+ ...keystone_3.8.4.bb => linux-keystone_3.10.10.bb} |   25 +++++++++++---------
+ 2 files changed, 14 insertions(+), 11 deletions(-)
+ rename recipes-kernel/linux/{linux-keystone-3.8.4 => linux-keystone-3.10.10}/defconfig (100%)
+ rename recipes-kernel/linux/{linux-keystone_3.8.4.bb => linux-keystone_3.10.10.bb} (50%)
 
-<h2>BUILD_ID: build-2014-01-30_21-01-32</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="keystone-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.01"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+diff --git a/recipes-kernel/linux/linux-keystone-3.8.4/defconfig b/recipes-kernel/linux/linux-keystone-3.10.10/defconfig
+similarity index 100%
+rename from recipes-kernel/linux/linux-keystone-3.8.4/defconfig
+rename to recipes-kernel/linux/linux-keystone-3.10.10/defconfig
+diff --git a/recipes-kernel/linux/linux-keystone_3.8.4.bb b/recipes-kernel/linux/linux-keystone_3.10.10.bb
+similarity index 50%
+rename from recipes-kernel/linux/linux-keystone_3.8.4.bb
+rename to recipes-kernel/linux/linux-keystone_3.10.10.bb
+index d176f14..a5c113e 100644
+--- a/recipes-kernel/linux/linux-keystone_3.8.4.bb
++++ b/recipes-kernel/linux/linux-keystone_3.10.10.bb
+@@ -3,26 +3,29 @@ DESCRIPTION = "Linux kernel for TI Keystone devices"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ 
++COMPATIBLE_MACHINE = "keystone"
++
+ inherit kernel
+ 
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
+ 
++MACHINE_KERNEL_PR_append = "a"
++
++CORTEXA8FIXUP = "no"
++
+ KERNEL_DEVICETREE_keystone-evm = "k2hk-evm.dtb"
+ 
+-COMPATIBLE_MACHINE = "keystone"
++#This commit corresponds to "K2_LINUX_03.10.10_13.12"
++SRCREV = "335d14b1c2ce23585835243126c6acba89067ecf"
+ 
+-S = "${WORKDIR}/git"
++BRANCH = "master"
+ 
+-BRANCH = "sept-2013/master"
++SRC_URI = "git://git.ti.com/keystone-linux/linux.git;protocol=git;branch=${BRANCH}\
++           file://defconfig\
++           "
+ 
+-# This commit corresponds to K2_LINUX_03.08.04_13.09 tag
+-SRCREV = "20a48dc5309c4434650baef2b6072b5f1016f946"
++S = "${WORKDIR}/git"
+ 
+-# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+-PR = "${MACHINE_KERNEL_PR}"
++RDEPENDS_kernel-base = ""
+ 
+-SRC_URI = "git://arago-project.org/git/projects/linux-keystone.git;protocol=git;branch=${BRANCH}\
+-           file://defconfig\
+-          "
+-- 
+1.7.9.5
 
 
-------=_Part_208_1708771504.1391136918931--
