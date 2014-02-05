@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D7ED7E00288
-	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 15:44:04 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 40364E003D2
+	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 15:44:12 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 699EB52A1B; Wed,  5 Feb 2014 23:44:04 +0000 (UTC)
+	id 036CD529D2; Wed,  5 Feb 2014 23:44:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140205234404.699EB52A1B@arago-project.org>
-Date: Wed,  5 Feb 2014 23:44:04 +0000 (UTC)
+Message-Id: <20140205234412.036CD529D2@arago-project.org>
+Date: Wed,  5 Feb 2014 23:44:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : linux-keystone-rt: Add new recipe for build rt-kernel
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Feb 2014 23:44:07 -0000
+X-List-Received-Date: Wed, 05 Feb 2014 23:44:12 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dora
-Commit: 0bc3d9bb11d9d0c6676f2731bfd474c2c4c9154d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0bc3d9bb11d9d0c6676f2731bfd474c2c4c9154d
+Branch: dylan
+Commit: 87b39200b293562259c55cc52282cec361ce2578
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=87b39200b293562259c55cc52282cec361ce2578
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Wed Feb  5 18:25:18 2014 -0500
