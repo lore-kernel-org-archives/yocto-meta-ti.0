@@ -1,15 +1,22 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E769E00566
-	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 15:13:32 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 2F4AE52A1B; Wed,  5 Feb 2014 23:13:29 +0000 (UTC)
+Return-Path: <denis@denix.org>
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D2F0E00280
+	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 15:22:40 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173025.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N0J00AYEQ8S4IE0@vms173025.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 05 Feb 2014 17:22:19 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id EF221201BF; Wed,
+	05 Feb 2014 18:22:03 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20140205231329.2F4AE52A1B@arago-project.org>
-Date: Wed,  5 Feb 2014 23:13:29 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : linux-keystone: Update to linux kernel version 3.10
+Date: Wed, 05 Feb 2014 18:22:02 -0500
+Message-id: <1391642522-22676-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH] am33x-cm3: update with FW version 0x185 aka 05.00.00.02
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,85 +29,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Feb 2014 23:13:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 05 Feb 2014 23:22:42 -0000
 
-Module: meta-ti
-Branch: dylan
-Commit: 2bae56cfdc0f797f6a680a37280ae8cbbdd45e7a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2bae56cfdc0f797f6a680a37280ae8cbbdd45e7a
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Feb  5 17:52:07 2014 -0500
-
-linux-keystone: Update to linux kernel version 3.10
-
-- Updated Source URL & version
-- Added device tree file
-- Added LOADADDR extra args
-- Added PV 3.10.10
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-bsp/ti/am33x-cm3_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- .../defconfig                                      |    0
- ...ux-keystone_3.8.4.bb => linux-keystone_3.10.bb} |   26 +++++++++++--------
- 2 files changed, 15 insertions(+), 11 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-keystone-3.8.4/defconfig b/recipes-kernel/linux/linux-keystone/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-keystone-3.8.4/defconfig
-rename to recipes-kernel/linux/linux-keystone/defconfig
-diff --git a/recipes-kernel/linux/linux-keystone_3.8.4.bb b/recipes-kernel/linux/linux-keystone_3.10.bb
-similarity index 59%
-rename from recipes-kernel/linux/linux-keystone_3.8.4.bb
-rename to recipes-kernel/linux/linux-keystone_3.10.bb
-index d176f14..2384ede 100644
---- a/recipes-kernel/linux/linux-keystone_3.8.4.bb
-+++ b/recipes-kernel/linux/linux-keystone_3.10.bb
-@@ -3,26 +3,30 @@ DESCRIPTION = "Linux kernel for TI Keystone devices"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
+index 1e99595..175cbfb 100644
+--- a/recipes-bsp/ti/am33x-cm3_git.bb
++++ b/recipes-bsp/ti/am33x-cm3_git.bb
+@@ -3,14 +3,14 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
+ LICENSE = "TI-BSD"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
  
-+COMPATIBLE_MACHINE = "keystone"
-+
- inherit kernel
+-PV = "05.00.00.01"
++PV = "05.00.00.02"
+ PR = "r1"
  
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
+ # Make package machine specific due to different init scripts
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
-+
- KERNEL_DEVICETREE_keystone-evm = "k2hk-evm.dtb"
+-# SRCREV corresponds to tag v05.00.00.01
+-SRCREV = "40cb75b9dd9ba15c6de1c15cbb7cce8f1a6588b8"
++# SRCREV corresponds to tag v05.00.00.02
++SRCREV = "11107db2f1e9e58ee75d4fe9cc38423c9a6e4365"
+ BRANCH ?= "master"
  
--COMPATIBLE_MACHINE = "keystone"
-+KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
- 
--S = "${WORKDIR}/git"
-+#This commit corresponds to "K2_LINUX_03.10.10_13.12"
-+SRCREV = "335d14b1c2ce23585835243126c6acba89067ecf"
-+PV = "3.10.10"
- 
--BRANCH = "sept-2013/master"
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/keystone-linux/linux.git;protocol=git;branch=${BRANCH}\
-+           file://defconfig\
-+           "
- 
--# This commit corresponds to K2_LINUX_03.08.04_13.09 tag
--SRCREV = "20a48dc5309c4434650baef2b6072b5f1016f946"
-+S = "${WORKDIR}/git"
- 
--# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
--PR = "${MACHINE_KERNEL_PR}"
-+RDEPENDS_kernel-base = ""
- 
--SRC_URI = "git://arago-project.org/git/projects/linux-keystone.git;protocol=git;branch=${BRANCH}\
--           file://defconfig\
--          "
+ # This init script is only used for older kernels that do not support
+-- 
+1.8.3.2
 
 
