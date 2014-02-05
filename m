@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B44ADE00280
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B583CE002A7
 	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 15:13:22 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D62FF52A38; Wed,  5 Feb 2014 23:13:21 +0000 (UTC)
+	id D08D1529AA; Wed,  5 Feb 2014 23:13:21 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140205231321.D62FF52A38@arago-project.org>
+Message-Id: <20140205231321.D08D1529AA@arago-project.org>
 Date: Wed,  5 Feb 2014 23:13:21 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : linux-keystone: Update to linux kernel version 3.10
@@ -26,9 +26,9 @@ X-List-Received-Date: Wed, 05 Feb 2014 23:13:23 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dora
-Commit: 467cfb121eef4ef77a02c46758d27060918dc24c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=467cfb121eef4ef77a02c46758d27060918dc24c
+Branch: master
+Commit: 99ac3f85cc76479df5ca2da3b19cc95ec1569e98
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=99ac3f85cc76479df5ca2da3b19cc95ec1569e98
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Wed Feb  5 17:52:07 2014 -0500
