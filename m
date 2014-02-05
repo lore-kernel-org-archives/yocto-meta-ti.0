@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B583CE002A7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B6B57E00303
 	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 15:13:22 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D08D1529AA; Wed,  5 Feb 2014 23:13:21 +0000 (UTC)
+	id B1F5D52A1B; Wed,  5 Feb 2014 23:13:21 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140205231321.D08D1529AA@arago-project.org>
+Message-Id: <20140205231321.B1F5D52A1B@arago-project.org>
 Date: Wed,  5 Feb 2014 23:13:21 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : linux-keystone: Update to linux kernel version 3.10
+Subject: Sam Nelson : keystone: Add pci feature to MACHINE Keystone
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,80 +27,42 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 99ac3f85cc76479df5ca2da3b19cc95ec1569e98
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=99ac3f85cc76479df5ca2da3b19cc95ec1569e98
+Commit: 67b010ffcb815d524c2302d85b190d7794d7ccb2
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=67b010ffcb815d524c2302d85b190d7794d7ccb2
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Feb  5 17:52:07 2014 -0500
+Date:   Fri Jan 31 23:47:58 2014 -0500
 
-linux-keystone: Update to linux kernel version 3.10
+keystone: Add pci feature to MACHINE Keystone
 
-- Updated Source URL & version
-- Added device tree file
-- Added LOADADDR extra args
-- Added PV 3.10.10
+- Device support pci interface
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../defconfig                                      |    0
- ...ux-keystone_3.8.4.bb => linux-keystone_3.10.bb} |   26 +++++++++++--------
- 2 files changed, 15 insertions(+), 11 deletions(-)
+ conf/machine/include/keystone.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-keystone-3.8.4/defconfig b/recipes-kernel/linux/linux-keystone/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-keystone-3.8.4/defconfig
-rename to recipes-kernel/linux/linux-keystone/defconfig
-diff --git a/recipes-kernel/linux/linux-keystone_3.8.4.bb b/recipes-kernel/linux/linux-keystone_3.10.bb
-similarity index 59%
-rename from recipes-kernel/linux/linux-keystone_3.8.4.bb
-rename to recipes-kernel/linux/linux-keystone_3.10.bb
-index d176f14..2384ede 100644
---- a/recipes-kernel/linux/linux-keystone_3.8.4.bb
-+++ b/recipes-kernel/linux/linux-keystone_3.10.bb
-@@ -3,26 +3,30 @@ DESCRIPTION = "Linux kernel for TI Keystone devices"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index 72e71bf..b961ad3 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -8,7 +8,7 @@ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-keystone"
+ PREFERRED_PROVIDER_u-boot = "u-boot-keystone"
  
-+COMPATIBLE_MACHINE = "keystone"
-+
- inherit kernel
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r6"
++MACHINE_KERNEL_PR = "r7"
  
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
+ KERNEL_IMAGETYPE = "uImage"
  
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
-+
- KERNEL_DEVICETREE_keystone-evm = "k2hk-evm.dtb"
+@@ -20,4 +20,4 @@ UBOOT_LOADADDRESS = "0x80008000"
+ EXTRA_IMAGEDEPENDS += "u-boot"
+ EXTRA_IMAGEDEPENDS += "boot-monitor"
  
--COMPATIBLE_MACHINE = "keystone"
-+KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
- 
--S = "${WORKDIR}/git"
-+#This commit corresponds to "K2_LINUX_03.10.10_13.12"
-+SRCREV = "335d14b1c2ce23585835243126c6acba89067ecf"
-+PV = "3.10.10"
- 
--BRANCH = "sept-2013/master"
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/keystone-linux/linux.git;protocol=git;branch=${BRANCH}\
-+           file://defconfig\
-+           "
- 
--# This commit corresponds to K2_LINUX_03.08.04_13.09 tag
--SRCREV = "20a48dc5309c4434650baef2b6072b5f1016f946"
-+S = "${WORKDIR}/git"
- 
--# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
--PR = "${MACHINE_KERNEL_PR}"
-+RDEPENDS_kernel-base = ""
- 
--SRC_URI = "git://arago-project.org/git/projects/linux-keystone.git;protocol=git;branch=${BRANCH}\
--           file://defconfig\
--          "
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat pci"
 
 
