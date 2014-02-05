@@ -1,24 +1,22 @@
 Return-Path: <denis@denix.org>
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54091E002A7
-	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 15:30:35 -0800 (PST)
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2D76E002A7
+	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 15:30:52 -0800 (PST)
 Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173023.mailsrvcs.net
+	by vms173017.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N0J005VEQMYHAB0@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 05 Feb 2014 17:30:34 -0600 (CST)
+	2009)) with ESMTPA id <0N0J00LNKQMXI370@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 05 Feb 2014 17:30:44 -0600 (CST)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 02357202AA; Wed,
-	05 Feb 2014 18:30:34 -0500 (EST)
+	by gandalf.denix.org (Postfix) with ESMTP id 4188D201BF; Wed,
+	05 Feb 2014 18:30:33 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 05 Feb 2014 18:30:32 -0500
-Message-id: <1391643032-25354-2-git-send-email-denis@denix.org>
+Date: Wed, 05 Feb 2014 18:30:31 -0500
+Message-id: <1391643032-25354-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.8.3.2
-In-reply-to: <1391643032-25354-1-git-send-email-denis@denix.org>
-References: <1391643032-25354-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] u-boot-ti-staging: update with many fixes for the upcoming release
+Subject: [PATCH 1/2] linux-ti-staging: update with many fixes for the upcoming release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,36 +29,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Feb 2014 23:30:38 -0000
+X-List-Received-Date: Wed, 05 Feb 2014 23:30:55 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_3.12.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-index af17f96..efaa2a2 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-@@ -5,14 +5,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index a0c8aec..bb4791f 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
  
- PV = "2013.10"
--PR = "r3+gitr${SRCPV}"
-+PR = "r4+gitr${SRCPV}"
+ BRANCH = "ti-linux-3.12.y"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "ae99216c5588fc0f9f6a48cb3da47c15f19e6415"
++SRCREV = "a4daf45088f752ed6b33239026518fc3d1bce2bc"
+ PV = "3.12.9"
  
- BRANCH ?= "ti-u-boot-2013.10"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
  
--# Corresponds to ti2013.12.00 release
--SRCREV = "562aa886438ea60cda487565b548b71407eaca26"
-+SRCREV = "ab011b4e3316c716106d2efc1e451af17f49ca75"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
 -- 
 1.8.3.2
 
