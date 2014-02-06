@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3DD4FE0030B
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3F076E003D2
 	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 18:52:59 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7FC1C52A52; Thu,  6 Feb 2014 02:52:59 +0000 (UTC)
+	id A3D9D52A54; Thu,  6 Feb 2014 02:52:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140206025259.7FC1C52A52@arago-project.org>
+Message-Id: <20140206025259.A3D9D52A54@arago-project.org>
 Date: Thu,  6 Feb 2014 02:52:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am33x-cm3: update with FW version 0x185 aka 05.00.00.02
+Subject: Denys Dmytriyenko : linux-ti-staging: update with many fixes for the upcoming release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,42 +27,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dylan
-Commit: 28a7655f792f79f6d11cdaa3d974df74d32174c8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=28a7655f792f79f6d11cdaa3d974df74d32174c8
+Commit: db1e0b9f315fca1a95251e348a0ff6395addcb33
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=db1e0b9f315fca1a95251e348a0ff6395addcb33
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Feb  5 18:21:00 2014 -0500
+Date:   Wed Feb  5 18:24:59 2014 -0500
 
-am33x-cm3: update with FW version 0x185 aka 05.00.00.02
+linux-ti-staging: update with many fixes for the upcoming release
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ti/am33x-cm3_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_3.12.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
-index 1e99595..175cbfb 100644
---- a/recipes-bsp/ti/am33x-cm3_git.bb
-+++ b/recipes-bsp/ti/am33x-cm3_git.bb
-@@ -3,14 +3,14 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
- LICENSE = "TI-BSD"
- LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index a0c8aec..bb4791f 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
  
--PV = "05.00.00.01"
-+PV = "05.00.00.02"
- PR = "r1"
+ BRANCH = "ti-linux-3.12.y"
  
- # Make package machine specific due to different init scripts
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+-SRCREV = "ae99216c5588fc0f9f6a48cb3da47c15f19e6415"
++SRCREV = "a4daf45088f752ed6b33239026518fc3d1bce2bc"
+ PV = "3.12.9"
  
--# SRCREV corresponds to tag v05.00.00.01
--SRCREV = "40cb75b9dd9ba15c6de1c15cbb7cce8f1a6588b8"
-+# SRCREV corresponds to tag v05.00.00.02
-+SRCREV = "11107db2f1e9e58ee75d4fe9cc38423c9a6e4365"
- BRANCH ?= "master"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
  
- # This init script is only used for older kernels that do not support
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
 
 
