@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD590E002A7
-	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 22:14:53 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E9D08E002A7
+	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 22:14:56 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CEEB6529D2; Thu,  6 Feb 2014 06:14:52 +0000 (UTC)
+	id A6C68529D2; Thu,  6 Feb 2014 06:14:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140206061452.CEEB6529D2@arago-project.org>
-Date: Thu,  6 Feb 2014 06:14:52 +0000 (UTC)
+Message-Id: <20140206061456.A6C68529D2@arago-project.org>
+Date: Thu,  6 Feb 2014 06:14:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : am33x-cm3: update md5 for license reformat, fix CC unset issue
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Feb 2014 06:14:53 -0000
+X-List-Received-Date: Thu, 06 Feb 2014 06:14:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 5a0938245dc12ddcd0b7c52411bf8536c9e59406
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5a0938245dc12ddcd0b7c52411bf8536c9e59406
+Branch: dora
+Commit: e786a9e186b62862d20ecb3f33c47172d184fd20
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e786a9e186b62862d20ecb3f33c47172d184fd20
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Feb  6 01:11:50 2014 -0500
