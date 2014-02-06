@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3CA5BE00303
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3DD4FE0030B
 	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 18:52:59 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1DA70529D2; Thu,  6 Feb 2014 02:52:58 +0000 (UTC)
+	id 7FC1C52A52; Thu,  6 Feb 2014 02:52:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140206025259.1DA70529D2@arago-project.org>
-Date: Thu,  6 Feb 2014 02:52:58 +0000 (UTC)
+Message-Id: <20140206025259.7FC1C52A52@arago-project.org>
+Date: Thu,  6 Feb 2014 02:52:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : am33x-cm3: update with FW version 0x185 aka 05.00.00.02
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Thu, 06 Feb 2014 02:53:00 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dora
-Commit: fe1f2777d030c774d7ea0046108de847b20c9fdc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fe1f2777d030c774d7ea0046108de847b20c9fdc
+Branch: dylan
+Commit: 28a7655f792f79f6d11cdaa3d974df74d32174c8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=28a7655f792f79f6d11cdaa3d974df74d32174c8
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Feb  5 18:21:00 2014 -0500
