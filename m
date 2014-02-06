@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3A278E002A7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B69CE002AC
 	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 18:52:59 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4B02D52A1B; Thu,  6 Feb 2014 02:52:59 +0000 (UTC)
+	id 411C6529AA; Thu,  6 Feb 2014 02:52:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140206025259.4B02D52A1B@arago-project.org>
+Message-Id: <20140206025259.411C6529AA@arago-project.org>
 Date: Thu,  6 Feb 2014 02:52:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update with many fixes for the upcoming release
+Subject: Denys Dmytriyenko : linux-ti-staging: update with many fixes for the upcoming release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,41 +27,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dora
-Commit: 53703700b37ec130c889176c9fb3561d6c8c5492
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=53703700b37ec130c889176c9fb3561d6c8c5492
+Commit: 466e558617b41192f0ce8e4b3e0cbb1e215be534
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=466e558617b41192f0ce8e4b3e0cbb1e215be534
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Feb  5 18:29:49 2014 -0500
+Date:   Wed Feb  5 18:24:59 2014 -0500
 
-u-boot-ti-staging: update with many fixes for the upcoming release
+linux-ti-staging: update with many fixes for the upcoming release
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    5 ++---
- 1 files changed, 2 insertions(+), 3 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_3.12.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-index af17f96..efaa2a2 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-@@ -5,14 +5,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index a0c8aec..bb4791f 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
  
- PV = "2013.10"
--PR = "r3+gitr${SRCPV}"
-+PR = "r4+gitr${SRCPV}"
+ BRANCH = "ti-linux-3.12.y"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "ae99216c5588fc0f9f6a48cb3da47c15f19e6415"
++SRCREV = "a4daf45088f752ed6b33239026518fc3d1bce2bc"
+ PV = "3.12.9"
  
- BRANCH ?= "ti-u-boot-2013.10"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
  
--# Corresponds to ti2013.12.00 release
--SRCREV = "562aa886438ea60cda487565b548b71407eaca26"
-+SRCREV = "ab011b4e3316c716106d2efc1e451af17f49ca75"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
 
 
