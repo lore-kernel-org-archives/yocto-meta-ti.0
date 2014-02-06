@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B01E5E002AC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B00C8E002A7
 	for <meta-ti@yoctoproject.org>; Wed,  5 Feb 2014 18:53:00 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 301F552A96; Thu,  6 Feb 2014 02:53:00 +0000 (UTC)
+	id AB28A52A38; Thu,  6 Feb 2014 02:52:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140206025300.301F552A96@arago-project.org>
-Date: Thu,  6 Feb 2014 02:53:00 +0000 (UTC)
+Message-Id: <20140206025259.AB28A52A38@arago-project.org>
+Date: Thu,  6 Feb 2014 02:52:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am33x-cm3: update with FW version 0x185 aka 05.00.00.02
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with many fixes for the upcoming release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -26,43 +26,42 @@ X-List-Received-Date: Thu, 06 Feb 2014 02:53:00 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 63ace6f107c6daf409b22e54c3f4d64ef3fc393c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=63ace6f107c6daf409b22e54c3f4d64ef3fc393c
+Branch: dylan
+Commit: 51b183dcdeb3e5f91bfd4a0f1641abebdcffaeee
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=51b183dcdeb3e5f91bfd4a0f1641abebdcffaeee
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Feb  5 18:21:00 2014 -0500
+Date:   Wed Feb  5 18:29:49 2014 -0500
 
-am33x-cm3: update with FW version 0x185 aka 05.00.00.02
+u-boot-ti-staging: update with many fixes for the upcoming release
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ti/am33x-cm3_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    5 ++---
+ 1 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
-index 1e99595..175cbfb 100644
---- a/recipes-bsp/ti/am33x-cm3_git.bb
-+++ b/recipes-bsp/ti/am33x-cm3_git.bb
-@@ -3,14 +3,14 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
- LICENSE = "TI-BSD"
- LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+index af17f96..efaa2a2 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+@@ -5,14 +5,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
  
--PV = "05.00.00.01"
-+PV = "05.00.00.02"
- PR = "r1"
+ PV = "2013.10"
+-PR = "r3+gitr${SRCPV}"
++PR = "r4+gitr${SRCPV}"
  
- # Make package machine specific due to different init scripts
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--# SRCREV corresponds to tag v05.00.00.01
--SRCREV = "40cb75b9dd9ba15c6de1c15cbb7cce8f1a6588b8"
-+# SRCREV corresponds to tag v05.00.00.02
-+SRCREV = "11107db2f1e9e58ee75d4fe9cc38423c9a6e4365"
- BRANCH ?= "master"
+ BRANCH ?= "ti-u-boot-2013.10"
  
- # This init script is only used for older kernels that do not support
+-# Corresponds to ti2013.12.00 release
+-SRCREV = "562aa886438ea60cda487565b548b71407eaca26"
++SRCREV = "ab011b4e3316c716106d2efc1e451af17f49ca75"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
