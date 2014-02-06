@@ -1,26 +1,28 @@
-Return-Path: <anders@chargestorm.se>
-Received: from stoexhubfe02.domain01.net (STOEXHUBFE02.domain01.net
-	[83.145.59.141])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 29AF1E004F2
-	for <meta-ti@yoctoproject.org>; Thu,  6 Feb 2014 12:25:43 -0800 (PST)
-Received: from ad.chargestorm.se (83.252.255.124) by stoexhubfe02.domain01.net
-	(10.12.10.7) with Microsoft SMTP Server (TLS) id 8.3.279.1;
-	Thu, 6 Feb 2014 21:25:34 +0100
-Date: Thu, 6 Feb 2014 21:25:38 +0100
-From: Anders Darander <anders@chargestorm.se>
+Return-Path: <denys@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CBA6FE004F2
+	for <meta-ti@yoctoproject.org>; Thu,  6 Feb 2014 12:28:33 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s16KSWmc017367
+	for <meta-ti@yoctoproject.org>; Thu, 6 Feb 2014 14:28:32 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s16KSWGt028061
+	for <meta-ti@yoctoproject.org>; Thu, 6 Feb 2014 14:28:32 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
+	Thu, 6 Feb 2014 14:28:31 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s16KSV3t001749	for
+	<meta-ti@yoctoproject.org>; Thu, 6 Feb 2014 14:28:31 -0600
+Date: Thu, 6 Feb 2014 15:28:31 -0500
+From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <20140206202538.GA24509@ad.chargestorm.se>
-Mail-Followup-To: meta-ti@yoctoproject.org
+Message-ID: <20140206202830.GC31128@edge>
 References: <20140206025300.301F552A96@arago-project.org>
+	<20140206202538.GA24509@ad.chargestorm.se>
 MIME-Version: 1.0
-In-Reply-To: <20140206025300.301F552A96@arago-project.org>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-GFI-SMTP-Submission: 1
+In-Reply-To: <20140206202538.GA24509@ad.chargestorm.se>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Subject: Re: Denys Dmytriyenko : am33x-cm3: update with FW version 0x185 aka 05.00.00.02
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -34,25 +36,23 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Feb 2014 20:25:46 -0000
+X-List-Received-Date: Thu, 06 Feb 2014 20:28:36 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-* Arago Project git <git@arago-project.org> [140206 03:53]:
-> am33x-cm3: update with FW version 0x185 aka 05.00.00.02
+On Thu, Feb 06, 2014 at 09:25:38PM +0100, Anders Darander wrote:
+> * Arago Project git <git@arago-project.org> [140206 03:53]:
+> > am33x-cm3: update with FW version 0x185 aka 05.00.00.02
+> 
+> Should the am33x-cm3 repo have been tagged with this?
+> 
+> > -PV = "05.00.00.01"
+> > +PV = "05.00.00.02"
+> 
+> Not least as the PV also indicates that version...
 
-Should the am33x-cm3 repo have been tagged with this?
-
-> -PV = "05.00.00.01"
-> +PV = "05.00.00.02"
-
-Not least as the PV also indicates that version...
-
-Cheers,
-Anders
-
+Yes, the maintainer has already been pinged for that...
 
 -- 
-Anders Darander
-ChargeStorm AB / eStorm AB
+Denys
 
