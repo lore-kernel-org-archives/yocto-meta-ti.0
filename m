@@ -1,22 +1,27 @@
-Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B56D4E004F2
-	for <meta-ti@yoctoproject.org>; Thu,  6 Feb 2014 11:17:05 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N0L006N39JR2J90@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 06 Feb 2014 13:16:49 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id B8733201BF; Thu,
-	06 Feb 2014 14:16:37 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Thu, 06 Feb 2014 14:16:37 -0500
-Message-id: <1391714197-29631-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH] am33x-cm3: update md5 for license reformat, fix CC unset issue
+Return-Path: <anders@chargestorm.se>
+Received: from stoexhubfe02.domain01.net (STOEXHUBFE02.domain01.net
+	[83.145.59.141])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 29AF1E004F2
+	for <meta-ti@yoctoproject.org>; Thu,  6 Feb 2014 12:25:43 -0800 (PST)
+Received: from ad.chargestorm.se (83.252.255.124) by stoexhubfe02.domain01.net
+	(10.12.10.7) with Microsoft SMTP Server (TLS) id 8.3.279.1;
+	Thu, 6 Feb 2014 21:25:34 +0100
+Date: Thu, 6 Feb 2014 21:25:38 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <20140206202538.GA24509@ad.chargestorm.se>
+Mail-Followup-To: meta-ti@yoctoproject.org
+References: <20140206025300.301F552A96@arago-project.org>
+MIME-Version: 1.0
+In-Reply-To: <20140206025300.301F552A96@arago-project.org>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-GFI-SMTP-Submission: 1
+Subject: Re: Denys Dmytriyenko : am33x-cm3: update with FW version 0x185 aka 05.00.00.02
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,42 +34,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Feb 2014 19:17:14 -0000
+X-List-Received-Date: Thu, 06 Feb 2014 20:25:46 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-From: Denys Dmytriyenko <denys@ti.com>
+* Arago Project git <git@arago-project.org> [140206 03:53]:
+> am33x-cm3: update with FW version 0x185 aka 05.00.00.02
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-bsp/ti/am33x-cm3_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Should the am33x-cm3 repo have been tagged with this?
 
-diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
-index 175cbfb..4c395c7 100644
---- a/recipes-bsp/ti/am33x-cm3_git.bb
-+++ b/recipes-bsp/ti/am33x-cm3_git.bb
-@@ -1,10 +1,10 @@
- DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
- 
- LICENSE = "TI-BSD"
--LIC_FILES_CHKSUM = "file://License.txt;md5=858099c817e47ea63559fc6b67ae8d91"
-+LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
- 
- PV = "05.00.00.02"
--PR = "r1"
-+PR = "r2"
- 
- # Make package machine specific due to different init scripts
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-@@ -36,7 +36,7 @@ SCRIPT_ti43x = "init-am43x-cm3"
- S = "${WORKDIR}/git"
- 
- do_compile() {
--	make CC="${TARGET_CC}" CROSS_COMPILE="${TARGET_PREFIX}"
-+	make CROSS_COMPILE="${TARGET_PREFIX}"
- }
- 
- do_install() {
+> -PV = "05.00.00.01"
+> +PV = "05.00.00.02"
+
+Not least as the PV also indicates that version...
+
+Cheers,
+Anders
+
+
 -- 
-1.8.3.2
-
+Anders Darander
+ChargeStorm AB / eStorm AB
 
