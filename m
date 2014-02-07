@@ -1,22 +1,24 @@
 Return-Path: <denis@denix.org>
 Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
 	[206.46.173.25])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E226E006AD
-	for <meta-ti@yoctoproject.org>; Thu,  6 Feb 2014 18:55:28 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB055E006B5
+	for <meta-ti@yoctoproject.org>; Thu,  6 Feb 2014 18:55:30 -0800 (PST)
 Received: from gandalf.denix.org ([unknown] [71.191.205.189])
 	by vms173025.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N0L000BGURK5H90@vms173025.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 06 Feb 2014 20:55:12 -0600 (CST)
+	2009)) with ESMTPA id <0N0L00DTZURLJ940@vms173025.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 06 Feb 2014 20:55:13 -0600 (CST)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id AD91F20094; Thu,
-	06 Feb 2014 21:54:56 -0500 (EST)
+	by gandalf.denix.org (Postfix) with ESMTP id 40B6F200AC; Thu,
+	06 Feb 2014 21:54:57 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Thu, 06 Feb 2014 21:54:54 -0500
-Message-id: <1391741695-14691-1-git-send-email-denis@denix.org>
+Date: Thu, 06 Feb 2014 21:54:55 -0500
+Message-id: <1391741695-14691-2-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH 1/2] linux-ti-staging: update to 3.12.10, merge Audio/Display fixed
+In-reply-to: <1391741695-14691-1-git-send-email-denis@denix.org>
+References: <1391741695-14691-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/2] u-boot-ti-staging: update with fixes for NAND partition names and sizes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,28 +37,29 @@ From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging_3.12.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index bb4791f..87f5f3c 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+index efaa2a2..f964b41 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+@@ -5,13 +5,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
  
- BRANCH = "ti-linux-3.12.y"
+ PV = "2013.10"
+-PR = "r4+gitr${SRCPV}"
++PR = "r5+gitr${SRCPV}"
  
--SRCREV = "a4daf45088f752ed6b33239026518fc3d1bce2bc"
--PV = "3.12.9"
-+SRCREV = "7f280334068b7c875ade51f8f3921ab311f0c824"
-+PV = "3.12.10"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
+ BRANCH ?= "ti-u-boot-2013.10"
  
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+-SRCREV = "ab011b4e3316c716106d2efc1e451af17f49ca75"
++SRCREV = "aa2521229894dcade9426796889d0793a4547acf"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 -- 
 1.8.3.2
 
