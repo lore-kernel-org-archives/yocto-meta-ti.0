@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 543FDE006B5
-	for <meta-ti@yoctoproject.org>; Thu,  6 Feb 2014 19:30:33 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 562D1E006EE
+	for <meta-ti@yoctoproject.org>; Thu,  6 Feb 2014 19:30:40 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 21BCB52A8C; Fri,  7 Feb 2014 03:30:33 +0000 (UTC)
+	id 24A5F52A73; Fri,  7 Feb 2014 03:30:40 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140207033033.21BCB52A8C@arago-project.org>
-Date: Fri,  7 Feb 2014 03:30:33 +0000 (UTC)
+Message-Id: <20140207033040.24A5F52A73@arago-project.org>
+Date: Fri,  7 Feb 2014 03:30:40 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update with fixes for NAND partition names and sizes
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 3.12.10, merge Audio/ Display fixed
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,45 +22,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Feb 2014 03:30:34 -0000
+X-List-Received-Date: Fri, 07 Feb 2014 03:30:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 4082922c5990eda0efe11929279d36c4c1b64d81
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4082922c5990eda0efe11929279d36c4c1b64d81
+Branch: dora
+Commit: cb01c93702519562431b56d2a5fca3e2ccbf6f8b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cb01c93702519562431b56d2a5fca3e2ccbf6f8b
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Feb  7 08:54:55 2014 +0000
+Date:   Fri Feb  7 08:54:54 2014 +0000
 
-u-boot-ti-staging: update with fixes for NAND partition names and sizes
+linux-ti-staging: update to 3.12.10, merge Audio/Display fixed
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_3.12.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-index efaa2a2..f964b41 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-@@ -5,13 +5,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index bb4791f..87f5f3c 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
  
- PV = "2013.10"
--PR = "r4+gitr${SRCPV}"
-+PR = "r5+gitr${SRCPV}"
+ BRANCH = "ti-linux-3.12.y"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "a4daf45088f752ed6b33239026518fc3d1bce2bc"
+-PV = "3.12.9"
++SRCREV = "7f280334068b7c875ade51f8f3921ab311f0c824"
++PV = "3.12.10"
  
- BRANCH ?= "ti-u-boot-2013.10"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
  
--SRCREV = "ab011b4e3316c716106d2efc1e451af17f49ca75"
-+SRCREV = "aa2521229894dcade9426796889d0793a4547acf"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
 
 
