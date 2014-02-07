@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 55711E006B7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 543FDE006B5
 	for <meta-ti@yoctoproject.org>; Thu,  6 Feb 2014 19:30:33 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 17AF252A73; Fri,  7 Feb 2014 03:30:33 +0000 (UTC)
+	id 21BCB52A8C; Fri,  7 Feb 2014 03:30:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140207033033.17AF252A73@arago-project.org>
+Message-Id: <20140207033033.21BCB52A8C@arago-project.org>
 Date: Fri,  7 Feb 2014 03:30:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 3.12.10, merge Audio/ Display fixed
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with fixes for NAND partition names and sizes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,39 +27,40 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 4a28965ca448e84c7cab278f7ef46a15b64b33e6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4a28965ca448e84c7cab278f7ef46a15b64b33e6
+Commit: 4082922c5990eda0efe11929279d36c4c1b64d81
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4082922c5990eda0efe11929279d36c4c1b64d81
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Feb  7 08:54:54 2014 +0000
+Date:   Fri Feb  7 08:54:55 2014 +0000
 
-linux-ti-staging: update to 3.12.10, merge Audio/Display fixed
+u-boot-ti-staging: update with fixes for NAND partition names and sizes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.12.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index bb4791f..87f5f3c 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+index efaa2a2..f964b41 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+@@ -5,13 +5,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
  
- BRANCH = "ti-linux-3.12.y"
+ PV = "2013.10"
+-PR = "r4+gitr${SRCPV}"
++PR = "r5+gitr${SRCPV}"
  
--SRCREV = "a4daf45088f752ed6b33239026518fc3d1bce2bc"
--PV = "3.12.9"
-+SRCREV = "7f280334068b7c875ade51f8f3921ab311f0c824"
-+PV = "3.12.10"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
+ BRANCH ?= "ti-u-boot-2013.10"
  
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+-SRCREV = "ab011b4e3316c716106d2efc1e451af17f49ca75"
++SRCREV = "aa2521229894dcade9426796889d0793a4547acf"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
