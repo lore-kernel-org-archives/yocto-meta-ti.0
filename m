@@ -1,15 +1,25 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB5F2E00748
-	for <meta-ti@yoctoproject.org>; Thu,  6 Feb 2014 19:30:48 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 9F0FB52A8C; Fri,  7 Feb 2014 03:30:48 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20140207033048.9F0FB52A8C@arago-project.org>
-Date: Fri,  7 Feb 2014 03:30:48 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update with fixes for NAND partition names and sizes
+Return-Path: <Jose.Alarcon@procemex.com>
+Received: from exchange.procemex.com (edgerole.procemex.fi [89.236.108.139])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84830E006B5
+	for <meta-ti@yoctoproject.org>; Fri,  7 Feb 2014 02:36:26 -0800 (PST)
+Received: from EXCHANGE.hq.procemex.fi (192.168.123.254) by
+	edgerole.procemex.fi (192.168.123.253) with Microsoft SMTP Server (TLS)
+	id 14.0.722.0; Fri, 7 Feb 2014 12:37:00 +0200
+Received: from EXCHANGE.hq.procemex.fi ([192.168.123.254]) by
+	exchange.hq.procemex.fi ([192.168.123.254]) with mapi; Fri, 7 Feb 2014
+	12:36:10 +0200
+From: Jose Alarcon <Jose.Alarcon@procemex.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: TI boot-monitor recipe doesn't install the boot monitor binary
+	in the image
+Thread-Index: Ac8j8GoYh5uIB+eoR/C6bj4vKQfRyw==
+Date: Fri, 7 Feb 2014 10:36:09 +0000
+Message-ID: <DD2F89422B483148BCFD0BF72A6C148A78C815A2@exchange.hq.procemex.fi>
+Accept-Language: en-US, fi-FI
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+MIME-Version: 1.0
+Subject: TI boot-monitor recipe doesn't install the boot monitor binary in the image
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,45 +32,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Feb 2014 03:30:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 07 Feb 2014 10:36:37 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Module: meta-ti
-Branch: dylan
-Commit: bef5c59b8cdf9ca7e302c6ebf4eb0874666ba38b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bef5c59b8cdf9ca7e302c6ebf4eb0874666ba38b
+Hi there,
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Feb  7 08:54:55 2014 +0000
+In order to boot ubi images on our Keystone2-evem, we had to modify the boo=
+t-monitor recipe so that the boot monitor binary gets installed into the im=
+age.
 
-u-boot-ti-staging: update with fixes for NAND partition names and sizes
+We fixed this in our own layers with a bbappend file like this:
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+    PROVIDES +=3D "boot-monitor"
 
----
+    do_install () {
+        install -d ${D}/boot
+        install ${S}/${BOOT_MONITOR_BINARY} ${D}/boot/${BOOT_MONITOR_IMAGE}
+        ln -sf ${BOOT_MONITOR_IMAGE} ${D}/boot/${BOOT_MONITOR_BINARY}
+    }
 
- recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+    FILES_${PN} =3D "/boot ${sysconfdir}"
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-index efaa2a2..f964b41 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-@@ -5,13 +5,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
- 
- PV = "2013.10"
--PR = "r4+gitr${SRCPV}"
-+PR = "r5+gitr${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2013.10"
- 
--SRCREV = "ab011b4e3316c716106d2efc1e451af17f49ca75"
-+SRCREV = "aa2521229894dcade9426796889d0793a4547acf"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+Should this be fixed in the boot-monitor_git.bb recipe itself?
 
+I am using danny branch of meta-ti, commit 0039248515b16b88161844aef5d50773=
+7331c834
+
+Best,
+
+--
+Jose Alarcon=
 
