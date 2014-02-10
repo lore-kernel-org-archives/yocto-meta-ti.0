@@ -1,28 +1,33 @@
-Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 756A8E00764
-	for <meta-ti@yoctoproject.org>; Sun,  9 Feb 2014 19:41:50 -0800 (PST)
+Return-Path: <sam.nelson@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7DF54E00764
+	for <meta-ti@yoctoproject.org>; Sun,  9 Feb 2014 19:44:22 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1A3fnD0010177
-	for <meta-ti@yoctoproject.org>; Sun, 9 Feb 2014 21:41:49 -0600
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1A3fn8H019428
-	for <meta-ti@yoctoproject.org>; Sun, 9 Feb 2014 21:41:49 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Sun, 9 Feb 2014 21:41:48 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s1A3fmOi026470	for <meta-ti@yoctoproject.org>;
-	Sun, 9 Feb 2014 21:41:48 -0600
-Date: Sun, 9 Feb 2014 22:28:35 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1656598645.253.1392002915399.JavaMail.jenkins@puget>
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1A3iMj3023406
+	for <meta-ti@yoctoproject.org>; Sun, 9 Feb 2014 21:44:22 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1A3iMYR020838
+	for <meta-ti@yoctoproject.org>; Sun, 9 Feb 2014 21:44:22 -0600
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.02.0342.003; Sun, 9 Feb 2014 21:44:21 -0600
+From: "Nelson, Sam" <sam.nelson@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH] u-boot-keystone: Update keystone u-boot to
+	latest version
+Thread-Index: AQHPG9rZfFFjb+dhT0ayohHFh4Zsp5qZ5QAAgBC5doCAA0Pc4A==
+Date: Mon, 10 Feb 2014 03:44:21 +0000
+Message-ID: <4F9216F96E5DF9428610502835A9F490549F3F63@DLEE11.ent.ti.com>
+References: <1390880491-24176-1-git-send-email-sam.nelson@ti.com>
+	<20140128035020.GB6814@edge> <20140207191417.GK22890@denix.org>
+In-Reply-To: <20140207191417.GK22890@denix.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-02-09_21-00-24
+Subject: Re: [PATCH] u-boot-keystone: Update keystone u-boot to latest version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +40,165 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2014 03:41:56 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_252_658130385.1392002915398"
+X-List-Received-Date: Mon, 10 Feb 2014 03:44:28 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_252_658130385.1392002915398
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-
-<html>
-<head>
-<title>
-Status for 02/09/14
-</title>
-</head>
-<body>
-
-<h2>Status for 02/09/14</h2>
-
-<h2>BUILD_ID: build-2014-02-09_21-01-34</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.01"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+I can eliminate do_compile & do_configure functions and also  see some of t=
+he statements repeated in do_install function  can be removed.
+But in  do-deploy  the directory to which the images are copied are differe=
+nt from=20
+u-boot.inc.
+( U-boot.inc copies to DEPLOY_DIR whereas u-boot-keystone recipe copies to =
+DEPLOY_DIR_IMAGE directory).=20
+So not much can be modified here.  I will send updated patch.
+With regards,
+Sam
 
 
-------=_Part_252_658130385.1392002915398--
+> -----Original Message-----
+> From: Dmytriyenko, Denys
+> Sent: Friday, February 07, 2014 2:14 PM
+> To: Nelson, Sam; meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCH] u-boot-keystone: Update keystone u-boot to
+> latest version
+>=20
+> Ping on the below - it's still pending resolution. Please let me know if =
+you
+> need further clarification or any help.
+>=20
+>=20
+> On Mon, Jan 27, 2014 at 10:50:20PM -0500, Denys Dmytriyenko wrote:
+> > On Mon, Jan 27, 2014 at 10:41:31PM -0500, Sam Nelson wrote:
+> > > - Update license and checksum
+> > > - Update source URL
+> > > - Added SPI Nor binaries and deployed images
+> > > - Update script to configure, compile, install, deploy
+> > >
+> > > Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> > > ---
+> > >  recipes-bsp/u-boot/u-boot-keystone_2013.01.bb |   75
+> +++++++++++++++++++++++--
+> > >  1 file changed, 71 insertions(+), 4 deletions(-)
+> > >
+> > > diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-
+> bsp/u-boot/u-boot-keystone_2013.01.bb
+> > > index 788d813..d225cea 100644
+> > > --- a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+> > > +++ b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+> > > @@ -1,16 +1,83 @@
+> > >  require u-boot-ti.inc
+> > >
+> > >  DESCRIPTION =3D "u-boot bootloader for Multi-Core BU devices"
+> > > +LICENSE =3D "GPLv2+"
+> > > +LIC_FILES_CHKSUM =3D
+> "file://COPYING;md5=3D1707d6db1d42237583f50183a5651ecb"
+> > >
+> > >  COMPATIBLE_MACHINE =3D "keystone"
+> > >
+> > > -PR =3D "r2+gitr${SRCPV}"
+> > > +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+> > >
+> > > -SRC_URI =3D "git://arago-project.org/git/projects/u-boot-
+> keystone.git;protocol=3Dgit;branch=3D${BRANCH}"
+> > > +PR =3D "r3+gitr${SRCPV}"
+> > > +
+> > > +# for nightly switch the two below
+> > > +SRC_URI =3D "git://git.ti.com/keystone-linux/u-
+> boot.git;protocol=3Dgit;branch=3D${BRANCH}"
+> > >
+> > >  BRANCH =3D "master"
+> > >
+> > > -# DEV.MCSDK-03.00.00.07
+> > > -SRCREV =3D "82f40e857d853165310d0753e79235aefb65d7ba"
+> > > +#Tag "K2_UBOOT_2013-01_13.12"
+> > > +SRCREV =3D "e4b19a8d418e35bf2bd63eba485afd5d9e436188"
+> > > +
+> > > +EXTRA_OEMAKE =3D 'CROSS_COMPILE=3D${TARGET_PREFIX}
+> CC=3D"${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
+> > > +
+> > > +S =3D "${WORKDIR}/git"
+> > >
+> > >  UBOOT_SUFFIX =3D "bin"
+> > > +
+> > > +UBOOT_MAKE_TARGET =3D "u-boot-spi.gph"
+> > > +# SPI NOR Flash binaries
+> > > +UBOOT_SPI_SPL_BINARY =3D "u-boot-spl.bin"
+> > > +UBOOT_SPI_BINARY =3D "u-boot.img"
+> > > +UBOOT_SPI_GPH_BINARY =3D "u-boot-spi.gph"
+> > > +# SPI NOR Flash deployed images
+> > > +UBOOT_SPI_SPL_IMAGE =3D "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
+> > > +UBOOT_SPI_SPL_SYMLINK =3D "u-boot-spl-${MACHINE}.bin"
+> > > +UBOOT_SPI_IMAGE =3D "u-boot-${MACHINE}-${PV}-${PR}.img"
+> > > +UBOOT_SPI_SYMLINK =3D "u-boot-${MACHINE}.img"
+> > > +UBOOT_SPI_GPH_IMAGE =3D "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
+> > > +UBOOT_SPI_GPH_SYMLINK =3D "u-boot-spi-${MACHINE}.gph"
+> > > +
+> > > +do_configure () {
+> > > +	oe_runmake ${UBOOT_MACHINE}
+> > > +}
+> > > +
+> > > +do_compile () {
+> > > +	unset LDFLAGS
+> > > +	unset CFLAGS
+> > > +	unset CPPFLAGS
+> > > +	oe_runmake ${UBOOT_MAKE_TARGET}
+> > > +}
+> > > +
+> > > +do_install () {
+> > > +	install -d ${D}/boot
+> > > +	install ${S}/${UBOOT_BINARY} ${D}/boot/${UBOOT_IMAGE}
+> > > +	install ${S}/spl/${UBOOT_SPI_SPL_BINARY}
+> ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
+> > > +	install ${S}/${UBOOT_SPI_BINARY} ${D}/boot/${UBOOT_SPI_IMAGE}
+> > > +	install ${S}/${UBOOT_SPI_GPH_BINARY}
+> ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
+> > > +	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
+> > > +	ln -sf ${UBOOT_SPI_SPL_IMAGE}
+> ${D}/boot/${UBOOT_SPI_SPL_BINARY}
+> > > +	ln -sf ${UBOOT_SPI_IMAGE} ${D}/boot/${UBOOT_SPI_BINARY}
+> > > +	ln -sf ${UBOOT_SPI_GPH_IMAGE}
+> ${D}/boot/${UBOOT_SPI_GPH_BINARY}
+> > > +}
+> > > +
+> > > +do_deploy () {
+> > > +	install -d ${DEPLOY_DIR_IMAGE}
+> > > +	install ${S}/${UBOOT_BINARY}
+> ${DEPLOY_DIR_IMAGE}/${UBOOT_IMAGE}
+> > > +	install ${S}/spl/${UBOOT_SPI_SPL_BINARY}
+> ${DEPLOY_DIR_IMAGE}/${UBOOT_SPI_SPL_IMAGE}
+> > > +	install ${S}/${UBOOT_SPI_BINARY}
+> ${DEPLOY_DIR_IMAGE}/${UBOOT_SPI_IMAGE}
+> > > +	install ${S}/${UBOOT_SPI_GPH_BINARY}
+> ${DEPLOY_DIR_IMAGE}/${UBOOT_SPI_GPH_IMAGE}
+> > > +
+> > > +	cd ${DEPLOY_DIR_IMAGE}
+> > > +	rm -f ${UBOOT_BINARY} ${UBOOT_SYMLINK}
+> > > +	ln -sf ${UBOOT_IMAGE} ${UBOOT_SYMLINK}
+> > > +	ln -sf ${UBOOT_IMAGE} ${UBOOT_BINARY}
+> > > +	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
+> > > +	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
+> > > +	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
+> > > +	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
+> > > +	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
+> > > +	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
+> > > +	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
+> > > +	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
+> > > +	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
+> > > +}
+> >
+> > Most of the above logic is already provided by the standard u-boot.inc =
+- it
+> > shouldn't be hard to extend it to support your special formats instead =
+of
+> > re-implementing everything from scratch...
+> >
+> > --
+> > Denys
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+> >
+
