@@ -1,29 +1,28 @@
-Return-Path: <Jose.Alarcon@procemex.com>
-Received: from exchange.procemex.com (edgerole.procemex.fi [89.236.108.139])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8A270E0076C
-	for <meta-ti@yoctoproject.org>; Sun,  9 Feb 2014 23:21:52 -0800 (PST)
-Received: from EXCHANGE.hq.procemex.fi (192.168.123.254) by
-	edgerole.procemex.fi (192.168.123.253) with Microsoft SMTP Server (TLS)
-	id 14.0.722.0; Mon, 10 Feb 2014 09:21:35 +0200
-Received: from EXCHANGE.hq.procemex.fi ([192.168.123.254]) by
-	exchange.hq.procemex.fi ([192.168.123.254]) with mapi; Mon, 10 Feb 2014
-	09:21:31 +0200
-From: Jose Alarcon <Jose.Alarcon@procemex.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Thread-Topic: [meta-ti] TI boot-monitor recipe doesn't install the boot
-	monitor binary in the image
-Thread-Index: AQHPJDg13il66fAoKkuOsGldIbqfJ5quFoWc
-Date: Mon, 10 Feb 2014 07:21:30 +0000
-Message-ID: <DD2F89422B483148BCFD0BF72A6C148A78C81695@exchange.hq.procemex.fi>
-References: <DD2F89422B483148BCFD0BF72A6C148A78C815A2@exchange.hq.procemex.fi>,
-	<20140207191000.GQ31128@edge>
-In-Reply-To: <20140207191000.GQ31128@edge>
-Accept-Language: en-US, fi-FI
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+Return-Path: <munoz0raul@gmail.com>
+Received: from mail-vb0-f46.google.com (mail-vb0-f46.google.com
+	[209.85.212.46])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42A24E00575
+	for <meta-ti@yoctoproject.org>; Mon, 10 Feb 2014 04:02:33 -0800 (PST)
+Received: by mail-vb0-f46.google.com with SMTP id o19so4697988vbm.33
+	for <meta-ti@yoctoproject.org>; Mon, 10 Feb 2014 04:02:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=GBYrJtR7vZMJbxuHToDpu0dL7lEaQPfUMwp8pk+2ULM=;
+	b=G+GZWxFLFTYycidLDqiEBDB04gXTJIoSAcNtm/eTFi/6kLteBZGE4iQB8LJgeqwKp0
+	c7J+9ouw9jO6qx2I2KOHAtFbbFjh14yeXm41fiH2fx5JXBDebN+gGZOc7jncjQxE0cVf
+	tBKBnDdmIS8/3krR78HlSWtbZ43YtXZmbPffpBtdb9chQ+gidQuoz4bMBeAxsHLmFB46
+	F1W8lcdPiGTOGR1y1UcHfWbSoRgyYYgfX6AeSGa8zVbt9pM+sOSEGpBPGPrTWsTdbAEi
+	1Vup7nQYgvIF+2zwEHw2FiONIZRNIpn998gyMIK4mLRMyzOn2lZZ6jvyC6gPditrxOcB
+	p+TQ==
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: TI boot-monitor recipe doesn't install the boot monitor binary in the image
+X-Received: by 10.58.66.137 with SMTP id f9mr23538428vet.11.1392033752661;
+	Mon, 10 Feb 2014 04:02:32 -0800 (PST)
+Received: by 10.221.68.131 with HTTP; Mon, 10 Feb 2014 04:02:32 -0800 (PST)
+Date: Mon, 10 Feb 2014 10:02:32 -0200
+Message-ID: <CANmVirjdxM6et+re3Lg1CUyoDAudqq5MF+PN6hFvUjwiUFrWHA@mail.gmail.com>
+From: Raul Rosetto Munoz <munoz0raul@gmail.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Battery Connections
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,82 +35,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2014 07:21:55 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 10 Feb 2014 12:02:34 -0000
+Content-Type: multipart/alternative; boundary=047d7b33d85657c47e04f20c1d38
+
+--047d7b33d85657c47e04f20c1d38
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hello Denys,
+Hello,
 
-Thanks for your comments. I am following the instructions on the MCSDK wiki=
- page: http://processors.wiki.ti.com/index.php/MCSDK_UG_Chapter_Exploring#U=
-BI.2FUBIFS
+I am looking for information about what it is possible to do using the
+Battery Connections.
 
-  NAND Layout
-  The NAND flash in the EVM contains three partitions:-
+I would like to use the beagle bone brack in a project that I need to sleep
+and wake up in a correct times.
 
-    bootloader - Contains u-boot
-    params - contains env variables
-    ubifs - contains following UBI volumes:-
-    boot volume - contains Kernel image (uImage), device tree blob etc,
-    rootfs volume - contains the rootfs which is the primary filesystem
+My questions is:
 
-After flashing the ubi image, the boad doesn't boot up unless I force the i=
-nstallation of the boot monitor under the /boot dir in the rootfs. The kern=
-el and the device tree were there already (didn't check which recipe instal=
-l those).
+Is possible to use a hibernate mode with Linux builded with Yocto?
 
-About the update of the keystone recipes to a newer yocto release, do you h=
-ave any estimation on when that will be ready? I am anticipating some work =
-on our side as well after this update.
+Thanks for all help.
 
-Thanks and sorry for the top posting. Using Outlook here :-(
 
---
-Jose
-________________________________________
-From: Denys Dmytriyenko [denys@ti.com]
-Sent: Friday, February 07, 2014 9:10 PM
-To: Jose Alarcon
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [meta-ti] TI boot-monitor recipe doesn't install the boot moni=
-tor binary in the image
+--=20
+*Raul Rosetto Mu=F1oz*
 
-On Fri, Feb 07, 2014 at 10:36:09AM +0000, Jose Alarcon wrote:
-> Hi there,
->
-> In order to boot ubi images on our Keystone2-evem, we had to modify the
-> boot-monitor recipe so that the boot monitor binary gets installed into t=
-he
-> image.
->
-> We fixed this in our own layers with a bbappend file like this:
->
->     PROVIDES +=3D "boot-monitor"
->
->     do_install () {
->         install -d ${D}/boot
->         install ${S}/${BOOT_MONITOR_BINARY} ${D}/boot/${BOOT_MONITOR_IMAG=
-E}
->         ln -sf ${BOOT_MONITOR_IMAGE} ${D}/boot/${BOOT_MONITOR_BINARY}
->     }
->
->     FILES_${PN} =3D "/boot ${sysconfdir}"
->
-> Should this be fixed in the boot-monitor_git.bb recipe itself?
->
-> I am using danny branch of meta-ti, commit 0039248515b16b88161844aef5d507=
-737331c834
+--047d7b33d85657c47e04f20c1d38
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Jose,
+<div dir=3D"ltr"><div>Hello,=A0</div><div><br></div><div>I am looking for i=
+nformation about what it is possible to do using the Battery Connections.</=
+div><div><br></div><div>I would like to use the beagle bone brack in a proj=
+ect that I need to sleep and wake up in a correct times.</div>
+<div><br></div><div>My questions is:</div><div><br></div><div>Is possible t=
+o use a hibernate mode with Linux builded with Yocto?</div><div><br></div><=
+div>Thanks for all help.</div><div><br></div><div><br></div>-- <br><div dir=
+=3D"ltr">
+*Raul Rosetto Mu=F1oz*<br></div>
+</div>
 
-boot-monitor gets deployed as a standalone image, like u-boot, kernel,
-devitrees etc. I don't think it needs to go into the rootfs...
-
-Plus, danny branch is long since outdated. Currently we are in the process =
-of
-updating Keystone recipes, so please stay tuned. Thanks.
-
---
-Denys=
-
+--047d7b33d85657c47e04f20c1d38--
