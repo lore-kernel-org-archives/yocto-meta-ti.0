@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D5C7E007AD
-	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2014 14:08:28 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D69FCE007B3
+	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2014 14:08:40 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 208A952AB4; Tue, 11 Feb 2014 22:08:28 +0000 (UTC)
+	id 9DE3D52AA8; Tue, 11 Feb 2014 22:08:40 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140211220828.208A952AB4@arago-project.org>
-Date: Tue, 11 Feb 2014 22:08:28 +0000 (UTC)
+Message-Id: <20140211220840.9DE3D52AA8@arago-project.org>
+Date: Tue, 11 Feb 2014 22:08:40 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with PM, connectivity and Display/Audio fixes
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with QSPI partition size changes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,43 +22,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 22:08:29 -0000
+X-List-Received-Date: Tue, 11 Feb 2014 22:08:41 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dora
-Commit: 2506f037aaa0400de7199b705422a6fc6b94db25
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2506f037aaa0400de7199b705422a6fc6b94db25
+Branch: dylan
+Commit: e5984623e9cf66042b6af58bc540993d5cb42ad2
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e5984623e9cf66042b6af58bc540993d5cb42ad2
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Feb 11 16:50:11 2014 -0500
+Date:   Tue Feb 11 14:36:31 2014 -0500
 
-linux-ti-staging: update with PM, connectivity and Display/Audio fixes
+u-boot-ti-staging: update with QSPI partition size changes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.12.bb |    4 ++--
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 87f5f3c..8254cc3 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+index f964b41..9a95cc3 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+@@ -5,13 +5,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
  
- BRANCH = "ti-linux-3.12.y"
+ PV = "2013.10"
+-PR = "r5+gitr${SRCPV}"
++PR = "r6+gitr${SRCPV}"
  
--SRCREV = "7f280334068b7c875ade51f8f3921ab311f0c824"
-+SRCREV = "c883f50c5bbf1bf5bfaeb550991caf5fc77a1c4d"
- PV = "3.12.10"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
+ BRANCH ?= "ti-u-boot-2013.10"
  
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+-SRCREV = "aa2521229894dcade9426796889d0793a4547acf"
++SRCREV = "f2dcae2f9e9434392673fea7584641afa98f4232"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
