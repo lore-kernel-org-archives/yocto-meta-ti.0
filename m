@@ -1,24 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 16C9EE007A5
-	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2014 13:52:11 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173023.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N0U003DPQ20JVC0@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 11 Feb 2014 15:51:36 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 3F1E0204E2; Tue,
-	11 Feb 2014 16:51:35 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42286E00799
+	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2014 14:08:23 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id C408D52AA8; Tue, 11 Feb 2014 22:08:22 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Tue, 11 Feb 2014 16:51:28 -0500
-Message-id: <1392155488-1163-2-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-In-reply-to: <1392155488-1163-1-git-send-email-denis@denix.org>
-References: <1392155488-1163-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] linux-ti-staging: update with PM, connectivity and Display/Audio fixes
+Message-Id: <20140211220822.C408D52AA8@arago-project.org>
+Date: Tue, 11 Feb 2014 22:08:22 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with QSPI partition size changes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,34 +22,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 21:52:11 -0000
+X-List-Received-Date: Tue, 11 Feb 2014 22:08:28 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: fae2cb3f1988b40ea60f0bd8715144819439d914
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fae2cb3f1988b40ea60f0bd8715144819439d914
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Feb 11 14:36:31 2014 -0500
+
+u-boot-ti-staging: update with QSPI partition size changes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-ti-staging_3.12.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 87f5f3c..8254cc3 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
+---
+
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+index f964b41..9a95cc3 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+@@ -5,13 +5,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
  
- BRANCH = "ti-linux-3.12.y"
+ PV = "2013.10"
+-PR = "r5+gitr${SRCPV}"
++PR = "r6+gitr${SRCPV}"
  
--SRCREV = "7f280334068b7c875ade51f8f3921ab311f0c824"
-+SRCREV = "c883f50c5bbf1bf5bfaeb550991caf5fc77a1c4d"
- PV = "3.12.10"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
+ BRANCH ?= "ti-u-boot-2013.10"
  
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
--- 
-1.8.3.2
+-SRCREV = "aa2521229894dcade9426796889d0793a4547acf"
++SRCREV = "f2dcae2f9e9434392673fea7584641afa98f4232"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
