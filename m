@@ -1,23 +1,25 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0CA4EE0076F
-	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2014 07:28:09 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1BFS6E1018611;
-	Tue, 11 Feb 2014 09:28:06 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1BFS6vE008546;
-	Tue, 11 Feb 2014 09:28:06 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 11 Feb 2014 09:28:06 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1BFS6gF016513;
-	Tue, 11 Feb 2014 09:28:06 -0600
-Date: Tue, 11 Feb 2014 10:28:06 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Diego Sueiro <diego.sueiro@gmail.com>
-Message-ID: <20140211152805.GK3131@edge>
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qa0-f50.google.com (mail-qa0-f50.google.com
+	[209.85.216.50])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C435DE00764
+	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2014 07:32:10 -0800 (PST)
+Received: by mail-qa0-f50.google.com with SMTP id cm18so11730711qab.23
+	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2014 07:32:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=frv02X89Gme7HW+/HBrYvtCvuN+WhK9z/RsIQfBagns=;
+	b=qMYNTiSIOdr0jUovXJptacE5AFG8sELKQMJp4XJ8xFWMaotOxZ5rOSnGwZQfYBAahP
+	XCjgEOY+Kf7lO8gWq5yn+ETNAwJyg1adsW61zkkemDRcPenjkwvFn1LNzej6p6MuLRnn
+	DTtCjeKIArmrIamWujq1KML43Rr9PEJ8X0sBXZVhzZ46S85qtBzmK5IISIr31LhVGoJ7
+	Q/hzeWjMYG9UOIkElm2fZVYtxi/sDNK7pkInZOYRe53qnjZukklaMnJabOJPGU/pe27t
+	ywpiCFKGZnGexXQZmku73j1VXUFTg/udLy4Ei//MBcQXPggrSn3fVbb6q9++hRAkNj0j
+	myvA==
+X-Received: by 10.140.21.179 with SMTP id 48mr54782979qgl.78.1392132729407;
+	Tue, 11 Feb 2014 07:32:09 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.25.47 with HTTP; Tue, 11 Feb 2014 07:31:49 -0800 (PST)
+In-Reply-To: <20140211152805.GK3131@edge>
 References: <1687303.zqgYtDvr2z@kgy-pc>
 	<321768C95D21724485BCE784F1BE98473EB8E6DA@DBDE04.ent.ti.com>
 	<2080630.Ym40fTraDf@kgy-pc>
@@ -27,9 +29,11 @@ References: <1687303.zqgYtDvr2z@kgy-pc>
 	<20140211145214.GH3131@edge>
 	<CAMCfZKFy-UYxZ+ENv0_U0ii+RLdScMthAPFhzK-2PhPZvg-3ZA@mail.gmail.com>
 	<CAMCfZKFexQe8-WSy-43Gp=8Tks=y+i3hkWGmaLe5wdPAdQj89Q@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAMCfZKFexQe8-WSy-43Gp=8Tks=y+i3hkWGmaLe5wdPAdQj89Q@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20140211152805.GK3131@edge>
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Tue, 11 Feb 2014 13:31:49 -0200
+Message-ID: <CAMCfZKH0ommWq09mrrnrPP2Yj-rgu97H2opdzzUYZM-B-Cy9Cw@mail.gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
 Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
 Subject: Re: How to compile omap3-sgx-modules_4.09.00.01
 X-BeenThere: meta-ti@yoctoproject.org
@@ -44,163 +48,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 15:28:10 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 11 Feb 2014 15:32:12 -0000
+Content-Type: multipart/alternative; boundary=001a11c11feed10d5e04f223280d
 
-On Tue, Feb 11, 2014 at 01:04:00PM -0200, Diego Sueiro wrote:
-> Adding these line on beaglebone.conf still builds 4.09.00.01 version:
-> PREFERRED_VERSION_libgles-omap3 = "5.01.00.01"
-> PREFERRED_VERSION_omap3-sgx-modules = "5.01.00.01"
-> 
-> Some outputs:
-> 
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-dev)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
+--001a11c11feed10d5e04f223280d
+Content-Type: text/plain; charset=ISO-8859-1
 
-Are you using the latest meta-ti?
+On Tue, Feb 11, 2014 at 1:28 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+
+> Are you using the latest meta-ti?
 
 
->  NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for
-> item libgles-omap3)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-flipwsegl-es3)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-flipwsegl-es5)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-flipwsegl-es6)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-flipwsegl-es8)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-flipwsegl-es9)
-> NOTE: versions of libgles-omap3 available: 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-linuxfbwsegl-es3)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-linuxfbwsegl-es5)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-linuxfbwsegl-es6)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-linuxfbwsegl-es8)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-linuxfbwsegl-es9)
-> NOTE: versions of libgles-omap3 available: 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-es3)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-es5)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-es6)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-es8)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-es9)
-> NOTE: versions of libgles-omap3 available: 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-blitwsegl-es3)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-blitwsegl-es5)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-blitwsegl-es6)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-blitwsegl-es8)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-blitwsegl-es9)
-> NOTE: versions of libgles-omap3 available: 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-frontwsegl-es3)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-frontwsegl-es5)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-frontwsegl-es6)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-frontwsegl-es8)
-> NOTE: versions of libgles-omap3 available: 4.05.00.03 4.08.00.01 4.08.00.02
-> 4.09.00.01
-> NOTE: preferred version 5.01.00.01 of libgles-omap3 not available (for item
-> libgles-omap3-frontwsegl-es9)
-> NOTE: versions of libgles-omap3 available: 4.09.00.01
-> 
-> 
-> Regards,
-> 
-> --
-> *dS
-> Diego Sueiro
-> 
-> Administrador do Embarcados
-> www.embarcados.com.br
-> 
-> /*long live rock 'n roll*/
-> 
-> 
-> On Tue, Feb 11, 2014 at 12:54 PM, Diego Sueiro <diego.sueiro@gmail.com>wrote:
-> 
-> >
-> > On Tue, Feb 11, 2014 at 12:52 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> >
-> >> PREFERRED_VERSION_blah = "ver"
-> >
-> >
-> > Can I add it im my image recipe, or do I need to add it on machine.conf?
-> > Why the newest version is not selected by default?
-> >
-> > Abraços,
-> >
-> > --
-> > *dS
-> > Diego Sueiro
-> >
-> > Administrador do Embarcados
-> > www.embarcados.com.br
-> >
-> > Engenheiro de Controle e Automação
-> > UNIVERSIDADE FEDERAL DE ITAJUBÀ
-> >
-> >
-> > /*long live rock 'n roll*/
-> >
+Yep:
+1923b5f (HEAD, origin/dora, dora) u-boot-ti-staging: update with fixes for
+NAND partition names and sizes
 
+Regards,
+
+--
+*dS
+Diego Sueiro
+
+Administrador do Embarcados
+www.embarcados.com.br
+
+/*long live rock 'n roll*/
+
+--001a11c11feed10d5e04f223280d
+Content-Type: text/html; charset=ISO-8859-1
+
+<div dir="ltr"><div class="gmail_extra"><br><div class="gmail_quote">On Tue, Feb 11, 2014 at 1:28 PM, Denys Dmytriyenko <span dir="ltr">&lt;<a href="mailto:denys@ti.com" target="_blank">denys@ti.com</a>&gt;</span> wrote:<br>
+
+<blockquote class="gmail_quote" style="margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;padding-left:1ex">Are you using the latest meta-ti?</blockquote></div><br>Yep:</div>
+
+<div class="gmail_extra">1923b5f (HEAD, origin/dora, dora) u-boot-ti-staging: update with fixes for NAND partition names and sizes<br><br clear="all"><div><div dir="ltr"><div>Regards,</div><div><br></div>--<br>*dS<br>Diego Sueiro<br>
+
+<br>Administrador do Embarcados<br><a href="http://www.embarcados.com.br" target="_blank">www.embarcados.com.br</a><br><br>/*long live rock &#39;n roll*/<br></div></div>
+</div></div>
+
+--001a11c11feed10d5e04f223280d--
