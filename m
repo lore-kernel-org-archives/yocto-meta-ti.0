@@ -1,28 +1,32 @@
 Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E922E00796
-	for <meta-ti@yoctoproject.org>; Mon, 10 Feb 2014 18:32:06 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1B2W2Yd000662
-	for <meta-ti@yoctoproject.org>; Mon, 10 Feb 2014 20:32:03 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1B2W24T014585
-	for <meta-ti@yoctoproject.org>; Mon, 10 Feb 2014 20:32:02 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.2.342.3;
-	Mon, 10 Feb 2014 20:32:02 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s1B2W2GK018371	for <meta-ti@yoctoproject.org>; Mon, 10 Feb 2014 20:32:02
-	-0600
-Date: Mon, 10 Feb 2014 21:18:47 -0500
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CAC97E006B9
+	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2014 06:46:01 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1BEjr1B025279;
+	Tue, 11 Feb 2014 08:45:53 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1BEjrlO008445;
+	Tue, 11 Feb 2014 08:45:53 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 11 Feb 2014 08:45:52 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1BEjqQZ004368;
+	Tue, 11 Feb 2014 08:45:52 -0600
+Date: Tue, 11 Feb 2014 09:45:51 -0500
 From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <812531486.257.1392085127985.JavaMail.jenkins@puget>
+To: Diego Sueiro <diego.sueiro@gmail.com>
+Message-ID: <20140211144551.GF3131@edge>
+References: <1687303.zqgYtDvr2z@kgy-pc>
+	<321768C95D21724485BCE784F1BE98473EB8E6DA@DBDE04.ent.ti.com>
+	<2080630.Ym40fTraDf@kgy-pc>
+	<CAMCfZKFvf0oxesWZ54Yj8rthHCS0GTnO-znDBQ1=2M9g-tLUCQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-02-10_21-00-24
+In-Reply-To: <CAMCfZKFvf0oxesWZ54Yj8rthHCS0GTnO-znDBQ1=2M9g-tLUCQ@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: Re: How to compile omap3-sgx-modules_4.09.00.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,168 +39,95 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 02:32:08 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_256_82717585.1392085127982"
+X-List-Received-Date: Tue, 11 Feb 2014 14:46:02 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-------=_Part_256_82717585.1392085127982
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+There were several updates and fixes since 4.09.00.01 version of Graphics SDK, 
+the latest being 5.01.00.01. Unfortunately, X11 and DRM handling was not 
+supported and un-tested for some time, but 5.01.00.01 was meant to fix some of 
+those issues...
 
-<html>
-<head>
-<title>
-Status for 02/10/14
-</title>
-</head>
-<body>
-
-<h2>Status for 02/10/14</h2>
-
-<h2>BUILD_ID: build-2014-02-10_21-01-35</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.01"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+-- 
+Denys
 
 
-------=_Part_256_82717585.1392085127982--
+On Mon, Feb 10, 2014 at 03:48:19PM -0200, Diego Sueiro wrote:
+> Folks,
+> 
+> Any update on this?
+> I'm facing with the same issue.
+> 
+> I'm using poky and meta-ti on dora branch.
+> 
+> 
+> Regards,
+> 
+> --
+> *dS
+> Diego Sueiro
+> 
+> Administrador do Embarcados
+> www.embarcados.com.br
+> 
+> /*long live rock 'n roll*/
+> 
+> 
+> On Sat, Aug 10, 2013 at 12:48 PM, Kovesdi Gyorgy <kgy@teledigit.eu> wrote:
+> 
+> > > It appears you are trying to build a drm driver - correct ?
+> > Yes, i would need a working OpenGL on my Beagleboard-C4 with 3.x kernel.
+> > (4.05
+> > works well with 2.6 but crashes with 3.x)
+> >
+> > > ________________________________________
+> > > From: meta-ti-bounces@yoctoproject.org [meta-ti-bounces@yoctoproject.org]
+> > on
+> > > behalf of Kovesdi Gyorgy [kgy@teledigit.eu] Sent: Saturday, August 10,
+> > 2013
+> > > 4:28 PM
+> > > To: meta-ti mailing list
+> > > Subject: [meta-ti] How to compile omap3-sgx-modules_4.09.00.01
+> > >
+> > > Hi,
+> > >
+> > > I tried to compile recent versions (4.08 or 4.09) of SGX modules for my
+> > > Beagleboard-C4 using the current Yoctoproject environment (tried Poky,
+> > > beagleboard-dylan-9.0.0, and Angstrom Linux with the same result).
+> > >
+> > > In every case i got this error message:
+> > > | make[3]: *** No rule to make target
+> > >
+> > > `/home/kgy/work/Yocto/poky/build/out/work/beagleboard-poky-linux-
+> > > gnueabi/omap3-sgx-modules/4.09.00.01-
+> > >
+> > r124a/Graphics_SDK_4_09_00_01/GFX_Linux_KM/services4/3rdparty/linux_drm/drm_
+> > > auth.o', needed by
+> > > `/home/kgy/work/Yocto/poky/build/out/work/beagleboard-poky-linux-
+> > > gnueabi/omap3-sgx-modules/4.09.00.01-
+> > >
+> > r124a/Graphics_SDK_4_09_00_01/GFX_Linux_KM/services4/3rdparty/linux_drm/drm.
+> > > o'. Stop.
+> > >
+> > > Please help me to compile it!
+> > >
+> > > Thanx in advance
+> > > György Kövesdi
+> > >
+> > > _______________________________________________
+> > > meta-ti mailing list
+> > > meta-ti@yoctoproject.org
+> > > https://lists.yoctoproject.org/listinfo/meta-ti
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+> >
+
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+
+
