@@ -1,28 +1,32 @@
-Return-Path: <fbberton@gmail.com>
-Received: from mail-lb0-f180.google.com (mail-lb0-f180.google.com
-	[209.85.217.180])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17BD8E006B5
-	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2014 08:51:18 -0800 (PST)
-Received: by mail-lb0-f180.google.com with SMTP id n15so6046077lbi.39
-	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2014 08:51:16 -0800 (PST)
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qa0-f54.google.com (mail-qa0-f54.google.com
+	[209.85.216.54])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7FB51E00475
+	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2014 09:15:18 -0800 (PST)
+Received: by mail-qa0-f54.google.com with SMTP id i13so12185274qae.27
+	for <meta-ti@yoctoproject.org>; Tue, 11 Feb 2014 09:15:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=ElR4wUe7Nsh+YjHiXrFEkGFuUDwoskxuvGLirtxY3RI=;
-	b=k+u7x+uRImCO/CtjhahUqsuq2TMnZDAjWK4WjSoKvxNX87MJFDNv9SJekD3Pr2wKQo
-	tZ8LyQ0YTp7+gPtZZIWf9amdZ6vmyNzDWfWWWdhoB2A+xbU7SOLx6EjA0g/4HnxPPX2l
-	yf+/pDxUn+3FTKOb/S0p4zhuWJBEeILpShVpxYkXeE7sY72lLv/+3ge2BDS3uhNBpbbI
-	nAybiRH7t+a3GzjjKxrqsfe8DgCLTgQ5sHdVQczl0YuaV53MShozf8IZG9W4+EShURWR
-	Ze4wXUyK9sC3lRhKAVYSBWkK6qXFbTnB2fe2+DM+sEA53rGK/v7GNJFHXC8i63g6u/Ni
-	o2CA==
-X-Received: by 10.112.151.146 with SMTP id uq18mr2452275lbb.38.1392137476545; 
-	Tue, 11 Feb 2014 08:51:16 -0800 (PST)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=jhodBqh4uyeFCs+fUHpS2YgNnVV2mbu72JDKhc6pVLM=;
+	b=VqWppSOEVh2DZdTLsj6uI14x7NOe95BxZZiehrD7Jh1adWWmmFExFhW8CijN3ZIUdm
+	IkYlANJyBxzodXRlA05At26IDW1c3zeQoRsW+cJe5jS/Y5MQBfWfVxA3phag554SDs1n
+	Z6gXZO2PB9qZAQTS7ebAJQtcT5tHQuFzZDeBMC6HU/e4+TnNN21sQweFcNxXZHqCLJaW
+	61kYdwfVfLKSkPHquKNMdaLWpoqKHfEh5TdUwA2XEmfIqUaSXRLI4hIQfgUPYQWg3cpA
+	I26+q5oUHSZZy+yGNpS8SvBl7RQsZAlyd8nSkfp3fldNPbjERcoY0z+S1wh0r2hHL2B+
+	8Okg==
+X-Received: by 10.224.75.73 with SMTP id x9mr60158561qaj.36.1392138917906;
+	Tue, 11 Feb 2014 09:15:17 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.114.4.82 with HTTP; Tue, 11 Feb 2014 08:50:55 -0800 (PST)
-From: Fabio Berton <fbberton@gmail.com>
-Date: Tue, 11 Feb 2014 14:50:55 -0200
-Message-ID: <CAEaGWUJAg_OuSLwy9rBy3q5VjRiO9UrA1zNdnKqG_f7=UDYY0w@mail.gmail.com>
-To: meta-ti@yoctoproject.org
-Subject: Cape manager Beaglebone Black
+Received: by 10.140.25.47 with HTTP; Tue, 11 Feb 2014 09:14:57 -0800 (PST)
+In-Reply-To: <CAEaGWUJAg_OuSLwy9rBy3q5VjRiO9UrA1zNdnKqG_f7=UDYY0w@mail.gmail.com>
+References: <CAEaGWUJAg_OuSLwy9rBy3q5VjRiO9UrA1zNdnKqG_f7=UDYY0w@mail.gmail.com>
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Tue, 11 Feb 2014 15:14:57 -0200
+Message-ID: <CAMCfZKHrfLX7C22ZkUKUMyXhe0+nmHRzwPwmUD1C9LD-W-dj4g@mail.gmail.com>
+To: Fabio Berton <fbberton@gmail.com>
+Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: Re: Cape manager Beaglebone Black
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,55 +39,57 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 16:51:21 -0000
-Content-Type: multipart/alternative; boundary=047d7beb97d8c4a43e04f22443b8
+X-List-Received-Date: Tue, 11 Feb 2014 17:15:21 -0000
+Content-Type: multipart/alternative; boundary=001a11c30308ae12b204f224993f
 
---047d7beb97d8c4a43e04f22443b8
-Content-Type: text/plain; charset=UTF-8
+--001a11c30308ae12b204f224993f
+Content-Type: text/plain; charset=ISO-8859-1
+
+On Tue, Feb 11, 2014 at 2:50 PM, Fabio Berton <fbberton@gmail.com> wrote:
+
+> Hi!
+> I created an image with Yocto to my beaglebone black and the image doens't
+> created /sys/device/bone_capemgr.*/ directory. So, I can't enable the LCD
+> 7" cape. How can I enable the cape support?
+>
+
+Try to put IMAGE_INSTALL += "kernel-modules" on your image recipe.
+
+
+Regards,
+
+--
+*dS
+Diego Sueiro
+
+Administrador do Embarcados
+www.embarcados.com.br
+
+/*long live rock 'n roll*/
+
+--001a11c30308ae12b204f224993f
+Content-Type: text/html; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi!
-I created an image with Yocto to my beaglebone black and the image doens't
-created /sys/device/bone_capemgr.*/ directory. So, I can't enable the LCD
-7" cape. How can I enable the cape support?
+<div dir=3D"ltr"><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">=
+On Tue, Feb 11, 2014 at 2:50 PM, Fabio Berton <span dir=3D"ltr">&lt;<a href=
+=3D"mailto:fbberton@gmail.com" target=3D"_blank">fbberton@gmail.com</a>&gt;=
+</span> wrote:<br>
 
-Fabio Berton
-Engenharia de Computa=C3=A7=C3=A3o - UFSM
-Estagi=C3=A1rio Chip Inside Tecnologia - ITSM
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex"><div dir=3D"ltr">Hi!<div>I created an image =
+with Yocto to my beaglebone black and the image doens&#39;t created /sys/de=
+vice/bone_capemgr.*/ directory. So, I can&#39;t enable the LCD 7&quot; cape=
+. How can I enable the cape support?</div>
 
-E-mail: fbberton@gmail.com
-Gtalk: fbberton@gmail.com
-Tel.:  (55) 9651-4405
+</div></blockquote></div><br>Try to put IMAGE_INSTALL +=3D &quot;kernel-mod=
+ules&quot; on your image recipe.</div><div class=3D"gmail_extra"><br><br cl=
+ear=3D"all"><div><div dir=3D"ltr"><div>Regards,</div><div><br></div>--<br>*=
+dS<br>
 
-Santa Maria - RS
-
---047d7beb97d8c4a43e04f22443b8
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi!<div>I created an image with Yocto to my beaglebone bla=
-ck and the image doens&#39;t created /sys/device/bone_capemgr.*/ directory.=
- So, I can&#39;t enable the LCD 7&quot; cape. How can I enable the cape sup=
-port?</div>
-
-<div><br clear=3D"all"><div><div dir=3D"ltr"><div>
-<font color=3D"#666666">Fabio Berton<br></font></div><div><font color=3D"#6=
-66666"><span>Engenharia de Computa=C3=A7=C3=A3o - UFSM</span></font></div><=
-div><font color=3D"#666666">Estagi=C3=A1rio Chip Inside Tecnologia - ITSM</=
-font></div><div>
-
-<font color=3D"#666666"><br></font></div><div><font color=3D"#666666">E-mai=
-l:=C2=A0<a href=3D"mailto:fbberton@gmail.com" target=3D"_blank">fbberton@gm=
-ail.com</a></font></div><div><span style=3D"color:rgb(102,102,102)">Gtalk:=
-=C2=A0<a href=3D"mailto:fbberton@gmail.com" target=3D"_blank">fbberton@gmai=
-l.com</a></span></div>
-
-
-
-
-<div><span style=3D"color:rgb(102,102,102)">Tel.:=C2=A0 (55) 9651-4405<br><=
-/span></div><div><font color=3D"#666666"><br></font></div><div><font color=
-=3D"#666666">Santa Maria - RS</font></div></div></div>
+Diego Sueiro<br><br>Administrador do Embarcados<br><a href=3D"http://www.em=
+barcados.com.br" target=3D"_blank">www.embarcados.com.br</a><br><br>/*long =
+live rock &#39;n roll*/<br></div></div>
 </div></div>
 
---047d7beb97d8c4a43e04f22443b8--
+--001a11c30308ae12b204f224993f--
