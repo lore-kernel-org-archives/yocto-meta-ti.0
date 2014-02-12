@@ -1,37 +1,42 @@
-Return-Path: <richard.rojfors@gmail.com>
-Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
-	[209.85.215.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2B4F7E00575
-	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 06:15:40 -0800 (PST)
-Received: by mail-ea0-f182.google.com with SMTP id r15so4419268ead.41
-	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 06:15:39 -0800 (PST)
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qc0-f180.google.com (mail-qc0-f180.google.com
+	[209.85.216.180])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E765EE0076C
+	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 07:42:51 -0800 (PST)
+Received: by mail-qc0-f180.google.com with SMTP id i17so15841481qcy.11
+	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 07:42:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type;
-	bh=E1uGLogDtEAEOAipvQyYlbjQmeXPM2BybT9FzRCl40k=;
-	b=NusPR3m1PMsYRJvTG37tQ6CPb9RrnLFkjc/OES5hbPZjCd84GZXitaODENJb+jVqAh
-	/mSCKd35K5knloVhnKiHurpdfkQNbjhxqMefotvla1cVnZOJm2uidwPYteIl4vzkGodZ
-	5zFUqx+yTOuLsmqj7Dnkxk9rpkF6czhhieAl1XixWT49KszIWgqE4YxRHyZJ30ijZWd2
-	LPa2szFw9bKdFQ225iSGjqgmn+BGCJi9B5B+/eQsJsVL+pwQR3c1CHEatinlDTBQR2fZ
-	U5i4rikoePubKQb2nV1NXjSZdApkG4vF3NnXBcm7a9YH0+dFSkhkW+lkBbZCEMYvR9JN
-	10tQ==
+	bh=VRYsHbaEvMKZdQQWVHKLmnJUlItUKUJQYjjMq8Eu3Tc=;
+	b=bNKonJ5eflLD5zltEChybCTCKYNk4XA8x2rRHcUzfYNr84IPnsoos/CRMlQDZydTQk
+	w9FjDSdpAbVIxVPzmGYD0fSoKctQOmykFXtaGkkUvZ5ZOoLrqCMYvtAVKt8S7IIC9Ucx
+	Bu+l+ViWdPODevCb5ZcpE9KX0ygcYRzmrnZ+bjcBGkb4FEnZFTA4nB36JPddqu3Z3oJN
+	H+a+ZVt+tkVAcpRxiaq/QtGEua/89eHvJvQHjdSzF8Rq2T1x7DBlRWEM5OSx4ZIVhiq7
+	gIb4uLRmUrhHLAGLecI5uydTUVoOcu+5yqdrwk96nHmhR37XcerQWFMDZ2b/SeWVDhht
+	Rvsw==
+X-Received: by 10.224.162.200 with SMTP id w8mr68943108qax.1.1392219770437;
+	Wed, 12 Feb 2014 07:42:50 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.14.93.199 with SMTP id l47mr4337735eef.58.1392214539012;
-	Wed, 12 Feb 2014 06:15:39 -0800 (PST)
-Received: by 10.14.178.196 with HTTP; Wed, 12 Feb 2014 06:15:38 -0800 (PST)
-In-Reply-To: <FFA7CA3D-C695-4C6D-90EC-F49E23F9E2E2@gmail.com>
-References: <245245F712CBF74D865D90E99497849F0642BFF8@mail-3.tvm.nestgroup.net>
-	<20131119060652.GN19813@edge>
-	<CAHB-PjkUvfgpsqU8SgmM_+aPYHZbbWUFnrPAsijL7MDaDYs9ug@mail.gmail.com>
-	<C969B5B7-2CF7-4815-819E-98FED7D07820@gmail.com>
-	<CAHB-PjmYZUT03PPzHCkasVOoMBMUJWojbL8pMRpipATH6yGpjw@mail.gmail.com>
-	<FFA7CA3D-C695-4C6D-90EC-F49E23F9E2E2@gmail.com>
-Date: Wed, 12 Feb 2014 15:15:38 +0100
-Message-ID: <CAHB-Pj=_sDdkbd0qjZVAWVs0f7c1HMiwfMnm13Ckys-UocVL=A@mail.gmail.com>
-From: =?UTF-8?Q?Richard_R=C3=B6jfors?= <richard.rojfors@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: pandaboard/omap4 support
+Received: by 10.140.25.47 with HTTP; Wed, 12 Feb 2014 07:42:30 -0800 (PST)
+In-Reply-To: <20140211164725.GN3131@edge>
+References: <CAMCfZKFvf0oxesWZ54Yj8rthHCS0GTnO-znDBQ1=2M9g-tLUCQ@mail.gmail.com>
+	<20140211144551.GF3131@edge>
+	<CAMCfZKHbrQR_1Htcxv5Xgg43yoLTJTyzu8=4CpWiO9-meB1Z5A@mail.gmail.com>
+	<20140211145214.GH3131@edge>
+	<CAMCfZKFy-UYxZ+ENv0_U0ii+RLdScMthAPFhzK-2PhPZvg-3ZA@mail.gmail.com>
+	<CAMCfZKFexQe8-WSy-43Gp=8Tks=y+i3hkWGmaLe5wdPAdQj89Q@mail.gmail.com>
+	<20140211152805.GK3131@edge>
+	<CAMCfZKH0ommWq09mrrnrPP2Yj-rgu97H2opdzzUYZM-B-Cy9Cw@mail.gmail.com>
+	<20140211162752.GL3131@edge>
+	<CAMCfZKHjb87g08+5fDDVqh3-5MWHoXPmwYsy294tND4=AN8HCA@mail.gmail.com>
+	<20140211164725.GN3131@edge>
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Wed, 12 Feb 2014 13:42:30 -0200
+Message-ID: <CAMCfZKH2dEsd8=qihsETyA0-pdC08pX=o-SKyOKhvXqkVGy75w@mail.gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
+Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: Re: How to compile omap3-sgx-modules_4.09.00.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -44,84 +49,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Feb 2014 14:15:43 -0000
-Content-Type: multipart/alternative; boundary=001a11c2707c0d2def04f23635ab
+X-List-Received-Date: Wed, 12 Feb 2014 15:42:53 -0000
+Content-Type: multipart/alternative; boundary=089e01494846ddc8fb04f2376ca6
 
---001a11c2707c0d2def04f23635ab
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+--089e01494846ddc8fb04f2376ca6
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Feb 12, 2014 at 3:07 PM, Khem Raj <raj.khem@gmail.com> wrote:
+On Tue, Feb 11, 2014 at 2:47 PM, Denys Dmytriyenko <denys@ti.com> wrote:
 
->
-> On Feb 12, 2014, at 6:03 AM, Richard R=C3=B6jfors <richard.rojfors@gmail.=
-com>
-> wrote:
->
-> On Wed, Feb 12, 2014 at 2:52 PM, Khem Raj <raj.khem@gmail.com> wrote:
->
->>
->> what incompatibilities do you see between 4.7 and 4.8 ?
->>
->
-> I saw this in the gcc 4.8 changelog:
-> "On ARM, a bug has been fixed in GCC's implementation of the AAPCS rules
-> for the layout of vectors that could lead to wrong code being generated.
-> Vectors larger than 8 bytes in size are now by default aligned to an 8-by=
-te
-> boundary. This is an ABI change: code that makes explicit use of vector
-> types may be incompatible with binary objects built with older versions o=
-f
-> GCC. Auto-vectorized code is not affected by this change.=E2=80=9D
->
->
-> OK. are you seeing this use case here ?
+> Set DEFAULTTUNE in your distro or local config to one of the available
+> values,
+> like armv7athf-neon or cortexa8thf-neon etc.
 >
 
-Nope I've not hit it nor gone through the calls between the blobs and the
-surrounding code.
+Thanks,
+It worked.
 
-I just think it makes sense to compile the blobs with a compiler similar to
-the one provided by oe-core, to avoid the risk...
+I's there a image recipe to test this module?
 
---Richard
+Regards,
 
---001a11c2707c0d2def04f23635ab
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+--
+*dS
+Diego Sueiro
 
-<div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On W=
-ed, Feb 12, 2014 at 3:07 PM, Khem Raj <span dir=3D"ltr">&lt;<a href=3D"mail=
-to:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt;</span> =
-wrote:<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex"><div style=3D"word-wrap:break-word"><br><div=
-><div><div class=3D"h5"><div>On Feb 12, 2014, at 6:03 AM, Richard R=C3=B6jf=
-ors &lt;<a href=3D"mailto:richard.rojfors@gmail.com" target=3D"_blank">rich=
-ard.rojfors@gmail.com</a>&gt; wrote:</div>
-<br></div></div><blockquote type=3D"cite"><div dir=3D"ltr"><div class=3D"gm=
-ail_extra"><div class=3D"gmail_quote"><div><div class=3D"h5">On Wed, Feb 12=
-, 2014 at 2:52 PM, Khem Raj <span dir=3D"ltr">&lt;<a href=3D"mailto:raj.khe=
-m@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt;</span> wrote:<br>
+Administrador do Embarcados
+www.embarcados.com.br
 
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
-adding-left:1ex"><div style=3D"word-wrap:break-word"><div><br><div>
-what incompatibilities do you see between 4.7 and 4.8 ?=C2=A0<br></div></di=
-v></div></blockquote><div><br></div>I saw this in the gcc 4.8 changelog:<br=
-></div></div><div>&quot;On ARM, a bug has been fixed in GCC&#39;s implement=
-ation of the AAPCS rules for the layout of vectors that could lead to wrong=
- code being generated. Vectors larger than 8 bytes in size are now by defau=
-lt aligned to an 8-byte boundary. This is an ABI change: code that makes ex=
-plicit use of vector types may be incompatible with binary objects built wi=
-th older versions of GCC. Auto-vectorized code is not affected by this chan=
-ge.=E2=80=9D=C2=A0</div>
-</div></div></div></blockquote><div><br></div><div>OK. are you seeing this =
-use case here ?</div></div></div></blockquote><div><br></div><div>Nope I&#3=
-9;ve not hit it nor gone through the calls between the blobs and the surrou=
-nding code.</div>
-<div><br></div><div>I just think it makes sense to compile the blobs with a=
- compiler similar to the one provided by oe-core, to avoid the risk...</div=
-><div><br></div><div>--Richard</div><div><br></div></div></div></div>
+/*long live rock 'n roll*/
 
---001a11c2707c0d2def04f23635ab--
+--089e01494846ddc8fb04f2376ca6
+Content-Type: text/html; charset=ISO-8859-1
+
+<div dir="ltr"><div class="gmail_extra"><br><div class="gmail_quote">On Tue, Feb 11, 2014 at 2:47 PM, Denys Dmytriyenko <span dir="ltr">&lt;<a href="mailto:denys@ti.com" target="_blank">denys@ti.com</a>&gt;</span> wrote:<br>
+
+
+
+<blockquote class="gmail_quote" style="margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div style="overflow:hidden">Set DEFAULTTUNE in your distro or local config to one of the available values,<br>
+
+like armv7athf-neon or cortexa8thf-neon etc.</div></blockquote></div><br>Thanks,</div><div class="gmail_extra">It worked.</div><div class="gmail_extra"><br></div><div class="gmail_extra">I&#39;s there a image recipe to test this module?<br>
+
+<br clear="all"><div><div dir="ltr"><div>Regards,</div><div><br>
+
+</div>--<br>*dS<br>Diego Sueiro<br><br>Administrador do Embarcados<br><a href="http://www.embarcados.com.br" target="_blank">www.embarcados.com.br</a><br><br>/*long live rock &#39;n roll*/<br></div></div>
+</div></div>
+
+--089e01494846ddc8fb04f2376ca6--
