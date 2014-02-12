@@ -1,28 +1,24 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qc0-f180.google.com (mail-qc0-f180.google.com
-	[209.85.216.180])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E765EE0076C
-	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 07:42:51 -0800 (PST)
-Received: by mail-qc0-f180.google.com with SMTP id i17so15841481qcy.11
-	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 07:42:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=VRYsHbaEvMKZdQQWVHKLmnJUlItUKUJQYjjMq8Eu3Tc=;
-	b=bNKonJ5eflLD5zltEChybCTCKYNk4XA8x2rRHcUzfYNr84IPnsoos/CRMlQDZydTQk
-	w9FjDSdpAbVIxVPzmGYD0fSoKctQOmykFXtaGkkUvZ5ZOoLrqCMYvtAVKt8S7IIC9Ucx
-	Bu+l+ViWdPODevCb5ZcpE9KX0ygcYRzmrnZ+bjcBGkb4FEnZFTA4nB36JPddqu3Z3oJN
-	H+a+ZVt+tkVAcpRxiaq/QtGEua/89eHvJvQHjdSzF8Rq2T1x7DBlRWEM5OSx4ZIVhiq7
-	gIb4uLRmUrhHLAGLecI5uydTUVoOcu+5yqdrwk96nHmhR37XcerQWFMDZ2b/SeWVDhht
-	Rvsw==
-X-Received: by 10.224.162.200 with SMTP id w8mr68943108qax.1.1392219770437;
-	Wed, 12 Feb 2014 07:42:50 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.140.25.47 with HTTP; Wed, 12 Feb 2014 07:42:30 -0800 (PST)
-In-Reply-To: <20140211164725.GN3131@edge>
-References: <CAMCfZKFvf0oxesWZ54Yj8rthHCS0GTnO-znDBQ1=2M9g-tLUCQ@mail.gmail.com>
-	<20140211144551.GF3131@edge>
-	<CAMCfZKHbrQR_1Htcxv5Xgg43yoLTJTyzu8=4CpWiO9-meB1Z5A@mail.gmail.com>
+Return-Path: <denys@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C348FE0043B
+	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 08:23:42 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1CGNaGA024002;
+	Wed, 12 Feb 2014 10:23:36 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1CGNaaj021607;
+	Wed, 12 Feb 2014 10:23:36 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 12 Feb 2014 10:23:35 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1CGNZDr019705;
+	Wed, 12 Feb 2014 10:23:35 -0600
+Date: Wed, 12 Feb 2014 11:23:35 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Diego Sueiro <diego.sueiro@gmail.com>
+Message-ID: <20140212162334.GE4346@edge>
+References: <CAMCfZKHbrQR_1Htcxv5Xgg43yoLTJTyzu8=4CpWiO9-meB1Z5A@mail.gmail.com>
 	<20140211145214.GH3131@edge>
 	<CAMCfZKFy-UYxZ+ENv0_U0ii+RLdScMthAPFhzK-2PhPZvg-3ZA@mail.gmail.com>
 	<CAMCfZKFexQe8-WSy-43Gp=8Tks=y+i3hkWGmaLe5wdPAdQj89Q@mail.gmail.com>
@@ -31,10 +27,10 @@ References: <CAMCfZKFvf0oxesWZ54Yj8rthHCS0GTnO-znDBQ1=2M9g-tLUCQ@mail.gmail.com>
 	<20140211162752.GL3131@edge>
 	<CAMCfZKHjb87g08+5fDDVqh3-5MWHoXPmwYsy294tND4=AN8HCA@mail.gmail.com>
 	<20140211164725.GN3131@edge>
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Wed, 12 Feb 2014 13:42:30 -0200
-Message-ID: <CAMCfZKH2dEsd8=qihsETyA0-pdC08pX=o-SKyOKhvXqkVGy75w@mail.gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
+	<CAMCfZKH2dEsd8=qihsETyA0-pdC08pX=o-SKyOKhvXqkVGy75w@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMCfZKH2dEsd8=qihsETyA0-pdC08pX=o-SKyOKhvXqkVGy75w@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
 Subject: Re: How to compile omap3-sgx-modules_4.09.00.01
 X-BeenThere: meta-ti@yoctoproject.org
@@ -49,49 +45,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Feb 2014 15:42:53 -0000
-Content-Type: multipart/alternative; boundary=089e01494846ddc8fb04f2376ca6
+X-List-Received-Date: Wed, 12 Feb 2014 16:23:44 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
---089e01494846ddc8fb04f2376ca6
-Content-Type: text/plain; charset=ISO-8859-1
+On Wed, Feb 12, 2014 at 01:42:30PM -0200, Diego Sueiro wrote:
+> On Tue, Feb 11, 2014 at 2:47 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+> 
+> > Set DEFAULTTUNE in your distro or local config to one of the available
+> > values,
+> > like armv7athf-neon or cortexa8thf-neon etc.
+> >
+> 
+> Thanks,
+> It worked.
+> 
+> I's there a image recipe to test this module?
 
-On Tue, Feb 11, 2014 at 2:47 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+We use it in our Arago distribution and SDKs and there are image recipes in 
+meta-arago for that. If you use meta-ti with other distributions, you'd have 
+to come up with your own image recipe or modify one of the existing ones.
 
-> Set DEFAULTTUNE in your distro or local config to one of the available
-> values,
-> like armv7athf-neon or cortexa8thf-neon etc.
->
+-- 
+Denys
 
-Thanks,
-It worked.
-
-I's there a image recipe to test this module?
-
-Regards,
-
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br
-
-/*long live rock 'n roll*/
-
---089e01494846ddc8fb04f2376ca6
-Content-Type: text/html; charset=ISO-8859-1
-
-<div dir="ltr"><div class="gmail_extra"><br><div class="gmail_quote">On Tue, Feb 11, 2014 at 2:47 PM, Denys Dmytriyenko <span dir="ltr">&lt;<a href="mailto:denys@ti.com" target="_blank">denys@ti.com</a>&gt;</span> wrote:<br>
-
-
-
-<blockquote class="gmail_quote" style="margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div style="overflow:hidden">Set DEFAULTTUNE in your distro or local config to one of the available values,<br>
-
-like armv7athf-neon or cortexa8thf-neon etc.</div></blockquote></div><br>Thanks,</div><div class="gmail_extra">It worked.</div><div class="gmail_extra"><br></div><div class="gmail_extra">I&#39;s there a image recipe to test this module?<br>
-
-<br clear="all"><div><div dir="ltr"><div>Regards,</div><div><br>
-
-</div>--<br>*dS<br>Diego Sueiro<br><br>Administrador do Embarcados<br><a href="http://www.embarcados.com.br" target="_blank">www.embarcados.com.br</a><br><br>/*long live rock &#39;n roll*/<br></div></div>
-</div></div>
-
---089e01494846ddc8fb04f2376ca6--
