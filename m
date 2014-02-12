@@ -1,37 +1,32 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
-	[209.85.192.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4BDF8E0053A
-	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 05:52:07 -0800 (PST)
-Received: by mail-pd0-f182.google.com with SMTP id v10so8982289pde.41
-	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 05:52:07 -0800 (PST)
+Return-Path: <richard.rojfors@gmail.com>
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53A1EE0053A
+	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 06:03:01 -0800 (PST)
+Received: by mail-ee0-f52.google.com with SMTP id e53so4382519eek.39
+	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 06:03:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=tu6fv/xXkp0hBByvXSbVz1clunkbrt2Ovg+UONZrHEs=;
-	b=tu2UAdPi2I3OUJcycvFPcACnMp30ks4lNaNeXqijYT3iVslJYdQqJetEuvfjRRigAy
-	B9OBuPtFsPDHQobPHm9nbUpLGAlWshtWpSL1VNtCwW0qTzbxEKn0Z8bzJWk2HesRKTZq
-	YqPowTcXQ0hN47pFtTMgxNEctUuIYfGIhwUwQWnCK4EThPLt3sUaVqpobOfQYWi7TJxV
-	LjIMDk3jTLuM6u80eObdeySDud7a5SyP3hEiUzL2Tgqyv5fv6MQ+bXgcdohTOOURPQwk
-	aqGCb4uUo+GWfZKLxgOA8fzk6NKwKuC7K4QT4TdwxVhyOL/U/Ix6Lbi3w+XFCPncR7Xm
-	BANg==
-X-Received: by 10.66.243.131 with SMTP id wy3mr16477316pac.32.1392213127552;
-	Wed, 12 Feb 2014 05:52:07 -0800 (PST)
-Received: from [192.168.0.33] (99-57-140-30.lightspeed.sntcca.sbcglobal.net.
-	[99.57.140.30]) by mx.google.com with ESMTPSA id
-	om6sm63885461pbc.43.2014.02.12.05.52.06 for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 12 Feb 2014 05:52:06 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 7.1 \(1827\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CAHB-PjkUvfgpsqU8SgmM_+aPYHZbbWUFnrPAsijL7MDaDYs9ug@mail.gmail.com>
-Date: Wed, 12 Feb 2014 05:52:05 -0800
-Message-Id: <C969B5B7-2CF7-4815-819E-98FED7D07820@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=+bOaqUbjIGZApskJZSPG3VU5dI4QRnCqSh4G3SXchJk=;
+	b=o81O+KpRKzwUsk+HfHb/0hT9DQ1p4KE88Tib2Bg8jyMD9m+nWmtl6RrnPbeWv8ER/g
+	POK+VqDhpZSsIcRxyxXqcEV2sTmCfNjOFitGzaU5KgE6X0nXAJkmAm5OyNOsijjKB15f
+	RntMIqzqV1PLhDo26rD6yOcIaEnacDiS+GXZp4be+tMim0Bhw+FGYj98ajpzC9cILiSt
+	JUAcCHhgTuSN5Y3x66mYAllONbXRqD4B4bBwolra71jPy9t0TbkBTsEKHjH25EXoeSYR
+	CPwcuGKGMIBvwVt5VpvbeF0vtiQexJyMp1ODW6YmJIdBZ1SANL8bdKVw5/neRi9P+1bD
+	Bdww==
+MIME-Version: 1.0
+X-Received: by 10.15.42.72 with SMTP id t48mr4161314eev.45.1392213780279; Wed,
+	12 Feb 2014 06:03:00 -0800 (PST)
+Received: by 10.14.178.196 with HTTP; Wed, 12 Feb 2014 06:03:00 -0800 (PST)
+In-Reply-To: <C969B5B7-2CF7-4815-819E-98FED7D07820@gmail.com>
 References: <245245F712CBF74D865D90E99497849F0642BFF8@mail-3.tvm.nestgroup.net>
 	<20131119060652.GN19813@edge>
 	<CAHB-PjkUvfgpsqU8SgmM_+aPYHZbbWUFnrPAsijL7MDaDYs9ug@mail.gmail.com>
-To: =?iso-8859-1?Q?Richard_R=F6jfors?= <richard.rojfors@gmail.com>
-X-Mailer: Apple Mail (2.1827)
+	<C969B5B7-2CF7-4815-819E-98FED7D07820@gmail.com>
+Date: Wed, 12 Feb 2014 15:03:00 +0100
+Message-ID: <CAHB-PjmYZUT03PPzHCkasVOoMBMUJWojbL8pMRpipATH6yGpjw@mail.gmail.com>
+From: =?UTF-8?Q?Richard_R=C3=B6jfors?= <richard.rojfors@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: meta-ti@yoctoproject.org
 Subject: Re: pandaboard/omap4 support
 X-BeenThere: meta-ti@yoctoproject.org
@@ -46,46 +41,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Feb 2014 13:52:08 -0000
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_134E797C-1A71-4C50-8996-73F62AF0650A"
+X-List-Received-Date: Wed, 12 Feb 2014 14:03:04 -0000
+Content-Type: multipart/alternative; boundary=089e0160cd1cd3360c04f23607a2
 
---Apple-Mail=_134E797C-1A71-4C50-8996-73F62AF0650A
+--089e0160cd1cd3360c04f23607a2
+Content-Type: text/plain; charset=UTF-8
+
+On Wed, Feb 12, 2014 at 2:52 PM, Khem Raj <raj.khem@gmail.com> wrote:
+
+>
+> what incompatibilities do you see between 4.7 and 4.8 ?
+>
+
+I saw this in the gcc 4.8 changelog:
+"On ARM, a bug has been fixed in GCC's implementation of the AAPCS rules
+for the layout of vectors that could lead to wrong code being generated.
+Vectors larger than 8 bytes in size are now by default aligned to an 8-byte
+boundary. This is an ABI change: code that makes explicit use of vector
+types may be incompatible with binary objects built with older versions of
+GCC. Auto-vectorized code is not affected by this change."
+
+--Richard
+
+--089e0160cd1cd3360c04f23607a2
+Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=iso-8859-1
 
+<div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On W=
+ed, Feb 12, 2014 at 2:52 PM, Khem Raj <span dir=3D"ltr">&lt;<a href=3D"mail=
+to:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt;</span> =
+wrote:<br>
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
+adding-left:1ex"><div style=3D"word-wrap:break-word"><div class=3D""><br><d=
+iv><div>
+what incompatibilities do you see between 4.7 and 4.8 ?=C2=A0<br></div></di=
+v></div></div></blockquote><div><br></div>I saw this in the gcc 4.8 changel=
+og:<br><div>&quot;On ARM, a bug has been fixed in GCC&#39;s implementation =
+of the AAPCS rules for the layout of vectors that could lead to wrong code =
+being generated. Vectors larger than 8 bytes in size are now by default ali=
+gned to an 8-byte boundary. This is an ABI change: code that makes explicit=
+ use of vector types may be incompatible with binary objects built with old=
+er versions of GCC. Auto-vectorized code is not affected by this change.&qu=
+ot;=C2=A0</div>
+<div><br></div><div>--Richard</div></div></div></div>
 
-On Feb 12, 2014, at 2:46 AM, Richard R=F6jfors =
-<richard.rojfors@gmail.com> wrote:
-
-> Now when oe-core is on gcc 4.8 (and there is some binary =
-incompatibilities between gcc 4.7 and 4.8) I think it's getting =
-important to get those binary blobs out compiled with gcc 4.8.
->=20
-what incompatibilities do you see between 4.7 and 4.8 ?=20=
-
---Apple-Mail=_134E797C-1A71-4C50-8996-73F62AF0650A
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=iso-8859-1
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html =
-charset=3Diso-8859-1"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; -webkit-line-break: =
-after-white-space;"><br><div><div>On Feb 12, 2014, at 2:46 AM, Richard =
-R=F6jfors &lt;<a =
-href=3D"mailto:richard.rojfors@gmail.com">richard.rojfors@gmail.com</a>&gt=
-; wrote:</div><br class=3D"Apple-interchange-newline"><blockquote =
-type=3D"cite"><div style=3D"font-family: Helvetica; font-size: 12px; =
-font-style: normal; font-variant: normal; font-weight: normal; =
-letter-spacing: normal; line-height: normal; orphans: auto; text-align: =
-start; text-indent: 0px; text-transform: none; white-space: normal; =
-widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">Now =
-when oe-core is on gcc 4.8 (and there is some binary incompatibilities =
-between gcc 4.7 and 4.8) I think it's getting important to get those =
-binary blobs out compiled with gcc 4.8.</div><br =
-class=3D"Apple-interchange-newline"></blockquote></div>what =
-incompatibilities do you see between 4.7 and 4.8 ?&nbsp;</body></html>=
-
---Apple-Mail=_134E797C-1A71-4C50-8996-73F62AF0650A--
+--089e0160cd1cd3360c04f23607a2--
