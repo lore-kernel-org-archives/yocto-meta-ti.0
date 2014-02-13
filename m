@@ -1,22 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E63CE0043B
-	for <meta-ti@yoctoproject.org>; Thu, 13 Feb 2014 15:08:34 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N0Y007UTIXGC780@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 13 Feb 2014 17:08:15 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 8A13E201BF; Thu,
-	13 Feb 2014 18:08:04 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E3403E0043B
+	for <meta-ti@yoctoproject.org>; Thu, 13 Feb 2014 15:12:45 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 9A6FE52A68; Thu, 13 Feb 2014 23:12:44 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Thu, 13 Feb 2014 18:08:03 -0500
-Message-id: <1392332883-31699-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH] am33x-cm3: update with I2C clock rate calculation fixes
+Message-Id: <20140213231244.9A6FE52A68@arago-project.org>
+Date: Thu, 13 Feb 2014 23:12:44 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : am33x-cm3: update with I2C clock rate calculation fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,14 +22,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Feb 2014 23:08:34 -0000
+X-List-Received-Date: Thu, 13 Feb 2014 23:12:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: fae7d7ec8998f9e0977af21acb4850414b3f6fef
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fae7d7ec8998f9e0977af21acb4850414b3f6fef
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Feb 13 18:06:40 2014 -0500
+
+am33x-cm3: update with I2C clock rate calculation fixes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/ti/am33x-cm3_git.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+
+ recipes-bsp/ti/am33x-cm3_git.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
 index 4c395c7..01d1273 100644
@@ -61,7 +65,5 @@ index 4c395c7..01d1273 100644
  BRANCH ?= "master"
  
  # This init script is only used for older kernels that do not support
--- 
-1.8.3.2
 
 
