@@ -1,31 +1,28 @@
 Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0852FE00404
-	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 12:01:08 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1CK14Cx022456;
-	Wed, 12 Feb 2014 14:01:04 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1CK14it019343;
-	Wed, 12 Feb 2014 14:01:04 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.2.342.3;
-	Wed, 12 Feb 2014 14:01:04 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1CK13Jg020210;
-	Wed, 12 Feb 2014 14:01:04 -0600
-Date: Wed, 12 Feb 2014 15:01:03 -0500
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C49CE007AD
+	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 18:31:31 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1D2VUiO009065
+	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 20:31:30 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1D2VUex006860
+	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 20:31:30 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Wed, 12 Feb 2014 20:31:29 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s1D2VTfl016478	for <meta-ti@yoctoproject.org>; Wed, 12 Feb 2014 20:31:30
+	-0600
+Date: Wed, 12 Feb 2014 21:18:12 -0500
 From: Denys Dmytriyenko <denys@ti.com>
-To: Jose Alarcon <Jose.Alarcon@procemex.com>
-Message-ID: <20140212200103.GR4346@edge>
-References: <DD2F89422B483148BCFD0BF72A6C148A78C815A2@exchange.hq.procemex.fi>
-	<20140207191000.GQ31128@edge>
-	<DD2F89422B483148BCFD0BF72A6C148A78C81695@exchange.hq.procemex.fi>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1326196920.265.1392257892317.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-In-Reply-To: <DD2F89422B483148BCFD0BF72A6C148A78C81695@exchange.hq.procemex.fi>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: TI boot-monitor recipe doesn't install the boot monitor binary in the image
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-02-12_21-00-24
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,85 +35,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Feb 2014 20:01:09 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 13 Feb 2014 02:31:34 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_264_1063662764.1392257892264"
 
-On Mon, Feb 10, 2014 at 07:21:30AM +0000, Jose Alarcon wrote:
-> Hello Denys,
-> 
-> Thanks for your comments. I am following the instructions on the MCSDK wiki 
-> page: 
-> http://processors.wiki.ti.com/index.php/MCSDK_UG_Chapter_Exploring#UBI.2FUBIFS
-> 
->   NAND Layout
->   The NAND flash in the EVM contains three partitions:-
-> 
->     bootloader - Contains u-boot
->     params - contains env variables
->     ubifs - contains following UBI volumes:-
->     boot volume - contains Kernel image (uImage), device tree blob etc,
->     rootfs volume - contains the rootfs which is the primary filesystem
-> 
-> After flashing the ubi image, the boad doesn't boot up unless I force the 
-> installation of the boot monitor under the /boot dir in the rootfs. The 
-> kernel and the device tree were there already (didn't check which recipe 
-> install those).
+------=_Part_264_1063662764.1392257892264
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-The instructions above talk extensively about boot-monitor and the need to 
-load it in RAM from U-boot. It doesn't say the image should be part of roofs.
+<html>
+<head>
+<title>
+Status for 02/12/14
+</title>
+</head>
+<body>
+
+<h2>Status for 02/12/14</h2>
+
+<h2>BUILD_ID: build-2014-02-12_21-01-35</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.01"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-> About the update of the keystone recipes to a newer yocto release, do you 
-> have any estimation on when that will be ready? I am anticipating some work 
-> on our side as well after this update.
-
-The necessary Keystone recipes and updates are now being submitted, reviewed 
-and pushed to main meta-ti (and meta-arago) repositories. No ETA yet.
-
-
-> Thanks and sorry for the top posting. Using Outlook here :-(
-> 
-> --
-> Jose
-> ________________________________________
-> From: Denys Dmytriyenko [denys@ti.com]
-> Sent: Friday, February 07, 2014 9:10 PM
-> To: Jose Alarcon
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] TI boot-monitor recipe doesn't install the boot monitor binary in the image
-> 
-> On Fri, Feb 07, 2014 at 10:36:09AM +0000, Jose Alarcon wrote:
-> > Hi there,
-> >
-> > In order to boot ubi images on our Keystone2-evem, we had to modify the
-> > boot-monitor recipe so that the boot monitor binary gets installed into the
-> > image.
-> >
-> > We fixed this in our own layers with a bbappend file like this:
-> >
-> >     PROVIDES += "boot-monitor"
-> >
-> >     do_install () {
-> >         install -d ${D}/boot
-> >         install ${S}/${BOOT_MONITOR_BINARY} ${D}/boot/${BOOT_MONITOR_IMAGE}
-> >         ln -sf ${BOOT_MONITOR_IMAGE} ${D}/boot/${BOOT_MONITOR_BINARY}
-> >     }
-> >
-> >     FILES_${PN} = "/boot ${sysconfdir}"
-> >
-> > Should this be fixed in the boot-monitor_git.bb recipe itself?
-> >
-> > I am using danny branch of meta-ti, commit 0039248515b16b88161844aef5d507737331c834
-> 
-> Jose,
-> 
-> boot-monitor gets deployed as a standalone image, like u-boot, kernel,
-> devitrees etc. I don't think it needs to go into the rootfs...
-> 
-> Plus, danny branch is long since outdated. Currently we are in the process of
-> updating Keystone recipes, so please stay tuned. Thanks.
-> 
-> --
-> Denys
-
+------=_Part_264_1063662764.1392257892264--
