@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E6FC7E00746
-	for <meta-ti@yoctoproject.org>; Thu, 13 Feb 2014 15:12:45 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D87AE0077A
+	for <meta-ti@yoctoproject.org>; Thu, 13 Feb 2014 15:12:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9554D52A14; Thu, 13 Feb 2014 23:12:44 +0000 (UTC)
+	id 19F2552A14; Thu, 13 Feb 2014 23:12:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140213231244.9554D52A14@arago-project.org>
-Date: Thu, 13 Feb 2014 23:12:44 +0000 (UTC)
+Message-Id: <20140213231252.19F2552A14@arago-project.org>
+Date: Thu, 13 Feb 2014 23:12:52 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : am33x-cm3: update with I2C clock rate calculation fixes
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Feb 2014 23:12:49 -0000
+X-List-Received-Date: Thu, 13 Feb 2014 23:12:52 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dora
-Commit: 9d9cee21c51b63937799f38450c6fec33809ddd7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9d9cee21c51b63937799f38450c6fec33809ddd7
+Branch: dylan
+Commit: f3551ab7240a6704ffbe6543eed6339a2f6c73af
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f3551ab7240a6704ffbe6543eed6339a2f6c73af
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Feb 13 18:06:40 2014 -0500
