@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D87AE0077A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5A25EE0074F
 	for <meta-ti@yoctoproject.org>; Thu, 13 Feb 2014 15:12:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 19F2552A14; Thu, 13 Feb 2014 23:12:52 +0000 (UTC)
+	id 05F5752A1B; Thu, 13 Feb 2014 23:12:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140213231252.19F2552A14@arago-project.org>
-Date: Thu, 13 Feb 2014 23:12:52 +0000 (UTC)
+Message-Id: <20140213231252.05F5752A1B@arago-project.org>
+Date: Thu, 13 Feb 2014 23:12:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am33x-cm3: update with I2C clock rate calculation fixes
+Subject: Denys Dmytriyenko : linux-ti-staging: apply network performance and LCD fixes locally for now
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,43 +27,27 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dylan
-Commit: f3551ab7240a6704ffbe6543eed6339a2f6c73af
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f3551ab7240a6704ffbe6543eed6339a2f6c73af
+Commit: 7df8efba137220614b26191bc0fcec3f7a72391a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7df8efba137220614b26191bc0fcec3f7a72391a
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Feb 13 18:06:40 2014 -0500
+Date:   Thu Feb 13 14:43:45 2014 -0500
 
-am33x-cm3: update with I2C clock rate calculation fixes
+linux-ti-staging: apply network performance and LCD fixes locally for now
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ti/am33x-cm3_git.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ ...2-am43xx-Add-context-offset-for-dss-hwmod.patch |   44 +++++
+ ...omap-Sync-up-omap2plus-defconfig-with-sav.patch |  195 ++++++++++++++++++++
+ ...map_hwmod-Add-context-ops-to-am43xx-soc_o.patch |   36 ++++
+ ...omap-Make-advanced-networking-features-as.patch |   54 ++++++
+ ...M-config-omap-Disable-extra-debug-options.patch |   47 +++++
+ ...ge-ARM-config-omap-Disable-SMP-for-AM335x.patch |   44 +++++
+ ...ll-warning-in-CPUIDLE-code-with-CONFIG_SM.patch |   49 +++++
+ recipes-kernel/linux/linux-ti-staging_3.12.bb      |   12 +-
+ 8 files changed, 480 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
-index 4c395c7..01d1273 100644
---- a/recipes-bsp/ti/am33x-cm3_git.bb
-+++ b/recipes-bsp/ti/am33x-cm3_git.bb
-@@ -3,14 +3,14 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
- LICENSE = "TI-BSD"
- LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
- 
--PV = "05.00.00.02"
--PR = "r2"
-+PV = "05.00.00.03"
-+PR = "r0"
- 
- # Make package machine specific due to different init scripts
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--# SRCREV corresponds to tag v05.00.00.02
--SRCREV = "11107db2f1e9e58ee75d4fe9cc38423c9a6e4365"
-+# SRCREV corresponds to tag v05.00.00.03
-+SRCREV = "a0ddffb63147e2079a08944c0e399c75538201a9"
- BRANCH ?= "master"
- 
- # This init script is only used for older kernels that do not support
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=7df8efba137220614b26191bc0fcec3f7a72391a
 
