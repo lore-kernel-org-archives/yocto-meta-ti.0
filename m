@@ -1,32 +1,25 @@
-Return-Path: <whittenburg@gmail.com>
-Received: from mail-qa0-f41.google.com (mail-qa0-f41.google.com
-	[209.85.216.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE65EE00807
-	for <meta-ti@yoctoproject.org>; Thu, 13 Feb 2014 12:02:50 -0800 (PST)
-Received: by mail-qa0-f41.google.com with SMTP id w8so17128383qac.0
-	for <meta-ti@yoctoproject.org>; Thu, 13 Feb 2014 12:02:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:reply-to:date:message-id:subject:from:to:content-type;
-	bh=KALHocrXzMn6wfLmVKAEc1tiBLgkfWkjtb8k96eDYHQ=;
-	b=AQL/YOGqtfVAlJh3AlXxSepLzn7jnX/dxgs5hOlKVq+H4u9pR7MzKCjMEulb7bJkOU
-	Ebt2omEREMowGuU9NPFPdMlFA+ZafjwQN3E34rGmolxygAprDAI5slspRn1ikp4C7gy7
-	XUZ3x0nVGcv3Jv6BjWGtkSunC3PA6wmma4/KglLLPOqvbYjoYtDpUxBX/RLMaf+qVOwr
-	C6CORUofaKniMAYxtmJots0ztt/CdiJgWNOQuKUWESRAKu1UnaVaQ2idDlccTmVC9/YT
-	vj2lv6e6rmbSWdLHQUAklqNTuPURNbjmfEtl8jBOkZ2frgy+Ah09yQ6rwuzl4bwbVfgv
-	TriA==
-MIME-Version: 1.0
-X-Received: by 10.140.102.167 with SMTP id w36mr5493450qge.109.1392321770133; 
-	Thu, 13 Feb 2014 12:02:50 -0800 (PST)
-Received: by 10.96.135.199 with HTTP; Thu, 13 Feb 2014 12:02:50 -0800 (PST)
-Date: Thu, 13 Feb 2014 14:02:50 -0600
-Message-ID: <CABcw_Omi-gyitpArOmqjjcZyjOjKyRfPtwvZoWv2q2eGe86sEA@mail.gmail.com>
-From: Chris Whittenburg <whittenburg@gmail.com>
+Return-Path: <denis@denix.org>
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E63CE0043B
+	for <meta-ti@yoctoproject.org>; Thu, 13 Feb 2014 15:08:34 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N0Y007UTIXGC780@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 13 Feb 2014 17:08:15 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 8A13E201BF; Thu,
+	13 Feb 2014 18:08:04 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Subject: ti-codecs-omap3530_4.00.00.00.bb
+Date: Thu, 13 Feb 2014 18:08:03 -0500
+Message-id: <1392332883-31699-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH] am33x-cm3: update with I2C clock rate calculation fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
-Reply-To: whittenburg@gmail.com
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -36,30 +29,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Feb 2014 20:02:54 -0000
-Content-Type: multipart/alternative; boundary=001a11c16f74859ff904f24f2c76
+X-List-Received-Date: Thu, 13 Feb 2014 23:08:34 -0000
 
---001a11c16f74859ff904f24f2c76
-Content-Type: text/plain; charset=ISO-8859-1
+From: Denys Dmytriyenko <denys@ti.com>
 
-Can I request that this recipe get updated to use codecs provided with
-dvsdk 4.03.00.06?  Specifically I'm trying to get 720p encoding on dm3730
-(gumstix).  Right now, I'm using meta-ti (dylan branch) and vga encoding
-works ok, just need the higher resolution.
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-bsp/ti/am33x-cm3_git.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Thanks,
-Chris
+diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
+index 4c395c7..01d1273 100644
+--- a/recipes-bsp/ti/am33x-cm3_git.bb
++++ b/recipes-bsp/ti/am33x-cm3_git.bb
+@@ -3,14 +3,14 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
+ LICENSE = "TI-BSD"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
+ 
+-PV = "05.00.00.02"
+-PR = "r2"
++PV = "05.00.00.03"
++PR = "r0"
+ 
+ # Make package machine specific due to different init scripts
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-# SRCREV corresponds to tag v05.00.00.02
+-SRCREV = "11107db2f1e9e58ee75d4fe9cc38423c9a6e4365"
++# SRCREV corresponds to tag v05.00.00.03
++SRCREV = "a0ddffb63147e2079a08944c0e399c75538201a9"
+ BRANCH ?= "master"
+ 
+ # This init script is only used for older kernels that do not support
+-- 
+1.8.3.2
 
---001a11c16f74859ff904f24f2c76
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><br><div style>Can I request that this recipe get updated =
-to use codecs provided with dvsdk 4.03.00.06? =A0Specifically I&#39;m tryin=
-g to get 720p encoding on dm3730 (gumstix). =A0Right now, I&#39;m using met=
-a-ti (dylan branch) and vga encoding works ok, just need the higher resolut=
-ion.</div>
-<div style><br></div><div style>Thanks,</div><div style>Chris</div><div sty=
-le><br></div></div>
-
---001a11c16f74859ff904f24f2c76--
