@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD137E007DF
-	for <meta-ti@yoctoproject.org>; Fri, 14 Feb 2014 14:44:43 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B01AAE007FA
+	for <meta-ti@yoctoproject.org>; Fri, 14 Feb 2014 14:44:50 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 31FD752A7D; Fri, 14 Feb 2014 22:44:42 +0000 (UTC)
+	id 10E8C52A7D; Fri, 14 Feb 2014 22:44:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140214224442.31FD752A7D@arago-project.org>
-Date: Fri, 14 Feb 2014 22:44:42 +0000 (UTC)
+Message-Id: <20140214224450.10E8C52A7D@arago-project.org>
+Date: Fri, 14 Feb 2014 22:44:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: update with QSPI partition fixes and properly list LCD patches
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2014 22:44:45 -0000
+X-List-Received-Date: Fri, 14 Feb 2014 22:44:51 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 90108cdd05000213c3163b784906a01a968f8b52
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=90108cdd05000213c3163b784906a01a968f8b52
+Branch: dora
+Commit: 58140ec4f4bc21c52e9d682483e470d7fe8c0cfc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=58140ec4f4bc21c52e9d682483e470d7fe8c0cfc
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Feb 14 17:13:53 2014 -0500
