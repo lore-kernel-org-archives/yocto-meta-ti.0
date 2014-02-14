@@ -1,22 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCF54E007E6
-	for <meta-ti@yoctoproject.org>; Fri, 14 Feb 2014 14:30:15 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173023.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N1000FA1BUDF5P0@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 14 Feb 2014 16:30:13 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 5ED0D201BF; Fri,
-	14 Feb 2014 17:30:13 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD137E007DF
+	for <meta-ti@yoctoproject.org>; Fri, 14 Feb 2014 14:44:43 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 31FD752A7D; Fri, 14 Feb 2014 22:44:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Fri, 14 Feb 2014 17:30:12 -0500
-Message-id: <1392417012-24492-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH] linux-ti-staging: update with QSPI partition fixes and properly list LCD patches
+Message-Id: <20140214224442.31FD752A7D@arago-project.org>
+Date: Fri, 14 Feb 2014 22:44:42 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update with QSPI partition fixes and properly list LCD patches
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,14 +22,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2014 22:30:16 -0000
+X-List-Received-Date: Fri, 14 Feb 2014 22:44:45 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 90108cdd05000213c3163b784906a01a968f8b52
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=90108cdd05000213c3163b784906a01a968f8b52
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Feb 14 17:13:53 2014 -0500
+
+linux-ti-staging: update with QSPI partition fixes and properly list LCD patches
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
+
  recipes-kernel/linux/linux-ti-staging_3.12.bb |   12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ 1 files changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
 index 29d1a4f..220495a 100644
@@ -69,7 +73,5 @@ index 29d1a4f..220495a 100644
 +            file://0003-ARM-OMAP2-am43xx-Add-context-offset-for-dss-hwmod.patch \
 +            file://0004-ARM-OMAP2-omap_hwmod-Maintain-legacy-context-loss-count.patch \
              "
--- 
-1.7.9.5
 
 
