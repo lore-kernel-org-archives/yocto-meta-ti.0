@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE55AE007FD
-	for <meta-ti@yoctoproject.org>; Mon, 17 Feb 2014 07:43:04 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B829E0081D
+	for <meta-ti@yoctoproject.org>; Mon, 17 Feb 2014 07:43:12 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 004F252A8D; Mon, 17 Feb 2014 15:43:03 +0000 (UTC)
+	id 6CC9F52A8E; Mon, 17 Feb 2014 15:43:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140217154304.004F252A8D@arago-project.org>
-Date: Mon, 17 Feb 2014 15:43:03 +0000 (UTC)
+Message-Id: <20140217154312.6CC9F52A8E@arago-project.org>
+Date: Mon, 17 Feb 2014 15:43:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: drop SMP-disabling patch that breaks suspend/resume
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2014 15:43:07 -0000
+X-List-Received-Date: Mon, 17 Feb 2014 15:43:12 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 7969c525c26dde8b601b7122b95182c9cce3f65c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7969c525c26dde8b601b7122b95182c9cce3f65c
+Branch: dylan
+Commit: 800105c4c27f2bb7febc596cafae1071fabc4c83
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=800105c4c27f2bb7febc596cafae1071fabc4c83
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Feb 17 10:26:36 2014 -0500
