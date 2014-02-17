@@ -1,12 +1,12 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED1C0E006B3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EE55AE007FD
 	for <meta-ti@yoctoproject.org>; Mon, 17 Feb 2014 07:43:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E50F152A98; Mon, 17 Feb 2014 15:43:03 +0000 (UTC)
+	id 004F252A8D; Mon, 17 Feb 2014 15:43:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140217154303.E50F152A98@arago-project.org>
+Message-Id: <20140217154304.004F252A8D@arago-project.org>
 Date: Mon, 17 Feb 2014 15:43:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: drop SMP-disabling patch that breaks suspend/resume
@@ -26,9 +26,9 @@ X-List-Received-Date: Mon, 17 Feb 2014 15:43:07 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dora
-Commit: ec8544247c4257987b89f4e69afbac2cbb6ceb7c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ec8544247c4257987b89f4e69afbac2cbb6ceb7c
+Branch: master
+Commit: 7969c525c26dde8b601b7122b95182c9cce3f65c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7969c525c26dde8b601b7122b95182c9cce3f65c
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Feb 17 10:26:36 2014 -0500
