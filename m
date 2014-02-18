@@ -1,15 +1,28 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9B829E0081D
-	for <meta-ti@yoctoproject.org>; Mon, 17 Feb 2014 07:43:12 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 6CC9F52A8E; Mon, 17 Feb 2014 15:43:12 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20140217154312.6CC9F52A8E@arago-project.org>
-Date: Mon, 17 Feb 2014 15:43:12 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: drop SMP-disabling patch that breaks suspend/resume
+Return-Path: <denys@ti.com>
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1C63EE00848
+	for <meta-ti@yoctoproject.org>; Mon, 17 Feb 2014 18:47:18 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1I2lHms027962
+	for <meta-ti@yoctoproject.org>; Mon, 17 Feb 2014 20:47:17 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1I2lHBH017336
+	for <meta-ti@yoctoproject.org>; Mon, 17 Feb 2014 20:47:17 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
+	Mon, 17 Feb 2014 20:47:17 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s1I2lHgE021886	for <meta-ti@yoctoproject.org>; Mon, 17 Feb 2014 20:47:17
+	-0600
+Date: Mon, 17 Feb 2014 21:33:51 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <632860407.285.1392690831619.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-02-17_21-00-24
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,50 +35,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2014 15:43:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 18 Feb 2014 02:47:19 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_284_1752574437.1392690831616"
 
-Module: meta-ti
-Branch: dylan
-Commit: 800105c4c27f2bb7febc596cafae1071fabc4c83
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=800105c4c27f2bb7febc596cafae1071fabc4c83
+------=_Part_284_1752574437.1392690831616
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Feb 17 10:26:36 2014 -0500
+<html>
+<head>
+<title>
+Status for 02/17/14
+</title>
+</head>
+<body>
 
-linux-ti-staging: drop SMP-disabling patch that breaks suspend/resume
+<h2>Status for 02/17/14</h2>
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+<h2>BUILD_ID: build-2014-02-17_21-01-34</h2>
 
----
+<h2>Clean Build: false</h2>
 
- recipes-kernel/linux/linux-ti-staging_3.12.bb |    6 +-----
- 1 files changed, 1 insertions(+), 5 deletions(-)
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 220495a..2561e12 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -40,7 +40,7 @@ SRCREV = "9d5b470605a6e5df5c46444c2b2c108d21f9a24a"
- PV = "3.12.10"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "e+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "f+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-@@ -51,11 +51,7 @@ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;bra
- SRC_URI += "file://0001-ARM-config-omap-Sync-up-omap2plus-defconfig-with-sav.patch \
-             file://0002-ARM-config-omap-Make-advanced-networking-features-as.patch \
-             file://0003-ARM-config-omap-Disable-extra-debug-options.patch \
--            file://0005-ARM-OMAP-Kill-warning-in-CPUIDLE-code-with-CONFIG_SM.patch \
-             "
--SRC_URI_append_ti33x = "file://0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
--SRC_URI_append_ti43x = "file://0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
--
- # LCD resume fixes
- SRC_URI += "file://0001-ARM-OMAP2-am43xx-Use-omap4-prm-context-ops.patch \
-             file://0002-ARM-OMAP2-omap_hwmod-Add-context-ops-to-am43xx-soc_ops.patch \
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=red>FAILED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.01"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_284_1752574437.1392690831616--
