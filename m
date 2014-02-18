@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4793CE0086D
-	for <meta-ti@yoctoproject.org>; Tue, 18 Feb 2014 09:01:02 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3AE88E00862
+	for <meta-ti@yoctoproject.org>; Tue, 18 Feb 2014 09:01:11 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id EA17452A72; Tue, 18 Feb 2014 17:01:01 +0000 (UTC)
+	id DF7BC52A72; Tue, 18 Feb 2014 17:01:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140218170101.EA17452A72@arago-project.org>
-Date: Tue, 18 Feb 2014 17:01:01 +0000 (UTC)
+Message-Id: <20140218170110.DF7BC52A72@arago-project.org>
+Date: Tue, 18 Feb 2014 17:01:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: remove local patches that got merged to kernel tree
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2014 17:01:02 -0000
+X-List-Received-Date: Tue, 18 Feb 2014 17:01:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dora
-Commit: 862600986455bcb877c429ff8005e2be51a20c88
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=862600986455bcb877c429ff8005e2be51a20c88
+Branch: dylan
+Commit: 975ce2d93d1d11f8931d5529ebd4390f25248b08
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=975ce2d93d1d11f8931d5529ebd4390f25248b08
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Feb 18 10:52:58 2014 -0500
@@ -51,5 +51,5 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  recipes-kernel/linux/linux-ti-staging_3.12.bb      |   16 +--
  10 files changed, 2 insertions(+), 635 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=862600986455bcb877c429ff8005e2be51a20c88
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=975ce2d93d1d11f8931d5529ebd4390f25248b08
 
