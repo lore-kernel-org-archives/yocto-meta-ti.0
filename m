@@ -1,28 +1,33 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1DB2E004DD
-	for <meta-ti@yoctoproject.org>; Wed, 19 Feb 2014 12:40:15 -0800 (PST)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id EA0F6F811E5; Wed, 19 Feb 2014 13:40:14 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 3A37DF811E5;
-	Wed, 19 Feb 2014 13:40:13 -0700 (MST)
-Message-ID: <530516AD.1050901@mlbassoc.com>
-Date: Wed, 19 Feb 2014 13:40:13 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
+	[209.85.223.169])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B9226E0071E
+	for <meta-ti@yoctoproject.org>; Wed, 19 Feb 2014 12:45:46 -0800 (PST)
+Received: by mail-ie0-f169.google.com with SMTP id at1so644749iec.28
+	for <meta-ti@yoctoproject.org>; Wed, 19 Feb 2014 12:45:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=QXzjXX3qPFOrh5X+Oe5qo5bIqoq6nlc+wozNH7Ykxn8=;
+	b=EHfZWscnptqBoKqOoCazQBIS4Kje+LVt5QWKPoA8Ik2Kw8OmjHvgfP4E8VpE4jrddO
+	V9zqQjnH7VdISXVPwvO6RYz82pjiYwNxclCYdRCEWkSo0E9fblY1NlzKJ7xvv1HAXKpe
+	4xapzJifJ1lAMGzAz2hjILXSkQBB7+MMLS6PkS1ft6PefuL3XxmFnCMwF9XJYl8XCT5e
+	p3xvKTlbrf0be2Sw4OU5spzirUOuhJIuAbvwLCrIxa3T+J/6WN/Ly18Vs5kFPy8BIQyB
+	7SZQtruzMUcZ+AYWloc+0BXe5WwYaIqjtjf5iA8GQsojx73c2BUoz0Fy+GCej/Kj9xsx
+	/6tA==
+X-Received: by 10.42.85.140 with SMTP id q12mr3296384icl.51.1392842746149;
+	Wed, 19 Feb 2014 12:45:46 -0800 (PST)
 MIME-Version: 1.0
-To: meta-ti@yoctoproject.org
+Received: by 10.50.224.137 with HTTP; Wed, 19 Feb 2014 12:45:16 -0800 (PST)
+In-Reply-To: <530516AD.1050901@mlbassoc.com>
 References: <CA+ujt=q+j7sBLqCFaAwomZepAah2R-y7=bp_H38otNvBUNznyg@mail.gmail.com>
 	<CAMKF1spN2gOjTav18Qi+FObE+QxVohQ89KObNoQe-MgwX8=Trg@mail.gmail.com>
-In-Reply-To: <CAMKF1spN2gOjTav18Qi+FObE+QxVohQ89KObNoQe-MgwX8=Trg@mail.gmail.com>
-X-Enigmail-Version: 1.5.2
+	<530516AD.1050901@mlbassoc.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 19 Feb 2014 12:45:16 -0800
+Message-ID: <CAMKF1srGu+GU3kQtE6zmddpoak6+sk7nDLKKdRexTsec9nXfCg@mail.gmail.com>
+To: Gary Thomas <gary@mlbassoc.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: Support for capemgr
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -36,23 +41,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2014 20:40:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 19 Feb 2014 20:45:47 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 2014-02-19 13:31, Khem Raj wrote:
-> On Wed, Feb 19, 2014 at 1:30 AM, Eric Seuret <eric.seuret@gmail.com> wrote:
->> I have been toying around with yocto and the meta-ti layer for my beaglebone
->> black and I am able to build and boot an image (I made core-image-basic).
->> However i don't seem to see the capemgr in my /sys/devices.
-> 
-> may be you will have better luck trying kernel from meta-beagleboard
+On Wed, Feb 19, 2014 at 12:40 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+> On 2014-02-19 13:31, Khem Raj wrote:
+>> On Wed, Feb 19, 2014 at 1:30 AM, Eric Seuret <eric.seuret@gmail.com> wrote:
+>>> I have been toying around with yocto and the meta-ti layer for my beaglebone
+>>> black and I am able to build and boot an image (I made core-image-basic).
+>>> However i don't seem to see the capemgr in my /sys/devices.
+>>
+>> may be you will have better luck trying kernel from meta-beagleboard
+>
+> Really?  That layer hasn't been updated since 2013-09-05... seems pretty dead to me.
+>
 
-Really?  That layer hasn't been updated since 2013-09-05... seems pretty dead to me.
+the upstream is here
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+https://github.com/koenkooi/meta-beagleboard/commits/master
+
+
+
+> --
+> ------------------------------------------------------------
+> Gary Thomas                 |  Consulting for the
+> MLB Associates              |    Embedded world
+> ------------------------------------------------------------
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
