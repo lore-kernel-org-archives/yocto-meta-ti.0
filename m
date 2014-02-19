@@ -1,28 +1,28 @@
-Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B60CE0071C
-	for <meta-ti@yoctoproject.org>; Tue, 18 Feb 2014 19:29:48 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1J3TkPH005929
-	for <meta-ti@yoctoproject.org>; Tue, 18 Feb 2014 21:29:46 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1J3TkqA003773
-	for <meta-ti@yoctoproject.org>; Tue, 18 Feb 2014 21:29:46 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 18 Feb 2014 21:29:46 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s1J3Tj03017598	for <meta-ti@yoctoproject.org>; Tue, 18 Feb 2014 21:29:46
-	-0600
-Date: Tue, 18 Feb 2014 22:16:18 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <579284737.291.1392779778859.JavaMail.jenkins@puget>
+Return-Path: <eric.seuret@gmail.com>
+Received: from mail-oa0-f51.google.com (mail-oa0-f51.google.com
+	[209.85.219.51])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 63BA4E006C6
+	for <meta-ti@yoctoproject.org>; Wed, 19 Feb 2014 01:30:03 -0800 (PST)
+Received: by mail-oa0-f51.google.com with SMTP id h16so128843oag.10
+	for <meta-ti@yoctoproject.org>; Wed, 19 Feb 2014 01:30:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=LUr8WQCpggvd2v2+3K+xuCJuWUSCa5fy4iGV8H/5zMg=;
+	b=RSQlaT/YJAF2n328bD4kUKlx+YOeocS8ROs/ouczy56t7KCGcuKin5xtQLgVBizikm
+	YrZ1AkOgGUw0ThTISEHfNeDdl7upJ0C/bbf8+gXpc4wrYjzJUsnHjb36nngRN/WBZrV5
+	TqOG3uDXJgzc6d0bJy+Tmj24WYA+KaWX4ClxZmHiOrEZRZhsEbOQTNGJofyhON7QcKzA
+	JNpolT4Cmp4VG2PdqZOqJECrWAn9FTmgcdfKyJwoTjVHe025NNTg8Vk5/5rZRwv467AU
+	JF4EJZSE/Z2lKaZ3KUkNWZArKKEJ4m7T/Q5wHDkJm/xKWMer50laj0/xQwzz8AUQNmgl
+	vXyw==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-02-18_21-00-24
+X-Received: by 10.182.166.40 with SMTP id zd8mr29983667obb.25.1392802201409;
+	Wed, 19 Feb 2014 01:30:01 -0800 (PST)
+Received: by 10.182.115.10 with HTTP; Wed, 19 Feb 2014 01:30:01 -0800 (PST)
+Date: Wed, 19 Feb 2014 10:30:01 +0100
+Message-ID: <CA+ujt=q+j7sBLqCFaAwomZepAah2R-y7=bp_H38otNvBUNznyg@mail.gmail.com>
+From: Eric Seuret <eric.seuret@gmail.com>
+To: meta-ti@yoctoproject.org
+Subject: Support for capemgr
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +35,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2014 03:29:51 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_290_1014808973.1392779778858"
+X-List-Received-Date: Wed, 19 Feb 2014 09:30:06 -0000
+Content-Type: multipart/alternative; boundary=e89a8ff1ce0275226a04f2bf083b
 
-------=_Part_290_1014808973.1392779778858
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--e89a8ff1ce0275226a04f2bf083b
+Content-Type: text/plain; charset=UTF-8
 
-<html>
-<head>
-<title>
-Status for 02/18/14
-</title>
-</head>
-<body>
+Hello,
 
-<h2>Status for 02/18/14</h2>
+I have been toying around with yocto and the meta-ti layer for my
+beaglebone black and I am able to build and boot an image (I made
+core-image-basic). However i don't seem to see the capemgr in my
+/sys/devices.
 
-<h2>BUILD_ID: build-2014-02-18_21-01-33</h2>
+I guess this means that meta-ti doesn't support the capemgr, but maybe I am
+doing something wrong... Is there a way to activate the capemgr support in
+the meta-ti layer or is it just not supported ?
 
-<h2>Clean Build: false</h2>
+For the config I just activated the meta-ti, yocto and yocto-bsp layers in
+my bblayers.conf
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+I have meta-ti at the tag: ti2013.12.00
+and yocto at the tag: yocto-1.5.1.final
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
+Thanks,
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+Eric
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.01"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+--e89a8ff1ce0275226a04f2bf083b
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-</body>
-</html>
+<div dir=3D"ltr">Hello,<div><br></div><div>I have been toying around with y=
+octo and the meta-ti layer for my beaglebone black and I am able to build a=
+nd boot an image (I made core-image-basic). However i don&#39;t seem to see=
+ the capemgr in my /sys/devices.=C2=A0</div>
+<div><br></div><div>I guess this means that meta-ti doesn&#39;t support the=
+ capemgr, but maybe I am doing something wrong... Is there a way to activat=
+e the capemgr support in the meta-ti layer or is it just not supported ?</d=
+iv>
+<div><br></div><div><div>For the config I just activated the meta-ti, yocto=
+ and yocto-bsp layers in my bblayers.conf<br></div><div><br></div><div>I ha=
+ve meta-ti at the tag: ti2013.12.00</div><div>and yocto at the tag: yocto-1=
+.5.1.final</div>
+</div><div><br></div><div>Thanks,</div><div><br></div><div>Eric</div><div><=
+br></div><div><br></div></div>
 
-
-------=_Part_290_1014808973.1392779778858--
+--e89a8ff1ce0275226a04f2bf083b--
