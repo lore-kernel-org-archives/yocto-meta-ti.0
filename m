@@ -1,28 +1,36 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A3D08E0082B
-	for <meta-ti@yoctoproject.org>; Wed, 19 Feb 2014 18:33:34 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1K2XXGE025947
-	for <meta-ti@yoctoproject.org>; Wed, 19 Feb 2014 20:33:33 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1K2XXIt028350
-	for <meta-ti@yoctoproject.org>; Wed, 19 Feb 2014 20:33:33 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 19 Feb 2014 20:33:32 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s1K2XWAZ001314	for <meta-ti@yoctoproject.org>; Wed, 19 Feb 2014 20:33:32
-	-0600
-Date: Wed, 19 Feb 2014 21:20:04 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <2031648369.295.1392862804119.JavaMail.jenkins@puget>
+Return-Path: <eric.seuret@gmail.com>
+Received: from mail-oa0-f47.google.com (mail-oa0-f47.google.com
+	[209.85.219.47])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04E86E00575
+	for <meta-ti@yoctoproject.org>; Thu, 20 Feb 2014 00:20:51 -0800 (PST)
+Received: by mail-oa0-f47.google.com with SMTP id m1so1757947oag.20
+	for <meta-ti@yoctoproject.org>; Thu, 20 Feb 2014 00:20:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=hTSwD573smIXzghWf0mWlQ2ZklFk4l0qNVO62Xzznak=;
+	b=INM/PUN6htHhYzh9p7C4ehx1Plkxalw3+4yy14gCVs2yVYQcQnkm1K+l2GzxpYRO8i
+	9Hu1f/KkdYOiW0MQAFPQbObKlOCTR0XArAg389Tsl09mspq4HsRhriHckHRdYOr7dLgR
+	9VM2y3+3goPSrEHHluNHdQE05ZvAzblkyCl2BelRCmqNDg7yyZLtcIKfKc9gq3nmo0Fb
+	46Txgdc7vj+DMoJEwr8DiBPaGlGNzGkY4krNWFbI+X1Ahd1sbE4q0zZLv4/c5CAsOj4S
+	RAiD4m9ArrYLcrohXoIwp3L1VSZam39fVCX+EmCv8fMEqm66FdBY7KxI7WzACNgcC5A9
+	K07g==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-02-19_21-00-24
+X-Received: by 10.60.98.73 with SMTP id eg9mr269864oeb.81.1392884450687; Thu,
+	20 Feb 2014 00:20:50 -0800 (PST)
+Received: by 10.182.115.10 with HTTP; Thu, 20 Feb 2014 00:20:50 -0800 (PST)
+In-Reply-To: <CAMKF1srGu+GU3kQtE6zmddpoak6+sk7nDLKKdRexTsec9nXfCg@mail.gmail.com>
+References: <CA+ujt=q+j7sBLqCFaAwomZepAah2R-y7=bp_H38otNvBUNznyg@mail.gmail.com>
+	<CAMKF1spN2gOjTav18Qi+FObE+QxVohQ89KObNoQe-MgwX8=Trg@mail.gmail.com>
+	<530516AD.1050901@mlbassoc.com>
+	<CAMKF1srGu+GU3kQtE6zmddpoak6+sk7nDLKKdRexTsec9nXfCg@mail.gmail.com>
+Date: Thu, 20 Feb 2014 09:20:50 +0100
+Message-ID: <CA+ujt=pT8oJesg0ZUs6Rb1hB6KYLx29mXin36qJxBnsgi48LXA@mail.gmail.com>
+From: Eric Seuret <eric.seuret@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	Gary Thomas <gary@mlbassoc.com>
+Subject: Re: Support for capemgr
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,168 +43,114 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2014 02:33:38 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_294_25803288.1392862804119"
+X-List-Received-Date: Thu, 20 Feb 2014 08:20:53 -0000
+Content-Type: multipart/alternative; boundary=089e0139fc60e580b604f2d22e8d
 
-------=_Part_294_25803288.1392862804119
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--089e0139fc60e580b604f2d22e8d
+Content-Type: text/plain; charset=UTF-8
 
-<html>
-<head>
-<title>
-Status for 02/19/14
-</title>
-</head>
-<body>
+I'll look into those repos then.
 
-<h2>Status for 02/19/14</h2>
-
-<h2>BUILD_ID: build-2014-02-19_21-01-32</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.01"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+Thanks for the answers.
 
 
-------=_Part_294_25803288.1392862804119--
+On Wed, Feb 19, 2014 at 9:45 PM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> On Wed, Feb 19, 2014 at 12:40 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+> > On 2014-02-19 13:31, Khem Raj wrote:
+> >> On Wed, Feb 19, 2014 at 1:30 AM, Eric Seuret <eric.seuret@gmail.com>
+> wrote:
+> >>> I have been toying around with yocto and the meta-ti layer for my
+> beaglebone
+> >>> black and I am able to build and boot an image (I made
+> core-image-basic).
+> >>> However i don't seem to see the capemgr in my /sys/devices.
+> >>
+> >> may be you will have better luck trying kernel from meta-beagleboard
+> >
+> > Really?  That layer hasn't been updated since 2013-09-05... seems pretty
+> dead to me.
+> >
+>
+> the upstream is here
+>
+> https://github.com/koenkooi/meta-beagleboard/commits/master
+>
+>
+>
+> > --
+> > ------------------------------------------------------------
+> > Gary Thomas                 |  Consulting for the
+> > MLB Associates              |    Embedded world
+> > ------------------------------------------------------------
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+>
+
+--089e0139fc60e580b604f2d22e8d
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">I&#39;ll look into those repos then.=C2=A0<div><br></div><=
+div>Thanks for the answers.</div></div><div class=3D"gmail_extra"><br><br><=
+div class=3D"gmail_quote">On Wed, Feb 19, 2014 at 9:45 PM, Khem Raj <span d=
+ir=3D"ltr">&lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.=
+khem@gmail.com</a>&gt;</span> wrote:<br>
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex"><div class=3D"">On Wed, Feb 19, 2014 at 12:4=
+0 PM, Gary Thomas &lt;<a href=3D"mailto:gary@mlbassoc.com">gary@mlbassoc.co=
+m</a>&gt; wrote:<br>
+
+&gt; On 2014-02-19 13:31, Khem Raj wrote:<br>
+&gt;&gt; On Wed, Feb 19, 2014 at 1:30 AM, Eric Seuret &lt;<a href=3D"mailto=
+:eric.seuret@gmail.com">eric.seuret@gmail.com</a>&gt; wrote:<br>
+&gt;&gt;&gt; I have been toying around with yocto and the meta-ti layer for=
+ my beaglebone<br>
+&gt;&gt;&gt; black and I am able to build and boot an image (I made core-im=
+age-basic).<br>
+&gt;&gt;&gt; However i don&#39;t seem to see the capemgr in my /sys/devices=
+.<br>
+&gt;&gt;<br>
+&gt;&gt; may be you will have better luck trying kernel from meta-beagleboa=
+rd<br>
+&gt;<br>
+&gt; Really? =C2=A0That layer hasn&#39;t been updated since 2013-09-05... s=
+eems pretty dead to me.<br>
+&gt;<br>
+<br>
+</div>the upstream is here<br>
+<br>
+<a href=3D"https://github.com/koenkooi/meta-beagleboard/commits/master" tar=
+get=3D"_blank">https://github.com/koenkooi/meta-beagleboard/commits/master<=
+/a><br>
+<div class=3D"HOEnZb"><div class=3D"h5"><br>
+<br>
+<br>
+&gt; --<br>
+&gt; ------------------------------------------------------------<br>
+&gt; Gary Thomas =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =
+=C2=A0Consulting for the<br>
+&gt; MLB Associates =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=
+=A0 =C2=A0Embedded world<br>
+&gt; ------------------------------------------------------------<br>
+&gt; _______________________________________________<br>
+&gt; meta-ti mailing list<br>
+&gt; <a href=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</=
+a><br>
+&gt; <a href=3D"https://lists.yoctoproject.org/listinfo/meta-ti" target=3D"=
+_blank">https://lists.yoctoproject.org/listinfo/meta-ti</a><br>
+_______________________________________________<br>
+meta-ti mailing list<br>
+<a href=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</a><br=
+>
+<a href=3D"https://lists.yoctoproject.org/listinfo/meta-ti" target=3D"_blan=
+k">https://lists.yoctoproject.org/listinfo/meta-ti</a><br>
+</div></div></blockquote></div><br></div>
+
+--089e0139fc60e580b604f2d22e8d--
