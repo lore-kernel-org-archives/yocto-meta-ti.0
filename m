@@ -1,32 +1,28 @@
-Return-Path: <fcooper@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 73350E0088A
-	for <meta-ti@yoctoproject.org>; Thu, 20 Feb 2014 12:05:30 -0800 (PST)
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DD718E00809
+	for <meta-ti@yoctoproject.org>; Thu, 20 Feb 2014 18:58:45 -0800 (PST)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1KK5Tmu021160
-	for <meta-ti@yoctoproject.org>; Thu, 20 Feb 2014 14:05:29 -0600
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1L2wifJ007366
+	for <meta-ti@yoctoproject.org>; Thu, 20 Feb 2014 20:58:44 -0600
 Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1KK5T6W022128
-	for <meta-ti@yoctoproject.org>; Thu, 20 Feb 2014 14:05:29 -0600
-Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.03.0174.001; Thu, 20 Feb 2014 14:05:29 -0600
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH] Graphics SDK: Add version 05.01.01.01
-Thread-Index: AQHPLMht2vt0UHb2ckSwl9yNi6bQfpq+zemA///GpTA=
-Date: Thu, 20 Feb 2014 20:05:28 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C6430EC@DLEE08.ent.ti.com>
-References: <1392741750-18725-1-git-send-email-fcooper@ti.com>
-	<20140220173027.GA16134@edge>
-In-Reply-To: <20140220173027.GA16134@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1L2wiVq004274
+	for <meta-ti@yoctoproject.org>; Thu, 20 Feb 2014 20:58:44 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 20 Feb 2014 20:58:44 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s1L2wi50007266	for <meta-ti@yoctoproject.org>; Thu, 20 Feb 2014 20:58:44
+	-0600
+Date: Thu, 20 Feb 2014 21:45:14 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1120373970.299.1392950714065.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] Graphics SDK: Add version 05.01.01.01
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-02-20_21-00-24
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,153 +35,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2014 20:05:33 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 21 Feb 2014 02:58:46 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_298_2014921759.1392950714065"
+
+------=_Part_298_2014921759.1392950714065
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+<head>
+<title>
+Status for 02/20/14
+</title>
+</head>
+<body>
+
+<h2>Status for 02/20/14</h2>
+
+<h2>BUILD_ID: build-2014-02-20_21-01-33</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.01"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Thursday, February 20, 2014 11:30 AM
-> To: Cooper Jr., Franklin
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH] Graphics SDK: Add version 05.01.01.01
->=20
-> Franklin,
->=20
-> The patch is fine. But I'm thinking about how to best handle it pushing t=
-o specific
-> branches...
->=20
-> I could push it to master and dora right away. But I'd assume you'd want =
-it in
-> dylan as well. Unfortunately, it's not going into our dylan-based release=
-, so I'd
-> like to wait until I tag the branch, which should hopefully happen tomorr=
-ow or
-> on Monday. Does it work for you?
-[Franklin] Works for me.
->=20
-> --
-> Denys
->=20
->=20
-> On Tue, Feb 18, 2014 at 10:42:30AM -0600, Franklin S. Cooper Jr wrote:
-> > * Add latest version of the Graphics SDK that includes bug fixes.
-> > * Fixed Suspend and Resume issue on AM43x.
-> >
-> > Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
-> > ---
-> >  ...01.00.01.bb =3D> omap3-sgx-modules_5.01.01.01.bb} |    6 +++---
-> >  .../rc.pvr                                         |    0
-> >  .../rc_dri.pvr                                     |    0
-> >  ...3_5.01.00.01.bb =3D> libgles-omap3_5.01.01.01.bb} |    8 ++++----
-> >  4 files changed, 7 insertions(+), 7 deletions(-)
-> >  copy recipes-bsp/powervr-drivers/{omap3-sgx-modules_5.01.00.01.bb =3D>
-> omap3-sgx-modules_5.01.01.01.bb} (92%)
-> >  copy recipes-graphics/libgles/{libgles-omap3-5.00.00.01 =3D> libgles-o=
-map3-
-> 5.01.01.01}/rc.pvr (100%)
-> >  copy recipes-graphics/libgles/{libgles-omap3-5.00.00.01 =3D> libgles-o=
-map3-
-> 5.01.01.01}/rc_dri.pvr (100%)
-> >  copy recipes-graphics/libgles/{libgles-omap3_5.01.00.01.bb =3D> libgle=
-s-
-> omap3_5.01.01.01.bb} (87%)
-> >
-> > diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.00.01.b=
-b
-> b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
-> > similarity index 92%
-> > copy from recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.00.01.bb
-> > copy to recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
-> > index 162e4d5..40bf8c0 100644
-> > --- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.00.01.bb
-> > +++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
-> > @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D "file://GPL-
-> COPYING;md5=3D60422928ba677faaa13d6ab5f5baaa1e"
-> >  TI_BIN_UNPK_CMDS=3D"Y: qY:workdir:Y"
-> >  require ../../recipes-ti/includes/ti-eula-unpack.inc
-> >
-> > -SGXPV =3D "5_01_00_01"
-> > +SGXPV =3D "5_01_01_01"
-> >  IMGPV =3D "1.10.2359475"
-> >
-> >  inherit module
-> > @@ -14,8 +14,8 @@ MACHINE_KERNEL_PR_append =3D "a"
-> >  PR =3D "${MACHINE_KERNEL_PR}"
-> >
-> >  BINFILE_HARDFP =3D "Graphics_SDK_setuplinux_hardfp_${SGXPV}.bin"
-> > -MD5SUM_HARDFP =3D "0ee7d59808330d442a51c0990c2cb30e"
-> > -SHA256SUM_HARDFP =3D
-> "769daae439677a7a85bbbced14cee4f85b19823e0b99560078d0a864c525c1
-> 28"
-> > +MD5SUM_HARDFP =3D "94acdbd20152c905939c2448d5e80a72"
-> > +SHA256SUM_HARDFP =3D
-> "7f647bf45a5ce8ba9aaa28c4afe85fced4275f9a4567a1886d4460b76c9051ae
-> "
-> >
-> >  # For now we only have hardfp version
-> >  python __anonymous() {
-> > diff --git a/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc.pvr b=
-/recipes-
-> graphics/libgles/libgles-omap3-5.01.01.01/rc.pvr
-> > similarity index 100%
-> > copy from recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc.pvr
-> > copy to recipes-graphics/libgles/libgles-omap3-5.01.01.01/rc.pvr
-> > diff --git a/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc_dri.p=
-vr
-> b/recipes-graphics/libgles/libgles-omap3-5.01.01.01/rc_dri.pvr
-> > similarity index 100%
-> > copy from recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc_dri.pvr
-> > copy to recipes-graphics/libgles/libgles-omap3-5.01.01.01/rc_dri.pvr
-> > diff --git a/recipes-graphics/libgles/libgles-omap3_5.01.00.01.bb b/rec=
-ipes-
-> graphics/libgles/libgles-omap3_5.01.01.01.bb
-> > similarity index 87%
-> > copy from recipes-graphics/libgles/libgles-omap3_5.01.00.01.bb
-> > copy to recipes-graphics/libgles/libgles-omap3_5.01.01.01.bb
-> > index a3b34fe..2d11317 100644
-> > --- a/recipes-graphics/libgles/libgles-omap3_5.01.00.01.bb
-> > +++ b/recipes-graphics/libgles/libgles-omap3_5.01.01.01.bb
-> > @@ -2,7 +2,7 @@ require libgles-omap3-no-x.inc
-> >
-> >  LICENSE =3D "TSPA"
-> >
-> > -PR =3D "${INC_PR}.1"
-> > +PR =3D "${INC_PR}.0"
-> >
-> >  BINLOCATION_omap3 =3D "${S}/gfx_rel_es3.x"
-> >  BINLOCATION_ti816x =3D "${S}/gfx_rel_es6.x"
-> > @@ -13,14 +13,14 @@ BINLOCATION_ti43x =3D "${S}/gfx_rel_es9.x"
-> >  PLATFORM =3D "LinuxARMV7"
-> >  PVR_INIT =3D "pvrsrvctl"
-> >
-> > -SGXPV =3D "5_01_00_01"
-> > +SGXPV =3D "5_01_01_01"
-> >  IMGPV =3D "1.10.2359475"
-> >
-> >  TI_BIN_UNPK_WDEXT :=3D "/Graphics_SDK_${SGXPV}"
-> >
-> >  BINFILE_HARDFP =3D "Graphics_SDK_setuplinux_hardfp_${SGXPV}.bin"
-> > -MD5SUM_HARDFP =3D "0ee7d59808330d442a51c0990c2cb30e"
-> > -SHA256SUM_HARDFP =3D
-> "769daae439677a7a85bbbced14cee4f85b19823e0b99560078d0a864c525c1
-> 28"
-> > +MD5SUM_HARDFP =3D "94acdbd20152c905939c2448d5e80a72"
-> > +SHA256SUM_HARDFP =3D
-> "7f647bf45a5ce8ba9aaa28c4afe85fced4275f9a4567a1886d4460b76c9051ae
-> "
-> >
-> >  # For now we only have hardfp version
-> >  python __anonymous() {
-> > --
-> > 1.7.0.4
-> >
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-
+------=_Part_298_2014921759.1392950714065--
