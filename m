@@ -1,22 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D4EBE007F6
-	for <meta-ti@yoctoproject.org>; Thu, 20 Feb 2014 22:20:11 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173023.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N1C000UE1KPNF10@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 21 Feb 2014 00:19:52 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 358842008E; Fri,
-	21 Feb 2014 01:19:37 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 75D25E00809
+	for <meta-ti@yoctoproject.org>; Fri, 21 Feb 2014 08:00:06 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 2D198529CF; Fri, 21 Feb 2014 16:00:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Fri, 21 Feb 2014 01:19:36 -0500
-Message-id: <1392963576-2477-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH] linux-omap-psp: specify branch for bitbake to find SRCREV
+Message-Id: <20140221160006.2D198529CF@arago-project.org>
+Date: Fri, 21 Feb 2014 16:00:06 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-omap-psp: specify branch for bitbake to find SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,14 +22,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2014 06:20:14 -0000
+X-List-Received-Date: Fri, 21 Feb 2014 16:00:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 90f78e4355153a8595b7885e6de696c4b7060091
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=90f78e4355153a8595b7885e6de696c4b7060091
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Feb 21 01:17:30 2014 -0500
+
+linux-omap-psp: specify branch for bitbake to find SRCREV
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-kernel/linux/linux-omap-psp_2.6.37.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+
+ recipes-kernel/linux/linux-omap-psp_2.6.37.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-omap-psp_2.6.37.bb b/recipes-kernel/linux/linux-omap-psp_2.6.37.bb
 index 8333cc8..8f6a450 100644
@@ -58,7 +62,5 @@ index 8333cc8..8f6a450 100644
             file://defconfig"
  
  # The following patches below have been upstreamed to linux kernel 2.6.39 tree
--- 
-1.8.3.2
 
 
