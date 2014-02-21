@@ -1,22 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC95DE007A5
-	for <meta-ti@yoctoproject.org>; Fri, 21 Feb 2014 08:36:46 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173023.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N1C0096VU58SQI0@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 21 Feb 2014 10:36:45 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id A30092008E; Fri,
-	21 Feb 2014 11:36:44 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1334BE007B4
+	for <meta-ti@yoctoproject.org>; Fri, 21 Feb 2014 09:19:09 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id C2C14529B5; Fri, 21 Feb 2014 17:19:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Fri, 21 Feb 2014 11:36:44 -0500
-Message-id: <1393000604-29701-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH] linux-ti-staging: add latest critical fixes locally for now
+Message-Id: <20140221171908.C2C14529B5@arago-project.org>
+Date: Fri, 21 Feb 2014 17:19:08 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: add latest critical fixes locally for now
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,359 +22,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2014 16:36:47 -0000
+X-List-Received-Date: Fri, 21 Feb 2014 17:19:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: f6e604d7ebe63c03a534c24ffb6ed32671581140
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f6e604d7ebe63c03a534c24ffb6ed32671581140
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Feb 21 11:06:35 2014 -0500
+
+linux-ti-staging: add latest critical fixes locally for now
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
+
  ...musb-musb_cppi41-Revert-the-Advisory-1.0..patch |  158 ++++++++++++++++++++
  ...02-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch |   37 +++++
  ...ll-warning-in-CPUIDLE-code-with-CONFIG_SM.patch |   49 ++++++
  ...ge-ARM-config-omap-Disable-SMP-for-AM335x.patch |   43 ++++++
- recipes-kernel/linux/linux-ti-staging_3.12.bb      |   11 +-
- 5 files changed, 297 insertions(+), 1 deletion(-)
- create mode 100644 recipes-kernel/linux/linux-ti-staging/0001-Revert-usb-musb-musb_cppi41-Revert-the-Advisory-1.0..patch
- create mode 100644 recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch
- create mode 100644 recipes-kernel/linux/linux-ti-staging/0003-ARM-OMAP-Kill-warning-in-CPUIDLE-code-with-CONFIG_SM.patch
- create mode 100644 recipes-kernel/linux/linux-ti-staging/0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
+ recipes-kernel/linux/linux-ti-staging_3.12.bb      |   11 ++-
+ 5 files changed, 297 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging/0001-Revert-usb-musb-musb_cppi41-Revert-the-Advisory-1.0..patch b/recipes-kernel/linux/linux-ti-staging/0001-Revert-usb-musb-musb_cppi41-Revert-the-Advisory-1.0..patch
-new file mode 100644
-index 0000000..dcb3322
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging/0001-Revert-usb-musb-musb_cppi41-Revert-the-Advisory-1.0..patch
-@@ -0,0 +1,158 @@
-+From f576e148cd15f10224e4ce13b6773717682f9a5a Mon Sep 17 00:00:00 2001
-+From: Chase Maupin <Chase.Maupin@ti.com>
-+Date: Fri, 21 Feb 2014 09:05:48 -0600
-+Subject: [PATCH 1/4] Revert "usb: musb: musb_cppi41: Revert the Advisory 1.0.13 workaround"
-+
-+This reverts commit c424ef3e2beb89488e7e597446b4c6bc8f1852c5.
-+---
-+ drivers/usb/musb/musb_cppi41.c |   96 +++++++++++++++++++++++++++++++++-------
-+ 1 files changed, 79 insertions(+), 17 deletions(-)
-+
-+diff --git a/drivers/usb/musb/musb_cppi41.c b/drivers/usb/musb/musb_cppi41.c
-+index d02facc..01df8f9 100644
-+--- a/drivers/usb/musb/musb_cppi41.c
-++++ b/drivers/usb/musb/musb_cppi41.c
-+@@ -31,6 +31,7 @@ struct cppi41_dma_channel {
-+ 	u8 port_num;
-+ 	u8 is_tx;
-+ 	u8 is_allocated;
-++	u8 usb_toggle;
-+ 
-+ 	dma_addr_t buf_addr;
-+ 	u32 total_len;
-+@@ -55,6 +56,50 @@ struct cppi41_dma_controller {
-+ 	u32 auto_req;
-+ };
-+ 
-++static void save_rx_toggle(struct cppi41_dma_channel *cppi41_channel)
-++{
-++	u16 csr;
-++	u8 toggle;
-++
-++	if (cppi41_channel->is_tx)
-++		return;
-++	if (!is_host_active(cppi41_channel->controller->musb))
-++		return;
-++
-++	csr = musb_readw(cppi41_channel->hw_ep->regs, MUSB_RXCSR);
-++	toggle = csr & MUSB_RXCSR_H_DATATOGGLE ? 1 : 0;
-++
-++	cppi41_channel->usb_toggle = toggle;
-++}
-++
-++static void update_rx_toggle(struct cppi41_dma_channel *cppi41_channel)
-++{
-++	u16 csr;
-++	u8 toggle;
-++
-++	if (cppi41_channel->is_tx)
-++		return;
-++	if (!is_host_active(cppi41_channel->controller->musb))
-++		return;
-++
-++	csr = musb_readw(cppi41_channel->hw_ep->regs, MUSB_RXCSR);
-++	toggle = csr & MUSB_RXCSR_H_DATATOGGLE ? 1 : 0;
-++
-++	/*
-++	 * AM335x Advisory 1.0.13: Due to internal synchronisation error the
-++	 * data toggle may reset from DATA1 to DATA0 during receiving data from
-++	 * more than one endpoint.
-++	 */
-++	if (!toggle && toggle == cppi41_channel->usb_toggle) {
-++		csr |= MUSB_RXCSR_H_DATATOGGLE | MUSB_RXCSR_H_WR_DATATOGGLE;
-++		musb_writew(cppi41_channel->hw_ep->regs, MUSB_RXCSR, csr);
-++		dev_dbg(cppi41_channel->controller->musb->controller,
-++				"Restoring DATA1 toggle.\n");
-++	}
-++
-++	cppi41_channel->usb_toggle = toggle;
-++}
-++
-+ static bool musb_is_tx_fifo_empty(struct musb_hw_ep *hw_ep)
-+ {
-+ 	u8		epnum = hw_ep->epnum;
-+@@ -217,6 +262,8 @@ static void cppi41_dma_callback(void *private_data)
-+ 		hw_ep->epnum, cppi41_channel->transferred,
-+ 		cppi41_channel->total_len);
-+ 
-++	update_rx_toggle(cppi41_channel);
-++
-+ 	if (cppi41_channel->transferred == cppi41_channel->total_len ||
-+ 			transferred < cppi41_channel->packet_sz)
-+ 		cppi41_channel->prog_len = 0;
-+@@ -347,6 +394,7 @@ static bool cppi41_configure_channel(struct dma_channel *channel,
-+ 	struct dma_async_tx_descriptor *dma_desc;
-+ 	enum dma_transfer_direction direction;
-+ 	struct musb *musb = cppi41_channel->controller->musb;
-++	unsigned use_gen_rndis = 0;
-+ 
-+ 	dev_dbg(musb->controller,
-+ 		"configure ep%d/%x packet_sz=%d, mode=%d, dma_addr=0x%llx, len=%d is_tx=%d\n",
-+@@ -359,26 +407,39 @@ static bool cppi41_configure_channel(struct dma_channel *channel,
-+ 	cppi41_channel->transferred = 0;
-+ 	cppi41_channel->packet_sz = packet_sz;
-+ 
-+-	/* RNDIS mode */
-+-	if (len > packet_sz) {
-+-		musb_writel(musb->ctrl_base,
-+-			    RNDIS_REG(cppi41_channel->port_num), len);
-+-		/* gen rndis */
-+-		cppi41_set_dma_mode(cppi41_channel,
-+-				    EP_MODE_DMA_GEN_RNDIS);
-+-
-+-		/* auto req */
-+-		cppi41_set_autoreq_mode(cppi41_channel,
-++	/*
-++	 * Due to AM335x' Advisory 1.0.13 we are not allowed to transfer more
-++	 * than max packet size at a time.
-++	 */
-++	if (cppi41_channel->is_tx)
-++		use_gen_rndis = 1;
-++
-++	if (use_gen_rndis) {
-++		/* RNDIS mode */
-++		if (len > packet_sz) {
-++			musb_writel(musb->ctrl_base,
-++				RNDIS_REG(cppi41_channel->port_num), len);
-++			/* gen rndis */
-++			cppi41_set_dma_mode(cppi41_channel,
-++					EP_MODE_DMA_GEN_RNDIS);
-++
-++			/* auto req */
-++			cppi41_set_autoreq_mode(cppi41_channel,
-+ 					EP_MODE_AUTOREG_ALL_NEOP);
-+-	} else {
-+-		musb_writel(musb->ctrl_base,
-+-			    RNDIS_REG(cppi41_channel->port_num), 0);
-+-		cppi41_set_dma_mode(cppi41_channel,
-+-				    EP_MODE_DMA_TRANSPARENT);
-+-		cppi41_set_autoreq_mode(cppi41_channel,
-++		} else {
-++			musb_writel(musb->ctrl_base,
-++					RNDIS_REG(cppi41_channel->port_num), 0);
-++			cppi41_set_dma_mode(cppi41_channel,
-++					EP_MODE_DMA_TRANSPARENT);
-++			cppi41_set_autoreq_mode(cppi41_channel,
-+ 					EP_MODE_AUTOREG_NONE);
-++		}
-++	} else {
-++		/* fallback mode */
-++		cppi41_set_dma_mode(cppi41_channel, EP_MODE_DMA_TRANSPARENT);
-++		cppi41_set_autoreq_mode(cppi41_channel, EP_MODE_AUTOREG_NONE);
-++		len = min_t(u32, packet_sz, len);
-+ 	}
-+-
-+ 	cppi41_channel->prog_len = len;
-+ 	direction = cppi41_channel->is_tx ? DMA_MEM_TO_DEV : DMA_DEV_TO_MEM;
-+ 	dma_desc = dmaengine_prep_slave_single(dc, dma_addr, len, direction,
-+@@ -390,6 +451,7 @@ static bool cppi41_configure_channel(struct dma_channel *channel,
-+ 	dma_desc->callback_param = channel;
-+ 	cppi41_channel->cookie = dma_desc->tx_submit(dma_desc);
-+ 
-++	save_rx_toggle(cppi41_channel);
-+ 	dma_async_issue_pending(dc);
-+ 	return true;
-+ }
-+-- 
-+1.7.0.4
-+
-diff --git a/recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch b/recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch
-new file mode 100644
-index 0000000..8137bb3
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch
-@@ -0,0 +1,37 @@
-+From 5b2aa64ccdeef659a9688730753199ba5b8e60b1 Mon Sep 17 00:00:00 2001
-+From: Dave Gerlach <d-gerlach@ti.com>
-+Date: Fri, 21 Feb 2014 10:25:33 +0000
-+Subject: [PATCH 2/4] ARM: config: Add HAVE_ARM_SCU for AM43XX
-+
-+CONFIG_HAVE_ARM_SCU only gets selected if CONFIG_SMP is selected in an OMAP
-+system however AM43XX needs this option regardless of CONFIG_SMP as it is
-+important for controlling power in the SoC. Without this suspend will
-+not work as scu_power_mode becomes an empty function.
-+
-+AM43XX requires SCU CPU Power Status bits for A9 core to be set to off mode
-+in order for the MSTANDBY signal to be asserted from the MPU during WFI.
-+This signal is used by the PRCM to determine when it is appropriate to
-+clock gate the MPU clock domain and also trigger M3_IRQ2 to tell the wkup_m3
-+firmware to put the part into the desired sleep more.
-+
-+Signed-off-by: Dave Gerlach <d-gerlach@ti.com>
-+Tested-by: Sekhar Nori <nsekhar@ti.com>
-+---
-+ arch/arm/mach-omap2/Kconfig |    1 +
-+ 1 files changed, 1 insertions(+), 0 deletions(-)
-+
-+diff --git a/arch/arm/mach-omap2/Kconfig b/arch/arm/mach-omap2/Kconfig
-+index 959f6fc..373d576 100644
-+--- a/arch/arm/mach-omap2/Kconfig
-++++ b/arch/arm/mach-omap2/Kconfig
-+@@ -85,6 +85,7 @@ config SOC_AM43XX
-+ 	depends on ARCH_MULTI_V7
-+ 	select CPU_V7
-+ 	select ARCH_OMAP2PLUS
-++	select HAVE_ARM_SCU
-+ 	select MULTI_IRQ_HANDLER
-+ 	select ARM_GIC
-+ 	select COMMON_CLK
-+-- 
-+1.7.0.4
-+
-diff --git a/recipes-kernel/linux/linux-ti-staging/0003-ARM-OMAP-Kill-warning-in-CPUIDLE-code-with-CONFIG_SM.patch b/recipes-kernel/linux/linux-ti-staging/0003-ARM-OMAP-Kill-warning-in-CPUIDLE-code-with-CONFIG_SM.patch
-new file mode 100644
-index 0000000..f79b045
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging/0003-ARM-OMAP-Kill-warning-in-CPUIDLE-code-with-CONFIG_SM.patch
-@@ -0,0 +1,49 @@
-+From 9b76ff20919fa939eed3fdffe05af8bcf1ec1ac5 Mon Sep 17 00:00:00 2001
-+From: Santosh Shilimkar <santosh.shilimkar@ti.com>
-+Date: Wed, 12 Feb 2014 16:42:39 -0500
-+Subject: [PATCH 3/4] ARM: OMAP: Kill warning in CPUIDLE code with !CONFIG_SMP
-+
-+for non SMP build, NR_CPUS is 1 and hence the code complains with below
-+warnings.
-+
-+arch/arm/mach-omap2/cpuidle44xx.c:207:8: warning: array subscript is above array bounds [-Warray-bounds]
-+arch/arm/mach-omap2/cpuidle44xx.c:212:11: warning: array subscript is above array bounds [-Warray-bounds]
-+
-+Kill it by making array size fixed.
-+
-+Signed-off-by: Santosh Shilimkar <santosh.shilimkar@ti.com>
-+---
-+ arch/arm/mach-omap2/cpuidle44xx.c |    8 +++++---
-+ 1 files changed, 5 insertions(+), 3 deletions(-)
-+
-+diff --git a/arch/arm/mach-omap2/cpuidle44xx.c b/arch/arm/mach-omap2/cpuidle44xx.c
-+index 4c8982a..5e85f1e 100644
-+--- a/arch/arm/mach-omap2/cpuidle44xx.c
-++++ b/arch/arm/mach-omap2/cpuidle44xx.c
-+@@ -23,6 +23,8 @@
-+ #include "prm.h"
-+ #include "clockdomain.h"
-+ 
-++#define MAX_CPUS	2
-++
-+ /* Machine specific information */
-+ struct idle_statedata {
-+ 	u32 cpu_state;
-+@@ -48,11 +50,11 @@ static struct idle_statedata omap4_idle_data[] = {
-+ 	},
-+ };
-+ 
-+-static struct powerdomain *mpu_pd, *cpu_pd[NR_CPUS];
-+-static struct clockdomain *cpu_clkdm[NR_CPUS];
-++static struct powerdomain *mpu_pd, *cpu_pd[MAX_CPUS];
-++static struct clockdomain *cpu_clkdm[MAX_CPUS];
-+ 
-+ static atomic_t abort_barrier;
-+-static bool cpu_done[NR_CPUS];
-++static bool cpu_done[MAX_CPUS];
-+ static struct idle_statedata *state_ptr = &omap4_idle_data[0];
-+ 
-+ /* Private functions */
-+-- 
-+1.7.0.4
-+
-diff --git a/recipes-kernel/linux/linux-ti-staging/0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch b/recipes-kernel/linux/linux-ti-staging/0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
-new file mode 100644
-index 0000000..b01c4d0
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging/0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
-@@ -0,0 +1,43 @@
-+From 89783143b64210e8f159fd875b23aa9af1fd51b0 Mon Sep 17 00:00:00 2001
-+From: Santosh Shilimkar <santosh.shilimkar@ti.com>
-+Date: Thu, 13 Feb 2014 08:52:41 -0500
-+Subject: [PATCH 4/4] Not-for-merge: ARM: config: omap: Disable SMP for AM335x build
-+
-+SMP and SMP_ON_UP introduces some extra barriers and code many fast paths
-+including kernel lock functions.
-+
-+Performance sensitive usecases like networking gets impacted because of this.
-+In typical production kernel which is targeted for single core device
-+like AM335x family, you don't want to take this hit.
-+
-+Ideally one should just create a device specific config feed as done by all
-+typical distro's. Other option is to apply this specifically during build
-+time using recipe.
-+
-+Whichever option, one definitely don't want this overhead for performance
-+critical usecases.
-+
-+Disabling SMP in the build introduces one warining in cpuidle44xx.c driver
-+and fix is included in the series
-+
-+Signed-off-by: Santosh Shilimkar <santosh.shilimkar@ti.com>
-+---
-+ arch/arm/configs/omap2plus_defconfig |    2 --
-+ 1 files changed, 0 insertions(+), 2 deletions(-)
-+
-+diff --git a/arch/arm/configs/omap2plus_defconfig b/arch/arm/configs/omap2plus_defconfig
-+index 3975b08..cfbc2d0 100644
-+--- a/arch/arm/configs/omap2plus_defconfig
-++++ b/arch/arm/configs/omap2plus_defconfig
-+@@ -36,8 +36,6 @@ CONFIG_OMAP4_ERRATA_I688=y
-+ CONFIG_ARM_THUMBEE=y
-+ CONFIG_ARM_ERRATA_411920=y
-+ CONFIG_PCIE_DRA7XX=y
-+-CONFIG_SMP=y
-+-CONFIG_NR_CPUS=2
-+ CONFIG_PREEMPT=y
-+ CONFIG_CMA=y
-+ CONFIG_ZBOOT_ROM_TEXT=0x0
-+-- 
-+1.7.0.4
-+
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 0b4815e..32cc5c5 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -40,9 +40,18 @@ SRCREV = "d5e4bfd196e114c885c5c42cf0a7b3edc7e54829"
- PV = "3.12.10"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "h+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
-           "
-+
-+# Latest critical fixes
-+SRC_URI += "file://0001-Revert-usb-musb-musb_cppi41-Revert-the-Advisory-1.0..patch \
-+            file://0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch \
-+            file://0003-ARM-OMAP-Kill-warning-in-CPUIDLE-code-with-CONFIG_SM.patch \
-+            "
-+
-+SRC_URI_append_ti33x = "file://0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
-+SRC_URI_append_ti43x = "file://0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
--- 
-1.7.9.5
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=f6e604d7ebe63c03a534c24ffb6ed32671581140
 
