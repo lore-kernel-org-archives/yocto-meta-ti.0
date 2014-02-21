@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 227E1E00852
-	for <meta-ti@yoctoproject.org>; Fri, 21 Feb 2014 08:00:09 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 914FDE00803
+	for <meta-ti@yoctoproject.org>; Fri, 21 Feb 2014 08:00:23 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 961B152A60; Fri, 21 Feb 2014 16:00:09 +0000 (UTC)
+	id 907A4529CF; Fri, 21 Feb 2014 16:00:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140221160009.961B152A60@arago-project.org>
-Date: Fri, 21 Feb 2014 16:00:09 +0000 (UTC)
+Message-Id: <20140221160023.907A4529CF@arago-project.org>
+Date: Fri, 21 Feb 2014 16:00:23 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-omap-psp: specify branch for bitbake to find SRCREV
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2014 16:00:12 -0000
+X-List-Received-Date: Fri, 21 Feb 2014 16:00:25 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dora
-Commit: 8ec2048cfbf4adc8725b0dec3736d24a61dc0a78
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8ec2048cfbf4adc8725b0dec3736d24a61dc0a78
+Branch: dylan
+Commit: 3bca395fab460a8f17b6295218f98995f5979d23
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3bca395fab460a8f17b6295218f98995f5979d23
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Feb 21 01:17:30 2014 -0500
