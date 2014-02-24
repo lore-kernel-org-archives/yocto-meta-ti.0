@@ -1,32 +1,28 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denys@ti.com>
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF20DE0081E
-	for <meta-ti@yoctoproject.org>; Sun, 23 Feb 2014 05:47:53 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1NDlqr8018689
-	for <meta-ti@yoctoproject.org>; Sun, 23 Feb 2014 07:47:52 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1NDlqeb011017
-	for <meta-ti@yoctoproject.org>; Sun, 23 Feb 2014 07:47:52 -0600
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.03.0174.001; Sun, 23 Feb 2014 07:47:52 -0600
-From: "Nelson, Sam" <sam.nelson@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH] linux-keystone: Update latest tag
-Thread-Index: AQHPMFAPUA6JO/aqSkq0Id6jysDwtJrCqZMAgAAwX+A=
-Date: Sun, 23 Feb 2014 13:47:51 +0000
-Message-ID: <4F9216F96E5DF9428610502835A9F49057F3D4D9@DLEE11.ent.ti.com>
-References: <1393129856-9624-1-git-send-email-sam.nelson@ti.com>
-	<20140223045044.GX22890@denix.org>
-In-Reply-To: <20140223045044.GX22890@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9DB10E00889
+	for <meta-ti@yoctoproject.org>; Sun, 23 Feb 2014 18:16:42 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1O2Gfa8024229
+	for <meta-ti@yoctoproject.org>; Sun, 23 Feb 2014 20:16:41 -0600
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1O2GfZ6009770
+	for <meta-ti@yoctoproject.org>; Sun, 23 Feb 2014 20:16:41 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Sun, 23 Feb 2014 20:16:41 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s1O2GfSr005261	for <meta-ti@yoctoproject.org>; Sun, 23 Feb 2014 20:16:41
+	-0600
+Date: Sun, 23 Feb 2014 21:03:06 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <2016488345.315.1393207386286.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] linux-keystone: Update latest tag
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-02-23_21-00-24
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,90 +35,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Feb 2014 13:47:54 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 24 Feb 2014 02:16:48 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_314_1947638617.1393207386285"
+
+------=_Part_314_1947638617.1393207386285
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+<head>
+<title>
+Status for 02/23/14
+</title>
+</head>
+<body>
+
+<h2>Status for 02/23/14</h2>
+
+<h2>BUILD_ID: build-2014-02-23_21-01-33</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.01"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Saturday, February 22, 2014 11:51 PM
-> To: Nelson, Sam
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH] linux-keystone: Update latest tag
->=20
-> On Sat, Feb 22, 2014 at 11:30:56PM -0500, Sam Nelson wrote:
-> > Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-> >
-> > ---
-> > Not sure whether need a PR bump
->=20
-> Yes, this one usually needs. Well, your SRCREV went up in both cases, so =
-will
-> still work w/o a PR bump, but it's still a good idea to bump PR when upda=
-ting
-> SRCREV only and PV stays the same. Kernel recipes have
-> MACHINE_KERNEL_PR_append
-> for that.
-[Sam] Thanks for the clarification. So in this case even though the MACHINE=
-_KERNEL_PR_append went up due to the git commit change,
-It is recommended to bump PR explicitly in this case from MACHINE_KERNEL_PR=
-_append =3D "a+gitr${SRCPV}" to MACHINE_KERNEL_PR_append =3D "b+gitr${SRCPV=
-}".
- Please confirm.=20
->=20
-> --
-> Denys
->=20
->=20
-> > ---
-> > ---
-> >  recipes-kernel/linux/linux-keystone-rt_3.10.bb |    4 ++--
-> >  recipes-kernel/linux/linux-keystone_3.10.bb    |    4 ++--
-> >  2 files changed, 4 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/recipes-kernel/linux/linux-keystone-rt_3.10.bb b/recipes-
-> kernel/linux/linux-keystone-rt_3.10.bb
-> > index 9c2f904..3965dfa 100644
-> > --- a/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-> > +++ b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-> > @@ -17,8 +17,8 @@ KERNEL_DEVICETREE_keystone-evm =3D "k2hk-
-> evm.dtb"
-> >
-> >  KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT}"
-> >
-> > -#This commit corresponds to "K2_RT_LINUX_03.10.10_13.12"
-> > -SRCREV =3D "8fa9091d0f9c91a048a975ddebbf2f492e73bf61"
-> > +#This commit corresponds to "K2_RT_LINUX_03.10.10_14.02"
-> > +SRCREV =3D "c78aa253ac385faae8b6c845a388e215395a8010"
-> >  PV =3D "3.10.10"
-> >
-> >  BRANCH =3D "master-rt"
-> > diff --git a/recipes-kernel/linux/linux-keystone_3.10.bb b/recipes-
-> kernel/linux/linux-keystone_3.10.bb
-> > index 2384ede..f063c0c 100644
-> > --- a/recipes-kernel/linux/linux-keystone_3.10.bb
-> > +++ b/recipes-kernel/linux/linux-keystone_3.10.bb
-> > @@ -17,8 +17,8 @@ KERNEL_DEVICETREE_keystone-evm =3D "k2hk-
-> evm.dtb"
-> >
-> >  KERNEL_EXTRA_ARGS +=3D "LOADADDR=3D${UBOOT_ENTRYPOINT}"
-> >
-> > -#This commit corresponds to "K2_LINUX_03.10.10_13.12"
-> > -SRCREV =3D "335d14b1c2ce23585835243126c6acba89067ecf"
-> > +#This commit corresponds to "K2_LINUX_03.10.10_14.02"
-> > +SRCREV =3D "93515476b357304e6fc075c004a1cfa91a0751d0"
-> >  PV =3D "3.10.10"
-> >
-> >  BRANCH =3D "master"
-> > --
-> > 1.7.9.5
-> >
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-> >
-
+------=_Part_314_1947638617.1393207386285--
