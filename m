@@ -1,28 +1,29 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9DB10E00889
-	for <meta-ti@yoctoproject.org>; Sun, 23 Feb 2014 18:16:42 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1O2Gfa8024229
-	for <meta-ti@yoctoproject.org>; Sun, 23 Feb 2014 20:16:41 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1O2GfZ6009770
-	for <meta-ti@yoctoproject.org>; Sun, 23 Feb 2014 20:16:41 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Sun, 23 Feb 2014 20:16:41 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s1O2GfSr005261	for <meta-ti@yoctoproject.org>; Sun, 23 Feb 2014 20:16:41
-	-0600
-Date: Sun, 23 Feb 2014 21:03:06 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <2016488345.315.1393207386286.JavaMail.jenkins@puget>
+Return-Path: <munoz0raul@gmail.com>
+Received: from mail-vc0-f182.google.com (mail-vc0-f182.google.com
+	[209.85.220.182])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B2495E008B1;
+	Mon, 24 Feb 2014 05:34:49 -0800 (PST)
+Received: by mail-vc0-f182.google.com with SMTP id id10so5715786vcb.41
+	for <multiple recipients>; Mon, 24 Feb 2014 05:34:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=0D43QonAiYn6GmubQ0c+pLO5OKr4dtneeCgyOcJF3Gw=;
+	b=h7gFZkRYNYNt2AgOPst54HAIeptjy7N/xxFpvXLE+1QZVIgdxjLE/WGMx4Nw83bf5Y
+	8Q7Jr9UksNrW4ZTIpMhEECO9RVgHbYhJJB5tWt+g0tZHr3Nj3BxmG0NbiZh/S1ycX328
+	AEGCsL6osJOUXKoEPFPxX8hpi6ZDvHbn+fctGacixFtA7KjuId1BNDKfteHH6UiwLT39
+	nlxpRJLo05LnlRs4Gh05ecZViBf9cWGiZU9bm/iqXc5ybVq5hOQlg/z316s05WyzvmKb
+	hp3/bE4bQyeX5MpRpUMD3OcNE/zrLU9eZziipJN+DqmruIuoUlA02lwA8/dE5QRSIBOq
+	vk/Q==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-02-23_21-00-24
+X-Received: by 10.221.37.1 with SMTP id tc1mr12669777vcb.32.1393248888888;
+	Mon, 24 Feb 2014 05:34:48 -0800 (PST)
+Received: by 10.221.68.131 with HTTP; Mon, 24 Feb 2014 05:34:48 -0800 (PST)
+Date: Mon, 24 Feb 2014 10:34:48 -0300
+Message-ID: <CANmVirgMuSXcSmHYSaEGazQX=oJTyJQEmrRKGZHE9tprkeM_yw@mail.gmail.com>
+From: Raul Rosetto Munoz <munoz0raul@gmail.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, 
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
+Subject: Device Tree Overlays
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +36,437 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2014 02:16:48 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_314_1947638617.1393207386285"
+X-List-Received-Date: Mon, 24 Feb 2014 13:34:51 -0000
+Content-Type: multipart/alternative; boundary=001a11334c381b229104f32709a5
 
-------=_Part_314_1947638617.1393207386285
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a11334c381b229104f32709a5
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-<html>
-<head>
-<title>
-Status for 02/23/14
-</title>
-</head>
-<body>
+Hello All,
 
-<h2>Status for 02/23/14</h2>
+I just compile a Yocto linux for BeagleBone Black using dora branch.
 
-<h2>BUILD_ID: build-2014-02-23_21-01-33</h2>
+I would like to use device tree overlay to change the pin mux.
 
-<h2>Clean Build: false</h2>
+But I think that this linux not enable this feature.
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+I couldnt see this folders:
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
+root@beaglebone:/lib/firmware# export
+SLOTS=3D/sys/devices/bone_capemgr.9/slots
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+1
+2
+3
+4
+5
+6
+7
+root@beaglebone:~/temp# cat $SLOTS
+0: 54:PF---
+1: 55:PF---
+2: 56:PF---
+3: 57:PF---
+4: ff:P-O-L Bone-LT-eMMC-2G,00A0,Texas Instrument,BB-BONE-EMMC-2G
+5: ff:P-O-L Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.01"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+Plz some one can tell me what I need to do to use this feature?
 
-</body>
-</html>
+Is some thing possible using yocto?
 
+Thanks.
+--=20
+*Raul Rosetto Mu=F1oz*
 
-------=_Part_314_1947638617.1393207386285--
+--001a11334c381b229104f32709a5
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><div>Hello All,</div><div><br></div><div>I just compi=
+le a Yocto linux for BeagleBone Black using dora branch.</div><div><br></di=
+v><div>I would like to use device tree overlay to change the pin mux.</div>
+<div><br></div><div>But I think that this linux not enable this feature.</d=
+iv><div><br></div><div>I couldnt see this folders:</div><div><br></div><div=
+><div>root@beaglebone:/lib/firmware# export SLOTS=3D/sys/devices/bone_capem=
+gr.9/slots</div>
+</div><div><br></div><div><table class=3D"" style=3D"font-size:12px;margin-=
+left:0px;font-family:Monaco,MonacoRegular,&#39;Courier New&#39;,monospace;b=
+ackground-color:rgb(253,253,253);color:rgb(116,116,116);line-height:15px;bo=
+rder-collapse:collapse!important;border-spacing:0px!important;border:none!i=
+mportant;padding:0px!important;margin-right:0px!important;margin-bottom:0px=
+!important;margin-top:0px!important;background-image:none!important;width:a=
+uto!important">
+<tbody><tr class=3D"" style=3D"padding:0px!important;border:none!important;=
+vertical-align:top!important;margin:0px!important"><td class=3D"" style=3D"=
+border-bottom-width:0px;border-top-width:0px;border-left-width:0px;font-fam=
+ily:Monaco,MonacoRegular,&#39;Courier New&#39;,monospace!important;vertical=
+-align:top!important;padding:0px!important;background-color:rgb(238,238,238=
+)!important;border-right-style:solid!important;border-right-width:1px!impor=
+tant;border-right-color:rgb(0,128,0)!important;color:rgb(0,0,0)!important">
+<div class=3D"" style=3D"border:0px;padding:0px;margin:0px"><div class=3D""=
+ style=3D"font-family:inherit;border:0px;padding:0px 5px;margin:0px;text-al=
+ign:center;font-size:inherit!important;line-height:inherit!important;font-w=
+eight:inherit!important;height:inherit!important">
+1</div><div class=3D"" style=3D"font-family:inherit;border:0px;padding:0px =
+5px;margin:0px;text-align:center;font-size:inherit!important;line-height:in=
+herit!important;font-weight:inherit!important;height:inherit!important">2</=
+div>
+<div class=3D"" style=3D"font-family:inherit;border:0px;padding:0px 5px;mar=
+gin:0px;text-align:center;font-size:inherit!important;line-height:inherit!i=
+mportant;font-weight:inherit!important;height:inherit!important">3</div><di=
+v class=3D"" style=3D"font-family:inherit;border:0px;padding:0px 5px;margin=
+:0px;text-align:center;font-size:inherit!important;line-height:inherit!impo=
+rtant;font-weight:inherit!important;height:inherit!important">
+4</div><div class=3D"" style=3D"font-family:inherit;border:0px;padding:0px =
+5px;margin:0px;text-align:center;font-size:inherit!important;line-height:in=
+herit!important;font-weight:inherit!important;height:inherit!important">5</=
+div>
+<div class=3D"" style=3D"font-family:inherit;border:0px;padding:0px 5px;mar=
+gin:0px;text-align:center;font-size:inherit!important;line-height:inherit!i=
+mportant;font-weight:inherit!important;height:inherit!important">6</div><di=
+v class=3D"" style=3D"font-family:inherit;border:0px;padding:0px 5px;margin=
+:0px;text-align:center;font-size:inherit!important;line-height:inherit!impo=
+rtant;font-weight:inherit!important;height:inherit!important">
+7</div></div></td><td class=3D"" style=3D"border:0px;width:649px;font-famil=
+y:Monaco,MonacoRegular,&#39;Courier New&#39;,monospace!important;vertical-a=
+lign:top!important;padding:0px!important"><div class=3D"" style=3D"padding:=
+0px;margin:0px;color:rgb(0,0,0);white-space:pre;overflow:visible;background=
+-image:none!important;border:none!important">
+<div class=3D"" id=3D"crayon-530b48709bf76604528014-1" style=3D"font-family=
+:inherit;border:0px;padding:0px 5px;margin:0px;font-size:inherit!important;=
+line-height:inherit!important;font-weight:inherit!important;height:inherit!=
+important">
+<span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;f=
+ont-size:inherit!important;line-height:inherit!important;font-weight:inheri=
+t!important;height:inherit!important">root</span><span class=3D"" style=3D"=
+font-family:inherit;display:inline-block;zoom:1;font-size:inherit!important=
+;line-height:inherit!important;font-weight:inherit!important;height:inherit=
+!important">@</span><span class=3D"" style=3D"font-family:inherit;display:i=
+nline-block;zoom:1;font-size:inherit!important;line-height:inherit!importan=
+t;font-weight:inherit!important;height:inherit!important">beaglebone</span>=
+<span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;f=
+ont-size:inherit!important;line-height:inherit!important;font-weight:inheri=
+t!important;height:inherit!important">:</span><span class=3D"" style=3D"fon=
+t-family:inherit;display:inline-block;zoom:1;font-size:inherit!important;li=
+ne-height:inherit!important;font-weight:inherit!important;height:inherit!im=
+portant">~</span><span class=3D"" style=3D"font-family:inherit;display:inli=
+ne-block;zoom:1;font-size:inherit!important;line-height:inherit!important;f=
+ont-weight:inherit!important;height:inherit!important">/</span><span class=
+=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;font-size:in=
+herit!important;line-height:inherit!important;font-weight:inherit!important=
+;height:inherit!important">temp</span><span class=3D"" style=3D"font-family=
+:inherit;display:inline-block;zoom:1;font-size:inherit!important;line-heigh=
+t:inherit!important;font-weight:inherit!important;height:inherit!important"=
+># cat $SLOTS</span></div>
+<div class=3D"" id=3D"crayon-530b48709bf76604528014-2" style=3D"font-family=
+:inherit;border:0px;padding:0px 5px;margin:0px;background-color:rgb(247,247=
+,247)!important;font-size:inherit!important;line-height:inherit!important;f=
+ont-weight:inherit!important;height:inherit!important">
+<span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;f=
+ont-size:inherit!important;line-height:inherit!important;font-weight:inheri=
+t!important;height:inherit!important;color:rgb(0,111,224)!important"> </spa=
+n><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1=
+;font-size:inherit!important;line-height:inherit!important;font-weight:inhe=
+rit!important;height:inherit!important;color:rgb(8,40,251)!important">0</sp=
+an><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:=
+1;font-size:inherit!important;line-height:inherit!important;font-weight:inh=
+erit!important;height:inherit!important">:</span><span class=3D"" style=3D"=
+font-family:inherit;display:inline-block;zoom:1;font-size:inherit!important=
+;line-height:inherit!important;font-weight:inherit!important;height:inherit=
+!important;color:rgb(0,111,224)!important"> </span><span class=3D"" style=
+=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!impor=
+tant;line-height:inherit!important;font-weight:inherit!important;height:inh=
+erit!important;color:rgb(8,40,251)!important">54</span><span class=3D"" sty=
+le=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!imp=
+ortant;line-height:inherit!important;font-weight:inherit!important;height:i=
+nherit!important">:</span><span class=3D"" style=3D"font-family:inherit;dis=
+play:inline-block;zoom:1;font-size:inherit!important;line-height:inherit!im=
+portant;font-weight:inherit!important;height:inherit!important">PF</span><s=
+pan class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;fon=
+t-size:inherit!important;line-height:inherit!important;font-weight:inherit!=
+important;height:inherit!important">--</span><span class=3D"" style=3D"font=
+-family:inherit;display:inline-block;zoom:1;font-size:inherit!important;lin=
+e-height:inherit!important;font-weight:inherit!important;height:inherit!imp=
+ortant">-</span><span class=3D"" style=3D"font-family:inherit;display:inlin=
+e-block;zoom:1;font-size:inherit!important;line-height:inherit!important;fo=
+nt-weight:inherit!important;height:inherit!important;color:rgb(0,111,224)!i=
+mportant"> </span></div>
+<div class=3D"" id=3D"crayon-530b48709bf76604528014-3" style=3D"font-family=
+:inherit;border:0px;padding:0px 5px;margin:0px;font-size:inherit!important;=
+line-height:inherit!important;font-weight:inherit!important;height:inherit!=
+important">
+<span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;f=
+ont-size:inherit!important;line-height:inherit!important;font-weight:inheri=
+t!important;height:inherit!important;color:rgb(0,111,224)!important"> </spa=
+n><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1=
+;font-size:inherit!important;line-height:inherit!important;font-weight:inhe=
+rit!important;height:inherit!important;color:rgb(8,40,251)!important">1</sp=
+an><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:=
+1;font-size:inherit!important;line-height:inherit!important;font-weight:inh=
+erit!important;height:inherit!important">:</span><span class=3D"" style=3D"=
+font-family:inherit;display:inline-block;zoom:1;font-size:inherit!important=
+;line-height:inherit!important;font-weight:inherit!important;height:inherit=
+!important;color:rgb(0,111,224)!important"> </span><span class=3D"" style=
+=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!impor=
+tant;line-height:inherit!important;font-weight:inherit!important;height:inh=
+erit!important;color:rgb(8,40,251)!important">55</span><span class=3D"" sty=
+le=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!imp=
+ortant;line-height:inherit!important;font-weight:inherit!important;height:i=
+nherit!important">:</span><span class=3D"" style=3D"font-family:inherit;dis=
+play:inline-block;zoom:1;font-size:inherit!important;line-height:inherit!im=
+portant;font-weight:inherit!important;height:inherit!important">PF</span><s=
+pan class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;fon=
+t-size:inherit!important;line-height:inherit!important;font-weight:inherit!=
+important;height:inherit!important">--</span><span class=3D"" style=3D"font=
+-family:inherit;display:inline-block;zoom:1;font-size:inherit!important;lin=
+e-height:inherit!important;font-weight:inherit!important;height:inherit!imp=
+ortant">-</span><span class=3D"" style=3D"font-family:inherit;display:inlin=
+e-block;zoom:1;font-size:inherit!important;line-height:inherit!important;fo=
+nt-weight:inherit!important;height:inherit!important;color:rgb(0,111,224)!i=
+mportant"> </span></div>
+<div class=3D"" id=3D"crayon-530b48709bf76604528014-4" style=3D"font-family=
+:inherit;border:0px;padding:0px 5px;margin:0px;background-color:rgb(247,247=
+,247)!important;font-size:inherit!important;line-height:inherit!important;f=
+ont-weight:inherit!important;height:inherit!important">
+<span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;f=
+ont-size:inherit!important;line-height:inherit!important;font-weight:inheri=
+t!important;height:inherit!important;color:rgb(0,111,224)!important"> </spa=
+n><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1=
+;font-size:inherit!important;line-height:inherit!important;font-weight:inhe=
+rit!important;height:inherit!important;color:rgb(8,40,251)!important">2</sp=
+an><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:=
+1;font-size:inherit!important;line-height:inherit!important;font-weight:inh=
+erit!important;height:inherit!important">:</span><span class=3D"" style=3D"=
+font-family:inherit;display:inline-block;zoom:1;font-size:inherit!important=
+;line-height:inherit!important;font-weight:inherit!important;height:inherit=
+!important;color:rgb(0,111,224)!important"> </span><span class=3D"" style=
+=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!impor=
+tant;line-height:inherit!important;font-weight:inherit!important;height:inh=
+erit!important;color:rgb(8,40,251)!important">56</span><span class=3D"" sty=
+le=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!imp=
+ortant;line-height:inherit!important;font-weight:inherit!important;height:i=
+nherit!important">:</span><span class=3D"" style=3D"font-family:inherit;dis=
+play:inline-block;zoom:1;font-size:inherit!important;line-height:inherit!im=
+portant;font-weight:inherit!important;height:inherit!important">PF</span><s=
+pan class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;fon=
+t-size:inherit!important;line-height:inherit!important;font-weight:inherit!=
+important;height:inherit!important">--</span><span class=3D"" style=3D"font=
+-family:inherit;display:inline-block;zoom:1;font-size:inherit!important;lin=
+e-height:inherit!important;font-weight:inherit!important;height:inherit!imp=
+ortant">-</span><span class=3D"" style=3D"font-family:inherit;display:inlin=
+e-block;zoom:1;font-size:inherit!important;line-height:inherit!important;fo=
+nt-weight:inherit!important;height:inherit!important;color:rgb(0,111,224)!i=
+mportant"> </span></div>
+<div class=3D"" id=3D"crayon-530b48709bf76604528014-5" style=3D"font-family=
+:inherit;border:0px;padding:0px 5px;margin:0px;font-size:inherit!important;=
+line-height:inherit!important;font-weight:inherit!important;height:inherit!=
+important">
+<span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;f=
+ont-size:inherit!important;line-height:inherit!important;font-weight:inheri=
+t!important;height:inherit!important;color:rgb(0,111,224)!important"> </spa=
+n><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1=
+;font-size:inherit!important;line-height:inherit!important;font-weight:inhe=
+rit!important;height:inherit!important;color:rgb(8,40,251)!important">3</sp=
+an><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:=
+1;font-size:inherit!important;line-height:inherit!important;font-weight:inh=
+erit!important;height:inherit!important">:</span><span class=3D"" style=3D"=
+font-family:inherit;display:inline-block;zoom:1;font-size:inherit!important=
+;line-height:inherit!important;font-weight:inherit!important;height:inherit=
+!important;color:rgb(0,111,224)!important"> </span><span class=3D"" style=
+=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!impor=
+tant;line-height:inherit!important;font-weight:inherit!important;height:inh=
+erit!important;color:rgb(8,40,251)!important">57</span><span class=3D"" sty=
+le=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!imp=
+ortant;line-height:inherit!important;font-weight:inherit!important;height:i=
+nherit!important">:</span><span class=3D"" style=3D"font-family:inherit;dis=
+play:inline-block;zoom:1;font-size:inherit!important;line-height:inherit!im=
+portant;font-weight:inherit!important;height:inherit!important">PF</span><s=
+pan class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;fon=
+t-size:inherit!important;line-height:inherit!important;font-weight:inherit!=
+important;height:inherit!important">--</span><span class=3D"" style=3D"font=
+-family:inherit;display:inline-block;zoom:1;font-size:inherit!important;lin=
+e-height:inherit!important;font-weight:inherit!important;height:inherit!imp=
+ortant">-</span><span class=3D"" style=3D"font-family:inherit;display:inlin=
+e-block;zoom:1;font-size:inherit!important;line-height:inherit!important;fo=
+nt-weight:inherit!important;height:inherit!important;color:rgb(0,111,224)!i=
+mportant"> </span></div>
+<div class=3D"" id=3D"crayon-530b48709bf76604528014-6" style=3D"font-family=
+:inherit;border:0px;padding:0px 5px;margin:0px;background-color:rgb(247,247=
+,247)!important;font-size:inherit!important;line-height:inherit!important;f=
+ont-weight:inherit!important;height:inherit!important">
+<span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;f=
+ont-size:inherit!important;line-height:inherit!important;font-weight:inheri=
+t!important;height:inherit!important;color:rgb(0,111,224)!important"> </spa=
+n><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1=
+;font-size:inherit!important;line-height:inherit!important;font-weight:inhe=
+rit!important;height:inherit!important;color:rgb(8,40,251)!important">4</sp=
+an><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:=
+1;font-size:inherit!important;line-height:inherit!important;font-weight:inh=
+erit!important;height:inherit!important">:</span><span class=3D"" style=3D"=
+font-family:inherit;display:inline-block;zoom:1;font-size:inherit!important=
+;line-height:inherit!important;font-weight:inherit!important;height:inherit=
+!important;color:rgb(0,111,224)!important"> </span><span class=3D"" style=
+=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!impor=
+tant;line-height:inherit!important;font-weight:inherit!important;height:inh=
+erit!important">ff</span><span class=3D"" style=3D"font-family:inherit;disp=
+lay:inline-block;zoom:1;font-size:inherit!important;line-height:inherit!imp=
+ortant;font-weight:inherit!important;height:inherit!important">:</span><spa=
+n class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;font-=
+size:inherit!important;line-height:inherit!important;font-weight:inherit!im=
+portant;height:inherit!important">P</span><span class=3D"" style=3D"font-fa=
+mily:inherit;display:inline-block;zoom:1;font-size:inherit!important;line-h=
+eight:inherit!important;font-weight:inherit!important;height:inherit!import=
+ant">-</span><span class=3D"" style=3D"font-family:inherit;display:inline-b=
+lock;zoom:1;font-size:inherit!important;line-height:inherit!important;font-=
+weight:inherit!important;height:inherit!important">O</span><span class=3D""=
+ style=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit=
+!important;line-height:inherit!important;font-weight:inherit!important;heig=
+ht:inherit!important">-</span><span class=3D"" style=3D"font-family:inherit=
+;display:inline-block;zoom:1;font-size:inherit!important;line-height:inheri=
+t!important;font-weight:inherit!important;height:inherit!important">L</span=
+><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;=
+font-size:inherit!important;line-height:inherit!important;font-weight:inher=
+it!important;height:inherit!important;color:rgb(0,111,224)!important"> </sp=
+an><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:=
+1;font-size:inherit!important;line-height:inherit!important;font-weight:inh=
+erit!important;height:inherit!important">Bone</span><span class=3D"" style=
+=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!impor=
+tant;line-height:inherit!important;font-weight:inherit!important;height:inh=
+erit!important">-</span><span class=3D"" style=3D"font-family:inherit;displ=
+ay:inline-block;zoom:1;font-size:inherit!important;line-height:inherit!impo=
+rtant;font-weight:inherit!important;height:inherit!important">LT</span><spa=
+n class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;font-=
+size:inherit!important;line-height:inherit!important;font-weight:inherit!im=
+portant;height:inherit!important">-</span><span class=3D"" style=3D"font-fa=
+mily:inherit;display:inline-block;zoom:1;font-size:inherit!important;line-h=
+eight:inherit!important;font-weight:inherit!important;height:inherit!import=
+ant">eMMC</span><span class=3D"" style=3D"font-family:inherit;display:inlin=
+e-block;zoom:1;font-size:inherit!important;line-height:inherit!important;fo=
+nt-weight:inherit!important;height:inherit!important">-</span><span class=
+=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;font-size:in=
+herit!important;line-height:inherit!important;font-weight:inherit!important=
+;height:inherit!important;color:rgb(8,40,251)!important">2G</span><span cla=
+ss=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;font-size:=
+inherit!important;line-height:inherit!important;font-weight:inherit!importa=
+nt;height:inherit!important">,</span><span class=3D"" style=3D"font-family:=
+inherit;display:inline-block;zoom:1;font-size:inherit!important;line-height=
+:inherit!important;font-weight:inherit!important;height:inherit!important;c=
+olor:rgb(8,40,251)!important">00A0</span><span class=3D"" style=3D"font-fam=
+ily:inherit;display:inline-block;zoom:1;font-size:inherit!important;line-he=
+ight:inherit!important;font-weight:inherit!important;height:inherit!importa=
+nt">,</span><span class=3D"" style=3D"font-family:inherit;display:inline-bl=
+ock;zoom:1;font-size:inherit!important;line-height:inherit!important;font-w=
+eight:inherit!important;height:inherit!important">Texas </span><span class=
+=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;font-size:in=
+herit!important;line-height:inherit!important;font-weight:inherit!important=
+;height:inherit!important">Instrument</span><span class=3D"" style=3D"font-=
+family:inherit;display:inline-block;zoom:1;font-size:inherit!important;line=
+-height:inherit!important;font-weight:inherit!important;height:inherit!impo=
+rtant">,</span><span class=3D"" style=3D"font-family:inherit;display:inline=
+-block;zoom:1;font-size:inherit!important;line-height:inherit!important;fon=
+t-weight:inherit!important;height:inherit!important">BB</span><span class=
+=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;font-size:in=
+herit!important;line-height:inherit!important;font-weight:inherit!important=
+;height:inherit!important">-</span><span class=3D"" style=3D"font-family:in=
+herit;display:inline-block;zoom:1;font-size:inherit!important;line-height:i=
+nherit!important;font-weight:inherit!important;height:inherit!important">BO=
+NE</span><span class=3D"" style=3D"font-family:inherit;display:inline-block=
+;zoom:1;font-size:inherit!important;line-height:inherit!important;font-weig=
+ht:inherit!important;height:inherit!important">-</span><span class=3D"" sty=
+le=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!imp=
+ortant;line-height:inherit!important;font-weight:inherit!important;height:i=
+nherit!important">EMMC</span><span class=3D"" style=3D"font-family:inherit;=
+display:inline-block;zoom:1;font-size:inherit!important;line-height:inherit=
+!important;font-weight:inherit!important;height:inherit!important">-</span>=
+<span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;f=
+ont-size:inherit!important;line-height:inherit!important;font-weight:inheri=
+t!important;height:inherit!important;color:rgb(8,40,251)!important">2G</spa=
+n></div>
+<div class=3D"" id=3D"crayon-530b48709bf76604528014-7" style=3D"font-family=
+:inherit;border:0px;padding:0px 5px;margin:0px;font-size:inherit!important;=
+line-height:inherit!important;font-weight:inherit!important;height:inherit!=
+important">
+<span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;f=
+ont-size:inherit!important;line-height:inherit!important;font-weight:inheri=
+t!important;height:inherit!important;color:rgb(0,111,224)!important"> </spa=
+n><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1=
+;font-size:inherit!important;line-height:inherit!important;font-weight:inhe=
+rit!important;height:inherit!important;color:rgb(8,40,251)!important">5</sp=
+an><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:=
+1;font-size:inherit!important;line-height:inherit!important;font-weight:inh=
+erit!important;height:inherit!important">:</span><span class=3D"" style=3D"=
+font-family:inherit;display:inline-block;zoom:1;font-size:inherit!important=
+;line-height:inherit!important;font-weight:inherit!important;height:inherit=
+!important;color:rgb(0,111,224)!important"> </span><span class=3D"" style=
+=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!impor=
+tant;line-height:inherit!important;font-weight:inherit!important;height:inh=
+erit!important">ff</span><span class=3D"" style=3D"font-family:inherit;disp=
+lay:inline-block;zoom:1;font-size:inherit!important;line-height:inherit!imp=
+ortant;font-weight:inherit!important;height:inherit!important">:</span><spa=
+n class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;font-=
+size:inherit!important;line-height:inherit!important;font-weight:inherit!im=
+portant;height:inherit!important">P</span><span class=3D"" style=3D"font-fa=
+mily:inherit;display:inline-block;zoom:1;font-size:inherit!important;line-h=
+eight:inherit!important;font-weight:inherit!important;height:inherit!import=
+ant">-</span><span class=3D"" style=3D"font-family:inherit;display:inline-b=
+lock;zoom:1;font-size:inherit!important;line-height:inherit!important;font-=
+weight:inherit!important;height:inherit!important">O</span><span class=3D""=
+ style=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit=
+!important;line-height:inherit!important;font-weight:inherit!important;heig=
+ht:inherit!important">-</span><span class=3D"" style=3D"font-family:inherit=
+;display:inline-block;zoom:1;font-size:inherit!important;line-height:inheri=
+t!important;font-weight:inherit!important;height:inherit!important">L</span=
+><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;=
+font-size:inherit!important;line-height:inherit!important;font-weight:inher=
+it!important;height:inherit!important;color:rgb(0,111,224)!important"> </sp=
+an><span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:=
+1;font-size:inherit!important;line-height:inherit!important;font-weight:inh=
+erit!important;height:inherit!important">Bone</span><span class=3D"" style=
+=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inherit!impor=
+tant;line-height:inherit!important;font-weight:inherit!important;height:inh=
+erit!important">-</span><span class=3D"" style=3D"font-family:inherit;displ=
+ay:inline-block;zoom:1;font-size:inherit!important;line-height:inherit!impo=
+rtant;font-weight:inherit!important;height:inherit!important">Black</span><=
+span class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;fo=
+nt-size:inherit!important;line-height:inherit!important;font-weight:inherit=
+!important;height:inherit!important">-</span><span class=3D"" style=3D"font=
+-family:inherit;display:inline-block;zoom:1;font-size:inherit!important;lin=
+e-height:inherit!important;font-weight:inherit!important;height:inherit!imp=
+ortant">HDMI</span><span class=3D"" style=3D"font-family:inherit;display:in=
+line-block;zoom:1;font-size:inherit!important;line-height:inherit!important=
+;font-weight:inherit!important;height:inherit!important">,</span><span clas=
+s=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;font-size:i=
+nherit!important;line-height:inherit!important;font-weight:inherit!importan=
+t;height:inherit!important;color:rgb(8,40,251)!important">00A0</span><span =
+class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;font-si=
+ze:inherit!important;line-height:inherit!important;font-weight:inherit!impo=
+rtant;height:inherit!important">,</span><span class=3D"" style=3D"font-fami=
+ly:inherit;display:inline-block;zoom:1;font-size:inherit!important;line-hei=
+ght:inherit!important;font-weight:inherit!important;height:inherit!importan=
+t">Texas </span><span class=3D"" style=3D"font-family:inherit;display:inlin=
+e-block;zoom:1;font-size:inherit!important;line-height:inherit!important;fo=
+nt-weight:inherit!important;height:inherit!important">Instrument</span><spa=
+n class=3D"" style=3D"font-family:inherit;display:inline-block;zoom:1;font-=
+size:inherit!important;line-height:inherit!important;font-weight:inherit!im=
+portant;height:inherit!important">,</span><span class=3D"" style=3D"font-fa=
+mily:inherit;display:inline-block;zoom:1;font-size:inherit!important;line-h=
+eight:inherit!important;font-weight:inherit!important;height:inherit!import=
+ant">BB</span><span class=3D"" style=3D"font-family:inherit;display:inline-=
+block;zoom:1;font-size:inherit!important;line-height:inherit!important;font=
+-weight:inherit!important;height:inherit!important">-</span><span class=3D"=
+" style=3D"font-family:inherit;display:inline-block;zoom:1;font-size:inheri=
+t!important;line-height:inherit!important;font-weight:inherit!important;hei=
+ght:inherit!important">BONELT</span><span class=3D"" style=3D"font-family:i=
+nherit;display:inline-block;zoom:1;font-size:inherit!important;line-height:=
+inherit!important;font-weight:inherit!important;height:inherit!important">-=
+</span><span class=3D"" style=3D"font-family:inherit;display:inline-block;z=
+oom:1;font-size:inherit!important;line-height:inherit!important;font-weight=
+:inherit!important;height:inherit!important">HDMI</span></div>
+</div></td></tr></tbody></table></div><div><br></div><div>Plz some one can =
+tell me what I need to do to use this feature?</div><div><br></div><div>Is =
+some thing possible using yocto?</div><div><br></div><div>Thanks.</div>
+</div>-- <br><div dir=3D"ltr">*Raul Rosetto Mu=F1oz*<br></div>
+</div>
+
+--001a11334c381b229104f32709a5--
