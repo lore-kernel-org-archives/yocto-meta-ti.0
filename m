@@ -1,22 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3AA9BE0080A
-	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 16:25:05 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N1I0059FZSOIG30@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Mon, 24 Feb 2014 18:24:40 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 8960D20092; Mon,
-	24 Feb 2014 19:24:24 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2A28FE008C8
+	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 18:08:48 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 59D7152A22; Tue, 25 Feb 2014 02:08:48 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Mon, 24 Feb 2014 19:24:24 -0500
-Message-id: <1393287864-828-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH] linux-ti-staging: ARM_SCU patch got merged, add PREEMPT_VOLUNTARY patch, reshuffle
+Message-Id: <20140225020848.59D7152A22@arago-project.org>
+Date: Tue, 25 Feb 2014 02:08:48 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: ARM_SCU patch got merged, add PREEMPT_VOLUNTARY patch, reshuffle
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,20 +22,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2014 00:25:08 -0000
+X-List-Received-Date: Tue, 25 Feb 2014 02:08:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 733a99c09f170d0d6d456c06be61e1952f8bb7c7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=733a99c09f170d0d6d456c06be61e1952f8bb7c7
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Mon Feb 24 18:52:55 2014 -0500
+
+linux-ti-staging: ARM_SCU patch got merged, add PREEMPT_VOLUNTARY patch, reshuffle
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- ...02-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch | 37 ----------------------
- ...onfig-omap-Change-PREEMPTion-to-voluntary.patch | 33 +++++++++++++++++++
- ...e-ARM-config-omap-Disable-SMP-for-AM335x.patch} | 16 ++++++----
- recipes-kernel/linux/linux-ti-staging_3.12.bb      | 10 +++---
+
+ ...02-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch |   37 --------------------
+ ...onfig-omap-Change-PREEMPTion-to-voluntary.patch |   33 +++++++++++++++++
+ ...e-ARM-config-omap-Disable-SMP-for-AM335x.patch} |   16 +++++----
+ recipes-kernel/linux/linux-ti-staging_3.12.bb      |   10 +++---
  4 files changed, 47 insertions(+), 49 deletions(-)
- delete mode 100644 recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch
- create mode 100644 recipes-kernel/linux/linux-ti-staging/0004-ARM-config-omap-Change-PREEMPTion-to-voluntary.patch
- rename recipes-kernel/linux/linux-ti-staging/{0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch => 0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch} (78%)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch b/recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch
 deleted file mode 100644
@@ -204,7 +205,5 @@ index 32cc5c5..9f39a72 100644
 -SRC_URI_append_ti43x = "file://0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
 +SRC_URI_append_ti33x = "file://0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
 +SRC_URI_append_ti43x = "file://0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
--- 
-1.8.3.2
 
 
