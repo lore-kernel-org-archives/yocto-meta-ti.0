@@ -1,28 +1,33 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1B7A9E008C3
-	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 18:30:01 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1P2U0NC031819
-	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 20:30:00 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1P2U0Xg015078
-	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 20:30:00 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Mon, 24 Feb 2014 20:29:59 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s1P2TxgW023223	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 20:29:59
-	-0600
-Date: Mon, 24 Feb 2014 21:16:23 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <344929551.319.1393294583399.JavaMail.jenkins@puget>
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
+	[209.85.223.173])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3F4B7E008DA;
+	Mon, 24 Feb 2014 21:31:00 -0800 (PST)
+Received: by mail-ie0-f173.google.com with SMTP id lx4so4438118iec.32
+	for <multiple recipients>; Mon, 24 Feb 2014 21:30:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=1lKlyuox1/mEqZMUxv05dI7E1uGsroNTbRaOLMcOdEQ=;
+	b=glg0dpHLye3p7QmQkqAaV8OIM0mfrkxhIavLsDR3UM8gjf4SX13RkIwGVFaOsfvG+Z
+	MSP8EHQhZPxAlm8HYhNDA/OcqzLTmQCyd59cPOyMaUeneqvwU55fRVCknYZpMMvZRgQj
+	PcCKDM4KlZ7jfSVH5a5hcDsZIbQnCN8mup4P0pH6prIt8BdThPDvSfVxAdJuc8Lh3aik
+	nFAxrSw8xwa1qs2PoXp7qnzI2GfnWAwNwoqm0M8ibY9Pakm5Nc13Fs0l5O1Vb8rzv14t
+	IHlc507MZvnE31mNCDV6ca1uuHj56XiIdu0a0o8thipEG3Wdf98G5SjaZ6ZwBDW++R7e
+	76kQ==
+X-Received: by 10.50.43.170 with SMTP id x10mr1190692igl.20.1393306259810;
+	Mon, 24 Feb 2014 21:30:59 -0800 (PST)
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-02-24_21-00-24
+Received: by 10.50.224.137 with HTTP; Mon, 24 Feb 2014 21:30:29 -0800 (PST)
+In-Reply-To: <CANmVirgMuSXcSmHYSaEGazQX=oJTyJQEmrRKGZHE9tprkeM_yw@mail.gmail.com>
+References: <CANmVirgMuSXcSmHYSaEGazQX=oJTyJQEmrRKGZHE9tprkeM_yw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 24 Feb 2014 21:30:29 -0800
+Message-ID: <CAMKF1srPrJ0PHufvSXQb0D70_=gjnPbD4SzfyOF1=kjqpTxMWQ@mail.gmail.com>
+To: Raul Rosetto Munoz <munoz0raul@gmail.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
+Subject: Re: Device Tree Overlays
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +40,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2014 02:30:03 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_318_1491772268.1393294583398"
+X-List-Received-Date: Tue, 25 Feb 2014 05:31:01 -0000
+Content-Type: multipart/alternative; boundary=089e01176cadadee4c04f33464f3
 
-------=_Part_318_1491772268.1393294583398
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--089e01176cadadee4c04f33464f3
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-<html>
-<head>
-<title>
-Status for 02/24/14
-</title>
-</head>
-<body>
+On Mon, Feb 24, 2014 at 5:34 AM, Raul Rosetto Munoz <munoz0raul@gmail.com>w=
+rote:
 
-<h2>Status for 02/24/14</h2>
+> I couldnt see this folders:
+>
+> root@beaglebone:/lib/fir
+> =E2=80=8Ban=E2=80=8B
+> mware# export SLOTS=3D/sys/devices/bone_capemgr.9/slots
+>
 
-<h2>BUILD_ID: build-2014-02-24_21-01-33</h2>
+=E2=80=8Bc=E2=80=8Ban you use the kernel from meta-beagleboard and check if=
+ you get cape
+support
 
-<h2>Clean Build: false</h2>
+--089e01176cadadee4c04f33464f3
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+<div dir=3D"ltr"><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">=
+On Mon, Feb 24, 2014 at 5:34 AM, Raul Rosetto Munoz <span dir=3D"ltr">&lt;<=
+a href=3D"mailto:munoz0raul@gmail.com" target=3D"_blank">munoz0raul@gmail.c=
+om</a>&gt;</span> wrote:<br>
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left-width:1px;border-left-color:rgb(204,204,204);border-left-style:solid;p=
+adding-left:1ex"><div>I couldnt see this folders:</div><div><br></div><div>
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+<div>root@beaglebone:/lib/fir<div class=3D"gmail_default" style=3D"font-fam=
+ily:&#39;courier new&#39;,monospace;font-size:small;display:inline">=E2=80=
+=8Ban=E2=80=8B</div>mware# export SLOTS=3D/sys/devices/bone_capemgr.9/slots=
+</div>
+</div><div></div></blockquote></div><br><div class=3D"gmail_default" style=
+=3D"font-family:&#39;courier new&#39;,monospace;font-size:small">=E2=80=8Bc=
+=E2=80=8Ban you use the kernel from meta-beagleboard and check if you get c=
+ape support=C2=A0</div>
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.01"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+<br></div></div>
 
-</body>
-</html>
-
-
-------=_Part_318_1491772268.1393294583398--
+--089e01176cadadee4c04f33464f3--
