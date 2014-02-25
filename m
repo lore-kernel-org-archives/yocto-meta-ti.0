@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2A28FE008C8
-	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 18:08:48 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2B5F3E008C9
+	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 18:08:53 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 59D7152A22; Tue, 25 Feb 2014 02:08:48 +0000 (UTC)
+	id 8CB7452A4E; Tue, 25 Feb 2014 02:08:53 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140225020848.59D7152A22@arago-project.org>
-Date: Tue, 25 Feb 2014 02:08:48 +0000 (UTC)
+Message-Id: <20140225020853.8CB7452A4E@arago-project.org>
+Date: Tue, 25 Feb 2014 02:08:53 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: ARM_SCU patch got merged, add PREEMPT_VOLUNTARY patch, reshuffle
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Tue, 25 Feb 2014 02:08:54 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 733a99c09f170d0d6d456c06be61e1952f8bb7c7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=733a99c09f170d0d6d456c06be61e1952f8bb7c7
+Branch: dylan
+Commit: 726a67e38f1e58ddf5b41cd3c169dc0d59596ddd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=726a67e38f1e58ddf5b41cd3c169dc0d59596ddd
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Mon Feb 24 18:52:55 2014 -0500
