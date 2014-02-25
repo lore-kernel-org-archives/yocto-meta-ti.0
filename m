@@ -1,15 +1,28 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF82AE008CD
-	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 18:09:00 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id B2BFF52A22; Tue, 25 Feb 2014 02:09:00 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20140225020900.B2BFF52A22@arago-project.org>
-Date: Tue, 25 Feb 2014 02:09:00 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: ARM_SCU patch got merged, add PREEMPT_VOLUNTARY patch, reshuffle
+Return-Path: <denys@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1B7A9E008C3
+	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 18:30:01 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1P2U0NC031819
+	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 20:30:00 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1P2U0Xg015078
+	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 20:30:00 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Mon, 24 Feb 2014 20:29:59 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s1P2TxgW023223	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 20:29:59
+	-0600
+Date: Mon, 24 Feb 2014 21:16:23 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <344929551.319.1393294583399.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-02-24_21-00-24
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,188 +35,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2014 02:09:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 25 Feb 2014 02:30:03 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_318_1491772268.1393294583398"
 
-Module: meta-ti
-Branch: dora
-Commit: ff8c391fdbdd6b9bc106807e9c51de10cbdeee88
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ff8c391fdbdd6b9bc106807e9c51de10cbdeee88
+------=_Part_318_1491772268.1393294583398
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Feb 24 18:52:55 2014 -0500
+<html>
+<head>
+<title>
+Status for 02/24/14
+</title>
+</head>
+<body>
 
-linux-ti-staging: ARM_SCU patch got merged, add PREEMPT_VOLUNTARY patch, reshuffle
+<h2>Status for 02/24/14</h2>
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+<h2>BUILD_ID: build-2014-02-24_21-01-33</h2>
 
----
+<h2>Clean Build: false</h2>
 
- ...02-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch |   37 --------------------
- ...onfig-omap-Change-PREEMPTion-to-voluntary.patch |   33 +++++++++++++++++
- ...e-ARM-config-omap-Disable-SMP-for-AM335x.patch} |   16 +++++----
- recipes-kernel/linux/linux-ti-staging_3.12.bb      |   10 +++---
- 4 files changed, 47 insertions(+), 49 deletions(-)
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-diff --git a/recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch b/recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch
-deleted file mode 100644
-index 8137bb3..0000000
---- a/recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From 5b2aa64ccdeef659a9688730753199ba5b8e60b1 Mon Sep 17 00:00:00 2001
--From: Dave Gerlach <d-gerlach@ti.com>
--Date: Fri, 21 Feb 2014 10:25:33 +0000
--Subject: [PATCH 2/4] ARM: config: Add HAVE_ARM_SCU for AM43XX
--
--CONFIG_HAVE_ARM_SCU only gets selected if CONFIG_SMP is selected in an OMAP
--system however AM43XX needs this option regardless of CONFIG_SMP as it is
--important for controlling power in the SoC. Without this suspend will
--not work as scu_power_mode becomes an empty function.
--
--AM43XX requires SCU CPU Power Status bits for A9 core to be set to off mode
--in order for the MSTANDBY signal to be asserted from the MPU during WFI.
--This signal is used by the PRCM to determine when it is appropriate to
--clock gate the MPU clock domain and also trigger M3_IRQ2 to tell the wkup_m3
--firmware to put the part into the desired sleep more.
--
--Signed-off-by: Dave Gerlach <d-gerlach@ti.com>
--Tested-by: Sekhar Nori <nsekhar@ti.com>
-----
-- arch/arm/mach-omap2/Kconfig |    1 +
-- 1 files changed, 1 insertions(+), 0 deletions(-)
--
--diff --git a/arch/arm/mach-omap2/Kconfig b/arch/arm/mach-omap2/Kconfig
--index 959f6fc..373d576 100644
----- a/arch/arm/mach-omap2/Kconfig
--+++ b/arch/arm/mach-omap2/Kconfig
--@@ -85,6 +85,7 @@ config SOC_AM43XX
-- 	depends on ARCH_MULTI_V7
-- 	select CPU_V7
-- 	select ARCH_OMAP2PLUS
--+	select HAVE_ARM_SCU
-- 	select MULTI_IRQ_HANDLER
-- 	select ARM_GIC
-- 	select COMMON_CLK
---- 
--1.7.0.4
--
-diff --git a/recipes-kernel/linux/linux-ti-staging/0004-ARM-config-omap-Change-PREEMPTion-to-voluntary.patch b/recipes-kernel/linux/linux-ti-staging/0004-ARM-config-omap-Change-PREEMPTion-to-voluntary.patch
-new file mode 100644
-index 0000000..469a0c7
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging/0004-ARM-config-omap-Change-PREEMPTion-to-voluntary.patch
-@@ -0,0 +1,33 @@
-+From 54821ed9f986a0023bbc3fa08060e1f2c8efb6b5 Mon Sep 17 00:00:00 2001
-+From: Chase Maupin <Chase.Maupin@ti.com>
-+Date: Mon, 24 Feb 2014 13:16:20 -0600
-+Subject: [PATCH 1/2] ARM: config: omap: Change PREEMPTion to voluntary
-+
-+* Change the default PREEMPT mode to voluntary which reduces the
-+  overhead and increases performance for many use cases such as
-+  UDP networking and cryptography.
-+* Based on recommendations from Joel Fernandes <joelf@ti.com>
-+
-+Signed-off-by: Joel Fernandes <joelf@ti.com>
-+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-+---
-+ arch/arm/configs/omap2plus_defconfig | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/arch/arm/configs/omap2plus_defconfig b/arch/arm/configs/omap2plus_defconfig
-+index 3975b08..a34b45a 100644
-+--- a/arch/arm/configs/omap2plus_defconfig
-++++ b/arch/arm/configs/omap2plus_defconfig
-+@@ -38,7 +38,7 @@ CONFIG_ARM_ERRATA_411920=y
-+ CONFIG_PCIE_DRA7XX=y
-+ CONFIG_SMP=y
-+ CONFIG_NR_CPUS=2
-+-CONFIG_PREEMPT=y
-++CONFIG_PREEMPT_VOLUNTARY=y
-+ CONFIG_CMA=y
-+ CONFIG_ZBOOT_ROM_TEXT=0x0
-+ CONFIG_ZBOOT_ROM_BSS=0x0
-+-- 
-+1.8.3.2
-+
-diff --git a/recipes-kernel/linux/linux-ti-staging/0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch b/recipes-kernel/linux/linux-ti-staging/0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
-similarity index 78%
-rename from recipes-kernel/linux/linux-ti-staging/0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
-rename to recipes-kernel/linux/linux-ti-staging/0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
-index b01c4d0..8e016b4 100644
---- a/recipes-kernel/linux/linux-ti-staging/0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
-+++ b/recipes-kernel/linux/linux-ti-staging/0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
-@@ -1,7 +1,8 @@
--From 89783143b64210e8f159fd875b23aa9af1fd51b0 Mon Sep 17 00:00:00 2001
-+From 2f6cbe000b1d31c91eee0248f24b0c306aadeb63 Mon Sep 17 00:00:00 2001
- From: Santosh Shilimkar <santosh.shilimkar@ti.com>
- Date: Thu, 13 Feb 2014 08:52:41 -0500
--Subject: [PATCH 4/4] Not-for-merge: ARM: config: omap: Disable SMP for AM335x build
-+Subject: [PATCH 2/2] Not-for-merge: ARM: config: omap: Disable SMP for AM335x
-+ build
- 
- SMP and SMP_ON_UP introduces some extra barriers and code many fast paths
- including kernel lock functions.
-@@ -21,12 +22,13 @@ Disabling SMP in the build introduces one warining in cpuidle44xx.c driver
- and fix is included in the series
- 
- Signed-off-by: Santosh Shilimkar <santosh.shilimkar@ti.com>
-+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
- ---
-- arch/arm/configs/omap2plus_defconfig |    2 --
-- 1 files changed, 0 insertions(+), 2 deletions(-)
-+ arch/arm/configs/omap2plus_defconfig | 2 --
-+ 1 file changed, 2 deletions(-)
- 
- diff --git a/arch/arm/configs/omap2plus_defconfig b/arch/arm/configs/omap2plus_defconfig
--index 3975b08..cfbc2d0 100644
-+index a34b45a..bb6beb2 100644
- --- a/arch/arm/configs/omap2plus_defconfig
- +++ b/arch/arm/configs/omap2plus_defconfig
- @@ -36,8 +36,6 @@ CONFIG_OMAP4_ERRATA_I688=y
-@@ -35,9 +37,9 @@ index 3975b08..cfbc2d0 100644
-  CONFIG_PCIE_DRA7XX=y
- -CONFIG_SMP=y
- -CONFIG_NR_CPUS=2
-- CONFIG_PREEMPT=y
-+ CONFIG_PREEMPT_VOLUNTARY=y
-  CONFIG_CMA=y
-  CONFIG_ZBOOT_ROM_TEXT=0x0
- -- 
--1.7.0.4
-+1.8.3.2
- 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 32cc5c5..9f39a72 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.12.y"
- 
--SRCREV = "d5e4bfd196e114c885c5c42cf0a7b3edc7e54829"
-+SRCREV = "c559824b17bfc194cc072dac0720ac8e23373871"
- PV = "3.12.10"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "h+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "i+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-@@ -49,9 +49,9 @@ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;bra
- 
- # Latest critical fixes
- SRC_URI += "file://0001-Revert-usb-musb-musb_cppi41-Revert-the-Advisory-1.0..patch \
--            file://0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch \
-             file://0003-ARM-OMAP-Kill-warning-in-CPUIDLE-code-with-CONFIG_SM.patch \
-+            file://0004-ARM-config-omap-Change-PREEMPTion-to-voluntary.patch \
-             "
- 
--SRC_URI_append_ti33x = "file://0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
--SRC_URI_append_ti43x = "file://0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
-+SRC_URI_append_ti33x = "file://0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
-+SRC_URI_append_ti43x = "file://0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.01"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_318_1491772268.1393294583398--
