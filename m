@@ -1,31 +1,22 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6667E008D5
-	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 09:41:03 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1OHf1qW016622
-	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 11:41:02 -0600
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1OHf1Dc010588
-	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 11:41:01 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Mon, 24 Feb 2014 11:41:01 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1OHf167027749;
-	Mon, 24 Feb 2014 11:41:01 -0600
-Date: Mon, 24 Feb 2014 12:41:00 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Nelson, Sam" <sam.nelson@ti.com>
-Message-ID: <20140224174100.GD18510@edge>
-References: <1393129856-9624-1-git-send-email-sam.nelson@ti.com>
-	<20140223045044.GX22890@denix.org>
-	<4F9216F96E5DF9428610502835A9F49057F3D4D9@DLEE11.ent.ti.com>
-MIME-Version: 1.0
-In-Reply-To: <4F9216F96E5DF9428610502835A9F49057F3D4D9@DLEE11.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] linux-keystone: Update latest tag
+Return-Path: <denis@denix.org>
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3AA9BE0080A
+	for <meta-ti@yoctoproject.org>; Mon, 24 Feb 2014 16:25:05 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N1I0059FZSOIG30@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 24 Feb 2014 18:24:40 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 8960D20092; Mon,
+	24 Feb 2014 19:24:24 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Mon, 24 Feb 2014 19:24:24 -0500
+Message-id: <1393287864-828-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH] linux-ti-staging: ARM_SCU patch got merged, add PREEMPT_VOLUNTARY patch, reshuffle
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,90 +29,182 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2014 17:41:05 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 25 Feb 2014 00:25:08 -0000
 
-On Sun, Feb 23, 2014 at 08:47:51AM -0500, Nelson, Sam wrote:
-> 
-> 
-> > -----Original Message-----
-> > From: Dmytriyenko, Denys
-> > Sent: Saturday, February 22, 2014 11:51 PM
-> > To: Nelson, Sam
-> > Cc: meta-ti@yoctoproject.org
-> > Subject: Re: [meta-ti] [PATCH] linux-keystone: Update latest tag
-> > 
-> > On Sat, Feb 22, 2014 at 11:30:56PM -0500, Sam Nelson wrote:
-> > > Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-> > >
-> > > ---
-> > > Not sure whether need a PR bump
-> > 
-> > Yes, this one usually needs. Well, your SRCREV went up in both cases, so will
-> > still work w/o a PR bump, but it's still a good idea to bump PR when updating
-> > SRCREV only and PV stays the same. Kernel recipes have
-> > MACHINE_KERNEL_PR_append
-> > for that.
+From: Denys Dmytriyenko <denys@ti.com>
 
-> [Sam] Thanks for the clarification. So in this case even though the 
-> MACHINE_KERNEL_PR_append went up due to the git commit change,
-> It is recommended to bump PR explicitly in this case from 
-> MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}" to MACHINE_KERNEL_PR_append = 
-> "b+gitr${SRCPV}".
->  Please confirm. 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ ...02-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch | 37 ----------------------
+ ...onfig-omap-Change-PREEMPTion-to-voluntary.patch | 33 +++++++++++++++++++
+ ...e-ARM-config-omap-Disable-SMP-for-AM335x.patch} | 16 ++++++----
+ recipes-kernel/linux/linux-ti-staging_3.12.bb      | 10 +++---
+ 4 files changed, 47 insertions(+), 49 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch
+ create mode 100644 recipes-kernel/linux/linux-ti-staging/0004-ARM-config-omap-Change-PREEMPTion-to-voluntary.patch
+ rename recipes-kernel/linux/linux-ti-staging/{0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch => 0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch} (78%)
 
-Yes, in this particular case it's not strictly required, as I explained just 
-above, but it's a good practice to do it anyway when changing SRCREV for 
-consistency and to not miss the next time when it's really needed.
+diff --git a/recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch b/recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch
+deleted file mode 100644
+index 8137bb3..0000000
+--- a/recipes-kernel/linux/linux-ti-staging/0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-From 5b2aa64ccdeef659a9688730753199ba5b8e60b1 Mon Sep 17 00:00:00 2001
+-From: Dave Gerlach <d-gerlach@ti.com>
+-Date: Fri, 21 Feb 2014 10:25:33 +0000
+-Subject: [PATCH 2/4] ARM: config: Add HAVE_ARM_SCU for AM43XX
+-
+-CONFIG_HAVE_ARM_SCU only gets selected if CONFIG_SMP is selected in an OMAP
+-system however AM43XX needs this option regardless of CONFIG_SMP as it is
+-important for controlling power in the SoC. Without this suspend will
+-not work as scu_power_mode becomes an empty function.
+-
+-AM43XX requires SCU CPU Power Status bits for A9 core to be set to off mode
+-in order for the MSTANDBY signal to be asserted from the MPU during WFI.
+-This signal is used by the PRCM to determine when it is appropriate to
+-clock gate the MPU clock domain and also trigger M3_IRQ2 to tell the wkup_m3
+-firmware to put the part into the desired sleep more.
+-
+-Signed-off-by: Dave Gerlach <d-gerlach@ti.com>
+-Tested-by: Sekhar Nori <nsekhar@ti.com>
+----
+- arch/arm/mach-omap2/Kconfig |    1 +
+- 1 files changed, 1 insertions(+), 0 deletions(-)
+-
+-diff --git a/arch/arm/mach-omap2/Kconfig b/arch/arm/mach-omap2/Kconfig
+-index 959f6fc..373d576 100644
+---- a/arch/arm/mach-omap2/Kconfig
+-+++ b/arch/arm/mach-omap2/Kconfig
+-@@ -85,6 +85,7 @@ config SOC_AM43XX
+- 	depends on ARCH_MULTI_V7
+- 	select CPU_V7
+- 	select ARCH_OMAP2PLUS
+-+	select HAVE_ARM_SCU
+- 	select MULTI_IRQ_HANDLER
+- 	select ARM_GIC
+- 	select COMMON_CLK
+--- 
+-1.7.0.4
+-
+diff --git a/recipes-kernel/linux/linux-ti-staging/0004-ARM-config-omap-Change-PREEMPTion-to-voluntary.patch b/recipes-kernel/linux/linux-ti-staging/0004-ARM-config-omap-Change-PREEMPTion-to-voluntary.patch
+new file mode 100644
+index 0000000..469a0c7
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti-staging/0004-ARM-config-omap-Change-PREEMPTion-to-voluntary.patch
+@@ -0,0 +1,33 @@
++From 54821ed9f986a0023bbc3fa08060e1f2c8efb6b5 Mon Sep 17 00:00:00 2001
++From: Chase Maupin <Chase.Maupin@ti.com>
++Date: Mon, 24 Feb 2014 13:16:20 -0600
++Subject: [PATCH 1/2] ARM: config: omap: Change PREEMPTion to voluntary
++
++* Change the default PREEMPT mode to voluntary which reduces the
++  overhead and increases performance for many use cases such as
++  UDP networking and cryptography.
++* Based on recommendations from Joel Fernandes <joelf@ti.com>
++
++Signed-off-by: Joel Fernandes <joelf@ti.com>
++Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
++Signed-off-by: Denys Dmytriyenko <denys@ti.com>
++---
++ arch/arm/configs/omap2plus_defconfig | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/arch/arm/configs/omap2plus_defconfig b/arch/arm/configs/omap2plus_defconfig
++index 3975b08..a34b45a 100644
++--- a/arch/arm/configs/omap2plus_defconfig
+++++ b/arch/arm/configs/omap2plus_defconfig
++@@ -38,7 +38,7 @@ CONFIG_ARM_ERRATA_411920=y
++ CONFIG_PCIE_DRA7XX=y
++ CONFIG_SMP=y
++ CONFIG_NR_CPUS=2
++-CONFIG_PREEMPT=y
+++CONFIG_PREEMPT_VOLUNTARY=y
++ CONFIG_CMA=y
++ CONFIG_ZBOOT_ROM_TEXT=0x0
++ CONFIG_ZBOOT_ROM_BSS=0x0
++-- 
++1.8.3.2
++
+diff --git a/recipes-kernel/linux/linux-ti-staging/0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch b/recipes-kernel/linux/linux-ti-staging/0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
+similarity index 78%
+rename from recipes-kernel/linux/linux-ti-staging/0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
+rename to recipes-kernel/linux/linux-ti-staging/0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
+index b01c4d0..8e016b4 100644
+--- a/recipes-kernel/linux/linux-ti-staging/0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
++++ b/recipes-kernel/linux/linux-ti-staging/0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
+@@ -1,7 +1,8 @@
+-From 89783143b64210e8f159fd875b23aa9af1fd51b0 Mon Sep 17 00:00:00 2001
++From 2f6cbe000b1d31c91eee0248f24b0c306aadeb63 Mon Sep 17 00:00:00 2001
+ From: Santosh Shilimkar <santosh.shilimkar@ti.com>
+ Date: Thu, 13 Feb 2014 08:52:41 -0500
+-Subject: [PATCH 4/4] Not-for-merge: ARM: config: omap: Disable SMP for AM335x build
++Subject: [PATCH 2/2] Not-for-merge: ARM: config: omap: Disable SMP for AM335x
++ build
+ 
+ SMP and SMP_ON_UP introduces some extra barriers and code many fast paths
+ including kernel lock functions.
+@@ -21,12 +22,13 @@ Disabling SMP in the build introduces one warining in cpuidle44xx.c driver
+ and fix is included in the series
+ 
+ Signed-off-by: Santosh Shilimkar <santosh.shilimkar@ti.com>
++Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+ ---
+- arch/arm/configs/omap2plus_defconfig |    2 --
+- 1 files changed, 0 insertions(+), 2 deletions(-)
++ arch/arm/configs/omap2plus_defconfig | 2 --
++ 1 file changed, 2 deletions(-)
+ 
+ diff --git a/arch/arm/configs/omap2plus_defconfig b/arch/arm/configs/omap2plus_defconfig
+-index 3975b08..cfbc2d0 100644
++index a34b45a..bb6beb2 100644
+ --- a/arch/arm/configs/omap2plus_defconfig
+ +++ b/arch/arm/configs/omap2plus_defconfig
+ @@ -36,8 +36,6 @@ CONFIG_OMAP4_ERRATA_I688=y
+@@ -35,9 +37,9 @@ index 3975b08..cfbc2d0 100644
+  CONFIG_PCIE_DRA7XX=y
+ -CONFIG_SMP=y
+ -CONFIG_NR_CPUS=2
+- CONFIG_PREEMPT=y
++ CONFIG_PREEMPT_VOLUNTARY=y
+  CONFIG_CMA=y
+  CONFIG_ZBOOT_ROM_TEXT=0x0
+ -- 
+-1.7.0.4
++1.8.3.2
+ 
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index 32cc5c5..9f39a72 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.12.y"
+ 
+-SRCREV = "d5e4bfd196e114c885c5c42cf0a7b3edc7e54829"
++SRCREV = "c559824b17bfc194cc072dac0720ac8e23373871"
+ PV = "3.12.10"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "h+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "i+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+@@ -49,9 +49,9 @@ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;bra
+ 
+ # Latest critical fixes
+ SRC_URI += "file://0001-Revert-usb-musb-musb_cppi41-Revert-the-Advisory-1.0..patch \
+-            file://0002-ARM-config-Add-HAVE_ARM_SCU-for-AM43XX.patch \
+             file://0003-ARM-OMAP-Kill-warning-in-CPUIDLE-code-with-CONFIG_SM.patch \
++            file://0004-ARM-config-omap-Change-PREEMPTion-to-voluntary.patch \
+             "
+ 
+-SRC_URI_append_ti33x = "file://0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
+-SRC_URI_append_ti43x = "file://0004-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
++SRC_URI_append_ti33x = "file://0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
++SRC_URI_append_ti43x = "file://0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
+-- 
+1.8.3.2
 
-
-> > > ---
-> > > ---
-> > >  recipes-kernel/linux/linux-keystone-rt_3.10.bb |    4 ++--
-> > >  recipes-kernel/linux/linux-keystone_3.10.bb    |    4 ++--
-> > >  2 files changed, 4 insertions(+), 4 deletions(-)
-> > >
-> > > diff --git a/recipes-kernel/linux/linux-keystone-rt_3.10.bb b/recipes-
-> > kernel/linux/linux-keystone-rt_3.10.bb
-> > > index 9c2f904..3965dfa 100644
-> > > --- a/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-> > > +++ b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-> > > @@ -17,8 +17,8 @@ KERNEL_DEVICETREE_keystone-evm = "k2hk-
-> > evm.dtb"
-> > >
-> > >  KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
-> > >
-> > > -#This commit corresponds to "K2_RT_LINUX_03.10.10_13.12"
-> > > -SRCREV = "8fa9091d0f9c91a048a975ddebbf2f492e73bf61"
-> > > +#This commit corresponds to "K2_RT_LINUX_03.10.10_14.02"
-> > > +SRCREV = "c78aa253ac385faae8b6c845a388e215395a8010"
-> > >  PV = "3.10.10"
-> > >
-> > >  BRANCH = "master-rt"
-> > > diff --git a/recipes-kernel/linux/linux-keystone_3.10.bb b/recipes-
-> > kernel/linux/linux-keystone_3.10.bb
-> > > index 2384ede..f063c0c 100644
-> > > --- a/recipes-kernel/linux/linux-keystone_3.10.bb
-> > > +++ b/recipes-kernel/linux/linux-keystone_3.10.bb
-> > > @@ -17,8 +17,8 @@ KERNEL_DEVICETREE_keystone-evm = "k2hk-
-> > evm.dtb"
-> > >
-> > >  KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
-> > >
-> > > -#This commit corresponds to "K2_LINUX_03.10.10_13.12"
-> > > -SRCREV = "335d14b1c2ce23585835243126c6acba89067ecf"
-> > > +#This commit corresponds to "K2_LINUX_03.10.10_14.02"
-> > > +SRCREV = "93515476b357304e6fc075c004a1cfa91a0751d0"
-> > >  PV = "3.10.10"
-> > >
-> > >  BRANCH = "master"
-> > > --
-> > > 1.7.9.5
-> > >
-> > > _______________________________________________
-> > > meta-ti mailing list
-> > > meta-ti@yoctoproject.org
-> > > https://lists.yoctoproject.org/listinfo/meta-ti
-> > >
 
