@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 19487E00946
-	for <meta-ti@yoctoproject.org>; Wed, 26 Feb 2014 13:47:36 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B29C8E00949
+	for <meta-ti@yoctoproject.org>; Wed, 26 Feb 2014 13:47:45 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C155452A69; Wed, 26 Feb 2014 21:47:35 +0000 (UTC)
+	id 24D1B52A69; Wed, 26 Feb 2014 21:47:45 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140226214735.C155452A69@arago-project.org>
-Date: Wed, 26 Feb 2014 21:47:35 +0000 (UTC)
+Message-Id: <20140226214745.24D1B52A69@arago-project.org>
+Date: Wed, 26 Feb 2014 21:47:45 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : linux-keystone: Update latest tag
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2014 21:47:39 -0000
+X-List-Received-Date: Wed, 26 Feb 2014 21:47:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: fcecf575282a4926179f9131521b369751aae394
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fcecf575282a4926179f9131521b369751aae394
+Branch: dora
+Commit: 12905c642845b68d1c4a19bd97043289c962ec34
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=12905c642845b68d1c4a19bd97043289c962ec34
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Mon Feb 24 22:05:51 2014 +0000
