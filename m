@@ -1,22 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B602E007E1
-	for <meta-ti@yoctoproject.org>; Thu, 27 Feb 2014 11:09:12 -0800 (PST)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173023.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N1O00D77571JT50@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 27 Feb 2014 13:09:11 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 01B252009B; Thu,
-	27 Feb 2014 14:09:01 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6E89BE00784
+	for <meta-ti@yoctoproject.org>; Thu, 27 Feb 2014 11:22:43 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id C888252A69; Thu, 27 Feb 2014 19:22:42 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Thu, 27 Feb 2014 14:09:00 -0500
-Message-id: <1393528140-5176-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH] linux-ti-staging: rebase patch to disable SMP to apply cleanly
+Message-Id: <20140227192242.C888252A69@arago-project.org>
+Date: Thu, 27 Feb 2014 19:22:42 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: rebase patch to disable SMP to apply cleanly
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,18 +22,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2014 19:09:14 -0000
+X-List-Received-Date: Thu, 27 Feb 2014 19:22:44 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 3b596055fe6f5e6c7d4e885e114c121f1ecd0c42
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3b596055fe6f5e6c7d4e885e114c121f1ecd0c42
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Feb 27 14:07:18 2014 -0500
+
+linux-ti-staging: rebase patch to disable SMP to apply cleanly
 
 No PR bump is needed.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- ...Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch} | 10 +++++-----
- recipes-kernel/linux/linux-ti-staging_3.12.bb                  |  4 ++--
+
+ ...e-ARM-config-omap-Disable-SMP-for-AM335x.patch} |   10 +++++-----
+ recipes-kernel/linux/linux-ti-staging_3.12.bb      |    4 ++--
  2 files changed, 7 insertions(+), 7 deletions(-)
- rename recipes-kernel/linux/linux-ti-staging/{0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch => 0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch} (87%)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging/0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch b/recipes-kernel/linux/linux-ti-staging/0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
 similarity index 87%
@@ -92,7 +95,5 @@ index 7982c0d..1b97ab2 100644
 -SRC_URI_append_ti43x = "file://0005-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
 +SRC_URI_append_ti33x = "file://0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
 +SRC_URI_append_ti43x = "file://0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
--- 
-1.8.3.2
 
 
