@@ -1,28 +1,28 @@
 Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1319DE009D9
-	for <meta-ti@yoctoproject.org>; Sat,  1 Mar 2014 18:29:00 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s222Sx5X028053
-	for <meta-ti@yoctoproject.org>; Sat, 1 Mar 2014 20:28:59 -0600
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F1ABAE008E5
+	for <meta-ti@yoctoproject.org>; Sun,  2 Mar 2014 18:44:05 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s232i4jK030266
+	for <meta-ti@yoctoproject.org>; Sun, 2 Mar 2014 20:44:04 -0600
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s222SxVE005414
-	for <meta-ti@yoctoproject.org>; Sat, 1 Mar 2014 20:28:59 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s232i4M2019815
+	for <meta-ti@yoctoproject.org>; Sun, 2 Mar 2014 20:44:04 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Sat, 1 Mar 2014 20:28:59 -0600
+	Sun, 2 Mar 2014 20:44:03 -0600
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s222SxgH005299	for <meta-ti@yoctoproject.org>;
-	Sat, 1 Mar 2014 20:28:59 -0600
-Date: Sat, 1 Mar 2014 21:15:14 -0500
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s232i3at013518	for <meta-ti@yoctoproject.org>;
+	Sun, 2 Mar 2014 20:44:03 -0600
+Date: Sun, 2 Mar 2014 21:30:17 -0500
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <551869935.351.1393726514893.JavaMail.jenkins@puget>
+Message-ID: <2147232835.355.1393813817874.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-03-01_21-00-24
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-03-02_21-00-24
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,24 +35,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Mar 2014 02:29:01 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_350_7060360.1393726514856"
+X-List-Received-Date: Mon, 03 Mar 2014 02:44:06 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_354_1207711976.1393813817872"
 
-------=_Part_350_7060360.1393726514856
+------=_Part_354_1207711976.1393813817872
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 03/01/14
+Status for 03/02/14
 </title>
 </head>
 <body>
 
-<h2>Status for 03/01/14</h2>
+<h2>Status for 03/02/14</h2>
 
-<h2>BUILD_ID: build-2014-03-01_21-01-34</h2>
+<h2>BUILD_ID: build-2014-03-02_21-01-34</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -98,18 +99,18 @@ Status for 03/01/14
     </tr>
     <tr>
         <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>am180x-evm</td>
@@ -118,13 +119,13 @@ Status for 03/01/14
     </tr>
     <tr>
         <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="omap5-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>keystone-evm</td>
@@ -133,18 +134,18 @@ Status for 03/01/14
     </tr>
     <tr>
         <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="beaglebone-build-result" bgcolor=red>FAILED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
 </table>
 
@@ -199,4 +200,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_350_7060360.1393726514856--
+------=_Part_354_1207711976.1393813817872--
