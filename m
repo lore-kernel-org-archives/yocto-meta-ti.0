@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B495BE00A21
-	for <meta-ti@yoctoproject.org>; Tue,  4 Mar 2014 20:55:13 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B5C2FE00A24
+	for <meta-ti@yoctoproject.org>; Tue,  4 Mar 2014 20:55:17 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C59B6529A1; Wed,  5 Mar 2014 04:55:12 +0000 (UTC)
+	id 82902529F3; Wed,  5 Mar 2014 04:55:17 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140305045512.C59B6529A1@arago-project.org>
-Date: Wed,  5 Mar 2014 04:55:12 +0000 (UTC)
+Message-Id: <20140305045517.82902529F3@arago-project.org>
+Date: Wed,  5 Mar 2014 04:55:17 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : ti-ipc: Add recipe for ti-ipc version 3.0.x
 X-BeenThere: meta-ti@yoctoproject.org
@@ -26,9 +26,9 @@ X-List-Received-Date: Wed, 05 Mar 2014 04:55:18 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: d2c9c3b981fc900b0e78fb98ff45d0fa7661910e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d2c9c3b981fc900b0e78fb98ff45d0fa7661910e
+Branch: dora
+Commit: 2c3d72b18162cbdedabcef6539c7879173f265b7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2c3d72b18162cbdedabcef6539c7879173f265b7
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Wed Feb 12 05:41:49 2014 +0000
