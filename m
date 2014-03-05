@@ -1,28 +1,15 @@
-Return-Path: <denys@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6A067E00A01
-	for <meta-ti@yoctoproject.org>; Tue,  4 Mar 2014 18:19:18 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s252JIfY017861
-	for <meta-ti@yoctoproject.org>; Tue, 4 Mar 2014 20:19:18 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s252JIZW024458
-	for <meta-ti@yoctoproject.org>; Tue, 4 Mar 2014 20:19:18 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 4 Mar 2014 20:19:17 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s252JH9E021237	for <meta-ti@yoctoproject.org>;
-	Tue, 4 Mar 2014 20:19:17 -0600
-Date: Tue, 4 Mar 2014 21:05:28 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <953147200.365.1393985128713.JavaMail.jenkins@puget>
-MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-03-04_21-00-25
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B495BE00A21
+	for <meta-ti@yoctoproject.org>; Tue,  4 Mar 2014 20:55:13 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id C59B6529A1; Wed,  5 Mar 2014 04:55:12 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20140305045512.C59B6529A1@arago-project.org>
+Date: Wed,  5 Mar 2014 04:55:12 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Sam Nelson : ti-ipc: Add recipe for ti-ipc version 3.0.x
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +22,117 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Mar 2014 02:19:22 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_364_1675546273.1393985128712"
+X-List-Received-Date: Wed, 05 Mar 2014 04:55:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
-------=_Part_364_1675546273.1393985128712
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Module: meta-ti
+Branch: master
+Commit: d2c9c3b981fc900b0e78fb98ff45d0fa7661910e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d2c9c3b981fc900b0e78fb98ff45d0fa7661910e
 
-<html>
-<head>
-<title>
-Status for 03/04/14
-</title>
-</head>
-<body>
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Wed Feb 12 05:41:49 2014 +0000
 
-<h2>Status for 03/04/14</h2>
+ti-ipc: Add recipe for ti-ipc version 3.0.x
 
-<h2>BUILD_ID: build-2014-03-04_21-01-47</h2>
+- Supports communication between processors in TI keystone architecture
 
-<h2>Clean Build: false</h2>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+---
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
+ recipes-ti/ipc/files/tiipclad-daemon.sh |   24 ++++++++++++++
+ recipes-ti/ipc/ti-ipc_3.00.00.bb        |   52 +++++++++++++++++++++++++++++++
+ 2 files changed, 76 insertions(+), 0 deletions(-)
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.01"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+diff --git a/recipes-ti/ipc/files/tiipclad-daemon.sh b/recipes-ti/ipc/files/tiipclad-daemon.sh
+new file mode 100755
+index 0000000..54b3888
+--- /dev/null
++++ b/recipes-ti/ipc/files/tiipclad-daemon.sh
+@@ -0,0 +1,24 @@
++#! /bin/sh
++
++tiipclad_daemon=/usr/bin/lad_tci6638
++tiipclad_params=lad.txt
++
++test -x "$tiipclad_daemon" || exit 0
++
++case "$1" in
++  start)
++    echo -n "Starting tiipclad daemon"
++    start-stop-daemon --start --quiet --exec $tiipclad_daemon $tiipclad_params
++    echo "."
++    ;;
++  stop)
++    echo -n "Stopping tiipclad daemon"
++    start-stop-daemon --stop --quiet --pidfile /var/run/tiipclad.pid
++    echo "."
++    ;;
++  *)
++    echo "Usage: /etc/init.d/tiipclad-daemon.sh {start|stop}"
++    exit 1
++esac
++
++exit 0
+diff --git a/recipes-ti/ipc/ti-ipc_3.00.00.bb b/recipes-ti/ipc/ti-ipc_3.00.00.bb
+new file mode 100644
+index 0000000..c07b7f9
+--- /dev/null
++++ b/recipes-ti/ipc/ti-ipc_3.00.00.bb
+@@ -0,0 +1,52 @@
++DESCRIPTION="This support the communication between processors \
++in a multi-processor environment and communication to peripherals. \
++This communication includes message passing, streams, and linked lists. \
++These modules work transparently in both uni-processor and multi-processor \
++configurations."
++
++HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
++
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://products.mak;beginline=2;endline=30;md5=195feadf798bb4165bcb1a23ffd50dbb"
++SECTION = "console"
++COMPATIBLE_MACHINE = "keystone"
++TARGET_PLATFORM = "tci6638"
++
++PR = "r0"
++
++BRANCH ?= "master"
++# The following commit corresponds to 3.00.04.29
++SRCREV = "12794ea33870b782bffe1fe4398e86e93fb64396"
++
++SRC_URI = " \
++    git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
++    file://tiipclad-daemon.sh"
++
++S = "${WORKDIR}/git"
++
++export PLATFORM = "${TARGET_PLATFORM}"
++
++export PARALLEL_MAKE = ""
++
++PACKAGES =+ "${PN}-test"
++
++FILES_${PN}-test = " \
++    ${bindir}/NameServerApp \
++    ${bindir}/MessageQApp \
++    ${bindir}/MessageQMulti \
++    ${bindir}/ping_rpmsg"
++
++DEPENDS += "virtual/kernel"
++
++EXTRA_OECONF += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR}"
++inherit autotools
++
++INITSCRIPT_NAME = "tiipclad-daemon.sh"
++INITSCRIPT_PARAMS = "defaults 10"
++
++inherit update-rc.d
++
++do_install_append() {
++	install -d ${D}${sysconfdir}/init.d/
++	install -c -m 755 ${WORKDIR}/tiipclad-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
++}
 
 
-------=_Part_364_1675546273.1393985128712--
