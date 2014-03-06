@@ -1,26 +1,15 @@
-Return-Path: <sam.nelson@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 862CCE00AE0
-	for <meta-ti@yoctoproject.org>; Thu,  6 Mar 2014 03:03:45 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s26B3igR019318
-	for <meta-ti@yoctoproject.org>; Thu, 6 Mar 2014 05:03:44 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s26B3hHi017856
-	for <meta-ti@yoctoproject.org>; Thu, 6 Mar 2014 05:03:44 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 6 Mar 2014 05:03:43 -0600
-Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s26B3hv8007650;	Thu, 6 Mar 2014 05:03:43 -0600
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 6 Mar 2014 06:03:42 -0500
-Message-ID: <1394103822-10926-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH] keystone-evm: Update NAND size to 256 MB
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 73956E00A43
+	for <meta-ti@yoctoproject.org>; Thu,  6 Mar 2014 11:04:19 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 5DC6952A14; Thu,  6 Mar 2014 19:04:16 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20140306190416.5DC6952A14@arago-project.org>
+Date: Thu,  6 Mar 2014 19:04:16 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update with musb, QSPI and touchscreen fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,41 +22,44 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Mar 2014 11:03:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 06 Mar 2014 19:04:20 -0000
+Content-Type: text/plain; charset=UTF-8
 
-- The keystone-evm actually has 256 MB Nand
-   ( Changing from previous size of 128 MB)
-- LEB calculated with reserved 10 MB for boot and 20 MB
-  for receovery image
+Module: meta-ti
+Branch: master
+Commit: 1ef46b34181ae94151cc35a583b08f73757c523b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1ef46b34181ae94151cc35a583b08f73757c523b
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Mar  6 12:57:59 2014 -0500
+
+linux-ti-staging: update with musb, QSPI and touchscreen fixes
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- conf/machine/keystone-evm.conf |    7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/conf/machine/keystone-evm.conf b/conf/machine/keystone-evm.conf
-index c878d52..4095d7e 100644
---- a/conf/machine/keystone-evm.conf
-+++ b/conf/machine/keystone-evm.conf
-@@ -15,13 +15,12 @@ SYSVINIT_ENABLED_GETTYS = ""
- # UBI: smallest flash I/O unit:    2048
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
--# UBI device number 0, total 857 LEBs
--# MKUBIFS_ARGS = "-m 2048 -e 129024 -c 857"
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 857"
-+# UBI device number 0, total 1764 LEBs
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 1764"
+ recipes-kernel/linux/linux-ti-staging_3.12.bb |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index 1b97ab2..1668c28 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -36,11 +36,12 @@ S = "${WORKDIR}/git"
  
- # do ubiattach /dev/ubi_ctrl -m 4
- # from dmesg:
- # UBI: smallest flash I/O unit:    2048
--# UBI: physical eraseblock size:   131072 bytes (128 KiB)
-+# UBI: physical eraseblock size:   262144 bytes (256 KiB)
- # UBI: sub-page size:              2048
- UBINIZE_ARGS = "-m 2048 -p 128KiB -s 2048 -O 2048"
--- 
-1.7.9.5
+ BRANCH = "ti-linux-3.12.y"
+ 
+-SRCREV = "83f0643caa2e8dabd42024bebfa4565eff347be7"
++# Corresponds to tag ti2013.12.01
++SRCREV = "2325bb5680986b6914d8fd0b5d0bdc20081fe8d3"
+ PV = "3.12.10"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "j+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "k+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
 
 
