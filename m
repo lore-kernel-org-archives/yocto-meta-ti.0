@@ -1,35 +1,22 @@
-Return-Path: <steve.jacot-guillarmod@swissdotnet.ch>
-Received: from emea01-am1-obe.outbound.protection.outlook.com
-	(mail-am1lp0013.outbound.protection.outlook.com [213.199.154.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1A454E009FC
-	for <meta-ti@yoctoproject.org>; Thu,  6 Mar 2014 22:44:06 -0800 (PST)
-Received: from AM3PR02MB033.eurprd02.prod.outlook.com (10.242.242.16) by
-	AM3PR02MB228.eurprd02.prod.outlook.com (10.242.248.26) with Microsoft
-	SMTP Server (TLS) id 15.0.893.10; Fri, 7 Mar 2014 06:44:03 +0000
-Received: from AM3PR02MB033.eurprd02.prod.outlook.com ([169.254.4.45]) by
-	AM3PR02MB033.eurprd02.prod.outlook.com ([169.254.4.190]) with mapi id
-	15.00.0888.003; Fri, 7 Mar 2014 06:44:03 +0000
-From: Steve Jacot-Guillarmod <steve.jacot-guillarmod@swissdotnet.ch>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: USB gadget with yocto>meta-ti
-Thread-Index: Ac850F6yvC8e9KSASWyjJ90397c2dw==
-Date: Fri, 7 Mar 2014 06:44:02 +0000
-Message-ID: <9afd2ebb07d84f29a8e935ac9b5c8f57@AM3PR02MB033.eurprd02.prod.outlook.com>
-Accept-Language: fr-CH, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [62.2.191.67]
-x-forefront-prvs: 014304E855
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009001)(6009001)(428001)(199002)(189002)(479174003)(65816001)(575784001)(93516002)(95666003)(86362001)(74876001)(92566001)(76482001)(2656002)(54356001)(54316002)(53806001)(87936001)(93136001)(77096001)(81542001)(19580395003)(80976001)(74482001)(51856001)(95416001)(74366001)(80022001)(56776001)(87266001)(85306002)(31966008)(74316001)(83072002)(74662001)(94946001)(4396001)(94316002)(69226001)(74706001)(85852003)(97336001)(63696002)(56816005)(33646001)(76176001)(47736001)(49866001)(77982001)(90146001)(97186001)(79102001)(59766001)(83322001)(76576001)(19580405001)(76786001)(47976001)(76796001)(81686001)(46102001)(47446002)(74502001)(66066001)(81816001)(50986001)(81342001)(24736002);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:AM3PR02MB228;
-	H:AM3PR02MB033.eurprd02.prod.outlook.com; CLIP:62.2.191.67;
-	FPR:8F5E616.AF2E5442.5470A1D5.1E2EC91.20285; PTR:InfoNoRecords;
-	A:1; MX:1; LANG:en; 
-received-spf: None (: swissdotnet.ch does not designate permitted sender hosts)
-MIME-Version: 1.0
-X-OriginatorOrg: swissdotnet.ch
-Subject: USB gadget with yocto>meta-ti
+Return-Path: <denis@denix.org>
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01334E00AD5
+	for <meta-ti@yoctoproject.org>; Fri,  7 Mar 2014 10:01:21 -0800 (PST)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173025.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N2200LG0VD68XG0@vms173025.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 07 Mar 2014 12:00:57 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 4C06B20086; Fri,
+	07 Mar 2014 13:00:42 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Fri, 07 Mar 2014 13:00:41 -0500
+Message-id: <1394215241-14051-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH] linux-mainline: add 3.14 mainline recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -42,56 +29,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Mar 2014 06:44:11 -0000
-Content-Language: fr-FR
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 07 Mar 2014 18:01:24 -0000
 
-Hello,
+From: Denys Dmytriyenko <denys@ti.com>
 
-I'm using Yocto (poky-dora-10.0.1) with [meta-ti] layer to create images fo=
-r the Ti's AM335x EVM Starter Kit or a BBB (using kernel linux-ti-staging 3=
-.12.10)
-I'm trying to get the USB gadget working, but without success!=20
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-kernel/linux/linux-mainline/defconfig |  1 +
+ recipes-kernel/linux/linux-mainline_3.14.bb   | 41 +++++++++++++++++++++++++++
+ 2 files changed, 42 insertions(+)
+ create mode 100644 recipes-kernel/linux/linux-mainline/defconfig
+ create mode 100644 recipes-kernel/linux/linux-mainline_3.14.bb
 
-1st test - [g_mass_storage]
-  modprobe g_mass_storage file=3D/dev/mmcblk0p1
+diff --git a/recipes-kernel/linux/linux-mainline/defconfig b/recipes-kernel/linux/linux-mainline/defconfig
+new file mode 100644
+index 0000000..926b35a
+--- /dev/null
++++ b/recipes-kernel/linux/linux-mainline/defconfig
+@@ -0,0 +1 @@
++use-kernel-config=omap2plus_defconfig
+diff --git a/recipes-kernel/linux/linux-mainline_3.14.bb b/recipes-kernel/linux/linux-mainline_3.14.bb
+new file mode 100644
+index 0000000..ec7d7a7
+--- /dev/null
++++ b/recipes-kernel/linux/linux-mainline_3.14.bb
+@@ -0,0 +1,41 @@
++SECTION = "kernel"
++DESCRIPTION = "Mainline Linux kernel"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
++
++inherit kernel
++
++require recipes-kernel/linux/linux-dtb.inc
++require recipes-kernel/linux/setup-defconfig.inc
++
++# Pull in the devicetree files into the rootfs
++RDEPENDS_kernel-base += "kernel-devicetree"
++
++# Add a run-time dependency for the PM firmware to be installed
++# on the target file system.
++RDEPENDS_kernel-base_append_ti33x = " am33x-cm3"
++
++# Default is to package all dtb files for ti33x devices unless building
++# for the specific beaglebone machine.
++KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
++KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
++
++KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
++
++COMPATIBLE_MACHINE = "ti33x"
++
++S = "${WORKDIR}/git"
++
++BRANCH = "master"
++
++# Corresponds to tag v3.14-rc5
++SRCREV = "0414855fdc4a40da05221fc6062cccbc0c30f169"
++PV = "3.13+3.14rc5"
++
++# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++PR = "${MACHINE_KERNEL_PR}"
++
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git;protocol=git;branch=${BRANCH} \
++           file://defconfig \
++          "
+-- 
+1.8.3.2
 
-[  246.227255] Number of LUNs=3D8
-[  246.231310] Mass Storage Function, version: 2009/09/11
-[  246.236803] LUN: removable file: (no medium)
-[  246.241963] Number of LUNs=3D1
-[  246.245323] LUN: file: /dev/mmcblk0p2
-[  246.249218] Number of LUNs=3D1
-[  246.253638] g_mass_storage gadget: Mass Storage Gadget, version: 2009/09=
-/11
-[  246.261122] g_mass_storage gadget: userspace failed to provide iSerialNu=
-mber
-[  246.268614] g_mass_storage gadget: g_mass_storage ready
-
-My host PC detect the drive, but my OS (Win7) doesn't see the partition (di=
-sk manager says Drive 4 49MB "not allocated")... very strange!
-
-Now more important for us, the g_ether and g_serial (or g_multi)
-
-root@am335x-evm:~# modprobe g_ether
-[  857.663478] g_ether musb-hdrc.0.auto: failed to start g_ether: -2
-modprobe: can't load module g_ether (kernel/drivers/usb/gadget/g_ether.ko):=
- unknown symbol in module, or unknown parameter
-
-[  879.223249] g_serial musb-hdrc.0.auto: failed to start g_serial: -2
-modprobe: can't load module g_serial (kernel/drivers/usb/gadget/g_serial.ko=
-): unknown symbol in module, or unknown parameter
-
-[  892.214224] g_multi musb-hdrc.0.auto: failed to start g_multi: -2
-modprobe: can't load module g_multi (kernel/drivers/usb/gadget/g_multi.ko):=
- unknown symbol in module, or unknown parameter
-
-Your help will be very welcome, this is an important feature for us. My goa=
-l is to get an ethernet and storage gadget working (and if possible also a =
-serial...)
-
-Best regards
-
-Steve Jacot-Guillarmod
 
