@@ -1,28 +1,35 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CAF59E009F5
-	for <meta-ti@yoctoproject.org>; Thu,  6 Mar 2014 18:30:22 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s272ULoe004414
-	for <meta-ti@yoctoproject.org>; Thu, 6 Mar 2014 20:30:22 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s272ULvR027340
-	for <meta-ti@yoctoproject.org>; Thu, 6 Mar 2014 20:30:21 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 6 Mar 2014 20:30:21 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s272ULDD010572	for <meta-ti@yoctoproject.org>;
-	Thu, 6 Mar 2014 20:30:21 -0600
-Date: Thu, 6 Mar 2014 21:16:29 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <709235109.375.1394158589248.JavaMail.jenkins@puget>
+Return-Path: <steve.jacot-guillarmod@swissdotnet.ch>
+Received: from emea01-am1-obe.outbound.protection.outlook.com
+	(mail-am1lp0013.outbound.protection.outlook.com [213.199.154.13])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1A454E009FC
+	for <meta-ti@yoctoproject.org>; Thu,  6 Mar 2014 22:44:06 -0800 (PST)
+Received: from AM3PR02MB033.eurprd02.prod.outlook.com (10.242.242.16) by
+	AM3PR02MB228.eurprd02.prod.outlook.com (10.242.248.26) with Microsoft
+	SMTP Server (TLS) id 15.0.893.10; Fri, 7 Mar 2014 06:44:03 +0000
+Received: from AM3PR02MB033.eurprd02.prod.outlook.com ([169.254.4.45]) by
+	AM3PR02MB033.eurprd02.prod.outlook.com ([169.254.4.190]) with mapi id
+	15.00.0888.003; Fri, 7 Mar 2014 06:44:03 +0000
+From: Steve Jacot-Guillarmod <steve.jacot-guillarmod@swissdotnet.ch>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: USB gadget with yocto>meta-ti
+Thread-Index: Ac850F6yvC8e9KSASWyjJ90397c2dw==
+Date: Fri, 7 Mar 2014 06:44:02 +0000
+Message-ID: <9afd2ebb07d84f29a8e935ac9b5c8f57@AM3PR02MB033.eurprd02.prod.outlook.com>
+Accept-Language: fr-CH, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [62.2.191.67]
+x-forefront-prvs: 014304E855
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009001)(6009001)(428001)(199002)(189002)(479174003)(65816001)(575784001)(93516002)(95666003)(86362001)(74876001)(92566001)(76482001)(2656002)(54356001)(54316002)(53806001)(87936001)(93136001)(77096001)(81542001)(19580395003)(80976001)(74482001)(51856001)(95416001)(74366001)(80022001)(56776001)(87266001)(85306002)(31966008)(74316001)(83072002)(74662001)(94946001)(4396001)(94316002)(69226001)(74706001)(85852003)(97336001)(63696002)(56816005)(33646001)(76176001)(47736001)(49866001)(77982001)(90146001)(97186001)(79102001)(59766001)(83322001)(76576001)(19580405001)(76786001)(47976001)(76796001)(81686001)(46102001)(47446002)(74502001)(66066001)(81816001)(50986001)(81342001)(24736002);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:AM3PR02MB228;
+	H:AM3PR02MB033.eurprd02.prod.outlook.com; CLIP:62.2.191.67;
+	FPR:8F5E616.AF2E5442.5470A1D5.1E2EC91.20285; PTR:InfoNoRecords;
+	A:1; MX:1; LANG:en; 
+received-spf: None (: swissdotnet.ch does not designate permitted sender hosts)
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-03-06_21-00-24
+X-OriginatorOrg: swissdotnet.ch
+Subject: USB gadget with yocto>meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +42,56 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Mar 2014 02:30:24 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_374_506023947.1394158589246"
+X-List-Received-Date: Fri, 07 Mar 2014 06:44:11 -0000
+Content-Language: fr-FR
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_374_506023947.1394158589246
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Hello,
 
-<html>
-<head>
-<title>
-Status for 03/06/14
-</title>
-</head>
-<body>
+I'm using Yocto (poky-dora-10.0.1) with [meta-ti] layer to create images fo=
+r the Ti's AM335x EVM Starter Kit or a BBB (using kernel linux-ti-staging 3=
+.12.10)
+I'm trying to get the USB gadget working, but without success!=20
 
-<h2>Status for 03/06/14</h2>
+1st test - [g_mass_storage]
+  modprobe g_mass_storage file=3D/dev/mmcblk0p1
 
-<h2>BUILD_ID: build-2014-03-06_21-01-33</h2>
+[  246.227255] Number of LUNs=3D8
+[  246.231310] Mass Storage Function, version: 2009/09/11
+[  246.236803] LUN: removable file: (no medium)
+[  246.241963] Number of LUNs=3D1
+[  246.245323] LUN: file: /dev/mmcblk0p2
+[  246.249218] Number of LUNs=3D1
+[  246.253638] g_mass_storage gadget: Mass Storage Gadget, version: 2009/09=
+/11
+[  246.261122] g_mass_storage gadget: userspace failed to provide iSerialNu=
+mber
+[  246.268614] g_mass_storage gadget: g_mass_storage ready
 
-<h2>Clean Build: false</h2>
+My host PC detect the drive, but my OS (Win7) doesn't see the partition (di=
+sk manager says Drive 4 49MB "not allocated")... very strange!
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+Now more important for us, the g_ether and g_serial (or g_multi)
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
+root@am335x-evm:~# modprobe g_ether
+[  857.663478] g_ether musb-hdrc.0.auto: failed to start g_ether: -2
+modprobe: can't load module g_ether (kernel/drivers/usb/gadget/g_ether.ko):=
+ unknown symbol in module, or unknown parameter
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+[  879.223249] g_serial musb-hdrc.0.auto: failed to start g_serial: -2
+modprobe: can't load module g_serial (kernel/drivers/usb/gadget/g_serial.ko=
+): unknown symbol in module, or unknown parameter
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.01"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+[  892.214224] g_multi musb-hdrc.0.auto: failed to start g_multi: -2
+modprobe: can't load module g_multi (kernel/drivers/usb/gadget/g_multi.ko):=
+ unknown symbol in module, or unknown parameter
 
-</body>
-</html>
+Your help will be very welcome, this is an important feature for us. My goa=
+l is to get an ethernet and storage gadget working (and if possible also a =
+serial...)
 
+Best regards
 
-------=_Part_374_506023947.1394158589246--
+Steve Jacot-Guillarmod
+
