@@ -1,34 +1,26 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-la0-f52.google.com (mail-la0-f52.google.com
-	[209.85.215.52])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93571E00B2B
-	for <meta-ti@yoctoproject.org>; Fri,  7 Mar 2014 13:16:07 -0800 (PST)
-Received: by mail-la0-f52.google.com with SMTP id ec20so3217629lab.11
-	for <meta-ti@yoctoproject.org>; Fri, 07 Mar 2014 13:16:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=dTXdZeQA6Fx+Y825l2nE6wsoDYb4HXL6H/hNEoFdbrY=;
-	b=BOIDLvYnJLrfC4h10JuteML9jvKfVSkIskdxzQGafjXspSAzzy9bsi58gAhqG1Q8yk
-	XjgOFw+5n8nhywlMniKqBMzHtRP0tkLUDGyWJLFCADUrkzCYc7bO0/wXu9mXqnqyL3Nu
-	LGZe8TaSTBvlvgEjWlFQcZfbm+u7UPT+vxf26bRsqT5w0+W8hFVcfDh3uwOnyYfwfroD
-	dsQojrf1bt96dX6PwqmPCz+qpOgtc20fo9LVnfqdBtzcj5wcJrkYwroIVUO/ID5RFMD2
-	kU4e2NMWkoVAxnGK8Tj9Wjw3J3Ah8rHiZKtzFzfg7HaKnjOM+kpXaaqYjz5KysarkMnI
-	B9wQ==
-X-Received: by 10.112.94.229 with SMTP id df5mr1690439lbb.36.1394226966218;
-	Fri, 07 Mar 2014 13:16:06 -0800 (PST)
+Return-Path: <sam.nelson@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 80568E00B26
+	for <meta-ti@yoctoproject.org>; Fri,  7 Mar 2014 13:53:24 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s27LrO7h017719
+	for <meta-ti@yoctoproject.org>; Fri, 7 Mar 2014 15:53:24 -0600
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s27LrNxh016720
+	for <meta-ti@yoctoproject.org>; Fri, 7 Mar 2014 15:53:24 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 7 Mar 2014 15:53:23 -0600
+Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s27LrNh5030325;	Fri, 7 Mar 2014 15:53:23 -0600
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 7 Mar 2014 16:53:22 -0500
+Message-ID: <1394229202-23032-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Received: by 10.114.185.231 with HTTP; Fri, 7 Mar 2014 13:15:36 -0800 (PST)
-In-Reply-To: <20140307211246.GS22125@edge>
-References: <1394215241-14051-1-git-send-email-denis@denix.org>
-	<CAMKF1sqiidoFYkyVyFBjcQ=qy2TKfgHaLL2b46TykWkyhf0wFA@mail.gmail.com>
-	<20140307211246.GS22125@edge>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 7 Mar 2014 13:15:36 -0800
-Message-ID: <CAMKF1sqP28BYxuPSPNzDiTVQp6ZKONZkVmO9am_sXeXOoA2fVg@mail.gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] linux-mainline: add 3.14 mainline recipe
+Subject: [PATCH v2] keystone-evm: Update NAND size to 512 MB
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,22 +33,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Mar 2014 21:16:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 07 Mar 2014 21:53:25 -0000
+Content-Type: text/plain
 
-On Fri, Mar 7, 2014 at 1:12 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> On Fri, Mar 07, 2014 at 01:03:23PM -0800, Khem Raj wrote:
->> On Fri, Mar 7, 2014 at 10:00 AM, Denys Dmytriyenko <denis@denix.org> wrote:
->> > +# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
->> > +MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
->> > +PR = "${MACHINE_KERNEL_PR}"
->>
->> is it possible to get rid of MACHINE_KERNEL_PR
->
-> What's wrong with MACHINE_KERNEL_PR the way it's used above?
+- The keystone-evm actually has 512 MB Nand
+   ( Changing from previous size of 128 MB)
+- LEB calculated with reserved 10 MB for boot and 20 MB
+  for receovery image
 
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 
-Nothing is wrong, but since you have a new recipe newer version may be
-you want to get rid of
-additional variables ?
+---
+* Corrected actual size from 256 MB to 512 MB
+* Reverted back Erase block size
+---
+---
+ conf/machine/keystone-evm.conf |    5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/conf/machine/keystone-evm.conf b/conf/machine/keystone-evm.conf
+index c878d52..088e524 100644
+--- a/conf/machine/keystone-evm.conf
++++ b/conf/machine/keystone-evm.conf
+@@ -15,9 +15,8 @@ SYSVINIT_ENABLED_GETTYS = ""
+ # UBI: smallest flash I/O unit:    2048
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+-# UBI device number 0, total 857 LEBs
+-# MKUBIFS_ARGS = "-m 2048 -e 129024 -c 857"
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 857"
++# UBI device number 0, total 3856 LEBs
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3856"
+ 
+ # do ubiattach /dev/ubi_ctrl -m 4
+ # from dmesg:
+-- 
+1.7.9.5
+
 
