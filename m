@@ -1,15 +1,26 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9BA40E00A55
-	for <meta-ti@yoctoproject.org>; Thu,  6 Mar 2014 11:04:30 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 0504A52A0A; Thu,  6 Mar 2014 19:04:29 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20140306190430.0504A52A0A@arago-project.org>
-Date: Thu,  6 Mar 2014 19:04:29 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update with QSPI fixes
+Return-Path: <sam.nelson@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E9D9DE009DA
+	for <meta-ti@yoctoproject.org>; Thu,  6 Mar 2014 17:48:13 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s271mCxW016869
+	for <meta-ti@yoctoproject.org>; Thu, 6 Mar 2014 19:48:12 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s271mCSd005039
+	for <meta-ti@yoctoproject.org>; Thu, 6 Mar 2014 19:48:12 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 6 Mar 2014 19:48:12 -0600
+Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s271mCXP012899;	Thu, 6 Mar 2014 19:48:12 -0600
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 6 Mar 2014 20:48:09 -0500
+Message-ID: <1394156889-17171-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [PATCH] uio-module-drv:User space IO driver for on chip modules
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,46 +33,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Mar 2014 19:04:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 07 Mar 2014 01:48:15 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: dora
-Commit: d343e3021c8c85b0defd635ae68b71ba60648e1d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d343e3021c8c85b0defd635ae68b71ba60648e1d
+- Provides user space access for peripheral module on chip
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Mar  6 13:00:58 2014 -0500
-
-u-boot-ti-staging: update with QSPI fixes
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
+ recipes-bsp/uio-module-drv/uio-module-drv_git.bb |   21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 recipes-bsp/uio-module-drv/uio-module-drv_git.bb
 
- recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-index 9a95cc3..b8f5ce6 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-@@ -5,13 +5,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
- 
- PV = "2013.10"
--PR = "r6+gitr${SRCPV}"
-+PR = "r7+gitr${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2013.10"
- 
--SRCREV = "f2dcae2f9e9434392673fea7584641afa98f4232"
-+# Corresponds to tag ti2013.12.01
-+SRCREV = "78d8ebd4a0214b72a125f5b98c5ed2f9a3e5e783"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+diff --git a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
+new file mode 100644
+index 0000000..2b02a8f
+--- /dev/null
++++ b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION="User space IO (UIO) driver for on-chip modules"
++
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
++
++BRANCH ?= "master"
++# This corresponds to version 0.0.0.0
++SRCREV = "489c4b9b6693314f841e83c24306b2327df6a77c"
++
++SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
++
++# This package builds a kernel module, use kernel PR as base and append a local
++PR = "${MACHINE_KERNEL_PR}"
++PR_append = "a"
++
++S = "${WORKDIR}/git"
++
++module_auto_load_uio-module-drv = "uio-module-drv"
++
++inherit module
++
+-- 
+1.7.9.5
 
 
