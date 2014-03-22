@@ -1,28 +1,29 @@
 Return-Path: <denys@ti.com>
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1A6E4E00B86
-	for <meta-ti@yoctoproject.org>; Fri, 21 Mar 2014 12:45:24 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s2LJjNXX028348
-	for <meta-ti@yoctoproject.org>; Fri, 21 Mar 2014 14:45:23 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s2LJjN2L006650
-	for <meta-ti@yoctoproject.org>; Fri, 21 Mar 2014 14:45:23 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 21 Mar 2014 14:45:23 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 15616E00B8F
+	for <meta-ti@yoctoproject.org>; Fri, 21 Mar 2014 18:57:55 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s2M1vrx3008871
+	for <meta-ti@yoctoproject.org>; Fri, 21 Mar 2014 20:57:53 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s2M1vrxP005040
+	for <meta-ti@yoctoproject.org>; Fri, 21 Mar 2014 20:57:53 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 21 Mar 2014 20:57:53 -0500
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s2LJjNIH022126	for <meta-ti@yoctoproject.org>; Fri, 21 Mar 2014 14:45:23
-	-0500
-Date: Fri, 21 Mar 2014 15:31:07 -0400
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s2M1vrGb004636;	Fri, 21 Mar 2014 20:57:53 -0500
+Date: Fri, 21 Mar 2014 21:43:37 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1356098975.427.1395430267871.JavaMail.jenkins@puget>
+To: <meta-ti@yoctoproject.org>, <denys@ti.com>
+Message-ID: <208886068.431.1395452617362.JavaMail.jenkins@puget>
+In-Reply-To: <1356098975.427.1395430267871.JavaMail.jenkins@puget>
+References: <1356098975.427.1395430267871.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: FAILURE
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-03-21_15-31-04
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-03-21_21-00-24
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,24 +36,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Mar 2014 19:45:27 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_426_17074518.1395430267859"
+X-List-Received-Date: Sat, 22 Mar 2014 01:57:58 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_430_27096952.1395452617286"
 
-------=_Part_426_17074518.1395430267859
+------=_Part_430_27096952.1395452617286
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 03/16/14
+Status for 03/21/14
 </title>
 </head>
 <body>
 
-<h2>Status for 03/16/14</h2>
+<h2>Status for 03/21/14</h2>
 
-<h2>BUILD_ID: build-2014-03-16_21-01-33</h2>
+<h2>BUILD_ID: build-2014-03-21_21-01-39</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -98,8 +99,8 @@ Status for 03/16/14
     </tr>
     <tr>
         <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>am37x-evm</td>
@@ -108,8 +109,8 @@ Status for 03/16/14
     </tr>
     <tr>
         <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>am180x-evm</td>
@@ -123,8 +124,8 @@ Status for 03/16/14
     </tr>
     <tr>
         <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>keystone-evm</td>
@@ -133,8 +134,8 @@ Status for 03/16/14
     </tr>
     <tr>
         <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
         <td>beaglebone</td>
@@ -143,8 +144,8 @@ Status for 03/16/14
     </tr>
     <tr>
         <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
 </table>
 
@@ -160,7 +161,7 @@ The configuration file passed to this script had the contents:
 </p>
 <p>
 MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.01"<br>
+TISDK_VERSION="2014.03"<br>
 MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
 NUM_ARM9_BUILDS="1"<br>
 NUM_CORTEX_BUILDS="2"<br>
@@ -199,4 +200,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_426_17074518.1395430267859--
+------=_Part_430_27096952.1395452617286--
