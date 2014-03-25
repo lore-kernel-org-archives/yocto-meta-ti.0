@@ -1,28 +1,15 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4C668E008FA
-	for <meta-ti@yoctoproject.org>; Mon, 24 Mar 2014 18:17:44 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s2P1Hhcj005121
-	for <meta-ti@yoctoproject.org>; Mon, 24 Mar 2014 20:17:43 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s2P1Hh7l014868
-	for <meta-ti@yoctoproject.org>; Mon, 24 Mar 2014 20:17:43 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Mon, 24 Mar 2014 20:17:43 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s2P1HhBP017213	for <meta-ti@yoctoproject.org>; Mon, 24 Mar 2014 20:17:43
-	-0500
-Date: Mon, 24 Mar 2014 21:03:22 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <903399509.443.1395709402894.JavaMail.jenkins@puget>
-MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-03-24_21-00-24
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 75390E00939
+	for <meta-ti@yoctoproject.org>; Tue, 25 Mar 2014 14:13:05 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 86A8B52A32; Tue, 25 Mar 2014 21:13:04 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20140325211304.86A8B52A32@arago-project.org>
+Date: Tue, 25 Mar 2014 21:13:04 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Samuli Piippo : libgles-omap3: create ESx.0 folders only if they exist
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +22,61 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Mar 2014 01:17:47 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_442_623714588.1395709402893"
+X-List-Received-Date: Tue, 25 Mar 2014 21:13:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-------=_Part_442_623714588.1395709402893
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Module: meta-ti
+Branch: master
+Commit: b7d07640adff0f4dd472fa139292a5fd7d58dca4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b7d07640adff0f4dd472fa139292a5fd7d58dca4
 
-<html>
-<head>
-<title>
-Status for 03/24/14
-</title>
-</head>
-<body>
+Author: Samuli Piippo <samuli.piippo@digia.com>
+Date:   Wed Mar  5 19:00:24 2014 +0000
 
-<h2>Status for 03/24/14</h2>
+libgles-omap3: create ESx.0 folders only if they exist
 
-<h2>BUILD_ID: build-2014-03-24_21-01-34</h2>
+Instead of creating all folders, only create those that exist
+in the Graphics SDK. This fixes QA issue with unshipped ES9.0
+folder which does not exists in 4.09.00.01.
 
-<h2>Clean Build: false</h2>
+Signed-off-by: Samuli Piippo <samuli.piippo@digia.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+---
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+ recipes-graphics/libgles/libgles-omap3-no-x.inc |   14 ++------------
+ 1 files changed, 2 insertions(+), 12 deletions(-)
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
+index 60bcad5..7bb6cfb 100644
+--- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
++++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
+@@ -158,24 +158,14 @@ do_install () {
+ 
+ 	#Create different folders for ease of installing into different platforms with different display drivers/ SGX core
+ 
+-	install -d ${D}${libdir}/ES9.0
+-	install -d ${D}${libdir}/ES8.0
+-	install -d ${D}${libdir}/ES6.0
+-	install -d ${D}${libdir}/ES5.0
+-	install -d ${D}${libdir}/ES3.0
+-
+-	install -d ${D}${bindir}/ES9.0
+-	install -d ${D}${bindir}/ES8.0
+-	install -d ${D}${bindir}/ES6.0
+-	install -d ${D}${bindir}/ES5.0
+-	install -d ${D}${bindir}/ES3.0
+-
+ 	shared_prog="eglinfo pvr2d_test ${PVR_INIT} services_test sgx_blit_test sgx_clipblit_test sgx_flip_test sgx_init_test sgx_render_flip_test"
+ 	raw_prog="gles1test1 gles2test1"
+ 
+ 	for esrev in 3 5 6 8 9 ; do
+ 		ESLOCATION=$(eval echo $(echo \$\{ES${esrev}LOCATION\}))
+ 		if [ -e ${ESLOCATION} ] ; then
++			install -d ${D}${libdir}/ES${esrev}.0
++			install -d ${D}${bindir}/ES${esrev}.0
+ 			cp -pPR ${ESLOCATION}/lib*${IMGPV} ${ESLOCATION}/pvr_drv.so ${ESLOCATION}/*.a ${D}${libdir}/ES${esrev}.0/
+ 			for esprog in $shared_prog $raw_prog ; do
+ 				install -m 0755 ${ESLOCATION}/$esprog ${D}${bindir}/ES${esrev}.0/ 2>/dev/null || true
 
 
-------=_Part_442_623714588.1395709402893--
