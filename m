@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 75390E00939
-	for <meta-ti@yoctoproject.org>; Tue, 25 Mar 2014 14:13:05 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D52F0E00975
+	for <meta-ti@yoctoproject.org>; Tue, 25 Mar 2014 14:13:10 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 86A8B52A32; Tue, 25 Mar 2014 21:13:04 +0000 (UTC)
+	id 6066D52A32; Tue, 25 Mar 2014 21:13:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140325211304.86A8B52A32@arago-project.org>
-Date: Tue, 25 Mar 2014 21:13:04 +0000 (UTC)
+Message-Id: <20140325211310.6066D52A32@arago-project.org>
+Date: Tue, 25 Mar 2014 21:13:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Samuli Piippo : libgles-omap3: create ESx.0 folders only if they exist
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Mar 2014 21:13:06 -0000
+X-List-Received-Date: Tue, 25 Mar 2014 21:13:13 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: b7d07640adff0f4dd472fa139292a5fd7d58dca4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b7d07640adff0f4dd472fa139292a5fd7d58dca4
+Branch: dora
+Commit: 2c7119bfabe079a1b809f92a124ffd6df4bb2163
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2c7119bfabe079a1b809f92a124ffd6df4bb2163
 
 Author: Samuli Piippo <samuli.piippo@digia.com>
 Date:   Wed Mar  5 19:00:24 2014 +0000
