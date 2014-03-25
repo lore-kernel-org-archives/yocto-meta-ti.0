@@ -1,15 +1,22 @@
-Return-Path: <git@arago-project.org>
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D52F0E00975
-	for <meta-ti@yoctoproject.org>; Tue, 25 Mar 2014 14:13:10 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 6066D52A32; Tue, 25 Mar 2014 21:13:10 +0000 (UTC)
+Return-Path: <denis@denix.org>
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4B022E00939
+	for <meta-ti@yoctoproject.org>; Tue, 25 Mar 2014 14:19:21 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173021.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N3000M4KGJCDA50@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 25 Mar 2014 16:19:03 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 0ABF5201B7; Tue,
+	25 Mar 2014 17:18:48 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20140325211310.6066D52A32@arago-project.org>
-Date: Tue, 25 Mar 2014 21:13:10 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Samuli Piippo : libgles-omap3: create ESx.0 folders only if they exist
+Date: Tue, 25 Mar 2014 17:18:47 -0400
+Message-id: <1395782327-31514-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH v2] linux-mainline: add 3.14 mainline recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -22,61 +29,75 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Mar 2014 21:13:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 25 Mar 2014 21:19:22 -0000
 
-Module: meta-ti
-Branch: dora
-Commit: 2c7119bfabe079a1b809f92a124ffd6df4bb2163
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2c7119bfabe079a1b809f92a124ffd6df4bb2163
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Samuli Piippo <samuli.piippo@digia.com>
-Date:   Wed Mar  5 19:00:24 2014 +0000
-
-libgles-omap3: create ESx.0 folders only if they exist
-
-Instead of creating all folders, only create those that exist
-in the Graphics SDK. This fixes QA issue with unshipped ES9.0
-folder which does not exists in 4.09.00.01.
-
-Signed-off-by: Samuli Piippo <samuli.piippo@digia.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+v2 - update to rc8, drop MACHINE_KERNEL_PR
 
- recipes-graphics/libgles/libgles-omap3-no-x.inc |   14 ++------------
- 1 files changed, 2 insertions(+), 12 deletions(-)
+ recipes-kernel/linux/linux-mainline/defconfig |  1 +
+ recipes-kernel/linux/linux-mainline_3.14.bb   | 41 +++++++++++++++++++++++++++
+ 2 files changed, 42 insertions(+)
+ create mode 100644 recipes-kernel/linux/linux-mainline/defconfig
+ create mode 100644 recipes-kernel/linux/linux-mainline_3.14.bb
 
-diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-index 60bcad5..7bb6cfb 100644
---- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
-+++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-@@ -158,24 +158,14 @@ do_install () {
- 
- 	#Create different folders for ease of installing into different platforms with different display drivers/ SGX core
- 
--	install -d ${D}${libdir}/ES9.0
--	install -d ${D}${libdir}/ES8.0
--	install -d ${D}${libdir}/ES6.0
--	install -d ${D}${libdir}/ES5.0
--	install -d ${D}${libdir}/ES3.0
--
--	install -d ${D}${bindir}/ES9.0
--	install -d ${D}${bindir}/ES8.0
--	install -d ${D}${bindir}/ES6.0
--	install -d ${D}${bindir}/ES5.0
--	install -d ${D}${bindir}/ES3.0
--
- 	shared_prog="eglinfo pvr2d_test ${PVR_INIT} services_test sgx_blit_test sgx_clipblit_test sgx_flip_test sgx_init_test sgx_render_flip_test"
- 	raw_prog="gles1test1 gles2test1"
- 
- 	for esrev in 3 5 6 8 9 ; do
- 		ESLOCATION=$(eval echo $(echo \$\{ES${esrev}LOCATION\}))
- 		if [ -e ${ESLOCATION} ] ; then
-+			install -d ${D}${libdir}/ES${esrev}.0
-+			install -d ${D}${bindir}/ES${esrev}.0
- 			cp -pPR ${ESLOCATION}/lib*${IMGPV} ${ESLOCATION}/pvr_drv.so ${ESLOCATION}/*.a ${D}${libdir}/ES${esrev}.0/
- 			for esprog in $shared_prog $raw_prog ; do
- 				install -m 0755 ${ESLOCATION}/$esprog ${D}${bindir}/ES${esrev}.0/ 2>/dev/null || true
+diff --git a/recipes-kernel/linux/linux-mainline/defconfig b/recipes-kernel/linux/linux-mainline/defconfig
+new file mode 100644
+index 0000000..926b35a
+--- /dev/null
++++ b/recipes-kernel/linux/linux-mainline/defconfig
+@@ -0,0 +1 @@
++use-kernel-config=omap2plus_defconfig
+diff --git a/recipes-kernel/linux/linux-mainline_3.14.bb b/recipes-kernel/linux/linux-mainline_3.14.bb
+new file mode 100644
+index 0000000..ec7d7a7
+--- /dev/null
++++ b/recipes-kernel/linux/linux-mainline_3.14.bb
+@@ -0,0 +1,41 @@
++SECTION = "kernel"
++DESCRIPTION = "Mainline Linux kernel"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
++
++inherit kernel
++
++require recipes-kernel/linux/linux-dtb.inc
++require recipes-kernel/linux/setup-defconfig.inc
++
++# Pull in the devicetree files into the rootfs
++RDEPENDS_kernel-base += "kernel-devicetree"
++
++# Add a run-time dependency for the PM firmware to be installed
++# on the target file system.
++RDEPENDS_kernel-base_append_ti33x = " am33x-cm3"
++
++# Default is to package all dtb files for ti33x devices unless building
++# for the specific beaglebone machine.
++KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
++KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
++
++KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
++
++COMPATIBLE_MACHINE = "ti33x"
++
++S = "${WORKDIR}/git"
++
++BRANCH = "master"
++
++# Corresponds to tag v3.14-rc5
++SRCREV = "0414855fdc4a40da05221fc6062cccbc0c30f169"
++PV = "3.13+3.14rc5"
++
++# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++PR = "${MACHINE_KERNEL_PR}"
++
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git;protocol=git;branch=${BRANCH} \
++           file://defconfig \
++          "
+-- 
+1.8.3.2
 
 
