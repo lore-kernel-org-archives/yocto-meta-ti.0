@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8113EE00939
-	for <meta-ti@yoctoproject.org>; Tue, 25 Mar 2014 14:21:55 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1843FE00939
+	for <meta-ti@yoctoproject.org>; Tue, 25 Mar 2014 14:22:05 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1EFAF52A32; Tue, 25 Mar 2014 21:21:55 +0000 (UTC)
+	id B950352A32; Tue, 25 Mar 2014 21:22:04 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140325212155.1EFAF52A32@arago-project.org>
-Date: Tue, 25 Mar 2014 21:21:55 +0000 (UTC)
+Message-Id: <20140325212204.B950352A32@arago-project.org>
+Date: Tue, 25 Mar 2014 21:22:04 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : keystone-evm: Update NAND size to 512 MB
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Mar 2014 21:21:55 -0000
+X-List-Received-Date: Tue, 25 Mar 2014 21:22:05 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dora
-Commit: 6534ddcc6c43d2faecf14f20bd4d1ec496c60778
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6534ddcc6c43d2faecf14f20bd4d1ec496c60778
+Branch: dylan
+Commit: 14858daa694a559b89881741ad9033acd925143c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=14858daa694a559b89881741ad9033acd925143c
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Sat Mar  8 03:53:22 2014 +0000
