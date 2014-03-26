@@ -1,28 +1,22 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC87AE00B68
-	for <meta-ti@yoctoproject.org>; Tue, 25 Mar 2014 20:10:42 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s2Q3AfxI008678
-	for <meta-ti@yoctoproject.org>; Tue, 25 Mar 2014 22:10:41 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s2Q3Af7q009955
-	for <meta-ti@yoctoproject.org>; Tue, 25 Mar 2014 22:10:41 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 25 Mar 2014 22:10:41 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s2Q3Af8r001789	for <meta-ti@yoctoproject.org>; Tue, 25 Mar 2014 22:10:41
-	-0500
-Date: Tue, 25 Mar 2014 22:56:18 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1112567650.449.1395802578877.JavaMail.jenkins@puget>
-MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-03-25_21-00-24
+Return-Path: <denis@denix.org>
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3D658E00B88
+	for <meta-ti@yoctoproject.org>; Wed, 26 Mar 2014 11:12:01 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173025.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N3200JKO2J2KO70@vms173025.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 26 Mar 2014 13:11:42 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 55CA3201CF; Wed,
+	26 Mar 2014 14:11:26 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Wed, 26 Mar 2014 14:11:23 -0400
+Message-id: <1395857483-29006-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH v3] linux-mainline: add 3.14 mainline recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +29,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2014 03:10:46 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_448_1797195815.1395802578847"
+X-List-Received-Date: Wed, 26 Mar 2014 18:12:05 -0000
 
-------=_Part_448_1797195815.1395802578847
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+From: Denys Dmytriyenko <denys@ti.com>
 
-<html>
-<head>
-<title>
-Status for 03/25/14
-</title>
-</head>
-<body>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+v2,v3 - update to rc8, drop MACHINE_KERNEL_PR
 
-<h2>Status for 03/25/14</h2>
+ recipes-kernel/linux/linux-mainline/defconfig |  1 +
+ recipes-kernel/linux/linux-mainline_3.14.bb   | 37 +++++++++++++++++++++++++++
+ 2 files changed, 38 insertions(+)
+ create mode 100644 recipes-kernel/linux/linux-mainline/defconfig
+ create mode 100644 recipes-kernel/linux/linux-mainline_3.14.bb
 
-<h2>BUILD_ID: build-2014-03-25_21-01-39</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+diff --git a/recipes-kernel/linux/linux-mainline/defconfig b/recipes-kernel/linux/linux-mainline/defconfig
+new file mode 100644
+index 0000000..926b35a
+--- /dev/null
++++ b/recipes-kernel/linux/linux-mainline/defconfig
+@@ -0,0 +1 @@
++use-kernel-config=omap2plus_defconfig
+diff --git a/recipes-kernel/linux/linux-mainline_3.14.bb b/recipes-kernel/linux/linux-mainline_3.14.bb
+new file mode 100644
+index 0000000..559a79b
+--- /dev/null
++++ b/recipes-kernel/linux/linux-mainline_3.14.bb
+@@ -0,0 +1,37 @@
++SECTION = "kernel"
++DESCRIPTION = "Mainline Linux kernel"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
++
++inherit kernel
++
++require recipes-kernel/linux/linux-dtb.inc
++require recipes-kernel/linux/setup-defconfig.inc
++
++# Pull in the devicetree files into the rootfs
++RDEPENDS_kernel-base += "kernel-devicetree"
++
++# Add a run-time dependency for the PM firmware to be installed
++# on the target file system.
++RDEPENDS_kernel-base_append_ti33x = " am33x-cm3"
++
++# Default is to package all dtb files for ti33x devices unless building
++# for the specific beaglebone machine.
++KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
++KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
++
++KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
++
++COMPATIBLE_MACHINE = "ti33x"
++
++S = "${WORKDIR}/git"
++
++BRANCH = "master"
++
++# Corresponds to tag v3.14-rc8
++SRCREV = "b098d6726bbfb94c06d6e1097466187afddae61f"
++PV = "3.13+3.14rc8"
++
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git;protocol=git;branch=${BRANCH} \
++           file://defconfig \
++          "
+-- 
+1.8.3.2
 
 
-------=_Part_448_1797195815.1395802578847--
