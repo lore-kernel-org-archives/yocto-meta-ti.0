@@ -1,22 +1,15 @@
-Return-Path: <denis@denix.org>
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3D658E00B88
-	for <meta-ti@yoctoproject.org>; Wed, 26 Mar 2014 11:12:01 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173025.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N3200JKO2J2KO70@vms173025.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 26 Mar 2014 13:11:42 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 55CA3201CF; Wed,
-	26 Mar 2014 14:11:26 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+Return-Path: <git@arago-project.org>
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 767D8E00B90
+	for <meta-ti@yoctoproject.org>; Wed, 26 Mar 2014 12:58:28 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 97FF552A7E; Wed, 26 Mar 2014 19:58:27 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Wed, 26 Mar 2014 14:11:23 -0400
-Message-id: <1395857483-29006-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH v3] linux-mainline: add 3.14 mainline recipe
+Message-Id: <20140326195827.97FF552A7E@arago-project.org>
+Date: Wed, 26 Mar 2014 19:58:27 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-mainline: add 3.14 mainline recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -29,19 +22,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2014 18:12:05 -0000
+X-List-Received-Date: Wed, 26 Mar 2014 19:58:28 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 3e4580f365bd49835b9d46cb1868ce6d997b02e1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e4580f365bd49835b9d46cb1868ce6d997b02e1
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Mar 27 00:11:23 2014 +0000
+
+linux-mainline: add 3.14 mainline recipe
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
-v2,v3 - update to rc8, drop MACHINE_KERNEL_PR
 
- recipes-kernel/linux/linux-mainline/defconfig |  1 +
- recipes-kernel/linux/linux-mainline_3.14.bb   | 37 +++++++++++++++++++++++++++
- 2 files changed, 38 insertions(+)
- create mode 100644 recipes-kernel/linux/linux-mainline/defconfig
- create mode 100644 recipes-kernel/linux/linux-mainline_3.14.bb
+---
+
+ recipes-kernel/linux/linux-mainline/defconfig |    1 +
+ recipes-kernel/linux/linux-mainline_3.14.bb   |   37 +++++++++++++++++++++++++
+ 2 files changed, 38 insertions(+), 0 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-mainline/defconfig b/recipes-kernel/linux/linux-mainline/defconfig
 new file mode 100644
@@ -93,7 +93,5 @@ index 0000000..559a79b
 +SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git;protocol=git;branch=${BRANCH} \
 +           file://defconfig \
 +          "
--- 
-1.8.3.2
 
 
