@@ -1,13 +1,13 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 767D8E00B90
-	for <meta-ti@yoctoproject.org>; Wed, 26 Mar 2014 12:58:28 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DF4E1E00B95
+	for <meta-ti@yoctoproject.org>; Wed, 26 Mar 2014 12:58:30 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 97FF552A7E; Wed, 26 Mar 2014 19:58:27 +0000 (UTC)
+	id A066A52A7E; Wed, 26 Mar 2014 19:58:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140326195827.97FF552A7E@arago-project.org>
-Date: Wed, 26 Mar 2014 19:58:27 +0000 (UTC)
+Message-Id: <20140326195830.A066A52A7E@arago-project.org>
+Date: Wed, 26 Mar 2014 19:58:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-mainline: add 3.14 mainline recipe
 X-BeenThere: meta-ti@yoctoproject.org
@@ -22,13 +22,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2014 19:58:28 -0000
+X-List-Received-Date: Wed, 26 Mar 2014 19:58:31 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 3e4580f365bd49835b9d46cb1868ce6d997b02e1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e4580f365bd49835b9d46cb1868ce6d997b02e1
+Branch: dora
+Commit: b5d21cb2f4f0ab9e898d208239867b0c5ea969bc
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b5d21cb2f4f0ab9e898d208239867b0c5ea969bc
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Mar 27 00:11:23 2014 +0000
