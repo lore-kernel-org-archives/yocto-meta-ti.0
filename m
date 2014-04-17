@@ -1,28 +1,28 @@
-Return-Path: <denys@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5741DE00BEC
-	for <meta-ti@yoctoproject.org>; Wed, 16 Apr 2014 18:18:05 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s3H1I4fQ020029
-	for <meta-ti@yoctoproject.org>; Wed, 16 Apr 2014 20:18:04 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s3H1I4Qv007704
-	for <meta-ti@yoctoproject.org>; Wed, 16 Apr 2014 20:18:04 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 16 Apr 2014 20:18:04 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s3H1I4Qu013846	for <meta-ti@yoctoproject.org>; Wed, 16 Apr 2014 20:18:04
-	-0500
-Date: Wed, 16 Apr 2014 21:03:07 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1146165391.541.1397696587298.JavaMail.jenkins@puget>
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qc0-f181.google.com (mail-qc0-f181.google.com
+	[209.85.216.181])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B38B9E00C04
+	for <meta-ti@yoctoproject.org>; Thu, 17 Apr 2014 03:58:33 -0700 (PDT)
+Received: by mail-qc0-f181.google.com with SMTP id x3so231871qcv.40
+	for <meta-ti@yoctoproject.org>; Thu, 17 Apr 2014 03:58:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=hjmMU4velin60tL5lb2BFyiGlQFc8couyjMt+DHsnNg=;
+	b=mAu4ogMQKwBoWcwHs8pHQ9odi/BKlGVTGGQP82j2L4DSlTwf59WZuLAdn6UVzgseOM
+	uITurncfc1cNWJ/iva+0QXyQ2NYvRHjqitcOMCwBrX5cBA2stFAMOG6SvrRBJeH/XG26
+	lJd1P4HeRXdzZYd6L1lpHycu8GIc0HVrEgR/akmNJIBjlK6wOvtKuGVx0hv4p1nrxweH
+	j3ZG8lmX1012PkAckiiK0vMeXdUiI0GXCDBlJGJ1e7wAd82IOLmdtYoOpgBDfIDGTd5W
+	zO3R2SOBKJ4zTDTf5SUfFbPSj/g1aB+ik+UDu+tXUPKMetT2ATV9qgKcK1I+lpRXq9ux
+	o+XQ==
+X-Received: by 10.224.20.72 with SMTP id e8mr9351341qab.86.1397732312584; Thu,
+	17 Apr 2014 03:58:32 -0700 (PDT)
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-04-16_21-00-24
+Received: by 10.140.40.114 with HTTP; Thu, 17 Apr 2014 03:58:11 -0700 (PDT)
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Thu, 17 Apr 2014 07:58:11 -0300
+Message-ID: <CAMCfZKFeeHaAfg6OPeTzN18KSzVCOmA=PCk4YALLgPYoBCVgyg@mail.gmail.com>
+To: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: AM3359 with OpenVG libraries
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +35,68 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Apr 2014 01:18:08 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_540_110080894.1397696587297"
+X-List-Received-Date: Thu, 17 Apr 2014 10:58:33 -0000
+Content-Type: multipart/alternative; boundary=001a11c1bfeafb99e204f73ae9f8
 
-------=_Part_540_110080894.1397696587297
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a11c1bfeafb99e204f73ae9f8
+Content-Type: text/plain; charset=ISO-8859-1
 
-<html>
-<head>
-<title>
-Status for 04/16/14
-</title>
-</head>
-<body>
+Folks,
 
-<h2>Status for 04/16/14</h2>
+Looking at this commit:
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/commit/recipes-graphics/libgles?id=91b307e78a98033f49a77a9664d89462e33030a3
 
-<h2>BUILD_ID: build-2014-04-16_21-01-31</h2>
+It says that OpenVG is no longer supported by SGX Graphics SDK.
+What is the reason for that?
+What is the latest SGX SDK version in which supports OpenVG?
 
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+I want to use Qt embedded with 2D hardware graphics acceleration and
+according to Qt embedded
+documentation<http://qt-project.org/doc/qt-4.8/qt-embeddedlinux-openvg.html>
+just
+need to use QPaintEngine to get regular widgets accelerated by the hardware.
 
 
-------=_Part_540_110080894.1397696587297--
+
+Regards,
+
+--
+*dS
+Diego Sueiro
+
+Administrador do Embarcados
+www.embarcados.com.br<http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
+
+/*long live rock 'n roll*/
+
+--001a11c1bfeafb99e204f73ae9f8
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div style>Folks,</div><div style><br></div><div style>Loo=
+king at this commit:</div><div style><a href=3D"http://git.yoctoproject.org=
+/cgit/cgit.cgi/meta-ti/commit/recipes-graphics/libgles?id=3D91b307e78a98033=
+f49a77a9664d89462e33030a3">http://git.yoctoproject.org/cgit/cgit.cgi/meta-t=
+i/commit/recipes-graphics/libgles?id=3D91b307e78a98033f49a77a9664d89462e330=
+30a3</a></div>
+
+<div style><br></div><div style>It says that OpenVG is no longer supported =
+by SGX Graphics SDK.</div><div style>What is the reason for that?</div><div=
+ style>What is the latest SGX SDK version in which supports OpenVG?</div>
+
+<div style><br></div><div style>I want to use Qt embedded with 2D hardware =
+graphics acceleration and according to Qt embedded <a href=3D"http://qt-pro=
+ject.org/doc/qt-4.8/qt-embeddedlinux-openvg.html">documentation</a>=A0just =
+need to use QPaintEngine to get regular widgets accelerated by the hardware=
+.</div>
+
+<div style><br></div><div style><br></div><br clear=3D"all"><div><div dir=
+=3D"ltr"><div>Regards,</div><div><br></div>--<br>*dS<br>Diego Sueiro<br><br=
+>Administrador do Embarcados<br><a href=3D"http://www.embarcados.com.br/?ut=
+m_source=3Dassinatura_diego&amp;utm_medium=3De-mail&amp;utm_campaign=3DAssi=
+natura%20Email%20Diego" target=3D"_blank">www.embarcados.com.br</a><br>
+
+<br>/*long live rock &#39;n roll*/<br></div></div>
+</div>
+
+--001a11c1bfeafb99e204f73ae9f8--
