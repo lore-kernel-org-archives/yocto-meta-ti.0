@@ -1,24 +1,22 @@
 Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B323E00B67
-	for <meta-ti@yoctoproject.org>; Wed, 23 Apr 2014 14:55:40 -0700 (PDT)
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 80341E00B6E
+	for <meta-ti@yoctoproject.org>; Wed, 23 Apr 2014 14:55:39 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173017.mailsrvcs.net
+	by vms173021.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N4I00JN77JTE360@vms173017.mailsrvcs.net> for
+	2009)) with ESMTPA id <0N4I00KK07JT7J60@vms173021.mailsrvcs.net> for
 	meta-ti@yoctoproject.org; Wed, 23 Apr 2014 16:55:21 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id B8FA4200AC; Wed,
-	23 Apr 2014 17:55:05 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 967342004B; Wed,
+	23 Apr 2014 17:55:04 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 23 Apr 2014 17:54:51 -0400
-Message-id: <1398290092-20034-2-git-send-email-denis@denix.org>
+Date: Wed, 23 Apr 2014 17:54:50 -0400
+Message-id: <1398290092-20034-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.9.2
-In-reply-to: <1398290092-20034-1-git-send-email-denis@denix.org>
-References: <1398290092-20034-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/3] am33x-cm3, ti-msp430: update license from TI-BSD to BSD-3-Clause
+Subject: [PATCH 1/3] licenses: add standard TI licenses
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,43 +33,309 @@ X-List-Received-Date: Wed, 23 Apr 2014 21:55:40 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
-Per recommendation from OSRB and Legal.
+The new Texas Instruments Text File License (TI-TFL) is now replacing the
+old Technology and Software Publicly Available (TSPA) license. But there are
+older versions of the components previously released under TI-TSPA license.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/ti/am33x-cm3_git.bb                   | 4 ++--
- recipes-ti/msp430/ti-msp430-chronos_1.05.00.00.bb | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ conf/layer.conf  |   2 +
+ licenses/TI-TFL  |  62 +++++++++++++++++
+ licenses/TI-TSPA | 206 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 270 insertions(+)
+ create mode 100644 licenses/TI-TFL
+ create mode 100644 licenses/TI-TSPA
 
-diff --git a/recipes-bsp/ti/am33x-cm3_git.bb b/recipes-bsp/ti/am33x-cm3_git.bb
-index 01d1273..42f20da 100644
---- a/recipes-bsp/ti/am33x-cm3_git.bb
-+++ b/recipes-bsp/ti/am33x-cm3_git.bb
-@@ -1,10 +1,10 @@
- DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
- 
--LICENSE = "TI-BSD"
-+LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
- 
- PV = "05.00.00.03"
--PR = "r0"
-+PR = "r1"
- 
- # Make package machine specific due to different init scripts
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/recipes-ti/msp430/ti-msp430-chronos_1.05.00.00.bb b/recipes-ti/msp430/ti-msp430-chronos_1.05.00.00.bb
-index 0a48b17..dd493f8 100644
---- a/recipes-ti/msp430/ti-msp430-chronos_1.05.00.00.bb
-+++ b/recipes-ti/msp430/ti-msp430-chronos_1.05.00.00.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "eZ430 Chronos Tools - MSP430 Development Kit/Watch"
- HOMEPAGE = "http://processors.wiki.ti.com/index.php/EZ430-Chronos"
--LICENSE = "TI-BSD"
-+LICENSE = "BSD-3-Clause"
- # We can't use the actualy source file, since it has space in its name :(
- LIC_FILES_CHKSUM = "file://eZ430-Chronos_CC_1_1.tcl;md5=59ba6ee0a26650ec660a4e65a9462806"
- 
+diff --git a/conf/layer.conf b/conf/layer.conf
+index faa4ac0..056422d 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -7,3 +7,5 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
+ BBFILE_COLLECTIONS += "meta-ti"
+ BBFILE_PATTERN_meta-ti := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-ti = "6"
++
++LICENSE_PATH += "${LAYERDIR}/licenses"
+diff --git a/licenses/TI-TFL b/licenses/TI-TFL
+new file mode 100644
+index 0000000..264692b
+--- /dev/null
++++ b/licenses/TI-TFL
+@@ -0,0 +1,62 @@
++TEXAS INSTRUMENTS TEXT FILE LICENSE
++
++Copyright (c) [earliest year] - [latest year] Texas Instruments Incorporated
++
++All rights reserved not granted herein.
++
++Limited License.
++
++Texas Instruments Incorporated grants a world-wide, royalty-free,
++non-exclusive license under copyrights and patents it now or hereafter owns
++or controls to make, have made, use, import, offer to sell and sell
++("Utilize") this software subject to the terms herein.  With respect to the
++foregoing patent license, such license is granted  solely to the extent that
++any such patent is necessary to Utilize the software alone.  The patent
++license shall not apply to any combinations which include this software,
++other than combinations with devices manufactured by or for TI ("TI
++Devices").  No hardware patent is licensed hereunder.
++
++Redistributions must preserve existing copyright notices and reproduce this
++license (including the above copyright notice and the disclaimer and (if
++applicable) source code license limitations below) in the documentation
++and/or other materials provided with the distribution
++
++Redistribution and use in binary form, without modification, are permitted
++provided that the following conditions are met:
++
++* No reverse engineering, decompilation, or disassembly of this software is
++permitted with respect to any software provided in binary form.
++
++* any redistribution and use are licensed by TI for use only with TI
++Devices.
++
++* Nothing shall obligate TI to provide you with source code for the software
++licensed and provided to you in object code.
++
++If software source code is provided to you, modification and redistribution
++of the source code are permitted provided that the following conditions are
++met:
++
++* any redistribution and use of the source code, including any resulting
++derivative works, are licensed by TI for use only with TI Devices.
++
++* any redistribution and use of any object code compiled from the source
++code and any resulting derivative works, are licensed by TI for use only
++with TI Devices.
++
++Neither the name of Texas Instruments Incorporated nor the names of its
++suppliers may be used to endorse or promote products derived from this
++software without specific prior written permission.
++
++DISCLAIMER.
++
++THIS SOFTWARE IS PROVIDED BY TI AND TI'S LICENSORS "AS IS" AND ANY EXPRESS
++OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
++OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN
++NO EVENT SHALL TI AND TI'S LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT,
++INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
++OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
++LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
++EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+diff --git a/licenses/TI-TSPA b/licenses/TI-TSPA
+new file mode 100644
+index 0000000..fd87c2a
+--- /dev/null
++++ b/licenses/TI-TSPA
+@@ -0,0 +1,206 @@
++Texas Instruments Incorporated
++Technology and Software Publicly Available
++Software License Agreement
++
++
++Important - Please read the following license agreement carefully.  This is
++a legally binding agreement.  Do not click "i have read and agree" or use
++(as applicable) the Licensed Materials unless: (1) you are authorized to
++accept and agree to the terms of this license agreement on behalf of
++yourself or your company (as applicable) and (2) you intend to be bound by
++the terms of this license agreement on behalf of yourself or your company
++(as applicable).
++
++This Software License Agreement ("Agreement") is a legal agreement between
++you (either an individual or entity) and Texas Instruments Incorporated
++("TI"), 12500 TI Boulevard, Dallas, Texas 75243.  The "Licensed Materials"
++subject to this Agreement include the software programs (in whole or in
++part), that accompany this Agreement and set forth in the applicable
++software manifest and which you access "on-line" and/or electronic
++documentation (in whole or in part) associated and provided with these
++software programs.  By installing, copying or otherwise using the Licensed
++Materials you agree to abide by the terms of this Agreement.  If you choose
++not to accept or agree with these terms, do not download or install the
++Licensed Materials.
++
++Note Regarding Possible Access to Open Source Software:  The Licensed
++Materials may be bundled with Open Source Software.  "Open Source Software"
++means any software licensed under terms requiring that (A) other software
++("Proprietary Software") incorporated, combined or distributed with such
++software or developed using such software: (i) be disclosed or distributed
++in source code form; or (ii) otherwise be licensed on terms inconsistent
++with the terms of this Agreement, including but not limited to permitting
++use of the Proprietary Software on or with devices other than TI Devices, or
++(B) require the owner of Proprietary Software to license any of its patents
++to users of the Open Source Software and/or Proprietary Software
++incorporated, combined or distributed with such Open Source Software or
++developed using such Open Source Software.
++
++You may gain access to Open Source Software, in which case such Open Source
++Software will be listed in the applicable software manifest (in whole or in
++part, the "Open Source Materials").  Your use of the Open Source Materials
++is subject to the separate licensing terms applicable to such Open Source
++Materials as specified in the applicable software manifest.  For
++clarification, this Agreement does not limit your rights under, or grant you
++rights that supersede, the license terms of any applicable Open Source
++Materials license agreement.  If any of the Open Source Materials have been
++provided to you in object code only, TI will provide to you or show you
++where can access the source code versions of such Open Source Materials if
++you contact TI at Texas Instruments Incorporated, 12500 TI Boulevard, Mail
++Station 8638, Dallas, Texas 75243, Attention: Contracts Manager.  You may
++terminate this Agreement in the event you choose not to accept or agree with
++the terms in any applicable Open Source Materials license agreement,
++provided that such termination occurs within five (5) calendar days of
++acceptance of this Agreement and you abide by all applicable license terms
++in this Agreement until such termination.
++
++1. License.
++
++a. Source Code License.  For the Licensed Materials provided in source code
++format, TI hereby grants to you a limited, non-exclusive license to
++reproduce, use, and create modified or derivative works of the Licensed
++Materials provided to you in source code format and to distribute an
++unlimited number of copies of such source code Licensed Materials, or any
++derivatives thereof, in any format.
++
++b.  Object Code License.  For the Licensed Materials provided in object code
++format, TI hereby grants to you a limited, non-exclusive license to
++reproduce and use the Licensed Materials provided to you in object code
++format and to distribute an unlimited number of object or executable copies
++of such object code Licensed Materials.
++
++2. Termination.  This Agreement is effective until terminated.  Without
++prejudice to any other rights, TI may terminate your right to use the
++Licensed Materials under this Agreement if you fail to comply with the terms
++of this Agreement.  In such event, you shall destroy all copies of the
++Licensed Materials, including all portions and derivatives thereof.
++
++3. Intellectual Property Rights.
++
++a. The Licensed Materials being provided to you hereunder are being made
++publicly available by TI, even though they contain copyrighted material of
++TI and its licensors, if applicable.   In no event may you alter, remove or
++destroy any copyright notice included in the Licensed Materials.  To the
++extent that any of the Licensed Materials are provided in binary or object
++code only, you may not unlock, decompile, reverse engineer, disassemble or
++otherwise translate such binary or object code to human-perceivable form.
++The source code of such reverse engineered code may contain TI trade secret
++and other proprietary information. TI reserves all rights not specifically
++granted under this Agreement.
++
++b. Certain Licensed Materials may (i) require patent licenses from third
++parties claiming patent rights covering implementation of the Licensed
++Materials or (ii) be based on industry recognized standards or software
++programs published by industry recognized standards bodies and certain third
++parties may claim to own patents or copyrights that cover implementation of
++those standards.  You acknowledge and agree that this Agreement does not
++convey a license to any such third party patents and copyrights.
++
++c. YOU ACKNOWLEDGE AND AGREE THAT TI SHALL NOT BE LIABLE FOR AND SHALL NOT
++DEFEND OR INDEMNIFY YOU AGAINST ANY THIRD PARTY INFRINGEMENT CLAIM THAT
++RELATES TO OR IS BASED ON YOUR MANUFACTURE, USE, OR DISTRIBUTION OF THE
++LICENSED MATERIALS OR YOUR MANUFACTURE, USE, OFFER FOR SALE, SALE,
++IMPORTATION OR DISTRIBUTION OF YOUR PRODUCTS THAT INCLUDE OR INCORPORATE THE
++LICENSED MATERIALS.
++
++d. You acknowledge and agree that you are responsible for any fees or
++royalties that may be payable to any third party based on such third party's
++interests in the Licensed Materials described in Section 3(b) above (the
++"Third Party Payment Obligations").  You agree to indemnify TI against any
++Third Party Payment Obligations and will defend any claim, suit or
++proceeding brought against TI insofar as such claim, suit or proceeding is
++based on your failure to pay any Third Party Payment Obligations.
++
++4. Warranties and Limitations.  THE LICENSED MATERIALS ARE PROVIDED "AS IS".
++TI AND ITS LICENSORS MAKE NO WARRANTY OR REPRESENTATION, EXPRESS, IMPLIED OR
++STATUTORY, INCLUDING ANY IMPLIED WARRANTIES OF MERCHANTIBILITY, FITNESS FOR
++A PARTICULAR PURPOSE, LACK OF VIRUSES, ACCURACY OR COMPLETENESS OF
++RESPONSES, RESULTS AND LACK OF NEGLIGENCE.  TI DISCLAIMS ANY WARRANTY OF
++TITLE, QUIET ENJOYMENT, QUIET POSESSION, AND NON-INFRINGEMENT OF ANY THIRD
++PARTY INTELLECTUAL PROPERTY RIGHTS WITH REGARD TO THE LICENSED MATERIALS OR
++USE OF THOSE MATERIALS.
++
++YOU ACKNOWLEDGE AND AGREE THAT THE LICENSED MATERIALS MAY NOT BE INTENDED
++FOR PRODUCTION APPLICATIONS AND MAY CONTAIN IRREGULARITIES AND DEFECTS NOT
++FOUND IN PRODUCTION SOFTWARE.  FURTHERMORE, YOU ACKNOWLEDGE AND AGREE THAT
++THE LICENSED MATERIALS HAVE NOT BEEN TESTED OR CERTIFIED BY ANY GOVERNMENT
++AGENCY OR INDUSTRY REGULATORY ORGANIZATION OR ANY OTHER THIRD PARTY
++ORGANIZATION.  YOU AGREE THAT PRIOR TO USING, INCORPORATING OR DISTRIBUTING
++THE LICENSED MATERIALS IN OR WITH ANY COMMERCIAL PRODUCT THAT YOU WILL
++THOROUGHLY TEST THE PRODUCT AND THE FUNCTIONALITY OF THE LICENSED MATERIALS
++IN OR WITH THAT PRODUCT AND BE SOLELY RESPONSIBLE FOR ANY PROBLEMS OR
++FAILURES.
++
++IN NO EVENT SHALL TI OR ITS LICENSORS BE LIABLE FOR ANY SPECIAL, INDIRECT,
++INCIDENTAL, PUNITIVE OR CONSEQUENTIAL DAMAGES, HOWEVER CAUSED ON ANY THEORY
++OF LIABILITY, ARISING IN ANY WAY OUT OF THIS AGREEMENT, OR YOUR USE OF THE
++LICENSED MATERIALS, WHETHER OR NOT TI HAS BEEN ADVISED OF THE POSSIBILITY OF
++SUCH DAMAGES.  EXCLUDED DAMAGES INCLUDE, BUT ARE NOT LIMITED TO, COST OF
++REMOVAL OR REINSTALLATION, OUTSIDE COMPUTER TIME, LABOR COSTS, LOSS OR
++CORRUPTION OF DATA, LOSS OF GOODWILL, LOSS OF PROFITS, LOSS OF SAVINGS, OR
++LOSS OF USE OR INTERRUPTION OF BUSINESS OR ANY OTHER ECONOMIC LOSS.  IN NO
++EVENT WILL TI'S AGGREGATE LIABILITY UNDER THIS AGREEMENT OR ARISING OUT OF
++YOUR USE OF THE LICENSED MATERIALS EXCEED FIVE HUNDRED U.S. DOLLARS
++(US$500).
++
++Because some jurisdictions do not allow the exclusion or limitation of
++incidental or consequential damages or limitation on how long an implied
++warranty lasts, the above limitations or exclusions may not apply to you.
++
++5. Export Control.  The Licensed Materials may be subject to the export or
++import regulations of certain countries. You agree to comply with all such
++regulations and acknowledge that you have the responsibility to obtain any
++licenses or other authorizations that may be required to export, re-export
++or import the Licensed Materials.
++
++6. Governing Law, Jurisdiction and Severability.  This Agreement will be
++governed by and interpreted in accordance with the laws of the State of
++Texas, without reference to conflict of laws principles.  If for any reason
++a court of competent jurisdiction finds any provision of the Agreement to be
++unenforceable, that provision will be enforced to the maximum extent
++possible to effectuate the intent of the parties and the remainder of the
++Agreement shall continue in full force and effect. This Agreement shall not
++be governed by the United Nations Convention on Contracts for the
++International Sale of Goods, or by the Uniform Computer Information
++Transactions Act (UCITA). The parties agree that non-exclusive jurisdiction
++for any dispute arising out of or relating to this Agreement lies within the
++courts located in the State of Texas.  Notwithstanding the foregoing, any
++judgment may be enforced in any United States or foreign court, and either
++party may seek injunctive relief in any United States or foreign court.
++Failure by TI to enforce any provision of this Agreement shall not be deemed
++a waiver of future enforcement of that or any other provision in this
++Agreement or any other agreement that may be in place between the parties.
++
++7. PRC Provisions.  If you are located in the People's Republic of China
++("PRC") or if the Licensed Materials will be sent to the PRC, the following
++provisions shall apply:
++
++a. Registration Requirements.  You shall be solely responsible for
++performing all acts and obtaining all approvals that may be required in
++connection with this Agreement by the government of the PRC, including but
++not limited to registering pursuant to, and otherwise complying with, the
++PRC Measures on the Administration of Software Products, Management
++Regulations on Technology Import-Export, and Technology Import and Export
++Contract Registration Management Rules.  Upon receipt of such approvals from
++the government authorities, you shall forward evidence of all such approvals
++to TI for its records.  In the event that you fail to obtain any such
++approval or registration, you shall be solely responsible for any and all
++losses, damages or costs resulting therefrom, and shall indemnify TI for all
++such losses, damages or costs.
++
++b. Governing Language.  This Agreement is written and executed in the
++English language.  If a translation of this Agreement is required for any
++purpose, including but not limited to registration of the Agreement pursuant
++to any governmental laws, regulations or rules, you shall be solely
++responsible for creating such translation.  Any translation of this
++Agreement into a language other than English is intended solely in order to
++comply with such laws or for reference purposes, and the English language
++version shall be authoritative and controlling.
++
++8. Entire Agreement.  This is the entire agreement between you and TI and
++supersedes any prior agreement between the parties related to the subject
++matter of this Agreement. No amendment or modification of this Agreement
++will be effective unless in writing and signed by a duly authorized
++representative of TI.  You hereby warrant and represent that you have
++obtained all authorizations and other applicable consents required
++empowering you to enter into this Agreement.
 -- 
 1.9.2
 
