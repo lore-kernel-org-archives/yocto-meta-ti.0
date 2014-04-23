@@ -1,28 +1,24 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6D71CE00480
-	for <meta-ti@yoctoproject.org>; Tue, 22 Apr 2014 18:18:39 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s3N1Icvn005614
-	for <meta-ti@yoctoproject.org>; Tue, 22 Apr 2014 20:18:38 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s3N1IcqI022958
-	for <meta-ti@yoctoproject.org>; Tue, 22 Apr 2014 20:18:38 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 22 Apr 2014 20:18:38 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s3N1IcTs007891	for <meta-ti@yoctoproject.org>; Tue, 22 Apr 2014 20:18:38
-	-0500
-Date: Tue, 22 Apr 2014 21:03:32 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1026560644.565.1398215012062.JavaMail.jenkins@puget>
-MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-04-22_21-00-24
+Return-Path: <denis@denix.org>
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EF4B9E00B50
+	for <meta-ti@yoctoproject.org>; Wed, 23 Apr 2014 14:55:07 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173025.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N4I0034K7JTMO80@vms173025.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 23 Apr 2014 16:55:06 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id BC1AA20396; Wed,
+	23 Apr 2014 17:55:05 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Wed, 23 Apr 2014 17:54:52 -0400
+Message-id: <1398290092-20034-3-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.9.2
+In-reply-to: <1398290092-20034-1-git-send-email-denis@denix.org>
+References: <1398290092-20034-1-git-send-email-denis@denix.org>
+Subject: [PATCH 3/3] recipes: use proper TI-TSPA license name instead of TSPA
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +31,157 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Apr 2014 01:18:46 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_564_1190907012.1398215012061"
+X-List-Received-Date: Wed, 23 Apr 2014 21:55:11 -0000
 
-------=_Part_564_1190907012.1398215012061
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+From: Denys Dmytriyenko <denys@ti.com>
 
-<html>
-<head>
-<title>
-Status for 04/22/14
-</title>
-</head>
-<body>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb    | 4 ++--
+ recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb        | 2 +-
+ recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb        | 2 +-
+ recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb        | 4 ++--
+ recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb        | 4 ++--
+ recipes-graphics/libgles/libgles-omap3_5.01.00.01.bb        | 4 ++--
+ recipes-graphics/libgles/libgles-omap3_5.01.01.01.bb        | 4 ++--
+ recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb | 4 ++--
+ recipes-ti/c6accel/ti-c6accel.inc                           | 2 +-
+ 9 files changed, 15 insertions(+), 15 deletions(-)
 
-<h2>Status for 04/22/14</h2>
-
-<h2>BUILD_ID: build-2014-04-22_21-01-31</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+diff --git a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
+index f7b9d66..15aa8a6 100644
+--- a/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3-x11_4.09.00.01.bb
+@@ -1,8 +1,8 @@
+ require libgles-omap3-x11.inc
+ 
+-LICENSE = "TSPA"
++LICENSE = "TI-TSPA"
+ 
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.3"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb b/recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb
+index 990b425..e466aab 100644
+--- a/recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb
+@@ -1,6 +1,6 @@
+ require libgles-omap3.inc
+ 
+-LICENSE = "TSPA"
++LICENSE = "TI-TSPA"
+ 
+ BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
+ BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb b/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
+index 59ef358..f4cd9ae 100644
+--- a/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
++++ b/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
+@@ -1,6 +1,6 @@
+ require libgles-omap3.inc
+ 
+-LICENSE = "TSPA"
++LICENSE = "TI-TSPA"
+ 
+ BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
+ BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+index fec84fd..373dd9d 100644
+--- a/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3_4.09.00.01.bb
+@@ -1,8 +1,8 @@
+ require libgles-omap3-no-x.inc
+ 
+-LICENSE = "TSPA"
++LICENSE = "TI-TSPA"
+ 
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.3"
+ 
+ BINLOCATION_omap3 = "${S}/gfx_rel_es3.x"
+ BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+diff --git a/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb b/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
+index e48ec63..22e510b 100644
+--- a/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
+@@ -1,8 +1,8 @@
+ require libgles-omap3-no-x.inc
+ 
+-LICENSE = "TSPA"
++LICENSE = "TI-TSPA"
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ BINLOCATION_omap3 = "${S}/gfx_rel_es3.x"
+ BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+diff --git a/recipes-graphics/libgles/libgles-omap3_5.01.00.01.bb b/recipes-graphics/libgles/libgles-omap3_5.01.00.01.bb
+index a3b34fe..607b44a 100644
+--- a/recipes-graphics/libgles/libgles-omap3_5.01.00.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3_5.01.00.01.bb
+@@ -1,8 +1,8 @@
+ require libgles-omap3-no-x.inc
+ 
+-LICENSE = "TSPA"
++LICENSE = "TI-TSPA"
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ BINLOCATION_omap3 = "${S}/gfx_rel_es3.x"
+ BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+diff --git a/recipes-graphics/libgles/libgles-omap3_5.01.01.01.bb b/recipes-graphics/libgles/libgles-omap3_5.01.01.01.bb
+index 2d11317..0b1b8ca 100644
+--- a/recipes-graphics/libgles/libgles-omap3_5.01.01.01.bb
++++ b/recipes-graphics/libgles/libgles-omap3_5.01.01.01.bb
+@@ -1,8 +1,8 @@
+ require libgles-omap3-no-x.inc
+ 
+-LICENSE = "TSPA"
++LICENSE = "TI-TSPA"
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ BINLOCATION_omap3 = "${S}/gfx_rel_es3.x"
+ BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
+index 8a03cd2..37ca7d8 100644
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Userspace libraries for omap5 sgx"
+ HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
+-LICENSE = "TSPA"
++LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=d280df8e94bb2e7b9251c8526078eeb8"
+ 
+ COMPATIBLE_MACHINE = "omap-a15"
+@@ -9,7 +9,7 @@ INHIBIT_PACKAGE_STRIP = "1"
+ 
+ SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/OMAP5_1_09_00_10//exports/${PN}-${PV}.tar.gz;protocol=http"
+ 
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI[md5sum] = "3cfb875de031098a4c1eeeaf4e442367"
+ SRC_URI[sha256sum] = "20b849088c0fd3ee5dd6bad8ddf16fb2b3267aa053cf3488c762fbc72f22489a"
+diff --git a/recipes-ti/c6accel/ti-c6accel.inc b/recipes-ti/c6accel/ti-c6accel.inc
+index 638c9be..65990a8 100644
+--- a/recipes-ti/c6accel/ti-c6accel.inc
++++ b/recipes-ti/c6accel/ti-c6accel.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "TI C6Accel - DSP Software Libraries on ARM"
+ HOMEPAGE = "https://gforge01.dal.design.ti.com/gf/project/dsplib4arm/"
+ 
+ SECTION = "devel"
+-LICENSE = "TI TSPA"
++LICENSE = "TI-TSPA"
+ 
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+-- 
+1.9.2
 
 
-------=_Part_564_1190907012.1398215012061--
