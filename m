@@ -1,15 +1,15 @@
 Return-Path: <git@arago-project.org>
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A48A9E00B77
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A5CDCE00B78
 	for <meta-ti@yoctoproject.org>; Thu, 24 Apr 2014 10:48:52 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 363F352A92; Thu, 24 Apr 2014 17:48:51 +0000 (UTC)
+	id 5DF4452AB4; Thu, 24 Apr 2014 17:48:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140424174851.363F352A92@arago-project.org>
+Message-Id: <20140424174851.5DF4452AB4@arago-project.org>
 Date: Thu, 24 Apr 2014 17:48:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : licenses: add standard TI licenses
+Subject: Denys Dmytriyenko : am437x-evm: increase LEB count to fit full rootfs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -27,28 +27,34 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 0442fa03bc07bd70376522c290c1af254f7e77d4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0442fa03bc07bd70376522c290c1af254f7e77d4
+Commit: ebc0f84be0eff71cb101bea47ffa15553113d5e4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ebc0f84be0eff71cb101bea47ffa15553113d5e4
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Apr 24 03:54:50 2014 +0000
+Date:   Thu Apr 24 07:49:17 2014 +0000
 
-licenses: add standard TI licenses
-
-The new Texas Instruments Text File License (TI-TFL) is now replacing the
-old Technology and Software Publicly Available (TSPA) license. But there are
-older versions of the components previously released under TI-TSPA license.
+am437x-evm: increase LEB count to fit full rootfs
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Chase Maupin <chase.maupin@ti.com>
-Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
 
 ---
 
- conf/layer.conf  |    2 +
- licenses/TI-TFL  |   62 ++++++++++++++++
- licenses/TI-TSPA |  206 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 270 insertions(+), 0 deletions(-)
+ conf/machine/am437x-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=0442fa03bc07bd70376522c290c1af254f7e77d4
+diff --git a/conf/machine/am437x-evm.conf b/conf/machine/am437x-evm.conf
+index 266f1fd..15e5f53 100644
+--- a/conf/machine/am437x-evm.conf
++++ b/conf/machine/am437x-evm.conf
+@@ -24,7 +24,7 @@ SERIAL_CONSOLE = "115200 ttyO0"
+ # UBI: logical eraseblock size:    253952 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 994 LEBs
+-MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 994"
++MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 1918"
+ 
+ # do ubiattach /dev/ubi_ctrl -m 11 -O 4096
+ # from dmesg:
+
 
