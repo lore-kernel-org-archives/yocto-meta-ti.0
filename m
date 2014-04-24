@@ -1,27 +1,31 @@
-Return-Path: <denys@ti.com>
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4CC5CE00716
-	for <meta-ti@yoctoproject.org>; Wed, 23 Apr 2014 19:37:39 -0700 (PDT)
+Return-Path: <chase.maupin@ti.com>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AF428E00AB5
+	for <meta-ti@yoctoproject.org>; Thu, 24 Apr 2014 05:39:12 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s3O2bbkl008735
-	for <meta-ti@yoctoproject.org>; Wed, 23 Apr 2014 21:37:37 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s3O2bbmO025914
-	for <meta-ti@yoctoproject.org>; Wed, 23 Apr 2014 21:37:37 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 23 Apr 2014 21:37:37 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s3O2bbjY019469;	Wed, 23 Apr 2014 21:37:37 -0500
-Date: Wed, 23 Apr 2014 22:22:29 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>, <fcooper@ti.com>
-Message-ID: <55366268.571.1398306149257.JavaMail.jenkins@puget>
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s3OCdBp1029759;
+	Thu, 24 Apr 2014 07:39:11 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s3OCdBhf016702;
+	Thu, 24 Apr 2014 07:39:11 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.03.0174.001; Thu, 24 Apr 2014 07:39:10 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH 1/3] licenses: add standard TI licenses
+Thread-Index: AQHPXz7JElaHp1UQw02NsVmoRoaOCJsgtdTQ
+Date: Thu, 24 Apr 2014 12:39:10 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015CFB20D0@DLEE11.ent.ti.com>
+References: <1398290092-20034-1-git-send-email-denis@denix.org>
+In-Reply-To: <1398290092-20034-1-git-send-email-denis@denix.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-04-23_21-00-24
+Subject: Re: [PATCH 1/3] licenses: add standard TI licenses
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,169 +38,524 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Apr 2014 02:37:42 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_570_1440978375.1398306149254"
+X-List-Received-Date: Thu, 24 Apr 2014 12:39:13 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_570_1440978375.1398306149254
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 
-<html>
-<head>
-<title>
-Status for 04/23/14
-</title>
-</head>
-<body>
+>-----Original Message-----
+>From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+>bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
+>Sent: Wednesday, April 23, 2014 4:55 PM
+>To: meta-ti@yoctoproject.org
+>Subject: [meta-ti] [PATCH 1/3] licenses: add standard TI licenses
+>
+>From: Denys Dmytriyenko <denys@ti.com>
+>
+>The new Texas Instruments Text File License (TI-TFL) is now
+>replacing the
+>old Technology and Software Publicly Available (TSPA) license. But
+>there are
+>older versions of the components previously released under TI-TSPA
+>license.
+>
+>Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+>---
+> conf/layer.conf  |   2 +
+> licenses/TI-TFL  |  62 +++++++++++++++++
+> licenses/TI-TSPA | 206
+>+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+> 3 files changed, 270 insertions(+)
+> create mode 100644 licenses/TI-TFL
+> create mode 100644 licenses/TI-TSPA
+>
+>diff --git a/conf/layer.conf b/conf/layer.conf
+>index faa4ac0..056422d 100644
+>--- a/conf/layer.conf
+>+++ b/conf/layer.conf
+>@@ -7,3 +7,5 @@ BBFILES +=3D "${LAYERDIR}/recipes*/*/*.bb
+>${LAYERDIR}/recipes*/*/*.bbappend"
+> BBFILE_COLLECTIONS +=3D "meta-ti"
+> BBFILE_PATTERN_meta-ti :=3D "^${LAYERDIR}/"
+> BBFILE_PRIORITY_meta-ti =3D "6"
+>+
+>+LICENSE_PATH +=3D "${LAYERDIR}/licenses"
+>diff --git a/licenses/TI-TFL b/licenses/TI-TFL
+>new file mode 100644
+>index 0000000..264692b
+>--- /dev/null
+>+++ b/licenses/TI-TFL
+>@@ -0,0 +1,62 @@
+>+TEXAS INSTRUMENTS TEXT FILE LICENSE
+>+
+>+Copyright (c) [earliest year] - [latest year] Texas Instruments
+>Incorporated
+>+
+>+All rights reserved not granted herein.
+>+
+>+Limited License.
+>+
+>+Texas Instruments Incorporated grants a world-wide, royalty-free,
+>+non-exclusive license under copyrights and patents it now or
+>hereafter owns
+>+or controls to make, have made, use, import, offer to sell and
+>sell
+>+("Utilize") this software subject to the terms herein.  With
+>respect to the
+>+foregoing patent license, such license is granted  solely to the
+>extent that
+>+any such patent is necessary to Utilize the software alone.  The
+>patent
+>+license shall not apply to any combinations which include this
+>software,
+>+other than combinations with devices manufactured by or for TI
+>("TI
+>+Devices").  No hardware patent is licensed hereunder.
+>+
+>+Redistributions must preserve existing copyright notices and
+>reproduce this
+>+license (including the above copyright notice and the disclaimer
+>and (if
+>+applicable) source code license limitations below) in the
+>documentation
+>+and/or other materials provided with the distribution
+>+
+>+Redistribution and use in binary form, without modification, are
+>permitted
+>+provided that the following conditions are met:
+>+
+>+* No reverse engineering, decompilation, or disassembly of this
+>software is
+>+permitted with respect to any software provided in binary form.
+>+
+>+* any redistribution and use are licensed by TI for use only with
+>TI
+>+Devices.
+>+
+>+* Nothing shall obligate TI to provide you with source code for
+>the software
+>+licensed and provided to you in object code.
+>+
+>+If software source code is provided to you, modification and
+>redistribution
+>+of the source code are permitted provided that the following
+>conditions are
+>+met:
+>+
+>+* any redistribution and use of the source code, including any
+>resulting
+>+derivative works, are licensed by TI for use only with TI
+>Devices.
+>+
+>+* any redistribution and use of any object code compiled from the
+>source
+>+code and any resulting derivative works, are licensed by TI for
+>use only
+>+with TI Devices.
+>+
+>+Neither the name of Texas Instruments Incorporated nor the names
+>of its
+>+suppliers may be used to endorse or promote products derived from
+>this
+>+software without specific prior written permission.
+>+
+>+DISCLAIMER.
+>+
+>+THIS SOFTWARE IS PROVIDED BY TI AND TI'S LICENSORS "AS IS" AND
+>ANY EXPRESS
+>+OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+>WARRANTIES
+>+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+>DISCLAIMED. IN
+>+NO EVENT SHALL TI AND TI'S LICENSORS BE LIABLE FOR ANY DIRECT,
+>INDIRECT,
+>+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+>(INCLUDING, BUT NOT
+>+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+>USE, DATA,
+>+OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+>THEORY OF
+>+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+>(INCLUDING
+>+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+>THIS SOFTWARE,
+>+EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+>diff --git a/licenses/TI-TSPA b/licenses/TI-TSPA
+>new file mode 100644
+>index 0000000..fd87c2a
+>--- /dev/null
+>+++ b/licenses/TI-TSPA
+>@@ -0,0 +1,206 @@
+>+Texas Instruments Incorporated
+>+Technology and Software Publicly Available
+>+Software License Agreement
+>+
+>+
+>+Important - Please read the following license agreement
+>carefully.  This is
+>+a legally binding agreement.  Do not click "i have read and
+>agree" or use
+>+(as applicable) the Licensed Materials unless: (1) you are
+>authorized to
+>+accept and agree to the terms of this license agreement on behalf
+>of
+>+yourself or your company (as applicable) and (2) you intend to be
+>bound by
+>+the terms of this license agreement on behalf of yourself or your
+>company
+>+(as applicable).
+>+
+>+This Software License Agreement ("Agreement") is a legal
+>agreement between
+>+you (either an individual or entity) and Texas Instruments
+>Incorporated
+>+("TI"), 12500 TI Boulevard, Dallas, Texas 75243.  The "Licensed
+>Materials"
+>+subject to this Agreement include the software programs (in whole
+>or in
+>+part), that accompany this Agreement and set forth in the
+>applicable
+>+software manifest and which you access "on-line" and/or
+>electronic
+>+documentation (in whole or in part) associated and provided with
+>these
+>+software programs.  By installing, copying or otherwise using the
+>Licensed
+>+Materials you agree to abide by the terms of this Agreement.  If
+>you choose
+>+not to accept or agree with these terms, do not download or
+>install the
+>+Licensed Materials.
+>+
+>+Note Regarding Possible Access to Open Source Software:  The
+>Licensed
+>+Materials may be bundled with Open Source Software.  "Open Source
+>Software"
+>+means any software licensed under terms requiring that (A) other
+>software
+>+("Proprietary Software") incorporated, combined or distributed
+>with such
+>+software or developed using such software: (i) be disclosed or
+>distributed
+>+in source code form; or (ii) otherwise be licensed on terms
+>inconsistent
+>+with the terms of this Agreement, including but not limited to
+>permitting
+>+use of the Proprietary Software on or with devices other than TI
+>Devices, or
+>+(B) require the owner of Proprietary Software to license any of
+>its patents
+>+to users of the Open Source Software and/or Proprietary Software
+>+incorporated, combined or distributed with such Open Source
+>Software or
+>+developed using such Open Source Software.
+>+
+>+You may gain access to Open Source Software, in which case such
+>Open Source
+>+Software will be listed in the applicable software manifest (in
+>whole or in
+>+part, the "Open Source Materials").  Your use of the Open Source
+>Materials
+>+is subject to the separate licensing terms applicable to such
+>Open Source
+>+Materials as specified in the applicable software manifest.  For
+>+clarification, this Agreement does not limit your rights under,
+>or grant you
+>+rights that supersede, the license terms of any applicable Open
+>Source
+>+Materials license agreement.  If any of the Open Source Materials
+>have been
+>+provided to you in object code only, TI will provide to you or
+>show you
+>+where can access the source code versions of such Open Source
+>Materials if
+>+you contact TI at Texas Instruments Incorporated, 12500 TI
+>Boulevard, Mail
+>+Station 8638, Dallas, Texas 75243, Attention: Contracts Manager.
+>You may
+>+terminate this Agreement in the event you choose not to accept or
+>agree with
+>+the terms in any applicable Open Source Materials license
+>agreement,
+>+provided that such termination occurs within five (5) calendar
+>days of
+>+acceptance of this Agreement and you abide by all applicable
+>license terms
+>+in this Agreement until such termination.
+>+
+>+1. License.
+>+
+>+a. Source Code License.  For the Licensed Materials provided in
+>source code
+>+format, TI hereby grants to you a limited, non-exclusive license
+>to
+>+reproduce, use, and create modified or derivative works of the
+>Licensed
+>+Materials provided to you in source code format and to distribute
+>an
+>+unlimited number of copies of such source code Licensed
+>Materials, or any
+>+derivatives thereof, in any format.
+>+
+>+b.  Object Code License.  For the Licensed Materials provided in
+>object code
+>+format, TI hereby grants to you a limited, non-exclusive license
+>to
+>+reproduce and use the Licensed Materials provided to you in
+>object code
+>+format and to distribute an unlimited number of object or
+>executable copies
+>+of such object code Licensed Materials.
+>+
+>+2. Termination.  This Agreement is effective until terminated.
+>Without
+>+prejudice to any other rights, TI may terminate your right to use
+>the
+>+Licensed Materials under this Agreement if you fail to comply
+>with the terms
+>+of this Agreement.  In such event, you shall destroy all copies
+>of the
+>+Licensed Materials, including all portions and derivatives
+>thereof.
+>+
+>+3. Intellectual Property Rights.
+>+
+>+a. The Licensed Materials being provided to you hereunder are
+>being made
+>+publicly available by TI, even though they contain copyrighted
+>material of
+>+TI and its licensors, if applicable.   In no event may you alter,
+>remove or
+>+destroy any copyright notice included in the Licensed Materials.
+>To the
+>+extent that any of the Licensed Materials are provided in binary
+>or object
+>+code only, you may not unlock, decompile, reverse engineer,
+>disassemble or
+>+otherwise translate such binary or object code to human-
+>perceivable form.
+>+The source code of such reverse engineered code may contain TI
+>trade secret
+>+and other proprietary information. TI reserves all rights not
+>specifically
+>+granted under this Agreement.
+>+
+>+b. Certain Licensed Materials may (i) require patent licenses
+>from third
+>+parties claiming patent rights covering implementation of the
+>Licensed
+>+Materials or (ii) be based on industry recognized standards or
+>software
+>+programs published by industry recognized standards bodies and
+>certain third
+>+parties may claim to own patents or copyrights that cover
+>implementation of
+>+those standards.  You acknowledge and agree that this Agreement
+>does not
+>+convey a license to any such third party patents and copyrights.
+>+
+>+c. YOU ACKNOWLEDGE AND AGREE THAT TI SHALL NOT BE LIABLE FOR AND
+>SHALL NOT
+>+DEFEND OR INDEMNIFY YOU AGAINST ANY THIRD PARTY INFRINGEMENT
+>CLAIM THAT
+>+RELATES TO OR IS BASED ON YOUR MANUFACTURE, USE, OR DISTRIBUTION
+>OF THE
+>+LICENSED MATERIALS OR YOUR MANUFACTURE, USE, OFFER FOR SALE,
+>SALE,
+>+IMPORTATION OR DISTRIBUTION OF YOUR PRODUCTS THAT INCLUDE OR
+>INCORPORATE THE
+>+LICENSED MATERIALS.
+>+
+>+d. You acknowledge and agree that you are responsible for any
+>fees or
+>+royalties that may be payable to any third party based on such
+>third party's
+>+interests in the Licensed Materials described in Section 3(b)
+>above (the
+>+"Third Party Payment Obligations").  You agree to indemnify TI
+>against any
+>+Third Party Payment Obligations and will defend any claim, suit
+>or
+>+proceeding brought against TI insofar as such claim, suit or
+>proceeding is
+>+based on your failure to pay any Third Party Payment Obligations.
+>+
+>+4. Warranties and Limitations.  THE LICENSED MATERIALS ARE
+>PROVIDED "AS IS".
+>+TI AND ITS LICENSORS MAKE NO WARRANTY OR REPRESENTATION, EXPRESS,
+>IMPLIED OR
+>+STATUTORY, INCLUDING ANY IMPLIED WARRANTIES OF MERCHANTIBILITY,
+>FITNESS FOR
+>+A PARTICULAR PURPOSE, LACK OF VIRUSES, ACCURACY OR COMPLETENESS
+>OF
+>+RESPONSES, RESULTS AND LACK OF NEGLIGENCE.  TI DISCLAIMS ANY
+>WARRANTY OF
+>+TITLE, QUIET ENJOYMENT, QUIET POSESSION, AND NON-INFRINGEMENT OF
+>ANY THIRD
+>+PARTY INTELLECTUAL PROPERTY RIGHTS WITH REGARD TO THE LICENSED
+>MATERIALS OR
+>+USE OF THOSE MATERIALS.
+>+
+>+YOU ACKNOWLEDGE AND AGREE THAT THE LICENSED MATERIALS MAY NOT BE
+>INTENDED
+>+FOR PRODUCTION APPLICATIONS AND MAY CONTAIN IRREGULARITIES AND
+>DEFECTS NOT
+>+FOUND IN PRODUCTION SOFTWARE.  FURTHERMORE, YOU ACKNOWLEDGE AND
+>AGREE THAT
+>+THE LICENSED MATERIALS HAVE NOT BEEN TESTED OR CERTIFIED BY ANY
+>GOVERNMENT
+>+AGENCY OR INDUSTRY REGULATORY ORGANIZATION OR ANY OTHER THIRD
+>PARTY
+>+ORGANIZATION.  YOU AGREE THAT PRIOR TO USING, INCORPORATING OR
+>DISTRIBUTING
+>+THE LICENSED MATERIALS IN OR WITH ANY COMMERCIAL PRODUCT THAT YOU
+>WILL
+>+THOROUGHLY TEST THE PRODUCT AND THE FUNCTIONALITY OF THE LICENSED
+>MATERIALS
+>+IN OR WITH THAT PRODUCT AND BE SOLELY RESPONSIBLE FOR ANY
+>PROBLEMS OR
+>+FAILURES.
+>+
+>+IN NO EVENT SHALL TI OR ITS LICENSORS BE LIABLE FOR ANY SPECIAL,
+>INDIRECT,
+>+INCIDENTAL, PUNITIVE OR CONSEQUENTIAL DAMAGES, HOWEVER CAUSED ON
+>ANY THEORY
+>+OF LIABILITY, ARISING IN ANY WAY OUT OF THIS AGREEMENT, OR YOUR
+>USE OF THE
+>+LICENSED MATERIALS, WHETHER OR NOT TI HAS BEEN ADVISED OF THE
+>POSSIBILITY OF
+>+SUCH DAMAGES.  EXCLUDED DAMAGES INCLUDE, BUT ARE NOT LIMITED TO,
+>COST OF
+>+REMOVAL OR REINSTALLATION, OUTSIDE COMPUTER TIME, LABOR COSTS,
+>LOSS OR
+>+CORRUPTION OF DATA, LOSS OF GOODWILL, LOSS OF PROFITS, LOSS OF
+>SAVINGS, OR
+>+LOSS OF USE OR INTERRUPTION OF BUSINESS OR ANY OTHER ECONOMIC
+>LOSS.  IN NO
+>+EVENT WILL TI'S AGGREGATE LIABILITY UNDER THIS AGREEMENT OR
+>ARISING OUT OF
+>+YOUR USE OF THE LICENSED MATERIALS EXCEED FIVE HUNDRED U.S.
+>DOLLARS
+>+(US$500).
+>+
+>+Because some jurisdictions do not allow the exclusion or
+>limitation of
+>+incidental or consequential damages or limitation on how long an
+>implied
+>+warranty lasts, the above limitations or exclusions may not apply
+>to you.
+>+
+>+5. Export Control.  The Licensed Materials may be subject to the
+>export or
+>+import regulations of certain countries. You agree to comply with
+>all such
+>+regulations and acknowledge that you have the responsibility to
+>obtain any
+>+licenses or other authorizations that may be required to export,
+>re-export
+>+or import the Licensed Materials.
+>+
+>+6. Governing Law, Jurisdiction and Severability.  This Agreement
+>will be
+>+governed by and interpreted in accordance with the laws of the
+>State of
+>+Texas, without reference to conflict of laws principles.  If for
+>any reason
+>+a court of competent jurisdiction finds any provision of the
+>Agreement to be
+>+unenforceable, that provision will be enforced to the maximum
+>extent
+>+possible to effectuate the intent of the parties and the
+>remainder of the
+>+Agreement shall continue in full force and effect. This Agreement
+>shall not
+>+be governed by the United Nations Convention on Contracts for the
+>+International Sale of Goods, or by the Uniform Computer
+>Information
+>+Transactions Act (UCITA). The parties agree that non-exclusive
+>jurisdiction
+>+for any dispute arising out of or relating to this Agreement lies
+>within the
+>+courts located in the State of Texas.  Notwithstanding the
+>foregoing, any
+>+judgment may be enforced in any United States or foreign court,
+>and either
+>+party may seek injunctive relief in any United States or foreign
+>court.
+>+Failure by TI to enforce any provision of this Agreement shall
+>not be deemed
+>+a waiver of future enforcement of that or any other provision in
+>this
+>+Agreement or any other agreement that may be in place between the
+>parties.
+>+
+>+7. PRC Provisions.  If you are located in the People's Republic
+>of China
+>+("PRC") or if the Licensed Materials will be sent to the PRC, the
+>following
+>+provisions shall apply:
+>+
+>+a. Registration Requirements.  You shall be solely responsible
+>for
+>+performing all acts and obtaining all approvals that may be
+>required in
+>+connection with this Agreement by the government of the PRC,
+>including but
+>+not limited to registering pursuant to, and otherwise complying
+>with, the
+>+PRC Measures on the Administration of Software Products,
+>Management
+>+Regulations on Technology Import-Export, and Technology Import
+>and Export
+>+Contract Registration Management Rules.  Upon receipt of such
+>approvals from
+>+the government authorities, you shall forward evidence of all
+>such approvals
+>+to TI for its records.  In the event that you fail to obtain any
+>such
+>+approval or registration, you shall be solely responsible for any
+>and all
+>+losses, damages or costs resulting therefrom, and shall indemnify
+>TI for all
+>+such losses, damages or costs.
+>+
+>+b. Governing Language.  This Agreement is written and executed in
+>the
+>+English language.  If a translation of this Agreement is required
+>for any
+>+purpose, including but not limited to registration of the
+>Agreement pursuant
+>+to any governmental laws, regulations or rules, you shall be
+>solely
+>+responsible for creating such translation.  Any translation of
+>this
+>+Agreement into a language other than English is intended solely
+>in order to
+>+comply with such laws or for reference purposes, and the English
+>language
+>+version shall be authoritative and controlling.
+>+
+>+8. Entire Agreement.  This is the entire agreement between you
+>and TI and
+>+supersedes any prior agreement between the parties related to the
+>subject
+>+matter of this Agreement. No amendment or modification of this
+>Agreement
+>+will be effective unless in writing and signed by a duly
+>authorized
+>+representative of TI.  You hereby warrant and represent that you
+>have
+>+obtained all authorizations and other applicable consents
+>required
+>+empowering you to enter into this Agreement.
+>--
+>1.9.2
+>
+>--
+>_______________________________________________
+>meta-ti mailing list
+>meta-ti@yoctoproject.org
+>https://lists.yoctoproject.org/listinfo/meta-ti
 
-<h2>Status for 04/23/14</h2>
-
-<h2>BUILD_ID: build-2014-04-23_21-01-36</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
-
-
-------=_Part_570_1440978375.1398306149254--
