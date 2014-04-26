@@ -1,28 +1,30 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 390E5E006EC
-	for <meta-ti@yoctoproject.org>; Fri, 25 Apr 2014 19:30:30 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s3Q2UTK4018380
-	for <meta-ti@yoctoproject.org>; Fri, 25 Apr 2014 21:30:29 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s3Q2UTab006252
-	for <meta-ti@yoctoproject.org>; Fri, 25 Apr 2014 21:30:29 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 25 Apr 2014 21:30:29 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s3Q2UTxv017245	for <meta-ti@yoctoproject.org>; Fri, 25 Apr 2014 21:30:29
-	-0500
-Date: Fri, 25 Apr 2014 22:15:18 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <555049528.581.1398478518492.JavaMail.jenkins@puget>
+Return-Path: <deepakvijay2255@gmail.com>
+Received: from mail-la0-f67.google.com (mail-la0-f67.google.com
+	[209.85.215.67])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 775B9E004EB
+	for <meta-ti@yoctoproject.org>; Fri, 25 Apr 2014 23:58:33 -0700 (PDT)
+Received: by mail-la0-f67.google.com with SMTP id mc6so339052lab.2
+	for <meta-ti@yoctoproject.org>; Fri, 25 Apr 2014 23:58:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:message-id:subject:from:to:content-type;
+	bh=6IHpL+TNw2wptjlNd6mOnjgTDpJesIN0pgK+Mh8daZg=;
+	b=LH0i6apyNih8uaFSw0q7SAZ6G8GPFB/Z4o23wWCNBs7GLaQQ7gg/LUFmKBZlJv/KR2
+	s8dumyDN6+P0Eew4VA3Ug5vvr3oELSno2Z4b1B3j39syx4+0TO8h3dUPfyjfADnnseY0
+	N0Vefn3SLd1PB1RP7Jv1pmWHVCMaDwg5GhGQi85/Sk0xoJ3p5zehVBtS0bWMU6g3sZBO
+	3xXqNxrc2pIKG9sx3A3aPg9gZpn6L2LWM0278aVipZM9/VLya3W3sH3GOAbXcWK7m4fe
+	bE1zFDHhAA/IkH2ovGSUgY0a+SCb61sjZZ77hAsE/HEzClTKjRdGGP5KMAFG30M38FXZ
+	ARuA==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-04-25_21-00-24
+X-Received: by 10.112.41.227 with SMTP id i3mr65926lbl.41.1398495511698; Fri,
+	25 Apr 2014 23:58:31 -0700 (PDT)
+Sender: deepakvijay2255@gmail.com
+Received: by 10.112.47.70 with HTTP; Fri, 25 Apr 2014 23:58:31 -0700 (PDT)
+Date: Sat, 26 Apr 2014 12:28:31 +0530
+X-Google-Sender-Auth: -bbNWiapsl7Rg3-LKzFW6HgeWfk
+Message-ID: <CAAxuRXguvLRy+DosUUzeLD_BUN7eM=47D6VYZhW2QVPzFWBjww@mail.gmail.com>
+From: deepak vijay <deepakvijay2255@rediff.com>
+To: meta-ti@yoctoproject.org
+Subject: Compatibility of linux kernel 2.6.37
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,169 +37,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Apr 2014 02:30:34 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_580_838352785.1398478518491"
+X-List-Received-Date: Sat, 26 Apr 2014 06:58:37 -0000
+Content-Type: multipart/alternative; boundary=001a113468f031df6704f7ec9cff
 
-------=_Part_580_838352785.1398478518491
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a113468f031df6704f7ec9cff
+Content-Type: text/plain; charset=UTF-8
 
-<html>
-<head>
-<title>
-Status for 04/25/14
-</title>
-</head>
-<body>
-
-<h2>Status for 04/25/14</h2>
-
-<h2>BUILD_ID: build-2014-04-25_21-01-31</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+Hi,
+I am new to yocto project.
+So I wold like to know whether the linux kernels versions less than 3.x
+(like 2.6.37) are compatible to the yocto.
+If yes I also want to know that how create a new recipe for this kernel.
 
 
-------=_Part_580_838352785.1398478518491--
+Regards,
+Deepak
+
+--001a113468f031df6704f7ec9cff
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi,<div>I am new to yocto project.</div><div>So I wold lik=
+e to know whether the linux kernels versions less than 3.x (like 2.6.37) ar=
+e compatible to the yocto.</div><div>If yes I also want to know that how cr=
+eate a new recipe for this kernel.</div>
+<div><br></div><div><br></div><div>Regards,</div><div>Deepak</div></div>
+
+--001a113468f031df6704f7ec9cff--
