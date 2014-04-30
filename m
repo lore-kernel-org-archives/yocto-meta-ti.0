@@ -1,44 +1,44 @@
-Return-Path: <deepakvijay2255@gmail.com>
+Return-Path: <chase.maupin@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 96A5BE004EB; Wed, 30 Apr 2014 05:00:42 -0700 (PDT)
+	id D0333E00955; Wed, 30 Apr 2014 07:32:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-	HTML_MESSAGE,RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [209.85.215.67 listed in list.dnswl.org]
+X-Spam-Status: No, score=-5.0 required=5.0 tests=HTML_MESSAGE, RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-la0-f67.google.com (mail-la0-f67.google.com
-	[209.85.215.67])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76EC2E003C7
-	for <meta-ti@yoctoproject.org>; Wed, 30 Apr 2014 05:00:37 -0700 (PDT)
-Received: by mail-la0-f67.google.com with SMTP id mc6so318796lab.2
-	for <meta-ti@yoctoproject.org>; Wed, 30 Apr 2014 05:00:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:message-id:subject:from:to:content-type;
-	bh=LoqiqtQi9rZqdjKSKoHb34NLVwTPPKXqsWm41Qj7aXc=;
-	b=z4BMJ2LlB6BF59GaUu8H31C3xnKuQxMDmj5ece6gPP6Yk/HuSMPyD2/79u+D3ZvzEm
-	K/2lzag9sPeLvkTaq+HCFnTzbQ9mVptVRfJDpXOP0h6kfXvwiVxOUq+4ox3sueC2z6OC
-	gZH4ywQGV6xag2jSHonZlQFM0hbQliO7txJLh6r9UlEIvmR6huVkr7EUU7UwPoolXB5i
-	8RIKJnThmZstfZ/ARebcsd0odRJKD+yUTnrR0Ev4Lj/JdFQnNzzmbfwTyFrwn97Z4Vic
-	01cB93BlI4hBj79I1oEkGh8SARBhO1GHoFNs0nPBX/mYudjTHNvQG4QpMx06WyP3a6Og
-	oK4Q==
+X-Greylist: delayed 163 seconds by postgrey-1.32 at yocto-www;
+	Wed, 30 Apr 2014 07:32:09 PDT
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56EFAE003C7
+	for <meta-ti@yoctoproject.org>; Wed, 30 Apr 2014 07:32:09 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s3UETMss013061;
+	Wed, 30 Apr 2014 09:29:22 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s3UETMvx027794;
+	Wed, 30 Apr 2014 09:29:22 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
+	14.03.0174.001; Wed, 30 Apr 2014 09:29:21 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: deepak vijay <deepakvijay2255@rediff.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] Regarding linux configuraion
+Thread-Index: AQHPZGviMZw22Ep/pUii192RFczTY5sqN3kQ
+Date: Wed, 30 Apr 2014 14:29:20 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015CFC50FD@DLEE11.ent.ti.com>
+References: <CAAxuRXjSVQ+yu5znei1LwA1hRhLbKADo5jtR0i+m+6xh2g0SgA@mail.gmail.com>
+In-Reply-To: <CAAxuRXjSVQ+yu5znei1LwA1hRhLbKADo5jtR0i+m+6xh2g0SgA@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-X-Received: by 10.112.27.133 with SMTP id t5mr2623342lbg.21.1398859235324;
-	Wed, 30 Apr 2014 05:00:35 -0700 (PDT)
-Sender: deepakvijay2255@gmail.com
-Received: by 10.112.47.70 with HTTP; Wed, 30 Apr 2014 05:00:35 -0700 (PDT)
-Date: Wed, 30 Apr 2014 17:30:35 +0530
-X-Google-Sender-Auth: W71Jms2TXFdeKqAfWT7vnxKRMF8
-Message-ID: <CAAxuRXjSVQ+yu5znei1LwA1hRhLbKADo5jtR0i+m+6xh2g0SgA@mail.gmail.com>
-From: deepak vijay <deepakvijay2255@rediff.com>
-To: meta-ti@yoctoproject.org
-Subject: Regarding linux configuraion
+Subject: Re: Regarding linux configuraion
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,28 +51,154 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 12:00:42 -0000
-Content-Type: multipart/alternative; boundary=001a1133b04acff73504f8414b13
+X-List-Received-Date: Wed, 30 Apr 2014 14:32:13 -0000
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_7D46E86EC0A8354091174257B2FED1015CFC50FDDLEE11entticom_"
 
---001a1133b04acff73504f8414b13
-Content-Type: text/plain; charset=UTF-8
+--_000_7D46E86EC0A8354091174257B2FED1015CFC50FDDLEE11entticom_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi,
-I am new to yocto project.
-I have seen the U-boot configuration variable (UBOOT_MACHINE) in
-conf/machine/include/.. files.
-I would like to know where the linux kernel configuration variable will be
-used?
-Please help me to understand this.
+VmlqYXksDQoNClRoZSBMaW51eCBjb25maWd1cmF0aW9uIGlzIHRoZSBkZWZjb25maWcgZmlsZSBy
+ZWZlcmVuY2VkIGluIHRoZSBrZXJuZWwgcmVjaXBlLiAgV2l0aCBtZXRhLXRpIHRoZXJlIGFyZSB0
+d28gd2F5cyB0aGF0IHlvdSBjYW4gdXNlIHRoZSBkZWZjb25maWc6DQoNCg0KMS4gICAgICBUaGUg
+ZGVmY29uZmlnIGZpbGUgY2FuIGJlIGEgY29tcGxldGUga2VybmVsIGNvbmZpZw0KDQoyLiAgICAg
+IFlvdSBjYW4gdXNlIGEgZmxhZyBpbiB0aGUgZGVmY29uZmlnIHRvIHNwZWNpZnkgdGhlIHVzZSBv
+ZiBhbiBpbi1rZXJuZWwgZGVmY29uZmlnLiAgRm9yIGV4YW1wbGUgaWYgeW91ciBkZWZjb25maWcg
+Y29udGFpbnMgdGhlIGxpbmUg4oCcdXNlLWtlcm5lbC1jb25maWc9b21hcDJwbHVzX2RlZmNvbmZp
+Z+KAnSB0aGVuIHRoZSBvbWFwMnBsdXNfZGVmY29uZmlnIGluc2lkZSBvZiB0aGUga2VybmVsIHRy
+ZWUgd2lsbCBiZSB1c2VkLg0KDQpJIGhvcGUgdGhpcyBhbnN3ZXJzIHlvdXIgcXVlc3Rpb24NCg0K
+Q2hhc2UNCg0KRnJvbTogbWV0YS10aS1ib3VuY2VzQHlvY3RvcHJvamVjdC5vcmcgW21haWx0bzpt
+ZXRhLXRpLWJvdW5jZXNAeW9jdG9wcm9qZWN0Lm9yZ10gT24gQmVoYWxmIE9mIGRlZXBhayB2aWph
+eQ0KU2VudDogV2VkbmVzZGF5LCBBcHJpbCAzMCwgMjAxNCA1OjAxIEFNDQpUbzogbWV0YS10aUB5
+b2N0b3Byb2plY3Qub3JnDQpTdWJqZWN0OiBbbWV0YS10aV0gUmVnYXJkaW5nIGxpbnV4IGNvbmZp
+Z3VyYWlvbg0KDQpIaSwNCkkgYW0gbmV3IHRvIHlvY3RvIHByb2plY3QuDQpJIGhhdmUgc2VlbiB0
+aGUgVS1ib290IGNvbmZpZ3VyYXRpb24gdmFyaWFibGUgKFVCT09UX01BQ0hJTkUpIGluIGNvbmYv
+bWFjaGluZS9pbmNsdWRlLy4uIGZpbGVzLg0KSSB3b3VsZCBsaWtlIHRvIGtub3cgd2hlcmUgdGhl
+IGxpbnV4IGtlcm5lbCBjb25maWd1cmF0aW9uIHZhcmlhYmxlIHdpbGwgYmUgdXNlZD8NClBsZWFz
+ZSBoZWxwIG1lIHRvIHVuZGVyc3RhbmQgdGhpcy4NCg0KDQpSZWdhcmRzLA0KRGVlcGFrDQo=
 
+--_000_7D46E86EC0A8354091174257B2FED1015CFC50FDDLEE11entticom_
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Regards,
-Deepak
+PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
+bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
+YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
+cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
+Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
+ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTIgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
+PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
+U2ltU3VuOw0KCXBhbm9zZS0xOjIgMSA2IDAgMyAxIDEgMSAxIDE7fQ0KQGZvbnQtZmFjZQ0KCXtm
+b250LWZhbWlseToiQ2FtYnJpYSBNYXRoIjsNCglwYW5vc2UtMToyIDQgNSAzIDUgNCA2IDMgMiA0
+O30NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6Q2FsaWJyaTsNCglwYW5vc2UtMToyIDE1IDUg
+MiAyIDIgNCAzIDIgNDt9DQpAZm9udC1mYWNlDQoJe2ZvbnQtZmFtaWx5OlRhaG9tYTsNCglwYW5v
+c2UtMToyIDExIDYgNCAzIDUgNCA0IDIgNDt9DQpAZm9udC1mYWNlDQoJe2ZvbnQtZmFtaWx5OiJc
+QFNpbVN1biI7DQoJcGFub3NlLTE6MiAxIDYgMCAzIDEgMSAxIDEgMTt9DQovKiBTdHlsZSBEZWZp
+bml0aW9ucyAqLw0KcC5Nc29Ob3JtYWwsIGxpLk1zb05vcm1hbCwgZGl2Lk1zb05vcm1hbA0KCXtt
+YXJnaW46MGluOw0KCW1hcmdpbi1ib3R0b206LjAwMDFwdDsNCglmb250LXNpemU6MTIuMHB0Ow0K
+CWZvbnQtZmFtaWx5OiJUaW1lcyBOZXcgUm9tYW4iLCJzZXJpZiI7fQ0KYTpsaW5rLCBzcGFuLk1z
+b0h5cGVybGluaw0KCXttc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJY29sb3I6Ymx1ZTsNCgl0ZXh0
+LWRlY29yYXRpb246dW5kZXJsaW5lO30NCmE6dmlzaXRlZCwgc3Bhbi5Nc29IeXBlcmxpbmtGb2xs
+b3dlZA0KCXttc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJY29sb3I6cHVycGxlOw0KCXRleHQtZGVj
+b3JhdGlvbjp1bmRlcmxpbmU7fQ0KcC5Nc29MaXN0UGFyYWdyYXBoLCBsaS5Nc29MaXN0UGFyYWdy
+YXBoLCBkaXYuTXNvTGlzdFBhcmFncmFwaA0KCXttc28tc3R5bGUtcHJpb3JpdHk6MzQ7DQoJbWFy
+Z2luLXRvcDowaW47DQoJbWFyZ2luLXJpZ2h0OjBpbjsNCgltYXJnaW4tYm90dG9tOjBpbjsNCglt
+YXJnaW4tbGVmdDouNWluOw0KCW1hcmdpbi1ib3R0b206LjAwMDFwdDsNCglmb250LXNpemU6MTIu
+MHB0Ow0KCWZvbnQtZmFtaWx5OiJUaW1lcyBOZXcgUm9tYW4iLCJzZXJpZiI7fQ0Kc3Bhbi5FbWFp
+bFN0eWxlMTcNCgl7bXNvLXN0eWxlLXR5cGU6cGVyc29uYWwtcmVwbHk7DQoJZm9udC1mYW1pbHk6
+IkNhbGlicmkiLCJzYW5zLXNlcmlmIjsNCgljb2xvcjojMUY0OTdEO30NCi5Nc29DaHBEZWZhdWx0
+DQoJe21zby1zdHlsZS10eXBlOmV4cG9ydC1vbmx5O30NCkBwYWdlIFdvcmRTZWN0aW9uMQ0KCXtz
+aXplOjguNWluIDExLjBpbjsNCgltYXJnaW46MS4waW4gMS4waW4gMS4waW4gMS4waW47fQ0KZGl2
+LldvcmRTZWN0aW9uMQ0KCXtwYWdlOldvcmRTZWN0aW9uMTt9DQovKiBMaXN0IERlZmluaXRpb25z
+ICovDQpAbGlzdCBsMA0KCXttc28tbGlzdC1pZDo4NDYyMTA2Mzc7DQoJbXNvLWxpc3QtdHlwZTpo
+eWJyaWQ7DQoJbXNvLWxpc3QtdGVtcGxhdGUtaWRzOjEzNzU0MTkxOCA2NzY5ODcwMyA2NzY5ODcx
+MyA2NzY5ODcxNSA2NzY5ODcwMyA2NzY5ODcxMyA2NzY5ODcxNSA2NzY5ODcwMyA2NzY5ODcxMyA2
+NzY5ODcxNTt9DQpAbGlzdCBsMDpsZXZlbDENCgl7bXNvLWxldmVsLXRhYi1zdG9wOm5vbmU7DQoJ
+bXNvLWxldmVsLW51bWJlci1wb3NpdGlvbjpsZWZ0Ow0KCXRleHQtaW5kZW50Oi0uMjVpbjt9DQpv
+bA0KCXttYXJnaW4tYm90dG9tOjBpbjt9DQp1bA0KCXttYXJnaW4tYm90dG9tOjBpbjt9DQotLT48
+L3N0eWxlPjwhLS1baWYgZ3RlIG1zbyA5XT48eG1sPg0KPG86c2hhcGVkZWZhdWx0cyB2OmV4dD0i
+ZWRpdCIgc3BpZG1heD0iMTAyNiIgLz4NCjwveG1sPjwhW2VuZGlmXS0tPjwhLS1baWYgZ3RlIG1z
+byA5XT48eG1sPg0KPG86c2hhcGVsYXlvdXQgdjpleHQ9ImVkaXQiPg0KPG86aWRtYXAgdjpleHQ9
+ImVkaXQiIGRhdGE9IjEiIC8+DQo8L286c2hhcGVsYXlvdXQ+PC94bWw+PCFbZW5kaWZdLS0+DQo8
+L2hlYWQ+DQo8Ym9keSBsYW5nPSJFTi1VUyIgbGluaz0iYmx1ZSIgdmxpbms9InB1cnBsZSI+DQo8
+ZGl2IGNsYXNzPSJXb3JkU2VjdGlvbjEiPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gc3R5
+bGU9ImZvbnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90OywmcXVv
+dDtzYW5zLXNlcmlmJnF1b3Q7O2NvbG9yOiMxRjQ5N0QiPlZpamF5LDxvOnA+PC9vOnA+PC9zcGFu
+PjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTEuMHB0
+O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7c2Fucy1zZXJpZiZxdW90Oztj
+b2xvcjojMUY0OTdEIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNv
+Tm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjEwLjBwdDtmb250LWZhbWlseTomcXVvdDtD
+YWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVvdDs7Y29sb3I6IzFGNDk3RCI+VGhlIExp
+bnV4IGNvbmZpZ3VyYXRpb24gaXMgdGhlIGRlZmNvbmZpZyBmaWxlIHJlZmVyZW5jZWQgaW4gdGhl
+IGtlcm5lbCByZWNpcGUuJm5ic3A7IFdpdGggbWV0YS10aSB0aGVyZSBhcmUgdHdvIHdheXMgdGhh
+dCB5b3UgY2FuIHVzZSB0aGUgZGVmY29uZmlnOjxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNs
+YXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTAuMHB0O2ZvbnQtZmFtaWx5
+OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7c2Fucy1zZXJpZiZxdW90Oztjb2xvcjojMUY0OTdE
+Ij48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTGlzdFBhcmFncmFw
+aCIgc3R5bGU9InRleHQtaW5kZW50Oi0uMjVpbjttc28tbGlzdDpsMCBsZXZlbDEgbGZvMSI+PCFb
+aWYgIXN1cHBvcnRMaXN0c10+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMC4wcHQ7Zm9udC1mYW1p
+bHk6JnF1b3Q7Q2FsaWJyaSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7O2NvbG9yOiMxRjQ5
+N0QiPjxzcGFuIHN0eWxlPSJtc28tbGlzdDpJZ25vcmUiPjEuPHNwYW4gc3R5bGU9ImZvbnQ6Ny4w
+cHQgJnF1b3Q7VGltZXMgTmV3IFJvbWFuJnF1b3Q7Ij4mbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsNCjwvc3Bhbj48L3NwYW4+PC9zcGFuPjwhW2VuZGlmXT48c3BhbiBzdHlsZT0iZm9udC1z
+aXplOjEwLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMtc2Vy
+aWYmcXVvdDs7Y29sb3I6IzFGNDk3RCI+VGhlIGRlZmNvbmZpZyBmaWxlIGNhbiBiZSBhIGNvbXBs
+ZXRlIGtlcm5lbCBjb25maWc8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTGlz
+dFBhcmFncmFwaCIgc3R5bGU9InRleHQtaW5kZW50Oi0uMjVpbjttc28tbGlzdDpsMCBsZXZlbDEg
+bGZvMSI+PCFbaWYgIXN1cHBvcnRMaXN0c10+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMC4wcHQ7
+Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7O2Nv
+bG9yOiMxRjQ5N0QiPjxzcGFuIHN0eWxlPSJtc28tbGlzdDpJZ25vcmUiPjIuPHNwYW4gc3R5bGU9
+ImZvbnQ6Ny4wcHQgJnF1b3Q7VGltZXMgTmV3IFJvbWFuJnF1b3Q7Ij4mbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsNCjwvc3Bhbj48L3NwYW4+PC9zcGFuPjwhW2VuZGlmXT48c3BhbiBzdHls
+ZT0iZm9udC1zaXplOjEwLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90
+O3NhbnMtc2VyaWYmcXVvdDs7Y29sb3I6IzFGNDk3RCI+WW91IGNhbiB1c2UgYSBmbGFnIGluIHRo
+ZSBkZWZjb25maWcgdG8gc3BlY2lmeSB0aGUgdXNlIG9mIGFuIGluLWtlcm5lbCBkZWZjb25maWcu
+Jm5ic3A7IEZvciBleGFtcGxlIGlmIHlvdXIgZGVmY29uZmlnIGNvbnRhaW5zIHRoZSBsaW5lIOKA
+nHVzZS1rZXJuZWwtY29uZmlnPW9tYXAycGx1c19kZWZjb25maWfigJ0NCiB0aGVuIHRoZSBvbWFw
+MnBsdXNfZGVmY29uZmlnIGluc2lkZSBvZiB0aGUga2VybmVsIHRyZWUgd2lsbCBiZSB1c2VkLjxv
+OnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxlPSJm
+b250LXNpemU6MTAuMHB0O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7c2Fu
+cy1zZXJpZiZxdW90Oztjb2xvcjojMUY0OTdEIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+
+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjEwLjBwdDtmb250
+LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVvdDs7Y29sb3I6
+IzFGNDk3RCI+SSBob3BlIHRoaXMgYW5zd2VycyB5b3VyIHF1ZXN0aW9uPG86cD48L286cD48L3Nw
+YW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMC4w
+cHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7
+O2NvbG9yOiMxRjQ5N0QiPjxvOnA+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJN
+c29Ob3JtYWwiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTAuMHB0O2ZvbnQtZmFtaWx5OiZxdW90
+O0NhbGlicmkmcXVvdDssJnF1b3Q7c2Fucy1zZXJpZiZxdW90Oztjb2xvcjojMUY0OTdEIj5DaGFz
+ZTxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxl
+PSJmb250LXNpemU6MTEuMHB0O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7
+c2Fucy1zZXJpZiZxdW90Oztjb2xvcjojMUY0OTdEIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48
+L3A+DQo8ZGl2IHN0eWxlPSJib3JkZXI6bm9uZTtib3JkZXItbGVmdDpzb2xpZCBibHVlIDEuNXB0
+O3BhZGRpbmc6MGluIDBpbiAwaW4gNC4wcHQiPg0KPGRpdj4NCjxkaXYgc3R5bGU9ImJvcmRlcjpu
+b25lO2JvcmRlci10b3A6c29saWQgI0I1QzRERiAxLjBwdDtwYWRkaW5nOjMuMHB0IDBpbiAwaW4g
+MGluIj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTAu
+MHB0O2ZvbnQtZmFtaWx5OiZxdW90O1RhaG9tYSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7
+Ij5Gcm9tOjwvc3Bhbj48L2I+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMC4wcHQ7Zm9udC1mYW1p
+bHk6JnF1b3Q7VGFob21hJnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVvdDsiPiBtZXRhLXRpLWJv
+dW5jZXNAeW9jdG9wcm9qZWN0Lm9yZyBbbWFpbHRvOm1ldGEtdGktYm91bmNlc0B5b2N0b3Byb2pl
+Y3Qub3JnXQ0KPGI+T24gQmVoYWxmIE9mIDwvYj5kZWVwYWsgdmlqYXk8YnI+DQo8Yj5TZW50Ojwv
+Yj4gV2VkbmVzZGF5LCBBcHJpbCAzMCwgMjAxNCA1OjAxIEFNPGJyPg0KPGI+VG86PC9iPiBtZXRh
+LXRpQHlvY3RvcHJvamVjdC5vcmc8YnI+DQo8Yj5TdWJqZWN0OjwvYj4gW21ldGEtdGldIFJlZ2Fy
+ZGluZyBsaW51eCBjb25maWd1cmFpb248bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8L2Rpdj4NCjwv
+ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8ZGl2Pg0K
+PHAgY2xhc3M9Ik1zb05vcm1hbCI+SGksPG86cD48L286cD48L3A+DQo8ZGl2Pg0KPHAgY2xhc3M9
+Ik1zb05vcm1hbCI+SSBhbSBuZXcgdG8geW9jdG8gcHJvamVjdC48bzpwPjwvbzpwPjwvcD4NCjwv
+ZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPkkgaGF2ZSBzZWVuIHRoZSBVLWJvb3Qg
+Y29uZmlndXJhdGlvbiB2YXJpYWJsZSAoVUJPT1RfTUFDSElORSkgaW4gY29uZi9tYWNoaW5lL2lu
+Y2x1ZGUvLi4gZmlsZXMuPG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0i
+TXNvTm9ybWFsIj5JIHdvdWxkIGxpa2UgdG8ga25vdyB3aGVyZSB0aGUgbGludXgga2VybmVsIGNv
+bmZpZ3VyYXRpb24gdmFyaWFibGUgd2lsbCBiZSB1c2VkPzxvOnA+PC9vOnA+PC9wPg0KPC9kaXY+
+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+UGxlYXNlIGhlbHAgbWUgdG8gdW5kZXJzdGFu
+ZCB0aGlzLjxvOnA+PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1h
+bCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9y
+bWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29O
+b3JtYWwiPlJlZ2FyZHMsPG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0i
+TXNvTm9ybWFsIj5EZWVwYWs8bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPC9kaXY+DQo8L2Rpdj4N
+CjwvZGl2Pg0KPC9ib2R5Pg0KPC9odG1sPg0K
 
---001a1133b04acff73504f8414b13
-Content-Type: text/html; charset=UTF-8
-
-<div dir="ltr">Hi,<div>I am new to yocto project.</div><div>I have seen the U-boot configuration variable (UBOOT_MACHINE) in conf/machine/include/.. files.</div><div>I would like to know where the linux kernel configuration variable will be used?</div>
-<div>Please help me to understand this.</div><div><br></div><div><br></div><div>Regards,</div><div>Deepak</div></div>
-
---001a1133b04acff73504f8414b13--
+--_000_7D46E86EC0A8354091174257B2FED1015CFC50FDDLEE11entticom_--
