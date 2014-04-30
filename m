@@ -1,42 +1,44 @@
-Return-Path: <denys@ti.com>
+Return-Path: <deepakvijay2255@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3E443E006C0; Tue, 29 Apr 2014 19:35:06 -0700 (PDT)
+	id 96A5BE004EB; Wed, 30 Apr 2014 05:00:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
-	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: *  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-X-Greylist: delayed 267 seconds by postgrey-1.32 at yocto-www;
-	Tue, 29 Apr 2014 19:35:01 PDT
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BF521E00478
-	for <meta-ti@yoctoproject.org>; Tue, 29 Apr 2014 19:35:01 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s3U2UXgh005175
-	for <meta-ti@yoctoproject.org>; Tue, 29 Apr 2014 21:30:33 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s3U2UXAj028857
-	for <meta-ti@yoctoproject.org>; Tue, 29 Apr 2014 21:30:33 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 29 Apr 2014 21:30:32 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s3U2UWSw023655	for <meta-ti@yoctoproject.org>; Tue, 29 Apr 2014 21:30:32
-	-0500
-Date: Tue, 29 Apr 2014 22:15:15 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <196005129.597.1398824115373.JavaMail.jenkins@puget>
+X-Spam-Status: No, score=-0.7 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+	HTML_MESSAGE,RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [209.85.215.67 listed in list.dnswl.org]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-la0-f67.google.com (mail-la0-f67.google.com
+	[209.85.215.67])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 76EC2E003C7
+	for <meta-ti@yoctoproject.org>; Wed, 30 Apr 2014 05:00:37 -0700 (PDT)
+Received: by mail-la0-f67.google.com with SMTP id mc6so318796lab.2
+	for <meta-ti@yoctoproject.org>; Wed, 30 Apr 2014 05:00:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:message-id:subject:from:to:content-type;
+	bh=LoqiqtQi9rZqdjKSKoHb34NLVwTPPKXqsWm41Qj7aXc=;
+	b=z4BMJ2LlB6BF59GaUu8H31C3xnKuQxMDmj5ece6gPP6Yk/HuSMPyD2/79u+D3ZvzEm
+	K/2lzag9sPeLvkTaq+HCFnTzbQ9mVptVRfJDpXOP0h6kfXvwiVxOUq+4ox3sueC2z6OC
+	gZH4ywQGV6xag2jSHonZlQFM0hbQliO7txJLh6r9UlEIvmR6huVkr7EUU7UwPoolXB5i
+	8RIKJnThmZstfZ/ARebcsd0odRJKD+yUTnrR0Ev4Lj/JdFQnNzzmbfwTyFrwn97Z4Vic
+	01cB93BlI4hBj79I1oEkGh8SARBhO1GHoFNs0nPBX/mYudjTHNvQG4QpMx06WyP3a6Og
+	oK4Q==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-04-29_21-00-24
+X-Received: by 10.112.27.133 with SMTP id t5mr2623342lbg.21.1398859235324;
+	Wed, 30 Apr 2014 05:00:35 -0700 (PDT)
+Sender: deepakvijay2255@gmail.com
+Received: by 10.112.47.70 with HTTP; Wed, 30 Apr 2014 05:00:35 -0700 (PDT)
+Date: Wed, 30 Apr 2014 17:30:35 +0530
+X-Google-Sender-Auth: W71Jms2TXFdeKqAfWT7vnxKRMF8
+Message-ID: <CAAxuRXjSVQ+yu5znei1LwA1hRhLbKADo5jtR0i+m+6xh2g0SgA@mail.gmail.com>
+From: deepak vijay <deepakvijay2255@rediff.com>
+To: meta-ti@yoctoproject.org
+Subject: Regarding linux configuraion
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,169 +51,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 02:35:06 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_596_373237088.1398824115372"
+X-List-Received-Date: Wed, 30 Apr 2014 12:00:42 -0000
+Content-Type: multipart/alternative; boundary=001a1133b04acff73504f8414b13
 
-------=_Part_596_373237088.1398824115372
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a1133b04acff73504f8414b13
+Content-Type: text/plain; charset=UTF-8
 
-<html>
-<head>
-<title>
-Status for 04/29/14
-</title>
-</head>
-<body>
-
-<h2>Status for 04/29/14</h2>
-
-<h2>BUILD_ID: build-2014-04-29_21-01-31</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+Hi,
+I am new to yocto project.
+I have seen the U-boot configuration variable (UBOOT_MACHINE) in
+conf/machine/include/.. files.
+I would like to know where the linux kernel configuration variable will be
+used?
+Please help me to understand this.
 
 
-------=_Part_596_373237088.1398824115372--
+Regards,
+Deepak
+
+--001a1133b04acff73504f8414b13
+Content-Type: text/html; charset=UTF-8
+
+<div dir="ltr">Hi,<div>I am new to yocto project.</div><div>I have seen the U-boot configuration variable (UBOOT_MACHINE) in conf/machine/include/.. files.</div><div>I would like to know where the linux kernel configuration variable will be used?</div>
+<div>Please help me to understand this.</div><div><br></div><div><br></div><div>Regards,</div><div>Deepak</div></div>
+
+--001a1133b04acff73504f8414b13--
