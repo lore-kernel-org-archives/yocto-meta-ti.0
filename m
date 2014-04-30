@@ -1,44 +1,41 @@
-Return-Path: <chase.maupin@ti.com>
+Return-Path: <Joshua.Vanderpool@raymondcorp.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D0333E00955; Wed, 30 Apr 2014 07:32:13 -0700 (PDT)
+	id 8C70CE00985; Wed, 30 Apr 2014 09:50:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.0 required=5.0 tests=HTML_MESSAGE, RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-X-Greylist: delayed 163 seconds by postgrey-1.32 at yocto-www;
-	Wed, 30 Apr 2014 07:32:09 PDT
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56EFAE003C7
-	for <meta-ti@yoctoproject.org>; Wed, 30 Apr 2014 07:32:09 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s3UETMss013061;
-	Wed, 30 Apr 2014 09:29:22 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s3UETMvx027794;
-	Wed, 30 Apr 2014 09:29:22 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
-	14.03.0174.001; Wed, 30 Apr 2014 09:29:21 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: deepak vijay <deepakvijay2255@rediff.com>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] Regarding linux configuraion
-Thread-Index: AQHPZGviMZw22Ep/pUii192RFczTY5sqN3kQ
-Date: Wed, 30 Apr 2014 14:29:20 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015CFC50FD@DLEE11.ent.ti.com>
-References: <CAAxuRXjSVQ+yu5znei1LwA1hRhLbKADo5jtR0i+m+6xh2g0SgA@mail.gmail.com>
-In-Reply-To: <CAAxuRXjSVQ+yu5znei1LwA1hRhLbKADo5jtR0i+m+6xh2g0SgA@mail.gmail.com>
+X-Spam-Status: No, score=0.0 required=5.0 tests=HTML_MESSAGE autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: *  0.0 HTML_MESSAGE BODY: HTML included in message
+X-Greylist: delayed 2794 seconds by postgrey-1.32 at yocto-www;
+	Wed, 30 Apr 2014 09:50:06 PDT
+Received: from smtp.raymondcorp.com (smtp.raymondcorp.com [24.97.209.121])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C73E3E00478
+	for <meta-ti@yoctoproject.org>; Wed, 30 Apr 2014 09:50:06 -0700 (PDT)
+Received: from usnygrcas2.raymondcorp.local (nothing.attdns.com
+	[130.1.155.195] (may be forged))
+	by smtp.raymondcorp.com (8.14.3/8.14.3) with ESMTP id s3UG3Rk2003595
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <meta-ti@yoctoproject.org>; Wed, 30 Apr 2014 11:03:30 -0500
+Received: from USNYGRMBX4.raymondcorp.local ([169.254.4.252]) by usnygrcas2
+	([130.1.155.199]) with mapi id 14.03.0174.001; Wed, 30 Apr 2014 12:03:27
+	-0400
+From: Vanderpool Josh <Joshua.Vanderpool@raymondcorp.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Thread-Topic: Kernel Hang I2C1??
+Thread-Index: Ac9kjbK9NF7l2hAPTFGOrV7u1lzpFA==
+Date: Wed, 30 Apr 2014 16:03:26 +0000
+Message-ID: <7D1F292BE8E4CC4F93079C1A7A58D5622BA96E10@USNYGRMBX4.raymondcorp.local>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+x-originating-ip: [10.154.128.241]
 MIME-Version: 1.0
-Subject: Re: Regarding linux configuraion
+X-mailWatchMessageID: 1398873810.617638.1642.3178315793
+X-mailWatchContentScore: Score of 0 assigned to Content
+X-mailWatchUCEScore: Score of 0 assigned to UCE
+X-mailWatch: Analyzed by IntelliReach MessageScreen(tm)
+Subject: Kernel Hang I2C1??
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,154 +48,448 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 14:32:13 -0000
+X-List-Received-Date: Wed, 30 Apr 2014 16:50:20 -0000
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_7D46E86EC0A8354091174257B2FED1015CFC50FDDLEE11entticom_"
+	boundary="_000_7D1F292BE8E4CC4F93079C1A7A58D5622BA96E10USNYGRMBX4raymo_"
 
---_000_7D46E86EC0A8354091174257B2FED1015CFC50FDDLEE11entticom_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+--_000_7D1F292BE8E4CC4F93079C1A7A58D5622BA96E10USNYGRMBX4raymo_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-VmlqYXksDQoNClRoZSBMaW51eCBjb25maWd1cmF0aW9uIGlzIHRoZSBkZWZjb25maWcgZmlsZSBy
-ZWZlcmVuY2VkIGluIHRoZSBrZXJuZWwgcmVjaXBlLiAgV2l0aCBtZXRhLXRpIHRoZXJlIGFyZSB0
-d28gd2F5cyB0aGF0IHlvdSBjYW4gdXNlIHRoZSBkZWZjb25maWc6DQoNCg0KMS4gICAgICBUaGUg
-ZGVmY29uZmlnIGZpbGUgY2FuIGJlIGEgY29tcGxldGUga2VybmVsIGNvbmZpZw0KDQoyLiAgICAg
-IFlvdSBjYW4gdXNlIGEgZmxhZyBpbiB0aGUgZGVmY29uZmlnIHRvIHNwZWNpZnkgdGhlIHVzZSBv
-ZiBhbiBpbi1rZXJuZWwgZGVmY29uZmlnLiAgRm9yIGV4YW1wbGUgaWYgeW91ciBkZWZjb25maWcg
-Y29udGFpbnMgdGhlIGxpbmUg4oCcdXNlLWtlcm5lbC1jb25maWc9b21hcDJwbHVzX2RlZmNvbmZp
-Z+KAnSB0aGVuIHRoZSBvbWFwMnBsdXNfZGVmY29uZmlnIGluc2lkZSBvZiB0aGUga2VybmVsIHRy
-ZWUgd2lsbCBiZSB1c2VkLg0KDQpJIGhvcGUgdGhpcyBhbnN3ZXJzIHlvdXIgcXVlc3Rpb24NCg0K
-Q2hhc2UNCg0KRnJvbTogbWV0YS10aS1ib3VuY2VzQHlvY3RvcHJvamVjdC5vcmcgW21haWx0bzpt
-ZXRhLXRpLWJvdW5jZXNAeW9jdG9wcm9qZWN0Lm9yZ10gT24gQmVoYWxmIE9mIGRlZXBhayB2aWph
-eQ0KU2VudDogV2VkbmVzZGF5LCBBcHJpbCAzMCwgMjAxNCA1OjAxIEFNDQpUbzogbWV0YS10aUB5
-b2N0b3Byb2plY3Qub3JnDQpTdWJqZWN0OiBbbWV0YS10aV0gUmVnYXJkaW5nIGxpbnV4IGNvbmZp
-Z3VyYWlvbg0KDQpIaSwNCkkgYW0gbmV3IHRvIHlvY3RvIHByb2plY3QuDQpJIGhhdmUgc2VlbiB0
-aGUgVS1ib290IGNvbmZpZ3VyYXRpb24gdmFyaWFibGUgKFVCT09UX01BQ0hJTkUpIGluIGNvbmYv
-bWFjaGluZS9pbmNsdWRlLy4uIGZpbGVzLg0KSSB3b3VsZCBsaWtlIHRvIGtub3cgd2hlcmUgdGhl
-IGxpbnV4IGtlcm5lbCBjb25maWd1cmF0aW9uIHZhcmlhYmxlIHdpbGwgYmUgdXNlZD8NClBsZWFz
-ZSBoZWxwIG1lIHRvIHVuZGVyc3RhbmQgdGhpcy4NCg0KDQpSZWdhcmRzLA0KRGVlcGFrDQo=
+I have a custom board and expect to use i2c1 on the board but it appears =
+to not allow this in the kernel...
+u-boot was able to be modified to support the hardware port i2c1.  Note t=
+hat that software is 1based and hardware is zero-based...
 
---_000_7D46E86EC0A8354091174257B2FED1015CFC50FDDLEE11entticom_
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: base64
+This is the dump:
+*         [    1.482628] ------------[ cut here ]------------
+*         [    1.487549] WARNING: CPU: 0 PID: 1 at arch/arm/mach-omap2/om=
+ap_device.c:888 omap_device_get_by_hwmod_name+0x94/0xb4()
+*         [    1.498803] omap_device_get_by_hwmod_name: no omap_device fo=
+r i2c1
+*         [    1.505365] Modules linked in:
+*         [    1.508606] CPU: 0 PID: 1 Comm: swapper Not tainted 3.12.10-=
+ti2013.12.01 #2
+*         [    1.515990] Backtrace:
+*         [    1.518595] [<c0017880>] (dump_backtrace+0x0/0x10c) from [<c=
+0017a1c>] (show_stack+0x18/0x1c)
+*         [    1.527542]  r6:c002f564 r5:00000009 r4:dd083e28 r3:00000000=
 
-PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
-bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
-YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
-cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
-VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
-Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
-ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTIgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
-PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
-U2ltU3VuOw0KCXBhbm9zZS0xOjIgMSA2IDAgMyAxIDEgMSAxIDE7fQ0KQGZvbnQtZmFjZQ0KCXtm
-b250LWZhbWlseToiQ2FtYnJpYSBNYXRoIjsNCglwYW5vc2UtMToyIDQgNSAzIDUgNCA2IDMgMiA0
-O30NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6Q2FsaWJyaTsNCglwYW5vc2UtMToyIDE1IDUg
-MiAyIDIgNCAzIDIgNDt9DQpAZm9udC1mYWNlDQoJe2ZvbnQtZmFtaWx5OlRhaG9tYTsNCglwYW5v
-c2UtMToyIDExIDYgNCAzIDUgNCA0IDIgNDt9DQpAZm9udC1mYWNlDQoJe2ZvbnQtZmFtaWx5OiJc
-QFNpbVN1biI7DQoJcGFub3NlLTE6MiAxIDYgMCAzIDEgMSAxIDEgMTt9DQovKiBTdHlsZSBEZWZp
-bml0aW9ucyAqLw0KcC5Nc29Ob3JtYWwsIGxpLk1zb05vcm1hbCwgZGl2Lk1zb05vcm1hbA0KCXtt
-YXJnaW46MGluOw0KCW1hcmdpbi1ib3R0b206LjAwMDFwdDsNCglmb250LXNpemU6MTIuMHB0Ow0K
-CWZvbnQtZmFtaWx5OiJUaW1lcyBOZXcgUm9tYW4iLCJzZXJpZiI7fQ0KYTpsaW5rLCBzcGFuLk1z
-b0h5cGVybGluaw0KCXttc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJY29sb3I6Ymx1ZTsNCgl0ZXh0
-LWRlY29yYXRpb246dW5kZXJsaW5lO30NCmE6dmlzaXRlZCwgc3Bhbi5Nc29IeXBlcmxpbmtGb2xs
-b3dlZA0KCXttc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJY29sb3I6cHVycGxlOw0KCXRleHQtZGVj
-b3JhdGlvbjp1bmRlcmxpbmU7fQ0KcC5Nc29MaXN0UGFyYWdyYXBoLCBsaS5Nc29MaXN0UGFyYWdy
-YXBoLCBkaXYuTXNvTGlzdFBhcmFncmFwaA0KCXttc28tc3R5bGUtcHJpb3JpdHk6MzQ7DQoJbWFy
-Z2luLXRvcDowaW47DQoJbWFyZ2luLXJpZ2h0OjBpbjsNCgltYXJnaW4tYm90dG9tOjBpbjsNCglt
-YXJnaW4tbGVmdDouNWluOw0KCW1hcmdpbi1ib3R0b206LjAwMDFwdDsNCglmb250LXNpemU6MTIu
-MHB0Ow0KCWZvbnQtZmFtaWx5OiJUaW1lcyBOZXcgUm9tYW4iLCJzZXJpZiI7fQ0Kc3Bhbi5FbWFp
-bFN0eWxlMTcNCgl7bXNvLXN0eWxlLXR5cGU6cGVyc29uYWwtcmVwbHk7DQoJZm9udC1mYW1pbHk6
-IkNhbGlicmkiLCJzYW5zLXNlcmlmIjsNCgljb2xvcjojMUY0OTdEO30NCi5Nc29DaHBEZWZhdWx0
-DQoJe21zby1zdHlsZS10eXBlOmV4cG9ydC1vbmx5O30NCkBwYWdlIFdvcmRTZWN0aW9uMQ0KCXtz
-aXplOjguNWluIDExLjBpbjsNCgltYXJnaW46MS4waW4gMS4waW4gMS4waW4gMS4waW47fQ0KZGl2
-LldvcmRTZWN0aW9uMQ0KCXtwYWdlOldvcmRTZWN0aW9uMTt9DQovKiBMaXN0IERlZmluaXRpb25z
-ICovDQpAbGlzdCBsMA0KCXttc28tbGlzdC1pZDo4NDYyMTA2Mzc7DQoJbXNvLWxpc3QtdHlwZTpo
-eWJyaWQ7DQoJbXNvLWxpc3QtdGVtcGxhdGUtaWRzOjEzNzU0MTkxOCA2NzY5ODcwMyA2NzY5ODcx
-MyA2NzY5ODcxNSA2NzY5ODcwMyA2NzY5ODcxMyA2NzY5ODcxNSA2NzY5ODcwMyA2NzY5ODcxMyA2
-NzY5ODcxNTt9DQpAbGlzdCBsMDpsZXZlbDENCgl7bXNvLWxldmVsLXRhYi1zdG9wOm5vbmU7DQoJ
-bXNvLWxldmVsLW51bWJlci1wb3NpdGlvbjpsZWZ0Ow0KCXRleHQtaW5kZW50Oi0uMjVpbjt9DQpv
-bA0KCXttYXJnaW4tYm90dG9tOjBpbjt9DQp1bA0KCXttYXJnaW4tYm90dG9tOjBpbjt9DQotLT48
-L3N0eWxlPjwhLS1baWYgZ3RlIG1zbyA5XT48eG1sPg0KPG86c2hhcGVkZWZhdWx0cyB2OmV4dD0i
-ZWRpdCIgc3BpZG1heD0iMTAyNiIgLz4NCjwveG1sPjwhW2VuZGlmXS0tPjwhLS1baWYgZ3RlIG1z
-byA5XT48eG1sPg0KPG86c2hhcGVsYXlvdXQgdjpleHQ9ImVkaXQiPg0KPG86aWRtYXAgdjpleHQ9
-ImVkaXQiIGRhdGE9IjEiIC8+DQo8L286c2hhcGVsYXlvdXQ+PC94bWw+PCFbZW5kaWZdLS0+DQo8
-L2hlYWQ+DQo8Ym9keSBsYW5nPSJFTi1VUyIgbGluaz0iYmx1ZSIgdmxpbms9InB1cnBsZSI+DQo8
-ZGl2IGNsYXNzPSJXb3JkU2VjdGlvbjEiPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gc3R5
-bGU9ImZvbnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90OywmcXVv
-dDtzYW5zLXNlcmlmJnF1b3Q7O2NvbG9yOiMxRjQ5N0QiPlZpamF5LDxvOnA+PC9vOnA+PC9zcGFu
-PjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTEuMHB0
-O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7c2Fucy1zZXJpZiZxdW90Oztj
-b2xvcjojMUY0OTdEIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNv
-Tm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjEwLjBwdDtmb250LWZhbWlseTomcXVvdDtD
-YWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVvdDs7Y29sb3I6IzFGNDk3RCI+VGhlIExp
-bnV4IGNvbmZpZ3VyYXRpb24gaXMgdGhlIGRlZmNvbmZpZyBmaWxlIHJlZmVyZW5jZWQgaW4gdGhl
-IGtlcm5lbCByZWNpcGUuJm5ic3A7IFdpdGggbWV0YS10aSB0aGVyZSBhcmUgdHdvIHdheXMgdGhh
-dCB5b3UgY2FuIHVzZSB0aGUgZGVmY29uZmlnOjxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNs
-YXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTAuMHB0O2ZvbnQtZmFtaWx5
-OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7c2Fucy1zZXJpZiZxdW90Oztjb2xvcjojMUY0OTdE
-Ij48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTGlzdFBhcmFncmFw
-aCIgc3R5bGU9InRleHQtaW5kZW50Oi0uMjVpbjttc28tbGlzdDpsMCBsZXZlbDEgbGZvMSI+PCFb
-aWYgIXN1cHBvcnRMaXN0c10+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMC4wcHQ7Zm9udC1mYW1p
-bHk6JnF1b3Q7Q2FsaWJyaSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7O2NvbG9yOiMxRjQ5
-N0QiPjxzcGFuIHN0eWxlPSJtc28tbGlzdDpJZ25vcmUiPjEuPHNwYW4gc3R5bGU9ImZvbnQ6Ny4w
-cHQgJnF1b3Q7VGltZXMgTmV3IFJvbWFuJnF1b3Q7Ij4mbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
-bmJzcDsNCjwvc3Bhbj48L3NwYW4+PC9zcGFuPjwhW2VuZGlmXT48c3BhbiBzdHlsZT0iZm9udC1z
-aXplOjEwLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMtc2Vy
-aWYmcXVvdDs7Y29sb3I6IzFGNDk3RCI+VGhlIGRlZmNvbmZpZyBmaWxlIGNhbiBiZSBhIGNvbXBs
-ZXRlIGtlcm5lbCBjb25maWc8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTGlz
-dFBhcmFncmFwaCIgc3R5bGU9InRleHQtaW5kZW50Oi0uMjVpbjttc28tbGlzdDpsMCBsZXZlbDEg
-bGZvMSI+PCFbaWYgIXN1cHBvcnRMaXN0c10+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMC4wcHQ7
-Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7O2Nv
-bG9yOiMxRjQ5N0QiPjxzcGFuIHN0eWxlPSJtc28tbGlzdDpJZ25vcmUiPjIuPHNwYW4gc3R5bGU9
-ImZvbnQ6Ny4wcHQgJnF1b3Q7VGltZXMgTmV3IFJvbWFuJnF1b3Q7Ij4mbmJzcDsmbmJzcDsmbmJz
-cDsmbmJzcDsmbmJzcDsNCjwvc3Bhbj48L3NwYW4+PC9zcGFuPjwhW2VuZGlmXT48c3BhbiBzdHls
-ZT0iZm9udC1zaXplOjEwLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90
-O3NhbnMtc2VyaWYmcXVvdDs7Y29sb3I6IzFGNDk3RCI+WW91IGNhbiB1c2UgYSBmbGFnIGluIHRo
-ZSBkZWZjb25maWcgdG8gc3BlY2lmeSB0aGUgdXNlIG9mIGFuIGluLWtlcm5lbCBkZWZjb25maWcu
-Jm5ic3A7IEZvciBleGFtcGxlIGlmIHlvdXIgZGVmY29uZmlnIGNvbnRhaW5zIHRoZSBsaW5lIOKA
-nHVzZS1rZXJuZWwtY29uZmlnPW9tYXAycGx1c19kZWZjb25maWfigJ0NCiB0aGVuIHRoZSBvbWFw
-MnBsdXNfZGVmY29uZmlnIGluc2lkZSBvZiB0aGUga2VybmVsIHRyZWUgd2lsbCBiZSB1c2VkLjxv
-OnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxlPSJm
-b250LXNpemU6MTAuMHB0O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7c2Fu
-cy1zZXJpZiZxdW90Oztjb2xvcjojMUY0OTdEIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+
-DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjEwLjBwdDtmb250
-LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVvdDs7Y29sb3I6
-IzFGNDk3RCI+SSBob3BlIHRoaXMgYW5zd2VycyB5b3VyIHF1ZXN0aW9uPG86cD48L286cD48L3Nw
-YW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMC4w
-cHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7
-O2NvbG9yOiMxRjQ5N0QiPjxvOnA+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJN
-c29Ob3JtYWwiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTAuMHB0O2ZvbnQtZmFtaWx5OiZxdW90
-O0NhbGlicmkmcXVvdDssJnF1b3Q7c2Fucy1zZXJpZiZxdW90Oztjb2xvcjojMUY0OTdEIj5DaGFz
-ZTxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxl
-PSJmb250LXNpemU6MTEuMHB0O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDssJnF1b3Q7
-c2Fucy1zZXJpZiZxdW90Oztjb2xvcjojMUY0OTdEIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48
-L3A+DQo8ZGl2IHN0eWxlPSJib3JkZXI6bm9uZTtib3JkZXItbGVmdDpzb2xpZCBibHVlIDEuNXB0
-O3BhZGRpbmc6MGluIDBpbiAwaW4gNC4wcHQiPg0KPGRpdj4NCjxkaXYgc3R5bGU9ImJvcmRlcjpu
-b25lO2JvcmRlci10b3A6c29saWQgI0I1QzRERiAxLjBwdDtwYWRkaW5nOjMuMHB0IDBpbiAwaW4g
-MGluIj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTAu
-MHB0O2ZvbnQtZmFtaWx5OiZxdW90O1RhaG9tYSZxdW90OywmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7
-Ij5Gcm9tOjwvc3Bhbj48L2I+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMC4wcHQ7Zm9udC1mYW1p
-bHk6JnF1b3Q7VGFob21hJnF1b3Q7LCZxdW90O3NhbnMtc2VyaWYmcXVvdDsiPiBtZXRhLXRpLWJv
-dW5jZXNAeW9jdG9wcm9qZWN0Lm9yZyBbbWFpbHRvOm1ldGEtdGktYm91bmNlc0B5b2N0b3Byb2pl
-Y3Qub3JnXQ0KPGI+T24gQmVoYWxmIE9mIDwvYj5kZWVwYWsgdmlqYXk8YnI+DQo8Yj5TZW50Ojwv
-Yj4gV2VkbmVzZGF5LCBBcHJpbCAzMCwgMjAxNCA1OjAxIEFNPGJyPg0KPGI+VG86PC9iPiBtZXRh
-LXRpQHlvY3RvcHJvamVjdC5vcmc8YnI+DQo8Yj5TdWJqZWN0OjwvYj4gW21ldGEtdGldIFJlZ2Fy
-ZGluZyBsaW51eCBjb25maWd1cmFpb248bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8L2Rpdj4NCjwv
-ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8ZGl2Pg0K
-PHAgY2xhc3M9Ik1zb05vcm1hbCI+SGksPG86cD48L286cD48L3A+DQo8ZGl2Pg0KPHAgY2xhc3M9
-Ik1zb05vcm1hbCI+SSBhbSBuZXcgdG8geW9jdG8gcHJvamVjdC48bzpwPjwvbzpwPjwvcD4NCjwv
-ZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPkkgaGF2ZSBzZWVuIHRoZSBVLWJvb3Qg
-Y29uZmlndXJhdGlvbiB2YXJpYWJsZSAoVUJPT1RfTUFDSElORSkgaW4gY29uZi9tYWNoaW5lL2lu
-Y2x1ZGUvLi4gZmlsZXMuPG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0i
-TXNvTm9ybWFsIj5JIHdvdWxkIGxpa2UgdG8ga25vdyB3aGVyZSB0aGUgbGludXgga2VybmVsIGNv
-bmZpZ3VyYXRpb24gdmFyaWFibGUgd2lsbCBiZSB1c2VkPzxvOnA+PC9vOnA+PC9wPg0KPC9kaXY+
-DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+UGxlYXNlIGhlbHAgbWUgdG8gdW5kZXJzdGFu
-ZCB0aGlzLjxvOnA+PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1h
-bCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9y
-bWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29O
-b3JtYWwiPlJlZ2FyZHMsPG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0i
-TXNvTm9ybWFsIj5EZWVwYWs8bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPC9kaXY+DQo8L2Rpdj4N
-CjwvZGl2Pg0KPC9ib2R5Pg0KPC9odG1sPg0K
+*         [    1.533567] [<c0017a04>] (show_stack+0x0/0x1c) from [<c0580b=
+a4>] (dump_stack+0x20/0x28)
+*         [    1.542068] [<c0580b84>] (dump_stack+0x0/0x28) from [<c0046d=
+08>] (warn_slowpath_common+0x70/0x90)
+*         [    1.551480] [<c0046c98>] (warn_slowpath_common+0x0/0x90) fro=
+m [<c0046dcc>] (warn_slowpath_fmt+0x38/0x40)
+*         [    1.561528]  r8:c076b3fc r7:c0768410 r6:c0c8c9ac r5:c084df08=
+ r4:c06b9fa4
+*         [    1.568647] [<c0046d94>] (warn_slowpath_fmt+0x0/0x40) from [=
+<c002f564>] (omap_device_get_by_hwmod_name+0x94/0xb4)
+*         [    1.579523]  r3:c058be8c r2:c06b6584
+*         [    1.583341] [<c002f4d0>] (omap_device_get_by_hwmod_name+0x0/=
+0xb4) from [<c0778280>] (am33xx_pm_init+0x204/0x45c)
+*         [    1.594120]  r4:00000000
+*         [    1.596808] [<c077807c>] (am33xx_pm_init+
 
---_000_7D46E86EC0A8354091174257B2FED1015CFC50FDDLEE11entticom_--
+
+The full capture is http://pastebin.com/VyY8CQ0L
+
+I found where roughly where there might be an issue...pm33xx.c as line#39=
+5 states it can only use bus i2c1(one based(I assume this is i2c0))
+Note I do not need smart reflex or sleep mode at all so any patches to wo=
+rk around this are welcome.
+
+Thanks
+
+Josh Vanderpool
+Electrical Engineer
+
+
+
+Confidentiality Notice:
+
+The preceding e-mail message (including any attachments) contains informa=
+tion that may be confidential, protected by applicable legal privileges, =
+or constitute non-public information. It is intended to be conveyed only =
+to the designated recipient(s). If you are not an intended recipient of t=
+his message, please notify the sender by replying to this message and the=
+n delete it from your system. Use, dissemination, distribution or reprodu=
+ction of this message by unintended recipients is=20
+not authorized and may be unlawful.
+
+
+
+--_000_7D1F292BE8E4CC4F93079C1A7A58D5622BA96E10USNYGRMBX4raymo_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-mi=
+crosoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:wo=
+rd" xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D=
+"http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-asci=
+i">
+<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">=
+
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+pre
+	{mso-style-priority:99;
+	mso-style-link:"HTML Preformatted Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Courier New","serif";}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+span.HTMLPreformattedChar
+	{mso-style-name:"HTML Preformatted Char";
+	mso-style-priority:99;
+	mso-style-link:"HTML Preformatted";
+	font-family:"Courier New","serif";}
+=2EMsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri","sans-serif";}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+/* List Definitions */
+@list l0
+	{mso-list-id:1752922788;
+	mso-list-template-ids:2142923300;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New","serif";
+	mso-bidi-font-family:"Times New Roman";}
+@list l0:level3
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l0:level4
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l0:level5
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l0:level6
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l0:level7
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l0:level8
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l0:level9
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">I have a custom board and expect to use i2c1 on th=
+e board but it appears to not allow this in the kernel&#8230;<o:p></o:p><=
+/p>
+<p class=3D"MsoNormal">u-boot was able to be modified to support the hard=
+ware port i2c1.&nbsp; Note that that software is 1based and hardware is z=
+ero-based&#8230;<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">This is the dump:<o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.482628] ------------[ cut here ]------------<o:p></o:=
+p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.487549] WARNING: CPU: 0 PID: 1 at arch/arm/mach-omap2=
+/omap_device.c:888 omap_device_get_by_hwmod_name&#43;0x94/0xb4()<o:p></o:=
+p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.498803] omap_device_get_by_hwmod_name: no omap_device=
+ for i2c1<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.505365] Modules linked in:<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.508606] CPU: 0 PID: 1 Comm: swapper Not tainted 3.12.=
+10-ti2013.12.01 #2<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.515990] Backtrace:
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.518595] [&lt;c0017880&gt;] (dump_backtrace&#43;0x0/0x=
+10c) from [&lt;c0017a1c&gt;] (show_stack&#43;0x18/0x1c)<o:p></o:p></span>=
+</p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.527542]&nbsp; r6:c002f564 r5:00000009 r4:dd083e28 r3:=
+00000000<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.533567] [&lt;c0017a04&gt;] (show_stack&#43;0x0/0x1c) =
+from [&lt;c0580ba4&gt;] (dump_stack&#43;0x20/0x28)<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.542068] [&lt;c0580b84&gt;] (dump_stack&#43;0x0/0x28) =
+from [&lt;c0046d08&gt;] (warn_slowpath_common&#43;0x70/0x90)<o:p></o:p></=
+span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.551480] [&lt;c0046c98&gt;] (warn_slowpath_common&#43;=
+0x0/0x90) from [&lt;c0046dcc&gt;] (warn_slowpath_fmt&#43;0x38/0x40)<o:p><=
+/o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.561528]&nbsp; r8:c076b3fc r7:c0768410 r6:c0c8c9ac r5:=
+c084df08 r4:c06b9fa4<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.568647] [&lt;c0046d94&gt;] (warn_slowpath_fmt&#43;0x0=
+/0x40) from [&lt;c002f564&gt;] (omap_device_get_by_hwmod_name&#43;0x94/0x=
+b4)<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.579523]&nbsp; r3:c058be8c r2:c06b6584<o:p></o:p></spa=
+n></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.583341] [&lt;c002f4d0&gt;] (omap_device_get_by_hwmod_=
+name&#43;0x0/0xb4) from [&lt;c0778280&gt;] (am33xx_pm_init&#43;0x204/0x45=
+c)<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.594120]&nbsp; r4:00000000<o:p></o:p></span></p>
+<p class=3D"MsoNormal" style=3D"margin-left:0in;text-indent:-.25in;mso-li=
+st:l0 level1 lfo1;background:white">
+<![if !supportLists]><span lang=3D"EN" style=3D"font-size:10.0pt;font-fam=
+ily:Symbol;color:#333333"><span style=3D"mso-list:Ignore">&middot;<span s=
+tyle=3D"font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=3D"EN" style=3D"font-size:10.0p=
+t;font-family:&quot;Courier New&quot;,&quot;serif&quot;;color:#333333">[&=
+nbsp;&nbsp;&nbsp; 1.596808] [&lt;c077807c&gt;] (am33xx_pm_init&#43;<o:p><=
+/o:p></span></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">The full capture is <a href=3D"http://pastebin.com=
+/VyY8CQ0L">http://pastebin.com/VyY8CQ0L</a><o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">I found where roughly where there might be an issu=
+e&#8230;pm33xx.c as line#395 states it can only use bus i2c1(one based(I =
+assume this is i2c0))<o:p></o:p></p>
+<p class=3D"MsoNormal">Note I do not need smart reflex or sleep mode at a=
+ll so any patches to work around this are welcome.<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Thanks<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt;font-family:&qu=
+ot;Arial&quot;,&quot;sans-serif&quot;;color:navy">Josh Vanderpool<br>
+</span></b><span style=3D"font-size:10.0pt;font-family:&quot;Arial&quot;,=
+&quot;sans-serif&quot;;color:gray">Electrical Engineer</span><b><span sty=
+le=3D"font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quo=
+t;;color:navy"><o:p></o:p></span></b></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<p>
+Confidentiality Notice:
+
+The preceding e-mail message (including any attachments) contains informa=
+tion that may be confidential, protected by applicable legal privileges, =
+or constitute non-public information. It is intended to be conveyed only =
+to the designated recipient(s). If you are not an intended recipient of t=
+his message, please notify the sender by replying to this message and the=
+n delete it from your system. Use, dissemination, distribution or reprodu=
+ction of this message by unintended recipients is=20
+not authorized and may be unlawful.
+
+<p>
+
+</body>
+</html>
+
+--_000_7D1F292BE8E4CC4F93079C1A7A58D5622BA96E10USNYGRMBX4raymo_--
