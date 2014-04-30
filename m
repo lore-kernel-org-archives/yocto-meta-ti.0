@@ -1,6 +1,6 @@
 Return-Path: <dmurphy@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3EEA5E0099B; Wed, 30 Apr 2014 15:02:44 -0700 (PDT)
+	id 2E90EE0099B; Wed, 30 Apr 2014 15:11:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,35 +8,36 @@ X-Spam-Status: No, score=-5.0 required=5.0 tests=RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DFA20E0098E
-	for <meta-ti@yoctoproject.org>; Wed, 30 Apr 2014 15:02:39 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s3UM1XKW010878;
-	Wed, 30 Apr 2014 17:01:33 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s3UM1XTX019114;
-	Wed, 30 Apr 2014 17:01:33 -0500
+	*      [192.94.94.41 listed in list.dnswl.org]
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90FCEE0098E
+	for <meta-ti@yoctoproject.org>; Wed, 30 Apr 2014 15:11:07 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s3UMAbKa032557;
+	Wed, 30 Apr 2014 17:10:37 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s3UMAbJj003960;
+	Wed, 30 Apr 2014 17:10:37 -0500
 Received: from DFLE09.ent.ti.com ([fe80::7090:147d:b5eb:4c12]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.03.0174.001; Wed, 30 Apr 2014 17:01:33 -0500
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.03.0174.001; Wed, 30 Apr 2014 17:10:36 -0500
 From: "Murphy, Dan" <dmurphy@ti.com>
 To: Vanderpool Josh <Joshua.Vanderpool@raymondcorp.com>, "Maupin, Chase"
 	<chase.maupin@ti.com>,
 	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Thread-Topic: Kernel Hang I2C1??
-Thread-Index: Ac9kjbK9NF7l2hAPTFGOrV7u1lzpFAAHjaAAAACCXLAAAHEnkAAAGDIAAAAxJQYAABPD8AADJv8E
-Date: Wed, 30 Apr 2014 22:01:32 +0000
-Message-ID: <00FC9A978A94B7418C33AFAE8A35ED49CAD258@DFLE09.ent.ti.com>
+Thread-Index: Ac9kjbK9NF7l2hAPTFGOrV7u1lzpFAAHjaAAAACCXLAAAHEnkAAAGDIAAAAxJQYAABPD8AADJv8EAADJUdE=
+Date: Wed, 30 Apr 2014 22:10:36 +0000
+Message-ID: <00FC9A978A94B7418C33AFAE8A35ED49CAD270@DFLE09.ent.ti.com>
 References: <7D1F292BE8E4CC4F93079C1A7A58D5622BA96E10@USNYGRMBX4.raymondcorp.local>,
 	<7D46E86EC0A8354091174257B2FED1015CFC6122@DLEE11.ent.ti.com>,
 	<7D1F292BE8E4CC4F93079C1A7A58D5622BA96F34@USNYGRMBX4.raymondcorp.local>
 	<00FC9A978A94B7418C33AFAE8A35ED49CAD12B@DFLE09.ent.ti.com>,
 	<7D1F292BE8E4CC4F93079C1A7A58D5622BA96F4E@USNYGRMBX4.raymondcorp.local>
 	<00FC9A978A94B7418C33AFAE8A35ED49CAD148@DFLE09.ent.ti.com>,
-	<7D1F292BE8E4CC4F93079C1A7A58D5622BA96F7A@USNYGRMBX4.raymondcorp.local>
-In-Reply-To: <7D1F292BE8E4CC4F93079C1A7A58D5622BA96F7A@USNYGRMBX4.raymondcorp.local>
+	<7D1F292BE8E4CC4F93079C1A7A58D5622BA96F7A@USNYGRMBX4.raymondcorp.local>,
+	<00FC9A978A94B7418C33AFAE8A35ED49CAD258@DFLE09.ent.ti.com>
+In-Reply-To: <00FC9A978A94B7418C33AFAE8A35ED49CAD258@DFLE09.ent.ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
@@ -55,10 +56,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 22:02:44 -0000
+X-List-Received-Date: Wed, 30 Apr 2014 22:11:09 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+
+Josh
+Disregard this statement I see you are doing it that way
+
+"Plus instead of recreating the whole memory map you the idea was to inheri=
+t other dt files to build so your board just becomes a child.
+You can always override the defaults in your child dt file.
+At the very least you could pull in the am33xx.dtsi which contains the memo=
+ry map"
+
+-----------------------------------------------------
+Dan  Murphy
+Texas Instruments Inc.
+________________________________________
+From: Murphy, Dan
+Sent: Wednesday, April 30, 2014 5:01 PM
+To: Vanderpool Josh; Maupin, Chase; meta-ti@yoctoproject.org
+Subject: RE: Kernel Hang I2C1??
 
 Josh
 
@@ -72,37 +91,43 @@ Which TI SDK are you using?
 Heres what I have for configurations of the I2C pins for the am335x-bone-co=
 mmon.dtsi  file.
 
-	i2c0_pins: pinmux_i2c0_pins {
-		pinctrl-single,pins =3D <
-			0x188 (PIN_INPUT_PULLUP | MUX_MODE0)	/* i2c0_sda.i2c0_sda */
-			0x18c (PIN_INPUT_PULLUP | MUX_MODE0)	/* i2c0_scl.i2c0_scl */
-		>;
-	};
+        i2c0_pins: pinmux_i2c0_pins {
+                pinctrl-single,pins =3D <
+                        0x188 (PIN_INPUT_PULLUP | MUX_MODE0)    /* i2c0_sda=
+.i2c0_sda */
+                        0x18c (PIN_INPUT_PULLUP | MUX_MODE0)    /* i2c0_scl=
+.i2c0_scl */
+                >;
+        };
 
-	i2c1_pins: pinmux_i2c1_pins {
-		pinctrl-single,pins =3D <
-			0x158 (PIN_INPUT_PULLUP | MUX_MODE2) 	/* spi0_d1.i2c1_sda */
-			0x15c (PIN_INPUT_PULLUP | MUX_MODE2)	/* spi0_cs0.i2c1_scl */
-		>;
-	};
+        i2c1_pins: pinmux_i2c1_pins {
+                pinctrl-single,pins =3D <
+                        0x158 (PIN_INPUT_PULLUP | MUX_MODE2)    /* spi0_d1.=
+i2c1_sda */
+                        0x15c (PIN_INPUT_PULLUP | MUX_MODE2)    /* spi0_cs0=
+.i2c1_scl */
+                >;
+        };
 
-	i2c2_pins: pinmux_i2c2_pins {
-		pinctrl-single,pins =3D <
-			0x178 (PIN_INPUT_PULLUP | MUX_MODE3) 	/* uart1_ctsn.i2c2_sda */
-			0x17c (PIN_INPUT_PULLUP | MUX_MODE3)	/* uart1_rtsn.i2c2_scl */
-		>;
-	};
+        i2c2_pins: pinmux_i2c2_pins {
+                pinctrl-single,pins =3D <
+                        0x178 (PIN_INPUT_PULLUP | MUX_MODE3)    /* uart1_ct=
+sn.i2c2_sda */
+                        0x17c (PIN_INPUT_PULLUP | MUX_MODE3)    /* uart1_rt=
+sn.i2c2_scl */
+                >;
+        };
 
 Then in the am335x-boneblack.dts I de-reference the I2C1
 
 &i2c1 {
-	status =3D "okay";
-	pinctrl-names =3D "default";
-	pinctrl-0 =3D <&i2c1_pins>;
+        status =3D "okay";
+        pinctrl-names =3D "default";
+        pinctrl-0 =3D <&i2c1_pins>;
 
-	clock-frequency =3D <400000>;
+        clock-frequency =3D <400000>;
 
-	<Place your device here>
+        <Place your device here>
 };
 
 Plus instead of recreating the whole memory map you the idea was to inherit=
@@ -339,7 +364,6 @@ age, please notify the sender by replying to this message and then delete i=
 t from your system. Use, dissemination, distribution or reproduction of thi=
 s message by unintended recipients is
 not authorized and may be unlawful.
-
 
 
 
