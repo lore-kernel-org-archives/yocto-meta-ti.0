@@ -1,6 +1,6 @@
 Return-Path: <Joshua.Vanderpool@raymondcorp.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0BE6AE00997; Thu,  1 May 2014 03:59:42 -0700 (PDT)
+	id 46875E00997; Thu,  1 May 2014 04:40:56 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,23 +8,23 @@ X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
 	version=3.3.1
 X-Spam-HAM-Report: 
 Received: from smtp.raymondcorp.com (smtp.raymondcorp.com [24.97.209.121])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D357E00985
-	for <meta-ti@yoctoproject.org>; Thu,  1 May 2014 03:59:36 -0700 (PDT)
-Received: from usnygrcas1.raymondcorp.local (nothing.attdns.com
-	[130.1.155.194] (may be forged))
-	by smtp.raymondcorp.com (8.14.3/8.14.3) with ESMTP id s41AxX5w026539
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0FFEAE00985
+	for <meta-ti@yoctoproject.org>; Thu,  1 May 2014 04:40:50 -0700 (PDT)
+Received: from usnygrcas2.raymondcorp.local (nothing.attdns.com
+	[130.1.155.195] (may be forged))
+	by smtp.raymondcorp.com (8.14.3/8.14.3) with ESMTP id s41BelLP010630
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 1 May 2014 05:59:33 -0500
-Received: from USNYGRMBX4.raymondcorp.local ([169.254.4.252]) by usnygrcas1
-	([130.1.155.198]) with mapi id 14.03.0174.001;
-	Thu, 1 May 2014 06:59:32 -0400
+	Thu, 1 May 2014 06:40:47 -0500
+Received: from USNYGRMBX4.raymondcorp.local ([169.254.4.252]) by usnygrcas2
+	([130.1.155.199]) with mapi id 14.03.0174.001;
+	Thu, 1 May 2014 07:40:46 -0400
 From: Vanderpool Josh <Joshua.Vanderpool@raymondcorp.com>
 To: "Murphy, Dan" <dmurphy@ti.com>, "Maupin, Chase" <chase.maupin@ti.com>,
 	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Thread-Topic: Kernel Hang I2C1??
-Thread-Index: Ac9kjbK9NF7l2hAPTFGOrV7u1lzpFAAHjaAAAACCXLAAAHEnkAAAGDIAAAAxJQYAABPD8AADJv8EAADJUdEAGmzBIg==
-Date: Thu, 1 May 2014 10:59:32 +0000
-Message-ID: <7D1F292BE8E4CC4F93079C1A7A58D5622BA9702A@USNYGRMBX4.raymondcorp.local>
+Thread-Index: Ac9kjbK9NF7l2hAPTFGOrV7u1lzpFAAHjaAAAACCXLAAAHEnkAAAGDIAAAAxJQYAABPD8AADJv8EAADJUdEAHDTF6A==
+Date: Thu, 1 May 2014 11:40:45 +0000
+Message-ID: <7D1F292BE8E4CC4F93079C1A7A58D5622BA9703D@USNYGRMBX4.raymondcorp.local>
 References: <7D1F292BE8E4CC4F93079C1A7A58D5622BA96E10@USNYGRMBX4.raymondcorp.local>,
 	<7D46E86EC0A8354091174257B2FED1015CFC6122@DLEE11.ent.ti.com>,
 	<7D1F292BE8E4CC4F93079C1A7A58D5622BA96F34@USNYGRMBX4.raymondcorp.local>
@@ -38,9 +38,9 @@ In-Reply-To: <00FC9A978A94B7418C33AFAE8A35ED49CAD270@DFLE09.ent.ti.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [192.168.150.131]
+x-originating-ip: [192.168.150.139]
 MIME-Version: 1.0
-X-mailWatchMessageID: 1398941975.905678.1642.2156937231
+X-mailWatchMessageID: 1398944450.303399.1642.2261581831
 X-mailWatchContentScore: Score of 0 assigned to Content
 X-mailWatchUCEScore: Score of 0 assigned to UCE
 X-mailWatch: Analyzed by IntelliReach MessageScreen(tm)
@@ -57,33 +57,19 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 May 2014 10:59:42 -0000
+X-List-Received-Date: Thu, 01 May 2014 11:40:56 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-I am using SDK7.0.
+I attempted disabling the PM but now i just get a hang with no dump?
+My new capture->http://pastebin.com/nf5XThRV
 
-I thought the hang might have to do with this: tisdk-7/board-support/linu=
-x-3.12.10-ti2013.12.01/arch/arm/mach-omap2/pm33xx.c
-	/*
-	 * We put the device tree node in the I2C controller that will
-	 * be sending the sequence. i2c1 is the only controller that can
-	 * be accessed by the firmware as it is the only controller in the
-	 * WKUP domain.
-	 */
-	dev =3D omap_device_get_by_hwmod_name("i2c1");
-	if (IS_ERR(dev))
-		return PTR_ERR(dev);
+Is there something i can do to get more messages from the kernel during b=
+oot to indicate the problem?
 
-Should i then just disable http://processors.wiki.ti.com/index.php/AM335x=
-_Linux_Power_Management_User_Guide#Enable.2FDisable_suspend-resume_suppor=
-t
-and what ramifications will this have, in our application we do not need =
-a suspend/resume so I would only worry about other side effects...
-
-Thanks
-
+Thanks for the continued support.
+josh
 ________________________________________
 From: Murphy, Dan [dmurphy@ti.com]
 Sent: Wednesday, April 30, 2014 6:10 PM
@@ -395,6 +381,7 @@ his message, please notify the sender by replying to this message and the=
 n delete it from your system. Use, dissemination, distribution or reprodu=
 ction of this message by unintended recipients is
 not authorized and may be unlawful.
+
 
 Confidentiality Notice:
 
