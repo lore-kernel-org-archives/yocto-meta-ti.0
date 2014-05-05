@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 368E6E0087F; Sat,  3 May 2014 18:27:32 -0700 (PDT)
+	id F10FEE00B27; Sun,  4 May 2014 18:21:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,33 +8,33 @@ X-Spam-Status: No, score=-3.9 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY,
 	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+	*      [198.47.26.152 listed in list.dnswl.org]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 561D9E00480
-	for <meta-ti@yoctoproject.org>; Sat,  3 May 2014 18:27:29 -0700 (PDT)
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B7788E00B20
+	for <meta-ti@yoctoproject.org>; Sun,  4 May 2014 18:21:21 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s441RS0l027209
-	for <meta-ti@yoctoproject.org>; Sat, 3 May 2014 20:27:28 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s451LJ5I023427
+	for <meta-ti@yoctoproject.org>; Sun, 4 May 2014 20:21:20 -0500
 Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s441RSZD000416
-	for <meta-ti@yoctoproject.org>; Sat, 3 May 2014 20:27:28 -0500
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s451LJ2Z011685
+	for <meta-ti@yoctoproject.org>; Sun, 4 May 2014 20:21:19 -0500
 Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
 	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Sat, 3 May 2014 20:27:28 -0500
+	Sun, 4 May 2014 20:21:19 -0500
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s441RSnT026863	for <meta-ti@yoctoproject.org>;
-	Sat, 3 May 2014 20:27:28 -0500
-Date: Sat, 3 May 2014 21:12:04 -0400
+	s451LJxP005579	for <meta-ti@yoctoproject.org>;
+	Sun, 4 May 2014 20:21:19 -0500
+Date: Sun, 4 May 2014 21:05:54 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1399996466.613.1399165924631.JavaMail.jenkins@puget>
+Message-ID: <185230727.617.1399251954263.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-05-03_21-00-24
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-05-04_21-00-24
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,25 +47,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 May 2014 01:27:32 -0000
+X-List-Received-Date: Mon, 05 May 2014 01:21:28 -0000
 Content-Type: multipart/mixed;
-	boundary="----=_Part_612_847858273.1399165924629"
+	boundary="----=_Part_616_623927404.1399251954262"
 
-------=_Part_612_847858273.1399165924629
+------=_Part_616_623927404.1399251954262
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 05/03/14
+Status for 05/04/14
 </title>
 </head>
 <body>
 
-<h2>Status for 05/03/14</h2>
+<h2>Status for 05/04/14</h2>
 
-<h2>BUILD_ID: build-2014-05-03_21-01-31</h2>
+<h2>BUILD_ID: build-2014-05-04_21-01-31</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -212,4 +212,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_612_847858273.1399165924629--
+------=_Part_616_623927404.1399251954262--
