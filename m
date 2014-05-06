@@ -1,56 +1,40 @@
-Return-Path: <cliff.brake@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D9A9DE00B7A; Mon,  5 May 2014 12:15:33 -0700 (PDT)
+	id 04742E00B7A; Mon,  5 May 2014 18:19:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU, FREEMAIL_FROM, MIME_QP_LONG_LINE,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (cliff.brake[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.213.174 listed in list.dnswl.org]
-	* 0.0 MIME_QP_LONG_LINE RAW: Quoted-printable line longer than 76 chars
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
-	[209.85.213.174])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3EC42E00B5D
-	for <meta-ti@yoctoproject.org>; Mon,  5 May 2014 12:15:28 -0700 (PDT)
-Received: by mail-ig0-f174.google.com with SMTP id h3so1902178igd.13
-	for <meta-ti@yoctoproject.org>; Mon, 05 May 2014 12:15:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:from:to:subject:content-type
-	:content-transfer-encoding;
-	bh=hlqhmQZpmhBJwT1vFkOtNus4akbvhn241JI5KpjLxIY=;
-	b=RRlZe/toHRgOZ5cYFCG9DpSbym+0OWQmhDLq8O7m3NnrvDwAg2RMRbpsI+67AUOcM9
-	h4U6A4EhHSYceTploiylORkdhJ8Q3tKrItJeNvTTXE/rx7dCPZAQIaVug+6wJOEiGJBC
-	1CZRXESXU3qpIv/OeeDGQTID+ow239Z7etYigDwIwNEKMsych1/rjA9yvGRx3rl8pudg
-	Il+ufDkV4TLZ2Ui2b/Et2e0qH2fqIA0WCxXVCa/3Xes9HOl56ArpxIjrVx9d9J0D/JzU
-	o1CLHS13S8+EIOS89s+VEzZ9FAaz9MpAuxfWGEyLER9/986FtWmI8BAAewdCE1s1CWSv
-	IlxA==
-X-Received: by 10.50.109.163 with SMTP id ht3mr26982805igb.4.1399317327786;
-	Mon, 05 May 2014 12:15:27 -0700 (PDT)
-Received: from happy.bec-systems.com (cable-pool6-cs-200.doycomm.com.
-	[66.219.185.200]) by mx.google.com with ESMTPSA id
-	on9sm30212452igb.11.2014.05.05.12.15.25 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 05 May 2014 12:15:26 -0700 (PDT)
-X-Google-Original-Date: Mon, 05 May 2014 19:15:25 GMT
+X-Spam-Status: No, score=-3.9 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: *  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 91577E00480
+	for <meta-ti@yoctoproject.org>; Mon,  5 May 2014 18:19:53 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s461JpMp027860
+	for <meta-ti@yoctoproject.org>; Mon, 5 May 2014 20:19:52 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s461JpcJ008721
+	for <meta-ti@yoctoproject.org>; Mon, 5 May 2014 20:19:51 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
+	Mon, 5 May 2014 20:19:51 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s461Jp2i021482	for <meta-ti@yoctoproject.org>;
+	Mon, 5 May 2014 20:19:51 -0500
+Date: Mon, 5 May 2014 21:04:24 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <860331323.621.1399338264833.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Date: Mon, 05 May 2014 12:15:26 -0700 (PDT)
-Message-Id: <1399317325030.598b8fc1@Nodemailer>
-From: cliff.brake@gmail.com
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
-Subject: OE Changelog since 2014-04-27 until 2014-05-04
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-05-05_21-00-24
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -63,516 +47,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 May 2014 19:15:33 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-Changelog since 2014-04-27 until 2014-05-04.  Projects included in this =
-report:
-
-bitbake: git://git.openembedded.org/bitbake
-openembedded-core: git://git.openembedded.org/openembedded-core
-meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
-meta-arago: git://arago-project.org/git/meta-arago.git
-meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
-meta-browser: git://github.com/OSSystems/meta-browser.git
-meta-bug: git://github.com/buglabs/meta-bug.git
-meta-chicken: git://github.com/OSSystems/meta-chicken
-meta-efikamx: git://github.com/kraj/meta-efikamx.git
-meta-ettus: http://github.com/koenkooi/meta-ettus.git
-meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
-meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
-meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
-meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
-meta-gumstix: git://github.com/gumstix/meta-gumstix.git
-meta-gumstix-community: =
-git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
-meta-handheld: git://git.openembedded.org/meta-handheld
-meta-igep: http://github.com/ebutera/meta-igep.git
-meta-intel: git://git.yoctoproject.org/meta-intel
-meta-ivi: git://git.yoctoproject.org/meta-ivi
-meta-java: git://github.com/woglinde/meta-java
-meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
-meta-micro: git://git.openembedded.org/meta-micro
-meta-mono: git://git.yoctoproject.org/meta-mono.git
-meta-netbookpro: git://github.com/tworaz/meta-netbookpro
-meta-nslu2: git://github.com/kraj/meta-nslu2
-meta-opie: git://git.openembedded.org/meta-opie
-meta-qt3: git://git.yoctoproject.org/meta-qt3
-meta-qt5: git://github.com/meta-qt5/meta-qt5.git
-meta-slugos: git://github.com/kraj/meta-slugos
-meta-systemd: git://git.yoctoproject.org/meta-systemd
-meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
-meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
-meta-ti: git://git.yoctoproject.org/meta-ti
-meta-webos: git://github.com/openwebos/meta-webos.git
-meta-xilinx: git://git.yoctoproject.org/meta-xilinx
-meta-yocto: git://git.yoctoproject.org/meta-yocto
-openembedded: git://git.openembedded.org/openembedded
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for bitbake:
-
-Christopher Larson (1):
-=20=20codeparser: don't interact with the cache for subshells
-
-Jacob Kroon (1):
-=20=20fetch2: Cleanup file checksum generation, v2
-
-Otavio Salvador (1):
-=20=20bb.utils, bb.codeparser: Add bb.utils.contains_any
-
-Richard Purdie (5):
-=20=20Revert "fetch2: Cleanup file checksum generation"
-=20=20bitbake: Bump version to 1.23.1
-=20=20codeparser: Fix to better catch all getVar references
-=20=20persist_data: Avoid fsync() calls
-=20=20prserv/db: Avoid fsync() calls
-
-Volker Vogelhuber (1):
-=20=20HG Fetch with username and password in url
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded-core:
-
-Cristian Iorga (7):
-=20=20telepathy-glib: upgrade to 0.24.0
-=20=20gstreamer1.0: upgrade to 1.2.4
-=20=20gstreamer1.0-libav: upgrade to 1.2.4
-=20=20gstreamer1.0-plugins-base: upgrade to 1.2.4
-=20=20gstreamer1.0-plugins-good: upgrade to 1.2.4
-=20=20gstreamer1.0-plugins-bad: upgrade to 1.2.4
-=20=20gstreamer1.0-plugins-ugly: upgrade to 1.2.4
-
-Drew Moseley (1):
-=20=20systemd: Check for HAVE_POSIX_FALLOCATE
-
-Irina Patru (1):
-=20=20distrodata.bbclass: Fix checkpkg functionality
-
-Jacob Kroon (2):
-=20=20sstate-cache-management: Minor cleanup of help text
-=20=20feature-arm-thumb.inc: Suppress false warning
-
-Laurentiu Palcu (12):
-=20=20xf86-input-synaptics: upgrade to 1.7.4
-=20=20libdrm: upgrade to 2.4.53
-=20=20xserver-xorg: upgrade to 1.15.1
-=20=20python-pygobject: upgrade to 2.28.3
-=20=20gdb: upgrade to 7.7
-=20=20xproto: upgrade to 7.0.26
-=20=20xrandr: upgrade to 1.4.2
-=20=20xtrans: upgrade to 1.3.4
-=20=20kexec-tools: upgrade to 2.0.6
-=20=20nasm: upgrade to 2.11.02
-=20=20xauth: upgrade to 1.0.9
-=20=20fontconfig: upgrade to 2.11.1
-
-Martin Jansa (4):
-=20=20feature-arm-thumb.inc: Replace inner quotes with apostrophes
-=20=20feature-arm-thumb.inc, arch-armv4.inc: Add "arm" to TUNE_FEATURES
-=20=20tune-cortexr4.inc: Add thumb and arm to TUNE_FEATURES
-=20=20feature-arm-thumb.inc: set ARMPKGSFX_THUMB only when thumb is in =
-TUNE_FEATUR
-
-Max Eliaser (1):
-=20=20Add texinfo.bbclass; recipes that use texinfo utils at build-time =
-inherit it
-
-Maxin B. John (2):
-=20=20openssl: enable ptest support
-=20=20ltp: update version to 20140422
-
-Otavio Salvador (2):
-=20=20alsa-tools: Enable GTK support for X11, Wayland and DirectFB
-=20=20sanity: Bump BitBake minimal version to 1.23.0
-
-Paul Barker (1):
-=20=20PR bumps to remove PRINC usage from meta-raspberrypi
-
-Paul Eggleton (6):
-=20=20sqlite3: restore upstream version numbering
-=20=20oeqa/controllers/masterimage: more robust master image startup
-=20=20classes/testimage: if start fails, don't try to stop
-=20=20scripts/contrib/serdevtry: add script to handle transient serial =
-terminals
-=20=20scripts/contrib/dialog-power-control: add a trivial power prompt =
-script
-=20=20oeqa: add proper handling for command errors where needed
-
-Richard Purdie (17):
-=20=20cross: Drop virtclass-cross OVERRIDE
-=20=20binutils/gcc/gdb: Add TARGET_ARCH to PN for all cross recipes
-=20=20gcc-target: Limit compile to host targets, don't build runtimes.
-=20=20gcc-common/gcc-configure-common: Move gnu-configize to its own shared =
-task
-=20=20gcc: Drop ARCH_FLAGS_FOR_TARGET usage
-=20=20base.bbclass: Update INCOMPATIBLE_LICENSE changes for gcc updates
-=20=20lib/oe/sdk: Ensure target directory exists before creating the link
-=20=20tcmode-default: Update PREFERRED_PROVIDERS
-=20=20tcmode-default.inc: Add default SDK PREFERRED_PROVIDERS
-=20=20base.bbclass: Silence PREFERRED_PROVIDER warnings for sdk builds
-=20=20layer.conf: Exclude gcc-cross dependencies from checksums
-=20=20cross: Update PKG_CONFIG variables after recent changes
-=20=20gcc-cross: Drop TARGET_CC_ARCH
-=20=20gcc-common: Only apply fpu settings to target gcc
-=20=20gcc-common: Ensure checksums don't change to match old behaviour
-=20=20sstatetests: Update after binutils-cross name change with PN addition
-=20=20sstatetests: Use TUNE_ARCH instead of TARGET_ARCH
-
-Saul Wold (5):
-=20=20mc: update to 4.8.12
-=20=20man-pages: Update to 3.65
-=20=20util-linux: Update to 2.24.2
-=20=20lsbinitscripts: Update to 9.54
-=20=20oprofileui*: Update to latest git
-
-Stefan Stanacar (4):
-=20=20oeqa/utils: sshcontrol: realtime logging of output
-=20=20oeqa/controllers/masterimage: add a base class for hw targets
-=20=20oeqa/targetcontrol: restart method shouldn't be abstract
-=20=20oeqa/controllers/masterimage: add a serial control command
-
-Tudor Florea (1):
-=20=20curl: Backport a fix for a build issue
-
-Valentin Popa (1):
-=20=20lighttpd: upgrade to 1.4.35
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-openembedded:
-
-Anders Darander (2):
-=20=20breakpad.bbclass: set includedir in CXXFLAGS
-=20=20breakpad: update to latest svn
-
-Andrea Adami (2):
-=20=20kexecboot: fix build when S !=3D B
-=20=20klcc_cross: move in target sysroot as crossscript
-
-Andreas M=C3=BCller (2):
-=20=20gnome-disk-utility: set correct nautilus configure options
-=20=20devilspie2: update to 0.33
-
-Ben Shelton (1):
-=20=20xwd: add recipe
-
-Changhyeok Bae (1):
-=20=20lzip: Upgrade to 1.15
-
-Chong Lu (1):
-=20=20mariadb: add perl and perl modules to RDEPENDS
-
-Chong.Lu@windriver.com (6):
-=20=20ltrace: update to version 0.7.90
-=20=20postgresql: add init script and DESCRIPTION
-=20=20postgresql: split out some lib files into seperate packages
-=20=20postgresql: split out contrib into seperate packages
-=20=20postgresql: enable some bindings
-=20=20rrdtool: enable perl and python bindings
-
-Hongxu Jia (1):
-=20=20libcanberra: fix QA Warning Files/directories were installed but not =
-shipped
-
-Jack Mitchell (3):
-=20=20xterm: upgrade to 303, set B=3DS, licence tweak
-=20=20tcpdump: inherit brokensep
-=20=20bridge-utils: apply brokensep
-
-Jackie Huang (8):
-=20=20iozone: update version to 414
-=20=20rsyslog: use BPN to fix multilib and add all licenses
-=20=20rsyslog: add PACKAGECONFIG for optional features
-=20=20rsyslog: Add config files and use update-alternatives for rsyslog
-=20=20rsyslog: add DEPENDS on bison-native and flex-native
-=20=20gd: split the binaries to package gd-tools
-=20=20eject: Fix wrong return value
-=20=20collectd: add threshold.so, load.so and disk.so in PRIVATE_LIBS
-
-Kang Kai (1):
-=20=20apache: upgrade to 2.4.9
-
-Khem Raj (24):
-=20=20gnome-control-center: Unbreak gnome images
-=20=20fftw: Build native version as well
-=20=20imagemagick: Update to 6.8.8
-=20=20htop: Update 1.0.2 -> 1.0.3
-=20=20mozjs: Fix build when B !=3D S
-=20=20esound: Fix build when B !=3D S
-=20=20libbonobo: Update to latest versions and fix build when S !=3D B
-=20=20debianutils: Upgrade to 4.4
-=20=20libxklavier: Update to 5.3 and fix build S !=3D B
-=20=20lcms: Update to lcms2 version 2.6
-=20=20liboauth: New recipe
-=20=20xfsprogs: Do not do out-of-tree build yet
-=20=20obexd, gnome-panel: Do not do out-of-tree builds yet
-=20=20bonnie++, lmbench, obex-data-server, samba, sg3-utils: Do not do =
-out-of-tree
-=20=20epiphany: Fix build when S !=3D B
-=20=20gedit: Fix build when S !=3D B
-=20=20gnome-bluetooth: Fix build when S !=3D B
-=20=20gnome-control-center: Fix build when S !=3D B
-=20=20t1lib: Fix build when S !=3D B
-=20=20gimp: Fix build when S !=3D B
-=20=20i2c-tools: Fix build when S !=3D B
-=20=20abiword: Fix build when S !=3D B
-=20=20libgdata: Fix build when S !=3D B
-=20=20llvm3: Fix build when S !=3D B
-
-Koen Kooi (8):
-=20=20fbida: update to latest git and make motif a PACKAGECONFIG option
-=20=20jack: move to git
-=20=20espeak: install header in proper location
-=20=20mariadb: handle seperate builddir
-=20=20openldap: inherit autotools-brokensep
-=20=20libmcrypt: inherit autotools-brokensep
-=20=20netperf: fix S!=3DB issues
-=20=20fwts: inherit autotools-brokensep
-
-Marc Ferland (1):
-=20=20lmsensors: update 3.3.3 -> 3.3.5
-
-Martin Jansa (2):
-=20=20gnome-backgrounds: add intltool-native dependency
-=20=20lighttpd: rename .bbappend to match with any version
-
-Matthieu CRAPET (1):
-=20=20cloud9: fix compilation error with o3 module
-
-Micha=C3=ABl Burtin (1):
-=20=20ruby: remove obsolete extmk_run.patch
-
-Paul Barker (1):
-=20=20vim: Don't build out-of-tree
-
-Paul Eggleton (2):
-=20=20modphp: fix for S !=3D B
-=20=20xdebug: fix for S !=3D B
-
-dv@pseudoterminal.org (1):
-=20=20fbset: inherit from autotools-brokensep instead of autotools to fix =
-build
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-angstrom:
-
-Khem Raj (2):
-=20=20external-toolchain-angstrom.bb: Delete largely nused and unmaintained =
-recipe
-=20=20Updates to match to OE-Core toolchain reorg
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-arago:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-beagleboard:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-browser:
-
-Carlos Rafael Giani (4):
-=20=20chromium: Add component-build PACKAGECONFIG option
-=20=20chromium: Add variable to contain extra command-line arguments
-=20=20chromium: Add use-egl PACKAGECONFIG option
-=20=20chromium: Add ignore-lost-context PACKAGECONFIG option
-
-Otavio Salvador (3):
-=20=20scripts/firefox-gen-l10n-recipes: Stop using PRINC
-=20=20firefox-l10n-*: Drop PRINC use
-=20=20firefox-addon-webconverger: Stop using PRINC
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-bug:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-chicken:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-efikamx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ettus:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm:
-
-Jacob Kroon (1):
-=20=20linux-imx-rt: Upgrade to 3.10.17-1.0.0 GA
-
-Lauren Post (18):
-=20=20firmware-imx: Update to 3.10.17-1.0.0 GA
-=20=20imx-kobs: Update to 3.10.17-1.0.0 GA version
-=20=20imx-uuc: Upgrade to 3.10.17-1.0.0 GA
-=20=20imx-test: Update to 3.10.17-1.0.0 GA version
-=20=20imx-vpu: Update to 3.10.17-1.0.0 GA version
-=20=20imx-test-hdcp: Create 3.10.17-1.0.0 version
-=20=20imx-lib: Update to 3.10.17-1.0.0 version
-=20=20gst-fsl-plugin: Upgrade to 3.0.11 version
-=20=20libfslvpuwrap: Update to 1.0.46 version
-=20=20libfslparser: Update to 3.0.11 version
-=20=20libfslcodec: Update to 3.0.11 version
-=20=20linux-imx: Upgrade to 3.10.17-1.0.0 GA
-=20=20uboot-imx: Upgrade to 3.10.17-1.0.0 GA for mx6
-=20=20imx6slevk: Add spinor U-Boot support
-=20=20gpu-viv-bin-mx6q: Update to 3.10.17-1.0.0 GA version
-=20=20xf86-video-imxfb-vivante: Update to 3.10.17-1.0.0 GA
-=20=20gpu-viv-g2d: Update to 3.10.17-1.0.0 GA version
-=20=20linux-imx: Update defconfig for 3.10.17-1.0.0 GA
-
-Mario Domenech Goulart (1):
-=20=20scripts/get-maintainer: use printf instead of "echo -e"
-
-Otavio Salvador (1):
-=20=20libz160: Add 'mx5' to COMPATIBLE_MACHINE
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm-extra:
-
-Carlos Rafael Giani (1):
-=20=20u-boot-cubox-i: update to ed888a1e88 SRCREV
-
-Eric Nelson (1):
-=20=20linux-boundary (3.10.17): Move to GA kernel (srcrev 731f96)
-
-John Weber (1):
-=20=20linux-wandboard (3.10.17): Move to GA kernel (srcrev 9d567e)
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-ppc:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-guacamayo:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix-community:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-handheld:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-igep:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-intel:
-
-Darren Hart (1):
-=20=20intel-common: Specify linux-yocto and cleanup order
-
-Nitin A Kamble (4):
-=20=20common linux-yocto_3.14: Update SRCREVs
-=20=20crownbay linux-yocto_3.14: Update SRCREVs
-=20=20emenlow linux-yocto_3.14: Update SRCREVs
-=20=20fri2 linux-yocto_3.14: Update SRCREVs
-
-Ong Boon Leong (1):
-=20=20meta-haswell: fix email address for haswell-wc maintainer
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ivi:
-
-Erik Bot=C3=B6 (1):
-=20=20persistence-client-library: disable parallel make
-
-Florin Sarbu (6):
-=20=20connman: Update .bbappend to 1.23 version
-=20=20libitzam: Change do_install_prepend to copy packageconfig file     =
-from buil
-=20=20keyutils: Explicitly change directory to where the Makefile     =
-resides befo
-=20=20node-startup-controller: Explicitly create the m4 directory     in =
-the sourc
-=20=20node-state-manager: Use inherit autotools-brokensep instead     of =
-autotools
-=20=20node-health-monitor: Use inherit autotools-brokensep     instead of =
-autotool
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-java:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-kde:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-micro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-mono:
-
-Alex J Lennon (1):
-=20=20mono, mono-native:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-netbookpro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-nslu2:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-opie:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt3:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt5:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-slugos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-systemd:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-raspberrypi:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-smartphone:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ti:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-webos:
-
-Andrii Motsok (1):
-=20=20webos-image: openssl=3Dv1.0.1g
-
-Simon Busch (2):
-=20=20python-dbusmock: Add recipe for v0.10.1
-=20=20webos-image: linux-yocto=3Dwebos5
-
-dongsun.kim (1):
-=20=20webos-image: librolegen=3D20-r4
-
-pugalendhi ganesan (1):
-=20=20webos-image: smartkey-hun=3D16
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-xilinx:
-
-Nathan Rossi (2):
-=20=20machine/boards: Fix-up naming of common dtsi files
-=20=20machine-xilinx-default.inc: Move base dts includes
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-Irina Patru (1):
-=20=20package_regex.inc: Changed, removed and added regexes
-
-Paul Eggleton (1):
-=20=20meta-yocto-bsp: oeqa/controllers: add EdgeRouterTarget
-
-Stefan Stanacar (1):
-=20=20meta-yocto-bsp: oeqa/controllers: add BeagleBoneTarget
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded:
-
-
-
+X-List-Received-Date: Tue, 06 May 2014 01:19:59 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_620_1929553810.1399338264832"
+
+------=_Part_620_1929553810.1399338264832
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+<head>
+<title>
+Status for 05/05/14
+</title>
+</head>
+<body>
+
+<h2>Status for 05/05/14</h2>
+
+<h2>BUILD_ID: build-2014-05-05_21-01-31</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.03"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_620_1929553810.1399338264832--
