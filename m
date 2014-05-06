@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2682EE00A44; Tue,  6 May 2014 15:36:03 -0700 (PDT)
+	id 27111E00975; Tue,  6 May 2014 15:36:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,12 +10,12 @@ X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	with *      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 50A65E00BB1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 50BD3E00BB3
 	for <meta-ti@yoctoproject.org>; Tue,  6 May 2014 15:35:53 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B4BD052A69; Tue,  6 May 2014 22:26:30 +0000 (UTC)
+	id 161FD52A67; Tue,  6 May 2014 22:26:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140506222630.B4BD052A69@arago-project.org>
+Message-Id: <20140506222630.161FD52A67@arago-project.org>
 Date: Tue,  6 May 2014 22:26:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: add baseport, connectivity, ipc and systest config fragments
@@ -35,9 +35,9 @@ X-List-Received-Date: Tue, 06 May 2014 22:36:03 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dora
-Commit: 323a782a843295fa0393999640377fafdab649cd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=323a782a843295fa0393999640377fafdab649cd
+Branch: master
+Commit: 788da6f205f69c959d03df390612f6c906caa1f4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=788da6f205f69c959d03df390612f6c906caa1f4
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Sat Apr 26 05:41:01 2014 +0000
