@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 254E5E00B47; Tue,  6 May 2014 15:36:03 -0700 (PDT)
+	id 25E85E00480; Tue,  6 May 2014 15:36:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,17 +8,15 @@ X-Spam-Status: No, score=0.4 required=5.0 tests=RDNS_DYNAMIC autolearn=no
 	version=3.3.1
 X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	with *      dynamic-looking rDNS
-X-Greylist: delayed 563 seconds by postgrey-1.32 at yocto-www;
-	Tue, 06 May 2014 15:35:53 PDT
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 52B43E00BE1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 50A0FE00B9D
 	for <meta-ti@yoctoproject.org>; Tue,  6 May 2014 15:35:53 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A41B152A77; Tue,  6 May 2014 22:26:30 +0000 (UTC)
+	id 01A9C52A73; Tue,  6 May 2014 22:26:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140506222630.A41B152A77@arago-project.org>
-Date: Tue,  6 May 2014 22:26:30 +0000 (UTC)
+Message-Id: <20140506222630.01A9C52A73@arago-project.org>
+Date: Tue,  6 May 2014 22:26:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : setup-defconfig.inc: implement config fragments by using in-kernel script
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +35,9 @@ X-List-Received-Date: Tue, 06 May 2014 22:36:03 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: dora
-Commit: 11cef2ccb38357edd353b4cbd8b3b20c6870e405
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=11cef2ccb38357edd353b4cbd8b3b20c6870e405
+Branch: master
+Commit: 58f0ba756b822a55975147f8d91e617c02dda0f1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=58f0ba756b822a55975147f8d91e617c02dda0f1
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Sat Apr 26 05:41:00 2014 +0000
