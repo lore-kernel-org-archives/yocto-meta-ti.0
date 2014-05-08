@@ -1,41 +1,46 @@
-Return-Path: <denys@ti.com>
+Return-Path: <deepakvijay2255@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 20CB9E009A6; Wed,  7 May 2014 19:55:21 -0700 (PDT)
+	id 3C068E009A6; Thu,  8 May 2014 03:32:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
-	RCVD_IN_DNSWL_HI,RDNS_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+X-Spam-Status: No, score=0.6 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+	HTML_MESSAGE,RCVD_IN_DNSWL_LOW,RDNS_NONE autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [209.85.217.170 listed in list.dnswl.org]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-Received: from comal.ext.ti.com (unknown [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1E887E0070F
-	for <meta-ti@yoctoproject.org>; Wed,  7 May 2014 19:55:12 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s482tBZL026929
-	for <meta-ti@yoctoproject.org>; Wed, 7 May 2014 21:55:11 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s482tBlD014679
-	for <meta-ti@yoctoproject.org>; Wed, 7 May 2014 21:55:11 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 7 May 2014 21:55:11 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s482tBiS026062	for <meta-ti@yoctoproject.org>;
-	Wed, 7 May 2014 21:55:11 -0500
-Date: Wed, 7 May 2014 22:39:41 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <690677600.5.1399516781570.JavaMail.jenkins@puget>
+X-Greylist: delayed 1021 seconds by postgrey-1.32 at yocto-www;
+	Thu, 08 May 2014 03:32:19 PDT
+Received: from mail-lb0-f170.google.com (unknown [209.85.217.170])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D036AE006EF
+	for <meta-ti@yoctoproject.org>; Thu,  8 May 2014 03:32:19 -0700 (PDT)
+Received: by mail-lb0-f170.google.com with SMTP id w7so3250359lbi.15
+	for <meta-ti@yoctoproject.org>; Thu, 08 May 2014 03:32:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:message-id:subject:from:to:content-type;
+	bh=N9386BRamjHoZbpWbf7CC+B8eLLbRtfkoYxLRv1CCgs=;
+	b=YI21luV5t/nuQ3525NHVYVe0N12gSPdw574SoKaQnddftNqnpLAQ2KDkdXo/WVecRK
+	ICgzLwnaHtZ0xa9OIDUsL7tuMer/u79rkbG3Sj7Ao3yC/KrBgzxct17ruIWlhHKFL5ID
+	nODRWL7TtynYKy9Rof4Q/GhqFL/kJ3880S08Qlq2wzYF9Aq8l8BvaDF7rcXM3vXTigki
+	cejX8ZWi3vvxwtDMfgn4W02MMDdcKLY9ZVi/J5+3JIQH13XzuVdDjemiVQTjLfd6Oq0w
+	nK7AL8eL05IcnefxsKxtetArPY/mCNNXOwCnGo5jfNZRz8uKrOf3zlXQcIGGzgYJEUnv
+	e4Fg==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-05-07_21-00-30
+X-Received: by 10.112.167.202 with SMTP id zq10mr820890lbb.76.1399544117094;
+	Thu, 08 May 2014 03:15:17 -0700 (PDT)
+Sender: deepakvijay2255@gmail.com
+Received: by 10.112.47.70 with HTTP; Thu, 8 May 2014 03:15:16 -0700 (PDT)
+Date: Thu, 8 May 2014 15:45:16 +0530
+X-Google-Sender-Auth: -Gqfqx4MD8dFpXDWaNUiCGVOZFU
+Message-ID: <CAAxuRXg9LxvzRzcu4V9awG8D0zmV4u1VkFQLpxebj90bHz+OfA@mail.gmail.com>
+From: deepak vijay <deepakvijay2255@rediff.com>
+To: meta-ti@yoctoproject.org
+Subject: Booting failed
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,168 +53,103 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 May 2014 02:55:21 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_4_834016567.1399516781569"
+X-List-Received-Date: Thu, 08 May 2014 10:32:21 -0000
+Content-Type: multipart/alternative; boundary=001a11c269c2f2e4b504f8e0c100
 
-------=_Part_4_834016567.1399516781569
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a11c269c2f2e4b504f8e0c100
+Content-Type: text/plain; charset=UTF-8
 
-<html>
-<head>
-<title>
-Status for 05/07/14
-</title>
-</head>
-<body>
-
-<h2>Status for 05/07/14</h2>
-
-<h2>BUILD_ID: build-2014-05-07_21-01-37</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+Hi,
+I have build omap3evm images by including mata-ti layer.
+When I am trying to boot the omap3evm board it is stuck at "Uncompressing
+Linux... done, booting the kernel" this comment.
+Can any one help me to over come this issue.
+The boot logs are given below.
+U-Boot SPL 2011.12 (May 08 2014 - 15:01:46)
+Texas Instruments Revision detection unimplemented
+OMAP SD/MMC: 0
+reading u-boot.img
+reading u-boot.img
 
 
-------=_Part_4_834016567.1399516781569--
+U-Boot 2011.12 (May 08 2014 - 15:01:46)
+
+OMAP36XX/37XX-GP ES1.2, CPU-OPP2, L3-165MHz, Max CPU Clock 1 Ghz
+OMAP3 EVM board + LPDDR/NAND
+I2C:   ready
+DRAM:  256 MiB
+NAND:  512 MiB
+MMC:   OMAP SD/MMC: 0
+*** Warning - bad CRC, using default environment
+
+In:    serial
+Out:   serial
+Err:   serial
+Read back SMSC id 0x92200000
+Die ID #706a00029ff80000016842c911024007
+Net:   smc911x-0
+Hit any key to stop autoboot:  0
+reading boot.scr
+
+** Unable to read "boot.scr" from mmc 0:1 **
+reading uImage
+
+3139340 bytes read
+Booting from mmc ...
+## Booting kernel from Legacy Image at 82000000 ...
+   Image Name:   Linux-2.6.37
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    3139276 Bytes = 3 MiB
+   Load Address: 80008000
+   Entry Point:  80008000
+   Verifying Checksum ... OK
+   Loading Kernel Image ... OK
+OK
+
+Starting kernel ...
+
+Uncompressing Linux... done, booting the kernel.
+
+
+Regards,
+Deepak Vijay
+
+--001a11c269c2f2e4b504f8e0c100
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi,<div>I have build omap3evm images by including mata-ti =
+layer.</div><div>When I am trying to boot the omap3evm board it is stuck at=
+ &quot;Uncompressing Linux... done, booting the kernel&quot; this comment.<=
+/div>
+<div>Can any one help me to over come this issue.</div><div>The boot logs a=
+re given below.</div><div><div>U-Boot SPL 2011.12 (May 08 2014 - 15:01:46)<=
+/div><div>Texas Instruments Revision detection unimplemented</div><div>
+OMAP SD/MMC: 0</div><div>reading u-boot.img</div><div>reading u-boot.img</d=
+iv><div><br></div><div><br></div><div>U-Boot 2011.12 (May 08 2014 - 15:01:4=
+6)</div><div><br></div><div>OMAP36XX/37XX-GP ES1.2, CPU-OPP2, L3-165MHz, Ma=
+x CPU Clock 1 Ghz</div>
+<div>OMAP3 EVM board + LPDDR/NAND</div><div>I2C: =C2=A0 ready</div><div>DRA=
+M: =C2=A0256 MiB</div><div>NAND: =C2=A0512 MiB</div><div>MMC: =C2=A0 OMAP S=
+D/MMC: 0</div><div>*** Warning - bad CRC, using default environment</div><d=
+iv><br></div><div>
+In: =C2=A0 =C2=A0serial</div><div>Out: =C2=A0 serial</div><div>Err: =C2=A0 =
+serial</div><div>Read back SMSC id 0x92200000</div><div>Die ID #706a00029ff=
+80000016842c911024007</div><div>Net: =C2=A0 smc911x-0</div><div>Hit any key=
+ to stop autoboot: =C2=A00=C2=A0</div>
+<div>reading boot.scr</div><div><br></div><div>** Unable to read &quot;boot=
+.scr&quot; from mmc 0:1 **</div><div>reading uImage</div><div><br></div><di=
+v>3139340 bytes read</div><div>Booting from mmc ...</div><div>## Booting ke=
+rnel from Legacy Image at 82000000 ...</div>
+<div>=C2=A0 =C2=A0Image Name: =C2=A0 Linux-2.6.37</div><div>=C2=A0 =C2=A0Im=
+age Type: =C2=A0 ARM Linux Kernel Image (uncompressed)</div><div>=C2=A0 =C2=
+=A0Data Size: =C2=A0 =C2=A03139276 Bytes =3D 3 MiB</div><div>=C2=A0 =C2=A0L=
+oad Address: 80008000</div><div>=C2=A0 =C2=A0Entry Point: =C2=A080008000</d=
+iv>
+<div>=C2=A0 =C2=A0Verifying Checksum ... OK</div><div>=C2=A0 =C2=A0Loading =
+Kernel Image ... OK</div><div>OK</div><div><br></div><div>Starting kernel .=
+..</div><div><br></div><div>Uncompressing Linux... done, booting the kernel=
+.</div></div><div>
+<br></div><div><br></div><div>Regards,</div><div>Deepak Vijay</div></div>
+
+--001a11c269c2f2e4b504f8e0c100--
