@@ -1,46 +1,58 @@
-Return-Path: <deepakvijay2255@gmail.com>
+Return-Path: <schnitzeltony@googlemail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3C068E009A6; Thu,  8 May 2014 03:32:21 -0700 (PDT)
+	id A3BCCE009A6; Thu,  8 May 2014 04:27:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.6 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-	HTML_MESSAGE,RCVD_IN_DNSWL_LOW,RDNS_NONE autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [209.85.217.170 listed in list.dnswl.org]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
+X-Spam-Status: No, score=0.5 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,FREEMAIL_FROM,RCVD_IN_DNSWL_LOW,RDNS_NONE autolearn=no
+	version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (schnitzeltony[at]googlemail.com)
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [74.125.83.41 listed in list.dnswl.org]
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-X-Greylist: delayed 1021 seconds by postgrey-1.32 at yocto-www;
-	Thu, 08 May 2014 03:32:19 PDT
-Received: from mail-lb0-f170.google.com (unknown [209.85.217.170])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D036AE006EF
-	for <meta-ti@yoctoproject.org>; Thu,  8 May 2014 03:32:19 -0700 (PDT)
-Received: by mail-lb0-f170.google.com with SMTP id w7so3250359lbi.15
-	for <meta-ti@yoctoproject.org>; Thu, 08 May 2014 03:32:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:message-id:subject:from:to:content-type;
-	bh=N9386BRamjHoZbpWbf7CC+B8eLLbRtfkoYxLRv1CCgs=;
-	b=YI21luV5t/nuQ3525NHVYVe0N12gSPdw574SoKaQnddftNqnpLAQ2KDkdXo/WVecRK
-	ICgzLwnaHtZ0xa9OIDUsL7tuMer/u79rkbG3Sj7Ao3yC/KrBgzxct17ruIWlhHKFL5ID
-	nODRWL7TtynYKy9Rof4Q/GhqFL/kJ3880S08Qlq2wzYF9Aq8l8BvaDF7rcXM3vXTigki
-	cejX8ZWi3vvxwtDMfgn4W02MMDdcKLY9ZVi/J5+3JIQH13XzuVdDjemiVQTjLfd6Oq0w
-	nK7AL8eL05IcnefxsKxtetArPY/mCNNXOwCnGo5jfNZRz8uKrOf3zlXQcIGGzgYJEUnv
-	e4Fg==
-MIME-Version: 1.0
-X-Received: by 10.112.167.202 with SMTP id zq10mr820890lbb.76.1399544117094;
-	Thu, 08 May 2014 03:15:17 -0700 (PDT)
-Sender: deepakvijay2255@gmail.com
-Received: by 10.112.47.70 with HTTP; Thu, 8 May 2014 03:15:16 -0700 (PDT)
-Date: Thu, 8 May 2014 15:45:16 +0530
-X-Google-Sender-Auth: -Gqfqx4MD8dFpXDWaNUiCGVOZFU
-Message-ID: <CAAxuRXg9LxvzRzcu4V9awG8D0zmV4u1VkFQLpxebj90bHz+OfA@mail.gmail.com>
-From: deepak vijay <deepakvijay2255@rediff.com>
+X-Greylist: delayed 418 seconds by postgrey-1.32 at yocto-www;
+	Thu, 08 May 2014 04:26:56 PDT
+Received: from mail-ee0-f41.google.com (unknown [74.125.83.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 25CDAE006EF
+	for <meta-ti@yoctoproject.org>; Thu,  8 May 2014 04:26:56 -0700 (PDT)
+Received: by mail-ee0-f41.google.com with SMTP id t10so1643544eei.28
+	for <meta-ti@yoctoproject.org>; Thu, 08 May 2014 04:26:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=QAQmMfBq29k4yiNH1mdYUg+R2b7W/5W7X5c4zUzjPhs=;
+	b=i9NVSLwo4ABVB1d92SaU7dRIkBMZirtgemKLcLfTOd5z08UD1LlXY4lulH8K9QhV0s
+	KCT7SfrSWXP7tmACZPwSVcGddOHRp6T5TbkbqijR2vzhK5vMjuBSKkD8A7GmgM3zzkaG
+	NkZjBHr0746vS9lZhGG5PRpAj4O8q2br1PpuUY9z8S/qioNHPM0EwSsrUc3nSIvs/H9q
+	Qkarh2vKNlYU/CIDwJSmff4NbDrc5wwZbZtLO3fsVpax5EmuSDRtbPkSBctbbm7crWK/
+	yuU7HCJ03EQE0rgcKd49rVEa1enopOocBsxfBK447tVkjUN7fhar2EBqPku+yarqx7o/
+	5Hfg==
+X-Received: by 10.14.7.65 with SMTP id 41mr4713924eeo.100.1399547997800;
+	Thu, 08 May 2014 04:19:57 -0700 (PDT)
+Received: from localhost.localdomain (ip-178-200-247-162.unitymediagroup.de.
+	[178.200.247.162])
+	by mx.google.com with ESMTPSA id x45sm3611636eef.15.2014.05.08.04.19.56
+	for <meta-ti@yoctoproject.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 08 May 2014 04:19:57 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: meta-ti@yoctoproject.org
-Subject: Booting failed
+Date: Thu,  8 May 2014 13:19:48 +0200
+Message-Id: <1399547988-9135-2-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1399547988-9135-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1399547988-9135-1-git-send-email-schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+Subject: [PATCH 2/2] formfactor: : remove PRINC
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -53,103 +65,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 May 2014 10:32:21 -0000
-Content-Type: multipart/alternative; boundary=001a11c269c2f2e4b504f8e0c100
-
---001a11c269c2f2e4b504f8e0c100
+X-List-Received-Date: Thu, 08 May 2014 11:27:01 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
-I have build omap3evm images by including mata-ti layer.
-When I am trying to boot the omap3evm board it is stuck at "Uncompressing
-Linux... done, booting the kernel" this comment.
-Can any one help me to over come this issue.
-The boot logs are given below.
-U-Boot SPL 2011.12 (May 08 2014 - 15:01:46)
-Texas Instruments Revision detection unimplemented
-OMAP SD/MMC: 0
-reading u-boot.img
-reading u-boot.img
+last oe-core PR-bump was commited May 2nd
 
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ recipes-bsp/formfactor/formfactor_0.0.bbappend | 1 -
+ 1 file changed, 1 deletion(-)
 
-U-Boot 2011.12 (May 08 2014 - 15:01:46)
-
-OMAP36XX/37XX-GP ES1.2, CPU-OPP2, L3-165MHz, Max CPU Clock 1 Ghz
-OMAP3 EVM board + LPDDR/NAND
-I2C:   ready
-DRAM:  256 MiB
-NAND:  512 MiB
-MMC:   OMAP SD/MMC: 0
-*** Warning - bad CRC, using default environment
-
-In:    serial
-Out:   serial
-Err:   serial
-Read back SMSC id 0x92200000
-Die ID #706a00029ff80000016842c911024007
-Net:   smc911x-0
-Hit any key to stop autoboot:  0
-reading boot.scr
-
-** Unable to read "boot.scr" from mmc 0:1 **
-reading uImage
-
-3139340 bytes read
-Booting from mmc ...
-## Booting kernel from Legacy Image at 82000000 ...
-   Image Name:   Linux-2.6.37
-   Image Type:   ARM Linux Kernel Image (uncompressed)
-   Data Size:    3139276 Bytes = 3 MiB
-   Load Address: 80008000
-   Entry Point:  80008000
-   Verifying Checksum ... OK
-   Loading Kernel Image ... OK
-OK
-
-Starting kernel ...
-
-Uncompressing Linux... done, booting the kernel.
+diff --git a/recipes-bsp/formfactor/formfactor_0.0.bbappend b/recipes-bsp/formfactor/formfactor_0.0.bbappend
+index 491d403..72d991c 100644
+--- a/recipes-bsp/formfactor/formfactor_0.0.bbappend
++++ b/recipes-bsp/formfactor/formfactor_0.0.bbappend
+@@ -1,2 +1 @@
+-PRINC := "${@int(PRINC) + 1}"
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+-- 
+1.8.3.1
 
 
-Regards,
-Deepak Vijay
-
---001a11c269c2f2e4b504f8e0c100
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi,<div>I have build omap3evm images by including mata-ti =
-layer.</div><div>When I am trying to boot the omap3evm board it is stuck at=
- &quot;Uncompressing Linux... done, booting the kernel&quot; this comment.<=
-/div>
-<div>Can any one help me to over come this issue.</div><div>The boot logs a=
-re given below.</div><div><div>U-Boot SPL 2011.12 (May 08 2014 - 15:01:46)<=
-/div><div>Texas Instruments Revision detection unimplemented</div><div>
-OMAP SD/MMC: 0</div><div>reading u-boot.img</div><div>reading u-boot.img</d=
-iv><div><br></div><div><br></div><div>U-Boot 2011.12 (May 08 2014 - 15:01:4=
-6)</div><div><br></div><div>OMAP36XX/37XX-GP ES1.2, CPU-OPP2, L3-165MHz, Ma=
-x CPU Clock 1 Ghz</div>
-<div>OMAP3 EVM board + LPDDR/NAND</div><div>I2C: =C2=A0 ready</div><div>DRA=
-M: =C2=A0256 MiB</div><div>NAND: =C2=A0512 MiB</div><div>MMC: =C2=A0 OMAP S=
-D/MMC: 0</div><div>*** Warning - bad CRC, using default environment</div><d=
-iv><br></div><div>
-In: =C2=A0 =C2=A0serial</div><div>Out: =C2=A0 serial</div><div>Err: =C2=A0 =
-serial</div><div>Read back SMSC id 0x92200000</div><div>Die ID #706a00029ff=
-80000016842c911024007</div><div>Net: =C2=A0 smc911x-0</div><div>Hit any key=
- to stop autoboot: =C2=A00=C2=A0</div>
-<div>reading boot.scr</div><div><br></div><div>** Unable to read &quot;boot=
-.scr&quot; from mmc 0:1 **</div><div>reading uImage</div><div><br></div><di=
-v>3139340 bytes read</div><div>Booting from mmc ...</div><div>## Booting ke=
-rnel from Legacy Image at 82000000 ...</div>
-<div>=C2=A0 =C2=A0Image Name: =C2=A0 Linux-2.6.37</div><div>=C2=A0 =C2=A0Im=
-age Type: =C2=A0 ARM Linux Kernel Image (uncompressed)</div><div>=C2=A0 =C2=
-=A0Data Size: =C2=A0 =C2=A03139276 Bytes =3D 3 MiB</div><div>=C2=A0 =C2=A0L=
-oad Address: 80008000</div><div>=C2=A0 =C2=A0Entry Point: =C2=A080008000</d=
-iv>
-<div>=C2=A0 =C2=A0Verifying Checksum ... OK</div><div>=C2=A0 =C2=A0Loading =
-Kernel Image ... OK</div><div>OK</div><div><br></div><div>Starting kernel .=
-..</div><div><br></div><div>Uncompressing Linux... done, booting the kernel=
-.</div></div><div>
-<br></div><div><br></div><div>Regards,</div><div>Deepak Vijay</div></div>
-
---001a11c269c2f2e4b504f8e0c100--
