@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 238C5E00B68; Thu,  8 May 2014 21:56:27 -0700 (PDT)
+	id 24814E00B62; Thu,  8 May 2014 21:56:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -10,27 +10,23 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
 	*      [206.46.173.21 listed in list.dnswl.org]
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-X-Greylist: delayed 3603 seconds by postgrey-1.32 at yocto-www;
-	Thu, 08 May 2014 21:56:22 PDT
 Received: from vms173021pub.verizon.net (unknown [206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D075FE00B62
-	for <meta-ti@yoctoproject.org>; Thu,  8 May 2014 21:56:22 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC12EE00B66
+	for <meta-ti@yoctoproject.org>; Thu,  8 May 2014 21:56:24 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [71.191.205.189])
 	by vms173021.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N5A00551G9F2BA0@vms173021.mailsrvcs.net> for
+	2009)) with ESMTPA id <0N5A00BZHG9FBJ60@vms173021.mailsrvcs.net> for
 	meta-ti@yoctoproject.org; Thu, 08 May 2014 22:56:09 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 9AF1F20363; Thu,
+	by gandalf.denix.org (Postfix) with ESMTP id 708B2200BD; Thu,
 	08 May 2014 23:56:03 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Thu, 08 May 2014 23:55:45 -0400
-Message-id: <1399607745-24450-2-git-send-email-denis@denix.org>
+Date: Thu, 08 May 2014 23:55:44 -0400
+Message-id: <1399607745-24450-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.9.2
-In-reply-to: <1399607745-24450-1-git-send-email-denis@denix.org>
-References: <1399607745-24450-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] linux-keystone: update to the latest tag 03.10.10_14.03_03
+Subject: [PATCH 1/2] u-boot-keystone: update to the latest version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,68 +43,82 @@ X-List-Received-Date: Fri, 09 May 2014 04:56:27 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
+Modified version of the original patch from Sam Nelson
+
+* Update source URL/REV
+* Added SPI NOR binaries and deployed images
+
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-keystone-rt_3.10.bb | 7 +++----
- recipes-kernel/linux/linux-keystone_3.10.bb    | 7 +++----
- 2 files changed, 6 insertions(+), 8 deletions(-)
+ recipes-bsp/u-boot/u-boot-keystone_2013.01.bb | 53 ++++++++++++++++++++++++---
+ 1 file changed, 48 insertions(+), 5 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-keystone-rt_3.10.bb b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-index 65625f3..cbd02d6 100644
---- a/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-+++ b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-@@ -10,15 +10,15 @@ inherit kernel
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
+diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+index 788d813..6717e62 100644
+--- a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
++++ b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+@@ -4,13 +4,56 @@ DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
  
--MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
+ COMPATIBLE_MACHINE = "keystone"
  
- KERNEL_DEVICETREE_keystone-evm = "k2hk-evm.dtb"
- 
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
- 
--#This commit corresponds to "K2_RT_LINUX_03.10.10_14.02"
--SRCREV = "c78aa253ac385faae8b6c845a388e215395a8010"
-+# This commit corresponds to "K2_RT_LINUX_03.10.10_14.03_03"
-+SRCREV = "6b482abe6a18d004230ca54da866f4627f02125b"
- PV = "3.10.10"
- 
- BRANCH = "master-rt"
-@@ -29,4 +29,3 @@ SRC_URI = "git://git.ti.com/keystone-linux/linux.git;protocol=git;branch=${BRANC
- S = "${WORKDIR}/git"
- 
- RDEPENDS_kernel-base = ""
+-PR = "r2+gitr${SRCPV}"
 -
-diff --git a/recipes-kernel/linux/linux-keystone_3.10.bb b/recipes-kernel/linux/linux-keystone_3.10.bb
-index d97520a..54cb86a 100644
---- a/recipes-kernel/linux/linux-keystone_3.10.bb
-+++ b/recipes-kernel/linux/linux-keystone_3.10.bb
-@@ -10,15 +10,15 @@ inherit kernel
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
+-SRC_URI = "git://arago-project.org/git/projects/u-boot-keystone.git;protocol=git;branch=${BRANCH}"
++PR = "r3+gitr${SRCPV}"
  
--MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_DEVICETREE_keystone-evm = "k2hk-evm.dtb"
- 
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
- 
--#This commit corresponds to "K2_LINUX_03.10.10_14.02"
--SRCREV = "93515476b357304e6fc075c004a1cfa91a0751d0"
-+# This commit corresponds to "K2_LINUX_03.10.10_14.03_03"
-+SRCREV = "07176920ed86dfdae97d272f574c3e2760d687ef"
- PV = "3.10.10"
- 
++# Tag "K2_UBOOT_2013_01_14.03_02"
++SRCREV = "0b9b4be2f3097b5bdc3b0ea7aa5e8f465097e365"
  BRANCH = "master"
-@@ -29,4 +29,3 @@ SRC_URI = "git://git.ti.com/keystone-linux/linux.git;protocol=git;branch=${BRANC
- S = "${WORKDIR}/git"
  
- RDEPENDS_kernel-base = ""
--
+-# DEV.MCSDK-03.00.00.07
+-SRCREV = "82f40e857d853165310d0753e79235aefb65d7ba"
++SRC_URI = "git://git.ti.com/keystone-linux/u-boot.git;protocol=git;branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
+ 
+ UBOOT_SUFFIX = "bin"
++UBOOT_MAKE_TARGET = "u-boot-spi.gph"
++
++# SPI NOR Flash binaries
++UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
++UBOOT_SPI_BINARY = "u-boot.img"
++UBOOT_SPI_GPH_BINARY = "u-boot-spi.gph"
++
++# SPI NOR Flash deployed images
++UBOOT_SPI_SPL_IMAGE = "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
++UBOOT_SPI_SPL_SYMLINK = "u-boot-spl-${MACHINE}.bin"
++UBOOT_SPI_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
++UBOOT_SPI_SYMLINK = "u-boot-${MACHINE}.img"
++UBOOT_SPI_GPH_IMAGE = "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
++UBOOT_SPI_GPH_SYMLINK = "u-boot-spi-${MACHINE}.gph"
++
++do_install_append () {
++	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
++	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${D}/boot/${UBOOT_SPI_SPL_BINARY}
++
++	install ${S}/${UBOOT_SPI_BINARY} ${D}/boot/${UBOOT_SPI_IMAGE}
++	ln -sf ${UBOOT_SPI_IMAGE} ${D}/boot/${UBOOT_SPI_BINARY}
++
++	install ${S}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
++	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
++}
++
++do_deploy_append () {
++	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_SPL_IMAGE}
++	rm -f ${UBOOT_SPI_SPL_BINARY} ${UBOOT_SPI_SPL_SYMLINK}
++	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_SYMLINK}
++	ln -sf ${UBOOT_SPI_SPL_IMAGE} ${UBOOT_SPI_SPL_BINARY}
++
++	install ${S}/${UBOOT_SPI_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_IMAGE}
++	rm -f ${UBOOT_SPI_BINARY} ${UBOOT_SPI_SYMLINK}
++	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_SYMLINK}
++	ln -sf ${UBOOT_SPI_IMAGE} ${UBOOT_SPI_BINARY}
++
++	install ${S}/${UBOOT_SPI_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_SPI_GPH_IMAGE}
++	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
++	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
++	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
++}
 -- 
 1.9.2
 
