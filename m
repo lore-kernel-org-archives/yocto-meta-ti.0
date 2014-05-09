@@ -1,41 +1,41 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C5E1FE0073A; Fri,  9 May 2014 11:59:08 -0700 (PDT)
+	id 2E194E0073A; Fri,  9 May 2014 12:48:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=5.0 tests=RCVD_IN_DNSWL_HI,RDNS_NONE
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.6 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
+	RCVD_IN_DNSWL_HI,RDNS_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+	*      [198.47.26.153 listed in list.dnswl.org]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-Received: from comal.ext.ti.com (unknown [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B60CE00478
-	for <meta-ti@yoctoproject.org>; Fri,  9 May 2014 11:59:05 -0700 (PDT)
+Received: from devils.ext.ti.com (unknown [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6B6FFE00478
+	for <meta-ti@yoctoproject.org>; Fri,  9 May 2014 12:48:26 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s49IwvSh015742;
-	Fri, 9 May 2014 13:58:57 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s49Iwujx020197;
-	Fri, 9 May 2014 13:58:57 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 9 May 2014 13:58:56 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s49IwuCB006324;
-	Fri, 9 May 2014 13:58:56 -0500
-Date: Fri, 9 May 2014 14:58:56 -0400
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s49JmPYB029265
+	for <meta-ti@yoctoproject.org>; Fri, 9 May 2014 14:48:25 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s49JmP47027540
+	for <meta-ti@yoctoproject.org>; Fri, 9 May 2014 14:48:25 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 9 May 2014 14:48:25 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s49JmOcY017832	for <meta-ti@yoctoproject.org>;
+	Fri, 9 May 2014 14:48:25 -0500
+Date: Fri, 9 May 2014 15:32:52 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: deepak vijay <deepakvijay2255@rediff.com>
-Message-ID: <20140509185855.GN18053@edge>
-References: <CAAxuRXg9LxvzRzcu4V9awG8D0zmV4u1VkFQLpxebj90bHz+OfA@mail.gmail.com>
-	<CAAxuRXipcVH8MXa=bG2cvHUpaPsHSGcH+yMrf=C4obSOz4606g@mail.gmail.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1721215804.13.1399663972367.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-In-Reply-To: <CAAxuRXipcVH8MXa=bG2cvHUpaPsHSGcH+yMrf=C4obSOz4606g@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Booting failed
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-05-09_13-45-49
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,264 +48,168 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 May 2014 18:59:08 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 09 May 2014 19:48:29 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_12_525122361.1399663972364"
 
-Well, you don't provide details, such as your configuration, build setup or 
-versions of your tools/layers, etc. You just say it rather vaguely:
+------=_Part_12_525122361.1399663972364
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-> > I have build omap3evm images by including mata-ti layer.
+<html>
+<head>
+<title>
+Status for 05/09/14
+</title>
+</head>
+<body>
 
-From the bootlog it appears you used gcc-4.8 with such an old kernel 2.6.37. 
-I'm wondering if it's one of the incompatibilities between old kernels and new 
-toolchains, something like this one:
+<h2>Status for 05/09/14</h2>
 
-http://arago-project.org/git/?p=meta-ti.git;a=commitdiff;h=07809e70f4f277d894323b7d2ed39400e0cca8e3
+<h2>BUILD_ID: build-2014-05-09_13-46-56</h2>
 
-The recommendation would be to use a correspondingly old toolchain, such as 
-gcc-4.5, if you really need to use such an old kernel 2.6.37.
+<h2>Clean Build: true</h2>
 
-Otherwise, OMAP3 should be well supported in recent mainline kernels, so if 
-you do not depend on specifically 2.6.37 kernel, you should consider using 
-that, in which case newer toolchains should also work.
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
--- 
-Denys
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
 
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
 
-On Fri, May 09, 2014 at 04:01:02PM +0530, deepak vijay wrote:
-> Hi,
-> When I configured Low level debugging and earlyprintk in bootargs I am
-> getting the following output logs of crashing.
-> U-Boot SPL 2011.12 (May 08 2014 - 15:01:46)
-> Texas Instruments Revision detection unimplemented
-> OMAP SD/MMC: 0
-> reading u-boot.img
-> reading u-boot.img
-> 
-> 
-> U-Boot 2011.12 (May 08 2014 - 15:01:46)
-> 
-> OMAP36XX/37XX-GP ES1.2, CPU-OPP2, L3-165MHz, Max CPU Clock 1 Ghz
-> OMAP3 EVM board + LPDDR/NAND
-> I2C:   ready
-> DRAM:  256 MiB
-> NAND:  512 MiB
-> MMC:   OMAP SD/MMC: 0
-> In:    serial
-> Out:   serial
-> Err:   serial
-> Read back SMSC id 0x92200000
-> Die ID #706a00029ff80000016842c911024007
-> Net:   smc911x-0
-> Hit any key to stop autoboot:  0
-> reading boot.scr
-> 
-> ** Unable to read "boot.scr" from mmc 0:1 **
-> reading uImage
-> 
-> 3214968 bytes read
-> Booting from mmc ...
-> ## Booting kernel from Legacy Image at 82000000 ...
->    Image Name:   Linux-2.6.37
->    Image Type:   ARM Linux Kernel Image (uncompressed)
->    Data Size:    3214904 Bytes = 3.1 MiB
->    Load Address: 80008000
->    Entry Point:  80008000
->    Verifying Checksum ... OK
->    Loading Kernel Image ... OK
-> OK
-> 
-> Starting kernel ...
-> 
-> 
-> ********Using machid 0x5ff from environment
-> Uncompressing Linux... done, booting the kernel.
-> [    0.000000] Linux version 2.6.37 (mistral@CPU000512U) (gcc version 4.8.2
-> (GCC) ) #2 Fri May 9 14:42:06
->  IST 2014
-> [    0.000000] CPU: ARMv7 Processor [413fc082] revision 2 (ARMv7),
-> cr=10c53c7d
-> [    0.000000] CPU: VIPT nonaliasing data cache, VIPT aliasing instruction
-> cache
-> [    0.000000] Machine: OMAP3 EVM
-> [    0.000000] bootconsole [earlycon0] enabled
-> [    0.000000] Reserving 4194304 bytes SDRAM for VRAM
-> [    0.000000] Memory policy: ECC disabled, Data cache writeback
-> [    0.000000] OMAP3630 ES1.2 (l2cache iva sgx neon isp 192mhz_clk )
-> [    0.000000] SRAM: Mapped pa 0x40200000 to va 0xfe400000 size: 0x10000
-> [    0.000000] Built 1 zonelists in Zone order, mobility grouping on.
->  Total pages: 64000
-> [    0.000000] Kernel command line: console=ttyO0,115200n8 earlyprintk
-> root=/dev/mmcblk0p2 rw rootfstype=
-> ext3 rootwait
-> [    0.000000] PID hash table entries: 1024 (order: 0, 4096 bytes)
-> [    0.000000] Dentry cache hash table entries: 32768 (order: 5, 131072
-> bytes)
-> [    0.000000] Inode-cache hash table entries: 16384 (order: 4, 65536 bytes)
-> [    0.000000] Memory: 252MB = 252MB total
-> [    0.000000] Memory: 242156k/242156k available, 19988k reserved, 0K
-> highmem
-> [    0.000000] Virtual kernel memory layout:
-> [    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
-> [    0.000000]     fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
-> [    0.000000]     DMA     : 0xffc00000 - 0xffe00000   (   2 MB)
-> [    0.000000]     vmalloc : 0xd0800000 - 0xf8000000   ( 632 MB)
-> [    0.000000]     lowmem  : 0xc0000000 - 0xd0000000   ( 256 MB)
-> [    0.000000]     modules : 0xbf000000 - 0xc0000000   (  16 MB)
-> [    0.000000]       .init : 0xc0008000 - 0xc003c000   ( 208 kB)
-> [    0.000000]       .text : 0xc003c000 - 0xc05eda00   (5831 kB)
-> [    0.000000]       .data : 0xc05ee000 - 0xc07afb60   (1799 kB)
-> [    0.000000] Unable to handle kernel paging request at virtual address
-> 8002f130
-> [    0.000000] pgd = c0004000
-> [    0.000000] [8002f130] *pgd=00000000
-> [    0.000000] Internal error: Oops: 805 [#1]
-> [    0.000000] last sysfs file:
-> [    0.000000] Modules linked in:
-> [    0.000000] CPU: 0    Not tainted  (2.6.37 #2)
-> [    0.000000] PC is at perf_pmu_register+0x12c/0x178
-> [    0.000000] LR is at lockdep_init_map+0xb0/0x448
-> [    0.000000] pc : [<c00ca3e4>]    lr : [<c009bcd0>]    psr: a00001d3
-> [    0.000000] sp : c05eff90  ip : 00000000  fp : c05effd4
-> [    0.000000] r10: 0000001f  r9 : 413fc082  r8 : 000003f8
-> [    0.000000] r7 : c0605750  r6 : c05eff68  r5 : c0f4b010  r4 : c05eff68
-> [    0.000000] r3 : 8002f12c  r2 : c07789dc  r1 : c0548676  r0 : 00000001
-> [    0.000000] Flags: NzCv  IRQs off  FIQs off  Mode SVC_32  ISA ARM
->  Segment kernel
-> [    0.000000] Control: 10c5387d  Table: 80004019  DAC: 00000017
-> [    0.000000] Process swapper (pid: 0, stack limit = 0xc05ee2f0)
-> [    0.000000] Stack: (0xc05eff90 to 0xc05f0000)
-> [    0.000000] ff80:                                     c0778ba0 c07b0c40
-> c07b0c40 c0018588
-> [    0.000000] ffa0: c05ee000 c0015784 3b9aca00 00000000 00000000 00000001
-> c0030bb0 c07afb80
-> [    0.000000] ffc0: c0030bb0 c0f49100 c05f2d0c 8002f12c 00000000 c0008a0c
-> c000866c 000005ff
-> [    0.000000] ffe0: 80000100 c0030bb0 10c53c7d c07afd34 c0030bac 80008034
-> 00000000 00000000
-> [    0.000000] [<c00ca3e4>] (perf_pmu_register+0x12c/0x178) from
-> [<c0018588>] (perf_event_init+0x3c/0xa4)
-> [    0.000000] [<c0018588>] (perf_event_init+0x3c/0xa4) from [<c0015784>]
-> (sched_init+0x200/0x24c)
-> [    0.000000] [<c0015784>] (sched_init+0x200/0x24c) from [<c0008a0c>]
-> (start_kernel+0x124/0x2d0)
-> [    0.000000] [<c0008a0c>] (start_kernel+0x124/0x2d0) from [<80008034>]
-> (0x80008034)
-> [    0.000000] Code: e59f204c e5843000 e5842004 e2422064 (e5834004)
-> [    0.000000] irq 56, desc: c0769a24, depth: 1, count: 0, unhandled: 0
-> [    0.000000] ->handle_irq():  c00adad0, handle_bad_irq+0x0/0x224
-> [    0.000000] ->irq_data.chip():   (null), 0x0
-> [    0.000000] ->action():   (null)
-> [    0.000000]   IRQ_DISABLED set
-> [    0.000000]    IRQ_NOPROBE set
-> [    0.000000]  IRQ_NOREQUEST set
-> [    0.000000] Unable to handle kernel NULL pointer dereference at virtual
-> address 00000000
-> [    0.000000] pgd = c0004000
-> [    0.000000] [00000000] *pgd=00000000
-> [    0.000000] Internal error: Oops: 5 [#2]
-> [    0.000000] last sysfs file:
-> [    0.000000] Modules linked in:
-> [    0.000000] CPU: 0    Tainted: G      D      (2.6.37 #2)
-> [    0.000000] PC is at handle_bad_irq+0x1a0/0x224
-> [    0.000000] LR is at handle_bad_irq+0x184/0x224
-> [    0.000000] pc : [<c00adc70>]    lr : [<c00adc54>]    psr: 400001d3
-> [    0.000000] sp : c05efd28  ip : ffffffff  fp : c00ca3e4
-> [    0.000000] r10: 00000017  r9 : 00000000  r8 : c05ee000
-> [    0.000000] r7 : c00ca3e6  r6 : 00000000  r5 : c078114c  r4 : c0769a24
-> [    0.000000] r3 : 00000000  r2 : 00000000  r1 : c05efc40  r0 : 00000025
-> [    0.000000] Flags: nZcv  IRQs off  FIQs off  Mode SVC_32  ISA ARM
->  Segment kernel
-> [    0.000000] Control: 10c5387d  Table: 80004019  DAC: 00000017
-> [    0.000000] Process swapper (pid: 0, stack limit = 0xc05ee2f0)
-> [    0.000000] Stack: (0xc05efd28 to 0xc05f0000)
-> [    0.000000] fd20:                   00000000 00000000 00000038 c003c070
-> ffffffff fa200000
-> [    0.000000] fd40: 00000001 c043c6b8 c043bee4 c05efd70 00000000 00000001
-> c05f2f30 c05efdda
-> [    0.000000] fd60: 00000001 c00ca3e6 c05ee000 00000000 00000017 c00ca3e4
-> ffffffff c05efd90
-> [    0.000000] fd80: c043bee4 c043bee8 60000153 ffffffff c05eff48 c0049800
-> c05ee2f0 0000000b
-> [    0.000000] fda0: 00000000 00000008 655f14a8 32663935 20633430 34383565
-> 30303033 38356520
-> 
-> 
-> 
-> 
-> 
-> So from this I believe that it is because of kernel paging problem.
-> Please help me to resolve this.
-> 
-> 
-> Regards,
-> Deepak
-> 
-> 
-> On Thu, May 8, 2014 at 3:45 PM, deepak vijay <deepakvijay2255@rediff.com>wrote:
-> 
-> > Hi,
-> > I have build omap3evm images by including mata-ti layer.
-> > When I am trying to boot the omap3evm board it is stuck at "Uncompressing
-> > Linux... done, booting the kernel" this comment.
-> > Can any one help me to over come this issue.
-> > The boot logs are given below.
-> > U-Boot SPL 2011.12 (May 08 2014 - 15:01:46)
-> > Texas Instruments Revision detection unimplemented
-> > OMAP SD/MMC: 0
-> > reading u-boot.img
-> > reading u-boot.img
-> >
-> >
-> > U-Boot 2011.12 (May 08 2014 - 15:01:46)
-> >
-> > OMAP36XX/37XX-GP ES1.2, CPU-OPP2, L3-165MHz, Max CPU Clock 1 Ghz
-> > OMAP3 EVM board + LPDDR/NAND
-> > I2C:   ready
-> > DRAM:  256 MiB
-> > NAND:  512 MiB
-> > MMC:   OMAP SD/MMC: 0
-> > *** Warning - bad CRC, using default environment
-> >
-> > In:    serial
-> > Out:   serial
-> > Err:   serial
-> > Read back SMSC id 0x92200000
-> > Die ID #706a00029ff80000016842c911024007
-> > Net:   smc911x-0
-> > Hit any key to stop autoboot:  0
-> > reading boot.scr
-> >
-> > ** Unable to read "boot.scr" from mmc 0:1 **
-> > reading uImage
-> >
-> > 3139340 bytes read
-> > Booting from mmc ...
-> > ## Booting kernel from Legacy Image at 82000000 ...
-> >    Image Name:   Linux-2.6.37
-> >    Image Type:   ARM Linux Kernel Image (uncompressed)
-> >    Data Size:    3139276 Bytes = 3 MiB
-> >    Load Address: 80008000
-> >    Entry Point:  80008000
-> >    Verifying Checksum ... OK
-> >    Loading Kernel Image ... OK
-> > OK
-> >
-> > Starting kernel ...
-> >
-> > Uncompressing Linux... done, booting the kernel.
-> >
-> >
-> > Regards,
-> > Deepak Vijay
-> >
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.03"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="true"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+</body>
+</html>
 
 
+------=_Part_12_525122361.1399663972364--
