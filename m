@@ -1,41 +1,49 @@
-Return-Path: <denys@ti.com>
+Return-Path: <dfldashgkv@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 95283E00B85; Tue, 13 May 2014 19:32:01 -0700 (PDT)
+	id 5D2CFE00B83; Wed, 14 May 2014 05:06:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
-	RCVD_IN_DNSWL_HI,RDNS_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: *  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+X-Spam-Status: No, score=0.6 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+	FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW,RDNS_NONE autolearn=no
+	version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (shiftee[at]eircom.net)
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.216.169 listed in list.dnswl.org]
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-Received: from comal.ext.ti.com (unknown [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 47507E00B74
-	for <meta-ti@yoctoproject.org>; Tue, 13 May 2014 19:31:57 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4E2Vv6L010807
-	for <meta-ti@yoctoproject.org>; Tue, 13 May 2014 21:31:57 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4E2Vuef028086
-	for <meta-ti@yoctoproject.org>; Tue, 13 May 2014 21:31:56 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 13 May 2014 21:31:56 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s4E2VuGv003500	for <meta-ti@yoctoproject.org>; Tue, 13 May 2014 21:31:56
-	-0500
-Date: Tue, 13 May 2014 22:16:17 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1311827519.35.1400033777030.JavaMail.jenkins@puget>
+X-Greylist: delayed 1693 seconds by postgrey-1.32 at yocto-www;
+	Wed, 14 May 2014 05:06:24 PDT
+Received: from mail-qc0-f169.google.com (unknown [209.85.216.169])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 015EDE00975
+	for <meta-ti@yoctoproject.org>; Wed, 14 May 2014 05:06:24 -0700 (PDT)
+Received: by mail-qc0-f169.google.com with SMTP id e16so2617829qcx.0
+	for <meta-ti@yoctoproject.org>; Wed, 14 May 2014 05:06:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:message-id:subject:from:to:content-type;
+	bh=6wnYWBFddSfregsZSiGmb3zAtmc1Lfg5b/dsb30N3mY=;
+	b=BgERwPV9fRgLRZW+zeg9+LVhRreKXANRAkbXMniVTqWd3AZVPklQAFGrLb3Bzks6UB
+	PbfrALTF/RKEAdqnC7eJ89tBlq4R6BThpVo6mAswZ1G5WR7G5hWnhE5rRu6R1AZ/vTgZ
+	iwRoH1mSoI2hR/PZvD+DlBBH4jpaWM3LFcuHdy1Caa3aFsB3vOF2D5bhhSl+n+Qqmsmc
+	KJtFMMNEq96/zk9TyCDBq9oO/duppB6icXMhzs2kOUMi+qvEdn0aYqBfc5BTkB7QA9Zo
+	GKZs/+iZHlxkQU7nz4oRzj3k4aMmfRbkrk4tApEo6bD6nAJXx3utqv4wgHG337q7ZdP8
+	V/gA==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-05-13_21-00-30
+X-Received: by 10.140.30.99 with SMTP id c90mr4605196qgc.13.1400067490657;
+	Wed, 14 May 2014 04:38:10 -0700 (PDT)
+Sender: dfldashgkv@gmail.com
+Received: by 10.96.42.39 with HTTP; Wed, 14 May 2014 04:38:10 -0700 (PDT)
+Date: Wed, 14 May 2014 12:38:10 +0100
+X-Google-Sender-Auth: WGSPwW958F83CwDU_QFVf6EpFgQ
+Message-ID: <CAJv4cO2zWjwBKPVe9Xs4zs4F6ynQ6987CEdjsRnzVDkH=oThdw@mail.gmail.com>
+From: "Mark O'Donovan" <shiftee@eircom.net>
+To: meta-ti@yoctoproject.org
+Subject: Beaglebone usb issue after first reboot
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,168 +56,69 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 May 2014 02:32:01 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_34_660793108.1400033777028"
+X-List-Received-Date: Wed, 14 May 2014 12:06:29 -0000
+Content-Type: multipart/alternative; boundary=001a113a1ada713b7e04f95a9db8
 
-------=_Part_34_660793108.1400033777028
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a113a1ada713b7e04f95a9db8
+Content-Type: text/plain; charset=UTF-8
 
-<html>
-<head>
-<title>
-Status for 05/13/14
-</title>
-</head>
-<body>
+Issue:
+Beaglebone black detects usb devices on first boot after flashing sd-card.
+On subsequent boots it does not.
 
-<h2>Status for 05/13/14</h2>
+Setup:
+Yocto Project 1.5.1
+linux-ti-staging 3.12.17
+meta-ti = "dora:990d8f62257029e25fc2b8786155bcf5dc483659"
 
-<h2>BUILD_ID: build-2014-05-13_21-01-38</h2>
+Using the diff command found here:
+http://superuser.com/a/470876
 
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+I found the following:
+diff -r CLEAN-IMAGE/etc/udev/cache.data BOOTED-IMAGE/etc/udev/cache.data
+0a1
+> Linux version 3.12.17 (modonovan@changanu) (gcc version 4.8.1 (GCC) ) #3
+SMP PREEMPT Thu May 1 14:08:42 IST 2014console=ttyO0,115200n8
+root=/dev/mmcblk0p2 ro rootfstype=ext4 rootwaitCharacter devices:1 mem4
+/dev/vc/04 tty4 ttyS5 /dev/tty5 /dev/console5 /dev/ptmx7 vcs10 misc13
+input29 fb81 video4linux89 i2c90 mtd128 ptm136 pts180 usb188 ttyUSB189
+usb_device247 ttySDIO248 usbmon249 ttyO250 watchdog251 ptp252 pps253
+media254 rtcBlock devices:1 ramdisk259 blkext7 loop8 sd31 mtdblock65 sd66
+sd67 sd68 sd69 sd70 sd71 sd128 sd129 sd130 sd131 sd132 sd133 sd134 sd135
+sd179 mmc
 
 
-------=_Part_34_660793108.1400033777028--
+Running the following after booting fixes the issue on the next boot:
+echo "" > /etc/udev/cache.data
+
+Is this a known issue??
+
+Thanks
+Mark
+
+--001a113a1ada713b7e04f95a9db8
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><span class=3D""><span>Issue:<br>Beaglebone black det=
+ects usb devices on first boot after flashing sd-card.<br>On subsequent boo=
+ts it does not.<br><br>Setup:<br>Yocto Project 1.5.1<br>linux-ti-staging 3.=
+12.17<br>
+meta-ti =3D &quot;dora:990d8f62257029e25fc2b8786155bcf5dc483659&quot;<br><b=
+r>Using the diff command found here:<br><a href=3D"http://superuser.com/a/4=
+70876">http://superuser.com/a/470876</a><br><br>I found the following:<br>d=
+iff -r CLEAN-IMAGE/etc/udev/cache.data BOOTED-IMAGE/etc/udev/cache.data<br>
+0a1<br>&gt; Linux version 3.12.17 (modonovan@changanu) (gcc version 4.8.1 (=
+GCC) ) #3 SMP PREEMPT Thu May 1 14:08:42 IST 2014console=3DttyO0,115200n8 r=
+oot=3D/dev/mmcblk0p2 ro rootfstype=3Dext4 rootwaitCharacter devices:1 mem4 =
+/dev/vc/04 tty4 ttyS5 /dev/tty5 /dev/console5 /dev/ptmx7 vcs10 misc13 input=
+29 fb81 video4linux89 i2c90 mtd128 ptm136 pts180 usb188 ttyUSB189 usb_devic=
+e247 ttySDIO248 usbmon249 ttyO250 watchdog251 ptp252 pps253 media254 rtcBlo=
+ck devices:1 ramdisk259 blkext7 loop8 sd31 mtdblock65 sd66 sd67 sd68 sd69 s=
+d70 sd71 sd128 sd129 sd130 sd131 sd132 sd133 sd134 sd135 sd179 mmc<br>
+<br><br>Running the following after booting fixes the issue on the next boo=
+t:<br>echo &quot;&quot; &gt; /etc/udev/cache.data<br><br></span></span></di=
+v><span class=3D""><span>Is this a known issue??<br><br>Thanks<br>Mark<br>
+</span></span><div><span class=3D""><span><br></span></span></div></div>
+
+--001a113a1ada713b7e04f95a9db8--
