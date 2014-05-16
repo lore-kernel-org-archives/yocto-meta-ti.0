@@ -1,6 +1,6 @@
-Return-Path: <hzhang@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B5A26E0070F; Fri, 16 May 2014 09:59:50 -0700 (PDT)
+	id 54330E00716; Fri, 16 May 2014 10:29:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,33 +8,33 @@ X-Spam-Status: No, score=-3.7 required=5.0 tests=RCVD_IN_DNSWL_HI,RDNS_NONE
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [192.94.94.40 listed in list.dnswl.org]
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-Received: from devils.ext.ti.com (unknown [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EF88DE0053B
-	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 09:59:46 -0700 (PDT)
+Received: from arroyo.ext.ti.com (unknown [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1D95EE006EC
+	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 10:29:49 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4GGxk4W015631
-	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 11:59:46 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4GGxkbB006472
-	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 11:59:46 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 16 May 2014 11:59:45 -0500
-Received: from ares-ubuntu.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s4GGxju6004850;	Fri, 16 May 2014 11:59:46 -0500
-Received: from a0868496 by ares-ubuntu.am.dhcp.ti.com with local (Exim 4.76)
-	(envelope-from <hzhang@ti.com>)	id 1WlLU1-0006Yo-L0; Fri, 16 May 2014
-	12:59:45 -0400
-From: <hzhang@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 16 May 2014 12:59:44 -0400
-Message-ID: <1400259584-25188-1-git-send-email-hzhang@ti.com>
-X-Mailer: git-send-email 1.7.9.5
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4GHThnI020849;
+	Fri, 16 May 2014 12:29:43 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4GHThOA029259;
+	Fri, 16 May 2014 12:29:43 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 16 May 2014 12:29:43 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4GHThTu018522;
+	Fri, 16 May 2014 12:29:43 -0500
+Date: Fri, 16 May 2014 13:29:42 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Mark O'Donovan" <shiftee@eircom.net>
+Message-ID: <20140516172942.GA18053@edge>
+References: <CAJv4cO2zWjwBKPVe9Xs4zs4F6ynQ6987CEdjsRnzVDkH=oThdw@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH] keystone: u-boot: rename tci6638 to k2hk evm config
+In-Reply-To: <CAJv4cO2zWjwBKPVe9Xs4zs4F6ynQ6987CEdjsRnzVDkH=oThdw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Beaglebone usb issue after first reboot
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,50 +47,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 May 2014 16:59:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 16 May 2014 17:29:53 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-From: Hao Zhang <hzhang@ti.com>
+On Wed, May 14, 2014 at 12:38:10PM +0100, Mark O'Donovan wrote:
+> Issue:
+> Beaglebone black detects usb devices on first boot after flashing sd-card.
+> On subsequent boots it does not.
+> 
+> Setup:
+> Yocto Project 1.5.1
+> linux-ti-staging 3.12.17
+> meta-ti = "dora:990d8f62257029e25fc2b8786155bcf5dc483659"
+> 
+> Using the diff command found here:
+> http://superuser.com/a/470876
+> 
+> I found the following:
+> diff -r CLEAN-IMAGE/etc/udev/cache.data BOOTED-IMAGE/etc/udev/cache.data
+> 0a1
+> > Linux version 3.12.17 (modonovan@changanu) (gcc version 4.8.1 (GCC) ) #3
+> SMP PREEMPT Thu May 1 14:08:42 IST 2014console=ttyO0,115200n8
+> root=/dev/mmcblk0p2 ro rootfstype=ext4 rootwaitCharacter devices:1 mem4
+> /dev/vc/04 tty4 ttyS5 /dev/tty5 /dev/console5 /dev/ptmx7 vcs10 misc13
+> input29 fb81 video4linux89 i2c90 mtd128 ptm136 pts180 usb188 ttyUSB189
+> usb_device247 ttySDIO248 usbmon249 ttyO250 watchdog251 ptp252 pps253
+> media254 rtcBlock devices:1 ramdisk259 blkext7 loop8 sd31 mtdblock65 sd66
+> sd67 sd68 sd69 sd70 sd71 sd128 sd129 sd130 sd131 sd132 sd133 sd134 sd135
+> sd179 mmc
+> 
+> 
+> Running the following after booting fixes the issue on the next boot:
+> echo "" > /etc/udev/cache.data
+> 
+> Is this a known issue??
 
-Rename U-boot "tci6638_evm_config" to "k2hk_evm_config" to align
-with DTB device name.
----
- conf/machine/include/keystone.inc             |    2 +-
- recipes-bsp/u-boot/u-boot-keystone_2013.01.bb |    6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+Mark,
 
-diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
-index b961ad3..63f069c 100644
---- a/conf/machine/include/keystone.inc
-+++ b/conf/machine/include/keystone.inc
-@@ -12,7 +12,7 @@ MACHINE_KERNEL_PR = "r7"
- 
- KERNEL_IMAGETYPE = "uImage"
- 
--UBOOT_MACHINE = "tci6638_evm_config"
-+UBOOT_MACHINE = "k2hk_evm_config"
- 
- UBOOT_ENTRYPOINT = "0x80008000"
- UBOOT_LOADADDRESS = "0x80008000"
-diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-index 6717e62..5e5eb51 100644
---- a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-@@ -4,10 +4,10 @@ DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
- 
- COMPATIBLE_MACHINE = "keystone"
- 
--PR = "r3+gitr${SRCPV}"
-+PR = "r4+gitr${SRCPV}"
- 
--# Tag "K2_UBOOT_2013_01_14.03_02"
--SRCREV = "0b9b4be2f3097b5bdc3b0ea7aa5e8f465097e365"
-+# Tag "K2_UBOOT_2013_01_14.05_16"
-+SRCREV = "fee500417b989fc9906d86e377b4d3d96033d54e"
- BRANCH = "master"
- 
- SRC_URI = "git://git.ti.com/keystone-linux/u-boot.git;protocol=git;branch=${BRANCH}"
+Thanks for the report! Yes, I've seen this issue before and had a workaround 
+for it, but I didn't trace it to the udev cache. I'll check it again.
+
 -- 
-1.7.9.5
-
+Denys
 
