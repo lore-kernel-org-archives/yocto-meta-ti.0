@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3AC4BE00716; Fri, 16 May 2014 11:50:53 -0700 (PDT)
+	id 08764E0070F; Fri, 16 May 2014 12:01:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -11,30 +11,30 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	*      [192.94.94.40 listed in list.dnswl.org]
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
 Received: from arroyo.ext.ti.com (unknown [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B395CE006EC
-	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 11:50:47 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4GIok1t003264
-	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 13:50:46 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4GIokM3015148
-	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 13:50:46 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 16 May 2014 13:50:46 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 68920E00BA1
+	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 12:00:52 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4GJ0pKG009249
+	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 14:00:51 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4GJ0p1P029377
+	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 14:00:51 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 16 May 2014 14:00:51 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4GIokeC027555;
-	Fri, 16 May 2014 13:50:46 -0500
-Date: Fri, 16 May 2014 14:50:46 -0400
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4GJ0pV8008631;
+	Fri, 16 May 2014 14:00:51 -0500
+Date: Fri, 16 May 2014 15:00:51 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Sam Nelson <sam.nelson@ti.com>
-Message-ID: <20140516185046.GD18053@edge>
-References: <1400264234-24709-1-git-send-email-sam.nelson@ti.com>
+To: <hzhang@ti.com>
+Message-ID: <20140516190051.GF18053@edge>
+References: <1400259584-25188-1-git-send-email-hzhang@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <1400264234-24709-1-git-send-email-sam.nelson@ti.com>
+In-Reply-To: <1400259584-25188-1-git-send-email-hzhang@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] cmem: Update to new version of cmem 4.0.2.11
+Subject: Re: [PATCH] keystone: u-boot: rename tci6638 to k2hk evm config
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,85 +47,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 May 2014 18:50:53 -0000
+X-List-Received-Date: Fri, 16 May 2014 19:01:11 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Fri, May 16, 2014 at 02:17:14PM -0400, Sam Nelson wrote:
-> - updated PR prefix to be common
+On Fri, May 16, 2014 at 12:59:44PM -0400, hzhang@ti.com wrote:
+> From: Hao Zhang <hzhang@ti.com>
 
-That's not how you do it.
-
-The -mod part will work, although the PR would need to be bumped in the .inc 
-file, not the mod.
-
-But the main cmem recipe will change from -r0+gitr... to -b+gitr...
-
-Historically, we used PRINC or INC_PR mechanisms. Either of those, as well as 
-PR on its own, are no going away. Unfortunately, you are still staying with 
-Dylan, so it may be still possible to use one of the PRINC or INC_PR...
-
--- 
-Denys
+Ack.
 
 
-> - Updated license file checksum
-> - Updated SRCREV commit Id
-> 
-> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> Rename U-boot "tci6638_evm_config" to "k2hk_evm_config" to align
+> with DTB device name.
 > ---
->  recipes-bsp/cmem/cmem-mod_git.bb |    2 +-
->  recipes-bsp/cmem/cmem.inc        |    8 +++++---
->  recipes-bsp/cmem/cmem_git.bb     |    2 +-
->  3 files changed, 7 insertions(+), 5 deletions(-)
+>  conf/machine/include/keystone.inc             |    2 +-
+>  recipes-bsp/u-boot/u-boot-keystone_2013.01.bb |    6 +++---
+>  2 files changed, 4 insertions(+), 4 deletions(-)
 > 
-> diff --git a/recipes-bsp/cmem/cmem-mod_git.bb b/recipes-bsp/cmem/cmem-mod_git.bb
-> index 2bdf9c0..f926fef 100644
-> --- a/recipes-bsp/cmem/cmem-mod_git.bb
-> +++ b/recipes-bsp/cmem/cmem-mod_git.bb
-> @@ -3,7 +3,7 @@ DESCRIPTION = "Kernel module for contiguous memory allocation from userspace"
->  include cmem.inc
+> diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+> index b961ad3..63f069c 100644
+> --- a/conf/machine/include/keystone.inc
+> +++ b/conf/machine/include/keystone.inc
+> @@ -12,7 +12,7 @@ MACHINE_KERNEL_PR = "r7"
 >  
->  # This package builds a kernel module, use kernel PR as base and append a local
-> -MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-> +MACHINE_KERNEL_PR_append = "${CMEM_PR_PREFIX}+gitr${SRCPV}"
->  PR = "${MACHINE_KERNEL_PR}"
+>  KERNEL_IMAGETYPE = "uImage"
 >  
->  inherit module
-> diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-> index 7927839..ef57bb5 100644
-> --- a/recipes-bsp/cmem/cmem.inc
-> +++ b/recipes-bsp/cmem/cmem.inc
-> @@ -1,11 +1,13 @@
->  HOMEPAGE = "http://processors.wiki.ti.com/index.php/Category:CMEM"
+> -UBOOT_MACHINE = "tci6638_evm_config"
+> +UBOOT_MACHINE = "k2hk_evm_config"
 >  
->  LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=b86138d4028fb8310b3b983024edc620"
-> +LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
+>  UBOOT_ENTRYPOINT = "0x80008000"
+>  UBOOT_LOADADDRESS = "0x80008000"
+> diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+> index 6717e62..5e5eb51 100644
+> --- a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+> +++ b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+> @@ -4,10 +4,10 @@ DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
 >  
->  BRANCH ?= "master"
-> -# This corresponds to version 4.00.01.08
-> -SRCREV = "0b68dfe9f155a1978cdb2178e052dc0d6f1e705b"
-> +# This corresponds to version 4.00.02.11
-> +SRCREV = "317792d2c18c1144401e2aee689aadebbd3a9b12"
-> +CMEM_PR_PREFIX = "b"
-> +PV="4.0.2.11"
+>  COMPATIBLE_MACHINE = "keystone"
 >  
->  SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
+> -PR = "r3+gitr${SRCPV}"
+> +PR = "r4+gitr${SRCPV}"
 >  
-> diff --git a/recipes-bsp/cmem/cmem_git.bb b/recipes-bsp/cmem/cmem_git.bb
-> index b633d74..2382451 100644
-> --- a/recipes-bsp/cmem/cmem_git.bb
-> +++ b/recipes-bsp/cmem/cmem_git.bb
-> @@ -4,7 +4,7 @@ include cmem.inc
+> -# Tag "K2_UBOOT_2013_01_14.03_02"
+> -SRCREV = "0b9b4be2f3097b5bdc3b0ea7aa5e8f465097e365"
+> +# Tag "K2_UBOOT_2013_01_14.05_16"
+> +SRCREV = "fee500417b989fc9906d86e377b4d3d96033d54e"
+>  BRANCH = "master"
 >  
->  RDEPENDS_${PN} = "cmem-mod"
->  
-> -PR = "r0+gitr${SRCPV}"
-> +PR = "${CMEM_PR_PREFIX}+gitr${SRCPV}"
->  
->  PACKAGES =+ "${PN}-test"
->  
+>  SRC_URI = "git://git.ti.com/keystone-linux/u-boot.git;protocol=git;branch=${BRANCH}"
 > -- 
 > 1.7.9.5
 > 
