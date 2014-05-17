@@ -1,44 +1,41 @@
-Return-Path: <hzhang@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 32054E00BA1; Fri, 16 May 2014 12:58:24 -0700 (PDT)
+	id 31281E00BA1; Fri, 16 May 2014 18:20:14 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=5.0 tests=RCVD_IN_DNSWL_HI,RDNS_NONE
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.6 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
+	RCVD_IN_DNSWL_HI,RDNS_NONE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+	*      [198.47.26.152 listed in list.dnswl.org]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-Received: from bear.ext.ti.com (unknown [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D3A72E006EC
-	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 12:58:22 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4GJwMSv003077
-	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 14:58:22 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4GJwMv4004631
-	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 14:58:22 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 16 May 2014 14:58:21 -0500
-Received: from [158.218.103.104] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4GJwL9L016427;
-	Fri, 16 May 2014 14:58:21 -0500
-Message-ID: <53766DDD.1090307@ti.com>
-Date: Fri, 16 May 2014 15:58:21 -0400
-From: Hao Zhang <hzhang@ti.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:17.0) Gecko/20130801 Thunderbird/17.0.8
+Received: from comal.ext.ti.com (unknown [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D2C57E00716
+	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 18:20:06 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4H1K6au028021
+	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 20:20:06 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4H1K6gT002395
+	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 20:20:06 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 16 May 2014 20:20:05 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s4H1K59a016033	for <meta-ti@yoctoproject.org>; Fri, 16 May 2014 20:20:05
+	-0500
+Date: Fri, 16 May 2014 21:04:21 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <103575850.47.1400288661484.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <1400268135-24694-1-git-send-email-hzhang@ti.com>
-	<20140516193355.GK18053@edge> <537669BF.1000706@ti.com>
-	<20140516195600.GN18053@edge>
-In-Reply-To: <20140516195600.GN18053@edge>
-X-Enigmail-Version: 1.6
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 1/3] keystone: machine config: change machine config name from keystone-evm to k2hk-evm
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-05-16_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,97 +48,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 May 2014 19:58:24 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
+X-List-Received-Date: Sat, 17 May 2014 01:20:14 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_46_1171686120.1400288661482"
+
+------=_Part_46_1171686120.1400288661482
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 5/16/2014 3:56 PM, Denys Dmytriyenko wrote:
-> On Fri, May 16, 2014 at 03:40:47PM -0400, Hao Zhang wrote:
->> On 5/16/2014 3:33 PM, Denys Dmytriyenko wrote:
->>> On Fri, May 16, 2014 at 03:22:15PM -0400, hzhang@ti.com wrote:
->>>> From: Hao Zhang <hzhang@ti.com>
->>>>
->>>> Keystone II SOC family has multiple devices and EVMs: k2hk, k2l
->>>> and k2e, each EVM should have a separate machine config, and share
->>>> the common keystone SOC family.
->>>
->>> It's better. But I don't see you adding other machines to the kernel recipe. 
->>> Is it correct?
->>>
->>>
->> We have not pushed the Linux k2l/K2e changes to external git yet,
->> internally we will add below append to meta-mcsdk:
->> KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
->> KERNEL_DEVICETREE_k2e-evm = "k2e-evm.dtb"
-> 
-> Ok, do you plan on making those changes public? Otherwise nobody will be able 
-> to build those other 2 machines outside of your setup...
-> 
-> 
+<html>
+<head>
+<title>
+Status for 05/16/14
+</title>
+</head>
+<body>
 
-Yes, I do, once we push Linux kernel k2l/k2e changes to external git, we
-will submit another patch to support k2l/k2e dtb build.
+<h2>Status for 05/16/14</h2>
 
->>>> Signed-off-by: Hao Zhang <hzhang@ti.com>
->>>> ---
->>>>  conf/machine/{keystone-evm.conf => k2hk-evm.conf} |    0
->>>>  recipes-bsp/boot-monitor/boot-monitor_git.bb      |    2 +-
->>>>  recipes-kernel/linux/linux-keystone-rt_3.10.bb    |    2 +-
->>>>  recipes-kernel/linux/linux-keystone_3.10.bb       |    2 +-
->>>>  4 files changed, 3 insertions(+), 3 deletions(-)
->>>>  rename conf/machine/{keystone-evm.conf => k2hk-evm.conf} (100%)
->>>>
->>>> diff --git a/conf/machine/keystone-evm.conf b/conf/machine/k2hk-evm.conf
->>>> similarity index 100%
->>>> rename from conf/machine/keystone-evm.conf
->>>> rename to conf/machine/k2hk-evm.conf
->>>> diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
->>>> index 7c5e9cf..0b559fa 100644
->>>> --- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
->>>> +++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
->>>> @@ -9,7 +9,7 @@ BOOT_MONITOR_MAKE_TARGET  ?= "all"
->>>>  
->>>>  LIC_FILES_CHKSUM = "file://COPYING;md5=25fe219a6febf6e5bb45beda1b2eb315"
->>>>  
->>>> -COMPATIBLE_MACHINE = "keystone-evm"
->>>> +COMPATIBLE_MACHINE = "k2hk-evm"
->>>>  
->>>>  SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
->>>>  
->>>> diff --git a/recipes-kernel/linux/linux-keystone-rt_3.10.bb b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
->>>> index cbd02d6..eb4bbd2 100644
->>>> --- a/recipes-kernel/linux/linux-keystone-rt_3.10.bb
->>>> +++ b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
->>>> @@ -13,7 +13,7 @@ require recipes-kernel/linux/setup-defconfig.inc
->>>>  MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
->>>>  PR = "${MACHINE_KERNEL_PR}"
->>>>  
->>>> -KERNEL_DEVICETREE_keystone-evm = "k2hk-evm.dtb"
->>>> +KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
->>>>  
->>>>  KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
->>>>  
->>>> diff --git a/recipes-kernel/linux/linux-keystone_3.10.bb b/recipes-kernel/linux/linux-keystone_3.10.bb
->>>> index 54cb86a..93b5481 100644
->>>> --- a/recipes-kernel/linux/linux-keystone_3.10.bb
->>>> +++ b/recipes-kernel/linux/linux-keystone_3.10.bb
->>>> @@ -13,7 +13,7 @@ require recipes-kernel/linux/setup-defconfig.inc
->>>>  MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
->>>>  PR = "${MACHINE_KERNEL_PR}"
->>>>  
->>>> -KERNEL_DEVICETREE_keystone-evm = "k2hk-evm.dtb"
->>>> +KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
->>>>  
->>>>  KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
->>>>  
->>>> -- 
->>>> 1.7.9.5
->>>>
->>>> -- 
->>>> _______________________________________________
->>>> meta-ti mailing list
->>>> meta-ti@yoctoproject.org
->>>> https://lists.yoctoproject.org/listinfo/meta-ti
->>
+<h2>BUILD_ID: build-2014-05-16_21-01-40</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.03"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_46_1171686120.1400288661482--
