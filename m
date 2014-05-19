@@ -1,6 +1,6 @@
 Return-Path: <chase.maupin@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2A677E0070F; Mon, 19 May 2014 12:20:03 -0700 (PDT)
+	id 26C4EE00BAA; Mon, 19 May 2014 12:20:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -11,29 +11,29 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	*      [198.47.26.152 listed in list.dnswl.org]
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
 Received: from comal.ext.ti.com (unknown [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC296E0070F
-	for <meta-ti@yoctoproject.org>; Mon, 19 May 2014 12:19:59 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C1F37E0073D
+	for <meta-ti@yoctoproject.org>; Mon, 19 May 2014 12:20:02 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4JJJxs0028349
-	for <meta-ti@yoctoproject.org>; Mon, 19 May 2014 14:19:59 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4JJJxSq020070
-	for <meta-ti@yoctoproject.org>; Mon, 19 May 2014 14:19:59 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Mon, 19 May 2014 14:19:58 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4JJK2Pt028409
+	for <meta-ti@yoctoproject.org>; Mon, 19 May 2014 14:20:02 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4JJK2Qg020120
+	for <meta-ti@yoctoproject.org>; Mon, 19 May 2014 14:20:02 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Mon, 19 May 2014 14:20:01 -0500
 Received: from sdit-build04.dal.design.ti.com (dbdp20.itg.ti.com
 	[172.24.170.38])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s4JJJog4019914;	Mon, 19 May 2014 14:19:57 -0500
+	s4JJJog5019914;	Mon, 19 May 2014 14:20:00 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Mon, 19 May 2014 14:19:41 -0500
-Message-ID: <1400527188-16951-3-git-send-email-Chase.Maupin@ti.com>
+Date: Mon, 19 May 2014 14:19:42 -0500
+Message-ID: <1400527188-16951-4-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1400527188-16951-1-git-send-email-Chase.Maupin@ti.com>
 References: <1400527188-16951-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/9] ti-ipc: Add version 3.21.00.07
+Subject: [PATCH 3/9] ti-ipc: Consolidate IPC recipes with include file
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,77 +46,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 May 2014 19:20:03 -0000
+X-List-Received-Date: Mon, 19 May 2014 19:20:07 -0000
 Content-Type: text/plain
 
-From: Mrinmayee Hingolikar <mrinmayee@ti.com>
-
-* Added version 3.21.00.07 from the meta-ti-glsdk layer.
-  Preserved authorship by Mrinmayee
-* Cleaned up the recipe for upstream by removing the sed lines
-  in do_configure and instead using EXTRA_OEMAKE values passed
-  into the make process.
+* Update the 3.00.00 and 3.21.00.07 versions of ti-ipc to use
+  a common ti-ipc.inc file which combines the configuration and
+  installation steps for both to be common.
+* Modify the tiiipclad-daemon.sh script to have a replacement
+  variable so that it can be used for more than a single device.
+* Move the tiipclad-daemon script to the ti-ipc directory with
+  the rest of the files used by this recipe.
+* Fix the permissions for the tiipclad-daemon script
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- ...nstallation-prefix-feature-to-products.ma.patch |   38 ++++++++++++++++++++
- recipes-ti/ipc/ti-ipc_3.21.00.07.bb                |   31 ++++++++++++++++
- 2 files changed, 69 insertions(+)
- create mode 100644 recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch
- create mode 100644 recipes-ti/ipc/ti-ipc_3.21.00.07.bb
+ recipes-ti/ipc/ti-ipc.inc                          |   58 ++++++++++++++++++++
+ .../ipc/{files => ti-ipc}/tiipclad-daemon.sh       |    2 +-
+ recipes-ti/ipc/ti-ipc_3.00.00.bb                   |   51 +----------------
+ recipes-ti/ipc/ti-ipc_3.21.00.07.bb                |   31 +----------
+ 4 files changed, 64 insertions(+), 78 deletions(-)
+ create mode 100644 recipes-ti/ipc/ti-ipc.inc
+ rename recipes-ti/ipc/{files => ti-ipc}/tiipclad-daemon.sh (92%)
+ mode change 100755 => 100644
 
-diff --git a/recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch b/recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
 new file mode 100644
-index 0000000..58d77c7
+index 0000000..ee9feff
 --- /dev/null
-+++ b/recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch
-@@ -0,0 +1,38 @@
-+From 26d09063063593aec760151393226b96bc7ab9f8 Mon Sep 17 00:00:00 2001
-+From: Mrinmayee Hingolikar <mrinmayee@ti.com>
-+Date: Thu, 5 Sep 2013 17:01:15 +0530
-+Subject: [PATCH] ipc: Added installation prefix feature to products.mak
-+
-+Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
-+---
-+ ipc-linux.mak |    1 +
-+ products.mak  |    1 +
-+ 2 files changed, 2 insertions(+)
-+
-+diff --git a/ipc-linux.mak b/ipc-linux.mak
-+index 788a5a2..01579e4 100644
-+--- a/ipc-linux.mak
-++++ b/ipc-linux.mak
-+@@ -38,6 +38,7 @@ include products.mak
-+ config:
-+ 	@echo "Configuring Linux Ipc ..."
-+ 	./configure --host=$(TOOLCHAIN_LONGNAME) \
-++            --prefix=$(PREFIX) \
-+             CC=$(TOOLCHAIN_PREFIX)gcc \
-+             PLATFORM=$(PLATFORM) \
-+             CMEM_INSTALL_DIR=$(CMEM_INSTALL_DIR) \
-+diff --git a/products.mak b/products.mak
-+index e418d2f..4578a1e 100644
-+--- a/products.mak
-++++ b/products.mak
-+@@ -55,6 +55,7 @@ PLATFORM ?=
-+ TOOLCHAIN_LONGNAME = arm-none-linux-gnueabi
-+ TOOLCHAIN_INSTALL_DIR = $(DEPOT)/_your_arm_code_gen_install_
-+ TOOLCHAIN_PREFIX = $(TOOLCHAIN_INSTALL_DIR)/bin/$(TOOLCHAIN_LONGNAME)-
-++PREFIX = /usr/local
-+ 
-+ # Optional: Path to Linux Kernel - needed to build the MmRpc user libraries
-+ # (for devices that support it)
-+-- 
-+1.7.9.5
-+
-diff --git a/recipes-ti/ipc/ti-ipc_3.21.00.07.bb b/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
-new file mode 100644
-index 0000000..8131754
---- /dev/null
-+++ b/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
-@@ -0,0 +1,31 @@
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -0,0 +1,58 @@
 +DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
-+HOMEPAGE = "https://git.ti.com/ipc/pages/Home"
++HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
++
 +LICENSE = "BSD"
 +LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=f2518e421e230f06fe6d449718d02edc"
 +
@@ -126,26 +87,167 @@ index 0000000..8131754
 +
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
++PLATFORM = "UNKNOWN"
 +PLATFORM_omap5-evm = "OMAP54XX"
 +PLATFORM_dra7xx-evm = "DRA7XX"
++PLATFORM_keystone = "TCI6638"
 +
-+inherit autotools pkgconfig
++DAEMON = "UNKNOWN"
++DAEMON_omap5-evm = "lad_omap54xx_smp"
++DAEMON_dra7xx-evm = "lad_dra7xx"
++DAEMON_keystone = "lad_tci6638"
++
++inherit autotools pkgconfig update-rc.d
 +
 +SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git \
 +           file://0002-ipc-Added-installation-prefix-feature-to-products.ma.patch \
++           file://tiipclad-daemon.sh \
 +           "
-+
-+SRCREV = "c18fece0c9f0dc76361dc1ee11b7ee2417479847"
 +
 +S = "${WORKDIR}/git"
 +
-+FILESEXTRAPATHS_prepend := "${THISDIR}:"
++INITSCRIPT_NAME = "tiipclad-daemon.sh"
++INITSCRIPT_PARAMS = "defaults 10"
 +
 +EXTRA_OEMAKE += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} TOOLCHAIN_INSTALL_DIR=${TOOLCHAIN_PATH} TOOLCHAIN_LONGNAME=${TOOLCHAIN_SYS} PLATFORM=${PLATFORM} PREFIX=${prefix}"
 +
 +do_configure() {
-+	oe_runmake -f ${S}/ipc-linux.mak config
++    oe_runmake -f ${S}/ipc-linux.mak config
 +}
++
++do_install_append() {
++    install -d ${D}${sysconfdir}/init.d/
++
++    # Modify the tiipclad-daemon.sh script to point to the right
++    # lad daemon executable.
++    sed -i -e "s/__LAD_DAEMON__/${DAEMON}/" ${WORKDIR}/tiipclad-daemon.sh
++    install -c -m 755 ${WORKDIR}/tiipclad-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
++}
++
++PACKAGES =+ "${PN}-test"
++RDEPENDS_${PN}-test += "${PN}"
++
++FILES_${PN}-test = " \
++    ${bindir}/NameServerApp \
++    ${bindir}/MessageQApp \
++    ${bindir}/MessageQMulti \
++    ${bindir}/ping_rpmsg"
++
+diff --git a/recipes-ti/ipc/files/tiipclad-daemon.sh b/recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh
+old mode 100755
+new mode 100644
+similarity index 92%
+rename from recipes-ti/ipc/files/tiipclad-daemon.sh
+rename to recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh
+index 54b3888..97f870e
+--- a/recipes-ti/ipc/files/tiipclad-daemon.sh
++++ b/recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh
+@@ -1,6 +1,6 @@
+ #! /bin/sh
+ 
+-tiipclad_daemon=/usr/bin/lad_tci6638
++tiipclad_daemon=/usr/bin/__LAD_DAEMON__
+ tiipclad_params=lad.txt
+ 
+ test -x "$tiipclad_daemon" || exit 0
+diff --git a/recipes-ti/ipc/ti-ipc_3.00.00.bb b/recipes-ti/ipc/ti-ipc_3.00.00.bb
+index c07b7f9..a6922c0 100644
+--- a/recipes-ti/ipc/ti-ipc_3.00.00.bb
++++ b/recipes-ti/ipc/ti-ipc_3.00.00.bb
+@@ -1,52 +1,7 @@
+-DESCRIPTION="This support the communication between processors \
+-in a multi-processor environment and communication to peripherals. \
+-This communication includes message passing, streams, and linked lists. \
+-These modules work transparently in both uni-processor and multi-processor \
+-configurations."
++require ti-ipc.inc
+ 
+-HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
++# For this version of IPC the PLATFORM value is lowercase
++PLATFORM_keystone = "tci6638"
+ 
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://products.mak;beginline=2;endline=30;md5=195feadf798bb4165bcb1a23ffd50dbb"
+-SECTION = "console"
+-COMPATIBLE_MACHINE = "keystone"
+-TARGET_PLATFORM = "tci6638"
+-
+-PR = "r0"
+-
+-BRANCH ?= "master"
+ # The following commit corresponds to 3.00.04.29
+ SRCREV = "12794ea33870b782bffe1fe4398e86e93fb64396"
+-
+-SRC_URI = " \
+-    git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
+-    file://tiipclad-daemon.sh"
+-
+-S = "${WORKDIR}/git"
+-
+-export PLATFORM = "${TARGET_PLATFORM}"
+-
+-export PARALLEL_MAKE = ""
+-
+-PACKAGES =+ "${PN}-test"
+-
+-FILES_${PN}-test = " \
+-    ${bindir}/NameServerApp \
+-    ${bindir}/MessageQApp \
+-    ${bindir}/MessageQMulti \
+-    ${bindir}/ping_rpmsg"
+-
+-DEPENDS += "virtual/kernel"
+-
+-EXTRA_OECONF += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR}"
+-inherit autotools
+-
+-INITSCRIPT_NAME = "tiipclad-daemon.sh"
+-INITSCRIPT_PARAMS = "defaults 10"
+-
+-inherit update-rc.d
+-
+-do_install_append() {
+-	install -d ${D}${sysconfdir}/init.d/
+-	install -c -m 755 ${WORKDIR}/tiipclad-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
+-}
+diff --git a/recipes-ti/ipc/ti-ipc_3.21.00.07.bb b/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
+index 8131754..17cdab0 100644
+--- a/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
++++ b/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
+@@ -1,31 +1,4 @@
+-DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
+-HOMEPAGE = "https://git.ti.com/ipc/pages/Home"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=f2518e421e230f06fe6d449718d02edc"
+-
+-DEPENDS += "virtual/kernel"
+-
+-PR = "r1"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-PLATFORM_omap5-evm = "OMAP54XX"
+-PLATFORM_dra7xx-evm = "DRA7XX"
+-
+-inherit autotools pkgconfig
+-
+-SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git \
+-           file://0002-ipc-Added-installation-prefix-feature-to-products.ma.patch \
+-           "
++require ti-ipc.inc
+ 
++# This commit corresponds to 3.21.00.07
+ SRCREV = "c18fece0c9f0dc76361dc1ee11b7ee2417479847"
+-
+-S = "${WORKDIR}/git"
+-
+-FILESEXTRAPATHS_prepend := "${THISDIR}:"
+-
+-EXTRA_OEMAKE += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} TOOLCHAIN_INSTALL_DIR=${TOOLCHAIN_PATH} TOOLCHAIN_LONGNAME=${TOOLCHAIN_SYS} PLATFORM=${PLATFORM} PREFIX=${prefix}"
+-
+-do_configure() {
+-	oe_runmake -f ${S}/ipc-linux.mak config
+-}
 -- 
 1.7.9.5
 
