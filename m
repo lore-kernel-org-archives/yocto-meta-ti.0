@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A34E9E0077C; Wed, 21 May 2014 12:57:24 -0700 (PDT)
+	id A4E1DE00BC3; Wed, 21 May 2014 12:57:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,15 +9,15 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF778E00BC3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF378E0077C
 	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:57:21 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7541B52A83; Wed, 21 May 2014 19:57:18 +0000 (UTC)
+	id 7C73052A89; Wed, 21 May 2014 19:57:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140521195718.7541B52A83@arago-project.org>
+Message-Id: <20140521195718.7C73052A89@arago-project.org>
 Date: Wed, 21 May 2014 19:57:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Mrinmayee Hingolikar : bltsville: Add TI BLTsville library
+Subject: Maupin, Chase : dra7xx-evm: Add sgx to MACHINE_FEATURES
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,57 +35,36 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 66b91b7d243abd801b8aa360cb401386648c234d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=66b91b7d243abd801b8aa360cb401386648c234d
+Commit: c78c19187036569914b4b0ea7990bab2cb6458bb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c78c19187036569914b4b0ea7990bab2cb6458bb
 
-Author: Mrinmayee Hingolikar <mrinmayee@ti.com>
-Date:   Tue May 20 01:19:46 2014 +0000
+Author: Maupin, Chase <chase.maupin@ti.com>
+Date:   Tue May 20 01:19:47 2014 +0000
 
-bltsville: Add TI BLTsville library
+dra7xx-evm: Add sgx to MACHINE_FEATURES
 
-* Migrated from meta-ti-glsdk and preserved authorship for
-  Mrinmayee
-* This library allows use of the GC320 2D blitter
-* Modified for upstream:
-    * LICENSE was changed to BSD-3-Clause but the TI-TSPA license
-      is still present as well so modified this to be a dual
-      license package.
+* Add sgx to the MACHINE_FEATURES so that the dra7xx-evm can
+  start including sgx libraries.  NOTE: currently there are
+  no driver modules that work with v3.12 of the Linux kernel
+  but this does work with version 3.8.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-graphics/bltsville/bltsville_git.bb |   22 ++++++++++++++++++++++
- 1 files changed, 22 insertions(+), 0 deletions(-)
+ conf/machine/dra7xx-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-graphics/bltsville/bltsville_git.bb b/recipes-graphics/bltsville/bltsville_git.bb
-new file mode 100644
-index 0000000..158d189
---- /dev/null
-+++ b/recipes-graphics/bltsville/bltsville_git.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "Userspace libraries and headers for TI BLTsville implementation"
-+HOMEPAGE = "http://omapzoom.org/?p=platform/external/bltsville.git;a=summary"
-+LICENSE = "BSD-3-Clause & TI-TSPA"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=10a9abb9c5bb19edd83a8cf66eef7148 \
-+                    file://ticpu/license;md5=0bb831850a0de80e32a63772d89c6562"
-+
-+PR = "r2"
-+
-+SRCREV = "016586280ecdae201fd6e340ec8c4f8a9605cc94"
-+
-+inherit autotools pkgconfig
-+
-+SRC_URI = "git://git.omapzoom.org/platform/external/bltsville.git;protocol=git"
-+
-+S = "${WORKDIR}/git"
-+
-+do_configure() {
-+	chmod +x autogen.sh
-+	./autogen.sh --prefix=${prefix} --with-libtool-sysroot=${STAGING_DIR_TARGET}
-+}
-+
-+FILES_${PN} += "${libdir}/libbltsville_ticpu_license.txt"   
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index 14253cf..8ba2757 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -33,4 +33,4 @@ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
+ 
+ # Currently removing the sgx machine feature because there is no SGX package
+ # available for omap5
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen sgx"
 
 
