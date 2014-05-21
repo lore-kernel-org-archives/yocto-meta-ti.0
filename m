@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3AB28E00C71; Wed, 21 May 2014 12:57:43 -0700 (PDT)
+	id 6E67AE00C71; Wed, 21 May 2014 12:57:43 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,15 +9,15 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0BB2BE00C2F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2242CE00C0B
 	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:57:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A074052A73; Wed, 21 May 2014 19:57:33 +0000 (UTC)
+	id C1F3952A78; Wed, 21 May 2014 19:57:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140521195733.A074052A73@arago-project.org>
+Message-Id: <20140521195733.C1F3952A78@arago-project.org>
 Date: Wed, 21 May 2014 19:57:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Maupin, Chase : ti-ipc: Consolidate IPC recipes with include file
+Subject: Mrinmayee Hingolikar : dspdce-fw: Add DSP firmware recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,212 +35,58 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dora
-Commit: 7bfd7b5d15faad1d56eec22f4facfc9cf2123537
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7bfd7b5d15faad1d56eec22f4facfc9cf2123537
+Commit: 445007a3e3b84bede027d7b35f95a9b4e2750a10
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=445007a3e3b84bede027d7b35f95a9b4e2750a10
 
-Author: Maupin, Chase <chase.maupin@ti.com>
-Date:   Tue May 20 01:19:42 2014 +0000
+Author: Mrinmayee Hingolikar <mrinmayee@ti.com>
+Date:   Tue May 20 01:19:44 2014 +0000
 
-ti-ipc: Consolidate IPC recipes with include file
+dspdce-fw: Add DSP firmware recipe
 
-* Update the 3.00.00 and 3.21.00.07 versions of ti-ipc to use
-  a common ti-ipc.inc file which combines the configuration and
-  installation steps for both to be common.
-* Modify the tiiipclad-daemon.sh script to have a replacement
-  variable so that it can be used for more than a single device.
-* Move the tiipclad-daemon script to the ti-ipc directory with
-  the rest of the files used by this recipe.
-* Fix the permissions for the tiipclad-daemon script
+* Migrated the dspdce-fw recipe from meta-ti-glsdk and
+  preserved authorship for Mrinmayee.
+* Cleaned up for upstream:
+    * Removed the MACHINE name from the recipe name
+    * Used MACHINE variable in SRC_URI
+    * Update to use default variables such as base_libdir
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc.inc                          |   58 ++++++++++++++++++++
- .../ipc/{files => ti-ipc}/tiipclad-daemon.sh       |    2 +-
- recipes-ti/ipc/ti-ipc_3.00.00.bb                   |   51 +----------------
- recipes-ti/ipc/ti-ipc_3.21.00.07.bb                |   31 +----------
- 4 files changed, 64 insertions(+), 78 deletions(-)
+ recipes-ti/dspdce-fw/dspdce-fw_1.00.00.02.bb |   24 ++++++++++++++++++++++++
+ 1 files changed, 24 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+diff --git a/recipes-ti/dspdce-fw/dspdce-fw_1.00.00.02.bb b/recipes-ti/dspdce-fw/dspdce-fw_1.00.00.02.bb
 new file mode 100644
-index 0000000..ee9feff
+index 0000000..69e9814
 --- /dev/null
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -0,0 +1,58 @@
-+DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
-+HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
++++ b/recipes-ti/dspdce-fw/dspdce-fw_1.00.00.02.bb
+@@ -0,0 +1,24 @@
++DESCRIPTION = "Firmware for DSP "
++LICENSE = "TI-TSPA"
++LIC_FILES_CHKSUM = "file://DSPDCE-${PV}-Manifest.doc;md5=587a7b9fdd99f98fbe99af4a4ba3362a"
 +
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=f2518e421e230f06fe6d449718d02edc"
-+
-+DEPENDS += "virtual/kernel"
-+
-+PR = "r1"
-+
++COMPATIBLE_MACHINE = "dra7xx-evm"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+PLATFORM = "UNKNOWN"
-+PLATFORM_omap5-evm = "OMAP54XX"
-+PLATFORM_dra7xx-evm = "DRA7XX"
-+PLATFORM_keystone = "TCI6638"
++SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00_00_02/exports/dspdce-${MACHINE}-1.00.00.02.tar.gz;protocol=http"
 +
-+DAEMON = "UNKNOWN"
-+DAEMON_omap5-evm = "lad_omap54xx_smp"
-+DAEMON_dra7xx-evm = "lad_dra7xx"
-+DAEMON_keystone = "lad_tci6638"
++S = "${WORKDIR}/dspdce-${MACHINE}-${PV}"
 +
-+inherit autotools pkgconfig update-rc.d
++SRC_URI[md5sum] = "df19baf16f828b5d32b4eed50f0364f5"
++SRC_URI[sha256sum] = "0c0f34674110d1ef0300b61b572a326daffb95a31cc9d45888b2e50a83c6f555"
 +
-+SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git \
-+           file://0002-ipc-Added-installation-prefix-feature-to-products.ma.patch \
-+           file://tiipclad-daemon.sh \
-+           "
++TARGET = "dra7-dsp1-fw.xe66"
 +
-+S = "${WORKDIR}/git"
-+
-+INITSCRIPT_NAME = "tiipclad-daemon.sh"
-+INITSCRIPT_PARAMS = "defaults 10"
-+
-+EXTRA_OEMAKE += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} TOOLCHAIN_INSTALL_DIR=${TOOLCHAIN_PATH} TOOLCHAIN_LONGNAME=${TOOLCHAIN_SYS} PLATFORM=${PLATFORM} PREFIX=${prefix}"
-+
-+do_configure() {
-+    oe_runmake -f ${S}/ipc-linux.mak config
++do_install() {
++        mkdir -p ${D}${base_libdir}/firmware
++        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
 +}
 +
-+do_install_append() {
-+    install -d ${D}${sysconfdir}/init.d/
++FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
 +
-+    # Modify the tiipclad-daemon.sh script to point to the right
-+    # lad daemon executable.
-+    sed -i -e "s/__LAD_DAEMON__/${DAEMON}/" ${WORKDIR}/tiipclad-daemon.sh
-+    install -c -m 755 ${WORKDIR}/tiipclad-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
-+}
-+
-+PACKAGES =+ "${PN}-test"
-+RDEPENDS_${PN}-test += "${PN}"
-+
-+FILES_${PN}-test = " \
-+    ${bindir}/NameServerApp \
-+    ${bindir}/MessageQApp \
-+    ${bindir}/MessageQMulti \
-+    ${bindir}/ping_rpmsg"
-+
-diff --git a/recipes-ti/ipc/files/tiipclad-daemon.sh b/recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh
-old mode 100755
-new mode 100644
-similarity index 92%
-rename from recipes-ti/ipc/files/tiipclad-daemon.sh
-rename to recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh
-index 54b3888..97f870e
---- a/recipes-ti/ipc/files/tiipclad-daemon.sh
-+++ b/recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh
-@@ -1,6 +1,6 @@
- #! /bin/sh
- 
--tiipclad_daemon=/usr/bin/lad_tci6638
-+tiipclad_daemon=/usr/bin/__LAD_DAEMON__
- tiipclad_params=lad.txt
- 
- test -x "$tiipclad_daemon" || exit 0
-diff --git a/recipes-ti/ipc/ti-ipc_3.00.00.bb b/recipes-ti/ipc/ti-ipc_3.00.00.bb
-index c07b7f9..a6922c0 100644
---- a/recipes-ti/ipc/ti-ipc_3.00.00.bb
-+++ b/recipes-ti/ipc/ti-ipc_3.00.00.bb
-@@ -1,52 +1,7 @@
--DESCRIPTION="This support the communication between processors \
--in a multi-processor environment and communication to peripherals. \
--This communication includes message passing, streams, and linked lists. \
--These modules work transparently in both uni-processor and multi-processor \
--configurations."
-+require ti-ipc.inc
- 
--HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
-+# For this version of IPC the PLATFORM value is lowercase
-+PLATFORM_keystone = "tci6638"
- 
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://products.mak;beginline=2;endline=30;md5=195feadf798bb4165bcb1a23ffd50dbb"
--SECTION = "console"
--COMPATIBLE_MACHINE = "keystone"
--TARGET_PLATFORM = "tci6638"
--
--PR = "r0"
--
--BRANCH ?= "master"
- # The following commit corresponds to 3.00.04.29
- SRCREV = "12794ea33870b782bffe1fe4398e86e93fb64396"
--
--SRC_URI = " \
--    git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
--    file://tiipclad-daemon.sh"
--
--S = "${WORKDIR}/git"
--
--export PLATFORM = "${TARGET_PLATFORM}"
--
--export PARALLEL_MAKE = ""
--
--PACKAGES =+ "${PN}-test"
--
--FILES_${PN}-test = " \
--    ${bindir}/NameServerApp \
--    ${bindir}/MessageQApp \
--    ${bindir}/MessageQMulti \
--    ${bindir}/ping_rpmsg"
--
--DEPENDS += "virtual/kernel"
--
--EXTRA_OECONF += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR}"
--inherit autotools
--
--INITSCRIPT_NAME = "tiipclad-daemon.sh"
--INITSCRIPT_PARAMS = "defaults 10"
--
--inherit update-rc.d
--
--do_install_append() {
--	install -d ${D}${sysconfdir}/init.d/
--	install -c -m 755 ${WORKDIR}/tiipclad-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
--}
-diff --git a/recipes-ti/ipc/ti-ipc_3.21.00.07.bb b/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
-index 8131754..17cdab0 100644
---- a/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
-+++ b/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
-@@ -1,31 +1,4 @@
--DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
--HOMEPAGE = "https://git.ti.com/ipc/pages/Home"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=f2518e421e230f06fe6d449718d02edc"
--
--DEPENDS += "virtual/kernel"
--
--PR = "r1"
--
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--PLATFORM_omap5-evm = "OMAP54XX"
--PLATFORM_dra7xx-evm = "DRA7XX"
--
--inherit autotools pkgconfig
--
--SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git \
--           file://0002-ipc-Added-installation-prefix-feature-to-products.ma.patch \
--           "
-+require ti-ipc.inc
- 
-+# This commit corresponds to 3.21.00.07
- SRCREV = "c18fece0c9f0dc76361dc1ee11b7ee2417479847"
--
--S = "${WORKDIR}/git"
--
--FILESEXTRAPATHS_prepend := "${THISDIR}:"
--
--EXTRA_OEMAKE += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} TOOLCHAIN_INSTALL_DIR=${TOOLCHAIN_PATH} TOOLCHAIN_LONGNAME=${TOOLCHAIN_SYS} PLATFORM=${PLATFORM} PREFIX=${prefix}"
--
--do_configure() {
--	oe_runmake -f ${S}/ipc-linux.mak config
--}
++INSANE_SKIP_${PN} = "arch"
 
 
