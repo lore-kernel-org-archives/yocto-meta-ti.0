@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 43EF5E00C45; Wed, 21 May 2014 12:57:34 -0700 (PDT)
+	id 105B6E00C60; Wed, 21 May 2014 12:57:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,15 +9,15 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC1C8E0077C
-	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:57:25 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 27538E00C13
+	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:57:26 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5C41952A73; Wed, 21 May 2014 19:57:25 +0000 (UTC)
+	id 6A79052A78; Wed, 21 May 2014 19:57:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140521195725.5C41952A73@arago-project.org>
+Message-Id: <20140521195725.6A79052A78@arago-project.org>
 Date: Wed, 21 May 2014 19:57:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Mrinmayee Hingolikar : dspdce-fw: Add DSP firmware recipe
+Subject: Karthik Ramanan : vis: Add radio application firmware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,63 +30,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 May 2014 19:57:34 -0000
+X-List-Received-Date: Wed, 21 May 2014 19:57:38 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: f8f298be41f0edf38c0c8e983f974c35547d99fd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f8f298be41f0edf38c0c8e983f974c35547d99fd
+Commit: f59f3e03c7af556b3bd1e872052c74b62e92223a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f59f3e03c7af556b3bd1e872052c74b62e92223a
 
-Author: Mrinmayee Hingolikar <mrinmayee@ti.com>
-Date:   Tue May 20 01:19:44 2014 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Tue May 20 01:19:45 2014 +0000
 
-dspdce-fw: Add DSP firmware recipe
+vis: Add radio application firmware
 
-* Migrated the dspdce-fw recipe from meta-ti-glsdk and
-  preserved authorship for Mrinmayee.
-* Cleaned up for upstream:
-    * Removed the MACHINE name from the recipe name
-    * Used MACHINE variable in SRC_URI
-    * Update to use default variables such as base_libdir
+* Migrated from meta-ti-glsdk and preserved authorship for
+  Karthik
+* Modified for upstream:
+    * Made PACKAGE_ARCH machine specific
+    * Removed bogus HOMEPAGE setting
+    * Separated the firmware into a ${PN}-fw package and left the
+      ARM side RadioApp in the base package.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/dspdce-fw/dspdce-fw_1.00.00.02.bb |   24 ++++++++++++++++++++++++
- 1 files changed, 24 insertions(+), 0 deletions(-)
+ recipes-ti/vis-fw/vis_01.50.07.15.bb |   31 +++++++++++++++++++++++++++++++
+ 1 files changed, 31 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/dspdce-fw/dspdce-fw_1.00.00.02.bb b/recipes-ti/dspdce-fw/dspdce-fw_1.00.00.02.bb
+diff --git a/recipes-ti/vis-fw/vis_01.50.07.15.bb b/recipes-ti/vis-fw/vis_01.50.07.15.bb
 new file mode 100644
-index 0000000..69e9814
+index 0000000..85d8539
 --- /dev/null
-+++ b/recipes-ti/dspdce-fw/dspdce-fw_1.00.00.02.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "Firmware for DSP "
++++ b/recipes-ti/vis-fw/vis_01.50.07.15.bb
+@@ -0,0 +1,31 @@
++DESCRIPTION = "Radio Application Firmware"
 +LICENSE = "TI-TSPA"
-+LIC_FILES_CHKSUM = "file://DSPDCE-${PV}-Manifest.doc;md5=587a7b9fdd99f98fbe99af4a4ba3362a"
++LIC_FILES_CHKSUM = "file://${S}/J6_VIS_DEMO_LINUX_BINARY_01.50.07.15-Manifest.html;md5=a59aa54b9470f555cf086b91dca0afa3"
 +
 +COMPATIBLE_MACHINE = "dra7xx-evm"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00_00_02/exports/dspdce-${MACHINE}-1.00.00.02.tar.gz;protocol=http"
++SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/vis/01_50_07_15/exports/vis-${MACHINE}-01.50.07.15.tar.gz;protocol=http"
 +
-+S = "${WORKDIR}/dspdce-${MACHINE}-${PV}"
++SRC_URI[md5sum] = "fe8b00e398fb3b7ada0c15b601867acb"
++SRC_URI[sha256sum] = "6e2aa47ae892910616ebdc96646af778af9a59ca0657716ab4fa4b24a9afae69"
 +
-+SRC_URI[md5sum] = "df19baf16f828b5d32b4eed50f0364f5"
-+SRC_URI[sha256sum] = "0c0f34674110d1ef0300b61b572a326daffb95a31cc9d45888b2e50a83c6f555"
++S = "${WORKDIR}"
 +
-+TARGET = "dra7-dsp1-fw.xe66"
++DSPAPP = "dra7-dsp1-fw-radio.xe66"
++GPPAPP = "RadioApp"
 +
 +do_install() {
-+        mkdir -p ${D}${base_libdir}/firmware
-+        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
++    install -d ${D}${base_libdir}/firmware
++    install -d ${D}${bindir}
++    install ${S}/prebuilt/${DSPAPP} ${D}${base_libdir}/firmware/${DSPAPP}
++    install -m 0755 ${S}/prebuilt/${GPPAPP} ${D}${bindir}/${GPPAPP}
 +}
 +
-+FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
++PACKAGES += "${PN}-fw"
++RDEPENDS_${PN} += "${PN}-fw"
 +
-+INSANE_SKIP_${PN} = "arch"
++FILES_${PN}-fw += "${base_libdir}/firmware/${DSPAPP}"
++
++INSANE_SKIP_${PN}-fw = "arch"
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1" 
 
 
