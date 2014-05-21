@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 105B6E00C60; Wed, 21 May 2014 12:57:38 -0700 (PDT)
+	id 0D721E00C1B; Wed, 21 May 2014 12:57:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,15 +9,15 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 27538E00C13
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 277CAE00C1B
 	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:57:26 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6A79052A78; Wed, 21 May 2014 19:57:25 +0000 (UTC)
+	id 8812E52A83; Wed, 21 May 2014 19:57:25 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140521195725.6A79052A78@arago-project.org>
+Message-Id: <20140521195725.8812E52A83@arago-project.org>
 Date: Wed, 21 May 2014 19:57:25 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : vis: Add radio application firmware
+Subject: Mrinmayee Hingolikar : bltsville: Add TI BLTsville library
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,66 +35,57 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: f59f3e03c7af556b3bd1e872052c74b62e92223a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f59f3e03c7af556b3bd1e872052c74b62e92223a
+Commit: 99970bb459d1ffb816d71e7177b0bec6dc014a62
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=99970bb459d1ffb816d71e7177b0bec6dc014a62
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Tue May 20 01:19:45 2014 +0000
+Author: Mrinmayee Hingolikar <mrinmayee@ti.com>
+Date:   Tue May 20 01:19:46 2014 +0000
 
-vis: Add radio application firmware
+bltsville: Add TI BLTsville library
 
 * Migrated from meta-ti-glsdk and preserved authorship for
-  Karthik
+  Mrinmayee
+* This library allows use of the GC320 2D blitter
 * Modified for upstream:
-    * Made PACKAGE_ARCH machine specific
-    * Removed bogus HOMEPAGE setting
-    * Separated the firmware into a ${PN}-fw package and left the
-      ARM side RadioApp in the base package.
+    * LICENSE was changed to BSD-3-Clause but the TI-TSPA license
+      is still present as well so modified this to be a dual
+      license package.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/vis-fw/vis_01.50.07.15.bb |   31 +++++++++++++++++++++++++++++++
- 1 files changed, 31 insertions(+), 0 deletions(-)
+ recipes-graphics/bltsville/bltsville_git.bb |   22 ++++++++++++++++++++++
+ 1 files changed, 22 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/vis-fw/vis_01.50.07.15.bb b/recipes-ti/vis-fw/vis_01.50.07.15.bb
+diff --git a/recipes-graphics/bltsville/bltsville_git.bb b/recipes-graphics/bltsville/bltsville_git.bb
 new file mode 100644
-index 0000000..85d8539
+index 0000000..158d189
 --- /dev/null
-+++ b/recipes-ti/vis-fw/vis_01.50.07.15.bb
-@@ -0,0 +1,31 @@
-+DESCRIPTION = "Radio Application Firmware"
-+LICENSE = "TI-TSPA"
-+LIC_FILES_CHKSUM = "file://${S}/J6_VIS_DEMO_LINUX_BINARY_01.50.07.15-Manifest.html;md5=a59aa54b9470f555cf086b91dca0afa3"
++++ b/recipes-graphics/bltsville/bltsville_git.bb
+@@ -0,0 +1,22 @@
++DESCRIPTION = "Userspace libraries and headers for TI BLTsville implementation"
++HOMEPAGE = "http://omapzoom.org/?p=platform/external/bltsville.git;a=summary"
++LICENSE = "BSD-3-Clause & TI-TSPA"
++LIC_FILES_CHKSUM = "file://COPYING;md5=10a9abb9c5bb19edd83a8cf66eef7148 \
++                    file://ticpu/license;md5=0bb831850a0de80e32a63772d89c6562"
 +
-+COMPATIBLE_MACHINE = "dra7xx-evm"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
++PR = "r2"
 +
-+SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/vis/01_50_07_15/exports/vis-${MACHINE}-01.50.07.15.tar.gz;protocol=http"
++SRCREV = "016586280ecdae201fd6e340ec8c4f8a9605cc94"
 +
-+SRC_URI[md5sum] = "fe8b00e398fb3b7ada0c15b601867acb"
-+SRC_URI[sha256sum] = "6e2aa47ae892910616ebdc96646af778af9a59ca0657716ab4fa4b24a9afae69"
++inherit autotools pkgconfig
 +
-+S = "${WORKDIR}"
++SRC_URI = "git://git.omapzoom.org/platform/external/bltsville.git;protocol=git"
 +
-+DSPAPP = "dra7-dsp1-fw-radio.xe66"
-+GPPAPP = "RadioApp"
++S = "${WORKDIR}/git"
 +
-+do_install() {
-+    install -d ${D}${base_libdir}/firmware
-+    install -d ${D}${bindir}
-+    install ${S}/prebuilt/${DSPAPP} ${D}${base_libdir}/firmware/${DSPAPP}
-+    install -m 0755 ${S}/prebuilt/${GPPAPP} ${D}${bindir}/${GPPAPP}
++do_configure() {
++	chmod +x autogen.sh
++	./autogen.sh --prefix=${prefix} --with-libtool-sysroot=${STAGING_DIR_TARGET}
 +}
 +
-+PACKAGES += "${PN}-fw"
-+RDEPENDS_${PN} += "${PN}-fw"
-+
-+FILES_${PN}-fw += "${base_libdir}/firmware/${DSPAPP}"
-+
-+INSANE_SKIP_${PN}-fw = "arch"
-+INHIBIT_PACKAGE_DEBUG_SPLIT = "1" 
++FILES_${PN} += "${libdir}/libbltsville_ticpu_license.txt"   
 
 
