@@ -1,23 +1,41 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A2134E00C23; Wed, 21 May 2014 12:33:42 -0700 (PDT)
+	id 44B1CE00B88; Wed, 21 May 2014 12:48:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
-	version=3.3.1
-X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
-	with no rDNS
-Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB046E00B85
-	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:33:33 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id A91EB52A0E; Wed, 21 May 2014 19:33:33 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20140521193333.A91EB52A0E@arago-project.org>
-Date: Wed, 21 May 2014 19:33:33 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Hao Zhang : keystone: k2e-evm config: add k2e-evm machine config
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.7 required=5.0 tests=RCVD_IN_DNSWL_HI,RDNS_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
+Received: from arroyo.ext.ti.com (unknown [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A23C8E0077C
+	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:48:21 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4LJmLGU026275
+	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 14:48:21 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4LJmLOv016330
+	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 14:48:21 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Wed, 21 May 2014 14:48:21 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4LJmLxm024052;
+	Wed, 21 May 2014 14:48:21 -0500
+Date: Wed, 21 May 2014 15:48:20 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Chase Maupin <Chase.Maupin@ti.com>
+Message-ID: <20140521194820.GI21819@edge>
+References: <1400527188-16951-1-git-send-email-Chase.Maupin@ti.com>
+	<1400527188-16951-10-git-send-email-Chase.Maupin@ti.com>
+MIME-Version: 1.0
+In-Reply-To: <1400527188-16951-10-git-send-email-Chase.Maupin@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 9/9] omap5-sgx-ddk-um-linux: Add version 1.9.0.12
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,64 +48,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 May 2014 19:33:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 21 May 2014 19:48:27 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: daisy
-Commit: 9c5900749c527639246baf2bee2b8cece80d6c68
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9c5900749c527639246baf2bee2b8cece80d6c68
+On Mon, May 19, 2014 at 02:19:48PM -0500, Chase Maupin wrote:
+> From: Mrinmayee Hingolikar <mrinmayee@ti.com>
+> 
+> * Pulled in latest version 1.9.0.12 from meta-ti-gsldk and
+>   preserved authorship for Mrinmayee
+> * Mark this recipe as providing the gles1, gles2, and egl
+>   libraries so that it doesn't conflict with other recipes like
+>   mesa and will be pulled in to satisfy those dependencies
+> 
+> Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> ---
+>  .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |   30 ++++++++++++++++++++
+>  1 file changed, 30 insertions(+)
+>  create mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+> 
+> diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+> new file mode 100644
+> index 0000000..e36cc58
+> --- /dev/null
+> +++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+> @@ -0,0 +1,30 @@
+> +DESCRIPTION = "Userspace libraries for SGX"
+> +HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
+> +LICENSE = "TI-TSPA"
+> +LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=360d293df455e4f2d363bb4014a49603"
+> +
+> +SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git"
+> +SRCREV = "994922a5655c63b05343a9238cb30e6ef61744be"
+> +
+> +PR = "r2"
+> +PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+> +
+> +RREPLACES_${PN} = "libegl libgles1 libgles2"
+> +RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
+> +RREPLACES_${PN}-dbg = "libegl-dbg"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +do_install () {
+> +    oe_runmake install DESTDIR=${D}
+> +}
+> +
+> +PACKAGES =+ "${PN}-${PV}"
 
-Author: Hao Zhang <hzhang@ti.com>
-Date:   Mon May 19 19:51:51 2014 +0000
+What is this ^^^ for?
 
-keystone: k2e-evm config: add k2e-evm machine config
 
-Add a new k2e-evm machine config for Keystone II SoC family.
-
-Signed-off-by: Hao Zhang <hzhang@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- conf/machine/k2e-evm.conf |   30 ++++++++++++++++++++++++++++++
- 1 files changed, 30 insertions(+), 0 deletions(-)
-
-diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
-new file mode 100644
-index 0000000..551587f
---- /dev/null
-+++ b/conf/machine/k2e-evm.conf
-@@ -0,0 +1,30 @@
-+#@TYPE: Machine
-+#@NAME: Keystone 2 K2E machine
-+#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2E EVM
-+
-+require conf/machine/include/keystone.inc
-+
-+UBOOT_MACHINE = "k2e_evm_config"
-+
-+BOOT_MONITOR_MAKE_TARGET = "k2e"
-+
-+IMAGE_FSTYPES += "ubi tar.gz cpio"
-+
-+SERIAL_CONSOLE = "115200 ttyS0"
-+
-+SYSVINIT_ENABLED_GETTYS = ""
-+
-+# do ubiattach /dev/ubi_ctrl -m 4
-+# From dmesg:
-+# UBI: smallest flash I/O unit:    2048
-+# UBI: logical eraseblock size:    126976 bytes
-+# from ubiattach stdout:
-+# UBI device number 0, total 3856 LEBs
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3856"
-+
-+# do ubiattach /dev/ubi_ctrl -m 4
-+# from dmesg:
-+# UBI: smallest flash I/O unit:    2048
-+# UBI: physical eraseblock size:   131072 bytes (128 KiB)
-+# UBI: sub-page size:              2048
-+UBINIZE_ARGS = "-m 2048 -p 128KiB -s 2048 -O 2048"
-
+> +FILES_${PN} =  "${bindir}/*"
+> +FILES_${PN} += " ${libdir}/*"
+> +FILES_${PN} +=  "${includedir}/* /usr/share/sgx-lib/"
+> +
+> +INHIBIT_PACKAGE_STRIP = "1"
+> +
+> +INSANE_SKIP_${PN} += "dev-so"
+> -- 
+> 1.7.9.5
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
