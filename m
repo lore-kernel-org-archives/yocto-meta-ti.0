@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 91101E00B85; Wed, 21 May 2014 13:39:57 -0700 (PDT)
+	id 8AF9EE00BA0; Wed, 21 May 2014 13:40:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,13 +9,13 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A32A2E0077C
-	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 13:39:51 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 62608E00B87
+	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 13:39:58 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9421052A1E; Wed, 21 May 2014 20:39:51 +0000 (UTC)
+	id E1F8C52A1E; Wed, 21 May 2014 20:39:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140521203951.9421052A1E@arago-project.org>
-Date: Wed, 21 May 2014 20:39:51 +0000 (UTC)
+Message-Id: <20140521203957.E1F8C52A1E@arago-project.org>
+Date: Wed, 21 May 2014 20:39:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Mrinmayee Hingolikar : omap5-sgx-ddk-um-linux: Add version 1.9.0.12
 X-BeenThere: meta-ti@yoctoproject.org
@@ -30,13 +30,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 May 2014 20:39:57 -0000
+X-List-Received-Date: Wed, 21 May 2014 20:40:03 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: a701d20e99bfaae4092ff9a3d9005f1e3f69629f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a701d20e99bfaae4092ff9a3d9005f1e3f69629f
+Branch: daisy
+Commit: 27e836d56d84348ed5a72dddd6451fc296a0dd0c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=27e836d56d84348ed5a72dddd6451fc296a0dd0c
 
 Author: Mrinmayee Hingolikar <mrinmayee@ti.com>
 Date:   Thu May 22 02:23:23 2014 +0000
