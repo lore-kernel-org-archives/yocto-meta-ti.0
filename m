@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 13630E00B6F; Wed, 21 May 2014 12:32:09 -0700 (PDT)
+	id 2BB73E00B6F; Wed, 21 May 2014 12:32:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,15 +9,15 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B995E00B85
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3CD6BE00B88
 	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:32:03 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3FC6652A6F; Wed, 21 May 2014 19:32:03 +0000 (UTC)
+	id 1D04952A3E; Wed, 21 May 2014 19:32:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140521193203.3FC6652A6F@arago-project.org>
+Message-Id: <20140521193203.1D04952A3E@arago-project.org>
 Date: Wed, 21 May 2014 19:32:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Hao Zhang : keystone: k2e-evm config: add k2e-evm machine config
+Subject: Hao Zhang : keystone: machine config: change machine config name from keystone-evm to k2hk-evm
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,59 +35,83 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: cc23fcacc1445adcc586a082f0f59170ccaee2ee
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cc23fcacc1445adcc586a082f0f59170ccaee2ee
+Commit: 521f747c25e260cc520edc983bea0427754d6772
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=521f747c25e260cc520edc983bea0427754d6772
 
 Author: Hao Zhang <hzhang@ti.com>
-Date:   Mon May 19 19:51:51 2014 +0000
+Date:   Mon May 19 19:51:28 2014 +0000
 
-keystone: k2e-evm config: add k2e-evm machine config
+keystone: machine config: change machine config name from keystone-evm to k2hk-evm
 
-Add a new k2e-evm machine config for Keystone II SoC family.
+Keystone II SOC family has multiple devices and EVMs: k2hk, k2l
+and k2e, each EVM should have a separate machine config, and share
+the common keystone SOC family.
 
 Signed-off-by: Hao Zhang <hzhang@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/k2e-evm.conf |   30 ++++++++++++++++++++++++++++++
- 1 files changed, 30 insertions(+), 0 deletions(-)
+ conf/machine/{keystone-evm.conf => k2hk-evm.conf} |    4 ++--
+ recipes-bsp/boot-monitor/boot-monitor_git.bb      |    2 +-
+ recipes-kernel/linux/linux-keystone-rt_3.10.bb    |    2 +-
+ recipes-kernel/linux/linux-keystone_3.10.bb       |    2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
-new file mode 100644
-index 0000000..551587f
---- /dev/null
-+++ b/conf/machine/k2e-evm.conf
-@@ -0,0 +1,30 @@
-+#@TYPE: Machine
-+#@NAME: Keystone 2 K2E machine
-+#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2E EVM
-+
-+require conf/machine/include/keystone.inc
-+
-+UBOOT_MACHINE = "k2e_evm_config"
-+
-+BOOT_MONITOR_MAKE_TARGET = "k2e"
-+
-+IMAGE_FSTYPES += "ubi tar.gz cpio"
-+
-+SERIAL_CONSOLE = "115200 ttyS0"
-+
-+SYSVINIT_ENABLED_GETTYS = ""
-+
-+# do ubiattach /dev/ubi_ctrl -m 4
-+# From dmesg:
-+# UBI: smallest flash I/O unit:    2048
-+# UBI: logical eraseblock size:    126976 bytes
-+# from ubiattach stdout:
-+# UBI device number 0, total 3856 LEBs
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3856"
-+
-+# do ubiattach /dev/ubi_ctrl -m 4
-+# from dmesg:
-+# UBI: smallest flash I/O unit:    2048
-+# UBI: physical eraseblock size:   131072 bytes (128 KiB)
-+# UBI: sub-page size:              2048
-+UBINIZE_ARGS = "-m 2048 -p 128KiB -s 2048 -O 2048"
+diff --git a/conf/machine/keystone-evm.conf b/conf/machine/k2hk-evm.conf
+similarity index 86%
+rename from conf/machine/keystone-evm.conf
+rename to conf/machine/k2hk-evm.conf
+index 088e524..4b05f40 100644
+--- a/conf/machine/keystone-evm.conf
++++ b/conf/machine/k2hk-evm.conf
+@@ -1,6 +1,6 @@
+ #@TYPE: Machine
+-#@NAME: Keystone 2 machine
+-#@DESCRIPTION: Machine configuration for the TI Keystone 2
++#@NAME: Keystone 2 K2HK machine
++#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2HK EVM
+ 
+ require conf/machine/include/keystone.inc
+ 
+diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+index 7c5e9cf..c3d41f5 100644
+--- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
++++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+@@ -9,7 +9,7 @@ BOOT_MONITOR_MAKE_TARGET  ?= "all"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=25fe219a6febf6e5bb45beda1b2eb315"
+ 
+-COMPATIBLE_MACHINE = "keystone-evm"
++COMPATIBLE_MACHINE = "keystone"
+ 
+ SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
+ 
+diff --git a/recipes-kernel/linux/linux-keystone-rt_3.10.bb b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
+index cbd02d6..eb4bbd2 100644
+--- a/recipes-kernel/linux/linux-keystone-rt_3.10.bb
++++ b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
+@@ -13,7 +13,7 @@ require recipes-kernel/linux/setup-defconfig.inc
+ MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+-KERNEL_DEVICETREE_keystone-evm = "k2hk-evm.dtb"
++KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
+ 
+ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+ 
+diff --git a/recipes-kernel/linux/linux-keystone_3.10.bb b/recipes-kernel/linux/linux-keystone_3.10.bb
+index 54cb86a..93b5481 100644
+--- a/recipes-kernel/linux/linux-keystone_3.10.bb
++++ b/recipes-kernel/linux/linux-keystone_3.10.bb
+@@ -13,7 +13,7 @@ require recipes-kernel/linux/setup-defconfig.inc
+ MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+-KERNEL_DEVICETREE_keystone-evm = "k2hk-evm.dtb"
++KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
+ 
+ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+ 
 
 
