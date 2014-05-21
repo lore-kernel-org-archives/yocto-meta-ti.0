@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EA3EDE00C0B; Wed, 21 May 2014 12:32:19 -0700 (PDT)
+	id F02A1E00C0A; Wed, 21 May 2014 12:32:19 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,15 +9,15 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 61762E00BFE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 65019E00C08
 	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:32:19 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0B1C652A0E; Wed, 21 May 2014 19:32:19 +0000 (UTC)
+	id 256F852A6D; Wed, 21 May 2014 19:32:19 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140521193219.0B1C652A0E@arago-project.org>
+Message-Id: <20140521193219.256F852A6D@arago-project.org>
 Date: Wed, 21 May 2014 19:32:19 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Hao Zhang : keystone: k2l-evm conf: add k2l-evm machine config
+Subject: Hao Zhang : keystone: k2e-evm config: add k2e-evm machine config
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,71 +35,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dylan
-Commit: d8ca0d973948f0465f177d790d30e3dbba5cc2e9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d8ca0d973948f0465f177d790d30e3dbba5cc2e9
+Commit: 0056050410c1d5f8627c509490a5650eb082261c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0056050410c1d5f8627c509490a5650eb082261c
 
 Author: Hao Zhang <hzhang@ti.com>
-Date:   Mon May 19 19:51:43 2014 +0000
+Date:   Mon May 19 19:51:51 2014 +0000
 
-keystone: k2l-evm conf: add k2l-evm machine config
+keystone: k2e-evm config: add k2e-evm machine config
 
-k2l-evm machine config shares the same Keystone SoC family, it has K2L EVM
-specific machine configuration for UBI image, boot monitor, U-boot, etc.
+Add a new k2e-evm machine config for Keystone II SoC family.
 
 Signed-off-by: Hao Zhang <hzhang@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/keystone.inc            |    2 -
- conf/machine/k2hk-evm.conf                   |    4 +++
- conf/machine/k2l-evm.conf                    |   30 ++++++++++++++++++++++++++
- recipes-bsp/boot-monitor/boot-monitor_git.bb |    7 ++---
- 4 files changed, 37 insertions(+), 6 deletions(-)
+ conf/machine/k2e-evm.conf |   30 ++++++++++++++++++++++++++++++
+ 1 files changed, 30 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
-index 63f069c..a9449b2 100644
---- a/conf/machine/include/keystone.inc
-+++ b/conf/machine/include/keystone.inc
-@@ -12,8 +12,6 @@ MACHINE_KERNEL_PR = "r7"
- 
- KERNEL_IMAGETYPE = "uImage"
- 
--UBOOT_MACHINE = "k2hk_evm_config"
--
- UBOOT_ENTRYPOINT = "0x80008000"
- UBOOT_LOADADDRESS = "0x80008000"
- 
-diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
-index 4b05f40..0ef6ad0 100644
---- a/conf/machine/k2hk-evm.conf
-+++ b/conf/machine/k2hk-evm.conf
-@@ -4,6 +4,10 @@
- 
- require conf/machine/include/keystone.inc
- 
-+UBOOT_MACHINE = "k2hk_evm_config"
-+
-+BOOT_MONITOR_MAKE_TARGET = "k2hk"
-+
- IMAGE_FSTYPES += "ubi tar.gz cpio"
- 
- SERIAL_CONSOLE = "115200 ttyS0"
-diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
+diff --git a/conf/machine/k2e-evm.conf b/conf/machine/k2e-evm.conf
 new file mode 100644
-index 0000000..0824a09
+index 0000000..551587f
 --- /dev/null
-+++ b/conf/machine/k2l-evm.conf
++++ b/conf/machine/k2e-evm.conf
 @@ -0,0 +1,30 @@
 +#@TYPE: Machine
-+#@NAME: Keystone 2 K2L machine
-+#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2L EVM
++#@NAME: Keystone 2 K2E machine
++#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2E EVM
 +
 +require conf/machine/include/keystone.inc
 +
-+UBOOT_MACHINE = "k2l_evm_config"
++UBOOT_MACHINE = "k2e_evm_config"
 +
-+BOOT_MONITOR_MAKE_TARGET = "k2hk"
++BOOT_MONITOR_MAKE_TARGET = "k2e"
 +
 +IMAGE_FSTYPES += "ubi tar.gz cpio"
 +
@@ -109,47 +77,17 @@ index 0000000..0824a09
 +
 +# do ubiattach /dev/ubi_ctrl -m 4
 +# From dmesg:
-+# UBI: smallest flash I/O unit:    4096
-+# UBI: logical eraseblock size:    253952 bytes
++# UBI: smallest flash I/O unit:    2048
++# UBI: logical eraseblock size:    126976 bytes
 +# from ubiattach stdout:
-+# UBI device number 0, total 1926 LEBs
-+MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 1926"
++# UBI device number 0, total 3856 LEBs
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3856"
 +
 +# do ubiattach /dev/ubi_ctrl -m 4
 +# from dmesg:
-+# UBI: smallest flash I/O unit:    4096
-+# UBI: physical eraseblock size:   256 KiB
-+# UBI: sub-page size:              4096
-+UBINIZE_ARGS = "-m 4096 -p 256KiB -s 4096 -O 4096"
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index c3d41f5..6e68213 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -5,7 +5,6 @@ LICENSE = "BSD"
- 
- BOOT_MONITOR_BINARY ?= "skern.bin"
- BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
--BOOT_MONITOR_MAKE_TARGET  ?= "all"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=25fe219a6febf6e5bb45beda1b2eb315"
- 
-@@ -14,14 +13,14 @@ COMPATIBLE_MACHINE = "keystone"
- SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
- 
- PV = "2.0"
--PR = "r0+gitr${SRCPV}"
-+PR = "r1+gitr${SRCPV}"
- 
- BRANCH = "master"
- 
- S = "${WORKDIR}/git"
- 
--#Tag "K2_BM_13.11"
--SRCREV = "ba597d183423971e63295cdd59d3c90245e9170a"
-+#Tag "K2_BM_14.05"
-+SRCREV = "0e3ffe1ea4a0cee38ae2406901b7cf4d5324b5e9"
- 
- do_compile () {
- 	unset LDFLAGS
++# UBI: smallest flash I/O unit:    2048
++# UBI: physical eraseblock size:   131072 bytes (128 KiB)
++# UBI: sub-page size:              2048
++UBINIZE_ARGS = "-m 2048 -p 128KiB -s 2048 -O 2048"
 
 
