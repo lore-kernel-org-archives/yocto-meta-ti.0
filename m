@@ -1,41 +1,23 @@
-Return-Path: <denys@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 24F2CE009E7; Tue, 20 May 2014 18:21:49 -0700 (PDT)
+	id 89B9DE00BE8; Wed, 21 May 2014 12:32:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
-	RCVD_IN_DNSWL_HI,RDNS_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-Received: from arroyo.ext.ti.com (unknown [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7A2C0E0070F
-	for <meta-ti@yoctoproject.org>; Tue, 20 May 2014 18:21:45 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4L1LjFd011753
-	for <meta-ti@yoctoproject.org>; Tue, 20 May 2014 20:21:45 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4L1LjgP021005
-	for <meta-ti@yoctoproject.org>; Tue, 20 May 2014 20:21:45 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 20 May 2014 20:21:44 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s4L1LiVq028091	for <meta-ti@yoctoproject.org>; Tue, 20 May 2014 20:21:44
-	-0500
-Date: Tue, 20 May 2014 21:05:54 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1023892306.63.1400634354271.JavaMail.jenkins@puget>
-MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-05-20_21-00-30
+X-Spam-Level: *
+X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
+	version=3.3.1
+X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
+	with no rDNS
+Received: from arago-project.org (unknown [184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3A694E00B6F
+	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:32:03 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 367BD52A6D; Wed, 21 May 2014 19:32:03 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20140521193203.367BD52A6D@arago-project.org>
+Date: Wed, 21 May 2014 19:32:03 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Hao Zhang : keystone: k2l-evm conf: add k2l-evm machine config
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,168 +30,126 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 May 2014 01:21:49 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_62_364597771.1400634354268"
+X-List-Received-Date: Wed, 21 May 2014 19:32:08 -0000
+Content-Type: text/plain; charset=UTF-8
 
-------=_Part_62_364597771.1400634354268
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Module: meta-ti
+Branch: master
+Commit: 804c2bc8f238351fd34abe5695d2dee695ba0636
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=804c2bc8f238351fd34abe5695d2dee695ba0636
 
-<html>
-<head>
-<title>
-Status for 05/20/14
-</title>
-</head>
-<body>
+Author: Hao Zhang <hzhang@ti.com>
+Date:   Mon May 19 19:51:43 2014 +0000
 
-<h2>Status for 05/20/14</h2>
+keystone: k2l-evm conf: add k2l-evm machine config
 
-<h2>BUILD_ID: build-2014-05-20_21-01-39</h2>
+k2l-evm machine config shares the same Keystone SoC family, it has K2L EVM
+specific machine configuration for UBI image, boot monitor, U-boot, etc.
 
-<h2>Clean Build: false</h2>
+Signed-off-by: Hao Zhang <hzhang@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+---
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>keystone-evm</td>
-        <td id="keystone-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+ conf/machine/include/keystone.inc            |    2 -
+ conf/machine/k2hk-evm.conf                   |    4 +++
+ conf/machine/k2l-evm.conf                    |   30 ++++++++++++++++++++++++++
+ recipes-bsp/boot-monitor/boot-monitor_git.bb |    7 ++---
+ 4 files changed, 37 insertions(+), 6 deletions(-)
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.03"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index 63f069c..a9449b2 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -12,8 +12,6 @@ MACHINE_KERNEL_PR = "r7"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+-UBOOT_MACHINE = "k2hk_evm_config"
+-
+ UBOOT_ENTRYPOINT = "0x80008000"
+ UBOOT_LOADADDRESS = "0x80008000"
+ 
+diff --git a/conf/machine/k2hk-evm.conf b/conf/machine/k2hk-evm.conf
+index 4b05f40..0ef6ad0 100644
+--- a/conf/machine/k2hk-evm.conf
++++ b/conf/machine/k2hk-evm.conf
+@@ -4,6 +4,10 @@
+ 
+ require conf/machine/include/keystone.inc
+ 
++UBOOT_MACHINE = "k2hk_evm_config"
++
++BOOT_MONITOR_MAKE_TARGET = "k2hk"
++
+ IMAGE_FSTYPES += "ubi tar.gz cpio"
+ 
+ SERIAL_CONSOLE = "115200 ttyS0"
+diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
+new file mode 100644
+index 0000000..0824a09
+--- /dev/null
++++ b/conf/machine/k2l-evm.conf
+@@ -0,0 +1,30 @@
++#@TYPE: Machine
++#@NAME: Keystone 2 K2L machine
++#@DESCRIPTION: Machine configuration for the TI Keystone 2 K2L EVM
++
++require conf/machine/include/keystone.inc
++
++UBOOT_MACHINE = "k2l_evm_config"
++
++BOOT_MONITOR_MAKE_TARGET = "k2hk"
++
++IMAGE_FSTYPES += "ubi tar.gz cpio"
++
++SERIAL_CONSOLE = "115200 ttyS0"
++
++SYSVINIT_ENABLED_GETTYS = ""
++
++# do ubiattach /dev/ubi_ctrl -m 4
++# From dmesg:
++# UBI: smallest flash I/O unit:    4096
++# UBI: logical eraseblock size:    253952 bytes
++# from ubiattach stdout:
++# UBI device number 0, total 1926 LEBs
++MKUBIFS_ARGS = "-F -m 4096 -e 253952 -c 1926"
++
++# do ubiattach /dev/ubi_ctrl -m 4
++# from dmesg:
++# UBI: smallest flash I/O unit:    4096
++# UBI: physical eraseblock size:   256 KiB
++# UBI: sub-page size:              4096
++UBINIZE_ARGS = "-m 4096 -p 256KiB -s 4096 -O 4096"
+diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+index c3d41f5..6e68213 100644
+--- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
++++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+@@ -5,7 +5,6 @@ LICENSE = "BSD"
+ 
+ BOOT_MONITOR_BINARY ?= "skern.bin"
+ BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
+-BOOT_MONITOR_MAKE_TARGET  ?= "all"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=25fe219a6febf6e5bb45beda1b2eb315"
+ 
+@@ -14,14 +13,14 @@ COMPATIBLE_MACHINE = "keystone"
+ SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
+ 
+ PV = "2.0"
+-PR = "r0+gitr${SRCPV}"
++PR = "r1+gitr${SRCPV}"
+ 
+ BRANCH = "master"
+ 
+ S = "${WORKDIR}/git"
+ 
+-#Tag "K2_BM_13.11"
+-SRCREV = "ba597d183423971e63295cdd59d3c90245e9170a"
++#Tag "K2_BM_14.05"
++SRCREV = "0e3ffe1ea4a0cee38ae2406901b7cf4d5324b5e9"
+ 
+ do_compile () {
+ 	unset LDFLAGS
 
 
-------=_Part_62_364597771.1400634354268--
