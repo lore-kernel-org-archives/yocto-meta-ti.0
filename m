@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7BC0EE00BAE; Wed, 21 May 2014 12:57:22 -0700 (PDT)
+	id A194BE00C00; Wed, 21 May 2014 12:57:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,15 +9,15 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 58BAAE00BC2
-	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:57:18 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF3BAE00B8C
+	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:57:21 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 033EF52A1E; Wed, 21 May 2014 19:57:17 +0000 (UTC)
+	id 582E352A79; Wed, 21 May 2014 19:57:18 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140521195718.033EF52A1E@arago-project.org>
-Date: Wed, 21 May 2014 19:57:17 +0000 (UTC)
+Message-Id: <20140521195718.582E352A79@arago-project.org>
+Date: Wed, 21 May 2014 19:57:18 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Mrinmayee Hingolikar : ti-ipc: Add version 3.21.00.07
+Subject: Karthik Ramanan : vis: Add radio application firmware
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,114 +30,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 May 2014 19:57:22 -0000
+X-List-Received-Date: Wed, 21 May 2014 19:57:24 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: d0b2529bb53ed19059c17969a26f281c1f69958f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d0b2529bb53ed19059c17969a26f281c1f69958f
+Commit: 82cb9bf59a156d090daf269e78a86796dabbfd34
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=82cb9bf59a156d090daf269e78a86796dabbfd34
 
-Author: Mrinmayee Hingolikar <mrinmayee@ti.com>
-Date:   Tue May 20 01:19:41 2014 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Tue May 20 01:19:45 2014 +0000
 
-ti-ipc: Add version 3.21.00.07
+vis: Add radio application firmware
 
-* Added version 3.21.00.07 from the meta-ti-glsdk layer.
-  Preserved authorship by Mrinmayee
-* Cleaned up the recipe for upstream by removing the sed lines
-  in do_configure and instead using EXTRA_OEMAKE values passed
-  into the make process.
+* Migrated from meta-ti-glsdk and preserved authorship for
+  Karthik
+* Modified for upstream:
+    * Made PACKAGE_ARCH machine specific
+    * Removed bogus HOMEPAGE setting
+    * Separated the firmware into a ${PN}-fw package and left the
+      ARM side RadioApp in the base package.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...nstallation-prefix-feature-to-products.ma.patch |   38 ++++++++++++++++++++
- recipes-ti/ipc/ti-ipc_3.21.00.07.bb                |   31 ++++++++++++++++
- 2 files changed, 69 insertions(+), 0 deletions(-)
+ recipes-ti/vis-fw/vis_01.50.07.15.bb |   31 +++++++++++++++++++++++++++++++
+ 1 files changed, 31 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch b/recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch
+diff --git a/recipes-ti/vis-fw/vis_01.50.07.15.bb b/recipes-ti/vis-fw/vis_01.50.07.15.bb
 new file mode 100644
-index 0000000..58d77c7
+index 0000000..85d8539
 --- /dev/null
-+++ b/recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch
-@@ -0,0 +1,38 @@
-+From 26d09063063593aec760151393226b96bc7ab9f8 Mon Sep 17 00:00:00 2001
-+From: Mrinmayee Hingolikar <mrinmayee@ti.com>
-+Date: Thu, 5 Sep 2013 17:01:15 +0530
-+Subject: [PATCH] ipc: Added installation prefix feature to products.mak
-+
-+Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
-+---
-+ ipc-linux.mak |    1 +
-+ products.mak  |    1 +
-+ 2 files changed, 2 insertions(+)
-+
-+diff --git a/ipc-linux.mak b/ipc-linux.mak
-+index 788a5a2..01579e4 100644
-+--- a/ipc-linux.mak
-++++ b/ipc-linux.mak
-+@@ -38,6 +38,7 @@ include products.mak
-+ config:
-+ 	@echo "Configuring Linux Ipc ..."
-+ 	./configure --host=$(TOOLCHAIN_LONGNAME) \
-++            --prefix=$(PREFIX) \
-+             CC=$(TOOLCHAIN_PREFIX)gcc \
-+             PLATFORM=$(PLATFORM) \
-+             CMEM_INSTALL_DIR=$(CMEM_INSTALL_DIR) \
-+diff --git a/products.mak b/products.mak
-+index e418d2f..4578a1e 100644
-+--- a/products.mak
-++++ b/products.mak
-+@@ -55,6 +55,7 @@ PLATFORM ?=
-+ TOOLCHAIN_LONGNAME = arm-none-linux-gnueabi
-+ TOOLCHAIN_INSTALL_DIR = $(DEPOT)/_your_arm_code_gen_install_
-+ TOOLCHAIN_PREFIX = $(TOOLCHAIN_INSTALL_DIR)/bin/$(TOOLCHAIN_LONGNAME)-
-++PREFIX = /usr/local
-+ 
-+ # Optional: Path to Linux Kernel - needed to build the MmRpc user libraries
-+ # (for devices that support it)
-+-- 
-+1.7.9.5
-+
-diff --git a/recipes-ti/ipc/ti-ipc_3.21.00.07.bb b/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
-new file mode 100644
-index 0000000..8131754
---- /dev/null
-+++ b/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
++++ b/recipes-ti/vis-fw/vis_01.50.07.15.bb
 @@ -0,0 +1,31 @@
-+DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
-+HOMEPAGE = "https://git.ti.com/ipc/pages/Home"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=f2518e421e230f06fe6d449718d02edc"
++DESCRIPTION = "Radio Application Firmware"
++LICENSE = "TI-TSPA"
++LIC_FILES_CHKSUM = "file://${S}/J6_VIS_DEMO_LINUX_BINARY_01.50.07.15-Manifest.html;md5=a59aa54b9470f555cf086b91dca0afa3"
 +
-+DEPENDS += "virtual/kernel"
-+
-+PR = "r1"
-+
++COMPATIBLE_MACHINE = "dra7xx-evm"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+PLATFORM_omap5-evm = "OMAP54XX"
-+PLATFORM_dra7xx-evm = "DRA7XX"
++SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/vis/01_50_07_15/exports/vis-${MACHINE}-01.50.07.15.tar.gz;protocol=http"
 +
-+inherit autotools pkgconfig
++SRC_URI[md5sum] = "fe8b00e398fb3b7ada0c15b601867acb"
++SRC_URI[sha256sum] = "6e2aa47ae892910616ebdc96646af778af9a59ca0657716ab4fa4b24a9afae69"
 +
-+SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git \
-+           file://0002-ipc-Added-installation-prefix-feature-to-products.ma.patch \
-+           "
++S = "${WORKDIR}"
 +
-+SRCREV = "c18fece0c9f0dc76361dc1ee11b7ee2417479847"
++DSPAPP = "dra7-dsp1-fw-radio.xe66"
++GPPAPP = "RadioApp"
 +
-+S = "${WORKDIR}/git"
-+
-+FILESEXTRAPATHS_prepend := "${THISDIR}:"
-+
-+EXTRA_OEMAKE += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} TOOLCHAIN_INSTALL_DIR=${TOOLCHAIN_PATH} TOOLCHAIN_LONGNAME=${TOOLCHAIN_SYS} PLATFORM=${PLATFORM} PREFIX=${prefix}"
-+
-+do_configure() {
-+	oe_runmake -f ${S}/ipc-linux.mak config
++do_install() {
++    install -d ${D}${base_libdir}/firmware
++    install -d ${D}${bindir}
++    install ${S}/prebuilt/${DSPAPP} ${D}${base_libdir}/firmware/${DSPAPP}
++    install -m 0755 ${S}/prebuilt/${GPPAPP} ${D}${bindir}/${GPPAPP}
 +}
++
++PACKAGES += "${PN}-fw"
++RDEPENDS_${PN} += "${PN}-fw"
++
++FILES_${PN}-fw += "${base_libdir}/firmware/${DSPAPP}"
++
++INSANE_SKIP_${PN}-fw = "arch"
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1" 
 
 
