@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7AABDE00B95; Wed, 21 May 2014 12:57:22 -0700 (PDT)
+	id 7B3B8E00BAD; Wed, 21 May 2014 12:57:22 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,15 +9,15 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57833E00BBC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 564CDE00BAE
 	for <meta-ti@yoctoproject.org>; Wed, 21 May 2014 12:57:18 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3DFA352A78; Wed, 21 May 2014 19:57:18 +0000 (UTC)
+	id E139F52A6D; Wed, 21 May 2014 19:57:17 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140521195718.3DFA352A78@arago-project.org>
-Date: Wed, 21 May 2014 19:57:18 +0000 (UTC)
+Message-Id: <20140521195717.E139F52A6D@arago-project.org>
+Date: Wed, 21 May 2014 19:57:17 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Mrinmayee Hingolikar : dspdce-fw: Add DSP firmware recipe
+Subject: Maupin, Chase : ti-ipc: Consolidate include file and old recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,58 +35,117 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 8168e00b6df872e35b2b74f93efbbd8c15a7ad20
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8168e00b6df872e35b2b74f93efbbd8c15a7ad20
+Commit: ec17eef312f281484e4cb96c1370303ca57b6daf
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ec17eef312f281484e4cb96c1370303ca57b6daf
 
-Author: Mrinmayee Hingolikar <mrinmayee@ti.com>
-Date:   Tue May 20 01:19:44 2014 +0000
+Author: Maupin, Chase <chase.maupin@ti.com>
+Date:   Tue May 20 01:19:40 2014 +0000
 
-dspdce-fw: Add DSP firmware recipe
+ti-ipc: Consolidate include file and old recipe
 
-* Migrated the dspdce-fw recipe from meta-ti-glsdk and
-  preserved authorship for Mrinmayee.
-* Cleaned up for upstream:
-    * Removed the MACHINE name from the recipe name
-    * Used MACHINE variable in SRC_URI
-    * Update to use default variables such as base_libdir
+* The ti-ipc.inc file was for the legacy 1.24.00.16 version of
+  ti-ipc.  So consolidate these files together since there is
+  only one version of the ti-ipc recipe that needs that .inc
+  file and there are no updates planned for it.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/dspdce-fw/dspdce-fw_1.00.00.02.bb |   24 ++++++++++++++++++++++++
- 1 files changed, 24 insertions(+), 0 deletions(-)
+ recipes-ti/ipc/ti-ipc.inc           |   36 ----------------------------------
+ recipes-ti/ipc/ti-ipc_1.24.00.16.bb |   37 +++++++++++++++++++++++++++++++++-
+ 2 files changed, 35 insertions(+), 38 deletions(-)
 
-diff --git a/recipes-ti/dspdce-fw/dspdce-fw_1.00.00.02.bb b/recipes-ti/dspdce-fw/dspdce-fw_1.00.00.02.bb
-new file mode 100644
-index 0000000..69e9814
---- /dev/null
-+++ b/recipes-ti/dspdce-fw/dspdce-fw_1.00.00.02.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "Firmware for DSP "
-+LICENSE = "TI-TSPA"
-+LIC_FILES_CHKSUM = "file://DSPDCE-${PV}-Manifest.doc;md5=587a7b9fdd99f98fbe99af4a4ba3362a"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+deleted file mode 100644
+index 7f4b919..0000000
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ /dev/null
+@@ -1,36 +0,0 @@
+-DESCRIPTION = "TI Inter Process Ccommunication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
+-HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/index.html"
+-
+-SECTION = "devel"
+-LICENSE = "BSD" 
+-
+-require ../includes/ti-paths.inc
+-require ../includes/ti-staging.inc
+-require ../includes/ti-eula-unpack.inc
+-
+-S = "${WORKDIR}/ipc_${PV}"
+-
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/${PV}/exports/ipc_setuplinux_${PV}.bin;name=ipcbin"
+-
+-SRC_URI =+ "file://ipc.pc"
+-
+-DEPENDS = "ti-sysbios ti-cgt6x ti-xdctools"
+-
+-BINFILE="ipc_setuplinux_${PV}.bin"
+-TI_BIN_UNPK_CMDS="Y: q:workdir:Y"
+-
+-do_configure() {
+-    sed -i -e s:@VERSION@:${PV}:g ${WORKDIR}/ipc.pc
+-    
+-    cp ${WORKDIR}/ipc.pc ${S}
+-}
+-
+-do_install() {
+-    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
+-    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
+-   
+-    install -d ${D}/${libdir}/pkgconfig
+-    install ${S}/ipc.pc ${D}/${libdir}/pkgconfig/
+-}
+-
+-FILES_${PN}-dev = "${libdir}/*"
+diff --git a/recipes-ti/ipc/ti-ipc_1.24.00.16.bb b/recipes-ti/ipc/ti-ipc_1.24.00.16.bb
+index e7ae7ef..420d0f7 100644
+--- a/recipes-ti/ipc/ti-ipc_1.24.00.16.bb
++++ b/recipes-ti/ipc/ti-ipc_1.24.00.16.bb
+@@ -1,8 +1,41 @@
+-require ti-ipc.inc
++DESCRIPTION = "TI Inter Process Ccommunication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
++HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/index.html"
++SECTION = "devel"
++LICENSE = "BSD" 
++LIC_FILES_CHKSUM = "file://ipc_${PV}_manifest.html;md5=573f5a5c0448d28bf8db35f438244d7f"
 +
-+COMPATIBLE_MACHINE = "dra7xx-evm"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00_00_02/exports/dspdce-${MACHINE}-1.00.00.02.tar.gz;protocol=http"
++require ../includes/ti-paths.inc
++require ../includes/ti-staging.inc
++require ../includes/ti-eula-unpack.inc
+ 
+ PV = "1_24_00_16"
+ 
+-LIC_FILES_CHKSUM = "file://ipc_${PV}_manifest.html;md5=573f5a5c0448d28bf8db35f438244d7f"
++S = "${WORKDIR}/ipc_${PV}"
 +
-+S = "${WORKDIR}/dspdce-${MACHINE}-${PV}"
++SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/${PV}/exports/ipc_setuplinux_${PV}.bin;name=ipcbin \
++           file://ipc.pc"
 +
-+SRC_URI[md5sum] = "df19baf16f828b5d32b4eed50f0364f5"
-+SRC_URI[sha256sum] = "0c0f34674110d1ef0300b61b572a326daffb95a31cc9d45888b2e50a83c6f555"
++DEPENDS = "ti-sysbios ti-cgt6x ti-xdctools"
 +
-+TARGET = "dra7-dsp1-fw.xe66"
++BINFILE="ipc_setuplinux_${PV}.bin"
++TI_BIN_UNPK_CMDS="Y: q:workdir:Y"
 +
-+do_install() {
-+        mkdir -p ${D}${base_libdir}/firmware
-+        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
++do_configure() {
++    sed -i -e s:@VERSION@:${PV}:g ${WORKDIR}/ipc.pc
++    
++    cp ${WORKDIR}/ipc.pc ${S}
 +}
 +
-+FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
++do_install() {
++    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
++    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
++   
++    install -d ${D}/${libdir}/pkgconfig
++    install ${S}/ipc.pc ${D}/${libdir}/pkgconfig/
++}
 +
-+INSANE_SKIP_${PN} = "arch"
++FILES_${PN}-dev = "${libdir}/*"
+ 
+ SRC_URI[ipcbin.md5sum] = "d2f7cc82310d555ca039dcd353bd94c5"
+ SRC_URI[ipcbin.sha256sum] = "96df7835e920c7dabcd63d30ec8bc2aea7cd0c6197c9fb9ca0f8a9b681aa5396"
 
 
