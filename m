@@ -1,34 +1,37 @@
-Return-Path: <denis@denix.org>
+Return-Path: <chase.maupin@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A0136E00BAD; Thu, 22 May 2014 09:25:44 -0700 (PDT)
+	id 906AFE00B68; Thu, 22 May 2014 09:28:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.3 required=5.0 tests=RCVD_IN_DNSWL_NONE,RDNS_NONE
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.25 listed in list.dnswl.org]
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.7 required=5.0 tests=RCVD_IN_DNSWL_HI,RDNS_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-Received: from vms173025pub.verizon.net (unknown [206.46.173.25])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2DA4E00BAA
-	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 09:25:26 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173025.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N5Z00745HLF7YF0@vms173025.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 22 May 2014 11:25:06 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 247F3201C2; Thu,
-	22 May 2014 12:24:51 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Thu, 22 May 2014 12:24:48 -0400
-Message-id: <1400775888-23432-2-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.9.3
-In-reply-to: <1400775888-23432-1-git-send-email-denis@denix.org>
-References: <1400775888-23432-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] linux-ti-staging: bump to 3.12.20 stable release
+Received: from devils.ext.ti.com (unknown [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0C6CE00975
+	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 09:28:36 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4MGSaYN006150
+	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 11:28:36 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4MGSaoJ026324
+	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 11:28:36 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 22 May 2014 11:28:35 -0500
+Received: from sdit-build04.dal.design.ti.com (dbdp20.itg.ti.com
+	[172.24.170.38])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s4MGSXCw016234;	Thu, 22 May 2014 11:28:34 -0500
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 22 May 2014 11:28:31 -0500
+Message-ID: <1400776111-28985-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [PATCHv2 4/4] linux-ti-staging: Add version 3.15 of TI integration kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,35 +44,111 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2014 16:25:44 -0000
+X-List-Received-Date: Thu, 22 May 2014 16:28:40 -0000
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
+* Add version 3.15 of the TI integration kernel.  Major changes
+  from previous version are:
+    * Config fragments now come primarily from the integration
+      tree.  Removed baseport and connectivity fragments for now
+      and the others can be removed as they are added to the
+      integration tree.
+    * Added a non-smp.cfg config to disable SMP for single core
+      devices instead of using a patch to the defconfig file as
+      we did in the past.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging_3.12.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+* Updated in version 2
+    * Change the default config fragements location
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 154d2fc..ac30ab5 100644
+---
+ .../defconfig                                      |    0
+ .../ipc.cfg                                        |    0
+ .../linux/linux-ti-staging-3.15/non-smp.cfg        |    5 +++++
+ .../systest.cfg                                    |    0
+ ...ti-staging_3.12.bb => linux-ti-staging_3.15.bb} |   20 +++++++++-----------
+ 5 files changed, 14 insertions(+), 11 deletions(-)
+ copy recipes-kernel/linux/{linux-mainline => linux-ti-staging-3.15}/defconfig (100%)
+ copy recipes-kernel/linux/{linux-ti-staging-3.12 => linux-ti-staging-3.15}/ipc.cfg (100%)
+ create mode 100644 recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg
+ copy recipes-kernel/linux/{linux-ti-staging-3.12 => linux-ti-staging-3.15}/systest.cfg (100%)
+ copy recipes-kernel/linux/{linux-ti-staging_3.12.bb => linux-ti-staging_3.15.bb} (75%)
+
+diff --git a/recipes-kernel/linux/linux-mainline/defconfig b/recipes-kernel/linux/linux-ti-staging-3.15/defconfig
+similarity index 100%
+copy from recipes-kernel/linux/linux-mainline/defconfig
+copy to recipes-kernel/linux/linux-ti-staging-3.15/defconfig
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.12/ipc.cfg b/recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg
+similarity index 100%
+copy from recipes-kernel/linux/linux-ti-staging-3.12/ipc.cfg
+copy to recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg b/recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg
+new file mode 100644
+index 0000000..d61a413
+--- /dev/null
++++ b/recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg
+@@ -0,0 +1,5 @@
++##################################################
++# Non-SMP config options
++##################################################
++CONFIG_SMP=n
++CONFIG_NR_CPUS=n
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.12/systest.cfg b/recipes-kernel/linux/linux-ti-staging-3.15/systest.cfg
+similarity index 100%
+copy from recipes-kernel/linux/linux-ti-staging-3.12/systest.cfg
+copy to recipes-kernel/linux/linux-ti-staging-3.15/systest.cfg
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.15.bb
+similarity index 75%
+copy from recipes-kernel/linux/linux-ti-staging_3.12.bb
+copy to recipes-kernel/linux/linux-ti-staging_3.15.bb
+index d555b04..f198fb2 100644
 --- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
++++ b/recipes-kernel/linux/linux-ti-staging_3.15.bb
+@@ -9,7 +9,7 @@ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
  
- BRANCH = "ti-linux-3.12.y"
+ # Look in the generic major.minor directory for files
+-FILESEXTRAPATHS_append := "${THISDIR}/${PN}-3.12:"
++FILESEXTRAPATHS_append := "${THISDIR}/${PN}-3.15:"
  
--SRCREV = "f0d4672333685697320f4907d5b4d3919121c299"
+ # Pull in the devicetree files into the rootfs
+ RDEPENDS_kernel-base += "kernel-devicetree"
+@@ -37,25 +37,23 @@ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+ 
+ S = "${WORKDIR}/git"
+ 
+-BRANCH = "ti-linux-3.12.y"
++BRANCH = "ti-linux-3.15.y"
+ 
+ SRCREV = "f0d4672333685697320f4907d5b4d3919121c299"
 -PV = "3.12.17"
-+SRCREV = "ffe21d87399ec09620878613a9ebfbc6c1d7c548"
-+PV = "3.12.20"
++PV = "3.14+3.15-rc6"
  
  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
 -MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
  PR = "${MACHINE_KERNEL_PR}"
  
- KERNEL_CONFIG_FRAGMENTS = "baseport.cfg connectivity.cfg ipc.cfg"
+-KERNEL_CONFIG_FRAGMENTS = "baseport.cfg connectivity.cfg ipc.cfg"
++KERNEL_CONFIG_DIR = "ti_config_fragments"
++KERNEL_CONFIG_FRAGMENTS = "ipc.cfg"
++KERNEL_CONFIG_FRAGMENTS_append_ti33x = "non-smp.cfg"
++KERNEL_CONFIG_FRAGMENTS_append_ti43x = "non-smp.cfg"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+-           file://baseport.cfg \
+-           file://connectivity.cfg \
+            file://ipc.cfg \
+            file://systest.cfg \
++           file://non-smp.cfg \
+           "
+-
+-# Disable SMP in defconfig on single-core platforms to reduce overhead
+-SRC_URI_append_ti33x = "file://0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
+-SRC_URI_append_ti43x = "file://0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch"
 -- 
-1.9.3
+1.7.9.5
 
 
