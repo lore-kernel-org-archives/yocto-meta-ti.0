@@ -1,6 +1,6 @@
 Return-Path: <chase.maupin@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F28ACE00A44; Thu, 22 May 2014 10:16:27 -0700 (PDT)
+	id B28CBE00B68; Thu, 22 May 2014 10:16:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,38 +8,36 @@ X-Spam-Status: No, score=-3.7 required=5.0 tests=RCVD_IN_DNSWL_HI,RDNS_NONE
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+	*      [198.47.26.152 listed in list.dnswl.org]
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-Received: from bear.ext.ti.com (unknown [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 83C8CE00975
-	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 10:16:22 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4MHGMFU005965
-	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 12:16:22 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4MHGMnH000394
-	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 12:16:22 -0500
+Received: from comal.ext.ti.com (unknown [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85D52E00975
+	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 10:16:52 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4MHGoPI022224;
+	Thu, 22 May 2014 12:16:51 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4MHGo1L003084;
+	Thu, 22 May 2014 12:16:50 -0500
 Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.03.0174.001; Thu, 22 May 2014 12:16:21 -0500
+	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
+	14.03.0174.001; Thu, 22 May 2014 12:16:50 -0500
 From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCH 3/4] setup-defconfig: allow use of in-kernel
-	config fragments
-Thread-Index: AQHPdd3wHCQk0847DEOXSGSdVPKhuJtM1s1Q
-Date: Thu, 22 May 2014 17:16:21 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015D04CC5E@DLEE11.ent.ti.com>
-References: <1400775376-28129-1-git-send-email-Chase.Maupin@ti.com>
-	<1400775376-28129-3-git-send-email-Chase.Maupin@ti.com>
-	<20140522161900.GL21819@edge> <20140522165029.GN21819@edge>
-In-Reply-To: <20140522165029.GN21819@edge>
+To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH 1/2] omap5-sgx-ddk-um-linux: remove version
+	1.9.0.10 as replaced by 1.9.0.12
+Thread-Index: AQHPddqRPiDVEuDckUGQBoufDT1Jz5tM13Iw
+Date: Thu, 22 May 2014 17:16:49 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015D04CCA8@DLEE11.ent.ti.com>
+References: <1400775888-23432-1-git-send-email-denis@denix.org>
+In-Reply-To: <1400775888-23432-1-git-send-email-denis@denix.org>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 3/4] setup-defconfig: allow use of in-kernel config fragments
+Subject: Re: [PATCH 1/2] omap5-sgx-ddk-um-linux: remove version 1.9.0.10 as replaced by 1.9.0.12
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -52,140 +50,79 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2014 17:16:28 -0000
+X-List-Received-Date: Thu, 22 May 2014 17:16:54 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
+Acked-by: Chase Maupin <chase.maupin@ti.com>
+
 >-----Original Message-----
->From: Dmytriyenko, Denys
->Sent: Thursday, May 22, 2014 11:51 AM
->To: Maupin, Chase
->Cc: meta-ti@yoctoproject.org
->Subject: Re: [meta-ti] [PATCH 3/4] setup-defconfig: allow use of
->in-kernel config fragments
+>From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+>bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
+>Sent: Thursday, May 22, 2014 11:25 AM
+>To: meta-ti@yoctoproject.org
+>Subject: [meta-ti] [PATCH 1/2] omap5-sgx-ddk-um-linux: remove
+>version 1.9.0.10 as replaced by 1.9.0.12
 >
->On Thu, May 22, 2014 at 12:19:01PM -0400, Denys Dmytriyenko wrote:
->> On Thu, May 22, 2014 at 11:16:15AM -0500, Chase Maupin wrote:
->> > * Allow the use of in-kernel config fragments instead of only
->> >   pulling config fragments from the OE meta data.  The OE meta
->> >   data fragments will still take precedence over in tree .cfg
->> >   files.
->>
->> I was thinking to do it differently...
+>From: Denys Dmytriyenko <denys@ti.com>
 >
->Basically, I was thinking of embedding the path in the
->KERNEL_CONFIG_FRAGMENTS
->variable, similar to how KERNEL_DEVICETREE used to do it:
+>Also version 1.9.0.10 of the recipe doesn't have necessary
+>PROVIDES and
+>results in conflicts with mesa and other gl/gles providers.
 >
->KERNEL_CONFIG_FRAGMENTS =3D "${WORKDIR}/ipc.cfg
->${KERNEL_CONFIG_DIR}/non-smp.cfg"
+>Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+>---
+> .../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb     | 26 ---------
+>-------------
+> 1 file changed, 26 deletions(-)
+> delete mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-
+>linux_1.9.0.10.bb
 >
->This way you could have fragments of the same name and choose
->which one to
->use. But the logic in setup-defconfig.inc would be much simpler...
-
-I also considered this.  I had rejected it because I didn't want to see a b=
-unch of duplicate entries for ${WORKDIR} and ${KERNEL_CONFIG_DIR}.  You are=
- right though that it makes the setup-defconfig simpler.
-
-Maybe a use case to consider is whether we think we would have fragments in=
- more than 2 locations.  i.e. one in WORKDIR, another in directory x of the=
- kernel, and another in directory y of the kernel.  If we think this would =
-be reasonable to support then your method makes more sense.  What do you th=
-ink?
-
+>diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-
+>linux_1.9.0.10.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-
+>linux_1.9.0.10.bb
+>deleted file mode 100644
+>index 37ca7d8..0000000
+>--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
+>+++ /dev/null
+>@@ -1,26 +0,0 @@
+>-DESCRIPTION =3D "Userspace libraries for omap5 sgx"
+>-HOMEPAGE =3D "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
+>-LICENSE =3D "TI-TSPA"
+>-LIC_FILES_CHKSUM =3D "file://OMAP5-Linux-Graphics-DDK-UM-
+>Manifest.doc;md5=3Dd280df8e94bb2e7b9251c8526078eeb8"
+>-
+>-COMPATIBLE_MACHINE =3D "omap-a15"
+>-
+>-INHIBIT_PACKAGE_STRIP =3D "1"
+>-
+>-SRC_URI =3D
+>"http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/
+>gfxsdk/OMAP5_1_09_00_10//exports/${PN}-${PV}.tar.gz;protocol=3Dhttp"
+>-
+>-PR =3D "r1"
+>-
+>-SRC_URI[md5sum] =3D "3cfb875de031098a4c1eeeaf4e442367"
+>-SRC_URI[sha256sum] =3D
+>"20b849088c0fd3ee5dd6bad8ddf16fb2b3267aa053cf3488c762fbc72f22489a"
+>-
+>-S =3D "${WORKDIR}/${PN}-${PV}"
+>-
+>-do_install () {
+>-    oe_runmake install DESTDIR=3D${D}
+>-}
+>-
+>-FILES_${PN} +=3D "${libdir}/gbm/"
+>-
+>-INSANE_SKIP_${PN} =3D "useless-rpaths"
+>-INSANE_SKIP_${PN}-dev =3D "useless-rpaths"
+>--
+>1.9.3
 >
->
->> > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
->> > ---
->> >  recipes-kernel/linux/setup-defconfig.inc |   36
->++++++++++++++++++++++++++++--
->> >  1 file changed, 34 insertions(+), 2 deletions(-)
->> >
->> > diff --git a/recipes-kernel/linux/setup-defconfig.inc
->b/recipes-kernel/linux/setup-defconfig.inc
->> > index 4277f26..fbe7e96 100644
->> > --- a/recipes-kernel/linux/setup-defconfig.inc
->> > +++ b/recipes-kernel/linux/setup-defconfig.inc
->> > @@ -2,6 +2,10 @@
->> >  # kernel version string.  such as the commit id
->> >  KERNEL_LOCALVERSION ?=3D ""
->> >
->> > +# KERNEL_CONFIG_DIR can be set to specify a subdirectory to
->search for
->> > +# kernel configuration fragments
->> > +KERNEL_CONFIG_DIR ?=3D ""
->> > +
->> >  # Check the defconfig file and see if it points to an in
->kernel
->> >  # defconfig that should be used, or if it is a complete
->config file
->> >
->> > @@ -27,10 +31,38 @@ do_configure() {
->> >          yes '' | oe_runmake oldconfig
->> >      fi
->> >
->> > -    # check for fragments
->> > +    # Check for kernel config fragments.  First check the
->files copied from
->> > +    # the OE meta data since we may want to override kernel
->config fragments
->> > +    # in the recipe.  If you don't find the fragment in the
->OE meta data
->> > +    # then check the kernel sources.  If you still can't find
->it then bail
->> > +    # with an error.
->> > +    # Check if any config fragments are specified.
->> >      if [ ! -z "${KERNEL_CONFIG_FRAGMENTS}" ]
->> >      then
->> > -        ( cd ${WORKDIR} &&
->${S}/scripts/kconfig/merge_config.sh -m -r -O ${S} ${S}/.config
->${KERNEL_CONFIG_FRAGMENTS} 1>&2 )
->> > +        # Variable to hold the assembled list of fragments
->with absolute paths
->> > +        configs=3D""
->> > +
->> > +        for f in ${KERNEL_CONFIG_FRAGMENTS}
->> > +        do
->> > +            # Check if the config fragment was copied into
->the WORKDIR from
->> > +            # the OE meta data
->> > +            if [ -e "${WORKDIR}/$f" ]
->> > +            then
->> > +                echo "Found config in workdir"
->> > +                configs=3D"$configs ""${WORKDIR}/$f"
->> > +            # Check if the fragement is in the kernel sources
->> > +            elif [ -e "${S}/${KERNEL_CONFIG_DIR}/$f" ]
->> > +            then
->> > +                echo "Found config in kernel"
->> > +                configs=3D"$configs
->""${S}/${KERNEL_CONFIG_DIR}/$f"
->> > +            else
->> > +                echo "Could not find kernel config fragment
->$f"
->> > +                exit 1
->> > +            fi
->> > +        done
->> > +
->> > +        # Now that all the fragments are located merge them.
->> > +        ( cd ${WORKDIR} &&
->${S}/scripts/kconfig/merge_config.sh -m -r -O ${S} ${S}/.config
->${configs} 1>&2 )
->> >          yes '' | oe_runmake oldconfig
->> >      fi
->> >  }
->> > --
->> > 1.7.9.5
->> >
->> > --
->> > _______________________________________________
->> > meta-ti mailing list
->> > meta-ti@yoctoproject.org
->> > https://lists.yoctoproject.org/listinfo/meta-ti
->> --
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
+>--
+>_______________________________________________
+>meta-ti mailing list
+>meta-ti@yoctoproject.org
+>https://lists.yoctoproject.org/listinfo/meta-ti
 
