@@ -1,6 +1,6 @@
-Return-Path: <chase.maupin@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EFE4BE00BE4; Thu, 22 May 2014 10:17:10 -0700 (PDT)
+	id A0BEAE00A44; Thu, 22 May 2014 10:36:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,37 +8,36 @@ X-Spam-Status: No, score=-3.7 required=5.0 tests=RCVD_IN_DNSWL_HI,RDNS_NONE
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+	*      [198.47.26.153 listed in list.dnswl.org]
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-Received: from comal.ext.ti.com (unknown [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 564F2E00B94
-	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 10:17:03 -0700 (PDT)
+Received: from devils.ext.ti.com (unknown [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3738BE00975
+	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 10:36:08 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4MHH24W022255;
-	Thu, 22 May 2014 12:17:02 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4MHH1ck000857;
-	Thu, 22 May 2014 12:17:02 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.03.0174.001; Thu, 22 May 2014 12:17:01 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
-	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH 2/2] linux-ti-staging: bump to 3.12.20 stable
-	release
-Thread-Index: AQHPddqHK6TasbWqDUu9HZgHWrvcdJtM141A
-Date: Thu, 22 May 2014 17:17:01 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015D04CCCB@DLEE11.ent.ti.com>
-References: <1400775888-23432-1-git-send-email-denis@denix.org>
-	<1400775888-23432-2-git-send-email-denis@denix.org>
-In-Reply-To: <1400775888-23432-2-git-send-email-denis@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4MHa7c2013900
+	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 12:36:07 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4MHa7FT019464
+	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 12:36:07 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 22 May 2014 12:36:07 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4MHa7eB019386;
+	Thu, 22 May 2014 12:36:07 -0500
+Date: Thu, 22 May 2014 13:36:06 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Maupin, Chase" <chase.maupin@ti.com>
+Message-ID: <20140522173605.GP21819@edge>
+References: <1400775376-28129-1-git-send-email-Chase.Maupin@ti.com>
+	<1400775376-28129-3-git-send-email-Chase.Maupin@ti.com>
+	<20140522161900.GL21819@edge> <20140522165029.GN21819@edge>
+	<7D46E86EC0A8354091174257B2FED1015D04CC5E@DLEE11.ent.ti.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/2] linux-ti-staging: bump to 3.12.20 stable	release
+In-Reply-To: <7D46E86EC0A8354091174257B2FED1015D04CC5E@DLEE11.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH 3/4] setup-defconfig: allow use of in-kernel config fragments
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,55 +50,141 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2014 17:17:11 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 22 May 2014 17:36:13 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Acked-by: Chase Maupin <chase.maupin@ti.com>
+On Thu, May 22, 2014 at 01:16:21PM -0400, Maupin, Chase wrote:
+> >-----Original Message-----
+> >From: Dmytriyenko, Denys
+> >Sent: Thursday, May 22, 2014 11:51 AM
+> >To: Maupin, Chase
+> >Cc: meta-ti@yoctoproject.org
+> >Subject: Re: [meta-ti] [PATCH 3/4] setup-defconfig: allow use of
+> >in-kernel config fragments
+> >
+> >On Thu, May 22, 2014 at 12:19:01PM -0400, Denys Dmytriyenko wrote:
+> >> On Thu, May 22, 2014 at 11:16:15AM -0500, Chase Maupin wrote:
+> >> > * Allow the use of in-kernel config fragments instead of only
+> >> >   pulling config fragments from the OE meta data.  The OE meta
+> >> >   data fragments will still take precedence over in tree .cfg
+> >> >   files.
+> >>
+> >> I was thinking to do it differently...
+> >
+> >Basically, I was thinking of embedding the path in the
+> >KERNEL_CONFIG_FRAGMENTS
+> >variable, similar to how KERNEL_DEVICETREE used to do it:
+> >
+> >KERNEL_CONFIG_FRAGMENTS = "${WORKDIR}/ipc.cfg
+> >${KERNEL_CONFIG_DIR}/non-smp.cfg"
+> >
+> >This way you could have fragments of the same name and choose
+> >which one to
+> >use. But the logic in setup-defconfig.inc would be much simpler...
+> 
+> I also considered this.  I had rejected it because I didn't want to see a 
+> bunch of duplicate entries for ${WORKDIR} and ${KERNEL_CONFIG_DIR}.  You are 
+> right though that it makes the setup-defconfig simpler.
+> 
+> Maybe a use case to consider is whether we think we would have fragments in 
+> more than 2 locations.  i.e. one in WORKDIR, another in directory x of the 
+> kernel, and another in directory y of the kernel.  If we think this would be 
+> reasonable to support then your method makes more sense.  What do you think?
 
->-----Original Message-----
->From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
->bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
->Sent: Thursday, May 22, 2014 11:25 AM
->To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [PATCH 2/2] linux-ti-staging: bump to 3.12.20
->stable release
->
->From: Denys Dmytriyenko <denys@ti.com>
->
->Signed-off-by: Denys Dmytriyenko <denys@ti.com>
->---
-> recipes-kernel/linux/linux-ti-staging_3.12.bb | 6 +++---
-> 1 file changed, 3 insertions(+), 3 deletions(-)
->
->diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb
->b/recipes-kernel/linux/linux-ti-staging_3.12.bb
->index 154d2fc..ac30ab5 100644
->--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
->+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
->@@ -36,11 +36,11 @@ S =3D "${WORKDIR}/git"
->
-> BRANCH =3D "ti-linux-3.12.y"
->
->-SRCREV =3D "f0d4672333685697320f4907d5b4d3919121c299"
->-PV =3D "3.12.17"
->+SRCREV =3D "ffe21d87399ec09620878613a9ebfbc6c1d7c548"
->+PV =3D "3.12.20"
->
-> # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause
->a rebuild
->-MACHINE_KERNEL_PR_append =3D "b+gitr${SRCPV}"
->+MACHINE_KERNEL_PR_append =3D "a+gitr${SRCPV}"
-> PR =3D "${MACHINE_KERNEL_PR}"
->
-> KERNEL_CONFIG_FRAGMENTS =3D "baseport.cfg connectivity.cfg ipc.cfg"
->--
->1.9.3
->
->--
->_______________________________________________
->meta-ti mailing list
->meta-ti@yoctoproject.org
->https://lists.yoctoproject.org/listinfo/meta-ti
+Another possible location could be inside a separate git repository. Which I 
+was considering initially, as I didn't know where Dan would create it...
+
+
+> >> > Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+> >> > ---
+> >> >  recipes-kernel/linux/setup-defconfig.inc |   36
+> >++++++++++++++++++++++++++++--
+> >> >  1 file changed, 34 insertions(+), 2 deletions(-)
+> >> >
+> >> > diff --git a/recipes-kernel/linux/setup-defconfig.inc
+> >b/recipes-kernel/linux/setup-defconfig.inc
+> >> > index 4277f26..fbe7e96 100644
+> >> > --- a/recipes-kernel/linux/setup-defconfig.inc
+> >> > +++ b/recipes-kernel/linux/setup-defconfig.inc
+> >> > @@ -2,6 +2,10 @@
+> >> >  # kernel version string.  such as the commit id
+> >> >  KERNEL_LOCALVERSION ?= ""
+> >> >
+> >> > +# KERNEL_CONFIG_DIR can be set to specify a subdirectory to
+> >search for
+> >> > +# kernel configuration fragments
+> >> > +KERNEL_CONFIG_DIR ?= ""
+> >> > +
+> >> >  # Check the defconfig file and see if it points to an in
+> >kernel
+> >> >  # defconfig that should be used, or if it is a complete
+> >config file
+> >> >
+> >> > @@ -27,10 +31,38 @@ do_configure() {
+> >> >          yes '' | oe_runmake oldconfig
+> >> >      fi
+> >> >
+> >> > -    # check for fragments
+> >> > +    # Check for kernel config fragments.  First check the
+> >files copied from
+> >> > +    # the OE meta data since we may want to override kernel
+> >config fragments
+> >> > +    # in the recipe.  If you don't find the fragment in the
+> >OE meta data
+> >> > +    # then check the kernel sources.  If you still can't find
+> >it then bail
+> >> > +    # with an error.
+> >> > +    # Check if any config fragments are specified.
+> >> >      if [ ! -z "${KERNEL_CONFIG_FRAGMENTS}" ]
+> >> >      then
+> >> > -        ( cd ${WORKDIR} &&
+> >${S}/scripts/kconfig/merge_config.sh -m -r -O ${S} ${S}/.config
+> >${KERNEL_CONFIG_FRAGMENTS} 1>&2 )
+> >> > +        # Variable to hold the assembled list of fragments
+> >with absolute paths
+> >> > +        configs=""
+> >> > +
+> >> > +        for f in ${KERNEL_CONFIG_FRAGMENTS}
+> >> > +        do
+> >> > +            # Check if the config fragment was copied into
+> >the WORKDIR from
+> >> > +            # the OE meta data
+> >> > +            if [ -e "${WORKDIR}/$f" ]
+> >> > +            then
+> >> > +                echo "Found config in workdir"
+> >> > +                configs="$configs ""${WORKDIR}/$f"
+> >> > +            # Check if the fragement is in the kernel sources
+> >> > +            elif [ -e "${S}/${KERNEL_CONFIG_DIR}/$f" ]
+> >> > +            then
+> >> > +                echo "Found config in kernel"
+> >> > +                configs="$configs
+> >""${S}/${KERNEL_CONFIG_DIR}/$f"
+> >> > +            else
+> >> > +                echo "Could not find kernel config fragment
+> >$f"
+> >> > +                exit 1
+> >> > +            fi
+> >> > +        done
+> >> > +
+> >> > +        # Now that all the fragments are located merge them.
+> >> > +        ( cd ${WORKDIR} &&
+> >${S}/scripts/kconfig/merge_config.sh -m -r -O ${S} ${S}/.config
+> >${configs} 1>&2 )
+> >> >          yes '' | oe_runmake oldconfig
+> >> >      fi
+> >> >  }
+> >> > --
+> >> > 1.7.9.5
+> >> >
+> >> > --
+> >> > _______________________________________________
+> >> > meta-ti mailing list
+> >> > meta-ti@yoctoproject.org
+> >> > https://lists.yoctoproject.org/listinfo/meta-ti
+> >> --
+> >> _______________________________________________
+> >> meta-ti mailing list
+> >> meta-ti@yoctoproject.org
+> >> https://lists.yoctoproject.org/listinfo/meta-ti
 
