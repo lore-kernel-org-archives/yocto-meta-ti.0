@@ -1,6 +1,6 @@
 Return-Path: <chase.maupin@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B28CBE00B68; Thu, 22 May 2014 10:16:54 -0700 (PDT)
+	id EFE4BE00BE4; Thu, 22 May 2014 10:17:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -11,33 +11,34 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	*      [198.47.26.152 listed in list.dnswl.org]
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
 Received: from comal.ext.ti.com (unknown [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85D52E00975
-	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 10:16:52 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4MHGoPI022224;
-	Thu, 22 May 2014 12:16:51 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 564F2E00B94
+	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 10:17:03 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4MHH24W022255;
+	Thu, 22 May 2014 12:17:02 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4MHGo1L003084;
-	Thu, 22 May 2014 12:16:50 -0500
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4MHH1ck000857;
+	Thu, 22 May 2014 12:17:02 -0500
 Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
 	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.03.0174.001; Thu, 22 May 2014 12:16:50 -0500
+	14.03.0174.001; Thu, 22 May 2014 12:17:01 -0500
 From: "Maupin, Chase" <chase.maupin@ti.com>
 To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
 	<meta-ti@yoctoproject.org>
-Thread-Topic: [meta-ti] [PATCH 1/2] omap5-sgx-ddk-um-linux: remove version
-	1.9.0.10 as replaced by 1.9.0.12
-Thread-Index: AQHPddqRPiDVEuDckUGQBoufDT1Jz5tM13Iw
-Date: Thu, 22 May 2014 17:16:49 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015D04CCA8@DLEE11.ent.ti.com>
+Thread-Topic: [meta-ti] [PATCH 2/2] linux-ti-staging: bump to 3.12.20 stable
+	release
+Thread-Index: AQHPddqHK6TasbWqDUu9HZgHWrvcdJtM141A
+Date: Thu, 22 May 2014 17:17:01 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015D04CCCB@DLEE11.ent.ti.com>
 References: <1400775888-23432-1-git-send-email-denis@denix.org>
-In-Reply-To: <1400775888-23432-1-git-send-email-denis@denix.org>
+	<1400775888-23432-2-git-send-email-denis@denix.org>
+In-Reply-To: <1400775888-23432-2-git-send-email-denis@denix.org>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/2] omap5-sgx-ddk-um-linux: remove version 1.9.0.10 as replaced by 1.9.0.12
+Subject: Re: [PATCH 2/2] linux-ti-staging: bump to 3.12.20 stable	release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,7 +51,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2014 17:16:54 -0000
+X-List-Received-Date: Thu, 22 May 2014 17:17:11 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
@@ -62,61 +63,37 @@ Acked-by: Chase Maupin <chase.maupin@ti.com>
 >bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
 >Sent: Thursday, May 22, 2014 11:25 AM
 >To: meta-ti@yoctoproject.org
->Subject: [meta-ti] [PATCH 1/2] omap5-sgx-ddk-um-linux: remove
->version 1.9.0.10 as replaced by 1.9.0.12
+>Subject: [meta-ti] [PATCH 2/2] linux-ti-staging: bump to 3.12.20
+>stable release
 >
 >From: Denys Dmytriyenko <denys@ti.com>
 >
->Also version 1.9.0.10 of the recipe doesn't have necessary
->PROVIDES and
->results in conflicts with mesa and other gl/gles providers.
->
 >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 >---
-> .../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb     | 26 ---------
->-------------
-> 1 file changed, 26 deletions(-)
-> delete mode 100644 recipes-graphics/libgles/omap5-sgx-ddk-um-
->linux_1.9.0.10.bb
+> recipes-kernel/linux/linux-ti-staging_3.12.bb | 6 +++---
+> 1 file changed, 3 insertions(+), 3 deletions(-)
 >
->diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-
->linux_1.9.0.10.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-
->linux_1.9.0.10.bb
->deleted file mode 100644
->index 37ca7d8..0000000
->--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
->+++ /dev/null
->@@ -1,26 +0,0 @@
->-DESCRIPTION =3D "Userspace libraries for omap5 sgx"
->-HOMEPAGE =3D "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
->-LICENSE =3D "TI-TSPA"
->-LIC_FILES_CHKSUM =3D "file://OMAP5-Linux-Graphics-DDK-UM-
->Manifest.doc;md5=3Dd280df8e94bb2e7b9251c8526078eeb8"
->-
->-COMPATIBLE_MACHINE =3D "omap-a15"
->-
->-INHIBIT_PACKAGE_STRIP =3D "1"
->-
->-SRC_URI =3D
->"http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/
->gfxsdk/OMAP5_1_09_00_10//exports/${PN}-${PV}.tar.gz;protocol=3Dhttp"
->-
->-PR =3D "r1"
->-
->-SRC_URI[md5sum] =3D "3cfb875de031098a4c1eeeaf4e442367"
->-SRC_URI[sha256sum] =3D
->"20b849088c0fd3ee5dd6bad8ddf16fb2b3267aa053cf3488c762fbc72f22489a"
->-
->-S =3D "${WORKDIR}/${PN}-${PV}"
->-
->-do_install () {
->-    oe_runmake install DESTDIR=3D${D}
->-}
->-
->-FILES_${PN} +=3D "${libdir}/gbm/"
->-
->-INSANE_SKIP_${PN} =3D "useless-rpaths"
->-INSANE_SKIP_${PN}-dev =3D "useless-rpaths"
+>diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb
+>b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+>index 154d2fc..ac30ab5 100644
+>--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
+>+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+>@@ -36,11 +36,11 @@ S =3D "${WORKDIR}/git"
+>
+> BRANCH =3D "ti-linux-3.12.y"
+>
+>-SRCREV =3D "f0d4672333685697320f4907d5b4d3919121c299"
+>-PV =3D "3.12.17"
+>+SRCREV =3D "ffe21d87399ec09620878613a9ebfbc6c1d7c548"
+>+PV =3D "3.12.20"
+>
+> # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause
+>a rebuild
+>-MACHINE_KERNEL_PR_append =3D "b+gitr${SRCPV}"
+>+MACHINE_KERNEL_PR_append =3D "a+gitr${SRCPV}"
+> PR =3D "${MACHINE_KERNEL_PR}"
+>
+> KERNEL_CONFIG_FRAGMENTS =3D "baseport.cfg connectivity.cfg ipc.cfg"
 >--
 >1.9.3
 >
