@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E9769E009E7; Fri, 23 May 2014 12:17:57 -0700 (PDT)
+	id E8D46E00BBC; Fri, 23 May 2014 12:17:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,13 +9,13 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC877E00BA0
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D7979E00B9F
 	for <meta-ti@yoctoproject.org>; Fri, 23 May 2014 12:17:53 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 39BF152AB2; Fri, 23 May 2014 19:17:51 +0000 (UTC)
+	id A500052AB0; Fri, 23 May 2014 19:17:49 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140523191751.39BF152AB2@arago-project.org>
-Date: Fri, 23 May 2014 19:17:51 +0000 (UTC)
+Message-Id: <20140523191749.A500052AB0@arago-project.org>
+Date: Fri, 23 May 2014 19:17:49 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Maupin, Chase : linux-ti-staging: Add version 3.15 of TI integration kernel
 X-BeenThere: meta-ti@yoctoproject.org
@@ -34,9 +34,9 @@ X-List-Received-Date: Fri, 23 May 2014 19:17:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 5becd8dbae23381ede8c32f5d2c1c91ea8ed63c2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5becd8dbae23381ede8c32f5d2c1c91ea8ed63c2
+Branch: master
+Commit: 4517d35a6459ef7091f94429fd6413a201f633ed
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4517d35a6459ef7091f94429fd6413a201f633ed
 
 Author: Maupin, Chase <chase.maupin@ti.com>
 Date:   Fri May 23 02:08:33 2014 +0000
