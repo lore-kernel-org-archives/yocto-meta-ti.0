@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D6420E009A7; Fri, 23 May 2014 12:17:55 -0700 (PDT)
+	id E7325E00B97; Fri, 23 May 2014 12:17:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,15 +9,15 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 61B0AE009E7
-	for <meta-ti@yoctoproject.org>; Fri, 23 May 2014 12:17:49 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 467ACE00BB1
+	for <meta-ti@yoctoproject.org>; Fri, 23 May 2014 12:17:53 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3554752A8F; Fri, 23 May 2014 19:17:49 +0000 (UTC)
+	id D0C5252AB1; Fri, 23 May 2014 19:17:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140523191749.3554752A8F@arago-project.org>
-Date: Fri, 23 May 2014 19:17:49 +0000 (UTC)
+Message-Id: <20140523191750.D0C5252AB1@arago-project.org>
+Date: Fri, 23 May 2014 19:17:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Maupin, Chase : linux-ti-staging: Make files directory version specific
+Subject: Denys Dmytriyenko : omap5-sgx-ddk-um-linux: remove version 1.9.0. 10 as replaced by 1.9.0.12
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,75 +30,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 May 2014 19:17:55 -0000
+X-List-Received-Date: Fri, 23 May 2014 19:17:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: ecfdfaa6fd53c94e73e228788eeb589920bf1ad1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ecfdfaa6fd53c94e73e228788eeb589920bf1ad1
+Branch: daisy
+Commit: 1ccfc1f25635b2fa642fbdf489aa4d56fa61f6b1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1ccfc1f25635b2fa642fbdf489aa4d56fa61f6b1
 
-Author: Maupin, Chase <chase.maupin@ti.com>
-Date:   Thu May 22 22:16:14 2014 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu May 22 22:24:47 2014 +0000
 
-linux-ti-staging: Make files directory version specific
+omap5-sgx-ddk-um-linux: remove version 1.9.0.10 as replaced by 1.9.0.12
 
-* As we add the next version of the linux-ti-staging kernel there
-  will be a different list of config fragments, removed patches,
-  etc.  For this reason it makes sense to have the file directory
-  be version specific
+Also version 1.9.0.10 of the recipe doesn't have necessary PROVIDES and
+results in conflicts with mesa and other gl/gles providers.
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...ge-ARM-config-omap-Disable-SMP-for-AM335x.patch |    0
- .../baseport.cfg                                   |    0
- .../connectivity.cfg                               |    0
- .../defconfig                                      |    0
- .../ipc.cfg                                        |    0
- .../systest.cfg                                    |    0
- recipes-kernel/linux/linux-ti-staging_3.12.bb      |    3 +++
- 7 files changed, 3 insertions(+), 0 deletions(-)
+ .../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb     |   26 --------------------
+ 1 files changed, 0 insertions(+), 26 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging/0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch b/recipes-kernel/linux/linux-ti-staging-3.12/0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging/0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
-rename to recipes-kernel/linux/linux-ti-staging-3.12/0001-Not-for-merge-ARM-config-omap-Disable-SMP-for-AM335x.patch
-diff --git a/recipes-kernel/linux/linux-ti-staging/baseport.cfg b/recipes-kernel/linux/linux-ti-staging-3.12/baseport.cfg
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging/baseport.cfg
-rename to recipes-kernel/linux/linux-ti-staging-3.12/baseport.cfg
-diff --git a/recipes-kernel/linux/linux-ti-staging/connectivity.cfg b/recipes-kernel/linux/linux-ti-staging-3.12/connectivity.cfg
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging/connectivity.cfg
-rename to recipes-kernel/linux/linux-ti-staging-3.12/connectivity.cfg
-diff --git a/recipes-kernel/linux/linux-ti-staging/defconfig b/recipes-kernel/linux/linux-ti-staging-3.12/defconfig
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging/defconfig
-rename to recipes-kernel/linux/linux-ti-staging-3.12/defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging/ipc.cfg b/recipes-kernel/linux/linux-ti-staging-3.12/ipc.cfg
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging/ipc.cfg
-rename to recipes-kernel/linux/linux-ti-staging-3.12/ipc.cfg
-diff --git a/recipes-kernel/linux/linux-ti-staging/systest.cfg b/recipes-kernel/linux/linux-ti-staging-3.12/systest.cfg
-similarity index 100%
-rename from recipes-kernel/linux/linux-ti-staging/systest.cfg
-rename to recipes-kernel/linux/linux-ti-staging-3.12/systest.cfg
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index ac30ab5..dbb49b3 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -8,6 +8,9 @@ inherit kernel
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
- 
-+# Look in the generic major.minor directory for files
-+FILESEXTRAPATHS_append := "${THISDIR}/${PN}-3.12:"
-+
- # Pull in the devicetree files into the rootfs
- RDEPENDS_kernel-base += "kernel-devicetree"
- 
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
+deleted file mode 100644
+index 37ca7d8..0000000
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
++++ /dev/null
+@@ -1,26 +0,0 @@
+-DESCRIPTION = "Userspace libraries for omap5 sgx"
+-HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
+-LICENSE = "TI-TSPA"
+-LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=d280df8e94bb2e7b9251c8526078eeb8"
+-
+-COMPATIBLE_MACHINE = "omap-a15"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-
+-SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/OMAP5_1_09_00_10//exports/${PN}-${PV}.tar.gz;protocol=http"
+-
+-PR = "r1"
+-
+-SRC_URI[md5sum] = "3cfb875de031098a4c1eeeaf4e442367"
+-SRC_URI[sha256sum] = "20b849088c0fd3ee5dd6bad8ddf16fb2b3267aa053cf3488c762fbc72f22489a"
+-
+-S = "${WORKDIR}/${PN}-${PV}"
+-
+-do_install () {
+-    oe_runmake install DESTDIR=${D}
+-}
+-
+-FILES_${PN} += "${libdir}/gbm/"
+-
+-INSANE_SKIP_${PN} = "useless-rpaths"
+-INSANE_SKIP_${PN}-dev = "useless-rpaths"
 
 
