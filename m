@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 22589E00BFD; Fri, 23 May 2014 12:18:01 -0700 (PDT)
+	id 2736FE00BEF; Fri, 23 May 2014 12:18:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,15 +9,15 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 354C3E00BBC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1D5D2E0073A
 	for <meta-ti@yoctoproject.org>; Fri, 23 May 2014 12:17:59 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C22F452A88; Fri, 23 May 2014 19:17:58 +0000 (UTC)
+	id A91BD52A78; Fri, 23 May 2014 19:17:58 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140523191758.C22F452A88@arago-project.org>
+Message-Id: <20140523191758.A91BD52A78@arago-project.org>
 Date: Fri, 23 May 2014 19:17:58 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: bump to 3.12.20 stable release
+Subject: Denys Dmytriyenko : omap5-sgx-ddk-um-linux: remove version 1.9.0. 10 as replaced by 1.9.0.12
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,13 +35,16 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: dora
-Commit: aac938b153545fb6ea3b120e6fd20d80470f10e6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=aac938b153545fb6ea3b120e6fd20d80470f10e6
+Commit: 86f7e559acec152f4071bf3b75b48f9ee7b3a96b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=86f7e559acec152f4071bf3b75b48f9ee7b3a96b
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu May 22 22:24:48 2014 +0000
+Date:   Thu May 22 22:24:47 2014 +0000
 
-linux-ti-staging: bump to 3.12.20 stable release
+omap5-sgx-ddk-um-linux: remove version 1.9.0.10 as replaced by 1.9.0.12
+
+Also version 1.9.0.10 of the recipe doesn't have necessary PROVIDES and
+results in conflicts with mesa and other gl/gles providers.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 Acked-by: Chase Maupin <chase.maupin@ti.com>
@@ -49,27 +52,40 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.12.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ .../libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb     |   26 --------------------
+ 1 files changed, 0 insertions(+), 26 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 154d2fc..ac30ab5 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.12.y"
- 
--SRCREV = "f0d4672333685697320f4907d5b4d3919121c299"
--PV = "3.12.17"
-+SRCREV = "ffe21d87399ec09620878613a9ebfbc6c1d7c548"
-+PV = "3.12.20"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_FRAGMENTS = "baseport.cfg connectivity.cfg ipc.cfg"
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
+deleted file mode 100644
+index 37ca7d8..0000000
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.10.bb
++++ /dev/null
+@@ -1,26 +0,0 @@
+-DESCRIPTION = "Userspace libraries for omap5 sgx"
+-HOMEPAGE = "http://downloads.ti.com/dsps/dsps_public_sw/gfxsdk"
+-LICENSE = "TI-TSPA"
+-LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=d280df8e94bb2e7b9251c8526078eeb8"
+-
+-COMPATIBLE_MACHINE = "omap-a15"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-
+-SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/OMAP5_1_09_00_10//exports/${PN}-${PV}.tar.gz;protocol=http"
+-
+-PR = "r1"
+-
+-SRC_URI[md5sum] = "3cfb875de031098a4c1eeeaf4e442367"
+-SRC_URI[sha256sum] = "20b849088c0fd3ee5dd6bad8ddf16fb2b3267aa053cf3488c762fbc72f22489a"
+-
+-S = "${WORKDIR}/${PN}-${PV}"
+-
+-do_install () {
+-    oe_runmake install DESTDIR=${D}
+-}
+-
+-FILES_${PN} += "${libdir}/gbm/"
+-
+-INSANE_SKIP_${PN} = "useless-rpaths"
+-INSANE_SKIP_${PN}-dev = "useless-rpaths"
 
 
