@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E8D46E00BBC; Fri, 23 May 2014 12:17:57 -0700 (PDT)
+	id EA001E00B9F; Fri, 23 May 2014 12:17:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,15 +9,15 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D7979E00B9F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 467DCE00BB3
 	for <meta-ti@yoctoproject.org>; Fri, 23 May 2014 12:17:53 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A500052AB0; Fri, 23 May 2014 19:17:49 +0000 (UTC)
+	id 2945352AB5; Fri, 23 May 2014 19:17:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140523191749.A500052AB0@arago-project.org>
-Date: Fri, 23 May 2014 19:17:49 +0000 (UTC)
+Message-Id: <20140523191751.2945352AB5@arago-project.org>
+Date: Fri, 23 May 2014 19:17:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Maupin, Chase : linux-ti-staging: Add version 3.15 of TI integration kernel
+Subject: Maupin, Chase : setup-defconfig: allow use of in-kernel config fragments
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,170 +34,81 @@ X-List-Received-Date: Fri, 23 May 2014 19:17:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 4517d35a6459ef7091f94429fd6413a201f633ed
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4517d35a6459ef7091f94429fd6413a201f633ed
+Branch: daisy
+Commit: 593c10902a7af5d1ffab5c5ac9c61742ad0f8d51
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=593c10902a7af5d1ffab5c5ac9c61742ad0f8d51
 
 Author: Maupin, Chase <chase.maupin@ti.com>
-Date:   Fri May 23 02:08:33 2014 +0000
+Date:   Fri May 23 02:08:32 2014 +0000
 
-linux-ti-staging: Add version 3.15 of TI integration kernel
+setup-defconfig: allow use of in-kernel config fragments
 
-* Add version 3.15 of the TI integration kernel.  Major changes
-  from previous version are:
-    * Config fragments now come primarily from the integration
-      tree.  Removed baseport and connectivity fragments for now
-      and the others can be removed as they are added to the
-      integration tree.
-    * Added a non-smp.cfg config to disable SMP for single core
-      devices instead of using a patch to the defconfig file as
-      we did in the past.
-* Use the right SRCREV
+* Allow the use of in-kernel config fragments instead of only
+  pulling config fragments from the OE meta data.
+* The absolute path to the config fragment is used to allow
+  pointing to different fragment locations.
+* Update the linux-ti-staging_3.12 recipe which uses config
+  fragments to specify the absolute path
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/linux-ti-staging-3.15/defconfig          |    1 +
- recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg |   18 ++++++
- .../linux/linux-ti-staging-3.15/non-smp.cfg        |    5 ++
- .../linux/linux-ti-staging-3.15/systest.cfg        |   20 +++++++
- recipes-kernel/linux/linux-ti-staging_3.15.bb      |   59 ++++++++++++++++++++
- 5 files changed, 103 insertions(+), 0 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_3.12.bb |    3 ++-
+ recipes-kernel/linux/setup-defconfig.inc      |   24 +++++++++++++++++++++++-
+ 2 files changed, 25 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/defconfig b/recipes-kernel/linux/linux-ti-staging-3.15/defconfig
-new file mode 100644
-index 0000000..926b35a
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-3.15/defconfig
-@@ -0,0 +1 @@
-+use-kernel-config=omap2plus_defconfig
-diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg b/recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg
-new file mode 100644
-index 0000000..645dfdf
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg
-@@ -0,0 +1,18 @@
-+##################################################
-+# IPC config options
-+##################################################
-+CONFIG_IOMMU_API=y
-+CONFIG_IOMMU_SUPPORT=y
-+CONFIG_OF_IOMMU=y
-+CONFIG_OMAP_IOMMU=y
-+CONFIG_OMAP_IOVMM=y
-+CONFIG_OMAP_IOMMU_DEBUG=y
-+CONFIG_VIRTIO=m
-+CONFIG_RPMSG=m
-+CONFIG_RPMSG_RPC=m
-+CONFIG_REMOTEPROC=m
-+CONFIG_OMAP_REMOTEPROC=m
-+CONFIG_OMAP_REMOTEPROC_IPU=y
-+CONFIG_OMAP_REMOTEPROC_DSP=y
-+CONFIG_OMAP_REMOTEPROC_IPU1=y
-+CONFIG_OMAP_REMOTEPROC_DSP2=y
-diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg b/recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg
-new file mode 100644
-index 0000000..d61a413
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg
-@@ -0,0 +1,5 @@
-+##################################################
-+# Non-SMP config options
-+##################################################
-+CONFIG_SMP=n
-+CONFIG_NR_CPUS=n
-diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/systest.cfg b/recipes-kernel/linux/linux-ti-staging-3.15/systest.cfg
-new file mode 100644
-index 0000000..e21602f
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging-3.15/systest.cfg
-@@ -0,0 +1,20 @@
-+##################################################
-+# Systest config options
-+##################################################
-+CONFIG_DEBUG_SPINLOCK=y
-+CONFIG_DEBUG_MUTEXES=y
-+CONFIG_DEBUG_KMEMLEAK=y
-+CONFIG_DEVKMEM=y
-+CONFIG_HAVE_DEBUG_KMEMLEAK=y
-+CONFIG_DEBUG_KMEMLEAK_EARLY_LOG_SIZE=400
-+CONFIG_DEBUG_KMEMLEAK_TEST=n
-+CONFIG_DEBUG_KMEMLEAK_DEFAULT_OFF=n
-+CONFIG_DEBUG_LOCK_ALLOC=y
-+CONFIG_DEBUG_INFO=y
-+CONFIG_DEBUG_FS=y
-+CONFIG_DEBUG_KERNEL=y
-+CONFIG_PM_DEBUG=y
-+CONFIG_DEBUG_GPIO=y
-+CONFIG_USB_DEBUG=y
-+CONFIG_SND_DEBUG=y
-+CONFIG_RTC_DEBUG=y
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.15.bb b/recipes-kernel/linux/linux-ti-staging_3.15.bb
-new file mode 100644
-index 0000000..308a412
---- /dev/null
-+++ b/recipes-kernel/linux/linux-ti-staging_3.15.bb
-@@ -0,0 +1,59 @@
-+SECTION = "kernel"
-+DESCRIPTION = "Linux kernel for TI devices"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index dbb49b3..cb289c4 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -46,7 +46,8 @@ PV = "3.12.20"
+ MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+-KERNEL_CONFIG_FRAGMENTS = "baseport.cfg connectivity.cfg ipc.cfg"
++KERNEL_CONFIG_FRAGMENTS = "${WORKDIR}/baseport.cfg ${WORKDIR}/connectivity.cfg \
++                           ${WORKDIR}/ipc.cfg"
+ 
+ SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+diff --git a/recipes-kernel/linux/setup-defconfig.inc b/recipes-kernel/linux/setup-defconfig.inc
+index 4277f26..dbfd0d4 100644
+--- a/recipes-kernel/linux/setup-defconfig.inc
++++ b/recipes-kernel/linux/setup-defconfig.inc
+@@ -27,9 +27,31 @@ do_configure() {
+         yes '' | oe_runmake oldconfig
+     fi
+ 
+-    # check for fragments
++    # Check for kernel config fragments.  The assumption is that the config
++    # fragment will be specified with the absolute path.  For example:
++    #   * ${WORKDIR}/config1.cfg
++    #   * ${S}/config2.cfg
++    # Iterate through the list of configs and make sure that you can find
++    # each one.  If not then error out.
++    # NOTE: If you want to override a configuration that is kept in the kernel
++    #       with one from the OE meta data then you should make sure that the
++    #       OE meta data version (i.e. ${WORKDIR}/config1.cfg) is listed
++    #       after the in kernel configuration fragment.
++    # Check if any config fragments are specified.
+     if [ ! -z "${KERNEL_CONFIG_FRAGMENTS}" ]
+     then
++        for f in ${KERNEL_CONFIG_FRAGMENTS}
++        do
++            # Check if the config fragment was copied into the WORKDIR from
++            # the OE meta data
++            if [ ! -e "$f" ]
++            then
++                echo "Could not find kernel config fragment $f"
++                exit 1
++            fi
++        done
 +
-+inherit kernel
-+
-+require recipes-kernel/linux/linux-dtb.inc
-+require recipes-kernel/linux/setup-defconfig.inc
-+
-+# Look in the generic major.minor directory for files
-+FILESEXTRAPATHS_append := "${THISDIR}/${PN}-3.15:"
-+
-+# Pull in the devicetree files into the rootfs
-+RDEPENDS_kernel-base += "kernel-devicetree"
-+
-+# Add a run-time dependency for the PM firmware to be installed
-+# on the target file system.
-+RDEPENDS_kernel-base_append_ti33x = " am33x-cm3"
-+RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
-+
-+# Add a run-time dependency for the VPE VPDMA firmware to be installed
-+# on the target file system.
-+RDEPENDS_kernel-base_append_dra7xx-evm = " vpe-vpdma-fw"
-+
-+# Default is to package all dtb files for ti33x devices unless building
-+# for the specific beaglebone machine.
-+KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
-+KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb"
-+KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
-+KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
-+KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
-+
-+KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
-+
-+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
-+
-+S = "${WORKDIR}/git"
-+
-+BRANCH = "ti-linux-3.15.y"
-+
-+SRCREV = "3fd9aad17d3b4d1d7ee50ae788c0a096921e7216"
-+PV = "3.14+3.15-rc6"
-+
-+# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+KERNEL_CONFIG_DIR = "ti_config_fragments"
-+KERNEL_CONFIG_FRAGMENTS = "${WORKDIR}/ipc.cfg"
-+KERNEL_CONFIG_FRAGMENTS_append_ti33x = "${WORKDIR}/non-smp.cfg"
-+KERNEL_CONFIG_FRAGMENTS_append_ti43x = "${WORKDIR}/non-smp.cfg"
-+
-+SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-+           file://defconfig \
-+           file://ipc.cfg \
-+           file://systest.cfg \
-+           file://non-smp.cfg \
-+          "
++        # Now that all the fragments are located merge them.
+         ( cd ${WORKDIR} && ${S}/scripts/kconfig/merge_config.sh -m -r -O ${S} ${S}/.config ${KERNEL_CONFIG_FRAGMENTS} 1>&2 )
+         yes '' | oe_runmake oldconfig
+     fi
 
 
