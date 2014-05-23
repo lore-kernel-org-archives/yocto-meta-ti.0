@@ -1,45 +1,41 @@
-Return-Path: <chase.maupin@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 232BEE00A44; Thu, 22 May 2014 13:38:22 -0700 (PDT)
+	id 9BF0BE00B68; Thu, 22 May 2014 18:18:52 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=5.0 tests=RCVD_IN_DNSWL_HI,RDNS_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
+X-Spam-Status: No, score=-2.6 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
+	RCVD_IN_DNSWL_HI,RDNS_NONE autolearn=ham version=3.3.1
+X-Spam-HAM-Report: *  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
 	*      [192.94.94.41 listed in list.dnswl.org]
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
 Received: from bear.ext.ti.com (unknown [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90660E00975
-	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 13:38:18 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A2782E00A2F
+	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 18:18:45 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4MKcIGE025375
-	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 15:38:18 -0500
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4N1Ij0S015819
+	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 20:18:45 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4MKcI7u021152
-	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 15:38:18 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.03.0174.001; Thu, 22 May 2014 15:38:18 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [PATCHv3 4/4] linux-ti-staging: Add version 3.15 of
-	TI integration kernel
-Thread-Index: AQHPdfu5GFb3/PGOzUqu0ym+m2Bi3ZtNDxag
-Date: Thu, 22 May 2014 20:38:17 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015D050ADF@DLEE11.ent.ti.com>
-References: <1400789313-13523-1-git-send-email-Chase.Maupin@ti.com>
-	<1400789313-13523-2-git-send-email-Chase.Maupin@ti.com>
-	<20140522202340.GQ21819@edge>
-In-Reply-To: <20140522202340.GQ21819@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4N1Ij8V015366
+	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 20:18:45 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 22 May 2014 20:18:44 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s4N1IiH3001190	for <meta-ti@yoctoproject.org>; Thu, 22 May 2014 20:18:44
+	-0500
+Date: Thu, 22 May 2014 21:02:50 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <568681604.71.1400806970968.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCHv3 4/4] linux-ti-staging: Add version 3.15 of TI integration kernel
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-05-22_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -52,163 +48,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2014 20:38:22 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 23 May 2014 01:18:52 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_70_1151014540.1400806970964"
 
->-----Original Message-----
->From: Dmytriyenko, Denys
->Sent: Thursday, May 22, 2014 3:24 PM
->To: Maupin, Chase
->Cc: meta-ti@yoctoproject.org
->Subject: Re: [meta-ti] [PATCHv3 4/4] linux-ti-staging: Add version
->3.15 of TI integration kernel
->
->On Thu, May 22, 2014 at 03:08:33PM -0500, Chase Maupin wrote:
->> * Add version 3.15 of the TI integration kernel.  Major changes
->>   from previous version are:
->>     * Config fragments now come primarily from the integration
->>       tree.  Removed baseport and connectivity fragments for now
->>       and the others can be removed as they are added to the
->>       integration tree.
->>     * Added a non-smp.cfg config to disable SMP for single core
->>       devices instead of using a patch to the defconfig file as
->>       we did in the past.
->>
->> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
->>
->> ---
->> * Updated in version 2
->>     * Change the default config fragements location
->>
->> * Updated in version 3
->>     * Use absolute paths in the config fragment names
->> ---
->>  .../defconfig                                      |    0
->>  .../ipc.cfg                                        |    0
->>  .../linux/linux-ti-staging-3.15/non-smp.cfg        |    5 +++++
->>  .../systest.cfg                                    |    0
->>  ...ti-staging_3.12.bb =3D> linux-ti-staging_3.15.bb} |   21
->+++++++++-----------
->>  5 files changed, 14 insertions(+), 12 deletions(-)
->>  copy recipes-kernel/linux/{linux-mainline =3D> linux-ti-staging-
->3.15}/defconfig (100%)
->>  copy recipes-kernel/linux/{linux-ti-staging-3.12 =3D> linux-ti-
->staging-3.15}/ipc.cfg (100%)
->>  create mode 100644 recipes-kernel/linux/linux-ti-staging-
->3.15/non-smp.cfg
->>  copy recipes-kernel/linux/{linux-ti-staging-3.12 =3D> linux-ti-
->staging-3.15}/systest.cfg (100%)
->>  copy recipes-kernel/linux/{linux-ti-staging_3.12.bb =3D> linux-
->ti-staging_3.15.bb} (73%)
->>
->> diff --git a/recipes-kernel/linux/linux-mainline/defconfig
->b/recipes-kernel/linux/linux-ti-staging-3.15/defconfig
->> similarity index 100%
->> copy from recipes-kernel/linux/linux-mainline/defconfig
->> copy to recipes-kernel/linux/linux-ti-staging-3.15/defconfig
->> diff --git a/recipes-kernel/linux/linux-ti-staging-3.12/ipc.cfg
->b/recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg
->> similarity index 100%
->> copy from recipes-kernel/linux/linux-ti-staging-3.12/ipc.cfg
->> copy to recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg
->> diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/non-
->smp.cfg b/recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg
->> new file mode 100644
->> index 0000000..d61a413
->> --- /dev/null
->> +++ b/recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg
->> @@ -0,0 +1,5 @@
->> +##################################################
->> +# Non-SMP config options
->> +##################################################
->> +CONFIG_SMP=3Dn
->> +CONFIG_NR_CPUS=3Dn
->> diff --git a/recipes-kernel/linux/linux-ti-staging-
->3.12/systest.cfg b/recipes-kernel/linux/linux-ti-staging-
->3.15/systest.cfg
->> similarity index 100%
->> copy from recipes-kernel/linux/linux-ti-staging-3.12/systest.cfg
->> copy to recipes-kernel/linux/linux-ti-staging-3.15/systest.cfg
->> diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb
->b/recipes-kernel/linux/linux-ti-staging_3.15.bb
->> similarity index 73%
->> copy from recipes-kernel/linux/linux-ti-staging_3.12.bb
->> copy to recipes-kernel/linux/linux-ti-staging_3.15.bb
->> index 5c4d669..fee67ce 100644
->> --- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
->> +++ b/recipes-kernel/linux/linux-ti-staging_3.15.bb
->> @@ -9,7 +9,7 @@ require recipes-kernel/linux/linux-dtb.inc
->>  require recipes-kernel/linux/setup-defconfig.inc
->>
->>  # Look in the generic major.minor directory for files
->> -FILESEXTRAPATHS_append :=3D "${THISDIR}/${PN}-3.12:"
->> +FILESEXTRAPATHS_append :=3D "${THISDIR}/${PN}-3.15:"
->>
->>  # Pull in the devicetree files into the rootfs
->>  RDEPENDS_kernel-base +=3D "kernel-devicetree"
->> @@ -37,26 +37,23 @@ COMPATIBLE_MACHINE =3D "ti33x|ti43x|omap-a15"
->>
->>  S =3D "${WORKDIR}/git"
->>
->> -BRANCH =3D "ti-linux-3.12.y"
->> +BRANCH =3D "ti-linux-3.15.y"
->>
->>  SRCREV =3D "f0d4672333685697320f4907d5b4d3919121c299"
->> -PV =3D "3.12.17"
->> +PV =3D "3.14+3.15-rc6"
->>
->>  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will
->cause a rebuild
->> -MACHINE_KERNEL_PR_append =3D "b+gitr${SRCPV}"
->> +MACHINE_KERNEL_PR_append =3D "c+gitr${SRCPV}"
->>  PR =3D "${MACHINE_KERNEL_PR}"
->>
->> -KERNEL_CONFIG_FRAGMENTS =3D "${WORKDIR}/baseport.cfg
->${WORKDIR}/connectivity.cfg \
->> -                           ${WORKDIR}/ipc.cfg"
->> +KERNEL_CONFIG_DIR =3D "ti_config_fragments"
->
->So, where this directory is meant to be? The last patch assumed it
->was in
->arch/arm/configs... Or did I miss v2 of the patch?
+------=_Part_70_1151014540.1400806970964
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-There will be configs in the ti_config_fragments in the base of the kernel =
-tree.  Those are being merged in over the next couple of days.  Then we can=
- add ${KERNEL_CONFIG_DIR}/connnectivity.cfg, etc.
+<html>
+<head>
+<title>
+Status for 05/22/14
+</title>
+</head>
+<body>
 
-So I left this directory here because I plan to use it soon but it isn't us=
-ed right now.
+<h2>Status for 05/22/14</h2>
 
->
->
->> +KERNEL_CONFIG_FRAGMENTS =3D "${WORKDIR}/ipc.cfg"
->> +KERNEL_CONFIG_FRAGMENTS_append_ti33x =3D "${WORKDIR}/non-smp.cfg"
->> +KERNEL_CONFIG_FRAGMENTS_append_ti43x =3D "${WORKDIR}/non-smp.cfg"
->>
->>  SRC_URI =3D "git://git.ti.com/ti-linux-kernel/ti-linux-
->kernel.git;protocol=3Dgit;branch=3D${BRANCH} \
->>             file://defconfig \
->> -           file://baseport.cfg \
->> -           file://connectivity.cfg \
->>             file://ipc.cfg \
->>             file://systest.cfg \
->> +           file://non-smp.cfg \
->>            "
->> -
->> -# Disable SMP in defconfig on single-core platforms to reduce
->overhead
->> -SRC_URI_append_ti33x =3D "file://0001-Not-for-merge-ARM-config-
->omap-Disable-SMP-for-AM335x.patch"
->> -SRC_URI_append_ti43x =3D "file://0001-Not-for-merge-ARM-config-
->omap-Disable-SMP-for-AM335x.patch"
->> --
->> 1.7.9.5
->>
->> --
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
+<h2>BUILD_ID: build-2014-05-22_21-01-38</h2>
 
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>keystone-evm</td>
+        <td id="keystone-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="keystone-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.03"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm keystone-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_70_1151014540.1400806970964--
