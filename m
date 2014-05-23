@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EA001E00B9F; Fri, 23 May 2014 12:17:57 -0700 (PDT)
+	id 22589E00BFD; Fri, 23 May 2014 12:18:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -9,15 +9,15 @@ X-Spam-Status: No, score=1.3 required=5.0 tests=RDNS_NONE autolearn=no
 X-Spam-HAM-Report: * 1.3 RDNS_NONE Delivered to internal network by a host
 	with no rDNS
 Received: from arago-project.org (unknown [184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 467DCE00BB3
-	for <meta-ti@yoctoproject.org>; Fri, 23 May 2014 12:17:53 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 354C3E00BBC
+	for <meta-ti@yoctoproject.org>; Fri, 23 May 2014 12:17:59 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2945352AB5; Fri, 23 May 2014 19:17:51 +0000 (UTC)
+	id C22F452A88; Fri, 23 May 2014 19:17:58 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140523191751.2945352AB5@arago-project.org>
-Date: Fri, 23 May 2014 19:17:51 +0000 (UTC)
+Message-Id: <20140523191758.C22F452A88@arago-project.org>
+Date: Fri, 23 May 2014 19:17:58 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Maupin, Chase : setup-defconfig: allow use of in-kernel config fragments
+Subject: Denys Dmytriyenko : linux-ti-staging: bump to 3.12.20 stable release
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -30,85 +30,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 May 2014 19:17:58 -0000
+X-List-Received-Date: Fri, 23 May 2014 19:18:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 593c10902a7af5d1ffab5c5ac9c61742ad0f8d51
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=593c10902a7af5d1ffab5c5ac9c61742ad0f8d51
+Branch: dora
+Commit: aac938b153545fb6ea3b120e6fd20d80470f10e6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=aac938b153545fb6ea3b120e6fd20d80470f10e6
 
-Author: Maupin, Chase <chase.maupin@ti.com>
-Date:   Fri May 23 02:08:32 2014 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu May 22 22:24:48 2014 +0000
 
-setup-defconfig: allow use of in-kernel config fragments
+linux-ti-staging: bump to 3.12.20 stable release
 
-* Allow the use of in-kernel config fragments instead of only
-  pulling config fragments from the OE meta data.
-* The absolute path to the config fragment is used to allow
-  pointing to different fragment locations.
-* Update the linux-ti-staging_3.12 recipe which uses config
-  fragments to specify the absolute path
-
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Acked-by: Chase Maupin <chase.maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.12.bb |    3 ++-
- recipes-kernel/linux/setup-defconfig.inc      |   24 +++++++++++++++++++++++-
- 2 files changed, 25 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_3.12.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index dbb49b3..cb289c4 100644
+index 154d2fc..ac30ab5 100644
 --- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -46,7 +46,8 @@ PV = "3.12.20"
- MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+@@ -36,11 +36,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.12.y"
+ 
+-SRCREV = "f0d4672333685697320f4907d5b4d3919121c299"
+-PV = "3.12.17"
++SRCREV = "ffe21d87399ec09620878613a9ebfbc6c1d7c548"
++PV = "3.12.20"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
  PR = "${MACHINE_KERNEL_PR}"
  
--KERNEL_CONFIG_FRAGMENTS = "baseport.cfg connectivity.cfg ipc.cfg"
-+KERNEL_CONFIG_FRAGMENTS = "${WORKDIR}/baseport.cfg ${WORKDIR}/connectivity.cfg \
-+                           ${WORKDIR}/ipc.cfg"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
-diff --git a/recipes-kernel/linux/setup-defconfig.inc b/recipes-kernel/linux/setup-defconfig.inc
-index 4277f26..dbfd0d4 100644
---- a/recipes-kernel/linux/setup-defconfig.inc
-+++ b/recipes-kernel/linux/setup-defconfig.inc
-@@ -27,9 +27,31 @@ do_configure() {
-         yes '' | oe_runmake oldconfig
-     fi
- 
--    # check for fragments
-+    # Check for kernel config fragments.  The assumption is that the config
-+    # fragment will be specified with the absolute path.  For example:
-+    #   * ${WORKDIR}/config1.cfg
-+    #   * ${S}/config2.cfg
-+    # Iterate through the list of configs and make sure that you can find
-+    # each one.  If not then error out.
-+    # NOTE: If you want to override a configuration that is kept in the kernel
-+    #       with one from the OE meta data then you should make sure that the
-+    #       OE meta data version (i.e. ${WORKDIR}/config1.cfg) is listed
-+    #       after the in kernel configuration fragment.
-+    # Check if any config fragments are specified.
-     if [ ! -z "${KERNEL_CONFIG_FRAGMENTS}" ]
-     then
-+        for f in ${KERNEL_CONFIG_FRAGMENTS}
-+        do
-+            # Check if the config fragment was copied into the WORKDIR from
-+            # the OE meta data
-+            if [ ! -e "$f" ]
-+            then
-+                echo "Could not find kernel config fragment $f"
-+                exit 1
-+            fi
-+        done
-+
-+        # Now that all the fragments are located merge them.
-         ( cd ${WORKDIR} && ${S}/scripts/kconfig/merge_config.sh -m -r -O ${S} ${S}/.config ${KERNEL_CONFIG_FRAGMENTS} 1>&2 )
-         yes '' | oe_runmake oldconfig
-     fi
+ KERNEL_CONFIG_FRAGMENTS = "baseport.cfg connectivity.cfg ipc.cfg"
 
 
