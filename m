@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6324CE00B71; Thu, 29 May 2014 12:13:25 -0700 (PDT)
+	id 6D47AE00B68; Thu, 29 May 2014 12:13:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,15 +10,15 @@ X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	with *      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8386EE00A44
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 821F8E00A2F
 	for <meta-ti@yoctoproject.org>; Thu, 29 May 2014 12:13:20 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BE029529E1; Thu, 29 May 2014 19:13:19 +0000 (UTC)
+	id B25C852A23; Thu, 29 May 2014 19:13:19 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140529191319.BE029529E1@arago-project.org>
+Message-Id: <20140529191319.B25C852A23@arago-project.org>
 Date: Thu, 29 May 2014 19:13:19 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: lower the preference for 3. 15 recipe for now
+Subject: Hao Zhang : keystone: u-boot: add build support for EMIF16 NAND gph image
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -36,37 +36,77 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: e4abf98729bb3ed555c65e101b227b5c166b9e81
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e4abf98729bb3ed555c65e101b227b5c166b9e81
+Commit: 9277a0276f0c3a49793e53e57678455272042480
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9277a0276f0c3a49793e53e57678455272042480
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu May 29 07:41:08 2014 +0000
+Author: Hao Zhang <hzhang@ti.com>
+Date:   Thu May 29 00:49:05 2014 +0000
 
-linux-ti-staging: lower the preference for 3.15 recipe for now
-
-* It breaks libgles/SGX due to missing omafb/omafb.h header
-* Will be switching to 3.14 instead for LTS
+keystone: u-boot: add build support for EMIF16 NAND gph image
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Acked-by: Chase Maupin <chase.maupin@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.15.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ recipes-bsp/u-boot/u-boot-keystone_2013.01.bb |   15 +++++++++++++--
+ 1 files changed, 13 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.15.bb b/recipes-kernel/linux/linux-ti-staging_3.15.bb
-index a55b581..64db8da 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.15.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.15.bb
-@@ -3,6 +3,8 @@ DESCRIPTION = "Linux kernel for TI devices"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+index 5e5eb51..37f7738 100644
+--- a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
++++ b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+@@ -4,7 +4,7 @@ DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
  
-+DEFAULT_PREFERENCE = "-1"
+ COMPATIBLE_MACHINE = "keystone"
+ 
+-PR = "r4+gitr${SRCPV}"
++PR = "r5+gitr${SRCPV}"
+ 
+ # Tag "K2_UBOOT_2013_01_14.05_16"
+ SRCREV = "fee500417b989fc9906d86e377b4d3d96033d54e"
+@@ -15,12 +15,13 @@ SRC_URI = "git://git.ti.com/keystone-linux/u-boot.git;protocol=git;branch=${BRAN
+ S = "${WORKDIR}/git"
+ 
+ UBOOT_SUFFIX = "bin"
+-UBOOT_MAKE_TARGET = "u-boot-spi.gph"
++UBOOT_MAKE_TARGET = "u-boot-spi.gph u-boot-nand.gph"
+ 
+ # SPI NOR Flash binaries
+ UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
+ UBOOT_SPI_BINARY = "u-boot.img"
+ UBOOT_SPI_GPH_BINARY = "u-boot-spi.gph"
++UBOOT_NAND_GPH_BINARY = "u-boot-nand.gph"
+ 
+ # SPI NOR Flash deployed images
+ UBOOT_SPI_SPL_IMAGE = "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
+@@ -29,6 +30,8 @@ UBOOT_SPI_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
+ UBOOT_SPI_SYMLINK = "u-boot-${MACHINE}.img"
+ UBOOT_SPI_GPH_IMAGE = "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
+ UBOOT_SPI_GPH_SYMLINK = "u-boot-spi-${MACHINE}.gph"
++UBOOT_NAND_GPH_IMAGE = "u-boot-nand-${MACHINE}-${PV}-${PR}.gph"
++UBOOT_NAND_GPH_SYMLINK = "u-boot-nand-${MACHINE}.gph"
+ 
+ do_install_append () {
+ 	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
+@@ -39,6 +42,9 @@ do_install_append () {
+ 
+ 	install ${S}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
+ 	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
 +
- inherit kernel
++        install ${S}/${UBOOT_NAND_GPH_BINARY} ${D}/boot/${UBOOT_NAND_GPH_IMAGE}
++        ln -sf ${UBOOT_NAND_GPH_IMAGE} ${D}/boot/${UBOOT_NAND_GPH_BINARY}
+ }
  
- require recipes-kernel/linux/linux-dtb.inc
+ do_deploy_append () {
+@@ -56,4 +62,9 @@ do_deploy_append () {
+ 	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
+ 	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
+ 	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
++
++        install ${S}/${UBOOT_NAND_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_NAND_GPH_IMAGE}
++        rm -f ${UBOOT_NAND_GPH_BINARY} ${UBOOT_NAND_GPH_SYMLINK}
++        ln -sf ${UBOOT_NAND_GPH_IMAGE} ${UBOOT_NAND_GPH_SYMLINK}
++        ln -sf ${UBOOT_NAND_GPH_IMAGE} ${UBOOT_NAND_GPH_BINARY}
+ }
 
 
