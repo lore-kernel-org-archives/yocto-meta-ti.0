@@ -1,41 +1,32 @@
-Return-Path: <denys@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 93150E00B6F; Wed, 28 May 2014 13:37:36 -0700 (PDT)
+	id 6BA35E00B6F; Wed, 28 May 2014 18:41:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=5.0 tests=RCVD_IN_DNSWL_HI,RDNS_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+X-Spam-Level: *
+X-Spam-Status: No, score=1.3 required=5.0 tests=RCVD_IN_DNSWL_NONE,RDNS_NONE
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [206.46.173.17 listed in list.dnswl.org]
 	*  1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-Received: from arroyo.ext.ti.com (unknown [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 390B9E00B6A
-	for <meta-ti@yoctoproject.org>; Wed, 28 May 2014 13:37:33 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4SKbWYP030253;
-	Wed, 28 May 2014 15:37:32 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4SKbWe1007909;
-	Wed, 28 May 2014 15:37:32 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 28 May 2014 15:37:31 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4SKbVLc023047;
-	Wed, 28 May 2014 15:37:31 -0500
-Date: Wed, 28 May 2014 16:37:31 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Dean <dean@ripperd.com>
-Message-ID: <20140528203730.GY21819@edge>
-References: <20140523191759.1158552AAF@arago-project.org>
-	<53864855.8040600@ripperd.com>
-MIME-Version: 1.0
-In-Reply-To: <53864855.8040600@ripperd.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: Maupin, Chase : linux-ti-staging: Add version 3.15 of TI integration kernel
+Received: from vms173017pub.verizon.net (unknown [206.46.173.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 33A1DE00B6A
+	for <meta-ti@yoctoproject.org>; Wed, 28 May 2014 18:41:47 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N6B00MLCBCNR360@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 28 May 2014 20:41:26 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id E740A20086; Wed,
+	28 May 2014 21:41:10 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Wed, 28 May 2014 21:41:08 -0400
+Message-id: <1401327668-3680-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.9.3
+Subject: [PATCH] linux-ti-staging: lower the preference for 3.15 recipe for now
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,261 +39,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 May 2014 20:37:36 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 29 May 2014 01:41:58 -0000
 
-Yeah, I have a fix for cryptodev in the queue, but was sick lately. I'll try 
-to push the fix soon.
+From: Denys Dmytriyenko <denys@ti.com>
 
+* It breaks libgles/SGX due to missing omafb/omafb.h header
+* Will be switching to 3.14 instead for LTS
 
-On Wed, May 28, 2014 at 03:34:29PM -0500, Dean wrote:
-> I think this broke my build? I am using dora rather than daisy or
-> master, so I was hoping to avoid problems.
-> 
-> Based on googling the error messages cryptodev might need to be
-> updated for 3.13+ kernels?
-> 
-> Build Configuration:
-> BB_VERSION        = "1.20.0"
-> BUILD_SYS         = "i686-linux"
-> NATIVELSBSTRING   = "Debian-7.5"
-> TARGET_SYS        = "arm-oe-linux-gnueabi"
-> MACHINE           = "am335x-evm"
-> DISTRO            = "arago"
-> DISTRO_VERSION    = "2014.05"
-> TUNE_FEATURES     = "armv7a vfp thumb neon callconvention-hard cortexa8"
-> TARGET_FPU        = "vfp-neon"
-> meta-arago-distro
-> meta-arago-extras = "master:dfd2d18aabc562c6cd22fac96e715b58167b19f0"
-> meta-qt5          = "dora:5b5616b63bdf163ea3eb2ca8857c56a393435fe3"
-> toolchain-layer
-> meta-networking
-> meta-ruby
-> meta-oe           = "dora:ee173678383683e972c7d4d6f0ef5790bfa50274"
-> meta-ti           = "dora:afabec7ba33b2b24298481d3325147b0f29a17fc"
-> meta-linaro-toolchain = "dora:503b1fe68f90a8e2b43c456ddd17a0a90816cf9c"
-> meta              = "dora:4c58fe468790822fe48e0a570779979c831d0f10"
-> meta-java         = "dora:d86d17c9d13d1117b484cb36f884709ce585a3e0"
-> ...
-> ERROR: Function failed: do_compile (log file is located at /home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/work/am335x_evm-oe-linux-gnueabi/cryptodev/1.6-r1-arago1/temp/log.do_compile.4071)
-> ERROR: Logfile of failure stored in: /home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/work/am335x_evm-oe-linux-gnueabi/cryptodev/1.6-r1-arago1/temp/log.do_compile.4071
-> Log data follows:
-> | DEBUG: Executing shell function do_compile
-> | NOTE: make -j 8 KERNEL_DIR=/home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/sysroots/am335x-evm/usr/src/kernel PREFIX=/home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/work/am335x_evm-oe-linux-gnueabi/cryptodev/1.6-r1-arago1/image KERNEL_PATH=/home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/sysroots/am335x-evm/usr/src/kernel KERNEL_SRC=/home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/sysroots/am335x-evm/usr/src/kernel
-> KERNEL_VERSION=3.15.0-rc6 CC=arm-linux-gnueabihf-gcc
-> -mno-thumb-interwork -marm LD=arm-linux-gnueabihf-ld.bfd
-> AR=arm-linux-gnueabihf-ar
-> | make -C /home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/sysroots/am335x-evm/usr/src/kernel
-> SUBDIRS=`pwd` ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- modules
-> | make[1]: Entering directory `/home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/sysroots/am335x-evm/usr/src/kernel'
-> | make[1]: warning: jobserver unavailable: using -j1.  Add `+' to
-> parent make rule.
-> |   CC [M] /home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/work/am335x_evm-oe-linux-gnueabi/cryptodev/1.6-r1-arago1/git/cryptlib.o
-> | */home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/work/am335x_evm-oe-linux-gnueabi/cryptodev/1.6-r1-arago1/git/cryptlib.c:
-> In function 'cryptodev_cipher_encrypt':**
-> **| /home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/work/am335x_evm-oe-linux-gnueabi/cryptodev/1.6-r1-arago1/git/cryptlib.c:223:2:
-> error: implicit declaration of function 'INIT_COMPLETION'
-> [-Werror=implicit-function-declaration]*
-> | cc1: some warnings being treated as errors
-> | make[2]: *** [/home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/work/am335x_evm-oe-linux-gnueabi/cryptodev/1.6-r1-arago1/git/cryptlib.o]
-> Error 1
-> | make[1]: *** [_module_/home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/work/am335x_evm-oe-linux-gnueabi/cryptodev/1.6-r1-arago1/git]
-> Error 2
-> | make[1]: Leaving directory `/home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/sysroots/am335x-evm/usr/src/kernel'
-> | make: *** [build] Error 2
-> | ERROR: oe_runmake failed
-> | WARNING: exit code 1 from a shell command.
-> | ERROR: Function failed: do_compile (log file is located at /home/deane/arago/tisdk-dora/build/arago-tmp-external-linaro-toolchain/work/am335x_evm-oe-linux-gnueabi/cryptodev/1.6-r1-arago1/temp/log.do_compile.4071)
-> ERROR: Task 2302 (/home/deane/arago/tisdk-dora/sources/meta-arago/meta-arago-extras/recipes-kernel/cryptodev/cryptodev_1.6.bb,
-> do_compile) failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 2387 tasks of which 2346 didn't need
-> to be rerun and 1 failed.
-> Waiting for 0 running tasks to finish:
-> 
-> Summary: 1 task failed:
-> /home/deane/arago/tisdk-dora/sources/meta-arago/meta-arago-extras/recipes-kernel/cryptodev/cryptodev_1.6.bb,
-> do_compile
-> Summary: There was 1 WARNING message shown.
-> Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-> 
-> Thanks,
-> Dean
-> 
-> On 5/23/2014 2:17 PM, Arago Project git wrote:
-> >Module: meta-ti
-> >Branch: dora
-> >Commit: 5548cad9ffb24e06f645c6c8ff843ba1b79c290d
-> >URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5548cad9ffb24e06f645c6c8ff843ba1b79c290d
-> >
-> >Author: Maupin, Chase <chase.maupin@ti.com>
-> >Date:   Fri May 23 02:08:33 2014 +0000
-> >
-> >linux-ti-staging: Add version 3.15 of TI integration kernel
-> >
-> >* Add version 3.15 of the TI integration kernel.  Major changes
-> >   from previous version are:
-> >     * Config fragments now come primarily from the integration
-> >       tree.  Removed baseport and connectivity fragments for now
-> >       and the others can be removed as they are added to the
-> >       integration tree.
-> >     * Added a non-smp.cfg config to disable SMP for single core
-> >       devices instead of using a patch to the defconfig file as
-> >       we did in the past.
-> >* Use the right SRCREV
-> >
-> >Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-> >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> >
-> >---
-> >
-> >  .../linux/linux-ti-staging-3.15/defconfig          |    1 +
-> >  recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg |   18 ++++++
-> >  .../linux/linux-ti-staging-3.15/non-smp.cfg        |    5 ++
-> >  .../linux/linux-ti-staging-3.15/systest.cfg        |   20 +++++++
-> >  recipes-kernel/linux/linux-ti-staging_3.15.bb      |   59 ++++++++++++++++++++
-> >  5 files changed, 103 insertions(+), 0 deletions(-)
-> >
-> >diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/defconfig b/recipes-kernel/linux/linux-ti-staging-3.15/defconfig
-> >new file mode 100644
-> >index 0000000..926b35a
-> >--- /dev/null
-> >+++ b/recipes-kernel/linux/linux-ti-staging-3.15/defconfig
-> >@@ -0,0 +1 @@
-> >+use-kernel-config=omap2plus_defconfig
-> >diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg b/recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg
-> >new file mode 100644
-> >index 0000000..645dfdf
-> >--- /dev/null
-> >+++ b/recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg
-> >@@ -0,0 +1,18 @@
-> >+##################################################
-> >+# IPC config options
-> >+##################################################
-> >+CONFIG_IOMMU_API=y
-> >+CONFIG_IOMMU_SUPPORT=y
-> >+CONFIG_OF_IOMMU=y
-> >+CONFIG_OMAP_IOMMU=y
-> >+CONFIG_OMAP_IOVMM=y
-> >+CONFIG_OMAP_IOMMU_DEBUG=y
-> >+CONFIG_VIRTIO=m
-> >+CONFIG_RPMSG=m
-> >+CONFIG_RPMSG_RPC=m
-> >+CONFIG_REMOTEPROC=m
-> >+CONFIG_OMAP_REMOTEPROC=m
-> >+CONFIG_OMAP_REMOTEPROC_IPU=y
-> >+CONFIG_OMAP_REMOTEPROC_DSP=y
-> >+CONFIG_OMAP_REMOTEPROC_IPU1=y
-> >+CONFIG_OMAP_REMOTEPROC_DSP2=y
-> >diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg b/recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg
-> >new file mode 100644
-> >index 0000000..d61a413
-> >--- /dev/null
-> >+++ b/recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg
-> >@@ -0,0 +1,5 @@
-> >+##################################################
-> >+# Non-SMP config options
-> >+##################################################
-> >+CONFIG_SMP=n
-> >+CONFIG_NR_CPUS=n
-> >diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/systest.cfg b/recipes-kernel/linux/linux-ti-staging-3.15/systest.cfg
-> >new file mode 100644
-> >index 0000000..e21602f
-> >--- /dev/null
-> >+++ b/recipes-kernel/linux/linux-ti-staging-3.15/systest.cfg
-> >@@ -0,0 +1,20 @@
-> >+##################################################
-> >+# Systest config options
-> >+##################################################
-> >+CONFIG_DEBUG_SPINLOCK=y
-> >+CONFIG_DEBUG_MUTEXES=y
-> >+CONFIG_DEBUG_KMEMLEAK=y
-> >+CONFIG_DEVKMEM=y
-> >+CONFIG_HAVE_DEBUG_KMEMLEAK=y
-> >+CONFIG_DEBUG_KMEMLEAK_EARLY_LOG_SIZE=400
-> >+CONFIG_DEBUG_KMEMLEAK_TEST=n
-> >+CONFIG_DEBUG_KMEMLEAK_DEFAULT_OFF=n
-> >+CONFIG_DEBUG_LOCK_ALLOC=y
-> >+CONFIG_DEBUG_INFO=y
-> >+CONFIG_DEBUG_FS=y
-> >+CONFIG_DEBUG_KERNEL=y
-> >+CONFIG_PM_DEBUG=y
-> >+CONFIG_DEBUG_GPIO=y
-> >+CONFIG_USB_DEBUG=y
-> >+CONFIG_SND_DEBUG=y
-> >+CONFIG_RTC_DEBUG=y
-> >diff --git a/recipes-kernel/linux/linux-ti-staging_3.15.bb b/recipes-kernel/linux/linux-ti-staging_3.15.bb
-> >new file mode 100644
-> >index 0000000..308a412
-> >--- /dev/null
-> >+++ b/recipes-kernel/linux/linux-ti-staging_3.15.bb
-> >@@ -0,0 +1,59 @@
-> >+SECTION = "kernel"
-> >+DESCRIPTION = "Linux kernel for TI devices"
-> >+LICENSE = "GPLv2"
-> >+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-> >+
-> >+inherit kernel
-> >+
-> >+require recipes-kernel/linux/linux-dtb.inc
-> >+require recipes-kernel/linux/setup-defconfig.inc
-> >+
-> >+# Look in the generic major.minor directory for files
-> >+FILESEXTRAPATHS_append := "${THISDIR}/${PN}-3.15:"
-> >+
-> >+# Pull in the devicetree files into the rootfs
-> >+RDEPENDS_kernel-base += "kernel-devicetree"
-> >+
-> >+# Add a run-time dependency for the PM firmware to be installed
-> >+# on the target file system.
-> >+RDEPENDS_kernel-base_append_ti33x = " am33x-cm3"
-> >+RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
-> >+
-> >+# Add a run-time dependency for the VPE VPDMA firmware to be installed
-> >+# on the target file system.
-> >+RDEPENDS_kernel-base_append_dra7xx-evm = " vpe-vpdma-fw"
-> >+
-> >+# Default is to package all dtb files for ti33x devices unless building
-> >+# for the specific beaglebone machine.
-> >+KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
-> >+KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb"
-> >+KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
-> >+KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
-> >+KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
-> >+
-> >+KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
-> >+
-> >+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
-> >+
-> >+S = "${WORKDIR}/git"
-> >+
-> >+BRANCH = "ti-linux-3.15.y"
-> >+
-> >+SRCREV = "3fd9aad17d3b4d1d7ee50ae788c0a096921e7216"
-> >+PV = "3.14+3.15-rc6"
-> >+
-> >+# Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
-> >+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-> >+PR = "${MACHINE_KERNEL_PR}"
-> >+
-> >+KERNEL_CONFIG_DIR = "ti_config_fragments"
-> >+KERNEL_CONFIG_FRAGMENTS = "${WORKDIR}/ipc.cfg"
-> >+KERNEL_CONFIG_FRAGMENTS_append_ti33x = "${WORKDIR}/non-smp.cfg"
-> >+KERNEL_CONFIG_FRAGMENTS_append_ti43x = "${WORKDIR}/non-smp.cfg"
-> >+
-> >+SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-> >+           file://defconfig \
-> >+           file://ipc.cfg \
-> >+           file://systest.cfg \
-> >+           file://non-smp.cfg \
-> >+          "
-> >
-> 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging_3.15.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.15.bb b/recipes-kernel/linux/linux-ti-staging_3.15.bb
+index a55b581..64db8da 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.15.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.15.bb
+@@ -3,6 +3,8 @@ DESCRIPTION = "Linux kernel for TI devices"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ 
++DEFAULT_PREFERENCE = "-1"
++
+ inherit kernel
+ 
+ require recipes-kernel/linux/linux-dtb.inc
+-- 
+1.9.3
 
 
