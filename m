@@ -1,24 +1,40 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 39BC3E00C00; Thu, 29 May 2014 12:14:02 -0700 (PDT)
+	id 29188E00BBF; Thu, 29 May 2014 19:03:36 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.4 required=5.0 tests=RDNS_DYNAMIC autolearn=no
-	version=3.3.1
-X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
-	with *      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1652CE00BEA
-	for <meta-ti@yoctoproject.org>; Thu, 29 May 2014 12:13:51 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id C1F5952A23; Thu, 29 May 2014 19:13:50 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20140529191350.C1F5952A23@arago-project.org>
-Date: Thu, 29 May 2014 19:13:50 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Hao Zhang : keystone: u-boot: add build support for EMIF16 NAND gph image
+X-Spam-Status: No, score=-3.9 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 776CFE00B71
+	for <meta-ti@yoctoproject.org>; Thu, 29 May 2014 19:03:27 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s4U23RSZ003794
+	for <meta-ti@yoctoproject.org>; Thu, 29 May 2014 21:03:27 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s4U23RXU018615
+	for <meta-ti@yoctoproject.org>; Thu, 29 May 2014 21:03:27 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 29 May 2014 21:03:26 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s4U23QZZ026290	for <meta-ti@yoctoproject.org>; Thu, 29 May 2014 21:03:26
+	-0500
+Date: Thu, 29 May 2014 21:47:21 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1772688852.109.1401414441977.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-05-29_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,82 +47,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 May 2014 19:14:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 30 May 2014 02:03:36 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_108_1335625194.1401414441970"
 
-Module: meta-ti
-Branch: dora
-Commit: 882c2acca78720af91c9c231cb576aa42bc7386f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=882c2acca78720af91c9c231cb576aa42bc7386f
+------=_Part_108_1335625194.1401414441970
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Author: Hao Zhang <hzhang@ti.com>
-Date:   Thu May 29 00:49:05 2014 +0000
+<html>
+<head>
+<title>
+Status for 05/29/14
+</title>
+</head>
+<body>
 
-keystone: u-boot: add build support for EMIF16 NAND gph image
+<h2>Status for 05/29/14</h2>
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+<h2>BUILD_ID: build-2014-05-29_21-01-45</h2>
 
----
+<h2>Clean Build: false</h2>
 
- recipes-bsp/u-boot/u-boot-keystone_2013.01.bb |   15 +++++++++++++--
- 1 files changed, 13 insertions(+), 2 deletions(-)
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-index 5e5eb51..37f7738 100644
---- a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-@@ -4,7 +4,7 @@ DESCRIPTION = "u-boot bootloader for Multi-Core BU devices"
- 
- COMPATIBLE_MACHINE = "keystone"
- 
--PR = "r4+gitr${SRCPV}"
-+PR = "r5+gitr${SRCPV}"
- 
- # Tag "K2_UBOOT_2013_01_14.05_16"
- SRCREV = "fee500417b989fc9906d86e377b4d3d96033d54e"
-@@ -15,12 +15,13 @@ SRC_URI = "git://git.ti.com/keystone-linux/u-boot.git;protocol=git;branch=${BRAN
- S = "${WORKDIR}/git"
- 
- UBOOT_SUFFIX = "bin"
--UBOOT_MAKE_TARGET = "u-boot-spi.gph"
-+UBOOT_MAKE_TARGET = "u-boot-spi.gph u-boot-nand.gph"
- 
- # SPI NOR Flash binaries
- UBOOT_SPI_SPL_BINARY = "u-boot-spl.bin"
- UBOOT_SPI_BINARY = "u-boot.img"
- UBOOT_SPI_GPH_BINARY = "u-boot-spi.gph"
-+UBOOT_NAND_GPH_BINARY = "u-boot-nand.gph"
- 
- # SPI NOR Flash deployed images
- UBOOT_SPI_SPL_IMAGE = "u-boot-spl-${MACHINE}-${PV}-${PR}.bin"
-@@ -29,6 +30,8 @@ UBOOT_SPI_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
- UBOOT_SPI_SYMLINK = "u-boot-${MACHINE}.img"
- UBOOT_SPI_GPH_IMAGE = "u-boot-spi-${MACHINE}-${PV}-${PR}.gph"
- UBOOT_SPI_GPH_SYMLINK = "u-boot-spi-${MACHINE}.gph"
-+UBOOT_NAND_GPH_IMAGE = "u-boot-nand-${MACHINE}-${PV}-${PR}.gph"
-+UBOOT_NAND_GPH_SYMLINK = "u-boot-nand-${MACHINE}.gph"
- 
- do_install_append () {
- 	install ${S}/spl/${UBOOT_SPI_SPL_BINARY} ${D}/boot/${UBOOT_SPI_SPL_IMAGE}
-@@ -39,6 +42,9 @@ do_install_append () {
- 
- 	install ${S}/${UBOOT_SPI_GPH_BINARY} ${D}/boot/${UBOOT_SPI_GPH_IMAGE}
- 	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${D}/boot/${UBOOT_SPI_GPH_BINARY}
-+
-+        install ${S}/${UBOOT_NAND_GPH_BINARY} ${D}/boot/${UBOOT_NAND_GPH_IMAGE}
-+        ln -sf ${UBOOT_NAND_GPH_IMAGE} ${D}/boot/${UBOOT_NAND_GPH_BINARY}
- }
- 
- do_deploy_append () {
-@@ -56,4 +62,9 @@ do_deploy_append () {
- 	rm -f ${UBOOT_SPI_GPH_BINARY} ${UBOOT_SPI_GPH_SYMLINK}
- 	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_SYMLINK}
- 	ln -sf ${UBOOT_SPI_GPH_IMAGE} ${UBOOT_SPI_GPH_BINARY}
-+
-+        install ${S}/${UBOOT_NAND_GPH_BINARY} ${DEPLOYDIR}/${UBOOT_NAND_GPH_IMAGE}
-+        rm -f ${UBOOT_NAND_GPH_BINARY} ${UBOOT_NAND_GPH_SYMLINK}
-+        ln -sf ${UBOOT_NAND_GPH_IMAGE} ${UBOOT_NAND_GPH_SYMLINK}
-+        ln -sf ${UBOOT_NAND_GPH_IMAGE} ${UBOOT_NAND_GPH_BINARY}
- }
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=red>FAILED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.05"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_108_1335625194.1401414441970--
