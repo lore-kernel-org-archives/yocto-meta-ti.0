@@ -1,55 +1,40 @@
-Return-Path: <dgross@intronik.de>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A7680E00B66; Tue,  3 Jun 2014 02:57:34 -0700 (PDT)
+	id 38EC0E00BE0; Tue,  3 Jun 2014 19:01:56 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU, HTML_MESSAGE,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [209.85.213.180 listed in list.dnswl.org]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
-	[209.85.213.180])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A590DE00AFD
-	for <meta-ti@yoctoproject.org>; Tue,  3 Jun 2014 02:57:33 -0700 (PDT)
-Received: by mail-ig0-f180.google.com with SMTP id c1so4548557igq.1
-	for <meta-ti@yoctoproject.org>; Tue, 03 Jun 2014 02:57:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intronik.de; s=intronik;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=1nldor9pqHWUj46xPFxq1C0d75t1Hpldqfi9Sm3nJ4Q=;
-	b=EgAy/B7/YPApPkPZHwDnbTeg1P/viElzg+qKyiVAYrrgcTc4T6RHa3BE5XzKiG7Yv3
-	h8zX+j+ZRmHXS6FcT5zMYUQSsoCUEkJV6Xuchl5uCrK0BEwVCGYvmrIo3I5BIpry9AZI
-	BweIZd7RlJOSYzTvkiOpLgVLRYPvR8g6aKfww=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=1nldor9pqHWUj46xPFxq1C0d75t1Hpldqfi9Sm3nJ4Q=;
-	b=Zq+Q3SPcnL7zFIc76ETT+RGU97vkhsrrKg4QQAyFRdLUfEkIr95SFLQxd9zXlXeu3B
-	JzfSG83SXdhpy3wwLNCAMCAitpTPOJjrcjhCJgb4Zt2EH7NQ5ARWqsOYTxOD09yoLves
-	K77ZIOLl4C3NpO4M5eNiF9fEmaYXKDfnwU6B6wN0YJrhiQeytoAQzYCUVG8N212MrvJi
-	QHcNgAqgqWp1tTEoL8rTUrPp+YdZ4uQB+sURZl8wMeWmyVaJoiwPvTCndlYi8CntINQh
-	CMHRFQZ6Xhjcn1UkHKrRSUndSi1o0WO5Y2DTVq7dqmT14U++9b8hds6OvcExUs2sBD/m
-	yG6A==
-X-Gm-Message-State: ALoCoQne7326ynXw3LUENQGYUfOhRWTO+O/7qySjAdxqNJ3gdXZRg/2KErYSe0ISjMWjNp8QrAw8
+X-Spam-Status: No, score=-3.9 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: *  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCE06E00B5C
+	for <meta-ti@yoctoproject.org>; Tue,  3 Jun 2014 19:01:46 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5421jNT021035
+	for <meta-ti@yoctoproject.org>; Tue, 3 Jun 2014 21:01:45 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5421jan019615
+	for <meta-ti@yoctoproject.org>; Tue, 3 Jun 2014 21:01:45 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 3 Jun 2014 21:01:45 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s5421j5s014296	for <meta-ti@yoctoproject.org>;
+	Tue, 3 Jun 2014 21:01:45 -0500
+Date: Tue, 3 Jun 2014 21:45:32 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <333461204.135.1401846332870.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-X-Received: by 10.50.18.12 with SMTP id s12mr10472498igd.22.1401789452474;
-	Tue, 03 Jun 2014 02:57:32 -0700 (PDT)
-Received: by 10.64.27.136 with HTTP; Tue, 3 Jun 2014 02:57:32 -0700 (PDT)
-Date: Tue, 3 Jun 2014 11:57:32 +0200
-Message-ID: <CAJ0JmfUT1z7Y5QZthVamzsTBqMZ-L2RZvNAEdbc1A0iuFVY7vg@mail.gmail.com>
-From: =?UTF-8?B?RGFuaWVsIEdyb8Of?= <dgross@intronik.de>
-To: meta-ti@yoctoproject.org
-Subject: beaglebone black usb device problem (daisy)
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-06-03_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -62,126 +47,169 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Jun 2014 09:57:34 -0000
-Content-Type: multipart/alternative; boundary=089e014947b45d73d004faeb8a61
+X-List-Received-Date: Wed, 04 Jun 2014 02:01:56 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_134_835528591.1401846332867"
 
---089e014947b45d73d004faeb8a61
-Content-Type: text/plain; charset=UTF-8
+------=_Part_134_835528591.1401846332867
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hello there,
-I have successfully build several beaglebone (qt4embedded demo and
-sato+mono hard float) images using yocto 1.6 (daisy) for the beagle bone
-black.
+<html>
+<head>
+<title>
+Status for 06/03/14
+</title>
+</head>
+<body>
 
-However USB devices (mouse, keyboard, anything) are only found during the
-first boot.
+<h2>Status for 06/03/14</h2>
 
-I narrowed the problem down to the file "/etc/udev/cache.data". If I remove
-this file and boot again (using the serial console), USB works once for the
-next boot process.
+<h2>BUILD_ID: build-2014-06-03_21-01-39</h2>
 
-After some try and error, I was able to restart the USB enumeration by
-issuing a "udevadm trigger" command again using the serial console. That
-always works. To me it seems that USB root hub is not loaded by udev if the
-/etc/udev/cache.data file exists.
+<h2>Clean Build: false</h2>
 
-The output of the trigger command is:
-root@beaglebone:~# udevadm trigger
-udevadm trigger
-47401300.usb-phy supply vcc not found, using dummy regulator
-47401b00.usb-phy supply vcc not found, using dummy regulator
-omap_rng 48310000.rng: OMAP Random Number Generator ver. 20
-root@beaglebone:~# musb-hdrc musb-hdrc.0.auto: MUSB HDRC host driver
-musb-hdrc musb-hdrc.0.auto: new USB bus registered, assigned bus number 1
-hub 1-0:1.0: USB hub found
-hub 1-0:1.0: 1 port detected
-musb-hdrc musb-hdrc.1.auto: MUSB HDRC host driver
-musb-hdrc musb-hdrc.1.auto: new USB bus registered, assigned bus number 2
-hub 2-0:1.0: USB hub found
-hub 2-0:1.0: 1 port detected
-usb 2-1: new low-speed USB device number 2 using musb-hdrc
-input: Logitech USB Optical Mouse as
-/devices/ocp.3/47400000.usb/47401c00.usb/musb-hdrc.1.auto/usb2/2-1/2-1:1.0/0003:046D:C00C.0001/input/input0
-hid-generic 0003:046D:C00C.0001: input: USB HID v1.10 Mouse [Logitech USB
-Optical Mouse] on usb-musb-hdrc.1.auto-1/input0
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-The content of the /etc/udev/cache.data file is:
-root@beaglebone:~# cat /etc/udev/cache.data
-cat /etc/udev/cache.data
-Linux version 3.14.0-yocto-standard (daniel@daniel-ubuntu) (gcc version
-4.8.2 (GCC) ) #1 PREEMPT Sat May 24 16:40:23 CEST
-2014console=ttyO0,115200n8 root=/dev/mmcblk0p2 ro rootfstype=ext4
-rootwaitCharacter devices:1 mem2 pty3 ttyp4 /dev/vc/04 tty5 /dev/tty5
-/dev/console5 /dev/ptmx7 vcs10 misc13 input29 fb89 i2c90 mtd128 ptm136
-pts180 usb189 usb_device226 drm250 ttySDIO251 ttyO252 bsg253 watchdog254
-rtcBlock devices:1 ramdisk259 blkext8 sd31 mtdblock65 sd66 sd67 sd68 sd69
-sd70 sd71 sd128 sd129 sd130 sd131 sd132 sd133 sd134 sd135 sd179 mmc
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.05"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
+OPENTEST_TEE_IP="10.218.102.142"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-For the sake of completeness:
-root@beaglebone:~# uname -a
-uname -a
-Linux beaglebone 3.14.0-yocto-standard #1 PREEMPT Sat May 24 16:40:23 CEST
-2014 armv7l GNU/Linux
-
-
-Did anyone else see these problems? And is this a bug - or a feature?
-
-
-Daniel
-
---089e014947b45d73d004faeb8a61
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hello there,</div><div>I have successfully build seve=
-ral beaglebone (qt4embedded demo and sato+mono hard float) images using yoc=
-to 1.6 (daisy) for the beagle bone black.</div><div><br></div><div>However =
-USB devices (mouse, keyboard, anything) are only found during the first boo=
-t.</div>
-<div><br></div><div>I narrowed the problem down to the file &quot;/etc/udev=
-/cache.data&quot;. If I remove this file and boot again (using the serial c=
-onsole), USB works once for the next boot process.</div><div><br></div>
-<div>After some try and error, I was able to restart the USB enumeration by=
- issuing a &quot;udevadm trigger&quot; command again using the serial conso=
-le. That always works. To me it seems that USB root hub is not loaded by ud=
-ev if the /etc/udev/cache.data file exists.</div>
-<div><br></div><div>The output of the trigger command is:</div><div>root@be=
-aglebone:~# udevadm trigger<br></div><div><div>udevadm trigger</div><div>47=
-401300.usb-phy supply vcc not found, using dummy regulator</div><div>47401b=
-00.usb-phy supply vcc not found, using dummy regulator</div>
-<div>omap_rng 48310000.rng: OMAP Random Number Generator ver. 20</div><div>=
-root@beaglebone:~# musb-hdrc musb-hdrc.0.auto: MUSB HDRC host driver</div><=
-div>musb-hdrc musb-hdrc.0.auto: new USB bus registered, assigned bus number=
- 1</div>
-<div>hub 1-0:1.0: USB hub found</div><div>hub 1-0:1.0: 1 port detected</div=
-><div>musb-hdrc musb-hdrc.1.auto: MUSB HDRC host driver</div><div>musb-hdrc=
- musb-hdrc.1.auto: new USB bus registered, assigned bus number 2</div><div>
-hub 2-0:1.0: USB hub found</div><div>hub 2-0:1.0: 1 port detected</div><div=
->usb 2-1: new low-speed USB device number 2 using musb-hdrc</div><div>input=
-: Logitech USB Optical Mouse as /devices/ocp.3/47400000.usb/47401c00.usb/mu=
-sb-hdrc.1.auto/usb2/2-1/2-1:1.0/0003:046D:C00C.0001/input/input0</div>
-<div>hid-generic 0003:046D:C00C.0001: input: USB HID v1.10 Mouse [Logitech =
-USB Optical Mouse] on usb-musb-hdrc.1.auto-1/input0</div></div><div><br></d=
-iv><div>The content of the /etc/udev/cache.data file is:</div><div><div>
-root@beaglebone:~# cat /etc/udev/cache.data</div><div>cat /etc/udev/cache.d=
-ata</div><div>Linux version 3.14.0-yocto-standard (daniel@daniel-ubuntu) (g=
-cc version 4.8.2 (GCC) ) #1 PREEMPT Sat May 24 16:40:23 CEST 2014console=3D=
-ttyO0,115200n8 root=3D/dev/mmcblk0p2 ro rootfstype=3Dext4 rootwaitCharacter=
- devices:1 mem2 pty3 ttyp4 /dev/vc/04 tty5 /dev/tty5 /dev/console5 /dev/ptm=
-x7 vcs10 misc13 input29 fb89 i2c90 mtd128 ptm136 pts180 usb189 usb_device22=
-6 drm250 ttySDIO251 ttyO252 bsg253 watchdog254 rtcBlock devices:1 ramdisk25=
-9 blkext8 sd31 mtdblock65 sd66 sd67 sd68 sd69 sd70 sd71 sd128 sd129 sd130 s=
-d131 sd132 sd133 sd134 sd135 sd179 mmc</div>
-<div><br></div></div><div><br></div><div>For the sake of completeness:</div=
-><div><div>root@beaglebone:~# uname -a</div><div>uname -a</div><div>Linux b=
-eaglebone 3.14.0-yocto-standard #1 PREEMPT Sat May 24 16:40:23 CEST 2014 ar=
-mv7l GNU/Linux</div>
-</div><div><br></div><div><br></div><div>Did anyone else see these problems=
-? And is this a bug - or a feature?</div><div><br></div><div><div dir=3D"lt=
-r"><span style=3D"background-color:rgb(255,255,255)"><br>Daniel<br><br></sp=
-an></div>
-</div>
-</div>
-
---089e014947b45d73d004faeb8a61--
+------=_Part_134_835528591.1401846332867--
