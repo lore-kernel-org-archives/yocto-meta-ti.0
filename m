@@ -1,40 +1,50 @@
-Return-Path: <denys@ti.com>
+Return-Path: <chase.maupin@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 38EC0E00BE0; Tue,  3 Jun 2014 19:01:56 -0700 (PDT)
+	id DF17EE00BE0; Wed,  4 Jun 2014 06:49:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
-	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: *  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
+X-Spam-Status: No, score=-5.0 required=5.0 tests=RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
 	*      [192.94.94.40 listed in list.dnswl.org]
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCE06E00B5C
-	for <meta-ti@yoctoproject.org>; Tue,  3 Jun 2014 19:01:46 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E705E00B68
+	for <meta-ti@yoctoproject.org>; Wed,  4 Jun 2014 06:48:59 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5421jNT021035
-	for <meta-ti@yoctoproject.org>; Tue, 3 Jun 2014 21:01:45 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5421jan019615
-	for <meta-ti@yoctoproject.org>; Tue, 3 Jun 2014 21:01:45 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 3 Jun 2014 21:01:45 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s5421j5s014296	for <meta-ti@yoctoproject.org>;
-	Tue, 3 Jun 2014 21:01:45 -0500
-Date: Tue, 3 Jun 2014 21:45:32 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <333461204.135.1401846332870.JavaMail.jenkins@puget>
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s54Dmw7P022840
+	for <meta-ti@yoctoproject.org>; Wed, 4 Jun 2014 08:48:58 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s54DmwIj026824
+	for <meta-ti@yoctoproject.org>; Wed, 4 Jun 2014 08:48:58 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
+	14.03.0174.001; Wed, 4 Jun 2014 08:48:58 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>, "Zhang, Hao" <hzhang@ti.com>
+Thread-Topic: [meta-ti] [PATCH] boot-monitor: add K2L and K2E boot monitor
+	build support
+Thread-Index: AQHPb6bsndqH52iPMEeqhXPNDssciptAfOBAgABgjQCAANTj0IAAFesAgAAEmrCAAAVLD4AAAV+wgAAD5u+AH0BZkA==
+Date: Wed, 4 Jun 2014 13:48:57 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015D08BE4C@DLEE11.ent.ti.com>
+References: <5374D230.6090002@ti.com> <20140515145432.GR18053@edge>
+	<5374D81B.7020909@ti.com> <5374DF89.1040105@ti.com>
+	<7D46E86EC0A8354091174257B2FED1015D01C00A@DLEE11.ent.ti.com>
+	<5374E5F7.2080705@ti.com> <20140515161137.GS18053@edge>
+	<5374E7D6.4010901@ti.com>
+	<7D46E86EC0A8354091174257B2FED1015D01C3E0@DLEE11.ent.ti.com>
+	<5374EAA5.9060100@ti.com> <20140515163305.GT18053@edge>
+In-Reply-To: <20140515163305.GT18053@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-06-03_21-00-30
+Cc: "Rini, Tom" <trini@ti.com>,
+	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	"Shilimkar, Santosh" <santosh.shilimkar@ti.com>
+Subject: Re: [PATCH] boot-monitor: add K2L and K2E boot monitor build support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,169 +57,154 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2014 02:01:56 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_134_835528591.1401846332867"
+X-List-Received-Date: Wed, 04 Jun 2014 13:49:05 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_134_835528591.1401846332867
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+>-----Original Message-----
+>From: Dmytriyenko, Denys
+>Sent: Thursday, May 15, 2014 11:33 AM
+>To: Zhang, Hao
+>Cc: Maupin, Chase; Shilimkar, Santosh; Rini, Tom; meta-
+>ti@yoctoproject.org
+>Subject: Re: [meta-ti] [PATCH] boot-monitor: add K2L and K2E boot
+>monitor build support
+>
+>On Thu, May 15, 2014 at 12:26:13PM -0400, Hao Zhang wrote:
+>> On 5/15/2014 12:22 PM, Maupin, Chase wrote:
+>> >> -----Original Message-----
+>> >> From: Shilimkar, Santosh
+>> >> Sent: Thursday, May 15, 2014 11:14 AM
+>> >> To: Dmytriyenko, Denys
+>> >> Cc: Maupin, Chase; Zhang, Hao; Rini, Tom; meta-
+>ti@yoctoproject.org
+>> >> Subject: Re: [meta-ti] [PATCH] boot-monitor: add K2L and K2E
+>boot
+>> >> monitor build support
+>> >>
+>> >> On Thursday 15 May 2014 12:11 PM, Denys Dmytriyenko wrote:
+>> >>> On Thu, May 15, 2014 at 12:06:15PM -0400, Santosh Shilimkar
+>> >> wrote:
+>> >>>> On Thursday 15 May 2014 11:56 AM, Maupin, Chase wrote:
+>> >>>>>> -----Original Message-----
+>> >>>>>> From: Shilimkar, Santosh
+>> >>>>>> Sent: Thursday, May 15, 2014 10:39 AM
+>> >>>>>> To: Zhang, Hao; Dmytriyenko, Denys
+>> >>>>>> Cc: Maupin, Chase; Rini, Tom; meta-ti@yoctoproject.org
+>> >>>>>> Subject: Re: [meta-ti] [PATCH] boot-monitor: add K2L and
+>K2E
+>> >> boot
+>> >>>>>> monitor build support
+>> >>>>>>
+>> >>>>>> On Thursday 15 May 2014 11:07 AM, Hao Zhang wrote:
+>> >>>>>>> On 5/15/2014 10:54 AM, Denys Dmytriyenko wrote:
+>> >>>>>>>> On Thu, May 15, 2014 at 10:41:52AM -0400, Hao Zhang
+>wrote:
+>> >>>>>>
+>> >>>>>> [..]
+>> >>>>>>
+>> >>>>>>>>>> Can you clarify if you really want all 3 devices
+>> >> installed
+>> >>>>>> all the time or
+>> >>>>>>>>>> do you really want a recipe that installs the boot
+>> >> monitor
+>> >>>>>> per device?  I
+>> >>>>>>>>>> know you don't currently have 3 machine types so
+>maybe
+>> >> that
+>> >>>>>> is what is
+>> >>>>>>>>>> feeding your issue here, but my question is whether
+>you
+>> >> need
+>> >>>>>> to have
+>> >>>>>>>>>> separate builds per device.
+>> >>>>>>>>>>
+>> >>>>>>>>>
+>> >>>>>>>>> I want all the 3 boot monitors built and installed all
+>the
+>> >>>>>> time in one
+>> >>>>>>>>> recipe, since MCSDK 3.1 supports all the 3 Keystone II
+>> >> devices
+>> >>>>>> in the
+>> >>>>>>>>> same release package. This applies to the U-boot (3 U-
+>boot
+>> >>>>>> build for all
+>> >>>>>>>>> the 3 Keystone II devices) and Linux kernel DTB.
+>> >>>>>>>>
+>> >>>>>>>> Linux kernel has support for board variations through
+>DTBs,
+>> >>>>>> obviously.
+>> >>>>>>>>
+>> >>>>>>>> As of U-boot, in Sitara world we had to manage board
+>> >> variations
+>> >>>>>> by detecting
+>> >>>>>>>> the board at runtime. So, the same single binary would
+>work
+>> >> on
+>> >>>>>> AM335x-EVM,
+>> >>>>>>>> AM335x-SK, BeagleBone White and BeagleBone Black.
+>> >>>>>>>>
+>> >>>>>>>> I would recommend you working with Tom Rini and doing
+>it
+>> >>>>>> similarly, so you
+>> >>>>>>>> don't have to build 3 different binaries for 3 slightly
+>> >>>>>> different Keystone
+>> >>>>>>>> baords...
+>> >>>>>>>>
+>> >>>>>>>>
+>> >>>>>> Three boars for same SOC is different than 3 different
+>SOCs
+>> >> with
+>> >>>>>> their
+>> >>>>>> own boards. We need to support different u-boot configs
+>for
+>> >> that.
+>> >>>>>> And
+>> >>>>>> upstream of the patches work is already in progress with
+>Tom
+>> >>>>>> reviewing
+>> >>>>>> the patches.
+>> >>>>>
+>> >>>>> So which one is it?  Is this a case of three boards for a
+>> >> single SoC or 3 SoCs with their own boards?
+>> >>>>>
+>> >>>> I was just saying you AM example was multiple board for 1
+>SOC.
+>> >> What Hao is talking
+>> >>>> '3 SOCs with their own boards.
+>> >>>
+>> >>> If those are 3 different SOCs (not just spins or diff part
+>#s),
+>> >> then we should
+>> >>> consider creating 3 different OE machine configs.
+>> >>>
+>> >> yes they are 3 different SOCs with different capabilities
+>> >
+>> > Then Denys is right.  We should have 3 different OE machine
+>configs which all share an SOC_FAMILY of "keystone".  That way
+>they can re-use as much as possible, but unique differences such
+>as the bootloader, example apps, etc can be easily handled.
+>> >
+>>
+>> Can you show me an example how to do that?
+>
+>meta-ti layer, conf/machine for machine configs and
+>conf/machine/include for
+>SOC configs.
+>
+>examples would be:
+>
+>- am335x-evm.conf and beaglebone.conf both use ti33x.inc SOC
+>definition
+>- dra7xx-evm.conf and omap5-evm.conf both use omap-a15.inc SOC
 
-<html>
-<head>
-<title>
-Status for 06/03/14
-</title>
-</head>
-<body>
+Denys,
 
-<h2>Status for 06/03/14</h2>
+Is there something outstanding here?  Does this patch need to be revamped n=
+ow that we have individual machine types?
 
-<h2>BUILD_ID: build-2014-06-03_21-01-39</h2>
+>
+>--
+>Denys
 
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.05"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
-
-
-------=_Part_134_835528591.1401846332867--
