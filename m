@@ -1,47 +1,57 @@
-Return-Path: <denys@ti.com>
+Return-Path: <cliff.brake@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BAFE4E00B6F; Wed,  4 Jun 2014 08:04:56 -0700 (PDT)
+	id 24719E00B74; Wed,  4 Jun 2014 13:34:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.0 required=5.0 tests=RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 40425E00B68
-	for <meta-ti@yoctoproject.org>; Wed,  4 Jun 2014 08:04:54 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s54F4rF8007216
-	for <meta-ti@yoctoproject.org>; Wed, 4 Jun 2014 10:04:53 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s54F4rSY004451
-	for <meta-ti@yoctoproject.org>; Wed, 4 Jun 2014 10:04:53 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 4 Jun 2014 10:04:52 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s54F4qau001841;
-	Wed, 4 Jun 2014 10:04:53 -0500
-Date: Wed, 4 Jun 2014 11:04:52 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Maupin, Chase" <chase.maupin@ti.com>
-Message-ID: <20140604150452.GG21819@edge>
-References: <5374D81B.7020909@ti.com> <5374DF89.1040105@ti.com>
-	<7D46E86EC0A8354091174257B2FED1015D01C00A@DLEE11.ent.ti.com>
-	<5374E5F7.2080705@ti.com> <20140515161137.GS18053@edge>
-	<5374E7D6.4010901@ti.com>
-	<7D46E86EC0A8354091174257B2FED1015D01C3E0@DLEE11.ent.ti.com>
-	<5374EAA5.9060100@ti.com> <20140515163305.GT18053@edge>
-	<7D46E86EC0A8354091174257B2FED1015D08BE4C@DLEE11.ent.ti.com>
+X-Spam-Status: No, score=-0.8 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU, FREEMAIL_FROM, MIME_QP_LONG_LINE,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (cliff.brake[at]gmail.com)
+	* 0.0 MIME_QP_LONG_LINE RAW: Quoted-printable line longer than 76 chars
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.223.172 listed in list.dnswl.org]
+Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
+	[209.85.223.172])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D6741E00B6A
+	for <meta-ti@yoctoproject.org>; Wed,  4 Jun 2014 13:34:10 -0700 (PDT)
+Received: by mail-ie0-f172.google.com with SMTP id tp5so33083ieb.31
+	for <meta-ti@yoctoproject.org>; Wed, 04 Jun 2014 13:34:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:mime-version:message-id:from:to:subject:content-type
+	:content-transfer-encoding;
+	bh=lDAl0aY+oys1Wko7y53xTSv9x+6WNxLmxpxGgaNXfcI=;
+	b=rTQAW36rUm5/7kCSHvppemzjKzbRrlz4HPUpzojXc2OYs/PggCB1kIwlpJwbI8wU2i
+	x//rMBJBXEvtyavOPlDyF2YzOci8UvCyk2aL3C8TjQv1i8foMwmOeckfD67Vz4AeaV3+
+	+IKSGMyX+JjguyrqCmLRee3cVD6NndUC2ZDvv+w0oC+06WUKo51/kfnQL0nwSDFyU7xq
+	WU6H871H28Q0XclanLh37FD3qNvQlJJpIR/iR0HzOT3N4eObVboGZ/8f1rGFhFJsoMlH
+	tiRnFvRMjwXvH0G6oLlHxASLTv9g5cLMc5BaOxJqXQ3hF9F9oo2c/TdOpN/a3hPhiZpd
+	ojAQ==
+X-Received: by 10.50.152.98 with SMTP id ux2mr11227154igb.27.1401914049526;
+	Wed, 04 Jun 2014 13:34:09 -0700 (PDT)
+Received: from happy.bec-systems.com (cable-pool6-cs-200.doycomm.com.
+	[66.219.185.200])
+	by mx.google.com with ESMTPSA id q5sm47536115igg.10.2014.06.04.13.34.07
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 04 Jun 2014 13:34:08 -0700 (PDT)
+Date: Wed, 04 Jun 2014 13:34:08 -0700 (PDT)
+X-Google-Original-Date: Wed, 04 Jun 2014 20:34:07 GMT
 MIME-Version: 1.0
-In-Reply-To: <7D46E86EC0A8354091174257B2FED1015D08BE4C@DLEE11.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "Rini, Tom" <trini@ti.com>,
-	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-	"Shilimkar, Santosh" <santosh.shilimkar@ti.com>
-Subject: Re: [PATCH] boot-monitor: add K2L and K2E boot monitor build support
+X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
+Message-Id: <1401914047070.ad70ade6@Nodemailer>
+From: cliff.brake@gmail.com
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
+Subject: OE Changelog since 2014-05-25 until 2014-06-01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -54,156 +64,380 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2014 15:04:56 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Jun 2014 20:34:17 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 04, 2014 at 09:48:57AM -0400, Maupin, Chase wrote:
-> >-----Original Message-----
-> >From: Dmytriyenko, Denys
-> >Sent: Thursday, May 15, 2014 11:33 AM
-> >To: Zhang, Hao
-> >Cc: Maupin, Chase; Shilimkar, Santosh; Rini, Tom; meta-
-> >ti@yoctoproject.org
-> >Subject: Re: [meta-ti] [PATCH] boot-monitor: add K2L and K2E boot
-> >monitor build support
-> >
-> >On Thu, May 15, 2014 at 12:26:13PM -0400, Hao Zhang wrote:
-> >> On 5/15/2014 12:22 PM, Maupin, Chase wrote:
-> >> >> -----Original Message-----
-> >> >> From: Shilimkar, Santosh
-> >> >> Sent: Thursday, May 15, 2014 11:14 AM
-> >> >> To: Dmytriyenko, Denys
-> >> >> Cc: Maupin, Chase; Zhang, Hao; Rini, Tom; meta-
-> >ti@yoctoproject.org
-> >> >> Subject: Re: [meta-ti] [PATCH] boot-monitor: add K2L and K2E
-> >boot
-> >> >> monitor build support
-> >> >>
-> >> >> On Thursday 15 May 2014 12:11 PM, Denys Dmytriyenko wrote:
-> >> >>> On Thu, May 15, 2014 at 12:06:15PM -0400, Santosh Shilimkar
-> >> >> wrote:
-> >> >>>> On Thursday 15 May 2014 11:56 AM, Maupin, Chase wrote:
-> >> >>>>>> -----Original Message-----
-> >> >>>>>> From: Shilimkar, Santosh
-> >> >>>>>> Sent: Thursday, May 15, 2014 10:39 AM
-> >> >>>>>> To: Zhang, Hao; Dmytriyenko, Denys
-> >> >>>>>> Cc: Maupin, Chase; Rini, Tom; meta-ti@yoctoproject.org
-> >> >>>>>> Subject: Re: [meta-ti] [PATCH] boot-monitor: add K2L and
-> >K2E
-> >> >> boot
-> >> >>>>>> monitor build support
-> >> >>>>>>
-> >> >>>>>> On Thursday 15 May 2014 11:07 AM, Hao Zhang wrote:
-> >> >>>>>>> On 5/15/2014 10:54 AM, Denys Dmytriyenko wrote:
-> >> >>>>>>>> On Thu, May 15, 2014 at 10:41:52AM -0400, Hao Zhang
-> >wrote:
-> >> >>>>>>
-> >> >>>>>> [..]
-> >> >>>>>>
-> >> >>>>>>>>>> Can you clarify if you really want all 3 devices
-> >> >> installed
-> >> >>>>>> all the time or
-> >> >>>>>>>>>> do you really want a recipe that installs the boot
-> >> >> monitor
-> >> >>>>>> per device?  I
-> >> >>>>>>>>>> know you don't currently have 3 machine types so
-> >maybe
-> >> >> that
-> >> >>>>>> is what is
-> >> >>>>>>>>>> feeding your issue here, but my question is whether
-> >you
-> >> >> need
-> >> >>>>>> to have
-> >> >>>>>>>>>> separate builds per device.
-> >> >>>>>>>>>>
-> >> >>>>>>>>>
-> >> >>>>>>>>> I want all the 3 boot monitors built and installed all
-> >the
-> >> >>>>>> time in one
-> >> >>>>>>>>> recipe, since MCSDK 3.1 supports all the 3 Keystone II
-> >> >> devices
-> >> >>>>>> in the
-> >> >>>>>>>>> same release package. This applies to the U-boot (3 U-
-> >boot
-> >> >>>>>> build for all
-> >> >>>>>>>>> the 3 Keystone II devices) and Linux kernel DTB.
-> >> >>>>>>>>
-> >> >>>>>>>> Linux kernel has support for board variations through
-> >DTBs,
-> >> >>>>>> obviously.
-> >> >>>>>>>>
-> >> >>>>>>>> As of U-boot, in Sitara world we had to manage board
-> >> >> variations
-> >> >>>>>> by detecting
-> >> >>>>>>>> the board at runtime. So, the same single binary would
-> >work
-> >> >> on
-> >> >>>>>> AM335x-EVM,
-> >> >>>>>>>> AM335x-SK, BeagleBone White and BeagleBone Black.
-> >> >>>>>>>>
-> >> >>>>>>>> I would recommend you working with Tom Rini and doing
-> >it
-> >> >>>>>> similarly, so you
-> >> >>>>>>>> don't have to build 3 different binaries for 3 slightly
-> >> >>>>>> different Keystone
-> >> >>>>>>>> baords...
-> >> >>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>> Three boars for same SOC is different than 3 different
-> >SOCs
-> >> >> with
-> >> >>>>>> their
-> >> >>>>>> own boards. We need to support different u-boot configs
-> >for
-> >> >> that.
-> >> >>>>>> And
-> >> >>>>>> upstream of the patches work is already in progress with
-> >Tom
-> >> >>>>>> reviewing
-> >> >>>>>> the patches.
-> >> >>>>>
-> >> >>>>> So which one is it?  Is this a case of three boards for a
-> >> >> single SoC or 3 SoCs with their own boards?
-> >> >>>>>
-> >> >>>> I was just saying you AM example was multiple board for 1
-> >SOC.
-> >> >> What Hao is talking
-> >> >>>> '3 SOCs with their own boards.
-> >> >>>
-> >> >>> If those are 3 different SOCs (not just spins or diff part
-> >#s),
-> >> >> then we should
-> >> >>> consider creating 3 different OE machine configs.
-> >> >>>
-> >> >> yes they are 3 different SOCs with different capabilities
-> >> >
-> >> > Then Denys is right.  We should have 3 different OE machine
-> >configs which all share an SOC_FAMILY of "keystone".  That way
-> >they can re-use as much as possible, but unique differences such
-> >as the bootloader, example apps, etc can be easily handled.
-> >> >
-> >>
-> >> Can you show me an example how to do that?
-> >
-> >meta-ti layer, conf/machine for machine configs and
-> >conf/machine/include for
-> >SOC configs.
-> >
-> >examples would be:
-> >
-> >- am335x-evm.conf and beaglebone.conf both use ti33x.inc SOC
-> >definition
-> >- dra7xx-evm.conf and omap5-evm.conf both use omap-a15.inc SOC
-> 
-> Denys,
-> 
-> Is there something outstanding here?  Does this patch need to be revamped 
-> now that we have individual machine types?
+Changelog since 2014-05-25 until 2014-06-01.  Projects included in this =
+report:
 
-Yes, indeed. This recipe should build boot-monitor for current ${MACHINE} and 
-not all 3 of them together. Similar to kernel and u-boot.
+bitbake: git://git.openembedded.org/bitbake
+openembedded-core: git://git.openembedded.org/openembedded-core
+meta-openembedded: git://git.openembedded.org/meta-openembedded
+meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
+meta-arago: git://arago-project.org/git/meta-arago.git
+meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
+meta-browser: git://github.com/OSSystems/meta-browser.git
+meta-bug: git://github.com/buglabs/meta-bug.git
+meta-chicken: git://github.com/OSSystems/meta-chicken
+meta-efikamx: git://github.com/kraj/meta-efikamx.git
+meta-ettus: http://github.com/koenkooi/meta-ettus.git
+meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
+meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
+meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
+meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
+meta-gumstix: git://github.com/gumstix/meta-gumstix.git
+meta-gumstix-community: =
+git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
+meta-handheld: git://git.openembedded.org/meta-handheld
+meta-igep: http://github.com/ebutera/meta-igep.git
+meta-intel: git://git.yoctoproject.org/meta-intel
+meta-ivi: git://git.yoctoproject.org/meta-ivi
+meta-java: git://github.com/woglinde/meta-java
+meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
+meta-micro: git://git.openembedded.org/meta-micro
+meta-mono: git://git.yoctoproject.org/meta-mono.git
+meta-netbookpro: git://github.com/tworaz/meta-netbookpro
+meta-nslu2: git://github.com/kraj/meta-nslu2
+meta-opie: git://git.openembedded.org/meta-opie
+meta-qt3: git://git.yoctoproject.org/meta-qt3
+meta-qt5: git://github.com/meta-qt5/meta-qt5.git
+meta-slugos: git://github.com/kraj/meta-slugos
+meta-systemd: git://git.yoctoproject.org/meta-systemd
+meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
+meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
+meta-ti: git://git.yoctoproject.org/meta-ti
+meta-webos: git://github.com/openwebos/meta-webos.git
+meta-xilinx: git://git.yoctoproject.org/meta-xilinx
+meta-yocto: git://git.yoctoproject.org/meta-yocto
+openembedded: git://git.openembedded.org/openembedded
 
--- 
-Denys
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for bitbake:
+
+Paul Eggleton (6):
+=20=20bitbake-layers: show-cross-depends: add option to ignore a layer
+=20=20bitbake-layers: show-cross-depends: ignore global inherits
+=20=20bitbake-layers: show-cross-depends: ignore self-satisfied RDEPENDS
+=20=20bitbake-layers: show-cross-depends: add support for RRECOMMENDS
+=20=20fetch2: improve handling of two classes of URL parameter mistakes
+=20=20utils: avoid printing traceback on ExpansionError during parsing
+
+Richard Purdie (8):
+=20=20Revert "toaster: toaster oe-selftest support"
+=20=20event: Fix event handlers to raise SkipPackage
+=20=20cookerdata: Improve error handling
+=20=20event.py: Allow passthrough of BBHandledException events
+=20=20event: Add SkipRecipe event to replace SkipPackage
+=20=20bb.fatal: Raise a BBHandledException instead of exiting
+=20=20build/utils: Fix broken exception handling
+=20=20siggen: Print warning about tainted tasks
+
+Volker Vogelhuber (1):
+=20=20fetch2/hg: Fix missing proto param for hg checkout with user and pw
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded-core:
+
+Alexandru-Cezar Sardan (1):
+=20=20gcc: add patch to fix errors with Decimal64 type
+
+Armin Kuster (2):
+=20=20Update tzdata to 2014c
+=20=20Update tzcode to 2014c
+
+Bruce Ashfield (4):
+=20=20linux-yocto/3.14: update to v3.14.4
+=20=20linux-yocto-rt/3.14: update to 3.14-rt5
+=20=20beaglebone: enable the nowayout option for the watchdog
+=20=20linux-yocto/3.10: bump kver to v3.10.40
+
+Chen Qi (1):
+=20=20update-rc.d: fix to handle priority numbers correctly
+
+Cristian Iorga (1):
+=20=20libogg: upgrade to 1.3.2
+
+Dan McGregor (1):
+=20=20gzip: Avoid host contamination during build
+
+Darren Hart (3):
+=20=20ddimage: Support Mac OS
+=20=20linux-yocto-dev: Dynamic SRCREV update
+=20=20i2c-tools: Add i2c-tools to the core
+
+Ionut Chisanovici (1):
+=20=20toaster: toaster oe-selftest support
+
+Jo=C3=A3o Henrique Ferreira de Freitas (1):
+=20=20combo-layer: fix revlist taking into account file_filter
+
+Khem Raj (11):
+=20=20tcmode-default.inc: Default to using gcc 4.9
+=20=20siteinfo, insane: Recognize musl specific triplets
+=20=20tclibc-musl.inc: Add musl specific distro policy file
+=20=20multilib_header: Do not install mutlilib headers for musl
+=20=20image.bbclass: Remove dependency on ldconfig-native for musl
+=20=20cross-canadian.bbclass: Recognise musl
+=20=20gnu-config: Let it recognise *-*-musl* triplets
+=20=20layer.conf: Add musl to safe recipes for exclusion
+=20=20gcc, uclibc: Add/Fix Upstream-Status in patches
+=20=20eglibc: Fix configure when re-building with gold
+=20=20systemd: Upgrade 212 -> 213
+
+Mike Crowe (1):
+=20=20cmake: Avoid accidentally including libacl.h
+
+Paul Barker (1):
+=20=20opkg-utils: Update SRCREV
+
+Peter Seebach (1):
+=20=20pseudo: Honor umask again
+
+Richard Purdie (14):
+=20=20devshell: Add interactive python shell
+=20=20libgpg-error: Extend pkgconfig support to m4 macros
+=20=20libassuan: Improve pkgconfig support
+=20=20gnupg: Convert to use pkg-config for dependencies
+=20=20libxslt: Use pkg-config for dependencies
+=20=20libgcrypt: Use pkg-config for dependencies
+=20=20gpgme: Update to ensure we pkg-config for dependencies
+=20=20libksba: Use pkg-config for dependencies
+=20=20libarchive: Use pkg-config for libxml2 dependency
+=20=20lighthttp: Use pkg-config for pcre dependency
+=20=20sstatesig: Move saferecipedeps handling to be earlier
+=20=20classextend: Fix crosssdk remapping for multilib
+=20=20gcc: Clean up configure_prepend and fix for mingw
+=20=20bitbake.conf: Set a dafault value for TUNE_PKGARCH
+
+Ross Burton (5):
+=20=20readline: add missing STRUCT_DIRENT_D_* symbols to config.h.in
+=20=20readline: exclude autoheader from autoreconf
+=20=20readline: use upstream's aclocal.m4 as acinclude.m4
+=20=20lrzsz: fix autoheader warning due to missing AC_DEFINE template
+=20=20socat: upgrade to 1.7.2.4
+
+Roy Li (1):
+=20=20openssl: add openssl-CVE-2010-5298.patch SRC_URI
+
+Saul Wold (1):
+=20=20util-linux: add sulogin to alternatives list
+
+Tim Orling (3):
+=20=20weston: drop superfluous --disable-lcms
+=20=20weston: fix make-lcms-configurable.patch
+=20=20weston: make lcms explicitly configurable
+
+Tudor Florea (1):
+=20=20ethtool: use serial-tests config needed by ptest.
+
+Valentin Popa (1):
+=20=20eglinfo: updated to compile with mesa10+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-openembedded:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-angstrom:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-arago:
+
+Denys Dmytriyenko (1):
+=20=20cryptodev: fix INIT_COMPLETION macro change in kernels 3.13+
+
+Hao Zhang (1):
+=20=20keystone: tisdk-image: change TARGET_IMAGES from keystone-evm to =
+k2hk-evm
+
+Maupin, Chase (8):
+=20=20ipc-test-fw: Update to not conflict with ipumm-fw
+=20=20packagegroup-arago-gst: Add accelerated MM packages
+=20=20packagegroup-arago-tisdk-graphics: Add SGX and BLTsville packages
+=20=20packagegroup-arago-tisdk-addons: Add libdrm components
+=20=20packagegroup-arago-tisdk-multimedia: Add accelerator firmwares
+=20=20packagegroup-arago-test: Add drm and bltsville tests
+=20=20arago-prefs: Use omap5-sgx package for libgles dependencies
+=20=20arago-prefs: Use mesa for keystone devices
+
+Mrinmayee Hingolikar (11):
+=20=20libdce: Add libdce version 2.0 support from glsdk
+=20=20gstreamer: Add append to use TI version
+=20=20gst-plugins-bad: Append with TI version of plugins
+=20=20gst-plugins-good: Add TI version of gst-plugins-good
+=20=20gst-plugins-base: Add TI version with bbappend
+=20=20gst-plugins-ducati: Add GStreamer elements that use ducati
+=20=20gst-plugins-vpe: Add TI VPE GStreamer plugins
+=20=20bvtest: Add bltsville test application
+=20=20omapdrmtest: Test application for OMAP DRM interface
+=20=20libgbm: Add TI specific version of libgbm
+=20=20kmscube: Add kmscube demo application
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-beagleboard:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-browser:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-bug:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-chicken:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-efikamx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ettus:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm-extra:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-ppc:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-guacamayo:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix-community:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-handheld:
+
+Andrea Adami (4):
+=20=20mininit: initial commit of v. 1.1.0
+=20=20initramfs-mininit-klibc-image: initial commit
+=20=20linux-gcw0-kexecboot_3.12: initial commit
+=20=20gcw0: improve compatibility with kexecboot
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-igep:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-intel:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ivi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-java:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-kde:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-micro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-mono:
+
+Alex J Lennon (2):
+=20=20layer.conf: Default to building latest release of Mono (3.4.0)
+=20=20mono,mono-native: Add non-default recipes to build Mono from the git =
+reposit
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-netbookpro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nslu2:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-opie:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt3:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt5:
+
+Andreas M=C3=BCller (4):
+=20=20qtwayland: move to latest revision
+=20=20qtwayland-native: make qtwayland find qtwaylandscanner
+=20=20qtwayland: install created private headers
+=20=20qtwayland: install created private headers, v2
+
+Otavio Salvador (3):
+=20=20packagegroup-qt5-toolchain-target: Don't require =
+qtquickcontrols-qmlplugins
+=20=20qtbase: Remove examples.pro file from packages
+=20=20qtsystems: Remove examples.pro file from packages
+
+Thomas Senyk (1):
+=20=20qtbase.inc: add -no-xkbcommon
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-slugos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-systemd:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-raspberrypi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-smartphone:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ti:
+
+Denys Dmytriyenko (1):
+=20=20linux-ti-staging: lower the preference for 3.15 recipe for now
+
+Hao Zhang (1):
+=20=20keystone: u-boot: add build support for EMIF16 NAND gph image
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-webos:
+
+Andrii Motsok (1):
+=20=20webos-image: libmikmod=3Dv3.1.12-0webos1
+
+Gayathri Srinivasan (1):
+=20=20meta-webos: pmlogdaemon=3D120
+
+Kyrylo Kropivyanskiy (1):
+=20=20alsa-utils: Configure usage of libsamplerate
+
+Oleg Yablokov (1):
+=20=20webos-image: db8=3D141
+
+Sapna Todwal (1):
+=20=20webos-image: luna-init=3D10
+
+Sergey Olendarenko (1):
+=20=20webos-image: vboxguestdrivers=3Dv4.3.8
+
+Susan Montooth (1):
+=20=20Revert "webos-image: luna-service2=3D191,v3.9.0"
+
+amotsok (1):
+=20=20webos-image: jemalloc=3D12
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-xilinx:
+
+Nathan Rossi (3):
+=20=20zynq7-base.dtsi: Update bindings
+=20=20gdb: Update gdb for microblaze
+=20=20common/linux/*.cfg: Fix up new line at end of file
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+Ross Burton (1):
+=20=20genericx86: switch to Linux 3.14 from 3.10
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded:
+
+
 
