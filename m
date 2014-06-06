@@ -1,46 +1,41 @@
-Return-Path: <cliff.brake@gmail.com>
+Return-Path: <chase.maupin@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AE74AE00BF0; Fri,  6 Jun 2014 08:13:08 -0700 (PDT)
+	id 86B6EE00B95; Fri,  6 Jun 2014 08:20:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (cliff.brake[at]gmail.com)
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.216.46 listed in list.dnswl.org]
-Received: from mail-qa0-f46.google.com (mail-qa0-f46.google.com
-	[209.85.216.46])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5225BE00B9F
-	for <meta-ti@yoctoproject.org>; Fri,  6 Jun 2014 08:13:06 -0700 (PDT)
-Received: by mail-qa0-f46.google.com with SMTP id w8so3991709qac.33
-	for <meta-ti@yoctoproject.org>; Fri, 06 Jun 2014 08:13:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=1YhtNdoPnePKzAaXtlVQn2Up3eiuVAHMNUxyRTC1uJ4=;
-	b=F//dtceMoPV+KW0rRDNsmoFTJXtY+O6Jw9NETO5EvbG2EyCyZC2n+Yse5vbcdtLLme
-	HYyfmHxDRItvIA3SWETHR/eLyn1uKRZ/0udlJjD8lzZY0z96zxMLV7jd67TiAAoTYwt6
-	gnp4PfqEUFlhwyDxP/qvum+jIqGSKSiNYQI8Sv3NJ/tcyoa52NIwdl9bL/nGHsgVPuE1
-	Wl/2MHguMybfwJeyI4nK2R4P0UCb2Pb5XfmFnTqGuaeRqn4UL2QRVy4gDU5cGa14gAbs
-	n3+TKtTk/B15D96jcHII2itvQdSqmCkoIWDhIO7DRDFWji7G1yIGWgKlzccoizxeB1TQ
-	52zA==
+X-Spam-Status: No, score=-5.0 required=5.0 tests=RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 383BEE009E7
+	for <meta-ti@yoctoproject.org>; Fri,  6 Jun 2014 08:20:31 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s56FKUs7030154;
+	Fri, 6 Jun 2014 10:20:30 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s56FKU58023928;
+	Fri, 6 Jun 2014 10:20:30 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.03.0174.001; Fri, 6 Jun 2014 10:20:30 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: Cliff Brake <cliff.brake@gmail.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] what branch of meta-ti should be used with dora?
+Thread-Index: AQHPgZoDSRfPYPi66kuoy/9uVdD3p5tkMnLA
+Date: Fri, 6 Jun 2014 15:20:29 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015D09841A@DLEE11.ent.ti.com>
+References: <CAOd_LFzCrgUGLKtgPUSQgxtd7ASn8Ee4oBbDyCSZH8yobh78pw@mail.gmail.com>
+In-Reply-To: <CAOd_LFzCrgUGLKtgPUSQgxtd7ASn8Ee4oBbDyCSZH8yobh78pw@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-X-Received: by 10.140.82.113 with SMTP id g104mr9209003qgd.55.1402067585414;
-	Fri, 06 Jun 2014 08:13:05 -0700 (PDT)
-Received: by 10.140.31.73 with HTTP; Fri, 6 Jun 2014 08:13:05 -0700 (PDT)
-Date: Fri, 6 Jun 2014 11:13:05 -0400
-Message-ID: <CAOd_LFzCrgUGLKtgPUSQgxtd7ASn8Ee4oBbDyCSZH8yobh78pw@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: what branch of meta-ti should be used with dora?
+Subject: Re: what branch of meta-ti should be used with dora?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -53,15 +48,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jun 2014 15:13:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 06 Jun 2014 15:20:47 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-I'm wondering what branch of meta-ti is a good one to use with OE 1.5/Dora.
+Use the dora branch.
 
-Thanks,
-Cliff
-
--- 
-=================
-http://bec-systems.com
+>-----Original Message-----
+>From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+>bounces@yoctoproject.org] On Behalf Of Cliff Brake
+>Sent: Friday, June 06, 2014 10:13 AM
+>To: meta-ti@yoctoproject.org
+>Subject: [meta-ti] what branch of meta-ti should be used with
+>dora?
+>
+>I'm wondering what branch of meta-ti is a good one to use with OE
+>1.5/Dora.
+>
+>Thanks,
+>Cliff
+>
+>--
+>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>http://bec-systems.com
+>--
+>_______________________________________________
+>meta-ti mailing list
+>meta-ti@yoctoproject.org
+>https://lists.yoctoproject.org/listinfo/meta-ti
 
