@@ -1,41 +1,40 @@
-Return-Path: <denys@ti.com>
+Return-Path: <meta-ti@emagii.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7A831E00B95; Fri,  6 Jun 2014 08:42:45 -0700 (PDT)
+	id 5C216E00985; Fri,  6 Jun 2014 15:22:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.0 required=5.0 tests=RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=0.0 required=5.0 tests=RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1393CE009E7
-	for <meta-ti@yoctoproject.org>; Fri,  6 Jun 2014 08:42:38 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s56FgahW014737;
-	Fri, 6 Jun 2014 10:42:36 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s56Fgan4008527;
-	Fri, 6 Jun 2014 10:42:36 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 6 Jun 2014 10:42:36 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s56FgaCP032690;
-	Fri, 6 Jun 2014 10:42:36 -0500
-Date: Fri, 6 Jun 2014 11:42:35 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Cliff Brake <cliff.brake@gmail.com>
-Message-ID: <20140606154235.GA18034@edge>
-References: <CAOd_LFzCrgUGLKtgPUSQgxtd7ASn8Ee4oBbDyCSZH8yobh78pw@mail.gmail.com>
-	<7D46E86EC0A8354091174257B2FED1015D09841A@DLEE11.ent.ti.com>
-	<CAOd_LFwesJcR4nan9Bp9E8dQVj6-GPOZFEU-6OCUjQcjdFd=Tw@mail.gmail.com>
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [195.54.99.213 listed in list.dnswl.org]
+X-Greylist: delayed 1406 seconds by postgrey-1.32 at yocto-www;
+	Fri, 06 Jun 2014 15:21:50 PDT
+Received: from smtprelay-b22.telenor.se (smtprelay-b22.telenor.se
+	[195.54.99.213])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 80882E0070F
+	for <meta-ti@yoctoproject.org>; Fri,  6 Jun 2014 15:21:50 -0700 (PDT)
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-b22.telenor.se (Postfix) with ESMTP id CFEB8DA2C
+	for <meta-ti@yoctoproject.org>; Fri,  6 Jun 2014 23:58:22 +0200 (CEST)
+X-SENDER-IP: [83.227.57.112]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AuEkAAI5klNT4zlwPGdsb2JhbAANTItbo1AGkU+IXQQBAQEBOIR3QD0WGAMCAQIBMScIAQGIQ60roCUXhV2JKYQrAQOaHZcC
+X-IPAS-Result: AuEkAAI5klNT4zlwPGdsb2JhbAANTItbo1AGkU+IXQQBAQEBOIR3QD0WGAMCAQIBMScIAQGIQ60roCUXhV2JKYQrAQOaHZcC
+X-IronPort-AV: E=Sophos;i="4.98,991,1392159600"; d="scan'208";a="24610034"
+Received: from c-7039e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.199]) ([83.227.57.112])
+	by ipb2.telenor.se with ESMTP; 06 Jun 2014 23:58:22 +0200
+Message-ID: <5392397D.4000504@emagii.com>
+Date: Fri, 06 Jun 2014 23:58:21 +0200
+From: Ulf Samuelsson <meta-ti@emagii.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
 MIME-Version: 1.0
-In-Reply-To: <CAOd_LFwesJcR4nan9Bp9E8dQVj6-GPOZFEU-6OCUjQcjdFd=Tw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: what branch of meta-ti should be used with dora?
+To: meta-ti@yoctoproject.org
+Subject: Building qt5 using Yocto+meta-ti possible for Beaglebone?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,59 +47,22 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jun 2014 15:42:45 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-
-On Fri, Jun 06, 2014 at 11:32:32AM -0400, Cliff Brake wrote:
-> got it.  Looking further, I happened to be using
-> https://github.com/Angstrom-distribution/meta-ti, so that is why I
-> don't see the dora branch.  Thanks!
-
-And that is NOT meta-ti!
-
-That is actually a very wicked way to discredit the project... I've heard 
-first-hand few other instances when people were confused by that stale fork 
-into thinking meta-ti is dead. :(
-
--- 
-Denys
+X-List-Received-Date: Fri, 06 Jun 2014 22:22:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
-> On Fri, Jun 6, 2014 at 11:20 AM, Maupin, Chase <chase.maupin@ti.com> wrote:
-> > Use the dora branch.
-> >
-> >>-----Original Message-----
-> >>From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> >>bounces@yoctoproject.org] On Behalf Of Cliff Brake
-> >>Sent: Friday, June 06, 2014 10:13 AM
-> >>To: meta-ti@yoctoproject.org
-> >>Subject: [meta-ti] what branch of meta-ti should be used with
-> >>dora?
-> >>
-> >>I'm wondering what branch of meta-ti is a good one to use with OE
-> >>1.5/Dora.
-> >>
-> >>Thanks,
-> >>Cliff
-> >>
-> >>--
-> >>=================
-> >>http://bec-systems.com
-> >>--
-> >>_______________________________________________
-> >>meta-ti mailing list
-> >>meta-ti@yoctoproject.org
-> >>https://lists.yoctoproject.org/listinfo/meta-ti
-> 
-> 
-> 
-> -- 
-> =================
-> http://bec-systems.com
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+Anyone succeded with this?
+
+Which version of Yocto (dora/daisy?)
+
+Which kernel
+
+Any extra patches needed?
+
+Any image recipe which can be shared?
+
+BR
+Ulf Samuelsson
+
 
