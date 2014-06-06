@@ -1,40 +1,34 @@
-Return-Path: <meta-ti@emagii.com>
+Return-Path: <philip@balister.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5C216E00985; Fri,  6 Jun 2014 15:22:03 -0700 (PDT)
+	id 9BD29E00C24; Fri,  6 Jun 2014 15:55:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [195.54.99.213 listed in list.dnswl.org]
-X-Greylist: delayed 1406 seconds by postgrey-1.32 at yocto-www;
-	Fri, 06 Jun 2014 15:21:50 PDT
-Received: from smtprelay-b22.telenor.se (smtprelay-b22.telenor.se
-	[195.54.99.213])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 80882E0070F
-	for <meta-ti@yoctoproject.org>; Fri,  6 Jun 2014 15:21:50 -0700 (PDT)
-Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
-	by smtprelay-b22.telenor.se (Postfix) with ESMTP id CFEB8DA2C
-	for <meta-ti@yoctoproject.org>; Fri,  6 Jun 2014 23:58:22 +0200 (CEST)
-X-SENDER-IP: [83.227.57.112]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AuEkAAI5klNT4zlwPGdsb2JhbAANTItbo1AGkU+IXQQBAQEBOIR3QD0WGAMCAQIBMScIAQGIQ60roCUXhV2JKYQrAQOaHZcC
-X-IPAS-Result: AuEkAAI5klNT4zlwPGdsb2JhbAANTItbo1AGkU+IXQQBAQEBOIR3QD0WGAMCAQIBMScIAQGIQ60roCUXhV2JKYQrAQOaHZcC
-X-IronPort-AV: E=Sophos;i="4.98,991,1392159600"; d="scan'208";a="24610034"
-Received: from c-7039e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.199]) ([83.227.57.112])
-	by ipb2.telenor.se with ESMTP; 06 Jun 2014 23:58:22 +0200
-Message-ID: <5392397D.4000504@emagii.com>
-Date: Fri, 06 Jun 2014 23:58:21 +0200
-From: Ulf Samuelsson <meta-ti@emagii.com>
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: 
+X-Greylist: delayed 400 seconds by postgrey-1.32 at yocto-www;
+	Fri, 06 Jun 2014 15:55:15 PDT
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by yocto-www.yoctoproject.org (Postfix) with SMTP id C34E2E00B6F
+	for <meta-ti@yoctoproject.org>; Fri,  6 Jun 2014 15:55:15 -0700 (PDT)
+Received: (qmail 27089 invoked by uid 1003); 6 Jun 2014 22:48:34 -0000
+Received: from unknown (HELO ?192.168.1.123?) (philip@opensdr.com@71.171.40.82)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	6 Jun 2014 22:48:34 -0000
+Message-ID: <53924541.3060109@balister.org>
+Date: Fri, 06 Jun 2014 18:48:33 -0400
+From: Philip Balister <philip@balister.org>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
 MIME-Version: 1.0
-To: meta-ti@yoctoproject.org
-Subject: Building qt5 using Yocto+meta-ti possible for Beaglebone?
+To: Denys Dmytriyenko <denys@ti.com>, Cliff Brake <cliff.brake@gmail.com>
+References: <CAOd_LFzCrgUGLKtgPUSQgxtd7ASn8Ee4oBbDyCSZH8yobh78pw@mail.gmail.com>	<7D46E86EC0A8354091174257B2FED1015D09841A@DLEE11.ent.ti.com>	<CAOd_LFwesJcR4nan9Bp9E8dQVj6-GPOZFEU-6OCUjQcjdFd=Tw@mail.gmail.com>
+	<20140606154235.GA18034@edge>
+In-Reply-To: <20140606154235.GA18034@edge>
+X-Enigmail-Version: 1.6
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: what branch of meta-ti should be used with dora?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,22 +41,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jun 2014 22:22:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 06 Jun 2014 22:55:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
+On 06/06/2014 11:42 AM, Denys Dmytriyenko wrote:
+> On Fri, Jun 06, 2014 at 11:32:32AM -0400, Cliff Brake wrote:
+>> got it.  Looking further, I happened to be using
+>> https://github.com/Angstrom-distribution/meta-ti, so that is why I
+>> don't see the dora branch.  Thanks!
+> 
+> And that is NOT meta-ti!
+> 
+> That is actually a very wicked way to discredit the project... I've heard 
+> first-hand few other instances when people were confused by that stale fork 
+> into thinking meta-ti is dead. :(
+> 
 
-Anyone succeded with this?
+Oh come on, it is labeled as a mirror. I updated the banner to point at
+the YP git.
 
-Which version of Yocto (dora/daisy?)
+https://github.com/Angstrom-distribution/meta-ti
 
-Which kernel
-
-Any extra patches needed?
-
-Any image recipe which can be shared?
-
-BR
-Ulf Samuelsson
-
+Philip
 
