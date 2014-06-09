@@ -1,40 +1,53 @@
-Return-Path: <denys@ti.com>
+Return-Path: <diego.sueiro@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2871EE00B4C; Sun,  8 Jun 2014 18:20:31 -0700 (PDT)
+	id E624EE00B6C; Mon,  9 Jun 2014 03:04:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
-	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+X-Spam-Status: No, score=-0.8 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU, FREEMAIL_FROM, HTML_MESSAGE,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (diego.sueiro[at]gmail.com)
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AC17CE0073A
-	for <meta-ti@yoctoproject.org>; Sun,  8 Jun 2014 18:20:26 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s591KQ9V002424
-	for <meta-ti@yoctoproject.org>; Sun, 8 Jun 2014 20:20:26 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s591KQVB023030
-	for <meta-ti@yoctoproject.org>; Sun, 8 Jun 2014 20:20:26 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Sun, 8 Jun 2014 20:20:25 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s591KPg3015453	for <meta-ti@yoctoproject.org>;
-	Sun, 8 Jun 2014 20:20:25 -0500
-Date: Sun, 8 Jun 2014 21:04:05 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1032861581.155.1402275845148.JavaMail.jenkins@puget>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.216.54 listed in list.dnswl.org]
+Received: from mail-qa0-f54.google.com (mail-qa0-f54.google.com
+	[209.85.216.54])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 56826E00A44
+	for <meta-ti@yoctoproject.org>; Mon,  9 Jun 2014 03:04:37 -0700 (PDT)
+Received: by mail-qa0-f54.google.com with SMTP id j15so7713635qaq.27
+	for <meta-ti@yoctoproject.org>; Mon, 09 Jun 2014 03:04:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=HARu6unDqsWSlqw4+p9vIFl3K0kbd045i+RHnoySQpM=;
+	b=VFVBV92e9VvoHWDWGutCvtGdNOrMl/V8T97EdLcFcCYUIYTsQ3XD+c8mUr/Vlhs8JJ
+	2XxrOBbK26W/t0iKpE0rKwUsraDV3oT5AZF9vUyc5c5/HVyxV3ZTqm5parobLgTKEWg1
+	vHuYBy9NBNAnsh76/HMDvjEyMFLZyHXwnFeKjr82rJX5XwIgJN9J7HM4Yy/AxUU5ve8p
+	EfUb8WshOtgFzzN7W6dj+wBQRPNdI6vsB28WK4sQAHAKT+0c1oh3Cgq4hgBrdH9HoXT5
+	DovtSUbaB1ALVpqYEmn17kXRPKeuWwGNqEcUpLvcZgutyNuk4XD6X4tNySIJpyhmCZOX
+	I5hg==
+X-Received: by 10.140.86.178 with SMTP id p47mr29406475qgd.66.1402308277174;
+	Mon, 09 Jun 2014 03:04:37 -0700 (PDT)
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-06-08_21-00-30
+Received: by 10.140.48.112 with HTTP; Mon, 9 Jun 2014 03:04:17 -0700 (PDT)
+In-Reply-To: <5394FEA0.1020602@emagii.com>
+References: <5392397D.4000504@emagii.com>
+	<7fe72dbd-40a2-4730-a737-ac67ef21c9a1@email.android.com>
+	<5392BE20.2000509@emagii.com> <5394FEA0.1020602@emagii.com>
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Mon, 9 Jun 2014 07:04:17 -0300
+Message-ID: <CAMCfZKHYWGdStwbGVjnfqC3O3zj5j4qPmsq9jH=U9s_a92EtRA@mail.gmail.com>
+To: Ulf Samuelsson <meta-ti@emagii.com>
+Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: Re: Building qt5 using Yocto+meta-ti possible for Beaglebone?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,169 +60,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jun 2014 01:20:31 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_154_149044969.1402275845147"
+X-List-Received-Date: Mon, 09 Jun 2014 10:04:51 -0000
+Content-Type: multipart/alternative; boundary=001a11c13d5cba0b0804fb6456a1
 
-------=_Part_154_149044969.1402275845147
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a11c13d5cba0b0804fb6456a1
+Content-Type: text/plain; charset=ISO-8859-1
 
-<html>
-<head>
-<title>
-Status for 06/08/14
-</title>
-</head>
-<body>
+Ulf,
 
-<h2>Status for 06/08/14</h2>
+On Sun, Jun 8, 2014 at 9:24 PM, Ulf Samuelsson <meta-ti@emagii.com> wrote:
 
-<h2>BUILD_ID: build-2014-06-08_21-01-39</h2>
+> Romber Nelson and some other people mention that the 3.12 kernel used is
+> not compatible with the advanced capes like LCDs.
+> Do I need to revert to the 3.8 kernel?
+>
 
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.05"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+Kernel 3.12 does not have cape manager capabilities, as far as I know.
+Did you tested it in a HDMI monitor/TV?
 
 
-------=_Part_154_149044969.1402275845147--
+Regrads,
+
+--
+*dS
+Diego Sueiro
+
+Administrador do Embarcados
+www.embarcados.com.br
+<http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
+
+/*long live rock 'n roll*/
+
+--001a11c13d5cba0b0804fb6456a1
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_extra">Ulf,</div><div class=3D"gmail_e=
+xtra"><br><div class=3D"gmail_quote">On Sun, Jun 8, 2014 at 9:24 PM, Ulf Sa=
+muelsson <span dir=3D"ltr">&lt;<a href=3D"mailto:meta-ti@emagii.com" target=
+=3D"_blank">meta-ti@emagii.com</a>&gt;</span> wrote:<br>
+
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex"><div id=3D":4eg" class=3D"a3s" style=3D"over=
+flow:hidden">Romber Nelson and some other people mention that the 3.12 kern=
+el used is not compatible with the advanced capes like LCDs.<br>
+
+
+Do I need to revert to the 3.8 kernel?</div></blockquote></div><div class=
+=3D"gmail_extra"><br></div>Kernel 3.12 does not have cape manager capabilit=
+ies, as far as I know.</div><div class=3D"gmail_extra">Did you tested it in=
+ a HDMI monitor/TV?<br>
+
+<br><br clear=3D"all"><div><div dir=3D"ltr"><div>Regrads,</div><div><br></d=
+iv>--<br>*dS<br>Diego Sueiro<br><br>Administrador do Embarcados<br><a href=
+=3D"http://www.embarcados.com.br/?utm_source=3Dassinatura_diego&amp;utm_med=
+ium=3De-mail&amp;utm_campaign=3DAssinatura%20Email%20Diego" target=3D"_blan=
+k">www.embarcados.com.br</a><br>
+
+<br>/*long live rock &#39;n roll*/<br></div></div>
+</div></div>
+
+--001a11c13d5cba0b0804fb6456a1--
