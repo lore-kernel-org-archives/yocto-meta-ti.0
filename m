@@ -1,40 +1,41 @@
-Return-Path: <denys@ti.com>
+Return-Path: <meta-ti@emagii.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 60286E00B94; Sat,  7 Jun 2014 18:19:14 -0700 (PDT)
+	id B81C5E0073A; Sun,  8 Jun 2014 17:18:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
-	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: *  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 78F2CE00A44
-	for <meta-ti@yoctoproject.org>; Sat,  7 Jun 2014 18:19:08 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s581J8mr002233
-	for <meta-ti@yoctoproject.org>; Sat, 7 Jun 2014 20:19:08 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s581J878014022
-	for <meta-ti@yoctoproject.org>; Sat, 7 Jun 2014 20:19:08 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Sat, 7 Jun 2014 20:19:07 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s581J7CZ025799	for <meta-ti@yoctoproject.org>;
-	Sat, 7 Jun 2014 20:19:07 -0500
-Date: Sat, 7 Jun 2014 21:02:48 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <648539032.151.1402189368934.JavaMail.jenkins@puget>
+X-Spam-Status: No, score=0.0 required=5.0 tests=RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [213.150.131.21 listed in list.dnswl.org]
+Received: from smtprelay-b32.telenor.se (smtprelay-b32.telenor.se
+	[213.150.131.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42996E0073A
+	for <meta-ti@yoctoproject.org>; Sun,  8 Jun 2014 17:18:38 -0700 (PDT)
+Received: from ipb4.telenor.se (ipb4.telenor.se [195.54.127.167])
+	by smtprelay-b32.telenor.se (Postfix) with ESMTP id B7A1EDF42
+	for <meta-ti@yoctoproject.org>; Mon,  9 Jun 2014 02:18:36 +0200 (CEST)
+X-SENDER-IP: [83.227.57.112]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AmMkAMz8lFNT4zlwPGdsb2JhbAANTItbo2YBBpkQAYEgBAEBAQE4hDgBAQEBAgE4QAYLCxgJFAIPCQMCAQIBMRQTBgIBAYg2DalRn3IXhV2JFhaEKwEDmiGXAw
+X-IPAS-Result: AmMkAMz8lFNT4zlwPGdsb2JhbAANTItbo2YBBpkQAYEgBAEBAQE4hDgBAQEBAgE4QAYLCxgJFAIPCQMCAQIBMRQTBgIBAYg2DalRn3IXhV2JFhaEKwEDmiGXAw
+X-IronPort-AV: E=Sophos;i="4.98,1000,1392159600"; d="scan'208";a="595941712"
+Received: from c-7039e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.199]) ([83.227.57.112])
+	by ipb4.telenor.se with ESMTP; 09 Jun 2014 02:18:36 +0200
+Message-ID: <5394FD5B.6070700@emagii.com>
+Date: Mon, 09 Jun 2014 02:18:35 +0200
+From: Ulf Samuelsson <meta-ti@emagii.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-06-07_21-00-30
+To: meta-ti@yoctoproject.org
+References: <5392397D.4000504@emagii.com>	<7fe72dbd-40a2-4730-a737-ac67ef21c9a1@email.android.com>
+	<5392BE20.2000509@emagii.com>
+In-Reply-To: <5392BE20.2000509@emagii.com>
+Subject: Re: Building qt5 using Yocto+meta-ti possible for Beaglebone?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,169 +48,77 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Jun 2014 01:19:14 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_150_497203987.1402189368933"
-
-------=_Part_150_497203987.1402189368933
-Content-Type: text/html; charset="UTF-8"
+X-List-Received-Date: Mon, 09 Jun 2014 00:18:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-<html>
-<head>
-<title>
-Status for 06/07/14
-</title>
-</head>
-<body>
 
-<h2>Status for 06/07/14</h2>
+2014-06-07 09:24, Ulf Samuelsson skrev:
+>
+> 2014-06-07 00:38, Denys Dmytriyenko skrev:
+>> On June 6, 2014 5:58:21 PM EDT, Ulf Samuelsson <meta-ti@emagii.com> 
+>> wrote:
+>>> Anyone succeded with this?
+>>>
+>>> Which version of Yocto (dora/daisy?)
+>>>
+>>> Which kernel
+>>>
+>>> Any extra patches needed?
+>>>
+>>> Any image recipe which can be shared?
+>>>
+>>> BR
+>>> Ulf Samuelsson
+>> I have the necessary recipes and images in meta-arago. And you'd 
+>> obviously need meta-qt5. Do you need any specific features out of it?
+>>
+> Could you send me your
+>
+> * local.conf
+> * bblayers.conf
+>
+>  for building qt5?
+>
+Have managed to build meta-arago/meta-ti/meta-qt5,
+and I am now running a Beaglebone Black with a 4Dsystems 4.3" LCD.
 
-<h2>BUILD_ID: build-2014-06-07_21-01-39</h2>
+This is all black.
 
-<h2>Clean Build: false</h2>
+Created my own image, based on arago-qt5-test-image
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+This does not add libgles-omap3, which seems to be needed.
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+Also built the qtbase-examples.
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.05"<br>
-MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/opentest_cli_0.7.tar.gz"<br>
-OPENTEST_TEE_IP="10.218.102.142"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+The resulting filesystem did not find the modules, but after depmod -a,
+this is OK.
 
 
-------=_Part_150_497203987.1402189368933--
+root@beaglebone:/usr/share/qt5/examples/widgets/widgets/calculator# lsmod
+Module                  Size  Used by
+bufferclass_ti          5405  0
+omaplfb                11414  0
+pvrsrvkm              175499  2 bufferclass_ti,omaplfb
+
+  and I can run several Qt applications, but:
+
+Screen is all black.
+
+I did not change any
+
+
+
+
+
+
+
+
+
+
+> BR
+> Ulf
+>
+>
+
+
