@@ -1,52 +1,41 @@
-Return-Path: <robertcnelson@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 23FA2E00BEB; Mon,  9 Jun 2014 16:35:00 -0700 (PDT)
+	id 3A97CE00BEC; Mon,  9 Jun 2014 17:35:37 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (robertcnelson[at]gmail.com)
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.213.49 listed in list.dnswl.org]
-Received: from mail-yh0-f49.google.com (mail-yh0-f49.google.com
-	[209.85.213.49])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A4CA0E00B7B
-	for <meta-ti@yoctoproject.org>; Mon,  9 Jun 2014 16:34:47 -0700 (PDT)
-Received: by mail-yh0-f49.google.com with SMTP id c41so3185891yho.36
-	for <meta-ti@yoctoproject.org>; Mon, 09 Jun 2014 16:34:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=x9t1BV87StV+IRJ9HMkXI3TdkFcSAL2xz/tJrDC2hxU=;
-	b=0ZmtV/yG31DWzATK0qJwPwZGoCOkvUaIK5D1CRYL0Vwpza3bvufYavTM93MkbTStSs
-	2E1SlsJdV6LdNeUdLU1kZgkyTkomNrKBw/qGlBJuClKKov9/Qb0zHsMe3LCdE7imhgzL
-	7KWJOz6AH7/FJUupt5aKFprilAyw2Cwlp6M6fSLxoF4c7EksVIfp25/T3dsKcUTgZ2ye
-	80aYb5PSpli26ygcOlhUqHIkAOtwMkMmkyv9SNkwEbSLDJEZyXuaPVnfB5AceTzxBTcm
-	NmbWgAxRyAiijQP66yJLHrTmttaAOWctpe3oEpGjRW6jfT62F3p6FsNxjO1YTvq6hYlW
-	pg0w==
-MIME-Version: 1.0
-X-Received: by 10.236.192.73 with SMTP id h49mr19425385yhn.6.1402356887383;
-	Mon, 09 Jun 2014 16:34:47 -0700 (PDT)
-Received: by 10.170.134.131 with HTTP; Mon, 9 Jun 2014 16:34:47 -0700 (PDT)
-In-Reply-To: <53963B12.2090906@emagii.com>
+X-Spam-Status: No, score=-5.0 required=5.0 tests=RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD38DE00BE3
+	for <meta-ti@yoctoproject.org>; Mon,  9 Jun 2014 17:35:32 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5A0ZSVx004859;
+	Mon, 9 Jun 2014 19:35:28 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5A0ZShW011055;
+	Mon, 9 Jun 2014 19:35:28 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
+	Mon, 9 Jun 2014 19:35:28 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5A0ZRZu008429;
+	Mon, 9 Jun 2014 19:35:27 -0500
+Date: Mon, 9 Jun 2014 20:35:27 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Ulf Samuelsson <meta-ti@emagii.com>
+Message-ID: <20140610003527.GI18034@edge>
 References: <5392397D.4000504@emagii.com>
 	<7fe72dbd-40a2-4730-a737-ac67ef21c9a1@email.android.com>
 	<5392BE20.2000509@emagii.com> <5394FEA0.1020602@emagii.com>
 	<CAMCfZKHYWGdStwbGVjnfqC3O3zj5j4qPmsq9jH=U9s_a92EtRA@mail.gmail.com>
 	<53963B12.2090906@emagii.com>
-Date: Mon, 9 Jun 2014 18:34:47 -0500
-Message-ID: <CAOCHtYh40Us+q3fCi3nUDDL2N8awzFVqaJFurgefzrWQZ_ddqQ@mail.gmail.com>
-From: Robert Nelson <robertcnelson@gmail.com>
-To: Ulf Samuelsson <meta-ti@emagii.com>
+MIME-Version: 1.0
+In-Reply-To: <53963B12.2090906@emagii.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
 Subject: Re: Building qt5 using Yocto+meta-ti possible for Beaglebone?
 X-BeenThere: meta-ti@yoctoproject.org
@@ -61,10 +50,95 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jun 2014 23:35:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 10 Jun 2014 00:35:37 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
->
+On Tue, Jun 10, 2014 at 12:54:10AM +0200, Ulf Samuelsson wrote:
+> 
+> 2014-06-09 12:04, Diego Sueiro skrev:
+> >Ulf,
+> >
+> >On Sun, Jun 8, 2014 at 9:24 PM, Ulf Samuelsson <meta-ti@emagii.com
+> ><mailto:meta-ti@emagii.com>> wrote:
+> >
+> >    Romber Nelson and some other people mention that the 3.12 kernel
+> >    used is not compatible with the advanced capes like LCDs.
+> >    Do I need to revert to the 3.8 kernel?
+> >
+> >
+> >Kernel 3.12 does not have cape manager capabilities, as far as I know.
+> >Did you tested it in a HDMI monitor/TV?
+> >
+> >
+> I have a 4,3" LCD display and HDMI connected.
+> 
+> "Romber Nelson" = Robert C Nelson.
+> 
+> I replaced the  meta-ti kernel with his patched 3.8.13 kernel.
+> If I understand this correctly, this has backported the Graphics
+> acceleration.
+> 
+> Made sure that kernel-modules and libgles-omap3 are included in the build.
+> Also made sure that qtbase-5.1.1 is built with qtbaseexamples for testing.
+> 
+> I also enabled the LCD in the bootargs.
+> 
+> Now I get a splash screen and I can run the qt examples,
+> but only if I supply the linux frame buffer
+> 
+> "$ calculator"   fails, due not no X-windowa
+> 
+> Available platform plugins are: eglfs, linuxfb, minimal, minimalegl,
+> offscreen.
+> 
+> "$ calculator -platform linuxfb" works, but is of course not accelerated.
+> 
+> "$ calculator -platform eglfs" fails.
+> 
+> Could not initialize egl display
+> EGL error
+> Aborted
+
+IIRC, there were some additional patches for libgles-omap3 and Qt5 in 
+meta-arago... I don't remember the version of Qt5 when I played with it and 
+got it working - it was either 5.1.1 or 5.2...
+
+
+> I assume that this is either a faulty kernel, or lack of libraries.
+> 
+> My libraires related to EGL are:
+> 
+> root@beaglebone:/usr/lib# ls | grep EGL
+> libEGL.so
+> libEGL.so.1
+> libEGL.so.1.10
+> libEGL.so.1.10.2359475
+> libEGL_eglimage.so
+> libEGL_eglimage.so.1
+> libEGL_eglimage.so.1.10
+> libEGL_eglimage.so.1.10.2359475
+> libpvrPVR2D_BLITWSEGL.so
+> libpvrPVR2D_BLITWSEGL.so.1
+> libpvrPVR2D_BLITWSEGL.so.1.10
+> libpvrPVR2D_BLITWSEGL.so.1.10.2359475
+> libpvrPVR2D_FLIPWSEGL.so
+> libpvrPVR2D_FLIPWSEGL.so.1
+> libpvrPVR2D_FLIPWSEGL.so.1.10
+> libpvrPVR2D_FLIPWSEGL.so.1.10.2359475
+> libpvrPVR2D_FRONTWSEGL.so
+> libpvrPVR2D_FRONTWSEGL.so.1
+> libpvrPVR2D_FRONTWSEGL.so.1.10
+> libpvrPVR2D_FRONTWSEGL.so.1.10.2359475
+> libpvrPVR2D_LINUXFBWSEGL.so
+> libpvrPVR2D_LINUXFBWSEGL.so.1
+> libpvrPVR2D_LINUXFBWSEGL.so.1.10
+> libpvrPVR2D_LINUXFBWSEGL.so.1.10.2359475
+> 
+> Any other library, I should be looking for?
+> 
+> -----------------------------------------------------------------------
+> 
 > The kernel options have set
 > CONFIG_DRM_TILCDC=y
 > CONFIG_DRM is not set
@@ -74,32 +148,29 @@ Content-Type: text/plain; charset=UTF-8
 > CONFIG_FB_DA8XX=y
 > CONFIG_FB_ST7735=y
 > FB_BOTH_ENDIAN=y
->
+> 
 > CONFIG_OMAP2_DSS_DPI=y
 > CONFIG_OMAP2_DSS_RFBI=y
 > CONFIG_OMAP2_DSS_VENC=y
 > CONFIG_OMAP4_DSS_HDMI=y
 > CONFIG_OMAP2_DSS_SDI=y
 > CONFIG_OMAP2_DSS_DSL=y
->
+> 
 > CONFIG_FB_OMAP2_DEBUG_SUPPORT=y
->
->
+> 
+> 
 > CONFIG_FB_OMAP2_NUM_FBS=3
-
-If this is just for the beaglebone you can drop these OMAP*_DSS configs..
-
->
+> 
 > CONFIG_PANEL_GENERIC_DPI=m
 > CONFIG_PANEL_SHARP_LS037V7DW01=m
 > CONFIG_PANEL_NEC_NL8048HL11_01B=m
->
+> 
 > CONFIG_PANEL_TAAL=y
 > CONFIG_PANEL_TPO_TD043MTEA1=y
 > CONFIG_PANEL_ACX565AKM=y
 > CONFIG_LCD_ILI9320=y
->
->
+> 
+> 
 > CONFIG_LCD_PLATFORM=y
 > CONFIG_FRAMEBUFFER_CONSOLE=y
 > CONFIG_FONTS=y
@@ -109,31 +180,54 @@ If this is just for the beaglebone you can drop these OMAP*_DSS configs..
 > LOGO_LINUX_MONO=y
 > LOGO_LINUX_VGA16=y
 > LOGO_LINUX_CLUT224=y
->
-> Checked the 3.12 meta-ti kernel and it does not seem to have a lot of extra
-> config options.
->
+> 
+> Checked the 3.12 meta-ti kernel and it does not seem to have a lot
+> of extra config options.
+> 
 > Should I focus on the kernel or the libraries to get an EGL display?
->
 > ---------------------------------------------------------------------
->
+> 
 > BTW: What is the reason that there is no cape support
->
+> 
 > 1.It is considered a bad idea, and rejected?
 > 2.Beaglebone specific, and thus of no interest to anyone with real money?
 > 3.Noone bothered to submit to mainstream?
-
-Patch series 1 (overlays) is stuck in never-ending "review", here is
-the latest submission:
-
-https://lkml.org/lkml/2014/5/28/280
-
 > 4.There is another API in the works, which will allow similar functionality.
 > 5.Other reason?
 
-Regards,
+5. Other reason - it's been in the works for some time now, but is still not 
+merged upstream, as it's not trivial. You can google for capebus, capemgr and 
+devtree overlays for the latest set of patches...
 
--- 
-Robert Nelson
-http://www.rcn-ee.com/
+
+> Seems that every system on a chip with programmable I/O would need
+> something similar.
+> 
+> Is there any other easy way to get the LCD running.
+> Customized device-tree fille?
+> 
+> Any such file available off the shelf?
+> 
+> 
+> BR
+> Ulf Samuelsson
+> 
+> >Regrads,
+> >
+> >--
+> >*dS
+> >Diego Sueiro
+> >
+> >Administrador do Embarcados
+> >www.embarcados.com.br <http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
+> >
+> >/*long live rock 'n roll*/
+> 
+
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+
 
