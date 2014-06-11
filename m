@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A4D7FE00B83; Tue, 10 Jun 2014 19:29:43 -0700 (PDT)
+	id A2D31E00BF5; Tue, 10 Jun 2014 19:29:43 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,15 +10,15 @@ X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	with *      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E48E9E00B83
-	for <meta-ti@yoctoproject.org>; Tue, 10 Jun 2014 19:29:29 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E829BE00BE8
+	for <meta-ti@yoctoproject.org>; Tue, 10 Jun 2014 19:29:35 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 15AAA52A80; Wed, 11 Jun 2014 02:29:29 +0000 (UTC)
+	id 7AD8852AC5; Wed, 11 Jun 2014 02:29:35 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140611022929.15AAA52A80@arago-project.org>
-Date: Wed, 11 Jun 2014 02:29:28 +0000 (UTC)
+Message-Id: <20140611022935.7AD8852AC5@arago-project.org>
+Date: Wed, 11 Jun 2014 02:29:35 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Hao Zhang : keystone: linux: add K2L and K2E DTB for RT build
+Subject: Hao Zhang : keystone: linux: add K2E and K2L DTB build support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,26 +35,26 @@ X-List-Received-Date: Wed, 11 Jun 2014 02:29:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 45db1b50bd4c3d3f2d70cab4f1acde3c1661ed18
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=45db1b50bd4c3d3f2d70cab4f1acde3c1661ed18
+Branch: dora
+Commit: 92effbbcad441f92b9c487043b0f8f0a64f9fc73
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=92effbbcad441f92b9c487043b0f8f0a64f9fc73
 
 Author: Hao Zhang <hzhang@ti.com>
-Date:   Tue Jun 10 07:29:45 2014 +0000
+Date:   Tue Jun 10 07:13:57 2014 +0000
 
-keystone: linux: add K2L and K2E DTB for RT build
+keystone: linux: add K2E and K2L DTB build support
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-keystone-rt_3.10.bb |    2 ++
+ recipes-kernel/linux/linux-keystone_3.10.bb |    2 ++
  1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-keystone-rt_3.10.bb b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-index eb4bbd2..70073f9 100644
---- a/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-+++ b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
+diff --git a/recipes-kernel/linux/linux-keystone_3.10.bb b/recipes-kernel/linux/linux-keystone_3.10.bb
+index 93b5481..e90c9fc 100644
+--- a/recipes-kernel/linux/linux-keystone_3.10.bb
++++ b/recipes-kernel/linux/linux-keystone_3.10.bb
 @@ -14,6 +14,8 @@ MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
  PR = "${MACHINE_KERNEL_PR}"
  
