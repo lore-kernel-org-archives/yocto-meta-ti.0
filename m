@@ -1,51 +1,36 @@
-Return-Path: <ashcharles@gmail.com>
+Return-Path: <fcooper@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0D580E00B83; Wed, 11 Jun 2014 01:13:52 -0700 (PDT)
+	id 08B71E00BC2; Wed, 11 Jun 2014 06:54:18 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (ashcharles[at]gmail.com)
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.128.181 listed in list.dnswl.org]
-Received: from mail-ve0-f181.google.com (mail-ve0-f181.google.com
-	[209.85.128.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CBE9FE0082A
-	for <meta-ti@yoctoproject.org>; Wed, 11 Jun 2014 01:13:42 -0700 (PDT)
-Received: by mail-ve0-f181.google.com with SMTP id db11so4646460veb.26
-	for <meta-ti@yoctoproject.org>; Wed, 11 Jun 2014 01:13:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=KLv8jgnXVHcdIAy0k9qAHUSf+KBrpusIQMz8sAFTVBY=;
-	b=Bn3rBFMbAMsbA+xQVz0Q9MSIgHVgQ8sxbTXLe28sZWWQL34c01oyjbRotcItBycd9S
-	lJEAMKx9ySSv9wR2W8+CJu1DX0bQljOnNORiZyUuR98kgcfbfTPDUY3NrcuqIiJXtwrG
-	x2jJQ+Oyil/2eDh0G/jzjIOssfdLfOlGczUKsKEoso9hXIwpIHBbtZQtkSs9b//tzEAk
-	okAg6wCY5WEP8h2kFYFJmFBRf9mv5PTfFNp8or6nrVuE6FIZxbHWk9++vAeKoKEw11/T
-	Gt6NejEjrUTwcQ6lqlJzLw1LbJWtEywThgIo2jNf6nqQL+EsKYXSxdWSzmP5XqYxeOAT
-	90jw==
-X-Received: by 10.58.132.70 with SMTP id os6mr1615702veb.36.1402474422017;
-	Wed, 11 Jun 2014 01:13:42 -0700 (PDT)
+X-Spam-Status: No, score=-5.0 required=5.0 tests=RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CB154E00B74
+	for <meta-ti@yoctoproject.org>; Wed, 11 Jun 2014 06:54:14 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5BDsDVL004544
+	for <meta-ti@yoctoproject.org>; Wed, 11 Jun 2014 08:54:13 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5BDsCti006588
+	for <meta-ti@yoctoproject.org>; Wed, 11 Jun 2014 08:54:13 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Wed, 11 Jun 2014 08:54:12 -0500
+Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5BDs9I4030034;
+	Wed, 11 Jun 2014 08:54:11 -0500
+From: "Franklin S. Cooper Jr" <fcooper@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 11 Jun 2014 08:54:07 -0500
+Message-ID: <1402494847-29713-1-git-send-email-fcooper@ti.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-Received: by 10.58.198.163 with HTTP; Wed, 11 Jun 2014 01:13:11 -0700 (PDT)
-In-Reply-To: <20140611025637.GK18034@edge>
-References: <CAK8F28kqBnnWBgdk3TXHqBLVW25sVchmQ-eUVf5ujbh=6Dcwtw@mail.gmail.com>
-	<20140611025637.GK18034@edge>
-From: Ash Charles <ashcharles@gmail.com>
-Date: Wed, 11 Jun 2014 01:13:11 -0700
-Message-ID: <CAK8F28khwqPSrfonrhqWDDe=_=Mn1602z8w-h3EYV9x_3oU4-g@mail.gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: DSP packages for OMAP3
+Subject: [for dora & master][PATCH] u-boot-ti-staging:_2013.10: Update to pull in critical fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,17 +43,39 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jun 2014 08:13:52 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 11 Jun 2014 13:54:18 -0000
+Content-Type: text/plain
 
-On Tue, Jun 10, 2014 at 7:56 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> Unfortunately, DSP support in meta-ti is not maintained currently, as
-> explained in the corresponding README file.
-Thanks Denys---I understand the recipes are aging a bit.  I mostly
-trying to  get a handle on what is achievable with the current
-state-of-the-art.  Know of any reason a) not to try with a recent
-version of the CGT b) that hard float can't be used with DSP support
-code?
+* Critical fixes have been added to the ti-u-boot-2013.10 branch for AM4x.
+* Update commit id to point to this new commit.
+* For all other platforms nothing should have changed.
+---
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
---Ash
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+index b8f5ce6..d954db4 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+@@ -5,14 +5,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+ 
+ PV = "2013.10"
+-PR = "r7+gitr${SRCPV}"
++PR = "r8+gitr${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2013.10"
+ 
+-# Corresponds to tag ti2013.12.01
+-SRCREV = "78d8ebd4a0214b72a125f5b98c5ed2f9a3e5e783"
++# Corresponds to tag ti2013.12.01_amsdk-07.01
++SRCREV = "259ff9a577cc66cb40e3cdff3e41628e466f0fef"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
+-- 
+1.7.0.4
+
 
