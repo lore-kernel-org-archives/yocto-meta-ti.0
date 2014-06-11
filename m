@@ -1,24 +1,39 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CD80EE00BE1; Tue, 10 Jun 2014 19:29:46 -0700 (PDT)
+	id 13E3DE00BE1; Tue, 10 Jun 2014 19:56:44 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.4 required=5.0 tests=RDNS_DYNAMIC autolearn=no
-	version=3.3.1
-X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
-	with *      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6D6F8E00BF8
-	for <meta-ti@yoctoproject.org>; Tue, 10 Jun 2014 19:29:45 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 0840D52ABF; Wed, 11 Jun 2014 02:29:45 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20140611022945.0840D52ABF@arago-project.org>
-Date: Wed, 11 Jun 2014 02:29:44 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Hao Zhang : keystone: linux: add K2L and K2E DTB for RT build
+X-Spam-Status: No, score=-5.0 required=5.0 tests=RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C1407E00B83
+	for <meta-ti@yoctoproject.org>; Tue, 10 Jun 2014 19:56:40 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5B2udL0014125;
+	Tue, 10 Jun 2014 21:56:39 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5B2udKE026249;
+	Tue, 10 Jun 2014 21:56:39 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 10 Jun 2014 21:56:39 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5B2uddD021171;
+	Tue, 10 Jun 2014 21:56:39 -0500
+Date: Tue, 10 Jun 2014 22:56:39 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Ash Charles <ashcharles@gmail.com>
+Message-ID: <20140611025637.GK18034@edge>
+References: <CAK8F28kqBnnWBgdk3TXHqBLVW25sVchmQ-eUVf5ujbh=6Dcwtw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAK8F28kqBnnWBgdk3TXHqBLVW25sVchmQ-eUVf5ujbh=6Dcwtw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: DSP packages for OMAP3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,38 +46,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jun 2014 02:29:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 11 Jun 2014 02:56:44 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: dylan
-Commit: 475c45d19265180164df4a6a3cb2496c7c3c1ef7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=475c45d19265180164df4a6a3cb2496c7c3c1ef7
+On Tue, Jun 10, 2014 at 04:04:43PM -0700, Ash Charles wrote:
+> Hi,
+> 
+> I was stepping through the meta-ti layer to assess support for the DSP
+> on OMAP3[57].
+> 
+> Two questions:
+> 1.  It looks like there are more recent versions of the code
+> generation tools [1] (either 7.6.0 or 7.4.8) than 7.2.7.  Is there any
+> reason not to use these newer version? (Apologies if this is a dumb
+> question---I just don't know enough about the DSP ecosystem)
+> 
+> 2. It seems like ti-dsplink and ti-linuxutils (among others I suspect)
+> have hardcoded compiler paths and flags that supersede those provided
+> by bitbake.  This is causing me headaches when trying to build with a
+> hardfp compiler (as recent SGX binaries are provided in hardfp mode).
+> Is there a technical limitation to compiling DSP support code with a
+> hard float compiler?  I don't mind taking a stab at making the
+> makefiles a little more flexible but if the code itself relies on
+> non-hardfp, I'll need to rethink.
 
-Author: Hao Zhang <hzhang@ti.com>
-Date:   Tue Jun 10 07:29:45 2014 +0000
+Unfortunately, DSP support in meta-ti is not maintained currently, as 
+explained in the corresponding README file.
 
-keystone: linux: add K2L and K2E DTB for RT build
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-kernel/linux/linux-keystone-rt_3.10.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-keystone-rt_3.10.bb b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-index eb4bbd2..70073f9 100644
---- a/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-+++ b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-@@ -14,6 +14,8 @@ MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
-+KERNEL_DEVICETREE_k2e-evm = "k2e-evm.dtb"
-+KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
- 
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
- 
-
+-- 
+Denys
 
