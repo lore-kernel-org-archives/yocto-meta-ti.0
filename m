@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B0B28E00BAE; Tue, 10 Jun 2014 19:29:44 -0700 (PDT)
+	id B12E0E00BEC; Tue, 10 Jun 2014 19:29:44 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,13 +10,13 @@ X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	with *      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5C85E00BAE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E95A3E00BEC
 	for <meta-ti@yoctoproject.org>; Tue, 10 Jun 2014 19:29:29 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5314F52AC3; Wed, 11 Jun 2014 02:29:29 +0000 (UTC)
+	id E26FA52ABF; Wed, 11 Jun 2014 02:29:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140611022929.5314F52AC3@arago-project.org>
-Date: Wed, 11 Jun 2014 02:29:29 +0000 (UTC)
+Message-Id: <20140611022928.E26FA52ABF@arago-project.org>
+Date: Wed, 11 Jun 2014 02:29:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Hao Zhang : keystone: linux: add K2E and K2L DTB build support
 X-BeenThere: meta-ti@yoctoproject.org
@@ -35,9 +35,9 @@ X-List-Received-Date: Wed, 11 Jun 2014 02:29:44 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: e4be015537ceeb551b989dd546e78e394fb069f4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e4be015537ceeb551b989dd546e78e394fb069f4
+Branch: daisy
+Commit: 355e8633e588dd8ee968d3be5b7a92041093176c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=355e8633e588dd8ee968d3be5b7a92041093176c
 
 Author: Hao Zhang <hzhang@ti.com>
 Date:   Tue Jun 10 07:13:57 2014 +0000
