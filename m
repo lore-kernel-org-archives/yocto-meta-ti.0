@@ -1,6 +1,6 @@
 Return-Path: <ashcharles@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3BA83E00BEC; Fri, 13 Jun 2014 15:34:49 -0700 (PDT)
+	id 34CB7E00BB3; Fri, 13 Jun 2014 15:34:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -16,36 +16,37 @@ X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
 	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
 	low *      trust
-	*      [209.85.220.42 listed in list.dnswl.org]
-Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
-	[209.85.220.42])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A153EE00BB1
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 15:34:42 -0700 (PDT)
-Received: by mail-pa0-f42.google.com with SMTP id lj1so2595831pab.1
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 15:34:42 -0700 (PDT)
+	*      [209.85.160.49 listed in list.dnswl.org]
+Received: from mail-pb0-f49.google.com (mail-pb0-f49.google.com
+	[209.85.160.49])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D4995E00BB3
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 15:34:48 -0700 (PDT)
+Received: by mail-pb0-f49.google.com with SMTP id jt11so2520587pbb.8
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 15:34:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=bqXkr9USZ9be1fVfe0CHiNtFccAaO1nhUHTI6ZQ+zek=;
-	b=QbCTcZyqumH2Qevb7W4uQHNJbRK/9/te1eGJUzo9XZVgoTm2w0jfT5T2Mz7sRoiVt8
-	Z7BK1yCA6VNUfa5UJ1FvjW18TG2dw+LwM2OFotQOzeV+NVMLLrWo54+gxwlfAlYo+L2c
-	yG60cxEWBqQyhavBPaensXtOuiH5mgPl11hkJ/AMS/1qOFZU6aF2WXAQfs08IpV0zq0B
-	ZapYLSDvXd8nR7Cyn1yep6bwsjYcgZGGwMsWyJ/lMAc/b6d0irY0rjmEn7sjY87oGbfS
-	TwiXJlGXA8i7YlQjcg8zNXfyjjh+Nd/ncF4OjH6LTe9+ONFIK5t/UcHFB0fJ77s18sRZ
-	R1og==
-X-Received: by 10.68.222.196 with SMTP id qo4mr6814407pbc.14.1402698882330;
-	Fri, 13 Jun 2014 15:34:42 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=Q5hWC64KiJMMe6Jx1G/f21kFEyaTmxCx4KJ0ynP3gfc=;
+	b=Rjng9e+1A6FUxpYzmHE75JN0FI1lAxDueVLT9DB4dOt0Ehim+SqEU5Ir57W8Rh7Gml
+	WZRotJ46N0oWwycennPUBF5XNRD888NDikC4REptb0Txu5Dx7pez0BuTJReCFCwtZA1d
+	h3gfuKS1fR1cq0v8g0mNEvSEgpU0PJ9qBWLYIGyjjPnm1wlADB0q9hNqazRI4xJiUXFz
+	OvWweyO4VDVeihwf2g0G9HbLaM+w0de1KhOmNp9RYPEwiGgtVv1w4sDoLtaGMGjlcI3k
+	iNd+Y8vE9fpZIznRXsbikv4Di8Cd67T0rJ6tPZN2WeBVPy5I4vi4heHHJGBfOxzQ3B1k
+	YfWQ==
+X-Received: by 10.69.25.69 with SMTP id io5mr6919192pbd.22.1402698888041;
+	Fri, 13 Jun 2014 15:34:48 -0700 (PDT)
 Received: from gumstux.bchsia.telus.net (s206-116-3-18.bc.hsia.telus.net.
 	[206.116.3.18]) by mx.google.com with ESMTPSA id
-	xk1sm27397061pac.21.2014.06.13.15.34.41 for <multiple recipients>
+	xk1sm27397061pac.21.2014.06.13.15.34.47 for <multiple recipients>
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 13 Jun 2014 15:34:41 -0700 (PDT)
+	Fri, 13 Jun 2014 15:34:47 -0700 (PDT)
 From: Ash Charles <ashcharles@gmail.com>
 To: meta-ti@yoctoproject.org
-Date: Fri, 13 Jun 2014 15:34:03 -0700
-Message-Id: <1402698848-13759-1-git-send-email-ashcharles@gmail.com>
+Date: Fri, 13 Jun 2014 15:34:04 -0700
+Message-Id: <1402698848-13759-2-git-send-email-ashcharles@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
-Cc: Scott Ellis <scott@jumpnowtek.com>
-Subject: [PATCH 1/6] Remove deprecated update-modules from recipes
+In-Reply-To: <1402698848-13759-1-git-send-email-ashcharles@gmail.com>
+References: <1402698848-13759-1-git-send-email-ashcharles@gmail.com>
+Subject: [PATCH 2/6] Set ${TOOLCHAIN_PATH} used by some recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -58,94 +59,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jun 2014 22:34:49 -0000
+X-List-Received-Date: Fri, 13 Jun 2014 22:34:51 -0000
 
-From: Scott Ellis <scott@jumpnowtek.com>
-
+Signed-off-by: Ash Charles <ashcharles@gmail.com>
 ---
- recipes-ti/dsplink/ti-dsplink.inc                        | 16 ----------------
- .../local-power-manager/ti-local-power-manager.inc       | 13 -------------
- recipes-ti/syslink/ti-syslink.inc                        | 16 ----------------
- 3 files changed, 45 deletions(-)
+ recipes-ti/includes/ti-paths.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/recipes-ti/dsplink/ti-dsplink.inc b/recipes-ti/dsplink/ti-dsplink.inc
-index ce7cbf9..fa1c9dd 100644
---- a/recipes-ti/dsplink/ti-dsplink.inc
-+++ b/recipes-ti/dsplink/ti-dsplink.inc
-@@ -187,22 +187,6 @@ do_install () {
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index 511b5ae..5c9b716 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -1,5 +1,6 @@
+ installdir = "${datadir}/ti"
  
- PACKAGES =+ "ti-dsplink-module"
- FILES_ti-dsplink-module = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp/dsplinkk.ko" 
--RDEPENDS_ti-dsplink-module += "update-modules"
--
--pkg_postinst_ti-dsplink-module () {
--#!/bin/sh
--if [ -n "$D" ]; then
--	exit 1
--fi
--
--depmod -a
--update-modules || true
--}
--
--pkg_postrm_ti-dsplink-module () {
--#!/bin/sh
--update-modules || true
--}
- 
- PACKAGES += "ti-dsplink-examples"
- RDEPENDS_ti-dsplink-examples_append = " ti-dsplink-module"
-diff --git a/recipes-ti/local-power-manager/ti-local-power-manager.inc b/recipes-ti/local-power-manager/ti-local-power-manager.inc
-index 9155c76..2f2b525 100644
---- a/recipes-ti/local-power-manager/ti-local-power-manager.inc
-+++ b/recipes-ti/local-power-manager/ti-local-power-manager.inc
-@@ -113,19 +113,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- PACKAGES += "ti-lpm-module"
- FILES_ti-lpm-module = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp/*lpm*ko"
- RDEPENDS_ti-lpm-module += "ti-dsplink-module"
--RDEPENDS_ti-lpm-module += "update-modules"
--
--pkg_postinst_ti-lpm-module_append () {
--        if [ -n "$D" ]; then
--                exit 1
--        fi
--        depmod -a
--        update-modules || true
--}
--
--pkg_postrm_ti-lpm-module_append () {
--        update-modules || true
--}
- 
- PACKAGES += "ti-lpm-utils"
- RDEPENDS_ti-lpm-utils += "ti-lpm-module"
-diff --git a/recipes-ti/syslink/ti-syslink.inc b/recipes-ti/syslink/ti-syslink.inc
-index 70289d4..af5f896 100644
---- a/recipes-ti/syslink/ti-syslink.inc
-+++ b/recipes-ti/syslink/ti-syslink.inc
-@@ -216,22 +216,6 @@ do_install () {
- 
- PACKAGES =+ "ti-syslink-module"
- FILES_ti-syslink-module = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/dsp/syslink.ko" 
--RDEPENDS_ti-syslink-module += "update-modules"
--
--pkg_postinst_ti-syslink-module () {
--#!/bin/sh
--if [ -n "$D" ]; then
--	exit 1
--fi
--
--depmod -a
--update-modules || true
--}
--
--pkg_postrm_ti-syslink-module () {
--#!/bin/sh
--update-modules || true
--}
- 
- PACKAGES =+ "ti-syslink-examples"
- RRECOMMENDS_ti-syslink-examples_append = " ti-syslink-module"
++export TOOLCHAIN_PATH = "${STAGING_DIR_NATIVE}${prefix_native}/bin/${TARGET_SYS}"
+ # This is where do_install will put it
+ export AUDIO_SOC_INSTALL_DIR_RECIPE  = "${installdir}/ti-audio-soc-example-tree"
+ export BIOS_INSTALL_DIR_RECIPE       = "${installdir}/ti-dspbios-tree"
 -- 
 1.8.3.2
 
