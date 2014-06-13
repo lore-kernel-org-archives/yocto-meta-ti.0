@@ -1,6 +1,6 @@
 Return-Path: <chase.maupin@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BB570E00BEA; Fri, 13 Jun 2014 14:56:13 -0700 (PDT)
+	id DE37DE00BB3; Fri, 13 Jun 2014 14:56:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,29 +8,31 @@ X-Spam-Status: No, score=-5.0 required=5.0 tests=RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8542EE00AFD
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 14:56:01 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5DLu0Lq026928
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 16:56:00 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5DLu0Ut032224
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 16:56:00 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 13 Jun 2014 16:56:00 -0500
+	*      [198.47.26.152 listed in list.dnswl.org]
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A27D2E00BB1
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 14:56:05 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5DLu3mL007401
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 16:56:03 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5DLu2ME015632
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 16:56:03 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 13 Jun 2014 16:56:02 -0500
 Received: from sdit-build04.dal.design.ti.com (dbdp20.itg.ti.com
 	[172.24.170.38])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s5DLtvbO018171;	Fri, 13 Jun 2014 16:55:58 -0500
+	s5DLtvbP018171;	Fri, 13 Jun 2014 16:56:01 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 13 Jun 2014 16:55:54 -0500
-Message-ID: <1402696555-21792-1-git-send-email-Chase.Maupin@ti.com>
+Date: Fri, 13 Jun 2014 16:55:55 -0500
+Message-ID: <1402696555-21792-2-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1402696555-21792-1-git-send-email-Chase.Maupin@ti.com>
+References: <1402696555-21792-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2] u-boot: Add mainline u-boot version 2014.07-rc3
+Subject: [PATCH 2/2] u-boot: remove old mainline versions
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,53 +48,81 @@ List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 X-List-Received-Date: Fri, 13 Jun 2014 21:56:13 -0000
 Content-Type: text/plain
 
-* The latest mainline u-boot works well for most TI devices and
-  we want to enable more people to use and test it.  Adding
-  version 2014.07-rc3 will allow more people to build and use this
-  u-boot version
-* Add a dependency on dtc-native since the latest mainline of u-boot
-  now requires this and not every build host will have the right
-  version.
+* Remove old mainline u-boot versions since the latest version
+  has better support for TI platforms.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- recipes-bsp/u-boot/u-boot_2014.07.bb |   27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
- create mode 100644 recipes-bsp/u-boot/u-boot_2014.07.bb
+ recipes-bsp/u-boot/u-boot_2011.12.bb    |   37 -------------------------------
+ recipes-bsp/u-boot/u-boot_2013.01.01.bb |   15 -------------
+ 2 files changed, 52 deletions(-)
+ delete mode 100644 recipes-bsp/u-boot/u-boot_2011.12.bb
+ delete mode 100644 recipes-bsp/u-boot/u-boot_2013.01.01.bb
 
-diff --git a/recipes-bsp/u-boot/u-boot_2014.07.bb b/recipes-bsp/u-boot/u-boot_2014.07.bb
-new file mode 100644
-index 0000000..b326aa1
---- /dev/null
-+++ b/recipes-bsp/u-boot/u-boot_2014.07.bb
-@@ -0,0 +1,27 @@
-+require u-boot-ti.inc
-+
-+# DEPEND on dtc-native for mainline u-boot because the mainline u-boot depends
-+# on some of the latest syntax constructs for an appended in dtb used for
-+# items like secure boot/image signing.
-+DEPENDS += "dtc-native"
-+
-+DESCRIPTION = "Mainline u-boot bootloader"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
-+
-+# This is still an RC so set the PV accordingly to allow proper version
-+# ordering when the RC is dropped.
-+PV = "2014.04+2014.07-rc3"
-+PR = "r0"
-+
-+SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
-+
-+BRANCH ?= "master"
-+
-+# Corresponds to tag v2014.07-rc3
-+SRCREV = "76b21026ceb5a6a83fc53b0ecdf425f240318022"
-+
-+SPL_BINARY = "MLO"
-+SPL_UART_BINARY = "u-boot-spl.bin"
+diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
+deleted file mode 100644
+index 13cb537..0000000
+--- a/recipes-bsp/u-boot/u-boot_2011.12.bb
++++ /dev/null
+@@ -1,37 +0,0 @@
+-require u-boot-ti.inc
+-
+-SPL_BINARY = "MLO"
+-
+-PR = "r8"
+-
+-COMPATIBLE_MACHINE = "(beagleboard|pandaboard|am3517-evm|am37x-evm|omap3evm)"
+-
+-# Non-omap4 platforms need outer cache turned on
+-CACHEFIX = "file://2011.12/0008-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.patch"
+-CACHEFIX_omap4 = ""
+-
+-# File is board-specific, only copy when it will be correct.
+-FWENV_beagleboard = "file://fw_env.config"
+-FWENV = ""
+-
+-SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
+-           file://2011.12/0001-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch \
+-           file://2011.12/0002-beagleboard-add-support-for-TCT-Beacon-board.patch \
+-           file://2011.12/0003-beagleboard-add-support-for-scanning-loop-through-ex.patch \
+-           file://2011.12/0004-omap4-common-mount-root-RO.patch \
+-           file://2011.12/0005-omap4-common-use-ext4-by-default.patch \
+-           file://2011.12/0006-OMAP-MMC-Add-delay-before-waiting-for-status.patch \
+-           file://2011.12/0007-config-Always-use-GNU-ld.patch \
+-           ${CACHEFIX} \
+-           file://2011.12/0009-Beagleboard-Correct-memory-size-on-rev-C4.patch \
+-           file://2011.12/0010-OMAP3-Correct-get_sdr_cs_offset-mask.patch \
+-           file://2011.12/0011-ext2load-increase-read-speed.patch \
+-           file://2011.12/0012-ext4fs-ls-load-support.patch \
+-           file://2011.12/0013-beagleboard-switch-mmcroots-to-ext4.patch \
+-           ${FWENV} \
+-          "
+-
+-# v2011.12 tag
+-SRCREV = "cba9a894fdb1cb49b60fcd1d1d6919cbd7995dd5"
+-
+-RRECOMMENDS_${PN}_beagleboard = "u-boot-fw-utils"
+diff --git a/recipes-bsp/u-boot/u-boot_2013.01.01.bb b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
+deleted file mode 100644
+index e3da1f3..0000000
+--- a/recipes-bsp/u-boot/u-boot_2013.01.01.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-require u-boot-ti.inc
+-
+-DESCRIPTION = "Mainline u-boot bootloader"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-PR = "r1"
+-
+-SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
+-
+-BRANCH ?= "u-boot-2013.01.y"
+-
+-SRCREV = "e8ae0fa5edd152b2b29c470b88429be4cdcd2c46"
+-
+-SPL_BINARY = "MLO"
 -- 
 1.7.9.5
 
