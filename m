@@ -1,52 +1,40 @@
-Return-Path: <ashcharles@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DB07CE00C0E; Fri, 13 Jun 2014 15:34:56 -0700 (PDT)
+	id ABE09E00BFD; Fri, 13 Jun 2014 19:46:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (ashcharles[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.220.43 listed in list.dnswl.org]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
-	[209.85.220.43])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0DD03E00BEA
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 15:34:51 -0700 (PDT)
-Received: by mail-pa0-f43.google.com with SMTP id lf10so2543824pab.2
-	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 15:34:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=jmGLQSHGOXe/SBeXF/aHWB3vM12JxU58mvDA+2r2jfY=;
-	b=FJzqZcNLO65VAW2D/5ZxO6sAuZpDjEz5jxFM9I6OeiudfaeuDLmLfRzbQlNdvhYsRh
-	jD52P+2S1er6WsRy6p2/JjNP9W6RaFHa2bys6/FlLhxGUI8YtShbMeuzN9jrNkuAox1/
-	5EIyr287mSFJZngCFR7VsQXkqaE5Q/yJ8KMf8Wz+B0nSC09dLOn73pNGxfVugwiFVV+m
-	0kEE6A63yBnewbtAPxzrVGzSB9WF3Du+LPUCiHFxoadzM0Y4tm8RcKzfcxD7L1fhZZtb
-	EWE8BoVsZ4dsNwuN99TBpM0eapAte3jWNRn3jRDFuJ8IdkN7+L1JU13qudJ+08p9nAhM
-	fo+A==
-X-Received: by 10.68.235.6 with SMTP id ui6mr6578029pbc.45.1402698890830;
-	Fri, 13 Jun 2014 15:34:50 -0700 (PDT)
-Received: from gumstux.bchsia.telus.net (s206-116-3-18.bc.hsia.telus.net.
-	[206.116.3.18]) by mx.google.com with ESMTPSA id
-	xk1sm27397061pac.21.2014.06.13.15.34.49 for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 13 Jun 2014 15:34:50 -0700 (PDT)
-From: Ash Charles <ashcharles@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Fri, 13 Jun 2014 15:34:07 -0700
-Message-Id: <1402698848-13759-5-git-send-email-ashcharles@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-In-Reply-To: <1402698848-13759-1-git-send-email-ashcharles@gmail.com>
-References: <1402698848-13759-1-git-send-email-ashcharles@gmail.com>
-Subject: [PATCH 5/6] Use INSANE_SKIP_${PN} = "installed-vs-shipped"
+X-Spam-Status: No, score=-3.9 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: *  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 41727E00BEA
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 19:46:26 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5E2kPjJ002403
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 21:46:25 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5E2kP7Z010598
+	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 21:46:25 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 13 Jun 2014 21:46:25 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s5E2kPdQ009614	for <meta-ti@yoctoproject.org>; Fri, 13 Jun 2014 21:46:25
+	-0500
+Date: Fri, 13 Jun 2014 22:29:56 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <502355220.179.1402712996898.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-06-13_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -59,153 +47,181 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jun 2014 22:34:56 -0000
+X-List-Received-Date: Sat, 14 Jun 2014 02:46:31 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_178_946829070.1402712996895"
 
-A number of recipes in recipes-ti install more files than are
-packaged causing lots of QA errors.  We choose to ignore these.
+------=_Part_178_946829070.1402712996895
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Ash Charles <ashcharles@gmail.com>
----
- recipes-ti/bios/ti-biosutils_1.02.02.bb                               | 1 +
- recipes-ti/bios/ti-dspbios_5.41.11.38.bb                              | 2 ++
- recipes-ti/codec-engine/ti-codec-engine_2.26.02.11.bb                 | 2 ++
- recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb              | 2 +-
- recipes-ti/devtools/ti-cgt6x_7.2.7.bb                                 | 2 ++
- recipes-ti/devtools/ti-xdctools_3.23.00.32.bb                         | 2 ++
- recipes-ti/dmai/ti-dmai_svn.bb                                        | 1 +
- recipes-ti/dsplink/ti-dsplink_1.65.00.03.bb                           | 1 +
- recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb                        | 1 +
- recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb | 2 +-
- recipes-ti/linuxutils/ti-linuxutils_2.26.01.02.bb                     | 1 +
- recipes-ti/local-power-manager/ti-local-power-manager_1.24.02.09.bb   | 1 +
- recipes-ti/xdais/ti-xdais_6.26.01.03.bb                               | 2 +-
- 13 files changed, 17 insertions(+), 3 deletions(-)
+<html>
+<head>
+<title>
+Status for 06/13/14
+</title>
+</head>
+<body>
 
-diff --git a/recipes-ti/bios/ti-biosutils_1.02.02.bb b/recipes-ti/bios/ti-biosutils_1.02.02.bb
-index 918f124..5b6b4f4 100644
---- a/recipes-ti/bios/ti-biosutils_1.02.02.bb
-+++ b/recipes-ti/bios/ti-biosutils_1.02.02.bb
-@@ -6,3 +6,4 @@ PVsuffix = "_02"
- SRC_URI[biosutilstarball.md5sum] = "0654e9e72b0a6fc7a6575829c0cd90c9"
- SRC_URI[biosutilstarball.sha256sum] = "df486500bdc8dbe3800fc7efe4241e6fa5b1827ba7c0dc17a71b41d42ef921e1"
- 
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/bios/ti-dspbios_5.41.11.38.bb b/recipes-ti/bios/ti-dspbios_5.41.11.38.bb
-index 9e3b695..f60f6c0 100644
---- a/recipes-ti/bios/ti-dspbios_5.41.11.38.bb
-+++ b/recipes-ti/bios/ti-dspbios_5.41.11.38.bb
-@@ -5,3 +5,5 @@ PV = "5_41_11_38"
- SRC_URI[biosbin.md5sum] = "7fab13740c25f5b34b331bcdc759536e"
- SRC_URI[biosbin.sha256sum] = "96b8e090f79420a4c11d9c0c10d182d1d3b4afb48f11ec375c97b4c91970d0a0"
- 
-+
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/codec-engine/ti-codec-engine_2.26.02.11.bb b/recipes-ti/codec-engine/ti-codec-engine_2.26.02.11.bb
-index bcb89b7..4a27b1d 100644
---- a/recipes-ti/codec-engine/ti-codec-engine_2.26.02.11.bb
-+++ b/recipes-ti/codec-engine/ti-codec-engine_2.26.02.11.bb
-@@ -8,3 +8,5 @@ SRC_URI += "file://bypass-GCArmv5T-used-is-sealed.patch"
- 
- SRC_URI[cetarball.md5sum] = "4f755f77119e4da19ab5cc7ae7ccfdb4"
- SRC_URI[cetarball.sha256sum] = "17fa053719265e0901fe3c3f90c9204957c6d0f5351d6b3ba4900df58cb7300f"
-+
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb b/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-index ea9f389..5c87b4c 100644
---- a/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-+++ b/recipes-ti/codec-engine/ti-codecs-omap3530_4.00.00.00.bb
-@@ -205,4 +205,4 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- PACKAGES += "ti-codecs-omap3530-server"
- FILES_ti-codecs-omap3530-server = "${installdir}/ti-codecs-server/*"
- 
--
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/devtools/ti-cgt6x_7.2.7.bb b/recipes-ti/devtools/ti-cgt6x_7.2.7.bb
-index aab1b96..a226600 100644
---- a/recipes-ti/devtools/ti-cgt6x_7.2.7.bb
-+++ b/recipes-ti/devtools/ti-cgt6x_7.2.7.bb
-@@ -9,3 +9,5 @@ PVwithdots = "7.2.7"
- SRC_URI[cgt6xbin.md5sum] = "71a0768a541fdebd9c35d44301019d1d"
- SRC_URI[cgt6xbin.sha256sum] = "211477f0142d603975544abe3c45cc3b77a3b38038158676c60812806378738b"
- 
-+
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/devtools/ti-xdctools_3.23.00.32.bb b/recipes-ti/devtools/ti-xdctools_3.23.00.32.bb
-index b2db76c..7f00d9e 100644
---- a/recipes-ti/devtools/ti-xdctools_3.23.00.32.bb
-+++ b/recipes-ti/devtools/ti-xdctools_3.23.00.32.bb
-@@ -9,3 +9,5 @@ SRC_URI[xdcbin.md5sum] = "263aa11795670265551d36a8c77ad27d"
- SRC_URI[xdcbin.sha256sum] = "880b4e263850f2a3c0ea7352c5b6e0a86692361e26634c3b70dddc42c71231a5"
- 
- S = "${WORKDIR}/ti/xdctools_${PV}"
-+
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/dmai/ti-dmai_svn.bb b/recipes-ti/dmai/ti-dmai_svn.bb
-index 3ac7a81..536bb78 100644
---- a/recipes-ti/dmai/ti-dmai_svn.bb
-+++ b/recipes-ti/dmai/ti-dmai_svn.bb
-@@ -36,3 +36,4 @@ SRC_URI_append = " file://omap3530-r642-remove-include-videodev.diff;striplevel=
-                    file://r642-fix-config-bld.diff;striplevel=3 \
-                  "
- 
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/dsplink/ti-dsplink_1.65.00.03.bb b/recipes-ti/dsplink/ti-dsplink_1.65.00.03.bb
-index a124b21..1d6fb00 100644
---- a/recipes-ti/dsplink/ti-dsplink_1.65.00.03.bb
-+++ b/recipes-ti/dsplink/ti-dsplink_1.65.00.03.bb
-@@ -14,3 +14,4 @@ SRC_URI += "file://dsplink-BKL-fix.patch \
- SRC_URI[dsplinktarball.md5sum] = "1bda596b631bd2f517edc70f6be4f2ca"
- SRC_URI[dsplinktarball.sha256sum] = "4b1bda89bd8465b887f5bcdf7b95018bc1d1f8968c0c44f8cbad2a9e1c52bcb7"
- 
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb b/recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb
-index 9b03e9b..549e020 100644
---- a/recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb
-+++ b/recipes-ti/edma3lld/ti-edma3lld_01.11.01.04.bb
-@@ -7,3 +7,4 @@ SRC_URI_edma3lldsite = "sdo_tii/psp"
- SRC_URI[edma3lldbin.md5sum] = "b3c41cb946e2e4b94348fc6bcbe30b16"
- SRC_URI[edma3lldbin.sha256sum] = "617db3eadff33a88e3d42818c204f379906da3b312bc120092408043e7e2aaeb"
- 
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb b/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
-index b7ea9b8..7abe793 100644
---- a/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
-+++ b/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
-@@ -5,4 +5,4 @@ PV = "2_26_00_01"
- SRC_URI[fctarball.md5sum] = "40b51cade2f9ae6e6f6dca73c17065af"
- SRC_URI[fctarball.sha256sum] = "3f7a12a51dfe87310828a31518d7ef8f9039e59269c0ca24f74a68433c235048"
- 
--
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/linuxutils/ti-linuxutils_2.26.01.02.bb b/recipes-ti/linuxutils/ti-linuxutils_2.26.01.02.bb
-index 2a67e6a..75a32da 100644
---- a/recipes-ti/linuxutils/ti-linuxutils_2.26.01.02.bb
-+++ b/recipes-ti/linuxutils/ti-linuxutils_2.26.01.02.bb
-@@ -8,3 +8,4 @@ PV = "2_26_01_02"
- SRC_URI[md5sum] = "70b4918bc35c1bcfef34d6ba3fbce0c8"
- SRC_URI[sha256sum] = "51266dd928f8d629cd417c869789a6c0d596612120f165619119cbaadfd66ee2"
- 
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/local-power-manager/ti-local-power-manager_1.24.02.09.bb b/recipes-ti/local-power-manager/ti-local-power-manager_1.24.02.09.bb
-index 759561f..195b177 100644
---- a/recipes-ti/local-power-manager/ti-local-power-manager_1.24.02.09.bb
-+++ b/recipes-ti/local-power-manager/ti-local-power-manager_1.24.02.09.bb
-@@ -8,3 +8,4 @@ SRC_URI += "file://lpm-BKL-fix.patch"
- SRC_URI[lpmtarball.md5sum] = "3d05453df26dfc811de04839d74c2f2b" 
- SRC_URI[lpmtarball.sha256sum] = "7335959a6217df17289f81839e6c6948f31cc0797ebc5389edef7190ed3ea589"
- 
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-diff --git a/recipes-ti/xdais/ti-xdais_6.26.01.03.bb b/recipes-ti/xdais/ti-xdais_6.26.01.03.bb
-index f8bef79..0451b2d 100644
---- a/recipes-ti/xdais/ti-xdais_6.26.01.03.bb
-+++ b/recipes-ti/xdais/ti-xdais_6.26.01.03.bb
-@@ -5,4 +5,4 @@ PV = "6_26_01_03"
- SRC_URI[xdaistarball.md5sum] = "9b2bea3408254e737ec0d819a031adf6"
- SRC_URI[xdaistarball.sha256sum] = "d7bcbd8bcfe6fdfc5f402e4b125ced6c806dc30bc5296e98d5d43b0b5a237a0d"
- 
--
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
--- 
-1.8.3.2
+<h2>Status for 06/13/14</h2>
+
+<h2>BUILD_ID: build-2014-06-13_21-01-31</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.05"<br>
+MACHINES="am335x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_178_946829070.1402712996895--
