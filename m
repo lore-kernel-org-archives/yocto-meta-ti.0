@@ -1,24 +1,39 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AAC6DE00C1A; Mon, 16 Jun 2014 15:40:43 -0700 (PDT)
+	id 07B2AE00BDE; Mon, 16 Jun 2014 16:13:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.4 required=5.0 tests=RDNS_DYNAMIC autolearn=no
-	version=3.3.1
-X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
-	with *      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BF84E00C39
-	for <meta-ti@yoctoproject.org>; Mon, 16 Jun 2014 15:40:34 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 3BB07529F5; Mon, 16 Jun 2014 22:40:34 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20140616224034.3BB07529F5@arago-project.org>
-Date: Mon, 16 Jun 2014 22:40:34 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Hao Zhang : keystone: config: fix K2L boot monitor build target name error
+X-Spam-Status: No, score=-5.0 required=5.0 tests=RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1E80BE00B71
+	for <meta-ti@yoctoproject.org>; Mon, 16 Jun 2014 16:12:52 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5GNCpPQ012384
+	for <meta-ti@yoctoproject.org>; Mon, 16 Jun 2014 18:12:51 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5GNCppn029147
+	for <meta-ti@yoctoproject.org>; Mon, 16 Jun 2014 18:12:51 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Mon, 16 Jun 2014 18:12:51 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5GNCpKI002992;
+	Mon, 16 Jun 2014 18:12:51 -0500
+Date: Mon, 16 Jun 2014 19:12:50 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Franklin S. Cooper Jr" <fcooper@ti.com>
+Message-ID: <20140616231250.GF1825@edge>
+References: <1402494847-29713-1-git-send-email-fcooper@ti.com>
+MIME-Version: 1.0
+In-Reply-To: <1402494847-29713-1-git-send-email-fcooper@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [for dora & master][PATCH] u-boot-ti-staging:_2013.10: Update to pull in critical fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -31,39 +46,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jun 2014 22:40:43 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 16 Jun 2014 23:13:08 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: dylan
-Commit: 8beec1ca66c9d064cd0c81add74f3c199d9a0961
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8beec1ca66c9d064cd0c81add74f3c199d9a0961
+On Wed, Jun 11, 2014 at 08:54:07AM -0500, Franklin S. Cooper Jr wrote:
+> * Critical fixes have been added to the ti-u-boot-2013.10 branch for AM4x.
+> * Update commit id to point to this new commit.
+> * For all other platforms nothing should have changed.
+> ---
+>  recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    6 +++---
+>  1 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+> index b8f5ce6..d954db4 100644
+> --- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+> +++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+> @@ -5,14 +5,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+>  LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+>  
+>  PV = "2013.10"
+> -PR = "r7+gitr${SRCPV}"
+> +PR = "r8+gitr${SRCPV}"
+>  
+>  SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+>  
+>  BRANCH ?= "ti-u-boot-2013.10"
+>  
+> -# Corresponds to tag ti2013.12.01
+> -SRCREV = "78d8ebd4a0214b72a125f5b98c5ed2f9a3e5e783"
+> +# Corresponds to tag ti2013.12.01_amsdk-07.01
 
-Author: Hao Zhang <hzhang@ti.com>
-Date:   Tue Jun 17 00:56:12 2014 +0000
+I'm still not sure of how to handle this kind of change...
 
-keystone: config: fix K2L boot monitor build target name error
 
-Signed-off-by: Hao Zhang <hzhang@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- conf/machine/k2l-evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
-index 0824a09..76fb3f8 100644
---- a/conf/machine/k2l-evm.conf
-+++ b/conf/machine/k2l-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/keystone.inc
- 
- UBOOT_MACHINE = "k2l_evm_config"
- 
--BOOT_MONITOR_MAKE_TARGET = "k2hk"
-+BOOT_MONITOR_MAKE_TARGET = "k2l"
- 
- IMAGE_FSTYPES += "ubi tar.gz cpio"
- 
-
+> +SRCREV = "259ff9a577cc66cb40e3cdff3e41628e466f0fef"
+>  
+>  SPL_BINARY = "MLO"
+>  SPL_UART_BINARY = "u-boot-spl.bin"
+> -- 
+> 1.7.0.4
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
