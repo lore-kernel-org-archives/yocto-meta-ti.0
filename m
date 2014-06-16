@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0939CE00B71; Mon, 16 Jun 2014 15:38:57 -0700 (PDT)
+	id A44D3E00C1B; Mon, 16 Jun 2014 15:38:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,13 +10,13 @@ X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	with *      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 442F4E00BBA
-	for <meta-ti@yoctoproject.org>; Mon, 16 Jun 2014 15:38:45 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC6E6E00C15
+	for <meta-ti@yoctoproject.org>; Mon, 16 Jun 2014 15:38:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 98FE552A69; Mon, 16 Jun 2014 22:38:45 +0000 (UTC)
+	id 814EE52A80; Mon, 16 Jun 2014 22:38:53 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140616223845.98FE552A69@arago-project.org>
-Date: Mon, 16 Jun 2014 22:38:45 +0000 (UTC)
+Message-Id: <20140616223853.814EE52A80@arago-project.org>
+Date: Mon, 16 Jun 2014 22:38:53 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : am180x-evm: don't request ubi FS w/ o setting MKUBIFS and UBINIZE vars
 X-BeenThere: meta-ti@yoctoproject.org
@@ -35,9 +35,9 @@ X-List-Received-Date: Mon, 16 Jun 2014 22:38:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: a518c83ef5ecac4064e99796c7e53c468fb77345
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a518c83ef5ecac4064e99796c7e53c468fb77345
+Branch: dora
+Commit: 7eb568bda93160c3aec82c193c9b6bb6f0240f12
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7eb568bda93160c3aec82c193c9b6bb6f0240f12
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Jun 13 22:55:12 2014 +0000
