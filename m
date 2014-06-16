@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0D831E00C27; Mon, 16 Jun 2014 15:38:59 -0700 (PDT)
+	id 0E539E00BFD; Mon, 16 Jun 2014 15:38:59 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,15 +10,15 @@ X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	with *      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC60EE00C14
-	for <meta-ti@yoctoproject.org>; Mon, 16 Jun 2014 15:38:56 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 455F5E00BFD
+	for <meta-ti@yoctoproject.org>; Mon, 16 Jun 2014 15:38:43 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BB99D52A76; Mon, 16 Jun 2014 22:38:45 +0000 (UTC)
+	id 2DDEC529F5; Mon, 16 Jun 2014 22:38:43 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140616223845.BB99D52A76@arago-project.org>
-Date: Mon, 16 Jun 2014 22:38:45 +0000 (UTC)
+Message-Id: <20140616223843.2DDEC529F5@arago-project.org>
+Date: Mon, 16 Jun 2014 22:38:43 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Maupin, Chase : u-boot: remove old mainline versions
+Subject: Maupin, Chase : u-boot: Add mainline u-boot version 2014.07-rc3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,90 +35,63 @@ X-List-Received-Date: Mon, 16 Jun 2014 22:38:59 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 15d14fa675c71c514746bda1d88f1354545a9b54
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=15d14fa675c71c514746bda1d88f1354545a9b54
+Branch: master
+Commit: 7c5088b0d0d1e624edf1116c36dc175c7d63eb34
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7c5088b0d0d1e624edf1116c36dc175c7d63eb34
 
 Author: Maupin, Chase <chase.maupin@ti.com>
-Date:   Sat Jun 14 03:55:55 2014 +0000
+Date:   Sat Jun 14 03:55:54 2014 +0000
 
-u-boot: remove old mainline versions
+u-boot: Add mainline u-boot version 2014.07-rc3
 
-* Remove old mainline u-boot versions since the latest version
-  has better support for TI platforms.
+* The latest mainline u-boot works well for most TI devices and
+  we want to enable more people to use and test it.  Adding
+  version 2014.07-rc3 will allow more people to build and use this
+  u-boot version
+* Add a dependency on dtc-native since the latest mainline of u-boot
+  now requires this and not every build host will have the right
+  version.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot_2011.12.bb    |   37 -------------------------------
- recipes-bsp/u-boot/u-boot_2013.01.01.bb |   15 ------------
- 2 files changed, 0 insertions(+), 52 deletions(-)
+ recipes-bsp/u-boot/u-boot_2014.07.bb |   27 +++++++++++++++++++++++++++
+ 1 files changed, 27 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot_2011.12.bb b/recipes-bsp/u-boot/u-boot_2011.12.bb
-deleted file mode 100644
-index 13cb537..0000000
---- a/recipes-bsp/u-boot/u-boot_2011.12.bb
-+++ /dev/null
-@@ -1,37 +0,0 @@
--require u-boot-ti.inc
--
--SPL_BINARY = "MLO"
--
--PR = "r8"
--
--COMPATIBLE_MACHINE = "(beagleboard|pandaboard|am3517-evm|am37x-evm|omap3evm)"
--
--# Non-omap4 platforms need outer cache turned on
--CACHEFIX = "file://2011.12/0008-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.patch"
--CACHEFIX_omap4 = ""
--
--# File is board-specific, only copy when it will be correct.
--FWENV_beagleboard = "file://fw_env.config"
--FWENV = ""
--
--SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
--           file://2011.12/0001-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch \
--           file://2011.12/0002-beagleboard-add-support-for-TCT-Beacon-board.patch \
--           file://2011.12/0003-beagleboard-add-support-for-scanning-loop-through-ex.patch \
--           file://2011.12/0004-omap4-common-mount-root-RO.patch \
--           file://2011.12/0005-omap4-common-use-ext4-by-default.patch \
--           file://2011.12/0006-OMAP-MMC-Add-delay-before-waiting-for-status.patch \
--           file://2011.12/0007-config-Always-use-GNU-ld.patch \
--           ${CACHEFIX} \
--           file://2011.12/0009-Beagleboard-Correct-memory-size-on-rev-C4.patch \
--           file://2011.12/0010-OMAP3-Correct-get_sdr_cs_offset-mask.patch \
--           file://2011.12/0011-ext2load-increase-read-speed.patch \
--           file://2011.12/0012-ext4fs-ls-load-support.patch \
--           file://2011.12/0013-beagleboard-switch-mmcroots-to-ext4.patch \
--           ${FWENV} \
--          "
--
--# v2011.12 tag
--SRCREV = "cba9a894fdb1cb49b60fcd1d1d6919cbd7995dd5"
--
--RRECOMMENDS_${PN}_beagleboard = "u-boot-fw-utils"
-diff --git a/recipes-bsp/u-boot/u-boot_2013.01.01.bb b/recipes-bsp/u-boot/u-boot_2013.01.01.bb
-deleted file mode 100644
-index e3da1f3..0000000
---- a/recipes-bsp/u-boot/u-boot_2013.01.01.bb
-+++ /dev/null
-@@ -1,15 +0,0 @@
--require u-boot-ti.inc
--
--DESCRIPTION = "Mainline u-boot bootloader"
--
--DEFAULT_PREFERENCE = "-1"
--
--PR = "r1"
--
--SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
--
--BRANCH ?= "u-boot-2013.01.y"
--
--SRCREV = "e8ae0fa5edd152b2b29c470b88429be4cdcd2c46"
--
--SPL_BINARY = "MLO"
+diff --git a/recipes-bsp/u-boot/u-boot_2014.07.bb b/recipes-bsp/u-boot/u-boot_2014.07.bb
+new file mode 100644
+index 0000000..b326aa1
+--- /dev/null
++++ b/recipes-bsp/u-boot/u-boot_2014.07.bb
+@@ -0,0 +1,27 @@
++require u-boot-ti.inc
++
++# DEPEND on dtc-native for mainline u-boot because the mainline u-boot depends
++# on some of the latest syntax constructs for an appended in dtb used for
++# items like secure boot/image signing.
++DEPENDS += "dtc-native"
++
++DESCRIPTION = "Mainline u-boot bootloader"
++
++DEFAULT_PREFERENCE = "-1"
++
++LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
++
++# This is still an RC so set the PV accordingly to allow proper version
++# ordering when the RC is dropped.
++PV = "2014.04+2014.07-rc3"
++PR = "r0"
++
++SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
++
++BRANCH ?= "master"
++
++# Corresponds to tag v2014.07-rc3
++SRCREV = "76b21026ceb5a6a83fc53b0ecdf425f240318022"
++
++SPL_BINARY = "MLO"
++SPL_UART_BINARY = "u-boot-spl.bin"
 
 
