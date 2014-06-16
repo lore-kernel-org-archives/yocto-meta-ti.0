@@ -1,38 +1,24 @@
-Return-Path: <hzhang@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D08F5E00BDE; Mon, 16 Jun 2014 11:56:25 -0700 (PDT)
+	id 082A9E00C20; Mon, 16 Jun 2014 15:38:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.0 required=5.0 tests=RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9F766E00B71
-	for <meta-ti@yoctoproject.org>; Mon, 16 Jun 2014 11:56:15 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5GIuEWv025231
-	for <meta-ti@yoctoproject.org>; Mon, 16 Jun 2014 13:56:14 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5GIuEp8023937
-	for <meta-ti@yoctoproject.org>; Mon, 16 Jun 2014 13:56:14 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Mon, 16 Jun 2014 13:56:13 -0500
-Received: from ares-ubuntu (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5GIuETk007397;
-	Mon, 16 Jun 2014 13:56:14 -0500
-Received: from a0868496 by ares-ubuntu with local (Exim 4.76)	(envelope-from
-	<hzhang@ti.com>)	id 1Wwc4j-0007Qg-Qc; Mon, 16 Jun 2014 14:56:13 -0400
-From: <hzhang@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 16 Jun 2014 14:56:12 -0400
-Message-ID: <1402944972-28528-1-git-send-email-hzhang@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH] keystone: config: fix K2L boot monitor build target name error
+X-Spam-Status: No, score=0.4 required=5.0 tests=RDNS_DYNAMIC autolearn=no
+	version=3.3.1
+X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
+	with *      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42F85E00B71
+	for <meta-ti@yoctoproject.org>; Mon, 16 Jun 2014 15:38:43 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 0EA8C52A5D; Mon, 16 Jun 2014 22:38:43 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20140616223843.0EA8C52A5D@arago-project.org>
+Date: Mon, 16 Jun 2014 22:38:43 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : am180x-evm: don't request ubi FS w/ o setting MKUBIFS and UBINIZE vars
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,30 +31,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jun 2014 18:56:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 16 Jun 2014 22:38:57 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Hao Zhang <hzhang@ti.com>
+Module: meta-ti
+Branch: master
+Commit: de54630569e2d84c6c077b8bd0f700e9a8949847
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=de54630569e2d84c6c077b8bd0f700e9a8949847
 
-Signed-off-by: Hao Zhang <hzhang@ti.com>
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Jun 13 22:55:12 2014 +0000
+
+am180x-evm: don't request ubi FS w/o setting MKUBIFS and UBINIZE vars
+
+It was ignored previously, but now it breaks the build.
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- conf/machine/k2l-evm.conf |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/conf/machine/k2l-evm.conf b/conf/machine/k2l-evm.conf
-index 0824a09..76fb3f8 100644
---- a/conf/machine/k2l-evm.conf
-+++ b/conf/machine/k2l-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/keystone.inc
+ conf/machine/am180x-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
+index cff1565..44ca0c6 100644
+--- a/conf/machine/am180x-evm.conf
++++ b/conf/machine/am180x-evm.conf
+@@ -9,7 +9,7 @@ UBOOT_MACHINE = "da850evm_config"
+ UBOOT_ENTRYPOINT = "0xc0008000"
+ UBOOT_LOADADDRESS = "0xc0008000"
  
- UBOOT_MACHINE = "k2l_evm_config"
+-IMAGE_FSTYPES += "tar.gz ubi"
++IMAGE_FSTYPES += "tar.gz"
  
--BOOT_MONITOR_MAKE_TARGET = "k2hk"
-+BOOT_MONITOR_MAKE_TARGET = "k2l"
+ SERIAL_CONSOLE = "115200 ttyS2"
  
- IMAGE_FSTYPES += "ubi tar.gz cpio"
- 
--- 
-1.7.9.5
 
 
