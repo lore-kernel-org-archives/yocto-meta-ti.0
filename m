@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E86E1E00BC1; Fri, 20 Jun 2014 09:34:37 -0700 (PDT)
+	id DF2F1E00BC1; Fri, 20 Jun 2014 14:11:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,25 +8,25 @@ X-Spam-Status: No, score=0.0 required=5.0 tests=RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.23 listed in list.dnswl.org]
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8DCD5E00B7B
-	for <meta-ti@yoctoproject.org>; Fri, 20 Jun 2014 09:34:32 -0700 (PDT)
+	*      [206.46.173.19 listed in list.dnswl.org]
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86796E00B7B
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jun 2014 14:11:53 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173023.mailsrvcs.net
+	by vms173019.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N7H009YT7CAP870@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 20 Jun 2014 11:34:02 -0500 (CDT)
+	2009)) with ESMTPA id <0N7H00515K7DQN10@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 20 Jun 2014 16:11:37 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 43CA2200BD; Fri,
-	20 Jun 2014 12:33:46 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 34C68200BD; Fri,
+	20 Jun 2014 17:11:37 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Fri, 20 Jun 2014 12:33:44 -0400
-Message-id: <1403282024-19153-1-git-send-email-denis@denix.org>
+Date: Fri, 20 Jun 2014 17:11:28 -0400
+Message-id: <1403298689-22444-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.0.0
-Subject: [PATCH] machine configs: set optimized hardfp DEFAULTTUNE if not set
+Subject: [PATCH 1/2] linux-ti-staging: update to latest 3.14 stable, as being LTS
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,142 +39,82 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jun 2014 16:34:38 -0000
+X-List-Received-Date: Fri, 20 Jun 2014 21:11:58 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- conf/machine/include/keystone.inc | 3 ++-
- conf/machine/include/omap-a15.inc | 3 ++-
- conf/machine/include/omap3.inc    | 3 ++-
- conf/machine/include/omap4.inc    | 3 ++-
- conf/machine/include/ti33x.inc    | 3 ++-
- conf/machine/include/ti43x.inc    | 3 ++-
- 6 files changed, 12 insertions(+), 6 deletions(-)
+ .../defconfig                                                |  0
+ .../{linux-ti-staging-3.15 => linux-ti-staging-3.14}/ipc.cfg |  0
+ .../non-smp.cfg                                              |  0
+ .../systest.cfg                                              |  0
+ .../{linux-ti-staging_3.15.bb => linux-ti-staging_3.14.bb}   | 12 +++++-------
+ 5 files changed, 5 insertions(+), 7 deletions(-)
+ rename recipes-kernel/linux/{linux-ti-staging-3.15 => linux-ti-staging-3.14}/defconfig (100%)
+ rename recipes-kernel/linux/{linux-ti-staging-3.15 => linux-ti-staging-3.14}/ipc.cfg (100%)
+ rename recipes-kernel/linux/{linux-ti-staging-3.15 => linux-ti-staging-3.14}/non-smp.cfg (100%)
+ rename recipes-kernel/linux/{linux-ti-staging-3.15 => linux-ti-staging-3.14}/systest.cfg (100%)
+ rename recipes-kernel/linux/{linux-ti-staging_3.15.bb => linux-ti-staging_3.14.bb} (89%)
 
-diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
-index a9449b2..9a5c11f 100644
---- a/conf/machine/include/keystone.inc
-+++ b/conf/machine/include/keystone.inc
-@@ -1,6 +1,7 @@
- SOC_FAMILY = "keystone"
- require conf/machine/include/soc-family.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/defconfig b/recipes-kernel/linux/linux-ti-staging-3.14/defconfig
+similarity index 100%
+rename from recipes-kernel/linux/linux-ti-staging-3.15/defconfig
+rename to recipes-kernel/linux/linux-ti-staging-3.14/defconfig
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg b/recipes-kernel/linux/linux-ti-staging-3.14/ipc.cfg
+similarity index 100%
+rename from recipes-kernel/linux/linux-ti-staging-3.15/ipc.cfg
+rename to recipes-kernel/linux/linux-ti-staging-3.14/ipc.cfg
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg b/recipes-kernel/linux/linux-ti-staging-3.14/non-smp.cfg
+similarity index 100%
+rename from recipes-kernel/linux/linux-ti-staging-3.15/non-smp.cfg
+rename to recipes-kernel/linux/linux-ti-staging-3.14/non-smp.cfg
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.15/systest.cfg b/recipes-kernel/linux/linux-ti-staging-3.14/systest.cfg
+similarity index 100%
+rename from recipes-kernel/linux/linux-ti-staging-3.15/systest.cfg
+rename to recipes-kernel/linux/linux-ti-staging-3.14/systest.cfg
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.15.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+similarity index 89%
+rename from recipes-kernel/linux/linux-ti-staging_3.15.bb
+rename to recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 64db8da..a3045b2 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.15.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -3,15 +3,13 @@ DESCRIPTION = "Linux kernel for TI devices"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
  
-+DEFAULTTUNE ?= "cortexa15thf-neon"
- require conf/machine/include/tune-cortexa15.inc
+-DEFAULT_PREFERENCE = "-1"
+-
+ inherit kernel
  
- PREFERRED_PROVIDER_virtual/kernel = "linux-keystone"
-@@ -8,7 +9,7 @@ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-keystone"
- PREFERRED_PROVIDER_u-boot = "u-boot-keystone"
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
  
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r7"
-+MACHINE_KERNEL_PR = "r8"
+ # Look in the generic major.minor directory for files
+-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.15:"
++FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.14:"
  
- KERNEL_IMAGETYPE = "uImage"
+ # Pull in the devicetree files into the rootfs
+ RDEPENDS_kernel-base += "kernel-devicetree"
+@@ -39,13 +37,13 @@ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
  
-diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
-index dcf973e..3fef64e 100644
---- a/conf/machine/include/omap-a15.inc
-+++ b/conf/machine/include/omap-a15.inc
-@@ -1,10 +1,11 @@
- SOC_FAMILY = "omap-a15"
- require conf/machine/include/soc-family.inc
+ S = "${WORKDIR}/git"
  
-+DEFAULTTUNE ?= "cortexa15thf-neon"
- require conf/machine/include/tune-cortexa15.inc
+-BRANCH = "ti-linux-3.15.y"
++BRANCH = "ti-linux-3.14.y"
  
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r3"
-+MACHINE_KERNEL_PR = "r4"
+-SRCREV = "3fd9aad17d3b4d1d7ee50ae788c0a096921e7216"
+-PV = "3.14+3.15-rc6"
++SRCREV = "9d00dd1187099b0841125220c7432a3507e5b5fa"
++PV = "3.14.8"
  
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
- PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
-diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
-index c80939a..e71630b 100644
---- a/conf/machine/include/omap3.inc
-+++ b/conf/machine/include/omap3.inc
-@@ -1,6 +1,7 @@
- SOC_FAMILY = "omap3"
- require conf/machine/include/soc-family.inc
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
  
-+DEFAULTTUNE ?= "cortexa8thf-neon"
- require conf/machine/include/tune-cortexa8.inc
- 
- PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-@@ -16,7 +17,7 @@ XSERVER = "xserver-xorg \
- GUI_MACHINE_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r125"
-+MACHINE_KERNEL_PR = "r126"
- 
- KERNEL_IMAGETYPE = "uImage"
- 
-diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
-index cf71be1..066acca 100644
---- a/conf/machine/include/omap4.inc
-+++ b/conf/machine/include/omap4.inc
-@@ -1,6 +1,7 @@
- SOC_FAMILY = "omap4"
- require conf/machine/include/soc-family.inc
- 
-+DEFAULTTUNE ?= "cortexa9thf-neon"
- require conf/machine/include/tune-cortexa9.inc
- 
- PREFERRED_PROVIDER_virtual/kernel = "linux-omap4"
-@@ -13,7 +14,7 @@ XSERVER = "xserver-xorg \
-            xf86-video-omap"
- 
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r1"
-+MACHINE_KERNEL_PR = "r2"
- 
- KERNEL_IMAGETYPE = "uImage"
- 
-diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
-index 17b968d..53f38c9 100644
---- a/conf/machine/include/ti33x.inc
-+++ b/conf/machine/include/ti33x.inc
-@@ -1,6 +1,7 @@
- SOC_FAMILY = "ti33x"
- require conf/machine/include/soc-family.inc
- 
-+DEFAULTTUNE ?= "cortexa8thf-neon"
- require conf/machine/include/tune-cortexa8.inc
- 
- PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-@@ -16,7 +17,7 @@ XSERVER = "xserver-xorg \
- GUI_MACHINE_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r21"
-+MACHINE_KERNEL_PR = "r22"
- 
- # Default providers, may need to override for specific machines
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
-diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
-index 8913380..8c5fa2d 100644
---- a/conf/machine/include/ti43x.inc
-+++ b/conf/machine/include/ti43x.inc
-@@ -1,6 +1,7 @@
- SOC_FAMILY = "ti43x"
- require conf/machine/include/soc-family.inc
- 
-+DEFAULTTUNE ?= "cortexa9thf-neon"
- require conf/machine/include/tune-cortexa9.inc
- 
- PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-@@ -16,7 +17,7 @@ XSERVER = "xserver-xorg \
- GUI_MACHINE_CLASS = "bigscreen"
- 
- # Increase this everytime you change something in the kernel
--MACHINE_KERNEL_PR = "r2"
-+MACHINE_KERNEL_PR = "r3"
- 
- # Default providers, may need to override for specific machines
- PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+ KERNEL_CONFIG_DIR = "ti_config_fragments"
 -- 
 2.0.0
 
