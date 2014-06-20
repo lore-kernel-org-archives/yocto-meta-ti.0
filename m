@@ -1,34 +1,32 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F4153E00283; Fri, 20 Jun 2014 14:35:26 -0700 (PDT)
+	id 9CDACE00283; Fri, 20 Jun 2014 14:54:37 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=RCVD_IN_DNSWL_NONE,
-	T_MANY_HDRS_LCASE autolearn=ham version=3.3.1
+X-Spam-Status: No, score=0.0 required=5.0 tests=RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.19 listed in list.dnswl.org]
-	* 0.0 T_MANY_HDRS_LCASE Odd capitalization of multiple message headers
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AC3AFE0027B
-	for <meta-ti@yoctoproject.org>; Fri, 20 Jun 2014 14:35:06 -0700 (PDT)
+	*      [206.46.173.21 listed in list.dnswl.org]
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F24F2E0027B
+	for <meta-ti@yoctoproject.org>; Fri, 20 Jun 2014 14:54:33 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173019.mailsrvcs.net
+	by vms173021.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N7H00HY2LA9V1A0@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 20 Jun 2014 16:35:06 -0500 (CDT)
+	2009)) with ESMTPA id <0N7H00GW3M6L8H50@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 20 Jun 2014 16:54:23 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 19DDC20183; Fri,
-	20 Jun 2014 17:34:57 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 459F020183; Fri,
+	20 Jun 2014 17:54:21 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Fri, 20 Jun 2014 17:34:55 -0400
-Message-id: <1403300095-29630-1-git-send-email-denis@denix.org>
+Date: Fri, 20 Jun 2014 17:54:18 -0400
+Message-id: <1403301258-4269-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.0.0
-MIME-version: 1.0
-Subject: [PATCH] u-boot: remove old platform-specific versions
+Subject: [PATCH] libgles-omap3, omap3-sgx-modules: remove old 4.8.x and 5.x versions
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,12322 +39,1713 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jun 2014 21:35:27 -0000
-Content-type: text/plain; charset=UTF-8
-Content-transfer-encoding: 8bit
+X-List-Received-Date: Fri, 20 Jun 2014 21:54:37 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
+Leave 4.9 as the last release providing softfp binaries and x11 support.
+Leave 4.5 for now as being widely used on legacy omap3 devices.
+
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- ...hange-default-memory-to-not-limit-at-32MB.patch |   34 -
- recipes-bsp/u-boot/u-boot-am180x_2010.12.bb        |   22 -
- recipes-bsp/u-boot/u-boot-am33x_2011.10rc.bb       |   27 -
- recipes-bsp/u-boot/u-boot-am3517_2011.09.bb        |   21 -
- recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb   |   36 -
- ...-Beagle-Pin-Mux-initialization-glitch-fix.patch |   46 -
- .../u-boot/0001-armv7-Unaligned-access-fix.patch   |   30 -
- .../u-boot/0001-config-Always-use-GNU-ld.patch     |   43 -
- ...m-Change-default-console-serial-port-from.patch |   30 -
- ...-omapfb.debug-y-from-Beagle-and-Overo-env.patch |   56 -
- ...e-enable-the-use-of-a-plain-text-file-nam.patch |   89 -
- ...-OMAP3-BeagleBoard-Enable-pullups-on-i2c2.patch |   69 -
- ...MAP3-BeagleBoard-add-xM-rev-B-to-ID-table.patch |  111 -
- ...3-BeagleBoard-add-more-expansionboard-IDs.patch |   95 -
- .../0007-OMAP3-Add-DSS-driver-for-OMAP3.patch      |  435 ----
- ...0008-BeagleBoard-Added-userbutton-command.patch |  100 -
- ...agle-pass-expansionboard-name-in-bootargs.patch |   57 -
- .../u-boot/0010-Enable-DSS-driver-for-Beagle.patch |  107 -
- .../u-boot/u-boot/0011-Add-led-command.patch       |  213 --
- .../u-boot/0012-BeagleBoard-Added-LED-driver.patch |  160 --
- ...BeagleBoard-updated-default-configuration.patch |  184 --
- ...ED-name-match-finding-avoiding-extraneous.patch |   42 -
- ...e-Switch-default-console-from-ttyS2-to-tt.patch |   29 -
- ...gleBoard-Load-kernel-via-MMC-ext2-not-fat.patch |   26 -
- ...p3-mem-Comment-enable_gpmc_cs_config-more.patch |   56 -
- ...e-SDRC-dram_init-to-always-call-make_cs1_.patch |   66 -
- ...-a-helper-function-to-set-timings-in-SDRC.patch |  172 --
- ...e-mem_ok-to-clear-again-after-reading-bac.patch |   30 -
- .../0005-OMAP3-Remove-get_mem_type-prototype.patch |   28 -
- .../0006-omap3-mem-Add-MCFG-helper-macro.patch     |   97 -
- ...d-optimal-SDRC-autorefresh-control-values.patch |   59 -
- ...x-all-Micron-memory-timing-parts-with-the.patch |   55 -
- ...ework-memory-initalization-and-devkit8000.patch |  174 --
- ...OMAP3-SPL-Add-identify_nand_chip-function.patch |  142 --
- ...0011-OMAP3-Add-SPL-support-to-Beagleboard.patch |  315 ---
- .../0012-OMAP3-Add-SPL-support-to-omap3_evm.patch  |  319 ---
- .../2011.09/0013-AM3517-Add-SPL-support.patch      |  150 --
- .../0014-AM3517-CraneBoard-Add-SPL-support.patch   |  150 --
- ...-beagleboard-config-disable-cache-for-USB.patch |   33 -
- ...16-beagleboard-config-enable-gpio-command.patch |   25 -
- ...d-some-timeout-durations-for-MMC-and-EHCI.patch |   39 -
- ...ard-mount-rootfs-RO-instead-of-RW-at-boot.patch |   26 -
- ...BeagleBoard-config-Really-switch-to-ttyO2.patch |   28 -
- ...gleboard-add-support-for-TCT-Beacon-board.patch |   65 -
- ...-add-support-for-scanning-loop-through-ex.patch |  105 -
- ...add-option-to-boot-kernel-from-boot-in-ex.patch |   26 -
- .../0002-am335x_evm-set-bootdelay-to-1.patch       |   26 -
- ...-make-MMC-rootfs-RO-on-boot-so-fsck-works.patch |   26 -
- .../0004-am335x_evm-switch-to-ext4.patch           |   26 -
- ...35x-evm-enable-i2c2-pinmux-for-beaglebone.patch |   63 -
- .../0006-ext2load-increase-read-speed.patch        |   74 -
- ...fix-ext2load-and-specify-partition-for-bo.patch |   30 -
- ...evm-load-uImage-from-boot-instead-of-VFAT.patch |   35 -
- .../2011.09git/0009-ext4fs-ls-load-support.patch   | 2362 --------------------
- .../0010-am335x-switch-to-ext4-mode.patch          |   52 -
- ...ard-mount-rootfs-RO-instead-of-RW-at-boot.patch |   26 -
- ...gleboard-add-support-for-TCT-Beacon-board.patch |   65 -
- ...-add-support-for-scanning-loop-through-ex.patch |  121 -
- .../2011.12/0004-omap4-common-mount-root-RO.patch  |   26 -
- .../0005-omap4-common-use-ext4-by-default.patch    |   26 -
- ...P-MMC-Add-delay-before-waiting-for-status.patch |   44 -
- .../2011.12/0007-config-Always-use-GNU-ld.patch    |   43 -
- ...7-disable-L2-cache-in-cleanup_before_linu.patch |   25 -
- ...Beagleboard-Correct-memory-size-on-rev-C4.patch |   37 -
- ...0010-OMAP3-Correct-get_sdr_cs_offset-mask.patch |   37 -
- .../0011-ext2load-increase-read-speed.patch        |   74 -
- .../2011.12/0012-ext4fs-ls-load-support.patch      | 2362 --------------------
- .../0013-beagleboard-switch-mmcroots-to-ext4.patch |   43 -
- recipes-bsp/u-boot/u-boot/600mhz.patch             |   25 -
- recipes-bsp/u-boot/u-boot/ai-logo.patch            | 1353 -----------
- .../u-boot/u-boot/beagleboard/fw_env.config        |    1 -
- .../u-boot/u-boot/dont-inline-weak-symbols.patch   |   39 -
- .../u-boot/u-boot/dont-inline-weak-symbols2.patch  |   45 -
- recipes-bsp/u-boot/u-boot/dss2.patch               |   73 -
- recipes-bsp/u-boot/u-boot/fw_env.config            |    8 -
- recipes-bsp/u-boot/u-boot/headphone.patch          |   47 -
- recipes-bsp/u-boot/u-boot/mmcinit.patch            |   34 -
- recipes-bsp/u-boot/u-boot/new-pinmux.patch         |   82 -
- recipes-bsp/u-boot/u-boot/power.patch              |   27 -
- recipes-bsp/u-boot/u-boot/spi3.patch               |   43 -
- recipes-bsp/u-boot/u-boot/spi4.patch               |   36 -
- 81 files changed, 11658 deletions(-)
- delete mode 100644 recipes-bsp/u-boot/u-boot-am180x-2010.12/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
- delete mode 100644 recipes-bsp/u-boot/u-boot-am33x_2011.10rc.bb
- delete mode 100644 recipes-bsp/u-boot/u-boot-am3517_2011.09.bb
- delete mode 100644 recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
- delete mode 100644 recipes-bsp/u-boot/u-boot/0001-OMAP3-Beagle-Pin-Mux-initialization-glitch-fix.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0001-armv7-Unaligned-access-fix.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0001-omap3evm-Change-default-console-serial-port-from.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0002-OMAP-Remove-omapfb.debug-y-from-Beagle-and-Overo-env.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0003-omap3_beagle-enable-the-use-of-a-plain-text-file-nam.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0004-OMAP3-BeagleBoard-Enable-pullups-on-i2c2.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0005-ARMV7-OMAP3-BeagleBoard-add-xM-rev-B-to-ID-table.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0006-OMAP3-BeagleBoard-add-more-expansionboard-IDs.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0007-OMAP3-Add-DSS-driver-for-OMAP3.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0008-BeagleBoard-Added-userbutton-command.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0009-OMAP3-beagle-pass-expansionboard-name-in-bootargs.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0010-Enable-DSS-driver-for-Beagle.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0011-Add-led-command.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0012-BeagleBoard-Added-LED-driver.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0013-OMAP3-BeagleBoard-updated-default-configuration.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0014-Corrected-LED-name-match-finding-avoiding-extraneous.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0015-omap3_beagle-Switch-default-console-from-ttyS2-to-tt.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/0016-BeagleBoard-Load-kernel-via-MMC-ext2-not-fat.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0001-omap3-mem-Comment-enable_gpmc_cs_config-more.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0002-OMAP3-Update-SDRC-dram_init-to-always-call-make_cs1_.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0003-OMAP3-Add-a-helper-function-to-set-timings-in-SDRC.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0004-OMAP3-Change-mem_ok-to-clear-again-after-reading-bac.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0005-OMAP3-Remove-get_mem_type-prototype.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0006-omap3-mem-Add-MCFG-helper-macro.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0007-OMAP3-Add-optimal-SDRC-autorefresh-control-values.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0008-OMAP3-Suffix-all-Micron-memory-timing-parts-with-the.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0009-OMAP3-SPL-Rework-memory-initalization-and-devkit8000.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0010-OMAP3-SPL-Add-identify_nand_chip-function.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0011-OMAP3-Add-SPL-support-to-Beagleboard.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0012-OMAP3-Add-SPL-support-to-omap3_evm.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0013-AM3517-Add-SPL-support.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0014-AM3517-CraneBoard-Add-SPL-support.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0015-HACK-beagleboard-config-disable-cache-for-USB.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0016-beagleboard-config-enable-gpio-command.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0017-Increased-some-timeout-durations-for-MMC-and-EHCI.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0018-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0019-BeagleBoard-config-Really-switch-to-ttyO2.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0020-beagleboard-add-support-for-TCT-Beacon-board.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09/0021-beagleboard-add-support-for-scanning-loop-through-ex.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0001-am335x_evm-add-option-to-boot-kernel-from-boot-in-ex.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0002-am335x_evm-set-bootdelay-to-1.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0003-am335x-evm-make-MMC-rootfs-RO-on-boot-so-fsck-works.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0004-am335x_evm-switch-to-ext4.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0005-am335x-evm-enable-i2c2-pinmux-for-beaglebone.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0006-ext2load-increase-read-speed.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0007-am335x-evm-fix-ext2load-and-specify-partition-for-bo.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0008-am335x-evm-load-uImage-from-boot-instead-of-VFAT.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0009-ext4fs-ls-load-support.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.09git/0010-am335x-switch-to-ext4-mode.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0001-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0002-beagleboard-add-support-for-TCT-Beacon-board.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0003-beagleboard-add-support-for-scanning-loop-through-ex.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0004-omap4-common-mount-root-RO.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0005-omap4-common-use-ext4-by-default.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0006-OMAP-MMC-Add-delay-before-waiting-for-status.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0007-config-Always-use-GNU-ld.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0008-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0009-Beagleboard-Correct-memory-size-on-rev-C4.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0010-OMAP3-Correct-get_sdr_cs_offset-mask.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0011-ext2load-increase-read-speed.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0012-ext4fs-ls-load-support.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/2011.12/0013-beagleboard-switch-mmcroots-to-ext4.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/600mhz.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/ai-logo.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/beagleboard/fw_env.config
- delete mode 100644 recipes-bsp/u-boot/u-boot/dont-inline-weak-symbols.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/dont-inline-weak-symbols2.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/dss2.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/fw_env.config
- delete mode 100644 recipes-bsp/u-boot/u-boot/headphone.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/mmcinit.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/new-pinmux.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/power.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/spi3.patch
- delete mode 100644 recipes-bsp/u-boot/u-boot/spi4.patch
+ .../omap3-sgx-modules_4.08.00.01.bb                |  54 --------
+ .../omap3-sgx-modules_4.08.00.02.bb                |  54 --------
+ .../omap3-sgx-modules_5.00.00.01.bb                |  67 ----------
+ .../omap3-sgx-modules_5.01.00.01.bb                |  67 ----------
+ .../libgles/libgles-omap3-4.08.00.01/rc.pvr        | 124 ------------------
+ .../libgles/libgles-omap3-4.08.00.01/rc_dri.pvr    | 136 -------------------
+ .../libgles/libgles-omap3-4.08.00.02/rc.pvr        | 124 ------------------
+ .../libgles/libgles-omap3-4.08.00.02/rc_dri.pvr    | 136 -------------------
+ .../libgles/libgles-omap3-5.00.00.01/rc.pvr        | 134 -------------------
+ .../libgles/libgles-omap3-5.00.00.01/rc_dri.pvr    | 145 ---------------------
+ .../libgles/libgles-omap3-5.01.00.01/rc.pvr        | 134 -------------------
+ .../libgles/libgles-omap3-5.01.00.01/rc_dri.pvr    | 145 ---------------------
+ .../libgles/libgles-omap3_4.08.00.01.bb            |  74 -----------
+ .../libgles/libgles-omap3_4.08.00.02.bb            |  74 -----------
+ .../libgles/libgles-omap3_5.00.00.01.bb            |  50 -------
+ .../libgles/libgles-omap3_5.01.00.01.bb            |  50 -------
+ 16 files changed, 1568 deletions(-)
+ delete mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.01.bb
+ delete mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
+ delete mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules_5.00.00.01.bb
+ delete mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.00.01.bb
+ delete mode 100755 recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc.pvr
+ delete mode 100755 recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc_dri.pvr
+ delete mode 100755 recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc.pvr
+ delete mode 100755 recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc_dri.pvr
+ delete mode 100755 recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc.pvr
+ delete mode 100755 recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc_dri.pvr
+ delete mode 100755 recipes-graphics/libgles/libgles-omap3-5.01.00.01/rc.pvr
+ delete mode 100755 recipes-graphics/libgles/libgles-omap3-5.01.00.01/rc_dri.pvr
+ delete mode 100644 recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb
+ delete mode 100644 recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
+ delete mode 100644 recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
+ delete mode 100644 recipes-graphics/libgles/libgles-omap3_5.01.00.01.bb
 
-diff --git a/recipes-bsp/u-boot/u-boot-am180x-2010.12/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch b/recipes-bsp/u-boot/u-boot-am180x-2010.12/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.01.bb
 deleted file mode 100644
-index b19575b..0000000
---- a/recipes-bsp/u-boot/u-boot-am180x-2010.12/am180x-evm/0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch
+index e9f7190..0000000
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.01.bb
 +++ /dev/null
-@@ -1,34 +0,0 @@
--From df5c87c4e1be1670475eba1187301a2f7a7aca30 Mon Sep 17 00:00:00 2001
--From: Chase Maupin <Chase.Maupin@ti.com>
--Date: Wed, 22 Jun 2011 12:12:09 -0500
--Subject: [PATCH] da850evm: change default memory to not limit at 32MB
+@@ -1,54 +0,0 @@
+-DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=ea5743acf520dd81ca172e69f818a3d4"
 -
--* Change the default mem= option passed to the Linux kernel to
--  not limit the memory to 32MB.
--* This change is used by AM devices that do not need to reserve
--  space for the DSP image.  By removing the mem= option we get
--  access to all of the memory on the system.
--* Limiting the memory to 32MB causes out-of-memory errors
--  when running large applications such as web browsers
+-TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
+-require ../../recipes-ti/includes/ti-eula-unpack.inc
 -
--Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-----
-- include/configs/da850evm.h |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
+-SGXPV = "4_08_00_01"
+-IMGPV = "1.9.2139099"
+-BINFILE = "Graphics_SDK_setuplinux_${SGXPV}.bin"
 -
--diff --git a/include/configs/da850evm.h b/include/configs/da850evm.h
--index 4a1e0af..55badc9 100755
----- a/include/configs/da850evm.h
--+++ b/include/configs/da850evm.h
--@@ -184,7 +184,7 @@
-- #define CONFIG_CMDLINE_TAG
-- #define CONFIG_REVISION_TAG
-- #define CONFIG_SETUP_MEMORY_TAGS
---#define CONFIG_BOOTARGS		"mem=32M console=ttyS2,115200n8 root=/dev/mmcblk0p2 rw rootwait ip=off"
--+#define CONFIG_BOOTARGS		"console=ttyS2,115200n8 root=/dev/mmcblk0p2 rw rootwait ip=off"
-- #define CONFIG_BOOTCOMMAND	"if mmc rescan 0; then if fatload mmc 0 0xc0600000 boot.scr; then source 0xc0600000; else fatload mmc 0 0xc0700000 uImage; bootm c0700000; fi; else sf probe 0; sf read 0xc0700000 0x80000 0x220000; bootm 0xc0700000; fi"
-- #define CONFIG_BOOTDELAY	3
-- 
---- 
--1.7.0.4
+-inherit module
 -
-diff --git a/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb b/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
+-MACHINE_KERNEL_PR_append = "a"
+-PR = "${MACHINE_KERNEL_PR}"
+-
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE}"
+-
+-SRC_URI[md5sum] = "dd0d994a48ecc4293f272a1fddddf159"
+-SRC_URI[sha256sum] = "fd721288c95314e0d676dd89462e1dec994e185cb608bcb8ac4a4b5809f9693a"
+-
+-TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
+-S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
+-
+-PVRBUILD = "release"
+-export KERNELDIR = "${STAGING_KERNEL_DIR}"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-
+-TI_PLATFORM_omap3 = "omap3630"
+-TI_PLATFORM_ti814x = "ti81xx"
+-TI_PLATFORM_ti816x = "ti81xx"
+-TI_PLATFORM_ti33x = "ti335x"
+-
+-MODULESLOCATION_omap3 = "dc_omapfb3_linux"
+-MODULESLOCATION_ti814x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti816x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti33x = "dc_ti335x_linux"
+-
+-export SUPPORT_XORG ?= "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
+-
+-MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
+-
+-do_install() {
+-    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-    cp  ${S}/pvrsrvkm.ko \
+-        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
+-        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
+-        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-
+-    if [ "${SUPPORT_XORG}" = "1" ]; then
+-        cp ${S}/services4/3rdparty/linux_drm/drm.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-    fi
+-}
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
 deleted file mode 100644
-index b2852c4..0000000
---- a/recipes-bsp/u-boot/u-boot-am180x_2010.12.bb
+index d5737cd..0000000
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.08.00.02.bb
 +++ /dev/null
-@@ -1,22 +0,0 @@
--require u-boot-ti.inc
+@@ -1,54 +0,0 @@
+-DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=ea5743acf520dd81ca172e69f818a3d4"
 -
--DESCRIPTION = "u-boot bootloader for AM180x devices"
--LIC_FILES_CHKSUM = "file://COPYING;md5=4c6cde5df68eff615d36789dc18edd3b"
+-TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
+-require ../../recipes-ti/includes/ti-eula-unpack.inc
 -
--COMPATIBLE_MACHINE = "am180x-evm"
+-SGXPV = "4_08_00_02"
+-IMGPV = "1.9.2188537"
+-BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
 -
--PR = "r0"
+-inherit module
 -
--SRC_URI = "git://arago-project.org/git/projects/u-boot-davinci.git;protocol=git;branch=${BRANCH}"
+-MACHINE_KERNEL_PR_append = "a"
+-PR = "${MACHINE_KERNEL_PR}"
 -
--# For the am180x we want to enable all the memory on the EVM, but for other
--# devices that use the DSP we do not want this change because that memory
--# is used for the DSP
--SRC_URI_append_am180x-evm = " file://0001-da850evm-change-default-memory-to-not-limit-at-32MB.patch"
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE}"
 -
--BRANCH = "03.21.00.03"
+-SRC_URI[md5sum] = "0efa3a38266e6f41f8cc4fad0187f0d6"
+-SRC_URI[sha256sum] = "c732044b515a598e1fab661b7463aa9c53d4fa37f4980dfa85cd02b7468d0cd9"
 -
--# v2010.12_DAVINCIPSP_03.21.00.04
--SRCREV = "1254a0b58d900b7035cfb36bf4e1b05dfbf09997"
+-TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
+-S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
 -
--UBOOT_SUFFIX = "bin"
-diff --git a/recipes-bsp/u-boot/u-boot-am33x_2011.10rc.bb b/recipes-bsp/u-boot/u-boot-am33x_2011.10rc.bb
+-PVRBUILD = "release"
+-export KERNELDIR = "${STAGING_KERNEL_DIR}"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-
+-TI_PLATFORM_omap3 = "omap3630"
+-TI_PLATFORM_ti814x = "ti81xx"
+-TI_PLATFORM_ti816x = "ti81xx"
+-TI_PLATFORM_ti33x = "ti335x"
+-
+-MODULESLOCATION_omap3 = "dc_omapfb3_linux"
+-MODULESLOCATION_ti814x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti816x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti33x = "dc_ti335x_linux"
+-
+-export SUPPORT_XORG ?= "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
+-
+-MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
+-
+-do_install() {
+-    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-    cp  ${S}/pvrsrvkm.ko \
+-        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
+-        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
+-        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-
+-    if [ "${SUPPORT_XORG}" = "1" ]; then
+-        cp ${S}/services4/3rdparty/linux_drm/drm.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-    fi
+-}
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.00.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.00.00.01.bb
 deleted file mode 100644
-index d1a8236..0000000
---- a/recipes-bsp/u-boot/u-boot-am33x_2011.10rc.bb
+index e18ce0c..0000000
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.00.00.01.bb
 +++ /dev/null
-@@ -1,27 +0,0 @@
--require u-boot-ti.inc
+@@ -1,67 +0,0 @@
+-DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://GPL-COPYING;md5=60422928ba677faaa13d6ab5f5baaa1e"
 -
--# No patches for other machines yet
--COMPATIBLE_MACHINE = "(ti33x)"
+-TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
+-require ../../recipes-ti/includes/ti-eula-unpack.inc
 -
--DEFAULT_PREFERENCE_ti33x = "99"
+-SGXPV = "5_00_00_01"
+-IMGPV = "1.10.2359475"
 -
--PV = "2011.09+git"
--PR = "r30"
+-inherit module
 -
--SPL_BINARY = "MLO"
+-MACHINE_KERNEL_PR_append = "a"
+-PR = "${MACHINE_KERNEL_PR}"
 -
--SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=master \
--           file://2011.09git/0001-am335x_evm-add-option-to-boot-kernel-from-boot-in-ex.patch \
--           file://2011.09git/0002-am335x_evm-set-bootdelay-to-1.patch \
--           file://2011.09git/0003-am335x-evm-make-MMC-rootfs-RO-on-boot-so-fsck-works.patch \
--           file://2011.09git/0004-am335x_evm-switch-to-ext4.patch \
--           file://2011.09git/0005-am335x-evm-enable-i2c2-pinmux-for-beaglebone.patch \
--           file://2011.09git/0006-ext2load-increase-read-speed.patch \
--           file://2011.09git/0007-am335x-evm-fix-ext2load-and-specify-partition-for-bo.patch \
--           file://2011.09git/0008-am335x-evm-load-uImage-from-boot-instead-of-VFAT.patch \
--           file://2011.09git/0009-ext4fs-ls-load-support.patch \
--           file://2011.09git/0010-am335x-switch-to-ext4-mode.patch \
--           file://0001-config-Always-use-GNU-ld.patch \
--          "
+-BINFILE_HARDFP = "Graphics_SDK_setuplinux_${SGXPV}_alpha_hardfp_minimal_demos.bin"
+-MD5SUM_HARDFP = "ae6125d7f8a313ea5c02afded893052d"
+-SHA256SUM_HARDFP = "c2782a2f85024741722b936ec9dca66b858ae8561aa71b693f11e12d8c0385e0"
 -
--SRCREV = "dc52533ccff00a12761f793d66b39e4f6a4a3bba"
-diff --git a/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb b/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb
+-# For now we only have hardfp version
+-python __anonymous() {
+-    tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
+-    if not tunes:
+-        return
+-    pkgn = bb.data.getVar("PN", d, 1)
+-    pkgv = bb.data.getVar("PV", d, 1)
+-    if "callconvention-hard" not in tunes:
+-        bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+-        raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+-}
+-
+-BINFILE := "${BINFILE_HARDFP}"
+-
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/gfxsdk/${SGXPV}/exports/${BINFILE}"
+-
+-SRC_URI[md5sum] := "${MD5SUM_HARDFP}"
+-SRC_URI[sha256sum] := "${SHA256SUM_HARDFP}"
+-
+-TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
+-S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
+-
+-PVRBUILD = "release"
+-export KERNELDIR = "${STAGING_KERNEL_DIR}"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-
+-TI_PLATFORM_omap3 = "omap3630"
+-TI_PLATFORM_ti814x = "ti81xx"
+-TI_PLATFORM_ti816x = "ti81xx"
+-TI_PLATFORM_ti33x = "ti335x"
+-TI_PLATFORM_ti43x = "ti43xx"
+-
+-MODULESLOCATION_omap3 = "dc_omapfb3_linux"
+-MODULESLOCATION_ti814x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti816x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti33x = "dc_ti335x_linux"
+-MODULESLOCATION_ti43x = "dc_ti43xx_linux"
+-
+-MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
+-
+-do_install() {
+-    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-    cp  ${S}/pvrsrvkm.ko \
+-        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
+-        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
+-        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-}
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.00.01.bb
 deleted file mode 100644
-index 06b8cf1..0000000
---- a/recipes-bsp/u-boot/u-boot-am3517_2011.09.bb
+index 162e4d5..0000000
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.00.01.bb
 +++ /dev/null
-@@ -1,21 +0,0 @@
--require u-boot-ti.inc
+@@ -1,67 +0,0 @@
+-DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://GPL-COPYING;md5=60422928ba677faaa13d6ab5f5baaa1e"
 -
--DESCRIPTION = "u-boot bootloader for ARM MPU devices"
+-TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
+-require ../../recipes-ti/includes/ti-eula-unpack.inc
 -
--COMPATIBLE_MACHINE = "omap3"
+-SGXPV = "5_01_00_01"
+-IMGPV = "1.10.2359475"
 -
--DEFAULT_PREFERENCE = "-1"
+-inherit module
 -
--PR = "r1+gitr${SRCPV}"
+-MACHINE_KERNEL_PR_append = "a"
+-PR = "${MACHINE_KERNEL_PR}"
 -
--SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH} \
--           file://0001-armv7-Unaligned-access-fix.patch \
+-BINFILE_HARDFP = "Graphics_SDK_setuplinux_hardfp_${SGXPV}.bin"
+-MD5SUM_HARDFP = "0ee7d59808330d442a51c0990c2cb30e"
+-SHA256SUM_HARDFP = "769daae439677a7a85bbbced14cee4f85b19823e0b99560078d0a864c525c128"
+-
+-# For now we only have hardfp version
+-python __anonymous() {
+-    tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
+-    if not tunes:
+-        return
+-    pkgn = bb.data.getVar("PN", d, 1)
+-    pkgv = bb.data.getVar("PV", d, 1)
+-    if "callconvention-hard" not in tunes:
+-        bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+-        raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+-}
+-
+-BINFILE := "${BINFILE_HARDFP}"
+-
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/gfxsdk/${SGXPV}/exports/${BINFILE}"
+-
+-SRC_URI[md5sum] := "${MD5SUM_HARDFP}"
+-SRC_URI[sha256sum] := "${SHA256SUM_HARDFP}"
+-
+-TI_BIN_UNPK_WDEXT="/Graphics_SDK_${SGXPV}"
+-S = "${WORKDIR}${TI_BIN_UNPK_WDEXT}/GFX_Linux_KM"
+-
+-PVRBUILD = "release"
+-export KERNELDIR = "${STAGING_KERNEL_DIR}"
+-
+-INHIBIT_PACKAGE_STRIP = "1"
+-
+-TI_PLATFORM_omap3 = "omap3630"
+-TI_PLATFORM_ti814x = "ti81xx"
+-TI_PLATFORM_ti816x = "ti81xx"
+-TI_PLATFORM_ti33x = "ti335x"
+-TI_PLATFORM_ti43x = "ti43xx"
+-
+-MODULESLOCATION_omap3 = "dc_omapfb3_linux"
+-MODULESLOCATION_ti814x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti816x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti33x = "dc_ti335x_linux"
+-MODULESLOCATION_ti43x = "dc_ti43xx_linux"
+-
+-MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
+-
+-do_install() {
+-    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-    cp  ${S}/pvrsrvkm.ko \
+-        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
+-        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
+-        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-}
+diff --git a/recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc.pvr b/recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc.pvr
+deleted file mode 100755
+index 7b5cefa..0000000
+--- a/recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc.pvr
++++ /dev/null
+@@ -1,124 +0,0 @@
+-#!/bin/sh
+-PATH=$PATH:/usr/sbin
+-
+-# Check if an fb device is available.  If not then just go ahead and
+-# exit because we have no display.
+-fbset > /dev/null 2>&1
+-if [ "$?" == "1" ]
+-then
+-    # looks like there is no display, so let's exit
+-    exit 0
+-fi
+-
+-BITSPERPIXEL="$(fbset | grep geom | awk '{print $6}')"
+-YRES="$(fbset | grep geom | awk '{print $3}')"
+-
+-CPUTYPE="$(cputype)"
+-
+-if [ "$1" = "" ]; then
+-	echo PVR-INIT: Please use start, stop, or restart.
+-	exit 1
+-fi
+-
+-if [ "$1" = "stop" -o  "$1" = "restart" ]; then
+-	echo Stopping PVR
+-	rmmod bufferclass_ti
+-	rmmod omaplfb 2>/dev/null
+-	rmmod pvrsrvkm 2>/dev/null
+-fi
+-
+-if [ "$1" = "stop" ]; then
+-	exit 0
+-fi
+-
+-# Set RGBA ordering to something the drivers like
+-if [ "$BITSPERPIXEL" = "32" ] ; then
+-	fbset -rgba 8/16,8/8,8/0,8/24
+-fi
+-
+-# Try to enable triple buffering when there's enough VRAM
+-fbset -vyres $(expr $YRES \* 3)
+-
+-sgxprepare () {
+-	echo Starting PVR
+-	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
+-
+-    if [ "$?" != "0" ]
+-    then
+-        echo "Could not find pvrsrvkm driver"
+-        exit 1
+-    fi
+-
+-	modprobe omaplfb
+-	modprobe bufferclass_ti
+-
+-	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
+-        bc_maj=`grep "bc" /proc/devices | cut -b1,2,3`
+-
+-	if [ -e /dev/pvrsrvkm ] ; then
+-		rm -f /dev/pvrsrvkm
+-	fi
+-
+-	mknod /dev/pvrsrvkm c $pvr_maj 0
+-	chmod 666 /dev/pvrsrvkm
+-
+-	touch /etc/powervr-esrev
+-
+-	SAVED_ESREVISION="$(cat /etc/powervr-esrev)"
+-}
+-
+-sgxfinish () {
+-	# Fix up a bug in opkg
+-	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then
+-		cd /usr/lib
+-		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
+-	fi
+-
+-	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
+-		echo -n "Starting SGX fixup for"
+-		echo " ES${ES_REVISION}.x"
+-		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
+-		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
+-		echo "${ES_REVISION}" > /etc/powervr-esrev
+-	fi
+-
+-	if ! /usr/bin/pvrsrvctl --start --no-module; then return; fi 
+-}
+-
+-case $CPUTYPE in
+-"OMAP3530")
+-	sgxprepare
+-
+-	devmem2 0x48004B48 w 0x2 > /dev/null
+-	devmem2 0x48004B10 w 0x1 > /dev/null
+-	devmem2 0x48004B00 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x50000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI33XX")
+-	sgxprepare
+-
+-	devmem2 0x44e01104 w 0x0 > /dev/null
+-	devmem2 0x44e00904 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI816x")
+-	sgxprepare
+-
+-	devmem2 0x48180F04 w 0x0 > /dev/null
+-	devmem2 0x48180900 w 0x2 > /dev/null
+-	devmem2 0x48180920 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:6: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-*)
+-	echo No SGX hardware, not starting PVR
+-	;;
+-esac
+diff --git a/recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc_dri.pvr b/recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc_dri.pvr
+deleted file mode 100755
+index dd1e942..0000000
+--- a/recipes-graphics/libgles/libgles-omap3-4.08.00.01/rc_dri.pvr
++++ /dev/null
+@@ -1,136 +0,0 @@
+-#!/bin/sh
+-PATH=$PATH:/usr/sbin
+-
+-# Check if an fb device is available.  If not then just go ahead and
+-# exit because we have no display.
+-fbset > /dev/null 2>&1
+-if [ "$?" == "1" ]
+-then
+-    # looks like there is no display, so let's exit
+-    exit 0
+-fi
+-
+-BITSPERPIXEL="$(fbset | grep geom | awk '{print $6}')"
+-YRES="$(fbset | grep geom | awk '{print $3}')"
+-
+-CPUTYPE="$(cputype)"
+-
+-if [ "$1" = "" ]; then
+-	echo PVR-INIT: Please use start, stop, or restart.
+-	exit 1
+-fi
+-
+-if [ "$1" = "stop" -o  "$1" = "restart" ]; then
+-	echo Stopping PVR
+-
+-	# Stop the X Server.
+-	#
+-	[ -f /tmp/.X0-lock ] && read XPID < /tmp/.X0-lock && [ -n "$XPID" ] && kill $XPID && while [ -e /proc/$XPID ] ; do sleep 1; done
+-
+-	rmmod bufferclass_ti
+-	rmmod pvrsrvkm 2>/dev/null
+-    rmmod drm 2>/dev/null
+-fi
+-
+-if [ "$1" = "stop" ]; then
+-	exit 0
+-fi
+-
+-# Set RGBA ordering to something the drivers like
+-if [ "$BITSPERPIXEL" = "32" ] ; then
+-	fbset -rgba 8/16,8/8,8/0,8/24
+-fi
+-
+-# Try to enable triple buffering when there's enough VRAM
+-fbset -vyres $(expr $YRES \* 3)
+-
+-sgxprepare () {
+-	echo Starting PVR
+-
+-	# Start the X Server. 
+-	# The X Server will load the PVR Services module.
+-	#
+-	/usr/local/XSGX/bin/X -verbose -config /usr/local/XSGX/etc/xorg.conf &
+-
+-	modprobe drm
+-
+-	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
+-
+-    if [ "$?" != "0" ]
+-    then
+-        echo "Could not find pvrsrvkm driver"
+-        exit 1
+-    fi
+-
+-	modprobe bufferclass_ti
+-
+-	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
+-        bc_maj=`grep "bc" /proc/devices | cut -b1,2,3`
+-
+-	if [ -e /dev/pvrsrvkm ] ; then
+-		rm -f /dev/pvrsrvkm
+-	fi
+-
+-	mknod /dev/pvrsrvkm c $pvr_maj 0
+-	chmod 666 /dev/pvrsrvkm
+-
+-	touch /etc/powervr-esrev
+-
+-	SAVED_ESREVISION="$(cat /etc/powervr-esrev)"
+-}
+-
+-sgxfinish () {
+-	# Fix up a bug in opkg
+-	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then
+-		cd /usr/lib
+-		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
+-	fi
+-
+-	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
+-		echo -n "Starting SGX fixup for"
+-		echo " ES${ES_REVISION}.x"
+-		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
+-		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
+-		echo "${ES_REVISION}" > /etc/powervr-esrev
+-	fi
+-
+-	if ! /usr/bin/pvrsrvctl --start --no-module; then return; fi 
+-}
+-
+-case $CPUTYPE in
+-"OMAP3530")
+-	sgxprepare
+-
+-	devmem2 0x48004B48 w 0x2 > /dev/null
+-	devmem2 0x48004B10 w 0x1 > /dev/null
+-	devmem2 0x48004B00 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x50000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI33XX")
+-	sgxprepare
+-
+-	devmem2 0x44e01104 w 0x0 > /dev/null
+-	devmem2 0x44e00904 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI816x")
+-	sgxprepare
+-
+-	devmem2 0x48180F04 w 0x0 > /dev/null
+-	devmem2 0x48180900 w 0x2 > /dev/null
+-	devmem2 0x48180920 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:6: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-*)
+-	echo No SGX hardware, not starting PVR
+-	;;
+-esac
+diff --git a/recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc.pvr b/recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc.pvr
+deleted file mode 100755
+index 7b5cefa..0000000
+--- a/recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc.pvr
++++ /dev/null
+@@ -1,124 +0,0 @@
+-#!/bin/sh
+-PATH=$PATH:/usr/sbin
+-
+-# Check if an fb device is available.  If not then just go ahead and
+-# exit because we have no display.
+-fbset > /dev/null 2>&1
+-if [ "$?" == "1" ]
+-then
+-    # looks like there is no display, so let's exit
+-    exit 0
+-fi
+-
+-BITSPERPIXEL="$(fbset | grep geom | awk '{print $6}')"
+-YRES="$(fbset | grep geom | awk '{print $3}')"
+-
+-CPUTYPE="$(cputype)"
+-
+-if [ "$1" = "" ]; then
+-	echo PVR-INIT: Please use start, stop, or restart.
+-	exit 1
+-fi
+-
+-if [ "$1" = "stop" -o  "$1" = "restart" ]; then
+-	echo Stopping PVR
+-	rmmod bufferclass_ti
+-	rmmod omaplfb 2>/dev/null
+-	rmmod pvrsrvkm 2>/dev/null
+-fi
+-
+-if [ "$1" = "stop" ]; then
+-	exit 0
+-fi
+-
+-# Set RGBA ordering to something the drivers like
+-if [ "$BITSPERPIXEL" = "32" ] ; then
+-	fbset -rgba 8/16,8/8,8/0,8/24
+-fi
+-
+-# Try to enable triple buffering when there's enough VRAM
+-fbset -vyres $(expr $YRES \* 3)
+-
+-sgxprepare () {
+-	echo Starting PVR
+-	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
+-
+-    if [ "$?" != "0" ]
+-    then
+-        echo "Could not find pvrsrvkm driver"
+-        exit 1
+-    fi
+-
+-	modprobe omaplfb
+-	modprobe bufferclass_ti
+-
+-	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
+-        bc_maj=`grep "bc" /proc/devices | cut -b1,2,3`
+-
+-	if [ -e /dev/pvrsrvkm ] ; then
+-		rm -f /dev/pvrsrvkm
+-	fi
+-
+-	mknod /dev/pvrsrvkm c $pvr_maj 0
+-	chmod 666 /dev/pvrsrvkm
+-
+-	touch /etc/powervr-esrev
+-
+-	SAVED_ESREVISION="$(cat /etc/powervr-esrev)"
+-}
+-
+-sgxfinish () {
+-	# Fix up a bug in opkg
+-	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then
+-		cd /usr/lib
+-		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
+-	fi
+-
+-	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
+-		echo -n "Starting SGX fixup for"
+-		echo " ES${ES_REVISION}.x"
+-		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
+-		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
+-		echo "${ES_REVISION}" > /etc/powervr-esrev
+-	fi
+-
+-	if ! /usr/bin/pvrsrvctl --start --no-module; then return; fi 
+-}
+-
+-case $CPUTYPE in
+-"OMAP3530")
+-	sgxprepare
+-
+-	devmem2 0x48004B48 w 0x2 > /dev/null
+-	devmem2 0x48004B10 w 0x1 > /dev/null
+-	devmem2 0x48004B00 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x50000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI33XX")
+-	sgxprepare
+-
+-	devmem2 0x44e01104 w 0x0 > /dev/null
+-	devmem2 0x44e00904 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI816x")
+-	sgxprepare
+-
+-	devmem2 0x48180F04 w 0x0 > /dev/null
+-	devmem2 0x48180900 w 0x2 > /dev/null
+-	devmem2 0x48180920 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:6: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-*)
+-	echo No SGX hardware, not starting PVR
+-	;;
+-esac
+diff --git a/recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc_dri.pvr b/recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc_dri.pvr
+deleted file mode 100755
+index dd1e942..0000000
+--- a/recipes-graphics/libgles/libgles-omap3-4.08.00.02/rc_dri.pvr
++++ /dev/null
+@@ -1,136 +0,0 @@
+-#!/bin/sh
+-PATH=$PATH:/usr/sbin
+-
+-# Check if an fb device is available.  If not then just go ahead and
+-# exit because we have no display.
+-fbset > /dev/null 2>&1
+-if [ "$?" == "1" ]
+-then
+-    # looks like there is no display, so let's exit
+-    exit 0
+-fi
+-
+-BITSPERPIXEL="$(fbset | grep geom | awk '{print $6}')"
+-YRES="$(fbset | grep geom | awk '{print $3}')"
+-
+-CPUTYPE="$(cputype)"
+-
+-if [ "$1" = "" ]; then
+-	echo PVR-INIT: Please use start, stop, or restart.
+-	exit 1
+-fi
+-
+-if [ "$1" = "stop" -o  "$1" = "restart" ]; then
+-	echo Stopping PVR
+-
+-	# Stop the X Server.
+-	#
+-	[ -f /tmp/.X0-lock ] && read XPID < /tmp/.X0-lock && [ -n "$XPID" ] && kill $XPID && while [ -e /proc/$XPID ] ; do sleep 1; done
+-
+-	rmmod bufferclass_ti
+-	rmmod pvrsrvkm 2>/dev/null
+-    rmmod drm 2>/dev/null
+-fi
+-
+-if [ "$1" = "stop" ]; then
+-	exit 0
+-fi
+-
+-# Set RGBA ordering to something the drivers like
+-if [ "$BITSPERPIXEL" = "32" ] ; then
+-	fbset -rgba 8/16,8/8,8/0,8/24
+-fi
+-
+-# Try to enable triple buffering when there's enough VRAM
+-fbset -vyres $(expr $YRES \* 3)
+-
+-sgxprepare () {
+-	echo Starting PVR
+-
+-	# Start the X Server. 
+-	# The X Server will load the PVR Services module.
+-	#
+-	/usr/local/XSGX/bin/X -verbose -config /usr/local/XSGX/etc/xorg.conf &
+-
+-	modprobe drm
+-
+-	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
+-
+-    if [ "$?" != "0" ]
+-    then
+-        echo "Could not find pvrsrvkm driver"
+-        exit 1
+-    fi
+-
+-	modprobe bufferclass_ti
+-
+-	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
+-        bc_maj=`grep "bc" /proc/devices | cut -b1,2,3`
+-
+-	if [ -e /dev/pvrsrvkm ] ; then
+-		rm -f /dev/pvrsrvkm
+-	fi
+-
+-	mknod /dev/pvrsrvkm c $pvr_maj 0
+-	chmod 666 /dev/pvrsrvkm
+-
+-	touch /etc/powervr-esrev
+-
+-	SAVED_ESREVISION="$(cat /etc/powervr-esrev)"
+-}
+-
+-sgxfinish () {
+-	# Fix up a bug in opkg
+-	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then
+-		cd /usr/lib
+-		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
+-	fi
+-
+-	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
+-		echo -n "Starting SGX fixup for"
+-		echo " ES${ES_REVISION}.x"
+-		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
+-		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
+-		echo "${ES_REVISION}" > /etc/powervr-esrev
+-	fi
+-
+-	if ! /usr/bin/pvrsrvctl --start --no-module; then return; fi 
+-}
+-
+-case $CPUTYPE in
+-"OMAP3530")
+-	sgxprepare
+-
+-	devmem2 0x48004B48 w 0x2 > /dev/null
+-	devmem2 0x48004B10 w 0x1 > /dev/null
+-	devmem2 0x48004B00 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x50000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI33XX")
+-	sgxprepare
+-
+-	devmem2 0x44e01104 w 0x0 > /dev/null
+-	devmem2 0x44e00904 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI816x")
+-	sgxprepare
+-
+-	devmem2 0x48180F04 w 0x0 > /dev/null
+-	devmem2 0x48180900 w 0x2 > /dev/null
+-	devmem2 0x48180920 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:6: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-*)
+-	echo No SGX hardware, not starting PVR
+-	;;
+-esac
+diff --git a/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc.pvr b/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc.pvr
+deleted file mode 100755
+index 132749a..0000000
+--- a/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc.pvr
++++ /dev/null
+@@ -1,134 +0,0 @@
+-#!/bin/sh
+-PATH=$PATH:/usr/sbin
+-
+-# Check if an fb device is available.  If not then just go ahead and
+-# exit because we have no display.
+-fbset > /dev/null 2>&1
+-if [ "$?" == "1" ]
+-then
+-	# looks like there is no display, so let's exit
+-	exit 0
+-fi
+-
+-BITSPERPIXEL="$(fbset | grep geom | awk '{print $6}')"
+-YRES="$(fbset | grep geom | awk '{print $3}')"
+-
+-CPUTYPE="$(cputype)"
+-
+-if [ "$1" = "" ]; then
+-	echo PVR-INIT: Please use start, stop, or restart.
+-	exit 1
+-fi
+-
+-if [ "$1" = "stop" -o  "$1" = "restart" ]; then
+-	echo Stopping PVR
+-	rmmod bufferclass_ti
+-	rmmod omaplfb 2>/dev/null
+-	rmmod pvrsrvkm 2>/dev/null
+-fi
+-
+-if [ "$1" = "stop" ]; then
+-	exit 0
+-fi
+-
+-# Set RGBA ordering to something the drivers like
+-if [ "$BITSPERPIXEL" = "32" ] ; then
+-	fbset -rgba 8/16,8/8,8/0,8/24
+-fi
+-
+-# Try to enable triple buffering when there's enough VRAM
+-fbset -vyres $(expr $YRES \* 3)
+-
+-sgxprepare () {
+-	echo Starting PVR
+-
+-	lsmod | grep pvrsrvkm > /dev/null
+-
+-	if [ "$?" != "0" ]
+-	then
+-		insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
+-
+-		if [ "$?" != "0" ]
+-		then
+-			echo "Could not find pvrsrvkm driver"
+-			exit 1
+-		fi
+-	fi
+-
+-	modprobe omaplfb
+-	modprobe bufferclass_ti
+-
+-	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
+-	bc_maj=`grep "bc" /proc/devices | cut -b1,2,3`
+-
+-	if [ -e /dev/pvrsrvkm ] ; then
+-		rm -f /dev/pvrsrvkm
+-	fi
+-
+-	mknod /dev/pvrsrvkm c $pvr_maj 0
+-	chmod 666 /dev/pvrsrvkm
+-
+-	touch /etc/powervr-esrev
+-
+-	SAVED_ESREVISION="$(cat /etc/powervr-esrev)"
+-}
+-
+-sgxfinish () {
+-	# Fix up a bug in opkg
+-	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then
+-		cd /usr/lib
+-		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
+-	fi
+-
+-	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
+-		echo -n "Starting SGX fixup for"
+-		echo " ES${ES_REVISION}.x"
+-		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
+-		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
+-		echo "${ES_REVISION}" > /etc/powervr-esrev
+-	fi
+-
+-	if ! /usr/bin/pvrsrvctl --start --no-module; then return; fi
+-}
+-
+-case $CPUTYPE in
+-"OMAP3530")
+-	sgxprepare
+-
+-	devmem2 0x48004B48 w 0x2 > /dev/null
+-	devmem2 0x48004B10 w 0x1 > /dev/null
+-	devmem2 0x48004B00 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x50000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI33XX")
+-	sgxprepare
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI43XX")
+-	sgxprepare
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI816x")
+-	sgxprepare
+-
+-	devmem2 0x48180F04 w 0x0 > /dev/null
+-	devmem2 0x48180900 w 0x2 > /dev/null
+-	devmem2 0x48180920 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:6: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-*)
+-	echo No SGX hardware, not starting PVR
+-	;;
+-esac
+diff --git a/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc_dri.pvr b/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc_dri.pvr
+deleted file mode 100755
+index 9b75aaf..0000000
+--- a/recipes-graphics/libgles/libgles-omap3-5.00.00.01/rc_dri.pvr
++++ /dev/null
+@@ -1,145 +0,0 @@
+-#!/bin/sh
+-PATH=$PATH:/usr/sbin
+-
+-# Check if an fb device is available.  If not then just go ahead and
+-# exit because we have no display.
+-fbset > /dev/null 2>&1
+-if [ "$?" == "1" ]
+-then
+-	# looks like there is no display, so let's exit
+-	exit 0
+-fi
+-
+-BITSPERPIXEL="$(fbset | grep geom | awk '{print $6}')"
+-YRES="$(fbset | grep geom | awk '{print $3}')"
+-
+-CPUTYPE="$(cputype)"
+-
+-if [ "$1" = "" ]; then
+-	echo PVR-INIT: Please use start, stop, or restart.
+-	exit 1
+-fi
+-
+-if [ "$1" = "stop" -o  "$1" = "restart" ]; then
+-	echo Stopping PVR
+-
+-	# Stop the X Server.
+-	#
+-	[ -f /tmp/.X0-lock ] && read XPID < /tmp/.X0-lock && [ -n "$XPID" ] && kill $XPID && while [ -e /proc/$XPID ] ; do sleep 1; done
+-
+-	rmmod bufferclass_ti
+-	rmmod pvrsrvkm 2>/dev/null
+-	rmmod drm 2>/dev/null
+-fi
+-
+-if [ "$1" = "stop" ]; then
+-	exit 0
+-fi
+-
+-# Set RGBA ordering to something the drivers like
+-if [ "$BITSPERPIXEL" = "32" ] ; then
+-	fbset -rgba 8/16,8/8,8/0,8/24
+-fi
+-
+-# Try to enable triple buffering when there's enough VRAM
+-fbset -vyres $(expr $YRES \* 3)
+-
+-sgxprepare () {
+-	echo Starting PVR
+-
+-	# Start the X Server.
+-	# The X Server will load the PVR Services module.
+-	#
+-	/usr/local/XSGX/bin/X -verbose -config /usr/local/XSGX/etc/xorg.conf &
+-
+-	modprobe drm
+-
+-	lsmod | grep pvrsrvkm > /dev/null
+-
+-	if [ "$?" != "0" ]
+-	then
+-		insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
+-
+-		if [ "$?" != "0" ]
+-		then
+-			echo "Could not find pvrsrvkm driver"
+-			exit 1
+-		fi
+-	fi
+-
+-	modprobe bufferclass_ti
+-
+-	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
+-        bc_maj=`grep "bc" /proc/devices | cut -b1,2,3`
+-
+-	if [ -e /dev/pvrsrvkm ] ; then
+-		rm -f /dev/pvrsrvkm
+-	fi
+-
+-	mknod /dev/pvrsrvkm c $pvr_maj 0
+-	chmod 666 /dev/pvrsrvkm
+-
+-	touch /etc/powervr-esrev
+-
+-	SAVED_ESREVISION="$(cat /etc/powervr-esrev)"
+-}
+-
+-sgxfinish () {
+-	# Fix up a bug in opkg
+-	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then
+-		cd /usr/lib
+-		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
+-	fi
+-
+-	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
+-		echo -n "Starting SGX fixup for"
+-		echo " ES${ES_REVISION}.x"
+-		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
+-		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
+-		echo "${ES_REVISION}" > /etc/powervr-esrev
+-	fi
+-
+-	if ! /usr/bin/pvrsrvctl --start --no-module; then return; fi
+-}
+-
+-case $CPUTYPE in
+-"OMAP3530")
+-	sgxprepare
+-
+-	devmem2 0x48004B48 w 0x2 > /dev/null
+-	devmem2 0x48004B10 w 0x1 > /dev/null
+-	devmem2 0x48004B00 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x50000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI33XX")
+-	sgxprepare
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI43XX")
+-	sgxprepare
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI816x")
+-	sgxprepare
+-
+-	devmem2 0x48180F04 w 0x0 > /dev/null
+-	devmem2 0x48180900 w 0x2 > /dev/null
+-	devmem2 0x48180920 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:6: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-*)
+-	echo No SGX hardware, not starting PVR
+-	;;
+-esac
+diff --git a/recipes-graphics/libgles/libgles-omap3-5.01.00.01/rc.pvr b/recipes-graphics/libgles/libgles-omap3-5.01.00.01/rc.pvr
+deleted file mode 100755
+index 132749a..0000000
+--- a/recipes-graphics/libgles/libgles-omap3-5.01.00.01/rc.pvr
++++ /dev/null
+@@ -1,134 +0,0 @@
+-#!/bin/sh
+-PATH=$PATH:/usr/sbin
+-
+-# Check if an fb device is available.  If not then just go ahead and
+-# exit because we have no display.
+-fbset > /dev/null 2>&1
+-if [ "$?" == "1" ]
+-then
+-	# looks like there is no display, so let's exit
+-	exit 0
+-fi
+-
+-BITSPERPIXEL="$(fbset | grep geom | awk '{print $6}')"
+-YRES="$(fbset | grep geom | awk '{print $3}')"
+-
+-CPUTYPE="$(cputype)"
+-
+-if [ "$1" = "" ]; then
+-	echo PVR-INIT: Please use start, stop, or restart.
+-	exit 1
+-fi
+-
+-if [ "$1" = "stop" -o  "$1" = "restart" ]; then
+-	echo Stopping PVR
+-	rmmod bufferclass_ti
+-	rmmod omaplfb 2>/dev/null
+-	rmmod pvrsrvkm 2>/dev/null
+-fi
+-
+-if [ "$1" = "stop" ]; then
+-	exit 0
+-fi
+-
+-# Set RGBA ordering to something the drivers like
+-if [ "$BITSPERPIXEL" = "32" ] ; then
+-	fbset -rgba 8/16,8/8,8/0,8/24
+-fi
+-
+-# Try to enable triple buffering when there's enough VRAM
+-fbset -vyres $(expr $YRES \* 3)
+-
+-sgxprepare () {
+-	echo Starting PVR
+-
+-	lsmod | grep pvrsrvkm > /dev/null
+-
+-	if [ "$?" != "0" ]
+-	then
+-		insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
+-
+-		if [ "$?" != "0" ]
+-		then
+-			echo "Could not find pvrsrvkm driver"
+-			exit 1
+-		fi
+-	fi
+-
+-	modprobe omaplfb
+-	modprobe bufferclass_ti
+-
+-	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
+-	bc_maj=`grep "bc" /proc/devices | cut -b1,2,3`
+-
+-	if [ -e /dev/pvrsrvkm ] ; then
+-		rm -f /dev/pvrsrvkm
+-	fi
+-
+-	mknod /dev/pvrsrvkm c $pvr_maj 0
+-	chmod 666 /dev/pvrsrvkm
+-
+-	touch /etc/powervr-esrev
+-
+-	SAVED_ESREVISION="$(cat /etc/powervr-esrev)"
+-}
+-
+-sgxfinish () {
+-	# Fix up a bug in opkg
+-	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then
+-		cd /usr/lib
+-		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
+-	fi
+-
+-	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
+-		echo -n "Starting SGX fixup for"
+-		echo " ES${ES_REVISION}.x"
+-		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
+-		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
+-		echo "${ES_REVISION}" > /etc/powervr-esrev
+-	fi
+-
+-	if ! /usr/bin/pvrsrvctl --start --no-module; then return; fi
+-}
+-
+-case $CPUTYPE in
+-"OMAP3530")
+-	sgxprepare
+-
+-	devmem2 0x48004B48 w 0x2 > /dev/null
+-	devmem2 0x48004B10 w 0x1 > /dev/null
+-	devmem2 0x48004B00 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x50000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI33XX")
+-	sgxprepare
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI43XX")
+-	sgxprepare
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI816x")
+-	sgxprepare
+-
+-	devmem2 0x48180F04 w 0x0 > /dev/null
+-	devmem2 0x48180900 w 0x2 > /dev/null
+-	devmem2 0x48180920 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:6: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-*)
+-	echo No SGX hardware, not starting PVR
+-	;;
+-esac
+diff --git a/recipes-graphics/libgles/libgles-omap3-5.01.00.01/rc_dri.pvr b/recipes-graphics/libgles/libgles-omap3-5.01.00.01/rc_dri.pvr
+deleted file mode 100755
+index 9b75aaf..0000000
+--- a/recipes-graphics/libgles/libgles-omap3-5.01.00.01/rc_dri.pvr
++++ /dev/null
+@@ -1,145 +0,0 @@
+-#!/bin/sh
+-PATH=$PATH:/usr/sbin
+-
+-# Check if an fb device is available.  If not then just go ahead and
+-# exit because we have no display.
+-fbset > /dev/null 2>&1
+-if [ "$?" == "1" ]
+-then
+-	# looks like there is no display, so let's exit
+-	exit 0
+-fi
+-
+-BITSPERPIXEL="$(fbset | grep geom | awk '{print $6}')"
+-YRES="$(fbset | grep geom | awk '{print $3}')"
+-
+-CPUTYPE="$(cputype)"
+-
+-if [ "$1" = "" ]; then
+-	echo PVR-INIT: Please use start, stop, or restart.
+-	exit 1
+-fi
+-
+-if [ "$1" = "stop" -o  "$1" = "restart" ]; then
+-	echo Stopping PVR
+-
+-	# Stop the X Server.
+-	#
+-	[ -f /tmp/.X0-lock ] && read XPID < /tmp/.X0-lock && [ -n "$XPID" ] && kill $XPID && while [ -e /proc/$XPID ] ; do sleep 1; done
+-
+-	rmmod bufferclass_ti
+-	rmmod pvrsrvkm 2>/dev/null
+-	rmmod drm 2>/dev/null
+-fi
+-
+-if [ "$1" = "stop" ]; then
+-	exit 0
+-fi
+-
+-# Set RGBA ordering to something the drivers like
+-if [ "$BITSPERPIXEL" = "32" ] ; then
+-	fbset -rgba 8/16,8/8,8/0,8/24
+-fi
+-
+-# Try to enable triple buffering when there's enough VRAM
+-fbset -vyres $(expr $YRES \* 3)
+-
+-sgxprepare () {
+-	echo Starting PVR
+-
+-	# Start the X Server.
+-	# The X Server will load the PVR Services module.
+-	#
+-	/usr/local/XSGX/bin/X -verbose -config /usr/local/XSGX/etc/xorg.conf &
+-
+-	modprobe drm
+-
+-	lsmod | grep pvrsrvkm > /dev/null
+-
+-	if [ "$?" != "0" ]
+-	then
+-		insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
+-
+-		if [ "$?" != "0" ]
+-		then
+-			echo "Could not find pvrsrvkm driver"
+-			exit 1
+-		fi
+-	fi
+-
+-	modprobe bufferclass_ti
+-
+-	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
+-        bc_maj=`grep "bc" /proc/devices | cut -b1,2,3`
+-
+-	if [ -e /dev/pvrsrvkm ] ; then
+-		rm -f /dev/pvrsrvkm
+-	fi
+-
+-	mknod /dev/pvrsrvkm c $pvr_maj 0
+-	chmod 666 /dev/pvrsrvkm
+-
+-	touch /etc/powervr-esrev
+-
+-	SAVED_ESREVISION="$(cat /etc/powervr-esrev)"
+-}
+-
+-sgxfinish () {
+-	# Fix up a bug in opkg
+-	if [ $(readlink /usr/lib/libsrv_um.so) != $(readlink /usr/lib/libsrv_um.so.1) ] ; then
+-		cd /usr/lib
+-		ln -sf $(readlink /usr/lib/libsrv_um.so.1) libsrv_um.so
+-	fi
+-
+-	if [ "${ES_REVISION}" != "${SAVED_ESREVISION}" ] ; then
+-		echo -n "Starting SGX fixup for"
+-		echo " ES${ES_REVISION}.x"
+-		cp -a /usr/lib/ES${ES_REVISION}.0/* /usr/lib
+-		cp -a /usr/bin/ES${ES_REVISION}.0/* /usr/bin
+-		echo "${ES_REVISION}" > /etc/powervr-esrev
+-	fi
+-
+-	if ! /usr/bin/pvrsrvctl --start --no-module; then return; fi
+-}
+-
+-case $CPUTYPE in
+-"OMAP3530")
+-	sgxprepare
+-
+-	devmem2 0x48004B48 w 0x2 > /dev/null
+-	devmem2 0x48004B10 w 0x1 > /dev/null
+-	devmem2 0x48004B00 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x50000014 | sed -e s:0x00010205:5: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI33XX")
+-	sgxprepare
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI43XX")
+-	sgxprepare
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:8: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-"TI816x")
+-	sgxprepare
+-
+-	devmem2 0x48180F04 w 0x0 > /dev/null
+-	devmem2 0x48180900 w 0x2 > /dev/null
+-	devmem2 0x48180920 w 0x2 > /dev/null
+-
+-	ES_REVISION="$(devmem2 0x56000014 | sed -e s:0x00010205:6: -e s:0x00010201:3: -e s:0x00010003:2: | tail -n1 | awk -F': ' '{print $2}')"
+-
+-	sgxfinish
+-	;;
+-*)
+-	echo No SGX hardware, not starting PVR
+-	;;
+-esac
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb b/recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb
+deleted file mode 100644
+index e466aab..0000000
+--- a/recipes-graphics/libgles/libgles-omap3_4.08.00.01.bb
++++ /dev/null
+@@ -1,74 +0,0 @@
+-require libgles-omap3.inc
+-
+-LICENSE = "TI-TSPA"
+-
+-BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
+-BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+-BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
+-BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
+-
+-PLATFORM = "LinuxARMV7"
+-PVR_INIT = "pvrsrvctl"
+-
+-# download required binary distribution from:
+-# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
+-# see libgles-omap3.inc for detailed installation instructions
+-
+-SGXPV = "4_08_00_01"
+-IMGPV = "1.9.2139099"
+-BINFILE = "Graphics_SDK_setuplinux_${SGXPV}.bin"
+-TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
+-           file://cputype \
+-           file://rc.pvr \
+-           file://rc_dri.pvr \
+-           file://sample.desktop \
+-           file://99-bufferclass.rules  \
 -"
 -
--BRANCH = "AM335XPSP_04.06.00.08"
+-SRC_URI[md5sum] = "dd0d994a48ecc4293f272a1fddddf159"
+-SRC_URI[sha256sum] = "fd721288c95314e0d676dd89462e1dec994e185cb608bcb8ac4a4b5809f9693a"
 -
--# Lock to the commit corresponding to tag "v2011.09_AM335xPSP_04.06.00.08"
--SRCREV = "1e4626f0d5f3bb04ec974e76a5d9029875269d31"
+-S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
 -
--# Set the name of the SPL that will built so that it is also packaged with u-boot.
--SPL_BINARY = "MLO"
-diff --git a/recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb b/recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
+-LIBGLESWINDOWSYSTEM ?= "${@base_contains('DISTRO_FEATURES', 'x11',"libpvrPVR2D_DRIWSEGL.so" ,"libpvrPVR2D_FRONTWSEGL.so.1", d)}"
+-
+-do_configure_append() {
+-
+-    # Change PVR server's user mode library to point to DRI
+-    for drifile in $(find ${S} -name "libsrv_um_dri.so"); do
+-    if [ "$drifile" != "" ]
+-    then
+-        dir=$(dirname ${drifile})
+-        if [ "$SUPPORT_XORG" = "1" ]
+-        then
+-            mv ${dir}/libsrv_um_dri.so ${dir}/libsrv_um.so
+-        else
+-            rm -rf ${dir}/libsrv_um_dri.so
+-        fi
+-    fi
+-
+-    done
+-}
+-
+-do_install_append() {
+-
+-    # In this version of the graphics SDK the following directories do not exist:
+-    #    /GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/pvr2d.h (doesn't exist)
+-    #    /GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/GLES/egltypes.h (doesn't exist)
+-    # Therefore, need to copy these files manually at the only location that they do exist
+-    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir}
+-    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/
+-
+-    rm ${D}${sysconfdir}/init.d/pvr-init
+-
+-    if [ "$SUPPORT_XORG" = "1" ]; then
+-        cp -pP ${WORKDIR}/rc_dri.pvr ${D}${sysconfdir}/init.d/pvr-init
+-    else
+-        cp -pP ${WORKDIR}/rc.pvr ${D}${sysconfdir}/init.d/pvr-init
+-    fi
+-
+-}
+-
+-RRECOMMENDS_${PN}-x11demos = "${PN}-driwsegl"
+-RRECOMMENDS_${PN}-x11trainingcourses = "${PN}-driwsegl"
+diff --git a/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb b/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
 deleted file mode 100644
-index 519df16..0000000
---- a/recipes-bsp/u-boot/u-boot-beagleboard_2011.09.bb
-+++ /dev/null
-@@ -1,36 +0,0 @@
--require u-boot-ti.inc
--
--PR = "r7"
--
--SPL_BINARY = "MLO"
--
--# No patches for other machines yet
--COMPATIBLE_MACHINE = "(beagleboard)"
--
--SRC_URI = "git://git.denx.de/u-boot.git;protocol=git \
--           file://2011.09/0001-omap3-mem-Comment-enable_gpmc_cs_config-more.patch \
--           file://2011.09/0002-OMAP3-Update-SDRC-dram_init-to-always-call-make_cs1_.patch \
--           file://2011.09/0003-OMAP3-Add-a-helper-function-to-set-timings-in-SDRC.patch \
--           file://2011.09/0004-OMAP3-Change-mem_ok-to-clear-again-after-reading-bac.patch \
--           file://2011.09/0005-OMAP3-Remove-get_mem_type-prototype.patch \
--           file://2011.09/0006-omap3-mem-Add-MCFG-helper-macro.patch \
--           file://2011.09/0007-OMAP3-Add-optimal-SDRC-autorefresh-control-values.patch \
--           file://2011.09/0008-OMAP3-Suffix-all-Micron-memory-timing-parts-with-the.patch \
--           file://2011.09/0009-OMAP3-SPL-Rework-memory-initalization-and-devkit8000.patch \
--           file://2011.09/0010-OMAP3-SPL-Add-identify_nand_chip-function.patch \
--           file://2011.09/0011-OMAP3-Add-SPL-support-to-Beagleboard.patch \
--           file://2011.09/0012-OMAP3-Add-SPL-support-to-omap3_evm.patch \
--           file://2011.09/0013-AM3517-Add-SPL-support.patch \
--           file://2011.09/0014-AM3517-CraneBoard-Add-SPL-support.patch \
--           file://2011.09/0015-HACK-beagleboard-config-disable-cache-for-USB.patch \
--           file://2011.09/0016-beagleboard-config-enable-gpio-command.patch \
--           file://2011.09/0017-Increased-some-timeout-durations-for-MMC-and-EHCI.patch \
--           file://2011.09/0018-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch \
--           file://2011.09/0019-BeagleBoard-config-Really-switch-to-ttyO2.patch \
--           file://2011.09/0020-beagleboard-add-support-for-TCT-Beacon-board.patch \
--           file://2011.09/0021-beagleboard-add-support-for-scanning-loop-through-ex.patch \
--           file://0001-config-Always-use-GNU-ld.patch \
--           file://fw_env.config \
--          "
--
--SRCREV = "fdbe8b9a2d1858ba35dd6214315563ad44d4a0e3"
-diff --git a/recipes-bsp/u-boot/u-boot/0001-OMAP3-Beagle-Pin-Mux-initialization-glitch-fix.patch b/recipes-bsp/u-boot/u-boot/0001-OMAP3-Beagle-Pin-Mux-initialization-glitch-fix.patch
-deleted file mode 100644
-index 7e88d70..0000000
---- a/recipes-bsp/u-boot/u-boot/0001-OMAP3-Beagle-Pin-Mux-initialization-glitch-fix.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--From 7b250f8be3b8c496796dcdc954c9e5959cefea2c Mon Sep 17 00:00:00 2001
--From: Bob Feretich <bob.feretich@rafresearch.com>
--Date: Thu, 24 Feb 2011 13:16:44 +0000
--Subject: [PATCH 01/16] OMAP3 Beagle Pin Mux initialization glitch fix
--
--The below patch reverses the order of two segments in the board file.
--Output pins need to have their values initialized, before they are
--exposed to the logic outside the chip.
--
--Signed-off-by: Bob Feretich <bob.feretich@rafresearch.com>
--Cc: Wolfgang Denk <wd@denx.de>
-----
-- board/ti/beagle/beagle.c |   12 ++++++------
-- 1 files changed, 6 insertions(+), 6 deletions(-)
--
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index c066d6e..929461c 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -239,17 +239,17 @@ int misc_init_r(void)
-- 	twl4030_power_init();
-- 	twl4030_led_init(TWL4030_LED_LEDEN_LEDAON | TWL4030_LED_LEDEN_LEDBON);
-- 
---	/* Configure GPIOs to output */
---	writel(~(GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1), &gpio6_base->oe);
---	writel(~(GPIO31 | GPIO30 | GPIO29 | GPIO28 | GPIO22 | GPIO21 |
---		GPIO15 | GPIO14 | GPIO13 | GPIO12), &gpio5_base->oe);
---
---	/* Set GPIOs */
--+	/* Set GPIO states before they are made outputs */
-- 	writel(GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1,
-- 		&gpio6_base->setdataout);
-- 	writel(GPIO31 | GPIO30 | GPIO29 | GPIO28 | GPIO22 | GPIO21 |
-- 		GPIO15 | GPIO14 | GPIO13 | GPIO12, &gpio5_base->setdataout);
-- 
--+	/* Configure GPIOs to output */
--+	writel(~(GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1), &gpio6_base->oe);
--+	writel(~(GPIO31 | GPIO30 | GPIO29 | GPIO28 | GPIO22 | GPIO21 |
--+		GPIO15 | GPIO14 | GPIO13 | GPIO12), &gpio5_base->oe);
--+
-- 	dieid_num_r();
-- 
-- 	return 0;
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0001-armv7-Unaligned-access-fix.patch b/recipes-bsp/u-boot/u-boot/0001-armv7-Unaligned-access-fix.patch
-deleted file mode 100644
-index 35307ac..0000000
---- a/recipes-bsp/u-boot/u-boot/0001-armv7-Unaligned-access-fix.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 40f1e7db785f477a2aa145a3b47bd498c48ad52d Mon Sep 17 00:00:00 2001
--From: Steve Kipisz <s-kipisz2@ti.com>
--Date: Fri, 14 Jun 2013 05:16:52 -0500
--Subject: [PATCH] armv7:Unaligned access fix
--
--This fixes an unaligned access data abort introduced when using gcc 4.7
--or higher. The Linaro toolchain uses gcc 4.7.3. This is documented in u-boot
--doc/README.arm-unaligned-accesses.
--
--Signed-off-by: Steve Kipisz <s-kipisz2@ti.com>
-----
-- arch/arm/cpu/armv7/config.mk |    2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/arch/arm/cpu/armv7/config.mk b/arch/arm/cpu/armv7/config.mk
--index 9c3e2f3..9736da8 100644
----- a/arch/arm/cpu/armv7/config.mk
--+++ b/arch/arm/cpu/armv7/config.mk
--@@ -20,7 +20,7 @@
-- # Foundation, Inc., 59 Temple Place, Suite 330, Boston,
-- # MA 02111-1307 USA
-- #
---PLATFORM_RELFLAGS += -fno-common -ffixed-r8 -msoft-float
--+PLATFORM_RELFLAGS += -fno-common -ffixed-r8 -msoft-float -mno-unaligned-access
-- 
-- # If armv7-a is not supported by GCC fall-back to armv5, which is
-- # supported by more tool-chains
---- 
--1.7.9.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch b/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
-deleted file mode 100644
-index 64685e3..0000000
---- a/recipes-bsp/u-boot/u-boot/0001-config-Always-use-GNU-ld.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From a8dc33253472328f2af04973575f26e9106db1c3 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 21 Dec 2011 08:53:02 -0800
--Subject: [PATCH] config: Always use GNU ld
--
--This patch makes sure that we always use the GNU ld. u-boot uses certain
--construct e.g. OVERLAY which are not implemented in gold therefore it
--always needs GNU ld for linking. It works well if default linker in
--toolchain is GNU ld but in some cases we can have gold to be the
--default linker and also ship GNU ld but not as default in such cases
--its called $(PREFIX)ld.bfd, with this patch we make sure that if
--$(PREFIX)ld.bfd exists than we use that for our ld. This way it
--does not matter what the default ld is.
--
--Upstream-status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- config.mk |    4 +++-
-- 1 files changed, 3 insertions(+), 1 deletions(-)
--
--diff --git a/config.mk b/config.mk
--index ddaa477..139dfa0 100644
----- a/config.mk
--+++ b/config.mk
--@@ -126,11 +126,13 @@ cc-option = $(strip $(if $(findstring $1,$(CC_OPTIONS)),$1,\
-- 		$(if $(call cc-option-sys,$1),$1,$2)))
-- endif
-- 
--+exists_bfd_ld = $(shell if $(CROSS_COMPILE)ld.bfd -v > /dev/null 2>&1; \
--+		then echo "$(1)"; else echo "$(2)"; fi; )
-- #
-- # Include the make variables (CC, etc...)
-- #
-- AS	= $(CROSS_COMPILE)as
---LD	= $(CROSS_COMPILE)ld
--+LD	= $(call exists_bfd_ld, "$(CROSS_COMPILE)ld.bfd", "$(CROSS_COMPILE)ld")
-- CC	= $(CROSS_COMPILE)gcc
-- CPP	= $(CC) -E
-- AR	= $(CROSS_COMPILE)ar
---- 
--1.7.9.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0001-omap3evm-Change-default-console-serial-port-from.patch b/recipes-bsp/u-boot/u-boot/0001-omap3evm-Change-default-console-serial-port-from.patch
-deleted file mode 100644
-index d171b78..0000000
---- a/recipes-bsp/u-boot/u-boot/0001-omap3evm-Change-default-console-serial-port-from.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 6b23ecf49d1c2ee5227ff57101919af46ecd7396 Mon Sep 17 00:00:00 2001
--From: Roger Monk <r-monk@ti.com>
--Date: Fri, 9 Jul 2010 08:37:04 +0100
--Subject: [PATCH] omap3evm:  Change default 'console' serial port from ttyS2 to ttyS0
--
--   * Update default kernel console env variable ($(console))
--     to use ttyS0 (instead of ttyS2) to match the serial port
--      used by x-loader and u-boot
--
--Signed-off-by: Roger Monk <r-monk@ti.com>
-----
-- include/configs/omap3_evm.h |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/include/configs/omap3_evm.h b/include/configs/omap3_evm.h
--index 73a5c98..d01d733 100644
----- a/include/configs/omap3_evm.h
--+++ b/include/configs/omap3_evm.h
--@@ -203,7 +203,7 @@
-- #define CONFIG_EXTRA_ENV_SETTINGS \
-- 	"loadaddr=0x82000000\0" \
-- 	"usbtty=cdc_acm\0" \
---	"console=ttyS2,115200n8\0" \
--+	"console=ttyS0,115200n8\0" \
-- 	"mmcargs=setenv bootargs console=${console} " \
-- 		"root=/dev/mmcblk0p2 rw " \
-- 		"rootfstype=ext3 rootwait\0" \
---- 
--1.6.0.4
--
-diff --git a/recipes-bsp/u-boot/u-boot/0002-OMAP-Remove-omapfb.debug-y-from-Beagle-and-Overo-env.patch b/recipes-bsp/u-boot/u-boot/0002-OMAP-Remove-omapfb.debug-y-from-Beagle-and-Overo-env.patch
-deleted file mode 100644
-index 707cc79..0000000
---- a/recipes-bsp/u-boot/u-boot/0002-OMAP-Remove-omapfb.debug-y-from-Beagle-and-Overo-env.patch
-+++ /dev/null
-@@ -1,56 +0,0 @@
--From 0588da9057fddb5f6a6a04aedd7e0a79eb39e9e5 Mon Sep 17 00:00:00 2001
--From: Steve Sakoman <steve@sakoman.com>
--Date: Thu, 30 Dec 2010 07:19:44 +0000
--Subject: [PATCH 02/16] OMAP: Remove omapfb.debug=y from Beagle and Overo env settings
--
--The kernel DSS2 code is mature now, and keeping this setting hurts performance
--
--Signed-off-by: Steve Sakoman <steve@sakoman.com>
-----
-- include/configs/omap3_beagle.h |    2 --
-- include/configs/omap3_overo.h  |    2 --
-- 2 files changed, 0 insertions(+), 4 deletions(-)
--
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 5cfa4cb..8b580ef 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -203,7 +203,6 @@
-- 		"mpurate=${mpurate} " \
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
---		"omapfb.debug=y " \
-- 		"omapdss.def_disp=${defaultdisplay} " \
-- 		"root=${mmcroot} " \
-- 		"rootfstype=${mmcrootfstype}\0" \
--@@ -211,7 +210,6 @@
-- 		"mpurate=${mpurate} " \
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
---		"omapfb.debug=y " \
-- 		"omapdss.def_disp=${defaultdisplay} " \
-- 		"root=${nandroot} " \
-- 		"rootfstype=${nandrootfstype}\0" \
--diff --git a/include/configs/omap3_overo.h b/include/configs/omap3_overo.h
--index 1b3d439..06a28f6 100644
----- a/include/configs/omap3_overo.h
--+++ b/include/configs/omap3_overo.h
--@@ -169,7 +169,6 @@
-- 		"mpurate=${mpurate} " \
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
---		"omapfb.debug=y " \
-- 		"omapdss.def_disp=${defaultdisplay} " \
-- 		"root=${mmcroot} " \
-- 		"rootfstype=${mmcrootfstype}\0" \
--@@ -177,7 +176,6 @@
-- 		"mpurate=${mpurate} " \
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
---		"omapfb.debug=y " \
-- 		"omapdss.def_disp=${defaultdisplay} " \
-- 		"root=${nandroot} " \
-- 		"rootfstype=${nandrootfstype}\0" \
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0003-omap3_beagle-enable-the-use-of-a-plain-text-file-nam.patch b/recipes-bsp/u-boot/u-boot/0003-omap3_beagle-enable-the-use-of-a-plain-text-file-nam.patch
-deleted file mode 100644
-index a68859e..0000000
---- a/recipes-bsp/u-boot/u-boot/0003-omap3_beagle-enable-the-use-of-a-plain-text-file-nam.patch
-+++ /dev/null
-@@ -1,89 +0,0 @@
--From 58ca6009d4101e5fd45ef9df22aa360d1662e9e9 Mon Sep 17 00:00:00 2001
--From: Alexander Holler <holler@ahsoftware.de>
--Date: Mon, 24 Jan 2011 13:08:49 +0000
--Subject: [PATCH 03/16] omap3_beagle: enable the use of a plain text file named uEnv.txt instead of boot.scr
--
--Using the new env import command it is possible to use plain text files instead
--of script-images. Plain text files are much easier to handle.
--
--E.g. If your boot.scr contains the following:
-------------------------------------
--setenv dvimode 1024x768-16@60
--run loaduimage
--run mmcboot
-------------------------------------
--you could create a file named uEnv.txt and use that instead of boot.scr:
-------------------------------------
--dvimode=1024x768-16@60
--uenvcmd=run loaduimage; run mmcboot
-------------------------------------
--The variable uenvcmd (if existent) will be executed (using run) after uEnv.txt
--was loaded. If uenvcmd doesn't exist the default boot sequence will be started,
--therefore you could just use
-------------------------------------
--dvimode=1024x768-16@60
-------------------------------------
--as uEnv.txt because loaduimage and mmcboot is part of the default boot sequence.
-----
--Changes for v2:
--  - Eliminated else redundant clause that would be ignored if boot
--    succeeds.
--
--Changes for v3:
--  - Removed boot.scr
--
--Changes for v4:
--  - Removed comment about boot.scr being supported.
-----
-- include/configs/omap3_beagle.h |   28 ++++++++++++++++------------
-- 1 files changed, 16 insertions(+), 12 deletions(-)
--
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 8b580ef..c85537c 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -213,9 +213,9 @@
-- 		"omapdss.def_disp=${defaultdisplay} " \
-- 		"root=${nandroot} " \
-- 		"rootfstype=${nandrootfstype}\0" \
---	"loadbootscript=fatload mmc ${mmcdev} ${loadaddr} boot.scr\0" \
---	"bootscript=echo Running bootscript from mmc ...; " \
---		"source ${loadaddr}\0" \
--+	"loadbootenv=fatload mmc ${mmcdev} ${loadaddr} uEnv.txt\0" \
--+	"importbootenv=echo Importing environment from mmc ...; " \
--+		"env import -t $loadaddr $filesize\0" \
-- 	"loaduimage=fatload mmc ${mmcdev} ${loadaddr} uImage\0" \
-- 	"mmcboot=echo Booting from mmc ...; " \
-- 		"run mmcargs; " \
--@@ -227,15 +227,19 @@
-- 
-- #define CONFIG_BOOTCOMMAND \
-- 	"if mmc rescan ${mmcdev}; then " \
---		"if run loadbootscript; then " \
---			"run bootscript; " \
---		"else " \
---			"if run loaduimage; then " \
---				"run mmcboot; " \
---			"else run nandboot; " \
---			"fi; " \
---		"fi; " \
---	"else run nandboot; fi"
--+		"echo SD/MMC found on device ${mmcdev};" \
--+		"if run loadbootenv; then " \
--+			"run importbootenv;" \
--+		"fi;" \
--+		"if test -n $uenvcmd; then " \
--+			"echo Running uenvcmd ...;" \
--+			"run uenvcmd;" \
--+		"fi;" \
--+		"if run loaduimage; then " \
--+			"run mmcboot;" \
--+		"fi;" \
--+	"fi;" \
--+	"run nandboot;" \
-- 
-- #define CONFIG_AUTO_COMPLETE		1
-- /*
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0004-OMAP3-BeagleBoard-Enable-pullups-on-i2c2.patch b/recipes-bsp/u-boot/u-boot/0004-OMAP3-BeagleBoard-Enable-pullups-on-i2c2.patch
-deleted file mode 100644
-index 4840d86..0000000
---- a/recipes-bsp/u-boot/u-boot/0004-OMAP3-BeagleBoard-Enable-pullups-on-i2c2.patch
-+++ /dev/null
-@@ -1,69 +0,0 @@
--From 6859e4b88c405ed40c898d259227f158da5f867a Mon Sep 17 00:00:00 2001
--From: Steve Kipisz <s-kipisz2@ti.com>
--Date: Thu, 5 Aug 2010 10:36:07 -0500
--Subject: [PATCH 04/16] OMAP3: BeagleBoard: Enable pullups on i2c2.
--
--This allows the reading of EEPROMS on the expansion bus without adding
--external pull-ups.
-----
--v2 updates
-- * Updated per http://patchwork.ozlabs.org/patch/71997/
-- * Added description
-- * Used OMAP34XX_CTRL_BASE
-- * Used structure and writel to perform write
--
--v3 updates
-- * Included v3 in the subject line
-- * Fixed structure name typo that got messed up in generating patch
-- * Removed some extraneous blank lines
--
--v4 updates
-- * Fixed typo in typecast
-----
-- arch/arm/include/asm/arch-omap3/omap3.h |   14 ++++++++++++++
-- board/ti/beagle/beagle.c                |    4 ++++
-- 2 files changed, 18 insertions(+), 0 deletions(-)
--
--diff --git a/arch/arm/include/asm/arch-omap3/omap3.h b/arch/arm/include/asm/arch-omap3/omap3.h
--index 3957c79..cc2b541 100644
----- a/arch/arm/include/asm/arch-omap3/omap3.h
--+++ b/arch/arm/include/asm/arch-omap3/omap3.h
--@@ -50,6 +50,20 @@
-- /* CONTROL */
-- #define OMAP34XX_CTRL_BASE		(OMAP34XX_L4_IO_BASE + 0x2000)
-- 
--+#ifndef __ASSEMBLY__
--+/* Signal Integrity Parameter Control Registers */
--+struct control_prog_io {
--+	unsigned char res[0x408];
--+	unsigned int io2;		/* 0x408 */
--+	unsigned char res2[0x38];
--+	unsigned int io0;		/* 0x444 */
--+	unsigned int io1;		/* 0x448 */
--+};
--+#endif /* __ASSEMBLY__ */
--+
--+/* Bit definition for CONTROL_PROG_IO1 */
--+#define PRG_I2C2_PULLUPRESX		0x00000001
--+
-- /* UART */
-- #define OMAP34XX_UART1			(OMAP34XX_L4_IO_BASE + 0x6a000)
-- #define OMAP34XX_UART2			(OMAP34XX_L4_IO_BASE + 0x6c000)
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 929461c..9d03b24 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -148,6 +148,10 @@ int misc_init_r(void)
-- {
-- 	struct gpio *gpio5_base = (struct gpio *)OMAP34XX_GPIO5_BASE;
-- 	struct gpio *gpio6_base = (struct gpio *)OMAP34XX_GPIO6_BASE;
--+	struct control_prog_io *prog_io_base = (struct control_prog_io *)OMAP34XX_CTRL_BASE;
--+
--+	/* Enable i2c2 pullup resisters */
--+	writel(~(PRG_I2C2_PULLUPRESX), &prog_io_base->io1);
-- 
-- 	switch (get_board_revision()) {
-- 	case REVISION_AXBX:
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0005-ARMV7-OMAP3-BeagleBoard-add-xM-rev-B-to-ID-table.patch b/recipes-bsp/u-boot/u-boot/0005-ARMV7-OMAP3-BeagleBoard-add-xM-rev-B-to-ID-table.patch
-deleted file mode 100644
-index 0e8dd84..0000000
---- a/recipes-bsp/u-boot/u-boot/0005-ARMV7-OMAP3-BeagleBoard-add-xM-rev-B-to-ID-table.patch
-+++ /dev/null
-@@ -1,111 +0,0 @@
--From d2d1669e4e2d4eeb996305278c6e4df0b1e04a8d Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Wed, 3 Nov 2010 14:48:31 +0100
--Subject: [PATCH 05/16] ARMV7: OMAP3: BeagleBoard: add xM rev B to ID table
--
--Patch was updated by Jason Kridner <jkridner@beagleboard.org>:
--* Use tabs to match style of other board revisions
--* Only include board revisions that exist
--* Default to the same configuration as the latest revision, but
--  without setting 'beaglerev'
-----
--v2 Changes
--  * Updated with feedback from http://patchwork.ozlabs.org/patch/71995/
--  * Removed setting of mpurate based on board revision
--  * Set mpurate to auto in default environment variables
--
--Cc: Koen Kooi <koen@dominion.thruhere.net>
-----
-- board/ti/beagle/beagle.c       |   22 +++++++++++++++++-----
-- board/ti/beagle/beagle.h       |    3 ++-
-- include/configs/omap3_beagle.h |    2 +-
-- 3 files changed, 20 insertions(+), 7 deletions(-)
--
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 9d03b24..87a952e 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -157,18 +157,15 @@ int misc_init_r(void)
-- 	case REVISION_AXBX:
-- 		printf("Beagle Rev Ax/Bx\n");
-- 		setenv("beaglerev", "AxBx");
---		setenv("mpurate", "600");
-- 		break;
-- 	case REVISION_CX:
-- 		printf("Beagle Rev C1/C2/C3\n");
-- 		setenv("beaglerev", "Cx");
---		setenv("mpurate", "600");
-- 		MUX_BEAGLE_C();
-- 		break;
-- 	case REVISION_C4:
-- 		printf("Beagle Rev C4\n");
-- 		setenv("beaglerev", "C4");
---		setenv("mpurate", "720");
-- 		MUX_BEAGLE_C();
-- 		/* Set VAUX2 to 1.8V for EHCI PHY */
-- 		twl4030_pmrecv_vsel_cfg(TWL4030_PM_RECEIVER_VAUX2_DEDICATED,
--@@ -176,10 +173,19 @@ int misc_init_r(void)
-- 					TWL4030_PM_RECEIVER_VAUX2_DEV_GRP,
-- 					TWL4030_PM_RECEIVER_DEV_GRP_P1);
-- 		break;
---	case REVISION_XM:
--+	case REVISION_XM_A:
-- 		printf("Beagle xM Rev A\n");
-- 		setenv("beaglerev", "xMA");
---		setenv("mpurate", "1000");
--+		MUX_BEAGLE_XM();
--+		/* Set VAUX2 to 1.8V for EHCI PHY */
--+		twl4030_pmrecv_vsel_cfg(TWL4030_PM_RECEIVER_VAUX2_DEDICATED,
--+					TWL4030_PM_RECEIVER_VAUX2_VSEL_18,
--+					TWL4030_PM_RECEIVER_VAUX2_DEV_GRP,
--+					TWL4030_PM_RECEIVER_DEV_GRP_P1);
--+		break;
--+	case REVISION_XM_B:
--+		printf("Beagle xM Rev B\n");
--+		setenv("beaglerev", "xMB");
-- 		MUX_BEAGLE_XM();
-- 		/* Set VAUX2 to 1.8V for EHCI PHY */
-- 		twl4030_pmrecv_vsel_cfg(TWL4030_PM_RECEIVER_VAUX2_DEDICATED,
--@@ -189,6 +195,12 @@ int misc_init_r(void)
-- 		break;
-- 	default:
-- 		printf("Beagle unknown 0x%02x\n", get_board_revision());
--+		MUX_BEAGLE_XM();
--+		/* Set VAUX2 to 1.8V for EHCI PHY */
--+		twl4030_pmrecv_vsel_cfg(TWL4030_PM_RECEIVER_VAUX2_DEDICATED,
--+					TWL4030_PM_RECEIVER_VAUX2_VSEL_18,
--+					TWL4030_PM_RECEIVER_VAUX2_DEV_GRP,
--+					TWL4030_PM_RECEIVER_DEV_GRP_P1);
-- 	}
-- 
-- 	switch (get_expansion_id()) {
--diff --git a/board/ti/beagle/beagle.h b/board/ti/beagle/beagle.h
--index b22b653..b0e26e5 100644
----- a/board/ti/beagle/beagle.h
--+++ b/board/ti/beagle/beagle.h
--@@ -37,7 +37,8 @@ const omap3_sysinfo sysinfo = {
-- #define REVISION_AXBX	0x7
-- #define REVISION_CX	0x6
-- #define REVISION_C4	0x5
---#define REVISION_XM	0x0
--+#define REVISION_XM_A	0x0
--+#define REVISION_XM_B	0x1
-- 
-- /*
--  * IEN  - Input Enable
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index c85537c..51e14d0 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -190,7 +190,7 @@
-- 	"loadaddr=0x82000000\0" \
-- 	"usbtty=cdc_acm\0" \
-- 	"console=ttyS2,115200n8\0" \
---	"mpurate=500\0" \
--+	"mpurate=auto\0" \
-- 	"vram=12M\0" \
-- 	"dvimode=1024x768MR-16@60\0" \
-- 	"defaultdisplay=dvi\0" \
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0006-OMAP3-BeagleBoard-add-more-expansionboard-IDs.patch b/recipes-bsp/u-boot/u-boot/0006-OMAP3-BeagleBoard-add-more-expansionboard-IDs.patch
-deleted file mode 100644
-index 1d16cf7..0000000
---- a/recipes-bsp/u-boot/u-boot/0006-OMAP3-BeagleBoard-add-more-expansionboard-IDs.patch
-+++ /dev/null
-@@ -1,95 +0,0 @@
--From 40cdd86d6040714f79e81bb813596748490aa948 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Wed, 3 Nov 2010 14:39:15 +0100
--Subject: [PATCH 06/16] OMAP3: BeagleBoard: add more expansionboard IDs
--
--Information on configurations pulled from
--http://www.elinux.org/BeagleBoardPinMux#Vendor_and_Device_IDs
--
--Boards added:
--* Added BeagleBoardToys WiFi, VGA and LCD boards
--* Added KBADC Beagle FPGA board
--* Added Brainmux LCDog and LCDog Touch
--* Added Liquidware BeagleTouch
-----
--v2 updates
--  * Removed unused definitions
--  * Added BeagleBoardToys board configurations
--  * Made definition names consistent as VENDOR_BOARD
-----
-- board/ti/beagle/beagle.c |   30 +++++++++++++++++++++++++++++-
-- board/ti/beagle/beagle.h |   12 ++++++++++++
-- 2 files changed, 41 insertions(+), 1 deletions(-)
--
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 87a952e..97e9e12 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -48,7 +48,12 @@
-- #define TINCANTOOLS_TRAINER		0x04000100
-- #define TINCANTOOLS_SHOWDOG		0x03000100
-- #define KBADC_BEAGLEFPGA		0x01000600
---
--+#define LW_BEAGLETOUCH			0x01000700
--+#define BRAINMUX_LCDOG			0x01000800
--+#define BRAINMUX_LCDOGTOUCH		0x02000800
--+#define BBTOYS_WIFI			0x01000B00
--+#define BBTOYS_VGA			0x02000B00
--+#define BBTOYS_LCD			0x03000B00
-- #define BEAGLE_NO_EEPROM		0xffffffff
-- 
-- DECLARE_GLOBAL_DATA_PTR;
--@@ -239,6 +244,29 @@ int misc_init_r(void)
-- 		MUX_KBADC_BEAGLEFPGA();
-- 		setenv("buddy", "beaglefpga");
-- 		break;
--+	case LW_BEAGLETOUCH:
--+		printf("Recognized Liquidware BeagleTouch board\n");
--+		setenv("buddy", "beagletouch");
--+		break;
--+	case BRAINMUX_LCDOG:
--+		printf("Recognized Brainmux LCDog board\n");
--+		setenv("buddy", "lcdog");
--+		break;
--+	case BRAINMUX_LCDOGTOUCH:
--+		printf("Recognized Brainmux LCDog Touch board\n");
--+		setenv("buddy", "lcdogtouch");
--+		break;
--+	case BBTOYS_WIFI:
--+		printf("Recognized BeagleBoardToys WiFi board\n");
--+		MUX_BBTOYS_WIFI()
--+		setenv("buddy", "bbtoys-wifi");
--+		break;;
--+	case BBTOYS_VGA:
--+		printf("Recognized BeagleBoardToys VGA board\n");
--+		break;;
--+	case BBTOYS_LCD:
--+		printf("Recognized BeagleBoardToys LCD board\n");
--+		break;;
-- 	case BEAGLE_NO_EEPROM:
-- 		printf("No EEPROM on expansion board\n");
-- 		setenv("buddy", "none");
--diff --git a/board/ti/beagle/beagle.h b/board/ti/beagle/beagle.h
--index b0e26e5..0f21790 100644
----- a/board/ti/beagle/beagle.h
--+++ b/board/ti/beagle/beagle.h
--@@ -458,4 +458,16 @@ const omap3_sysinfo sysinfo = {
-- 	MUX_VAL(CP(MCBSP1_DR),      (IEN  | PTU | EN  | M1)) /*MCSPI4_SOMI*/\
-- 	MUX_VAL(CP(MCBSP1_FSX),     (IDIS | PTU | DIS | M1)) /*MCSPI4_CS0*/
-- 
--+#define MUX_BBTOYS_WIFI() \
--+	MUX_VAL(CP(MMC2_CLK),       (IEN  | PTU | EN  | M0)) /*MMC2_CLK*/\
--+	MUX_VAL(CP(MMC2_CMD),       (IEN  | PTU | EN  | M0)) /*MMC2_CMD*/\
--+	MUX_VAL(CP(MMC2_DAT0),      (IEN  | PTU | EN  | M0)) /*MMC2_DAT0*/\
--+	MUX_VAL(CP(MMC2_DAT1),      (IEN  | PTU | EN  | M0)) /*MMC2_DAT1*/\
--+	MUX_VAL(CP(MMC2_DAT2),      (IEN  | PTU | EN  | M0)) /*MMC2_DAT2*/\
--+	MUX_VAL(CP(MMC2_DAT3),      (IEN  | PTU | EN  | M0)) /*MMC2_DAT3*/\
--+	MUX_VAL(CP(MMC2_DAT4),      (IDIS | PTU | EN  | M4)) /*GPIO_136 FM_EN/BT_WU*/\
--+	MUX_VAL(CP(MMC2_DAT5),      (IEN  | PTU | EN  | M4)) /*GPIO_137 WLAN_IRQ*/\
--+	MUX_VAL(CP(MMC2_DAT6),      (IDIS | PTU | EN  | M4)) /*GPIO_138 BT_EN*/\
--+	MUX_VAL(CP(MMC2_DAT7),      (IDIS | PTU | EN  | M4)) /*GPIO_139 WLAN_EN*/
--+
-- #endif
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0007-OMAP3-Add-DSS-driver-for-OMAP3.patch b/recipes-bsp/u-boot/u-boot/0007-OMAP3-Add-DSS-driver-for-OMAP3.patch
-deleted file mode 100644
-index a1b3b0e..0000000
---- a/recipes-bsp/u-boot/u-boot/0007-OMAP3-Add-DSS-driver-for-OMAP3.patch
-+++ /dev/null
-@@ -1,435 +0,0 @@
--From 8a249fc1c57ab01a78996e33e74a71757a9448b1 Mon Sep 17 00:00:00 2001
--From: Syed Mohammed Khasim <khasim@ti.com>
--Date: Tue, 12 Jan 2010 23:57:28 +0530
--Subject: [PATCH 07/16] OMAP3: Add DSS driver for OMAP3
--
--Supports dynamic panel configuration
--Supports dynamic tv standard selection
--Adds support for DSS register access through generic APIs
--
--Incorporated DSS register access using structures.
--
--Previous discussions are here
--http://www.mail-archive.com/u-boot@lists.denx.de/msg27150.html
-----
--v2 updates:
--  * Enable panel output for BeagleBoard
--  * BeagleBoard: Update DVI-D orange screen frequencies for xM
--
--Signed-off-by: Syed Mohammed Khasim <khasim@ti.com>
-----
-- arch/arm/include/asm/arch-omap3/dss.h |  173 +++++++++++++++++++++++++++++++++
-- board/ti/beagle/beagle.c              |   22 ++++
-- board/ti/beagle/beagle.h              |   26 +++++
-- drivers/video/Makefile                |    2 +
-- drivers/video/omap3_dss.c             |  130 +++++++++++++++++++++++++
-- 5 files changed, 353 insertions(+), 0 deletions(-)
-- create mode 100644 arch/arm/include/asm/arch-omap3/dss.h
-- create mode 100644 drivers/video/omap3_dss.c
--
--diff --git a/arch/arm/include/asm/arch-omap3/dss.h b/arch/arm/include/asm/arch-omap3/dss.h
--new file mode 100644
--index 0000000..e5e3b0d
----- /dev/null
--+++ b/arch/arm/include/asm/arch-omap3/dss.h
--@@ -0,0 +1,173 @@
--+/*
--+ * (C) Copyright 2010
--+ * Texas Instruments, <www.ti.com>
--+ * Syed Mohammed Khasim <khasim@ti.com>
--+ *
--+ * Referred to Linux DSS driver files for OMAP3
--+ *
--+ * See file CREDITS for list of people who contributed to this
--+ * project.
--+ *
--+ * This program is free software; you can redistribute it and/or
--+ * modify it under the terms of the GNU General Public License as
--+ * published by the Free Software Foundation's version 2 of
--+ * the License.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
--+ * MA 02111-1307 USA
--+ */
--+
--+#ifndef DSS_H
--+#define DSS_H
--+
--+/*
--+ * DSS Base Registers
--+ */
--+#define OMAP3_DSS_BASE		0x48050040
--+#define OMAP3_DISPC_BASE	0x48050440
--+#define OMAP3_VENC_BASE		0x48050C00
--+
--+/* DSS Registers */
--+struct dss_regs {
--+	u32 control;				/* 0x40 */
--+	u32 sdi_control;			/* 0x44 */
--+	u32 pll_control;			/* 0x48 */
--+};
--+
--+/* DISPC Registers */
--+struct dispc_regs {
--+	u32 control;				/* 0x40 */
--+	u32 config;				/* 0x44 */
--+	u32 reserve_2;				/* 0x48 */
--+	u32 default_color0;			/* 0x4C */
--+	u32 default_color1;			/* 0x50 */
--+	u32 trans_color0;			/* 0x54 */
--+	u32 trans_color1;			/* 0x58 */
--+	u32 line_status;			/* 0x5C */
--+	u32 line_number;			/* 0x60 */
--+	u32 timing_h;				/* 0x64 */
--+	u32 timing_v;				/* 0x68 */
--+	u32 pol_freq;				/* 0x6C */
--+	u32 divisor;				/* 0x70 */
--+	u32 global_alpha;			/* 0x74 */
--+	u32 size_dig;				/* 0x78 */
--+	u32 size_lcd;				/* 0x7C */
--+};
--+
--+/* VENC Registers */
--+struct venc_regs {
--+	u32 rev_id;				/* 0x00 */
--+	u32 status;				/* 0x04 */
--+	u32 f_control;				/* 0x08 */
--+	u32 reserve_1;				/* 0x0C */
--+	u32 vidout_ctrl;			/* 0x10 */
--+	u32 sync_ctrl;				/* 0x14 */
--+	u32 reserve_2;				/* 0x18 */
--+	u32 llen;				/* 0x1C */
--+	u32 flens;				/* 0x20 */
--+	u32 hfltr_ctrl;				/* 0x24 */
--+	u32 cc_carr_wss_carr;			/* 0x28 */
--+	u32 c_phase;				/* 0x2C */
--+	u32 gain_u;				/* 0x30 */
--+	u32 gain_v;				/* 0x34 */
--+	u32 gain_y;				/* 0x38 */
--+	u32 black_level;			/* 0x3C */
--+	u32 blank_level;			/* 0x40 */
--+	u32 x_color;				/* 0x44 */
--+	u32 m_control;				/* 0x48 */
--+	u32 bstamp_wss_data;			/* 0x4C */
--+	u32 s_carr;				/* 0x50 */
--+	u32 line21;				/* 0x54 */
--+	u32 ln_sel;				/* 0x58 */
--+	u32 l21__wc_ctl;			/* 0x5C */
--+	u32 htrigger_vtrigger;			/* 0x60 */
--+	u32 savid__eavid;			/* 0x64 */
--+	u32 flen__fal;				/* 0x68 */
--+	u32 lal__phase_reset;			/* 0x6C */
--+	u32 hs_int_start_stop_x;		/* 0x70 */
--+	u32 hs_ext_start_stop_x;		/* 0x74 */
--+	u32 vs_int_start_x;			/* 0x78 */
--+	u32 vs_int_stop_x__vs_int_start_y;	/* 0x7C */
--+	u32 vs_int_stop_y__vs_ext_start_x;	/* 0x80 */
--+	u32 vs_ext_stop_x__vs_ext_start_y;	/* 0x84 */
--+	u32 vs_ext_stop_y;			/* 0x88 */
--+	u32 reserve_3;				/* 0x8C */
--+	u32 avid_start_stop_x;			/* 0x90 */
--+	u32 avid_start_stop_y;			/* 0x94 */
--+	u32 reserve_4;				/* 0x98 */
--+	u32 reserve_5;				/* 0x9C */
--+	u32 fid_int_start_x__fid_int_start_y;	/* 0xA0 */
--+	u32 fid_int_offset_y__fid_ext_start_x;	/* 0xA4 */
--+	u32 fid_ext_start_y__fid_ext_offset_y;	/* 0xA8 */
--+	u32 reserve_6;				/* 0xAC */
--+	u32 tvdetgp_int_start_stop_x;		/* 0xB0 */
--+	u32 tvdetgp_int_start_stop_y;		/* 0xB4 */
--+	u32 gen_ctrl;				/* 0xB8 */
--+	u32 reserve_7;				/* 0xBC */
--+	u32 reserve_8;				/* 0xC0 */
--+	u32 output_control;			/* 0xC4 */
--+	u32 dac_b__dac_c;			/* 0xC8 */
--+	u32 height_width;			/* 0xCC */
--+};
--+
--+/* Few Register Offsets */
--+#define FRAME_MODE_SHIFT			1
--+#define TFTSTN_SHIFT				3
--+#define DATALINES_SHIFT				8
--+
--+/* Enabling Display controller */
--+#define LCD_ENABLE				1
--+#define DIG_ENABLE				(1 << 1)
--+#define GO_LCD					(1 << 5)
--+#define GO_DIG					(1 << 6)
--+#define GP_OUT0					(1 << 15)
--+#define GP_OUT1					(1 << 16)
--+
--+#define DISPC_ENABLE				(LCD_ENABLE | \
--+						 DIG_ENABLE | \
--+						 GO_LCD | \
--+						 GO_DIG | \
--+						 GP_OUT0| \
--+						 GP_OUT1)
--+
--+/* Configure VENC DSS Params */
--+#define VENC_CLK_ENABLE				(1 << 3)
--+#define DAC_DEMEN				(1 << 4)
--+#define DAC_POWERDN				(1 << 5)
--+#define VENC_OUT_SEL				(1 << 6)
--+#define DIG_LPP_SHIFT				16
--+#define VENC_DSS_CONFIG				(VENC_CLK_ENABLE | \
--+						 DAC_DEMEN | \
--+						 DAC_POWERDN | \
--+						 VENC_OUT_SEL)
--+/*
--+ * Panel Configuration
--+ */
--+struct panel_config {
--+	u32 timing_h;
--+	u32 timing_v;
--+	u32 pol_freq;
--+	u32 divisor;
--+	u32 lcd_size;
--+	u32 panel_type;
--+	u32 data_lines;
--+	u32 load_mode;
--+	u32 panel_color;
--+};
--+
--+/*
--+ * Generic DSS Functions
--+ */
--+void omap3_dss_venc_config(const struct venc_regs *venc_cfg,
--+			u32 height, u32 width);
--+void omap3_dss_panel_config(const struct panel_config *panel_cfg);
--+void omap3_dss_enable(void);
--+
--+#endif /* DSS_H */
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 97e9e12..56e7afc 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -146,6 +146,27 @@ unsigned int get_expansion_id(void)
-- }
-- 
-- /*
--+ * Configure DSS to display background color on DVID
--+ * Configure VENC to display color bar on S-Video
--+ */
--+void display_init(void)
--+{
--+	omap3_dss_venc_config(&venc_config_std_tv, VENC_HEIGHT, VENC_WIDTH);
--+	switch (get_board_revision()) {
--+	case REVISION_AXBX:
--+	case REVISION_CX:
--+	case REVISION_C4:
--+		omap3_dss_panel_config(&dvid_cfg);
--+		break;
--+	case REVISION_XM_A:
--+	case REVISION_XM_B:
--+	default:
--+		omap3_dss_panel_config(&dvid_cfg_xm);
--+		break;
--+	}
--+}
--+
--+/*
--  * Routine: misc_init_r
--  * Description: Configure board specific parts
--  */
--@@ -282,6 +303,7 @@ int misc_init_r(void)
-- 
-- 	twl4030_power_init();
-- 	twl4030_led_init(TWL4030_LED_LEDEN_LEDAON | TWL4030_LED_LEDEN_LEDBON);
--+	display_init();
-- 
-- 	/* Set GPIO states before they are made outputs */
-- 	writel(GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1,
--diff --git a/board/ti/beagle/beagle.h b/board/ti/beagle/beagle.h
--index 0f21790..48228dc 100644
----- a/board/ti/beagle/beagle.h
--+++ b/board/ti/beagle/beagle.h
--@@ -470,4 +470,30 @@ const omap3_sysinfo sysinfo = {
-- 	MUX_VAL(CP(MMC2_DAT6),      (IDIS | PTU | EN  | M4)) /*GPIO_138 BT_EN*/\
-- 	MUX_VAL(CP(MMC2_DAT7),      (IDIS | PTU | EN  | M4)) /*GPIO_139 WLAN_EN*/
-- 
--+/*
--+ * Configure Timings for DVI D
--+ */
--+static const struct panel_config dvid_cfg = {
--+	.timing_h	= 0x0ff03f31, /* Horizantal timing */
--+	.timing_v	= 0x01400504, /* Vertical timing */
--+	.pol_freq	= 0x00007028, /* Pol Freq */
--+	.divisor	= 0x00010006, /* 72Mhz Pixel Clock */
--+	.lcd_size	= 0x02ff03ff, /* 1024x768 */
--+	.panel_type	= 0x01, /* TFT */
--+	.data_lines	= 0x03, /* 24 Bit RGB */
--+	.load_mode	= 0x02, /* Frame Mode */
--+	.panel_color	= DVI_BEAGLE_ORANGE_COL /* ORANGE */
--+};
--+
--+static const struct panel_config dvid_cfg_xm = {
--+	.timing_h	= 0x1a4024c9, /* Horizantal timing */
--+	.timing_v	= 0x02c00509, /* Vertical timing */
--+	.pol_freq	= 0x00007028, /* Pol Freq */
--+	.divisor	= 0x00010001, /* 96MHz Pixel Clock */
--+	.lcd_size	= 0x02ff03ff, /* 1024x768 */
--+	.panel_type	= 0x01, /* TFT */
--+	.data_lines	= 0x03, /* 24 Bit RGB */
--+	.load_mode	= 0x02, /* Frame Mode */
--+	.panel_color	= DVI_BEAGLE_ORANGE_COL /* ORANGE */
--+};
-- #endif
--diff --git a/drivers/video/Makefile b/drivers/video/Makefile
--index 2c53a6f..6baa7ca 100644
----- a/drivers/video/Makefile
--+++ b/drivers/video/Makefile
--@@ -41,6 +41,8 @@ COBJS-$(CONFIG_SED156X) += sed156x.o
-- COBJS-$(CONFIG_VIDEO_SM501) += sm501.o
-- COBJS-$(CONFIG_VIDEO_SMI_LYNXEM) += smiLynxEM.o videomodes.o
-- COBJS-$(CONFIG_VIDEO_VCXK) += bus_vcxk.o
--+COBJS-$(CONFIG_VIDEO_OMAP3) += omap3_dss.o
--+COBJS-y += videomodes.o
-- 
-- COBJS	:= $(COBJS-y)
-- SRCS	:= $(COBJS:.o=.c)
--diff --git a/drivers/video/omap3_dss.c b/drivers/video/omap3_dss.c
--new file mode 100644
--index 0000000..69c705a
----- /dev/null
--+++ b/drivers/video/omap3_dss.c
--@@ -0,0 +1,130 @@
--+/*
--+ * (C) Copyright 2010
--+ * Texas Instruments, <www.ti.com>
--+ * Syed Mohammed Khasim <khasim@ti.com>
--+ *
--+ * Referred to Linux DSS driver files for OMAP3
--+ *
--+ * See file CREDITS for list of people who contributed to this
--+ * project.
--+ *
--+ * This program is free software; you can redistribute it and/or
--+ * modify it under the terms of the GNU General Public License as
--+ * published by the Free Software Foundation's version 2 of
--+ * the License.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
--+ * MA 02111-1307 USA
--+ */
--+
--+#include <common.h>
--+#include <asm/io.h>
--+#include <asm/arch/dss.h>
--+
--+/*
--+ * Configure VENC for a given Mode (NTSC / PAL)
--+ */
--+void omap3_dss_venc_config(const struct venc_regs *venc_cfg,
--+				u32 height, u32 width)
--+{
--+	struct venc_regs *venc = (struct venc_regs *) OMAP3_VENC_BASE;
--+	struct dss_regs *dss = (struct dss_regs *) OMAP3_DSS_BASE;
--+	struct dispc_regs *dispc = (struct dispc_regs *) OMAP3_DISPC_BASE;
--+
--+	writel(venc_cfg->status, &venc->status);
--+	writel(venc_cfg->f_control, &venc->f_control);
--+	writel(venc_cfg->vidout_ctrl, &venc->vidout_ctrl);
--+	writel(venc_cfg->sync_ctrl, &venc->sync_ctrl);
--+	writel(venc_cfg->llen, &venc->llen);
--+	writel(venc_cfg->flens, &venc->flens);
--+	writel(venc_cfg->hfltr_ctrl, &venc->hfltr_ctrl);
--+	writel(venc_cfg->cc_carr_wss_carr, &venc->cc_carr_wss_carr);
--+	writel(venc_cfg->c_phase, &venc->c_phase);
--+	writel(venc_cfg->gain_u, &venc->gain_u);
--+	writel(venc_cfg->gain_v, &venc->gain_v);
--+	writel(venc_cfg->gain_y, &venc->gain_y);
--+	writel(venc_cfg->black_level, &venc->black_level);
--+	writel(venc_cfg->blank_level, &venc->blank_level);
--+	writel(venc_cfg->x_color, &venc->x_color);
--+	writel(venc_cfg->m_control, &venc->m_control);
--+	writel(venc_cfg->bstamp_wss_data, &venc->bstamp_wss_data);
--+	writel(venc_cfg->s_carr, &venc->s_carr);
--+	writel(venc_cfg->line21, &venc->line21);
--+	writel(venc_cfg->ln_sel, &venc->ln_sel);
--+	writel(venc_cfg->l21__wc_ctl, &venc->l21__wc_ctl);
--+	writel(venc_cfg->htrigger_vtrigger, &venc->htrigger_vtrigger);
--+	writel(venc_cfg->savid__eavid, &venc->savid__eavid);
--+	writel(venc_cfg->flen__fal, &venc->flen__fal);
--+	writel(venc_cfg->lal__phase_reset, &venc->lal__phase_reset);
--+	writel(venc_cfg->hs_int_start_stop_x,
--+				&venc->hs_int_start_stop_x);
--+	writel(venc_cfg->hs_ext_start_stop_x,
--+				&venc->hs_ext_start_stop_x);
--+	writel(venc_cfg->vs_int_start_x, &venc->vs_int_start_x);
--+	writel(venc_cfg->vs_int_stop_x__vs_int_start_y,
--+			&venc->vs_int_stop_x__vs_int_start_y);
--+	writel(venc_cfg->vs_int_stop_y__vs_ext_start_x,
--+			&venc->vs_int_stop_y__vs_ext_start_x);
--+	writel(venc_cfg->vs_ext_stop_x__vs_ext_start_y,
--+			&venc->vs_ext_stop_x__vs_ext_start_y);
--+	writel(venc_cfg->vs_ext_stop_y, &venc->vs_ext_stop_y);
--+	writel(venc_cfg->avid_start_stop_x, &venc->avid_start_stop_x);
--+	writel(venc_cfg->avid_start_stop_y, &venc->avid_start_stop_y);
--+	writel(venc_cfg->fid_int_start_x__fid_int_start_y,
--+				&venc->fid_int_start_x__fid_int_start_y);
--+	writel(venc_cfg->fid_int_offset_y__fid_ext_start_x,
--+				&venc->fid_int_offset_y__fid_ext_start_x);
--+	writel(venc_cfg->fid_ext_start_y__fid_ext_offset_y,
--+				&venc->fid_ext_start_y__fid_ext_offset_y);
--+	writel(venc_cfg->tvdetgp_int_start_stop_x,
--+				&venc->tvdetgp_int_start_stop_x);
--+	writel(venc_cfg->tvdetgp_int_start_stop_y,
--+				&venc->tvdetgp_int_start_stop_y);
--+	writel(venc_cfg->gen_ctrl, &venc->gen_ctrl);
--+	writel(venc_cfg->output_control, &venc->output_control);
--+	writel(venc_cfg->dac_b__dac_c, &venc->dac_b__dac_c);
--+
--+	/* Configure DSS for VENC Settings */
--+	writel(VENC_DSS_CONFIG, &dss->control);
--+
--+	/* Configure height and width for Digital out */
--+	writel(((height << DIG_LPP_SHIFT) | width), &dispc->size_dig);
--+}
--+
--+/*
--+ * Configure Panel Specific Parameters
--+ */
--+void omap3_dss_panel_config(const struct panel_config *panel_cfg)
--+{
--+	struct dispc_regs *dispc = (struct dispc_regs *) OMAP3_DISPC_BASE;
--+
--+	writel(panel_cfg->timing_h, &dispc->timing_h);
--+	writel(panel_cfg->timing_v, &dispc->timing_v);
--+	writel(panel_cfg->pol_freq, &dispc->pol_freq);
--+	writel(panel_cfg->divisor, &dispc->divisor);
--+	writel(panel_cfg->lcd_size, &dispc->size_lcd);
--+	writel((panel_cfg->load_mode << FRAME_MODE_SHIFT), &dispc->config);
--+	writel(((panel_cfg->panel_type << TFTSTN_SHIFT) |
--+		(panel_cfg->data_lines << DATALINES_SHIFT)), &dispc->control);
--+	writel(panel_cfg->panel_color, &dispc->default_color0);
--+}
--+
--+/*
--+ * Enable LCD and DIGITAL OUT in DSS
--+ */
--+void omap3_dss_enable(void)
--+{
--+	struct dispc_regs *dispc = (struct dispc_regs *) OMAP3_DISPC_BASE;
--+	u32 l = 0;
--+
--+	l = readl(&dispc->control);
--+	l |= DISPC_ENABLE;
--+	writel(l, &dispc->control);
--+}
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0008-BeagleBoard-Added-userbutton-command.patch b/recipes-bsp/u-boot/u-boot/0008-BeagleBoard-Added-userbutton-command.patch
-deleted file mode 100644
-index 411bb7b..0000000
---- a/recipes-bsp/u-boot/u-boot/0008-BeagleBoard-Added-userbutton-command.patch
-+++ /dev/null
-@@ -1,100 +0,0 @@
--From 31110e039b1982590df08c66e53924f454e3e3f1 Mon Sep 17 00:00:00 2001
--From: Jason Kridner <jkridner@beagleboard.org>
--Date: Wed, 21 Jul 2010 07:41:25 -0500
--Subject: [PATCH 08/16] BeagleBoard: Added userbutton command
--
--Based on commit f1099c7c43caf5bac3bf6a65aa266fade4747072
--    Author: Greg Turner <gregturner@ti.com>
--    Date:   Tue May 25 09:19:06 2010 -0500
--
--    New u-boot command for status of USER button on BeagleBoard-xM
--
--         Modified bootcmd to check the staus at boot time and set
--	 filename of the boot script.
--
--* Moved to a BeagleBoard specific file.
--* Removed changes to default boot command from adding userbutton
--  command.
--* Made to handle pre-xM boards.
--* Flipped polarity of the return value to avoid confusion.  Success (0)
--  is when the button is pressed.  Failure (1) is when the button is NOT
--  pressed.
--* Used latest revision getting function.
--* Used latest macros for board revision.
-----
-- board/ti/beagle/beagle.c |   55 ++++++++++++++++++++++++++++++++++++++++++++++
-- 1 files changed, 55 insertions(+), 0 deletions(-)
--
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 56e7afc..04e4259 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -38,6 +38,7 @@
-- #include <asm/arch/gpio.h>
-- #include <asm/mach-types.h>
-- #include "beagle.h"
--+#include <command.h>
-- 
-- #define TWL4030_I2C_BUS			0
-- #define EXPANSION_EEPROM_I2C_BUS	1
--@@ -339,3 +340,57 @@ int board_mmc_init(bd_t *bis)
-- 	return 0;
-- }
-- #endif
--+
--+/*
--+ * This command returns the status of the user button on beagle xM
--+ * Input - none
--+ * Returns - 	1 if button is held down
--+ *		0 if button is not held down
--+ */
--+int do_userbutton (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
--+{
--+	int     button = 0;
--+	int	gpio;
--+
--+	/*
--+	 * pass address parameter as argv[0] (aka command name),
--+	 * and all remaining args
--+	 */
--+	switch (get_board_revision()) {
--+	case REVISION_AXBX:
--+	case REVISION_CX:
--+	case REVISION_C4:
--+		gpio = 7;
--+		break;
--+	case REVISION_XM_A:
--+	case REVISION_XM_B:
--+	default:
--+		gpio = 4;
--+		break;
--+	}
--+	omap_request_gpio(gpio);
--+	omap_set_gpio_direction(gpio, 1);
--+	printf("The user button is currently ");
--+	if(omap_get_gpio_datain(gpio))
--+	{
--+		button = 1;
--+		printf("PRESSED.\n");
--+	}
--+	else
--+	{
--+		button = 0;
--+		printf("NOT pressed.\n");
--+	}
--+
--+	omap_free_gpio(gpio);
--+
--+	return !button;
--+}
--+
--+/* -------------------------------------------------------------------- */
--+
--+U_BOOT_CMD(
--+	userbutton, CONFIG_SYS_MAXARGS, 1,	do_userbutton,
--+	"Return the status of the BeagleBoard USER button",
--+	""
--+);
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0009-OMAP3-beagle-pass-expansionboard-name-in-bootargs.patch b/recipes-bsp/u-boot/u-boot/0009-OMAP3-beagle-pass-expansionboard-name-in-bootargs.patch
-deleted file mode 100644
-index 7da18af..0000000
---- a/recipes-bsp/u-boot/u-boot/0009-OMAP3-beagle-pass-expansionboard-name-in-bootargs.patch
-+++ /dev/null
-@@ -1,57 +0,0 @@
--From ca7179112840cdca717ac0c958a9ab226d1bdf25 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Mon, 22 Nov 2010 11:51:32 +0100
--Subject: [PATCH 09/16] OMAP3: beagle: pass expansionboard name in bootargs
--
-----
-- include/configs/omap3_beagle.h |   13 +++++++++++++
-- 1 files changed, 13 insertions(+), 0 deletions(-)
--
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 51e14d0..9d569a5 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -191,6 +191,7 @@
-- 	"usbtty=cdc_acm\0" \
-- 	"console=ttyS2,115200n8\0" \
-- 	"mpurate=auto\0" \
--+	"buddy=none "\
-- 	"vram=12M\0" \
-- 	"dvimode=1024x768MR-16@60\0" \
-- 	"defaultdisplay=dvi\0" \
--@@ -201,6 +202,7 @@
-- 	"nandrootfstype=jffs2\0" \
-- 	"mmcargs=setenv bootargs console=${console} " \
-- 		"mpurate=${mpurate} " \
--+		"buddy=${buddy} "\
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
-- 		"omapdss.def_disp=${defaultdisplay} " \
--@@ -208,6 +210,7 @@
-- 		"rootfstype=${mmcrootfstype}\0" \
-- 	"nandargs=setenv bootargs console=${console} " \
-- 		"mpurate=${mpurate} " \
--+		"buddy=${buddy} "\
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
-- 		"omapdss.def_disp=${defaultdisplay} " \
--@@ -216,6 +219,16 @@
-- 	"loadbootenv=fatload mmc ${mmcdev} ${loadaddr} uEnv.txt\0" \
-- 	"importbootenv=echo Importing environment from mmc ...; " \
-- 		"env import -t $loadaddr $filesize\0" \
--+	"ramargs=setenv bootargs console=${console} " \
--+		"${optargs} " \
--+		"mpurate=${mpurate} " \
--+		"buddy=${buddy} "\
--+		"vram=${vram} " \
--+		"omapfb.mode=dvi:${dvimode} " \
--+		"omapdss.def_disp=${defaultdisplay} " \
--+		"root=${ramroot} " \
--+		"rootfstype=${ramrootfstype}\0" \
--+	"loadramdisk=fatload mmc ${mmcdev} ${rdaddr} ramdisk.gz\0" \
-- 	"loaduimage=fatload mmc ${mmcdev} ${loadaddr} uImage\0" \
-- 	"mmcboot=echo Booting from mmc ...; " \
-- 		"run mmcargs; " \
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0010-Enable-DSS-driver-for-Beagle.patch b/recipes-bsp/u-boot/u-boot/0010-Enable-DSS-driver-for-Beagle.patch
-deleted file mode 100644
-index 8766d89..0000000
---- a/recipes-bsp/u-boot/u-boot/0010-Enable-DSS-driver-for-Beagle.patch
-+++ /dev/null
-@@ -1,107 +0,0 @@
--From 2226921518eebb215ddadce09efb35b99a9db8ac Mon Sep 17 00:00:00 2001
--From: Syed Mohammed Khasim <khasim@ti.com>
--Date: Sun, 11 Apr 2010 17:44:39 +0200
--Subject: [PATCH 10/16] Enable DSS driver for Beagle
--
--Configures DSS to display color bar on Svideo
--Configures DSS to display background color on DVID
--
--Signed-off-by: Syed Mohammed Khasim <khasim@ti.com>
-----
-- board/ti/beagle/beagle.c |    1 +
-- board/ti/beagle/beagle.h |   60 ++++++++++++++++++++++++++++++++++++++++++++++
-- 2 files changed, 61 insertions(+), 0 deletions(-)
--
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 04e4259..7c80a97 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -318,6 +318,7 @@ int misc_init_r(void)
-- 		GPIO15 | GPIO14 | GPIO13 | GPIO12), &gpio5_base->oe);
-- 
-- 	dieid_num_r();
--+	omap3_dss_enable();
-- 
-- 	return 0;
-- }
--diff --git a/board/ti/beagle/beagle.h b/board/ti/beagle/beagle.h
--index 48228dc..bdf2a6f 100644
----- a/board/ti/beagle/beagle.h
--+++ b/board/ti/beagle/beagle.h
--@@ -23,6 +23,8 @@
-- #ifndef _BEAGLE_H_
-- #define _BEAGLE_H_
-- 
--+#include <asm/arch/dss.h>
--+
-- const omap3_sysinfo sysinfo = {
-- 	DDR_STACKED,
-- 	"OMAP3 Beagle board",
--@@ -471,6 +473,64 @@ const omap3_sysinfo sysinfo = {
-- 	MUX_VAL(CP(MMC2_DAT7),      (IDIS | PTU | EN  | M4)) /*GPIO_139 WLAN_EN*/
-- 
-- /*
--+ * Display Configuration
--+ */
--+
--+#define DVI_BEAGLE_ORANGE_COL		0x00FF8000
--+#define VENC_HEIGHT			0x00ef
--+#define VENC_WIDTH			0x027f
--+
--+/*
--+ * Configure VENC in DSS for Beagle to generate Color Bar
--+ *
--+ * Kindly refer to OMAP TRM for definition of these values.
--+ */
--+static const struct venc_regs venc_config_std_tv = {
--+	.status					= 0x0000001B,
--+	.f_control				= 0x00000040,
--+	.vidout_ctrl				= 0x00000000,
--+	.sync_ctrl				= 0x00008000,
--+	.llen					= 0x00008359,
--+	.flens					= 0x0000020C,
--+	.hfltr_ctrl				= 0x00000000,
--+	.cc_carr_wss_carr			= 0x043F2631,
--+	.c_phase				= 0x00000024,
--+	.gain_u					= 0x00000130,
--+	.gain_v					= 0x00000198,
--+	.gain_y					= 0x000001C0,
--+	.black_level				= 0x0000006A,
--+	.blank_level				= 0x0000005C,
--+	.x_color				= 0x00000000,
--+	.m_control				= 0x00000001,
--+	.bstamp_wss_data			= 0x0000003F,
--+	.s_carr					= 0x21F07C1F,
--+	.line21					= 0x00000000,
--+	.ln_sel					= 0x00000015,
--+	.l21__wc_ctl				= 0x00001400,
--+	.htrigger_vtrigger			= 0x00000000,
--+	.savid__eavid				= 0x069300F4,
--+	.flen__fal				= 0x0016020C,
--+	.lal__phase_reset			= 0x00060107,
--+	.hs_int_start_stop_x			= 0x008D034E,
--+	.hs_ext_start_stop_x			= 0x000F0359,
--+	.vs_int_start_x				= 0x01A00000,
--+	.vs_int_stop_x__vs_int_start_y		= 0x020501A0,
--+	.vs_int_stop_y__vs_ext_start_x		= 0x01AC0024,
--+	.vs_ext_stop_x__vs_ext_start_y		= 0x020D01AC,
--+	.vs_ext_stop_y				= 0x00000006,
--+	.avid_start_stop_x			= 0x03480079,
--+	.avid_start_stop_y			= 0x02040024,
--+	.fid_int_start_x__fid_int_start_y	= 0x0001008A,
--+	.fid_int_offset_y__fid_ext_start_x	= 0x01AC0106,
--+	.fid_ext_start_y__fid_ext_offset_y	= 0x01060006,
--+	.tvdetgp_int_start_stop_x		= 0x00140001,
--+	.tvdetgp_int_start_stop_y		= 0x00010001,
--+	.gen_ctrl				= 0x00FF0000,
--+	.output_control				= 0x0000000D,
--+	.dac_b__dac_c				= 0x00000000
--+};
--+
--+/*
--  * Configure Timings for DVI D
--  */
-- static const struct panel_config dvid_cfg = {
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0011-Add-led-command.patch b/recipes-bsp/u-boot/u-boot/0011-Add-led-command.patch
-deleted file mode 100644
-index e51ee5e..0000000
---- a/recipes-bsp/u-boot/u-boot/0011-Add-led-command.patch
-+++ /dev/null
-@@ -1,213 +0,0 @@
--From e3e94bd49df4b4588cc5c95392b872eadb531fc4 Mon Sep 17 00:00:00 2001
--From: Jason Kridner <jkridner@beagleboard.org>
--Date: Thu, 20 May 2010 05:41:26 -0500
--Subject: [PATCH 11/16] Add 'led' command
--
--This patch allows any board implementing the coloured LED API
--to control the LEDs from the console.
--
--led [green | yellow | red | all ]  [ on | off ]
--
--or
--
--led [ 1 | 2 | 3 | all ]  [ on | off ]
--
--Adds configuration item CONFIG_CMD_LED enabling the command.
--
--Partially based on patch from Ulf Samuelsson:
--http://www.mail-archive.com/u-boot@lists.denx.de/msg09593.html.
--
--Updated based on feedback:
--http://www.mail-archive.com/u-boot@lists.denx.de/msg41847.html
--https://groups.google.com/d/topic/beagleboard/8Wf1HiK_QBo/discussion
--* Fixed a handful of style issues.
--* Significantly reduced the number of #ifdefs and redundant code
--* Converted redundant code into loops test against a structure
--* Made use of cmd_usage()
--* Introduced a str_onoff() function, but haven't yet put it in common
--* Eliminated trailing newline
--
--v2 updates
-- * Test every LED in case "all" is used.  Previously, the code broke from
--   the loop after setting the state of only one LED.
-- * Corrected swapped on/off in structure definition
-- * Removed trailing white space
-----
-- common/Makefile  |    1 +
-- common/cmd_led.c |  152 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
-- 2 files changed, 153 insertions(+), 0 deletions(-)
-- create mode 100644 common/cmd_led.c
--
--diff --git a/common/Makefile b/common/Makefile
--index 048df0c..29a0ead 100644
----- a/common/Makefile
--+++ b/common/Makefile
--@@ -105,6 +105,7 @@ COBJS-$(CONFIG_CMD_IRQ) += cmd_irq.o
-- COBJS-$(CONFIG_CMD_ITEST) += cmd_itest.o
-- COBJS-$(CONFIG_CMD_JFFS2) += cmd_jffs2.o
-- COBJS-$(CONFIG_CMD_CRAMFS) += cmd_cramfs.o
--+COBJS-$(CONFIG_CMD_LED) += cmd_led.o
-- COBJS-$(CONFIG_CMD_LICENSE) += cmd_license.o
-- COBJS-y += cmd_load.o
-- COBJS-$(CONFIG_LOGBUFFER) += cmd_log.o
--diff --git a/common/cmd_led.c b/common/cmd_led.c
--new file mode 100644
--index 0000000..7f02fe6
----- /dev/null
--+++ b/common/cmd_led.c
--@@ -0,0 +1,152 @@
--+/*
--+ * (C) Copyright 2010
--+ * Jason Kridner <jkridner@beagleboard.org>
--+ *
--+ * Based on cmd_led.c patch from:
--+ * http://www.mail-archive.com/u-boot@lists.denx.de/msg06873.html
--+ * (C) Copyright 2008
--+ * Ulf Samuelsson <ulf.samuelsson@atmel.com>
--+ *
--+ * See file CREDITS for list of people who contributed to this
--+ * project.
--+ *
--+ * This program is free software; you can redistribute it and/or
--+ * modify it under the terms of the GNU General Public License as
--+ * published by the Free Software Foundation; either version 2 of
--+ * the License, or (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
--+ * MA 02111-1307 USA
--+ */
--+
--+#include <common.h>
--+#include <config.h>
--+#include <command.h>
--+#include <status_led.h>
--+
--+struct led_tbl_s {
--+	char		*string;	/* String for use in the command */
--+	led_id_t	mask;		/* Mask used for calling __led_set() */
--+	void		(*off)(void);	/* Optional fucntion for turning LED off */
--+	void		(*on)(void);	/* Optional fucntion for turning LED on */
--+};
--+
--+typedef struct led_tbl_s led_tbl_t;
--+
--+static const led_tbl_t led_commands[] = {
--+#ifdef CONFIG_BOARD_SPECIFIC_LED
--+#ifdef STATUS_LED_BIT
--+	{ "0", STATUS_LED_BIT, NULL, NULL },
--+#endif
--+#ifdef STATUS_LED_BIT1
--+	{ "1", STATUS_LED_BIT1, NULL, NULL },
--+#endif
--+#ifdef STATUS_LED_BIT2
--+	{ "2", STATUS_LED_BIT2, NULL, NULL },
--+#endif
--+#ifdef STATUS_LED_BIT3
--+	{ "3", STATUS_LED_BIT3, NULL, NULL },
--+#endif
--+#endif
--+#ifdef STATUS_LED_GREEN
--+	{ "green", STATUS_LED_GREEN, green_LED_off, green_LED_on },
--+#endif
--+#ifdef STATUS_LED_YELLOW
--+	{ "yellow", STATUS_LED_YELLOW, yellow_LED_off, yellow_LED_on },
--+#endif
--+#ifdef STATUS_LED_RED
--+	{ "red", STATUS_LED_RED, red_LED_off, red_LED_on },
--+#endif
--+#ifdef STATUS_LED_BLUE
--+	{ "blue", STATUS_LED_BLUE, blue_LED_off, blue_LED_on },
--+#endif
--+	{ NULL, 0, NULL, NULL }
--+};
--+
--+int str_onoff (char *var)
--+{
--+	if (strcmp(var, "off") == 0) {
--+		return 0;
--+	}
--+	if (strcmp(var, "on") == 0) {
--+		return 1;
--+	}
--+	return -1;
--+}
--+
--+int do_led (cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
--+{
--+	int state, i;
--+
--+	/* Validate arguments */
--+	if ((argc != 3)) {
--+		return cmd_usage(cmdtp);
--+	}
--+
--+	state = str_onoff(argv[2]);
--+	if (state < 0) {
--+		return cmd_usage(cmdtp);
--+	}
--+
--+	for (i = 0; led_commands[i].string; i++) {
--+		if ((strcmp("all", argv[1]) == 0) ||
--+		    (strcmp(led_commands[i].string, argv[1]) == 0)) {
--+			if (led_commands[i].on) {
--+				if (state) {
--+					led_commands[i].on();
--+				} else {
--+					led_commands[i].off();
--+				}
--+			} else {
--+				__led_set(led_commands[i].mask, state);
--+			}
--+		}
--+	}
--+
--+	/* If we ran out of matches, print Usage */
--+	if (!led_commands[i].string && !(strcmp("all", argv[1]) == 0)) {
--+		return cmd_usage(cmdtp);
--+	}
--+
--+	return 0;
--+}
--+
--+U_BOOT_CMD(
--+	led, 3, 1, do_led,
--+	"led\t- ["
--+#ifdef CONFIG_BOARD_SPECIFIC_LED
--+#ifdef STATUS_LED_BIT
--+	"0|"
--+#endif
--+#ifdef STATUS_LED_BIT1
--+	"1|"
--+#endif
--+#ifdef STATUS_LED_BIT2
--+	"2|"
--+#endif
--+#ifdef STATUS_LED_BIT3
--+	"3|"
--+#endif
--+#endif
--+#ifdef STATUS_LED_GREEN
--+	"green|"
--+#endif
--+#ifdef STATUS_LED_YELLOW
--+	"yellow|"
--+#endif
--+#ifdef STATUS_LED_RED
--+	"red|"
--+#endif
--+#ifdef STATUS_LED_BLUE
--+	"blue|"
--+#endif
--+	"all] [on|off]\n",
--+	"led [led_name] [on|off] sets or clears led(s)\n"
--+);
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0012-BeagleBoard-Added-LED-driver.patch b/recipes-bsp/u-boot/u-boot/0012-BeagleBoard-Added-LED-driver.patch
-deleted file mode 100644
-index 01897af..0000000
---- a/recipes-bsp/u-boot/u-boot/0012-BeagleBoard-Added-LED-driver.patch
-+++ /dev/null
-@@ -1,160 +0,0 @@
--From 35271d72072841c16687ffd51f08ec65cdac3b3e Mon Sep 17 00:00:00 2001
--From: Jason Kridner <jkridner@beagleboard.org>
--Date: Thu, 20 May 2010 06:14:01 -0500
--Subject: [PATCH 12/16] BeagleBoard: Added LED driver
--
--Added LED driver using status_led.  USR0 is set to monitor the boot
--status.  USR1 is set to be the green LED.
--
--Included adding configuration and command to the default configuration.
--
--v2 updates
-- * Fixed USR0/USR1 to be LED 0/1 respectively
-----
-- board/ti/beagle/Makefile |    4 ++-
-- board/ti/beagle/beagle.c |    7 ++++
-- board/ti/beagle/led.c    |   91 ++++++++++++++++++++++++++++++++++++++++++++++
-- 3 files changed, 101 insertions(+), 1 deletions(-)
-- create mode 100644 board/ti/beagle/led.c
--
--diff --git a/board/ti/beagle/Makefile b/board/ti/beagle/Makefile
--index 3b4aaac..d9f445f 100644
----- a/board/ti/beagle/Makefile
--+++ b/board/ti/beagle/Makefile
--@@ -25,8 +25,10 @@ include $(TOPDIR)/config.mk
-- 
-- LIB	= $(obj)lib$(BOARD).o
-- 
---COBJS	:= beagle.o
--+COBJS-y	:= $(BOARD).o
--+COBJS-$(CONFIG_STATUS_LED) += led.o
-- 
--+COBJS	:= $(sort $(COBJS-y))
-- SRCS	:= $(COBJS:.o=.c)
-- OBJS	:= $(addprefix $(obj),$(COBJS))
-- 
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 7c80a97..905b151 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -30,6 +30,9 @@
--  * MA 02111-1307 USA
--  */
-- #include <common.h>
--+#ifdef CONFIG_STATUS_LED
--+#include <status_led.h>
--+#endif
-- #include <twl4030.h>
-- #include <asm/io.h>
-- #include <asm/arch/mmc_host_def.h>
--@@ -80,6 +83,10 @@ int board_init(void)
-- 	/* boot param addr */
-- 	gd->bd->bi_boot_params = (OMAP34XX_SDRC_CS0 + 0x100);
-- 
--+#if defined(CONFIG_STATUS_LED) && defined(STATUS_LED_BOOT)
--+	status_led_set (STATUS_LED_BOOT, STATUS_LED_ON);
--+#endif
--+
-- 	return 0;
-- }
-- 
--diff --git a/board/ti/beagle/led.c b/board/ti/beagle/led.c
--new file mode 100644
--index 0000000..fe80e19
----- /dev/null
--+++ b/board/ti/beagle/led.c
--@@ -0,0 +1,91 @@
--+/*
--+ * Copyright (c) 2010 Texas Instruments, Inc.
--+ * Jason Kridner <jkridner@beagleboard.org>
--+ *
--+ * This program is free software; you can redistribute it and/or
--+ * modify it under the terms of the GNU General Public License as
--+ * published by the Free Software Foundation; either version 2 of
--+ * the License, or (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
--+ * MA 02111-1307 USA
--+ */
--+#include <common.h>
--+#include <status_led.h>
--+#include <asm/arch/cpu.h>
--+#include <asm/io.h>
--+#include <asm/arch/sys_proto.h>
--+#include <asm/arch/gpio.h>
--+
--+static unsigned int saved_state[2] = {STATUS_LED_OFF, STATUS_LED_OFF};
--+
--+/* GPIO pins for the LEDs */
--+#define BEAGLE_LED_USR0	150
--+#define BEAGLE_LED_USR1	149
--+
--+#ifdef STATUS_LED_GREEN
--+void green_LED_off (void)
--+{
--+	__led_set (STATUS_LED_GREEN, 0);
--+}
--+
--+void green_LED_on (void)
--+{
--+	__led_set (STATUS_LED_GREEN, 1);
--+}
--+#endif
--+
--+void __led_init (led_id_t mask, int state)
--+{
--+	__led_set (mask, state);
--+}
--+
--+void __led_toggle (led_id_t mask)
--+{
--+#ifdef STATUS_LED_BIT
--+	if (STATUS_LED_BIT & mask) {
--+		if (STATUS_LED_ON == saved_state[0])
--+			__led_set(STATUS_LED_BIT, 0);
--+		else
--+			__led_set(STATUS_LED_BIT, 1);
--+	}
--+#endif
--+#ifdef STATUS_LED_BIT1
--+	if (STATUS_LED_BIT1 & mask) {
--+		if (STATUS_LED_ON == saved_state[1])
--+			__led_set(STATUS_LED_BIT1, 0);
--+		else
--+			__led_set(STATUS_LED_BIT1, 1);
--+	}
--+#endif
--+}
--+
--+void __led_set (led_id_t mask, int state)
--+{
--+#ifdef STATUS_LED_BIT
--+	if (STATUS_LED_BIT & mask) {
--+		if (!omap_request_gpio(BEAGLE_LED_USR0)) {
--+			omap_set_gpio_direction(BEAGLE_LED_USR0, 0);
--+			omap_set_gpio_dataout(BEAGLE_LED_USR0, state);
--+		}
--+		saved_state[0] = state;
--+	}
--+#endif
--+#ifdef STATUS_LED_BIT1
--+	if (STATUS_LED_BIT1 & mask) {
--+		if (!omap_request_gpio(BEAGLE_LED_USR1)) {
--+			omap_set_gpio_direction(BEAGLE_LED_USR1, 0);
--+			omap_set_gpio_dataout(BEAGLE_LED_USR1, state);
--+		}
--+		saved_state[1] = state;
--+	}
--+#endif
--+}
--+
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0013-OMAP3-BeagleBoard-updated-default-configuration.patch b/recipes-bsp/u-boot/u-boot/0013-OMAP3-BeagleBoard-updated-default-configuration.patch
-deleted file mode 100644
-index 9c9a3fd..0000000
---- a/recipes-bsp/u-boot/u-boot/0013-OMAP3-BeagleBoard-updated-default-configuration.patch
-+++ /dev/null
-@@ -1,184 +0,0 @@
--From da8fa305fd10331958cd18c9c27c9e062b886fc4 Mon Sep 17 00:00:00 2001
--From: Jason Kridner <jkridner@beagleboard.org>
--Date: Wed, 21 Jul 2010 07:41:25 -0500
--Subject: [PATCH 13/16] OMAP3: BeagleBoard: updated default configuration
--
--* Decrease bootdelay to 3, use VGA for default resolution
--* Add CONFIG_SYS_MEMTEST_SCRATCH to point to a scratch memory area.
--* Add camera to default bootargs
--* Move ramdisk parameters. This will make it easier to reprogram the ramdisk size.
--* Improved boot env var setting
--    * Enabled evaluation of expressions with 'setexpr'
--    * Made room for a 64MB ramdisk by moving from 0x81600000 to 0x81000000
--    * Removed expression from 'ramroot' that wouldn't be evaluated
--    * Doubled console I/O buffer size from 256 to 512
--    * Doubled maximum command arguments size from 16 to 32
--* Enable multibus support for I2C
--* Added USER button switch from uEnv.txt to user.txt
--* Enable LEDs
--    Added LED driver using status_led.  USR0 is set to monitor
--    the boot status.  USR1 is set to be the GREEN LED.
-----
-- include/configs/omap3_beagle.h |   62 ++++++++++++++++++++++++++++++++-------
-- 1 files changed, 51 insertions(+), 11 deletions(-)
--
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 9d569a5..73d4d4e 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -108,9 +108,27 @@
-- #define CONFIG_OMAP_HSMMC		1
-- #define CONFIG_DOS_PARTITION		1
-- 
--+/* Status LED */
--+#define CONFIG_STATUS_LED		1
--+#define CONFIG_BOARD_SPECIFIC_LED	1
--+#define STATUS_LED_BIT			0x01
--+#define STATUS_LED_STATE		STATUS_LED_ON
--+#define STATUS_LED_PERIOD		(CONFIG_SYS_HZ / 2)
--+#define STATUS_LED_BIT1			0x02
--+#define STATUS_LED_STATE1		STATUS_LED_ON
--+#define STATUS_LED_PERIOD1		(CONFIG_SYS_HZ / 2)
--+#define STATUS_LED_BOOT			STATUS_LED_BIT
--+#define STATUS_LED_GREEN		STATUS_LED_BIT1
--+
-- /* DDR - I use Micron DDR */
-- #define CONFIG_OMAP3_MICRON_DDR		1
-- 
--+/* Enable Multi Bus support for I2C */
--+#define CONFIG_I2C_MULTI_BUS		1
--+
--+/* Probe all devices */
--+#define CONFIG_SYS_I2C_NOPROBES		{0x0, 0x0}
--+
-- /* USB */
-- #define CONFIG_MUSB_UDC			1
-- #define CONFIG_USB_OMAP3		1
--@@ -138,6 +156,9 @@
-- #define CONFIG_CMD_I2C		/* I2C serial bus support	*/
-- #define CONFIG_CMD_MMC		/* MMC support			*/
-- #define CONFIG_CMD_NAND		/* NAND support			*/
--+#define CONFIG_CMD_LED		/* LED support			*/
--+#define CONFIG_VIDEO_OMAP3	/* DSS Support			*/
--+#define CONFIG_CMD_SETEXPR	/* Evaluate expressions		*/
-- 
-- #undef CONFIG_CMD_FLASH		/* flinfo, erase, protect	*/
-- #undef CONFIG_CMD_FPGA		/* FPGA configuration Support	*/
--@@ -184,45 +205,56 @@
-- 							/* partition */
-- 
-- /* Environment information */
---#define CONFIG_BOOTDELAY		10
--+#define CONFIG_BOOTDELAY		3
-- 
-- #define CONFIG_EXTRA_ENV_SETTINGS \
---	"loadaddr=0x82000000\0" \
--+	"loadaddr=0x80200000\0" \
--+	"rdaddr=0x81000000\0" \
-- 	"usbtty=cdc_acm\0" \
-- 	"console=ttyS2,115200n8\0" \
-- 	"mpurate=auto\0" \
-- 	"buddy=none "\
--+	"optargs=\0" \
--+	"camera=lbcm3m1\0" \
-- 	"vram=12M\0" \
---	"dvimode=1024x768MR-16@60\0" \
--+	"dvimode=640x480MR-16@60\0" \
-- 	"defaultdisplay=dvi\0" \
-- 	"mmcdev=0\0" \
-- 	"mmcroot=/dev/mmcblk0p2 rw\0" \
-- 	"mmcrootfstype=ext3 rootwait\0" \
-- 	"nandroot=/dev/mtdblock4 rw\0" \
-- 	"nandrootfstype=jffs2\0" \
--+	"ramroot=/dev/ram0 rw ramdisk_size=65536 initrd=0x81000000,64M\0" \
--+	"ramrootfstype=ext2\0" \
-- 	"mmcargs=setenv bootargs console=${console} " \
--+		"${optargs} " \
-- 		"mpurate=${mpurate} " \
-- 		"buddy=${buddy} "\
--+		"camera=${camera} "\
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
-- 		"omapdss.def_disp=${defaultdisplay} " \
-- 		"root=${mmcroot} " \
-- 		"rootfstype=${mmcrootfstype}\0" \
-- 	"nandargs=setenv bootargs console=${console} " \
--+		"${optargs} " \
-- 		"mpurate=${mpurate} " \
-- 		"buddy=${buddy} "\
--+		"camera=${camera} "\
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
-- 		"omapdss.def_disp=${defaultdisplay} " \
-- 		"root=${nandroot} " \
-- 		"rootfstype=${nandrootfstype}\0" \
---	"loadbootenv=fatload mmc ${mmcdev} ${loadaddr} uEnv.txt\0" \
--+	"bootenv=uEnv.txt\0" \
--+	"loadbootenv=fatload mmc ${mmcdev} ${loadaddr} ${bootenv}\0" \
-- 	"importbootenv=echo Importing environment from mmc ...; " \
-- 		"env import -t $loadaddr $filesize\0" \
-- 	"ramargs=setenv bootargs console=${console} " \
-- 		"${optargs} " \
-- 		"mpurate=${mpurate} " \
-- 		"buddy=${buddy} "\
--+		"camera=${camera} "\
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
-- 		"omapdss.def_disp=${defaultdisplay} " \
--@@ -237,11 +269,18 @@
-- 		"run nandargs; " \
-- 		"nand read ${loadaddr} 280000 400000; " \
-- 		"bootm ${loadaddr}\0" \
--+	"ramboot=echo Booting from ramdisk ...; " \
--+		"run ramargs; " \
--+		"bootm ${loadaddr}\0" \
-- 
-- #define CONFIG_BOOTCOMMAND \
-- 	"if mmc rescan ${mmcdev}; then " \
--+		"if userbutton; then " \
--+			"setenv bootenv user.txt;" \
--+		"fi;" \
-- 		"echo SD/MMC found on device ${mmcdev};" \
-- 		"if run loadbootenv; then " \
--+			"echo Loaded environment from ${bootenv};" \
-- 			"run importbootenv;" \
-- 		"fi;" \
-- 		"if test -n $uenvcmd; then " \
--@@ -252,7 +291,7 @@
-- 			"run mmcboot;" \
-- 		"fi;" \
-- 	"fi;" \
---	"run nandboot;" \
--+	"run nandboot;"
-- 
-- #define CONFIG_AUTO_COMPLETE		1
-- /*
--@@ -262,18 +301,19 @@
-- #define CONFIG_SYS_HUSH_PARSER		/* use "hush" command parser */
-- #define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
-- #define CONFIG_SYS_PROMPT		"OMAP3 beagleboard.org # "
---#define CONFIG_SYS_CBSIZE		256	/* Console I/O Buffer Size */
--+#define CONFIG_SYS_CBSIZE		512	/* Console I/O Buffer Size */
-- /* Print Buffer Size */
-- #define CONFIG_SYS_PBSIZE		(CONFIG_SYS_CBSIZE + \
-- 					sizeof(CONFIG_SYS_PROMPT) + 16)
---#define CONFIG_SYS_MAXARGS		16	/* max number of command args */
--+#define CONFIG_SYS_MAXARGS		32	/* max number of command args */
-- /* Boot Argument Buffer Size */
-- #define CONFIG_SYS_BARGSIZE		(CONFIG_SYS_CBSIZE)
-- 
---#define CONFIG_SYS_MEMTEST_START	(OMAP34XX_SDRC_CS0)	/* memtest */
---								/* works on */
---#define CONFIG_SYS_MEMTEST_END		(OMAP34XX_SDRC_CS0 + \
---					0x01F00000) /* 31MB */
--+#define CONFIG_SYS_ALT_MEMTEST		1
--+#define CONFIG_SYS_MEMTEST_START	(0x82000000)		/* memtest */
--+								/* defaults */
--+#define CONFIG_SYS_MEMTEST_END		(0x87FFFFFF) 		/* 128MB */
--+#define CONFIG_SYS_MEMTEST_SCRATCH	(0x81000000)	/* dummy address */
-- 
-- #define CONFIG_SYS_LOAD_ADDR		(OMAP34XX_SDRC_CS0)	/* default */
-- 							/* load address */
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0014-Corrected-LED-name-match-finding-avoiding-extraneous.patch b/recipes-bsp/u-boot/u-boot/0014-Corrected-LED-name-match-finding-avoiding-extraneous.patch
-deleted file mode 100644
-index e01092a..0000000
---- a/recipes-bsp/u-boot/u-boot/0014-Corrected-LED-name-match-finding-avoiding-extraneous.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--From abc09e8f0b8e02dbfec8bb3c2e024ef9f1bdf4f0 Mon Sep 17 00:00:00 2001
--From: Jason Kridner <jkridner@beagleboard.org>
--Date: Tue, 8 Mar 2011 20:42:01 -0600
--Subject: [PATCH 14/16] Corrected LED name match finding avoiding extraneous Usage printouts
--
-----
-- common/cmd_led.c |    5 +++--
-- 1 files changed, 3 insertions(+), 2 deletions(-)
--
--diff --git a/common/cmd_led.c b/common/cmd_led.c
--index 7f02fe6..ca2227f 100644
----- a/common/cmd_led.c
--+++ b/common/cmd_led.c
--@@ -83,7 +83,7 @@ int str_onoff (char *var)
-- 
-- int do_led (cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
-- {
---	int state, i;
--+	int state, i, match = 0;
-- 
-- 	/* Validate arguments */
-- 	if ((argc != 3)) {
--@@ -98,6 +98,7 @@ int do_led (cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
-- 	for (i = 0; led_commands[i].string; i++) {
-- 		if ((strcmp("all", argv[1]) == 0) ||
-- 		    (strcmp(led_commands[i].string, argv[1]) == 0)) {
--+		    	match = 1;
-- 			if (led_commands[i].on) {
-- 				if (state) {
-- 					led_commands[i].on();
--@@ -111,7 +112,7 @@ int do_led (cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
-- 	}
-- 
-- 	/* If we ran out of matches, print Usage */
---	if (!led_commands[i].string && !(strcmp("all", argv[1]) == 0)) {
--+	if (!match) {
-- 		return cmd_usage(cmdtp);
-- 	}
-- 
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0015-omap3_beagle-Switch-default-console-from-ttyS2-to-tt.patch b/recipes-bsp/u-boot/u-boot/0015-omap3_beagle-Switch-default-console-from-ttyS2-to-tt.patch
-deleted file mode 100644
-index 2db0810..0000000
---- a/recipes-bsp/u-boot/u-boot/0015-omap3_beagle-Switch-default-console-from-ttyS2-to-tt.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From 1a88890580917571811950eabd877cccdb643cb1 Mon Sep 17 00:00:00 2001
--From: Alexander Holler <holler@ahsoftware.de>
--Date: Thu, 17 Feb 2011 22:37:57 +0000
--Subject: [PATCH 15/16] omap3_beagle: Switch default console from ttyS2 to ttyO2
--
--Linux kernels >= 2.6.36 are using ttyOn instead ttySn for the
--serials on OMAPs.
--
--Signed-off-by: Alexander Holler <holler@ahsoftware.de>
-----
-- include/configs/omap3_beagle.h |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 73d4d4e..de572e8 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -211,7 +211,7 @@
-- 	"loadaddr=0x80200000\0" \
-- 	"rdaddr=0x81000000\0" \
-- 	"usbtty=cdc_acm\0" \
---	"console=ttyS2,115200n8\0" \
--+	"console=ttyO2,115200n8\0" \
-- 	"mpurate=auto\0" \
-- 	"buddy=none "\
-- 	"optargs=\0" \
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/0016-BeagleBoard-Load-kernel-via-MMC-ext2-not-fat.patch b/recipes-bsp/u-boot/u-boot/0016-BeagleBoard-Load-kernel-via-MMC-ext2-not-fat.patch
-deleted file mode 100644
-index bdcdeb4..0000000
---- a/recipes-bsp/u-boot/u-boot/0016-BeagleBoard-Load-kernel-via-MMC-ext2-not-fat.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From 03757f19b4affb531d1606e468e0411acd8d57cb Mon Sep 17 00:00:00 2001
--From: Jason Kridner <jkridner@beagleboard.org>
--Date: Wed, 9 Mar 2011 18:48:19 -0600
--Subject: [PATCH 16/16] BeagleBoard: Load kernel via MMC ext2, not fat
--
-----
-- include/configs/omap3_beagle.h |    3 ++-
-- 1 files changed, 2 insertions(+), 1 deletions(-)
--
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index de572e8..3a102e5 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -261,7 +261,8 @@
-- 		"root=${ramroot} " \
-- 		"rootfstype=${ramrootfstype}\0" \
-- 	"loadramdisk=fatload mmc ${mmcdev} ${rdaddr} ramdisk.gz\0" \
---	"loaduimage=fatload mmc ${mmcdev} ${loadaddr} uImage\0" \
--+	"loaduimagefat=fatload mmc ${mmcdev} ${loadaddr} uImage\0" \
--+	"loaduimage=ext2load mmc ${mmcdev}:2 ${loadaddr} /boot/uImage\0" \
-- 	"mmcboot=echo Booting from mmc ...; " \
-- 		"run mmcargs; " \
-- 		"bootm ${loadaddr}\0" \
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0001-omap3-mem-Comment-enable_gpmc_cs_config-more.patch b/recipes-bsp/u-boot/u-boot/2011.09/0001-omap3-mem-Comment-enable_gpmc_cs_config-more.patch
-deleted file mode 100644
-index 38da967..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0001-omap3-mem-Comment-enable_gpmc_cs_config-more.patch
-+++ /dev/null
-@@ -1,56 +0,0 @@
--From 81630b54970a9274140b1c14caa31da6331a62fa Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:47:58 +0000
--Subject: [PATCH 01/21] omap3: mem: Comment enable_gpmc_cs_config more
--
--Expand the "enable the config" comment to explain what the bit shifts
--are and define out two of the magic numbers.
--
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/cpu/armv7/omap3/mem.c        |   12 +++++++++---
-- arch/arm/include/asm/arch-omap3/mem.h |    4 ++++
-- 2 files changed, 13 insertions(+), 3 deletions(-)
--
--diff --git a/arch/arm/cpu/armv7/omap3/mem.c b/arch/arm/cpu/armv7/omap3/mem.c
--index a01c303..2f1efea 100644
----- a/arch/arm/cpu/armv7/omap3/mem.c
--+++ b/arch/arm/cpu/armv7/omap3/mem.c
--@@ -105,9 +105,15 @@ void enable_gpmc_cs_config(const u32 *gpmc_config, struct gpmc_cs *cs, u32 base,
-- 	writel(gpmc_config[3], &cs->config4);
-- 	writel(gpmc_config[4], &cs->config5);
-- 	writel(gpmc_config[5], &cs->config6);
---	/* Enable the config */
---	writel((((size & 0xF) << 8) | ((base >> 24) & 0x3F) |
---		(1 << 6)), &cs->config7);
--+
--+	/*
--+	 * Enable the config.  size is the CS size and goes in
--+	 * bits 11:8.  We set bit 6 to enable this CS and the base
--+	 * address goes into bits 5:0.
--+	 */
--+	 writel((size << 8) | (GPMC_CS_ENABLE << 6) |
--+				 ((base >> 24) & GPMC_BASEADDR_MASK),
--+				 &cs->config7);
-- 	sdelay(2000);
-- }
-- 
--diff --git a/arch/arm/include/asm/arch-omap3/mem.h b/arch/arm/include/asm/arch-omap3/mem.h
--index db6a696..abf4e82 100644
----- a/arch/arm/include/asm/arch-omap3/mem.h
--+++ b/arch/arm/include/asm/arch-omap3/mem.h
--@@ -259,6 +259,10 @@ enum {
-- #define GPMC_SIZE_32M	0xE
-- #define GPMC_SIZE_16M	0xF
-- 
--+#define GPMC_BASEADDR_MASK	0x3F
--+
--+#define GPMC_CS_ENABLE		0x1
--+
-- #define SMNAND_GPMC_CONFIG1	0x00000800
-- #define SMNAND_GPMC_CONFIG2	0x00141400
-- #define SMNAND_GPMC_CONFIG3	0x00141400
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0002-OMAP3-Update-SDRC-dram_init-to-always-call-make_cs1_.patch b/recipes-bsp/u-boot/u-boot/2011.09/0002-OMAP3-Update-SDRC-dram_init-to-always-call-make_cs1_.patch
-deleted file mode 100644
-index cb12873..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0002-OMAP3-Update-SDRC-dram_init-to-always-call-make_cs1_.patch
-+++ /dev/null
-@@ -1,66 +0,0 @@
--From 42db3ebdd76628017e7ab83752e9b288ec4f26a0 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:47:59 +0000
--Subject: [PATCH 02/21] OMAP3: Update SDRC dram_init to always call make_cs1_contiguous()
--
--We update the comment in make_cs1_contiguous() to be a little bit
--more clear (it's been copy/pasted from other silicons) and then
--explain in dram_init() why we need to always try this.
--
--Note that in the previous behavior we were always calling this on
--boards that never had cs1 populated anyhow so making sure we do
--this always is fine and will correct things like omap3evm detecting
--an invalid amount of memory (384MB).
--
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/cpu/armv7/omap3/sdrc.c |   23 +++++++++++------------
-- 1 files changed, 11 insertions(+), 12 deletions(-)
--
--diff --git a/arch/arm/cpu/armv7/omap3/sdrc.c b/arch/arm/cpu/armv7/omap3/sdrc.c
--index 0dd1955..66ce33f 100644
----- a/arch/arm/cpu/armv7/omap3/sdrc.c
--+++ b/arch/arm/cpu/armv7/omap3/sdrc.c
--@@ -58,10 +58,9 @@ u32 is_mem_sdr(void)
-- 
-- /*
--  * make_cs1_contiguous -
--- *  - For es2 and above remap cs1 behind cs0 to allow command line
--- *    mem=xyz use all memory with out discontinuous support compiled in.
--- *    Could do it at the ATAG, but there really is two banks...
--- *  - Called as part of 2nd phase DDR init.
--+ * - When we have CS1 populated we want to have it mapped after cs0 to allow
--+ *   command line mem=xyz use all memory with out discontinuous support
--+ *   compiled in.  We could do it in the ATAG, but there really is two banks...
--  */
-- void make_cs1_contiguous(void)
-- {
--@@ -207,16 +206,16 @@ int dram_init(void)
-- 
-- 	size0 = get_sdr_cs_size(CS0);
-- 	/*
---	 * If a second bank of DDR is attached to CS1 this is
---	 * where it can be started.  Early init code will init
---	 * memory on CS0.
--+	 * We always need to have cs_cfg point at where the second
--+	 * bank would be, if present.  Failure to do so can lead to
--+	 * strange situations where memory isn't detected and
--+	 * configured correctly.  CS0 will already have been setup
--+	 * at this point.
-- 	 */
---	if ((sysinfo.mtype == DDR_COMBO) || (sysinfo.mtype == DDR_STACKED)) {
---		do_sdrc_init(CS1, NOT_EARLY);
---		make_cs1_contiguous();
--+	make_cs1_contiguous();
--+	do_sdrc_init(CS1, NOT_EARLY);
--+	size1 = get_sdr_cs_size(CS1);
-- 
---		size1 = get_sdr_cs_size(CS1);
---	}
-- 	gd->ram_size = size0 + size1;
-- 
-- 	return 0;
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0003-OMAP3-Add-a-helper-function-to-set-timings-in-SDRC.patch b/recipes-bsp/u-boot/u-boot/2011.09/0003-OMAP3-Add-a-helper-function-to-set-timings-in-SDRC.patch
-deleted file mode 100644
-index 71e49af..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0003-OMAP3-Add-a-helper-function-to-set-timings-in-SDRC.patch
-+++ /dev/null
-@@ -1,172 +0,0 @@
--From a186210c5003db4df2a4f97bd6d4cb2dc616a591 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:48:00 +0000
--Subject: [PATCH 03/21] OMAP3: Add a helper function to set timings in SDRC
--
--Since we go through the sequence to setup the SDRC timings more than
--once, break this logic out into its own function and have that function
--call mem_ok() to make sure the memory is usable.
--
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/cpu/armv7/omap3/sdrc.c |  116 ++++++++++++++++++++------------------
-- 1 files changed, 61 insertions(+), 55 deletions(-)
--
--diff --git a/arch/arm/cpu/armv7/omap3/sdrc.c b/arch/arm/cpu/armv7/omap3/sdrc.c
--index 66ce33f..2756024 100644
----- a/arch/arm/cpu/armv7/omap3/sdrc.c
--+++ b/arch/arm/cpu/armv7/omap3/sdrc.c
--@@ -108,14 +108,45 @@ u32 get_sdr_cs_offset(u32 cs)
-- }
-- 
-- /*
--+ * write_sdrc_timings -
--+ *  - Takes CS and associated timings and initalize SDRAM
--+ *  - Test CS to make sure it's OK for use
--+ */
--+static void write_sdrc_timings(u32 cs, struct sdrc_actim *sdrc_actim_base,
--+		u32 mcfg, u32 ctrla, u32 ctrlb, u32 rfr_ctrl, u32 mr)
--+{
--+	/* Setup timings we got from the board. */
--+	writel(mcfg, &sdrc_base->cs[cs].mcfg);
--+	writel(ctrla, &sdrc_actim_base->ctrla);
--+	writel(ctrlb, &sdrc_actim_base->ctrlb);
--+	writel(rfr_ctrl, &sdrc_base->cs[cs].rfr_ctrl);
--+	writel(CMD_NOP, &sdrc_base->cs[cs].manual);
--+	writel(CMD_PRECHARGE, &sdrc_base->cs[cs].manual);
--+	writel(CMD_AUTOREFRESH, &sdrc_base->cs[cs].manual);
--+	writel(CMD_AUTOREFRESH, &sdrc_base->cs[cs].manual);
--+	writel(mr, &sdrc_base->cs[cs].mr);
--+
--+	/*
--+	 * Test ram in this bank
--+	 * Disable if bad or not present
--+	 */
--+	if (!mem_ok(cs))
--+		writel(0, &sdrc_base->cs[cs].mcfg);
--+}
--+
--+/*
--  * do_sdrc_init -
--- *  - Initialize the SDRAM for use.
--- *  - code called once in C-Stack only context for CS0 and a possible 2nd
--- *    time depending on memory configuration from stack+global context
--+ *  - Code called once in C-Stack only context for CS0 and with early being
--+ *    true and a possible 2nd time depending on memory configuration from
--+ *    stack+global context.
--  */
-- void do_sdrc_init(u32 cs, u32 early)
-- {
-- 	struct sdrc_actim *sdrc_actim_base0, *sdrc_actim_base1;
--+	u32 mcfg, ctrla, ctrlb, rfr_ctrl, mr;
--+
--+	sdrc_actim_base0 = (struct sdrc_actim *)SDRC_ACTIM_CTRL0_BASE;
--+	sdrc_actim_base1 = (struct sdrc_actim *)SDRC_ACTIM_CTRL1_BASE;
-- 
-- 	if (early) {
-- 		/* reset sdrc controller */
--@@ -127,73 +158,48 @@ void do_sdrc_init(u32 cs, u32 early)
-- 		/* setup sdrc to ball mux */
-- 		writel(SDRC_SHARING, &sdrc_base->sharing);
-- 
---		/* Disable Power Down of CKE cuz of 1 CKE on combo part */
--+		/* Disable Power Down of CKE because of 1 CKE on combo part */
-- 		writel(WAKEUPPROC | SRFRONRESET | PAGEPOLICY_HIGH,
-- 				&sdrc_base->power);
-- 
-- 		writel(ENADLL | DLLPHASE_90, &sdrc_base->dlla_ctrl);
-- 		sdelay(0x20000);
---	}
---
-- /* As long as V_MCFG and V_RFR_CTRL is not defined for all OMAP3 boards we need
--  * to prevent this to be build in non-SPL build */
-- #ifdef CONFIG_SPL_BUILD
---	/* If we use a SPL there is no x-loader nor config header so we have
---	 * to do the job ourselfs
---	 */
---	if (cs == CS0) {
---		sdrc_actim_base0 = (struct sdrc_actim *)SDRC_ACTIM_CTRL0_BASE;
---
---		/* General SDRC config */
---		writel(V_MCFG, &sdrc_base->cs[cs].mcfg);
---		writel(V_RFR_CTRL, &sdrc_base->cs[cs].rfr_ctrl);
---
---		/* AC timings */
---		writel(V_ACTIMA_165, &sdrc_actim_base0->ctrla);
---		writel(V_ACTIMB_165, &sdrc_actim_base0->ctrlb);
---
---		/* Initialize */
---		writel(CMD_NOP, &sdrc_base->cs[cs].manual);
---		writel(CMD_PRECHARGE, &sdrc_base->cs[cs].manual);
---		writel(CMD_AUTOREFRESH, &sdrc_base->cs[cs].manual);
---		writel(CMD_AUTOREFRESH, &sdrc_base->cs[cs].manual);
--+		/*
--+		 * If we use a SPL there is no x-loader nor config header so
--+		 * we have to do the job ourselfs
--+		 */
--+
--+		mcfg = V_MCFG;
--+		ctrla = V_ACTIMA_165;
--+		ctrlb = V_ACTIMB_165;
--+		rfr_ctrl = V_RFR_CTRL;
--+		mr = V_MR;
--+
--+		write_sdrc_timings(CS0, sdrc_actim_base0, mcfg, ctrla, ctrlb,
--+				rfr_ctrl, mr);
--+#endif
-- 
---		writel(V_MR, &sdrc_base->cs[cs].mr);
-- 	}
---#endif
-- 
-- 	/*
---	 * SDRC timings are set up by x-load or config header
---	 * We don't need to redo them here.
---	 * Older x-loads configure only CS0
---	 * configure CS1 to handle this ommission
--+	 * If we aren't using SPL we have been loaded by some
--+	 * other means which may not have correctly initialized
--+	 * both CS0 and CS1 (such as some older versions of x-loader)
--+	 * so we may be asked now to setup CS1.
-- 	 */
-- 	if (cs == CS1) {
---		sdrc_actim_base0 = (struct sdrc_actim *)SDRC_ACTIM_CTRL0_BASE;
---		sdrc_actim_base1 = (struct sdrc_actim *)SDRC_ACTIM_CTRL1_BASE;
---		writel(readl(&sdrc_base->cs[CS0].mcfg),
---			&sdrc_base->cs[CS1].mcfg);
---		writel(readl(&sdrc_base->cs[CS0].rfr_ctrl),
---			&sdrc_base->cs[CS1].rfr_ctrl);
---		writel(readl(&sdrc_actim_base0->ctrla),
---			&sdrc_actim_base1->ctrla);
---		writel(readl(&sdrc_actim_base0->ctrlb),
---			&sdrc_actim_base1->ctrlb);
---
---		writel(CMD_NOP, &sdrc_base->cs[cs].manual);
---		writel(CMD_PRECHARGE, &sdrc_base->cs[cs].manual);
---		writel(CMD_AUTOREFRESH, &sdrc_base->cs[cs].manual);
---		writel(CMD_AUTOREFRESH, &sdrc_base->cs[cs].manual);
---		writel(readl(&sdrc_base->cs[CS0].mr),
---			&sdrc_base->cs[CS1].mr);
---	}
--+		mcfg = readl(&sdrc_base->cs[CS0].mcfg),
--+		rfr_ctrl = readl(&sdrc_base->cs[CS0].rfr_ctrl);
--+		ctrla = readl(&sdrc_actim_base0->ctrla),
--+		ctrlb = readl(&sdrc_actim_base0->ctrlb);
--+		mr = readl(&sdrc_base->cs[CS0].mr);
--+		write_sdrc_timings(cs, sdrc_actim_base1, mcfg, ctrla, ctrlb,
--+				rfr_ctrl, mr);
-- 
---	/*
---	 * Test ram in this bank
---	 * Disable if bad or not present
---	 */
---	if (!mem_ok(cs))
---		writel(0, &sdrc_base->cs[cs].mcfg);
--+	}
-- }
-- 
-- /*
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0004-OMAP3-Change-mem_ok-to-clear-again-after-reading-bac.patch b/recipes-bsp/u-boot/u-boot/2011.09/0004-OMAP3-Change-mem_ok-to-clear-again-after-reading-bac.patch
-deleted file mode 100644
-index 30d912c..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0004-OMAP3-Change-mem_ok-to-clear-again-after-reading-bac.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 0cf0d611823f6e1f3b63f9233c145a3940a89694 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:48:01 +0000
--Subject: [PATCH 04/21] OMAP3: Change mem_ok to clear again after reading back
--
--It's possible to need to call this function on the same banks multiple
--times so we want to be sure that 'pos A' is cleared out again at the
--end.
--
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/cpu/armv7/omap3/mem.c |    1 +
-- 1 files changed, 1 insertions(+), 0 deletions(-)
--
--diff --git a/arch/arm/cpu/armv7/omap3/mem.c b/arch/arm/cpu/armv7/omap3/mem.c
--index 2f1efea..2fe5ac7 100644
----- a/arch/arm/cpu/armv7/omap3/mem.c
--+++ b/arch/arm/cpu/armv7/omap3/mem.c
--@@ -86,6 +86,7 @@ u32 mem_ok(u32 cs)
-- 	writel(0x0, addr + 4);		/* remove pattern off the bus */
-- 	val1 = readl(addr + 0x400);	/* get pos A value */
-- 	val2 = readl(addr);		/* get val2 */
--+	writel(0x0, addr + 0x400);	/* clear pos A */
-- 
-- 	if ((val1 != 0) || (val2 != pattern))	/* see if pos A val changed */
-- 		return 0;
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0005-OMAP3-Remove-get_mem_type-prototype.patch b/recipes-bsp/u-boot/u-boot/2011.09/0005-OMAP3-Remove-get_mem_type-prototype.patch
-deleted file mode 100644
-index ec1b5f7..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0005-OMAP3-Remove-get_mem_type-prototype.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 45ccdf2ba3aa6e5f258c463691c85ac4529246e6 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:48:02 +0000
--Subject: [PATCH 05/21] OMAP3: Remove get_mem_type prototype
--
--This function doesn't exist for omap3
--
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/include/asm/arch-omap3/sys_proto.h |    1 -
-- 1 files changed, 0 insertions(+), 1 deletions(-)
--
--diff --git a/arch/arm/include/asm/arch-omap3/sys_proto.h b/arch/arm/include/asm/arch-omap3/sys_proto.h
--index 995e7cb..9e64410 100644
----- a/arch/arm/include/asm/arch-omap3/sys_proto.h
--+++ b/arch/arm/include/asm/arch-omap3/sys_proto.h
--@@ -49,7 +49,6 @@ void set_muxconf_regs(void);
-- u32 get_cpu_family(void);
-- u32 get_cpu_rev(void);
-- u32 get_sku_id(void);
---u32 get_mem_type(void);
-- u32 get_sysboot_value(void);
-- u32 is_gpmc_muxed(void);
-- u32 get_gpmc0_type(void);
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0006-omap3-mem-Add-MCFG-helper-macro.patch b/recipes-bsp/u-boot/u-boot/2011.09/0006-omap3-mem-Add-MCFG-helper-macro.patch
-deleted file mode 100644
-index 475febf..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0006-omap3-mem-Add-MCFG-helper-macro.patch
-+++ /dev/null
-@@ -1,97 +0,0 @@
--From bd50b147ff61a5203815296eac726b0a244c3cb2 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:48:03 +0000
--Subject: [PATCH 06/21] omap3: mem: Add MCFG helper macro
--
--This adds an MCFG macro to calculate the correct value, similar to
--the ACTIMA/ACTIMB macros and adds a comment that all of the potential
--values here are documented in the TRM.  Then we convert the Micron
--value to use this macro.
--
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/include/asm/arch-omap3/mem.h |   46 +++++++++++++++++++++-----------
-- 1 files changed, 30 insertions(+), 16 deletions(-)
--
--diff --git a/arch/arm/include/asm/arch-omap3/mem.h b/arch/arm/include/asm/arch-omap3/mem.h
--index abf4e82..12ff3b0 100644
----- a/arch/arm/include/asm/arch-omap3/mem.h
--+++ b/arch/arm/include/asm/arch-omap3/mem.h
--@@ -39,6 +39,12 @@ enum {
-- 
-- #define EARLY_INIT	1
-- 
--+/*
--+ * For a full explanation of these registers and values please see
--+ * the Technical Reference Manual (TRM) for any of the processors in
--+ * this family.
--+ */
--+
-- /* Slower full frequency range default timings for x32 operation*/
-- #define SDRC_SHARING	0x00000100
-- #define SDRC_MR_0_SDR	0x00000031
--@@ -86,6 +92,27 @@ enum {
-- 		ACTIM_CTRLB_TXP(b)	|	\
-- 		ACTIM_CTRLB_TXSR(d)
-- 
--+/*
--+ * Values used in the MCFG register.  Only values we use today
--+ * are defined and the rest can be found in the TRM.  Unless otherwise
--+ * noted all fields are one bit.
--+ */
--+#define V_MCFG_RAMTYPE_DDR		(0x1)
--+#define V_MCFG_DEEPPD_EN		(0x1 << 3)
--+#define V_MCFG_B32NOT16_32		(0x1 << 4)
--+#define V_MCFG_BANKALLOCATION_RBC	(0x2 << 6)	/* 6:7 */
--+#define V_MCFG_RAMSIZE(a)		((((a)/(1024*1024))/2) << 8) /* 8:17 */
--+#define V_MCFG_ADDRMUXLEGACY_FLEX	(0x1 << 19)
--+#define V_MCFG_CASWIDTH_10B		(0x5 << 20)	/* 20:22 */
--+#define V_MCFG_RASWIDTH(a)		((a) << 24)	/* 24:26 */
--+
--+/* Macro to construct MCFG */
--+#define MCFG(a, b)						\
--+		V_MCFG_RASWIDTH(b) | V_MCFG_CASWIDTH_10B |	\
--+		V_MCFG_ADDRMUXLEGACY_FLEX | V_MCFG_RAMSIZE(a) |	\
--+		V_MCFG_BANKALLOCATION_RBC |			\
--+		V_MCFG_B32NOT16_32 | V_MCFG_DEEPPD_EN | V_MCFG_RAMTYPE_DDR
--+
-- /* Infineon part of 3430SDP (165MHz optimized) 6.06ns */
-- #define INFINEON_TDAL_165	6	/* Twr/Tck + Trp/tck		*/
-- 					/* 15/6 + 18/6 = 5.5 -> 6	*/
--@@ -138,21 +165,8 @@ enum {
-- 		ACTIM_CTRLB(MICRON_TWTR_165, MICRON_TCKE_165,	\
-- 				MICRON_TXP_165,	MICRON_XSR_165)
-- 
---#define MICRON_RAMTYPE			0x1
---#define MICRON_DDRTYPE			0x0
---#define MICRON_DEEPPD			0x1
---#define MICRON_B32NOT16			0x1
---#define MICRON_BANKALLOCATION	0x2
---#define MICRON_RAMSIZE			((PHYS_SDRAM_1_SIZE/(1024*1024))/2)
---#define MICRON_ADDRMUXLEGACY	0x1
---#define MICRON_CASWIDTH			0x5
---#define MICRON_RASWIDTH			0x2
---#define MICRON_LOCKSTATUS		0x0
---#define MICRON_V_MCFG ((MICRON_LOCKSTATUS << 30) | (MICRON_RASWIDTH << 24) | \
---	(MICRON_CASWIDTH << 20) | (MICRON_ADDRMUXLEGACY << 19) | \
---	(MICRON_RAMSIZE << 8) | (MICRON_BANKALLOCATION << 6) | \
---	(MICRON_B32NOT16 << 4) | (MICRON_DEEPPD << 3) | \
---	(MICRON_DDRTYPE << 2) | (MICRON_RAMTYPE))
--+#define MICRON_RASWIDTH		0x2
--+#define MICRON_V_MCFG(size)	MCFG((size), MICRON_RASWIDTH)
-- 
-- #define MICRON_ARCV				2030
-- #define MICRON_ARE				0x1
--@@ -199,7 +213,7 @@ enum {
-- #ifdef CONFIG_OMAP3_MICRON_DDR
-- #define V_ACTIMA_165		MICRON_V_ACTIMA_165
-- #define V_ACTIMB_165		MICRON_V_ACTIMB_165
---#define V_MCFG			MICRON_V_MCFG
--+#define V_MCFG			MICRON_V_MCFG(PHYS_SDRAM_1_SIZE)
-- #define V_RFR_CTRL		MICRON_V_RFR_CTRL
-- #define V_MR			MICRON_V_MR
-- #endif
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0007-OMAP3-Add-optimal-SDRC-autorefresh-control-values.patch b/recipes-bsp/u-boot/u-boot/2011.09/0007-OMAP3-Add-optimal-SDRC-autorefresh-control-values.patch
-deleted file mode 100644
-index 2024094..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0007-OMAP3-Add-optimal-SDRC-autorefresh-control-values.patch
-+++ /dev/null
-@@ -1,59 +0,0 @@
--From 67ea79f7a99d7168915a5db8a577814ec501774e Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:48:04 +0000
--Subject: [PATCH 07/21] OMAP3: Add optimal SDRC autorefresh control values
--
--This adds the optimal SDRC autorefresh control register values for
--100Mhz, 133MHz, 165MHz and 200MHz clocks.  We switch to using this
--to provide the default 165MHz value.
--
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/include/asm/arch-omap3/mem.h |   16 +++++++++++-----
-- 1 files changed, 11 insertions(+), 5 deletions(-)
--
--diff --git a/arch/arm/include/asm/arch-omap3/mem.h b/arch/arm/include/asm/arch-omap3/mem.h
--index 12ff3b0..912c737 100644
----- a/arch/arm/include/asm/arch-omap3/mem.h
--+++ b/arch/arm/include/asm/arch-omap3/mem.h
--@@ -49,6 +49,16 @@ enum {
-- #define SDRC_SHARING	0x00000100
-- #define SDRC_MR_0_SDR	0x00000031
-- 
--+/*
--+ * SDRC autorefresh control values.  This register consists of autorefresh
--+ * enable at bits 0:1 and an autorefresh counter value in bits 8:23.  The
--+ * counter is a result of ( tREFI / tCK ) - 50.
--+ */
--+#define SDP_3430_SDRC_RFR_CTRL_100MHz	0x0002da01
--+#define SDP_3430_SDRC_RFR_CTRL_133MHz	0x0003de01 /* 7.8us/7.5ns - 50=0x3de */
--+#define SDP_3430_SDRC_RFR_CTRL_165MHz	0x0004e201 /* 7.8us/6ns - 50=0x4e2 */
--+#define SDP_3430_SDRC_RFR_CTRL_200MHz	0x0005e601 /* 7.8us/5ns - 50=0x5e6 */
--+
-- #define DLL_OFFSET		0
-- #define DLL_WRITEDDRCLKX2DIS	1
-- #define DLL_ENADLL		1
--@@ -168,10 +178,6 @@ enum {
-- #define MICRON_RASWIDTH		0x2
-- #define MICRON_V_MCFG(size)	MCFG((size), MICRON_RASWIDTH)
-- 
---#define MICRON_ARCV				2030
---#define MICRON_ARE				0x1
---#define MICRON_V_RFR_CTRL ((MICRON_ARCV << 8) | (MICRON_ARE))
---
-- #define MICRON_BL				0x2
-- #define MICRON_SIL				0x0
-- #define MICRON_CASL				0x3
--@@ -214,7 +220,7 @@ enum {
-- #define V_ACTIMA_165		MICRON_V_ACTIMA_165
-- #define V_ACTIMB_165		MICRON_V_ACTIMB_165
-- #define V_MCFG			MICRON_V_MCFG(PHYS_SDRAM_1_SIZE)
---#define V_RFR_CTRL		MICRON_V_RFR_CTRL
--+#define V_RFR_CTRL		SDP_3430_SDRC_RFR_CTRL_165MHz
-- #define V_MR			MICRON_V_MR
-- #endif
-- 
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0008-OMAP3-Suffix-all-Micron-memory-timing-parts-with-the.patch b/recipes-bsp/u-boot/u-boot/2011.09/0008-OMAP3-Suffix-all-Micron-memory-timing-parts-with-the.patch
-deleted file mode 100644
-index 79f4efb..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0008-OMAP3-Suffix-all-Micron-memory-timing-parts-with-the.patch
-+++ /dev/null
-@@ -1,55 +0,0 @@
--From 0e9f4ab3cafdc1de638ab7a603a750acd4688967 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:48:05 +0000
--Subject: [PATCH 08/21] OMAP3: Suffix all Micron memory timing parts with their speed
--
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/include/asm/arch-omap3/mem.h |   21 +++++++++++----------
-- 1 files changed, 11 insertions(+), 10 deletions(-)
--
--diff --git a/arch/arm/include/asm/arch-omap3/mem.h b/arch/arm/include/asm/arch-omap3/mem.h
--index 912c737..4f996d9 100644
----- a/arch/arm/include/asm/arch-omap3/mem.h
--+++ b/arch/arm/include/asm/arch-omap3/mem.h
--@@ -175,15 +175,16 @@ enum {
-- 		ACTIM_CTRLB(MICRON_TWTR_165, MICRON_TCKE_165,	\
-- 				MICRON_TXP_165,	MICRON_XSR_165)
-- 
---#define MICRON_RASWIDTH		0x2
---#define MICRON_V_MCFG(size)	MCFG((size), MICRON_RASWIDTH)
--+#define MICRON_RASWIDTH_165	0x2
--+#define MICRON_V_MCFG_165(size)	MCFG((size), MICRON_RASWIDTH_165)
-- 
---#define MICRON_BL				0x2
---#define MICRON_SIL				0x0
---#define MICRON_CASL				0x3
---#define MICRON_WBST				0x0
---#define MICRON_V_MR ((MICRON_WBST << 9) | (MICRON_CASL << 4) | \
---	(MICRON_SIL << 3) | (MICRON_BL))
--+#define MICRON_BL_165			0x2
--+#define MICRON_SIL_165			0x0
--+#define MICRON_CASL_165			0x3
--+#define MICRON_WBST_165			0x0
--+#define MICRON_V_MR_165			((MICRON_WBST_165 << 9) | \
--+		(MICRON_CASL_165 << 4) | (MICRON_SIL_165 << 3) | \
--+		(MICRON_BL_165))
-- 
-- /* NUMONYX part of IGEP v2 (165MHz optimized) 6.06ns */
-- #define NUMONYX_TDAL_165	6	/* Twr/Tck + Trp/tck		*/
--@@ -219,9 +220,9 @@ enum {
-- #ifdef CONFIG_OMAP3_MICRON_DDR
-- #define V_ACTIMA_165		MICRON_V_ACTIMA_165
-- #define V_ACTIMB_165		MICRON_V_ACTIMB_165
---#define V_MCFG			MICRON_V_MCFG(PHYS_SDRAM_1_SIZE)
--+#define V_MCFG			MICRON_V_MCFG_165(PHYS_SDRAM_1_SIZE)
-- #define V_RFR_CTRL		SDP_3430_SDRC_RFR_CTRL_165MHz
---#define V_MR			MICRON_V_MR
--+#define V_MR			MICRON_V_MR_165
-- #endif
-- 
-- #ifdef CONFIG_OMAP3_NUMONYX_DDR
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0009-OMAP3-SPL-Rework-memory-initalization-and-devkit8000.patch b/recipes-bsp/u-boot/u-boot/2011.09/0009-OMAP3-SPL-Rework-memory-initalization-and-devkit8000.patch
-deleted file mode 100644
-index 7c12e7a..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0009-OMAP3-SPL-Rework-memory-initalization-and-devkit8000.patch
-+++ /dev/null
-@@ -1,174 +0,0 @@
--From bf66bbd9347874b6ad13f7747288327e968022d2 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:48:06 +0000
--Subject: [PATCH 09/21] OMAP3 SPL: Rework memory initalization and devkit8000 support
--
--This changes to making the board be responsible for providing the
--memory initialization timings in SPL and converts the devkit8000
--to this framework.  In SPL we try and initialize both CS0 and CS1.
--
--Cc: Frederik Kriewitz <frederik@kriewitz.eu>
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/cpu/armv7/omap3/sdrc.c             |   28 ++++++++++++++------------
-- arch/arm/include/asm/arch-omap3/mem.h       |   26 -------------------------
-- arch/arm/include/asm/arch-omap3/sys_proto.h |    2 +
-- board/timll/devkit8000/devkit8000.c         |   21 ++++++++++++++++++++
-- include/configs/devkit8000.h                |    5 ----
-- 5 files changed, 38 insertions(+), 44 deletions(-)
--
--diff --git a/arch/arm/cpu/armv7/omap3/sdrc.c b/arch/arm/cpu/armv7/omap3/sdrc.c
--index 2756024..a27b4b1 100644
----- a/arch/arm/cpu/armv7/omap3/sdrc.c
--+++ b/arch/arm/cpu/armv7/omap3/sdrc.c
--@@ -148,6 +148,18 @@ void do_sdrc_init(u32 cs, u32 early)
-- 	sdrc_actim_base0 = (struct sdrc_actim *)SDRC_ACTIM_CTRL0_BASE;
-- 	sdrc_actim_base1 = (struct sdrc_actim *)SDRC_ACTIM_CTRL1_BASE;
-- 
--+	/*
--+	 * When called in the early context this may be SPL and we will
--+	 * need to set all of the timings.  This ends up being board
--+	 * specific so we call a helper function to take care of this
--+	 * for us.  Otherwise, to be safe, we need to copy the settings
--+	 * from the first bank to the second.  We will setup CS0,
--+	 * then set cs_cfg to the appropriate value then try and
--+	 * setup CS1.
--+	 */
--+#ifdef CONFIG_SPL_BUILD
--+	get_board_mem_timings(&mcfg, &ctrla, &ctrlb, &rfr_ctrl, &mr);
--+#endif
-- 	if (early) {
-- 		/* reset sdrc controller */
-- 		writel(SOFTRESET, &sdrc_base->sysconfig);
--@@ -164,22 +176,12 @@ void do_sdrc_init(u32 cs, u32 early)
-- 
-- 		writel(ENADLL | DLLPHASE_90, &sdrc_base->dlla_ctrl);
-- 		sdelay(0x20000);
---/* As long as V_MCFG and V_RFR_CTRL is not defined for all OMAP3 boards we need
--- * to prevent this to be build in non-SPL build */
-- #ifdef CONFIG_SPL_BUILD
---		/*
---		 * If we use a SPL there is no x-loader nor config header so
---		 * we have to do the job ourselfs
---		 */
---
---		mcfg = V_MCFG;
---		ctrla = V_ACTIMA_165;
---		ctrlb = V_ACTIMB_165;
---		rfr_ctrl = V_RFR_CTRL;
---		mr = V_MR;
---
-- 		write_sdrc_timings(CS0, sdrc_actim_base0, mcfg, ctrla, ctrlb,
-- 				rfr_ctrl, mr);
--+		make_cs1_contiguous();
--+		write_sdrc_timings(CS0, sdrc_actim_base1, mcfg, ctrla, ctrlb,
--+				rfr_ctrl, mr);
-- #endif
-- 
-- 	}
--diff --git a/arch/arm/include/asm/arch-omap3/mem.h b/arch/arm/include/asm/arch-omap3/mem.h
--index 4f996d9..09f5872 100644
----- a/arch/arm/include/asm/arch-omap3/mem.h
--+++ b/arch/arm/include/asm/arch-omap3/mem.h
--@@ -212,32 +212,6 @@ enum {
-- 		ACTIM_CTRLB(NUMONYX_TWTR_165, NUMONYX_TCKE_165,	\
-- 				NUMONYX_TXP_165, NUMONYX_XSR_165)
-- 
---#ifdef CONFIG_OMAP3_INFINEON_DDR
---#define V_ACTIMA_165		INFINEON_V_ACTIMA_165
---#define V_ACTIMB_165		INFINEON_V_ACTIMB_165
---#endif
---
---#ifdef CONFIG_OMAP3_MICRON_DDR
---#define V_ACTIMA_165		MICRON_V_ACTIMA_165
---#define V_ACTIMB_165		MICRON_V_ACTIMB_165
---#define V_MCFG			MICRON_V_MCFG_165(PHYS_SDRAM_1_SIZE)
---#define V_RFR_CTRL		SDP_3430_SDRC_RFR_CTRL_165MHz
---#define V_MR			MICRON_V_MR_165
---#endif
---
---#ifdef CONFIG_OMAP3_NUMONYX_DDR
---#define V_ACTIMA_165		NUMONYX_V_ACTIMA_165
---#define V_ACTIMB_165		NUMONYX_V_ACTIMB_165
---#endif
---
---#if !defined(V_ACTIMA_165) || !defined(V_ACTIMB_165)
---#error "Please choose the right DDR type in config header"
---#endif
---
---#if defined(CONFIG_SPL_BUILD) && (!defined(V_MCFG) || !defined(V_RFR_CTRL))
---#error "Please choose the right DDR type in config header"
---#endif
---
-- /*
--  * GPMC settings -
--  * Definitions is as per the following format
--diff --git a/arch/arm/include/asm/arch-omap3/sys_proto.h b/arch/arm/include/asm/arch-omap3/sys_proto.h
--index 9e64410..80e167b 100644
----- a/arch/arm/include/asm/arch-omap3/sys_proto.h
--+++ b/arch/arm/include/asm/arch-omap3/sys_proto.h
--@@ -38,6 +38,8 @@ void per_clocks_enable(void);
-- void memif_init(void);
-- void sdrc_init(void);
-- void do_sdrc_init(u32, u32);
--+void get_board_mem_timings(u32 *mcfg, u32 *ctrla, u32 *ctrlb, u32 *rfr_ctrl,
--+		u32 *mr);
-- void emif4_init(void);
-- void gpmc_init(void);
-- void enable_gpmc_cs_config(const u32 *gpmc_config, struct gpmc_cs *cs, u32 base,
--diff --git a/board/timll/devkit8000/devkit8000.c b/board/timll/devkit8000/devkit8000.c
--index fee0dff..b06aab6 100644
----- a/board/timll/devkit8000/devkit8000.c
--+++ b/board/timll/devkit8000/devkit8000.c
--@@ -138,3 +138,24 @@ int board_eth_init(bd_t *bis)
-- 	return dm9000_initialize(bis);
-- }
-- #endif
--+
--+/*
--+ * Routine: get_board_mem_timings
--+ * Description: If we use SPL then there is no x-loader nor config header
--+ * so we have to setup the DDR timings ourself on the first bank.  This
--+ * provides the timing values back to the function that configures
--+ * the memory.  We have either one or two banks of 128MB DDR.
--+ */
--+void get_board_mem_timings(u32 *mcfg, u32 *ctrla, u32 *ctrlb, u32 *rfr_ctrl,
--+		u32 *mr)
--+{
--+	/* General SDRC config */
--+	*mcfg = MICRON_V_MCFG_165(128 << 20);
--+	*rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_165MHz;
--+
--+	/* AC timings */
--+	*ctrla = MICRON_V_ACTIMA_165;
--+	*ctrlb = MICRON_V_ACTIMB_165;
--+
--+	*mr = MICRON_V_MR_165;
--+}
--diff --git a/include/configs/devkit8000.h b/include/configs/devkit8000.h
--index e1743dc..b3e60cd 100644
----- a/include/configs/devkit8000.h
--+++ b/include/configs/devkit8000.h
--@@ -68,10 +68,6 @@
-- #define CONFIG_SYS_MALLOC_LEN		(CONFIG_ENV_SIZE + (128 << 10))
-- 
-- /* Hardware drivers */
---
---/* DDR - I use Micron DDR */
---#define CONFIG_OMAP3_MICRON_DDR		1
---
-- /* DM9000 */
-- #define CONFIG_NET_RETRY_COUNT		20
-- #define	CONFIG_DRIVER_DM9000		1
--@@ -284,7 +280,6 @@
-- /*  Physical Memory Map  */
-- #define CONFIG_NR_DRAM_BANKS		2 /* CS1 may or may not be populated */
-- #define PHYS_SDRAM_1			OMAP34XX_SDRC_CS0
---#define PHYS_SDRAM_1_SIZE		(128 << 20)	/* at least 128 MiB */
-- #define PHYS_SDRAM_2			OMAP34XX_SDRC_CS1
-- 
-- /* SDRAM Bank Allocation method */
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0010-OMAP3-SPL-Add-identify_nand_chip-function.patch b/recipes-bsp/u-boot/u-boot/2011.09/0010-OMAP3-SPL-Add-identify_nand_chip-function.patch
-deleted file mode 100644
-index 94ef0de..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0010-OMAP3-SPL-Add-identify_nand_chip-function.patch
-+++ /dev/null
-@@ -1,142 +0,0 @@
--From 290ebce5d39112ce80c6180206952aa5cc0ea871 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:48:07 +0000
--Subject: [PATCH 10/21] OMAP3 SPL: Add identify_nand_chip function
--
--A number of boards are populated with a PoP chip for both DDR and NAND
--memory.  Other boards may simply use this as an easy way to identify
--board revs.  So we provide a function that can be called early to reset
--the NAND chip and return the result of NAND_CMD_READID.  All of this
--code is put into spl_id_nand.c and controlled via CONFIG_SPL_OMAP3_ID_NAND.
--
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/cpu/armv7/omap3/Makefile           |    3 +
-- arch/arm/cpu/armv7/omap3/spl_id_nand.c      |   87 +++++++++++++++++++++++++++
-- arch/arm/include/asm/arch-omap3/sys_proto.h |    1 +
-- 3 files changed, 91 insertions(+), 0 deletions(-)
-- create mode 100644 arch/arm/cpu/armv7/omap3/spl_id_nand.c
--
--diff --git a/arch/arm/cpu/armv7/omap3/Makefile b/arch/arm/cpu/armv7/omap3/Makefile
--index 8e85891..4b38e45 100644
----- a/arch/arm/cpu/armv7/omap3/Makefile
--+++ b/arch/arm/cpu/armv7/omap3/Makefile
--@@ -31,6 +31,9 @@ COBJS	+= board.o
-- COBJS	+= clock.o
-- COBJS	+= mem.o
-- COBJS	+= sys_info.o
--+ifdef CONFIG_SPL_BUILD
--+COBJS-$(CONFIG_SPL_OMAP3_ID_NAND)	+= spl_id_nand.o
--+endif
-- 
-- COBJS-$(CONFIG_EMIF4)	+= emif4.o
-- COBJS-$(CONFIG_SDRC)	+= sdrc.o
--diff --git a/arch/arm/cpu/armv7/omap3/spl_id_nand.c b/arch/arm/cpu/armv7/omap3/spl_id_nand.c
--new file mode 100644
--index 0000000..0871fc9
----- /dev/null
--+++ b/arch/arm/cpu/armv7/omap3/spl_id_nand.c
--@@ -0,0 +1,87 @@
--+/*
--+ * (C) Copyright 2011
--+ * Texas Instruments, <www.ti.com>
--+ *
--+ * Author :
--+ *     Tom Rini <trini@ti.com>
--+ *
--+ * Initial Code from:
--+ *     Richard Woodruff <r-woodruff2@ti.com>
--+ *     Jian Zhang <jzhang@ti.com>
--+ *
--+ * This program is free software; you can redistribute it and/or
--+ * modify it under the terms of the GNU General Public License as
--+ * published by the Free Software Foundation; either version 2 of
--+ * the License, or (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
--+ * MA 02111-1307 USA
--+ */
--+
--+#include <common.h>
--+#include <linux/mtd/nand.h>
--+#include <asm/io.h>
--+#include <asm/arch/sys_proto.h>
--+#include <asm/arch/mem.h>
--+
--+static struct gpmc *gpmc_config = (struct gpmc *)GPMC_BASE;
--+
--+/* nand_command: Send a flash command to the flash chip */
--+static void nand_command(u8 command)
--+{
--+	writeb(command, &gpmc_config->cs[0].nand_cmd);
--+
--+	if (command == NAND_CMD_RESET) {
--+		unsigned char ret_val;
--+		writeb(NAND_CMD_STATUS, &gpmc_config->cs[0].nand_cmd);
--+		do {
--+			/* Wait until ready */
--+			ret_val = readl(&gpmc_config->cs[0].nand_dat);
--+		} while ((ret_val & NAND_STATUS_READY) != NAND_STATUS_READY);
--+	}
--+}
--+
--+/*
--+ * Many boards will want to know the results of the NAND_CMD_READID command
--+ * in order to decide what to do about DDR initialization.  This function
--+ * allows us to do that very early and to pass those results back to the
--+ * board so it can make whatever decisions need to be made.
--+ */
--+void identify_nand_chip(int *mfr, int *id)
--+{
--+	/* Make sure that we have setup GPMC for NAND correctly. */
--+	writel(M_NAND_GPMC_CONFIG1, &gpmc_config->cs[0].config1);
--+	writel(M_NAND_GPMC_CONFIG2, &gpmc_config->cs[0].config2);
--+	writel(M_NAND_GPMC_CONFIG3, &gpmc_config->cs[0].config3);
--+	writel(M_NAND_GPMC_CONFIG4, &gpmc_config->cs[0].config4);
--+	writel(M_NAND_GPMC_CONFIG5, &gpmc_config->cs[0].config5);
--+	writel(M_NAND_GPMC_CONFIG6, &gpmc_config->cs[0].config6);
--+
--+	/*
--+	 * Enable the config.  The CS size goes in bits 11:8.  We set
--+	 * bit 6 to enable the CS and the base address goes into bits 5:0.
--+	 */
--+	writel((GPMC_SIZE_128M << 8) | (GPMC_CS_ENABLE << 6) |
--+				((NAND_BASE >> 24) & GPMC_BASEADDR_MASK),
--+			&gpmc_config->cs[0].config7);
--+
--+	sdelay(2000);
--+
--+	/* Issue a RESET and then READID */
--+	nand_command(NAND_CMD_RESET);
--+	nand_command(NAND_CMD_READID);
--+
--+	/* Set the address to read to 0x0 */
--+	writeb(0x0, &gpmc_config->cs[0].nand_adr);
--+
--+	/* Read off the manufacturer and device id. */
--+	*mfr = readb(&gpmc_config->cs[0].nand_dat);
--+	*id = readb(&gpmc_config->cs[0].nand_dat);
--+}
--diff --git a/arch/arm/include/asm/arch-omap3/sys_proto.h b/arch/arm/include/asm/arch-omap3/sys_proto.h
--index 80e167b..e5031d5 100644
----- a/arch/arm/include/asm/arch-omap3/sys_proto.h
--+++ b/arch/arm/include/asm/arch-omap3/sys_proto.h
--@@ -40,6 +40,7 @@ void sdrc_init(void);
-- void do_sdrc_init(u32, u32);
-- void get_board_mem_timings(u32 *mcfg, u32 *ctrla, u32 *ctrlb, u32 *rfr_ctrl,
-- 		u32 *mr);
--+void identify_nand_chip(int *mfr, int *id);
-- void emif4_init(void);
-- void gpmc_init(void);
-- void enable_gpmc_cs_config(const u32 *gpmc_config, struct gpmc_cs *cs, u32 base,
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0011-OMAP3-Add-SPL-support-to-Beagleboard.patch b/recipes-bsp/u-boot/u-boot/2011.09/0011-OMAP3-Add-SPL-support-to-Beagleboard.patch
-deleted file mode 100644
-index a32c21d..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0011-OMAP3-Add-SPL-support-to-Beagleboard.patch
-+++ /dev/null
-@@ -1,315 +0,0 @@
--From 4ce72b52b5eeb172c1118fbd6e23d49eeec30ad2 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:48:08 +0000
--Subject: [PATCH 11/21] OMAP3: Add SPL support to Beagleboard
--
--This introduces 200MHz Micron parts timing information based on x-loader
--to <asm/arch-omap3/mem.h> and Numonyx MCFG calculation.  The memory init
--logic is also based on what x-loader does in these cases.  Note that
--while previously u-boot would be flashed in with SW ECC in this case it
--now must be flashed with HW ECC.  We also change CONFIG_SYS_TEXT_BASE to
--0x80100000.
--
--Cc: Dirk Behme <dirk.behme@gmail.com>
--Beagleboard rev C5, xM rev A:
--Tested-by: Tom Rini <trini@ti.com>
--Beagleboard xM rev C:
--Tested-by: Matt Ranostay <mranostay@gmail.com>
--Beagleboard rev B7, C2, xM rev B:
--Tested-by: Matt Porter <mporter@ti.com>
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/include/asm/arch-omap3/mem.h |   29 +++++++++++++
-- board/ti/beagle/beagle.c              |   71 ++++++++++++++++++++++++++++++++-
-- board/ti/beagle/config.mk             |   33 ---------------
-- include/configs/omap3_beagle.h        |   59 +++++++++++++++++++++++++--
-- 4 files changed, 153 insertions(+), 39 deletions(-)
-- delete mode 100644 board/ti/beagle/config.mk
--
--diff --git a/arch/arm/include/asm/arch-omap3/mem.h b/arch/arm/include/asm/arch-omap3/mem.h
--index 09f5872..4ea5f74 100644
----- a/arch/arm/include/asm/arch-omap3/mem.h
--+++ b/arch/arm/include/asm/arch-omap3/mem.h
--@@ -186,6 +186,32 @@ enum {
-- 		(MICRON_CASL_165 << 4) | (MICRON_SIL_165 << 3) | \
-- 		(MICRON_BL_165))
-- 
--+/* Micron part (200MHz optimized) 5 ns */
--+#define MICRON_TDAL_200		6
--+#define MICRON_TDPL_200		3
--+#define MICRON_TRRD_200		2
--+#define MICRON_TRCD_200		3
--+#define MICRON_TRP_200		3
--+#define MICRON_TRAS_200		8
--+#define MICRON_TRC_200		11
--+#define MICRON_TRFC_200		15
--+#define MICRON_V_ACTIMA_200	\
--+		ACTIM_CTRLA(MICRON_TRFC_200, MICRON_TRC_200,		\
--+				MICRON_TRAS_200, MICRON_TRP_200,	\
--+				MICRON_TRCD_200, MICRON_TRRD_200,	\
--+				MICRON_TDPL_200, MICRON_TDAL_200)
--+
--+#define MICRON_TWTR_200		2
--+#define MICRON_TCKE_200		4
--+#define MICRON_TXP_200		2
--+#define MICRON_XSR_200		23
--+#define MICRON_V_ACTIMB_200	\
--+		ACTIM_CTRLB(MICRON_TWTR_200, MICRON_TCKE_200,	\
--+				MICRON_TXP_200,	MICRON_XSR_200)
--+
--+#define MICRON_RASWIDTH_200	0x3
--+#define MICRON_V_MCFG_200(size)	MCFG((size), MICRON_RASWIDTH_200)
--+
-- /* NUMONYX part of IGEP v2 (165MHz optimized) 6.06ns */
-- #define NUMONYX_TDAL_165	6	/* Twr/Tck + Trp/tck		*/
-- 					/* 15/6 + 18/6 = 5.5 -> 6	*/
--@@ -212,6 +238,9 @@ enum {
-- 		ACTIM_CTRLB(NUMONYX_TWTR_165, NUMONYX_TCKE_165,	\
-- 				NUMONYX_TXP_165, NUMONYX_XSR_165)
-- 
--+#define NUMONYX_RASWIDTH_165		0x4
--+#define NUMONYX_V_MCFG_165(size)	MCFG((size), NUMONYX_RASWIDTH_165)
--+
-- /*
--  * GPMC settings -
--  * Definitions is as per the following format
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 9482c5e..6a457cb 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -1,5 +1,5 @@
-- /*
--- * (C) Copyright 2004-2008
--+ * (C) Copyright 2004-2011
--  * Texas Instruments, <www.ti.com>
--  *
--  * Author :
--@@ -34,9 +34,11 @@
-- #include <status_led.h>
-- #endif
-- #include <twl4030.h>
--+#include <linux/mtd/nand.h>
-- #include <asm/io.h>
-- #include <asm/arch/mmc_host_def.h>
-- #include <asm/arch/mux.h>
--+#include <asm/arch/mem.h>
-- #include <asm/arch/sys_proto.h>
-- #include <asm/gpio.h>
-- #include <asm/mach-types.h>
--@@ -135,6 +137,69 @@ int get_board_revision(void)
-- 	return revision;
-- }
-- 
--+#ifdef CONFIG_SPL_BUILD
--+/*
--+ * Routine: get_board_mem_timings
--+ * Description: If we use SPL then there is no x-loader nor config header
--+ * so we have to setup the DDR timings ourself on both banks.
--+ */
--+void get_board_mem_timings(u32 *mcfg, u32 *ctrla, u32 *ctrlb, u32 *rfr_ctrl,
--+		u32 *mr)
--+{
--+	int pop_mfr, pop_id;
--+
--+	/*
--+	 * We need to identify what PoP memory is on the board so that
--+	 * we know what timings to use.  If we can't identify it then
--+	 * we know it's an xM.  To map the ID values please see nand_ids.c
--+	 */
--+	identify_nand_chip(&pop_mfr, &pop_id);
--+
--+	*mr = MICRON_V_MR_165;
--+	switch (get_board_revision()) {
--+	case REVISION_C4:
--+		if (pop_mfr == NAND_MFR_STMICRO && pop_id == 0xba) {
--+			/* 512MB DDR */
--+			*mcfg = NUMONYX_V_MCFG_165(512 << 20);
--+			*ctrla = NUMONYX_V_ACTIMA_165;
--+			*ctrlb = NUMONYX_V_ACTIMB_165;
--+			*rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_165MHz;
--+			break;
--+		} else if (pop_mfr == NAND_MFR_MICRON && pop_id == 0xbc) {
--+			/* Beagleboard Rev C5, 256MB DDR */
--+			*mcfg = MICRON_V_MCFG_200(256 << 20);
--+			*ctrla = MICRON_V_ACTIMA_200;
--+			*ctrlb = MICRON_V_ACTIMB_200;
--+			*rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_200MHz;
--+			break;
--+		}
--+	case REVISION_XM_A:
--+	case REVISION_XM_B:
--+	case REVISION_XM_C:
--+		if (pop_mfr == 0) {
--+			/* 256MB DDR */
--+			*mcfg = MICRON_V_MCFG_200(256 << 20);
--+			*ctrla = MICRON_V_ACTIMA_200;
--+			*ctrlb = MICRON_V_ACTIMB_200;
--+			*rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_200MHz;
--+		} else {
--+			/* 512MB DDR */
--+			*mcfg = NUMONYX_V_MCFG_165(512 << 20);
--+			*ctrla = NUMONYX_V_ACTIMA_165;
--+			*ctrlb = NUMONYX_V_ACTIMB_165;
--+			*rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_165MHz;
--+		}
--+		break;
--+	default:
--+		/* Assume 128MB and Micron/165MHz timings to be safe */
--+		*mcfg = MICRON_V_MCFG_165(128 << 20);
--+		*ctrla = MICRON_V_ACTIMA_165;
--+		*ctrlb = MICRON_V_ACTIMB_165;
--+		*rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_165MHz;
--+	}
--+}
--+#endif
--+
-- /*
--  * Routine: get_expansion_id
--  * Description: This function checks for expansion board by checking I2C
--@@ -367,7 +432,7 @@ void set_muxconf_regs(void)
-- 	MUX_BEAGLE();
-- }
-- 
---#ifdef CONFIG_GENERIC_MMC
--+#if defined(CONFIG_GENERIC_MMC) && !defined(CONFIG_SPL_BUILD)
-- int board_mmc_init(bd_t *bis)
-- {
-- 	omap_mmc_init(0);
--@@ -476,6 +541,7 @@ int ehci_hcd_init(void)
-- 
-- #endif /* CONFIG_USB_EHCI */
-- 
--+#ifndef CONFIG_SPL_BUILD
-- /*
--  * This command returns the status of the user button on beagle xM
--  * Input - none
--@@ -528,3 +594,4 @@ U_BOOT_CMD(
-- 	"Return the status of the BeagleBoard USER button",
-- 	""
-- );
--+#endif
--diff --git a/board/ti/beagle/config.mk b/board/ti/beagle/config.mk
--deleted file mode 100644
--index cf055db..0000000
----- a/board/ti/beagle/config.mk
--+++ /dev/null
--@@ -1,33 +0,0 @@
---#
---# (C) Copyright 2006
---# Texas Instruments, <www.ti.com>
---#
---# Beagle Board uses OMAP3 (ARM-CortexA8) cpu
---# see http://www.ti.com/ for more information on Texas Instruments
---#
---# See file CREDITS for list of people who contributed to this
---# project.
---#
---# This program is free software; you can redistribute it and/or
---# modify it under the terms of the GNU General Public License as
---# published by the Free Software Foundation; either version 2 of
---# the License, or (at your option) any later version.
---#
---# This program is distributed in the hope that it will be useful,
---# but WITHOUT ANY WARRANTY; without even the implied warranty of
---# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
---# GNU General Public License for more details.
---#
---# You should have received a copy of the GNU General Public License
---# along with this program; if not, write to the Free Software
---# Foundation, Inc., 59 Temple Place, Suite 330, Boston,
---# MA 02111-1307 USA
---#
---# Physical Address:
---# 8000'0000 (bank0)
---# A000/0000 (bank1)
---# Linux-Kernel is expected to be at 8000'8000, entry 8000'8000
---# (mem base + reserved)
---
---# For use with external or internal boots.
---CONFIG_SYS_TEXT_BASE = 0x80008000
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 15e40c5..941ec38 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -111,9 +111,6 @@
-- #define STATUS_LED_BOOT			STATUS_LED_BIT
-- #define STATUS_LED_GREEN		STATUS_LED_BIT1
-- 
---/* DDR - I use Micron DDR */
---#define CONFIG_OMAP3_MICRON_DDR		1
---
-- /* Enable Multi Bus support for I2C */
-- #define CONFIG_I2C_MULTI_BUS		1
-- 
--@@ -347,7 +344,6 @@
--  */
-- #define CONFIG_NR_DRAM_BANKS	2	/* CS1 may or may not be populated */
-- #define PHYS_SDRAM_1		OMAP34XX_SDRC_CS0
---#define PHYS_SDRAM_1_SIZE	(32 << 20)	/* at least 32 MiB */
-- #define PHYS_SDRAM_2		OMAP34XX_SDRC_CS1
-- 
-- /* SDRAM Bank Allocation method */
--@@ -390,4 +386,59 @@
-- 
-- #define CONFIG_OMAP3_SPI
-- 
--+/* Defines for SPL */
--+#define CONFIG_SPL
--+#define CONFIG_SPL_NAND_SIMPLE
--+#define CONFIG_SPL_TEXT_BASE		0x40200800
--+#define CONFIG_SPL_MAX_SIZE		(45 * 1024)
--+#define CONFIG_SPL_STACK		LOW_LEVEL_SRAM_STACK
--+
--+#define CONFIG_SPL_BSS_START_ADDR	0x80000000
--+#define CONFIG_SPL_BSS_MAX_SIZE		0x80000		/* 512 KB */
--+
--+#define CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR	0x300 /* address 0x60000 */
--+#define CONFIG_SYS_U_BOOT_MAX_SIZE_SECTORS	0x200 /* 256 KB */
--+#define CONFIG_SYS_MMC_SD_FAT_BOOT_PARTITION	1
--+#define CONFIG_SPL_FAT_LOAD_PAYLOAD_NAME	"u-boot.img"
--+
--+#define CONFIG_SPL_LIBCOMMON_SUPPORT
--+#define CONFIG_SPL_LIBDISK_SUPPORT
--+#define CONFIG_SPL_I2C_SUPPORT
--+#define CONFIG_SPL_LIBGENERIC_SUPPORT
--+#define CONFIG_SPL_MMC_SUPPORT
--+#define CONFIG_SPL_FAT_SUPPORT
--+#define CONFIG_SPL_SERIAL_SUPPORT
--+#define CONFIG_SPL_NAND_SUPPORT
--+#define CONFIG_SPL_POWER_SUPPORT
--+#define CONFIG_SPL_OMAP3_ID_NAND
--+#define CONFIG_SPL_LDSCRIPT		"$(CPUDIR)/omap-common/u-boot-spl.lds"
--+
--+/* NAND boot config */
--+#define CONFIG_SYS_NAND_5_ADDR_CYCLE
--+#define CONFIG_SYS_NAND_PAGE_COUNT	64
--+#define CONFIG_SYS_NAND_PAGE_SIZE	2048
--+#define CONFIG_SYS_NAND_OOBSIZE		64
--+#define CONFIG_SYS_NAND_BLOCK_SIZE	(128*1024)
--+#define CONFIG_SYS_NAND_BAD_BLOCK_POS	0
--+#define CONFIG_SYS_NAND_ECCPOS		{2, 3, 4, 5, 6, 7, 8, 9,\
--+						10, 11, 12, 13}
--+#define CONFIG_SYS_NAND_ECCSIZE		512
--+#define CONFIG_SYS_NAND_ECCBYTES	3
--+#define CONFIG_SYS_NAND_ECCSTEPS	(CONFIG_SYS_NAND_PAGE_SIZE / \
--+						CONFIG_SYS_NAND_ECCSIZE)
--+#define CONFIG_SYS_NAND_ECCTOTAL	(CONFIG_SYS_NAND_ECCBYTES * \
--+						CONFIG_SYS_NAND_ECCSTEPS)
--+#define CONFIG_SYS_NAND_U_BOOT_START	CONFIG_SYS_TEXT_BASE
--+#define CONFIG_SYS_NAND_U_BOOT_OFFS	0x80000
--+
--+/*
--+ * 1MB into the SDRAM to allow for SPL's bss at the beginning of SDRAM
--+ * 64 bytes before this address should be set aside for u-boot.img's
--+ * header. That is 0x800FFFC0--0x80100000 should not be used for any
--+ * other needs.
--+ */
--+#define CONFIG_SYS_TEXT_BASE		0x80100000
--+#define CONFIG_SYS_SPL_MALLOC_START	0x80208000
--+#define CONFIG_SYS_SPL_MALLOC_SIZE	0x100000
--+
-- #endif /* __CONFIG_H */
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0012-OMAP3-Add-SPL-support-to-omap3_evm.patch b/recipes-bsp/u-boot/u-boot/2011.09/0012-OMAP3-Add-SPL-support-to-omap3_evm.patch
-deleted file mode 100644
-index 7121ff7..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0012-OMAP3-Add-SPL-support-to-omap3_evm.patch
-+++ /dev/null
-@@ -1,319 +0,0 @@
--From a2985d6ef29ee6eb09ad1b40cf09f955549e66e2 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:48:09 +0000
--Subject: [PATCH 12/21] OMAP3: Add SPL support to omap3_evm
--
--Add Hynix 200MHz timing information to <asm/arch-omap3/mem.h>.
--This also changes CONFIG_SYS_TEXT_BASE to 0x80100000.
--
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/include/asm/arch-omap3/mem.h  |   26 ++++++++++++++++++++
-- board/ti/evm/config.mk                 |   33 -------------------------
-- board/ti/evm/evm.c                     |   41 ++++++++++++++++++++++++++++++-
-- include/configs/omap3_evm.h            |   27 +++++++++++++++++++++
-- include/configs/omap3_evm_common.h     |   30 +++++++++++++++++++++-
-- include/configs/omap3_evm_quick_mmc.h  |   10 +++++++
-- include/configs/omap3_evm_quick_nand.h |   22 +++++++++++++++++
-- 7 files changed, 152 insertions(+), 37 deletions(-)
-- delete mode 100644 board/ti/evm/config.mk
--
--diff --git a/arch/arm/include/asm/arch-omap3/mem.h b/arch/arm/include/asm/arch-omap3/mem.h
--index 4ea5f74..5fd02d4 100644
----- a/arch/arm/include/asm/arch-omap3/mem.h
--+++ b/arch/arm/include/asm/arch-omap3/mem.h
--@@ -123,6 +123,32 @@ enum {
-- 		V_MCFG_BANKALLOCATION_RBC |			\
-- 		V_MCFG_B32NOT16_32 | V_MCFG_DEEPPD_EN | V_MCFG_RAMTYPE_DDR
-- 
--+/* Hynix part of AM/DM37xEVM (200MHz optimized) */
--+#define HYNIX_TDAL_200		6
--+#define HYNIX_TDPL_200		3
--+#define HYNIX_TRRD_200		2
--+#define HYNIX_TRCD_200		4
--+#define HYNIX_TRP_200		3
--+#define HYNIX_TRAS_200		8
--+#define HYNIX_TRC_200		11
--+#define HYNIX_TRFC_200		18
--+#define HYNIX_V_ACTIMA_200	\
--+		ACTIM_CTRLA(HYNIX_TRFC_200, HYNIX_TRC_200,	\
--+				HYNIX_TRAS_200, HYNIX_TRP_200,	\
--+				HYNIX_TRCD_200, HYNIX_TRRD_200,	\
--+				HYNIX_TDPL_200, HYNIX_TDAL_200)
--+
--+#define HYNIX_TWTR_200		2
--+#define HYNIX_TCKE_200		1
--+#define HYNIX_TXP_200		1
--+#define HYNIX_XSR_200		28
--+#define HYNIX_V_ACTIMB_200	\
--+		ACTIM_CTRLB(HYNIX_TWTR_200, HYNIX_TCKE_200,	\
--+				HYNIX_TXP_200, HYNIX_XSR_200)
--+
--+#define HYNIX_RASWIDTH_200	0x3
--+#define HYNIX_V_MCFG_200(size)	MCFG((size), HYNIX_RASWIDTH_200)
--+
-- /* Infineon part of 3430SDP (165MHz optimized) 6.06ns */
-- #define INFINEON_TDAL_165	6	/* Twr/Tck + Trp/tck		*/
-- 					/* 15/6 + 18/6 = 5.5 -> 6	*/
--diff --git a/board/ti/evm/config.mk b/board/ti/evm/config.mk
--deleted file mode 100644
--index d173eef..0000000
----- a/board/ti/evm/config.mk
--+++ /dev/null
--@@ -1,33 +0,0 @@
---#
---# (C) Copyright 2006 - 2008
---# Texas Instruments, <www.ti.com>
---#
---# EVM uses OMAP3 (ARM-CortexA8) cpu
---# see http://www.ti.com/ for more information on Texas Instruments
---#
---# See file CREDITS for list of people who contributed to this
---# project.
---#
---# This program is free software; you can redistribute it and/or
---# modify it under the terms of the GNU General Public License as
---# published by the Free Software Foundation; either version 2 of
---# the License, or (at your option) any later version.
---#
---# This program is distributed in the hope that it will be useful,
---# but WITHOUT ANY WARRANTY; without even the implied warranty of
---# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
---# GNU General Public License for more details.
---#
---# You should have received a copy of the GNU General Public License
---# along with this program; if not, write to the Free Software
---# Foundation, Inc., 59 Temple Place, Suite 330, Boston,
---# MA 02111-1307 USA
---#
---# Physical Address:
---# 8000'0000 (bank0)
---# A000/0000 (bank1)
---# Linux-Kernel is expected to be at 8000'8000, entry 8000'8000
---# (mem base + reserved)
---
---# For use with external or internal boots.
---CONFIG_SYS_TEXT_BASE = 0x80008000
--diff --git a/board/ti/evm/evm.c b/board/ti/evm/evm.c
--index 8c43463..8497aee 100644
----- a/board/ti/evm/evm.c
--+++ b/board/ti/evm/evm.c
--@@ -1,5 +1,5 @@
-- /*
--- * (C) Copyright 2004-2008
--+ * (C) Copyright 2004-2011
--  * Texas Instruments, <www.ti.com>
--  *
--  * Author :
--@@ -37,6 +37,7 @@
-- #include <asm/gpio.h>
-- #include <i2c.h>
-- #include <asm/mach-types.h>
--+#include <linux/mtd/nand.h>
-- #include "evm.h"
-- 
-- #define OMAP3EVM_GPIO_ETH_RST_GEN1		64
--@@ -119,6 +120,42 @@ int board_init(void)
-- 	return 0;
-- }
-- 
--+#ifdef CONFIG_SPL_BUILD
--+/*
--+ * Routine: get_board_mem_timings
--+ * Description: If we use SPL then there is no x-loader nor config header
--+ * so we have to setup the DDR timings ourself on the first bank.  This
--+ * provides the timing values back to the function that configures
--+ * the memory.
--+ */
--+void get_board_mem_timings(u32 *mcfg, u32 *ctrla, u32 *ctrlb, u32 *rfr_ctrl,
--+		u32 *mr)
--+{
--+	int pop_mfr, pop_id;
--+
--+	/*
--+	 * We need to identify what PoP memory is on the board so that
--+	 * we know what timings to use.  To map the ID values please see
--+	 * nand_ids.c
--+	 */
--+	identify_nand_chip(&pop_mfr, &pop_id);
--+
--+	if (pop_mfr == NAND_MFR_HYNIX && pop_id == 0xbc) {
--+		/* 256MB DDR */
--+		*mcfg = HYNIX_V_MCFG_200(256 << 20);
--+		*ctrla = HYNIX_V_ACTIMA_200;
--+		*ctrlb = HYNIX_V_ACTIMB_200;
--+	} else {
--+		/* 128MB DDR */
--+		*mcfg = MICRON_V_MCFG_165(128 << 20);
--+		*ctrla = MICRON_V_ACTIMA_165;
--+		*ctrlb = MICRON_V_ACTIMB_165;
--+	}
--+	*rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_165MHz;
--+	*mr = MICRON_V_MR_165;
--+}
--+#endif
--+
-- /*
--  * Routine: misc_init_r
--  * Description: Init ethernet (done here so udelay works)
--@@ -238,7 +275,7 @@ int board_eth_init(bd_t *bis)
-- }
-- #endif /* CONFIG_CMD_NET */
-- 
---#ifdef CONFIG_GENERIC_MMC
--+#if defined(CONFIG_GENERIC_MMC) && !defined(CONFIG_SPL_BUILD)
-- int board_mmc_init(bd_t *bis)
-- {
-- 	omap_mmc_init(0);
--diff --git a/include/configs/omap3_evm.h b/include/configs/omap3_evm.h
--index 47ec39f..dc611ca 100644
----- a/include/configs/omap3_evm.h
--+++ b/include/configs/omap3_evm.h
--@@ -84,6 +84,13 @@
-- #define CONFIG_GENERIC_MMC
-- #define CONFIG_OMAP_HSMMC
-- #define CONFIG_DOS_PARTITION
--+/* SPL */
--+#define CONFIG_SPL_MMC_SUPPORT
--+#define CONFIG_SPL_FAT_SUPPORT
--+#define CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR	0x300 /* address 0x60000 */
--+#define CONFIG_SYS_U_BOOT_MAX_SIZE_SECTORS	0x200 /* 256 KB */
--+#define CONFIG_SYS_MMC_SD_FAT_BOOT_PARTITION	1
--+#define CONFIG_SPL_FAT_LOAD_PAYLOAD_NAME	"u-boot.img"
-- 
-- /* USB
--  *
--@@ -94,6 +101,26 @@
-- #define CONFIG_MUSB_HCD
-- /* #define CONFIG_MUSB_UDC */
-- 
--+/* NAND SPL */
--+#define CONFIG_SPL_NAND_SIMPLE
--+#define CONFIG_SPL_NAND_SUPPORT
--+#define CONFIG_SYS_NAND_5_ADDR_CYCLE
--+#define CONFIG_SYS_NAND_PAGE_COUNT	64
--+#define CONFIG_SYS_NAND_PAGE_SIZE	2048
--+#define CONFIG_SYS_NAND_OOBSIZE		64
--+#define CONFIG_SYS_NAND_BLOCK_SIZE	(128*1024)
--+#define CONFIG_SYS_NAND_BAD_BLOCK_POS	0
--+#define CONFIG_SYS_NAND_ECCPOS		{2, 3, 4, 5, 6, 7, 8, 9,\
--+						10, 11, 12, 13}
--+#define CONFIG_SYS_NAND_ECCSIZE		512
--+#define CONFIG_SYS_NAND_ECCBYTES	3
--+#define CONFIG_SYS_NAND_ECCSTEPS	(CONFIG_SYS_NAND_PAGE_SIZE / \
--+						CONFIG_SYS_NAND_ECCSIZE)
--+#define CONFIG_SYS_NAND_ECCTOTAL       (CONFIG_SYS_NAND_ECCBYTES * \
--+						CONFIG_SYS_NAND_ECCSTEPS)
--+#define CONFIG_SYS_NAND_U_BOOT_START   CONFIG_SYS_TEXT_BASE
--+#define CONFIG_SYS_NAND_U_BOOT_OFFS	0x80000
--+
-- /* -----------------------------------------------------------------------------
--  * Include common board configuration
--  * -----------------------------------------------------------------------------
--diff --git a/include/configs/omap3_evm_common.h b/include/configs/omap3_evm_common.h
--index 54aa7a7..a2aeb76 100644
----- a/include/configs/omap3_evm_common.h
--+++ b/include/configs/omap3_evm_common.h
--@@ -27,7 +27,6 @@
-- #define CONFIG_SDRC			/* The chip has SDRC controller */
-- 
-- #define CONFIG_OMAP3_EVM		/* This is a OMAP3 EVM */
---#define CONFIG_OMAP3_MICRON_DDR		/* with MICRON DDR part */
-- #define CONFIG_TWL4030_POWER		/* with TWL4030 PMIC */
-- 
-- #undef CONFIG_USE_IRQ			/* no support for IRQs */
--@@ -71,7 +70,6 @@
--  */
-- #define CONFIG_NR_DRAM_BANKS		2
-- #define PHYS_SDRAM_1			OMAP34XX_SDRC_CS0
---#define PHYS_SDRAM_1_SIZE		(32 << 20)
-- #define PHYS_SDRAM_2			OMAP34XX_SDRC_CS1
-- 
-- /* SDRAM Bank Allocation method */
--@@ -289,4 +287,32 @@
-- /* Uncomment to define the board revision statically */
-- /* #define CONFIG_STATIC_BOARD_REV	OMAP3EVM_BOARD_GEN_2 */
-- 
--+/* Defines for SPL */
--+#define CONFIG_SPL
--+#define CONFIG_SPL_TEXT_BASE		0x40200800
--+#define CONFIG_SPL_MAX_SIZE		(45 * 1024)	/* 45 KB */
--+#define CONFIG_SPL_STACK		LOW_LEVEL_SRAM_STACK
--+
--+#define CONFIG_SPL_BSS_START_ADDR	0x80000000
--+#define CONFIG_SPL_BSS_MAX_SIZE		0x80000		/* 512 KB */
--+
--+#define CONFIG_SPL_LIBCOMMON_SUPPORT
--+#define CONFIG_SPL_LIBDISK_SUPPORT
--+#define CONFIG_SPL_I2C_SUPPORT
--+#define CONFIG_SPL_LIBGENERIC_SUPPORT
--+#define CONFIG_SPL_SERIAL_SUPPORT
--+#define CONFIG_SPL_POWER_SUPPORT
--+#define CONFIG_SPL_OMAP3_ID_NAND
--+#define CONFIG_SPL_LDSCRIPT		"$(CPUDIR)/omap-common/u-boot-spl.lds"
--+
--+/*
--+ * 1MB into the SDRAM to allow for SPL's bss at the beginning of SDRAM
--+ * 64 bytes before this address should be set aside for u-boot.img's
--+ * header. That is 0x800FFFC0--0x80100000 should not be used for any
--+ * other needs.
--+ */
--+#define CONFIG_SYS_TEXT_BASE		0x80100000
--+#define CONFIG_SYS_SPL_MALLOC_START	0x80208000
--+#define CONFIG_SYS_SPL_MALLOC_SIZE	0x100000
--+
-- #endif /* __OMAP3_EVM_COMMON_H */
--diff --git a/include/configs/omap3_evm_quick_mmc.h b/include/configs/omap3_evm_quick_mmc.h
--index 691e4c2..912da7d 100644
----- a/include/configs/omap3_evm_quick_mmc.h
--+++ b/include/configs/omap3_evm_quick_mmc.h
--@@ -88,4 +88,14 @@
-- 	"root=/dev/mmcblk0p2 rw "	\
-- 	"rootfstype=ext3 rootwait"
-- 
--+/*
--+ * SPL
--+ */
--+#define CONFIG_SPL_MMC_SUPPORT
--+#define CONFIG_SPL_FAT_SUPPORT
--+#define CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR	0x300 /* address 0x60000 */
--+#define CONFIG_SYS_U_BOOT_MAX_SIZE_SECTORS	0x200 /* 256 KB */
--+#define CONFIG_SYS_MMC_SD_FAT_BOOT_PARTITION	1
--+#define CONFIG_SPL_FAT_LOAD_PAYLOAD_NAME	"u-boot.img"
--+
-- #endif /* __OMAP3_EVM_QUICK_MMC_H */
--diff --git a/include/configs/omap3_evm_quick_nand.h b/include/configs/omap3_evm_quick_nand.h
--index 2d18314..2f879c0 100644
----- a/include/configs/omap3_evm_quick_nand.h
--+++ b/include/configs/omap3_evm_quick_nand.h
--@@ -76,4 +76,26 @@
-- 	"root=/dev/mtdblock4 rw "	\
-- 	"rootfstype=jffs2 "
-- 
--+/*
--+ * SPL
--+ */
--+#define CONFIG_SPL_NAND_SIMPLE
--+#define CONFIG_SPL_NAND_SUPPORT
--+#define CONFIG_SYS_NAND_5_ADDR_CYCLE
--+#define CONFIG_SYS_NAND_PAGE_COUNT	64
--+#define CONFIG_SYS_NAND_PAGE_SIZE	2048
--+#define CONFIG_SYS_NAND_OOBSIZE		64
--+#define CONFIG_SYS_NAND_BLOCK_SIZE	(128*1024)
--+#define CONFIG_SYS_NAND_BAD_BLOCK_POS	0
--+#define CONFIG_SYS_NAND_ECCPOS		{2, 3, 4, 5, 6, 7, 8, 9,\
--+						10, 11, 12, 13}
--+#define CONFIG_SYS_NAND_ECCSIZE		512
--+#define CONFIG_SYS_NAND_ECCBYTES	3
--+#define CONFIG_SYS_NAND_ECCSTEPS	(CONFIG_SYS_NAND_PAGE_SIZE / \
--+						CONFIG_SYS_NAND_ECCSIZE)
--+#define CONFIG_SYS_NAND_ECCTOTAL       (CONFIG_SYS_NAND_ECCBYTES * \
--+						CONFIG_SYS_NAND_ECCSTEPS)
--+#define CONFIG_SYS_NAND_U_BOOT_START   CONFIG_SYS_TEXT_BASE
--+#define CONFIG_SYS_NAND_U_BOOT_OFFS	0x80000
--+
-- #endif /* __OMAP3_EVM_QUICK_NAND_H */
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0013-AM3517-Add-SPL-support.patch b/recipes-bsp/u-boot/u-boot/2011.09/0013-AM3517-Add-SPL-support.patch
-deleted file mode 100644
-index cb9c1b2..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0013-AM3517-Add-SPL-support.patch
-+++ /dev/null
-@@ -1,150 +0,0 @@
--From aff5a412e0353407420ed63246ea630988ebf469 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:48:10 +0000
--Subject: [PATCH 13/21] AM3517: Add SPL support
--
--The only change of note is that we move from 0x80008000 to 0x80100000
--for CONFIG_SYS_TEXT_BASE
--
--Cc: Vaibhav Hiremath <hvaibhav@ti.com>
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- board/logicpd/am3517evm/am3517evm.c |    2 +-
-- board/logicpd/am3517evm/config.mk   |   30 ------------------
-- include/configs/am3517_evm.h        |   57 +++++++++++++++++++++++++++++++++-
-- 3 files changed, 56 insertions(+), 33 deletions(-)
-- delete mode 100644 board/logicpd/am3517evm/config.mk
--
--diff --git a/board/logicpd/am3517evm/am3517evm.c b/board/logicpd/am3517evm/am3517evm.c
--index c0a006a..0a105bf 100644
----- a/board/logicpd/am3517evm/am3517evm.c
--+++ b/board/logicpd/am3517evm/am3517evm.c
--@@ -76,7 +76,7 @@ void set_muxconf_regs(void)
-- 	MUX_AM3517EVM();
-- }
-- 
---#ifdef CONFIG_GENERIC_MMC
--+#if defined(CONFIG_GENERIC_MMC) && !defined(CONFIG_SPL_BUILD)
-- int board_mmc_init(bd_t *bis)
-- {
--        omap_mmc_init(0);
--diff --git a/board/logicpd/am3517evm/config.mk b/board/logicpd/am3517evm/config.mk
--deleted file mode 100644
--index 71ec5d0..0000000
----- a/board/logicpd/am3517evm/config.mk
--+++ /dev/null
--@@ -1,30 +0,0 @@
---#
---# Author: Vaibhav Hiremath <hvaibhav@ti.com>
---#
---# Based on ti/evm/config.mk
---#
---# Copyright (C) 2010
---# Texas Instruments Incorporated - http://www.ti.com/
---#
---# This program is free software; you can redistribute it and/or modify
---# it under the terms of the GNU General Public License as published by
---# the Free Software Foundation; either version 2 of the License, or
---# (at your option) any later version.
---#
---# This program is distributed in the hope that it will be useful,
---# but WITHOUT ANY WARRANTY; without even the implied warranty of
---# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
---# GNU General Public License for more details.
---#
---# You should have received a copy of the GNU General Public License
---# along with this program; if not, write to the Free Software
---# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
---#
---# Physical Address:
---# 8000'0000 (bank0)
---# A000/0000 (bank1)
---# Linux-Kernel is expected to be at 8000'8000, entry 8000'8000
---# (mem base + reserved)
---
---# For use with external or internal boots.
---CONFIG_SYS_TEXT_BASE = 0x80008000
--diff --git a/include/configs/am3517_evm.h b/include/configs/am3517_evm.h
--index 1c70b9d..4a1c72c 100644
----- a/include/configs/am3517_evm.h
--+++ b/include/configs/am3517_evm.h
--@@ -63,7 +63,6 @@
-- /*
--  * DDR related
--  */
---#define CONFIG_OMAP3_MICRON_DDR		1	/* Micron DDR */
-- #define CONFIG_SYS_CS0_SIZE		(256 * 1024 * 1024)
-- 
-- /*
--@@ -273,7 +272,6 @@
--  */
-- #define CONFIG_NR_DRAM_BANKS	2	/* CS1 may or may not be populated */
-- #define PHYS_SDRAM_1		OMAP34XX_SDRC_CS0
---#define PHYS_SDRAM_1_SIZE	(32 << 20)	/* at least 32 MiB */
-- #define PHYS_SDRAM_2		OMAP34XX_SDRC_CS1
-- 
-- /* SDRAM Bank Allocation method */
--@@ -331,4 +329,59 @@
-- #define CONFIG_SYS_INIT_SP_ADDR		(CONFIG_SYS_INIT_RAM_ADDR + \
-- 					 CONFIG_SYS_INIT_RAM_SIZE - \
-- 					 GENERATED_GBL_DATA_SIZE)
--+
--+/* Defines for SPL */
--+#define CONFIG_SPL
--+#define CONFIG_SPL_NAND_SIMPLE
--+#define CONFIG_SPL_TEXT_BASE		0x40200800
--+#define CONFIG_SPL_MAX_SIZE		(45 * 1024)
--+#define CONFIG_SPL_STACK		LOW_LEVEL_SRAM_STACK
--+
--+#define CONFIG_SPL_BSS_START_ADDR	0x80000000
--+#define CONFIG_SPL_BSS_MAX_SIZE		0x80000		/* 512 KB */
--+
--+#define CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR	0x300 /* address 0x60000 */
--+#define CONFIG_SYS_U_BOOT_MAX_SIZE_SECTORS	0x200 /* 256 KB */
--+#define CONFIG_SYS_MMC_SD_FAT_BOOT_PARTITION	1
--+#define CONFIG_SPL_FAT_LOAD_PAYLOAD_NAME	"u-boot.img"
--+
--+#define CONFIG_SPL_LIBCOMMON_SUPPORT
--+#define CONFIG_SPL_LIBDISK_SUPPORT
--+#define CONFIG_SPL_I2C_SUPPORT
--+#define CONFIG_SPL_LIBGENERIC_SUPPORT
--+#define CONFIG_SPL_MMC_SUPPORT
--+#define CONFIG_SPL_FAT_SUPPORT
--+#define CONFIG_SPL_SERIAL_SUPPORT
--+#define CONFIG_SPL_NAND_SUPPORT
--+#define CONFIG_SPL_POWER_SUPPORT
--+#define CONFIG_SPL_LDSCRIPT		"$(CPUDIR)/omap-common/u-boot-spl.lds"
--+
--+/* NAND boot config */
--+#define CONFIG_SYS_NAND_5_ADDR_CYCLE
--+#define CONFIG_SYS_NAND_PAGE_COUNT	64
--+#define CONFIG_SYS_NAND_PAGE_SIZE	2048
--+#define CONFIG_SYS_NAND_OOBSIZE		64
--+#define CONFIG_SYS_NAND_BLOCK_SIZE	(128*1024)
--+#define CONFIG_SYS_NAND_BAD_BLOCK_POS	NAND_LARGE_BADBLOCK_POS
--+#define CONFIG_SYS_NAND_ECCPOS		{2, 3, 4, 5, 6, 7, 8, 9,\
--+						10, 11, 12, 13}
--+#define CONFIG_SYS_NAND_ECCSIZE		512
--+#define CONFIG_SYS_NAND_ECCBYTES	3
--+#define CONFIG_SYS_NAND_ECCSTEPS	(CONFIG_SYS_NAND_PAGE_SIZE / \
--+						CONFIG_SYS_NAND_ECCSIZE)
--+#define CONFIG_SYS_NAND_ECCTOTAL	(CONFIG_SYS_NAND_ECCBYTES * \
--+						CONFIG_SYS_NAND_ECCSTEPS)
--+#define CONFIG_SYS_NAND_U_BOOT_START	CONFIG_SYS_TEXT_BASE
--+#define CONFIG_SYS_NAND_U_BOOT_OFFS	0x80000
--+
--+/*
--+ * 1MB into the SDRAM to allow for SPL's bss at the beginning of SDRAM
--+ * 64 bytes before this address should be set aside for u-boot.img's
--+ * header. That is 0x800FFFC0--0x80100000 should not be used for any
--+ * other needs.
--+ */
--+#define CONFIG_SYS_TEXT_BASE		0x80100000
--+#define CONFIG_SYS_SPL_MALLOC_START	0x80208000
--+#define CONFIG_SYS_SPL_MALLOC_SIZE	0x100000
--+
-- #endif /* __CONFIG_H */
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0014-AM3517-CraneBoard-Add-SPL-support.patch b/recipes-bsp/u-boot/u-boot/2011.09/0014-AM3517-CraneBoard-Add-SPL-support.patch
-deleted file mode 100644
-index 22a3e71..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0014-AM3517-CraneBoard-Add-SPL-support.patch
-+++ /dev/null
-@@ -1,150 +0,0 @@
--From 04567bb3a9e3b8aefe2a58c339c592c4b62b79d3 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Fri, 18 Nov 2011 12:48:11 +0000
--Subject: [PATCH 14/21] AM3517 CraneBoard: Add SPL support
--
--The only change of note is that we move from 0x80008000 to 0x80100000
--for CONFIG_SYS_TEXT_BASE
--
--Cc: Nagendra T S <nagendra@mistralsolutions.com>
--Tested-by: Koen Kooi <k-kooi@ti.com>
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- board/ti/am3517crane/am3517crane.c |    2 +-
-- board/ti/am3517crane/config.mk     |   29 ------------------
-- include/configs/am3517_crane.h     |   57 ++++++++++++++++++++++++++++++++++-
-- 3 files changed, 56 insertions(+), 32 deletions(-)
-- delete mode 100644 board/ti/am3517crane/config.mk
--
--diff --git a/board/ti/am3517crane/am3517crane.c b/board/ti/am3517crane/am3517crane.c
--index cd5683d..436645a 100644
----- a/board/ti/am3517crane/am3517crane.c
--+++ b/board/ti/am3517crane/am3517crane.c
--@@ -75,7 +75,7 @@ void set_muxconf_regs(void)
-- 	MUX_AM3517CRANE();
-- }
-- 
---#ifdef CONFIG_GENERIC_MMC
--+#if defined(CONFIG_GENERIC_MMC) && !defined(CONFIG_SPL_BUILD)
-- int board_mmc_init(bd_t *bis)
-- {
-- 	omap_mmc_init(0);
--diff --git a/board/ti/am3517crane/config.mk b/board/ti/am3517crane/config.mk
--deleted file mode 100644
--index c6a18b5..0000000
----- a/board/ti/am3517crane/config.mk
--+++ /dev/null
--@@ -1,29 +0,0 @@
---#
---# Author: Srinath R <srinath@mistralsolutions.com>
---#
---# Based on logicpd/am3517evm/config.mk
---#
---# Copyright (C) 2011 Mistral Solutions Pvt Ltd
---#
---# This program is free software; you can redistribute it and/or modify
---# it under the terms of the GNU General Public License as published by
---# the Free Software Foundation; either version 2 of the License, or
---# (at your option) any later version.
---#
---# This program is distributed in the hope that it will be useful,
---# but WITHOUT ANY WARRANTY; without even the implied warranty of
---# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
---# GNU General Public License for more details.
---#
---# You should have received a copy of the GNU General Public License
---# along with this program; if not, write to the Free Software
---# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
---#
---# Physical Address:
---# 8000'0000 (bank0)
---# A000/0000 (bank1)
---# Linux-Kernel is expected to be at 8000'8000, entry 8000'8000
---# (mem base + reserved)
---
---# For use with external or internal boots.
---CONFIG_SYS_TEXT_BASE = 0x80008000
--diff --git a/include/configs/am3517_crane.h b/include/configs/am3517_crane.h
--index 8842a18..68cbf37 100644
----- a/include/configs/am3517_crane.h
--+++ b/include/configs/am3517_crane.h
--@@ -64,7 +64,6 @@
-- /*
--  * DDR related
--  */
---#define CONFIG_OMAP3_MICRON_DDR		1	/* Micron DDR */
-- #define CONFIG_SYS_CS0_SIZE		(256 * 1024 * 1024)
-- 
-- /*
--@@ -274,7 +273,6 @@
--  */
-- #define CONFIG_NR_DRAM_BANKS	2	/* CS1 may or may not be populated */
-- #define PHYS_SDRAM_1		OMAP34XX_SDRC_CS0
---#define PHYS_SDRAM_1_SIZE	(32 << 20)	/* at least 32 MiB */
-- #define PHYS_SDRAM_2		OMAP34XX_SDRC_CS1
-- 
-- /* SDRAM Bank Allocation method */
--@@ -330,4 +328,59 @@
-- #define CONFIG_SYS_INIT_SP_ADDR		(CONFIG_SYS_INIT_RAM_ADDR + \
-- 					 CONFIG_SYS_INIT_RAM_SIZE - \
-- 					 GENERATED_GBL_DATA_SIZE)
--+
--+/* Defines for SPL */
--+#define CONFIG_SPL
--+#define CONFIG_SPL_NAND_SIMPLE
--+#define CONFIG_SPL_TEXT_BASE		0x40200800
--+#define CONFIG_SPL_MAX_SIZE		(45 * 1024)
--+#define CONFIG_SPL_STACK		LOW_LEVEL_SRAM_STACK
--+
--+#define CONFIG_SPL_BSS_START_ADDR	0x80000000
--+#define CONFIG_SPL_BSS_MAX_SIZE		0x80000		/* 512 KB */
--+
--+#define CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR	0x300 /* address 0x60000 */
--+#define CONFIG_SYS_U_BOOT_MAX_SIZE_SECTORS	0x200 /* 256 KB */
--+#define CONFIG_SYS_MMC_SD_FAT_BOOT_PARTITION	1
--+#define CONFIG_SPL_FAT_LOAD_PAYLOAD_NAME	"u-boot.img"
--+
--+#define CONFIG_SPL_LIBCOMMON_SUPPORT
--+#define CONFIG_SPL_LIBDISK_SUPPORT
--+#define CONFIG_SPL_I2C_SUPPORT
--+#define CONFIG_SPL_LIBGENERIC_SUPPORT
--+#define CONFIG_SPL_MMC_SUPPORT
--+#define CONFIG_SPL_FAT_SUPPORT
--+#define CONFIG_SPL_SERIAL_SUPPORT
--+#define CONFIG_SPL_NAND_SUPPORT
--+#define CONFIG_SPL_POWER_SUPPORT
--+#define CONFIG_SPL_LDSCRIPT		"$(CPUDIR)/omap-common/u-boot-spl.lds"
--+
--+/* NAND boot config */
--+#define CONFIG_SYS_NAND_5_ADDR_CYCLE
--+#define CONFIG_SYS_NAND_PAGE_COUNT	64
--+#define CONFIG_SYS_NAND_PAGE_SIZE	2048
--+#define CONFIG_SYS_NAND_OOBSIZE		64
--+#define CONFIG_SYS_NAND_BLOCK_SIZE	(128*1024)
--+#define CONFIG_SYS_NAND_BAD_BLOCK_POS	NAND_LARGE_BADBLOCK_POS
--+#define CONFIG_SYS_NAND_ECCPOS		{2, 3, 4, 5, 6, 7, 8, 9,\
--+						10, 11, 12, 13}
--+#define CONFIG_SYS_NAND_ECCSIZE		512
--+#define CONFIG_SYS_NAND_ECCBYTES	3
--+#define CONFIG_SYS_NAND_ECCSTEPS	(CONFIG_SYS_NAND_PAGE_SIZE / \
--+						CONFIG_SYS_NAND_ECCSIZE)
--+#define CONFIG_SYS_NAND_ECCTOTAL	(CONFIG_SYS_NAND_ECCBYTES * \
--+						CONFIG_SYS_NAND_ECCSTEPS)
--+#define CONFIG_SYS_NAND_U_BOOT_START	CONFIG_SYS_TEXT_BASE
--+#define CONFIG_SYS_NAND_U_BOOT_OFFS	0x80000
--+
--+/*
--+ * 1MB into the SDRAM to allow for SPL's bss at the beginning of SDRAM
--+ * 64 bytes before this address should be set aside for u-boot.img's
--+ * header. That is 0x800FFFC0--0x80100000 should not be used for any
--+ * other needs.
--+ */
--+#define CONFIG_SYS_TEXT_BASE		0x80100000
--+#define CONFIG_SYS_SPL_MALLOC_START	0x80208000
--+#define CONFIG_SYS_SPL_MALLOC_SIZE	0x100000
--+
-- #endif /* __CONFIG_H */
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0015-HACK-beagleboard-config-disable-cache-for-USB.patch b/recipes-bsp/u-boot/u-boot/2011.09/0015-HACK-beagleboard-config-disable-cache-for-USB.patch
-deleted file mode 100644
-index ec1ec26..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0015-HACK-beagleboard-config-disable-cache-for-USB.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From 3fe471d34ef6575bc49c9f85ed74368e3ac25ad6 Mon Sep 17 00:00:00 2001
--From: Jason Kridner <jdk@ti.com>
--Date: Sun, 18 Sep 2011 12:16:31 -0400
--Subject: [PATCH 15/21] HACK: beagleboard: config: disable cache for USB
--
--There is currently a bug in the USB code for the BeagleBoard that is
--worked-around by disabling the cache.
--
--See http://comments.gmane.org/gmane.comp.boot-loaders.u-boot/108224
--
--Signed-off-by: Jason Kridner <jdk@ti.com>
-----
-- include/configs/omap3_beagle.h |    4 ++++
-- 1 files changed, 4 insertions(+), 0 deletions(-)
--
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 941ec38..569d747 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -36,6 +36,10 @@
-- #define CONFIG_OMAP3430		1	/* which is in a 3430 */
-- #define CONFIG_OMAP3_BEAGLE	1	/* working with BEAGLE */
-- 
--+/* TODO: WORK-AROUND for bug in BeagleBoard-specific USB */
--+#define CONFIG_SYS_ICACHE_OFF
--+#define CONFIG_SYS_DCACHE_OFF
--+
-- #define CONFIG_SDRC	/* The chip has SDRC controller */
-- 
-- #include <asm/arch/cpu.h>		/* get chip and board defs */
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0016-beagleboard-config-enable-gpio-command.patch b/recipes-bsp/u-boot/u-boot/2011.09/0016-beagleboard-config-enable-gpio-command.patch
-deleted file mode 100644
-index 268932b..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0016-beagleboard-config-enable-gpio-command.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--From e5bf80f2fb4af9a2627541cb8bc8686e8a9e8404 Mon Sep 17 00:00:00 2001
--From: Jason Kridner <jdk@ti.com>
--Date: Tue, 6 Sep 2011 18:56:11 -0400
--Subject: [PATCH 16/21] beagleboard: config: enable gpio command
--
--Now that we are using the generic GPIO framework, enable the command.
-----
-- include/configs/omap3_beagle.h |    1 +
-- 1 files changed, 1 insertions(+), 0 deletions(-)
--
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 569d747..337ca29 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -164,6 +164,7 @@
-- #define CONFIG_CMD_PING
-- #define CONFIG_CMD_DHCP
-- #define CONFIG_CMD_SETEXPR	/* Evaluate expressions		*/
--+#define CONFIG_CMD_GPIO
-- 
-- #undef CONFIG_CMD_FLASH		/* flinfo, erase, protect	*/
-- #undef CONFIG_CMD_FPGA		/* FPGA configuration Support	*/
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0017-Increased-some-timeout-durations-for-MMC-and-EHCI.patch b/recipes-bsp/u-boot/u-boot/2011.09/0017-Increased-some-timeout-durations-for-MMC-and-EHCI.patch
-deleted file mode 100644
-index 9aeb548..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0017-Increased-some-timeout-durations-for-MMC-and-EHCI.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From 7ba57c9e6372c067609797cbac53f8a14691fc2d Mon Sep 17 00:00:00 2001
--From: Jason Kridner <jdk@ti.com>
--Date: Wed, 7 Sep 2011 08:56:48 -0400
--Subject: [PATCH 17/21] Increased some timeout durations for MMC and EHCI
--
-----
-- drivers/mmc/omap_hsmmc.c |    2 +-
-- include/usb.h            |    2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/drivers/mmc/omap_hsmmc.c b/drivers/mmc/omap_hsmmc.c
--index c38b9e6..5054a21 100644
----- a/drivers/mmc/omap_hsmmc.c
--+++ b/drivers/mmc/omap_hsmmc.c
--@@ -34,7 +34,7 @@
-- #include <asm/arch/sys_proto.h>
-- 
-- /* If we fail after 1 second wait, something is really bad */
---#define MAX_RETRY_MS	1000
--+#define MAX_RETRY_MS	5000
-- 
-- static int mmc_read_data(struct hsmmc *mmc_base, char *buf, unsigned int size);
-- static int mmc_write_data(struct hsmmc *mmc_base, const char *buf,
--diff --git a/include/usb.h b/include/usb.h
--index 06170cd..0d99b92 100644
----- a/include/usb.h
--+++ b/include/usb.h
--@@ -46,7 +46,7 @@
--  * This is the timeout to allow for submitting an urb in ms. We allow more
--  * time for a BULK device to react - some are slow.
--  */
---#define USB_TIMEOUT_MS(pipe) (usb_pipebulk(pipe) ? 5000 : 1000)
--+#define USB_TIMEOUT_MS(pipe) (usb_pipebulk(pipe) ? 5000 : 5000)
-- 
-- /* device request (setup) */
-- struct devrequest {
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0018-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch b/recipes-bsp/u-boot/u-boot/2011.09/0018-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch
-deleted file mode 100644
-index b571a4e..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0018-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From daa9fa5f66a1b370072f1e91fd51c6a5e3d81fd8 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sun, 27 Nov 2011 14:43:58 +0100
--Subject: [PATCH 18/21] beagleboard: mount rootfs RO instead of RW at boot
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/omap3_beagle.h |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 337ca29..186586f 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -226,7 +226,7 @@
-- 	"dvimode=640x480MR-16@60\0" \
-- 	"defaultdisplay=dvi\0" \
-- 	"mmcdev=0\0" \
---	"mmcroot=/dev/mmcblk0p2 rw\0" \
--+	"mmcroot=/dev/mmcblk0p2 ro\0" \
-- 	"mmcrootfstype=ext3 rootwait\0" \
-- 	"nandroot=ubi0:rootfs ubi.mtd=4\0" \
-- 	"nandrootfstype=ubifs\0" \
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0019-BeagleBoard-config-Really-switch-to-ttyO2.patch b/recipes-bsp/u-boot/u-boot/2011.09/0019-BeagleBoard-config-Really-switch-to-ttyO2.patch
-deleted file mode 100644
-index 1d21612..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0019-BeagleBoard-config-Really-switch-to-ttyO2.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From ceb3c55ff226f068edb369342e3bd2db70ca8827 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sun, 27 Nov 2011 14:46:04 +0100
--Subject: [PATCH 19/21] BeagleBoard: config: Really switch to ttyO2
--
--The previous commit changed it to "zero two" instead of the proper "Oh two". This was completely broken!
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/omap3_beagle.h |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 186586f..833f86a 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -217,7 +217,7 @@
-- 	"rdaddr=0x81000000\0" \
-- 	"usbtty=cdc_acm\0" \
-- 	"bootfile=uImage.beagle\0" \
---	"console=tty02,115200n8\0" \
--+	"console=ttyO2,115200n8\0" \
-- 	"mpurate=auto\0" \
-- 	"buddy=none "\
-- 	"optargs=\0" \
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0020-beagleboard-add-support-for-TCT-Beacon-board.patch b/recipes-bsp/u-boot/u-boot/2011.09/0020-beagleboard-add-support-for-TCT-Beacon-board.patch
-deleted file mode 100644
-index 39c2a36..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0020-beagleboard-add-support-for-TCT-Beacon-board.patch
-+++ /dev/null
-@@ -1,65 +0,0 @@
--From e368b3cc2b281146c7848a2044e8a7d457ea1e38 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 8 Oct 2011 21:56:35 +0200
--Subject: [PATCH 20/21] beagleboard: add support for TCT Beacon board
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- board/ti/beagle/beagle.c |   10 ++++++++++
-- board/ti/beagle/beagle.h |    7 +++++++
-- 2 files changed, 17 insertions(+), 0 deletions(-)
--
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 6a457cb..9c2e6d0 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -59,11 +59,14 @@ extern volatile struct ehci_hcor *hcor;
-- #define TWL4030_I2C_BUS			0
-- #define EXPANSION_EEPROM_I2C_BUS	1
-- #define EXPANSION_EEPROM_I2C_ADDRESS	0x50
--+#define DVI_EDID_I2C_BUS	2
--+#define DVI_EDID_I2C_ADDRESS	0x50
-- 
-- #define TINCANTOOLS_ZIPPY		0x01000100
-- #define TINCANTOOLS_ZIPPY2		0x02000100
-- #define TINCANTOOLS_TRAINER		0x04000100
-- #define TINCANTOOLS_SHOWDOG		0x03000100
--+#define TINCANTOOLS_BEACON		0x05000100
-- #define KBADC_BEAGLEFPGA		0x01000600
-- #define LW_BEAGLETOUCH			0x01000700
-- #define BRAINMUX_LCDOG			0x01000800
--@@ -351,6 +354,13 @@ int misc_init_r(void)
-- 		setenv("defaultdisplay", "showdoglcd");
-- 		setenv("buddy", "showdog");
-- 		break;
--+	case TINCANTOOLS_BEACON:
--+		printf("Recognized Tincantools Beacon board (rev %d %s)\n",
--+			expansion_config.revision,
--+			expansion_config.fab_revision);
--+		MUX_TINCANTOOLS_BEACON();
--+		setenv("buddy", "beacon");
--+		break;
-- 	case KBADC_BEAGLEFPGA:
-- 		printf("Recognized KBADC Beagle FPGA board\n");
-- 		MUX_KBADC_BEAGLEFPGA();
--diff --git a/board/ti/beagle/beagle.h b/board/ti/beagle/beagle.h
--index 18bfaa8..6a9ad73 100644
----- a/board/ti/beagle/beagle.h
--+++ b/board/ti/beagle/beagle.h
--@@ -456,6 +456,13 @@ const omap3_sysinfo sysinfo = {
-- 	MUX_VAL(CP(MCBSP3_CLKX),    (IEN  | PTU | EN  | M4)) /*GPIO_141*/\
-- 	MUX_VAL(CP(MCBSP1_CLKX),    (IEN  | PTU | EN  | M4)) /*GPIO_162*/
-- 
--+#define MUX_TINCANTOOLS_BEACON() \
--+	MUX_VAL(CP(MMC2_DAT3),      (IEN  | PTU | EN  | M4)) /*GPIO_135*/\
--+	MUX_VAL(CP(MMC2_DAT4),      (IEN  | PTU | EN  | M4)) /*GPIO_136*/\
--+	MUX_VAL(CP(MMC2_DAT5),      (IEN  | PTU | EN  | M4)) /*GPIO_137*/\
--+	MUX_VAL(CP(MMC2_DAT6),      (IEN  | PTU | EN  | M4)) /*GPIO_138*/\
--+	MUX_VAL(CP(MMC2_DAT7),      (IEN  | PTU | EN  | M4)) /*GPIO_139*/\
--+
-- #define MUX_KBADC_BEAGLEFPGA() \
-- 	MUX_VAL(CP(MCBSP1_CLKR),    (IEN  | PTU | DIS | M1)) /*MCSPI4_CLK*/\
-- 	MUX_VAL(CP(MCBSP1_DX),      (IDIS | PTU | DIS | M1)) /*MCSPI4_SIMO*/\
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09/0021-beagleboard-add-support-for-scanning-loop-through-ex.patch b/recipes-bsp/u-boot/u-boot/2011.09/0021-beagleboard-add-support-for-scanning-loop-through-ex.patch
-deleted file mode 100644
-index a2df7ca..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09/0021-beagleboard-add-support-for-scanning-loop-through-ex.patch
-+++ /dev/null
-@@ -1,105 +0,0 @@
--From 78fd05bd746f623de3150469a9f6f4e9531a17c4 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sun, 27 Nov 2011 14:53:56 +0100
--Subject: [PATCH 21/21] beagleboard: add support for scanning loop-through expansionboards like the uLCD-lite
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- board/ti/beagle/beagle.c       |   30 ++++++++++++++++++++++++++----
-- include/configs/omap3_beagle.h |    2 ++
-- 2 files changed, 28 insertions(+), 4 deletions(-)
--
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 9c2e6d0..5ea50d1 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -74,6 +74,7 @@ extern volatile struct ehci_hcor *hcor;
-- #define BBTOYS_WIFI			0x01000B00
-- #define BBTOYS_VGA			0x02000B00
-- #define BBTOYS_LCD			0x03000B00
--+#define BBTOYS_ULCD			0x04000B00
-- #define BEAGLE_NO_EEPROM		0xffffffff
-- 
-- DECLARE_GLOBAL_DATA_PTR;
--@@ -209,18 +210,18 @@ void get_board_mem_timings(u32 *mcfg, u32 *ctrla, u32 *ctrlb, u32 *rfr_ctrl,
--  *		bus 1 for the availability of an AT24C01B serial EEPROM.
--  *		returns the device_vendor field from the EEPROM
--  */
---unsigned int get_expansion_id(void)
--+unsigned int get_expansion_id(int eeprom_address)
-- {
-- 	i2c_set_bus_num(EXPANSION_EEPROM_I2C_BUS);
-- 
-- 	/* return BEAGLE_NO_EEPROM if eeprom doesn't respond */
---	if (i2c_probe(EXPANSION_EEPROM_I2C_ADDRESS) == 1) {
--+	if (i2c_probe(eeprom_address) == 1) {
-- 		i2c_set_bus_num(TWL4030_I2C_BUS);
-- 		return BEAGLE_NO_EEPROM;
-- 	}
-- 
-- 	/* read configuration data */
---	i2c_read(EXPANSION_EEPROM_I2C_ADDRESS, 0, 1, (u8 *)&expansion_config,
--+	i2c_read(eeprom_address, 0, 1, (u8 *)&expansion_config,
-- 		 sizeof(expansion_config));
-- 
-- 	i2c_set_bus_num(TWL4030_I2C_BUS);
--@@ -323,7 +324,7 @@ int misc_init_r(void)
-- 					TWL4030_PM_RECEIVER_DEV_GRP_P1);
-- 	}
-- 
---	switch (get_expansion_id()) {
--+	switch (get_expansion_id(EXPANSION_EEPROM_I2C_ADDRESS)) {
-- 	case TINCANTOOLS_ZIPPY:
-- 		printf("Recognized Tincantools Zippy board (rev %d %s)\n",
-- 			expansion_config.revision,
--@@ -402,6 +403,27 @@ int misc_init_r(void)
-- 	if (expansion_config.content == 1)
-- 		setenv(expansion_config.env_var, expansion_config.env_setting);
-- 
--+	/* Scan 0x51 as well for loop-thru boards */
--+	switch (get_expansion_id(EXPANSION_EEPROM_I2C_ADDRESS + 1)) {
--+	case BBTOYS_ULCD:
--+		printf("Recognized BeagleBoardToys uLCD-lite board\n");
--+		setenv("buddy2", "bbtoys-ulcd");
--+		setenv("defaultdisplay", "lcd");
--+		setenv("uenvcmd", "i2c dev 1 ; i2c mw 40 00 00; i2c mw 40 04 80; i2c mw 40 0d 05; i2c mw 40 0d 15");
--+		break;
--+	case BEAGLE_NO_EEPROM:
--+		printf("No EEPROM on expansion board\n");
--+		setenv("buddy2", "none");
--+		break;
--+	default:
--+		printf("Unrecognized expansion board: %x\n",
--+			expansion_config.device_vendor);
--+		setenv("buddy2", "unknown");
--+	}
--+
--+	if (expansion_config.content == 1)
--+		setenv(expansion_config.env_var, expansion_config.env_setting);
--+
-- 	twl4030_power_init();
-- 	switch (get_board_revision()) {
-- 	case REVISION_XM_A:
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 833f86a..1cc46dc 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -220,6 +220,7 @@
-- 	"console=ttyO2,115200n8\0" \
-- 	"mpurate=auto\0" \
-- 	"buddy=none "\
--+	"buddy2=none "\
-- 	"optargs=\0" \
-- 	"camera=none\0" \
-- 	"vram=12M\0" \
--@@ -236,6 +237,7 @@
-- 		"${optargs} " \
-- 		"mpurate=${mpurate} " \
-- 		"buddy=${buddy} "\
--+		"buddy2=${buddy2} "\
-- 		"camera=${camera} "\
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0001-am335x_evm-add-option-to-boot-kernel-from-boot-in-ex.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0001-am335x_evm-add-option-to-boot-kernel-from-boot-in-ex.patch
-deleted file mode 100644
-index 03569d1..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09git/0001-am335x_evm-add-option-to-boot-kernel-from-boot-in-ex.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From 65ba75f46ec4c9749996ec290fa1c5e4e6264ce3 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Tue, 1 Nov 2011 12:21:07 +0100
--Subject: [PATCH 01/10] am335x_evm: add option to boot kernel from /boot in
-- ext2/3 filesystem
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/am335x_evm.h |    1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
--index 44a8500..83ccb5a 100755
----- a/include/configs/am335x_evm.h
--+++ b/include/configs/am335x_evm.h
--@@ -75,6 +75,7 @@
-- 	"importbootenv=echo Importing environment from mmc ...; " \
-- 		"env import -t $loadaddr $filesize\0" \
-- 	"mmc_load_uimage=fatload mmc ${mmc_dev} ${kloadaddr} ${bootfile}\0" \
--+	"mmc_load_uimage_ext2=ext2load ${mmc_dev} ${kloadaddr} /boot/${bootfile}\0" \
-- 	"optargs=\0" \
-- 	"bootargs_defaults=setenv bootargs " \
-- 		"console=${console} " \
---- 
--1.7.10
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0002-am335x_evm-set-bootdelay-to-1.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0002-am335x_evm-set-bootdelay-to-1.patch
-deleted file mode 100644
-index fdce9c4..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09git/0002-am335x_evm-set-bootdelay-to-1.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From cb92653d26476880602a20b62da03a35d36d622e Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Tue, 1 Nov 2011 12:21:38 +0100
--Subject: [PATCH 02/10] am335x_evm: set bootdelay to 1
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/am335x_evm.h |    2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
--index 83ccb5a..2558775 100755
----- a/include/configs/am335x_evm.h
--+++ b/include/configs/am335x_evm.h
--@@ -127,7 +127,7 @@
-- 
-- #ifndef CONFIG_RESTORE_FLASH
-- /* set to negative value for no autoboot */
---#define CONFIG_BOOTDELAY		3
--+#define CONFIG_BOOTDELAY		1
-- 
-- #define CONFIG_BOOTCOMMAND \
-- 	"if mmc rescan; then " \
---- 
--1.7.10
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0003-am335x-evm-make-MMC-rootfs-RO-on-boot-so-fsck-works.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0003-am335x-evm-make-MMC-rootfs-RO-on-boot-so-fsck-works.patch
-deleted file mode 100644
-index 8096df0..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09git/0003-am335x-evm-make-MMC-rootfs-RO-on-boot-so-fsck-works.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From ca9a3452249bfda3d9a8096794b4fbfbf212d72f Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Tue, 1 Nov 2011 12:22:30 +0100
--Subject: [PATCH 03/10] am335x-evm: make MMC rootfs RO on boot so fsck works
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/am335x_evm.h |    2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
--index 2558775..1b4fa37 100755
----- a/include/configs/am335x_evm.h
--+++ b/include/configs/am335x_evm.h
--@@ -50,7 +50,7 @@
-- 	"script_addr=0x81900000\0" \
-- 	"console=ttyO0,115200n8\0" \
-- 	"mmc_dev=0\0" \
---	"mmc_root=/dev/mmcblk0p2 rw\0" \
--+	"mmc_root=/dev/mmcblk0p2 ro\0" \
-- 	"nand_root=ubi0:rootfs rw ubi.mtd=7,2048\0" \
-- 	"spi_root=/dev/mtdblock4 rw\0" \
-- 	"nor_root=/dev/mtdblock3 rw\0" \
---- 
--1.7.10
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0004-am335x_evm-switch-to-ext4.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0004-am335x_evm-switch-to-ext4.patch
-deleted file mode 100644
-index 3d8495e..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09git/0004-am335x_evm-switch-to-ext4.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From 97fa23e167d3e4b46c71a5fac1a5e9aa39f0a551 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Mon, 7 Nov 2011 21:33:32 +0100
--Subject: [PATCH 04/10] am335x_evm: switch to ext4
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/am335x_evm.h |    2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
--index 1b4fa37..3d37058 100755
----- a/include/configs/am335x_evm.h
--+++ b/include/configs/am335x_evm.h
--@@ -54,7 +54,7 @@
-- 	"nand_root=ubi0:rootfs rw ubi.mtd=7,2048\0" \
-- 	"spi_root=/dev/mtdblock4 rw\0" \
-- 	"nor_root=/dev/mtdblock3 rw\0" \
---	"mmc_root_fs_type=ext3 rootwait\0" \
--+	"mmc_root_fs_type=ext4 rootwait\0" \
-- 	"nand_root_fs_type=ubifs rootwait=1\0" \
-- 	"spi_root_fs_type=jffs2\0" \
-- 	"nor_root_fs_type=jffs2\0" \
---- 
--1.7.10
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0005-am335x-evm-enable-i2c2-pinmux-for-beaglebone.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0005-am335x-evm-enable-i2c2-pinmux-for-beaglebone.patch
-deleted file mode 100644
-index fa2790d..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09git/0005-am335x-evm-enable-i2c2-pinmux-for-beaglebone.patch
-+++ /dev/null
-@@ -1,63 +0,0 @@
--From e2121ca4fd82f8313b764fe7fb24511ef7d10904 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Wed, 16 Nov 2011 18:57:12 +0100
--Subject: [PATCH 05/10] am335x-evm: enable i2c2 pinmux for beaglebone
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- board/ti/am335x/mux.c |   18 ++++++++++++++++++
-- 1 file changed, 18 insertions(+)
--
--diff --git a/board/ti/am335x/mux.c b/board/ti/am335x/mux.c
--index 885b33f..70645d4 100644
----- a/board/ti/am335x/mux.c
--+++ b/board/ti/am335x/mux.c
--@@ -310,6 +310,12 @@ static struct module_pin_mux i2c1_pin_mux[] = {
-- 	{-1},
-- };
-- 
--+static struct module_pin_mux i2c2_pin_mux[] = {
--+	{OFFSET(uart1_ctsn), (MODE(3) | RXACTIVE | PULLUDEN | SLEWCTRL)},  /* I2C_DATA */
--+	{OFFSET(uart1_rtsn), (MODE(3) | RXACTIVE | PULLUDEN | SLEWCTRL)}, /* I2C_SCLK */
--+	{-1},
--+};
--+
-- #ifndef CONFIG_NO_ETH
-- static struct module_pin_mux rgmii1_pin_mux[] = {
-- 	{OFFSET(mii1_txen), MODE(2)},			/* RGMII1_TCTL */
--@@ -598,6 +604,7 @@ static struct evm_pin_mux sk_evm_pin_mux[] = {
-- static struct evm_pin_mux beaglebone_pin_mux[] = {
-- 	{uart0_pin_mux, PROFILE_ALL, DEV_ON_BASEBOARD},
-- 	{i2c1_pin_mux, PROFILE_ALL & ~PROFILE_2 & ~PROFILE_4, DEV_ON_BASEBOARD},
--+	{i2c2_pin_mux, PROFILE_ALL, DEV_ON_BASEBOARD},
-- #ifdef CONFIG_NAND
-- 	{nand_pin_mux, PROFILE_ALL & ~PROFILE_2 & ~PROFILE_3, DEV_ON_DGHTR_BRD},
-- #endif
--@@ -617,6 +624,7 @@ static struct evm_pin_mux beaglebone_pin_mux[] = {
-- static struct evm_pin_mux beaglebone_old_pin_mux[] = {
-- 	{uart0_pin_mux, PROFILE_ALL, DEV_ON_BASEBOARD},
-- 	{i2c1_pin_mux, PROFILE_ALL & ~PROFILE_2 & ~PROFILE_4, DEV_ON_BASEBOARD},
--+	{i2c2_pin_mux, PROFILE_ALL, DEV_ON_BASEBOARD},
-- #ifdef CONFIG_NAND
-- 	{nand_pin_mux, PROFILE_ALL & ~PROFILE_2 & ~PROFILE_3, DEV_ON_DGHTR_BRD},
-- #endif
--@@ -713,6 +721,16 @@ void enable_i2c0_pin_mux(void)
-- 	configure_module_pin_mux(i2c0_pin_mux);
-- }
-- 
--+void enable_i2c1_pin_mux(void)
--+{
--+	configure_module_pin_mux(i2c1_pin_mux);
--+}
--+
--+void enable_i2c2_pin_mux(void)
--+{
--+	configure_module_pin_mux(i2c2_pin_mux);
--+}
--+
-- void enable_uart0_pin_mux(void)
-- {
-- 	configure_module_pin_mux(uart0_pin_mux);
---- 
--1.7.10
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0006-ext2load-increase-read-speed.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0006-ext2load-increase-read-speed.patch
-deleted file mode 100644
-index ee33d90..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09git/0006-ext2load-increase-read-speed.patch
+index f4cd9ae..0000000
+--- a/recipes-graphics/libgles/libgles-omap3_4.08.00.02.bb
 +++ /dev/null
 @@ -1,74 +0,0 @@
--From f6894e8bc193d225267e4d58a633354e9937c93d Mon Sep 17 00:00:00 2001
--From: "u-boot@lakedaemon.net" <u-boot@lakedaemon.net>
--Date: Wed, 28 Mar 2012 04:37:11 +0000
--Subject: [PATCH 06/10] ext2load: increase read speed
+-require libgles-omap3.inc
 -
--This patch dramatically drops the amount of time u-boot needs to read a
--file from an ext2 partition.  On a typical 2 to 5 MB file (kernels and
--initrds) it goes from tens of seconds to a couple seconds.
+-LICENSE = "TI-TSPA"
 -
--All we are doing here is grouping contiguous blocks into one read.
+-BINLOCATION_omap3  = "${S}/gfx_rel_es3.x"
+-BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+-BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
+-BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
 -
--Boot tested on Globalscale Technologies Dreamplug (Kirkwood ARM SoC)
--with three different files.  sha1sums were calculated in Linux
--userspace, and then confirmed after ext2load.
+-PLATFORM = "LinuxARMV7"
+-PVR_INIT = "pvrsrvctl"
 -
--Signed-off-by: Jason Cooper <u-boot@lakedaemon.net>
-----
-- fs/ext2/ext2fs.c |   26 ++++++++++++++++++++++++--
-- 1 file changed, 24 insertions(+), 2 deletions(-)
+-# download required binary distribution from:
+-# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
+-# see libgles-omap3.inc for detailed installation instructions
 -
--diff --git a/fs/ext2/ext2fs.c b/fs/ext2/ext2fs.c
--index e119e13..8531db5 100644
----- a/fs/ext2/ext2fs.c
--+++ b/fs/ext2/ext2fs.c
--@@ -414,7 +414,6 @@ int ext2fs_read_file
-- 		if (blknr < 0) {
-- 			return (-1);
-- 		}
---		blknr = blknr << log2blocksize;
-- 
-- 		/* Last block.  */
-- 		if (i == blockcnt - 1) {
--@@ -432,6 +431,29 @@ int ext2fs_read_file
-- 			blockend -= skipfirst;
-- 		}
-- 
--+		/* grab middle blocks in one go */
--+		if (i != pos / blocksize && i != blockcnt - 1 && blockcnt > 3) {
--+			int oldblk = blknr;
--+			int blocknxt;
--+			while (i < blockcnt - 1) {
--+				blocknxt = ext2fs_read_block(node, i + 1);
--+				if (blocknxt == (oldblk + 1)) {
--+					oldblk = blocknxt;
--+					i++;
--+				} else {
--+					blocknxt = ext2fs_read_block(node, i);
--+					break;
--+				}
--+			}
--+
--+			if (oldblk == blknr)
--+				blockend = blocksize;
--+			else
--+				blockend = (1 + blocknxt - blknr) * blocksize;
--+		}
--+
--+		blknr = blknr << log2blocksize;
--+
-- 		/* If the block number is 0 this block is not stored on disk but
-- 		   is zero filled instead.  */
-- 		if (blknr) {
--@@ -444,7 +466,7 @@ int ext2fs_read_file
-- 		} else {
-- 			memset (buf, 0, blocksize - skipfirst);
-- 		}
---		buf += blocksize - skipfirst;
--+		buf += blockend - skipfirst;
-- 	}
-- 	return (len);
-- }
---- 
--1.7.10
+-SGXPV = "4_08_00_02"
+-IMGPV = "1.9.2188537"
+-BINFILE = "Graphics_SDK_setuplinux_${SGXPV}_minimal_demos.bin"
+-TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/${BINFILE} \
+-           file://cputype \
+-           file://rc.pvr \
+-           file://rc_dri.pvr \
+-           file://sample.desktop \
+-           file://99-bufferclass.rules  \
+-"
 -
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0007-am335x-evm-fix-ext2load-and-specify-partition-for-bo.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0007-am335x-evm-fix-ext2load-and-specify-partition-for-bo.patch
+-SRC_URI[md5sum] = "0efa3a38266e6f41f8cc4fad0187f0d6"
+-SRC_URI[sha256sum] = "c732044b515a598e1fab661b7463aa9c53d4fa37f4980dfa85cd02b7468d0cd9"
+-
+-S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
+-
+-LIBGLESWINDOWSYSTEM ?= "${@base_contains('DISTRO_FEATURES', 'x11',"libpvrPVR2D_DRIWSEGL.so" ,"libpvrPVR2D_FRONTWSEGL.so.1", d)}"
+-
+-do_configure_append() {
+-
+-    # Change PVR server's user mode library to point to DRI
+-    for drifile in $(find ${S} -name "libsrv_um_dri.so"); do
+-    if [ "$drifile" != "" ]
+-    then
+-        dir=$(dirname ${drifile})
+-        if [ "$SUPPORT_XORG" = "1" ]
+-        then
+-            mv ${dir}/libsrv_um_dri.so ${dir}/libsrv_um.so
+-        else
+-            rm -rf ${dir}/libsrv_um_dri.so
+-        fi
+-    fi
+-
+-    done
+-}
+-
+-do_install_append() {
+-
+-    # In this version of the graphics SDK the following directories do not exist:
+-    #    /GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/pvr2d.h (doesn't exist)
+-    #    /GFX_Linux_SDK/OGLES/SDKPackage/Builds/OGLES/Include/GLES/egltypes.h (doesn't exist)
+-    # Therefore, need to copy these files manually at the only location that they do exist
+-    cp -pPr ${S}/include/pvr2d/*.h ${D}${includedir}
+-    cp -pPr ${S}/include/OGLES/GLES ${D}${includedir}/
+-
+-    rm ${D}${sysconfdir}/init.d/pvr-init
+-
+-    if [ "$SUPPORT_XORG" = "1" ]; then
+-        cp -pP ${WORKDIR}/rc_dri.pvr ${D}${sysconfdir}/init.d/pvr-init
+-    else
+-        cp -pP ${WORKDIR}/rc.pvr ${D}${sysconfdir}/init.d/pvr-init
+-    fi
+-
+-}
+-
+-RRECOMMENDS_${PN}-x11demos = "${PN}-driwsegl"
+-RRECOMMENDS_${PN}-x11trainingcourses = "${PN}-driwsegl"
+diff --git a/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb b/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
 deleted file mode 100644
-index ba7cf03..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09git/0007-am335x-evm-fix-ext2load-and-specify-partition-for-bo.patch
+index 22e510b..0000000
+--- a/recipes-graphics/libgles/libgles-omap3_5.00.00.01.bb
 +++ /dev/null
-@@ -1,30 +0,0 @@
--From 160a0a0145cbe4bca9c0f71286fc8529e57c21c4 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sun, 1 Apr 2012 22:57:37 +0200
--Subject: [PATCH 07/10] am335x-evm: fix ext2load and specify partition for
-- both fatload and ext2load
+@@ -1,50 +0,0 @@
+-require libgles-omap3-no-x.inc
 -
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/am335x_evm.h |    5 ++---
-- 1 file changed, 2 insertions(+), 3 deletions(-)
+-LICENSE = "TI-TSPA"
 -
--diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
--index 3d37058..a81d716 100755
----- a/include/configs/am335x_evm.h
--+++ b/include/configs/am335x_evm.h
--@@ -74,9 +74,8 @@
-- 	"loadbootenv=fatload mmc ${mmc_dev} ${loadaddr} ${bootenv}\0" \
-- 	"importbootenv=echo Importing environment from mmc ...; " \
-- 		"env import -t $loadaddr $filesize\0" \
---	"mmc_load_uimage=fatload mmc ${mmc_dev} ${kloadaddr} ${bootfile}\0" \
---	"mmc_load_uimage_ext2=ext2load ${mmc_dev} ${kloadaddr} /boot/${bootfile}\0" \
---	"optargs=\0" \
--+	"mmc_load_uimage=fatload mmc ${mmc_dev}:1 ${kloadaddr} ${bootfile}\0" \
--+	"mmc_load_uimage_ext2=ext2load mmc ${mmc_dev}:2 ${kloadaddr} /boot/${bootfile}\0" \
-- 	"bootargs_defaults=setenv bootargs " \
-- 		"console=${console} " \
-- 		"${optargs}\0" \
---- 
--1.7.10
+-PR = "${INC_PR}.2"
 -
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0008-am335x-evm-load-uImage-from-boot-instead-of-VFAT.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0008-am335x-evm-load-uImage-from-boot-instead-of-VFAT.patch
+-BINLOCATION_omap3 = "${S}/gfx_rel_es3.x"
+-BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+-BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
+-BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
+-BINLOCATION_ti43x = "${S}/gfx_rel_es9.x"
+-
+-PLATFORM = "LinuxARMV7"
+-PVR_INIT = "pvrsrvctl"
+-
+-SGXPV = "5_00_00_01"
+-IMGPV = "1.10.2359475"
+-
+-TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
+-
+-BINFILE_HARDFP = "Graphics_SDK_setuplinux_${SGXPV}_alpha_hardfp_minimal_demos.bin"
+-MD5SUM_HARDFP = "ae6125d7f8a313ea5c02afded893052d"
+-SHA256SUM_HARDFP = "c2782a2f85024741722b936ec9dca66b858ae8561aa71b693f11e12d8c0385e0"
+-
+-# For now we only have hardfp version
+-python __anonymous() {
+-    tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
+-    if not tunes:
+-        return
+-    pkgn = bb.data.getVar("PN", d, 1)
+-    pkgv = bb.data.getVar("PV", d, 1)
+-    if "callconvention-hard" not in tunes:
+-        bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+-        raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+-}
+-
+-BINFILE := "${BINFILE_HARDFP}"
+-
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/gfxsdk/${SGXPV}/exports/${BINFILE} \
+-           file://cputype \
+-           file://rc.pvr \
+-           file://99-bufferclass.rules  \
+-"
+-
+-SRC_URI[md5sum] := "${MD5SUM_HARDFP}"
+-SRC_URI[sha256sum] := "${SHA256SUM_HARDFP}"
+-
+-S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
+-
+-LIBGLESWINDOWSYSTEM ?= "libpvrPVR2D_FRONTWSEGL.so.1"
+diff --git a/recipes-graphics/libgles/libgles-omap3_5.01.00.01.bb b/recipes-graphics/libgles/libgles-omap3_5.01.00.01.bb
 deleted file mode 100644
-index 70408b6..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09git/0008-am335x-evm-load-uImage-from-boot-instead-of-VFAT.patch
+index 607b44a..0000000
+--- a/recipes-graphics/libgles/libgles-omap3_5.01.00.01.bb
 +++ /dev/null
-@@ -1,35 +0,0 @@
--From b01ee680bab7b40f6dc9b8087630e5c0251c6fcd Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sun, 1 Apr 2012 23:10:22 +0200
--Subject: [PATCH 08/10] am335x-evm: load uImage from /boot instead of VFAT
+@@ -1,50 +0,0 @@
+-require libgles-omap3-no-x.inc
 -
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/am335x_evm.h |    4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
+-LICENSE = "TI-TSPA"
 -
--diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
--index a81d716..e42febe 100755
----- a/include/configs/am335x_evm.h
--+++ b/include/configs/am335x_evm.h
--@@ -101,7 +101,7 @@
-- 		"nfsroot=${serverip}:${rootpath},${nfsopts} rw " \
-- 		"ip=dhcp\0" \
-- 	"mmc_boot=run mmc_args; " \
---		"run mmc_load_uimage; " \
--+		"run mmc_load_uimage_ext2; " \
-- 		"bootm ${kloadaddr}\0" \
-- 	"nand_boot=echo Booting from nand ...; " \
-- 		"run nand_args; " \
--@@ -139,7 +139,7 @@
-- 			"echo Running uenvcmd ...;" \
-- 			"run uenvcmd;" \
-- 		"fi;" \
---		"if run mmc_load_uimage; then " \
--+		"if run mmc_load_uimage_ext2; then " \
-- 			"run mmc_args;" \
-- 			"bootm ${kloadaddr};" \
-- 		"fi;" \
---- 
--1.7.10
+-PR = "${INC_PR}.2"
 -
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0009-ext4fs-ls-load-support.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0009-ext4fs-ls-load-support.patch
-deleted file mode 100644
-index 37ef5d4..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09git/0009-ext4fs-ls-load-support.patch
-+++ /dev/null
-@@ -1,2362 +0,0 @@
--From 4e2f3f39a37883bddbe92a71045cb90f489e1d5f Mon Sep 17 00:00:00 2001
--From: "uma.shankar" <uma.shankar@samsung.com>
--Date: Mon, 9 Jan 2012 07:54:50 +0000
--Subject: [PATCH 09/10] ext4fs ls load support
+-BINLOCATION_omap3 = "${S}/gfx_rel_es3.x"
+-BINLOCATION_ti816x = "${S}/gfx_rel_es6.x"
+-BINLOCATION_ti814x = "${S}/gfx_rel_es6.x"
+-BINLOCATION_ti33x = "${S}/gfx_rel_es8.x"
+-BINLOCATION_ti43x = "${S}/gfx_rel_es9.x"
 -
--Signed-off-by: Uma Shankar <uma.shankar@samsung.com>
--Signed-off-by: Manjunatha C Achar <a.manjunatha@samsung.com>
--Signed-off-by: Iqbal Shareef <iqbal.ams@samsung.com>
--Signed-off-by: Hakgoo Lee <goodguy.lee@samsung.com>
-----
-- Makefile              |    2 +-
-- common/Makefile       |    1 +
-- common/cmd_ext4.c     |  266 +++++++++++++++
-- fs/Makefile           |    1 +
-- fs/ext2/dev.c         |    1 +
-- fs/ext2/ext2fs.c      |  181 ++--------
-- fs/ext4/Makefile      |   51 +++
-- fs/ext4/dev.c         |  145 ++++++++
-- fs/ext4/ext4_common.c |  875 +++++++++++++++++++++++++++++++++++++++++++++++++
-- fs/ext4/ext4_common.h |   63 ++++
-- fs/ext4/ext4fs.c      |  228 +++++++++++++
-- include/ext4fs.h      |  132 ++++++++
-- include/ext_common.h  |  188 +++++++++++
-- 13 files changed, 1977 insertions(+), 157 deletions(-)
-- create mode 100644 common/cmd_ext4.c
-- create mode 100644 fs/ext4/Makefile
-- create mode 100644 fs/ext4/dev.c
-- create mode 100644 fs/ext4/ext4_common.c
-- create mode 100644 fs/ext4/ext4_common.h
-- create mode 100644 fs/ext4/ext4fs.c
-- create mode 100644 include/ext4fs.h
-- create mode 100644 include/ext_common.h
+-PLATFORM = "LinuxARMV7"
+-PVR_INIT = "pvrsrvctl"
 -
--diff --git a/Makefile b/Makefile
--index 99b9278..6a5068d 100644
----- a/Makefile
--+++ b/Makefile
--@@ -226,7 +226,7 @@ LIBS += arch/arm/cpu/ixp/npe/libnpe.o
-- endif
-- LIBS += arch/$(ARCH)/lib/lib$(ARCH).o
-- LIBS += fs/cramfs/libcramfs.o fs/fat/libfat.o fs/fdos/libfdos.o fs/jffs2/libjffs2.o \
---	fs/reiserfs/libreiserfs.o fs/ext2/libext2fs.o fs/yaffs2/libyaffs2.o \
--+	fs/reiserfs/libreiserfs.o fs/ext2/libext2fs.o fs/ext4/libext4fs.o fs/yaffs2/libyaffs2.o \
-- 	fs/ubifs/libubifs.o
-- LIBS += net/libnet.o
-- LIBS += disk/libdisk.o
--diff --git a/common/Makefile b/common/Makefile
--index 838ae25..b9b5c85 100644
----- a/common/Makefile
--+++ b/common/Makefile
--@@ -87,6 +87,7 @@ COBJS-$(CONFIG_ENV_IS_IN_EEPROM) += cmd_eeprom.o
-- COBJS-$(CONFIG_CMD_EEPROM) += cmd_eeprom.o
-- COBJS-$(CONFIG_CMD_ELF) += cmd_elf.o
-- COBJS-$(CONFIG_SYS_HUSH_PARSER) += cmd_exit.o
--+COBJS-$(CONFIG_CMD_EXT4) += cmd_ext4.o
-- COBJS-$(CONFIG_CMD_EXT2) += cmd_ext2.o
-- COBJS-$(CONFIG_CMD_FAT) += cmd_fat.o
-- COBJS-$(CONFIG_CMD_FDC)$(CONFIG_CMD_FDOS) += cmd_fdc.o
--diff --git a/common/cmd_ext4.c b/common/cmd_ext4.c
--new file mode 100644
--index 0000000..2c53d2c
----- /dev/null
--+++ b/common/cmd_ext4.c
--@@ -0,0 +1,266 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * Ext4fs support
--+ * made from existing cmd_ext2.c file of Uboot
--+ *
--+ * (C) Copyright 2004
--+ * esd gmbh <www.esd-electronics.com>
--+ * Reinhard Arlt <reinhard.arlt@esd-electronics.com>
--+ *
--+ * made from cmd_reiserfs by
--+ *
--+ * (C) Copyright 2003 - 2004
--+ * Sysgo Real-Time Solutions, AG <www.elinos.com>
--+ * Pavel Bartusek <pba@sysgo.com>
--+ *
--+ * This program is free software; you can redistribute it and/or
--+ * modify it under the terms of the GNU General Public License as
--+ * published by the Free Software Foundation; either version 2 of
--+ * the License, or (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
--+ * MA 02111-1307 USA
--+ *
--+ */
--+
--+/*
--+ * Changelog:
--+ *	0.1 - Newly created file for ext4fs support. Taken from cmd_ext2.c
--+ *	        file in uboot. Added ext4fs ls and load support.
--+ */
--+
--+#include <common.h>
--+#include <part.h>
--+#include <config.h>
--+#include <command.h>
--+#include <image.h>
--+#include <linux/ctype.h>
--+#include <asm/byteorder.h>
--+#include <ext_common.h>
--+#include <ext4fs.h>
--+#include <linux/stat.h>
--+#include <malloc.h>
--+
--+#if defined(CONFIG_CMD_USB) && defined(CONFIG_USB_STORAGE)
--+#include <usb.h>
--+#endif
--+
--+#if !defined(CONFIG_DOS_PARTITION) && !defined(CONFIG_EFI_PARTITION)
--+#error DOS or EFI partition support must be selected
--+#endif
--+
--+uint64_t total_sector;
--+uint64_t part_offset;
--+
--+#define DOS_PART_MAGIC_OFFSET	0x1fe
--+#define DOS_FS_TYPE_OFFSET	0x36
--+#define DOS_FS32_TYPE_OFFSET	0x52
--+
--+static int do_ext4_load(cmd_tbl_t *cmdtp, int flag, int argc,
--+						char *const argv[])
--+{
--+	char *filename = NULL;
--+	char *ep;
--+	int dev;
--+	unsigned long part = 1;
--+	ulong addr = 0;
--+	ulong part_length;
--+	int filelen;
--+	disk_partition_t info;
--+	struct ext_filesystem *fs;
--+	char buf[12];
--+	unsigned long count;
--+	const char *addr_str;
--+
--+	count = 0;
--+	addr = simple_strtoul(argv[3], NULL, 16);
--+	filename = getenv("bootfile");
--+	switch (argc) {
--+	case 3:
--+		addr_str = getenv("loadaddr");
--+		if (addr_str != NULL)
--+			addr = simple_strtoul(addr_str, NULL, 16);
--+		else
--+			addr = CONFIG_SYS_LOAD_ADDR;
--+
--+		break;
--+	case 4:
--+		break;
--+	case 5:
--+		filename = argv[4];
--+		break;
--+	case 6:
--+		filename = argv[4];
--+		count = simple_strtoul(argv[5], NULL, 16);
--+		break;
--+
--+	default:
--+		return cmd_usage(cmdtp);
--+	}
--+
--+	if (!filename) {
--+		puts("** No boot file defined **\n");
--+		return 1;
--+	}
--+
--+	dev = (int)simple_strtoul(argv[2], &ep, 16);
--+	ext4_dev_desc = get_dev(argv[1], dev);
--+	if (ext4_dev_desc == NULL) {
--+		printf("** Block device %s %d not supported\n", argv[1], dev);
--+		return 1;
--+	}
--+	if (init_fs(ext4_dev_desc))
--+		return 1;
--+
--+	fs = get_fs();
--+	if (*ep) {
--+		if (*ep != ':') {
--+			puts("** Invalid boot device, use `dev[:part]' **\n");
--+			return 1;
--+		}
--+		part = simple_strtoul(++ep, NULL, 16);
--+	}
--+
--+	if (part != 0) {
--+		if (get_partition_info(fs->dev_desc, part, &info)) {
--+			printf("** Bad partition %lu **\n", part);
--+			return 1;
--+		}
--+
--+		if (strncmp((char *)info.type, BOOT_PART_TYPE,
--+			    strlen(BOOT_PART_TYPE)) != 0) {
--+			printf("** Invalid partition type \"%s\""
--+			       " (expect \"" BOOT_PART_TYPE "\")\n", info.type);
--+			return 1;
--+		}
--+		printf("Loading file \"%s\" "
--+		       "from %s device %d:%lu %s\n",
--+		       filename, argv[1], dev, part, info.name);
--+	} else {
--+		printf("Loading file \"%s\" from %s device %d\n",
--+		       filename, argv[1], dev);
--+	}
--+
--+	part_length = ext4fs_set_blk_dev(fs->dev_desc, part);
--+	if (part_length == 0) {
--+		printf("**Bad partition - %s %d:%lu **\n", argv[1], dev, part);
--+		ext4fs_close();
--+		return 1;
--+	}
--+
--+	if (!ext4fs_mount(part_length)) {
--+		printf("** Bad ext2 partition or disk - %s %d:%lu **\n",
--+		       argv[1], dev, part);
--+		ext4fs_close();
--+		return 1;
--+	}
--+
--+	filelen = ext4fs_open(filename);
--+	if (filelen < 0) {
--+		printf("** File not found %s\n", filename);
--+		ext4fs_close();
--+		return 1;
--+	}
--+	if ((count < filelen) && (count != 0))
--+		filelen = count;
--+
--+	if (ext4fs_read((char *)addr, filelen) != filelen) {
--+		printf("** Unable to read \"%s\" from %s %d:%lu **\n",
--+		       filename, argv[1], dev, part);
--+		ext4fs_close();
--+		return 1;
--+	}
--+
--+	ext4fs_close();
--+	deinit_fs(fs->dev_desc);
--+	/* Loading ok, update default load address */
--+	load_addr = addr;
--+
--+	printf("%d bytes read\n", filelen);
--+	sprintf(buf, "%X", filelen);
--+	setenv("filesize", buf);
--+
--+	return 0;
--+}
--+
--+static int do_ext4_ls(cmd_tbl_t *cmdtp, int flag, int argc, char *const argv[])
--+{
--+	const char *filename = "/";
--+	int dev;
--+	unsigned long part = 1;
--+	char *ep;
--+	struct ext_filesystem *fs;
--+	int part_length;
--+
--+	if (argc < 3)
--+		return cmd_usage(cmdtp);
--+
--+	dev = (int)simple_strtoul(argv[2], &ep, 16);
--+	ext4_dev_desc = get_dev(argv[1], dev);
--+
--+	if (ext4_dev_desc == NULL) {
--+		printf("\n** Block device %s %d not supported\n", argv[1], dev);
--+		return 1;
--+	}
--+
--+	if (init_fs(ext4_dev_desc))
--+		return 1;
--+
--+	fs = get_fs();
--+	if (*ep) {
--+		if (*ep != ':') {
--+			puts("\n** Invalid boot device, use `dev[:part]' **\n");
--+			return 1;
--+		}
--+		part = simple_strtoul(++ep, NULL, 16);
--+	}
--+
--+	if (argc == 4)
--+		filename = argv[3];
--+
--+	part_length = ext4fs_set_blk_dev(fs->dev_desc, part);
--+	if (part_length == 0) {
--+		printf("** Bad partition - %s %d:%lu **\n", argv[1], dev, part);
--+		ext4fs_close();
--+		return 1;
--+	}
--+
--+	if (!ext4fs_mount(part_length)) {
--+		printf("** Bad ext2 partition or disk - %s %d:%lu **\n",
--+		       argv[1], dev, part);
--+		ext4fs_close();
--+		return 1;
--+	}
--+	if (ext4fs_ls(filename)) {
--+		printf("** Error ext2fs_ls() **\n");
--+		ext4fs_close();
--+		return 1;
--+	};
--+
--+	ext4fs_close();
--+	deinit_fs(fs->dev_desc);
--+
--+	return 0;
--+}
--+
--+U_BOOT_CMD(ext4ls, 4, 1, do_ext4_ls,
--+	   "list files in a directory (default /)",
--+	   "<interface> <dev[:part]> [directory]\n"
--+	   "	  - list files from 'dev' on 'interface' in a 'directory'");
--+
--+U_BOOT_CMD(ext4load, 6, 0, do_ext4_load,
--+	   "load binary file from a Ext2 filesystem",
--+	   "<interface> <dev[:part]> [addr] [filename] [bytes]\n"
--+	   "	  - load binary file 'filename' from 'dev' on 'interface'\n"
--+	   "		 to address 'addr' from ext2 filesystem");
--diff --git a/fs/Makefile b/fs/Makefile
--index 22aad12..00a8f37 100644
----- a/fs/Makefile
--+++ b/fs/Makefile
--@@ -23,6 +23,7 @@
-- #
-- 
-- subdirs-$(CONFIG_CMD_CRAMFS) := cramfs
--+subdirs-$(CONFIG_CMD_EXT4) += ext4
-- subdirs-$(CONFIG_CMD_EXT2) += ext2
-- subdirs-$(CONFIG_CMD_FAT) += fat
-- subdirs-$(CONFIG_CMD_FDOS) += fdos
--diff --git a/fs/ext2/dev.c b/fs/ext2/dev.c
--index 78851d0..339a16e 100644
----- a/fs/ext2/dev.c
--+++ b/fs/ext2/dev.c
--@@ -27,6 +27,7 @@
-- #include <common.h>
-- #include <config.h>
-- #include <ext2fs.h>
--+#include <ext_common.h>
-- 
-- static block_dev_desc_t *ext2fs_block_dev_desc;
-- static disk_partition_t part_info;
--diff --git a/fs/ext2/ext2fs.c b/fs/ext2/ext2fs.c
--index 8531db5..ea3d98c 100644
----- a/fs/ext2/ext2fs.c
--+++ b/fs/ext2/ext2fs.c
--@@ -25,152 +25,16 @@
-- 
-- #include <common.h>
-- #include <ext2fs.h>
--+#include <ext_common.h>
-- #include <malloc.h>
-- #include <asm/byteorder.h>
-- 
-- extern int ext2fs_devread (int sector, int byte_offset, int byte_len,
-- 			   char *buf);
-- 
---/* Magic value used to identify an ext2 filesystem.  */
---#define	EXT2_MAGIC		0xEF53
---/* Amount of indirect blocks in an inode.  */
---#define INDIRECT_BLOCKS		12
---/* Maximum lenght of a pathname.  */
---#define EXT2_PATH_MAX		4096
---/* Maximum nesting of symlinks, used to prevent a loop.  */
---#define	EXT2_MAX_SYMLINKCNT	8
---
---/* Filetype used in directory entry.  */
---#define	FILETYPE_UNKNOWN	0
---#define	FILETYPE_REG		1
---#define	FILETYPE_DIRECTORY	2
---#define	FILETYPE_SYMLINK	7
---
---/* Filetype information as used in inodes.  */
---#define FILETYPE_INO_MASK	0170000
---#define FILETYPE_INO_REG	0100000
---#define FILETYPE_INO_DIRECTORY	0040000
---#define FILETYPE_INO_SYMLINK	0120000
---
---/* Bits used as offset in sector */
---#define DISK_SECTOR_BITS        9
---
---/* Log2 size of ext2 block in 512 blocks.  */
---#define LOG2_EXT2_BLOCK_SIZE(data) (__le32_to_cpu (data->sblock.log2_block_size) + 1)
---
---/* Log2 size of ext2 block in bytes.  */
---#define LOG2_BLOCK_SIZE(data)	   (__le32_to_cpu (data->sblock.log2_block_size) + 10)
---
---/* The size of an ext2 block in bytes.  */
---#define EXT2_BLOCK_SIZE(data)	   (1 << LOG2_BLOCK_SIZE(data))
---
---/* The ext2 superblock.  */
---struct ext2_sblock {
---	uint32_t total_inodes;
---	uint32_t total_blocks;
---	uint32_t reserved_blocks;
---	uint32_t free_blocks;
---	uint32_t free_inodes;
---	uint32_t first_data_block;
---	uint32_t log2_block_size;
---	uint32_t log2_fragment_size;
---	uint32_t blocks_per_group;
---	uint32_t fragments_per_group;
---	uint32_t inodes_per_group;
---	uint32_t mtime;
---	uint32_t utime;
---	uint16_t mnt_count;
---	uint16_t max_mnt_count;
---	uint16_t magic;
---	uint16_t fs_state;
---	uint16_t error_handling;
---	uint16_t minor_revision_level;
---	uint32_t lastcheck;
---	uint32_t checkinterval;
---	uint32_t creator_os;
---	uint32_t revision_level;
---	uint16_t uid_reserved;
---	uint16_t gid_reserved;
---	uint32_t first_inode;
---	uint16_t inode_size;
---	uint16_t block_group_number;
---	uint32_t feature_compatibility;
---	uint32_t feature_incompat;
---	uint32_t feature_ro_compat;
---	uint32_t unique_id[4];
---	char volume_name[16];
---	char last_mounted_on[64];
---	uint32_t compression_info;
---};
---
---/* The ext2 blockgroup.  */
---struct ext2_block_group {
---	uint32_t block_id;
---	uint32_t inode_id;
---	uint32_t inode_table_id;
---	uint16_t free_blocks;
---	uint16_t free_inodes;
---	uint16_t used_dir_cnt;
---	uint32_t reserved[3];
---};
---
---/* The ext2 inode.  */
---struct ext2_inode {
---	uint16_t mode;
---	uint16_t uid;
---	uint32_t size;
---	uint32_t atime;
---	uint32_t ctime;
---	uint32_t mtime;
---	uint32_t dtime;
---	uint16_t gid;
---	uint16_t nlinks;
---	uint32_t blockcnt;	/* Blocks of 512 bytes!! */
---	uint32_t flags;
---	uint32_t osd1;
---	union {
---		struct datablocks {
---			uint32_t dir_blocks[INDIRECT_BLOCKS];
---			uint32_t indir_block;
---			uint32_t double_indir_block;
---			uint32_t tripple_indir_block;
---		} blocks;
---		char symlink[60];
---	} b;
---	uint32_t version;
---	uint32_t acl;
---	uint32_t dir_acl;
---	uint32_t fragment_addr;
---	uint32_t osd2[3];
---};
---
---/* The header of an ext2 directory entry.  */
---struct ext2_dirent {
---	uint32_t inode;
---	uint16_t direntlen;
---	uint8_t namelen;
---	uint8_t filetype;
---};
---
---struct ext2fs_node {
---	struct ext2_data *data;
---	struct ext2_inode inode;
---	int ino;
---	int inode_read;
---};
---
---/* Information about a "mounted" ext2 filesystem.  */
---struct ext2_data {
---	struct ext2_sblock sblock;
---	struct ext2_inode *inode;
---	struct ext2fs_node diropen;
---};
---
---
---typedef struct ext2fs_node *ext2fs_node_t;
-- 
-- struct ext2_data *ext2fs_root = NULL;
---ext2fs_node_t ext2fs_file = NULL;
--+struct ext2fs_node *ext2fs_file;
-- int symlinknest = 0;
-- uint32_t *indir1_block = NULL;
-- int indir1_size = 0;
--@@ -243,14 +107,16 @@ static int ext2fs_read_inode
-- }
-- 
-- 
---void ext2fs_free_node (ext2fs_node_t node, ext2fs_node_t currroot) {
--+void ext2fs_free_node(struct ext2fs_node *node, struct ext2fs_node *currroot)
--+{
-- 	if ((node != &ext2fs_root->diropen) && (node != currroot)) {
-- 		free (node);
-- 	}
-- }
-- 
-- 
---static int ext2fs_read_block (ext2fs_node_t node, int fileblock) {
--+static int ext2fs_read_block(struct ext2fs_node *node, int fileblock)
--+{
-- 	struct ext2_data *data = node->data;
-- 	struct ext2_inode *inode = &node->inode;
-- 	int blknr;
--@@ -390,7 +256,8 @@ static int ext2fs_read_block (ext2fs_node_t node, int fileblock) {
-- 
-- 
-- int ext2fs_read_file
---	(ext2fs_node_t node, int pos, unsigned int len, char *buf) {
--+	(struct ext2fs_node *node, int pos, unsigned int len, char *buf)
--+{
-- 	int i;
-- 	int blockcnt;
-- 	int log2blocksize = LOG2_EXT2_BLOCK_SIZE (node->data);
--@@ -471,8 +338,8 @@ int ext2fs_read_file
-- 	return (len);
-- }
-- 
---
---static int ext2fs_iterate_dir (ext2fs_node_t dir, char *name, ext2fs_node_t * fnode, int *ftype)
--+int ext2fs_iterate_dir(struct ext2fs_node *dir, char *name,
--+					struct ext2fs_node **fnode, int *ftype)
-- {
-- 	unsigned int fpos = 0;
-- 	int status;
--@@ -501,7 +368,7 @@ static int ext2fs_iterate_dir (ext2fs_node_t dir, char *name, ext2fs_node_t * fn
-- 		}
-- 		if (dirent.namelen != 0) {
-- 			char filename[dirent.namelen + 1];
---			ext2fs_node_t fdiro;
--+			struct ext2fs_node *fdiro;
-- 			int type = FILETYPE_UNKNOWN;
-- 
-- 			status = ext2fs_read_file (diro,
--@@ -603,8 +470,8 @@ static int ext2fs_iterate_dir (ext2fs_node_t dir, char *name, ext2fs_node_t * fn
-- 	return (0);
-- }
-- 
---
---static char *ext2fs_read_symlink (ext2fs_node_t node) {
--+static char *ext2fs_read_symlink(struct ext2fs_node *node)
--+{
-- 	char *symlink;
-- 	struct ext2fs_node *diro = node;
-- 	int status;
--@@ -641,15 +508,16 @@ static char *ext2fs_read_symlink (ext2fs_node_t node) {
-- 
-- 
-- int ext2fs_find_file1
---	(const char *currpath,
---	 ext2fs_node_t currroot, ext2fs_node_t * currfound, int *foundtype) {
--+	(const char *currpath, struct ext2fs_node *currroot,
--+		struct ext2fs_node **currfound, int *foundtype)
--+{
-- 	char fpath[strlen (currpath) + 1];
-- 	char *name = fpath;
-- 	char *next;
-- 	int status;
-- 	int type = FILETYPE_DIRECTORY;
---	ext2fs_node_t currnode = currroot;
---	ext2fs_node_t oldnode = currroot;
--+	struct ext2fs_node *currnode = currroot;
--+	struct ext2fs_node *oldnode = currroot;
-- 
-- 	strncpy (fpath, currpath, strlen (currpath) + 1);
-- 
--@@ -745,8 +613,9 @@ int ext2fs_find_file1
-- 
-- 
-- int ext2fs_find_file
---	(const char *path,
---	 ext2fs_node_t rootnode, ext2fs_node_t * foundnode, int expecttype) {
--+	(const char *path, struct ext2fs_node *rootnode,
--+	struct ext2fs_node **foundnode, int expecttype)
--+{
-- 	int status;
-- 	int foundtype = FILETYPE_DIRECTORY;
-- 
--@@ -772,7 +641,7 @@ int ext2fs_find_file
-- 
-- 
-- int ext2fs_ls (const char *dirname) {
---	ext2fs_node_t dirnode;
--+	struct ext2fs_node *dirnode;
-- 	int status;
-- 
-- 	if (ext2fs_root == NULL) {
--@@ -792,7 +661,7 @@ int ext2fs_ls (const char *dirname) {
-- 
-- 
-- int ext2fs_open (const char *filename) {
---	ext2fs_node_t fdiro = NULL;
--+	struct ext2fs_node *fdiro = NULL;
-- 	int status;
-- 	int len;
-- 
--@@ -822,8 +691,8 @@ fail:
-- }
-- 
-- 
---int ext2fs_close (void
---	) {
--+int ext2fs_close(void)
--+{
-- 	if ((ext2fs_file != NULL) && (ext2fs_root != NULL)) {
-- 		ext2fs_free_node (ext2fs_file, &ext2fs_root->diropen);
-- 		ext2fs_file = NULL;
--diff --git a/fs/ext4/Makefile b/fs/ext4/Makefile
--new file mode 100644
--index 0000000..7add4ab
----- /dev/null
--+++ b/fs/ext4/Makefile
--@@ -0,0 +1,51 @@
--+#
--+# (C) Copyright 2006
--+# Wolfgang Denk, DENX Software Engineering, wd@denx.de.
--+#
--+# (C) Copyright 2003
--+# Pavel Bartusek, Sysgo Real-Time Solutions AG, pba@sysgo.de
--+#
--+#
--+# See file CREDITS for list of people who contributed to this
--+# project.
--+#
--+# This program is free software; you can redistribute it and/or
--+# modify it under the terms of the GNU General Public License as
--+# published by the Free Software Foundation; either version 2 of
--+# the License, or (at your option) any later version.
--+#
--+# This program is distributed in the hope that it will be useful,
--+# but WITHOUT ANY WARRANTY; without even the implied warranty of
--+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+# GNU General Public License for more details.
--+#
--+# You should have received a copy of the GNU General Public License
--+# along with this program; if not, write to the Free Software
--+# Foundation, Inc., 59 Temple Place, Suite 330, Boston,
--+# MA 02111-1307 USA
--+#
--+
--+include $(TOPDIR)/config.mk
--+
--+LIB	= $(obj)libext4fs.o
--+
--+AOBJS	=
--+COBJS-$(CONFIG_CMD_EXT4) := ext4fs.o ext4_common.o dev.o
--+
--+SRCS	:= $(AOBJS:.o=.S) $(COBJS-y:.o=.c)
--+OBJS	:= $(addprefix $(obj),$(AOBJS) $(COBJS-y))
--+
--+
--+all:	$(LIB) $(AOBJS)
--+
--+$(LIB):	$(obj).depend $(OBJS)
--+	$(call cmd_link_o_target, $(OBJS))
--+
--+#########################################################################
--+
--+# defines $(obj).depend target
--+include $(SRCTREE)/rules.mk
--+
--+sinclude $(obj).depend
--+
--+#########################################################################
--diff --git a/fs/ext4/dev.c b/fs/ext4/dev.c
--new file mode 100644
--index 0000000..2054be3
----- /dev/null
--+++ b/fs/ext4/dev.c
--@@ -0,0 +1,145 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * made from existing ext2/dev.c file of Uboot
--+ * (C) Copyright 2004
--+ * esd gmbh <www.esd-electronics.com>
--+ * Reinhard Arlt <reinhard.arlt@esd-electronics.com>
--+ *
--+ * based on code of fs/reiserfs/dev.c by
--+ *
--+ * (C) Copyright 2003 - 2004
--+ * Sysgo AG, <www.elinos.com>, Pavel Bartusek <pba@sysgo.com>
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License as published by
--+ * the Free Software Foundation; either version 2 of the License, or
--+ * (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--+ *
--+ */
--+
--+/*
--+ * Changelog:
--+ *	0.1 - Newly created file for ext4fs support. Taken from
--+ *	        fs/ext2/dev.c file in uboot.
--+ */
--+
--+#include <common.h>
--+#include <config.h>
--+#include <ext_common.h>
--+
--+static block_dev_desc_t *ext4fs_block_dev_desc;
--+static disk_partition_t part_info;
--+
--+int ext4fs_set_blk_dev(block_dev_desc_t *rbdd, int part)
--+{
--+	ext4fs_block_dev_desc = rbdd;
--+
--+	if (part == 0) {
--+		/* disk doesn't use partition table */
--+		part_info.start = 0;
--+		part_info.size = rbdd->lba;
--+		part_info.blksz = rbdd->blksz;
--+	} else {
--+		if (get_partition_info(ext4fs_block_dev_desc,
--+					part, &part_info))
--+			return 0;
--+	}
--+	return part_info.size;
--+}
--+
--+int ext4fs_devread(int sector, int byte_offset, int byte_len, char *buf)
--+{
--+	char sec_buf[SECTOR_SIZE];
--+	unsigned block_len;
--+
--+	/* Check partition boundaries */
--+	if ((sector < 0)
--+	    || ((sector + ((byte_offset + byte_len - 1) >> SECTOR_BITS)) >=
--+		part_info.size)) {
--+		printf("%s read outside partition %d\n", __func__, sector);
--+		return 0;
--+	}
--+
--+	/* Get the read to the beginning of a partition */
--+	sector += byte_offset >> SECTOR_BITS;
--+	byte_offset &= SECTOR_SIZE - 1;
--+
--+	debug(" <%d, %d, %d>\n", sector, byte_offset, byte_len);
--+
--+	if (ext4fs_block_dev_desc == NULL) {
--+		printf("** Invalid Block Device Descriptor (NULL)\n");
--+		return 0;
--+	}
--+
--+	if (byte_offset != 0) {
--+		/* read first part which isn't aligned with start of sector */
--+		if (ext4fs_block_dev_desc->
--+		    block_read(ext4fs_block_dev_desc->dev,
--+				part_info.start + sector, 1,
--+				(unsigned long *) sec_buf) != 1) {
--+			printf(" ** ext2fs_devread() read error **\n");
--+			return 0;
--+		}
--+		memcpy(buf, sec_buf + byte_offset,
--+			min(SECTOR_SIZE - byte_offset, byte_len));
--+		buf += min(SECTOR_SIZE - byte_offset, byte_len);
--+		byte_len -= min(SECTOR_SIZE - byte_offset, byte_len);
--+		sector++;
--+	}
--+
--+	if (byte_len == 0)
--+		return 1;
--+
--+	/* read sector aligned part */
--+	block_len = byte_len & ~(SECTOR_SIZE - 1);
--+
--+	if (block_len == 0) {
--+		u8 p[SECTOR_SIZE];
--+
--+		block_len = SECTOR_SIZE;
--+		ext4fs_block_dev_desc->block_read(ext4fs_block_dev_desc->dev,
--+						  part_info.start + sector,
--+						  1, (unsigned long *)p);
--+		memcpy(buf, p, byte_len);
--+		return 1;
--+	}
--+
--+	if (ext4fs_block_dev_desc->block_read(ext4fs_block_dev_desc->dev,
--+					part_info.start + sector,
--+					block_len / SECTOR_SIZE,
--+					(unsigned long *) buf) !=
--+					block_len / SECTOR_SIZE) {
--+		printf(" ** %s read error - block\n", __func__);
--+		return 0;
--+	}
--+	block_len = byte_len & ~(SECTOR_SIZE - 1);
--+	buf += block_len;
--+	byte_len -= block_len;
--+	sector += block_len / SECTOR_SIZE;
--+
--+	if (byte_len != 0) {
--+		/* read rest of data which are not in whole sector */
--+		if (ext4fs_block_dev_desc->
--+		    block_read(ext4fs_block_dev_desc->dev,
--+				part_info.start + sector, 1,
--+				(unsigned long *) sec_buf) != 1) {
--+			printf("* %s read error - last part\n", __func__);
--+			return 0;
--+		}
--+		memcpy(buf, sec_buf, byte_len);
--+	}
--+	return 1;
--+}
--diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
--new file mode 100644
--index 0000000..d9deefe
----- /dev/null
--+++ b/fs/ext4/ext4_common.c
--@@ -0,0 +1,875 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * ext4ls and ext4load : Based on ext2 ls load support in Uboot.
--+ *
--+ * (C) Copyright 2004
--+ * esd gmbh <www.esd-electronics.com>
--+ * Reinhard Arlt <reinhard.arlt@esd-electronics.com>
--+ *
--+ * based on code from grub2 fs/ext2.c and fs/fshelp.c by
--+ * GRUB  --  GRand Unified Bootloader
--+ * Copyright (C) 2003, 2004  Free Software Foundation, Inc.
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License as published by
--+ * the Free Software Foundation; either version 2 of the License, or
--+ * (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--+ */
--+
--+#include <common.h>
--+#include <ext_common.h>
--+#include <ext4fs.h>
--+#include <malloc.h>
--+#include <stddef.h>
--+#include <linux/stat.h>
--+#include <linux/time.h>
--+#include <asm/byteorder.h>
--+#include "ext4_common.h"
--+
--+struct ext2_data *ext4fs_root;
--+struct ext2fs_node *ext4fs_file;
--+uint32_t *ext4fs_indir1_block;
--+int ext4fs_indir1_size;
--+int ext4fs_indir1_blkno = -1;
--+uint32_t *ext4fs_indir2_block;
--+int ext4fs_indir2_size;
--+int ext4fs_indir2_blkno = -1;
--+
--+uint32_t *ext4fs_indir3_block;
--+int ext4fs_indir3_size;
--+int ext4fs_indir3_blkno = -1;
--+struct ext2_inode *g_parent_inode;
--+static int symlinknest;
--+
--+static struct ext4_extent_header *ext4fs_get_extent_block
--+	(struct ext2_data *data, char *buf,
--+		struct ext4_extent_header *ext_block,
--+		uint32_t fileblock, int log2_blksz)
--+{
--+	struct ext4_extent_idx *index;
--+	unsigned long long block;
--+	struct ext_filesystem *fs = get_fs();
--+	int i;
--+
--+	while (1) {
--+		index = (struct ext4_extent_idx *)(ext_block + 1);
--+
--+		if (le32_to_cpu(ext_block->eh_magic) != EXT4_EXT_MAGIC)
--+			return 0;
--+
--+		if (ext_block->eh_depth == 0)
--+			return ext_block;
--+		i = -1;
--+		do {
--+			i++;
--+			if (i >= le32_to_cpu(ext_block->eh_entries))
--+				break;
--+		} while (fileblock > le32_to_cpu(index[i].ei_block));
--+
--+		if (--i < 0)
--+			return 0;
--+
--+		block = le32_to_cpu(index[i].ei_leaf_hi);
--+		block = (block << 32) + le32_to_cpu(index[i].ei_leaf_lo);
--+
--+		if (ext4fs_devread(block << log2_blksz, 0, fs->blksz, buf))
--+			ext_block = (struct ext4_extent_header *)buf;
--+		else
--+			return 0;
--+	}
--+}
--+
--+static int ext4fs_blockgroup
--+	(struct ext2_data *data, int group, struct ext2_block_group *blkgrp)
--+{
--+	long int blkno;
--+	unsigned int blkoff, desc_per_blk;
--+
--+	desc_per_blk = EXT2_BLOCK_SIZE(data) / sizeof(struct ext2_block_group);
--+
--+	blkno = __le32_to_cpu(data->sblock.first_data_block) + 1 +
--+	    group / desc_per_blk;
--+	blkoff = (group % desc_per_blk) * sizeof(struct ext2_block_group);
--+
--+	debug("ext4fs read %d group descriptor (blkno %ld blkoff %u)\n",
--+	      group, blkno, blkoff);
--+
--+	return ext4fs_devread(blkno << LOG2_EXT2_BLOCK_SIZE(data),
--+			      blkoff, sizeof(struct ext2_block_group),
--+			      (char *)blkgrp);
--+}
--+
--+int ext4fs_read_inode(struct ext2_data *data, int ino, struct ext2_inode *inode)
--+{
--+	struct ext2_block_group blkgrp;
--+	struct ext2_sblock *sblock = &data->sblock;
--+	struct ext_filesystem *fs = get_fs();
--+	int inodes_per_block, status;
--+	long int blkno;
--+	unsigned int blkoff;
--+
--+	/* It is easier to calculate if the first inode is 0. */
--+	ino--;
--+	status = ext4fs_blockgroup(data, ino / __le32_to_cpu
--+				   (sblock->inodes_per_group), &blkgrp);
--+	if (status == 0)
--+		return 0;
--+
--+	inodes_per_block = EXT2_BLOCK_SIZE(data) / fs->inodesz;
--+	blkno = __le32_to_cpu(blkgrp.inode_table_id) +
--+	    (ino % __le32_to_cpu(sblock->inodes_per_group)) / inodes_per_block;
--+	blkoff = (ino % inodes_per_block) * fs->inodesz;
--+	/* Read the inode. */
--+	status = ext4fs_devread(blkno << LOG2_EXT2_BLOCK_SIZE(data), blkoff,
--+				sizeof(struct ext2_inode), (char *)inode);
--+	if (status == 0)
--+		return 0;
--+
--+	return 1;
--+}
--+
--+long int read_allocated_block(struct ext2_inode *inode, int fileblock)
--+{
--+	long int blknr;
--+	int blksz;
--+	int log2_blksz;
--+	int status;
--+	long int rblock;
--+	long int perblock_parent;
--+	long int perblock_child;
--+	unsigned long long start;
--+	/* get the blocksize of the filesystem */
--+	blksz = EXT2_BLOCK_SIZE(ext4fs_root);
--+	log2_blksz = LOG2_EXT2_BLOCK_SIZE(ext4fs_root);
--+	if (le32_to_cpu(inode->flags) & EXT4_EXTENTS_FL) {
--+		char *buf = zalloc(blksz);
--+		if (!buf)
--+			return -ENOMEM;
--+		struct ext4_extent_header *ext_block;
--+		struct ext4_extent *extent;
--+		int i = -1;
--+		ext_block = ext4fs_get_extent_block(ext4fs_root, buf,
--+						    (struct ext4_extent_header
--+						     *)inode->b.
--+						    blocks.dir_blocks,
--+						    fileblock, log2_blksz);
--+		if (!ext_block) {
--+			printf("invalid extent block\n");
--+			free(buf);
--+			return -EINVAL;
--+		}
--+
--+		extent = (struct ext4_extent *)(ext_block + 1);
--+
--+		do {
--+			i++;
--+			if (i >= le32_to_cpu(ext_block->eh_entries))
--+				break;
--+		} while (fileblock >= le32_to_cpu(extent[i].ee_block));
--+		if (--i >= 0) {
--+			fileblock -= le32_to_cpu(extent[i].ee_block);
--+			if (fileblock >= le32_to_cpu(extent[i].ee_len)) {
--+				free(buf);
--+				return 0;
--+			}
--+
--+			start = le32_to_cpu(extent[i].ee_start_hi);
--+			start = (start << 32) +
--+			    le32_to_cpu(extent[i].ee_start_lo);
--+			free(buf);
--+			return fileblock + start;
--+		}
--+
--+		printf("Extent Error\n");
--+		free(buf);
--+		return -1;
--+	}
--+
--+	/* Direct blocks. */
--+	if (fileblock < INDIRECT_BLOCKS)
--+		blknr = __le32_to_cpu(inode->b.blocks.dir_blocks[fileblock]);
--+
--+	/* Indirect. */
--+	else if (fileblock < (INDIRECT_BLOCKS + (blksz / 4))) {
--+		if (ext4fs_indir1_block == NULL) {
--+			ext4fs_indir1_block = zalloc(blksz);
--+			if (ext4fs_indir1_block == NULL) {
--+				printf("** SI ext2fs read block (indir 1)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_size = blksz;
--+			ext4fs_indir1_blkno = -1;
--+		}
--+		if (blksz != ext4fs_indir1_size) {
--+			free(ext4fs_indir1_block);
--+			ext4fs_indir1_block = NULL;
--+			ext4fs_indir1_size = 0;
--+			ext4fs_indir1_blkno = -1;
--+			ext4fs_indir1_block = zalloc(blksz);
--+			if (ext4fs_indir1_block == NULL) {
--+				printf("** SI ext2fs read block (indir 1):"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_size = blksz;
--+		}
--+		if ((__le32_to_cpu(inode->b.blocks.indir_block) <<
--+		     log2_blksz) != ext4fs_indir1_blkno) {
--+			status =
--+			    ext4fs_devread(__le32_to_cpu
--+					   (inode->b.blocks.
--+					    indir_block) << log2_blksz, 0,
--+					   blksz, (char *)ext4fs_indir1_block);
--+			if (status == 0) {
--+				printf("** SI ext2fs read block (indir 1)"
--+				       "failed. **\n");
--+				return 0;
--+			}
--+			ext4fs_indir1_blkno =
--+			    __le32_to_cpu(inode->b.blocks.
--+					  indir_block) << log2_blksz;
--+		}
--+		blknr = __le32_to_cpu(ext4fs_indir1_block
--+				      [fileblock - INDIRECT_BLOCKS]);
--+	}
--+	/* Double indirect. */
--+	else if (fileblock < (INDIRECT_BLOCKS + (blksz / 4 *
--+					(blksz / 4 + 1)))) {
--+
--+		long int perblock = blksz / 4;
--+		long int rblock = fileblock - (INDIRECT_BLOCKS + blksz / 4);
--+
--+		if (ext4fs_indir1_block == NULL) {
--+			ext4fs_indir1_block = zalloc(blksz);
--+			if (ext4fs_indir1_block == NULL) {
--+				printf("** DI ext2fs read block (indir 2 1)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_size = blksz;
--+			ext4fs_indir1_blkno = -1;
--+		}
--+		if (blksz != ext4fs_indir1_size) {
--+			free(ext4fs_indir1_block);
--+			ext4fs_indir1_block = NULL;
--+			ext4fs_indir1_size = 0;
--+			ext4fs_indir1_blkno = -1;
--+			ext4fs_indir1_block = zalloc(blksz);
--+			if (ext4fs_indir1_block == NULL) {
--+				printf("** DI ext2fs read block (indir 2 1)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_size = blksz;
--+		}
--+		if ((__le32_to_cpu(inode->b.blocks.double_indir_block) <<
--+		     log2_blksz) != ext4fs_indir1_blkno) {
--+			status =
--+			    ext4fs_devread(__le32_to_cpu
--+					   (inode->b.blocks.
--+					    double_indir_block) << log2_blksz,
--+					   0, blksz,
--+					   (char *)ext4fs_indir1_block);
--+			if (status == 0) {
--+				printf("** DI ext2fs read block (indir 2 1)"
--+				       "failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_blkno =
--+			    __le32_to_cpu(inode->b.blocks.double_indir_block) <<
--+			    log2_blksz;
--+		}
--+
--+		if (ext4fs_indir2_block == NULL) {
--+			ext4fs_indir2_block = zalloc(blksz);
--+			if (ext4fs_indir2_block == NULL) {
--+				printf("** DI ext2fs read block (indir 2 2)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir2_size = blksz;
--+			ext4fs_indir2_blkno = -1;
--+		}
--+		if (blksz != ext4fs_indir2_size) {
--+			free(ext4fs_indir2_block);
--+			ext4fs_indir2_block = NULL;
--+			ext4fs_indir2_size = 0;
--+			ext4fs_indir2_blkno = -1;
--+			ext4fs_indir2_block = zalloc(blksz);
--+			if (ext4fs_indir2_block == NULL) {
--+				printf("** DI ext2fs read block (indir 2 2)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir2_size = blksz;
--+		}
--+		if ((__le32_to_cpu(ext4fs_indir1_block[rblock / perblock]) <<
--+		     log2_blksz) != ext4fs_indir2_blkno) {
--+			status = ext4fs_devread(__le32_to_cpu
--+						(ext4fs_indir1_block
--+						 [rblock /
--+						  perblock]) << log2_blksz, 0,
--+						blksz,
--+						(char *)ext4fs_indir2_block);
--+			if (status == 0) {
--+				printf("** DI ext2fs read block (indir 2 2)"
--+				       "failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir2_blkno =
--+			    __le32_to_cpu(ext4fs_indir1_block[rblock
--+							      /
--+							      perblock]) <<
--+			    log2_blksz;
--+		}
--+		blknr = __le32_to_cpu(ext4fs_indir2_block[rblock % perblock]);
--+	}
--+	/* Tripple indirect. */
--+	else {
--+		rblock = fileblock - (INDIRECT_BLOCKS + blksz / 4 +
--+				      (blksz / 4 * blksz / 4));
--+		perblock_child = blksz / 4;
--+		perblock_parent = ((blksz / 4) * (blksz / 4));
--+
--+		if (ext4fs_indir1_block == NULL) {
--+			ext4fs_indir1_block = zalloc(blksz);
--+			if (ext4fs_indir1_block == NULL) {
--+				printf("** TI ext2fs read block (indir 2 1)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_size = blksz;
--+			ext4fs_indir1_blkno = -1;
--+		}
--+		if (blksz != ext4fs_indir1_size) {
--+			free(ext4fs_indir1_block);
--+			ext4fs_indir1_block = NULL;
--+			ext4fs_indir1_size = 0;
--+			ext4fs_indir1_blkno = -1;
--+			ext4fs_indir1_block = zalloc(blksz);
--+			if (ext4fs_indir1_block == NULL) {
--+				printf("** TI ext2fs read block (indir 2 1)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_size = blksz;
--+		}
--+		if ((__le32_to_cpu(inode->b.blocks.triple_indir_block) <<
--+		     log2_blksz) != ext4fs_indir1_blkno) {
--+			status = ext4fs_devread
--+			    (__le32_to_cpu(inode->b.blocks.triple_indir_block)
--+			     << log2_blksz, 0, blksz,
--+			     (char *)ext4fs_indir1_block);
--+			if (status == 0) {
--+				printf("** TI ext2fs read block (indir 2 1)"
--+				       "failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_blkno =
--+			    __le32_to_cpu(inode->b.blocks.triple_indir_block) <<
--+			    log2_blksz;
--+		}
--+
--+		if (ext4fs_indir2_block == NULL) {
--+			ext4fs_indir2_block = zalloc(blksz);
--+			if (ext4fs_indir2_block == NULL) {
--+				printf("** TI ext2fs read block (indir 2 2)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir2_size = blksz;
--+			ext4fs_indir2_blkno = -1;
--+		}
--+		if (blksz != ext4fs_indir2_size) {
--+			free(ext4fs_indir2_block);
--+			ext4fs_indir2_block = NULL;
--+			ext4fs_indir2_size = 0;
--+			ext4fs_indir2_blkno = -1;
--+			ext4fs_indir2_block = zalloc(blksz);
--+			if (ext4fs_indir2_block == NULL) {
--+				printf("** TI ext2fs read block (indir 2 2)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir2_size = blksz;
--+		}
--+		if ((__le32_to_cpu(ext4fs_indir1_block[rblock /
--+						       perblock_parent]) <<
--+		     log2_blksz)
--+		    != ext4fs_indir2_blkno) {
--+			status = ext4fs_devread(__le32_to_cpu
--+						(ext4fs_indir1_block
--+						 [rblock /
--+						  perblock_parent]) <<
--+						log2_blksz, 0, blksz,
--+						(char *)ext4fs_indir2_block);
--+			if (status == 0) {
--+				printf("** TI ext2fs read block (indir 2 2)"
--+				       "failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir2_blkno =
--+			    __le32_to_cpu(ext4fs_indir1_block[rblock /
--+							      perblock_parent])
--+			    << log2_blksz;
--+		}
--+
--+		if (ext4fs_indir3_block == NULL) {
--+			ext4fs_indir3_block = zalloc(blksz);
--+			if (ext4fs_indir3_block == NULL) {
--+				printf("** TI ext2fs read block (indir 2 2)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir3_size = blksz;
--+			ext4fs_indir3_blkno = -1;
--+		}
--+		if (blksz != ext4fs_indir3_size) {
--+			free(ext4fs_indir3_block);
--+			ext4fs_indir3_block = NULL;
--+			ext4fs_indir3_size = 0;
--+			ext4fs_indir3_blkno = -1;
--+			ext4fs_indir3_block = zalloc(blksz);
--+			if (ext4fs_indir3_block == NULL) {
--+				printf("** TI ext2fs read block (indir 2 2)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir3_size = blksz;
--+		}
--+		if ((__le32_to_cpu(ext4fs_indir2_block[rblock
--+						       /
--+						       perblock_child]) <<
--+		     log2_blksz) != ext4fs_indir3_blkno) {
--+			status =
--+			    ext4fs_devread(__le32_to_cpu
--+					   (ext4fs_indir2_block
--+					    [(rblock / perblock_child)
--+					     % (blksz / 4)]) << log2_blksz, 0,
--+					   blksz, (char *)ext4fs_indir3_block);
--+			if (status == 0) {
--+				printf("** TI ext2fs read block (indir 2 2)"
--+				       "failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir3_blkno =
--+			    __le32_to_cpu(ext4fs_indir2_block[(rblock /
--+							       perblock_child) %
--+							      (blksz /
--+							       4)]) <<
--+			    log2_blksz;
--+		}
--+
--+		blknr = __le32_to_cpu(ext4fs_indir3_block
--+				      [rblock % perblock_child]);
--+	}
--+	debug("ext4fs_read_block %ld\n", blknr);
--+
--+	return blknr;
--+}
--+
--+void ext4fs_close(void)
--+{
--+	if ((ext4fs_file != NULL) && (ext4fs_root != NULL)) {
--+		ext4fs_free_node(ext4fs_file, &ext4fs_root->diropen);
--+		ext4fs_file = NULL;
--+	}
--+	if (ext4fs_root != NULL) {
--+		free(ext4fs_root);
--+		ext4fs_root = NULL;
--+	}
--+	if (ext4fs_indir1_block != NULL) {
--+		free(ext4fs_indir1_block);
--+		ext4fs_indir1_block = NULL;
--+		ext4fs_indir1_size = 0;
--+		ext4fs_indir1_blkno = -1;
--+	}
--+	if (ext4fs_indir2_block != NULL) {
--+		free(ext4fs_indir2_block);
--+		ext4fs_indir2_block = NULL;
--+		ext4fs_indir2_size = 0;
--+		ext4fs_indir2_blkno = -1;
--+	}
--+	if (ext4fs_indir3_block != NULL) {
--+		free(ext4fs_indir3_block);
--+		ext4fs_indir3_block = NULL;
--+		ext4fs_indir3_size = 0;
--+		ext4fs_indir3_blkno = -1;
--+	}
--+}
--+
--+int ext4fs_iterate_dir(struct ext2fs_node *dir, char *name,
--+		       struct ext2fs_node **fnode, int *ftype)
--+{
--+	unsigned int fpos = 0;
--+	int status;
--+	struct ext2fs_node *diro = (struct ext2fs_node *)dir;
--+
--+#ifdef DEBUG
--+	if (name != NULL)
--+		printf("Iterate dir %s\n", name);
--+#endif				/* of DEBUG */
--+	if (!diro->inode_read) {
--+		status = ext4fs_read_inode(diro->data, diro->ino, &diro->inode);
--+		if (status == 0)
--+			return 0;
--+	}
--+	/* Search the file.  */
--+	while (fpos < __le32_to_cpu(diro->inode.size)) {
--+		struct ext2_dirent dirent;
--+
--+		status = ext4fs_read_file(diro, fpos,
--+					  sizeof(struct ext2_dirent),
--+					  (char *)&dirent);
--+		if (status < 1)
--+			return 0;
--+
--+		if (dirent.namelen != 0) {
--+			char filename[dirent.namelen + 1];
--+			struct ext2fs_node *fdiro;
--+			int type = FILETYPE_UNKNOWN;
--+
--+			status = ext4fs_read_file(diro,
--+						  fpos +
--+						  sizeof(struct ext2_dirent),
--+						  dirent.namelen, filename);
--+			if (status < 1)
--+				return 0;
--+
--+			fdiro = zalloc(sizeof(struct ext2fs_node));
--+			if (!fdiro)
--+				return 0;
--+
--+			fdiro->data = diro->data;
--+			fdiro->ino = __le32_to_cpu(dirent.inode);
--+
--+			filename[dirent.namelen] = '\0';
--+
--+			if (dirent.filetype != FILETYPE_UNKNOWN) {
--+				fdiro->inode_read = 0;
--+
--+				if (dirent.filetype == FILETYPE_DIRECTORY)
--+					type = FILETYPE_DIRECTORY;
--+				else if (dirent.filetype == FILETYPE_SYMLINK)
--+					type = FILETYPE_SYMLINK;
--+				else if (dirent.filetype == FILETYPE_REG)
--+					type = FILETYPE_REG;
--+			} else {
--+				status = ext4fs_read_inode(diro->data,
--+							   __le32_to_cpu
--+							   (dirent.inode),
--+							   &fdiro->inode);
--+				if (status == 0) {
--+					free(fdiro);
--+					return 0;
--+				}
--+				fdiro->inode_read = 1;
--+
--+				if ((__le16_to_cpu(fdiro->inode.mode) &
--+				     FILETYPE_INO_MASK) ==
--+				    FILETYPE_INO_DIRECTORY) {
--+					type = FILETYPE_DIRECTORY;
--+				} else if ((__le16_to_cpu(fdiro->inode.mode)
--+					    & FILETYPE_INO_MASK) ==
--+					   FILETYPE_INO_SYMLINK) {
--+					type = FILETYPE_SYMLINK;
--+				} else if ((__le16_to_cpu(fdiro->inode.mode)
--+					    & FILETYPE_INO_MASK) ==
--+					   FILETYPE_INO_REG) {
--+					type = FILETYPE_REG;
--+				}
--+			}
--+#ifdef DEBUG
--+			printf("iterate >%s<\n", filename);
--+#endif				/* of DEBUG */
--+			if ((name != NULL) && (fnode != NULL)
--+			    && (ftype != NULL)) {
--+				if (strcmp(filename, name) == 0) {
--+					*ftype = type;
--+					*fnode = fdiro;
--+					return 1;
--+				}
--+			} else {
--+				if (fdiro->inode_read == 0) {
--+					status = ext4fs_read_inode(diro->data,
--+								 __le32_to_cpu(
--+								 dirent.inode),
--+								 &fdiro->inode);
--+					if (status == 0) {
--+						free(fdiro);
--+						return 0;
--+					}
--+					fdiro->inode_read = 1;
--+				}
--+				switch (type) {
--+				case FILETYPE_DIRECTORY:
--+					printf("<DIR> ");
--+					break;
--+				case FILETYPE_SYMLINK:
--+					printf("<SYM> ");
--+					break;
--+				case FILETYPE_REG:
--+					printf("      ");
--+					break;
--+				default:
--+					printf("< ? > ");
--+					break;
--+				}
--+				printf("%10d %s\n",
--+				       __le32_to_cpu(fdiro->inode.size),
--+				       filename);
--+			}
--+			free(fdiro);
--+		}
--+		fpos += __le16_to_cpu(dirent.direntlen);
--+	}
--+	return 0;
--+}
--+
--+static char *ext4fs_read_symlink(struct ext2fs_node *node)
--+{
--+	char *symlink;
--+	struct ext2fs_node *diro = node;
--+	int status;
--+
--+	if (!diro->inode_read) {
--+		status = ext4fs_read_inode(diro->data, diro->ino, &diro->inode);
--+		if (status == 0)
--+			return 0;
--+	}
--+	symlink = zalloc(__le32_to_cpu(diro->inode.size) + 1);
--+	if (!symlink)
--+		return 0;
--+
--+	if (__le32_to_cpu(diro->inode.size) <= 60) {
--+		strncpy(symlink, diro->inode.b.symlink,
--+			__le32_to_cpu(diro->inode.size));
--+	} else {
--+		status = ext4fs_read_file(diro, 0,
--+					  __le32_to_cpu(diro->inode.size),
--+					  symlink);
--+		if (status == 0) {
--+			free(symlink);
--+			return 0;
--+		}
--+	}
--+	symlink[__le32_to_cpu(diro->inode.size)] = '\0';
--+	return symlink;
--+}
--+
--+static int ext4fs_find_file1(const char *currpath,
--+			     struct ext2fs_node *currroot,
--+			     struct ext2fs_node **currfound, int *foundtype)
--+{
--+	char fpath[strlen(currpath) + 1];
--+	char *name = fpath;
--+	char *next;
--+	int status;
--+	int type = FILETYPE_DIRECTORY;
--+	struct ext2fs_node *currnode = currroot;
--+	struct ext2fs_node *oldnode = currroot;
--+
--+	strncpy(fpath, currpath, strlen(currpath) + 1);
--+
--+	/* Remove all leading slashes. */
--+	while (*name == '/')
--+		name++;
--+
--+	if (!*name) {
--+		*currfound = currnode;
--+		return 1;
--+	}
--+
--+	for (;;) {
--+		int found;
--+
--+		/* Extract the actual part from the pathname. */
--+		next = strchr(name, '/');
--+		if (next) {
--+			/* Remove all leading slashes. */
--+			while (*next == '/')
--+				*(next++) = '\0';
--+		}
--+
--+		if (type != FILETYPE_DIRECTORY) {
--+			ext4fs_free_node(currnode, currroot);
--+			return 0;
--+		}
--+
--+		oldnode = currnode;
--+
--+		/* Iterate over the directory. */
--+		found = ext4fs_iterate_dir(currnode, name, &currnode, &type);
--+		if (found == 0)
--+			return 0;
--+
--+		if (found == -1)
--+			break;
--+
--+		/* Read in the symlink and follow it. */
--+		if (type == FILETYPE_SYMLINK) {
--+			char *symlink;
--+
--+			/* Test if the symlink does not loop. */
--+			if (++symlinknest == 8) {
--+				ext4fs_free_node(currnode, currroot);
--+				ext4fs_free_node(oldnode, currroot);
--+				return 0;
--+			}
--+
--+			symlink = ext4fs_read_symlink(currnode);
--+			ext4fs_free_node(currnode, currroot);
--+
--+			if (!symlink) {
--+				ext4fs_free_node(oldnode, currroot);
--+				return 0;
--+			}
--+
--+			debug("Got symlink >%s<\n", symlink);
--+
--+			if (symlink[0] == '/') {
--+				ext4fs_free_node(oldnode, currroot);
--+				oldnode = &ext4fs_root->diropen;
--+			}
--+
--+			/* Lookup the node the symlink points to. */
--+			status = ext4fs_find_file1(symlink, oldnode,
--+						   &currnode, &type);
--+
--+			free(symlink);
--+
--+			if (status == 0) {
--+				ext4fs_free_node(oldnode, currroot);
--+				return 0;
--+			}
--+		}
--+
--+		ext4fs_free_node(oldnode, currroot);
--+
--+		/* Found the node! */
--+		if (!next || *next == '\0') {
--+			*currfound = currnode;
--+			*foundtype = type;
--+			return 1;
--+		}
--+		name = next;
--+	}
--+	return -1;
--+}
--+
--+int ext4fs_find_file(const char *path, struct ext2fs_node *rootnode,
--+	struct ext2fs_node **foundnode, int expecttype)
--+{
--+	int status;
--+	int foundtype = FILETYPE_DIRECTORY;
--+
--+	symlinknest = 0;
--+	if (!path)
--+		return 0;
--+
--+	status = ext4fs_find_file1(path, rootnode, foundnode, &foundtype);
--+	if (status == 0)
--+		return 0;
--+
--+	/* Check if the node that was found was of the expected type. */
--+	if ((expecttype == FILETYPE_REG) && (foundtype != expecttype))
--+		return 0;
--+	else if ((expecttype == FILETYPE_DIRECTORY)
--+		   && (foundtype != expecttype))
--+		return 0;
--+
--+	return 1;
--+}
--+
--+int ext4fs_open(const char *filename)
--+{
--+	struct ext2fs_node *fdiro = NULL;
--+	int status;
--+	int len;
--+
--+	if (ext4fs_root == NULL)
--+		return -1;
--+
--+	ext4fs_file = NULL;
--+	status = ext4fs_find_file(filename, &ext4fs_root->diropen, &fdiro,
--+				  FILETYPE_REG);
--+	if (status == 0)
--+		goto fail;
--+
--+	if (!fdiro->inode_read) {
--+		status = ext4fs_read_inode(fdiro->data, fdiro->ino,
--+					   &fdiro->inode);
--+		if (status == 0)
--+			goto fail;
--+	}
--+	len = __le32_to_cpu(fdiro->inode.size);
--+	ext4fs_file = fdiro;
--+
--+	return len;
--+ fail:
--+	ext4fs_free_node(fdiro, &ext4fs_root->diropen);
--+
--+	return -1;
--+}
--+
--+int ext4fs_mount(unsigned part_length)
--+{
--+	struct ext2_data *data;
--+	int status;
--+	struct ext_filesystem *fs = get_fs();
--+	data = zalloc(sizeof(struct ext2_data));
--+	if (!data)
--+		return 0;
--+
--+	/* Read the superblock. */
--+	status = ext4fs_devread(1 * 2, 0, sizeof(struct ext2_sblock),
--+				(char *)&data->sblock);
--+
--+	if (status == 0)
--+		goto fail;
--+
--+	/* Make sure this is an ext2 filesystem. */
--+	if (__le16_to_cpu(data->sblock.magic) != EXT2_MAGIC)
--+		goto fail;
--+
--+	if (__le32_to_cpu(data->sblock.revision_level == 0))
--+		fs->inodesz = 128;
--+	else
--+		fs->inodesz = __le16_to_cpu(data->sblock.inode_size);
--+
--+	debug("EXT2 rev %d, inode_size %d\n",
--+	      __le32_to_cpu(data->sblock.revision_level), fs->inodesz);
--+
--+	data->diropen.data = data;
--+	data->diropen.ino = 2;
--+	data->diropen.inode_read = 1;
--+	data->inode = &data->diropen.inode;
--+
--+	status = ext4fs_read_inode(data, 2, data->inode);
--+	if (status == 0)
--+		goto fail;
--+
--+	ext4fs_root = data;
--+
--+	return 1;
--+ fail:
--+	printf("Failed to mount ext2 filesystem...\n");
--+	free(data);
--+	ext4fs_root = NULL;
--+
--+	return 0;
--+}
--diff --git a/fs/ext4/ext4_common.h b/fs/ext4/ext4_common.h
--new file mode 100644
--index 0000000..18e6ad1
----- /dev/null
--+++ b/fs/ext4/ext4_common.h
--@@ -0,0 +1,63 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * ext4ls and ext4load :  based on ext2 ls load support in Uboot.
--+ *
--+ * (C) Copyright 2004
--+ * esd gmbh <www.esd-electronics.com>
--+ * Reinhard Arlt <reinhard.arlt@esd-electronics.com>
--+ *
--+ * based on code from grub2 fs/ext2.c and fs/fshelp.c by
--+ * GRUB  --  GRand Unified Bootloader
--+ * Copyright (C) 2003, 2004  Free Software Foundation, Inc.
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License as published by
--+ * the Free Software Foundation; either version 2 of the License, or
--+ * (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--+ */
--+
--+#ifndef __EXT4_COMMON__
--+#define __EXT4_COMMON__
--+#include <ext_common.h>
--+#include <ext4fs.h>
--+#include <malloc.h>
--+#include <asm/errno.h>
--+
--+#define YES		1
--+#define NO		0
--+#define TRUE		1
--+#define FALSE		0
--+#define RECOVER	1
--+#define SCAN		0
--+
--+#define S_IFLNK	0120000		/* symbolic link */
--+#define BLOCK_NO_ONE		1
--+#define SUPERBLOCK_SECTOR	2
--+#define SUPERBLOCK_SIZE	1024
--+#define F_FILE			1
--+
--+#define zalloc(size) calloc(1, size)
--+
--+extern unsigned long part_offset;
--+int ext4fs_read_inode(struct ext2_data *data, int ino,
--+		      struct ext2_inode *inode);
--+int ext4fs_read_file(struct ext2fs_node *node, int pos,
--+		unsigned int len, char *buf);
--+int ext4fs_find_file(const char *path, struct ext2fs_node *rootnode,
--+			struct ext2fs_node **foundnode, int expecttype);
--+int ext4fs_iterate_dir(struct ext2fs_node *dir, char *name,
--+			struct ext2fs_node **fnode, int *ftype);
--+#endif
--diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
--new file mode 100644
--index 0000000..7933769
----- /dev/null
--+++ b/fs/ext4/ext4fs.c
--@@ -0,0 +1,228 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * ext4ls and ext4load : Based on ext2 ls and load support in Uboot.
--+ *		       Ext4 read optimization taken from Open-Moko
--+ *		       Qi bootloader
--+ *
--+ * (C) Copyright 2004
--+ * esd gmbh <www.esd-electronics.com>
--+ * Reinhard Arlt <reinhard.arlt@esd-electronics.com>
--+ *
--+ * based on code from grub2 fs/ext2.c and fs/fshelp.c by
--+ * GRUB  --  GRand Unified Bootloader
--+ * Copyright (C) 2003, 2004  Free Software Foundation, Inc.
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License as published by
--+ * the Free Software Foundation; either version 2 of the License, or
--+ * (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--+ */
--+
--+#include <common.h>
--+#include <malloc.h>
--+#include <ext_common.h>
--+#include <ext4fs.h>
--+#include <linux/stat.h>
--+#include <linux/time.h>
--+#include <asm/byteorder.h>
--+#include "ext4_common.h"
--+
--+int ext4fs_symlinknest;
--+block_dev_desc_t *ext4_dev_desc;
--+
--+struct ext_filesystem *get_fs(void)
--+{
--+	if (ext4_dev_desc == NULL || ext4_dev_desc->priv == NULL)
--+		printf("Invalid Input Arguments %s\n", __func__);
--+
--+	return ext4_dev_desc->priv;
--+}
--+
--+int init_fs(block_dev_desc_t *dev_desc)
--+{
--+	struct ext_filesystem *fs;
--+	if (dev_desc == NULL) {
--+		printf("Invalid Input Arguments %s\n", __func__);
--+		return -EINVAL;
--+	}
--+
--+	fs = zalloc(sizeof(struct ext_filesystem));
--+	if (fs == NULL) {
--+		printf("malloc failed: %s\n", __func__);
--+		return -ENOMEM;
--+	}
--+
--+	fs->dev_desc = dev_desc;
--+	dev_desc->priv = fs;
--+
--+	return 0;
--+}
--+
--+void deinit_fs(block_dev_desc_t *dev_desc)
--+{
--+	if (dev_desc == NULL) {
--+		printf("Invalid Input Arguments %s\n", __func__);
--+		return;
--+	}
--+	free(dev_desc->priv);
--+	dev_desc->priv = NULL;
--+}
--+
--+void ext4fs_free_node(struct ext2fs_node *node, struct ext2fs_node *currroot)
--+{
--+	if ((node != &ext4fs_root->diropen) && (node != currroot))
--+		free(node);
--+}
--+
--+/*
--+ * Taken from openmoko-kernel mailing list: By Andy green
--+ * Optimized read file API : collects and defers contiguous sector
--+ * reads into one potentially more efficient larger sequential read action
--+ */
--+int ext4fs_read_file(struct ext2fs_node *node, int pos,
--+		     unsigned int len, char *buf)
--+{
--+	int i;
--+	int blockcnt;
--+	int log2blocksize = LOG2_EXT2_BLOCK_SIZE(node->data);
--+	int blocksize = 1 << (log2blocksize + DISK_SECTOR_BITS);
--+	unsigned int filesize = __le32_to_cpu(node->inode.size);
--+	int previous_block_number = -1;
--+	int delayed_start = 0;
--+	int delayed_extent = 0;
--+	int delayed_skipfirst = 0;
--+	int delayed_next = 0;
--+	char *delayed_buf = NULL;
--+	short status;
--+
--+	/* Adjust len so it we can't read past the end of the file. */
--+	if (len > filesize)
--+		len = filesize;
--+
--+	blockcnt = ((len + pos) + blocksize - 1) / blocksize;
--+
--+	for (i = pos / blocksize; i < blockcnt; i++) {
--+		int blknr;
--+		int blockoff = pos % blocksize;
--+		int blockend = blocksize;
--+		int skipfirst = 0;
--+		blknr = read_allocated_block(&(node->inode), i);
--+		if (blknr < 0)
--+			return -1;
--+
--+		blknr = blknr << log2blocksize;
--+
--+		/* Last block.  */
--+		if (i == blockcnt - 1) {
--+			blockend = (len + pos) % blocksize;
--+
--+			/* The last portion is exactly blocksize. */
--+			if (!blockend)
--+				blockend = blocksize;
--+		}
--+
--+		/* First block. */
--+		if (i == pos / blocksize) {
--+			skipfirst = blockoff;
--+			blockend -= skipfirst;
--+		}
--+		if (blknr) {
--+			int status;
--+
--+			if (previous_block_number != -1) {
--+				if (delayed_next == blknr) {
--+					delayed_extent += blockend;
--+					delayed_next += blockend >> SECTOR_BITS;
--+				} else {	/* spill */
--+					status = ext4fs_devread(delayed_start,
--+							delayed_skipfirst,
--+							delayed_extent,
--+							delayed_buf);
--+					if (status == 0)
--+						return -1;
--+					previous_block_number = blknr;
--+					delayed_start = blknr;
--+					delayed_extent = blockend;
--+					delayed_skipfirst = skipfirst;
--+					delayed_buf = buf;
--+					delayed_next = blknr +
--+					    (blockend >> SECTOR_BITS);
--+				}
--+			} else {
--+				previous_block_number = blknr;
--+				delayed_start = blknr;
--+				delayed_extent = blockend;
--+				delayed_skipfirst = skipfirst;
--+				delayed_buf = buf;
--+				delayed_next = blknr +
--+				    (blockend >> SECTOR_BITS);
--+			}
--+		} else {
--+			if (previous_block_number != -1) {
--+				/* spill */
--+				status = ext4fs_devread(delayed_start,
--+							delayed_skipfirst,
--+							delayed_extent,
--+							delayed_buf);
--+				if (status == 0)
--+					return -1;
--+				previous_block_number = -1;
--+			}
--+			memset(buf, 0, blocksize - skipfirst);
--+		}
--+		buf += blocksize - skipfirst;
--+	}
--+	if (previous_block_number != -1) {
--+		/* spill */
--+		status = ext4fs_devread(delayed_start,
--+					delayed_skipfirst, delayed_extent,
--+					delayed_buf);
--+		if (status == 0)
--+			return -1;
--+		previous_block_number = -1;
--+	}
--+
--+	return len;
--+}
--+
--+int ext4fs_ls(const char *dirname)
--+{
--+	struct ext2fs_node *dirnode;
--+	int status;
--+
--+	if (dirname == NULL)
--+		return 0;
--+
--+	status = ext4fs_find_file(dirname, &ext4fs_root->diropen, &dirnode,
--+				  FILETYPE_DIRECTORY);
--+	if (status != 1) {
--+		printf("** Can not find directory. **\n");
--+		return 1;
--+	}
--+
--+	ext4fs_iterate_dir(dirnode, NULL, NULL, NULL);
--+	ext4fs_free_node(dirnode, &ext4fs_root->diropen);
--+
--+	return 0;
--+}
--+
--+int ext4fs_read(char *buf, unsigned len)
--+{
--+	if (ext4fs_root == NULL || ext4fs_file == NULL)
--+		return 0;
--+
--+	return ext4fs_read_file(ext4fs_file, 0, len, buf);
--+}
--diff --git a/include/ext4fs.h b/include/ext4fs.h
--new file mode 100644
--index 0000000..58a6a1d
----- /dev/null
--+++ b/include/ext4fs.h
--@@ -0,0 +1,132 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * Ext4 Extent data structures are taken from  original ext4 fs code
--+ * as found in the linux kernel.
--+ *
--+ * Copyright (c) 2003-2006, Cluster File Systems, Inc, info@clusterfs.com
--+ * Written by Alex Tomas <alex@clusterfs.com>
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License version 2 as
--+ * published by the Free Software Foundation.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--+ */
--+
--+#ifndef __EXT4__
--+#define __EXT4__
--+#include <ext_common.h>
--+
--+#define EXT4_EXTENTS_FL		0x00080000 /* Inode uses extents */
--+#define EXT4_EXT_MAGIC			0xf30a
--+#define EXT4_FEATURE_RO_COMPAT_GDT_CSUM	0x0010
--+#define EXT4_FEATURE_INCOMPAT_EXTENTS	0x0040
--+#define EXT4_INDIRECT_BLOCKS		12
--+
--+#define EXT4_BG_INODE_UNINIT		0x0001
--+#define EXT4_BG_BLOCK_UNINIT		0x0002
--+#define EXT4_BG_INODE_ZEROED		0x0004
--+
--+/*
--+ * ext4_inode has i_block array (60 bytes total).
--+ * The first 12 bytes store ext4_extent_header;
--+ * the remainder stores an array of ext4_extent.
--+ */
--+
--+/*
--+ * This is the extent on-disk structure.
--+ * It's used at the bottom of the tree.
--+ */
--+struct ext4_extent {
--+	__le32	ee_block;	/* first logical block extent covers */
--+	__le16	ee_len;		/* number of blocks covered by extent */
--+	__le16	ee_start_hi;	/* high 16 bits of physical block */
--+	__le32	ee_start_lo;	/* low 32 bits of physical block */
--+};
--+
--+/*
--+ * This is index on-disk structure.
--+ * It's used at all the levels except the bottom.
--+ */
--+struct ext4_extent_idx {
--+	__le32	ei_block;	/* index covers logical blocks from 'block' */
--+	__le32	ei_leaf_lo;	/* pointer to the physical block of the next *
--+				 * level. leaf or next index could be there */
--+	__le16	ei_leaf_hi;	/* high 16 bits of physical block */
--+	__u16	ei_unused;
--+};
--+
--+/* Each block (leaves and indexes), even inode-stored has header. */
--+struct ext4_extent_header {
--+	__le16	eh_magic;	/* probably will support different formats */
--+	__le16	eh_entries;	/* number of valid entries */
--+	__le16	eh_max;		/* capacity of store in entries */
--+	__le16	eh_depth;	/* has tree real underlying blocks? */
--+	__le32	eh_generation;	/* generation of the tree */
--+};
--+
--+struct ext_filesystem {
--+	/* Total Sector of partition */
--+	uint64_t total_sect;
--+	/* Block size  of partition */
--+	uint32_t blksz;
--+	/* Inode size of partition */
--+	uint32_t inodesz;
--+	/* Sectors per Block */
--+	uint32_t sect_perblk;
--+	/* Group Descriptor Block Number */
--+	uint32_t gdtable_blkno;
--+	/* Total block groups of partition */
--+	uint32_t no_blkgrp;
--+	/* No of blocks required for bgdtable */
--+	uint32_t no_blk_pergdt;
--+	/* Superblock */
--+	struct ext2_sblock *sb;
--+	/* Block group descritpor table */
--+	struct ext2_block_group *gd;
--+	char *gdtable;
--+
--+	/* Block Bitmap Related */
--+	unsigned char **blk_bmaps;
--+	long int curr_blkno;
--+	uint16_t first_pass_bbmap;
--+
--+	/* Inode Bitmap Related */
--+	unsigned char **inode_bmaps;
--+	int curr_inode_no;
--+	uint16_t first_pass_ibmap;
--+
--+	/* Journal Related */
--+
--+	/* Block Device Descriptor */
--+	block_dev_desc_t *dev_desc;
--+};
--+
--+extern block_dev_desc_t *ext4_dev_desc;
--+extern struct ext2_data *ext4fs_root;
--+extern struct ext2fs_node *ext4fs_file;
--+
--+struct ext_filesystem *get_fs(void);
--+int init_fs(block_dev_desc_t *dev_desc);
--+void deinit_fs(block_dev_desc_t *dev_desc);
--+int ext4fs_open(const char *filename);
--+int ext4fs_read(char *buf, unsigned len);
--+int ext4fs_mount(unsigned part_length);
--+void ext4fs_close(void);
--+int ext4fs_ls(const char *dirname);
--+void ext4fs_free_node(struct ext2fs_node *node, struct ext2fs_node *currroot);
--+int ext4fs_devread(int sector, int byte_offset, int byte_len, char *buf);
--+int ext4fs_set_blk_dev(block_dev_desc_t *rbdd, int part);
--+long int read_allocated_block(struct ext2_inode *inode, int fileblock);
--+#endif
--diff --git a/include/ext_common.h b/include/ext_common.h
--new file mode 100644
--index 0000000..5d48021
----- /dev/null
--+++ b/include/ext_common.h
--@@ -0,0 +1,188 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * Data structures and headers for ext4 support have been taken from
--+ * ext2 ls load support in Uboot
--+ *
--+ * (C) Copyright 2004
--+ * esd gmbh <www.esd-electronics.com>
--+ * Reinhard Arlt <reinhard.arlt@esd-electronics.com>
--+ *
--+ * based on code from grub2 fs/ext2.c and fs/fshelp.c by
--+ * GRUB  --  GRand Unified Bootloader
--+ * Copyright (C) 2003, 2004  Free Software Foundation, Inc.
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License as published by
--+ * the Free Software Foundation; either version 2 of the License, or
--+ * (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--+ */
--+
--+#ifndef __EXT_COMMON__
--+#define __EXT_COMMON__
--+
--+#define SECTOR_SIZE		0x200
--+#define SECTOR_BITS		9
--+
--+/* Magic value used to identify an ext2 filesystem.  */
--+#define	EXT2_MAGIC		0xEF53
--+/* Amount of indirect blocks in an inode.  */
--+#define INDIRECT_BLOCKS		12
--+/* Maximum lenght of a pathname.  */
--+#define EXT2_PATH_MAX			4096
--+/* Maximum nesting of symlinks, used to prevent a loop.  */
--+#define	EXT2_MAX_SYMLINKCNT		8
--+
--+/* Filetype used in directory entry.  */
--+#define	FILETYPE_UNKNOWN		0
--+#define	FILETYPE_REG			1
--+#define	FILETYPE_DIRECTORY		2
--+#define	FILETYPE_SYMLINK		7
--+
--+/* Filetype information as used in inodes.  */
--+#define FILETYPE_INO_MASK		0170000
--+#define FILETYPE_INO_REG		0100000
--+#define FILETYPE_INO_DIRECTORY		0040000
--+#define FILETYPE_INO_SYMLINK		0120000
--+#define EXT2_ROOT_INO			2 /* Root inode */
--+
--+/* Bits used as offset in sector */
--+#define DISK_SECTOR_BITS		9
--+/* The size of an ext2 block in bytes.  */
--+#define EXT2_BLOCK_SIZE(data)	   (1 << LOG2_BLOCK_SIZE(data))
--+
--+/* Log2 size of ext2 block in 512 blocks.  */
--+#define LOG2_EXT2_BLOCK_SIZE(data) (__le32_to_cpu \
--+				(data->sblock.log2_block_size) + 1)
--+
--+/* Log2 size of ext2 block in bytes.  */
--+#define LOG2_BLOCK_SIZE(data)	   (__le32_to_cpu \
--+		(data->sblock.log2_block_size) + 10)
--+#define INODE_SIZE_FILESYSTEM(data)	(__le32_to_cpu \
--+			(data->sblock.inode_size))
--+
--+#define EXT2_FT_DIR	2
--+#define SUCCESS	1
--+
--+/* Macro-instructions used to manage several block sizes  */
--+#define EXT2_MIN_BLOCK_LOG_SIZE	10 /* 1024 */
--+#define EXT2_MAX_BLOCK_LOG_SIZE	16 /* 65536 */
--+#define EXT2_MIN_BLOCK_SIZE		(1 << EXT2_MIN_BLOCK_LOG_SIZE)
--+#define EXT2_MAX_BLOCK_SIZE		(1 << EXT2_MAX_BLOCK_LOG_SIZE)
--+
--+/* The ext2 superblock.  */
--+struct ext2_sblock {
--+	uint32_t total_inodes;
--+	uint32_t total_blocks;
--+	uint32_t reserved_blocks;
--+	uint32_t free_blocks;
--+	uint32_t free_inodes;
--+	uint32_t first_data_block;
--+	uint32_t log2_block_size;
--+	uint32_t log2_fragment_size;
--+	uint32_t blocks_per_group;
--+	uint32_t fragments_per_group;
--+	uint32_t inodes_per_group;
--+	uint32_t mtime;
--+	uint32_t utime;
--+	uint16_t mnt_count;
--+	uint16_t max_mnt_count;
--+	uint16_t magic;
--+	uint16_t fs_state;
--+	uint16_t error_handling;
--+	uint16_t minor_revision_level;
--+	uint32_t lastcheck;
--+	uint32_t checkinterval;
--+	uint32_t creator_os;
--+	uint32_t revision_level;
--+	uint16_t uid_reserved;
--+	uint16_t gid_reserved;
--+	uint32_t first_inode;
--+	uint16_t inode_size;
--+	uint16_t block_group_number;
--+	uint32_t feature_compatibility;
--+	uint32_t feature_incompat;
--+	uint32_t feature_ro_compat;
--+	uint32_t unique_id[4];
--+	char volume_name[16];
--+	char last_mounted_on[64];
--+	uint32_t compression_info;
--+};
--+
--+struct ext2_block_group {
--+	__u32 block_id;	/* Blocks bitmap block */
--+	__u32 inode_id;	/* Inodes bitmap block */
--+	__u32 inode_table_id;	/* Inodes table block */
--+	__u16 free_blocks;	/* Free blocks count */
--+	__u16 free_inodes;	/* Free inodes count */
--+	__u16 used_dir_cnt;	/* Directories count */
--+	__u16 bg_flags;
--+	__u32 bg_reserved[2];
--+	__u16 bg_itable_unused; /* Unused inodes count */
--+	__u16 bg_checksum;	/* crc16(s_uuid+grouo_num+group_desc)*/
--+};
--+
--+/* The ext2 inode. */
--+struct ext2_inode {
--+	uint16_t mode;
--+	uint16_t uid;
--+	uint32_t size;
--+	uint32_t atime;
--+	uint32_t ctime;
--+	uint32_t mtime;
--+	uint32_t dtime;
--+	uint16_t gid;
--+	uint16_t nlinks;
--+	uint32_t blockcnt;	/* Blocks of 512 bytes!! */
--+	uint32_t flags;
--+	uint32_t osd1;
--+	union {
--+		struct datablocks {
--+			uint32_t dir_blocks[INDIRECT_BLOCKS];
--+			uint32_t indir_block;
--+			uint32_t double_indir_block;
--+			uint32_t triple_indir_block;
--+		} blocks;
--+		char symlink[60];
--+	} b;
--+	uint32_t version;
--+	uint32_t acl;
--+	uint32_t dir_acl;
--+	uint32_t fragment_addr;
--+	uint32_t osd2[3];
--+};
--+
--+/* The header of an ext2 directory entry. */
--+struct ext2_dirent {
--+	uint32_t inode;
--+	uint16_t direntlen;
--+	uint8_t namelen;
--+	uint8_t filetype;
--+};
--+
--+struct ext2fs_node {
--+	struct ext2_data *data;
--+	struct ext2_inode inode;
--+	int ino;
--+	int inode_read;
--+};
--+
--+/* Information about a "mounted" ext2 filesystem. */
--+struct ext2_data {
--+	struct ext2_sblock sblock;
--+	struct ext2_inode *inode;
--+	struct ext2fs_node diropen;
--+};
--+#endif
---- 
--1.7.10
+-SGXPV = "5_01_00_01"
+-IMGPV = "1.10.2359475"
 -
-diff --git a/recipes-bsp/u-boot/u-boot/2011.09git/0010-am335x-switch-to-ext4-mode.patch b/recipes-bsp/u-boot/u-boot/2011.09git/0010-am335x-switch-to-ext4-mode.patch
-deleted file mode 100644
-index 4511b6b..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.09git/0010-am335x-switch-to-ext4-mode.patch
-+++ /dev/null
-@@ -1,52 +0,0 @@
--From 9e1a99476875b1f1e6e34e70d9bf6e77d3ac8fba Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Wed, 4 Apr 2012 00:06:31 +0200
--Subject: [PATCH 10/10] am335x: switch to ext4 mode
+-TI_BIN_UNPK_WDEXT := "/Graphics_SDK_${SGXPV}"
 -
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/am335x_evm.h |    7 ++++---
-- 1 file changed, 4 insertions(+), 3 deletions(-)
+-BINFILE_HARDFP = "Graphics_SDK_setuplinux_hardfp_${SGXPV}.bin"
+-MD5SUM_HARDFP = "0ee7d59808330d442a51c0990c2cb30e"
+-SHA256SUM_HARDFP = "769daae439677a7a85bbbced14cee4f85b19823e0b99560078d0a864c525c128"
 -
--diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
--index e42febe..e2be380 100755
----- a/include/configs/am335x_evm.h
--+++ b/include/configs/am335x_evm.h
--@@ -75,7 +75,7 @@
-- 	"importbootenv=echo Importing environment from mmc ...; " \
-- 		"env import -t $loadaddr $filesize\0" \
-- 	"mmc_load_uimage=fatload mmc ${mmc_dev}:1 ${kloadaddr} ${bootfile}\0" \
---	"mmc_load_uimage_ext2=ext2load mmc ${mmc_dev}:2 ${kloadaddr} /boot/${bootfile}\0" \
--+	"mmc_load_uimage_ext4=ext4load mmc ${mmc_dev}:2 ${kloadaddr} /boot/${bootfile}\0" \
-- 	"bootargs_defaults=setenv bootargs " \
-- 		"console=${console} " \
-- 		"${optargs}\0" \
--@@ -101,7 +101,7 @@
-- 		"nfsroot=${serverip}:${rootpath},${nfsopts} rw " \
-- 		"ip=dhcp\0" \
-- 	"mmc_boot=run mmc_args; " \
---		"run mmc_load_uimage_ext2; " \
--+		"run mmc_load_uimage_ext4; " \
-- 		"bootm ${kloadaddr}\0" \
-- 	"nand_boot=echo Booting from nand ...; " \
-- 		"run nand_args; " \
--@@ -139,7 +139,7 @@
-- 			"echo Running uenvcmd ...;" \
-- 			"run uenvcmd;" \
-- 		"fi;" \
---		"if run mmc_load_uimage_ext2; then " \
--+		"if run mmc_load_uimage_ext4; then " \
-- 			"run mmc_args;" \
-- 			"bootm ${kloadaddr};" \
-- 		"fi;" \
--@@ -426,6 +426,7 @@
-- #define CONFIG_DOS_PARTITION
-- #define CONFIG_CMD_FAT
-- #define CONFIG_CMD_EXT2
--+#define CONFIG_CMD_EXT4
-- #endif
-- 
-- /* Unsupported features */
---- 
--1.7.10
+-# For now we only have hardfp version
+-python __anonymous() {
+-    tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
+-    if not tunes:
+-        return
+-    pkgn = bb.data.getVar("PN", d, 1)
+-    pkgv = bb.data.getVar("PV", d, 1)
+-    if "callconvention-hard" not in tunes:
+-        bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+-        raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+-}
 -
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0001-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch b/recipes-bsp/u-boot/u-boot/2011.12/0001-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch
-deleted file mode 100644
-index 02f91c5..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0001-beagleboard-mount-rootfs-RO-instead-of-RW-at-boot.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From e435374789db01c9499ec169b295496f039ec401 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sun, 27 Nov 2011 14:43:58 +0100
--Subject: [PATCH 01/10] beagleboard: mount rootfs RO instead of RW at boot
+-BINFILE := "${BINFILE_HARDFP}"
 -
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/omap3_beagle.h |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
+-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/gfxsdk/${SGXPV}/exports/${BINFILE} \
+-           file://cputype \
+-           file://rc.pvr \
+-           file://99-bufferclass.rules  \
+-"
 -
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 91af8a0..d4f33d0 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -220,7 +220,7 @@
-- 	"dvimode=640x480MR-16@60\0" \
-- 	"defaultdisplay=dvi\0" \
-- 	"mmcdev=0\0" \
---	"mmcroot=/dev/mmcblk0p2 rw\0" \
--+	"mmcroot=/dev/mmcblk0p2 ro\0" \
-- 	"mmcrootfstype=ext3 rootwait\0" \
-- 	"nandroot=ubi0:rootfs ubi.mtd=4\0" \
-- 	"nandrootfstype=ubifs\0" \
---- 
--1.7.2.5
+-SRC_URI[md5sum] := "${MD5SUM_HARDFP}"
+-SRC_URI[sha256sum] := "${SHA256SUM_HARDFP}"
 -
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0002-beagleboard-add-support-for-TCT-Beacon-board.patch b/recipes-bsp/u-boot/u-boot/2011.12/0002-beagleboard-add-support-for-TCT-Beacon-board.patch
-deleted file mode 100644
-index df3a09e..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0002-beagleboard-add-support-for-TCT-Beacon-board.patch
-+++ /dev/null
-@@ -1,65 +0,0 @@
--From 7c1bb614d0235c69e118f0552cbf46047f557b8c Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 8 Oct 2011 21:56:35 +0200
--Subject: [PATCH 02/10] beagleboard: add support for TCT Beacon board
+-S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
 -
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- board/ti/beagle/beagle.c |   10 ++++++++++
-- board/ti/beagle/beagle.h |    7 +++++++
-- 2 files changed, 17 insertions(+), 0 deletions(-)
--
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 6a457cb..9c2e6d0 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -59,11 +59,14 @@ extern volatile struct ehci_hcor *hcor;
-- #define TWL4030_I2C_BUS			0
-- #define EXPANSION_EEPROM_I2C_BUS	1
-- #define EXPANSION_EEPROM_I2C_ADDRESS	0x50
--+#define DVI_EDID_I2C_BUS	2
--+#define DVI_EDID_I2C_ADDRESS	0x50
-- 
-- #define TINCANTOOLS_ZIPPY		0x01000100
-- #define TINCANTOOLS_ZIPPY2		0x02000100
-- #define TINCANTOOLS_TRAINER		0x04000100
-- #define TINCANTOOLS_SHOWDOG		0x03000100
--+#define TINCANTOOLS_BEACON		0x05000100
-- #define KBADC_BEAGLEFPGA		0x01000600
-- #define LW_BEAGLETOUCH			0x01000700
-- #define BRAINMUX_LCDOG			0x01000800
--@@ -351,6 +354,13 @@ int misc_init_r(void)
-- 		setenv("defaultdisplay", "showdoglcd");
-- 		setenv("buddy", "showdog");
-- 		break;
--+	case TINCANTOOLS_BEACON:
--+		printf("Recognized Tincantools Beacon board (rev %d %s)\n",
--+			expansion_config.revision,
--+			expansion_config.fab_revision);
--+		MUX_TINCANTOOLS_BEACON();
--+		setenv("buddy", "beacon");
--+		break;
-- 	case KBADC_BEAGLEFPGA:
-- 		printf("Recognized KBADC Beagle FPGA board\n");
-- 		MUX_KBADC_BEAGLEFPGA();
--diff --git a/board/ti/beagle/beagle.h b/board/ti/beagle/beagle.h
--index 18bfaa8..6a9ad73 100644
----- a/board/ti/beagle/beagle.h
--+++ b/board/ti/beagle/beagle.h
--@@ -456,6 +456,13 @@ const omap3_sysinfo sysinfo = {
-- 	MUX_VAL(CP(MCBSP3_CLKX),    (IEN  | PTU | EN  | M4)) /*GPIO_141*/\
-- 	MUX_VAL(CP(MCBSP1_CLKX),    (IEN  | PTU | EN  | M4)) /*GPIO_162*/
-- 
--+#define MUX_TINCANTOOLS_BEACON() \
--+	MUX_VAL(CP(MMC2_DAT3),      (IEN  | PTU | EN  | M4)) /*GPIO_135*/\
--+	MUX_VAL(CP(MMC2_DAT4),      (IEN  | PTU | EN  | M4)) /*GPIO_136*/\
--+	MUX_VAL(CP(MMC2_DAT5),      (IEN  | PTU | EN  | M4)) /*GPIO_137*/\
--+	MUX_VAL(CP(MMC2_DAT6),      (IEN  | PTU | EN  | M4)) /*GPIO_138*/\
--+	MUX_VAL(CP(MMC2_DAT7),      (IEN  | PTU | EN  | M4)) /*GPIO_139*/\
--+
-- #define MUX_KBADC_BEAGLEFPGA() \
-- 	MUX_VAL(CP(MCBSP1_CLKR),    (IEN  | PTU | DIS | M1)) /*MCSPI4_CLK*/\
-- 	MUX_VAL(CP(MCBSP1_DX),      (IDIS | PTU | DIS | M1)) /*MCSPI4_SIMO*/\
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0003-beagleboard-add-support-for-scanning-loop-through-ex.patch b/recipes-bsp/u-boot/u-boot/2011.12/0003-beagleboard-add-support-for-scanning-loop-through-ex.patch
-deleted file mode 100644
-index 1bbe14e..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0003-beagleboard-add-support-for-scanning-loop-through-ex.patch
-+++ /dev/null
-@@ -1,121 +0,0 @@
--From c8c3b1adff56c49f20732846a7087e95f6916e61 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sun, 27 Nov 2011 14:53:56 +0100
--Subject: [PATCH 03/10] beagleboard: add support for scanning loop-through expansionboards like the uLCD-lite
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- board/ti/beagle/beagle.c       |   30 ++++++++++++++++++++++++++----
-- include/configs/omap3_beagle.h |    4 ++++
-- 2 files changed, 30 insertions(+), 4 deletions(-)
--
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 9c2e6d0..5ea50d1 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -74,6 +74,7 @@ extern volatile struct ehci_hcor *hcor;
-- #define BBTOYS_WIFI			0x01000B00
-- #define BBTOYS_VGA			0x02000B00
-- #define BBTOYS_LCD			0x03000B00
--+#define BBTOYS_ULCD			0x04000B00
-- #define BEAGLE_NO_EEPROM		0xffffffff
-- 
-- DECLARE_GLOBAL_DATA_PTR;
--@@ -209,18 +210,18 @@ void get_board_mem_timings(u32 *mcfg, u32 *ctrla, u32 *ctrlb, u32 *rfr_ctrl,
--  *		bus 1 for the availability of an AT24C01B serial EEPROM.
--  *		returns the device_vendor field from the EEPROM
--  */
---unsigned int get_expansion_id(void)
--+unsigned int get_expansion_id(int eeprom_address)
-- {
-- 	i2c_set_bus_num(EXPANSION_EEPROM_I2C_BUS);
-- 
-- 	/* return BEAGLE_NO_EEPROM if eeprom doesn't respond */
---	if (i2c_probe(EXPANSION_EEPROM_I2C_ADDRESS) == 1) {
--+	if (i2c_probe(eeprom_address) == 1) {
-- 		i2c_set_bus_num(TWL4030_I2C_BUS);
-- 		return BEAGLE_NO_EEPROM;
-- 	}
-- 
-- 	/* read configuration data */
---	i2c_read(EXPANSION_EEPROM_I2C_ADDRESS, 0, 1, (u8 *)&expansion_config,
--+	i2c_read(eeprom_address, 0, 1, (u8 *)&expansion_config,
-- 		 sizeof(expansion_config));
-- 
-- 	i2c_set_bus_num(TWL4030_I2C_BUS);
--@@ -323,7 +324,7 @@ int misc_init_r(void)
-- 					TWL4030_PM_RECEIVER_DEV_GRP_P1);
-- 	}
-- 
---	switch (get_expansion_id()) {
--+	switch (get_expansion_id(EXPANSION_EEPROM_I2C_ADDRESS)) {
-- 	case TINCANTOOLS_ZIPPY:
-- 		printf("Recognized Tincantools Zippy board (rev %d %s)\n",
-- 			expansion_config.revision,
--@@ -402,6 +403,27 @@ int misc_init_r(void)
-- 	if (expansion_config.content == 1)
-- 		setenv(expansion_config.env_var, expansion_config.env_setting);
-- 
--+	/* Scan 0x51 as well for loop-thru boards */
--+	switch (get_expansion_id(EXPANSION_EEPROM_I2C_ADDRESS + 1)) {
--+	case BBTOYS_ULCD:
--+		printf("Recognized BeagleBoardToys uLCD-lite board\n");
--+		setenv("buddy2", "bbtoys-ulcd");
--+		setenv("defaultdisplay", "lcd");
--+		//setenv("uenvcmd", "i2c dev 1 ; i2c mw 40 00 00; i2c mw 40 04 80; i2c mw 40 0d 05; i2c mw 40 0d 15");
--+		break;
--+	case BEAGLE_NO_EEPROM:
--+		printf("No EEPROM on expansion board\n");
--+		setenv("buddy2", "none");
--+		break;
--+	default:
--+		printf("Unrecognized expansion board: %x\n",
--+			expansion_config.device_vendor);
--+		setenv("buddy2", "unknown");
--+	}
--+
--+	if (expansion_config.content == 1)
--+		setenv(expansion_config.env_var, expansion_config.env_setting);
--+
-- 	twl4030_power_init();
-- 	switch (get_board_revision()) {
-- 	case REVISION_XM_A:
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index d4f33d0..65ab8ee 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -214,6 +214,7 @@
-- 	"console=ttyO2,115200n8\0" \
-- 	"mpurate=auto\0" \
-- 	"buddy=none "\
--+	"buddy2=none "\
-- 	"optargs=\0" \
-- 	"camera=none\0" \
-- 	"vram=12M\0" \
--@@ -230,6 +231,7 @@
-- 		"${optargs} " \
-- 		"mpurate=${mpurate} " \
-- 		"buddy=${buddy} "\
--+		"buddy2=${buddy2} "\
-- 		"camera=${camera} "\
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
--@@ -240,6 +242,7 @@
-- 		"${optargs} " \
-- 		"mpurate=${mpurate} " \
-- 		"buddy=${buddy} "\
--+		"buddy2=${buddy2} "\
-- 		"camera=${camera} "\
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
--@@ -254,6 +257,7 @@
-- 		"${optargs} " \
-- 		"mpurate=${mpurate} " \
-- 		"buddy=${buddy} "\
--+		"buddy2=${buddy2} "\
-- 		"vram=${vram} " \
-- 		"omapfb.mode=dvi:${dvimode} " \
-- 		"omapdss.def_disp=${defaultdisplay} " \
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0004-omap4-common-mount-root-RO.patch b/recipes-bsp/u-boot/u-boot/2011.12/0004-omap4-common-mount-root-RO.patch
-deleted file mode 100644
-index ed340a0..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0004-omap4-common-mount-root-RO.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From e4ac25df241bc2f3e6e2b7116529e82dfa5aab00 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Thu, 8 Dec 2011 17:22:59 +0100
--Subject: [PATCH 04/10] omap4-common: mount root RO
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/omap4_common.h |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/include/configs/omap4_common.h b/include/configs/omap4_common.h
--index a989721..54760e9 100644
----- a/include/configs/omap4_common.h
--+++ b/include/configs/omap4_common.h
--@@ -154,7 +154,7 @@
-- 	"usbtty=cdc_acm\0" \
-- 	"vram=16M\0" \
-- 	"mmcdev=0\0" \
---	"mmcroot=/dev/mmcblk0p2 rw\0" \
--+	"mmcroot=/dev/mmcblk0p2 ro\0" \
-- 	"mmcrootfstype=ext3 rootwait\0" \
-- 	"mmcargs=setenv bootargs console=${console} " \
-- 		"vram=${vram} " \
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0005-omap4-common-use-ext4-by-default.patch b/recipes-bsp/u-boot/u-boot/2011.12/0005-omap4-common-use-ext4-by-default.patch
-deleted file mode 100644
-index 97dab04..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0005-omap4-common-use-ext4-by-default.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From 9e4679bdc5a2f3908f9d5e757c9706c0040e3643 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Thu, 8 Dec 2011 17:23:24 +0100
--Subject: [PATCH 05/10] omap4-common: use ext4 by default
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/omap4_common.h |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/include/configs/omap4_common.h b/include/configs/omap4_common.h
--index 54760e9..7637688 100644
----- a/include/configs/omap4_common.h
--+++ b/include/configs/omap4_common.h
--@@ -155,7 +155,7 @@
-- 	"vram=16M\0" \
-- 	"mmcdev=0\0" \
-- 	"mmcroot=/dev/mmcblk0p2 ro\0" \
---	"mmcrootfstype=ext3 rootwait\0" \
--+	"mmcrootfstype=ext4 rootwait\0" \
-- 	"mmcargs=setenv bootargs console=${console} " \
-- 		"vram=${vram} " \
-- 		"root=${mmcroot} " \
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0006-OMAP-MMC-Add-delay-before-waiting-for-status.patch b/recipes-bsp/u-boot/u-boot/2011.12/0006-OMAP-MMC-Add-delay-before-waiting-for-status.patch
-deleted file mode 100644
-index 8429365..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0006-OMAP-MMC-Add-delay-before-waiting-for-status.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--From 64e971ecd4bb1dec118b5687dfa7c57790922bba Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
--Date: Wed, 21 Dec 2011 23:56:35 +0000
--Subject: [PATCH 06/10] OMAP MMC: Add delay before waiting for status
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--Loading kernel from MMC created the following error message reproducable:
--
--| reading uImage
--| mmc_send_cmd: timedout waiting for stat!
--|
--| 2860468 bytes read
--
--Tested on overo with OMAP3530:
--* OMAP3530-GP ES3.1, CPU-OPP2, L3-165MHz, Max CPU Clock 720 mHz
--  Die ID #470e000400000000040398d31402100c
--* OMAP3530-GP ES3.1, CPU-OPP2, L3-165MHz, Max CPU Clock 600 mHz
--  Die ID #112000040000000004035c140101b011
--
--Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
-----
-- drivers/mmc/omap_hsmmc.c |    4 ++++
-- 1 files changed, 4 insertions(+), 0 deletions(-)
--
--diff --git a/drivers/mmc/omap_hsmmc.c b/drivers/mmc/omap_hsmmc.c
--index c38b9e6..ac91e5d 100644
----- a/drivers/mmc/omap_hsmmc.c
--+++ b/drivers/mmc/omap_hsmmc.c
--@@ -197,6 +197,10 @@ static int mmc_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
-- 	unsigned int flags, mmc_stat;
-- 	ulong start;
-- 
--+	/* Delay added before checking the status */
--+	if (cmd->cmdidx == MMC_CMD_SEND_STATUS)
--+		udelay(1); /* wait 1 us */
--+
-- 	start = get_timer(0);
-- 	while ((readl(&mmc_base->pstate) & DATI_MASK) == DATI_CMDDIS) {
-- 		if (get_timer(0) - start > MAX_RETRY_MS) {
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0007-config-Always-use-GNU-ld.patch b/recipes-bsp/u-boot/u-boot/2011.12/0007-config-Always-use-GNU-ld.patch
-deleted file mode 100644
-index 64685e3..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0007-config-Always-use-GNU-ld.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From a8dc33253472328f2af04973575f26e9106db1c3 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 21 Dec 2011 08:53:02 -0800
--Subject: [PATCH] config: Always use GNU ld
--
--This patch makes sure that we always use the GNU ld. u-boot uses certain
--construct e.g. OVERLAY which are not implemented in gold therefore it
--always needs GNU ld for linking. It works well if default linker in
--toolchain is GNU ld but in some cases we can have gold to be the
--default linker and also ship GNU ld but not as default in such cases
--its called $(PREFIX)ld.bfd, with this patch we make sure that if
--$(PREFIX)ld.bfd exists than we use that for our ld. This way it
--does not matter what the default ld is.
--
--Upstream-status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- config.mk |    4 +++-
-- 1 files changed, 3 insertions(+), 1 deletions(-)
--
--diff --git a/config.mk b/config.mk
--index ddaa477..139dfa0 100644
----- a/config.mk
--+++ b/config.mk
--@@ -126,11 +126,13 @@ cc-option = $(strip $(if $(findstring $1,$(CC_OPTIONS)),$1,\
-- 		$(if $(call cc-option-sys,$1),$1,$2)))
-- endif
-- 
--+exists_bfd_ld = $(shell if $(CROSS_COMPILE)ld.bfd -v > /dev/null 2>&1; \
--+		then echo "$(1)"; else echo "$(2)"; fi; )
-- #
-- # Include the make variables (CC, etc...)
-- #
-- AS	= $(CROSS_COMPILE)as
---LD	= $(CROSS_COMPILE)ld
--+LD	= $(call exists_bfd_ld, "$(CROSS_COMPILE)ld.bfd", "$(CROSS_COMPILE)ld")
-- CC	= $(CROSS_COMPILE)gcc
-- CPP	= $(CC) -E
-- AR	= $(CROSS_COMPILE)ar
---- 
--1.7.9.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0008-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.patch b/recipes-bsp/u-boot/u-boot/2011.12/0008-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.patch
-deleted file mode 100644
-index 9a13b69..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0008-Revert-armv7-disable-L2-cache-in-cleanup_before_linu.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--From 076f5b5c65a0f0652f5ba8b5328c52c76e951aaa Mon Sep 17 00:00:00 2001
--From: Philip Balister <philip@opensdr.com>
--Date: Mon, 16 Jan 2012 09:45:11 -0500
--Subject: [PATCH 08/10] Revert "armv7: disable L2 cache in cleanup_before_linux()"
--
--This reverts commit dc7100f4080952798413fb63bb4134b22c57623a.
-----
-- arch/arm/cpu/armv7/cpu.c |    1 -
-- 1 files changed, 0 insertions(+), 1 deletions(-)
--
--diff --git a/arch/arm/cpu/armv7/cpu.c b/arch/arm/cpu/armv7/cpu.c
--index 662c496..091e3e0 100644
----- a/arch/arm/cpu/armv7/cpu.c
--+++ b/arch/arm/cpu/armv7/cpu.c
--@@ -65,7 +65,6 @@ int cleanup_before_linux(void)
-- 	 * dcache_disable() in turn flushes the d-cache and disables MMU
-- 	 */
-- 	dcache_disable();
---	v7_outer_cache_disable();
-- 
-- 	/*
-- 	 * After D-cache is flushed and before it is disabled there may
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0009-Beagleboard-Correct-memory-size-on-rev-C4.patch b/recipes-bsp/u-boot/u-boot/2011.12/0009-Beagleboard-Correct-memory-size-on-rev-C4.patch
-deleted file mode 100644
-index be95db6..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0009-Beagleboard-Correct-memory-size-on-rev-C4.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From 588d0e7259e17f302cb79d12ed0f47410a0d8697 Mon Sep 17 00:00:00 2001
--From: robertcnelson@gmail.com <robertcnelson@gmail.com>
--Date: Fri, 27 Jan 2012 07:09:42 +0000
--Subject: [PATCH 09/10] Beagleboard: Correct memory size on rev C4
--
--Beagleboard: Correct memory size on rev C4
--
--The logic for the rev C4 boards was missing one of the cases
--(variant with Micron NAND and 2x128MB).
--
--Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- board/ti/beagle/beagle.c |    7 +++++++
-- 1 files changed, 7 insertions(+), 0 deletions(-)
--
--diff --git a/board/ti/beagle/beagle.c b/board/ti/beagle/beagle.c
--index 5ea50d1..4555977 100644
----- a/board/ti/beagle/beagle.c
--+++ b/board/ti/beagle/beagle.c
--@@ -169,6 +169,13 @@ void get_board_mem_timings(u32 *mcfg, u32 *ctrla, u32 *ctrlb, u32 *rfr_ctrl,
-- 			*ctrlb = NUMONYX_V_ACTIMB_165;
-- 			*rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_165MHz;
-- 			break;
--+		} else if (pop_mfr == NAND_MFR_MICRON && pop_id == 0xba) {
--+			/* Beagleboard Rev C4, 512MB Nand/256MB DDR*/
--+			*mcfg = MICRON_V_MCFG_165(128 << 20);
--+			*ctrla = MICRON_V_ACTIMA_165;
--+			*ctrlb = MICRON_V_ACTIMB_165;
--+			*rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_165MHz;
--+			break;
-- 		} else if (pop_mfr == NAND_MFR_MICRON && pop_id == 0xbc) {
-- 			/* Beagleboard Rev C5, 256MB DDR */
-- 			*mcfg = MICRON_V_MCFG_200(256 << 20);
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0010-OMAP3-Correct-get_sdr_cs_offset-mask.patch b/recipes-bsp/u-boot/u-boot/2011.12/0010-OMAP3-Correct-get_sdr_cs_offset-mask.patch
-deleted file mode 100644
-index b9b61e5..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0010-OMAP3-Correct-get_sdr_cs_offset-mask.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From 351fcc22c10beb005f589584b91298269a81aa52 Mon Sep 17 00:00:00 2001
--From: Tom Rini <trini@ti.com>
--Date: Wed, 18 Jan 2012 08:28:50 +0000
--Subject: [PATCH 10/10] OMAP3: Correct get_sdr_cs_offset mask
--
--OMAP3: Correct get_sdr_cs_offset mask
--
--The function get_sdr_cs_offset reads the CS_CFG register in the SDRC
--to determine where CS1 is mapped to.  make_cs1_contiguous() will set
--CS1 to follow after CS0.  The CS_CFG register has values in bits 9:8
--and 3:0 but we had erroneously been testing 5:4 and 3:0 resulting in
--incorrect offsets on platforms with less than 128MB as 3:0 describe
--128MB hunks and 9:8 describe 32MB offsets after the 128MB hunk.
--
--Tested-by: Grant Erickson <marathon96@gmail.com>
--Signed-off-by: Tom Rini <trini@ti.com>
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- arch/arm/cpu/armv7/omap3/sdrc.c |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/arch/arm/cpu/armv7/omap3/sdrc.c b/arch/arm/cpu/armv7/omap3/sdrc.c
--index a27b4b1..91f42c0 100644
----- a/arch/arm/cpu/armv7/omap3/sdrc.c
--+++ b/arch/arm/cpu/armv7/omap3/sdrc.c
--@@ -102,7 +102,7 @@ u32 get_sdr_cs_offset(u32 cs)
-- 		return 0;
-- 
-- 	offset = readl(&sdrc_base->cs_cfg);
---	offset = (offset & 15) << 27 | (offset & 0x30) << 17;
--+	offset = (offset & 15) << 27 | (offset & 0x300) << 17;
-- 
-- 	return offset;
-- }
---- 
--1.7.2.5
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0011-ext2load-increase-read-speed.patch b/recipes-bsp/u-boot/u-boot/2011.12/0011-ext2load-increase-read-speed.patch
-deleted file mode 100644
-index 2adb1db..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0011-ext2load-increase-read-speed.patch
-+++ /dev/null
-@@ -1,74 +0,0 @@
--From e4181abd88a932bc38054af05d39a633656caefa Mon Sep 17 00:00:00 2001
--From: "u-boot@lakedaemon.net" <u-boot@lakedaemon.net>
--Date: Wed, 28 Mar 2012 04:37:11 +0000
--Subject: [PATCH 11/13] ext2load: increase read speed
--
--This patch dramatically drops the amount of time u-boot needs to read a
--file from an ext2 partition.  On a typical 2 to 5 MB file (kernels and
--initrds) it goes from tens of seconds to a couple seconds.
--
--All we are doing here is grouping contiguous blocks into one read.
--
--Boot tested on Globalscale Technologies Dreamplug (Kirkwood ARM SoC)
--with three different files.  sha1sums were calculated in Linux
--userspace, and then confirmed after ext2load.
--
--Signed-off-by: Jason Cooper <u-boot@lakedaemon.net>
-----
-- fs/ext2/ext2fs.c |   26 ++++++++++++++++++++++++--
-- 1 file changed, 24 insertions(+), 2 deletions(-)
--
--diff --git a/fs/ext2/ext2fs.c b/fs/ext2/ext2fs.c
--index e119e13..8531db5 100644
----- a/fs/ext2/ext2fs.c
--+++ b/fs/ext2/ext2fs.c
--@@ -414,7 +414,6 @@ int ext2fs_read_file
-- 		if (blknr < 0) {
-- 			return (-1);
-- 		}
---		blknr = blknr << log2blocksize;
-- 
-- 		/* Last block.  */
-- 		if (i == blockcnt - 1) {
--@@ -432,6 +431,29 @@ int ext2fs_read_file
-- 			blockend -= skipfirst;
-- 		}
-- 
--+		/* grab middle blocks in one go */
--+		if (i != pos / blocksize && i != blockcnt - 1 && blockcnt > 3) {
--+			int oldblk = blknr;
--+			int blocknxt;
--+			while (i < blockcnt - 1) {
--+				blocknxt = ext2fs_read_block(node, i + 1);
--+				if (blocknxt == (oldblk + 1)) {
--+					oldblk = blocknxt;
--+					i++;
--+				} else {
--+					blocknxt = ext2fs_read_block(node, i);
--+					break;
--+				}
--+			}
--+
--+			if (oldblk == blknr)
--+				blockend = blocksize;
--+			else
--+				blockend = (1 + blocknxt - blknr) * blocksize;
--+		}
--+
--+		blknr = blknr << log2blocksize;
--+
-- 		/* If the block number is 0 this block is not stored on disk but
-- 		   is zero filled instead.  */
-- 		if (blknr) {
--@@ -444,7 +466,7 @@ int ext2fs_read_file
-- 		} else {
-- 			memset (buf, 0, blocksize - skipfirst);
-- 		}
---		buf += blocksize - skipfirst;
--+		buf += blockend - skipfirst;
-- 	}
-- 	return (len);
-- }
---- 
--1.7.10
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0012-ext4fs-ls-load-support.patch b/recipes-bsp/u-boot/u-boot/2011.12/0012-ext4fs-ls-load-support.patch
-deleted file mode 100644
-index c16a2d8..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0012-ext4fs-ls-load-support.patch
-+++ /dev/null
-@@ -1,2362 +0,0 @@
--From 04a6b1d60a4fec316992b11837d6347117cbb670 Mon Sep 17 00:00:00 2001
--From: "uma.shankar" <uma.shankar@samsung.com>
--Date: Mon, 9 Jan 2012 07:54:50 +0000
--Subject: [PATCH 12/13] ext4fs ls load support
--
--Signed-off-by: Uma Shankar <uma.shankar@samsung.com>
--Signed-off-by: Manjunatha C Achar <a.manjunatha@samsung.com>
--Signed-off-by: Iqbal Shareef <iqbal.ams@samsung.com>
--Signed-off-by: Hakgoo Lee <goodguy.lee@samsung.com>
-----
-- Makefile              |    2 +-
-- common/Makefile       |    1 +
-- common/cmd_ext4.c     |  266 +++++++++++++++
-- fs/Makefile           |    1 +
-- fs/ext2/dev.c         |    1 +
-- fs/ext2/ext2fs.c      |  181 ++--------
-- fs/ext4/Makefile      |   51 +++
-- fs/ext4/dev.c         |  145 ++++++++
-- fs/ext4/ext4_common.c |  875 +++++++++++++++++++++++++++++++++++++++++++++++++
-- fs/ext4/ext4_common.h |   63 ++++
-- fs/ext4/ext4fs.c      |  228 +++++++++++++
-- include/ext4fs.h      |  132 ++++++++
-- include/ext_common.h  |  188 +++++++++++
-- 13 files changed, 1977 insertions(+), 157 deletions(-)
-- create mode 100644 common/cmd_ext4.c
-- create mode 100644 fs/ext4/Makefile
-- create mode 100644 fs/ext4/dev.c
-- create mode 100644 fs/ext4/ext4_common.c
-- create mode 100644 fs/ext4/ext4_common.h
-- create mode 100644 fs/ext4/ext4fs.c
-- create mode 100644 include/ext4fs.h
-- create mode 100644 include/ext_common.h
--
--diff --git a/Makefile b/Makefile
--index 0438f1e..51cc8c8 100644
----- a/Makefile
--+++ b/Makefile
--@@ -235,7 +235,7 @@ LIBS += dts/libdts.o
-- endif
-- LIBS += arch/$(ARCH)/lib/lib$(ARCH).o
-- LIBS += fs/cramfs/libcramfs.o fs/fat/libfat.o fs/fdos/libfdos.o fs/jffs2/libjffs2.o \
---	fs/reiserfs/libreiserfs.o fs/ext2/libext2fs.o fs/yaffs2/libyaffs2.o \
--+	fs/reiserfs/libreiserfs.o fs/ext2/libext2fs.o fs/ext4/libext4fs.o fs/yaffs2/libyaffs2.o \
-- 	fs/ubifs/libubifs.o
-- LIBS += net/libnet.o
-- LIBS += disk/libdisk.o
--diff --git a/common/Makefile b/common/Makefile
--index 2d9ae8c..f5243f6 100644
----- a/common/Makefile
--+++ b/common/Makefile
--@@ -86,6 +86,7 @@ COBJS-$(CONFIG_ENV_IS_IN_EEPROM) += cmd_eeprom.o
-- COBJS-$(CONFIG_CMD_EEPROM) += cmd_eeprom.o
-- COBJS-$(CONFIG_CMD_ELF) += cmd_elf.o
-- COBJS-$(CONFIG_SYS_HUSH_PARSER) += cmd_exit.o
--+COBJS-$(CONFIG_CMD_EXT4) += cmd_ext4.o
-- COBJS-$(CONFIG_CMD_EXT2) += cmd_ext2.o
-- COBJS-$(CONFIG_CMD_FAT) += cmd_fat.o
-- COBJS-$(CONFIG_CMD_FDC)$(CONFIG_CMD_FDOS) += cmd_fdc.o
--diff --git a/common/cmd_ext4.c b/common/cmd_ext4.c
--new file mode 100644
--index 0000000..2c53d2c
----- /dev/null
--+++ b/common/cmd_ext4.c
--@@ -0,0 +1,266 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * Ext4fs support
--+ * made from existing cmd_ext2.c file of Uboot
--+ *
--+ * (C) Copyright 2004
--+ * esd gmbh <www.esd-electronics.com>
--+ * Reinhard Arlt <reinhard.arlt@esd-electronics.com>
--+ *
--+ * made from cmd_reiserfs by
--+ *
--+ * (C) Copyright 2003 - 2004
--+ * Sysgo Real-Time Solutions, AG <www.elinos.com>
--+ * Pavel Bartusek <pba@sysgo.com>
--+ *
--+ * This program is free software; you can redistribute it and/or
--+ * modify it under the terms of the GNU General Public License as
--+ * published by the Free Software Foundation; either version 2 of
--+ * the License, or (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
--+ * MA 02111-1307 USA
--+ *
--+ */
--+
--+/*
--+ * Changelog:
--+ *	0.1 - Newly created file for ext4fs support. Taken from cmd_ext2.c
--+ *	        file in uboot. Added ext4fs ls and load support.
--+ */
--+
--+#include <common.h>
--+#include <part.h>
--+#include <config.h>
--+#include <command.h>
--+#include <image.h>
--+#include <linux/ctype.h>
--+#include <asm/byteorder.h>
--+#include <ext_common.h>
--+#include <ext4fs.h>
--+#include <linux/stat.h>
--+#include <malloc.h>
--+
--+#if defined(CONFIG_CMD_USB) && defined(CONFIG_USB_STORAGE)
--+#include <usb.h>
--+#endif
--+
--+#if !defined(CONFIG_DOS_PARTITION) && !defined(CONFIG_EFI_PARTITION)
--+#error DOS or EFI partition support must be selected
--+#endif
--+
--+uint64_t total_sector;
--+uint64_t part_offset;
--+
--+#define DOS_PART_MAGIC_OFFSET	0x1fe
--+#define DOS_FS_TYPE_OFFSET	0x36
--+#define DOS_FS32_TYPE_OFFSET	0x52
--+
--+static int do_ext4_load(cmd_tbl_t *cmdtp, int flag, int argc,
--+						char *const argv[])
--+{
--+	char *filename = NULL;
--+	char *ep;
--+	int dev;
--+	unsigned long part = 1;
--+	ulong addr = 0;
--+	ulong part_length;
--+	int filelen;
--+	disk_partition_t info;
--+	struct ext_filesystem *fs;
--+	char buf[12];
--+	unsigned long count;
--+	const char *addr_str;
--+
--+	count = 0;
--+	addr = simple_strtoul(argv[3], NULL, 16);
--+	filename = getenv("bootfile");
--+	switch (argc) {
--+	case 3:
--+		addr_str = getenv("loadaddr");
--+		if (addr_str != NULL)
--+			addr = simple_strtoul(addr_str, NULL, 16);
--+		else
--+			addr = CONFIG_SYS_LOAD_ADDR;
--+
--+		break;
--+	case 4:
--+		break;
--+	case 5:
--+		filename = argv[4];
--+		break;
--+	case 6:
--+		filename = argv[4];
--+		count = simple_strtoul(argv[5], NULL, 16);
--+		break;
--+
--+	default:
--+		return cmd_usage(cmdtp);
--+	}
--+
--+	if (!filename) {
--+		puts("** No boot file defined **\n");
--+		return 1;
--+	}
--+
--+	dev = (int)simple_strtoul(argv[2], &ep, 16);
--+	ext4_dev_desc = get_dev(argv[1], dev);
--+	if (ext4_dev_desc == NULL) {
--+		printf("** Block device %s %d not supported\n", argv[1], dev);
--+		return 1;
--+	}
--+	if (init_fs(ext4_dev_desc))
--+		return 1;
--+
--+	fs = get_fs();
--+	if (*ep) {
--+		if (*ep != ':') {
--+			puts("** Invalid boot device, use `dev[:part]' **\n");
--+			return 1;
--+		}
--+		part = simple_strtoul(++ep, NULL, 16);
--+	}
--+
--+	if (part != 0) {
--+		if (get_partition_info(fs->dev_desc, part, &info)) {
--+			printf("** Bad partition %lu **\n", part);
--+			return 1;
--+		}
--+
--+		if (strncmp((char *)info.type, BOOT_PART_TYPE,
--+			    strlen(BOOT_PART_TYPE)) != 0) {
--+			printf("** Invalid partition type \"%s\""
--+			       " (expect \"" BOOT_PART_TYPE "\")\n", info.type);
--+			return 1;
--+		}
--+		printf("Loading file \"%s\" "
--+		       "from %s device %d:%lu %s\n",
--+		       filename, argv[1], dev, part, info.name);
--+	} else {
--+		printf("Loading file \"%s\" from %s device %d\n",
--+		       filename, argv[1], dev);
--+	}
--+
--+	part_length = ext4fs_set_blk_dev(fs->dev_desc, part);
--+	if (part_length == 0) {
--+		printf("**Bad partition - %s %d:%lu **\n", argv[1], dev, part);
--+		ext4fs_close();
--+		return 1;
--+	}
--+
--+	if (!ext4fs_mount(part_length)) {
--+		printf("** Bad ext2 partition or disk - %s %d:%lu **\n",
--+		       argv[1], dev, part);
--+		ext4fs_close();
--+		return 1;
--+	}
--+
--+	filelen = ext4fs_open(filename);
--+	if (filelen < 0) {
--+		printf("** File not found %s\n", filename);
--+		ext4fs_close();
--+		return 1;
--+	}
--+	if ((count < filelen) && (count != 0))
--+		filelen = count;
--+
--+	if (ext4fs_read((char *)addr, filelen) != filelen) {
--+		printf("** Unable to read \"%s\" from %s %d:%lu **\n",
--+		       filename, argv[1], dev, part);
--+		ext4fs_close();
--+		return 1;
--+	}
--+
--+	ext4fs_close();
--+	deinit_fs(fs->dev_desc);
--+	/* Loading ok, update default load address */
--+	load_addr = addr;
--+
--+	printf("%d bytes read\n", filelen);
--+	sprintf(buf, "%X", filelen);
--+	setenv("filesize", buf);
--+
--+	return 0;
--+}
--+
--+static int do_ext4_ls(cmd_tbl_t *cmdtp, int flag, int argc, char *const argv[])
--+{
--+	const char *filename = "/";
--+	int dev;
--+	unsigned long part = 1;
--+	char *ep;
--+	struct ext_filesystem *fs;
--+	int part_length;
--+
--+	if (argc < 3)
--+		return cmd_usage(cmdtp);
--+
--+	dev = (int)simple_strtoul(argv[2], &ep, 16);
--+	ext4_dev_desc = get_dev(argv[1], dev);
--+
--+	if (ext4_dev_desc == NULL) {
--+		printf("\n** Block device %s %d not supported\n", argv[1], dev);
--+		return 1;
--+	}
--+
--+	if (init_fs(ext4_dev_desc))
--+		return 1;
--+
--+	fs = get_fs();
--+	if (*ep) {
--+		if (*ep != ':') {
--+			puts("\n** Invalid boot device, use `dev[:part]' **\n");
--+			return 1;
--+		}
--+		part = simple_strtoul(++ep, NULL, 16);
--+	}
--+
--+	if (argc == 4)
--+		filename = argv[3];
--+
--+	part_length = ext4fs_set_blk_dev(fs->dev_desc, part);
--+	if (part_length == 0) {
--+		printf("** Bad partition - %s %d:%lu **\n", argv[1], dev, part);
--+		ext4fs_close();
--+		return 1;
--+	}
--+
--+	if (!ext4fs_mount(part_length)) {
--+		printf("** Bad ext2 partition or disk - %s %d:%lu **\n",
--+		       argv[1], dev, part);
--+		ext4fs_close();
--+		return 1;
--+	}
--+	if (ext4fs_ls(filename)) {
--+		printf("** Error ext2fs_ls() **\n");
--+		ext4fs_close();
--+		return 1;
--+	};
--+
--+	ext4fs_close();
--+	deinit_fs(fs->dev_desc);
--+
--+	return 0;
--+}
--+
--+U_BOOT_CMD(ext4ls, 4, 1, do_ext4_ls,
--+	   "list files in a directory (default /)",
--+	   "<interface> <dev[:part]> [directory]\n"
--+	   "	  - list files from 'dev' on 'interface' in a 'directory'");
--+
--+U_BOOT_CMD(ext4load, 6, 0, do_ext4_load,
--+	   "load binary file from a Ext2 filesystem",
--+	   "<interface> <dev[:part]> [addr] [filename] [bytes]\n"
--+	   "	  - load binary file 'filename' from 'dev' on 'interface'\n"
--+	   "		 to address 'addr' from ext2 filesystem");
--diff --git a/fs/Makefile b/fs/Makefile
--index 22aad12..00a8f37 100644
----- a/fs/Makefile
--+++ b/fs/Makefile
--@@ -23,6 +23,7 @@
-- #
-- 
-- subdirs-$(CONFIG_CMD_CRAMFS) := cramfs
--+subdirs-$(CONFIG_CMD_EXT4) += ext4
-- subdirs-$(CONFIG_CMD_EXT2) += ext2
-- subdirs-$(CONFIG_CMD_FAT) += fat
-- subdirs-$(CONFIG_CMD_FDOS) += fdos
--diff --git a/fs/ext2/dev.c b/fs/ext2/dev.c
--index 874e211..315ff53 100644
----- a/fs/ext2/dev.c
--+++ b/fs/ext2/dev.c
--@@ -27,6 +27,7 @@
-- #include <common.h>
-- #include <config.h>
-- #include <ext2fs.h>
--+#include <ext_common.h>
-- 
-- static block_dev_desc_t *ext2fs_block_dev_desc;
-- static disk_partition_t part_info;
--diff --git a/fs/ext2/ext2fs.c b/fs/ext2/ext2fs.c
--index 8531db5..ea3d98c 100644
----- a/fs/ext2/ext2fs.c
--+++ b/fs/ext2/ext2fs.c
--@@ -25,152 +25,16 @@
-- 
-- #include <common.h>
-- #include <ext2fs.h>
--+#include <ext_common.h>
-- #include <malloc.h>
-- #include <asm/byteorder.h>
-- 
-- extern int ext2fs_devread (int sector, int byte_offset, int byte_len,
-- 			   char *buf);
-- 
---/* Magic value used to identify an ext2 filesystem.  */
---#define	EXT2_MAGIC		0xEF53
---/* Amount of indirect blocks in an inode.  */
---#define INDIRECT_BLOCKS		12
---/* Maximum lenght of a pathname.  */
---#define EXT2_PATH_MAX		4096
---/* Maximum nesting of symlinks, used to prevent a loop.  */
---#define	EXT2_MAX_SYMLINKCNT	8
---
---/* Filetype used in directory entry.  */
---#define	FILETYPE_UNKNOWN	0
---#define	FILETYPE_REG		1
---#define	FILETYPE_DIRECTORY	2
---#define	FILETYPE_SYMLINK	7
---
---/* Filetype information as used in inodes.  */
---#define FILETYPE_INO_MASK	0170000
---#define FILETYPE_INO_REG	0100000
---#define FILETYPE_INO_DIRECTORY	0040000
---#define FILETYPE_INO_SYMLINK	0120000
---
---/* Bits used as offset in sector */
---#define DISK_SECTOR_BITS        9
---
---/* Log2 size of ext2 block in 512 blocks.  */
---#define LOG2_EXT2_BLOCK_SIZE(data) (__le32_to_cpu (data->sblock.log2_block_size) + 1)
---
---/* Log2 size of ext2 block in bytes.  */
---#define LOG2_BLOCK_SIZE(data)	   (__le32_to_cpu (data->sblock.log2_block_size) + 10)
---
---/* The size of an ext2 block in bytes.  */
---#define EXT2_BLOCK_SIZE(data)	   (1 << LOG2_BLOCK_SIZE(data))
---
---/* The ext2 superblock.  */
---struct ext2_sblock {
---	uint32_t total_inodes;
---	uint32_t total_blocks;
---	uint32_t reserved_blocks;
---	uint32_t free_blocks;
---	uint32_t free_inodes;
---	uint32_t first_data_block;
---	uint32_t log2_block_size;
---	uint32_t log2_fragment_size;
---	uint32_t blocks_per_group;
---	uint32_t fragments_per_group;
---	uint32_t inodes_per_group;
---	uint32_t mtime;
---	uint32_t utime;
---	uint16_t mnt_count;
---	uint16_t max_mnt_count;
---	uint16_t magic;
---	uint16_t fs_state;
---	uint16_t error_handling;
---	uint16_t minor_revision_level;
---	uint32_t lastcheck;
---	uint32_t checkinterval;
---	uint32_t creator_os;
---	uint32_t revision_level;
---	uint16_t uid_reserved;
---	uint16_t gid_reserved;
---	uint32_t first_inode;
---	uint16_t inode_size;
---	uint16_t block_group_number;
---	uint32_t feature_compatibility;
---	uint32_t feature_incompat;
---	uint32_t feature_ro_compat;
---	uint32_t unique_id[4];
---	char volume_name[16];
---	char last_mounted_on[64];
---	uint32_t compression_info;
---};
---
---/* The ext2 blockgroup.  */
---struct ext2_block_group {
---	uint32_t block_id;
---	uint32_t inode_id;
---	uint32_t inode_table_id;
---	uint16_t free_blocks;
---	uint16_t free_inodes;
---	uint16_t used_dir_cnt;
---	uint32_t reserved[3];
---};
---
---/* The ext2 inode.  */
---struct ext2_inode {
---	uint16_t mode;
---	uint16_t uid;
---	uint32_t size;
---	uint32_t atime;
---	uint32_t ctime;
---	uint32_t mtime;
---	uint32_t dtime;
---	uint16_t gid;
---	uint16_t nlinks;
---	uint32_t blockcnt;	/* Blocks of 512 bytes!! */
---	uint32_t flags;
---	uint32_t osd1;
---	union {
---		struct datablocks {
---			uint32_t dir_blocks[INDIRECT_BLOCKS];
---			uint32_t indir_block;
---			uint32_t double_indir_block;
---			uint32_t tripple_indir_block;
---		} blocks;
---		char symlink[60];
---	} b;
---	uint32_t version;
---	uint32_t acl;
---	uint32_t dir_acl;
---	uint32_t fragment_addr;
---	uint32_t osd2[3];
---};
---
---/* The header of an ext2 directory entry.  */
---struct ext2_dirent {
---	uint32_t inode;
---	uint16_t direntlen;
---	uint8_t namelen;
---	uint8_t filetype;
---};
---
---struct ext2fs_node {
---	struct ext2_data *data;
---	struct ext2_inode inode;
---	int ino;
---	int inode_read;
---};
---
---/* Information about a "mounted" ext2 filesystem.  */
---struct ext2_data {
---	struct ext2_sblock sblock;
---	struct ext2_inode *inode;
---	struct ext2fs_node diropen;
---};
---
---
---typedef struct ext2fs_node *ext2fs_node_t;
-- 
-- struct ext2_data *ext2fs_root = NULL;
---ext2fs_node_t ext2fs_file = NULL;
--+struct ext2fs_node *ext2fs_file;
-- int symlinknest = 0;
-- uint32_t *indir1_block = NULL;
-- int indir1_size = 0;
--@@ -243,14 +107,16 @@ static int ext2fs_read_inode
-- }
-- 
-- 
---void ext2fs_free_node (ext2fs_node_t node, ext2fs_node_t currroot) {
--+void ext2fs_free_node(struct ext2fs_node *node, struct ext2fs_node *currroot)
--+{
-- 	if ((node != &ext2fs_root->diropen) && (node != currroot)) {
-- 		free (node);
-- 	}
-- }
-- 
-- 
---static int ext2fs_read_block (ext2fs_node_t node, int fileblock) {
--+static int ext2fs_read_block(struct ext2fs_node *node, int fileblock)
--+{
-- 	struct ext2_data *data = node->data;
-- 	struct ext2_inode *inode = &node->inode;
-- 	int blknr;
--@@ -390,7 +256,8 @@ static int ext2fs_read_block (ext2fs_node_t node, int fileblock) {
-- 
-- 
-- int ext2fs_read_file
---	(ext2fs_node_t node, int pos, unsigned int len, char *buf) {
--+	(struct ext2fs_node *node, int pos, unsigned int len, char *buf)
--+{
-- 	int i;
-- 	int blockcnt;
-- 	int log2blocksize = LOG2_EXT2_BLOCK_SIZE (node->data);
--@@ -471,8 +338,8 @@ int ext2fs_read_file
-- 	return (len);
-- }
-- 
---
---static int ext2fs_iterate_dir (ext2fs_node_t dir, char *name, ext2fs_node_t * fnode, int *ftype)
--+int ext2fs_iterate_dir(struct ext2fs_node *dir, char *name,
--+					struct ext2fs_node **fnode, int *ftype)
-- {
-- 	unsigned int fpos = 0;
-- 	int status;
--@@ -501,7 +368,7 @@ static int ext2fs_iterate_dir (ext2fs_node_t dir, char *name, ext2fs_node_t * fn
-- 		}
-- 		if (dirent.namelen != 0) {
-- 			char filename[dirent.namelen + 1];
---			ext2fs_node_t fdiro;
--+			struct ext2fs_node *fdiro;
-- 			int type = FILETYPE_UNKNOWN;
-- 
-- 			status = ext2fs_read_file (diro,
--@@ -603,8 +470,8 @@ static int ext2fs_iterate_dir (ext2fs_node_t dir, char *name, ext2fs_node_t * fn
-- 	return (0);
-- }
-- 
---
---static char *ext2fs_read_symlink (ext2fs_node_t node) {
--+static char *ext2fs_read_symlink(struct ext2fs_node *node)
--+{
-- 	char *symlink;
-- 	struct ext2fs_node *diro = node;
-- 	int status;
--@@ -641,15 +508,16 @@ static char *ext2fs_read_symlink (ext2fs_node_t node) {
-- 
-- 
-- int ext2fs_find_file1
---	(const char *currpath,
---	 ext2fs_node_t currroot, ext2fs_node_t * currfound, int *foundtype) {
--+	(const char *currpath, struct ext2fs_node *currroot,
--+		struct ext2fs_node **currfound, int *foundtype)
--+{
-- 	char fpath[strlen (currpath) + 1];
-- 	char *name = fpath;
-- 	char *next;
-- 	int status;
-- 	int type = FILETYPE_DIRECTORY;
---	ext2fs_node_t currnode = currroot;
---	ext2fs_node_t oldnode = currroot;
--+	struct ext2fs_node *currnode = currroot;
--+	struct ext2fs_node *oldnode = currroot;
-- 
-- 	strncpy (fpath, currpath, strlen (currpath) + 1);
-- 
--@@ -745,8 +613,9 @@ int ext2fs_find_file1
-- 
-- 
-- int ext2fs_find_file
---	(const char *path,
---	 ext2fs_node_t rootnode, ext2fs_node_t * foundnode, int expecttype) {
--+	(const char *path, struct ext2fs_node *rootnode,
--+	struct ext2fs_node **foundnode, int expecttype)
--+{
-- 	int status;
-- 	int foundtype = FILETYPE_DIRECTORY;
-- 
--@@ -772,7 +641,7 @@ int ext2fs_find_file
-- 
-- 
-- int ext2fs_ls (const char *dirname) {
---	ext2fs_node_t dirnode;
--+	struct ext2fs_node *dirnode;
-- 	int status;
-- 
-- 	if (ext2fs_root == NULL) {
--@@ -792,7 +661,7 @@ int ext2fs_ls (const char *dirname) {
-- 
-- 
-- int ext2fs_open (const char *filename) {
---	ext2fs_node_t fdiro = NULL;
--+	struct ext2fs_node *fdiro = NULL;
-- 	int status;
-- 	int len;
-- 
--@@ -822,8 +691,8 @@ fail:
-- }
-- 
-- 
---int ext2fs_close (void
---	) {
--+int ext2fs_close(void)
--+{
-- 	if ((ext2fs_file != NULL) && (ext2fs_root != NULL)) {
-- 		ext2fs_free_node (ext2fs_file, &ext2fs_root->diropen);
-- 		ext2fs_file = NULL;
--diff --git a/fs/ext4/Makefile b/fs/ext4/Makefile
--new file mode 100644
--index 0000000..7add4ab
----- /dev/null
--+++ b/fs/ext4/Makefile
--@@ -0,0 +1,51 @@
--+#
--+# (C) Copyright 2006
--+# Wolfgang Denk, DENX Software Engineering, wd@denx.de.
--+#
--+# (C) Copyright 2003
--+# Pavel Bartusek, Sysgo Real-Time Solutions AG, pba@sysgo.de
--+#
--+#
--+# See file CREDITS for list of people who contributed to this
--+# project.
--+#
--+# This program is free software; you can redistribute it and/or
--+# modify it under the terms of the GNU General Public License as
--+# published by the Free Software Foundation; either version 2 of
--+# the License, or (at your option) any later version.
--+#
--+# This program is distributed in the hope that it will be useful,
--+# but WITHOUT ANY WARRANTY; without even the implied warranty of
--+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+# GNU General Public License for more details.
--+#
--+# You should have received a copy of the GNU General Public License
--+# along with this program; if not, write to the Free Software
--+# Foundation, Inc., 59 Temple Place, Suite 330, Boston,
--+# MA 02111-1307 USA
--+#
--+
--+include $(TOPDIR)/config.mk
--+
--+LIB	= $(obj)libext4fs.o
--+
--+AOBJS	=
--+COBJS-$(CONFIG_CMD_EXT4) := ext4fs.o ext4_common.o dev.o
--+
--+SRCS	:= $(AOBJS:.o=.S) $(COBJS-y:.o=.c)
--+OBJS	:= $(addprefix $(obj),$(AOBJS) $(COBJS-y))
--+
--+
--+all:	$(LIB) $(AOBJS)
--+
--+$(LIB):	$(obj).depend $(OBJS)
--+	$(call cmd_link_o_target, $(OBJS))
--+
--+#########################################################################
--+
--+# defines $(obj).depend target
--+include $(SRCTREE)/rules.mk
--+
--+sinclude $(obj).depend
--+
--+#########################################################################
--diff --git a/fs/ext4/dev.c b/fs/ext4/dev.c
--new file mode 100644
--index 0000000..2054be3
----- /dev/null
--+++ b/fs/ext4/dev.c
--@@ -0,0 +1,145 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * made from existing ext2/dev.c file of Uboot
--+ * (C) Copyright 2004
--+ * esd gmbh <www.esd-electronics.com>
--+ * Reinhard Arlt <reinhard.arlt@esd-electronics.com>
--+ *
--+ * based on code of fs/reiserfs/dev.c by
--+ *
--+ * (C) Copyright 2003 - 2004
--+ * Sysgo AG, <www.elinos.com>, Pavel Bartusek <pba@sysgo.com>
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License as published by
--+ * the Free Software Foundation; either version 2 of the License, or
--+ * (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--+ *
--+ */
--+
--+/*
--+ * Changelog:
--+ *	0.1 - Newly created file for ext4fs support. Taken from
--+ *	        fs/ext2/dev.c file in uboot.
--+ */
--+
--+#include <common.h>
--+#include <config.h>
--+#include <ext_common.h>
--+
--+static block_dev_desc_t *ext4fs_block_dev_desc;
--+static disk_partition_t part_info;
--+
--+int ext4fs_set_blk_dev(block_dev_desc_t *rbdd, int part)
--+{
--+	ext4fs_block_dev_desc = rbdd;
--+
--+	if (part == 0) {
--+		/* disk doesn't use partition table */
--+		part_info.start = 0;
--+		part_info.size = rbdd->lba;
--+		part_info.blksz = rbdd->blksz;
--+	} else {
--+		if (get_partition_info(ext4fs_block_dev_desc,
--+					part, &part_info))
--+			return 0;
--+	}
--+	return part_info.size;
--+}
--+
--+int ext4fs_devread(int sector, int byte_offset, int byte_len, char *buf)
--+{
--+	char sec_buf[SECTOR_SIZE];
--+	unsigned block_len;
--+
--+	/* Check partition boundaries */
--+	if ((sector < 0)
--+	    || ((sector + ((byte_offset + byte_len - 1) >> SECTOR_BITS)) >=
--+		part_info.size)) {
--+		printf("%s read outside partition %d\n", __func__, sector);
--+		return 0;
--+	}
--+
--+	/* Get the read to the beginning of a partition */
--+	sector += byte_offset >> SECTOR_BITS;
--+	byte_offset &= SECTOR_SIZE - 1;
--+
--+	debug(" <%d, %d, %d>\n", sector, byte_offset, byte_len);
--+
--+	if (ext4fs_block_dev_desc == NULL) {
--+		printf("** Invalid Block Device Descriptor (NULL)\n");
--+		return 0;
--+	}
--+
--+	if (byte_offset != 0) {
--+		/* read first part which isn't aligned with start of sector */
--+		if (ext4fs_block_dev_desc->
--+		    block_read(ext4fs_block_dev_desc->dev,
--+				part_info.start + sector, 1,
--+				(unsigned long *) sec_buf) != 1) {
--+			printf(" ** ext2fs_devread() read error **\n");
--+			return 0;
--+		}
--+		memcpy(buf, sec_buf + byte_offset,
--+			min(SECTOR_SIZE - byte_offset, byte_len));
--+		buf += min(SECTOR_SIZE - byte_offset, byte_len);
--+		byte_len -= min(SECTOR_SIZE - byte_offset, byte_len);
--+		sector++;
--+	}
--+
--+	if (byte_len == 0)
--+		return 1;
--+
--+	/* read sector aligned part */
--+	block_len = byte_len & ~(SECTOR_SIZE - 1);
--+
--+	if (block_len == 0) {
--+		u8 p[SECTOR_SIZE];
--+
--+		block_len = SECTOR_SIZE;
--+		ext4fs_block_dev_desc->block_read(ext4fs_block_dev_desc->dev,
--+						  part_info.start + sector,
--+						  1, (unsigned long *)p);
--+		memcpy(buf, p, byte_len);
--+		return 1;
--+	}
--+
--+	if (ext4fs_block_dev_desc->block_read(ext4fs_block_dev_desc->dev,
--+					part_info.start + sector,
--+					block_len / SECTOR_SIZE,
--+					(unsigned long *) buf) !=
--+					block_len / SECTOR_SIZE) {
--+		printf(" ** %s read error - block\n", __func__);
--+		return 0;
--+	}
--+	block_len = byte_len & ~(SECTOR_SIZE - 1);
--+	buf += block_len;
--+	byte_len -= block_len;
--+	sector += block_len / SECTOR_SIZE;
--+
--+	if (byte_len != 0) {
--+		/* read rest of data which are not in whole sector */
--+		if (ext4fs_block_dev_desc->
--+		    block_read(ext4fs_block_dev_desc->dev,
--+				part_info.start + sector, 1,
--+				(unsigned long *) sec_buf) != 1) {
--+			printf("* %s read error - last part\n", __func__);
--+			return 0;
--+		}
--+		memcpy(buf, sec_buf, byte_len);
--+	}
--+	return 1;
--+}
--diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
--new file mode 100644
--index 0000000..d9deefe
----- /dev/null
--+++ b/fs/ext4/ext4_common.c
--@@ -0,0 +1,875 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * ext4ls and ext4load : Based on ext2 ls load support in Uboot.
--+ *
--+ * (C) Copyright 2004
--+ * esd gmbh <www.esd-electronics.com>
--+ * Reinhard Arlt <reinhard.arlt@esd-electronics.com>
--+ *
--+ * based on code from grub2 fs/ext2.c and fs/fshelp.c by
--+ * GRUB  --  GRand Unified Bootloader
--+ * Copyright (C) 2003, 2004  Free Software Foundation, Inc.
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License as published by
--+ * the Free Software Foundation; either version 2 of the License, or
--+ * (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--+ */
--+
--+#include <common.h>
--+#include <ext_common.h>
--+#include <ext4fs.h>
--+#include <malloc.h>
--+#include <stddef.h>
--+#include <linux/stat.h>
--+#include <linux/time.h>
--+#include <asm/byteorder.h>
--+#include "ext4_common.h"
--+
--+struct ext2_data *ext4fs_root;
--+struct ext2fs_node *ext4fs_file;
--+uint32_t *ext4fs_indir1_block;
--+int ext4fs_indir1_size;
--+int ext4fs_indir1_blkno = -1;
--+uint32_t *ext4fs_indir2_block;
--+int ext4fs_indir2_size;
--+int ext4fs_indir2_blkno = -1;
--+
--+uint32_t *ext4fs_indir3_block;
--+int ext4fs_indir3_size;
--+int ext4fs_indir3_blkno = -1;
--+struct ext2_inode *g_parent_inode;
--+static int symlinknest;
--+
--+static struct ext4_extent_header *ext4fs_get_extent_block
--+	(struct ext2_data *data, char *buf,
--+		struct ext4_extent_header *ext_block,
--+		uint32_t fileblock, int log2_blksz)
--+{
--+	struct ext4_extent_idx *index;
--+	unsigned long long block;
--+	struct ext_filesystem *fs = get_fs();
--+	int i;
--+
--+	while (1) {
--+		index = (struct ext4_extent_idx *)(ext_block + 1);
--+
--+		if (le32_to_cpu(ext_block->eh_magic) != EXT4_EXT_MAGIC)
--+			return 0;
--+
--+		if (ext_block->eh_depth == 0)
--+			return ext_block;
--+		i = -1;
--+		do {
--+			i++;
--+			if (i >= le32_to_cpu(ext_block->eh_entries))
--+				break;
--+		} while (fileblock > le32_to_cpu(index[i].ei_block));
--+
--+		if (--i < 0)
--+			return 0;
--+
--+		block = le32_to_cpu(index[i].ei_leaf_hi);
--+		block = (block << 32) + le32_to_cpu(index[i].ei_leaf_lo);
--+
--+		if (ext4fs_devread(block << log2_blksz, 0, fs->blksz, buf))
--+			ext_block = (struct ext4_extent_header *)buf;
--+		else
--+			return 0;
--+	}
--+}
--+
--+static int ext4fs_blockgroup
--+	(struct ext2_data *data, int group, struct ext2_block_group *blkgrp)
--+{
--+	long int blkno;
--+	unsigned int blkoff, desc_per_blk;
--+
--+	desc_per_blk = EXT2_BLOCK_SIZE(data) / sizeof(struct ext2_block_group);
--+
--+	blkno = __le32_to_cpu(data->sblock.first_data_block) + 1 +
--+	    group / desc_per_blk;
--+	blkoff = (group % desc_per_blk) * sizeof(struct ext2_block_group);
--+
--+	debug("ext4fs read %d group descriptor (blkno %ld blkoff %u)\n",
--+	      group, blkno, blkoff);
--+
--+	return ext4fs_devread(blkno << LOG2_EXT2_BLOCK_SIZE(data),
--+			      blkoff, sizeof(struct ext2_block_group),
--+			      (char *)blkgrp);
--+}
--+
--+int ext4fs_read_inode(struct ext2_data *data, int ino, struct ext2_inode *inode)
--+{
--+	struct ext2_block_group blkgrp;
--+	struct ext2_sblock *sblock = &data->sblock;
--+	struct ext_filesystem *fs = get_fs();
--+	int inodes_per_block, status;
--+	long int blkno;
--+	unsigned int blkoff;
--+
--+	/* It is easier to calculate if the first inode is 0. */
--+	ino--;
--+	status = ext4fs_blockgroup(data, ino / __le32_to_cpu
--+				   (sblock->inodes_per_group), &blkgrp);
--+	if (status == 0)
--+		return 0;
--+
--+	inodes_per_block = EXT2_BLOCK_SIZE(data) / fs->inodesz;
--+	blkno = __le32_to_cpu(blkgrp.inode_table_id) +
--+	    (ino % __le32_to_cpu(sblock->inodes_per_group)) / inodes_per_block;
--+	blkoff = (ino % inodes_per_block) * fs->inodesz;
--+	/* Read the inode. */
--+	status = ext4fs_devread(blkno << LOG2_EXT2_BLOCK_SIZE(data), blkoff,
--+				sizeof(struct ext2_inode), (char *)inode);
--+	if (status == 0)
--+		return 0;
--+
--+	return 1;
--+}
--+
--+long int read_allocated_block(struct ext2_inode *inode, int fileblock)
--+{
--+	long int blknr;
--+	int blksz;
--+	int log2_blksz;
--+	int status;
--+	long int rblock;
--+	long int perblock_parent;
--+	long int perblock_child;
--+	unsigned long long start;
--+	/* get the blocksize of the filesystem */
--+	blksz = EXT2_BLOCK_SIZE(ext4fs_root);
--+	log2_blksz = LOG2_EXT2_BLOCK_SIZE(ext4fs_root);
--+	if (le32_to_cpu(inode->flags) & EXT4_EXTENTS_FL) {
--+		char *buf = zalloc(blksz);
--+		if (!buf)
--+			return -ENOMEM;
--+		struct ext4_extent_header *ext_block;
--+		struct ext4_extent *extent;
--+		int i = -1;
--+		ext_block = ext4fs_get_extent_block(ext4fs_root, buf,
--+						    (struct ext4_extent_header
--+						     *)inode->b.
--+						    blocks.dir_blocks,
--+						    fileblock, log2_blksz);
--+		if (!ext_block) {
--+			printf("invalid extent block\n");
--+			free(buf);
--+			return -EINVAL;
--+		}
--+
--+		extent = (struct ext4_extent *)(ext_block + 1);
--+
--+		do {
--+			i++;
--+			if (i >= le32_to_cpu(ext_block->eh_entries))
--+				break;
--+		} while (fileblock >= le32_to_cpu(extent[i].ee_block));
--+		if (--i >= 0) {
--+			fileblock -= le32_to_cpu(extent[i].ee_block);
--+			if (fileblock >= le32_to_cpu(extent[i].ee_len)) {
--+				free(buf);
--+				return 0;
--+			}
--+
--+			start = le32_to_cpu(extent[i].ee_start_hi);
--+			start = (start << 32) +
--+			    le32_to_cpu(extent[i].ee_start_lo);
--+			free(buf);
--+			return fileblock + start;
--+		}
--+
--+		printf("Extent Error\n");
--+		free(buf);
--+		return -1;
--+	}
--+
--+	/* Direct blocks. */
--+	if (fileblock < INDIRECT_BLOCKS)
--+		blknr = __le32_to_cpu(inode->b.blocks.dir_blocks[fileblock]);
--+
--+	/* Indirect. */
--+	else if (fileblock < (INDIRECT_BLOCKS + (blksz / 4))) {
--+		if (ext4fs_indir1_block == NULL) {
--+			ext4fs_indir1_block = zalloc(blksz);
--+			if (ext4fs_indir1_block == NULL) {
--+				printf("** SI ext2fs read block (indir 1)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_size = blksz;
--+			ext4fs_indir1_blkno = -1;
--+		}
--+		if (blksz != ext4fs_indir1_size) {
--+			free(ext4fs_indir1_block);
--+			ext4fs_indir1_block = NULL;
--+			ext4fs_indir1_size = 0;
--+			ext4fs_indir1_blkno = -1;
--+			ext4fs_indir1_block = zalloc(blksz);
--+			if (ext4fs_indir1_block == NULL) {
--+				printf("** SI ext2fs read block (indir 1):"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_size = blksz;
--+		}
--+		if ((__le32_to_cpu(inode->b.blocks.indir_block) <<
--+		     log2_blksz) != ext4fs_indir1_blkno) {
--+			status =
--+			    ext4fs_devread(__le32_to_cpu
--+					   (inode->b.blocks.
--+					    indir_block) << log2_blksz, 0,
--+					   blksz, (char *)ext4fs_indir1_block);
--+			if (status == 0) {
--+				printf("** SI ext2fs read block (indir 1)"
--+				       "failed. **\n");
--+				return 0;
--+			}
--+			ext4fs_indir1_blkno =
--+			    __le32_to_cpu(inode->b.blocks.
--+					  indir_block) << log2_blksz;
--+		}
--+		blknr = __le32_to_cpu(ext4fs_indir1_block
--+				      [fileblock - INDIRECT_BLOCKS]);
--+	}
--+	/* Double indirect. */
--+	else if (fileblock < (INDIRECT_BLOCKS + (blksz / 4 *
--+					(blksz / 4 + 1)))) {
--+
--+		long int perblock = blksz / 4;
--+		long int rblock = fileblock - (INDIRECT_BLOCKS + blksz / 4);
--+
--+		if (ext4fs_indir1_block == NULL) {
--+			ext4fs_indir1_block = zalloc(blksz);
--+			if (ext4fs_indir1_block == NULL) {
--+				printf("** DI ext2fs read block (indir 2 1)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_size = blksz;
--+			ext4fs_indir1_blkno = -1;
--+		}
--+		if (blksz != ext4fs_indir1_size) {
--+			free(ext4fs_indir1_block);
--+			ext4fs_indir1_block = NULL;
--+			ext4fs_indir1_size = 0;
--+			ext4fs_indir1_blkno = -1;
--+			ext4fs_indir1_block = zalloc(blksz);
--+			if (ext4fs_indir1_block == NULL) {
--+				printf("** DI ext2fs read block (indir 2 1)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_size = blksz;
--+		}
--+		if ((__le32_to_cpu(inode->b.blocks.double_indir_block) <<
--+		     log2_blksz) != ext4fs_indir1_blkno) {
--+			status =
--+			    ext4fs_devread(__le32_to_cpu
--+					   (inode->b.blocks.
--+					    double_indir_block) << log2_blksz,
--+					   0, blksz,
--+					   (char *)ext4fs_indir1_block);
--+			if (status == 0) {
--+				printf("** DI ext2fs read block (indir 2 1)"
--+				       "failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_blkno =
--+			    __le32_to_cpu(inode->b.blocks.double_indir_block) <<
--+			    log2_blksz;
--+		}
--+
--+		if (ext4fs_indir2_block == NULL) {
--+			ext4fs_indir2_block = zalloc(blksz);
--+			if (ext4fs_indir2_block == NULL) {
--+				printf("** DI ext2fs read block (indir 2 2)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir2_size = blksz;
--+			ext4fs_indir2_blkno = -1;
--+		}
--+		if (blksz != ext4fs_indir2_size) {
--+			free(ext4fs_indir2_block);
--+			ext4fs_indir2_block = NULL;
--+			ext4fs_indir2_size = 0;
--+			ext4fs_indir2_blkno = -1;
--+			ext4fs_indir2_block = zalloc(blksz);
--+			if (ext4fs_indir2_block == NULL) {
--+				printf("** DI ext2fs read block (indir 2 2)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir2_size = blksz;
--+		}
--+		if ((__le32_to_cpu(ext4fs_indir1_block[rblock / perblock]) <<
--+		     log2_blksz) != ext4fs_indir2_blkno) {
--+			status = ext4fs_devread(__le32_to_cpu
--+						(ext4fs_indir1_block
--+						 [rblock /
--+						  perblock]) << log2_blksz, 0,
--+						blksz,
--+						(char *)ext4fs_indir2_block);
--+			if (status == 0) {
--+				printf("** DI ext2fs read block (indir 2 2)"
--+				       "failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir2_blkno =
--+			    __le32_to_cpu(ext4fs_indir1_block[rblock
--+							      /
--+							      perblock]) <<
--+			    log2_blksz;
--+		}
--+		blknr = __le32_to_cpu(ext4fs_indir2_block[rblock % perblock]);
--+	}
--+	/* Tripple indirect. */
--+	else {
--+		rblock = fileblock - (INDIRECT_BLOCKS + blksz / 4 +
--+				      (blksz / 4 * blksz / 4));
--+		perblock_child = blksz / 4;
--+		perblock_parent = ((blksz / 4) * (blksz / 4));
--+
--+		if (ext4fs_indir1_block == NULL) {
--+			ext4fs_indir1_block = zalloc(blksz);
--+			if (ext4fs_indir1_block == NULL) {
--+				printf("** TI ext2fs read block (indir 2 1)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_size = blksz;
--+			ext4fs_indir1_blkno = -1;
--+		}
--+		if (blksz != ext4fs_indir1_size) {
--+			free(ext4fs_indir1_block);
--+			ext4fs_indir1_block = NULL;
--+			ext4fs_indir1_size = 0;
--+			ext4fs_indir1_blkno = -1;
--+			ext4fs_indir1_block = zalloc(blksz);
--+			if (ext4fs_indir1_block == NULL) {
--+				printf("** TI ext2fs read block (indir 2 1)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_size = blksz;
--+		}
--+		if ((__le32_to_cpu(inode->b.blocks.triple_indir_block) <<
--+		     log2_blksz) != ext4fs_indir1_blkno) {
--+			status = ext4fs_devread
--+			    (__le32_to_cpu(inode->b.blocks.triple_indir_block)
--+			     << log2_blksz, 0, blksz,
--+			     (char *)ext4fs_indir1_block);
--+			if (status == 0) {
--+				printf("** TI ext2fs read block (indir 2 1)"
--+				       "failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir1_blkno =
--+			    __le32_to_cpu(inode->b.blocks.triple_indir_block) <<
--+			    log2_blksz;
--+		}
--+
--+		if (ext4fs_indir2_block == NULL) {
--+			ext4fs_indir2_block = zalloc(blksz);
--+			if (ext4fs_indir2_block == NULL) {
--+				printf("** TI ext2fs read block (indir 2 2)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir2_size = blksz;
--+			ext4fs_indir2_blkno = -1;
--+		}
--+		if (blksz != ext4fs_indir2_size) {
--+			free(ext4fs_indir2_block);
--+			ext4fs_indir2_block = NULL;
--+			ext4fs_indir2_size = 0;
--+			ext4fs_indir2_blkno = -1;
--+			ext4fs_indir2_block = zalloc(blksz);
--+			if (ext4fs_indir2_block == NULL) {
--+				printf("** TI ext2fs read block (indir 2 2)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir2_size = blksz;
--+		}
--+		if ((__le32_to_cpu(ext4fs_indir1_block[rblock /
--+						       perblock_parent]) <<
--+		     log2_blksz)
--+		    != ext4fs_indir2_blkno) {
--+			status = ext4fs_devread(__le32_to_cpu
--+						(ext4fs_indir1_block
--+						 [rblock /
--+						  perblock_parent]) <<
--+						log2_blksz, 0, blksz,
--+						(char *)ext4fs_indir2_block);
--+			if (status == 0) {
--+				printf("** TI ext2fs read block (indir 2 2)"
--+				       "failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir2_blkno =
--+			    __le32_to_cpu(ext4fs_indir1_block[rblock /
--+							      perblock_parent])
--+			    << log2_blksz;
--+		}
--+
--+		if (ext4fs_indir3_block == NULL) {
--+			ext4fs_indir3_block = zalloc(blksz);
--+			if (ext4fs_indir3_block == NULL) {
--+				printf("** TI ext2fs read block (indir 2 2)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir3_size = blksz;
--+			ext4fs_indir3_blkno = -1;
--+		}
--+		if (blksz != ext4fs_indir3_size) {
--+			free(ext4fs_indir3_block);
--+			ext4fs_indir3_block = NULL;
--+			ext4fs_indir3_size = 0;
--+			ext4fs_indir3_blkno = -1;
--+			ext4fs_indir3_block = zalloc(blksz);
--+			if (ext4fs_indir3_block == NULL) {
--+				printf("** TI ext2fs read block (indir 2 2)"
--+				       "malloc failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir3_size = blksz;
--+		}
--+		if ((__le32_to_cpu(ext4fs_indir2_block[rblock
--+						       /
--+						       perblock_child]) <<
--+		     log2_blksz) != ext4fs_indir3_blkno) {
--+			status =
--+			    ext4fs_devread(__le32_to_cpu
--+					   (ext4fs_indir2_block
--+					    [(rblock / perblock_child)
--+					     % (blksz / 4)]) << log2_blksz, 0,
--+					   blksz, (char *)ext4fs_indir3_block);
--+			if (status == 0) {
--+				printf("** TI ext2fs read block (indir 2 2)"
--+				       "failed. **\n");
--+				return -1;
--+			}
--+			ext4fs_indir3_blkno =
--+			    __le32_to_cpu(ext4fs_indir2_block[(rblock /
--+							       perblock_child) %
--+							      (blksz /
--+							       4)]) <<
--+			    log2_blksz;
--+		}
--+
--+		blknr = __le32_to_cpu(ext4fs_indir3_block
--+				      [rblock % perblock_child]);
--+	}
--+	debug("ext4fs_read_block %ld\n", blknr);
--+
--+	return blknr;
--+}
--+
--+void ext4fs_close(void)
--+{
--+	if ((ext4fs_file != NULL) && (ext4fs_root != NULL)) {
--+		ext4fs_free_node(ext4fs_file, &ext4fs_root->diropen);
--+		ext4fs_file = NULL;
--+	}
--+	if (ext4fs_root != NULL) {
--+		free(ext4fs_root);
--+		ext4fs_root = NULL;
--+	}
--+	if (ext4fs_indir1_block != NULL) {
--+		free(ext4fs_indir1_block);
--+		ext4fs_indir1_block = NULL;
--+		ext4fs_indir1_size = 0;
--+		ext4fs_indir1_blkno = -1;
--+	}
--+	if (ext4fs_indir2_block != NULL) {
--+		free(ext4fs_indir2_block);
--+		ext4fs_indir2_block = NULL;
--+		ext4fs_indir2_size = 0;
--+		ext4fs_indir2_blkno = -1;
--+	}
--+	if (ext4fs_indir3_block != NULL) {
--+		free(ext4fs_indir3_block);
--+		ext4fs_indir3_block = NULL;
--+		ext4fs_indir3_size = 0;
--+		ext4fs_indir3_blkno = -1;
--+	}
--+}
--+
--+int ext4fs_iterate_dir(struct ext2fs_node *dir, char *name,
--+		       struct ext2fs_node **fnode, int *ftype)
--+{
--+	unsigned int fpos = 0;
--+	int status;
--+	struct ext2fs_node *diro = (struct ext2fs_node *)dir;
--+
--+#ifdef DEBUG
--+	if (name != NULL)
--+		printf("Iterate dir %s\n", name);
--+#endif				/* of DEBUG */
--+	if (!diro->inode_read) {
--+		status = ext4fs_read_inode(diro->data, diro->ino, &diro->inode);
--+		if (status == 0)
--+			return 0;
--+	}
--+	/* Search the file.  */
--+	while (fpos < __le32_to_cpu(diro->inode.size)) {
--+		struct ext2_dirent dirent;
--+
--+		status = ext4fs_read_file(diro, fpos,
--+					  sizeof(struct ext2_dirent),
--+					  (char *)&dirent);
--+		if (status < 1)
--+			return 0;
--+
--+		if (dirent.namelen != 0) {
--+			char filename[dirent.namelen + 1];
--+			struct ext2fs_node *fdiro;
--+			int type = FILETYPE_UNKNOWN;
--+
--+			status = ext4fs_read_file(diro,
--+						  fpos +
--+						  sizeof(struct ext2_dirent),
--+						  dirent.namelen, filename);
--+			if (status < 1)
--+				return 0;
--+
--+			fdiro = zalloc(sizeof(struct ext2fs_node));
--+			if (!fdiro)
--+				return 0;
--+
--+			fdiro->data = diro->data;
--+			fdiro->ino = __le32_to_cpu(dirent.inode);
--+
--+			filename[dirent.namelen] = '\0';
--+
--+			if (dirent.filetype != FILETYPE_UNKNOWN) {
--+				fdiro->inode_read = 0;
--+
--+				if (dirent.filetype == FILETYPE_DIRECTORY)
--+					type = FILETYPE_DIRECTORY;
--+				else if (dirent.filetype == FILETYPE_SYMLINK)
--+					type = FILETYPE_SYMLINK;
--+				else if (dirent.filetype == FILETYPE_REG)
--+					type = FILETYPE_REG;
--+			} else {
--+				status = ext4fs_read_inode(diro->data,
--+							   __le32_to_cpu
--+							   (dirent.inode),
--+							   &fdiro->inode);
--+				if (status == 0) {
--+					free(fdiro);
--+					return 0;
--+				}
--+				fdiro->inode_read = 1;
--+
--+				if ((__le16_to_cpu(fdiro->inode.mode) &
--+				     FILETYPE_INO_MASK) ==
--+				    FILETYPE_INO_DIRECTORY) {
--+					type = FILETYPE_DIRECTORY;
--+				} else if ((__le16_to_cpu(fdiro->inode.mode)
--+					    & FILETYPE_INO_MASK) ==
--+					   FILETYPE_INO_SYMLINK) {
--+					type = FILETYPE_SYMLINK;
--+				} else if ((__le16_to_cpu(fdiro->inode.mode)
--+					    & FILETYPE_INO_MASK) ==
--+					   FILETYPE_INO_REG) {
--+					type = FILETYPE_REG;
--+				}
--+			}
--+#ifdef DEBUG
--+			printf("iterate >%s<\n", filename);
--+#endif				/* of DEBUG */
--+			if ((name != NULL) && (fnode != NULL)
--+			    && (ftype != NULL)) {
--+				if (strcmp(filename, name) == 0) {
--+					*ftype = type;
--+					*fnode = fdiro;
--+					return 1;
--+				}
--+			} else {
--+				if (fdiro->inode_read == 0) {
--+					status = ext4fs_read_inode(diro->data,
--+								 __le32_to_cpu(
--+								 dirent.inode),
--+								 &fdiro->inode);
--+					if (status == 0) {
--+						free(fdiro);
--+						return 0;
--+					}
--+					fdiro->inode_read = 1;
--+				}
--+				switch (type) {
--+				case FILETYPE_DIRECTORY:
--+					printf("<DIR> ");
--+					break;
--+				case FILETYPE_SYMLINK:
--+					printf("<SYM> ");
--+					break;
--+				case FILETYPE_REG:
--+					printf("      ");
--+					break;
--+				default:
--+					printf("< ? > ");
--+					break;
--+				}
--+				printf("%10d %s\n",
--+				       __le32_to_cpu(fdiro->inode.size),
--+				       filename);
--+			}
--+			free(fdiro);
--+		}
--+		fpos += __le16_to_cpu(dirent.direntlen);
--+	}
--+	return 0;
--+}
--+
--+static char *ext4fs_read_symlink(struct ext2fs_node *node)
--+{
--+	char *symlink;
--+	struct ext2fs_node *diro = node;
--+	int status;
--+
--+	if (!diro->inode_read) {
--+		status = ext4fs_read_inode(diro->data, diro->ino, &diro->inode);
--+		if (status == 0)
--+			return 0;
--+	}
--+	symlink = zalloc(__le32_to_cpu(diro->inode.size) + 1);
--+	if (!symlink)
--+		return 0;
--+
--+	if (__le32_to_cpu(diro->inode.size) <= 60) {
--+		strncpy(symlink, diro->inode.b.symlink,
--+			__le32_to_cpu(diro->inode.size));
--+	} else {
--+		status = ext4fs_read_file(diro, 0,
--+					  __le32_to_cpu(diro->inode.size),
--+					  symlink);
--+		if (status == 0) {
--+			free(symlink);
--+			return 0;
--+		}
--+	}
--+	symlink[__le32_to_cpu(diro->inode.size)] = '\0';
--+	return symlink;
--+}
--+
--+static int ext4fs_find_file1(const char *currpath,
--+			     struct ext2fs_node *currroot,
--+			     struct ext2fs_node **currfound, int *foundtype)
--+{
--+	char fpath[strlen(currpath) + 1];
--+	char *name = fpath;
--+	char *next;
--+	int status;
--+	int type = FILETYPE_DIRECTORY;
--+	struct ext2fs_node *currnode = currroot;
--+	struct ext2fs_node *oldnode = currroot;
--+
--+	strncpy(fpath, currpath, strlen(currpath) + 1);
--+
--+	/* Remove all leading slashes. */
--+	while (*name == '/')
--+		name++;
--+
--+	if (!*name) {
--+		*currfound = currnode;
--+		return 1;
--+	}
--+
--+	for (;;) {
--+		int found;
--+
--+		/* Extract the actual part from the pathname. */
--+		next = strchr(name, '/');
--+		if (next) {
--+			/* Remove all leading slashes. */
--+			while (*next == '/')
--+				*(next++) = '\0';
--+		}
--+
--+		if (type != FILETYPE_DIRECTORY) {
--+			ext4fs_free_node(currnode, currroot);
--+			return 0;
--+		}
--+
--+		oldnode = currnode;
--+
--+		/* Iterate over the directory. */
--+		found = ext4fs_iterate_dir(currnode, name, &currnode, &type);
--+		if (found == 0)
--+			return 0;
--+
--+		if (found == -1)
--+			break;
--+
--+		/* Read in the symlink and follow it. */
--+		if (type == FILETYPE_SYMLINK) {
--+			char *symlink;
--+
--+			/* Test if the symlink does not loop. */
--+			if (++symlinknest == 8) {
--+				ext4fs_free_node(currnode, currroot);
--+				ext4fs_free_node(oldnode, currroot);
--+				return 0;
--+			}
--+
--+			symlink = ext4fs_read_symlink(currnode);
--+			ext4fs_free_node(currnode, currroot);
--+
--+			if (!symlink) {
--+				ext4fs_free_node(oldnode, currroot);
--+				return 0;
--+			}
--+
--+			debug("Got symlink >%s<\n", symlink);
--+
--+			if (symlink[0] == '/') {
--+				ext4fs_free_node(oldnode, currroot);
--+				oldnode = &ext4fs_root->diropen;
--+			}
--+
--+			/* Lookup the node the symlink points to. */
--+			status = ext4fs_find_file1(symlink, oldnode,
--+						   &currnode, &type);
--+
--+			free(symlink);
--+
--+			if (status == 0) {
--+				ext4fs_free_node(oldnode, currroot);
--+				return 0;
--+			}
--+		}
--+
--+		ext4fs_free_node(oldnode, currroot);
--+
--+		/* Found the node! */
--+		if (!next || *next == '\0') {
--+			*currfound = currnode;
--+			*foundtype = type;
--+			return 1;
--+		}
--+		name = next;
--+	}
--+	return -1;
--+}
--+
--+int ext4fs_find_file(const char *path, struct ext2fs_node *rootnode,
--+	struct ext2fs_node **foundnode, int expecttype)
--+{
--+	int status;
--+	int foundtype = FILETYPE_DIRECTORY;
--+
--+	symlinknest = 0;
--+	if (!path)
--+		return 0;
--+
--+	status = ext4fs_find_file1(path, rootnode, foundnode, &foundtype);
--+	if (status == 0)
--+		return 0;
--+
--+	/* Check if the node that was found was of the expected type. */
--+	if ((expecttype == FILETYPE_REG) && (foundtype != expecttype))
--+		return 0;
--+	else if ((expecttype == FILETYPE_DIRECTORY)
--+		   && (foundtype != expecttype))
--+		return 0;
--+
--+	return 1;
--+}
--+
--+int ext4fs_open(const char *filename)
--+{
--+	struct ext2fs_node *fdiro = NULL;
--+	int status;
--+	int len;
--+
--+	if (ext4fs_root == NULL)
--+		return -1;
--+
--+	ext4fs_file = NULL;
--+	status = ext4fs_find_file(filename, &ext4fs_root->diropen, &fdiro,
--+				  FILETYPE_REG);
--+	if (status == 0)
--+		goto fail;
--+
--+	if (!fdiro->inode_read) {
--+		status = ext4fs_read_inode(fdiro->data, fdiro->ino,
--+					   &fdiro->inode);
--+		if (status == 0)
--+			goto fail;
--+	}
--+	len = __le32_to_cpu(fdiro->inode.size);
--+	ext4fs_file = fdiro;
--+
--+	return len;
--+ fail:
--+	ext4fs_free_node(fdiro, &ext4fs_root->diropen);
--+
--+	return -1;
--+}
--+
--+int ext4fs_mount(unsigned part_length)
--+{
--+	struct ext2_data *data;
--+	int status;
--+	struct ext_filesystem *fs = get_fs();
--+	data = zalloc(sizeof(struct ext2_data));
--+	if (!data)
--+		return 0;
--+
--+	/* Read the superblock. */
--+	status = ext4fs_devread(1 * 2, 0, sizeof(struct ext2_sblock),
--+				(char *)&data->sblock);
--+
--+	if (status == 0)
--+		goto fail;
--+
--+	/* Make sure this is an ext2 filesystem. */
--+	if (__le16_to_cpu(data->sblock.magic) != EXT2_MAGIC)
--+		goto fail;
--+
--+	if (__le32_to_cpu(data->sblock.revision_level == 0))
--+		fs->inodesz = 128;
--+	else
--+		fs->inodesz = __le16_to_cpu(data->sblock.inode_size);
--+
--+	debug("EXT2 rev %d, inode_size %d\n",
--+	      __le32_to_cpu(data->sblock.revision_level), fs->inodesz);
--+
--+	data->diropen.data = data;
--+	data->diropen.ino = 2;
--+	data->diropen.inode_read = 1;
--+	data->inode = &data->diropen.inode;
--+
--+	status = ext4fs_read_inode(data, 2, data->inode);
--+	if (status == 0)
--+		goto fail;
--+
--+	ext4fs_root = data;
--+
--+	return 1;
--+ fail:
--+	printf("Failed to mount ext2 filesystem...\n");
--+	free(data);
--+	ext4fs_root = NULL;
--+
--+	return 0;
--+}
--diff --git a/fs/ext4/ext4_common.h b/fs/ext4/ext4_common.h
--new file mode 100644
--index 0000000..18e6ad1
----- /dev/null
--+++ b/fs/ext4/ext4_common.h
--@@ -0,0 +1,63 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * ext4ls and ext4load :  based on ext2 ls load support in Uboot.
--+ *
--+ * (C) Copyright 2004
--+ * esd gmbh <www.esd-electronics.com>
--+ * Reinhard Arlt <reinhard.arlt@esd-electronics.com>
--+ *
--+ * based on code from grub2 fs/ext2.c and fs/fshelp.c by
--+ * GRUB  --  GRand Unified Bootloader
--+ * Copyright (C) 2003, 2004  Free Software Foundation, Inc.
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License as published by
--+ * the Free Software Foundation; either version 2 of the License, or
--+ * (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--+ */
--+
--+#ifndef __EXT4_COMMON__
--+#define __EXT4_COMMON__
--+#include <ext_common.h>
--+#include <ext4fs.h>
--+#include <malloc.h>
--+#include <asm/errno.h>
--+
--+#define YES		1
--+#define NO		0
--+#define TRUE		1
--+#define FALSE		0
--+#define RECOVER	1
--+#define SCAN		0
--+
--+#define S_IFLNK	0120000		/* symbolic link */
--+#define BLOCK_NO_ONE		1
--+#define SUPERBLOCK_SECTOR	2
--+#define SUPERBLOCK_SIZE	1024
--+#define F_FILE			1
--+
--+#define zalloc(size) calloc(1, size)
--+
--+extern unsigned long part_offset;
--+int ext4fs_read_inode(struct ext2_data *data, int ino,
--+		      struct ext2_inode *inode);
--+int ext4fs_read_file(struct ext2fs_node *node, int pos,
--+		unsigned int len, char *buf);
--+int ext4fs_find_file(const char *path, struct ext2fs_node *rootnode,
--+			struct ext2fs_node **foundnode, int expecttype);
--+int ext4fs_iterate_dir(struct ext2fs_node *dir, char *name,
--+			struct ext2fs_node **fnode, int *ftype);
--+#endif
--diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
--new file mode 100644
--index 0000000..7933769
----- /dev/null
--+++ b/fs/ext4/ext4fs.c
--@@ -0,0 +1,228 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * ext4ls and ext4load : Based on ext2 ls and load support in Uboot.
--+ *		       Ext4 read optimization taken from Open-Moko
--+ *		       Qi bootloader
--+ *
--+ * (C) Copyright 2004
--+ * esd gmbh <www.esd-electronics.com>
--+ * Reinhard Arlt <reinhard.arlt@esd-electronics.com>
--+ *
--+ * based on code from grub2 fs/ext2.c and fs/fshelp.c by
--+ * GRUB  --  GRand Unified Bootloader
--+ * Copyright (C) 2003, 2004  Free Software Foundation, Inc.
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License as published by
--+ * the Free Software Foundation; either version 2 of the License, or
--+ * (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--+ */
--+
--+#include <common.h>
--+#include <malloc.h>
--+#include <ext_common.h>
--+#include <ext4fs.h>
--+#include <linux/stat.h>
--+#include <linux/time.h>
--+#include <asm/byteorder.h>
--+#include "ext4_common.h"
--+
--+int ext4fs_symlinknest;
--+block_dev_desc_t *ext4_dev_desc;
--+
--+struct ext_filesystem *get_fs(void)
--+{
--+	if (ext4_dev_desc == NULL || ext4_dev_desc->priv == NULL)
--+		printf("Invalid Input Arguments %s\n", __func__);
--+
--+	return ext4_dev_desc->priv;
--+}
--+
--+int init_fs(block_dev_desc_t *dev_desc)
--+{
--+	struct ext_filesystem *fs;
--+	if (dev_desc == NULL) {
--+		printf("Invalid Input Arguments %s\n", __func__);
--+		return -EINVAL;
--+	}
--+
--+	fs = zalloc(sizeof(struct ext_filesystem));
--+	if (fs == NULL) {
--+		printf("malloc failed: %s\n", __func__);
--+		return -ENOMEM;
--+	}
--+
--+	fs->dev_desc = dev_desc;
--+	dev_desc->priv = fs;
--+
--+	return 0;
--+}
--+
--+void deinit_fs(block_dev_desc_t *dev_desc)
--+{
--+	if (dev_desc == NULL) {
--+		printf("Invalid Input Arguments %s\n", __func__);
--+		return;
--+	}
--+	free(dev_desc->priv);
--+	dev_desc->priv = NULL;
--+}
--+
--+void ext4fs_free_node(struct ext2fs_node *node, struct ext2fs_node *currroot)
--+{
--+	if ((node != &ext4fs_root->diropen) && (node != currroot))
--+		free(node);
--+}
--+
--+/*
--+ * Taken from openmoko-kernel mailing list: By Andy green
--+ * Optimized read file API : collects and defers contiguous sector
--+ * reads into one potentially more efficient larger sequential read action
--+ */
--+int ext4fs_read_file(struct ext2fs_node *node, int pos,
--+		     unsigned int len, char *buf)
--+{
--+	int i;
--+	int blockcnt;
--+	int log2blocksize = LOG2_EXT2_BLOCK_SIZE(node->data);
--+	int blocksize = 1 << (log2blocksize + DISK_SECTOR_BITS);
--+	unsigned int filesize = __le32_to_cpu(node->inode.size);
--+	int previous_block_number = -1;
--+	int delayed_start = 0;
--+	int delayed_extent = 0;
--+	int delayed_skipfirst = 0;
--+	int delayed_next = 0;
--+	char *delayed_buf = NULL;
--+	short status;
--+
--+	/* Adjust len so it we can't read past the end of the file. */
--+	if (len > filesize)
--+		len = filesize;
--+
--+	blockcnt = ((len + pos) + blocksize - 1) / blocksize;
--+
--+	for (i = pos / blocksize; i < blockcnt; i++) {
--+		int blknr;
--+		int blockoff = pos % blocksize;
--+		int blockend = blocksize;
--+		int skipfirst = 0;
--+		blknr = read_allocated_block(&(node->inode), i);
--+		if (blknr < 0)
--+			return -1;
--+
--+		blknr = blknr << log2blocksize;
--+
--+		/* Last block.  */
--+		if (i == blockcnt - 1) {
--+			blockend = (len + pos) % blocksize;
--+
--+			/* The last portion is exactly blocksize. */
--+			if (!blockend)
--+				blockend = blocksize;
--+		}
--+
--+		/* First block. */
--+		if (i == pos / blocksize) {
--+			skipfirst = blockoff;
--+			blockend -= skipfirst;
--+		}
--+		if (blknr) {
--+			int status;
--+
--+			if (previous_block_number != -1) {
--+				if (delayed_next == blknr) {
--+					delayed_extent += blockend;
--+					delayed_next += blockend >> SECTOR_BITS;
--+				} else {	/* spill */
--+					status = ext4fs_devread(delayed_start,
--+							delayed_skipfirst,
--+							delayed_extent,
--+							delayed_buf);
--+					if (status == 0)
--+						return -1;
--+					previous_block_number = blknr;
--+					delayed_start = blknr;
--+					delayed_extent = blockend;
--+					delayed_skipfirst = skipfirst;
--+					delayed_buf = buf;
--+					delayed_next = blknr +
--+					    (blockend >> SECTOR_BITS);
--+				}
--+			} else {
--+				previous_block_number = blknr;
--+				delayed_start = blknr;
--+				delayed_extent = blockend;
--+				delayed_skipfirst = skipfirst;
--+				delayed_buf = buf;
--+				delayed_next = blknr +
--+				    (blockend >> SECTOR_BITS);
--+			}
--+		} else {
--+			if (previous_block_number != -1) {
--+				/* spill */
--+				status = ext4fs_devread(delayed_start,
--+							delayed_skipfirst,
--+							delayed_extent,
--+							delayed_buf);
--+				if (status == 0)
--+					return -1;
--+				previous_block_number = -1;
--+			}
--+			memset(buf, 0, blocksize - skipfirst);
--+		}
--+		buf += blocksize - skipfirst;
--+	}
--+	if (previous_block_number != -1) {
--+		/* spill */
--+		status = ext4fs_devread(delayed_start,
--+					delayed_skipfirst, delayed_extent,
--+					delayed_buf);
--+		if (status == 0)
--+			return -1;
--+		previous_block_number = -1;
--+	}
--+
--+	return len;
--+}
--+
--+int ext4fs_ls(const char *dirname)
--+{
--+	struct ext2fs_node *dirnode;
--+	int status;
--+
--+	if (dirname == NULL)
--+		return 0;
--+
--+	status = ext4fs_find_file(dirname, &ext4fs_root->diropen, &dirnode,
--+				  FILETYPE_DIRECTORY);
--+	if (status != 1) {
--+		printf("** Can not find directory. **\n");
--+		return 1;
--+	}
--+
--+	ext4fs_iterate_dir(dirnode, NULL, NULL, NULL);
--+	ext4fs_free_node(dirnode, &ext4fs_root->diropen);
--+
--+	return 0;
--+}
--+
--+int ext4fs_read(char *buf, unsigned len)
--+{
--+	if (ext4fs_root == NULL || ext4fs_file == NULL)
--+		return 0;
--+
--+	return ext4fs_read_file(ext4fs_file, 0, len, buf);
--+}
--diff --git a/include/ext4fs.h b/include/ext4fs.h
--new file mode 100644
--index 0000000..58a6a1d
----- /dev/null
--+++ b/include/ext4fs.h
--@@ -0,0 +1,132 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * Ext4 Extent data structures are taken from  original ext4 fs code
--+ * as found in the linux kernel.
--+ *
--+ * Copyright (c) 2003-2006, Cluster File Systems, Inc, info@clusterfs.com
--+ * Written by Alex Tomas <alex@clusterfs.com>
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License version 2 as
--+ * published by the Free Software Foundation.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--+ */
--+
--+#ifndef __EXT4__
--+#define __EXT4__
--+#include <ext_common.h>
--+
--+#define EXT4_EXTENTS_FL		0x00080000 /* Inode uses extents */
--+#define EXT4_EXT_MAGIC			0xf30a
--+#define EXT4_FEATURE_RO_COMPAT_GDT_CSUM	0x0010
--+#define EXT4_FEATURE_INCOMPAT_EXTENTS	0x0040
--+#define EXT4_INDIRECT_BLOCKS		12
--+
--+#define EXT4_BG_INODE_UNINIT		0x0001
--+#define EXT4_BG_BLOCK_UNINIT		0x0002
--+#define EXT4_BG_INODE_ZEROED		0x0004
--+
--+/*
--+ * ext4_inode has i_block array (60 bytes total).
--+ * The first 12 bytes store ext4_extent_header;
--+ * the remainder stores an array of ext4_extent.
--+ */
--+
--+/*
--+ * This is the extent on-disk structure.
--+ * It's used at the bottom of the tree.
--+ */
--+struct ext4_extent {
--+	__le32	ee_block;	/* first logical block extent covers */
--+	__le16	ee_len;		/* number of blocks covered by extent */
--+	__le16	ee_start_hi;	/* high 16 bits of physical block */
--+	__le32	ee_start_lo;	/* low 32 bits of physical block */
--+};
--+
--+/*
--+ * This is index on-disk structure.
--+ * It's used at all the levels except the bottom.
--+ */
--+struct ext4_extent_idx {
--+	__le32	ei_block;	/* index covers logical blocks from 'block' */
--+	__le32	ei_leaf_lo;	/* pointer to the physical block of the next *
--+				 * level. leaf or next index could be there */
--+	__le16	ei_leaf_hi;	/* high 16 bits of physical block */
--+	__u16	ei_unused;
--+};
--+
--+/* Each block (leaves and indexes), even inode-stored has header. */
--+struct ext4_extent_header {
--+	__le16	eh_magic;	/* probably will support different formats */
--+	__le16	eh_entries;	/* number of valid entries */
--+	__le16	eh_max;		/* capacity of store in entries */
--+	__le16	eh_depth;	/* has tree real underlying blocks? */
--+	__le32	eh_generation;	/* generation of the tree */
--+};
--+
--+struct ext_filesystem {
--+	/* Total Sector of partition */
--+	uint64_t total_sect;
--+	/* Block size  of partition */
--+	uint32_t blksz;
--+	/* Inode size of partition */
--+	uint32_t inodesz;
--+	/* Sectors per Block */
--+	uint32_t sect_perblk;
--+	/* Group Descriptor Block Number */
--+	uint32_t gdtable_blkno;
--+	/* Total block groups of partition */
--+	uint32_t no_blkgrp;
--+	/* No of blocks required for bgdtable */
--+	uint32_t no_blk_pergdt;
--+	/* Superblock */
--+	struct ext2_sblock *sb;
--+	/* Block group descritpor table */
--+	struct ext2_block_group *gd;
--+	char *gdtable;
--+
--+	/* Block Bitmap Related */
--+	unsigned char **blk_bmaps;
--+	long int curr_blkno;
--+	uint16_t first_pass_bbmap;
--+
--+	/* Inode Bitmap Related */
--+	unsigned char **inode_bmaps;
--+	int curr_inode_no;
--+	uint16_t first_pass_ibmap;
--+
--+	/* Journal Related */
--+
--+	/* Block Device Descriptor */
--+	block_dev_desc_t *dev_desc;
--+};
--+
--+extern block_dev_desc_t *ext4_dev_desc;
--+extern struct ext2_data *ext4fs_root;
--+extern struct ext2fs_node *ext4fs_file;
--+
--+struct ext_filesystem *get_fs(void);
--+int init_fs(block_dev_desc_t *dev_desc);
--+void deinit_fs(block_dev_desc_t *dev_desc);
--+int ext4fs_open(const char *filename);
--+int ext4fs_read(char *buf, unsigned len);
--+int ext4fs_mount(unsigned part_length);
--+void ext4fs_close(void);
--+int ext4fs_ls(const char *dirname);
--+void ext4fs_free_node(struct ext2fs_node *node, struct ext2fs_node *currroot);
--+int ext4fs_devread(int sector, int byte_offset, int byte_len, char *buf);
--+int ext4fs_set_blk_dev(block_dev_desc_t *rbdd, int part);
--+long int read_allocated_block(struct ext2_inode *inode, int fileblock);
--+#endif
--diff --git a/include/ext_common.h b/include/ext_common.h
--new file mode 100644
--index 0000000..5d48021
----- /dev/null
--+++ b/include/ext_common.h
--@@ -0,0 +1,188 @@
--+/*
--+ * (C) Copyright 2011 - 2012 Samsung Electronics
--+ * EXT4 filesystem implementation in Uboot by
--+ * Uma Shankar <uma.shankar@samsung.com>
--+ * Manjunatha C Achar <a.manjunatha@samsung.com>
--+ *
--+ * Data structures and headers for ext4 support have been taken from
--+ * ext2 ls load support in Uboot
--+ *
--+ * (C) Copyright 2004
--+ * esd gmbh <www.esd-electronics.com>
--+ * Reinhard Arlt <reinhard.arlt@esd-electronics.com>
--+ *
--+ * based on code from grub2 fs/ext2.c and fs/fshelp.c by
--+ * GRUB  --  GRand Unified Bootloader
--+ * Copyright (C) 2003, 2004  Free Software Foundation, Inc.
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License as published by
--+ * the Free Software Foundation; either version 2 of the License, or
--+ * (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
--+ */
--+
--+#ifndef __EXT_COMMON__
--+#define __EXT_COMMON__
--+
--+#define SECTOR_SIZE		0x200
--+#define SECTOR_BITS		9
--+
--+/* Magic value used to identify an ext2 filesystem.  */
--+#define	EXT2_MAGIC		0xEF53
--+/* Amount of indirect blocks in an inode.  */
--+#define INDIRECT_BLOCKS		12
--+/* Maximum lenght of a pathname.  */
--+#define EXT2_PATH_MAX			4096
--+/* Maximum nesting of symlinks, used to prevent a loop.  */
--+#define	EXT2_MAX_SYMLINKCNT		8
--+
--+/* Filetype used in directory entry.  */
--+#define	FILETYPE_UNKNOWN		0
--+#define	FILETYPE_REG			1
--+#define	FILETYPE_DIRECTORY		2
--+#define	FILETYPE_SYMLINK		7
--+
--+/* Filetype information as used in inodes.  */
--+#define FILETYPE_INO_MASK		0170000
--+#define FILETYPE_INO_REG		0100000
--+#define FILETYPE_INO_DIRECTORY		0040000
--+#define FILETYPE_INO_SYMLINK		0120000
--+#define EXT2_ROOT_INO			2 /* Root inode */
--+
--+/* Bits used as offset in sector */
--+#define DISK_SECTOR_BITS		9
--+/* The size of an ext2 block in bytes.  */
--+#define EXT2_BLOCK_SIZE(data)	   (1 << LOG2_BLOCK_SIZE(data))
--+
--+/* Log2 size of ext2 block in 512 blocks.  */
--+#define LOG2_EXT2_BLOCK_SIZE(data) (__le32_to_cpu \
--+				(data->sblock.log2_block_size) + 1)
--+
--+/* Log2 size of ext2 block in bytes.  */
--+#define LOG2_BLOCK_SIZE(data)	   (__le32_to_cpu \
--+		(data->sblock.log2_block_size) + 10)
--+#define INODE_SIZE_FILESYSTEM(data)	(__le32_to_cpu \
--+			(data->sblock.inode_size))
--+
--+#define EXT2_FT_DIR	2
--+#define SUCCESS	1
--+
--+/* Macro-instructions used to manage several block sizes  */
--+#define EXT2_MIN_BLOCK_LOG_SIZE	10 /* 1024 */
--+#define EXT2_MAX_BLOCK_LOG_SIZE	16 /* 65536 */
--+#define EXT2_MIN_BLOCK_SIZE		(1 << EXT2_MIN_BLOCK_LOG_SIZE)
--+#define EXT2_MAX_BLOCK_SIZE		(1 << EXT2_MAX_BLOCK_LOG_SIZE)
--+
--+/* The ext2 superblock.  */
--+struct ext2_sblock {
--+	uint32_t total_inodes;
--+	uint32_t total_blocks;
--+	uint32_t reserved_blocks;
--+	uint32_t free_blocks;
--+	uint32_t free_inodes;
--+	uint32_t first_data_block;
--+	uint32_t log2_block_size;
--+	uint32_t log2_fragment_size;
--+	uint32_t blocks_per_group;
--+	uint32_t fragments_per_group;
--+	uint32_t inodes_per_group;
--+	uint32_t mtime;
--+	uint32_t utime;
--+	uint16_t mnt_count;
--+	uint16_t max_mnt_count;
--+	uint16_t magic;
--+	uint16_t fs_state;
--+	uint16_t error_handling;
--+	uint16_t minor_revision_level;
--+	uint32_t lastcheck;
--+	uint32_t checkinterval;
--+	uint32_t creator_os;
--+	uint32_t revision_level;
--+	uint16_t uid_reserved;
--+	uint16_t gid_reserved;
--+	uint32_t first_inode;
--+	uint16_t inode_size;
--+	uint16_t block_group_number;
--+	uint32_t feature_compatibility;
--+	uint32_t feature_incompat;
--+	uint32_t feature_ro_compat;
--+	uint32_t unique_id[4];
--+	char volume_name[16];
--+	char last_mounted_on[64];
--+	uint32_t compression_info;
--+};
--+
--+struct ext2_block_group {
--+	__u32 block_id;	/* Blocks bitmap block */
--+	__u32 inode_id;	/* Inodes bitmap block */
--+	__u32 inode_table_id;	/* Inodes table block */
--+	__u16 free_blocks;	/* Free blocks count */
--+	__u16 free_inodes;	/* Free inodes count */
--+	__u16 used_dir_cnt;	/* Directories count */
--+	__u16 bg_flags;
--+	__u32 bg_reserved[2];
--+	__u16 bg_itable_unused; /* Unused inodes count */
--+	__u16 bg_checksum;	/* crc16(s_uuid+grouo_num+group_desc)*/
--+};
--+
--+/* The ext2 inode. */
--+struct ext2_inode {
--+	uint16_t mode;
--+	uint16_t uid;
--+	uint32_t size;
--+	uint32_t atime;
--+	uint32_t ctime;
--+	uint32_t mtime;
--+	uint32_t dtime;
--+	uint16_t gid;
--+	uint16_t nlinks;
--+	uint32_t blockcnt;	/* Blocks of 512 bytes!! */
--+	uint32_t flags;
--+	uint32_t osd1;
--+	union {
--+		struct datablocks {
--+			uint32_t dir_blocks[INDIRECT_BLOCKS];
--+			uint32_t indir_block;
--+			uint32_t double_indir_block;
--+			uint32_t triple_indir_block;
--+		} blocks;
--+		char symlink[60];
--+	} b;
--+	uint32_t version;
--+	uint32_t acl;
--+	uint32_t dir_acl;
--+	uint32_t fragment_addr;
--+	uint32_t osd2[3];
--+};
--+
--+/* The header of an ext2 directory entry. */
--+struct ext2_dirent {
--+	uint32_t inode;
--+	uint16_t direntlen;
--+	uint8_t namelen;
--+	uint8_t filetype;
--+};
--+
--+struct ext2fs_node {
--+	struct ext2_data *data;
--+	struct ext2_inode inode;
--+	int ino;
--+	int inode_read;
--+};
--+
--+/* Information about a "mounted" ext2 filesystem. */
--+struct ext2_data {
--+	struct ext2_sblock sblock;
--+	struct ext2_inode *inode;
--+	struct ext2fs_node diropen;
--+};
--+#endif
---- 
--1.7.10
--
-diff --git a/recipes-bsp/u-boot/u-boot/2011.12/0013-beagleboard-switch-mmcroots-to-ext4.patch b/recipes-bsp/u-boot/u-boot/2011.12/0013-beagleboard-switch-mmcroots-to-ext4.patch
-deleted file mode 100644
-index c80dfc2..0000000
---- a/recipes-bsp/u-boot/u-boot/2011.12/0013-beagleboard-switch-mmcroots-to-ext4.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From f5b19d6609a540a9eafa60dad902e7416df57771 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Mon, 30 Apr 2012 11:10:07 +0200
--Subject: [PATCH 13/13] beagleboard: switch mmcroots to ext4
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- include/configs/omap3_beagle.h |    5 +++--
-- 1 file changed, 3 insertions(+), 2 deletions(-)
--
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index 65ab8ee..3157d47 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -140,6 +140,7 @@
-- 
-- #define CONFIG_CMD_CACHE
-- #define CONFIG_CMD_EXT2		/* EXT2 Support			*/
--+#define CONFIG_CMD_EXT4
-- #define CONFIG_CMD_FAT		/* FAT support			*/
-- #define CONFIG_CMD_JFFS2	/* JFFS2 Support		*/
-- #define CONFIG_CMD_MTDPARTS	/* Enable MTD parts commands */
--@@ -222,7 +223,7 @@
-- 	"defaultdisplay=dvi\0" \
-- 	"mmcdev=0\0" \
-- 	"mmcroot=/dev/mmcblk0p2 ro\0" \
---	"mmcrootfstype=ext3 rootwait\0" \
--+	"mmcrootfstype=ext4 rootwait\0" \
-- 	"nandroot=ubi0:rootfs ubi.mtd=4\0" \
-- 	"nandrootfstype=ubifs\0" \
-- 	"ramroot=/dev/ram0 rw ramdisk_size=65536 initrd=0x81000000,64M\0" \
--@@ -265,7 +266,7 @@
-- 		"rootfstype=${ramrootfstype}\0" \
-- 	"loadramdisk=fatload mmc ${mmcdev} ${rdaddr} ramdisk.gz\0" \
-- 	"loaduimagefat=fatload mmc ${mmcdev} ${loadaddr} uImage\0" \
---	"loaduimage=ext2load mmc ${mmcdev}:2 ${loadaddr} /boot/uImage\0" \
--+	"loaduimage=ext4load mmc ${mmcdev}:2 ${loadaddr} /boot/uImage\0" \
-- 	"mmcboot=echo Booting from mmc ...; " \
-- 		"run mmcargs; " \
-- 		"bootm ${loadaddr}\0" \
---- 
--1.7.10
--
-diff --git a/recipes-bsp/u-boot/u-boot/600mhz.patch b/recipes-bsp/u-boot/u-boot/600mhz.patch
-deleted file mode 100644
-index 3a7fce2..0000000
---- a/recipes-bsp/u-boot/u-boot/600mhz.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--From 7189f933a151c3f2f4778aaaefa1a3b037368bed Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 8 Jan 2011 19:13:31 +0100
--Subject: [PATCH 02/10] 600mhz.patch
--
-----
-- include/asm-arm/arch-omap3/clocks_omap3.h |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/include/asm-arm/arch-omap3/clocks_omap3.h b/include/asm-arm/arch-omap3/clocks_omap3.h
--index 661407b..e148d68 100644
----- a/include/asm-arm/arch-omap3/clocks_omap3.h
--+++ b/include/asm-arm/arch-omap3/clocks_omap3.h
--@@ -71,7 +71,7 @@
-- #define MPU_FSEL_13_ES1		0x03
-- #define MPU_M2_13_ES1		0x01
-- 
---#define MPU_M_13_ES2		0x1F4
--+#define MPU_M_13_ES2		0x258
-- #define MPU_N_13_ES2		0x0C
-- #define MPU_FSEL_13_ES2		0x03
-- #define MPU_M2_13_ES2		0x01
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/ai-logo.patch b/recipes-bsp/u-boot/u-boot/ai-logo.patch
-deleted file mode 100644
-index 53f06b8..0000000
---- a/recipes-bsp/u-boot/u-boot/ai-logo.patch
-+++ /dev/null
-@@ -1,1353 +0,0 @@
--From b5c3e2dae5e435a1429239b4e53a45a992415cdd Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 8 Jan 2011 19:16:51 +0100
--Subject: [PATCH 08/10] ai-logo.patch
--
-----
-- board/omap3/beagle/beagle.c |  141 ++++++
-- board/omap3/beagle/logo.h   | 1171 +++++++++++++++++++++++++++++++++++++++++++
-- 2 files changed, 1312 insertions(+), 0 deletions(-)
-- create mode 100644 board/omap3/beagle/logo.h
--
--diff --git a/board/omap3/beagle/beagle.c b/board/omap3/beagle/beagle.c
--index 39073db..d5ec63e 100644
----- a/board/omap3/beagle/beagle.c
--+++ b/board/omap3/beagle/beagle.c
--@@ -35,9 +35,147 @@
-- #include <asm/arch/sys_proto.h>
-- #include <asm/mach-types.h>
-- #include "beagle.h"
--+#include "logo.h"
--+
--+#define LOGO_SCREEN_WIDTH  1024
--+#define LOGO_SCREEN_HEIGHT 600
--+#define LOGO_FILL_COLOUR   0x0
-- 
-- static int beagle_revision_c;
-- 
--+void dss_init(void)
--+{
--+	unsigned int i, k=0;
--+	unsigned char pixel[3];
--+	int offset = 0;
--+
--+	/* Fill up to the logo */
--+	for (i = 0; i < 2 * (LOGO_SCREEN_WIDTH * ((LOGO_SCREEN_HEIGHT/2) - (height/2))); i += 2) {
--+		*((unsigned short *)(0x85000000 + i)) = LOGO_FILL_COLOUR;
--+	}
--+	offset += i;
--+
--+	/* Paint the image data */
--+	for (i = 0; i < height; i++) {
--+		for (k = 0; k < LOGO_SCREEN_WIDTH; k++) {
--+			if(k < (LOGO_SCREEN_WIDTH / 2 - width / 2) || k >= (LOGO_SCREEN_WIDTH / 2 + width / 2))
--+				*((unsigned short *)(0x85000000 + offset + 2*k)) = LOGO_FILL_COLOUR;
--+			else {
--+				HEADER_PIXEL(header_data, pixel);
--+				*((unsigned short *)(0x85000000 + offset + 2*k)) =
--+					((((pixel[0])&0xf8) << 8) |
--+					 (((pixel[1])&0xfc) << 3) |
--+					 (((pixel[2])&0xf8) >> 3));
--+			}
--+		}
--+
--+		offset += 2 * LOGO_SCREEN_WIDTH;
--+	}
--+
--+	/* Fill the rest */
--+	for (i = 0; i < 2 * (LOGO_SCREEN_WIDTH * ((LOGO_SCREEN_HEIGHT/2) - (height/2))); i += 2) {
--+		*((unsigned short *)(0x85000000 + offset + i)) = LOGO_FILL_COLOUR;
--+	}	
--+
--+	*((uint *) 0x48310034) = 0xfefffedf;
--+	*((uint *) 0x48310094) = 0x01000120;
--+	*((uint *) 0x48004D44) = 0x0001b00c;
--+	*((uint *) 0x48004E40) = 0x00001002;
--+	*((uint *) 0x48004D00) = 0x00370037;
--+
--+	*((uint *) 0x48050C00) = 0x00000002;
--+	*((uint *) 0x48050C04) = 0x0000001B;
--+	*((uint *) 0x48050C08) = 0x00000040;
--+	*((uint *) 0x48050C0C) = 0x00000000;
--+	*((uint *) 0x48050C10) = 0x00000000;
--+	*((uint *) 0x48050C14) = 0x00008000;
--+	*((uint *) 0x48050C18) = 0x00000000;
--+	*((uint *) 0x48050C1C) = 0x00008359;
--+	*((uint *) 0x48050C20) = 0x0000020C;
--+	*((uint *) 0x48050C24) = 0x00000000;
--+	*((uint *) 0x48050C28) = 0x043F2631;
--+	*((uint *) 0x48050C2C) = 0x00000024;
--+	*((uint *) 0x48050C30) = 0x00000130;
--+	*((uint *) 0x48050C34) = 0x00000198;
--+	*((uint *) 0x48050C38) = 0x000001C0;
--+	*((uint *) 0x48050C3C) = 0x0000006A;
--+	*((uint *) 0x48050C40) = 0x0000005C;
--+	*((uint *) 0x48050C44) = 0x00000000;
--+	*((uint *) 0x48050C48) = 0x00000001;
--+	*((uint *) 0x48050C4C) = 0x0000003F;
--+	*((uint *) 0x48050C50) = 0x21F07C1F;
--+	*((uint *) 0x48050C54) = 0x00000000;
--+	*((uint *) 0x48050C58) = 0x00000015;
--+	*((uint *) 0x48050C5C) = 0x00001400;
--+	*((uint *) 0x48050C60) = 0x00000000;
--+	*((uint *) 0x48050C64) = 0x069300F4;
--+	*((uint *) 0x48050C68) = 0x0016020C;
--+	*((uint *) 0x48050C6C) = 0x00060107;
--+	*((uint *) 0x48050C70) = 0x008D034E;
--+	*((uint *) 0x48050C74) = 0x000F0359;
--+	*((uint *) 0x48050C78) = 0x01A00000;
--+	*((uint *) 0x48050C7C) = 0x020501A0;
--+	*((uint *) 0x48050C80) = 0x01AC0024;
--+	*((uint *) 0x48050C84) = 0x020D01AC;
--+	*((uint *) 0x48050C88) = 0x00000006;
--+	*((uint *) 0x48050C8C) = 0x00000000;
--+	*((uint *) 0x48050C90) = 0x03480079;
--+	*((uint *) 0x48050C94) = 0x02040024;
--+	*((uint *) 0x48050C98) = 0x00000000;
--+	*((uint *) 0x48050C9C) = 0x00000000;
--+	*((uint *) 0x48050CA0) = 0x0001008A;
--+	*((uint *) 0x48050CA4) = 0x01AC0106;
--+	*((uint *) 0x48050CA8) = 0x01060006;
--+	*((uint *) 0x48050CAC) = 0x00000000;
--+	*((uint *) 0x48050CB0) = 0x00140001;
--+	*((uint *) 0x48050CB4) = 0x00010001;
--+	*((uint *) 0x48050CB8) = 0x00FF0000;
--+	*((uint *) 0x48050CBC) = 0x00000000;
--+	*((uint *) 0x48050CC0) = 0x00000000;
--+	*((uint *) 0x48050CC4) = 0x0000000D;
--+	*((uint *) 0x48050CC8) = 0x00000000;
--+	*((uint *) 0x48050010) = 0x00000001;
--+	*((uint *) 0x48050040) = 0x00000078;
--+	*((uint *) 0x48050044) = 0x00000000;
--+	*((uint *) 0x48050048) = 0x00000000;
--+	*((uint *) 0x48050050) = 0x00000000;
--+	*((uint *) 0x48050058) = 0x00000000;
--+	*((uint *) 0x48050410) = 0x00002015;
--+	*((uint *) 0x48050414) = 0x00000001;
--+	*((uint *) 0x48050444) = 0x00000004;
--+	*((uint *) 0x4805044c) = 0xFFFFFFFF;
--+	*((uint *) 0x48050450) = 0x00000000;
--+	*((uint *) 0x48050454) = 0x00000000;
--+	*((uint *) 0x48050458) = 0x00000000;
--+	*((uint *) 0x48050464) = 0x02600202;
--+	*((uint *) 0x48050468) = 0x00700200;
--+	*((uint *) 0x4805046c) = 0x00000000;
--+	*((uint *) 0x48050470) = 0x00010007;
--+	*((uint *) 0x48050478) = 0x00ef027f;
--+	*((uint *) 0x4805047c) = 0x02ff03ff;
--+	*((uint *) 0x48050480) = 0x85000000;
--+	*((uint *) 0x48050484) = 0x85000000;
--+	*((uint *) 0x48050488) = 0x00000000;
--+	*((uint *) 0x4805048c) = 0x02ff03ff;
--+	*((uint *) 0x480504a0) = 0x0000008d;
--+	*((uint *) 0x480504a4) = 0x03fc03bc;
--+	*((uint *) 0x480504a8) = 0x00000400;
--+	*((uint *) 0x480504ac) = 0x00000001;
--+	*((uint *) 0x480504b0) = 0x00000001;
--+	*((uint *) 0x480504b4) = 0x00000000;
--+	*((uint *) 0x480504b8) = 0x807ff000;
--+	udelay(1000);
--+	*((uint *) 0x48050440) = 0x0001836b;
--+	udelay(1000);
--+	*((uint *) 0x48050440) = 0x0001836b;
--+	udelay(1000);
--+	*((uint *) 0x48050440) = 0x0001836b;
--+	udelay(1000);
--+	
--+	/* Turn on GPT9 PWM */
--+	*((uint *) 0x49040024) = 0x80;
--+}
--+
-- /*
--  * Routine: board_init
--  * Description: Early hardware init.
--@@ -118,6 +256,9 @@ int misc_init_r(void)
-- 
-- 	dieid_num_r();
-- 
--+	/* Touch Book logo */
--+	dss_init();
--+
-- 	return 0;
-- }
-- 
--diff --git a/board/omap3/beagle/logo.h b/board/omap3/beagle/logo.h
--new file mode 100644
--index 0000000..c0996ac
----- /dev/null
--+++ b/board/omap3/beagle/logo.h
--@@ -0,0 +1,1171 @@
--+/*  GIMP header image file format (RGB): /Documents/Desktop/u-boot-black.h  */
--+
--+static unsigned int width = 136;
--+static unsigned int height = 136;
--+
--+/*  Call this macro repeatedly.  After each use, the pixel data can be extracted  */
--+
--+#define HEADER_PIXEL(data,pixel) {\
--+  pixel[0] = (((data[0] - 33) << 2) | ((data[1] - 33) >> 4)); \
--+  pixel[1] = ((((data[1] - 33) & 0xF) << 4) | ((data[2] - 33) >> 2)); \
--+  pixel[2] = ((((data[2] - 33) & 0x3) << 6) | ((data[3] - 33))); \
--+  data += 4; \
--+}
--+static char *header_data =
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!(R]?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!(RY?7VB9F:+3YO$A````````````"
--+	"````````O,;WB)'#1E\"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!(RY?"
--+	"B)'\"````````````````````````````````````````````````Y?$@:W2E%2%2"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!%2%2>H.S````````````````````````````````````"
--+	"````````````````````````````YO(A1E!`!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIKO,;W````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````B)'\"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!+SEJY?$@````````````````````````````````````````````"
--+	"````````````````````````````````````````JK3D%B)3!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!(RY?YO$@````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````B9+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!O<;W````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````;'6E!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:W2E````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````+SIK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"(RY?YO$A````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````JK3E!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!>8*S````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````+SIJ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"YO$@````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````B9+#!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!1E!`````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````YO$A!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!;'6F"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````+SIK"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!J[3E````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````4EN,!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````:W2E"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````:W2E!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````:W2E"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!O<;W````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````;'6F!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.D1U.T5U.T5V.T5U"
--+	".T5V.T5V.T5U.T5U%2%2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````7F>8"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.T5U:W6E"
--+	"F:+3JK3D````````````````````````````````````````````````T-L+JK/D"
--+	":W2E1E!`(R]@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!>8*S````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````.D1U!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!(R]?7FB8JK3E````````````````````````````````````````````"
--+	"````````````````````````````````````````````O<;W>H*S+SIK!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1D]`"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!%B)24ER,O<;W````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````T-L,>H*S)\"]@!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!%B)2````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````F:+3!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)\"]@B)'\"YO(A"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````J[3E.T5U!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"B)'\"````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````1E\"!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!)\"]@B)'\"````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````J[3E.T5V!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIJ````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````T-H+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:W2EYO$A````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````FJ/3(RY?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!B)'\"````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````1D]`!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	".T5VT-L+````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````YO$A7VB9"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%2%2YO$A````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````F:+3!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!>8*S````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````J[3E(RY?!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!+SIJ````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````O<;W%2%2!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%2%2O<;W````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````YO$A.T5U!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!4EN,````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````O<;W%B%2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!+SEJYO$A````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````4ER,!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!1E!`YO$A````````````````````````````````````````"
--+	"````````````````````````````````````O<;W%B)2!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIJYO$A````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````B)'\"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIJO<;W````"
--+	"````````````````````````````````````````````````````````````````"
--+	">H*S%B)3!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!1D]`YO$A````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````B)'\"!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!4UR,T=L,````````````````````````````"
--+	"````````````````````````JK/D.T5V!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIKYO$@````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````B)'\"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!1D]`B)'\"YO$@````````````````````````````T-L,>8*S+SIK!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	",#IKYO$A````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````4UR,"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)\"]@.T5V.D5U.T5V"
--+	".T5U.T5U%2%2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!%2%2T-L+````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````1D]`!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"Y?$@)\"]@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!7F>8````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````JK/D!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!(R]?YO$A````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````7F>8!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````YO$A(R]?!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1D]`````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````B)'\"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!T-L+````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````+SEJ!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!4EN,````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````B)'\"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!O<;W````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````(R]?!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!(R]@7F>8F:+3T=L,````````````O<;WB9+#4ER,%B)3!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIK````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````YO$AJ[3E:W2E:W2E"
--+	";'6F:W2EFJ+3T-L+````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````>8*S!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!(RY?B9+#````````````````````````"
--+	"````````````````YO$@;'6E%2%2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!B)'\"````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````F:+31E!`!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,#IK>H*SYO$@````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````Y?$@!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!;'6E"
--+	"````````````````````````````````````````````````````````YO$A.T5V"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!YO(A````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````O<;W.T5V!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!%2%2>8*S````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````1E\"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!B)'\"````````````````````````````````````"
--+	"````````````````````````````````4ER,!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!.T5U````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````B)'\""
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"1E!`Y?$@````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````>8*S!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!B)'\"````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````4EN,!!!!!!!!!!!!!!!!!!!!!!!!!!!!;'6E````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````4ER,!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIJYO$A````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````T-L+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!:W2E````````````````````````````````````````````"
--+	"````````````````````````````````````````+SIK!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!JK3D````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````B9+#!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!.T5V````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````%2%2"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!(R]?````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````T-L+!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````T-H+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:W2E````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````.D1U!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!B)'\"````````````````````````````````````````````````"
--+	"````````````````````````````````````````````4EN,!!!!!!!!!!!!!!!!"
--+	"+SIK````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````.D1U!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!%2%2YO(A````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````:W2E"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)\"]@````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````T=L,!!!!!!!!!!!!!!!!.T5U````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````T=L,!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!;'6F````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````B)'\"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!7F>8````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````+SIK!!!!!!!!!!!!"
--+	"7F>8````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````;'6F!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!+SIJ````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````J[3E"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!F:+3````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````7F>8!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````.T5V!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!YO$A````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````JK/D!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!O<;W````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````>8*S!!!!!!!!!!!!"
--+	";'6F````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````+SIJ!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK3D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````O<;W"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK/D!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!J[3E````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK3D!!!!!!!!!!!!"
--+	";'6F````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK/D!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	";'6F````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK3E````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK3E!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!J[3E````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	";'6F````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK3E!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!J[3E````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!J[3E````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK/D!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK3E````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK3D!!!!!!!!!!!!"
--+	";'6E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!J[3E````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK/D!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK3E!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK3E````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK/D!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK/D!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK3E````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	";'6E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK3E````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK3E!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK3D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK3E!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````J[3E!!!!!!!!!!!!;'6F````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````J[3E!!!!!!!!!!!!"
--+	";'6F````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK/D!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK3D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK3D!!!!!!!!!!!!"
--+	";'6F````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!J[3E````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK/D!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK3D!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK3D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK/D!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!J[3E````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	";'6E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````J[3E!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	";'6E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK3D!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK3D!!!!!!!!!!!!"
--+	";'6E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````J[3E!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK3E````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK3D!!!!!!!!!!!!"
--+	";'6E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK3D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````J[3E!!!!!!!!!!!!;'6F````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!J[3E````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````J[3E!!!!!!!!!!!!;'6F````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````J[3E!!!!!!!!!!!!;'6F````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK3D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	";'6E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK3E````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````J[3E!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK3E````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK3E!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK/D!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!JK/D````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK/D!!!!!!!!!!!!"
--+	";'6E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!JK/D````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````JK3D!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!J[3E````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````JK3E!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!J[3E````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"%2%2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIK````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````:W2E!!!!!!!!!!!!;'6E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!>8*S````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````1E!`!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!7F>8````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````;'6F!!!!!!!!!!!!"
--+	";'6F````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!:W2E````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"B)'\"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!O<;X````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````7FB8!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1E!`````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````(RY?!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	".T5U````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````.D1U!!!!!!!!!!!!"
--+	";'6F````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!+SIK````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````JK/D!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!O<;W````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````%2%2!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!YO$A````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````7F>8!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!>8*S"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````T=L,!!!!!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!F:+3````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````4EN,!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!4EN,````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````B)'\"!!!!!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!7F>8````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````;'6F!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!B)'\"````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````1E\"!!!!!!!!!!!!!!!!!"
--+	";'6E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!(RY?````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````JK3E.D1U!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!.T5UO<;W````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````%2%2!!!!!!!!!!!!!!!!;'6F````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!O<;W"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````JK3E"
--+	"1E!`%2%2!!!!!!!!!!!!!!!!!!!!!!!!%2%24UR,JK3D````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````F:+3!!!!!!!!!!!!!!!!!!!!"
--+	";'6E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!4ER,````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````O<?XF:+3;'6E:W2EJ[3EO<;W"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````1D]`!!!!!!!!!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%B)2"
--+	"YO$A````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````T-L+!!!!!!!!!!!!!!!!!!!!!!!!"
--+	";'6E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!;'6F````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````4UR,!!!!!!!!!!!!!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"%B%2YO(A````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````T=L,!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!;'6E````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"4EN,!!!!!!!!!!!!!!!!!!!!!!!!!!!!:W2E````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!T-H+````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````JK/D!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	":W2E````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.T5V````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````+SIJ"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.D5U````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````JK/D!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!>8*S````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````;'6F!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"%B)2````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````>8*S!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%B)3O,;W````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````JK3E!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!F:+2````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````+SIK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!(RY?YO$@````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````T-L+%B)3!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!.D1U````````````````````````````````````````````````````````"
--+	"````````````````````````````````````JK/D!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIK````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````YO$A+SIK!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!F:+3````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````.T5U!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!4EN,````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````+SIJ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!%2%2YO$@````````````````````````````````````````````````"
--+	"````````````````````````````````>8*S!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!4EN,"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````4EN,!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIK````````````````"
--+	"````````````````````````````````````````````````````````````JK3E"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!4UR,````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"YO$@+SIJ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!.T5UYO$A````````````````````````````````````````"
--+	"````````````````````````F:+2%2%2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!+SIKYO(A````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````YO$@+SIK!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIJO<;W````"
--+	"````````````````````````````````````````````````````;'6E!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)\"]@O<;W````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````JK/D%B)3"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!4ER,T=L,````````````````````````````"
--+	"````````````B9+#(R]@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!%2%2>8*S````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````;'6F!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!1E!`>H*SJK/DT-L+````````JK3EF:+37F>8(R]?!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.D1UT-L+````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````O<;W+SIJ!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!%B)2:W2EYO$A````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````Y?$@:W2E!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"(R]?B)'\"````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````YO$@:W2E%B)2!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!(R]?>8*SYO$@````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````````````````````````````````````````````YO$@;'6E%2%2"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!%2%24UR,JK/D````````````````````````````````````"
--+	"````````````````````````````````````````````````````````````````"
--+	"````````````F:+34EN,!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!(R]?"
--+	"4EN,F:+3YO(A````````````````````````````````````````````````````"
--+	"````````````````````````````YO(AF:+34ER,%B)2!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIJ4ER,>8*SJK/DT=L,"
--+	"````````````````````````````````````````T-L+JK/D>8*S4ER,+SEJ!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+SIK.T5U.D1U.T5V.T5U(R]?"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
--+	"";
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/beagleboard/fw_env.config b/recipes-bsp/u-boot/u-boot/beagleboard/fw_env.config
-deleted file mode 100644
-index ba8147a..0000000
---- a/recipes-bsp/u-boot/u-boot/beagleboard/fw_env.config
-+++ /dev/null
-@@ -1 +0,0 @@
--/dev/mtd5 0x0 0x20000 0x20000
-diff --git a/recipes-bsp/u-boot/u-boot/dont-inline-weak-symbols.patch b/recipes-bsp/u-boot/u-boot/dont-inline-weak-symbols.patch
-deleted file mode 100644
-index 4c37e00..0000000
---- a/recipes-bsp/u-boot/u-boot/dont-inline-weak-symbols.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--diff --git a/lib_arm/board.c b/lib_arm/board.c
--index 5d05d9b..0e7fa9a 100644
----- a/lib_arm/board.c
--+++ b/lib_arm/board.c
--@@ -122,20 +122,20 @@ void *sbrk (ptrdiff_t increment)
--  ************************************************************************
--  * May be supplied by boards if desired
--  */
---void inline __coloured_LED_init (void) {}
---void inline coloured_LED_init (void) __attribute__((weak, alias("__coloured_LED_init")));
---void inline __red_LED_on (void) {}
---void inline red_LED_on (void) __attribute__((weak, alias("__red_LED_on")));
---void inline __red_LED_off(void) {}
---void inline red_LED_off(void)	     __attribute__((weak, alias("__red_LED_off")));
---void inline __green_LED_on(void) {}
---void inline green_LED_on(void) __attribute__((weak, alias("__green_LED_on")));
---void inline __green_LED_off(void) {}
---void inline green_LED_off(void)__attribute__((weak, alias("__green_LED_off")));
---void inline __yellow_LED_on(void) {}
---void inline yellow_LED_on(void)__attribute__((weak, alias("__yellow_LED_on")));
---void inline __yellow_LED_off(void) {}
---void inline yellow_LED_off(void)__attribute__((weak, alias("__yellow_LED_off")));
--+void __coloured_LED_init (void) {}
--+void coloured_LED_init (void) __attribute__((weak, alias("__coloured_LED_init")));
--+void __red_LED_on (void) {}
--+void red_LED_on (void) __attribute__((weak, alias("__red_LED_on")));
--+void __red_LED_off(void) {}
--+void red_LED_off(void)	     __attribute__((weak, alias("__red_LED_off")));
--+void __green_LED_on(void) {}
--+void green_LED_on(void) __attribute__((weak, alias("__green_LED_on")));
--+void __green_LED_off(void) {}
--+void green_LED_off(void)__attribute__((weak, alias("__green_LED_off")));
--+void __yellow_LED_on(void) {}
--+void yellow_LED_on(void)__attribute__((weak, alias("__yellow_LED_on")));
--+void __yellow_LED_off(void) {}
--+void yellow_LED_off(void)__attribute__((weak, alias("__yellow_LED_off")));
-- 
-- /************************************************************************
--  * Init Utilities							*
-diff --git a/recipes-bsp/u-boot/u-boot/dont-inline-weak-symbols2.patch b/recipes-bsp/u-boot/u-boot/dont-inline-weak-symbols2.patch
-deleted file mode 100644
-index 5931ccf..0000000
---- a/recipes-bsp/u-boot/u-boot/dont-inline-weak-symbols2.patch
-+++ /dev/null
-@@ -1,45 +0,0 @@
--Patch initially created by Ron Lee and archived in OE patchwork at
--http://patchwork.openembedded.org/patch/1534/.
--
--GCC 4.4 complains about this now.
--
--Signed-off-by: Ron Lee <ron@debian.org>
-----
-- lib_arm/board.c |   18 +++++++++---------
-- 1 files changed, 9 insertions(+), 9 deletions(-)
--
----- a/lib_arm/board.c
--+++ b/lib_arm/board.c
--@@ -124,23 +124,23 @@
--  * May be supplied by boards if desired
--  */
-- void inline __coloured_LED_init (void) {}
---void inline coloured_LED_init (void) __attribute__((weak, alias("__coloured_LED_init")));
--+void coloured_LED_init (void) __attribute__((weak, alias("__coloured_LED_init")));
-- void inline __red_LED_on (void) {}
---void inline red_LED_on (void) __attribute__((weak, alias("__red_LED_on")));
--+void red_LED_on (void) __attribute__((weak, alias("__red_LED_on")));
-- void inline __red_LED_off(void) {}
---void inline red_LED_off(void)	     __attribute__((weak, alias("__red_LED_off")));
--+void red_LED_off(void)	     __attribute__((weak, alias("__red_LED_off")));
-- void inline __green_LED_on(void) {}
---void inline green_LED_on(void) __attribute__((weak, alias("__green_LED_on")));
--+void green_LED_on(void) __attribute__((weak, alias("__green_LED_on")));
-- void inline __green_LED_off(void) {}
---void inline green_LED_off(void)__attribute__((weak, alias("__green_LED_off")));
--+void green_LED_off(void)__attribute__((weak, alias("__green_LED_off")));
-- void inline __yellow_LED_on(void) {}
---void inline yellow_LED_on(void)__attribute__((weak, alias("__yellow_LED_on")));
--+void yellow_LED_on(void)__attribute__((weak, alias("__yellow_LED_on")));
-- void inline __yellow_LED_off(void) {}
---void inline yellow_LED_off(void)__attribute__((weak, alias("__yellow_LED_off")));
--+void yellow_LED_off(void)__attribute__((weak, alias("__yellow_LED_off")));
-- void inline __blue_LED_on(void) {}
---void inline blue_LED_on(void)__attribute__((weak, alias("__blue_LED_on")));
--+void blue_LED_on(void)__attribute__((weak, alias("__blue_LED_on")));
-- void inline __blue_LED_off(void) {}
---void inline blue_LED_off(void)__attribute__((weak, alias("__blue_LED_off")));
--+void blue_LED_off(void)__attribute__((weak, alias("__blue_LED_off")));
-- 
-- /************************************************************************
--  * Init Utilities							*
-diff --git a/recipes-bsp/u-boot/u-boot/dss2.patch b/recipes-bsp/u-boot/u-boot/dss2.patch
-deleted file mode 100644
-index 768743f..0000000
---- a/recipes-bsp/u-boot/u-boot/dss2.patch
-+++ /dev/null
-@@ -1,73 +0,0 @@
--From af839210aa4c643506c6c27270a7f823c6bd0d58 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 8 Jan 2011 19:12:59 +0100
--Subject: [PATCH 01/10] dss2.patch
--
-----
-- include/configs/omap3_beagle.h |   15 +++++++++++----
-- include/configs/omap3_overo.h  |   15 +++++++++++----
-- 2 files changed, 22 insertions(+), 8 deletions(-)
--
--diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
--index a3d9cf6..f7899b9 100644
----- a/include/configs/omap3_beagle.h
--+++ b/include/configs/omap3_beagle.h
--@@ -156,14 +156,21 @@
-- #define CONFIG_EXTRA_ENV_SETTINGS \
-- 	"loadaddr=0x82000000\0" \
-- 	"console=ttyS2,115200n8\0" \
---	"videomode=1024x768@60,vxres=1024,vyres=768\0" \
---	"videospec=omapfb:vram:2M,vram:4M\0" \
--+	"vram=12M\0" \
--+	"dvimode=1024x768MR-16@60\0" \
--+	"defaultdisplay=dvi\0" \
-- 	"mmcargs=setenv bootargs console=${console} " \
---		"video=${videospec},mode:${videomode} " \
--+		"vram=${vram} " \
--+		"omapfb.mode=dvi:${dvimode} " \
--+		"omapfb.debug=y " \
--+		"omapdss.def_disp=${defaultdisplay} " \
-- 		"root=/dev/mmcblk0p2 rw " \
-- 		"rootfstype=ext3 rootwait\0" \
-- 	"nandargs=setenv bootargs console=${console} " \
---		"video=${videospec},mode:${videomode} " \
--+		"vram=${vram} " \
--+		"omapfb.mode=dvi:${dvimode} " \
--+		"omapfb.debug=y " \
--+		"omapdss.def_disp=${defaultdisplay} " \
-- 		"root=/dev/mtdblock4 rw " \
-- 		"rootfstype=jffs2\0" \
-- 	"loadbootscript=fatload mmc 0 ${loadaddr} boot.scr\0" \
--diff --git a/include/configs/omap3_overo.h b/include/configs/omap3_overo.h
--index fed6ff5..6162d6c 100644
----- a/include/configs/omap3_overo.h
--+++ b/include/configs/omap3_overo.h
--@@ -147,14 +147,21 @@
-- #define CONFIG_EXTRA_ENV_SETTINGS \
-- 	"loadaddr=0x82000000\0" \
-- 	"console=ttyS2,115200n8\0" \
---	"videomode=1024x768@60,vxres=1024,vyres=768\0" \
---	"videospec=omapfb:vram:2M,vram:4M\0" \
--+	"vram=12M\0" \
--+	"dvimode=1024x768MR-16@60\0" \
--+	"defaultdisplay=dvi\0" \
-- 	"mmcargs=setenv bootargs console=${console} " \
---		"video=${videospec},mode:${videomode} " \
--+		"vram=${vram} " \
--+		"omapfb.mode=dvi:${dvimode} " \
--+		"omapfb.debug=y " \
--+		"omapdss.def_disp=${defaultdisplay} " \
-- 		"root=/dev/mmcblk0p2 rw " \
-- 		"rootfstype=ext3 rootwait\0" \
-- 	"nandargs=setenv bootargs console=${console} " \
---		"video=${videospec},mode:${videomode} " \
--+		"vram=${vram} " \
--+		"omapfb.mode=dvi:${dvimode} " \
--+		"omapfb.debug=y " \
--+		"omapdss.def_disp=${defaultdisplay} " \
-- 		"root=/dev/mtdblock4 rw " \
-- 		"rootfstype=jffs2\0" \
-- 	"loadbootscript=fatload mmc 0 ${loadaddr} boot.scr\0" \
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/fw_env.config b/recipes-bsp/u-boot/u-boot/fw_env.config
-deleted file mode 100644
-index d9112c2..0000000
---- a/recipes-bsp/u-boot/u-boot/fw_env.config
-+++ /dev/null
-@@ -1,8 +0,0 @@
--# Configuration file for fw_(printenv/saveenv) utility.
--# Up to two entries are valid, in this case the redundant
--# environment sector is assumed present.
--# Notice, that the "Number of sectors" is ignored on NOR.
--
--# MTD device name	Device offset	Env. size	Flash sector size	Number of sectors
--/dev/mtd2		0x0000		0x20000		0x20000
--
-diff --git a/recipes-bsp/u-boot/u-boot/headphone.patch b/recipes-bsp/u-boot/u-boot/headphone.patch
-deleted file mode 100644
-index dacb30b..0000000
---- a/recipes-bsp/u-boot/u-boot/headphone.patch
-+++ /dev/null
-@@ -1,47 +0,0 @@
--From c26fbaf25d06dcec26e1c2b6669345bd08c8be5f Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 8 Jan 2011 19:16:16 +0100
--Subject: [PATCH 06/10] headphone.patch
--
-----
-- board/omap3/beagle/beagle.c |    4 ++--
-- board/omap3/beagle/beagle.h |    4 ++--
-- 2 files changed, 4 insertions(+), 4 deletions(-)
--
--diff --git a/board/omap3/beagle/beagle.c b/board/omap3/beagle/beagle.c
--index 7eb70ee..39073db 100644
----- a/board/omap3/beagle/beagle.c
--+++ b/board/omap3/beagle/beagle.c
--@@ -104,12 +104,12 @@ int misc_init_r(void)
-- 	power_init_r();
-- 
-- 	/* Configure GPIOs to output */
---	writel(~(GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1), &gpio6_base->oe);
--+	writel(~(GPIO16 | GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1), &gpio6_base->oe);
-- 	writel(~(GPIO31 | GPIO30 | GPIO29 | GPIO28 | GPIO22 | GPIO21 |
-- 		GPIO15 | GPIO14 | GPIO13 | GPIO12), &gpio5_base->oe);
-- 
-- 	/* Set GPIOs */
---	writel(GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1,
--+	writel(GPIO16 | GPIO23 | GPIO10 | GPIO8 | GPIO2 | GPIO1,
-- 		&gpio6_base->setdataout);
-- 	writel(GPIO31 | GPIO30 | GPIO29 | GPIO28 | GPIO22 | GPIO21 |
-- 		GPIO15 | GPIO14 | GPIO13 | GPIO12, &gpio5_base->setdataout);
--diff --git a/board/omap3/beagle/beagle.h b/board/omap3/beagle/beagle.h
--index 876dd4f..e77ab43 100644
----- a/board/omap3/beagle/beagle.h
--+++ b/board/omap3/beagle/beagle.h
--@@ -115,8 +115,8 @@ const omap3_sysinfo sysinfo = {
--  MUX_VAL(CP(GPMC_NCS1),		(IDIS | PTU | EN  | M0)) /*GPMC_nCS1*/\
--  MUX_VAL(CP(GPMC_NCS2),		(IDIS | PTU | EN  | M0)) /*GPMC_nCS2*/\
--  MUX_VAL(CP(GPMC_NCS3),		(IDIS | PTU | EN  | M0)) /*GPMC_nCS3*/\
--- MUX_VAL(CP(GPMC_NCS4),		(IDIS | PTU | EN  | M0)) /*GPMC_nCS4*/\
--- MUX_VAL(CP(GPMC_NCS5),		(IDIS | PTD | DIS | M0)) /*GPMC_nCS5*/\
--+ MUX_VAL(CP(GPMC_NCS4),		(IDIS | PTU | DIS | M3)) /*GPMC_nCS4 -- GPT9_PWM*/\
--+ MUX_VAL(CP(GPMC_NCS5),		(IEN  | PTD | DIS | M4)) /*GPMC_nCS5 -- PHONES_DETECT GPIO_56*/\
--  MUX_VAL(CP(GPMC_NCS6),		(IEN  | PTD | DIS | M1)) /*SYS_nDMA_REQ2*/\
--  MUX_VAL(CP(GPMC_NCS7),		(IEN  | PTU | EN  | M1)) /*SYS_nDMA_REQ3*/\
--  MUX_VAL(CP(GPMC_NBE1),		(IEN  | PTD | DIS | M0)) /*GPMC_nBE1*/\
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/mmcinit.patch b/recipes-bsp/u-boot/u-boot/mmcinit.patch
-deleted file mode 100644
-index a48d9eb..0000000
---- a/recipes-bsp/u-boot/u-boot/mmcinit.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 412e0ab7334defa38c8d3732fb0076f4957843f0 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 8 Jan 2011 19:17:07 +0100
--Subject: [PATCH 09/10] mmcinit.patch
--
-----
-- common/cmd_mmc.c |   11 +++++++++++
-- 1 files changed, 11 insertions(+), 0 deletions(-)
--
--diff --git a/common/cmd_mmc.c b/common/cmd_mmc.c
--index 039fe59..c1958ba 100644
----- a/common/cmd_mmc.c
--+++ b/common/cmd_mmc.c
--@@ -91,6 +91,17 @@ U_BOOT_CMD(
-- 	"init [dev] - init MMC sub system\n"
-- 	"mmc device [dev] - show or set current device\n"
-- );
--+int do_mmcinit (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
--+{
--+	char *argv2[] = {"mmc", "init"};
--+	return do_mmc (cmdtp, flag, 2, argv2);
--+}
--+
--+U_BOOT_CMD(
--+	mmcinit,	1,	0,	do_mmcinit,
--+	"mmcinit - init mmc card\n",
--+	NULL
--+);
-- #else /* !CONFIG_GENERIC_MMC */
-- 
-- static void print_mmcinfo(struct mmc *mmc)
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/new-pinmux.patch b/recipes-bsp/u-boot/u-boot/new-pinmux.patch
-deleted file mode 100644
-index b64204d..0000000
---- a/recipes-bsp/u-boot/u-boot/new-pinmux.patch
-+++ /dev/null
-@@ -1,82 +0,0 @@
--From 71a2717bf4f85bf4cb55b9cad653a4b9bb966489 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 8 Jan 2011 19:15:25 +0100
--Subject: [PATCH 03/10] newpinmux.patch
--
-----
-- board/omap3/beagle/beagle.h |   38 +++++++++++++++++++-------------------
-- 1 files changed, 19 insertions(+), 19 deletions(-)
--
--diff --git a/board/omap3/beagle/beagle.h b/board/omap3/beagle/beagle.h
--index 00b15cb..2ba6a12 100644
----- a/board/omap3/beagle/beagle.h
--+++ b/board/omap3/beagle/beagle.h
--@@ -201,16 +201,16 @@ const omap3_sysinfo sysinfo = {
--  MUX_VAL(CP(MMC1_DAT6),		(IEN  | PTU | EN  | M0)) /*MMC1_DAT6*/\
--  MUX_VAL(CP(MMC1_DAT7),		(IEN  | PTU | EN  | M0)) /*MMC1_DAT7*/\
--  /*Wireless LAN */\
--- MUX_VAL(CP(MMC2_CLK),		(IEN  | PTU | EN  | M4)) /*GPIO_130*/\
--- MUX_VAL(CP(MMC2_CMD),		(IEN  | PTU | EN  | M4)) /*GPIO_131*/\
--- MUX_VAL(CP(MMC2_DAT0),		(IEN  | PTU | EN  | M4)) /*GPIO_132*/\
--- MUX_VAL(CP(MMC2_DAT1),		(IEN  | PTU | EN  | M4)) /*GPIO_133*/\
--- MUX_VAL(CP(MMC2_DAT2),		(IEN  | PTU | EN  | M4)) /*GPIO_134*/\
--- MUX_VAL(CP(MMC2_DAT3),		(IEN  | PTU | EN  | M4)) /*GPIO_135*/\
--- MUX_VAL(CP(MMC2_DAT4),		(IEN  | PTU | EN  | M4)) /*GPIO_136*/\
--- MUX_VAL(CP(MMC2_DAT5),		(IEN  | PTU | EN  | M4)) /*GPIO_137*/\
--- MUX_VAL(CP(MMC2_DAT6),		(IEN  | PTU | EN  | M4)) /*GPIO_138*/\
--- MUX_VAL(CP(MMC2_DAT7),		(IEN  | PTU | EN  | M4)) /*GPIO_139*/\
--+ MUX_VAL(CP(MMC2_CLK),		(IEN  | PTU | EN  | M0)) /*MMC2_CLK*/\
--+ MUX_VAL(CP(MMC2_CMD),		(IEN  | PTU | EN  | M0)) /*MMC2_CMD*/\
--+ MUX_VAL(CP(MMC2_DAT0),		(IEN  | PTU | EN  | M0)) /*MMC2_DAT0*/\
--+ MUX_VAL(CP(MMC2_DAT1),		(IEN  | PTU | EN  | M0)) /*MMC2_DAT1*/\
--+ MUX_VAL(CP(MMC2_DAT2),		(IEN  | PTU | EN  | M0)) /*MMC2_DAT2*/\
--+ MUX_VAL(CP(MMC2_DAT3),		(IEN  | PTU | EN  | M0)) /*MMC2_DAT3*/\
--+ MUX_VAL(CP(MMC2_DAT4),		(IEN  | PTU | EN  | M1)) /*MMC2_DIR_DAT0*/\
--+ MUX_VAL(CP(MMC2_DAT5),		(IEN  | PTU | EN  | M1)) /*MMC2_DIR_DAT1*/\
--+ MUX_VAL(CP(MMC2_DAT6),		(IEN  | PTU | EN  | M1)) /*MMC2_DIR_CMD*/\
--+ MUX_VAL(CP(MMC2_DAT7),		(IEN  | PTU | EN  | M1)) /*MMC2_CLKIN*/\
--  /*Bluetooth*/\
--  MUX_VAL(CP(MCBSP3_DX),		(IEN  | PTD | DIS | M1)) /*UART2_CTS*/\
--  MUX_VAL(CP(MCBSP3_DR),		(IDIS | PTD | DIS | M1)) /*UART2_RTS*/\
--@@ -225,10 +225,10 @@ const omap3_sysinfo sysinfo = {
--  MUX_VAL(CP(UART1_RTS),		(IDIS | PTD | DIS | M4)) /*GPIO_149*/ \
--  MUX_VAL(CP(UART1_CTS),		(IDIS | PTD | DIS | M4)) /*GPIO_150*/ \
--  MUX_VAL(CP(UART1_RX),		(IEN  | PTD | DIS | M0)) /*UART1_RX*/\
--- MUX_VAL(CP(MCBSP4_CLKX),	(IEN  | PTD | DIS | M1)) /*SSI1_DAT_RX*/\
--- MUX_VAL(CP(MCBSP4_DR),		(IEN  | PTD | DIS | M1)) /*SSI1_FLAG_RX*/\
--- MUX_VAL(CP(MCBSP4_DX),		(IEN  | PTD | DIS | M1)) /*SSI1_RDY_RX*/\
--- MUX_VAL(CP(MCBSP4_FSX),	(IEN  | PTD | DIS | M1)) /*SSI1_WAKE*/\
--+ MUX_VAL(CP(MCBSP4_CLKX),	(IEN | PTU | EN  | M4)) /*GPIO_152*/\
--+ MUX_VAL(CP(MCBSP4_DR),		(IEN | PTU | EN  | M4)) /*GPIO_153*/\
--+ MUX_VAL(CP(MCBSP4_DX),		(IEN | PTU | EN  | M4)) /*GPIO_154*/\
--+ MUX_VAL(CP(MCBSP4_FSX),	(IEN | PTU | EN  | M4)) /*GPIO_155*/\
--  MUX_VAL(CP(MCBSP1_CLKR),	(IDIS | PTD | DIS | M4)) /*GPIO_156*/\
--  MUX_VAL(CP(MCBSP1_FSR),	(IDIS | PTU | EN  | M4)) /*GPIO_157*/\
--  MUX_VAL(CP(MCBSP1_DX),		(IDIS | PTD | DIS | M4)) /*GPIO_158*/\
--@@ -255,8 +255,8 @@ const omap3_sysinfo sysinfo = {
--  MUX_VAL(CP(HSUSB0_DATA7),	(IEN  | PTD | DIS | M0)) /*HSUSB0_DATA7*/\
--  MUX_VAL(CP(I2C1_SCL),		(IEN  | PTU | EN  | M0)) /*I2C1_SCL*/\
--  MUX_VAL(CP(I2C1_SDA),		(IEN  | PTU | EN  | M0)) /*I2C1_SDA*/\
--- MUX_VAL(CP(I2C2_SCL),		(IEN  | PTU | EN  | M4)) /*GPIO_168*/\
--- MUX_VAL(CP(I2C2_SDA),		(IEN  | PTU | EN  | M4)) /*GPIO_183*/\
--+ MUX_VAL(CP(I2C2_SCL),		(IEN  | PTU | EN  | M0)) /*I2C2_SCL*/\
--+ MUX_VAL(CP(I2C2_SDA),		(IEN  | PTU | EN  | M0)) /*I2C2_SDA*/\
--  MUX_VAL(CP(I2C3_SCL),		(IEN  | PTU | EN  | M0)) /*I2C3_SCL*/\
--  MUX_VAL(CP(I2C3_SDA),		(IEN  | PTU | EN  | M0)) /*I2C3_SDA*/\
--  MUX_VAL(CP(I2C4_SCL),		(IEN  | PTU | EN  | M0)) /*I2C4_SCL*/\
--@@ -374,9 +374,9 @@ const omap3_sysinfo sysinfo = {
--  MUX_VAL(CP(SDRC_CKE1),		(IDIS | PTU | EN  | M0)) /*sdrc_cke1*/
-- 
-- #define MUX_BEAGLE_C() \
--- MUX_VAL(CP(MCBSP3_DX),		(IEN | PTD | DIS | M4)) /*GPIO_140*/\
--- MUX_VAL(CP(MCBSP3_DR),		(IEN | PTD | DIS | M4)) /*GPIO_142*/\
--- MUX_VAL(CP(MCBSP3_CLKX),	(IEN | PTD | DIS | M4)) /*GPIO_141*/\
--+ MUX_VAL(CP(MCBSP3_DX),		(IEN  | PTD | DIS | M4)) /*GPIO_140*/\
--+ MUX_VAL(CP(MCBSP3_DR),		(IEN  | PTD | DIS | M4)) /*GPIO_142*/\
--+ MUX_VAL(CP(MCBSP3_CLKX),	(IEN  | PTD | DIS | M4)) /*GPIO_141*/\
--  MUX_VAL(CP(UART2_CTS),		(IEN  | PTU | EN  | M0)) /*UART2_CTS*/\
--  MUX_VAL(CP(UART2_RTS),		(IDIS | PTD | DIS | M0)) /*UART2_RTS*/\
--  MUX_VAL(CP(UART2_TX),		(IDIS | PTD | DIS | M0)) /*UART2_TX*/
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/power.patch b/recipes-bsp/u-boot/u-boot/power.patch
-deleted file mode 100644
-index 6403e29..0000000
---- a/recipes-bsp/u-boot/u-boot/power.patch
-+++ /dev/null
-@@ -1,27 +0,0 @@
--From 62d6dee28046b333125ebbd1f0c5d946a3ea329a Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 8 Jan 2011 19:16:32 +0100
--Subject: [PATCH 07/10] power.patch
--
-----
-- board/omap3/beagle/beagle.h |    4 ++--
-- 1 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/board/omap3/beagle/beagle.h b/board/omap3/beagle/beagle.h
--index e77ab43..1828153 100644
----- a/board/omap3/beagle/beagle.h
--+++ b/board/omap3/beagle/beagle.h
--@@ -255,8 +255,8 @@ const omap3_sysinfo sysinfo = {
--  MUX_VAL(CP(HSUSB0_DATA7),	(IEN  | PTD | DIS | M0)) /*HSUSB0_DATA7*/\
--  MUX_VAL(CP(I2C1_SCL),		(IEN  | PTU | EN  | M0)) /*I2C1_SCL*/\
--  MUX_VAL(CP(I2C1_SDA),		(IEN  | PTU | EN  | M0)) /*I2C1_SDA*/\
--- MUX_VAL(CP(I2C2_SCL),		(IEN  | PTU | EN  | M0)) /*I2C2_SCL*/\
--- MUX_VAL(CP(I2C2_SDA),		(IEN  | PTU | EN  | M0)) /*I2C2_SDA*/\
--+ MUX_VAL(CP(I2C2_SCL),		(IEN  | PTU | EN  | M4)) /*GPIO_168*/\
--+ MUX_VAL(CP(I2C2_SDA),		(IEN  | PTU | EN  | M4)) /*GPIO_183*/\
--  MUX_VAL(CP(I2C3_SCL),		(IEN  | PTU | EN  | M0)) /*I2C3_SCL*/\
--  MUX_VAL(CP(I2C3_SDA),		(IEN  | PTU | EN  | M0)) /*I2C3_SDA*/\
--  MUX_VAL(CP(I2C4_SCL),		(IEN  | PTU | EN  | M0)) /*I2C4_SCL*/\
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/spi3.patch b/recipes-bsp/u-boot/u-boot/spi3.patch
-deleted file mode 100644
-index 5c46ed5..0000000
---- a/recipes-bsp/u-boot/u-boot/spi3.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From 17d40dae02b56f1f4c4f3766e20b7b4c69596049 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 8 Jan 2011 19:15:52 +0100
--Subject: [PATCH 04/10] spi3.patch
--
-----
-- board/omap3/beagle/beagle.h |   20 ++++++++++----------
-- 1 files changed, 10 insertions(+), 10 deletions(-)
--
--diff --git a/board/omap3/beagle/beagle.h b/board/omap3/beagle/beagle.h
--index 2ba6a12..743e32c 100644
----- a/board/omap3/beagle/beagle.h
--+++ b/board/omap3/beagle/beagle.h
--@@ -201,16 +201,16 @@ const omap3_sysinfo sysinfo = {
--  MUX_VAL(CP(MMC1_DAT6),		(IEN  | PTU | EN  | M0)) /*MMC1_DAT6*/\
--  MUX_VAL(CP(MMC1_DAT7),		(IEN  | PTU | EN  | M0)) /*MMC1_DAT7*/\
--  /*Wireless LAN */\
--- MUX_VAL(CP(MMC2_CLK),		(IEN  | PTU | EN  | M0)) /*MMC2_CLK*/\
--- MUX_VAL(CP(MMC2_CMD),		(IEN  | PTU | EN  | M0)) /*MMC2_CMD*/\
--- MUX_VAL(CP(MMC2_DAT0),		(IEN  | PTU | EN  | M0)) /*MMC2_DAT0*/\
--- MUX_VAL(CP(MMC2_DAT1),		(IEN  | PTU | EN  | M0)) /*MMC2_DAT1*/\
--- MUX_VAL(CP(MMC2_DAT2),		(IEN  | PTU | EN  | M0)) /*MMC2_DAT2*/\
--- MUX_VAL(CP(MMC2_DAT3),		(IEN  | PTU | EN  | M0)) /*MMC2_DAT3*/\
--- MUX_VAL(CP(MMC2_DAT4),		(IEN  | PTU | EN  | M1)) /*MMC2_DIR_DAT0*/\
--- MUX_VAL(CP(MMC2_DAT5),		(IEN  | PTU | EN  | M1)) /*MMC2_DIR_DAT1*/\
--- MUX_VAL(CP(MMC2_DAT6),		(IEN  | PTU | EN  | M1)) /*MMC2_DIR_CMD*/\
--- MUX_VAL(CP(MMC2_DAT7),		(IEN  | PTU | EN  | M1)) /*MMC2_CLKIN*/\
--+ MUX_VAL(CP(MMC2_CLK),		(IEN  | PTU | DIS  | M1)) /*MCSPI3_CLK*/\
--+ MUX_VAL(CP(MMC2_CMD),		(IEN  | PTU | DIS  | M1)) /*MCSPI3_SIMO*/\
--+ MUX_VAL(CP(MMC2_DAT0),		(IEN  | PTU | EN  | M1)) /*MCSPI3_SOMI*/\
--+ MUX_VAL(CP(MMC2_DAT1),		(IEN  | PTU | EN  | M4)) /*GPIO_133*/\
--+ MUX_VAL(CP(MMC2_DAT2),		(IEN  | PTU | EN  | M1)) /*MCSPI3_CS1*/\
--+ MUX_VAL(CP(MMC2_DAT3),		(IEN  | PTU | EN  | M1)) /*MCSPI3_CS0*/\
--+ MUX_VAL(CP(MMC2_DAT4),		(IEN  | PTU | EN  | M4)) /*GPIO_136*/\
--+ MUX_VAL(CP(MMC2_DAT5),		(IEN  | PTU | EN  | M4)) /*GPIO_137*/\
--+ MUX_VAL(CP(MMC2_DAT6),		(IEN  | PTU | EN  | M4)) /*GPIO_138*/\
--+ MUX_VAL(CP(MMC2_DAT7),		(IEN  | PTU | EN  | M4)) /*GPIO_139*/\
--  /*Bluetooth*/\
--  MUX_VAL(CP(MCBSP3_DX),		(IEN  | PTD | DIS | M1)) /*UART2_CTS*/\
--  MUX_VAL(CP(MCBSP3_DR),		(IDIS | PTD | DIS | M1)) /*UART2_RTS*/\
---- 
--1.6.6.1
--
-diff --git a/recipes-bsp/u-boot/u-boot/spi4.patch b/recipes-bsp/u-boot/u-boot/spi4.patch
-deleted file mode 100644
-index 4c92a7e..0000000
---- a/recipes-bsp/u-boot/u-boot/spi4.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From b2b7765ad59b5422df9337ee6c6f838a381b86c0 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Sat, 8 Jan 2011 19:15:59 +0100
--Subject: [PATCH 05/10] spi4.patch
--
-----
-- board/omap3/beagle/beagle.h |   12 ++++++------
-- 1 files changed, 6 insertions(+), 6 deletions(-)
--
--diff --git a/board/omap3/beagle/beagle.h b/board/omap3/beagle/beagle.h
--index 743e32c..876dd4f 100644
----- a/board/omap3/beagle/beagle.h
--+++ b/board/omap3/beagle/beagle.h
--@@ -229,13 +229,13 @@ const omap3_sysinfo sysinfo = {
--  MUX_VAL(CP(MCBSP4_DR),		(IEN | PTU | EN  | M4)) /*GPIO_153*/\
--  MUX_VAL(CP(MCBSP4_DX),		(IEN | PTU | EN  | M4)) /*GPIO_154*/\
--  MUX_VAL(CP(MCBSP4_FSX),	(IEN | PTU | EN  | M4)) /*GPIO_155*/\
--- MUX_VAL(CP(MCBSP1_CLKR),	(IDIS | PTD | DIS | M4)) /*GPIO_156*/\
--- MUX_VAL(CP(MCBSP1_FSR),	(IDIS | PTU | EN  | M4)) /*GPIO_157*/\
--- MUX_VAL(CP(MCBSP1_DX),		(IDIS | PTD | DIS | M4)) /*GPIO_158*/\
--- MUX_VAL(CP(MCBSP1_DR),		(IDIS | PTD | DIS | M4)) /*GPIO_159*/\
--+ MUX_VAL(CP(MCBSP1_CLKR),	(IEN | PTU | DIS | M1)) /*MCSPI4_CLK*/\
--+ MUX_VAL(CP(MCBSP1_FSR),	(IEN | PTU | EN  | M4)) /*GPIO_157*/\
--+ MUX_VAL(CP(MCBSP1_DX),		(IEN | PTU | DIS | M1)) /*MCSPI4_SIMO*/\
--+ MUX_VAL(CP(MCBSP1_DR),		(IEN | PTU | EN | M1)) /*MCSPI4_SOMI*/\
--  MUX_VAL(CP(MCBSP_CLKS),	(IEN  | PTU | DIS | M0)) /*McBSP_CLKS*/\
--- MUX_VAL(CP(MCBSP1_FSX),	(IDIS | PTD | DIS | M4)) /*GPIO_161*/\
--- MUX_VAL(CP(MCBSP1_CLKX),	(IDIS | PTD | DIS | M4)) /*GPIO_162*/\
--+ MUX_VAL(CP(MCBSP1_FSX),	(IEN | PTU | EN | M1)) /*MCSPI4_CS0*/\
--+ MUX_VAL(CP(MCBSP1_CLKX),	(IEN | PTU | EN | M4)) /*GPIO_162*/\
--  /*Serial Interface*/\
--  MUX_VAL(CP(UART3_CTS_RCTX),	(IEN  | PTD | EN  | M0)) /*UART3_CTS_RCTX*/\
--  MUX_VAL(CP(UART3_RTS_SD),	(IDIS | PTD | DIS | M0)) /*UART3_RTS_SD */\
---- 
--1.6.6.1
--
+-LIBGLESWINDOWSYSTEM ?= "libpvrPVR2D_FRONTWSEGL.so.1"
 -- 
 2.0.0
 
