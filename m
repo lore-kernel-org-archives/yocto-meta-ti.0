@@ -1,50 +1,40 @@
-Return-Path: <ashcharles@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A7F6DE003C1; Mon, 23 Jun 2014 15:30:48 -0700 (PDT)
+	id 956C7E003C1; Mon, 23 Jun 2014 15:33:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (ashcharles[at]gmail.com)
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.220.178 listed in list.dnswl.org]
-Received: from mail-vc0-f178.google.com (mail-vc0-f178.google.com
-	[209.85.220.178])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 695DDE0027B
-	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 15:30:41 -0700 (PDT)
-Received: by mail-vc0-f178.google.com with SMTP id ij19so6753283vcb.23
-	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 15:30:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=HkGVamzuZIKkCtbKv9fwd+a6McNK6YNbSrQt3S07dDo=;
-	b=Oq70qh/WLfi4Iz2kK63Qrzp5drcuLdMt13NGdKS+BreX0StW1nRU3vFXG/F8jePad0
-	GYNg2Dd8oL9UbXK4xiMaiZCIS9mgGURJ+ZWdSk6QsQl+8Ym17OJCCS1zFw7QybGocBC8
-	7Xd6bAjvw+qPB0seK34wA9heQ24/zxBusip5vHcM15IoRpD5jRTA/4V2cADw7AO0T3z1
-	PPxJTlSf0KPgDWUO9yov/fNfDNkdhodOn7w90Go72Hjy4Vym+ryRHqywMtNthKWMUjUW
-	cLt1FipY53EHmZBUgquFlE3QbsKO0CIyB3H7tSnLWpwI6h9NxkBlqyfN2ssvUv/Oe3PH
-	suQA==
-X-Received: by 10.58.167.168 with SMTP id zp8mr6055189veb.33.1403562640542;
-	Mon, 23 Jun 2014 15:30:40 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.58.196.229 with HTTP; Mon, 23 Jun 2014 15:30:10 -0700 (PDT)
-In-Reply-To: <20140623220500.GK6700@edge>
+X-Spam-Status: No, score=-5.0 required=5.0 tests=RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4B982E0027B
+	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 15:33:35 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5NMXYMQ010599;
+	Mon, 23 Jun 2014 17:33:34 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5NMXYru015282;
+	Mon, 23 Jun 2014 17:33:34 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Mon, 23 Jun 2014 17:33:34 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5NMXYqB031870;
+	Mon, 23 Jun 2014 17:33:34 -0500
+Date: Mon, 23 Jun 2014 18:33:33 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Ash Charles <ashcharles@gmail.com>
+Message-ID: <20140623223333.GL6700@edge>
 References: <1402698848-13759-1-git-send-email-ashcharles@gmail.com>
 	<1402698848-13759-2-git-send-email-ashcharles@gmail.com>
 	<20140623220500.GK6700@edge>
-From: Ash Charles <ashcharles@gmail.com>
-Date: Mon, 23 Jun 2014 15:30:10 -0700
-Message-ID: <CAK8F28mucmU73EWJOWtBpCd60kBhGv97q-Vn0oGNT5U0hsUfxw@mail.gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
+	<CAK8F28mucmU73EWJOWtBpCd60kBhGv97q-Vn0oGNT5U0hsUfxw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAK8F28mucmU73EWJOWtBpCd60kBhGv97q-Vn0oGNT5U0hsUfxw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [PATCH 2/6] Set ${TOOLCHAIN_PATH} used by some recipes
 X-BeenThere: meta-ti@yoctoproject.org
@@ -59,40 +49,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 22:30:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 23 Jun 2014 22:33:39 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Good point.  Where is the right place to set the toolchain path?  Or
-perhaps the recipes shouldn't use it at all?
+Well, I set it in our Arago distro based on the toolchain used, but since 
+meta-ti is not a distro, I was thinking it should provide a safe default, but 
+conditional. In other words, changing your patch to conditional assignment ?= 
+should be good enough...
 
---Ash
+-- 
+Denys
 
-On Mon, Jun 23, 2014 at 3:05 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> This one is not correct and will break with an external toolchain...
->
-> On Fri, Jun 13, 2014 at 03:34:04PM -0700, Ash Charles wrote:
->> Signed-off-by: Ash Charles <ashcharles@gmail.com>
->> ---
->>  recipes-ti/includes/ti-paths.inc | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
->> index 511b5ae..5c9b716 100644
->> --- a/recipes-ti/includes/ti-paths.inc
->> +++ b/recipes-ti/includes/ti-paths.inc
->> @@ -1,5 +1,6 @@
->>  installdir = "${datadir}/ti"
->>
->> +export TOOLCHAIN_PATH = "${STAGING_DIR_NATIVE}${prefix_native}/bin/${TARGET_SYS}"
->>  # This is where do_install will put it
->>  export AUDIO_SOC_INSTALL_DIR_RECIPE  = "${installdir}/ti-audio-soc-example-tree"
->>  export BIOS_INSTALL_DIR_RECIPE       = "${installdir}/ti-dspbios-tree"
->> --
->> 1.8.3.2
->>
->> --
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
+
+On Mon, Jun 23, 2014 at 03:30:10PM -0700, Ash Charles wrote:
+> Good point.  Where is the right place to set the toolchain path?  Or
+> perhaps the recipes shouldn't use it at all?
+> 
+> --Ash
+> 
+> On Mon, Jun 23, 2014 at 3:05 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+> > This one is not correct and will break with an external toolchain...
+> >
+> > On Fri, Jun 13, 2014 at 03:34:04PM -0700, Ash Charles wrote:
+> >> Signed-off-by: Ash Charles <ashcharles@gmail.com>
+> >> ---
+> >>  recipes-ti/includes/ti-paths.inc | 1 +
+> >>  1 file changed, 1 insertion(+)
+> >>
+> >> diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+> >> index 511b5ae..5c9b716 100644
+> >> --- a/recipes-ti/includes/ti-paths.inc
+> >> +++ b/recipes-ti/includes/ti-paths.inc
+> >> @@ -1,5 +1,6 @@
+> >>  installdir = "${datadir}/ti"
+> >>
+> >> +export TOOLCHAIN_PATH = "${STAGING_DIR_NATIVE}${prefix_native}/bin/${TARGET_SYS}"
+> >>  # This is where do_install will put it
+> >>  export AUDIO_SOC_INSTALL_DIR_RECIPE  = "${installdir}/ti-audio-soc-example-tree"
+> >>  export BIOS_INSTALL_DIR_RECIPE       = "${installdir}/ti-dspbios-tree"
+> >> --
+> >> 1.8.3.2
+> >>
+> >> --
+> >> _______________________________________________
+> >> meta-ti mailing list
+> >> meta-ti@yoctoproject.org
+> >> https://lists.yoctoproject.org/listinfo/meta-ti
 
