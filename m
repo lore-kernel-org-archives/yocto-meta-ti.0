@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 07122E00509; Mon, 23 Jun 2014 15:15:11 -0700 (PDT)
+	id 14236E00511; Mon, 23 Jun 2014 15:15:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: ***
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	*  1.1 TO_NO_BRKTS_DYNIP To: misformatted and dynamic rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ABAFAE003D8
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B616CE003FA
 	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 15:15:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5F73052A9B; Mon, 23 Jun 2014 22:15:09 +0000 (UTC)
+	id 7705552A04; Mon, 23 Jun 2014 22:15:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140623221509.5F73052A9B@arago-project.org>
+Message-Id: <20140623221509.7705552A04@arago-project.org>
 Date: Mon, 23 Jun 2014 22:15:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : recipes: consolidate firmware recipes under recipes-bsp in own directories
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 23 Jun 2014 22:15:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 65a3d9a04d66968a91c29acfe1c600877e001c17
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=65a3d9a04d66968a91c29acfe1c600877e001c17
+Branch: master
+Commit: 4b79986d032bfd9cc40a7cf832de3e772a1e2e81
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4b79986d032bfd9cc40a7cf832de3e772a1e2e81
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Jun 20 18:10:18 2014 -0400
