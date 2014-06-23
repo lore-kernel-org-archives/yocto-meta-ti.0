@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DE74DE00511; Mon, 23 Jun 2014 09:41:30 -0700 (PDT)
+	id 904C1E00283; Mon, 23 Jun 2014 09:42:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -11,13 +11,13 @@ X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	*  1.1 TO_NO_BRKTS_DYNIP To: misformatted and dynamic rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD158E00509
-	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 09:41:21 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7E62AE00282
+	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 09:41:29 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 432FC529F2; Mon, 23 Jun 2014 16:41:21 +0000 (UTC)
+	id 33A48529F2; Mon, 23 Jun 2014 16:41:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140623164121.432FC529F2@arago-project.org>
-Date: Mon, 23 Jun 2014 16:41:21 +0000 (UTC)
+Message-Id: <20140623164129.33A48529F2@arago-project.org>
+Date: Mon, 23 Jun 2014 16:41:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : u-boot-ti-staging:_2013.10: Update to pull in critical fixes
 X-BeenThere: meta-ti@yoctoproject.org
@@ -32,13 +32,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 16:41:31 -0000
+X-List-Received-Date: Mon, 23 Jun 2014 16:42:08 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 5f5ce539b9efe9bdbc096b71b60f5fadaa5f5ab4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5f5ce539b9efe9bdbc096b71b60f5fadaa5f5ab4
+Branch: dora
+Commit: d1578c08bdf114bc0f1606c65bd39f0c8293c562
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d1578c08bdf114bc0f1606c65bd39f0c8293c562
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Wed Jun 11 19:54:07 2014 +0000
