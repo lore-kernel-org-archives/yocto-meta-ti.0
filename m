@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CE8D2E00282; Mon, 23 Jun 2014 15:04:56 -0700 (PDT)
+	id 9A549E00576; Mon, 23 Jun 2014 15:04:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -11,13 +11,13 @@ X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	*  1.1 TO_NO_BRKTS_DYNIP To: misformatted and dynamic rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CCAFDE00282
-	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 15:04:50 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 72E40E003FA
+	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 15:04:54 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id ACBDB52A04; Mon, 23 Jun 2014 22:04:49 +0000 (UTC)
+	id D259752A99; Mon, 23 Jun 2014 22:04:50 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140623220449.ACBDB52A04@arago-project.org>
-Date: Mon, 23 Jun 2014 22:04:49 +0000 (UTC)
+Message-Id: <20140623220450.D259752A99@arago-project.org>
+Date: Mon, 23 Jun 2014 22:04:50 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Ash Charles : Use INSANE_SKIP_${PN} = "installed-vs-shipped"
 X-BeenThere: meta-ti@yoctoproject.org
@@ -32,13 +32,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 22:04:56 -0000
+X-List-Received-Date: Mon, 23 Jun 2014 22:04:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: ec85fc2d3b884da85152e6e7e5ea16970d80fa8a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ec85fc2d3b884da85152e6e7e5ea16970d80fa8a
+Branch: master
+Commit: 5bb6e1083ae977778f213f17335b076ad2d33004
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5bb6e1083ae977778f213f17335b076ad2d33004
 
 Author: Ash Charles <ashcharles@gmail.com>
 Date:   Sat Jun 14 04:34:07 2014 +0000
