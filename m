@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E3A92E00571; Mon, 23 Jun 2014 09:02:26 -0700 (PDT)
+	id 0347DE003D8; Mon, 23 Jun 2014 09:02:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -11,15 +11,15 @@ X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	*  1.1 TO_NO_BRKTS_DYNIP To: misformatted and dynamic rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6FE5EE00507
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6FE04E003D8
 	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 09:02:01 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F1F2C52A5D; Mon, 23 Jun 2014 16:02:00 +0000 (UTC)
+	id 24C2F52A6A; Mon, 23 Jun 2014 16:02:01 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140623160200.F1F2C52A5D@arago-project.org>
-Date: Mon, 23 Jun 2014 16:02:00 +0000 (UTC)
+Message-Id: <20140623160201.24C2F52A6A@arago-project.org>
+Date: Mon, 23 Jun 2014 16:02:01 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-mainline: update to 3.14. 8 and enable legacy omap3 devices
+Subject: Denys Dmytriyenko : machine configs: set optimized hardfp DEFAULTTUNE if not set
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,58 +32,152 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 16:02:27 -0000
+X-List-Received-Date: Mon, 23 Jun 2014 16:02:30 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 727c29513252a3b8d1d48aef7f69580a9f377180
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=727c29513252a3b8d1d48aef7f69580a9f377180
+Commit: 721aad503b2c6ad8555b4c70f564b8d83481bf47
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=721aad503b2c6ad8555b4c70f564b8d83481bf47
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Jun 20 00:38:31 2014 +0000
+Date:   Fri Jun 20 22:33:44 2014 +0000
 
-linux-mainline: update to 3.14.8 and enable legacy omap3 devices
+machine configs: set optimized hardfp DEFAULTTUNE if not set
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-mainline_3.14.bb |   14 +++++++++-----
- 1 files changed, 9 insertions(+), 5 deletions(-)
+ conf/machine/include/keystone.inc |    3 ++-
+ conf/machine/include/omap-a15.inc |    3 ++-
+ conf/machine/include/omap3.inc    |    3 ++-
+ conf/machine/include/omap4.inc    |    3 ++-
+ conf/machine/include/ti33x.inc    |    3 ++-
+ conf/machine/include/ti43x.inc    |    3 ++-
+ 6 files changed, 12 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-mainline_3.14.bb b/recipes-kernel/linux/linux-mainline_3.14.bb
-index 559a79b..1e8473a 100644
---- a/recipes-kernel/linux/linux-mainline_3.14.bb
-+++ b/recipes-kernel/linux/linux-mainline_3.14.bb
-@@ -19,19 +19,23 @@ RDEPENDS_kernel-base_append_ti33x = " am33x-cm3"
- # for the specific beaglebone machine.
- KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
-+KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
-+KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
-+KERNEL_DEVICETREE_am37x-evm = "omap3-evm-37xx.dtb"
-+KERNEL_DEVICETREE_beagleboard = "omap3-beagle.dtb omap3-beagle-xm.dtb"
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index a9449b2..9a5c11f 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -1,6 +1,7 @@
+ SOC_FAMILY = "keystone"
+ require conf/machine/include/soc-family.inc
  
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
++DEFAULTTUNE ?= "cortexa15thf-neon"
+ require conf/machine/include/tune-cortexa15.inc
  
--COMPATIBLE_MACHINE = "ti33x"
-+COMPATIBLE_MACHINE = "ti33x|omap3"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-keystone"
+@@ -8,7 +9,7 @@ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-keystone"
+ PREFERRED_PROVIDER_u-boot = "u-boot-keystone"
  
- S = "${WORKDIR}/git"
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r7"
++MACHINE_KERNEL_PR = "r8"
  
- BRANCH = "master"
+ KERNEL_IMAGETYPE = "uImage"
  
--# Corresponds to tag v3.14-rc8
--SRCREV = "b098d6726bbfb94c06d6e1097466187afddae61f"
--PV = "3.13+3.14rc8"
-+# Corresponds to tag v3.14.8
-+SRCREV = "0c5b3b80f7aeba9b8d25e12f7b321d148a1b1cb9"
-+PV = "3.14.8"
+diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+index dcf973e..3fef64e 100644
+--- a/conf/machine/include/omap-a15.inc
++++ b/conf/machine/include/omap-a15.inc
+@@ -1,10 +1,11 @@
+ SOC_FAMILY = "omap-a15"
+ require conf/machine/include/soc-family.inc
  
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git;protocol=git;branch=${BRANCH} \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
-           "
++DEFAULTTUNE ?= "cortexa15thf-neon"
+ require conf/machine/include/tune-cortexa15.inc
+ 
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r3"
++MACHINE_KERNEL_PR = "r4"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index c80939a..e71630b 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -1,6 +1,7 @@
+ SOC_FAMILY = "omap3"
+ require conf/machine/include/soc-family.inc
+ 
++DEFAULTTUNE ?= "cortexa8thf-neon"
+ require conf/machine/include/tune-cortexa8.inc
+ 
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+@@ -16,7 +17,7 @@ XSERVER = "xserver-xorg \
+ GUI_MACHINE_CLASS = "bigscreen"
+ 
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r125"
++MACHINE_KERNEL_PR = "r126"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+diff --git a/conf/machine/include/omap4.inc b/conf/machine/include/omap4.inc
+index cf71be1..066acca 100644
+--- a/conf/machine/include/omap4.inc
++++ b/conf/machine/include/omap4.inc
+@@ -1,6 +1,7 @@
+ SOC_FAMILY = "omap4"
+ require conf/machine/include/soc-family.inc
+ 
++DEFAULTTUNE ?= "cortexa9thf-neon"
+ require conf/machine/include/tune-cortexa9.inc
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap4"
+@@ -13,7 +14,7 @@ XSERVER = "xserver-xorg \
+            xf86-video-omap"
+ 
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r1"
++MACHINE_KERNEL_PR = "r2"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+diff --git a/conf/machine/include/ti33x.inc b/conf/machine/include/ti33x.inc
+index 17b968d..53f38c9 100644
+--- a/conf/machine/include/ti33x.inc
++++ b/conf/machine/include/ti33x.inc
+@@ -1,6 +1,7 @@
+ SOC_FAMILY = "ti33x"
+ require conf/machine/include/soc-family.inc
+ 
++DEFAULTTUNE ?= "cortexa8thf-neon"
+ require conf/machine/include/tune-cortexa8.inc
+ 
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+@@ -16,7 +17,7 @@ XSERVER = "xserver-xorg \
+ GUI_MACHINE_CLASS = "bigscreen"
+ 
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r21"
++MACHINE_KERNEL_PR = "r22"
+ 
+ # Default providers, may need to override for specific machines
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+diff --git a/conf/machine/include/ti43x.inc b/conf/machine/include/ti43x.inc
+index 8913380..8c5fa2d 100644
+--- a/conf/machine/include/ti43x.inc
++++ b/conf/machine/include/ti43x.inc
+@@ -1,6 +1,7 @@
+ SOC_FAMILY = "ti43x"
+ require conf/machine/include/soc-family.inc
+ 
++DEFAULTTUNE ?= "cortexa9thf-neon"
+ require conf/machine/include/tune-cortexa9.inc
+ 
+ PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+@@ -16,7 +17,7 @@ XSERVER = "xserver-xorg \
+ GUI_MACHINE_CLASS = "bigscreen"
+ 
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r2"
++MACHINE_KERNEL_PR = "r3"
+ 
+ # Default providers, may need to override for specific machines
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
 
 
