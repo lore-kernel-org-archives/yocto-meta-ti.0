@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 16443E003FA; Mon, 23 Jun 2014 15:15:11 -0700 (PDT)
+	id A9386E003FA; Mon, 23 Jun 2014 15:15:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,13 +10,13 @@ X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	with *      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0CF95E00282
-	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 15:15:07 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0E404E00283
+	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 15:15:08 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0B822529F2; Mon, 23 Jun 2014 22:15:06 +0000 (UTC)
+	id 84E3E52A42; Mon, 23 Jun 2014 22:15:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140623221507.0B822529F2@arago-project.org>
-Date: Mon, 23 Jun 2014 22:15:06 +0000 (UTC)
+Message-Id: <20140623221508.84E3E52A42@arago-project.org>
+Date: Mon, 23 Jun 2014 22:15:08 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux: remove old platform-specific 2.6.37 kernels
 X-BeenThere: meta-ti@yoctoproject.org
@@ -35,9 +35,9 @@ X-List-Received-Date: Mon, 23 Jun 2014 22:15:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: bf0741681d3ddd0c02fbbbe8b19cd7bf19d43c7b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bf0741681d3ddd0c02fbbbe8b19cd7bf19d43c7b
+Branch: daisy
+Commit: eba101cc81db5caa31de81ef3c9e61141565e3b9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=eba101cc81db5caa31de81ef3c9e61141565e3b9
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Fri Jun 20 17:18:40 2014 -0400
@@ -286,5 +286,5 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  recipes-kernel/linux/linux-omapl138-psp_2.6.37.bb  |   42 -
  233 files changed, 0 insertions(+), 156701 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=bf0741681d3ddd0c02fbbbe8b19cd7bf19d43c7b
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=eba101cc81db5caa31de81ef3c9e61141565e3b9
 
