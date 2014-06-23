@@ -1,25 +1,34 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 904C1E00283; Mon, 23 Jun 2014 09:42:08 -0700 (PDT)
+	id 84971E003D2; Mon, 23 Jun 2014 09:43:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.4 required=5.0 tests=RDNS_DYNAMIC, TO_NO_BRKTS_DYNIP
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
-	with *      dynamic-looking rDNS
-	*  1.1 TO_NO_BRKTS_DYNIP To: misformatted and dynamic rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7E62AE00282
-	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 09:41:29 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 33A48529F2; Mon, 23 Jun 2014 16:41:29 +0000 (UTC)
+X-Spam-Level: 
+X-Spam-Status: No, score=0.0 required=5.0 tests=RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [206.46.173.21 listed in list.dnswl.org]
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 584A2E00282
+	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 09:43:46 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173021.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N7M00GP2RSH3IA0@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 23 Jun 2014 11:43:30 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 7E3C920368; Mon,
+	23 Jun 2014 12:43:29 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20140623164129.33A48529F2@arago-project.org>
-Date: Mon, 23 Jun 2014 16:41:29 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : u-boot-ti-staging:_2013.10: Update to pull in critical fixes
+Date: Mon, 23 Jun 2014 12:43:26 -0400
+Message-id: <1403541806-12912-2-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.0.0
+In-reply-to: <1403541806-12912-1-git-send-email-denis@denix.org>
+References: <1403541806-12912-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/2] u-boot: remove bbappends for old u-boot recipes removed from meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,51 +41,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 16:42:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 23 Jun 2014 16:43:58 -0000
 
-Module: meta-ti
-Branch: dora
-Commit: d1578c08bdf114bc0f1606c65bd39f0c8293c562
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d1578c08bdf114bc0f1606c65bd39f0c8293c562
-
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Wed Jun 11 19:54:07 2014 +0000
-
-u-boot-ti-staging:_2013.10: Update to pull in critical fixes
-
-* Critical fixes have been added to the ti-u-boot-2013.10 branch for AM4x.
-* Update commit id to point to this new commit.
-* For all other platforms nothing should have changed.
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ meta-arago-distro/recipes-bsp/u-boot/u-boot-am180x_2010.12.bbappend | 5 -----
+ meta-arago-distro/recipes-bsp/u-boot/u-boot-am3517_2011.09.bbappend | 5 -----
+ 2 files changed, 10 deletions(-)
+ delete mode 100644 meta-arago-distro/recipes-bsp/u-boot/u-boot-am180x_2010.12.bbappend
+ delete mode 100644 meta-arago-distro/recipes-bsp/u-boot/u-boot-am3517_2011.09.bbappend
 
- recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-index b8f5ce6..d954db4 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
-@@ -5,14 +5,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
- 
- PV = "2013.10"
--PR = "r7+gitr${SRCPV}"
-+PR = "r8+gitr${SRCPV}"
- 
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH ?= "ti-u-boot-2013.10"
- 
--# Corresponds to tag ti2013.12.01
--SRCREV = "78d8ebd4a0214b72a125f5b98c5ed2f9a3e5e783"
-+# Corresponds to tag ti2013.12.01_amsdk-07.01
-+SRCREV = "259ff9a577cc66cb40e3cdff3e41628e466f0fef"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+diff --git a/meta-arago-distro/recipes-bsp/u-boot/u-boot-am180x_2010.12.bbappend b/meta-arago-distro/recipes-bsp/u-boot/u-boot-am180x_2010.12.bbappend
+deleted file mode 100644
+index 06a69a0..0000000
+--- a/meta-arago-distro/recipes-bsp/u-boot/u-boot-am180x_2010.12.bbappend
++++ /dev/null
+@@ -1,5 +0,0 @@
+-PR_append = "-arago0"
+-
+-# PSPREL and UVER are used by arago-source-ipk.conf
+-UVER = "2010.12"
+-PSPREL = "03.21.00.04.sdk"
+diff --git a/meta-arago-distro/recipes-bsp/u-boot/u-boot-am3517_2011.09.bbappend b/meta-arago-distro/recipes-bsp/u-boot/u-boot-am3517_2011.09.bbappend
+deleted file mode 100644
+index 9871300..0000000
+--- a/meta-arago-distro/recipes-bsp/u-boot/u-boot-am3517_2011.09.bbappend
++++ /dev/null
+@@ -1,5 +0,0 @@
+-PR_append = "-arago0"
+-
+-# PSPREL and UVER are used by arago-source-ipk.conf
+-PSPREL = "04.06.00.08"
+-UVER = "2011.09"
+-- 
+2.0.0
 
 
