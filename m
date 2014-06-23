@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 28A0CE0056E; Mon, 23 Jun 2014 09:04:41 -0700 (PDT)
+	id 54470E003C1; Mon, 23 Jun 2014 09:41:14 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -11,15 +11,15 @@ X-Spam-HAM-Report: * 0.4 RDNS_DYNAMIC Delivered to internal network by host
 	*  1.1 TO_NO_BRKTS_DYNIP To: misformatted and dynamic rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 010DDE003D8
-	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 09:03:45 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 308C6E00282
+	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 09:41:08 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A991352A5D; Mon, 23 Jun 2014 16:03:44 +0000 (UTC)
+	id EB3AD529F2; Mon, 23 Jun 2014 16:41:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140623160344.A991352A5D@arago-project.org>
-Date: Mon, 23 Jun 2014 16:03:44 +0000 (UTC)
+Message-Id: <20140623164106.EB3AD529F2@arago-project.org>
+Date: Mon, 23 Jun 2014 16:41:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-mainline: update to 3.14. 8 and enable legacy omap3 devices
+Subject: Franklin S. Cooper Jr : u-boot-ti-staging:_2013.10: Update to pull in critical fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -32,58 +32,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 16:04:41 -0000
+X-List-Received-Date: Mon, 23 Jun 2014 16:41:14 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: d8c5571b1b1d0c6a7785d45a46f436566f94ce6f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d8c5571b1b1d0c6a7785d45a46f436566f94ce6f
+Branch: master
+Commit: 00a2173047da1ecc0141f6cec9c8e27d2252a398
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=00a2173047da1ecc0141f6cec9c8e27d2252a398
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Jun 20 00:38:31 2014 +0000
+Author: Franklin S. Cooper Jr <fcooper@ti.com>
+Date:   Wed Jun 11 19:54:07 2014 +0000
 
-linux-mainline: update to 3.14.8 and enable legacy omap3 devices
+u-boot-ti-staging:_2013.10: Update to pull in critical fixes
+
+* Critical fixes have been added to the ti-u-boot-2013.10 branch for AM4x.
+* Update commit id to point to this new commit.
+* For all other platforms nothing should have changed.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-mainline_3.14.bb |   14 +++++++++-----
- 1 files changed, 9 insertions(+), 5 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-mainline_3.14.bb b/recipes-kernel/linux/linux-mainline_3.14.bb
-index 559a79b..1e8473a 100644
---- a/recipes-kernel/linux/linux-mainline_3.14.bb
-+++ b/recipes-kernel/linux/linux-mainline_3.14.bb
-@@ -19,19 +19,23 @@ RDEPENDS_kernel-base_append_ti33x = " am33x-cm3"
- # for the specific beaglebone machine.
- KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
-+KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
-+KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
-+KERNEL_DEVICETREE_am37x-evm = "omap3-evm-37xx.dtb"
-+KERNEL_DEVICETREE_beagleboard = "omap3-beagle.dtb omap3-beagle-xm.dtb"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+index b8f5ce6..d954db4 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb
+@@ -5,14 +5,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
  
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+ PV = "2013.10"
+-PR = "r7+gitr${SRCPV}"
++PR = "r8+gitr${SRCPV}"
  
--COMPATIBLE_MACHINE = "ti33x"
-+COMPATIBLE_MACHINE = "ti33x|omap3"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- S = "${WORKDIR}/git"
+ BRANCH ?= "ti-u-boot-2013.10"
  
- BRANCH = "master"
+-# Corresponds to tag ti2013.12.01
+-SRCREV = "78d8ebd4a0214b72a125f5b98c5ed2f9a3e5e783"
++# Corresponds to tag ti2013.12.01_amsdk-07.01
++SRCREV = "259ff9a577cc66cb40e3cdff3e41628e466f0fef"
  
--# Corresponds to tag v3.14-rc8
--SRCREV = "b098d6726bbfb94c06d6e1097466187afddae61f"
--PV = "3.13+3.14rc8"
-+# Corresponds to tag v3.14.8
-+SRCREV = "0c5b3b80f7aeba9b8d25e12f7b321d148a1b1cb9"
-+PV = "3.14.8"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git;protocol=git;branch=${BRANCH} \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
-           "
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
