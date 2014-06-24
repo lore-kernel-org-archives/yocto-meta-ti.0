@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 38D97E0056D; Tue, 24 Jun 2014 16:35:15 -0700 (PDT)
+	id 39F8FE00563; Tue, 24 Jun 2014 16:35:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,15 +13,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  1.1 TO_NO_BRKTS_DYNIP To: misformatted and dynamic rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 31449E00405
-	for <meta-ti@yoctoproject.org>; Tue, 24 Jun 2014 16:35:09 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A5A47E00563
+	for <meta-ti@yoctoproject.org>; Tue, 24 Jun 2014 16:35:10 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C5A00529C8; Tue, 24 Jun 2014 23:35:08 +0000 (UTC)
+	id 553EE52A51; Tue, 24 Jun 2014 23:35:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140624233508.C5A00529C8@arago-project.org>
-Date: Tue, 24 Jun 2014 23:35:08 +0000 (UTC)
+Message-Id: <20140624233509.553EE52A51@arago-project.org>
+Date: Tue, 24 Jun 2014 23:35:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: temporarily lower default priority due to sgx breakage
+Subject: Denys Dmytriyenko : u-boot-am37x: remove old machine-specific version in favor of mainline
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,34 +38,30 @@ X-List-Received-Date: Tue, 24 Jun 2014 23:35:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 5dad1bc02dd922a6c4fa4d68f6ea9ec779cf5e66
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5dad1bc02dd922a6c4fa4d68f6ea9ec779cf5e66
+Branch: master
+Commit: 96e81aed3c89decd8f304191655da2e356ca150d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=96e81aed3c89decd8f304191655da2e356ca150d
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Jun 24 09:16:21 2014 +0000
+Date:   Tue Jun 24 09:16:19 2014 +0000
 
-linux-ti-staging: temporarily lower default priority due to sgx breakage
+u-boot-am37x: remove old machine-specific version in favor of mainline
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ ...3-Set-SPL-stack-size-to-8KB-image-to-54KB.patch |  172 --------------------
+ .../0001-OMAP3-Beagle-Set-BOOTDELAY-to-3.patch     |   31 ----
+ ...e-add-usbethaddr-setting-to-enable-networ.patch |   40 -----
+ ...dded-function-calls-to-set-volts-speed-on.patch |  146 -----------------
+ ...17evm-beagleboard-am37x-Add-CONFIG_CMD_AS.patch |   73 ---------
+ ...2-omap3evm-Make-the-board-start-at-800MHz.patch |   36 ----
+ ...gleboard-Load-uImage-from-VFAT-by-default.patch |   34 ----
+ ...03-beagleboard-Make-xM-rev-C-go-to-800MHz.patch |   34 ----
+ ...-Load-uImage-to-the-default-kernel-linux-.patch |   57 -------
+ recipes-bsp/u-boot/u-boot-am37x_2012.04.01.bb      |   41 -----
+ 10 files changed, 0 insertions(+), 664 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index 32c6f5a..5c8022b 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -3,6 +3,8 @@ DESCRIPTION = "Linux kernel for TI devices"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
- 
-+DEFAULT_PREFERENCE = "-1"
-+
- inherit kernel
- 
- require recipes-kernel/linux/linux-dtb.inc
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=96e81aed3c89decd8f304191655da2e356ca150d
 
