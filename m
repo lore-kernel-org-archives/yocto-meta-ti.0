@@ -1,54 +1,40 @@
-Return-Path: <ashcharles@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 471E4E00283; Mon, 23 Jun 2014 16:03:19 -0700 (PDT)
+	id 279F2E003D2; Mon, 23 Jun 2014 19:50:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [209.85.220.181 listed in list.dnswl.org]
-	* 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-	provider *      (ashcharles[at]gmail.com)
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-vc0-f181.google.com (mail-vc0-f181.google.com
-	[209.85.220.181])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 81451E0027B
-	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 16:03:12 -0700 (PDT)
-Received: by mail-vc0-f181.google.com with SMTP id il7so6746388vcb.40
-	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 16:03:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=ER28TcIbYBspusVpOp3jvTRKr7qaNpl5PHhdC9vcLeE=;
-	b=Xx9ukEZhjyTJc43JTMzFlymsKgcHvhEZj2MsKGOmcvCaGC1KmZTHLJVEGIOGvp8KiO
-	tb3sINCgpdb9xaPMPqKBYBLDCXPeRH2/n+qvU8AOJWVUcLDcHBnwT4VTuRIkgYb3Igle
-	xQVMTd8frdz3nBva5ACSwIP+Mz3sXYpC9fDLJkV4x6+wIiptkRxsXyD2nvjjLnfxKTQu
-	4YjDEc4sNcU9k7ztqPveDV1EqH5bOEtTy4oTPdimP7q8CcnI/JA00j3mojBZky0vbE4f
-	pSyfLVctJ1u+1igWjYjvZOs0ZBTn6sDO7GqAIh1f4+tSrRoBCFoxwZcXdi+X4mK+cKKL
-	BGtw==
-X-Received: by 10.58.132.41 with SMTP id or9mr21853435veb.5.1403564592077;
-	Mon, 23 Jun 2014 16:03:12 -0700 (PDT)
+X-Spam-Status: No, score=-3.9 required=5.0 tests=HTML_MESSAGE, MIME_HTML_ONLY, 
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  1.1 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 434CFE00283
+	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 19:50:27 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5O2oQqc007925
+	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 21:50:26 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5O2oQ5o015127
+	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 21:50:26 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Mon, 23 Jun 2014 21:50:26 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s5O2oQfx016485	for <meta-ti@yoctoproject.org>; Mon, 23 Jun 2014 21:50:26
+	-0500
+Date: Mon, 23 Jun 2014 22:33:41 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1580122033.223.1403577221932.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Received: by 10.58.196.229 with HTTP; Mon, 23 Jun 2014 16:02:42 -0700 (PDT)
-In-Reply-To: <20140623223333.GL6700@edge>
-References: <1402698848-13759-1-git-send-email-ashcharles@gmail.com>
-	<1402698848-13759-2-git-send-email-ashcharles@gmail.com>
-	<20140623220500.GK6700@edge>
-	<CAK8F28mucmU73EWJOWtBpCd60kBhGv97q-Vn0oGNT5U0hsUfxw@mail.gmail.com>
-	<20140623223333.GL6700@edge>
-From: Ash Charles <ashcharles@gmail.com>
-Date: Mon, 23 Jun 2014 16:02:42 -0700
-Message-ID: <CAK8F28kbYkyvM6caRVb50M5CvvzmORWKmnW+MZ8kbBUuiWpHLw@mail.gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 2/6] Set ${TOOLCHAIN_PATH} used by some recipes
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-06-23_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -61,55 +47,186 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 23:03:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 24 Jun 2014 02:50:29 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_222_1744197769.1403577221931"
 
-Okay---I'll test and send a V2.
+------=_Part_222_1744197769.1403577221931
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
---Ash
+<html>
+<head>
+<title>
+Status for 06/23/14
+</title>
+</head>
+<body>
 
-On Mon, Jun 23, 2014 at 3:33 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> Well, I set it in our Arago distro based on the toolchain used, but since
-> meta-ti is not a distro, I was thinking it should provide a safe default, but
-> conditional. In other words, changing your patch to conditional assignment ?=
-> should be good enough...
->
-> --
-> Denys
->
->
-> On Mon, Jun 23, 2014 at 03:30:10PM -0700, Ash Charles wrote:
->> Good point.  Where is the right place to set the toolchain path?  Or
->> perhaps the recipes shouldn't use it at all?
->>
->> --Ash
->>
->> On Mon, Jun 23, 2014 at 3:05 PM, Denys Dmytriyenko <denys@ti.com> wrote:
->> > This one is not correct and will break with an external toolchain...
->> >
->> > On Fri, Jun 13, 2014 at 03:34:04PM -0700, Ash Charles wrote:
->> >> Signed-off-by: Ash Charles <ashcharles@gmail.com>
->> >> ---
->> >>  recipes-ti/includes/ti-paths.inc | 1 +
->> >>  1 file changed, 1 insertion(+)
->> >>
->> >> diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
->> >> index 511b5ae..5c9b716 100644
->> >> --- a/recipes-ti/includes/ti-paths.inc
->> >> +++ b/recipes-ti/includes/ti-paths.inc
->> >> @@ -1,5 +1,6 @@
->> >>  installdir = "${datadir}/ti"
->> >>
->> >> +export TOOLCHAIN_PATH = "${STAGING_DIR_NATIVE}${prefix_native}/bin/${TARGET_SYS}"
->> >>  # This is where do_install will put it
->> >>  export AUDIO_SOC_INSTALL_DIR_RECIPE  = "${installdir}/ti-audio-soc-example-tree"
->> >>  export BIOS_INSTALL_DIR_RECIPE       = "${installdir}/ti-dspbios-tree"
->> >> --
->> >> 1.8.3.2
->> >>
->> >> --
->> >> _______________________________________________
->> >> meta-ti mailing list
->> >> meta-ti@yoctoproject.org
->> >> https://lists.yoctoproject.org/listinfo/meta-ti
+<h2>Status for 06/23/14</h2>
 
+<h2>BUILD_ID: build-2014-06-23_21-01-31</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.06"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_222_1744197769.1403577221931--
