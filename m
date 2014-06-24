@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 39F8FE00563; Tue, 24 Jun 2014 16:35:15 -0700 (PDT)
+	id 3B633E0056A; Tue, 24 Jun 2014 16:35:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,15 +13,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  1.1 TO_NO_BRKTS_DYNIP To: misformatted and dynamic rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A5A47E00563
-	for <meta-ti@yoctoproject.org>; Tue, 24 Jun 2014 16:35:10 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 31DE4E00509
+	for <meta-ti@yoctoproject.org>; Tue, 24 Jun 2014 16:35:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 553EE52A51; Tue, 24 Jun 2014 23:35:09 +0000 (UTC)
+	id 4D20452A6A; Tue, 24 Jun 2014 23:35:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140624233509.553EE52A51@arago-project.org>
+Message-Id: <20140624233509.4D20452A6A@arago-project.org>
 Date: Tue, 24 Jun 2014 23:35:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-am37x: remove old machine-specific version in favor of mainline
+Subject: Denys Dmytriyenko : conf/machine: update legacy machines to use latest mainline kernel and u-boot
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,29 +39,123 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 96e81aed3c89decd8f304191655da2e356ca150d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=96e81aed3c89decd8f304191655da2e356ca150d
+Commit: 4cb36eead6dd7051de8a6a2ddf82daa9c81d09c5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4cb36eead6dd7051de8a6a2ddf82daa9c81d09c5
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Jun 24 09:16:19 2014 +0000
+Date:   Tue Jun 24 04:23:52 2014 +0000
 
-u-boot-am37x: remove old machine-specific version in favor of mainline
+conf/machine: update legacy machines to use latest mainline kernel and u-boot
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...3-Set-SPL-stack-size-to-8KB-image-to-54KB.patch |  172 --------------------
- .../0001-OMAP3-Beagle-Set-BOOTDELAY-to-3.patch     |   31 ----
- ...e-add-usbethaddr-setting-to-enable-networ.patch |   40 -----
- ...dded-function-calls-to-set-volts-speed-on.patch |  146 -----------------
- ...17evm-beagleboard-am37x-Add-CONFIG_CMD_AS.patch |   73 ---------
- ...2-omap3evm-Make-the-board-start-at-800MHz.patch |   36 ----
- ...gleboard-Load-uImage-from-VFAT-by-default.patch |   34 ----
- ...03-beagleboard-Make-xM-rev-C-go-to-800MHz.patch |   34 ----
- ...-Load-uImage-to-the-default-kernel-linux-.patch |   57 -------
- recipes-bsp/u-boot/u-boot-am37x_2012.04.01.bb      |   41 -----
- 10 files changed, 0 insertions(+), 664 deletions(-)
+ conf/machine/am180x-evm.conf     |    4 ----
+ conf/machine/am3517-evm.conf     |    5 -----
+ conf/machine/am37x-evm.conf      |    4 ----
+ conf/machine/beagleboard.conf    |    4 ----
+ conf/machine/include/davinci.inc |    2 +-
+ conf/machine/include/omap3.inc   |    2 +-
+ conf/machine/omap3evm.conf       |    2 --
+ 7 files changed, 2 insertions(+), 21 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=96e81aed3c89decd8f304191655da2e356ca150d
+diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
+index 44ca0c6..3182e8a 100644
+--- a/conf/machine/am180x-evm.conf
++++ b/conf/machine/am180x-evm.conf
+@@ -12,7 +12,3 @@ UBOOT_LOADADDRESS = "0xc0008000"
+ IMAGE_FSTYPES += "tar.gz"
+ 
+ SERIAL_CONSOLE = "115200 ttyS2"
+-
+-PREFERRED_PROVIDER_virtual/kernel = "linux-omapl138-psp"
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-am180x"
+-PREFERRED_PROVIDER_u-boot = "u-boot-am180x"
+diff --git a/conf/machine/am3517-evm.conf b/conf/machine/am3517-evm.conf
+index b9b6d17..7295c1f 100644
+--- a/conf/machine/am3517-evm.conf
++++ b/conf/machine/am3517-evm.conf
+@@ -15,11 +15,6 @@ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ SERIAL_CONSOLE = "115200 ttyO2"
+ USE_VT = "2"
+ 
+-PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
+-
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-am3517"
+-PREFERRED_PROVIDER_u-boot = "u-boot-am3517"
+-
+ UBOOT_MACHINE = "am3517_evm_config"
+ XLOAD_MACHINE = "am3517evm_config"
+ 
+diff --git a/conf/machine/am37x-evm.conf b/conf/machine/am37x-evm.conf
+index 0d53d50..16ce73c 100644
+--- a/conf/machine/am37x-evm.conf
++++ b/conf/machine/am37x-evm.conf
+@@ -14,10 +14,6 @@ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ 
+ SERIAL_CONSOLE = "115200 ttyO0"
+ 
+-PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-am37x"
+-PREFERRED_PROVIDER_u-boot = "u-boot-am37x"
+-
+ # NOTE: there are NAND and OneNAND versions of this board...
+ # do ubiattach /dev/ubi_ctrl -m 4
+ # From dmesg:
+diff --git a/conf/machine/beagleboard.conf b/conf/machine/beagleboard.conf
+index f923119..32985b3 100644
+--- a/conf/machine/beagleboard.conf
++++ b/conf/machine/beagleboard.conf
+@@ -7,10 +7,6 @@ require conf/machine/include/omap3.inc
+ # Only has DVI connector for external screen
+ GUI_MACHINE_CLASS = "bigscreen"
+ 
+-PREFERRED_PROVIDER_virtual/kernel = "linux-mainline"
+-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-beagleboard"
+-PREFERRED_PROVIDER_u-boot = "u-boot-beagleboard"
+-
+ IMAGE_FSTYPES += "tar.gz ubi"
+ EXTRA_IMAGECMD_jffs2 = "-lnp"
+ 
+diff --git a/conf/machine/include/davinci.inc b/conf/machine/include/davinci.inc
+index 6be5eb7..9f90f24 100644
+--- a/conf/machine/include/davinci.inc
++++ b/conf/machine/include/davinci.inc
+@@ -5,7 +5,7 @@ MACHINE_KERNEL_PR = "r53"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+-PREFERRED_PROVIDER_virtual/kernel = "linux-davinci"
++PREFERRED_PROVIDER_virtual/kernel = "linux-mainline"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
+ 
+ UBOOT_MACHINE = "davinci_dvevm_config"
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index e71630b..0757b43 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -22,7 +22,7 @@ MACHINE_KERNEL_PR = "r126"
+ KERNEL_IMAGETYPE = "uImage"
+ 
+ # Default providers, may need to override for specific machines
+-PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
++PREFERRED_PROVIDER_virtual/kernel = "linux-mainline"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
+ 
+ UBOOT_ARCH = "arm"
+diff --git a/conf/machine/omap3evm.conf b/conf/machine/omap3evm.conf
+index 584866c..6bfd808 100644
+--- a/conf/machine/omap3evm.conf
++++ b/conf/machine/omap3evm.conf
+@@ -15,8 +15,6 @@ EXTRA_IMAGECMD_jffs2 = "-lnp -e 0x20000 -s 2048"
+ SERIAL_CONSOLE = "115200 ttyS0"
+ USE_VT = "0"
+ 
+-PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
+-
+ EXTRA_IMAGEDEPENDS += "x-load"
+ 
+ # NOTE: there are NAND and OneNAND versions of this board...
+
 
