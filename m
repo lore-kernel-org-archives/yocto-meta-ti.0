@@ -1,39 +1,42 @@
-Return-Path: <denis@denix.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4EF69E00566; Thu, 26 Jun 2014 16:59:17 -0700 (PDT)
+	id 5049AE00546; Thu, 26 Jun 2014 18:30:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00, RCVD_IN_DNSWL_NONE, 
-	T_HDRS_LCASE,T_MANY_HDRS_LCASE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.21 listed in list.dnswl.org]
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 T_HDRS_LCASE Odd capitalization of message header
-	* 0.0 T_MANY_HDRS_LCASE Odd capitalization of multiple message headers
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6118E00282
-	for <meta-ti@yoctoproject.org>; Thu, 26 Jun 2014 16:59:14 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173021.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N7S00310VXWX800@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 26 Jun 2014 18:58:54 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id DF8E72018D; Thu,
-	26 Jun 2014 19:58:43 -0400 (EDT)
-Date: Thu, 26 Jun 2014 19:58:43 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Cody P Schafer <dev@codyps.com>
-Message-id: <20140626235843.GK1580@denix.org>
-References: <1403826485-396-1-git-send-email-dev@codyps.com>
-MIME-version: 1.0
-In-reply-to: <1403826485-396-1-git-send-email-dev@codyps.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] libgles-omap3: add already-stripped to INSANE_SKIP to fix build in poky
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 003CAE00282
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jun 2014 18:30:04 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5R1U3wd000798
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jun 2014 20:30:03 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5R1U2Ev016777
+	for <meta-ti@yoctoproject.org>; Thu, 26 Jun 2014 20:30:03 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 26 Jun 2014 20:30:01 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s5R1U1Lo026511	for <meta-ti@yoctoproject.org>; Thu, 26 Jun 2014 20:30:01
+	-0500
+Date: Thu, 26 Jun 2014 21:13:12 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1265767962.239.1403831592535.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-06-26_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,247 +49,186 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jun 2014 23:59:17 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 27 Jun 2014 01:30:10 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_238_383267045.1403831592532"
 
-Hmm, Poky keeps on turning warnings into errors... Ok, I'll take it.
+------=_Part_238_383267045.1403831592532
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+<head>
+<title>
+Status for 06/26/14
+</title>
+</head>
+<body>
+
+<h2>Status for 06/26/14</h2>
+
+<h2>BUILD_ID: build-2014-06-26_21-01-37</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.06"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-On Thu, Jun 26, 2014 at 07:48:05PM -0400, Cody P Schafer wrote:
-> Signed-off-by: Cody P Schafer <dev@codyps.com>
-> ---
->  recipes-graphics/libgles/libgles-omap3-no-x.inc | 64 ++++++++++----------
->  recipes-graphics/libgles/libgles-omap3-x11.inc  | 44 +++++++-------
->  recipes-graphics/libgles/libgles-omap3.inc      | 78 ++++++++++++-------------
->  3 files changed, 93 insertions(+), 93 deletions(-)
-> 
-> diff --git a/recipes-graphics/libgles/libgles-omap3-no-x.inc b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-> index 7bb6cfb..13418ad 100644
-> --- a/recipes-graphics/libgles/libgles-omap3-no-x.inc
-> +++ b/recipes-graphics/libgles/libgles-omap3-no-x.inc
-> @@ -268,38 +268,38 @@ RRECOMMENDS_${PN} += "omap3-sgx-modules"
->  RDEPENDS_${PN} += "fbset devmem2"
->  
->  #HACK! These are binaries, so we can't guarantee that LDFLAGS match :(
-> -INSANE_SKIP_${PN} = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-es3 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-es5 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-es6 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-es8 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-es9 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-rawdemos = "ldflags dev-so useless-rpaths"
-> -INSANE_SKIP_${PN}-blitwsegl = "ldflags"
-> -INSANE_SKIP_${PN}-blitwsegl-es3 = "ldflags"
-> -INSANE_SKIP_${PN}-blitwsegl-es5 = "ldflags"
-> -INSANE_SKIP_${PN}-blitwsegl-es6 = "ldflags"
-> -INSANE_SKIP_${PN}-blitwsegl-es8 = "ldflags"
-> -INSANE_SKIP_${PN}-blitwsegl-es9 = "ldflags"
-> -INSANE_SKIP_${PN}-flipwsegl = "ldflags"
-> -INSANE_SKIP_${PN}-flipwsegl-es3 = "ldflags"
-> -INSANE_SKIP_${PN}-flipwsegl-es5 = "ldflags"
-> -INSANE_SKIP_${PN}-flipwsegl-es6 = "ldflags"
-> -INSANE_SKIP_${PN}-flipwsegl-es8 = "ldflags"
-> -INSANE_SKIP_${PN}-flipwsegl-es9 = "ldflags"
-> -INSANE_SKIP_${PN}-frontwsegl = "ldflags"
-> -INSANE_SKIP_${PN}-frontwsegl-es3 = "ldflags"
-> -INSANE_SKIP_${PN}-frontwsegl-es5 = "ldflags"
-> -INSANE_SKIP_${PN}-frontwsegl-es6 = "ldflags"
-> -INSANE_SKIP_${PN}-frontwsegl-es8 = "ldflags"
-> -INSANE_SKIP_${PN}-frontwsegl-es9 = "ldflags"
-> -INSANE_SKIP_${PN}-linuxfbwsegl = "ldflags"
-> -INSANE_SKIP_${PN}-linuxfbwsegl-es3 = "ldflags"
-> -INSANE_SKIP_${PN}-linuxfbwsegl-es5 = "ldflags"
-> -INSANE_SKIP_${PN}-linuxfbwsegl-es6 = "ldflags"
-> -INSANE_SKIP_${PN}-linuxfbwsegl-es8 = "ldflags"
-> -INSANE_SKIP_${PN}-linuxfbwsegl-es9 = "ldflags"
-> -INSANE_SKIP_${PN}-tests = "ldflags"
-> +INSANE_SKIP_${PN} = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-es3 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-es5 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-es6 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-es8 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-es9 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-rawdemos = "ldflags dev-so useless-rpaths already-stripped"
-> +INSANE_SKIP_${PN}-blitwsegl = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-blitwsegl-es3 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-blitwsegl-es5 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-blitwsegl-es6 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-blitwsegl-es8 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-blitwsegl-es9 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-flipwsegl = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-flipwsegl-es3 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-flipwsegl-es5 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-flipwsegl-es6 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-flipwsegl-es8 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-flipwsegl-es9 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-frontwsegl = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-frontwsegl-es3 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-frontwsegl-es5 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-frontwsegl-es6 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-frontwsegl-es8 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-frontwsegl-es9 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-linuxfbwsegl = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-linuxfbwsegl-es3 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-linuxfbwsegl-es5 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-linuxfbwsegl-es6 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-linuxfbwsegl-es8 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-linuxfbwsegl-es9 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-tests = "ldflags already-stripped"
->  
->  # Quality control is really poor on these SDKs, so hack around the latest madness:
->  FILES_${PN} += "${libdir}/*.so "
-> diff --git a/recipes-graphics/libgles/libgles-omap3-x11.inc b/recipes-graphics/libgles/libgles-omap3-x11.inc
-> index 76ef5b3..9aa596a 100644
-> --- a/recipes-graphics/libgles/libgles-omap3-x11.inc
-> +++ b/recipes-graphics/libgles/libgles-omap3-x11.inc
-> @@ -284,28 +284,28 @@ RRECOMMENDS_${PN} += "omap3-sgx-modules-x11"
->  RDEPENDS_${PN} += "fbset devmem2"
->  
->  #HACK! These are binaries, so we can't guarantee that LDFLAGS match :(
-> -INSANE_SKIP_${PN} = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-es3 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-es5 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-es6 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-es8 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-es9 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-x11demos = "ldflags dev-so useless-rpaths"
-> -INSANE_SKIP_${PN}-x11wsegl = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-x11wsegl-es3 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-x11wsegl-es5 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-x11wsegl-es6 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-x11wsegl-es8 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-x11wsegl-es9 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-driwsegl = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-driwsegl-es3 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-driwsegl-es5 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-driwsegl-es6 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-driwsegl-es8 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-driwsegl-es9 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-tests = "ldflags"
-> -INSANE_SKIP_xserver-kdrive-powervrsgx = "ldflags"
-> -INSANE_SKIP_${PN}-dev = "ldflags dev-so"
-> +INSANE_SKIP_${PN} = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-es3 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-es5 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-es6 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-es8 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-es9 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-x11demos = "ldflags dev-so useless-rpaths already-stripped"
-> +INSANE_SKIP_${PN}-x11wsegl = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-x11wsegl-es3 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-x11wsegl-es5 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-x11wsegl-es6 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-x11wsegl-es8 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-x11wsegl-es9 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-driwsegl = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-driwsegl-es3 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-driwsegl-es5 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-driwsegl-es6 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-driwsegl-es8 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-driwsegl-es9 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-tests = "ldflags already-stripped"
-> +INSANE_SKIP_xserver-kdrive-powervrsgx = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-dev = "ldflags dev-so already-stripped"
->  
->  inherit update-rc.d
->  
-> diff --git a/recipes-graphics/libgles/libgles-omap3.inc b/recipes-graphics/libgles/libgles-omap3.inc
-> index f417b8e..0b61946 100644
-> --- a/recipes-graphics/libgles/libgles-omap3.inc
-> +++ b/recipes-graphics/libgles/libgles-omap3.inc
-> @@ -352,45 +352,45 @@ RRECOMMENDS_${PN} += "omap3-sgx-modules"
->  RDEPENDS_${PN} += "fbset devmem2"
->  
->  #HACK! These are binaries, so we can't guarantee that LDFLAGS match :(
-> -INSANE_SKIP_${PN} = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-es3 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-es5 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-es6 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-es8 = "ldflags dev-so staticdev"
-> -INSANE_SKIP_${PN}-rawdemos = "ldflags dev-so useless-rpaths"
-> -INSANE_SKIP_${PN}-x11demos = "ldflags dev-so useless-rpaths"
-> -INSANE_SKIP_${PN}-blitwsegl = "ldflags"
-> -INSANE_SKIP_${PN}-blitwsegl-es3 = "ldflags"
-> -INSANE_SKIP_${PN}-blitwsegl-es5 = "ldflags"
-> -INSANE_SKIP_${PN}-blitwsegl-es6 = "ldflags"
-> -INSANE_SKIP_${PN}-blitwsegl-es8 = "ldflags"
-> -INSANE_SKIP_${PN}-flipwsegl = "ldflags"
-> -INSANE_SKIP_${PN}-flipwsegl-es3 = "ldflags"
-> -INSANE_SKIP_${PN}-flipwsegl-es5 = "ldflags"
-> -INSANE_SKIP_${PN}-flipwsegl-es6 = "ldflags"
-> -INSANE_SKIP_${PN}-flipwsegl-es8 = "ldflags"
-> -INSANE_SKIP_${PN}-frontwsegl = "ldflags"
-> -INSANE_SKIP_${PN}-frontwsegl-es3 = "ldflags"
-> -INSANE_SKIP_${PN}-frontwsegl-es5 = "ldflags"
-> -INSANE_SKIP_${PN}-frontwsegl-es6 = "ldflags"
-> -INSANE_SKIP_${PN}-frontwsegl-es8 = "ldflags"
-> -INSANE_SKIP_${PN}-linuxfbwsegl = "ldflags"
-> -INSANE_SKIP_${PN}-linuxfbwsegl-es3 = "ldflags"
-> -INSANE_SKIP_${PN}-linuxfbwsegl-es5 = "ldflags"
-> -INSANE_SKIP_${PN}-linuxfbwsegl-es6 = "ldflags"
-> -INSANE_SKIP_${PN}-linuxfbwsegl-es8 = "ldflags"
-> -INSANE_SKIP_${PN}-x11wsegl = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-x11wsegl-es3 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-x11wsegl-es5 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-x11wsegl-es6 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-x11wsegl-es8 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-driwsegl = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-driwsegl-es3 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-driwsegl-es5 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-driwsegl-es6 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-driwsegl-es8 = "ldflags dev-so"
-> -INSANE_SKIP_${PN}-tests = "ldflags"
-> -INSANE_SKIP_xserver-kdrive-powervrsgx = "ldflags"
-> +INSANE_SKIP_${PN} = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-es3 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-es5 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-es6 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-es8 = "ldflags dev-so staticdev already-stripped"
-> +INSANE_SKIP_${PN}-rawdemos = "ldflags dev-so useless-rpaths already-stripped"
-> +INSANE_SKIP_${PN}-x11demos = "ldflags dev-so useless-rpaths already-stripped"
-> +INSANE_SKIP_${PN}-blitwsegl = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-blitwsegl-es3 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-blitwsegl-es5 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-blitwsegl-es6 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-blitwsegl-es8 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-flipwsegl = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-flipwsegl-es3 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-flipwsegl-es5 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-flipwsegl-es6 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-flipwsegl-es8 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-frontwsegl = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-frontwsegl-es3 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-frontwsegl-es5 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-frontwsegl-es6 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-frontwsegl-es8 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-linuxfbwsegl = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-linuxfbwsegl-es3 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-linuxfbwsegl-es5 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-linuxfbwsegl-es6 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-linuxfbwsegl-es8 = "ldflags already-stripped"
-> +INSANE_SKIP_${PN}-x11wsegl = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-x11wsegl-es3 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-x11wsegl-es5 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-x11wsegl-es6 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-x11wsegl-es8 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-driwsegl = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-driwsegl-es3 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-driwsegl-es5 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-driwsegl-es6 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-driwsegl-es8 = "ldflags dev-so already-stripped"
-> +INSANE_SKIP_${PN}-tests = "ldflags already-stripped"
-> +INSANE_SKIP_xserver-kdrive-powervrsgx = "ldflags already-stripped"
->  
->  # Quality control is really poor on these SDKs, so hack around the latest madness:
->  FILES_${PN} += "${libdir}/*.so "
-> -- 
-> 2.0.0
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
-
+------=_Part_238_383267045.1403831592532--
