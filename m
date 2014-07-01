@@ -1,38 +1,40 @@
 Return-Path: <chase.maupin@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 68B59E006DB; Tue,  1 Jul 2014 06:36:30 -0700 (PDT)
+	id 7F67DE006D5; Tue,  1 Jul 2014 06:36:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D88B4E006CD
-	for <meta-ti@yoctoproject.org>; Tue,  1 Jul 2014 06:36:14 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s61DaDGo031093
-	for <meta-ti@yoctoproject.org>; Tue, 1 Jul 2014 08:36:13 -0500
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5CED1E006C6
+	for <meta-ti@yoctoproject.org>; Tue,  1 Jul 2014 06:36:21 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s61DaKk5006825
+	for <meta-ti@yoctoproject.org>; Tue, 1 Jul 2014 08:36:20 -0500
 Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s61DaDoN011127
-	for <meta-ti@yoctoproject.org>; Tue, 1 Jul 2014 08:36:13 -0500
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s61DaK64020133
+	for <meta-ti@yoctoproject.org>; Tue, 1 Jul 2014 08:36:20 -0500
 Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
 	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 1 Jul 2014 08:36:13 -0500
+	Tue, 1 Jul 2014 08:36:20 -0500
 Received: from sdit-build04.dal.design.ti.com (dbdp20.itg.ti.com
 	[172.24.170.38])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s61DaAUf019441;	Tue, 1 Jul 2014 08:36:11 -0500
+	s61DaAUi019441;	Tue, 1 Jul 2014 08:36:19 -0500
 From: Chase Maupin <Chase.Maupin@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 1 Jul 2014 08:36:06 -0500
-Message-ID: <1404221769-7903-1-git-send-email-Chase.Maupin@ti.com>
+Date: Tue, 1 Jul 2014 08:36:09 -0500
+Message-ID: <1404221769-7903-4-git-send-email-Chase.Maupin@ti.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1404221769-7903-1-git-send-email-Chase.Maupin@ti.com>
+References: <1404221769-7903-1-git-send-email-Chase.Maupin@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/4] dra7xx: create DRA7xx include file for new SOC Family
+Subject: [PATCH 4/4] Update dra7xx-evm settings to use dra7xx SOC_FAMILY
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,28 +50,137 @@ List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 X-List-Received-Date: Tue, 01 Jul 2014 13:36:30 -0000
 Content-Type: text/plain
 
-* Create the dra7xx.inc file which inherits the omap-a15.inc file
-  and then adds the dra7xx as another valid SOC_FAMILY setting.
-* The addition of the dra7xx SOC_FAMILY is done while still keeping
-  access to the omap-a15 family.  What this means is that omap-a15
-  can apply to omap5-evm, dra7xx-evm, and am57xx-evm.  Then the
-  dra7xx family can be used to differentiate between omap5 and
-  dra7xx based devices.
+* Update to use the dra7xx SOC_FAMILY instead of the specific
+  dra7xx-evm machine type.
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- conf/machine/include/dra7xx.inc |    2 ++
- 1 file changed, 2 insertions(+)
- create mode 100644 conf/machine/include/dra7xx.inc
+ recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb   |   20 +++++++++++++++++---
+ recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb        |    2 +-
+ recipes-kernel/linux/linux-ti-staging_3.12.bb |    4 ++--
+ recipes-kernel/linux/linux-ti-staging_3.14.bb |    4 ++--
+ recipes-ti/ipc/ti-ipc.inc                     |    4 ++--
+ 5 files changed, 24 insertions(+), 10 deletions(-)
 
-diff --git a/conf/machine/include/dra7xx.inc b/conf/machine/include/dra7xx.inc
-new file mode 100644
-index 0000000..fd0ecfe
---- /dev/null
-+++ b/conf/machine/include/dra7xx.inc
-@@ -0,0 +1,2 @@
-+require conf/machine/include/omap-a15.inc
-+SOC_FAMILY_append = ":dra7xx"
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb
+index c3017fe..7f67c39 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb
+@@ -1,13 +1,27 @@
++python __anonymous() {
++    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
++    if not features:
++        return
++    if "mmip" not in features:
++        raise bb.parse.SkipPackage('ipumm-fw does not apply to systems without the "mmip" flag in MACHINE_FEATURES')
++}
++
+ DESCRIPTION = "Firmware for IPU "
+ 
+ LICENSE = "TI-TSPA"
+-LIC_FILES_CHKSUM_dra7xx-evm = "file://MMIP-${PV}-Manifest.doc;md5=64ca6f9d7e5243b8a4084eb918a543bc"
++LIC_FILES_CHKSUM_dra7xx = "file://MMIP-${PV}-Manifest.doc;md5=64ca6f9d7e5243b8a4084eb918a543bc"
+ LIC_FILES_CHKSUM_omap5-evm = "file://MMIP-${PV}-Manifest.doc;md5=39a593dd8fc2a9654c74f679ed329c45"
+ 
+ COMPATIBLE_MACHINE = "omap-a15"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/ipumm/3_00_04_02/exports/ipumm-${MACHINE}-3.00.04.02.tar.gz;protocol=http;name=${MACHINE}"
++# Need to set the PLATFORM variable since now multiple MACHINEs are sharing
++# a common named tarball
++PLATFORM = "UNKNOWN"
++PLATFORM_dra7xx = "dra7xx-evm"
++PLATFORM_omap5-evm = "omap5-evm"
++
++SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/ipumm/3_00_04_02/exports/ipumm-${PLATFORM}-3.00.04.02.tar.gz;protocol=http;name=${PLATFORM}"
+ 
+ # DRA7xx checksums
+ SRC_URI[dra7xx-evm.md5sum] = "da04c03b0fd57901e8283afa80f81379"
+@@ -19,7 +33,7 @@ SRC_URI[omap5-evm.sha256sum] = "2fdb469f19e3c9984854f5bc82444fca4d7da869f5e645da
+ 
+ S = "${WORKDIR}/ipumm-${MACHINE}-${PV}"
+ 
+-TARGET_dra7xx-evm = "dra7-ipu2-fw.xem4"
++TARGET_dra7xx = "dra7-ipu2-fw.xem4"
+ TARGET_omap5-evm = "ducati-m3-core0.xem3"
+ 
+ do_install() {
+diff --git a/recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb b/recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb
+index fb3012a..14f059b 100644
+--- a/recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb
++++ b/recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb
+@@ -5,7 +5,7 @@ DEPENDS += "virtual/kernel"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
+ 
+-COMPATIBLE_MACHINE = "dra7xx-evm"
++COMPATIBLE_MACHINE = "dra7xx"
+ 
+ PV = "1b8"
+ PR = "r1"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index 90dab23..e288a6d 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -21,7 +21,7 @@ RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
+ 
+ # Add a run-time dependency for the VPE VPDMA firmware to be installed
+ # on the target file system.
+-RDEPENDS_kernel-base_append_dra7xx-evm = " vpe-vpdma-fw"
++RDEPENDS_kernel-base_append_dra7xx = " vpe-vpdma-fw"
+ 
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+@@ -29,7 +29,7 @@ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335
+ KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb"
+ KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
+ KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
+-KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
++KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb"
+ 
+ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+ 
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 5c8022b..8c12bad 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -23,7 +23,7 @@ RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
+ 
+ # Add a run-time dependency for the VPE VPDMA firmware to be installed
+ # on the target file system.
+-RDEPENDS_kernel-base_append_dra7xx-evm = " vpe-vpdma-fw"
++RDEPENDS_kernel-base_append_dra7xx = " vpe-vpdma-fw"
+ 
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+@@ -31,7 +31,7 @@ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335
+ KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb"
+ KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
+ KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
+-KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
++KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb"
+ KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
+ KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
+ KERNEL_DEVICETREE_am37x-evm = "omap3-evm-37xx.dtb"
+diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
+index ee9feff..860f55f 100644
+--- a/recipes-ti/ipc/ti-ipc.inc
++++ b/recipes-ti/ipc/ti-ipc.inc
+@@ -12,12 +12,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ PLATFORM = "UNKNOWN"
+ PLATFORM_omap5-evm = "OMAP54XX"
+-PLATFORM_dra7xx-evm = "DRA7XX"
++PLATFORM_dra7xx = "DRA7XX"
+ PLATFORM_keystone = "TCI6638"
+ 
+ DAEMON = "UNKNOWN"
+ DAEMON_omap5-evm = "lad_omap54xx_smp"
+-DAEMON_dra7xx-evm = "lad_dra7xx"
++DAEMON_dra7xx = "lad_dra7xx"
+ DAEMON_keystone = "lad_tci6638"
+ 
+ inherit autotools pkgconfig update-rc.d
 -- 
 1.7.9.5
 
