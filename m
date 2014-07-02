@@ -1,43 +1,26 @@
-Return-Path: <denys@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E7919E0043F; Wed,  2 Jul 2014 12:57:22 -0700 (PDT)
+	id F1E06E006F6; Wed,  2 Jul 2014 13:03:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85A0CE00342
-	for <meta-ti@yoctoproject.org>; Wed,  2 Jul 2014 12:57:13 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s62JvDCB021099
-	for <meta-ti@yoctoproject.org>; Wed, 2 Jul 2014 14:57:13 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s62JvDSU018399
-	for <meta-ti@yoctoproject.org>; Wed, 2 Jul 2014 14:57:13 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 2 Jul 2014 14:57:12 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s62JvCjc008652;
-	Wed, 2 Jul 2014 14:57:12 -0500
-Date: Wed, 2 Jul 2014 15:57:12 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Tom Rini <trini@ti.com>
-Message-ID: <20140702195711.GF15788@edge>
-References: <1403806695-6302-1-git-send-email-denis@denix.org>
-	<20140626193101.GQ9006@bill-the-cat> <20140626195150.GC6700@edge>
-	<20140626201609.GR9006@bill-the-cat>
-MIME-Version: 1.0
-In-Reply-To: <20140626201609.GR9006@bill-the-cat>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v2] u-boot: switch from SPL/MLO to "ais" image for omapl138 SOCs
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B77E3E003D8
+	for <meta-ti@yoctoproject.org>; Wed,  2 Jul 2014 13:03:16 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id ACF0E52AAB; Wed,  2 Jul 2014 20:03:15 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20140702200315.ACF0E52AAB@arago-project.org>
+Date: Wed,  2 Jul 2014 20:03:15 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Maupin, Chase : dra7xx: create DRA7xx include file for new SOC Family
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,72 +33,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jul 2014 19:57:23 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 02 Jul 2014 20:03:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, Jun 26, 2014 at 04:16:09PM -0400, Tom Rini wrote:
-> On Thu, Jun 26, 2014 at 03:51:50PM -0400, Denys Dmytriyenko wrote:
-> > On Thu, Jun 26, 2014 at 03:33:20PM -0400, Tom Rini wrote:
-> > > On Thu, Jun 26, 2014 at 02:18:15PM -0400, Denys Dmytriyenko wrote:
-> > > > From: Denys Dmytriyenko <denys@ti.com>
-> > > > 
-> > > > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > > > Cc: Tom Rini <trini@ti.com>
-> > > > ---
-> > > >  conf/machine/am180x-evm.conf         | 4 +++-
-> > > >  recipes-bsp/u-boot/u-boot-ti.inc     | 4 ++--
-> > > >  recipes-bsp/u-boot/u-boot_2014.07.bb | 3 +++
-> > > >  3 files changed, 8 insertions(+), 3 deletions(-)
-> > > > 
-> > > > diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
-> > > > index 3182e8a..f83814e 100644
-> > > > --- a/conf/machine/am180x-evm.conf
-> > > > +++ b/conf/machine/am180x-evm.conf
-> > > > @@ -5,7 +5,9 @@
-> > > >  require conf/machine/include/davinci.inc
-> > > >  require conf/machine/include/omapl138.inc
-> > > >  
-> > > > -UBOOT_MACHINE = "da850evm_config"
-> > > > +UBOOT_MACHINE = "da850_am18xxevm_config"
-> > > > +UBOOT_SUFFIX = "ais"
-> > > > +
-> > > >  UBOOT_ENTRYPOINT = "0xc0008000"
-> > > >  UBOOT_LOADADDRESS = "0xc0008000"
-> > > 
-> > > Since we've got ENTRYPOINT/LOADADDRESS in here which also are omapl138
-> > > rather than am180x specific, that's OK with me.
-> > > 
-> > > > diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-> > > > index c024e96..0cb53ea 100644
-> > > > --- a/recipes-bsp/u-boot/u-boot-ti.inc
-> > > > +++ b/recipes-bsp/u-boot/u-boot-ti.inc
-> > > > @@ -1,3 +1,5 @@
-> > > > +UBOOT_SUFFIX ?= "img"
-> > > > +
-> > > >  require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
-> > > 
-> > > This isn't completely safe, is it?  The COREBASE version also has ?= for
-> > > UBOOT_SUFFIX too.  We need to either convince oe-core to use ??= or just
-> > > populate our machine.conf/soc.inc files with UBOOT_SUFFIX.
-> > 
-> > That's why I moved it before require COREBASE, as otherwise it will be 
-> > set there...
-> > 
-> > So, if machine defines own UBOOT_SUFFIX, our .inc won't overwrite it and 
-> > COREBASE version won't either. If machine doesn't define one, we set it to 
-> > "img" here. And for recipes not using our version of .inc, it will be set to 
-> > "bin" in COREBASE .inc
-> 
-> I would have sworn the reason ??= was added was that what you describe
-> isn't always safe even if it looks like it should be, in all cases.  If
-> you're sure it's fine, OK.
+Module: meta-ti
+Branch: master
+Commit: d85e008dec29d30c08e77516c62563c2bcfa4bc5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d85e008dec29d30c08e77516c62563c2bcfa4bc5
 
-Well, I think it may be unsafe when it cannot immediately evaluate the 
-variable, which is not the case here. I did some more testing and seems to 
-work. I guess long-term plan should be to populate all our machines with 
-UBOOT_SUFFIX, then.
+Author: Maupin, Chase <chase.maupin@ti.com>
+Date:   Tue Jul  1 19:36:06 2014 +0000
 
--- 
-Denys
+dra7xx: create DRA7xx include file for new SOC Family
+
+* Create the dra7xx.inc file which inherits the omap-a15.inc file
+  and then adds the dra7xx as another valid SOC_FAMILY setting.
+* The addition of the dra7xx SOC_FAMILY is done while still keeping
+  access to the omap-a15 family.  What this means is that omap-a15
+  can apply to omap5-evm, dra7xx-evm, and am57xx-evm.  Then the
+  dra7xx family can be used to differentiate between omap5 and
+  dra7xx based devices.
+
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ conf/machine/include/dra7xx.inc |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/conf/machine/include/dra7xx.inc b/conf/machine/include/dra7xx.inc
+new file mode 100644
+index 0000000..fd0ecfe
+--- /dev/null
++++ b/conf/machine/include/dra7xx.inc
+@@ -0,0 +1,2 @@
++require conf/machine/include/omap-a15.inc
++SOC_FAMILY_append = ":dra7xx"
+
 
