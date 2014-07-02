@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F1E06E006F6; Wed,  2 Jul 2014 13:03:24 -0700 (PDT)
+	id 1207BE006F3; Wed,  2 Jul 2014 13:03:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B77E3E003D8
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B63D5E00342
 	for <meta-ti@yoctoproject.org>; Wed,  2 Jul 2014 13:03:16 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id ACF0E52AAB; Wed,  2 Jul 2014 20:03:15 +0000 (UTC)
+	id 7E7F352A72; Wed,  2 Jul 2014 20:03:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140702200315.ACF0E52AAB@arago-project.org>
+Message-Id: <20140702200315.7E7F352A72@arago-project.org>
 Date: Wed,  2 Jul 2014 20:03:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Maupin, Chase : dra7xx: create DRA7xx include file for new SOC Family
+Subject: Cody P Schafer : libgles-omap3: add already-stripped to INSANE_SKIP to fix build in poky
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,38 +38,23 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: d85e008dec29d30c08e77516c62563c2bcfa4bc5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d85e008dec29d30c08e77516c62563c2bcfa4bc5
+Commit: af07567111c7a9dc6bb63f19a3d7c9363b774752
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=af07567111c7a9dc6bb63f19a3d7c9363b774752
 
-Author: Maupin, Chase <chase.maupin@ti.com>
-Date:   Tue Jul  1 19:36:06 2014 +0000
+Author: Cody P Schafer <dev@codyps.com>
+Date:   Fri Jun 27 05:48:05 2014 +0000
 
-dra7xx: create DRA7xx include file for new SOC Family
+libgles-omap3: add already-stripped to INSANE_SKIP to fix build in poky
 
-* Create the dra7xx.inc file which inherits the omap-a15.inc file
-  and then adds the dra7xx as another valid SOC_FAMILY setting.
-* The addition of the dra7xx SOC_FAMILY is done while still keeping
-  access to the omap-a15 family.  What this means is that omap-a15
-  can apply to omap5-evm, dra7xx-evm, and am57xx-evm.  Then the
-  dra7xx family can be used to differentiate between omap5 and
-  dra7xx based devices.
-
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
+Signed-off-by: Cody P Schafer <dev@codyps.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/dra7xx.inc |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ recipes-graphics/libgles/libgles-omap3-no-x.inc |   64 +++++++++---------
+ recipes-graphics/libgles/libgles-omap3-x11.inc  |   44 +++++++-------
+ recipes-graphics/libgles/libgles-omap3.inc      |   78 +++++++++++-----------
+ 3 files changed, 93 insertions(+), 93 deletions(-)
 
-diff --git a/conf/machine/include/dra7xx.inc b/conf/machine/include/dra7xx.inc
-new file mode 100644
-index 0000000..fd0ecfe
---- /dev/null
-+++ b/conf/machine/include/dra7xx.inc
-@@ -0,0 +1,2 @@
-+require conf/machine/include/omap-a15.inc
-+SOC_FAMILY_append = ":dra7xx"
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=af07567111c7a9dc6bb63f19a3d7c9363b774752
 
