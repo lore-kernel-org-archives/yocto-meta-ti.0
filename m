@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1207BE006F3; Wed,  2 Jul 2014 13:03:25 -0700 (PDT)
+	id 182D6E00721; Wed,  2 Jul 2014 13:03:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B63D5E00342
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BB183E006C4
 	for <meta-ti@yoctoproject.org>; Wed,  2 Jul 2014 13:03:16 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7E7F352A72; Wed,  2 Jul 2014 20:03:15 +0000 (UTC)
+	id 89C6152A80; Wed,  2 Jul 2014 20:03:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140702200315.7E7F352A72@arago-project.org>
+Message-Id: <20140702200315.89C6152A80@arago-project.org>
 Date: Wed,  2 Jul 2014 20:03:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Cody P Schafer : libgles-omap3: add already-stripped to INSANE_SKIP to fix build in poky
+Subject: Ash Charles : Conditionally set ${TOOLCHAIN_PATH} used by some recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,28 +33,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jul 2014 20:03:25 -0000
+X-List-Received-Date: Wed, 02 Jul 2014 20:03:27 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: af07567111c7a9dc6bb63f19a3d7c9363b774752
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=af07567111c7a9dc6bb63f19a3d7c9363b774752
+Commit: 8836c5a33bdc5832e8438e951b2989234c23cd13
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8836c5a33bdc5832e8438e951b2989234c23cd13
 
-Author: Cody P Schafer <dev@codyps.com>
-Date:   Fri Jun 27 05:48:05 2014 +0000
+Author: Ash Charles <ashcharles@gmail.com>
+Date:   Sat Jun 28 01:03:01 2014 +0000
 
-libgles-omap3: add already-stripped to INSANE_SKIP to fix build in poky
+Conditionally set ${TOOLCHAIN_PATH} used by some recipes
 
-Signed-off-by: Cody P Schafer <dev@codyps.com>
+Signed-off-by: Ash Charles <ashcharles@gmail.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-graphics/libgles/libgles-omap3-no-x.inc |   64 +++++++++---------
- recipes-graphics/libgles/libgles-omap3-x11.inc  |   44 +++++++-------
- recipes-graphics/libgles/libgles-omap3.inc      |   78 +++++++++++-----------
- 3 files changed, 93 insertions(+), 93 deletions(-)
+ recipes-ti/includes/ti-paths.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=af07567111c7a9dc6bb63f19a3d7c9363b774752
+diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
+index 511b5ae..4e6227e 100644
+--- a/recipes-ti/includes/ti-paths.inc
++++ b/recipes-ti/includes/ti-paths.inc
+@@ -1,5 +1,6 @@
+ installdir = "${datadir}/ti"
+ 
++export TOOLCHAIN_PATH ?= "${STAGING_DIR_NATIVE}${prefix_native}/bin/${TARGET_SYS}"
+ # This is where do_install will put it
+ export AUDIO_SOC_INSTALL_DIR_RECIPE  = "${installdir}/ti-audio-soc-example-tree"
+ export BIOS_INSTALL_DIR_RECIPE       = "${installdir}/ti-dspbios-tree"
+
 
