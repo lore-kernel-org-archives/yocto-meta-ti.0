@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 19166E0071E; Wed,  2 Jul 2014 13:03:27 -0700 (PDT)
+	id 19D28E0043F; Wed,  2 Jul 2014 13:03:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B8AF8E0043F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B9E2BE004FF
 	for <meta-ti@yoctoproject.org>; Wed,  2 Jul 2014 13:03:16 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5BEDE52A70; Wed,  2 Jul 2014 20:03:15 +0000 (UTC)
+	id C9D3052AB6; Wed,  2 Jul 2014 20:03:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140702200315.5BEDE52A70@arago-project.org>
+Message-Id: <20140702200315.C9D3052AB6@arago-project.org>
 Date: Wed,  2 Jul 2014 20:03:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot: switch from SPL/MLO to "ais" image for omapl138 SOCs
+Subject: Maupin, Chase : am57xx-evm: Add the AM57xx machine type
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,68 +38,68 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: b5d24149feea733a97f12c2eed2595f22982a4fe
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b5d24149feea733a97f12c2eed2595f22982a4fe
+Commit: 14ae4fa5a3ebb9ca52dec2c016ffc325bda52cc9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=14ae4fa5a3ebb9ca52dec2c016ffc325bda52cc9
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Jun 27 00:18:15 2014 +0000
+Author: Maupin, Chase <chase.maupin@ti.com>
+Date:   Tue Jul  1 19:36:07 2014 +0000
 
-u-boot: switch from SPL/MLO to "ais" image for omapl138 SOCs
+am57xx-evm: Add the AM57xx machine type
 
+* Add the AM57xx machine type which is used to differentiate
+  between the AM57xx and the DRA7xx which are derivative devices
+  with different HW platforms and SoC capabilities.
+
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Cc: Tom Rini <trini@ti.com>
 
 ---
 
- conf/machine/am180x-evm.conf         |    4 +++-
- recipes-bsp/u-boot/u-boot-ti.inc     |    4 ++--
- recipes-bsp/u-boot/u-boot_2014.07.bb |    3 +++
- 3 files changed, 8 insertions(+), 3 deletions(-)
+ conf/machine/am57xx-evm.conf |   36 ++++++++++++++++++++++++++++++++++++
+ 1 files changed, 36 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
-index 3182e8a..f83814e 100644
---- a/conf/machine/am180x-evm.conf
-+++ b/conf/machine/am180x-evm.conf
-@@ -5,7 +5,9 @@
- require conf/machine/include/davinci.inc
- require conf/machine/include/omapl138.inc
- 
--UBOOT_MACHINE = "da850evm_config"
-+UBOOT_MACHINE = "da850_am18xxevm_config"
-+UBOOT_SUFFIX = "ais"
+diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
+new file mode 100644
+index 0000000..7069b44
+--- /dev/null
++++ b/conf/machine/am57xx-evm.conf
+@@ -0,0 +1,36 @@
++#@TYPE: Machine
++#@NAME: DRA7xx EVM
++#@DESCRIPTION: Machine configuration for the TI DRA7xx EVM
 +
- UBOOT_ENTRYPOINT = "0xc0008000"
- UBOOT_LOADADDRESS = "0xc0008000"
- 
-diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
-index c024e96..0cb53ea 100644
---- a/recipes-bsp/u-boot/u-boot-ti.inc
-+++ b/recipes-bsp/u-boot/u-boot-ti.inc
-@@ -1,3 +1,5 @@
-+UBOOT_SUFFIX ?= "img"
++require conf/machine/include/dra7xx.inc
 +
- require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
- 
- FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot:"
-@@ -14,8 +16,6 @@ PKG_${PN}-dbg = "u-boot-dbg"
- 
- S = "${WORKDIR}/git"
- 
--UBOOT_SUFFIX = "img"
--
- # SPL (Second Program Loader) to be loaded over UART
- SPL_UART_BINARY ?= ""
- SPL_UART_IMAGE ?= "${SPL_UART_BINARY}-${MACHINE}-${PV}-${PR}"
-diff --git a/recipes-bsp/u-boot/u-boot_2014.07.bb b/recipes-bsp/u-boot/u-boot_2014.07.bb
-index b326aa1..9da6f7d 100644
---- a/recipes-bsp/u-boot/u-boot_2014.07.bb
-+++ b/recipes-bsp/u-boot/u-boot_2014.07.bb
-@@ -25,3 +25,6 @@ SRCREV = "76b21026ceb5a6a83fc53b0ecdf425f240318022"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
++IMAGE_FSTYPES += "ubi tar.gz"
 +
-+SPL_BINARY_omapl138 = ""
-+SPL_UART_BINARY_omapl138 = ""
++SERIAL_CONSOLE = "115200 ttyO0"
++
++UBOOT_MACHINE = "dra7xx_evm_config"
++
++# UBI information.  Note that this is board and kernel specific.  Changes
++# in your kernel port may require changes in these variables.  For more
++# details about this board please see
++# http://processors.wiki.ti.com/index.php/UBIFS_Support
++
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# From dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: logical eraseblock size:    126976 bytes
++# from ubiattach stdout:
++# UBI device number 0, total 1988 LEBs
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
++
++# do ubiattach /dev/ubi_ctrl -m 7 -O 2048
++# from dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: physical eraseblock size:   131072 bytes (128 KiB)
++# UBI: sub-page size:              512
++# UBI: VID header offset:          2048 (aligned 2048)
++UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512 -O 2048"
++
++# Currently removing the sgx machine feature because there is no SGX package
++# available for omap5
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen touchscreen"
 
 
