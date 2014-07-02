@@ -1,26 +1,46 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <trini@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B4633E00799; Wed,  2 Jul 2014 13:03:37 -0700 (PDT)
+	id 7F0A2E0043F; Wed,  2 Jul 2014 13:45:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E4AF7E0071C
-	for <meta-ti@yoctoproject.org>; Wed,  2 Jul 2014 13:03:26 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 9CCE252AB7; Wed,  2 Jul 2014 20:03:26 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20140702200326.9CCE252AB7@arago-project.org>
-Date: Wed,  2 Jul 2014 20:03:26 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Maupin, Chase : Update dra7xx-evm settings to use dra7xx SOC_FAMILY
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3EEADE00342
+	for <meta-ti@yoctoproject.org>; Wed,  2 Jul 2014 13:45:50 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s62KjnbR011062
+	for <meta-ti@yoctoproject.org>; Wed, 2 Jul 2014 15:45:49 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s62KjnLP026045
+	for <meta-ti@yoctoproject.org>; Wed, 2 Jul 2014 15:45:49 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Wed, 2 Jul 2014 15:45:49 -0500
+Received: from [172.22.141.168] (dbdp20.itg.ti.com [172.24.170.38])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s62KjkBp030314;
+	Wed, 2 Jul 2014 15:45:47 -0500
+Message-ID: <53B46F7E.5030909@ti.com>
+Date: Wed, 2 Jul 2014 16:45:50 -0400
+From: Tom Rini <trini@ti.com>
+Organization: Texas Instruments
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+MIME-Version: 1.0
+To: Denys Dmytriyenko <denys@ti.com>
+References: <1403806695-6302-1-git-send-email-denis@denix.org>
+	<20140626193101.GQ9006@bill-the-cat> <20140626195150.GC6700@edge>
+	<20140626201609.GR9006@bill-the-cat> <20140702195711.GF15788@edge>
+In-Reply-To: <20140702195711.GF15788@edge>
+X-Enigmail-Version: 1.6
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH v2] u-boot: switch from SPL/MLO to "ais" image for omapl138 SOCs
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,153 +53,75 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jul 2014 20:03:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 02 Jul 2014 20:45:57 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Module: meta-ti
-Branch: daisy
-Commit: 13ce1b64d411e9260f61a363b7c2d356c7a30ff3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=13ce1b64d411e9260f61a363b7c2d356c7a30ff3
+On 07/02/2014 03:57 PM, Denys Dmytriyenko wrote:
+> On Thu, Jun 26, 2014 at 04:16:09PM -0400, Tom Rini wrote:
+>> On Thu, Jun 26, 2014 at 03:51:50PM -0400, Denys Dmytriyenko wrote:
+>>> On Thu, Jun 26, 2014 at 03:33:20PM -0400, Tom Rini wrote:
+>>>> On Thu, Jun 26, 2014 at 02:18:15PM -0400, Denys Dmytriyenko wrote:
+>>>>> From: Denys Dmytriyenko <denys@ti.com>
+>>>>>
+>>>>> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+>>>>> Cc: Tom Rini <trini@ti.com>
+>>>>> ---
+>>>>>  conf/machine/am180x-evm.conf         | 4 +++-
+>>>>>  recipes-bsp/u-boot/u-boot-ti.inc     | 4 ++--
+>>>>>  recipes-bsp/u-boot/u-boot_2014.07.bb | 3 +++
+>>>>>  3 files changed, 8 insertions(+), 3 deletions(-)
+>>>>>
+>>>>> diff --git a/conf/machine/am180x-evm.conf b/conf/machine/am180x-evm.conf
+>>>>> index 3182e8a..f83814e 100644
+>>>>> --- a/conf/machine/am180x-evm.conf
+>>>>> +++ b/conf/machine/am180x-evm.conf
+>>>>> @@ -5,7 +5,9 @@
+>>>>>  require conf/machine/include/davinci.inc
+>>>>>  require conf/machine/include/omapl138.inc
+>>>>>  
+>>>>> -UBOOT_MACHINE = "da850evm_config"
+>>>>> +UBOOT_MACHINE = "da850_am18xxevm_config"
+>>>>> +UBOOT_SUFFIX = "ais"
+>>>>> +
+>>>>>  UBOOT_ENTRYPOINT = "0xc0008000"
+>>>>>  UBOOT_LOADADDRESS = "0xc0008000"
+>>>>
+>>>> Since we've got ENTRYPOINT/LOADADDRESS in here which also are omapl138
+>>>> rather than am180x specific, that's OK with me.
+>>>>
+>>>>> diff --git a/recipes-bsp/u-boot/u-boot-ti.inc b/recipes-bsp/u-boot/u-boot-ti.inc
+>>>>> index c024e96..0cb53ea 100644
+>>>>> --- a/recipes-bsp/u-boot/u-boot-ti.inc
+>>>>> +++ b/recipes-bsp/u-boot/u-boot-ti.inc
+>>>>> @@ -1,3 +1,5 @@
+>>>>> +UBOOT_SUFFIX ?= "img"
+>>>>> +
+>>>>>  require ${COREBASE}/meta/recipes-bsp/u-boot/u-boot.inc
+>>>>
+>>>> This isn't completely safe, is it?  The COREBASE version also has ?= for
+>>>> UBOOT_SUFFIX too.  We need to either convince oe-core to use ??= or just
+>>>> populate our machine.conf/soc.inc files with UBOOT_SUFFIX.
+>>>
+>>> That's why I moved it before require COREBASE, as otherwise it will be 
+>>> set there...
+>>>
+>>> So, if machine defines own UBOOT_SUFFIX, our .inc won't overwrite it and 
+>>> COREBASE version won't either. If machine doesn't define one, we set it to 
+>>> "img" here. And for recipes not using our version of .inc, it will be set to 
+>>> "bin" in COREBASE .inc
+>>
+>> I would have sworn the reason ??= was added was that what you describe
+>> isn't always safe even if it looks like it should be, in all cases.  If
+>> you're sure it's fine, OK.
+> 
+> Well, I think it may be unsafe when it cannot immediately evaluate the 
+> variable, which is not the case here. I did some more testing and seems to 
+> work. I guess long-term plan should be to populate all our machines with 
+> UBOOT_SUFFIX, then.
 
-Author: Maupin, Chase <chase.maupin@ti.com>
-Date:   Tue Jul  1 19:36:09 2014 +0000
+Sounds good to me, thanks!
 
-Update dra7xx-evm settings to use dra7xx SOC_FAMILY
-
-* Update to use the dra7xx SOC_FAMILY instead of the specific
-  dra7xx-evm machine type.
-
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
-Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb   |   20 +++++++++++++++++---
- recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb        |    2 +-
- recipes-kernel/linux/linux-ti-staging_3.12.bb |    4 ++--
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    4 ++--
- recipes-ti/ipc/ti-ipc.inc                     |    4 ++--
- 5 files changed, 24 insertions(+), 10 deletions(-)
-
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb
-index c3017fe..7f67c39 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb
-@@ -1,13 +1,27 @@
-+python __anonymous() {
-+    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
-+    if not features:
-+        return
-+    if "mmip" not in features:
-+        raise bb.parse.SkipPackage('ipumm-fw does not apply to systems without the "mmip" flag in MACHINE_FEATURES')
-+}
-+
- DESCRIPTION = "Firmware for IPU "
- 
- LICENSE = "TI-TSPA"
--LIC_FILES_CHKSUM_dra7xx-evm = "file://MMIP-${PV}-Manifest.doc;md5=64ca6f9d7e5243b8a4084eb918a543bc"
-+LIC_FILES_CHKSUM_dra7xx = "file://MMIP-${PV}-Manifest.doc;md5=64ca6f9d7e5243b8a4084eb918a543bc"
- LIC_FILES_CHKSUM_omap5-evm = "file://MMIP-${PV}-Manifest.doc;md5=39a593dd8fc2a9654c74f679ed329c45"
- 
- COMPATIBLE_MACHINE = "omap-a15"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/ipumm/3_00_04_02/exports/ipumm-${MACHINE}-3.00.04.02.tar.gz;protocol=http;name=${MACHINE}"
-+# Need to set the PLATFORM variable since now multiple MACHINEs are sharing
-+# a common named tarball
-+PLATFORM = "UNKNOWN"
-+PLATFORM_dra7xx = "dra7xx-evm"
-+PLATFORM_omap5-evm = "omap5-evm"
-+
-+SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/ipumm/3_00_04_02/exports/ipumm-${PLATFORM}-3.00.04.02.tar.gz;protocol=http;name=${PLATFORM}"
- 
- # DRA7xx checksums
- SRC_URI[dra7xx-evm.md5sum] = "da04c03b0fd57901e8283afa80f81379"
-@@ -19,7 +33,7 @@ SRC_URI[omap5-evm.sha256sum] = "2fdb469f19e3c9984854f5bc82444fca4d7da869f5e645da
- 
- S = "${WORKDIR}/ipumm-${MACHINE}-${PV}"
- 
--TARGET_dra7xx-evm = "dra7-ipu2-fw.xem4"
-+TARGET_dra7xx = "dra7-ipu2-fw.xem4"
- TARGET_omap5-evm = "ducati-m3-core0.xem3"
- 
- do_install() {
-diff --git a/recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb b/recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb
-index fb3012a..14f059b 100644
---- a/recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb
-+++ b/recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb
-@@ -5,7 +5,7 @@ DEPENDS += "virtual/kernel"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
- 
--COMPATIBLE_MACHINE = "dra7xx-evm"
-+COMPATIBLE_MACHINE = "dra7xx"
- 
- PV = "1b8"
- PR = "r1"
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 90dab23..e288a6d 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -21,7 +21,7 @@ RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
- 
- # Add a run-time dependency for the VPE VPDMA firmware to be installed
- # on the target file system.
--RDEPENDS_kernel-base_append_dra7xx-evm = " vpe-vpdma-fw"
-+RDEPENDS_kernel-base_append_dra7xx = " vpe-vpdma-fw"
- 
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
-@@ -29,7 +29,7 @@ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335
- KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb"
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
- KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
--KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
-+KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb"
- 
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
- 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index 5c8022b..8c12bad 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -23,7 +23,7 @@ RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
- 
- # Add a run-time dependency for the VPE VPDMA firmware to be installed
- # on the target file system.
--RDEPENDS_kernel-base_append_dra7xx-evm = " vpe-vpdma-fw"
-+RDEPENDS_kernel-base_append_dra7xx = " vpe-vpdma-fw"
- 
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
-@@ -31,7 +31,7 @@ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335
- KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb"
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
- KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
--KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
-+KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb"
- KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
- KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
- KERNEL_DEVICETREE_am37x-evm = "omap3-evm-37xx.dtb"
-diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc.inc
-index ee9feff..860f55f 100644
---- a/recipes-ti/ipc/ti-ipc.inc
-+++ b/recipes-ti/ipc/ti-ipc.inc
-@@ -12,12 +12,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
- PLATFORM = "UNKNOWN"
- PLATFORM_omap5-evm = "OMAP54XX"
--PLATFORM_dra7xx-evm = "DRA7XX"
-+PLATFORM_dra7xx = "DRA7XX"
- PLATFORM_keystone = "TCI6638"
- 
- DAEMON = "UNKNOWN"
- DAEMON_omap5-evm = "lad_omap54xx_smp"
--DAEMON_dra7xx-evm = "lad_dra7xx"
-+DAEMON_dra7xx = "lad_dra7xx"
- DAEMON_keystone = "lad_tci6638"
- 
- inherit autotools pkgconfig update-rc.d
-
+-- 
+Tom
 
