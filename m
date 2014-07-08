@@ -1,50 +1,42 @@
-Return-Path: <fabio@bertux.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ACF45E00576; Mon,  7 Jul 2014 17:06:52 -0700 (PDT)
+	id 46B57E00576; Mon,  7 Jul 2014 18:30:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
-	http://www.dnswl.org/, low *      trust
-	*      [209.85.216.171 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mail-qc0-f171.google.com (mail-qc0-f171.google.com
-	[209.85.216.171])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 11101E00566
-	for <meta-ti@yoctoproject.org>; Mon,  7 Jul 2014 17:06:40 -0700 (PDT)
-Received: by mail-qc0-f171.google.com with SMTP id w7so4680217qcr.30
-	for <meta-ti@yoctoproject.org>; Mon, 07 Jul 2014 17:06:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:content-type:content-transfer-encoding;
-	bh=JiiWDSoy1tAyyqkPJ+qBkejdkDhZYTEl6NX/oXc111k=;
-	b=Jq7shNq3YTzZhccSoM+v8cVnlUwRR+woAzHrwUjhF/SHNNcL3pdUjYKXUR9B5x22pp
-	JqIO3J2mT6wgLy2stVvGfqZp0k0jYGzV3W5dO0OenDWfcSMmB99bPlerqJwQ+v4yb5Jz
-	y/WaWjLWgJEMwm8r5YKT19NGXfLCWwY/HzHOyPbvXGnKwPLBifp+Cp+wdWdUaybWvnw4
-	euyoW2ymdj+a8YBD0IddrTAeGDzyYHFQoJ6BT5FwsA50X1tTES/QH8fiM7DaI/soo1qv
-	sV0ZVsgIufUvEuMxHfszpM8HJb3tCLn3IxQlWF/e0iq0BZPDEPEbCe31GCdu1LfiQWfF
-	xGHQ==
-X-Gm-Message-State: ALoCoQmVpy3Thr7FXMXocfU14iNb6oXci7JIj1AgKRGNoRic5TrXTzl0gBawkVjOXtL0JjX1ZW87
-X-Received: by 10.224.49.71 with SMTP id u7mr53707272qaf.58.1404777999222;
-	Mon, 07 Jul 2014 17:06:39 -0700 (PDT)
-Received: from [192.168.0.102]
-	(200-96-120-221.smace701.dsl.brasiltelecom.net.br. [200.96.120.221])
-	by mx.google.com with ESMTPSA id t3sm77288200qai.28.2014.07.07.17.06.38
-	for <meta-ti@yoctoproject.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 07 Jul 2014 17:06:38 -0700 (PDT)
-Message-ID: <53BB360C.3050001@bertux.com>
-Date: Mon, 07 Jul 2014 21:06:36 -0300
-From: Fabio Berton <fabio@bertux.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 099B8E00566
+	for <meta-ti@yoctoproject.org>; Mon,  7 Jul 2014 18:30:11 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s681UAHg001969
+	for <meta-ti@yoctoproject.org>; Mon, 7 Jul 2014 20:30:10 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s681U99t000532
+	for <meta-ti@yoctoproject.org>; Mon, 7 Jul 2014 20:30:10 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Mon, 7 Jul 2014 20:30:09 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s681U94K006166	for <meta-ti@yoctoproject.org>;
+	Mon, 7 Jul 2014 20:30:09 -0500
+Date: Mon, 7 Jul 2014 21:13:03 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <165755968.283.1404781983336.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-To: meta-ti@yoctoproject.org
-Subject: Qt5 + egl display
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-07-07_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -57,19 +49,186 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jul 2014 00:06:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 08 Jul 2014 01:30:17 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_282_946297950.1404781983335"
+
+------=_Part_282_946297950.1404781983335
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Hi all,
-I'm trying to build an image for my bbb with Qt5 and egl support. I'm 
-using meta-ti and meta-qt5 layers. I made an image and appended 
-omap3-sgx-modules and libgles-omap3 to my image install. I get this 
-modules loaded: bufferclass_ti, omaplfb, pvrsrvkm. But when I run 
-Qt5_CinematicExperience -platform eglfs, I get this message:  Could not 
-initialize egl display Aborted.
-The kernel version is 3.12.20.
-Do I need to install anything else? Or I'm making a mistake?
+<html>
+<head>
+<title>
+Status for 07/07/14
+</title>
+</head>
+<body>
 
-Thanks!
+<h2>Status for 07/07/14</h2>
 
+<h2>BUILD_ID: build-2014-07-07_21-01-39</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.06"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_282_946297950.1404781983335--
