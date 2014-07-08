@@ -1,45 +1,58 @@
-Return-Path: <denys@ti.com>
+Return-Path: <cliff.brake@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 487C2E00576; Tue,  8 Jul 2014 06:41:45 -0700 (PDT)
+	id EF314E00744; Tue,  8 Jul 2014 06:49:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, MIME_QP_LONG_LINE,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (cliff.brake[at]gmail.com)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.223.169 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D8B13E004FF
-	for <meta-ti@yoctoproject.org>; Tue,  8 Jul 2014 06:41:31 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s68DfUOB002190;
-	Tue, 8 Jul 2014 08:41:30 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s68DfUGN028226;
-	Tue, 8 Jul 2014 08:41:30 -0500
-Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
-	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
-	14.03.0174.001; Tue, 8 Jul 2014 08:41:30 -0500
-From: "Dmytriyenko, Denys" <denys@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-	"miroslav.kes@gmail.com" <miroslav.kes@gmail.com>
-Thread-Topic: [meta-ti] BeagleBoard / Beagleboard-xM build
-Thread-Index: AQHPmeh9+Y4e+ep9QU2xTenEkql9o5uUogpRgAGs2gD//+Hwaw==
-Date: Tue, 8 Jul 2014 13:41:29 +0000
-Message-ID: <B0581B5571079145BA1CD78C126DBDE7320765DF@DLEE08.ent.ti.com>
-References: <53BAA233.4030803@gmail.com>
-	<B0581B5571079145BA1CD78C126DBDE732074600@DLEE08.ent.ti.com>,
-	<53BBC7F2.50803@gmail.com>
-In-Reply-To: <53BBC7F2.50803@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+	* 0.0 MIME_QP_LONG_LINE RAW: Quoted-printable line longer than 76 chars
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
+	[209.85.223.169])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1ACF7E00746
+	for <meta-ti@yoctoproject.org>; Tue,  8 Jul 2014 06:49:10 -0700 (PDT)
+Received: by mail-ie0-f169.google.com with SMTP id rl12so5044979iec.28
+	for <meta-ti@yoctoproject.org>; Tue, 08 Jul 2014 06:49:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:mime-version:message-id:from:to:subject:content-type
+	:content-transfer-encoding;
+	bh=7pjrMbScSknHdTpUwz++L5F0F8a/UAfuJ8FALqE2EMI=;
+	b=nYVhMm704wzSoNzoIkrXOVmE910gKPJAptd8Ov6sEV0uQvyUIbdREs9QM0brMlLwK0
+	NF/p7BG/XKu58musigQOKd9aB+lU13G0p0DKJutBikl9apTO5b9qfQarB1Sj2EwlzS/i
+	Svkyp3jmaPn6W0sMOFDFsZn3Lm+79FFZRfG27Y3zJISQIUQ1xu3DARvnj6X7TtNvie0m
+	9EI8odZriMnjgH4PRyMMh4PE/pnktnqp0YHO3jPi2wu/APGnFJcdoVhQkr8QuIyOXksI
+	d5Dn+KY5Q9qV6v3JBcdItnNB9PvgBt8llkSDqsGgtPq9ane36dE1/Rc7DjuAXF4JNwLF
+	7/Hw==
+X-Received: by 10.43.104.132 with SMTP id dm4mr39615212icc.56.1404827349715;
+	Tue, 08 Jul 2014 06:49:09 -0700 (PDT)
+Received: from [127.0.0.1] (cable-pool6-cs-200.doycomm.com. [66.219.185.200])
+	by mx.google.com with ESMTPSA id y8sm5612455igg.5.2014.07.08.06.49.08
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 08 Jul 2014 06:49:08 -0700 (PDT)
+Date: Tue, 08 Jul 2014 06:49:08 -0700 (PDT)
+X-Google-Original-Date: Tue, 08 Jul 2014 13:49:07 GMT
 MIME-Version: 1.0
-Subject: Re: BeagleBoard / Beagleboard-xM build
+X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
+Message-Id: <1404827347806.fa51d2f@Nodemailer>
+From: cliff.brake@gmail.com
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
+Subject: OE Changelog since 2014-06-29 until 2014-07-06
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -52,318 +65,350 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jul 2014 13:41:45 -0000
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_B0581B5571079145BA1CD78C126DBDE7320765DFDLEE08entticom_"
-
---_000_B0581B5571079145BA1CD78C126DBDE7320765DFDLEE08entticom_
-Content-Type: text/plain; charset="Windows-1252"
+X-List-Received-Date: Tue, 08 Jul 2014 13:49:22 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Sorry, missed it was BeagleBoard and 3.2 kernel...
+Changelog since 2014-06-29 until 2014-07-06.  Projects included in this =
+report:
+
+bitbake: git://git.openembedded.org/bitbake
+openembedded-core: git://git.openembedded.org/openembedded-core
+meta-openembedded: git://git.openembedded.org/meta-openembedded
+meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
+meta-arago: git://arago-project.org/git/meta-arago.git
+meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
+meta-browser: git://github.com/OSSystems/meta-browser.git
+meta-bug: git://github.com/buglabs/meta-bug.git
+meta-chicken: git://github.com/OSSystems/meta-chicken
+meta-efikamx: git://github.com/kraj/meta-efikamx.git
+meta-ettus: http://github.com/koenkooi/meta-ettus.git
+meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
+meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
+meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
+meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
+meta-gumstix: git://github.com/gumstix/meta-gumstix.git
+meta-gumstix-community: =
+git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
+meta-handheld: git://git.openembedded.org/meta-handheld
+meta-igep: http://github.com/ebutera/meta-igep.git
+meta-intel: git://git.yoctoproject.org/meta-intel
+meta-ivi: git://git.yoctoproject.org/meta-ivi
+meta-java: git://github.com/woglinde/meta-java
+meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
+meta-micro: git://git.openembedded.org/meta-micro
+meta-mono: git://git.yoctoproject.org/meta-mono.git
+meta-netbookpro: git://github.com/tworaz/meta-netbookpro
+meta-nslu2: git://github.com/kraj/meta-nslu2
+meta-opie: git://git.openembedded.org/meta-opie
+meta-qt3: git://git.yoctoproject.org/meta-qt3
+meta-qt5: git://github.com/meta-qt5/meta-qt5.git
+meta-slugos: git://github.com/kraj/meta-slugos
+meta-systemd: git://git.yoctoproject.org/meta-systemd
+meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
+meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
+meta-ti: git://git.yoctoproject.org/meta-ti
+meta-webos: git://github.com/openwebos/meta-webos.git
+meta-xilinx: git://git.yoctoproject.org/meta-xilinx
+meta-yocto: git://git.yoctoproject.org/meta-yocto
+openembedded: git://git.openembedded.org/openembedded
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for bitbake:
+
+Richard Purdie (1):
+=20=20fetch2/svn: Add transportuser parameter
+
+Robert Yang (2):
+=20=20toaster: fix no newline at end of file
+=20=20lib: fix no newline at end of file
+
+Scott Rifenbark (1):
+=20=20templates: Added newline character to end of script.
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded-core:
+
+Chen Qi (2):
+=20=20runqemu-extract-sdk: normalize paths to improve output
+=20=20openssh: avoid checking empty passwords to mess up with PAM modules
+
+Chong Lu (1):
+=20=20scripts/contrib/verify-homepage.py: add a script to verify HOMEPAGE
+
+Corneliu Stoicescu (1):
+=20=20init-install-testfs.sh: add '--hotkey x' to 'test' menuentry
+
+Cristian Iorga (1):
+=20=20qemu: fix qemu-native pkg-config paths
+
+Hongxu Jia (1):
+=20=20libxml-parser-perl: fix do_compile failed with unrecognized option =
+'-Wl, -O1
+
+Ionut Chisanovici (2):
+=20=20oeqa/selftest/toaster.py: renamed to _toaster.py
+=20=20oeqa/selftest/_toaster.py: fix 'IndentationError' issues
+
+Lucian Musat (1):
+=20=20Added testcase decorator to use in logging. Added class decorator =
+LogResults
+
+Mark Hatle (1):
+=20=20lib/oe/package_manager.py: Fix _pkg_translate_smart_to_oe function
+
+Martin Jansa (1):
+=20=20gtk+: Add PACKAGECONFIG for directfb
+
+Matthieu Crapet (1):
+=20=20libav: add PACKAGECONFIG for theora, libvorbis, speex and openssl
+
+Ming Liu (2):
+=20=20groff: remove redundant code snippet
+=20=20groff: Fix build on Fedora 17 for 1.18.1.4
+
+Richard Purdie (5):
+=20=20adt_installer: Fix sed file not found error
+=20=20toolchain-scripts: Add handling for CANADIANEXTRAOS
+=20=20adt_installer: Fix real envrionment script issues
+=20=20build-appliance-image: Update to master head revision
+=20=20Revert "meta-yocto-bsp: oeqa/controllers: add GrubTarget"
+
+Robert Yang (1):
+=20=20meta: fix no newline at end of file
+
+Ross Burton (3):
+=20=20glib-2.0: silence QA warnings about libraries outside ${libdir}
+=20=20bitbake.conf: automatically add libexecdir/BPN/.debug to -dbg
+=20=20autotools.bbclass: remove autotools_set_crosscompiling
+
+Roxana (1):
+=20=20python3: fix builtins imports
+
+Roxana Ciobanu (2):
+=20=20gawk: fix optional dependency mpfr
+=20=20elfutils/elfutils-native: Fix patching generated files
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-openembedded:
+
+Amy Fong (1):
+=20=20Uprev memcached from upstream
+
+Roy Li (1):
+=20=20tftp-hpa: fix a build failure
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-angstrom:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-arago:
+
+Denys Dmytriyenko (1):
+=20=20tisdk-image.bbclass: update for the new rootfs/image infrastructure
+
+Franklin S. Cooper Jr (1):
+=20=20packagegroup-arago-tisdk-addons: Add valgrind
+
+Maupin, Chase (7):
+=20=20Add am57xx-evm support and use dra7xx SOC_FAMILY
+=20=20gstreamer: make accelerated recipes instead of appends
+=20=20arago-prefs: set PREFERRED_PROVIDER for gstreamer based on mmip
+=20=20packagegroup-arago-test: make omapdrmtest depend on mmip
+=20=20packagegroup-arago-gst: make mmip elements depend on mmip feature
+=20=20packagegroup-arago-tisdk-multimedia: don't inlcude ipumm fw without =
+mmip
+=20=20ocf-linux: remove ocf-linux usage since it is deprecated
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-beagleboard:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-browser:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-bug:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-chicken:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-efikamx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ettus:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm:
+
+Carlos Rafael Giani (1):
+=20=20gstreamer1.0-plugins-imx: Update to version 0.9.7
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm-extra:
+
+Christoph Settgast (3):
+=20=20u-boot-script-boundary: Update to aed947536
+=20=20linux-boundary (3.10.17): remove CONFIG_INPUT_EVBUG
+=20=20linux-boundary (3.10.17): Bump SRCREV to ca882d5a
+
+Eric Nelson (1):
+=20=20u-boot-boundary: Update to aed947536
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-ppc:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-guacamayo:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix-community:
+
+Andreas M=C3=BCller (2):
+=20=20linux-mainline: update to 3.14.7
+=20=20linux-mainline-3.14: update to 3.14.10
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-handheld:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-igep:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-intel:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ivi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-java:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-kde:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-micro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-mono:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-netbookpro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nslu2:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-opie:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt3:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt5:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-slugos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-systemd:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-raspberrypi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-smartphone:
+
+Martin Jansa (10):
+=20=20meta-hp: Update README
+=20=20meta-hp: Update README
+=20=20recipes: inherit autotools-brokensep or set B =3D ${S} for failing =
+recipes
+=20=20fbreader: Drop one .bbappend
+=20=20meta-shr-distro: preferred-shr-versions: don't use autorev
+=20=20packagegroup-shr-minimal: replace vala-terminal with terminology
+=20=20packagegroup-shr-feed: drop blacklisted xchat, abiword, omgps, =
+sylpheed
+=20=20layer.conf: Exclude some theme dependencies from siggen
+
+Simon Busch (20):
+=20=20meta-android: android-system: improve container setup
+=20=20android-tools: split out machine specific configuration
+=20=20meta-asus/meta-lg/meta-samsung: grouper/maguro/mako: update =
+android-system-i
+=20=20android-system: minor fixes
+=20=20meta-hp: creating a new layer for HP devices
+=20=20meta-hp: conf: machine: add machine configuration for HP touchpad
+=20=20meta-hp: initramfs-boot-android: add touchpad specific init script
+=20=20meta-hp: android-tools-conf: add touchpad specific gadget =
+configuration
+=20=20meta-hp: linux-hp-tenderloin: add kernel build configuration
+=20=20meta-hp: android-system-image-tenderloin: add recipe
+=20=20meta-hp: android-system-image-tenderloin: update to newer version
+=20=20meta-android: libhybris: also provide virtual/libandroid-properties
+=20=20meta-lg: mako: add providers for virtual/libandroid-providers and =
+virtual/an
+=20=20meta-android: libhybris: make recipe machine specific
+=20=20meta-android: add libhybris to SIGGEN_EXCLUDERECIPES_ABISAFE
+=20=20meta-android: phablet-headers: make recipe machine specific
+=20=20meta-lg: android-system-image-mako: update to new version 20140624-108
+=20=20meta-android: libhybris: also provide virtual/libhardware
+=20=20mako/tuna/grouper: align for new libhybris provider
+=20=20meta-android: android-system: make the container never gets killed on =
+low me
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ti:
+
+Ash Charles (1):
+=20=20Conditionally set ${TOOLCHAIN_PATH} used by some recipes
+
+Cody P Schafer (1):
+=20=20libgles-omap3: add already-stripped to INSANE_SKIP to fix build in =
+poky
+
+Denys Dmytriyenko (1):
+=20=20u-boot: switch from SPL/MLO to "ais" image for omapl138 SOCs
+
+Maupin, Chase (5):
+=20=20dra7xx: create DRA7xx include file for new SOC Family
+=20=20am57xx-evm: Add the AM57xx machine type
+=20=20dra7xx-evm: Use dra7xx include
+=20=20Update dra7xx-evm settings to use dra7xx SOC_FAMILY
+=20=20vis: inhibit package strip for DSP binaries
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-webos:
+
+Martin Jansa (3):
+=20=20webos-repositories.inc: Use http when accessing github.com
+=20=20leveldb-tl: Add branch parameter
+=20=20alsa-plugins: Add PACKAGECONFIG for samplerate
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-xilinx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+Corneliu Stoicescu (1):
+=20=20grubtarget.py: Change 'test' GRUB entry selection method
+
+Cristian Iorga (1):
+=20=20meta-yocto-bsp: oeqa/controllers: add GrubTarget
+
+Richard Purdie (2):
+=20=20yocto-bsp: Update qemu inclusion lists
+=20=20yocto-bsp: Drop GLIBC_ADDONS setting
+
+Robert Yang (1):
+=20=20scripts: fix no newline at end of file
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded:
 
 
-Sent from my Android phone using TouchDown (www.nitrodesk.com)
 
------Original Message-----
-From: Miroslav Ke=9A [miroslav.kes@gmail.com]
-Received: Tuesday, 08 Jul 2014, 6:29
-To: Dmytriyenko, Denys [denys@ti.com]; meta-ti@yoctoproject.org [meta-ti@yo=
-ctoproject.org]
-Subject: Re: [meta-ti] BeagleBoard / Beagleboard-xM build
-
-On 07/07/14 15:54, Dmytriyenko, Denys wrote:
-> Missing DTB files:
-> http://git.yoctoproject.org/cgit/cgit.cgi/meta-yocto/tree/README.hardware=
-#n190
->
->
-Denys,
-
-The hardware README note in your link is related to BeagleBone. Is the DTB =
-true also for BeagleBoard?
-I'm asking because my BeagleBoard build doesn't produce any .dtb image. Sho=
-uld it create one?
-
-Thanks
-
-Mira
-> Sent from my Android phone using TouchDown (www.nitrodesk.com<http://www.=
-nitrodesk.com>)
->
-> -----Original Message-----
-> *From:* Miroslav Ke=9A [miroslav.kes@gmail.com]
-> *Received:* Monday, 07 Jul 2014, 9:36
-> *To:* meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]
-> *Subject:* [meta-ti] BeagleBoard / Beagleboard-xM build
->
-> Hi!
->
-> I tried to build the kernel plus core-image-minimal for BeagleBoard using=
- just
->
-> BBLAYERS ?=3D " \
->   ${OEBASE}/meta-ti \
->   ${OEBASE}/openembedded-core/meta \
->   "
-> The build completed OK but the boot process hangs on both BeagleBoard and=
- Beagleboard-xM after
-> the "booting the kernel" message (see the output bellow).
->
-> I have spent 3 days googling on potential reasons. I found some people ha=
-ving similar problems but it looks like the kernel debugging options are tu=
-rned on in the kernel configuration and the ttyO2 should be OK for kernel 3=
-.2.28
->
-> I would appreciate if someone could answer these questions:
->
-> 1) Is it good idea trying to build the BeagleBoard distro using just meta=
--ti and openembedded-core (i.e. without Angstrom)?
-> 2) Is there particular combination of meta-ti and openembedded-core versi=
-ons that should be used?
-> 3) What is the relationship between meta-ti and meta-beagleboard (it look=
-s like meta-ti supports beagleboards while meta-beagleboard supports beagle=
-bone)
->
-> Any hints would be really welcome
->
-> Mira
->
-> ---------------------------------------------------------------------
->
-> Welcome to minicom 2.6
->
-> OPTIONS: I18n
-> Compiled on Nov 18 2013, 11:01:02.
-> Port /dev/ttyS0
->
-> Press CTRL-A Z for help on special keys
->
-> ...40V...=FE
-> U-Boot SPL 2011.09-01172-gfdbe8b9-dirty (Jul 02 2014 - 14:36:18)
-> Texas Instruments Revision detection unimplemented
-> OMAP SD/MMC: 0
-> reading u-boot.img
-> reading u-boot.img
->
->
-> U-Boot 2011.09-01172-gfdbe8b9-dirty (Jul 02 2014 - 14:36:18)
->
-> OMAP3530-GP ES3.0, CPU-OPP2, L3-165MHz, Max CPU Clock 600 mHz
-> OMAP3 Beagle board + LPDDR/NAND
-> I2C:   ready
-> DRAM:  256 MiB
-> WARNING: Caches not enabled
-> NAND:  256 MiB
-> MMC:   OMAP SD/MMC: 0
-> In:    serial
-> Out:   serial
-> Err:   serial
-> Beagle Rev C1/C2/C3
-> timed out in wait_for_pin: I2C_STAT=3D0
-> I2C read: I/O error
-> Unrecognized expansion board: 0
-> timed out in wait_for_pin: I2C_STAT=3D0
-> I2C read: I/O error
-> Unrecognized expansion board: 0
-> Die ID #5ac400030000000004013f8901001001
-> Net:   Net Initialization Skipped
-> No ethernet found.
-> Hit any key to stop autoboot:  0
-> OMAP3 beagleboard.org # mmc rescan
-> OMAP3 beagleboard.org # setenv bootargs console=3DttyO2,115200n8 root=3D/=
-dev/mmcblk0p2 rw rootdelay=3D1
-> OMAP3 beagleboard.org # fatload mmc 0:1 0x80000000  uImage
-> reading uImage
->
-> 4337768 bytes read
-> OMAP3 beagleboard.org # bootm 0x80000000
-> ## Booting kernel from Legacy Image at 80000000 ...
->    Image Name:   Linux-3.2.28
->    Image Type:   ARM Linux Kernel Image (uncompressed)
->    Data Size:    4337704 Bytes =3D 4.1 MiB
->    Load Address: 80008000
->    Entry Point:  80008000
->    Verifying Checksum ... OK
->    Loading Kernel Image ... OK
-> OK
->
-> Starting kernel ...
->
-> Uncompressing Linux... done, booting the kernel.
-> --
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-
-
---_000_B0581B5571079145BA1CD78C126DBDE7320765DFDLEE08entticom_
-Content-Type: text/html; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
-252">
-<meta name=3D"Generator" content=3D"Microsoft Exchange Server">
-<!-- converted from text --><style><!-- .EmailQuote { margin-left: 1pt; pad=
-ding-left: 4pt; border-left: #800000 2px solid; } --></style>
-</head>
-<body>
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11p=
-t; color:black">
-<span style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11=
-pt; color:black">Sorry, missed it was BeagleBoard and 3.2 kernel...<br>
-<br>
-<br>
-Sent from my Android phone using TouchDown (www.nitrodesk.com)<br>
-<br>
-<span style=3D"color:black">-----Original Message----- <br>
-<b>From:</b> Miroslav Ke=9A [miroslav.kes@gmail.com]<br>
-<b>Received:</b> Tuesday, 08 Jul 2014, 6:29<br>
-<b>To:</b> Dmytriyenko, Denys [denys@ti.com]; meta-ti@yoctoproject.org [met=
-a-ti@yoctoproject.org]<br>
-<b>Subject:</b> Re: [meta-ti] BeagleBoard / Beagleboard-xM build<br>
-<br>
-</span></span></div>
-<font size=3D"2"><span style=3D"font-size:10pt;">
-<div class=3D"PlainText">On 07/07/14 15:54, Dmytriyenko, Denys wrote:<br>
-&gt; Missing DTB files:<br>
-&gt; <a href=3D"http://git.yoctoproject.org/cgit/cgit.cgi/meta-yocto/tree/R=
-EADME.hardware#n190">
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-yocto/tree/README.hardware#n=
-190</a><br>
-&gt;<br>
-&gt;<br>
-Denys,<br>
-<br>
-The hardware README note in your link is related to BeagleBone. Is the DTB =
-true also for BeagleBoard?<br>
-I'm asking because my BeagleBoard build doesn't produce any .dtb image. Sho=
-uld it create one?<br>
-<br>
-Thanks<br>
-<br>
-Mira<br>
-&gt; Sent from my Android phone using TouchDown (<a href=3D"http://www.nitr=
-odesk.com">www.nitrodesk.com</a>)<br>
-&gt;<br>
-&gt; -----Original Message-----<br>
-&gt; *From:* Miroslav Ke=9A [miroslav.kes@gmail.com]<br>
-&gt; *Received:* Monday, 07 Jul 2014, 9:36<br>
-&gt; *To:* meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]<br>
-&gt; *Subject:* [meta-ti] BeagleBoard / Beagleboard-xM build<br>
-&gt;<br>
-&gt; Hi!<br>
-&gt;<br>
-&gt; I tried to build the kernel plus core-image-minimal for BeagleBoard us=
-ing just<br>
-&gt;<br>
-&gt; BBLAYERS ?=3D &quot; \<br>
-&gt;&nbsp;&nbsp; ${OEBASE}/meta-ti \<br>
-&gt;&nbsp;&nbsp; ${OEBASE}/openembedded-core/meta \<br>
-&gt;&nbsp;&nbsp; &quot;<br>
-&gt; The build completed OK but the boot process hangs on both BeagleBoard =
-and Beagleboard-xM after<br>
-&gt; the &quot;booting the kernel&quot; message (see the output bellow).<br=
->
-&gt;<br>
-&gt; I have spent 3 days googling on potential reasons. I found some people=
- having similar problems but it looks like the kernel debugging options are=
- turned on in the kernel configuration and the ttyO2 should be OK for kerne=
-l 3.2.28<br>
-&gt;<br>
-&gt; I would appreciate if someone could answer these questions:<br>
-&gt;<br>
-&gt; 1) Is it good idea trying to build the BeagleBoard distro using just m=
-eta-ti and openembedded-core (i.e. without Angstrom)?<br>
-&gt; 2) Is there particular combination of meta-ti and openembedded-core ve=
-rsions that should be used?<br>
-&gt; 3) What is the relationship between meta-ti and meta-beagleboard (it l=
-ooks like meta-ti supports beagleboards while meta-beagleboard supports bea=
-glebone)<br>
-&gt;<br>
-&gt; Any hints would be really welcome<br>
-&gt;<br>
-&gt; Mira<br>
-&gt;<br>
-&gt; ---------------------------------------------------------------------<=
-br>
-&gt;<br>
-&gt; Welcome to minicom 2.6<br>
-&gt;<br>
-&gt; OPTIONS: I18n<br>
-&gt; Compiled on Nov 18 2013, 11:01:02.<br>
-&gt; Port /dev/ttyS0<br>
-&gt;<br>
-&gt; Press CTRL-A Z for help on special keys<br>
-&gt;<br>
-&gt; ...40V...=FE<br>
-&gt; U-Boot SPL 2011.09-01172-gfdbe8b9-dirty (Jul 02 2014 - 14:36:18)<br>
-&gt; Texas Instruments Revision detection unimplemented<br>
-&gt; OMAP SD/MMC: 0<br>
-&gt; reading u-boot.img<br>
-&gt; reading u-boot.img<br>
-&gt;<br>
-&gt;<br>
-&gt; U-Boot 2011.09-01172-gfdbe8b9-dirty (Jul 02 2014 - 14:36:18)<br>
-&gt;<br>
-&gt; OMAP3530-GP ES3.0, CPU-OPP2, L3-165MHz, Max CPU Clock 600 mHz<br>
-&gt; OMAP3 Beagle board &#43; LPDDR/NAND<br>
-&gt; I2C:&nbsp;&nbsp; ready<br>
-&gt; DRAM:&nbsp; 256 MiB<br>
-&gt; WARNING: Caches not enabled<br>
-&gt; NAND:&nbsp; 256 MiB<br>
-&gt; MMC:&nbsp;&nbsp; OMAP SD/MMC: 0<br>
-&gt; In:&nbsp;&nbsp;&nbsp; serial<br>
-&gt; Out:&nbsp;&nbsp; serial<br>
-&gt; Err:&nbsp;&nbsp; serial<br>
-&gt; Beagle Rev C1/C2/C3<br>
-&gt; timed out in wait_for_pin: I2C_STAT=3D0<br>
-&gt; I2C read: I/O error<br>
-&gt; Unrecognized expansion board: 0<br>
-&gt; timed out in wait_for_pin: I2C_STAT=3D0<br>
-&gt; I2C read: I/O error<br>
-&gt; Unrecognized expansion board: 0<br>
-&gt; Die ID #5ac400030000000004013f8901001001<br>
-&gt; Net:&nbsp;&nbsp; Net Initialization Skipped<br>
-&gt; No ethernet found.<br>
-&gt; Hit any key to stop autoboot:&nbsp; 0<br>
-&gt; OMAP3 beagleboard.org # mmc rescan<br>
-&gt; OMAP3 beagleboard.org # setenv bootargs console=3DttyO2,115200n8 root=
-=3D/dev/mmcblk0p2 rw rootdelay=3D1<br>
-&gt; OMAP3 beagleboard.org # fatload mmc 0:1 0x80000000&nbsp; uImage<br>
-&gt; reading uImage<br>
-&gt;<br>
-&gt; 4337768 bytes read<br>
-&gt; OMAP3 beagleboard.org # bootm 0x80000000<br>
-&gt; ## Booting kernel from Legacy Image at 80000000 ...<br>
-&gt;&nbsp;&nbsp;&nbsp; Image Name:&nbsp;&nbsp; Linux-3.2.28<br>
-&gt;&nbsp;&nbsp;&nbsp; Image Type:&nbsp;&nbsp; ARM Linux Kernel Image (unco=
-mpressed)<br>
-&gt;&nbsp;&nbsp;&nbsp; Data Size:&nbsp;&nbsp;&nbsp; 4337704 Bytes =3D 4.1 M=
-iB<br>
-&gt;&nbsp;&nbsp;&nbsp; Load Address: 80008000<br>
-&gt;&nbsp;&nbsp;&nbsp; Entry Point:&nbsp; 80008000<br>
-&gt;&nbsp;&nbsp;&nbsp; Verifying Checksum ... OK<br>
-&gt;&nbsp;&nbsp;&nbsp; Loading Kernel Image ... OK<br>
-&gt; OK<br>
-&gt;<br>
-&gt; Starting kernel ...<br>
-&gt;<br>
-&gt; Uncompressing Linux... done, booting the kernel.<br>
-&gt; -- <br>
-&gt; _______________________________________________<br>
-&gt; meta-ti mailing list<br>
-&gt; meta-ti@yoctoproject.org<br>
-&gt; <a href=3D"https://lists.yoctoproject.org/listinfo/meta-ti">https://li=
-sts.yoctoproject.org/listinfo/meta-ti</a><br>
-<br>
-</div>
-</span></font>
-</body>
-</html>
-
---_000_B0581B5571079145BA1CD78C126DBDE7320765DFDLEE08entticom_--
