@@ -1,43 +1,43 @@
-Return-Path: <Joshua.Vanderpool@raymondcorp.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0D6CAE00736; Thu, 10 Jul 2014 13:15:30 -0700 (PDT)
+	id 333F0E006F3; Thu, 10 Jul 2014 14:15:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=BAYES_20,HTML_MESSAGE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: *  0.0 HTML_MESSAGE BODY: HTML included in message
-	* -0.0 BAYES_20 BODY: Bayes spam probability is 5 to 20%
-	*      [score: 0.0521]
-X-Greylist: delayed 2779 seconds by postgrey-1.32 at yocto-www;
-	Thu, 10 Jul 2014 13:15:27 PDT
-Received: from smtp.raymondcorp.com (smtp.raymondcorp.com [24.97.209.121])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93582E006F3
-	for <meta-ti@yoctoproject.org>; Thu, 10 Jul 2014 13:15:26 -0700 (PDT)
-Received: from usnygrcas2.raymondcorp.local (nothing.attdns.com
-	[130.1.155.195] (may be forged))
-	by smtp.raymondcorp.com (8.14.3/8.14.3) with ESMTP id s6AJT2ML020929
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <meta-ti@yoctoproject.org>; Thu, 10 Jul 2014 14:29:08 -0500
-Received: from USNYGRMBX3.raymondcorp.local ([169.254.3.227]) by usnygrcas2
-	([130.1.155.199]) with mapi id 14.03.0174.001; Thu, 10 Jul 2014 15:29:03
-	-0400
-From: Vanderpool Josh <Joshua.Vanderpool@raymondcorp.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Thread-Topic: Kernel Config Fragments?
-Thread-Index: Ac+cdTGOhruSzqR4T+iz1DxxXzpWXw==
-Date: Thu, 10 Jul 2014 19:29:03 +0000
-Message-ID: <7D1F292BE8E4CC4F93079C1A7A58D5622BAB10CA@usnygrmbx3.raymondcorp.local>
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5D08E0059F
+	for <meta-ti@yoctoproject.org>; Thu, 10 Jul 2014 14:15:02 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s6ALEs4C026102;
+	Thu, 10 Jul 2014 16:14:54 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s6ALEs91010578;
+	Thu, 10 Jul 2014 16:14:54 -0500
+Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.03.0174.001; Thu, 10 Jul 2014 16:14:53 -0500
+From: "Dmytriyenko, Denys" <denys@ti.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	"Joshua.Vanderpool@raymondcorp.com" <Joshua.Vanderpool@raymondcorp.com>
+Thread-Topic: [meta-ti] Kernel Config Fragments?
+Thread-Index: AQHPnIP+rLtZJcAW/06CqMUtPxUCuA==
+Date: Thu, 10 Jul 2014 21:14:53 +0000
+Message-ID: <B0581B5571079145BA1CD78C126DBDE732079D2F@DLEE08.ent.ti.com>
+References: <7D1F292BE8E4CC4F93079C1A7A58D5622BAB10CA@usnygrmbx3.raymondcorp.local>
+In-Reply-To: <7D1F292BE8E4CC4F93079C1A7A58D5622BAB10CA@usnygrmbx3.raymondcorp.local>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [10.154.128.241]
 MIME-Version: 1.0
-X-mailWatchMessageID: 1405020548.240446.1642.2309029904
-X-mailWatchContentScore: Score of 0 assigned to Content
-X-mailWatchUCEScore: Score of 0 assigned to UCE
-X-mailWatch: Analyzed by IntelliReach MessageScreen(tm)
-Subject: Kernel Config Fragments?
+Subject: Re: Kernel Config Fragments?
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,111 +50,123 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jul 2014 20:15:30 -0000
+X-List-Received-Date: Thu, 10 Jul 2014 21:15:11 -0000
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_7D1F292BE8E4CC4F93079C1A7A58D5622BAB10CAusnygrmbx3raymo_"
+	boundary="_000_B0581B5571079145BA1CD78C126DBDE732079D2FDLEE08entticom_"
 
---_000_7D1F292BE8E4CC4F93079C1A7A58D5622BAB10CAusnygrmbx3raymo_
+--_000_B0581B5571079145BA1CD78C126DBDE732079D2FDLEE08entticom_
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
+Yes, it does, please check the recipe for examples.
+
+Denys
+
+
+Sent from my Android phone using TouchDown (www.nitrodesk.com)
+
+-----Original Message-----
+From: Vanderpool Josh [Joshua.Vanderpool@raymondcorp.com]
+Received: Thursday, 10 Jul 2014, 16:16
+To: meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]
+Subject: [meta-ti] Kernel Config Fragments?
+
 Does the linux-ti-staging allow the use of config fragments.
 
-We would like to have a bbappend that includes the configuration fragment=
- in our upper layer.
-Currently we have to use the menuconfig which is a manual process, if the=
-re is a better automated process please advise.
+We would like to have a bbappend that includes the configuration fragment i=
+n our upper layer.
+Currently we have to use the menuconfig which is a manual process, if there=
+ is a better automated process please advise.
 
 Regards,
 -Josh
 
+Confidentiality Notice: The preceding e-mail message (including any attachm=
+ents) contains information that may be confidential, protected by applicabl=
+e legal privileges, or constitute non-public information. It is intended to=
+ be conveyed only to the designated recipient(s). If you are not an intende=
+d recipient of this message, please notify the sender by replying to this m=
+essage and then delete it from your system. Use, dissemination, distributio=
+n or reproduction of this message by unintended recipients is not authorize=
+d and may be unlawful.
 
-Confidentiality Notice: The preceding e-mail message (including any attac=
-hments) contains information that may be confidential, protected by appli=
-cable legal privileges, or constitute non-public information. It is inten=
-ded to be conveyed only to the designated recipient(s). If you are not an=
- intended recipient of this message, please notify the sender by replying=
- to this message and then delete it from your system. Use, dissemination,=
- distribution or reproduction of this message by unintended recipients is=
- not authorized and may be unlawful.
-
---_000_7D1F292BE8E4CC4F93079C1A7A58D5622BAB10CAusnygrmbx3raymo_
+--_000_B0581B5571079145BA1CD78C126DBDE732079D2FDLEE08entticom_
 Content-Type: text/html; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-mi=
-crosoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:wo=
-rd" xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D=
-"http://www.w3.org/TR/REC-html40">
+<html>
 <head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-asci=
-i">
-<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">=
-
-<style><!--
-/* Font Definitions */
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<style>
+<!--
 @font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-/* Style Definitions */
+	{font-family:Calibri}
 p.MsoNormal, li.MsoNormal, div.MsoNormal
 	{margin:0in;
 	margin-bottom:.0001pt;
 	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";}
+	font-family:"Calibri","sans-serif"}
 a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
+	{color:blue;
+	text-decoration:underline}
 a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:purple;
-	text-decoration:underline;}
+	{color:purple;
+	text-decoration:underline}
 span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri","sans-serif";
-	color:windowtext;}
-=2EMsoChpDefault
-	{mso-style-type:export-only;
-	font-family:"Calibri","sans-serif";}
+	{font-family:"Calibri","sans-serif";
+	color:windowtext}
+.MsoChpDefault
+	{font-family:"Calibri","sans-serif"}
 @page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
+	{margin:1.0in 1.0in 1.0in 1.0in}
 div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
+	{}
+-->
+</style>
 </head>
 <body lang=3D"EN-US" link=3D"blue" vlink=3D"purple">
+<span style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11=
+pt; color:black">Yes, it does, please check the recipe for examples.<br>
+<br>
+Denys<br>
+<br>
+<br>
+Sent from my Android phone using TouchDown (www.nitrodesk.com)<br>
+<br>
+<span style=3D"color:black">-----Original Message----- <br>
+<b>From:</b> Vanderpool Josh [Joshua.Vanderpool@raymondcorp.com]<br>
+<b>Received:</b> Thursday, 10 Jul 2014, 16:16<br>
+<b>To:</b> meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]<br>
+<b>Subject:</b> [meta-ti] Kernel Config Fragments?<br>
+<br>
+</span></span>
+<div>
 <div class=3D"WordSection1">
-<p class=3D"MsoNormal">Does the linux-ti-staging allow the use of config =
-fragments.<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">We would like to have a bbappend that includes the=
- configuration fragment in our upper layer.<o:p></o:p></p>
-<p class=3D"MsoNormal">Currently we have to use the menuconfig which is a=
- manual process, if there is a better automated process please advise.<o:=
-p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Regards,<o:p></o:p></p>
-<p class=3D"MsoNormal">-Josh<o:p></o:p></p>
+<p class=3D"MsoNormal">Does the linux-ti-staging allow the use of config fr=
+agments.</p>
+<p class=3D"MsoNormal">&nbsp;</p>
+<p class=3D"MsoNormal">We would like to have a bbappend that includes the c=
+onfiguration fragment in our upper layer.</p>
+<p class=3D"MsoNormal">Currently we have to use the menuconfig which is a m=
+anual process, if there is a better automated process please advise.</p>
+<p class=3D"MsoNormal">&nbsp;</p>
+<p class=3D"MsoNormal">Regards,</p>
+<p class=3D"MsoNormal">-Josh</p>
 </div>
-<p>
-Confidentiality Notice: The preceding e-mail message (including any attac=
-hments) contains information that may be confidential, protected by appli=
-cable legal privileges, or constitute non-public information. It is inten=
-ded to be conveyed only to the designated recipient(s). If you are not an=
- intended recipient of this message, please notify the sender by replying=
- to this message and then delete it from your system. Use, dissemination,=
- distribution or reproduction of this message by unintended recipients is=
- not authorized and may be unlawful.<p>
-
+<p>Confidentiality Notice: The preceding e-mail message (including any atta=
+chments) contains information that may be confidential, protected by applic=
+able legal privileges, or constitute non-public information. It is intended=
+ to be conveyed only to the designated
+ recipient(s). If you are not an intended recipient of this message, please=
+ notify the sender by replying to this message and then delete it from your=
+ system. Use, dissemination, distribution or reproduction of this message b=
+y unintended recipients is not authorized
+ and may be unlawful.</p>
+<p></p>
+</div>
 </body>
 </html>
 
---_000_7D1F292BE8E4CC4F93079C1A7A58D5622BAB10CAusnygrmbx3raymo_--
+--_000_B0581B5571079145BA1CD78C126DBDE732079D2FDLEE08entticom_--
