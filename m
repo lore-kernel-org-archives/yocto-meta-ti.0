@@ -1,46 +1,51 @@
-Return-Path: <denys@ti.com>
+Return-Path: <cliff.brake@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ECC8DE0030A; Fri, 11 Jul 2014 09:09:22 -0700 (PDT)
+	id E59B5E0030A; Fri, 11 Jul 2014 09:24:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7C34EE002AA
-	for <meta-ti@yoctoproject.org>; Fri, 11 Jul 2014 09:09:20 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s6BG8uWW028671;
-	Fri, 11 Jul 2014 11:08:56 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s6BG8uaX012388;
-	Fri, 11 Jul 2014 11:08:56 -0500
-Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
-	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
-	14.03.0174.001; Fri, 11 Jul 2014 11:08:55 -0500
-From: "Dmytriyenko, Denys" <denys@ti.com>
-To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-	"cbrake@bec-systems.com" <cbrake@bec-systems.com>, "Dmytriyenko, Denys"
-	<denys@ti.com>
-Thread-Topic: [meta-ti] [diasy] omap2plus_defconfig does not include	systemd
-	support
-Thread-Index: AQHPnR7emxSVpvN8uUajAdl4NEuaxJubCpV6
-Date: Fri, 11 Jul 2014 16:08:54 +0000
-Message-ID: <B0581B5571079145BA1CD78C126DBDE73207AE8F@DLEE08.ent.ti.com>
-References: <CAOd_LFxuEix6fEiRA8aA89OhR=tdPZTAp+NxfZAxA565Hirj_Q@mail.gmail.com>,
-	<B0581B5571079145BA1CD78C126DBDE73207ADE2@DLEE08.ent.ti.com>
-In-Reply-To: <B0581B5571079145BA1CD78C126DBDE73207ADE2@DLEE08.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.217.173 listed in list.dnswl.org]
+Received: from mail-lb0-f173.google.com (mail-lb0-f173.google.com
+	[209.85.217.173])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7BD87E002AC
+	for <meta-ti@yoctoproject.org>; Fri, 11 Jul 2014 09:24:16 -0700 (PDT)
+Received: by mail-lb0-f173.google.com with SMTP id v6so831348lbi.32
+	for <meta-ti@yoctoproject.org>; Fri, 11 Jul 2014 09:24:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=EMSwKnZZGgLTVayuDXcy1LcPn5FP1ZEGRqH9cLe3Ak0=;
+	b=PjUTGKVb6HyNQ+Ac6O9XMexjQnMb7QndgUhbUEQxIpSlBAzEw6006oYjecspFjCut3
+	dmpfMsv7mlD7qlL8F//1Pa4Q6g/RRUtMIxKJQ0TgDccxDTXZYGd/w9/IyQtQ2MgBDBNR
+	m18utbcKlQoSNvue+EenqYFOv9rTKC0rQA3R53PTXZoKfVN8VeldQgJCQ7pfiApJka5a
+	jAMTlJXRQXOYcwSmP6T364nRj2Zt/BzhzI5xaaakI3i9uC0aYvfthMi4L5lNvd8ftq0W
+	46aSsJBfHDK0G75REJ3HuFTcks5dy9SsVyppi+ZkAKPz9E9iOWZJvSD6MCOXFGSecAQ+
+	dtsg==
 MIME-Version: 1.0
-Subject: Re: [diasy] omap2plus_defconfig does not include	systemd	support
+X-Received: by 10.112.182.36 with SMTP id eb4mr2396995lbc.99.1405095855567;
+	Fri, 11 Jul 2014 09:24:15 -0700 (PDT)
+Sender: cliff.brake@gmail.com
+Received: by 10.152.171.102 with HTTP; Fri, 11 Jul 2014 09:24:15 -0700 (PDT)
+In-Reply-To: <B0581B5571079145BA1CD78C126DBDE73207AE8F@DLEE08.ent.ti.com>
+References: <CAOd_LFxuEix6fEiRA8aA89OhR=tdPZTAp+NxfZAxA565Hirj_Q@mail.gmail.com>
+	<B0581B5571079145BA1CD78C126DBDE73207ADE2@DLEE08.ent.ti.com>
+	<B0581B5571079145BA1CD78C126DBDE73207AE8F@DLEE08.ent.ti.com>
+Date: Fri, 11 Jul 2014 12:24:15 -0400
+X-Google-Sender-Auth: WoHoI4I4IMmNliYWRteK1H6NniY
+Message-ID: <CAOd_LFysd8sM+-PU54eEDSNCs=A2tr83yMoZMvpQ-CsutwJCTg@mail.gmail.com>
+From: Cliff Brake <cbrake@bec-systems.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [diasy] omap2plus_defconfig does not include systemd support
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -53,175 +58,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jul 2014 16:09:23 -0000
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_B0581B5571079145BA1CD78C126DBDE73207AE8FDLEE08entticom_"
+X-List-Received-Date: Fri, 11 Jul 2014 16:24:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
---_000_B0581B5571079145BA1CD78C126DBDE73207AE8FDLEE08entticom_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+On Fri, Jul 11, 2014 at 12:08 PM, Dmytriyenko, Denys <denys@ti.com> wrote:
+> Unless you also have meta-yocto-bsp layer (before daisy) defining
+> beagleboard machine...
 
-Unless you also have meta-yocto-bsp layer (before daisy) defining beagleboa=
-rd machine...
+or unless you have meta-gumstix-community included ...
 
-Denys
+DEBUG: LOAD /scratch/oe/oe-build-daisy/sources/meta-ti/conf/machine/beagleboard.conf
+DEBUG: CONF /scratch/oe/oe-build-daisy/sources/meta-ti/conf/machine/beagleboard.conf:5:
+including conf/machine/include/omap3.inc
+DEBUG: BB /scratch/oe/oe-build-daisy/sources/meta-gumstix-community/conf/machine/include/omap3.inc:
+handle(data, include)
+DEBUG: LOAD /scratch/oe/oe-build-daisy/sources/meta-gumstix-community/conf/machine/include/omap3.inc
 
+Supporting multiple machines in one build present some interesting
+challenges -- what are the best practices in situations like this?
 
+I guess the good news is I got to try 3.14 on the bb ...
 
-Sent from my Android phone using TouchDown (www.nitrodesk.com)
-
------Original Message-----
-From: Dmytriyenko, Denys [denys@ti.com]
-Received: Friday, 11 Jul 2014, 11:43
-To: meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]; cbrake@bec-systems=
-.com [cbrake@bec-systems.com]
-Subject: Re: [meta-ti] [diasy] omap2plus_defconfig does not include systemd=
- support
-
-> Should the meta-ti layer be defining a prefered provider for the
-beagleboard kernel?
-
-It's already defining a default provider:
-
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/conf/machine/include=
-/omap3.inc?h=3Ddaisy#n25
-
-Denys
-
-
-Sent from my Android phone using TouchDown (www.nitrodesk.com)
-
------Original Message-----
-From: Cliff Brake [cbrake@bec-systems.com]
-Received: Friday, 11 Jul 2014, 9:19
-To: meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]
-Subject: [meta-ti] [diasy] omap2plus_defconfig does not include systemd sup=
-port
-
-Hi,
-
-I'm trying to get a daisy build working on the beagleboard.  Its
-currently building the linux-ti-staging-3.14 kernel for the bb.
-However, this kernel appears to use the omap2plus_defconfig from the
-http://git.ti.com/ti-linux-kernel repo.  What is the best path to get
-omap2plus_defconfig modified to support systemd (its just a minor
-tweak for cgroups?  Ideally, we'd get omap2plus_defconfig modified in
-the upstream kernel.  Perhaps for now, we could have a config fragment
-in the recipe?
-
-NOTE: multiple providers are available for virtual/kernel
-(linux-ti-staging, linux-mainline, linux-dummy, linux)
-NOTE: consider defining a PREFERRED_PROVIDER entry to match virtual/kernel
-
-Should the meta-ti layer be defining a prefered provider for the
-beagleboard kernel?
-
-Thanks,
 Cliff
---
-_______________________________________________
-meta-ti mailing list
-meta-ti@yoctoproject.org
-https://lists.yoctoproject.org/listinfo/meta-ti
 
---_000_B0581B5571079145BA1CD78C126DBDE73207AE8FDLEE08entticom_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<style>
-<!--
-.EmailQuote
-	{margin-left:1pt;
-	padding-left:4pt;
-	border-left:#800000 2px solid}
--->
-</style>
-</head>
-<body>
-<span style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11=
-pt; color:black">Unless you also have meta-yocto-bsp layer (before daisy) d=
-efining beagleboard machine...<br>
-<br>
-Denys<br>
-<br>
-<br>
-<br>
-Sent from my Android phone using TouchDown (www.nitrodesk.com)<br>
-<br>
-<span style=3D"color:black">-----Original Message----- <br>
-<b>From:</b> Dmytriyenko, Denys [denys@ti.com]<br>
-<b>Received:</b> Friday, 11 Jul 2014, 11:43<br>
-<b>To:</b> meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]; cbrake@bec-=
-systems.com [cbrake@bec-systems.com]<br>
-<b>Subject:</b> Re: [meta-ti] [diasy] omap2plus_defconfig does not include =
-systemd support<br>
-<br>
-</span></span>
-<div>
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11p=
-t; color:black">
-<span style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11=
-pt; color:black">&gt; Should the meta-ti layer be defining a prefered provi=
-der for the<br>
-beagleboard kernel?<br>
-<br>
-It's already defining a default provider:<br>
-<br>
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/conf/machine/include=
-/omap3.inc?h=3Ddaisy#n25<br>
-<br>
-Denys<br>
-<br>
-<br>
-Sent from my Android phone using TouchDown (www.nitrodesk.com)<br>
-<br>
-<span style=3D"color:black">-----Original Message----- <br>
-<b>From:</b> Cliff Brake [cbrake@bec-systems.com]<br>
-<b>Received:</b> Friday, 11 Jul 2014, 9:19<br>
-<b>To:</b> meta-ti@yoctoproject.org [meta-ti@yoctoproject.org]<br>
-<b>Subject:</b> [meta-ti] [diasy] omap2plus_defconfig does not include syst=
-emd support<br>
-<br>
-</span></span></div>
-<font size=3D"2"><span style=3D"font-size:10pt">
-<div class=3D"PlainText">Hi,<br>
-<br>
-I'm trying to get a daisy build working on the beagleboard.&nbsp; Its<br>
-currently building the linux-ti-staging-3.14 kernel for the bb.<br>
-However, this kernel appears to use the omap2plus_defconfig from the<br>
-<a href=3D"http://git.ti.com/ti-linux-kernel">http://git.ti.com/ti-linux-ke=
-rnel</a> repo.&nbsp; What is the best path to get<br>
-omap2plus_defconfig modified to support systemd (its just a minor<br>
-tweak for cgroups?&nbsp; Ideally, we'd get omap2plus_defconfig modified in<=
-br>
-the upstream kernel.&nbsp; Perhaps for now, we could have a config fragment=
-<br>
-in the recipe?<br>
-<br>
-NOTE: multiple providers are available for virtual/kernel<br>
-(linux-ti-staging, linux-mainline, linux-dummy, linux)<br>
-NOTE: consider defining a PREFERRED_PROVIDER entry to match virtual/kernel<=
-br>
-<br>
-Should the meta-ti layer be defining a prefered provider for the<br>
-beagleboard kernel?<br>
-<br>
-Thanks,<br>
-Cliff<br>
--- <br>
-_______________________________________________<br>
-meta-ti mailing list<br>
-meta-ti@yoctoproject.org<br>
-<a href=3D"https://lists.yoctoproject.org/listinfo/meta-ti">https://lists.y=
-octoproject.org/listinfo/meta-ti</a><br>
-</div>
-</span></font></div>
-</body>
-</html>
-
---_000_B0581B5571079145BA1CD78C126DBDE73207AE8FDLEE08entticom_--
