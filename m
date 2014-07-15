@@ -1,50 +1,40 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 35C1DE00547; Tue, 15 Jul 2014 11:35:13 -0700 (PDT)
+	id F1A8DE006C4; Tue, 15 Jul 2014 11:41:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (raj.khem[at]gmail.com)
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.223.182 listed in list.dnswl.org]
-Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
-	[209.85.223.182])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 08553E004FF
-	for <meta-ti@yoctoproject.org>; Tue, 15 Jul 2014 11:35:01 -0700 (PDT)
-Received: by mail-ie0-f182.google.com with SMTP id y20so4917104ier.27
-	for <meta-ti@yoctoproject.org>; Tue, 15 Jul 2014 11:35:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=azTGjbBjzWAJkkOOF7JsbqJpwBv1tlv59BVqakuPtB0=;
-	b=b9SpoQkhnA3hY62FZrSxJT7UA9bBY3BSndro4T5FPNbVJI994Y28H2/l9y9TK5co0d
-	PcSKJyJzt1qflO1U8OZndlMQMwoxGMTZMhL1QIT9L6pJ0taCAqBVUO0FNMAN2zc4PjeF
-	KiDsJ9fweB14ncGA1/EuNqONa8cheeWj2FmRtZ43p5GBmNSZM/a190LVzrc1YSpWAjpb
-	4TVsDraoUmcNIjy9kcKh8n6PEBBYMMYI97fnzCfzVKrFyVvAAimaa/VmMvotn0s2HjZd
-	1h218QlPs55KFmKaD0PDljeBAcHzHmTn8pf4f7SDQ1J3iwF7CuL0JQ0qQyYYod7v8LSK
-	hCzg==
-X-Received: by 10.50.43.134 with SMTP id w6mr8859772igl.17.1405449301099; Tue,
-	15 Jul 2014 11:35:01 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.50.78.105 with HTTP; Tue, 15 Jul 2014 11:34:31 -0700 (PDT)
-In-Reply-To: <53C3F353.2020001@gmail.com>
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8FFEDE004FF
+	for <meta-ti@yoctoproject.org>; Tue, 15 Jul 2014 11:41:24 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s6FIfNj0008462;
+	Tue, 15 Jul 2014 13:41:23 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s6FIfNhS012641;
+	Tue, 15 Jul 2014 13:41:23 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 15 Jul 2014 13:41:23 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s6FIfNPn013106;
+	Tue, 15 Jul 2014 13:41:23 -0500
+Date: Tue, 15 Jul 2014 14:41:22 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20140715184122.GH15788@edge>
 References: <53C3F353.2020001@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 15 Jul 2014 11:34:31 -0700
-Message-ID: <CAMKF1sqn0wYeNHps-0Ss0zotP3cMp-u2iVC1e49Cc8o3HO4OcA@mail.gmail.com>
-To: =?UTF-8?Q?Miroslav_Ke=C5=A1?= <miroslav.kes@gmail.com>
+	<CAMKF1sqn0wYeNHps-0Ss0zotP3cMp-u2iVC1e49Cc8o3HO4OcA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1sqn0wYeNHps-0Ss0zotP3cMp-u2iVC1e49Cc8o3HO4OcA@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
 Subject: Re: [daisy] missing network adapter options in omap2plus_defconfig
 X-BeenThere: meta-ti@yoctoproject.org
@@ -59,17 +49,22 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 18:35:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 15 Jul 2014 18:41:35 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Mon, Jul 14, 2014 at 8:12 AM, Miroslav Ke=C5=A1 <miroslav.kes@gmail.com>=
- wrote:
->
-> Neverthelles, the kernel config pulled by meta-ti/recipes-kernel/linux/li=
-nux-mainline/defconfig refers the omap2plus_defconfig which doesn't set the
-> CONFIG_USB_EHCI_HCD option.
->
+On Tue, Jul 15, 2014 at 11:34:31AM -0700, Khem Raj wrote:
+> On Mon, Jul 14, 2014 at 8:12 AM, Miroslav Keš <miroslav.kes@gmail.com> wrote:
+> >
+> > Neverthelles, the kernel config pulled by 
+> > meta-ti/recipes-kernel/linux/linux-mainline/defconfig refers the 
+> > omap2plus_defconfig which doesn't set the CONFIG_USB_EHCI_HCD option.
+> 
+> inform or send a patch to meta-ti
 
-inform or send a patch to meta-ti
+This is meta-ti mailing list already...
+
+-- 
+Denys
 
