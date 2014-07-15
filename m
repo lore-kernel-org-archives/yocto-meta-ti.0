@@ -1,53 +1,52 @@
-Return-Path: <cliff.brake@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C4B1FE006ED; Tue, 15 Jul 2014 08:44:23 -0700 (PDT)
+	id 35C1DE00547; Tue, 15 Jul 2014 11:35:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,RCVD_IN_DNSWL_NONE autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [209.85.192.54 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (raj.khem[at]gmail.com)
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-qg0-f54.google.com (mail-qg0-f54.google.com
-	[209.85.192.54])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 97204E00543
-	for <meta-ti@yoctoproject.org>; Tue, 15 Jul 2014 08:44:19 -0700 (PDT)
-Received: by mail-qg0-f54.google.com with SMTP id z60so3519994qgd.13
-	for <meta-ti@yoctoproject.org>; Tue, 15 Jul 2014 08:44:19 -0700 (PDT)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.223.182 listed in list.dnswl.org]
+Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
+	[209.85.223.182])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 08553E004FF
+	for <meta-ti@yoctoproject.org>; Tue, 15 Jul 2014 11:35:01 -0700 (PDT)
+Received: by mail-ie0-f182.google.com with SMTP id y20so4917104ier.27
+	for <meta-ti@yoctoproject.org>; Tue, 15 Jul 2014 11:35:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=428lp8Y28V4hh9RBcuUHChUp3L3khw3Tsmip2Vgwt4o=;
-	b=ArwyVp2wIjBftHTmUL4iYcuvpCZvrcp9VdqIOu4oItPz8eu3MP1c8ymgRUblS0jVNo
-	SDQGvliiKeqDGg8x4tqaUQHZyJlC7lTqovrZ+j16fp5UlDvtOG4fYaOpT7nS7iarHBRe
-	XRLsQsYnYKBZw4YRqftIV9nYTB5K6gjZdJGTYYSJAkTiZP76r2VqB0dJlBzX3rdg6dhp
-	bN75fAS9uyazBtJ7FGwyC9GpUbPU7nVK1zpcHRmjkbs/Cp6MA37qwWL5N0aqE8Ur6UvT
-	7Tjej9mJ7sFJmC1jGNS65XmVEXVEK6mEkl1FrZsACyYFZzmWrgWMELXdtD5/y5uwGuQq
-	VUAw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=azTGjbBjzWAJkkOOF7JsbqJpwBv1tlv59BVqakuPtB0=;
+	b=b9SpoQkhnA3hY62FZrSxJT7UA9bBY3BSndro4T5FPNbVJI994Y28H2/l9y9TK5co0d
+	PcSKJyJzt1qflO1U8OZndlMQMwoxGMTZMhL1QIT9L6pJ0taCAqBVUO0FNMAN2zc4PjeF
+	KiDsJ9fweB14ncGA1/EuNqONa8cheeWj2FmRtZ43p5GBmNSZM/a190LVzrc1YSpWAjpb
+	4TVsDraoUmcNIjy9kcKh8n6PEBBYMMYI97fnzCfzVKrFyVvAAimaa/VmMvotn0s2HjZd
+	1h218QlPs55KFmKaD0PDljeBAcHzHmTn8pf4f7SDQ1J3iwF7CuL0JQ0qQyYYod7v8LSK
+	hCzg==
+X-Received: by 10.50.43.134 with SMTP id w6mr8859772igl.17.1405449301099; Tue,
+	15 Jul 2014 11:35:01 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.224.71.198 with SMTP id i6mr34138113qaj.76.1405439059136;
-	Tue, 15 Jul 2014 08:44:19 -0700 (PDT)
-Sender: cliff.brake@gmail.com
-Received: by 10.140.17.19 with HTTP; Tue, 15 Jul 2014 08:44:19 -0700 (PDT)
-In-Reply-To: <20140714202648.GX15788@edge>
-References: <CAOd_LFxuEix6fEiRA8aA89OhR=tdPZTAp+NxfZAxA565Hirj_Q@mail.gmail.com>
-	<B0581B5571079145BA1CD78C126DBDE73207ADE2@DLEE08.ent.ti.com>
-	<B0581B5571079145BA1CD78C126DBDE73207AE8F@DLEE08.ent.ti.com>
-	<CAOd_LFysd8sM+-PU54eEDSNCs=A2tr83yMoZMvpQ-CsutwJCTg@mail.gmail.com>
-	<20140714202648.GX15788@edge>
-Date: Tue, 15 Jul 2014 11:44:19 -0400
-X-Google-Sender-Auth: BBAWvbih724ibmqFAQa33uBUMVE
-Message-ID: <CAOd_LFx5A933+DvXsQgs9n=wgjksJj5oRspgGufVy-7wGd+AYw@mail.gmail.com>
-From: Cliff Brake <cbrake@bec-systems.com>
-To: Denys Dmytriyenko <denys@ti.com>
+Received: by 10.50.78.105 with HTTP; Tue, 15 Jul 2014 11:34:31 -0700 (PDT)
+In-Reply-To: <53C3F353.2020001@gmail.com>
+References: <53C3F353.2020001@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 15 Jul 2014 11:34:31 -0700
+Message-ID: <CAMKF1sqn0wYeNHps-0Ss0zotP3cMp-u2iVC1e49Cc8o3HO4OcA@mail.gmail.com>
+To: =?UTF-8?Q?Miroslav_Ke=C5=A1?= <miroslav.kes@gmail.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [diasy] omap2plus_defconfig does not include systemd support
+Subject: Re: [daisy] missing network adapter options in omap2plus_defconfig
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -60,23 +59,17 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 15:44:23 -0000
+X-List-Received-Date: Tue, 15 Jul 2014 18:35:13 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 14, 2014 at 4:26 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-> On Fri, Jul 11, 2014 at 12:24:15PM -0400, Cliff Brake wrote:
+On Mon, Jul 14, 2014 at 8:12 AM, Miroslav Ke=C5=A1 <miroslav.kes@gmail.com>=
+ wrote:
 >
-> That is interesting indeed. If they felt the need to overwrite the entire
-> include file for the SOC, then they should care to keep it updated or set all
-> necessary defaults. Otherwise they should have used a more unique name, like
-> omap3-gumstix.inc and made necessary customizations in there, keeping the
-> original upstream omap3.inc intact and using or not using it from their
-> machine configs accordingly. For example, I've dealt with u-boot.inc in a
-> similar fashion in meta-ti:
-> http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-bsp/u-boot/u-boot-ti.inc
+> Neverthelles, the kernel config pulled by meta-ti/recipes-kernel/linux/li=
+nux-mainline/defconfig refers the omap2plus_defconfig which doesn't set the
+> CONFIG_USB_EHCI_HCD option.
+>
 
-Thanks for the ideas, I'll see if we can get meta-gumstix-community modified.
-
-Thanks,
-Clff
+inform or send a patch to meta-ti
 
