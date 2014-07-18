@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D67B6E00777; Wed, 16 Jul 2014 20:21:48 -0700 (PDT)
+	id BC499E00736; Thu, 17 Jul 2014 19:59:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,31 +12,31 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
 	high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4C237E006ED
-	for <meta-ti@yoctoproject.org>; Wed, 16 Jul 2014 20:21:38 -0700 (PDT)
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64EFBE006C4
+	for <meta-ti@yoctoproject.org>; Thu, 17 Jul 2014 19:59:10 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s6H3LYKn023615
-	for <meta-ti@yoctoproject.org>; Wed, 16 Jul 2014 22:21:34 -0500
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s6I2x8wj032422
+	for <meta-ti@yoctoproject.org>; Thu, 17 Jul 2014 21:59:08 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s6H3LYAc012068
-	for <meta-ti@yoctoproject.org>; Wed, 16 Jul 2014 22:21:34 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s6I2x8pG005423
+	for <meta-ti@yoctoproject.org>; Thu, 17 Jul 2014 21:59:08 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 16 Jul 2014 22:21:34 -0500
+	Thu, 17 Jul 2014 21:59:08 -0500
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s6H3LY9w016760	for <meta-ti@yoctoproject.org>; Wed, 16 Jul 2014 22:21:34
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s6I2x7dY026317	for <meta-ti@yoctoproject.org>; Thu, 17 Jul 2014 21:59:07
 	-0500
-Date: Wed, 16 Jul 2014 23:04:13 -0400
+Date: Thu, 17 Jul 2014 22:41:45 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1844060949.321.1405566253538.JavaMail.jenkins@puget>
+Message-ID: <290583355.325.1405651305400.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-07-16_21-00-30
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-07-17_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,25 +49,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jul 2014 03:21:48 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_320_1819855189.1405566253529"
+X-List-Received-Date: Fri, 18 Jul 2014 02:59:15 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_324_66331564.1405651305399"
 
-------=_Part_320_1819855189.1405566253529
+------=_Part_324_66331564.1405651305399
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 07/16/14
+Status for 07/17/14
 </title>
 </head>
 <body>
 
-<h2>Status for 07/16/14</h2>
+<h2>Status for 07/17/14</h2>
 
-<h2>BUILD_ID: build-2014-07-16_21-01-41</h2>
+<h2>BUILD_ID: build-2014-07-17_21-01-41</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -158,7 +157,7 @@ Status for 07/16/14
     </tr>
     <tr>
         <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-build-result" bgcolor=red>FAILED</td>
         <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
     </tr>
     <tr>
@@ -231,4 +230,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_320_1819855189.1405566253529--
+------=_Part_324_66331564.1405651305399--
