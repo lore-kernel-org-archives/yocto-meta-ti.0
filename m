@@ -1,50 +1,28 @@
-Return-Path: <rpjday@crashcourse.ca>
+Return-Path: <maciej.borzecki@open-rnd.pl>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7250BE006EF; Fri, 18 Jul 2014 04:50:21 -0700 (PDT)
+	id A2D0EE0043F; Fri, 18 Jul 2014 06:53:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [208.80.206.84 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 211 seconds by postgrey-1.32 at yocto-www;
-	Fri, 18 Jul 2014 04:50:18 PDT
-Received: from smtp684.redcondor.net (smtp684.redcondor.net [208.80.206.84])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B335E0056A
-	for <meta-ti@yoctoproject.org>; Fri, 18 Jul 2014 04:50:18 -0700 (PDT)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp684.redcondor.net ({700db0a8-6fb7-4c8b-9b2a-6812225182d8})
-	via TCP (outbound) with ESMTPS id 20140718114645729
-	for <meta-ti@yoctoproject.org>; Fri, 18 Jul 2014 11:46:45 +0000
-X-RC-FROM: <rpjday@crashcourse.ca>
-X-RC-RCPT: <meta-ti@yoctoproject.org>
-Received: from [99.240.204.5] (port=51335 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1X86cZ-0006OG-I8
-	for meta-ti@yoctoproject.org; Fri, 18 Jul 2014 07:46:39 -0400
-Date: Fri, 18 Jul 2014 07:46:36 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: meta-ti mailing list <meta-ti@yoctoproject.org>
-Message-ID: <alpine.LFD.2.11.1407180737270.9890@localhost>
-User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - yoctoproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Subject: curious about libdrm-2.4.41 recipe from meta-ti layer
+X-Greylist: delayed 362 seconds by postgrey-1.32 at yocto-www;
+	Fri, 18 Jul 2014 06:52:52 PDT
+Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 88C6CE00786
+	for <meta-ti@yoctoproject.org>; Fri, 18 Jul 2014 06:52:52 -0700 (PDT)
+Received: from localhost.localdomain (unknown [46.170.72.194])
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id 21E352B01983;
+	Fri, 18 Jul 2014 15:46:48 +0200 (CEST)
+From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+To: meta-ti@yoctoproject.org
+Date: Fri, 18 Jul 2014 15:46:35 +0200
+Message-Id: <1405691195-32751-1-git-send-email-maciej.borzecki@open-rnd.pl>
+X-Mailer: git-send-email 1.9.0
+Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
+Subject: [PATCH] wic: wks and source plugin for creating SD card images
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -57,48 +35,156 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2014 11:50:21 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Fri, 18 Jul 2014 13:53:07 -0000
 
+Commit 2b524321a25c35c5f987b8331e41b49d3b2e2d2b removed bbclass for
+building SD card images in favor of using wic. This commit adds a mic
+source plugin that prepares a useable boot partition as part of wic's
+image creation process. The plugin defines a new source type -
+beaglebonebootimg, similarly to the existing bootimg-{efi,pcbios} in
+current poky tree.
 
-  i was perusing a number of yocto layers looking for cool examples to
-use in an upcoming class and ran across this oddity in the meta-ti
-layer:
+An example *.wks for setting up the partitions is provided as well.
+Usage:
 
-recipes-graphics/drm/libdrm_2.4.41.bb:
-  FILESEXTRAPATHS_append := ":${COREBASE}/meta/recipes-graphics/drm/libdrm"
+  wic create beaglebonesdimage -e core-image-minimal
 
-  in all of the layers i've looked at, that is the only example of
-*appending* to FILESEXTRAPATHS i've ever seen, so i thought i'd look
-closer to see what was going on.
+Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+Signed-off-by: Maciek Borzecki <maciek.borzecki@gmail.com>
+---
+ scripts/lib/image/canned-wks/beaglebonesdimage.wks |   5 +
+ .../lib/mic/plugins/source/beaglebonebootimg.py    | 109 +++++++++++++++++++++
+ 2 files changed, 114 insertions(+)
+ create mode 100644 scripts/lib/image/canned-wks/beaglebonesdimage.wks
+ create mode 100644 scripts/lib/mic/plugins/source/beaglebonebootimg.py
 
-  even though oe-core defines a libdrm recipe file, the meta-ti layer
-doesn't use a bbappend for its version. rather, it explicitly adds the
-libdrm/ directory from oe-core using a reference to ${COREBASE}, then
-adds its own files. that's valid, i guess, it just looks weird and is
-the only time i've ever seen that.
-
-  i'm also puzzled that the meta-ti recipe sets:
-
-DEFAULT_PREFERENCE = "-1"
-
-what's that for?  given that the oe-core layer already defines a
-recipe for libdrm that has a higher version number, why would the
-above line be necessary?
-
-  just trying to understand the rationale behind this unusual
-construction.
-
-rday
-
+diff --git a/scripts/lib/image/canned-wks/beaglebonesdimage.wks b/scripts/lib/image/canned-wks/beaglebonesdimage.wks
+new file mode 100644
+index 0000000..efd302d
+--- /dev/null
++++ b/scripts/lib/image/canned-wks/beaglebonesdimage.wks
+@@ -0,0 +1,5 @@
++# short-description: Create SD card image for BeagleBone
++# long-description: Creates a partitioned SD card image for use with BeagleBone
++
++part /boot --source beaglebonebootimg --ondisk mmcblk0 --fstype=vfat --label boot --active --align 1024 --size 10
++part / --source rootfs --ondisk mmcblk0 --fstype=ext3 --label root --align 1024
+diff --git a/scripts/lib/mic/plugins/source/beaglebonebootimg.py b/scripts/lib/mic/plugins/source/beaglebonebootimg.py
+new file mode 100644
+index 0000000..969632b
+--- /dev/null
++++ b/scripts/lib/mic/plugins/source/beaglebonebootimg.py
+@@ -0,0 +1,109 @@
++# ex:ts=4:sw=4:sts=4:et
++# -*- tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
++#
++# This program is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License version 2 as
++# published by the Free Software Foundation.
++#
++# This program is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
++#
++# You should have received a copy of the GNU General Public License along
++# with this program; if not, write to the Free Software Foundation, Inc.,
++# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
++#
++# DESCRIPTION
++# This implements the 'beaglebonebootimg' source plugin class for 'wic'
++#
++# AUTHORS
++# Maciej Borzecki <maciej.borzecki (at] open-rnd.pl>
++#
++
++import os
++import shutil
++import re
++import tempfile
++
++from mic import kickstart, chroot, msger
++from mic.utils import misc, fs_related, errors, runner, cmdln
++from mic.conf import configmgr
++from mic.plugin import pluginmgr
++from mic.utils.partitionedfs import PartitionedMount
++import mic.imager.direct as direct
++from mic.pluginbase import SourcePlugin
++from mic.utils.oe.misc import *
++from mic.imager.direct import DirectImageCreator
++
++class BootimgPcbiosPlugin(SourcePlugin):
++    name = 'beaglebonebootimg'
++
++    @classmethod
++    def do_install_disk(self, disk, disk_name, cr, workdir, oe_builddir,
++                        bootimg_dir, kernel_dir, native_sysroot):
++        """
++        Called after all partitions have been prepared and assembled into a
++        disk image. Do nothing.
++        """
++        pass
++
++    @classmethod
++    def do_configure_partition(self, part, cr, cr_workdir, oe_builddir,
++                               bootimg_dir, kernel_dir, native_sysroot):
++        """
++        Called before do_prepare_partition(). Possibly prepare
++        configuration files of some sort.
++
++        """
++        pass
++
++    @classmethod
++    def do_prepare_partition(self, part, cr, cr_workdir, oe_builddir, bootimg_dir,
++                             kernel_dir, rootfs_dir, native_sysroot):
++        """
++        Called to do the actual content population for a partition i.e. it
++        'prepares' the partition to be incorporated into the image.
++        In this case, does the following:
++        - sets up a vfat partition
++        - copies u-boot
++        - copies MLO
++        """
++        hdddir = "%s/boot" % cr_workdir
++        rm_cmd = "rm -rf %s" % cr_workdir
++        exec_cmd(rm_cmd)
++
++        install_cmd = "install -d %s" % hdddir
++        tmp = exec_cmd(install_cmd)
++
++        img_deploy_dir = get_bitbake_var("DEPLOY_DIR_IMAGE")
++
++        mlo_img = "MLO"
++        mlo_src_path = os.path.join(img_deploy_dir, mlo_img)
++
++        uboot_img = "u-boot.img"
++        uboot_src_path = os.path.join(img_deploy_dir, uboot_img)
++
++        for entry in [(mlo_src_path, "MLO"), (uboot_src_path, "u-boot.img")]:
++            file_src, file_dst = entry
++            print '-- install %s as %s' % (file_src, file_dst)
++            install_cmd = "install -m 0644 %s %s" \
++                          % (file_src, os.path.join(hdddir, file_dst))
++            tmp = exec_cmd(install_cmd)
++
++        if part.get_size() == 0:
++            msger.error('Boot partition may not be 0 in size')
++
++        du_cmd = "du -bks %s" % hdddir
++        rc, out = exec_cmd(du_cmd)
++        blocks = int(out.split()[0])
++
++        extra_blocks = part.get_extra_block_count(blocks)
++        if extra_blocks == 0:
++            msger.error('Not enough space in boot parition')
++
++        part.prepare_empty_partition(cr_workdir, oe_builddir, native_sysroot)
++
++        mcopy_cmd = "mcopy -i %s -s %s/* ::/" % (part.source_file, hdddir)
++        exec_native_cmd(mcopy_cmd, native_sysroot)
++
 -- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+1.9.0
 
 
