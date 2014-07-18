@@ -1,34 +1,43 @@
-Return-Path: <denis@denix.org>
+Return-Path: <chase.maupin@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 05788E003FA; Fri, 18 Jul 2014 08:27:07 -0700 (PDT)
+	id 11510E003FA; Fri, 18 Jul 2014 08:31:14 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.21 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D08C4E00342
-	for <meta-ti@yoctoproject.org>; Fri, 18 Jul 2014 08:27:02 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173021.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N8W00I3NYWNMJJ0@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 18 Jul 2014 10:26:48 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 7865F2008D; Fri,
-	18 Jul 2014 11:26:47 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Fri, 18 Jul 2014 11:26:46 -0400
-Message-id: <1405697206-28358-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.0.0
-Subject: [PATCH] linux-ti-staging: update to the latest source with new config fragments
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CBF2CE00342
+	for <meta-ti@yoctoproject.org>; Fri, 18 Jul 2014 08:31:08 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s6IFUwl0001768;
+	Fri, 18 Jul 2014 10:30:58 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s6IFUwSw003530;
+	Fri, 18 Jul 2014 10:30:58 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
+	14.03.0174.001; Fri, 18 Jul 2014 10:30:58 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "Robert P. J. Day" <rpjday@crashcourse.ca>, meta-ti mailing list
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] curious about libdrm-2.4.41 recipe from meta-ti layer
+Thread-Index: AQHPon6INdUG9Xypa0CAJwNGyFpdiZul80FA
+Date: Fri, 18 Jul 2014 15:30:57 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015D15411B@DLEE11.ent.ti.com>
+References: <alpine.LFD.2.11.1407180737270.9890@localhost>
+In-Reply-To: <alpine.LFD.2.11.1407180737270.9890@localhost>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
+MIME-Version: 1.0
+Subject: Re: curious about libdrm-2.4.41 recipe from meta-ti layer
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,103 +50,95 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2014 15:27:07 -0000
+X-List-Received-Date: Fri, 18 Jul 2014 15:31:14 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-From: Denys Dmytriyenko <denys@ti.com>
+>-----Original Message-----
+>From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+>bounces@yoctoproject.org] On Behalf Of Robert P. J. Day
+>Sent: Friday, July 18, 2014 6:47 AM
+>To: meta-ti mailing list
+>Subject: [meta-ti] curious about libdrm-2.4.41 recipe from meta-ti
+>layer
+>
+>
+>  i was perusing a number of yocto layers looking for cool
+>examples to
+>use in an upcoming class and ran across this oddity in the meta-ti
+>layer:
+>
+>recipes-graphics/drm/libdrm_2.4.41.bb:
+>  FILESEXTRAPATHS_append :=3D ":${COREBASE}/meta/recipes-
+>graphics/drm/libdrm"
+>
+>  in all of the layers i've looked at, that is the only example of
+>*appending* to FILESEXTRAPATHS i've ever seen, so i thought i'd
+>look
+>closer to see what was going on.
+>
+>  even though oe-core defines a libdrm recipe file, the meta-ti
+>layer
+>doesn't use a bbappend for its version. rather, it explicitly adds
+>the
+>libdrm/ directory from oe-core using a reference to ${COREBASE},
+>then
+>adds its own files. that's valid, i guess, it just looks weird and
+>is
+>the only time i've ever seen that.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-ti-staging-3.14/ipc.cfg   | 18 ------------------
- .../linux/linux-ti-staging-3.14/systest.cfg          | 20 --------------------
- recipes-kernel/linux/linux-ti-staging_3.14.bb        | 13 +++++++------
- 3 files changed, 7 insertions(+), 44 deletions(-)
- delete mode 100644 recipes-kernel/linux/linux-ti-staging-3.14/ipc.cfg
- delete mode 100644 recipes-kernel/linux/linux-ti-staging-3.14/systest.cfg
+The recipe also defines using a TI version of libdrm (I don't like that but=
+ it is what we have been given from the component team doing this).  So the=
+ intent here is to:
 
-diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/ipc.cfg b/recipes-kernel/linux/linux-ti-staging-3.14/ipc.cfg
-deleted file mode 100644
-index 645dfdf..0000000
---- a/recipes-kernel/linux/linux-ti-staging-3.14/ipc.cfg
-+++ /dev/null
-@@ -1,18 +0,0 @@
--##################################################
--# IPC config options
--##################################################
--CONFIG_IOMMU_API=y
--CONFIG_IOMMU_SUPPORT=y
--CONFIG_OF_IOMMU=y
--CONFIG_OMAP_IOMMU=y
--CONFIG_OMAP_IOVMM=y
--CONFIG_OMAP_IOMMU_DEBUG=y
--CONFIG_VIRTIO=m
--CONFIG_RPMSG=m
--CONFIG_RPMSG_RPC=m
--CONFIG_REMOTEPROC=m
--CONFIG_OMAP_REMOTEPROC=m
--CONFIG_OMAP_REMOTEPROC_IPU=y
--CONFIG_OMAP_REMOTEPROC_DSP=y
--CONFIG_OMAP_REMOTEPROC_IPU1=y
--CONFIG_OMAP_REMOTEPROC_DSP2=y
-diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/systest.cfg b/recipes-kernel/linux/linux-ti-staging-3.14/systest.cfg
-deleted file mode 100644
-index e21602f..0000000
---- a/recipes-kernel/linux/linux-ti-staging-3.14/systest.cfg
-+++ /dev/null
-@@ -1,20 +0,0 @@
--##################################################
--# Systest config options
--##################################################
--CONFIG_DEBUG_SPINLOCK=y
--CONFIG_DEBUG_MUTEXES=y
--CONFIG_DEBUG_KMEMLEAK=y
--CONFIG_DEVKMEM=y
--CONFIG_HAVE_DEBUG_KMEMLEAK=y
--CONFIG_DEBUG_KMEMLEAK_EARLY_LOG_SIZE=400
--CONFIG_DEBUG_KMEMLEAK_TEST=n
--CONFIG_DEBUG_KMEMLEAK_DEFAULT_OFF=n
--CONFIG_DEBUG_LOCK_ALLOC=y
--CONFIG_DEBUG_INFO=y
--CONFIG_DEBUG_FS=y
--CONFIG_DEBUG_KERNEL=y
--CONFIG_PM_DEBUG=y
--CONFIG_DEBUG_GPIO=y
--CONFIG_USB_DEBUG=y
--CONFIG_SND_DEBUG=y
--CONFIG_RTC_DEBUG=y
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index 8c12bad..30f0da1 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -45,21 +45,22 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.14.y"
- 
--SRCREV = "9d00dd1187099b0841125220c7432a3507e5b5fa"
--PV = "3.14.8"
-+SRCREV = "a69e0bc270093fdb401a1a595f1740d1fc8518ae"
-+PV = "3.14.12"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
--KERNEL_CONFIG_DIR = "ti_config_fragments"
--KERNEL_CONFIG_FRAGMENTS = "${WORKDIR}/ipc.cfg"
-+KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
-+KERNEL_CONFIG_FRAGMENTS = "${KERNEL_CONFIG_DIR}/audio_display.cfg ${KERNEL_CONFIG_DIR}/baseport.cfg \
-+                           ${KERNEL_CONFIG_DIR}/connectivity.cfg ${KERNEL_CONFIG_DIR}/ipc.cfg \
-+                           ${KERNEL_CONFIG_DIR}/power.cfg"
-+
- KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/non-smp.cfg"
- KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${WORKDIR}/non-smp.cfg"
- 
- SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
--           file://ipc.cfg \
--           file://systest.cfg \
-            file://non-smp.cfg \
-           "
--- 
-2.0.0
+1. Define a libdrm that uses the TI modified sources.
+2. Use the recipe only for the omap-a15 devices and make that an explicit s=
+etting by setting default preference to -1.
 
+This wasn't done as an append because we wanted this only for omap-a15 devi=
+ces when explicitely set as the preferred version to use and not impact oth=
+er devices using the later version from oe-core.
+
+As for the reference to COREBASE it is to pick up the GNU_SOURCE_definition=
+.patch file rather than overlaying that as well.
+
+>
+>  i'm also puzzled that the meta-ti recipe sets:
+>
+>DEFAULT_PREFERENCE =3D "-1"
+>
+>what's that for?  given that the oe-core layer already defines a
+>recipe for libdrm that has a higher version number, why would the
+>above line be necessary?
+>
+>  just trying to understand the rationale behind this unusual
+>construction.
+>
+>rday
+>
+>--
+>
+>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>=3D=3D=3D=3D=3D=3D
+>Robert P. J. Day                                 Ottawa, Ontario,
+>CANADA
+>                        http://crashcourse.ca
+>
+>Twitter:
+>http://twitter.com/rpjday
+>LinkedIn:
+>http://ca.linkedin.com/in/rpjday
+>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>=3D=3D=3D=3D=3D=3D
+>
+>--
+>_______________________________________________
+>meta-ti mailing list
+>meta-ti@yoctoproject.org
+>https://lists.yoctoproject.org/listinfo/meta-ti
 
