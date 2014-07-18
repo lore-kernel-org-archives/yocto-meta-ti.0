@@ -1,36 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5A7CDE0043F; Fri, 18 Jul 2014 12:38:05 -0700 (PDT)
+	id 932D5E0043F; Fri, 18 Jul 2014 13:48:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [206.46.173.25 listed in list.dnswl.org]
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21901E00342
-	for <meta-ti@yoctoproject.org>; Fri, 18 Jul 2014 12:37:54 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173025.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N8X003DGAIZ18X0@vms173025.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 18 Jul 2014 14:37:48 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 5D98A20087; Fri,
-	18 Jul 2014 15:37:47 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 563A7E003C1
+	for <meta-ti@yoctoproject.org>; Fri, 18 Jul 2014 13:48:00 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 7466652A32; Fri, 18 Jul 2014 20:47:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Fri, 18 Jul 2014 15:37:45 -0400
-Message-id: <1405712265-16158-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.0.0
-In-reply-to: <1405709056-30388-1-git-send-email-denis@denix.org>
-References: <1405709056-30388-1-git-send-email-denis@denix.org>
-Subject: [PATCH v3] linux-ti-staging: update to the latest source with new config fragments
+Message-Id: <20140718204759.7466652A32@arago-project.org>
+Date: Fri, 18 Jul 2014 20:47:59 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update to the latest source with new config fragments
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,21 +33,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2014 19:38:05 -0000
+X-List-Received-Date: Fri, 18 Jul 2014 20:48:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 072fca87de2ea7da822f0efbfdfb208f0f998071
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=072fca87de2ea7da822f0efbfdfb208f0f998071
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Sat Jul 19 01:37:45 2014 +0000
+
+linux-ti-staging: update to the latest source with new config fragments
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
-v2 - updated with the latest 3.14.13 merge
-v3 - another merge of audio-display tree
 
- recipes-kernel/linux/linux-ti-staging-3.14/ipc.cfg   | 18 ------------------
- .../linux/linux-ti-staging-3.14/systest.cfg          | 20 --------------------
- recipes-kernel/linux/linux-ti-staging_3.14.bb        | 13 +++++++------
+---
+
+ recipes-kernel/linux/linux-ti-staging-3.14/ipc.cfg |   18 ------------------
+ .../linux/linux-ti-staging-3.14/systest.cfg        |   20 --------------------
+ recipes-kernel/linux/linux-ti-staging_3.14.bb      |   13 +++++++------
  3 files changed, 7 insertions(+), 44 deletions(-)
- delete mode 100644 recipes-kernel/linux/linux-ti-staging-3.14/ipc.cfg
- delete mode 100644 recipes-kernel/linux/linux-ti-staging-3.14/systest.cfg
 
 diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/ipc.cfg b/recipes-kernel/linux/linux-ti-staging-3.14/ipc.cfg
 deleted file mode 100644
@@ -142,7 +138,5 @@ index 8c12bad..fd8e1f2 100644
 -           file://systest.cfg \
             file://non-smp.cfg \
            "
--- 
-2.0.0
 
 
