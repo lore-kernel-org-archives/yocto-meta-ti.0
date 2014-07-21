@@ -1,42 +1,26 @@
-Return-Path: <denys@ti.com>
+Return-Path: <maciej.borzecki@open-rnd.pl>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C704AE0054C; Sun, 20 Jul 2014 18:22:50 -0700 (PDT)
+	id 37FE7E00572; Mon, 21 Jul 2014 06:47:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6F371E0053E
-	for <meta-ti@yoctoproject.org>; Sun, 20 Jul 2014 18:22:42 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s6L1MeLA006139
-	for <meta-ti@yoctoproject.org>; Sun, 20 Jul 2014 20:22:41 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s6L1Meal021780
-	for <meta-ti@yoctoproject.org>; Sun, 20 Jul 2014 20:22:40 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Sun, 20 Jul 2014 20:22:40 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s6L1MeYe023061	for <meta-ti@yoctoproject.org>; Sun, 20 Jul 2014 20:22:40
-	-0500
-Date: Sun, 20 Jul 2014 21:05:13 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <834221543.337.1405904713191.JavaMail.jenkins@puget>
-MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-07-20_21-00-30
+Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D26C7E002AA
+	for <meta-ti@yoctoproject.org>; Mon, 21 Jul 2014 06:47:00 -0700 (PDT)
+Received: from localhost.localdomain (unknown [46.170.72.194])
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id 057E431604D3;
+	Mon, 21 Jul 2014 15:46:55 +0200 (CEST)
+From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+To: meta-ti@yoctoproject.org
+Date: Mon, 21 Jul 2014 15:46:48 +0200
+Message-Id: <1405950408-31691-1-git-send-email-maciej.borzecki@open-rnd.pl>
+X-Mailer: git-send-email 1.9.0
+Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
+Subject: [PATCH v2] wic: wks and source plugin for build SD card image
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,186 +33,159 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jul 2014 01:22:50 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_336_522258576.1405904713177"
+X-List-Received-Date: Mon, 21 Jul 2014 13:47:13 -0000
 
-------=_Part_336_522258576.1405904713177
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Commit 2b524321a25c35c5f987b8331e41b49d3b2e2d2b removed bbclass for
+building SD card images in favor of using wic. This commit adds a mic
+source plugin that prepares a useable boot partition as part of wic's
+image creation process. The plugin defines a new source type -
+beaglebonebootimg, similarly to the existing bootimg-{efi,pcbios} in
+current poky tree.
 
-<html>
-<head>
-<title>
-Status for 07/20/14
-</title>
-</head>
-<body>
+An example *.wks for setting up the partitions is provided as well.
+Usage:
 
-<h2>Status for 07/20/14</h2>
+  wic create beaglebonesdimage -e core-image-minimal
 
-<h2>BUILD_ID: build-2014-07-20_21-01-42</h2>
+Wic cannot handle non {h,s}da disk handling at this time, --ondisk
+needs to account for this, hence disks need to be named like in the
+example (mmcblk0p instead of mmcblk0).
 
-<h2>Clean Build: false</h2>
+Accompanying patches in poky are needed for proper handling of any non /
+and /boot partitions as well as fs mount options (--fsoptions). Entry
+for partition mounted at /media/data is provided for reference only.
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+Signed-off-by: Maciek Borzecki <maciek.borzecki@gmail.com>
+---
+ scripts/lib/image/canned-wks/beaglebonesdimage.wks |   9 ++
+ .../lib/mic/plugins/source/beaglebonebootimg.py    | 100 +++++++++++++++++++++
+ 2 files changed, 109 insertions(+)
+ create mode 100644 scripts/lib/image/canned-wks/beaglebonesdimage.wks
+ create mode 100644 scripts/lib/mic/plugins/source/beaglebonebootimg.py
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.07"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+diff --git a/scripts/lib/image/canned-wks/beaglebonesdimage.wks b/scripts/lib/image/canned-wks/beaglebonesdimage.wks
+new file mode 100644
+index 0000000..c01607f
+--- /dev/null
++++ b/scripts/lib/image/canned-wks/beaglebonesdimage.wks
+@@ -0,0 +1,9 @@
++# short-description: Create SD card image for BeagleBone
++# long-description: Creates a partitioned SD card image for use with BeagleBone
++
++# vfat boot partition
++part --source beaglebonebootimg --ondisk mmcblk0p --fstype=vfat --label boot --active --align 1024 --size 10
++# root filesystem
++part / --source rootfs --ondisk mmcblk0p --fstype=ext3 --label root --align 1024
++# data partition
++# part /media/data --ondisk mmcblk0p --fstype=vfat --label data --align 1024 --size 100 --fsoptions sync
+diff --git a/scripts/lib/mic/plugins/source/beaglebonebootimg.py b/scripts/lib/mic/plugins/source/beaglebonebootimg.py
+new file mode 100644
+index 0000000..ee1c3c7
+--- /dev/null
++++ b/scripts/lib/mic/plugins/source/beaglebonebootimg.py
+@@ -0,0 +1,100 @@
++# ex:ts=4:sw=4:sts=4:et
++# -*- tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
++#
++# This program is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License version 2 as
++# published by the Free Software Foundation.
++#
++# This program is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
++#
++# You should have received a copy of the GNU General Public License along
++# with this program; if not, write to the Free Software Foundation, Inc.,
++# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
++#
++# DESCRIPTION
++# This implements the 'beaglebonebootimg' source plugin class for 'wic'
++#
++# AUTHORS
++# Maciej Borzecki <maciej.borzecki (at] open-rnd.pl>
++#
++
++import os
++
++from mic import msger
++from mic.pluginbase import SourcePlugin
++from mic.utils.oe.misc import *
++
++class BootimgPcbiosPlugin(SourcePlugin):
++    name = 'beaglebonebootimg'
++
++    @classmethod
++    def do_install_disk(self, disk, disk_name, cr, workdir, oe_builddir,
++                        bootimg_dir, kernel_dir, native_sysroot):
++        """
++        Called after all partitions have been prepared and assembled into a
++        disk image. Do nothing.
++        """
++        pass
++
++    @classmethod
++    def do_configure_partition(self, part, cr, cr_workdir, oe_builddir,
++                               bootimg_dir, kernel_dir, native_sysroot):
++        """
++        Called before do_prepare_partition(). Possibly prepare
++        configuration files of some sort.
++
++        """
++        pass
++
++    @classmethod
++    def do_prepare_partition(self, part, cr, cr_workdir, oe_builddir, bootimg_dir,
++                             kernel_dir, rootfs_dir, native_sysroot):
++        """
++        Called to do the actual content population for a partition i.e. it
++        'prepares' the partition to be incorporated into the image.
++        In this case, does the following:
++        - sets up a vfat partition
++        - copies u-boot
++        - copies MLO
++        """
++        hdddir = "%s/boot" % cr_workdir
++        rm_cmd = "rm -rf %s" % cr_workdir
++        exec_cmd(rm_cmd)
++
++        install_cmd = "install -d %s" % hdddir
++        tmp = exec_cmd(install_cmd)
++
++        img_deploy_dir = get_bitbake_var("DEPLOY_DIR_IMAGE")
++
++        mlo_img = "MLO"
++        mlo_src_path = os.path.join(img_deploy_dir, mlo_img)
++
++        uboot_img = "u-boot.img"
++        uboot_src_path = os.path.join(img_deploy_dir, uboot_img)
++
++        for entry in [(mlo_src_path, "MLO"), (uboot_src_path, "u-boot.img")]:
++            file_src, file_dst = entry
++            print '-- install %s as %s' % (file_src, file_dst)
++            install_cmd = "install -m 0644 %s %s" \
++                          % (file_src, os.path.join(hdddir, file_dst))
++            tmp = exec_cmd(install_cmd)
++
++        if part.get_size() == 0:
++            msger.error('Boot partition may not be 0 in size')
++
++        du_cmd = "du -bks %s" % hdddir
++        rc, out = exec_cmd(du_cmd)
++        blocks = int(out.split()[0])
++
++        extra_blocks = part.get_extra_block_count(blocks)
++        if extra_blocks == 0:
++            msger.error('Not enough space in boot parition')
++
++        part.prepare_empty_partition(cr_workdir, oe_builddir, native_sysroot)
++
++        mcopy_cmd = "mcopy -i %s -s %s/* ::/" % (part.source_file, hdddir)
++        exec_native_cmd(mcopy_cmd, native_sysroot)
++
+-- 
+1.9.0
 
 
-------=_Part_336_522258576.1405904713177--
