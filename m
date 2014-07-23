@@ -1,26 +1,34 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 84756E006DB; Wed, 23 Jul 2014 13:33:24 -0700 (PDT)
+	id 2B05EE006DB; Wed, 23 Jul 2014 13:39:57 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1CBCFE006B7
-	for <meta-ti@yoctoproject.org>; Wed, 23 Jul 2014 13:33:10 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id D335352A84; Wed, 23 Jul 2014 20:33:09 +0000 (UTC)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [206.46.173.17 listed in list.dnswl.org]
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 16B32E006B7
+	for <meta-ti@yoctoproject.org>; Wed, 23 Jul 2014 13:39:52 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N9600E86MPLMHC0@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 23 Jul 2014 15:39:37 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 7A2FB2001F; Wed,
+	23 Jul 2014 16:39:21 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20140723203309.D335352A84@arago-project.org>
-Date: Wed, 23 Jul 2014 20:33:09 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : am57xx-evm.conf: Use correct TTY port
+Date: Wed, 23 Jul 2014 16:39:19 -0400
+Message-id: <1406147959-31875-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.0.2
+Subject: [PATCH v2] u-boot: update to 2014.07 release version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,43 +41,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jul 2014 20:33:24 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 23 Jul 2014 20:39:57 -0000
 
-Module: meta-ti
-Branch: master
-Commit: 3a2d6f20f83a948e5ff9133a9ba58a151e888e54
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3a2d6f20f83a948e5ff9133a9ba58a151e888e54
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Wed Jul 23 04:07:18 2014 +0000
-
-am57xx-evm.conf: Use correct TTY port
-
-* This machine config is based on dra7xx-evm.conf.
-* However, due to differences in the boards a different serial console is used.
-* Update port for the am57xx-evm (GP).
-
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+v2 - also drop comment about RC version
 
- conf/machine/am57xx-evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-bsp/u-boot/u-boot_2014.07.bb | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index 7069b44..56b1873 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -6,7 +6,7 @@ require conf/machine/include/dra7xx.inc
+diff --git a/recipes-bsp/u-boot/u-boot_2014.07.bb b/recipes-bsp/u-boot/u-boot_2014.07.bb
+index 9da6f7d..91406f9 100644
+--- a/recipes-bsp/u-boot/u-boot_2014.07.bb
++++ b/recipes-bsp/u-boot/u-boot_2014.07.bb
+@@ -11,17 +11,14 @@ DEFAULT_PREFERENCE = "-1"
  
- IMAGE_FSTYPES += "ubi tar.gz"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
  
--SERIAL_CONSOLE = "115200 ttyO0"
-+SERIAL_CONSOLE = "115200 ttyO2"
+-# This is still an RC so set the PV accordingly to allow proper version
+-# ordering when the RC is dropped.
+-PV = "2014.04+2014.07-rc3"
+-PR = "r0"
++PV = "2014.07"
  
- UBOOT_MACHINE = "dra7xx_evm_config"
+ SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
  
+ BRANCH ?= "master"
+ 
+-# Corresponds to tag v2014.07-rc3
+-SRCREV = "76b21026ceb5a6a83fc53b0ecdf425f240318022"
++# Corresponds to tag v2014.07
++SRCREV = "524123a70761110c5cf3ccc5f52f6d4da071b959"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
+-- 
+2.0.2
 
 
