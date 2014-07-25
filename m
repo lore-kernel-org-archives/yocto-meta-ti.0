@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4E911E006DB; Fri, 25 Jul 2014 10:23:12 -0700 (PDT)
+	id 50002E006C4; Fri, 25 Jul 2014 10:23:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2C795E003C1
-	for <meta-ti@yoctoproject.org>; Fri, 25 Jul 2014 10:23:07 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 02345E003FA
+	for <meta-ti@yoctoproject.org>; Fri, 25 Jul 2014 10:23:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 19461529B9; Fri, 25 Jul 2014 17:23:07 +0000 (UTC)
+	id 95E1E529B9; Fri, 25 Jul 2014 17:23:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140725172307.19461529B9@arago-project.org>
-Date: Fri, 25 Jul 2014 17:23:07 +0000 (UTC)
+Message-Id: <20140725172309.95E1E529B9@arago-project.org>
+Date: Fri, 25 Jul 2014 17:23:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot: update to 2014.07 release version
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 25 Jul 2014 17:23:12 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: ecd9028a083bba97c9270ad771c4c838f02f0b0c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ecd9028a083bba97c9270ad771c4c838f02f0b0c
+Branch: daisy
+Commit: fd4246e492525a6b143cefec2f0a942f8d0a8d95
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fd4246e492525a6b143cefec2f0a942f8d0a8d95
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Jul 24 02:39:19 2014 +0000
