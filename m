@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <fcooper@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C17C6E00862; Wed, 30 Jul 2014 11:29:43 -0700 (PDT)
+	id D91E9E00862; Wed, 30 Jul 2014 11:38:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,35 +8,38 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+	*      [192.94.94.40 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2541EE00781
-	for <meta-ti@yoctoproject.org>; Wed, 30 Jul 2014 11:29:35 -0700 (PDT)
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4EDB0E00781
+	for <meta-ti@yoctoproject.org>; Wed, 30 Jul 2014 11:38:10 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s6UITXfB009519;
-	Wed, 30 Jul 2014 13:29:33 -0500
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s6UIc8oX011756;
+	Wed, 30 Jul 2014 13:38:08 -0500
 Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s6UITX9L007832;
-	Wed, 30 Jul 2014 13:29:33 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 30 Jul 2014 13:29:33 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s6UITVIv026661;
-	Wed, 30 Jul 2014 13:29:32 -0500
-Date: Wed, 30 Jul 2014 14:29:31 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Cooper Jr., Franklin" <fcooper@ti.com>
-Message-ID: <20140730182927.GW15788@edge>
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s6UIc8lw014406;
+	Wed, 30 Jul 2014 13:38:08 -0500
+Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.03.0174.001; Wed, 30 Jul 2014 13:38:08 -0500
+From: "Cooper Jr., Franklin" <fcooper@ti.com>
+To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH 2/2] omap3-sgx-modules 5.01.01.01: add
+	Darren's patches to work with 3.14 kernel
+Thread-Index: AQHPq5axv3utr1jrfEWYAVdCABOSuZu46UkA
+Date: Wed, 30 Jul 2014 18:38:07 +0000
+Message-ID: <8F29D6B095ED194EA1980491A5E029710C6EE5D4@DFLE08.ent.ti.com>
 References: <1406684113-18232-1-git-send-email-denis@denix.org>
-	<8F29D6B095ED194EA1980491A5E029710C6EE55D@DFLE08.ent.ti.com>
+	<1406684113-18232-2-git-send-email-denis@denix.org>
+In-Reply-To: <1406684113-18232-2-git-send-email-denis@denix.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-In-Reply-To: <8F29D6B095ED194EA1980491A5E029710C6EE55D@DFLE08.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH 1/2] linux-ti-staging: add Darren's SGX patches to make graphics work with 3.14
+Subject: Re: [PATCH 2/2] omap3-sgx-modules 5.01.01.01: add Darren's patches to work with 3.14 kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,648 +52,546 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 18:29:43 -0000
+X-List-Received-Date: Wed, 30 Jul 2014 18:38:17 -0000
+Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 30, 2014 at 06:00:47PM +0000, Cooper Jr., Franklin wrote:
-> Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
-> 
-> Although we really need to move away from having these kernel config 
-> fragments within OE and not pushed back to the kernel. I understand the sgx 
-> stuff is currently a work in progress but just something for the future 
-> before we have an official "release".
+Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
 
-All the other config fragments are in the kernel, BTW. This is an external 
-patching, hence the external config fragments. Unless all the changes are 
-accepted to the kernel, we can't have the config in there.
+It might be a good idea to run sourceipk (meta-arago) on this so that the v=
+ersion of the Graphics SDK we bundle already have these patches included.
+Nothing we need to do here in meta-ti but just something to keep track of i=
+n meta-arago.
 
-
-> > -----Original Message-----
-> > From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> > bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
-> > Sent: Tuesday, July 29, 2014 8:35 PM
-> > To: meta-ti@yoctoproject.org
-> > Subject: [meta-ti] [PATCH 1/2] linux-ti-staging: add Darren's SGX patches to
-> > make graphics work with 3.14
-> > 
-> > From: Denys Dmytriyenko <denys@ti.com>
-> > 
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > ---
-> >  recipes-kernel/linux/linux-ti-staging-3.14/sgx.cfg | 24 ++++++  ...HACK-drm-
-> > fb_helper-enable-panning-support.patch | 51 ++++++++++++  ...lcdc-add-
-> > vsync-callback-for-use-in-omaplf.patch | 96 +++++++++++++++++++++  ...fix-
-> > the-ping-pong-dma-tearing-issue-seen-.patch | 97 ++++++++++++++++++++++
-> > ...se-pdata-quirks-for-sgx-deassert_hardrese.patch | 86 +++++++++++++++++++
-> >  .../sgx/0005-ARM-dts-am437x-add-SGX-node.patch     | 41 +++++++++
-> >  .../0006-ARM-dts-am33xx-add-DT-node-for-gpu.patch  | 42 ++++++++++
-> >  recipes-kernel/linux/linux-ti-staging_3.14.bb      | 20 +++--
-> >  8 files changed, 452 insertions(+), 5 deletions(-)  create mode 100644 recipes-
-> > kernel/linux/linux-ti-staging-3.14/sgx.cfg
-> >  create mode 100644 recipes-kernel/linux/linux-ti-staging-3.14/sgx/0001-
-> > HACK-drm-fb_helper-enable-panning-support.patch
-> >  create mode 100644 recipes-kernel/linux/linux-ti-staging-3.14/sgx/0002-
-> > HACK-drm-tilcdc-add-vsync-callback-for-use-in-omaplf.patch
-> >  create mode 100644 recipes-kernel/linux/linux-ti-staging-3.14/sgx/0003-drm-
-> > tilcdc-fix-the-ping-pong-dma-tearing-issue-seen-.patch
-> >  create mode 100644 recipes-kernel/linux/linux-ti-staging-3.14/sgx/0004-ARM-
-> > OMAP2-Use-pdata-quirks-for-sgx-deassert_hardrese.patch
-> >  create mode 100644 recipes-kernel/linux/linux-ti-staging-3.14/sgx/0005-ARM-
-> > dts-am437x-add-SGX-node.patch
-> >  create mode 100644 recipes-kernel/linux/linux-ti-staging-3.14/sgx/0006-ARM-
-> > dts-am33xx-add-DT-node-for-gpu.patch
-> > 
-> > diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/sgx.cfg b/recipes-
-> > kernel/linux/linux-ti-staging-3.14/sgx.cfg
-> > new file mode 100644
-> > index 0000000..0291779
-> > --- /dev/null
-> > +++ b/recipes-kernel/linux/linux-ti-staging-3.14/sgx.cfg
-> > @@ -0,0 +1,24 @@
-> > +##################################################
-> > +# SGX Graphics config options
-> > +##################################################
-> > +CONFIG_DMA_SHARED_BUFFER=y
-> > +CONFIG_TI_ST=n
-> > +CONFIG_INPUT_TOUCHSCREEN=y
-> > +CONFIG_TOUCHSCREEN_ADS7846=y
-> > +CONFIG_I2C_ALGOBIT=y
-> > +CONFIG_MFD_TPS65218=n
-> > +CONFIG_DRM=y
-> > +CONFIG_DRM_KMS_HELPER=y
-> > +CONFIG_DRM_KMS_FB_HELPER=y
-> > +CONFIG_DRM_GEM_CMA_HELPER=y
-> > +CONFIG_DRM_KMS_CMA_HELPER=y
-> > +CONFIG_DRM_I2C_NXP_TDA998X=y
-> > +CONFIG_DRM_TILCDC=y
-> > +CONFIG_FB_SYS_FILLRECT=y
-> > +CONFIG_FB_SYS_COPYAREA=y
-> > +CONFIG_FB_SYS_IMAGEBLIT=y
-> > +CONFIG_BACKLIGHT_CLASS_DEVICE=y
-> > +CONFIG_HDMI=y
-> > +CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY=y
-> > +CONFIG_SND_DAVINCI_SOC=m
-> > +CONFIG_SND_SIMPLE_CARD=n
-> > diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/sgx/0001-HACK-drm-
-> > fb_helper-enable-panning-support.patch b/recipes-kernel/linux/linux-ti-
-> > staging-3.14/sgx/0001-HACK-drm-fb_helper-enable-panning-support.patch
-> > new file mode 100644
-> > index 0000000..e760248
-> > --- /dev/null
-> > +++ b/recipes-kernel/linux/linux-ti-staging-3.14/sgx/0001-HACK-drm-fb_he
-> > +++ lper-enable-panning-support.patch
-> > @@ -0,0 +1,51 @@
-> > +From d9d8fea4c60b3a44e8660408eb9337413b108b15 Mon Sep 17 00:00:00
-> > 2001
-> > +From: Darren Etheridge <detheridge@ti.com>
-> > +Date: Thu, 24 Jul 2014 11:49:28 -0500
-> > +Subject: [PATCH 1/6] HACK: drm/fb_helper: enable panning support
-> > +
-> > +Increase the size of the buffer that is created in the fbdev emulation
-> > +helpers.  And fill in the var structure with the amount that was allocated.
-> > +
-> > +Signed-off-by: Darren Etheridge <detheridge@ti.com>
-> > +---
-> > + drivers/gpu/drm/drm_fb_cma_helper.c | 10 ++++++++--
-> > + 1 file changed, 8 insertions(+), 2 deletions(-)
-> > +
-> > +diff --git a/drivers/gpu/drm/drm_fb_cma_helper.c
-> > +b/drivers/gpu/drm/drm_fb_cma_helper.c
-> > +index 61b5a47..2e2c489 100644
-> > +--- a/drivers/gpu/drm/drm_fb_cma_helper.c
-> > ++++ b/drivers/gpu/drm/drm_fb_cma_helper.c
-> > +@@ -25,6 +25,12 @@
-> > + #include <drm/drm_fb_cma_helper.h>
-> > + #include <linux/module.h>
-> > +
-> > ++/*
-> > ++ * number of buffers to allocate from CMA pool, often increased for
-> > ++ * double/triple buffering
-> > ++ */
-> > ++#define DRM_NUM_FBDEV_BUFFERS 3
-> > ++
-> > + struct drm_fb_cma {
-> > + 	struct drm_framebuffer		fb;
-> > + 	struct drm_gem_cma_object	*obj[4];
-> > +@@ -265,7 +271,7 @@ static int drm_fbdev_cma_create(struct
-> > drm_fb_helper *helper,
-> > + 	bytes_per_pixel = DIV_ROUND_UP(sizes->surface_bpp, 8);
-> > +
-> > + 	mode_cmd.width = sizes->surface_width;
-> > +-	mode_cmd.height = sizes->surface_height;
-> > ++	mode_cmd.height = sizes->surface_height *
-> > DRM_NUM_FBDEV_BUFFERS;
-> > + 	mode_cmd.pitches[0] = sizes->surface_width * bytes_per_pixel;
-> > + 	mode_cmd.pixel_format = drm_mode_legacy_fb_format(sizes-
-> > >surface_bpp,
-> > + 		sizes->surface_depth);
-> > +@@ -304,7 +310,7 @@ static int drm_fbdev_cma_create(struct
-> > drm_fb_helper *helper,
-> > + 	}
-> > +
-> > + 	drm_fb_helper_fill_fix(fbi, fb->pitches[0], fb->depth);
-> > +-	drm_fb_helper_fill_var(fbi, helper, fb->width, fb->height);
-> > ++	drm_fb_helper_fill_var(fbi, helper, fb->width,
-> > ++sizes->surface_height);
-> > +
-> > + 	offset = fbi->var.xoffset * bytes_per_pixel;
-> > + 	offset += fbi->var.yoffset * fb->pitches[0];
-> > +--
-> > +1.9.1
-> > +
-> > diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/sgx/0002-HACK-drm-
-> > tilcdc-add-vsync-callback-for-use-in-omaplf.patch b/recipes-kernel/linux/linux-
-> > ti-staging-3.14/sgx/0002-HACK-drm-tilcdc-add-vsync-callback-for-use-in-
-> > omaplf.patch
-> > new file mode 100644
-> > index 0000000..d154508
-> > --- /dev/null
-> > +++ b/recipes-kernel/linux/linux-ti-staging-3.14/sgx/0002-HACK-drm-tilcd
-> > +++ c-add-vsync-callback-for-use-in-omaplf.patch
-> > @@ -0,0 +1,96 @@
-> > +From eaf6ac95a81612250d6bd5e2ed9da41e52aac444 Mon Sep 17 00:00:00
-> > 2001
-> > +From: Darren Etheridge <detheridge@ti.com>
-> > +Date: Fri, 11 Jul 2014 09:15:25 -0500
-> > +Subject: [PATCH 2/6] HACK: drm/tilcdc: add vsync callback for use in
-> > +omaplfb  for gpu
-> > +
-> > +Add a vsync callback registration API that is identical to what was
-> > +done for da8xx-fb.c.
-> > +
-> > +Need to find if there is a better way using the DRM infrastructure from
-> > +kernel space.  Either that or change the userspace window manager stuff
-> > +in the gpu libraries to make use of the DRM provided syncronization
-> > +mechanisms.
-> > +
-> > +Signed-off-by: Darren Etheridge <detheridge@ti.com>
-> > +---
-> > + drivers/gpu/drm/tilcdc/tilcdc_crtc.c | 34
-> > +++++++++++++++++++++++++++++++++++
-> > + drivers/gpu/drm/tilcdc/tilcdc_drv.h  |  5 +++++
-> > + 2 files changed, 39 insertions(+)
-> > +
-> > +diff --git a/drivers/gpu/drm/tilcdc/tilcdc_crtc.c
-> > +b/drivers/gpu/drm/tilcdc/tilcdc_crtc.c
-> > +index 4b6b139..bf94a0f 100644
-> > +--- a/drivers/gpu/drm/tilcdc/tilcdc_crtc.c
-> > ++++ b/drivers/gpu/drm/tilcdc/tilcdc_crtc.c
-> > +@@ -37,6 +37,10 @@ struct tilcdc_crtc {
-> > + 	/* for deferred fb unref's: */
-> > + 	struct drm_flip_work unref_work;
-> > + };
-> > ++
-> > ++static vsync_callback_t vsync_cb_handler; static void *vsync_cb_arg;
-> > ++
-> > + #define to_tilcdc_crtc(x) container_of(x, struct tilcdc_crtc, base)
-> > +
-> > + static void unref_worker(struct drm_flip_work *work, void *val) @@
-> > +-576,6 +580,32 @@ out:
-> > + 	pm_runtime_put_sync(dev->dev);
-> > + }
-> > +
-> > ++int register_vsync_cb(vsync_callback_t handler, void *arg, int idx) {
-> > ++	if ((vsync_cb_handler == NULL) && (vsync_cb_arg == NULL)) {
-> > ++		vsync_cb_arg = arg;
-> > ++		vsync_cb_handler = handler;
-> > ++	} else {
-> > ++		return -EEXIST;
-> > ++	}
-> > ++
-> > ++	return 0;
-> > ++}
-> > ++EXPORT_SYMBOL(register_vsync_cb);
-> > ++
-> > ++int unregister_vsync_cb(vsync_callback_t handler, void *arg, int idx)
-> > ++{
-> > ++	if ((vsync_cb_handler == handler) && (vsync_cb_arg == arg)) {
-> > ++		vsync_cb_handler = NULL;
-> > ++		vsync_cb_arg = NULL;
-> > ++	} else {
-> > ++		return -ENXIO;
-> > ++	}
-> > ++
-> > ++	return 0;
-> > ++}
-> > ++EXPORT_SYMBOL(unregister_vsync_cb);
-> > ++
-> > + irqreturn_t tilcdc_crtc_irq(struct drm_crtc *crtc)  {
-> > + 	struct tilcdc_crtc *tilcdc_crtc = to_tilcdc_crtc(crtc); @@ -610,6
-> > ++640,10 @@ irqreturn_t tilcdc_crtc_irq(struct drm_crtc *crtc)
-> > + 		tilcdc_crtc->event = NULL;
-> > + 		if (event)
-> > + 			drm_send_vblank_event(dev, 0, event);
-> > ++
-> > ++		if (vsync_cb_handler)
-> > ++			vsync_cb_handler(vsync_cb_arg);
-> > ++
-> > + 		spin_unlock_irqrestore(&dev->event_lock, flags);
-> > +
-> > + 		if (dirty && !tilcdc_crtc->dirty)
-> > +diff --git a/drivers/gpu/drm/tilcdc/tilcdc_drv.h
-> > +b/drivers/gpu/drm/tilcdc/tilcdc_drv.h
-> > +index 0938036..05269be 100644
-> > +--- a/drivers/gpu/drm/tilcdc/tilcdc_drv.h
-> > ++++ b/drivers/gpu/drm/tilcdc/tilcdc_drv.h
-> > +@@ -170,4 +170,9 @@ void tilcdc_crtc_set_panel_info(struct drm_crtc
-> > +*crtc,  int tilcdc_crtc_mode_valid(struct drm_crtc *crtc, struct
-> > +drm_display_mode *mode);  int tilcdc_crtc_max_width(struct drm_crtc
-> > +*crtc);
-> > +
-> > ++/* used by SGX OMAPLFB drvier */
-> > ++typedef void (*vsync_callback_t)(void *arg); int
-> > ++register_vsync_cb(vsync_callback_t handler, void *arg, int idx); int
-> > ++unregister_vsync_cb(vsync_callback_t handler, void *arg, int idx);
-> > ++
-> > + #endif /* __TILCDC_DRV_H__ */
-> > +--
-> > +1.9.1
-> > +
-> > diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/sgx/0003-drm-tilcdc-fix-
-> > the-ping-pong-dma-tearing-issue-seen-.patch b/recipes-kernel/linux/linux-ti-
-> > staging-3.14/sgx/0003-drm-tilcdc-fix-the-ping-pong-dma-tearing-issue-seen-
-> > .patch
-> > new file mode 100644
-> > index 0000000..b3d0466
-> > --- /dev/null
-> > +++ b/recipes-kernel/linux/linux-ti-staging-3.14/sgx/0003-drm-tilcdc-fix
-> > +++ -the-ping-pong-dma-tearing-issue-seen-.patch
-> > @@ -0,0 +1,97 @@
-> > +From 7b4400287144101f8c7bdf2a9fa45c82859177e2 Mon Sep 17 00:00:00
-> > 2001
-> > +From: Darren Etheridge <detheridge@ti.com>
-> > +Date: Fri, 18 Jul 2014 16:21:46 -0500
-> > +Subject: [PATCH 3/6] drm/tilcdc: fix the ping-pong dma tearing issue
-> > +seen on  buffer flipping
-> > +
-> > +Update the DMA pointers during the pan display ioctl.  Borrowed from
-> > +da8xx_fb.c update the scanout buffers immediately so the DMA ping/pong
-> > +doesn't end up out of sync with what we really want it to DMA.
-> > +
-> > +Signed-off-by: Darren Etheridge <detheridge@ti.com>
-> > +---
-> > + drivers/gpu/drm/tilcdc/tilcdc_crtc.c | 36
-> > ++++++++++++++++++++++++++++++++-----
-> > + 1 file changed, 31 insertions(+), 5 deletions(-)
-> > +
-> > +diff --git a/drivers/gpu/drm/tilcdc/tilcdc_crtc.c
-> > +b/drivers/gpu/drm/tilcdc/tilcdc_crtc.c
-> > +index bf94a0f..cdea159 100644
-> > +--- a/drivers/gpu/drm/tilcdc/tilcdc_crtc.c
-> > ++++ b/drivers/gpu/drm/tilcdc/tilcdc_crtc.c
-> > +@@ -30,6 +30,8 @@ struct tilcdc_crtc {
-> > + 	int dpms;
-> > + 	wait_queue_head_t frame_done_wq;
-> > + 	bool frame_done;
-> > ++	spinlock_t irq_lock;
-> > ++	int dma_completed_channel;
-> > +
-> > + 	/* fb currently set to scanout 0/1: */
-> > + 	struct drm_framebuffer *scanout[2];
-> > +@@ -102,10 +104,23 @@ static void update_scanout(struct drm_crtc *crtc)
-> > + 			(crtc->mode.vdisplay * fb->pitches[0]);
-> > +
-> > + 	if (tilcdc_crtc->dpms == DRM_MODE_DPMS_ON) {
-> > +-		/* already enabled, so just mark the frames that need
-> > +-		 * updating and they will be updated on vblank:
-> > ++		/*
-> > ++		 * already enabled, so just mark the frames that need
-> > ++		 * updating and they will be updated on vblank
-> > ++		 * and update the inactive DMA channel immediately
-> > ++		 * to avoid any tearing due to the DMA already starting
-> > ++		 * on the pending dma buffer when we hit the vblank IRQ
-> > + 		 */
-> > +-		tilcdc_crtc->dirty |= LCDC_END_OF_FRAME0 |
-> > LCDC_END_OF_FRAME1;
-> > ++		if (tilcdc_crtc->dma_completed_channel == 0) {
-> > ++			tilcdc_crtc->dirty |= LCDC_END_OF_FRAME1;
-> > ++			set_scanout(crtc, 0);
-> > ++		}
-> > ++
-> > ++		if (tilcdc_crtc->dma_completed_channel == 1) {
-> > ++			tilcdc_crtc->dirty |= LCDC_END_OF_FRAME0;
-> > ++			set_scanout(crtc, 1);
-> > ++		}
-> > ++
-> > + 		drm_vblank_get(dev, 0);
-> > + 	} else {
-> > + 		/* not enabled yet, so update registers immediately: */ @@ -
-> > 612,6
-> > ++627,7 @@ irqreturn_t tilcdc_crtc_irq(struct drm_crtc *crtc)
-> > + 	struct drm_device *dev = crtc->dev;
-> > + 	struct tilcdc_drm_private *priv = dev->dev_private;
-> > + 	uint32_t stat = tilcdc_read_irqstatus(dev);
-> > ++	unsigned long irq_flags;
-> > +
-> > + 	if ((stat & LCDC_SYNC_LOST) && (stat & LCDC_FIFO_UNDERFLOW)) {
-> > + 		stop(crtc);
-> > +@@ -627,11 +643,19 @@ irqreturn_t tilcdc_crtc_irq(struct drm_crtc
-> > +*crtc)
-> > +
-> > + 		tilcdc_clear_irqstatus(dev, stat);
-> > +
-> > +-		if (dirty & LCDC_END_OF_FRAME0)
-> > ++		spin_lock_irqsave(&tilcdc_crtc->irq_lock, irq_flags);
-> > ++
-> > ++		if (dirty & LCDC_END_OF_FRAME0) {
-> > + 			set_scanout(crtc, 0);
-> > ++			tilcdc_crtc->dma_completed_channel = 0;
-> > ++		}
-> > +
-> > +-		if (dirty & LCDC_END_OF_FRAME1)
-> > ++		if (dirty & LCDC_END_OF_FRAME1) {
-> > + 			set_scanout(crtc, 1);
-> > ++			tilcdc_crtc->dma_completed_channel = 1;
-> > ++		}
-> > ++
-> > ++		spin_unlock_irqrestore(&tilcdc_crtc->irq_lock, irq_flags);
-> > +
-> > + 		drm_handle_vblank(dev, 0);
-> > +
-> > +@@ -707,6 +731,8 @@ struct drm_crtc *tilcdc_crtc_create(struct drm_device
-> > *dev)
-> > + 		goto fail;
-> > + 	}
-> > +
-> > ++	spin_lock_init(&tilcdc_crtc->irq_lock);
-> > ++
-> > + 	ret = drm_crtc_init(dev, crtc, &tilcdc_crtc_funcs);
-> > + 	if (ret < 0)
-> > + 		goto fail;
-> > +--
-> > +1.9.1
-> > +
-> > diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/sgx/0004-ARM-OMAP2-
-> > Use-pdata-quirks-for-sgx-deassert_hardrese.patch b/recipes-
-> > kernel/linux/linux-ti-staging-3.14/sgx/0004-ARM-OMAP2-Use-pdata-quirks-for-
-> > sgx-deassert_hardrese.patch
-> > new file mode 100644
-> > index 0000000..b0d5d40
-> > --- /dev/null
-> > +++ b/recipes-kernel/linux/linux-ti-staging-3.14/sgx/0004-ARM-OMAP2-Use-
-> > +++ pdata-quirks-for-sgx-deassert_hardrese.patch
-> > @@ -0,0 +1,86 @@
-> > +From 761dbda366d46ff007e04c09dd2deeee5073d090 Mon Sep 17 00:00:00
-> > 2001
-> > +From: Darren Etheridge <detheridge@ti.com>
-> > +Date: Fri, 25 Jul 2014 16:09:53 -0500
-> > +Subject: [PATCH 4/6] ARM: OMAP2+: Use pdata-quirks for sgx
-> > +deassert_hardreset
-> > +
-> > +Use pdata_quirks to provide platform data to the sgx driver.
-> > +The data that is provided includes:
-> > +
-> > +1) Function pointers for the driver to use to reset the h/w block.
-> > +2) The reset name that matches with what is used in hwmod.
-> > +
-> > +Signed-off-by: Darren Etheridge <detheridge@ti.com>
-> > +---
-> > + arch/arm/mach-omap2/pdata-quirks.c    | 12 ++++++++++++
-> > + include/linux/platform_data/gfx-sgx.h | 22 ++++++++++++++++++++++
-> > + 2 files changed, 34 insertions(+)
-> > + create mode 100644 include/linux/platform_data/gfx-sgx.h
-> > +
-> > +diff --git a/arch/arm/mach-omap2/pdata-quirks.c
-> > +b/arch/arm/mach-omap2/pdata-quirks.c
-> > +index a1fb5aa..945dd61 100644
-> > +--- a/arch/arm/mach-omap2/pdata-quirks.c
-> > ++++ b/arch/arm/mach-omap2/pdata-quirks.c
-> > +@@ -17,6 +17,7 @@
-> > +
-> > + #include <linux/platform_data/pinctrl-single.h>
-> > + #include <linux/platform_data/iommu-omap.h>
-> > ++#include <linux/platform_data/gfx-sgx.h>
-> > +
-> > + #include "am35xx.h"
-> > + #include "common.h"
-> > +@@ -63,6 +64,13 @@ static inline void legacy_init_wl12xx(unsigned
-> > +ref_clock,  }  #endif
-> > +
-> > ++#if defined(CONFIG_SOC_AM33XX) || defined(CONFIG_SOC_AM43XX) static
-> > ++struct gfx_sgx_platform_data gfx_pdata = {
-> > ++	.reset_name = "gfx",
-> > ++	.deassert_reset = omap_device_deassert_hardreset, }; #endif
-> > ++
-> > + #ifdef CONFIG_MACH_NOKIA_N8X0
-> > + static void __init omap2420_n8x0_legacy_init(void)  { @@ -270,6
-> > ++278,10 @@ struct of_dev_auxdata omap_auxdata_lookup[] __initdata = {
-> > + 	OF_DEV_AUXDATA("ti,am3517-emac", 0x5c000000, "davinci_emac.0",
-> > + 		       &am35xx_emac_pdata),
-> > + #endif
-> > ++#if defined(CONFIG_SOC_AM33XX) || defined(CONFIG_SOC_AM43XX)
-> > ++	OF_DEV_AUXDATA("ti,sgx", 0x56000000, "56000000.sgx",
-> > ++			&gfx_pdata),
-> > ++#endif
-> > + #ifdef CONFIG_ARCH_OMAP4
-> > + 	OF_DEV_AUXDATA("ti,omap4-padconf", 0x4a100040,
-> > "4a100040.pinmux", &pcs_pdata),
-> > + 	OF_DEV_AUXDATA("ti,omap4-padconf", 0x4a31e040,
-> > "4a31e040.pinmux",
-> > +&pcs_pdata), diff --git a/include/linux/platform_data/gfx-sgx.h
-> > +b/include/linux/platform_data/gfx-sgx.h
-> > +new file mode 100644
-> > +index 0000000..aa59b2c
-> > +--- /dev/null
-> > ++++ b/include/linux/platform_data/gfx-sgx.h
-> > +@@ -0,0 +1,22 @@
-> > ++/*
-> > ++ * SGX Graphics Driver Platform Data
-> > ++ *
-> > ++ * Copyright (C) 2014 Texas Instruments Incorporated - http://www.ti.com/
-> > ++ *	Darren Etheridge <detheridge@ti.com>
-> > ++ *
-> > ++ * This program is free software; you can redistribute it and/or
-> > ++modify
-> > ++ * it under the terms of the GNU General Public License version 2 as
-> > ++ * published by the Free Software Foundation.
-> > ++ *
-> > ++ * This program is distributed "as is" WITHOUT ANY WARRANTY of any
-> > ++ * kind, whether express or implied; without even the implied warranty
-> > ++ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> > ++ * GNU General Public License for more details.
-> > ++ */
-> > ++#include <linux/platform_device.h>
-> > ++
-> > ++struct gfx_sgx_platform_data {
-> > ++	const char *reset_name;
-> > ++
-> > ++	int (*deassert_reset)(struct platform_device *pdev, const char
-> > ++*name); };
-> > +--
-> > +1.9.1
-> > +
-> > diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/sgx/0005-ARM-dts-
-> > am437x-add-SGX-node.patch b/recipes-kernel/linux/linux-ti-staging-
-> > 3.14/sgx/0005-ARM-dts-am437x-add-SGX-node.patch
-> > new file mode 100644
-> > index 0000000..e18581a
-> > --- /dev/null
-> > +++ b/recipes-kernel/linux/linux-ti-staging-3.14/sgx/0005-ARM-dts-am437x
-> > +++ -add-SGX-node.patch
-> > @@ -0,0 +1,41 @@
-> > +From c921fe043facef3bd6649170fb6130f18e9367b7 Mon Sep 17 00:00:00
-> > 2001
-> > +From: Darren Etheridge <detheridge@ti.com>
-> > +Date: Tue, 29 Jul 2014 16:27:59 -0500
-> > +Subject: [PATCH 5/6] ARM: dts: am437x: add SGX node
-> > +
-> > +Add dt node to enable SGX PowerVR driver.
-> > +
-> > +Signed-off-by: Darren Etheridge <detheridge@ti.com>
-> > +---
-> > + arch/arm/boot/dts/am4372.dtsi | 8 ++++++++
-> > + 1 file changed, 8 insertions(+)
-> > +
-> > +diff --git a/arch/arm/boot/dts/am4372.dtsi
-> > +b/arch/arm/boot/dts/am4372.dtsi index d36af42..d963a60 100644
-> > +--- a/arch/arm/boot/dts/am4372.dtsi
-> > ++++ b/arch/arm/boot/dts/am4372.dtsi
-> > +@@ -707,6 +707,13 @@
-> > + 			dma-names = "tx", "rx";
-> > + 		};
-> > +
-> > ++		sgx@0x56000000 {
-> > ++			compatible = "ti,sgx";
-> > ++			ti,hwmods = "gfx";
-> > ++			reg = <0x56000000 0x1000000>;
-> > ++			interrupts = <GIC_SPI 37 IRQ_TYPE_LEVEL_HIGH>;
-> > ++		};
-> > ++
-> > + 		mcasp1: mcasp@4803C000 {
-> > + 			compatible = "ti,am33xx-mcasp-audio";
-> > + 			ti,hwmods = "mcasp1";
-> > +@@ -891,6 +898,7 @@
-> > + 				clocks = <&disp_clk>;
-> > + 				clock-names = "fck";
-> > + 			};
-> > ++
-> > + 		};
-> > + 	};
-> > + };
-> > +--
-> > +1.9.1
-> > +
-> > diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/sgx/0006-ARM-dts-
-> > am33xx-add-DT-node-for-gpu.patch b/recipes-kernel/linux/linux-ti-staging-
-> > 3.14/sgx/0006-ARM-dts-am33xx-add-DT-node-for-gpu.patch
-> > new file mode 100644
-> > index 0000000..d4d0f13
-> > --- /dev/null
-> > +++ b/recipes-kernel/linux/linux-ti-staging-3.14/sgx/0006-ARM-dts-am33xx
-> > +++ -add-DT-node-for-gpu.patch
-> > @@ -0,0 +1,42 @@
-> > +From 0ef34332c3400b211a047eaca751d00c97f5104c Mon Sep 17 00:00:00
-> > 2001
-> > +From: Darren Etheridge <detheridge@ti.com>
-> > +Date: Fri, 18 Jul 2014 16:19:54 -0500
-> > +Subject: [PATCH 6/6] ARM: dts: am33xx: add DT node for gpu
-> > +
-> > +Add the node into the am33xx.dtsi file for the SGX GPU that is found in
-> > +some variants of the SoC.
-> > +
-> > +Signed-off-by: Darren Etheridge <detheridge@ti.com>
-> > +---
-> > + arch/arm/boot/dts/am33xx.dtsi | 8 +++++++-
-> > + 1 file changed, 7 insertions(+), 1 deletion(-)
-> > +
-> > +diff --git a/arch/arm/boot/dts/am33xx.dtsi
-> > +b/arch/arm/boot/dts/am33xx.dtsi index 2cfd694..df6ae9c 100644
-> > +--- a/arch/arm/boot/dts/am33xx.dtsi
-> > ++++ b/arch/arm/boot/dts/am33xx.dtsi
-> > +@@ -109,7 +109,6 @@
-> > + 		prcm: prcm@44e00000 {
-> > + 			compatible = "ti,am3-prcm";
-> > + 			reg = <0x44e00000 0x4000>;
-> > +-
-> > + 			prcm_clocks: clocks {
-> > + 				#address-cells = <1>;
-> > + 				#size-cells = <0>;
-> > +@@ -822,6 +821,13 @@
-> > + 			reg = <0x48310000 0x2000>;
-> > + 			interrupts = <111>;
-> > + 		};
-> > ++
-> > ++		sgx@0x56000000 {
-> > ++			compatible = "ti,sgx";
-> > ++			ti,hwmods = "gfx";
-> > ++			reg = <0x56000000 0x1000000>;
-> > ++			interrupts = <37>;
-> > ++		};
-> > + 	};
-> > + };
-> > +
-> > +--
-> > +1.9.1
-> > +
-> > diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-
-> > kernel/linux/linux-ti-staging_3.14.bb
-> > index b505640..c223c88 100644
-> > --- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-> > +++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-> > @@ -3,8 +3,6 @@ DESCRIPTION = "Linux kernel for TI devices"
-> >  LICENSE = "GPLv2"
-> >  LIC_FILES_CHKSUM =
-> > "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-> > 
-> > -DEFAULT_PREFERENCE = "-1"
-> > -
-> >  inherit kernel
-> > 
-> >  require recipes-kernel/linux/linux-dtb.inc
-> > @@ -49,7 +47,7 @@ SRCREV =
-> > "b0fa4f08d72c8723219b5174b5749151b5acaee0"
-> >  PV = "3.14.14"
-> > 
-> >  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a
-> > rebuild -MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-> > +MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-> >  PR = "${MACHINE_KERNEL_PR}"
-> > 
-> >  KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
-> > @@ -57,10 +55,22 @@ KERNEL_CONFIG_FRAGMENTS =
-> > "${KERNEL_CONFIG_DIR}/audio_display.cfg ${KERNEL_CONFI
-> >                             ${KERNEL_CONFIG_DIR}/connectivity.cfg
-> > ${KERNEL_CONFIG_DIR}/ipc.cfg \
-> >                             ${KERNEL_CONFIG_DIR}/power.cfg"
-> > 
-> > -KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/non-smp.cfg"
-> > -KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${WORKDIR}/non-smp.cfg"
-> > +KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/non-smp.cfg
-> > ${WORKDIR}/sgx.cfg"
-> > +KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${WORKDIR}/non-smp.cfg
-> > ${WORKDIR}/sgx.cfg"
-> > +
-> > +# Patches necessary to make SGX graphics work with this kernel version
-> > +SGX_PATCHES = "file://sgx/0001-HACK-drm-fb_helper-enable-panning-
-> > support.patch \
-> > +               file://sgx/0002-HACK-drm-tilcdc-add-vsync-callback-for-use-in-
-> > omaplf.patch \
-> > +               file://sgx/0003-drm-tilcdc-fix-the-ping-pong-dma-tearing-issue-seen-
-> > .patch \
-> > +               file://sgx/0004-ARM-OMAP2-Use-pdata-quirks-for-sgx-
-> > deassert_hardrese.patch \
-> > +               file://sgx/0005-ARM-dts-am437x-add-SGX-node.patch \
-> > +               file://sgx/0006-ARM-dts-am33xx-add-DT-node-for-gpu.patch"
-> > 
-> >  SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-
-> > kernel.git;protocol=git;branch=${BRANCH} \
-> >             file://defconfig \
-> >             file://non-smp.cfg \
-> > +           file://sgx.cfg \
-> >            "
-> > +
-> > +SRC_URI_append_ti33x = " ${SGX_PATCHES}"
-> > +SRC_URI_append_ti43x = " ${SGX_PATCHES}"
-> > --
-> > 2.0.2
-> > 
-> > --
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-> -- 
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
+> Sent: Tuesday, July 29, 2014 8:35 PM
+> To: meta-ti@yoctoproject.org
+> Subject: [meta-ti] [PATCH 2/2] omap3-sgx-modules 5.01.01.01: add Darren's
+> patches to work with 3.14 kernel
+>=20
+> From: Denys Dmytriyenko <denys@ti.com>
+>=20
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+>  ...SDK-Make-5_01_01_01-work-against-3.14-LTS.patch |  52 +++++++  ...x-u=
+se-
+> platform-data-to-provide-reset-info.patch | 121 ++++++++++++++++  ...clas=
+s-
+> am335x-am437x-fix-mutex-deadlock-wa.patch | 153 +++++++++++++++++++++
+> ...-make-it-building-against-ti-linux-3.14.y.patch |  44 ++++++
+>  .../omap3-sgx-modules_5.01.01.01.bb                |   7 +-
+>  5 files changed, 376 insertions(+), 1 deletion(-)  create mode 100644 re=
+cipes-
+> bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0001-PoC-GFX-SDK-Make-
+> 5_01_01_01-work-against-3.14-LTS.patch
+>  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-
+> 5.01.01.01/0002-SGX-linux-use-platform-data-to-provide-reset-info.patch
+>  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-
+> 5.01.01.01/0003-SGX-displayclass-am335x-am437x-fix-mutex-deadlock-
+> wa.patch
+>  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-
+> 5.01.01.01/0004-SGX-linux-make-it-building-against-ti-linux-3.14.y.patch
+>=20
+> diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/000=
+1-
+> PoC-GFX-SDK-Make-5_01_01_01-work-against-3.14-LTS.patch b/recipes-
+> bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0001-PoC-GFX-SDK-Make-
+> 5_01_01_01-work-against-3.14-LTS.patch
+> new file mode 100644
+> index 0000000..e541079
+> --- /dev/null
+> +++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0001-PoC-
+> +++ GFX-SDK-Make-5_01_01_01-work-against-3.14-LTS.patch
+> @@ -0,0 +1,52 @@
+> +From e2db38959a70d1be604a297276a0b0c2ac219bf5 Mon Sep 17 00:00:00
+> 2001
+> +From: Darren Etheridge <detheridge@ti.com>
+> +Date: Tue, 29 Jul 2014 16:06:17 -0500
+> +Subject: [PATCH 1/4] PoC: GFX: SDK: Make 5_01_01_01 work against 3.14
+> +LTS
+> +
+> +An API rename is the main change.  Also hacked in some function
+> +prototypes for enabling use of the tilcdc DRM driver instead of the
+> +fbdev driver on AM335x.  However this all really needs a good cleanup
+> +as it is hacky at the moment.
+> +
+> +Signed-off-by: Darren Etheridge <detheridge@ti.com>
+> +---
+> + GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/omaplfb_linux.c | 5
+> +++++
+> + GFX_Linux_KM/services4/srvkm/env/linux/mutils.h                 | 6 +++=
+++-
+> + 2 files changed, 10 insertions(+), 1 deletion(-)
+> +
+> +diff --git
+> +a/GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/omaplfb_linux.c
+> +b/GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/omaplfb_linux.c
+> +index 5c3fc48..3857b95 100644
+> +--- a/GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/omaplfb_linux.c
+> ++++ b/GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/omaplfb_linux.c
+> +@@ -93,6 +93,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR
+> OTHER DEALINGS IN THE SOFTWARE.
+> + #include <linux/mutex.h>
+> +
+> + #include <video/da8xx-fb.h>
+> ++/* used by SGX OMAPLFB drvier */
+> ++typedef void (*vsync_callback_t)(void *arg); int
+> ++register_vsync_cb(vsync_callback_t handler, void *arg, int idx); int
+> ++unregister_vsync_cb(vsync_callback_t handler, void *arg, int idx);
+> ++
+> + #if defined(PVR_OMAPLFB_DRM_FB)
+> + #if (LINUX_VERSION_CODE < KERNEL_VERSION(3,0,0))  #include
+> +<plat/display.h> diff --git
+> +a/GFX_Linux_KM/services4/srvkm/env/linux/mutils.h
+> +b/GFX_Linux_KM/services4/srvkm/env/linux/mutils.h
+> +index 31e0dac..90ec41c 100644
+> +--- a/GFX_Linux_KM/services4/srvkm/env/linux/mutils.h
+> ++++ b/GFX_Linux_KM/services4/srvkm/env/linux/mutils.h
+> +@@ -79,7 +79,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR
+> OTHER DEALINGS IN THE SOFTWARE.
+> + 	#define	IOREMAP(pa, bytes)	ioremap_cache(pa, bytes)
+> + #else
+> + 	#if defined(__arm__) && (LINUX_VERSION_CODE >=3D
+> KERNEL_VERSION(2,6,0))
+> +-		#define	IOREMAP(pa, bytes)	ioremap_cached(pa, bytes)
+> ++		#if (LINUX_VERSION_CODE >=3D KERNEL_VERSION(3,13,0))
+> ++			#define	IOREMAP(pa, bytes)	ioremap_cache(pa,
+> bytes)
+> ++		#else
+> ++			#define	IOREMAP(pa, bytes)	ioremap_cached(pa,
+> bytes)
+> ++		#endif
+> + 	#else
+> + 		#define IOREMAP(pa, bytes)	ioremap(pa, bytes)
+> + 	#endif
+> +--
+> +1.9.1
+> +
+> diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/000=
+2-
+> SGX-linux-use-platform-data-to-provide-reset-info.patch b/recipes-
+> bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0002-SGX-linux-use-
+> platform-data-to-provide-reset-info.patch
+> new file mode 100644
+> index 0000000..22b73fd
+> --- /dev/null
+> +++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0002-SGX-
+> +++ linux-use-platform-data-to-provide-reset-info.patch
+> @@ -0,0 +1,121 @@
+> +From 30a695502496302f804e14eeca90568f067b2db2 Mon Sep 17 00:00:00
+> 2001
+> +From: Darren Etheridge <detheridge@ti.com>
+> +Date: Fri, 25 Jul 2014 16:03:14 -0500
+> +Subject: [PATCH 2/4] SGX: linux: use platform data to provide reset
+> +info
+> +
+> +In ti-linux-3.14.y we will not have a reset driver unlike
+> +ti-linux-3.12.y so this commit removes the dependency on the reset
+> +driver and instead uses the platform data that in a dt environment is
+> +configured in mach-omap2/pdata-quirks.c
+> +
+> +Signed-off-by: Darren Etheridge <detheridge@ti.com>
+> +---
+> + GFX_Linux_KM/services4/srvkm/env/linux/module.c | 34
+> +++++++++++++++++++++-----
+> + 1 file changed, 28 insertions(+), 6 deletions(-)
+> +
+> +diff --git a/GFX_Linux_KM/services4/srvkm/env/linux/module.c
+> +b/GFX_Linux_KM/services4/srvkm/env/linux/module.c
+> +index e03dc00..82d07f4 100644
+> +--- a/GFX_Linux_KM/services4/srvkm/env/linux/module.c
+> ++++ b/GFX_Linux_KM/services4/srvkm/env/linux/module.c
+> +@@ -47,6 +47,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR
+> OTHER DEALINGS IN THE SOFTWARE.
+> + #endif
+> + #endif
+> +
+> ++#ifndef CONFIG_RESET_CONTROLLER
+> ++#include <linux/platform_data/gfx-sgx.h> #endif
+> ++
+> + #if defined(SUPPORT_DRI_DRM) && !defined(SUPPORT_DRI_DRM_PLUGIN)
+> + #define	PVR_MOD_STATIC
+> + #else
+> +@@ -344,9 +348,11 @@ static LDM_DRV powervr_driver =3D {  LDM_DEV
+> +*gpsPVRLDMDev;
+> +
+> + #if (LINUX_VERSION_CODE >=3D KERNEL_VERSION(3,11,0))
+> ++#ifdef CONFIG_RESET_CONTROLLER
+> + struct reset_control *rstc;
+> + bool already_deasserted =3D false;
+> + #endif
+> ++#endif
+> +
+> + #if defined(MODULE) && defined(PVR_LDM_PLATFORM_MODULE) && \
+> + 	!defined(PVR_USE_PRE_REGISTERED_PLATFORM_DEV)
+> +@@ -388,11 +394,14 @@ static int __devinit PVRSRVDriverProbe(LDM_DEV
+> +*pDevice, const struct pci_device  #endif  {
+> + 	SYS_DATA *psSysData;
+> +-	int ret;
+> ++	int ret;
+> ++	struct device *dev =3D &pDevice->dev;
+> ++	struct gfx_sgx_platform_data *pdata =3D dev->platform_data;
+> ++
+> + 	PVR_TRACE(("PVRSRVDriverProbe(pDevice=3D%p)", pDevice)); #if
+> + (LINUX_VERSION_CODE >=3D KERNEL_VERSION(3,11,0))
+> ++#ifdef CONFIG_RESET_CONTROLLER
+> + 	rstc =3D reset_control_get(&pDevice->dev, NULL);
+> +-
+> + 	if (IS_ERR(rstc))
+> + 	{
+> + 		dev_err(&pDevice->dev, "%s: error: reset_control_get\n",
+> __func__);
+> +@@ -403,7 +412,7 @@ static int __devinit PVRSRVDriverProbe(LDM_DEV
+> +*pDevice, const struct pci_device
+> +
+> + 	if (ret < 0)
+> + 	{
+> +-		dev_err(&pDevice->dev, "%s: error:
+> reset_control_clear_reset\n", __func__);
+> ++		dev_err(dev, "%s: error: reset_control_clear_reset\n",
+> __func__);
+> + 		return ret;
+> + 	}
+> +
+> +@@ -413,11 +422,22 @@ static int __devinit PVRSRVDriverProbe(LDM_DEV
+> *pDevice, const struct pci_device
+> + 	{
+> + 		already_deasserted =3D true;
+> + 	}
+> +-	else if (ret < 0)
+> ++	else if (ret < 0)
+> + 	{
+> +-		dev_err(&pDevice->dev, "%s: error: reset_control_deassert\n",
+> __func__);
+> ++		dev_err(dev, "%s: error: reset_control_deassert\n", __func__);
+> + 		return ret;
+> + 	}
+> ++#else
+> ++	if (pdata && pdata->deassert_reset) {
+> ++		ret =3D pdata->deassert_reset(pDevice, pdata->reset_name);
+> ++		if (ret) {
+> ++			dev_err(dev, "Unable to reset SGX!\n");
+> ++		}
+> ++	} else {
+> ++		dev_err(dev, "SGX Platform data missing deassert_reset!\n");
+> ++		return -ENODEV;
+> ++	}
+> ++#endif  /* CONFIG_RESET_CONTROLLER */
+> + #endif
+> +
+> + #if 0   /* INTEGRATION_POINT */
+> +@@ -432,7 +452,7 @@ static int __devinit PVRSRVDriverProbe(LDM_DEV
+> *pDevice, const struct pci_device
+> + 	{
+> + 		return -EINVAL;
+> + 	}
+> +-#endif
+> ++#endif
+> + 	/* SysInitialise only designed to be called once.
+> + 	 */
+> + 	psSysData =3D SysAcquireDataNoCheck();
+> +@@ -445,6 +465,7 @@ static int __devinit PVRSRVDriverProbe(LDM_DEV
+> *pDevice, const struct pci_device
+> + 		}
+> + 	}
+> + #if (LINUX_VERSION_CODE >=3D KERNEL_VERSION(3,11,0))
+> ++#ifdef CONFIG_RESET_CONTROLLER
+> +         if (!already_deasserted)
+> +         {
+> +                 ret =3D reset_control_is_reset(rstc); @@ -454,6 +475,7
+> +@@ static int __devinit PVRSRVDriverProbe(LDM_DEV *pDevice, const struct
+> pci_device
+> +                 }
+> +         }
+> +         reset_control_put(rstc);
+> ++#endif /* CONFIG_RESET_CONTROLLER */
+> + #endif
+> +
+> + 	return PVRSRVIONClientCreate();
+> +--
+> +1.9.1
+> +
+> diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/000=
+3-
+> SGX-displayclass-am335x-am437x-fix-mutex-deadlock-wa.patch b/recipes-
+> bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0003-SGX-displayclass-
+> am335x-am437x-fix-mutex-deadlock-wa.patch
+> new file mode 100644
+> index 0000000..0e2902d
+> --- /dev/null
+> +++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0003-SGX-
+> +++ displayclass-am335x-am437x-fix-mutex-deadlock-wa.patch
+> @@ -0,0 +1,153 @@
+> +From cf5156ff82e14fe01a194f9fa9a9adc528ac72f0 Mon Sep 17 00:00:00 2001
+> +From: Darren Etheridge <detheridge@ti.com>
+> +Date: Tue, 29 Jul 2014 15:39:56 -0500
+> +Subject: [PATCH 3/4] SGX: displayclass: am335x, am437x - fix mutex
+> +deadlock  warning
+> +
+> +Rearrange the locking semantics in the Unblank screen function to
+> +remove the kernel warning about a possible deadlock scenario.
+> +
+> +The warning presents itself on the console like this:
+> +[ 2976.202979]
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D
+> +[ 2976.202983] [ INFO: possible circular locking dependency detected ]
+> +[ 2976.202994] 3.14.11-00997-gb20d0ac-dirty #53 Tainted: G           O
+> +[ 2976.202997] -------------------------------------------------------
+> +[ 2976.203005] OGLES2Chameleon/1203 is trying to acquire lock:
+> +[ 2976.203058]  (console_lock){+.+.+.}, at: [<bf07a310>]
+> +OMAPLFBUnblankDisplay+0x24/0xbc [omaplfb]
+> +[ 2976.203062]
+> +[ 2976.203062] but task is already holding lock:
+> +[ 2976.203087]  (&fb_info->lock){+.+.+.}, at: [<c0312358>]
+> +lock_fb_info+0x18/0x3c [ 2976.203090] [ 2976.203090] which lock already
+> +depends on the new lock.
+> +[ 2976.203090]
+> +[ 2976.203093]
+> +[ 2976.203093] the existing dependency chain (in reverse order) is:
+> +[ 2976.203101]
+> +[ 2976.203101] -> #1 (&fb_info->lock){+.+.+.}:
+> +[ 2976.203112]        [<c0312358>] lock_fb_info+0x18/0x3c
+> +[ 2976.203124]        [<c0313a7c>] register_framebuffer+0x174/0x26c
+> +[ 2976.203146]        [<c033c314>] omapfb_create_framebuffers+0x48c/0x7a=
+c
+> +[ 2976.203157]        [<c033d3c4>] omapfb_probe+0x4d4/0x848
+> +[ 2976.203170]        [<c0381cc8>] platform_drv_probe+0x18/0x48
+> +[ 2976.203189]        [<c038096c>] driver_probe_device+0x10c/0x238
+> +[ 2976.203199]        [<c0380b2c>] __driver_attach+0x94/0x98
+> +[ 2976.203208]        [<c037f0f0>] bus_for_each_dev+0x54/0x88
+> +[ 2976.203216]        [<c03800f0>] bus_add_driver+0xd8/0x1d8
+> +[ 2976.203223]        [<c038115c>] driver_register+0x78/0xf4
+> +[ 2976.203234]        [<c0008968>] do_one_initcall+0xe4/0x144
+> +[ 2976.203250]        [<c07d3c18>] kernel_init_freeable+0xfc/0x1cc
+> +[ 2976.203261]        [<c0563260>] kernel_init+0x8/0xec
+> +[ 2976.203275]        [<c000e648>] ret_from_fork+0x14/0x2c
+> +[ 2976.203284]
+> +[ 2976.203284] -> #0 (console_lock){+.+.+.}:
+> +[ 2976.203301]        [<c008bc00>] console_lock+0x4c/0x60
+> +[ 2976.203328]        [<bf07a310>] OMAPLFBUnblankDisplay+0x24/0xbc
+> [omaplfb]
+> +[ 2976.203340]        [<bf0797f4>] OpenDCDevice+0x60/0x78 [omaplfb]
+> +[ 2976.203459]        [<bf041ac0>] PVRSRVOpenDCDeviceKM+0xec/0x178
+> [pvrsrvkm]
+> +[ 2976.203654]        [<bf05645c>] PVRSRVOpenDCDeviceBW+0x6c/0xac
+> [pvrsrvkm]
+> +[ 2976.203811]        [<bf056d10>] BridgedDispatchKM+0xf4/0x14c [pvrsrvk=
+m]
+> +[ 2976.203966]        [<bf04f304>] PVRSRV_BridgeDispatchKM+0xf0/0x204
+> +[pvrsrvkm]
+> +[ 2976.203987]        [<c0129500>] do_vfs_ioctl+0x78/0x61c
+> +[ 2976.203997]        [<c0129b08>] SyS_ioctl+0x64/0x74
+> +[ 2976.204013]        [<c000e580>] ret_fast_syscall+0x0/0x48
+> +[ 2976.204016]
+> +[ 2976.204016] other info that might help us debug this:
+> +[ 2976.204016]
+> +[ 2976.204019]  Possible unsafe locking scenario:
+> +[ 2976.204019]
+> +[ 2976.204022]        CPU0                    CPU1
+> +[ 2976.204024]        ----                    ----
+> +[ 2976.204030]   lock(&fb_info->lock);
+> +[ 2976.204036]                                lock(console_lock);
+> +[ 2976.204041]                                lock(&fb_info->lock);
+> +[ 2976.204046]   lock(console_lock);
+> +[ 2976.204048]
+> +[ 2976.204048]  *** DEADLOCK ***
+> +[ 2976.204048]
+> +[ 2976.204055] 2 locks held by OGLES2Chameleon/1203:
+> +[ 2976.204217]  #0:  (psPVRSRVMutex#2/1){+.+.+.}, at: [<bf04f238>]
+> +PVRSRV_BridgeDispatchKM+0x24/0x204 [pvrsrvkm] [ 2976.204240]  #1:
+> +(&fb_info->lock){+.+.+.}, at: [<c0312358>] lock_fb_info+0x18/0x3c
+> +
+> +Signed-off-by: Darren Etheridge <detheridge@ti.com>
+> +---
+> + GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/omaplfb_linux.c | 8
+> ++++++---
+> +GFX_Linux_KM/services4/3rdparty/dc_ti43xx_linux/omaplfb_linux.c | 7
+> ++++++--
+> + 2 files changed, 10 insertions(+), 5 deletions(-)
+> +
+> +diff --git
+> +a/GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/omaplfb_linux.c
+> +b/GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/omaplfb_linux.c
+> +index 3857b95..a5cc7d0 100644
+> +--- a/GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/omaplfb_linux.c
+> ++++ b/GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/omaplfb_linux.c
+> +@@ -812,10 +812,13 @@ static OMAPLFB_ERROR
+> +OMAPLFBBlankOrUnblankDisplay(OMAPLFB_DEVINFO *psDevInfo, IM  {
+> #ifdef
+> +FBDEV_PRESENT
+> + 	int res;
+> ++
+> ++	OMAPLFB_CONSOLE_LOCK();
+> + 	if (!lock_fb_info(psDevInfo->psLINFBInfo))
+> + 	{
+> + 		printk(KERN_ERR DRIVER_PREFIX
+> + 			": %s: Device %u: Couldn't lock FB info\n",
+> __FUNCTION__,
+> + psDevInfo->uiFBDevID);
+> ++		OMAPLFB_CONSOLE_UNLOCK();
+> + 		return (OMAPLFB_ERROR_GENERIC);
+> + 	}
+> +
+> +@@ -825,14 +828,13 @@ static OMAPLFB_ERROR
+> OMAPLFBBlankOrUnblankDisplay(OMAPLFB_DEVINFO *psDevInfo, IM
+> + 	* notification.
+> + 	*/
+> +
+> +-
+> +-	OMAPLFB_CONSOLE_LOCK();
+> + 	psDevInfo->psLINFBInfo->flags |=3D FBINFO_MISC_USEREVENT;
+> + 	res =3D fb_blank(psDevInfo->psLINFBInfo, bBlank ? 1 : 0);
+> + 	psDevInfo->psLINFBInfo->flags &=3D ~FBINFO_MISC_USEREVENT;
+> +
+> +-	OMAPLFB_CONSOLE_UNLOCK();
+> + 	unlock_fb_info(psDevInfo->psLINFBInfo);
+> ++	OMAPLFB_CONSOLE_UNLOCK();
+> ++
+> + 	if (res !=3D 0 && res !=3D -EINVAL)
+> + 	{
+> + 		printk(KERN_ERR DRIVER_PREFIX
+> +diff --git
+> +a/GFX_Linux_KM/services4/3rdparty/dc_ti43xx_linux/omaplfb_linux.c
+> +b/GFX_Linux_KM/services4/3rdparty/dc_ti43xx_linux/omaplfb_linux.c
+> +index c79dbd0..58b8640 100755
+> +--- a/GFX_Linux_KM/services4/3rdparty/dc_ti43xx_linux/omaplfb_linux.c
+> ++++ b/GFX_Linux_KM/services4/3rdparty/dc_ti43xx_linux/omaplfb_linux.c
+> +@@ -948,10 +948,13 @@ static OMAPLFB_ERROR
+> +OMAPLFBBlankOrUnblankDisplay(OMAPLFB_DEVINFO *psDevInfo, IM  {
+> #ifdef
+> +FBDEV_PRESENT
+> + 	int res;
+> ++
+> ++	OMAPLFB_CONSOLE_LOCK();
+> + 	if (!lock_fb_info(psDevInfo->psLINFBInfo))
+> + 	{
+> + 		printk(KERN_ERR DRIVER_PREFIX
+> + 		": %s: Device %u: Couldn't lock FB info\n", __FUNCTION__,
+> + psDevInfo->uiFBDevID);
+> ++		OMAPLFB_CONSOLE_UNLOCK();
+> + 		return (OMAPLFB_ERROR_GENERIC);
+> + 	}
+> +
+> +@@ -961,13 +964,13 @@ static OMAPLFB_ERROR
+> OMAPLFBBlankOrUnblankDisplay(OMAPLFB_DEVINFO *psDevInfo, IM
+> + 	* notification.
+> + 	*/
+> +
+> +-	OMAPLFB_CONSOLE_LOCK();
+> + 	psDevInfo->psLINFBInfo->flags |=3D FBINFO_MISC_USEREVENT;
+> + 	res =3D fb_blank(psDevInfo->psLINFBInfo, bBlank ? 1 : 0);
+> + 	psDevInfo->psLINFBInfo->flags &=3D ~FBINFO_MISC_USEREVENT;
+> +
+> +-	OMAPLFB_CONSOLE_UNLOCK();
+> + 	unlock_fb_info(psDevInfo->psLINFBInfo);
+> ++	OMAPLFB_CONSOLE_UNLOCK();
+> ++
+> + 	if (res !=3D 0 && res !=3D -EINVAL)
+> + 	{
+> + 		printk(KERN_ERR DRIVER_PREFIX
+> +--
+> +1.9.1
+> +
+> diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/000=
+4-
+> SGX-linux-make-it-building-against-ti-linux-3.14.y.patch b/recipes-
+> bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0004-SGX-linux-make-it-
+> building-against-ti-linux-3.14.y.patch
+> new file mode 100644
+> index 0000000..b9c004f
+> --- /dev/null
+> +++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0004-SGX-
+> +++ linux-make-it-building-against-ti-linux-3.14.y.patch
+> @@ -0,0 +1,44 @@
+> +From 21e14daefe16351320e01392f188cf473f67702f Mon Sep 17 00:00:00
+> 2001
+> +From: Darren Etheridge <detheridge@ti.com>
+> +Date: Tue, 29 Jul 2014 15:54:14 -0500
+> +Subject: [PATCH 4/4] SGX: linux: make it building against
+> +ti-linux-3.14.y
+> +
+> +The fbdev drivers moved into their own directory under drivers/video.
+> +All of the omap2 dss stuff moved there as well so update the Makefile
+> +to point to the right place.
+> +
+> +Signed-off-by: Darren Etheridge <detheridge@ti.com>
+> +---
+> + GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/Kbuild | 2 +-
+> +GFX_Linux_KM/services4/3rdparty/dc_ti43xx_linux/Kbuild | 2 +-
+> + 2 files changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/Kbuild
+> +b/GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/Kbuild
+> +index 1ae2359..7c2a39d 100755
+> +--- a/GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/Kbuild
+> ++++ b/GFX_Linux_KM/services4/3rdparty/dc_ti335x_linux/Kbuild
+> +@@ -14,7 +14,7 @@ EXTRA_CFLAGS =3D	-DLINUX \
+> + 		-I$(PVR_BUILD_DIR)/include4 \
+> + 		-I$(PVR_BUILD_DIR)/services4/include \
+> + 		-I$(PVR_BUILD_DIR)/services4/system/$(PVR_SYSTEM) \
+> +-		-I$(KERNELDIR)/drivers/video/omap2 \
+> ++		-I$(KERNELDIR)/drivers/video/fbdev/omap2 \
+> + 		-I$(PVR_BUILD_DIR)/services4/system/include \
+> + 		$(SYS_CFLAGS.1) \
+> +
+> +diff --git a/GFX_Linux_KM/services4/3rdparty/dc_ti43xx_linux/Kbuild
+> +b/GFX_Linux_KM/services4/3rdparty/dc_ti43xx_linux/Kbuild
+> +index 1ae2359..7c2a39d 100755
+> +--- a/GFX_Linux_KM/services4/3rdparty/dc_ti43xx_linux/Kbuild
+> ++++ b/GFX_Linux_KM/services4/3rdparty/dc_ti43xx_linux/Kbuild
+> +@@ -14,7 +14,7 @@ EXTRA_CFLAGS =3D	-DLINUX \
+> + 		-I$(PVR_BUILD_DIR)/include4 \
+> + 		-I$(PVR_BUILD_DIR)/services4/include \
+> + 		-I$(PVR_BUILD_DIR)/services4/system/$(PVR_SYSTEM) \
+> +-		-I$(KERNELDIR)/drivers/video/omap2 \
+> ++		-I$(KERNELDIR)/drivers/video/fbdev/omap2 \
+> + 		-I$(PVR_BUILD_DIR)/services4/system/include \
+> + 		$(SYS_CFLAGS.1) \
+> +
+> +--
+> +1.9.1
+> +
+> diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
+> b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
+> index 40bf8c0..0b1c06f 100644
+> --- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
+> +++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
+> @@ -10,7 +10,7 @@ IMGPV =3D "1.10.2359475"
+>=20
+>  inherit module
+>=20
+> -MACHINE_KERNEL_PR_append =3D "a"
+> +MACHINE_KERNEL_PR_append =3D "b"
+>  PR =3D "${MACHINE_KERNEL_PR}"
+>=20
+>  BINFILE_HARDFP =3D "Graphics_SDK_setuplinux_hardfp_${SGXPV}.bin"
+> @@ -33,6 +33,11 @@ BINFILE :=3D "${BINFILE_HARDFP}"
+>=20
+>  SRC_URI =3D "http://software-
+> dl.ti.com/dsps/dsps_public_sw/gfxsdk/${SGXPV}/exports/${BINFILE}"
+>=20
+> +SRC_URI +=3D "file://0001-PoC-GFX-SDK-Make-5_01_01_01-work-against-3.14-
+> LTS.patch;striplevel=3D2 \
+> +            file://0002-SGX-linux-use-platform-data-to-provide-reset-
+> info.patch;striplevel=3D2 \
+> +            file://0003-SGX-displayclass-am335x-am437x-fix-mutex-deadloc=
+k-
+> wa.patch;striplevel=3D2 \
+> +            file://0004-SGX-linux-make-it-building-against-ti-linux-
+> 3.14.y.patch;striplevel=3D2"
+> +
+>  SRC_URI[md5sum] :=3D "${MD5SUM_HARDFP}"
+>  SRC_URI[sha256sum] :=3D "${SHA256SUM_HARDFP}"
+>=20
+> --
+> 2.0.2
+>=20
+> --
 > _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
