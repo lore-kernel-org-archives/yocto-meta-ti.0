@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EAB67E007D5; Sun,  3 Aug 2014 14:45:01 -0700 (PDT)
+	id E1374E007D6; Sun,  3 Aug 2014 14:45:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -11,26 +11,26 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      [206.46.173.19 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 3601 seconds by postgrey-1.32 at yocto-www;
-	Sun, 03 Aug 2014 14:44:52 PDT
 Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
 	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DE2DBE007CA
-	for <meta-ti@yoctoproject.org>; Sun,  3 Aug 2014 14:44:52 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 05B7EE007D2
+	for <meta-ti@yoctoproject.org>; Sun,  3 Aug 2014 14:44:59 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [72.66.25.89])
 	by vms173019.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N9R00B8W0ACT090@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Sun, 03 Aug 2014 15:44:36 -0500 (CDT)
+	2009)) with ESMTPA id <0N9R00I700AD5F50@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Sun, 03 Aug 2014 15:44:37 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 5AF41226BD; Sat,
-	02 Aug 2014 21:11:09 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 8E58320190; Fri,
+	01 Aug 2014 13:40:01 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Sat, 02 Aug 2014 21:11:05 -0400
-Message-id: <1407028266-10077-1-git-send-email-denis@denix.org>
+Date: Fri, 01 Aug 2014 13:39:59 -0400
+Message-id: <1406914799-10706-2-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.0.2
-Subject: [PATCH 1/2] linux-ti-staging 3.12: update to latest 3.12.26
+In-reply-to: <1406914799-10706-1-git-send-email-denis@denix.org>
+References: <1406914799-10706-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/2] linux-ti-staging 3.14: update to latest 3.14.15 plus connectivity changes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,24 +49,28 @@ From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-ti-staging_3.12.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_3.14.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index e288a6d..427bd97 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -39,8 +39,8 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index c223c88..7abaeac 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -43,11 +43,11 @@ S = "${WORKDIR}/git"
  
- BRANCH = "ti-linux-3.12.y"
+ BRANCH = "ti-linux-3.14.y"
  
--SRCREV = "ffe21d87399ec09620878613a9ebfbc6c1d7c548"
--PV = "3.12.20"
-+SRCREV = "5c62fd05f12d008a136d5620d12a76d50429af3c"
-+PV = "3.12.26"
+-SRCREV = "b0fa4f08d72c8723219b5174b5749151b5acaee0"
+-PV = "3.14.14"
++SRCREV = "aa595e6598fc5a722ee653881334d0d8a16477bc"
++PV = "3.14.15"
  
  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 -- 
 2.0.2
 
