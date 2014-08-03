@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E1374E007D6; Sun,  3 Aug 2014 14:45:01 -0700 (PDT)
+	id 29923E007D6; Sun,  3 Aug 2014 14:45:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,7 +13,7 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      [score: 0.0000]
 Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
 	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 05B7EE007D2
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21571E007D3
 	for <meta-ti@yoctoproject.org>; Sun,  3 Aug 2014 14:44:59 -0700 (PDT)
 Received: from gandalf.denix.org ([unknown] [72.66.25.89])
 	by vms173019.mailsrvcs.net
@@ -21,15 +21,15 @@ Received: from gandalf.denix.org ([unknown] [72.66.25.89])
 	2009)) with ESMTPA id <0N9R00I700AD5F50@vms173019.mailsrvcs.net> for
 	meta-ti@yoctoproject.org; Sun, 03 Aug 2014 15:44:37 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 8E58320190; Fri,
-	01 Aug 2014 13:40:01 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 7946222704; Sat,
+	02 Aug 2014 21:11:09 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Fri, 01 Aug 2014 13:39:59 -0400
-Message-id: <1406914799-10706-2-git-send-email-denis@denix.org>
+Date: Sat, 02 Aug 2014 21:11:06 -0400
+Message-id: <1407028266-10077-2-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.0.2
-In-reply-to: <1406914799-10706-1-git-send-email-denis@denix.org>
-References: <1406914799-10706-1-git-send-email-denis@denix.org>
+In-reply-to: <1407028266-10077-1-git-send-email-denis@denix.org>
+References: <1407028266-10077-1-git-send-email-denis@denix.org>
 Subject: [PATCH 2/2] linux-ti-staging 3.14: update to latest 3.14.15 plus connectivity changes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -43,7 +43,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Aug 2014 21:45:02 -0000
+X-List-Received-Date: Sun, 03 Aug 2014 21:45:03 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
