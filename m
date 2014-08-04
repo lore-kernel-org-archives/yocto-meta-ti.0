@@ -1,31 +1,54 @@
-Return-Path: <alexandre.belloni@free-electrons.com>
+Return-Path: <tom.rini@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 941E9E004DD; Mon,  4 Aug 2014 09:20:46 -0700 (PDT)
+	id 72115E004DD; Mon,  4 Aug 2014 09:39:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mail.free-electrons.com (top.free-electrons.com [176.31.233.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A861AE0030B
-	for <meta-ti@yoctoproject.org>; Mon,  4 Aug 2014 09:20:38 -0700 (PDT)
-Received: by mail.free-electrons.com (Postfix, from userid 106)
-	id 371E62DCB; Mon,  4 Aug 2014 18:20:40 +0200 (CEST)
-Received: from localhost (128-79-216-6.hfc.dyn.abo.bbox.fr [128.79.216.6])
-	by mail.free-electrons.com (Postfix) with ESMTPSA id D6FCA803;
-	Mon,  4 Aug 2014 18:20:39 +0200 (CEST)
-Date: Mon, 4 Aug 2014 18:20:31 +0200
-From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
-To: "Cooper Jr., Franklin" <fcooper@ti.com>
-Message-ID: <20140804162031.GR3214@piout.net>
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.192.44 listed in list.dnswl.org]
+Received: from mail-qg0-f44.google.com (mail-qg0-f44.google.com
+	[209.85.192.44])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 357D2E0030B
+	for <meta-ti@yoctoproject.org>; Mon,  4 Aug 2014 09:39:01 -0700 (PDT)
+Received: by mail-qg0-f44.google.com with SMTP id e89so9146786qgf.17
+	for <meta-ti@yoctoproject.org>; Mon, 04 Aug 2014 09:39:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=6J3sWyvz4ZRZJCkdvPLBB8V8bq50nkUR695+dmJIxLc=;
+	b=FRDDdSdqBS8kJ7DrFF/GqiPLhR49nHcPvPdOCEmbjyH8VU72vtNOKAa77GGPJGllRz
+	faFbe65Ujli+FoIXbUnwKmJyS8914lS0irb4egcQzM9+SMyuzd5NZAtpLxPialsZu3tR
+	4OLiztUA8ZJni53Rf/Rpr5rtuEmzWfKL9nrq2d/OJDq6UY0ZCP6oFHre6xehBrwRg/xg
+	h+cySiAswxmK1ZFDFzAFoteecaxH4bUgoNxIXVT1HyntC6Bl0mpgp2q9KGRZOl1aIECq
+	pKO5Gr3Pkx6+BqPvHVDgCJYdM0iqzXi5NfmAjrbpcqHnIB/JeSxSwQjvKd++pRw5d7jS
+	aeaQ==
+X-Received: by 10.224.127.131 with SMTP id g3mr38617143qas.0.1407170341008;
+	Mon, 04 Aug 2014 09:39:01 -0700 (PDT)
+Received: from bill-the-cat (cpe-098-121-186-226.ec.res.rr.com.
+	[98.121.186.226])
+	by mx.google.com with ESMTPSA id t3sm32142245qak.18.2014.08.04.09.38.50
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 04 Aug 2014 09:38:57 -0700 (PDT)
+Sender: Tom Rini <tom.rini@gmail.com>
+Date: Mon, 4 Aug 2014 12:38:55 -0400
+From: Tom Rini <trini@ti.com>
+To: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+Message-ID: <20140804163855.GK19374@bill-the-cat>
 References: <1407167150-22655-1-git-send-email-alexandre.belloni@free-electrons.com>
-	<CDAEECB9-550D-4013-A3C9-07520AA88C9D@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <CDAEECB9-550D-4013-A3C9-07520AA88C9D@ti.com>
+In-Reply-To: <1407167150-22655-1-git-send-email-alexandre.belloni@free-electrons.com>
+Organization: Texas Instruments
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Cc: meta-ti@yoctoproject.org
 Subject: Re: [PATCH] beaglebone: use the am335x_boneblack u-boot configuration
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -39,53 +62,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Aug 2014 16:20:46 -0000
+X-List-Received-Date: Mon, 04 Aug 2014 16:39:05 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hi,
+On Mon, Aug 04, 2014 at 05:45:50PM +0200, Alexandre Belloni wrote:
 
-On 04/08/2014 at 16:04:04 +0000, Cooper Jr., Franklin wrote :
-> How does this config work on the Beaglebone white?
+> Using the am335x_boneblack configuration for u-boot allows to save the
+> environment to the emmc. Else, it is not possible to save the
+> environment at all.
 > 
+> Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
 
-I didn't test but I don't think it will change anything has it doesn't
-have any NAND or emmc and the only change is that the am335x_boneblack
-uses emmc to save the environment instead of trying (and failing) to
-save to NAND.
+There's two ways to go about improving the out of box experience.  One
+of which would be to switch "beaglebone" to am335x_boneblack config
+which will switch env saving to eMMC and leave BBW just as unable to
+have persisent env (outside of uEnv.txt) as today.  Another would be to
+bring in http://patchwork.ozlabs.org/patch/375824/ (which will be merged
+to mainline) and
+https://git.ti.com/ti-u-boot/ti-u-boot/commit/b8fce957880e6c4194614260f70be4e7f2c9f469
+(which will not, we'll instead get env location migrated to Kconfig
+choices and leave it to the user to pick where they want things to be)
+which puts everything in a binary file on the FAT partition of the SD
+card which is also pretty frequently available.
 
-> > On Aug 4, 2014, at 10:46 AM, "Alexandre Belloni" <alexandre.belloni@free-electrons.com> wrote:
-> > 
-> > Using the am335x_boneblack configuration for u-boot allows to save the
-> > environment to the emmc. Else, it is not possible to save the
-> > environment at all.
-> > 
-> > Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
-> > ---
-> > conf/machine/beaglebone.conf | 2 +-
-> > 1 file changed, 1 insertion(+), 1 deletion(-)
-> > 
-> > diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.conf
-> > index 8a83a1aeb569..0b4dce3ad647 100644
-> > --- a/conf/machine/beaglebone.conf
-> > +++ b/conf/machine/beaglebone.conf
-> > @@ -11,4 +11,4 @@ IMAGE_FSTYPES += "tar.gz"
-> > 
-> > SERIAL_CONSOLE = "115200 ttyO0"
-> > 
-> > -UBOOT_MACHINE = "am335x_evm_config"
-> > +UBOOT_MACHINE = "am335x_boneblack"
-> > -- 
-> > 1.9.1
-> > 
-> > -- 
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
+Either one is honestly a fine improvement.
 
 -- 
-Alexandre Belloni, Free Electrons
-Embedded Linux, Kernel and Android engineering
-http://free-electrons.com
+Tom
 
