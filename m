@@ -1,39 +1,39 @@
 Return-Path: <fcooper@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 93DE6E00804; Mon,  4 Aug 2014 06:56:24 -0700 (PDT)
+	id 4A40AE00804; Mon,  4 Aug 2014 06:56:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B3C76E007EE
-	for <meta-ti@yoctoproject.org>; Mon,  4 Aug 2014 06:56:22 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s74DuLhW016887;
-	Mon, 4 Aug 2014 08:56:21 -0500
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7E419E007F6
+	for <meta-ti@yoctoproject.org>; Mon,  4 Aug 2014 06:56:29 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s74DuSbt014677;
+	Mon, 4 Aug 2014 08:56:28 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s74DuKAs024303;
-	Mon, 4 Aug 2014 08:56:20 -0500
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s74DuSrF021428;
+	Mon, 4 Aug 2014 08:56:28 -0500
 Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
 	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.03.0174.001; Mon, 4 Aug 2014 08:56:20 -0500
+	14.03.0174.001; Mon, 4 Aug 2014 08:56:27 -0500
 From: "Cooper Jr., Franklin" <fcooper@ti.com>
 To: Denys Dmytriyenko <denis@denix.org>, "meta-ti@yoctoproject.org"
 	<meta-ti@yoctoproject.org>
 Thread-Topic: [meta-ti] [PATCH 2/2] linux-ti-staging 3.14: update to latest
 	3.14.15 plus connectivity changes
-Thread-Index: AQHPr2RYx8teM9yYCUKlL/fSX+CiDZvAePJw
-Date: Mon, 4 Aug 2014 13:56:19 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C6F1BD8@DFLE08.ent.ti.com>
-References: <1406914799-10706-1-git-send-email-denis@denix.org>
-	<1406914799-10706-2-git-send-email-denis@denix.org>
-In-Reply-To: <1406914799-10706-2-git-send-email-denis@denix.org>
+Thread-Index: AQHPr2RsM29mpDTqL0m3jSOSPDb0WZvAePlA
+Date: Mon, 4 Aug 2014 13:56:27 +0000
+Message-ID: <8F29D6B095ED194EA1980491A5E029710C6F1BDF@DFLE08.ent.ti.com>
+References: <1407028266-10077-1-git-send-email-denis@denix.org>
+	<1407028266-10077-2-git-send-email-denis@denix.org>
+In-Reply-To: <1407028266-10077-2-git-send-email-denis@denix.org>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
@@ -52,7 +52,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Aug 2014 13:56:24 -0000
+X-List-Received-Date: Mon, 04 Aug 2014 13:56:30 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
@@ -62,7 +62,7 @@ Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
 > -----Original Message-----
 > From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
 > bounces@yoctoproject.org] On Behalf Of Denys Dmytriyenko
-> Sent: Friday, August 01, 2014 12:40 PM
+> Sent: Saturday, August 02, 2014 8:11 PM
 > To: meta-ti@yoctoproject.org
 > Subject: [meta-ti] [PATCH 2/2] linux-ti-staging 3.14: update to latest 3.=
 14.15
