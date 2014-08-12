@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ECF25E00796; Mon, 11 Aug 2014 17:27:39 -0700 (PDT)
+	id EDBF2E00786; Mon, 11 Aug 2014 17:27:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A48BFE00786
-	for <meta-ti@yoctoproject.org>; Mon, 11 Aug 2014 17:27:28 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A3008E004F2
+	for <meta-ti@yoctoproject.org>; Mon, 11 Aug 2014 17:27:27 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7517F529D5; Tue, 12 Aug 2014 00:27:28 +0000 (UTC)
+	id 42DDE52981; Tue, 12 Aug 2014 00:27:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140812002728.7517F529D5@arago-project.org>
-Date: Tue, 12 Aug 2014 00:27:28 +0000 (UTC)
+Message-Id: <20140812002726.42DDE52981@arago-project.org>
+Date: Tue, 12 Aug 2014 00:27:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : am57xx-evm: Update the config name used in U-boot for this board
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 12 Aug 2014 00:27:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: f54041ddbd88c58ed72d8a3c05c3fdd7ae13eaf5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f54041ddbd88c58ed72d8a3c05c3fdd7ae13eaf5
+Branch: master
+Commit: 3de384bb34d4b4e5a36196ec4a62983c7dbef3b8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3de384bb34d4b4e5a36196ec4a62983c7dbef3b8
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Thu Aug  7 04:10:57 2014 +0000
