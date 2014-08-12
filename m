@@ -1,41 +1,34 @@
-Return-Path: <denys@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3DEE7E00799; Tue, 12 Aug 2014 08:52:50 -0700 (PDT)
+	id DC7F8E0079A; Tue, 12 Aug 2014 11:21:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 977B1E006EF
-	for <meta-ti@yoctoproject.org>; Tue, 12 Aug 2014 08:52:48 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s7CFqmZC001865;
-	Tue, 12 Aug 2014 10:52:48 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s7CFql8x005880;
-	Tue, 12 Aug 2014 10:52:48 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 12 Aug 2014 10:52:47 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s7CFqlXA025937;
-	Tue, 12 Aug 2014 10:52:47 -0500
-Date: Tue, 12 Aug 2014 11:52:46 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Eric Lee <eric.lee@embedian.com>
-Message-ID: <20140812155246.GH23523@edge>
-References: <000001cfb5fb$1cafdd60$560f9820$@embedian.com>
-MIME-Version: 1.0
-In-Reply-To: <000001cfb5fb$1cafdd60$560f9820$@embedian.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: cryptodev build error with 3.15.y
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [206.46.173.17 listed in list.dnswl.org]
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B1C43E00796
+	for <meta-ti@yoctoproject.org>; Tue, 12 Aug 2014 11:21:46 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.18.33.160])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0NA700543HNUV5C0@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 12 Aug 2014 13:21:45 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 39A6A20015; Tue,
+	12 Aug 2014 14:21:30 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Tue, 12 Aug 2014 14:21:29 -0400
+Message-id: <1407867689-22855-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.0.4
+Subject: [PATCH] am33x-cm3: update with version 1.8.7
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,21 +41,62 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2014 15:52:50 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Aug 2014 18:21:58 -0000
 
-On Tue, Aug 12, 2014 at 03:00:22PM +0800, Eric Lee wrote:
-> Hi Denys,
-> 
-> I built TI SDK7 with Linux kernel 3.15.y and got cryptodev compile error. I
-> knew that you have a fix for this. May I know where can I find your fix?
-> Thanks.
+From: Denys Dmytriyenko <denys@ti.com>
 
-There were no releases with 3.15 kernel. The one we have working is 3.14 now.
+* Move repo to git.ti.com
+* Bump PE due to versioning schema change
 
-What is the compile error you are getting?
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-bsp/am33x-cm3/am33x-cm3_git.bb | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
+diff --git a/recipes-bsp/am33x-cm3/am33x-cm3_git.bb b/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
+index 42f20da..97c45ad 100644
+--- a/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
++++ b/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
+@@ -3,15 +3,15 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
+ 
+-PV = "05.00.00.03"
+-PR = "r1"
++PV = "1.8.7"
++PR = "r0"
++PE = "1"
+ 
+ # Make package machine specific due to different init scripts
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-# SRCREV corresponds to tag v05.00.00.03
+-SRCREV = "a0ddffb63147e2079a08944c0e399c75538201a9"
+-BRANCH ?= "master"
++SRCREV = "fb0117edd5810a8d3bd9b1cd8abe34e12ff2d0ba"
++BRANCH ?= "next"
+ 
+ # This init script is only used for older kernels that do not support
+ # hotplug of the firmware.  Newer kernels do not require the initscript
+@@ -25,7 +25,7 @@ UPDATERCPN = "${PN}-initscript"
+ 
+ RDEPENDS_${PN}-initscript = "am33x-cm3"
+ 
+-SRC_URI = "git://arago-project.org/git/projects/am33x-cm3.git;protocol=git;branch=${BRANCH} \
++SRC_URI = "git://git.ti.com/ti-cm3-pm-firmware/amx3-cm3.git;protocol=git;branch=${BRANCH} \
+            file://init-am33x-cm3 \
+            file://init-am43x-cm3 \
+           "
+@@ -41,7 +41,7 @@ do_compile() {
+ 
+ do_install() {
+ 	install -d ${D}${base_libdir}/firmware
+-	install -m 0644 bin/am335x-pm-firmware.bin ${D}${base_libdir}/firmware/
++	install -m 0644 bin/am335x-pm-firmware.elf ${D}${base_libdir}/firmware/
+ 
+ 	# Install the init script to load the PM firmware at boot
+ 	install -d ${D}${sysconfdir}/init.d
 -- 
-Denys
+2.0.4
+
 
