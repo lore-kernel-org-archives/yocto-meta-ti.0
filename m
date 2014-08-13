@@ -1,50 +1,53 @@
-Return-Path: <denys@ti.com>
+Return-Path: <aymeric.dumaz@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D17E4E0079A; Tue, 12 Aug 2014 16:04:07 -0700 (PDT)
+	id 0E890E007A0; Tue, 12 Aug 2014 18:00:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (aymeric.dumaz[at]gmail.com)
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6665DE00796
-	for <meta-ti@yoctoproject.org>; Tue, 12 Aug 2014 16:04:04 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s7CN3xYb004948;
-	Tue, 12 Aug 2014 18:03:59 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s7CN3x1Q028449;
-	Tue, 12 Aug 2014 18:03:59 -0500
-Received: from DLEE08.ent.ti.com ([fe80::b57d:c966:76e5:eb71]) by
-	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
-	14.03.0174.001; Tue, 12 Aug 2014 18:03:59 -0500
-From: "Dmytriyenko, Denys" <denys@ti.com>
-To: "alexandre.belloni@free-electrons.com"
-	<alexandre.belloni@free-electrons.com>, "diego.sueiro@gmail.com"
-	<diego.sueiro@gmail.com>
-Thread-Topic: [meta-ti] Alexandre Belloni : beaglebone: use the
-	am335x_boneblack u-boot configuration
-Thread-Index: AQHPtilLmNu/Dr9BBkOXuKAkx2snS5vNJJ6AgAC6RwCAAAufAP//rI9H
-Date: Tue, 12 Aug 2014 23:03:58 +0000
-Message-ID: <B0581B5571079145BA1CD78C126DBDE7320BBDC5@DLEE08.ent.ti.com>
-References: <20140812020344.BF28052981@arago-project.org>
-	<CAMCfZKFhAVNKZP2X5jATWOWwrtk4TdBK5VADsui+dTWACAHr9g@mail.gmail.com>
-	<20140812151419.GF23523@edge> <20140812222101.GB16009@piout.net>,
-	<CAMCfZKGNewfvERQczxPpEwDYGk21OvdLLPqzvL+BmLFoArsmRQ@mail.gmail.com>
-In-Reply-To: <CAMCfZKGNewfvERQczxPpEwDYGk21OvdLLPqzvL+BmLFoArsmRQ@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
-	"git@arago-project.org" <git@arago-project.org>
-Subject: Re: Alexandre Belloni : beaglebone: use the am335x_boneblack u-boot configuration
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [74.125.82.49 listed in list.dnswl.org]
+Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A2EA5E00796
+	for <meta-ti@yoctoproject.org>; Tue, 12 Aug 2014 18:00:41 -0700 (PDT)
+Received: by mail-wg0-f49.google.com with SMTP id k14so10768614wgh.32
+	for <meta-ti@yoctoproject.org>; Tue, 12 Aug 2014 18:00:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=84gcP9FPoDpIJntlf6BemuaK6T61Wu5ICdnD3tzBq4o=;
+	b=n9Vw1igdbPfUrtPI1q+F7zbXVYrYuajOoNX3TTGjKnNmUWS4dCxSbuMfeId/6s2+AQ
+	8AQSJfgnOpEeS0xxBKSYtphiOvpR77pfQPDgNToZaFVCa6Gs2jCihrNkmHd2/hF1oahW
+	NAJ5gaoJ9ytdkW5kXE8QnNTGJoqL7EoK6MtNdPaybIIrdXLANXsiQ1S6J5LqwsdCjNCD
+	7rGc+KZZ+BPnmWW0yWyqtLWUktT4z6AUcHVmbefl2P8flkAlXJGh+de8yGVWDo7fodIm
+	9c3g4YBf6YmNsrgpRBoapLmS24exk6KZ0Qd1ekSaMA57IU6dYoP3WrRox5KZg+kbBJYL
+	6J0w==
+X-Received: by 10.194.206.67 with SMTP id lm3mr1161604wjc.70.1407891640588;
+	Tue, 12 Aug 2014 18:00:40 -0700 (PDT)
+Received: from localhost.localdomain (136.217.123.78.rev.sfr.net.
+	[78.123.217.136])
+	by mx.google.com with ESMTPSA id pe6sm752390wjb.38.2014.08.12.18.00.39
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 12 Aug 2014 18:00:39 -0700 (PDT)
+Sender: Aymeric Dumaz <aymericdumaz@gmail.com>
+From: Aymeric Dumaz <aymeric.dumaz@gmail.com>
+To: meta-ti@yoctoproject.org
+Date: Wed, 13 Aug 2014 03:00:25 +0200
+Message-Id: <1407891625-23383-1-git-send-email-aymeric.dumaz@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [daisy/master][PATCH] recipes-qt: add a .bbappend for qtbase
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -57,163 +60,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2014 23:04:07 -0000
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_B0581B5571079145BA1CD78C126DBDE7320BBDC5DLEE08entticom_"
+X-List-Received-Date: Wed, 13 Aug 2014 01:00:50 -0000
 
---_000_B0581B5571079145BA1CD78C126DBDE7320BBDC5DLEE08entticom_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+This bbappend is inspired from the meta-fsl-arm one [1].
+It is made to build qtbase with ligles-omap3 libraries and integrate more
+plugins, like tslib.
 
-Same here, it was failing the configure step.
+It has only been tested on AM335x EVM-SK, hence the _ti33x overrides; the
+QMAKE_LIBS flags come from [2] and [3].
+
+[1] http://git.yoctoproject.org/cgit/cgit.cgi/meta-fsl-arm/tree/qt5-layer/recipes-qt/qt5/
+[2] https://github.com/prabindh/sgxconfiguro/tree/master/pkgconfig/5.xx
+[3] https://github.com/prabindh/qt-configs/tree/master/qt5_1_1_Sep13
+
+Signed-off-by: Aymeric Dumaz <aymeric.dumaz@gmail.com>
+---
+ recipes-qt/qt5/qtbase_%.bbappend | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtbase_%.bbappend
+
+diff --git a/recipes-qt/qt5/qtbase_%.bbappend b/recipes-qt/qt5/qtbase_%.bbappend
+new file mode 100644
+index 0000000..eaa4a6b
+--- /dev/null
++++ b/recipes-qt/qt5/qtbase_%.bbappend
+@@ -0,0 +1,15 @@
++PACKAGECONFIG_GL_ti33x = "gles2"
++PACKAGECONFIG_append_ti33x = " tslib icu examples"
++
++do_configure_prepend_ti33x() {
++    sed -i 's!load(qt_config)!!' ${S}/mkspecs/linux-oe-g++/qmake.conf
++
++    cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
++
++QMAKE_LIBS_EGL         += -lGLESv2 -lGLES_CM -lsrv_um -lusc -lEGL -lIMGegl
++QMAKE_LIBS_OPENGL_ES2  += -lGLESv2 -lGLES_CM -lsrv_um -lusc -lEGL -lIMGegl
++
++load(qt_config)
++
++EOF
++}
+-- 
+1.9.1
 
 
-Sent from my Android phone using TouchDown (www.nitrodesk.com)
-
------Original Message-----
-From: Diego Sueiro [diego.sueiro@gmail.com]
-Received: Tuesday, 12 Aug 2014, 19:03
-To: Alexandre Belloni [alexandre.belloni@free-electrons.com]
-CC: Dmytriyenko, Denys [denys@ti.com]; meta-ti mailing list [meta-ti@yoctop=
-roject.org]; Arago Project git [git@arago-project.org]
-Subject: Re: [meta-ti] Alexandre Belloni : beaglebone: use the am335x_boneb=
-lack u-boot configuration
-
-Hi Alexandre,
-
-On Tue, Aug 12, 2014 at 7:21 PM, Alexandre Belloni <alexandre.belloni@free-=
-electrons.com<mailto:alexandre.belloni@free-electrons.com>> wrote:
-Hi,
-
-On 12/08/2014 at 11:14:19 -0400, Denys Dmytriyenko wrote :
-> > > diff --git a/conf/machine/beaglebone.conf b/conf/machine/beaglebone.c=
-onf
-> > > index 8a83a1a..0b4dce3 100644
-> > > --- a/conf/machine/beaglebone.conf
-> > > +++ b/conf/machine/beaglebone.conf
-> > > @@ -11,4 +11,4 @@ IMAGE_FSTYPES +=3D "tar.gz"
-> > >
-> > >  SERIAL_CONSOLE =3D "115200 ttyO0"
-> > >
-> > > -UBOOT_MACHINE =3D "am335x_evm_config"
-> > > +UBOOT_MACHINE =3D "am335x_boneblack"
-> > >
-> >
-> > There is a typo here. Must be "am335x_boneblack_config" instead of
-> > "am335x_boneblack"
->
-> Goot catch, thanks!
->
-
-I tried, both are working. I didn't think that patch would be merged
-that fast, sorry about that.
-
-It did not worked for me. I had to put "am335x_boneblack_config"
-
-Regards,
-
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br<http://www.embarcados.com.br/?utm_source=3Dassinatura=
-_diego&utm_medium=3De-mail&utm_campaign=3DAssinatura%20Email%20Diego>
-
-/*long live rock 'n roll*/
-
---_000_B0581B5571079145BA1CD78C126DBDE7320BBDC5DLEE08entticom_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-</head>
-<body>
-<span style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:11=
-pt; color:black">Same here, it was failing the configure step.<br>
-<br>
-<br>
-Sent from my Android phone using TouchDown (www.nitrodesk.com)<br>
-<br>
-<span style=3D"color:black">-----Original Message----- <br>
-<b>From:</b> Diego Sueiro [diego.sueiro@gmail.com]<br>
-<b>Received:</b> Tuesday, 12 Aug 2014, 19:03<br>
-<b>To:</b> Alexandre Belloni [alexandre.belloni@free-electrons.com]<br>
-<b>CC:</b> Dmytriyenko, Denys [denys@ti.com]; meta-ti mailing list [meta-ti=
-@yoctoproject.org]; Arago Project git [git@arago-project.org]<br>
-<b>Subject:</b> Re: [meta-ti] Alexandre Belloni : beaglebone: use the am335=
-x_boneblack u-boot configuration<br>
-<br>
-</span></span>
-<div>
-<div dir=3D"ltr">
-<div class=3D"gmail_extra">Hi Alexandre,</div>
-<div class=3D"gmail_extra"><br>
-<div class=3D"gmail_quote">On Tue, Aug 12, 2014 at 7:21 PM, Alexandre Bello=
-ni <span dir=3D"ltr">
-&lt;<a href=3D"mailto:alexandre.belloni@free-electrons.com" target=3D"_blan=
-k">alexandre.belloni@free-electrons.com</a>&gt;</span> wrote:<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex; border=
--left-width:1px; border-left-color:rgb(204,204,204); border-left-style:soli=
-d; padding-left:1ex">
-<div id=3D":1im" class=3D"" style=3D"overflow:hidden">Hi,<br>
-<br>
-On 12/08/2014 at 11:14:19 -0400, Denys Dmytriyenko wrote :<br>
-<div class=3D"">&gt; &gt; &gt; diff --git a/conf/machine/beaglebone.conf b/=
-conf/machine/beaglebone.conf<br>
-&gt; &gt; &gt; index 8a83a1a..0b4dce3 100644<br>
-&gt; &gt; &gt; --- a/conf/machine/beaglebone.conf<br>
-&gt; &gt; &gt; &#43;&#43;&#43; b/conf/machine/beaglebone.conf<br>
-&gt; &gt; &gt; @@ -11,4 &#43;11,4 @@ IMAGE_FSTYPES &#43;=3D &quot;tar.gz&qu=
-ot;<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; &nbsp;SERIAL_CONSOLE =3D &quot;115200 ttyO0&quot;<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; -UBOOT_MACHINE =3D &quot;am335x_evm_config&quot;<br>
-&gt; &gt; &gt; &#43;UBOOT_MACHINE =3D &quot;am335x_boneblack&quot;<br>
-&gt; &gt; &gt;<br>
-&gt; &gt;<br>
-&gt; &gt; There is a typo here. Must be &quot;am335x_boneblack_config&quot;=
- instead of<br>
-&gt; &gt; &quot;am335x_boneblack&quot;<br>
-&gt;<br>
-&gt; Goot catch, thanks!<br>
-&gt;<br>
-<br>
-</div>
-I tried, both are working. I didn't think that patch would be merged<br>
-that fast, sorry about that.</div>
-</blockquote>
-</div>
-<br>
-It did not worked for me. I had to put &quot;am335x_boneblack_config&quot;<=
-br>
-<br clear=3D"all">
-<div>
-<div dir=3D"ltr">
-<div>Regards,</div>
-<div><br>
-</div>
---<br>
-*dS<br>
-Diego Sueiro<br>
-<br>
-Administrador do Embarcados<br>
-<a href=3D"http://www.embarcados.com.br/?utm_source=3Dassinatura_diego&amp;=
-utm_medium=3De-mail&amp;utm_campaign=3DAssinatura%20Email%20Diego" target=
-=3D"_blank">www.embarcados.com.br</a><br>
-<br>
-/*long live rock 'n roll*/<br>
-</div>
-</div>
-</div>
-</div>
-</div>
-</body>
-</html>
-
---_000_B0581B5571079145BA1CD78C126DBDE7320BBDC5DLEE08entticom_--
