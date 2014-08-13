@@ -1,53 +1,42 @@
-Return-Path: <aymeric.dumaz@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0E890E007A0; Tue, 12 Aug 2014 18:00:50 -0700 (PDT)
+	id 5C7D0E007A0; Tue, 12 Aug 2014 18:44:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (aymeric.dumaz[at]gmail.com)
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [74.125.82.49 listed in list.dnswl.org]
-Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A2EA5E00796
-	for <meta-ti@yoctoproject.org>; Tue, 12 Aug 2014 18:00:41 -0700 (PDT)
-Received: by mail-wg0-f49.google.com with SMTP id k14so10768614wgh.32
-	for <meta-ti@yoctoproject.org>; Tue, 12 Aug 2014 18:00:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=84gcP9FPoDpIJntlf6BemuaK6T61Wu5ICdnD3tzBq4o=;
-	b=n9Vw1igdbPfUrtPI1q+F7zbXVYrYuajOoNX3TTGjKnNmUWS4dCxSbuMfeId/6s2+AQ
-	8AQSJfgnOpEeS0xxBKSYtphiOvpR77pfQPDgNToZaFVCa6Gs2jCihrNkmHd2/hF1oahW
-	NAJ5gaoJ9ytdkW5kXE8QnNTGJoqL7EoK6MtNdPaybIIrdXLANXsiQ1S6J5LqwsdCjNCD
-	7rGc+KZZ+BPnmWW0yWyqtLWUktT4z6AUcHVmbefl2P8flkAlXJGh+de8yGVWDo7fodIm
-	9c3g4YBf6YmNsrgpRBoapLmS24exk6KZ0Qd1ekSaMA57IU6dYoP3WrRox5KZg+kbBJYL
-	6J0w==
-X-Received: by 10.194.206.67 with SMTP id lm3mr1161604wjc.70.1407891640588;
-	Tue, 12 Aug 2014 18:00:40 -0700 (PDT)
-Received: from localhost.localdomain (136.217.123.78.rev.sfr.net.
-	[78.123.217.136])
-	by mx.google.com with ESMTPSA id pe6sm752390wjb.38.2014.08.12.18.00.39
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 12 Aug 2014 18:00:39 -0700 (PDT)
-Sender: Aymeric Dumaz <aymericdumaz@gmail.com>
-From: Aymeric Dumaz <aymeric.dumaz@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Wed, 13 Aug 2014 03:00:25 +0200
-Message-Id: <1407891625-23383-1-git-send-email-aymeric.dumaz@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [daisy/master][PATCH] recipes-qt: add a .bbappend for qtbase
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CAE16E00796
+	for <meta-ti@yoctoproject.org>; Tue, 12 Aug 2014 18:44:21 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s7D1iLiW022665
+	for <meta-ti@yoctoproject.org>; Tue, 12 Aug 2014 20:44:21 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s7D1iLGK010901
+	for <meta-ti@yoctoproject.org>; Tue, 12 Aug 2014 20:44:21 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 12 Aug 2014 20:44:20 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s7D1iKTO010731	for <meta-ti@yoctoproject.org>; Tue, 12 Aug 2014 20:44:20
+	-0500
+Date: Tue, 12 Aug 2014 21:26:16 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1211168369.443.1407893176771.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-08-12_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -60,47 +49,186 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Aug 2014 01:00:50 -0000
+X-List-Received-Date: Wed, 13 Aug 2014 01:44:25 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_442_1305274982.1407893176708"
 
-This bbappend is inspired from the meta-fsl-arm one [1].
-It is made to build qtbase with ligles-omap3 libraries and integrate more
-plugins, like tslib.
+------=_Part_442_1305274982.1407893176708
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-It has only been tested on AM335x EVM-SK, hence the _ti33x overrides; the
-QMAKE_LIBS flags come from [2] and [3].
+<html>
+<head>
+<title>
+Status for 08/12/14
+</title>
+</head>
+<body>
 
-[1] http://git.yoctoproject.org/cgit/cgit.cgi/meta-fsl-arm/tree/qt5-layer/recipes-qt/qt5/
-[2] https://github.com/prabindh/sgxconfiguro/tree/master/pkgconfig/5.xx
-[3] https://github.com/prabindh/qt-configs/tree/master/qt5_1_1_Sep13
+<h2>Status for 08/12/14</h2>
 
-Signed-off-by: Aymeric Dumaz <aymeric.dumaz@gmail.com>
----
- recipes-qt/qt5/qtbase_%.bbappend | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 recipes-qt/qt5/qtbase_%.bbappend
+<h2>BUILD_ID: build-2014-08-12_21-01-51</h2>
 
-diff --git a/recipes-qt/qt5/qtbase_%.bbappend b/recipes-qt/qt5/qtbase_%.bbappend
-new file mode 100644
-index 0000000..eaa4a6b
---- /dev/null
-+++ b/recipes-qt/qt5/qtbase_%.bbappend
-@@ -0,0 +1,15 @@
-+PACKAGECONFIG_GL_ti33x = "gles2"
-+PACKAGECONFIG_append_ti33x = " tslib icu examples"
-+
-+do_configure_prepend_ti33x() {
-+    sed -i 's!load(qt_config)!!' ${S}/mkspecs/linux-oe-g++/qmake.conf
-+
-+    cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
-+
-+QMAKE_LIBS_EGL         += -lGLESv2 -lGLES_CM -lsrv_um -lusc -lEGL -lIMGegl
-+QMAKE_LIBS_OPENGL_ES2  += -lGLESv2 -lGLES_CM -lsrv_um -lusc -lEGL -lIMGegl
-+
-+load(qt_config)
-+
-+EOF
-+}
--- 
-1.9.1
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=red>FAILED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.07"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="false"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_442_1305274982.1407893176708--
