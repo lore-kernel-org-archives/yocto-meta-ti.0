@@ -1,34 +1,26 @@
-Return-Path: <dv@pseudoterminal.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B0872E00781; Thu, 14 Aug 2014 07:31:06 -0700 (PDT)
+	id DC660E004F2; Thu, 14 Aug 2014 09:53:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_HELO_PASS autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 SPF_HELO_PASS SPF: HELO matches SPF record
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21526E0074B
-	for <meta-ti@yoctoproject.org>; Thu, 14 Aug 2014 07:30:55 -0700 (PDT)
-Received: from [10.1.14.248] (vpn.streamunlimited.com [91.114.0.140])
-	by ptmx.org (Postfix) with ESMTPSA id 1FE25331EA;
-	Thu, 14 Aug 2014 16:30:54 +0200 (CEST)
-Message-ID: <53ECC823.8010800@pseudoterminal.org>
-Date: Thu, 14 Aug 2014 16:30:59 +0200
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-MIME-Version: 1.0
-To: Diego Sueiro <diego.sueiro@gmail.com>, 
- Denys Dmytriyenko <denys@ti.com>
-References: <53ECBC66.4070509@pseudoterminal.org> <20140814140331.GW23523@edge>
-	<CAMCfZKG1yX1usuAFGeCKUvVpejy9k9TGRy-2QnieJHCpUKsH_g@mail.gmail.com>
-In-Reply-To: <CAMCfZKG1yX1usuAFGeCKUvVpejy9k9TGRy-2QnieJHCpUKsH_g@mail.gmail.com>
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: Beaglebone Black and libgles-omap3 : build problem
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7E02BE0044A
+	for <meta-ti@yoctoproject.org>; Thu, 14 Aug 2014 09:53:06 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 4642B52A51; Thu, 14 Aug 2014 16:53:06 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20140814165306.4642B52A51@arago-project.org>
+Date: Thu, 14 Aug 2014 16:53:06 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 3.14.17 stable
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,105 +33,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Aug 2014 14:31:06 -0000
-Content-Type: multipart/alternative;
-	boundary="------------050104010605060708030404"
+X-List-Received-Date: Thu, 14 Aug 2014 16:53:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
---------------050104010605060708030404
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+Module: meta-ti
+Branch: daisy
+Commit: 96cf07485bb25df46ec0c8fd9d81cc240e069deb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=96cf07485bb25df46ec0c8fd9d81cc240e069deb
 
-On 2014-08-14 16:07, Diego Sueiro wrote:
-> Hi,
->
-> On Thu, Aug 14, 2014 at 11:03 AM, Denys Dmytriyenko <denys@ti.com 
-> <mailto:denys@ti.com>> wrote:
->
->     Don't use beaglebone machine from meta-yocto-bsp, but instead use
->     beaglebone
->     machine from meta-ti, if you want to use other components from
->     meta-ti...
->
->
-> Just complementing. Remove meta-yocto-bsp from your bblayers.conf
->
-> Regards,
->
-> --
-> *dS
-> Diego Sueiro
->
-> Administrador do Embarcados
-> www.embarcados.com.br 
-> <http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
->
-> /*long live rock 'n roll*/
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Aug 14 08:26:23 2014 +0000
 
-Thanks! Such an easy an obvious solution. Apparently I thought too 
-complicated again :)
-It works now.
+linux-ti-staging: update to 3.14.17 stable
 
---------------050104010605060708030404
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-<html>
-  <head>
-    <meta content="text/html; charset=ISO-8859-1"
-      http-equiv="Content-Type">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 2014-08-14 16:07, Diego Sueiro
-      wrote:<br>
-    </div>
-    <blockquote
-cite="mid:CAMCfZKG1yX1usuAFGeCKUvVpejy9k9TGRy-2QnieJHCpUKsH_g@mail.gmail.com"
-      type="cite">
-      <div dir="ltr">
-        <div class="gmail_extra">Hi,</div>
-        <div class="gmail_extra"><br>
-          <div class="gmail_quote">On Thu, Aug 14, 2014 at 11:03 AM,
-            Denys Dmytriyenko <span dir="ltr">&lt;<a
-                moz-do-not-send="true" href="mailto:denys@ti.com"
-                target="_blank">denys@ti.com</a>&gt;</span> wrote:<br>
-            <blockquote class="gmail_quote" style="margin:0 0 0
-              .8ex;border-left:1px #ccc solid;padding-left:1ex">
-              <div id=":2y0" class="a3s" style="overflow:hidden">Don't
-                use beaglebone machine from meta-yocto-bsp, but instead
-                use beaglebone<br>
-                machine from meta-ti, if you want to use other
-                components from meta-ti...</div>
-            </blockquote>
-          </div>
-          <br>
-          Just complementing. Remove meta-yocto-bsp from your
-          bblayers.conf</div>
-        <div class="gmail_extra"><br clear="all">
-          <div>
-            <div dir="ltr">
-              <div>Regards,</div>
-              <div><br>
-              </div>
-              --<br>
-              *dS<br>
-              Diego Sueiro<br>
-              <br>
-              Administrador do Embarcados<br>
-              <a moz-do-not-send="true"
-href="http://www.embarcados.com.br/?utm_source=assinatura_diego&amp;utm_medium=e-mail&amp;utm_campaign=Assinatura%20Email%20Diego"
-                target="_blank">www.embarcados.com.br</a><br>
-              <br>
-              /*long live rock 'n roll*/<br>
-            </div>
-          </div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-    Thanks! Such an easy an obvious solution. Apparently I thought too
-    complicated again :)<br>
-    It works now.<br>
-  </body>
-</html>
+---
 
---------------050104010605060708030404--
+ recipes-kernel/linux/linux-ti-staging_3.14.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 37e6259..46c3ded 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -44,8 +44,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.14.y"
+ 
+-SRCREV = "8f69b4c2243fb3b0d85fd2a0b575d5170d53dbea"
+-PV = "3.14.16"
++SRCREV = "367e55fbd8b6a7fb853f44a4f854eaadbbfd68c2"
++PV = "3.14.17"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+
+
