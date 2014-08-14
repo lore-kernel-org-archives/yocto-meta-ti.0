@@ -1,30 +1,42 @@
-Return-Path: <maciej.borzecki@open-rnd.pl>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 25441E007A0; Wed, 13 Aug 2014 05:51:22 -0700 (PDT)
+	id 756A9E0079E; Wed, 13 Aug 2014 18:22:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EBD53E00796
-	for <meta-ti@yoctoproject.org>; Wed, 13 Aug 2014 05:51:08 -0700 (PDT)
-Received: from localhost.localdomain (unknown [46.170.72.194])
-	by open-rnd.nazwa.pl (Postfix) with ESMTP id D28CC115A79C;
-	Wed, 13 Aug 2014 14:51:05 +0200 (CEST)
-From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-To: Denys Dmytriyenko <denys@ti.com>
-Date: Wed, 13 Aug 2014 14:51:05 +0200
-Message-ID: <2416199.mUoSIRFDFS@localhost.localdomain>
-User-Agent: KMail/4.13.3 (Linux/3.15.8-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
-In-Reply-To: <20140812154053.GG23523@edge>
-References: <1447960.SoSg2UIySt@localhost.localdomain>
-	<20140812154053.GG23523@edge>
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9D860E0079A
+	for <meta-ti@yoctoproject.org>; Wed, 13 Aug 2014 18:22:00 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s7E1LxJJ024502
+	for <meta-ti@yoctoproject.org>; Wed, 13 Aug 2014 20:21:59 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s7E1Lx70025561
+	for <meta-ti@yoctoproject.org>; Wed, 13 Aug 2014 20:21:59 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Wed, 13 Aug 2014 20:21:59 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s7E1LxFa031525	for <meta-ti@yoctoproject.org>; Wed, 13 Aug 2014 20:21:59
+	-0500
+Date: Wed, 13 Aug 2014 21:03:53 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <566884522.449.1407978233774.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: BeagleBone Black fails to boot with u-boot 2014.07, linux-yocto 3.14.5
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-08-13_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,216 +49,186 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Aug 2014 12:51:22 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Thu, 14 Aug 2014 01:22:03 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_448_118862776.1407978233773"
 
-On Tuesday 12 of August 2014 11:40:54 Denys Dmytriyenko wrote:
-> The bug report you are mentioning is not related to this issue, most
-> probably. The manifestation is exactly the same - it just doesn't boo=
-t. But
-> that can be caused by million other things... And yes, the fix was al=
-ready
-> pending upstream when I applied it to 2013.07 version in OE-Core. So
-> 2014.07 already has it.
->=20
-> Now, as of the issue at hand - late last year, early this year, all
-> platforms in U-boot have switched from uImage to zImage, as a default=
+------=_Part_448_118862776.1407978233773
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-> format. So, 2013.07 used uImage and 2014.07 expects zImage.
->=20
-> Looks like you are mixing layers badly. So, you are getting machine c=
-onfig
-> from Poky/meta-yocto, instead of meta-ti, because you are building ke=
-rnel in
-> uImage format and not zImage. But then you are building newer U-boot =
-from
-> meta-ti. But not the kernel from meta-ti...
->=20
-> Ways to fix it (from easy to hard):
->=20
-> 1. Decide whether you want beaglebone from meta-yocto or from meta-ti=
- and
-> use the correct layer alone w/o mixing them.
->=20
-> 2. If you are mixing layers, use all the components from the same lay=
-er -
-> machine config, bootloader, kernel. If there are 2 layers defining th=
-e same
-> machine (e.g. the case of beaglebone.conf provided by meta-yocto and
-> meta-ti), the one that is mentioned first in the bblayers.conf wins.
-> Machine config usually defines things like preferred bootloader, kern=
-el
-> versions, load addresses and image formats.
->=20
-> 3. If for some of the reasons one of the components gets picked up fr=
-om a
-> wrong layer (u-boot from meta-ti instead of oe-core/meta-yocto), make=
- sure
-> to add additional PREFERRED_PROVIDER and/or PREFERRED_VERSION accordi=
-ngly.
->=20
-> 4. If you are adventurous and know what you are doing, you can mix an=
-d match
-> layers as well as components, making sure all the parameters like ima=
-ge
-> formats, addresses, etc. do match. My guess it should be possible to =
-do so
-> by setting KERNEL_IMAGETYPE to zImage, if you want to use latest U-bo=
-ot
-> from meta-ti, while keeping kernel from meta-yocto. Maybe some other
-> tweaks...
->=20
-> Good luck and let me know if you have more questions.
+<html>
+<head>
+<title>
+Status for 08/13/14
+</title>
+</head>
+<body>
 
-Thanks for suggestions. I've removed meta-ti from bblayers and done a c=
-lean=20
-build of core-image-minimal + kernel-devicetree in IMAGE_INSTALL_append=
-.=20
-Unfortunately with the same effect.
+<h2>Status for 08/13/14</h2>
 
-What is the order in which load addresses are used? It seems that the a=
-ddress=20
-embedded in uboot header takes precedence before default uboot environm=
-ent=20
-setting. Running `bitbake -e linux-yocto` produces this:
+<h2>BUILD_ID: build-2014-08-13_21-01-42</h2>
 
-# $UBOOT_ENTRYPOINT [3 operations]
-#   set /home/mborzecki/yocto/heads/poky/meta-yocto-
-bsp/conf/machine/beaglebone.conf:34
-#     "0x80008000"
-#   set /home/mborzecki/yocto/heads/poky/meta/conf/documentation.conf:4=
-32
-#     [doc] "Specifies the entry point for the U-Boot image."
-#   set? /home/mborzecki/yocto/heads/poky/meta/classes/kernel.bbclass:6=
-6
-#     "20008000"
-# computed:
-#   "0x80008000"
-UBOOT_ENTRYPOINT=3D"0x80008000"
-...
-# $UBOOT_LOADADDRESS [3 operations]
-#   set /home/mborzecki/yocto/heads/poky/meta-yocto-
-bsp/conf/machine/beaglebone.conf:35
-#     "0x80008000"
-#   set /home/mborzecki/yocto/heads/poky/meta/conf/documentation.conf:4=
-33
-#     [doc] "Specifies the load address for the U-Boot image."
-#   set? /home/mborzecki/yocto/heads/poky/meta/classes/kernel.bbclass:6=
-7
-#     "${UBOOT_ENTRYPOINT}"
-# computed:
-#   "0x80008000"
-UBOOT_LOADADDRESS=3D"0x80008000"
+<h2>Clean Build: false</h2>
 
-Then UBOOT_ENTRYPOINT is passed as LOADADDR in KERNEL_EXTRA_ARGS where =
-it ends=20
-up in uboot header.
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-Setting this in local.conf produces a bootable image:
-UBOOT_LOADADDRESS_beaglebone =3D "0x82000000"
-UBOOT_ENTRYPOINT_beaglebone =3D "0x82000000"
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=red>FAILED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
 
-/proc/iomem has this:
-  80008000-809e33ef : Kernel code
-  80a60000-80b9fc07 : Kernel data
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
 
->=20
-> > Hi all,
-> >=20
-> > I'm having trouble booting BBB with current meta-ti
-> > (f7b1140774e6c8c8aecde41388d40d9d407df6ff). The problem looks simil=
-ar to
-> > this bug report:
-> > https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D6165
-> >=20
-> > Console output is as follows:
-> > Booting from mmc ...
-> > ## Booting kernel from Legacy Image at 80007fc0 ...
-> >=20
-> >    Image Name:   Linux-3.14.5-yocto-standard
-> >    Image Type:   ARM Linux Kernel Image (uncompressed)
-> >    Data Size:    5098048 Bytes =3D 4.9 MiB
-> >    Load Address: 80008000
-> >    Entry Point:  80008000
-> >    Verifying Checksum ... OK
-> >=20
-> > ## Flattened Device Tree blob at 80f80000
-> >=20
-> >    Booting using the fdt blob at 0x80f80000
-> >    XIP Kernel Image ... OK
-> >=20
-> > OK
-> >=20
-> >    Using Device Tree in place at 80f80000, end 80f8a207
-> >=20
-> > Starting kernel ...
-> >=20
-> >=20
-> > The original issue with kernel overlapping fdt was fixed with this =
-patch
-> > to
-> > OE-core:
-> > http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=3D2cae5f7=
-8ad2982c7
-> > ca0c22c085b71a1d2184a1b0 However, current meta-ti contains u-boot i=
-n
-> > version 2014.07, overriding 2013.07 from poky master. I'm assuming =
-that
-> > the patch eventually made it into denx tree.
-> >=20
-> > Another problem is that uImage contains the following info:
-> > Image Name:   Linux-3.14.5-yocto-standard
-> > Created:      Mon Aug 11 16:59:42 2014
-> > Image Type:   ARM Linux Kernel Image (uncompressed)
-> > Data Size:    5098048 Bytes =3D 4978.56 kB =3D 4.86 MB
-> > Load Address: 80008000
-> > Entry Point:  80008000
-> >=20
-> > I'm not sure what is the order in which the addresses are applied. =
-Is it
-> > kernel -> default env -> uEnv.txt?
-> >=20
-> > Adding uEnv.txt with these contents fixes the problem:
-> > loadaddr=3D0x82000000
-> > kernel_addr_r=3D0x82000000
-> > fdtaddr=3D0x88000000
-> > fdt_addr_r=3D0x88000000
-> > rdaddr=3D0x88080000
-> > ramdisk_addr_r=3D0x88080000
-> > bootm_size=3D0x10000000
-> >=20
-> > Please advise how to fix it without falling back to uEnv.
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.07"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="false"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
 
---=20
+</body>
+</html>
 
-Maciej Borz=C4=99cki=20
-Senior Software Engineer Open-RnD Sp. z o.o.=20
-www.open-rnd.pl, Facebook, Twitter=20
-mobile: +48 telefon, fax: +48 42 657 9079=20
 
-Niniejsza wiadomo=C5=9B=C4=87 wraz z za=C5=82=C4=85cznikami mo=C5=BCe z=
-awiera=C4=87 chronione prawem lub=20
-poufne informacje i zosta=C5=82a wys=C5=82ana wy=C5=82=C4=85cznie do wi=
-adomo=C5=9Bci i u=C5=BCytku os=C3=B3b, do=20
-kt=C3=B3rych zosta=C5=82a zaadresowana. Je=C5=9Bli wiadomo=C5=9B=C4=87 =
-zosta=C5=82a otrzymana przypadkowo=20
-zabrania si=C4=99 jej kopiowania lub rozsy=C5=82ania do os=C3=B3b trzec=
-ich. W takim przypadku=20
-uprasza si=C4=99 o natychmiastowe zniszczenie wiadomo=C5=9Bci oraz poin=
-formowanie=20
-nadawcy o zaistnia=C5=82ej sytuacji za pomoc=C4=85 wiadomo=C5=9Bci zwro=
-tnej. Dzi=C4=99kujemy.=20
-
-This message, including any attachments hereto, may contain privileged =
-or=20
-confidential information and is sent solely for the attention and use o=
-f the=20
-intended addressee(s). If you are not an intended addressee, you may ne=
-ither=20
-use this message nor copy or deliver it to anyone. In such case, you sh=
-ould=20
-immediately destroy this message and kindly notify the sender by reply =
-email.=20
-Thank you. 
-
+------=_Part_448_118862776.1407978233773--
