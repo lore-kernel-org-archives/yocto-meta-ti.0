@@ -1,6 +1,6 @@
-Return-Path: <aymeric.dumaz@gmail.com>
+Return-Path: <aymericdumaz@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 44A32E00566; Fri, 15 Aug 2014 12:02:45 -0700 (PDT)
+	id EB484E00566; Fri, 15 Aug 2014 12:46:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -11,7 +11,7 @@ X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	mail provider *      (aymeric.dumaz[at]gmail.com)
 	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
 	low *      trust
-	*      [74.125.82.42 listed in list.dnswl.org]
+	*      [209.85.216.48 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -19,35 +19,37 @@ X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B7351E0054C
-	for <meta-ti@yoctoproject.org>; Fri, 15 Aug 2014 12:02:41 -0700 (PDT)
-Received: by mail-wg0-f42.google.com with SMTP id l18so2606892wgh.25
-	for <meta-ti@yoctoproject.org>; Fri, 15 Aug 2014 12:02:40 -0700 (PDT)
+Received: from mail-qa0-f48.google.com (mail-qa0-f48.google.com
+	[209.85.216.48])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3ED7CE0054C
+	for <meta-ti@yoctoproject.org>; Fri, 15 Aug 2014 12:46:36 -0700 (PDT)
+Received: by mail-qa0-f48.google.com with SMTP id m5so2408429qaj.7
+	for <meta-ti@yoctoproject.org>; Fri, 15 Aug 2014 12:46:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=3PzVZK6vQO79V2iIFtBSYdWooftzLANfSxYmSffBdL0=;
-	b=HILlU9owVmFWROrUiMWr+r1b4pl/KVnZbaTL6o6kPGRKg4Ayp97zQ2C7CWsmWk3QTp
-	EgZ7UkyoTAqhl3T9JTar4nDRujlxxDWVu3EI3BYpSOxLPZlaTLFKuVg80VobHQGuH4Lt
-	rMjmmP9bedZFZXnVTnPTzJaa/Z+jk6jynWbjhLWdzJt2IBoI1EYvlTXApzfbrmxrKbRS
-	jN6mai4X3LyST3w22AXDw6MTB1sW5PGGdPzgCpSIUsevZ8jlJxdYvoK1r/2GDQ+KtXwn
-	+SGz35rn0Gx/tpJK/BssWZ9X+Vb+mY+X2IbuqOTRHFCZ2jmuMX+5eyR+x61BtG3cqaqH
-	ocrw==
-X-Received: by 10.180.7.163 with SMTP id k3mr8572888wia.0.1408129360921;
-	Fri, 15 Aug 2014 12:02:40 -0700 (PDT)
-Received: from localhost.localdomain (136.217.123.78.rev.sfr.net.
-	[78.123.217.136])
-	by mx.google.com with ESMTPSA id f16sm9318907wic.7.2014.08.15.12.02.39
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 15 Aug 2014 12:02:40 -0700 (PDT)
-Sender: Aymeric Dumaz <aymericdumaz@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=J1lOtUkR148Kw8MGsBVaU/SkQRyy1ER06f088ETHsy8=;
+	b=jI15psVaGAdK6Eg5YOCMBq9E6yFaVbguX8BOijmB3v8oaDcD60+a91WO37DYsszxDV
+	By+Uu/V6l7LKoKb6SyBl0dePtqsYp22VvsEL/DojYrDCmZhFuOesd4GRE7lhFFgjFpYa
+	PBdO6jEuVkMGMbmOZ+rDCpnCwrUfc2JQ9uEyx6pzCqdzS8cXgznypPphjOLBC2N4aSTK
+	1dLfo/Y44vQU6l6k926Yoa8e7Mft3gFL330zwHxb6P0sxC0cCBZ/Lb3VnrfrL6AZUt+h
+	ED/xFNpd4jVRvaBGJA8qZrSiJukU0Cret4VMk3M6OaLqZYv+SvFxEIpPLl4jysPj+GZi
+	yABw==
+MIME-Version: 1.0
+X-Received: by 10.229.178.138 with SMTP id bm10mr31403451qcb.16.1408131996195; 
+	Fri, 15 Aug 2014 12:46:36 -0700 (PDT)
+Sender: aymericdumaz@gmail.com
+Received: by 10.224.53.74 with HTTP; Fri, 15 Aug 2014 12:46:36 -0700 (PDT)
+In-Reply-To: <CAMCfZKE8KR2aS-ME1X694wqfzpegPM8JND9rF22ehoknj1+6=w@mail.gmail.com>
+References: <1408119254-13052-1-git-send-email-aymeric.dumaz@gmail.com>
+	<CAMCfZKE8KR2aS-ME1X694wqfzpegPM8JND9rF22ehoknj1+6=w@mail.gmail.com>
+Date: Fri, 15 Aug 2014 21:46:36 +0200
+X-Google-Sender-Auth: mYsMgjun3ys1CSYKkYeG16QyfXk
+Message-ID: <CAESSzZx7wwX7gbTF+FxjWMqQvYvVdKK0RsJBOxD27UhMtGYcgw@mail.gmail.com>
 From: Aymeric Dumaz <aymeric.dumaz@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Fri, 15 Aug 2014 21:02:33 +0200
-Message-Id: <1408129353-14747-1-git-send-email-aymeric.dumaz@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [master][PATCH v2] libgles-omap3-5.01.01.01: add .list file
+To: Diego Sueiro <diego.sueiro@gmail.com>
+Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: Re: [dora/daisy][PATCH] libgles-omap3-5.01.01.01: add .ver and .list files
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -60,62 +62,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Aug 2014 19:02:45 -0000
+X-List-Received-Date: Fri, 15 Aug 2014 19:46:39 -0000
+Content-Type: text/plain; charset=UTF-8
 
-When libraries don't have a SONAME in their section, their name aren't added in
-the .list file generated during do_package.
-Other recipes are able to build against them but are not able to find them
-afterwards, leading to missing dependencies.
+2014-08-15 19:01 GMT+02:00 Diego Sueiro <diego.sueiro@gmail.com>:
+> Aymeric,
+>
+Hello Diego,
 
-This patch add the file that would be created if the SONAME was present.
+>
+> On Fri, Aug 15, 2014 at 1:14 PM, Aymeric Dumaz <aymeric.dumaz@gmail.com>
+> wrote:
+>>
+>> When libraries don't have a SONAME in their section, their name aren't
+>> added in
+>> the .list/.ver files generated during do_package.
+>> Other recipes are able to build against them but are not able to find them
+>> afterwards, leading to missing dependencies.
+>>
+>> This patch add the files that would be created if the SONAME was present.
+>>
+>> Signed-off-by: Aymeric Dumaz <aymeric.dumaz@gmail.com>
+>
+>
+> Just for curiosity.
+> To have libgles-omap3 installed on the image, with Qt5 stuff, I had to
+> explicit add it on the IMAGE_INSTALL. This patch should fix it, is it
+> correct?
+>
+>
+> Regards,
+>
 
-The version 2 of this patch add the -f to the copy command.
+When you add libgles-omap3 on the IMAGE_INSTALL, with the right flags Qt 5 is
+compiled against it.
+The problem is when you run "bitbake meta-toolchain-qt5", the resulting
+toolchain doesn't have the libgles-omap3 libraries included.
+If you look on the qtbase do_package log, you can see that:
 
-Signed-off-by: Aymeric Dumaz <aymeric.dumaz@gmail.com>
----
- .../libgles/libgles-omap3-5.01.01.01/libgles-omap3.list          | 9 +++++++++
- recipes-graphics/libgles/libgles-omap3_5.01.01.01.bb             | 7 +++++++
- 2 files changed, 16 insertions(+)
- create mode 100644 recipes-graphics/libgles/libgles-omap3-5.01.01.01/libgles-omap3.list
+NOTE: Couldn't find shared library provider for libGLESv2.so, used by files:
+[...]
 
-diff --git a/recipes-graphics/libgles/libgles-omap3-5.01.01.01/libgles-omap3.list b/recipes-graphics/libgles/libgles-omap3-5.01.01.01/libgles-omap3.list
-new file mode 100644
-index 0000000..a59d7f5
---- /dev/null
-+++ b/recipes-graphics/libgles/libgles-omap3-5.01.01.01/libgles-omap3.list
-@@ -0,0 +1,9 @@
-+libEGL.so:/usr/lib:5.01.01.01
-+libGLES_CM.so:/usr/lib:5.01.01.01
-+libsrv_init.so:/usr/lib:5.01.01.01
-+libusc.so:/usr/lib:5.01.01.01
-+libsrv_um.so:/usr/lib:5.01.01.01
-+libglslcompiler.so:/usr/lib:5.01.01.01
-+libpvr2d.so:/usr/lib:5.01.01.01
-+libGLESv2.so:/usr/lib:5.01.01.01
-+libIMGegl.so:/usr/lib:5.01.01.01
-diff --git a/recipes-graphics/libgles/libgles-omap3_5.01.01.01.bb b/recipes-graphics/libgles/libgles-omap3_5.01.01.01.bb
-index 0b1b8ca..353fe2f 100644
---- a/recipes-graphics/libgles/libgles-omap3_5.01.01.01.bb
-+++ b/recipes-graphics/libgles/libgles-omap3_5.01.01.01.bb
-@@ -40,6 +40,7 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/gfxsdk/${SGXPV}/exports
-            file://cputype \
-            file://rc.pvr \
-            file://99-bufferclass.rules  \
-+           file://${PN}.list \
- "
- 
- SRC_URI[md5sum] := "${MD5SUM_HARDFP}"
-@@ -48,3 +49,9 @@ SRC_URI[sha256sum] := "${SHA256SUM_HARDFP}"
- S = "${WORKDIR}/Graphics_SDK_${SGXPV}"
- 
- LIBGLESWINDOWSYSTEM ?= "libpvrPVR2D_FRONTWSEGL.so.1"
-+
-+# HACK! The libraries don't have a SONAME, so other packages will link to them
-+# but Yocto won't be able to find this package as a dependency afterwards.
-+package_do_shlibs_append () {
-+    os.system("cp -f ${WORKDIR}/${PN}.list ${SHLIBSWORKDIR}")
-+}
--- 
-1.9.1
+This is because for each library, Yocto will add the library name (coming from
+the SONAME) to the .list/.ver files of the corresponding package.
+Because for some reason those proprietary libraries don't have a SONAME, Yocto
+fails to do so.
 
+This patch is not 100% perfect, because files from others PACKAGES will produce
+similar errors, for example:
+
+DEBUG: calculating shlib requirements for libgles-omap3-es5
+NOTE: Couldn't find shared library provider for libIMGegl.so, used by files:
+[...]
+
+But at least it permits other packages like qtbase to find the libgles-omap3
+dependency, so that it will be included in the sysroot.
+I made patches for oe-core (see [1] and [2]), if this is accepted it will be
+possible to handle more gracefully with the ASSUME_SONAME variable.
+
+[1] http://lists.openembedded.org/pipermail/openembedded-core/2014-August/095726.html
+[2] http://lists.openembedded.org/pipermail/openembedded-core/2014-August/095727.html
+
+> --
+> *dS
+> Diego Sueiro
+>
+> Administrador do Embarcados
+> www.embarcados.com.br
+>
+> /*long live rock 'n roll*/
 
