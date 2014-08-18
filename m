@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D78BBE007A2; Mon, 18 Aug 2014 15:57:50 -0700 (PDT)
+	id D8535E00563; Mon, 18 Aug 2014 15:57:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 964C2E00655
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 95191E00563
 	for <meta-ti@yoctoproject.org>; Mon, 18 Aug 2014 15:57:44 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E696B52A5D; Mon, 18 Aug 2014 22:57:40 +0000 (UTC)
+	id 5B54852A67; Mon, 18 Aug 2014 22:57:41 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140818225740.E696B52A5D@arago-project.org>
-Date: Mon, 18 Aug 2014 22:57:40 +0000 (UTC)
+Message-Id: <20140818225741.5B54852A67@arago-project.org>
+Date: Mon, 18 Aug 2014 22:57:41 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : am33x-cm3: pass float ABI flag to fix gcc-4.9. 1 issue with stubs
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 18 Aug 2014 22:57:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 7b8ee4026e0e3b69a8ce5526be24ba70321e88dc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7b8ee4026e0e3b69a8ce5526be24ba70321e88dc
+Branch: master
+Commit: c739fca5ed4faa56ac1bec9062882df5371d4bd1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c739fca5ed4faa56ac1bec9062882df5371d4bd1
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Aug 19 01:08:40 2014 +0000
