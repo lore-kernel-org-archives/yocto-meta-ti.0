@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EB05BE00814; Wed, 20 Aug 2014 17:27:01 -0700 (PDT)
+	id EBC0AE004F5; Wed, 20 Aug 2014 17:27:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7AFA3E004F5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7C3B6E007FE
 	for <meta-ti@yoctoproject.org>; Wed, 20 Aug 2014 17:26:58 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 85156529D5; Thu, 21 Aug 2014 00:26:55 +0000 (UTC)
+	id 6FDD652A04; Thu, 21 Aug 2014 00:26:55 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140821002655.85156529D5@arago-project.org>
+Message-Id: <20140821002655.6FDD652A04@arago-project.org>
 Date: Thu, 21 Aug 2014 00:26:55 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : u-boot-ti-staging: update with DRA7 and AM335 ENV/FAT/ SD changes
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 21 Aug 2014 00:27:02 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 3844eea82c9c9f7ed961086657efbb49ac3f1353
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3844eea82c9c9f7ed961086657efbb49ac3f1353
+Branch: master
+Commit: d2c40099cd219493e4a6d9a6218f88f1b9f3f8fb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d2c40099cd219493e4a6d9a6218f88f1b9f3f8fb
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Aug 20 22:52:01 2014 +0000
