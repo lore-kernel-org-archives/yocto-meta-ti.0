@@ -1,32 +1,42 @@
-Return-Path: <maciej.borzecki@open-rnd.pl>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 17A04E007DF; Sat, 23 Aug 2014 01:37:07 -0700 (PDT)
+	id 725B0E00842; Sat, 23 Aug 2014 20:17:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 80F75E00781
-	for <meta-ti@yoctoproject.org>; Sat, 23 Aug 2014 01:36:54 -0700 (PDT)
-Received: from localhost.localdomain (unknown [78.8.164.13])
-	by open-rnd.nazwa.pl (Postfix) with ESMTP id ACCD86098ED;
-	Sat, 23 Aug 2014 10:36:51 +0200 (CEST)
-From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-To: Denys Dmytriyenko <denys@ti.com>
-Date: Sat, 23 Aug 2014 10:36:50 +0200
-Message-ID: <29987622.exz6SDnJbz@localhost.localdomain>
-User-Agent: KMail/4.13.3 (Linux/3.15.10-200.fc20.x86_64; KDE/4.13.3; x86_64; ;
-	)
-In-Reply-To: <20140823032420.GZ23523@edge>
-References: <53ED13BE.2090809@pseudoterminal.org>
-	<5823428.XaY5WDaLTE@localhost.localdomain>
-	<20140823032420.GZ23523@edge>
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1F770E006EF
+	for <meta-ti@yoctoproject.org>; Sat, 23 Aug 2014 20:17:25 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s7O3HPFH013237
+	for <meta-ti@yoctoproject.org>; Sat, 23 Aug 2014 22:17:25 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s7O3HOBV003836
+	for <meta-ti@yoctoproject.org>; Sat, 23 Aug 2014 22:17:24 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
+	Sat, 23 Aug 2014 22:17:24 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s7O3HO4q022167	for <meta-ti@yoctoproject.org>; Sat, 23 Aug 2014 22:17:24
+	-0500
+Date: Sat, 23 Aug 2014 22:59:02 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <482643281.497.1408849142782.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: BeagleBone Black , u-boot, and zImage
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-08-23_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,146 +49,186 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Aug 2014 08:37:07 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Sun, 24 Aug 2014 03:17:27 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_496_2015906000.1408849142777"
 
-On Friday 22 of August 2014 23:24:20 Denys Dmytriyenko wrote:
-> On Mon, Aug 18, 2014 at 04:45:16PM +0200, Maciej Borzecki wrote:
-> > On Monday 18 of August 2014 10:16:14 Denys Dmytriyenko wrote:
-> > > On Mon, Aug 18, 2014 at 09:34:58AM -0300, Diego Sueiro wrote:
-> > > > On Mon, Aug 18, 2014 at 9:28 AM, Maciej Borzecki <
-> > > >=20
-> > > > maciej.borzecki@open-rnd.pl> wrote:
-> > > > > Rough guess, but it looks like a default u-boot from eMMC. Tr=
-y
-> > > > > following
-> > > > > official instruction to make it boot off SD card:
-> > > > > https://www.yoctoproject.org/downloads/bsps/daisy16/beaglebon=
-e
-> > > >=20
-> > > > This should do the trick:
-> > > > "Pressing the USER/BOOT button when powering on will temporaril=
-y
-> > > > change
-> > > > the
-> > > > boot order".
-> > >=20
-> > > The USER button may sometimes be tricky, as it preserves the stat=
-e
-> > > across
-> > > reboots. So, if you already booted off of eMMC, holding the butto=
-n and
-> > > rebooting won't work - you'd have to unplug the power to complete=
-ly turn
-> > > it
-> > > down and then power it up, while pressing the USER button. Making=
- eMMC
-> > > non-bootable is more reliable in many cases...
-> >=20
-> > Silly question, is there any requirement that partition block count=
- must
-> > be
-> > even for boot partition?
-> >=20
-> > For instance, I'm not able to boot using this partition layout, kee=
-p
-> > getting CCC on serial console:
-> >=20
-> > Device         Boot     Start       End Blocks  Id System
-> > /dev/mmcblk0p1 *         2048     22526  10239+  c W95 FAT32 (LBA)
-> > /dev/mmcblk0p2          22528    116735  47104  83 Linux
-> >=20
-> > This one, almost works (u-boot runs, init fails mounting rootfs):
-> > evice         Boot     Start       End Blocks  Id System
-> > /dev/mmcblk0p1 *         2048     22527  10240   c W95 FAT32 (LBA)
-> > /dev/mmcblk0p2          22528    116735  47104  83 Linux
->=20
-> Have you tried the latest update to u-boot-ti-staging? There were cou=
-ple
-> fixes related to FAT and SD handling.
+------=_Part_496_2015906000.1408849142777
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-I tried these, but the problem was elsewhere. After some digging I foun=
-d that=20
-there are some intricacies to the boot process.
+<html>
+<head>
+<title>
+Status for 08/23/14
+</title>
+</head>
+<body>
 
-First of all, the CCCC sequence appears the boot ROM is attempting to l=
-oad a=20
-bootloader from UART. This would imply that attempts to locate a bootlo=
-ader=20
-failed. In case of BBB this would mean that MLO (?) was not located nei=
-ther on=20
-eMMC no SD (I'm guessing the checks are done in sequence eMMC -> SD -> =
-UART).
+<h2>Status for 08/23/14</h2>
 
-There's some clue about this behavior here:
-http://e2e.ti.com/support/embedded/starterware/f/790/t/210768.aspx
+<h2>BUILD_ID: build-2014-08-23_21-01-39</h2>
 
-Then, there was an error in wic partition generating code that ended up=
-=20
-stealing a single sector from the first partition to compensate for byt=
-es lost=20
-to MBR. The code always subtracted from partition size, by never made u=
-p for=20
-this. Eventually, the partition that was initially even in size sector-=
-wise,=20
-ended up with an odd size. This apparently is a problem for OMAPs, see =
-the=20
-links below (not BBB exactly but still an OMAP CPU):
+<h2>Clean Build: false</h2>
 
-http://comments.gmane.org/gmane.comp.embedded.pandaboard/2790
-https://groups.google.com/forum/#!topic/beagleboard/ro5k5r4Cuq4
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-There's very little info on the subject. Either what happened here is a=
- very=20
-special case, or everyone knows about these intricacies, in which case,=
- shame=20
-on me :) Yet, the partitions were perfectly valid for fdisk/parted not =
-to=20
-complain, and kernel to mount them.
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
 
-Since wic only generates partition in at least 1MB size, removing the c=
-ode=20
-stealing single sectors was enough for the image to become correct.
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
 
-The fix is already in master-next:=20
-http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?h=3Dmaster-next&=
-id=3De67d59c6fab33a3ae38ff2375189dc5235995492
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.08"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
 
-I guess that eventually some sanity checking code would be useful, just=
- to=20
-verify that some basic alignment constrains for particular platform is =
-met.
+</body>
+</html>
 
---=20
 
-Maciej Borz=C4=99cki=20
-Senior Software Engineer Open-RnD Sp. z o.o.=20
-www.open-rnd.pl, Facebook, Twitter=20
-mobile: +48 telefon, fax: +48 42 657 9079=20
-
-Niniejsza wiadomo=C5=9B=C4=87 wraz z za=C5=82=C4=85cznikami mo=C5=BCe z=
-awiera=C4=87 chronione prawem lub=20
-poufne informacje i zosta=C5=82a wys=C5=82ana wy=C5=82=C4=85cznie do wi=
-adomo=C5=9Bci i u=C5=BCytku os=C3=B3b, do=20
-kt=C3=B3rych zosta=C5=82a zaadresowana. Je=C5=9Bli wiadomo=C5=9B=C4=87 =
-zosta=C5=82a otrzymana przypadkowo=20
-zabrania si=C4=99 jej kopiowania lub rozsy=C5=82ania do os=C3=B3b trzec=
-ich. W takim przypadku=20
-uprasza si=C4=99 o natychmiastowe zniszczenie wiadomo=C5=9Bci oraz poin=
-formowanie=20
-nadawcy o zaistnia=C5=82ej sytuacji za pomoc=C4=85 wiadomo=C5=9Bci zwro=
-tnej. Dzi=C4=99kujemy.=20
-
-This message, including any attachments hereto, may contain privileged =
-or=20
-confidential information and is sent solely for the attention and use o=
-f the=20
-intended addressee(s). If you are not an intended addressee, you may ne=
-ither=20
-use this message nor copy or deliver it to anyone. In such case, you sh=
-ould=20
-immediately destroy this message and kindly notify the sender by reply =
-email.=20
-Thank you. 
-
+------=_Part_496_2015906000.1408849142777--
