@@ -1,42 +1,57 @@
-Return-Path: <denys@ti.com>
+Return-Path: <rstreif@linuxfoundation.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 34B47E007DD; Sat, 30 Aug 2014 19:17:08 -0700 (PDT)
+	id BB33DE007BA; Sun, 31 Aug 2014 07:48:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HTML_MESSAGE,RCVD_IN_DNSWL_LOW autolearn=ham
+	version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [209.85.223.177 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C5076E007C2
-	for <meta-ti@yoctoproject.org>; Sat, 30 Aug 2014 19:17:05 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s7V2H316032422
-	for <meta-ti@yoctoproject.org>; Sat, 30 Aug 2014 21:17:03 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s7V2H3CB009149
-	for <meta-ti@yoctoproject.org>; Sat, 30 Aug 2014 21:17:03 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Sat, 30 Aug 2014 21:17:03 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s7V2H3uq029464	for <meta-ti@yoctoproject.org>; Sat, 30 Aug 2014 21:17:03
-	-0500
-Date: Sat, 30 Aug 2014 21:58:30 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1330147917.535.1409450310755.JavaMail.jenkins@puget>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
+	[209.85.223.177])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0BF4DE00572
+	for <meta-ti@yoctoproject.org>; Sun, 31 Aug 2014 07:48:10 -0700 (PDT)
+Received: by mail-ie0-f177.google.com with SMTP id tp5so4988695ieb.36
+	for <meta-ti@yoctoproject.org>; Sun, 31 Aug 2014 07:48:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=VghoGznnAwAZjlOUrERtikO6jsDTNVwQ4/6zJ0FQlyw=;
+	b=AkVKC5Z6U7EW8fqA9pK01rKt40VdUD45IM2t2IORzsC9eNAI5H3C9i9YmUcAjUFSm+
+	PVCHmhcqDLJZJxj2wuLiRPGZO9frbGpNG+yid+mnSgZll2PiL2xAbx1AVrqDbGqdk51k
+	fkAtVU+yDBxu8K5j0TYN78B8EnZEKal+cYMLs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=VghoGznnAwAZjlOUrERtikO6jsDTNVwQ4/6zJ0FQlyw=;
+	b=ITukdNAPRELecdjYaDPyFyfw5clP3xUzcBkIWsMVKd/0vqVF/Uu3HCHuIoHu6HpkXq
+	YyT1ruPoJVCfgZcuvms61iB0cx8AZGaF55MY37JPLFSu1bwrmdjRltxtKKs5MgC8QmU3
+	3G/esxZNOYBjoYkttfpn2FMtBYdQBmC2Fy1ogkI/Dbm/Q1HgUHtBLeE/R4exJrzD2PJl
+	MOtxNMDvwaFQVBrfh5t7tXNK9PIZwhdNx+xx4FcLjMku/NQNl5Eqow0TJoFnvxHOcaYU
+	HoQdNCRAfkCos12Vn6+EkTYmapLYoIcp7PMkF9VZUwtnpZ0lBILdvkh9sZU/FRDF4PpN
+	z95w==
+X-Gm-Message-State: ALoCoQnNQShBr7N68zhTfeBIr0RN8wGKZCpUj0xwDMh5UN1epDosdcHqL8Ww3KA0qbkLL6Ljx7Lx
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-08-30_21-00-30
+X-Received: by 10.50.13.106 with SMTP id g10mr16123904igc.45.1409496489801;
+	Sun, 31 Aug 2014 07:48:09 -0700 (PDT)
+Received: by 10.107.149.73 with HTTP; Sun, 31 Aug 2014 07:48:09 -0700 (PDT)
+Date: Sun, 31 Aug 2014 07:48:09 -0700
+Message-ID: <CA+gsK-okuyjWuEp+3bm6++ojWrDfaCPwXtXEOswu7Xikxg8jfA@mail.gmail.com>
+From: Rudolf Streif <rstreif@linuxfoundation.org>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: BeagleBoard C4 with USB
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,186 +64,142 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Aug 2014 02:17:08 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_534_1572455757.1409450310752"
+X-List-Received-Date: Sun, 31 Aug 2014 14:48:12 -0000
+Content-Type: multipart/alternative; boundary=089e013c69ce96743a0501edf944
 
-------=_Part_534_1572455757.1409450310752
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--089e013c69ce96743a0501edf944
+Content-Type: text/plain; charset=UTF-8
 
-<html>
-<head>
-<title>
-Status for 08/30/14
-</title>
-</head>
-<body>
+I have a BeagleBoard C4 laying around that I want to use for a project that
+has USB devices connected to it. I built a core-image-base with YP from
+master and meta-ti from master with this configuration:
 
-<h2>Status for 08/30/14</h2>
+Build Configuration:
+BB_VERSION        = "1.23.1"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "Fedora-18"
+TARGET_SYS        = "arm-poky-linux-gnueabi"
+MACHINE           = "beagleboard"
+DISTRO            = "poky"
+DISTRO_VERSION    = "1.6+snapshot-20140831"
+TUNE_FEATURES     = "arm armv7a vfp thumb neon callconvention-hard cortexa8"
+TARGET_FPU        = "vfp-neon"
+meta
+meta-yocto
+meta-yocto-bsp    = "master:c16795477ea7e2159b5d3808268912b572887e2d"
+meta-ti           = "master:d2c40099cd219493e4a6d9a6218f88f1b9f3f8fb"
+meta-oe           = "master:1513d0e31f609ffcde9a116a50bfb0360b9e7ecf"
 
-<h2>BUILD_ID: build-2014-08-30_21-01-40</h2>
+It builds fine. I am installing u-boot, kernel and the device tree on the
+SSD card.
 
-<h2>Clean Build: false</h2>
+I use this u-boot script to boot the board:
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+setenv bootcmd 'mmc init; fatload mmc 0:1 0x80300000 uImage; fatload mmc
+0:1 0x815f0000 beagle.dtb; bootm 0x80300000 - 0x815f0000'
+setenv bootargs 'console=tty0 console=ttyO2,115200n8 root=/dev/mmcblk0p2
+rootwait rootfstype=ext3 ro'
+boot
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+In the above beagle.dtb =  uImage--3.14.8-r0-omap3-beagle-<date>.dtb which
+I assumed to be the correct one for the C4 because the other dtb created
+has xM explicitly in its name.
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+The system boots fine but USB is not working. None of the typical USB host
+controller initialization is in the dmesg output and lsusb responds with
+'unable to initialize libsub: -99'.
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.08"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+I am not sure if I am doing anything wrong or if there is an actual issue.
+Help appreciated.
 
-</body>
-</html>
+Cheers,
+Rudi
 
+--089e013c69ce96743a0501edf944
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_534_1572455757.1409450310752--
+<div dir=3D"ltr"><div dir=3D"ltr"><div><font face=3D"garamond, serif"><span=
+ style=3D"border-collapse:collapse;color:rgb(102,102,102);font-family:arial=
+,sans-serif;font-size:13px">I have a BeagleBoard C4 laying around that I wa=
+nt to use for a project that has USB devices connected to it. I built a cor=
+e-image-base with YP from master and meta-ti from master with this configur=
+ation:</span></font></div>
+<div><font face=3D"garamond, serif"><span style=3D"border-collapse:collapse=
+;color:rgb(102,102,102);font-family:arial,sans-serif;font-size:13px"><br></=
+span></font></div><div><span style=3D"border-collapse:collapse"><div style>=
+<font color=3D"#666666" face=3D"arial, sans-serif">Build Configuration:</fo=
+nt></div>
+<div style><font color=3D"#666666" face=3D"arial, sans-serif">BB_VERSION =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;1.23.1&quot;</font></div><div style><f=
+ont color=3D"#666666" face=3D"arial, sans-serif">BUILD_SYS =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =3D &quot;x86_64-linux&quot;</font></div>
+<div style><font color=3D"#666666" face=3D"arial, sans-serif">NATIVELSBSTRI=
+NG =C2=A0 =3D &quot;Fedora-18&quot;</font></div><div style><font color=3D"#=
+666666" face=3D"arial, sans-serif">TARGET_SYS =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+=3D &quot;arm-poky-linux-gnueabi&quot;</font></div>
+<div style><font color=3D"#666666" face=3D"arial, sans-serif">MACHINE =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &quot;beagleboard&quot;</font></div><di=
+v style><font color=3D"#666666" face=3D"arial, sans-serif">DISTRO =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;poky&quot;</font></div>
+<div style><font color=3D"#666666" face=3D"arial, sans-serif">DISTRO_VERSIO=
+N =C2=A0 =C2=A0=3D &quot;1.6+snapshot-20140831&quot;</font></div><div style=
+><font color=3D"#666666" face=3D"arial, sans-serif">TUNE_FEATURES =C2=A0 =
+=C2=A0 =3D &quot;arm armv7a vfp thumb neon callconvention-hard cortexa8&quo=
+t;</font></div>
+<div style><font color=3D"#666666" face=3D"arial, sans-serif">TARGET_FPU =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;vfp-neon&quot;</font></div><div style>=
+<font color=3D"#666666" face=3D"arial, sans-serif">meta =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0</font></div><div style><font color=3D"#6666=
+66" face=3D"arial, sans-serif">meta-yocto =C2=A0 =C2=A0 =C2=A0 =C2=A0</font=
+></div>
+<div style><font color=3D"#666666" face=3D"arial, sans-serif">meta-yocto-bs=
+p =C2=A0 =C2=A0=3D &quot;master:c16795477ea7e2159b5d3808268912b572887e2d&qu=
+ot;</font></div><div style><font color=3D"#666666" face=3D"arial, sans-seri=
+f">meta-ti =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &quot;master:d2c40099cd21=
+9493e4a6d9a6218f88f1b9f3f8fb&quot;</font></div>
+<div style><font color=3D"#666666" face=3D"arial, sans-serif">meta-oe =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &quot;master:1513d0e31f609ffcde9a116a50=
+bfb0360b9e7ecf&quot;</font></div><div style=3D"color:rgb(102,102,102);font-=
+family:arial,sans-serif;font-size:13px">
+<br></div><div style=3D"color:rgb(102,102,102);font-family:arial,sans-serif=
+;font-size:13px">It builds fine. I am installing u-boot, kernel and the dev=
+ice tree on the SSD card.</div><div style=3D"color:rgb(102,102,102);font-fa=
+mily:arial,sans-serif;font-size:13px">
+<br></div><div style=3D"color:rgb(102,102,102);font-family:arial,sans-serif=
+;font-size:13px">I use this u-boot script to boot the board:</div><div styl=
+e=3D"color:rgb(102,102,102);font-family:arial,sans-serif;font-size:13px"><b=
+r>
+</div><div style><div style=3D"color:rgb(102,102,102);font-family:arial,san=
+s-serif;font-size:13px">setenv bootcmd &#39;mmc init; fatload mmc 0:1 0x803=
+00000 uImage; fatload mmc 0:1 0x815f0000 beagle.dtb; bootm 0x80300000 - 0x8=
+15f0000&#39;</div>
+<div style=3D"color:rgb(102,102,102);font-family:arial,sans-serif;font-size=
+:13px">setenv bootargs &#39;console=3Dtty0 console=3DttyO2,115200n8 root=3D=
+/dev/mmcblk0p2 rootwait rootfstype=3Dext3 ro&#39;</div><div style=3D"color:=
+rgb(102,102,102);font-family:arial,sans-serif;font-size:13px">
+boot</div><div style=3D"color:rgb(102,102,102);font-family:arial,sans-serif=
+;font-size:13px"><br></div><div style><font color=3D"#666666" face=3D"arial=
+, sans-serif">In the above beagle.dtb =3D=C2=A0</font><span style=3D"color:=
+rgb(102,102,102);font-family:arial,sans-serif;font-size:13px">=C2=A0</span>=
+<font color=3D"#666666" face=3D"arial, sans-serif">uImage--3.14.8-r0-omap3-=
+beagle-&lt;date&gt;.dtb which I assumed to be the correct one for the C4 be=
+cause the other dtb created has xM explicitly in its name.</font></div>
+<div style><font color=3D"#666666" face=3D"arial, sans-serif"><br></font></=
+div><div style><font color=3D"#666666" face=3D"arial, sans-serif">The syste=
+m boots fine but USB is not working. None of the typical USB host controlle=
+r initialization is in the dmesg output and lsusb responds with &#39;unable=
+ to initialize libsub: -99&#39;.</font></div>
+<div style><font color=3D"#666666" face=3D"arial, sans-serif"><br></font></=
+div><div style><font color=3D"#666666" face=3D"arial, sans-serif">I am not =
+sure if I am doing anything wrong or if there is an actual issue. Help appr=
+eciated.</font></div>
+<div style><font color=3D"#666666" face=3D"arial, sans-serif"><br></font></=
+div><div style><font color=3D"#666666" face=3D"arial, sans-serif">Cheers,</=
+font></div><div style><font color=3D"#666666" face=3D"arial, sans-serif">Ru=
+di</font></div>
+<div style=3D"color:rgb(102,102,102);font-family:arial,sans-serif;font-size=
+:13px"><br></div></div></span></div></div>
+</div>
+
+--089e013c69ce96743a0501edf944--
