@@ -1,13 +1,16 @@
 Return-Path: <rstreif@linuxfoundation.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AF2C7E0082A; Sun, 31 Aug 2014 21:41:46 -0700 (PDT)
+	id 294DCE0082A; Sun, 31 Aug 2014 23:34:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HTML_MESSAGE,RCVD_IN_DNSWL_LOW autolearn=ham
 	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [209.85.213.171 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
@@ -15,44 +18,42 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.223.173 listed in list.dnswl.org]
-Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
-	[209.85.223.173])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 44EFAE00821
-	for <meta-ti@yoctoproject.org>; Sun, 31 Aug 2014 21:41:36 -0700 (PDT)
-Received: by mail-ie0-f173.google.com with SMTP id lx4so5506948iec.4
-	for <meta-ti@yoctoproject.org>; Sun, 31 Aug 2014 21:41:36 -0700 (PDT)
+Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
+	[209.85.213.171])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BF49AE00821
+	for <meta-ti@yoctoproject.org>; Sun, 31 Aug 2014 23:34:30 -0700 (PDT)
+Received: by mail-ig0-f171.google.com with SMTP id l13so12343999iga.10
+	for <meta-ti@yoctoproject.org>; Sun, 31 Aug 2014 23:34:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=linuxfoundation.org; s=google;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:cc:content-type;
-	bh=Y19Q5gPrOye0U9PDyC9V3khXjPXkTwbs+bP7u2YeBc4=;
-	b=YNaE6UTV92smDS39WIrGHVg5XSI8QcjPcnfHtRiDUIbriDJw7aiSx6lEuJjJj8jfbg
-	F/jYPzugUiDzIl/1eiXPIX0wyw/3UpJegMDvBuI/jFdFXlnn7f6Ese45qq4YrGEZuJkf
-	aZ+oYRnUN18N1tnSfRrp4iyW/j2LefxWFsEj0=
+	bh=JuXfjSXpDJOcNFzSq/aWVvF/beJ5Rzz2YEKF8z0TDos=;
+	b=VQXBmOFZbvMlrI4P6Bu1Cod4npWpGVLSCkZlS8zb+njh44Yot0xEhSIyR/REIO0tWW
+	tAuhgfYaPWF3aKcJXSuDrGkEkCS388ptstUIg0yl8MW5TeREnkyUh7IOPwdAiJ3ZOFPm
+	ZhL4/6+/39vM45D8kjgFEYFy1Ww6mwXKrkj5M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:cc:content-type;
-	bh=Y19Q5gPrOye0U9PDyC9V3khXjPXkTwbs+bP7u2YeBc4=;
-	b=XIfQzN2P9zqvH5Kr04r1Acai/te5R7MLg+trJpBffq7iJGJ7reuE0GQKcehu/SR7+f
-	/H8mrtM/71YPY2qqOelqhmeYYeXvCvuuRV/6xjkRPB3sitCOUIrOfl1gy3RAWtEtTVVk
-	ZDx0EteMUynSSQ5oQPrPspfu8hWP+p9X2Hfeg77xSXpE3z17uoNqzjn0UrHezlzzG12Q
-	o4HFuqKOfdDVdrOZ5oBqAkM8IlBtaXV9CDBuzaEKcYr0LJkqAXzI71D4bh5EUbJvbIIY
-	mP0fPj+2ZODhLZanbLmRkRyYH4fQmEE/B2WJIexVDS+f9lpGLlVuTSyJ4uBgfbCylQrn
-	CWDQ==
-X-Gm-Message-State: ALoCoQm4klBitFffK6rPYno4Fi1s0SpOj/SvHtd/9Rh0HQse/gwpO/2JtXIHN6mF7johJpNrvlnI
+	bh=JuXfjSXpDJOcNFzSq/aWVvF/beJ5Rzz2YEKF8z0TDos=;
+	b=Fjp3SCG5bfNQnB7J81J1GVU8bnVNPRudmvCtZxAkqcLrgzmjXsx5yzJJqe7FfzTpv9
+	vSid6RVA+QsM5hB70TdKjQzCqS0m6DpJPtL3KG94HLJ4Rg7rrt6Bm/EJ+VA178J+gEdN
+	748pjBhYBNX/+zqwp9iSAt54yJKTlh5vs72SDCY2s7KS7K6VR8fOMkeMv4HQJ9i1VKZv
+	tFS04COiZXW9Coh0Gepf2wujvLY8Y0KZXNbRgfDWaxZS6wf8sFMvpMDAeiTYfsGYVUbC
+	8Sb0mnsYFRFWoXy6J6WSnszwCWZQYp2mjDiTaPWxKnKktQaPke7DWAsKmoPC/G0K0/zb
+	d2jQ==
+X-Gm-Message-State: ALoCoQllWY4Em4RjDByk7bZZt4B40YDVZQ/zq9L9wNCYfICFC6MPhxlXTmKSIjrWG0J9tdI/7hPo
 MIME-Version: 1.0
-X-Received: by 10.50.41.104 with SMTP id e8mr18577393igl.35.1409546495885;
-	Sun, 31 Aug 2014 21:41:35 -0700 (PDT)
-Received: by 10.107.149.73 with HTTP; Sun, 31 Aug 2014 21:41:35 -0700 (PDT)
-In-Reply-To: <5403809E.3000703@bertux.com>
+X-Received: by 10.50.111.167 with SMTP id ij7mr19000547igb.49.1409553269876;
+	Sun, 31 Aug 2014 23:34:29 -0700 (PDT)
+Received: by 10.107.149.73 with HTTP; Sun, 31 Aug 2014 23:34:29 -0700 (PDT)
+In-Reply-To: <CA+gsK-qDoxr2OGk5WUGcJAPJNR5XXXem5U9moqtb2gFgXJKOLw@mail.gmail.com>
 References: <mailman.3.1409511601.29045.meta-ti@yoctoproject.org>
 	<5403809E.3000703@bertux.com>
-Date: Sun, 31 Aug 2014 21:41:35 -0700
-Message-ID: <CA+gsK-qDoxr2OGk5WUGcJAPJNR5XXXem5U9moqtb2gFgXJKOLw@mail.gmail.com>
+	<CA+gsK-qDoxr2OGk5WUGcJAPJNR5XXXem5U9moqtb2gFgXJKOLw@mail.gmail.com>
+Date: Sun, 31 Aug 2014 23:34:29 -0700
+Message-ID: <CA+gsK-pU+dm61c9WXHUXp7diratVD3-ArJbOudXemsiSLLH=4A@mail.gmail.com>
 From: Rudolf Streif <rstreif@linuxfoundation.org>
 To: Fabio Berton <fabio@bertux.com>
 Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
@@ -69,155 +70,189 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Sep 2014 04:41:46 -0000
-Content-Type: multipart/alternative; boundary=089e01161a262e9eec0501f99efe
+X-List-Received-Date: Mon, 01 Sep 2014 06:34:35 -0000
+Content-Type: multipart/alternative; boundary=047d7b414478f18aea0501fb31b5
 
---089e01161a262e9eec0501f99efe
+--047d7b414478f18aea0501fb31b5
 Content-Type: text/plain; charset=UTF-8
 
-Thank you, Fabio.
+I found the issue. Configuring CONFIG_USB_EHCI_HCD_OMAP,
+CONFIG_USB_OHCI_HCD and
+CONFIG_USB_OHCI_HCD_OMAP3 in the kernel configuration finally enabled the
+USB host controller.
 
-However, that is not the reason. The modules phy_omap_usb2 and
-phy_omap_usb3 are built into the kernel but yet the hardware does not seem
-to be recognized. That is the case we two different BeagleBoard C4 boards.
+However, I don't exactly understand why that is not the default for a board
+support package.
 
 :rjs
 
 
-On Sun, Aug 31, 2014 at 1:07 PM, Fabio Berton <fabio@bertux.com> wrote:
 
-> Try to install the packages bellow:
+On Sun, Aug 31, 2014 at 9:41 PM, Rudolf Streif <rstreif@linuxfoundation.org>
+wrote:
+
+> Thank you, Fabio.
 >
-> kernel-modules
-> usbutils
+> However, that is not the reason. The modules phy_omap_usb2 and
+> phy_omap_usb3 are built into the kernel but yet the hardware does not seem
+> to be recognized. That is the case we two different BeagleBoard C4 boards.
+>
+> :rjs
 >
 >
-> On 08/31/2014 04:00 PM, meta-ti-request@yoctoproject.org wrote:
 >
->> Send meta-ti mailing list submissions to
->>         meta-ti@yoctoproject.org
+> On Sun, Aug 31, 2014 at 1:07 PM, Fabio Berton <fabio@bertux.com> wrote:
+>
+>> Try to install the packages bellow:
 >>
->> To subscribe or unsubscribe via the World Wide Web, visit
->>         https://lists.yoctoproject.org/listinfo/meta-ti
->> or, via email, send a message with subject or body 'help' to
->>         meta-ti-request@yoctoproject.org
->>
->> You can reach the person managing the list at
->>         meta-ti-owner@yoctoproject.org
->>
->> When replying, please edit your Subject line so it is more specific
->> than "Re: Contents of meta-ti digest..."
+>> kernel-modules
+>> usbutils
 >>
 >>
->> Today's Topics:
+>> On 08/31/2014 04:00 PM, meta-ti-request@yoctoproject.org wrote:
 >>
->>     1. [nightly] Distroless meta-ti/master minimal build
->>        2014-08-30_21-00-30 (Denys Dmytriyenko)
->>     2. BeagleBoard C4 with USB (Rudolf Streif)
+>>> Send meta-ti mailing list submissions to
+>>>         meta-ti@yoctoproject.org
+>>>
+>>> To subscribe or unsubscribe via the World Wide Web, visit
+>>>         https://lists.yoctoproject.org/listinfo/meta-ti
+>>> or, via email, send a message with subject or body 'help' to
+>>>         meta-ti-request@yoctoproject.org
+>>>
+>>> You can reach the person managing the list at
+>>>         meta-ti-owner@yoctoproject.org
+>>>
+>>> When replying, please edit your Subject line so it is more specific
+>>> than "Re: Contents of meta-ti digest..."
+>>>
+>>>
+>>> Today's Topics:
+>>>
+>>>     1. [nightly] Distroless meta-ti/master minimal build
+>>>        2014-08-30_21-00-30 (Denys Dmytriyenko)
+>>>     2. BeagleBoard C4 with USB (Rudolf Streif)
+>>>
+>>>
+>>> ----------------------------------------------------------------------
+>>>
+>>> Message: 1
+>>> Date: Sat, 30 Aug 2014 21:58:30 -0400
+>>> From: Denys Dmytriyenko <denys@ti.com>
+>>> To: <meta-ti@yoctoproject.org>
+>>> Subject: [meta-ti] [nightly] Distroless meta-ti/master minimal build
+>>>         2014-08-30_21-00-30
+>>> Message-ID: <1330147917.535.1409450310755.JavaMail.jenkins@puget>
+>>> Content-Type: text/plain; charset="us-ascii"
+>>>
+>>> An HTML attachment was scrubbed...
+>>> URL: <http://lists.yoctoproject.org/pipermail/meta-ti/
+>>> attachments/20140830/406dab3a/attachment-0001.html>
+>>>
+>>> ------------------------------
+>>>
+>>> Message: 2
+>>> Date: Sun, 31 Aug 2014 07:48:09 -0700
+>>> From: Rudolf Streif <rstreif@linuxfoundation.org>
+>>> To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+>>> Subject: [meta-ti] BeagleBoard C4 with USB
+>>> Message-ID:
+>>>         <CA+gsK-okuyjWuEp+3bm6++ojWrDfaCPwXtXEOswu7Xikxg8jfA@
+>>> mail.gmail.com>
+>>> Content-Type: text/plain; charset="utf-8"
+>>>
+>>>
+>>> I have a BeagleBoard C4 laying around that I want to use for a project
+>>> that
+>>> has USB devices connected to it. I built a core-image-base with YP from
+>>> master and meta-ti from master with this configuration:
+>>>
+>>> Build Configuration:
+>>> BB_VERSION        = "1.23.1"
+>>> BUILD_SYS         = "x86_64-linux"
+>>> NATIVELSBSTRING   = "Fedora-18"
+>>> TARGET_SYS        = "arm-poky-linux-gnueabi"
+>>> MACHINE           = "beagleboard"
+>>> DISTRO            = "poky"
+>>> DISTRO_VERSION    = "1.6+snapshot-20140831"
+>>> TUNE_FEATURES     = "arm armv7a vfp thumb neon callconvention-hard
+>>> cortexa8"
+>>> TARGET_FPU        = "vfp-neon"
+>>> meta
+>>> meta-yocto
+>>> meta-yocto-bsp    = "master:c16795477ea7e2159b5d3808268912b572887e2d"
+>>> meta-ti           = "master:d2c40099cd219493e4a6d9a6218f88f1b9f3f8fb"
+>>> meta-oe           = "master:1513d0e31f609ffcde9a116a50bfb0360b9e7ecf"
+>>>
+>>> It builds fine. I am installing u-boot, kernel and the device tree on the
+>>> SSD card.
+>>>
+>>> I use this u-boot script to boot the board:
+>>>
+>>> setenv bootcmd 'mmc init; fatload mmc 0:1 0x80300000 uImage; fatload mmc
+>>> 0:1 0x815f0000 beagle.dtb; bootm 0x80300000 - 0x815f0000'
+>>> setenv bootargs 'console=tty0 console=ttyO2,115200n8 root=/dev/mmcblk0p2
+>>> rootwait rootfstype=ext3 ro'
+>>> boot
+>>>
+>>> In the above beagle.dtb =  uImage--3.14.8-r0-omap3-beagle-<date>.dtb
+>>> which
+>>> I assumed to be the correct one for the C4 because the other dtb created
+>>> has xM explicitly in its name.
+>>>
+>>> The system boots fine but USB is not working. None of the typical USB
+>>> host
+>>> controller initialization is in the dmesg output and lsusb responds with
+>>> 'unable to initialize libsub: -99'.
+>>>
+>>> I am not sure if I am doing anything wrong or if there is an actual
+>>> issue.
+>>> Help appreciated.
+>>>
+>>> Cheers,
+>>> Rudi
+>>> -------------- next part --------------
+>>> An HTML attachment was scrubbed...
+>>> URL: <http://lists.yoctoproject.org/pipermail/meta-ti/
+>>> attachments/20140831/fc724dcd/attachment-0001.html>
+>>>
+>>> ------------------------------
+>>>
+>>>
+>> --
+>> _______________________________________________
+>> meta-ti mailing list
+>> meta-ti@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/meta-ti
 >>
->>
->> ----------------------------------------------------------------------
->>
->> Message: 1
->> Date: Sat, 30 Aug 2014 21:58:30 -0400
->> From: Denys Dmytriyenko <denys@ti.com>
->> To: <meta-ti@yoctoproject.org>
->> Subject: [meta-ti] [nightly] Distroless meta-ti/master minimal build
->>         2014-08-30_21-00-30
->> Message-ID: <1330147917.535.1409450310755.JavaMail.jenkins@puget>
->> Content-Type: text/plain; charset="us-ascii"
->>
->> An HTML attachment was scrubbed...
->> URL: <http://lists.yoctoproject.org/pipermail/meta-ti/
->> attachments/20140830/406dab3a/attachment-0001.html>
->>
->> ------------------------------
->>
->> Message: 2
->> Date: Sun, 31 Aug 2014 07:48:09 -0700
->> From: Rudolf Streif <rstreif@linuxfoundation.org>
->> To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
->> Subject: [meta-ti] BeagleBoard C4 with USB
->> Message-ID:
->>         <CA+gsK-okuyjWuEp+3bm6++ojWrDfaCPwXtXEOswu7Xikxg8jfA@
->> mail.gmail.com>
->> Content-Type: text/plain; charset="utf-8"
->>
->>
->> I have a BeagleBoard C4 laying around that I want to use for a project
->> that
->> has USB devices connected to it. I built a core-image-base with YP from
->> master and meta-ti from master with this configuration:
->>
->> Build Configuration:
->> BB_VERSION        = "1.23.1"
->> BUILD_SYS         = "x86_64-linux"
->> NATIVELSBSTRING   = "Fedora-18"
->> TARGET_SYS        = "arm-poky-linux-gnueabi"
->> MACHINE           = "beagleboard"
->> DISTRO            = "poky"
->> DISTRO_VERSION    = "1.6+snapshot-20140831"
->> TUNE_FEATURES     = "arm armv7a vfp thumb neon callconvention-hard
->> cortexa8"
->> TARGET_FPU        = "vfp-neon"
->> meta
->> meta-yocto
->> meta-yocto-bsp    = "master:c16795477ea7e2159b5d3808268912b572887e2d"
->> meta-ti           = "master:d2c40099cd219493e4a6d9a6218f88f1b9f3f8fb"
->> meta-oe           = "master:1513d0e31f609ffcde9a116a50bfb0360b9e7ecf"
->>
->> It builds fine. I am installing u-boot, kernel and the device tree on the
->> SSD card.
->>
->> I use this u-boot script to boot the board:
->>
->> setenv bootcmd 'mmc init; fatload mmc 0:1 0x80300000 uImage; fatload mmc
->> 0:1 0x815f0000 beagle.dtb; bootm 0x80300000 - 0x815f0000'
->> setenv bootargs 'console=tty0 console=ttyO2,115200n8 root=/dev/mmcblk0p2
->> rootwait rootfstype=ext3 ro'
->> boot
->>
->> In the above beagle.dtb =  uImage--3.14.8-r0-omap3-beagle-<date>.dtb
->> which
->> I assumed to be the correct one for the C4 because the other dtb created
->> has xM explicitly in its name.
->>
->> The system boots fine but USB is not working. None of the typical USB host
->> controller initialization is in the dmesg output and lsusb responds with
->> 'unable to initialize libsub: -99'.
->>
->> I am not sure if I am doing anything wrong or if there is an actual issue.
->> Help appreciated.
->>
->> Cheers,
->> Rudi
->> -------------- next part --------------
->> An HTML attachment was scrubbed...
->> URL: <http://lists.yoctoproject.org/pipermail/meta-ti/
->> attachments/20140831/fc724dcd/attachment-0001.html>
->>
->> ------------------------------
->>
->>
-> --
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+>
+>
 >
 
---089e01161a262e9eec0501f99efe
+--047d7b414478f18aea0501fb31b5
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Thank you, Fabio.<div><br></div><div>However, that is not =
-the reason. The modules phy_omap_usb2 and phy_omap_usb3 are built into the =
-kernel but yet the hardware does not seem to be recognized. That is the cas=
-e we two different BeagleBoard C4 boards.</div>
-<div><br></div><div>:rjs<br><div class=3D"gmail_extra"><br><br><div class=
-=3D"gmail_quote">On Sun, Aug 31, 2014 at 1:07 PM, Fabio Berton <span dir=3D=
-"ltr">&lt;<a href=3D"mailto:fabio@bertux.com" target=3D"_blank">fabio@bertu=
-x.com</a>&gt;</span> wrote:<br>
+<div dir=3D"ltr">I found the issue. Configuring=C2=A0CONFIG_USB_EHCI_HCD_OM=
+AP, CONFIG_USB_OHCI_HCD and<div>CONFIG_USB_OHCI_HCD_OMAP3 in the kernel con=
+figuration finally enabled the USB host controller.</div><div><br></div><di=
+v>However, I don&#39;t exactly understand why that is not the default for a=
+ board support package.</div>
+<div><br></div><div>:rjs</div><div><br></div><div class=3D"gmail_extra"><br=
+><br><div class=3D"gmail_quote">On Sun, Aug 31, 2014 at 9:41 PM, Rudolf Str=
+eif <span dir=3D"ltr">&lt;<a href=3D"mailto:rstreif@linuxfoundation.org" ta=
+rget=3D"_blank">rstreif@linuxfoundation.org</a>&gt;</span> wrote:<br>
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex"><div dir=3D"ltr">Thank you, Fabio.<div><br><=
+/div><div>However, that is not the reason. The modules phy_omap_usb2 and ph=
+y_omap_usb3 are built into the kernel but yet the hardware does not seem to=
+ be recognized. That is the case we two different BeagleBoard C4 boards.</d=
+iv>
+
+<div><br></div><div>:rjs<div><div class=3D"h5"><br><div class=3D"gmail_extr=
+a"><br><br><div class=3D"gmail_quote">On Sun, Aug 31, 2014 at 1:07 PM, Fabi=
+o Berton <span dir=3D"ltr">&lt;<a href=3D"mailto:fabio@bertux.com" target=
+=3D"_blank">fabio@bertux.com</a>&gt;</span> wrote:<br>
+
 <blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
 x #ccc solid;padding-left:1ex">Try to install the packages bellow:<br>
 <br>
@@ -277,6 +312,7 @@ ents/20140830/406dab3a/attachment-0001.html" target=3D"_blank">http://lists=
 .yoctoproject.<u></u>org/pipermail/meta-ti/<u></u>attachments/20140830/406d=
 ab3a/<u></u>attachment-0001.html</a>&gt;<br>
 
+
 <br>
 ------------------------------<br>
 <br>
@@ -293,8 +329,7 @@ Message-ID:<br>
 %2B%2BojWrDfaCPwXtXEOswu7Xikxg8jfA@mail.gmail.com" target=3D"_blank">CA+gsK=
 -okuyjWuEp+3bm6++<u></u>ojWrDfaCPwXtXEOswu7Xikxg8jfA@<u></u>mail.gmail.com<=
 /a>&gt;<br>
-Content-Type: text/plain; charset=3D&quot;utf-8&quot;<div><div class=3D"h5"=
-><br>
+Content-Type: text/plain; charset=3D&quot;utf-8&quot;<div><div><br>
 <br>
 I have a BeagleBoard C4 laying around that I want to use for a project that=
 <br>
@@ -362,10 +397,11 @@ ents/20140831/fc724dcd/attachment-0001.html" target=3D"_blank">http://lists=
 .yoctoproject.<u></u>org/pipermail/meta-ti/<u></u>attachments/20140831/fc72=
 4dcd/<u></u>attachment-0001.html</a>&gt;<br>
 
+
 <br>
 ------------------------------<br>
-<br><span class=3D"HOEnZb"><font color=3D"#888888">
-</font></span></blockquote><span class=3D"HOEnZb"><font color=3D"#888888">
+<br><span><font color=3D"#888888">
+</font></span></blockquote><span><font color=3D"#888888">
 <br>
 -- <br>
 ______________________________<u></u>_________________<br>
@@ -379,6 +415,9 @@ ramond, serif"><span style=3D"border-collapse:collapse;color:rgb(102,102,10=
 2);font-family:arial,sans-serif;font-size:13px"><br></span></font></div></d=
 iv>
 
-</div></div></div>
 
---089e01161a262e9eec0501f99efe--
+</div></div></div></div></div>
+</blockquote></div><br><div><br></div>
+</div></div>
+
+--047d7b414478f18aea0501fb31b5--
