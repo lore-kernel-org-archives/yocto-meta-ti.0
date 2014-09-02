@@ -1,54 +1,33 @@
-Return-Path: <robertcnelson@gmail.com>
+Return-Path: <pab@pabigot.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6CB1DE0074B; Mon,  1 Sep 2014 16:54:14 -0700 (PDT)
+	id E32FCE0078A; Mon,  1 Sep 2014 20:08:17 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (robertcnelson[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.223.169 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
-	[209.85.223.169])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 00DC0E006B3
-	for <meta-ti@yoctoproject.org>; Mon,  1 Sep 2014 16:54:09 -0700 (PDT)
-Received: by mail-ie0-f169.google.com with SMTP id tr6so6767708ieb.14
-	for <meta-ti@yoctoproject.org>; Mon, 01 Sep 2014 16:54:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=/yewDuNu9v/ZvU8ep7tHbMX3JntdMGAvPTtixpYtK8g=;
-	b=jKgHY6yw5tfocOXnT9qHLX5VeS4dd6WwnHQXgthVaKzLyF1MnTxDjQn1ZDLrb6O2SB
-	Y3p56ZP0FF2oZgq44U/OEwRu9+a0mL13dD+8w/3hxMub7olGMaZe9hoWOz8qKHbMeokC
-	QY+ghI8Z1ZMch8+35X6Q+PSo1C893BZMI7jxigWD5mTd3Nb/K1SJWqRN1I65vE0DS1+y
-	6dDPod2IxEVTWzgj84GTjOevtgxEIdwpNQSQxV07krACi4ZYMLM17Jg2cDgh0LJ7yC9Q
-	QrBmNQk31VoYRvwb4cbDB7hViwbnr3XpDx89Mb9IEwmWR8IdTY2iu5pB2QjxwUcNc5c0
-	DTCQ==
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [173.201.192.239 listed in list.dnswl.org]
+Received: from p3plsmtpa07-10.prod.phx3.secureserver.net
+	(p3plsmtpa07-10.prod.phx3.secureserver.net [173.201.192.239])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 671B9E0074B
+	for <meta-ti@yoctoproject.org>; Mon,  1 Sep 2014 20:08:12 -0700 (PDT)
+Received: from [192.168.65.10] ([66.41.60.82])
+	by p3plsmtpa07-10.prod.phx3.secureserver.net with 
+	id m38B1o0021mTNtu0138BCW; Mon, 01 Sep 2014 20:08:12 -0700
+Message-ID: <5405349A.4050207@pabigot.com>
+Date: Mon, 01 Sep 2014 22:08:10 -0500
+From: "Peter A. Bigot" <pab@pabigot.com>
+Organization: Peter Bigot Consulting, LLC
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-X-Received: by 10.43.140.4 with SMTP id iy4mr28589958icc.23.1409615648485;
-	Mon, 01 Sep 2014 16:54:08 -0700 (PDT)
-Received: by 10.107.166.16 with HTTP; Mon, 1 Sep 2014 16:54:08 -0700 (PDT)
-In-Reply-To: <5405010E.2070400@pabigot.com>
+To: meta-ti@yoctoproject.org
 References: <5087658.bcI9hl3Jbj@localhost.localdomain>
-	<5404E0A8.8030204@pabigot.com>
-	<CAMCfZKEqU=Ric8131BA=nrToyAWxaEbHs0e-3EzKAz6CQUrtNA@mail.gmail.com>
-	<5405010E.2070400@pabigot.com>
-Date: Mon, 1 Sep 2014 18:54:08 -0500
-Message-ID: <CAOCHtYhzAfZwae2x_SjoiXagu3jJqTiM0ts7wZPF45DMzJYPvQ@mail.gmail.com>
-From: Robert Nelson <robertcnelson@gmail.com>
-To: "Peter A. Bigot" <pab@pabigot.com>
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
+In-Reply-To: <5087658.bcI9hl3Jbj@localhost.localdomain>
 Subject: Re: BBB + uboot 2014.07 - not booting
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
@@ -62,112 +41,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Sep 2014 23:54:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 02 Sep 2014 03:08:18 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Sep 1, 2014 at 6:28 PM, Peter A. Bigot <pab@pabigot.com> wrote:
-> On 09/01/2014 04:53 PM, Diego Sueiro wrote:
+On 08/19/2014 04:29 AM, Maciej Borzecki wrote:
+> Hi all,
 >
-> Peter,
+> There seems to be a problem booting BBB from SD card with uboot 2014.07 from
+> meta-ti, 2013.07 from yocto seems to work.
+> The card is partitioned as follows:
 >
-> On Mon, Sep 1, 2014 at 6:10 PM, Peter A. Bigot <pab@pabigot.com> wrote:
->>
->> I am seeing the same behavior with an SD card with u-boot from current
->> meta-ti master (MLO-beaglebone-2014.07-r1+gitrAUTOINC+8bd803d2c5)
->>
->> I partition the cards and create the boot/root partitions with:
->>
->> sudo dd if=/dev/zero of=${MMC} bs=1024 count=1024
->> ( echo ,9,0x0C,* ; echo ,,,- ) \
->>   | sudo sfdisk -D -H 255 -S 63 ${MMC}
->>
->> ${SUDO} mkfs.vfat -F 16 -n boot ${MMC}1
->> ${SUDO} mkfs -t ${FSTYPE} -L rootfs ${MMC}2
->>
->> ${SUDO} cp -p MLO u-boot.img ${MPROOT}/boot
->>
->> This process works with poky master and yocto-bsp on beaglebone.
->>
->> I recall from long ago that some TI systems were picky about the
->> partitioning of the boot media.
+> Device         Boot     Start       End Blocks  Id System
+> /dev/mmcblk0p1 *         2048     22527  10240   c W95 FAT32 (LBA)
+> /dev/mmcblk0p2          22528    227327 102400  83 Linux
 >
+> I've already tried different cards.
 >
-> This is not true for recent Sitara SoCs:
-> http://permalink.gmane.org/gmane.comp.handhelds.openembedded/64088
+> This is all I get on the serial console:
 >
+> U-Boot SPL 2014.07 (Aug 19 2014 - 10:45:01)
+> MMC: block number 0x100 exceeds max(0x0)
+> MMC: block number 0x200 exceeds max(0x0)
+> *** Error - No Valid Environment Area found
+> Using default environment
 >
->>
->> Would somebody with an SD card image that boots the current meta-ti master
->> provide the output of fdisk -lu from it, or a pointer to instructions for
->> doing the formatting?  For reference, what doesn't work is:
->>
->> llc[325]$ sudo fdisk -lu /dev/sdh
->>
->> Disk /dev/sdh: 7892 MB, 7892631552 bytes
->> 255 heads, 63 sectors/track, 959 cylinders, total 15415296 sectors
->> Units = sectors of 1 * 512 = 512 bytes
->> Sector size (logical/physical): 512 bytes / 512 bytes
->> I/O size (minimum/optimal): 512 bytes / 512 bytes
->> Disk identifier: 0x00000000
->>
->>
->>    Device Boot      Start         End      Blocks   Id  System
->> /dev/sdh1   *          63      144584       72261    c  W95 FAT32 (LBA)
->> /dev/sdh2          144585    15406334     7630875   83  Linux
->
->
-> I'm using the following partition layout (both working on eMMC and sdcard
-> with u-boot_2014.07.bb):
->
-> # fdisk -lu /dev/mmcblk0
->
-> Disk /dev/mmcblk0: 1920 MB, 1920991232 bytes, 3751936 sectors
-> Units = sectors of 1 * 512 = 512 bytes
-> Sector size (logical/physical): 512 bytes / 512 bytes
-> I/O size (minimum/optimal): 512 bytes / 512 bytes
-> Disk label type: dos
-> Disk identifier: 0x00000000
->
->         Device Boot      Start         End      Blocks   Id  System
-> /dev/mmcblk0p1   *          63       80324       40131    c  W95 FAT32 (LBA)
->
->
-> Thanks.  That does appear to be an eMMC partition, which probably shouldn't
-> matter, but I replicated the configuration on a 2GB class 4 uSD card, and an
-> 8GB class 6, and it doesn't work on either one.
->
-> llc[77]$ sudo fdisk -lu /dev/sdh
->
-> Disk /dev/sdh: 3965 MB, 3965190144 bytes
-> 255 heads, 63 sectors/track, 482 cylinders, total 7744512 sectors
->
-> Units = sectors of 1 * 512 = 512 bytes
-> Sector size (logical/physical): 512 bytes / 512 bytes
-> I/O size (minimum/optimal): 512 bytes / 512 bytes
-> Disk identifier: 0x00000000
->
->    Device Boot      Start         End      Blocks   Id  System
-> /dev/sdh1   *          63       80324       40131    c  W95 FAT32 (LBA)
-> /dev/sdh2           80325     7743329     3831502+  83  Linux
->
-> Anybody got a uSD partition layout that works?  I'm suspecting an issue with
-> the heads/sectors/cylinders configuration.
->
-> (FWIW: I'm also using u-boot-staging-ti, as that's the default for
-> beaglebone on the master branch.)
+> MMC: block number 0x1 exceeds max(0x0)
+> ** Can't read partition table on 0:0 **
+> ** Partition 1 not valid on device 0 **
+> spl_register_fat_device: fat register err - -1
+> ### ERROR ### Please RESET the board ###
 
-You could bypass the whole fat partition (On omap4+ bootrom
-generations (including the am335x)):
+This is a bug in handling mmc_switch_part: what's happening is that the 
+code reconfigures the mmc device to look at the partition on which the 
+environment is to be found, but fails to restore it to reflect the state 
+of the whole device.  I.e., the mmc capacity and lba are zero in my case 
+(I have no partition 2 on the uSD card), but mmc_switch_part() returns 
+-ENODEV on the attempt to switch back in fini_mmc_for_env() without also 
+resetting the capacity to what the rest of the system expects.
 
-dd if=MLO of=/dev/sdX count=1 seek=1 conv=notrunc bs=128k
-dd if=u-boot.img of=/dev/sdX count=2 seek=1 conv=notrunc bs=384k
+I'll follow up here with a patch based on the ti-uboot repository. It 
+conflicts with an upstream patch in u-boot master; I'll let Tom or 
+somebody else sort that out.
 
-Just make sure to leave a 1mb hole when you create a partition for
-everything else.
+Peter
 
-Regards,
-
--- 
-Robert Nelson
-http://www.rcn-ee.com/
 
