@@ -1,38 +1,56 @@
-Return-Path: <pab@pabigot.com>
+Return-Path: <tom.rini@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5F5ECE00842; Tue,  2 Sep 2014 04:42:26 -0700 (PDT)
+	id 52EB8E00524; Tue,  2 Sep 2014 09:44:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [68.178.252.102 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [209.85.213.50 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from p3plsmtpa11-01.prod.phx3.secureserver.net
-	(p3plsmtpa11-01.prod.phx3.secureserver.net [68.178.252.102])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C4C53E00837
-	for <meta-ti@yoctoproject.org>; Tue,  2 Sep 2014 04:42:13 -0700 (PDT)
-Received: from [192.168.65.10] ([66.41.60.82])
-	by p3plsmtpa11-01.prod.phx3.secureserver.net with 
-	id mBiB1o00G1mTNtu01BiCuk; Tue, 02 Sep 2014 04:42:13 -0700
-Message-ID: <5405AD13.7000306@pabigot.com>
-Date: Tue, 02 Sep 2014 06:42:11 -0500
-From: "Peter A. Bigot" <pab@pabigot.com>
-Organization: Peter Bigot Consulting, LLC
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.0
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-yh0-f50.google.com (mail-yh0-f50.google.com
+	[209.85.213.50])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0D664E004A0
+	for <meta-ti@yoctoproject.org>; Tue,  2 Sep 2014 09:44:46 -0700 (PDT)
+Received: by mail-yh0-f50.google.com with SMTP id f10so4413262yha.37
+	for <meta-ti@yoctoproject.org>; Tue, 02 Sep 2014 09:44:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:organization
+	:user-agent; bh=Uj1QakhXk5VN5u50YsSJphvvOb4ISjW9viygxft/Wo4=;
+	b=yyL0uqtZcYCdloUuvcjLlR4+xpGJftW7d8bOsI7XiIgKDnsAG7vsH/zCIARyR4/xOt
+	/iI0i4kZKhKe9f57go+2YpEXw4gl4e2VkDn1nCNAfNC3LWe16sWulNfYRPSJP3HMCZa5
+	u+WYS+/yL+G/OT0G3LP7MgSG7SMBM2U6Bh4xHPMOWJY++f+a6iOJ0+OnHLuUrRXjTW2k
+	jzCOcKH0fxJtPpmWfGEmNBYbNbaWmJcFNnMkX3SK8smkq7CTCAS7IHkQcUdatXDsQutL
+	+i8FECWHf/zK2Xwz90FeF50yC2f9qtrSOcKlErp7nzQ3ZPzEV+TTL/bv1CZDJT/j0ugj
+	QPvA==
+X-Received: by 10.236.31.4 with SMTP id l4mr2419555yha.158.1409676285536;
+	Tue, 02 Sep 2014 09:44:45 -0700 (PDT)
+Received: from bill-the-cat (cpe-098-121-186-226.ec.res.rr.com.
+	[98.121.186.226])
+	by mx.google.com with ESMTPSA id b61sm4456151yhc.35.2014.09.02.09.44.44
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Tue, 02 Sep 2014 09:44:44 -0700 (PDT)
+Sender: Tom Rini <tom.rini@gmail.com>
+Date: Tue, 2 Sep 2014 12:44:51 -0400
+From: Tom Rini <trini@ti.com>
+To: "Peter A. Bigot" <pab@pabigot.com>
+Message-ID: <20140902164451.GV19374@bill-the-cat>
+References: <5405349A.4050207@pabigot.com>
+	<1409627490-28337-1-git-send-email-pab@pabigot.com>
 MIME-Version: 1.0
-To: Maciej Borzecki <maciej.borzecki@open-rnd.pl>, 
- meta-ti@yoctoproject.org
-References: <5087658.bcI9hl3Jbj@localhost.localdomain>
-	<CAMCfZKEqU=Ric8131BA=nrToyAWxaEbHs0e-3EzKAz6CQUrtNA@mail.gmail.com>
-	<5405010E.2070400@pabigot.com>
-	<3756859.1y16KtP05K@localhost.localdomain>
-In-Reply-To: <3756859.1y16KtP05K@localhost.localdomain>
-Subject: Re: BBB + uboot 2014.07 - not booting
+In-Reply-To: <1409627490-28337-1-git-send-email-pab@pabigot.com>
+Organization: Texas Instruments
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: meta-ti@yoctoproject.org, Pantelis Antoniou <panto@antoniou-consulting.com>
+Subject: Re: [ti-uboot][PATCH] mmc: restore capacity when switching to partition 0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,113 +63,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Sep 2014 11:42:26 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 02 Sep 2014 16:44:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 09/02/2014 02:56 AM, Maciej Borzecki wrote:
-> On Monday 01 of September 2014 18:28:14 Peter A. Bigot wrote:
->> On 09/01/2014 04:53 PM, Diego Sueiro wrote:
->>> Peter,
->>>
->>> On Mon, Sep 1, 2014 at 6:10 PM, Peter A. Bigot <pab@pabigot.com
->>>
->>> <mailto:pab@pabigot.com>> wrote:
->>>      I am seeing the same behavior with an SD card with u-boot from
->>>      current meta-ti master
->>>      (MLO-beaglebone-2014.07-r1+gitrAUTOINC+8bd803d2c5)
->>>      
->>>      I partition the cards and create the boot/root partitions with:
->>>      
->>>      sudo dd if=/dev/zero of=${MMC} bs=1024 count=1024
->>>      ( echo ,9,0x0C,* ; echo ,,,- ) \
->>>      
->>>        | sudo sfdisk -D -H 255 -S 63 ${MMC}
->>>      
->>>      ${SUDO} mkfs.vfat -F 16 -n boot ${MMC}1
->>>      ${SUDO} mkfs -t ${FSTYPE} -L rootfs ${MMC}2
->>>      
->>>      ${SUDO} cp -p MLO u-boot.img ${MPROOT}/boot
->>>      
->>>      This process works with poky master and yocto-bsp on beaglebone.
->>>      
->>>      I recall from long ago that some TI systems were picky about the
->>>      partitioning of the boot media.
->>>
->>> This is not true for recent Sitara SoCs:
->>> http://permalink.gmane.org/gmane.comp.handhelds.openembedded/64088
->>>
->>>      Would somebody with an SD card image that boots the current
->>>      meta-ti master provide the output of fdisk -lu from it, or a
->>>      pointer to instructions for doing the formatting?  For reference,
->>>      what doesn't work is:
->>>      
->>>      llc[325]$ sudo fdisk -lu /dev/sdh
->>>      
->>>      Disk /dev/sdh: 7892 MB, 7892631552 bytes
->>>      255 heads, 63 sectors/track, 959 cylinders, total 15415296 sectors
->>>      Units = sectors of 1 * 512 = 512 bytes
->>>      Sector size (logical/physical): 512 bytes / 512 bytes
->>>      I/O size (minimum/optimal): 512 bytes / 512 bytes
->>>      Disk identifier: 0x00000000
->>>      
->>>         Device Boot      Start         End      Blocks  Id  System
->>>      
->>>      /dev/sdh1   *          63      144584       72261    c W95 FAT32 (LBA)
->>>      /dev/sdh2          144585    15406334     7630875   83 Linux
->>>
->>> I'm using the following partition layout (both working on eMMC and
->>>
->>> sdcard with u-boot_2014.07.bb <http://u-boot_2014.07.bb>):
->>>      # fdisk -lu /dev/mmcblk0
->>>      
->>>      Disk /dev/mmcblk0: 1920 MB, 1920991232 bytes, 3751936 sectors
->>>      Units = sectors of 1 * 512 = 512 bytes
->>>      Sector size (logical/physical): 512 bytes / 512 bytes
->>>      I/O size (minimum/optimal): 512 bytes / 512 bytes
->>>      Disk label type: dos
->>>      Disk identifier: 0x00000000
->>>      
->>>              Device Boot      Start     End      Blocks   Id  System
->>>      
->>>      /dev/mmcblk0p1   *          63   80324       40131    c  W95 FAT32
->>>      (LBA)
->> Thanks.  That does appear to be an eMMC partition, which probably
->> shouldn't matter, but I replicated the configuration on a 2GB class 4
->> uSD card, and an 8GB class 6, and it doesn't work on either one.
->>
->> llc[77]$ sudo fdisk -lu /dev/sdh
->>
->> Disk /dev/sdh: 3965 MB, 3965190144 bytes
->> 255 heads, 63 sectors/track, 482 cylinders, total 7744512 sectors
->> Units = sectors of 1 * 512 = 512 bytes
->> Sector size (logical/physical): 512 bytes / 512 bytes
->> I/O size (minimum/optimal): 512 bytes / 512 bytes
->> Disk identifier: 0x00000000
->>
->>      Device Boot      Start         End      Blocks   Id  System
->> /dev/sdh1   *          63       80324       40131    c  W95 FAT32 (LBA)
->> /dev/sdh2           80325     7743329     3831502+  83  Linux
->>
->> Anybody got a uSD partition layout that works?  I'm suspecting an issue
->> with the heads/sectors/cylinders configuration.
-> Try looking here:
-> http://article.gmane.org/gmane.linux.embedded.yocto.meta-ti/4371
->
-> Although I could not confirm this, it seems that the first partition on SD
-> needs to have an even block count (not sure about eMMC though, but I'm
-> guessing the same rules apply).
+On Mon, Sep 01, 2014 at 10:11:30PM -0500, Peter A. Bigot wrote:
 
-I had seen that, and did try even block counts, which didn't help. 
-Please try applying the u-boot patch I sent to your build and seeing if 
-that fixes the issue for you.  The symptoms you described fit it precisely.
+> The capacity and lba for an MMC device with part_num 0 reflects the
+> whole device.  When mmc_switch_part() successfully switches to a
+> partition, the capacity is changed to that partition.  As partition 0
+> does not physically exist, attempts to switch back to the whole device
+> will indicate an error, but should still restore the capacity setting.
 
-It's not obvious whether the problem remains when the upstream changes 
-to u-boot that conflict with it are present, but they're past 2014.07 so 
-it'd be good to get that patch into meta-ti or the TI u-boot branch.  
-I'd push it to OE Core but they're still at 2013.07 which doesn't have 
-this problem.  If it also fixes the problems you and Diego are having 
-that's more evidence it's worth adding.
+In other words:
+# mmc dev 0:1
+...
+# mmc dev 0:0
 
-Peter
+Fails?  And the following patch fixes it.
+
+> 
+> Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+> ---
+>  drivers/mmc/mmc.c | 7 ++++---
+>  1 file changed, 4 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+> index b5477b1..b05c6ee 100644
+> --- a/drivers/mmc/mmc.c
+> +++ b/drivers/mmc/mmc.c
+> @@ -596,10 +596,11 @@ int mmc_switch_part(int dev_num, unsigned int part_num)
+>  	ret = mmc_switch(mmc, EXT_CSD_CMD_SET_NORMAL, EXT_CSD_PART_CONF,
+>  			 (mmc->part_config & ~PART_ACCESS_MASK)
+>  			 | (part_num & PART_ACCESS_MASK));
+> -	if (ret)
+> -		return ret;
+>  
+> -	return mmc_set_capacity(mmc, part_num);
+> +	if ((0 == ret) || ((-ENODEV == ret) && (0 == part_num)))
+
+This is backwards from how we usually code things:
+
+if ((ret == 0) || ((ret == -ENODEV) && (part_num == 0)))
+
+And should have a comment above it that's a short summary of the commit
+message so this doesn't get lost later on.
+
+> +		ret = mmc_set_capacity(mmc, part_num);
+> +
+> +	return ret;
+>  }
+>  
+>  int mmc_getcd(struct mmc *mmc)
+> -- 
+> 1.8.5.5
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+
+And speaking of getting lost, this isn't the U-Boot mailing list so the
+change would get lost with the next release.  Please make sure to post
+the next version to the u-boot ML as well and CC Pantelis.   Thanks!
+
+-- 
+Tom
 
