@@ -1,6 +1,6 @@
-Return-Path: <maciej.borzecki@open-rnd.pl>
+Return-Path: <pierluigi.passaro@phoenixsoftware.it>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A6C84E00563; Wed,  3 Sep 2014 00:43:56 -0700 (PDT)
+	id 5B09CE00566; Wed,  3 Sep 2014 02:25:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,25 +8,23 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3AF0CE00524
-	for <meta-ti@yoctoproject.org>; Wed,  3 Sep 2014 00:43:51 -0700 (PDT)
-Received: from comp-006-thk.localnet (unknown [46.170.72.194])
-	by open-rnd.nazwa.pl (Postfix) with ESMTP id 9F79D1158A19;
-	Wed,  3 Sep 2014 09:43:48 +0200 (CEST)
-From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-To: "Peter A. Bigot" <pab@pabigot.com>
-Date: Wed, 03 Sep 2014 09:43:48 +0200
-Message-ID: <1433853.OJ5kKceYN4@comp-006-thk>
-User-Agent: KMail/4.13.3 (Linux/3.15.10-201.fc20.x86_64; KDE/4.13.3; x86_64; ;
-	)
-In-Reply-To: <5405AD13.7000306@pabigot.com>
-References: <5087658.bcI9hl3Jbj@localhost.localdomain>
-	<3756859.1y16KtP05K@localhost.localdomain>
-	<5405AD13.7000306@pabigot.com>
+Received: from smtpcmd01217.aruba.it (smtpcmd01217.aruba.it [62.149.158.217])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D3A1E0054C
+	for <meta-ti@yoctoproject.org>; Wed,  3 Sep 2014 02:25:34 -0700 (PDT)
+Received: from [192.168.0.90] ([93.39.88.63])
+	by smtpcmd01.ad.aruba.it with bizsmtp
+	id mZRW1o00q1N064D01ZRWAk; Wed, 03 Sep 2014 11:25:31 +0200
+Message-ID: <5406DE8A.90801@phoenixsoftware.it>
+Date: Wed, 03 Sep 2014 11:25:30 +0200
+From: Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
+To: Denys Dmytriyenko <denys@ti.com>
+References: <54064ACC.9020702@phoenixsoftware.it> <20140903015326.GP18620@edge>
+In-Reply-To: <20140903015326.GP18620@edge>
 Cc: meta-ti@yoctoproject.org
-Subject: Re: BBB + uboot 2014.07 - not booting
+Subject: Re: AM335X EVMSK kernel problem
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,180 +37,21 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Sep 2014 07:43:56 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Wed, 03 Sep 2014 09:25:40 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tuesday 02 of September 2014 06:42:11 Peter A. Bigot wrote:
-> On 09/02/2014 02:56 AM, Maciej Borzecki wrote:
-> > On Monday 01 of September 2014 18:28:14 Peter A. Bigot wrote:
-> >> On 09/01/2014 04:53 PM, Diego Sueiro wrote:
-> >>> Peter,
-> >>>=20
-> >>> On Mon, Sep 1, 2014 at 6:10 PM, Peter A. Bigot <pab@pabigot.com
-> >>>=20
-> >>> <mailto:pab@pabigot.com>> wrote:
-> >>>      I am seeing the same behavior with an SD card with u-boot fr=
-om
-> >>>      current meta-ti master
-> >>>      (MLO-beaglebone-2014.07-r1+gitrAUTOINC+8bd803d2c5)
-> >>>     =20
-> >>>      I partition the cards and create the boot/root partitions wi=
-th:
-> >>>     =20
-> >>>      sudo dd if=3D/dev/zero of=3D${MMC} bs=3D1024 count=3D1024
-> >>>      ( echo ,9,0x0C,* ; echo ,,,- ) \
-> >>>     =20
-> >>>        | sudo sfdisk -D -H 255 -S 63 ${MMC}
-> >>>     =20
-> >>>      ${SUDO} mkfs.vfat -F 16 -n boot ${MMC}1
-> >>>      ${SUDO} mkfs -t ${FSTYPE} -L rootfs ${MMC}2
-> >>>     =20
-> >>>      ${SUDO} cp -p MLO u-boot.img ${MPROOT}/boot
-> >>>     =20
-> >>>      This process works with poky master and yocto-bsp on beagleb=
-one.
-> >>>     =20
-> >>>      I recall from long ago that some TI systems were picky about=
- the
-> >>>      partitioning of the boot media.
-> >>>=20
-> >>> This is not true for recent Sitara SoCs:
-> >>> http://permalink.gmane.org/gmane.comp.handhelds.openembedded/6408=
-8
-> >>>=20
-> >>>      Would somebody with an SD card image that boots the current
-> >>>      meta-ti master provide the output of fdisk -lu from it, or a=
+Hi Denys,
+how can I identify "latest known good commit from meta-ti for 
+linux-ti-staging"?
 
-> >>>      pointer to instructions for doing the formatting?  For refer=
-ence,
-> >>>      what doesn't work is:
-> >>>     =20
-> >>>      llc[325]$ sudo fdisk -lu /dev/sdh
-> >>>     =20
-> >>>      Disk /dev/sdh: 7892 MB, 7892631552 bytes
-> >>>      255 heads, 63 sectors/track, 959 cylinders, total 15415296 s=
-ectors
-> >>>      Units =3D sectors of 1 * 512 =3D 512 bytes
-> >>>      Sector size (logical/physical): 512 bytes / 512 bytes
-> >>>      I/O size (minimum/optimal): 512 bytes / 512 bytes
-> >>>      Disk identifier: 0x00000000
-> >>>     =20
-> >>>         Device Boot      Start         End      Blocks  Id  Syste=
-m
-> >>>     =20
-> >>>      /dev/sdh1   *          63      144584       72261    c W95 F=
-AT32
-> >>>      (LBA)
-> >>>      /dev/sdh2          144585    15406334     7630875   83 Linux=
+Thanks
+Pierluigi
 
-> >>>=20
-> >>> I'm using the following partition layout (both working on eMMC an=
-d
-> >>>=20
-> >>> sdcard with u-boot_2014.07.bb <http://u-boot_2014.07.bb>):
-> >>>      # fdisk -lu /dev/mmcblk0
-> >>>     =20
-> >>>      Disk /dev/mmcblk0: 1920 MB, 1920991232 bytes, 3751936 sector=
-s
-> >>>      Units =3D sectors of 1 * 512 =3D 512 bytes
-> >>>      Sector size (logical/physical): 512 bytes / 512 bytes
-> >>>      I/O size (minimum/optimal): 512 bytes / 512 bytes
-> >>>      Disk label type: dos
-> >>>      Disk identifier: 0x00000000
-> >>>     =20
-> >>>              Device Boot      Start     End      Blocks   Id  Sys=
-tem
-> >>>     =20
-> >>>      /dev/mmcblk0p1   *          63   80324       40131    c  W95=
- FAT32
-> >>>      (LBA)
-> >>=20
-> >> Thanks.  That does appear to be an eMMC partition, which probably
-> >> shouldn't matter, but I replicated the configuration on a 2GB clas=
-s 4
-> >> uSD card, and an 8GB class 6, and it doesn't work on either one.
-> >>=20
-> >> llc[77]$ sudo fdisk -lu /dev/sdh
-> >>=20
-> >> Disk /dev/sdh: 3965 MB, 3965190144 bytes
-> >> 255 heads, 63 sectors/track, 482 cylinders, total 7744512 sectors
-> >> Units =3D sectors of 1 * 512 =3D 512 bytes
-> >> Sector size (logical/physical): 512 bytes / 512 bytes
-> >> I/O size (minimum/optimal): 512 bytes / 512 bytes
-> >> Disk identifier: 0x00000000
-> >>=20
-> >>      Device Boot      Start         End      Blocks   Id  System
-> >>=20
-> >> /dev/sdh1   *          63       80324       40131    c  W95 FAT32 =
-(LBA)
-> >> /dev/sdh2           80325     7743329     3831502+  83  Linux
-> >>=20
-> >> Anybody got a uSD partition layout that works?  I'm suspecting an =
-issue
-> >> with the heads/sectors/cylinders configuration.
-> >=20
-> > Try looking here:
-> > http://article.gmane.org/gmane.linux.embedded.yocto.meta-ti/4371
-> >=20
-> > Although I could not confirm this, it seems that the first partitio=
-n on SD
-> > needs to have an even block count (not sure about eMMC though, but =
-I'm
-> > guessing the same rules apply).
->=20
-> I had seen that, and did try even block counts, which didn't help.
-> Please try applying the u-boot patch I sent to your build and seeing =
-if
-> that fixes the issue for you.  The symptoms you described fit it prec=
-isely.
-
-The patch works as advertised. I've applied it on uboot-ti=20
-053adddee4c97315059e08d4b3f5ebd264ed295f
-Great job, thanks.
-
->=20
-> It's not obvious whether the problem remains when the upstream change=
-s
-> to u-boot that conflict with it are present, but they're past 2014.07=
- so
-> it'd be good to get that patch into meta-ti or the TI u-boot branch.
-> I'd push it to OE Core but they're still at 2013.07 which doesn't hav=
-e
-> this problem.  If it also fixes the problems you and Diego are having=
-
-> that's more evidence it's worth adding.
-
-
---=20
-
-Maciej Borz=C4=99cki=20
-Senior Software Engineer Open-RnD Sp. z o.o.=20
-www.open-rnd.pl, Facebook, Twitter=20
-mobile: +48 telefon, fax: +48 42 657 9079=20
-
-Niniejsza wiadomo=C5=9B=C4=87 wraz z za=C5=82=C4=85cznikami mo=C5=BCe z=
-awiera=C4=87 chronione prawem lub=20
-poufne informacje i zosta=C5=82a wys=C5=82ana wy=C5=82=C4=85cznie do wi=
-adomo=C5=9Bci i u=C5=BCytku os=C3=B3b, do=20
-kt=C3=B3rych zosta=C5=82a zaadresowana. Je=C5=9Bli wiadomo=C5=9B=C4=87 =
-zosta=C5=82a otrzymana przypadkowo=20
-zabrania si=C4=99 jej kopiowania lub rozsy=C5=82ania do os=C3=B3b trzec=
-ich. W takim przypadku=20
-uprasza si=C4=99 o natychmiastowe zniszczenie wiadomo=C5=9Bci oraz poin=
-formowanie=20
-nadawcy o zaistnia=C5=82ej sytuacji za pomoc=C4=85 wiadomo=C5=9Bci zwro=
-tnej. Dzi=C4=99kujemy.=20
-
-This message, including any attachments hereto, may contain privileged =
-or=20
-confidential information and is sent solely for the attention and use o=
-f the=20
-intended addressee(s). If you are not an intended addressee, you may ne=
-ither=20
-use this message nor copy or deliver it to anyone. In such case, you sh=
-ould=20
-immediately destroy this message and kindly notify the sender by reply =
-email.=20
-Thank you. 
+On 03/09/2014 03:53, Denys Dmytriyenko wrote:
+> Pierluigi,
+>
+> Try the latest known good commit from meta-ti for linux-ti-staging, as
+> meta-arago AUTOREV's the commit and there were some known regressions in the
+> past few days, that are being looked at now.
 
