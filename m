@@ -1,26 +1,42 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D343CE0049D; Wed,  3 Sep 2014 10:00:43 -0700 (PDT)
+	id 19437E004F5; Wed,  3 Sep 2014 12:35:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0D03E004A0
-	for <meta-ti@yoctoproject.org>; Wed,  3 Sep 2014 10:00:31 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 6DF1552A72; Wed,  3 Sep 2014 17:00:31 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20140903170031.6DF1552A72@arago-project.org>
-Date: Wed,  3 Sep 2014 17:00:31 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to the latest rev and add wlan config
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C65A2E0049D
+	for <meta-ti@yoctoproject.org>; Wed,  3 Sep 2014 12:35:10 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s83JZ6Ma002929;
+	Wed, 3 Sep 2014 14:35:06 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s83JZ6fL028042;
+	Wed, 3 Sep 2014 14:35:06 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Wed, 3 Sep 2014 14:35:06 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s83JZ6Pu031112;
+	Wed, 3 Sep 2014 14:35:06 -0500
+Date: Wed, 3 Sep 2014 15:35:05 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Pierluigi Passaro <pierluigi.passaro@phoenixsoftware.it>
+Message-ID: <20140903193505.GZ18620@edge>
+References: <54064ACC.9020702@phoenixsoftware.it> <20140903015326.GP18620@edge>
+	<5406DE8A.90801@phoenixsoftware.it>
+MIME-Version: 1.0
+In-Reply-To: <5406DE8A.90801@phoenixsoftware.it>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: AM335X EVMSK kernel problem
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,51 +49,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Sep 2014 17:00:43 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Sep 2014 19:35:20 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: daisy
-Commit: 517864123d85330ec6a41a5f94603b3ffeb167fe
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=517864123d85330ec6a41a5f94603b3ffeb167fe
+On Wed, Sep 03, 2014 at 11:25:30AM +0200, Pierluigi Passaro wrote:
+> Hi Denys,
+> how can I identify "latest known good commit from meta-ti for
+> linux-ti-staging"?
+> 
+> Thanks
+> Pierluigi
+> 
+> On 03/09/2014 03:53, Denys Dmytriyenko wrote:
+> >Pierluigi,
+> >
+> >Try the latest known good commit from meta-ti for linux-ti-staging, as
+> >meta-arago AUTOREV's the commit and there were some known regressions in the
+> >past few days, that are being looked at now.
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Sep  3 22:11:34 2014 +0000
+You can always look at SRCREV value in meta-ti/recipes-kernel/linux/linux-ti-staging_3.14.bb
+Having said that, I just pushed the latest update that supposed to contain the 
+necessary fix. Please let me know if you are still having issues. Thanks.
 
-linux-ti-staging: update to the latest rev and add wlan config
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
-
----
-
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index 46c3ded..2a458b7 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -44,17 +44,17 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.14.y"
- 
--SRCREV = "367e55fbd8b6a7fb853f44a4f854eaadbbfd68c2"
-+SRCREV = "0627fb95826dbcaac164f051d7d0a694e59d709a"
- PV = "3.14.17"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
- KERNEL_CONFIG_FRAGMENTS = "${KERNEL_CONFIG_DIR}/audio_display.cfg ${KERNEL_CONFIG_DIR}/baseport.cfg \
-                            ${KERNEL_CONFIG_DIR}/connectivity.cfg ${KERNEL_CONFIG_DIR}/ipc.cfg \
--                           ${KERNEL_CONFIG_DIR}/power.cfg"
-+                           ${KERNEL_CONFIG_DIR}/power.cfg ${KERNEL_CONFIG_DIR}/wlan.cfg"
- 
- KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/non-smp.cfg"
- KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${WORKDIR}/non-smp.cfg"
-
+-- 
+Denys
 
