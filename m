@@ -1,44 +1,34 @@
-Return-Path: <denys@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3F737E004F5; Wed,  3 Sep 2014 13:28:20 -0700 (PDT)
+	id 9E6FFE0079A; Wed,  3 Sep 2014 14:14:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	HTML_MIME_NO_HTML_TAG,MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-	*  0.4 HTML_MIME_NO_HTML_TAG HTML-only message, but there is no HTML tag
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D9338E0049D
-	for <meta-ti@yoctoproject.org>; Wed,  3 Sep 2014 13:28:13 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s83KSC4O001816
-	for <meta-ti@yoctoproject.org>; Wed, 3 Sep 2014 15:28:12 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s83KSCxL029970
-	for <meta-ti@yoctoproject.org>; Wed, 3 Sep 2014 15:28:12 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 3 Sep 2014 15:28:12 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s83KSBHI016327	for <meta-ti@yoctoproject.org>;
-	Wed, 3 Sep 2014 15:28:12 -0500
-Date: Wed, 3 Sep 2014 16:09:33 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <371885955.541.1409774973352.JavaMail.jenkins@puget>
-MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: FAILURE
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-09-03_16-09-26
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [206.46.173.25 listed in list.dnswl.org]
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 75F29E0049D
+	for <meta-ti@yoctoproject.org>; Wed,  3 Sep 2014 14:14:05 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.18.33.160])
+	by vms173025.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0NBC006HCGAX5HD0@vms173025.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 03 Sep 2014 16:13:45 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 09A0320092; Wed,
+	03 Sep 2014 17:13:45 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Wed, 03 Sep 2014 17:13:42 -0400
+Message-id: <1409778823-9681-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.0.4
+Subject: [PATCH 1/2] linux-ti-staging 3.12: update to the latest stable 3.12.27 version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,14 +41,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Sep 2014 20:28:20 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_540_2064325441.1409774973351"
+X-List-Received-Date: Wed, 03 Sep 2014 21:14:12 -0000
 
-------=_Part_540_2064325441.1409774973351
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+From: Denys Dmytriyenko <denys@ti.com>
 
-ERROR: File 'results.html' does not exist
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging_3.12.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-------=_Part_540_2064325441.1409774973351--
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index 427bd97..3ef8b61 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -39,8 +39,8 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.12.y"
+ 
+-SRCREV = "5c62fd05f12d008a136d5620d12a76d50429af3c"
+-PV = "3.12.26"
++SRCREV = "26f5c93225a929d2260d182497bba8077386390e"
++PV = "3.12.27"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+-- 
+2.0.4
+
+
