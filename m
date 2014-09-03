@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D2313E0079B; Wed,  3 Sep 2014 10:00:43 -0700 (PDT)
+	id D343CE0049D; Wed,  3 Sep 2014 10:00:43 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9F8E8E0049D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0D03E004A0
 	for <meta-ti@yoctoproject.org>; Wed,  3 Sep 2014 10:00:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 727C7529D5; Wed,  3 Sep 2014 17:00:31 +0000 (UTC)
+	id 6DF1552A72; Wed,  3 Sep 2014 17:00:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140903170031.727C7529D5@arago-project.org>
+Message-Id: <20140903170031.6DF1552A72@arago-project.org>
 Date: Wed,  3 Sep 2014 17:00:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: update to the latest rev and add wlan config
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 03 Sep 2014 17:00:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 9b88e08c144f6e4471f5eba79187b78c1d6ff570
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9b88e08c144f6e4471f5eba79187b78c1d6ff570
+Branch: daisy
+Commit: 517864123d85330ec6a41a5f94603b3ffeb167fe
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=517864123d85330ec6a41a5f94603b3ffeb167fe
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Sep  3 22:11:34 2014 +0000
