@@ -1,36 +1,48 @@
-Return-Path: <denis@denix.org>
+Return-Path: <raj.khem@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DB4F8E004F5; Wed,  3 Sep 2014 14:14:12 -0700 (PDT)
+	id 61E5DE004F5; Wed,  3 Sep 2014 15:44:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (raj.khem[at]gmail.com)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.213.178 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [206.46.173.19 listed in list.dnswl.org]
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCFC6E004A0
-	for <meta-ti@yoctoproject.org>; Wed,  3 Sep 2014 14:14:04 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.18.33.160])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0NBC00HR4GAX3SF0@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 03 Sep 2014 16:13:45 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 1646F2011D; Wed,
-	03 Sep 2014 17:13:45 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Wed, 03 Sep 2014 17:13:43 -0400
-Message-id: <1409778823-9681-2-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.0.4
-In-reply-to: <1409778823-9681-1-git-send-email-denis@denix.org>
-References: <1409778823-9681-1-git-send-email-denis@denix.org>
-Subject: [PATCH 2/2] linux-mainline 3.14: update to the latest stable 3.14.17 version
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
+	[209.85.213.178])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2EC3E0049D
+	for <meta-ti@yoctoproject.org>; Wed,  3 Sep 2014 15:44:45 -0700 (PDT)
+Received: by mail-ig0-f178.google.com with SMTP id hn18so79270igb.11
+	for <meta-ti@yoctoproject.org>; Wed, 03 Sep 2014 15:44:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=9plm3VjqpEVPL0KkqmwqSMieTtWBB5xEYDTg+odCP4g=;
+	b=toAl4MgZ8Lur9XIr7OURBav74qm20tHK55HA7F4+7Fz1CCZ/GAC3U46w+uheGF57+N
+	YZqDEQXFugQeqo1R4kyIZjlQXaZQ6GW1oCddBT++oMSQb/ch0CHH3MhOMBj9DwRgwrE6
+	8XFjI/9cTQ9fBT7CF8K+IIqr8u1ViFAlrtybCtQ5Pl6lDZ2NcAU74MbhuGbd5tr0yZ/z
+	hZhPecwa096vOArckXj+tMRaeyIevjE+8fbHNdR1pXZ/i/o3rTyh0hLPAgA94nJCjzw4
+	ISBcKC+3g01C2HDwZub/rW46uG1WWTvm9H2QQOu0HpIc+pRW8g6kDOxV0lbg8EcP3M0x
+	D4BQ==
+X-Received: by 10.50.111.112 with SMTP id ih16mr741290igb.30.1409784285100;
+	Wed, 03 Sep 2014 15:44:45 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.50.102.67 with HTTP; Wed, 3 Sep 2014 15:44:15 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 3 Sep 2014 15:44:15 -0700
+Message-ID: <CAMKF1spKFXzP_FjhAeodUuxTR8O3EDygsh94Vwgv_Q-pk0J6kg@mail.gmail.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: parsing errors with meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -43,33 +55,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Sep 2014 21:14:12 -0000
+X-List-Received-Date: Wed, 03 Sep 2014 22:44:51 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Hi
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-mainline_3.14.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+I am getting
 
-diff --git a/recipes-kernel/linux/linux-mainline_3.14.bb b/recipes-kernel/linux/linux-mainline_3.14.bb
-index bdb595d..1ad97e2 100644
---- a/recipes-kernel/linux/linux-mainline_3.14.bb
-+++ b/recipes-kernel/linux/linux-mainline_3.14.bb
-@@ -32,9 +32,9 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "linux-3.14.y"
- 
--# Corresponds to tag v3.14.8
--SRCREV = "0c5b3b80f7aeba9b8d25e12f7b321d148a1b1cb9"
--PV = "3.14.8"
-+# Corresponds to tag v3.14.17
-+SRCREV = "946de0e6b6ed49eacb03e3cddfcb1d774d6378ed"
-+PV = "3.14.17"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
--- 
-2.0.4
+ERROR: Nothing PROVIDES 'libdce' (but
+/home/ubuntu/work/upstream/meta-ti/recipes-graphics/omapfbplay/omapfbplay-dce_git.bb
+DEPENDS on or otherwise requires it). Close matches:
 
+  libice
+
+  libcec
+
+  libpcre
+
+ERROR: Nothing RPROVIDES 'sox' (but
+/home/ubuntu/work/upstream/meta-ti/recipes-ti/beagleboard/beaglebone-tester.bb
+RDEPENDS on or otherwise requires it)
+
+NOTE: Runtime target 'sox' is unbuildable, removing...
+
+Missing or unbuildable dependency chain was: ['sox']
+
+NOTE: Runtime target 'beaglebone-tester-dev' is unbuildable, removing...
+
+Missing or unbuildable dependency chain was: ['beaglebone-tester-dev', 'sox']
+
+ERROR: Nothing RPROVIDES 'beaglebone-tester' (but
+/home/ubuntu/work/upstream/meta-ti/recipes-ti/beagleboard/beaglebone-tester.bb
+RDEPENDS on or otherwise requires it)
+
+ERROR: No eligible RPROVIDERs exist for 'beaglebone-tester'
+
+NOTE: Runtime target 'beaglebone-tester' is unbuildable, removing...
+
+Missing or unbuildable dependency chain was: ['beaglebone-tester']
+
+ERROR: Nothing RPROVIDES 'omapfbplay-dce' (but
+/home/ubuntu/work/upstream/meta-ti/recipes-graphics/omapfbplay/omapfbplay-dce_git.bb
+RDEPENDS on or otherwise requires it)
+
+ERROR: No eligible RPROVIDERs exist for 'omapfbplay-dce'
+
+NOTE: Runtime target 'omapfbplay-dce' is unbuildable, removing...
+
+Missing or unbuildable dependency chain was: ['omapfbplay-dce']
+
+ERROR: Nothing RPROVIDES 'omapfbplay-dce-dev' (but
+/home/ubuntu/work/upstream/meta-ti/recipes-graphics/omapfbplay/omapfbplay-dce_git.bb
+RDEPENDS on or otherwise requires it)
+
+ERROR: No eligible RPROVIDERs exist for 'omapfbplay-dce-dev'
+
+NOTE: Runtime target 'omapfbplay-dce-dev' is unbuildable, removing...
+
+Missing or unbuildable dependency chain was: ['omapfbplay-dce-dev']
+
+
+sox is available in meta-multimedia
+http://cgit.openembedded.org/cgit.cgi/meta-openembedded/tree/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb?h=master
+
+but meta-ti claims to only depend on oe-core. So either this dep
+should be removed or README should be updated to reflect the layerdep
+
+-Khem
 
