@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D90F8E0076C; Thu,  4 Sep 2014 09:20:21 -0700 (PDT)
+	id 515B7E007C1; Thu,  4 Sep 2014 09:20:22 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EBE68E00769
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EEE8DE0079E
 	for <meta-ti@yoctoproject.org>; Thu,  4 Sep 2014 09:20:10 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 57FE352A72; Thu,  4 Sep 2014 16:20:10 +0000 (UTC)
+	id 73BAD52A75; Thu,  4 Sep 2014 16:20:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140904162010.57FE352A72@arago-project.org>
+Message-Id: <20140904162010.73BAD52A75@arago-project.org>
 Date: Thu,  4 Sep 2014 16:20:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-mainline 3.14: update to the latest stable 3.14. 17 version
+Subject: Denys Dmytriyenko : linux-ti-staging: merge audio/display changes, drop local SGX-related patches
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,42 +33,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2014 16:20:21 -0000
+X-List-Received-Date: Thu, 04 Sep 2014 16:20:22 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 192a50aa54e5deace1a0d3362035ff92e1efec09
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=192a50aa54e5deace1a0d3362035ff92e1efec09
+Commit: a52b0f6c8a7bbc739657f232897045a58bc1b3c5
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a52b0f6c8a7bbc739657f232897045a58bc1b3c5
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Sep  4 03:13:43 2014 +0000
+Date:   Thu Sep  4 21:40:50 2014 +0000
 
-linux-mainline 3.14: update to the latest stable 3.14.17 version
+linux-ti-staging: merge audio/display changes, drop local SGX-related patches
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-mainline_3.14.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ ...HACK-drm-fb_helper-enable-panning-support.patch |   51 ----------
+ ...lcdc-add-vsync-callback-for-use-in-omaplf.patch |   96 -------------------
+ ...fix-the-ping-pong-dma-tearing-issue-seen-.patch |   97 --------------------
+ recipes-kernel/linux/linux-ti-staging_3.14.bb      |   12 +--
+ 4 files changed, 2 insertions(+), 254 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-mainline_3.14.bb b/recipes-kernel/linux/linux-mainline_3.14.bb
-index bdb595d..1ad97e2 100644
---- a/recipes-kernel/linux/linux-mainline_3.14.bb
-+++ b/recipes-kernel/linux/linux-mainline_3.14.bb
-@@ -32,9 +32,9 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "linux-3.14.y"
- 
--# Corresponds to tag v3.14.8
--SRCREV = "0c5b3b80f7aeba9b8d25e12f7b321d148a1b1cb9"
--PV = "3.14.8"
-+# Corresponds to tag v3.14.17
-+SRCREV = "946de0e6b6ed49eacb03e3cddfcb1d774d6378ed"
-+PV = "3.14.17"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=a52b0f6c8a7bbc739657f232897045a58bc1b3c5
 
