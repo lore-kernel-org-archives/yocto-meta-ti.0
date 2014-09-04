@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 515B7E007C1; Thu,  4 Sep 2014 09:20:22 -0700 (PDT)
+	id 57C45E0079E; Thu,  4 Sep 2014 09:20:22 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EEE8DE0079E
-	for <meta-ti@yoctoproject.org>; Thu,  4 Sep 2014 09:20:10 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6D57AE004A0
+	for <meta-ti@yoctoproject.org>; Thu,  4 Sep 2014 09:20:19 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 73BAD52A75; Thu,  4 Sep 2014 16:20:10 +0000 (UTC)
+	id 2D95552A9A; Thu,  4 Sep 2014 16:20:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140904162010.73BAD52A75@arago-project.org>
-Date: Thu,  4 Sep 2014 16:20:10 +0000 (UTC)
+Message-Id: <20140904162014.2D95552A9A@arago-project.org>
+Date: Thu,  4 Sep 2014 16:20:14 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: merge audio/display changes, drop local SGX-related patches
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 04 Sep 2014 16:20:22 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: a52b0f6c8a7bbc739657f232897045a58bc1b3c5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a52b0f6c8a7bbc739657f232897045a58bc1b3c5
+Branch: daisy
+Commit: ea17f7e17e50917a990f7bad76a44221461dc718
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ea17f7e17e50917a990f7bad76a44221461dc718
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Sep  4 21:40:50 2014 +0000
@@ -56,5 +56,5 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  recipes-kernel/linux/linux-ti-staging_3.14.bb      |   12 +--
  4 files changed, 2 insertions(+), 254 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=a52b0f6c8a7bbc739657f232897045a58bc1b3c5
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=ea17f7e17e50917a990f7bad76a44221461dc718
 
