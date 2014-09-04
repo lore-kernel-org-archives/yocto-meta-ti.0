@@ -1,34 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BA2C4E00833; Thu,  4 Sep 2014 09:47:21 -0700 (PDT)
+	id 90FA8E00744; Thu,  4 Sep 2014 09:48:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.17 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCB41E006EF
-	for <meta-ti@yoctoproject.org>; Thu,  4 Sep 2014 09:46:30 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.18.33.160])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0NBD00IMRYLELM70@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 04 Sep 2014 11:46:27 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 6EAE92008C; Thu,
-	04 Sep 2014 12:46:26 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 274C7E004A0
+	for <meta-ti@yoctoproject.org>; Thu,  4 Sep 2014 09:48:37 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 2ED09529D5; Thu,  4 Sep 2014 16:48:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Thu, 04 Sep 2014 12:46:26 -0400
-Message-id: <1409849186-20394-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.0.4
-Subject: [PATCH] linux-ti-staging: fix breakage in rpmsg/rproc caused by the merge
+Message-Id: <20140904164837.2ED09529D5@arago-project.org>
+Date: Thu,  4 Sep 2014 16:48:37 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: fix breakage in rpmsg/ rproc caused by the merge
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -41,14 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2014 16:47:21 -0000
+X-List-Received-Date: Thu, 04 Sep 2014 16:48:40 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: 4f6a9e5b984ec4f1c32c88bfc8df88486169b717
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4f6a9e5b984ec4f1c32c88bfc8df88486169b717
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Sep  4 22:46:26 2014 +0000
+
+linux-ti-staging: fix breakage in rpmsg/rproc caused by the merge
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-kernel/linux/linux-ti-staging_3.14.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+
+ recipes-kernel/linux/linux-ti-staging_3.14.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
 index 4a613ad..45dccef 100644
@@ -68,7 +71,5 @@ index 4a613ad..45dccef 100644
  PR = "${MACHINE_KERNEL_PR}"
  
  KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
--- 
-2.0.4
 
 
