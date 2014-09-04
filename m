@@ -1,26 +1,35 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <pab@pabigot.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7275EE00744; Thu,  4 Sep 2014 09:48:57 -0700 (PDT)
+	id CD243E0076C; Thu,  4 Sep 2014 10:50:12 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [173.201.192.235 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 17AF2E004A0
-	for <meta-ti@yoctoproject.org>; Thu,  4 Sep 2014 09:48:56 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id BDAB8529D5; Thu,  4 Sep 2014 16:48:55 +0000 (UTC)
+Received: from p3plsmtpa07-06.prod.phx3.secureserver.net
+	(p3plsmtpa07-06.prod.phx3.secureserver.net [173.201.192.235])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D54A4E006EF
+	for <meta-ti@yoctoproject.org>; Thu,  4 Sep 2014 10:50:08 -0700 (PDT)
+Received: from [192.168.65.10] ([66.41.60.82])
+	by p3plsmtpa07-06.prod.phx3.secureserver.net with 
+	id n5q51o00S1mTNtu015q67q; Thu, 04 Sep 2014 10:50:07 -0700
+Message-ID: <5408A64D.8020806@pabigot.com>
+Date: Thu, 04 Sep 2014 12:50:05 -0500
+From: "Peter A. Bigot" <pab@pabigot.com>
+Organization: Peter Bigot Consulting, LLC
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
+MIME-Version: 1.0
 To: meta-ti@yoctoproject.org
-Message-Id: <20140904164855.BDAB8529D5@arago-project.org>
-Date: Thu,  4 Sep 2014 16:48:55 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: fix breakage in rpmsg/ rproc caused by the merge
+References: <a46afa0b8d064471ae32a8078631d962@mb.cognitivesystems.com>	<20140904150022.GD18620@edge>	<54088734.1090204@pabigot.com>
+	<54088819.60906@pabigot.com>
+In-Reply-To: <54088819.60906@pabigot.com>
+Subject: Re: poor performance of OpenEmbedded on, BeagleBoneBlack compared to Debian
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,43 +42,29 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2014 16:48:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 04 Sep 2014 17:50:12 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Module: meta-ti
-Branch: daisy
-Commit: 287001242547b13638cfe192348b9669bdac9c9c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=287001242547b13638cfe192348b9669bdac9c9c
+On 09/04/2014 10:41 AM, Peter A. Bigot wrote:
+> On 09/04/2014 10:37 AM, Peter A. Bigot wrote:
+>>
+>> But I'm still looking for a way to set the CPU frequency to the 
+>> higher values supported on Beaglebone Black.  I had hoped meta-ti's 
+>> would be able to do that, since it has bone vs boneblack device trees 
+>> and u-boot detection.
+>>
+>> Any hints where to look for clock settings?
+>>
+>
+> Apologies; I didn't read Mikhail's full email before responding. 
+> Thanks for the links; I'll check those out, and maybe provide meta-ti 
+> patches so this gets fixed at the "source".
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Sep  4 22:46:26 2014 +0000
+And with the clues from the referenced patch I finally found this in 
+arch/arm/mach-omap2/opp33xx_data.c where it's apparently been for some 
+time.  Dunno why I wasn't seeing it on meta-ti kernels; juggling too 
+many variables I guess.
 
-linux-ti-staging: fix breakage in rpmsg/rproc caused by the merge
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index 4a613ad..45dccef 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -44,11 +44,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.14.y"
- 
--SRCREV = "4247372d2f38f7346e34063d38ac4adb3fe053c2"
-+SRCREV = "1cfe07e737fa842f9f93d80cee4e3b7f198bc566"
- PV = "3.14.17"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
-
+Peter
 
