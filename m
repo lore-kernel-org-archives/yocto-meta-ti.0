@@ -1,26 +1,34 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E551BE00814; Mon,  8 Sep 2014 07:49:34 -0700 (PDT)
+	id AA93AE00786; Mon,  8 Sep 2014 14:21:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [206.46.173.17 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 28F57E00855
-	for <meta-ti@yoctoproject.org>; Mon,  8 Sep 2014 07:49:25 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 650D252A85; Mon,  8 Sep 2014 14:49:24 +0000 (UTC)
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CA44BE0034C
+	for <meta-ti@yoctoproject.org>; Mon,  8 Sep 2014 14:21:45 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.18.33.160])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0NBL00HDWQ086WE0@vms173017.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 08 Sep 2014 16:21:44 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 5A15A20015; Mon,
+	08 Sep 2014 17:21:44 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20140908144924.650D252A85@arago-project.org>
-Date: Mon,  8 Sep 2014 14:49:24 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with A&D merge, add new DTBs for AM437x-SK and J6Eco
+Date: Mon, 08 Sep 2014 17:21:43 -0400
+Message-id: <1410211303-28836-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.0.4
+Subject: [PATCH] am33x-cm3: add voltage scaling binaries
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,57 +41,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Sep 2014 14:49:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 08 Sep 2014 21:21:51 -0000
 
-Module: meta-ti
-Branch: daisy
-Commit: 21a478d55a63c169403b2c601578f6293cd2fefe
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=21a478d55a63c169403b2c601578f6293cd2fefe
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Sep  8 20:17:13 2014 +0000
-
-linux-ti-staging: update with A&D merge, add new DTBs for AM437x-SK and J6Eco
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
-
 ---
+ recipes-bsp/am33x-cm3/am33x-cm3_git.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index cb6086a..7667e1a 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -26,10 +26,10 @@ RDEPENDS_kernel-base_append_dra7xx = " vpe-vpdma-fw"
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
- KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
--KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb"
-+KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-sk-evm.dtb"
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
- KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
--KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb am57xx-beagle-x15.dtb"
-+KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb dra72-evm.dtb am57xx-beagle-x15.dtb"
- KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb"
- KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
- KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
-@@ -44,11 +44,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/am33x-cm3/am33x-cm3_git.bb b/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
+index 7731992..e5728ab 100644
+--- a/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
++++ b/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
+@@ -4,10 +4,10 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
  
- BRANCH = "ti-linux-3.14.y"
+ PV = "1.8.7"
+-PR = "r0"
++PR = "r1"
+ PE = "1"
  
--SRCREV = "1cfe07e737fa842f9f93d80cee4e3b7f198bc566"
-+SRCREV = "0261be2e3a30f496c2c8642b6709f4fc54e75391"
- PV = "3.14.17"
+-SRCREV = "fb0117edd5810a8d3bd9b1cd8abe34e12ff2d0ba"
++SRCREV = "fffeab4236d4129ab046bb7081a8ac244134ad89"
+ BRANCH ?= "next"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "e+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
+ SRC_URI = "git://git.ti.com/ti-cm3-pm-firmware/amx3-cm3.git;protocol=git;branch=${BRANCH}"
+@@ -23,6 +23,7 @@ do_compile() {
+ do_install() {
+ 	install -d ${D}${base_libdir}/firmware
+ 	install -m 0644 bin/am335x-pm-firmware.elf ${D}${base_libdir}/firmware/
++	install -m 0644 bin/*-scale-data.bin ${D}${base_libdir}/firmware/
+ }
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+ FILES_${PN} += "${base_libdir}/firmware"
+-- 
+2.0.4
 
 
