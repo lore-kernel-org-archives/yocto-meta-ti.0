@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 74CB3E00857; Mon,  8 Sep 2014 07:49:33 -0700 (PDT)
+	id E48DCE0085D; Mon,  8 Sep 2014 07:49:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26799E0080F
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 27C27E00814
 	for <meta-ti@yoctoproject.org>; Mon,  8 Sep 2014 07:49:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4D92C52A77; Mon,  8 Sep 2014 14:49:24 +0000 (UTC)
+	id 5EDDA52A51; Mon,  8 Sep 2014 14:49:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140908144924.4D92C52A77@arago-project.org>
+Message-Id: <20140908144924.5EDDA52A51@arago-project.org>
 Date: Mon,  8 Sep 2014 14:49:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Peter A. Bigot : linux-ti-staging_3.14: make kernel origin configurable
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Sep 2014 14:49:33 -0000
+X-List-Received-Date: Mon, 08 Sep 2014 14:49:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 2febbb8d357bfc7efeb6f97b4c47956d6e39d0d6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2febbb8d357bfc7efeb6f97b4c47956d6e39d0d6
+Branch: daisy
+Commit: 169647d3dcb756b9d5399310383915a6193ebfd2
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=169647d3dcb756b9d5399310383915a6193ebfd2
 
 Author: Peter A. Bigot <pab@pabigot.com>
 Date:   Fri Sep  5 18:34:43 2014 +0000
