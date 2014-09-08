@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 72B11E00858; Mon,  8 Sep 2014 07:49:33 -0700 (PDT)
+	id 74CB3E00857; Mon,  8 Sep 2014 07:49:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24FE7E007A0
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26799E0080F
 	for <meta-ti@yoctoproject.org>; Mon,  8 Sep 2014 07:49:25 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6370652A6D; Mon,  8 Sep 2014 14:49:24 +0000 (UTC)
+	id 4D92C52A77; Mon,  8 Sep 2014 14:49:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140908144924.6370652A6D@arago-project.org>
+Message-Id: <20140908144924.4D92C52A77@arago-project.org>
 Date: Mon,  8 Sep 2014 14:49:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with A&D merge, add new DTBs for AM437x-SK and J6Eco
+Subject: Peter A. Bigot : linux-ti-staging_3.14: make kernel origin configurable
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,52 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 59ff8301e4e704df5f942391bacd87f321300836
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=59ff8301e4e704df5f942391bacd87f321300836
+Commit: 2febbb8d357bfc7efeb6f97b4c47956d6e39d0d6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2febbb8d357bfc7efeb6f97b4c47956d6e39d0d6
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Sep  8 20:17:13 2014 +0000
+Author: Peter A. Bigot <pab@pabigot.com>
+Date:   Fri Sep  5 18:34:43 2014 +0000
 
-linux-ti-staging: update with A&D merge, add new DTBs for AM437x-SK and J6Eco
+linux-ti-staging_3.14: make kernel origin configurable
 
+Using variables for KERNEL_GIT_URI and KERNEL_GIT_PROTOCOL allows layer
+bbappends to specify local repositories to test of pending changes that
+are not available in the official TI kernel, without requiring
+duplication of config fragments specified in SRC_URI in the base recipe.
+
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_3.14.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
 diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index cb6086a..7667e1a 100644
+index 45dccef..cb6086a 100644
 --- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
 +++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -26,10 +26,10 @@ RDEPENDS_kernel-base_append_dra7xx = " vpe-vpdma-fw"
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
- KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
--KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb"
-+KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-sk-evm.dtb"
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
- KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
--KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb am57xx-beagle-x15.dtb"
-+KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb dra72-evm.dtb am57xx-beagle-x15.dtb"
- KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb"
- KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
- KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
-@@ -44,11 +44,11 @@ S = "${WORKDIR}/git"
+@@ -59,7 +59,9 @@ KERNEL_CONFIG_FRAGMENTS = "${KERNEL_CONFIG_DIR}/audio_display.cfg ${KERNEL_CONFI
+ KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/non-smp.cfg"
+ KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${WORKDIR}/non-smp.cfg"
  
- BRANCH = "ti-linux-3.14.y"
- 
--SRCREV = "1cfe07e737fa842f9f93d80cee4e3b7f198bc566"
-+SRCREV = "0261be2e3a30f496c2c8642b6709f4fc54e75391"
- PV = "3.14.17"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "e+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+-SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH} \
++KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
++KERNEL_GIT_PROTOCOL = "git"
++SRC_URI = "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
+            file://defconfig \
+            file://non-smp.cfg \
+           "
 
 
