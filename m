@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C9EBDE007A0; Mon,  8 Sep 2014 15:19:47 -0700 (PDT)
+	id CB6E2E00786; Mon,  8 Sep 2014 15:19:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D46CE0034C
-	for <meta-ti@yoctoproject.org>; Mon,  8 Sep 2014 15:19:41 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E88DE0056A
+	for <meta-ti@yoctoproject.org>; Mon,  8 Sep 2014 15:19:44 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6FD5252A85; Mon,  8 Sep 2014 22:19:40 +0000 (UTC)
+	id 53B0852A87; Mon,  8 Sep 2014 22:19:44 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140908221940.6FD5252A85@arago-project.org>
-Date: Mon,  8 Sep 2014 22:19:40 +0000 (UTC)
+Message-Id: <20140908221944.53B0852A87@arago-project.org>
+Date: Mon,  8 Sep 2014 22:19:44 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : am33x-cm3: add voltage scaling binaries
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 08 Sep 2014 22:19:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 24f0cd652c274be0d8884f454ae40263636f58ea
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=24f0cd652c274be0d8884f454ae40263636f58ea
+Branch: daisy
+Commit: b236fc5ea32ff5fac9e78171bff408ac7d7c8570
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b236fc5ea32ff5fac9e78171bff408ac7d7c8570
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Sep  9 03:21:43 2014 +0000
