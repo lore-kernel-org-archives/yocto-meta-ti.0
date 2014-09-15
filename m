@@ -1,42 +1,30 @@
-Return-Path: <denys@ti.com>
+Return-Path: <Liviu.Gheorghisan@enea.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E5638E00849; Sun, 14 Sep 2014 18:41:15 -0700 (PDT)
+	id B52DDE0084A; Mon, 15 Sep 2014 00:23:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=no
+	version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E24E1E00846
-	for <meta-ti@yoctoproject.org>; Sun, 14 Sep 2014 18:41:04 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s8F1f4RM018992
-	for <meta-ti@yoctoproject.org>; Sun, 14 Sep 2014 20:41:04 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s8F1f3HQ028705
-	for <meta-ti@yoctoproject.org>; Sun, 14 Sep 2014 20:41:04 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Sun, 14 Sep 2014 20:41:04 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s8F1f3Dd027853	for <meta-ti@yoctoproject.org>; Sun, 14 Sep 2014 20:41:03
-	-0500
-Date: Sun, 14 Sep 2014 21:22:06 -0400
-From: Denys Dmytriyenko <denys@ti.com>
+Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
+	by yocto-www.yoctoproject.org (Postfix) with SMTP id B31ABE00746
+	for <meta-ti@yoctoproject.org>; Mon, 15 Sep 2014 00:23:00 -0700 (PDT)
+Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
+	(172.21.1.209) with Microsoft SMTP Server id 14.3.158.1;
+	Mon, 15 Sep 2014 09:22:58 +0200
+Received: by sestofb10.enea.se (Postfix, from userid 4496)	id 3B57E28D5E0;
+	Mon, 15 Sep 2014 09:22:58 +0200 (CEST)
+From: Liviu Gheorghisan <liviu.gheorghisan@enea.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1149215079.609.1410744126910.JavaMail.jenkins@puget>
+Date: Mon, 15 Sep 2014 09:22:56 +0200
+Message-ID: <1410765776-37708-1-git-send-email-liviu.gheorghisan@enea.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-09-14_21-00-30
+Received-SPF: None (SESTOEX03.enea.se: liviu.gheorghisan@enea.com does not
+	designate permitted sender hosts)
+Subject: [PATCH 1/1] CVE-2014-5077 Kernel/SCTP: fix a NULL pointer dereference
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,188 +37,78 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Sep 2014 01:41:16 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_608_1335681310.1410744126907"
+X-List-Received-Date: Mon, 15 Sep 2014 07:23:05 -0000
+Content-Type: text/plain
 
-------=_Part_608_1335681310.1410744126907
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+A NULL pointer dereference flaw was found in the way the
+Linux kernel's Stream Control Transmission Protocol
+(SCTP) implementation handled simultaneous connections
+between the same hosts. A remote attacker could use this
+flaw to crash the system.
 
-<html>
-<head>
-<title>
-Status for 09/14/14
-</title>
-</head>
-<body>
+References:
+    - https://access.redhat.com/security/cve/CVE-2014-5077
+    - http://patchwork.ozlabs.org/patch/372475/
 
-<h2>Status for 09/14/14</h2>
+Signed-off-by: Liviu Gheorghisan <liviu.gheorghisan@enea.com>
+---
+ ...p-inherit-auth-capable-on-INIT-collisions.patch | 33 ++++++++++++++++++++++
+ recipes-kernel/linux/linux-keystone_3.10.bb        |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 recipes-kernel/linux/files/Fix-CVE-2014-5077-sctp-inherit-auth-capable-on-INIT-collisions.patch
 
-<h2>BUILD_ID: build-2014-09-14_21-01-34</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am437x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.08"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+diff --git a/recipes-kernel/linux/files/Fix-CVE-2014-5077-sctp-inherit-auth-capable-on-INIT-collisions.patch b/recipes-kernel/linux/files/Fix-CVE-2014-5077-sctp-inherit-auth-capable-on-INIT-collisions.patch
+new file mode 100644
+index 0000000..f196d24
+--- /dev/null
++++ b/recipes-kernel/linux/files/Fix-CVE-2014-5077-sctp-inherit-auth-capable-on-INIT-collisions.patch
+@@ -0,0 +1,33 @@
++CVE-2014-5077 Kernel/SCTP: fix a NULL pointer dereference
++
++A NULL pointer dereference flaw was found in the way the 
++Linux kernel's Stream Control Transmission Protocol 
++(SCTP) implementation handled simultaneous connections 
++between the same hosts. A remote attacker could use this 
++flaw to crash the system.
++
++References:
++    - https://access.redhat.com/security/cve/CVE-2014-5077
++    - http://patchwork.ozlabs.org/patch/372475/
++
++Upstream-Status: Backport
++
++Fixes: 730fc3d05cd4 ("[SCTP]: Implete SCTP-AUTH parameter processing")
++Reported-by: Jason Gunthorpe <jgunthorpe@obsidianresearch.com>
++Signed-off-by: Daniel Borkmann <dborkman@redhat.com>
++Signed-off-by: Liviu Gheorghisan <liviu.gheorghisan@enea.com>
++Tested-by: Jason Gunthorpe <jgunthorpe@obsidianresearch.com>
++Cc: Vlad Yasevich <vyasevich@gmail.com>
++---
++diff --git a/net/sctp/associola.c b/net/sctp/associola.c
++index cef5099..c2d5109 100644
++--- a/net/sctp/associola.c
+++++ b/net/sctp/associola.c
++@@ -1198,6 +1198,7 @@ void sctp_assoc_update(struct sctp_association *asoc,
++ 	asoc->c = new->c;
++ 	asoc->peer.rwnd = new->peer.rwnd;
++ 	asoc->peer.sack_needed = new->peer.sack_needed;
+++	asoc->peer.auth_capable = new->peer.auth_capable;
++ 	asoc->peer.i = new->peer.i;
++ 	sctp_tsnmap_init(&asoc->peer.tsn_map, SCTP_TSN_MAP_INITIAL,
++ 			 asoc->peer.i.initial_tsn, GFP_ATOMIC);
+diff --git a/recipes-kernel/linux/linux-keystone_3.10.bb b/recipes-kernel/linux/linux-keystone_3.10.bb
+index a90ae47..e2ab8a6 100644
+--- a/recipes-kernel/linux/linux-keystone_3.10.bb
++++ b/recipes-kernel/linux/linux-keystone_3.10.bb
+@@ -31,6 +31,7 @@ SRC_URI = "git://git.ti.com/keystone-linux/linux.git;protocol=git;branch=${BRANC
+            file://Fix_HRTICK_related_deadlock_from_ntp_lock.patch\
+            file://dts-for-m800.patch\
+            file://Fix-CVE-2014-2309-dont-set-DST_NOCOUNT-for-remotely.patch\
++           file://Fix-CVE-2014-5077-sctp-inherit-auth-capable-on-INIT-collisions.patch\
+            "
+ 
+ S = "${WORKDIR}/git"
+-- 
+1.9.1
 
 
-------=_Part_608_1335681310.1410744126907--
