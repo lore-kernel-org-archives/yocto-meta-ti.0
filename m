@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9AB8DE006EF; Mon, 22 Sep 2014 09:49:40 -0700 (PDT)
+	id 9B722E005BD; Mon, 22 Sep 2014 09:49:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 66870E00566
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6553BE0034C
 	for <meta-ti@yoctoproject.org>; Mon, 22 Sep 2014 09:49:33 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 059B552A43; Mon, 22 Sep 2014 16:49:30 +0000 (UTC)
+	id F12E752A57; Mon, 22 Sep 2014 16:49:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140922164931.059B552A43@arago-project.org>
+Message-Id: <20140922164930.F12E752A57@arago-project.org>
 Date: Mon, 22 Sep 2014 16:49:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Khem Raj : am33x-cm3: Add TOOLCHAIN_OPTIONS to redefined CC
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 22 Sep 2014 16:49:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 41dd39e0ed8b4155c989f307785f1f37ec83b5c7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=41dd39e0ed8b4155c989f307785f1f37ec83b5c7
+Branch: master
+Commit: 3735bc41089cc7ba32f5550ce18c3bb0d20f3a32
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3735bc41089cc7ba32f5550ce18c3bb0d20f3a32
 
 Author: Khem Raj <raj.khem@gmail.com>
 Date:   Sun Sep 21 13:05:38 2014 +0000
