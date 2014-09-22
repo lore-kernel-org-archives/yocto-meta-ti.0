@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6C39AE007C2; Mon, 22 Sep 2014 12:32:40 -0700 (PDT)
+	id 6D57FE007AA; Mon, 22 Sep 2014 12:32:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F13F8E007DD
-	for <meta-ti@yoctoproject.org>; Mon, 22 Sep 2014 12:32:37 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3C7A4E00744
+	for <meta-ti@yoctoproject.org>; Mon, 22 Sep 2014 12:32:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9CC7E52A74; Mon, 22 Sep 2014 19:32:37 +0000 (UTC)
+	id 8CD6952A6B; Mon, 22 Sep 2014 19:32:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140922193237.9CC7E52A74@arago-project.org>
-Date: Mon, 22 Sep 2014 19:32:37 +0000 (UTC)
+Message-Id: <20140922193233.8CD6952A6B@arago-project.org>
+Date: Mon, 22 Sep 2014 19:32:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update with numerous fixes on top of 2014.07
+Subject: Denys Dmytriyenko : am33x-cm3: update to version 0x189
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,42 +37,39 @@ X-List-Received-Date: Mon, 22 Sep 2014 19:32:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 26511e179edd016bcd920a72529016b9fe9b2c39
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=26511e179edd016bcd920a72529016b9fe9b2c39
+Branch: master
+Commit: d0124de6b10e93d7c5eaad58763f0dfef51da781
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d0124de6b10e93d7c5eaad58763f0dfef51da781
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Sep 23 00:36:46 2014 +0000
+Date:   Mon Sep 22 22:55:21 2014 +0000
 
-u-boot-ti-staging: update with numerous fixes on top of 2014.07
+am33x-cm3: update to version 0x189
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb |    5 ++---
- 1 files changed, 2 insertions(+), 3 deletions(-)
+ recipes-bsp/am33x-cm3/am33x-cm3_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
-index a0029f9..a020299 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
-@@ -8,14 +8,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+diff --git a/recipes-bsp/am33x-cm3/am33x-cm3_git.bb b/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
+index 0b0a776..81431e9 100644
+--- a/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
++++ b/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
+@@ -3,11 +3,11 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
  
- PV = "2014.07"
--PR = "r1+gitr${SRCPV}"
-+PR = "r2+gitr${SRCPV}"
+-PV = "1.8.7"
++PV = "1.8.9"
+ PR = "r1"
+ PE = "1"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "fffeab4236d4129ab046bb7081a8ac244134ad89"
++SRCREV = "4e219d5053ee41b8fa8f85b48b1529ae4c6feb48"
+ BRANCH ?= "next"
  
- BRANCH ?= "ti-u-boot-2014.07"
- 
--# Corresponds to tag ti2014.07
--SRCREV = "8bd803d2c552f5f85a79b4bfed7b322fbaf89e27"
-+SRCREV = "00ddc45a9cbecb0f70fecdecf7f31bc1d5602dc0"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+ SRC_URI = "git://git.ti.com/ti-cm3-pm-firmware/amx3-cm3.git;protocol=git;branch=${BRANCH}"
 
 
