@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6E43AE00744; Mon, 22 Sep 2014 12:32:40 -0700 (PDT)
+	id 6F24DE00798; Mon, 22 Sep 2014 12:32:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0BDCE007AA
-	for <meta-ti@yoctoproject.org>; Mon, 22 Sep 2014 12:32:37 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3DABAE00798
+	for <meta-ti@yoctoproject.org>; Mon, 22 Sep 2014 12:32:34 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 780A752A6B; Mon, 22 Sep 2014 19:32:37 +0000 (UTC)
+	id D389D52A84; Mon, 22 Sep 2014 19:32:33 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20140922193237.780A752A6B@arago-project.org>
-Date: Mon, 22 Sep 2014 19:32:37 +0000 (UTC)
+Message-Id: <20140922193233.D389D52A84@arago-project.org>
+Date: Mon, 22 Sep 2014 19:32:33 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am33x-cm3: update to version 0x189
+Subject: Denys Dmytriyenko : linux-mainline: update to version 3.14.19
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,39 +37,38 @@ X-List-Received-Date: Mon, 22 Sep 2014 19:32:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 630f9e198e77c0a37bc2435080fc5742cfdf0502
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=630f9e198e77c0a37bc2435080fc5742cfdf0502
+Branch: master
+Commit: 71e6ae3702a5f7e9375b3a1d6bc1c92620865882
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=71e6ae3702a5f7e9375b3a1d6bc1c92620865882
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Mon Sep 22 22:55:21 2014 +0000
+Date:   Tue Sep 23 00:39:19 2014 +0000
 
-am33x-cm3: update to version 0x189
+linux-mainline: update to version 3.14.19
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/am33x-cm3/am33x-cm3_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-mainline_3.14.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/am33x-cm3/am33x-cm3_git.bb b/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
-index 0b0a776..81431e9 100644
---- a/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
-+++ b/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
-@@ -3,11 +3,11 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
+diff --git a/recipes-kernel/linux/linux-mainline_3.14.bb b/recipes-kernel/linux/linux-mainline_3.14.bb
+index 1ad97e2..bff7627 100644
+--- a/recipes-kernel/linux/linux-mainline_3.14.bb
++++ b/recipes-kernel/linux/linux-mainline_3.14.bb
+@@ -32,9 +32,9 @@ S = "${WORKDIR}/git"
  
--PV = "1.8.7"
-+PV = "1.8.9"
- PR = "r1"
- PE = "1"
+ BRANCH = "linux-3.14.y"
  
--SRCREV = "fffeab4236d4129ab046bb7081a8ac244134ad89"
-+SRCREV = "4e219d5053ee41b8fa8f85b48b1529ae4c6feb48"
- BRANCH ?= "next"
+-# Corresponds to tag v3.14.17
+-SRCREV = "946de0e6b6ed49eacb03e3cddfcb1d774d6378ed"
+-PV = "3.14.17"
++# Corresponds to tag v3.14.19
++SRCREV = "af92ba8fd23cb5811d96b833bbb7133efefeb5b9"
++PV = "3.14.19"
  
- SRC_URI = "git://git.ti.com/ti-cm3-pm-firmware/amx3-cm3.git;protocol=git;branch=${BRANCH}"
+ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
 
 
