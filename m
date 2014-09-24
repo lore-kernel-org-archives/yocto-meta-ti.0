@@ -1,49 +1,42 @@
-Return-Path: <manuel.torres.fernandez@gmail.com>
+Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C5941E00786; Wed, 24 Sep 2014 01:53:04 -0700 (PDT)
+	id B4C04E00786; Wed, 24 Sep 2014 02:37:44 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (manuel.torres.fernandez[at]gmail.com)
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.192.42 listed in list.dnswl.org]
-Received: from mail-qg0-f42.google.com (mail-qg0-f42.google.com
-	[209.85.192.42])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5889EE0034C
-	for <meta-ti@yoctoproject.org>; Wed, 24 Sep 2014 01:53:01 -0700 (PDT)
-Received: by mail-qg0-f42.google.com with SMTP id z60so4401001qgd.15
-	for <meta-ti@yoctoproject.org>; Wed, 24 Sep 2014 01:53:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=QirJWSA0ZlV8rX7WWzt7z2TmKzstVxPnF8qDdS23CJU=;
-	b=YeRu29ZtkdRiTR7zD1Oqt30pAGRkOgiObJMp89MyGAZ5BpnHH0QlLIEtEdtuIwafvQ
-	QEek0h2nkCtbSM1H8oFAf35/+q3WibjjE9pawjCGNJwIKUbxnC7pRVUkCoPMMLNmThVP
-	8g6Db+7F0gQRWNrOLtDgXiFAxh+vHCpC6DiihBWEiLkKT9GPhH6GYzDWlIXfVKsKokpg
-	t6g89sD/W0gT5GxBaG91mM7dtNpbDYalv2yYfHfUQXJlcUh60QWAMEeBHydTMZEO561b
-	LWLhPasA9bnEzQU8aOjwsRmhopfc139qL57emq7L7B12t6v9I9aWWLnGWuZWBenFLe5w
-	S0NA==
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E0777E0034C
+	for <meta-ti@yoctoproject.org>; Wed, 24 Sep 2014 02:37:33 -0700 (PDT)
+Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s8O9bVPD008008
+	for <meta-ti@yoctoproject.org>; Wed, 24 Sep 2014 04:37:32 -0500
+Received: from DBDE72.ent.ti.com (dbdmailx.itg.ti.com [172.24.171.97])
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id s8O9bEPi005761
+	for <meta-ti@yoctoproject.org>; Wed, 24 Sep 2014 15:07:15 +0530
+Received: from [172.24.159.120] (172.24.159.120) by DBDE72.ent.ti.com
+	(172.24.171.97) with Microsoft SMTP Server (TLS) id 14.3.174.1;
+	Wed, 24 Sep 2014 15:07:13 +0530
+Message-ID: <542290C8.3040102@ti.com>
+Date: Wed, 24 Sep 2014 15:07:12 +0530
+From: Karthik Ramanan <a0393906@ti.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:17.0) Gecko/20130620 Thunderbird/17.0.7
 MIME-Version: 1.0
-X-Received: by 10.140.22.177 with SMTP id 46mr7290332qgn.35.1411548780825;
-	Wed, 24 Sep 2014 01:53:00 -0700 (PDT)
-Received: by 10.224.212.74 with HTTP; Wed, 24 Sep 2014 01:53:00 -0700 (PDT)
-Date: Wed, 24 Sep 2014 10:53:00 +0200
-Message-ID: <CAF+2n7Tr+tqEq_R2cr0SuUQ8+PDB5tQKeCW2GLr=RW+-W35o_Q@mail.gmail.com>
-From: Manuel Torres <manuel.torres.fernandez@gmail.com>
-To: meta-ti@yoctoproject.org
-Subject: Video encoding on OMAP4430
+To: Denys Dmytriyenko <denys@ti.com>
+References: <1411488036-32089-1-git-send-email-a0393906@ti.com>
+	<1411488036-32089-7-git-send-email-a0393906@ti.com>
+	<20140923162254.GS6303@edge> <20140923180559.GT6303@edge>
+In-Reply-To: <20140923180559.GT6303@edge>
+X-Originating-IP: [172.24.159.120]
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [for master 6/6] libdrm: do_install_append added for modetest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,59 +49,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Sep 2014 08:53:04 -0000
-Content-Type: multipart/alternative; boundary=001a11c12fb8aa15f90503cbcfb9
+X-List-Received-Date: Wed, 24 Sep 2014 09:37:44 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---001a11c12fb8aa15f90503cbcfb9
-Content-Type: text/plain; charset=UTF-8
+Denys,
 
-Hello everyone,
+On 23-Sep-14 11:35 PM, Denys Dmytriyenko wrote:
+> Doesn't this work?
+>
+> http://git.yoctoproject.org/cgit/cgit.cgi/meta-ti/tree/recipes-graphics/drm/libdrm-2.4.41/installtests-ti.patch#n43
 
-I am using a Gumstix Duovero Zephyr, which is based on OMAP4430, and I
-would like to use the OMAP video encoding capabilities.
 
-I got this working with a Gumstix Overo IronStorm by adding "gstreamer-ti"
-to the image recipe but, if I run this target with "duovero" as machine, I
-get the following error:
+Yes, it works. The patch that I submitted was not required.
+I had not looked at this patch earlier.
 
-NOTE: Preparing runqueue
-NOTE: Executing SetScene Tasks
-NOTE: Executing RunQueue Tasks
-WARNING: Failed to fetch URL svn://
-gforge.ti.com/svn/dmai/;module=UNDEFINED_DMAIBRANCH;protocol=https;user=anonymous;pswd='',
-attempting MIRRORS if available
-ERROR: Fetcher failure: Fetch command failed with exit code 1, output:
-svn: E205000: Syntax error in revision argument 'UNDEFINED_SRCREV'
+Thanks for pointing me to this.
 
-ERROR: Function failed: Fetcher failure for URL: 'svn://
-gforge.ti.com/svn/dmai/;module=UNDEFINED_DMAIBRANCH;protocol=https;user=anonymous;pswd='''.
-Unable to fetch URL from any source.
+>
+>
+> On Tue, Sep 23, 2014 at 12:22:54PM -0400, Denys Dmytriyenko wrote:
+>> I was pretty sure installtests-ti.patch was supposed to take care of that...
+>>
+>>
+>> On Tue, Sep 23, 2014 at 09:30:36PM +0530, Karthik Ramanan wrote:
+>>> * modetest is a very important application to test the drm
+>>>    interface, this is not installed by the default make install.
+>>>
+>>> * It is desirable to have this binary on the target because it
+>>>    allows all kinds of basic debugging.
+>>>
+>>> Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+>>> ---
+>>>   recipes-graphics/drm/libdrm_2.4.41.bb |    8 +++++++-
+>>>   1 file changed, 7 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/recipes-graphics/drm/libdrm_2.4.41.bb b/recipes-graphics/drm/libdrm_2.4.41.bb
+>>> index 0150632..d94dca1 100644
+>>> --- a/recipes-graphics/drm/libdrm_2.4.41.bb
+>>> +++ b/recipes-graphics/drm/libdrm_2.4.41.bb
+>>> @@ -15,6 +15,12 @@ SRC_URI += "file://installtests-ti.patch \
+>>>               file://GNU_SOURCE_definition.patch \
+>>>              "
+>>>
+>>> -PR = "${INC_PR}.1"
+>>> +PR = "${INC_PR}.2"
+>>>
+>>>   S = "${WORKDIR}/git"
+>>> +
+>>> +do_install_append() {
+>>> +        mkdir -p ${D}/usr/bin/
+>>> +        cp ${S}/tests/modetest/.libs/modetest ${D}/usr/bin
+>>> +}
+>>> +
+>>> --
+>>> 1.7.9.5
+>>>
+>>> --
+>>> _______________________________________________
+>>> meta-ti mailing list
+>>> meta-ti@yoctoproject.org
+>>> https://lists.yoctoproject.org/listinfo/meta-ti
+>> --
+>> _______________________________________________
+>> meta-ti mailing list
+>> meta-ti@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/meta-ti
 
-Does anyone know what is wrong? Should I add a different target to the
-recipe?
 
---001a11c12fb8aa15f90503cbcfb9
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><div><div>Hello everyone,<br><br></div>I am using a G=
-umstix Duovero Zephyr, which is based on OMAP4430, and I would like to use =
-the OMAP video encoding capabilities.<br><br></div>I got this working with =
-a Gumstix Overo IronStorm by adding &quot;gstreamer-ti&quot;=C2=A0 to the i=
-mage recipe but, if I run this target with &quot;duovero&quot; as machine, =
-I get the following error:<br><br>NOTE: Preparing runqueue<br>NOTE: Executi=
-ng SetScene Tasks<br>NOTE: Executing RunQueue Tasks<br>WARNING: Failed to f=
-etch URL svn://<a href=3D"http://gforge.ti.com/svn/dmai/;module=3DUNDEFINED=
-_DMAIBRANCH;protocol=3Dhttps;user=3Danonymous;pswd=3D&#39;">gforge.ti.com/s=
-vn/dmai/;module=3DUNDEFINED_DMAIBRANCH;protocol=3Dhttps;user=3Danonymous;ps=
-wd=3D&#39;</a>&#39;, attempting MIRRORS if available<br>ERROR: Fetcher fail=
-ure: Fetch command failed with exit code 1, output:<br>svn: E205000: Syntax=
- error in revision argument &#39;UNDEFINED_SRCREV&#39;<br><br>ERROR: Functi=
-on failed: Fetcher failure for URL: &#39;svn://<a href=3D"http://gforge.ti.=
-com/svn/dmai/;module=3DUNDEFINED_DMAIBRANCH;protocol=3Dhttps;user=3Danonymo=
-us;pswd=3D&#39;&#39;">gforge.ti.com/svn/dmai/;module=3DUNDEFINED_DMAIBRANCH=
-;protocol=3Dhttps;user=3Danonymous;pswd=3D&#39;&#39;</a>&#39;. Unable to fe=
-tch URL from any source.<br><br></div>Does anyone know what is wrong? Shoul=
-d I add a different target to the recipe?<br><div><br></div></div>
-
---001a11c12fb8aa15f90503cbcfb9--
