@@ -1,53 +1,44 @@
-Return-Path: <ebutera@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 271BBE00790; Thu, 25 Sep 2014 09:05:21 -0700 (PDT)
+	id DC6A1E0076C; Thu, 25 Sep 2014 09:20:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.220.43 listed in list.dnswl.org]
-Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
-	[209.85.220.43])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D51D7E0074B
-	for <meta-ti@yoctoproject.org>; Thu, 25 Sep 2014 09:05:14 -0700 (PDT)
-Received: by mail-pa0-f43.google.com with SMTP id kx10so11306698pab.30
-	for <meta-ti@yoctoproject.org>; Thu, 25 Sep 2014 09:05:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=POohy84Nq9vg45PJI7kg2kDTflDt6nVSfUOF5jJReUU=;
-	b=mLvqo2V3WqM7e9aFNTBI+RP+f24sZdzPLfOf745mNVBCkWlOYc39e73+Umv0GxpZMx
-	KxTKxfgBK/PUgPWzQVSXIAxRK2zB2qeOVa83jQuW5Wi6PfRdmiACNlPCgLkMicsvp8xP
-	4zvNopby+ANr/50FXGnhtVhYJcr+oexaBcyFJJF5cV7PWbL0SAX77gI/Fern7KmnoTpn
-	pIna2+JJTOvlK0B3qqvJDSlE+rZQK1S4ImvJ072rCgQYA9W+A6jlSM2f/VtpD4fDrc4O
-	d+gVWDJnCUiBdNG/AUpYLz95T0yRNnmrv43mF5jlktAH9wbhDoUY5RaC80+OLuQHZtXa
-	wDgw==
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AC774E0074B
+	for <meta-ti@yoctoproject.org>; Thu, 25 Sep 2014 09:20:12 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s8PGK7EE015700;
+	Thu, 25 Sep 2014 11:20:07 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s8PGK6er028207;
+	Thu, 25 Sep 2014 11:20:07 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 25 Sep 2014 11:20:06 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s8PGK5H5020465;
+	Thu, 25 Sep 2014 11:20:05 -0500
+Date: Thu, 25 Sep 2014 12:20:05 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Diego Sueiro <diego.sueiro@gmail.com>
+Message-ID: <20140925162004.GA6303@edge>
+References: <1411405491-30435-1-git-send-email-denis@denix.org>
+	<CAMCfZKHU6GkJMrKBUHJbPttyoKvnb0xqDAEHxysi-W-B1U3scQ@mail.gmail.com>
+	<20140924155211.GZ6303@edge>
+	<CAMCfZKGPy3mLD_4_4ZJCHQs-=3HjvMk6KkD8Z8_HFhi=jmMhVw@mail.gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.70.87.169 with SMTP id az9mr28437369pdb.63.1411661114157;
-	Thu, 25 Sep 2014 09:05:14 -0700 (PDT)
-Sender: ebutera@gmail.com
-Received: by 10.70.54.70 with HTTP; Thu, 25 Sep 2014 09:05:14 -0700 (PDT)
-In-Reply-To: <CAF+2n7SGhcgMgD0AXoQb1=WV+P=ZiP9UEYe8RfOr+VxmhUAZuQ@mail.gmail.com>
-References: <CAF+2n7Tr+tqEq_R2cr0SuUQ8+PDB5tQKeCW2GLr=RW+-W35o_Q@mail.gmail.com>
-	<CA+2YH7t7PVNKA6xT1QcCgGoPY_foe020_sxWk5dJYhmLqi8QYA@mail.gmail.com>
-	<CAF+2n7QzdBhtZxJ6oi11KaUovc2PiWpN=Q4gBBm28tMjm3efXw@mail.gmail.com>
-	<CA+2YH7uaRmXepsmmYXQQ8_UXzsOBnwo1QPxnCSf=xqU1s04Cew@mail.gmail.com>
-	<CAF+2n7SGhcgMgD0AXoQb1=WV+P=ZiP9UEYe8RfOr+VxmhUAZuQ@mail.gmail.com>
-Date: Thu, 25 Sep 2014 18:05:14 +0200
-X-Google-Sender-Auth: LdyYLk5aRjDS4s90wEqN9apsYdc
-Message-ID: <CA+2YH7t1ET1YK3-0LqmL65S954CJAb4ACeKKpw=PPnzvCBtOBw@mail.gmail.com>
-From: Enrico <ebutera@users.sourceforge.net>
-To: Manuel Torres <manuel.torres.fernandez@gmail.com>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: Video encoding on OMAP4430
+In-Reply-To: <CAMCfZKGPy3mLD_4_4ZJCHQs-=3HjvMk6KkD8Z8_HFhi=jmMhVw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] linux-ti-staging: update to 3.14.19 with latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -60,33 +51,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Sep 2014 16:05:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 25 Sep 2014 16:20:21 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On Thu, Sep 25, 2014 at 5:57 PM, Manuel Torres
-<manuel.torres.fernandez@gmail.com> wrote:
-> Which console image should I build? The Arago or the Gumstix one?
+On Thu, Sep 25, 2014 at 09:04:58AM -0300, Diego Sueiro wrote:
+> On Wed, Sep 24, 2014 at 12:52 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+> 
+> > Do you need to submit a bug report? Is it for kernel or some other
+> > component?
+> 
+> Not at all.
+> Just thinking about to have a place where I can easily track issues, solved
+> bugs and enhancements for both kernel and u-boot projects. I wish I could
+> have an idea on what to expect from TI's work.
 
-The arago one, just to be sure you have a working setup.
+Well, this is meant to be an internal release and a staging area. The official 
+deliverable for the community is the mainline, although that takes longer time 
+for everything to get upstreamed and accepted in to the mainline... There is, 
+of course, an internal resource for tracking everything, but I don't think 
+it's meant for public consumption...
 
-(and btw you shouldn't have the gumstix one, because it's in gumstix-extras).
 
-Enrico
+> The gitorious web interface is the worst available for opensource projects.
 
+I prefer gitweb interface myself:
 
-> On Thu, Sep 25, 2014 at 5:33 PM, Enrico <ebutera@users.sourceforge.net>
-> wrote:
->>
->> On Thu, Sep 25, 2014 at 4:31 PM, Manuel Torres
->> <manuel.torres.fernandez@gmail.com> wrote:
->> > First of all, thank you for taking the time to help me.
->> >
->> > Now, back on topic: should I download the "meta-arago-extras" layer?
->> > That is
->> > what I found on Google when I searched for "gst-plugins-ducati".
->>
->> You should just follow the steps to build latest arago, build a simple
->> console-image and if everything is ok you can go on building gstreamer
->> and the ducati plugin.
->> You will need meta-gumstix of course.
+http://git.ti.com/gitweb/
+
+-- 
+Denys
 
