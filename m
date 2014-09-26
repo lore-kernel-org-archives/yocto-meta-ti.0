@@ -1,42 +1,59 @@
-Return-Path: <denys@ti.com>
+Return-Path: <manuel.torres.fernandez@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7D40EE00796; Thu, 25 Sep 2014 18:40:03 -0700 (PDT)
+	id 0AAB2E00873; Fri, 26 Sep 2014 01:22:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (manuel.torres.fernandez[at]gmail.com)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.223.173 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 44675E00769
-	for <meta-ti@yoctoproject.org>; Thu, 25 Sep 2014 18:39:50 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s8Q1dolx022013
-	for <meta-ti@yoctoproject.org>; Thu, 25 Sep 2014 20:39:50 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s8Q1douZ000607
-	for <meta-ti@yoctoproject.org>; Thu, 25 Sep 2014 20:39:50 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 25 Sep 2014 20:39:50 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s8Q1dn9m008346	for <meta-ti@yoctoproject.org>; Thu, 25 Sep 2014 20:39:50
-	-0500
-Date: Thu, 25 Sep 2014 21:20:35 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1521273915.657.1411694435644.JavaMail.jenkins@puget>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
+	[209.85.223.173])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4A4ACE007BA
+	for <meta-ti@yoctoproject.org>; Fri, 26 Sep 2014 01:21:26 -0700 (PDT)
+Received: by mail-ie0-f173.google.com with SMTP id tr6so15418384ieb.32
+	for <meta-ti@yoctoproject.org>; Fri, 26 Sep 2014 01:21:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=bTaK3vplYARV6vLjc/Nz0QtZhWHyQrqHnB9+/wiKK6w=;
+	b=iOYy8b8NcbPD0v2dICcCsdymRIxkfbrAAn4uQmbL8GvlVUFRIgVDm5DYwhOMauEGBC
+	06RxzwPllBWTbMmg/0z9iI7mN+yhJciznoQ0wb9OVTMv2YT+AqByXZbo9Q3obeL2qmKn
+	Fy8pMThsOHmqKfgh2AlvrVS6s9drVpJR3Pzm2PIkkQSC4AvlUztqcD07H+MraLXkpy0c
+	bXP0MeGl8x+M0mEgNJ4QhqMxsXW1a7+HINVAbV3CjrB4fxOA5Pre3Aspf67hfbqG/CSx
+	v0YEHqU4nOcYKGTkiExoXOs2Vga2UWruWvXjTeN7H2zoS6wqJUoJe34Yi/efpeABuh2c
+	bWuA==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-09-25_21-00-30
+X-Received: by 10.50.50.175 with SMTP id d15mr26695218igo.35.1411719686011;
+	Fri, 26 Sep 2014 01:21:26 -0700 (PDT)
+Received: by 10.107.135.13 with HTTP; Fri, 26 Sep 2014 01:21:25 -0700 (PDT)
+In-Reply-To: <20140925164857.GB6303@edge>
+References: <CAF+2n7Tr+tqEq_R2cr0SuUQ8+PDB5tQKeCW2GLr=RW+-W35o_Q@mail.gmail.com>
+	<CA+2YH7t7PVNKA6xT1QcCgGoPY_foe020_sxWk5dJYhmLqi8QYA@mail.gmail.com>
+	<CAF+2n7QzdBhtZxJ6oi11KaUovc2PiWpN=Q4gBBm28tMjm3efXw@mail.gmail.com>
+	<CA+2YH7uaRmXepsmmYXQQ8_UXzsOBnwo1QPxnCSf=xqU1s04Cew@mail.gmail.com>
+	<CAF+2n7SGhcgMgD0AXoQb1=WV+P=ZiP9UEYe8RfOr+VxmhUAZuQ@mail.gmail.com>
+	<CA+2YH7t1ET1YK3-0LqmL65S954CJAb4ACeKKpw=PPnzvCBtOBw@mail.gmail.com>
+	<20140925164857.GB6303@edge>
+Date: Fri, 26 Sep 2014 10:21:25 +0200
+Message-ID: <CAF+2n7Szf5nu26M3ynOuE17=F1qWrwznh7Abt5Cc=0yHkTMq8A@mail.gmail.com>
+From: Manuel Torres <manuel.torres.fernandez@gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: Video encoding on OMAP4430
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,188 +66,234 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Sep 2014 01:40:03 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_656_423147476.1411694435626"
+X-List-Received-Date: Fri, 26 Sep 2014 08:22:01 -0000
+Content-Type: multipart/alternative; boundary=047d7b2e549c683ec70503f39a62
 
-------=_Part_656_423147476.1411694435626
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--047d7b2e549c683ec70503f39a62
+Content-Type: text/plain; charset=UTF-8
 
-<html>
-<head>
-<title>
-Status for 09/25/14
-</title>
-</head>
-<body>
+Is it too bad if I did not understand any of this: "Also you might need
+"mm-accel" versions of gstreamer components, which are used when "mmip"
+flag in MACHINE_FEATURES is set..."?
 
-<h2>Status for 09/25/14</h2>
+I included the meta-arago-extras layer, ran "bitbake-layers show-recipes"
+and got this error:
 
-<h2>BUILD_ID: build-2014-09-25_21-01-33</h2>
+Parsing recipes..ERROR: ExpansionError during parsing
+/home/mtorres/Development/Gumstix/yocto/poky/meta-arago-extras/meta-arago-extras/recipes-core/meta/
+external-arago-toolchain.bb: Failure expanding variable ARG_VER_MAIN[:=],
+expression was ${@arg_get_main_version(d)} which triggered exception
+TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'
+Traceback (most recent call last):
+  File
+"/home/mtorres/Development/Gumstix/yocto/poky/bitbake/bin/bitbake-layers",
+line 726, in <module>
+    sys.exit(main(sys.argv[1:]) or 0)
+  File
+"/home/mtorres/Development/Gumstix/yocto/poky/bitbake/bin/bitbake-layers",
+line 50, in main
+    cmds.onecmd(' '.join(args))
+  File "/usr/lib/python2.7/cmd.py", line 221, in onecmd
+    return func(arg)
+  File
+"/home/mtorres/Development/Gumstix/yocto/poky/bitbake/bin/bitbake-layers",
+line 212, in do_show_recipes
+    self.init_bbhandler()
+  File
+"/home/mtorres/Development/Gumstix/yocto/poky/bitbake/bin/bitbake-layers",
+line 67, in init_bbhandler
+    self.bbhandler.prepare(config_only)
+  File
+"/home/mtorres/Development/Gumstix/yocto/poky/bitbake/lib/bb/tinfoil.py",
+line 82, in prepare
+    self.parseRecipes()
+  File
+"/home/mtorres/Development/Gumstix/yocto/poky/bitbake/lib/bb/tinfoil.py",
+line 65, in parseRecipes
+    self.cooker.updateCache()
+  File
+"/home/mtorres/Development/Gumstix/yocto/poky/bitbake/lib/bb/cooker.py",
+line 1309, in updateCache
+    raise bb.BBHandledException()
+bb.BBHandledException
 
-<h2>Clean Build: false</h2>
+I do not know how to address this error. I tried rolling back to a previous
+Yocto version, from Daisy to Dora, but got the same error.
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am437x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.08"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+I will write to the meta-arago mailing list too. Thanks for the pointer.
 
 
-------=_Part_656_423147476.1411694435626--
+On Thu, Sep 25, 2014 at 6:48 PM, Denys Dmytriyenko <denys@ti.com> wrote:
+
+> There are some pieces of accelerated multimedia with gstreamer in
+> meta-arago-extras:
+>
+>
+> http://arago-project.org/git/?p=meta-arago.git;a=tree;f=meta-arago-extras/recipes-multimedia;hb=HEAD
+>
+> Although, those are currently being used for OMAP5 and derived parts, so
+> compatibility with OMAP4 is not guaranteed. If you are adventurous enough,
+> you
+> are welcome to try those. You'd need gst-plugin-ducati and libdce.
+>
+> Also you might need "mm-accel" versions of gstreamer components, which are
+> used when "mmip" flag in MACHINE_FEATURES is set...
+>
+> You would also be better off moving the further discussion to
+> meta-arago@arago-project.org mailing list, since this is not BSP specific.
+>
+> --
+> Denys
+>
+>
+> On Thu, Sep 25, 2014 at 06:05:14PM +0200, Enrico wrote:
+> > On Thu, Sep 25, 2014 at 5:57 PM, Manuel Torres
+> > <manuel.torres.fernandez@gmail.com> wrote:
+> > > Which console image should I build? The Arago or the Gumstix one?
+> >
+> > The arago one, just to be sure you have a working setup.
+> >
+> > (and btw you shouldn't have the gumstix one, because it's in
+> gumstix-extras).
+> >
+> > Enrico
+> >
+> >
+> > > On Thu, Sep 25, 2014 at 5:33 PM, Enrico <ebutera@users.sourceforge.net
+> >
+> > > wrote:
+> > >>
+> > >> On Thu, Sep 25, 2014 at 4:31 PM, Manuel Torres
+> > >> <manuel.torres.fernandez@gmail.com> wrote:
+> > >> > First of all, thank you for taking the time to help me.
+> > >> >
+> > >> > Now, back on topic: should I download the "meta-arago-extras" layer?
+> > >> > That is
+> > >> > what I found on Google when I searched for "gst-plugins-ducati".
+> > >>
+> > >> You should just follow the steps to build latest arago, build a simple
+> > >> console-image and if everything is ok you can go on building gstreamer
+> > >> and the ducati plugin.
+> > >> You will need meta-gumstix of course.
+> > --
+> > _______________________________________________
+> > meta-ti mailing list
+> > meta-ti@yoctoproject.org
+> > https://lists.yoctoproject.org/listinfo/meta-ti
+>
+
+--047d7b2e549c683ec70503f39a62
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Is it too bad if I did not understand any of this: &q=
+uot;Also you might need &quot;mm-accel&quot; versions of gstreamer componen=
+ts, which are used when &quot;mmip&quot; flag in MACHINE_FEATURES is set...=
+&quot;?<br><br></div>I included the meta-arago-extras layer, ran &quot;bitb=
+ake-layers show-recipes&quot; and got this error: <br><div><div><br>Parsing=
+ recipes..ERROR: ExpansionError during parsing /home/mtorres/Development/Gu=
+mstix/yocto/poky/meta-arago-extras/meta-arago-extras/recipes-core/meta/<a h=
+ref=3D"http://external-arago-toolchain.bb">external-arago-toolchain.bb</a>:=
+ Failure expanding variable ARG_VER_MAIN[:=3D], expression was ${@arg_get_m=
+ain_version(d)} which triggered exception TypeError: unsupported operand ty=
+pe(s) for +: &#39;NoneType&#39; and &#39;str&#39;<br>Traceback (most recent=
+ call last):<br>=C2=A0 File &quot;/home/mtorres/Development/Gumstix/yocto/p=
+oky/bitbake/bin/bitbake-layers&quot;, line 726, in &lt;module&gt;<br>=C2=A0=
+=C2=A0=C2=A0 sys.exit(main(sys.argv[1:]) or 0)<br>=C2=A0 File &quot;/home/m=
+torres/Development/Gumstix/yocto/poky/bitbake/bin/bitbake-layers&quot;, lin=
+e 50, in main<br>=C2=A0=C2=A0=C2=A0 cmds.onecmd(&#39; &#39;.join(args))<br>=
+=C2=A0 File &quot;/usr/lib/python2.7/cmd.py&quot;, line 221, in onecmd<br>=
+=C2=A0=C2=A0=C2=A0 return func(arg)<br>=C2=A0 File &quot;/home/mtorres/Deve=
+lopment/Gumstix/yocto/poky/bitbake/bin/bitbake-layers&quot;, line 212, in d=
+o_show_recipes<br>=C2=A0=C2=A0=C2=A0 self.init_bbhandler()<br>=C2=A0 File &=
+quot;/home/mtorres/Development/Gumstix/yocto/poky/bitbake/bin/bitbake-layer=
+s&quot;, line 67, in init_bbhandler<br>=C2=A0=C2=A0=C2=A0 self.bbhandler.pr=
+epare(config_only)<br>=C2=A0 File &quot;/home/mtorres/Development/Gumstix/y=
+octo/poky/bitbake/lib/bb/tinfoil.py&quot;, line 82, in prepare<br>=C2=A0=C2=
+=A0=C2=A0 self.parseRecipes()<br>=C2=A0 File &quot;/home/mtorres/Developmen=
+t/Gumstix/yocto/poky/bitbake/lib/bb/tinfoil.py&quot;, line 65, in parseReci=
+pes<br>=C2=A0=C2=A0=C2=A0 self.cooker.updateCache()<br>=C2=A0 File &quot;/h=
+ome/mtorres/Development/Gumstix/yocto/poky/bitbake/lib/bb/cooker.py&quot;, =
+line 1309, in updateCache<br>=C2=A0=C2=A0=C2=A0 raise bb.BBHandledException=
+()<br>bb.BBHandledException<br><br></div><div>I do not know how to address =
+this error. I tried rolling back to a previous Yocto version, from Daisy to=
+ Dora, but got the same error.<br><br></div><div>I will write to the meta-a=
+rago mailing list too. Thanks for the pointer.<br></div><div><br></div></di=
+v></div><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">On Thu, S=
+ep 25, 2014 at 6:48 PM, Denys Dmytriyenko <span dir=3D"ltr">&lt;<a href=3D"=
+mailto:denys@ti.com" target=3D"_blank">denys@ti.com</a>&gt;</span> wrote:<b=
+r><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:=
+1px #ccc solid;padding-left:1ex">There are some pieces of accelerated multi=
+media with gstreamer in<br>
+meta-arago-extras:<br>
+<br>
+<a href=3D"http://arago-project.org/git/?p=3Dmeta-arago.git;a=3Dtree;f=3Dme=
+ta-arago-extras/recipes-multimedia;hb=3DHEAD" target=3D"_blank">http://arag=
+o-project.org/git/?p=3Dmeta-arago.git;a=3Dtree;f=3Dmeta-arago-extras/recipe=
+s-multimedia;hb=3DHEAD</a><br>
+<br>
+Although, those are currently being used for OMAP5 and derived parts, so<br=
+>
+compatibility with OMAP4 is not guaranteed. If you are adventurous enough, =
+you<br>
+are welcome to try those. You&#39;d need gst-plugin-ducati and libdce.<br>
+<br>
+Also you might need &quot;mm-accel&quot; versions of gstreamer components, =
+which are<br>
+used when &quot;mmip&quot; flag in MACHINE_FEATURES is set...<br>
+<br>
+You would also be better off moving the further discussion to<br>
+<a href=3D"mailto:meta-arago@arago-project.org">meta-arago@arago-project.or=
+g</a> mailing list, since this is not BSP specific.<br>
+<br>
+--<br>
+Denys<br>
+<div class=3D"HOEnZb"><div class=3D"h5"><br>
+<br>
+On Thu, Sep 25, 2014 at 06:05:14PM +0200, Enrico wrote:<br>
+&gt; On Thu, Sep 25, 2014 at 5:57 PM, Manuel Torres<br>
+&gt; &lt;<a href=3D"mailto:manuel.torres.fernandez@gmail.com">manuel.torres=
+.fernandez@gmail.com</a>&gt; wrote:<br>
+&gt; &gt; Which console image should I build? The Arago or the Gumstix one?=
+<br>
+&gt;<br>
+&gt; The arago one, just to be sure you have a working setup.<br>
+&gt;<br>
+&gt; (and btw you shouldn&#39;t have the gumstix one, because it&#39;s in g=
+umstix-extras).<br>
+&gt;<br>
+&gt; Enrico<br>
+&gt;<br>
+&gt;<br>
+&gt; &gt; On Thu, Sep 25, 2014 at 5:33 PM, Enrico &lt;<a href=3D"mailto:ebu=
+tera@users.sourceforge.net">ebutera@users.sourceforge.net</a>&gt;<br>
+&gt; &gt; wrote:<br>
+&gt; &gt;&gt;<br>
+&gt; &gt;&gt; On Thu, Sep 25, 2014 at 4:31 PM, Manuel Torres<br>
+&gt; &gt;&gt; &lt;<a href=3D"mailto:manuel.torres.fernandez@gmail.com">manu=
+el.torres.fernandez@gmail.com</a>&gt; wrote:<br>
+&gt; &gt;&gt; &gt; First of all, thank you for taking the time to help me.<=
+br>
+&gt; &gt;&gt; &gt;<br>
+&gt; &gt;&gt; &gt; Now, back on topic: should I download the &quot;meta-ara=
+go-extras&quot; layer?<br>
+&gt; &gt;&gt; &gt; That is<br>
+&gt; &gt;&gt; &gt; what I found on Google when I searched for &quot;gst-plu=
+gins-ducati&quot;.<br>
+&gt; &gt;&gt;<br>
+&gt; &gt;&gt; You should just follow the steps to build latest arago, build=
+ a simple<br>
+&gt; &gt;&gt; console-image and if everything is ok you can go on building =
+gstreamer<br>
+&gt; &gt;&gt; and the ducati plugin.<br>
+&gt; &gt;&gt; You will need meta-gumstix of course.<br>
+</div></div><span class=3D"HOEnZb"><font color=3D"#888888">&gt; --<br>
+&gt; _______________________________________________<br>
+&gt; meta-ti mailing list<br>
+&gt; <a href=3D"mailto:meta-ti@yoctoproject.org">meta-ti@yoctoproject.org</=
+a><br>
+&gt; <a href=3D"https://lists.yoctoproject.org/listinfo/meta-ti" target=3D"=
+_blank">https://lists.yoctoproject.org/listinfo/meta-ti</a><br>
+</font></span></blockquote></div><br></div>
+
+--047d7b2e549c683ec70503f39a62--
