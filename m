@@ -1,48 +1,42 @@
-Return-Path: <fcooper@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B9BC8E007DC; Fri, 26 Sep 2014 14:49:34 -0700 (PDT)
+	id 19A9CE007B9; Fri, 26 Sep 2014 18:50:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C5061E006DB
-	for <meta-ti@yoctoproject.org>; Fri, 26 Sep 2014 14:49:25 -0700 (PDT)
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C3813E006DB
+	for <meta-ti@yoctoproject.org>; Fri, 26 Sep 2014 18:50:40 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s8QLnOqP014285
-	for <meta-ti@yoctoproject.org>; Fri, 26 Sep 2014 16:49:24 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s8QLnOCO008979
-	for <meta-ti@yoctoproject.org>; Fri, 26 Sep 2014 16:49:24 -0500
-Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
-	DFLE72.ent.ti.com ([fe80::e5e2:bab6:34dc:a483%28]) with mapi id
-	14.03.0174.001; Fri, 26 Sep 2014 16:49:24 -0500
-From: "Cooper Jr., Franklin" <fcooper@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>
-Thread-Topic: [meta-ti] [daisy][PATCH] dra7xx: add "mmip" to MACHINE_FEATURES
-Thread-Index: AQHP0OEYcIwuQJoYlUqlQUimHB4uwJwQaa2wgAOFGJCAAFuqAP//rHfwgABhLYD//615oA==
-Date: Fri, 26 Sep 2014 21:49:23 +0000
-Message-ID: <8F29D6B095ED194EA1980491A5E029710C73F180@DFLE08.ent.ti.com>
-References: <1410784339-25597-1-git-send-email-j-stiffler@ti.com>
-	<4B26FB5A64EBA14C87266869E037F958140B2C3B@DFLE09.ent.ti.com>
-	<8F29D6B095ED194EA1980491A5E029710C73F08B@DFLE08.ent.ti.com>
-	<20140926205521.GH6303@edge>
-	<8F29D6B095ED194EA1980491A5E029710C73F0F5@DFLE08.ent.ti.com>
-	<20140926214411.GI6303@edge>
-In-Reply-To: <20140926214411.GI6303@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s8R1oedO014088
+	for <meta-ti@yoctoproject.org>; Fri, 26 Sep 2014 20:50:40 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s8R1oeut000456
+	for <meta-ti@yoctoproject.org>; Fri, 26 Sep 2014 20:50:40 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 26 Sep 2014 20:50:39 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s8R1odRC002764	for <meta-ti@yoctoproject.org>; Fri, 26 Sep 2014 20:50:39
+	-0500
+Date: Fri, 26 Sep 2014 21:31:23 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <320636110.663.1411781483932.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [daisy][PATCH] dra7xx: add "mmip" to MACHINE_FEATURES
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-09-26_21-00-30
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -55,146 +49,188 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Sep 2014 21:49:34 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 27 Sep 2014 01:50:47 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_662_1066541717.1411781483931"
+
+------=_Part_662_1066541717.1411781483931
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+<head>
+<title>
+Status for 09/26/14
+</title>
+</head>
+<body>
+
+<h2>Status for 09/26/14</h2>
+
+<h2>BUILD_ID: build-2014-09-26_21-01-34</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.08"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Friday, September 26, 2014 4:44 PM
-> To: Cooper Jr., Franklin
-> Cc: Stiffler, Jacob; meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [daisy][PATCH] dra7xx: add "mmip" to
-> MACHINE_FEATURES
->=20
-> On Fri, Sep 26, 2014 at 05:09:26PM -0400, Cooper Jr., Franklin wrote:
-> >
-> >
-> > > -----Original Message-----
-> > > From: Dmytriyenko, Denys
-> > > Sent: Friday, September 26, 2014 3:55 PM
-> > > To: Cooper Jr., Franklin
-> > > Cc: Stiffler, Jacob; meta-ti@yoctoproject.org
-> > > Subject: Re: [meta-ti] [daisy][PATCH] dra7xx: add "mmip" to
-> > > MACHINE_FEATURES
-> > >
-> > > On Fri, Sep 26, 2014 at 08:33:39PM +0000, Cooper Jr., Franklin wrote:
-> > > > So this patch shouldn't be needed.
-> > > >
-> > > > The only recipe that is using mmip is ipumm-fw. Currently the
-> > > > recipe has COMPATIBLE_MACHINE set to only omap-a15. So why do
-> we
-> > > > also
-> > > need to
-> > > > add this to the SOC family?
-> > >
-> > > The above statement is not correct.
-> > >
-> > > The flag mmip in MACHINE_FEATURES was introduced to handle cases of
-> > > hardware accelerated multimedia, when some software components
-> needs
-> > > to be replaced with "forked" patched and modified versions. Take a
-> > > look at gstreamer pieces in meta-arago...
-> > [Franklin] Ah. My grep was only in meta-ti  I missed the usage in meta-
-> arago.
-> > >
-> > >
-> > > > Honestly for ipumm-fw the below code should be removed.
-> > > > python __anonymous() {
-> > > >      features =3D bb.data.getVar("MACHINE_FEATURES", d, 1)
-> > > >      if not features:
-> > > >          return
-> > > >      if "mmip" not in features:
-> > > >          raise bb.parse.SkipPackage('ipumm-fw does not apply to
-> > > > systems without the "mmip" flag in MACHINE_FEATURES')  }
-> > > >
-> > > > Plus this patch will break things for am57xx-evm. By allowing this
-> > > > change ipumm-fw would not be skipped for am57x evm and the current
-> > > > recipe will fail because of it.
-> > >
-> > > So, am57xx-evm should not build and load ipumm-fw is what you are
-> saying?
-> > [Franklin] I didn't realize that dra7xx was used for am57x-evm. So it w=
-ill
-> build.
-> >
-> > So this patch is fine but I'm still pretty confused by the usage of mmi=
-p.
-> > Now that mmip is added to omap-a15 SOC family can we now remove skip
-> > package code from all the various recipes that use mmip and simply
-> > replace it with COMPATIBLE_MACHINE?
->=20
-> Why are you saying "mmip" is added to omap-a15? I think there are some
-> differences between OMAP5 and DRA7x/J6 in the MM department, although
-> they are based on the same omap-a15 SOC family. That was one of the
-> reasons "mmip"
-> was introduced...
->=20
-> Also, you can't do COMPATIBLE_MACHINE for gstreamer and co. Currently
-> the correct variant of mainline vs. forked gstreamer is being selected by
-> "mmip"
-> flag in meta-arago distro config:
->=20
-> PREFERRED_PROVIDER_gstreamer =3D
-> "${@base_contains('MACHINE_FEATURES', 'mmip', 'gstreamer-mm-accel',
-> 'gstreamer', d)}"
-[Franklin] I completely misread this patch when I first looked at it. Every=
-thing makes sense and this patch is fine as is.
->=20
-> --
-> Denys
->=20
->=20
-> > > --
-> > > Denys
-> > >
-> > >
-> > > > > -----Original Message-----
-> > > > > From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> > > > > bounces@yoctoproject.org] On Behalf Of Stiffler, Jacob
-> > > > > Sent: Wednesday, September 24, 2014 9:42 AM
-> > > > > To: meta-ti@yoctoproject.org
-> > > > > Subject: Re: [meta-ti] [daisy][PATCH] dra7xx: add "mmip" to
-> > > > > MACHINE_FEATURES
-> > > > >
-> > > > > ping
-> > > > >
-> > > > > -----Original Message-----
-> > > > > From: Stiffler, Jacob
-> > > > > Sent: Monday, September 15, 2014 8:32 AM
-> > > > > To: meta-ti@yoctoproject.org
-> > > > > Cc: Stiffler, Jacob
-> > > > > Subject: [daisy][PATCH] dra7xx: add "mmip" to MACHINE_FEATURES
-> > > > >
-> > > > > Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-> > > > > ---
-> > > > >  conf/machine/include/dra7xx.inc |    2 +-
-> > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/conf/machine/include/dra7xx.inc
-> > > > > b/conf/machine/include/dra7xx.inc index 857e1b3..a7c8782 100644
-> > > > > --- a/conf/machine/include/dra7xx.inc
-> > > > > +++ b/conf/machine/include/dra7xx.inc
-> > > > > @@ -1,4 +1,4 @@
-> > > > >  require conf/machine/include/omap-a15.inc  SOC_FAMILY_append =3D
-> > > > > ":dra7xx"
-> > > > >
-> > > > > -MACHINE_FEATURES +=3D "pci"
-> > > > > +MACHINE_FEATURES +=3D "pci mmip"
-> > > > > --
-> > > > > 1.7.9.5
-> > > > >
-> > > > > --
-> > > > > _______________________________________________
-> > > > > meta-ti mailing list
-> > > > > meta-ti@yoctoproject.org
-> > > > > https://lists.yoctoproject.org/listinfo/meta-ti
-> > > > --
-> > > > _______________________________________________
-> > > > meta-ti mailing list
-> > > > meta-ti@yoctoproject.org
-> > > > https://lists.yoctoproject.org/listinfo/meta-ti
-
+------=_Part_662_1066541717.1411781483931--
