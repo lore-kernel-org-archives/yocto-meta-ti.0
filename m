@@ -1,43 +1,42 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AE566E007DF; Tue, 30 Sep 2014 14:08:19 -0700 (PDT)
+	id 92749E007DF; Tue, 30 Sep 2014 14:15:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCA8BE0034C
-	for <meta-ti@yoctoproject.org>; Tue, 30 Sep 2014 14:08:16 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s8UL8FTk029923
-	for <meta-ti@yoctoproject.org>; Tue, 30 Sep 2014 16:08:15 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s8UL8FN6018506
-	for <meta-ti@yoctoproject.org>; Tue, 30 Sep 2014 16:08:15 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 30 Sep 2014 16:08:14 -0500
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4CA4BE0034C
+	for <meta-ti@yoctoproject.org>; Tue, 30 Sep 2014 14:15:06 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s8ULF5gp011667
+	for <meta-ti@yoctoproject.org>; Tue, 30 Sep 2014 16:15:05 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s8ULF5M5028839
+	for <meta-ti@yoctoproject.org>; Tue, 30 Sep 2014 16:15:05 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 30 Sep 2014 16:15:06 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s8UL8E7i013546;
-	Tue, 30 Sep 2014 16:08:14 -0500
-Date: Tue, 30 Sep 2014 17:08:14 -0400
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s8ULF56J025866;
+	Tue, 30 Sep 2014 16:15:05 -0500
+Date: Tue, 30 Sep 2014 17:15:05 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: Karthik Ramanan <a0393906@ti.com>
-Message-ID: <20140930210814.GQ6303@edge>
-References: <1410784171-25486-1-git-send-email-j-stiffler@ti.com>
-	<4B26FB5A64EBA14C87266869E037F958140B2C34@DFLE09.ent.ti.com>
-	<5422DFE1.9080404@ti.com> <20140924154852.GY6303@edge>
+Message-ID: <20140930211505.GR6303@edge>
+References: <1411559009-7951-1-git-send-email-a0393906@ti.com>
+	<1411559009-7951-2-git-send-email-a0393906@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <20140924154852.GY6303@edge>
+In-Reply-To: <1411559009-7951-2-git-send-email-a0393906@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [daisy][PATCH] ti-ipc: Upgraded to IPC 3.30.00.06_eng
+Subject: Re: [for master] dspdce-fw: Updated dspdce firmware for latest IPC version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,237 +49,103 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Sep 2014 21:08:19 -0000
+X-List-Received-Date: Tue, 30 Sep 2014 21:15:09 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-Jake,
+On Wed, Sep 24, 2014 at 05:13:29PM +0530, Karthik Ramanan wrote:
+> Also refactored the dspdce-fw recipes to have inc file
+> for common parts
 
-Ping, will you be updating it to 3.30.00.09?
+Why do you need 2 versions? Can you just upgrade from 1.00.00.02 to 
+1.00.00.04?
 
 
-On Wed, Sep 24, 2014 at 11:48:52AM -0400, Denys Dmytriyenko wrote:
-> On Wed, Sep 24, 2014 at 08:44:41PM +0530, Karthik Ramanan wrote:
-> > Two points:
-> > 
-> > * GA version 3.30.00.09 is available.
-> > 
-> > * It may not be applicable to this patch, but making an assumption
-> > about every component being on the latest IPC and removing the older
-> > recipes may not be a good idea.
+> Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+> ---
+>  recipes-bsp/dspdce-fw/dspdce-fw.inc           |   18 ++++++++++++++++++
+>  recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.02.bb |   19 +++----------------
+>  recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb |   11 +++++++++++
+>  3 files changed, 32 insertions(+), 16 deletions(-)
+>  create mode 100644 recipes-bsp/dspdce-fw/dspdce-fw.inc
+>  create mode 100644 recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb
 > 
-> The second point would require a bigger discussion, but basically we'd like to 
-> consolidate ipc versions at least in master for 3.14 kernel. For now we can 
-> keep older specific versions in Dora and Dylan for GL and MC variants on 3.12 
-> and 3.10 kernels...
+> diff --git a/recipes-bsp/dspdce-fw/dspdce-fw.inc b/recipes-bsp/dspdce-fw/dspdce-fw.inc
+> new file mode 100644
+> index 0000000..9676888
+> --- /dev/null
+> +++ b/recipes-bsp/dspdce-fw/dspdce-fw.inc
+> @@ -0,0 +1,18 @@
+> +DESCRIPTION = "Firmware for DSP for an example application called copycodectest"
+> +LICENSE = "TI-TSPA"
+> +
+> +COMPATIBLE_MACHINE = "dra7xx-evm"
+> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> +
+> +S = "${WORKDIR}/dspdce-${MACHINE}-${PV}"
+> +
+> +TARGET = "dra7-dsp1-fw.xe66"
+> +
+> +do_install() {
+> +        mkdir -p ${D}${base_libdir}/firmware
+> +        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
+> +}
+> +
+> +FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+> +
+> +INSANE_SKIP_${PN} = "arch"
+> diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.02.bb b/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.02.bb
+> index 69e9814..bfc3e1f 100644
+> --- a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.02.bb
+> +++ b/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.02.bb
+> @@ -1,24 +1,11 @@
+> -DESCRIPTION = "Firmware for DSP "
+> -LICENSE = "TI-TSPA"
+> +require dspdce-fw.inc
+> +
+>  LIC_FILES_CHKSUM = "file://DSPDCE-${PV}-Manifest.doc;md5=587a7b9fdd99f98fbe99af4a4ba3362a"
+>  
+> -COMPATIBLE_MACHINE = "dra7xx-evm"
+> -PACKAGE_ARCH = "${MACHINE_ARCH}"
+> +PR = "r1"
+>  
+>  SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00_00_02/exports/dspdce-${MACHINE}-1.00.00.02.tar.gz;protocol=http"
+>  
+> -S = "${WORKDIR}/dspdce-${MACHINE}-${PV}"
+> -
+>  SRC_URI[md5sum] = "df19baf16f828b5d32b4eed50f0364f5"
+>  SRC_URI[sha256sum] = "0c0f34674110d1ef0300b61b572a326daffb95a31cc9d45888b2e50a83c6f555"
+>  
+> -TARGET = "dra7-dsp1-fw.xe66"
+> -
+> -do_install() {
+> -        mkdir -p ${D}${base_libdir}/firmware
+> -        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
+> -}
+> -
+> -FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+> -
+> -INSANE_SKIP_${PN} = "arch"
+> diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb b/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb
+> new file mode 100644
+> index 0000000..db01f31
+> --- /dev/null
+> +++ b/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb
+> @@ -0,0 +1,11 @@
+> +require dspdce-fw.inc
+> +
+> +LIC_FILES_CHKSUM = "file://DSPDCE-${PV}-Manifest.doc;md5=b8feda5a3ed8197d05993c0d0ff5590e"
+> +
+> +PR = "r0"
+> +
+> +SRC_URI = " http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00_00_04/exports/dspdce-${MACHINE}-1.00.00.04.tar.gz;protocol=ftp"
+> +
+> +SRC_URI[md5sum] = "72722b12e90c26a85f7f1b56d749cad0"
+> +SRC_URI[sha256sum] = "64057db41dbee5a992db88129a9154f27c67cfbba8efdc0f09b7de38df4d58eb"
+> +
+> -- 
+> 1.7.9.5
 > 
-> 
-> > On 24-Sep-14 8:12 PM, Stiffler, Jacob wrote:
-> > >ping
-> > >
-> > >-----Original Message-----
-> > >From: Stiffler, Jacob
-> > >Sent: Monday, September 15, 2014 8:30 AM
-> > >To: meta-ti@yoctoproject.org
-> > >Cc: Stiffler, Jacob
-> > >Subject: [daisy][PATCH] ti-ipc: Upgraded to IPC 3.30.00.06_eng
-> > >
-> > >* Added new recipe for latest IPC
-> > >* Removed older recipe versions
-> > >* Latest recipe points to IPC 3.30.00.06_eng
-> > >
-> > >Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-> > >---
-> > >  ...nstallation-prefix-feature-to-products.ma.patch |   38 ------------------
-> > >  recipes-ti/ipc/ti-ipc/ipc.pc                       |    8 ----
-> > >  recipes-ti/ipc/ti-ipc_1.24.00.16.bb                |   41 --------------------
-> > >  recipes-ti/ipc/ti-ipc_3.00.00.bb                   |    7 ----
-> > >  recipes-ti/ipc/ti-ipc_3.21.00.07.bb                |    4 --
-> > >  recipes-ti/ipc/{ti-ipc.inc => ti-ipc_git.bb}       |   26 +++++++------
-> > >  6 files changed, 15 insertions(+), 109 deletions(-)  delete mode 100644 recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch
-> > >  delete mode 100644 recipes-ti/ipc/ti-ipc/ipc.pc  delete mode 100644 recipes-ti/ipc/ti-ipc_1.24.00.16.bb
-> > >  delete mode 100644 recipes-ti/ipc/ti-ipc_3.00.00.bb  delete mode 100644 recipes-ti/ipc/ti-ipc_3.21.00.07.bb
-> > >  rename recipes-ti/ipc/{ti-ipc.inc => ti-ipc_git.bb} (75%)
-> > >
-> > >diff --git a/recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch b/recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch
-> > >deleted file mode 100644
-> > >index 58d77c7..0000000
-> > >--- a/recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch
-> > >+++ /dev/null
-> > >@@ -1,38 +0,0 @@
-> > >-From 26d09063063593aec760151393226b96bc7ab9f8 Mon Sep 17 00:00:00 2001
-> > >-From: Mrinmayee Hingolikar <mrinmayee@ti.com>
-> > >-Date: Thu, 5 Sep 2013 17:01:15 +0530
-> > >-Subject: [PATCH] ipc: Added installation prefix feature to products.mak
-> > >-
-> > >-Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
-> > >----
-> > >- ipc-linux.mak |    1 +
-> > >- products.mak  |    1 +
-> > >- 2 files changed, 2 insertions(+)
-> > >-
-> > >-diff --git a/ipc-linux.mak b/ipc-linux.mak -index 788a5a2..01579e4 100644
-> > >---- a/ipc-linux.mak
-> > >-+++ b/ipc-linux.mak
-> > >-@@ -38,6 +38,7 @@ include products.mak
-> > >- config:
-> > >- 	@echo "Configuring Linux Ipc ..."
-> > >- 	./configure --host=$(TOOLCHAIN_LONGNAME) \
-> > >-+            --prefix=$(PREFIX) \
-> > >-             CC=$(TOOLCHAIN_PREFIX)gcc \
-> > >-             PLATFORM=$(PLATFORM) \
-> > >-             CMEM_INSTALL_DIR=$(CMEM_INSTALL_DIR) \
-> > >-diff --git a/products.mak b/products.mak -index e418d2f..4578a1e 100644
-> > >---- a/products.mak
-> > >-+++ b/products.mak
-> > >-@@ -55,6 +55,7 @@ PLATFORM ?=
-> > >- TOOLCHAIN_LONGNAME = arm-none-linux-gnueabi
-> > >- TOOLCHAIN_INSTALL_DIR = $(DEPOT)/_your_arm_code_gen_install_
-> > >- TOOLCHAIN_PREFIX = $(TOOLCHAIN_INSTALL_DIR)/bin/$(TOOLCHAIN_LONGNAME)-
-> > >-+PREFIX = /usr/local
-> > >-
-> > >- # Optional: Path to Linux Kernel - needed to build the MmRpc user libraries
-> > >- # (for devices that support it)
-> > >---
-> > >-1.7.9.5
-> > >-
-> > >diff --git a/recipes-ti/ipc/ti-ipc/ipc.pc b/recipes-ti/ipc/ti-ipc/ipc.pc deleted file mode 100644 index 1a8c52d..0000000
-> > >--- a/recipes-ti/ipc/ti-ipc/ipc.pc
-> > >+++ /dev/null
-> > >@@ -1,8 +0,0 @@
-> > >-prefix=/../../ipc_@VERSION@
-> > >-includedir=${prefix}/ti/ipc
-> > >-
-> > >-Name: TI IPC
-> > >-Description: TI ARM-DSP IPC (Inter Processor Communication)
-> > >-Version: @VERSION@
-> > >-Requires:
-> > >-Cflags: -I${includedir}
-> > >diff --git a/recipes-ti/ipc/ti-ipc_1.24.00.16.bb b/recipes-ti/ipc/ti-ipc_1.24.00.16.bb
-> > >deleted file mode 100644
-> > >index 420d0f7..0000000
-> > >--- a/recipes-ti/ipc/ti-ipc_1.24.00.16.bb
-> > >+++ /dev/null
-> > >@@ -1,41 +0,0 @@
-> > >-DESCRIPTION = "TI Inter Process Ccommunication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
-> > >-HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/index.html"
-> > >-SECTION = "devel"
-> > >-LICENSE = "BSD"
-> > >-LIC_FILES_CHKSUM = "file://ipc_${PV}_manifest.html;md5=573f5a5c0448d28bf8db35f438244d7f"
-> > >-
-> > >-
-> > >-require ../includes/ti-paths.inc
-> > >-require ../includes/ti-staging.inc
-> > >-require ../includes/ti-eula-unpack.inc
-> > >-
-> > >-PV = "1_24_00_16"
-> > >-
-> > >-S = "${WORKDIR}/ipc_${PV}"
-> > >-
-> > >-SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/${PV}/exports/ipc_setuplinux_${PV}.bin;name=ipcbin \
-> > >-           file://ipc.pc"
-> > >-
-> > >-DEPENDS = "ti-sysbios ti-cgt6x ti-xdctools"
-> > >-
-> > >-BINFILE="ipc_setuplinux_${PV}.bin"
-> > >-TI_BIN_UNPK_CMDS="Y: q:workdir:Y"
-> > >-
-> > >-do_configure() {
-> > >-    sed -i -e s:@VERSION@:${PV}:g ${WORKDIR}/ipc.pc
-> > >-
-> > >-    cp ${WORKDIR}/ipc.pc ${S}
-> > >-}
-> > >-
-> > >-do_install() {
-> > >-    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
-> > >-    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
-> > >-
-> > >-    install -d ${D}/${libdir}/pkgconfig
-> > >-    install ${S}/ipc.pc ${D}/${libdir}/pkgconfig/
-> > >-}
-> > >-
-> > >-FILES_${PN}-dev = "${libdir}/*"
-> > >-
-> > >-SRC_URI[ipcbin.md5sum] = "d2f7cc82310d555ca039dcd353bd94c5"
-> > >-SRC_URI[ipcbin.sha256sum] = "96df7835e920c7dabcd63d30ec8bc2aea7cd0c6197c9fb9ca0f8a9b681aa5396"
-> > >diff --git a/recipes-ti/ipc/ti-ipc_3.00.00.bb b/recipes-ti/ipc/ti-ipc_3.00.00.bb
-> > >deleted file mode 100644
-> > >index a6922c0..0000000
-> > >--- a/recipes-ti/ipc/ti-ipc_3.00.00.bb
-> > >+++ /dev/null
-> > >@@ -1,7 +0,0 @@
-> > >-require ti-ipc.inc
-> > >-
-> > >-# For this version of IPC the PLATFORM value is lowercase -PLATFORM_keystone = "tci6638"
-> > >-
-> > >-# The following commit corresponds to 3.00.04.29 -SRCREV = "12794ea33870b782bffe1fe4398e86e93fb64396"
-> > >diff --git a/recipes-ti/ipc/ti-ipc_3.21.00.07.bb b/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
-> > >deleted file mode 100644
-> > >index 17cdab0..0000000
-> > >--- a/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
-> > >+++ /dev/null
-> > >@@ -1,4 +0,0 @@
-> > >-require ti-ipc.inc
-> > >-
-> > >-# This commit corresponds to 3.21.00.07 -SRCREV = "c18fece0c9f0dc76361dc1ee11b7ee2417479847"
-> > >diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc_git.bb similarity index 75% rename from recipes-ti/ipc/ti-ipc.inc rename to recipes-ti/ipc/ti-ipc_git.bb index 860f55f..af1973e 100644
-> > >--- a/recipes-ti/ipc/ti-ipc.inc
-> > >+++ b/recipes-ti/ipc/ti-ipc_git.bb
-> > >@@ -2,11 +2,22 @@ DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Mul  HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
-> > >
-> > >  LICENSE = "BSD"
-> > >-LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=f2518e421e230f06fe6d449718d02edc"
-> > >+LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=abd112f156e5eb9b0f3e202e48747f9a"
-> > >
-> > >  DEPENDS += "virtual/kernel"
-> > >
-> > >-PR = "r1"
-> > >+PV = "3.30.00.06"
-> > >+
-> > >+# This is the first version of the 3.30.00.06 # PR = "r0"
-> > >+
-> > >+BRANCH = "ipc-next"
-> > >+SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
-> > >+           file://tiipclad-daemon.sh \
-> > >+           "
-> > >+SRCREV = "a0eea0e953a94a64c541e468e8f7a7244361a0fb"
-> > >+
-> > >+S = "${WORKDIR}/git"
-> > >
-> > >  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> > >
-> > >@@ -22,20 +33,13 @@ DAEMON_keystone = "lad_tci6638"
-> > >
-> > >  inherit autotools pkgconfig update-rc.d
-> > >
-> > >-SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git \
-> > >-           file://0002-ipc-Added-installation-prefix-feature-to-products.ma.patch \
-> > >-           file://tiipclad-daemon.sh \
-> > >-           "
-> > >-
-> > >-S = "${WORKDIR}/git"
-> > >-
-> > >  INITSCRIPT_NAME = "tiipclad-daemon.sh"
-> > >  INITSCRIPT_PARAMS = "defaults 10"
-> > >
-> > >-EXTRA_OEMAKE += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} TOOLCHAIN_INSTALL_DIR=${TOOLCHAIN_PATH} TOOLCHAIN_LONGNAME=${TOOLCHAIN_SYS} PLATFORM=${PLATFORM} PREFIX=${prefix}"
-> > >+EXTRA_OECONF += "PLATFORM=${PLATFORM} KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR}"
-> > >
-> > >  do_configure() {
-> > >-    oe_runmake -f ${S}/ipc-linux.mak config
-> > >+    oe_runconf
-> > >  }
-> > >
-> > >  do_install_append() {
-> > >--
-> > >1.7.9.5
-> > >
-> > 
-> > -- 
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
 > -- 
 > _______________________________________________
 > meta-ti mailing list
