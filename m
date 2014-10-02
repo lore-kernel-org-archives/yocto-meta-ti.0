@@ -1,42 +1,42 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 10D76E0077F; Wed,  1 Oct 2014 13:41:18 -0700 (PDT)
+	id 9EDAEE00857; Wed,  1 Oct 2014 18:49:18 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ABA99E006DB
-	for <meta-ti@yoctoproject.org>; Wed,  1 Oct 2014 13:41:13 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s91KfCuc004694
-	for <meta-ti@yoctoproject.org>; Wed, 1 Oct 2014 15:41:12 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s91KfCgO029922
-	for <meta-ti@yoctoproject.org>; Wed, 1 Oct 2014 15:41:12 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 1 Oct 2014 15:41:11 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s91KfBgU004069;
-	Wed, 1 Oct 2014 15:41:11 -0500
-Date: Wed, 1 Oct 2014 16:41:10 -0400
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4FCCBE0074B
+	for <meta-ti@yoctoproject.org>; Wed,  1 Oct 2014 18:49:14 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s921nDs3006455
+	for <meta-ti@yoctoproject.org>; Wed, 1 Oct 2014 20:49:13 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s921nDRD001685
+	for <meta-ti@yoctoproject.org>; Wed, 1 Oct 2014 20:49:13 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Wed, 1 Oct 2014 20:49:13 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s921nDwC023651	for <meta-ti@yoctoproject.org>;
+	Wed, 1 Oct 2014 20:49:13 -0500
+Date: Wed, 1 Oct 2014 21:29:48 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: "Stiffler, Jacob" <j-stiffler@ti.com>
-Message-ID: <20141001204110.GX6303@edge>
-References: <1412169273-30215-1-git-send-email-j-stiffler@ti.com>
-	<4B26FB5A64EBA14C87266869E037F958140B4773@DFLE09.ent.ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1185620921.1.1412213389070.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-In-Reply-To: <4B26FB5A64EBA14C87266869E037F958140B4773@DFLE09.ent.ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [daisy][PATCH v2] ti-ipc: Upgrade to IPC 3.30.00.09
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-10-01_21-00-21
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,222 +49,187 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2014 20:41:18 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Oct 2014 01:49:18 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_0_808372169.1412213388998"
 
-Jake,
+------=_Part_0_808372169.1412213388998
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Why are you patches not being sent to meta-ti list? Do you get any error 
-messages? I assume you are sending them with git-send-email?
+<html>
+<head>
+<title>
+Status for 10/01/14
+</title>
+</head>
+<body>
 
--- 
-Denys
+<h2>Status for 10/01/14</h2>
+
+<h2>BUILD_ID: build-2014-10-01_21-01-24</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.08"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-On Wed, Oct 01, 2014 at 01:35:20PM +0000, Stiffler, Jacob wrote:
-> ping
-> 
-> -----Original Message-----
-> From: Stiffler, Jacob 
-> Sent: Wednesday, October 01, 2014 9:15 AM
-> To: meta-ti@yoctoproject.org
-> Cc: Stiffler, Jacob
-> Subject: [daisy][PATCH v2] ti-ipc: Upgrade to IPC 3.30.00.09
-> 
-> * Added new recipe for latest IPC
-> * Removed older recipe versions
-> * Latest recipe points to IPC 3.30.00.09
-> 
-> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-> ---
->  ...nstallation-prefix-feature-to-products.ma.patch |   38 ------------------
->  recipes-ti/ipc/ti-ipc/ipc.pc                       |    8 ----
->  recipes-ti/ipc/ti-ipc_1.24.00.16.bb                |   41 --------------------
->  recipes-ti/ipc/ti-ipc_3.00.00.bb                   |    7 ----
->  recipes-ti/ipc/ti-ipc_3.21.00.07.bb                |    4 --
->  recipes-ti/ipc/{ti-ipc.inc => ti-ipc_git.bb}       |   26 +++++++------
->  6 files changed, 15 insertions(+), 109 deletions(-)  delete mode 100644 recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch
->  delete mode 100644 recipes-ti/ipc/ti-ipc/ipc.pc  delete mode 100644 recipes-ti/ipc/ti-ipc_1.24.00.16.bb
->  delete mode 100644 recipes-ti/ipc/ti-ipc_3.00.00.bb  delete mode 100644 recipes-ti/ipc/ti-ipc_3.21.00.07.bb
->  rename recipes-ti/ipc/{ti-ipc.inc => ti-ipc_git.bb} (75%)
-> 
-> diff --git a/recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch b/recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch
-> deleted file mode 100644
-> index 58d77c7..0000000
-> --- a/recipes-ti/ipc/ti-ipc/0002-ipc-Added-installation-prefix-feature-to-products.ma.patch
-> +++ /dev/null
-> @@ -1,38 +0,0 @@
-> -From 26d09063063593aec760151393226b96bc7ab9f8 Mon Sep 17 00:00:00 2001
-> -From: Mrinmayee Hingolikar <mrinmayee@ti.com>
-> -Date: Thu, 5 Sep 2013 17:01:15 +0530
-> -Subject: [PATCH] ipc: Added installation prefix feature to products.mak
-> -
-> -Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
-> ----
-> - ipc-linux.mak |    1 +
-> - products.mak  |    1 +
-> - 2 files changed, 2 insertions(+)
-> -
-> -diff --git a/ipc-linux.mak b/ipc-linux.mak -index 788a5a2..01579e4 100644
-> ---- a/ipc-linux.mak
-> -+++ b/ipc-linux.mak
-> -@@ -38,6 +38,7 @@ include products.mak
-> - config:
-> - 	@echo "Configuring Linux Ipc ..."
-> - 	./configure --host=$(TOOLCHAIN_LONGNAME) \
-> -+            --prefix=$(PREFIX) \
-> -             CC=$(TOOLCHAIN_PREFIX)gcc \
-> -             PLATFORM=$(PLATFORM) \
-> -             CMEM_INSTALL_DIR=$(CMEM_INSTALL_DIR) \
-> -diff --git a/products.mak b/products.mak -index e418d2f..4578a1e 100644
-> ---- a/products.mak
-> -+++ b/products.mak
-> -@@ -55,6 +55,7 @@ PLATFORM ?=
-> - TOOLCHAIN_LONGNAME = arm-none-linux-gnueabi
-> - TOOLCHAIN_INSTALL_DIR = $(DEPOT)/_your_arm_code_gen_install_
-> - TOOLCHAIN_PREFIX = $(TOOLCHAIN_INSTALL_DIR)/bin/$(TOOLCHAIN_LONGNAME)-
-> -+PREFIX = /usr/local
-> -
-> - # Optional: Path to Linux Kernel - needed to build the MmRpc user libraries
-> - # (for devices that support it)
-> ---
-> -1.7.9.5
-> -
-> diff --git a/recipes-ti/ipc/ti-ipc/ipc.pc b/recipes-ti/ipc/ti-ipc/ipc.pc deleted file mode 100644 index 1a8c52d..0000000
-> --- a/recipes-ti/ipc/ti-ipc/ipc.pc
-> +++ /dev/null
-> @@ -1,8 +0,0 @@
-> -prefix=/../../ipc_@VERSION@
-> -includedir=${prefix}/ti/ipc
-> -
-> -Name: TI IPC
-> -Description: TI ARM-DSP IPC (Inter Processor Communication)
-> -Version: @VERSION@
-> -Requires: 
-> -Cflags: -I${includedir}
-> diff --git a/recipes-ti/ipc/ti-ipc_1.24.00.16.bb b/recipes-ti/ipc/ti-ipc_1.24.00.16.bb
-> deleted file mode 100644
-> index 420d0f7..0000000
-> --- a/recipes-ti/ipc/ti-ipc_1.24.00.16.bb
-> +++ /dev/null
-> @@ -1,41 +0,0 @@
-> -DESCRIPTION = "TI Inter Process Ccommunication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
-> -HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/index.html"
-> -SECTION = "devel"
-> -LICENSE = "BSD" 
-> -LIC_FILES_CHKSUM = "file://ipc_${PV}_manifest.html;md5=573f5a5c0448d28bf8db35f438244d7f"
-> -
-> -
-> -require ../includes/ti-paths.inc
-> -require ../includes/ti-staging.inc
-> -require ../includes/ti-eula-unpack.inc
-> -
-> -PV = "1_24_00_16"
-> -
-> -S = "${WORKDIR}/ipc_${PV}"
-> -
-> -SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/${PV}/exports/ipc_setuplinux_${PV}.bin;name=ipcbin \
-> -           file://ipc.pc"
-> -
-> -DEPENDS = "ti-sysbios ti-cgt6x ti-xdctools"
-> -
-> -BINFILE="ipc_setuplinux_${PV}.bin"
-> -TI_BIN_UNPK_CMDS="Y: q:workdir:Y"
-> -
-> -do_configure() {
-> -    sed -i -e s:@VERSION@:${PV}:g ${WORKDIR}/ipc.pc
-> -    
-> -    cp ${WORKDIR}/ipc.pc ${S}
-> -}
-> -
-> -do_install() {
-> -    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
-> -    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
-> -   
-> -    install -d ${D}/${libdir}/pkgconfig
-> -    install ${S}/ipc.pc ${D}/${libdir}/pkgconfig/
-> -}
-> -
-> -FILES_${PN}-dev = "${libdir}/*"
-> -
-> -SRC_URI[ipcbin.md5sum] = "d2f7cc82310d555ca039dcd353bd94c5"
-> -SRC_URI[ipcbin.sha256sum] = "96df7835e920c7dabcd63d30ec8bc2aea7cd0c6197c9fb9ca0f8a9b681aa5396"
-> diff --git a/recipes-ti/ipc/ti-ipc_3.00.00.bb b/recipes-ti/ipc/ti-ipc_3.00.00.bb
-> deleted file mode 100644
-> index a6922c0..0000000
-> --- a/recipes-ti/ipc/ti-ipc_3.00.00.bb
-> +++ /dev/null
-> @@ -1,7 +0,0 @@
-> -require ti-ipc.inc
-> -
-> -# For this version of IPC the PLATFORM value is lowercase -PLATFORM_keystone = "tci6638"
-> -
-> -# The following commit corresponds to 3.00.04.29 -SRCREV = "12794ea33870b782bffe1fe4398e86e93fb64396"
-> diff --git a/recipes-ti/ipc/ti-ipc_3.21.00.07.bb b/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
-> deleted file mode 100644
-> index 17cdab0..0000000
-> --- a/recipes-ti/ipc/ti-ipc_3.21.00.07.bb
-> +++ /dev/null
-> @@ -1,4 +0,0 @@
-> -require ti-ipc.inc
-> -
-> -# This commit corresponds to 3.21.00.07 -SRCREV = "c18fece0c9f0dc76361dc1ee11b7ee2417479847"
-> diff --git a/recipes-ti/ipc/ti-ipc.inc b/recipes-ti/ipc/ti-ipc_git.bb similarity index 75% rename from recipes-ti/ipc/ti-ipc.inc rename to recipes-ti/ipc/ti-ipc_git.bb index 860f55f..185e58b 100644
-> --- a/recipes-ti/ipc/ti-ipc.inc
-> +++ b/recipes-ti/ipc/ti-ipc_git.bb
-> @@ -2,11 +2,22 @@ DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Mul  HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
->  
->  LICENSE = "BSD"
-> -LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=f2518e421e230f06fe6d449718d02edc"
-> +LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=abd112f156e5eb9b0f3e202e48747f9a"
->  
->  DEPENDS += "virtual/kernel"
->  
-> -PR = "r1"
-> +PV = "3.30.00.09"
-> +
-> +# This is the first version of the 3.30.00.09 # PR = "r0"
-> +
-> +BRANCH = "master"
-> +SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
-> +           file://tiipclad-daemon.sh \
-> +           "
-> +SRCREV = "595bc3e3bbb2e7ec12a8287145d8e3929291e59d"
-> +
-> +S = "${WORKDIR}/git"
->  
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
->  
-> @@ -22,20 +33,13 @@ DAEMON_keystone = "lad_tci6638"
->  
->  inherit autotools pkgconfig update-rc.d
->  
-> -SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git \
-> -           file://0002-ipc-Added-installation-prefix-feature-to-products.ma.patch \
-> -           file://tiipclad-daemon.sh \
-> -           "
-> -
-> -S = "${WORKDIR}/git"
-> -
->  INITSCRIPT_NAME = "tiipclad-daemon.sh"
->  INITSCRIPT_PARAMS = "defaults 10"
->  
-> -EXTRA_OEMAKE += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} TOOLCHAIN_INSTALL_DIR=${TOOLCHAIN_PATH} TOOLCHAIN_LONGNAME=${TOOLCHAIN_SYS} PLATFORM=${PLATFORM} PREFIX=${prefix}"
-> +EXTRA_OECONF += "PLATFORM=${PLATFORM} KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR}"
->  
->  do_configure() {
-> -    oe_runmake -f ${S}/ipc-linux.mak config
-> +    oe_runconf
->  }
->  
->  do_install_append() {
-> --
-> 1.7.9.5
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-
+------=_Part_0_808372169.1412213388998--
