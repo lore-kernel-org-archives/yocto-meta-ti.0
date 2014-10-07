@@ -1,39 +1,38 @@
-Return-Path: <denis@denix.org>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DA055E007C1; Tue,  7 Oct 2014 13:59:10 -0700 (PDT)
+	id C462BE00848; Tue,  7 Oct 2014 14:31:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,HDRS_LCASE,
-	RCVD_IN_DNSWL_NONE,T_MANY_HDRS_LCASE autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.17 listed in list.dnswl.org]
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.1 HDRS_LCASE Odd capitalization of message header
-	* 0.0 T_MANY_HDRS_LCASE Odd capitalization of multiple message headers
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BEBC0E0076C
-	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 13:58:59 -0700 (PDT)
-Received: from gandalf.denix.org ([unknown] [108.18.33.160])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0ND3002CSE9QLZT0@vms173017.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 07 Oct 2014 15:58:43 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 087AD20261; Tue,
-	07 Oct 2014 16:58:38 -0400 (EDT)
-Date: Tue, 07 Oct 2014 16:58:37 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: "Peter A. Bigot" <pab@pabigot.com>
-Message-id: <20141007205837.GF25997@denix.org>
-References: <540B960B.6080907@pabigot.com> <54197BBF.6070004@pabigot.com>
-MIME-version: 1.0
-In-reply-to: <54197BBF.6070004@pabigot.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: mis-definition of SLEWCTRL_FAST in dt-bindings amxxxx header
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 606ECE0076C
+	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 14:31:35 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s97LVZSY031830
+	for <meta-ti@yoctoproject.org>; Tue, 7 Oct 2014 16:31:35 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s97LVZqa016055
+	for <meta-ti@yoctoproject.org>; Tue, 7 Oct 2014 16:31:35 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 7 Oct 2014 16:31:34 -0500
+Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s97LVYHZ009193;	Tue, 7 Oct 2014 16:31:34 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Tue, 7 Oct 2014 17:31:27 -0400
+Message-ID: <1412717489-29990-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [PATCH 1/3] ti-rm: Move from meta-arago to meta-ti
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,64 +45,75 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 20:59:10 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 07 Oct 2014 21:31:38 -0000
+Content-Type: text/plain
 
-Wasn't this already fixed upstream?
+-Moved recipe to meta-arago based on review comments
+ (from http://arago-project.org/git/?p=meta-arago.git;a=blob;f=meta-arago-extras/recipes-bsp/ti-rm/ti-rm_git.bb;h=38ec0ada5330977a5e19928e02060c9857b1f8d0;hb=HEAD)
+- Provides resource manager low level driver
 
-On Wed, Sep 17, 2014 at 07:17:03AM -0500, Peter A. Bigot wrote:
-> Any comment on this?  I have a patch, but figured it'd be better for
-> TI to provide an official solution.  Or is there another forum it
-> should be raised in?
-> 
-> It's really misleading for the self-documenting device tree
-> specifications to lie about what sort of slew is being configured.
-> 
-> Peter
-> 
-> On 09/06/2014 06:17 PM, Peter A. Bigot wrote:
-> >While converting some old DTS bindings, I noticed that the Linux
-> >include/dt-bindings/pinctrl/am33xx.h and am43xx.h headers both
-> >define SLEWCTRL_FAST constants:
-> >
-> >include/dt-bindings/pinctrl/am33xx.h:#define SLEWCTRL_FAST
-> >(1 << 6)
-> >include/dt-bindings/pinctrl/am43xx.h:#define SLEWCTRL_FAST
-> >(1 << 19)
-> >
-> >According to the TRM for these processors, the effect of setting
-> >that bit is to select slow slew; fast would be selected by leaving
-> >it cleared.  The constants should therefore be named
-> >SLEWCTRL_SLOW.
-> >
-> >This is consistent with the value for the I2C binding constants
-> >I'm converting:
-> >
-> >beagleboard/3.14:arch/arm/boot/dts/am335x-bone-common-pinmux.dtsi:
-> >0x158 0x72      /* spi0_d1.i2c1_sda, SLEWCTRL_SLOW | INPUT_PULLUP
-> >| MODE2 */
-> >beagleboard/3.14:arch/arm/boot/dts/am335x-bone-common-pinmux.dtsi:
-> >0x15c 0x72      /* spi0_cs0.i2c1_scl, SLEWCTRL_SLOW | INPUT_PULLUP
-> >| MODE2 */
-> >
-> >except that in the official files we have something like:
-> >
-> >stable/linux-3.14.y:arch/arm/boot/dts/am43x-epos-evm.dts: 0x188
-> >(PIN_INPUT_PULLUP | SLEWCTRL_FAST | MUX_MODE0)    /*
-> >i2c0_sda.i2c0_sda */
-> >stable/linux-3.14.y:arch/arm/boot/dts/am43x-epos-evm.dts: 0x18c
-> >(PIN_INPUT_PULLUP | SLEWCTRL_FAST | MUX_MODE0)    /*
-> >i2c0_scl.i2c0_scl */
-> >
-> >which is either wrong or misleading.
-> >
-> >Peter
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-> 
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-bsp/rm-lld/ti-rm_git.bb |   49 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
+ create mode 100644 recipes-bsp/rm-lld/ti-rm_git.bb
+
+diff --git a/recipes-bsp/rm-lld/ti-rm_git.bb b/recipes-bsp/rm-lld/ti-rm_git.bb
+new file mode 100644
+index 0000000..276c01e
+--- /dev/null
++++ b/recipes-bsp/rm-lld/ti-rm_git.bb
+@@ -0,0 +1,49 @@
++DESCRIPTION = "TI Resource Manager Low Level Driver"
++LICENSE = "TI BSD"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/rm/COPYING.txt;md5=dc61631b65360e6beb73b6c337800afc"
++
++BRANCH="master"
++SRC_URI = "git://git.ti.com/keystone-rtos/rm-lld.git;destsuffix=git/ti/drv/rm;protocol=git;branch=${BRANCH}"
++# Below commit ID corresponds to DEV.RM_LLD.02.01.00.04
++SRCREV = "59e3bf5fca3995dd0f79bbdd1af988d278a2a049"
++PR = "r0"
++PV = "02.01.00.04"
++
++COMPATIBLE_MACHINE = "keystone"
++
++DEPENDS = "ti-ipc"
++
++PACKAGES =+ "${PN}-test"
++
++FILES_${PN}-test = "${bindir}/rmDspClientTest_*.out \
++                    ${bindir}/rmLinuxClientTest_*.out \
++                    ${bindir}/ti/drv/rm/test/dts_files/*.dtb"
++
++DEVICELIST = "k2h k2k"
++
++CHOICELIST = "yes no"
++
++BASEDIR = "${WORKDIR}/git"
++S = "${BASEDIR}/ti/drv/rm"
++
++do_compile () {
++#   Now build the lld
++    make -f makefile_armv7 clean lib PDK_INSTALL_PATH=${STAGING_INCDIR} RM_SRC_DIR=${S}
++    for device in ${DEVICELIST}
++    do
++      for choice in ${CHOICELIST}
++      do
++        make -f makefile_armv7 tests IPC_DEVKIT_INSTALL_PATH=${STAGING_INCDIR} PDK_INSTALL_PATH=${BASEDIR} DEVICE="$device" USEDYNAMIC_LIB="$choice"
++      done
++    done
++}
++
++do_install () {
++    install -d ${D}${includedir}/ti/drv/rm
++    install -d ${D}${libdir}
++    install -d ${D}${bindir}
++    for device in ${DEVICELIST}
++    do
++      make -f makefile_armv7 install installbin installbin_test INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} DEVICE="$device"
++    done
++}
+-- 
+1.7.9.5
+
 
