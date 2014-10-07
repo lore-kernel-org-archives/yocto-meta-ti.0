@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CA051E00848; Tue,  7 Oct 2014 16:04:40 -0700 (PDT)
+	id C8377E0084F; Tue,  7 Oct 2014 16:04:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 71381E007C1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6FF08E00786
 	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 16:04:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3881A529DD; Tue,  7 Oct 2014 23:04:31 +0000 (UTC)
+	id 858DA52A3F; Tue,  7 Oct 2014 23:04:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141007230431.3881A529DD@arago-project.org>
+Message-Id: <20141007230431.858DA52A3F@arago-project.org>
 Date: Tue,  7 Oct 2014 23:04:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : boot-monitor: pass float ABI flag to fix gcc-4.9. 1 issue with stubs
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 07 Oct 2014 23:04:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 3070224598c3a0cf0fcdfdfd7adaccbb9a920296
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3070224598c3a0cf0fcdfdfd7adaccbb9a920296
+Branch: daisy
+Commit: 51621f90c114ee335a1ef29cc49968416ddf35a4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=51621f90c114ee335a1ef29cc49968416ddf35a4
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed Oct  8 04:25:30 2014 +0000
