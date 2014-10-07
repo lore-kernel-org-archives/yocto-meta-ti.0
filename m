@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E2505E00876; Tue,  7 Oct 2014 12:24:09 -0700 (PDT)
+	id 7B860E0076C; Tue,  7 Oct 2014 12:24:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,13 +14,13 @@ X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 91F84E0076C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 959D2E00848
 	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 12:24:03 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CB6335298E; Tue,  7 Oct 2014 19:23:57 +0000 (UTC)
+	id 7A098529DD; Tue,  7 Oct 2014 19:23:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141007192357.CB6335298E@arago-project.org>
-Date: Tue,  7 Oct 2014 19:23:57 +0000 (UTC)
+Message-Id: <20141007192359.7A098529DD@arago-project.org>
+Date: Tue,  7 Oct 2014 19:23:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Karthik Ramanan : omapdrm-pvr: recipe update for SGX KM compatible with Kernel 3.12
 X-BeenThere: meta-ti@yoctoproject.org
@@ -39,9 +39,9 @@ X-List-Received-Date: Tue, 07 Oct 2014 19:24:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 29939be7f3edfe32c6d6a8efc6b217851c64e7aa
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=29939be7f3edfe32c6d6a8efc6b217851c64e7aa
+Branch: daisy
+Commit: 937b7408f296d1f75467b5334e85a79305935a00
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=937b7408f296d1f75467b5334e85a79305935a00
 
 Author: Karthik Ramanan <a0393906@ti.com>
 Date:   Tue Sep 23 22:00:31 2014 +0000
