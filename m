@@ -1,26 +1,34 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C8377E0084F; Tue,  7 Oct 2014 16:04:40 -0700 (PDT)
+	id A9393E00848; Tue,  7 Oct 2014 16:39:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6FF08E00786
-	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 16:04:31 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 858DA52A3F; Tue,  7 Oct 2014 23:04:31 +0000 (UTC)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [206.46.173.23 listed in list.dnswl.org]
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9D087E0076C
+	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 16:39:41 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.18.33.160])
+	by vms173023.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0ND3009JVLPIN0A1@vms173023.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 07 Oct 2014 18:39:33 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 13921200A9; Tue,
+	07 Oct 2014 19:39:18 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20141007230431.858DA52A3F@arago-project.org>
-Date: Tue,  7 Oct 2014 23:04:31 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : boot-monitor: pass float ABI flag to fix gcc-4.9. 1 issue with stubs
+Date: Tue, 07 Oct 2014 19:39:17 -0400
+Message-id: <1412725157-13802-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.1.2
+Subject: [PATCH] linux-ti-staging 3.14: update with latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,59 +41,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 23:04:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 07 Oct 2014 23:39:42 -0000
 
-Module: meta-ti
-Branch: daisy
-Commit: 51621f90c114ee335a1ef29cc49968416ddf35a4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=51621f90c114ee335a1ef29cc49968416ddf35a4
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Oct  8 04:25:30 2014 +0000
-
-boot-monitor: pass float ABI flag to fix gcc-4.9.1 issue with stubs
-
-Otherwise fails with the below error, similar to am33x-cm3:
-
-fatal error: gnu/stubs-soft.h: No such file or directory
+non-smp configuration has moved to the kernel
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-kernel/linux/linux-ti-staging-3.14/non-smp.cfg | 5 -----
+ recipes-kernel/linux/linux-ti-staging_3.14.bb          | 9 ++++-----
+ 2 files changed, 4 insertions(+), 10 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-ti-staging-3.14/non-smp.cfg
 
- recipes-bsp/boot-monitor/boot-monitor_git.bb |   13 +++++++------
- 1 files changed, 7 insertions(+), 6 deletions(-)
-
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index 6e68213..6967be7 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -1,11 +1,5 @@
- DESCRIPTION = "Boot Monitor - TI ARM Boot monitor code"
--EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX}"
--
- LICENSE = "BSD"
--
--BOOT_MONITOR_BINARY ?= "skern.bin"
--BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
--
- LIC_FILES_CHKSUM = "file://COPYING;md5=25fe219a6febf6e5bb45beda1b2eb315"
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/non-smp.cfg b/recipes-kernel/linux/linux-ti-staging-3.14/non-smp.cfg
+deleted file mode 100644
+index d61a413..0000000
+--- a/recipes-kernel/linux/linux-ti-staging-3.14/non-smp.cfg
++++ /dev/null
+@@ -1,5 +0,0 @@
+-##################################################
+-# Non-SMP config options
+-##################################################
+-CONFIG_SMP=n
+-CONFIG_NR_CPUS=n
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index f0dd841..9e82aae 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -44,11 +44,11 @@ S = "${WORKDIR}/git"
  
- COMPATIBLE_MACHINE = "keystone"
-@@ -22,6 +16,13 @@ S = "${WORKDIR}/git"
- #Tag "K2_BM_14.05"
- SRCREV = "0e3ffe1ea4a0cee38ae2406901b7cf4d5324b5e9"
+ BRANCH = "ti-linux-3.14.y"
  
-+BOOT_MONITOR_BINARY ?= "skern.bin"
-+BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
-+
-+FLOATABI = "${@base_contains("TUNE_FEATURES", "vfp", base_contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
-+
-+EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}""
-+
- do_compile () {
- 	unset LDFLAGS
- 	unset CFLAGS
+-SRCREV = "f56742085ff39d6aa7f487c14a6abff473b4b810"
++SRCREV = "bdbce705b538fb18116afbcf62a59d2fb602de5e"
+ PV = "3.14.19"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+@@ -56,12 +56,11 @@ KERNEL_CONFIG_FRAGMENTS = "${KERNEL_CONFIG_DIR}/audio_display.cfg ${KERNEL_CONFI
+                            ${KERNEL_CONFIG_DIR}/connectivity.cfg ${KERNEL_CONFIG_DIR}/ipc.cfg \
+                            ${KERNEL_CONFIG_DIR}/power.cfg ${KERNEL_CONFIG_DIR}/wlan.cfg"
+ 
+-KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/non-smp.cfg"
+-KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${WORKDIR}/non-smp.cfg"
++KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${KERNEL_CONFIG_DIR}/am33xx-only.cfg"
++KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${KERNEL_CONFIG_DIR}/am43xx-only.cfg"
+ 
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+ KERNEL_GIT_PROTOCOL = "git"
+ SRC_URI = "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
+            file://defconfig \
+-           file://non-smp.cfg \
+           "
+-- 
+2.1.2
 
 
