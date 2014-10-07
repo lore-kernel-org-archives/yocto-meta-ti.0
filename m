@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E403EE0084F; Tue,  7 Oct 2014 12:43:51 -0700 (PDT)
+	id 0EC59E00894; Tue,  7 Oct 2014 12:44:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 62ED4E00786
-	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 12:43:48 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 893DFE0088C
+	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 12:43:58 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5B27D52981; Tue,  7 Oct 2014 19:43:47 +0000 (UTC)
+	id 48832529CF; Tue,  7 Oct 2014 19:43:58 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141007194347.5B27D52981@arago-project.org>
-Date: Tue,  7 Oct 2014 19:43:47 +0000 (UTC)
+Message-Id: <20141007194358.48832529CF@arago-project.org>
+Date: Tue,  7 Oct 2014 19:43:58 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : common-csl-ip: Update to csl version 2.1.0.5
+Subject: Sam Nelson : common-csl-ip: (ti-csl) Moved from meta-arago and renamed
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,63 +33,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 19:43:52 -0000
+X-List-Received-Date: Tue, 07 Oct 2014 19:44:05 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 0b17797a12ec3f385052d080ca56e17687482aab
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0b17797a12ec3f385052d080ca56e17687482aab
+Branch: daisy
+Commit: b31045066ffd61a3a13d7901ea8bcb94c34f4c2d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b31045066ffd61a3a13d7901ea8bcb94c34f4c2d
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct  7 17:36:45 2014 +0000
+Date:   Tue Oct  7 17:36:44 2014 +0000
 
-common-csl-ip: Update to csl version 2.1.0.5
+common-csl-ip: (ti-csl) Moved from meta-arago and renamed
 
-- Updated description
-- Updated LICENSE to BSD-3-Clause
-- Updated Commit id
-- Removed trailing whitespaces
+- Moved from meta-arago (where it was called ti-csl_git.bb)
+  http://arago-project.org/git/?p=meta-arago.git;a=blob_plain;f=meta-arago-extras/recipes-bsp/ti-csl/ti-csl_git.bb;hb=HEAD
+- Renamed it to common-csl-ip_git.bb
+- This package provides chip support library interface files
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/common-csl-ip/common-csl-ip_git.bb |   13 ++++++-------
- 1 files changed, 6 insertions(+), 7 deletions(-)
+ recipes-bsp/common-csl-ip/common-csl-ip_git.bb |   21 +++++++++++++++++++++
+ 1 files changed, 21 insertions(+), 0 deletions(-)
 
 diff --git a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-index fb5e6f8..a6f46db 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
+new file mode 100644
+index 0000000..fb5e6f8
+--- /dev/null
 +++ b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-@@ -1,21 +1,20 @@
--DESCRIPTION = "TI CSL"
--LICENSE = "TI BSD"
-+DESCRIPTION = "Chip support library low level interface"
-+LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
- 
- COMPATIBLE_MACHINE = "keystone"
- ALLOW_EMPTY_${PN} = "1"
- 
--PR = "r0"
-+PR = "r1"
- BRANCH="master"
- SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH}"
--# commit ID corresponds to DEV.CSL_KEYSTONE2.02.00.00.17
--SRCREV = "f6f90144c14e1ee783c4b893b52e54830be8166e" 
-+# commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.00.05A
-+SRCREV = "80d18dda4a76ce1a22cf2b5156f111390d75bea4"
- 
- S = "${WORKDIR}/git"
- 
- do_install () {
-     install -d ${D}${includedir}/ti/csl
--    find . -name "*.h" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl 
-+    find . -name "*.h" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl
-     find ./src/ip/serdes_sb/V0 -name "*.c" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl
- }
--
+@@ -0,0 +1,21 @@
++DESCRIPTION = "TI CSL"
++LICENSE = "TI BSD"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
++
++COMPATIBLE_MACHINE = "keystone"
++ALLOW_EMPTY_${PN} = "1"
++
++PR = "r0"
++BRANCH="master"
++SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH}"
++# commit ID corresponds to DEV.CSL_KEYSTONE2.02.00.00.17
++SRCREV = "f6f90144c14e1ee783c4b893b52e54830be8166e" 
++
++S = "${WORKDIR}/git"
++
++do_install () {
++    install -d ${D}${includedir}/ti/csl
++    find . -name "*.h" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl 
++    find ./src/ip/serdes_sb/V0 -name "*.c" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl
++}
++
 
 
