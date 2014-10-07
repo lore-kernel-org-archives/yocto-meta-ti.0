@@ -1,26 +1,43 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 64746E008A1; Tue,  7 Oct 2014 12:44:05 -0700 (PDT)
+	id 1B77AE00848; Tue,  7 Oct 2014 12:47:19 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB2D8E00895
-	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 12:43:58 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 5393A529D1; Tue,  7 Oct 2014 19:43:58 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20141007194358.5393A529D1@arago-project.org>
-Date: Tue,  7 Oct 2014 19:43:58 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : common-csl-ip: Update to csl version 2.1.0.5
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A2BF2E0076C
+	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 12:47:14 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s97JlEU7001800
+	for <meta-ti@yoctoproject.org>; Tue, 7 Oct 2014 14:47:14 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s97JlEtD018940
+	for <meta-ti@yoctoproject.org>; Tue, 7 Oct 2014 14:47:14 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 7 Oct 2014 14:47:13 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s97JlDIN009080;
+	Tue, 7 Oct 2014 14:47:13 -0500
+Date: Tue, 7 Oct 2014 15:47:13 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: "Nelson, Sam" <sam.nelson@ti.com>
+Message-ID: <20141007194713.GH1731@edge>
+References: <1412707498-10920-1-git-send-email-sam.nelson@ti.com>
+	<20141007184901.GB1731@edge>
+	<4F9216F96E5DF9428610502835A9F49058068DAC@DLEE11.ent.ti.com>
+MIME-Version: 1.0
+In-Reply-To: <4F9216F96E5DF9428610502835A9F49058068DAC@DLEE11.ent.ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] uio-module-drv: Add new recipe for user space io driver
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,63 +50,81 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 19:44:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 07 Oct 2014 19:47:19 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: daisy
-Commit: bc68ca3a013cec40ee995b25093195914f2184b8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bc68ca3a013cec40ee995b25093195914f2184b8
+It might be the time to change or configure your text editor to not add extra 
+whitespaces and blank lines, or at least mark them to be visible... :)
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct  7 17:36:45 2014 +0000
+/OE/arago-daisy/sources/meta-ti/.git/rebase-apply/patch:33: new blank line at EOF.
 
-common-csl-ip: Update to csl version 2.1.0.5
 
-- Updated description
-- Updated LICENSE to BSD-3-Clause
-- Updated Commit id
-- Removed trailing whitespaces
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-bsp/common-csl-ip/common-csl-ip_git.bb |   13 ++++++-------
- 1 files changed, 6 insertions(+), 7 deletions(-)
-
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-index fb5e6f8..a6f46db 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-@@ -1,21 +1,20 @@
--DESCRIPTION = "TI CSL"
--LICENSE = "TI BSD"
-+DESCRIPTION = "Chip support library low level interface"
-+LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
- 
- COMPATIBLE_MACHINE = "keystone"
- ALLOW_EMPTY_${PN} = "1"
- 
--PR = "r0"
-+PR = "r1"
- BRANCH="master"
- SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH}"
--# commit ID corresponds to DEV.CSL_KEYSTONE2.02.00.00.17
--SRCREV = "f6f90144c14e1ee783c4b893b52e54830be8166e" 
-+# commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.00.05A
-+SRCREV = "80d18dda4a76ce1a22cf2b5156f111390d75bea4"
- 
- S = "${WORKDIR}/git"
- 
- do_install () {
-     install -d ${D}${includedir}/ti/csl
--    find . -name "*.h" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl 
-+    find . -name "*.h" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl
-     find ./src/ip/serdes_sb/V0 -name "*.c" -type f | xargs -I {} cp --parents {} ${D}${includedir}/ti/csl
- }
--
-
+On Tue, Oct 07, 2014 at 02:58:01PM -0400, Nelson, Sam wrote:
+> > -----Original Message-----
+> > From: Dmytriyenko, Denys
+> > Sent: Tuesday, October 07, 2014 2:49 PM
+> > To: Nelson, Sam
+> > Cc: meta-ti@yoctoproject.org
+> > Subject: Re: [meta-ti] [PATCH] uio-module-drv: Add new recipe for user
+> > space io driver
+> > 
+> > On Tue, Oct 07, 2014 at 02:44:58PM -0400, Sam Nelson wrote:
+> > > - Provides User space IO driver for on-chip modules
+> > >
+> > > Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> > 
+> > Looks very good, thanks!
+> > 
+> > I take it this is rather generic and not keystone specific, as you don't set
+> > COMPATIBLE_MACHINE, right?
+> [Sam] That is correct.
+> > 
+> > 
+> > > ---
+> > >  recipes-bsp/uio-module-drv/uio-module-drv_git.bb |   22
+> > ++++++++++++++++++++++
+> > >  1 file changed, 22 insertions(+)
+> > >  create mode 100644 recipes-bsp/uio-module-drv/uio-module-drv_git.bb
+> > >
+> > > diff --git a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb b/recipes-
+> > bsp/uio-module-drv/uio-module-drv_git.bb
+> > > new file mode 100644
+> > > index 0000000..c80dfc8
+> > > --- /dev/null
+> > > +++ b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
+> > > @@ -0,0 +1,22 @@
+> > > +DESCRIPTION="User space IO (UIO) driver for on-chip modules"
+> > > +
+> > > +LICENSE = "BSD"
+> > > +LIC_FILES_CHKSUM =
+> > "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
+> > > +
+> > > +BRANCH ?= "master"
+> > > +# This corresponds to version 01.00.01.00A
+> > > +SRCREV = "3bce5bfec7a7865e278410e3c4484f878b9038b6"
+> > > +PV = "1.0.1"
+> > > +
+> > > +SRC_URI = "git://git.ti.com/keystone-linux/uio-module-
+> > drv.git;protocol=git;branch=${BRANCH}"
+> > > +
+> > > +# This package builds a kernel module, use kernel PR as base and append
+> > a local
+> > > +MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+> > > +PR = "${MACHINE_KERNEL_PR}"
+> > > +
+> > > +S = "${WORKDIR}/git"
+> > > +
+> > > +module_auto_load_uio-module-drv = "uio-module-drv"
+> > > +
+> > > +inherit module
+> > > +
+> > > --
+> > > 1.7.9.5
+> > >
+> > > --
+> > > _______________________________________________
+> > > meta-ti mailing list
+> > > meta-ti@yoctoproject.org
+> > > https://lists.yoctoproject.org/listinfo/meta-ti
 
