@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7AAAEE00786; Tue,  7 Oct 2014 12:24:10 -0700 (PDT)
+	id 7DC17E00848; Tue,  7 Oct 2014 12:24:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0DA69E00853
-	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 12:24:08 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 94676E007C1
+	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 12:24:03 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id AF1A352A3F; Tue,  7 Oct 2014 19:23:59 +0000 (UTC)
+	id 99BB752973; Tue,  7 Oct 2014 19:23:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141007192359.AF1A352A3F@arago-project.org>
+Message-Id: <20141007192359.99BB752973@arago-project.org>
 Date: Tue,  7 Oct 2014 19:23:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : omap5-sgx-ddk-um-linux: Updated SRCREV to include bugfixes
+Subject: Karthik Ramanan : bltsville: Updated SRCREV to the latest
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,40 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: 3baa3aeaeb282c8d0e24915bda9df059c467f361
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3baa3aeaeb282c8d0e24915bda9df059c467f361
+Commit: 08c82772700227b1b76f7dd6af50193a79716eac
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=08c82772700227b1b76f7dd6af50193a79716eac
 
 Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Tue Sep 23 22:00:35 2014 +0000
+Date:   Tue Sep 23 22:00:34 2014 +0000
 
-omap5-sgx-ddk-um-linux: Updated SRCREV to include bugfixes
+bltsville: Updated SRCREV to the latest
 
-* This version is compatible with version Kernel 3.12
+* Contains incremental updates and bug fixes
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
-Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
 Acked-by: Franklin Cooper Jr. <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    4 ++--
+ recipes-graphics/bltsville/bltsville_git.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-index b875328..37ea088 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-@@ -4,9 +4,9 @@ LICENSE = "TI-TSPA"
- LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=360d293df455e4f2d363bb4014a49603"
- 
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git"
--SRCREV = "994922a5655c63b05343a9238cb30e6ef61744be"
-+SRCREV = "0af11b676900de5a3e5550728fe18acd88c29848"
+diff --git a/recipes-graphics/bltsville/bltsville_git.bb b/recipes-graphics/bltsville/bltsville_git.bb
+index 158d189..7a05b4d 100644
+--- a/recipes-graphics/bltsville/bltsville_git.bb
++++ b/recipes-graphics/bltsville/bltsville_git.bb
+@@ -4,9 +4,9 @@ LICENSE = "BSD-3-Clause & TI-TSPA"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=10a9abb9c5bb19edd83a8cf66eef7148 \
+                     file://ticpu/license;md5=0bb831850a0de80e32a63772d89c6562"
  
 -PR = "r2"
 +PR = "r3"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
  
- RREPLACES_${PN} = "libegl libgles1 libgles2"
+-SRCREV = "016586280ecdae201fd6e340ec8c4f8a9605cc94"
++SRCREV = "a759bde8a5a6e518dfb8a6e633736a360005498e"
+ 
+ inherit autotools pkgconfig
+ 
 
 
