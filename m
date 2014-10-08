@@ -1,38 +1,49 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <eballetbo@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 70881E00853; Wed,  8 Oct 2014 05:10:53 -0700 (PDT)
+	id 3CFBFE00878; Wed,  8 Oct 2014 06:48:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+X-Spam-HAM-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at
+	http://www.dnswl.org/, low *      trust
+	*      [209.85.212.175 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3E808E007C1
-	for <meta-ti@yoctoproject.org>; Wed,  8 Oct 2014 05:10:47 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s98CAkiv022449
-	for <meta-ti@yoctoproject.org>; Wed, 8 Oct 2014 07:10:46 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s98CAk4T018511
-	for <meta-ti@yoctoproject.org>; Wed, 8 Oct 2014 07:10:46 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 8 Oct 2014 07:10:45 -0500
-Received: from udb0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s98CAkBM026573;	Wed, 8 Oct 2014 07:10:46 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 8 Oct 2014 08:10:44 -0400
-Message-ID: <1412770244-3829-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [daisy][PATCH v2] dra7xx: add "mmip" to MACHINE_FEATURES
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A8FB5E0084F
+	for <meta-ti@yoctoproject.org>; Wed,  8 Oct 2014 06:48:07 -0700 (PDT)
+Received: by mail-wi0-f175.google.com with SMTP id d1so10614137wiv.14
+	for <meta-ti@yoctoproject.org>; Wed, 08 Oct 2014 06:48:07 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=from:to:cc:subject:date:message-id;
+	bh=q3fh24r6s5mzkFNdA5jDxE9V6TRlBRpNZ6DQYl2c1xA=;
+	b=QlFFQmZa1V2nmU2GXMwKS9vbaJlQ8LBNwyuFa/kgGax/khoFX8xQEqMVQ0QWyYSilp
+	s5kHIGPYxxOPERf1Ie35773FDJn9s/tgjXhgW58l7nC6oDhJFrYIGg6rlbYkr7E9pt3O
+	4kQGV57sfhqMOYP3y2EmHZjGI1T4IraTuz9/AbkOiKHa1S4uxvQ5w36+t71sdygdPnEU
+	kZr5v4Fl8s/N5HFZmdHrfAiVL96rDAYIXnAAcR9h8tDie4jcVJVBmSo0+mnFEJf7VpMz
+	atuYa3yvIgv5wi6fVkPxOCkb+RwH5+RUdmYlH6Jgi3JR9S8fn0KWg4W0w7ofOwniCRtj
+	v5Dw==
+X-Received: by 10.194.89.225 with SMTP id br1mr11961707wjb.51.1412776086462;
+	Wed, 08 Oct 2014 06:48:06 -0700 (PDT)
+Received: from localhost.localdomain (43.Red-2-139-180.staticIP.rima-tde.net.
+	[2.139.180.43])
+	by mx.google.com with ESMTPSA id p1sm158375wjy.22.2014.10.08.06.48.05
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 08 Oct 2014 06:48:05 -0700 (PDT)
+From: Enric Balletbo i Serra <eballetbo@iseebcn.com>
+To: meta-ti@yoctoproject.org,
+	ebutera@gmail.com,
+	martinez.javier@gmail.com
+Date: Wed,  8 Oct 2014 15:47:43 +0200
+Message-Id: <1412776066-4991-1-git-send-email-eballetbo@iseebcn.com>
+X-Mailer: git-send-email 1.9.1
+Cc: Enric Balletbo i Serra <eballetbo@iseebcn.com>
+Subject: [PATCH 0/3] Fix dsp related packages for new kernels
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,25 +56,41 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2014 12:10:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 08 Oct 2014 13:48:15 -0000
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
----
- conf/machine/include/dra7xx.inc |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hi all,
 
-diff --git a/conf/machine/include/dra7xx.inc b/conf/machine/include/dra7xx.inc
-index 857e1b3..a7c8782 100644
---- a/conf/machine/include/dra7xx.inc
-+++ b/conf/machine/include/dra7xx.inc
-@@ -1,4 +1,4 @@
- require conf/machine/include/omap-a15.inc
- SOC_FAMILY_append = ":dra7xx"
- 
--MACHINE_FEATURES += "pci"
-+MACHINE_FEATURES += "pci mmip"
+According to the README I know that probably these packages are unmaintained,
+but these packages are still used for some of us with newer kernels. This patch
+series fixes some build problems found when I tried to build this infrastructure
+with a 3.17 kernel. With these patches I'm able to build and run dsplink examples
+and gstreamer-ti to encode/decode some videos using the DSP.
+
+If you don't have any inconvenient maybe would be interesting add these patches.
+
+Cheers,
+
+Enric Balletbo i Serra (3):
+  ti-dmai: Fix build with recent kernels and compilers.
+  ti-dsplink: Fix irq mismatch for kernel versions greater than 3.7.0.
+  ti-linuxutils: Fix build problems for kernel up to 3.17
+
+ .../dmai/ti-dmai/remove-unneeded-includes.patch    | 26 ++++++++++
+ recipes-ti/dmai/ti-dmai_svn.bb                     |  3 +-
+ recipes-ti/dsplink/ti-dsplink.inc                  |  2 +-
+ ...splink_1_65_kernel_3_7_0_fix-irq-mismatch.patch | 16 ++++++
+ recipes-ti/dsplink/ti-dsplink_1.65.00.03.bb        |  1 +
+ recipes-ti/linuxutils/ti-linuxutils.inc            |  2 +-
+ .../linuxutils_2_26-cmemk-fixes.patch              | 59 ++++++++++++++++++++++
+ .../linuxutils_2_26-sdmak-fixes.patch              | 25 +++++++++
+ recipes-ti/linuxutils/ti-linuxutils_2.26.01.02.bb  |  5 +-
+ 9 files changed, 135 insertions(+), 4 deletions(-)
+ create mode 100644 recipes-ti/dmai/ti-dmai/remove-unneeded-includes.patch
+ create mode 100644 recipes-ti/dsplink/ti-dsplink/dsplink_1_65_kernel_3_7_0_fix-irq-mismatch.patch
+ create mode 100644 recipes-ti/linuxutils/ti-linuxutils/linuxutils_2_26-cmemk-fixes.patch
+ create mode 100644 recipes-ti/linuxutils/ti-linuxutils/linuxutils_2_26-sdmak-fixes.patch
+
 -- 
-1.7.9.5
+1.9.1
 
 
