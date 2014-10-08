@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 846CBE00878; Tue,  7 Oct 2014 18:10:22 -0700 (PDT)
+	id 85E4BE00877; Tue,  7 Oct 2014 18:10:22 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6118DE0076C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 62507E007C1
 	for <meta-ti@yoctoproject.org>; Tue,  7 Oct 2014 18:10:16 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 98CA252A3F; Wed,  8 Oct 2014 01:10:15 +0000 (UTC)
+	id 70F01529D1; Wed,  8 Oct 2014 01:10:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141008011015.98CA252A3F@arago-project.org>
+Message-Id: <20141008011015.70F01529D1@arago-project.org>
 Date: Wed,  8 Oct 2014 01:10:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-mainline 3.14: update to 3.14.20
+Subject: Denys Dmytriyenko : linux-ti-staging 3.14: update with latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,37 +38,67 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 02d7db614f16d418e6f6a0670c79962193eae911
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=02d7db614f16d418e6f6a0670c79962193eae911
+Commit: 3b14cb6aba91413c1391986d6fea5587b26a4c00
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3b14cb6aba91413c1391986d6fea5587b26a4c00
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Oct  8 05:42:57 2014 +0000
+Date:   Wed Oct  8 06:17:12 2014 +0000
 
-linux-mainline 3.14: update to 3.14.20
+linux-ti-staging 3.14: update with latest fixes
+
+non-smp configuration has moved to the kernel
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-mainline_3.14.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ .../linux/linux-ti-staging-3.14/non-smp.cfg        |    5 -----
+ recipes-kernel/linux/linux-ti-staging_3.14.bb      |    9 ++++-----
+ 2 files changed, 4 insertions(+), 10 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-mainline_3.14.bb b/recipes-kernel/linux/linux-mainline_3.14.bb
-index bff7627..32491b7 100644
---- a/recipes-kernel/linux/linux-mainline_3.14.bb
-+++ b/recipes-kernel/linux/linux-mainline_3.14.bb
-@@ -32,9 +32,9 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/non-smp.cfg b/recipes-kernel/linux/linux-ti-staging-3.14/non-smp.cfg
+deleted file mode 100644
+index d61a413..0000000
+--- a/recipes-kernel/linux/linux-ti-staging-3.14/non-smp.cfg
++++ /dev/null
+@@ -1,5 +0,0 @@
+-##################################################
+-# Non-SMP config options
+-##################################################
+-CONFIG_SMP=n
+-CONFIG_NR_CPUS=n
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index f0dd841..180a038 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -44,11 +44,11 @@ S = "${WORKDIR}/git"
  
- BRANCH = "linux-3.14.y"
+ BRANCH = "ti-linux-3.14.y"
  
--# Corresponds to tag v3.14.19
--SRCREV = "af92ba8fd23cb5811d96b833bbb7133efefeb5b9"
--PV = "3.14.19"
-+# Corresponds to tag v3.14.20
-+SRCREV = "2023c00d650dfa409e58539596aca7d9deded824"
-+PV = "3.14.20"
+-SRCREV = "f56742085ff39d6aa7f487c14a6abff473b4b810"
++SRCREV = "bdbce705b538fb18116afbcf62a59d2fb602de5e"
+ PV = "3.14.19"
  
- SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;protocol=git;branch=${BRANCH} \
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+@@ -56,12 +56,11 @@ KERNEL_CONFIG_FRAGMENTS = "${KERNEL_CONFIG_DIR}/audio_display.cfg ${KERNEL_CONFI
+                            ${KERNEL_CONFIG_DIR}/connectivity.cfg ${KERNEL_CONFIG_DIR}/ipc.cfg \
+                            ${KERNEL_CONFIG_DIR}/power.cfg ${KERNEL_CONFIG_DIR}/wlan.cfg"
+ 
+-KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/non-smp.cfg"
+-KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${WORKDIR}/non-smp.cfg"
++KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${KERNEL_CONFIG_DIR}/am33xx_only.cfg"
++KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${KERNEL_CONFIG_DIR}/am43xx_only.cfg"
+ 
+ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
+ KERNEL_GIT_PROTOCOL = "git"
+ SRC_URI = "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
             file://defconfig \
+-           file://non-smp.cfg \
+           "
 
 
