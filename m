@@ -1,41 +1,26 @@
-Return-Path: <denys@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E320EE00786; Wed,  8 Oct 2014 11:05:40 -0700 (PDT)
+	id 1467DE0088A; Wed,  8 Oct 2014 11:10:04 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4D3D8E006DB
-	for <meta-ti@yoctoproject.org>; Wed,  8 Oct 2014 11:05:27 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s98I5QkG006270;
-	Wed, 8 Oct 2014 13:05:26 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s98I5QNw014850;
-	Wed, 8 Oct 2014 13:05:26 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 8 Oct 2014 13:05:25 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s98I5PLY009009;
-	Wed, 8 Oct 2014 13:05:25 -0500
-Date: Wed, 8 Oct 2014 14:05:25 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Enric Balletbo i Serra <eballetbo@iseebcn.com>
-Message-ID: <20141008180525.GS1731@edge>
-References: <1412776066-4991-1-git-send-email-eballetbo@iseebcn.com>
-MIME-Version: 1.0
-In-Reply-To: <1412776066-4991-1-git-send-email-eballetbo@iseebcn.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org, martinez.javier@gmail.com, ebutera@gmail.com
-Subject: Re: [PATCH 0/3] Fix dsp related packages for new kernels
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BB44CE0076C
+	for <meta-ti@yoctoproject.org>; Wed,  8 Oct 2014 11:09:59 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 9445452981; Wed,  8 Oct 2014 18:09:57 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20141008180957.9445452981@arago-project.org>
+Date: Wed,  8 Oct 2014 18:09:57 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Enric Balletbo i Serra : ti-dmai: Fix build with recent kernels and compilers.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,59 +33,83 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2014 18:05:41 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 08 Oct 2014 18:10:04 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, Oct 08, 2014 at 03:47:43PM +0200, Enric Balletbo i Serra wrote:
-> Hi all,
-> 
-> According to the README I know that probably these packages are unmaintained,
-> but these packages are still used for some of us with newer kernels. This patch
-> series fixes some build problems found when I tried to build this infrastructure
-> with a 3.17 kernel. With these patches I'm able to build and run dsplink examples
-> and gstreamer-ti to encode/decode some videos using the DSP.
-> 
-> If you don't have any inconvenient maybe would be interesting add these patches.
+Module: meta-ti
+Branch: master
+Commit: f6c7946591dc9099855139be0e9e1a56474c6a7a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f6c7946591dc9099855139be0e9e1a56474c6a7a
 
-Thanks for the patches! Can you please provide a bit more details about the HW 
-platform you are using these on. Also, we are slowly updating other components 
-in meta-ti, that touch DSP, like IPC, etc. - please let us know if any of the 
-new changes affect the old components or break anything for you. I can't 
-guarantee we'd be able to fix or support older platforms within new components 
-right away, but at least we should be able to preserve old versions of the 
-required components for as long as they work. Please keep in touch. Thanks!
+Author: Enric Balletbo i Serra <eballetbo@iseebcn.com>
+Date:   Wed Oct  8 19:47:44 2014 +0000
 
--- 
-Denys
+ti-dmai: Fix build with recent kernels and compilers.
 
+Remove unused includes that only redefine some typedefs already defined in
+other includes and add the --sysroot flag to fix a linkage problem.
 
-> Enric Balletbo i Serra (3):
->   ti-dmai: Fix build with recent kernels and compilers.
->   ti-dsplink: Fix irq mismatch for kernel versions greater than 3.7.0.
->   ti-linuxutils: Fix build problems for kernel up to 3.17
-> 
->  .../dmai/ti-dmai/remove-unneeded-includes.patch    | 26 ++++++++++
->  recipes-ti/dmai/ti-dmai_svn.bb                     |  3 +-
->  recipes-ti/dsplink/ti-dsplink.inc                  |  2 +-
->  ...splink_1_65_kernel_3_7_0_fix-irq-mismatch.patch | 16 ++++++
->  recipes-ti/dsplink/ti-dsplink_1.65.00.03.bb        |  1 +
->  recipes-ti/linuxutils/ti-linuxutils.inc            |  2 +-
->  .../linuxutils_2_26-cmemk-fixes.patch              | 59 ++++++++++++++++++++++
->  .../linuxutils_2_26-sdmak-fixes.patch              | 25 +++++++++
->  recipes-ti/linuxutils/ti-linuxutils_2.26.01.02.bb  |  5 +-
->  9 files changed, 135 insertions(+), 4 deletions(-)
->  create mode 100644 recipes-ti/dmai/ti-dmai/remove-unneeded-includes.patch
->  create mode 100644 recipes-ti/dsplink/ti-dsplink/dsplink_1_65_kernel_3_7_0_fix-irq-mismatch.patch
->  create mode 100644 recipes-ti/linuxutils/ti-linuxutils/linuxutils_2_26-cmemk-fixes.patch
->  create mode 100644 recipes-ti/linuxutils/ti-linuxutils/linuxutils_2_26-sdmak-fixes.patch
-> 
-> -- 
-> 1.9.1
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+Signed-off-by: Enric Balletbo i Serra <eballetbo@iseebcn.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ .../dmai/ti-dmai/remove-unneeded-includes.patch    |   26 ++++++++++++++++++++
+ recipes-ti/dmai/ti-dmai_svn.bb                     |    3 +-
+ 2 files changed, 28 insertions(+), 1 deletions(-)
+
+diff --git a/recipes-ti/dmai/ti-dmai/remove-unneeded-includes.patch b/recipes-ti/dmai/ti-dmai/remove-unneeded-includes.patch
+new file mode 100644
+index 0000000..cfd325a
+--- /dev/null
++++ b/recipes-ti/dmai/ti-dmai/remove-unneeded-includes.patch
+@@ -0,0 +1,26 @@
++Index: a/packages/ti/sdo/dmai/Makefile
++===================================================================
++--- a/packages/ti/sdo/dmai/Makefile
+++++ b/packages/ti/sdo/dmai/Makefile
++@@ -107,7 +107,7 @@ XDCPATH	+= $(XDC_INSTALL_DIR)/packages;$
++ 
++ CPP_FLAGS	+= -I$(XDC_INSTALL_DIR)/packages -I$(DMAI_INSTALL_DIR)/packages -I$(CE_INSTALL_DIR)/packages -I$(FC_INSTALL_DIR)/packages -I$(XDAIS_INSTALL_DIR)/packages -I$(CODEC_INSTALL_DIR)/packages -DDmai_Device_$(PLATFORM_DEVICE)
++ 
++-GCC_CPP_FLAGS	+= $(CPP_FLAGS) -I$(LINUXKERNEL_INSTALL_DIR)/include -I$(LINUXKERNEL_INSTALL_DIR)/arch/arm/include -I$(LINUXKERNEL_INSTALL_DIR)/arch/arm/$(PLATFORM_ARCH)/include $(HAVE_AUTOCONFIG) -I$(CMEM_INSTALL_DIR)/packages -I$(LINK_INSTALL_DIR) -DDmai_BuildOs_linux -Dxdc_target_types__=gnu/targets/std.h -I$(LINUXLIBS_INSTALL_DIR)/include -Dxdc_target_name__=arm/GCArmv5T
+++GCC_CPP_FLAGS	+= $(CPP_FLAGS) $(HAVE_AUTOCONFIG) -I$(CMEM_INSTALL_DIR)/packages -I$(LINK_INSTALL_DIR) -DDmai_BuildOs_linux -Dxdc_target_types__=gnu/targets/std.h -I$(LINUXLIBS_INSTALL_DIR)/include -Dxdc_target_name__=arm/GCArmv5T
++ C64P_CPP_FLAGS	+= $(CPP_FLAGS) -I$(BIOS_INSTALL_DIR)/packages/ti/bios/include -I$(BIOS_INSTALL_DIR)/packages -DDmai_BuildOs_bios -Dxdc_target__='<ti/targets/std.h>' -I$(CODEGEN_INSTALL_DIR)/include -mv6400+ -pdse225 -eo$(PLATFORM_DEVICE).o$(EXT)
++ 
++ GCC_C_FLAGS	+= $(C_FLAGS) -Wall 
++Index: a/packages/ti/sdo/dmai/apps/Makefile.app
++===================================================================
++--- a/packages/ti/sdo/dmai/apps/Makefile.app
+++++ b/packages/ti/sdo/dmai/apps/Makefile.app
++@@ -121,7 +121,7 @@ C64P_C_FLAGS	= $(C_FLAGS)
++ GCC_CPP_FLAGS  	= $(CPP_FLAGS) -I$(LINUXKERNEL_INSTALL_DIR)/include
++ C64P_CPP_FLAGS	= $(CPP_FLAGS) -pdse225 -I$(CODEGEN_INSTALL_DIR)/include -mv6400+ -I$(BIOS_INSTALL_DIR)/packages/ti/bios/include -eo$(PLATFORM_DEVICE).o$(EXT)
++ 
++-GCC_LD_FLAGS	= $(LD_FLAGS) -lpthread -lm -L$(LINUXLIBS_INSTALL_DIR)/lib -lasound
+++GCC_LD_FLAGS	= $(LD_FLAGS) -lpthread -lm --sysroot=$(PKG_CONFIG_SYSROOT_DIR) -L$(LINUXLIBS_INSTALL_DIR)/lib -lasound
++ C64P_LD_FLAGS	= $(LD_FLAGS) -z -w -x -c -i$(RTDX_INSTALL_DIR)/packages/ti/rtdx/iom/lib/debug -i$(RTDX_INSTALL_DIR)/packages/ti/rtdx/cio/lib/release -i$(RTDX_INSTALL_DIR)/packages/ti/rtdx/lib/c6000 
++ 
++ SOURCES 	= $(wildcard *.c)
+diff --git a/recipes-ti/dmai/ti-dmai_svn.bb b/recipes-ti/dmai/ti-dmai_svn.bb
+index 536bb78..4a91b9b 100644
+--- a/recipes-ti/dmai/ti-dmai_svn.bb
++++ b/recipes-ti/dmai/ti-dmai_svn.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://dmai_${PV}_License.html;md5=3302f728a5a42f97cabc26a54
+ 
+ # This package has high dependence on kernel, use kernel PR as base and append a local version
+ PR = "${MACHINE_KERNEL_PR}"
+-PR_append = "o"
++PR_append = "p"
+ 
+ DMAIBRANCH_dm6446     = "trunk"
+ DMAIBRANCH_dm6467     = "branches/GITPSP_INT_101009"
+@@ -34,6 +34,7 @@ SRCREV               ?= "UNDEFINED_SRCREV"
+ 
+ SRC_URI_append = " file://omap3530-r642-remove-include-videodev.diff;striplevel=3 \
+                    file://r642-fix-config-bld.diff;striplevel=3 \
++                   file://remove-unneeded-includes.patch \
+                  "
+ 
+ INSANE_SKIP_${PN} = "installed-vs-shipped"
+
 
