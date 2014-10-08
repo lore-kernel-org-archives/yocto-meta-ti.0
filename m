@@ -1,26 +1,41 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7243CE00857; Wed,  8 Oct 2014 11:10:05 -0700 (PDT)
+	id C3759E0077F; Wed,  8 Oct 2014 11:13:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 67821E00848
-	for <meta-ti@yoctoproject.org>; Wed,  8 Oct 2014 11:10:03 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 16C2552981; Wed,  8 Oct 2014 18:10:02 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20141008181003.16C2552981@arago-project.org>
-Date: Wed,  8 Oct 2014 18:10:02 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Enric Balletbo i Serra : ti-dmai: Fix build with recent kernels and compilers.
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93332E006DB
+	for <meta-ti@yoctoproject.org>; Wed,  8 Oct 2014 11:13:42 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s98IDeC9032659;
+	Wed, 8 Oct 2014 13:13:40 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s98IDd9L024268;
+	Wed, 8 Oct 2014 13:13:39 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
+	Wed, 8 Oct 2014 13:13:39 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s98IDdch010187;
+	Wed, 8 Oct 2014 13:13:39 -0500
+Date: Wed, 8 Oct 2014 14:13:38 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+Message-ID: <20141008181338.GT1731@edge>
+References: <20141008161507.GE18916@piout.net>
+MIME-Version: 1.0
+In-Reply-To: <20141008161507.GE18916@piout.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: Issues installing libgles-omap3
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,83 +48,31 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2014 18:10:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 08 Oct 2014 18:13:51 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: daisy
-Commit: 175d1d47156fc1010c99b2b07bb4704fdcb3337d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=175d1d47156fc1010c99b2b07bb4704fdcb3337d
+On Wed, Oct 08, 2014 at 06:15:07PM +0200, Alexandre Belloni wrote:
+> Hi,
+> 
+> I'm trying to build an image with poky (daisy) for the am335x-evm. While
+> libgles-omap3 builds fine. At the final installation step (do_rootfs for
+> my image), it fails with:
+> 
+> Computing transaction...error: Can't install libgles-omap3-es5-5.01.01.01-r38.1@cortexa8t2hf_vfp_neon: no package provides libews.so
+> 
+> On another build machine, it fails with:
+> 
+> Computing transaction...error: Can't install libgles-omap3-es3-5.01.01.01-r38.1@cortexa8t2hf_vfp_neon: no package provides libews.so
+> 
+> 
+> What I don't understand is why it is not selecting libgles-omap3-es8
+> which as I understand would be the correct package for ti33x.
+> 
+> Any insight on how to debug that ?
 
-Author: Enric Balletbo i Serra <eballetbo@iseebcn.com>
-Date:   Wed Oct  8 19:47:44 2014 +0000
+Can you please show how do you pull it into your image. Thanks.
 
-ti-dmai: Fix build with recent kernels and compilers.
-
-Remove unused includes that only redefine some typedefs already defined in
-other includes and add the --sysroot flag to fix a linkage problem.
-
-Signed-off-by: Enric Balletbo i Serra <eballetbo@iseebcn.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- .../dmai/ti-dmai/remove-unneeded-includes.patch    |   26 ++++++++++++++++++++
- recipes-ti/dmai/ti-dmai_svn.bb                     |    3 +-
- 2 files changed, 28 insertions(+), 1 deletions(-)
-
-diff --git a/recipes-ti/dmai/ti-dmai/remove-unneeded-includes.patch b/recipes-ti/dmai/ti-dmai/remove-unneeded-includes.patch
-new file mode 100644
-index 0000000..cfd325a
---- /dev/null
-+++ b/recipes-ti/dmai/ti-dmai/remove-unneeded-includes.patch
-@@ -0,0 +1,26 @@
-+Index: a/packages/ti/sdo/dmai/Makefile
-+===================================================================
-+--- a/packages/ti/sdo/dmai/Makefile
-++++ b/packages/ti/sdo/dmai/Makefile
-+@@ -107,7 +107,7 @@ XDCPATH	+= $(XDC_INSTALL_DIR)/packages;$
-+ 
-+ CPP_FLAGS	+= -I$(XDC_INSTALL_DIR)/packages -I$(DMAI_INSTALL_DIR)/packages -I$(CE_INSTALL_DIR)/packages -I$(FC_INSTALL_DIR)/packages -I$(XDAIS_INSTALL_DIR)/packages -I$(CODEC_INSTALL_DIR)/packages -DDmai_Device_$(PLATFORM_DEVICE)
-+ 
-+-GCC_CPP_FLAGS	+= $(CPP_FLAGS) -I$(LINUXKERNEL_INSTALL_DIR)/include -I$(LINUXKERNEL_INSTALL_DIR)/arch/arm/include -I$(LINUXKERNEL_INSTALL_DIR)/arch/arm/$(PLATFORM_ARCH)/include $(HAVE_AUTOCONFIG) -I$(CMEM_INSTALL_DIR)/packages -I$(LINK_INSTALL_DIR) -DDmai_BuildOs_linux -Dxdc_target_types__=gnu/targets/std.h -I$(LINUXLIBS_INSTALL_DIR)/include -Dxdc_target_name__=arm/GCArmv5T
-++GCC_CPP_FLAGS	+= $(CPP_FLAGS) $(HAVE_AUTOCONFIG) -I$(CMEM_INSTALL_DIR)/packages -I$(LINK_INSTALL_DIR) -DDmai_BuildOs_linux -Dxdc_target_types__=gnu/targets/std.h -I$(LINUXLIBS_INSTALL_DIR)/include -Dxdc_target_name__=arm/GCArmv5T
-+ C64P_CPP_FLAGS	+= $(CPP_FLAGS) -I$(BIOS_INSTALL_DIR)/packages/ti/bios/include -I$(BIOS_INSTALL_DIR)/packages -DDmai_BuildOs_bios -Dxdc_target__='<ti/targets/std.h>' -I$(CODEGEN_INSTALL_DIR)/include -mv6400+ -pdse225 -eo$(PLATFORM_DEVICE).o$(EXT)
-+ 
-+ GCC_C_FLAGS	+= $(C_FLAGS) -Wall 
-+Index: a/packages/ti/sdo/dmai/apps/Makefile.app
-+===================================================================
-+--- a/packages/ti/sdo/dmai/apps/Makefile.app
-++++ b/packages/ti/sdo/dmai/apps/Makefile.app
-+@@ -121,7 +121,7 @@ C64P_C_FLAGS	= $(C_FLAGS)
-+ GCC_CPP_FLAGS  	= $(CPP_FLAGS) -I$(LINUXKERNEL_INSTALL_DIR)/include
-+ C64P_CPP_FLAGS	= $(CPP_FLAGS) -pdse225 -I$(CODEGEN_INSTALL_DIR)/include -mv6400+ -I$(BIOS_INSTALL_DIR)/packages/ti/bios/include -eo$(PLATFORM_DEVICE).o$(EXT)
-+ 
-+-GCC_LD_FLAGS	= $(LD_FLAGS) -lpthread -lm -L$(LINUXLIBS_INSTALL_DIR)/lib -lasound
-++GCC_LD_FLAGS	= $(LD_FLAGS) -lpthread -lm --sysroot=$(PKG_CONFIG_SYSROOT_DIR) -L$(LINUXLIBS_INSTALL_DIR)/lib -lasound
-+ C64P_LD_FLAGS	= $(LD_FLAGS) -z -w -x -c -i$(RTDX_INSTALL_DIR)/packages/ti/rtdx/iom/lib/debug -i$(RTDX_INSTALL_DIR)/packages/ti/rtdx/cio/lib/release -i$(RTDX_INSTALL_DIR)/packages/ti/rtdx/lib/c6000 
-+ 
-+ SOURCES 	= $(wildcard *.c)
-diff --git a/recipes-ti/dmai/ti-dmai_svn.bb b/recipes-ti/dmai/ti-dmai_svn.bb
-index 536bb78..4a91b9b 100644
---- a/recipes-ti/dmai/ti-dmai_svn.bb
-+++ b/recipes-ti/dmai/ti-dmai_svn.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://dmai_${PV}_License.html;md5=3302f728a5a42f97cabc26a54
- 
- # This package has high dependence on kernel, use kernel PR as base and append a local version
- PR = "${MACHINE_KERNEL_PR}"
--PR_append = "o"
-+PR_append = "p"
- 
- DMAIBRANCH_dm6446     = "trunk"
- DMAIBRANCH_dm6467     = "branches/GITPSP_INT_101009"
-@@ -34,6 +34,7 @@ SRCREV               ?= "UNDEFINED_SRCREV"
- 
- SRC_URI_append = " file://omap3530-r642-remove-include-videodev.diff;striplevel=3 \
-                    file://r642-fix-config-bld.diff;striplevel=3 \
-+                   file://remove-unneeded-includes.patch \
-                  "
- 
- INSANE_SKIP_${PN} = "installed-vs-shipped"
-
+-- 
+Denys
 
