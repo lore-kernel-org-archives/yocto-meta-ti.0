@@ -1,32 +1,38 @@
-Return-Path: <alexandre.belloni@free-electrons.com>
+Return-Path: <pab@pabigot.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E50F9E00848; Wed,  8 Oct 2014 15:02:12 -0700 (PDT)
+	id CCE7BE0088A; Wed,  8 Oct 2014 16:55:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [68.178.252.109 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mail.free-electrons.com (top.free-electrons.com [176.31.233.9])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E96FE0077F
-	for <meta-ti@yoctoproject.org>; Wed,  8 Oct 2014 15:02:01 -0700 (PDT)
-Received: by mail.free-electrons.com (Postfix, from userid 106)
-	id C1F906D5; Thu,  9 Oct 2014 00:02:03 +0200 (CEST)
-Received: from localhost (128-79-216-6.hfc.dyn.abo.bbox.fr [128.79.216.6])
-	by mail.free-electrons.com (Postfix) with ESMTPSA id 81D44D3;
-	Thu,  9 Oct 2014 00:02:03 +0200 (CEST)
-Date: Thu, 9 Oct 2014 00:01:57 +0200
-From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Message-ID: <20141008220157.GG18916@piout.net>
-References: <20141008161507.GE18916@piout.net> <20141008181338.GT1731@edge>
-	<20141008195358.GF18916@piout.net>
+X-Greylist: delayed 92 seconds by postgrey-1.32 at yocto-www;
+	Wed, 08 Oct 2014 16:55:26 PDT
+Received: from p3plsmtpa11-08.prod.phx3.secureserver.net
+	(p3plsmtpa11-08.prod.phx3.secureserver.net [68.178.252.109])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 46340E00860
+	for <meta-ti@yoctoproject.org>; Wed,  8 Oct 2014 16:55:26 -0700 (PDT)
+Received: from [192.168.65.10] ([75.72.225.8])
+	by p3plsmtpa11-08.prod.phx3.secureserver.net with 
+	id 0nts1p0060BVjqb01ntsfn; Wed, 08 Oct 2014 16:53:53 -0700
+Message-ID: <5435CE8F.3020500@pabigot.com>
+Date: Wed, 08 Oct 2014 18:53:51 -0500
+From: "Peter A. Bigot" <pab@pabigot.com>
+Organization: Peter Bigot Consulting, LLC
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.1.2
 MIME-Version: 1.0
-In-Reply-To: <20141008195358.GF18916@piout.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+To: Denys Dmytriyenko <denis@denix.org>
+References: <540B960B.6080907@pabigot.com> <54197BBF.6070004@pabigot.com>
+	<20141007205837.GF25997@denix.org>
+In-Reply-To: <20141007205837.GF25997@denix.org>
 Cc: meta-ti@yoctoproject.org
-Subject: Re: Issues installing libgles-omap3
+Subject: Re: mis-definition of SLEWCTRL_FAST in dt-bindings amxxxx header
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,53 +45,71 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2014 22:02:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 08 Oct 2014 23:55:27 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 08/10/2014 at 21:53:58 +0200, Alexandre Belloni wrote :
-> On 08/10/2014 at 14:13:38 -0400, Denys Dmytriyenko wrote :
-> > On Wed, Oct 08, 2014 at 06:15:07PM +0200, Alexandre Belloni wrote:
-> > > Hi,
-> > > 
-> > > I'm trying to build an image with poky (daisy) for the am335x-evm. While
-> > > libgles-omap3 builds fine. At the final installation step (do_rootfs for
-> > > my image), it fails with:
-> > > 
-> > > Computing transaction...error: Can't install libgles-omap3-es5-5.01.01.01-r38.1@cortexa8t2hf_vfp_neon: no package provides libews.so
-> > > 
-> > > On another build machine, it fails with:
-> > > 
-> > > Computing transaction...error: Can't install libgles-omap3-es3-5.01.01.01-r38.1@cortexa8t2hf_vfp_neon: no package provides libews.so
-> > > 
-> > > 
-> > > What I don't understand is why it is not selecting libgles-omap3-es8
-> > > which as I understand would be the correct package for ti33x.
-> > > 
-> > > Any insight on how to debug that ?
-> > 
-> > Can you please show how do you pull it into your image. Thanks.
-> > 
-> 
-> Sure, I tried multiple things, but basically, I have:
-> 
-> PREFERRED_PROVIDER_virtual/egl ?= "libgles-omap3"
-> PREFERRED_PROVIDER_virtual/libgles1 ?= "libgles-omap3"
-> PREFERRED_PROVIDER_virtual/libgles2 ?= "libgles-omap3"
-> PREFERRED_PROVIDER_virtual/libgl ?= "mesa-gl"
-> PREFERRED_PROVIDER_virtual/mesa ?= "mesa-gl"
-> 
-> and libgles-omap3 is coming as a dependency of qtbase (from meta-qt5).
-> But I also tried removing qtbase from my image recipe and putting
-> directly either libgles-omap3 or libgles-omap3-es8 in IMAGE_INSTALL,
-> with the same result.
-> 
+Depends what "upstream" means.  It's not in 3.17 released 05 Oct, nor in 
+any other non-TI repository I can find.  (Might be hidden in a TI 
+repository somewhere that I'm not looking.)
 
-Just to let you know, the same image recipe builds fine when using
-meta-arago.
+Peter
 
--- 
-Alexandre Belloni, Free Electrons
-Embedded Linux, Kernel and Android engineering
-http://free-electrons.com
+On 10/07/2014 03:58 PM, Denys Dmytriyenko wrote:
+> Wasn't this already fixed upstream?
+>
+> On Wed, Sep 17, 2014 at 07:17:03AM -0500, Peter A. Bigot wrote:
+>> Any comment on this?  I have a patch, but figured it'd be better for
+>> TI to provide an official solution.  Or is there another forum it
+>> should be raised in?
+>>
+>> It's really misleading for the self-documenting device tree
+>> specifications to lie about what sort of slew is being configured.
+>>
+>> Peter
+>>
+>> On 09/06/2014 06:17 PM, Peter A. Bigot wrote:
+>>> While converting some old DTS bindings, I noticed that the Linux
+>>> include/dt-bindings/pinctrl/am33xx.h and am43xx.h headers both
+>>> define SLEWCTRL_FAST constants:
+>>>
+>>> include/dt-bindings/pinctrl/am33xx.h:#define SLEWCTRL_FAST
+>>> (1 << 6)
+>>> include/dt-bindings/pinctrl/am43xx.h:#define SLEWCTRL_FAST
+>>> (1 << 19)
+>>>
+>>> According to the TRM for these processors, the effect of setting
+>>> that bit is to select slow slew; fast would be selected by leaving
+>>> it cleared.  The constants should therefore be named
+>>> SLEWCTRL_SLOW.
+>>>
+>>> This is consistent with the value for the I2C binding constants
+>>> I'm converting:
+>>>
+>>> beagleboard/3.14:arch/arm/boot/dts/am335x-bone-common-pinmux.dtsi:
+>>> 0x158 0x72      /* spi0_d1.i2c1_sda, SLEWCTRL_SLOW | INPUT_PULLUP
+>>> | MODE2 */
+>>> beagleboard/3.14:arch/arm/boot/dts/am335x-bone-common-pinmux.dtsi:
+>>> 0x15c 0x72      /* spi0_cs0.i2c1_scl, SLEWCTRL_SLOW | INPUT_PULLUP
+>>> | MODE2 */
+>>>
+>>> except that in the official files we have something like:
+>>>
+>>> stable/linux-3.14.y:arch/arm/boot/dts/am43x-epos-evm.dts: 0x188
+>>> (PIN_INPUT_PULLUP | SLEWCTRL_FAST | MUX_MODE0)    /*
+>>> i2c0_sda.i2c0_sda */
+>>> stable/linux-3.14.y:arch/arm/boot/dts/am43x-epos-evm.dts: 0x18c
+>>> (PIN_INPUT_PULLUP | SLEWCTRL_FAST | MUX_MODE0)    /*
+>>> i2c0_scl.i2c0_scl */
+>>>
+>>> which is either wrong or misleading.
+>>>
+>>> Peter
+>> -- 
+>> _______________________________________________
+>> meta-ti mailing list
+>> meta-ti@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/meta-ti
+>>
+
 
