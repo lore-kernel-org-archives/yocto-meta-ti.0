@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 48DC9E0088B; Wed,  8 Oct 2014 11:10:05 -0700 (PDT)
+	id 4F6FEE0088A; Wed,  8 Oct 2014 11:10:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BC837E00786
-	for <meta-ti@yoctoproject.org>; Wed,  8 Oct 2014 11:09:59 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7C40CE00860
+	for <meta-ti@yoctoproject.org>; Wed,  8 Oct 2014 11:10:03 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BEE74529C2; Wed,  8 Oct 2014 18:09:57 +0000 (UTC)
+	id 2ABDD52973; Wed,  8 Oct 2014 18:10:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141008180957.BEE74529C2@arago-project.org>
-Date: Wed,  8 Oct 2014 18:09:57 +0000 (UTC)
+Message-Id: <20141008181003.2ABDD52973@arago-project.org>
+Date: Wed,  8 Oct 2014 18:10:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Enric Balletbo i Serra : ti-linuxutils: Fix build problems for kernel up to 3.17
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 08 Oct 2014 18:10:05 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: a9a74cc33dded238756eb81879d01a6eac64e503
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a9a74cc33dded238756eb81879d01a6eac64e503
+Branch: daisy
+Commit: cbd2f82aad2a29415cd483ccd9fa9b394ae74bbf
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cbd2f82aad2a29415cd483ccd9fa9b394ae74bbf
 
 Author: Enric Balletbo i Serra <eballetbo@iseebcn.com>
 Date:   Wed Oct  8 19:47:46 2014 +0000
