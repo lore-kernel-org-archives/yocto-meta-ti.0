@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 65E1BE00860; Wed,  8 Oct 2014 11:10:05 -0700 (PDT)
+	id 7243CE00857; Wed,  8 Oct 2014 11:10:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6FE27E00857
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 67821E00848
 	for <meta-ti@yoctoproject.org>; Wed,  8 Oct 2014 11:10:03 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 22C8B529B7; Wed,  8 Oct 2014 18:10:03 +0000 (UTC)
+	id 16C2552981; Wed,  8 Oct 2014 18:10:02 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141008181003.22C8B529B7@arago-project.org>
-Date: Wed,  8 Oct 2014 18:10:03 +0000 (UTC)
+Message-Id: <20141008181003.16C2552981@arago-project.org>
+Date: Wed,  8 Oct 2014 18:10:02 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Enric Balletbo i Serra : ti-dsplink: Fix irq mismatch for kernel versions greater than 3.7.0.
+Subject: Enric Balletbo i Serra : ti-dmai: Fix build with recent kernels and compilers.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,76 +38,78 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: c9f00172ade80e62d03270e51b6d13f7c60d19fc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c9f00172ade80e62d03270e51b6d13f7c60d19fc
+Commit: 175d1d47156fc1010c99b2b07bb4704fdcb3337d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=175d1d47156fc1010c99b2b07bb4704fdcb3337d
 
 Author: Enric Balletbo i Serra <eballetbo@iseebcn.com>
-Date:   Wed Oct  8 19:47:45 2014 +0000
+Date:   Wed Oct  8 19:47:44 2014 +0000
 
-ti-dsplink: Fix irq mismatch for kernel versions greater than 3.7.0.
+ti-dmai: Fix build with recent kernels and compilers.
 
-Commit 7d7e1eb (ARM: OMAP2+: Prepare for irqs.h removal) and commit
-ec2c082 (ARM: OMAP2+: Remove hardcoded IRQs and enable SPARSE_IRQ)
-from kernel updated the way interrupts for OMAP2/3 devices are defined.
-
-Fix irq number as dsplink misses to add the NR_IRQS relative offset.
+Remove unused includes that only redefine some typedefs already defined in
+other includes and add the --sysroot flag to fix a linkage problem.
 
 Signed-off-by: Enric Balletbo i Serra <eballetbo@iseebcn.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/dsplink/ti-dsplink.inc                  |    2 +-
- ...splink_1_65_kernel_3_7_0_fix-irq-mismatch.patch |   16 ++++++++++++++++
- recipes-ti/dsplink/ti-dsplink_1.65.00.03.bb        |    1 +
- 3 files changed, 18 insertions(+), 1 deletions(-)
+ .../dmai/ti-dmai/remove-unneeded-includes.patch    |   26 ++++++++++++++++++++
+ recipes-ti/dmai/ti-dmai_svn.bb                     |    3 +-
+ 2 files changed, 28 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-ti/dsplink/ti-dsplink.inc b/recipes-ti/dsplink/ti-dsplink.inc
-index fa1c9dd..78b53cf 100644
---- a/recipes-ti/dsplink/ti-dsplink.inc
-+++ b/recipes-ti/dsplink/ti-dsplink.inc
-@@ -21,7 +21,7 @@ PROVIDES += "ti-dsplink-examples"
- 
- # This package builds a kernel module, use kernel PR as base and append a local version
- PR = "${MACHINE_KERNEL_PR}"
--PR_append = "j"
-+PR_append = "h"
- 
- S = "${WORKDIR}/dsplink_linux_${PV}"
- 
-diff --git a/recipes-ti/dsplink/ti-dsplink/dsplink_1_65_kernel_3_7_0_fix-irq-mismatch.patch b/recipes-ti/dsplink/ti-dsplink/dsplink_1_65_kernel_3_7_0_fix-irq-mismatch.patch
+diff --git a/recipes-ti/dmai/ti-dmai/remove-unneeded-includes.patch b/recipes-ti/dmai/ti-dmai/remove-unneeded-includes.patch
 new file mode 100644
-index 0000000..787c22e
+index 0000000..cfd325a
 --- /dev/null
-+++ b/recipes-ti/dsplink/ti-dsplink/dsplink_1_65_kernel_3_7_0_fix-irq-mismatch.patch
-@@ -0,0 +1,16 @@
-+Index: dsplink_linux_1_65_00_03/dsplink/gpp/src/osal/Linux/2.6.18/isr.c
++++ b/recipes-ti/dmai/ti-dmai/remove-unneeded-includes.patch
+@@ -0,0 +1,26 @@
++Index: a/packages/ti/sdo/dmai/Makefile
 +===================================================================
-+--- dsplink_linux_1_65_00_03.orig/dsplink/gpp/src/osal/Linux/2.6.18/isr.c
-++++ dsplink_linux_1_65_00_03/dsplink/gpp/src/osal/Linux/2.6.18/isr.c
-+@@ -286,7 +286,11 @@ ISR_Create (IN  IsrProc             fnIS
++--- a/packages/ti/sdo/dmai/Makefile
+++++ b/packages/ti/sdo/dmai/Makefile
++@@ -107,7 +107,7 @@ XDCPATH	+= $(XDC_INSTALL_DIR)/packages;$
 + 
-+         if (DSP_SUCCEEDED (status)) {
-+             (*isrObj)->signature = SIGN_ISR       ;
-++#if LINUX_VERSION_CODE < KERNEL_VERSION(3,7,0)
-+             (*isrObj)->irq       = intObj->intId  ;
-++#else
-++            (*isrObj)->irq       = intObj->intId + NR_IRQS ;
-++#endif
-+             (*isrObj)->enabled   = FALSE          ;
-+             (*isrObj)->dspId     = intObj->dspId  ;
-+             (*isrObj)->checkFunc = intObj->checkFunc  ;
-diff --git a/recipes-ti/dsplink/ti-dsplink_1.65.00.03.bb b/recipes-ti/dsplink/ti-dsplink_1.65.00.03.bb
-index 1d6fb00..2606cfc 100644
---- a/recipes-ti/dsplink/ti-dsplink_1.65.00.03.bb
-+++ b/recipes-ti/dsplink/ti-dsplink_1.65.00.03.bb
-@@ -9,6 +9,7 @@ PV_DL_PATH = "DSPLink/${PV_major}/${PV}/${PV_dot}"
++ CPP_FLAGS	+= -I$(XDC_INSTALL_DIR)/packages -I$(DMAI_INSTALL_DIR)/packages -I$(CE_INSTALL_DIR)/packages -I$(FC_INSTALL_DIR)/packages -I$(XDAIS_INSTALL_DIR)/packages -I$(CODEC_INSTALL_DIR)/packages -DDmai_Device_$(PLATFORM_DEVICE)
++ 
++-GCC_CPP_FLAGS	+= $(CPP_FLAGS) -I$(LINUXKERNEL_INSTALL_DIR)/include -I$(LINUXKERNEL_INSTALL_DIR)/arch/arm/include -I$(LINUXKERNEL_INSTALL_DIR)/arch/arm/$(PLATFORM_ARCH)/include $(HAVE_AUTOCONFIG) -I$(CMEM_INSTALL_DIR)/packages -I$(LINK_INSTALL_DIR) -DDmai_BuildOs_linux -Dxdc_target_types__=gnu/targets/std.h -I$(LINUXLIBS_INSTALL_DIR)/include -Dxdc_target_name__=arm/GCArmv5T
+++GCC_CPP_FLAGS	+= $(CPP_FLAGS) $(HAVE_AUTOCONFIG) -I$(CMEM_INSTALL_DIR)/packages -I$(LINK_INSTALL_DIR) -DDmai_BuildOs_linux -Dxdc_target_types__=gnu/targets/std.h -I$(LINUXLIBS_INSTALL_DIR)/include -Dxdc_target_name__=arm/GCArmv5T
++ C64P_CPP_FLAGS	+= $(CPP_FLAGS) -I$(BIOS_INSTALL_DIR)/packages/ti/bios/include -I$(BIOS_INSTALL_DIR)/packages -DDmai_BuildOs_bios -Dxdc_target__='<ti/targets/std.h>' -I$(CODEGEN_INSTALL_DIR)/include -mv6400+ -pdse225 -eo$(PLATFORM_DEVICE).o$(EXT)
++ 
++ GCC_C_FLAGS	+= $(C_FLAGS) -Wall 
++Index: a/packages/ti/sdo/dmai/apps/Makefile.app
++===================================================================
++--- a/packages/ti/sdo/dmai/apps/Makefile.app
+++++ b/packages/ti/sdo/dmai/apps/Makefile.app
++@@ -121,7 +121,7 @@ C64P_C_FLAGS	= $(C_FLAGS)
++ GCC_CPP_FLAGS  	= $(CPP_FLAGS) -I$(LINUXKERNEL_INSTALL_DIR)/include
++ C64P_CPP_FLAGS	= $(CPP_FLAGS) -pdse225 -I$(CODEGEN_INSTALL_DIR)/include -mv6400+ -I$(BIOS_INSTALL_DIR)/packages/ti/bios/include -eo$(PLATFORM_DEVICE).o$(EXT)
++ 
++-GCC_LD_FLAGS	= $(LD_FLAGS) -lpthread -lm -L$(LINUXLIBS_INSTALL_DIR)/lib -lasound
+++GCC_LD_FLAGS	= $(LD_FLAGS) -lpthread -lm --sysroot=$(PKG_CONFIG_SYSROOT_DIR) -L$(LINUXLIBS_INSTALL_DIR)/lib -lasound
++ C64P_LD_FLAGS	= $(LD_FLAGS) -z -w -x -c -i$(RTDX_INSTALL_DIR)/packages/ti/rtdx/iom/lib/debug -i$(RTDX_INSTALL_DIR)/packages/ti/rtdx/cio/lib/release -i$(RTDX_INSTALL_DIR)/packages/ti/rtdx/lib/c6000 
++ 
++ SOURCES 	= $(wildcard *.c)
+diff --git a/recipes-ti/dmai/ti-dmai_svn.bb b/recipes-ti/dmai/ti-dmai_svn.bb
+index 536bb78..4a91b9b 100644
+--- a/recipes-ti/dmai/ti-dmai_svn.bb
++++ b/recipes-ti/dmai/ti-dmai_svn.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://dmai_${PV}_License.html;md5=3302f728a5a42f97cabc26a54
  
- SRC_URI += "file://dsplink-BKL-fix.patch \
-             file://0001-remove-check-for-make-version-3.85-works-fine.patch \
-+            file://dsplink_1_65_kernel_3_7_0_fix-irq-mismatch.patch \
-            "
+ # This package has high dependence on kernel, use kernel PR as base and append a local version
+ PR = "${MACHINE_KERNEL_PR}"
+-PR_append = "o"
++PR_append = "p"
  
- SRC_URI[dsplinktarball.md5sum] = "1bda596b631bd2f517edc70f6be4f2ca"
+ DMAIBRANCH_dm6446     = "trunk"
+ DMAIBRANCH_dm6467     = "branches/GITPSP_INT_101009"
+@@ -34,6 +34,7 @@ SRCREV               ?= "UNDEFINED_SRCREV"
+ 
+ SRC_URI_append = " file://omap3530-r642-remove-include-videodev.diff;striplevel=3 \
+                    file://r642-fix-config-bld.diff;striplevel=3 \
++                   file://remove-unneeded-includes.patch \
+                  "
+ 
+ INSANE_SKIP_${PN} = "installed-vs-shipped"
 
 
