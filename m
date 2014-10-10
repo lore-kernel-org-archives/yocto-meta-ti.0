@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A1592E00872; Fri, 10 Oct 2014 14:28:02 -0700 (PDT)
+	id 7DFAEE00875; Fri, 10 Oct 2014 14:28:03 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7FC54E00781
-	for <meta-ti@yoctoproject.org>; Fri, 10 Oct 2014 14:27:54 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 80F6CE0078E
+	for <meta-ti@yoctoproject.org>; Fri, 10 Oct 2014 14:27:56 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E2DC3529C2; Fri, 10 Oct 2014 21:27:53 +0000 (UTC)
+	id 8168952A78; Fri, 10 Oct 2014 21:27:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141010212753.E2DC3529C2@arago-project.org>
-Date: Fri, 10 Oct 2014 21:27:53 +0000 (UTC)
+Message-Id: <20141010212756.8168952A78@arago-project.org>
+Date: Fri, 10 Oct 2014 21:27:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update with latest fixes
+Subject: Denys Dmytriyenko : linux-ti-staging 3.12: update to 3.12.30 stable
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,45 +33,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Oct 2014 21:28:02 -0000
+X-List-Received-Date: Fri, 10 Oct 2014 21:28:03 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 129783a9cba7902feb7f35d390b37d96b733a201
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=129783a9cba7902feb7f35d390b37d96b733a201
+Branch: daisy
+Commit: a6f4056b62198d9331e66c0942d075d63c2be4bb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a6f4056b62198d9331e66c0942d075d63c2be4bb
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Oct 11 02:53:13 2014 +0000
+Date:   Sat Oct 11 02:53:12 2014 +0000
 
-u-boot-ti-staging: update with latest fixes
+linux-ti-staging 3.12: update to 3.12.30 stable
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb |    4 ++--
+ recipes-kernel/linux/linux-ti-staging_3.12.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
-index a020299..d6343b5 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
-@@ -8,13 +8,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index 68b6104..27a3f35 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -39,8 +39,8 @@ S = "${WORKDIR}/git"
  
- PV = "2014.07"
--PR = "r2+gitr${SRCPV}"
-+PR = "r3+gitr${SRCPV}"
+ BRANCH = "ti-linux-3.12.y"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+-SRCREV = "595e0e568639ef203725532e9f4a767e8a7e3281"
+-PV = "3.12.29"
++SRCREV = "68f449afccf6d1fb6b38bddfc3a40d9e97b53bdf"
++PV = "3.12.30"
  
- BRANCH ?= "ti-u-boot-2014.07"
- 
--SRCREV = "00ddc45a9cbecb0f70fecdecf7f31bc1d5602dc0"
-+SRCREV = "8f725ef650595fa23b1cf6fccd20389ec029e2dd"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
 
 
