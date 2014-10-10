@@ -1,26 +1,34 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 09C9CE0078E; Fri, 10 Oct 2014 12:16:33 -0700 (PDT)
+	id 00E52E007B9; Fri, 10 Oct 2014 13:53:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [206.46.173.19 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 18D0DE00781
-	for <meta-ti@yoctoproject.org>; Fri, 10 Oct 2014 12:16:31 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 00046529CD; Fri, 10 Oct 2014 19:16:30 +0000 (UTC)
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 82734E0076C
+	for <meta-ti@yoctoproject.org>; Fri, 10 Oct 2014 13:53:46 -0700 (PDT)
+Received: from gandalf.denix.org ([unknown] [108.18.33.160])
+	by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0ND80079ZY0RMB80@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 10 Oct 2014 15:53:31 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id B787A20142; Fri,
+	10 Oct 2014 16:53:15 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20141010191631.00046529CD@arago-project.org>
-Date: Fri, 10 Oct 2014 19:16:30 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : Revert "dra7xx: add "mmip" to MACHINE_FEATURES"
+Date: Fri, 10 Oct 2014 16:53:11 -0400
+Message-id: <1412974393-11323-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.1.2
+Subject: [PATCH 1/3] linux-ti-staging 3.14: update to latest with connectivity, pm, a/d fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,37 +41,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Oct 2014 19:16:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 10 Oct 2014 20:53:50 -0000
 
-Module: meta-ti
-Branch: daisy
-Commit: ae064c55f3da416df7e37db3c339834ef13656ac
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ae064c55f3da416df7e37db3c339834ef13656ac
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Oct 10 14:55:44 2014 -0400
-
-Revert "dra7xx: add "mmip" to MACHINE_FEATURES"
-
-Results in gstreamer conflicts in SDK.
-
-This reverts commit 2dce435ff1dc09637d62f59d179fb89c468c0818.
-
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
+ recipes-kernel/linux/linux-ti-staging_3.14.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- conf/machine/include/dra7xx.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/conf/machine/include/dra7xx.inc b/conf/machine/include/dra7xx.inc
-index a7c8782..857e1b3 100644
---- a/conf/machine/include/dra7xx.inc
-+++ b/conf/machine/include/dra7xx.inc
-@@ -1,4 +1,4 @@
- require conf/machine/include/omap-a15.inc
- SOC_FAMILY_append = ":dra7xx"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 180a038..4c5ddf3 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -44,11 +44,11 @@ S = "${WORKDIR}/git"
  
--MACHINE_FEATURES += "pci mmip"
-+MACHINE_FEATURES += "pci"
+ BRANCH = "ti-linux-3.14.y"
+ 
+-SRCREV = "bdbce705b538fb18116afbcf62a59d2fb602de5e"
++SRCREV = "4590fc1f771056d620bf964af7202fea7f743380"
+ PV = "3.14.19"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+-- 
+2.1.2
 
 
