@@ -1,49 +1,42 @@
-Return-Path: <diego.sueiro@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 65D84E00799; Thu, 16 Oct 2014 03:22:14 -0700 (PDT)
+	id AD846E00873; Thu, 16 Oct 2014 18:31:44 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (diego.sueiro[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.216.172 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-qc0-f172.google.com (mail-qc0-f172.google.com
-	[209.85.216.172])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E95EDE006EF
-	for <meta-ti@yoctoproject.org>; Thu, 16 Oct 2014 03:22:09 -0700 (PDT)
-Received: by mail-qc0-f172.google.com with SMTP id o8so2440429qcw.17
-	for <meta-ti@yoctoproject.org>; Thu, 16 Oct 2014 03:22:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=xTncxggGxuk5LmC0Ty/D8mlHRvipo3HJVxaPftqjxTA=;
-	b=hlzpUtszrD4uoxRLtV/lRF95YnzhWG/a8+tbH+vmlHH4pa0EAMKJVQD+B4Z/Qrsc74
-	QYQS32Az0yfI0JGTz2DFjI0JBfqoj9lnV73ad/sX0TODnMuBrFQPvnz6kEI3+wuMcgEw
-	8OBOVOXECaat4v/XcVJXq8oGeo6wL5TWnq+yJBOzSGmcHWdHXiWIb8i64pW4OqP/sYG3
-	CdaFJ9hX3/84etwc/Sp5iKJgvzVkMIcLGUeMXFGX692Bb0PAXOwZMvj7UQZSGpeVryq7
-	HWeQV0rYsSMRlVwV0RQu9UNNhA8d1ZT7JV8o1ojePg50GpLvENo/xDNvoYpJuS8FuHW/
-	3cVA==
-X-Received: by 10.140.40.227 with SMTP id x90mr392109qgx.69.1413454928651;
-	Thu, 16 Oct 2014 03:22:08 -0700 (PDT)
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 09FF4E0079E
+	for <meta-ti@yoctoproject.org>; Thu, 16 Oct 2014 18:31:39 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s9H1VcXP029703
+	for <meta-ti@yoctoproject.org>; Thu, 16 Oct 2014 20:31:38 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s9H1Vc8v021376
+	for <meta-ti@yoctoproject.org>; Thu, 16 Oct 2014 20:31:38 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 16 Oct 2014 20:31:38 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s9H1Vb6c002203	for <meta-ti@yoctoproject.org>; Thu, 16 Oct 2014 20:31:38
+	-0500
+Date: Thu, 16 Oct 2014 21:11:48 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <612926753.51.1413508308958.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Received: by 10.140.82.20 with HTTP; Thu, 16 Oct 2014 03:21:48 -0700 (PDT)
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Thu, 16 Oct 2014 07:21:48 -0300
-Message-ID: <CAMCfZKHsJuUaAvJj2z1NGb9dMKJZLdOPedDsjbxQEnAV8vGEaw@mail.gmail.com>
-To: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: omap3-sgx-modules-5.01.01.01 compile fail
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-10-16_21-01-10
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,144 +49,189 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2014 10:22:14 -0000
-Content-Type: multipart/alternative; boundary=001a11c120a0edae310505879e81
+X-List-Received-Date: Fri, 17 Oct 2014 01:31:44 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_50_2103949465.1413508308956"
 
---001a11c120a0edae310505879e81
-Content-Type: text/plain; charset=ISO-8859-1
+------=_Part_50_2103949465.1413508308956
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Folks,
+<html>
+<head>
+<title>
+Status for 10/16/14
+</title>
+</head>
+<body>
 
-After updating my local repo (daisy branch) omap3-sgx-modules fails on
-compile task:
+<h2>Status for 10/16/14</h2>
 
-Log data follows:
-| DEBUG: Executing shell function do_compile
-| NOTE: make -j 8 -e MAKEFLAGS=
-KERNEL_PATH=/<snip>/tmp-eglibc/sysroots/beaglebone/usr/src/kernel
-KERNEL_SRC=/<snip>/tmp-eglibc/sysroots/beaglebone/usr/src/kernel
-KERNEL_VERSION=3.14.19 CC=arm-qubit-linux-gnueabi-gcc  -mno-thumb-interwork
--marm LD=arm-qubit-linux-gnueabi-ld.bfd   AR=arm-qubit-linux-gnueabi-ar
- BUILD=release TI_PLATFORM=ti335x SUPPORT_XORG=
-| make -C /<snip>/tmp-eglibc/sysroots/beaglebone/usr/src/kernel M=`pwd`
-| make[1]: Entering directory
-`/<snip>/tmp-eglibc/sysroots/beaglebone/usr/src/kernel'
-|   CC [M]
- /<snip>/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM/services4/srvkm/env/linux/module.o
-|
-/<snip>/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM/services4/srvkm/env/linux/module.c:
-In function 'PVRSRVDriverProbe':
-|
-/<snip>/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM/services4/srvkm/env/linux/module.c:411:2:
-error: implicit declaration of function 'reset_control_clear_reset'
-[-Werror=implicit-function-declaration]
-|   ret = reset_control_clear_reset(rstc);
-|   ^
-|
-/<snip>/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM/services4/srvkm/env/linux/module.c:471:17:
-error: implicit declaration of function 'reset_control_is_reset'
-[-Werror=implicit-function-declaration]
-|                  ret = reset_control_is_reset(rstc);
-|                  ^
-|
-/<snip>/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM/services4/srvkm/env/linux/module.c:399:32:
-warning: unused variable 'pdata' [-Wunused-variable]
-|   struct gfx_sgx_platform_data *pdata = dev->platform_data;
-|                                 ^
-| cc1: some warnings being treated as errors
-| make[2]: ***
-[/<snip>/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM/services4/srvkm/env/linux/module.o]
-Error 1
-| make[1]: ***
-[_module_/<snip>/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM]
-Error 2
-| make[1]: Leaving directory
-`/<snip>/tmp-eglibc/sysroots/beaglebone/usr/src/kernel'
-| make: *** [all] Error 2
-| ERROR: oe_runmake failed
-| WARNING:
-/<snip>/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.01-r22c/temp/run.do_compile.29491:1
-exit 1 from
-|   exit 1
-| ERROR: Function failed: do_compile (log file is located at
-/<snip>/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.01-r22c/temp/log.do_compile.29491)
-ERROR: Task 2915 (/<snip>/poky/meta-ti/recipes-bsp/powervr-drivers/
-omap3-sgx-modules_5.01.01.01.bb, do_compile) failed with exit code '1'
+<h2>BUILD_ID: build-2014-10-16_21-02-14</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.10"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-
-
-Regards,
-
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br
-<http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
-
-/*long live rock 'n roll*/
-
---001a11c120a0edae310505879e81
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Folks,</div><div><br></div><div>After updating my loc=
-al repo (daisy branch) omap3-sgx-modules fails on compile task:</div><div><=
-br></div><div><div>Log data follows:</div><div>| DEBUG: Executing shell fun=
-ction do_compile</div><div>| NOTE: make -j 8 -e MAKEFLAGS=3D KERNEL_PATH=3D=
-/&lt;snip&gt;/tmp-eglibc/sysroots/beaglebone/usr/src/kernel KERNEL_SRC=3D/&=
-lt;snip&gt;/tmp-eglibc/sysroots/beaglebone/usr/src/kernel KERNEL_VERSION=3D=
-3.14.19 CC=3Darm-qubit-linux-gnueabi-gcc =A0-mno-thumb-interwork -marm LD=
-=3Darm-qubit-linux-gnueabi-ld.bfd =A0 AR=3Darm-qubit-linux-gnueabi-ar =A0BU=
-ILD=3Drelease TI_PLATFORM=3Dti335x SUPPORT_XORG=3D</div><div>| make -C /&lt=
-;snip&gt;/tmp-eglibc/sysroots/beaglebone/usr/src/kernel M=3D`pwd`</div><div=
->| make[1]: Entering directory `/&lt;snip&gt;/tmp-eglibc/sysroots/beaglebon=
-e/usr/src/kernel&#39;</div><div>| =A0 CC [M] =A0/&lt;snip&gt;/tmp-eglibc/wo=
-rk/beaglebone-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.01-r22c/Graphic=
-s_SDK_5_01_01_01/GFX_Linux_KM/services4/srvkm/env/linux/module.o</div><div>=
-| /&lt;snip&gt;/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-mo=
-dules/5.01.01.01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM/services4/srvkm/=
-env/linux/module.c: In function &#39;PVRSRVDriverProbe&#39;:</div><div>| /&=
-lt;snip&gt;/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-module=
-s/5.01.01.01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM/services4/srvkm/env/=
-linux/module.c:411:2: error: implicit declaration of function &#39;reset_co=
-ntrol_clear_reset&#39; [-Werror=3Dimplicit-function-declaration]</div><div>=
-| =A0 ret =3D reset_control_clear_reset(rstc);</div><div>| =A0 ^</div><div>=
-| /&lt;snip&gt;/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-mo=
-dules/5.01.01.01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM/services4/srvkm/=
-env/linux/module.c:471:17: error: implicit declaration of function &#39;res=
-et_control_is_reset&#39; [-Werror=3Dimplicit-function-declaration]</div><di=
-v>| =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0ret =3D reset_control_is_reset(rstc)=
-;</div><div>| =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0^</div><div>| /&lt;snip&gt=
-;/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.=
-01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM/services4/srvkm/env/linux/modu=
-le.c:399:32: warning: unused variable &#39;pdata&#39; [-Wunused-variable]</=
-div><div>| =A0 struct gfx_sgx_platform_data *pdata =3D dev-&gt;platform_dat=
-a;</div><div>| =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 ^</div><div>| cc1: some warnings being treated as errors</div><div>| ma=
-ke[2]: *** [/&lt;snip&gt;/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/om=
-ap3-sgx-modules/5.01.01.01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM/servic=
-es4/srvkm/env/linux/module.o] Error 1</div><div>| make[1]: *** [_module_/&l=
-t;snip&gt;/tmp-eglibc/work/beaglebone-qubit-linux-gnueabi/omap3-sgx-modules=
-/5.01.01.01-r22c/Graphics_SDK_5_01_01_01/GFX_Linux_KM] Error 2</div><div>| =
-make[1]: Leaving directory `/&lt;snip&gt;/tmp-eglibc/sysroots/beaglebone/us=
-r/src/kernel&#39;</div><div>| make: *** [all] Error 2</div><div>| ERROR: oe=
-_runmake failed</div><div>| WARNING: /&lt;snip&gt;/tmp-eglibc/work/beaglebo=
-ne-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.01-r22c/temp/run.do_compil=
-e.29491:1 exit 1 from</div><div>| =A0 exit 1</div><div>| ERROR: Function fa=
-iled: do_compile (log file is located at /&lt;snip&gt;/tmp-eglibc/work/beag=
-lebone-qubit-linux-gnueabi/omap3-sgx-modules/5.01.01.01-r22c/temp/log.do_co=
-mpile.29491)</div><div>ERROR: Task 2915 (/&lt;snip&gt;/poky/meta-ti/recipes=
--bsp/powervr-drivers/<a href=3D"http://omap3-sgx-modules_5.01.01.01.bb">oma=
-p3-sgx-modules_5.01.01.01.bb</a>, do_compile) failed with exit code &#39;1&=
-#39;</div></div><div><br></div><div><br></div><div><br></div><br clear=3D"a=
-ll"><div><div dir=3D"ltr"><div>Regards,</div><div><br></div>--<br>*dS<br>Di=
-ego Sueiro<br><br>Administrador do Embarcados<br><a href=3D"http://www.emba=
-rcados.com.br/?utm_source=3Dassinatura_diego&amp;utm_medium=3De-mail&amp;ut=
-m_campaign=3DAssinatura%20Email%20Diego" target=3D"_blank">www.embarcados.c=
-om.br</a><br><br>/*long live rock &#39;n roll*/<br></div></div>
-</div>
-
---001a11c120a0edae310505879e81--
+------=_Part_50_2103949465.1413508308956--
