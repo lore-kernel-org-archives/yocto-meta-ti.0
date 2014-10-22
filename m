@@ -1,6 +1,6 @@
 Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8F844E008B0; Wed, 22 Oct 2014 11:05:31 -0700 (PDT)
+	id B8419E00863; Wed, 22 Oct 2014 11:11:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,19 +12,19 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1F834E007D6
-	for <meta-ti@yoctoproject.org>; Wed, 22 Oct 2014 11:05:21 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BDD5E007D6
+	for <meta-ti@yoctoproject.org>; Wed, 22 Oct 2014 11:11:05 -0700 (PDT)
 Received: from dbdlxv05.itg.ti.com ([172.24.171.60])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s9MI5Er8009161;
-	Wed, 22 Oct 2014 13:05:15 -0500
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s9MIAn1S012722;
+	Wed, 22 Oct 2014 13:10:50 -0500
 Received: from DBDE72.ent.ti.com (dbdmailx.itg.ti.com [172.24.171.97])
-	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id s9MI5BoV016588;
-	Wed, 22 Oct 2014 23:35:12 +0530
+	by dbdlxv05.itg.ti.com (8.14.3/8.13.8) with ESMTP id s9MIAlE3016763;
+	Wed, 22 Oct 2014 23:40:48 +0530
 Received: from [172.22.216.89] (172.22.216.89) by DBDE72.ent.ti.com
 	(172.24.171.97) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Wed, 22 Oct 2014 23:35:10 +0530
-Message-ID: <5447F1D5.50508@ti.com>
-Date: Wed, 22 Oct 2014 23:35:09 +0530
+	Wed, 22 Oct 2014 23:40:45 +0530
+Message-ID: <5447F323.1010701@ti.com>
+Date: Wed, 22 Oct 2014 23:40:43 +0530
 From: Karthik Ramanan <a0393906@ti.com>
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
 	rv:17.0) Gecko/20130620 Thunderbird/17.0.7
@@ -47,12 +47,9 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2014 18:05:31 -0000
+X-List-Received-Date: Wed, 22 Oct 2014 18:11:10 -0000
 Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
-
-Looks good to me.
-ACK.
 
 On 22-Oct-14 11:08 PM, Denys Dmytriyenko wrote:
 > From: Karthik Ramanan <a0393906@ti.com>
@@ -107,6 +104,9 @@ On 22-Oct-14 11:08 PM, Denys Dmytriyenko wrote:
 > -SRC_URI[dra7xx-evm.sha256sum] = "0b26fd13f9c318b52c18b9bff56862ef1f58a768b19285b87c035e65bc828ddc"
 > +SRC_URI[dra7xx-evm.md5sum] = "8e1ae40eb10d631318d001463fa11d79"
 > +SRC_URI[dra7xx-evm.sha256sum] = "30c275146c34d11dbc2dfd568f0bbc3098a13cd981eee8a7a9766cb07d2f1ca5"
+
+Had another look. Would this work, dra7xx-evm?
+
 >
 >   # OMAP5 checksums
 >   SRC_URI[omap5-evm.md5sum] = "1572073ebd4f6d127c4e8cf47d270b6a"
