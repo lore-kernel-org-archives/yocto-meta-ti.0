@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2D7DBE0089E; Mon, 27 Oct 2014 19:04:23 -0700 (PDT)
+	id 2F08BE008B8; Mon, 27 Oct 2014 19:04:23 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C0554E0089E
-	for <meta-ti@yoctoproject.org>; Mon, 27 Oct 2014 19:04:13 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64E24E00878
+	for <meta-ti@yoctoproject.org>; Mon, 27 Oct 2014 19:04:17 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D7E7352A66; Tue, 28 Oct 2014 02:04:12 +0000 (UTC)
+	id 1955652AB4; Tue, 28 Oct 2014 02:04:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141028020412.D7E7352A66@arago-project.org>
-Date: Tue, 28 Oct 2014 02:04:12 +0000 (UTC)
+Message-Id: <20141028020414.1955652AB4@arago-project.org>
+Date: Tue, 28 Oct 2014 02:04:14 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : boot-monitor: Update to latest tag 14.09
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 28 Oct 2014 02:04:23 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: c06f25913317160e03d172df73919edf9bdf8554
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c06f25913317160e03d172df73919edf9bdf8554
+Branch: master
+Commit: 3096ee95d1770a4215589447b055f4d3648a889e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3096ee95d1770a4215589447b055f4d3648a889e
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Tue Oct 28 01:48:32 2014 +0000
