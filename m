@@ -1,27 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2FB94E008BA; Mon, 27 Oct 2014 19:04:23 -0700 (PDT)
+	id 3030CE008CD; Mon, 27 Oct 2014 19:04:23 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
-	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
-	*  2.5 TO_NO_BRKTS_PCNT To: misformatted + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 65400E0087E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 655C8E008BA
 	for <meta-ti@yoctoproject.org>; Mon, 27 Oct 2014 19:04:17 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id AE28552A6D; Tue, 28 Oct 2014 02:04:13 +0000 (UTC)
+	id E66A052AAE; Tue, 28 Oct 2014 02:04:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141028020413.AE28552A6D@arago-project.org>
+Message-Id: <20141028020413.E66A052AAE@arago-project.org>
 Date: Tue, 28 Oct 2014 02:04:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : dspdce-fw: Updated dspdce firmware for latest IPC version
+Subject: Sam Nelson : u-boot-keystone: Update to latest tag 2013_01_14.09
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,56 +38,36 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 61396da367b8483461e016eb6a7ccfdc3018241e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=61396da367b8483461e016eb6a7ccfdc3018241e
+Commit: 8893c47468a9466de629f5e9542e88869a736a4f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8893c47468a9466de629f5e9542e88869a736a4f
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Mon Oct 27 14:41:20 2014 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Tue Oct 28 01:47:08 2014 +0000
 
-dspdce-fw: Updated dspdce firmware for latest IPC version
+u-boot-keystone: Update to latest tag 2013_01_14.09
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- ...ce-fw_1.00.00.02.bb => dspdce-fw_1.00.00.04.bb} |   12 +++++++-----
- 1 files changed, 7 insertions(+), 5 deletions(-)
+ recipes-bsp/u-boot/u-boot-keystone_2013.01.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.02.bb b/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb
-similarity index 52%
-rename from recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.02.bb
-rename to recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb
-index 69e9814..d8d5b01 100644
---- a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.02.bb
-+++ b/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb
-@@ -1,16 +1,16 @@
--DESCRIPTION = "Firmware for DSP "
-+DESCRIPTION = "Firmware for DSP for an example application called copycodectest"
- LICENSE = "TI-TSPA"
--LIC_FILES_CHKSUM = "file://DSPDCE-${PV}-Manifest.doc;md5=587a7b9fdd99f98fbe99af4a4ba3362a"
-+LIC_FILES_CHKSUM = "file://DSPDCE-${PV}-Manifest.doc;md5=b8feda5a3ed8197d05993c0d0ff5590e"
+diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+index 37f7738..a464d14 100644
+--- a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
++++ b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
+@@ -6,8 +6,8 @@ COMPATIBLE_MACHINE = "keystone"
  
- COMPATIBLE_MACHINE = "dra7xx-evm"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ PR = "r5+gitr${SRCPV}"
  
--SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00_00_02/exports/dspdce-${MACHINE}-1.00.00.02.tar.gz;protocol=http"
-+SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00_00_04/exports/dspdce-${MACHINE}-1.00.00.04.tar.gz;protocol=ftp"
+-# Tag "K2_UBOOT_2013_01_14.05_16"
+-SRCREV = "fee500417b989fc9906d86e377b4d3d96033d54e"
++# Tag "K2_UBOOT_2013_01_14.09"
++SRCREV = "f9bc365551ff8c685bf6134d795576713fec0917"
+ BRANCH = "master"
  
- S = "${WORKDIR}/dspdce-${MACHINE}-${PV}"
- 
--SRC_URI[md5sum] = "df19baf16f828b5d32b4eed50f0364f5"
--SRC_URI[sha256sum] = "0c0f34674110d1ef0300b61b572a326daffb95a31cc9d45888b2e50a83c6f555"
-+SRC_URI[md5sum] = "72722b12e90c26a85f7f1b56d749cad0"
-+SRC_URI[sha256sum] = "64057db41dbee5a992db88129a9154f27c67cfbba8efdc0f09b7de38df4d58eb"
- 
- TARGET = "dra7-dsp1-fw.xe66"
- 
-@@ -22,3 +22,5 @@ do_install() {
- FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
- 
- INSANE_SKIP_${PN} = "arch"
-+
-+PR = "r1"
+ SRC_URI = "git://git.ti.com/keystone-linux/u-boot.git;protocol=git;branch=${BRANCH}"
 
 
