@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3030CE008CD; Mon, 27 Oct 2014 19:04:23 -0700 (PDT)
+	id 66C8BE008B8; Mon, 27 Oct 2014 19:04:23 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 655C8E008BA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F0B00E00873
 	for <meta-ti@yoctoproject.org>; Mon, 27 Oct 2014 19:04:17 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E66A052AAE; Tue, 28 Oct 2014 02:04:13 +0000 (UTC)
+	id C5D8852AA9; Tue, 28 Oct 2014 02:04:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141028020413.E66A052AAE@arago-project.org>
+Message-Id: <20141028020413.C5D8852AA9@arago-project.org>
 Date: Tue, 28 Oct 2014 02:04:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : u-boot-keystone: Update to latest tag 2013_01_14.09
+Subject: Sam Nelson : linux-keystone: update to the latest tag 03.10.10_14.09_01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,36 +38,52 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 8893c47468a9466de629f5e9542e88869a736a4f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8893c47468a9466de629f5e9542e88869a736a4f
+Commit: a0a56512b56c1e965817a19c7fdd149b2512ef70
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a0a56512b56c1e965817a19c7fdd149b2512ef70
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Oct 28 01:47:08 2014 +0000
+Date:   Mon Oct 27 22:59:30 2014 +0000
 
-u-boot-keystone: Update to latest tag 2013_01_14.09
+linux-keystone: update to the latest tag 03.10.10_14.09_01
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-keystone_2013.01.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-keystone-rt_3.10.bb |    4 ++--
+ recipes-kernel/linux/linux-keystone_3.10.bb    |    4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-index 37f7738..a464d14 100644
---- a/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-+++ b/recipes-bsp/u-boot/u-boot-keystone_2013.01.bb
-@@ -6,8 +6,8 @@ COMPATIBLE_MACHINE = "keystone"
+diff --git a/recipes-kernel/linux/linux-keystone-rt_3.10.bb b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
+index 70073f9..860d421 100644
+--- a/recipes-kernel/linux/linux-keystone-rt_3.10.bb
++++ b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
+@@ -19,8 +19,8 @@ KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
  
- PR = "r5+gitr${SRCPV}"
+ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
  
--# Tag "K2_UBOOT_2013_01_14.05_16"
--SRCREV = "fee500417b989fc9906d86e377b4d3d96033d54e"
-+# Tag "K2_UBOOT_2013_01_14.09"
-+SRCREV = "f9bc365551ff8c685bf6134d795576713fec0917"
+-# This commit corresponds to "K2_RT_LINUX_03.10.10_14.03_03"
+-SRCREV = "6b482abe6a18d004230ca54da866f4627f02125b"
++#This commit corresponds to "K2_RT_LINUX_03.10.10_14.09_01"
++SRCREV = "2b53a7b58e95c2cf3426fe95203e7fc082bc56e9"
+ PV = "3.10.10"
+ 
+ BRANCH = "master-rt"
+diff --git a/recipes-kernel/linux/linux-keystone_3.10.bb b/recipes-kernel/linux/linux-keystone_3.10.bb
+index e90c9fc..4475632 100644
+--- a/recipes-kernel/linux/linux-keystone_3.10.bb
++++ b/recipes-kernel/linux/linux-keystone_3.10.bb
+@@ -19,8 +19,8 @@ KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
+ 
+ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+ 
+-# This commit corresponds to "K2_LINUX_03.10.10_14.03_03"
+-SRCREV = "07176920ed86dfdae97d272f574c3e2760d687ef"
++#This commit corresponds to "K2_LINUX_03.10.10_14.09_01"
++SRCREV = "a59abdfadb821f27cc43b16d3f641960ba143746"
+ PV = "3.10.10"
+ 
  BRANCH = "master"
- 
- SRC_URI = "git://git.ti.com/keystone-linux/u-boot.git;protocol=git;branch=${BRANCH}"
 
 
