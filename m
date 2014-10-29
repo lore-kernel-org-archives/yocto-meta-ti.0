@@ -1,41 +1,44 @@
-Return-Path: <denys@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A8F93E0082F; Tue, 28 Oct 2014 18:35:25 -0700 (PDT)
+	id 50B4BE00877; Wed, 29 Oct 2014 07:40:28 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5997BE007BA
-	for <meta-ti@yoctoproject.org>; Tue, 28 Oct 2014 18:35:21 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s9T1ZKkS023029
-	for <meta-ti@yoctoproject.org>; Tue, 28 Oct 2014 20:35:20 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s9T1ZKvu025167
-	for <meta-ti@yoctoproject.org>; Tue, 28 Oct 2014 20:35:20 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 28 Oct 2014 20:35:20 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s9T1ZK2f014088;	Tue, 28 Oct 2014 20:35:20 -0500
-Date: Tue, 28 Oct 2014 21:15:02 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>, <denys@ti.com>
-Message-ID: <1452988173.99.1414545303237.JavaMail.jenkins@puget>
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B970E00799
+	for <meta-ti@yoctoproject.org>; Wed, 29 Oct 2014 07:40:16 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s9TEeGpQ031326
+	for <meta-ti@yoctoproject.org>; Wed, 29 Oct 2014 09:40:16 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s9TEeGDr022279
+	for <meta-ti@yoctoproject.org>; Wed, 29 Oct 2014 09:40:16 -0500
+Received: from DFLE09.ent.ti.com ([fe80::7090:147d:b5eb:4c12]) by
+	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
+	14.03.0174.001; Wed, 29 Oct 2014 09:40:15 -0500
+From: "Stiffler, Jacob" <j-stiffler@ti.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>, "R, Karthik"
+	<karthik.ramanan@ti.com>
+Thread-Topic: [meta-ti] Karthik Ramanan : dspdce-fw: Updated dspdce firmware
+	for	latest IPC version
+Thread-Index: AQHP8lQdzzJwHymd00S/k7SfHjLazJxHJ3AA
+Date: Wed, 29 Oct 2014 14:40:15 +0000
+Message-ID: <4B26FB5A64EBA14C87266869E037F958140B72CE@DFLE09.ent.ti.com>
+References: <20141028020412.9D39452A6A@arago-project.org>
+In-Reply-To: <20141028020412.9D39452A6A@arago-project.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-10-28_21-01-11
+Subject: Re: Karthik Ramanan : dspdce-fw: Updated dspdce firmware for	latest IPC version
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,189 +51,92 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Oct 2014 01:35:25 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_98_1127737749.1414545302983"
+X-List-Received-Date: Wed, 29 Oct 2014 14:40:28 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_98_1127737749.1414545302983
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Karthik,
 
-<html>
-<head>
-<title>
-Status for 10/28/14
-</title>
-</head>
-<body>
+What is the version of IPC with which this fw and the ipumm-fw is built?
 
-<h2>Status for 10/28/14</h2>
+Thank you,
+Jake
 
-<h2>BUILD_ID: build-2014-10-28_21-02-15</h2>
+-----Original Message-----
+From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject=
+.org] On Behalf Of Arago Project git
+Sent: Monday, October 27, 2014 10:04 PM
+To: meta-ti@yoctoproject.org
+Subject: [meta-ti] Karthik Ramanan : dspdce-fw: Updated dspdce firmware for=
+ latest IPC version
 
-<h2>Clean Build: false</h2>
+Module: meta-ti
+Branch: daisy
+Commit: 19c88084c2818e30907d8a10fe24f9f87b59430a
+URL:    http://arago-project.org/git/meta-ti.git?a=3Dcommit;h=3D19c88084c28=
+18e30907d8a10fe24f9f87b59430a
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Mon Oct 27 14:41:20 2014 +0000
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+dspdce-fw: Updated dspdce firmware for latest IPC version
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.10"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+---
 
-</body>
-</html>
+ ...ce-fw_1.00.00.02.bb =3D> dspdce-fw_1.00.00.04.bb} |   12 +++++++-----
+ 1 files changed, 7 insertions(+), 5 deletions(-)
 
+diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.02.bb b/recipes-bsp/ds=
+pdce-fw/dspdce-fw_1.00.00.04.bb
+similarity index 52%
+rename from recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.02.bb
+rename to recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb
+index 69e9814..d8d5b01 100644
+--- a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.02.bb
++++ b/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb
+@@ -1,16 +1,16 @@
+-DESCRIPTION =3D "Firmware for DSP "
++DESCRIPTION =3D "Firmware for DSP for an example application called copyco=
+dectest"
+ LICENSE =3D "TI-TSPA"
+-LIC_FILES_CHKSUM =3D "file://DSPDCE-${PV}-Manifest.doc;md5=3D587a7b9fdd99f=
+98fbe99af4a4ba3362a"
++LIC_FILES_CHKSUM =3D "file://DSPDCE-${PV}-Manifest.doc;md5=3Db8feda5a3ed81=
+97d05993c0d0ff5590e"
+=20
+ COMPATIBLE_MACHINE =3D "dra7xx-evm"
+ PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+=20
+-SRC_URI =3D "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00=
+_00_02/exports/dspdce-${MACHINE}-1.00.00.02.tar.gz;protocol=3Dhttp"
++SRC_URI =3D "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00=
+_00_04/exports/dspdce-${MACHINE}-1.00.00.04.tar.gz;protocol=3Dftp"
+=20
+ S =3D "${WORKDIR}/dspdce-${MACHINE}-${PV}"
+=20
+-SRC_URI[md5sum] =3D "df19baf16f828b5d32b4eed50f0364f5"
+-SRC_URI[sha256sum] =3D "0c0f34674110d1ef0300b61b572a326daffb95a31cc9d45888=
+b2e50a83c6f555"
++SRC_URI[md5sum] =3D "72722b12e90c26a85f7f1b56d749cad0"
++SRC_URI[sha256sum] =3D "64057db41dbee5a992db88129a9154f27c67cfbba8efdc0f09=
+b7de38df4d58eb"
+=20
+ TARGET =3D "dra7-dsp1-fw.xe66"
+=20
+@@ -22,3 +22,5 @@ do_install() {
+ FILES_${PN} +=3D "${base_libdir}/firmware/${TARGET}"
+=20
+ INSANE_SKIP_${PN} =3D "arch"
++
++PR =3D "r1"
 
-------=_Part_98_1127737749.1414545302983--
+--=20
+_______________________________________________
+meta-ti mailing list
+meta-ti@yoctoproject.org
+https://lists.yoctoproject.org/listinfo/meta-ti
+
