@@ -1,38 +1,42 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1896CE008C9; Wed,  5 Nov 2014 14:17:19 -0800 (PST)
+	id 7786EE00830; Wed,  5 Nov 2014 18:31:49 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0C28E0080D
-	for <meta-ti@yoctoproject.org>; Wed,  5 Nov 2014 14:17:10 -0800 (PST)
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 231C4E0076C
+	for <meta-ti@yoctoproject.org>; Wed,  5 Nov 2014 18:31:45 -0800 (PST)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id sA5MH9kD023795
-	for <meta-ti@yoctoproject.org>; Wed, 5 Nov 2014 16:17:09 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id sA5MH92H010059
-	for <meta-ti@yoctoproject.org>; Wed, 5 Nov 2014 16:17:09 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 5 Nov 2014 16:17:09 -0600
-Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	sA5MH9TN001855;	Wed, 5 Nov 2014 16:17:09 -0600
-From: Sam Nelson <sam.nelson@ti.com>
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id sA62VioQ007482
+	for <meta-ti@yoctoproject.org>; Wed, 5 Nov 2014 20:31:44 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id sA62ViEn029557
+	for <meta-ti@yoctoproject.org>; Wed, 5 Nov 2014 20:31:44 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Wed, 5 Nov 2014 20:31:44 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	sA62ViHv006031	for <meta-ti@yoctoproject.org>;
+	Wed, 5 Nov 2014 20:31:44 -0600
+Date: Wed, 5 Nov 2014 21:11:08 -0500
+From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 5 Nov 2014 17:17:04 -0500
-Message-ID: <1415225824-26713-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.7.9.5
+Message-ID: <815115506.133.1415239868844.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Subject: [PATCH v2] hyplnk-lld: Add new recipe for Hyperlink lld
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-11-05_21-01-11
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,128 +49,189 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Nov 2014 22:17:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 06 Nov 2014 02:31:49 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_132_1968394163.1415239868841"
 
-- Provides low level driver for Hyperlink module
-- Test recipe is used to build tests and examples using
-  the hyperlink library.
-- Supports k2h, k2k & k2e
+------=_Part_132_1968394163.1415239868841
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
----
-Changes from previous patch
-- Formatting changes
-- Removed {} for non shell variables
-- Make lines organised into multiple lines
-- Added consistent use of {S} instead of PWD
----
----
- recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb |   32 +++++++++++++++++++++++++
- recipes-bsp/hyplnk-lld/hyplnk-lld.inc         |   24 +++++++++++++++++++
- recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb      |   22 +++++++++++++++++
- 3 files changed, 78 insertions(+)
- create mode 100755 recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
- create mode 100644 recipes-bsp/hyplnk-lld/hyplnk-lld.inc
- create mode 100755 recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
+<html>
+<head>
+<title>
+Status for 11/05/14
+</title>
+</head>
+<body>
 
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
-new file mode 100755
-index 0000000..8212c97
---- /dev/null
-+++ b/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
-@@ -0,0 +1,32 @@
-+include hyplnk-lld.inc
-+
-+DEPENDS = "common-csl-ip hyplnk-lld"
-+
-+CHOICELIST = " yes \
-+               no  \
-+"
-+
-+do_compile () {
-+	make -f makefile_armv7 clean PDK_INSTALL_PATH="${STAGING_INCDIR}" \
-+		HYPLNK_SRC_DIR="${S}"
-+	for device in ${DEVICELIST}
-+	do
-+		for choice in ${CHOICELIST}
-+		do
-+			make -f makefile_armv7 tests examples \
-+				PDK_INSTALL_PATH="${STAGING_INCDIR}" \
-+				DEVICE="$device" HYPLNK_SRC_DIR="${S}" \
-+				USEDYNAMIC_LIB="$choice"
-+		done
-+	done
-+}
-+
-+do_install () {
-+    for device in ${DEVICELIST}
-+	do
-+		make -f makefile_armv7 installbin \
-+			PDK_INSTALL_PATH="${STAGING_INCDIR}" DEVICE="$device" \
-+			HYPLNK_SRC_DIR="${S}" \
-+			INSTALL_BIN_BASE_DIR="${D}/${bindir}"
-+	done
-+}
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-new file mode 100644
-index 0000000..4c8bb32
---- /dev/null
-+++ b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "TI Hyperlink Low Level Driver"
-+LICENSE = "BSD-3-Clause"
-+
-+COMPATIBLE_MACHINE = "keystone"
-+
-+LLDNAME="hyplnk"
-+
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/${LLDNAME}/COPYING.txt;md5=623325cc19e613a4e770fbb749922592"
-+
-+BRANCH="master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/hyplnk-lld.git;destsuffix=git/ti/drv/${LLDNAME};protocol=git;branch=${BRANCH}"
-+# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.01
-+SRCREV = "6910da379501984ecf27f8d23ba6fc6310fe387e"
-+
-+PV = "2.1.0"
-+PR = "r0"
-+
-+DEVICELIST = " k2h \
-+               k2k \
-+               k2e \
-+"
-+
-+BASEDIR = "${WORKDIR}/git"
-+S = "${BASEDIR}/ti/drv/${LLDNAME}"
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
-new file mode 100755
-index 0000000..a582f98
---- /dev/null
-+++ b/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
-@@ -0,0 +1,22 @@
-+include hyplnk-lld.inc
-+
-+DEPENDS = "common-csl-ip"
-+
-+CHOICELIST = " yes \
-+               no  \
-+"
-+do_compile () {
-+	make -f makefile_armv7 clean PDK_INSTALL_PATH="${STAGING_INCDIR}" \
-+		HYPLNK_SRC_DIR="${S}"
-+	for device in ${DEVICELIST}
-+	do
-+		make -f makefile_armv7 lib PDK_INSTALL_PATH="${STAGING_INCDIR}"\
-+			DEVICE="$device" HYPLNK_SRC_DIR="${S}"
-+	done
-+}
-+
-+do_install () {
-+	make -f makefile_armv7 install PDK_INSTALL_PATH="${STAGING_INCDIR}" \
-+		INSTALL_INC_BASE_DIR="${D}/${includedir}" \
-+		INSTALL_LIB_BASE_DIR="${D}${libdir}" HYPLNK_SRC_DIR="${S}"
-+}
--- 
-1.7.9.5
+<h2>Status for 11/05/14</h2>
+
+<h2>BUILD_ID: build-2014-11-05_21-02-14</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.10"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin02.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_132_1968394163.1415239868841--
