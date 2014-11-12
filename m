@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3A95AE007C1; Wed, 12 Nov 2014 11:54:30 -0800 (PST)
+	id 3C7BFE00777; Wed, 12 Nov 2014 11:54:30 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 16207E00769
-	for <meta-ti@yoctoproject.org>; Wed, 12 Nov 2014 11:54:19 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 14E7AE005B7
+	for <meta-ti@yoctoproject.org>; Wed, 12 Nov 2014 11:54:16 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id AC1BF52A57; Wed, 12 Nov 2014 19:54:18 +0000 (UTC)
+	id 8126852A43; Wed, 12 Nov 2014 19:54:15 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141112195418.AC1BF52A57@arago-project.org>
-Date: Wed, 12 Nov 2014 19:54:18 +0000 (UTC)
+Message-Id: <20141112195415.8126852A43@arago-project.org>
+Date: Wed, 12 Nov 2014 19:54:15 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : hyplnk-lld: Add new recipe for Hyperlink lld
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 12 Nov 2014 19:54:30 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: b8854f7969ef8d7ca1db52aaf693cee6d64bb645
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b8854f7969ef8d7ca1db52aaf693cee6d64bb645
+Branch: master
+Commit: 0e3d63eb9f1c8cce6228eb424eea1aa2aa835cb9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0e3d63eb9f1c8cce6228eb424eea1aa2aa835cb9
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Thu Nov  6 04:17:04 2014 +0000
