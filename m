@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C1B42E007BA; Fri, 14 Nov 2014 18:29:16 -0800 (PST)
+	id D26EDE008C8; Sat, 15 Nov 2014 18:28:36 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,35 +8,35 @@ X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
 	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [192.94.94.40 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 897B4E005B7
-	for <meta-ti@yoctoproject.org>; Fri, 14 Nov 2014 18:29:13 -0800 (PST)
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6CC2DE0085F
+	for <meta-ti@yoctoproject.org>; Sat, 15 Nov 2014 18:28:33 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id sAF2TCFs024152
-	for <meta-ti@yoctoproject.org>; Fri, 14 Nov 2014 20:29:12 -0600
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id sAG2SX3j023316
+	for <meta-ti@yoctoproject.org>; Sat, 15 Nov 2014 20:28:33 -0600
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id sAF2TCaB011253
-	for <meta-ti@yoctoproject.org>; Fri, 14 Nov 2014 20:29:12 -0600
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id sAG2SX4x002560
+	for <meta-ti@yoctoproject.org>; Sat, 15 Nov 2014 20:28:33 -0600
 Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 14 Nov 2014 20:29:12 -0600
+	Sat, 15 Nov 2014 20:28:32 -0600
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	sAF2TCVK030856	for <meta-ti@yoctoproject.org>; Fri, 14 Nov 2014 20:29:12
+	sAG2SWQU003184	for <meta-ti@yoctoproject.org>; Sat, 15 Nov 2014 20:28:32
 	-0600
-Date: Fri, 14 Nov 2014 21:08:15 -0500
+Date: Sat, 15 Nov 2014 21:07:34 -0500
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1495018487.173.1416017295985.JavaMail.jenkins@puget>
+Message-ID: <369784617.177.1416103654161.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-11-14_21-01-10
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-11-15_21-01-10
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,25 +49,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Nov 2014 02:29:16 -0000
+X-List-Received-Date: Sun, 16 Nov 2014 02:28:36 -0000
 Content-Type: multipart/mixed;
-	boundary="----=_Part_172_382386273.1416017295984"
+	boundary="----=_Part_176_997419357.1416103654160"
 
-------=_Part_172_382386273.1416017295984
+------=_Part_176_997419357.1416103654160
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 11/14/14
+Status for 11/15/14
 </title>
 </head>
 <body>
 
-<h2>Status for 11/14/14</h2>
+<h2>Status for 11/15/14</h2>
 
-<h2>BUILD_ID: build-2014-11-14_21-02-13</h2>
+<h2>BUILD_ID: build-2014-11-15_21-02-12</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -234,4 +234,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_172_382386273.1416017295984--
+------=_Part_176_997419357.1416103654160--
