@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 99BFCE00873; Fri, 21 Nov 2014 12:11:59 -0800 (PST)
+	id 9B6CCE0085D; Fri, 21 Nov 2014 12:11:59 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7772DE005B7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 78A44E0076C
 	for <meta-ti@yoctoproject.org>; Fri, 21 Nov 2014 12:11:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id AF892529EB; Fri, 21 Nov 2014 20:11:51 +0000 (UTC)
+	id 94917529B3; Fri, 21 Nov 2014 20:11:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141121201151.AF892529EB@arago-project.org>
+Message-Id: <20141121201151.94917529B3@arago-project.org>
 Date: Fri, 21 Nov 2014 20:11:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-mainline: update to 3.14.25
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 3.14.25
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,37 +38,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 2684ab439158cb723047aa571bead51b1a790ba4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2684ab439158cb723047aa571bead51b1a790ba4
+Commit: 1e91f4a2eedd53e915b1e58881ebd995bbe4979d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1e91f4a2eedd53e915b1e58881ebd995bbe4979d
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Nov 22 00:55:32 2014 +0000
+Date:   Sat Nov 22 00:55:27 2014 +0000
 
-linux-mainline: update to 3.14.25
+linux-ti-staging: update to 3.14.25
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-mainline_3.14.bb |    6 +++---
+ recipes-kernel/linux/linux-ti-staging_3.14.bb |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-mainline_3.14.bb b/recipes-kernel/linux/linux-mainline_3.14.bb
-index 32491b7..440e170 100644
---- a/recipes-kernel/linux/linux-mainline_3.14.bb
-+++ b/recipes-kernel/linux/linux-mainline_3.14.bb
-@@ -32,9 +32,9 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 4c5ddf3..fa64840 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -44,11 +44,11 @@ S = "${WORKDIR}/git"
  
- BRANCH = "linux-3.14.y"
+ BRANCH = "ti-linux-3.14.y"
  
--# Corresponds to tag v3.14.20
--SRCREV = "2023c00d650dfa409e58539596aca7d9deded824"
--PV = "3.14.20"
-+# Corresponds to tag v3.14.25
-+SRCREV = "2dc2565902d3c24108c4b7101e91957fd068a242"
+-SRCREV = "4590fc1f771056d620bf964af7202fea7f743380"
+-PV = "3.14.19"
++SRCREV = "5dcfe16d0585aeed7158820e934a5e43ff017476"
 +PV = "3.14.25"
  
- SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
