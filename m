@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B70AEE0085D; Fri, 21 Nov 2014 11:55:59 -0800 (PST)
+	id B250AE0076C; Fri, 21 Nov 2014 11:56:00 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,31 +8,31 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.21 listed in list.dnswl.org]
+	*      [206.46.173.23 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 2059 seconds by postgrey-1.32 at yocto-www;
-	Fri, 21 Nov 2014 11:55:57 PST
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BB780E005B7
-	for <meta-ti@yoctoproject.org>; Fri, 21 Nov 2014 11:55:57 -0800 (PST)
-Received: from gandalf.denix.org ([108.18.33.160]) by vms173021.mailsrvcs.net
+X-Greylist: delayed 3609 seconds by postgrey-1.32 at yocto-www;
+	Fri, 21 Nov 2014 11:55:59 PST
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 81C5DE0076C
+	for <meta-ti@yoctoproject.org>; Fri, 21 Nov 2014 11:55:59 -0800 (PST)
+Received: from gandalf.denix.org ([108.18.33.160]) by vms173023.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
 	16 2014))
-	with ESMTPSA id <0NFE00MIJND8FTP0@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Fri, 21 Nov 2014 13:55:56 -0600 (CST)
+	with ESMTPSA id <0NFE00I1SKKF4V10@vms173023.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 21 Nov 2014 12:55:28 -0600 (CST)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=IOK10brD c=1 sm=1 tr=0	a=A8KAnipHuDHkz1LiHkTZyg==:117
+X-CMAE-Analysis: v=2.1 cv=AKpDk7pY c=1 sm=1 tr=0	a=A8KAnipHuDHkz1LiHkTZyg==:117
 	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=5y4faFyK3SkA:10
 	a=sozttTNsAAAA:8	a=-EdC4w1VNuq7U9Rkd8YA:9
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id B7DFB200E2;	Fri,
-	21 Nov 2014 14:55:54 -0500 (EST)
+	by gandalf.denix.org (Postfix) with ESMTP id C21BD2010D;	Fri,
+	21 Nov 2014 13:55:27 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Fri, 21 Nov 2014 14:55:54 -0500
-Message-id: <1416599754-21402-1-git-send-email-denis@denix.org>
+Date: Fri, 21 Nov 2014 13:55:27 -0500
+Message-id: <1416596127-8363-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.1.2
 Subject: [PATCH] linux-ti-staging: update to 3.14.25
 X-BeenThere: meta-ti@yoctoproject.org
@@ -47,7 +47,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2014 19:55:59 -0000
+X-List-Received-Date: Fri, 21 Nov 2014 19:56:00 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
