@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9B6CCE0085D; Fri, 21 Nov 2014 12:11:59 -0800 (PST)
+	id 59436E008FB; Fri, 21 Nov 2014 12:12:01 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 78A44E0076C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 79DC9E00849
 	for <meta-ti@yoctoproject.org>; Fri, 21 Nov 2014 12:11:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 94917529B3; Fri, 21 Nov 2014 20:11:51 +0000 (UTC)
+	id CA62852A63; Fri, 21 Nov 2014 20:11:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141121201151.94917529B3@arago-project.org>
+Message-Id: <20141121201151.CA62852A63@arago-project.org>
 Date: Fri, 21 Nov 2014 20:11:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 3.14.25
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update 2014.07 with few fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,44 +33,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2014 20:11:59 -0000
+X-List-Received-Date: Fri, 21 Nov 2014 20:12:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 1e91f4a2eedd53e915b1e58881ebd995bbe4979d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1e91f4a2eedd53e915b1e58881ebd995bbe4979d
+Commit: 9ce5c18442e03cb027c7e936b5042c3e9c015b82
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9ce5c18442e03cb027c7e936b5042c3e9c015b82
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Nov 22 00:55:27 2014 +0000
+Date:   Sat Nov 22 00:22:00 2014 +0000
 
-linux-ti-staging: update to 3.14.25
+u-boot-ti-staging: update 2014.07 with few fixes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index 4c5ddf3..fa64840 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -44,11 +44,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
+index d6343b5..d3cea77 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
+@@ -8,13 +8,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
  
- BRANCH = "ti-linux-3.14.y"
+ PV = "2014.07"
+-PR = "r3+gitr${SRCPV}"
++PR = "r4+gitr${SRCPV}"
  
--SRCREV = "4590fc1f771056d620bf964af7202fea7f743380"
--PV = "3.14.19"
-+SRCREV = "5dcfe16d0585aeed7158820e934a5e43ff017476"
-+PV = "3.14.25"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
+ BRANCH ?= "ti-u-boot-2014.07"
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+-SRCREV = "8f725ef650595fa23b1cf6fccd20389ec029e2dd"
++SRCREV = "6ff3f70e38ca6933a7dcfb84eefd0597e9558bc3"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
