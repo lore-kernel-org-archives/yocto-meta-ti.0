@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B3340E0077F; Sat, 22 Nov 2014 18:31:45 -0800 (PST)
+	id 82F6CE0089B; Sun, 23 Nov 2014 18:31:54 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,29 +14,29 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB7CFE006B3
-	for <meta-ti@yoctoproject.org>; Sat, 22 Nov 2014 18:31:43 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id sAN2VgUD024269
-	for <meta-ti@yoctoproject.org>; Sat, 22 Nov 2014 20:31:42 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id sAN2Vgvq009989
-	for <meta-ti@yoctoproject.org>; Sat, 22 Nov 2014 20:31:42 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Sat, 22 Nov 2014 20:31:42 -0600
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0AF28E00837
+	for <meta-ti@yoctoproject.org>; Sun, 23 Nov 2014 18:31:52 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id sAO2VpVk032544
+	for <meta-ti@yoctoproject.org>; Sun, 23 Nov 2014 20:31:51 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id sAO2VpTr021867
+	for <meta-ti@yoctoproject.org>; Sun, 23 Nov 2014 20:31:51 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
+	Sun, 23 Nov 2014 20:31:51 -0600
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	sAN2VfD1027503	for <meta-ti@yoctoproject.org>; Sat, 22 Nov 2014 20:31:41
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	sAO2VpuQ000377	for <meta-ti@yoctoproject.org>; Sun, 23 Nov 2014 20:31:51
 	-0600
-Date: Sat, 22 Nov 2014 21:10:27 -0500
+Date: Sun, 23 Nov 2014 21:10:34 -0500
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1826984251.211.1416708627219.JavaMail.jenkins@puget>
+Message-ID: <1784373210.215.1416795034244.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-11-22_21-01-10
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-11-23_21-01-10
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,25 +49,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Nov 2014 02:31:45 -0000
+X-List-Received-Date: Mon, 24 Nov 2014 02:31:54 -0000
 Content-Type: multipart/mixed;
-	boundary="----=_Part_210_1339810378.1416708627216"
+	boundary="----=_Part_214_198154580.1416795034243"
 
-------=_Part_210_1339810378.1416708627216
+------=_Part_214_198154580.1416795034243
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 11/22/14
+Status for 11/23/14
 </title>
 </head>
 <body>
 
-<h2>Status for 11/22/14</h2>
+<h2>Status for 11/23/14</h2>
 
-<h2>BUILD_ID: build-2014-11-22_21-02-13</h2>
+<h2>BUILD_ID: build-2014-11-23_21-02-14</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -234,4 +234,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_210_1339810378.1416708627216--
+------=_Part_214_198154580.1416795034243--
