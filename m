@@ -1,41 +1,59 @@
-Return-Path: <denys@ti.com>
+Return-Path: <cliff.brake@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2D517E008D6; Mon, 24 Nov 2014 18:34:08 -0800 (PST)
+	id D8586E0085F; Tue, 25 Nov 2014 07:43:12 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, MIME_QP_LONG_LINE,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (cliff.brake[at]gmail.com)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.213.169 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 858DBE00832
-	for <meta-ti@yoctoproject.org>; Mon, 24 Nov 2014 18:34:03 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id sAP2Y2OJ024456
-	for <meta-ti@yoctoproject.org>; Mon, 24 Nov 2014 20:34:02 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id sAP2Y2YR018421
-	for <meta-ti@yoctoproject.org>; Mon, 24 Nov 2014 20:34:02 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Mon, 24 Nov 2014 20:34:02 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	sAP2Y2Xs017330;	Mon, 24 Nov 2014 20:34:02 -0600
-Date: Mon, 24 Nov 2014 21:12:43 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>, <denys@ti.com>
-Message-ID: <152134877.219.1416881563059.JavaMail.jenkins@puget>
+	* 0.0 MIME_QP_LONG_LINE RAW: Quoted-printable line longer than 76 chars
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-ig0-f169.google.com (mail-ig0-f169.google.com
+	[209.85.213.169])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 54825E0084A
+	for <meta-ti@yoctoproject.org>; Tue, 25 Nov 2014 07:43:06 -0800 (PST)
+Received: by mail-ig0-f169.google.com with SMTP id hl2so6974793igb.4
+	for <meta-ti@yoctoproject.org>; Tue, 25 Nov 2014 07:43:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:mime-version:message-id:from:to:subject:content-type
+	:content-transfer-encoding;
+	bh=IqYu7s5fiAC0fKrBUZ8GnpwHbIzgYYkkJ78Bu5IelpA=;
+	b=h62SiI03U97FxwGAnnSM/55WR/FESVV2WuNYCaNRODeUglFnJi87J/U7rxEtbVyTlK
+	Mlkvw1LICIHoYwmj3SGAhAU+6FU4OCVMPAEHGbOqL2ONcfVJ9khps6TEoYYfc4I9mlF3
+	zjXpZGgw/rr+SSNqtkKF5UWEcDcbM/+SwdvVAjBiq2LdBKYQxG/ZQ7AuucaM9yp+jVog
+	DwvcAHTk2D/eaSDvCK5QFTLXwgcjkKY0SsKx7A58SK3rB43UnqHQl58lvUb2XgxPxIud
+	6By60fUqSx9r/I0UP3IZmJpc88MrsLBaaLKJ3mp9yiNnasamLR2dyi8yq+8CE2mm6uDM
+	7Q6A==
+X-Received: by 10.50.134.225 with SMTP id pn1mr17725183igb.33.1416930185105;
+	Tue, 25 Nov 2014 07:43:05 -0800 (PST)
+Received: from [127.0.0.1] (cable2-pool191-cs-105.doycomm.com.
+	[66.219.191.105])
+	by mx.google.com with ESMTPSA id c17sm730131ioc.9.2014.11.25.07.43.03
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 25 Nov 2014 07:43:04 -0800 (PST)
+Date: Tue, 25 Nov 2014 07:43:04 -0800 (PST)
+X-Google-Original-Date: Tue, 25 Nov 2014 15:43:03 GMT
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-11-24_21-01-10
+X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
+Message-Id: <1416930183142.83d8ab1c@Nodemailer>
+From: cliff.brake@gmail.com
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
+Subject: OE Changelog since 2014-11-16 until 2014-11-23
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,189 +66,447 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2014 02:34:08 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_218_712454281.1416881563056"
+X-List-Received-Date: Tue, 25 Nov 2014 15:43:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-------=_Part_218_712454281.1416881563056
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Changelog since 2014-11-16 until 2014-11-23.  Projects included in this =
+report:
 
-<html>
-<head>
-<title>
-Status for 11/24/14
-</title>
-</head>
-<body>
+bitbake: git://git.openembedded.org/bitbake
+openembedded-core: git://git.openembedded.org/openembedded-core
+meta-openembedded: git://git.openembedded.org/meta-openembedded
+meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
+meta-arago: git://arago-project.org/git/meta-arago.git
+meta-atmel: https://github.com/linux4sam/meta-atmel.git
+meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
+meta-browser: git://github.com/OSSystems/meta-browser.git
+meta-bug: git://github.com/buglabs/meta-bug.git
+meta-chicken: git://github.com/OSSystems/meta-chicken
+meta-efikamx: git://github.com/kraj/meta-efikamx.git
+meta-ettus: http://github.com/koenkooi/meta-ettus.git
+meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
+meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
+meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
+meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
+meta-gumstix: git://github.com/gumstix/meta-gumstix.git
+meta-gumstix-community: =
+git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
+meta-handheld: git://git.openembedded.org/meta-handheld
+meta-igep: http://github.com/ebutera/meta-igep.git
+meta-intel: git://git.yoctoproject.org/meta-intel
+meta-ivi: git://git.yoctoproject.org/meta-ivi
+meta-java: git://github.com/woglinde/meta-java
+meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
+meta-micro: git://git.openembedded.org/meta-micro
+meta-mono: git://git.yoctoproject.org/meta-mono.git
+meta-netbookpro: git://github.com/tworaz/meta-netbookpro
+meta-nslu2: git://github.com/kraj/meta-nslu2
+meta-opie: git://git.openembedded.org/meta-opie
+meta-qt3: git://git.yoctoproject.org/meta-qt3
+meta-qt5: git://github.com/meta-qt5/meta-qt5.git
+meta-slugos: git://github.com/kraj/meta-slugos
+meta-systemd: git://git.yoctoproject.org/meta-systemd
+meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
+meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
+meta-ti: git://git.yoctoproject.org/meta-ti
+meta-webos: git://github.com/openwebos/meta-webos.git
+meta-xilinx: git://git.yoctoproject.org/meta-xilinx
+meta-yocto: git://git.yoctoproject.org/meta-yocto
+openembedded: git://git.openembedded.org/openembedded
 
-<h2>Status for 11/24/14</h2>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for bitbake:
 
-<h2>BUILD_ID: build-2014-11-24_21-02-16</h2>
+Alexandru DAMIAN (1):
+=20=20toastergui: layer name correlation
 
-<h2>Clean Build: false</h2>
+Belen Barros Pena (5):
+=20=20toaster: fix file name collision
+=20=20toaster: Tiny refinements to the new build button dialog
+=20=20toaster: add no results state to all layers page
+=20=20toaster: fix dependencies dialog layout
+=20=20toaster: do not show target if target name is empty
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+Michael Wood (5):
+=20=20toaster: skip virtualenv when searching for django apps
+=20=20toaster: Create libtoaster.js with some utility functions
+=20=20toaster: libtoaster: Add getProjectInfo utility function
+=20=20toaster: Add New Build Button feature
+=20=20toaster: project page remove additional tooltip for Change pencil
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+Otavio Salvador (1):
+=20=20bb.codeparser.py: Remove reference for oe.utils.contains
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+Robert Yang (1):
+=20=20bitbake-worker: exit normally when SIGHUP
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.11"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+Ross Burton (1):
+=20=20depexp: use stateForceShutdown instead of stateStop
 
-</body>
-</html>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded-core:
+
+Alexandru DAMIAN (1):
+=20=20toaster: add toaster layer configuration files
+
+Andrei Gherzan (1):
+=20=20xkeyboard-config: Inherit gettext
+
+Changhyeok Bae (1):
+=20=20ethtool: Upgrade to 3.16
+
+Chong Lu (2):
+=20=20tcl: Upgrade to 8.6.3
+=20=20byacc: Upgrade to 20141006
+
+Hongxu Jia (4):
+=20=20ghostscript: upgrade to 9.15
+=20=20parted: upgrade to 3.2
+=20=20gcc-4.9: fix the compile failure of 'defaults.h' not found
+=20=20postinst-intercept: rename recipe for nativesdk only
+
+Javier Viguera (1):
+=20=20shadow-securetty: add ttyAM[0-3] serial ports
+
+Krzysztof Sywula (1):
+=20=20dtc: old SRC_URI died, changing to new working one
+
+Otavio Salvador (3):
+=20=20toolchain-scripts.bbclass: Export KCFLAGS to ensure sysroot is =
+provided
+=20=20sysvinit-inittab: Disable the carrier detect requirement for serial =
+consoles
+=20=20systemd-serialgetty: Disable the carrier detect requirement for =
+serial conso
+
+Paul Eggleton (4):
+=20=20openssh: drop already applied patch
+=20=20cmake: drop already applied patches
+=20=20xmodmap: drop already applied patch
+=20=20gtk+: drop part of patch adding useless file
+
+Richard Tollerton (3):
+=20=20util-linux: break out util-linux-getopt
+=20=20default-providers.inc: define VIRTUAL-RUNTIME_getopt
+=20=20lsb: update RDEPENDS for broken-out util-linux-getopt
+
+Robert Yang (1):
+=20=20toolchain-shar-template.sh: fix the text files in the top dir
+
+Ross Burton (2):
+=20=20bind: use PACKAGE_BEFORE_PN instead of PACKAGES_prepend
+=20=20cups: remove unrecognised option
+
+Roy.Li (1):
+=20=20rpm: fix the rpm addsign function
+
+Tobias Olausson (1):
+=20=20spdx.bbclass: improved error handling and code cleanup
+
+Wenzong Fan (1):
+=20=20python: Fix CVE-2014-7185
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-openembedded:
+
+Andrea Adami (3):
+=20=20klibc: define KLIBCLIBGCC
+=20=20ubi-utils-klibc_1.5.0: remove recipe and patches
+=20=20ubi-utils-klibc_1.5.1: initial commit of v. 1.5.1
+
+Andreas M=C3=BCller (2):
+=20=20xfce4-weather-plugin: make work properly after met.no API change
+=20=20gvfs: replace deprecated g_memmove by memmove
+
+Armin Kuster (1):
+=20=20wireshark: update to 1.12.2
+
+Bian Naimeng (2):
+=20=20libesmtp: port from openembedded.
+=20=20esmpt: port from openembedded.
+
+Jackie Huang (1):
+=20=20postfix.inc: Remove references to buildmachine paths in target =
+makedefs.out
+
+Kai Kang (1):
+=20=20polarssl: add dependency openssl
+
+Mario Domenech Goulart (2):
+=20=20gtest: add recipe
+=20=20gmock: add recipe
+
+Martin Jansa (1):
+=20=20postfix: Fix indentation
+
+Peter Bigot (2):
+=20=20imagemagick: update URI to allow fetching current and previous =
+releases
+=20=20imagemagick: update 6.8.9 to patchset 9
+
+Xufeng Zhang (1):
+=20=20syslog-ng: Fix memory leak when udp connection is used [ LIN7-1379 ]
+
+Yevhen Kyriukha (1):
+=20=20rabbitmq-c: update to v0.5.2.
+
+Zhenhua Luo (1):
+=20=20ptpd: add FSL QorIQ DPAA and eTSEC support
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-angstrom:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-arago:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-atmel:
+
+Josh Wu (5):
+=20=20qt-demo-init-v1.1: remove tslib as we can use linux touch event =
+directly
+=20=20Use touchscreen evdev directly.
+=20=20atmel-qt5-demo-image: remove tslib features
+=20=20atmel-qt5-demo-image: add post process command to remove tslib plugin =
+in qt=20
+=20=20qt-demo-init-v1.1: support mouse support
+
+Nicolas Ferre (1):
+=20=20at91bootstrap: use 3.7.1 revision for all boards
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-beagleboard:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-browser:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-bug:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-chicken:
+
+Mario Domenech Goulart (52):
+=20=20gen-egg-recipes: add CHICKEN major version to URI paths
+=20=20Update all egg recipes' SRC_URI to point to the right path for =
+CHICKEN 4
+=20=20chicken-egg-awful-sql-de-lite: update to version 0.6.0
+=20=20chicken-egg-awful: update to version 0.41.0
+=20=20chicken-egg-clojurian: update to version 0.0.5
+=20=20chicken-egg-comparse: update to version 0.1.0
+=20=20chicken-egg-crypt: update to version 0.4.3
+=20=20chicken-egg-html-parser: update to version 0.5.6
+=20=20chicken-egg-html-utils: update to version 0.10
+=20=20chicken-egg-http-client: update to version 0.7.1
+=20=20chicken-egg-ini-file: update to version 0.3.4
+=20=20chicken-egg-intarweb: update to version 1.3
+=20=20chicken-egg-md5: update to version 3.1.0
+=20=20chicken-egg-medea: update to version 0.1.5
+=20=20chicken-egg-message-digest: update to version 3.1.0
+=20=20chicken-egg-miscmacros: update to version 2.96
+=20=20chicken-egg-numbers: update to version 3.1
+=20=20chicken-egg-openssl: update to version 1.6.4
+=20=20chicken-egg-pastiche: update to version 0.22
+=20=20chicken-egg-scss: update to version 0.5.0
+=20=20chicken-egg-sendfile: update to version 1.7.29
+=20=20chicken-egg-server-test: update to version 0.5
+=20=20chicken-egg-setup-helper: update to version 1.5.4
+=20=20chicken-egg-siphash: update to version 0.0.3
+=20=20chicken-egg-slice: update to version 1.2
+=20=20chicken-egg-spiffy: update to version 5.3.1
+=20=20chicken-egg-sql-de-lite: update to version 0.6.3
+=20=20chicken-egg-srfi-99: update to version 1.4.2
+=20=20chicken-egg-stty: update to version 0.2.5
+=20=20chicken-egg-test: update to version 0.9.9.8
+=20=20chicken-egg-uri-common: update to version 1.4
+=20=20chicken-egg-uri-generic: update to version 2.41
+=20=20chicken-egg-variable-item: update to version 1.3.1
+=20=20chicken: use autotools-brokensep instead of autotools
+=20=20chicken: use the class-cross override instead of virtclass-cross
+=20=20chicken: fix build options
+=20=20chicken_install.bbclass: use the class-cross override instead of =
+virtclass-c
+=20=20chicken-egg-protobj: add SRC_URI and sum hashes
+=20=20chicken-egg-message-digest: add chicken-egg-message-digest-cross to =
+DEPENDS
+=20=20chicken-egg-easyffi: add chicken-egg-easyffi-cross to DEPENDS
+=20=20Update egg recipes to use class-cross instead of virtclass-cross
+=20=20gen-egg-recipes: add protobj
+=20=20gen-egg-recipes: generate recipes using class-cross override
+=20=20gen-egg-recipes: message-digest depends on its cross binaries
+=20=20gen-egg-recipes: easyffi depends on its cross binaries
+=20=20chicken-egg-utf8: add recipe for version 3.3.9
+=20=20chicken-egg-iset: add recipe for version 1.9
+=20=20gen-egg-recipes: add utf8 egg
+=20=20scripts/gen-egg-list: add script to generate a list of all eggs
+=20=20all-chicken-egg-recipes.inc: add file with a list of all available =
+eggs
+=20=20chicken-test-image: add image recipe which includes all eggs
+=20=20chicken-test-image-sdk: add image with all available eggs plus =
+development t
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-efikamx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ettus:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm:
+
+Alexander Shashkevych (1):
+=20=20udev-extraconf: allow all users to use gpu
+
+Daiane Angolini (3):
+=20=20linux-imx: Remove +yocto sufix from LOCALVERSION
+=20=20u-boot-*: Rework LOCALVERSION depending on SRCBRANCH
+=20=20linux-*: Rework LOCALVERSION depending on SRCBRANCH
+
+Jacob Kroon (1):
+=20=20linux-imx-rt: Upgrade to 3.10.17-1.0.2
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm-extra:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-ppc:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-guacamayo:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix-community:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-handheld:
+
+Linus Walleij (1):
+=20=20meta-handheld: h3600: support kernel v3.17
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-igep:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-intel:
+
+Ng, Wei Tee (1):
+=20=20meta-valleyisland: Update linux-yocto v3.10.43 SRCREV to v3.10.59
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ivi:
+
+Andrei Gherzan (7):
+=20=20README.md: Update dependencies to dizzy HEAD
+=20=20README.md: Use TEMPLATECONF to ensure proper build configuration
+=20=20linux-yocto: Use v3.14 for vexpressa9 and minor recipe cleanups
+=20=20local.conf.sample: Sync file with poky
+=20=20xkeyboard-config: Add temporary fix
+=20=20audiomanager: Add node-state-manager
+=20=20dlt-daemon: Update version to 2.11.1
+
+Holger Behrens (9):
+=20=20persistence-administrator: uprev to git tag 7.0 + patches
+=20=20persistence-client-library: uprev to git tag 7.0 + patches
+=20=20README.md: update poky (dizzy) reference sha
+=20=20neard: added to baseline image
+=20=20poky-ivi-systemd: prefer gstreamer 1.4.x over 1.2.3
+=20=20gstreamer: add gstreamer1.0 recipes for version 1.2.3
+=20=20poky-ivi-systemd: revert work around for bug #6930
+=20=20persistence-common-object: uprev to git tag 7.0
+=20=20linux-yocto: enable kernel feature to support NFC
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-java:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-kde:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-micro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-mono:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-netbookpro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nslu2:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-opie:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt3:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt5:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-slugos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-systemd:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-raspberrypi:
+
+Parthiban Nallathambi (1):
+=20=20gstreamer1.0-plugins-bad: Making bbappend version independent
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-smartphone:
+
+Martin Jansa (1):
+=20=20Merge remote-tracking branch 'shr/shr'
+
+Simon Busch (5):
+=20=20meta-[asus,lg,samsung]: linux-[asus,lg,samsung]-[grouper,mako,tuna]: =
+enable=20
+=20=20meta-lg: android-system-image-mako: update to new version 20141112-76
+=20=20meta-lg: linux-lg-mako: bump SRCREV
+=20=20meta-hp: linux-hp-tenderloin: update to newer version
+=20=20meta-hp: systemd-machine-units: include job to correctl activate =
+existing SW
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ti:
+
+Denys Dmytriyenko (3):
+=20=20linux-ti-staging: update to 3.14.25
+=20=20linux-mainline: update to 3.14.25
+=20=20u-boot-ti-staging: update 2014.07 with few fixes
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-webos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-xilinx:
+
+Nathan Rossi (2):
+=20=20device-tree.bb: Set package arch to machine arch
+=20=20machine-xilinx-default.inc: Move UBOOT_SUFFIX definition
+
+Philip Balister (5):
+=20=20zc702-zynq7 : Update uEnv.txt devicetree filename to match updates.
+=20=20zedboard : Add files to build working boot.bin file.
+=20=20machine-xilinx-board.inc : Add definition of boot files for wic =
+utility.
+=20=20zedboard : Add files to support bootable image creation with wic.
+=20=20zc702 : Add files to support bootable image creation with wic.
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+Alexandru DAMIAN (1):
+=20=20toaster: add toaster layer configuration files for meta-yocto
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded:
 
 
-------=_Part_218_712454281.1416881563056--
+
