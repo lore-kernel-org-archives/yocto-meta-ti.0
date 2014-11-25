@@ -1,54 +1,41 @@
-Return-Path: <diego.sueiro@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8F997E00832; Mon, 24 Nov 2014 09:54:10 -0800 (PST)
+	id 2D517E008D6; Mon, 24 Nov 2014 18:34:08 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (diego.sueiro[at]gmail.com)
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.192.53 listed in list.dnswl.org]
-Received: from mail-qg0-f53.google.com (mail-qg0-f53.google.com
-	[209.85.192.53])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 46E1CE005B7
-	for <meta-ti@yoctoproject.org>; Mon, 24 Nov 2014 09:53:57 -0800 (PST)
-Received: by mail-qg0-f53.google.com with SMTP id q108so7012216qgd.26
-	for <meta-ti@yoctoproject.org>; Mon, 24 Nov 2014 09:53:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=x+Bl0R1WqxPGXcAixt/26Z3B0ctFi8P6AiNIApGKpg0=;
-	b=DA5gyF+gsoSubPvVUfzlSueFD3aGXHnfYK8NPsCpx6LCXn5FtKXhi2em/QdXBJb8lO
-	4/5D05QudUGkt5D6D1Y2XFLicHYlHQTSBIySEul9GJUJVSTHvvRGE5zLOUkKa6YnZLwu
-	+IGGs3HLMBGRIqvVgkzBlrRs3gi9QPul7ecVysuVtQATaz+KpmxmAmBCes6Cswr+sw6h
-	b4gJkZAmGZspgzziwFLMAuIEMi5mhEX8kTiYcRWJ3kC2+dzBUPDRU8FGitx7rON+6FyH
-	LGtaK/UpjVXIheUN8syqPyPRl7xkq1hE/karMph46smH4oQ314JWnWIhfsXKhdLowqod
-	/uJQ==
-X-Received: by 10.140.35.105 with SMTP id m96mr31078004qgm.8.1416851636605;
-	Mon, 24 Nov 2014 09:53:56 -0800 (PST)
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 858DBE00832
+	for <meta-ti@yoctoproject.org>; Mon, 24 Nov 2014 18:34:03 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id sAP2Y2OJ024456
+	for <meta-ti@yoctoproject.org>; Mon, 24 Nov 2014 20:34:02 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id sAP2Y2YR018421
+	for <meta-ti@yoctoproject.org>; Mon, 24 Nov 2014 20:34:02 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
+	Mon, 24 Nov 2014 20:34:02 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	sAP2Y2Xs017330;	Mon, 24 Nov 2014 20:34:02 -0600
+Date: Mon, 24 Nov 2014 21:12:43 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>, <denys@ti.com>
+Message-ID: <152134877.219.1416881563059.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Received: by 10.140.82.20 with HTTP; Mon, 24 Nov 2014 09:53:36 -0800 (PST)
-In-Reply-To: <20141124174322.GB2242@edge>
-References: <CAMCfZKFbTOszNMe+5PdP29x_eJmwNmykwdFVxynh-3fijcGWZQ@mail.gmail.com>
-	<20141124174322.GB2242@edge>
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Mon, 24 Nov 2014 15:53:36 -0200
-Message-ID: <CAMCfZKGCu_mkbOESo+XihpXBxBJsWqYgRdEN_znZMHj4Lc6oeg@mail.gmail.com>
-To: Denys Dmytriyenko <denys@ti.com>
-Cc: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: Re: AM1705 support
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-11-24_21-01-10
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -61,100 +48,189 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Nov 2014 17:54:10 -0000
-Content-Type: multipart/alternative; boundary=001a11c03cec7fdea705089e7a15
+X-List-Received-Date: Tue, 25 Nov 2014 02:34:08 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_218_712454281.1416881563056"
 
---001a11c03cec7fdea705089e7a15
-Content-Type: text/plain; charset=ISO-8859-1
+------=_Part_218_712454281.1416881563056
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Denys,
+<html>
+<head>
+<title>
+Status for 11/24/14
+</title>
+</head>
+<body>
+
+<h2>Status for 11/24/14</h2>
+
+<h2>BUILD_ID: build-2014-11-24_21-02-16</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.11"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-On Mon, Nov 24, 2014 at 3:43 PM, Denys Dmytriyenko <denys@ti.com> wrote:
-
-> On Mon, Nov 24, 2014 at 03:10:50PM -0200, Diego Sueiro wrote:
-> > Folks,
-> >
-> > I have a project with AM1705 processor and I couldn't found any specific
-> > machine configurations for it.
-> >
-> > Looking at the link http://www.ti.com/tool/linuxezsdk-sitara when I try
-> to
-> > download it's SDK it points me to download AM18x SDK (
-> >
-> http://software-dl.ti.com/sitara_linux/esd/AM17xSDK/latest/index_FDS.html
-> ).
-> >
-> > So, the question is. Is the AM1705 SDK and AM18x SDK the same?
->
-> Yes, AM17x and AM18x are very similar - they use OMAP-L137 and OMAP-L138
-> parts
-> respectively. The differences are mostly in peripherals:
->
-> http://www.ti.com/product/omap-l137
-> http://www.ti.com/product/omap-l138
->
-> From BSP perspective, you can use am180x-evm machine.
-
-
-Thank you very much for the quick answer.
-
-Regards,
-
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br
-<http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
-
-/*long live rock 'n roll*/
-
---001a11c03cec7fdea705089e7a15
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_extra">Denys,</div><div class=3D"gmail=
-_extra"><br></div><div class=3D"gmail_extra"><br><div class=3D"gmail_quote"=
->On Mon, Nov 24, 2014 at 3:43 PM, Denys Dmytriyenko <span dir=3D"ltr">&lt;<=
-a href=3D"mailto:denys@ti.com" target=3D"_blank">denys@ti.com</a>&gt;</span=
-> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bo=
-rder-left:1px #ccc solid;padding-left:1ex"><span class=3D"">On Mon, Nov 24,=
- 2014 at 03:10:50PM -0200, Diego Sueiro wrote:<br>
-&gt; Folks,<br>
-&gt;<br>
-&gt; I have a project with AM1705 processor and I couldn&#39;t found any sp=
-ecific<br>
-&gt; machine configurations for it.<br>
-&gt;<br>
-&gt; Looking at the link <a href=3D"http://www.ti.com/tool/linuxezsdk-sitar=
-a" target=3D"_blank">http://www.ti.com/tool/linuxezsdk-sitara</a> when I tr=
-y to<br>
-&gt; download it&#39;s SDK it points me to download AM18x SDK (<br>
-&gt; <a href=3D"http://software-dl.ti.com/sitara_linux/esd/AM17xSDK/latest/=
-index_FDS.html" target=3D"_blank">http://software-dl.ti.com/sitara_linux/es=
-d/AM17xSDK/latest/index_FDS.html</a>).<br>
-&gt;<br>
-&gt; So, the question is. Is the AM1705 SDK and AM18x SDK the same?<br>
-<br>
-</span>Yes, AM17x and AM18x are very similar - they use OMAP-L137 and OMAP-=
-L138 parts<br>
-respectively. The differences are mostly in peripherals:<br>
-<br>
-<a href=3D"http://www.ti.com/product/omap-l137" target=3D"_blank">http://ww=
-w.ti.com/product/omap-l137</a><br>
-<a href=3D"http://www.ti.com/product/omap-l138" target=3D"_blank">http://ww=
-w.ti.com/product/omap-l138</a><br>
-<br>
-From BSP perspective, you can use am180x-evm machine.</blockquote></div><br=
->Thank you very much for the quick answer.<br><br clear=3D"all"><div><div c=
-lass=3D"gmail_signature"><div dir=3D"ltr"><div>Regards,</div><div><br></div=
->--<br>*dS<br>Diego Sueiro<br><br>Administrador do Embarcados<br><a href=3D=
-"http://www.embarcados.com.br/?utm_source=3Dassinatura_diego&amp;utm_medium=
-=3De-mail&amp;utm_campaign=3DAssinatura%20Email%20Diego" target=3D"_blank">=
-www.embarcados.com.br</a><br><br>/*long live rock &#39;n roll*/<br></div></=
-div></div>
-</div></div>
-
---001a11c03cec7fdea705089e7a15--
+------=_Part_218_712454281.1416881563056--
