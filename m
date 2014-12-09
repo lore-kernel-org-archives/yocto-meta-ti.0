@@ -1,26 +1,45 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 03FF8E0093F; Tue,  9 Dec 2014 09:15:03 -0800 (PST)
+	id 2F60EE0093F; Tue,  9 Dec 2014 12:04:21 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 936A5E0082F
-	for <meta-ti@yoctoproject.org>; Tue,  9 Dec 2014 09:14:57 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 0B7F8529DD; Tue,  9 Dec 2014 17:14:55 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20141209171456.0B7F8529DD@arago-project.org>
-Date: Tue,  9 Dec 2014 17:14:55 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 3.14.26, add new DTBs, sort configs
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DAC4FE00903
+	for <meta-ti@yoctoproject.org>; Tue,  9 Dec 2014 12:04:14 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id sB9K4DKV030143
+	for <meta-ti@yoctoproject.org>; Tue, 9 Dec 2014 14:04:13 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id sB9K4DkM010640
+	for <meta-ti@yoctoproject.org>; Tue, 9 Dec 2014 14:04:13 -0600
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
+	14.03.0174.001; Tue, 9 Dec 2014 14:04:13 -0600
+From: "Nelson, Sam" <sam.nelson@ti.com>
+To: "Maupin, Chase" <chase.maupin@ti.com>, "meta-ti@yoctoproject.org"
+	<meta-ti@yoctoproject.org>
+Thread-Topic: [meta-ti] [PATCH] edma3-lld: add new recipe for edma3 low
+	level	driver
+Thread-Index: AQHQBBuiu00GPcG3AUWuTRlc4Sh6GpyHzZOg
+Date: Tue, 9 Dec 2014 20:04:13 +0000
+Message-ID: <4F9216F96E5DF9428610502835A9F490580E5086@DLEE11.ent.ti.com>
+References: <1416403293-23706-1-git-send-email-sam.nelson@ti.com>
+	<7D46E86EC0A8354091174257B2FED1015D375DBE@DLEE11.ent.ti.com>
+In-Reply-To: <7D46E86EC0A8354091174257B2FED1015D375DBE@DLEE11.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [157.170.170.90]
+MIME-Version: 1.0
+Subject: Re: [PATCH] edma3-lld: add new recipe for edma3 low level	driver
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,66 +52,179 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Dec 2014 17:15:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 09 Dec 2014 20:04:21 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Module: meta-ti
-Branch: master
-Commit: 977e53ebc9dfbbbdc154d771ceb9ce39bed7775a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=977e53ebc9dfbbbdc154d771ceb9ce39bed7775a
+Please refer to the reply to the mmap-lld recipe.  Currently not planning t=
+o make the recipe to build only particular evm content.
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Dec  9 08:30:26 2014 +0000
-
-linux-ti-staging: update to 3.14.26, add new DTBs, sort configs
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-kernel/linux/linux-ti-staging_3.14.bb |   15 ++++++++-------
- 1 files changed, 8 insertions(+), 7 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index fa64840..9172268 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -26,10 +26,10 @@ RDEPENDS_kernel-base_append_dra7xx = " vpe-vpdma-fw"
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
- KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
--KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-sk-evm.dtb"
-+KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb am437x-sk-evm.dtb"
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
- KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
--KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb dra72-evm.dtb am57xx-beagle-x15.dtb"
-+KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb dra7-evm-lcd7.dtb dra7-evm-lcd10.dtb dra72-evm.dtb dra72-evm-lcd7.dtb dra72-evm-lcd10.dtb am57xx-beagle-x15.dtb"
- KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb"
- KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
- KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
-@@ -44,17 +44,18 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.14.y"
- 
--SRCREV = "5dcfe16d0585aeed7158820e934a5e43ff017476"
--PV = "3.14.25"
-+SRCREV = "6564a16c2f4f6c1cb141169a51c31f8b81eb18a8"
-+PV = "3.14.26"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
--KERNEL_CONFIG_FRAGMENTS = "${KERNEL_CONFIG_DIR}/audio_display.cfg ${KERNEL_CONFIG_DIR}/baseport.cfg \
--                           ${KERNEL_CONFIG_DIR}/connectivity.cfg ${KERNEL_CONFIG_DIR}/ipc.cfg \
--                           ${KERNEL_CONFIG_DIR}/power.cfg ${KERNEL_CONFIG_DIR}/wlan.cfg"
-+KERNEL_CONFIG_FRAGMENTS = "${KERNEL_CONFIG_DIR}/baseport.cfg ${KERNEL_CONFIG_DIR}/all_valid_socs.cfg \
-+                           ${KERNEL_CONFIG_DIR}/power.cfg ${KERNEL_CONFIG_DIR}/connectivity.cfg \
-+                           ${KERNEL_CONFIG_DIR}/ipc.cfg ${KERNEL_CONFIG_DIR}/audio_display.cfg \
-+                           ${KERNEL_CONFIG_DIR}/wlan.cfg"
- 
- KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${KERNEL_CONFIG_DIR}/am33xx_only.cfg"
- KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${KERNEL_CONFIG_DIR}/am43xx_only.cfg"
-
+Let me know if you have any other feedback. Otherwise appreciate if this  c=
+an be accepted.
+With regards,
+Sam
+> -----Original Message-----
+> From: Maupin, Chase
+> Sent: Wednesday, November 19, 2014 12:10 PM
+> To: Nelson, Sam; meta-ti@yoctoproject.org
+> Subject: RE: [meta-ti] [PATCH] edma3-lld: add new recipe for edma3 low
+> level driver
+>=20
+> Same comments as mmap-lld about whether this should be a machine
+> specific recipe.  For the do_install you could use a machine override for=
+ the
+> values there.  Just a thought though as to whether that makes more sense =
+or
+> not.
+>=20
+> -----Original Message-----
+> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
+> bounces@yoctoproject.org] On Behalf Of Nelson, Sam
+> Sent: Wednesday, November 19, 2014 7:22 AM
+> To: meta-ti@yoctoproject.org
+> Subject: [meta-ti] [PATCH] edma3-lld: add new recipe for edma3 low level
+> driver
+>=20
+> - Provides low level driver for EDMA3 module
+> - supports k2k, k2l, k2e evm platforms
+>=20
+> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> ---
+>  recipes-bsp/edma3-lld/edma3-lld_git.bb |   80
+> ++++++++++++++++++++++++++++++++
+>  1 file changed, 80 insertions(+)
+>  create mode 100755 recipes-bsp/edma3-lld/edma3-lld_git.bb
+>=20
+> diff --git a/recipes-bsp/edma3-lld/edma3-lld_git.bb b/recipes-bsp/edma3-
+> lld/edma3-lld_git.bb
+> new file mode 100755
+> index 0000000..1ed4b93
+> --- /dev/null
+> +++ b/recipes-bsp/edma3-lld/edma3-lld_git.bb
+> @@ -0,0 +1,80 @@
+> +DESCRIPTION =3D "TI EDMA3 low level driver and test code"
+> +LICENSE =3D "BSD-3-Clause"
+> +LIC_FILES_CHKSUM =3D
+> "file://COPYING.txt;md5=3D5bdceac872dffdec915b819654ee23ea"
+> +
+> +BRANCH =3D "master"
+> +SRC_URI =3D "git://git.ti.com/keystone-rtos/edma3_lld.git"
+> +# The following commit corresponds to tag DEV_EDMA3_LLD_02_11_13_17
+> +SRCREV =3D "8c27e548fa53ca8472404ef347b8f6b6e2588d46"
+> +
+> +PV =3D "2.11.13"
+> +PR =3D "r0"
+> +
+> +COMPATIBLE_MACHINE =3D "keystone"
+> +
+> +DEPENDS =3D "common-csl-ip"
+> +
+> +PLATFORMLIST =3D "tci6636k2h-evm \
+> +	tci6638k2k-evm \
+> +	tci6630k2l-evm \
+> +	c66ak2e-evm \
+> +	"
+> +
+> +PACKAGES =3D+ "${PN}-test"
+> +
+> +FILES_${PN}-test =3D "${bindir}/*"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +do_compile () {
+> +	cd ${S}/packages
+> +	for platform in ${PLATFORMLIST}
+> +	do
+> +		ROOTDIR=3D${S} CROSSCC=3D"${TARGET_PREFIX}gcc"
+> CROSSAR=3D"${TARGET_PREFIX}ar" \
+> +		CROSSLNK=3D"${TARGET_PREFIX}gcc"
+> INTERNAL_SW_ROOT=3D"${S}" make \
+> +		PLATFORM=3D"$platform" TARGET=3Da15 TOOLCHAIN_a15=3DGCC
+> FORMAT=3DELF \
+> +		SONAME=3Dlibedma3.so all
+> +	done
+> +}
+> +
+> +do_install () {
+> +	install -d ${D}/${libdir}
+> +
+> +	# Static Libraries
+> +	cp
+> ${S}/packages/ti/sdo/edma3/drv/lib/a15/release/edma3_lld_drv.aa15fg \
+> +		${D}/${libdir}/libedma3.a
+> +	cp ${S}/packages/ti/sdo/edma3/rm/lib/tci6636k2h-
+> evm/a15/release/edma3_lld_rm.aa15fg \
+> +		${D}/${libdir}/libedma3rm.a
+> +
+> +	# Shared Libraries
+> +	cp -a ${S}/packages/ti/sdo/edma3/drv/lib/a15/release/libedma*
+> ${D}/${libdir}
+> +	cp -a
+> +${S}/packages/ti/sdo/edma3/rm/lib/tci6636k2h-
+> evm/a15/release/libedma*
+> +${D}/${libdir}
+> +
+> +	# Copy Headers
+> +	install -d ${D}/${includedir}/ti/sdo/edma3/drv/
+> +	install -d ${D}/${includedir}/ti/sdo/edma3/rm
+> +	cp ${S}/packages/ti/sdo/edma3/drv/*.h
+> ${D}/${includedir}/ti/sdo/edma3/drv/
+> +	cp ${S}/packages/ti/sdo/edma3/rm/*.h
+> +${D}/${includedir}/ti/sdo/edma3/rm/
+> +
+> +	# Copy Sample Config
+> +	install -d ${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
+> +	cp
+> ${S}/examples/edma3_user_space_driver/evmTCI6636K2H/evmTCI6636K2H
+> Sample.c \
+> +		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
+> +	cp
+> ${S}/examples/edma3_user_space_driver/evmTCI6638K2K/evmTCI6638K2K
+> Sample.c \
+> +		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
+> +	cp
+> ${S}/examples/edma3_user_space_driver/evmTCI6630K2L/evmTCI6630K2LS
+> ample.c \
+> +		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
+> +	cp
+> ${S}/examples/edma3_user_space_driver/evmC66AK2E/evmC66AK2ESampl
+> e.c \
+> +		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
+> +
+> +	install -d ${D}/${bindir}
+> +	install -c -m 755
+> ${S}/examples/edma3_user_space_driver/evmTCI6636K2H/bin/tci6636k2h-
+> evm/edma3_drv_6636k2h_a15_sample_a15host_release.xa15fg \
+> +
+> 	${D}/${bindir}/edma3_drv_6636k2h_a15_sample_a15host_release.x
+> a15fg
+> +	install -c -m 755
+> ${S}/examples/edma3_user_space_driver/evmTCI6638K2K/bin/tci6638k2k-
+> evm/edma3_drv_6638k2k_a15_sample_a15host_release.xa15fg \
+> +
+> 	${D}/${bindir}/edma3_drv_6638k2k_a15_sample_a15host_release.x
+> a15fg
+> +	install -c -m 755
+> ${S}/examples/edma3_user_space_driver/evmTCI6630K2L/bin/tci6630k2l-
+> evm/edma3_drv_6630k2l_a15_sample_a15host_release.xa15fg \
+> +
+> 	${D}/${bindir}/edma3_drv_6630k2l_a15_sample_a15host_release.x
+> a15fg
+> +	install -c -m 755
+> ${S}/examples/edma3_user_space_driver/evmC66AK2E/bin/c66ak2e-
+> evm/edma3_drv_c66ak2e_a15_sample_a15host_release.xa15fg \
+> +
+> 	${D}/${bindir}/edma3_drv_c66ak2e_a15_sample_a15host_release.x
+> a15fg
+> +}
+> +
+> --
+> 1.7.9.5
+>=20
+> --
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
