@@ -1,46 +1,42 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6C274E00985; Tue,  9 Dec 2014 12:04:40 -0800 (PST)
+	id 19C0FE0092E; Tue,  9 Dec 2014 18:52:44 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [192.94.94.40 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3DDC6E0097F
-	for <meta-ti@yoctoproject.org>; Tue,  9 Dec 2014 12:04:35 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id sB9K4YjM002948
-	for <meta-ti@yoctoproject.org>; Tue, 9 Dec 2014 14:04:34 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id sB9K4YJC024283
-	for <meta-ti@yoctoproject.org>; Tue, 9 Dec 2014 14:04:34 -0600
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.03.0174.001; Tue, 9 Dec 2014 14:04:33 -0600
-From: "Nelson, Sam" <sam.nelson@ti.com>
-To: "Dmytriyenko, Denys" <denys@ti.com>, "Maupin, Chase" <chase.maupin@ti.com>
-Thread-Topic: [meta-ti] [PATCH] mmap-lld; Add new recipe for mmap lld
-Thread-Index: AQHQA+6Jz6Ry8pnetEauB0zT/8VdtpxoktyAgAHBCACAEicScIALU9xw
-Date: Tue, 9 Dec 2014 20:04:33 +0000
-Message-ID: <4F9216F96E5DF9428610502835A9F490580E5093@DLEE11.ent.ti.com>
-References: <1416397621-20552-1-git-send-email-sam.nelson@ti.com>
-	<7D46E86EC0A8354091174257B2FED1015D375D5C@DLEE11.ent.ti.com>
-	<20141120195300.GD31396@edge>
-	<4F9216F96E5DF9428610502835A9F490580D964B@DLEE11.ent.ti.com>
-In-Reply-To: <4F9216F96E5DF9428610502835A9F490580D964B@DLEE11.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [157.170.170.90]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D1E5E00924
+	for <meta-ti@yoctoproject.org>; Tue,  9 Dec 2014 18:52:36 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id sBA2qaW4011522
+	for <meta-ti@yoctoproject.org>; Tue, 9 Dec 2014 20:52:36 -0600
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id sBA2qZrL026504
+	for <meta-ti@yoctoproject.org>; Tue, 9 Dec 2014 20:52:35 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 9 Dec 2014 20:52:35 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	sBA2qZ27031082	for <meta-ti@yoctoproject.org>;
+	Tue, 9 Dec 2014 20:52:35 -0600
+Date: Tue, 9 Dec 2014 21:31:58 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1993850908.55.1418178718401.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] mmap-lld; Add new recipe for mmap lld
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2014-12-09_21-00-57
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -53,193 +49,188 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Dec 2014 20:04:40 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 10 Dec 2014 02:52:44 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_54_996493802.1418178718395"
 
-Ping.
+------=_Part_54_996493802.1418178718395
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-> -----Original Message-----
-> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-
-> bounces@yoctoproject.org] On Behalf Of Nelson, Sam
-> Sent: Tuesday, December 02, 2014 10:08 AM
-> To: Dmytriyenko, Denys; Maupin, Chase
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH] mmap-lld; Add new recipe for mmap lld
->=20
-> Denys & Chase,
->=20
-> Can you please advise on further action on this?
->=20
-> With regards,
-> Sam
->=20
-> > -----Original Message-----
-> > From: Dmytriyenko, Denys
-> > Sent: Thursday, November 20, 2014 2:53 PM
-> > To: Maupin, Chase
-> > Cc: Nelson, Sam; meta-ti@yoctoproject.org
-> > Subject: Re: [meta-ti] [PATCH] mmap-lld; Add new recipe for mmap lld
-> >
-> > Chase,
-> >
-> > I had pretty much all the same questions before. Please see the discuss=
-ion
-> > we
-> > had previously on hyplnk-lld patch:
-> >
-> > http://thread.gmane.org/gmane.linux.embedded.yocto.meta-ti/4651
-> >
-> > --
-> > Denys
-> >
-> >
-> > On Wed, Nov 19, 2014 at 05:05:51PM +0000, Maupin, Chase wrote:
-> > >
-> > > diff --git a/recipes-bsp/mmap-lld/mmap-lld-test_git.bb b/recipes-
-> > bsp/mmap-lld/mmap-lld-test_git.bb
-> > > new file mode 100755
-> > > index 0000000..41e46f7
-> > > --- /dev/null
-> > > +++ b/recipes-bsp/mmap-lld/mmap-lld-test_git.bb
-> > > @@ -0,0 +1,40 @@
-> > > +DESCRIPTION =3D "TI KEYSTONE MMAP driver test binaries "
-> > > +include mmap-lld.inc
-> > > +
-> > > +DEPENDS=3D"common-csl-ip mmap-lld"
-> > > +RDEPENDS_${PN}=3D"uio-module-drv"
-> > > +
-> > > +DEVICELIST =3D "k2h \
-> > > +              k2k \
-> > > +              k2e \
-> > > +"
-> > >
-> > > I don't have a fundamental issue with a single  recipe for all device=
-s, but
-> > would it be easier to make this per device and then keep a generic bina=
-ry
-> > name?  i.e. a machine specific recipe that installs the binary build fo=
-r that
-> > device into the file system?
-> > >
-> > > +
-> > > +CHOICELIST =3D " yes \
-> > > +               no \
-> > > +"
-> > > +
-> > > +do_compile () {
-> > > +	for device in ${DEVICELIST}
-> > > +	do
-> > > +		make -f makefile_armv7 clean \
-> > > +			PDK_INSTALL_PATH=3D"${STAGING_INCDIR}" \
-> > > +			DEVICE=3D"$device" MPAX_SRC_DIR=3D"${S}"
-> > > +		for choice in ${CHOICELIST}
-> > > +		do
-> > > +			make -f makefile_armv7 tests examples \
-> > > +				PDK_INSTALL_PATH=3D${STAGING_INCDIR} \
-> > > +				DEVICE=3D"$device" MPAX_SRC_DIR=3D"${S}" \
-> > > +				USEDYNAMIC_LIB=3D"$choice"
-> > > +		done
-> > >
-> > > What is the purpose for both choice options?  Are you expecting users=
- to
-> > use both?
-> > >
-> > > +	done
-> > > +}
-> > > +
-> > > +do_install () {
-> > > +	for device in ${DEVICELIST}
-> > > +	do
-> > > +		make -f makefile_armv7 installbin \
-> > > +		PDK_INSTALL_PATH=3D${STAGING_INCDIR} \
-> > > +		DEVICE=3D"$device" MPAX_SRC_DIR=3D"${S}" \
-> > > +		INSTALL_BIN_BASE_DIR=3D"${D}/${bindir}"
-> > > +	done
-> > > +}
-> > > diff --git a/recipes-bsp/mmap-lld/mmap-lld.inc b/recipes-bsp/mmap-
-> > lld/mmap-lld.inc
-> > > new file mode 100644
-> > > index 0000000..b8a5b32
-> > > --- /dev/null
-> > > +++ b/recipes-bsp/mmap-lld/mmap-lld.inc
-> > > @@ -0,0 +1,16 @@
-> > > +LICENSE =3D "BSD-3-Clause"
-> > > +
-> > > +COMPATIBLE_MACHINE =3D "keystone"
-> > > +
-> > > +LIC_FILES_CHKSUM =3D
-> > "file://COPYING.txt;md5=3Db3315b8190036fe1c6a8263d02e15606"
-> > >
-> > > Nit pick here but can this checksum go after the LICENSE setting?
-> > >
-> > > +
-> > > +
-> > > +BRANCH=3D"master"
-> > > +SRC_URI =3D "git://git.ti.com/keystone-rtos/mmap-
-> > lld.git;destsuffix=3Dgit/ti/runtime/mmap;protocol=3Dgit;branch=3D${BRAN=
-CH}"
-> > > +# Commit correspond to DEV.MMAP.02.00.00.03 SRCREV =3D
-> > > +"601f9284c392f67bb7f69ed1a5df5231a43c3137"
-> > >
-> > > I would put the SRCREV in the _git file, not in the .inc since you wo=
-uld
-> > expect the .inc to be common across all versions.  I guess you are usin=
-g the
-> > .inc to handle the different test vs driver recipes.  Maybe a better id=
-ea
-> would
-> > be a single recipe that builds both but package the driver as the defau=
-lt
-> > package and make a new PACKAGE for the test applications?
-> > >
-> > > +
-> > > +PV=3D"2.0.0"
-> > > +PR =3D "r0"
-> > > +
-> > > +S =3D "${WORKDIR}/git/ti/runtime/mmap"
-> > > \ No newline at end of file
-> > > diff --git a/recipes-bsp/mmap-lld/mmap-lld_git.bb b/recipes-bsp/mmap-
-> > lld/mmap-lld_git.bb
-> > > new file mode 100755
-> > > index 0000000..3a56a62
-> > > --- /dev/null
-> > > +++ b/recipes-bsp/mmap-lld/mmap-lld_git.bb
-> > > @@ -0,0 +1,12 @@
-> > > +DESCRIPTION =3D "TI KEYSTONE mmap driver using Keystone MPAX
-> > Programming"
-> > > +include mmap-lld.inc
-> > > +
-> > > +DEPENDS=3D"common-csl-ip"
-> > > +
-> > > +do_compile () {
-> > > +	make -f makefile_armv7 clean lib
-> > PDK_INSTALL_PATH=3D${STAGING_INCDIR}
-> > > +}
-> > > +
-> > > +do_install () {
-> > > +	make -f makefile_armv7 install
-> > PDK_INSTALL_PATH=3D${STAGING_INCDIR}
-> > > +INSTALL_INC_BASE_DIR=3D${D}/${includedir}
-> > > +INSTALL_LIB_BASE_DIR=3D${D}${libdir}
-> > > +}
-> > > --
-> > > 1.7.9.5
-> > >
-> > > --
-> > > _______________________________________________
-> > > meta-ti mailing list
-> > > meta-ti@yoctoproject.org
-> > > https://lists.yoctoproject.org/listinfo/meta-ti
-> > > --
-> > > _______________________________________________
-> > > meta-ti mailing list
-> > > meta-ti@yoctoproject.org
-> > > https://lists.yoctoproject.org/listinfo/meta-ti
-> --
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+<html>
+<head>
+<title>
+Status for 12/09/14
+</title>
+</head>
+<body>
 
+<h2>Status for 12/09/14</h2>
+
+<h2>BUILD_ID: build-2014-12-09_21-02-00</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.11"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_54_996493802.1418178718395--
