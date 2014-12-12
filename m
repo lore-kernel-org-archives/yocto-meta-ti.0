@@ -1,45 +1,49 @@
-Return-Path: <denys@ti.com>
+Return-Path: <kalle@zapdevelopment.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 70F1EE0089B; Thu, 11 Dec 2014 20:34:11 -0800 (PST)
+	id B950DE009A1; Thu, 11 Dec 2014 23:45:37 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HTML_MESSAGE autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2BEAFE00873
-	for <meta-ti@yoctoproject.org>; Thu, 11 Dec 2014 20:34:06 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id sBC4Y62U019424
-	for <meta-ti@yoctoproject.org>; Thu, 11 Dec 2014 22:34:06 -0600
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id sBC4Y6S0006199
-	for <meta-ti@yoctoproject.org>; Thu, 11 Dec 2014 22:34:06 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 11 Dec 2014 22:34:05 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	sBC4Y5XS003163	for <meta-ti@yoctoproject.org>; Thu, 11 Dec 2014 22:34:06
-	-0600
-Date: Thu, 11 Dec 2014 23:13:23 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <493286373.65.1418357603918.JavaMail.jenkins@puget>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Greylist: delayed 65 seconds by postgrey-1.32 at yocto-www;
+	Thu, 11 Dec 2014 23:45:34 PST
+Received: from mailrelay8.public.one.com (mailrelay8.public.one.com
+	[91.198.169.216])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7AFE0E00993
+	for <meta-ti@yoctoproject.org>; Thu, 11 Dec 2014 23:45:34 -0800 (PST)
+X-HalOne-Cookie: b8969b3353d4a16bfd25d38820055cbcc4b4a0cc
+X-HalOne-ID: 691c04be-81d2-11e4-bf9a-b82a72cffc46
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=zapdevelopment.com; s=20140924;
+	h=from:reply-to:subject:date:message-id:to:mime-version:content-type;
+	bh=iocLFKfNo3Jv9Qt1kaxhP9Px+4gpUICEGSMgL0o94Hs=;
+	b=e395IDmiCAMmdGPraKR2y5jRojU3iQ/fpjolq5OS0n8/Lonso/VoI5gm+jAZ2Nj4v3i2XbjDW9K5B
+	X8RDlN3EO4igV7E37/8gMAogtDQ8VA/Wf4QmEpiaWedcvfnHSuulBLYksZnIoB+aRR/SF2Be6llVr8
+	ckxWT2C0Ld/tKb3Q=
+Received: from webmail7 (unknown [10.246.6.7])
+	by smtpfilter4.public.one.com (Halon Mail Gateway) with SMTP
+	for <meta-ti@yoctoproject.org>; Fri, 12 Dec 2014 07:42:23 +0000 (GMT)
+X-Originating-IP: 10.246.4.248
+User-Agent: One.com webmail 9.6.1
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2014-12-11_21-00-57
+Message-ID: <1418370266664.32456.5724@webmail7>
+Date: Fri, 12 Dec 2014 07:44:26 GMT
+To: <meta-ti@yoctoproject.org>
+From: "Kalle Komierowski" <kalle@zapdevelopment.com>
+Subject: TI wirelesl WL18xx drivers
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
+Reply-To: kalle@zapdevelopment.com
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -49,188 +53,53 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Dec 2014 04:34:11 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_64_58293915.1418357603916"
+X-List-Received-Date: Fri, 12 Dec 2014 07:45:37 -0000
+Content-Type: multipart/alternative; boundary="----------5722-1418370266664-1"
 
-------=_Part_64_58293915.1418357603916
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+------------5722-1418370266664-1
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-<html>
-<head>
-<title>
-Status for 12/11/14
-</title>
-</head>
-<body>
+Hi all,
 
-<h2>Status for 12/11/14</h2>
+I'm new to this list, and new to Yocto.
+I am about use the TI WL18xx wifi together with Beaglebone. I've seen that =
+the older WL12xx drivers are present.
+I included the
+meta-openembedded/meta-oe/recipes-kernel/compat-wireless
+layer/recipe but compat-wireless fails when compiling (maybe a question som=
+ething for the meta-oe mailing list)
 
-<h2>BUILD_ID: build-2014-12-11_21-02-01</h2>
+I have two questions:
+1. Is there ongoing work to support the WL18xx drivers in a yocto/oe layer?=
+ (if yes, when will they be available?)
+2. Should this work be done in meta-ti or the meta-oe/compat-wireless?
 
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=red>FAILED: CRITICAL</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=red>FAILED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.11"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+Thanks for your time.
 
 
-------=_Part_64_58293915.1418357603916--
+BR
+-Kalle Komierowski
+
+
+------------5722-1418370266664-1
+Content-Type: multipart/related; boundary="----------5722-1418370266664-2"
+
+------------5722-1418370266664-2
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+
+Hi all, <br /><br />I'm new to this list, and new to Yocto.<br />I am about=
+ use the TI WL18xx wifi together with Beaglebone. I've seen that the older =
+WL12xx drivers are present.<br />I included the <br />meta-openembedded/met=
+a-oe/recipes-kernel/compat-wireless<br />layer/recipe but compat-wireless f=
+ails when compiling (maybe a question something for the meta-oe mailing lis=
+t)<br /><br />I have two questions:<br />1. Is there ongoing work to suppor=
+t the WL18xx drivers in a yocto/oe layer? (if yes, when will they be availa=
+ble?)<br />2. Should this work be done in meta-ti or the meta-oe/compat-wir=
+eless?<br /><br />Thanks for your time.<br /><br /><br />BR<br />-Kalle Kom=
+ierowski<br />
+
+------------5722-1418370266664-2--
+
+------------5722-1418370266664-1--
