@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A01DCE00963; Mon, 15 Dec 2014 12:22:46 -0800 (PST)
+	id A79ADE009B2; Mon, 15 Dec 2014 12:22:47 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DD9B6E009A0
-	for <meta-ti@yoctoproject.org>; Mon, 15 Dec 2014 12:22:36 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB2B1E00947
+	for <meta-ti@yoctoproject.org>; Mon, 15 Dec 2014 12:22:30 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 77B4552A85; Mon, 15 Dec 2014 20:22:36 +0000 (UTC)
+	id EF95652A6C; Mon, 15 Dec 2014 20:22:29 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141215202236.77B4552A85@arago-project.org>
-Date: Mon, 15 Dec 2014 20:22:36 +0000 (UTC)
+Message-Id: <20141215202229.EF95652A6C@arago-project.org>
+Date: Mon, 15 Dec 2014 20:22:29 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : edma3-lld: add new recipe for edma3 low level driver
+Subject: Sam Nelson : mmap-lld; Add new recipe for mmap lld
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,115 +33,119 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Dec 2014 20:22:46 -0000
+X-List-Received-Date: Mon, 15 Dec 2014 20:22:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 8cde7b5f12c47c78dc00443d2f35a9b54e9df3ed
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8cde7b5f12c47c78dc00443d2f35a9b54e9df3ed
+Branch: master
+Commit: f81589410d96d123b6143d1bc8e33374775e7d7c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f81589410d96d123b6143d1bc8e33374775e7d7c
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Nov 19 19:21:33 2014 +0000
+Date:   Wed Nov 19 17:47:01 2014 +0000
 
-edma3-lld: add new recipe for edma3 low level driver
+mmap-lld; Add new recipe for mmap lld
 
-- Provides low level driver for EDMA3 module
-- supports k2k, k2l, k2e evm platforms
+- Provides memory map driver using Keystone MPAX module
+- Test recipe is used to build test binaries using the mmap lld library
+- Supports k2h, k2k & k2e
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/edma3-lld/edma3-lld_git.bb |   80 ++++++++++++++++++++++++++++++++
- 1 files changed, 80 insertions(+), 0 deletions(-)
+ recipes-bsp/mmap-lld/mmap-lld-test_git.bb |   40 +++++++++++++++++++++++++++++
+ recipes-bsp/mmap-lld/mmap-lld.inc         |   16 +++++++++++
+ recipes-bsp/mmap-lld/mmap-lld_git.bb      |   12 ++++++++
+ 3 files changed, 68 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/edma3-lld/edma3-lld_git.bb b/recipes-bsp/edma3-lld/edma3-lld_git.bb
+diff --git a/recipes-bsp/mmap-lld/mmap-lld-test_git.bb b/recipes-bsp/mmap-lld/mmap-lld-test_git.bb
 new file mode 100755
-index 0000000..1ed4b93
+index 0000000..41e46f7
 --- /dev/null
-+++ b/recipes-bsp/edma3-lld/edma3-lld_git.bb
-@@ -0,0 +1,80 @@
-+DESCRIPTION = "TI EDMA3 low level driver and test code"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5bdceac872dffdec915b819654ee23ea"
++++ b/recipes-bsp/mmap-lld/mmap-lld-test_git.bb
+@@ -0,0 +1,40 @@
++DESCRIPTION = "TI KEYSTONE MMAP driver test binaries "
++include mmap-lld.inc
 +
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
-+# The following commit corresponds to tag DEV_EDMA3_LLD_02_11_13_17
-+SRCREV = "8c27e548fa53ca8472404ef347b8f6b6e2588d46"
++DEPENDS="common-csl-ip mmap-lld"
++RDEPENDS_${PN}="uio-module-drv"
 +
-+PV = "2.11.13"
-+PR = "r0"
++DEVICELIST = "k2h \
++              k2k \
++              k2e \
++"
 +
-+COMPATIBLE_MACHINE = "keystone"
-+
-+DEPENDS = "common-csl-ip"
-+
-+PLATFORMLIST = "tci6636k2h-evm \
-+	tci6638k2k-evm \
-+	tci6630k2l-evm \
-+	c66ak2e-evm \
-+	"
-+
-+PACKAGES =+ "${PN}-test"
-+
-+FILES_${PN}-test = "${bindir}/*"
-+
-+S = "${WORKDIR}/git"
++CHOICELIST = " yes \
++               no \
++"
 +
 +do_compile () {
-+	cd ${S}/packages
-+	for platform in ${PLATFORMLIST}
++	for device in ${DEVICELIST}
 +	do
-+		ROOTDIR=${S} CROSSCC="${TARGET_PREFIX}gcc" CROSSAR="${TARGET_PREFIX}ar" \
-+		CROSSLNK="${TARGET_PREFIX}gcc" INTERNAL_SW_ROOT="${S}" make \
-+		PLATFORM="$platform" TARGET=a15 TOOLCHAIN_a15=GCC FORMAT=ELF \
-+		SONAME=libedma3.so all
++		make -f makefile_armv7 clean \
++			PDK_INSTALL_PATH="${STAGING_INCDIR}" \
++			DEVICE="$device" MPAX_SRC_DIR="${S}"
++		for choice in ${CHOICELIST}
++		do
++			make -f makefile_armv7 tests examples \
++				PDK_INSTALL_PATH=${STAGING_INCDIR} \
++				DEVICE="$device" MPAX_SRC_DIR="${S}" \
++				USEDYNAMIC_LIB="$choice"
++		done
 +	done
 +}
 +
 +do_install () {
-+	install -d ${D}/${libdir}
++	for device in ${DEVICELIST}
++	do
++		make -f makefile_armv7 installbin \
++		PDK_INSTALL_PATH=${STAGING_INCDIR} \
++		DEVICE="$device" MPAX_SRC_DIR="${S}" \
++		INSTALL_BIN_BASE_DIR="${D}/${bindir}"
++	done
++}
+diff --git a/recipes-bsp/mmap-lld/mmap-lld.inc b/recipes-bsp/mmap-lld/mmap-lld.inc
+new file mode 100644
+index 0000000..b8a5b32
+--- /dev/null
++++ b/recipes-bsp/mmap-lld/mmap-lld.inc
+@@ -0,0 +1,16 @@
++LICENSE = "BSD-3-Clause"
 +
-+	# Static Libraries
-+	cp ${S}/packages/ti/sdo/edma3/drv/lib/a15/release/edma3_lld_drv.aa15fg \
-+		${D}/${libdir}/libedma3.a
-+	cp ${S}/packages/ti/sdo/edma3/rm/lib/tci6636k2h-evm/a15/release/edma3_lld_rm.aa15fg \
-+		${D}/${libdir}/libedma3rm.a
++COMPATIBLE_MACHINE = "keystone"
 +
-+	# Shared Libraries
-+	cp -a ${S}/packages/ti/sdo/edma3/drv/lib/a15/release/libedma* ${D}/${libdir}
-+	cp -a ${S}/packages/ti/sdo/edma3/rm/lib/tci6636k2h-evm/a15/release/libedma* ${D}/${libdir}
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=b3315b8190036fe1c6a8263d02e15606"
 +
-+	# Copy Headers
-+	install -d ${D}/${includedir}/ti/sdo/edma3/drv/
-+	install -d ${D}/${includedir}/ti/sdo/edma3/rm
-+	cp ${S}/packages/ti/sdo/edma3/drv/*.h ${D}/${includedir}/ti/sdo/edma3/drv/
-+	cp ${S}/packages/ti/sdo/edma3/rm/*.h ${D}/${includedir}/ti/sdo/edma3/rm/
 +
-+	# Copy Sample Config
-+	install -d ${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
-+	cp ${S}/examples/edma3_user_space_driver/evmTCI6636K2H/evmTCI6636K2HSample.c \
-+		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
-+	cp ${S}/examples/edma3_user_space_driver/evmTCI6638K2K/evmTCI6638K2KSample.c \
-+		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
-+	cp ${S}/examples/edma3_user_space_driver/evmTCI6630K2L/evmTCI6630K2LSample.c \
-+		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
-+	cp ${S}/examples/edma3_user_space_driver/evmC66AK2E/evmC66AK2ESample.c \
-+		${D}/${includedir}/ti/sdo/edma3/drv/sample/src/platforms
++BRANCH="master"
++SRC_URI = "git://git.ti.com/keystone-rtos/mmap-lld.git;destsuffix=git/ti/runtime/mmap;protocol=git;branch=${BRANCH}"
++# Commit correspond to DEV.MMAP.02.00.00.03
++SRCREV = "601f9284c392f67bb7f69ed1a5df5231a43c3137"
 +
-+	install -d ${D}/${bindir}
-+	install -c -m 755 ${S}/examples/edma3_user_space_driver/evmTCI6636K2H/bin/tci6636k2h-evm/edma3_drv_6636k2h_a15_sample_a15host_release.xa15fg \
-+		${D}/${bindir}/edma3_drv_6636k2h_a15_sample_a15host_release.xa15fg
-+	install -c -m 755 ${S}/examples/edma3_user_space_driver/evmTCI6638K2K/bin/tci6638k2k-evm/edma3_drv_6638k2k_a15_sample_a15host_release.xa15fg \
-+		${D}/${bindir}/edma3_drv_6638k2k_a15_sample_a15host_release.xa15fg
-+	install -c -m 755 ${S}/examples/edma3_user_space_driver/evmTCI6630K2L/bin/tci6630k2l-evm/edma3_drv_6630k2l_a15_sample_a15host_release.xa15fg \
-+		${D}/${bindir}/edma3_drv_6630k2l_a15_sample_a15host_release.xa15fg
-+	install -c -m 755 ${S}/examples/edma3_user_space_driver/evmC66AK2E/bin/c66ak2e-evm/edma3_drv_c66ak2e_a15_sample_a15host_release.xa15fg \
-+		${D}/${bindir}/edma3_drv_c66ak2e_a15_sample_a15host_release.xa15fg
++PV="2.0.0"
++PR = "r0"
++
++S = "${WORKDIR}/git/ti/runtime/mmap"
+\ No newline at end of file
+diff --git a/recipes-bsp/mmap-lld/mmap-lld_git.bb b/recipes-bsp/mmap-lld/mmap-lld_git.bb
+new file mode 100755
+index 0000000..3a56a62
+--- /dev/null
++++ b/recipes-bsp/mmap-lld/mmap-lld_git.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "TI KEYSTONE mmap driver using Keystone MPAX Programming"
++include mmap-lld.inc
++
++DEPENDS="common-csl-ip"
++
++do_compile () {
++	make -f makefile_armv7 clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
 +}
 +
++do_install () {
++	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++}
 
 
