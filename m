@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2F801E00B9F; Thu, 18 Dec 2014 10:04:53 -0800 (PST)
+	id 30D31E00A73; Thu, 18 Dec 2014 10:04:53 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AFC3AE00A73
-	for <meta-ti@yoctoproject.org>; Thu, 18 Dec 2014 10:04:47 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6BB6FE00B49
+	for <meta-ti@yoctoproject.org>; Thu, 18 Dec 2014 10:04:51 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 77612529DF; Thu, 18 Dec 2014 18:04:46 +0000 (UTC)
+	id 2D606529DE; Thu, 18 Dec 2014 18:04:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141218180446.77612529DF@arago-project.org>
-Date: Thu, 18 Dec 2014 18:04:46 +0000 (UTC)
+Message-Id: <20141218180451.2D606529DE@arago-project.org>
+Date: Thu, 18 Dec 2014 18:04:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : cppi-lld: Add new recipe for CPPI Module low level driver
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 18 Dec 2014 18:04:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 70664faa8da48c0c8cfed96c89c038017b8bfea1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=70664faa8da48c0c8cfed96c89c038017b8bfea1
+Branch: daisy
+Commit: 2a3575bd2887c11374a05d2863951df96050970e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2a3575bd2887c11374a05d2863951df96050970e
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Wed Dec 17 00:12:10 2014 +0000
