@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A43B8E00BE8; Thu, 18 Dec 2014 15:55:36 -0800 (PST)
+	id 1BDCEE00C21; Thu, 18 Dec 2014 15:55:44 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 334C0E00BC6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 320F9E00B9C
 	for <meta-ti@yoctoproject.org>; Thu, 18 Dec 2014 15:55:32 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D8D3452A9E; Thu, 18 Dec 2014 23:55:30 +0000 (UTC)
+	id 89CA952A6D; Thu, 18 Dec 2014 23:55:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141218235530.D8D3452A9E@arago-project.org>
+Message-Id: <20141218235530.89CA952A6D@arago-project.org>
 Date: Thu, 18 Dec 2014 23:55:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : sa-lld: Add recipes for SA module low level driver
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with latest fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,110 +33,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2014 23:55:36 -0000
+X-List-Received-Date: Thu, 18 Dec 2014 23:55:44 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 091c19a8fbba21a5ca9efab77ed7047721428f25
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=091c19a8fbba21a5ca9efab77ed7047721428f25
+Commit: bd65d9994ea25c6c222d61f0846b0fce7f7fa777
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bd65d9994ea25c6c222d61f0846b0fce7f7fa777
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Dec 19 05:38:26 2014 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Dec 19 05:11:29 2014 +0000
 
-sa-lld: Add recipes for SA module low level driver
+u-boot-ti-staging: update with latest fixes
 
-- Provides library and test code for Security accelerator module
-- Supports k2h, k2k, k2l & k2e devices
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/sa-lld/sa-lld-test_git.bb |   33 +++++++++++++++++++++++++++++++++
- recipes-bsp/sa-lld/sa-lld.inc         |   14 ++++++++++++++
- recipes-bsp/sa-lld/sa-lld_git.bb      |   14 ++++++++++++++
- 3 files changed, 61 insertions(+), 0 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/sa-lld/sa-lld-test_git.bb b/recipes-bsp/sa-lld/sa-lld-test_git.bb
-new file mode 100644
-index 0000000..2069d41
---- /dev/null
-+++ b/recipes-bsp/sa-lld/sa-lld-test_git.bb
-@@ -0,0 +1,33 @@
-+DESCRIPTION = "TI Security Accelerator LLD (SA LLD) Examples"
-+
-+DEPENDS = "common-csl-ip cppi-lld qmss-lld pa-lld sa-lld"
-+
-+include sa-lld.inc
-+
-+DEVICELIST = "k2h k2k k2l k2e"
-+
-+CHOICELIST = "no yes"
-+
-+do_compile () {
-+#   Now build the lld in the updated directory
-+	for device in ${DEVICELIST}
-+	do
-+		make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S}
-+		for choice in ${CHOICELIST}
-+		do
-+			make -f makefile_armv7 examples PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
-+		done
-+	done
-+}
-+
-+do_install () {
-+	install -d ${D}${bindir}/ti/drv/sa/example/SaBasicExample/vectors
-+
-+# copy all the test vectors
-+	find example/SaBasicExample/vectors -name *.bin -type f | xargs -I {} cp --parents {} ${D}${bindir}/ti/drv/sa
-+
-+	for device in ${DEVICELIST}
-+	do
-+		make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S} INSTALL_BIN_BASE_DIR=${D}${bindir}
-+	done
-+}
-diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
-new file mode 100644
-index 0000000..d4bdc95
---- /dev/null
-+++ b/recipes-bsp/sa-lld/sa-lld.inc
-@@ -0,0 +1,14 @@
-+LICENSE = "BSD-3-Clause"
-+COMPATIBLE_MACHINE = "keystone"
-+
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/sa/COPYING.txt;md5=4709d353574a9569e129ebdf20e732dd"
-+
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/sa-lld.git;destsuffix=git/ti/drv/sa;protocol=git;branch=${BRANCH}"
-+# Following commit DEV.SA_LLD.03.00.00.08
-+SRCREV = "4da032c600ded79ab226a2a0100c1d8178a9da39"
-+PV = "03.00.00.08"
-+PR = "r0"
-+
-+BASEDIR = "${WORKDIR}/git"
-+S = "${BASEDIR}/ti/drv/sa"
-diff --git a/recipes-bsp/sa-lld/sa-lld_git.bb b/recipes-bsp/sa-lld/sa-lld_git.bb
-new file mode 100644
-index 0000000..f345895
---- /dev/null
-+++ b/recipes-bsp/sa-lld/sa-lld_git.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "TI Security Accelerator LLD (SA LLD) Library"
-+
-+DEPENDS = "common-csl-ip"
-+
-+include sa-lld.inc
-+
-+do_compile () {
-+#   Now build the lld in the updated directory
-+	make -f makefile_armv7 clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
-+}
-+
-+do_install () {
-+	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
-+}
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
+index d3cea77..a895978 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
+@@ -8,13 +8,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+ 
+ PV = "2014.07"
+-PR = "r4+gitr${SRCPV}"
++PR = "r5+gitr${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2014.07"
+ 
+-SRCREV = "6ff3f70e38ca6933a7dcfb84eefd0597e9558bc3"
++SRCREV = "b6f7378f75acab9b08d229f9bf0197779107db55"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
