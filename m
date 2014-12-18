@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BE4F4E00BDC; Thu, 18 Dec 2014 15:55:33 -0800 (PST)
+	id E5757E00BE8; Thu, 18 Dec 2014 15:55:35 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 844B8E002F9
-	for <meta-ti@yoctoproject.org>; Thu, 18 Dec 2014 15:55:30 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 329D9E00BB3
+	for <meta-ti@yoctoproject.org>; Thu, 18 Dec 2014 15:55:32 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4D7B5529DF; Thu, 18 Dec 2014 23:55:28 +0000 (UTC)
+	id B45A352A8C; Thu, 18 Dec 2014 23:55:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141218235529.4D7B5529DF@arago-project.org>
-Date: Thu, 18 Dec 2014 23:55:28 +0000 (UTC)
+Message-Id: <20141218235530.B45A352A8C@arago-project.org>
+Date: Thu, 18 Dec 2014 23:55:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with latest fixes
+Subject: Sam Nelson : pa-lld: Add recipes for PA low level driver and test code
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,43 +33,107 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2014 23:55:33 -0000
+X-List-Received-Date: Thu, 18 Dec 2014 23:55:36 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 1d46274416c3b50808590963bdb6c157d9d7c745
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1d46274416c3b50808590963bdb6c157d9d7c745
+Branch: master
+Commit: 838c9edd2e6afe778ce49e32dd9c23c5985eefb8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=838c9edd2e6afe778ce49e32dd9c23c5985eefb8
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Dec 19 05:09:54 2014 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Fri Dec 19 05:38:25 2014 +0000
 
-linux-ti-staging: update with latest fixes
+pa-lld: Add recipes for PA low level driver and test code
 
+- Provides low level driver for Packet accelerator module
+- Supports k2h, k2k, k2l & k2e devices
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/pa-lld/pa-lld-test_git.bb |   28 ++++++++++++++++++++++++++++
+ recipes-bsp/pa-lld/pa-lld.inc         |   15 +++++++++++++++
+ recipes-bsp/pa-lld/pa-lld_git.bb      |   15 +++++++++++++++
+ 3 files changed, 58 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index 9172268..61989c3 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -44,11 +44,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.14.y"
- 
--SRCREV = "6564a16c2f4f6c1cb141169a51c31f8b81eb18a8"
-+SRCREV = "f93aba31cfc224ed7ea414d1b7ab988808d764ba"
- PV = "3.14.26"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+diff --git a/recipes-bsp/pa-lld/pa-lld-test_git.bb b/recipes-bsp/pa-lld/pa-lld-test_git.bb
+new file mode 100644
+index 0000000..b70dadd
+--- /dev/null
++++ b/recipes-bsp/pa-lld/pa-lld-test_git.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION = "TI PA LLD unit test and example binaries"
++
++DEPENDS = "common-csl-ip pa-lld cppi-lld qmss-lld sa-lld"
++
++include pa-lld.inc
++
++DEVICELIST = "k2h k2k k2l k2e"
++
++CHOICELIST = "yes no"
++
++do_compile () {
++# Now build the lld unit test examples
++	for device in ${DEVICELIST}
++	do
++	make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" PA_SRC_DIR=${S}
++		for choice in ${CHOICELIST}
++		do
++			make -f makefile_armv7 tests examples PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" PA_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
++		done
++	done
++}
++
++do_install () {
++	for device in ${DEVICELIST}
++	do
++		make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" PA_SRC_DIR=${S} INSTALL_BIN_BASE_DIR=${D}${bindir}
++	done
++}
+diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
+new file mode 100644
+index 0000000..e93ce15
+--- /dev/null
++++ b/recipes-bsp/pa-lld/pa-lld.inc
+@@ -0,0 +1,15 @@
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/pa/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
++
++COMPATIBLE_MACHINE = "keystone"
++
++BRANCH = "master"
++SRC_URI = "git://git.ti.com/keystone-rtos/pa-lld.git;destsuffix=git/ti/drv/pa;protocol=git;branch=${BRANCH}"
++
++# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.01"
++SRCREV = "55207930b4491f33776f2c4c2c0707a73c69314c"
++PV = "03.00.01.01"
++PR = "r0"
++
++BASEDIR = "${WORKDIR}/git"
++S = "${BASEDIR}/ti/drv/pa"
+diff --git a/recipes-bsp/pa-lld/pa-lld_git.bb b/recipes-bsp/pa-lld/pa-lld_git.bb
+new file mode 100644
+index 0000000..63e34ad
+--- /dev/null
++++ b/recipes-bsp/pa-lld/pa-lld_git.bb
+@@ -0,0 +1,15 @@
++DESCRIPTION = "TI PA LLD library"
++
++DEPENDS = "common-csl-ip rm-lld"
++
++include pa-lld.inc
++
++do_compile () {
++#   Now build the lld in the updated directory
++	make -f makefile_armv7 DEVICE=k2h clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
++	make -f makefile_armv7 DEVICE=k2l lib PDK_INSTALL_PATH=${STAGING_INCDIR}
++}
++
++do_install () {
++	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++}
 
 
