@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 004CEE00B68; Thu, 18 Dec 2014 10:04:50 -0800 (PST)
+	id 5572AE00B63; Thu, 18 Dec 2014 10:04:51 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B0F0DE00B49
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE886E009B3
 	for <meta-ti@yoctoproject.org>; Thu, 18 Dec 2014 10:04:47 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7A262529A4; Thu, 18 Dec 2014 18:04:46 +0000 (UTC)
+	id 97C74529F7; Thu, 18 Dec 2014 18:04:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141218180446.7A262529A4@arago-project.org>
+Message-Id: <20141218180446.97C74529F7@arago-project.org>
 Date: Thu, 18 Dec 2014 18:04:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : qmss-lld: Add new recipe for QMSS Module low level driver
+Subject: Sam Nelson : mpm-transport: Add new recipe for multiproc transport library and test code
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,106 +38,67 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: d0a7ce516faddbff49f6e7065d7c6ea6c0165c3f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d0a7ce516faddbff49f6e7065d7c6ea6c0165c3f
+Commit: ce24dff877407018ffeadc7d2538aa670bc8b688
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ce24dff877407018ffeadc7d2538aa670bc8b688
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Dec 17 00:12:11 2014 +0000
+Date:   Thu Dec 18 21:54:17 2014 +0000
 
-qmss-lld: Add new recipe for QMSS Module low level driver
+mpm-transport: Add new recipe for multiproc transport library and test code
 
-- Provides low level driver and test code for Queue managment subsystem module
-- Supports k2h, k2k, k2l k2e devices
+- mpm-transport provide basic transport layer for moving data between different processing nodes
+- Support communication with the process nodes using shared memory and hyperlink interface
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/qmss-lld/qmss-lld-test_git.bb |   27 +++++++++++++++++++++++++++
- recipes-bsp/qmss-lld/qmss-lld.inc         |   15 +++++++++++++++
- recipes-bsp/qmss-lld/qmss-lld_git.bb      |   20 ++++++++++++++++++++
- 3 files changed, 62 insertions(+), 0 deletions(-)
+ recipes-ti/mpm-transport/mpm-transport_git.bb |   37 +++++++++++++++++++++++++
+ 1 files changed, 37 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/qmss-lld/qmss-lld-test_git.bb b/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
-new file mode 100755
-index 0000000..438d840
---- /dev/null
-+++ b/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "TI QMSS low level driver unit test and example binaries"
-+COMPATIBLE_MACHINE = "keystone"
-+
-+DEPENDS="common-csl-ip rm-lld cppi-lld qmss-lld"
-+
-+include qmss-lld.inc
-+
-+CHOICELIST = "yes no"
-+
-+do_compile () {
-+#   Now build the lld in the updated directory
-+	for device in ${DEVICELIST}
-+	do
-+		make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" QMSS_SRC_DIR=${S}
-+		for choice in ${CHOICELIST}
-+		do
-+			make -f makefile_armv7 tests examples PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" QMSS_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
-+		done
-+	done
-+}
-+
-+do_install () {
-+	for device in ${DEVICELIST}
-+	do
-+		make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" QMSS_SRC_DIR=${S} INSTALL_BIN_BASE_DIR=${D}${bindir}
-+	done
-+}
-diff --git a/recipes-bsp/qmss-lld/qmss-lld.inc b/recipes-bsp/qmss-lld/qmss-lld.inc
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
 new file mode 100644
-index 0000000..87499cc
+index 0000000..fe67195
 --- /dev/null
-+++ b/recipes-bsp/qmss-lld/qmss-lld.inc
-@@ -0,0 +1,15 @@
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/qmss/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -0,0 +1,37 @@
++DESCRIPTION = "Multiproc transport layer for KeyStone devices: Provide basic transport layer for moving data between different processing nodes"
++HOMEPAGE = "http://git.ti.com/cgit/cgit.cgi/keystone-linux/mpm-transport.git"
++LICENSE = "BSD-3-Clause & MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2c17cd1dc60dc06a4c4f2a2c45472a51"
++COMPATIBLE_MACHINE = "keystone"
++DEPENDS = "common-csl-ip hyplnk-lld edma3-lld mmap-lld"
 +
-+BRANCH ="master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/qmss-lld.git;destsuffix=git/ti/drv/qmss;protocol=git;branch=${BRANCH}"
++SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
 +
-+# commit ID corresponding to DEV.QMSS_LLD.02.01.00.06
-+SRCREV = "661fff76530fd56cf7550f76c7b7a541ea18fda8"
-+PV = "02.01.00.06"
++BRANCH = "master"
++# This commit corresponds to tag DEV.MPM-TRANSPORT-01.00.04.00E
++SRCREV = "56640c6296f9f4816140364b7620b1d1a483ac40"
++PV = "1.0.4.0"
 +PR = "r0"
 +
-+DEVICELIST = "k2h k2k k2l k2e"
++S = "${WORKDIR}/git"
 +
-+BASEDIR = "${WORKDIR}/git"
-+S = "${BASEDIR}/ti/drv/qmss"
-diff --git a/recipes-bsp/qmss-lld/qmss-lld_git.bb b/recipes-bsp/qmss-lld/qmss-lld_git.bb
-new file mode 100755
-index 0000000..9d2f547
---- /dev/null
-+++ b/recipes-bsp/qmss-lld/qmss-lld_git.bb
-@@ -0,0 +1,20 @@
-+DESCRIPTION = "TI QMSS low level driver library"
-+COMPATIBLE_MACHINE = "keystone"
-+
-+DEPENDS="common-csl-ip rm-lld"
-+
-+include qmss-lld.inc
++PACKAGES =+ "${PN}-test"
++FILES_${PN}-test = "${bindir}/mpm_transport_test.out ${bindir}/mpm_transport_hyplnk_loopback.out ${bindir}/mpm_transport_hyplnk_remote.out ${bindir}/mpm_transport_hyplnk_loopback_dma.out ${bindir}/mpm_transport_hyplnk_loopback64.out"
 +
 +do_compile () {
-+#   Now build the lld
-+    make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR}
-+	for device in ${DEVICELIST}
-+	do
-+		make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR}  DEVICE="${device}"
-+	done
-+
++	cd ${S}
++	make PDK_INSTALL_PATH=${STAGING_INCDIR}
 +}
 +
-+do_install () {
-+    make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++do_install() {
++	make installbin BASE_DIR=${S} INSTALL_BIN_BASE_DIR=${D}/${bindir}
++
++	install -d ${D}${includedir}/
++	install -c -m 755 ${S}/include/* ${D}${includedir}/
++
++	install -d ${D}${libdir}/
++	cp  -a ${S}/lib/* ${D}${libdir}/
++
++	install -d ${D}${sysconfdir}/mpm/
++	install -c -m 755 ${S}/scripts/mpm_config.json ${D}${sysconfdir}/mpm/mpm_config.json
 +}
 
 
