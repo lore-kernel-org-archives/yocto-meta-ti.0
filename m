@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 77D76E00BE9; Thu, 18 Dec 2014 15:55:36 -0800 (PST)
+	id A43B8E00BE8; Thu, 18 Dec 2014 15:55:36 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 32DF9E00BC0
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 334C0E00BC6
 	for <meta-ti@yoctoproject.org>; Thu, 18 Dec 2014 15:55:32 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 292CD52A6B; Thu, 18 Dec 2014 23:55:30 +0000 (UTC)
+	id D8D3452A9E; Thu, 18 Dec 2014 23:55:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141218235530.292CD52A6B@arago-project.org>
+Message-Id: <20141218235530.D8D3452A9E@arago-project.org>
 Date: Thu, 18 Dec 2014 23:55:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : am33x-cm3: update to version 0x190
+Subject: Sam Nelson : sa-lld: Add recipes for SA module low level driver
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,41 +38,105 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 6f6e5ef243f17f2dbaac3c2ea0b373fe249ab373
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6f6e5ef243f17f2dbaac3c2ea0b373fe249ab373
+Commit: 091c19a8fbba21a5ca9efab77ed7047721428f25
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=091c19a8fbba21a5ca9efab77ed7047721428f25
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Dec 19 05:07:37 2014 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Fri Dec 19 05:38:26 2014 +0000
 
-am33x-cm3: update to version 0x190
+sa-lld: Add recipes for SA module low level driver
 
+- Provides library and test code for Security accelerator module
+- Supports k2h, k2k, k2l & k2e devices
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/am33x-cm3/am33x-cm3_git.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/sa-lld/sa-lld-test_git.bb |   33 +++++++++++++++++++++++++++++++++
+ recipes-bsp/sa-lld/sa-lld.inc         |   14 ++++++++++++++
+ recipes-bsp/sa-lld/sa-lld_git.bb      |   14 ++++++++++++++
+ 3 files changed, 61 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/am33x-cm3/am33x-cm3_git.bb b/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
-index 81431e9..7e636ee 100644
---- a/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
-+++ b/recipes-bsp/am33x-cm3/am33x-cm3_git.bb
-@@ -3,12 +3,12 @@ DESCRIPTION = "Cortex-M3 binary blob for suspend-resume"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://License.txt;md5=7bdc54a749ab7a7dea999d25d99a41b8"
- 
--PV = "1.8.9"
--PR = "r1"
-+PV = "1.9.0"
+diff --git a/recipes-bsp/sa-lld/sa-lld-test_git.bb b/recipes-bsp/sa-lld/sa-lld-test_git.bb
+new file mode 100644
+index 0000000..2069d41
+--- /dev/null
++++ b/recipes-bsp/sa-lld/sa-lld-test_git.bb
+@@ -0,0 +1,33 @@
++DESCRIPTION = "TI Security Accelerator LLD (SA LLD) Examples"
++
++DEPENDS = "common-csl-ip cppi-lld qmss-lld pa-lld sa-lld"
++
++include sa-lld.inc
++
++DEVICELIST = "k2h k2k k2l k2e"
++
++CHOICELIST = "no yes"
++
++do_compile () {
++#   Now build the lld in the updated directory
++	for device in ${DEVICELIST}
++	do
++		make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S}
++		for choice in ${CHOICELIST}
++		do
++			make -f makefile_armv7 examples PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
++		done
++	done
++}
++
++do_install () {
++	install -d ${D}${bindir}/ti/drv/sa/example/SaBasicExample/vectors
++
++# copy all the test vectors
++	find example/SaBasicExample/vectors -name *.bin -type f | xargs -I {} cp --parents {} ${D}${bindir}/ti/drv/sa
++
++	for device in ${DEVICELIST}
++	do
++		make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" SA_SRC_DIR=${S} INSTALL_BIN_BASE_DIR=${D}${bindir}
++	done
++}
+diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
+new file mode 100644
+index 0000000..d4bdc95
+--- /dev/null
++++ b/recipes-bsp/sa-lld/sa-lld.inc
+@@ -0,0 +1,14 @@
++LICENSE = "BSD-3-Clause"
++COMPATIBLE_MACHINE = "keystone"
++
++LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/sa/COPYING.txt;md5=4709d353574a9569e129ebdf20e732dd"
++
++BRANCH = "master"
++SRC_URI = "git://git.ti.com/keystone-rtos/sa-lld.git;destsuffix=git/ti/drv/sa;protocol=git;branch=${BRANCH}"
++# Following commit DEV.SA_LLD.03.00.00.08
++SRCREV = "4da032c600ded79ab226a2a0100c1d8178a9da39"
++PV = "03.00.00.08"
 +PR = "r0"
- PE = "1"
- 
--SRCREV = "4e219d5053ee41b8fa8f85b48b1529ae4c6feb48"
--BRANCH ?= "next"
-+SRCREV = "d85e6a17da1025adac9ab7f97dd7aa2a58c517ce"
-+BRANCH ?= "ti-v3.14.y"
- 
- SRC_URI = "git://git.ti.com/ti-cm3-pm-firmware/amx3-cm3.git;protocol=git;branch=${BRANCH}"
- 
++
++BASEDIR = "${WORKDIR}/git"
++S = "${BASEDIR}/ti/drv/sa"
+diff --git a/recipes-bsp/sa-lld/sa-lld_git.bb b/recipes-bsp/sa-lld/sa-lld_git.bb
+new file mode 100644
+index 0000000..f345895
+--- /dev/null
++++ b/recipes-bsp/sa-lld/sa-lld_git.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "TI Security Accelerator LLD (SA LLD) Library"
++
++DEPENDS = "common-csl-ip"
++
++include sa-lld.inc
++
++do_compile () {
++#   Now build the lld in the updated directory
++	make -f makefile_armv7 clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
++}
++
++do_install () {
++	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++}
 
 
