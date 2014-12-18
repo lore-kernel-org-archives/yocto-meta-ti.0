@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5572AE00B63; Thu, 18 Dec 2014 10:04:51 -0800 (PST)
+	id 2F801E00B9F; Thu, 18 Dec 2014 10:04:53 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AE886E009B3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AFC3AE00A73
 	for <meta-ti@yoctoproject.org>; Thu, 18 Dec 2014 10:04:47 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 97C74529F7; Thu, 18 Dec 2014 18:04:46 +0000 (UTC)
+	id 77612529DF; Thu, 18 Dec 2014 18:04:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20141218180446.97C74529F7@arago-project.org>
+Message-Id: <20141218180446.77612529DF@arago-project.org>
 Date: Thu, 18 Dec 2014 18:04:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : mpm-transport: Add new recipe for multiproc transport library and test code
+Subject: Sam Nelson : cppi-lld: Add new recipe for CPPI Module low level driver
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,72 +33,110 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2014 18:04:51 -0000
+X-List-Received-Date: Thu, 18 Dec 2014 18:04:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ce24dff877407018ffeadc7d2538aa670bc8b688
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ce24dff877407018ffeadc7d2538aa670bc8b688
+Commit: 70664faa8da48c0c8cfed96c89c038017b8bfea1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=70664faa8da48c0c8cfed96c89c038017b8bfea1
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Thu Dec 18 21:54:17 2014 +0000
+Date:   Wed Dec 17 00:12:10 2014 +0000
 
-mpm-transport: Add new recipe for multiproc transport library and test code
+cppi-lld: Add new recipe for CPPI Module low level driver
 
-- mpm-transport provide basic transport layer for moving data between different processing nodes
-- Support communication with the process nodes using shared memory and hyperlink interface
+- Provides low level driver and test code for Communications port programming
+  interface module
+- Supports k2h, k2k, k2l k2e devices
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/mpm-transport/mpm-transport_git.bb |   37 +++++++++++++++++++++++++
- 1 files changed, 37 insertions(+), 0 deletions(-)
+ recipes-bsp/cppi-lld/cppi-lld-test_git.bb |   26 ++++++++++++++++++++++++++
+ recipes-bsp/cppi-lld/cppi-lld.inc         |   15 +++++++++++++++
+ recipes-bsp/cppi-lld/cppi-lld_git.bb      |   19 +++++++++++++++++++
+ 3 files changed, 60 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
-new file mode 100644
-index 0000000..fe67195
+diff --git a/recipes-bsp/cppi-lld/cppi-lld-test_git.bb b/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
+new file mode 100755
+index 0000000..871546e
 --- /dev/null
-+++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
-@@ -0,0 +1,37 @@
-+DESCRIPTION = "Multiproc transport layer for KeyStone devices: Provide basic transport layer for moving data between different processing nodes"
-+HOMEPAGE = "http://git.ti.com/cgit/cgit.cgi/keystone-linux/mpm-transport.git"
-+LICENSE = "BSD-3-Clause & MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2c17cd1dc60dc06a4c4f2a2c45472a51"
++++ b/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
+@@ -0,0 +1,26 @@
++DESCRIPTION = "TI CPPI low level driver unit test and example binaries"
 +COMPATIBLE_MACHINE = "keystone"
-+DEPENDS = "common-csl-ip hyplnk-lld edma3-lld mmap-lld"
++DEPENDS = "common-csl-ip rm-lld cppi-lld qmss-lld"
 +
-+SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
++include cppi-lld.inc
 +
-+BRANCH = "master"
-+# This commit corresponds to tag DEV.MPM-TRANSPORT-01.00.04.00E
-+SRCREV = "56640c6296f9f4816140364b7620b1d1a483ac40"
-+PV = "1.0.4.0"
-+PR = "r0"
-+
-+S = "${WORKDIR}/git"
-+
-+PACKAGES =+ "${PN}-test"
-+FILES_${PN}-test = "${bindir}/mpm_transport_test.out ${bindir}/mpm_transport_hyplnk_loopback.out ${bindir}/mpm_transport_hyplnk_remote.out ${bindir}/mpm_transport_hyplnk_loopback_dma.out ${bindir}/mpm_transport_hyplnk_loopback64.out"
++CHOICELIST = "yes no"
 +
 +do_compile () {
-+	cd ${S}
-+	make PDK_INSTALL_PATH=${STAGING_INCDIR}
++#   Now build the lld in the updated directory
++	for device in ${DEVICELIST}
++	do
++		make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" CPPI_SRC_DIR=${S}
++		for choice in ${CHOICELIST}
++		do
++			make -f makefile_armv7 tests examples PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" CPPI_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
++		done
++	done
 +}
 +
-+do_install() {
-+	make installbin BASE_DIR=${S} INSTALL_BIN_BASE_DIR=${D}/${bindir}
++do_install () {
++	for device in ${DEVICELIST}
++do
++	make -f makefile_armv7 installbin PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device" CPPI_SRC_DIR=${S} INSTALL_BIN_BASE_DIR=${D}${bindir}
++	done
++}
+diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
+new file mode 100644
+index 0000000..d26adc5
+--- /dev/null
++++ b/recipes-bsp/cppi-lld/cppi-lld.inc
+@@ -0,0 +1,15 @@
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/cppi/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
 +
-+	install -d ${D}${includedir}/
-+	install -c -m 755 ${S}/include/* ${D}${includedir}/
++BRANCH = "master"
++SRC_URI = "git://git.ti.com/keystone-rtos/cppi-lld.git;destsuffix=git/ti/drv/cppi;protocol=git;branch=${BRANCH}"
 +
-+	install -d ${D}${libdir}/
-+	cp  -a ${S}/lib/* ${D}${libdir}/
++# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.06"
++SRCREV = "4c6c0a857786c49d8003453d3bc7c3c97ff4f5a4"
++PV = "02.01.00.06"
++PR = "r0"
 +
-+	install -d ${D}${sysconfdir}/mpm/
-+	install -c -m 755 ${S}/scripts/mpm_config.json ${D}${sysconfdir}/mpm/mpm_config.json
++DEVICELIST = "k2h k2k k2l k2e"
++
++BASEDIR = "${WORKDIR}/git"
++S = "${BASEDIR}/ti/drv/cppi"
+diff --git a/recipes-bsp/cppi-lld/cppi-lld_git.bb b/recipes-bsp/cppi-lld/cppi-lld_git.bb
+new file mode 100755
+index 0000000..bb2028b
+--- /dev/null
++++ b/recipes-bsp/cppi-lld/cppi-lld_git.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "TI CPPI Module low level driver"
++COMPATIBLE_MACHINE = "keystone"
++
++DEPENDS = "common-csl-ip rm-lld qmss-lld"
++
++include cppi-lld.inc
++
++do_compile () {
++#   Now build the lld in the updated directory
++	make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR}
++	for device in ${DEVICELIST}
++	do
++		make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR}  DEVICE="${device}" 
++	done
++}
++
++do_install () {
++	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
 +}
 
 
