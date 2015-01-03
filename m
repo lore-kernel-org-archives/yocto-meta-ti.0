@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 10292E007E7; Thu,  1 Jan 2015 18:27:13 -0800 (PST)
+	id 5E5C6E008F6; Fri,  2 Jan 2015 18:27:31 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,31 +12,31 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
 	high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 22601E006EF
-	for <meta-ti@yoctoproject.org>; Thu,  1 Jan 2015 18:27:03 -0800 (PST)
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 90FF5E00828
+	for <meta-ti@yoctoproject.org>; Fri,  2 Jan 2015 18:27:17 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t022R2XN023216
-	for <meta-ti@yoctoproject.org>; Thu, 1 Jan 2015 20:27:02 -0600
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t032RGWf016131
+	for <meta-ti@yoctoproject.org>; Fri, 2 Jan 2015 20:27:16 -0600
 Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t022R11h007466
-	for <meta-ti@yoctoproject.org>; Thu, 1 Jan 2015 20:27:02 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t032RGUB002404
+	for <meta-ti@yoctoproject.org>; Fri, 2 Jan 2015 20:27:16 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
 	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 1 Jan 2015 20:27:01 -0600
+	Fri, 2 Jan 2015 20:27:16 -0600
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t022R1d4028102	for <meta-ti@yoctoproject.org>;
-	Thu, 1 Jan 2015 20:27:01 -0600
-Date: Thu, 1 Jan 2015 21:05:30 -0500
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t032RGZJ027174	for <meta-ti@yoctoproject.org>;
+	Fri, 2 Jan 2015 20:27:16 -0600
+Date: Fri, 2 Jan 2015 21:05:43 -0500
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1181090311.161.1420164330774.JavaMail.jenkins@puget>
+Message-ID: <867234161.165.1420250743287.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-01-01_21-00-57
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-01-02_21-00-57
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,24 +49,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jan 2015 02:27:13 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_160_17702971.1420164330690"
+X-List-Received-Date: Sat, 03 Jan 2015 02:27:31 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_164_1998679505.1420250743285"
 
-------=_Part_160_17702971.1420164330690
+------=_Part_164_1998679505.1420250743285
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 01/01/15
+Status for 01/02/15
 </title>
 </head>
 <body>
 
-<h2>Status for 01/01/15</h2>
+<h2>Status for 01/02/15</h2>
 
-<h2>BUILD_ID: build-2015-01-01_21-02-02</h2>
+<h2>BUILD_ID: build-2015-01-02_21-02-01</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -233,4 +234,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_160_17702971.1420164330690--
+------=_Part_164_1998679505.1420250743285--
