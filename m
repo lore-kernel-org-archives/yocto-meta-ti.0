@@ -1,58 +1,40 @@
-Return-Path: <cliff.brake@gmail.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F2A69E00751; Mon,  5 Jan 2015 13:42:52 -0800 (PST)
+	id EB92FE00751; Mon,  5 Jan 2015 16:32:33 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, MIME_QP_LONG_LINE,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (cliff.brake[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.213.174 listed in list.dnswl.org]
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [206.46.173.19 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* 0.0 MIME_QP_LONG_LINE RAW: Quoted-printable line longer than 76 chars
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
-	[209.85.213.174])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E72FE003E3
-	for <meta-ti@yoctoproject.org>; Mon,  5 Jan 2015 13:42:48 -0800 (PST)
-Received: by mail-ig0-f174.google.com with SMTP id hn15so3187879igb.1
-	for <meta-ti@yoctoproject.org>; Mon, 05 Jan 2015 13:42:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:mime-version:message-id:from:to:subject:content-type
-	:content-transfer-encoding;
-	bh=uznYpSsDCcTpoZqvs9n+nDjXKQ5I25XZr2Jn3iSgTgo=;
-	b=H00LRCDemIibgS+GnYZx3uhTBC5tjETf7tEGOWl1aBLDFr4Asw1V+mywx0MOfSJ4OE
-	4lPU4VKAz6XRZb/ilb71J0D1A4u9M0NnaEfD7N6ygbv0Z27rgofqGFJJptCiDnrq4Ot1
-	teVgRE+hfm3w5YMuVndamCx1vdGDV4I4ocKFiYvWRO7iGBXQWCD7jjagav4lGIPxOOHi
-	tREKYOZAuPqzvXxSZJg8xk2zgP+Qb3q/rhwRWtnqHfcIhrOIui+Lu7b32iEUsSpoQtXU
-	gAeBt7X8oTUG/ZfOqGFScF5q56B0Wf8+S0ZnrzYzqIxdmJKIP+/C2TCgOQUnTLE8aA7b
-	MMJg==
-X-Received: by 10.50.66.171 with SMTP id g11mr12917931igt.49.1420494167657;
-	Mon, 05 Jan 2015 13:42:47 -0800 (PST)
-Received: from [127.0.0.1] (cable2-pool191-cs-105.doycomm.com.
-	[66.219.191.105]) by mx.google.com with ESMTPSA id
-	c73sm27148947ioe.22.2015.01.05.13.42.46
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 05 Jan 2015 13:42:46 -0800 (PST)
-Date: Mon, 05 Jan 2015 13:42:46 -0800 (PST)
-X-Google-Original-Date: Mon, 05 Jan 2015 21:42:45 GMT
-MIME-Version: 1.0
-X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Message-Id: <1420494165503.1e7c56fa@Nodemailer>
-From: cliff.brake@gmail.com
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
-Subject: OE Changelog since 2014-12-28 until 2015-01-04
+X-Greylist: delayed 3600 seconds by postgrey-1.32 at yocto-www;
+	Mon, 05 Jan 2015 16:32:19 PST
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8B1D6E003E3
+	for <meta-ti@yoctoproject.org>; Mon,  5 Jan 2015 16:32:19 -0800 (PST)
+Received: from gandalf.denix.org ([108.18.33.160]) by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NHQ00JJQ9D96FF0@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 05 Jan 2015 17:32:03 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=b6gFOWC0 c=1 sm=1 tr=0	a=A8KAnipHuDHkz1LiHkTZyg==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=YNv0rlydsVwA:10
+	a=sozttTNsAAAA:8	a=lGHdoIVS9Vq03D4QAO0A:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 6336720088;	Mon,
+	5 Jan 2015 18:31:57 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Mon, 05 Jan 2015 18:31:57 -0500
+Message-id: <1420500717-26033-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] setup-defconfig: support combined defconfig with listed config fragments
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,353 +47,150 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jan 2015 21:42:53 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-Changelog since 2014-12-28 until 2015-01-04.  Projects included in this =
-report:
-
-bitbake: git://git.openembedded.org/bitbake
-openembedded-core: git://git.openembedded.org/openembedded-core
-meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
-meta-arago: git://arago-project.org/git/meta-arago.git
-meta-atmel: https://github.com/linux4sam/meta-atmel.git
-meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
-meta-browser: git://github.com/OSSystems/meta-browser.git
-meta-bug: git://github.com/buglabs/meta-bug.git
-meta-chicken: git://github.com/OSSystems/meta-chicken
-meta-efikamx: git://github.com/kraj/meta-efikamx.git
-meta-ettus: http://github.com/koenkooi/meta-ettus.git
-meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
-meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
-meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
-meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
-meta-gumstix: git://github.com/gumstix/meta-gumstix.git
-meta-gumstix-community: =
-git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
-meta-handheld: git://git.openembedded.org/meta-handheld
-meta-igep: http://github.com/ebutera/meta-igep.git
-meta-intel: git://git.yoctoproject.org/meta-intel
-meta-ivi: git://git.yoctoproject.org/meta-ivi
-meta-java: git://github.com/woglinde/meta-java
-meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
-meta-micro: git://git.openembedded.org/meta-micro
-meta-mono: git://git.yoctoproject.org/meta-mono.git
-meta-netbookpro: git://github.com/tworaz/meta-netbookpro
-meta-nslu2: git://github.com/kraj/meta-nslu2
-meta-opie: git://git.openembedded.org/meta-opie
-meta-qt3: git://git.yoctoproject.org/meta-qt3
-meta-qt5: git://github.com/meta-qt5/meta-qt5.git
-meta-slugos: git://github.com/kraj/meta-slugos
-meta-systemd: git://git.yoctoproject.org/meta-systemd
-meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
-meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
-meta-ti: git://git.yoctoproject.org/meta-ti
-meta-webos: git://github.com/openwebos/meta-webos.git
-meta-xilinx: git://git.yoctoproject.org/meta-xilinx
-meta-yocto: git://git.yoctoproject.org/meta-yocto
-openembedded: git://git.openembedded.org/openembedded
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for bitbake:
-
-Paul Eggleton (2):
-=20=20bitbake-layers: fix error handling in add-layer / remove-layer
-=20=20utils: make edit_metadata_file() handle VARIABLE +=3D
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded-core:
-
-An=C3=ADbal Lim=C3=B3n (5):
-=20=20xrandr: Upgrade to 1.4.3
-=20=20acpid: Upgrade to 2.0.23
-=20=20lsof: Upgrade to 4.88
-=20=20mc: Upgrade to 4.8.13
-=20=20sqlite3: Upgrade to 3.8.7.4
-
-Armin Kuster (2):
-=20=20mmc-utils: update to latest git version
-=20=20libinput: update to 0.7.0
-
-Awais Belal (1):
-=20=20gstreamer1.0-omx: use mulitple SCMs to fetch submodules
-
-Chen Qi (2):
-=20=20diffutils & diffstat: fix up EXTRA_OECONF
-=20=20pciutils: change default value of PACKAGECONFIG
-
-Justin Capella (1):
-=20=20wpa-supplicant: avoid host contamination of drivers by libnl3
-
-Kai Kang (1):
-=20=20qemu: upgrade to 2.2.0
-
-Mark Hatle (1):
-=20=20local.conf.sample: Add qemuarm64
-
-Otavio Salvador (4):
-=20=20lttng-modules: Update to revision to 16d7431c3
-=20=20lttng-tools: Update to 2.5.3 version
-=20=20lttng-ust: Update to 2.5.2 version
-=20=20image.bbclass: Remove 'set_image_autologin' function
-
-Richard Purdie (1):
-=20=20oeqa/parselogs: Add harmless failure warning introduced by new qemu =
-version=20
-
-Ross Burton (22):
-=20=20clutter: enable EGL backend by default
-=20=20glib-2.0: Upgrade to 2.42.1
-=20=20atk: upgrade to 2.14.0
-=20=20at-spi2-core: upgrade to 2.14.1
-=20=20at-spi2-atk: upgrade to 2.14.1.
-=20=20cairo: upgrade to 1.12.8
-=20=20harfbuzz: upgrade to 0.9.37
-=20=20pango: upgrade to 1.36.8
-=20=20gtk+: upgrade to 2.24.25
-=20=20libxext: upgrade to 1.3.3
-=20=20xtrans: upgrade to 1.3.5
-=20=20xcb-util: upgrade to 0.4.0
-=20=20xcb-util-image: upgrade to 0.4.0
-=20=20xcb-util-keysyms: upgrade to 0.4.0
-=20=20gstreamer1.0: upgrade to 1.4.5
-=20=20gstreamer1.0-plugins-base: upgrade to 1.4.5
-=20=20gstreamer1.0-plugins-bad: upgrade to 1.4.5
-=20=20gstreamer1.0-plugins-good: upgrade to 1.4.5
-=20=20gstreamer1.0-plugins-ugly: upgrade to 1.4.5
-=20=20gstreamer1.0-libav: upgrade to 1.4.5
-=20=20gstreamer1.0-rtsp-server: upgrade to 1.4.5
-=20=20telepathy: remove (moved to meta-oe)
-
-Sona Sarmadi (1):
-=20=20bind: fix for CVE-2014-8500
-
-Tim Orling (2):
-=20=20clutter-1.0: upgrade to v1.20.0
-=20=20clutter-1.0: add ptest
-
-Yi Zhao (1):
-=20=20oeqa/selftest: fix test_incremental_image_generation for changes in =
-log outp
-
-Zidan Wang (2):
-=20=20gstreamer1.0-plugins-good: Decrease the rank as havn't this kind of =
-decoder=20
-=20=20gstreamer1.0-plugins-base: Taglist will not be sent to downstream if =
-all the
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-openembedded:
-
-Armin Kuster (1):
-=20=20proftpd: update to 1.3.5
-
-Bian Naimeng (1):
-=20=20libgxim: Add recipe
-
-Graeme Gregory (1):
-=20=20fwts: add the Firmware Test Suite
-
-Li xin (1):
-=20=20dstat: add new recipe
-
-Martin Jansa (1):
-=20=20meta-efl: use MIT & BSD license
-
-Otavio Salvador (12):
-=20=20nbench-byte: Fix license QA error
-=20=20dash: Fix license format QA error
-=20=20sound-theme-freedesktop: Fix license format QA error
-=20=20soft66: Fix license format QA error
-=20=20log4cplus: Fix license format QA error
-=20=20libutempter: Fix license format QA error
-=20=20libftdi: Fix license format QA error
-=20=20procmail: Fix license format QA error
-=20=20libspatialite: Fix license format QA error
-=20=20ttf-sazanami: Fix license format QA error
-=20=20navit: Fix license format QA error
-=20=20t1lib: Fix license format QA error
-
-Paul Barker (1):
-=20=20distro-feed-configs: Make list of archs configurable
-
-Paul Eggleton (1):
-=20=20ntp: upgrade to 4.2.8
-
-Philip Balister (1):
-=20=20log4cpp: Add new recipe
-
-Qian Lei (2):
-=20=20dnrd: Add new recipe
-=20=20ctapi-common: Add new recipe
-
-Robert Yang (1):
-=20=20netkit-rusers: fix parallel build issue
-
-Wenzong Fan (1):
-=20=20collectd: add PACKAGECONFIG for libvirt, libesmtp
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-angstrom:
-
-Koen Kooi (1):
-=20=20angstrom-mirrors: point to the correct URI
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-arago:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-atmel:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-beagleboard:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-browser:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-bug:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-chicken:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-efikamx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ettus:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm:
-
-Carlos Rafael Giani (1):
-=20=20gstreamer1.0-plugins-imx: Update to version 0.10.0
-
-Chunrong Guo (1):
-=20=20linux-ls1: update to sdk v1.7 release
-
-Jacob Kroon (1):
-=20=20gpu-viv-bin-mx6q: Don't package X11 libraries in non-X11 builds
-
-Max Krummenacher (2):
-=20=20libmcc: provide explicit do_install
-=20=20mqxboot: provide explicit do_install
-
-Otavio Salvador (3):
-=20=20u-boot-fslc: Update to 2015.01-rc3 based version
-=20=20libfslcodec: Add a depends on imx-vpu
-=20=20libfslcodec: Use PACKAGECONFIG to handle VPU support
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm-extra:
-
-Raphael Silva (2):
-=20=20cgtqmx6: changing preferred kernel assignement type
-=20=20linux-congatec-rt: add initial recipe
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-ppc:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-guacamayo:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix-community:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-handheld:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-igep:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-intel:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ivi:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-java:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-kde:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-micro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-mono:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-netbookpro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-nslu2:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-opie:
-
-Khem Raj (1):
-=20=20packagegroups: Move inheriting packagegroup after setting PACKAGE_ARCH
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt3:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt5:
-
-Andreas M=C3=BCller (1):
-=20=20qtbase: Make libraries build with cmake find gl(es) headers
-
-Mingtao Qu (1):
-=20=20qtmultimedia: Fix crash when use Gstreamer 0.10 plugin
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-slugos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-systemd:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-raspberrypi:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-smartphone:
-
-Martin Jansa (8):
-=20=20android-audiosystem: Fix build with poisoned default sysroot
-=20=20meta-shr-distro: rename bbappend to match new version from oe-core
-=20=20midori: rename bbappend to match new version from oe-core
-=20=20meta-efl: use MIT & BSD license
-=20=20preferred-shr-versions: Drop unnecessary entries
-=20=20e-wm-config-illume2-shr: temporary drop elfe dependency
-=20=20meta-shr: replace eve with elbow - webkit2 based browser
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ti:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-webos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-xilinx:
-
-David Holsgrove (1):
-=20=20external-xilinx-toolchain: Fix version detection for gcc
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-Mark Hatle (1):
-=20=20local.conf.sample: Add qemuarm64
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded:
-
+X-List-Received-Date: Tue, 06 Jan 2015 00:32:34 -0000
+
+From: Denys Dmytriyenko <denys@ti.com>
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ .../linux/linux-ti-staging-3.14/defconfig          |  2 +-
+ recipes-kernel/linux/linux-ti-staging_3.14.bb      |  8 +--
+ recipes-kernel/linux/setup-defconfig.inc           | 64 ++++++++++++++--------
+ 3 files changed, 44 insertions(+), 30 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging-3.14/defconfig b/recipes-kernel/linux/linux-ti-staging-3.14/defconfig
+index 926b35a..990e7f7 100644
+--- a/recipes-kernel/linux/linux-ti-staging-3.14/defconfig
++++ b/recipes-kernel/linux/linux-ti-staging-3.14/defconfig
+@@ -1 +1 @@
+-use-kernel-config=omap2plus_defconfig
++use-combined-config=ti_config_fragments/defconfig_fragment
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 61989c3..2e89ace 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -44,18 +44,14 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.14.y"
+ 
+-SRCREV = "f93aba31cfc224ed7ea414d1b7ab988808d764ba"
++SRCREV = "4311f726041145161621593e5d67f106913c0f28"
+ PV = "3.14.26"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+-KERNEL_CONFIG_FRAGMENTS = "${KERNEL_CONFIG_DIR}/baseport.cfg ${KERNEL_CONFIG_DIR}/all_valid_socs.cfg \
+-                           ${KERNEL_CONFIG_DIR}/power.cfg ${KERNEL_CONFIG_DIR}/connectivity.cfg \
+-                           ${KERNEL_CONFIG_DIR}/ipc.cfg ${KERNEL_CONFIG_DIR}/audio_display.cfg \
+-                           ${KERNEL_CONFIG_DIR}/wlan.cfg"
+ 
+ KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${KERNEL_CONFIG_DIR}/am33xx_only.cfg"
+ KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${KERNEL_CONFIG_DIR}/am43xx_only.cfg"
+diff --git a/recipes-kernel/linux/setup-defconfig.inc b/recipes-kernel/linux/setup-defconfig.inc
+index dbfd0d4..7468929 100644
+--- a/recipes-kernel/linux/setup-defconfig.inc
++++ b/recipes-kernel/linux/setup-defconfig.inc
+@@ -4,13 +4,9 @@ KERNEL_LOCALVERSION ?= ""
+ 
+ # Check the defconfig file and see if it points to an in kernel
+ # defconfig that should be used, or if it is a complete config file
++# Or if it points to a combined defconfig that lists both in kernel
++# defconfig and associated config fragments.
+ 
+-# define our own do_configure that will:
+-#   1. Check the .config file and see if string use-kernel-config= is present
+-#   2. If the use-kernel-config string is present parse out the config to use
+-#      and run make $config
+-#   3. else run yes '' | oe_runmake oldconfig like the default do_configure
+-#      does
+ do_configure() {
+     # Always copy the defconfig file to .config to keep consistency
+     # between the case where there is a real config and the in kernel
+@@ -19,40 +15,62 @@ do_configure() {
+ 
+     echo ${KERNEL_LOCALVERSION} > ${B}/.scmversion
+     echo ${KERNEL_LOCALVERSION} > ${S}/.scmversion
++
++    # First, check if pointing to a combined config with config fragments
++    config=`cat ${S}/.config | grep use-combined-config | cut -d= -f2`
++    if [ -n "$config" ]
++    then
++        cp $config ${S}/.config
++    fi
++
++    # Second, extract any config fragments listed in the defconfig
++    config=`cat ${S}/.config | grep config-fragment | cut -d= -f2`
++    if [ -n "$config" ]
++    then
++        configfrags=""
++        for f in $config
++        do
++            # Check if the config fragment is available
++            if [ ! -e "$f" ]
++            then
++                echo "Could not find kernel config fragment $f"
++                exit 1
++            else
++                # Sanitize config fragment files to be relative to sources
++                configfrags+=" ${S}/$f"
++            fi
++        done
++    fi
++
++    # Third, check if pointing to a known in kernel defconfig
+     config=`cat ${S}/.config | grep use-kernel-config | cut -d= -f2`
+-    if [ ! -z "$config" ]
++    if [ -n "$config" ]
+     then
+         oe_runmake $config
+     else
+         yes '' | oe_runmake oldconfig
+     fi
+ 
+-    # Check for kernel config fragments.  The assumption is that the config
+-    # fragment will be specified with the absolute path.  For example:
+-    #   * ${WORKDIR}/config1.cfg
+-    #   * ${S}/config2.cfg
+-    # Iterate through the list of configs and make sure that you can find
+-    # each one.  If not then error out.
+-    # NOTE: If you want to override a configuration that is kept in the kernel
+-    #       with one from the OE meta data then you should make sure that the
+-    #       OE meta data version (i.e. ${WORKDIR}/config1.cfg) is listed
+-    #       after the in kernel configuration fragment.
+-    # Check if any config fragments are specified.
+-    if [ ! -z "${KERNEL_CONFIG_FRAGMENTS}" ]
++    # Fourth, handle config fragments specified in the recipe
++    # The assumption is that the config fragment will be specified with the absolute path.
++    # E.g. ${WORKDIR}/config1.cfg or ${S}/config2.cfg
++    if [ -n "${KERNEL_CONFIG_FRAGMENTS}" ]
+     then
+         for f in ${KERNEL_CONFIG_FRAGMENTS}
+         do
+-            # Check if the config fragment was copied into the WORKDIR from
+-            # the OE meta data
++            # Check if the config fragment is available
+             if [ ! -e "$f" ]
+             then
+                 echo "Could not find kernel config fragment $f"
+                 exit 1
+             fi
+         done
++    fi
+ 
+-        # Now that all the fragments are located merge them.
+-        ( cd ${WORKDIR} && ${S}/scripts/kconfig/merge_config.sh -m -r -O ${S} ${S}/.config ${KERNEL_CONFIG_FRAGMENTS} 1>&2 )
++    # Now that all the fragments are located merge them
++    if [ -n "${KERNEL_CONFIG_FRAGMENTS}" -o -n "$configfrags" ]
++    then
++        ( cd ${WORKDIR} && ${S}/scripts/kconfig/merge_config.sh -m -r -O ${S} ${S}/.config $configfrags ${KERNEL_CONFIG_FRAGMENTS} 1>&2 )
+         yes '' | oe_runmake oldconfig
+     fi
+ }
+-- 
+2.2.0
 
 
