@@ -1,38 +1,41 @@
-Return-Path: <denis@denix.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4E58BE005B4; Tue,  6 Jan 2015 08:37:11 -0800 (PST)
+	id 44C75E007BA; Tue,  6 Jan 2015 10:19:25 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
-	no *      trust
-	*      [206.46.173.25 listed in list.dnswl.org]
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E5365E002F9
-	for <meta-ti@yoctoproject.org>; Tue,  6 Jan 2015 08:37:07 -0800 (PST)
-Received: from gandalf.denix.org ([108.18.33.160]) by vms173025.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NHR00LY3KSTZV81@vms173025.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 06 Jan 2015 10:36:35 -0600 (CST)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=PYxIXZlY c=1 sm=1 tr=0	a=A8KAnipHuDHkz1LiHkTZyg==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=YNv0rlydsVwA:10
-	a=sozttTNsAAAA:8	a=2AXTtKS3TDr_s1_UewkA:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 6A0AF20076;	Tue,
-	6 Jan 2015 11:36:29 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Tue, 06 Jan 2015 11:36:26 -0500
-Message-id: <1420562186-25430-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] multi-kernel: update to work with latest code
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5518CE002F9
+	for <meta-ti@yoctoproject.org>; Tue,  6 Jan 2015 10:19:23 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t06IJMOC032047
+	for <meta-ti@yoctoproject.org>; Tue, 6 Jan 2015 12:19:22 -0600
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t06IJMWe017525
+	for <meta-ti@yoctoproject.org>; Tue, 6 Jan 2015 12:19:22 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 6 Jan 2015 12:19:22 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t06IJMva021417;
+	Tue, 6 Jan 2015 12:19:22 -0600
+Date: Tue, 6 Jan 2015 13:19:22 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <20150106181921.GZ4759@edge>
+References: <1420556964-20311-1-git-send-email-j-stiffler@ti.com>
+MIME-Version: 1.0
+In-Reply-To: <1420556964-20311-1-git-send-email-j-stiffler@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [daisy][PATCH] ti-ipc: Upgrade to IPC 3.30.01.12 GA.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,215 +48,47 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2015 16:37:11 -0000
+X-List-Received-Date: Tue, 06 Jan 2015 18:19:25 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-From: Denys Dmytriyenko <denys@ti.com>
+Ack
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-ti-staging_3.14.bb |   9 +-
- recipes-kernel/linux/multi-kernel.inc         | 125 +++++++++++++-------------
- 2 files changed, 65 insertions(+), 69 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index 2e89ace..a86a275 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -7,6 +7,7 @@ inherit kernel
- 
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
-+require recipes-kernel/linux/multi-kernel.inc
- 
- # Look in the generic major.minor directory for files
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.14:"
-@@ -48,7 +49,7 @@ SRCREV = "4311f726041145161621593e5d67f106913c0f28"
- PV = "3.14.26"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
-@@ -58,6 +59,6 @@ KERNEL_CONFIG_FRAGMENTS_append_ti43x = " ${KERNEL_CONFIG_DIR}/am43xx_only.cfg"
- 
- KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
- KERNEL_GIT_PROTOCOL = "git"
--SRC_URI = "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
--           file://defconfig \
--          "
-+SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH} \
-+            file://defconfig \
-+           "
-diff --git a/recipes-kernel/linux/multi-kernel.inc b/recipes-kernel/linux/multi-kernel.inc
-index e696c8b..a503b01 100644
---- a/recipes-kernel/linux/multi-kernel.inc
-+++ b/recipes-kernel/linux/multi-kernel.inc
-@@ -20,7 +20,7 @@
- # and breaks in several places. Introduce a task do_preparekernel that calls
- # "make prepare" in the kernel tree to generate all the necessary files.
- 
--require linux.inc
-+#require linux.inc
- 
- SRC_URI += " \
-            file://configs "
-@@ -29,94 +29,89 @@ MULTI_CONFIG_BASE_SUFFIX = "multi-config-"
- MODULE_IMAGE_BASE_NAME ?= "modules-${PE}-${PV}-${PR}-${MACHINE}-${DATETIME}"
- 
- do_preparekernel () {
--	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
--	oe_runmake prepare CC="${KERNEL_CC}" LD="${KERNEL_LD}"
-+    unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
-+    oe_runmake prepare CC="${KERNEL_CC}" LD="${KERNEL_LD}"
- }
- 
- addtask preparekernel after do_configure before do_compile
- 
- do_compileconfigs () {
-+    # fixup for fetcher change
-+    if [ -e ${WORKDIR}/configs/configs ] ; then
-+        if [ -e ${WORKDIR}/configs/configs/empty ] ; then
-+            mv ${WORKDIR}/configs/configs/empty ${WORKDIR}/configs/
-+        fi
-+        mv ${WORKDIR}/configs/configs/* ${WORKDIR}/configs/
-+        rm -rf ${WORKDIR}/configs/configs
-+    fi
- 
--  # fixup for fetcher change
--  if [ -e ${WORKDIR}/configs/configs ] ; then
--      if [ -e ${WORKDIR}/configs/configs/empty ] ; then
--          mv ${WORKDIR}/configs/configs/empty ${WORKDIR}/configs/
--      fi
--      mv ${WORKDIR}/configs/configs/* ${WORKDIR}/configs/
--      rm -rf ${WORKDIR}/configs/configs
--  fi
--
--  # Compile and Install additional kernel configs if found
--  if [ -e ${WORKDIR}/configs/empty ] ; then
--       echo "No configs found in configs/ directory, skipping to regular build"
--  else
--      echo "Multiple configs found, building those first"
--
--      # Context Save the regular 'defconfig'
--      cp ${WORKDIR}/defconfig ${WORKDIR}/defconfig.save
--
--      for config in ${WORKDIR}/configs/* ; do
--
--        # Copy in alternative config
-+    # Compile and Install additional kernel configs if found
-+    if [ -e ${WORKDIR}/configs/empty ] ; then
-+        echo "No configs found in configs/ directory, skipping to regular build"
-+    else
-+        echo "Multiple configs found, building those first"
-+
-+        # Context Save the regular 'defconfig'
-+        cp ${WORKDIR}/defconfig ${WORKDIR}/defconfig.save
-+
-+        for config in ${WORKDIR}/configs/* ; do
-+            # Copy in alternative config
-+            cd ${S}
-+            cp $config ${WORKDIR}/defconfig
-+
-+            # Enable config to be viewed on the target
-+            echo "CONFIG_IKCONFIG=y" >> ${WORKDIR}/defconfig
-+            echo "CONFIG_IKCONFIG_PROC=y" >> ${WORKDIR}/defconfig
-+
-+            # Build and Install this alternative kernel
-+            do_configure
-+            kernel_do_compile
-+            do_compile_kernelmodules
-+            kernel_do_install
-+
-+            # Drop the resulting images in the deploy dir
-+            install -d ${DEPLOY_DIR_IMAGE}
-+            install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).bin
-+
-+            if [ -d "${D}/lib" ]; then
-+                tar --owner=root --group=root -cvzf ${DEPLOY_DIR_IMAGE}/${MODULE_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz -C ${D} lib
-+            fi
-+
-+            # Install the final config alongside the images
-+            cp .config ${DEPLOY_DIR_IMAGE}/config-${PV}-${PR}-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).config
-+
-+            # Create symlinks
-+            cd ${DEPLOY_DIR_IMAGE}
-+            rm -f ${KERNEL_IMAGE_SYMLINK_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).bin
-+            ln -sf ${KERNEL_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).bin ${KERNEL_IMAGE_SYMLINK_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).bin
-+            rm -f modules-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz
-+            ln -sf ${MODULE_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz modules-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz
-+            rm -f config-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).config
-+            ln -sf config-${PV}-${PR}-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).config config-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).config
-+        done
-+
-+        # Restore the regular 'defconfig'
-+        cp ${WORKDIR}/defconfig.save ${WORKDIR}/defconfig
-         cd ${S}
--        cp $config ${WORKDIR}/defconfig
--
--        # Enable config to be viewed on the target
--        echo "CONFIG_IKCONFIG=y" >> ${WORKDIR}/defconfig
--        echo "CONFIG_IKCONFIG_PROC=y" >> ${WORKDIR}/defconfig
--	
--        # Build and Install this alternative kernel
-         do_configure
--        kernel_do_compile
--        do_compile_kernelmodules
--        kernel_do_install
--
--        # Drop the resulting images in the deploy dir
--        install -d ${DEPLOY_DIR_IMAGE}
--        install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).bin
--
--        if [ -d "${D}/lib" ]; then
--            tar --owner=root --group=root -cvzf ${DEPLOY_DIR_IMAGE}/${MODULE_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz -C ${D} lib
--        fi
-- 
--        # Install the final config alongside the images
--        cp .config ${DEPLOY_DIR_IMAGE}/config-${PV}-${PR}-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).config
--
--        # Create symlinks
--        cd ${DEPLOY_DIR_IMAGE}
--        rm -f ${KERNEL_IMAGE_SYMLINK_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).bin
--        ln -sf ${KERNEL_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).bin ${KERNEL_IMAGE_SYMLINK_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).bin
--        rm -f modules-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz
--        ln -sf ${MODULE_IMAGE_BASE_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz modules-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).tgz
--        rm -f config-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).config
--        ln -sf config-${PV}-${PR}-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).config config-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $config).config
--
--      done
--
--      # Restore the regular 'defconfig'
--      cp ${WORKDIR}/defconfig.save ${WORKDIR}/defconfig
--      cd ${S}
--      do_configure
-     fi
- }
- 
- # For reference, copy .config to deploy image
- do_deploy_append () {
--
--	install -d ${DEPLOY_DIR_IMAGE}
-+    install -d ${DEPLOY_DIR_IMAGE}
- 
-     # Drop the regular defconfig along side the others for consistency
-     cd ${S}
-     cp .config ${DEPLOY_DIR_IMAGE}/config-${PV}-${PR}-${MACHINE}.config
- 
-     # add symlink
--    cd ${DEPLOY_DIR_IMAGE}    
-+    cd ${DEPLOY_DIR_IMAGE}
-     rm -f config-${MACHINE}.config
-     ln -s config-${PV}-${PR}-${MACHINE}.config config-${MACHINE}.config
- 
-     rm -f modules-${MACHINE}.tgz
-     ln -sf ${MODULE_IMAGE_BASE_NAME}.tgz modules-${MACHINE}.tgz
--
- }
- 
- do_compileconfigs[depends] += "u-boot-mkimage-native:do_populate_sysroot virtual/${TARGET_PREFIX}gcc:do_populate_sysroot"
--- 
-2.2.0
-
+On Tue, Jan 06, 2015 at 10:09:24AM -0500, Jacob Stiffler wrote:
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+> ---
+>  recipes-ti/ipc/ti-ipc_git.bb |    7 ++-----
+>  1 file changed, 2 insertions(+), 5 deletions(-)
+> 
+> diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+> index 185e58b..07f8195 100644
+> --- a/recipes-ti/ipc/ti-ipc_git.bb
+> +++ b/recipes-ti/ipc/ti-ipc_git.bb
+> @@ -6,16 +6,13 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=abd112f
+>  
+>  DEPENDS += "virtual/kernel"
+>  
+> -PV = "3.30.00.09"
+> -
+> -# This is the first version of the 3.30.00.09 
+> -# PR = "r0"
+> +PV = "3.30.01.12"
+>  
+>  BRANCH = "master"
+>  SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
+>             file://tiipclad-daemon.sh \
+>             "
+> -SRCREV = "595bc3e3bbb2e7ec12a8287145d8e3929291e59d"
+> +SRCREV = "8deec9b295a5700b26449986927c77d60c5c0e5f"
+>  
+>  S = "${WORKDIR}/git"
+>  
+> -- 
+> 1.7.9.5
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
