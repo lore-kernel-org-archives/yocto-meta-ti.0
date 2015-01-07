@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8015BE00571; Wed,  7 Jan 2015 10:52:23 -0800 (PST)
+	id 15C08E005A9; Wed,  7 Jan 2015 11:53:48 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,32 +10,29 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
 	high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9EE6EE002F9
-	for <meta-ti@yoctoproject.org>; Wed,  7 Jan 2015 10:52:19 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t07IqHuV022040;
-	Wed, 7 Jan 2015 12:52:17 -0600
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5FEAE002F9
+	for <meta-ti@yoctoproject.org>; Wed,  7 Jan 2015 11:53:43 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t07JrhAg000854
+	for <meta-ti@yoctoproject.org>; Wed, 7 Jan 2015 13:53:43 -0600
 Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t07IqHm0001390;
-	Wed, 7 Jan 2015 12:52:17 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t07Jrhxn013775
+	for <meta-ti@yoctoproject.org>; Wed, 7 Jan 2015 13:53:43 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
 	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 7 Jan 2015 12:52:17 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t07IqGSL001284;
-	Wed, 7 Jan 2015 12:52:17 -0600
-Date: Wed, 7 Jan 2015 13:52:15 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Peter A. Bigot" <pab@pabigot.com>
-Message-ID: <20150107185215.GF4759@edge>
-References: <54AD7DF5.1040805@pabigot.com>
+	Wed, 7 Jan 2015 13:53:42 -0600
+Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t07Jrgpc015363;	Wed, 7 Jan 2015 13:53:42 -0600
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 7 Jan 2015 14:53:37 -0500
+Message-ID: <1420660417-10807-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-In-Reply-To: <54AD7DF5.1040805@pabigot.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: linux-ti-staging broken in oe-core master
+Subject: [PATCH] pktlib: Adds recipe for pklib component
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,30 +45,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2015 18:52:23 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 07 Jan 2015 19:53:48 -0000
+Content-Type: text/plain
 
-On Wed, Jan 07, 2015 at 12:41:57PM -0600, Peter A. Bigot wrote:
-> The recent churn in how kernel source is managed apparently makes
-> meta-ti/linux-ti-staging-3.14 unusable with oe-core master. One
-> gets:
-> 
-> NOTE: make omap2plus_defconfig
-> make: *** No rule to make target `omap2plus_defconfig'.  Stop.
-> ERROR: oe_runmake failed
-> 
-> possibly because the source isn't where it used to be.
-> 
-> Just a FYI.  There's ongoing discussion about this on oe-core 
-> (http://www.mail-archive.com/openembedded-core@lists.openembedded.org/msg60146.html)
-> which TI folks might want to participate in.
+- pktlib: provides library for handling packet descriptor for keystone devices
 
-Yes, I know, why do you think nightlies have been failing lately?
-It was caused by the way git repos are no longer copied to ${S}, but instead 
-symlinked from sysroots. RP had mentioned about this change before the 
-holidays. But I won't be able to fix it until later this month, though.
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-bsp/pktlib/pktlib_git.bb |   25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 recipes-bsp/pktlib/pktlib_git.bb
 
+diff --git a/recipes-bsp/pktlib/pktlib_git.bb b/recipes-bsp/pktlib/pktlib_git.bb
+new file mode 100644
+index 0000000..8cd43d9
+--- /dev/null
++++ b/recipes-bsp/pktlib/pktlib_git.bb
+@@ -0,0 +1,25 @@
++DESCRIPTION = "Provides library for handling packet descriptors for keystone devices"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=b7982a377c680ad71ca2fbb735982462"
++
++DEPENDS="common-csl-ip rm-lld qmss-lld cppi-lld"
++COMPATIBLE_MACHINE = "keystone"
++
++BRANCH = "master"
++SRC_URI = "git://git.ti.com/keystone-rtos/pktlib.git;protocol=git;branch=${BRANCH}"
++
++# Corresponds to DEV.PKTLIB.2.1.0.4
++SRCREV = "a9aa56afed54b0a04f36d2fdb248cad5dcac6ff6"
++PV = "2.1.0.4"
++PR = "r0"
++
++S = "${WORKDIR}/git//ti/runtime/pktlib"
++
++do_compile () {
++#   Now build the pktlib in the updated directory
++    make -f makefile_armv7 clean lib PDK_INSTALL_PATH=${STAGING_INCDIR}
++}
++
++do_install () {
++    make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
++}
 -- 
-Denys
+1.7.9.5
+
 
