@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 76954E00970; Thu,  8 Jan 2015 09:23:02 -0800 (PST)
+	id 77FC3E00961; Thu,  8 Jan 2015 09:23:02 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6EC11E00961
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6DFBBE00951
 	for <meta-ti@yoctoproject.org>; Thu,  8 Jan 2015 09:22:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BB82D52A58; Thu,  8 Jan 2015 17:22:49 +0000 (UTC)
+	id A5E6B52A6C; Thu,  8 Jan 2015 17:22:49 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150108172249.BB82D52A58@arago-project.org>
+Message-Id: <20150108172249.A5E6B52A6C@arago-project.org>
 Date: Thu,  8 Jan 2015 17:22:49 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : am57xx-evm, dra7xx-evm: ubifs: Increase "max_leb_cnt"
+Subject: Jacob Stiffler : ti-ipc: Upgrade to IPC 3.30.01.12 GA.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,50 +38,44 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: b195119dc2331ba75d92e54b2ae91c7288b4ee7f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b195119dc2331ba75d92e54b2ae91c7288b4ee7f
+Commit: 549f3fcbff609979097cc3643a846ce4adc38148
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=549f3fcbff609979097cc3643a846ce4adc38148
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Tue Jan  6 21:16:26 2015 +0000
+Date:   Tue Jan  6 21:09:24 2015 +0000
 
-am57xx-evm, dra7xx-evm: ubifs: Increase "max_leb_cnt"
-
-* This is needed for larger filesystem size.
+ti-ipc: Upgrade to IPC 3.30.01.12 GA.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/am57xx-evm.conf |    2 +-
- conf/machine/dra7xx-evm.conf |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/ipc/ti-ipc_git.bb |    7 ++-----
+ 1 files changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
-index 25b1647..3010e04 100644
---- a/conf/machine/am57xx-evm.conf
-+++ b/conf/machine/am57xx-evm.conf
-@@ -23,7 +23,7 @@ UBOOT_MACHINE = "beagle_x15_config"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4352"
+diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+index 185e58b..07f8195 100644
+--- a/recipes-ti/ipc/ti-ipc_git.bb
++++ b/recipes-ti/ipc/ti-ipc_git.bb
+@@ -6,16 +6,13 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=abd112f
  
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index ba7b440..175450f 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -23,7 +23,7 @@ UBOOT_MACHINE = "dra7xx_evm_config"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 3836"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4352"
+ DEPENDS += "virtual/kernel"
  
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
+-PV = "3.30.00.09"
+-
+-# This is the first version of the 3.30.00.09 
+-# PR = "r0"
++PV = "3.30.01.12"
+ 
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
+            file://tiipclad-daemon.sh \
+            "
+-SRCREV = "595bc3e3bbb2e7ec12a8287145d8e3929291e59d"
++SRCREV = "8deec9b295a5700b26449986927c77d60c5c0e5f"
+ 
+ S = "${WORKDIR}/git"
+ 
 
 
