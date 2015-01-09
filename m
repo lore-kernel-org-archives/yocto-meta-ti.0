@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5CC0CE0090F; Fri,  9 Jan 2015 11:50:56 -0800 (PST)
+	id 16EB6E0096F; Fri,  9 Jan 2015 11:50:57 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D8774E0080C
-	for <meta-ti@yoctoproject.org>; Fri,  9 Jan 2015 11:50:44 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 93D11E00954
+	for <meta-ti@yoctoproject.org>; Fri,  9 Jan 2015 11:50:52 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7C2F852A2B; Fri,  9 Jan 2015 19:50:43 +0000 (UTC)
+	id 5133552AB1; Fri,  9 Jan 2015 19:50:44 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150109195043.7C2F852A2B@arago-project.org>
-Date: Fri,  9 Jan 2015 19:50:43 +0000 (UTC)
+Message-Id: <20150109195044.5133552AB1@arago-project.org>
+Date: Fri,  9 Jan 2015 19:50:44 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : setup-defconfig: fix bashism
+Subject: Denys Dmytriyenko : linux-ti-staging: update with latest fixes in connectivity and A/D
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,40 +33,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jan 2015 19:50:56 -0000
+X-List-Received-Date: Fri, 09 Jan 2015 19:50:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: b9031f04a38451cd14f7acc42db2a802723acd17
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b9031f04a38451cd14f7acc42db2a802723acd17
+Branch: daisy
+Commit: 6d96a4b09b44487c82cc71907541783508f22b9c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6d96a4b09b44487c82cc71907541783508f22b9c
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Jan 10 01:13:19 2015 +0000
+Date:   Sat Jan 10 01:10:55 2015 +0000
 
-setup-defconfig: fix bashism
-
-Reported by Francesco Del Degan
+linux-ti-staging: update with latest fixes in connectivity and A/D
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/setup-defconfig.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_3.14.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/setup-defconfig.inc b/recipes-kernel/linux/setup-defconfig.inc
-index 7468929..2c169cd 100644
---- a/recipes-kernel/linux/setup-defconfig.inc
-+++ b/recipes-kernel/linux/setup-defconfig.inc
-@@ -37,7 +37,7 @@ do_configure() {
-                 exit 1
-             else
-                 # Sanitize config fragment files to be relative to sources
--                configfrags+=" ${S}/$f"
-+                configfrags="$configfrags ${S}/$f"
-             fi
-         done
-     fi
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 6c0a352..bfeccf3 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -45,11 +45,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.14.y"
+ 
+-SRCREV = "6b7737373fad112d416781e83841732d33b0d1bd"
++SRCREV = "6af3881e0d3701fcec3050d477b62d7f3c9ea42e"
+ PV = "3.14.26"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "e+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
