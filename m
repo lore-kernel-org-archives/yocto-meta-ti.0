@@ -1,49 +1,42 @@
-Return-Path: <diego.sueiro@gmail.com>
+Return-Path: <ceh@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 58D4FE0086E; Fri,  9 Jan 2015 02:41:51 -0800 (PST)
+	id B392BE0086E; Fri,  9 Jan 2015 05:33:52 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (diego.sueiro[at]gmail.com)
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.192.45 listed in list.dnswl.org]
-Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
-	[209.85.192.45])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 307D9E004D6
-	for <meta-ti@yoctoproject.org>; Fri,  9 Jan 2015 02:41:41 -0800 (PST)
-Received: by mail-qg0-f45.google.com with SMTP id z107so7766485qgd.4
-	for <meta-ti@yoctoproject.org>; Fri, 09 Jan 2015 02:41:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=58OdW1g9n/vI1IjsJ4BK2MKGVO9iuFulWmQMsSISWic=;
-	b=cUDfvMW3O3olWHxz4qswhMR2qHKdD2y5oKFPsQpjYomjowNfLDXj8rlpRte1fjATFg
-	YFAXq1W7nIBjGQWCu3bQ0bjlbcuGSdEgc5KkqFEX2qDiXhRbeY6nTuVVslaUWQaPpS6i
-	UkuqzpSNuJhzYGJ6IZv1c/ZkRAG7eSpIQNfd/a2FFz2gyRGNECmrTCcpFFbkBMu4Aa3b
-	L9YdHhNGA3eVXlia3ie/VWDldAAKX6AQLiJGwF5MZXFm3wUTtLotT0xUQ15wAIY/omD6
-	tU9QYKkK10DM3sJ18CJ+Fr4ax+4mMkLIQbHVOO8yzIrUWqw3IJfEP3XwE3SbF2xX3Pzq
-	xW7A==
-X-Received: by 10.224.63.70 with SMTP id a6mr21943803qai.42.1420800100608;
-	Fri, 09 Jan 2015 02:41:40 -0800 (PST)
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5D2D3E004D6
+	for <meta-ti@yoctoproject.org>; Fri,  9 Jan 2015 05:33:39 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t09DXc28014870
+	for <meta-ti@yoctoproject.org>; Fri, 9 Jan 2015 07:33:38 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t09DXcVn021387
+	for <meta-ti@yoctoproject.org>; Fri, 9 Jan 2015 07:33:38 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 9 Jan 2015 07:33:38 -0600
+Received: from [158.218.103.10] (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t09DXbSa016520	for
+	<meta-ti@yoctoproject.org>; Fri, 9 Jan 2015 07:33:38 -0600
+Message-ID: <54AFD8B1.2050505@ti.com>
+Date: Fri, 9 Jan 2015 08:33:37 -0500
+From: Carlos Hernandez <ceh@ti.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:17.0) Gecko/20130801 Thunderbird/17.0.8
 MIME-Version: 1.0
-Received: by 10.140.44.10 with HTTP; Fri, 9 Jan 2015 02:41:19 -0800 (PST)
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Fri, 9 Jan 2015 08:41:19 -0200
-Message-ID: <CAMCfZKH_-v_S=mLiNLQVRZ_YmUYZgz1a6q8h_ZX5VRqfwjiESQ@mail.gmail.com>
-To: meta-ti mailing list <meta-ti@yoctoproject.org>
-Subject: pvrsrvkm failing on kernel 3.14.26 for am3359
+To: <meta-ti@yoctoproject.org>
+References: <CAMCfZKH_-v_S=mLiNLQVRZ_YmUYZgz1a6q8h_ZX5VRqfwjiESQ@mail.gmail.com>
+In-Reply-To: <CAMCfZKH_-v_S=mLiNLQVRZ_YmUYZgz1a6q8h_ZX5VRqfwjiESQ@mail.gmail.com>
+Subject: Re: pvrsrvkm failing on kernel 3.14.26 for am3359
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,67 +49,201 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jan 2015 10:41:51 -0000
-Content-Type: multipart/alternative; boundary=047d7bdca1004b320e050c35cd41
+X-List-Received-Date: Fri, 09 Jan 2015 13:33:52 -0000
+Content-Type: multipart/alternative;
+	boundary="------------030102090706080903060906"
 
---047d7bdca1004b320e050c35cd41
-Content-Type: text/plain; charset=ISO-8859-1
+--------------030102090706080903060906
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Folks,
+Diego,
 
-I have recently updated my meta-ti daisy branch and noticed that
-omap3-sgx-modules are not being loaded.
+The commit shown below should fix the issue.
 
-Here is the log for 3.14.26 kernel (from meta-ti commit
-1d46274416c3b50808590963bdb6c157d9d7c745):
+Carlos
 
-pvrsrvkm: Unknown symbol v7_dma_map_area (err 0)
-pvrsrvkm: Unknown symbol v7_dma_flush_range (err 0)
-insmod: ERROR: could not insert module
-/lib/modules/3.14.26/kernel/drivers/gpu/pvr/pvrsrvkm.ko: Unknown symbol in
-module
-Could not find pvrsrvkm driver
+commit b35aa2398f8347e51dc29acc9bf1cc64e672ec22
+Author: Pantelis Antoniou <panto@antoniou-consulting.com>
+Date:   Wed Jan 7 13:52:08 2015 +0000
+
+     arm: Export cache flush management symbols when !MULTI_CACHE
+
+     When compiling a kernel without CONFIG_MULTI_CACHE enabled the
+     dma access functions end up not being exported. Fix it.
+
+     Signed-off-by: Pantelis Antoniou <panto@antoniou-consulting.com>
+     Signed-off-by: Tomi Valkeinen <tomi.valkeinen@ti.com>
+
+diff --git a/arch/arm/kernel/setup.c b/arch/arm/kernel/setup.c
+index 1e8b030..c6a9a61 100644
+--- a/arch/arm/kernel/setup.c
++++ b/arch/arm/kernel/setup.c
+@@ -1080,3 +1080,12 @@ const struct seq_operations cpuinfo_op = {
+         .stop   = c_stop,
+         .show   = c_show
+  };
++
++/* export the cache management functions */
++#ifndef MULTI_CACHE
++
++EXPORT_SYMBOL(__glue(_CACHE,_dma_map_area));
++EXPORT_SYMBOL(__glue(_CACHE,_dma_unmap_area));
++EXPORT_SYMBOL(__glue(_CACHE,_dma_flush_range));
++
++#endif
 
 
-The 3.14.25 kernel version (from meta-ti commit
-31348244882a8defb640af75119ba275d9915f09) is OK.
+On 01/09/2015 05:41 AM, Diego Sueiro wrote:
+> Folks,
+>
+> I have recently updated my meta-ti daisy branch and noticed that 
+> omap3-sgx-modules are not being loaded.
+>
+> Here is the log for 3.14.26 kernel (from meta-ti commit 
+> 1d46274416c3b50808590963bdb6c157d9d7c745):
+>
+>     pvrsrvkm: Unknown symbol v7_dma_map_area (err 0)
+>     pvrsrvkm: Unknown symbol v7_dma_flush_range (err 0)
+>     insmod: ERROR: could not insert module
+>     /lib/modules/3.14.26/kernel/drivers/gpu/pvr/pvrsrvkm.ko: Unknown
+>     symbol in module
+>     Could not find pvrsrvkm driver
+>
+>
+> The 3.14.25 kernel version (from meta-ti commit 
+> 31348244882a8defb640af75119ba275d9915f09) is OK.
+>
+> I'm using the default kernel configuration.
+>
+>
+> Regards,
+>
+> --
+> *dS
+> Diego Sueiro
+>
+> Administrador do Embarcados
+> www.embarcados.com.br 
+> <http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
+>
+> /*long live rock 'n roll*/
+>
+>
 
-I'm using the default kernel configuration.
 
+--------------030102090706080903060906
+Content-Type: text/html; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Regards,
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1"
+      http-equiv="Content-Type">
+  </head>
+  <body bgcolor="#FFFFFF" text="#000000">
+    <div class="moz-cite-prefix">Diego,<br>
+      <br>
+      The commit shown below should fix the issue.<br>
+      <br>
+      Carlos<br>
+      <br>
+      commit b35aa2398f8347e51dc29acc9bf1cc64e672ec22<br>
+      Author: Pantelis Antoniou <a class="moz-txt-link-rfc2396E" href="mailto:panto@antoniou-consulting.com">&lt;panto@antoniou-consulting.com&gt;</a><br>
+      Date:&nbsp;&nbsp; Wed Jan 7 13:52:08 2015 +0000<br>
+      <br>
+      &nbsp;&nbsp;&nbsp; arm: Export cache flush management symbols when !MULTI_CACHE<br>
+      &nbsp;&nbsp;&nbsp; <br>
+      &nbsp;&nbsp;&nbsp; When compiling a kernel without CONFIG_MULTI_CACHE enabled the<br>
+      &nbsp;&nbsp;&nbsp; dma access functions end up not being exported. Fix it.<br>
+      &nbsp;&nbsp;&nbsp; <br>
+      &nbsp;&nbsp;&nbsp; Signed-off-by: Pantelis Antoniou
+      <a class="moz-txt-link-rfc2396E" href="mailto:panto@antoniou-consulting.com">&lt;panto@antoniou-consulting.com&gt;</a><br>
+      &nbsp;&nbsp;&nbsp; Signed-off-by: Tomi Valkeinen <a class="moz-txt-link-rfc2396E" href="mailto:tomi.valkeinen@ti.com">&lt;tomi.valkeinen@ti.com&gt;</a><br>
+      <br>
+      diff --git a/arch/arm/kernel/setup.c b/arch/arm/kernel/setup.c<br>
+      index 1e8b030..c6a9a61 100644<br>
+      --- a/arch/arm/kernel/setup.c<br>
+      +++ b/arch/arm/kernel/setup.c<br>
+      @@ -1080,3 +1080,12 @@ const struct seq_operations cpuinfo_op = {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .stop&nbsp;&nbsp; = c_stop,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .show&nbsp;&nbsp; = c_show<br>
+      &nbsp;};<br>
+      +<br>
+      +/* export the cache management functions */<br>
+      +#ifndef MULTI_CACHE<br>
+      +<br>
+      +EXPORT_SYMBOL(__glue(_CACHE,_dma_map_area));<br>
+      +EXPORT_SYMBOL(__glue(_CACHE,_dma_unmap_area));<br>
+      +EXPORT_SYMBOL(__glue(_CACHE,_dma_flush_range));<br>
+      +<br>
+      +#endif<br>
+      <br>
+      <br>
+      On 01/09/2015 05:41 AM, Diego Sueiro wrote:<br>
+    </div>
+    <blockquote
+cite="mid:CAMCfZKH_-v_S=mLiNLQVRZ_YmUYZgz1a6q8h_ZX5VRqfwjiESQ@mail.gmail.com"
+      type="cite">
+      <meta http-equiv="Content-Type" content="text/html;
+        charset=ISO-8859-1">
+      <div dir="ltr">
+        <div>Folks,</div>
+        <div><br>
+        </div>
+        <div>I have recently updated my meta-ti daisy branch and noticed
+          that omap3-sgx-modules are not being loaded.</div>
+        <div><br>
+        </div>
+        <div>Here is the log for 3.14.26 kernel (from meta-ti commit
+          1d46274416c3b50808590963bdb6c157d9d7c745):</div>
+        <blockquote style="margin:0px 0px 0px
+          40px;border:none;padding:0px">
+          <div>pvrsrvkm: Unknown symbol v7_dma_map_area (err 0)</div>
+          <div>pvrsrvkm: Unknown symbol v7_dma_flush_range (err 0)</div>
+          <div>insmod: ERROR: could not insert module
+            /lib/modules/3.14.26/kernel/drivers/gpu/pvr/pvrsrvkm.ko:
+            Unknown symbol in module</div>
+          <div>Could not find pvrsrvkm driver</div>
+        </blockquote>
+        <div><br>
+        </div>
+        <div>The 3.14.25 kernel version (from meta-ti commit
+          31348244882a8defb640af75119ba275d9915f09) is OK.<br>
+        </div>
+        <div><br>
+        </div>
+        <div>I'm using the default kernel configuration.</div>
+        <div><br>
+        </div>
+        <div><br>
+        </div>
+        <div>
+          <div>
+            <div dir="ltr">
+              <div>Regards,</div>
+              <div><br>
+              </div>
+              --<br>
+              *dS<br>
+              Diego Sueiro<br>
+              <br>
+              Administrador do Embarcados<br>
+              <a moz-do-not-send="true"
+href="http://www.embarcados.com.br/?utm_source=assinatura_diego&amp;utm_medium=e-mail&amp;utm_campaign=Assinatura%20Email%20Diego"
+                target="_blank">www.embarcados.com.br</a><br>
+              <br>
+              /*long live rock 'n roll*/<br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <br>
+    </blockquote>
+    <br>
+  </body>
+</html>
 
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br
-<http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
-
-/*long live rock 'n roll*/
-
---047d7bdca1004b320e050c35cd41
-Content-Type: text/html; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Folks,</div><div><br></div><div>I have recently updat=
-ed my meta-ti daisy branch and noticed that omap3-sgx-modules are not being=
- loaded.</div><div><br></div><div>Here is the log for 3.14.26 kernel (from =
-meta-ti commit 1d46274416c3b50808590963bdb6c157d9d7c745):</div><blockquote =
-style=3D"margin:0px 0px 0px 40px;border:none;padding:0px"><div>pvrsrvkm: Un=
-known symbol v7_dma_map_area (err 0)</div><div>pvrsrvkm: Unknown symbol v7_=
-dma_flush_range (err 0)</div><div>insmod: ERROR: could not insert module /l=
-ib/modules/3.14.26/kernel/drivers/gpu/pvr/pvrsrvkm.ko: Unknown symbol in mo=
-dule</div><div>Could not find pvrsrvkm driver</div></blockquote><div><br></=
-div><div>The 3.14.25 kernel version (from meta-ti commit 31348244882a8defb6=
-40af75119ba275d9915f09) is OK.<br></div><div><br></div><div>I&#39;m using t=
-he default kernel configuration.</div><div><br></div><div><br></div><div><d=
-iv><div dir=3D"ltr"><div>Regards,</div><div><br></div>--<br>*dS<br>Diego Su=
-eiro<br><br>Administrador do Embarcados<br><a href=3D"http://www.embarcados=
-.com.br/?utm_source=3Dassinatura_diego&amp;utm_medium=3De-mail&amp;utm_camp=
-aign=3DAssinatura%20Email%20Diego" target=3D"_blank">www.embarcados.com.br<=
-/a><br><br>/*long live rock &#39;n roll*/<br></div></div></div>
-</div>
-
---047d7bdca1004b320e050c35cd41--
+--------------030102090706080903060906--
