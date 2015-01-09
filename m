@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8DD73E0070B; Fri,  9 Jan 2015 08:30:47 -0800 (PST)
+	id 506D7E00828; Fri,  9 Jan 2015 08:36:09 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [206.46.173.25 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E096BE0080C
-	for <meta-ti@yoctoproject.org>; Fri,  9 Jan 2015 08:30:39 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id E1F3452A09; Fri,  9 Jan 2015 16:30:38 +0000 (UTC)
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5BEB1E0070B
+	for <meta-ti@yoctoproject.org>; Fri,  9 Jan 2015 08:36:01 -0800 (PST)
+Received: from gandalf.denix.org ([108.18.33.160]) by vms173025.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NHX007Q94RL1C40@vms173025.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Fri, 09 Jan 2015 10:36:00 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=PYxIXZlY c=1 sm=1 tr=0	a=A8KAnipHuDHkz1LiHkTZyg==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=YNv0rlydsVwA:10
+	a=sozttTNsAAAA:8	a=g1xrgIQGl6udWOza_KAA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 0AAE0200E2;	Fri,
+	9 Jan 2015 11:35:45 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20150109163038.E1F3452A09@arago-project.org>
-Date: Fri,  9 Jan 2015 16:30:38 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : multi-kernel: update to work with latest code
+Date: Fri, 09 Jan 2015 11:35:44 -0500
+Message-id: <1420821344-29181-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] linux-ti-staging: update with cpsw interrupt fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,30 +45,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jan 2015 16:30:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 09 Jan 2015 16:36:09 -0000
 
-Module: meta-ti
-Branch: daisy
-Commit: 5532d8df96caaa6ac73ff825f36e7f11793c7060
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5532d8df96caaa6ac73ff825f36e7f11793c7060
-
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Fri Jan  9 05:34:19 2015 +0000
-
-multi-kernel: update to work with latest code
-
-Handle multi-config kernel builds with separate namespaces to allow installing
-them side by side safely.
+From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-kernel/linux/linux-ti-staging_3.14.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- .../linux/linux-ti-staging-3.14/configs/systest    |    1 +
- recipes-kernel/linux/linux-ti-staging_3.14.bb      |   13 +-
- recipes-kernel/linux/multi-kernel.inc              |  137 ++++++++++----------
- 3 files changed, 76 insertions(+), 75 deletions(-)
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 6c0a352..ee31fb0 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -45,11 +45,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.14.y"
+ 
+-SRCREV = "6b7737373fad112d416781e83841732d33b0d1bd"
++SRCREV = "792b5f406b0aa71f3d103baab7a6027ca9ba663b"
+ PV = "3.14.26"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "e+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+-- 
+2.2.0
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=5532d8df96caaa6ac73ff825f36e7f11793c7060
 
