@@ -1,53 +1,49 @@
-Return-Path: <gleym-meta-ti@m.gmane.org>
+Return-Path: <diego.sueiro@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E90EDE0086E; Fri,  9 Jan 2015 02:37:58 -0800 (PST)
+	id 58D4FE0086E; Fri,  9 Jan 2015 02:41:51 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00, DKIM_ADSP_CUSTOM_MED,
-	FREEMAIL_FROM,NML_ADSP_CUSTOM_MED,RCVD_IN_DNSWL_LOW,SPF_HELO_PASS
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (f.deldegan[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [80.91.229.3 listed in list.dnswl.org]
-	* -0.0 SPF_HELO_PASS SPF: HELO matches SPF record
-	*  0.0 DKIM_ADSP_CUSTOM_MED No valid author signature, adsp_override is
-	*      CUSTOM_MED
+	mail provider *      (diego.sueiro[at]gmail.com)
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.9 NML_ADSP_CUSTOM_MED ADSP custom_med hit,
-	and not from a mailing list
-X-Greylist: delayed 906 seconds by postgrey-1.32 at yocto-www;
-	Fri, 09 Jan 2015 02:37:55 PST
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E2616E004D6
-	for <meta-ti@yoctoproject.org>; Fri,  9 Jan 2015 02:37:55 -0800 (PST)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gleym-meta-ti@m.gmane.org>) id 1Y9Wfi-0001KM-S0
-	for meta-ti@yoctoproject.org; Fri, 09 Jan 2015 11:20:03 +0100
-Received: from 93-58-90-146.ip157.fastwebnet.it ([93.58.90.146])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00
-	for <meta-ti@yoctoproject.org>; Fri, 09 Jan 2015 11:20:02 +0100
-Received: from f.deldegan by 93-58-90-146.ip157.fastwebnet.it with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <meta-ti@yoctoproject.org>; Fri, 09 Jan 2015 11:20:02 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: meta-ti@yoctoproject.org
-From: Francesco Del Degan <f.deldegan@gmail.com>
-Date: Fri, 9 Jan 2015 09:58:10 +0000 (UTC)
-Message-ID: <loom.20150109T105110-873@post.gmane.org>
-References: <20150108172247.1FE43529D3@arago-project.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 93.58.90.146 (Mozilla/5.0 (X11;
-	Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu
-	Chromium/39.0.2171.65 Chrome/39.0.2171.65 Safari/537.36)
-Subject: Re: Denys Dmytriyenko : setup-defconfig: support combined	defconfig with listed config fragments
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.192.45 listed in list.dnswl.org]
+Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
+	[209.85.192.45])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 307D9E004D6
+	for <meta-ti@yoctoproject.org>; Fri,  9 Jan 2015 02:41:41 -0800 (PST)
+Received: by mail-qg0-f45.google.com with SMTP id z107so7766485qgd.4
+	for <meta-ti@yoctoproject.org>; Fri, 09 Jan 2015 02:41:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=58OdW1g9n/vI1IjsJ4BK2MKGVO9iuFulWmQMsSISWic=;
+	b=cUDfvMW3O3olWHxz4qswhMR2qHKdD2y5oKFPsQpjYomjowNfLDXj8rlpRte1fjATFg
+	YFAXq1W7nIBjGQWCu3bQ0bjlbcuGSdEgc5KkqFEX2qDiXhRbeY6nTuVVslaUWQaPpS6i
+	UkuqzpSNuJhzYGJ6IZv1c/ZkRAG7eSpIQNfd/a2FFz2gyRGNECmrTCcpFFbkBMu4Aa3b
+	L9YdHhNGA3eVXlia3ie/VWDldAAKX6AQLiJGwF5MZXFm3wUTtLotT0xUQ15wAIY/omD6
+	tU9QYKkK10DM3sJ18CJ+Fr4ax+4mMkLIQbHVOO8yzIrUWqw3IJfEP3XwE3SbF2xX3Pzq
+	xW7A==
+X-Received: by 10.224.63.70 with SMTP id a6mr21943803qai.42.1420800100608;
+	Fri, 09 Jan 2015 02:41:40 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.44.10 with HTTP; Fri, 9 Jan 2015 02:41:19 -0800 (PST)
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Fri, 9 Jan 2015 08:41:19 -0200
+Message-ID: <CAMCfZKH_-v_S=mLiNLQVRZ_YmUYZgz1a6q8h_ZX5VRqfwjiESQ@mail.gmail.com>
+To: meta-ti mailing list <meta-ti@yoctoproject.org>
+Subject: pvrsrvkm failing on kernel 3.14.26 for am3359
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -60,41 +56,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jan 2015 10:37:59 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 09 Jan 2015 10:41:51 -0000
+Content-Type: multipart/alternative; boundary=047d7bdca1004b320e050c35cd41
 
-Arago Project git <git@...> writes:
+--047d7bdca1004b320e050c35cd41
+Content-Type: text/plain; charset=ISO-8859-1
 
-> +    config=`cat ${S}/.config | grep config-fragment | cut -d= -f2`
-> +    if [ -n "$config" ]
-> +    then
-> +        configfrags=""
-> +        for f in $config
-> +        do
-> +            # Check if the config fragment is available
-> +            if [ ! -e "$f" ]
-> +            then
-> +                echo "Could not find kernel config fragment $f"
-> +                exit 1
-> +            else
-> +                # Sanitize config fragment files to be relative to 
-sources
-> +                configfrags+=" ${S}/$f"
-> +            fi
-> +        done
-> +    fi
-> +
+Folks,
 
-Hi,
+I have recently updated my meta-ti daisy branch and noticed that
+omap3-sgx-modules are not being loaded.
 
-I think that configfrags+="..." here is a bashism. It fails on my builder 
-with "configfrags+= ..... not found".
+Here is the log for 3.14.26 kernel (from meta-ti commit
+1d46274416c3b50808590963bdb6c157d9d7c745):
 
-I resolved with configfrags="$configfrags ${S}/$f"
-
-Cheers,
-  Francesco
+pvrsrvkm: Unknown symbol v7_dma_map_area (err 0)
+pvrsrvkm: Unknown symbol v7_dma_flush_range (err 0)
+insmod: ERROR: could not insert module
+/lib/modules/3.14.26/kernel/drivers/gpu/pvr/pvrsrvkm.ko: Unknown symbol in
+module
+Could not find pvrsrvkm driver
 
 
+The 3.14.25 kernel version (from meta-ti commit
+31348244882a8defb640af75119ba275d9915f09) is OK.
 
+I'm using the default kernel configuration.
+
+
+Regards,
+
+--
+*dS
+Diego Sueiro
+
+Administrador do Embarcados
+www.embarcados.com.br
+<http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
+
+/*long live rock 'n roll*/
+
+--047d7bdca1004b320e050c35cd41
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Folks,</div><div><br></div><div>I have recently updat=
+ed my meta-ti daisy branch and noticed that omap3-sgx-modules are not being=
+ loaded.</div><div><br></div><div>Here is the log for 3.14.26 kernel (from =
+meta-ti commit 1d46274416c3b50808590963bdb6c157d9d7c745):</div><blockquote =
+style=3D"margin:0px 0px 0px 40px;border:none;padding:0px"><div>pvrsrvkm: Un=
+known symbol v7_dma_map_area (err 0)</div><div>pvrsrvkm: Unknown symbol v7_=
+dma_flush_range (err 0)</div><div>insmod: ERROR: could not insert module /l=
+ib/modules/3.14.26/kernel/drivers/gpu/pvr/pvrsrvkm.ko: Unknown symbol in mo=
+dule</div><div>Could not find pvrsrvkm driver</div></blockquote><div><br></=
+div><div>The 3.14.25 kernel version (from meta-ti commit 31348244882a8defb6=
+40af75119ba275d9915f09) is OK.<br></div><div><br></div><div>I&#39;m using t=
+he default kernel configuration.</div><div><br></div><div><br></div><div><d=
+iv><div dir=3D"ltr"><div>Regards,</div><div><br></div>--<br>*dS<br>Diego Su=
+eiro<br><br>Administrador do Embarcados<br><a href=3D"http://www.embarcados=
+.com.br/?utm_source=3Dassinatura_diego&amp;utm_medium=3De-mail&amp;utm_camp=
+aign=3DAssinatura%20Email%20Diego" target=3D"_blank">www.embarcados.com.br<=
+/a><br><br>/*long live rock &#39;n roll*/<br></div></div></div>
+</div>
+
+--047d7bdca1004b320e050c35cd41--
