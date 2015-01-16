@@ -1,38 +1,38 @@
 Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CBD72E008F6; Fri, 16 Jan 2015 10:20:30 -0800 (PST)
+	id 1B441E00948; Fri, 16 Jan 2015 10:50:49 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 97414E008D7
-	for <meta-ti@yoctoproject.org>; Fri, 16 Jan 2015 10:20:23 -0800 (PST)
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C5ADCE008DE
+	for <meta-ti@yoctoproject.org>; Fri, 16 Jan 2015 10:50:35 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0GIKMdd003282
-	for <meta-ti@yoctoproject.org>; Fri, 16 Jan 2015 12:20:22 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0GIKMLb012781
-	for <meta-ti@yoctoproject.org>; Fri, 16 Jan 2015 12:20:22 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 16 Jan 2015 12:20:22 -0600
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0GIoYMe024599
+	for <meta-ti@yoctoproject.org>; Fri, 16 Jan 2015 12:50:34 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0GIoYYd002065
+	for <meta-ti@yoctoproject.org>; Fri, 16 Jan 2015 12:50:34 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 16 Jan 2015 12:50:34 -0600
 Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t0GIKMIE018465;	Fri, 16 Jan 2015 12:20:22 -0600
+	t0GIoYEJ020338;	Fri, 16 Jan 2015 12:50:34 -0600
 From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 16 Jan 2015 13:20:20 -0500
-Message-ID: <1421432420-32358-1-git-send-email-sam.nelson@ti.com>
+Date: Fri, 16 Jan 2015 13:50:33 -0500
+Message-ID: <1421434233-395-1-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] traceframework: Add recipe for TI trace framework library
+Subject: [PATCH] ti-softhsmv2: Add recipe for ti customised softhsm package
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,72 +45,66 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jan 2015 18:20:30 -0000
+X-List-Received-Date: Fri, 16 Jan 2015 18:50:49 -0000
 Content-Type: text/plain
 
-- Provide libraries and test code for trace framework.
-- Support framework to stream data from producer to multiple consumers
-- Supports devices K2H, K2K, K2E, K2L & c6614
+- Provide library, deamon and util for ti customised softhsm
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- recipes-bsp/traceframework/traceframework_git.bb |   48 ++++++++++++++++++++++
- 1 file changed, 48 insertions(+)
- create mode 100644 recipes-bsp/traceframework/traceframework_git.bb
+ recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb |   44 +++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
+ create mode 100644 recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
 
-diff --git a/recipes-bsp/traceframework/traceframework_git.bb b/recipes-bsp/traceframework/traceframework_git.bb
+diff --git a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
 new file mode 100644
-index 0000000..3211dea
+index 0000000..fef6500
 --- /dev/null
-+++ b/recipes-bsp/traceframework/traceframework_git.bb
-@@ -0,0 +1,48 @@
-+DESCRIPTION = "TI Trace Framework library"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/instrumentation/traceframework/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
++++ b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
+@@ -0,0 +1,44 @@
++DESCRIPTION = "TI softhsmv2 package"
++LICENSE = "BSD-2-Clause | BSD-3-Clause | Others"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=55144a048ba54f211a1aaa38c7fd2424"
++SECTION = "libs"
++PRIORITY = "optional"
++
++mntdir = "/mnt"
++
++inherit autotools pkgconfig
++
++DEPENDS = "openssl libdaemon"
++COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
 +
 +BRANCH="master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/traceframework.git;destsuffix=git/ti/instrumentation/traceframework;protocol=git;branch=${BRANCH}"
++SRC_URI = "git://git.ti.com/keystone-linux/ti-softhsmv2.git;protocol=git;branch=${BRANCH}"
++#Following commit corresponds to tag DEV.SOFTHSM-01.03.00.01
++SRCREV = "c79d93ac2a326567a7245dda1b903ef340b5650c"
++PV = "1.3.0.1"
 +
-+# Below commit ID corresponds to DEV.TFWK-01.01.01.06A
-+SRCREV = "bd87f53f4d12dc802bcc5609afb7994643e40cb9"
-+PV = "01.01.01.06"
++S = "${WORKDIR}/git"
 +
-+COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
-+DEPENDS = "cuia"
++CFLAGS += " -mno-unaligned-access"
++CPPFLAGS += " -mno-unaligned-access"
 +
-+DEVICELIST = ""
-+DEVICELIST_append_tci6614-evm = "c6614"
-+DEVICELIST_append_keystone    = "k2k k2h k2e k2l"
++INITSCRIPT_NAME = "softhsm-daemon.sh"
++INITSCRIPT_PARAMS = "defaults 10"
 +
-+PACKAGES =+ "${PN}-test"
++inherit update-rc.d
 +
-+FILES_${PN}-test = "${bindir}/tfw*.out \
-+                    ${bindir}/*.txt"
++SELECTED_OPTIMIZATION := "${@d.getVar("SELECTED_OPTIMIZATION", True).replace("-O2", "-O3")}"
++SELECTED_OPTIMIZATION := "${@d.getVar("SELECTED_OPTIMIZATION", True).replace("-ggdb2", "")}"
 +
-+BASEDIR = "${WORKDIR}/git"
-+S = "${BASEDIR}/ti/instrumentation/traceframework"
++FILES_${PN} += "${libdir}/softhsm/lib*.so.* ${mntdir}/*"
++FILES_${PN}-dbg += "${libdir}/softhsm/.debug"
++FILES_${PN}-staticdev += "${libdir}/softhsm/*.a "
++FILES_${PN}-dev += "${libdir}/softhsm/*.la ${libdir}/softhsm/lib*.so"
 +
-+EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} \
-+                 CUIA_INSTALL_DIR=${STAGING_INCDIR} CUIA_LIB_DIR=${STAGING_LIBDIR}"
++do_install_append() {
++	install -d ${D}${mntdir}/securedbv0
++	install -d ${D}${mntdir}/securedbv1
 +
-+do_compile () {
-+#   making the library
-+	oe_runmake clean
-+	oe_runmake lib
-+
-+#   make the test application
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake tests DEVICE="$device" TFW_INC_DIR=${BASEDIR} TFW_SRC_DIR=${S} \
-+			TARGET_ROOT_DIR=${D}
-+	done
-+}
-+
-+do_install() {
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake install DEVICE="$device" TFW_SRC_DIR=${S} TARGET_ROOT_DIR=${D}
-+	done
++	install -d ${D}${sysconfdir}/init.d/
++	install -c -m 755 ${S}/src/bin/daemon/softhsm-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
 +}
 -- 
 1.7.9.5
