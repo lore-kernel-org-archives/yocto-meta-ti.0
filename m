@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A2890E00951; Thu, 15 Jan 2015 18:57:52 -0800 (PST)
+	id A4A83E00948; Thu, 15 Jan 2015 18:57:52 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5FB3AE00894
-	for <meta-ti@yoctoproject.org>; Thu, 15 Jan 2015 18:57:41 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 60FC7E0093B
+	for <meta-ti@yoctoproject.org>; Thu, 15 Jan 2015 18:57:40 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id ADBCA52A5A; Fri, 16 Jan 2015 02:57:40 +0000 (UTC)
+	id 5684F52981; Fri, 16 Jan 2015 02:57:40 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150116025740.ADBCA52A5A@arago-project.org>
+Message-Id: <20150116025740.5684F52981@arago-project.org>
 Date: Fri, 16 Jan 2015 02:57:40 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : cuia: Add recipe for TI unified Instrumentation Architecture in C module
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 16 Jan 2015 02:57:52 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: a993f20a30c24aa2e26d54c86036745c110687b3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a993f20a30c24aa2e26d54c86036745c110687b3
+Branch: master
+Commit: 6a7aa3b035b401717343f10abe7abdc3312529d8
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6a7aa3b035b401717343f10abe7abdc3312529d8
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Fri Jan 16 00:48:31 2015 +0000
