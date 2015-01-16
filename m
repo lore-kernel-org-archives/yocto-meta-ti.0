@@ -1,6 +1,6 @@
 Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 50A7EE00753; Fri, 16 Jan 2015 05:10:13 -0800 (PST)
+	id CBD72E008F6; Fri, 16 Jan 2015 10:20:30 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,31 +10,29 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
 	high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0E9A8E004D6
-	for <meta-ti@yoctoproject.org>; Fri, 16 Jan 2015 05:10:08 -0800 (PST)
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 97414E008D7
+	for <meta-ti@yoctoproject.org>; Fri, 16 Jan 2015 10:20:23 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0GDA75g024197
-	for <meta-ti@yoctoproject.org>; Fri, 16 Jan 2015 07:10:07 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0GDA7ta021112
-	for <meta-ti@yoctoproject.org>; Fri, 16 Jan 2015 07:10:07 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 16 Jan 2015 07:10:07 -0600
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0GIKMdd003282
+	for <meta-ti@yoctoproject.org>; Fri, 16 Jan 2015 12:20:22 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0GIKMLb012781
+	for <meta-ti@yoctoproject.org>; Fri, 16 Jan 2015 12:20:22 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 16 Jan 2015 12:20:22 -0600
 Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t0GD7tWJ016606;	Fri, 16 Jan 2015 07:10:07 -0600
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t0GIKMIE018465;	Fri, 16 Jan 2015 12:20:22 -0600
 From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 16 Jan 2015 07:20:26 -0500
-Message-ID: <1421410826-27466-2-git-send-email-sam.nelson@ti.com>
+Date: Fri, 16 Jan 2015 13:20:20 -0500
+Message-ID: <1421432420-32358-1-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1421410826-27466-1-git-send-email-sam.nelson@ti.com>
-References: <1421410826-27466-1-git-send-email-sam.nelson@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] multiprocmgr: Update to new version of MPM 2.0.1.7
+Subject: [PATCH] traceframework: Add recipe for TI trace framework library
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,115 +45,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jan 2015 13:10:13 -0000
+X-List-Received-Date: Fri, 16 Jan 2015 18:20:30 -0000
 Content-Type: text/plain
 
-- Recipe split into main and test recipes.
-- Added dependency on mpm-transport & libdaemon & syslog-ng
-- Added startup scripts for daemon
-- Removed PR
+- Provide libraries and test code for trace framework.
+- Support framework to stream data from producer to multiple consumers
+- Supports devices K2H, K2K, K2E, K2L & c6614
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- recipes-ti/multiprocmgr/multiprocmgr-test_git.bb |   18 ++++++++++++
- recipes-ti/multiprocmgr/multiprocmgr.inc         |   14 +++++++++
- recipes-ti/multiprocmgr/multiprocmgr_git.bb      |   34 +++++++++++++++-------
- 3 files changed, 55 insertions(+), 11 deletions(-)
- create mode 100644 recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
- create mode 100644 recipes-ti/multiprocmgr/multiprocmgr.inc
+ recipes-bsp/traceframework/traceframework_git.bb |   48 ++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
+ create mode 100644 recipes-bsp/traceframework/traceframework_git.bb
 
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+diff --git a/recipes-bsp/traceframework/traceframework_git.bb b/recipes-bsp/traceframework/traceframework_git.bb
 new file mode 100644
-index 0000000..b05cd44
+index 0000000..3211dea
 --- /dev/null
-+++ b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "TI Multiproc Manager test code"
++++ b/recipes-bsp/traceframework/traceframework_git.bb
+@@ -0,0 +1,48 @@
++DESCRIPTION = "TI Trace Framework library"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/instrumentation/traceframework/COPYING.txt;md5=e8f6789acdcda76d02ed9203fc2e603d"
 +
-+include multiprocmgr.inc
++BRANCH="master"
++SRC_URI = "git://git.ti.com/keystone-rtos/traceframework.git;destsuffix=git/ti/instrumentation/traceframework;protocol=git;branch=${BRANCH}"
 +
-+DEPENDS = "multiprocmgr cmem"
-+RDEPENDS_${PN} = "multiprocmgr mpm-transport cmem"
++# Below commit ID corresponds to DEV.TFWK-01.01.01.06A
++SRCREV = "bd87f53f4d12dc802bcc5609afb7994643e40cb9"
++PV = "01.01.01.06"
 +
-+CC += "-I${STAGING_KERNEL_DIR}/include"
++COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
++DEPENDS = "cuia"
 +
-+do_compile() {
-+	make -C ${S} test
++DEVICELIST = ""
++DEVICELIST_append_tci6614-evm = "c6614"
++DEVICELIST_append_keystone    = "k2k k2h k2e k2l"
++
++PACKAGES =+ "${PN}-test"
++
++FILES_${PN}-test = "${bindir}/tfw*.out \
++                    ${bindir}/*.txt"
++
++BASEDIR = "${WORKDIR}/git"
++S = "${BASEDIR}/ti/instrumentation/traceframework"
++
++EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} \
++                 CUIA_INSTALL_DIR=${STAGING_INCDIR} CUIA_LIB_DIR=${STAGING_LIBDIR}"
++
++do_compile () {
++#   making the library
++	oe_runmake clean
++	oe_runmake lib
++
++#   make the test application
++	for device in ${DEVICELIST}
++	do
++		oe_runmake tests DEVICE="$device" TFW_INC_DIR=${BASEDIR} TFW_SRC_DIR=${S} \
++			TARGET_ROOT_DIR=${D}
++	done
 +}
 +
 +do_install() {
-+	install -d ${D}${bindir}/
-+	install -c -m 755 ${S}/test/filetestdemo/host/bin/demo_filetest ${D}${bindir}/mpm_demo_filetest
-+	install -c -m 755 ${S}/test/sync_test/host/bin/sync_test ${D}${bindir}/mpm_sync_test
++	for device in ${DEVICELIST}
++	do
++		oe_runmake install DEVICE="$device" TFW_SRC_DIR=${S} TARGET_ROOT_DIR=${D}
++	done
 +}
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
-new file mode 100644
-index 0000000..26c8959
---- /dev/null
-+++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
-@@ -0,0 +1,14 @@
-+HOMEPAGE = "http://git.ti.com/cgit/cgit.cgi/keystone-linux/multi-proc-manager.git"
-+LICENSE = "BSD-3-Clause & MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fce208c498eb9669223724dc9c1d8fe4"
-+SECTION = "console"
-+COMPATIBLE_MACHINE = "keystone"
-+
-+BRANCH = "master"
-+# The following commits correspond to DEV.MPM-2.00.01.07
-+SRCREV = "b79e1cdaed78014569d82cf2f748d3f5f91623ee"
-+PV = "2.0.1.7"
-+
-+SRC_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git;protocol=git;branch=${BRANCH}"
-+
-+S = "${WORKDIR}/git"
-diff --git a/recipes-ti/multiprocmgr/multiprocmgr_git.bb b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
-index 3f2e52c..e1c4f2f 100644
---- a/recipes-ti/multiprocmgr/multiprocmgr_git.bb
-+++ b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
-@@ -1,20 +1,32 @@
- DESCRIPTION = "TI Multiproc Manager for KeyStone II"
--HOMEPAGE = "http://gtgit01.gt.design.ti.com/git/?p=projects/multiprocmgr.git;a=summary"
--LICENSE = "BSD & MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fce208c498eb9669223724dc9c1d8fe4"
--SECTION = "console"
--COMPATIBLE_MACHINE = "keystone"
-+SUMMARY = "Provides download, debug and other utilities for other cores in the SOC like DSP"
- 
--PR = "r1"
-+include multiprocmgr.inc
- 
--BRANCH ?= "master"
--SRCREV = "8a97fb5c2c06d5f02d30106629f27fe0ca8a4f95"
-+DEPENDS = "mpm-transport libdaemon"
-+RDEPENDS_${PN} = "syslog-ng"
- 
--SRC_URI = "git://gtgit01.gt.design.ti.com/git/projects/multiprocmgr.git;protocol=git;branch=${BRANCH}"
- 
--S = "${WORKDIR}/git"
-+CC += "-I${STAGING_KERNEL_DIR}/include"
-+
-+INITSCRIPT_NAME = "mpmsrv-daemon.sh"
-+INITSCRIPT_PARAMS = "defaults 10"
-+
-+inherit update-rc.d
- 
- do_install() {
- 	install -d ${D}${bindir}/
--	install -c -m 755 ${S}/mpmsrv ${D}${bindir}/mpmsrv
-+	install -c -m 755 ${S}/bin/mpmsrv ${D}${bindir}/mpmsrv
-+	install -c -m 755 ${S}/bin/mpmcl ${D}${bindir}/mpmcl
-+
-+	install -d ${D}${sysconfdir}/init.d/
-+	install -c -m 755 ${S}/scripts/mpmsrv-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
-+	install -d ${D}${sysconfdir}/mpm/
-+	install -c -m 755 ${S}/scripts/crash_callback.sh ${D}${sysconfdir}/mpm/crash_callback.sh
-+
-+	install -d ${D}${includedir}/
-+	install -c -m 755 ${S}/include/* ${D}${includedir}/
-+
-+	install -d ${D}${libdir}/
-+	cp -a ${S}/lib/* ${D}${libdir}/
- }
 -- 
 1.7.9.5
 
