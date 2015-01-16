@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 837C3E00945; Thu, 15 Jan 2015 18:57:50 -0800 (PST)
+	id 851DCE00942; Thu, 15 Jan 2015 18:57:50 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5CD40E00757
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E7F8E00782
 	for <meta-ti@yoctoproject.org>; Thu, 15 Jan 2015 18:57:40 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 497EB529B7; Fri, 16 Jan 2015 02:57:40 +0000 (UTC)
+	id 8878952A2E; Fri, 16 Jan 2015 02:57:40 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150116025740.497EB529B7@arago-project.org>
+Message-Id: <20150116025740.8878952A2E@arago-project.org>
 Date: Fri, 16 Jan 2015 02:57:40 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Franklin S. Cooper Jr : sitara-linux-ti-staging: Create recipe for Sitara 3 .14 kernel tree
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 16 Jan 2015 02:57:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: cf62459026d2f2042ea035f2cd618d823065e1ea
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cf62459026d2f2042ea035f2cd618d823065e1ea
+Branch: daisy
+Commit: 9e1ca2d9e169c7edd67e0839b838dc7bcf6ef6d1
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9e1ca2d9e169c7edd67e0839b838dc7bcf6ef6d1
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
 Date:   Thu Jan 15 02:43:29 2015 +0000
