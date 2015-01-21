@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 60A46E0084E; Wed, 21 Jan 2015 12:38:08 -0800 (PST)
+	id 53667E0094C; Wed, 21 Jan 2015 12:38:09 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7F0EE008EC
-	for <meta-ti@yoctoproject.org>; Wed, 21 Jan 2015 12:38:00 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1D59DE00902
+	for <meta-ti@yoctoproject.org>; Wed, 21 Jan 2015 12:38:05 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2BACA5297F; Wed, 21 Jan 2015 20:38:00 +0000 (UTC)
+	id CFA2252A78; Wed, 21 Jan 2015 20:38:00 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150121203800.2BACA5297F@arago-project.org>
+Message-Id: <20150121203800.CFA2252A78@arago-project.org>
 Date: Wed, 21 Jan 2015 20:38:00 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : multiprocmgr: Update to new version of MPM 2.0.1.7
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2015 20:38:08 -0000
+X-List-Received-Date: Wed, 21 Jan 2015 20:38:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: a9fe62d130146ed94dc248f35c563c1e76206517
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a9fe62d130146ed94dc248f35c563c1e76206517
+Branch: daisy
+Commit: 09410e4b765be4b2244da2f838d2b3df5ab24822
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=09410e4b765be4b2244da2f838d2b3df5ab24822
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Fri Jan 16 18:20:26 2015 +0000
