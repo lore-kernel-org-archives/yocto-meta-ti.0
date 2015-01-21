@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5B335E0092E; Wed, 21 Jan 2015 12:38:08 -0800 (PST)
+	id 5EB8DE0092D; Wed, 21 Jan 2015 12:38:08 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6B6FE008A7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A510FE0084E
 	for <meta-ti@yoctoproject.org>; Wed, 21 Jan 2015 12:38:00 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9553652A72; Wed, 21 Jan 2015 20:38:00 +0000 (UTC)
+	id 0849D529A4; Wed, 21 Jan 2015 20:37:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150121203800.9553652A72@arago-project.org>
-Date: Wed, 21 Jan 2015 20:38:00 +0000 (UTC)
+Message-Id: <20150121203800.0849D529A4@arago-project.org>
+Date: Wed, 21 Jan 2015 20:37:59 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : hplib: Add recipe for TI high performance library
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 21 Jan 2015 20:38:08 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: db6bdcd044fceb1f3f923418670faf20ed536be0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=db6bdcd044fceb1f3f923418670faf20ed536be0
+Branch: master
+Commit: ca6a156ea89a1632cf3d97dafece66ea26784894
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ca6a156ea89a1632cf3d97dafece66ea26784894
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Sat Jan 10 09:07:09 2015 +0000
