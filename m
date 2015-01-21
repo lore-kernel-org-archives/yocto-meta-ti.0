@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5EB8DE0092D; Wed, 21 Jan 2015 12:38:08 -0800 (PST)
+	id 60A46E0084E; Wed, 21 Jan 2015 12:38:08 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A510FE0084E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A7F0EE008EC
 	for <meta-ti@yoctoproject.org>; Wed, 21 Jan 2015 12:38:00 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0849D529A4; Wed, 21 Jan 2015 20:37:59 +0000 (UTC)
+	id 2BACA5297F; Wed, 21 Jan 2015 20:38:00 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150121203800.0849D529A4@arago-project.org>
-Date: Wed, 21 Jan 2015 20:37:59 +0000 (UTC)
+Message-Id: <20150121203800.2BACA5297F@arago-project.org>
+Date: Wed, 21 Jan 2015 20:38:00 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : hplib: Add recipe for TI high performance library
+Subject: Sam Nelson : multiprocmgr: Update to new version of MPM 2.0.1.7
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,142 +38,120 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ca6a156ea89a1632cf3d97dafece66ea26784894
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ca6a156ea89a1632cf3d97dafece66ea26784894
+Commit: a9fe62d130146ed94dc248f35c563c1e76206517
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a9fe62d130146ed94dc248f35c563c1e76206517
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Jan 10 09:07:09 2015 +0000
+Date:   Fri Jan 16 18:20:26 2015 +0000
 
-hplib: Add recipe for TI high performance library
+multiprocmgr: Update to new version of MPM 2.0.1.7
 
-- Provides high performance library, kernel module, user space libraries
-  and test binaries
-- Supports devices k2h, k2k, k2l & k2e
+- Recipe split into main and test recipes.
+- Added dependency on mpm-transport & libdaemon & syslog-ng
+- Added startup scripts for daemon
+- Removed PR
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/hplib/hplib-mod_git.bb  |   20 ++++++++++++++++++++
- recipes-bsp/hplib/hplib-test_git.bb |   30 ++++++++++++++++++++++++++++++
- recipes-bsp/hplib/hplib.inc         |   10 ++++++++++
- recipes-bsp/hplib/hplib_git.bb      |   30 ++++++++++++++++++++++++++++++
- 4 files changed, 90 insertions(+), 0 deletions(-)
+ recipes-ti/multiprocmgr/multiprocmgr-test_git.bb |   18 +++++++++++
+ recipes-ti/multiprocmgr/multiprocmgr.inc         |   14 +++++++++
+ recipes-ti/multiprocmgr/multiprocmgr_git.bb      |   34 +++++++++++++++-------
+ 3 files changed, 55 insertions(+), 11 deletions(-)
 
-diff --git a/recipes-bsp/hplib/hplib-mod_git.bb b/recipes-bsp/hplib/hplib-mod_git.bb
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
 new file mode 100644
-index 0000000..acef1ce
+index 0000000..b05cd44
 --- /dev/null
-+++ b/recipes-bsp/hplib/hplib-mod_git.bb
-@@ -0,0 +1,20 @@
-+DESCRIPTION = "TI High Performance Library kernel module"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/runtime/hplib/module/COPYING.txt;md5=c1c4d3453cddc5b7f0ce84a277e66779"
++++ b/recipes-ti/multiprocmgr/multiprocmgr-test_git.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "TI Multiproc Manager test code"
 +
-+DEPENDS = "hplib"
++include multiprocmgr.inc
 +
-+include hplib.inc
++DEPENDS = "multiprocmgr cmem"
++RDEPENDS_${PN} = "multiprocmgr mpm-transport cmem"
 +
-+# This package builds a kernel module, use kernel PR as base and append a local
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
++CC += "-I${STAGING_KERNEL_DIR}/include"
 +
-+S ="${WORKDIR}/git/ti/runtime/hplib/module"
-+EXTRA_OEMAKE = "KDIR=${STAGING_KERNEL_DIR} PDK_INSTALL_PATH=${STAGING_INCDIR}"
-+
-+inherit module
-+
-+do_install () {
-+	oe_runmake install INSTALL_MOD_PATH="${D}"
-+}
-diff --git a/recipes-bsp/hplib/hplib-test_git.bb b/recipes-bsp/hplib/hplib-test_git.bb
-new file mode 100644
-index 0000000..574fa2a
---- /dev/null
-+++ b/recipes-bsp/hplib/hplib-test_git.bb
-@@ -0,0 +1,30 @@
-+DESCRIPTION = "TI High performance library test binaries"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/runtime/hplib/src/COPYING.txt;md5=b7982a377c680ad71ca2fbb735982462"
-+
-+DEPENDS = "common-csl-ip qmss-lld sa-lld pktlib hplib"
-+
-+include hplib.inc
-+
-+CHOICELIST = "yes no"
-+
-+S = "${WORKDIR}/git/ti/runtime/hplib"
-+
-+EXTRA_OEMAKE += '-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}'
-+
-+do_compile () {
-+	for device in ${DEVICELIST}
-+	do
-+		for choice in ${CHOICELIST}
-+		do
-+			oe_runmake tests HPLIB_SRC_DIR=${S} USEDYNAMIC_LIB=$choice DEVICE="$device"
-+		done
-+	done
++do_compile() {
++	make -C ${S} test
 +}
 +
-+do_install () {
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake installbin INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} DEVICE="$device"
-+	done
++do_install() {
++	install -d ${D}${bindir}/
++	install -c -m 755 ${S}/test/filetestdemo/host/bin/demo_filetest ${D}${bindir}/mpm_demo_filetest
++	install -c -m 755 ${S}/test/sync_test/host/bin/sync_test ${D}${bindir}/mpm_sync_test
 +}
-diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr.inc b/recipes-ti/multiprocmgr/multiprocmgr.inc
 new file mode 100644
-index 0000000..99254d1
+index 0000000..26c8959
 --- /dev/null
-+++ b/recipes-bsp/hplib/hplib.inc
-@@ -0,0 +1,10 @@
++++ b/recipes-ti/multiprocmgr/multiprocmgr.inc
+@@ -0,0 +1,14 @@
++HOMEPAGE = "http://git.ti.com/cgit/cgit.cgi/keystone-linux/multi-proc-manager.git"
++LICENSE = "BSD-3-Clause & MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fce208c498eb9669223724dc9c1d8fe4"
++SECTION = "console"
 +COMPATIBLE_MACHINE = "keystone"
 +
-+DEVICELIST = "k2h k2k k2l k2e"
-+
 +BRANCH = "master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/hplib.git;protocol=git;branch=${BRANCH}"
++# The following commits correspond to DEV.MPM-2.00.01.07
++SRCREV = "b79e1cdaed78014569d82cf2f748d3f5f91623ee"
++PV = "2.0.1.7"
 +
-+# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.04"
-+SRCREV = "89d847bb8155f5727867d82f96978f89ea0a7d13"
-+PV = "01.01.00.04"
-diff --git a/recipes-bsp/hplib/hplib_git.bb b/recipes-bsp/hplib/hplib_git.bb
-new file mode 100644
-index 0000000..fbb3004
---- /dev/null
-+++ b/recipes-bsp/hplib/hplib_git.bb
-@@ -0,0 +1,30 @@
-+DESCRIPTION = "TI High performance libraries"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/runtime/hplib/src/COPYING.txt;md5=b7982a377c680ad71ca2fbb735982462"
++SRC_URI = "git://git.ti.com/keystone-linux/multi-proc-manager.git;protocol=git;branch=${BRANCH}"
 +
-+DEPENDS = "common-csl-ip rm-lld qmss-lld sa-lld pktlib"
++S = "${WORKDIR}/git"
+diff --git a/recipes-ti/multiprocmgr/multiprocmgr_git.bb b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
+index 3f2e52c..e1c4f2f 100644
+--- a/recipes-ti/multiprocmgr/multiprocmgr_git.bb
++++ b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
+@@ -1,20 +1,32 @@
+ DESCRIPTION = "TI Multiproc Manager for KeyStone II"
+-HOMEPAGE = "http://gtgit01.gt.design.ti.com/git/?p=projects/multiprocmgr.git;a=summary"
+-LICENSE = "BSD & MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fce208c498eb9669223724dc9c1d8fe4"
+-SECTION = "console"
+-COMPATIBLE_MACHINE = "keystone"
++SUMMARY = "Provides download, debug and other utilities for other cores in the SOC like DSP"
+ 
+-PR = "r1"
++include multiprocmgr.inc
+ 
+-BRANCH ?= "master"
+-SRCREV = "8a97fb5c2c06d5f02d30106629f27fe0ca8a4f95"
++DEPENDS = "mpm-transport libdaemon"
++RDEPENDS_${PN} = "syslog-ng"
+ 
+-SRC_URI = "git://gtgit01.gt.design.ti.com/git/projects/multiprocmgr.git;protocol=git;branch=${BRANCH}"
+ 
+-S = "${WORKDIR}/git"
++CC += "-I${STAGING_KERNEL_DIR}/include"
 +
-+include hplib.inc
++INITSCRIPT_NAME = "mpmsrv-daemon.sh"
++INITSCRIPT_PARAMS = "defaults 10"
 +
-+CHOICELIST = "yes no"
++inherit update-rc.d
+ 
+ do_install() {
+ 	install -d ${D}${bindir}/
+-	install -c -m 755 ${S}/mpmsrv ${D}${bindir}/mpmsrv
++	install -c -m 755 ${S}/bin/mpmsrv ${D}${bindir}/mpmsrv
++	install -c -m 755 ${S}/bin/mpmcl ${D}${bindir}/mpmcl
 +
-+S = "${WORKDIR}/git/ti/runtime/hplib"
++	install -d ${D}${sysconfdir}/init.d/
++	install -c -m 755 ${S}/scripts/mpmsrv-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
++	install -d ${D}${sysconfdir}/mpm/
++	install -c -m 755 ${S}/scripts/crash_callback.sh ${D}${sysconfdir}/mpm/crash_callback.sh
 +
-+EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
++	install -d ${D}${includedir}/
++	install -c -m 755 ${S}/include/* ${D}${includedir}/
 +
-+do_compile () {
-+	for device in ${DEVICELIST}
-+	do
-+		for choice in ${CHOICELIST}
-+		do
-+			oe_runmake lib HPLIB_SRC_DIR=${S} USEDYNAMIC_LIB=$choice DEVICE="$device"
-+		done
-+	done
-+}
-+
-+do_install () {
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} DEVICE="$device"
-+	done
-+}
++	install -d ${D}${libdir}/
++	cp -a ${S}/lib/* ${D}${libdir}/
+ }
 
 
