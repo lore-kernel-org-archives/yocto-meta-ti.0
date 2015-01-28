@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B69C2E01F0A; Tue, 27 Jan 2015 17:02:53 -0800 (PST)
+	id B8170E019FF; Tue, 27 Jan 2015 17:02:53 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: *
@@ -13,13 +13,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*  2.5 TO_NO_BRKTS_PCNT To: misformatted + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 71FFCE019FF
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 74C19E01A04
 	for <meta-ti@yoctoproject.org>; Tue, 27 Jan 2015 17:02:40 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2B21852AF5; Wed, 28 Jan 2015 01:02:35 +0000 (UTC)
+	id C97E252AF9; Wed, 28 Jan 2015 01:02:36 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150128010236.2B21852AF5@arago-project.org>
-Date: Wed, 28 Jan 2015 01:02:35 +0000 (UTC)
+Message-Id: <20150128010236.C97E252AF9@arago-project.org>
+Date: Wed, 28 Jan 2015 01:02:36 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Nikhil Devshatwar : vpdma-fw: Separate vpdma-fw and vpe-tests recipe
 X-BeenThere: meta-ti@yoctoproject.org
@@ -38,9 +38,9 @@ X-List-Received-Date: Wed, 28 Jan 2015 01:02:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: a47fe3573ec2c7662eb385049807dea4f81fa284
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a47fe3573ec2c7662eb385049807dea4f81fa284
+Branch: master
+Commit: 7cddc2a6d92d14164916d6cf303f4bdb38f47b4a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7cddc2a6d92d14164916d6cf303f4bdb38f47b4a
 
 Author: Nikhil Devshatwar <nikhil.nd@ti.com>
 Date:   Thu Jan 22 20:06:16 2015 +0000
