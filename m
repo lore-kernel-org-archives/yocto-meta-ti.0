@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9FCFFE00DC7; Tue, 27 Jan 2015 17:02:51 -0800 (PST)
+	id A2B16E00DC6; Tue, 27 Jan 2015 17:02:51 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 734BAE01A01
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 761DCE01A07
 	for <meta-ti@yoctoproject.org>; Tue, 27 Jan 2015 17:02:40 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 9757C52AF8; Wed, 28 Jan 2015 01:02:36 +0000 (UTC)
+	id B13F352AF6; Wed, 28 Jan 2015 01:02:35 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150128010236.9757C52AF8@arago-project.org>
-Date: Wed, 28 Jan 2015 01:02:36 +0000 (UTC)
+Message-Id: <20150128010235.B13F352AF6@arago-project.org>
+Date: Wed, 28 Jan 2015 01:02:35 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : nwal-lld: Add recipes for Network abstraction layer low level driver and test code
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 28 Jan 2015 01:02:51 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 82da11cf23abe9a1eac62a706549a9f0bd70dcf4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=82da11cf23abe9a1eac62a706549a9f0bd70dcf4
+Branch: daisy
+Commit: 521f58d1ebeaa7838235650519f7fd4ba29e3a02
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=521f58d1ebeaa7838235650519f7fd4ba29e3a02
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Thu Jan 22 11:25:16 2015 +0000
