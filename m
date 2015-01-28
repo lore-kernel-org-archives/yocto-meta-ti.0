@@ -1,27 +1,42 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B8170E019FF; Tue, 27 Jan 2015 17:02:53 -0800 (PST)
+	id 397FAE007CD; Tue, 27 Jan 2015 18:32:46 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
-	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
+X-Spam-Level: 
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-	*  2.5 TO_NO_BRKTS_PCNT To: misformatted + percentage
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 74C19E01A04
-	for <meta-ti@yoctoproject.org>; Tue, 27 Jan 2015 17:02:40 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id C97E252AF9; Wed, 28 Jan 2015 01:02:36 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20150128010236.C97E252AF9@arago-project.org>
-Date: Wed, 28 Jan 2015 01:02:36 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Nikhil Devshatwar : vpdma-fw: Separate vpdma-fw and vpe-tests recipe
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E7D13E00753
+	for <meta-ti@yoctoproject.org>; Tue, 27 Jan 2015 18:32:37 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0S2Wajk001868
+	for <meta-ti@yoctoproject.org>; Tue, 27 Jan 2015 20:32:36 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0S2WZhb012092
+	for <meta-ti@yoctoproject.org>; Tue, 27 Jan 2015 20:32:35 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 27 Jan 2015 20:32:35 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t0S2WYfo032157	for <meta-ti@yoctoproject.org>; Tue, 27 Jan 2015 20:32:34
+	-0600
+Date: Tue, 27 Jan 2015 21:10:04 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1310405410.273.1422411004033.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-01-27_21-00-57
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -34,124 +49,191 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jan 2015 01:02:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 28 Jan 2015 02:32:46 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_272_1900831626.1422411004030"
 
-Module: meta-ti
-Branch: master
-Commit: 7cddc2a6d92d14164916d6cf303f4bdb38f47b4a
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7cddc2a6d92d14164916d6cf303f4bdb38f47b4a
+------=_Part_272_1900831626.1422411004030
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Author: Nikhil Devshatwar <nikhil.nd@ti.com>
-Date:   Thu Jan 22 20:06:16 2015 +0000
+<html>
+<head>
+<title>
+Status for 01/27/15
+</title>
+</head>
+<body>
 
-vpdma-fw: Separate vpdma-fw and vpe-tests recipe
+<h2>Status for 01/27/15</h2>
 
-VPDMA firmware is published publicly as IPUMM firmware.
-This patch creates a separate recipe for VPDMA firmware.
-Also, it updates the package names in kernel dependencies.
+<h2>BUILD_ID: build-2015-01-27_21-02-02</h2>
 
-The vpe-tests is an independent recipe which can be included
-in the packagegroup if required.
+<h2>Clean Build: false</h2>
 
-Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
----
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=red>FAILED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
 
- recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb           |   25 ++++++++++++++++++++
- .../vpe-tests_git.bb}                              |   10 +-------
- recipes-kernel/linux/linux-ti-staging_3.12.bb      |    2 +-
- recipes-kernel/linux/linux-ti-staging_3.14.bb      |    2 +-
- 4 files changed, 28 insertions(+), 11 deletions(-)
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
 
-diff --git a/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb b/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
-new file mode 100644
-index 0000000..4707f17
---- /dev/null
-+++ b/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
-@@ -0,0 +1,25 @@
-+DESCRIPTION = "VPDMA firmware for Video Input Port and Video Processing Engine"
-+
-+LICENSE = "TI-TSPA"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fd463c9500441ed91d07a0331baa635c"
-+
-+COMPATIBLE_MACHINE = "dra7xx"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+DEPENDS += "virtual/kernel"
-+
-+SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/vpdma-fw/03-2012/exports/vpdma-fw_03-2012.tar.gz;protocol=http;name=dra7xx-evm"
-+SRC_URI[dra7xx-evm.md5sum] = "80176df1350c21d9efa90171789c546e"
-+SRC_URI[dra7xx-evm.sha256sum] = "a0b254ffd0c7f481cb3989e632088f5e4a233c73a1c676faa3061721ea60dc90"
-+
-+S = "${WORKDIR}/vpdma-fw-${PV}"
-+TARGET = "vpdma-1b8.bin"
-+
-+do_install() {
-+    mkdir -p ${D}${base_libdir}/firmware
-+    cp ${S}/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
-+}
-+
-+FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
-+
-+PR = "r1"
-diff --git a/recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb b/recipes-bsp/vpe-tests/vpe-tests_git.bb
-similarity index 77%
-rename from recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb
-rename to recipes-bsp/vpe-tests/vpe-tests_git.bb
-index f7a63ab..a8ee7f8 100644
---- a/recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb
-+++ b/recipes-bsp/vpe-tests/vpe-tests_git.bb
-@@ -1,15 +1,10 @@
--DESCRIPTION = "VPE VPDMA firmware and test program"
--
--DEPENDS += "virtual/kernel"
-+DESCRIPTION = "VPE test program"
- 
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
- 
- COMPATIBLE_MACHINE = "dra7xx"
- 
--PV = "1b8"
--PR = "r2"
--
- SRCREV = "e3d8db1aa935775f9d196ad7428e0cd9864a36ca"
- BRANCH ?= "master"
- 
-@@ -26,6 +21,3 @@ do_install() {
-     oe_runmake DESTDIR="${D}" install
- }
- 
--# Separate the firmware into it's own package.
--PACKAGES =+ "${PN}-fw"
--FILES_${PN}-fw += "${base_libdir}/firmware"
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-index 27a3f35..358bd1b 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
-@@ -21,7 +21,7 @@ RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
- 
- # Add a run-time dependency for the VPE VPDMA firmware to be installed
- # on the target file system.
--RDEPENDS_kernel-base_append_dra7xx = " vpe-vpdma-fw"
-+RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
- 
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index 2192e3c..c8cbc93 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -22,7 +22,7 @@ RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
- 
- # Add a run-time dependency for the VPE VPDMA firmware to be installed
- # on the target file system.
--RDEPENDS_kernel-base_append_dra7xx = " vpe-vpdma-fw"
-+RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
- 
- # Default is to package all dtb files for ti33x devices unless building
- # for the specific beaglebone machine.
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.11"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_272_1900831626.1422411004030--
