@@ -1,26 +1,27 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A2B16E00DC6; Tue, 27 Jan 2015 17:02:51 -0800 (PST)
+	id B69C2E01F0A; Tue, 27 Jan 2015 17:02:53 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Level: *
+X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
+	*  2.5 TO_NO_BRKTS_PCNT To: misformatted + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 761DCE01A07
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 71FFCE019FF
 	for <meta-ti@yoctoproject.org>; Tue, 27 Jan 2015 17:02:40 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B13F352AF6; Wed, 28 Jan 2015 01:02:35 +0000 (UTC)
+	id 2B21852AF5; Wed, 28 Jan 2015 01:02:35 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150128010235.B13F352AF6@arago-project.org>
+Message-Id: <20150128010236.2B21852AF5@arago-project.org>
 Date: Wed, 28 Jan 2015 01:02:35 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : nwal-lld: Add recipes for Network abstraction layer low level driver and test code
+Subject: Nikhil Devshatwar : vpdma-fw: Separate vpdma-fw and vpe-tests recipe
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,117 +34,124 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jan 2015 01:02:51 -0000
+X-List-Received-Date: Wed, 28 Jan 2015 01:02:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: 521f58d1ebeaa7838235650519f7fd4ba29e3a02
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=521f58d1ebeaa7838235650519f7fd4ba29e3a02
+Commit: a47fe3573ec2c7662eb385049807dea4f81fa284
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a47fe3573ec2c7662eb385049807dea4f81fa284
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Thu Jan 22 11:25:16 2015 +0000
+Author: Nikhil Devshatwar <nikhil.nd@ti.com>
+Date:   Thu Jan 22 20:06:16 2015 +0000
 
-nwal-lld: Add recipes for Network abstraction layer low level driver and test code
+vpdma-fw: Separate vpdma-fw and vpe-tests recipe
 
-- Provide Network abstraction layer for keystone devices.
-- Supports k2h, k2k, k2l & k2e devices.
+VPDMA firmware is published publicly as IPUMM firmware.
+This patch creates a separate recipe for VPDMA firmware.
+Also, it updates the package names in kernel dependencies.
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+The vpe-tests is an independent recipe which can be included
+in the packagegroup if required.
+
+Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/nwal-lld/nwal-lld-test_git.bb |   25 +++++++++++++++++++++++++
- recipes-bsp/nwal-lld/nwal-lld.inc         |   18 ++++++++++++++++++
- recipes-bsp/nwal-lld/nwal-lld_git.bb      |   25 +++++++++++++++++++++++++
- 3 files changed, 68 insertions(+), 0 deletions(-)
+ recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb           |   25 ++++++++++++++++++++
+ .../vpe-tests_git.bb}                              |   10 +-------
+ recipes-kernel/linux/linux-ti-staging_3.12.bb      |    2 +-
+ recipes-kernel/linux/linux-ti-staging_3.14.bb      |    2 +-
+ 4 files changed, 28 insertions(+), 11 deletions(-)
 
-diff --git a/recipes-bsp/nwal-lld/nwal-lld-test_git.bb b/recipes-bsp/nwal-lld/nwal-lld-test_git.bb
+diff --git a/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb b/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
 new file mode 100644
-index 0000000..3813df9
+index 0000000..4707f17
 --- /dev/null
-+++ b/recipes-bsp/nwal-lld/nwal-lld-test_git.bb
++++ b/recipes-bsp/vpdma-fw/vpdma-fw_03-2012.bb
 @@ -0,0 +1,25 @@
-+DESCRIPTION = "TI Network Abstraction Layer unit test binaries"
++DESCRIPTION = "VPDMA firmware for Video Input Port and Video Processing Engine"
 +
-+DEPENDS = "common-csl-ip rm-lld qmss-lld hplib pa-lld sa-lld pktlib nwal-lld"
++LICENSE = "TI-TSPA"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fd463c9500441ed91d07a0331baa635c"
 +
-+include nwal-lld.inc
++COMPATIBLE_MACHINE = "dra7xx"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
++DEPENDS += "virtual/kernel"
 +
-+do_compile () {
-+	for device in ${DEVICELIST}
-+	do
-+		for choice in ${CHOICELIST}
-+		do
-+			oe_runmake clean NWAL_INC_DIR=${BASEDIR} NWAL_SRC_DIR=${S} USEDYNAMIC_LIB="$choice" DEVICE="$device"
-+			oe_runmake tests NWAL_INC_DIR=${BASEDIR} NWAL_SRC_DIR=${S} USEDYNAMIC_LIB="$choice" DEVICE="$device"
-+		done
-+	done
++SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/vpdma-fw/03-2012/exports/vpdma-fw_03-2012.tar.gz;protocol=http;name=dra7xx-evm"
++SRC_URI[dra7xx-evm.md5sum] = "80176df1350c21d9efa90171789c546e"
++SRC_URI[dra7xx-evm.sha256sum] = "a0b254ffd0c7f481cb3989e632088f5e4a233c73a1c676faa3061721ea60dc90"
++
++S = "${WORKDIR}/vpdma-fw-${PV}"
++TARGET = "vpdma-1b8.bin"
++
++do_install() {
++    mkdir -p ${D}${base_libdir}/firmware
++    cp ${S}/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
 +}
 +
-+do_install () {
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake installbin INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} DEVICE="$device"
-+	done
-+}
-diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
-new file mode 100644
-index 0000000..1e77140
---- /dev/null
-+++ b/recipes-bsp/nwal-lld/nwal-lld.inc
-@@ -0,0 +1,18 @@
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=b7982a377c680ad71ca2fbb735982462"
++FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
 +
-+COMPATIBLE_MACHINE = "keystone"
-+
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git;protocol=git;branch=${BRANCH}"
-+
-+# Below commit ID corresponds to "DEV.NWAL.02.01.00.04A"
-+SRCREV = "099a9191e642c7732760078bf5af1e3c6ca0197b"
-+PV = "02.01.00.04"
-+
-+BASEDIR = "${WORKDIR}/git"
-+S = "${BASEDIR}/ti/drv/nwal"
-+
-+DEVICELIST = "k2h k2k k2l k2e"
-+
-+CHOICELIST = "yes no"
-diff --git a/recipes-bsp/nwal-lld/nwal-lld_git.bb b/recipes-bsp/nwal-lld/nwal-lld_git.bb
-new file mode 100644
-index 0000000..da09730
---- /dev/null
-+++ b/recipes-bsp/nwal-lld/nwal-lld_git.bb
-@@ -0,0 +1,25 @@
-+DESCRIPTION = "TI Network abstraction layer LLD library "
-+
-+DEPENDS = "common-csl-ip rm-lld qmss-lld hplib pa-lld sa-lld pktlib"
-+
-+include nwal-lld.inc
-+
-+EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
-+
-+do_compile () {
-+	for device in ${DEVICELIST}
-+	do
-+		for choice in ${CHOICELIST}
-+		do
-+			oe_runmake clean NWAL_INC_DIR=${BASEDIR} NWAL_SRC_DIR=${S} USEDYNAMIC_LIB="$choice" DEVICE="$device"
-+			oe_runmake lib NWAL_INC_DIR=${BASEDIR} NWAL_SRC_DIR=${S} USEDYNAMIC_LIB="$choice" DEVICE="$device"
-+		done
-+	done
-+}
-+
-+do_install () {
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} DEVICE="$device"
-+	done
-+}
++PR = "r1"
+diff --git a/recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb b/recipes-bsp/vpe-tests/vpe-tests_git.bb
+similarity index 77%
+rename from recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb
+rename to recipes-bsp/vpe-tests/vpe-tests_git.bb
+index f7a63ab..a8ee7f8 100644
+--- a/recipes-bsp/vpe-vpdma/vpe-vpdma_git.bb
++++ b/recipes-bsp/vpe-tests/vpe-tests_git.bb
+@@ -1,15 +1,10 @@
+-DESCRIPTION = "VPE VPDMA firmware and test program"
+-
+-DEPENDS += "virtual/kernel"
++DESCRIPTION = "VPE test program"
+ 
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
+ 
+ COMPATIBLE_MACHINE = "dra7xx"
+ 
+-PV = "1b8"
+-PR = "r2"
+-
+ SRCREV = "e3d8db1aa935775f9d196ad7428e0cd9864a36ca"
+ BRANCH ?= "master"
+ 
+@@ -26,6 +21,3 @@ do_install() {
+     oe_runmake DESTDIR="${D}" install
+ }
+ 
+-# Separate the firmware into it's own package.
+-PACKAGES =+ "${PN}-fw"
+-FILES_${PN}-fw += "${base_libdir}/firmware"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.12.bb b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+index 27a3f35..358bd1b 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.12.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.12.bb
+@@ -21,7 +21,7 @@ RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
+ 
+ # Add a run-time dependency for the VPE VPDMA firmware to be installed
+ # on the target file system.
+-RDEPENDS_kernel-base_append_dra7xx = " vpe-vpdma-fw"
++RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
+ 
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 2192e3c..c8cbc93 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -22,7 +22,7 @@ RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
+ 
+ # Add a run-time dependency for the VPE VPDMA firmware to be installed
+ # on the target file system.
+-RDEPENDS_kernel-base_append_dra7xx = " vpe-vpdma-fw"
++RDEPENDS_kernel-base_append_dra7xx = " vpdma-fw"
+ 
+ # Default is to package all dtb files for ti33x devices unless building
+ # for the specific beaglebone machine.
 
 
