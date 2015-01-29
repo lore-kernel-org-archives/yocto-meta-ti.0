@@ -1,41 +1,53 @@
-Return-Path: <denys@ti.com>
+Return-Path: <ashcharles@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9EFF0E00827; Wed, 28 Jan 2015 16:50:22 -0800 (PST)
+	id E78AAE0080C; Wed, 28 Jan 2015 18:00:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (ashcharles[at]gmail.com)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.220.51 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 18198E006AF
-	for <meta-ti@yoctoproject.org>; Wed, 28 Jan 2015 16:50:16 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0T0oFig027609
-	for <meta-ti@yoctoproject.org>; Wed, 28 Jan 2015 18:50:15 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0T0oElc027051
-	for <meta-ti@yoctoproject.org>; Wed, 28 Jan 2015 18:50:14 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 28 Jan 2015 18:50:14 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0T0oE9N018645;
-	Wed, 28 Jan 2015 18:50:14 -0600
-Date: Wed, 28 Jan 2015 19:50:13 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: "Franklin S. Cooper Jr" <fcooper@ti.com>
-Message-ID: <20150129005013.GB21328@edge>
-References: <1422491258-4786-1-git-send-email-fcooper@ti.com>
-MIME-Version: 1.0
-In-Reply-To: <1422491258-4786-1-git-send-email-fcooper@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] sitara-linux-ti-staging_3.14.bb: Update commit to pull in suspend/standby fix
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E929E006AF
+	for <meta-ti@yoctoproject.org>; Wed, 28 Jan 2015 18:00:22 -0800 (PST)
+Received: by mail-pa0-f51.google.com with SMTP id fb1so32539173pad.10
+	for <meta-ti@yoctoproject.org>; Wed, 28 Jan 2015 18:00:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=ih11hb7EzNyiz0dw9l8VqL+44YWZbE2LRN25LOHplFo=;
+	b=zyhDKcowMC+QlpLARXNuvjqxBXu0FuEh554xYJ65X6H0bF/MZufeSFwOpiib+N6B7g
+	VM5vu9zGHCPB1f3FgvtVj5extdTBKYpNl1lnvGrmLw1WMRiAPHV6jfOXE6bMctmsQY/7
+	xBBtMlETp41jtFCYFhsYTG2+pdSTgIkA7l4QugZ8uliFpq7mX7DKgMOLwS5el2vG2Xc5
+	cv4kpYFEpSsBjpNjJwMT1N7k3q4z0mn892GF5sNsR5vS4AfKqTWDz3g8SdVFCke2es79
+	iyyDCE3NqX+7vVHtep2vDQN5uvV/mrH3NevutXEg2C0bBfOZ/tyMbLURM6lJ36MFtYEG
+	nfQQ==
+X-Received: by 10.70.100.73 with SMTP id ew9mr10355499pdb.95.1422496821775;
+	Wed, 28 Jan 2015 18:00:21 -0800 (PST)
+Received: from localhost.localdomain (104-37-60-13.dyn.novuscom.net.
+	[104.37.60.13])
+	by mx.google.com with ESMTPSA id ys5sm6014521pbc.17.2015.01.28.18.00.20
+	for <meta-ti@yoctoproject.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 28 Jan 2015 18:00:21 -0800 (PST)
+From: Ash Charles <ashcharles@gmail.com>
+To: meta-ti@yoctoproject.org
+Date: Wed, 28 Jan 2015 18:00:19 -0800
+Message-Id: <1422496819-20863-1-git-send-email-ashcharles@gmail.com>
+X-Mailer: git-send-email 2.1.0
+Subject: [PATCH] uim: allow argument for sysfs path
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,32 +60,247 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2015 00:50:22 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 29 Jan 2015 02:00:28 -0000
 
-On Wed, Jan 28, 2015 at 06:27:38PM -0600, Franklin S. Cooper Jr wrote:
-> From: "Franklin S. Cooper Jr" <fcooper@ti.com>
-> 
-> Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
-> ---
->  .../linux/sitara-linux-ti-staging_3.14.bb          |    2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
-> index f9c4641..991f694 100644
-> --- a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
-> +++ b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
-> @@ -35,7 +35,7 @@ S = "${WORKDIR}/git"
->  
->  BRANCH = "sitara-ti-linux-3.14.y"
->  
-> -SRCREV = "2d7148a3a95a2811604611f6c66a8826a61b8b12"
-> +SRCREV = "99b50bfb0f3fb0e43de31a6735989d31660b0835"
->  PV = "3.14.26"
+This updates uim to match the version included in meta-arago.  It
+includes a useful patch to allow the sysfs node to be passed via
+command line argument.
 
-No PV or PR bump? Are you sure?
+Signed-off-by: Ash Charles <ashcharles@gmail.com>
+---
+ ...mand-line-args-for-passing-sysfs-node-pat.patch | 135 +++++++++++++++++++++
+ recipes-connectivity/uim/files/uim-sysfs           |  33 +++++
+ recipes-connectivity/uim/uim_git.bb                |  32 +++--
+ 3 files changed, 189 insertions(+), 11 deletions(-)
+ create mode 100644 recipes-connectivity/uim/files/0001-uim-Add-command-line-args-for-passing-sysfs-node-pat.patch
+ create mode 100755 recipes-connectivity/uim/files/uim-sysfs
 
+diff --git a/recipes-connectivity/uim/files/0001-uim-Add-command-line-args-for-passing-sysfs-node-pat.patch b/recipes-connectivity/uim/files/0001-uim-Add-command-line-args-for-passing-sysfs-node-pat.patch
+new file mode 100644
+index 0000000..ad6f95f
+--- /dev/null
++++ b/recipes-connectivity/uim/files/0001-uim-Add-command-line-args-for-passing-sysfs-node-pat.patch
+@@ -0,0 +1,135 @@
++From 0df5f6766722a844162e96777980feee146a3c86 Mon Sep 17 00:00:00 2001
++From: Roger Monk <r-monk@ti.com>
++Date: Tue, 1 Oct 2013 17:17:25 +0100
++Subject: [PATCH] uim:  Add command line args for passing sysfs node path
++
++   * pass -f <sysfs path> and/or -b <bd address>
++   * re-mapped DEFINEs to strings
++      * minimal code changes for minimal instrusion
++      * could be rewritten for cleaner implementation in the future
++   * default path (no args) remains the same
++   * users passing bd address via uim <addr> will need to add -b
++
++Signed-off-by: Roger Monk <r-monk@ti.com>
++---
++ uim.c |   61 +++++++++++++++++++++++++++++++++++++++++++++++++++++--------
++ uim.h |   10 +++++-----
++ 2 files changed, 58 insertions(+), 13 deletions(-)
++
++diff --git a/uim.c b/uim.c
++index 3775dda..4dfdbd7 100644
++--- a/uim.c
+++++ b/uim.c
++@@ -38,6 +38,11 @@ static int exiting;
++ static int line_discipline;
++ static int dev_fd;
++ 
+++static char install_sysfs_entry[48];
+++static char dev_name_sysfs[48];
+++static char baud_rate_sysfs[48];
+++static char flow_cntrl_sysfs[48];
+++
++ /* BD address as string and a pointer to array of hex bytes */
++ char uim_bd_address[BD_ADDR_LEN];
++ bdaddr_t *bd_addr;
++@@ -455,9 +460,17 @@ bdaddr_t *strtoba(const char *str)
++         return (bdaddr_t *) ba;
++ }
++ 
+++void usage(void)
+++{
+++	UIM_ERR("Invalid arguments");
+++	UIM_ERR("Usage: uim [ -f <path-to-sysfs-kim> ] [ -b <bd address XX:XX:XX:XX:XX:XX> ]");
+++}
+++
++ /*****************************************************************************/
++ int main(int argc, char *argv[])
++ {
+++	int opt;
+++	char *arg_kim_path = NULL, *arg_bd_addr = NULL, *temp_path = KIM_SYSFS_BASE;
++ 	int st_fd, err;
++ 	unsigned char install;
++ 	struct pollfd 	p;
++@@ -466,18 +479,50 @@ int main(int argc, char *argv[])
++ 	err = 0;
++ 
++ 	/* Parse the user input */
++-	if ((argc > 2)) {
++-		UIM_ERR("Invalid arguements");
++-		UIM_ERR("Usage: uim <bd address>");
++-		return -1;
+++	while ((opt = getopt (argc, argv, "f:b:")) != -1) {
+++		switch (opt) {
+++			case 'f':
+++				arg_kim_path = optarg;
+++				break;
+++			case 'b':
+++				arg_bd_addr = optarg;
+++				break;
+++			default:
+++				usage();
+++				return -1;
+++		}
+++	}
+++
+++	if (arg_kim_path != NULL) {
+++		temp_path = arg_kim_path;
+++		if( strlen(temp_path) > (sizeof(install_sysfs_entry)-10) ) {
+++			UIM_ERR("Path to sysfs node too long");
+++			return -1;
+++		}
++ 	}
++-	if (argc == 2) {
++-		if (strlen(argv[2]) != BD_ADDR_LEN) {
++-			UIM_ERR("Usage: uim XX:XX:XX:XX:XX:XX");
+++	strcpy(install_sysfs_entry, temp_path);
+++	strcpy(dev_name_sysfs, temp_path);
+++	strcpy(baud_rate_sysfs, temp_path);
+++	strcpy(flow_cntrl_sysfs, temp_path);
+++
+++	strcat(install_sysfs_entry, "/install");
+++	strcat(dev_name_sysfs, "/dev_name");
+++	strcat(baud_rate_sysfs, "/baud_rate");
+++	strcat(flow_cntrl_sysfs, "/flow_cntrl");
+++
+++	UIM_DBG("install = %s", install_sysfs_entry);
+++	UIM_DBG("dev_name = %s", dev_name_sysfs);
+++	UIM_DBG("baud_rate = %s", baud_rate_sysfs);
+++	UIM_DBG("flow_cntrl = %s", flow_cntrl_sysfs);
+++
+++	if (arg_bd_addr != NULL) {
+++		if (strlen(arg_bd_addr) != BD_ADDR_LEN) {
+++			usage();
++ 			return -1;
++ 		}
+++		UIM_DBG("Address = %s", arg_bd_addr);
++ 		/* BD address passed as string in xx:xx:xx:xx:xx:xx format */
++-		strncpy(uim_bd_address, argv[2], sizeof(uim_bd_address));
+++		strncpy(uim_bd_address, arg_bd_addr, sizeof(uim_bd_address));
++ 		bd_addr = strtoba(uim_bd_address);
++ 	}
++ 
++diff --git a/uim.h b/uim.h
++index a8ef699..32a8fe0 100644
++--- a/uim.h
+++++ b/uim.h
++@@ -65,11 +65,11 @@
++ /* the sysfs entries with device configuration set by
++  * shared transport driver
++  */
++-#define INSTALL_SYSFS_ENTRY "/sys/devices/platform/kim/install"
++-#define DEV_NAME_SYSFS "/sys/devices/platform/kim/dev_name"
++-#define BAUD_RATE_SYSFS "/sys/devices/platform/kim/baud_rate"
++-#define FLOW_CTRL_SYSFS "/sys/devices/platform/kim/flow_cntrl"
++-
+++#define KIM_SYSFS_BASE		"/sys/devices/platform/kim"
+++#define INSTALL_SYSFS_ENTRY	install_sysfs_entry
+++#define DEV_NAME_SYSFS		dev_name_sysfs
+++#define BAUD_RATE_SYSFS		baud_rate_sysfs
+++#define FLOW_CTRL_SYSFS		flow_cntrl_sysfs
++ 
++ #define VERBOSE
++ /*Debug logs*/
++-- 
++1.7.9.5
++
+diff --git a/recipes-connectivity/uim/files/uim-sysfs b/recipes-connectivity/uim/files/uim-sysfs
+new file mode 100755
+index 0000000..0891768
+--- /dev/null
++++ b/recipes-connectivity/uim/files/uim-sysfs
+@@ -0,0 +1,33 @@
++#! /bin/sh
++
++NODE=`cd /sys; find . | grep kim | grep install`
++if [ $NODE ]
++then
++    echo UIM SYSFS Node Found at /sys/$NODE
++else
++    echo UIM SYSFS Node Not Found 
++    exit 0
++fi 
++
++uim="/usr/bin/uim"
++uim_args="-f `dirname /sys/$NODE`"
++
++test -x "$uim" || exit 0
++
++case "$1" in
++  start)
++    echo -n "Starting uim-sysfs daemon"
++    start-stop-daemon --start --quiet --pidfile /var/run/uim.pid --make-pidfile --exec $uim -- $uim_args & 
++    echo "."
++    ;;
++  stop)
++    echo -n "Stopping uim-sysfs daemon"
++    start-stop-daemon --stop --quiet --pidfile /var/run/uim.pid
++    echo "."
++    ;;
++  *)
++    echo "Usage: /etc/init.d/uim-sysfs.sh {start|stop}"
++    exit 1
++esac
++
++exit 0
+diff --git a/recipes-connectivity/uim/uim_git.bb b/recipes-connectivity/uim/uim_git.bb
+index c8265e9..0ebaeb0 100644
+--- a/recipes-connectivity/uim/uim_git.bb
++++ b/recipes-connectivity/uim/uim_git.bb
+@@ -1,19 +1,29 @@
+-DESCRIPTION = "User Mode Initialization Manager for wl12xx devices"
++DESCRIPTION = "Shared Transport Line Discipline User Mode initialisation Manager Daemon"
+ LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://uim.c;startline=4;endline=12;md5=16a9d6e829218481f8a61797fe2be2e2"
++LIC_FILES_CHKSUM = "file://uim.c;beginline=1;endline=18;md5=9f0bbfbc10c67689e81a523e2976c31e"
+ 
+-# Doesn't have a version, so we'll make one up
+-PV = "0.0"
++PV = "1.0"
++PR ="r1"
++PR_append = "+gitr${SRCPV}"
++
++INITSCRIPT_NAME = "uim-sysfs"
++INITSCRIPT_PARAMS = "defaults 03"
++
++inherit update-rc.d
+ 
+ SRCREV = "c73894456df5def97111cb33d2106b684b8b7959"
+-SRC_URI = "git://gitorious.org/uim/uim.git"
++SRC_URI = "git://gitorious.org/uim/uim.git \
++	   file://0001-uim-Add-command-line-args-for-passing-sysfs-node-pat.patch \
++	   file://uim-sysfs \
++"
+ 
+-S= "${WORKDIR}/git"
++S = "${WORKDIR}/git"
++
++EXTRA_OEMAKE = "CC=${TARGET_PREFIX}gcc"
+ 
+ do_install() {
+-	oe_runmake install DESTDIR=${D}
++	install -d ${D}${bindir}
++	install -m 0755 uim ${D}${bindir}
++	install -d ${D}${sysconfdir}/init.d
++	install -m 0755 ${WORKDIR}/uim-sysfs ${D}${sysconfdir}/init.d
+ }
+-
+-# connman has a plugin to handle all this
+-RCONFLICTS_${PN} += "connman-plugin-tist"
+-RRECOMMENDS_${PN} = "linux-firmware-wl12xx"
 -- 
-Denys
+2.1.0
+
 
