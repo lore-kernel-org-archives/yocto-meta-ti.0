@@ -1,6 +1,6 @@
 Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8AA42E00828; Thu, 29 Jan 2015 08:11:31 -0800 (PST)
+	id 759DCE00824; Thu, 29 Jan 2015 13:13:38 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,29 +10,29 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
 	high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2B75AE006EF
-	for <meta-ti@yoctoproject.org>; Thu, 29 Jan 2015 08:11:28 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0TGBRgJ018025
-	for <meta-ti@yoctoproject.org>; Thu, 29 Jan 2015 10:11:27 -0600
+	*      [192.94.94.41 listed in list.dnswl.org]
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 44159E00782
+	for <meta-ti@yoctoproject.org>; Thu, 29 Jan 2015 13:13:32 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0TLDV0L005981
+	for <meta-ti@yoctoproject.org>; Thu, 29 Jan 2015 15:13:31 -0600
 Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0TGBQJk028471
-	for <meta-ti@yoctoproject.org>; Thu, 29 Jan 2015 10:11:26 -0600
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0TLDUJX004635
+	for <meta-ti@yoctoproject.org>; Thu, 29 Jan 2015 15:13:30 -0600
 Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
 	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 29 Jan 2015 10:11:26 -0600
+	Thu, 29 Jan 2015 15:13:30 -0600
 Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t0TGBQw8023769;	Thu, 29 Jan 2015 10:11:26 -0600
+	t0TLDUqD030691;	Thu, 29 Jan 2015 15:13:30 -0600
 From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 29 Jan 2015 11:11:25 -0500
-Message-ID: <1422547885-14935-1-git-send-email-sam.nelson@ti.com>
+Date: Thu, 29 Jan 2015 16:13:28 -0500
+Message-ID: <1422566008-4449-1-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH v2] ti-softhsmv2: Add recipe for ti customised softhsm package
+Subject: [PATCH] udma: Add recipe for user space library for udma kernel driver
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,70 +45,52 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2015 16:11:31 -0000
+X-List-Received-Date: Thu, 29 Jan 2015 21:13:38 -0000
 Content-Type: text/plain
 
-- Provide library, deamon and util for ti customised softhsm
+- Provides zero copy access from user-space to packet dma channels
+  via udma kernel driver
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-ti/udma/udma_git.bb |   29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 recipes-ti/udma/udma_git.bb
 
----
-Changes from previous patch
-- Update LICENSE information
----
----
- recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb |   43 +++++++++++++++++++++++++++
- 1 file changed, 43 insertions(+)
- create mode 100644 recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-
-diff --git a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
+diff --git a/recipes-ti/udma/udma_git.bb b/recipes-ti/udma/udma_git.bb
 new file mode 100644
-index 0000000..518508c
+index 0000000..0578647
 --- /dev/null
-+++ b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-@@ -0,0 +1,43 @@
-+DESCRIPTION = "TI softhsmv2 package"
-+LICENSE = "BSD-2-Clause | BSD-3-Clause | ISC | IBM-License | FSFULLR | Zlib"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=55144a048ba54f211a1aaa38c7fd2424"
-+SECTION = "libs"
++++ b/recipes-ti/udma/udma_git.bb
+@@ -0,0 +1,29 @@
++DESCRIPTION = "Provides zero copy access from user-space to packet dma channels via udma kernel driver"
++LICENSE = "BSD-3-Clause"
 +
-+mntdir = "/mnt"
++COMPATIBLE_MACHINE = "keystone"
++LIC_FILES_CHKSUM = "file://include/udma.h;startline=1;endline=39;md5=ba3c7f91f970afe073b759ced61d0f27"
 +
-+inherit autotools pkgconfig
-+
-+DEPENDS = "openssl libdaemon"
-+COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
-+
-+BRANCH="master"
-+SRC_URI = "git://git.ti.com/keystone-linux/ti-softhsmv2.git;protocol=git;branch=${BRANCH}"
-+#Following commit corresponds to tag DEV.SOFTHSM-01.03.00.01
-+SRCREV = "c79d93ac2a326567a7245dda1b903ef340b5650c"
-+PV = "1.3.0.1"
-+
++BRANCH = "master"
++SRC_URI = "git://git.ti.com/keystone-linux/udma.git;protocol=git;branch=${BRANCH}"
 +S = "${WORKDIR}/git"
++# Commit corresponds to UDMA.01.00.00.00
++SRCREV = "53d09fb0bc98c41c5eb43623097e363c497d6fd8"
 +
-+CFLAGS += " -mno-unaligned-access"
-+CPPFLAGS += " -mno-unaligned-access"
++PACKAGES =+ "${PN}-test"
 +
-+INITSCRIPT_NAME = "softhsm-daemon.sh"
-+INITSCRIPT_PARAMS = "defaults 10"
-+
-+inherit update-rc.d
-+
-+SELECTED_OPTIMIZATION := "${@d.getVar("SELECTED_OPTIMIZATION", True).replace("-O2", "-O3")}"
-+SELECTED_OPTIMIZATION := "${@d.getVar("SELECTED_OPTIMIZATION", True).replace("-ggdb2", "")}"
-+
-+FILES_${PN} += "${libdir}/softhsm/lib*.so.* ${mntdir}/*"
-+FILES_${PN}-dbg += "${libdir}/softhsm/.debug"
-+FILES_${PN}-staticdev += "${libdir}/softhsm/*.a "
-+FILES_${PN}-dev += "${libdir}/softhsm/*.la ${libdir}/softhsm/lib*.so"
++FILES_${PN}-test = "${bindir}/udma_test"
 +
 +do_install_append() {
-+	install -d ${D}${mntdir}/securedbv0
-+	install -d ${D}${mntdir}/securedbv1
-+
-+	install -d ${D}${sysconfdir}/init.d/
-+	install -c -m 755 ${S}/src/bin/daemon/softhsm-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
++	install -d ${D}${bindir}/
++	install -d ${D}${libdir}/
++	install -d ${D}${includedir}/
++	install -c -m 755 ${S}/udma_test ${D}${bindir}/
++	install -c -m 755 ${S}/libudma.a ${D}${libdir}/
++	install -c -m 755 ${S}/libudma.so ${D}${libdir}/
++	cd ${D}${libdir}/
++	mv libudma.so libudma.so.1.0.0
++	ln -sf libudma.so.1.0.0 libudma.so.1
++	ln -sf libudma.so.1.0.0 libudma.so
++	install -c -m 755 ${S}/include/* ${D}${includedir}/
 +}
 -- 
 1.7.9.5
