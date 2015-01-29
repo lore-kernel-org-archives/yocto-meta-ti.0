@@ -1,53 +1,42 @@
-Return-Path: <ashcharles@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E78AAE0080C; Wed, 28 Jan 2015 18:00:27 -0800 (PST)
+	id AC142E0087C; Wed, 28 Jan 2015 18:31:45 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (ashcharles[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.220.51 listed in list.dnswl.org]
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8E929E006AF
-	for <meta-ti@yoctoproject.org>; Wed, 28 Jan 2015 18:00:22 -0800 (PST)
-Received: by mail-pa0-f51.google.com with SMTP id fb1so32539173pad.10
-	for <meta-ti@yoctoproject.org>; Wed, 28 Jan 2015 18:00:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=ih11hb7EzNyiz0dw9l8VqL+44YWZbE2LRN25LOHplFo=;
-	b=zyhDKcowMC+QlpLARXNuvjqxBXu0FuEh554xYJ65X6H0bF/MZufeSFwOpiib+N6B7g
-	VM5vu9zGHCPB1f3FgvtVj5extdTBKYpNl1lnvGrmLw1WMRiAPHV6jfOXE6bMctmsQY/7
-	xBBtMlETp41jtFCYFhsYTG2+pdSTgIkA7l4QugZ8uliFpq7mX7DKgMOLwS5el2vG2Xc5
-	cv4kpYFEpSsBjpNjJwMT1N7k3q4z0mn892GF5sNsR5vS4AfKqTWDz3g8SdVFCke2es79
-	iyyDCE3NqX+7vVHtep2vDQN5uvV/mrH3NevutXEg2C0bBfOZ/tyMbLURM6lJ36MFtYEG
-	nfQQ==
-X-Received: by 10.70.100.73 with SMTP id ew9mr10355499pdb.95.1422496821775;
-	Wed, 28 Jan 2015 18:00:21 -0800 (PST)
-Received: from localhost.localdomain (104-37-60-13.dyn.novuscom.net.
-	[104.37.60.13])
-	by mx.google.com with ESMTPSA id ys5sm6014521pbc.17.2015.01.28.18.00.20
-	for <meta-ti@yoctoproject.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 28 Jan 2015 18:00:21 -0800 (PST)
-From: Ash Charles <ashcharles@gmail.com>
-To: meta-ti@yoctoproject.org
-Date: Wed, 28 Jan 2015 18:00:19 -0800
-Message-Id: <1422496819-20863-1-git-send-email-ashcharles@gmail.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [PATCH] uim: allow argument for sysfs path
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26795E00827
+	for <meta-ti@yoctoproject.org>; Wed, 28 Jan 2015 18:31:38 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0T2VbGF024105
+	for <meta-ti@yoctoproject.org>; Wed, 28 Jan 2015 20:31:37 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0T2VaQX003607
+	for <meta-ti@yoctoproject.org>; Wed, 28 Jan 2015 20:31:36 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 28 Jan 2015 20:31:36 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t0T2Vae8016920	for <meta-ti@yoctoproject.org>; Wed, 28 Jan 2015 20:31:36
+	-0600
+Date: Wed, 28 Jan 2015 21:09:03 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <2038338569.277.1422497343563.JavaMail.jenkins@puget>
+MIME-Version: 1.0
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-01-28_21-00-57
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -60,247 +49,191 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2015 02:00:28 -0000
+X-List-Received-Date: Thu, 29 Jan 2015 02:31:45 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_276_1481140078.1422497343561"
 
-This updates uim to match the version included in meta-arago.  It
-includes a useful patch to allow the sysfs node to be passed via
-command line argument.
+------=_Part_276_1481140078.1422497343561
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Ash Charles <ashcharles@gmail.com>
----
- ...mand-line-args-for-passing-sysfs-node-pat.patch | 135 +++++++++++++++++++++
- recipes-connectivity/uim/files/uim-sysfs           |  33 +++++
- recipes-connectivity/uim/uim_git.bb                |  32 +++--
- 3 files changed, 189 insertions(+), 11 deletions(-)
- create mode 100644 recipes-connectivity/uim/files/0001-uim-Add-command-line-args-for-passing-sysfs-node-pat.patch
- create mode 100755 recipes-connectivity/uim/files/uim-sysfs
+<html>
+<head>
+<title>
+Status for 01/28/15
+</title>
+</head>
+<body>
 
-diff --git a/recipes-connectivity/uim/files/0001-uim-Add-command-line-args-for-passing-sysfs-node-pat.patch b/recipes-connectivity/uim/files/0001-uim-Add-command-line-args-for-passing-sysfs-node-pat.patch
-new file mode 100644
-index 0000000..ad6f95f
---- /dev/null
-+++ b/recipes-connectivity/uim/files/0001-uim-Add-command-line-args-for-passing-sysfs-node-pat.patch
-@@ -0,0 +1,135 @@
-+From 0df5f6766722a844162e96777980feee146a3c86 Mon Sep 17 00:00:00 2001
-+From: Roger Monk <r-monk@ti.com>
-+Date: Tue, 1 Oct 2013 17:17:25 +0100
-+Subject: [PATCH] uim:  Add command line args for passing sysfs node path
-+
-+   * pass -f <sysfs path> and/or -b <bd address>
-+   * re-mapped DEFINEs to strings
-+      * minimal code changes for minimal instrusion
-+      * could be rewritten for cleaner implementation in the future
-+   * default path (no args) remains the same
-+   * users passing bd address via uim <addr> will need to add -b
-+
-+Signed-off-by: Roger Monk <r-monk@ti.com>
-+---
-+ uim.c |   61 +++++++++++++++++++++++++++++++++++++++++++++++++++++--------
-+ uim.h |   10 +++++-----
-+ 2 files changed, 58 insertions(+), 13 deletions(-)
-+
-+diff --git a/uim.c b/uim.c
-+index 3775dda..4dfdbd7 100644
-+--- a/uim.c
-++++ b/uim.c
-+@@ -38,6 +38,11 @@ static int exiting;
-+ static int line_discipline;
-+ static int dev_fd;
-+ 
-++static char install_sysfs_entry[48];
-++static char dev_name_sysfs[48];
-++static char baud_rate_sysfs[48];
-++static char flow_cntrl_sysfs[48];
-++
-+ /* BD address as string and a pointer to array of hex bytes */
-+ char uim_bd_address[BD_ADDR_LEN];
-+ bdaddr_t *bd_addr;
-+@@ -455,9 +460,17 @@ bdaddr_t *strtoba(const char *str)
-+         return (bdaddr_t *) ba;
-+ }
-+ 
-++void usage(void)
-++{
-++	UIM_ERR("Invalid arguments");
-++	UIM_ERR("Usage: uim [ -f <path-to-sysfs-kim> ] [ -b <bd address XX:XX:XX:XX:XX:XX> ]");
-++}
-++
-+ /*****************************************************************************/
-+ int main(int argc, char *argv[])
-+ {
-++	int opt;
-++	char *arg_kim_path = NULL, *arg_bd_addr = NULL, *temp_path = KIM_SYSFS_BASE;
-+ 	int st_fd, err;
-+ 	unsigned char install;
-+ 	struct pollfd 	p;
-+@@ -466,18 +479,50 @@ int main(int argc, char *argv[])
-+ 	err = 0;
-+ 
-+ 	/* Parse the user input */
-+-	if ((argc > 2)) {
-+-		UIM_ERR("Invalid arguements");
-+-		UIM_ERR("Usage: uim <bd address>");
-+-		return -1;
-++	while ((opt = getopt (argc, argv, "f:b:")) != -1) {
-++		switch (opt) {
-++			case 'f':
-++				arg_kim_path = optarg;
-++				break;
-++			case 'b':
-++				arg_bd_addr = optarg;
-++				break;
-++			default:
-++				usage();
-++				return -1;
-++		}
-++	}
-++
-++	if (arg_kim_path != NULL) {
-++		temp_path = arg_kim_path;
-++		if( strlen(temp_path) > (sizeof(install_sysfs_entry)-10) ) {
-++			UIM_ERR("Path to sysfs node too long");
-++			return -1;
-++		}
-+ 	}
-+-	if (argc == 2) {
-+-		if (strlen(argv[2]) != BD_ADDR_LEN) {
-+-			UIM_ERR("Usage: uim XX:XX:XX:XX:XX:XX");
-++	strcpy(install_sysfs_entry, temp_path);
-++	strcpy(dev_name_sysfs, temp_path);
-++	strcpy(baud_rate_sysfs, temp_path);
-++	strcpy(flow_cntrl_sysfs, temp_path);
-++
-++	strcat(install_sysfs_entry, "/install");
-++	strcat(dev_name_sysfs, "/dev_name");
-++	strcat(baud_rate_sysfs, "/baud_rate");
-++	strcat(flow_cntrl_sysfs, "/flow_cntrl");
-++
-++	UIM_DBG("install = %s", install_sysfs_entry);
-++	UIM_DBG("dev_name = %s", dev_name_sysfs);
-++	UIM_DBG("baud_rate = %s", baud_rate_sysfs);
-++	UIM_DBG("flow_cntrl = %s", flow_cntrl_sysfs);
-++
-++	if (arg_bd_addr != NULL) {
-++		if (strlen(arg_bd_addr) != BD_ADDR_LEN) {
-++			usage();
-+ 			return -1;
-+ 		}
-++		UIM_DBG("Address = %s", arg_bd_addr);
-+ 		/* BD address passed as string in xx:xx:xx:xx:xx:xx format */
-+-		strncpy(uim_bd_address, argv[2], sizeof(uim_bd_address));
-++		strncpy(uim_bd_address, arg_bd_addr, sizeof(uim_bd_address));
-+ 		bd_addr = strtoba(uim_bd_address);
-+ 	}
-+ 
-+diff --git a/uim.h b/uim.h
-+index a8ef699..32a8fe0 100644
-+--- a/uim.h
-++++ b/uim.h
-+@@ -65,11 +65,11 @@
-+ /* the sysfs entries with device configuration set by
-+  * shared transport driver
-+  */
-+-#define INSTALL_SYSFS_ENTRY "/sys/devices/platform/kim/install"
-+-#define DEV_NAME_SYSFS "/sys/devices/platform/kim/dev_name"
-+-#define BAUD_RATE_SYSFS "/sys/devices/platform/kim/baud_rate"
-+-#define FLOW_CTRL_SYSFS "/sys/devices/platform/kim/flow_cntrl"
-+-
-++#define KIM_SYSFS_BASE		"/sys/devices/platform/kim"
-++#define INSTALL_SYSFS_ENTRY	install_sysfs_entry
-++#define DEV_NAME_SYSFS		dev_name_sysfs
-++#define BAUD_RATE_SYSFS		baud_rate_sysfs
-++#define FLOW_CTRL_SYSFS		flow_cntrl_sysfs
-+ 
-+ #define VERBOSE
-+ /*Debug logs*/
-+-- 
-+1.7.9.5
-+
-diff --git a/recipes-connectivity/uim/files/uim-sysfs b/recipes-connectivity/uim/files/uim-sysfs
-new file mode 100755
-index 0000000..0891768
---- /dev/null
-+++ b/recipes-connectivity/uim/files/uim-sysfs
-@@ -0,0 +1,33 @@
-+#! /bin/sh
-+
-+NODE=`cd /sys; find . | grep kim | grep install`
-+if [ $NODE ]
-+then
-+    echo UIM SYSFS Node Found at /sys/$NODE
-+else
-+    echo UIM SYSFS Node Not Found 
-+    exit 0
-+fi 
-+
-+uim="/usr/bin/uim"
-+uim_args="-f `dirname /sys/$NODE`"
-+
-+test -x "$uim" || exit 0
-+
-+case "$1" in
-+  start)
-+    echo -n "Starting uim-sysfs daemon"
-+    start-stop-daemon --start --quiet --pidfile /var/run/uim.pid --make-pidfile --exec $uim -- $uim_args & 
-+    echo "."
-+    ;;
-+  stop)
-+    echo -n "Stopping uim-sysfs daemon"
-+    start-stop-daemon --stop --quiet --pidfile /var/run/uim.pid
-+    echo "."
-+    ;;
-+  *)
-+    echo "Usage: /etc/init.d/uim-sysfs.sh {start|stop}"
-+    exit 1
-+esac
-+
-+exit 0
-diff --git a/recipes-connectivity/uim/uim_git.bb b/recipes-connectivity/uim/uim_git.bb
-index c8265e9..0ebaeb0 100644
---- a/recipes-connectivity/uim/uim_git.bb
-+++ b/recipes-connectivity/uim/uim_git.bb
-@@ -1,19 +1,29 @@
--DESCRIPTION = "User Mode Initialization Manager for wl12xx devices"
-+DESCRIPTION = "Shared Transport Line Discipline User Mode initialisation Manager Daemon"
- LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://uim.c;startline=4;endline=12;md5=16a9d6e829218481f8a61797fe2be2e2"
-+LIC_FILES_CHKSUM = "file://uim.c;beginline=1;endline=18;md5=9f0bbfbc10c67689e81a523e2976c31e"
- 
--# Doesn't have a version, so we'll make one up
--PV = "0.0"
-+PV = "1.0"
-+PR ="r1"
-+PR_append = "+gitr${SRCPV}"
-+
-+INITSCRIPT_NAME = "uim-sysfs"
-+INITSCRIPT_PARAMS = "defaults 03"
-+
-+inherit update-rc.d
- 
- SRCREV = "c73894456df5def97111cb33d2106b684b8b7959"
--SRC_URI = "git://gitorious.org/uim/uim.git"
-+SRC_URI = "git://gitorious.org/uim/uim.git \
-+	   file://0001-uim-Add-command-line-args-for-passing-sysfs-node-pat.patch \
-+	   file://uim-sysfs \
-+"
- 
--S= "${WORKDIR}/git"
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OEMAKE = "CC=${TARGET_PREFIX}gcc"
- 
- do_install() {
--	oe_runmake install DESTDIR=${D}
-+	install -d ${D}${bindir}
-+	install -m 0755 uim ${D}${bindir}
-+	install -d ${D}${sysconfdir}/init.d
-+	install -m 0755 ${WORKDIR}/uim-sysfs ${D}${sysconfdir}/init.d
- }
--
--# connman has a plugin to handle all this
--RCONFLICTS_${PN} += "connman-plugin-tist"
--RRECOMMENDS_${PN} = "linux-firmware-wl12xx"
--- 
-2.1.0
+<h2>Status for 01/28/15</h2>
+
+<h2>BUILD_ID: build-2015-01-28_21-02-02</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=red>FAILED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.11"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
+------=_Part_276_1481140078.1422497343561--
