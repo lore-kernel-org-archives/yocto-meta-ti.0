@@ -1,41 +1,47 @@
 Return-Path: <fcooper@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 92DD2E00873; Fri, 30 Jan 2015 14:43:08 -0800 (PST)
+	id 491A9E00873; Fri, 30 Jan 2015 14:43:47 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 39136E00546
-	for <meta-ti@yoctoproject.org>; Fri, 30 Jan 2015 14:43:03 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0UMh2i9016378
-	for <meta-ti@yoctoproject.org>; Fri, 30 Jan 2015 16:43:02 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0UMh1ip032306
-	for <meta-ti@yoctoproject.org>; Fri, 30 Jan 2015 16:43:01 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 30 Jan 2015 16:43:01 -0600
-Received: from dbdmail01.india.ti.com (dbdmail01.india.ti.com
-	[172.24.162.206])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t0UMh0JS022713;	Fri, 30 Jan 2015 16:43:01 -0600
-Received: from sdit-build02.dal.design.ti.com (sdit-build02.dal.design.ti.com
-	[10.247.66.5])	by dbdmail01.india.ti.com (8.14.3/8.14.3/SuSE Linux
-	0.8) with ESMTP id t0UMgw9P009543;	Sat, 31 Jan 2015 04:12:58 +0530
-From: "Franklin S. Cooper Jr" <fcooper@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 30 Jan 2015 16:42:56 -0600
-Message-ID: <1422657776-16399-1-git-send-email-fcooper@ti.com>
-X-Mailer: git-send-email 1.7.9.5
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CF6A5E00546
+	for <meta-ti@yoctoproject.org>; Fri, 30 Jan 2015 14:43:42 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0UMhfWL011017
+	for <meta-ti@yoctoproject.org>; Fri, 30 Jan 2015 16:43:41 -0600
+Received: from DFLE51.ent.ti.com (dfle51.ent.ti.com [10.64.6.12])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0UMheOh017431
+	for <meta-ti@yoctoproject.org>; Fri, 30 Jan 2015 16:43:40 -0600
+Received: from DFLE08.ent.ti.com ([fe80::187f:8c86:2b7:ef9f]) by
+	DFLE51.ent.ti.com ([fe80::f88a:66e:ad57:ae4a%17]) with mapi id
+	14.03.0224.002; Fri, 30 Jan 2015 16:43:40 -0600
+From: "Cooper Jr., Franklin" <fcooper@ti.com>
+To: "Dmytriyenko, Denys" <denys@ti.com>
+Thread-Topic: [meta-ti] [PATCH] sitara-linux-ti-staging_3.14.bb: Update
+	commit to pull in suspend/standby fix
+Thread-Index: AQHQO1pmHryJ1/eHTUO95pzjF7qAOpzWqPSAgACGtMCAAjargP//3z8w
+Date: Fri, 30 Jan 2015 22:43:39 +0000
+Message-ID: <8F29D6B095ED194EA1980491A5E029710C7F2B45@DFLE08.ent.ti.com>
+References: <1422491258-4786-1-git-send-email-fcooper@ti.com>
+	<20150129005013.GB21328@edge>
+	<8F29D6B095ED194EA1980491A5E029710C7F04B4@DFLE08.ent.ti.com>
+	<20150130184031.GG21328@edge>
+In-Reply-To: <20150130184031.GG21328@edge>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-Subject: [PATCH] sitara-linux-ti-staging_3.14.bb: Update commit to pull in suspend/standby fix
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: [PATCH] sitara-linux-ti-staging_3.14.bb: Update commit to pull in suspend/standby fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,38 +54,78 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jan 2015 22:43:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 30 Jan 2015 22:43:47 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: "Franklin S. Cooper Jr" <fcooper@ti.com>
 
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
----
-Version 2:
-Bump PR
 
- .../linux/sitara-linux-ti-staging_3.14.bb          |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
-index f9c4641..8cd2c3f 100644
---- a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
-@@ -35,11 +35,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "sitara-ti-linux-3.14.y"
- 
--SRCREV = "2d7148a3a95a2811604611f6c66a8826a61b8b12"
-+SRCREV = "99b50bfb0f3fb0e43de31a6735989d31660b0835"
- PV = "3.14.26"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "f+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- MULTI_CONFIG_BASE_SUFFIX = ""
--- 
-1.7.9.5
-
+> -----Original Message-----
+> From: Dmytriyenko, Denys
+> Sent: Friday, January 30, 2015 12:41 PM
+> To: Cooper Jr., Franklin
+> Cc: meta-ti@yoctoproject.org
+> Subject: Re: [meta-ti] [PATCH] sitara-linux-ti-staging_3.14.bb: Update
+> commit to pull in suspend/standby fix
+>=20
+> On Thu, Jan 29, 2015 at 09:56:28AM -0500, Cooper Jr., Franklin wrote:
+> >
+> >
+> > > -----Original Message-----
+> > > From: Dmytriyenko, Denys
+> > > Sent: Wednesday, January 28, 2015 6:50 PM
+> > > To: Cooper Jr., Franklin
+> > > Cc: meta-ti@yoctoproject.org
+> > > Subject: Re: [meta-ti] [PATCH] sitara-linux-ti-staging_3.14.bb:
+> > > Update commit to pull in suspend/standby fix
+> > >
+> > > On Wed, Jan 28, 2015 at 06:27:38PM -0600, Franklin S. Cooper Jr wrote=
+:
+> > > > From: "Franklin S. Cooper Jr" <fcooper@ti.com>
+> > > >
+> > > > Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+> > > > ---
+> > > >  .../linux/sitara-linux-ti-staging_3.14.bb          |    2 +-
+> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
+> > > > b/recipes-
+> > > kernel/linux/sitara-linux-ti-staging_3.14.bb
+> > > > index f9c4641..991f694 100644
+> > > > --- a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
+> > > > +++ b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
+> > > > @@ -35,7 +35,7 @@ S =3D "${WORKDIR}/git"
+> > > >
+> > > >  BRANCH =3D "sitara-ti-linux-3.14.y"
+> > > >
+> > > > -SRCREV =3D "2d7148a3a95a2811604611f6c66a8826a61b8b12"
+> > > > +SRCREV =3D "99b50bfb0f3fb0e43de31a6735989d31660b0835"
+> > > >  PV =3D "3.14.26"
+> > >
+> > > No PV or PR bump? Are you sure?
+>=20
+> > [Franklin] I still get confused by the "smarter" bitbake determining
+> > when it needs to rebuild a recipe.
+>=20
+> Well, bitbake is smart and it will rebuild the recipe if it changes.
+>=20
+>=20
+> > Is the problem that all other kernel driver recipes still won't be
+> > rebuilt even though bitbake may know to rebuild the kernel recipe?
+>=20
+> The problem might be with out-of-tree kernel modules (graphics, cryptodev=
+,
+> etc.) and with the binary packages and the proper upgrade path (which you
+> probably don't care for now), since package upgrade is handled by the
+> package manager (opkg) and not bitbake. From opkg perspective, only the
+> version and the revision matter and should be sorted properly, so if SRCR=
+EV
+> is in PR, it may go lower (not in this case though) and won't get updated=
+.
+[Franklin] Thanks I keep forgetting that SRCREV can fluctuate so it's not g=
+ood enough to "bump" the PR.
+>=20
+> --
+> Denys
 
