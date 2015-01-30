@@ -1,6 +1,6 @@
-Return-Path: <denys@ti.com>
+Return-Path: <fcooper@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 833D0E00873; Fri, 30 Jan 2015 10:49:24 -0800 (PST)
+	id 92DD2E00873; Fri, 30 Jan 2015 14:43:08 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,32 +10,32 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
 	high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7DC17E00546
-	for <meta-ti@yoctoproject.org>; Fri, 30 Jan 2015 10:49:19 -0800 (PST)
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 39136E00546
+	for <meta-ti@yoctoproject.org>; Fri, 30 Jan 2015 14:43:03 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0UInJA7032388
-	for <meta-ti@yoctoproject.org>; Fri, 30 Jan 2015 12:49:19 -0600
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t0UMh2i9016378
+	for <meta-ti@yoctoproject.org>; Fri, 30 Jan 2015 16:43:02 -0600
 Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0UInIhI004311
-	for <meta-ti@yoctoproject.org>; Fri, 30 Jan 2015 12:49:18 -0600
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0UMh1ip032306
+	for <meta-ti@yoctoproject.org>; Fri, 30 Jan 2015 16:43:01 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
 	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 30 Jan 2015 12:49:18 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t0UInI8L016493;
-	Fri, 30 Jan 2015 12:49:18 -0600
-Date: Fri, 30 Jan 2015 13:49:18 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Sam Nelson <sam.nelson@ti.com>
-Message-ID: <20150130184917.GM21328@edge>
-References: <1422547885-14935-1-git-send-email-sam.nelson@ti.com>
+	Fri, 30 Jan 2015 16:43:01 -0600
+Received: from dbdmail01.india.ti.com (dbdmail01.india.ti.com
+	[172.24.162.206])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t0UMh0JS022713;	Fri, 30 Jan 2015 16:43:01 -0600
+Received: from sdit-build02.dal.design.ti.com (sdit-build02.dal.design.ti.com
+	[10.247.66.5])	by dbdmail01.india.ti.com (8.14.3/8.14.3/SuSE Linux
+	0.8) with ESMTP id t0UMgw9P009543;	Sat, 31 Jan 2015 04:12:58 +0530
+From: "Franklin S. Cooper Jr" <fcooper@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 30 Jan 2015 16:42:56 -0600
+Message-ID: <1422657776-16399-1-git-send-email-fcooper@ti.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-In-Reply-To: <1422547885-14935-1-git-send-email-sam.nelson@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v2] ti-softhsmv2: Add recipe for ti customised softhsm package
+Subject: [PATCH] sitara-linux-ti-staging_3.14.bb: Update commit to pull in suspend/standby fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,81 +48,38 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jan 2015 18:49:24 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 30 Jan 2015 22:43:08 -0000
+Content-Type: text/plain
 
-Ack
+From: "Franklin S. Cooper Jr" <fcooper@ti.com>
 
-On Thu, Jan 29, 2015 at 11:11:25AM -0500, Sam Nelson wrote:
-> - Provide library, deamon and util for ti customised softhsm
-> 
-> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-> 
-> ---
-> Changes from previous patch
-> - Update LICENSE information
-> ---
-> ---
->  recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb |   43 +++++++++++++++++++++++++++
->  1 file changed, 43 insertions(+)
->  create mode 100644 recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-> 
-> diff --git a/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-> new file mode 100644
-> index 0000000..518508c
-> --- /dev/null
-> +++ b/recipes-ti/ti-softhsmv2/ti-softhsmv2_git.bb
-> @@ -0,0 +1,43 @@
-> +DESCRIPTION = "TI softhsmv2 package"
-> +LICENSE = "BSD-2-Clause | BSD-3-Clause | ISC | IBM-License | FSFULLR | Zlib"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=55144a048ba54f211a1aaa38c7fd2424"
-> +SECTION = "libs"
-> +
-> +mntdir = "/mnt"
-> +
-> +inherit autotools pkgconfig
-> +
-> +DEPENDS = "openssl libdaemon"
-> +COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
-> +
-> +BRANCH="master"
-> +SRC_URI = "git://git.ti.com/keystone-linux/ti-softhsmv2.git;protocol=git;branch=${BRANCH}"
-> +#Following commit corresponds to tag DEV.SOFTHSM-01.03.00.01
-> +SRCREV = "c79d93ac2a326567a7245dda1b903ef340b5650c"
-> +PV = "1.3.0.1"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +CFLAGS += " -mno-unaligned-access"
-> +CPPFLAGS += " -mno-unaligned-access"
-> +
-> +INITSCRIPT_NAME = "softhsm-daemon.sh"
-> +INITSCRIPT_PARAMS = "defaults 10"
-> +
-> +inherit update-rc.d
-> +
-> +SELECTED_OPTIMIZATION := "${@d.getVar("SELECTED_OPTIMIZATION", True).replace("-O2", "-O3")}"
-> +SELECTED_OPTIMIZATION := "${@d.getVar("SELECTED_OPTIMIZATION", True).replace("-ggdb2", "")}"
-> +
-> +FILES_${PN} += "${libdir}/softhsm/lib*.so.* ${mntdir}/*"
-> +FILES_${PN}-dbg += "${libdir}/softhsm/.debug"
-> +FILES_${PN}-staticdev += "${libdir}/softhsm/*.a "
-> +FILES_${PN}-dev += "${libdir}/softhsm/*.la ${libdir}/softhsm/lib*.so"
-> +
-> +do_install_append() {
-> +	install -d ${D}${mntdir}/securedbv0
-> +	install -d ${D}${mntdir}/securedbv1
-> +
-> +	install -d ${D}${sysconfdir}/init.d/
-> +	install -c -m 755 ${S}/src/bin/daemon/softhsm-daemon.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
-> +}
-> -- 
-> 1.7.9.5
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+---
+Version 2:
+Bump PR
+
+ .../linux/sitara-linux-ti-staging_3.14.bb          |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
+index f9c4641..8cd2c3f 100644
+--- a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
+@@ -35,11 +35,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "sitara-ti-linux-3.14.y"
+ 
+-SRCREV = "2d7148a3a95a2811604611f6c66a8826a61b8b12"
++SRCREV = "99b50bfb0f3fb0e43de31a6735989d31660b0835"
+ PV = "3.14.26"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "f+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ MULTI_CONFIG_BASE_SUFFIX = ""
+-- 
+1.7.9.5
+
 
