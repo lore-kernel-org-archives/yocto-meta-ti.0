@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D061CE0092E; Mon,  2 Feb 2015 12:39:05 -0800 (PST)
+	id D7EF0E008BC; Mon,  2 Feb 2015 12:50:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7BF79E008CC
-	for <meta-ti@yoctoproject.org>; Mon,  2 Feb 2015 12:38:53 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id B40E652A6B; Mon,  2 Feb 2015 20:38:52 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20150202203852.B40E652A6B@arago-project.org>
-Date: Mon,  2 Feb 2015 20:38:52 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : udma: Add recipe for user space library for udma kernel driver
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7990BE00824
+	for <meta-ti@yoctoproject.org>; Mon,  2 Feb 2015 12:50:25 -0800 (PST)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t12KoPH7004701
+	for <meta-ti@yoctoproject.org>; Mon, 2 Feb 2015 14:50:25 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t12KoO9D009647
+	for <meta-ti@yoctoproject.org>; Mon, 2 Feb 2015 14:50:24 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 2 Feb 2015 14:50:24 -0600
+Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t12KoNws004099;	Mon, 2 Feb 2015 14:50:23 -0600
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Mon, 2 Feb 2015 15:50:20 -0500
+Message-ID: <1422910220-24142-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [PATCH] libp11: Add recipe for libp11
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,63 +45,42 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Feb 2015 20:39:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 02 Feb 2015 20:50:27 -0000
+Content-Type: text/plain
 
-Module: meta-ti
-Branch: master
-Commit: cd303368294f9b31edb241ddc4487aa2034a5859
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cd303368294f9b31edb241ddc4487aa2034a5859
-
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Jan 30 08:59:26 2015 +0000
-
-udma: Add recipe for user space library for udma kernel driver
-
-- Provides zero copy access from user-space to packet dma channels
-  via udma kernel driver
+- Provides PKCS11 abstraction library
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-ti/libp11/libp11_git.bb |   18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 recipes-ti/libp11/libp11_git.bb
 
- recipes-ti/udma/udma_git.bb |   28 ++++++++++++++++++++++++++++
- 1 files changed, 28 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-ti/udma/udma_git.bb b/recipes-ti/udma/udma_git.bb
+diff --git a/recipes-ti/libp11/libp11_git.bb b/recipes-ti/libp11/libp11_git.bb
 new file mode 100644
-index 0000000..0374d37
+index 0000000..87fc10b
 --- /dev/null
-+++ b/recipes-ti/udma/udma_git.bb
-@@ -0,0 +1,28 @@
-+DESCRIPTION = "Provides zero copy access from user-space to packet dma channels via udma kernel driver"
-+LICENSE = "BSD-3-Clause"
++++ b/recipes-ti/libp11/libp11_git.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "PKCS11 abstraction library"
++LICENSE = "LGPL2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
++SECTION = "libs"
++PROVIDES = "libp11"
 +
-+COMPATIBLE_MACHINE = "keystone"
-+LIC_FILES_CHKSUM = "file://include/udma.h;startline=1;endline=39;md5=ba3c7f91f970afe073b759ced61d0f27"
++inherit autotools pkgconfig
 +
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/keystone-linux/udma.git;protocol=git;branch=${BRANCH}"
++DEPENDS = "openssl libtool"
++RDEPENDS_${PN} = "ti-softhsmv2"
++
++SRC_URI = "git://git.ti.com/keystone-linux/libp11.git;protocol=git;branch=${BRANCH}"
++BRANCH="master"
++# Following commit corresponds to DEV.LIBP11-01.03.00.00
++SRCREV = "43c4f63a8d803fde2bcd8e4f8969e5fe9edf0e33"
++PV = "1.3.0.0"
++
 +S = "${WORKDIR}/git"
-+# Commit corresponds to UDMA.01.00.00.00
-+SRCREV = "53d09fb0bc98c41c5eb43623097e363c497d6fd8"
-+
-+PACKAGES =+ "${PN}-test"
-+
-+FILES_${PN}-test = "${bindir}/udma_test"
-+
-+do_install_append() {
-+	install -d ${D}${bindir}/
-+	install -d ${D}${libdir}/
-+	install -d ${D}${includedir}/
-+	install -c -m 755 ${S}/udma_test ${D}${bindir}/
-+	install -c -m 755 ${S}/libudma.a ${D}${libdir}/
-+	install -c -m 755 ${S}/libudma.so ${D}${libdir}/libudma.so.1.0.0
-+	cd ${D}${libdir}/
-+	ln -sf libudma.so.1.0.0 libudma.so.1
-+	ln -sf libudma.so.1.0.0 libudma.so
-+	install -c -m 755 ${S}/include/* ${D}${includedir}/
-+}
+-- 
+1.7.9.5
 
 
