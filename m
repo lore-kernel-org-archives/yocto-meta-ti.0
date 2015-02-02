@@ -1,38 +1,40 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D7EF0E008BC; Mon,  2 Feb 2015 12:50:27 -0800 (PST)
+	id 58502E008E5; Mon,  2 Feb 2015 13:42:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [206.46.173.23 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7990BE00824
-	for <meta-ti@yoctoproject.org>; Mon,  2 Feb 2015 12:50:25 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t12KoPH7004701
-	for <meta-ti@yoctoproject.org>; Mon, 2 Feb 2015 14:50:25 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t12KoO9D009647
-	for <meta-ti@yoctoproject.org>; Mon, 2 Feb 2015 14:50:24 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 2 Feb 2015 14:50:24 -0600
-Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t12KoNws004099;	Mon, 2 Feb 2015 14:50:23 -0600
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 2 Feb 2015 15:50:20 -0500
-Message-ID: <1422910220-24142-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH] libp11: Add recipe for libp11
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0531CE0086F
+	for <meta-ti@yoctoproject.org>; Mon,  2 Feb 2015 13:42:20 -0800 (PST)
+Received: from gandalf.denix.org ([108.28.89.130]) by vms173023.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NJ500JSPYXSGGQ0@vms173023.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 02 Feb 2015 15:41:53 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=PYxIXZlY c=1 sm=1 tr=0	a=ckUr7rGttv+NBxkAVUaaIw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=0HtSIViG9nkA:10
+	a=sozttTNsAAAA:8	a=_KTewm4GxciJfHG3V2cA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 858D72016F;	Mon,
+	2 Feb 2015 16:41:52 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Mon, 02 Feb 2015 16:41:48 -0500
+Message-id: <1422913308-8965-2-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+In-reply-to: <1422913308-8965-1-git-send-email-denis@denix.org>
+References: <1422913308-8965-1-git-send-email-denis@denix.org>
+Subject: [PATCH 2/2] u-boot-ti-staging: update with am57x/x15 and config fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,42 +47,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Feb 2015 20:50:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 02 Feb 2015 21:42:27 -0000
 
-- Provides PKCS11 abstraction library
+From: Denys Dmytriyenko <denys@ti.com>
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-ti/libp11/libp11_git.bb |   18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 recipes-ti/libp11/libp11_git.bb
+ recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/libp11/libp11_git.bb b/recipes-ti/libp11/libp11_git.bb
-new file mode 100644
-index 0000000..87fc10b
---- /dev/null
-+++ b/recipes-ti/libp11/libp11_git.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "PKCS11 abstraction library"
-+LICENSE = "LGPL2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
-+SECTION = "libs"
-+PROVIDES = "libp11"
-+
-+inherit autotools pkgconfig
-+
-+DEPENDS = "openssl libtool"
-+RDEPENDS_${PN} = "ti-softhsmv2"
-+
-+SRC_URI = "git://git.ti.com/keystone-linux/libp11.git;protocol=git;branch=${BRANCH}"
-+BRANCH="master"
-+# Following commit corresponds to DEV.LIBP11-01.03.00.00
-+SRCREV = "43c4f63a8d803fde2bcd8e4f8969e5fe9edf0e33"
-+PV = "1.3.0.0"
-+
-+S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
+index 2845750..dd9326a 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
+@@ -8,13 +8,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+ 
+ PV = "2014.07"
+-PR = "r6+gitr${SRCPV}"
++PR = "r7+gitr${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2014.07"
+ 
+-SRCREV = "705aec706adf37b63fd4b09660c638150e606fdb"
++SRCREV = "7e537bfdd261bf8bf444f3ac4d1be3db4ee124e8"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 -- 
-1.7.9.5
+2.2.0
 
 
