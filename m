@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B9735E0095F; Mon,  2 Feb 2015 12:39:05 -0800 (PST)
+	id CC917E00961; Mon,  2 Feb 2015 12:39:05 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EAAC5E008FB
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB5F6E0091D
 	for <meta-ti@yoctoproject.org>; Mon,  2 Feb 2015 12:39:02 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A6C9252ABB; Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
+	id 8936152ABA; Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150202203856.A6C9252ABB@arago-project.org>
+Message-Id: <20150202203856.8936152ABA@arago-project.org>
 Date: Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : Graphics SDK: Add 05.01.01.02
+Subject: Franklin S. Cooper Jr : sitara-linux-ti-staging_3.14.bb: Update commit to pull in suspend/standby fix
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,27 +38,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: 2e39f3ee3eacda552e7b4874dd45d070b46cab2c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2e39f3ee3eacda552e7b4874dd45d070b46cab2c
+Commit: 8f25c83c7450230e802d0d65fe0d403e2461ea85
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8f25c83c7450230e802d0d65fe0d403e2461ea85
 
 Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Sat Jan 31 04:45:02 2015 +0000
+Date:   Sat Jan 31 04:42:56 2015 +0000
 
-Graphics SDK: Add 05.01.01.02
-
-* This graphics sdk is a minor update to the 05.01.01.01 version but includes
-  updates to support the 3.14 kernel.
+sitara-linux-ti-staging_3.14.bb: Update commit to pull in suspend/standby fix
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../omap3-sgx-modules_5.01.01.02.bb                |   68 +++++++++
- .../libgles/libgles-omap3-5.01.01.02/rc.pvr        |  134 ++++++++++++++++++
- .../libgles/libgles-omap3-5.01.01.02/rc_dri.pvr    |  145 ++++++++++++++++++++
- .../libgles/libgles-omap3_5.01.01.02.bb            |   50 +++++++
- 4 files changed, 397 insertions(+), 0 deletions(-)
+ .../linux/sitara-linux-ti-staging_3.14.bb          |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=2e39f3ee3eacda552e7b4874dd45d070b46cab2c
+diff --git a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
+index f9c4641..8cd2c3f 100644
+--- a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
+@@ -35,11 +35,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "sitara-ti-linux-3.14.y"
+ 
+-SRCREV = "2d7148a3a95a2811604611f6c66a8826a61b8b12"
++SRCREV = "99b50bfb0f3fb0e43de31a6735989d31660b0835"
+ PV = "3.14.26"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "f+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ MULTI_CONFIG_BASE_SUFFIX = ""
+
 
