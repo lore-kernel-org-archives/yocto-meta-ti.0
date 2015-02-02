@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CD122E008FB; Mon,  2 Feb 2015 12:39:05 -0800 (PST)
+	id CF516E0091D; Mon,  2 Feb 2015 12:39:05 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB6AEE0092E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB6CBE0095D
 	for <meta-ti@yoctoproject.org>; Mon,  2 Feb 2015 12:39:02 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5D36B52AB6; Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
+	id 7F62B52AAD; Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150202203856.5D36B52AB6@arago-project.org>
+Message-Id: <20150202203856.7F62B52AAD@arago-project.org>
 Date: Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : dra7xx-evm: ubifs: Increase "max_leb_cnt"
+Subject: Sam Nelson : udma: Add recipe for user space library for udma kernel driver
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,43 +33,63 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Feb 2015 20:39:05 -0000
+X-List-Received-Date: Mon, 02 Feb 2015 20:39:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: 9221a67a91313e54cf4b35a4f5b5174088c15b40
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9221a67a91313e54cf4b35a4f5b5174088c15b40
+Commit: 9c1b22c6ba6416dfa05f8a2650e5685fa595e96e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9c1b22c6ba6416dfa05f8a2650e5685fa595e96e
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Wed Jan 21 23:52:49 2015 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Fri Jan 30 08:59:26 2015 +0000
 
-dra7xx-evm: ubifs: Increase "max_leb_cnt"
+udma: Add recipe for user space library for udma kernel driver
 
-* This is need to allow some room for customers to build on top
-      of the filesystem that we support
-    * This is needed for larger filesystem size to support dev image.
+- Provides zero copy access from user-space to packet dma channels
+  via udma kernel driver
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/dra7xx-evm.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-ti/udma/udma_git.bb |   28 ++++++++++++++++++++++++++++
+ 1 files changed, 28 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
-index 175450f..3b88668 100644
---- a/conf/machine/dra7xx-evm.conf
-+++ b/conf/machine/dra7xx-evm.conf
-@@ -23,7 +23,7 @@ UBOOT_MACHINE = "dra7xx_evm_config"
- # UBI: logical eraseblock size:    126976 bytes
- # from ubiattach stdout:
- # UBI device number 0, total 1988 LEBs
--MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4352"
-+MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5120"
- 
- # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
- # from dmesg:
+diff --git a/recipes-ti/udma/udma_git.bb b/recipes-ti/udma/udma_git.bb
+new file mode 100644
+index 0000000..0374d37
+--- /dev/null
++++ b/recipes-ti/udma/udma_git.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION = "Provides zero copy access from user-space to packet dma channels via udma kernel driver"
++LICENSE = "BSD-3-Clause"
++
++COMPATIBLE_MACHINE = "keystone"
++LIC_FILES_CHKSUM = "file://include/udma.h;startline=1;endline=39;md5=ba3c7f91f970afe073b759ced61d0f27"
++
++BRANCH = "master"
++SRC_URI = "git://git.ti.com/keystone-linux/udma.git;protocol=git;branch=${BRANCH}"
++S = "${WORKDIR}/git"
++# Commit corresponds to UDMA.01.00.00.00
++SRCREV = "53d09fb0bc98c41c5eb43623097e363c497d6fd8"
++
++PACKAGES =+ "${PN}-test"
++
++FILES_${PN}-test = "${bindir}/udma_test"
++
++do_install_append() {
++	install -d ${D}${bindir}/
++	install -d ${D}${libdir}/
++	install -d ${D}${includedir}/
++	install -c -m 755 ${S}/udma_test ${D}${bindir}/
++	install -c -m 755 ${S}/libudma.a ${D}${libdir}/
++	install -c -m 755 ${S}/libudma.so ${D}${libdir}/libudma.so.1.0.0
++	cd ${D}${libdir}/
++	ln -sf libudma.so.1.0.0 libudma.so.1
++	ln -sf libudma.so.1.0.0 libudma.so
++	install -c -m 755 ${S}/include/* ${D}${includedir}/
++}
 
 
