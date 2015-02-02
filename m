@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3C1B3E0095F; Mon,  2 Feb 2015 12:39:05 -0800 (PST)
+	id 3CA33E008E5; Mon,  2 Feb 2015 12:39:05 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EAF07E008FF
-	for <meta-ti@yoctoproject.org>; Mon,  2 Feb 2015 12:39:02 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7ACE2E008BC
+	for <meta-ti@yoctoproject.org>; Mon,  2 Feb 2015 12:38:53 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6ABC452AB7; Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
+	id ACE6352AA9; Mon,  2 Feb 2015 20:38:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150202203856.6ABC452AB7@arago-project.org>
-Date: Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
+Message-Id: <20150202203852.ACE6352AA9@arago-project.org>
+Date: Mon,  2 Feb 2015 20:38:52 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : ti-softhsmv2: Add recipe for ti customised softhsm package
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 02 Feb 2015 20:39:05 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: a4fa63b39f6a55559efb905a887a664e3c868ccc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a4fa63b39f6a55559efb905a887a664e3c868ccc
+Branch: master
+Commit: 02faeb98837ac068ff056f8480a5c8e86eb4041b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=02faeb98837ac068ff056f8480a5c8e86eb4041b
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Thu Jan 29 22:11:25 2015 +0000
