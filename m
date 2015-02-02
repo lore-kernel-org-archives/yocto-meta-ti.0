@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CC917E00961; Mon,  2 Feb 2015 12:39:05 -0800 (PST)
+	id CD122E008FB; Mon,  2 Feb 2015 12:39:05 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB5F6E0091D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB6AEE0092E
 	for <meta-ti@yoctoproject.org>; Mon,  2 Feb 2015 12:39:02 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8936152ABA; Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
+	id 5D36B52AB6; Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150202203856.8936152ABA@arago-project.org>
+Message-Id: <20150202203856.5D36B52AB6@arago-project.org>
 Date: Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Franklin S. Cooper Jr : sitara-linux-ti-staging_3.14.bb: Update commit to pull in suspend/standby fix
+Subject: Karthik Ramanan : dra7xx-evm: ubifs: Increase "max_leb_cnt"
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,39 +38,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: 8f25c83c7450230e802d0d65fe0d403e2461ea85
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8f25c83c7450230e802d0d65fe0d403e2461ea85
+Commit: 9221a67a91313e54cf4b35a4f5b5174088c15b40
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9221a67a91313e54cf4b35a4f5b5174088c15b40
 
-Author: Franklin S. Cooper Jr <fcooper@ti.com>
-Date:   Sat Jan 31 04:42:56 2015 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Wed Jan 21 23:52:49 2015 +0000
 
-sitara-linux-ti-staging_3.14.bb: Update commit to pull in suspend/standby fix
+dra7xx-evm: ubifs: Increase "max_leb_cnt"
 
-Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+* This is need to allow some room for customers to build on top
+      of the filesystem that we support
+    * This is needed for larger filesystem size to support dev image.
+
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/sitara-linux-ti-staging_3.14.bb          |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/dra7xx-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
-index f9c4641..8cd2c3f 100644
---- a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
-@@ -35,11 +35,11 @@ S = "${WORKDIR}/git"
+diff --git a/conf/machine/dra7xx-evm.conf b/conf/machine/dra7xx-evm.conf
+index 175450f..3b88668 100644
+--- a/conf/machine/dra7xx-evm.conf
++++ b/conf/machine/dra7xx-evm.conf
+@@ -23,7 +23,7 @@ UBOOT_MACHINE = "dra7xx_evm_config"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4352"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5120"
  
- BRANCH = "sitara-ti-linux-3.14.y"
- 
--SRCREV = "2d7148a3a95a2811604611f6c66a8826a61b8b12"
-+SRCREV = "99b50bfb0f3fb0e43de31a6735989d31660b0835"
- PV = "3.14.26"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "f+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- MULTI_CONFIG_BASE_SUFFIX = ""
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
 
 
