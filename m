@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CF516E0091D; Mon,  2 Feb 2015 12:39:05 -0800 (PST)
+	id D061CE0092E; Mon,  2 Feb 2015 12:39:05 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB6CBE0095D
-	for <meta-ti@yoctoproject.org>; Mon,  2 Feb 2015 12:39:02 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7BF79E008CC
+	for <meta-ti@yoctoproject.org>; Mon,  2 Feb 2015 12:38:53 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7F62B52AAD; Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
+	id B40E652A6B; Mon,  2 Feb 2015 20:38:52 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150202203856.7F62B52AAD@arago-project.org>
-Date: Mon,  2 Feb 2015 20:38:56 +0000 (UTC)
+Message-Id: <20150202203852.B40E652A6B@arago-project.org>
+Date: Mon,  2 Feb 2015 20:38:52 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : udma: Add recipe for user space library for udma kernel driver
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 02 Feb 2015 20:39:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 9c1b22c6ba6416dfa05f8a2650e5685fa595e96e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9c1b22c6ba6416dfa05f8a2650e5685fa595e96e
+Branch: master
+Commit: cd303368294f9b31edb241ddc4487aa2034a5859
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cd303368294f9b31edb241ddc4487aa2034a5859
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Fri Jan 30 08:59:26 2015 +0000
