@@ -1,58 +1,38 @@
-Return-Path: <cliff.brake@gmail.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C0366E00827; Wed,  4 Feb 2015 07:38:52 -0800 (PST)
+	id 68941E0082D; Wed,  4 Feb 2015 07:40:55 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM, MIME_QP_LONG_LINE,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (cliff.brake[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.223.169 listed in list.dnswl.org]
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* 0.0 MIME_QP_LONG_LINE RAW: Quoted-printable line longer than 76 chars
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
-	[209.85.223.169])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 602ADE00753
-	for <meta-ti@yoctoproject.org>; Wed,  4 Feb 2015 07:38:48 -0800 (PST)
-Received: by mail-ie0-f169.google.com with SMTP id rl12so2883475iec.0
-	for <meta-ti@yoctoproject.org>; Wed, 04 Feb 2015 07:38:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:mime-version:message-id:from:to:subject:content-type
-	:content-transfer-encoding;
-	bh=o6rF04JPqUtSzPrK635caLt1a4t7f5urNEEUhYeG1ZQ=;
-	b=S/2BRZVLtzygh8JBrYyqjvix/uRJgQnM5QmI4Tx9zbd9zEEx8M3VQk+mGE/u1wTDw7
-	xTk/i3H6gHAs1hdvA4A2bIHzncBCrC+/+eRQXXbv1y5UwOxEZnn36RPJmghCPcSWX7lG
-	LMbS4MxMQjC0PXbVltkv0xxf9cbN9DpXLSxVo79JQSXbSJSR2lmtN8oE5qc/QP255Tkk
-	/ChvyHdIsEdRyGFwc62wPjVb15w50e0nLS8JWjr3DpGSmfyq3xkKrpc5ZCSahbWvuFQJ
-	mslWV6LqPA3C1Gdar6jfjXeeSzxd8RIT3k8QDjovOudZ9l5Eu87yIlTfVVtETznbsJ0S
-	H/Yw==
-X-Received: by 10.50.13.97 with SMTP id g1mr24491463igc.42.1423064327730;
-	Wed, 04 Feb 2015 07:38:47 -0800 (PST)
-Received: from [127.0.0.1] (cable2-pool191-cs-105.doycomm.com.
-	[66.219.191.105])
-	by mx.google.com with ESMTPSA id q7sm9717651igx.9.2015.02.04.07.38.45
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Feb 2015 07:38:46 -0800 (PST)
-Date: Wed, 04 Feb 2015 07:38:46 -0800 (PST)
-X-Google-Original-Date: Wed, 04 Feb 2015 15:38:45 GMT
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1AC36E00753
+	for <meta-ti@yoctoproject.org>; Wed,  4 Feb 2015 07:40:50 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t14FenMS029465
+	for <meta-ti@yoctoproject.org>; Wed, 4 Feb 2015 09:40:49 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t14FemB8011843
+	for <meta-ti@yoctoproject.org>; Wed, 4 Feb 2015 09:40:48 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 4 Feb 2015 09:40:48 -0600
+Received: from udb0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t14Fem2I028213;	Wed, 4 Feb 2015 09:40:48 -0600
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Wed, 4 Feb 2015 10:40:45 -0500
+Message-ID: <1423064446-7202-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Message-Id: <1423064325148.aa0f3bc8@Nodemailer>
-From: cliff.brake@gmail.com
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
-Subject: OE Changelog since 2015-01-25 until 2015-02-01
+Subject: [PATCH 1/2] ti-eula-unpack: Add support for general binary installers.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -65,462 +45,189 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2015 15:38:52 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-Changelog since 2015-01-25 until 2015-02-01.  Projects included in this =
-report:
-
-bitbake: git://git.openembedded.org/bitbake
-openembedded-core: git://git.openembedded.org/openembedded-core
-meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
-meta-arago: git://arago-project.org/git/meta-arago.git
-meta-atmel: https://github.com/linux4sam/meta-atmel.git
-meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
-meta-browser: git://github.com/OSSystems/meta-browser.git
-meta-bug: git://github.com/buglabs/meta-bug.git
-meta-chicken: git://github.com/OSSystems/meta-chicken
-meta-efikamx: git://github.com/kraj/meta-efikamx.git
-meta-ettus: http://github.com/koenkooi/meta-ettus.git
-meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
-meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
-meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
-meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
-meta-gumstix: git://github.com/gumstix/meta-gumstix.git
-meta-gumstix-community: =
-git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
-meta-handheld: git://git.openembedded.org/meta-handheld
-meta-igep: http://github.com/ebutera/meta-igep.git
-meta-intel: git://git.yoctoproject.org/meta-intel
-meta-ivi: git://git.yoctoproject.org/meta-ivi
-meta-java: git://github.com/woglinde/meta-java
-meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
-meta-micro: git://git.openembedded.org/meta-micro
-meta-mono: git://git.yoctoproject.org/meta-mono.git
-meta-netbookpro: git://github.com/tworaz/meta-netbookpro
-meta-nslu2: git://github.com/kraj/meta-nslu2
-meta-opie: git://git.openembedded.org/meta-opie
-meta-qt3: git://git.yoctoproject.org/meta-qt3
-meta-qt5: git://github.com/meta-qt5/meta-qt5.git
-meta-slugos: git://github.com/kraj/meta-slugos
-meta-systemd: git://git.yoctoproject.org/meta-systemd
-meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
-meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
-meta-ti: git://git.yoctoproject.org/meta-ti
-meta-webos: git://github.com/openwebos/meta-webos.git
-meta-xilinx: git://git.yoctoproject.org/meta-xilinx
-meta-yocto: git://git.yoctoproject.org/meta-yocto
-openembedded: git://git.openembedded.org/openembedded
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for bitbake:
-
-Alexandru DAMIAN (3):
-=20=20toastergui: update project build listing
-=20=20toaster: update texts for the startup sequence
-=20=20toaster: new layer checkout logic
-
-Alexandru Damian (1):
-=20=20toasterui: do not filter images by extension
-
-Belen Barros Pena (12):
-=20=20toaster: make layouts consistent
-=20=20toaster: apply common styles to right hand column of detail pages
-=20=20toastergui: Generic message for the layer details empty states
-=20=20toastergui: remove redundant style declaration
-=20=20toastergui: consistent add / remove layer notifications
-=20=20toastergui: give the add dependencies form some breathing space
-=20=20toastergui: add 'show all' link to no results page
-=20=20toastergui: set column width in layer details page
-=20=20toastergui: hide table controls when when less than 10 entries
-=20=20toastergui: consistent capitals in button
-=20=20toastergui: remove recipe id links to the layer index
-=20=20toastergui: alignment fix
-
-Pascal Bach (1):
-=20=20parse/ast: Fix issue if path contains '&'
-
-Richard Purdie (1):
-=20=20data_smart: Don't use mutable objects as default args
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded-core:
-
-Andre McCurdy (3):
-=20=20udev: fix missing dependency on glib-2.0-native
-=20=20udev: remove obsolete dependency on acl
-=20=20logrotate: fix missing acl and libselinux dependencies
-
-Armin Kuster (2):
-=20=20nss: update package to 3.17.3 and build fix
-=20=20glibc: CVE-2014-9402 endless loop in getaddr_r
-
-Chen Qi (4):
-=20=20util-linux: upgrade to 2.25.2
-=20=20systemd: remove util-linux from DEPENDS
-=20=20libsm: remove dependency on e2fsprogs
-=20=20udev-cache: avoid using '-L' for stat
-
-Dan McGregor (2):
-=20=20gcc-sanitizers: fix licensing
-=20=20dpkg: fix host contamination
-
-Enrico Scholz (2):
-=20=20image_types.bbclass: fixed 'init' creation for cpio images
-=20=20image_types.bbclass: manage 'cpio_append' directory
-
-Fabien Proriol (1):
-=20=20boost: Avoid to use local host configuration
-
-Gustavo Sverzut Barbieri (1):
-=20=20kmod: new PACKAGECONFIG debug and logging to help reduce binary size.
-
-Hongxu Jia (2):
-=20=20distcc: fix initscript can not stop distcc daemon correctly
-=20=20libxml-parser-perl: upgrade to 2.44
-
-Jackie Huang (1):
-=20=20dmidecode: add powerpc64 to compatible host
-
-Jun Zhu (1):
-=20=20xserver-xorg: Add the patch to fix subwindow in Xi emulated events
-
-Juro Bystricky (1):
-=20=20eglibc-use-option-groups.patch: Various fixups
-
-Khem Raj (4):
-=20=20usbutils: Fix typo in md5sum
-=20=20icu: Upgrade to v54
-=20=20gmp: Change the SRC_URI to reflect upstream changed location
-=20=20libpng: Upgrade to 1.6.16
-
-Koen Kooi (1):
-=20=20linux-dummy: provide empty shared_workdir method
-
-Lei Maohui (1):
-=20=20libidn_0.6.14: fix the QA Issue
-
-Li xin (1):
-=20=20elfutils_0.148.bb: CVE-2014-9447 fix
-
-Mark Hatle (4):
-=20=20gcc/libgcc-common.inc: Add missing 'fakeroot' to two tasks
-=20=20python-smartpm: Fix attemptonly builds when file conflicts occur
-=20=20feature-arm-thumb.inc: Remove extra space on thumb override
-=20=20arch-mips.inc: Change definition of TRANSLATED_TARGET_ARCH
-
-Markus Lehtonen (2):
-=20=20combo-layer: minor refactor
-=20=20combo-layer: support updating up to arbitrary commit
-
-Martin Jansa (4):
-=20=20gst-ffmpeg: add dependency on libpostproc
-=20=20libpostproc: import from meta-oe
-=20=20libav: drop older 0.8.* and use libav-9 by default
-=20=20recipes-qt: add x11 to required DISTRO_FEATURES
-
-Max Krummenacher (2):
-=20=20udev: fix ptest rule syntax check
-=20=20udev: don't keep ptest testdata laying around
-
-Maxin B. John (1):
-=20=20ltp: update to 20150119 release
-
-Otavio Salvador (1):
-=20=20u-boot-fw-utils: Fix the cross build
-
-Pascal Bach (1):
-=20=20base-passwd: Don't replace $ variables in passwd and group files
-
-Patrick Ohly (2):
-=20=20binconfig-disabled: try harder to prevent usage of config scripts
-=20=20binconfig-disabled: install config scripts in sysroot
-
-Paul Eggleton (1):
-=20=20gcc: ensure target gcc headers can be included
-
-Peter Seebach (1):
-=20=20pseudo_1.6.x.bb/pseudo_git.bb: Pseudo 1.6.4
-
-Philip Balister (1):
-=20=20orc : Update to 0.4.23.
-
-Qian Lei (1):
-=20=20lighttpd: Use PACKAGECONFIG to enable openssl
-
-Richard Purdie (3):
-=20=20image: Add missing depends on virtual/kernel for depmod data
-=20=20kernel: Fix depmod for multilib
-=20=20scripts/send-error-report: Set exit code if error occurs
-
-Ross Burton (1):
-=20=20security_flags: disable PIE on expect
-
-Saul Wold (3):
-=20=20mkfontscale: Upgrade to 1.1.2
-=20=20build-appliance-image: Upgrade for 1.8 Master
-=20=20util-linux: move readprofile to match busybox
-
-Soren Brinkmann (1):
-=20=20shadow: securetty: Add Xilinx Zynq SoC
-
-Theodor Gherzan (1):
-=20=20kernel-yocto.bbclass: Bug Fix inside do_kernel_checkout()
-
-Ting Liu (3):
-=20=20bind: fix typo chown->chmod
-=20=20bitbake.conf: add PKGDATA_DIR to BB_HASHBASE_WHITELIST
-=20=20libunwind: Fix test case link failure on PowerPC with Altivec
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-openembedded:
-
-Andrea Adami (1):
-=20=20kexec-tools-klibc_2.0.2: backport patch to fix build with separate B =
-and S
-
-Armin Kuster (2):
-=20=20wireshark: update to 1.12.3
-=20=20wireshark: fix rdepends issue
-
-Ben Shelton (1):
-=20=20msr-tools: add recipe
-
-Bian Naimeng (1):
-=20=20opensaf: add recipe
-
-Dmitry Eremin-Solenikov (1):
-=20=20vlan: don't try to include files from ${HOME}/linux/include
-
-Jackie Huang (1):
-=20=20rsyslog: set the default file permission
-
-Joe MacDonald (1):
-=20=20opensaf: update SRC_URI and install actions
-
-Joe Slater (3):
-=20=20geoip-perl: add recipe for version 1.45
-=20=20python-ldap: move to version 2.4.10
-=20=20python-lxml: move to version 3.2.5
-
-Kang Kai (1):
-=20=20lksctp-tools: add ptest subpackage and other updates
-
-Li xin (5):
-=20=20openl2tp: add new recipe
-=20=20radvd: add licenses file to fix warning
-=20=20system-config-keyboard: add new recipe
-=20=20system-setup-keyboard: add new recipe
-=20=20openct: add new recipe
-
-Roy Li (3):
-=20=20traceroute: give high priority when update-alternatives
-=20=20iscsi-initiator-utils: fix the iscsid path in iscsid.conf
-=20=20apache2: fix a typos
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-angstrom:
-
-Koen Kooi (1):
-=20=20systemd: remove util-linux from DEPENDS to avoid dependency loop
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-arago:
-
-Carlos Hernandez (1):
-=20=20Update linaro-pm-qa-utils package version
-
-Denys Dmytriyenko (1):
-=20=20branding-core: re-enable AUTOREV after the release
-
-Franklin S. Cooper Jr (6):
-=20=20ti-tisdk-setup: Update commit to add support for Ubuntu 14.04
-=20=20matrix-gui-apps-git: Use updated commit
-=20=20matrix-gui-helper-scripts: Add script that will be useful to other =
-matrix ap
-=20=20matrix-gui-pm-demos: Use static set PM governor application
-=20=20matrix-gui-*: Add dependency on matrix-gui-helper-scripts
-=20=20branding-amsdk: Avoid picking up auto rev kernel and u-boot
-
-Nikhil Devshatwar (1):
-=20=20packagegroup-arago-test: Update vpdma-fw and vpe-tests packages
-
-Sam Nelson (1):
-=20=20multiprocmgr: Remove multiprocmgr recipe: moved to meta-ti
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-atmel:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-beagleboard:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-browser:
-
-Carlos Rafael Giani (2):
-=20=20chromium: Reorganize into .inc and .bb to allow for cleaner upgrades
-=20=20chromium: chromium: Upgrade to version 40.0.2214.91
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-bug:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-chicken:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-efikamx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ettus:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm:
-
-Carlos Rafael Giani (1):
-=20=20chromium: Update bbappend to version 40.0.2214.91
-
-Lauren Post (11):
-=20=20linux-imx: Upgrade to 3.10.53-1.1.0 GA release
-=20=20imx-test: Upgrade to 3.10.53-1.1.0_GA release
-=20=20imx-lib: Upgrade to 3.10.53-1.1.0_GA release
-=20=20imx-vpu: Upgrade to 3.10.53-1.1.0 GA release
-=20=20firmware-imx: Upgrade to 3.10.53-1.1.0 GA release
-=20=20u-boot-imx: Upgrade to 3.10.53-1.1.0_GA release
-=20=20imx-kobs: Upgrade to 3.10.53-1.1.0 GA release
-=20=20imx6sxsabresd: Remove deleted device tree canfd
-=20=20imx6sxsabreauto: Create for 3.10.53-1.1.0 Release
-=20=20imx6slevk: Add new uart device tree imx6sl-evk-uart.dtb
-=20=20imx6qsabresd.conf: Add imx6q-sabresd-uart device tree
-
-Neena Busireddy (4):
-=20=20imx-gpu-viv: Upgrade to 3.10.53-1.1.0 GA release
-=20=20xf86-video-imxfb-vivante: Upgrade to 3.10.53-1.1.0 GA release
-=20=20xf86-video-imxfb-vivante: Add autohdmi utility
-=20=20directfb: Upgrade to 1.7.4 version
-
-Zidan Wang (5):
-=20=20libfslvpuwrap: Upgrade to 1.0.57 version
-=20=20libfslcodec: Upgrade to 4.0.2 version
-=20=20libfslparser: Upgrade to 4.0.2 version
-=20=20gst1.0-fsl-plugin: Upgrade to 4.0.2 version
-=20=20gst-fsl-plugin: Upgrade to 4.0.2 version
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm-extra:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-ppc:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-guacamayo:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix-community:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-handheld:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-igep:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-intel:
-
-Pengyu Ma (1):
-=20=20intel-gpu-tools: Upgrade to 1.9
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ivi:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-java:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-kde:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-micro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-mono:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-netbookpro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-nslu2:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-opie:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt3:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt5:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-slugos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-systemd:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-raspberrypi:
-
-Alex J Lennon (1):
-=20=20linux-raspberrypi: Change to Linux Yocto style kernel recipes
-
-Andrei Gherzan (4):
-=20=20omxplayer: Add patch to fix lflags and cflags
-=20=20omxplayer: Minor tweaks
-=20=20README: Fix typo
-=20=20linux-raspberrypi: Remove old v3.2.27
-
-Maciej Borzecki (2):
-=20=20raspberrypi.conf: add IMAGE_BOOT_FILES
-=20=20sdimage-raspberrypi.wks: kickstart image definition
-
-Petter Mab=C3=A4cker (2):
-=20=20linux-raspberrypi: fix do_configure failure
-=20=20linux-raspberrypi: faulty branch and srcrev for 3.16
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-smartphone:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ti:
-
-Denys Dmytriyenko (1):
-=20=20linux-ti-staging: update to stable 3.14.29
-
-Nikhil Devshatwar (1):
-=20=20vpdma-fw: Separate vpdma-fw and vpe-tests recipe
-
-Sam Nelson (2):
-=20=20srss-tc: Add recipe for Smart reflex application
-=20=20nwal-lld: Add recipes for Network abstraction layer low level driver =
-and tes
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-webos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-xilinx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-Petter Mab=C3=A4cker (1):
-=20=20tiny-init: set proper S value
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded:
-
+X-List-Received-Date: Wed, 04 Feb 2015 15:40:55 -0000
+Content-Type: text/plain
+
+* ti-unpack.inc has been created to allow support for general binary
+  installers by creating a variable which is used to pass arbitrary
+  arguments to the executable.
+* ti-eula-unpack.inc sets the default arguments to retain support for
+  recipes which still use this feature.
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+ recipes-ti/includes/ti-eula-unpack.inc |   67 +-------------------------
+ recipes-ti/includes/ti-unpack.inc      |   83 ++++++++++++++++++++++++++++++++
+ 2 files changed, 85 insertions(+), 65 deletions(-)
+ create mode 100644 recipes-ti/includes/ti-unpack.inc
+
+diff --git a/recipes-ti/includes/ti-eula-unpack.inc b/recipes-ti/includes/ti-eula-unpack.inc
+index aee88f1..912cd18 100644
+--- a/recipes-ti/includes/ti-eula-unpack.inc
++++ b/recipes-ti/includes/ti-eula-unpack.inc
+@@ -9,70 +9,7 @@
+ #  TI_BIN_UNPK_WDEXT  - This variable extends workdir path, if user wants to put
+ #                       the output in some internal directory
+ 
+-python do_unpack () {
+-    bb.build.exec_func('base_do_unpack', d)
+-    bb.build.exec_func('ti_bin_do_unpack', d)
+-}
++require ../includes/ti-unpack.inc
+ 
+-TI_BIN_UNPK_WDEXT ?= ""
+-python ti_bin_do_unpack() {
+-
+-    import os
+-
+-    # InstallJammer requires 32bit version of glibc
+-    lib32path = '/lib'
+-    if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
+-        lib32path = '/lib32'
+-    if not os.path.exists('%s/libc.so.6' % lib32path):
+-        bb.warn("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on Ubuntu/Debian")
+-
+-    localdata = bb.data.createCopy(d)
+-    bb.data.update_data(localdata)
+-
+-    binfile  = bb.data.getVar('BINFILE', localdata)
+-    binfile  = bb.data.expand(binfile, localdata)
+-
+-    # Change to the working directory
+-    save_cwd = os.getcwd()
+-    workdir  = bb.data.getVar('WORKDIR', localdata)
+-    workdir  = bb.data.expand(workdir, localdata)
+-    os.chdir(workdir)
+-
+-    # Get unpack commands
+-    cmd_string = bb.data.getVar('TI_BIN_UNPK_CMDS', localdata)
+-    cmd_list = cmd_string.split( ":" )
+-
+-    # Make the InstallJammer binary executable so we can run it
+-    os.chmod(binfile, 0755)
+-
+-    # Run the InstallJammer binary and accept the EULA
+-    filename = "HOME=%s ./%s --mode console" % (workdir, binfile)
+-    
+-    # Test executable by printing installer version or help screen (--version currently broken for some installers) 
+-    # - this is currently broken in some IJ installers - comment out for now
+-    #if os.system(filename + " --version") != 0:
+-    #   print "ERROR: ti-eula-unpack: failed to execute binary installer"
+-    #   raise bb.build.FuncFailed()
+- 
+-    f = os.popen(filename,'w')
+-    for cmd in cmd_list:
+-        if cmd == "workdir":
+-            wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
+-            wdext = bb.data.expand(wdext, localdata)
+-            cmd = workdir+wdext
+-        f.write(cmd+'\n');
+-    f.close()
+-
+-    # Expand the tarball that was created if required
+-    tarfile  = bb.data.getVar('TARFILE', localdata)    
+-    if bool(tarfile) == True:
+-        tarfile  = bb.data.expand(tarfile, localdata)
+-        tcmd = 'tar x --no-same-owner -f %s -C %s' % (tarfile, workdir)
+-        if os.system(tcmd) != 0:
+-            print "ERROR: ti-eula-unpack: failed to extract tarfile"
+-            raise bb.build.FuncFailed()
+-
+-    # Return to the previous directory
+-    os.chdir(save_cwd)
+-}
++TI_BIN_UNPK_ARGS = "--mode console"
+ 
+diff --git a/recipes-ti/includes/ti-unpack.inc b/recipes-ti/includes/ti-unpack.inc
+new file mode 100644
+index 0000000..c19c78c
+--- /dev/null
++++ b/recipes-ti/includes/ti-unpack.inc
+@@ -0,0 +1,83 @@
++# This file defines function used for unpacking the .bin file downloaded over
++# the http.
++#  BINFILE - name of the install jammer .bin file
++#  TARFILE - name of the tar file inside the install jammer
++#  TI_BIN_UNPK_ARGS   - contains the arguments to be passed to the bin file.
++#  TI_BIN_UNPK_CMDS   - contains list of commands separated with colon to be 
++#                       passed while unpacking the bin file. The keyword 
++#                       workdir expands to WORKDIR and commands are appendded
++#                       with '\n'. Eg. TI_BIN_UNPK_CMDS="Y:Y: qY:workdir"
++#  TI_BIN_UNPK_WDEXT  - This variable extends workdir path, if user wants to put
++#                       the output in some internal directory
++
++python do_unpack () {
++    bb.build.exec_func('base_do_unpack', d)
++    bb.build.exec_func('ti_bin_do_unpack', d)
++}
++
++TI_BIN_UNPK_WDEXT ?= ""
++python ti_bin_do_unpack() {
++
++    import os
++
++    # InstallJammer requires 32bit version of glibc
++    lib32path = '/lib'
++    if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
++        lib32path = '/lib32'
++    if not os.path.exists('%s/libc.so.6' % lib32path):
++        bb.warn("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on Ubuntu/Debian")
++
++    localdata = bb.data.createCopy(d)
++    bb.data.update_data(localdata)
++
++    binfile  = bb.data.getVar('BINFILE', localdata)
++    binfile  = bb.data.expand(binfile, localdata)
++
++    # Change to the working directory
++    save_cwd = os.getcwd()
++    workdir  = bb.data.getVar('WORKDIR', localdata)
++    workdir  = bb.data.expand(workdir, localdata)
++    os.chdir(workdir)
++
++    # Get unpack args
++    arg_string = bb.data.getVar('TI_BIN_UNPK_ARGS', localdata)
++    arg_string = bb.data.expand(arg_string, localdata)
++
++    # Get unpack commands
++    cmd_string = bb.data.getVar('TI_BIN_UNPK_CMDS', localdata)
++    cmd_list = cmd_string.split( ":" )
++
++    # Make the InstallJammer binary executable so we can run it
++    os.chmod(binfile, 0755)
++
++    # Run the InstallJammer binary and accept the EULA
++    filename = "HOME=%s ./%s %s" % (workdir, binfile, arg_string)
++    
++    # Test executable by printing installer version or help screen (--version currently broken for some installers) 
++    # - this is currently broken in some IJ installers - comment out for now
++    #if os.system(filename + " --version") != 0:
++    #   print "ERROR: ti-eula-unpack: failed to execute binary installer"
++    #   raise bb.build.FuncFailed()
++ 
++    f = os.popen(filename,'w')
++    for cmd in cmd_list:
++        if cmd == "workdir":
++            wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
++            wdext = bb.data.expand(wdext, localdata)
++            cmd = workdir+wdext
++        f.write(cmd+'\n');
++    f.close()
++
++    # Expand the tarball that was created if required
++    tarfile  = bb.data.getVar('TARFILE', localdata)    
++    if bool(tarfile) == True:
++        tarfile  = bb.data.expand(tarfile, localdata)
++        tcmd = 'tar x --no-same-owner -f %s -C %s' % (tarfile, workdir)
++        if os.system(tcmd) != 0:
++            print "ERROR: ti-eula-unpack: failed to extract tarfile"
++            raise bb.build.FuncFailed()
++
++    # Return to the previous directory
++    os.chdir(save_cwd)
++}
++
+-- 
+1.7.9.5
 
 
