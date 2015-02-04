@@ -1,38 +1,40 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 68941E0082D; Wed,  4 Feb 2015 07:40:55 -0800 (PST)
+	id 4A0ECE00997; Wed,  4 Feb 2015 07:40:57 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1AC36E00753
-	for <meta-ti@yoctoproject.org>; Wed,  4 Feb 2015 07:40:50 -0800 (PST)
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 04117E0080C
+	for <meta-ti@yoctoproject.org>; Wed,  4 Feb 2015 07:40:53 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t14FenMS029465
-	for <meta-ti@yoctoproject.org>; Wed, 4 Feb 2015 09:40:49 -0600
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t14FemB8011843
-	for <meta-ti@yoctoproject.org>; Wed, 4 Feb 2015 09:40:48 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 4 Feb 2015 09:40:48 -0600
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t14Fernu008373
+	for <meta-ti@yoctoproject.org>; Wed, 4 Feb 2015 09:40:53 -0600
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t14FeqEZ011857
+	for <meta-ti@yoctoproject.org>; Wed, 4 Feb 2015 09:40:52 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 4 Feb 2015 09:40:51 -0600
 Received: from udb0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t14Fem2I028213;	Wed, 4 Feb 2015 09:40:48 -0600
+	t14Fem2J028213;	Wed, 4 Feb 2015 09:40:51 -0600
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 4 Feb 2015 10:40:45 -0500
-Message-ID: <1423064446-7202-1-git-send-email-j-stiffler@ti.com>
+Date: Wed, 4 Feb 2015 10:40:46 -0500
+Message-ID: <1423064446-7202-2-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1423064446-7202-1-git-send-email-j-stiffler@ti.com>
+References: <1423064446-7202-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2] ti-eula-unpack: Add support for general binary installers.
+Subject: [PATCH 2/2] ti-cgt6x: Upgrade to 8.0.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,187 +47,181 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2015 15:40:55 -0000
+X-List-Received-Date: Wed, 04 Feb 2015 15:40:57 -0000
 Content-Type: text/plain
 
-* ti-unpack.inc has been created to allow support for general binary
-  installers by creating a variable which is used to pass arbitrary
-  arguments to the executable.
-* ti-eula-unpack.inc sets the default arguments to retain support for
-  recipes which still use this feature.
+* Remove older versions.
+* Add support for native and nativesdk versions.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-ti/includes/ti-eula-unpack.inc |   67 +-------------------------
- recipes-ti/includes/ti-unpack.inc      |   83 ++++++++++++++++++++++++++++++++
- 2 files changed, 85 insertions(+), 65 deletions(-)
- create mode 100644 recipes-ti/includes/ti-unpack.inc
+ recipes-ti/devtools/ti-cgt6x.inc       |   24 ---------
+ recipes-ti/devtools/ti-cgt6x_6.1.20.bb |   11 ----
+ recipes-ti/devtools/ti-cgt6x_7.2.7.bb  |   13 -----
+ recipes-ti/devtools/ti-cgt6x_8.0.0.bb  |   86 ++++++++++++++++++++++++++++++++
+ 4 files changed, 86 insertions(+), 48 deletions(-)
+ delete mode 100644 recipes-ti/devtools/ti-cgt6x.inc
+ delete mode 100644 recipes-ti/devtools/ti-cgt6x_6.1.20.bb
+ delete mode 100644 recipes-ti/devtools/ti-cgt6x_7.2.7.bb
+ create mode 100644 recipes-ti/devtools/ti-cgt6x_8.0.0.bb
 
-diff --git a/recipes-ti/includes/ti-eula-unpack.inc b/recipes-ti/includes/ti-eula-unpack.inc
-index aee88f1..912cd18 100644
---- a/recipes-ti/includes/ti-eula-unpack.inc
-+++ b/recipes-ti/includes/ti-eula-unpack.inc
-@@ -9,70 +9,7 @@
- #  TI_BIN_UNPK_WDEXT  - This variable extends workdir path, if user wants to put
- #                       the output in some internal directory
- 
--python do_unpack () {
--    bb.build.exec_func('base_do_unpack', d)
--    bb.build.exec_func('ti_bin_do_unpack', d)
+diff --git a/recipes-ti/devtools/ti-cgt6x.inc b/recipes-ti/devtools/ti-cgt6x.inc
+deleted file mode 100644
+index 1d00a55..0000000
+--- a/recipes-ti/devtools/ti-cgt6x.inc
++++ /dev/null
+@@ -1,24 +0,0 @@
+-DESCRIPTION = "TI DSP Code Generation Tools"
+-HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+-SECTION = "devel"
+-LICENSE = "TI"
+-
+-require ../includes/ti-paths.inc
+-require ../includes/ti-staging.inc
+-require ../includes/ti-eula-unpack.inc
+-
+-PR = "r4"
+-
+-S = "${WORKDIR}/cgt6x_${PV}"
+-
+-SRC_URI = "http://install.source.dir.local/ti_cgt_c6000_${PVwithdots}_setup_linux_x86.bin;name=cgt6xbin"
+-
+-BINFILE="ti_cgt_c6000_${PVwithdots}_setup_linux_x86.bin"
+-TI_BIN_UNPK_CMDS="Y:qY:workdir: : "
+-TI_BIN_UNPK_WDEXT="/cgt6x_${PV}"
+-
+-do_install() {
+-    install -d ${D}${CODEGEN_INSTALL_DIR_RECIPE}
+-    cp -pPrf ${S}/* ${D}${CODEGEN_INSTALL_DIR_RECIPE}
 -}
-+require ../includes/ti-unpack.inc
- 
--TI_BIN_UNPK_WDEXT ?= ""
--python ti_bin_do_unpack() {
 -
--    import os
+diff --git a/recipes-ti/devtools/ti-cgt6x_6.1.20.bb b/recipes-ti/devtools/ti-cgt6x_6.1.20.bb
+deleted file mode 100644
+index 1d6609c..0000000
+--- a/recipes-ti/devtools/ti-cgt6x_6.1.20.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-require ti-cgt6x.inc
 -
--    # InstallJammer requires 32bit version of glibc
--    lib32path = '/lib'
--    if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
--        lib32path = '/lib32'
--    if not os.path.exists('%s/libc.so.6' % lib32path):
--        bb.warn("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on Ubuntu/Debian")
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=62f46f1125a152a2e213b414db7ac600"
 -
--    localdata = bb.data.createCopy(d)
--    bb.data.update_data(localdata)
+-PE = "1"
+-PV = "6_1_20"
+-PVwithdots = "6.1.20"
 -
--    binfile  = bb.data.getVar('BINFILE', localdata)
--    binfile  = bb.data.expand(binfile, localdata)
+-SRC_URI[cgt6xbin.md5sum] = "39485ea8211960de0a958ab27106ab9b"
+-SRC_URI[cgt6xbin.sha256sum] = "a020142011c8160e24f6386f7696ecfbfe02dab2a6c83af74ce6b67eb1da9900"
 -
--    # Change to the working directory
--    save_cwd = os.getcwd()
--    workdir  = bb.data.getVar('WORKDIR', localdata)
--    workdir  = bb.data.expand(workdir, localdata)
--    os.chdir(workdir)
+diff --git a/recipes-ti/devtools/ti-cgt6x_7.2.7.bb b/recipes-ti/devtools/ti-cgt6x_7.2.7.bb
+deleted file mode 100644
+index a226600..0000000
+--- a/recipes-ti/devtools/ti-cgt6x_7.2.7.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-require ti-cgt6x.inc
 -
--    # Get unpack commands
--    cmd_string = bb.data.getVar('TI_BIN_UNPK_CMDS', localdata)
--    cmd_list = cmd_string.split( ":" )
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=62f46f1125a152a2e213b414db7ac600"
 -
--    # Make the InstallJammer binary executable so we can run it
--    os.chmod(binfile, 0755)
+-PE = "1"
+-PV = "7_2_7"
+-PVwithdots = "7.2.7"
 -
--    # Run the InstallJammer binary and accept the EULA
--    filename = "HOME=%s ./%s --mode console" % (workdir, binfile)
--    
--    # Test executable by printing installer version or help screen (--version currently broken for some installers) 
--    # - this is currently broken in some IJ installers - comment out for now
--    #if os.system(filename + " --version") != 0:
--    #   print "ERROR: ti-eula-unpack: failed to execute binary installer"
--    #   raise bb.build.FuncFailed()
-- 
--    f = os.popen(filename,'w')
--    for cmd in cmd_list:
--        if cmd == "workdir":
--            wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
--            wdext = bb.data.expand(wdext, localdata)
--            cmd = workdir+wdext
--        f.write(cmd+'\n');
--    f.close()
+-SRC_URI[cgt6xbin.md5sum] = "71a0768a541fdebd9c35d44301019d1d"
+-SRC_URI[cgt6xbin.sha256sum] = "211477f0142d603975544abe3c45cc3b77a3b38038158676c60812806378738b"
 -
--    # Expand the tarball that was created if required
--    tarfile  = bb.data.getVar('TARFILE', localdata)    
--    if bool(tarfile) == True:
--        tarfile  = bb.data.expand(tarfile, localdata)
--        tcmd = 'tar x --no-same-owner -f %s -C %s' % (tarfile, workdir)
--        if os.system(tcmd) != 0:
--            print "ERROR: ti-eula-unpack: failed to extract tarfile"
--            raise bb.build.FuncFailed()
 -
--    # Return to the previous directory
--    os.chdir(save_cwd)
--}
-+TI_BIN_UNPK_ARGS = "--mode console"
- 
-diff --git a/recipes-ti/includes/ti-unpack.inc b/recipes-ti/includes/ti-unpack.inc
+-INSANE_SKIP_${PN} = "installed-vs-shipped"
+diff --git a/recipes-ti/devtools/ti-cgt6x_8.0.0.bb b/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
 new file mode 100644
-index 0000000..c19c78c
+index 0000000..28689af
 --- /dev/null
-+++ b/recipes-ti/includes/ti-unpack.inc
-@@ -0,0 +1,83 @@
-+# This file defines function used for unpacking the .bin file downloaded over
-+# the http.
-+#  BINFILE - name of the install jammer .bin file
-+#  TARFILE - name of the tar file inside the install jammer
-+#  TI_BIN_UNPK_ARGS   - contains the arguments to be passed to the bin file.
-+#  TI_BIN_UNPK_CMDS   - contains list of commands separated with colon to be 
-+#                       passed while unpacking the bin file. The keyword 
-+#                       workdir expands to WORKDIR and commands are appendded
-+#                       with '\n'. Eg. TI_BIN_UNPK_CMDS="Y:Y: qY:workdir"
-+#  TI_BIN_UNPK_WDEXT  - This variable extends workdir path, if user wants to put
-+#                       the output in some internal directory
++++ b/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
+@@ -0,0 +1,86 @@
++DESCRIPTION = "TI DSP Code Generation Tools"
++HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
++LICENSE = "TI TSPA with portions under Thai Open Source Software Center & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 and MIT and BSD-2-Clause and Public Domain and other similar"
 +
-+python do_unpack () {
-+    bb.build.exec_func('base_do_unpack', d)
-+    bb.build.exec_func('ti_bin_do_unpack', d)
++LIC_FILES_CHKSUM = "file://ti-cgt-c6000_${PV}/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
++LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-c6x/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
++
++require ../includes/ti-unpack.inc
++
++BINFILE = "ti_cgt_c6000_${PV}_linux_installer_x86.bin"
++BINFILE_NAME = "cgt6x_x86_installer"
++TI_BIN_UNPK_ARGS = "--prefix ${S}"
++TI_BIN_UNPK_CMDS = ""
++
++BINFILE_class-target = "ti_cgt_c6000_${PV}_armlinuxa8hf_busybox_installer.sh"
++BINFILE_NAME_class-target = "cgt6x_arm_installer"
++
++SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C6000/Production/${PV}/${BINFILE};name=${BINFILE_NAME}"
++
++SRC_URI[cgt6x_x86_installer.md5sum] = "ff83845672090bf0a669bba7b0cadf56"
++SRC_URI[cgt6x_x86_installer.sha256sum] = "297f77a00b211b3c4afa23afe7319e98b2400b5d2eb0f8c8cfe3ef7d7aa4d709"
++
++SRC_URI[cgt6x_arm_installer.md5sum] = "13961e5a1da4c310ea8c8707ab981fff"
++SRC_URI[cgt6x_arm_installer.sha256sum] = "cb24ae05baffbd44d6dedba68743be09fd883e04403e069c437c486533d8fffb"
++
++do_install() {
++    install -d ${D}${bindir}
++    for binfile in ${S}/ti-cgt-c6000_${PV}/bin/*; do
++        install -m 755 ${binfile} ${D}${bindir}
++    done
++
++    install -d ${D}${datadir}/ti/cgt-c6x/include
++    for includefile in ${S}/ti-cgt-c6000_${PV}/include/*; do
++        install -m 644 ${includefile} ${D}${datadir}/ti/cgt-c6x/include
++    done
++
++    install -d ${D}${datadir}/ti/cgt-c6x/lib
++    for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.a; do
++        install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
++    done
++
++    for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.cmd; do
++        install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
++    done
++
++    for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.lib; do
++        install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
++    done
++
++    install -d ${D}${datadir}/ti/cgt-c6x/lib/src
++    for srcfile in ${S}/ti-cgt-c6000_${PV}/lib/src/*; do
++        install -m 644 ${srcfile} ${D}${datadir}/ti/cgt-c6x/lib/src
++    done
++
++    install -d ${D}${datadir}/man/man1
++    for manfile in ${S}/ti-cgt-c6000_${PV}/man/man1/*; do
++        install -m 644 ${manfile} ${D}${datadir}/man/man1
++    done
++
++    install -d ${D}${datadir}/doc/ti/cgt-c6x
++    for docfile in ${S}/ti-cgt-c6000_${PV}/*.txt; do
++        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
++    done
++
++    for docfile in ${S}/ti-cgt-c6000_${PV}/*.htm; do
++        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
++    done
++
++    for docfile in ${S}/ti-cgt-c6000_${PV}/*.spdx; do
++        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
++    done
++
++    for docfile in ${S}/ti-cgt-c6000_${PV}/doc/*; do
++        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
++    done
++
 +}
 +
-+TI_BIN_UNPK_WDEXT ?= ""
-+python ti_bin_do_unpack() {
-+
-+    import os
-+
-+    # InstallJammer requires 32bit version of glibc
-+    lib32path = '/lib'
-+    if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
-+        lib32path = '/lib32'
-+    if not os.path.exists('%s/libc.so.6' % lib32path):
-+        bb.warn("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on Ubuntu/Debian")
-+
-+    localdata = bb.data.createCopy(d)
-+    bb.data.update_data(localdata)
-+
-+    binfile  = bb.data.getVar('BINFILE', localdata)
-+    binfile  = bb.data.expand(binfile, localdata)
-+
-+    # Change to the working directory
-+    save_cwd = os.getcwd()
-+    workdir  = bb.data.getVar('WORKDIR', localdata)
-+    workdir  = bb.data.expand(workdir, localdata)
-+    os.chdir(workdir)
-+
-+    # Get unpack args
-+    arg_string = bb.data.getVar('TI_BIN_UNPK_ARGS', localdata)
-+    arg_string = bb.data.expand(arg_string, localdata)
-+
-+    # Get unpack commands
-+    cmd_string = bb.data.getVar('TI_BIN_UNPK_CMDS', localdata)
-+    cmd_list = cmd_string.split( ":" )
-+
-+    # Make the InstallJammer binary executable so we can run it
-+    os.chmod(binfile, 0755)
-+
-+    # Run the InstallJammer binary and accept the EULA
-+    filename = "HOME=%s ./%s %s" % (workdir, binfile, arg_string)
-+    
-+    # Test executable by printing installer version or help screen (--version currently broken for some installers) 
-+    # - this is currently broken in some IJ installers - comment out for now
-+    #if os.system(filename + " --version") != 0:
-+    #   print "ERROR: ti-eula-unpack: failed to execute binary installer"
-+    #   raise bb.build.FuncFailed()
-+ 
-+    f = os.popen(filename,'w')
-+    for cmd in cmd_list:
-+        if cmd == "workdir":
-+            wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
-+            wdext = bb.data.expand(wdext, localdata)
-+            cmd = workdir+wdext
-+        f.write(cmd+'\n');
-+    f.close()
-+
-+    # Expand the tarball that was created if required
-+    tarfile  = bb.data.getVar('TARFILE', localdata)    
-+    if bool(tarfile) == True:
-+        tarfile  = bb.data.expand(tarfile, localdata)
-+        tcmd = 'tar x --no-same-owner -f %s -C %s' % (tarfile, workdir)
-+        if os.system(tcmd) != 0:
-+            print "ERROR: ti-eula-unpack: failed to extract tarfile"
-+            raise bb.build.FuncFailed()
-+
-+    # Return to the previous directory
-+    os.chdir(save_cwd)
++do_install_class-target() {
++    ${WORKDIR}/${BINFILE} --prefix ${D}
 +}
++
++FILES_${PN} += "${datadir}/ti/*"
++
++BBCLASSEXTEND = "native nativesdk"
 +
 -- 
 1.7.9.5
