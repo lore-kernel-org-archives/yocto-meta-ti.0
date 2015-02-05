@@ -1,38 +1,38 @@
-Return-Path: <denis@denix.org>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9A0C6E00894; Thu,  5 Feb 2015 10:10:56 -0800 (PST)
+	id 2C285E007AB; Thu,  5 Feb 2015 15:58:58 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.21 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 99A76E007AB
-	for <meta-ti@yoctoproject.org>; Thu,  5 Feb 2015 10:10:42 -0800 (PST)
-Received: from gandalf.denix.org ([108.28.89.130]) by vms173021.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NJB0052195D5MZ0@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Thu, 05 Feb 2015 12:10:26 -0600 (CST)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=CoYIqc8G c=1 sm=1 tr=0	a=ckUr7rGttv+NBxkAVUaaIw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=0HtSIViG9nkA:10
-	a=sozttTNsAAAA:8	a=kTEH2CxHhKMHeiuU8MkA:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id C8689200DD;	Thu,
-	5 Feb 2015 13:10:25 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Thu, 05 Feb 2015 13:10:25 -0500
-Message-id: <1423159825-17883-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] keystone: stop backfilling rtc
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ED8A9E00753
+	for <meta-ti@yoctoproject.org>; Thu,  5 Feb 2015 15:58:46 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t15Nwiuu003840
+	for <meta-ti@yoctoproject.org>; Thu, 5 Feb 2015 17:58:46 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t15NwhQF028245
+	for <meta-ti@yoctoproject.org>; Thu, 5 Feb 2015 17:58:43 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Thu, 5 Feb 2015 17:58:43 -0600
+Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t15NwgSn011522;	Thu, 5 Feb 2015 17:58:42 -0600
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 5 Feb 2015 18:58:41 -0500
+Message-ID: <1423180721-14697-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [PATCH] common-csl-ip: Update to version 2.1.0.6
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,25 +45,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Feb 2015 18:10:56 -0000
+X-List-Received-Date: Thu, 05 Feb 2015 23:58:58 -0000
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
+- Commit id updated
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- conf/machine/include/keystone.inc | 1 +
- 1 file changed, 1 insertion(+)
+ recipes-bsp/common-csl-ip/common-csl-ip_git.bb |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
-index 9a5c11f..820fe12 100644
---- a/conf/machine/include/keystone.inc
-+++ b/conf/machine/include/keystone.inc
-@@ -20,3 +20,4 @@ EXTRA_IMAGEDEPENDS += "u-boot"
- EXTRA_IMAGEDEPENDS += "boot-monitor"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
+index a6f46db..b242482 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
++++ b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
+@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
+ COMPATIBLE_MACHINE = "keystone"
+ ALLOW_EMPTY_${PN} = "1"
  
- MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat pci"
-+MACHINE_FEATURES_BACKFILL_CONSIDERED = "rtc"
+-PR = "r1"
++PR = "r2"
+ BRANCH="master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH}"
+-# commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.00.05A
+-SRCREV = "80d18dda4a76ce1a22cf2b5156f111390d75bea4"
++# commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.00.06A
++SRCREV = "6e39222e13244c285929bda2f90f5224f9ea5144"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.2.0
+1.7.9.5
 
 
