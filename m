@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4D0ACE0083D; Sat,  7 Feb 2015 18:30:15 -0800 (PST)
+	id ECE97E00949; Sun,  8 Feb 2015 19:13:27 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,28 +14,29 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3D5ADE007AB
-	for <meta-ti@yoctoproject.org>; Sat,  7 Feb 2015 18:30:12 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ACE3BE0093B
+	for <meta-ti@yoctoproject.org>; Sun,  8 Feb 2015 19:13:23 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t182UAT5002529
-	for <meta-ti@yoctoproject.org>; Sat, 7 Feb 2015 20:30:10 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t182U7Qk009707
-	for <meta-ti@yoctoproject.org>; Sat, 7 Feb 2015 20:30:09 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Sat, 7 Feb 2015 20:30:07 -0600
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t193DN9V014949
+	for <meta-ti@yoctoproject.org>; Sun, 8 Feb 2015 21:13:23 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t193DMp9007956
+	for <meta-ti@yoctoproject.org>; Sun, 8 Feb 2015 21:13:22 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Sun, 8 Feb 2015 21:13:21 -0600
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t182U7wE028662;	Sat, 7 Feb 2015 20:30:07 -0600
-Date: Sat, 7 Feb 2015 21:07:11 -0500
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t193DLFM011289	for <meta-ti@yoctoproject.org>;
+	Sun, 8 Feb 2015 21:13:21 -0600
+Date: Sun, 8 Feb 2015 21:50:23 -0500
 From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>, <fcooper@ti.com>
-Message-ID: <1517225204.321.1423361231312.JavaMail.jenkins@puget>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <757210582.325.1423450223044.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-02-07_21-00-58
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-02-08_21-00-57
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,24 +49,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Feb 2015 02:30:15 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_320_14748297.1423361231306"
+X-List-Received-Date: Mon, 09 Feb 2015 03:13:28 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_324_1318153062.1423450223044"
 
-------=_Part_320_14748297.1423361231306
+------=_Part_324_1318153062.1423450223044
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 02/07/15
+Status for 02/08/15
 </title>
 </head>
 <body>
 
-<h2>Status for 02/07/15</h2>
+<h2>Status for 02/08/15</h2>
 
-<h2>BUILD_ID: build-2015-02-07_21-02-11</h2>
+<h2>BUILD_ID: build-2015-02-08_21-02-03</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -234,4 +236,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_320_14748297.1423361231306--
+------=_Part_324_1318153062.1423450223044--
