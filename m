@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8B279E009C7; Tue, 10 Feb 2015 12:41:34 -0800 (PST)
+	id 8D0A0E008DC; Tue, 10 Feb 2015 12:41:34 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6AB74E008CC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 81F17E0093B
 	for <meta-ti@yoctoproject.org>; Tue, 10 Feb 2015 12:41:28 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 2327952A59; Tue, 10 Feb 2015 20:41:28 +0000 (UTC)
+	id 2DBCA52A5C; Tue, 10 Feb 2015 20:41:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150210204128.2327952A59@arago-project.org>
+Message-Id: <20150210204128.2DBCA52A5C@arago-project.org>
 Date: Tue, 10 Feb 2015 20:41:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : vpe-tests: Add DEPENDS for the recipe
+Subject: Denys Dmytriyenko : keystone: stop backfilling rtc
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,36 +38,29 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: f94472f82c9d07da40dffe14b239b744467f11ba
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f94472f82c9d07da40dffe14b239b744467f11ba
+Commit: 3c96c655d6c6503c76bc91e97a4e9c2415a3626e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3c96c655d6c6503c76bc91e97a4e9c2415a3626e
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Thu Feb  5 16:10:50 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Feb  6 00:10:25 2015 +0000
 
-vpe-tests: Add DEPENDS for the recipe
+keystone: stop backfilling rtc
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/vpe-tests/vpe-tests_git.bb |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
+ conf/machine/include/keystone.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/vpe-tests/vpe-tests_git.bb b/recipes-bsp/vpe-tests/vpe-tests_git.bb
-index a8ee7f8..ee91dea 100644
---- a/recipes-bsp/vpe-tests/vpe-tests_git.bb
-+++ b/recipes-bsp/vpe-tests/vpe-tests_git.bb
-@@ -3,6 +3,10 @@ DESCRIPTION = "VPE test program"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index 9a5c11f..820fe12 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -20,3 +20,4 @@ EXTRA_IMAGEDEPENDS += "u-boot"
+ EXTRA_IMAGEDEPENDS += "boot-monitor"
  
-+DEPENDS = "virtual/kernel"
-+
-+PR="r1"
-+
- COMPATIBLE_MACHINE = "dra7xx"
- 
- SRCREV = "e3d8db1aa935775f9d196ad7428e0cd9864a36ca"
+ MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat pci"
++MACHINE_FEATURES_BACKFILL_CONSIDERED = "rtc"
 
 
