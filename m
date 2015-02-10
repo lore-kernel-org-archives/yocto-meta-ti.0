@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A0380E0097F; Tue, 10 Feb 2015 12:41:11 -0800 (PST)
+	id A0C18E008CC; Tue, 10 Feb 2015 12:41:11 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1C7E4E008CC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1DB12E008CF
 	for <meta-ti@yoctoproject.org>; Tue, 10 Feb 2015 12:40:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6665452A59; Tue, 10 Feb 2015 20:40:56 +0000 (UTC)
+	id 9BD2152A67; Tue, 10 Feb 2015 20:40:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150210204056.6665452A59@arago-project.org>
+Message-Id: <20150210204056.9BD2152A67@arago-project.org>
 Date: Tue, 10 Feb 2015 20:40:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : vpe-tests: Add DEPENDS for the recipe
+Subject: Sam Nelson : ti-ipc: Correct error in ti ipc lad daemon startup script
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,36 +38,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 592fe0c75152329762a5c3541599d72a9b87c3fb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=592fe0c75152329762a5c3541599d72a9b87c3fb
+Commit: fc80f04360d5c67e4501eb8b292b67864b2a3aad
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fc80f04360d5c67e4501eb8b292b67864b2a3aad
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Thu Feb  5 16:10:50 2015 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Mon Feb  9 22:42:53 2015 +0000
 
-vpe-tests: Add DEPENDS for the recipe
+ti-ipc: Correct error in ti ipc lad daemon startup script
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+- Need to add -l for the log file parameter
+- Added -- to pass log file as additional parameter
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/vpe-tests/vpe-tests_git.bb |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
+ recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/vpe-tests/vpe-tests_git.bb b/recipes-bsp/vpe-tests/vpe-tests_git.bb
-index a8ee7f8..ee91dea 100644
---- a/recipes-bsp/vpe-tests/vpe-tests_git.bb
-+++ b/recipes-bsp/vpe-tests/vpe-tests_git.bb
-@@ -3,6 +3,10 @@ DESCRIPTION = "VPE test program"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
+diff --git a/recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh b/recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh
+index 97f870e..7f0632a 100644
+--- a/recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh
++++ b/recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh
+@@ -1,14 +1,15 @@
+ #! /bin/sh
  
-+DEPENDS = "virtual/kernel"
-+
-+PR="r1"
-+
- COMPATIBLE_MACHINE = "dra7xx"
+ tiipclad_daemon=/usr/bin/__LAD_DAEMON__
+-tiipclad_params=lad.txt
++tiipclad_params="-l lad.txt"
  
- SRCREV = "e3d8db1aa935775f9d196ad7428e0cd9864a36ca"
+ test -x "$tiipclad_daemon" || exit 0
+ 
+ case "$1" in
+   start)
+     echo -n "Starting tiipclad daemon"
+-    start-stop-daemon --start --quiet --exec $tiipclad_daemon $tiipclad_params
++    start-stop-daemon --start --quiet \
++        --exec $tiipclad_daemon -- $tiipclad_params
+     echo "."
+     ;;
+   stop)
 
 
