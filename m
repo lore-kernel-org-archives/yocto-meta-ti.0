@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D881EE00990; Tue, 10 Feb 2015 12:41:34 -0800 (PST)
+	id DA16EE00964; Tue, 10 Feb 2015 12:41:34 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D153E00964
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A3EB8E00998
 	for <meta-ti@yoctoproject.org>; Tue, 10 Feb 2015 12:41:28 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4727052A43; Tue, 10 Feb 2015 20:41:28 +0000 (UTC)
+	id 5001E52A65; Tue, 10 Feb 2015 20:41:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150210204128.4727052A43@arago-project.org>
+Message-Id: <20150210204128.5001E52A65@arago-project.org>
 Date: Tue, 10 Feb 2015 20:41:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : common-csl-ip: Update to version 2.1.0.6
+Subject: Sam Nelson : ti-ipc: Correct error in ti ipc lad daemon startup script
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,42 +38,46 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: f989fcd95288ceace5b5bb286662c620774c2a54
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f989fcd95288ceace5b5bb286662c620774c2a54
+Commit: c723c524460ffda696bd69e75dfa0179be334b45
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c723c524460ffda696bd69e75dfa0179be334b45
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Feb  6 05:58:41 2015 +0000
+Date:   Mon Feb  9 22:42:53 2015 +0000
 
-common-csl-ip: Update to version 2.1.0.6
+ti-ipc: Correct error in ti ipc lad daemon startup script
 
-- Commit id updated
+- Need to add -l for the log file parameter
+- Added -- to pass log file as additional parameter
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/common-csl-ip/common-csl-ip_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-index a6f46db..b242482 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
- COMPATIBLE_MACHINE = "keystone"
- ALLOW_EMPTY_${PN} = "1"
+diff --git a/recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh b/recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh
+index 97f870e..7f0632a 100644
+--- a/recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh
++++ b/recipes-ti/ipc/ti-ipc/tiipclad-daemon.sh
+@@ -1,14 +1,15 @@
+ #! /bin/sh
  
--PR = "r1"
-+PR = "r2"
- BRANCH="master"
- SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH}"
--# commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.00.05A
--SRCREV = "80d18dda4a76ce1a22cf2b5156f111390d75bea4"
-+# commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.00.06A
-+SRCREV = "6e39222e13244c285929bda2f90f5224f9ea5144"
+ tiipclad_daemon=/usr/bin/__LAD_DAEMON__
+-tiipclad_params=lad.txt
++tiipclad_params="-l lad.txt"
  
- S = "${WORKDIR}/git"
+ test -x "$tiipclad_daemon" || exit 0
  
+ case "$1" in
+   start)
+     echo -n "Starting tiipclad daemon"
+-    start-stop-daemon --start --quiet --exec $tiipclad_daemon $tiipclad_params
++    start-stop-daemon --start --quiet \
++        --exec $tiipclad_daemon -- $tiipclad_params
+     echo "."
+     ;;
+   stop)
 
 
