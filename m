@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 75290E00945; Tue, 10 Feb 2015 12:41:09 -0800 (PST)
+	id 75E87E00717; Tue, 10 Feb 2015 12:41:09 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1B53BE00815
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1A190E00717
 	for <meta-ti@yoctoproject.org>; Tue, 10 Feb 2015 12:40:57 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7C30152A65; Tue, 10 Feb 2015 20:40:56 +0000 (UTC)
+	id 727E552A5C; Tue, 10 Feb 2015 20:40:56 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150210204056.7C30152A65@arago-project.org>
+Message-Id: <20150210204056.727E552A5C@arago-project.org>
 Date: Tue, 10 Feb 2015 20:40:56 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : common-csl-ip: Update to version 2.1.0.6
+Subject: Denys Dmytriyenko : keystone: stop backfilling rtc
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,42 +38,29 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: e19f8be96aa0b6d7ad67a3de2f487e5d151e7cba
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e19f8be96aa0b6d7ad67a3de2f487e5d151e7cba
+Commit: 6747cadbe244cb68ad4e4dc96b1eb3f1c484bd07
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6747cadbe244cb68ad4e4dc96b1eb3f1c484bd07
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Feb  6 05:58:41 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Fri Feb  6 00:10:25 2015 +0000
 
-common-csl-ip: Update to version 2.1.0.6
+keystone: stop backfilling rtc
 
-- Commit id updated
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/common-csl-ip/common-csl-ip_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ conf/machine/include/keystone.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-index a6f46db..b242482 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
- COMPATIBLE_MACHINE = "keystone"
- ALLOW_EMPTY_${PN} = "1"
+diff --git a/conf/machine/include/keystone.inc b/conf/machine/include/keystone.inc
+index 9a5c11f..820fe12 100644
+--- a/conf/machine/include/keystone.inc
++++ b/conf/machine/include/keystone.inc
+@@ -20,3 +20,4 @@ EXTRA_IMAGEDEPENDS += "u-boot"
+ EXTRA_IMAGEDEPENDS += "boot-monitor"
  
--PR = "r1"
-+PR = "r2"
- BRANCH="master"
- SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH}"
--# commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.00.05A
--SRCREV = "80d18dda4a76ce1a22cf2b5156f111390d75bea4"
-+# commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.00.06A
-+SRCREV = "6e39222e13244c285929bda2f90f5224f9ea5144"
- 
- S = "${WORKDIR}/git"
- 
+ MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat pci"
++MACHINE_FEATURES_BACKFILL_CONSIDERED = "rtc"
 
 
