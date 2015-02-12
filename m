@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B8A8AE0098A; Thu, 12 Feb 2015 08:03:11 -0800 (PST)
+	id B936DE007CF; Thu, 12 Feb 2015 08:03:11 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2F791E00990
-	for <meta-ti@yoctoproject.org>; Thu, 12 Feb 2015 08:03:02 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2E4B7E0098E
+	for <meta-ti@yoctoproject.org>; Thu, 12 Feb 2015 08:02:58 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0387752A31; Thu, 12 Feb 2015 16:03:01 +0000 (UTC)
+	id 85315529B3; Thu, 12 Feb 2015 16:02:57 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150212160302.0387752A31@arago-project.org>
-Date: Thu, 12 Feb 2015 16:03:01 +0000 (UTC)
+Message-Id: <20150212160257.85315529B3@arago-project.org>
+Date: Thu, 12 Feb 2015 16:02:57 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : multi-kernel: improve deploying additional files and sstate handling
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 12 Feb 2015 16:03:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 3a3a4619ef98889ea745a740113ca712e9fe8247
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3a3a4619ef98889ea745a740113ca712e9fe8247
+Branch: master
+Commit: 43a0f57eb9f6522d6bdc31d1be886faf7a3ccee6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=43a0f57eb9f6522d6bdc31d1be886faf7a3ccee6
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Thu Feb 12 10:12:44 2015 +0000
