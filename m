@@ -1,43 +1,42 @@
-Return-Path: <Bruce.Ashfield@windriver.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AED20E0089B; Thu, 12 Feb 2015 21:08:52 -0800 (PST)
+	id 4F456E002AC; Fri, 13 Feb 2015 18:49:40 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -2.3 RCVD_IN_DNSWL_MED RBL: Sender listed at
-	http://www.dnswl.org/, *      medium trust
-	*      [147.11.146.13 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA7FFE00824;
-	Thu, 12 Feb 2015 21:08:49 -0800 (PST)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t1D58gEG019719
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 12 Feb 2015 21:08:42 -0800 (PST)
-Received: from server.local (128.224.22.235) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 12 Feb 2015 21:08:41 -0800
-Message-ID: <54DD86D9.5010007@windriver.com>
-Date: Fri, 13 Feb 2015 00:08:41 -0500
-From: Bruce Ashfield <bruce.ashfield@windriver.com>
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B5C3BE00288
+	for <meta-ti@yoctoproject.org>; Fri, 13 Feb 2015 18:49:35 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1E2nYvk018432
+	for <meta-ti@yoctoproject.org>; Fri, 13 Feb 2015 20:49:34 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1E2nXBG015373
+	for <meta-ti@yoctoproject.org>; Fri, 13 Feb 2015 20:49:33 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 13 Feb 2015 20:49:33 -0600
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t1E2nXkD025486	for <meta-ti@yoctoproject.org>; Fri, 13 Feb 2015 20:49:33
+	-0600
+Date: Fri, 13 Feb 2015 21:49:32 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <976931847.347.1423882172964.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-To: William Mills <wmills@ti.com>, Stephen Flowers <sflowers1@gmail.com>,
-	<yocto@yoctoproject.org>, <meta-ti@yoctoproject.org>
-References: <54DA0258.9070108@gmail.com>
-	<54DA12C7.8000000@windriver.com>	<54DA84F1.1080109@gmail.com>
-	<54DADD75.5000809@windriver.com>	<54DB17E7.8070308@gmail.com>
-	<54DB7455.4020402@windriver.com> <54DBF55D.3020001@ti.com>
-	<54DD2396.4000909@gmail.com> <54DD433E.2010703@ti.com>
-In-Reply-To: <54DD433E.2010703@ti.com>
-X-Mailman-Approved-At: Fri, 13 Feb 2015 07:49:53 -0800
-Subject: Re: [yocto] Yocto Realtime tests on beaglebone black
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-02-13_21-00-57
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,188 +49,191 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2015 05:08:52 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
+X-List-Received-Date: Sat, 14 Feb 2015 02:49:40 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_346_350284382.1423882172963"
+
+------=_Part_346_350284382.1423882172963
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 2015-02-12 7:20 PM, William Mills wrote:
->
->
-> On 02/12/2015 05:05 PM, Stephen Flowers wrote:
->>
->> So I ran cyclictest with an idle system and loaded with multiple
->> instances of cat /dev/zero > /dev/null &
->>
->
-> When I suggested filesystem activity I was suggesting getting a kernel
-> filesystem and a physical I/O device to be active.
-> The load above is just two character devices so not a ton of kernel
-> code is active.
->
-> If you are interested in pursuing this further I would write a script
-> that writes multiple files to MMC and then deletes them and do this in
-> a loop.
+<html>
+<head>
+<title>
+Status for 02/13/15
+</title>
+</head>
+<body>
 
-The mmc/flash/usb are definitely hot paths for any -rt kernel
-and will really show any lurking latency issues.
+<h2>Status for 02/13/15</h2>
 
->
-> Perhaps Bruce knows if there is already a test like this in the
-> rt-tests.
+<h2>BUILD_ID: build-2015-02-13_21-02-03</h2>
 
-It seems like everyone has their own set of scripts that load
-cpu, io and memory. I now that we have a few @ Wind River that
-really kick the crap out of a system.
+<h2>Clean Build: false</h2>
 
-rt-tests itself doesn't have any packaged, but it really sounds
-like something we should pull together.
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-In the meantime, using a combo of lmbench, an application that
-allocates and frees memory and a "find /" will generate a pretty
-good load on the system.
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=red>FAILED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
 
->
->> #cyclictest -a 0 -p 99 -m -n -l 100000 -q
->>
->> I ran this command as shown by Toyoka at the 2014 Linuxcon Japan
->> [http://events.linuxfoundation.org/sites/events/files/slides/toyooka_LCJ2014_v10.pdf]
->>
->>
->> to compare against his results for the BBB.  I also threw in xenomai
->> with kernel 3.8 for comparison.  For the standard kernel HR timers were
->> disabled.
->
-> I believe cyclictest requires HR timers for proper operation.
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
 
-You are correct.
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.11"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
 
-> This may explain the very strange numbers for standard kernel below.
->
->>
->> [idle]
->> preempt_rt: min 12 avg: 20 max: 59
->> standard: min: 8005 avg: 309985,955 max: 619963985
->> xenomai: min: 8 avg: 16: max 803
->>
->> [loaded]
->> preempt_rt: min 16 avg: 21 max: 47
->> standard: min: 15059 avg: 67769851 max: 135530885
->> xenomai: min: 10 avg: 15: max 839
->>
->
-> Yes, the RT numbers now look reasonable.
->
-> The standard kernel numbers are way out.  I can't believe the average
-> latency on an idle system was 5 minutes. Perhaps the dependency on HR
-> timers is more than I expect and without it the numbers are just
-> bonkers. I would have expected the numbers to have a floor near the tick
-> rate w/o HR.
-> Bruce: Is that really what that number means??
-
-Without hrtimers, the results really can get out of whack.
-cyclictest should be yelling when it starts if they aren't found in
-the system. While I would expect them to be worse (i.e. jiffies
-granularity ~ 10ms without HRT), I wouldn't expect them to be that
-bad .. it more smells like cyclic test is using uninitialized variable
-when high res timers aren't in play.
-
->
-> The loaded numbers are smaller for RT and std.  Strange.
-> It might be that the "load" is not very significant.
-
-Or the cache is staying hot, and hence -mm is staying out of the way.
-We've seen variants of this as well, keeping a close cpu in a tight
-loop, and then measuring interrupt latency to a second cpu results
-in better latencies.
-
-> Its not really the CPU load that were after.  Instead we are trying to
-> activate code paths that have premtption disabled due to critical
-> sections and locks.
->
-> I don't know if your are interested in taking this to ground, but if so
-> I would enable HR in std and try a load as I suggest above or is
-> already included in the rt-tests.
-> Bruce certainly knows more about this than I do and might suggest a
-> load script.
-
-See above.
-
-Also, let cyclictest trigger ftrace you your behalf, and the pathological
-case triggering the biggest spikes will be caught.
-
-Cheers,
-
-Bruce
-
->
->> Actually the preempt_rt results tie up pretty well with Toyooka above,
->> leading me to conclude theres something off in my code that could be
->> optimised - what do you guys think.
->
-> Is your test code userspace or kernel space?
-> You can look at cyclictest to see if you missed something.
-> The RT wiki also has some examples for RT apps.
->
-> https://rt.wiki.kernel.org/index.php/HOWTO:_Build_an_RT-application
->
->> Also, I ran a test with preempt_rt at 100Hz and there was maybe 10%
->> improvement in latency.
->>
-> That sounds reasonable to me.
->
->
->> Steve
->>
->> On 12/02/2015 00:35, William Mills wrote:
->>> + meta-ti
->>> Please keep meta-ti in the loop.
->>>
->>> [Sorry for the shorting.  Thunderbird keep locking up when I tried
->>> replay all in plain text to this message.]
->>>
->>> ~ 15-02-11, Stephen Flowers wrote:
->>> > Thanks for your input.  Here are results of 1000 samples over a
->>> > 10 second period:
->>> >
->>> > Interrupt response (microseconds)
->>> > standard: min: 81, max:118, average: 84
->>> > rt: min: 224, max: 289, average: 231
->>> >
->>> >Will share the .config later once I get on that machine.
->>>
->>> Steve I agree the numbers look strange.
->>> There may well be something funny for RT going on for BBB.
->>> TI is just starting to look into RT for BBB.
->>>
->>> I would like to see the cyclictest results under heavy system load for
->>> standard and RT kernels.  The whole point of RT is to limit the max
->>> latency when the system is doing *anything*.
->>>
->>> I am not surprised that the standard kernel has good latency when idle.
->>> As you add load (filessystem is usually a good load) you should see
->>> that max goes up a lot.
->>>
->>> Also, as Bruce says, some degradation of min and average and also
->>> general system throughput is expected for RT.  That is the trade-off.
->>> I still think the number you are getting for RT seem high but I don't
->>> know what your test is doing in detail.  (I did read your explanation.)
->>> cyclictest should give us a standard baseline.
->>>
->>>
->>> On 02/11/2015 10:25 AM, Bruce Ashfield wrote:
->>>> On 15-02-11 03:50 AM, Stephen Flowers wrote:
->>>>>
->>>>> my bad, here is the patch set.
->>>>> As for load, only system idle load for the results I posted
->>>>> previously.
->>>>> Will run some cyclic test next.
->>>>
->>>> One thing that did jump out was the difference in config_hz, you
->>>> are taking a lot more ticks in the preempt-rt configuration. If
->>>> you run both at the same hz, or with no_hz enabled, it would be
->>>> interesting to see if there's a difference.
->>>>
->>>> Bruce
->>
+</body>
+</html>
 
 
+------=_Part_346_350284382.1423882172963--
