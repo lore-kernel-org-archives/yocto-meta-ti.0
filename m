@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CB884E008BF; Thu, 19 Feb 2015 13:46:20 -0800 (PST)
+	id CC5FCE008BC; Thu, 19 Feb 2015 13:46:20 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6FA7E0088A
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ECAC3E008CD
 	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 13:46:16 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C181352A65; Thu, 19 Feb 2015 21:46:10 +0000 (UTC)
+	id F09F152ABB; Thu, 19 Feb 2015 21:46:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150219214610.C181352A65@arago-project.org>
-Date: Thu, 19 Feb 2015 21:46:10 +0000 (UTC)
+Message-Id: <20150219214614.F09F152ABB@arago-project.org>
+Date: Thu, 19 Feb 2015 21:46:14 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Karthik Ramanan : ti-ipc: Upgrade to IPC 3.30.03.14
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 19 Feb 2015 21:46:20 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 7f762b9fe5324b01864685a870b6eab7c34e5eb9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7f762b9fe5324b01864685a870b6eab7c34e5eb9
+Branch: daisy
+Commit: 593fc027eeb37aaa626b2d7a970f3abf420b0256
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=593fc027eeb37aaa626b2d7a970f3abf420b0256
 
 Author: Karthik Ramanan <a0393906@ti.com>
 Date:   Mon Feb 16 14:57:55 2015 +0000
