@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0BC06E008BF; Thu, 19 Feb 2015 13:46:20 -0800 (PST)
+	id CB884E008BF; Thu, 19 Feb 2015 13:46:20 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EC9F9E008CA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6FA7E0088A
 	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 13:46:16 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BD9A352AB7; Thu, 19 Feb 2015 21:46:14 +0000 (UTC)
+	id C181352A65; Thu, 19 Feb 2015 21:46:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150219214614.BD9A352AB7@arago-project.org>
-Date: Thu, 19 Feb 2015 21:46:14 +0000 (UTC)
+Message-Id: <20150219214610.C181352A65@arago-project.org>
+Date: Thu, 19 Feb 2015 21:46:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : dfe-lld: Add recipe for dfe test code
+Subject: Karthik Ramanan : ti-ipc: Upgrade to IPC 3.30.03.14
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,48 +37,43 @@ X-List-Received-Date: Thu, 19 Feb 2015 21:46:20 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 290512343741efe1b0043aae64ff6df1d943be07
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=290512343741efe1b0043aae64ff6df1d943be07
+Branch: master
+Commit: 7f762b9fe5324b01864685a870b6eab7c34e5eb9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7f762b9fe5324b01864685a870b6eab7c34e5eb9
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Feb 11 03:28:09 2015 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Mon Feb 16 14:57:55 2015 +0000
 
-dfe-lld: Add recipe for dfe test code
+ti-ipc: Upgrade to IPC 3.30.03.14
 
-- Adds test code for Digital front end low level driver
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dfe-lld/dfe-lld-test_git.bb |   18 ++++++++++++++++++
- 1 files changed, 18 insertions(+), 0 deletions(-)
+ recipes-ti/ipc/ti-ipc_git.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/dfe-lld/dfe-lld-test_git.bb b/recipes-bsp/dfe-lld/dfe-lld-test_git.bb
-new file mode 100644
-index 0000000..acaaf63
---- /dev/null
-+++ b/recipes-bsp/dfe-lld/dfe-lld-test_git.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "TI Digital Radio Front End lld test application"
-+
-+DEPENDS = "common-csl-ip dfe-lld iqn2-lld"
-+
-+include dfe-lld.inc
-+
-+EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} DFE_SRC_DIR=${S}"
-+
-+do_compile () {
-+#   Now build the lld in the updated directory
-+	oe_runmake clean DEVICE=k2l
-+	oe_runmake tests DEVICE=k2l
-+	oe_runmake tests DEVICE=k2l USEDYNAMIC_LIB=yes
-+}
-+
-+do_install () {
-+	oe_runmake installbin INSTALL_BIN_BASE_DIR=${D}/${bindir}
-+}
+diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+index 07f8195..10ae431 100644
+--- a/recipes-ti/ipc/ti-ipc_git.bb
++++ b/recipes-ti/ipc/ti-ipc_git.bb
+@@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=abd112f
+ 
+ DEPENDS += "virtual/kernel"
+ 
+-PV = "3.30.01.12"
++PV = "3.30.03.14"
+ 
+-BRANCH = "master"
++BRANCH = "3.30"
+ SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
+            file://tiipclad-daemon.sh \
+            "
+-SRCREV = "8deec9b295a5700b26449986927c77d60c5c0e5f"
++SRCREV = "ff0ca0e3943ab67be47673bfc77f40c53daac078"
+ 
+ S = "${WORKDIR}/git"
+ 
 
 
