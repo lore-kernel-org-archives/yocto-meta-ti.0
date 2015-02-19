@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AC072E00873; Thu, 19 Feb 2015 13:46:19 -0800 (PST)
+	id AD55CE0087C; Thu, 19 Feb 2015 13:46:19 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 50687E00858
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4DF8FE00831
 	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 13:46:11 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A518252A59; Thu, 19 Feb 2015 21:46:10 +0000 (UTC)
+	id 89F1252A52; Thu, 19 Feb 2015 21:46:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150219214610.A518252A59@arago-project.org>
+Message-Id: <20150219214610.89F1252A52@arago-project.org>
 Date: Thu, 19 Feb 2015 21:46:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : engine-pkcs11: Add recipe for PKCS11 engine
+Subject: Sam Nelson : iqn2-lld: Add recipe for iqn2 lld test code
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,48 +38,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 25b2d8a992e74a181d249895e6be32f9e2fef8e8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=25b2d8a992e74a181d249895e6be32f9e2fef8e8
+Commit: df0547480218a5f7688243010a769788703b7d85
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=df0547480218a5f7688243010a769788703b7d85
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Feb 11 05:04:35 2015 +0000
+Date:   Wed Feb 11 03:28:10 2015 +0000
 
-engine-pkcs11: Add recipe for PKCS11 engine
+iqn2-lld: Add recipe for iqn2 lld test code
 
-- Provides OpenSSL PKCS11 engine
+- Adds test code for iqn2 peripheral low level driver
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/engine-pkcs11/engine-pkcs11_git.bb |   19 +++++++++++++++++++
- 1 files changed, 19 insertions(+), 0 deletions(-)
+ recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb |   16 ++++++++++++++++
+ 1 files changed, 16 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/engine-pkcs11/engine-pkcs11_git.bb b/recipes-ti/engine-pkcs11/engine-pkcs11_git.bb
+diff --git a/recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb b/recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb
 new file mode 100644
-index 0000000..226beac
+index 0000000..f1aa9e4
 --- /dev/null
-+++ b/recipes-ti/engine-pkcs11/engine-pkcs11_git.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "OpenSSL PKCS11 engine"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;startline=1;endline=26;md5=471dacb7f0586e35729f422b8098585f"
-+SECTION = "libs"
++++ b/recipes-bsp/iqn2-lld/iqn2-lld-test_git.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "TI IQN2 peripheral module low level driver test binaries"
 +
-+inherit autotools pkgconfig
++DEPENDS = "common-csl-ip iqn2-lld dfe-lld"
 +
-+DEPENDS = "openssl libtool libp11"
++include iqn2-lld.inc
 +
-+PV = "1.3.0.0"
-+BRANCH="master"
-+# Commit corresponds to DEV.ENGINE_PKCS11-01.03.00.00
-+SRCREV = "0b14500b0ea8b37453b6d93aac02278465e7e732"
++EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR} IQN2_SRC_DIR=${WORKDIR}/git"
 +
-+SRC_URI = "git://git.ti.com/keystone-linux/engine-pkcs11.git;protocol=git;branch=${BRANCH}"
-+S = "${WORKDIR}/git"
++do_compile () {
++	oe_runmake clean DEVICE=k2l
++	oe_runmake tests DEVICE=k2l
++}
 +
-+FILES_${PN} += "${libdir}/engines/*.so*"
-+FILES_${PN}-dbg += "${libdir}/engines/.debug"
++do_install () {
++	oe_runmake installbin DEVICE=k2l IQN2_SRC_DIR=${WORKDIR}/git INSTALL_BIN_BASE_DIR=${D}/${bindir}
++}
 
 
