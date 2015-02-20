@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5247CE002F9; Fri, 20 Feb 2015 09:28:05 -0800 (PST)
+	id D16ABE0087C; Fri, 20 Feb 2015 09:29:06 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5E5CE002AC
-	for <meta-ti@yoctoproject.org>; Fri, 20 Feb 2015 09:28:01 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1D6D6E002AC
+	for <meta-ti@yoctoproject.org>; Fri, 20 Feb 2015 09:29:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id ACFEC52A4B; Fri, 20 Feb 2015 17:28:00 +0000 (UTC)
+	id D032552A3F; Fri, 20 Feb 2015 17:29:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150220172800.ACFEC52A4B@arago-project.org>
-Date: Fri, 20 Feb 2015 17:28:00 +0000 (UTC)
+Message-Id: <20150220172903.D032552A3F@arago-project.org>
+Date: Fri, 20 Feb 2015 17:29:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : ti-eula-unpack: Add support for general binary installers.
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Feb 2015 17:28:05 -0000
+X-List-Received-Date: Fri, 20 Feb 2015 17:29:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: b06623fa2a2245f7914a120b99edf4152ec7aea5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=b06623fa2a2245f7914a120b99edf4152ec7aea5
+Branch: daisy
+Commit: d992571ccd35b08357104dada6e1a09375fe11e9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d992571ccd35b08357104dada6e1a09375fe11e9
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Thu Feb  5 21:28:28 2015 +0000
