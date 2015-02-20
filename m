@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D16ABE0087C; Fri, 20 Feb 2015 09:29:06 -0800 (PST)
+	id D45BDE00837; Fri, 20 Feb 2015 09:29:06 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1D6D6E002AC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 378A5E0078E
 	for <meta-ti@yoctoproject.org>; Fri, 20 Feb 2015 09:29:04 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D032552A3F; Fri, 20 Feb 2015 17:29:03 +0000 (UTC)
+	id EBD2452A4B; Fri, 20 Feb 2015 17:29:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150220172903.D032552A3F@arago-project.org>
+Message-Id: <20150220172903.EBD2452A4B@arago-project.org>
 Date: Fri, 20 Feb 2015 17:29:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-eula-unpack: Add support for general binary installers.
+Subject: Karthik Ramanan : omap5-sgx-ddk-um-linux: Updated SRCREV to include bugfixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,194 +38,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: d992571ccd35b08357104dada6e1a09375fe11e9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d992571ccd35b08357104dada6e1a09375fe11e9
+Commit: df50c4d5bbf2b650ffbf18e3471ea7b9d7603201
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=df50c4d5bbf2b650ffbf18e3471ea7b9d7603201
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu Feb  5 21:28:28 2015 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Fri Feb 20 20:21:04 2015 +0000
 
-ti-eula-unpack: Add support for general binary installers.
+omap5-sgx-ddk-um-linux: Updated SRCREV to include bugfixes
 
-* ti-unpack.inc has been created to allow support for general binary
-  installers by creating a variable which is used to pass arbitrary
-  arguments to the executable.
-* ti-eula-unpack.inc sets the default arguments to retain support for
-  recipes which still use this feature.
+* This version is compatible with version Kernel 3.14
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/includes/ti-eula-unpack.inc |   67 +-------------------------
- recipes-ti/includes/ti-unpack.inc      |   83 ++++++++++++++++++++++++++++++++
- 2 files changed, 85 insertions(+), 65 deletions(-)
+ .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/includes/ti-eula-unpack.inc b/recipes-ti/includes/ti-eula-unpack.inc
-index aee88f1..912cd18 100644
---- a/recipes-ti/includes/ti-eula-unpack.inc
-+++ b/recipes-ti/includes/ti-eula-unpack.inc
-@@ -9,70 +9,7 @@
- #  TI_BIN_UNPK_WDEXT  - This variable extends workdir path, if user wants to put
- #                       the output in some internal directory
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+index 37ea088..10d1a1e 100644
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+@@ -4,9 +4,9 @@ LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=360d293df455e4f2d363bb4014a49603"
  
--python do_unpack () {
--    bb.build.exec_func('base_do_unpack', d)
--    bb.build.exec_func('ti_bin_do_unpack', d)
--}
-+require ../includes/ti-unpack.inc
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git"
+-SRCREV = "0af11b676900de5a3e5550728fe18acd88c29848"
++SRCREV = "53be02a24a30a4c74eb48f2c84fda789bd95ab33"
  
--TI_BIN_UNPK_WDEXT ?= ""
--python ti_bin_do_unpack() {
--
--    import os
--
--    # InstallJammer requires 32bit version of glibc
--    lib32path = '/lib'
--    if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
--        lib32path = '/lib32'
--    if not os.path.exists('%s/libc.so.6' % lib32path):
--        bb.warn("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on Ubuntu/Debian")
--
--    localdata = bb.data.createCopy(d)
--    bb.data.update_data(localdata)
--
--    binfile  = bb.data.getVar('BINFILE', localdata)
--    binfile  = bb.data.expand(binfile, localdata)
--
--    # Change to the working directory
--    save_cwd = os.getcwd()
--    workdir  = bb.data.getVar('WORKDIR', localdata)
--    workdir  = bb.data.expand(workdir, localdata)
--    os.chdir(workdir)
--
--    # Get unpack commands
--    cmd_string = bb.data.getVar('TI_BIN_UNPK_CMDS', localdata)
--    cmd_list = cmd_string.split( ":" )
--
--    # Make the InstallJammer binary executable so we can run it
--    os.chmod(binfile, 0755)
--
--    # Run the InstallJammer binary and accept the EULA
--    filename = "HOME=%s ./%s --mode console" % (workdir, binfile)
--    
--    # Test executable by printing installer version or help screen (--version currently broken for some installers) 
--    # - this is currently broken in some IJ installers - comment out for now
--    #if os.system(filename + " --version") != 0:
--    #   print "ERROR: ti-eula-unpack: failed to execute binary installer"
--    #   raise bb.build.FuncFailed()
-- 
--    f = os.popen(filename,'w')
--    for cmd in cmd_list:
--        if cmd == "workdir":
--            wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
--            wdext = bb.data.expand(wdext, localdata)
--            cmd = workdir+wdext
--        f.write(cmd+'\n');
--    f.close()
--
--    # Expand the tarball that was created if required
--    tarfile  = bb.data.getVar('TARFILE', localdata)    
--    if bool(tarfile) == True:
--        tarfile  = bb.data.expand(tarfile, localdata)
--        tcmd = 'tar x --no-same-owner -f %s -C %s' % (tarfile, workdir)
--        if os.system(tcmd) != 0:
--            print "ERROR: ti-eula-unpack: failed to extract tarfile"
--            raise bb.build.FuncFailed()
--
--    # Return to the previous directory
--    os.chdir(save_cwd)
--}
-+TI_BIN_UNPK_ARGS = "--mode console"
+-PR = "r3"
++PR = "r4"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
  
-diff --git a/recipes-ti/includes/ti-unpack.inc b/recipes-ti/includes/ti-unpack.inc
-new file mode 100644
-index 0000000..c19c78c
---- /dev/null
-+++ b/recipes-ti/includes/ti-unpack.inc
-@@ -0,0 +1,83 @@
-+# This file defines function used for unpacking the .bin file downloaded over
-+# the http.
-+#  BINFILE - name of the install jammer .bin file
-+#  TARFILE - name of the tar file inside the install jammer
-+#  TI_BIN_UNPK_ARGS   - contains the arguments to be passed to the bin file.
-+#  TI_BIN_UNPK_CMDS   - contains list of commands separated with colon to be 
-+#                       passed while unpacking the bin file. The keyword 
-+#                       workdir expands to WORKDIR and commands are appendded
-+#                       with '\n'. Eg. TI_BIN_UNPK_CMDS="Y:Y: qY:workdir"
-+#  TI_BIN_UNPK_WDEXT  - This variable extends workdir path, if user wants to put
-+#                       the output in some internal directory
-+
-+python do_unpack () {
-+    bb.build.exec_func('base_do_unpack', d)
-+    bb.build.exec_func('ti_bin_do_unpack', d)
-+}
-+
-+TI_BIN_UNPK_WDEXT ?= ""
-+python ti_bin_do_unpack() {
-+
-+    import os
-+
-+    # InstallJammer requires 32bit version of glibc
-+    lib32path = '/lib'
-+    if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
-+        lib32path = '/lib32'
-+    if not os.path.exists('%s/libc.so.6' % lib32path):
-+        bb.warn("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on Ubuntu/Debian")
-+
-+    localdata = bb.data.createCopy(d)
-+    bb.data.update_data(localdata)
-+
-+    binfile  = bb.data.getVar('BINFILE', localdata)
-+    binfile  = bb.data.expand(binfile, localdata)
-+
-+    # Change to the working directory
-+    save_cwd = os.getcwd()
-+    workdir  = bb.data.getVar('WORKDIR', localdata)
-+    workdir  = bb.data.expand(workdir, localdata)
-+    os.chdir(workdir)
-+
-+    # Get unpack args
-+    arg_string = bb.data.getVar('TI_BIN_UNPK_ARGS', localdata)
-+    arg_string = bb.data.expand(arg_string, localdata)
-+
-+    # Get unpack commands
-+    cmd_string = bb.data.getVar('TI_BIN_UNPK_CMDS', localdata)
-+    cmd_list = cmd_string.split( ":" )
-+
-+    # Make the InstallJammer binary executable so we can run it
-+    os.chmod(binfile, 0755)
-+
-+    # Run the InstallJammer binary and accept the EULA
-+    filename = "HOME=%s ./%s %s" % (workdir, binfile, arg_string)
-+    
-+    # Test executable by printing installer version or help screen (--version currently broken for some installers) 
-+    # - this is currently broken in some IJ installers - comment out for now
-+    #if os.system(filename + " --version") != 0:
-+    #   print "ERROR: ti-eula-unpack: failed to execute binary installer"
-+    #   raise bb.build.FuncFailed()
-+ 
-+    f = os.popen(filename,'w')
-+    for cmd in cmd_list:
-+        if cmd == "workdir":
-+            wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
-+            wdext = bb.data.expand(wdext, localdata)
-+            cmd = workdir+wdext
-+        f.write(cmd+'\n');
-+    f.close()
-+
-+    # Expand the tarball that was created if required
-+    tarfile  = bb.data.getVar('TARFILE', localdata)    
-+    if bool(tarfile) == True:
-+        tarfile  = bb.data.expand(tarfile, localdata)
-+        tcmd = 'tar x --no-same-owner -f %s -C %s' % (tarfile, workdir)
-+        if os.system(tcmd) != 0:
-+            print "ERROR: ti-eula-unpack: failed to extract tarfile"
-+            raise bb.build.FuncFailed()
-+
-+    # Return to the previous directory
-+    os.chdir(save_cwd)
-+}
-+
+ RREPLACES_${PN} = "libegl libgles1 libgles2"
 
 
