@@ -1,38 +1,38 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <karthik.ramanan@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 55A8BE00853; Thu, 19 Feb 2015 19:36:06 -0800 (PST)
+	id 5C3A0E00853; Fri, 20 Feb 2015 06:21:16 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 187C4E00837
-	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 19:36:02 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1K3a1Mw016766
-	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 21:36:01 -0600
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1K3a0t0025091
-	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 21:36:00 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 19 Feb 2015 21:35:59 -0600
-Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t1K3ZwEL027457;	Thu, 19 Feb 2015 21:35:59 -0600
-From: Sam Nelson <sam.nelson@ti.com>
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2AC88E00837
+	for <meta-ti@yoctoproject.org>; Fri, 20 Feb 2015 06:21:12 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1KELCZa031542
+	for <meta-ti@yoctoproject.org>; Fri, 20 Feb 2015 08:21:12 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1KELAGA024618
+	for <meta-ti@yoctoproject.org>; Fri, 20 Feb 2015 08:21:11 -0600
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 20 Feb 2015 08:21:10 -0600
+Received: from swubn01.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1KEL8b6017138;
+	Fri, 20 Feb 2015 08:21:09 -0600
+From: Karthik Ramanan <a0393906@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Thu, 19 Feb 2015 22:35:55 -0500
-Message-ID: <1424403355-4377-1-git-send-email-sam.nelson@ti.com>
+Date: Fri, 20 Feb 2015 19:51:04 +0530
+Message-ID: <1424442064-19411-1-git-send-email-a0393906@ti.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] netapi: Add recipe for NETAPI module
+Subject: [PATCH 1/1] omap5-sgx-ddk-um-linux: Updated SRCREV to include bugfixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,138 +45,32 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Feb 2015 03:36:06 -0000
+X-List-Received-Date: Fri, 20 Feb 2015 14:21:16 -0000
 Content-Type: text/plain
 
-- Provide TI user space network library and test code
-- Supports k2h, k2k, k2l & k2e devices
+    * This version is compatible with version Kernel 3.14
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
- recipes-ti/netapi/netapi-test_git.bb |   48 ++++++++++++++++++++++++++++++++++
- recipes-ti/netapi/netapi.inc         |   15 +++++++++++
- recipes-ti/netapi/netapi_git.bb      |   35 +++++++++++++++++++++++++
- 3 files changed, 98 insertions(+)
- create mode 100644 recipes-ti/netapi/netapi-test_git.bb
- create mode 100644 recipes-ti/netapi/netapi.inc
- create mode 100644 recipes-ti/netapi/netapi_git.bb
+ .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/netapi/netapi-test_git.bb b/recipes-ti/netapi/netapi-test_git.bb
-new file mode 100644
-index 0000000..4107366
---- /dev/null
-+++ b/recipes-ti/netapi/netapi-test_git.bb
-@@ -0,0 +1,48 @@
-+DESCRIPTION = "Provides test and application binaries using NETAPI module"
-+COMPATIBLE_MACHINE = "keystone"
-+DEPENDS = "netapi ipsecmgr"
-+
-+include netapi.inc
-+
-+BASEDIR = "${WORKDIR}/git"
-+S = "${BASEDIR}/ti/runtime/netapi"
-+
-+do_compile () {
-+#   Build the netapi binaries
-+	for device in ${DEVICELIST}
-+	do
-+		for choice in ${CHOICELIST}
-+		do
-+			oe_runmake tests NETAPI_SRC_DIR=${S} NETAPI_INC_DIR=${BASEDIR} \
-+				USEDYNAMIC_LIB="$choice" DEVICE="$device"
-+		done
-+
-+#     Now build the netapi appplications
-+		cd ${S}/applications/ipsec_offload/ipsecmgr/build
-+		make clean app PDK_INSTALL_PATH=${STAGING_INCDIR} NETAPI_SRC_DIR=${S} DEVICE="$device"
-+
-+		cd ${S}/applications/ipsec_offload/config-app/build
-+		make clean app PDK_INSTALL_PATH=${STAGING_INCDIR} DEVICE="$device"
-+		cd ${S}
-+	done
-+}
-+
-+do_install () {
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake installbin INSTALL_INC_BASE_DIR=${D}/${includedir} \
-+			INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} \
-+			SYSCONFDIR=${D}${sysconfdir} DEVICE="$device"
-+
-+		cd ${S}/applications/ipsec_offload/ipsecmgr/build
-+		make install PDK_INSTALL_PATH=${STAGING_INCDIR} \
-+			INSTALL_BIN_BASE_DIR=${D}${bindir} SYSCONFDIR=${D}${sysconfdir} \
-+			DEVICE="$device"
-+
-+		cd ${S}/applications/ipsec_offload/config-app/build
-+		make install PDK_INSTALL_PATH=${STAGING_INCDIR} \
-+			INSTALL_BIN_BASE_DIR=${D}${bindir} SYSCONFDIR=${D}${sysconfdir} \
-+			DEVICE="$device"
-+		cd ${S}
-+	done
-+}
-diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
-new file mode 100644
-index 0000000..4bed670
---- /dev/null
-+++ b/recipes-ti/netapi/netapi.inc
-@@ -0,0 +1,15 @@
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=f2b4f162358b1ffaf3f2307287ca2074"
-+
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANCH}"
-+
-+# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.04"
-+SRCREV= "dc08af268200908d3d8a456ac852c65c53d2fd12"
-+PV = "01.01.00.04"
-+
-+DEVICELIST = "k2h k2k k2l k2e"
-+
-+CHOICELIST = "yes no"
-+
-+EXTRA_OEMAKE += "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
-diff --git a/recipes-ti/netapi/netapi_git.bb b/recipes-ti/netapi/netapi_git.bb
-new file mode 100644
-index 0000000..7349c44
---- /dev/null
-+++ b/recipes-ti/netapi/netapi_git.bb
-@@ -0,0 +1,35 @@
-+DESCRIPTION = "Provides NETAPI module: TI user space network library"
-+
-+COMPATIBLE_MACHINE = "keystone"
-+
-+DEPENDS = "common-csl-ip rm-lld qmss-lld cppi-lld sa-lld hplib pktlib nwal-lld"
-+
-+NAME = "netapi"
-+
-+include netapi.inc
-+
-+BASEDIR = "${WORKDIR}/git"
-+S = "${BASEDIR}/ti/runtime/netapi"
-+
-+do_compile () {
-+#   Now build the netapi
-+	for device in ${DEVICELIST}
-+	do
-+		for choice in ${CHOICELIST}
-+		do
-+			oe_runmake clean NETAPI_SRC_DIR=${S} NETAPI_INC_DIR=${BASEDIR} \
-+				USEDYNAMIC_LIB="$choice" DEVICE="$device"
-+			oe_runmake lib NETAPI_SRC_DIR=${S} NETAPI_INC_DIR=${BASEDIR} \
-+				USEDYNAMIC_LIB="$choice" DEVICE="$device"
-+		done
-+	done
-+}
-+
-+do_install () {
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} \
-+			INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} \
-+			SYSCONFDIR=${D}${sysconfdir} DEVICE="$device"
-+	done
-+}
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+index 37ea088..10d1a1e 100644
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+@@ -4,9 +4,9 @@ LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=360d293df455e4f2d363bb4014a49603"
+ 
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git"
+-SRCREV = "0af11b676900de5a3e5550728fe18acd88c29848"
++SRCREV = "53be02a24a30a4c74eb48f2c84fda789bd95ab33"
+ 
+-PR = "r3"
++PR = "r4"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+ 
+ RREPLACES_${PN} = "libegl libgles1 libgles2"
 -- 
 1.7.9.5
 
