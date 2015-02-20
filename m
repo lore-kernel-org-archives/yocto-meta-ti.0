@@ -1,42 +1,41 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CEB95E0084F; Thu, 19 Feb 2015 18:29:05 -0800 (PST)
+	id 2DF65E0084F; Thu, 19 Feb 2015 18:58:43 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [192.94.94.41 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9E9CAE00831
-	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 18:29:02 -0800 (PST)
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3D24CE00831
+	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 18:58:40 -0800 (PST)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1K2T2hP029997
-	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 20:29:02 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1K2T1xO014898
-	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 20:29:01 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 19 Feb 2015 20:29:00 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t1K2T0dg025168	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 20:29:00
-	-0600
-Date: Thu, 19 Feb 2015 21:29:00 -0500
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1K2wdFC013219
+	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 20:58:39 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1K2wc77003380
+	for <meta-ti@yoctoproject.org>; Thu, 19 Feb 2015 20:58:38 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Thu, 19 Feb 2015 20:58:38 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1K2wcPY026090;
+	Thu, 19 Feb 2015 20:58:38 -0600
+Date: Thu, 19 Feb 2015 21:58:37 -0500
 From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <311890894.371.1424399340717.JavaMail.jenkins@puget>
+To: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <20150220025837.GH31287@edge>
+References: <1423150109-9436-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-02-19_21-00-57
+In-Reply-To: <1423150109-9436-1-git-send-email-j-stiffler@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH v2 1/2] ti-eula-unpack: Add support for general binary installers.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,191 +48,206 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Feb 2015 02:29:05 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_370_912318982.1424399340715"
+X-List-Received-Date: Fri, 20 Feb 2015 02:58:43 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-------=_Part_370_912318982.1424399340715
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Jake,
 
-<html>
-<head>
-<title>
-Status for 02/19/15
-</title>
-</head>
-<body>
+Can you generate this patch with -M or -Mxx where xx is the percentage of 
+similarities between the 2 files? I'm suspecting it will be much easier to 
+review the patch...
 
-<h2>Status for 02/19/15</h2>
-
-<h2>BUILD_ID: build-2015-02-19_21-01-58</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=red>FAILED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.11"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+-- 
+Denys
 
 
-------=_Part_370_912318982.1424399340715--
+On Thu, Feb 05, 2015 at 10:28:28AM -0500, Jacob Stiffler wrote:
+> * ti-unpack.inc has been created to allow support for general binary
+>   installers by creating a variable which is used to pass arbitrary
+>   arguments to the executable.
+> * ti-eula-unpack.inc sets the default arguments to retain support for
+>   recipes which still use this feature.
+> 
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+> ---
+>  recipes-ti/includes/ti-eula-unpack.inc |   67 +-------------------------
+>  recipes-ti/includes/ti-unpack.inc      |   83 ++++++++++++++++++++++++++++++++
+>  2 files changed, 85 insertions(+), 65 deletions(-)
+>  create mode 100644 recipes-ti/includes/ti-unpack.inc
+> 
+> diff --git a/recipes-ti/includes/ti-eula-unpack.inc b/recipes-ti/includes/ti-eula-unpack.inc
+> index aee88f1..912cd18 100644
+> --- a/recipes-ti/includes/ti-eula-unpack.inc
+> +++ b/recipes-ti/includes/ti-eula-unpack.inc
+> @@ -9,70 +9,7 @@
+>  #  TI_BIN_UNPK_WDEXT  - This variable extends workdir path, if user wants to put
+>  #                       the output in some internal directory
+>  
+> -python do_unpack () {
+> -    bb.build.exec_func('base_do_unpack', d)
+> -    bb.build.exec_func('ti_bin_do_unpack', d)
+> -}
+> +require ../includes/ti-unpack.inc
+>  
+> -TI_BIN_UNPK_WDEXT ?= ""
+> -python ti_bin_do_unpack() {
+> -
+> -    import os
+> -
+> -    # InstallJammer requires 32bit version of glibc
+> -    lib32path = '/lib'
+> -    if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
+> -        lib32path = '/lib32'
+> -    if not os.path.exists('%s/libc.so.6' % lib32path):
+> -        bb.warn("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on Ubuntu/Debian")
+> -
+> -    localdata = bb.data.createCopy(d)
+> -    bb.data.update_data(localdata)
+> -
+> -    binfile  = bb.data.getVar('BINFILE', localdata)
+> -    binfile  = bb.data.expand(binfile, localdata)
+> -
+> -    # Change to the working directory
+> -    save_cwd = os.getcwd()
+> -    workdir  = bb.data.getVar('WORKDIR', localdata)
+> -    workdir  = bb.data.expand(workdir, localdata)
+> -    os.chdir(workdir)
+> -
+> -    # Get unpack commands
+> -    cmd_string = bb.data.getVar('TI_BIN_UNPK_CMDS', localdata)
+> -    cmd_list = cmd_string.split( ":" )
+> -
+> -    # Make the InstallJammer binary executable so we can run it
+> -    os.chmod(binfile, 0755)
+> -
+> -    # Run the InstallJammer binary and accept the EULA
+> -    filename = "HOME=%s ./%s --mode console" % (workdir, binfile)
+> -    
+> -    # Test executable by printing installer version or help screen (--version currently broken for some installers) 
+> -    # - this is currently broken in some IJ installers - comment out for now
+> -    #if os.system(filename + " --version") != 0:
+> -    #   print "ERROR: ti-eula-unpack: failed to execute binary installer"
+> -    #   raise bb.build.FuncFailed()
+> - 
+> -    f = os.popen(filename,'w')
+> -    for cmd in cmd_list:
+> -        if cmd == "workdir":
+> -            wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
+> -            wdext = bb.data.expand(wdext, localdata)
+> -            cmd = workdir+wdext
+> -        f.write(cmd+'\n');
+> -    f.close()
+> -
+> -    # Expand the tarball that was created if required
+> -    tarfile  = bb.data.getVar('TARFILE', localdata)    
+> -    if bool(tarfile) == True:
+> -        tarfile  = bb.data.expand(tarfile, localdata)
+> -        tcmd = 'tar x --no-same-owner -f %s -C %s' % (tarfile, workdir)
+> -        if os.system(tcmd) != 0:
+> -            print "ERROR: ti-eula-unpack: failed to extract tarfile"
+> -            raise bb.build.FuncFailed()
+> -
+> -    # Return to the previous directory
+> -    os.chdir(save_cwd)
+> -}
+> +TI_BIN_UNPK_ARGS = "--mode console"
+>  
+> diff --git a/recipes-ti/includes/ti-unpack.inc b/recipes-ti/includes/ti-unpack.inc
+> new file mode 100644
+> index 0000000..c19c78c
+> --- /dev/null
+> +++ b/recipes-ti/includes/ti-unpack.inc
+> @@ -0,0 +1,83 @@
+> +# This file defines function used for unpacking the .bin file downloaded over
+> +# the http.
+> +#  BINFILE - name of the install jammer .bin file
+> +#  TARFILE - name of the tar file inside the install jammer
+> +#  TI_BIN_UNPK_ARGS   - contains the arguments to be passed to the bin file.
+> +#  TI_BIN_UNPK_CMDS   - contains list of commands separated with colon to be 
+> +#                       passed while unpacking the bin file. The keyword 
+> +#                       workdir expands to WORKDIR and commands are appendded
+> +#                       with '\n'. Eg. TI_BIN_UNPK_CMDS="Y:Y: qY:workdir"
+> +#  TI_BIN_UNPK_WDEXT  - This variable extends workdir path, if user wants to put
+> +#                       the output in some internal directory
+> +
+> +python do_unpack () {
+> +    bb.build.exec_func('base_do_unpack', d)
+> +    bb.build.exec_func('ti_bin_do_unpack', d)
+> +}
+> +
+> +TI_BIN_UNPK_WDEXT ?= ""
+> +python ti_bin_do_unpack() {
+> +
+> +    import os
+> +
+> +    # InstallJammer requires 32bit version of glibc
+> +    lib32path = '/lib'
+> +    if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
+> +        lib32path = '/lib32'
+> +    if not os.path.exists('%s/libc.so.6' % lib32path):
+> +        bb.warn("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on Ubuntu/Debian")
+> +
+> +    localdata = bb.data.createCopy(d)
+> +    bb.data.update_data(localdata)
+> +
+> +    binfile  = bb.data.getVar('BINFILE', localdata)
+> +    binfile  = bb.data.expand(binfile, localdata)
+> +
+> +    # Change to the working directory
+> +    save_cwd = os.getcwd()
+> +    workdir  = bb.data.getVar('WORKDIR', localdata)
+> +    workdir  = bb.data.expand(workdir, localdata)
+> +    os.chdir(workdir)
+> +
+> +    # Get unpack args
+> +    arg_string = bb.data.getVar('TI_BIN_UNPK_ARGS', localdata)
+> +    arg_string = bb.data.expand(arg_string, localdata)
+> +
+> +    # Get unpack commands
+> +    cmd_string = bb.data.getVar('TI_BIN_UNPK_CMDS', localdata)
+> +    cmd_list = cmd_string.split( ":" )
+> +
+> +    # Make the InstallJammer binary executable so we can run it
+> +    os.chmod(binfile, 0755)
+> +
+> +    # Run the InstallJammer binary and accept the EULA
+> +    filename = "HOME=%s ./%s %s" % (workdir, binfile, arg_string)
+> +    
+> +    # Test executable by printing installer version or help screen (--version currently broken for some installers) 
+> +    # - this is currently broken in some IJ installers - comment out for now
+> +    #if os.system(filename + " --version") != 0:
+> +    #   print "ERROR: ti-eula-unpack: failed to execute binary installer"
+> +    #   raise bb.build.FuncFailed()
+> + 
+> +    f = os.popen(filename,'w')
+> +    for cmd in cmd_list:
+> +        if cmd == "workdir":
+> +            wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
+> +            wdext = bb.data.expand(wdext, localdata)
+> +            cmd = workdir+wdext
+> +        f.write(cmd+'\n');
+> +    f.close()
+> +
+> +    # Expand the tarball that was created if required
+> +    tarfile  = bb.data.getVar('TARFILE', localdata)    
+> +    if bool(tarfile) == True:
+> +        tarfile  = bb.data.expand(tarfile, localdata)
+> +        tcmd = 'tar x --no-same-owner -f %s -C %s' % (tarfile, workdir)
+> +        if os.system(tcmd) != 0:
+> +            print "ERROR: ti-eula-unpack: failed to extract tarfile"
+> +            raise bb.build.FuncFailed()
+> +
+> +    # Return to the previous directory
+> +    os.chdir(save_cwd)
+> +}
+> +
+> -- 
+> 1.7.9.5
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
+
