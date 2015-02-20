@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AE5B8E00837; Fri, 20 Feb 2015 09:00:15 -0800 (PST)
+	id F2BEBE002F9; Fri, 20 Feb 2015 09:25:30 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,33 +12,31 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2EF0EE002AC
-	for <meta-ti@yoctoproject.org>; Fri, 20 Feb 2015 09:00:11 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9C084E00289
+	for <meta-ti@yoctoproject.org>; Fri, 20 Feb 2015 09:25:27 -0800 (PST)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1KH0BVo007122
-	for <meta-ti@yoctoproject.org>; Fri, 20 Feb 2015 11:00:11 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1KH08ln018295
-	for <meta-ti@yoctoproject.org>; Fri, 20 Feb 2015 11:00:09 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 20 Feb 2015 11:00:06 -0600
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1KHPRXZ009553
+	for <meta-ti@yoctoproject.org>; Fri, 20 Feb 2015 11:25:27 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1KHPQf9004637
+	for <meta-ti@yoctoproject.org>; Fri, 20 Feb 2015 11:25:26 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 20 Feb 2015 11:25:26 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1KH06eB021024;
-	Fri, 20 Feb 2015 11:00:07 -0600
-Date: Fri, 20 Feb 2015 12:00:06 -0500
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1KHPPgj018584;
+	Fri, 20 Feb 2015 11:25:26 -0600
+Date: Fri, 20 Feb 2015 12:25:22 -0500
 From: Denys Dmytriyenko <denys@ti.com>
-To: "Stiffler, Jacob" <j-stiffler@ti.com>
-Message-ID: <20150220170005.GI31287@edge>
+To: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <20150220172522.GJ31287@edge>
 References: <1423150109-9436-1-git-send-email-j-stiffler@ti.com>
-	<20150220025837.GH31287@edge>
-	<4B26FB5A64EBA14C87266869E037F958140EC9B4@DFLE09.ent.ti.com>
-	<4B26FB5A64EBA14C87266869E037F958140EC9D5@DFLE09.ent.ti.com>
+	<1423150109-9436-2-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <4B26FB5A64EBA14C87266869E037F958140EC9D5@DFLE09.ent.ti.com>
+In-Reply-To: <1423150109-9436-2-git-send-email-j-stiffler@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH v2 1/2] ti-eula-unpack: Add support for general binary installers.
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH v2 2/2] ti-cgt6x: Add verion 8.0.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,263 +49,132 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Feb 2015 17:00:15 -0000
+X-List-Received-Date: Fri, 20 Feb 2015 17:25:31 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-Ok, looks like -C (copy) would have worked better here instead of -M (move).
-I've re-sent the patch back to the list for reference.
-
-It's kind of strange that first part cuts out large portion of the file, while 
-the second part refers to that file in its original form. That works, because 
-patching is atomic and the second part still refers to the original version of 
-the file, even though it is also modified by the same patch...
-
-
-On Fri, Feb 20, 2015 at 10:24:39AM -0500, Stiffler, Jacob wrote:
-> I tried a variety of -Mxx options, but none seemed to work.
+On Thu, Feb 05, 2015 at 10:28:29AM -0500, Jacob Stiffler wrote:
+> * Supports native and nativesdk classes as well as target.
 > 
-> Here is the manual diff between the renamed file (ti-eula-unpack.inc --> ti-unpack.inc) :
-> 
-> 
-> $ diff recipes-ti/includes/ti-eula-unpack.inc recipes-ti/includes/ti-unpack.inc
-> 2c2
-> < # the http and display EULA.
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 > ---
-> > # the http.
-> 4a5
-> > #  TI_BIN_UNPK_ARGS   - contains the arguments to be passed to the bin file.
-> 40a42,45
-> >     # Get unpack args
-> >     arg_string = bb.data.getVar('TI_BIN_UNPK_ARGS', localdata)
-> >     arg_string = bb.data.expand(arg_string, localdata)
-> >
-> 49c54
-> <     filename = "HOME=%s ./%s --mode console" % (workdir, binfile)
-> ---
-> >     filename = "HOME=%s ./%s %s" % (workdir, binfile, arg_string)
+>  recipes-ti/devtools/ti-cgt6x_8.0.0.bb |   88 +++++++++++++++++++++++++++++++++
+>  1 file changed, 88 insertions(+)
+>  create mode 100644 recipes-ti/devtools/ti-cgt6x_8.0.0.bb
 > 
+> diff --git a/recipes-ti/devtools/ti-cgt6x_8.0.0.bb b/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
+> new file mode 100644
+> index 0000000..c56a629
+> --- /dev/null
+> +++ b/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
+> @@ -0,0 +1,88 @@
+> +DESCRIPTION = "TI DSP Code Generation Tools"
+> +HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+> +LICENSE = "TI TSPA with portions under Thai Open Source Software Center & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 and MIT and BSD-2-Clause and Public Domain and other similar"
+
+^^^ This is a very strange license. Have you consulted with OSRB? Should "and" 
+be replaced with "&" at the end?
+
+
+> +
+> +LIC_FILES_CHKSUM = "file://ti-cgt-c6000_${PV}/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
+> +LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-c6x/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
+> +
+> +PE = "1"
+> +
+> +require ../includes/ti-unpack.inc
+> +
+> +BINFILE = "ti_cgt_c6000_${PV}_linux_installer_x86.bin"
+> +BINFILE_NAME = "cgt6x_x86_installer"
+> +TI_BIN_UNPK_ARGS = "--prefix ${S}"
+> +TI_BIN_UNPK_CMDS = ""
+> +
+> +BINFILE_class-target = "ti_cgt_c6000_${PV}_armlinuxa8hf_busybox_installer.sh"
+> +BINFILE_NAME_class-target = "cgt6x_arm_installer"
+
+Now, since target portion is very ARM specific, would be nice to add this:
+
+COMPATIBLE_HOST_class-target = "arm.*-linux"
+
+Also, you may want to copy the anonymous function that checks for hardfp from 
+libgles recipes. You might want to modify it to only check the target case 
+though, to not block native and nativesdk cases... Let me know if you have any 
+issues here.
+
+
+> +SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C6000/Production/${PV}/${BINFILE};name=${BINFILE_NAME}"
+> +
+> +SRC_URI[cgt6x_x86_installer.md5sum] = "ff83845672090bf0a669bba7b0cadf56"
+> +SRC_URI[cgt6x_x86_installer.sha256sum] = "297f77a00b211b3c4afa23afe7319e98b2400b5d2eb0f8c8cfe3ef7d7aa4d709"
+> +
+> +SRC_URI[cgt6x_arm_installer.md5sum] = "13961e5a1da4c310ea8c8707ab981fff"
+> +SRC_URI[cgt6x_arm_installer.sha256sum] = "cb24ae05baffbd44d6dedba68743be09fd883e04403e069c437c486533d8fffb"
+> +
+> +do_install() {
+> +    install -d ${D}${bindir}
+> +    for binfile in ${S}/ti-cgt-c6000_${PV}/bin/*; do
+> +        install -m 755 ${binfile} ${D}${bindir}
+> +    done
+> +
+> +    install -d ${D}${datadir}/ti/cgt-c6x/include
+> +    for includefile in ${S}/ti-cgt-c6000_${PV}/include/*; do
+> +        install -m 644 ${includefile} ${D}${datadir}/ti/cgt-c6x/include
+> +    done
+> +
+> +    install -d ${D}${datadir}/ti/cgt-c6x/lib
+> +    for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.a; do
+> +        install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
+> +    done
+> +
+> +    for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.cmd; do
+> +        install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
+> +    done
+> +
+> +    for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.lib; do
+> +        install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
+> +    done
+> +
+> +    install -d ${D}${datadir}/ti/cgt-c6x/lib/src
+> +    for srcfile in ${S}/ti-cgt-c6000_${PV}/lib/src/*; do
+> +        install -m 644 ${srcfile} ${D}${datadir}/ti/cgt-c6x/lib/src
+> +    done
+> +
+> +    install -d ${D}${datadir}/man/man1
+> +    for manfile in ${S}/ti-cgt-c6000_${PV}/man/man1/*; do
+> +        install -m 644 ${manfile} ${D}${datadir}/man/man1
+> +    done
+> +
+> +    install -d ${D}${datadir}/doc/ti/cgt-c6x
+> +    for docfile in ${S}/ti-cgt-c6000_${PV}/*.txt; do
+> +        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+> +    done
+> +
+> +    for docfile in ${S}/ti-cgt-c6000_${PV}/*.htm; do
+> +        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+> +    done
+> +
+> +    for docfile in ${S}/ti-cgt-c6000_${PV}/*.spdx; do
+> +        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+> +    done
+> +
+> +    for docfile in ${S}/ti-cgt-c6000_${PV}/doc/*; do
+> +        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+> +    done
+> +
+> +}
+> +
+> +do_install_class-target() {
+> +    ${WORKDIR}/${BINFILE} --prefix ${D}
+> +}
+> +
+> +FILES_${PN} += "${datadir}/ti/*"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> +
+> -- 
+> 1.7.9.5
 > 
-> 
-> Thanks,
-> Jake 
-> 
-> -----Original Message-----
-> From: meta-ti-bounces@yoctoproject.org [mailto:meta-ti-bounces@yoctoproject.org] On Behalf Of Stiffler, Jacob
-> Sent: Friday, February 20, 2015 10:14 AM
-> To: Dmytriyenko, Denys
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH v2 1/2] ti-eula-unpack: Add support for general binary installers.
-> 
-> I had used the "-M" option. I will try with "-Mxx".
-> 
-> -----Original Message-----
-> From: Dmytriyenko, Denys
-> Sent: Thursday, February 19, 2015 9:59 PM
-> To: Stiffler, Jacob
-> Cc: meta-ti@yoctoproject.org
-> Subject: Re: [meta-ti] [PATCH v2 1/2] ti-eula-unpack: Add support for general binary installers.
-> 
-> Jake,
-> 
-> Can you generate this patch with -M or -Mxx where xx is the percentage of similarities between the 2 files? I'm suspecting it will be much easier to review the patch...
-> 
-> --
-> Denys
-> 
-> 
-> On Thu, Feb 05, 2015 at 10:28:28AM -0500, Jacob Stiffler wrote:
-> > * ti-unpack.inc has been created to allow support for general binary
-> >   installers by creating a variable which is used to pass arbitrary
-> >   arguments to the executable.
-> > * ti-eula-unpack.inc sets the default arguments to retain support for
-> >   recipes which still use this feature.
-> > 
-> > Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-> > ---
-> >  recipes-ti/includes/ti-eula-unpack.inc |   67 +-------------------------
-> >  recipes-ti/includes/ti-unpack.inc      |   83 ++++++++++++++++++++++++++++++++
-> >  2 files changed, 85 insertions(+), 65 deletions(-)  create mode 
-> > 100644 recipes-ti/includes/ti-unpack.inc
-> > 
-> > diff --git a/recipes-ti/includes/ti-eula-unpack.inc 
-> > b/recipes-ti/includes/ti-eula-unpack.inc
-> > index aee88f1..912cd18 100644
-> > --- a/recipes-ti/includes/ti-eula-unpack.inc
-> > +++ b/recipes-ti/includes/ti-eula-unpack.inc
-> > @@ -9,70 +9,7 @@
-> >  #  TI_BIN_UNPK_WDEXT  - This variable extends workdir path, if user wants to put
-> >  #                       the output in some internal directory
-> >  
-> > -python do_unpack () {
-> > -    bb.build.exec_func('base_do_unpack', d)
-> > -    bb.build.exec_func('ti_bin_do_unpack', d)
-> > -}
-> > +require ../includes/ti-unpack.inc
-> >  
-> > -TI_BIN_UNPK_WDEXT ?= ""
-> > -python ti_bin_do_unpack() {
-> > -
-> > -    import os
-> > -
-> > -    # InstallJammer requires 32bit version of glibc
-> > -    lib32path = '/lib'
-> > -    if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
-> > -        lib32path = '/lib32'
-> > -    if not os.path.exists('%s/libc.so.6' % lib32path):
-> > -        bb.warn("TI installer requires 32bit glibc libraries for proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get install ia32-libs' on Ubuntu/Debian")
-> > -
-> > -    localdata = bb.data.createCopy(d)
-> > -    bb.data.update_data(localdata)
-> > -
-> > -    binfile  = bb.data.getVar('BINFILE', localdata)
-> > -    binfile  = bb.data.expand(binfile, localdata)
-> > -
-> > -    # Change to the working directory
-> > -    save_cwd = os.getcwd()
-> > -    workdir  = bb.data.getVar('WORKDIR', localdata)
-> > -    workdir  = bb.data.expand(workdir, localdata)
-> > -    os.chdir(workdir)
-> > -
-> > -    # Get unpack commands
-> > -    cmd_string = bb.data.getVar('TI_BIN_UNPK_CMDS', localdata)
-> > -    cmd_list = cmd_string.split( ":" )
-> > -
-> > -    # Make the InstallJammer binary executable so we can run it
-> > -    os.chmod(binfile, 0755)
-> > -
-> > -    # Run the InstallJammer binary and accept the EULA
-> > -    filename = "HOME=%s ./%s --mode console" % (workdir, binfile)
-> > -    
-> > -    # Test executable by printing installer version or help screen (--version currently broken for some installers) 
-> > -    # - this is currently broken in some IJ installers - comment out for now
-> > -    #if os.system(filename + " --version") != 0:
-> > -    #   print "ERROR: ti-eula-unpack: failed to execute binary installer"
-> > -    #   raise bb.build.FuncFailed()
-> > - 
-> > -    f = os.popen(filename,'w')
-> > -    for cmd in cmd_list:
-> > -        if cmd == "workdir":
-> > -            wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
-> > -            wdext = bb.data.expand(wdext, localdata)
-> > -            cmd = workdir+wdext
-> > -        f.write(cmd+'\n');
-> > -    f.close()
-> > -
-> > -    # Expand the tarball that was created if required
-> > -    tarfile  = bb.data.getVar('TARFILE', localdata)    
-> > -    if bool(tarfile) == True:
-> > -        tarfile  = bb.data.expand(tarfile, localdata)
-> > -        tcmd = 'tar x --no-same-owner -f %s -C %s' % (tarfile, workdir)
-> > -        if os.system(tcmd) != 0:
-> > -            print "ERROR: ti-eula-unpack: failed to extract tarfile"
-> > -            raise bb.build.FuncFailed()
-> > -
-> > -    # Return to the previous directory
-> > -    os.chdir(save_cwd)
-> > -}
-> > +TI_BIN_UNPK_ARGS = "--mode console"
-> >  
-> > diff --git a/recipes-ti/includes/ti-unpack.inc 
-> > b/recipes-ti/includes/ti-unpack.inc
-> > new file mode 100644
-> > index 0000000..c19c78c
-> > --- /dev/null
-> > +++ b/recipes-ti/includes/ti-unpack.inc
-> > @@ -0,0 +1,83 @@
-> > +# This file defines function used for unpacking the .bin file 
-> > +downloaded over # the http.
-> > +#  BINFILE - name of the install jammer .bin file #  TARFILE - name 
-> > +of the tar file inside the install jammer
-> > +#  TI_BIN_UNPK_ARGS   - contains the arguments to be passed to the bin file.
-> > +#  TI_BIN_UNPK_CMDS   - contains list of commands separated with colon to be 
-> > +#                       passed while unpacking the bin file. The keyword 
-> > +#                       workdir expands to WORKDIR and commands are appendded
-> > +#                       with '\n'. Eg. TI_BIN_UNPK_CMDS="Y:Y: qY:workdir"
-> > +#  TI_BIN_UNPK_WDEXT  - This variable extends workdir path, if user wants to put
-> > +#                       the output in some internal directory
-> > +
-> > +python do_unpack () {
-> > +    bb.build.exec_func('base_do_unpack', d)
-> > +    bb.build.exec_func('ti_bin_do_unpack', d) }
-> > +
-> > +TI_BIN_UNPK_WDEXT ?= ""
-> > +python ti_bin_do_unpack() {
-> > +
-> > +    import os
-> > +
-> > +    # InstallJammer requires 32bit version of glibc
-> > +    lib32path = '/lib'
-> > +    if os.path.exists('/lib64') and (os.path.islink('/lib64') or os.path.islink('/lib') or os.path.exists('/lib32')):
-> > +        lib32path = '/lib32'
-> > +    if not os.path.exists('%s/libc.so.6' % lib32path):
-> > +        bb.warn("TI installer requires 32bit glibc libraries for 
-> > + proper operation\nrun 'yum install glibc.i686' on Fedora or 'apt-get 
-> > + install ia32-libs' on Ubuntu/Debian")
-> > +
-> > +    localdata = bb.data.createCopy(d)
-> > +    bb.data.update_data(localdata)
-> > +
-> > +    binfile  = bb.data.getVar('BINFILE', localdata)
-> > +    binfile  = bb.data.expand(binfile, localdata)
-> > +
-> > +    # Change to the working directory
-> > +    save_cwd = os.getcwd()
-> > +    workdir  = bb.data.getVar('WORKDIR', localdata)
-> > +    workdir  = bb.data.expand(workdir, localdata)
-> > +    os.chdir(workdir)
-> > +
-> > +    # Get unpack args
-> > +    arg_string = bb.data.getVar('TI_BIN_UNPK_ARGS', localdata)
-> > +    arg_string = bb.data.expand(arg_string, localdata)
-> > +
-> > +    # Get unpack commands
-> > +    cmd_string = bb.data.getVar('TI_BIN_UNPK_CMDS', localdata)
-> > +    cmd_list = cmd_string.split( ":" )
-> > +
-> > +    # Make the InstallJammer binary executable so we can run it
-> > +    os.chmod(binfile, 0755)
-> > +
-> > +    # Run the InstallJammer binary and accept the EULA
-> > +    filename = "HOME=%s ./%s %s" % (workdir, binfile, arg_string)
-> > +    
-> > +    # Test executable by printing installer version or help screen (--version currently broken for some installers) 
-> > +    # - this is currently broken in some IJ installers - comment out for now
-> > +    #if os.system(filename + " --version") != 0:
-> > +    #   print "ERROR: ti-eula-unpack: failed to execute binary installer"
-> > +    #   raise bb.build.FuncFailed()
-> > + 
-> > +    f = os.popen(filename,'w')
-> > +    for cmd in cmd_list:
-> > +        if cmd == "workdir":
-> > +            wdext = bb.data.getVar('TI_BIN_UNPK_WDEXT', localdata)
-> > +            wdext = bb.data.expand(wdext, localdata)
-> > +            cmd = workdir+wdext
-> > +        f.write(cmd+'\n');
-> > +    f.close()
-> > +
-> > +    # Expand the tarball that was created if required
-> > +    tarfile  = bb.data.getVar('TARFILE', localdata)    
-> > +    if bool(tarfile) == True:
-> > +        tarfile  = bb.data.expand(tarfile, localdata)
-> > +        tcmd = 'tar x --no-same-owner -f %s -C %s' % (tarfile, workdir)
-> > +        if os.system(tcmd) != 0:
-> > +            print "ERROR: ti-eula-unpack: failed to extract tarfile"
-> > +            raise bb.build.FuncFailed()
-> > +
-> > +    # Return to the previous directory
-> > +    os.chdir(save_cwd)
-> > +}
-> > +
-> > --
-> > 1.7.9.5
-> > 
-> > --
-> > _______________________________________________
-> > meta-ti mailing list
-> > meta-ti@yoctoproject.org
-> > https://lists.yoctoproject.org/listinfo/meta-ti
-> --
+> -- 
 > _______________________________________________
 > meta-ti mailing list
 > meta-ti@yoctoproject.org
