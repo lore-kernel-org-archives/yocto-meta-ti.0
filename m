@@ -1,42 +1,49 @@
-Return-Path: <denys@ti.com>
+Return-Path: <aravind.nizam79@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7D8C7E00757; Mon, 23 Feb 2015 18:11:45 -0800 (PST)
+	id 470D1E008CC; Tue, 24 Feb 2015 01:35:06 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (aravind.nizam79[at]gmail.com)
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.218.42 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 072B8E006E9
-	for <meta-ti@yoctoproject.org>; Mon, 23 Feb 2015 18:11:40 -0800 (PST)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1O2BdDt030586
-	for <meta-ti@yoctoproject.org>; Mon, 23 Feb 2015 20:11:39 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1O2BcrD006960
-	for <meta-ti@yoctoproject.org>; Mon, 23 Feb 2015 20:11:38 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 23 Feb 2015 20:11:38 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t1O2Bc72023104	for <meta-ti@yoctoproject.org>; Mon, 23 Feb 2015 20:11:38
-	-0600
-Date: Mon, 23 Feb 2015 21:11:38 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1066086984.389.1424743898210.JavaMail.jenkins@puget>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+Received: from mail-oi0-f42.google.com (mail-oi0-f42.google.com
+	[209.85.218.42])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07E1CE00712
+	for <meta-ti@yoctoproject.org>; Tue, 24 Feb 2015 01:35:04 -0800 (PST)
+Received: by mail-oi0-f42.google.com with SMTP id h136so18307970oig.1
+	for <meta-ti@yoctoproject.org>; Tue, 24 Feb 2015 01:35:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=foxfJ1008/XLUPL+zH6ZWsGxX3KD3wpVVuZnLRdzLnM=;
+	b=TcVJbHSXFoxCBew5sqWSexlqBlRkS1wsem4rsx3QI+elgWb7M1+mk7hY6A/PxE1ueC
+	fbH4qcm0hifeZOUXM0jMIsin7THIhbk52rEXf9hOaDKtnfrjZC0mpDaF2/GIfguQFWog
+	cFjaOgxUxC6v2uSUSNF24M0MhY2sha/EsT9XaLDMoT373FDXb+uQIMaimgaywOqFhIcx
+	GIjq1OnkfFYroCTOag0ad31OVNYXnC+sCFpbzf6ygZU9c/nrcYoOI2qJhSFzAFpw4Sf8
+	PKPBtY9+AoIKy4YiVcUjS7x6OVsNDLy5+67hs8nMeq+YKIQeR01Iihe0Br70IVXyxCvB
+	sc8A==
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-02-23_21-00-57
+X-Received: by 10.202.212.214 with SMTP id l205mr9634479oig.117.1424770503574; 
+	Tue, 24 Feb 2015 01:35:03 -0800 (PST)
+Received: by 10.182.120.168 with HTTP; Tue, 24 Feb 2015 01:35:03 -0800 (PST)
+Date: Tue, 24 Feb 2015 15:05:03 +0530
+Message-ID: <CADMH9KBinadwV00-kok4d4qQWLxFgmss0Auw8xKJh3u+H5uorQ@mail.gmail.com>
+From: Aravind Babu <aravind.nizam79@gmail.com>
+To: meta-ti@yoctoproject.org
+Subject: How to build Local PC kernel using Local Pc Toolchain with Yocto
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,191 +56,51 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2015 02:11:45 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_388_1009343691.1424743898208"
+X-List-Received-Date: Tue, 24 Feb 2015 09:35:06 -0000
+Content-Type: multipart/alternative; boundary=001a113de272c08b69050fd23ba4
 
-------=_Part_388_1009343691.1424743898208
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a113de272c08b69050fd23ba4
+Content-Type: text/plain; charset=UTF-8
 
-<html>
-<head>
-<title>
-Status for 02/23/15
-</title>
-</head>
-<body>
+Hi ,
 
-<h2>Status for 02/23/15</h2>
+I am new to Yocto build system & I am currently using Ycto (Poky
+distrbution) in my project to build u-boot, kernel and file system.
 
-<h2>BUILD_ID: build-2015-02-23_21-02-03</h2>
+I am working on *AM437x GP EVM board*. and I am using
+*ti-sdk-am437x-evm-07.01.00.00*
 
-<h2>Clean Build: false</h2>
+I am able to build kernel and file system using Yocto but these are
+different versions which I don't want to build,  and there are building
+based on versions  specified in .bb files.
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
+but I want to use my local PC *Tool chain* and my local PC* Kernel-3.12 *in
+Yocto build but with my local tool chain path and local PC kernel I am not
+able to build
 
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=red>FAILED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
+can you please provide the procedure to export local Toolchain path & build
+the local Pc kernel3.12
 
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
+Thanks
+Aravind
 
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.11"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
+--001a113de272c08b69050fd23ba4
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-</body>
-</html>
+<div dir=3D"ltr"><div>Hi ,</div><div><br></div><div>I am new to Yocto build=
+ system &amp;=C2=A0I am currently using Ycto (Poky distrbution) in my proje=
+ct to build u-boot, kernel and file system.</div><div><br></div><div>I am w=
+orking on <strong>AM437x GP EVM board</strong>. and I am using <strong>ti-s=
+dk-am437x-evm-07.01.00.00</strong>=C2=A0=C2=A0</div><div><br></div><div>I a=
+m able to build kernel and file system using Yocto but these are different =
+versions which I don&#39;t want to build,=C2=A0 and there are building base=
+d on versions=C2=A0=C2=A0specified in .bb files.</div><div><br></div><div>b=
+ut I want to use my local PC <strong>Tool chain</strong> and my local PC<st=
+rong> Kernel-3.12 </strong>in Yocto build=C2=A0but with my local tool chain=
+ path and local PC kernel I am not able to build </div><div><br></div><div>=
+can you please provide the procedure to export local Toolchain path &amp; b=
+uild the local Pc kernel3.12</div><div><br></div><div>Thanks </div><div>Ara=
+vind<br></div></div>
 
-
-------=_Part_388_1009343691.1424743898208--
+--001a113de272c08b69050fd23ba4--
