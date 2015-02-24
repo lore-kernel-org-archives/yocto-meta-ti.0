@@ -1,26 +1,27 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 71A1AE00477; Tue, 24 Feb 2015 13:10:23 -0800 (PST)
+	id E2694E0076F; Tue, 24 Feb 2015 13:11:40 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Level: *
+X-Spam-Status: No, score=1.6 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
+	*  2.5 TO_NO_BRKTS_PCNT To: misformatted + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6C229E0074C
-	for <meta-ti@yoctoproject.org>; Tue, 24 Feb 2015 13:10:20 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 89E7BE0074C
+	for <meta-ti@yoctoproject.org>; Tue, 24 Feb 2015 13:11:39 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 6132D529D9; Tue, 24 Feb 2015 21:10:20 +0000 (UTC)
+	id 2D8ED52A43; Tue, 24 Feb 2015 21:11:39 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150224211020.6132D529D9@arago-project.org>
-Date: Tue, 24 Feb 2015 21:10:20 +0000 (UTC)
+Message-Id: <20150224211139.2D8ED52A43@arago-project.org>
+Date: Tue, 24 Feb 2015 21:11:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : srio-lld: Add recipe for srio peripheral low level driver
+Subject: Karthik Ramanan : dspdce-fw: Updated dspdce firmware for IPC 3.30.03.14
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,111 +34,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2015 21:10:23 -0000
+X-List-Received-Date: Tue, 24 Feb 2015 21:11:41 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 81317592f1fdf969ccc2b35d4d3cd26378be3d91
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=81317592f1fdf969ccc2b35d4d3cd26378be3d91
+Branch: master
+Commit: 04d062fd4d3f3e457c2a60decaed09f616c0343c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=04d062fd4d3f3e457c2a60decaed09f616c0343c
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Feb 11 04:56:52 2015 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Mon Feb 23 19:21:58 2015 +0000
 
-srio-lld: Add recipe for srio peripheral low level driver
+dspdce-fw: Updated dspdce firmware for IPC 3.30.03.14
 
-- Provides user space low level driver for srio peripheral
-- Devices supported k2h & k2k
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/srio-lld/srio-lld-test_git.bb |   27 +++++++++++++++++++++++++++
- recipes-bsp/srio-lld/srio-lld.inc         |   16 ++++++++++++++++
- recipes-bsp/srio-lld/srio-lld_git.bb      |   19 +++++++++++++++++++
- 3 files changed, 62 insertions(+), 0 deletions(-)
+ ...ce-fw_1.00.00.04.bb => dspdce-fw_1.00.00.05.bb} |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/srio-lld/srio-lld-test_git.bb b/recipes-bsp/srio-lld/srio-lld-test_git.bb
-new file mode 100644
-index 0000000..7cf254e
---- /dev/null
-+++ b/recipes-bsp/srio-lld/srio-lld-test_git.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "TI SRIO peripheral low level driver unit test and example binaries"
-+COMPATIBLE_MACHINE = "keystone"
-+DEPENDS="common-csl-ip rm-lld cppi-lld qmss-lld srio-lld cmem"
-+
-+include srio-lld.inc
-+
-+CHOICELIST = "yes no"
-+
-+do_compile () {
-+#   Now build the lld in the updated directory
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake clean DEVICE="$device" SRIO_SRC_DIR=${S}
-+		for choice in ${CHOICELIST}
-+		do
-+			oe_runmake tests DEVICE="$device" SRIO_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
-+			oe_runmake examples DEVICE="$device" SRIO_SRC_DIR=${S} USEDYNAMIC_LIB="$choice"
-+		done
-+	done
-+}
-+
-+do_install () {
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake installbin DEVICE="$device" SRIO_SRC_DIR=${S} INSTALL_BIN_BASE_DIR=${D}${bindir}
-+	done
-+}
-diff --git a/recipes-bsp/srio-lld/srio-lld.inc b/recipes-bsp/srio-lld/srio-lld.inc
-new file mode 100644
-index 0000000..1ae2128
---- /dev/null
-+++ b/recipes-bsp/srio-lld/srio-lld.inc
-@@ -0,0 +1,16 @@
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/srio/srio_drv.h;beginline=1;endline=41;md5=469096088e072d883ff7eef301b34093"
-+
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/srio-lld.git;destsuffix=git/ti/drv/srio;protocol=git;branch=${BRANCH}"
-+
-+# commit ID corresponding to DEV.SRIO_LLD.02.00.00.11
-+SRCREV = "2d0efea281222055b3b828c79e57102edaae9db7"
-+PV = "02.00.00.11"
-+
-+DEVICELIST = "k2h k2k"
-+
-+BASEDIR = "${WORKDIR}/git"
-+S = "${BASEDIR}/ti/drv/srio"
-+
-+EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
-diff --git a/recipes-bsp/srio-lld/srio-lld_git.bb b/recipes-bsp/srio-lld/srio-lld_git.bb
-new file mode 100644
-index 0000000..9ff845b
---- /dev/null
-+++ b/recipes-bsp/srio-lld/srio-lld_git.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "TI SRIO peripheral low level driver"
-+COMPATIBLE_MACHINE = "keystone"
-+
-+DEPENDS="common-csl-ip rm-lld cppi-lld"
-+
-+include srio-lld.inc
-+
-+do_compile () {
-+#   Now build the lld
-+	oe_runmake clean
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake lib DEVICE="${device}"
-+	done
-+}
-+
-+do_install () {
-+	oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
-+}
+diff --git a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb b/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb
+similarity index 64%
+rename from recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb
+rename to recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb
+index d8d5b01..777c221 100644
+--- a/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.04.bb
++++ b/recipes-bsp/dspdce-fw/dspdce-fw_1.00.00.05.bb
+@@ -1,16 +1,16 @@
+ DESCRIPTION = "Firmware for DSP for an example application called copycodectest"
+ LICENSE = "TI-TSPA"
+-LIC_FILES_CHKSUM = "file://DSPDCE-${PV}-Manifest.doc;md5=b8feda5a3ed8197d05993c0d0ff5590e"
++LIC_FILES_CHKSUM = "file://DSPDCE-${PV}-Manifest.doc;md5=386d1802eefc2fcf00ab01a5b4556277"
+ 
+ COMPATIBLE_MACHINE = "dra7xx-evm"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00_00_04/exports/dspdce-${MACHINE}-1.00.00.04.tar.gz;protocol=ftp"
++SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/dspdce/1_00_00_05/exports/dspdce-${MACHINE}-1.00.00.05.tar.gz;protocol=ftp"
+ 
+ S = "${WORKDIR}/dspdce-${MACHINE}-${PV}"
+ 
+-SRC_URI[md5sum] = "72722b12e90c26a85f7f1b56d749cad0"
+-SRC_URI[sha256sum] = "64057db41dbee5a992db88129a9154f27c67cfbba8efdc0f09b7de38df4d58eb"
++SRC_URI[md5sum] = "4f3d5c6ef088019aa4804eaaedc8e949"
++SRC_URI[sha256sum] = "8d99c4f149613448a6d72c62a18cc7445c63c687b786658da1762c4e1c03a6a0"
+ 
+ TARGET = "dra7-dsp1-fw.xe66"
+ 
 
 
