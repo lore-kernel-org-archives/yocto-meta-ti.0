@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 70FBFE00828; Tue, 24 Feb 2015 13:10:23 -0800 (PST)
+	id 71A1AE00477; Tue, 24 Feb 2015 13:10:23 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6C184E00477
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6C229E0074C
 	for <meta-ti@yoctoproject.org>; Tue, 24 Feb 2015 13:10:20 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5954152A43; Tue, 24 Feb 2015 21:10:20 +0000 (UTC)
+	id 6132D529D9; Tue, 24 Feb 2015 21:10:20 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150224211020.5954152A43@arago-project.org>
+Message-Id: <20150224211020.6132D529D9@arago-project.org>
 Date: Tue, 24 Feb 2015 21:10:20 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : srio-lld: Add recipe for srio peripheral low level driver
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 24 Feb 2015 21:10:23 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 22b8d340af9493c2ab2eece65919dace2e2010aa
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=22b8d340af9493c2ab2eece65919dace2e2010aa
+Branch: daisy
+Commit: 81317592f1fdf969ccc2b35d4d3cd26378be3d91
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=81317592f1fdf969ccc2b35d4d3cd26378be3d91
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Wed Feb 11 04:56:52 2015 +0000
