@@ -1,42 +1,38 @@
-Return-Path: <denys@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 83BA8E00750; Tue, 24 Feb 2015 18:27:12 -0800 (PST)
+	id 7855DE003AB; Wed, 25 Feb 2015 08:54:14 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 965EAE00477
-	for <meta-ti@yoctoproject.org>; Tue, 24 Feb 2015 18:27:09 -0800 (PST)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86C87E002F9
+	for <meta-ti@yoctoproject.org>; Wed, 25 Feb 2015 08:54:12 -0800 (PST)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1P2R9jr017091
-	for <meta-ti@yoctoproject.org>; Tue, 24 Feb 2015 20:27:09 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1P2R7OT031753
-	for <meta-ti@yoctoproject.org>; Tue, 24 Feb 2015 20:27:08 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 24 Feb 2015 20:27:07 -0600
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1PGsALL032479
+	for <meta-ti@yoctoproject.org>; Wed, 25 Feb 2015 10:54:10 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1PGs9ax022865
+	for <meta-ti@yoctoproject.org>; Wed, 25 Feb 2015 10:54:09 -0600
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 25 Feb 2015 10:54:09 -0600
+Received: from udb0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t1P2R7hh005248	for <meta-ti@yoctoproject.org>; Tue, 24 Feb 2015 20:27:07
-	-0600
-Date: Tue, 24 Feb 2015 21:27:07 -0500
-From: Denys Dmytriyenko <denys@ti.com>
+	t1PGs9Qf013339;	Wed, 25 Feb 2015 10:54:09 -0600
+From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1098550895.393.1424831227452.JavaMail.jenkins@puget>
+Date: Wed, 25 Feb 2015 11:54:04 -0500
+Message-ID: <1424883244-22883-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-02-24_21-00-58
+Subject: [PATCH v4] ti-cgt6x: Add verion 8.0.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,191 +45,130 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2015 02:27:12 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_392_737827639.1424831227449"
+X-List-Received-Date: Wed, 25 Feb 2015 16:54:14 -0000
+Content-Type: text/plain
 
-------=_Part_392_737827639.1424831227449
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+* Supports native and nativesdk classes as well as target.
 
-<html>
-<head>
-<title>
-Status for 02/24/15
-</title>
-</head>
-<body>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+ recipes-ti/devtools/ti-cgt6x_8.0.0.bb |  106 +++++++++++++++++++++++++++++++++
+ 1 file changed, 106 insertions(+)
+ create mode 100644 recipes-ti/devtools/ti-cgt6x_8.0.0.bb
 
-<h2>Status for 02/24/15</h2>
-
-<h2>BUILD_ID: build-2015-02-24_21-02-03</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=red>FAILED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=red>FAILED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2014.11"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="true"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+diff --git a/recipes-ti/devtools/ti-cgt6x_8.0.0.bb b/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
+new file mode 100644
+index 0000000..f005569
+--- /dev/null
++++ b/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
+@@ -0,0 +1,106 @@
++DESCRIPTION = "TI DSP Code Generation Tools"
++HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
++LICENSE = "TI TSPA with portions under Thai Open Source Software Center & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & Public Domain & other similar"
++
++LIC_FILES_CHKSUM = "file://ti-cgt-c6000_${PV}/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
++LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-c6x/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
++
++PE = "1"
++
++require ../includes/ti-unpack.inc
++
++COMPATIBLE_HOST_class-target = "arm.*-linux"
++
++# For now we only have hardfp version for target class
++python __anonymous() {
++    c = bb.data.getVar("CLASSOVERRIDE", d, 1)
++
++    if c == "class-target":
++        tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
++        if not tunes:
++            return
++        pkgn = bb.data.getVar("PN", d, 1)
++        pkgv = bb.data.getVar("PV", d, 1)
++        if "callconvention-hard" not in tunes:
++            bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
++            raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
++}
++
++
++BINFILE = "ti_cgt_c6000_${PV}_linux_installer_x86.bin"
++BINFILE_NAME = "cgt6x_x86_installer"
++TI_BIN_UNPK_ARGS = "--prefix ${S}"
++TI_BIN_UNPK_CMDS = ""
++
++BINFILE_class-target = "ti_cgt_c6000_${PV}_armlinuxa8hf_busybox_installer.sh"
++BINFILE_NAME_class-target = "cgt6x_arm_installer"
++
++SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C6000/Production/${PV}/${BINFILE};name=${BINFILE_NAME}"
++
++SRC_URI[cgt6x_x86_installer.md5sum] = "ff83845672090bf0a669bba7b0cadf56"
++SRC_URI[cgt6x_x86_installer.sha256sum] = "297f77a00b211b3c4afa23afe7319e98b2400b5d2eb0f8c8cfe3ef7d7aa4d709"
++
++SRC_URI[cgt6x_arm_installer.md5sum] = "13961e5a1da4c310ea8c8707ab981fff"
++SRC_URI[cgt6x_arm_installer.sha256sum] = "cb24ae05baffbd44d6dedba68743be09fd883e04403e069c437c486533d8fffb"
++
++do_install() {
++    install -d ${D}${bindir}
++    for binfile in ${S}/ti-cgt-c6000_${PV}/bin/*; do
++        install -m 755 ${binfile} ${D}${bindir}
++    done
++
++    install -d ${D}${datadir}/ti/cgt-c6x/include
++    for includefile in ${S}/ti-cgt-c6000_${PV}/include/*; do
++        install -m 644 ${includefile} ${D}${datadir}/ti/cgt-c6x/include
++    done
++
++    install -d ${D}${datadir}/ti/cgt-c6x/lib
++    for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.a; do
++        install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
++    done
++
++    for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.cmd; do
++        install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
++    done
++
++    for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.lib; do
++        install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
++    done
++
++    install -d ${D}${datadir}/ti/cgt-c6x/lib/src
++    for srcfile in ${S}/ti-cgt-c6000_${PV}/lib/src/*; do
++        install -m 644 ${srcfile} ${D}${datadir}/ti/cgt-c6x/lib/src
++    done
++
++    install -d ${D}${datadir}/man/man1
++    for manfile in ${S}/ti-cgt-c6000_${PV}/man/man1/*; do
++        install -m 644 ${manfile} ${D}${datadir}/man/man1
++    done
++
++    install -d ${D}${datadir}/doc/ti/cgt-c6x
++    for docfile in ${S}/ti-cgt-c6000_${PV}/*.txt; do
++        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
++    done
++
++    for docfile in ${S}/ti-cgt-c6000_${PV}/*.htm; do
++        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
++    done
++
++    for docfile in ${S}/ti-cgt-c6000_${PV}/*.spdx; do
++        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
++    done
++
++    for docfile in ${S}/ti-cgt-c6000_${PV}/doc/*; do
++        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
++    done
++
++}
++
++do_install_class-target() {
++    ${WORKDIR}/${BINFILE} --prefix ${D}
++}
++
++FILES_${PN} += "${datadir}/ti/*"
++
++BBCLASSEXTEND = "native nativesdk"
++
+-- 
+1.7.9.5
 
 
-------=_Part_392_737827639.1424831227449--
