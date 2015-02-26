@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 38191E008CD; Thu, 26 Feb 2015 08:57:25 -0800 (PST)
+	id 4C58DE008CE; Thu, 26 Feb 2015 09:02:42 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,34 +8,34 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+	*      [192.94.94.40 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BA0EFE0077E
-	for <meta-ti@yoctoproject.org>; Thu, 26 Feb 2015 08:57:22 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1QGvLwO018427
-	for <meta-ti@yoctoproject.org>; Thu, 26 Feb 2015 10:57:21 -0600
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1QGvJmA026554
-	for <meta-ti@yoctoproject.org>; Thu, 26 Feb 2015 10:57:20 -0600
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 26 Feb 2015 10:57:19 -0600
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 14822E0088A
+	for <meta-ti@yoctoproject.org>; Thu, 26 Feb 2015 09:02:38 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1QH2beT004007
+	for <meta-ti@yoctoproject.org>; Thu, 26 Feb 2015 11:02:37 -0600
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1QH2aUX031789
+	for <meta-ti@yoctoproject.org>; Thu, 26 Feb 2015 11:02:36 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Thu, 26 Feb 2015 11:02:35 -0600
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1QGvJ05002797;
-	Thu, 26 Feb 2015 10:57:19 -0600
-Date: Thu, 26 Feb 2015 11:57:18 -0500
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1QH2Zv6005500;
+	Thu, 26 Feb 2015 11:02:35 -0600
+Date: Thu, 26 Feb 2015 12:02:34 -0500
 From: Denys Dmytriyenko <denys@ti.com>
-To: Sam Nelson <sam.nelson@ti.com>
-Message-ID: <20150226165718.GC6052@edge>
-References: <1424817827-5585-1-git-send-email-sam.nelson@ti.com>
+To: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <20150226170234.GE6052@edge>
+References: <1424883244-22883-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <1424817827-5585-1-git-send-email-sam.nelson@ti.com>
+In-Reply-To: <1424883244-22883-1-git-send-email-j-stiffler@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v2] netapi: Add recipe for NETAPI module
+Subject: Re: [PATCH v4] ti-cgt6x: Add verion 8.0.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,149 +48,135 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2015 16:57:25 -0000
+X-List-Received-Date: Thu, 26 Feb 2015 17:02:42 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Tue, Feb 24, 2015 at 05:43:47PM -0500, Sam Nelson wrote:
-> - Provide TI user space network library and test code
-> - Supports k2h, k2k, k2l & k2e devices
-> 
-> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-> 
-> ---
-> Changes from previous patch
-> - Modifed recipes to use oe_runmake for the applications as well
-> ---
-> ---
->  recipes-ti/netapi/netapi-test_git.bb |   49 ++++++++++++++++++++++++++++++++++
->  recipes-ti/netapi/netapi.inc         |   16 +++++++++++
->  recipes-ti/netapi/netapi_git.bb      |   34 +++++++++++++++++++++++
->  3 files changed, 99 insertions(+)
->  create mode 100644 recipes-ti/netapi/netapi-test_git.bb
->  create mode 100644 recipes-ti/netapi/netapi.inc
->  create mode 100644 recipes-ti/netapi/netapi_git.bb
-> 
-> diff --git a/recipes-ti/netapi/netapi-test_git.bb b/recipes-ti/netapi/netapi-test_git.bb
-> new file mode 100644
-> index 0000000..9d49c29
-> --- /dev/null
-> +++ b/recipes-ti/netapi/netapi-test_git.bb
-> @@ -0,0 +1,49 @@
-> +DESCRIPTION = "Provides test and application binaries using NETAPI module"
-> +COMPATIBLE_MACHINE = "keystone"
-> +DEPENDS = "netapi ipsecmgr"
-> +
-> +include netapi.inc
-> +
-> +EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
-> +
-> +do_compile () {
-> +#   Build the netapi binaries
-> +	for device in ${DEVICELIST}
-> +	do
-> +		for choice in ${CHOICELIST}
-> +		do
-> +			oe_runmake -f makefile_armv7 tests NETAPI_SRC_DIR=${S} NETAPI_INC_DIR=${BASEDIR} \
-> +				USEDYNAMIC_LIB="$choice" DEVICE="$device"
-> +		done
-> +
-> +#     Now build the netapi appplications
-> +		cd ${S}/applications/ipsec_offload/ipsecmgr/build
-> +		oe_runmake clean NETAPI_SRC_DIR=${S} DEVICE="$device"
-> +		oe_runmake app NETAPI_SRC_DIR=${S} DEVICE="$device"
-> +
-> +		cd ${S}/applications/ipsec_offload/config-app/build
-> +		oe_runmake clean DEVICE="$device"
-> +		oe_runmake app DEVICE="$device"
-> +		cd ${S}
-> +	done
-> +}
-> +
-> +do_install () {
-> +	for device in ${DEVICELIST}
-> +	do
-> +		oe_runmake -f makefile_armv7 installbin INSTALL_INC_BASE_DIR=${D}/${includedir} \
-> +			INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} \
-> +			SYSCONFDIR=${D}${sysconfdir} DEVICE="$device"
-> +
-> +		cd ${S}/applications/ipsec_offload/ipsecmgr/build
-> +		oe_runmake install \
-> +			INSTALL_BIN_BASE_DIR=${D}${bindir} SYSCONFDIR=${D}${sysconfdir} \
-> +			DEVICE="$device"
-> +
-> +		cd ${S}/applications/ipsec_offload/config-app/build
-> +		oe_runmake install \
-> +			INSTALL_BIN_BASE_DIR=${D}${bindir} SYSCONFDIR=${D}${sysconfdir} \
-> +			DEVICE="$device"
-> +		cd ${S}
-> +	done
-> +}
-> diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
-> new file mode 100644
-> index 0000000..b8d481a
-> --- /dev/null
-> +++ b/recipes-ti/netapi/netapi.inc
-> @@ -0,0 +1,16 @@
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=f2b4f162358b1ffaf3f2307287ca2074"
-> +
-> +BRANCH = "master"
-> +SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANCH}"
-> +
-> +# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.04"
-> +SRCREV= "dc08af268200908d3d8a456ac852c65c53d2fd12"
-> +PV = "01.01.00.04"
-> +
-> +DEVICELIST = "k2h k2k k2l k2e"
-> +
-> +CHOICELIST = "yes no"
-> +
-> +BASEDIR = "${WORKDIR}/git"
-> +S = "${BASEDIR}/ti/runtime/netapi"
-> diff --git a/recipes-ti/netapi/netapi_git.bb b/recipes-ti/netapi/netapi_git.bb
-> new file mode 100644
-> index 0000000..d568cd0
-> --- /dev/null
-> +++ b/recipes-ti/netapi/netapi_git.bb
-> @@ -0,0 +1,34 @@
-> +DESCRIPTION = "Provides NETAPI module: TI user space network library"
-> +
-> +COMPATIBLE_MACHINE = "keystone"
-> +
-> +DEPENDS = "common-csl-ip rm-lld qmss-lld cppi-lld sa-lld hplib pktlib nwal-lld"
-> +
-> +NAME = "netapi"
+On Wed, Feb 25, 2015 at 11:54:04AM -0500, Jacob Stiffler wrote:
+> * Supports native and nativesdk classes as well as target.
 
-Sorry, didn't notice it at first - what is this NAME variable for?
+This is fine, but it would be nice if you could provide a short changelog for 
+the patch revisions next time - see how others are doing it after the --- line
 
 
-> +include netapi.inc
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+> ---
+>  recipes-ti/devtools/ti-cgt6x_8.0.0.bb |  106 +++++++++++++++++++++++++++++++++
+>  1 file changed, 106 insertions(+)
+>  create mode 100644 recipes-ti/devtools/ti-cgt6x_8.0.0.bb
+> 
+> diff --git a/recipes-ti/devtools/ti-cgt6x_8.0.0.bb b/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
+> new file mode 100644
+> index 0000000..f005569
+> --- /dev/null
+> +++ b/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
+> @@ -0,0 +1,106 @@
+> +DESCRIPTION = "TI DSP Code Generation Tools"
+> +HOMEPAGE = "https://www-a.ti.com/downloads/sds_support/TICodegenerationTools/download.htm"
+> +LICENSE = "TI TSPA with portions under Thai Open Source Software Center & BSD-3-Clause & BSL-1.0 & Hewlett-Packard & AFL-3.0 & MIT & BSD-2-Clause & Public Domain & other similar"
 > +
-> +EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
+> +LIC_FILES_CHKSUM = "file://ti-cgt-c6000_${PV}/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
+> +LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-c6x/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
 > +
-> +do_compile () {
-> +#   Now build the netapi
-> +	for device in ${DEVICELIST}
-> +	do
-> +		for choice in ${CHOICELIST}
-> +		do
-> +			oe_runmake  clean NETAPI_SRC_DIR=${S} NETAPI_INC_DIR=${BASEDIR} \
-> +				USEDYNAMIC_LIB="$choice" DEVICE="$device"
-> +			oe_runmake lib NETAPI_SRC_DIR=${S} NETAPI_INC_DIR=${BASEDIR} \
-> +				USEDYNAMIC_LIB="$choice" DEVICE="$device"
-> +		done
-> +	done
+> +PE = "1"
+> +
+> +require ../includes/ti-unpack.inc
+> +
+> +COMPATIBLE_HOST_class-target = "arm.*-linux"
+> +
+> +# For now we only have hardfp version for target class
+> +python __anonymous() {
+> +    c = bb.data.getVar("CLASSOVERRIDE", d, 1)
+> +
+> +    if c == "class-target":
+> +        tunes = bb.data.getVar("TUNE_FEATURES", d, 1)
+> +        if not tunes:
+> +            return
+> +        pkgn = bb.data.getVar("PN", d, 1)
+> +        pkgv = bb.data.getVar("PV", d, 1)
+> +        if "callconvention-hard" not in tunes:
+> +            bb.warn("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
+> +            raise bb.parse.SkipPackage("%s-%s ONLY supports hardfp mode for now" % (pkgn, pkgv))
 > +}
 > +
-> +do_install () {
-> +	for device in ${DEVICELIST}
-> +	do
-> +		oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} \
-> +			INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} \
-> +			SYSCONFDIR=${D}${sysconfdir} DEVICE="$device"
-> +	done
+> +
+> +BINFILE = "ti_cgt_c6000_${PV}_linux_installer_x86.bin"
+> +BINFILE_NAME = "cgt6x_x86_installer"
+> +TI_BIN_UNPK_ARGS = "--prefix ${S}"
+> +TI_BIN_UNPK_CMDS = ""
+> +
+> +BINFILE_class-target = "ti_cgt_c6000_${PV}_armlinuxa8hf_busybox_installer.sh"
+> +BINFILE_NAME_class-target = "cgt6x_arm_installer"
+> +
+> +SRC_URI = "http://software-dl.ti.com/codegen/esd/cgt_public_sw/C6000/Production/${PV}/${BINFILE};name=${BINFILE_NAME}"
+> +
+> +SRC_URI[cgt6x_x86_installer.md5sum] = "ff83845672090bf0a669bba7b0cadf56"
+> +SRC_URI[cgt6x_x86_installer.sha256sum] = "297f77a00b211b3c4afa23afe7319e98b2400b5d2eb0f8c8cfe3ef7d7aa4d709"
+> +
+> +SRC_URI[cgt6x_arm_installer.md5sum] = "13961e5a1da4c310ea8c8707ab981fff"
+> +SRC_URI[cgt6x_arm_installer.sha256sum] = "cb24ae05baffbd44d6dedba68743be09fd883e04403e069c437c486533d8fffb"
+> +
+> +do_install() {
+> +    install -d ${D}${bindir}
+> +    for binfile in ${S}/ti-cgt-c6000_${PV}/bin/*; do
+> +        install -m 755 ${binfile} ${D}${bindir}
+> +    done
+> +
+> +    install -d ${D}${datadir}/ti/cgt-c6x/include
+> +    for includefile in ${S}/ti-cgt-c6000_${PV}/include/*; do
+> +        install -m 644 ${includefile} ${D}${datadir}/ti/cgt-c6x/include
+> +    done
+> +
+> +    install -d ${D}${datadir}/ti/cgt-c6x/lib
+> +    for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.a; do
+> +        install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
+> +    done
+> +
+> +    for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.cmd; do
+> +        install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
+> +    done
+> +
+> +    for libfile in ${S}/ti-cgt-c6000_${PV}/lib/*.lib; do
+> +        install -m 644 ${libfile} ${D}${datadir}/ti/cgt-c6x/lib
+> +    done
+> +
+> +    install -d ${D}${datadir}/ti/cgt-c6x/lib/src
+> +    for srcfile in ${S}/ti-cgt-c6000_${PV}/lib/src/*; do
+> +        install -m 644 ${srcfile} ${D}${datadir}/ti/cgt-c6x/lib/src
+> +    done
+> +
+> +    install -d ${D}${datadir}/man/man1
+> +    for manfile in ${S}/ti-cgt-c6000_${PV}/man/man1/*; do
+> +        install -m 644 ${manfile} ${D}${datadir}/man/man1
+> +    done
+> +
+> +    install -d ${D}${datadir}/doc/ti/cgt-c6x
+> +    for docfile in ${S}/ti-cgt-c6000_${PV}/*.txt; do
+> +        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+> +    done
+> +
+> +    for docfile in ${S}/ti-cgt-c6000_${PV}/*.htm; do
+> +        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+> +    done
+> +
+> +    for docfile in ${S}/ti-cgt-c6000_${PV}/*.spdx; do
+> +        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+> +    done
+> +
+> +    for docfile in ${S}/ti-cgt-c6000_${PV}/doc/*; do
+> +        install -m 644 ${docfile} ${D}${datadir}/doc/ti/cgt-c6x
+> +    done
+> +
 > +}
+> +
+> +do_install_class-target() {
+> +    ${WORKDIR}/${BINFILE} --prefix ${D}
+> +}
+> +
+> +FILES_${PN} += "${datadir}/ti/*"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> +
 > -- 
 > 1.7.9.5
 > 
