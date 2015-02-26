@@ -1,26 +1,41 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F2702E00769; Thu, 26 Feb 2015 11:05:02 -0800 (PST)
+	id 3DA9AE00779; Thu, 26 Feb 2015 12:21:40 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B604DE00769
-	for <meta-ti@yoctoproject.org>; Thu, 26 Feb 2015 11:05:00 -0800 (PST)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 75881529E0; Thu, 26 Feb 2015 19:05:00 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20150226190500.75881529E0@arago-project.org>
-Date: Thu, 26 Feb 2015 19:05:00 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : netapi: Add recipe for NETAPI module
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C9133E0074C
+	for <meta-ti@yoctoproject.org>; Thu, 26 Feb 2015 12:21:37 -0800 (PST)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t1QKLbGT031189;
+	Thu, 26 Feb 2015 14:21:37 -0600
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1QKLZqP023771;
+	Thu, 26 Feb 2015 14:21:35 -0600
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Thu, 26 Feb 2015 14:21:35 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t1QKLZgf004773;
+	Thu, 26 Feb 2015 14:21:35 -0600
+Date: Thu, 26 Feb 2015 15:21:35 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Aravind Babu <aravind.nizam79@gmail.com>
+Message-ID: <20150226202134.GH6052@edge>
+References: <CADMH9KBinadwV00-kok4d4qQWLxFgmss0Auw8xKJh3u+H5uorQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CADMH9KBinadwV00-kok4d4qQWLxFgmss0Auw8xKJh3u+H5uorQ@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: How to build Local PC kernel using Local Pc Toolchain with Yocto
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,146 +48,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2015 19:05:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 26 Feb 2015 20:21:40 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: daisy
-Commit: 40cd328669c1acdc3ed5d3d66e243c9dcf010328
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=40cd328669c1acdc3ed5d3d66e243c9dcf010328
+On Tue, Feb 24, 2015 at 03:05:03PM +0530, Aravind Babu wrote:
+> Hi ,
+> 
+> I am new to Yocto build system & I am currently using Ycto (Poky
+> distrbution) in my project to build u-boot, kernel and file system.
+> 
+> I am working on *AM437x GP EVM board*. and I am using
+> *ti-sdk-am437x-evm-07.01.00.00*
+> 
+> I am able to build kernel and file system using Yocto but these are
+> different versions which I don't want to build,  and there are building
+> based on versions  specified in .bb files.
+> 
+> but I want to use my local PC *Tool chain* and my local PC* Kernel-3.12 *in
+> Yocto build but with my local tool chain path and local PC kernel I am not
+> able to build
+> 
+> can you please provide the procedure to export local Toolchain path & build
+> the local Pc kernel3.12
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Feb 27 00:08:25 2015 +0000
+I'm not sure you'll get complete am437 support from 3.12 kernel... You can 
+start with these instructions and adopt to your needs:
 
-netapi: Add recipe for NETAPI module
+http://arago-project.org/wiki/index.php/Setting_Up_Build_Environment
 
-- Provide TI user space network library and test code
-- Supports k2h, k2k, k2l & k2e devices
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-ti/netapi/netapi-test_git.bb |   49 ++++++++++++++++++++++++++++++++++
- recipes-ti/netapi/netapi.inc         |   16 +++++++++++
- recipes-ti/netapi/netapi_git.bb      |   32 ++++++++++++++++++++++
- 3 files changed, 97 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-ti/netapi/netapi-test_git.bb b/recipes-ti/netapi/netapi-test_git.bb
-new file mode 100644
-index 0000000..9d49c29
---- /dev/null
-+++ b/recipes-ti/netapi/netapi-test_git.bb
-@@ -0,0 +1,49 @@
-+DESCRIPTION = "Provides test and application binaries using NETAPI module"
-+COMPATIBLE_MACHINE = "keystone"
-+DEPENDS = "netapi ipsecmgr"
-+
-+include netapi.inc
-+
-+EXTRA_OEMAKE = "PDK_INSTALL_PATH=${STAGING_INCDIR}"
-+
-+do_compile () {
-+#   Build the netapi binaries
-+	for device in ${DEVICELIST}
-+	do
-+		for choice in ${CHOICELIST}
-+		do
-+			oe_runmake -f makefile_armv7 tests NETAPI_SRC_DIR=${S} NETAPI_INC_DIR=${BASEDIR} \
-+				USEDYNAMIC_LIB="$choice" DEVICE="$device"
-+		done
-+
-+#     Now build the netapi appplications
-+		cd ${S}/applications/ipsec_offload/ipsecmgr/build
-+		oe_runmake clean NETAPI_SRC_DIR=${S} DEVICE="$device"
-+		oe_runmake app NETAPI_SRC_DIR=${S} DEVICE="$device"
-+
-+		cd ${S}/applications/ipsec_offload/config-app/build
-+		oe_runmake clean DEVICE="$device"
-+		oe_runmake app DEVICE="$device"
-+		cd ${S}
-+	done
-+}
-+
-+do_install () {
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake -f makefile_armv7 installbin INSTALL_INC_BASE_DIR=${D}/${includedir} \
-+			INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} \
-+			SYSCONFDIR=${D}${sysconfdir} DEVICE="$device"
-+
-+		cd ${S}/applications/ipsec_offload/ipsecmgr/build
-+		oe_runmake install \
-+			INSTALL_BIN_BASE_DIR=${D}${bindir} SYSCONFDIR=${D}${sysconfdir} \
-+			DEVICE="$device"
-+
-+		cd ${S}/applications/ipsec_offload/config-app/build
-+		oe_runmake install \
-+			INSTALL_BIN_BASE_DIR=${D}${bindir} SYSCONFDIR=${D}${sysconfdir} \
-+			DEVICE="$device"
-+		cd ${S}
-+	done
-+}
-diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
-new file mode 100644
-index 0000000..b8d481a
---- /dev/null
-+++ b/recipes-ti/netapi/netapi.inc
-@@ -0,0 +1,16 @@
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=f2b4f162358b1ffaf3f2307287ca2074"
-+
-+BRANCH = "master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANCH}"
-+
-+# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.04"
-+SRCREV= "dc08af268200908d3d8a456ac852c65c53d2fd12"
-+PV = "01.01.00.04"
-+
-+DEVICELIST = "k2h k2k k2l k2e"
-+
-+CHOICELIST = "yes no"
-+
-+BASEDIR = "${WORKDIR}/git"
-+S = "${BASEDIR}/ti/runtime/netapi"
-diff --git a/recipes-ti/netapi/netapi_git.bb b/recipes-ti/netapi/netapi_git.bb
-new file mode 100644
-index 0000000..d88e95a
---- /dev/null
-+++ b/recipes-ti/netapi/netapi_git.bb
-@@ -0,0 +1,32 @@
-+DESCRIPTION = "Provides NETAPI module: TI user space network library"
-+
-+COMPATIBLE_MACHINE = "keystone"
-+
-+DEPENDS = "common-csl-ip rm-lld qmss-lld cppi-lld sa-lld hplib pktlib nwal-lld"
-+
-+include netapi.inc
-+
-+EXTRA_OEMAKE = "-f makefile_armv7 PDK_INSTALL_PATH=${STAGING_INCDIR}"
-+
-+do_compile () {
-+#   Now build the netapi
-+	for device in ${DEVICELIST}
-+	do
-+		for choice in ${CHOICELIST}
-+		do
-+			oe_runmake  clean NETAPI_SRC_DIR=${S} NETAPI_INC_DIR=${BASEDIR} \
-+				USEDYNAMIC_LIB="$choice" DEVICE="$device"
-+			oe_runmake lib NETAPI_SRC_DIR=${S} NETAPI_INC_DIR=${BASEDIR} \
-+				USEDYNAMIC_LIB="$choice" DEVICE="$device"
-+		done
-+	done
-+}
-+
-+do_install () {
-+	for device in ${DEVICELIST}
-+	do
-+		oe_runmake install INSTALL_INC_BASE_DIR=${D}${includedir} \
-+			INSTALL_LIB_BASE_DIR=${D}${libdir} INSTALL_BIN_BASE_DIR=${D}${bindir} \
-+			SYSCONFDIR=${D}${sysconfdir} DEVICE="$device"
-+	done
-+}
-
+-- 
+Denys
 
