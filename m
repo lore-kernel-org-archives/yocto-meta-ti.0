@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B9895E00404; Fri, 27 Feb 2015 14:30:15 -0800 (PST)
+	id 45EA3E00837; Fri, 27 Feb 2015 14:30:17 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53CE2E00404
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 52822E00321
 	for <meta-ti@yoctoproject.org>; Fri, 27 Feb 2015 14:30:11 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 25F0B529E0; Fri, 27 Feb 2015 22:30:11 +0000 (UTC)
+	id 0585F529D9; Fri, 27 Feb 2015 22:30:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150227223011.25F0B529E0@arago-project.org>
+Message-Id: <20150227223011.0585F529D9@arago-project.org>
 Date: Fri, 27 Feb 2015 22:30:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-keystone: add 3.13 version
+Subject: Denys Dmytriyenko : kernel .inc: fix the breakage due to S!= B separation in master
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,73 +33,121 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2015 22:30:15 -0000
+X-List-Received-Date: Fri, 27 Feb 2015 22:30:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 76cb99ae62d49de951a88e874e18dba6c0abfb4c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=76cb99ae62d49de951a88e874e18dba6c0abfb4c
+Commit: 23d3e10a0ff7ea95d649dc22dc34b3e4010d8d77
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=23d3e10a0ff7ea95d649dc22dc34b3e4010d8d77
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Sat Feb 28 04:20:38 2015 +0000
+Date:   Sat Feb 28 01:49:37 2015 +0000
 
-linux-keystone: add 3.13 version
+kernel .inc: fix the breakage due to S!=B separation in master
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-keystone-3.13/defconfig |    1 +
- recipes-kernel/linux/linux-keystone_3.13.bb        |   34 ++++++++++++++++++++
- 2 files changed, 35 insertions(+), 0 deletions(-)
+ recipes-kernel/linux/multi-kernel.inc    |    7 +++----
+ recipes-kernel/linux/setup-defconfig.inc |   20 ++++++++++----------
+ 2 files changed, 13 insertions(+), 14 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-keystone-3.13/defconfig b/recipes-kernel/linux/linux-keystone-3.13/defconfig
-new file mode 100644
-index 0000000..bcfc482
---- /dev/null
-+++ b/recipes-kernel/linux/linux-keystone-3.13/defconfig
-@@ -0,0 +1 @@
-+use-kernel-config=keystone_defconfig
-diff --git a/recipes-kernel/linux/linux-keystone_3.13.bb b/recipes-kernel/linux/linux-keystone_3.13.bb
-new file mode 100644
-index 0000000..13ce73e
---- /dev/null
-+++ b/recipes-kernel/linux/linux-keystone_3.13.bb
-@@ -0,0 +1,34 @@
-+SECTION = "kernel"
-+DESCRIPTION = "Linux kernel for TI Keystone devices"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-+
-+COMPATIBLE_MACHINE = "keystone"
-+
-+inherit kernel
-+
-+require recipes-kernel/linux/linux-dtb.inc
-+require recipes-kernel/linux/setup-defconfig.inc
-+
-+# Look in the generic major.minor directory for files
-+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.13:"
-+
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
-+
-+# Only k2hk DTB is available in this version
-+KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
-+
-+KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
-+
-+SRCREV = "11a8eaee39b68e6047f07382c251786b40bef165"
-+PV = "3.13.0"
-+
-+BRANCH = "v3.13/master"
-+SRC_URI = "git://git.ti.com/keystone-linux/linux.git;protocol=git;branch=${BRANCH}\
-+           file://defconfig\
-+           "
-+
-+S = "${WORKDIR}/git"
-+
-+RDEPENDS_kernel-base = ""
+diff --git a/recipes-kernel/linux/multi-kernel.inc b/recipes-kernel/linux/multi-kernel.inc
+index b3358f9..5d21d4e 100644
+--- a/recipes-kernel/linux/multi-kernel.inc
++++ b/recipes-kernel/linux/multi-kernel.inc
+@@ -54,7 +54,7 @@ do_compileconfigs () {
+ 
+         for configname in ${WORKDIR}/configs/* ; do
+             # Copy in alternative config
+-            cd ${S}
++            cd ${B}
+             cp $configname ${WORKDIR}/defconfig
+ 
+             # Build and Install this alternative kernel
+@@ -96,7 +96,7 @@ do_compileconfigs () {
+ 
+         # Restore the regular 'defconfig'
+         cp ${WORKDIR}/defconfig.save ${WORKDIR}/defconfig
+-        cd ${S}
++        cd ${B}
+         do_configure
+     fi
+ }
+@@ -106,8 +106,7 @@ do_deploy_append () {
+     install -d ${DEPLOYDIR}
+ 
+     # Drop the regular defconfig along side the others for consistency
+-    cd ${S}
+-    cp .config ${DEPLOYDIR}/config-${PV}-${PR}-${MACHINE}.config
++    cp ${B}/.config ${DEPLOYDIR}/config-${PV}-${PR}-${MACHINE}.config
+ 
+     # add symlink
+     cd ${DEPLOYDIR}
+diff --git a/recipes-kernel/linux/setup-defconfig.inc b/recipes-kernel/linux/setup-defconfig.inc
+index 2c169cd..2b67bfc 100644
+--- a/recipes-kernel/linux/setup-defconfig.inc
++++ b/recipes-kernel/linux/setup-defconfig.inc
+@@ -11,27 +11,27 @@ do_configure() {
+     # Always copy the defconfig file to .config to keep consistency
+     # between the case where there is a real config and the in kernel
+     # tree config
+-    cp ${WORKDIR}/defconfig ${S}/.config
++    cp ${WORKDIR}/defconfig ${B}/.config
+ 
+     echo ${KERNEL_LOCALVERSION} > ${B}/.scmversion
+     echo ${KERNEL_LOCALVERSION} > ${S}/.scmversion
+ 
+     # First, check if pointing to a combined config with config fragments
+-    config=`cat ${S}/.config | grep use-combined-config | cut -d= -f2`
++    config=`cat ${B}/.config | grep use-combined-config | cut -d= -f2`
+     if [ -n "$config" ]
+     then
+-        cp $config ${S}/.config
++        cp ${S}/$config ${B}/.config
+     fi
+ 
+     # Second, extract any config fragments listed in the defconfig
+-    config=`cat ${S}/.config | grep config-fragment | cut -d= -f2`
++    config=`cat ${B}/.config | grep config-fragment | cut -d= -f2`
+     if [ -n "$config" ]
+     then
+         configfrags=""
+         for f in $config
+         do
+             # Check if the config fragment is available
+-            if [ ! -e "$f" ]
++            if [ ! -e "${S}/$f" ]
+             then
+                 echo "Could not find kernel config fragment $f"
+                 exit 1
+@@ -43,12 +43,12 @@ do_configure() {
+     fi
+ 
+     # Third, check if pointing to a known in kernel defconfig
+-    config=`cat ${S}/.config | grep use-kernel-config | cut -d= -f2`
++    config=`cat ${B}/.config | grep use-kernel-config | cut -d= -f2`
+     if [ -n "$config" ]
+     then
+-        oe_runmake $config
++        oe_runmake -C ${S} O=${B} $config
+     else
+-        yes '' | oe_runmake oldconfig
++        yes '' | oe_runmake -C ${S} O=${B} oldconfig
+     fi
+ 
+     # Fourth, handle config fragments specified in the recipe
+@@ -70,7 +70,7 @@ do_configure() {
+     # Now that all the fragments are located merge them
+     if [ -n "${KERNEL_CONFIG_FRAGMENTS}" -o -n "$configfrags" ]
+     then
+-        ( cd ${WORKDIR} && ${S}/scripts/kconfig/merge_config.sh -m -r -O ${S} ${S}/.config $configfrags ${KERNEL_CONFIG_FRAGMENTS} 1>&2 )
+-        yes '' | oe_runmake oldconfig
++        ( cd ${WORKDIR} && ${S}/scripts/kconfig/merge_config.sh -m -r -O ${B} ${B}/.config $configfrags ${KERNEL_CONFIG_FRAGMENTS} 1>&2 )
++        yes '' | oe_runmake -C ${S} O=${B} oldconfig
+     fi
+ }
 
 
