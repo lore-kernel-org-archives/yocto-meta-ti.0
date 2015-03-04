@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BF0B2E008DC; Wed,  4 Mar 2015 10:30:41 -0800 (PST)
+	id C16FBE008D4; Wed,  4 Mar 2015 10:30:41 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5EEC9E00718
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5DBD2E006EF
 	for <meta-ti@yoctoproject.org>; Wed,  4 Mar 2015 10:30:36 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id ECFE952A52; Wed,  4 Mar 2015 18:30:35 +0000 (UTC)
+	id C599D52A29; Wed,  4 Mar 2015 18:30:35 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150304183035.ECFE952A52@arago-project.org>
+Message-Id: <20150304183035.C599D52A29@arago-project.org>
 Date: Wed,  4 Mar 2015 18:30:35 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with platform, connectivity, a&d fixes, am57 dtb
+Subject: Jacob Stiffler : sitara-linux-ti-staging: Update commit to fix touchscreen issues on AM335x SK
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,49 +38,39 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: f9eb73dcb7a9d604560f0c591451c481acee056c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f9eb73dcb7a9d604560f0c591451c481acee056c
+Commit: 0d25bbfab6692cd6b78536b3a0de25dd453d885d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0d25bbfab6692cd6b78536b3a0de25dd453d885d
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Mar  4 22:29:07 2015 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Wed Mar  4 17:55:20 2015 +0000
 
-linux-ti-staging: update with platform, connectivity, a&d fixes, am57 dtb
+sitara-linux-ti-staging: Update commit to fix touchscreen issues on AM335x SK
 
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ .../linux/sitara-linux-ti-staging_3.14.bb          |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index 31afb70..65bd2dc 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -30,8 +30,8 @@ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335
- KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb am437x-sk-evm.dtb"
- KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
- KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
--KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb dra7-evm-lcd7.dtb dra7-evm-lcd10.dtb dra72-evm.dtb dra72-evm-lcd7.dtb dra72-evm-lcd10.dtb am57xx-beagle-x15.dtb"
--KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb"
-+KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb dra7-evm-lcd7.dtb dra7-evm-lcd10.dtb dra72-evm.dtb dra72-evm-lcd7.dtb dra72-evm-lcd10.dtb am57xx-beagle-x15.dtb am57xx-evm.dtb"
-+KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-evm.dtb"
- KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
- KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
- KERNEL_DEVICETREE_am37x-evm = "omap3-evm-37xx.dtb"
-@@ -45,11 +45,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
+index 8cd2c3f..31c1223 100644
+--- a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
+@@ -35,11 +35,11 @@ S = "${WORKDIR}/git"
  
- BRANCH = "ti-linux-3.14.y"
+ BRANCH = "sitara-ti-linux-3.14.y"
  
--SRCREV = "f8af15dd6a374fc7ccbcb72f3c2b682055c71f0e"
-+SRCREV = "f5f577498058620d0735ae96030521b49c0f358f"
- PV = "3.14.34"
+-SRCREV = "99b50bfb0f3fb0e43de31a6735989d31660b0835"
++SRCREV = "2489c022b2932432606f897741a71b712e6dbe77"
+ PV = "3.14.26"
  
  # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+-MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "h+gitr${SRCPV}"
  PR = "${MACHINE_KERNEL_PR}"
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+ MULTI_CONFIG_BASE_SUFFIX = ""
 
 
