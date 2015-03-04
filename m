@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2551DE008CC; Wed,  4 Mar 2015 10:30:43 -0800 (PST)
+	id 26182E00754; Wed,  4 Mar 2015 10:30:43 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8F51E008CF
-	for <meta-ti@yoctoproject.org>; Wed,  4 Mar 2015 10:30:39 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6017FE00754
+	for <meta-ti@yoctoproject.org>; Wed,  4 Mar 2015 10:30:36 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DFEBE52A8C; Wed,  4 Mar 2015 18:30:36 +0000 (UTC)
+	id 24EC252A62; Wed,  4 Mar 2015 18:30:36 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150304183036.DFEBE52A8C@arago-project.org>
+Message-Id: <20150304183036.24EC252A62@arago-project.org>
 Date: Wed,  4 Mar 2015 18:30:36 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : ti-ipc: Update to new version of ipc 3.35.00.05
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 04 Mar 2015 18:30:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 08d7652c32b801242ab5d98ae2705eeecfbf907b
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=08d7652c32b801242ab5d98ae2705eeecfbf907b
+Branch: master
+Commit: 9991516e5da2eff7cdd9cb76c619793156abbebd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=9991516e5da2eff7cdd9cb76c619793156abbebd
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Thu Mar  5 00:13:04 2015 +0000
