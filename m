@@ -1,38 +1,26 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5585DE00754; Wed,  4 Mar 2015 10:13:18 -0800 (PST)
+	id BF0B2E008DC; Wed,  4 Mar 2015 10:30:41 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EF0C2E006EF
-	for <meta-ti@yoctoproject.org>; Wed,  4 Mar 2015 10:13:09 -0800 (PST)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t24ID9em023769
-	for <meta-ti@yoctoproject.org>; Wed, 4 Mar 2015 12:13:09 -0600
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t24ID7KE024942
-	for <meta-ti@yoctoproject.org>; Wed, 4 Mar 2015 12:13:08 -0600
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 4 Mar 2015 12:13:07 -0600
-Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t24ID7i1003744;	Wed, 4 Mar 2015 12:13:07 -0600
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Wed, 4 Mar 2015 13:13:04 -0500
-Message-ID: <1425492784-18788-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH] ti-ipc: Update to new version of ipc 3.35.00.05
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5EEC9E00718
+	for <meta-ti@yoctoproject.org>; Wed,  4 Mar 2015 10:30:36 -0800 (PST)
+Received: by arago-project.org (Postfix, from userid 107)
+	id ECFE952A52; Wed,  4 Mar 2015 18:30:35 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20150304183035.ECFE952A52@arago-project.org>
+Date: Wed,  4 Mar 2015 18:30:35 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : linux-ti-staging: update with platform, connectivity, a&d fixes, am57 dtb
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,69 +33,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2015 18:13:18 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 04 Mar 2015 18:30:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
-- Update license checksum
-- Add support for k2hk, k2l & k2e evm.
+Module: meta-ti
+Branch: master
+Commit: f9eb73dcb7a9d604560f0c591451c481acee056c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f9eb73dcb7a9d604560f0c591451c481acee056c
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Wed Mar  4 22:29:07 2015 +0000
+
+linux-ti-staging: update with platform, connectivity, a&d fixes, am57 dtb
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-ti/ipc/ti-ipc_git.bb |   18 +++++++++++-------
- 1 file changed, 11 insertions(+), 7 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
-index 10ae431..6f46295 100644
---- a/recipes-ti/ipc/ti-ipc_git.bb
-+++ b/recipes-ti/ipc/ti-ipc_git.bb
-@@ -2,17 +2,18 @@ DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Mul
- HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
+ recipes-kernel/linux/linux-ti-staging_3.14.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 31afb70..65bd2dc 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -30,8 +30,8 @@ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335
+ KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am43x-epos-evm-hdmi.dtb am437x-gp-evm.dtb am437x-gp-evm-hdmi.dtb am437x-sk-evm.dtb"
+ KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
+ KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
+-KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb dra7-evm-lcd7.dtb dra7-evm-lcd10.dtb dra72-evm.dtb dra72-evm-lcd7.dtb dra72-evm-lcd10.dtb am57xx-beagle-x15.dtb"
+-KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb"
++KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb dra7-evm-lcd7.dtb dra7-evm-lcd10.dtb dra72-evm.dtb dra72-evm-lcd7.dtb dra72-evm-lcd10.dtb am57xx-beagle-x15.dtb am57xx-evm.dtb"
++KERNEL_DEVICETREE_am57xx-evm = "am57xx-beagle-x15.dtb am57xx-evm.dtb"
+ KERNEL_DEVICETREE_omap3 = "omap3-beagle.dtb omap3-beagle-xm.dtb omap3-evm.dtb omap3-evm-37xx.dtb am3517-evm.dtb"
+ KERNEL_DEVICETREE_am3517-evm = "am3517-evm.dtb"
+ KERNEL_DEVICETREE_am37x-evm = "omap3-evm-37xx.dtb"
+@@ -45,11 +45,11 @@ S = "${WORKDIR}/git"
  
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=abd112f156e5eb9b0f3e202e48747f9a"
-+LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
+ BRANCH = "ti-linux-3.14.y"
  
- DEPENDS += "virtual/kernel"
+-SRCREV = "f8af15dd6a374fc7ccbcb72f3c2b682055c71f0e"
++SRCREV = "f5f577498058620d0735ae96030521b49c0f358f"
+ PV = "3.14.34"
  
--PV = "3.30.03.14"
-+PV = "3.35.00.05"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
  
--BRANCH = "3.30"
-+BRANCH = "master"
- SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
-            file://tiipclad-daemon.sh \
-            "
--SRCREV = "ff0ca0e3943ab67be47673bfc77f40c53daac078"
-+# Commit corresponds to 3.35.00.05
-+SRCREV = "ce35c999f5c3368e387740a38aef3358290579b3"
- 
- S = "${WORKDIR}/git"
- 
-@@ -21,12 +22,16 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- PLATFORM = "UNKNOWN"
- PLATFORM_omap5-evm = "OMAP54XX"
- PLATFORM_dra7xx = "DRA7XX"
--PLATFORM_keystone = "TCI6638"
-+PLATFORM_k2hk-evm = "TCI6638"
-+PLATFORM_k2l-evm = "TCI6630"
-+PLATFORM_k2e-evm = "66AK2E"
- 
- DAEMON = "UNKNOWN"
- DAEMON_omap5-evm = "lad_omap54xx_smp"
- DAEMON_dra7xx = "lad_dra7xx"
--DAEMON_keystone = "lad_tci6638"
-+DAEMON_k2hk-evm = "lad_tci6638"
-+DAEMON_k2l-evm = "lad_tci6630"
-+DAEMON_k2e-evm = "lad_66ak2e"
- 
- inherit autotools pkgconfig update-rc.d
- 
-@@ -56,4 +61,3 @@ FILES_${PN}-test = " \
-     ${bindir}/MessageQApp \
-     ${bindir}/MessageQMulti \
-     ${bindir}/ping_rpmsg"
--
--- 
-1.7.9.5
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
