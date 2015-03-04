@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 192D3E008DD; Wed,  4 Mar 2015 10:30:43 -0800 (PST)
+	id 2551DE008CC; Wed,  4 Mar 2015 10:30:43 -0800 (PST)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6147CE0076F
-	for <meta-ti@yoctoproject.org>; Wed,  4 Mar 2015 10:30:37 -0800 (PST)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E8F51E008CF
+	for <meta-ti@yoctoproject.org>; Wed,  4 Mar 2015 10:30:39 -0800 (PST)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BA16552A77; Wed,  4 Mar 2015 18:30:36 +0000 (UTC)
+	id DFEBE52A8C; Wed,  4 Mar 2015 18:30:36 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150304183036.BA16552A77@arago-project.org>
+Message-Id: <20150304183036.DFEBE52A8C@arago-project.org>
 Date: Wed,  4 Mar 2015 18:30:36 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : sitara-linux-ti-staging: Update commit to fix touchscreen issues on AM335x SK
+Subject: Sam Nelson : ti-ipc: Update to new version of ipc 3.35.00.05
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,39 +38,75 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: 7c235c9b663f55c095f46e246a106cd7f281eef6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7c235c9b663f55c095f46e246a106cd7f281eef6
+Commit: 08d7652c32b801242ab5d98ae2705eeecfbf907b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=08d7652c32b801242ab5d98ae2705eeecfbf907b
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed Mar  4 17:55:20 2015 +0000
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Thu Mar  5 00:13:04 2015 +0000
 
-sitara-linux-ti-staging: Update commit to fix touchscreen issues on AM335x SK
+ti-ipc: Update to new version of ipc 3.35.00.05
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+- Update license checksum
+- Add support for k2hk, k2l & k2e evm.
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../linux/sitara-linux-ti-staging_3.14.bb          |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-ti/ipc/ti-ipc_git.bb |   18 +++++++++++-------
+ 1 files changed, 11 insertions(+), 7 deletions(-)
 
-diff --git a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
-index 8cd2c3f..31c1223 100644
---- a/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/sitara-linux-ti-staging_3.14.bb
-@@ -35,11 +35,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+index 10ae431..6f46295 100644
+--- a/recipes-ti/ipc/ti-ipc_git.bb
++++ b/recipes-ti/ipc/ti-ipc_git.bb
+@@ -2,17 +2,18 @@ DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Mul
+ HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
  
- BRANCH = "sitara-ti-linux-3.14.y"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=abd112f156e5eb9b0f3e202e48747f9a"
++LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
  
--SRCREV = "99b50bfb0f3fb0e43de31a6735989d31660b0835"
-+SRCREV = "2489c022b2932432606f897741a71b712e6dbe77"
- PV = "3.14.26"
+ DEPENDS += "virtual/kernel"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "h+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
+-PV = "3.30.03.14"
++PV = "3.35.00.05"
  
- MULTI_CONFIG_BASE_SUFFIX = ""
+-BRANCH = "3.30"
++BRANCH = "master"
+ SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
+            file://tiipclad-daemon.sh \
+            "
+-SRCREV = "ff0ca0e3943ab67be47673bfc77f40c53daac078"
++# Commit corresponds to 3.35.00.05
++SRCREV = "ce35c999f5c3368e387740a38aef3358290579b3"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -21,12 +22,16 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ PLATFORM = "UNKNOWN"
+ PLATFORM_omap5-evm = "OMAP54XX"
+ PLATFORM_dra7xx = "DRA7XX"
+-PLATFORM_keystone = "TCI6638"
++PLATFORM_k2hk-evm = "TCI6638"
++PLATFORM_k2l-evm = "TCI6630"
++PLATFORM_k2e-evm = "66AK2E"
+ 
+ DAEMON = "UNKNOWN"
+ DAEMON_omap5-evm = "lad_omap54xx_smp"
+ DAEMON_dra7xx = "lad_dra7xx"
+-DAEMON_keystone = "lad_tci6638"
++DAEMON_k2hk-evm = "lad_tci6638"
++DAEMON_k2l-evm = "lad_tci6630"
++DAEMON_k2e-evm = "lad_66ak2e"
+ 
+ inherit autotools pkgconfig update-rc.d
+ 
+@@ -56,4 +61,3 @@ FILES_${PN}-test = " \
+     ${bindir}/MessageQApp \
+     ${bindir}/MessageQMulti \
+     ${bindir}/ping_rpmsg"
+-
 
 
