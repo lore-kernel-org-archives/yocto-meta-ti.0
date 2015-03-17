@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 98CFEE00712; Sun, 15 Mar 2015 18:09:20 -0700 (PDT)
+	id A5D4EE008F6; Mon, 16 Mar 2015 19:47:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,29 +14,29 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DBE5EE0030A
-	for <meta-ti@yoctoproject.org>; Sun, 15 Mar 2015 18:09:14 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 263B4E008EA
+	for <meta-ti@yoctoproject.org>; Mon, 16 Mar 2015 19:47:37 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t2G19DDH014137
-	for <meta-ti@yoctoproject.org>; Sun, 15 Mar 2015 20:09:13 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t2G19Cxn029766
-	for <meta-ti@yoctoproject.org>; Sun, 15 Mar 2015 20:09:12 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Sun, 15 Mar 2015 20:09:12 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t2H2lb2s005318
+	for <meta-ti@yoctoproject.org>; Mon, 16 Mar 2015 21:47:37 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t2H2laXY011051
+	for <meta-ti@yoctoproject.org>; Mon, 16 Mar 2015 21:47:36 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 16 Mar 2015 21:47:35 -0500
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t2G19Cxl029518	for <meta-ti@yoctoproject.org>; Sun, 15 Mar 2015 20:09:12
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t2H2lZT9007460	for <meta-ti@yoctoproject.org>; Mon, 16 Mar 2015 21:47:35
 	-0500
-Date: Sun, 15 Mar 2015 21:09:12 -0400
+Date: Mon, 16 Mar 2015 22:47:35 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1357432919.15.1426468152129.JavaMail.jenkins@puget>
+Message-ID: <1951174917.23.1426560455346.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-03-15_21-00-51
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-03-16_21-00-51
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,24 +49,24 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Mar 2015 01:09:20 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_14_456742071.1426468152127"
+X-List-Received-Date: Tue, 17 Mar 2015 02:47:39 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_22_349959029.1426560455344"
 
-------=_Part_14_456742071.1426468152127
+------=_Part_22_349959029.1426560455344
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 03/15/15
+Status for 03/16/15
 </title>
 </head>
 <body>
 
-<h2>Status for 03/15/15</h2>
+<h2>Status for 03/16/15</h2>
 
-<h2>BUILD_ID: build-2015-03-15_21-01-55</h2>
+<h2>BUILD_ID: build-2015-03-16_21-01-56</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -235,4 +235,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_14_456742071.1426468152127--
+------=_Part_22_349959029.1426560455344--
