@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9E387E0091A; Tue, 17 Mar 2015 18:04:15 -0700 (PDT)
+	id 9F123E008EA; Tue, 17 Mar 2015 18:04:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2A03EE0090E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 28CA9E008EA
 	for <meta-ti@yoctoproject.org>; Tue, 17 Mar 2015 18:04:13 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7D46652A77; Wed, 18 Mar 2015 01:04:12 +0000 (UTC)
+	id A0B78529A9; Wed, 18 Mar 2015 01:04:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150318010412.7D46652A77@arago-project.org>
+Message-Id: <20150318010412.A0B78529A9@arago-project.org>
 Date: Wed, 18 Mar 2015 01:04:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : multiprocmgr: Add virutal/kernel dependency.
@@ -37,9 +37,9 @@ X-List-Received-Date: Wed, 18 Mar 2015 01:04:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 7e6f1b75b3ff905a0e2a2a1efcf77786d8b19259
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7e6f1b75b3ff905a0e2a2a1efcf77786d8b19259
+Branch: master
+Commit: c69c6e137e90f5326d617ba71dd00b4727d21a4a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c69c6e137e90f5326d617ba71dd00b4727d21a4a
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Wed Mar 18 00:32:52 2015 +0000
