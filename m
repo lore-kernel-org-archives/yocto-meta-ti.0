@@ -1,38 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 14D7BE008EA; Tue, 17 Mar 2015 11:33:02 -0700 (PDT)
+	id 9E387E0091A; Tue, 17 Mar 2015 18:04:15 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C007AE00753
-	for <meta-ti@yoctoproject.org>; Tue, 17 Mar 2015 11:32:57 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t2HIWuYR011821
-	for <meta-ti@yoctoproject.org>; Tue, 17 Mar 2015 13:32:56 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t2HIWtI3027588
-	for <meta-ti@yoctoproject.org>; Tue, 17 Mar 2015 13:32:55 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 17 Mar 2015 13:32:55 -0500
-Received: from udb0866934.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t2HIWsWD022303;	Tue, 17 Mar 2015 13:32:54 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 17 Mar 2015 14:32:52 -0400
-Message-ID: <1426617172-12121-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH] multiprocmgr: Add virutal/kernel dependency.
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2A03EE0090E
+	for <meta-ti@yoctoproject.org>; Tue, 17 Mar 2015 18:04:13 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 7D46652A77; Wed, 18 Mar 2015 01:04:12 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20150318010412.7D46652A77@arago-project.org>
+Date: Wed, 18 Mar 2015 01:04:12 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Jacob Stiffler : multiprocmgr: Add virutal/kernel dependency.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,15 +33,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2015 18:33:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 18 Mar 2015 01:04:15 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: daisy
+Commit: 7e6f1b75b3ff905a0e2a2a1efcf77786d8b19259
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7e6f1b75b3ff905a0e2a2a1efcf77786d8b19259
+
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Wed Mar 18 00:32:52 2015 +0000
+
+multiprocmgr: Add virutal/kernel dependency.
 
 * "linux/remoteproc_user.h" is included by ./src/daemon/mpmdlif.c
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
+
  recipes-ti/multiprocmgr/multiprocmgr_git.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
 diff --git a/recipes-ti/multiprocmgr/multiprocmgr_git.bb b/recipes-ti/multiprocmgr/multiprocmgr_git.bb
 index e1c4f2f..c2ef8fa 100644
@@ -68,7 +69,5 @@ index e1c4f2f..c2ef8fa 100644
  RDEPENDS_${PN} = "syslog-ng"
  
  
--- 
-1.7.9.5
 
 
