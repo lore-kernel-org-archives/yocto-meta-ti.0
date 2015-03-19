@@ -1,26 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E2160E00953; Thu, 19 Mar 2015 14:30:42 -0700 (PDT)
+	id 6FDA7E00832; Thu, 19 Mar 2015 14:43:30 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E962E00832
-	for <meta-ti@yoctoproject.org>; Thu, 19 Mar 2015 14:30:39 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id D9ABB529F8; Thu, 19 Mar 2015 21:30:38 +0000 (UTC)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [206.46.173.25 listed in list.dnswl.org]
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9F005E00777
+	for <meta-ti@yoctoproject.org>; Thu, 19 Mar 2015 14:43:26 -0700 (PDT)
+Received: from gandalf.denix.org ([108.18.33.236]) by vms173025.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NLH000BQB016ZI0@vms173025.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 19 Mar 2015 16:43:14 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=OqT4EJ7o c=1 sm=1 tr=0	a=SSUdfGXV8XCffJJ8+gLrig==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=emO1SXQWCLwA:10
+	a=sozttTNsAAAA:8	a=2bxdwivVn60XpDIYN8YA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id B758520190;	Thu,
+	19 Mar 2015 17:43:13 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20150319213038.D9ABB529F8@arago-project.org>
-Date: Thu, 19 Mar 2015 21:30:38 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : linux-keystone: update to new kernel version 3.10.61
+Date: Thu, 19 Mar 2015 17:43:13 -0400
+Message-id: <1426801393-9417-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] omap-a15, dra7xx: add mmip feature to entire SOC family
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,87 +45,46 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2015 21:30:43 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 19 Mar 2015 21:43:30 -0000
 
-Module: meta-ti
-Branch: daisy
-Commit: 6c23743f0fb18284b622288c2d39e5c74495ff9f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6c23743f0fb18284b622288c2d39e5c74495ff9f
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Mar 20 02:26:01 2015 +0000
-
-linux-keystone: update to new kernel version 3.10.61
-
-- Branch names changed to release version specific branch
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ conf/machine/include/dra7xx.inc   | 2 +-
+ conf/machine/include/omap-a15.inc | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
- recipes-kernel/linux/linux-keystone-rt_3.10.bb |   10 +++++-----
- recipes-kernel/linux/linux-keystone_3.10.bb    |   10 +++++-----
- 2 files changed, 10 insertions(+), 10 deletions(-)
-
-diff --git a/recipes-kernel/linux/linux-keystone-rt_3.10.bb b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-index 860d421..5560ad2 100644
---- a/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-+++ b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-@@ -10,7 +10,7 @@ inherit kernel
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
+diff --git a/conf/machine/include/dra7xx.inc b/conf/machine/include/dra7xx.inc
+index a7c8782..857e1b3 100644
+--- a/conf/machine/include/dra7xx.inc
++++ b/conf/machine/include/dra7xx.inc
+@@ -1,4 +1,4 @@
+ require conf/machine/include/omap-a15.inc
+ SOC_FAMILY_append = ":dra7xx"
  
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
+-MACHINE_FEATURES += "pci mmip"
++MACHINE_FEATURES += "pci"
+diff --git a/conf/machine/include/omap-a15.inc b/conf/machine/include/omap-a15.inc
+index 3654c3a..41a2f19 100644
+--- a/conf/machine/include/omap-a15.inc
++++ b/conf/machine/include/omap-a15.inc
+@@ -5,7 +5,7 @@ DEFAULTTUNE ?= "cortexa15thf-neon"
+ require conf/machine/include/tune-cortexa15.inc
  
- KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
-@@ -19,11 +19,11 @@ KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r6"
++MACHINE_KERNEL_PR = "r7"
  
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging"
+ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+@@ -31,4 +31,4 @@ GUI_MACHINE_CLASS = "smallscreen"
+ UBI_VOLNAME = "rootfs"
  
--#This commit corresponds to "K2_RT_LINUX_03.10.10_14.09_01"
--SRCREV = "2b53a7b58e95c2cf3426fe95203e7fc082bc56e9"
--PV = "3.10.10"
-+#This commit corresponds to "K2_RT_LINUX_03.10.61_15.02"
-+SRCREV = "e2e31a1d996d2ed8dd06dab1221e159033432b72"
-+PV = "3.10.61"
- 
--BRANCH = "master-rt"
-+BRANCH = "v3.10.61/master-rt"
- SRC_URI = "git://git.ti.com/keystone-linux/linux.git;protocol=git;branch=${BRANCH}\
-            file://defconfig\
-            "
-diff --git a/recipes-kernel/linux/linux-keystone_3.10.bb b/recipes-kernel/linux/linux-keystone_3.10.bb
-index 4475632..005aff4 100644
---- a/recipes-kernel/linux/linux-keystone_3.10.bb
-+++ b/recipes-kernel/linux/linux-keystone_3.10.bb
-@@ -10,7 +10,7 @@ inherit kernel
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
- 
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
-@@ -19,11 +19,11 @@ KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
- 
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
- 
--#This commit corresponds to "K2_LINUX_03.10.10_14.09_01"
--SRCREV = "a59abdfadb821f27cc43b16d3f641960ba143746"
--PV = "3.10.10"
-+#This commit corresponds to "K2_LINUX_03.10.61_15.02"
-+SRCREV = "a17b4c3fd6c93f908daf032786f90c0321296957"
-+PV = "3.10.61"
- 
--BRANCH = "master"
-+BRANCH = "v3.10.61/master"
- SRC_URI = "git://git.ti.com/keystone-linux/linux.git;protocol=git;branch=${BRANCH}\
-            file://defconfig\
-            "
+ # List common SoC features, may need to add touchscreen for specific machines
+-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx"
++MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip"
+-- 
+2.2.0
 
 
