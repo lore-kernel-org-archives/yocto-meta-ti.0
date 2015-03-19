@@ -1,38 +1,38 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 55400E00832; Thu, 19 Mar 2015 13:26:07 -0700 (PDT)
+	id 48B0AE00832; Thu, 19 Mar 2015 14:22:06 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 15741E00777
-	for <meta-ti@yoctoproject.org>; Thu, 19 Mar 2015 13:26:05 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t2JKQ4bF018190
-	for <meta-ti@yoctoproject.org>; Thu, 19 Mar 2015 15:26:04 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t2JKQ3l6003352
-	for <meta-ti@yoctoproject.org>; Thu, 19 Mar 2015 15:26:03 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 19 Mar 2015 15:26:03 -0500
-Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t2JKQ2ro031310;	Thu, 19 Mar 2015 15:26:03 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Thu, 19 Mar 2015 16:26:01 -0400
-Message-ID: <1426796761-10458-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH] linux-keystone: update to new kernel version 3.10.61
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [206.46.173.23 listed in list.dnswl.org]
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 106F6E00777
+	for <meta-ti@yoctoproject.org>; Thu, 19 Mar 2015 14:22:03 -0700 (PDT)
+Received: from gandalf.denix.org ([108.18.33.236]) by vms173023.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NLH000IQA02UKE0@vms173023.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Thu, 19 Mar 2015 16:21:39 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=A7bb5BSD c=1 sm=1 tr=0	a=SSUdfGXV8XCffJJ8+gLrig==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=emO1SXQWCLwA:10
+	a=sozttTNsAAAA:8	a=g1xrgIQGl6udWOza_KAA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id BD31B200EC;	Thu,
+	19 Mar 2015 17:21:38 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Thu, 19 Mar 2015 17:21:38 -0400
+Message-id: <1426800098-5875-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] linux-ti-staging: update with connectivity fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,76 +45,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2015 20:26:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 19 Mar 2015 21:22:06 -0000
 
-- Branch names changed to release version specific branch
+From: Denys Dmytriyenko <denys@ti.com>
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-kernel/linux/linux-keystone-rt_3.10.bb |   10 +++++-----
- recipes-kernel/linux/linux-keystone_3.10.bb    |   10 +++++-----
- 2 files changed, 10 insertions(+), 10 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_3.14.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-keystone-rt_3.10.bb b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-index 860d421..5560ad2 100644
---- a/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-+++ b/recipes-kernel/linux/linux-keystone-rt_3.10.bb
-@@ -10,7 +10,7 @@ inherit kernel
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 08f35ff..fae2a2f 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -45,11 +45,11 @@ S = "${WORKDIR}/git"
  
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
+ BRANCH = "ti-linux-3.14.y"
+ 
+-SRCREV = "f86844f9f0586940241e14e4b681c89498dacf2d"
++SRCREV = "5127b235b584ab300d510f6071464ed9ebd66e9a"
+ PV = "3.14.35"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
  PR = "${MACHINE_KERNEL_PR}"
  
- KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
-@@ -19,11 +19,11 @@ KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
- 
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
- 
--#This commit corresponds to "K2_RT_LINUX_03.10.10_14.09_01"
--SRCREV = "2b53a7b58e95c2cf3426fe95203e7fc082bc56e9"
--PV = "3.10.10"
-+#This commit corresponds to "K2_RT_LINUX_03.10.61_15.02"
-+SRCREV = "e2e31a1d996d2ed8dd06dab1221e159033432b72"
-+PV = "3.10.61"
- 
--BRANCH = "master-rt"
-+BRANCH = "v3.10.61/master-rt"
- SRC_URI = "git://git.ti.com/keystone-linux/linux.git;protocol=git;branch=${BRANCH}\
-            file://defconfig\
-            "
-diff --git a/recipes-kernel/linux/linux-keystone_3.10.bb b/recipes-kernel/linux/linux-keystone_3.10.bb
-index 4475632..005aff4 100644
---- a/recipes-kernel/linux/linux-keystone_3.10.bb
-+++ b/recipes-kernel/linux/linux-keystone_3.10.bb
-@@ -10,7 +10,7 @@ inherit kernel
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
- 
--MACHINE_KERNEL_PR_append = "c+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "d+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
-@@ -19,11 +19,11 @@ KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
- 
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
- 
--#This commit corresponds to "K2_LINUX_03.10.10_14.09_01"
--SRCREV = "a59abdfadb821f27cc43b16d3f641960ba143746"
--PV = "3.10.10"
-+#This commit corresponds to "K2_LINUX_03.10.61_15.02"
-+SRCREV = "a17b4c3fd6c93f908daf032786f90c0321296957"
-+PV = "3.10.61"
- 
--BRANCH = "master"
-+BRANCH = "v3.10.61/master"
- SRC_URI = "git://git.ti.com/keystone-linux/linux.git;protocol=git;branch=${BRANCH}\
-            file://defconfig\
-            "
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 -- 
-1.7.9.5
+2.2.0
 
 
