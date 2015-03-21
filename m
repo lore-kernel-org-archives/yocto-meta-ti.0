@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BFC9AE0091F; Fri, 20 Mar 2015 18:57:35 -0700 (PDT)
+	id C0B01E00839; Fri, 20 Mar 2015 18:57:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6FD8FE00839
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 71156E0090F
 	for <meta-ti@yoctoproject.org>; Fri, 20 Mar 2015 18:57:32 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id BF697529BD; Sat, 21 Mar 2015 01:57:31 +0000 (UTC)
+	id AA240529F8; Sat, 21 Mar 2015 01:57:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150321015731.BF697529BD@arago-project.org>
+Message-Id: <20150321015731.AA240529F8@arago-project.org>
 Date: Sat, 21 Mar 2015 01:57:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : ipumm-fw: dra7xx variant is reused for am57x MACHINE too
@@ -37,9 +37,9 @@ X-List-Received-Date: Sat, 21 Mar 2015 01:57:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 1b66b5a01c1d657c7603dd63110cfb21998dbc98
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1b66b5a01c1d657c7603dd63110cfb21998dbc98
+Branch: daisy
+Commit: 34729e54e3f9e16d6eb77f3d05f6f0fbbeb104fb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=34729e54e3f9e16d6eb77f3d05f6f0fbbeb104fb
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Sat Mar 21 04:17:49 2015 +0000
