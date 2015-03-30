@@ -1,53 +1,45 @@
-Return-Path: <whittenburg@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 6D059E00949; Sun, 29 Mar 2015 12:46:59 -0700 (PDT)
+	id B6947E0097D; Sun, 29 Mar 2015 18:08:29 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (whittenburg[at]gmail.com)
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.212.169 listed in list.dnswl.org]
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26FE1E0092E
-	for <meta-ti@yoctoproject.org>; Sun, 29 Mar 2015 12:46:55 -0700 (PDT)
-Received: by wibg7 with SMTP id g7so78952468wib.1
-	for <meta-ti@yoctoproject.org>; Sun, 29 Mar 2015 12:46:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:reply-to:date:message-id:subject:from:to:content-type;
-	bh=K4cPYAa83cHtVOQ4PqOslLs9eIr2DaNkAFNE2gLLoGI=;
-	b=iLYjgKJFN4Em+6lLkVZATpWblu34Lu6OJJcAeka5ux6Yv4un9xT/gW83gQo/1KQBj6
-	btREXPdpL9o+aO3aDdGjCngbdnfQiubbv31Ht5eAAbp3ZEdwvc7AWP8233tNpAJqAbLp
-	apJ3SevlJverUFBZNZZ9miqcvCyyc3B4tI1ztXUXc5XNDNfbYWlCTQ6JoacjbYF4rfXS
-	GpFTB/00CiUHIZ2URv+3YaBdfcYoFvvahKjHkmzPNnyfFQo3bdrwvLPHrXcuJetx2Yn/
-	kxe4XW4/1E2eZp32IcvBRFol4mfCtJg54Vt2jVKiAGMzi8kogn4f/yl9xuoo16vVrjUM
-	LAEQ==
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 63E4CE00930
+	for <meta-ti@yoctoproject.org>; Sun, 29 Mar 2015 18:08:23 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t2U18MHl022877
+	for <meta-ti@yoctoproject.org>; Sun, 29 Mar 2015 20:08:22 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t2U18Lml019725
+	for <meta-ti@yoctoproject.org>; Sun, 29 Mar 2015 20:08:21 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Sun, 29 Mar 2015 20:08:21 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t2U18LUC011794	for <meta-ti@yoctoproject.org>; Sun, 29 Mar 2015 20:08:21
+	-0500
+Date: Sun, 29 Mar 2015 21:08:21 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <246582333.93.1427677701297.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-X-Received: by 10.194.83.66 with SMTP id o2mr57080076wjy.55.1427658414454;
-	Sun, 29 Mar 2015 12:46:54 -0700 (PDT)
-Received: by 10.27.5.21 with HTTP; Sun, 29 Mar 2015 12:46:54 -0700 (PDT)
-Date: Sun, 29 Mar 2015 14:46:54 -0500
-Message-ID: <CABcw_OnRid8H9KYkK5tPCCG12Tzz-N0W3ZotpSa6FKBj68dXEA@mail.gmail.com>
-From: Chris Whittenburg <whittenburg@gmail.com>
-To: meta-ti@yoctoproject.org
-Subject: cmem-mod building problems
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-03-29_21-00-51
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
-Reply-To: whittenburg@gmail.com
 List-Id: Usage and development list for the meta-ti layer
 	<meta-ti.yoctoproject.org>
 List-Unsubscribe: <https://lists.yoctoproject.org/options/meta-ti>,
@@ -57,99 +49,190 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Mar 2015 19:46:59 -0000
-Content-Type: multipart/alternative; boundary=047d7bd6bbcaa77db4051272a0b4
+X-List-Received-Date: Mon, 30 Mar 2015 01:08:29 -0000
+Content-Type: multipart/mixed; boundary="----=_Part_92_5764464.1427677701296"
 
---047d7bd6bbcaa77db4051272a0b4
-Content-Type: text/plain; charset=UTF-8
+------=_Part_92_5764464.1427677701296
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-I'm using using dizzy on a Gumstix Overo, and I'm trying to build the cmem
-module recipe.  I'm guessing this is the preferred method versus the
-ti-linuxutils recipe.
+<html>
+<head>
+<title>
+Status for 03/29/15
+</title>
+</head>
+<body>
 
-BB_VERSION        = "1.24.0"
-BUILD_SYS         = "x86_64-linux"
-NATIVELSBSTRING   = "Ubuntu-12.04"
-TARGET_SYS        = "arm-poky-linux-gnueabi"
-MACHINE           = "overo"
-DISTRO            = "poky"
-DISTRO_VERSION    = "1.7.1"
-TUNE_FEATURES     = "arm armv7a vfp neon callconvention-hard cortexa8"
-TARGET_FPU        = "vfp-neon"
-meta
-meta-yocto        = "(nobranch):2a3805a666e14f0c995f7622fe0eecbb1fb48932"
-meta-gnome
-meta-oe
-meta-xfce
-meta-systemd
-meta-networking
-meta-multimedia
-meta-python       = "(nobranch):853dcfa0d618dc26bd27b3a1b49494b98d6eee97"
-meta-gumstix      = "(nobranch):40ac3593fab75020431651e79cfa3ef5926bd1a6"
-meta-gumstix-extras = "(nobranch):db157f15692eff0511b128e5c8241297e5582016"
-meta-ros          = "(nobranch):224b15a0b06dc2f3d7d54f855845b14a6c479c1d"
-meta-ti           = "master:b81014dbb5cc39fdfa66af87d18b72eb9eb3c701"
+<h2>Status for 03/29/15</h2>
 
-I get an error during compile which makes it look like it's not using the
-arm gcc compiler.  Any suggestions on what I'm doing wrong here?
+<h2>BUILD_ID: build-2015-03-29_21-01-57</h2>
 
-Early in the log, I see "CC=arm-poky-linux-gnueabi-gcc", but then later
-on...
+<h2>Clean Build: false</h2>
 
-|   CC [M]
- /home/chris/yocto/build/tmp/work/overo-poky-linux-gnueabi/cmem-mod/git-b+gitrAUTOINC+0d2fac7187/git/src/cmem/module/cmemk.o
-| cc1: error: unrecognized command line option '-mlittle-endian'
-| cc1: error: unrecognized command line option '-mno-thumb-interwork'
-| cc1: error: unrecognized command line option '-mfpu=vfp'
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
-The full log is here:
-http://pastebin.com/bHxGgQGe
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
 
-Thanks,
-Chris
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
 
---047d7bd6bbcaa77db4051272a0b4
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2014.11"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
 
-<div dir=3D"ltr"><br><div>I&#39;m using using dizzy on a Gumstix Overo, and=
- I&#39;m trying to build the cmem module recipe.=C2=A0 I&#39;m guessing thi=
-s is the preferred method versus the ti-linuxutils recipe.</div><div><br></=
-div><div><div>BB_VERSION =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;1.24.0&quot;<=
-/div><div>BUILD_SYS =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &quot;x86_64-linux&quot=
-;</div><div>NATIVELSBSTRING =C2=A0 =3D &quot;Ubuntu-12.04&quot;</div><div>T=
-ARGET_SYS =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;arm-poky-linux-gnueabi&quot;=
-</div><div>MACHINE =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &quot;overo&quot;=
-</div><div>DISTRO =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;poky&q=
-uot;</div><div>DISTRO_VERSION =C2=A0 =C2=A0=3D &quot;1.7.1&quot;</div><div>=
-TUNE_FEATURES =C2=A0 =C2=A0 =3D &quot;arm armv7a vfp neon callconvention-ha=
-rd cortexa8&quot;</div><div>TARGET_FPU =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot=
-;vfp-neon&quot;</div><div>meta =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0</div><div>meta-yocto =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;(nobranch)=
-:2a3805a666e14f0c995f7622fe0eecbb1fb48932&quot;</div><div>meta-gnome =C2=A0=
- =C2=A0 =C2=A0 =C2=A0</div><div>meta-oe =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-=C2=A0</div><div>meta-xfce =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0</div><div>meta=
--systemd =C2=A0 =C2=A0 =C2=A0</div><div>meta-networking =C2=A0=C2=A0</div><=
-div>meta-multimedia =C2=A0=C2=A0</div><div>meta-python =C2=A0 =C2=A0 =C2=A0=
- =3D &quot;(nobranch):853dcfa0d618dc26bd27b3a1b49494b98d6eee97&quot;</div><=
-div>meta-gumstix =C2=A0 =C2=A0 =C2=A0=3D &quot;(nobranch):40ac3593fab750204=
-31651e79cfa3ef5926bd1a6&quot;</div><div>meta-gumstix-extras =3D &quot;(nobr=
-anch):db157f15692eff0511b128e5c8241297e5582016&quot;</div><div>meta-ros =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;(nobranch):224b15a0b06dc2f3d7d54f8=
-55845b14a6c479c1d&quot;</div><div>meta-ti =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =3D &quot;master:b81014dbb5cc39fdfa66af87d18b72eb9eb3c701&quot;</div></=
-div><div><br></div><div>I get an error during compile which makes it look l=
-ike it&#39;s not using the arm gcc compiler.=C2=A0 Any suggestions on what =
-I&#39;m doing wrong here?</div><div><br></div><div>Early in the log, I see =
-&quot;CC=3Darm-poky-linux-gnueabi-gcc&quot;, but then later on...</div><div=
-><br></div><div><div>| =C2=A0 CC [M] =C2=A0/home/chris/yocto/build/tmp/work=
-/overo-poky-linux-gnueabi/cmem-mod/git-b+gitrAUTOINC+0d2fac7187/git/src/cme=
-m/module/cmemk.o</div><div>| cc1: error: unrecognized command line option &=
-#39;-mlittle-endian&#39;</div><div>| cc1: error: unrecognized command line =
-option &#39;-mno-thumb-interwork&#39;</div><div>| cc1: error: unrecognized =
-command line option &#39;-mfpu=3Dvfp&#39;</div></div><div><br></div><div>Th=
-e full log is here:</div><div><a href=3D"http://pastebin.com/bHxGgQGe">http=
-://pastebin.com/bHxGgQGe</a><br></div><div><br></div><div>Thanks,</div><div=
->Chris</div><div><br></div><div><br></div></div>
+</body>
+</html>
 
---047d7bd6bbcaa77db4051272a0b4--
+
+------=_Part_92_5764464.1427677701296--
