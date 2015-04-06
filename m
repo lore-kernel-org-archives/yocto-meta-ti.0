@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DFA0CE009C1; Mon,  6 Apr 2015 15:46:32 -0700 (PDT)
+	id 17929E009C2; Mon,  6 Apr 2015 15:46:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BD66EE009A5
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BBF96E007A0
 	for <meta-ti@yoctoproject.org>; Mon,  6 Apr 2015 15:46:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 3E097529C6; Mon,  6 Apr 2015 22:46:26 +0000 (UTC)
+	id 45699529CB; Mon,  6 Apr 2015 22:46:26 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150406224627.3E097529C6@arago-project.org>
+Message-Id: <20150406224627.45699529CB@arago-project.org>
 Date: Mon,  6 Apr 2015 22:46:26 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ipumm-fw: Add RDEPENDS to libdce
+Subject: Jacob Stiffler : omap3-sgx-modules: Install via the kernel's " modules_install" target.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,65 +33,166 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Apr 2015 22:46:33 -0000
+X-List-Received-Date: Mon, 06 Apr 2015 22:46:34 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: c6d2bd9547ad46577c0d4ca9df7e1f8ab75f2a78
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c6d2bd9547ad46577c0d4ca9df7e1f8ab75f2a78
+Commit: f59d1e8ade4c685bc61abb5705d6e20ae7e6f7ca
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f59d1e8ade4c685bc61abb5705d6e20ae7e6f7ca
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Thu Mar 26 18:38:47 2015 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Mon Mar 30 17:41:49 2015 +0000
 
-ipumm-fw: Add RDEPENDS to libdce
+omap3-sgx-modules: Install via the kernel's "modules_install" target.
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+* This allows the modules to have a consistent installation structure
+  when directly building from source.
+* Previously, these modules would be manualy installed to appears as
+  in-tree modules.
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb |    4 +++-
- recipes-bsp/ipumm-fw/ipumm-fw_3.00.07.02.bb |    4 +++-
- 2 files changed, 6 insertions(+), 2 deletions(-)
+ .../omap3-sgx-modules_4.05.00.03.bb                |   13 ++-----------
+ .../omap3-sgx-modules_4.09.00.01.bb                |   13 ++-----------
+ .../omap3-sgx-modules_5.01.01.01.bb                |   14 ++------------
+ .../omap3-sgx-modules_5.01.01.02.bb                |   14 ++------------
+ 4 files changed, 8 insertions(+), 46 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb
-index f5ebd14..642c94c 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.04.02.bb
-@@ -14,6 +14,8 @@ LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=39a593dd8fc2a9654c74f679e
- COMPATIBLE_MACHINE = "omap5-evm"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
+index bd476f0..a54a643 100644
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
+@@ -10,7 +10,7 @@ BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
  
-+RDEPENDS_${PN} = " libdce"
-+
- SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/ipumm/3_00_04_02/exports/ipumm-${MACHINE}-${PV}.tar.gz;protocol=http"
+ inherit module
  
- SRC_URI[md5sum] = "1572073ebd4f6d127c4e8cf47d270b6a"
-@@ -30,4 +32,4 @@ do_install() {
+-MACHINE_KERNEL_PR_append = "b"
++MACHINE_KERNEL_PR_append = "c"
+ PR = "${MACHINE_KERNEL_PR}"
  
- FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+ DEFAULT_PREFERENCE_omap3 = "99"
+@@ -32,17 +32,8 @@ TI_PLATFORM_ti814x = "ti81xx"
+ TI_PLATFORM_ti816x = "ti81xx"
+ TI_PLATFORM_ti33x = "ti335x"
  
--PR = "r3"
-+PR = "r4"
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.07.02.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.07.02.bb
-index 2401583..576931f 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.07.02.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.07.02.bb
-@@ -14,6 +14,8 @@ LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=caa45d993ac010abe2fd319f6
- COMPATIBLE_MACHINE = "dra7xx"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+-MODULESLOCATION_omap3 = "dc_omapfb3_linux"
+-MODULESLOCATION_ti814x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti816x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti33x = "dc_ti335x_linux"
+-
+ MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM}"
  
-+RDEPENDS_${PN} = " libdce"
-+
- SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/ipumm/3_00_07_02/exports/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
+ do_install() {
+-	mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-	cp ${S}/pvrsrvkm.ko \
+-	   ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
+-	   ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
+-	   ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
++    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B} INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
+ }
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
+index 4b97bbc..cd6dbe4 100644
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
+@@ -10,7 +10,7 @@ IMGPV = "1.9.2188537"
  
- SRC_URI[md5sum] = "06aaf4f144d48ca16054e67e40cc7bc3"
-@@ -30,4 +32,4 @@ do_install() {
+ inherit module
  
- FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+-MACHINE_KERNEL_PR_append = "c"
++MACHINE_KERNEL_PR_append = "d"
+ PR = "${MACHINE_KERNEL_PR}"
  
--PR = "r4"
-+PR = "r5"
+ DEFAULT_PREFERENCE = "-1"
+@@ -44,19 +44,10 @@ TI_PLATFORM_ti814x = "ti81xx"
+ TI_PLATFORM_ti816x = "ti81xx"
+ TI_PLATFORM_ti33x = "ti335x"
+ 
+-MODULESLOCATION_omap3 = "dc_omapfb3_linux"
+-MODULESLOCATION_ti814x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti816x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti33x = "dc_ti335x_linux"
+-
+ MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=0"
+ 
+ MAKE_TARGETS_append_ti33x = " PM_RUNTIME=1"
+ 
+ do_install() {
+-    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-    cp  ${S}/pvrsrvkm.ko \
+-        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
+-        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
+-        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
++    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B} INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
+ }
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
+index a1d95bf..1ac60da 100644
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
+@@ -10,7 +10,7 @@ IMGPV = "1.10.2359475"
+ 
+ inherit module
+ 
+-MACHINE_KERNEL_PR_append = "c"
++MACHINE_KERNEL_PR_append = "d"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ BINFILE_HARDFP = "Graphics_SDK_setuplinux_hardfp_${SGXPV}.bin"
+@@ -55,18 +55,8 @@ TI_PLATFORM_ti816x = "ti81xx"
+ TI_PLATFORM_ti33x = "ti335x"
+ TI_PLATFORM_ti43x = "ti43xx"
+ 
+-MODULESLOCATION_omap3 = "dc_omapfb3_linux"
+-MODULESLOCATION_ti814x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti816x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti33x = "dc_ti335x_linux"
+-MODULESLOCATION_ti43x = "dc_ti43xx_linux"
+-
+ MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
+ 
+ do_install() {
+-    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-    cp  ${S}/pvrsrvkm.ko \
+-        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
+-        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
+-        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
++    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B} INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
+ }
+diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.02.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.02.bb
+index 6a07d4f..cf042fc 100644
+--- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.02.bb
++++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.02.bb
+@@ -10,7 +10,7 @@ IMGPV = "1.10.2359475"
+ 
+ inherit module
+ 
+-MACHINE_KERNEL_PR_append = "a"
++MACHINE_KERNEL_PR_append = "b"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ BINFILE_HARDFP = "Graphics_SDK_setuplinux_hardfp_${SGXPV}.bin"
+@@ -51,18 +51,8 @@ TI_PLATFORM_ti816x = "ti81xx"
+ TI_PLATFORM_ti33x = "ti335x"
+ TI_PLATFORM_ti43x = "ti43xx"
+ 
+-MODULESLOCATION_omap3 = "dc_omapfb3_linux"
+-MODULESLOCATION_ti814x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti816x = "dc_ti81xx_linux"
+-MODULESLOCATION_ti33x = "dc_ti335x_linux"
+-MODULESLOCATION_ti43x = "dc_ti43xx_linux"
+-
+ MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
+ 
+ do_install() {
+-    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+-    cp  ${S}/pvrsrvkm.ko \
+-        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
+-        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
+-        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
++    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B} INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
+ }
 
 
