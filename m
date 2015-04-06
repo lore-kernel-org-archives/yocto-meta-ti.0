@@ -1,26 +1,28 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 18D4AE007A0; Mon,  6 Apr 2015 15:46:34 -0700 (PDT)
+	id 19720E009A6; Mon,  6 Apr 2015 15:46:34 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
+	sequence
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 34AF4E009B0
-	for <meta-ti@yoctoproject.org>; Mon,  6 Apr 2015 15:46:30 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BEB17E009AC
+	for <meta-ti@yoctoproject.org>; Mon,  6 Apr 2015 15:46:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A185E52A7E; Mon,  6 Apr 2015 22:46:28 +0000 (UTC)
+	id 7CA7E52A7D; Mon,  6 Apr 2015 22:46:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150406224628.A185E52A7E@arago-project.org>
+Message-Id: <20150406224628.7CA7E52A7D@arago-project.org>
 Date: Mon,  6 Apr 2015 22:46:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : omap3-sgx-modules: Install via the kernel's " modules_install" target.
+Subject: Karthik Ramanan : omapdrm-pvr: add support for voluntary kernel preemption option
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,67 +40,27 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: d63fd7691e99f9d8dfb9704f634a970b8e44dffd
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d63fd7691e99f9d8dfb9704f634a970b8e44dffd
+Commit: 8780d3f30ac993cce8f473f528ff25f328987c88
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8780d3f30ac993cce8f473f528ff25f328987c88
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon Mar 30 17:41:49 2015 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Wed Mar 25 15:59:15 2015 +0000
 
-omap3-sgx-modules: Install via the kernel's "modules_install" target.
+omapdrm-pvr: add support for voluntary kernel preemption option
 
-* This allows the modules to have a consistent installation structure
-  when directly building from source.
-* Previously, these modules would be manualy installed to appears as
-  in-tree modules.
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../omap3-sgx-modules_4.05.00.03.bb                |   13 ++-----------
- .../omap3-sgx-modules_4.09.00.01.bb                |   13 ++-----------
- .../omap3-sgx-modules_5.01.01.01.bb                |   14 ++------------
- .../omap3-sgx-modules_5.01.01.02.bb                |   14 ++------------
- 4 files changed, 8 insertions(+), 46 deletions(-)
+ .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |    8 +++++---
+ 1 files changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
-index bd476f0..a54a643 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.05.00.03.bb
-@@ -10,7 +10,7 @@ BINFILE := "Graphics_SDK_setuplinux_${SGXPV}.bin"
- 
- inherit module
- 
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- PR = "${MACHINE_KERNEL_PR}"
- 
- DEFAULT_PREFERENCE_omap3 = "99"
-@@ -32,17 +32,8 @@ TI_PLATFORM_ti814x = "ti81xx"
- TI_PLATFORM_ti816x = "ti81xx"
- TI_PLATFORM_ti33x = "ti335x"
- 
--MODULESLOCATION_omap3 = "dc_omapfb3_linux"
--MODULESLOCATION_ti814x = "dc_ti81xx_linux"
--MODULESLOCATION_ti816x = "dc_ti81xx_linux"
--MODULESLOCATION_ti33x = "dc_ti335x_linux"
--
- MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM}"
- 
- do_install() {
--	mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
--	cp ${S}/pvrsrvkm.ko \
--	   ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
--	   ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
--	   ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B} INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
- }
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-index 4b97bbc..cd6dbe4 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_4.09.00.01.bb
-@@ -10,7 +10,7 @@ IMGPV = "1.9.2188537"
+diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+index 1a91e1c..4ef920e 100644
+--- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
++++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
+@@ -5,13 +5,15 @@ LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=2b841bf
  
  inherit module
  
@@ -106,93 +68,16 @@ index 4b97bbc..cd6dbe4 100644
 +MACHINE_KERNEL_PR_append = "d"
  PR = "${MACHINE_KERNEL_PR}"
  
- DEFAULT_PREFERENCE = "-1"
-@@ -44,19 +44,10 @@ TI_PLATFORM_ti814x = "ti81xx"
- TI_PLATFORM_ti816x = "ti81xx"
- TI_PLATFORM_ti33x = "ti335x"
+-SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git"
++BRANCH = "next"
++
++SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/git"
  
--MODULESLOCATION_omap3 = "dc_omapfb3_linux"
--MODULESLOCATION_ti814x = "dc_ti81xx_linux"
--MODULESLOCATION_ti816x = "dc_ti81xx_linux"
--MODULESLOCATION_ti33x = "dc_ti335x_linux"
--
- MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=0"
+-SRCREV = "0f3561a47cf7a1b968fb64446a0be10abc9a15d5"
++SRCREV = "872aa64b227cadbc97755a4192919dd5ca637971"
  
- MAKE_TARGETS_append_ti33x = " PM_RUNTIME=1"
+ EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}"'
  
- do_install() {
--    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
--    cp  ${S}/pvrsrvkm.ko \
--        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
--        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
--        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B} INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
- }
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
-index a1d95bf..1ac60da 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.01.bb
-@@ -10,7 +10,7 @@ IMGPV = "1.10.2359475"
- 
- inherit module
- 
--MACHINE_KERNEL_PR_append = "c"
-+MACHINE_KERNEL_PR_append = "d"
- PR = "${MACHINE_KERNEL_PR}"
- 
- BINFILE_HARDFP = "Graphics_SDK_setuplinux_hardfp_${SGXPV}.bin"
-@@ -55,18 +55,8 @@ TI_PLATFORM_ti816x = "ti81xx"
- TI_PLATFORM_ti33x = "ti335x"
- TI_PLATFORM_ti43x = "ti43xx"
- 
--MODULESLOCATION_omap3 = "dc_omapfb3_linux"
--MODULESLOCATION_ti814x = "dc_ti81xx_linux"
--MODULESLOCATION_ti816x = "dc_ti81xx_linux"
--MODULESLOCATION_ti33x = "dc_ti335x_linux"
--MODULESLOCATION_ti43x = "dc_ti43xx_linux"
--
- MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
- 
- do_install() {
--    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
--    cp  ${S}/pvrsrvkm.ko \
--        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
--        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
--        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B} INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
- }
-diff --git a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.02.bb b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.02.bb
-index 6a07d4f..cf042fc 100644
---- a/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.02.bb
-+++ b/recipes-bsp/powervr-drivers/omap3-sgx-modules_5.01.01.02.bb
-@@ -10,7 +10,7 @@ IMGPV = "1.10.2359475"
- 
- inherit module
- 
--MACHINE_KERNEL_PR_append = "a"
-+MACHINE_KERNEL_PR_append = "b"
- PR = "${MACHINE_KERNEL_PR}"
- 
- BINFILE_HARDFP = "Graphics_SDK_setuplinux_hardfp_${SGXPV}.bin"
-@@ -51,18 +51,8 @@ TI_PLATFORM_ti816x = "ti81xx"
- TI_PLATFORM_ti33x = "ti335x"
- TI_PLATFORM_ti43x = "ti43xx"
- 
--MODULESLOCATION_omap3 = "dc_omapfb3_linux"
--MODULESLOCATION_ti814x = "dc_ti81xx_linux"
--MODULESLOCATION_ti816x = "dc_ti81xx_linux"
--MODULESLOCATION_ti33x = "dc_ti335x_linux"
--MODULESLOCATION_ti43x = "dc_ti43xx_linux"
--
- MAKE_TARGETS = " BUILD=${PVRBUILD} TI_PLATFORM=${TI_PLATFORM} SUPPORT_XORG=${SUPPORT_XORG}"
- 
- do_install() {
--    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
--    cp  ${S}/pvrsrvkm.ko \
--        ${S}/services4/3rdparty/${MODULESLOCATION}/omaplfb.ko  \
--        ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
--        ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-+    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B} INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
- }
 
 
