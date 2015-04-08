@@ -1,56 +1,26 @@
-Return-Path: <twoerner@gmail.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 09679E0086D; Wed,  8 Apr 2015 14:54:07 -0700 (PDT)
+	id 95013E00954; Wed,  8 Apr 2015 15:44:05 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (twoerner[at]gmail.com)
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.223.173 listed in list.dnswl.org]
-Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
-	[209.85.223.173])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CE928E007A0
-	for <meta-ti@yoctoproject.org>; Wed,  8 Apr 2015 14:54:04 -0700 (PDT)
-Received: by iebmp1 with SMTP id mp1so86394854ieb.0
-	for <meta-ti@yoctoproject.org>; Wed, 08 Apr 2015 14:54:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=TCWkLdJW72K9cepHEX5XB5RhYIO1++SCASc0oGAW4ck=;
-	b=vhlZpDmJLwB0hq7QuyD/R8SkuZY37HM2zCxq68AQFZP/dS8AY3Bbgl2qnFxa5EhRA2
-	slkjFsiqLzIdZSJTgaBm0anxk6r2RdWNzPqpP4rF3GDLPBUq2Io8ie7IyO0+cErEdJF8
-	enb9A6G6C+23qTeiUZ4AiF4jq4orMcB5GGgeEeaH9ku3oLSRCfSQzRqaGKhEFUrk29GA
-	zeLj5oCLzMlsF2VOBE7Gx1GEVC0JErmTM48cbczhqOo6mWc561XzLNveB+BpZMLaz6nR
-	Ana1c4uNak2rwi50zbi0YSm/JgOPww/9EpIluylMsvUMIE6dOb0pE4Vah+RrV0ZK3J0d
-	2FyQ==
-X-Received: by 10.107.32.73 with SMTP id g70mr42292098iog.55.1428530043654;
-	Wed, 08 Apr 2015 14:54:03 -0700 (PDT)
-Received: from [192.168.34.210] (static-66-11-92-234.ptr.terago.net.
-	[66.11.92.234])
-	by mx.google.com with ESMTPSA id 9sm7512341iom.29.2015.04.08.14.54.02
-	for <meta-ti@yoctoproject.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 Apr 2015 14:54:02 -0700 (PDT)
-Message-ID: <5525A37A.70503@gmail.com>
-Date: Wed, 08 Apr 2015 17:54:02 -0400
-From: Trevor Woerner <twoerner@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
-MIME-Version: 1.0
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1C94FE00837
+	for <meta-ti@yoctoproject.org>; Wed,  8 Apr 2015 15:43:59 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 7523052A0D; Wed,  8 Apr 2015 22:43:59 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Subject: dizzy branch
+Message-Id: <20150408224359.7523052A0D@arago-project.org>
+Date: Wed,  8 Apr 2015 22:43:59 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : uim: update and move from gitorious.org
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -63,9 +33,79 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2015 21:54:07 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Apr 2015 22:44:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Is there going to be a dizzy branch to meta-ti?
+Module: meta-ti
+Branch: master
+Commit: 0c3976cc76e073af1c4c7126a77e176556757925
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=0c3976cc76e073af1c4c7126a77e176556757925
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Apr  7 22:30:08 2015 +0000
+
+uim: update and move from gitorious.org
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-connectivity/uim/uim_8.5.bb |   22 ++++++++++++++++++++++
+ recipes-connectivity/uim/uim_git.bb |   19 -------------------
+ 2 files changed, 22 insertions(+), 19 deletions(-)
+
+diff --git a/recipes-connectivity/uim/uim_8.5.bb b/recipes-connectivity/uim/uim_8.5.bb
+new file mode 100644
+index 0000000..ac9dc51
+--- /dev/null
++++ b/recipes-connectivity/uim/uim_8.5.bb
+@@ -0,0 +1,22 @@
++DESCRIPTION = "Shared Transport Line Discipline User Mode initialisation Manager Daemon"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://uim.c;beginline=1;endline=18;md5=9f0bbfbc10c67689e81a523e2976c31e"
++
++INITSCRIPT_NAME = "uim-sysfs"
++INITSCRIPT_PARAMS = "defaults 03"
++
++inherit update-rc.d
++
++SRCREV = "a75f45be2d5c74fc1dd913d08afc30f09a230aa9"
++SRC_URI = "git://git.ti.com/ti-bt/uim.git"
++
++S = "${WORKDIR}/git"
++
++EXTRA_OEMAKE = "CC=${TARGET_PREFIX}gcc"
++
++do_install() {
++	install -d ${D}${bindir}
++	install -m 0755 uim ${D}${bindir}
++	install -d ${D}${sysconfdir}/init.d
++	install -m 0755 scripts/uim-sysfs ${D}${sysconfdir}/init.d
++}
+diff --git a/recipes-connectivity/uim/uim_git.bb b/recipes-connectivity/uim/uim_git.bb
+deleted file mode 100644
+index c8265e9..0000000
+--- a/recipes-connectivity/uim/uim_git.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-DESCRIPTION = "User Mode Initialization Manager for wl12xx devices"
+-LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://uim.c;startline=4;endline=12;md5=16a9d6e829218481f8a61797fe2be2e2"
+-
+-# Doesn't have a version, so we'll make one up
+-PV = "0.0"
+-
+-SRCREV = "c73894456df5def97111cb33d2106b684b8b7959"
+-SRC_URI = "git://gitorious.org/uim/uim.git"
+-
+-S= "${WORKDIR}/git"
+-
+-do_install() {
+-	oe_runmake install DESTDIR=${D}
+-}
+-
+-# connman has a plugin to handle all this
+-RCONFLICTS_${PN} += "connman-plugin-tist"
+-RRECOMMENDS_${PN} = "linux-firmware-wl12xx"
+
 
