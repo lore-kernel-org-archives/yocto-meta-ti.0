@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7BE64E00961; Fri, 10 Apr 2015 15:09:38 -0700 (PDT)
+	id 9272AE009C2; Fri, 10 Apr 2015 15:09:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C9AFCE009A1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C88D8E00993
 	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 15:09:32 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 23F42529CB; Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
+	id 1542D529C6; Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150410220932.23F42529CB@arago-project.org>
+Message-Id: <20150410220932.1542D529C6@arago-project.org>
 Date: Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : iqn2-lld: Update to new version 1.0.0.7
+Subject: Sam Nelson : hyplnk-lld: Update to new version 2.1.0.2
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,44 +33,138 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2015 22:09:38 -0000
+X-List-Received-Date: Fri, 10 Apr 2015 22:09:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: ea7cc761702806cc96a60fd492b147cc4c10e852
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ea7cc761702806cc96a60fd492b147cc4c10e852
+Commit: 3a17af114edc5c0e1178ce90789a8afabad056fb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3a17af114edc5c0e1178ce90789a8afabad056fb
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Apr 11 03:53:19 2015 +0000
+Date:   Sat Apr 11 03:52:27 2015 +0000
 
-iqn2-lld: Update to new version 1.0.0.7
+hyplnk-lld: Update to new version 2.1.0.2
+
+- Add init script to add symbolic link for generic device library
+- remove unused CHOICELIST
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/iqn2-lld/iqn2-lld.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/hyplnk-lld/files/init_hyplnk.sh |   47 +++++++++++++++++++++++++++
+ recipes-bsp/hyplnk-lld/hyplnk-lld.inc       |    8 ++--
+ recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb    |   18 ++++++++--
+ 3 files changed, 66 insertions(+), 7 deletions(-)
 
-diff --git a/recipes-bsp/iqn2-lld/iqn2-lld.inc b/recipes-bsp/iqn2-lld/iqn2-lld.inc
-index c5b1511..fb6886f 100644
---- a/recipes-bsp/iqn2-lld/iqn2-lld.inc
-+++ b/recipes-bsp/iqn2-lld/iqn2-lld.inc
-@@ -3,10 +3,10 @@ LICENSE = "BSD-3-Clause"
+diff --git a/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh b/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh
+new file mode 100755
+index 0000000..fb65057
+--- /dev/null
++++ b/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh
+@@ -0,0 +1,47 @@
++#*
++#* Copyright (C) 2015 Texas Instruments Incorporated - http://www.ti.com/
++#*
++#*
++#*  Redistribution and use in source and binary forms, with or without
++#*  modification, are permitted provided that the following conditions
++#*  are met:
++#*
++#*    Redistributions of source code must retain the above copyright
++#*    notice, this list of conditions and the following disclaimer.
++#*
++#*    Redistributions in binary form must reproduce the above copyright
++#*    notice, this list of conditions and the following disclaimer in the
++#*    documentation and/or other materials provided with the
++#*    distribution.
++#*
++#*    Neither the name of Texas Instruments Incorporated nor the names of
++#*    its contributors may be used to endorse or promote products derived
++#*    from this software without specific prior written permission.
++#*
++
++#! /bin/sh
++compatible=$(cat /proc/device-tree/compatible)
++
++cd /usr/lib
++case "$compatible" in
++	*k2hk*)
++		device=k2hk
++		ln -sf libhyplnk_k2h.so.1.0.0 libhyplnk_device.so.1
++	;;
++	*k2l*)
++		device=k2l
++		ln -sf libhyplnk_k2l.so.1.0.0 libhyplnk_device.so.1
++	;;
++	*k2e*)
++		device=k2e
++		ln -sf libhyplnk_k2e.so.1.0.0 libhyplnk_device.so.1
++	;;
++	*)
++		device=unknown
++	;;
++esac
++
++if [ $device != unknown ]; then
++	ln -sf libhyplnk_device.so.1 libhyplnk_device.so
++	echo hyplnk library link established for device : $device
++fi
+diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
+index 4c8bb32..7f46b7d 100644
+--- a/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
++++ b/recipes-bsp/hyplnk-lld/hyplnk-lld.inc
+@@ -9,11 +9,11 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/${LLDNAME}/COPYING.txt;md5=6233
  
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/iqn2-lld.git;destsuffix=git/ti/drv/iqn2;protocol=git;branch=${BRANCH}"
--# Following commit corresponds to DEV.IQN_LLD.01.00.00.05B
--SRCREV = "ca35079f41d06259be39f992f55a9f815d305ef5"
-+# Following commit corresponds to DEV.IQN_LLD.01.00.00.07A
-+SRCREV = "94017e30c87853e48f6e947186c5075289b190c6"
+ BRANCH="master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/hyplnk-lld.git;destsuffix=git/ti/drv/${LLDNAME};protocol=git;branch=${BRANCH}"
+-# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.01
+-SRCREV = "6910da379501984ecf27f8d23ba6fc6310fe387e"
++# Following commit corresponds to tag DEV.HYPLNK_LLD.02.01.00.02
++SRCREV = "8451586025a0cf561ed9bc6ab70a2cad88a7e95e"
  
--PV = "1.0.0.5"
-+PV = "1.0.0.7"
+-PV = "2.1.0"
+-PR = "r0"
++PV = "2.1.0.2"
++PR = "r1"
  
- COMPATIBLE_MACHINE = "k2l-evm"
+ DEVICELIST = " k2h \
+                k2k \
+diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
+index a582f98..8be072c 100755
+--- a/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
++++ b/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
+@@ -2,9 +2,13 @@ include hyplnk-lld.inc
  
+ DEPENDS = "common-csl-ip"
+ 
+-CHOICELIST = " yes \
+-               no  \
+-"
++SRC_URI += "file://init_hyplnk.sh"
++
++inherit update-rc.d
++
++INITSCRIPT_NAME = "init_hyplnk.sh"
++INITSCRIPT_PARAMS = "defaults 10"
++
+ do_compile () {
+ 	make -f makefile_armv7 clean PDK_INSTALL_PATH="${STAGING_INCDIR}" \
+ 		HYPLNK_SRC_DIR="${S}"
+@@ -19,4 +23,12 @@ do_install () {
+ 	make -f makefile_armv7 install PDK_INSTALL_PATH="${STAGING_INCDIR}" \
+ 		INSTALL_INC_BASE_DIR="${D}/${includedir}" \
+ 		INSTALL_LIB_BASE_DIR="${D}${libdir}" HYPLNK_SRC_DIR="${S}"
++#   Set the generic device library symbolic link to default k2h
++	cd ${D}${libdir}
++	ln -sf libhyplnk_k2h.so.1.0.0 libhyplnk_device.so.1
++	ln -sf libhyplnk_device.so.1 libhyplnk_device.so
++#   Copy init scripts
++	install -d ${D}${sysconfdir}/init.d/
++	install -c -m 755 ${WORKDIR}/init_hyplnk.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
++
+ }
 
 
