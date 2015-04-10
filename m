@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CBA38E009BD; Fri, 10 Apr 2015 15:09:40 -0700 (PDT)
+	id D89FAE009AD; Fri, 10 Apr 2015 15:09:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43B07E009AE
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43E7EE009AF
 	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 15:09:37 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8733E52A78; Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
+	id 96EE352A7F; Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150410220932.8733E52A78@arago-project.org>
+Message-Id: <20150410220932.96EE352A7F@arago-project.org>
 Date: Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : sa-lld: Update to new version 3.0.0.10
+Subject: Sam Nelson : nwal-lld: Update to new version 2.1.0.5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,40 +38,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 02ef026612446fe2019a840da561261803e3936e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=02ef026612446fe2019a840da561261803e3936e
+Commit: 6cacc505e9621c7f29b554d04e29bfc98a5a71a3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6cacc505e9621c7f29b554d04e29bfc98a5a71a3
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Apr 11 03:59:44 2015 +0000
+Date:   Sat Apr 11 04:00:35 2015 +0000
 
-sa-lld: Update to new version 3.0.0.10
+nwal-lld: Update to new version 2.1.0.5
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/sa-lld/sa-lld.inc |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/nwal-lld/nwal-lld.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
-index d4bdc95..6dc8566 100644
---- a/recipes-bsp/sa-lld/sa-lld.inc
-+++ b/recipes-bsp/sa-lld/sa-lld.inc
-@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/sa/COPYING.txt;md5=4709d353574a
- 
+diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
+index 1e77140..fcbecf8 100644
+--- a/recipes-bsp/nwal-lld/nwal-lld.inc
++++ b/recipes-bsp/nwal-lld/nwal-lld.inc
+@@ -6,9 +6,9 @@ COMPATIBLE_MACHINE = "keystone"
  BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/sa-lld.git;destsuffix=git/ti/drv/sa;protocol=git;branch=${BRANCH}"
--# Following commit DEV.SA_LLD.03.00.00.08
--SRCREV = "4da032c600ded79ab226a2a0100c1d8178a9da39"
--PV = "03.00.00.08"
--PR = "r0"
-+# Following commit DEV.SA_LLD.03.00.00.10
-+SRCREV = "533aec7ef0e28c3faff4ee64a861c8935262dc33"
-+PV = "03.00.00.10"
-+PR = "r1"
+ SRC_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git;protocol=git;branch=${BRANCH}"
+ 
+-# Below commit ID corresponds to "DEV.NWAL.02.01.00.04A"
+-SRCREV = "099a9191e642c7732760078bf5af1e3c6ca0197b"
+-PV = "02.01.00.04"
++# Below commit ID corresponds to "DEV.NWAL.02.01.00.05A"
++SRCREV = "05c0222714791ad95672293196a33fffab041fc9"
++PV = "02.01.00.05"
  
  BASEDIR = "${WORKDIR}/git"
- S = "${BASEDIR}/ti/drv/sa"
+ S = "${BASEDIR}/ti/drv/nwal"
 
 
