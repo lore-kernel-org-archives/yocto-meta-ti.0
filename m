@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D89FAE009AD; Fri, 10 Apr 2015 15:09:40 -0700 (PDT)
+	id DB5EAE009E2; Fri, 10 Apr 2015 15:09:43 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43E7EE009AF
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43E99E009B1
 	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 15:09:37 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 96EE352A7F; Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
+	id 6A96352A77; Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150410220932.96EE352A7F@arago-project.org>
+Message-Id: <20150410220932.6A96352A77@arago-project.org>
 Date: Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : nwal-lld: Update to new version 2.1.0.5
+Subject: Sam Nelson : pa-lld: Update to new version 3.0.1.4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,43 +33,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2015 22:09:40 -0000
+X-List-Received-Date: Fri, 10 Apr 2015 22:09:43 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 6cacc505e9621c7f29b554d04e29bfc98a5a71a3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6cacc505e9621c7f29b554d04e29bfc98a5a71a3
+Commit: 34a31a1b1cd918d4501c8d928b7d8c0ea37c97c9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=34a31a1b1cd918d4501c8d928b7d8c0ea37c97c9
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Apr 11 04:00:35 2015 +0000
+Date:   Sat Apr 11 03:58:18 2015 +0000
 
-nwal-lld: Update to new version 2.1.0.5
+pa-lld: Update to new version 3.0.1.4
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/nwal-lld/nwal-lld.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/pa-lld/pa-lld.inc |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
-index 1e77140..fcbecf8 100644
---- a/recipes-bsp/nwal-lld/nwal-lld.inc
-+++ b/recipes-bsp/nwal-lld/nwal-lld.inc
-@@ -6,9 +6,9 @@ COMPATIBLE_MACHINE = "keystone"
+diff --git a/recipes-bsp/pa-lld/pa-lld.inc b/recipes-bsp/pa-lld/pa-lld.inc
+index e93ce15..7d922fb 100644
+--- a/recipes-bsp/pa-lld/pa-lld.inc
++++ b/recipes-bsp/pa-lld/pa-lld.inc
+@@ -6,10 +6,10 @@ COMPATIBLE_MACHINE = "keystone"
  BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git;protocol=git;branch=${BRANCH}"
+ SRC_URI = "git://git.ti.com/keystone-rtos/pa-lld.git;destsuffix=git/ti/drv/pa;protocol=git;branch=${BRANCH}"
  
--# Below commit ID corresponds to "DEV.NWAL.02.01.00.04A"
--SRCREV = "099a9191e642c7732760078bf5af1e3c6ca0197b"
--PV = "02.01.00.04"
-+# Below commit ID corresponds to "DEV.NWAL.02.01.00.05A"
-+SRCREV = "05c0222714791ad95672293196a33fffab041fc9"
-+PV = "02.01.00.05"
+-# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.01"
+-SRCREV = "55207930b4491f33776f2c4c2c0707a73c69314c"
+-PV = "03.00.01.01"
+-PR = "r0"
++# Below Commit ID corresponds to "DEV.PA_LLD.03.00.01.04"
++SRCREV = "92de8879be3712af684bd031ca0ed291c05d6050"
++PV = "03.00.01.04"
++PR = "r1"
  
  BASEDIR = "${WORKDIR}/git"
- S = "${BASEDIR}/ti/drv/nwal"
+ S = "${BASEDIR}/ti/drv/pa"
 
 
