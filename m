@@ -1,26 +1,60 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <twoerner@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1D926E009AD; Fri, 10 Apr 2015 10:59:57 -0700 (PDT)
+	id 314BAE009AF; Fri, 10 Apr 2015 11:33:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (twoerner[at]gmail.com)
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DCA58E009A6
-	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 10:59:51 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 6C069529C6; Fri, 10 Apr 2015 17:59:51 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20150410175951.6C069529C6@arago-project.org>
-Date: Fri, 10 Apr 2015 17:59:51 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : cppi-lld: Update to new version 2.1.0.8
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.223.171 listed in list.dnswl.org]
+Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
+	[209.85.223.171])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85BF8E009A1
+	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 11:33:52 -0700 (PDT)
+Received: by iejt8 with SMTP id t8so24273474iej.2
+	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 11:33:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=+kQjkrsapRz3bVLtaaTIuDCb9LZon604MkTs7J6c2+w=;
+	b=GnS+BvUrrhEk34K+IUGpe0pbZsnuOaCNT1FxSH7pEYWn4GXpZMJL6OuSvPLPgEjAZ6
+	stUrmueFmDRCQm6SFLwo1fYBMVfJiDy7eyYquxIZ2ru9RMIgDE0iBR2JtI5rb5iFKprg
+	/BsW7Yb2H45XbWzS0wj42Fbzgqd//sCOnNnuuRzb5x7GgtMp0nW8pNppsVWWQrKnalGt
+	1bQZphH0Fx4jrptuUlgTf9ioTpckydeOwpORvu5mjeO4QRbH9b5OGmjkGQLuNizKw09Z
+	jpL7LyBk362MlUHYCjgzL11oHPjo4lR8euJfUU4QadAVeYR7Kav3goY81scGWq2rT3ds
+	vXWA==
+X-Received: by 10.107.135.144 with SMTP id r16mr4936560ioi.13.1428690832565;
+	Fri, 10 Apr 2015 11:33:52 -0700 (PDT)
+Received: from [192.168.34.210] (static-66-11-92-234.ptr.terago.net.
+	[66.11.92.234])
+	by mx.google.com with ESMTPSA id ij7sm284692igb.18.2015.04.10.11.33.51
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 10 Apr 2015 11:33:52 -0700 (PDT)
+Message-ID: <5528178F.7040502@gmail.com>
+Date: Fri, 10 Apr 2015 14:33:51 -0400
+From: Trevor Woerner <twoerner@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+MIME-Version: 1.0
+To: Denys Dmytriyenko <denys@ti.com>
+References: <5525A37A.70503@gmail.com>
+	<CAMKF1soSt+BSYq4d8EJnn=S43W3fq3yR-9kGauxqcG8GP_37CA@mail.gmail.com>
+	<55267887.80001@gmail.com> <20150409215736.GE6414@edge>
+In-Reply-To: <20150409215736.GE6414@edge>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Subject: Re: dizzy branch
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,137 +67,15 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2015 17:59:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 10 Apr 2015 18:33:58 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Module: meta-ti
-Branch: master
-Commit: 58d45b9abd67de8246822f8ac4e4f0363d7ef640
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=58d45b9abd67de8246822f8ac4e4f0363d7ef640
+On 15-04-09 05:57 PM, Denys Dmytriyenko wrote:
+> BTW, we plan to migrate our products to Fido in the near future, so 
+> basically we are tracking Spring Yocto releases - Denzil, Dylan, 
+> Daisy, Fido, etc. So, there will be fido branch at some point and I 
+> will stop accepting new features into daisy... 
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Apr 10 20:11:02 2015 +0000
-
-cppi-lld: Update to new version 2.1.0.8
-
-- Add init script for creating symbolic link for generic device library boot time
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-bsp/cppi-lld/cppi-lld.inc       |    8 ++--
- recipes-bsp/cppi-lld/cppi-lld_git.bb    |   16 ++++++++++-
- recipes-bsp/cppi-lld/files/init_cppi.sh |   47 +++++++++++++++++++++++++++++++
- 3 files changed, 66 insertions(+), 5 deletions(-)
-
-diff --git a/recipes-bsp/cppi-lld/cppi-lld.inc b/recipes-bsp/cppi-lld/cppi-lld.inc
-index d26adc5..0a8ee55 100644
---- a/recipes-bsp/cppi-lld/cppi-lld.inc
-+++ b/recipes-bsp/cppi-lld/cppi-lld.inc
-@@ -4,10 +4,10 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/cppi/COPYING.txt;md5=e8f6789acd
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/cppi-lld.git;destsuffix=git/ti/drv/cppi;protocol=git;branch=${BRANCH}"
- 
--# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.06"
--SRCREV = "4c6c0a857786c49d8003453d3bc7c3c97ff4f5a4"
--PV = "02.01.00.06"
--PR = "r0"
-+# Below Commit ID corresponds to "DEV.CPPI_LLD.02.01.00.08"
-+SRCREV = "320af092dc382af52b9e68f14ca8acd5c1c467c1"
-+PV = "02.01.00.09"
-+PR = "r1"
- 
- DEVICELIST = "k2h k2k k2l k2e"
- 
-diff --git a/recipes-bsp/cppi-lld/cppi-lld_git.bb b/recipes-bsp/cppi-lld/cppi-lld_git.bb
-index bb2028b..cd419f6 100755
---- a/recipes-bsp/cppi-lld/cppi-lld_git.bb
-+++ b/recipes-bsp/cppi-lld/cppi-lld_git.bb
-@@ -5,15 +5,29 @@ DEPENDS = "common-csl-ip rm-lld qmss-lld"
- 
- include cppi-lld.inc
- 
-+SRC_URI += "file://init_cppi.sh"
-+
-+inherit update-rc.d
-+
-+INITSCRIPT_NAME = "init_cppi.sh"
-+INITSCRIPT_PARAMS = "defaults 10"
-+
- do_compile () {
- #   Now build the lld in the updated directory
- 	make -f makefile_armv7 clean PDK_INSTALL_PATH=${STAGING_INCDIR}
- 	for device in ${DEVICELIST}
- 	do
--		make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR}  DEVICE="${device}" 
-+		make -f makefile_armv7 lib PDK_INSTALL_PATH=${STAGING_INCDIR}  DEVICE="${device}"
- 	done
- }
- 
- do_install () {
- 	make -f makefile_armv7 install PDK_INSTALL_PATH=${STAGING_INCDIR} INSTALL_INC_BASE_DIR=${D}/${includedir} INSTALL_LIB_BASE_DIR=${D}${libdir}
-+#   Set the generic device library symbolic link to default k2h
-+    cd ${D}${libdir}
-+    ln -sf libcppi_k2h.so.1.0.0 libcppi_device.so.1
-+    ln -sf libcppi_device.so.1 libcppi_device.so
-+#   Copy init scripts
-+    install -d ${D}${sysconfdir}/init.d/
-+    install -c -m 755 ${WORKDIR}/init_cppi.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
- }
-diff --git a/recipes-bsp/cppi-lld/files/init_cppi.sh b/recipes-bsp/cppi-lld/files/init_cppi.sh
-new file mode 100755
-index 0000000..7a602da
---- /dev/null
-+++ b/recipes-bsp/cppi-lld/files/init_cppi.sh
-@@ -0,0 +1,47 @@
-+#*
-+#* Copyright (C) 2015 Texas Instruments Incorporated - http://www.ti.com/
-+#*
-+#*
-+#*  Redistribution and use in source and binary forms, with or without
-+#*  modification, are permitted provided that the following conditions
-+#*  are met:
-+#*
-+#*    Redistributions of source code must retain the above copyright
-+#*    notice, this list of conditions and the following disclaimer.
-+#*
-+#*    Redistributions in binary form must reproduce the above copyright
-+#*    notice, this list of conditions and the following disclaimer in the
-+#*    documentation and/or other materials provided with the
-+#*    distribution.
-+#*
-+#*    Neither the name of Texas Instruments Incorporated nor the names of
-+#*    its contributors may be used to endorse or promote products derived
-+#*    from this software without specific prior written permission.
-+#*
-+
-+#! /bin/sh
-+compatible=$(cat /proc/device-tree/compatible)
-+
-+cd /usr/lib
-+case "$compatible" in
-+	*k2hk*)
-+		device=k2hk
-+		ln -sf libcppi_k2h.so.1.0.0 libcppi_device.so.1
-+	;;
-+	*k2l*)
-+		device=k2l
-+		ln -sf libcppi_k2l.so.1.0.0 libcppi_device.so.1
-+	;;
-+	*k2e*)
-+	device=k2e
-+		ln -sf libcppi_k2e.so.1.0.0 libcppi_device.so.1
-+	;;
-+	*)
-+		device=unknown
-+	;;
-+esac
-+
-+if [ $device != unknown ]; then
-+	ln -sf libcppi_device.so.1 libcppi_device.so
-+	echo cppi library link established for device : $device
-+fi
-
+Great, thanks for the explanation!
 
