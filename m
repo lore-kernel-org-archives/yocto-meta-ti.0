@@ -1,26 +1,42 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E06AFE009E1; Fri, 10 Apr 2015 15:09:43 -0700 (PDT)
+	id 43ACFE009A1; Fri, 10 Apr 2015 15:17:41 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57E4CE009B2
-	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 15:09:37 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id DB15452AA5; Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20150410220932.DB15452AA5@arago-project.org>
-Date: Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : netapi: Update to new version 1.1.0.5
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0C4B5E00961
+	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 15:17:38 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t3AMHbe5003114;
+	Fri, 10 Apr 2015 17:17:37 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3AMHa0c026374;
+	Fri, 10 Apr 2015 17:17:36 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 10 Apr 2015 17:17:35 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3AMHZ22000723;
+	Fri, 10 Apr 2015 17:17:35 -0500
+Date: Fri, 10 Apr 2015 18:17:35 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <20150410221735.GD9147@edge>
+References: <1428702884-23501-1-git-send-email-sam.nelson@ti.com>
+	<20150410220458.GC9147@edge> <552849DC.1000406@mlbassoc.com>
+MIME-Version: 1.0
+In-Reply-To: <552849DC.1000406@mlbassoc.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH] mmap-lld: Update to new version 2.0.0.4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,43 +49,50 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2015 22:09:43 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 10 Apr 2015 22:17:41 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: d616b0ac65e4cffad2f9ca939db670a2a6a641f1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d616b0ac65e4cffad2f9ca939db670a2a6a641f1
+On Fri, Apr 10, 2015 at 04:08:28PM -0600, Gary Thomas wrote:
+> On 2015-04-10 16:04, Denys Dmytriyenko wrote:
+> >On Fri, Apr 10, 2015 at 05:54:44PM -0400, Sam Nelson wrote:
+> >>Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+> >>---
+> >>  recipes-bsp/mmap-lld/mmap-lld.inc |    8 ++++----
+> >>  1 file changed, 4 insertions(+), 4 deletions(-)
+> >>
+> >>diff --git a/recipes-bsp/mmap-lld/mmap-lld.inc b/recipes-bsp/mmap-lld/mmap-lld.inc
+> >>index b8a5b32..7c19ee8 100644
+> >>--- a/recipes-bsp/mmap-lld/mmap-lld.inc
+> >>+++ b/recipes-bsp/mmap-lld/mmap-lld.inc
+> >>@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=b3315b8190036fe1c6a8263d02e15606"
+> >>
+> >>  BRANCH="master"
+> >>  SRC_URI = "git://git.ti.com/keystone-rtos/mmap-lld.git;destsuffix=git/ti/runtime/mmap;protocol=git;branch=${BRANCH}"
+> >>-# Commit correspond to DEV.MMAP.02.00.00.03
+> >>-SRCREV = "601f9284c392f67bb7f69ed1a5df5231a43c3137"
+> >>+# Commit correspond to DEV.MMAP.02.00.00.04
+> >>+SRCREV = "306895eb2d5decd14a760e70d273946958ff716f"
+> >>
+> >>-PV="2.0.0"
+> >>-PR = "r0"
+> >>+PV = "2.0.0.4"
+> >>+PR = "r1"
+> >>
+> >>  S = "${WORKDIR}/git/ti/runtime/mmap"
+> >>\ No newline at end of file
+> >
+> >^^^ This is usually not a good sign.
+> 
+> Also current practice is to not change PR values, but let
+> the PR Service handle that.
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Apr 11 04:02:45 2015 +0000
+Not in the code base that this goes to... Moreover, it's not as simple and 
+requires careful considerations and setup on the distro side to ensure proper 
+upgrade path, etc. In this particular case above, the PR shouldn't have been 
+changed at all, but in general, it's just safer to bump PR for some of the 
+old releases this goes to.
 
-netapi: Update to new version 1.1.0.5
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-ti/netapi/netapi.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
-index b8d481a..eae436c 100644
---- a/recipes-ti/netapi/netapi.inc
-+++ b/recipes-ti/netapi/netapi.inc
-@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=f2b4f162358b1ffaf3f230
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANCH}"
- 
--# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.04"
--SRCREV= "dc08af268200908d3d8a456ac852c65c53d2fd12"
--PV = "01.01.00.04"
-+# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.05C"
-+SRCREV = "fc407a408e6c7e4cad6b5f0dd4367049abfd375f"
-+PV = "01.01.00.05"
- 
- DEVICELIST = "k2h k2k k2l k2e"
- 
-
+-- 
+Denys
 
