@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 955E8E009AD; Fri, 10 Apr 2015 15:09:40 -0700 (PDT)
+	id CBA38E009BD; Fri, 10 Apr 2015 15:09:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42FEFE009A6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 43B07E009AE
 	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 15:09:37 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CD41152A83; Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
+	id 8733E52A78; Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150410220932.CD41152A83@arago-project.org>
+Message-Id: <20150410220932.8733E52A78@arago-project.org>
 Date: Fri, 10 Apr 2015 22:09:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : uio-module-drv: Update to new version 1.0.2.1
+Subject: Sam Nelson : sa-lld: Update to new version 3.0.0.10
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,44 +38,40 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 58718b0bcead48d845dd29a6b5af588ba9318224
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=58718b0bcead48d845dd29a6b5af588ba9318224
+Commit: 02ef026612446fe2019a840da561261803e3936e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=02ef026612446fe2019a840da561261803e3936e
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Apr 11 04:02:10 2015 +0000
+Date:   Sat Apr 11 03:59:44 2015 +0000
 
-uio-module-drv: Update to new version 1.0.2.1
+sa-lld: Update to new version 3.0.0.10
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/uio-module-drv/uio-module-drv_git.bb |    8 ++++----
+ recipes-bsp/sa-lld/sa-lld.inc |    8 ++++----
  1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
-index a363d5f..b7a26a1 100644
---- a/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
-+++ b/recipes-bsp/uio-module-drv/uio-module-drv_git.bb
-@@ -4,14 +4,14 @@ LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b7c96eb2aed7b0f6f922214dbde9016"
+diff --git a/recipes-bsp/sa-lld/sa-lld.inc b/recipes-bsp/sa-lld/sa-lld.inc
+index d4bdc95..6dc8566 100644
+--- a/recipes-bsp/sa-lld/sa-lld.inc
++++ b/recipes-bsp/sa-lld/sa-lld.inc
+@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/drv/sa/COPYING.txt;md5=4709d353574a
  
- BRANCH ?= "master"
--# This corresponds to version 01.00.01.00A
--SRCREV = "3bce5bfec7a7865e278410e3c4484f878b9038b6"
--PV = "1.0.1"
-+# This corresponds to version 01.00.02.01
-+SRCREV = "c1988446e3364af4df7cd877e6536f0c6647d7bb"
-+PV = "1.0.2.1"
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/sa-lld.git;destsuffix=git/ti/drv/sa;protocol=git;branch=${BRANCH}"
+-# Following commit DEV.SA_LLD.03.00.00.08
+-SRCREV = "4da032c600ded79ab226a2a0100c1d8178a9da39"
+-PV = "03.00.00.08"
+-PR = "r0"
++# Following commit DEV.SA_LLD.03.00.00.10
++SRCREV = "533aec7ef0e28c3faff4ee64a861c8935262dc33"
++PV = "03.00.00.10"
++PR = "r1"
  
- SRC_URI = "git://git.ti.com/keystone-linux/uio-module-drv.git;protocol=git;branch=${BRANCH}"
- 
- # This package builds a kernel module, use kernel PR as base and append a local
--MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- S = "${WORKDIR}/git"
+ BASEDIR = "${WORKDIR}/git"
+ S = "${BASEDIR}/ti/drv/sa"
 
 
