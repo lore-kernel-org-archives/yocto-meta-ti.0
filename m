@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 31B38E009AE; Fri, 10 Apr 2015 10:59:56 -0700 (PDT)
+	id EF651E009AF; Fri, 10 Apr 2015 10:59:56 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D8EEEE009A1
-	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 10:59:53 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DB68DE009A5
+	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 10:59:51 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C524352A77; Fri, 10 Apr 2015 17:59:52 +0000 (UTC)
+	id 4768D529CB; Fri, 10 Apr 2015 17:59:51 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150410175952.C524352A77@arago-project.org>
-Date: Fri, 10 Apr 2015 17:59:52 +0000 (UTC)
+Message-Id: <20150410175951.4768D529CB@arago-project.org>
+Date: Fri, 10 Apr 2015 17:59:51 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : srss-tc: Update to new version 1.0.0.1
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2015 17:59:56 -0000
+X-List-Received-Date: Fri, 10 Apr 2015 17:59:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 329af944f1745eef76133861a74fe24d1df2f72c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=329af944f1745eef76133861a74fe24d1df2f72c
+Branch: master
+Commit: bbe8b4f17d7c1adb140deea5ff35671e11e4f42b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=bbe8b4f17d7c1adb140deea5ff35671e11e4f42b
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Fri Apr 10 19:44:19 2015 +0000
