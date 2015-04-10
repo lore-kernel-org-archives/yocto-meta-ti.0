@@ -1,60 +1,38 @@
-Return-Path: <twoerner@gmail.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 314BAE009AF; Fri, 10 Apr 2015 11:33:58 -0700 (PDT)
+	id 25F77E009A1; Fri, 10 Apr 2015 14:51:44 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (twoerner[at]gmail.com)
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.223.171 listed in list.dnswl.org]
-Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
-	[209.85.223.171])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85BF8E009A1
-	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 11:33:52 -0700 (PDT)
-Received: by iejt8 with SMTP id t8so24273474iej.2
-	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 11:33:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=+kQjkrsapRz3bVLtaaTIuDCb9LZon604MkTs7J6c2+w=;
-	b=GnS+BvUrrhEk34K+IUGpe0pbZsnuOaCNT1FxSH7pEYWn4GXpZMJL6OuSvPLPgEjAZ6
-	stUrmueFmDRCQm6SFLwo1fYBMVfJiDy7eyYquxIZ2ru9RMIgDE0iBR2JtI5rb5iFKprg
-	/BsW7Yb2H45XbWzS0wj42Fbzgqd//sCOnNnuuRzb5x7GgtMp0nW8pNppsVWWQrKnalGt
-	1bQZphH0Fx4jrptuUlgTf9ioTpckydeOwpORvu5mjeO4QRbH9b5OGmjkGQLuNizKw09Z
-	jpL7LyBk362MlUHYCjgzL11oHPjo4lR8euJfUU4QadAVeYR7Kav3goY81scGWq2rT3ds
-	vXWA==
-X-Received: by 10.107.135.144 with SMTP id r16mr4936560ioi.13.1428690832565;
-	Fri, 10 Apr 2015 11:33:52 -0700 (PDT)
-Received: from [192.168.34.210] (static-66-11-92-234.ptr.terago.net.
-	[66.11.92.234])
-	by mx.google.com with ESMTPSA id ij7sm284692igb.18.2015.04.10.11.33.51
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 Apr 2015 11:33:52 -0700 (PDT)
-Message-ID: <5528178F.7040502@gmail.com>
-Date: Fri, 10 Apr 2015 14:33:51 -0400
-From: Trevor Woerner <twoerner@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6397BE00961
+	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 14:51:39 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t3ALpcwX006005
+	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 16:51:38 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3ALpbNU004497
+	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 16:51:37 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 10 Apr 2015 16:51:37 -0500
+Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t3ALpaNV003826;	Fri, 10 Apr 2015 16:51:37 -0500
+From: Sam Nelson <sam.nelson@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Fri, 10 Apr 2015 17:51:34 -0400
+Message-ID: <1428702694-23372-1-git-send-email-sam.nelson@ti.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <5525A37A.70503@gmail.com>
-	<CAMKF1soSt+BSYq4d8EJnn=S43W3fq3yR-9kGauxqcG8GP_37CA@mail.gmail.com>
-	<55267887.80001@gmail.com> <20150409215736.GE6414@edge>
-In-Reply-To: <20150409215736.GE6414@edge>
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: dizzy branch
+Subject: [PATCH] dfe-lld: Update to new version 1.0.0.4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -67,15 +45,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2015 18:33:58 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 10 Apr 2015 21:51:44 -0000
+Content-Type: text/plain
 
-On 15-04-09 05:57 PM, Denys Dmytriyenko wrote:
-> BTW, we plan to migrate our products to Fido in the near future, so 
-> basically we are tracking Spring Yocto releases - Denzil, Dylan, 
-> Daisy, Fido, etc. So, there will be fido branch at some point and I 
-> will stop accepting new features into daisy... 
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+---
+ recipes-bsp/dfe-lld/dfe-lld.inc |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Great, thanks for the explanation!
+diff --git a/recipes-bsp/dfe-lld/dfe-lld.inc b/recipes-bsp/dfe-lld/dfe-lld.inc
+index 4979499..2053c74 100644
+--- a/recipes-bsp/dfe-lld/dfe-lld.inc
++++ b/recipes-bsp/dfe-lld/dfe-lld.inc
+@@ -3,10 +3,10 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=1f4217b705bf98762a302fd720649dcc"
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/dfe-lld.git;destsuffix=git/ti/drv/dfe;protocol=git;branch=${BRANCH}"
+-# The following commit correspond to DEV.DFE_LLD.01.00.00.03C
+-SRCREV = "ed20e87d3676e3e05ce2b78179b504a05083ad15"
++# The following commit correspond to DEV.DFE_LLD.01.00.00.04C
++SRCREV = "62da141c1cf6224d24161f0c020091043a3d7c82"
+ 
+-PV = "1.0.0.3"
++PV = "1.0.0.4"
+ 
+ COMPATIBLE_MACHINE = "k2l-evm"
+ 
+-- 
+1.7.9.5
+
 
