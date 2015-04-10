@@ -1,38 +1,26 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 26175E00993; Fri, 10 Apr 2015 07:17:58 -0700 (PDT)
+	id 30C6EE009AF; Fri, 10 Apr 2015 10:59:56 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9CD5CE00932
-	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 07:17:56 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t3AEHuXu014978
-	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 09:17:56 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3AEHtRv003999
-	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 09:17:55 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 10 Apr 2015 09:17:54 -0500
-Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t3AEHsR3004187;	Fri, 10 Apr 2015 09:17:54 -0500
-From: Sam Nelson <sam.nelson@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 10 Apr 2015 10:17:52 -0400
-Message-ID: <1428675472-20382-1-git-send-email-sam.nelson@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH] common-csl-ip: Update to new version 2.1.0.7
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DA370E009A4
+	for <meta-ti@yoctoproject.org>; Fri, 10 Apr 2015 10:59:51 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 749CD52A6D; Fri, 10 Apr 2015 17:59:51 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20150410175951.749CD52A6D@arago-project.org>
+Date: Fri, 10 Apr 2015 17:59:51 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Sam Nelson : common-csl-ip: Update to new version 2.1.0.7
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,13 +33,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2015 14:17:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 10 Apr 2015 17:59:56 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: ff1129b597b5d25daddb85e76e1ebad6701cebbd
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ff1129b597b5d25daddb85e76e1ebad6701cebbd
+
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Fri Apr 10 20:17:52 2015 +0000
+
+common-csl-ip: Update to new version 2.1.0.7
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
+
  recipes-bsp/common-csl-ip/common-csl-ip_git.bb |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
 index b242482..01f7fc5 100644
@@ -72,7 +73,5 @@ index b242482..01f7fc5 100644
  
  S = "${WORKDIR}/git"
  
--- 
-1.7.9.5
 
 
