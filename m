@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D06D8E0095C; Mon, 20 Apr 2015 13:20:08 -0700 (PDT)
+	id D13CAE009A0; Mon, 20 Apr 2015 13:20:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5665FE0095C
-	for <meta-ti@yoctoproject.org>; Mon, 20 Apr 2015 13:20:04 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C620AE009A0
+	for <meta-ti@yoctoproject.org>; Mon, 20 Apr 2015 13:20:06 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5C49152A52; Mon, 20 Apr 2015 20:20:02 +0000 (UTC)
+	id C57B352A89; Mon, 20 Apr 2015 20:20:02 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150420202002.5C49152A52@arago-project.org>
+Message-Id: <20150420202002.C57B352A89@arago-project.org>
 Date: Mon, 20 Apr 2015 20:20:02 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : mmap-lld: Update to new version 2.0.0.4
+Subject: Jacob Stiffler : am57xx-evm: ubifs: Increase max_leb_cnt.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,46 +37,35 @@ X-List-Received-Date: Mon, 20 Apr 2015 20:20:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 6b23a352f29a28ff1c205c754573ee535d8ce4c4
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6b23a352f29a28ff1c205c754573ee535d8ce4c4
+Branch: master
+Commit: 2895d0792275d00f9fe62909f83e13ba210cc8a3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=2895d0792275d00f9fe62909f83e13ba210cc8a3
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Sat Apr 11 05:35:30 2015 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Tue Apr 14 16:53:36 2015 +0000
 
-mmap-lld: Update to new version 2.0.0.4
+am57xx-evm: ubifs: Increase max_leb_cnt.
 
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/mmap-lld/mmap-lld.inc |   11 +++++------
- 1 files changed, 5 insertions(+), 6 deletions(-)
+ conf/machine/am57xx-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/mmap-lld/mmap-lld.inc b/recipes-bsp/mmap-lld/mmap-lld.inc
-index b8a5b32..a5158d5 100644
---- a/recipes-bsp/mmap-lld/mmap-lld.inc
-+++ b/recipes-bsp/mmap-lld/mmap-lld.inc
-@@ -4,13 +4,12 @@ COMPATIBLE_MACHINE = "keystone"
+diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
+index 3010e04..c923174 100644
+--- a/conf/machine/am57xx-evm.conf
++++ b/conf/machine/am57xx-evm.conf
+@@ -23,7 +23,7 @@ UBOOT_MACHINE = "beagle_x15_config"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4352"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5120"
  
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=b3315b8190036fe1c6a8263d02e15606"
- 
--
- BRANCH="master"
- SRC_URI = "git://git.ti.com/keystone-rtos/mmap-lld.git;destsuffix=git/ti/runtime/mmap;protocol=git;branch=${BRANCH}"
--# Commit correspond to DEV.MMAP.02.00.00.03
--SRCREV = "601f9284c392f67bb7f69ed1a5df5231a43c3137"
-+# Commit correspond to DEV.MMAP.02.00.00.04
-+SRCREV = "306895eb2d5decd14a760e70d273946958ff716f"
- 
--PV="2.0.0"
--PR = "r0"
-+PV = "2.0.0.4"
-+PR = "r1"
- 
--S = "${WORKDIR}/git/ti/runtime/mmap"
-\ No newline at end of file
-+S = "${WORKDIR}/git/ti/runtime/mmap"
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
 
 
