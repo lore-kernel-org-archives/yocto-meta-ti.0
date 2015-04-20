@@ -1,41 +1,26 @@
-Return-Path: <denys@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 26876E00952; Mon, 20 Apr 2015 13:18:03 -0700 (PDT)
+	id 9E7A8E009BB; Mon, 20 Apr 2015 13:20:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4A7A9E0079F
-	for <meta-ti@yoctoproject.org>; Mon, 20 Apr 2015 13:18:01 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t3KKI0Np011326
-	for <meta-ti@yoctoproject.org>; Mon, 20 Apr 2015 15:18:00 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3KKHxwx021633
-	for <meta-ti@yoctoproject.org>; Mon, 20 Apr 2015 15:17:59 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 20 Apr 2015 15:17:59 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3KKHxsV010142;
-	Mon, 20 Apr 2015 15:17:59 -0500
-Date: Mon, 20 Apr 2015 16:17:56 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Sam Nelson <sam.nelson@ti.com>
-Message-ID: <20150420201756.GF23723@edge>
-References: <1428939961-5679-1-git-send-email-sam.nelson@ti.com>
-MIME-Version: 1.0
-In-Reply-To: <1428939961-5679-1-git-send-email-sam.nelson@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] ipc: Update to new version 3.35.1.7
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53CE2E00932
+	for <meta-ti@yoctoproject.org>; Mon, 20 Apr 2015 13:20:04 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 7749652A59; Mon, 20 Apr 2015 20:20:02 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20150420202002.7749652A59@arago-project.org>
+Date: Mon, 20 Apr 2015 20:20:02 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Sam Nelson : mpm-transport: Update to new version 1.0.6.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,49 +33,69 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2015 20:18:03 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 20 Apr 2015 20:20:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, Apr 13, 2015 at 11:46:01AM -0400, Sam Nelson wrote:
-> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
-> ---
->  recipes-ti/ipc/ti-ipc_git.bb |    7 ++++---
->  1 file changed, 4 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
-> index 6f46295..33715be 100644
-> --- a/recipes-ti/ipc/ti-ipc_git.bb
-> +++ b/recipes-ti/ipc/ti-ipc_git.bb
-> @@ -6,14 +6,15 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
->  
->  DEPENDS += "virtual/kernel"
->  
-> -PV = "3.35.00.05"
-> +PV = "3.35.01.07"
->  
->  BRANCH = "master"
->  SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
-> +           file://0001-Patch-LAD-daemon-to-allow-different-cluster-IDs-for-.patch \
+Module: meta-ti
+Branch: daisy
+Commit: f9de1136a37240dc4ec20301bb0c0119d64ab708
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f9de1136a37240dc4ec20301bb0c0119d64ab708
 
-The patch referenced here is missing.
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Mon Apr 13 20:38:49 2015 +0000
 
+mpm-transport: Update to new version 1.0.6.0
 
->             file://tiipclad-daemon.sh \
->             "
-> -# Commit corresponds to 3.35.00.05
-> -SRCREV = "ce35c999f5c3368e387740a38aef3358290579b3"
-> +# Commit corresponds to 3.35.01.07
-> +SRCREV = "358d966c9f5973faf9ab71fb1d7dfe5d3e08a8dc"
->  
->  S = "${WORKDIR}/git"
->  
-> -- 
-> 1.7.9.5
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+- Add new transport using qmss, srio modules
+- Update new dependency on cmem, rm-lld, qmss-lld, cppi-lld & srio-lld
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-ti/mpm-transport/mpm-transport_git.bb |   19 +++++++++++++------
+ 1 files changed, 13 insertions(+), 6 deletions(-)
+
+diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
+index cb0f6c4..fd68721 100644
+--- a/recipes-ti/mpm-transport/mpm-transport_git.bb
++++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
+@@ -1,22 +1,29 @@
+ DESCRIPTION = "Multiproc transport layer for KeyStone devices: Provide basic transport layer for moving data between different processing nodes"
+ HOMEPAGE = "http://git.ti.com/cgit/cgit.cgi/keystone-linux/mpm-transport.git"
+ LICENSE = "BSD-3-Clause & MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2c17cd1dc60dc06a4c4f2a2c45472a51"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=122b7757f366f3f6fe11988715258fc9"
+ COMPATIBLE_MACHINE = "keystone"
+-DEPENDS = "common-csl-ip hyplnk-lld edma3-lld mmap-lld"
++DEPENDS = "common-csl-ip hyplnk-lld edma3-lld mmap-lld cmem rm-lld qmss-lld cppi-lld srio-lld"
+ 
+ SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH = "master"
+-# This commit corresponds to tag DEV.MPM-TRANSPORT-01.00.06.00
+-SRCREV = "af2d2ad8721b769012662c539a86b94f7d44dbda"
+-PV = "1.0.6.0"
++# This commit corresponds to tag DEV.MPM-TRANSPORT-01.00.07.00A
++SRCREV = "267db40a9c551bd91dbed470d57cd1ed0d9e9141"
++
++PV = "1.0.7.0"
+ PR = "r1"
+ 
+ S = "${WORKDIR}/git"
+ 
+ PACKAGES =+ "${PN}-test"
+-FILES_${PN}-test = "${bindir}/mpm_transport_test.out ${bindir}/mpm_transport_hyplnk_loopback.out ${bindir}/mpm_transport_hyplnk_remote.out ${bindir}/mpm_transport_hyplnk_loopback_dma.out ${bindir}/mpm_transport_hyplnk_loopback64.out"
++FILES_${PN}-test = "${bindir}/mpm_transport_test.out \
++					${bindir}/mpm_transport_hyplnk_loopback.out \
++					${bindir}/mpm_transport_hyplnk_remote.out \
++					${bindir}/mpm_transport_hyplnk_loopback_dma.out \
++					${bindir}/mpm_transport_hyplnk_loopback64.out \
++					${bindir}/mpm_transport_qmss_arm_mt.out \
++					${bindir}/mpm_transport_srio_arm_mt.out"
+ 
+ do_compile () {
+ 	cd ${S}
+
 
