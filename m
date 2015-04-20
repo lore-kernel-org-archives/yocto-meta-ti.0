@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9E7A8E009BB; Mon, 20 Apr 2015 13:20:07 -0700 (PDT)
+	id 9FD83E0079F; Mon, 20 Apr 2015 13:20:07 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53CE2E00932
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 53783E0079F
 	for <meta-ti@yoctoproject.org>; Mon, 20 Apr 2015 13:20:04 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7749652A59; Mon, 20 Apr 2015 20:20:02 +0000 (UTC)
+	id 833D052A6B; Mon, 20 Apr 2015 20:20:02 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150420202002.7749652A59@arago-project.org>
+Message-Id: <20150420202002.833D052A6B@arago-project.org>
 Date: Mon, 20 Apr 2015 20:20:02 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : mpm-transport: Update to new version 1.0.6.0
+Subject: Jacob Stiffler : am57xx-evm: ubifs: Increase max_leb_cnt.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,64 +38,34 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: f9de1136a37240dc4ec20301bb0c0119d64ab708
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f9de1136a37240dc4ec20301bb0c0119d64ab708
+Commit: 34cc0d20a08596584a4087fa3fc1286fd7037b99
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=34cc0d20a08596584a4087fa3fc1286fd7037b99
 
-Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Mon Apr 13 20:38:49 2015 +0000
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Tue Apr 14 16:53:36 2015 +0000
 
-mpm-transport: Update to new version 1.0.6.0
+am57xx-evm: ubifs: Increase max_leb_cnt.
 
-- Add new transport using qmss, srio modules
-- Update new dependency on cmem, rm-lld, qmss-lld, cppi-lld & srio-lld
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/mpm-transport/mpm-transport_git.bb |   19 +++++++++++++------
- 1 files changed, 13 insertions(+), 6 deletions(-)
+ conf/machine/am57xx-evm.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-ti/mpm-transport/mpm-transport_git.bb b/recipes-ti/mpm-transport/mpm-transport_git.bb
-index cb0f6c4..fd68721 100644
---- a/recipes-ti/mpm-transport/mpm-transport_git.bb
-+++ b/recipes-ti/mpm-transport/mpm-transport_git.bb
-@@ -1,22 +1,29 @@
- DESCRIPTION = "Multiproc transport layer for KeyStone devices: Provide basic transport layer for moving data between different processing nodes"
- HOMEPAGE = "http://git.ti.com/cgit/cgit.cgi/keystone-linux/mpm-transport.git"
- LICENSE = "BSD-3-Clause & MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2c17cd1dc60dc06a4c4f2a2c45472a51"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=122b7757f366f3f6fe11988715258fc9"
- COMPATIBLE_MACHINE = "keystone"
--DEPENDS = "common-csl-ip hyplnk-lld edma3-lld mmap-lld"
-+DEPENDS = "common-csl-ip hyplnk-lld edma3-lld mmap-lld cmem rm-lld qmss-lld cppi-lld srio-lld"
+diff --git a/conf/machine/am57xx-evm.conf b/conf/machine/am57xx-evm.conf
+index 3010e04..c923174 100644
+--- a/conf/machine/am57xx-evm.conf
++++ b/conf/machine/am57xx-evm.conf
+@@ -23,7 +23,7 @@ UBOOT_MACHINE = "beagle_x15_config"
+ # UBI: logical eraseblock size:    126976 bytes
+ # from ubiattach stdout:
+ # UBI device number 0, total 1988 LEBs
+-MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 4352"
++MKUBIFS_ARGS = "-F -m 2048 -e 126976 -c 5120"
  
- SRC_URI = "git://git.ti.com/keystone-linux/mpm-transport.git;protocol=git;branch=${BRANCH}"
- 
- BRANCH = "master"
--# This commit corresponds to tag DEV.MPM-TRANSPORT-01.00.06.00
--SRCREV = "af2d2ad8721b769012662c539a86b94f7d44dbda"
--PV = "1.0.6.0"
-+# This commit corresponds to tag DEV.MPM-TRANSPORT-01.00.07.00A
-+SRCREV = "267db40a9c551bd91dbed470d57cd1ed0d9e9141"
-+
-+PV = "1.0.7.0"
- PR = "r1"
- 
- S = "${WORKDIR}/git"
- 
- PACKAGES =+ "${PN}-test"
--FILES_${PN}-test = "${bindir}/mpm_transport_test.out ${bindir}/mpm_transport_hyplnk_loopback.out ${bindir}/mpm_transport_hyplnk_remote.out ${bindir}/mpm_transport_hyplnk_loopback_dma.out ${bindir}/mpm_transport_hyplnk_loopback64.out"
-+FILES_${PN}-test = "${bindir}/mpm_transport_test.out \
-+					${bindir}/mpm_transport_hyplnk_loopback.out \
-+					${bindir}/mpm_transport_hyplnk_remote.out \
-+					${bindir}/mpm_transport_hyplnk_loopback_dma.out \
-+					${bindir}/mpm_transport_hyplnk_loopback64.out \
-+					${bindir}/mpm_transport_qmss_arm_mt.out \
-+					${bindir}/mpm_transport_srio_arm_mt.out"
- 
- do_compile () {
- 	cd ${S}
+ # do ubiattach /dev/ubi_ctrl -m 7 -O 2048
+ # from dmesg:
 
 
