@@ -1,43 +1,41 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8E186E009AE; Wed, 22 Apr 2015 15:16:14 -0700 (PDT)
+	id 99F75E00998; Wed, 22 Apr 2015 18:12:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
 	*      [192.94.94.40 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A51B5E00994
-	for <meta-ti@yoctoproject.org>; Wed, 22 Apr 2015 15:16:12 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t3MMFdZR002670;
-	Wed, 22 Apr 2015 17:15:39 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3MMFcPK028883;
-	Wed, 22 Apr 2015 17:15:38 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 22 Apr 2015 17:15:37 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3MMFbSr013505;
-	Wed, 22 Apr 2015 17:15:37 -0500
-Date: Wed, 22 Apr 2015 18:15:37 -0400
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 359EFE008EA
+	for <meta-ti@yoctoproject.org>; Wed, 22 Apr 2015 18:12:39 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t3N1Cckv005108
+	for <meta-ti@yoctoproject.org>; Wed, 22 Apr 2015 20:12:38 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3N1CblU018884
+	for <meta-ti@yoctoproject.org>; Wed, 22 Apr 2015 20:12:37 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 22 Apr 2015 20:12:37 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t3N1CbQh025890;	Wed, 22 Apr 2015 20:12:37 -0500
+Date: Wed, 22 Apr 2015 21:12:37 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Cody P Schafer <dev@codyps.com>
-Message-ID: <20150422221537.GM25236@edge>
-References: <1406684113-18232-2-git-send-email-denis@denix.org>
-	<1406842426-28955-1-git-send-email-denis@denix.org>
-	<CAPoQQ-0r2tnPZ0Zk-FSiOYqA_TYmXz5hMxrbWpTGW79KdJpLiA@mail.gmail.com>
+To: <meta-ti@yoctoproject.org>, <denys@ti.com>
+Message-ID: <983679375.249.1429751557182.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-In-Reply-To: <CAPoQQ-0r2tnPZ0Zk-FSiOYqA_TYmXz5hMxrbWpTGW79KdJpLiA@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v2 2/2] omap3-sgx-modules 5.01.01.01: add Darren's patches to work with 3.14 kernel
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-04-22_21-00-51
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,59 +48,191 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2015 22:16:14 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Apr 2015 01:12:42 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_248_200057092.1429751557140"
 
-On Wed, Apr 22, 2015 at 05:57:56PM -0400, Cody P Schafer wrote:
-> On Thu, Jul 31, 2014 at 5:33 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> > From: Denys Dmytriyenko <denys@ti.com>
-> >
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > ---
-> > v2 - update patch #4 to not break builds against 3.12 kernel
-> >
-> >  ...SDK-Make-5_01_01_01-work-against-3.14-LTS.patch |  52 +++++++
-> >  ...x-use-platform-data-to-provide-reset-info.patch | 121 ++++++++++++++++
-> >  ...class-am335x-am437x-fix-mutex-deadlock-wa.patch | 153 +++++++++++++++++++++
-> >  ...-make-it-building-against-ti-linux-3.14.y.patch |  45 ++++++
-> >  .../omap3-sgx-modules_5.01.01.01.bb                |   7 +-
-> >  5 files changed, 377 insertions(+), 1 deletion(-)
-> >  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0001-PoC-GFX-SDK-Make-5_01_01_01-work-against-3.14-LTS.patch
-> >  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0002-SGX-linux-use-platform-data-to-provide-reset-info.patch
-> >  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0003-SGX-displayclass-am335x-am437x-fix-mutex-deadlock-wa.patch
-> >  create mode 100644 recipes-bsp/powervr-drivers/omap3-sgx-modules-5.01.01.01/0004-SGX-linux-make-it-building-against-ti-linux-3.14.y.patch
-> >
-> [snip]
-> 
-> It looks like the new 5.01.01.02 also needs some of these patches:
+------=_Part_248_200057092.1429751557140
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Those patches got merged into the recent staging kernel. So, no, they are no 
-longer needed.
+<html>
+<head>
+<title>
+Status for 04/22/15
+</title>
+</head>
+<body>
+
+<h2>Status for 04/22/15</h2>
+
+<h2>BUILD_ID: build-2015-04-22_21-01-56</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=red>FAILED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=red>FAILED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2015.04"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm k2hk-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="true"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-> | /home/cody/obj/y/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-b/Graphics_SDK_5_01_01_02/GFX_Linux_KM/services4/srvkm/env/linux/module.c:411:2:
-> error: implicit declaration of function 'reset_control_clear_reset'
-> [-Werror=implicit-function-declaration]
-> |   ret = reset_control_clear_reset(rstc);
-> |   ^
-> | /home/cody/obj/y/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-b/Graphics_SDK_5_01_01_02/GFX_Linux_KM/services4/srvkm/env/linux/module.c:471:17:
-> error: implicit declaration of function 'reset_control_is_reset'
-> [-Werror=implicit-function-declaration]
-> |                  ret = reset_control_is_reset(rstc);
-> |                  ^
-> | /home/cody/obj/y/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-b/Graphics_SDK_5_01_01_02/GFX_Linux_KM/services4/srvkm/env/linux/module.c:399:32:
-> warning: unused variable 'pdata' [-Wunused-variable]
-> |   struct gfx_sgx_platform_data *pdata = dev->platform_data;
-> |                                 ^
-> | cc1: some warnings being treated as errors
-> | /home/cody/obj/y/tmp/work-shared/beaglebone/kernel-source/scripts/Makefile.build:257:
-> recipe for target
-> '/home/cody/obj/y/tmp/work/beaglebone-poky-linux-gnueabi/omap3-sgx-modules/5.01.01.02-b/Graphics_SDK_5_01_01_02/GFX_Linux_KM/services4/srvkm/env/linux/module.o'
-> failed
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
-
+------=_Part_248_200057092.1429751557140--
