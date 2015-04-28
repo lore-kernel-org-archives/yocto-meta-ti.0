@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C2BE5E009A6; Tue, 28 Apr 2015 15:31:53 -0700 (PDT)
+	id BFEC8E009A5; Tue, 28 Apr 2015 15:31:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8F751E009AA
-	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 15:31:49 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 24B63E009A5
+	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 15:31:48 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5F96852A96; Tue, 28 Apr 2015 22:31:48 +0000 (UTC)
+	id 3387052A8F; Tue, 28 Apr 2015 22:31:48 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150428223148.5F96852A96@arago-project.org>
+Message-Id: <20150428223148.3387052A8F@arago-project.org>
 Date: Tue, 28 Apr 2015 22:31:48 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : hplib: Update to new version 1.1.0.5
+Subject: Sam Nelson : netapi: Update to new version 1.1.0.6
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,13 +38,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: dc1a5ab13edbf8261fb1f1ae1b45f79e599f86b1
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=dc1a5ab13edbf8261fb1f1ae1b45f79e599f86b1
+Commit: a9cac6d38ba194f2f56a3deddc6d4b2d8210e8e6
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a9cac6d38ba194f2f56a3deddc6d4b2d8210e8e6
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Apr 28 20:14:28 2015 +0000
+Date:   Tue Apr 28 20:12:20 2015 +0000
 
-hplib: Update to new version 1.1.0.5
+netapi: Update to new version 1.1.0.6
 
 - Fixes issues with parallel builds
 
@@ -53,22 +53,25 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/hplib/hplib.inc |    6 +++---
+ recipes-ti/netapi/netapi.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
-index 99254d1..de5b2b7 100644
---- a/recipes-bsp/hplib/hplib.inc
-+++ b/recipes-bsp/hplib/hplib.inc
-@@ -5,6 +5,6 @@ DEVICELIST = "k2h k2k k2l k2e"
+diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
+index eae436c..0ba4eeb 100644
+--- a/recipes-ti/netapi/netapi.inc
++++ b/recipes-ti/netapi/netapi.inc
+@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=f2b4f162358b1ffaf3f230
  BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/hplib.git;protocol=git;branch=${BRANCH}"
+ SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANCH}"
  
--# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.04"
--SRCREV = "89d847bb8155f5727867d82f96978f89ea0a7d13"
--PV = "01.01.00.04"
-+# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.05"
-+SRCREV = "97c2ce177c78c0f7a861c8dc9ac10657d85eae36"
-+PV = "01.01.00.05"
+-# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.05C"
+-SRCREV = "fc407a408e6c7e4cad6b5f0dd4367049abfd375f"
+-PV = "01.01.00.05"
++# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.06"
++SRCREV = "42eefef1b4bdc659fc8fc42e8f2bc74a4b155265"
++PV = "01.01.00.06"
+ 
+ DEVICELIST = "k2h k2k k2l k2e"
+ 
 
 
