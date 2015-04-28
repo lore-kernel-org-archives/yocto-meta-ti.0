@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A76E4E009B6; Tue, 28 Apr 2015 15:31:50 -0700 (PDT)
+	id A8E61E00949; Tue, 28 Apr 2015 15:31:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2234AE00949
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21027E00932
 	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 15:31:47 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0665652A67; Tue, 28 Apr 2015 22:31:46 +0000 (UTC)
+	id 1102552A0D; Tue, 28 Apr 2015 22:31:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150428223147.0665652A67@arago-project.org>
+Message-Id: <20150428223147.1102552A0D@arago-project.org>
 Date: Tue, 28 Apr 2015 22:31:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : netapi: Update to new version 1.1.0.6
+Subject: Sam Nelson : nwal-lld: Update to new version 2.1.0.6
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,13 +38,13 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 972ae9702a1509c6c8f62ed1cf38ba8ca3ce6621
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=972ae9702a1509c6c8f62ed1cf38ba8ca3ce6621
+Commit: 438a4397f468e8d69a7741b6032a65e4df5389ea
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=438a4397f468e8d69a7741b6032a65e4df5389ea
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Tue Apr 28 20:12:20 2015 +0000
+Date:   Tue Apr 28 20:12:58 2015 +0000
 
-netapi: Update to new version 1.1.0.6
+nwal-lld: Update to new version 2.1.0.6
 
 - Fixes issues with parallel builds
 
@@ -53,25 +53,25 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/netapi/netapi.inc |    6 +++---
+ recipes-bsp/nwal-lld/nwal-lld.inc |    6 +++---
  1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-ti/netapi/netapi.inc b/recipes-ti/netapi/netapi.inc
-index eae436c..0ba4eeb 100644
---- a/recipes-ti/netapi/netapi.inc
-+++ b/recipes-ti/netapi/netapi.inc
-@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.txt;md5=f2b4f162358b1ffaf3f230
+diff --git a/recipes-bsp/nwal-lld/nwal-lld.inc b/recipes-bsp/nwal-lld/nwal-lld.inc
+index fcbecf8..2cdc9aa 100644
+--- a/recipes-bsp/nwal-lld/nwal-lld.inc
++++ b/recipes-bsp/nwal-lld/nwal-lld.inc
+@@ -6,9 +6,9 @@ COMPATIBLE_MACHINE = "keystone"
  BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/netapi.git;protocol=git;branch=${BRANCH}"
+ SRC_URI = "git://git.ti.com/keystone-rtos/nwal-lld.git;protocol=git;branch=${BRANCH}"
  
--# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.05C"
--SRCREV = "fc407a408e6c7e4cad6b5f0dd4367049abfd375f"
--PV = "01.01.00.05"
-+# Below Commit ID corresponds to "DEV.NETAPI.01.01.00.06"
-+SRCREV = "42eefef1b4bdc659fc8fc42e8f2bc74a4b155265"
-+PV = "01.01.00.06"
+-# Below commit ID corresponds to "DEV.NWAL.02.01.00.05A"
+-SRCREV = "05c0222714791ad95672293196a33fffab041fc9"
+-PV = "02.01.00.05"
++# Below commit ID corresponds to "DEV.NWAL.02.01.00.06"
++SRCREV = "a3494c9aaa2808f438d26b2c3b8b091448ffc445"
++PV = "02.01.00.06"
  
- DEVICELIST = "k2h k2k k2l k2e"
- 
+ BASEDIR = "${WORKDIR}/git"
+ S = "${BASEDIR}/ti/drv/nwal"
 
 
