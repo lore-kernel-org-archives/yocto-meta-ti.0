@@ -1,6 +1,6 @@
-Return-Path: <sam.nelson@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id AB9AFE00954; Tue, 28 Apr 2015 07:14:34 -0700 (PDT)
+	id C3DFDE00997; Tue, 28 Apr 2015 11:21:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,27 +12,27 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 42A03E003A8
-	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 07:14:32 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 291B9E00932
+	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 11:21:50 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t3SEEVRP007758
-	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 09:14:31 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3SEEU7V005862
-	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 09:14:30 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 28 Apr 2015 09:14:30 -0500
-Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t3SEEUME014997;	Tue, 28 Apr 2015 09:14:30 -0500
-From: Sam Nelson <sam.nelson@ti.com>
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t3SILn94000860
+	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 13:21:49 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3SILmZ3024075
+	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 13:21:48 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 28 Apr 2015 13:21:48 -0500
+Received: from localhost.localdomain (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t3SILh66020936;	Tue, 28 Apr 2015 13:21:46 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 28 Apr 2015 10:14:28 -0400
-Message-ID: <1430230468-9922-1-git-send-email-sam.nelson@ti.com>
+Date: Tue, 28 Apr 2015 14:21:38 -0400
+Message-ID: <1430245299-14096-1-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] hplib: Update to new version 1.1.0.5
+Subject: [PATCH 1/2] llvm-common: Extend to nativesdk class.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,30 +45,26 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2015 14:14:34 -0000
+X-List-Received-Date: Tue, 28 Apr 2015 18:21:51 -0000
 Content-Type: text/plain
 
-- Fixes issues with parallel builds
-
-Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-bsp/hplib/hplib.inc |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ recipes-core/llvm/llvm-common.bbappend |    5 +++++
+ 1 file changed, 5 insertions(+)
+ create mode 100644 recipes-core/llvm/llvm-common.bbappend
 
-diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
-index 99254d1..de5b2b7 100644
---- a/recipes-bsp/hplib/hplib.inc
-+++ b/recipes-bsp/hplib/hplib.inc
-@@ -5,6 +5,6 @@ DEVICELIST = "k2h k2k k2l k2e"
- BRANCH = "master"
- SRC_URI = "git://git.ti.com/keystone-rtos/hplib.git;protocol=git;branch=${BRANCH}"
- 
--# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.04"
--SRCREV = "89d847bb8155f5727867d82f96978f89ea0a7d13"
--PV = "01.01.00.04"
-+# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.05"
-+SRCREV = "97c2ce177c78c0f7a861c8dc9ac10657d85eae36"
-+PV = "01.01.00.05"
+diff --git a/recipes-core/llvm/llvm-common.bbappend b/recipes-core/llvm/llvm-common.bbappend
+new file mode 100644
+index 0000000..65de0d8
+--- /dev/null
++++ b/recipes-core/llvm/llvm-common.bbappend
+@@ -0,0 +1,5 @@
++PR_append = "-arago0"
++
++SYSROOT_PREPROCESS_FUNCS_append_class-nativesdk = " llvm_common_sysroot_preprocess"
++
++BBCLASSEXTEND += "nativesdk"
 -- 
 1.7.9.5
 
