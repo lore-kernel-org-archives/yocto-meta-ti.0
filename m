@@ -1,6 +1,6 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <sam.nelson@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 0F9FEE009AA; Tue, 28 Apr 2015 11:22:19 -0700 (PDT)
+	id 6631FE00997; Tue, 28 Apr 2015 15:23:18 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,33 +8,31 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [192.94.94.41 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8035DE00997
-	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 11:21:59 -0700 (PDT)
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 157E3E00932
+	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 15:23:16 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t3SILw1V003820
-	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 13:21:58 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3SILvqk024130
-	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 13:21:57 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 28 Apr 2015 13:21:57 -0500
-Received: from localhost.localdomain (ileax41-snat.itg.ti.com
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t3SMNF5v022787
+	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 17:23:15 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3SMNE1d015975
+	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 17:23:14 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 28 Apr 2015 17:23:14 -0500
+Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t3SILh67020936;	Tue, 28 Apr 2015 13:21:52 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
+	t3SMNEBq024910;	Tue, 28 Apr 2015 17:23:14 -0500
+From: Sam Nelson <sam.nelson@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Tue, 28 Apr 2015 14:21:39 -0400
-Message-ID: <1430245299-14096-2-git-send-email-j-stiffler@ti.com>
+Date: Tue, 28 Apr 2015 18:23:11 -0400
+Message-ID: <1430259791-13761-1-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1430245299-14096-1-git-send-email-j-stiffler@ti.com>
-References: <1430245299-14096-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] ti-llvm3.3: Add LLVM 3.3 with c6x intrinsic support.
+Subject: [PATCH] traceframework: Update commit id for version 1.1.1.6
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,194 +45,33 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2015 18:22:19 -0000
+X-List-Received-Date: Tue, 28 Apr 2015 22:23:18 -0000
 Content-Type: text/plain
 
-* Supports target, native, and nativesdk classes.
+- Fixes issue with parallel build
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 ---
- ...e-Do-not-check-build-executable-extension.patch |   60 ++++++++++++
- recipes-core/llvm/ti-llvm3.3_3.3.bb                |  103 ++++++++++++++++++++
- 2 files changed, 163 insertions(+)
- create mode 100644 recipes-core/llvm/ti-llvm3.3/0001-configure-Do-not-check-build-executable-extension.patch
- create mode 100644 recipes-core/llvm/ti-llvm3.3_3.3.bb
+ recipes-bsp/traceframework/traceframework_git.bb |    5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-core/llvm/ti-llvm3.3/0001-configure-Do-not-check-build-executable-extension.patch b/recipes-core/llvm/ti-llvm3.3/0001-configure-Do-not-check-build-executable-extension.patch
-new file mode 100644
-index 0000000..b6e5331
---- /dev/null
-+++ b/recipes-core/llvm/ti-llvm3.3/0001-configure-Do-not-check-build-executable-extension.patch
-@@ -0,0 +1,60 @@
-+From 60da8adc29a84796c9768a1a962eda1915c87332 Mon Sep 17 00:00:00 2001
-+From: Jake Stiffler <j-stiffler@ti.com>
-+Date: Fri, 20 Feb 2015 10:55:11 -0500
-+Subject: [PATCH] configure: Do not check build executable extension.
-+
-+ * This seems to cause issues nativesdk and build sdk
-+   architectures are the same.
-+
-+Signed-off-by: Jake Stiffler <j-stiffler@ti.com>
-+---
-+ configure                 |    3 +++
-+ projects/sample/configure |    4 ++++
-+ 2 files changed, 7 insertions(+)
-+
-+diff --git a/configure b/configure
-+index decbc40..387c4fd 100755
-+--- a/configure
-++++ b/configure
-+@@ -4951,6 +4951,8 @@ echo "$as_me: error: no acceptable cc found in \$PATH" >&2;}
-+   rm -f conftest*
-+   echo 'int main () { return 0; }' > conftest.$ac_ext
-+   ac_cv_build_exeext=
-++
-++if false; then
-+   if { (eval echo "$as_me:$LINENO: \"$ac_build_link\"") >&5
-+   (eval $ac_build_link) 2>&5
-+   ac_status=$?
-+@@ -4967,6 +4969,7 @@ echo "$as_me: error: no acceptable cc found in \$PATH" >&2;}
-+ echo "$as_me: error: installation or configuration problem: compiler cannot create executables." >&2;}
-+    { (exit 1); exit 1; }; }
-+   fi
-++fi
-+   rm -f conftest*
-+   test x"${ac_cv_build_exeext}" = x && ac_cv_build_exeext=blank
-+ fi
-+diff --git a/projects/sample/configure b/projects/sample/configure
-+index a2c70c6..b57f21c 100755
-+--- a/projects/sample/configure
-++++ b/projects/sample/configure
-+@@ -4753,6 +4753,8 @@ echo "$as_me: error: no acceptable cc found in \$PATH" >&2;}
-+   rm -f conftest*
-+   echo 'int main () { return 0; }' > conftest.$ac_ext
-+   ac_cv_build_exeext=
-++
-++if false; then
-+   if { (eval echo "$as_me:$LINENO: \"$ac_build_link\"") >&5
-+   (eval $ac_build_link) 2>&5
-+   ac_status=$?
-+@@ -4769,6 +4771,8 @@ echo "$as_me: error: no acceptable cc found in \$PATH" >&2;}
-+ echo "$as_me: error: installation or configuration problem: compiler cannot create executables." >&2;}
-+    { (exit 1); exit 1; }; }
-+   fi
-++fi
-++
-+   rm -f conftest*
-+   test x"${ac_cv_build_exeext}" = x && ac_cv_build_exeext=blank
-+ fi
-+-- 
-+1.7.9.5
-+
-diff --git a/recipes-core/llvm/ti-llvm3.3_3.3.bb b/recipes-core/llvm/ti-llvm3.3_3.3.bb
-new file mode 100644
-index 0000000..9ae8866
---- /dev/null
-+++ b/recipes-core/llvm/ti-llvm3.3_3.3.bb
-@@ -0,0 +1,103 @@
-+DESCRIPTION = "LLVM 3.3 with support for TI C66x intrinsics"
-+HOMEPAGE = "https://gitorious.design.ti.com/ocl/llvm33-src"
-+
-+do_configure_prepend_class-native() {
-+    # Fix paths in llvm-config
-+    sed -i "s|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|sys::path::parent_path(CurrentPath))\.str()|g" ${S}/tools/llvm-config/llvm-config.cpp
-+}
-+
-+require recipes-core/llvm/llvm.inc
-+require recipes-core/llvm/llvm3.inc
-+
-+DEPENDS_append_class-native = " llvm-common-native"
-+
-+LLVM_DIR = "ti-llvm${PV}"
-+
-+BRANCH = "master"
-+
-+SRC_URI = " \
-+  git://git.ti.com/opencl/ti-llvm-clang-3_3.git;protocol=git;branch=${BRANCH} \
-+  file://0001-configure-Do-not-check-build-executable-extension.patch \
-+"
-+
-+
-+SRCREV = "29629a3e70d445cfbfbb4046a56d3648ebae9544"
-+
-+S = "${WORKDIR}/git"
-+
-+do_compile_class-native() {
-+  cd ${LLVM_BUILD_DIR}
-+  oe_runmake
-+}
-+
-+do_compile_class-nativesdk() {
-+    cd ${LLVM_BUILD_DIR}
-+    oe_runmake \
-+        AR="${BUILD_AR}" \
-+        CC="${BUILD_CC}" \
-+        CFLAGS="${BUILD_CFLAGS}" \
-+        CXX="${BUILD_CXX}" \
-+        CXXFLAGS="${BUILD_CXXFLAGS}" \
-+        CPP="${BUILD_CPP}" \
-+        CPPFLAGS="${BUILD_CPPFLAGS}" \
-+        LD="${BUILD_LD}" \
-+        LDFLAGS="${BUILD_LDFLAGS}" \
-+        NM="${BUILD_NM}" \
-+        RANLIB="${BUILD_RANLIB}" \
-+        PATH="${STAGING_BINDIR_NATIVE}:$PATH" \
-+        cross-compile-build-tools
-+    oe_runmake
-+}
-+
-+do_install_append_class-target() {
-+    for b in ${D}${bindir}/${LLVM_DIR}/${HOST_SYS}-clang*; do
-+        if [ ! -L ${b} ]; then
-+            mv ${b} ${D}${bindir}/`echo "${b}" | sed -e 's|${D}${bindir}/${LLVM_DIR}/${HOST_SYS}-||g'`
-+        fi
-+    done
-+}
-+
-+do_install_class-native() {
-+    cd ${LLVM_BUILD_DIR}
-+    oe_runmake DESTDIR=${LLVM_INSTALL_DIR} install
-+
-+    mv ${LLVM_INSTALL_DIR}${bindir}/${HOST_SYS}-llvm-config ${LLVM_INSTALL_DIR}/llvm-config${PV}-ti
-+
-+    install -d ${D}${bindir}
-+    for b in ${LLVM_INSTALL_DIR}${bindir}/${HOST_SYS}-clang*; do
-+        if [ ! -L ${b} ]; then
-+            mv ${b} ${D}${bindir}/`echo "${b}" | sed -e 's|${LLVM_INSTALL_DIR}${bindir}/${HOST_SYS}-||g'`
-+        fi
-+    done
-+
-+    install -d ${D}${bindir}/${LLVM_DIR}
-+    mv ${LLVM_INSTALL_DIR}${bindir}/* ${D}${bindir}/${LLVM_DIR}/
-+
-+    install -d ${D}${includedir}/${LLVM_DIR}
-+    mv ${LLVM_INSTALL_DIR}${includedir}/* ${D}${includedir}/${LLVM_DIR}/
-+
-+    install -d ${D}${libdir}/${LLVM_DIR}
-+    mv ${LLVM_INSTALL_DIR}${libdir}/* ${D}${libdir}/${LLVM_DIR}/
-+    ln -s ${LLVM_DIR}/libLLVM-${PV}.so ${D}${libdir}/libLLVM-${PV}.so
-+
-+    install -d ${D}${docdir}/${LLVM_DIR}
-+    mv ${LLVM_INSTALL_DIR}${prefix}/docs/llvm/* ${D}${docdir}/${LLVM_DIR}
-+
-+    install -d ${D}${bindir}
-+    install -m 0755 ${LLVM_INSTALL_DIR}/llvm-config${PV}-ti ${D}${bindir}
-+}
-+
-+SYSROOT_PREPROCESS_FUNCS_class-target += "llvm_sysroot_preprocess_target"
-+SYSROOT_PREPROCESS_FUNCS_class-nativesdk += "llvm_sysroot_preprocess_target"
-+
-+llvm_sysroot_preprocess() {
-+    :
-+}
-+
-+llvm_sysroot_preprocess_target() {
-+    install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}
-+    mv ${LLVM_INSTALL_DIR}/llvm-config-host ${SYSROOT_DESTDIR}${bindir_crossscripts}/llvm-config${PV}-ti
-+}
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
+diff --git a/recipes-bsp/traceframework/traceframework_git.bb b/recipes-bsp/traceframework/traceframework_git.bb
+index 3211dea..e164428 100644
+--- a/recipes-bsp/traceframework/traceframework_git.bb
++++ b/recipes-bsp/traceframework/traceframework_git.bb
+@@ -5,9 +5,10 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/instrumentation/traceframework/COPY
+ BRANCH="master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/traceframework.git;destsuffix=git/ti/instrumentation/traceframework;protocol=git;branch=${BRANCH}"
+ 
+-# Below commit ID corresponds to DEV.TFWK-01.01.01.06A
+-SRCREV = "bd87f53f4d12dc802bcc5609afb7994643e40cb9"
++# Below commit ID corresponds to DEV.TFWK-01.01.01.06B
++SRCREV = "6d29bc0d1ab6bb0658876552197dcdc757a25082"
+ PV = "01.01.01.06"
++PR = "r1"
+ 
+ COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
+ DEPENDS = "cuia"
 -- 
 1.7.9.5
 
