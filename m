@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BDA52E009CF; Tue, 28 Apr 2015 15:31:53 -0700 (PDT)
+	id BE774E00997; Tue, 28 Apr 2015 15:31:53 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 901F9E009AF
-	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 15:31:49 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 23750E00997
+	for <meta-ti@yoctoproject.org>; Tue, 28 Apr 2015 15:31:47 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 69A8752A9A; Tue, 28 Apr 2015 22:31:48 +0000 (UTC)
+	id 3954A52A4F; Tue, 28 Apr 2015 22:31:47 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150428223148.69A8752A9A@arago-project.org>
-Date: Tue, 28 Apr 2015 22:31:48 +0000 (UTC)
+Message-Id: <20150428223147.3954A52A4F@arago-project.org>
+Date: Tue, 28 Apr 2015 22:31:47 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : traceframework: Update commit id for version 1.1.1.6
+Subject: Sam Nelson : hplib: Update to new version 1.1.0.5
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,41 +37,38 @@ X-List-Received-Date: Tue, 28 Apr 2015 22:31:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 141b6deaa3b902cac3240bd83aecb33abdaa0bdb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=141b6deaa3b902cac3240bd83aecb33abdaa0bdb
+Branch: master
+Commit: c76497d7b7b646c6b5dba47da9016468fd8d88cb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c76497d7b7b646c6b5dba47da9016468fd8d88cb
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Wed Apr 29 04:23:11 2015 +0000
+Date:   Tue Apr 28 20:14:28 2015 +0000
 
-traceframework: Update commit id for version 1.1.1.6
+hplib: Update to new version 1.1.0.5
 
-- Fixes issue with parallel build
+- Fixes issues with parallel builds
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/traceframework/traceframework_git.bb |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+ recipes-bsp/hplib/hplib.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/traceframework/traceframework_git.bb b/recipes-bsp/traceframework/traceframework_git.bb
-index 3211dea..e164428 100644
---- a/recipes-bsp/traceframework/traceframework_git.bb
-+++ b/recipes-bsp/traceframework/traceframework_git.bb
-@@ -5,9 +5,10 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/instrumentation/traceframework/COPY
- BRANCH="master"
- SRC_URI = "git://git.ti.com/keystone-rtos/traceframework.git;destsuffix=git/ti/instrumentation/traceframework;protocol=git;branch=${BRANCH}"
+diff --git a/recipes-bsp/hplib/hplib.inc b/recipes-bsp/hplib/hplib.inc
+index 99254d1..de5b2b7 100644
+--- a/recipes-bsp/hplib/hplib.inc
++++ b/recipes-bsp/hplib/hplib.inc
+@@ -5,6 +5,6 @@ DEVICELIST = "k2h k2k k2l k2e"
+ BRANCH = "master"
+ SRC_URI = "git://git.ti.com/keystone-rtos/hplib.git;protocol=git;branch=${BRANCH}"
  
--# Below commit ID corresponds to DEV.TFWK-01.01.01.06A
--SRCREV = "bd87f53f4d12dc802bcc5609afb7994643e40cb9"
-+# Below commit ID corresponds to DEV.TFWK-01.01.01.06B
-+SRCREV = "6d29bc0d1ab6bb0658876552197dcdc757a25082"
- PV = "01.01.01.06"
-+PR = "r1"
- 
- COMPATIBLE_MACHINE = "(tci6614-evm|keystone)"
- DEPENDS = "cuia"
+-# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.04"
+-SRCREV = "89d847bb8155f5727867d82f96978f89ea0a7d13"
+-PV = "01.01.00.04"
++# Below Commit ID corresponds to "DEV.HPLIB.01.01.00.05"
++SRCREV = "97c2ce177c78c0f7a861c8dc9ac10657d85eae36"
++PV = "01.01.00.05"
 
 
