@@ -1,6 +1,6 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <craig.mcqueen@innerrange.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 62DE3E00477; Wed, 29 Apr 2015 08:37:34 -0700 (PDT)
+	id BE775E0098D; Wed, 29 Apr 2015 17:50:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -10,17 +10,29 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 75918E007CC
-	for <meta-ti@yoctoproject.org>; Wed, 29 Apr 2015 08:37:28 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 2BEB552A0D; Wed, 29 Apr 2015 15:37:28 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20150429153728.2BEB552A0D@arago-project.org>
-Date: Wed, 29 Apr 2015 15:37:28 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 3.14.40 and PM, A/ D and connectivity fixes
+Received: from remote.innerrange.com (122-143-146.dsl.connexus.net.au
+	[203.122.143.146])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2F8A0E007CC
+	for <meta-ti@yoctoproject.org>; Wed, 29 Apr 2015 17:50:16 -0700 (PDT)
+Received: from IR-CENTRAL.corp.innerrange.com ([fe80::758b:a6c:a61b:18f4]) by
+	IR-CENTRAL.corp.innerrange.com ([fe80::758b:a6c:a61b:18f4%14]) with
+	mapi; Thu, 30 Apr 2015 10:50:14 +1000
+From: Craig McQueen <craig.mcqueen@innerrange.com>
+To: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
+Date: Thu, 30 Apr 2015 10:50:12 +1000
+Thread-Topic: Error when recompiling linux-ti-staging kernel
+Thread-Index: AdCC3sMO+KII47iZRUiV2+QhpHRI4Q==
+Message-ID: <5500469A22567C4BAF673A6E86AFA3A402227F4FAA84@IR-CENTRAL.corp.innerrange.com>
+Accept-Language: en-US, en-AU
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US, en-AU
+x-tm-as-product-ver: SMEX-11.1.0.1239-7.500.1018-21510.006
+x-tm-as-result: No--39.361800-5.000000-31
+x-tm-as-user-approved-sender: No
+x-tm-as-user-blocked-sender: No
+MIME-Version: 1.0
+Subject: Error when recompiling linux-ti-staging kernel
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,44 +45,36 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2015 15:37:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 30 Apr 2015 00:50:20 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Module: meta-ti
-Branch: daisy
-Commit: 216d98bd5499a8c4a7ef776dbc7bb1eb4c340461
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=216d98bd5499a8c4a7ef776dbc7bb1eb4c340461
+I'm using meta-ti with Poky dizzy to build linux-ti-staging 3.14.x for a Be=
+agleBone Black based system.
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed Apr 29 20:23:23 2015 +0000
+When I do a rebuild of linux-ti-staging, it does most of the compile but th=
+en fails with an error:
 
-linux-ti-staging: update to 3.14.40 and PM, A/D and connectivity fixes
+| touch: cannot touch '/home/craigm/yocto/poky/<boardname>/tmp/work/<boardn=
+ame>-poky-linux-gnueabi/linux-ti-staging/3.14.39-r22b+gitrAUTOINC+ba552b4bc=
+7/image/lib/modules/3.14.39/build': Permission denied
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compileconfigs (log file is located at /home/c=
+raigm/yocto/poky/<boardname>/tmp/work/<boardname>-poky-linux-gnueabi/linux-=
+ti-staging/3.14.39-r22b+gitrAUTOINC+ba552b4bc7/temp/log.do_compileconfigs.4=
+657)
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Checking that file, I find that it's a symlink that points to /usr/src/kern=
+el, which doesn't exist.
 
----
+My current work-around is to do "bitbake linux-ti-staging -c clean" then re=
+build my image. It works fine as long as it's a fresh build. But that slows=
+ down the development cycle.
 
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+Why might this be happening?
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index 5d1e5ca..cb08de4 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -45,11 +45,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.14.y"
- 
--SRCREV = "ba552b4bc706e4c7040afcd4bc9462fb957768e1"
--PV = "3.14.39"
-+SRCREV = "443cd651e9fd926f50932abff395f6f843a11372"
-+PV = "3.14.40"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+--=20
+Craig McQueen
 
 
