@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5DA95E009E2; Wed,  6 May 2015 10:52:20 -0700 (PDT)
+	id 92E53E009E3; Wed,  6 May 2015 10:52:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EDAACE0095C
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC806E00952
 	for <meta-ti@yoctoproject.org>; Wed,  6 May 2015 10:52:13 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id A212452093; Wed,  6 May 2015 17:52:13 +0000 (UTC)
+	id 7AFF4529A7; Wed,  6 May 2015 17:52:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150506175213.A212452093@arago-project.org>
+Message-Id: <20150506175213.7AFF4529A7@arago-project.org>
 Date: Wed,  6 May 2015 17:52:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux: remove outdated kernel recipes
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2015 17:52:20 -0000
+X-List-Received-Date: Wed, 06 May 2015 17:52:21 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: f57702adf41adde4a65aaaa3ec738f1fa4001ebe
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f57702adf41adde4a65aaaa3ec738f1fa4001ebe
+Branch: master
+Commit: 84a71a2560d56081a04b26fe50cfbb666df22f95
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=84a71a2560d56081a04b26fe50cfbb666df22f95
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Wed May  6 13:24:53 2015 -0400
@@ -2093,5 +2093,5 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  recipes-kernel/linux/tipspkernel.inc               |   32 -
  2041 files changed, 0 insertions(+), 343627 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=f57702adf41adde4a65aaaa3ec738f1fa4001ebe
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=84a71a2560d56081a04b26fe50cfbb666df22f95
 
