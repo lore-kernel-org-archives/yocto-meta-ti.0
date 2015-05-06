@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E11D6E0096A; Wed,  6 May 2015 10:52:14 -0700 (PDT)
+	id E1EECE0095F; Wed,  6 May 2015 10:52:14 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0B313E00306
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1000EE008DC
 	for <meta-ti@yoctoproject.org>; Wed,  6 May 2015 10:52:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DC89252A5A; Wed,  6 May 2015 17:52:08 +0000 (UTC)
+	id 67407529AA; Wed,  6 May 2015 17:52:09 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150506175208.DC89252A5A@arago-project.org>
-Date: Wed,  6 May 2015 17:52:08 +0000 (UTC)
+Message-Id: <20150506175209.67407529AA@arago-project.org>
+Date: Wed,  6 May 2015 17:52:09 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with more fixes
+Subject: Denys Dmytriyenko : omap4/pandaboard: switch from outdated 3.4 kernel to 3. 14-staging
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,39 +37,26 @@ X-List-Received-Date: Wed, 06 May 2015 17:52:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 292d722cb480c7c77e28291961b739e78aa77dca
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=292d722cb480c7c77e28291961b739e78aa77dca
+Branch: daisy
+Commit: 5e84c68eff483f80945d2452e3d7f534a0f53eaf
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5e84c68eff483f80945d2452e3d7f534a0f53eaf
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed May  6 22:57:28 2015 +0000
+Date:   Wed May  6 23:24:10 2015 +0000
 
-linux-ti-staging: update with more fixes
+omap4/pandaboard: switch from outdated 3.4 kernel to 3.14-staging
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/include/omap4.inc                     |    8 +-
+ ...fix-memset-related-crashes-caused-by-rece.patch |  256 --
+ .../0004-ARM-7670-1-fix-the-memset-fix.patch       |   83 -
+ .../linux/linux-omap4-3.4/pandaboard/defconfig     | 4152 --------------------
+ recipes-kernel/linux/linux-omap4_3.4.bb            |   20 -
+ recipes-kernel/linux/linux-ti-staging_3.14.bb      |    2 +-
+ 6 files changed, 5 insertions(+), 4516 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index cb08de4..63a8bd2 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -45,11 +45,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-3.14.y"
- 
--SRCREV = "443cd651e9fd926f50932abff395f6f843a11372"
-+SRCREV = "ad37716161e4e7a670607b4bd9b2407409918800"
- PV = "3.14.40"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=5e84c68eff483f80945d2452e3d7f534a0f53eaf
 
