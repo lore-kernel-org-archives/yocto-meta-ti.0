@@ -1,32 +1,32 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8CB06E0097C; Wed,  6 May 2015 10:26:42 -0700 (PDT)
+	id E6B21E00820; Wed,  6 May 2015 10:33:11 -0700 (PDT)
 Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
 	[206.46.173.23])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7006E00306
-	for <meta-ti@yoctoproject.org>; Wed,  6 May 2015 10:26:28 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 64B7BE00306
+	for <meta-ti@yoctoproject.org>; Wed,  6 May 2015 10:32:50 -0700 (PDT)
 Received: from gandalf.denix.org ([108.28.31.169]) by vms173023.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
 	16 2014))
-	with ESMTPSA id <0NNX006IPV3O4Q00@vms173023.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 06 May 2015 12:26:27 -0500 (CDT)
+	with ESMTPSA id <0NNX004DJVE7V520@vms173023.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 06 May 2015 12:32:48 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=XqdN4uAV c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
+X-CMAE-Analysis: v=2.1 cv=B/MOC1ok c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
 	a=IkcTkHD0fZMA:10 a=0gcC27t9AAAA:8	a=oR5dmqMzAAAA:8 a=-9mUelKeXuEA:10
-	a=h1PgugrvaO0A:10 a=sozttTNsAAAA:8	a=pGLkceISAAAA:8 a=2KMo9-giAAAA:8
-	a=QYXpOU9IAAAA:8 a=dzKkVJ4fEi8CcZQtMugA:9	a=2SBAkGmaTXahKZvY:21
-	a=LxfuvnV8HR8kpG-J:21 a=xo25VRc0WpmlMNWw:21	a=QEXdDO2ut3YA:10
-	a=Sf_gFPzhefAA:10 a=7oMQu0ng85MA:10
+	a=h1PgugrvaO0A:10 a=sozttTNsAAAA:8	a=_enOPnqeAAAA:8 a=pGLkceISAAAA:8
+	a=2KMo9-giAAAA:8 a=QYXpOU9IAAAA:8	a=dzKkVJ4fEi8CcZQtMugA:9
+	a=1wlrChLDMIv6GZMe:21 a=bo0Fjqxsp5B6DqSd:21	a=AJMj4ESRBukRgXxU:21
+	a=QEXdDO2ut3YA:10 a=Sf_gFPzhefAA:10 a=7oMQu0ng85MA:10
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 380AF200EC;	Wed,
-	6 May 2015 13:26:09 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id E3E24200EC;	Wed,
+	6 May 2015 13:32:28 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 06 May 2015 13:26:05 -0400
-Message-id: <1430933165-28326-1-git-send-email-denis@denix.org>
+Date: Wed, 06 May 2015 13:32:27 -0400
+Message-id: <1430933547-31209-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.2.0
 MIME-version: 1.0
-Subject: [PATCH] linux: remove outdated kernel recipes
+Subject: [PATCH v2] linux: remove outdated kernel recipes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -39,7 +39,7 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2015 17:26:42 -0000
+X-List-Received-Date: Wed, 06 May 2015 17:33:12 -0000
 Content-type: text/plain; charset=UTF-8
 Content-transfer-encoding: 8bit
 
@@ -47,6 +47,9 @@ From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
+v2 - remove few more unused files
+
+ .../files/0001-arm-fix-builds-with-gcc-4.7.patch   |    26 -
  ...M-OMAP-Cleanup-Beagleboard-DVI-reset-gpio.patch |   184 -
  ...ART-Fix-incorrect-population-of-default-u.patch |   169 -
  .../linux/linux-3.3.7/beagleboard/defconfig        |  3780 -
@@ -2084,9 +2087,12 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  ...-usb-gadget-udc-core-fix-wrong-call-order.patch |    33 -
  ...udc-core-fix-incompatibility-with-dummy-h.patch |    46 -
  recipes-kernel/linux/linux-ti33x-psp_3.2.bb        |  1949 -
+ recipes-kernel/linux/linux.inc                     |   277 -
  .../linux/linux/beagleboard/logo_linux_clut224.ppm | 73147 -------------------
  recipes-kernel/linux/linux_3.3.7.bb                |    41 -
- 2039 files changed, 343292 deletions(-)
+ recipes-kernel/linux/tipspkernel.inc               |    32 -
+ 2042 files changed, 343627 deletions(-)
+ delete mode 100644 recipes-kernel/linux/files/0001-arm-fix-builds-with-gcc-4.7.patch
  delete mode 100644 recipes-kernel/linux/linux-3.3.7/beagleboard/0001-ARM-OMAP-Cleanup-Beagleboard-DVI-reset-gpio.patch
  delete mode 100644 recipes-kernel/linux/linux-3.3.7/beagleboard/0001-ARM-OMAP2-UART-Fix-incorrect-population-of-default-u.patch
  delete mode 100644 recipes-kernel/linux/linux-3.3.7/beagleboard/defconfig
@@ -4124,9 +4130,43 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  delete mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0005-usb-gadget-udc-core-fix-wrong-call-order.patch
  delete mode 100644 recipes-kernel/linux/linux-ti33x-psp-3.2/usb/0006-usb-gadget-udc-core-fix-incompatibility-with-dummy-h.patch
  delete mode 100644 recipes-kernel/linux/linux-ti33x-psp_3.2.bb
+ delete mode 100644 recipes-kernel/linux/linux.inc
  delete mode 100644 recipes-kernel/linux/linux/beagleboard/logo_linux_clut224.ppm
  delete mode 100644 recipes-kernel/linux/linux_3.3.7.bb
+ delete mode 100644 recipes-kernel/linux/tipspkernel.inc
 
+diff --git a/recipes-kernel/linux/files/0001-arm-fix-builds-with-gcc-4.7.patch b/recipes-kernel/linux/files/0001-arm-fix-builds-with-gcc-4.7.patch
+deleted file mode 100644
+index db701e2..0000000
+--- a/recipes-kernel/linux/files/0001-arm-fix-builds-with-gcc-4.7.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From 0d12debe917269a013f8eddd42da8d3de5e3174e Mon Sep 17 00:00:00 2001
+-From: Steve Sakoman <steve@sakoman.com>
+-Date: Thu, 24 Jan 2013 15:42:01 -0800
+-Subject: [PATCH] arm: fix builds with gcc 4.7
+-
+-new unaligned access support in GCC was triggering an alignment fault at boot
+----
+- arch/arm/kernel/head.S | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/arch/arm/kernel/head.S b/arch/arm/kernel/head.S
+-index 6bd82d2..56b02cd 100644
+---- a/arch/arm/kernel/head.S
+-+++ b/arch/arm/kernel/head.S
+-@@ -336,7 +336,7 @@ __secondary_data:
+-  *  r13 = *virtual* address to jump to upon completion
+-  */
+- __enable_mmu:
+--#ifdef CONFIG_ALIGNMENT_TRAP
+-+#if defined(CONFIG_ALIGNMENT_TRAP) && __LINUX_ARM_ARCH__ < 6
+- 	orr	r0, r0, #CR_A
+- #else
+- 	bic	r0, r0, #CR_A
+--- 
+-1.8.1.2
+-
 diff --git a/recipes-kernel/linux/linux-3.3.7/beagleboard/0001-ARM-OMAP-Cleanup-Beagleboard-DVI-reset-gpio.patch b/recipes-kernel/linux/linux-3.3.7/beagleboard/0001-ARM-OMAP-Cleanup-Beagleboard-DVI-reset-gpio.patch
 deleted file mode 100644
 index 06db87e..0000000
@@ -286532,6 +286572,289 @@ index 1602e3f..0000000
 -	\
 -	file://beaglebone/0001-arm-boot-compressed-default-asm-arch-to-armv7-a.patch \
 -	"
+diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linux.inc
+deleted file mode 100644
+index ac51dae..0000000
+--- a/recipes-kernel/linux/linux.inc
++++ /dev/null
+@@ -1,277 +0,0 @@
+-DESCRIPTION = "Linux Kernel"
+-SECTION = "kernel"
+-LICENSE = "GPLv2"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+-
+-inherit kernel siteinfo
+-
+-# Enable OABI compat for people stuck with obsolete userspace
+-ARM_KEEP_OABI ?= "1"
+-
+-# Quirk for udev greater or equal 141
+-UDEV_GE_141 ?= "0"
+-
+-# Specify the commandline for your device
+-
+-# Boot from mmc
+-CMDLINE_at91sam9263ek = "mem=64M console=ttyS0,115200 root=/dev/mmcblk0p1 rootfstype=ext2 rootdelay=5"
+-# Boot from nfs
+-#CMDLINE_at91sam9263ek = "mem=64M console=ttyS0,115200 root=301 root=/dev/nfs nfsroot=172.20.3.1:/data/at91 ip=172.20.0.5:::255.255.0.0"
+-
+-# Set the verbosity of kernel messages during runtime
+-# You can define CMDLINE_DEBUG in your local.conf or distro.conf to override this behaviour  
+-CMDLINE_DEBUG ?= '${@base_conditional("DISTRO_TYPE", "release", "quiet", "debug", d)}'
+-CMDLINE_append = " ${CMDLINE_DEBUG} "
+-
+-# Kernel bootlogo is distro-specific (default is OE logo).
+-# Logo resolution (qvga, vga, ...) is machine-specific.
+-LOGO_SIZE ?= "."
+-
+-# Support for binary device tree generation
+-
+-FILES_kernel-devicetree = "/boot/devicetree*"
+-
+-KERNEL_DEVICETREE_boc01 = "${WORKDIR}/boc01.dts"
+-KERNEL_DEVICETREE_calamari = "arch/${ARCH}/boot/dts/mpc8536ds.dts"
+-KERNEL_DEVICETREE_canyonlands = "arch/${ARCH}/boot/dts/canyonlands.dts"
+-KERNEL_DEVICETREE_kilauea = "arch/${ARCH}/boot/dts/kilauea.dts"
+-KERNEL_DEVICETREE_lite5200 = "arch/${ARCH}/boot/dts/lite5200.dts"
+-KERNEL_DEVICETREE_lsppchd = "arch/${ARCH}/boot/dts/kuroboxHD.dts"
+-KERNEL_DEVICETREE_lsppchg = "arch/${ARCH}/boot/dts/kuroboxHG.dts"
+-KERNEL_DEVICETREE_mpc8313e-rdb = "arch/${ARCH}/boot/dts/mpc8313erdb.dts"
+-KERNEL_DEVICETREE_mpc8315e-rdb = "arch/${ARCH}/boot/dts/mpc8315erdb.dts"
+-KERNEL_DEVICETREE_mpc8323e-rdb = "arch/${ARCH}/boot/dts/mpc832x_rdb.dts"
+-KERNEL_DEVICETREE_mpc8544ds = "arch/${ARCH}/boot/dts/mpc8544ds.dts"
+-KERNEL_DEVICETREE_mpc8641-hpcn = "arch/${ARCH}/boot/dts/mpc8641_hpcn.dts"
+-KERNEL_DEVICETREE_p1020rdb = "arch/${ARCH}/boot/dts/p1020rdb.dts"
+-KERNEL_DEVICETREE_p2020ds = "arch/${ARCH}/boot/dts/p2020ds.dts"
+-KERNEL_DEVICETREE_sequoia = "arch/${ARCH}/boot/dts/sequoia.dts"
+-KERNEL_DEVICETREE_tqm8540 = "arch/${ARCH}/boot/dts/tqm8540.dts"
+-KERNEL_DEVICETREE_xilinx-ml507 = "arch/${ARCH}/boot/dts/virtex440-ml507.dts"
+-
+-KERNEL_DEVICETREE_FLAGS = "-R 8 -S 0x3000"
+-
+-CORTEXA8FIXUP ?= "yes"
+-
+-python __anonymous () {
+-
+-    import bb
+-    
+-    devicetree = bb.data.getVar('KERNEL_DEVICETREE', d, 1) or ''
+-    if devicetree:
+-    	depends = bb.data.getVar("DEPENDS", d, 1)
+-    	bb.data.setVar("DEPENDS", "%s dtc-native" % depends, d)
+-    	packages = bb.data.getVar("PACKAGES", d, 1)
+-    	bb.data.setVar("PACKAGES", "%s kernel-devicetree" % packages, d)
+-}
+-
+-do_configure_prepend() {
+-
+-        # Rename getline in ./scripts/unifdef.c
+-        # Kernels up to 2.6.29 are currently failing to build unifdef.c,
+-        # clashing with exposed getline() from <stdio.h>
+-        # see https://patchwork.kernel.org/patch/11166/
+-        # committed in 2.6.29 (commit d15bd1067b1fcb2b7250d22bc0c7c7fea0b759f7)
+-
+-        sed -i -e 's/getline/parseline/g' ${S}/scripts/unifdef.c
+-
+-
+-        echo "" > ${S}/.config
+-
+-        #
+-        # logo support, if you supply logo_linux_clut224.ppm in SRC_URI, then it's going to be used
+-        #
+-        if [ -e ${WORKDIR}/${LOGO_SIZE}/logo_linux_clut224.ppm ]; then
+-                install -m 0644 ${WORKDIR}/${LOGO_SIZE}/logo_linux_clut224.ppm drivers/video/logo/logo_linux_clut224.ppm
+-                echo "CONFIG_LOGO=y"                    >> ${S}/.config
+-                echo "CONFIG_LOGO_LINUX_CLUT224=y"      >> ${S}/.config
+-        fi
+-
+-        #
+-        # oabi / eabi support
+-        #
+-        if [ "${TARGET_OS}" = "linux-gnueabi" -o  "${TARGET_OS}" = "linux-uclibceabi" ]; then
+-                echo "CONFIG_AEABI=y"                   >> ${S}/.config
+-                if [ "${ARM_KEEP_OABI}" = "1" ] ; then
+-                        echo "CONFIG_OABI_COMPAT=y"             >> ${S}/.config
+-                else
+-                        echo "# CONFIG_OABI_COMPAT is not set"  >> ${S}/.config
+-                fi
+-        else
+-                echo "# CONFIG_AEABI is not set"        >> ${S}/.config
+-                echo "# CONFIG_OABI_COMPAT is not set"  >> ${S}/.config
+-        fi
+-
+-        # When enabling thumb for userspace we also need thumb support in the kernel
+-        if [ "${ARM_INSTRUCTION_SET}" = "thumb" ] ; then
+-            sed -i -e /CONFIG_ARM_THUMB/d ${WORKDIR}/defconfig 
+-            echo "CONFIG_ARM_THUMB=y" >> ${S}/.config
+-        fi
+-
+-        # Enable thumb2 fixup for specific issue in angstrom toolchains when used on A8 r1p[012] silicon
+-        if [ "${CORTEXA8FIXUP}" = "yes" ] ; then
+-            sed -i -e /CONFIG_ARM_ERRATA_430973/d ${WORKDIR}/defconfig
+-            echo "CONFIG_ARM_ERRATA_430973=y" >> ${S}/.config
+-        fi
+-
+-	#
+-	# endian support
+-	#
+-        if [ "${SITEINFO_ENDIANNESS}" = "be" ]; then
+-                echo "CONFIG_CPU_BIG_ENDIAN=y"          >> ${S}/.config
+-        fi
+-
+-        echo "CONFIG_CMDLINE=\"${CMDLINE}\"" >> ${S}/.config
+-
+-        sed -e '/CONFIG_AEABI/d' \
+-            -e '/CONFIG_OABI_COMPAT=/d' \
+-            -e '/CONFIG_CMDLINE=/d' \
+-            -e '/CONFIG_CPU_BIG_ENDIAN/d' \
+-            -e '/CONFIG_LOGO=/d' \
+-            -e '/CONFIG_LOGO_LINUX_CLUT224=/d' \
+-            -e '/CONFIG_LOCALVERSION/d' \
+-            -e '/CONFIG_LOCALVERSION_AUTO/d' \
+-	    < '${WORKDIR}/defconfig' >>'${S}/.config'
+-
+-        echo 'CONFIG_LOCALVERSION=""' >>${S}/.config
+-        echo '# CONFIG_LOCALVERSION_AUTO is not set' >>${S}/.config
+-
+-        #
+-        # Udev quirks
+-        #
+-
+-        # Newer versions of udev mandate that sysfs doesn't have deprecated entries
+-        if [ "${UDEV_GE_141}" = "1" ] ; then
+-            sed -e /CONFIG_SYSFS_DEPRECATED/d \
+-                -e /CONFIG_SYSFS_DEPRECATED_V2/d \
+-                -e /CONFIG_HOTPLUG/d \
+-                -e /CONFIG_UEVENT_HELPER_PATH/d \
+-                -e /CONFIG_UNIX/d \
+-                -e /CONFIG_SYSFS/d \
+-                -e /CONFIG_PROC_FS/d \
+-                -e /CONFIG_TMPFS/d \
+-                -e /CONFIG_INOTIFY_USER/d \
+-                -e /CONFIG_SIGNALFD/d \
+-                -e /CONFIG_TMPFS_POSIX_ACL/d \
+-                -e /CONFIG_BLK_DEV_BSG/d \
+-                -i '${S}/.config'
+-
+-            echo '# CONFIG_SYSFS_DEPRECATED is not set' >> ${S}/.config
+-            echo '# CONFIG_SYSFS_DEPRECATED_V2 is not set' >> ${S}/.config
+-            echo 'CONFIG_HOTPLUG=y' >> ${S}/.config
+-            echo 'CONFIG_UEVENT_HELPER_PATH=""' >> ${S}/.config
+-            echo 'CONFIG_UNIX=y' >> ${S}/.config
+-            echo 'CONFIG_SYSFS=y' >> ${S}/.config
+-            echo 'CONFIG_PROC_FS=y' >> ${S}/.config
+-            echo 'CONFIG_TMPFS=y' >> ${S}/.config
+-            echo 'CONFIG_INOTIFY_USER=y' >> ${S}/.config
+-            echo 'CONFIG_SIGNALFD=y' >> ${S}/.config
+-            echo 'CONFIG_TMPFS_POSIX_ACL=y' >> ${S}/.config
+-            echo 'CONFIG_BLK_DEV_BSG=y' >> ${S}/.config
+-            echo 'CONFIG_DEVTMPFS=y' >> ${S}/.config
+-            echo 'CONFIG_DEVTMPFS_MOUNT=y' >> ${S}/.config
+-        fi
+-
+-        # Newer inits like systemd need cgroup support
+-        if [ "${KERNEL_ENABLE_CGROUPS}" = "1" ] ; then
+-            sed -e /CONFIG_CGROUP_SCHED/d \
+-                -e /CONFIG_CGROUPS/d \
+-                -i '${S}/.config'
+-            
+-            echo 'CONFIG_CGROUP_SCHED=y' >> ${S}/.config
+-            echo 'CONFIG_CGROUPS=y' >> ${S}/.config
+-            echo 'CONFIG_CGROUP_NS=y' >> ${S}/.config
+-            echo 'CONFIG_CGROUP_FREEZER=y' >> ${S}/.config
+-            echo 'CONFIG_CGROUP_DEVICE=y' >> ${S}/.config
+-            echo 'CONFIG_CPUSETS=y' >> ${S}/.config
+-            echo 'CONFIG_PROC_PID_CPUSET=y' >> ${S}/.config
+-            echo 'CONFIG_CGROUP_CPUACCT=y' >> ${S}/.config
+-            echo 'CONFIG_RESOURCE_COUNTERS=y' >> ${S}/.config
+-        fi
+-
+-        #
+-        # root-over-nfs-over-usb-eth support. Limited, but should cover some cases.
+-        # Enable this by setting a proper CMDLINE_NFSROOT_USB.
+-        #
+-        if [ ! -z "${CMDLINE_NFSROOT_USB}" ]; then
+-                oenote "Configuring the kernel for root-over-nfs-over-usb-eth with CMDLINE ${CMDLINE_NFSROOT_USB}"
+-                sed -e '/CONFIG_INET/d' \
+-                    -e '/CONFIG_IP_PNP=/d' \
+-                    -e '/CONFIG_USB_GADGET=/d' \
+-                    -e '/CONFIG_USB_GADGET_SELECTED=/d' \
+-                    -e '/CONFIG_USB_ETH=/d' \
+-                    -e '/CONFIG_NFS_FS=/d' \
+-                    -e '/CONFIG_ROOT_NFS=/d' \
+-                    -e '/CONFIG_CMDLINE=/d' \
+-                    -i ${S}/.config
+-                echo "CONFIG_INET=y"                     >> ${S}/.config
+-                echo "CONFIG_IP_PNP=y"                   >> ${S}/.config
+-                echo "CONFIG_USB_GADGET=y"               >> ${S}/.config
+-                echo "CONFIG_USB_GADGET_SELECTED=y"      >> ${S}/.config
+-                echo "CONFIG_USB_ETH=y"                  >> ${S}/.config
+-                echo "CONFIG_NFS_FS=y"                   >> ${S}/.config
+-                echo "CONFIG_ROOT_NFS=y"                 >> ${S}/.config
+-                echo "CONFIG_CMDLINE=\"${CMDLINE_NFSROOT_USB}\"" >> ${S}/.config
+-        fi
+-		yes '' | oe_runmake oldconfig
+-}
+-
+-do_configure_append() {
+-        if test -e scripts/Makefile.fwinst ; then
+-		sed -i -e "s:-m0644:-m 0644:g" scripts/Makefile.fwinst
+-	fi
+-}
+-
+-# bitbake.conf only prepends PARALLEL make in tasks called do_compile, which isn't the case for compile_modules
+-# So explicitly enable it for that in here
+-EXTRA_OEMAKE = "${PARALLEL_MAKE} "
+-
+-do_install_append() {
+-	oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix}/src/linux-${KERNEL_VERSION} ARCH=$ARCH
+-}
+-
+-PACKAGES =+ "kernel-headers"
+-FILES_kernel-headers = "${exec_prefix}/src/linux*"
+-
+-do_devicetree_image() {
+-    if test -n "${KERNEL_DEVICETREE}" ; then
+-        dtc -I dts -O dtb ${KERNEL_DEVICETREE_FLAGS} -o devicetree ${KERNEL_DEVICETREE}
+-        install -d ${D}/boot
+-        install -m 0644 devicetree ${D}/boot/devicetree-${KERNEL_VERSION}
+-        install -d ${DEPLOY_DIR_IMAGE}
+-        install -m 0644 devicetree ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.dtb
+-        package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.dtb
+-        cd ${DEPLOY_DIR_IMAGE}
+-        rm -f ${KERNEL_IMAGE_SYMLINK_NAME}.dtb
+-        ln -sf ${KERNEL_IMAGE_BASE_NAME}.dtb ${KERNEL_IMAGE_SYMLINK_NAME}.dtb
+-        package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_SYMLINK_NAME}.dtb
+-    fi
+-}
+-
+-addtask devicetree_image after do_install before do_package do_deploy
+-
+-pkg_postinst_kernel-devicetree () {
+-	cd /${KERNEL_IMAGEDEST}; update-alternatives --install /${KERNEL_IMAGEDEST}/devicetree devicetree devicetree-${KERNEL_VERSION} ${KERNEL_PRIORITY} || true
+-}
+-
+-pkg_postrm_kernel-devicetree () {
+-	cd /${KERNEL_IMAGEDEST}; update-alternatives --remove devicetree devicetree-${KERNEL_VERSION} || true
+-}
+-
+-# Automatically depend on lzop-native if CONFIG_KERNEL_LZO is enabled
+-python () {
+-    try:
+-        defconfig = bb.fetch2.localpath('file://defconfig', d)
+-    except bb.fetch2.FetchError:
+-        return
+-
+-    try:
+-        configfile = open(defconfig)
+-    except IOError:
+-        return
+-
+-    if 'CONFIG_KERNEL_LZO=y\n' in configfile.readlines():
+-        depends = d.getVar('DEPENDS', False)
+-        d.setVar('DEPENDS', depends + ' lzop-native')
+-}
 diff --git a/recipes-kernel/linux/linux/beagleboard/logo_linux_clut224.ppm b/recipes-kernel/linux/linux/beagleboard/logo_linux_clut224.ppm
 deleted file mode 100644
 index d29fc1c..0000000
@@ -359732,6 +360055,44 @@ index f6d2172..0000000
 -do_install_append_beagleboard() {
 -    cd ${D}/${KERNEL_IMAGEDEST} && ln -sf uImage-${KERNEL_VERSION} uImage
 -}
+diff --git a/recipes-kernel/linux/tipspkernel.inc b/recipes-kernel/linux/tipspkernel.inc
+deleted file mode 100644
+index ba93530..0000000
+--- a/recipes-kernel/linux/tipspkernel.inc
++++ /dev/null
+@@ -1,32 +0,0 @@
+-# Include this file for kernel recipes that need to handle different defconfigs
+-# and apply patches based on "tipspkernel" DISTRO_FEATURES
+-
+-def get_major_pv(p):
+-	import re
+-	r = re.compile("([0-9]+\.[0-9]+).*")
+-	m = r.match(p);
+-	if m:
+-		return m.group(1)
+-	return None
+-
+-PMV = "${@get_major_pv(d.getVar('PV', True))}"
+-
+-# First of all, set own FILESPATH avoiding unnecessary BP and BPN, but adding
+-# extra level of major version
+-FILESPATH = "${@base_set_filespath([ "${FILE_DIRNAME}/${PF}", "${FILE_DIRNAME}/${P}", "${FILE_DIRNAME}/${PN}-${PMV}", \
+-"${FILE_DIRNAME}/${PN}", "${FILE_DIRNAME}/files", "${FILE_DIRNAME}" ], d)}"
+-
+-# We don't want "tipspkernel" to be another OVERRIDE, but rather a new level of
+-# FILESPATH with all the OVERRIDES applied to it
+-CONFIGS_PSP = "${@base_set_filespath(["${FILE_DIRNAME}/${PF}/tipspkernel", "${FILE_DIRNAME}/${P}/tipspkernel", \
+-"${FILE_DIRNAME}/${PN}-${PMV}/tipspkernel", "${FILE_DIRNAME}/${PN}/tipspkernel", "${FILE_DIRNAME}/files/tipspkernel", \
+-"${FILE_DIRNAME}/tipspkernel"], d)}:"
+-
+-# When "tipspkernel" is ENABLED, prepend additional set of directories to FILESPATH
+-FILESPATH =. "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "${CONFIGS_PSP}", "", d)}"
+-
+-# When "tipspkernel" is NOT ENABLED, append additional list of PATCHES_OVER_PSP to SRC_URI
+-SRC_URI_append = "${@base_contains('DISTRO_FEATURES', 'tipspkernel', "", "${PATCHES_OVER_PSP}", d)}"
+-
+-# List additional patches to apply on top of PSP kernel, start with a space
+-PATCHES_OVER_PSP = ""
 -- 
 2.2.0
 
