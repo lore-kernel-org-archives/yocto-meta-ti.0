@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DE94DE007B6; Wed,  6 May 2015 10:16:24 -0700 (PDT)
+	id 08180E007B6; Wed,  6 May 2015 10:24:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,34 +8,34 @@ X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00, RCVD_IN_DNSWL_NONE,
 	UPPERCASE_75_100 autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.19 listed in list.dnswl.org]
+	*      [206.46.173.25 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 UPPERCASE_75_100 message body is 75-100% uppercase
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ABE24E00306
-	for <meta-ti@yoctoproject.org>; Wed,  6 May 2015 10:16:14 -0700 (PDT)
-Received: from gandalf.denix.org ([108.28.31.169]) by vms173019.mailsrvcs.net
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B6838E00306
+	for <meta-ti@yoctoproject.org>; Wed,  6 May 2015 10:24:40 -0700 (PDT)
+Received: from gandalf.denix.org ([108.28.31.169]) by vms173025.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
 	16 2014))
-	with ESMTPSA id <0NNX002EYUMXF670@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 06 May 2015 12:16:12 -0500 (CDT)
+	with ESMTPSA id <0NNX001IWV0BMBZ0@vms173025.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 06 May 2015 12:24:14 -0500 (CDT)
 X-CMAE-Score: 0
 X-CMAE-Analysis: v=2.1 cv=XqdN4uAV c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
 	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=h1PgugrvaO0A:10
 	a=sozttTNsAAAA:8 a=ZFfnHRPFAAAA:8	a=KKAkSRfTAAAA:8 a=pGLkceISAAAA:8
-	a=drOt6m5kAAAA:8 a=x5BwiFZGAAAA:8	a=uq-9EjwRRJ9lmNp46OkA:9
-	a=9gT3VEmfs1-Z_16x:21 a=GsF3YI0FSe5_SNoZ:21
+	a=drOt6m5kAAAA:8 a=x5BwiFZGAAAA:8	a=IWkuwluyKS2SPEIas7YA:9
+	a=9QC3zyWdBlcwyhnm:21 a=MN27VeD5G9X0DdwF:21
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 7A0F3200EC;	Wed,
-	6 May 2015 13:16:09 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 0F806200EC;	Wed,
+	6 May 2015 13:24:11 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 06 May 2015 13:16:09 -0400
-Message-id: <1430932569-24170-1-git-send-email-denis@denix.org>
+Date: Wed, 06 May 2015 13:24:10 -0400
+Message-id: <1430933050-27603-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] omap4/pandaboard: switch from outdated 3.4 kernel to 3.14-staging
+Subject: [PATCH v2] omap4/pandaboard: switch from outdated 3.4 kernel to 3.14-staging
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,18 +48,21 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2015 17:16:24 -0000
+X-List-Received-Date: Wed, 06 May 2015 17:24:50 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
+v2 - make staging recipe omap4 compatible
+
  conf/machine/include/omap4.inc                     |    8 +-
  ...fix-memset-related-crashes-caused-by-rece.patch |  256 --
  .../0004-ARM-7670-1-fix-the-memset-fix.patch       |   83 -
  .../linux/linux-omap4-3.4/pandaboard/defconfig     | 4152 --------------------
  recipes-kernel/linux/linux-omap4_3.4.bb            |   20 -
- 5 files changed, 4 insertions(+), 4515 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_3.14.bb      |    2 +-
+ 6 files changed, 5 insertions(+), 4516 deletions(-)
  delete mode 100644 recipes-kernel/linux/linux-omap4-3.4/pandaboard/0003-ARM-7668-1-fix-memset-related-crashes-caused-by-rece.patch
  delete mode 100644 recipes-kernel/linux/linux-omap4-3.4/pandaboard/0004-ARM-7670-1-fix-the-memset-fix.patch
  delete mode 100644 recipes-kernel/linux/linux-omap4-3.4/pandaboard/defconfig
@@ -4627,6 +4630,19 @@ index 52629de..0000000
 -           "
 -
 -S = "${WORKDIR}/git"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 63a8bd2..aa5810d 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -39,7 +39,7 @@ KERNEL_DEVICETREE_beagleboard = "omap3-beagle.dtb omap3-beagle-xm.dtb"
+ 
+ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+ 
+-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|omap3"
++COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|omap3|omap4"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.2.0
 
