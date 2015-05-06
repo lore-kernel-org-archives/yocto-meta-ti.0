@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E4867E008DC; Wed,  6 May 2015 10:52:14 -0700 (PDT)
+	id E2AECE00820; Wed,  6 May 2015 10:52:14 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B4AEBE0094C
-	for <meta-ti@yoctoproject.org>; Wed,  6 May 2015 10:52:11 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0ECFFE00820
+	for <meta-ti@yoctoproject.org>; Wed,  6 May 2015 10:52:09 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8E58352A67; Wed,  6 May 2015 17:52:08 +0000 (UTC)
+	id 2F22D529A7; Wed,  6 May 2015 17:52:08 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150506175209.8E58352A67@arago-project.org>
+Message-Id: <20150506175209.2F22D529A7@arago-project.org>
 Date: Wed,  6 May 2015 17:52:08 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : omap4/pandaboard: switch from outdated 3.4 kernel to 3. 14-staging
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with more fixes (x15, usb, etc.)
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,26 +37,41 @@ X-List-Received-Date: Wed, 06 May 2015 17:52:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 7126dca19c9f109c7394267176547d24fd5eb259
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7126dca19c9f109c7394267176547d24fd5eb259
+Branch: daisy
+Commit: 259a5d757e9317123b56cbe876e8cfd2d8dab5ca
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=259a5d757e9317123b56cbe876e8cfd2d8dab5ca
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Wed May  6 23:24:10 2015 +0000
+Date:   Wed May  6 23:00:07 2015 +0000
 
-omap4/pandaboard: switch from outdated 3.4 kernel to 3.14-staging
+u-boot-ti-staging: update with more fixes (x15, usb, etc.)
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/machine/include/omap4.inc                     |    8 +-
- ...fix-memset-related-crashes-caused-by-rece.patch |  256 --
- .../0004-ARM-7670-1-fix-the-memset-fix.patch       |   83 -
- .../linux/linux-omap4-3.4/pandaboard/defconfig     | 4152 --------------------
- recipes-kernel/linux/linux-omap4_3.4.bb            |   20 -
- recipes-kernel/linux/linux-ti-staging_3.14.bb      |    2 +-
- 6 files changed, 5 insertions(+), 4516 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=7126dca19c9f109c7394267176547d24fd5eb259
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
+index 25201d7..bc4ba91 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
+@@ -8,13 +8,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+ 
+ PV = "2014.07"
+-PR = "r9+gitr${SRCPV}"
++PR = "r10+gitr${SRCPV}"
+ 
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ 
+ BRANCH ?= "ti-u-boot-2014.07"
+ 
+-SRCREV = "67b4cea8897cef6797549c8fa1f89ee7e36b6cdd"
++SRCREV = "18637f496efe0040516e5b807b44fe585f509bc7"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
+
 
