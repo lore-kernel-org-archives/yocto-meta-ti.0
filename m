@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7EA4AE007CC; Wed,  6 May 2015 16:57:09 -0700 (PDT)
+	id 77E2DE007CC; Wed,  6 May 2015 18:04:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,29 +14,29 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 44989E00477
-	for <meta-ti@yoctoproject.org>; Wed,  6 May 2015 16:57:05 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t46Nv50R018097
-	for <meta-ti@yoctoproject.org>; Wed, 6 May 2015 18:57:05 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t46Nv4Cw025651
-	for <meta-ti@yoctoproject.org>; Wed, 6 May 2015 18:57:04 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 6 May 2015 18:57:04 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F1333E00477
+	for <meta-ti@yoctoproject.org>; Wed,  6 May 2015 18:04:50 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4714nts023885
+	for <meta-ti@yoctoproject.org>; Wed, 6 May 2015 20:04:49 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4714mss004096
+	for <meta-ti@yoctoproject.org>; Wed, 6 May 2015 20:04:48 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 6 May 2015 20:04:48 -0500
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t46Nv3Ek003276	for <meta-ti@yoctoproject.org>;
-	Wed, 6 May 2015 18:57:04 -0500
-Date: Wed, 6 May 2015 19:57:03 -0400
+	t4714l1i017890	for <meta-ti@yoctoproject.org>;
+	Wed, 6 May 2015 20:04:48 -0500
+Date: Wed, 6 May 2015 21:04:47 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <2024414685.337.1430956623735.JavaMail.jenkins@puget>
+Message-ID: <1619180936.339.1430960687799.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-05-06_16-09-27
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-05-06_21-00-51
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,11 +49,11 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2015 23:57:09 -0000
+X-List-Received-Date: Thu, 07 May 2015 01:04:54 -0000
 Content-Type: multipart/mixed;
-	boundary="----=_Part_336_430460483.1430956623724"
+	boundary="----=_Part_338_975644483.1430960687798"
 
-------=_Part_336_430460483.1430956623724
+------=_Part_338_975644483.1430960687798
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
@@ -67,9 +67,9 @@ Status for 05/06/15
 
 <h2>Status for 05/06/15</h2>
 
-<h2>BUILD_ID: build-2015-05-06_16-10-29</h2>
+<h2>BUILD_ID: build-2015-05-06_21-02-00</h2>
 
-<h2>Clean Build: true</h2>
+<h2>Clean Build: false</h2>
 
 <h2>Clean Sources: false</h2>
 <h2><u>Repository Revisions</u></h2>
@@ -209,7 +209,7 @@ FS_FILTER="core-image-minimal-"<br>
 FS_IMAGE_TYPE="tar.gz"<br>
 NFS_ROOT="/home/jenkins/nfs-root"<br>
 SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="true"<br>
+CLEAN_BUILD="false"<br>
 CLEAN_ALL="false"<br>
 CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
 LOG_DIR="${BUILD_ROOT}/log-files"<br>
@@ -251,4 +251,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_336_430460483.1430956623724--
+------=_Part_338_975644483.1430960687798--
