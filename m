@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8FAD0E00956; Fri,  8 May 2015 05:34:09 -0700 (PDT)
+	id CE66BE009BB; Fri,  8 May 2015 06:12:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,27 +12,27 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4AE0DE00930
-	for <meta-ti@yoctoproject.org>; Fri,  8 May 2015 05:34:06 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 81C0FE00945
+	for <meta-ti@yoctoproject.org>; Fri,  8 May 2015 06:12:39 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t48CY5lZ008898
-	for <meta-ti@yoctoproject.org>; Fri, 8 May 2015 07:34:05 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t48CY5Eh031686
-	for <meta-ti@yoctoproject.org>; Fri, 8 May 2015 07:34:05 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 8 May 2015 07:34:04 -0500
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t48DCbbr011825
+	for <meta-ti@yoctoproject.org>; Fri, 8 May 2015 08:12:38 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t48DCbF3001042
+	for <meta-ti@yoctoproject.org>; Fri, 8 May 2015 08:12:37 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 8 May 2015 08:12:36 -0500
 Received: from localhost.localdomain (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t48CY4QD026954;	Fri, 8 May 2015 07:34:04 -0500
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t48DCaTN002384;	Fri, 8 May 2015 08:12:36 -0500
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Fri, 8 May 2015 08:33:57 -0400
-Message-ID: <1431088437-30316-1-git-send-email-j-stiffler@ti.com>
+Date: Fri, 8 May 2015 09:12:32 -0400
+Message-ID: <1431090752-3296-1-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] ti-cgt6x: Fix installation for native and nativesdk classes.
+Subject: [PATCH] ti-xdctools: Add version 3.30.06.67
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,48 +45,37 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 12:34:09 -0000
+X-List-Received-Date: Fri, 08 May 2015 13:12:42 -0000
 Content-Type: text/plain
-
-* Many RTOS packages assume that the entire cgt is installed in a
-  single directory as opposed to standard install paths.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
- recipes-ti/devtools/ti-cgt6x_8.0.0.bb |    8 ++++++++
- 1 file changed, 8 insertions(+)
+ recipes-ti/devtools/ti-xdctools_3.30.06.67.bb |   16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 recipes-ti/devtools/ti-xdctools_3.30.06.67.bb
 
-diff --git a/recipes-ti/devtools/ti-cgt6x_8.0.0.bb b/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
-index 69c6d60..2353ebd 100644
---- a/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
-+++ b/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://ti-cgt-c6000_${PV}/LICENSE.txt;md5=b6311962635a4f1563
- LIC_FILES_CHKSUM_class-target = "file://usr/share/doc/ti/cgt-c6x/LICENSE.txt;md5=b6311962635a4f15630e36ec2d875eca"
- 
- PE = "1"
-+PR = "r1"
- 
- require ../includes/ti-unpack.inc
- 
-@@ -49,6 +50,11 @@ do_install() {
-         install -m 755 ${binfile} ${D}${bindir}
-     done
- 
-+    install -d ${D}${datadir}/ti/cgt-c6x/bin
-+    for binfile in ${S}/ti-cgt-c6000_${PV}/bin/*; do
-+        install -m 755 ${binfile} ${D}${datadir}/ti/cgt-c6x/bin
-+    done
+diff --git a/recipes-ti/devtools/ti-xdctools_3.30.06.67.bb b/recipes-ti/devtools/ti-xdctools_3.30.06.67.bb
+new file mode 100644
+index 0000000..6de8181
+--- /dev/null
++++ b/recipes-ti/devtools/ti-xdctools_3.30.06.67.bb
+@@ -0,0 +1,16 @@
++require ti-xdctools.inc
 +
-     install -d ${D}${datadir}/ti/cgt-c6x/include
-     for includefile in ${S}/ti-cgt-c6000_${PV}/include/*; do
-         install -m 644 ${includefile} ${D}${datadir}/ti/cgt-c6x/include
-@@ -102,4 +108,6 @@ do_install_class-target() {
- 
- FILES_${PN} += "${datadir}/ti/*"
- 
-+FILES_${PN}-dbg += "${datadir}/ti/cgt-c6x/bin/.debug"
++PV = "3_30_06_67"
++PR = "r0"
 +
- BBCLASSEXTEND = "native nativesdk"
++LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=117e3c5f48df3e785edee50f5f34a738"
++
++SRC_URI[xdcbin.md5sum] = "b500f53e00c4422c7124e1825eee6352"
++SRC_URI[xdcbin.sha256sum] = "e5ca1f55c09b64bc9414adb55b2fcca301178194abed80f1d75d94cae442fd08"
++
++S = "${WORKDIR}/xdctools_${PV}"
++
++TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
++TI_BIN_UNPK_CMDS = ""
++
++INSANE_SKIP_${PN} = "installed-vs-shipped"
 -- 
 1.7.9.5
 
