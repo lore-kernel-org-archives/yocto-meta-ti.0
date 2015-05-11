@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2C7FEE00A11; Mon, 11 May 2015 14:49:18 -0700 (PDT)
+	id 30078E00A1E; Mon, 11 May 2015 14:49:18 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EAE0EE009A3
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EF2D5E009A6
 	for <meta-ti@yoctoproject.org>; Mon, 11 May 2015 14:49:14 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id B51B0529BA; Mon, 11 May 2015 21:49:14 +0000 (UTC)
+	id BEBD752A2B; Mon, 11 May 2015 21:49:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150511214914.B51B0529BA@arago-project.org>
+Message-Id: <20150511214914.BEBD752A2B@arago-project.org>
 Date: Mon, 11 May 2015 21:49:14 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update to 3.14.41 with platform, connectivity fixes
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update with connectivity, x15 and other fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,39 +38,40 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: 8ece3389737478a273da8ffd41a80fd56e3c18c8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8ece3389737478a273da8ffd41a80fd56e3c18c8
+Commit: efc3f4a7687c0ba959dca2b75a99ba8efac94507
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=efc3f4a7687c0ba959dca2b75a99ba8efac94507
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue May 12 01:27:53 2015 +0000
+Date:   Tue May 12 01:31:42 2015 +0000
 
-linux-ti-staging: update to 3.14.41 with platform, connectivity fixes
+u-boot-ti-staging: update with connectivity, x15 and other fixes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index aa5810d..955af5c 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -45,11 +45,11 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
+index bc4ba91..975253e 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb
+@@ -8,13 +8,13 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
  
- BRANCH = "ti-linux-3.14.y"
+ PV = "2014.07"
+-PR = "r10+gitr${SRCPV}"
++PR = "r11+gitr${SRCPV}"
  
--SRCREV = "ad37716161e4e7a670607b4bd9b2407409918800"
--PV = "3.14.40"
-+SRCREV = "725b7cf9428077b8cce8b4b7d74608b82978dda5"
-+PV = "3.14.41"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
+ BRANCH ?= "ti-u-boot-2014.07"
  
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+-SRCREV = "18637f496efe0040516e5b807b44fe585f509bc7"
++SRCREV = "57a4aba31cb343b6592120e95be86b83d3d7ac5e"
+ 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
