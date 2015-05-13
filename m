@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4759CE008DC; Wed, 13 May 2015 14:44:23 -0700 (PDT)
+	id D0202E009A1; Wed, 13 May 2015 14:44:23 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F2433E008DC
-	for <meta-ti@yoctoproject.org>; Wed, 13 May 2015 14:44:19 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DC9FFE0097D
+	for <meta-ti@yoctoproject.org>; Wed, 13 May 2015 14:44:14 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 969C952A6C; Wed, 13 May 2015 21:44:19 +0000 (UTC)
+	id 34F0852A40; Wed, 13 May 2015 21:44:14 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150513214419.969C952A6C@arago-project.org>
-Date: Wed, 13 May 2015 21:44:19 +0000 (UTC)
+Message-Id: <20150513214414.34F0852A40@arago-project.org>
+Date: Wed, 13 May 2015 21:44:14 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : boot-monitor: pass custom LD var that includes sysroot option
+Subject: Denys Dmytriyenko : linux-ti-staging: update to 3.14.42 with more fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,45 +37,36 @@ X-List-Received-Date: Wed, 13 May 2015 21:44:23 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 12d1b6f5361a1c3ecbe51431c03f94ab832cd0c3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=12d1b6f5361a1c3ecbe51431c03f94ab832cd0c3
+Branch: master
+Commit: 60a7bfbf96609ef6f3e084c32b2af853222b3b7e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=60a7bfbf96609ef6f3e084c32b2af853222b3b7e
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu May 14 03:21:59 2015 +0000
+Date:   Thu May 14 03:42:35 2015 +0000
 
-boot-monitor: pass custom LD var that includes sysroot option
-
-Otherwise it fails to link against static libgcc with OE toolchain.
+linux-ti-staging: update to 3.14.42 with more fixes
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/boot-monitor/boot-monitor_git.bb |    4 ++--
+ recipes-kernel/linux/linux-ti-staging_3.14.bb |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index 8273ce8..72dc924 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -7,7 +7,7 @@ COMPATIBLE_MACHINE = "keystone"
- SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 955af5c..eb1ad27 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -45,8 +45,8 @@ S = "${WORKDIR}/git"
  
- PV = "2.0"
--PR = "r1+gitr${SRCPV}"
-+PR = "r2+gitr${SRCPV}"
+ BRANCH = "ti-linux-3.14.y"
  
- BRANCH = "master"
+-SRCREV = "725b7cf9428077b8cce8b4b7d74608b82978dda5"
+-PV = "3.14.41"
++SRCREV = "7763988e04f12b089283e385f3593e7f34a92068"
++PV = "3.14.42"
  
-@@ -21,7 +21,7 @@ BOOT_MONITOR_IMAGE  ?= "skern-${MACHINE}.bin"
- 
- FLOATABI = "${@base_contains("TUNE_FEATURES", "vfp", base_contains("TUNE_FEATURES", "callconvention-hard", " -mfloat-abi=hard", " -mfloat-abi=softfp", d), "" ,d)}"
- 
--EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}""
-+EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}" LD="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS} ${FLOATABI}""
- 
- do_compile () {
- 	unset LDFLAGS
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+ MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
 
 
