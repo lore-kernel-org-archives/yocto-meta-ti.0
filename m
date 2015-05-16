@@ -1,67 +1,42 @@
-Return-Path: <b.hutchman@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 96CE8E00945; Fri, 15 May 2015 13:21:46 -0700 (PDT)
+	id 8E0A4E00960; Fri, 15 May 2015 20:26:02 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (b.hutchman[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.218.48 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-oi0-f48.google.com (mail-oi0-f48.google.com
-	[209.85.218.48])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2D0C5E00820;
-	Fri, 15 May 2015 13:21:44 -0700 (PDT)
-Received: by oica37 with SMTP id a37so91213434oic.0;
-	Fri, 15 May 2015 13:21:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=//QEMxlkWfvE/k4WF0zZM9H/L5VSrUrxRlRCvsIpC0A=;
-	b=frtU0L4OlCje6AQ2lBQx8n3KKnAaDRUrNRaCw4PPho85C+jyjo0zj1WEIJhI+Z+1+z
-	nPf3kTtuKfGL9n3Fx4IhdTDVFfeA4sFvGbQsJ9A6w20p0A9eyRK0SDCeZUbZmb1qKfPn
-	SrMw2/0EN7C/8HbdG+0G5lUJw8FsGacXI16FrmbUVc8jzoMzvW/vQ6LBfzgVrph6tXyu
-	xvLHLiR7jZiyoviymcjsD1FB8XUqJg2tZgORl038U+hrZLBkLerEzGS+xJiomFPWIyGJ
-	9G+FQauih2qwC0U0/y1L2kwFc6lCX7W5RvhZshrNGAPeJ6N6DMS48oagJFsZDkK2Y1Fr
-	mQLA==
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CA1E8E008DC
+	for <meta-ti@yoctoproject.org>; Fri, 15 May 2015 20:25:59 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4G3PvnE001007
+	for <meta-ti@yoctoproject.org>; Fri, 15 May 2015 22:25:57 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4G3PvoJ029716
+	for <meta-ti@yoctoproject.org>; Fri, 15 May 2015 22:25:57 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 15 May 2015 22:25:57 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t4G3PvYY032492	for <meta-ti@yoctoproject.org>; Fri, 15 May 2015 22:25:57
+	-0500
+Date: Fri, 15 May 2015 23:25:57 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <604709076.395.1431746757093.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-X-Received: by 10.60.40.163 with SMTP id y3mr9812919oek.34.1431721303755; Fri,
-	15 May 2015 13:21:43 -0700 (PDT)
-Received: by 10.60.6.33 with HTTP; Fri, 15 May 2015 13:21:43 -0700 (PDT)
-In-Reply-To: <CAFZh4h8qX6hYJ_kA4Ny=K7YqGnECu_nX1Jkejj=3P8saYmCH2g@mail.gmail.com>
-References: <4f2d75bf33ac423ab064f754e0b67655@ASTRO-EX1.Bensberg.de>
-	<5540DB34.6010102@windriver.com>
-	<a01714e680f8470cb21bb0b52e66c91e@ASTRO-EX1.Bensberg.de>
-	<55421DA2.9060909@windriver.com>
-	<e134e69a27bd460a9da71929a7f78d9a@ASTRO-EX1.Bensberg.de>
-	<554236CB.6000604@windriver.com>
-	<CAFZh4h9oL7K-=Nxhy=GV0k31ZgnPQuhFLQ-r_fReSRk1ZRhk1g@mail.gmail.com>
-	<5550FD98.1050507@windriver.com>
-	<CAFZh4h-SqSVsG_HXrx3H=QfDs3DH5GoKmFCgwBgGq90+B4WB5A@mail.gmail.com>
-	<55521DB8.2070606@windriver.com> <20150514220801.GD20022@denix.org>
-	<CAFZh4h9=cJG8aVbwvh_NjR24UTnCj9A44zHPs3rqEn_rdCfN3A@mail.gmail.com>
-	<CAFZh4h-r1_gabVP0HdDoOrcT_neED51JpMmm586KLuc_efWdFg@mail.gmail.com>
-	<CAFZh4h8qX6hYJ_kA4Ny=K7YqGnECu_nX1Jkejj=3P8saYmCH2g@mail.gmail.com>
-Date: Fri, 15 May 2015 16:21:43 -0400
-Message-ID: <CAFZh4h9oJ3UZFt2b_3SHB1xi99M+rEWis12-VU2gQxMQ9sVBsA@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: Bruce Ashfield <bruce.ashfield@windriver.com>,
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	=?UTF-8?B?U2NoYXVtbMO2ZmZlbCw=?= <J.Schaumloeffel@astro-kom.de>,
-	"meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [yocto] Migration from 1.7.1 to 1.8 - kernel-abiversion missing
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-05-15_21-00-51
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -74,182 +49,206 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2015 20:21:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 16 May 2015 03:26:02 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_394_179046189.1431746757061"
 
-On Fri, May 15, 2015 at 3:26 PM, Brian Hutchinson <b.hutchman@gmail.com> wrote:
-> On Fri, May 15, 2015 at 9:55 AM, Brian Hutchinson <b.hutchman@gmail.com> wrote:
->> On Thu, May 14, 2015 at 6:16 PM, Brian Hutchinson <b.hutchman@gmail.com> wrote:
->>>
->>> On May 14, 2015 6:08 PM, "Denys Dmytriyenko" <denis@denix.org> wrote:
->>>>
->>>> On Tue, May 12, 2015 at 11:35:20AM -0400, Bruce Ashfield wrote:
->>>> > On 2015-05-12 10:20 AM, Brian Hutchinson wrote:
->>>> > >On Mon, May 11, 2015 at 3:06 PM, Bruce Ashfield
->>>> > ><bruce.ashfield@windriver.com> wrote:
->>>> > >>On 2015-05-11 02:10 PM, Brian Hutchinson wrote:
->>>> > >>>
->>>> > >>>On Thu, Apr 30, 2015 at 10:06 AM, Bruce Ashfield
->>>> > >>><bruce.ashfield@windriver.com> wrote:
->>>> > >>>>
->>>> > >>>>It is plausible. But in theory, linux-dummy should still provide
->>>> > >>>>what you need (but since it doesn't build anything, there is
->>>> > >>>>no abi .. and no modules can be built against it) .. so the
->>>> > >>>>error isn't graceful.
->>>> > >>>>
->>>> > >>>>Bruce
->>>> > >>>
->>>> > >>>
->>>> > >>>I can confirm this same problem is happening to me.  I just updated
->>>> > >>>one of my builds from 1.7 to 1.8 and am also getting my rootfs to
->>>> > >>> fail
->>>> > >>>due to no abi kernel version:
->>>> > >>
->>>> > >>
->>>> > >>We still have a race condition in the 1.8 branch for the population
->>>> > >>of the build-artifacts directory.
->>>> > >>
->>>> > >>If modules start building, they'll race against the population of the
->>>> > >>abiversion, and you may see that message.
->>>> > >>
->>>> > >>There's a proposed patch for master, but I don't think it is in
->>>> > >>fido yet.
->>>> > >>
->>>> > >>Bruce
->>>> > >
->>>> > >Hi Bruce,
->>>> > >
->>>> > >I did some searches and looks like there are a number of 'race'
->>>> > >condition fixes but it wasn't obvious which one I may need.  Is it
->>>> > >this one:
->>>> >
->>>> > > >http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=02d0a003d603266114512160b209876199241e98
->>>> > >
->>>> >
->>>> > That's the one that should make sure that the shared workdir
->>>> > (Which has the abiversion) is in place before building any modules.
->>>> >
->>>> > I can't say that it is exactly your issue, but it is the change
->>>> > I was thinking of.
->>>>
->>>> Brian,
->>>>
->>>> Were you able to try the above mentioned commit against am180x in meta-ti?
->>>> Did
->>>> it solve the missing abi kernel version? Thanks.
->>>>
->>>> --
->>>> Denys
->>>
->>> Hi Denys,
->>>
->>> No, I got caught up in something else ... I'll try it tomorrow and report
->>> back after I cherry pick that commit Bruce mentioned.
->>>
->>> Regards,
->>>
->>> Brian
->>
->> Update.  Not sure if I did this right but this is what I did.  I added
->> master as a remote and cherry picked
->> 02d0a003d603266114512160b209876199241e98.  Next I just went for it and
->> tried to bitbake my image again and got the same result as before.
->> Next I did a bitbake cleanall on virtual/kernel and tried to make my
->> image again and still got the same result.
->>
->> I'm going to leave this build as is and setup a new one using 1.8
->> master and see if I get the same thing again.  I'll leave this broken
->> build alone for a while in case someone wants me to try something with
->> it to fix it.
->>
->> Regards,
->>
->> Brian
->
-> Yet another update ... I did a fresh checkout of master and tried to
-> build and had the same kernelabiversion error:
->
-> WARNING: omap3-sgx-modules-5.01.01.01 ONLY supports hardfp mode for
-> now#######################
->                                                           | ETA:
-> 00:00:28
-> WARNING: omap3-sgx-modules-5.01.01.02 ONLY supports hardfp mode for now
-> WARNING: ti-cgt6x-8.0.0 ONLY supports hardfp mode for
-> now########################################
->
->  | ETA:  00:00:26
-> Parsing recipes: 100%
-> |##############################################################################################################################################################################|
-> Time: 00:01:02
-> Parsing of 1802 .bb files complete (0 cached, 1802 parsed). 2303
-> targets, 182 skipped, 0 masked, 0 errors.
-> NOTE: Resolving any missing task queue dependencies
-> NOTE: multiple providers are available for u-boot (u-boot,
-> u-boot-glsdk, u-boot-ti-staging)
-> NOTE: consider defining a PREFERRED_PROVIDER entry to match u-boot
-> NOTE: multiple providers are available for jpeg (jpeg, libjpeg-turbo)
-> NOTE: consider defining a PREFERRED_PROVIDER entry to match jpeg
->
-> Build Configuration:
-> BB_VERSION        = "1.27.0"
-> BUILD_SYS         = "x86_64-linux"
-> NATIVELSBSTRING   = "Debian-7.8"
-> TARGET_SYS        = "arm-poky-linux-gnueabi"
-> MACHINE           = "am180x-evm"
-> DISTRO            = "poky"
-> DISTRO_VERSION    = "1.8+snapshot-20150515"
-> TUNE_FEATURES     = "arm armv5 thumb dsp"
-> TARGET_FPU        = "soft"
-> meta
-> meta-yocto
-> meta-yocto-bsp    = "master:fab7da4f8030a4067db0522f77eaa6d3b501c68f"
-> meta-ti           = "master:60a7bfbf96609ef6f3e084c32b2af853222b3b7e"
-> meta-oe
-> meta-python
-> meta-networking
-> meta-webserver    = "master:53d55216c8c721d3b66ec8f968737bf081def870"
->
-> NOTE: Preparing RunQueue
-> NOTE: Executing SetScene Tasks
-> NOTE: Executing RunQueue Tasks
-> WARNING: QA Issue: /usr/bin/apxs_apache2-dev contained in package
-> apache2-dev requires /usr/bin/perl, but no providers found in its
-> RDEPENDS [file-rdeps]
-> ERROR: No kernel-abiversion file found
-> (/home/hutch/yocto_1.8_davinci_2/poky/build/tmp/sysroots/am180x-evm/pkgdata/kernel-depmod/kernel-abiversion),
-> cannot run depmod, aborting
-> ERROR: Function failed: do_rootfs
-> ERROR: Logfile of failure stored in:
-> /home/hutch/yocto_1.8_davinci_2/poky/build/tmp/work/am180x_evm-poky-linux-gnueabi/core-image-nodeam/1.0-r0/temp/log.do_rootfs.10336
-> ERROR: Task 7 (/home/hutch/yocto_1.8_davinci_2/poky/meta/recipes-core/images/core-image-nodeam.bb,
-> do_rootfs) failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 2614 tasks of which 9 didn't need to be
-> rerun and 1 failed.
-> Waiting for 0 running tasks to finish:
->
-> Summary: 1 task failed:
->   /home/hutch/yocto_1.8_davinci_2/poky/meta/recipes-core/images/core-image-nodeam.bb,
-> do_rootfs
-> Summary: There were 4 WARNING messages shown.
-> Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+------=_Part_394_179046189.1431746757061
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-More info for those that care ...
+<html>
+<head>
+<title>
+Status for 05/15/15
+</title>
+</head>
+<body>
 
-The end of the error log file has:
-DEBUG: Executing python function write_image_manifest
-DEBUG: Python function write_image_manifest finished
-NOTE: Executing: ldconfig
--r/home/hutch/yocto_1.8_davinci_2/poky/build/tmp/work/am180x_evm-poky-linux-gnueabi/core-image-nodeam/1.0-r0/rootfs-c
-new -v
-ERROR: No kernel-abiversion file found
-(/home/hutch/yocto_1.8_davinci_2/poky/build/tmp/sysroots/am180x-evm/pkgdata/kernel-depmod/kernel-abiversion),
-cannot run depmod, aborting
-DEBUG: Python function do_rootfs finished
-ERROR: Function failed: do_rootfs
+<h2>Status for 05/15/15</h2>
 
-I have a linux-dummy director in pkgdata but no kernel-depmod directory exists.
+<h2>BUILD_ID: build-2015-05-15_21-01-59</h2>
 
-Regards,
+<h2>Clean Build: false</h2>
 
-Brian
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
 
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am57xx-evm</td>
+        <td id="am57xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2e-evm</td>
+        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2l-evm</td>
+        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2015.05"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="false"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
+
+
+------=_Part_394_179046189.1431746757061--
