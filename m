@@ -1,6 +1,6 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9F821E009D8; Mon, 18 May 2015 10:55:06 -0700 (PDT)
+	id 69696E009D8; Mon, 18 May 2015 11:11:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,33 +12,30 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C9971E0094C
-	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 10:55:02 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AFB0AE0094C
+	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 11:11:22 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4IHt16J017721
-	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 12:55:01 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IHt0pE016190
-	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 12:55:00 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 18 May 2015 12:55:00 -0500
-Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IHspDN021044;
-	Mon, 18 May 2015 12:54:55 -0500
-Message-ID: <555A276B.3020209@ti.com>
-Date: Mon, 18 May 2015 13:54:51 -0400
-From: Jacob Stiffler <j-stiffler@ti.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4IIBKwq019303
+	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 13:11:20 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IIBKjE029988
+	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 13:11:20 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 18 May 2015 13:11:19 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IIBJBu012873;
+	Mon, 18 May 2015 13:11:19 -0500
+Date: Mon, 18 May 2015 14:11:19 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <20150518181119.GG31845@edge>
+References: <1431951659-9935-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <1431970376-24163-1-git-send-email-j-stiffler@ti.com>
-	<1431970376-24163-2-git-send-email-j-stiffler@ti.com>
-	<20150518174028.GD31845@edge>
-In-Reply-To: <20150518174028.GD31845@edge>
+In-Reply-To: <1431951659-9935-1-git-send-email-j-stiffler@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 1/3] gdbserverproxy-module-drv: Add version 1.1.0
+Subject: Re: [PATCH 1/2] linux/cmem.inc: Support reserving memory for CMEM.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,91 +48,103 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2015 17:55:06 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 18 May 2015 18:11:26 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+
+On Mon, May 18, 2015 at 08:20:58AM -0400, Jacob Stiffler wrote:
+> To reserve contiguous memory for CMEM:
+> * include the "recipes-kernel/linux/cmem.inc"
+> * Set CMEM_BASE and CMEM_SIZE to the physical memory address and size,
+>   respectively, to reserve for CMEM.
+> 
+> Currently limited to reserving a single memory region used to create
+> a single buffer pool of a single buffer.
+
+Looks good. 2 comments below.
 
 
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+> ---
+>  recipes-kernel/linux/cmem.inc        |   22 ++++++++++++++++++++++
+>  recipes-kernel/linux/linux/cmem.dtsi |   24 ++++++++++++++++++++++++
+>  2 files changed, 46 insertions(+)
+>  create mode 100644 recipes-kernel/linux/cmem.inc
+>  create mode 100644 recipes-kernel/linux/linux/cmem.dtsi
+> 
+> diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
+> new file mode 100644
+> index 0000000..207bdc6
+> --- /dev/null
+> +++ b/recipes-kernel/linux/cmem.inc
+> @@ -0,0 +1,22 @@
+> +FILESEXTRAPATHS_append := ":${THISDIR}/linux"
 
-On 5/18/2015 1:40 PM, Denys Dmytriyenko wrote:
-> On Mon, May 18, 2015 at 01:32:54PM -0400, Jacob Stiffler wrote:
->> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
->> ---
->>   recipes-devtools/gdbc6x/gdbc6x.inc                 |    9 ++++++
->>   .../gdbc6x/gdbserverproxy-module-drv_git.bb        |   31 ++++++++++++++++++++
->>   2 files changed, 40 insertions(+)
->>   create mode 100644 recipes-devtools/gdbc6x/gdbc6x.inc
->>   create mode 100644 recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.bb
->>
->> diff --git a/recipes-devtools/gdbc6x/gdbc6x.inc b/recipes-devtools/gdbc6x/gdbc6x.inc
->> new file mode 100644
->> index 0000000..ecdc11e
->> --- /dev/null
->> +++ b/recipes-devtools/gdbc6x/gdbc6x.inc
->> @@ -0,0 +1,9 @@
->> +BRANCH = "master"
->> +
->> +PV = "1.1.0"
->> +INC_PR = "r0"
->> +
->> +# This corresponds to version 1.1.0
->> +SRCREV = "1ab06f8bcfe7540754558bac331a0312c4b59142"
->> +
->> +SRC_URI = "git://git.ti.com/sdo-emu/gdbc6x.git;protocol=git;branch=${BRANCH}"
->> diff --git a/recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.bb b/recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.bb
->> new file mode 100644
->> index 0000000..2b02236
->> --- /dev/null
->> +++ b/recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.bb
->> @@ -0,0 +1,31 @@
->> +DESCRIPTION="Interface for GDB to commincate witha TI C66X DSP"
->> +
->> +LICENSE = "GPLv2"
->> +LIC_FILES_CHKSUM = "file://COPYING.txt;md5=75859989545e37968a99b631ef42722e"
->> +
->> +include gdbc6x.inc
->> +
->> +COMPATIBLE_MACHINE = "dra7xx"
->> +PACKAGE_ARCH = "${MACHINE_ARCH}"
->> +
->> +# This package builds a kernel module, use kernel PR as base and append a local
->> +MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
->> +PR = "${MACHINE_KERNEL_PR}"
->> +
->> +PLATFORM = ""
->> +PLATFORM_dra7xx = "DRA7xx_PLATFORM"
->> +
->> +EXTRA_OEMAKE = "PLATFORM=${PLATFORM}"
->> +
->> +S = "${WORKDIR}/git/kernel_module/gdbproxy-mod"
->> +
->> +module_autoload_gdbserverproxy = "gdbserverproxy"
->> +
->> +inherit module
->> +
->> +do_configure[noexec] = "1"
->> +do_qa_configure[noexec] = "1"
-> What's the need for the above?
->
-
-All three of these gdbc6x recipes use the same source. Without this 
-there is a QA error due to the file "git/gdbc6x/intl/configure.ac", 
-which is outside of the ${S} directory. The error is the following:
-
-ERROR: virtual/gettext required but not in DEPENDS for file 
-/media/hdd-1TB/jake/git/oe-layersetup_patches/build/arago-tmp-external-linaro-toolchain/work/am57xx_evm-linux-gnueabi/gdbserver-c6x/1.1.0-r0.1/git/gdbc6x/intl/configure.ac.
-Missing inherit gettext?
-ERROR: Function failed: do_qa_configure
+Move the file into standard "files" directory and drop above line.
 
 
-Is there a better way to handle this?
+> +SRC_URI += "file://cmem.dtsi"
+> +
+> +CMEM_BASE ?= ""
+> +CMEM_SIZE ?= ""
+> +
+> +do_compileconfigs_prepend() {
 
->> +CREATE_SRCIPK = "1"
->> +SRCIPK_INSTALL_DIR = "board-support/extra-drivers/${PN}-${PV}"
->> +SRCIPK_PACKAGE_ARCH = "${MACHINE_ARCH}"
-> This is not the right place for these^^ either.
->
+Should this be do_configure_append() instead? It would probably be safer, as 
+do_compileconfigs() is specific to multi-kernel.inc and some kernel recipes 
+may not include it...
 
-This was an oversight, and I'll remove in the next version.
 
+> +    if [ ! -z "${CMEM_BASE}" ]
+> +    then
+> +        cp ${WORKDIR}/cmem.dtsi ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
+> +
+> +        sed -i -e "s|__CMEM_BASE__|${CMEM_BASE}|g" \
+> +               -e "s|__CMEM_SIZE__|${CMEM_SIZE}|g" \
+> +               ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
+> +
+> +        for dts in ${KERNEL_DEVICETREE}
+> +        do
+> +            echo "#include \"${MACHINE}-cmem.dtsi\"" >> ${S}/arch/arm/boot/dts/${dts%.dtb}.dts
+> +        done
+> +    fi
+> +}
+> diff --git a/recipes-kernel/linux/linux/cmem.dtsi b/recipes-kernel/linux/linux/cmem.dtsi
+> new file mode 100644
+> index 0000000..6b1da99
+> --- /dev/null
+> +++ b/recipes-kernel/linux/linux/cmem.dtsi
+> @@ -0,0 +1,24 @@
+> +/ {
+> +        reserved-memory {
+> +                cmem_block_mem_0: cmem_block_mem@__CMEM_BASE__ {
+> +                        reg = <0x__CMEM_BASE__ 0x__CMEM_SIZE__>;
+> +                        no-map;
+> +                        status = "okay";
+> +                };
+> +        };
+> +
+> +        cmem {
+> +                compatible = "ti,cmem";
+> +                #address-cells = <1>;
+> +                #size-cells = <0>;
+> +
+> +                status = "okay";
+> +
+> +                cmem_block_0: cmem_block@0 {
+> +                        reg = <0>;
+> +                        memory-region = <&cmem_block_mem_0>;
+> +                        cmem-buf-pools = <1 0x__CMEM_SIZE__>;
+> +                };
+> +        };
+> +
+> +};
+> -- 
+> 1.7.9.5
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
