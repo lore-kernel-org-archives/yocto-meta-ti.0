@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2CD51E009DA; Mon, 18 May 2015 12:03:31 -0700 (PDT)
+	id C1E90E009DA; Mon, 18 May 2015 12:05:16 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,36 +8,37 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84B1DE0095D
-	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 12:03:29 -0700 (PDT)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 06455E0095D
+	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 12:05:15 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4IJ3Sdu022446
-	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 14:03:28 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IJ3Sap009965
-	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 14:03:28 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 18 May 2015 14:03:27 -0500
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4IJ5DDI009185
+	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 14:05:13 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IJ5D1D011852
+	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 14:05:13 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 18 May 2015 14:05:13 -0500
 Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IJ3JW3024996;
-	Mon, 18 May 2015 14:03:23 -0500
-Message-ID: <555A3776.8090705@ti.com>
-Date: Mon, 18 May 2015 15:03:18 -0400
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IJ5DPH026087;
+	Mon, 18 May 2015 14:05:13 -0500
+Message-ID: <555A37E9.2040603@ti.com>
+Date: Mon, 18 May 2015 15:05:13 -0400
 From: Jacob Stiffler <j-stiffler@ti.com>
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
 MIME-Version: 1.0
 To: Denys Dmytriyenko <denys@ti.com>
-References: <1431951659-9935-1-git-send-email-j-stiffler@ti.com>
-	<20150518181119.GG31845@edge>
-In-Reply-To: <20150518181119.GG31845@edge>
+References: <1431969882-24031-1-git-send-email-j-stiffler@ti.com>
+	<1431969882-24031-2-git-send-email-j-stiffler@ti.com>
+	<20150518173346.GC31845@edge>
+In-Reply-To: <20150518173346.GC31845@edge>
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 1/2] linux/cmem.inc: Support reserving memory for CMEM.
+Subject: Re: [PATCH 1/3] debugss-module-drv: Add version 1.2.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,103 +51,73 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2015 19:03:31 -0000
+X-List-Received-Date: Mon, 18 May 2015 19:05:16 -0000
 Content-Type: text/plain; charset="windows-1252"; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 
-On 5/18/2015 2:11 PM, Denys Dmytriyenko wrote:
-> On Mon, May 18, 2015 at 08:20:58AM -0400, Jacob Stiffler wrote:
->> To reserve contiguous memory for CMEM:
->> * include the "recipes-kernel/linux/cmem.inc"
->> * Set CMEM_BASE and CMEM_SIZE to the physical memory address and size,
->>    respectively, to reserve for CMEM.
+On 5/18/2015 1:33 PM, Denys Dmytriyenko wrote:
+> On Mon, May 18, 2015 at 01:24:40PM -0400, Jacob Stiffler wrote:
+>> * The debugss-module-drv is require for the dsptop utility.
 >>
->> Currently limited to reserving a single memory region used to create
->> a single buffer pool of a single buffer.
-> Looks good. 2 comments below.
->
->
 >> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 >> ---
->>   recipes-kernel/linux/cmem.inc        |   22 ++++++++++++++++++++++
->>   recipes-kernel/linux/linux/cmem.dtsi |   24 ++++++++++++++++++++++++
->>   2 files changed, 46 insertions(+)
->>   create mode 100644 recipes-kernel/linux/cmem.inc
->>   create mode 100644 recipes-kernel/linux/linux/cmem.dtsi
+>>   recipes-bsp/dsptop/debugss-module-drv_git.bb |   22 ++++++++++++++++++++++
+>>   recipes-bsp/dsptop/dsptop.inc                |    9 +++++++++
+>>   2 files changed, 31 insertions(+)
+>>   create mode 100644 recipes-bsp/dsptop/debugss-module-drv_git.bb
+>>   create mode 100644 recipes-bsp/dsptop/dsptop.inc
 >>
->> diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
+>> diff --git a/recipes-bsp/dsptop/debugss-module-drv_git.bb b/recipes-bsp/dsptop/debugss-module-drv_git.bb
 >> new file mode 100644
->> index 0000000..207bdc6
+>> index 0000000..561bb91
 >> --- /dev/null
->> +++ b/recipes-kernel/linux/cmem.inc
+>> +++ b/recipes-bsp/dsptop/debugss-module-drv_git.bb
 >> @@ -0,0 +1,22 @@
->> +FILESEXTRAPATHS_append := ":${THISDIR}/linux"
-> Move the file into standard "files" directory and drop above line.
+>> +DESCRIPTION="Debug Sub-System (DebugSS) driver for Keystone and DRA7xx devices"
+> The description says Keystone and dra7xx, but you set compatible machine to
+> dra7xx only. Should this also enable Keystone?
 >
 
-Ok.
+These recipes will eventually be extended to keystone. I can go ahead 
+and enable it now, though it won't be tested.
 
->> +SRC_URI += "file://cmem.dtsi"
+>> +LICENSE = "GPLv2"
+>> +LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
 >> +
->> +CMEM_BASE ?= ""
->> +CMEM_SIZE ?= ""
+>> +include dsptop.inc
 >> +
->> +do_compileconfigs_prepend() {
-> Should this be do_configure_append() instead? It would probably be safer, as
-> do_compileconfigs() is specific to multi-kernel.inc and some kernel recipes
-> may not include it...
->
-
-I had noticed that do_configure() gets invoked multiple times.
-
-I'll try it as a do_configure_append() and make sure it will work.
-
->> +    if [ ! -z "${CMEM_BASE}" ]
->> +    then
->> +        cp ${WORKDIR}/cmem.dtsi ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
+>> +COMPATIBLE_MACHINE = "dra7xx"
+>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
 >> +
->> +        sed -i -e "s|__CMEM_BASE__|${CMEM_BASE}|g" \
->> +               -e "s|__CMEM_SIZE__|${CMEM_SIZE}|g" \
->> +               ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
+>> +# This package builds a kernel module, use kernel PR as base and append a local
+>> +MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+>> +PR = "${MACHINE_KERNEL_PR}"
 >> +
->> +        for dts in ${KERNEL_DEVICETREE}
->> +        do
->> +            echo "#include \"${MACHINE}-cmem.dtsi\"" >> ${S}/arch/arm/boot/dts/${dts%.dtb}.dts
->> +        done
->> +    fi
->> +}
->> diff --git a/recipes-kernel/linux/linux/cmem.dtsi b/recipes-kernel/linux/linux/cmem.dtsi
+>> +PLATFORM = ""
+>> +PLATFORM_dra7xx = "DRA7xx_PLATFORM"
+>> +
+>> +EXTRA_OEMAKE = "'PLATFORM=${PLATFORM}'"
+>> +
+>> +S = "${WORKDIR}/git/debugss_module/debugss-mod"
+>> +
+>> +inherit module
+>> diff --git a/recipes-bsp/dsptop/dsptop.inc b/recipes-bsp/dsptop/dsptop.inc
 >> new file mode 100644
->> index 0000000..6b1da99
+>> index 0000000..cd403a1
 >> --- /dev/null
->> +++ b/recipes-kernel/linux/linux/cmem.dtsi
->> @@ -0,0 +1,24 @@
->> +/ {
->> +        reserved-memory {
->> +                cmem_block_mem_0: cmem_block_mem@__CMEM_BASE__ {
->> +                        reg = <0x__CMEM_BASE__ 0x__CMEM_SIZE__>;
->> +                        no-map;
->> +                        status = "okay";
->> +                };
->> +        };
+>> +++ b/recipes-bsp/dsptop/dsptop.inc
+>> @@ -0,0 +1,9 @@
+>> +BRANCH = "master"
 >> +
->> +        cmem {
->> +                compatible = "ti,cmem";
->> +                #address-cells = <1>;
->> +                #size-cells = <0>;
+>> +PV = "1.2.0"
+>> +INC_PR = "r0"
 >> +
->> +                status = "okay";
+>> +# This corresponds to version 1.2.0
+>> +SRCREV = "9893486936626e2d3de721f429a67fcac8a68151"
 >> +
->> +                cmem_block_0: cmem_block@0 {
->> +                        reg = <0>;
->> +                        memory-region = <&cmem_block_mem_0>;
->> +                        cmem-buf-pools = <1 0x__CMEM_SIZE__>;
->> +                };
->> +        };
->> +
->> +};
+>> +SRC_URI = "git://git.ti.com/sdo-emu/dsptop.git;protocol=git;branch=${BRANCH}"
 >> -- 
 >> 1.7.9.5
 >>
