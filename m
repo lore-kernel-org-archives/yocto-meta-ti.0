@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 79932E009D8; Mon, 18 May 2015 12:07:29 -0700 (PDT)
+	id 5CB81E009D8; Mon, 18 May 2015 12:13:23 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,32 +12,31 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 19AD0E0094C
-	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 12:07:26 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4IJ7OZM024821
-	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 14:07:24 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IJ7OhP015323
-	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 14:07:24 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 18 May 2015 14:07:24 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21090E0094C
+	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 12:13:19 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4IJDI2c025308
+	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 14:13:18 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IJDI8A019418
+	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 14:13:18 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 18 May 2015 14:13:18 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IJ7O42028679;
-	Mon, 18 May 2015 14:07:24 -0500
-Date: Mon, 18 May 2015 15:07:24 -0400
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IJDH7f006784;
+	Mon, 18 May 2015 14:13:17 -0500
+Date: Mon, 18 May 2015 15:13:17 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <20150518190724.GM31845@edge>
-References: <1431970376-24163-1-git-send-email-j-stiffler@ti.com>
-	<1431970376-24163-3-git-send-email-j-stiffler@ti.com>
-	<20150518174145.GE31845@edge> <555A36D5.7000502@ti.com>
+Message-ID: <20150518191317.GN31845@edge>
+References: <1431951659-9935-1-git-send-email-j-stiffler@ti.com>
+	<20150518181119.GG31845@edge> <555A3776.8090705@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <555A36D5.7000502@ti.com>
+In-Reply-To: <555A3776.8090705@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 2/3] gdbserver-c6x: Add version 1.1.0
+Subject: Re: [PATCH 1/2] linux/cmem.inc: Support reserving memory for CMEM.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,88 +49,111 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2015 19:07:29 -0000
+X-List-Received-Date: Mon, 18 May 2015 19:13:23 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Mon, May 18, 2015 at 03:00:37PM -0400, Jacob Stiffler wrote:
+On Mon, May 18, 2015 at 03:03:18PM -0400, Jacob Stiffler wrote:
 > 
 > 
-> On 5/18/2015 1:41 PM, Denys Dmytriyenko wrote:
-> >On Mon, May 18, 2015 at 01:32:55PM -0400, Jacob Stiffler wrote:
-> >>* c6x DSP development files required to support remote gdb debugging.
+> On 5/18/2015 2:11 PM, Denys Dmytriyenko wrote:
+> >On Mon, May 18, 2015 at 08:20:58AM -0400, Jacob Stiffler wrote:
+> >>To reserve contiguous memory for CMEM:
+> >>* include the "recipes-kernel/linux/cmem.inc"
+> >>* Set CMEM_BASE and CMEM_SIZE to the physical memory address and size,
+> >>   respectively, to reserve for CMEM.
 > >>
+> >>Currently limited to reserving a single memory region used to create
+> >>a single buffer pool of a single buffer.
+> >Looks good. 2 comments below.
+> >
+> >
 > >>Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 > >>---
-> >>  recipes-devtools/gdbc6x/gdbserver-c6x_git.bb |   46 ++++++++++++++++++++++++++
-> >>  1 file changed, 46 insertions(+)
-> >>  create mode 100644 recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
+> >>  recipes-kernel/linux/cmem.inc        |   22 ++++++++++++++++++++++
+> >>  recipes-kernel/linux/linux/cmem.dtsi |   24 ++++++++++++++++++++++++
+> >>  2 files changed, 46 insertions(+)
+> >>  create mode 100644 recipes-kernel/linux/cmem.inc
+> >>  create mode 100644 recipes-kernel/linux/linux/cmem.dtsi
 > >>
-> >>diff --git a/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb b/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
+> >>diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
 > >>new file mode 100644
-> >>index 0000000..d21f03f
+> >>index 0000000..207bdc6
 > >>--- /dev/null
-> >>+++ b/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
-> >>@@ -0,0 +1,46 @@
-> >>+DESCRIPTION="TI gdb-server to be used with c6xgdb."
-> >>+
-> >>+LICENSE = "BSD"
-> >>+LIC_FILES_CHKSUM = "file://../debian/copyright;md5=82c616b6c8f9c11c46feaaf8f9a11495"
-> >>+
-> >>+include gdbc6x.inc
-> >>+
-> >>+COMPATIBLE_MACHINE = "dra7xx"
-> >>+PACKAGE_ARCH = "${MACHINE_ARCH}"
-> >>+
-> >>+PR = "${INC_PR}.0"
-> >>+
-> >>+require recipes-ti/includes/ti-paths.inc
-> >>+
-> >>+DEPENDS = "ti-xdais ti-framework-components ti-cgt6x-native ti-sysbios ti-xdctools"
-> >>+
-> >>+export XDAIS_DIR = "${XDAIS_INSTALL_DIR}"
-> >>+export FC_DIR = "${FC_INSTALL_DIR}"
-> >>+export TI_CGT_INSTALL = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-> >>+export BIOS_DIR = "${SYSBIOS_INSTALL_DIR}"
-> >>+export XDC_DIR = "${XDC_INSTALL_DIR}"
-> >>+
-> >>+PLATFORM = ""
-> >>+PLATFORM_dra7xx = "DRA7xx_PLATFORM"
-> >>+
-> >>+EXTRA_OEMAKE = "PLATFORM=${PLATFORM}"
-> >>+
-> >>+PARALLEL_MAKE = ""
-> >>+
-> >>+S = "${WORKDIR}/git/gdbserver-c6x/src"
-> >>+
-> >>+do_install() {
-> >>+    install -d ${D}${datadir}/ti/gdbc6x/include
-> >>+    install -d ${D}${datadir}/ti/gdbc6x/lib
-> >>+    cp -f ../include/* ${D}${datadir}/ti/gdbc6x/include
-> >>+    cp -f ../lib/* ${D}${datadir}/ti/gdbc6x/lib
-> >>+}
-> >>+
-> >>+ALLOW_EMPTY_${PN} = "1"
-> >Why?
+> >>+++ b/recipes-kernel/linux/cmem.inc
+> >>@@ -0,0 +1,22 @@
+> >>+FILESEXTRAPATHS_append := ":${THISDIR}/linux"
+> >Move the file into standard "files" directory and drop above line.
 > >
 > 
-> This recipes only popultaes the -dev and -staticdev packages.
-
-So, why do you need an empty package then? If you only need -dev and 
--staticdev added as a dependency for the devkit, this shouldn't be required. 
-Unless there's a need to depend on the main package someplace, in which case 
-you would create an empty one...
-
-
-> >>+FILES_${PN}-dev += "\
-> >>+    ${datadir}/ti/gdbc6x \
-> >>+"
+> Ok.
+> 
+> >>+SRC_URI += "file://cmem.dtsi"
 > >>+
-> >>+do_configure[noexec] = "1"
-> >>+do_qa_configure[noexec] = "1"
-> >Why?
+> >>+CMEM_BASE ?= ""
+> >>+CMEM_SIZE ?= ""
+> >>+
+> >>+do_compileconfigs_prepend() {
+> >Should this be do_configure_append() instead? It would probably be safer, as
+> >do_compileconfigs() is specific to multi-kernel.inc and some kernel recipes
+> >may not include it...
 > >
-> >
+> 
+> I had noticed that do_configure() gets invoked multiple times.
+> 
+> I'll try it as a do_configure_append() and make sure it will work.
+
+Ah, you are right. Then you'd need to call this function uniquely like 
+do_setup_cmem() and then addtask it after do_patch before do_configure. It 
+looks like it should be safe to do it even before do_configure. It would be 
+nice to do it after do_configure, but it needs to be before do_compile and 
+also do_compileconfigs, while the latter one is only defined by multi-kernel
+
+
+> >>+    if [ ! -z "${CMEM_BASE}" ]
+> >>+    then
+> >>+        cp ${WORKDIR}/cmem.dtsi ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
+> >>+
+> >>+        sed -i -e "s|__CMEM_BASE__|${CMEM_BASE}|g" \
+> >>+               -e "s|__CMEM_SIZE__|${CMEM_SIZE}|g" \
+> >>+               ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
+> >>+
+> >>+        for dts in ${KERNEL_DEVICETREE}
+> >>+        do
+> >>+            echo "#include \"${MACHINE}-cmem.dtsi\"" >> ${S}/arch/arm/boot/dts/${dts%.dtb}.dts
+> >>+        done
+> >>+    fi
+> >>+}
+> >>diff --git a/recipes-kernel/linux/linux/cmem.dtsi b/recipes-kernel/linux/linux/cmem.dtsi
+> >>new file mode 100644
+> >>index 0000000..6b1da99
+> >>--- /dev/null
+> >>+++ b/recipes-kernel/linux/linux/cmem.dtsi
+> >>@@ -0,0 +1,24 @@
+> >>+/ {
+> >>+        reserved-memory {
+> >>+                cmem_block_mem_0: cmem_block_mem@__CMEM_BASE__ {
+> >>+                        reg = <0x__CMEM_BASE__ 0x__CMEM_SIZE__>;
+> >>+                        no-map;
+> >>+                        status = "okay";
+> >>+                };
+> >>+        };
+> >>+
+> >>+        cmem {
+> >>+                compatible = "ti,cmem";
+> >>+                #address-cells = <1>;
+> >>+                #size-cells = <0>;
+> >>+
+> >>+                status = "okay";
+> >>+
+> >>+                cmem_block_0: cmem_block@0 {
+> >>+                        reg = <0>;
+> >>+                        memory-region = <&cmem_block_mem_0>;
+> >>+                        cmem-buf-pools = <1 0x__CMEM_SIZE__>;
+> >>+                };
+> >>+        };
+> >>+
+> >>+};
 > >>-- 
 > >>1.7.9.5
 > >>
