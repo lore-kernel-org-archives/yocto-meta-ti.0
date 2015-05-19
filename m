@@ -1,47 +1,38 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 99B91E0051B; Tue, 19 May 2015 10:52:48 -0700 (PDT)
+	id C8CFCE0051B; Tue, 19 May 2015 10:55:38 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [206.46.173.19 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BDA48E0027F
-	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 10:52:45 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4JHqh1c030593
-	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 12:52:43 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4JHqh1m012730
-	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 12:52:43 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 19 May 2015 12:52:42 -0500
-Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4JHqgM1012145;
-	Tue, 19 May 2015 12:52:42 -0500
-Message-ID: <555B786B.4070405@ti.com>
-Date: Tue, 19 May 2015 13:52:43 -0400
-From: Jacob Stiffler <j-stiffler@ti.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
-MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <1431951659-9935-1-git-send-email-j-stiffler@ti.com>
-	<20150518181119.GG31845@edge> <555A3776.8090705@ti.com>
-	<20150518191317.GN31845@edge> <555B717A.3010202@ti.com>
-	<20150519172525.GR31845@edge> <555B722D.9090502@ti.com>
-	<20150519173247.GS31845@edge> <555B756E.4070500@ti.com>
-	<20150519174750.GW31845@edge>
-In-Reply-To: <20150519174750.GW31845@edge>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 1/2] linux/cmem.inc: Support reserving memory for CMEM.
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A79DFE0027F
+	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 10:55:35 -0700 (PDT)
+Received: from gandalf.denix.org ([108.28.31.169]) by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NOL00JWWZ3X0670@vms173019.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 19 May 2015 12:55:19 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=JbALdvP9 c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=h1PgugrvaO0A:10
+	a=sozttTNsAAAA:8 a=VwQbUJbxAAAA:8	a=xoK4_OtYEhffinhWZb0A:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 1837420076;	Tue,
+	19 May 2015 13:55:09 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Tue, 19 May 2015 13:55:08 -0400
+Message-id: <1432058108-27852-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] linux-mainline: update to the latest stable 3.14.43 and lower default preference
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -54,149 +45,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2015 17:52:48 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 May 2015 17:55:38 -0000
 
+From: Denys Dmytriyenko <denys@ti.com>
 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-kernel/linux/linux-mainline_3.14.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-On 5/19/2015 1:47 PM, Denys Dmytriyenko wrote:
-> On Tue, May 19, 2015 at 01:39:58PM -0400, Jacob Stiffler wrote:
->>
->> On 5/19/2015 1:32 PM, Denys Dmytriyenko wrote:
->>> On Tue, May 19, 2015 at 01:26:05PM -0400, Jacob Stiffler wrote:
->>>> On 5/19/2015 1:25 PM, Denys Dmytriyenko wrote:
->>>>> On Tue, May 19, 2015 at 01:23:06PM -0400, Jacob Stiffler wrote:
->>>>>> On 5/18/2015 3:13 PM, Denys Dmytriyenko wrote:
->>>>>>> On Mon, May 18, 2015 at 03:03:18PM -0400, Jacob Stiffler wrote:
->>>>>>>> On 5/18/2015 2:11 PM, Denys Dmytriyenko wrote:
->>>>>>>>> On Mon, May 18, 2015 at 08:20:58AM -0400, Jacob Stiffler wrote:
->>>>>>>>>> To reserve contiguous memory for CMEM:
->>>>>>>>>> * include the "recipes-kernel/linux/cmem.inc"
->>>>>>>>>> * Set CMEM_BASE and CMEM_SIZE to the physical memory address and size,
->>>>>>>>>>    respectively, to reserve for CMEM.
->>>>>>>>>>
->>>>>>>>>> Currently limited to reserving a single memory region used to create
->>>>>>>>>> a single buffer pool of a single buffer.
->>>>>>>>> Looks good. 2 comments below.
->>>>>>>>>
->>>>>>>>>
->>>>>>>>>> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
->>>>>>>>>> ---
->>>>>>>>>>   recipes-kernel/linux/cmem.inc        |   22 ++++++++++++++++++++++
->>>>>>>>>>   recipes-kernel/linux/linux/cmem.dtsi |   24 ++++++++++++++++++++++++
->>>>>>>>>>   2 files changed, 46 insertions(+)
->>>>>>>>>>   create mode 100644 recipes-kernel/linux/cmem.inc
->>>>>>>>>>   create mode 100644 recipes-kernel/linux/linux/cmem.dtsi
->>>>>>>>>>
->>>>>>>>>> diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
->>>>>>>>>> new file mode 100644
->>>>>>>>>> index 0000000..207bdc6
->>>>>>>>>> --- /dev/null
->>>>>>>>>> +++ b/recipes-kernel/linux/cmem.inc
->>>>>>>>>> @@ -0,0 +1,22 @@
->>>>>>>>>> +FILESEXTRAPATHS_append := ":${THISDIR}/linux"
->>>>>>>>> Move the file into standard "files" directory and drop above line.
->>>>>>>>>
->>>>>>>> Ok.
->>>>>>>>
->>>>>>>>>> +SRC_URI += "file://cmem.dtsi"
->>>>>>>>>> +
->>>>>>>>>> +CMEM_BASE ?= ""
->>>>>>>>>> +CMEM_SIZE ?= ""
->>>>>>>>>> +
->>>>>>>>>> +do_compileconfigs_prepend() {
->>>>>>>>> Should this be do_configure_append() instead? It would probably be safer, as
->>>>>>>>> do_compileconfigs() is specific to multi-kernel.inc and some kernel recipes
->>>>>>>>> may not include it...
->>>>>>>>>
->>>>>>>> I had noticed that do_configure() gets invoked multiple times.
->>>>>>>>
->>>>>>>> I'll try it as a do_configure_append() and make sure it will work.
->>>>>>> Ah, you are right. Then you'd need to call this function uniquely like
->>>>>>> do_setup_cmem() and then addtask it after do_patch before do_configure. It
->>>>>>> looks like it should be safe to do it even before do_configure. It would be
->>>>>>> nice to do it after do_configure, but it needs to be before do_compile and
->>>>>>> also do_compileconfigs, while the latter one is only defined by multi-kernel
->>>>>>>
->>>>>> This should be called before do_create_srcipk(). But I suppose it
->>>>>> should not be assumed that do_create_srcipk() will be run for a
->>>>>> general kernel recipe.
->>>>>>
->>>>>> Should do_setup_cmem() be a postfunc of do_configure()? For example:
->>>>>>
->>>>>> do_configure[postfuncs] += "do_setup_cmem"
->>>>> Will it be called multiple times after each do_configure?
->>>>>
->>>> Sorry, I had meant do_patch().
->>> BTW, are you sure you want it before create_srcipk? It won't package the
->>> changes then...
->>>
->> I thought it would have to be done before create_srcipk, since
->> create_srcipk pulls the ${S} directory into the sourceipk. If this
->> is done after create_srcipk, then there will not be any way for
->> these changes to be packaged, correct?
-> Oops, you are correct. I was thinking backwards...
-> So, do_create_srcipk is also being re-called in do_compile_prepend, so it
-> would pick up those changes.
->
-
-But that is only for the case with the meta-arago bbappend, through 
-copy-defconfig.inc.
-
-Any reason it would be better to make this change after do_configure()?
-
->>>>>>>>>> +    if [ ! -z "${CMEM_BASE}" ]
->>>>>>>>>> +    then
->>>>>>>>>> +        cp ${WORKDIR}/cmem.dtsi ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
->>>>>>>>>> +
->>>>>>>>>> +        sed -i -e "s|__CMEM_BASE__|${CMEM_BASE}|g" \
->>>>>>>>>> +               -e "s|__CMEM_SIZE__|${CMEM_SIZE}|g" \
->>>>>>>>>> +               ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
->>>>>>>>>> +
->>>>>>>>>> +        for dts in ${KERNEL_DEVICETREE}
->>>>>>>>>> +        do
->>>>>>>>>> +            echo "#include \"${MACHINE}-cmem.dtsi\"" >> ${S}/arch/arm/boot/dts/${dts%.dtb}.dts
->>>>>>>>>> +        done
->>>>>>>>>> +    fi
->>>>>>>>>> +}
->>>>>>>>>> diff --git a/recipes-kernel/linux/linux/cmem.dtsi b/recipes-kernel/linux/linux/cmem.dtsi
->>>>>>>>>> new file mode 100644
->>>>>>>>>> index 0000000..6b1da99
->>>>>>>>>> --- /dev/null
->>>>>>>>>> +++ b/recipes-kernel/linux/linux/cmem.dtsi
->>>>>>>>>> @@ -0,0 +1,24 @@
->>>>>>>>>> +/ {
->>>>>>>>>> +        reserved-memory {
->>>>>>>>>> +                cmem_block_mem_0: cmem_block_mem@__CMEM_BASE__ {
->>>>>>>>>> +                        reg = <0x__CMEM_BASE__ 0x__CMEM_SIZE__>;
->>>>>>>>>> +                        no-map;
->>>>>>>>>> +                        status = "okay";
->>>>>>>>>> +                };
->>>>>>>>>> +        };
->>>>>>>>>> +
->>>>>>>>>> +        cmem {
->>>>>>>>>> +                compatible = "ti,cmem";
->>>>>>>>>> +                #address-cells = <1>;
->>>>>>>>>> +                #size-cells = <0>;
->>>>>>>>>> +
->>>>>>>>>> +                status = "okay";
->>>>>>>>>> +
->>>>>>>>>> +                cmem_block_0: cmem_block@0 {
->>>>>>>>>> +                        reg = <0>;
->>>>>>>>>> +                        memory-region = <&cmem_block_mem_0>;
->>>>>>>>>> +                        cmem-buf-pools = <1 0x__CMEM_SIZE__>;
->>>>>>>>>> +                };
->>>>>>>>>> +        };
->>>>>>>>>> +
->>>>>>>>>> +};
->>>>>>>>>> -- 
->>>>>>>>>> 1.7.9.5
->>>>>>>>>>
->>>>>>>>>> -- 
->>>>>>>>>> _______________________________________________
->>>>>>>>>> meta-ti mailing list
->>>>>>>>>> meta-ti@yoctoproject.org
->>>>>>>>>> https://lists.yoctoproject.org/listinfo/meta-ti
+diff --git a/recipes-kernel/linux/linux-mainline_3.14.bb b/recipes-kernel/linux/linux-mainline_3.14.bb
+index 440e170..b1d4eec 100644
+--- a/recipes-kernel/linux/linux-mainline_3.14.bb
++++ b/recipes-kernel/linux/linux-mainline_3.14.bb
+@@ -26,15 +26,15 @@ KERNEL_DEVICETREE_beagleboard = "omap3-beagle.dtb omap3-beagle-xm.dtb"
+ 
+ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
+ 
+-COMPATIBLE_MACHINE = "ti33x|omap3"
++DEFAULT_PREFERENCE = "-1"
+ 
+ S = "${WORKDIR}/git"
+ 
+ BRANCH = "linux-3.14.y"
+ 
+-# Corresponds to tag v3.14.25
+-SRCREV = "2dc2565902d3c24108c4b7101e91957fd068a242"
+-PV = "3.14.25"
++# Corresponds to tag v3.14.43
++SRCREV = "13253707013a08ce5a279ebd029fa10230172458"
++PV = "3.14.43"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;protocol=git;branch=${BRANCH} \
+            file://defconfig \
+-- 
+2.2.0
 
 
