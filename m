@@ -1,42 +1,42 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5CB81E009D8; Mon, 18 May 2015 12:13:23 -0700 (PDT)
+	id C3941E009DA; Mon, 18 May 2015 19:02:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 21090E0094C
-	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 12:13:19 -0700 (PDT)
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7C2A3E0099B
+	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 19:02:34 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4IJDI2c025308
-	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 14:13:18 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IJDI8A019418
-	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 14:13:18 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 18 May 2015 14:13:18 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4IJDH7f006784;
-	Mon, 18 May 2015 14:13:17 -0500
-Date: Mon, 18 May 2015 15:13:17 -0400
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4J22XBm020439
+	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 21:02:33 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4J22XAf019997
+	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 21:02:33 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 18 May 2015 21:02:32 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t4J22WBD018114	for <meta-ti@yoctoproject.org>; Mon, 18 May 2015 21:02:33
+	-0500
+Date: Mon, 18 May 2015 22:02:32 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <20150518191317.GN31845@edge>
-References: <1431951659-9935-1-git-send-email-j-stiffler@ti.com>
-	<20150518181119.GG31845@edge> <555A3776.8090705@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <81276877.407.1432000952595.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-In-Reply-To: <555A3776.8090705@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 1/2] linux/cmem.inc: Support reserving memory for CMEM.
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-05-18_21-00-51
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,118 +49,206 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2015 19:13:23 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 19 May 2015 02:02:39 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_406_1044294944.1432000952565"
 
-On Mon, May 18, 2015 at 03:03:18PM -0400, Jacob Stiffler wrote:
-> 
-> 
-> On 5/18/2015 2:11 PM, Denys Dmytriyenko wrote:
-> >On Mon, May 18, 2015 at 08:20:58AM -0400, Jacob Stiffler wrote:
-> >>To reserve contiguous memory for CMEM:
-> >>* include the "recipes-kernel/linux/cmem.inc"
-> >>* Set CMEM_BASE and CMEM_SIZE to the physical memory address and size,
-> >>   respectively, to reserve for CMEM.
-> >>
-> >>Currently limited to reserving a single memory region used to create
-> >>a single buffer pool of a single buffer.
-> >Looks good. 2 comments below.
-> >
-> >
-> >>Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-> >>---
-> >>  recipes-kernel/linux/cmem.inc        |   22 ++++++++++++++++++++++
-> >>  recipes-kernel/linux/linux/cmem.dtsi |   24 ++++++++++++++++++++++++
-> >>  2 files changed, 46 insertions(+)
-> >>  create mode 100644 recipes-kernel/linux/cmem.inc
-> >>  create mode 100644 recipes-kernel/linux/linux/cmem.dtsi
-> >>
-> >>diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
-> >>new file mode 100644
-> >>index 0000000..207bdc6
-> >>--- /dev/null
-> >>+++ b/recipes-kernel/linux/cmem.inc
-> >>@@ -0,0 +1,22 @@
-> >>+FILESEXTRAPATHS_append := ":${THISDIR}/linux"
-> >Move the file into standard "files" directory and drop above line.
-> >
-> 
-> Ok.
-> 
-> >>+SRC_URI += "file://cmem.dtsi"
-> >>+
-> >>+CMEM_BASE ?= ""
-> >>+CMEM_SIZE ?= ""
-> >>+
-> >>+do_compileconfigs_prepend() {
-> >Should this be do_configure_append() instead? It would probably be safer, as
-> >do_compileconfigs() is specific to multi-kernel.inc and some kernel recipes
-> >may not include it...
-> >
-> 
-> I had noticed that do_configure() gets invoked multiple times.
-> 
-> I'll try it as a do_configure_append() and make sure it will work.
+------=_Part_406_1044294944.1432000952565
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Ah, you are right. Then you'd need to call this function uniquely like 
-do_setup_cmem() and then addtask it after do_patch before do_configure. It 
-looks like it should be safe to do it even before do_configure. It would be 
-nice to do it after do_configure, but it needs to be before do_compile and 
-also do_compileconfigs, while the latter one is only defined by multi-kernel
+<html>
+<head>
+<title>
+Status for 05/18/15
+</title>
+</head>
+<body>
+
+<h2>Status for 05/18/15</h2>
+
+<h2>BUILD_ID: build-2015-05-18_21-02-00</h2>
+
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=red>FAILED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am57xx-evm</td>
+        <td id="am57xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2e-evm</td>
+        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2l-evm</td>
+        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2015.05"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="false"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-> >>+    if [ ! -z "${CMEM_BASE}" ]
-> >>+    then
-> >>+        cp ${WORKDIR}/cmem.dtsi ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
-> >>+
-> >>+        sed -i -e "s|__CMEM_BASE__|${CMEM_BASE}|g" \
-> >>+               -e "s|__CMEM_SIZE__|${CMEM_SIZE}|g" \
-> >>+               ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
-> >>+
-> >>+        for dts in ${KERNEL_DEVICETREE}
-> >>+        do
-> >>+            echo "#include \"${MACHINE}-cmem.dtsi\"" >> ${S}/arch/arm/boot/dts/${dts%.dtb}.dts
-> >>+        done
-> >>+    fi
-> >>+}
-> >>diff --git a/recipes-kernel/linux/linux/cmem.dtsi b/recipes-kernel/linux/linux/cmem.dtsi
-> >>new file mode 100644
-> >>index 0000000..6b1da99
-> >>--- /dev/null
-> >>+++ b/recipes-kernel/linux/linux/cmem.dtsi
-> >>@@ -0,0 +1,24 @@
-> >>+/ {
-> >>+        reserved-memory {
-> >>+                cmem_block_mem_0: cmem_block_mem@__CMEM_BASE__ {
-> >>+                        reg = <0x__CMEM_BASE__ 0x__CMEM_SIZE__>;
-> >>+                        no-map;
-> >>+                        status = "okay";
-> >>+                };
-> >>+        };
-> >>+
-> >>+        cmem {
-> >>+                compatible = "ti,cmem";
-> >>+                #address-cells = <1>;
-> >>+                #size-cells = <0>;
-> >>+
-> >>+                status = "okay";
-> >>+
-> >>+                cmem_block_0: cmem_block@0 {
-> >>+                        reg = <0>;
-> >>+                        memory-region = <&cmem_block_mem_0>;
-> >>+                        cmem-buf-pools = <1 0x__CMEM_SIZE__>;
-> >>+                };
-> >>+        };
-> >>+
-> >>+};
-> >>-- 
-> >>1.7.9.5
-> >>
-> >>-- 
-> >>_______________________________________________
-> >>meta-ti mailing list
-> >>meta-ti@yoctoproject.org
-> >>https://lists.yoctoproject.org/listinfo/meta-ti
-> 
-
+------=_Part_406_1044294944.1432000952565--
