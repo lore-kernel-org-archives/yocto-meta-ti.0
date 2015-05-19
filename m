@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 22463E009EB; Tue, 19 May 2015 12:31:45 -0700 (PDT)
+	id 258D5E005B9; Tue, 19 May 2015 12:31:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B966FE005B9
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B7D79E0051B
 	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 12:31:38 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CA87952A83; Tue, 19 May 2015 19:31:38 +0000 (UTC)
+	id 95B5B52A3D; Tue, 19 May 2015 19:31:38 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150519193138.CA87952A83@arago-project.org>
+Message-Id: <20150519193138.95B5B52A3D@arago-project.org>
 Date: Tue, 19 May 2015 19:31:38 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : linux-ti-staging-3.14: Allow CMEM DT injection.
+Subject: Jacob Stiffler : linux/cmem.inc: Support reserving memory for CMEM.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,44 +38,89 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 3fca98cfc0da711c366703daab745d7d65c586f6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3fca98cfc0da711c366703daab745d7d65c586f6
+Commit: 3ae905f31e0dcbb86cd79335def95f69b494ff61
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3ae905f31e0dcbb86cd79335def95f69b494ff61
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Mon May 18 18:20:59 2015 +0000
+Date:   Wed May 20 00:55:27 2015 +0000
 
-linux-ti-staging-3.14: Allow CMEM DT injection.
+linux/cmem.inc: Support reserving memory for CMEM.
 
-* Disabled by default.
+To reserve contiguous memory for CMEM:
+* include the "recipes-kernel/linux/cmem.inc"
+* Set CMEM_BASE and CMEM_SIZE to the physical memory address and size,
+  respectively, to reserve for CMEM.
+
+Currently limited to reserving a single memory region used to create
+a single buffer pool of a single buffer.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes-kernel/linux/cmem.inc        |   23 +++++++++++++++++++++++
+ recipes-kernel/linux/files/cmem.dtsi |   24 ++++++++++++++++++++++++
+ 2 files changed, 47 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index 260ed9b..3a319dc 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -8,6 +8,7 @@ inherit kernel
- require recipes-kernel/linux/linux-dtb.inc
- require recipes-kernel/linux/setup-defconfig.inc
- require recipes-kernel/linux/multi-kernel.inc
-+require recipes-kernel/linux/cmem.inc
- 
- # Look in the generic major.minor directory for files
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.14:"
-@@ -49,7 +50,7 @@ SRCREV = "d0f5c460aac292d2942b23dd6199fe23021212ad"
- PV = "3.14.43"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
+new file mode 100644
+index 0000000..742f3c8
+--- /dev/null
++++ b/recipes-kernel/linux/cmem.inc
+@@ -0,0 +1,23 @@
++SRC_URI += "file://cmem.dtsi"
++
++CMEM_BASE ?= ""
++CMEM_SIZE ?= ""
++
++do_setup_cmem() {
++    if [ ! -z "${CMEM_BASE}" ]
++    then
++        cp ${WORKDIR}/cmem.dtsi ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
++
++        sed -i -e "s|__CMEM_BASE__|${CMEM_BASE}|g" \
++               -e "s|__CMEM_SIZE__|${CMEM_SIZE}|g" \
++               ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
++
++        for dtb in ${KERNEL_DEVICETREE}
++        do
++            dts=`echo $dtb | sed -e 's|dtb$|dts|'`
++            echo "#include \"${MACHINE}-cmem.dtsi\"" >> ${S}/arch/arm/boot/dts/$dts
++        done
++    fi
++}
++
++do_patch[postfuncs] += "do_setup_cmem"
+diff --git a/recipes-kernel/linux/files/cmem.dtsi b/recipes-kernel/linux/files/cmem.dtsi
+new file mode 100644
+index 0000000..6b1da99
+--- /dev/null
++++ b/recipes-kernel/linux/files/cmem.dtsi
+@@ -0,0 +1,24 @@
++/ {
++        reserved-memory {
++                cmem_block_mem_0: cmem_block_mem@__CMEM_BASE__ {
++                        reg = <0x__CMEM_BASE__ 0x__CMEM_SIZE__>;
++                        no-map;
++                        status = "okay";
++                };
++        };
++
++        cmem {
++                compatible = "ti,cmem";
++                #address-cells = <1>;
++                #size-cells = <0>;
++
++                status = "okay";
++
++                cmem_block_0: cmem_block@0 {
++                        reg = <0>;
++                        memory-region = <&cmem_block_mem_0>;
++                        cmem-buf-pools = <1 0x__CMEM_SIZE__>;
++                };
++        };
++
++};
 
 
