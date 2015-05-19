@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D0A27E009EF; Tue, 19 May 2015 04:27:13 -0700 (PDT)
+	id 5A07FE009E1; Tue, 19 May 2015 05:12:49 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,33 +8,38 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
+	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 3B5F4E009DA
-	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 04:27:09 -0700 (PDT)
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 20EECE009B8
+	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 05:12:45 -0700 (PDT)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4JBR80T028003
-	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 06:27:08 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4JBR7Gi023931
-	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 06:27:07 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 19 May 2015 06:27:07 -0500
-Received: from localhost.localdomain (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t4JBR6LV028715;	Tue, 19 May 2015 06:27:07 -0500
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4JCChGq028660
+	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 07:12:43 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4JCChlt025108
+	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 07:12:43 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 19 May 2015 07:12:43 -0500
+Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4JCChjt022930;
+	Tue, 19 May 2015 07:12:43 -0500
+Message-ID: <555B28BB.9060709@ti.com>
+Date: Tue, 19 May 2015 08:12:43 -0400
 From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 19 May 2015 07:27:00 -0400
-Message-ID: <1432034821-22913-2-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1432034821-22913-1-git-send-email-j-stiffler@ti.com>
-References: <1432034821-22913-1-git-send-email-j-stiffler@ti.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
 MIME-Version: 1.0
-Subject: [PATCH v2 2/3] libulm: Add ULM library for ARM and DSP.
+To: Denys Dmytriyenko <denys@ti.com>
+References: <1431970376-24163-1-git-send-email-j-stiffler@ti.com>
+	<1431970376-24163-3-git-send-email-j-stiffler@ti.com>
+	<20150518174145.GE31845@edge> <555A36D5.7000502@ti.com>
+	<20150518190724.GM31845@edge>
+In-Reply-To: <20150518190724.GM31845@edge>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 2/3] gdbserver-c6x: Add version 1.1.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,68 +52,104 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2015 11:27:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 19 May 2015 12:12:49 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
----
-* v2 changes:
-  - Add support for k2hk-evm
-  - Reorganize file based on oe-stylize.
 
- recipes-bsp/dsptop/libulm_git.bb |   42 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
- create mode 100644 recipes-bsp/dsptop/libulm_git.bb
 
-diff --git a/recipes-bsp/dsptop/libulm_git.bb b/recipes-bsp/dsptop/libulm_git.bb
-new file mode 100644
-index 0000000..f99dd6a
---- /dev/null
-+++ b/recipes-bsp/dsptop/libulm_git.bb
-@@ -0,0 +1,42 @@
-+DESCRIPTION = "TI dsptop utility."
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://../debian/copyright;md5=309825aa8f5edfcf2c44912ac094b979"
-+
-+DEPENDS = "ti-cgt6x-native"
-+PR = "${INC_PR}.0"
-+
-+S = "${WORKDIR}/git/dsptop/ulm"
-+
-+DEVICE=""
-+DEVICE_dra7xx = "DRA7xx"
-+DEVICE_k2hk-evm = "C66AK2Hxx"
-+
-+EXTRA_OEMAKE = "release DEVICE=${DEVICE} CROSS_COMPILE=${TARGET_PREFIX}"
-+
-+do_compile() {
-+    oe_runmake arm XPORT_ONLY
-+    oe_runmake dsp C6X_C_DIR=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x/include
-+}
-+
-+do_install() {
-+    install -d ${D}${includedir}
-+    install -d ${D}${libdir}
-+    install -d ${D}${datadir}/ti/ulm
-+    cp -f tiulm.h ${D}${includedir}
-+    cp -f release/libtiulm.a ${D}${libdir}
-+    cp -f tiulm.h ${D}${datadir}/ti/ulm
-+    cp -f release/libtiulm.ae66 ${D}${datadir}/ti/ulm
-+}
-+
-+COMPATIBLE_MACHINE = "dra7xx|k2hk-evm"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+FILES_${PN}-dev += "\
-+    ${datadir}/ti/ulm \
-+"
-+
-+include dsptop.inc
-+
-+ALLOW_EMPTY_${PN} = "1"
-+
-+PARALLEL_MAKE= ""
--- 
-1.7.9.5
+On 5/18/2015 3:07 PM, Denys Dmytriyenko wrote:
+> On Mon, May 18, 2015 at 03:00:37PM -0400, Jacob Stiffler wrote:
+>>
+>> On 5/18/2015 1:41 PM, Denys Dmytriyenko wrote:
+>>> On Mon, May 18, 2015 at 01:32:55PM -0400, Jacob Stiffler wrote:
+>>>> * c6x DSP development files required to support remote gdb debugging.
+>>>>
+>>>> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+>>>> ---
+>>>>   recipes-devtools/gdbc6x/gdbserver-c6x_git.bb |   46 ++++++++++++++++++++++++++
+>>>>   1 file changed, 46 insertions(+)
+>>>>   create mode 100644 recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
+>>>>
+>>>> diff --git a/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb b/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
+>>>> new file mode 100644
+>>>> index 0000000..d21f03f
+>>>> --- /dev/null
+>>>> +++ b/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
+>>>> @@ -0,0 +1,46 @@
+>>>> +DESCRIPTION="TI gdb-server to be used with c6xgdb."
+>>>> +
+>>>> +LICENSE = "BSD"
+>>>> +LIC_FILES_CHKSUM = "file://../debian/copyright;md5=82c616b6c8f9c11c46feaaf8f9a11495"
+>>>> +
+>>>> +include gdbc6x.inc
+>>>> +
+>>>> +COMPATIBLE_MACHINE = "dra7xx"
+>>>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+>>>> +
+>>>> +PR = "${INC_PR}.0"
+>>>> +
+>>>> +require recipes-ti/includes/ti-paths.inc
+>>>> +
+>>>> +DEPENDS = "ti-xdais ti-framework-components ti-cgt6x-native ti-sysbios ti-xdctools"
+>>>> +
+>>>> +export XDAIS_DIR = "${XDAIS_INSTALL_DIR}"
+>>>> +export FC_DIR = "${FC_INSTALL_DIR}"
+>>>> +export TI_CGT_INSTALL = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
+>>>> +export BIOS_DIR = "${SYSBIOS_INSTALL_DIR}"
+>>>> +export XDC_DIR = "${XDC_INSTALL_DIR}"
+>>>> +
+>>>> +PLATFORM = ""
+>>>> +PLATFORM_dra7xx = "DRA7xx_PLATFORM"
+>>>> +
+>>>> +EXTRA_OEMAKE = "PLATFORM=${PLATFORM}"
+>>>> +
+>>>> +PARALLEL_MAKE = ""
+>>>> +
+>>>> +S = "${WORKDIR}/git/gdbserver-c6x/src"
+>>>> +
+>>>> +do_install() {
+>>>> +    install -d ${D}${datadir}/ti/gdbc6x/include
+>>>> +    install -d ${D}${datadir}/ti/gdbc6x/lib
+>>>> +    cp -f ../include/* ${D}${datadir}/ti/gdbc6x/include
+>>>> +    cp -f ../lib/* ${D}${datadir}/ti/gdbc6x/lib
+>>>> +}
+>>>> +
+>>>> +ALLOW_EMPTY_${PN} = "1"
+>>> Why?
+>>>
+>> This recipes only popultaes the -dev and -staticdev packages.
+> So, why do you need an empty package then? If you only need -dev and
+> -staticdev added as a dependency for the devkit, this shouldn't be required.
+> Unless there's a need to depend on the main package someplace, in which case
+> you would create an empty one...
+>
+
+Without this, I am seeing an error when populating the devkit:
+
+Collected errors:
+  * satisfy_dependencies_for: Cannot satisfy the following dependencies 
+for packagegroup-arago-toolchain-tisdk-target:
+  *      libulm (= 1.2.0-r0.1) *         gdbserver-c6x (= 1.1.0-r0.1) *
+  * opkg_install_cmd: Cannot install package 
+packagegroup-arago-toolchain-tisdk-target.
+
+>>>> +FILES_${PN}-dev += "\
+>>>> +    ${datadir}/ti/gdbc6x \
+>>>> +"
+>>>> +
+>>>> +do_configure[noexec] = "1"
+>>>> +do_qa_configure[noexec] = "1"
+>>> Why?
+>>>
+>>>
+>>>> -- 
+>>>> 1.7.9.5
+>>>>
+>>>> -- 
+>>>> _______________________________________________
+>>>> meta-ti mailing list
+>>>> meta-ti@yoctoproject.org
+>>>> https://lists.yoctoproject.org/listinfo/meta-ti
 
 
