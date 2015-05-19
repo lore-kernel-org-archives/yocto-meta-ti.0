@@ -1,26 +1,44 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 258D5E005B9; Tue, 19 May 2015 12:31:45 -0700 (PDT)
+	id DA216E0051B; Tue, 19 May 2015 13:11:08 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B7D79E0051B
-	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 12:31:38 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 95B5B52A3D; Tue, 19 May 2015 19:31:38 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20150519193138.95B5B52A3D@arago-project.org>
-Date: Tue, 19 May 2015 19:31:38 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : linux/cmem.inc: Support reserving memory for CMEM.
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E3CB7E0027F
+	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 13:11:05 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4JKB32p012306;
+	Tue, 19 May 2015 15:11:03 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4JKB3Ux005299;
+	Tue, 19 May 2015 15:11:03 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 19 May 2015 15:11:03 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4JKB35J031270;
+	Tue, 19 May 2015 15:11:03 -0500
+Date: Tue, 19 May 2015 16:11:02 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <20150519201102.GD31845@edge>
+References: <1431094194-11852-1-git-send-email-j-stiffler@ti.com>
+	<1431094194-11852-2-git-send-email-j-stiffler@ti.com>
+	<22A42254-B630-4E50-BB82-A52F1FA2CD84@gmail.com>
+	<554CEFB6.3070708@ti.com>
+MIME-Version: 1.0
+In-Reply-To: <554CEFB6.3070708@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 2/2] ti-xdais: Add version 7.24.00.04
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,94 +51,30 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2015 19:31:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 19 May 2015 20:11:08 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: master
-Commit: 3ae905f31e0dcbb86cd79335def95f69b494ff61
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3ae905f31e0dcbb86cd79335def95f69b494ff61
+On Fri, May 08, 2015 at 01:17:42PM -0400, Jacob Stiffler wrote:
+> I was following the precedent set by existing RTOS packages (See
+> recipes-ti/xdais/ti-xdais_6.26.01.03.bb).
+> 
+> These RTOS packages are build only dependencies, and they do not get
+> installed into the target filesystem. They are primarily used for
+> building firmware.
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed May 20 00:55:27 2015 +0000
+Should they be "-native" then?
 
-linux/cmem.inc: Support reserving memory for CMEM.
 
-To reserve contiguous memory for CMEM:
-* include the "recipes-kernel/linux/cmem.inc"
-* Set CMEM_BASE and CMEM_SIZE to the physical memory address and size,
-  respectively, to reserve for CMEM.
-
-Currently limited to reserving a single memory region used to create
-a single buffer pool of a single buffer.
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-kernel/linux/cmem.inc        |   23 +++++++++++++++++++++++
- recipes-kernel/linux/files/cmem.dtsi |   24 ++++++++++++++++++++++++
- 2 files changed, 47 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
-new file mode 100644
-index 0000000..742f3c8
---- /dev/null
-+++ b/recipes-kernel/linux/cmem.inc
-@@ -0,0 +1,23 @@
-+SRC_URI += "file://cmem.dtsi"
-+
-+CMEM_BASE ?= ""
-+CMEM_SIZE ?= ""
-+
-+do_setup_cmem() {
-+    if [ ! -z "${CMEM_BASE}" ]
-+    then
-+        cp ${WORKDIR}/cmem.dtsi ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
-+
-+        sed -i -e "s|__CMEM_BASE__|${CMEM_BASE}|g" \
-+               -e "s|__CMEM_SIZE__|${CMEM_SIZE}|g" \
-+               ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
-+
-+        for dtb in ${KERNEL_DEVICETREE}
-+        do
-+            dts=`echo $dtb | sed -e 's|dtb$|dts|'`
-+            echo "#include \"${MACHINE}-cmem.dtsi\"" >> ${S}/arch/arm/boot/dts/$dts
-+        done
-+    fi
-+}
-+
-+do_patch[postfuncs] += "do_setup_cmem"
-diff --git a/recipes-kernel/linux/files/cmem.dtsi b/recipes-kernel/linux/files/cmem.dtsi
-new file mode 100644
-index 0000000..6b1da99
---- /dev/null
-+++ b/recipes-kernel/linux/files/cmem.dtsi
-@@ -0,0 +1,24 @@
-+/ {
-+        reserved-memory {
-+                cmem_block_mem_0: cmem_block_mem@__CMEM_BASE__ {
-+                        reg = <0x__CMEM_BASE__ 0x__CMEM_SIZE__>;
-+                        no-map;
-+                        status = "okay";
-+                };
-+        };
-+
-+        cmem {
-+                compatible = "ti,cmem";
-+                #address-cells = <1>;
-+                #size-cells = <0>;
-+
-+                status = "okay";
-+
-+                cmem_block_0: cmem_block@0 {
-+                        reg = <0>;
-+                        memory-region = <&cmem_block_mem_0>;
-+                        cmem-buf-pools = <1 0x__CMEM_SIZE__>;
-+                };
-+        };
-+
-+};
-
+> On 5/8/2015 12:23 PM, Khem Raj wrote:
+> >>On May 8, 2015, at 7:09 AM, Jacob Stiffler <j-stiffler@ti.com> wrote:
+> >>
+> >>+INSANE_SKIP_${PN} = "installed-vs-shipped"
+> >can this be fixed instead ?
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
