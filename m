@@ -1,38 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EC23CE0051B; Tue, 19 May 2015 11:55:38 -0700 (PDT)
+	id 0B417E00998; Tue, 19 May 2015 12:31:42 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7F949E0027F
-	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 11:55:34 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4JItW1H011994
-	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 13:55:32 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4JItWhL017749
-	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 13:55:32 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 19 May 2015 13:55:32 -0500
-Received: from localhost.localdomain (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t4JItW9i003899;	Tue, 19 May 2015 13:55:32 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 19 May 2015 14:55:27 -0400
-Message-ID: <1432061727-12437-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH v2 1/2] linux/cmem.inc: Support reserving memory for CMEM.
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B55E0E0027F
+	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 12:31:38 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id B215E529F8; Tue, 19 May 2015 19:31:38 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20150519193138.B215E529F8@arago-project.org>
+Date: Tue, 19 May 2015 19:31:38 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Jacob Stiffler : linux-ti-staging-3.14: Allow CMEM DT injection.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,90 +33,49 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2015 18:55:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 19 May 2015 19:31:42 -0000
+Content-Type: text/plain; charset=UTF-8
 
-To reserve contiguous memory for CMEM:
-* include the "recipes-kernel/linux/cmem.inc"
-* Set CMEM_BASE and CMEM_SIZE to the physical memory address and size,
-  respectively, to reserve for CMEM.
+Module: meta-ti
+Branch: daisy
+Commit: c1a686ec23efd6ed63b4714521274cdfd87dae1e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c1a686ec23efd6ed63b4714521274cdfd87dae1e
 
-Currently limited to reserving a single memory region used to create
-a single buffer pool of a single buffer.
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Mon May 18 18:20:59 2015 +0000
+
+linux-ti-staging-3.14: Allow CMEM DT injection.
+
+* Disabled by default.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
-v2 changes:
-* Instead of prepending to do_compileconfigs(), create new function,
-  and append to do_patch[postfuncs].
-* Replace bashism with sed.
 
- recipes-kernel/linux/cmem.inc        |   23 +++++++++++++++++++++++
- recipes-kernel/linux/files/cmem.dtsi |   24 ++++++++++++++++++++++++
- 2 files changed, 47 insertions(+)
- create mode 100644 recipes-kernel/linux/cmem.inc
- create mode 100644 recipes-kernel/linux/files/cmem.dtsi
+ recipes-kernel/linux/linux-ti-staging_3.14.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-kernel/linux/cmem.inc b/recipes-kernel/linux/cmem.inc
-new file mode 100644
-index 0000000..742f3c8
---- /dev/null
-+++ b/recipes-kernel/linux/cmem.inc
-@@ -0,0 +1,23 @@
-+SRC_URI += "file://cmem.dtsi"
-+
-+CMEM_BASE ?= ""
-+CMEM_SIZE ?= ""
-+
-+do_setup_cmem() {
-+    if [ ! -z "${CMEM_BASE}" ]
-+    then
-+        cp ${WORKDIR}/cmem.dtsi ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
-+
-+        sed -i -e "s|__CMEM_BASE__|${CMEM_BASE}|g" \
-+               -e "s|__CMEM_SIZE__|${CMEM_SIZE}|g" \
-+               ${S}/arch/arm/boot/dts/${MACHINE}-cmem.dtsi
-+
-+        for dtb in ${KERNEL_DEVICETREE}
-+        do
-+            dts=`echo $dtb | sed -e 's|dtb$|dts|'`
-+            echo "#include \"${MACHINE}-cmem.dtsi\"" >> ${S}/arch/arm/boot/dts/$dts
-+        done
-+    fi
-+}
-+
-+do_patch[postfuncs] += "do_setup_cmem"
-diff --git a/recipes-kernel/linux/files/cmem.dtsi b/recipes-kernel/linux/files/cmem.dtsi
-new file mode 100644
-index 0000000..6b1da99
---- /dev/null
-+++ b/recipes-kernel/linux/files/cmem.dtsi
-@@ -0,0 +1,24 @@
-+/ {
-+        reserved-memory {
-+                cmem_block_mem_0: cmem_block_mem@__CMEM_BASE__ {
-+                        reg = <0x__CMEM_BASE__ 0x__CMEM_SIZE__>;
-+                        no-map;
-+                        status = "okay";
-+                };
-+        };
-+
-+        cmem {
-+                compatible = "ti,cmem";
-+                #address-cells = <1>;
-+                #size-cells = <0>;
-+
-+                status = "okay";
-+
-+                cmem_block_0: cmem_block@0 {
-+                        reg = <0>;
-+                        memory-region = <&cmem_block_mem_0>;
-+                        cmem-buf-pools = <1 0x__CMEM_SIZE__>;
-+                };
-+        };
-+
-+};
--- 
-1.7.9.5
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 260ed9b..3a319dc 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -8,6 +8,7 @@ inherit kernel
+ require recipes-kernel/linux/linux-dtb.inc
+ require recipes-kernel/linux/setup-defconfig.inc
+ require recipes-kernel/linux/multi-kernel.inc
++require recipes-kernel/linux/cmem.inc
+ 
+ # Look in the generic major.minor directory for files
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.14:"
+@@ -49,7 +50,7 @@ SRCREV = "d0f5c460aac292d2942b23dd6199fe23021212ad"
+ PV = "3.14.43"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
++MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
