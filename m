@@ -1,38 +1,43 @@
-Return-Path: <denis@denix.org>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C8CFCE0051B; Tue, 19 May 2015 10:55:38 -0700 (PDT)
+	id F334AE0051B; Tue, 19 May 2015 10:56:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.19 listed in list.dnswl.org]
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A79DFE0027F
-	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 10:55:35 -0700 (PDT)
-Received: from gandalf.denix.org ([108.28.31.169]) by vms173019.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NOL00JWWZ3X0670@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 19 May 2015 12:55:19 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=JbALdvP9 c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=h1PgugrvaO0A:10
-	a=sozttTNsAAAA:8 a=VwQbUJbxAAAA:8	a=xoK4_OtYEhffinhWZb0A:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 1837420076;	Tue,
-	19 May 2015 13:55:09 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: meta-ti@yoctoproject.org
-Date: Tue, 19 May 2015 13:55:08 -0400
-Message-id: <1432058108-27852-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] linux-mainline: update to the latest stable 3.14.43 and lower default preference
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 26E94E0027F
+	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 10:56:30 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4JHuT0i032726
+	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 12:56:29 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4JHuTEP015222
+	for <meta-ti@yoctoproject.org>; Tue, 19 May 2015 12:56:29 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 19 May 2015 12:56:29 -0500
+Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4JHuTVW001344;
+	Tue, 19 May 2015 12:56:29 -0500
+Message-ID: <555B794D.3050403@ti.com>
+Date: Tue, 19 May 2015 13:56:29 -0400
+From: Jacob Stiffler <j-stiffler@ti.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+MIME-Version: 1.0
+To: Denys Dmytriyenko <denys@ti.com>
+References: <1432034821-22913-1-git-send-email-j-stiffler@ti.com>
+	<20150519173908.GV31845@edge>
+In-Reply-To: <20150519173908.GV31845@edge>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH v2 1/3] debugss-module-drv: Add version 1.2.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,40 +50,87 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2015 17:55:38 -0000
+X-List-Received-Date: Tue, 19 May 2015 17:56:34 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Denys Dmytriyenko <denys@ti.com>
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-kernel/linux/linux-mainline_3.14.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-mainline_3.14.bb b/recipes-kernel/linux/linux-mainline_3.14.bb
-index 440e170..b1d4eec 100644
---- a/recipes-kernel/linux/linux-mainline_3.14.bb
-+++ b/recipes-kernel/linux/linux-mainline_3.14.bb
-@@ -26,15 +26,15 @@ KERNEL_DEVICETREE_beagleboard = "omap3-beagle.dtb omap3-beagle-xm.dtb"
- 
- KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
- 
--COMPATIBLE_MACHINE = "ti33x|omap3"
-+DEFAULT_PREFERENCE = "-1"
- 
- S = "${WORKDIR}/git"
- 
- BRANCH = "linux-3.14.y"
- 
--# Corresponds to tag v3.14.25
--SRCREV = "2dc2565902d3c24108c4b7101e91957fd068a242"
--PV = "3.14.25"
-+# Corresponds to tag v3.14.43
-+SRCREV = "13253707013a08ce5a279ebd029fa10230172458"
-+PV = "3.14.43"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;protocol=git;branch=${BRANCH} \
-            file://defconfig \
--- 
-2.2.0
+On 5/19/2015 1:39 PM, Denys Dmytriyenko wrote:
+> On Tue, May 19, 2015 at 07:26:59AM -0400, Jacob Stiffler wrote:
+>> * The debugss-module-drv is require for the dsptop utility.
+>>
+>> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+>> ---
+>> * v2 changes:
+>>    - Add support for k2hk-evm
+>>    - Reorganize file based on oe-stylize.
+>>
+>>   recipes-bsp/dsptop/debugss-module-drv_git.bb |   22 ++++++++++++++++++++++
+>>   recipes-bsp/dsptop/dsptop.inc                |    8 ++++++++
+>>   2 files changed, 30 insertions(+)
+>>   create mode 100644 recipes-bsp/dsptop/debugss-module-drv_git.bb
+>>   create mode 100644 recipes-bsp/dsptop/dsptop.inc
+>>
+>> diff --git a/recipes-bsp/dsptop/debugss-module-drv_git.bb b/recipes-bsp/dsptop/debugss-module-drv_git.bb
+>> new file mode 100644
+>> index 0000000..c4edb8d
+>> --- /dev/null
+>> +++ b/recipes-bsp/dsptop/debugss-module-drv_git.bb
+>> @@ -0,0 +1,22 @@
+>> +DESCRIPTION = "Debug Sub-System (DebugSS) driver for Keystone and DRA7xx devices"
+>> +LICENSE = "GPLv2"
+>> +LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
+>> +
+>> +# This package builds a kernel module, use kernel PR as base and append a local
+>> +MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+>> +PR = "${MACHINE_KERNEL_PR}"
+>> +
+>> +S = "${WORKDIR}/git/debugss_module/debugss-mod"
+>> +
+>> +inherit module
+>> +
+>> +PLATFORM = ""
+>> +PLATFORM_dra7xx = "DRA7xx_PLATFORM"
+>> +PLATFORM_k2hk-evm = "KEYSTONE_PLATFORM"
+>> +
+>> +EXTRA_OEMAKE = "'PLATFORM=${PLATFORM}'"
+>> +
+>> +COMPATIBLE_MACHINE = "dra7xx|k2hk-evm"
+> So, is it really only limited to k2hk and not other Keystones?
+>
+
+I briefly looked through the source to get the platform options, and I 
+noticed that "K2H" is used in many of the #defines. Looking closer, I 
+see that KEYSTONE_PLATFORM appears to general to the keystone family.
+
+In other recipes, DEVICE is used. This appears to be specific to 
+individual MACHINEs.
+
+>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+>> +
+>> +include dsptop.inc
+>> diff --git a/recipes-bsp/dsptop/dsptop.inc b/recipes-bsp/dsptop/dsptop.inc
+>> new file mode 100644
+>> index 0000000..4b9e3fa
+>> --- /dev/null
+>> +++ b/recipes-bsp/dsptop/dsptop.inc
+>> @@ -0,0 +1,8 @@
+>> +# This corresponds to version 1.2.0
+>> +SRCREV = "9893486936626e2d3de721f429a67fcac8a68151"
+>> +PV = "1.2.0"
+>> +INC_PR = "r0"
+>> +
+>> +SRC_URI = "git://git.ti.com/sdo-emu/dsptop.git;protocol=git;branch=${BRANCH}"
+>> +
+>> +BRANCH = "master"
+>> -- 
+>> 1.7.9.5
+>>
+>> -- 
+>> _______________________________________________
+>> meta-ti mailing list
+>> meta-ti@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/meta-ti
 
 
