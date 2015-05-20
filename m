@@ -1,38 +1,38 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 600B8E005B9; Wed, 20 May 2015 06:25:32 -0700 (PDT)
+	id D845EE004F6; Wed, 20 May 2015 06:30:41 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 57A9AE0027F
-	for <meta-ti@yoctoproject.org>; Wed, 20 May 2015 06:25:30 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4KDPT95016066
-	for <meta-ti@yoctoproject.org>; Wed, 20 May 2015 08:25:29 -0500
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [198.47.26.153 listed in list.dnswl.org]
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B3E70E0095D
+	for <meta-ti@yoctoproject.org>; Wed, 20 May 2015 06:30:25 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4KDUNnt019041
+	for <meta-ti@yoctoproject.org>; Wed, 20 May 2015 08:30:23 -0500
 Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4KDPTfk026641
-	for <meta-ti@yoctoproject.org>; Wed, 20 May 2015 08:25:29 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE72.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4KDUMJ6028152
+	for <meta-ti@yoctoproject.org>; Wed, 20 May 2015 08:30:23 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
 	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 20 May 2015 08:25:28 -0500
+	Wed, 20 May 2015 08:30:22 -0500
 Received: from localhost.localdomain (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t4KDPQs1012151;	Wed, 20 May 2015 08:25:27 -0500
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t4KDUMKp029777;	Wed, 20 May 2015 08:30:22 -0500
 From: Jacob Stiffler <j-stiffler@ti.com>
 To: <meta-ti@yoctoproject.org>
-Date: Wed, 20 May 2015 09:25:22 -0400
-Message-ID: <1432128322-23461-1-git-send-email-j-stiffler@ti.com>
+Date: Wed, 20 May 2015 09:30:20 -0400
+Message-ID: <1432128620-18860-1-git-send-email-j-stiffler@ti.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH v2 1/3] debugss-module-drv: Add version 1.2.0
+Subject: [PATCH v3 2/3] libulm: Add ULM library for ARM and DSP.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,10 +45,8 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2015 13:25:32 -0000
+X-List-Received-Date: Wed, 20 May 2015 13:30:41 -0000
 Content-Type: text/plain
-
-* The debugss-module-drv is require for the dsptop utility.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 ---
@@ -60,54 +58,58 @@ Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
   - Add support for k2hk-evm
   - Reorganize file based on oe-stylize.
 
- recipes-bsp/dsptop/debugss-module-drv_git.bb |   22 ++++++++++++++++++++++
- recipes-bsp/dsptop/dsptop.inc                |    8 ++++++++
- 2 files changed, 30 insertions(+)
- create mode 100644 recipes-bsp/dsptop/debugss-module-drv_git.bb
- create mode 100644 recipes-bsp/dsptop/dsptop.inc
+ recipes-bsp/dsptop/libulm_git.bb |   42 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+ create mode 100644 recipes-bsp/dsptop/libulm_git.bb
 
-diff --git a/recipes-bsp/dsptop/debugss-module-drv_git.bb b/recipes-bsp/dsptop/debugss-module-drv_git.bb
+diff --git a/recipes-bsp/dsptop/libulm_git.bb b/recipes-bsp/dsptop/libulm_git.bb
 new file mode 100644
-index 0000000..66e0453
+index 0000000..306d86f
 --- /dev/null
-+++ b/recipes-bsp/dsptop/debugss-module-drv_git.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "Debug Sub-System (DebugSS) driver for Keystone and DRA7xx devices"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
++++ b/recipes-bsp/dsptop/libulm_git.bb
+@@ -0,0 +1,42 @@
++DESCRIPTION = "TI dsptop utility."
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://../debian/copyright;md5=309825aa8f5edfcf2c44912ac094b979"
 +
-+# This package builds a kernel module, use kernel PR as base and append a local
-+MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
-+PR = "${MACHINE_KERNEL_PR}"
++DEPENDS = "ti-cgt6x-native"
++PR = "${INC_PR}.0"
 +
-+S = "${WORKDIR}/git/debugss_module/debugss-mod"
++S = "${WORKDIR}/git/dsptop/ulm"
 +
-+inherit module
++DEVICE=""
++DEVICE_dra7xx = "DRA7xx"
++DEVICE_keystone = "C66AK2Hxx"
 +
-+PLATFORM = ""
-+PLATFORM_dra7xx = "DRA7xx_PLATFORM"
-+PLATFORM_keystone = "KEYSTONE_PLATFORM"
++EXTRA_OEMAKE = "release DEVICE=${DEVICE} CROSS_COMPILE=${TARGET_PREFIX}"
 +
-+EXTRA_OEMAKE = "'PLATFORM=${PLATFORM}'"
++do_compile() {
++    oe_runmake arm XPORT_ONLY
++    oe_runmake dsp C6X_C_DIR=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x/include
++}
++
++do_install() {
++    install -d ${D}${includedir}
++    install -d ${D}${libdir}
++    install -d ${D}${datadir}/ti/ulm
++    cp -f tiulm.h ${D}${includedir}
++    cp -f release/libtiulm.a ${D}${libdir}
++    cp -f tiulm.h ${D}${datadir}/ti/ulm
++    cp -f release/libtiulm.ae66 ${D}${datadir}/ti/ulm
++}
 +
 +COMPATIBLE_MACHINE = "dra7xx|keystone"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
++FILES_${PN}-dev += "\
++    ${datadir}/ti/ulm \
++"
++
 +include dsptop.inc
-diff --git a/recipes-bsp/dsptop/dsptop.inc b/recipes-bsp/dsptop/dsptop.inc
-new file mode 100644
-index 0000000..4b9e3fa
---- /dev/null
-+++ b/recipes-bsp/dsptop/dsptop.inc
-@@ -0,0 +1,8 @@
-+# This corresponds to version 1.2.0    
-+SRCREV = "9893486936626e2d3de721f429a67fcac8a68151"
-+PV = "1.2.0"
-+INC_PR = "r0"
 +
-+SRC_URI = "git://git.ti.com/sdo-emu/dsptop.git;protocol=git;branch=${BRANCH}"
++ALLOW_EMPTY_${PN} = "1"
 +
-+BRANCH = "master"
++PARALLEL_MAKE= ""
 -- 
 1.7.9.5
 
