@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BD2D7E00A03; Thu, 21 May 2015 08:12:10 -0700 (PDT)
+	id BF22FE00A08; Thu, 21 May 2015 08:12:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 85D4CE009D6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84A47E009D2
 	for <meta-ti@yoctoproject.org>; Thu, 21 May 2015 08:12:01 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 48E3B52A22; Thu, 21 May 2015 15:12:01 +0000 (UTC)
+	id DF249529AA; Thu, 21 May 2015 15:12:00 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150521151201.48E3B52A22@arago-project.org>
-Date: Thu, 21 May 2015 15:12:01 +0000 (UTC)
+Message-Id: <20150521151200.DF249529AA@arago-project.org>
+Date: Thu, 21 May 2015 15:12:00 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : omap5-sgx-ddk-um-linux: fix GNU_HASH and RPATH QA warnings
+Subject: Denys Dmytriyenko : u-boot: remove unused and upstreamed 2015.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,30 +38,53 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 92af7cd1bfba25867b2d72b7b591abf5f3ed91a5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=92af7cd1bfba25867b2d72b7b591abf5f3ed91a5
+Commit: e7601086a4db4dbbb93b50251642794314b8e46f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e7601086a4db4dbbb93b50251642794314b8e46f
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu May 21 07:56:25 2015 +0000
+Date:   Thu May 21 07:56:21 2015 +0000
 
-omap5-sgx-ddk-um-linux: fix GNU_HASH and RPATH QA warnings
+u-boot: remove unused and upstreamed 2015.01
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes-bsp/u-boot/u-boot_2015.01.bb |   27 ---------------------------
+ 1 files changed, 0 insertions(+), 27 deletions(-)
 
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-index 10d1a1e..f806ae8 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-@@ -25,4 +25,4 @@ FILES_${PN} +=  "${includedir}/* /usr/share/sgx-lib/"
- 
- INHIBIT_PACKAGE_STRIP = "1"
- 
--INSANE_SKIP_${PN} += "dev-so"
-+INSANE_SKIP_${PN} += "dev-so ldflags useless-rpaths"
+diff --git a/recipes-bsp/u-boot/u-boot_2015.01.bb b/recipes-bsp/u-boot/u-boot_2015.01.bb
+deleted file mode 100644
+index ee02107..0000000
+--- a/recipes-bsp/u-boot/u-boot_2015.01.bb
++++ /dev/null
+@@ -1,27 +0,0 @@
+-require u-boot-ti.inc
+-
+-# DEPEND on dtc-native for mainline u-boot because the mainline u-boot depends
+-# on some of the latest syntax constructs for an appended in dtb used for
+-# items like secure boot/image signing.
+-DEPENDS += "dtc-native"
+-
+-DESCRIPTION = "Mainline u-boot bootloader"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-LIC_FILES_CHKSUM = "file://Licenses/README;md5=c7383a594871c03da76b3707929d2919"
+-
+-PV = "2014.10+2015.01-rc4"
+-
+-SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;branch=${BRANCH}"
+-
+-BRANCH ?= "master"
+-
+-# Corresponds to tag v2015.01-rc4 plus more fixes
+-SRCREV = "b188067f39627d977bb1db67c8456e9aaab90743"
+-
+-SPL_BINARY = "MLO"
+-SPL_UART_BINARY = "u-boot-spl.bin"
+-
+-SPL_BINARY_omapl138 = ""
+-SPL_UART_BINARY_omapl138 = ""
 
 
