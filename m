@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D2DB0E00A11; Thu, 21 May 2015 08:12:13 -0700 (PDT)
+	id D46B8E00A08; Thu, 21 May 2015 08:12:13 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 00995E009EC
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 008E6E009EB
 	for <meta-ti@yoctoproject.org>; Thu, 21 May 2015 08:12:04 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7EFAD529F8; Thu, 21 May 2015 15:12:02 +0000 (UTC)
+	id 63DDD52A4B; Thu, 21 May 2015 15:12:02 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150521151202.7EFAD529F8@arago-project.org>
+Message-Id: <20150521151202.63DDD52A4B@arago-project.org>
 Date: Thu, 21 May 2015 15:12:02 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : layer.conf: add ti-ipc to safe ABI list
+Subject: Denys Dmytriyenko : recipes: move SRCPV from PR to PV, so PRServ can package AUTOINC after patching
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,32 +38,42 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: 3df50212ee873c39cf1bd17dbdfe73e874c4a7b7
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3df50212ee873c39cf1bd17dbdfe73e874c4a7b7
+Commit: a257bfb6ca4f5249ff31385489e960d7449c0763
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a257bfb6ca4f5249ff31385489e960d7449c0763
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu May 21 07:56:23 2015 +0000
+Date:   Thu May 21 07:56:22 2015 +0000
 
-layer.conf: add ti-ipc to safe ABI list
+recipes: move SRCPV from PR to PV, so PRServ can package AUTOINC after patching
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- conf/layer.conf |    4 ++++
- 1 files changed, 4 insertions(+), 0 deletions(-)
+ recipes-bsp/boot-monitor/boot-monitor_git.bb       |    4 ++--
+ recipes-bsp/cmem/cmem-mod_git.bb                   |    2 +-
+ recipes-bsp/cmem/cmem.inc                          |    2 ++
+ recipes-bsp/cmem/cmem_git.bb                       |    2 +-
+ recipes-bsp/hplib/hplib-mod_git.bb                 |    2 +-
+ recipes-bsp/hplib/hplib.inc                        |    2 +-
+ recipes-bsp/pru/ti-pru-sw-edma-driver_1.00.00.bb   |    3 ++-
+ .../ti-ocf-crypto-module_1.0.bb                    |    3 ++-
+ recipes-bsp/u-boot/u-boot-am33x_2013.01.01.bb      |    3 ++-
+ recipes-bsp/u-boot/u-boot-glsdk_2013.01.01.bb      |    3 ++-
+ recipes-bsp/u-boot/u-boot-keystone_2013.01.bb      |    3 ++-
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.01.01.bb |    3 ++-
+ recipes-bsp/u-boot/u-boot-ti-staging_2013.10.bb    |    4 ++--
+ recipes-bsp/u-boot/u-boot-ti-staging_2014.07.bb    |    4 ++--
+ recipes-bsp/u-boot/u-boot_2014.07.bb               |    2 --
+ recipes-bsp/uio-module-drv/uio-module-drv_git.bb   |    4 ++--
+ recipes-kernel/linux/linux-keystone-rt_3.10.bb     |    4 ++--
+ recipes-kernel/linux/linux-keystone_3.10.bb        |    4 ++--
+ recipes-kernel/linux/linux-keystone_3.13.bb        |    4 ++--
+ recipes-kernel/linux/linux-ti-glsdk_3.8.bb         |    4 ++--
+ recipes-kernel/linux/linux-ti-staging_3.12.bb      |    4 ++--
+ recipes-kernel/linux/linux-ti-staging_3.14.bb      |    4 ++--
+ .../linux/sitara-linux-ti-staging_3.14.bb          |    4 ++--
+ 23 files changed, 40 insertions(+), 34 deletions(-)
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 056422d..7bb46e6 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -9,3 +9,7 @@ BBFILE_PATTERN_meta-ti := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-ti = "6"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
-+
-+SIGGEN_EXCLUDERECIPES_ABISAFE += " \
-+    ti-ipc \
-+"
-
+Diff:   http://arago-project.org/git/meta-ti.git?a=commitdiff;h=a257bfb6ca4f5249ff31385489e960d7449c0763
 
