@@ -1,6 +1,6 @@
 Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 49828E00992; Wed, 20 May 2015 18:56:50 -0700 (PDT)
+	id B09CEE005B9; Wed, 20 May 2015 18:56:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -13,28 +13,29 @@ X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
 	*      [score: 0.0000]
 Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
 	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 6CAF5E004F6
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 88000E005B9
 	for <meta-ti@yoctoproject.org>; Wed, 20 May 2015 18:56:49 -0700 (PDT)
 Received: from gandalf.denix.org ([108.28.31.169]) by vms173021.mailsrvcs.net
 	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
 	16 2014))
-	with ESMTPSA id <0NOO00L5JG245I00@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 20 May 2015 20:56:29 -0500 (CDT)
+	with ESMTPSA id <0NOO00KVVG24OAF0@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Wed, 20 May 2015 20:56:33 -0500 (CDT)
 X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=B/MOC1ok c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
+X-CMAE-Analysis: v=2.1 cv=Ap5ZB14n c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
 	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=h1PgugrvaO0A:10
-	a=sozttTNsAAAA:8	a=x06MctwaW5tDC91DrgQA:9
+	a=sozttTNsAAAA:8	a=VUIIJN3uNjl_kZRl0BcA:9 a=GNWJZC2dH_gA:10
+	a=My-4BpwWpkcA:10
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id A5A062014E;	Wed,
+	by gandalf.denix.org (Postfix) with ESMTP id 996AA20143;	Wed,
 	20 May 2015 21:56:28 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Date: Wed, 20 May 2015 21:56:24 -0400
-Message-id: <1432173385-9193-4-git-send-email-denis@denix.org>
+Date: Wed, 20 May 2015 21:56:23 -0400
+Message-id: <1432173385-9193-3-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.2.0
 In-reply-to: <1432173385-9193-1-git-send-email-denis@denix.org>
 References: <1432173385-9193-1-git-send-email-denis@denix.org>
-Subject: [PATCH 4/5] vpe-tests: mark as machine-specific due to kernel dependency
+Subject: [PATCH 3/5] layer.conf: add ti-ipc to safe ABI list
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,38 +48,27 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2015 01:56:50 -0000
+X-List-Received-Date: Thu, 21 May 2015 01:56:51 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- recipes-bsp/vpe-tests/vpe-tests_git.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ conf/layer.conf | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/recipes-bsp/vpe-tests/vpe-tests_git.bb b/recipes-bsp/vpe-tests/vpe-tests_git.bb
-index ee91dea..776bda5 100644
---- a/recipes-bsp/vpe-tests/vpe-tests_git.bb
-+++ b/recipes-bsp/vpe-tests/vpe-tests_git.bb
-@@ -5,10 +5,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74d2f71d8898c54e3d1c9d0058c484aa"
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 056422d..7bb46e6 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -9,3 +9,7 @@ BBFILE_PATTERN_meta-ti := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-ti = "6"
  
- DEPENDS = "virtual/kernel"
- 
--PR="r1"
-+PR = "r2"
- 
- COMPATIBLE_MACHINE = "dra7xx"
- 
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
+ LICENSE_PATH += "${LAYERDIR}/licenses"
 +
- SRCREV = "e3d8db1aa935775f9d196ad7428e0cd9864a36ca"
- BRANCH ?= "master"
- 
-@@ -24,4 +26,3 @@ EXTRA_OEMAKE = 'CROSS_COMPILE="${TARGET_PREFIX}" CC="${TARGET_PREFIX}gcc ${FLOAT
- do_install() {
-     oe_runmake DESTDIR="${D}" install
- }
--
++SIGGEN_EXCLUDERECIPES_ABISAFE += " \
++    ti-ipc \
++"
 -- 
 2.2.0
 
