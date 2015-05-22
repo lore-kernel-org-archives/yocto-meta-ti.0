@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 01439E00A00; Fri, 22 May 2015 11:18:50 -0700 (PDT)
+	id 27260E009F8; Fri, 22 May 2015 11:18:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D0BDEE00945
-	for <meta-ti@yoctoproject.org>; Fri, 22 May 2015 11:18:46 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D11C0E009E5
+	for <meta-ti@yoctoproject.org>; Fri, 22 May 2015 11:18:47 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4ED2152987; Fri, 22 May 2015 18:18:46 +0000 (UTC)
+	id 8AC8152A23; Fri, 22 May 2015 18:18:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150522181846.4ED2152987@arago-project.org>
+Message-Id: <20150522181846.8AC8152A23@arago-project.org>
 Date: Fri, 22 May 2015 18:18:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-xdctools: Add version 3.30.06.67
+Subject: Jacob Stiffler : ti-sysbios: Add version 6.41.02.41
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,42 +38,40 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: c0325a242e258cb0c20f4971a47a7adab2758a6d
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c0325a242e258cb0c20f4971a47a7adab2758a6d
+Commit: 26ada267c527c22ddebbb8b42bee8e9b38d0ab5f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=26ada267c527c22ddebbb8b42bee8e9b38d0ab5f
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Fri May  8 19:12:32 2015 +0000
+Date:   Fri May  8 19:59:48 2015 +0000
 
-ti-xdctools: Add version 3.30.06.67
+ti-sysbios: Add version 6.41.02.41
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/devtools/ti-xdctools_3.30.06.67.bb |   16 ++++++++++++++++
- 1 files changed, 16 insertions(+), 0 deletions(-)
+ recipes-ti/bios/ti-sysbios_6.41.02.41.bb |   14 ++++++++++++++
+ 1 files changed, 14 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/devtools/ti-xdctools_3.30.06.67.bb b/recipes-ti/devtools/ti-xdctools_3.30.06.67.bb
+diff --git a/recipes-ti/bios/ti-sysbios_6.41.02.41.bb b/recipes-ti/bios/ti-sysbios_6.41.02.41.bb
 new file mode 100644
-index 0000000..6de8181
+index 0000000..fcad086
 --- /dev/null
-+++ b/recipes-ti/devtools/ti-xdctools_3.30.06.67.bb
-@@ -0,0 +1,16 @@
-+require ti-xdctools.inc
++++ b/recipes-ti/bios/ti-sysbios_6.41.02.41.bb
+@@ -0,0 +1,14 @@
++require ti-sysbios.inc
 +
-+PV = "3_30_06_67"
++PV = "6_41_02_41"
 +PR = "r0"
 +
-+LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=117e3c5f48df3e785edee50f5f34a738"
++LIC_FILES_CHKSUM = "file://bios_${PV}_manifest.html;md5=a4af75ec6d586c5267c71075eebff418"
 +
-+SRC_URI[xdcbin.md5sum] = "b500f53e00c4422c7124e1825eee6352"
-+SRC_URI[xdcbin.sha256sum] = "e5ca1f55c09b64bc9414adb55b2fcca301178194abed80f1d75d94cae442fd08"
++SRC_URI[sysbiosbin.md5sum] = "65deff27110c2af87a3c71fea3c0345e"
++SRC_URI[sysbiosbin.sha256sum] = "2c47b4a3aa9513d10e5811a8ac7ed1d6ce3d13df57a0bffe10d8cabaf228c76f"
 +
-+S = "${WORKDIR}/xdctools_${PV}"
-+
++TI_BIN_UNPK_CMDS=""
 +TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
-+TI_BIN_UNPK_CMDS = ""
 +
 +INSANE_SKIP_${PN} = "installed-vs-shipped"
 
