@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8044BE00A00; Fri, 22 May 2015 09:33:40 -0700 (PDT)
+	id 82D8FE00974; Fri, 22 May 2015 09:33:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1E3E0E009D9
-	for <meta-ti@yoctoproject.org>; Fri, 22 May 2015 09:33:36 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB392E009A1
+	for <meta-ti@yoctoproject.org>; Fri, 22 May 2015 09:33:32 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8D76E52A85; Fri, 22 May 2015 16:33:32 +0000 (UTC)
+	id 8BBAA52A9A; Fri, 22 May 2015 16:33:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150522163332.8D76E52A85@arago-project.org>
+Message-Id: <20150522163332.8BBAA52A9A@arago-project.org>
 Date: Fri, 22 May 2015 16:33:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : libulm: Add ULM library for ARM and DSP.
@@ -37,9 +37,9 @@ X-List-Received-Date: Fri, 22 May 2015 16:33:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: d20340cdf0b99a9cb70c09eeae34cf7879706d8e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d20340cdf0b99a9cb70c09eeae34cf7879706d8e
+Branch: daisy
+Commit: 4a297054ef5f5d553c3c918aea8cec0d759b25a2
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4a297054ef5f5d553c3c918aea8cec0d759b25a2
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Wed May 20 19:30:20 2015 +0000
