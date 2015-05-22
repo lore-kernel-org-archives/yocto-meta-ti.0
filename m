@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 84E02E009C8; Fri, 22 May 2015 09:33:40 -0700 (PDT)
+	id 2E1CAE00974; Fri, 22 May 2015 09:40:33 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A9DB5E00974
-	for <meta-ti@yoctoproject.org>; Fri, 22 May 2015 09:33:32 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5E0EBE008DC
+	for <meta-ti@yoctoproject.org>; Fri, 22 May 2015 09:40:30 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7B22052A23; Fri, 22 May 2015 16:33:32 +0000 (UTC)
+	id 67A7D52987; Fri, 22 May 2015 16:40:30 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150522163332.7B22052A23@arago-project.org>
-Date: Fri, 22 May 2015 16:33:32 +0000 (UTC)
+Message-Id: <20150522164030.67A7D52987@arago-project.org>
+Date: Fri, 22 May 2015 16:40:30 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : debugss-module-drv: Add version 1.2.0
+Subject: Jacob Stiffler : gdbserverproxy-module-drv: Add version 1.1.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +33,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 May 2015 16:33:40 -0000
+X-List-Received-Date: Fri, 22 May 2015 16:40:33 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 5b891588b347338bf46af44bec49d74e97d6f7c9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5b891588b347338bf46af44bec49d74e97d6f7c9
+Branch: master
+Commit: 63f1954c616ea32a0fbc6f5408ad3dd330a6c324
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=63f1954c616ea32a0fbc6f5408ad3dd330a6c324
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed May 20 19:33:59 2015 +0000
+Date:   Wed May 20 19:38:23 2015 +0000
 
-debugss-module-drv: Add version 1.2.0
-
-* The debugss-module-drv is require for the dsptop utility.
+gdbserverproxy-module-drv: Add version 1.1.0
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dsptop/debugss-module-drv_git.bb |   23 +++++++++++++++++++++++
- recipes-bsp/dsptop/dsptop.inc                |    8 ++++++++
- 2 files changed, 31 insertions(+), 0 deletions(-)
+ recipes-devtools/gdbc6x/gdbc6x.inc                 |    8 +++++
+ .../gdbc6x/gdbserverproxy-module-drv_git.bb        |   32 ++++++++++++++++++++
+ 2 files changed, 40 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/dsptop/debugss-module-drv_git.bb b/recipes-bsp/dsptop/debugss-module-drv_git.bb
+diff --git a/recipes-devtools/gdbc6x/gdbc6x.inc b/recipes-devtools/gdbc6x/gdbc6x.inc
 new file mode 100644
-index 0000000..052ae4b
+index 0000000..8256127
 --- /dev/null
-+++ b/recipes-bsp/dsptop/debugss-module-drv_git.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "Debug Sub-System (DebugSS) driver for Keystone and DRA7xx devices"
++++ b/recipes-devtools/gdbc6x/gdbc6x.inc
+@@ -0,0 +1,8 @@
++# This corresponds to version 1.1.0
++SRCREV = "1ab06f8bcfe7540754558bac331a0312c4b59142"
++PV = "1.1.0"
++INC_PR = "r0"
++
++SRC_URI = "git://git.ti.com/sdo-emu/gdbc6x.git;protocol=git;branch=${BRANCH}"
++
++BRANCH = "master"
+diff --git a/recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.bb b/recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.bb
+new file mode 100644
+index 0000000..4dedb83
+--- /dev/null
++++ b/recipes-devtools/gdbc6x/gdbserverproxy-module-drv_git.bb
+@@ -0,0 +1,32 @@
++DESCRIPTION = "Interface for GDB to commincate witha TI C66X DSP"
 +LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=75859989545e37968a99b631ef42722e"
 +
 +# This package builds a kernel module, use kernel PR as base and append a local
 +MACHINE_KERNEL_PR_append = "a"
 +PR = "${MACHINE_KERNEL_PR}"
 +PV_append = "+git${SRCPV}"
 +
-+S = "${WORKDIR}/git/debugss_module/debugss-mod"
++S = "${WORKDIR}/git/kernel_module/gdbproxy-mod"
 +
 +inherit module
 +
@@ -80,25 +92,20 @@ index 0000000..052ae4b
 +PLATFORM_dra7xx = "DRA7xx_PLATFORM"
 +PLATFORM_keystone = "KEYSTONE_PLATFORM"
 +
-+EXTRA_OEMAKE = "'PLATFORM=${PLATFORM}'"
++EXTRA_OEMAKE = "PLATFORM=${PLATFORM}"
++
++# The following is to prevent an unused configure.ac from erroneously
++# triggering the QA check for gettext.
++EXTRA_OECONF = "--disable-nls"
++do_configure() {
++    :
++}
 +
 +COMPATIBLE_MACHINE = "dra7xx|keystone"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+include dsptop.inc
-diff --git a/recipes-bsp/dsptop/dsptop.inc b/recipes-bsp/dsptop/dsptop.inc
-new file mode 100644
-index 0000000..5897f25
---- /dev/null
-+++ b/recipes-bsp/dsptop/dsptop.inc
-@@ -0,0 +1,8 @@
-+# This corresponds to version 1.2.0
-+SRCREV = "9893486936626e2d3de721f429a67fcac8a68151"
-+PV = "1.2.0"
-+INC_PR = "r0"
++include gdbc6x.inc
 +
-+SRC_URI = "git://git.ti.com/sdo-emu/dsptop.git;protocol=git;branch=${BRANCH}"
-+
-+BRANCH = "master"
++module_autoload_gdbserverproxy = "gdbserverproxy"
 
 
