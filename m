@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 82D8FE00974; Fri, 22 May 2015 09:33:40 -0700 (PDT)
+	id 84E02E009C8; Fri, 22 May 2015 09:33:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AB392E009A1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A9DB5E00974
 	for <meta-ti@yoctoproject.org>; Fri, 22 May 2015 09:33:32 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8BBAA52A9A; Fri, 22 May 2015 16:33:32 +0000 (UTC)
+	id 7B22052A23; Fri, 22 May 2015 16:33:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150522163332.8BBAA52A9A@arago-project.org>
+Message-Id: <20150522163332.7B22052A23@arago-project.org>
 Date: Fri, 22 May 2015 16:33:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : libulm: Add ULM library for ARM and DSP.
+Subject: Jacob Stiffler : debugss-module-drv: Add version 1.2.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,69 +38,67 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: 4a297054ef5f5d553c3c918aea8cec0d759b25a2
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=4a297054ef5f5d553c3c918aea8cec0d759b25a2
+Commit: 5b891588b347338bf46af44bec49d74e97d6f7c9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5b891588b347338bf46af44bec49d74e97d6f7c9
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed May 20 19:30:20 2015 +0000
+Date:   Wed May 20 19:33:59 2015 +0000
 
-libulm: Add ULM library for ARM and DSP.
+debugss-module-drv: Add version 1.2.0
+
+* The debugss-module-drv is require for the dsptop utility.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dsptop/libulm_git.bb |   42 ++++++++++++++++++++++++++++++++++++++
- 1 files changed, 42 insertions(+), 0 deletions(-)
+ recipes-bsp/dsptop/debugss-module-drv_git.bb |   23 +++++++++++++++++++++++
+ recipes-bsp/dsptop/dsptop.inc                |    8 ++++++++
+ 2 files changed, 31 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/dsptop/libulm_git.bb b/recipes-bsp/dsptop/libulm_git.bb
+diff --git a/recipes-bsp/dsptop/debugss-module-drv_git.bb b/recipes-bsp/dsptop/debugss-module-drv_git.bb
 new file mode 100644
-index 0000000..306d86f
+index 0000000..052ae4b
 --- /dev/null
-+++ b/recipes-bsp/dsptop/libulm_git.bb
-@@ -0,0 +1,42 @@
-+DESCRIPTION = "TI dsptop utility."
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://../debian/copyright;md5=309825aa8f5edfcf2c44912ac094b979"
++++ b/recipes-bsp/dsptop/debugss-module-drv_git.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "Debug Sub-System (DebugSS) driver for Keystone and DRA7xx devices"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=9d4316fe434ba450dca4da25348ca5a3"
 +
-+DEPENDS = "ti-cgt6x-native"
-+PR = "${INC_PR}.0"
++# This package builds a kernel module, use kernel PR as base and append a local
++MACHINE_KERNEL_PR_append = "a"
++PR = "${MACHINE_KERNEL_PR}"
++PV_append = "+git${SRCPV}"
 +
-+S = "${WORKDIR}/git/dsptop/ulm"
++S = "${WORKDIR}/git/debugss_module/debugss-mod"
 +
-+DEVICE=""
-+DEVICE_dra7xx = "DRA7xx"
-+DEVICE_keystone = "C66AK2Hxx"
++inherit module
 +
-+EXTRA_OEMAKE = "release DEVICE=${DEVICE} CROSS_COMPILE=${TARGET_PREFIX}"
++PLATFORM = ""
++PLATFORM_dra7xx = "DRA7xx_PLATFORM"
++PLATFORM_keystone = "KEYSTONE_PLATFORM"
 +
-+do_compile() {
-+    oe_runmake arm XPORT_ONLY
-+    oe_runmake dsp C6X_C_DIR=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x/include
-+}
-+
-+do_install() {
-+    install -d ${D}${includedir}
-+    install -d ${D}${libdir}
-+    install -d ${D}${datadir}/ti/ulm
-+    cp -f tiulm.h ${D}${includedir}
-+    cp -f release/libtiulm.a ${D}${libdir}
-+    cp -f tiulm.h ${D}${datadir}/ti/ulm
-+    cp -f release/libtiulm.ae66 ${D}${datadir}/ti/ulm
-+}
++EXTRA_OEMAKE = "'PLATFORM=${PLATFORM}'"
 +
 +COMPATIBLE_MACHINE = "dra7xx|keystone"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+FILES_${PN}-dev += "\
-+    ${datadir}/ti/ulm \
-+"
-+
 +include dsptop.inc
+diff --git a/recipes-bsp/dsptop/dsptop.inc b/recipes-bsp/dsptop/dsptop.inc
+new file mode 100644
+index 0000000..5897f25
+--- /dev/null
++++ b/recipes-bsp/dsptop/dsptop.inc
+@@ -0,0 +1,8 @@
++# This corresponds to version 1.2.0
++SRCREV = "9893486936626e2d3de721f429a67fcac8a68151"
++PV = "1.2.0"
++INC_PR = "r0"
 +
-+ALLOW_EMPTY_${PN} = "1"
++SRC_URI = "git://git.ti.com/sdo-emu/dsptop.git;protocol=git;branch=${BRANCH}"
 +
-+PARALLEL_MAKE= ""
++BRANCH = "master"
 
 
