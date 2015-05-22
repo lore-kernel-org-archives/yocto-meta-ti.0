@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D06E7E009CA; Fri, 22 May 2015 11:18:51 -0700 (PDT)
+	id D1935E009E6; Fri, 22 May 2015 11:18:51 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D10ECE009CA
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D2657E009E6
 	for <meta-ti@yoctoproject.org>; Fri, 22 May 2015 11:18:47 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CF12752093; Fri, 22 May 2015 18:18:46 +0000 (UTC)
+	id 026A252A7D; Fri, 22 May 2015 18:18:46 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150522181846.CF12752093@arago-project.org>
+Message-Id: <20150522181847.026A252A7D@arago-project.org>
 Date: Fri, 22 May 2015 18:18:46 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-xdais: Move LIC_FILES_CHKSUM into recipe.
+Subject: Jacob Stiffler : ti-xdais: Add version 7.24.00.04
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,64 +38,37 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: f527afaae474198260c560b6c5b37ab2a515e1fb
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f527afaae474198260c560b6c5b37ab2a515e1fb
+Commit: 3d09af48ef924b2089128ec47d778d6da42b5d8b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3d09af48ef924b2089128ec47d778d6da42b5d8b
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Fri May  8 20:09:53 2015 +0000
+Date:   Fri May  8 20:09:54 2015 +0000
 
-ti-xdais: Move LIC_FILES_CHKSUM into recipe.
-
-* This is version specific, so it should not be in a version-agnostic
-  include file.
+ti-xdais: Add version 7.24.00.04
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/xdais/ti-xdais.inc           |    7 +------
- recipes-ti/xdais/ti-xdais_6.26.01.03.bb |    3 +++
- 2 files changed, 4 insertions(+), 6 deletions(-)
+ recipes-ti/xdais/ti-xdais_7.24.00.04.bb |   10 ++++++++++
+ 1 files changed, 10 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/xdais/ti-xdais.inc b/recipes-ti/xdais/ti-xdais.inc
-index 9514ce6..2e7eb13 100644
---- a/recipes-ti/xdais/ti-xdais.inc
-+++ b/recipes-ti/xdais/ti-xdais.inc
-@@ -3,13 +3,9 @@ HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/x
- LICENSE = "GPLv2"
- SECTION = "devel"
- 
--LIC_FILES_CHKSUM = "file://xdais_6_26_01_03_manifest.html;md5=a5a675d49db2f658bb98746ec80cda4e"
--
- require ../includes/ti-paths.inc
- require ../includes/ti-staging.inc
- 
--PR = "r1"
--
- S = "${WORKDIR}/xdais_${PV}"
- 
- SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/xdais/${PV}/exports/xdais_${PV}.tar.gz;name=xdaistarball"
-@@ -17,5 +13,4 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/xd
- do_install() {
-     install -d ${D}${XDAIS_INSTALL_DIR_RECIPE}
-     cp -pPrf ${S}/* ${D}${XDAIS_INSTALL_DIR_RECIPE}
--} 
--
-+}
-diff --git a/recipes-ti/xdais/ti-xdais_6.26.01.03.bb b/recipes-ti/xdais/ti-xdais_6.26.01.03.bb
-index 0451b2d..3d35863 100644
---- a/recipes-ti/xdais/ti-xdais_6.26.01.03.bb
-+++ b/recipes-ti/xdais/ti-xdais_6.26.01.03.bb
-@@ -1,6 +1,9 @@
- require ti-xdais.inc
- 
- PV = "6_26_01_03"
-+PR = "r1"
+diff --git a/recipes-ti/xdais/ti-xdais_7.24.00.04.bb b/recipes-ti/xdais/ti-xdais_7.24.00.04.bb
+new file mode 100644
+index 0000000..0f27514
+--- /dev/null
++++ b/recipes-ti/xdais/ti-xdais_7.24.00.04.bb
+@@ -0,0 +1,10 @@
++require ti-xdais.inc
 +
-+LIC_FILES_CHKSUM = "file://xdais_6_26_01_03_manifest.html;md5=a5a675d49db2f658bb98746ec80cda4e"
- 
- SRC_URI[xdaistarball.md5sum] = "9b2bea3408254e737ec0d819a031adf6"
- SRC_URI[xdaistarball.sha256sum] = "d7bcbd8bcfe6fdfc5f402e4b125ced6c806dc30bc5296e98d5d43b0b5a237a0d"
++PV = "7_24_00_04"
++
++LIC_FILES_CHKSUM = "file://xdais_7_24_00_04_Manifest.html;md5=fd16442230745f0877cfe1c622669fd6"
++
++SRC_URI[xdaistarball.md5sum] = "f7514085b531f2ae49b37b30194e4989"
++SRC_URI[xdaistarball.sha256sum] = "79fd30377ab4c497292aeefb0565f81703d9020d1242b02ca9968c561e0de9a1"
++
++INSANE_SKIP_${PN} = "installed-vs-shipped"
 
 
