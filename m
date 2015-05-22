@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 80FACE009EA; Fri, 22 May 2015 09:33:40 -0700 (PDT)
+	id 8044BE00A00; Fri, 22 May 2015 09:33:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ABFF5E009C8
-	for <meta-ti@yoctoproject.org>; Fri, 22 May 2015 09:33:32 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1E3E0E009D9
+	for <meta-ti@yoctoproject.org>; Fri, 22 May 2015 09:33:36 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8478652A4F; Fri, 22 May 2015 16:33:32 +0000 (UTC)
+	id 8D76E52A85; Fri, 22 May 2015 16:33:32 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150522163332.8478652A4F@arago-project.org>
+Message-Id: <20150522163332.8D76E52A85@arago-project.org>
 Date: Fri, 22 May 2015 16:33:32 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : dsptop: Add version 1.2.0
+Subject: Jacob Stiffler : libulm: Add ULM library for ARM and DSP.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,59 +37,70 @@ X-List-Received-Date: Fri, 22 May 2015 16:33:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 3a1f93c6c0e3f1fcb2c51877677129c47f1ec589
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3a1f93c6c0e3f1fcb2c51877677129c47f1ec589
+Branch: master
+Commit: d20340cdf0b99a9cb70c09eeae34cf7879706d8e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d20340cdf0b99a9cb70c09eeae34cf7879706d8e
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed May 20 19:32:16 2015 +0000
+Date:   Wed May 20 19:30:20 2015 +0000
 
-dsptop: Add version 1.2.0
-
-* dsptop is a utility that provides a top-like interface to observe
-  DSP resource usage in real-time.
+libulm: Add ULM library for ARM and DSP.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/dsptop/dsptop_git.bb |   28 ++++++++++++++++++++++++++++
- 1 files changed, 28 insertions(+), 0 deletions(-)
+ recipes-bsp/dsptop/libulm_git.bb |   42 ++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 42 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/dsptop/dsptop_git.bb b/recipes-bsp/dsptop/dsptop_git.bb
+diff --git a/recipes-bsp/dsptop/libulm_git.bb b/recipes-bsp/dsptop/libulm_git.bb
 new file mode 100644
-index 0000000..4b6c729
+index 0000000..306d86f
 --- /dev/null
-+++ b/recipes-bsp/dsptop/dsptop_git.bb
-@@ -0,0 +1,28 @@
++++ b/recipes-bsp/dsptop/libulm_git.bb
+@@ -0,0 +1,42 @@
 +DESCRIPTION = "TI dsptop utility."
 +LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=309825aa8f5edfcf2c44912ac094b979"
++LIC_FILES_CHKSUM = "file://../debian/copyright;md5=309825aa8f5edfcf2c44912ac094b979"
 +
-+DEPENDS = "libulm ncurses"
-+
++DEPENDS = "ti-cgt6x-native"
 +PR = "${INC_PR}.0"
 +
-+S = "${WORKDIR}/git/dsptop"
++S = "${WORKDIR}/git/dsptop/ulm"
 +
-+DEVICE = ""
++DEVICE=""
 +DEVICE_dra7xx = "DRA7xx"
 +DEVICE_keystone = "C66AK2Hxx"
 +
 +EXTRA_OEMAKE = "release DEVICE=${DEVICE} CROSS_COMPILE=${TARGET_PREFIX}"
 +
++do_compile() {
++    oe_runmake arm XPORT_ONLY
++    oe_runmake dsp C6X_C_DIR=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x/include
++}
++
 +do_install() {
-+    oe_runmake install DESTDIR=${D}
++    install -d ${D}${includedir}
++    install -d ${D}${libdir}
++    install -d ${D}${datadir}/ti/ulm
++    cp -f tiulm.h ${D}${includedir}
++    cp -f release/libtiulm.a ${D}${libdir}
++    cp -f tiulm.h ${D}${datadir}/ti/ulm
++    cp -f release/libtiulm.ae66 ${D}${datadir}/ti/ulm
 +}
 +
 +COMPATIBLE_MACHINE = "dra7xx|keystone"
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
 +
-+RDEPENDS_${PN} = "debugss-module-drv"
++FILES_${PN}-dev += "\
++    ${datadir}/ti/ulm \
++"
 +
 +include dsptop.inc
 +
-+PARALLEL_MAKE = ""
++ALLOW_EMPTY_${PN} = "1"
++
++PARALLEL_MAKE= ""
 
 
