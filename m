@@ -1,44 +1,42 @@
-Return-Path: <meenakumari.s@hcl.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 390A8E009E6; Fri, 22 May 2015 23:44:37 -0700 (PDT)
+	id B701DE009DF; Sat, 23 May 2015 18:03:39 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-X-Greylist: delayed 66 seconds by postgrey-1.32 at yocto-www;
-	Fri, 22 May 2015 23:44:33 PDT
-Received: from GWS06.hcl.com (gws06.hcl.com [203.105.185.25])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0A91DE00988
-	for <meta-ti@yoctoproject.org>; Fri, 22 May 2015 23:44:32 -0700 (PDT)
-X-IronPort-AV: E=Sophos;i="5.13,480,1427740200"; d="scan'208";a="140708931"
-Received: from unknown (HELO NDA-CORP-HT03.CORP.HCL.IN) ([10.248.64.35])
-	by GWS06.hcl.com with ESMTP/TLS/AES128-SHA; 23 May 2015 12:13:22 +0530
-Received: from NDA-HCLT-CSHT04.HCLT.CORP.HCL.IN (10.98.132.29) by
-	NDA-CORP-HT03.CORP.HCL.IN (10.248.64.35) with Microsoft SMTP Server
-	(TLS) id 14.3.123.3; Sat, 23 May 2015 12:13:22 +0530
-Received: from NDA-HCLT-MBS05.HCLT.CORP.HCL.IN ([10.98.132.20]) by
-	NDA-HCLT-CSHT04.HCLT.CORP.HCL.IN ([10.98.132.29]) with mapi id
-	14.03.0123.003; Sat, 23 May 2015 12:13:22 +0530
-From: Meenakumari Shedole <meenakumari.s@hcl.com>
-To: Denys Dmytriyenko <denys@ti.com>, Jacob Stiffler <j-stiffler@ti.com>
-Thread-Topic: [meta-ti] [PATCH] ti-cgt6x: Fix installation for native and
-	nativesdk classes.
-Thread-Index: AQHQlLkFIjMl+WUEN0+iBMk2LHYcip2JG2gm
-Date: Sat, 23 May 2015 06:43:22 +0000
-Message-ID: <E4938C0D959B3445943720B88F0721343743E34E@NDA-HCLT-MBS05.hclt.corp.hcl.in>
-References: <1431088437-30316-1-git-send-email-j-stiffler@ti.com>,
-	<20150522175849.GB8903@edge>
-In-Reply-To: <20150522175849.GB8903@edge>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.96.4.252]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5B0D9E00293
+	for <meta-ti@yoctoproject.org>; Sat, 23 May 2015 18:03:35 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4O13Y0x003483
+	for <meta-ti@yoctoproject.org>; Sat, 23 May 2015 20:03:34 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4O13XWp032734
+	for <meta-ti@yoctoproject.org>; Sat, 23 May 2015 20:03:33 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Sat, 23 May 2015 20:03:33 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t4O13XsT008160	for <meta-ti@yoctoproject.org>; Sat, 23 May 2015 20:03:33
+	-0500
+Date: Sat, 23 May 2015 21:03:33 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1798182005.443.1432429413549.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>
-Subject: Re: [PATCH] ti-cgt6x: Fix installation for native and nativesdk classes.
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-05-23_21-00-51
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -51,138 +49,207 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 May 2015 06:44:37 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 24 May 2015 01:03:39 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_442_1424394502.1432429413547"
 
-Hi all,
+------=_Part_442_1424394502.1432429413547
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-I've compiled these modules using my own toolchain with success with the de=
-fault compiler flags(--with-fpu=3Dvfpv3 --with-float=3Dhard --with-mode=3Dt=
-humb)
+<html>
+<head>
+<title>
+Status for 05/23/15
+</title>
+</head>
+<body>
 
-But I had a little trouble, when I tried to compile  the LPM utilities (lpm=
-ON/lpmOFF), since doesn't support thumb and hard float.
+<h2>Status for 05/23/15</h2>
 
-I would like to know if I continue working with my default compiler flag, I=
-'m going to have issues when compiling.
+<h2>BUILD_ID: build-2015-05-23_21-01-59</h2>
 
-Error Message:
-/usr/local/xtools/arm-none-linux-gnueabi/lib/gcc/arm-none-linux-gnueabi/4.7=
-.4/../../../../arm-none-linux-gnueabi/bin/ld.bfd: error: bin/ti_platforms_e=
-vm3530/linux/debug/lpmON.xv5T uses VFP register arguments, /usr/local/xtool=
-s/arm-none-linux-gnueabi/dsp/local_power_manager_linux_1_24_02_09/packages/=
-ti/bios/power/lib/debug/lpm.av5T(lpm_api.ov5T) does not
-/usr/local/xtools/arm-none-linux-gnueabi/lib/gcc/arm-none-linux-gnueabi/4.7=
-.4/../../../../arm-none-linux-gnueabi/bin/ld.bfd: failed to merge target sp=
-ecific data of file /usr/local/xtools/arm-none-linux-
+<h2>Clean Build: false</h2>
+
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am57xx-evm</td>
+        <td id="am57xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2e-evm</td>
+        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2l-evm</td>
+        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2015.05"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_SSTATE="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="false"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-Changed compiler flag hardfloat to softfp also used multiarch Distro Featur=
-e but  faced same issue "USes VFP regsiter arguments".
-
-can someone suggest me if it compiled successfully.
-
-
-Regards
-Meena
-
-
-
-From: meta-ti-bounces@yoctoproject.org [meta-ti-bounces@yoctoproject.org] o=
-n behalf of Denys Dmytriyenko [denys@ti.com]
-Sent: Friday, May 22, 2015 11:28 PM
-To: Jacob Stiffler
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [meta-ti] [PATCH] ti-cgt6x: Fix installation for native and na=
-tivesdk classes.
-
-On Fri, May 08, 2015 at 08:33:57AM -0400, Jacob Stiffler wrote:
-> * Many RTOS packages assume that the entire cgt is installed in a
->   single directory as opposed to standard install paths.
->
-> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-> ---
->  recipes-ti/devtools/ti-cgt6x_8.0.0.bb |    8 ++++++++
->  1 file changed, 8 insertions(+)
->
-> diff --git a/recipes-ti/devtools/ti-cgt6x_8.0.0.bb b/recipes-ti/devtools/=
-ti-cgt6x_8.0.0.bb
-> index 69c6d60..2353ebd 100644
-> --- a/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
-> +++ b/recipes-ti/devtools/ti-cgt6x_8.0.0.bb
-> @@ -6,6 +6,7 @@ LIC_FILES_CHKSUM =3D "file://ti-cgt-c6000_${PV}/LICENSE.t=
-xt;md5=3Db6311962635a4f1563
->  LIC_FILES_CHKSUM_class-target =3D "file://usr/share/doc/ti/cgt-c6x/LICEN=
-SE.txt;md5=3Db6311962635a4f15630e36ec2d875eca"
->
->  PE =3D "1"
-> +PR =3D "r1"
->
->  require ../includes/ti-unpack.inc
->
-> @@ -49,6 +50,11 @@ do_install() {
->          install -m 755 ${binfile} ${D}${bindir}
->      done
->
-> +    install -d ${D}${datadir}/ti/cgt-c6x/bin
-> +    for binfile in ${S}/ti-cgt-c6000_${PV}/bin/*; do
-> +        install -m 755 ${binfile} ${D}${datadir}/ti/cgt-c6x/bin
-> +    done
-
-Would have symlinks worked here as well, instead of duplicating binaries?
-
-
->      install -d ${D}${datadir}/ti/cgt-c6x/include
->      for includefile in ${S}/ti-cgt-c6000_${PV}/include/*; do
->          install -m 644 ${includefile} ${D}${datadir}/ti/cgt-c6x/include
-> @@ -102,4 +108,6 @@ do_install_class-target() {
->
->  FILES_${PN} +=3D "${datadir}/ti/*"
->
-> +FILES_${PN}-dbg +=3D "${datadir}/ti/cgt-c6x/bin/.debug"
-> +
->  BBCLASSEXTEND =3D "native nativesdk"
-> --
-> 1.7.9.5
->
-> --
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
---
-_______________________________________________
-meta-ti mailing list
-meta-ti@yoctoproject.org
-https://lists.yoctoproject.org/listinfo/meta-ti
-
-
-::DISCLAIMER::
----------------------------------------------------------------------------=
--------------------------------------------------------------------------
-
-The contents of this e-mail and any attachment(s) are confidential and inte=
-nded for the named recipient(s) only.
-E-mail transmission is not guaranteed to be secure or error-free as informa=
-tion could be intercepted, corrupted,
-lost, destroyed, arrive late or incomplete, or may contain viruses in trans=
-mission. The e mail and its contents
-(with or without referred errors) shall therefore not attach any liability =
-on the originator or HCL or its affiliates.
-Views or opinions, if any, presented in this email are solely those of the =
-author and may not necessarily reflect the
-views or opinions of HCL or its affiliates. Any form of reproduction, disse=
-mination, copying, disclosure, modification,
-distribution and / or publication of this message without the prior written=
- consent of authorized representative of
-HCL is strictly prohibited. If you have received this email in error please=
- delete it and notify the sender immediately.
-Before opening any email and/or attachments, please check them for viruses =
-and other defects.
-
----------------------------------------------------------------------------=
--------------------------------------------------------------------------
-
-
+------=_Part_442_1424394502.1432429413547--
