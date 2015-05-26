@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 10F4CE00A00; Sun, 24 May 2015 20:19:50 -0700 (PDT)
+	id 5828DE00982; Mon, 25 May 2015 18:03:16 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -14,29 +14,29 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
 Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id B4B4AE00830
-	for <meta-ti@yoctoproject.org>; Sun, 24 May 2015 20:19:45 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4P3JixT023597
-	for <meta-ti@yoctoproject.org>; Sun, 24 May 2015 22:19:44 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4P3JiZm010513
-	for <meta-ti@yoctoproject.org>; Sun, 24 May 2015 22:19:44 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Sun, 24 May 2015 22:19:43 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C1D3BE0095C
+	for <meta-ti@yoctoproject.org>; Mon, 25 May 2015 18:03:11 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4Q138Gu026388
+	for <meta-ti@yoctoproject.org>; Mon, 25 May 2015 20:03:09 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4Q138IL022129
+	for <meta-ti@yoctoproject.org>; Mon, 25 May 2015 20:03:08 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 25 May 2015 20:03:08 -0500
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t4P3Jhtv022125	for <meta-ti@yoctoproject.org>; Sun, 24 May 2015 22:19:43
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t4Q138GT031288	for <meta-ti@yoctoproject.org>; Mon, 25 May 2015 20:03:08
 	-0500
-Date: Sun, 24 May 2015 23:19:43 -0400
+Date: Mon, 25 May 2015 21:03:08 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <1492475896.447.1432523983493.JavaMail.jenkins@puget>
+Message-ID: <307476149.451.1432602188369.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-05-24_21-00-51
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-05-25_21-00-51
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,24 +49,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2015 03:19:50 -0000
-Content-Type: multipart/mixed; boundary="----=_Part_446_81224763.1432523983465"
+X-List-Received-Date: Tue, 26 May 2015 01:03:16 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_450_121530578.1432602188365"
 
-------=_Part_446_81224763.1432523983465
+------=_Part_450_121530578.1432602188365
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 05/24/15
+Status for 05/25/15
 </title>
 </head>
 <body>
 
-<h2>Status for 05/24/15</h2>
+<h2>Status for 05/25/15</h2>
 
-<h2>BUILD_ID: build-2015-05-24_21-01-58</h2>
+<h2>BUILD_ID: build-2015-05-25_21-01-59</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -251,4 +252,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_446_81224763.1432523983465--
+------=_Part_450_121530578.1432602188365--
