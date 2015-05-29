@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A8F6AE009A3; Fri, 29 May 2015 13:11:26 -0700 (PDT)
+	id 33C00E00A1E; Fri, 29 May 2015 13:12:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,30 +12,31 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 02997E009A3
-	for <meta-ti@yoctoproject.org>; Fri, 29 May 2015 13:11:25 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4TKBNKX024581
-	for <meta-ti@yoctoproject.org>; Fri, 29 May 2015 15:11:23 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4TKBNcB016809
-	for <meta-ti@yoctoproject.org>; Fri, 29 May 2015 15:11:23 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 29 May 2015 15:11:23 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03C0AE009A3
+	for <meta-ti@yoctoproject.org>; Fri, 29 May 2015 13:12:08 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4TKC7fT025137
+	for <meta-ti@yoctoproject.org>; Fri, 29 May 2015 15:12:07 -0500
+Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4TKC7Cp028099
+	for <meta-ti@yoctoproject.org>; Fri, 29 May 2015 15:12:07 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
+	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 29 May 2015 15:12:07 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4TKBNST003154;
-	Fri, 29 May 2015 15:11:23 -0500
-Date: Fri, 29 May 2015 16:11:23 -0400
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4TKC7Y3003691;
+	Fri, 29 May 2015 15:12:07 -0500
+Date: Fri, 29 May 2015 16:12:06 -0400
 From: Denys Dmytriyenko <denys@ti.com>
-To: Sam Nelson <sam.nelson@ti.com>
-Message-ID: <20150529201122.GF16418@edge>
-References: <1432746454-5851-1-git-send-email-sam.nelson@ti.com>
+To: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <20150529201206.GG16418@edge>
+References: <1432743617-24000-1-git-send-email-j-stiffler@ti.com>
+	<1432743617-24000-3-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <1432746454-5851-1-git-send-email-sam.nelson@ti.com>
+In-Reply-To: <1432743617-24000-3-git-send-email-j-stiffler@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH] cmem: Update to new version 4.10.01.02
+Subject: Re: [PATCH 2/3] edma3-lld: Update to version 2.12.01.21.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,36 +49,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 May 2015 20:11:26 -0000
+X-List-Received-Date: Fri, 29 May 2015 20:12:11 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
 Ack
 
-On Wed, May 27, 2015 at 01:07:34PM -0400, Sam Nelson wrote:
-> Signed-off-by: Sam Nelson <sam.nelson@ti.com>
+On Wed, May 27, 2015 at 12:20:16PM -0400, Jacob Stiffler wrote:
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 > ---
->  recipes-bsp/cmem/cmem.inc |    6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  recipes-bsp/edma3-lld/edma3-lld.inc |    8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 > 
-> diff --git a/recipes-bsp/cmem/cmem.inc b/recipes-bsp/cmem/cmem.inc
-> index bbb86b0..23e5f2e 100644
-> --- a/recipes-bsp/cmem/cmem.inc
-> +++ b/recipes-bsp/cmem/cmem.inc
-> @@ -4,10 +4,10 @@ LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://include/ti/cmem.h;beginline=1;endline=30;md5=9b745e2765a6ba8a636c91aed4b02ac1"
+> diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
+> index e6dd92b..28c49e3 100644
+> --- a/recipes-bsp/edma3-lld/edma3-lld.inc
+> +++ b/recipes-bsp/edma3-lld/edma3-lld.inc
+> @@ -3,8 +3,8 @@ LICENSE = "BSD-3-Clause"
+>  LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5bdceac872dffdec915b819654ee23ea"
 >  
->  BRANCH ?= "master"
-> -# This corresponds to version 4.10.00.01
-> -SRCREV = "0d2fac7187ca1f6af62a98dee5b3621908cf5831"
-> +# This corresponds to version 4.10.01.02
-> +SRCREV = "a51d9770021fd16c97fc59b320286a3fa43278bc"
+>  BRANCH = "master"
+> -SRC_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
+> -# The following commit corresponds to tag DEV_EDMA3_LLD_02_11_13_17
+> -SRCREV = "8c27e548fa53ca8472404ef347b8f6b6e2588d46"
+> +SRC_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git;protocol=git;branch=${BRANCH}"
+> +# The following commit corresponds to tag DEV_EDMA3_LLD_02_12_01_21_RC1
+> +SRCREV = "562cba36ccd53e89e6979e99a58374513b543f93"
 >  
-> -PV = "4.10.00.01+git${SRCPV}"
-> +PV = "4.10.01.02+git${SRCPV}"
->  
->  SRC_URI = "git://git.ti.com/ipc/ludev.git;protocol=git;branch=${BRANCH}"
->  
+> -PV = "2.11.13"
+> +PV = "2.12.01.21"
 > -- 
 > 1.7.9.5
 > 
