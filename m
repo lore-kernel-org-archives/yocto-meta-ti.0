@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id E493EE009A3; Fri, 29 May 2015 13:03:22 -0700 (PDT)
+	id D791CE00A1A; Fri, 29 May 2015 13:04:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,34 +8,34 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+	*      [198.47.26.153 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 894C9E0086D
-	for <meta-ti@yoctoproject.org>; Fri, 29 May 2015 13:03:20 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4TK3I4o014770
-	for <meta-ti@yoctoproject.org>; Fri, 29 May 2015 15:03:18 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4TK3IFN010699
-	for <meta-ti@yoctoproject.org>; Fri, 29 May 2015 15:03:18 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 29 May 2015 15:03:18 -0500
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4F9E2E0086D
+	for <meta-ti@yoctoproject.org>; Fri, 29 May 2015 13:04:31 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t4TK4U0p020769
+	for <meta-ti@yoctoproject.org>; Fri, 29 May 2015 15:04:30 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4TK4Uxs022625
+	for <meta-ti@yoctoproject.org>; Fri, 29 May 2015 15:04:30 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 29 May 2015 15:04:29 -0500
 Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4TK3I6c002214;
-	Fri, 29 May 2015 15:03:18 -0500
-Date: Fri, 29 May 2015 16:03:17 -0400
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t4TK4Tdi013351;
+	Fri, 29 May 2015 15:04:29 -0500
+Date: Fri, 29 May 2015 16:04:29 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <20150529200317.GX16418@edge>
-References: <1432727881-31872-1-git-send-email-j-stiffler@ti.com>
+Message-ID: <20150529200429.GY16418@edge>
+References: <1432728947-4837-1-git-send-email-j-stiffler@ti.com>
 MIME-Version: 1.0
-In-Reply-To: <1432727881-31872-1-git-send-email-j-stiffler@ti.com>
+In-Reply-To: <1432728947-4837-1-git-send-email-j-stiffler@ti.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v2] ti-ipc-rtos: Add the TI-RTOS IPC package version 3.35.01.07
+Subject: Re: [PATCH 1/3] ti-framework-components: Move LIC_FILES_CHKSUM into recipe.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,62 +48,54 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 May 2015 20:03:23 -0000
+X-List-Received-Date: Fri, 29 May 2015 20:04:32 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
 Ack
 
-On Wed, May 27, 2015 at 07:58:00AM -0400, Jacob Stiffler wrote:
+On Wed, May 27, 2015 at 08:15:45AM -0400, Jacob Stiffler wrote:
+> * This is version specific, so it should not be in a version-agnostic
+>   include file.
+> 
 > Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 > ---
-> * v2 changes:
->   - Add all files to the main package.
+>  .../ti-framework-components.inc                    |    4 ----
+>  .../ti-framework-components_2.26.00.01.bb          |    3 +++
+>  2 files changed, 3 insertions(+), 4 deletions(-)
 > 
->  recipes-ti/ipc/ti-ipc-rtos.inc           |   18 ++++++++++++++++++
->  recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb |    8 ++++++++
->  2 files changed, 26 insertions(+)
->  create mode 100644 recipes-ti/ipc/ti-ipc-rtos.inc
->  create mode 100644 recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
-> 
-> diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
-> new file mode 100644
-> index 0000000..fe179f5
-> --- /dev/null
-> +++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
-> +HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
+> diff --git a/recipes-ti/framework-components/ti-framework-components.inc b/recipes-ti/framework-components/ti-framework-components.inc
+> index f2244db..46f6cfd 100644
+> --- a/recipes-ti/framework-components/ti-framework-components.inc
+> +++ b/recipes-ti/framework-components/ti-framework-components.inc
+> @@ -3,13 +3,9 @@ HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/f
+>  SECTION = "devel"
+>  LICENSE = "BSD"
+>  
+> -LIC_FILES_CHKSUM = "file://framework_components_2_26_00_01_manifest.html;md5=3250f9da7ee72284c07f8dd840400c75"
+> -
+>  require recipes-ti/includes/ti-paths.inc
+>  require recipes-ti/includes/ti-staging.inc
+>  
+> -PR = "r1"
+> -
+>  S = "${WORKDIR}/framework_components_${PV}"
+>  
+>  SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/fc/${PV}/exports/framework_components_${PV},lite.tar.gz;name=fctarball"
+> diff --git a/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb b/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
+> index 7abe793..9570678 100644
+> --- a/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
+> +++ b/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
+> @@ -1,6 +1,9 @@
+>  require ti-framework-components.inc
+>  
+>  PV = "2_26_00_01"
+> +PR = "r1"
 > +
-> +LICENSE = "BSD"
-> +
-> +require recipes-ti/includes/ti-paths.inc
-> +require recipes-ti/includes/ti-staging.inc
-> +
-> +SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/${PV}/exports/ipc_${PV}.zip;name=ipczip"
-> +
-> +S = "${WORKDIR}/ipc_${PV}"
-> +
-> +do_install() {
-> +    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
-> +    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
-> +}
-> +
-> +FILES_${PN} += "${IPC_INSTALL_DIR_RECIPE}"
-> diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb b/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
-> new file mode 100644
-> index 0000000..4c67c6e
-> --- /dev/null
-> +++ b/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
-> @@ -0,0 +1,8 @@
-> +require ti-ipc-rtos.inc
-> +
-> +PV = "3_35_01_07"
-> +
-> +LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
-> +
-> +SRC_URI[ipczip.md5sum] = "9e62e35b8c2d44b1ac5f7ad9554b1a34"
-> +SRC_URI[ipczip.sha256sum] = "006ac780ded0a5fa843397bbde0cb597338dc521544121f697c2efdd80f86314"
+> +LIC_FILES_CHKSUM = "file://framework_components_2_26_00_01_manifest.html;md5=3250f9da7ee72284c07f8dd840400c75"
+>  
+>  SRC_URI[fctarball.md5sum] = "40b51cade2f9ae6e6f6dca73c17065af"
+>  SRC_URI[fctarball.sha256sum] = "3f7a12a51dfe87310828a31518d7ef8f9039e59269c0ca24f74a68433c235048"
 > -- 
 > 1.7.9.5
 > 
