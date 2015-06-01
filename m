@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A4163E00A4B; Mon,  1 Jun 2015 07:43:25 -0700 (PDT)
+	id A6AC2E00A4D; Mon,  1 Jun 2015 07:43:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2AD69E009F6
-	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:43:19 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 446A2E009E1
+	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:43:24 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DC4B952A3F; Mon,  1 Jun 2015 14:43:18 +0000 (UTC)
+	id E30B252A3F; Mon,  1 Jun 2015 14:43:23 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150601144318.DC4B952A3F@arago-project.org>
-Date: Mon,  1 Jun 2015 14:43:18 +0000 (UTC)
+Message-Id: <20150601144323.E30B252A3F@arago-project.org>
+Date: Mon,  1 Jun 2015 14:43:23 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : ti-framework-components: Add all files to the main package .
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 01 Jun 2015 14:43:25 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: e7816d0b731205e43eec89e3156f161e96c1ecb6
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e7816d0b731205e43eec89e3156f161e96c1ecb6
+Branch: daisy
+Commit: 3095e4e8c7a6aa4963a1c9e39ea0a81397143a4e
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3095e4e8c7a6aa4963a1c9e39ea0a81397143a4e
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Wed May 27 18:15:46 2015 +0000
