@@ -1,46 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2B579E009F6; Mon,  1 Jun 2015 07:32:25 -0700 (PDT)
+	id 0BF26E009F6; Mon,  1 Jun 2015 07:33:01 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD199E00992
-	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:32:19 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t51EWI2P009188
-	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 09:32:18 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t51EWIN4006136
-	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 09:32:18 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 1 Jun 2015 09:32:17 -0500
-Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t51EWHgm027724;
-	Mon, 1 Jun 2015 09:32:17 -0500
-Message-ID: <556C6CF2.50002@ti.com>
-Date: Mon, 1 Jun 2015 10:32:18 -0400
-From: Jacob Stiffler <j-stiffler@ti.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
-MIME-Version: 1.0
-To: Denys Dmytriyenko <denys@ti.com>
-References: <1432728947-4837-1-git-send-email-j-stiffler@ti.com>
-	<1432728947-4837-2-git-send-email-j-stiffler@ti.com>
-	<20150529200544.GZ16418@edge> <556C4FA5.3020700@ti.com>
-	<20150601133530.GK16418@edge> <556C658F.3050206@ti.com>
-	<20150601140337.GL16418@edge>
-In-Reply-To: <20150601140337.GL16418@edge>
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 2/3] ti-framework-components: Add all files to the main package.
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D2047E00992
+	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:32:58 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 825AF52A14; Mon,  1 Jun 2015 14:32:58 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20150601143258.825AF52A14@arago-project.org>
+Date: Mon,  1 Jun 2015 14:32:58 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Jacob Stiffler : gdbc6x: Add version 1.1.0
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -53,74 +33,134 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2015 14:32:25 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Jun 2015 14:33:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
+Module: meta-ti
+Branch: master
+Commit: fb67ece977563192a42fb14ab9ae3311205e63a3
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fb67ece977563192a42fb14ab9ae3311205e63a3
 
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Tue May 19 18:51:22 2015 +0000
 
-On 6/1/2015 10:03 AM, Denys Dmytriyenko wrote:
-> On Mon, Jun 01, 2015 at 10:00:47AM -0400, Jacob Stiffler wrote:
->>
->> On 6/1/2015 9:35 AM, Denys Dmytriyenko wrote:
->>> On Mon, Jun 01, 2015 at 08:27:17AM -0400, Jacob Stiffler wrote:
->>>> On 5/29/2015 4:05 PM, Denys Dmytriyenko wrote:
->>>>> On Wed, May 27, 2015 at 08:15:46AM -0400, Jacob Stiffler wrote:
->>>>>> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
->>>>>> ---
->>>>>>   .../ti-framework-components.inc                    |    3 +++
->>>>>>   .../ti-framework-components_2.26.00.01.bb          |    4 +---
->>>>>>   2 files changed, 4 insertions(+), 3 deletions(-)
->>>>>>
->>>>>> diff --git a/recipes-ti/framework-components/ti-framework-components.inc b/recipes-ti/framework-components/ti-framework-components.inc
->>>>>> index 46f6cfd..b8d3f7c 100644
->>>>>> --- a/recipes-ti/framework-components/ti-framework-components.inc
->>>>>> +++ b/recipes-ti/framework-components/ti-framework-components.inc
->>>>>> @@ -15,3 +15,6 @@ do_install() {
->>>>>>       cp -pPrf ${S}/* ${D}${FC_INSTALL_DIR_RECIPE}
->>>>>>   }
->>>>>> +INSANE_SKIP_${PN} = "ldflags"
->>>>> Are there libraries in the package?
->>>> DSP libraries are provided in this package.
->>> ldflags checks for GNU_HASH in ELF libraries. It shouldn't apply to DSP libs,
->>> right?
->>>
->> The DSP libraries are in ELF format.
->>
->> I dug a little deeper and found that this warning is not generated
->> for the newer 3.40 package.
->>
->> For the 2.26 package, there are a couple ARM executables which
->> trigger the warning.
-> Should those executables be packaged separately in main package and the rest
-> in -dev?
->
+gdbc6x: Add version 1.1.0
 
-These are example applications. I'm just not too sure how well these can 
-stand alone in a separate package.
+* The gdbc6x utility provides remote gdb capabilities for C6x DSP
+  cores.
 
->>>>>> +FILES_${PN} += "${FC_INSTALL_DIR_RECIPE}"
->>>>>> diff --git a/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb b/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
->>>>>> index 9570678..1ec10b1 100644
->>>>>> --- a/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
->>>>>> +++ b/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
->>>>>> @@ -1,11 +1,9 @@
->>>>>>   require ti-framework-components.inc
->>>>>>   PV = "2_26_00_01"
->>>>>> -PR = "r1"
->>>>>> +PR = "r2"
->>>>>>   LIC_FILES_CHKSUM = "file://framework_components_2_26_00_01_manifest.html;md5=3250f9da7ee72284c07f8dd840400c75"
->>>>>>   SRC_URI[fctarball.md5sum] = "40b51cade2f9ae6e6f6dca73c17065af"
->>>>>>   SRC_URI[fctarball.sha256sum] = "3f7a12a51dfe87310828a31518d7ef8f9039e59269c0ca24f74a68433c235048"
->>>>>> -
->>>>>> -INSANE_SKIP_${PN} = "installed-vs-shipped"
->>>>>> -- 
->>>>>> 1.7.9.5
->>>>>>
->>>>>> -- 
->>>>>> _______________________________________________
->>>>>> meta-ti mailing list
->>>>>> meta-ti@yoctoproject.org
->>>>>> https://lists.yoctoproject.org/listinfo/meta-ti
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+---
+
+ recipes-devtools/gdbc6x/gdbc6x/init   |   48 +++++++++++++++++++++++++++++++++
+ recipes-devtools/gdbc6x/gdbc6x_git.bb |   44 ++++++++++++++++++++++++++++++
+ 2 files changed, 92 insertions(+), 0 deletions(-)
+
+diff --git a/recipes-devtools/gdbc6x/gdbc6x/init b/recipes-devtools/gdbc6x/gdbc6x/init
+new file mode 100644
+index 0000000..90210b8
+--- /dev/null
++++ b/recipes-devtools/gdbc6x/gdbc6x/init
+@@ -0,0 +1,48 @@
++#!/bin/bash
++
++GDB_DEVICE_NAME='/dev/gdbtty$i'
++DSP_FIRMWARE_NAME='/lib/firmware/dra7-dsp$[$i+1]-fw.xe66'
++
++DSP_L2_GLOBAL_OFFSET="40000000"
++DSP_L2_GLOBAL_SHIFT="00800000"
++
++case "$1" in
++  start)
++
++    dsp_core_l2_offset=$DSP_L2_GLOBAL_OFFSET
++
++    i=0
++    while [ -c "`eval echo $GDB_DEVICE_NAME`" ]
++    do
++      dsp_firmware=`eval echo $DSP_FIRMWARE_NAME`
++
++      if [ -f "`eval echo $DSP_FIRMWARE_NAME`" ]
++      then 
++        eval echo "Initializing $GDB_DEVICE_NAME based on $DSP_FIRMWARE_NAME ..."
++
++        gdb_data_local=`eval readelf -s "$DSP_FIRMWARE_NAME" | \
++                        grep 'gdb_globalData' | \
++                        awk '{print $2}'`
++
++        echo "gdb_globalData (local)  = $gdb_data_local"
++        printf "gdb_globalData (global) = %X\n" \
++          $[0x$gdb_data_local + 0x$dsp_core_l2_offset]
++
++
++        printf "%X\n" $[0x$gdb_data_local + 0x$dsp_core_l2_offset] \
++          >> `eval echo $GDB_DEVICE_NAME`
++      fi
++      i=$[$i + 1]
++      dsp_core_l2_offset=`printf "%X" $[0x$dsp_core_l2_offset + 0x$DSP_L2_GLOBAL_SHIFT]`
++    done
++  ;;
++  stop)
++    # Nothing to be done.
++  ;;
++  *)
++    echo "Usage: $0 {start|stop}"
++    exit 1
++  ;;
++esac
++
++
+diff --git a/recipes-devtools/gdbc6x/gdbc6x_git.bb b/recipes-devtools/gdbc6x/gdbc6x_git.bb
+new file mode 100644
+index 0000000..0e6a907
+--- /dev/null
++++ b/recipes-devtools/gdbc6x/gdbc6x_git.bb
+@@ -0,0 +1,44 @@
++DESCRIPTION = "GNU debugger for TI C6X DSP."
++SECTION = "devel"
++LICENSE = "GPLv3+"
++LIC_FILES_CHKSUM = "file://debian/copyright;md5=bf0fe2872eb3dfeebb2cbe38206fe81f"
++
++DEPENDS = "ncurses bison texinfo flex gettext"
++
++PR = "${INC_PR}.0"
++
++SRC_URI_append = " \
++    file://init \
++"
++
++S = "${WORKDIR}/git/gdbc6x"
++
++inherit update-rc.d
++inherit gettext
++
++do_configure () {
++    cd ${S}
++    ./configure --program-suffix=c6x --target=tic6x-elf-tirtos --host=${HOST_SYS} --prefix=${S}/install_gdb
++}
++
++do_install () {
++    make install
++
++    # Custom install to prevent conflict with standard GDB.
++    install -d ${D}${bindir}
++    install -d ${D}${includedir}
++    install -m 755  ${S}/install_gdb/bin/gdbc6x ${D}${bindir} 
++    cp -rf ${S}/install_gdb/include/* ${D}${includedir}
++
++    install -d ${D}${sysconfdir}/init.d
++    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/gdbserverproxy
++}
++
++RDEPENDS_${PN} = "gdbserverproxy-module-drv"
++
++include gdbc6x.inc
++
++INITSCRIPT_NAME = "gdbserverproxy"
++INITSCRIPT_PARAMS = "defaults 95"
++
++PARALLEL_MAKE = ""
 
 
