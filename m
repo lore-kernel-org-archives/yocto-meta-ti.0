@@ -1,26 +1,46 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 8AE13E00A28; Mon,  1 Jun 2015 07:31:19 -0700 (PDT)
+	id 2B579E009F6; Mon,  1 Jun 2015 07:32:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 32226E00A28
-	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:31:07 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id ABB2752A0A; Mon,  1 Jun 2015 14:31:06 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20150601143106.ABB2752A0A@arago-project.org>
-Date: Mon,  1 Jun 2015 14:31:06 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : gdbserver-c6x: Add version 1.1.0
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AD199E00992
+	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:32:19 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t51EWI2P009188
+	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 09:32:18 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t51EWIN4006136
+	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 09:32:18 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 1 Jun 2015 09:32:17 -0500
+Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t51EWHgm027724;
+	Mon, 1 Jun 2015 09:32:17 -0500
+Message-ID: <556C6CF2.50002@ti.com>
+Date: Mon, 1 Jun 2015 10:32:18 -0400
+From: Jacob Stiffler <j-stiffler@ti.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+MIME-Version: 1.0
+To: Denys Dmytriyenko <denys@ti.com>
+References: <1432728947-4837-1-git-send-email-j-stiffler@ti.com>
+	<1432728947-4837-2-git-send-email-j-stiffler@ti.com>
+	<20150529200544.GZ16418@edge> <556C4FA5.3020700@ti.com>
+	<20150601133530.GK16418@edge> <556C658F.3050206@ti.com>
+	<20150601140337.GL16418@edge>
+In-Reply-To: <20150601140337.GL16418@edge>
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 2/3] ti-framework-components: Add all files to the main package.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,84 +53,74 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2015 14:31:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 01 Jun 2015 14:32:25 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Module: meta-ti
-Branch: fido
-Commit: 575c95ef19dfac7663c03eff344c1b6b0bd522df
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=575c95ef19dfac7663c03eff344c1b6b0bd522df
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed May 20 19:40:30 2015 +0000
 
-gdbserver-c6x: Add version 1.1.0
+On 6/1/2015 10:03 AM, Denys Dmytriyenko wrote:
+> On Mon, Jun 01, 2015 at 10:00:47AM -0400, Jacob Stiffler wrote:
+>>
+>> On 6/1/2015 9:35 AM, Denys Dmytriyenko wrote:
+>>> On Mon, Jun 01, 2015 at 08:27:17AM -0400, Jacob Stiffler wrote:
+>>>> On 5/29/2015 4:05 PM, Denys Dmytriyenko wrote:
+>>>>> On Wed, May 27, 2015 at 08:15:46AM -0400, Jacob Stiffler wrote:
+>>>>>> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+>>>>>> ---
+>>>>>>   .../ti-framework-components.inc                    |    3 +++
+>>>>>>   .../ti-framework-components_2.26.00.01.bb          |    4 +---
+>>>>>>   2 files changed, 4 insertions(+), 3 deletions(-)
+>>>>>>
+>>>>>> diff --git a/recipes-ti/framework-components/ti-framework-components.inc b/recipes-ti/framework-components/ti-framework-components.inc
+>>>>>> index 46f6cfd..b8d3f7c 100644
+>>>>>> --- a/recipes-ti/framework-components/ti-framework-components.inc
+>>>>>> +++ b/recipes-ti/framework-components/ti-framework-components.inc
+>>>>>> @@ -15,3 +15,6 @@ do_install() {
+>>>>>>       cp -pPrf ${S}/* ${D}${FC_INSTALL_DIR_RECIPE}
+>>>>>>   }
+>>>>>> +INSANE_SKIP_${PN} = "ldflags"
+>>>>> Are there libraries in the package?
+>>>> DSP libraries are provided in this package.
+>>> ldflags checks for GNU_HASH in ELF libraries. It shouldn't apply to DSP libs,
+>>> right?
+>>>
+>> The DSP libraries are in ELF format.
+>>
+>> I dug a little deeper and found that this warning is not generated
+>> for the newer 3.40 package.
+>>
+>> For the 2.26 package, there are a couple ARM executables which
+>> trigger the warning.
+> Should those executables be packaged separately in main package and the rest
+> in -dev?
+>
 
-* c6x DSP development files required to support remote gdb debugging.
+These are example applications. I'm just not too sure how well these can 
+stand alone in a separate package.
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- recipes-devtools/gdbc6x/gdbserver-c6x_git.bb |   50 ++++++++++++++++++++++++++
- 1 files changed, 50 insertions(+), 0 deletions(-)
-
-diff --git a/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb b/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
-new file mode 100644
-index 0000000..f4dc51d
---- /dev/null
-+++ b/recipes-devtools/gdbc6x/gdbserver-c6x_git.bb
-@@ -0,0 +1,50 @@
-+DESCRIPTION = "TI gdb-server to be used with c6xgdb."
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://../debian/copyright;md5=82c616b6c8f9c11c46feaaf8f9a11495"
-+
-+DEPENDS = "ti-xdais ti-framework-components ti-cgt6x-native ti-sysbios ti-xdctools"
-+
-+PR = "${INC_PR}.0"
-+
-+S = "${WORKDIR}/git/gdbserver-c6x/src"
-+
-+PLATFORM = ""
-+PLATFORM_dra7xx = "DRA7xx_PLATFORM"
-+PLATFORM_keystone = "KEYSTONE_PLATFORM"
-+
-+EXTRA_OEMAKE = "PLATFORM=${PLATFORM}"
-+
-+export XDAIS_DIR = "${XDAIS_INSTALL_DIR}"
-+export FC_DIR = "${FC_INSTALL_DIR}"
-+export TI_CGT_INSTALL = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-+export BIOS_DIR = "${SYSBIOS_INSTALL_DIR}" 
-+export XDC_DIR = "${XDC_INSTALL_DIR}"
-+
-+# The following is to prevent an unused configure.ac from erroneously
-+# triggering the QA check for gettext.
-+EXTRA_OECONF = "--disable-nls"
-+do_configure() {
-+    :
-+}
-+
-+do_install() {
-+    install -d ${D}${datadir}/ti/gdbc6x/include
-+    install -d ${D}${datadir}/ti/gdbc6x/lib
-+    cp -f ../include/* ${D}${datadir}/ti/gdbc6x/include
-+    cp -f ../lib/* ${D}${datadir}/ti/gdbc6x/lib
-+}
-+
-+COMPATIBLE_MACHINE = "dra7xx|keystone"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+FILES_${PN}-dev += "\
-+    ${datadir}/ti/gdbc6x \
-+"
-+
-+include gdbc6x.inc
-+
-+require recipes-ti/includes/ti-paths.inc
-+
-+ALLOW_EMPTY_${PN} = "1"
-+
-+PARALLEL_MAKE = ""
+>>>>>> +FILES_${PN} += "${FC_INSTALL_DIR_RECIPE}"
+>>>>>> diff --git a/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb b/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
+>>>>>> index 9570678..1ec10b1 100644
+>>>>>> --- a/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
+>>>>>> +++ b/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
+>>>>>> @@ -1,11 +1,9 @@
+>>>>>>   require ti-framework-components.inc
+>>>>>>   PV = "2_26_00_01"
+>>>>>> -PR = "r1"
+>>>>>> +PR = "r2"
+>>>>>>   LIC_FILES_CHKSUM = "file://framework_components_2_26_00_01_manifest.html;md5=3250f9da7ee72284c07f8dd840400c75"
+>>>>>>   SRC_URI[fctarball.md5sum] = "40b51cade2f9ae6e6f6dca73c17065af"
+>>>>>>   SRC_URI[fctarball.sha256sum] = "3f7a12a51dfe87310828a31518d7ef8f9039e59269c0ca24f74a68433c235048"
+>>>>>> -
+>>>>>> -INSANE_SKIP_${PN} = "installed-vs-shipped"
+>>>>>> -- 
+>>>>>> 1.7.9.5
+>>>>>>
+>>>>>> -- 
+>>>>>> _______________________________________________
+>>>>>> meta-ti mailing list
+>>>>>> meta-ti@yoctoproject.org
+>>>>>> https://lists.yoctoproject.org/listinfo/meta-ti
 
 
