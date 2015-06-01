@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D61DEE00A90; Mon,  1 Jun 2015 07:49:45 -0700 (PDT)
+	id D7382E00A8E; Mon,  1 Jun 2015 07:49:45 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 492C4E00A93
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 490C9E00A84
 	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:49:24 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 68B5252A3F; Mon,  1 Jun 2015 14:49:24 +0000 (UTC)
+	id 80BB652A81; Mon,  1 Jun 2015 14:49:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150601144924.68B5252A3F@arago-project.org>
+Message-Id: <20150601144924.80BB652A81@arago-project.org>
 Date: Mon,  1 Jun 2015 14:49:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : common-csl-ip: Seperate source and version into include file.
+Subject: Jacob Stiffler : common-csl-ip-rtos: Add CSL RTOS package.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,61 +38,60 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 957d6f3e0c1867cac52455bcd902646d13a44c8f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=957d6f3e0c1867cac52455bcd902646d13a44c8f
+Commit: 768add74e91a3698b93de079f6a554e568201aa9
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=768add74e91a3698b93de079f6a554e568201aa9
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed May 27 20:10:36 2015 +0000
+Date:   Wed May 27 20:10:38 2015 +0000
 
-common-csl-ip: Seperate source and version into include file.
+common-csl-ip-rtos: Add CSL RTOS package.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/common-csl-ip/common-csl-ip.inc    |   10 ++++++++++
- recipes-bsp/common-csl-ip/common-csl-ip_git.bb |   13 +++----------
- 2 files changed, 13 insertions(+), 10 deletions(-)
+ .../common-csl-ip/common-csl-ip-rtos_git.bb        |   33 ++++++++++++++++++++
+ 1 files changed, 33 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
 new file mode 100644
-index 0000000..1fa34f3
+index 0000000..5d4a552
 --- /dev/null
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
-@@ -0,0 +1,10 @@
-+DESCRIPTION = "Chip support library low level interface"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
-+
-+COMPATIBLE_MACHINE = "keystone"
-+
-+BRANCH="master"
-+SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH}"
-+# commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.00.07A
-+SRCREV = "c78867df9165fdf8042fb692fcea776fc0102326"
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-index 01f7fc5..8f622a5 100644
---- a/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip_git.bb
-@@ -1,15 +1,8 @@
--DESCRIPTION = "Chip support library low level interface"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
--
--COMPATIBLE_MACHINE = "keystone"
--ALLOW_EMPTY_${PN} = "1"
++++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+@@ -0,0 +1,33 @@
 +require common-csl-ip.inc
- 
- PR = "r3"
--BRANCH="master"
--SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH}"
--# commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.00.07A
--SRCREV = "c78867df9165fdf8042fb692fcea776fc0102326"
 +
-+ALLOW_EMPTY_${PN} = "1"
- 
- S = "${WORKDIR}/git"
- 
++require recipes-ti/includes/ti-paths.inc
++require recipes-ti/includes/ti-staging.inc
++
++DEPENDS = "ti-xdctools ti-cgt6x-native ti-sysbios"
++
++S = "${WORKDIR}/ti/csl"
++
++export C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr"
++export XDCCGROOT="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
++export XDCPATH="${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages"
++
++do_configure() {
++    sed -i "s/\ \"\.\\\\\\\\\"\ +//" src/Module.xs
++    find -name "*.xs" -exec sed -i "s/ofd6x\.exe/ofd6x/" {} \;
++    find -name "*.xs" -exec sed -i "s/sectti\.exe/sectti/" {} \;
++    find -name "*.xs" -exec sed -i "/\.chm/d" {} \;
++    find -name "*.xs" -exec sed -i "s/pasm\_dos/pasm\_linux/" {} \;
++}
++
++do_compile() {
++    ${XDC_INSTALL_DIR}/xdc .make
++    ${XDC_INSTALL_DIR}/xdc clean
++    ${XDC_INSTALL_DIR}/xdc release
++}
++
++do_install () {
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages
++    find -name "*.tar" -exec tar xf {} -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages \;
++}
++
++FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
 
 
