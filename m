@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id B6BA8E00A90; Mon,  1 Jun 2015 07:49:44 -0700 (PDT)
+	id B7896E00A7D; Mon,  1 Jun 2015 07:49:44 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8F605E00A7D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id BB520E00A80
 	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:49:24 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 4DCF652A14; Mon,  1 Jun 2015 14:49:24 +0000 (UTC)
+	id 6F68D52A47; Mon,  1 Jun 2015 14:49:24 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150601144924.4DCF652A14@arago-project.org>
+Message-Id: <20150601144924.6F68D52A47@arago-project.org>
 Date: Mon,  1 Jun 2015 14:49:24 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-paths: Add PDK_INSTALL_DIR for RTOS drivers.
+Subject: Jacob Stiffler : common-csl-ip.inc: Add source revision for dra7xx.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,45 +38,45 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 344abbf4a53e587aefb4cd1c0e266f149b49992c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=344abbf4a53e587aefb4cd1c0e266f149b49992c
+Commit: e2b273b39d77d2ed83c617e6c84dec302fe25775
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e2b273b39d77d2ed83c617e6c84dec302fe25775
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed May 27 20:10:35 2015 +0000
+Date:   Wed May 27 20:10:37 2015 +0000
 
-ti-paths: Add PDK_INSTALL_DIR for RTOS drivers.
+common-csl-ip.inc: Add source revision for dra7xx.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/includes/ti-paths.inc |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes-bsp/common-csl-ip/common-csl-ip.inc |   12 ++++++++++--
+ 1 files changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index 4e6227e..b902cbb 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -43,6 +43,7 @@ export UIA_INSTALL_DIR_RECIPE        = "${installdir}/ti-uia-tree"
- export VICPLIB_INSTALL_DIR_RECIPE    = "${installdir}/ti-vicplib-tree"
- export XDAIS_INSTALL_DIR_RECIPE      = "${installdir}/ti-xdais-tree"
- export XDC_INSTALL_DIR_RECIPE        = "${installdir}/ti-xdctools-tree"
-+export PDK_INSTALL_DIR_RECIPE        = "${installdir}/ti-pdk-tree"
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip.inc b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+index 1fa34f3..cbf2c3c 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip.inc
++++ b/recipes-bsp/common-csl-ip/common-csl-ip.inc
+@@ -2,9 +2,17 @@ DESCRIPTION = "Chip support library low level interface"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5857833e20836213677fac33f9aded21"
  
- # This is where the tools will end up in sysroot
- export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
-@@ -76,10 +77,10 @@ export SYSLINK_INSTALL_DIR    = "${STAGING_DIR_TARGET}${SYSLINK_INSTALL_DIR_RECI
- export UIA_INSTALL_DIR        = "${STAGING_DIR_TARGET}${UIA_INSTALL_DIR_RECIPE}"
- export XDAIS_INSTALL_DIR      = "${STAGING_DIR_TARGET}${XDAIS_INSTALL_DIR_RECIPE}"
- export XDC_INSTALL_DIR        = "${STAGING_DIR_TARGET}${XDC_INSTALL_DIR_RECIPE}"
-+export PDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${PDK_INSTALL_DIR_RECIPE}"
+-COMPATIBLE_MACHINE = "keystone"
++COMPATIBLE_MACHINE = "keystone|dra7xx"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
  
- DSPSUFFIX_omapl137 = "x674"
- DSPSUFFIX_omapl138 = "x674"
- DSPSUFFIX_ti816x = "xe674"
- DSPSUFFIX_ti814x = "xe674"
- DSPSUFFIX ?= "x64P"
--
+ BRANCH="master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH}"
++BRANCH_dra7xx = "releases/PROCESSOR-SDK.01.00.00"
++
++SRC_URI = "git://git.ti.com/keystone-rtos/common-csl-ip.git;protocol=git;branch=${BRANCH};destsuffix=${S}"
++
+ # commit ID corresponds to DEV.CSL_KEYSTONE2.02.01.00.07A
+ SRCREV = "c78867df9165fdf8042fb692fcea776fc0102326"
++
++# commit ID corresponds to PROCESSOR-SDK-ALPHA-1
++SRCREV_dra7xx = "37c5311ddf289f83b1432a9422816722d264bf55"
 
 
