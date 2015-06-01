@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D7382E00A8E; Mon,  1 Jun 2015 07:49:45 -0700 (PDT)
+	id 213B4E009F8; Mon,  1 Jun 2015 07:54:46 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 490C9E00A84
-	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:49:24 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DAB51E00992
+	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:54:43 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 80BB652A81; Mon,  1 Jun 2015 14:49:24 +0000 (UTC)
+	id 85ED552A47; Mon,  1 Jun 2015 14:54:43 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150601144924.80BB652A81@arago-project.org>
-Date: Mon,  1 Jun 2015 14:49:24 +0000 (UTC)
+Message-Id: <20150601145443.85ED552A47@arago-project.org>
+Date: Mon,  1 Jun 2015 14:54:43 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : common-csl-ip-rtos: Add CSL RTOS package.
+Subject: Jacob Stiffler : edma3-lld: Update to version 2.12.01.21.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,65 +33,43 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2015 14:49:45 -0000
+X-List-Received-Date: Mon, 01 Jun 2015 14:54:46 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 768add74e91a3698b93de079f6a554e568201aa9
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=768add74e91a3698b93de079f6a554e568201aa9
+Branch: master
+Commit: 957f09f167afe7472621214353126661d619d73f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=957f09f167afe7472621214353126661d619d73f
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed May 27 20:10:38 2015 +0000
+Date:   Wed May 27 22:20:16 2015 +0000
 
-common-csl-ip-rtos: Add CSL RTOS package.
+edma3-lld: Update to version 2.12.01.21.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../common-csl-ip/common-csl-ip-rtos_git.bb        |   33 ++++++++++++++++++++
- 1 files changed, 33 insertions(+), 0 deletions(-)
+ recipes-bsp/edma3-lld/edma3-lld.inc |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-new file mode 100644
-index 0000000..5d4a552
---- /dev/null
-+++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
-@@ -0,0 +1,33 @@
-+require common-csl-ip.inc
-+
-+require recipes-ti/includes/ti-paths.inc
-+require recipes-ti/includes/ti-staging.inc
-+
-+DEPENDS = "ti-xdctools ti-cgt6x-native ti-sysbios"
-+
-+S = "${WORKDIR}/ti/csl"
-+
-+export C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr"
-+export XDCCGROOT="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
-+export XDCPATH="${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages"
-+
-+do_configure() {
-+    sed -i "s/\ \"\.\\\\\\\\\"\ +//" src/Module.xs
-+    find -name "*.xs" -exec sed -i "s/ofd6x\.exe/ofd6x/" {} \;
-+    find -name "*.xs" -exec sed -i "s/sectti\.exe/sectti/" {} \;
-+    find -name "*.xs" -exec sed -i "/\.chm/d" {} \;
-+    find -name "*.xs" -exec sed -i "s/pasm\_dos/pasm\_linux/" {} \;
-+}
-+
-+do_compile() {
-+    ${XDC_INSTALL_DIR}/xdc .make
-+    ${XDC_INSTALL_DIR}/xdc clean
-+    ${XDC_INSTALL_DIR}/xdc release
-+}
-+
-+do_install () {
-+    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages
-+    find -name "*.tar" -exec tar xf {} -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages \;
-+}
-+
-+FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld.inc b/recipes-bsp/edma3-lld/edma3-lld.inc
+index e6dd92b..28c49e3 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld.inc
++++ b/recipes-bsp/edma3-lld/edma3-lld.inc
+@@ -3,8 +3,8 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=5bdceac872dffdec915b819654ee23ea"
+ 
+ BRANCH = "master"
+-SRC_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git"
+-# The following commit corresponds to tag DEV_EDMA3_LLD_02_11_13_17
+-SRCREV = "8c27e548fa53ca8472404ef347b8f6b6e2588d46"
++SRC_URI = "git://git.ti.com/keystone-rtos/edma3_lld.git;protocol=git;branch=${BRANCH}"
++# The following commit corresponds to tag DEV_EDMA3_LLD_02_12_01_21_RC1
++SRCREV = "562cba36ccd53e89e6979e99a58374513b543f93"
+ 
+-PV = "2.11.13"
++PV = "2.12.01.21"
 
 
