@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EC746E00A38; Mon,  1 Jun 2015 07:23:10 -0700 (PDT)
+	id EF2D1E00A28; Mon,  1 Jun 2015 07:23:10 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E9017E00992
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA439E009E1
 	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:23:06 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 22D8652A08; Mon,  1 Jun 2015 14:23:06 +0000 (UTC)
+	id 7B37E52A14; Mon,  1 Jun 2015 14:23:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150601142306.22D8652A08@arago-project.org>
+Message-Id: <20150601142306.7B37E52A14@arago-project.org>
 Date: Mon,  1 Jun 2015 14:23:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : ti-ipc-rtos: Add the TI-RTOS IPC package version 3.35.01. 07
@@ -37,9 +37,9 @@ X-List-Received-Date: Mon, 01 Jun 2015 14:23:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: f4ea115ca08351af409fa343533045296088eba0
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=f4ea115ca08351af409fa343533045296088eba0
+Branch: master
+Commit: 74356ce9c00eb9c6aa45515a9d98468ddfa7a2ee
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=74356ce9c00eb9c6aa45515a9d98468ddfa7a2ee
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Wed May 27 17:58:00 2015 +0000
