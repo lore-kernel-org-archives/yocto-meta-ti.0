@@ -1,28 +1,38 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 1CC70E009E1; Mon,  1 Jun 2015 08:20:44 -0700 (PDT)
+	id 8C443E0096A; Mon,  1 Jun 2015 08:35:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
-	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB70BE0096A
-	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 08:20:40 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id E20DE52A0A; Mon,  1 Jun 2015 15:20:39 +0000 (UTC)
+	* -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at http://www.dnswl.org/,
+	no *      trust
+	*      [206.46.173.23 listed in list.dnswl.org]
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C7C16E0027F
+	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 08:35:37 -0700 (PDT)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173023.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NP90012NVA9TA90@vms173023.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Mon, 01 Jun 2015 10:35:19 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=Lv5vsSpc c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=XAFQembCKUMA:10
+	a=sozttTNsAAAA:8	a=g1xrgIQGl6udWOza_KAA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id E9E01161A6A;	Mon,
+	1 Jun 2015 11:34:56 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: meta-ti@yoctoproject.org
-Message-Id: <20150601152039.E20DE52A0A@arago-project.org>
-Date: Mon,  1 Jun 2015 15:20:39 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : omapdrm-pvr: Use kernel mechanism for module installation.
+Date: Mon, 01 Jun 2015 11:34:56 -0400
+Message-id: <1433172896-31547-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] linux-ti-staging: update with latest PM, connectivity and A/D fixes
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,48 +45,34 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2015 15:20:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 01 Jun 2015 15:35:40 -0000
 
-Module: meta-ti
-Branch: fido
-Commit: d8f09b39ab3da34ed54d3ab426c0e7d34466c8df
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d8f09b39ab3da34ed54d3ab426c0e7d34466c8df
+From: Denys Dmytriyenko <denys@ti.com>
 
-Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Thu May 28 17:15:28 2015 +0000
-
-omapdrm-pvr: Use kernel mechanism for module installation.
-
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
 ---
+ recipes-kernel/linux/linux-ti-staging_3.14.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |    6 ++----
- 1 files changed, 2 insertions(+), 4 deletions(-)
-
-diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-index 4ef920e..39885f8 100644
---- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-+++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=2b841bf
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index 3981bf3..0c3d499 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -46,11 +46,11 @@ S = "${WORKDIR}/git"
  
- inherit module
+ BRANCH = "ti-linux-3.14.y"
  
--MACHINE_KERNEL_PR_append = "d"
-+MACHINE_KERNEL_PR_append = "e"
+-SRCREV = "1da51aba787fd40cf6d0ce7fd35b6757e13a1d4f"
++SRCREV = "c12a0f63ff2636cb406f249ca286d1d80bbac5c8"
+ PV = "3.14.43+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "c"
++MACHINE_KERNEL_PR_append = "d"
  PR = "${MACHINE_KERNEL_PR}"
  
- BRANCH = "next"
-@@ -22,7 +22,5 @@ do_compile_prepend() {
- }
- 
- do_install() {
--    mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/extra/
--    cp ${S}/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild/omapdrm_pvr.ko \
--    ${D}/lib/modules/${KERNEL_VERSION}/extra/
-+    make -C ${STAGING_KERNEL_DIR} SUBDIRS=${B}/eurasia_km/eurasiacon/binary2_omap5430_linux_release/target/kbuild INSTALL_MOD_PATH=${D} PREFIX=${STAGING_DIR_HOST} modules_install
- }
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+-- 
+2.2.0
 
 
