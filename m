@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C0639E00A01; Mon,  1 Jun 2015 05:55:55 -0700 (PDT)
+	id 0D0F0E00A01; Mon,  1 Jun 2015 05:56:48 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,36 +8,37 @@ X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
 	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
+	*      [192.94.94.41 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id D5481E00547
-	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 05:55:54 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t51CtrLI001595
-	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 07:55:53 -0500
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t51CtrbI002426
-	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 07:55:53 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 1 Jun 2015 07:55:53 -0500
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9874FE00547
+	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 05:56:46 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t51Cui7r023458
+	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 07:56:44 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t51CuiYL014604
+	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 07:56:44 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 1 Jun 2015 07:56:44 -0500
 Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t51CtqSD002366;
-	Mon, 1 Jun 2015 07:55:53 -0500
-Message-ID: <556C5659.6010106@ti.com>
-Date: Mon, 1 Jun 2015 08:55:53 -0400
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t51Cuirh032547;
+	Mon, 1 Jun 2015 07:56:44 -0500
+Message-ID: <556C568C.5090509@ti.com>
+Date: Mon, 1 Jun 2015 08:56:44 -0400
 From: Jacob Stiffler <j-stiffler@ti.com>
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
 MIME-Version: 1.0
 To: Denys Dmytriyenko <denys@ti.com>
-References: <1432727881-31872-1-git-send-email-j-stiffler@ti.com>
-	<20150529200317.GX16418@edge>
-In-Reply-To: <20150529200317.GX16418@edge>
+References: <1432728947-4837-1-git-send-email-j-stiffler@ti.com>
+	<1432728947-4837-2-git-send-email-j-stiffler@ti.com>
+	<20150529200544.GZ16418@edge> <556C4FA5.3020700@ti.com>
+In-Reply-To: <556C4FA5.3020700@ti.com>
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH v2] ti-ipc-rtos: Add the TI-RTOS IPC package version 3.35.01.07
+Subject: Re: [PATCH 2/3] ti-framework-components: Add all files to the main package.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -50,72 +51,67 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2015 12:55:55 -0000
+X-List-Received-Date: Mon, 01 Jun 2015 12:56:48 -0000
 Content-Type: text/plain; charset="windows-1252"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-These files should also be added to the ${PN}-dev package.
+This should also only produce a ${PN}-dev package.
 
-On 5/29/2015 4:03 PM, Denys Dmytriyenko wrote:
-> Ack
+On 6/1/2015 8:27 AM, Jacob Stiffler wrote:
 >
-> On Wed, May 27, 2015 at 07:58:00AM -0400, Jacob Stiffler wrote:
->> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
->> ---
->> * v2 changes:
->>    - Add all files to the main package.
+>
+> On 5/29/2015 4:05 PM, Denys Dmytriyenko wrote:
+>> On Wed, May 27, 2015 at 08:15:46AM -0400, Jacob Stiffler wrote:
+>>> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+>>> ---
+>>>   .../ti-framework-components.inc                    |    3 +++
+>>>   .../ti-framework-components_2.26.00.01.bb          |    4 +---
+>>>   2 files changed, 4 insertions(+), 3 deletions(-)
+>>>
+>>> diff --git 
+>>> a/recipes-ti/framework-components/ti-framework-components.inc 
+>>> b/recipes-ti/framework-components/ti-framework-components.inc
+>>> index 46f6cfd..b8d3f7c 100644
+>>> --- a/recipes-ti/framework-components/ti-framework-components.inc
+>>> +++ b/recipes-ti/framework-components/ti-framework-components.inc
+>>> @@ -15,3 +15,6 @@ do_install() {
+>>>       cp -pPrf ${S}/* ${D}${FC_INSTALL_DIR_RECIPE}
+>>>   }
+>>>   +INSANE_SKIP_${PN} = "ldflags"
+>> Are there libraries in the package?
 >>
->>   recipes-ti/ipc/ti-ipc-rtos.inc           |   18 ++++++++++++++++++
->>   recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb |    8 ++++++++
->>   2 files changed, 26 insertions(+)
->>   create mode 100644 recipes-ti/ipc/ti-ipc-rtos.inc
->>   create mode 100644 recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
->>
->> diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
->> new file mode 100644
->> index 0000000..fe179f5
->> --- /dev/null
->> +++ b/recipes-ti/ipc/ti-ipc-rtos.inc
->> @@ -0,0 +1,18 @@
->> +DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
->> +HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
->> +
->> +LICENSE = "BSD"
->> +
->> +require recipes-ti/includes/ti-paths.inc
->> +require recipes-ti/includes/ti-staging.inc
->> +
->> +SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/${PV}/exports/ipc_${PV}.zip;name=ipczip"
->> +
->> +S = "${WORKDIR}/ipc_${PV}"
->> +
->> +do_install() {
->> +    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
->> +    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
->> +}
->> +
->> +FILES_${PN} += "${IPC_INSTALL_DIR_RECIPE}"
->> diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb b/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
->> new file mode 100644
->> index 0000000..4c67c6e
->> --- /dev/null
->> +++ b/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
->> @@ -0,0 +1,8 @@
->> +require ti-ipc-rtos.inc
->> +
->> +PV = "3_35_01_07"
->> +
->> +LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
->> +
->> +SRC_URI[ipczip.md5sum] = "9e62e35b8c2d44b1ac5f7ad9554b1a34"
->> +SRC_URI[ipczip.sha256sum] = "006ac780ded0a5fa843397bbde0cb597338dc521544121f697c2efdd80f86314"
->> -- 
->> 1.7.9.5
->>
->> -- 
->> _______________________________________________
->> meta-ti mailing list
->> meta-ti@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/meta-ti
+>
+> DSP libraries are provided in this package.
+>
+>>> +FILES_${PN} += "${FC_INSTALL_DIR_RECIPE}"
+>>> diff --git 
+>>> a/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb 
+>>> b/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
+>>> index 9570678..1ec10b1 100644
+>>> --- 
+>>> a/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
+>>> +++ 
+>>> b/recipes-ti/framework-components/ti-framework-components_2.26.00.01.bb
+>>> @@ -1,11 +1,9 @@
+>>>   require ti-framework-components.inc
+>>>     PV = "2_26_00_01"
+>>> -PR = "r1"
+>>> +PR = "r2"
+>>>     LIC_FILES_CHKSUM = 
+>>> "file://framework_components_2_26_00_01_manifest.html;md5=3250f9da7ee72284c07f8dd840400c75"
+>>>     SRC_URI[fctarball.md5sum] = "40b51cade2f9ae6e6f6dca73c17065af"
+>>>   SRC_URI[fctarball.sha256sum] = 
+>>> "3f7a12a51dfe87310828a31518d7ef8f9039e59269c0ca24f74a68433c235048"
+>>> -
+>>> -INSANE_SKIP_${PN} = "installed-vs-shipped"
+>>> -- 
+>>> 1.7.9.5
+>>>
+>>> -- 
+>>> _______________________________________________
+>>> meta-ti mailing list
+>>> meta-ti@yoctoproject.org
+>>> https://lists.yoctoproject.org/listinfo/meta-ti
+>
 
 
