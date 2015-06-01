@@ -1,6 +1,6 @@
 Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7DD40E009AD; Mon,  1 Jun 2015 05:52:49 -0700 (PDT)
+	id A457DE009AD; Mon,  1 Jun 2015 05:54:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,36 +12,33 @@ X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D898E00547
-	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 05:52:47 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t51Cqkjn015509
-	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 07:52:46 -0500
-Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t51CqkAm032094
-	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 07:52:46 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 1 Jun 2015 07:52:45 -0500
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1EE84E00547
+	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 05:54:23 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t51CsLPk016347
+	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 07:54:21 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t51CsLWA012553
+	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 07:54:21 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 1 Jun 2015 07:54:21 -0500
 Received: from [10.218.109.201] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t51CqjvI006968;
-	Mon, 1 Jun 2015 07:52:45 -0500
-Message-ID: <556C559D.7070601@ti.com>
-Date: Mon, 1 Jun 2015 08:52:45 -0400
+	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t51CsLbN028350;
+	Mon, 1 Jun 2015 07:54:21 -0500
+Message-ID: <556C55FD.6020800@ti.com>
+Date: Mon, 1 Jun 2015 08:54:21 -0400
 From: Jacob Stiffler <j-stiffler@ti.com>
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
 MIME-Version: 1.0
 To: Denys Dmytriyenko <denys@ti.com>
-References: <1431094194-11852-1-git-send-email-j-stiffler@ti.com>
-	<1431094194-11852-2-git-send-email-j-stiffler@ti.com>
-	<22A42254-B630-4E50-BB82-A52F1FA2CD84@gmail.com>
-	<554CEFB6.3070708@ti.com> <20150519201102.GD31845@edge>
-	<555C621A.6090704@ti.com> <20150522181216.GD8903@edge>
-	<55674045.9080509@ti.com> <20150529193747.GP16418@edge>
-In-Reply-To: <20150529193747.GP16418@edge>
+References: <1432735838-7207-1-git-send-email-j-stiffler@ti.com>
+	<1432735838-7207-5-git-send-email-j-stiffler@ti.com>
+	<20150529201043.GE16418@edge>
+In-Reply-To: <20150529201043.GE16418@edge>
 Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 2/2] ti-xdais: Add version 7.24.00.04
+Subject: Re: [PATCH 4/4] common-csl-ip-rtos: Add CSL RTOS package.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -54,62 +51,78 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2015 12:52:49 -0000
+X-List-Received-Date: Mon, 01 Jun 2015 12:54:24 -0000
 Content-Type: text/plain; charset="windows-1252"; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 
-On 5/29/2015 3:37 PM, Denys Dmytriyenko wrote:
-> On Thu, May 28, 2015 at 12:20:21PM -0400, Jacob Stiffler wrote:
->>
->> On 5/22/2015 2:12 PM, Denys Dmytriyenko wrote:
->>> On Wed, May 20, 2015 at 06:29:46AM -0400, Jacob Stiffler wrote:
->>>> On 5/19/2015 4:11 PM, Denys Dmytriyenko wrote:
->>>>> On Fri, May 08, 2015 at 01:17:42PM -0400, Jacob Stiffler wrote:
->>>>>> I was following the precedent set by existing RTOS packages (See
->>>>>> recipes-ti/xdais/ti-xdais_6.26.01.03.bb).
->>>>>>
->>>>>> These RTOS packages are build only dependencies, and they do not get
->>>>>> installed into the target filesystem. They are primarily used for
->>>>>> building firmware.
->>>>> Should they be "-native" then?
->>>>>
->>>> I suppose they should be, but this is how is was done before.
->>>>
->>>> If you look at recipes-ti/includes/ti-paths.inc, you'll see that all
->>>> paths point into STAGING_DIR_TARGET
->>> Ok, we may end up doing this on the target at some point.
->>> Can we simply FILES_${PN} += "*" to pick up everything installed and shove it
->>> into the package? That way we won't need INSANE_SKIP and the build deps can be
->>> used on the target in the future...
->>>
->> Adding all of these files to the ${PN} package causes them to be
->> pulled into the filesystem. Should these instead go into the
->> ${PN}-dev package (they are purely development files), and then
->> ALLOW_EMPTY_${PN} = "1"?
-> Actually, that's a good idea. Should we modify other recipes similarly, when
-> they only provide build dependencies for DSP?
+On 5/29/2015 4:10 PM, Denys Dmytriyenko wrote:
+> Ack
+>
+> Are all the dependencies ready for this?
+
+Yes.
+
+> Should all the files be added to ${PN}-dev?
 >
 
-It seems this would make the most sense.
+And yes. If there are no other comments, I'll submit a v2 to add these 
+files to the dev package.
 
-Should I submit patches for the recently updated packages which would be 
-effected? They are the following:
-* ti-sysbios
-* ti-xdais
-
-I'm not sure about ti-xdctools since this includes xdc and other utilities.
-
->>>>>> On 5/8/2015 12:23 PM, Khem Raj wrote:
->>>>>>>> On May 8, 2015, at 7:09 AM, Jacob Stiffler <j-stiffler@ti.com> wrote:
->>>>>>>>
->>>>>>>> +INSANE_SKIP_${PN} = "installed-vs-shipped"
->>>>>>> can this be fixed instead ?
->>>>>> -- 
->>>>>> _______________________________________________
->>>>>> meta-ti mailing list
->>>>>> meta-ti@yoctoproject.org
->>>>>> https://lists.yoctoproject.org/listinfo/meta-ti
+> On Wed, May 27, 2015 at 10:10:38AM -0400, Jacob Stiffler wrote:
+>> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+>> ---
+>>   .../common-csl-ip/common-csl-ip-rtos_git.bb        |   33 ++++++++++++++++++++
+>>   1 file changed, 33 insertions(+)
+>>   create mode 100644 recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+>>
+>> diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+>> new file mode 100644
+>> index 0000000..5d4a552
+>> --- /dev/null
+>> +++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+>> @@ -0,0 +1,33 @@
+>> +require common-csl-ip.inc
+>> +
+>> +require recipes-ti/includes/ti-paths.inc
+>> +require recipes-ti/includes/ti-staging.inc
+>> +
+>> +DEPENDS = "ti-xdctools ti-cgt6x-native ti-sysbios"
+>> +
+>> +S = "${WORKDIR}/ti/csl"
+>> +
+>> +export C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr"
+>> +export XDCCGROOT="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
+>> +export XDCPATH="${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages"
+>> +
+>> +do_configure() {
+>> +    sed -i "s/\ \"\.\\\\\\\\\"\ +//" src/Module.xs
+>> +    find -name "*.xs" -exec sed -i "s/ofd6x\.exe/ofd6x/" {} \;
+>> +    find -name "*.xs" -exec sed -i "s/sectti\.exe/sectti/" {} \;
+>> +    find -name "*.xs" -exec sed -i "/\.chm/d" {} \;
+>> +    find -name "*.xs" -exec sed -i "s/pasm\_dos/pasm\_linux/" {} \;
+>> +}
+>> +
+>> +do_compile() {
+>> +    ${XDC_INSTALL_DIR}/xdc .make
+>> +    ${XDC_INSTALL_DIR}/xdc clean
+>> +    ${XDC_INSTALL_DIR}/xdc release
+>> +}
+>> +
+>> +do_install () {
+>> +    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages
+>> +    find -name "*.tar" -exec tar xf {} -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages \;
+>> +}
+>> +
+>> +FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
+>> -- 
+>> 1.7.9.5
+>>
+>> -- 
+>> _______________________________________________
+>> meta-ti mailing list
+>> meta-ti@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/meta-ti
 
 
