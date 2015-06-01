@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EF2D1E00A28; Mon,  1 Jun 2015 07:23:10 -0700 (PDT)
+	id 3CD6FE009E1; Mon,  1 Jun 2015 07:23:11 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EA439E009E1
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id EB95AE009F6
 	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:23:06 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 7B37E52A14; Mon,  1 Jun 2015 14:23:06 +0000 (UTC)
+	id 8B3D552A3F; Mon,  1 Jun 2015 14:23:06 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150601142306.7B37E52A14@arago-project.org>
+Message-Id: <20150601142306.8B3D552A3F@arago-project.org>
 Date: Mon,  1 Jun 2015 14:23:06 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-ipc-rtos: Add the TI-RTOS IPC package version 3.35.01. 07
+Subject: Jacob Stiffler : llvm-common: Extend to nativesdk class.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,60 +38,32 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 74356ce9c00eb9c6aa45515a9d98468ddfa7a2ee
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=74356ce9c00eb9c6aa45515a9d98468ddfa7a2ee
+Commit: 5c880613a30351e8dfa815ed82740aa5012ef0d4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5c880613a30351e8dfa815ed82740aa5012ef0d4
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed May 27 17:58:00 2015 +0000
+Date:   Wed May 27 16:52:16 2015 +0000
 
-ti-ipc-rtos: Add the TI-RTOS IPC package version 3.35.01.07
+llvm-common: Extend to nativesdk class.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/ipc/ti-ipc-rtos.inc           |   18 ++++++++++++++++++
- recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb |    8 ++++++++
- 2 files changed, 26 insertions(+), 0 deletions(-)
+ recipes-core/llvm/llvm-common.bbappend |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+diff --git a/recipes-core/llvm/llvm-common.bbappend b/recipes-core/llvm/llvm-common.bbappend
 new file mode 100644
-index 0000000..fe179f5
+index 0000000..ffe4dcb
 --- /dev/null
-+++ b/recipes-ti/ipc/ti-ipc-rtos.inc
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "TI Inter Process Communication (IPC) Mechanisms (for Uni- and Multi- Processor Configurations)"
-+HOMEPAGE="http://processors.wiki.ti.com/index.php/Category:IPC"
++++ b/recipes-core/llvm/llvm-common.bbappend
+@@ -0,0 +1,5 @@
++PR_append = "-ti0"
 +
-+LICENSE = "BSD"
++SYSROOT_PREPROCESS_FUNCS_append_class-nativesdk = " llvm_common_sysroot_preprocess"
 +
-+require recipes-ti/includes/ti-paths.inc
-+require recipes-ti/includes/ti-staging.inc
-+
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ipc/${PV}/exports/ipc_${PV}.zip;name=ipczip"
-+
-+S = "${WORKDIR}/ipc_${PV}"
-+
-+do_install() {
-+    install -d ${D}${IPC_INSTALL_DIR_RECIPE}
-+    cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
-+}
-+
-+FILES_${PN} += "${IPC_INSTALL_DIR_RECIPE}"
-diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb b/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
-new file mode 100644
-index 0000000..4c67c6e
---- /dev/null
-+++ b/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
-@@ -0,0 +1,8 @@
-+require ti-ipc-rtos.inc
-+
-+PV = "3_35_01_07"
-+
-+LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
-+
-+SRC_URI[ipczip.md5sum] = "9e62e35b8c2d44b1ac5f7ad9554b1a34"
-+SRC_URI[ipczip.sha256sum] = "006ac780ded0a5fa843397bbde0cb597338dc521544121f697c2efdd80f86314"
++BBCLASSEXTEND += "nativesdk"
 
 
