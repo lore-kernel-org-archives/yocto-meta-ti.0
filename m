@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 28895E00A73; Mon,  1 Jun 2015 07:49:13 -0700 (PDT)
+	id 96BFDE00A7D; Mon,  1 Jun 2015 07:49:14 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7772FE009E1
-	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:49:10 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E7FC0E00A6C
+	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 07:49:11 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 97CF152A88; Mon,  1 Jun 2015 14:49:10 +0000 (UTC)
+	id D390F52AAC; Mon,  1 Jun 2015 14:49:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150601144910.97CF152A88@arago-project.org>
+Message-Id: <20150601144910.D390F52AAC@arago-project.org>
 Date: Mon,  1 Jun 2015 14:49:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Jacob Stiffler : ti-paths: Add PDK_INSTALL_DIR for RTOS drivers.
+Subject: Jacob Stiffler : common-csl-ip-rtos: Add CSL RTOS package.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,50 +33,65 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2015 14:49:13 -0000
+X-List-Received-Date: Mon, 01 Jun 2015 14:49:14 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: master
-Commit: 3860ef375fa2c4c9c37c66461036b3773d6158c8
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3860ef375fa2c4c9c37c66461036b3773d6158c8
+Commit: 7a9e78f4eacd66fe2224bf3b9920eee0c2fad71a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7a9e78f4eacd66fe2224bf3b9920eee0c2fad71a
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
-Date:   Wed May 27 20:10:35 2015 +0000
+Date:   Wed May 27 20:10:38 2015 +0000
 
-ti-paths: Add PDK_INSTALL_DIR for RTOS drivers.
+common-csl-ip-rtos: Add CSL RTOS package.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-ti/includes/ti-paths.inc |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ .../common-csl-ip/common-csl-ip-rtos_git.bb        |   33 ++++++++++++++++++++
+ 1 files changed, 33 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-ti/includes/ti-paths.inc b/recipes-ti/includes/ti-paths.inc
-index 4e6227e..b902cbb 100644
---- a/recipes-ti/includes/ti-paths.inc
-+++ b/recipes-ti/includes/ti-paths.inc
-@@ -43,6 +43,7 @@ export UIA_INSTALL_DIR_RECIPE        = "${installdir}/ti-uia-tree"
- export VICPLIB_INSTALL_DIR_RECIPE    = "${installdir}/ti-vicplib-tree"
- export XDAIS_INSTALL_DIR_RECIPE      = "${installdir}/ti-xdais-tree"
- export XDC_INSTALL_DIR_RECIPE        = "${installdir}/ti-xdctools-tree"
-+export PDK_INSTALL_DIR_RECIPE        = "${installdir}/ti-pdk-tree"
- 
- # This is where the tools will end up in sysroot
- export BIOS_INSTALL_DIR       = "${STAGING_DIR_TARGET}${BIOS_INSTALL_DIR_RECIPE}"
-@@ -76,10 +77,10 @@ export SYSLINK_INSTALL_DIR    = "${STAGING_DIR_TARGET}${SYSLINK_INSTALL_DIR_RECI
- export UIA_INSTALL_DIR        = "${STAGING_DIR_TARGET}${UIA_INSTALL_DIR_RECIPE}"
- export XDAIS_INSTALL_DIR      = "${STAGING_DIR_TARGET}${XDAIS_INSTALL_DIR_RECIPE}"
- export XDC_INSTALL_DIR        = "${STAGING_DIR_TARGET}${XDC_INSTALL_DIR_RECIPE}"
-+export PDK_INSTALL_DIR        = "${STAGING_DIR_TARGET}${PDK_INSTALL_DIR_RECIPE}"
- 
- DSPSUFFIX_omapl137 = "x674"
- DSPSUFFIX_omapl138 = "x674"
- DSPSUFFIX_ti816x = "xe674"
- DSPSUFFIX_ti814x = "xe674"
- DSPSUFFIX ?= "x64P"
--
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+new file mode 100644
+index 0000000..5d4a552
+--- /dev/null
++++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+@@ -0,0 +1,33 @@
++require common-csl-ip.inc
++
++require recipes-ti/includes/ti-paths.inc
++require recipes-ti/includes/ti-staging.inc
++
++DEPENDS = "ti-xdctools ti-cgt6x-native ti-sysbios"
++
++S = "${WORKDIR}/ti/csl"
++
++export C6X_GEN_INSTALL_PATH="${STAGING_DIR_NATIVE}/usr"
++export XDCCGROOT="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
++export XDCPATH="${XDCCGROOT}/include;${XDC_INSTALL_DIR}/packages;${SYSBIOS_INSTALL_DIR}/packages"
++
++do_configure() {
++    sed -i "s/\ \"\.\\\\\\\\\"\ +//" src/Module.xs
++    find -name "*.xs" -exec sed -i "s/ofd6x\.exe/ofd6x/" {} \;
++    find -name "*.xs" -exec sed -i "s/sectti\.exe/sectti/" {} \;
++    find -name "*.xs" -exec sed -i "/\.chm/d" {} \;
++    find -name "*.xs" -exec sed -i "s/pasm\_dos/pasm\_linux/" {} \;
++}
++
++do_compile() {
++    ${XDC_INSTALL_DIR}/xdc .make
++    ${XDC_INSTALL_DIR}/xdc clean
++    ${XDC_INSTALL_DIR}/xdc release
++}
++
++do_install () {
++    install -d ${D}${PDK_INSTALL_DIR_RECIPE}/packages
++    find -name "*.tar" -exec tar xf {} -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages \;
++}
++
++FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
 
 
