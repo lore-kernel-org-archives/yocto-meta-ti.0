@@ -1,6 +1,6 @@
 Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 61CCDE0086D; Mon,  1 Jun 2015 18:03:40 -0700 (PDT)
+	id 0F3BAE00A08; Tue,  2 Jun 2015 18:02:58 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -8,35 +8,35 @@ X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
 	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
 	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id DEB46E0027F
-	for <meta-ti@yoctoproject.org>; Mon,  1 Jun 2015 18:03:37 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t5213Zbf024428
-	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 20:03:35 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t5213Zml007020
-	for <meta-ti@yoctoproject.org>; Mon, 1 Jun 2015 20:03:35 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 1 Jun 2015 20:03:35 -0500
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 97E79E009CC
+	for <meta-ti@yoctoproject.org>; Tue,  2 Jun 2015 18:02:52 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t5312o7Q008819
+	for <meta-ti@yoctoproject.org>; Tue, 2 Jun 2015 20:02:50 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t5312o1q011797
+	for <meta-ti@yoctoproject.org>; Tue, 2 Jun 2015 20:02:50 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 2 Jun 2015 20:02:50 -0500
 Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t5213ZWZ010961	for <meta-ti@yoctoproject.org>;
-	Mon, 1 Jun 2015 20:03:35 -0500
-Date: Mon, 1 Jun 2015 21:03:35 -0400
+	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t5312oHM015306	for <meta-ti@yoctoproject.org>;
+	Tue, 2 Jun 2015 20:02:50 -0500
+Date: Tue, 2 Jun 2015 21:02:50 -0400
 From: Denys Dmytriyenko <denys@ti.com>
 To: <meta-ti@yoctoproject.org>
-Message-ID: <393130496.481.1433207015223.JavaMail.jenkins@puget>
+Message-ID: <1470283444.485.1433293370037.JavaMail.jenkins@puget>
 MIME-Version: 1.0
 X-Jenkins-Job: distroless-meta-ti-nightly
 X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-06-01_21-00-51
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-06-02_21-00-51
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,25 +49,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jun 2015 01:03:40 -0000
+X-List-Received-Date: Wed, 03 Jun 2015 01:02:58 -0000
 Content-Type: multipart/mixed;
-	boundary="----=_Part_480_264386077.1433207015222"
+	boundary="----=_Part_484_1217382459.1433293370034"
 
-------=_Part_480_264386077.1433207015222
+------=_Part_484_1217382459.1433293370034
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 <html>
 <head>
 <title>
-Status for 06/01/15
+Status for 06/02/15
 </title>
 </head>
 <body>
 
-<h2>Status for 06/01/15</h2>
+<h2>Status for 06/02/15</h2>
 
-<h2>BUILD_ID: build-2015-06-01_21-02-00</h2>
+<h2>BUILD_ID: build-2015-06-02_21-01-58</h2>
 
 <h2>Clean Build: false</h2>
 
@@ -252,4 +252,4 @@ BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
 </html>
 
 
-------=_Part_480_264386077.1433207015222--
+------=_Part_484_1217382459.1433293370034--
