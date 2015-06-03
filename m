@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A6F2DE009CC; Tue,  2 Jun 2015 18:40:07 -0700 (PDT)
+	id CE0BEE009EC; Tue,  2 Jun 2015 18:40:21 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5AC87E009E5
-	for <meta-ti@yoctoproject.org>; Tue,  2 Jun 2015 18:40:06 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4CA80E00AB6
+	for <meta-ti@yoctoproject.org>; Tue,  2 Jun 2015 18:40:14 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 11022529BA; Wed,  3 Jun 2015 01:40:06 +0000 (UTC)
+	id D6DB6529BA; Wed,  3 Jun 2015 01:40:13 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150603014006.11022529BA@arago-project.org>
-Date: Wed,  3 Jun 2015 01:40:06 +0000 (UTC)
+Message-Id: <20150603014013.D6DB6529BA@arago-project.org>
+Date: Wed,  3 Jun 2015 01:40:13 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : Revert "llvm-common: Extend to nativesdk class."
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,20 +33,20 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jun 2015 01:40:07 -0000
+X-List-Received-Date: Wed, 03 Jun 2015 01:40:21 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: c6fb26ac141fcbf832e39922d6ed83c21a6a99da
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=c6fb26ac141fcbf832e39922d6ed83c21a6a99da
+Branch: daisy
+Commit: d0352aecb87cb364714c248fb709359a9883dd67
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d0352aecb87cb364714c248fb709359a9883dd67
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Jun  2 21:39:15 2015 -0400
+Date:   Tue Jun  2 21:39:37 2015 -0400
 
 Revert "llvm-common: Extend to nativesdk class."
 
-This reverts commit 8b564e676b4418875f2e24002660ba92ecd4bbf0.
+This reverts commit 02ca76d89456fc0073f1b3384c06494ac51d1498.
 
 ---
 
