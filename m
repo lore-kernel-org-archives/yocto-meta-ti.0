@@ -1,39 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F3BABE0095D; Wed,  3 Jun 2015 17:24:39 -0700 (PDT)
+	id B9963E009C8; Wed,  3 Jun 2015 17:27:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.19 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5131EE007B6
-	for <meta-ti@yoctoproject.org>; Wed,  3 Jun 2015 17:24:36 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173019.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NPE007BA94ZZT20@vms173019.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Wed, 03 Jun 2015 19:24:36 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=N5PUbDJB c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=eIhxMilvRf8A:10 a=0gcC27t9AAAA:8	a=oR5dmqMzAAAA:8 a=-9mUelKeXuEA:10
-	a=XAFQembCKUMA:10 a=sozttTNsAAAA:8	a=HihYlcsHAAAA:8
-	a=rFoFbkrH39ev6EuT788A:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id D4BBD161A73;	Wed,
-	3 Jun 2015 20:24:35 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7F791E0086D
+	for <meta-ti@yoctoproject.org>; Wed,  3 Jun 2015 17:27:21 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 7A82452A44; Thu,  4 Jun 2015 00:27:21 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Wed, 03 Jun 2015 20:24:34 -0400
-Message-id: <1433377474-17120-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] ipumm-fw: update to 3.00.08.01
+Message-Id: <20150604002721.7A82452A44@arago-project.org>
+Date: Thu,  4 Jun 2015 00:27:21 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Denys Dmytriyenko : ipumm-fw: update to 3.00.08.01
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -46,18 +33,28 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2015 00:24:40 -0000
+X-List-Received-Date: Thu, 04 Jun 2015 00:27:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: cf929ea6564564458eeabfd4fb4d42a86b20cd85
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=cf929ea6564564458eeabfd4fb4d42a86b20cd85
+
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Thu Jun  4 06:24:34 2015 +0000
+
+ipumm-fw: update to 3.00.08.01
 
 Note: this prebuilt FW image hasn't been released publicly yet - interim copy
 It doesn't have the correct Manifest either.
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb | 33 +++++++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
- create mode 100644 recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
+
+ recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb |   33 +++++++++++++++++++++++++++
+ 1 files changed, 33 insertions(+), 0 deletions(-)
 
 diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
 new file mode 100644
@@ -98,7 +95,5 @@ index 0000000..2e43584
 +}
 +
 +FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
--- 
-2.2.0
 
 
