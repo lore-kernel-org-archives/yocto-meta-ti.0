@@ -1,41 +1,38 @@
-Return-Path: <denys@ti.com>
+Return-Path: <j-stiffler@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 4A23DE009C8; Wed,  3 Jun 2015 20:19:48 -0700 (PDT)
+	id A405FE009AE; Thu,  4 Jun 2015 09:59:18 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 07745E0095D
-	for <meta-ti@yoctoproject.org>; Wed,  3 Jun 2015 20:19:44 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t543Jgoh028051
-	for <meta-ti@yoctoproject.org>; Wed, 3 Jun 2015 22:19:42 -0500
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.41 listed in list.dnswl.org]
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 1867CE00985
+	for <meta-ti@yoctoproject.org>; Thu,  4 Jun 2015 09:59:16 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t54GxEq2005671
+	for <meta-ti@yoctoproject.org>; Thu, 4 Jun 2015 11:59:14 -0500
 Received: from DLEE70.ent.ti.com (dlemailx.itg.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t543Jg7f016612
-	for <meta-ti@yoctoproject.org>; Wed, 3 Jun 2015 22:19:42 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t54GxEbm013547
+	for <meta-ti@yoctoproject.org>; Thu, 4 Jun 2015 11:59:14 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE70.ent.ti.com
 	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 3 Jun 2015 22:19:42 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t543Jgd4012595;	Wed, 3 Jun 2015 22:19:42 -0500
-Date: Wed, 3 Jun 2015 23:19:41 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>, <denys@ti.com>
-Message-ID: <623436702.491.1433387981962.JavaMail.jenkins@puget>
+	Thu, 4 Jun 2015 11:59:14 -0500
+Received: from localhost.localdomain (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t54GxECn028450;	Thu, 4 Jun 2015 11:59:14 -0500
+From: Jacob Stiffler <j-stiffler@ti.com>
+To: <meta-ti@yoctoproject.org>
+Date: Thu, 4 Jun 2015 12:59:05 -0400
+Message-ID: <1433437145-14902-1-git-send-email-j-stiffler@ti.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-06-03_21-00-51
+Subject: [PATCH] rtos-recipes: Add files to ${PN}-dev instead of ${PN}.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,207 +45,176 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2015 03:19:48 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_490_250968969.1433387981932"
+X-List-Received-Date: Thu, 04 Jun 2015 16:59:18 -0000
+Content-Type: text/plain
 
-------=_Part_490_250968969.1433387981932
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+* These packages only contain firmware development files.
 
-<html>
-<head>
-<title>
-Status for 06/03/15
-</title>
-</head>
-<body>
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+ .../common-csl-ip/common-csl-ip-rtos_git.bb        |    5 ++++-
+ recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb        |    7 ++++---
+ recipes-ti/bios/ti-sysbios.inc                     |    4 ++++
+ recipes-ti/bios/ti-sysbios_6.41.02.41.bb           |    4 +---
+ .../ti-framework-components.inc                    |    3 ++-
+ .../ti-framework-components_3.40.00.02.bb          |    2 +-
+ recipes-ti/ipc/ti-ipc-rtos.inc                     |    3 ++-
+ recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb           |    1 +
+ recipes-ti/xdais/ti-xdais.inc                      |    5 +++++
+ recipes-ti/xdais/ti-xdais_7.24.00.04.bb            |    3 +--
+ 10 files changed, 25 insertions(+), 12 deletions(-)
 
-<h2>Status for 06/03/15</h2>
-
-<h2>BUILD_ID: build-2015-06-03_21-01-59</h2>
-
-<h2>Clean Build: false</h2>
-
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2e-evm</td>
-        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2l-evm</td>
-        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2015.05"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_SSTATE="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+diff --git a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+index 5d4a552..c1fb566 100644
+--- a/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
++++ b/recipes-bsp/common-csl-ip/common-csl-ip-rtos_git.bb
+@@ -3,6 +3,8 @@ require common-csl-ip.inc
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+ 
++PR = "r1"
++
+ DEPENDS = "ti-xdctools ti-cgt6x-native ti-sysbios"
+ 
+ S = "${WORKDIR}/ti/csl"
+@@ -30,4 +32,5 @@ do_install () {
+     find -name "*.tar" -exec tar xf {} -C ${D}${PDK_INSTALL_DIR_RECIPE}/packages \;
+ }
+ 
+-FILES_${PN} += "${PDK_INSTALL_DIR_RECIPE}/packages"
++ALLOW_EMPTY_${PN} = "1"
++FILES_${PN}-dev += "${PDK_INSTALL_DIR_RECIPE}/packages"
+diff --git a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+index 246d7a8..a4e0df6 100644
+--- a/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
++++ b/recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb
+@@ -2,7 +2,7 @@ require edma3-lld.inc
+ require recipes-ti/includes/ti-paths.inc
+ require recipes-ti/includes/ti-staging.inc
+ 
+-PR = "r0"
++PR = "r1"
+ 
+ DEPENDS = "ti-cgt6x-native ti-sysbios ti-xdctools"
+ 
+@@ -70,6 +70,7 @@ do_install () {
+     cp -pPrf ${S}/* ${D}${EDMA3_LLD_INSTALL_DIR_RECIPE}
+ }
+ 
+-INSANE_SKIP_${PN} = "arch"
++INSANE_SKIP_${PN}-dev = "arch"
+ 
+-FILES_${PN} += "${EDMA3_LLD_INSTALL_DIR_RECIPE}"
++ALLOW_EMPTY_${PN} = "1"
++FILES_${PN}-dev += "${EDMA3_LLD_INSTALL_DIR_RECIPE}"
+diff --git a/recipes-ti/bios/ti-sysbios.inc b/recipes-ti/bios/ti-sysbios.inc
+index d04a158..c44fec3 100644
+--- a/recipes-ti/bios/ti-sysbios.inc
++++ b/recipes-ti/bios/ti-sysbios.inc
+@@ -19,3 +19,7 @@ do_install() {
+     cp -pPrf ${S}/* ${D}${SYSBIOS_INSTALL_DIR_RECIPE}
+ }
+ 
++ALLOW_EMPTY_${PN} = "1"
++FILES_${PN}-dev += "${SYSBIOS_INSTALL_DIR_RECIPE}"
++
++INSANE_SKIP_${PN}-dev = "arch ldflags staticdev"
+diff --git a/recipes-ti/bios/ti-sysbios_6.41.02.41.bb b/recipes-ti/bios/ti-sysbios_6.41.02.41.bb
+index fcad086..ccc6ad1 100644
+--- a/recipes-ti/bios/ti-sysbios_6.41.02.41.bb
++++ b/recipes-ti/bios/ti-sysbios_6.41.02.41.bb
+@@ -1,7 +1,7 @@
+ require ti-sysbios.inc
+ 
+ PV = "6_41_02_41"
+-PR = "r0"
++PR = "r1"
+ 
+ LIC_FILES_CHKSUM = "file://bios_${PV}_manifest.html;md5=a4af75ec6d586c5267c71075eebff418"
+ 
+@@ -10,5 +10,3 @@ SRC_URI[sysbiosbin.sha256sum] = "2c47b4a3aa9513d10e5811a8ac7ed1d6ce3d13df57a0bff
+ 
+ TI_BIN_UNPK_CMDS=""
+ TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
+-
+-INSANE_SKIP_${PN} = "installed-vs-shipped"
+diff --git a/recipes-ti/framework-components/ti-framework-components.inc b/recipes-ti/framework-components/ti-framework-components.inc
+index b8d3f7c..e111ec4 100644
+--- a/recipes-ti/framework-components/ti-framework-components.inc
++++ b/recipes-ti/framework-components/ti-framework-components.inc
+@@ -17,4 +17,5 @@ do_install() {
+ 
+ INSANE_SKIP_${PN} = "ldflags"
+ 
+-FILES_${PN} += "${FC_INSTALL_DIR_RECIPE}"
++ALLOW_EMPTY_${PN} = "1"
++FILES_${PN}-dev += "${FC_INSTALL_DIR_RECIPE}"
+diff --git a/recipes-ti/framework-components/ti-framework-components_3.40.00.02.bb b/recipes-ti/framework-components/ti-framework-components_3.40.00.02.bb
+index 2dd8548..78f764d 100644
+--- a/recipes-ti/framework-components/ti-framework-components_3.40.00.02.bb
++++ b/recipes-ti/framework-components/ti-framework-components_3.40.00.02.bb
+@@ -1,7 +1,7 @@
+ require ti-framework-components.inc
+ 
+ PV = "3_40_00_02"
+-PR = "r0"
++PR = "r1"
+ 
+ LIC_FILES_CHKSUM = "file://framework_components_${PV}_Manifest.html;md5=e3ce0b3e17175b7200f346d0c6dbbcc6"
+ 
+diff --git a/recipes-ti/ipc/ti-ipc-rtos.inc b/recipes-ti/ipc/ti-ipc-rtos.inc
+index fe179f5..d14c756 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos.inc
++++ b/recipes-ti/ipc/ti-ipc-rtos.inc
+@@ -15,4 +15,5 @@ do_install() {
+     cp -pPrf ${S}/* ${D}${IPC_INSTALL_DIR_RECIPE}
+ }
+ 
+-FILES_${PN} += "${IPC_INSTALL_DIR_RECIPE}"
++ALLOW_EMPTY_${PN} = "1"
++FILES_${PN}-dev += "${IPC_INSTALL_DIR_RECIPE}"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb b/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
+index 4c67c6e..ef5087d 100644
+--- a/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
++++ b/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
+@@ -1,6 +1,7 @@
+ require ti-ipc-rtos.inc
+ 
+ PV = "3_35_01_07"
++PR = "r1"
+ 
+ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
+ 
+diff --git a/recipes-ti/xdais/ti-xdais.inc b/recipes-ti/xdais/ti-xdais.inc
+index 2e7eb13..a7017e7 100644
+--- a/recipes-ti/xdais/ti-xdais.inc
++++ b/recipes-ti/xdais/ti-xdais.inc
+@@ -14,3 +14,8 @@ do_install() {
+     install -d ${D}${XDAIS_INSTALL_DIR_RECIPE}
+     cp -pPrf ${S}/* ${D}${XDAIS_INSTALL_DIR_RECIPE}
+ }
++
++INSANE_SKIP_${PN}-dev = "arch"
++
++ALLOW_EMPTY_${PN} = "1"
++FILES_${PN}-dev += "${XDAIS_INSTALL_DIR_RECIPE}"
+diff --git a/recipes-ti/xdais/ti-xdais_7.24.00.04.bb b/recipes-ti/xdais/ti-xdais_7.24.00.04.bb
+index 0f27514..8148f73 100644
+--- a/recipes-ti/xdais/ti-xdais_7.24.00.04.bb
++++ b/recipes-ti/xdais/ti-xdais_7.24.00.04.bb
+@@ -1,10 +1,9 @@
+ require ti-xdais.inc
+ 
+ PV = "7_24_00_04"
++PR = "r1"
+ 
+ LIC_FILES_CHKSUM = "file://xdais_7_24_00_04_Manifest.html;md5=fd16442230745f0877cfe1c622669fd6"
+ 
+ SRC_URI[xdaistarball.md5sum] = "f7514085b531f2ae49b37b30194e4989"
+ SRC_URI[xdaistarball.sha256sum] = "79fd30377ab4c497292aeefb0565f81703d9020d1242b02ca9968c561e0de9a1"
+-
+-INSANE_SKIP_${PN} = "installed-vs-shipped"
+-- 
+1.7.9.5
 
 
-------=_Part_490_250968969.1433387981932--
