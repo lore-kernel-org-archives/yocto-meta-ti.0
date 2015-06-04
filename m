@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id DB43BE00A03; Wed,  3 Jun 2015 17:27:36 -0700 (PDT)
+	id DA74CE00A08; Wed,  3 Jun 2015 17:27:41 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 4A42AE009F6
-	for <meta-ti@yoctoproject.org>; Wed,  3 Jun 2015 17:27:30 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id F3A08E007B6
+	for <meta-ti@yoctoproject.org>; Wed,  3 Jun 2015 17:27:37 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id DE73352A44; Thu,  4 Jun 2015 00:27:29 +0000 (UTC)
+	id ADD1452A2B; Thu,  4 Jun 2015 00:27:37 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150604002729.DE73352A44@arago-project.org>
-Date: Thu,  4 Jun 2015 00:27:29 +0000 (UTC)
+Message-Id: <20150604002737.ADD1452A2B@arago-project.org>
+Date: Thu,  4 Jun 2015 00:27:37 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : ipumm-fw: update to 3.00.08.01
+Subject: Denys Dmytriyenko : ti-ipc: update to 3.36.01.11
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,67 +33,78 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2015 00:27:36 -0000
+X-List-Received-Date: Thu, 04 Jun 2015 00:27:41 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: daisy
-Commit: 7e50591a6902ced8c32f40109567d969e45c815e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7e50591a6902ced8c32f40109567d969e45c815e
+Branch: fido
+Commit: d0943769d496e4c39eea872d76409e319f7344ea
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d0943769d496e4c39eea872d76409e319f7344ea
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Jun  4 06:24:34 2015 +0000
+Date:   Thu Jun  4 04:54:10 2015 +0000
 
-ipumm-fw: update to 3.00.08.01
-
-Note: this prebuilt FW image hasn't been released publicly yet - interim copy
-It doesn't have the correct Manifest either.
+ti-ipc: update to 3.36.01.11
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb |   33 +++++++++++++++++++++++++++
- 1 files changed, 33 insertions(+), 0 deletions(-)
+ recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb |    8 --------
+ recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb |    8 ++++++++
+ recipes-ti/ipc/ti-ipc_git.bb             |    8 ++++----
+ 3 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb b/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
+deleted file mode 100644
+index 4c67c6e..0000000
+--- a/recipes-ti/ipc/ti-ipc-rtos_3.35.01.07.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require ti-ipc-rtos.inc
+-
+-PV = "3_35_01_07"
+-
+-LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
+-
+-SRC_URI[ipczip.md5sum] = "9e62e35b8c2d44b1ac5f7ad9554b1a34"
+-SRC_URI[ipczip.sha256sum] = "006ac780ded0a5fa843397bbde0cb597338dc521544121f697c2efdd80f86314"
+diff --git a/recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb b/recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb
 new file mode 100644
-index 0000000..2e43584
+index 0000000..07a8136
 --- /dev/null
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
-@@ -0,0 +1,33 @@
-+python __anonymous() {
-+    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
-+    if not features:
-+        return
-+    if "mmip" not in features:
-+        raise bb.parse.SkipPackage('ipumm-fw does not apply to systems without the "mmip" flag in MACHINE_FEATURES')
-+}
++++ b/recipes-ti/ipc/ti-ipc-rtos_3.36.01.11.bb
+@@ -0,0 +1,8 @@
++require ti-ipc-rtos.inc
 +
-+DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
-+LICENSE = "TI-TSPA"
++PV = "3_36_01_11"
 +
-+LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=caa45d993ac010abe2fd319f6613bc26"
++LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9b710fd7c95e545b91cec79255"
 +
-+COMPATIBLE_MACHINE = "dra7xx"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+RDEPENDS_${PN} = "libdce"
-+
-+SRC_URI = "http://arago-project.org/files/short-term/misc/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
-+
-+SRC_URI[md5sum] = "e770dce63fdf218bb19ceb748d9812c0"
-+SRC_URI[sha256sum] = "044d49b77560660bdfc29894e669fe8f70dc467c66b4acb49b24722a0799baa1"
-+
-+S = "${WORKDIR}/ipumm-dra7xx-evm-${PV}"
-+
-+TARGET = "dra7-ipu2-fw.xem4"
-+
-+do_install() {
-+        mkdir -p ${D}${base_libdir}/firmware
-+        cp ${S}/firmware/${TARGET} ${D}${base_libdir}/firmware/${TARGET}
-+}
-+
-+FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
++SRC_URI[ipczip.md5sum] = "560a75d6291ba1467ab9e328b3f7b995"
++SRC_URI[ipczip.sha256sum] = "ccf339a976a313c9f12cbdd91e74e7e0bc36507086b0cf077a344dcd79b9b273"
+diff --git a/recipes-ti/ipc/ti-ipc_git.bb b/recipes-ti/ipc/ti-ipc_git.bb
+index bb2c3c9..5f0b8db 100644
+--- a/recipes-ti/ipc/ti-ipc_git.bb
++++ b/recipes-ti/ipc/ti-ipc_git.bb
+@@ -6,14 +6,14 @@ LIC_FILES_CHKSUM = "file://${S}/ipc-linux.mak;beginline=1;endline=30;md5=7b327f9
+ 
+ DEPENDS += "virtual/kernel"
+ 
+-PV = "3.35.01.07"
++PV = "3.36.01.11"
+ 
+-BRANCH = "master"
++BRANCH = "3.36"
+ SRC_URI = "git://git.ti.com/ipc/ipcdev.git;protocol=git;branch=${BRANCH} \
+            file://tiipclad-daemon.sh \
+            "
+-# Commit corresponds to 3.35.01.07
+-SRCREV = "358d966c9f5973faf9ab71fb1d7dfe5d3e08a8dc"
++# Commit corresponds to 3.36.01.11
++SRCREV = "2a4256289d462d93a7e00a6ffb10bd46081a9500"
+ 
+ S = "${WORKDIR}/git"
+ 
 
 
