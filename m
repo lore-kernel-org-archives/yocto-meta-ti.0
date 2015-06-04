@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id CCDF7E009B8; Thu,  4 Jun 2015 13:00:26 -0700 (PDT)
+	id CE3F3E009AE; Thu,  4 Jun 2015 13:00:26 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,12 +12,12 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ACA46E0098D
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ABD64E00985
 	for <meta-ti@yoctoproject.org>; Thu,  4 Jun 2015 13:00:20 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 8DBE5529F8; Thu,  4 Jun 2015 20:00:20 +0000 (UTC)
+	id C058752A08; Thu,  4 Jun 2015 20:00:20 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150604200020.8DBE5529F8@arago-project.org>
+Message-Id: <20150604200020.C058752A08@arago-project.org>
 Date: Thu,  4 Jun 2015 20:00:20 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : linux-ti-staging: Fix dra7 DTBs appearing in am57xx-evm build.
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 04 Jun 2015 20:00:26 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: d7812de2c22899aaa701a71eabc4942826cfaca3
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=d7812de2c22899aaa701a71eabc4942826cfaca3
+Branch: master
+Commit: edbe41e86b62377c18cc68647c808e4dd269bdfb
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=edbe41e86b62377c18cc68647c808e4dd269bdfb
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Fri Jun  5 00:33:23 2015 +0000
