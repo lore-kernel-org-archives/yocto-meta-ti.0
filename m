@@ -1,38 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 58986E009DF; Fri,  5 Jun 2015 03:56:38 -0700 (PDT)
+	id C4934E009F0; Fri,  5 Jun 2015 07:18:23 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 0ED2EE0098D
-	for <meta-ti@yoctoproject.org>; Fri,  5 Jun 2015 03:56:33 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t55AuV8l006080
-	for <meta-ti@yoctoproject.org>; Fri, 5 Jun 2015 05:56:31 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t55AuVb3013722
-	for <meta-ti@yoctoproject.org>; Fri, 5 Jun 2015 05:56:31 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 5 Jun 2015 05:56:31 -0500
-Received: from localhost.localdomain (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t55AuVEX009925;	Fri, 5 Jun 2015 05:56:31 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Fri, 5 Jun 2015 06:56:29 -0400
-Message-ID: <1433501789-13097-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH v2] rtos-recipes: Add files to ${PN}-dev instead of ${PN}.
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2A716E009E7
+	for <meta-ti@yoctoproject.org>; Fri,  5 Jun 2015 07:18:18 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id 163495298F; Fri,  5 Jun 2015 14:18:18 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20150605141818.163495298F@arago-project.org>
+Date: Fri,  5 Jun 2015 14:18:18 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Jacob Stiffler : rtos-recipes: Add files to ${PN}-dev instead of ${PN}.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,15 +33,25 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2015 10:56:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 05 Jun 2015 14:18:23 -0000
+Content-Type: text/plain; charset=UTF-8
+
+Module: meta-ti
+Branch: master
+Commit: 147aeb445c891b70dd468dee00420a22e26a58e4
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=147aeb445c891b70dd468dee00420a22e26a58e4
+
+Author: Jacob Stiffler <j-stiffler@ti.com>
+Date:   Fri Jun  5 16:56:29 2015 +0000
+
+rtos-recipes: Add files to ${PN}-dev instead of ${PN}.
 
 * These packages only contain firmware development files.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
-v2 changes:
-* Rebased patch to get IPC upgrade.
 
  .../common-csl-ip/common-csl-ip-rtos_git.bb        |    5 ++++-
  recipes-bsp/edma3-lld/edma3-lld-rtos_git.bb        |    7 ++++---
@@ -217,7 +215,5 @@ index 0f27514..8148f73 100644
  SRC_URI[xdaistarball.sha256sum] = "79fd30377ab4c497292aeefb0565f81703d9020d1242b02ca9968c561e0de9a1"
 -
 -INSANE_SKIP_${PN} = "installed-vs-shipped"
--- 
-1.7.9.5
 
 
