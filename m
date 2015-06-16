@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BCCEFE00A07; Tue, 16 Jun 2015 07:37:21 -0700 (PDT)
+	id 4E248E00A76; Tue, 16 Jun 2015 07:37:37 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id ECFC9E009AE
-	for <meta-ti@yoctoproject.org>; Tue, 16 Jun 2015 07:37:16 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A1E87E00A54
+	for <meta-ti@yoctoproject.org>; Tue, 16 Jun 2015 07:37:28 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 5B82C529FF; Tue, 16 Jun 2015 14:37:16 +0000 (UTC)
+	id 69C9B529FF; Tue, 16 Jun 2015 14:37:28 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150616143716.5B82C529FF@arago-project.org>
-Date: Tue, 16 Jun 2015 14:37:16 +0000 (UTC)
+Message-Id: <20150616143728.69C9B529FF@arago-project.org>
+Date: Tue, 16 Jun 2015 14:37:28 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Denys Dmytriyenko : linux-ti-staging: update with latest connectivity fixes
 X-BeenThere: meta-ti@yoctoproject.org
@@ -33,13 +33,13 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jun 2015 14:37:21 -0000
+X-List-Received-Date: Tue, 16 Jun 2015 14:37:37 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 7b4dbc5405e3068b74690450bb80c5a0d56720bc
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=7b4dbc5405e3068b74690450bb80c5a0d56720bc
+Branch: fido
+Commit: 80ce62b67288df10d9b2097f93cb9ae3eaaa4404
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=80ce62b67288df10d9b2097f93cb9ae3eaaa4404
 
 Author: Denys Dmytriyenko <denys@ti.com>
 Date:   Tue Jun 16 20:22:09 2015 +0000
