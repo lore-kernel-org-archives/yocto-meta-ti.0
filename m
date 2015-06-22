@@ -1,42 +1,49 @@
-Return-Path: <denys@ti.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 9AF46E00957; Sun, 21 Jun 2015 18:15:20 -0700 (PDT)
+	id D7373E0095D; Sun, 21 Jun 2015 19:29:09 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [198.47.26.152 listed in list.dnswl.org]
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
+	mail provider *      (ankur.tyagi85[at]gmail.com)
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id E69CBE006C6
-	for <meta-ti@yoctoproject.org>; Sun, 21 Jun 2015 18:15:12 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t5M1FA1Y010322
-	for <meta-ti@yoctoproject.org>; Sun, 21 Jun 2015 20:15:10 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t5M1FA7D004763
-	for <meta-ti@yoctoproject.org>; Sun, 21 Jun 2015 20:15:10 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.224.2;
-	Sun, 21 Jun 2015 20:15:10 -0500
-Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t5M1FAoO031412	for <meta-ti@yoctoproject.org>; Sun, 21 Jun 2015 20:15:10
-	-0500
-Date: Sun, 21 Jun 2015 21:15:10 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: <meta-ti@yoctoproject.org>
-Message-ID: <1937763980.581.1434935710346.JavaMail.jenkins@puget>
+	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+	author's *       domain
+	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+	*      valid
+	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
+	low *      trust
+	*      [209.85.218.42 listed in list.dnswl.org]
+Received: from mail-oi0-f42.google.com (mail-oi0-f42.google.com
+	[209.85.218.42])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 8D05AE00793
+	for <meta-ti@yoctoproject.org>; Sun, 21 Jun 2015 19:29:05 -0700 (PDT)
+Received: by oigb199 with SMTP id b199so70960659oig.3
+	for <meta-ti@yoctoproject.org>; Sun, 21 Jun 2015 19:29:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=b5aETWNY/9/2BQu/zmM/TiNow83TcWoAv5ndxHchihk=;
+	b=PqNJPZv1ZxsC+90z2eYWbPp3k8BkzpBPHHdNrDaBp0qNaxs0Saetd8lk7Pj6bXNiWv
+	zjAqihdeSeRM4bYVYF061YFa4RNXX00YqU8soWGI0dVbl5Tw8dQV+kgB17FZt2VT99cF
+	T1SSvsNIUWBJv+g2zWUj6aqDwkLOJIJKVItlKdpdhNAUoBeA0CQrw9iWDTB5dAQm8EKQ
+	r1XcCT+QHl4dwFX1VNljKPpZTvKfWbuOvxo2hfkkVXcZLGdGaTbyMFCpdH/31fiiF/Pr
+	b7soVj6xdwQsrb5t5wSpvRCuilMyThhaXwNp9WxNvD/pix3tBKF14SP1cBB6aeWpeQ+s
+	oU0w==
+X-Received: by 10.202.71.20 with SMTP id u20mr21638566oia.81.1434940144969;
+	Sun, 21 Jun 2015 19:29:04 -0700 (PDT)
 MIME-Version: 1.0
-X-Jenkins-Job: distroless-meta-ti-nightly
-X-Jenkins-Result: SUCCESS
-Subject: [nightly] Distroless meta-ti/master minimal build 2015-06-21_21-00-51
+Received: by 10.202.106.213 with HTTP; Sun, 21 Jun 2015 19:28:45 -0700 (PDT)
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Mon, 22 Jun 2015 14:28:45 +1200
+Message-ID: <CADySD0HphnNi2CXZKZP82Vumbv-ajwDsUBNjh2SQ+w+W5dnq6A@mail.gmail.com>
+To: meta-ti@yoctoproject.org
+Subject: Problem building chromium for AM335x EVM
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -49,207 +56,222 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2015 01:15:20 -0000
-Content-Type: multipart/mixed;
-	boundary="----=_Part_580_1681865742.1434935710346"
+X-List-Received-Date: Mon, 22 Jun 2015 02:29:09 -0000
+Content-Type: multipart/alternative; boundary=001a113e53649d6d8f05191209b4
 
-------=_Part_580_1681865742.1434935710346
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--001a113e53649d6d8f05191209b4
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-<html>
-<head>
-<title>
-Status for 06/21/15
-</title>
-</head>
-<body>
+=E2=80=8B=E2=80=8B
+Hi,
 
-<h2>Status for 06/21/15</h2>
+I am trying to build chromium for AM335x EVM but having trouble. I am using
+arago-daisy-config
+When chromium is doing the configure step it is halted with a message that
+the package
+gdk-2.0 is missing. Can someone give a hint about whats wrong in my
+configuration and how to
+proceed?
 
-<h2>BUILD_ID: build-2015-06-21_21-01-58</h2>
+In my local.conf I have added:
 
-<h2>Clean Build: false</h2>
+DISTRO_FEATURES_remove =3D " x11 wayland"
+PACKAGECONFIG_remove =3D " x11 wayland"
 
-<h2>Clean Sources: false</h2>
-<h2><u>Repository Revisions</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Repository</th>
-        <th>Git URL</th>
-        <th>Branch</th>
-        <th>Commit ID</th>
-        <th>Layers</th>
-    </tr>
-
-    <tr>
-        <td>bitbake</td>
-        <td>git://git.openembedded.org/bitbake</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>meta-ti</td>
-        <td>git://git.yoctoproject.org/meta-ti</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=</td>
-    </tr>
-    <tr>
-        <td>oe-core</td>
-        <td>git://git.openembedded.org/openembedded-core</td>
-        <td>master</td>
-        <td>HEAD</td>
-        <td>layers=meta</td>
-    </tr>
-</table>
-<h2><u>Build and Target Test Results</u></h2>
-<table border=1 cellspacing=1 cellpadding=1>
-    <tr>
-        <th>Machine</th>
-        <th>Build Result</th>
-        <th>Target Test Result</th>
-    </tr>
-    <tr>
-        <td>am335x-evm</td>
-        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am437x-evm</td>
-        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am37x-evm</td>
-        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am3517-evm</td>
-        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am180x-evm</td>
-        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>omap5-evm</td>
-        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>dra7xx-evm</td>
-        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>am57xx-evm</td>
-        <td id="am57xx-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2hk-evm</td>
-        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2e-evm</td>
-        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>k2l-evm</td>
-        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
-        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beagleboard</td>
-        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>beaglebone</td>
-        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
-        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-    <tr>
-        <td>pandaboard</td>
-        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
-        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
-    </tr>
-</table>
-
-<p>
-These builds were performed using the build-oesdk.sh script at:
-</p>
-<p>
-git://arago-project.org/git/projects/tisdk-build-scripts.git
-</p>
-
-<p>
-The configuration file passed to this script had the contents:
-</p>
-<p>
-MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
-TISDK_VERSION="2015.05"<br>
-MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
-NUM_ARM9_BUILDS="1"<br>
-NUM_CORTEX_BUILDS="2"<br>
-BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
-SCRIPTS_ROOT="$PWD"<br>
-BUILD_ROOT="/home/jenkins/distroless-build"<br>
-TEST_ROOT="$BUILD_ROOT/testing"<br>
-PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
-DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
-FS_FILTER="core-image-minimal-"<br>
-FS_IMAGE_TYPE="tar.gz"<br>
-NFS_ROOT="/home/jenkins/nfs-root"<br>
-SOURCE_DIR="${BUILD_ROOT}/sources"<br>
-CLEAN_BUILD="false"<br>
-CLEAN_SSTATE="false"<br>
-CLEAN_ALL="false"<br>
-CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
-LOG_DIR="${BUILD_ROOT}/log-files"<br>
-BUILD_LOG_VERBOSE="true"<br>
-DL_DIR="/OE/downloads"<br>
-BB_GENERATE_MIRROR_TARBALLS="0"<br>
-INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
-TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
-TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
-TEST_LOCAL_IFACE="eth1"<br>
-OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
-OPENTEST_TEE_IP="none"<br>
-OPENTEST_HW_CAP="linux_tigt_farm"<br>
-OPENTEST_BOOTLOADERS="false"<br>
-RUN_BUILD_TESTS="false"<br>
-STAF_ROOT="/usr/local/staf"<br>
-SKIP_TEST_FAILURES="false"<br>
-PRODUCTIZE_SDK="false"<br>
-BITBAKE_COMMAND="core-image-minimal"<br>
-RESULTS_CONFIG_COMMENTS="false"<br>
-INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
-INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
-INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
-INSTALLER_PREFIX="ti-sdk"<br>
-SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
-PACKAGE_BOOT_KERNEL_FILES="false"<br>
-WEBGEN_ROOT="/home/jenkins/webgen"<br>
-WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
-WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
-EXPORT_ARAGO_SRC="0"<br>
-COPY_TO_WEB="true"<br>
-COPY_DEPLOY_TO_WEB="true"<br>
-WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
-CLEAN_AFTER_COPY="true"<br>
-BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
-</p>
-
-</body>
-</html>
+This is the output from 'bitbake chromium':
 
 
-------=_Part_580_1681865742.1434935710346--
+Loading cache: 100%
+|##########################################################################=
+###########################################################################=
+###################|
+ETA:  00:00:00
+Loaded 2346 entries from dependency cache.
+Parsing recipes: 100%
+|##########################################################################=
+###########################################################################=
+#################|
+Time: 00:00:03
+Parsing of 1911 .bb files complete (1904 cached, 7 parsed). 2352 targets,
+224 skipped, 0 masked, 0 errors.
+WARNING: No recipes available for:
+
+/home/ankur/ti-arago/new/oe-layersetup/sources/meta-openembedded/meta-brows=
+er/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bbappen=
+d
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION        =3D "1.26.0"
+BUILD_SYS         =3D "i686-linux"
+NATIVELSBSTRING   =3D "Ubuntu-14.04"
+TARGET_SYS        =3D "arm-linux-gnueabi"
+MACHINE           =3D "am335x-evm"
+DISTRO            =3D "arago"
+DISTRO_VERSION    =3D "2015.05"
+TUNE_FEATURES     =3D "armv7a vfp thumb neon callconvention-hard cortexa8"
+TARGET_FPU        =3D "vfp-neon"
+meta-arago-distro
+meta-arago-extras =3D "daisy:dd99e55e89ca680b18ebfa80dacbef4895e17511"
+meta-qt5          =3D "master:5ebbfedbc72452d2de18ce1557a36f3ba8b1175f"
+toolchain-layer
+meta-networking
+meta-ruby         =3D "daisy:d3d14d3fcca7fcde362cf0b31411dc4eea6d20aa"
+meta-browser      =3D "master:fff8d3bdc97ddb97d4129256ee5c7708a85c4aca"
+meta-oe           =3D "daisy:d3d14d3fcca7fcde362cf0b31411dc4eea6d20aa"
+meta-ti           =3D "daisy:7e50591a6902ced8c32f40109567d969e45c815e"
+meta-linaro-toolchain =3D "daisy:06008235ca752fea678953e85adaa29a491d246b"
+meta              =3D "daisy:5a577ec878a15f3caaf4893b819825ffb8c81266"
+
+NOTE: Preparing RunQueue
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+ERROR: Function failed: do_configure (log file is located at
+/home/ankur/ti-arago/new/oe-layersetup/build/arago-tmp-external-linaro-tool=
+chain/work/cortexa8t2hf-vfp-neon-linux-gnueabi/chromium/40.0.2214.91-r0/tem=
+p/log.do_configure.30182)
+ERROR: Logfile of failure stored in:
+/home/ankur/ti-arago/new/oe-layersetup/build/arago-tmp-external-linaro-tool=
+chain/work/cortexa8t2hf-vfp-neon-linux-gnueabi/chromium/40.0.2214.91-r0/tem=
+p/log.do_configure.30182
+Log data follows:
+| DEBUG: Executing python function sysroot_cleansstate
+| DEBUG: Python function sysroot_cleansstate finished
+| DEBUG: Executing shell function do_configure
+| Updating projects from gyp files...
+| Package gdk-2.0 was not found in the pkg-config search path.
+| Perhaps you should add the directory containing `gdk-2.0.pc'
+| to the PKG_CONFIG_PATH environment variable
+| No package 'gdk-2.0' found
+| gyp: Call to 'pkg-config --cflags gdk-2.0' returned exit status 1.
+| WARNING:
+/home/ankur/ti-arago/new/oe-layersetup/build/arago-tmp-external-linaro-tool=
+chain/work/cortexa8t2hf-vfp-neon-linux-gnueabi/chromium/40.0.2214.91-r0/tem=
+p/run.do_configure.30182:1
+exit 1 from
+|   build/gyp_chromium --depth=3D. -Dangle_use_commit_id=3D0 -Dclang=3D0
+-Dhost_clang=3D0 -Ddisable_fatal_linker_warnings=3D1 -Dlinux_use_gold_binar=
+y=3D0
+-Dlinux_use_gold_flags=3D0 -I
+/home/ankur/ti-arago/new/oe-layersetup/build/arago-tmp-external-linaro-tool=
+chain/work/cortexa8t2hf-vfp-neon-linux-gnueabi/chromium/40.0.2214.91-r0/oe-=
+defaults.gypi
+-I
+/home/ankur/ti-arago/new/oe-layersetup/build/arago-tmp-external-linaro-tool=
+chain/work/cortexa8t2hf-vfp-neon-linux-gnueabi/chromium/40.0.2214.91-r0/inc=
+lude.gypi
+-f ninja
+| ERROR: Function failed: do_configure (log file is located at
+/home/ankur/ti-arago/new/oe-layersetup/build/arago-tmp-external-linaro-tool=
+chain/work/cortexa8t2hf-vfp-neon-linux-gnueabi/chromium/40.0.2214.91-r0/tem=
+p/log.do_configure.30182)
+ERROR: Task 4
+(/home/ankur/ti-arago/new/oe-layersetup/sources/meta-openembedded/meta-brow=
+ser/recipes-browser/chromium/
+chromium_40.0.2214.91.bb, do_configure) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 1075 tasks of which 1074 didn't need to be
+rerun and 1 failed.
+No currently running tasks (1075 of 1076)
+
+Summary: 1 task failed:
+
+/home/ankur/ti-arago/new/oe-layersetup/sources/meta-openembedded/meta-brows=
+er/recipes-browser/chromium/
+chromium_40.0.2214.91.bb, do_configure
+Summary: There was 1 WARNING message shown.
+NOTE: Writing buildhistory
+ankur@GGL-PC1210:~/ti-arago/new/oe-layersetup/build$
+
+=E2=80=8Bregards
+Ankur=E2=80=8B
+
+--001a113e53649d6d8f05191209b4
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"font-family:georgia,=
+serif;font-size:small;color:rgb(51,51,153);display:inline">=E2=80=8B=E2=80=
+=8B</div>Hi,<br><br>I am trying to build chromium for AM335x EVM but having=
+ trouble. I am using arago-daisy-config<br>When chromium is doing the confi=
+gure step it is halted with a message that the package<br>gdk-2.0 is missin=
+g. Can someone give a hint about whats wrong in my configuration and how to=
+ <br>proceed?<br><br>In my local.conf I have added:<br><br>DISTRO_FEATURES_=
+remove =3D &quot; x11 wayland&quot;<br>PACKAGECONFIG_remove =3D &quot; x11 =
+wayland&quot;<br><br>This is the output from &#39;bitbake chromium&#39;:<br=
+><br><br>Loading cache: 100% |#############################################=
+###########################################################################=
+################################################| ETA: =C2=A000:00:00<br>Lo=
+aded 2346 entries from dependency cache.<br>Parsing recipes: 100% |########=
+###########################################################################=
+###########################################################################=
+########| Time: 00:00:03<br>Parsing of 1911 .bb files complete (1904 cached=
+, 7 parsed). 2352 targets, 224 skipped, 0 masked, 0 errors.<br>WARNING: No =
+recipes available for:<br>=C2=A0 /home/ankur/ti-arago/new/oe-layersetup/sou=
+rces/meta-openembedded/meta-browser/recipes-gnome/gnome-settings-daemon/gno=
+me-settings-daemon_2.32.1.bbappend<br>NOTE: Resolving any missing task queu=
+e dependencies<br><br>Build Configuration:<br>BB_VERSION =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0=3D &quot;1.26.0&quot;<br>BUILD_SYS =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=3D &quot;i686-linux&quot;<br>NATIVELSBSTRING =C2=A0 =3D &quot;Ubuntu-14.04=
+&quot;<br>TARGET_SYS =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;arm-linux-gnueabi=
+&quot;<br>MACHINE =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &quot;am335x-evm&q=
+uot;<br>DISTRO =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;arago&quo=
+t;<br>DISTRO_VERSION =C2=A0 =C2=A0=3D &quot;2015.05&quot;<br>TUNE_FEATURES =
+=C2=A0 =C2=A0 =3D &quot;armv7a vfp thumb neon callconvention-hard cortexa8&=
+quot;<br>TARGET_FPU =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D &quot;vfp-neon&quot;<br>=
+meta-arago-distro<br>meta-arago-extras =3D &quot;daisy:dd99e55e89ca680b18eb=
+fa80dacbef4895e17511&quot;<br>meta-qt5 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+=3D &quot;master:5ebbfedbc72452d2de18ce1557a36f3ba8b1175f&quot;<br>toolchai=
+n-layer =C2=A0 <br>meta-networking =C2=A0 <br>meta-ruby =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =3D &quot;daisy:d3d14d3fcca7fcde362cf0b31411dc4eea6d20aa&quot;<b=
+r>meta-browser =C2=A0 =C2=A0 =C2=A0=3D &quot;master:fff8d3bdc97ddb97d412925=
+6ee5c7708a85c4aca&quot;<br>meta-oe =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &=
+quot;daisy:d3d14d3fcca7fcde362cf0b31411dc4eea6d20aa&quot;<br>meta-ti =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D &quot;daisy:7e50591a6902ced8c32f40109567d9=
+69e45c815e&quot;<br>meta-linaro-toolchain =3D &quot;daisy:06008235ca752fea6=
+78953e85adaa29a491d246b&quot;<br>meta =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0=3D &quot;daisy:5a577ec878a15f3caaf4893b819825ffb8c81266&quot;=
+<br><br>NOTE: Preparing RunQueue<br>NOTE: Executing SetScene Tasks<br>NOTE:=
+ Executing RunQueue Tasks<br>ERROR: Function failed: do_configure (log file=
+ is located at /home/ankur/ti-arago/new/oe-layersetup/build/arago-tmp-exter=
+nal-linaro-toolchain/work/cortexa8t2hf-vfp-neon-linux-gnueabi/chromium/40.0=
+.2214.91-r0/temp/log.do_configure.30182)<br>ERROR: Logfile of failure store=
+d in: /home/ankur/ti-arago/new/oe-layersetup/build/arago-tmp-external-linar=
+o-toolchain/work/cortexa8t2hf-vfp-neon-linux-gnueabi/chromium/40.0.2214.91-=
+r0/temp/log.do_configure.30182<br>Log data follows:<br>| DEBUG: Executing p=
+ython function sysroot_cleansstate<br>| DEBUG: Python function sysroot_clea=
+nsstate finished<br>| DEBUG: Executing shell function do_configure<br>| Upd=
+ating projects from gyp files...<br>| Package gdk-2.0 was not found in the =
+pkg-config search path.<br>| Perhaps you should add the directory containin=
+g `gdk-2.0.pc&#39;<br>| to the PKG_CONFIG_PATH environment variable<br>| No=
+ package &#39;gdk-2.0&#39; found<br>| gyp: Call to &#39;pkg-config --cflags=
+ gdk-2.0&#39; returned exit status 1.<br>| WARNING: /home/ankur/ti-arago/ne=
+w/oe-layersetup/build/arago-tmp-external-linaro-toolchain/work/cortexa8t2hf=
+-vfp-neon-linux-gnueabi/chromium/40.0.2214.91-r0/temp/run.do_configure.3018=
+2:1 exit 1 from<br>| =C2=A0 build/gyp_chromium --depth=3D. -Dangle_use_comm=
+it_id=3D0 -Dclang=3D0 -Dhost_clang=3D0 -Ddisable_fatal_linker_warnings=3D1 =
+-Dlinux_use_gold_binary=3D0 -Dlinux_use_gold_flags=3D0 -I /home/ankur/ti-ar=
+ago/new/oe-layersetup/build/arago-tmp-external-linaro-toolchain/work/cortex=
+a8t2hf-vfp-neon-linux-gnueabi/chromium/40.0.2214.91-r0/oe-defaults.gypi -I =
+/home/ankur/ti-arago/new/oe-layersetup/build/arago-tmp-external-linaro-tool=
+chain/work/cortexa8t2hf-vfp-neon-linux-gnueabi/chromium/40.0.2214.91-r0/inc=
+lude.gypi -f ninja<br>| ERROR: Function failed: do_configure (log file is l=
+ocated at /home/ankur/ti-arago/new/oe-layersetup/build/arago-tmp-external-l=
+inaro-toolchain/work/cortexa8t2hf-vfp-neon-linux-gnueabi/chromium/40.0.2214=
+.91-r0/temp/log.do_configure.30182)<br>ERROR: Task 4 (/home/ankur/ti-arago/=
+new/oe-layersetup/sources/meta-openembedded/meta-browser/recipes-browser/ch=
+romium/<a href=3D"http://chromium_40.0.2214.91.bb">chromium_40.0.2214.91.bb=
+</a>, do_configure) failed with exit code &#39;1&#39;<br>NOTE: Tasks Summar=
+y: Attempted 1075 tasks of which 1074 didn&#39;t need to be rerun and 1 fai=
+led.<br>No currently running tasks (1075 of 1076)<br><br>Summary: 1 task fa=
+iled:<br>=C2=A0 /home/ankur/ti-arago/new/oe-layersetup/sources/meta-openemb=
+edded/meta-browser/recipes-browser/chromium/<a href=3D"http://chromium_40.0=
+.2214.91.bb">chromium_40.0.2214.91.bb</a>, do_configure<br>Summary: There w=
+as 1 WARNING message shown.<br>NOTE: Writing buildhistory<br>ankur@GGL-PC12=
+10:~/ti-arago/new/oe-layersetup/build$<br><br><div class=3D"gmail_default" =
+style=3D"font-family:georgia,serif;font-size:small;color:rgb(51,51,153)">=
+=E2=80=8Bregards<br></div><div class=3D"gmail_default" style=3D"font-family=
+:georgia,serif;font-size:small;color:rgb(51,51,153)">Ankur=E2=80=8B</div><b=
+r></div>
+
+--001a113e53649d6d8f05191209b4--
