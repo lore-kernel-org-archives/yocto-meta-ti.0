@@ -1,49 +1,42 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id EF8DFE0095D; Sun, 21 Jun 2015 19:31:18 -0700 (PDT)
+	id EEF36E009C6; Mon, 22 Jun 2015 18:30:27 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (ankur.tyagi85[at]gmail.com)
-	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
-	low *      trust
-	*      [209.85.218.50 listed in list.dnswl.org]
+X-Spam-Status: No, score=-6.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_HTML_ONLY,RCVD_IN_DNSWL_HI autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  0.0 HTML_MESSAGE BODY: HTML included in message
-	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-	author's *       domain
-	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-	*      valid
-	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-oi0-f50.google.com (mail-oi0-f50.google.com
-	[209.85.218.50])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 464DAE00793
-	for <meta-ti@yoctoproject.org>; Sun, 21 Jun 2015 19:31:15 -0700 (PDT)
-Received: by oigb199 with SMTP id b199so70982174oig.3
-	for <meta-ti@yoctoproject.org>; Sun, 21 Jun 2015 19:31:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=FNR7oPLLOloTd0KqIBDQOI2u+fh/v3BS+qFKHZhZhFk=;
-	b=PkjehZbIf+HKIAPlXApjagIQux5j64ZCYazzPDdIuMuE6tOft6rgA4EwdGaeFv5w4+
-	sMLsfMjd6BE/GhRjMOyIiPPN4Uv+HLP57jviDSFNa512VsNDjcUldvi6H6+SziJIS1E5
-	gSNBS7R/euvwqmQr1Ev92i9jQeNlxekSzuo14cninN4QHqGTJkQ+mUrfow9Uk3rhy5ZZ
-	8OUyxWT/7hYyW8TQgkvJ16PCChw0bq38jQXEMmuPQ3Mt4rwX+OPMEaTNg40BVMq/AnrY
-	hBY4Eo1vf/ORz07TqhvtGPY3f/118+8Hc+cuOqFo1ugBDmQ9Th7GkjsYokwqfYcbqwVs
-	G1Bg==
-X-Received: by 10.60.134.19 with SMTP id pg19mr17666941oeb.12.1434940275143;
-	Sun, 21 Jun 2015 19:31:15 -0700 (PDT)
+	*  0.7 MIME_HTML_ONLY BODY: Message only has text/html MIME parts
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id C6718E0096A
+	for <meta-ti@yoctoproject.org>; Mon, 22 Jun 2015 18:30:21 -0700 (PDT)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t5N1UG5b020745
+	for <meta-ti@yoctoproject.org>; Mon, 22 Jun 2015 20:30:16 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t5N1UGOu030110
+	for <meta-ti@yoctoproject.org>; Mon, 22 Jun 2015 20:30:16 -0500
+Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 22 Jun 2015 20:30:15 -0500
+Received: from puget.gt.design.ti.com (ileax41-snat.itg.ti.com
+	[10.172.224.153])	by dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	t5N1UFg0004482	for <meta-ti@yoctoproject.org>; Mon, 22 Jun 2015 20:30:15
+	-0500
+Date: Mon, 22 Jun 2015 21:30:10 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: <meta-ti@yoctoproject.org>
+Message-ID: <1379019998.585.1435023010461.JavaMail.jenkins@puget>
 MIME-Version: 1.0
-Received: by 10.202.106.213 with HTTP; Sun, 21 Jun 2015 19:30:55 -0700 (PDT)
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Mon, 22 Jun 2015 14:30:55 +1200
-Message-ID: <CADySD0HpooZtywHpLR+TTjTe_HF5metgV4Fa0M=XwXtPDUd1wQ@mail.gmail.com>
-To: meta-ti@yoctoproject.org
-Subject: Problem building firefox for AM335x EVM
+X-Jenkins-Job: distroless-meta-ti-nightly
+X-Jenkins-Result: SUCCESS
+Subject: [nightly] Distroless meta-ti/master minimal build 2015-06-22_21-00-51
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -56,115 +49,207 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2015 02:31:19 -0000
-Content-Type: multipart/alternative; boundary=047d7b471dbe5fde9005191211ed
+X-List-Received-Date: Tue, 23 Jun 2015 01:30:28 -0000
+Content-Type: multipart/mixed;
+	boundary="----=_Part_584_575316856.1435023010458"
 
---047d7b471dbe5fde9005191211ed
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+------=_Part_584_575316856.1435023010458
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-=E2=80=8B=E2=80=8BHi,
+<html>
+<head>
+<title>
+Status for 06/22/15
+</title>
+</head>
+<body>
 
-I am trying to build firefox for AM335x EVM but having trouble. I am using
-arago-daisy-config
+<h2>Status for 06/22/15</h2>
 
-In my local.conf I have added:
+<h2>BUILD_ID: build-2015-06-22_21-01-58</h2>
 
-DISTRO_FEATURES_remove =3D " x11 wayland"
-PACKAGECONFIG_remove =3D " x11 wayland"
+<h2>Clean Build: false</h2>
 
-This is the output from 'bitbake firefox':
+<h2>Clean Sources: false</h2>
+<h2><u>Repository Revisions</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Repository</th>
+        <th>Git URL</th>
+        <th>Branch</th>
+        <th>Commit ID</th>
+        <th>Layers</th>
+    </tr>
+
+    <tr>
+        <td>bitbake</td>
+        <td>git://git.openembedded.org/bitbake</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>meta-ti</td>
+        <td>git://git.yoctoproject.org/meta-ti</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=</td>
+    </tr>
+    <tr>
+        <td>oe-core</td>
+        <td>git://git.openembedded.org/openembedded-core</td>
+        <td>master</td>
+        <td>HEAD</td>
+        <td>layers=meta</td>
+    </tr>
+</table>
+<h2><u>Build and Target Test Results</u></h2>
+<table border=1 cellspacing=1 cellpadding=1>
+    <tr>
+        <th>Machine</th>
+        <th>Build Result</th>
+        <th>Target Test Result</th>
+    </tr>
+    <tr>
+        <td>am335x-evm</td>
+        <td id="am335x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am335x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am437x-evm</td>
+        <td id="am437x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am437x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am37x-evm</td>
+        <td id="am37x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am37x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am3517-evm</td>
+        <td id="am3517-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am3517-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am180x-evm</td>
+        <td id="am180x-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am180x-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>omap5-evm</td>
+        <td id="omap5-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="omap5-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>dra7xx-evm</td>
+        <td id="dra7xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="dra7xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>am57xx-evm</td>
+        <td id="am57xx-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="am57xx-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2hk-evm</td>
+        <td id="k2hk-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2hk-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2e-evm</td>
+        <td id="k2e-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2e-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>k2l-evm</td>
+        <td id="k2l-evm-build-result" bgcolor=lime>PASSED</td>
+        <td id="k2l-evm-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beagleboard</td>
+        <td id="beagleboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="beagleboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>beaglebone</td>
+        <td id="beaglebone-build-result" bgcolor=lime>PASSED</td>
+        <td id="beaglebone-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+    <tr>
+        <td>pandaboard</td>
+        <td id="pandaboard-build-result" bgcolor=lime>PASSED</td>
+        <td id="pandaboard-target-result" bgcolor=yellow>SKIPPED</td>
+    </tr>
+</table>
+
+<p>
+These builds were performed using the build-oesdk.sh script at:
+</p>
+<p>
+git://arago-project.org/git/projects/tisdk-build-scripts.git
+</p>
+
+<p>
+The configuration file passed to this script had the contents:
+</p>
+<p>
+MANDATORY_INPUTS="MACHINES NUM_ARM9_BUILDS NUM_CORTEX_BUILDS BUILD_ID SCRIPTS_ROOT BUILD_ROOT TEST_ROOT PACKAGE_ROOT DEPLOY_ROOT FS_FILTER FS_IMAGE_TYPE NFS_ROOT CONFIG_FILE LOG_DIR TISDK_VERSION"<br>
+TISDK_VERSION="2015.05"<br>
+MACHINES="am335x-evm am437x-evm am37x-evm am3517-evm am180x-evm omap5-evm dra7xx-evm am57xx-evm k2hk-evm k2e-evm k2l-evm beagleboard beaglebone pandaboard"<br>
+NUM_ARM9_BUILDS="1"<br>
+NUM_CORTEX_BUILDS="2"<br>
+BUILD_ID="`date +build-%F_%H-%M-%S`"<br>
+SCRIPTS_ROOT="$PWD"<br>
+BUILD_ROOT="/home/jenkins/distroless-build"<br>
+TEST_ROOT="$BUILD_ROOT/testing"<br>
+PACKAGE_ROOT="$BUILD_ROOT/packaging"<br>
+DEPLOY_ROOT="$BUILD_ROOT/deploy/$TISDK_VERSION"<br>
+FS_FILTER="core-image-minimal-"<br>
+FS_IMAGE_TYPE="tar.gz"<br>
+NFS_ROOT="/home/jenkins/nfs-root"<br>
+SOURCE_DIR="${BUILD_ROOT}/sources"<br>
+CLEAN_BUILD="false"<br>
+CLEAN_SSTATE="false"<br>
+CLEAN_ALL="false"<br>
+CONFIG_FILE="${BUILD_ROOT}/configs/distroless-meta-ti-config.txt"<br>
+LOG_DIR="${BUILD_ROOT}/log-files"<br>
+BUILD_LOG_VERBOSE="true"<br>
+DL_DIR="/OE/downloads"<br>
+BB_GENERATE_MIRROR_TARBALLS="0"<br>
+INSTALLER_EXTRAS_ROOT="/home/jenkins/extra-files/installer_content"<br>
+TEST_SCRIPTS="$SCRIPTS_ROOT/test-scripts"<br>
+TEST_SCRIPTS_TGT="home/root/test-scripts"<br>
+TEST_LOCAL_IFACE="eth1"<br>
+OPENTEST_CLI="$SCRIPTS_ROOT/linux-devtest.tgz"<br>
+OPENTEST_TEE_IP="none"<br>
+OPENTEST_HW_CAP="linux_tigt_farm"<br>
+OPENTEST_BOOTLOADERS="false"<br>
+RUN_BUILD_TESTS="false"<br>
+STAF_ROOT="/usr/local/staf"<br>
+SKIP_TEST_FAILURES="false"<br>
+PRODUCTIZE_SDK="false"<br>
+BITBAKE_COMMAND="core-image-minimal"<br>
+RESULTS_CONFIG_COMMENTS="false"<br>
+INSTALL_BUILDER="/home/jenkins/installbuilder"<br>
+INSTALLER_ROOT="$BUILD_ROOT/installer"<br>
+INSTALL_BUILDER_PROJECT="$SCRIPTS_ROOT/installer-files/tisdk.xml"<br>
+INSTALLER_PREFIX="ti-sdk"<br>
+SD_CARD_CONTENT="/home/jenkins/extra-files/sd_content"<br>
+PACKAGE_BOOT_KERNEL_FILES="false"<br>
+WEBGEN_ROOT="/home/jenkins/webgen"<br>
+WEB_EXTRAS_ROOT="/home/jenkins/extra-files/web_content"<br>
+WEBGEN_MAK_ROOT="$SCRIPTS_ROOT/publish-sdk-data"<br>
+EXPORT_ARAGO_SRC="0"<br>
+COPY_TO_WEB="true"<br>
+COPY_DEPLOY_TO_WEB="true"<br>
+WEB_HOST="lcpdbld@lsblogin01.dal.design.ti.com:/web/lcpd/htdocs/core-minimal"<br>
+CLEAN_AFTER_COPY="true"<br>
+BACKUP_RESULTS="/home/jenkins/jobs/distroless-meta-ti-nightly/workspace"<br>
+</p>
+
+</body>
+</html>
 
 
-ankur@GGL-PC1210:~/ti-arago/new/oe-layersetup/build$ MACHINE=3Dam335x-evm
-bitbake -c compile firefox
-NOTE: Started PRServer with DBfile:
-/home/ankur/ti-arago/new/oe-layersetup/build/cache/prserv.sqlite3, IP:
-127.0.0.1, PORT: 36963, PID: 32560
-Loading cache: 100%
-|##########################################################################=
-###########################################################################=
-###################|
-ETA:  00:00:00
-Loaded 2346 entries from dependency cache.
-Parsing recipes: 100%
-|##########################################################################=
-###########################################################################=
-#################|
-Time: 00:00:03
-Parsing of 1911 .bb files complete (1904 cached, 7 parsed). 2352 targets,
-224 skipped, 0 masked, 0 errors.
-WARNING: No recipes available for:
-
-/home/ankur/ti-arago/new/oe-layersetup/sources/meta-openembedded/meta-brows=
-er/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bbappen=
-d
-NOTE: Resolving any missing task queue dependencies
-ERROR: Nothing PROVIDES 'virtual/libgl' (but
-/home/ankur/ti-arago/new/oe-layersetup/sources/meta-openembedded/meta-brows=
-er/recipes-mozilla/firefox/
-firefox_10.0.11esr.bb DEPENDS on or otherwise requires it)
-ERROR: mesa PROVIDES virtual/libgl but was skipped: missing required distro
-feature ['opengl'] (not in DISTRO_FEATURES)
-ERROR: mesa-gl PROVIDES virtual/libgl but was skipped: missing required
-distro feature ['opengl'] (not in DISTRO_FEATURES)
-ERROR: mesa PROVIDES virtual/libgl but was skipped: missing required distro
-feature ['opengl'] (not in DISTRO_FEATURES)
-ERROR: Required build target 'firefox' has no buildable providers.
-Missing or unbuildable dependency chain was: ['firefox', 'virtual/libgl']
-
-Summary: There was 1 WARNING message shown.
-Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
-
-How to fix this and proceed furthur.
-
-=E2=80=8Bregards
-Ankur=E2=80=8B
-
---047d7b471dbe5fde9005191211ed
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"font-family:georgia,=
-serif;font-size:small;color:rgb(51,51,153)">=E2=80=8B=E2=80=8BHi,<br><br>I =
-am trying to build firefox for AM335x EVM but having trouble. I am using ar=
-ago-daisy-config<br><br>In my local.conf I have added:<br><br>DISTRO_FEATUR=
-ES_remove =3D &quot; x11 wayland&quot;<br>PACKAGECONFIG_remove =3D &quot; x=
-11 wayland&quot;<br><br>This is the output from &#39;bitbake firefox&#39;:<=
-br><br><br>ankur@GGL-PC1210:~/ti-arago/new/oe-layersetup/build$ MACHINE=3Da=
-m335x-evm bitbake -c compile firefox<br>NOTE: Started PRServer with DBfile:=
- /home/ankur/ti-arago/new/oe-layersetup/build/cache/prserv.sqlite3, IP: 127=
-.0.0.1, PORT: 36963, PID: 32560<br>Loading cache: 100% |###################=
-###########################################################################=
-##########################################################################|=
- ETA:=C2=A0 00:00:00<br>Loaded 2346 entries from dependency cache.<br>Parsi=
-ng recipes: 100% |#########################################################=
-###########################################################################=
-##################################| Time: 00:00:03<br>Parsing of 1911 .bb f=
-iles complete (1904 cached, 7 parsed). 2352 targets, 224 skipped, 0 masked,=
- 0 errors.<br>WARNING: No recipes available for:<br>=C2=A0 /home/ankur/ti-a=
-rago/new/oe-layersetup/sources/meta-openembedded/meta-browser/recipes-gnome=
-/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bbappend<br>NOTE: Resol=
-ving any missing task queue dependencies<br>ERROR: Nothing PROVIDES &#39;vi=
-rtual/libgl&#39; (but /home/ankur/ti-arago/new/oe-layersetup/sources/meta-o=
-penembedded/meta-browser/recipes-mozilla/firefox/<a href=3D"http://firefox_=
-10.0.11esr.bb">firefox_10.0.11esr.bb</a> DEPENDS on or otherwise requires i=
-t)<br>ERROR: mesa PROVIDES virtual/libgl but was skipped: missing required =
-distro feature [&#39;opengl&#39;] (not in DISTRO_FEATURES)<br>ERROR: mesa-g=
-l PROVIDES virtual/libgl but was skipped: missing required distro feature [=
-&#39;opengl&#39;] (not in DISTRO_FEATURES)<br>ERROR: mesa PROVIDES virtual/=
-libgl but was skipped: missing required distro feature [&#39;opengl&#39;] (=
-not in DISTRO_FEATURES)<br>ERROR: Required build target &#39;firefox&#39; h=
-as no buildable providers.<br>Missing or unbuildable dependency chain was: =
-[&#39;firefox&#39;, &#39;virtual/libgl&#39;]<br><br>Summary: There was 1 WA=
-RNING message shown.<br>Summary: There were 2 ERROR messages shown, returni=
-ng a non-zero exit code.<br><br></div><div class=3D"gmail_default" style=3D=
-"font-family:georgia,serif;font-size:small;color:rgb(51,51,153)">How to fix=
- this and proceed furthur.<br><br></div><div class=3D"gmail_default" style=
-=3D"font-family:georgia,serif;font-size:small;color:rgb(51,51,153)"><div cl=
-ass=3D"gmail_default" style=3D"font-family:georgia,serif;font-size:small;co=
-lor:rgb(51,51,153)">=E2=80=8Bregards<br></div><div class=3D"gmail_default" =
-style=3D"font-family:georgia,serif;font-size:small;color:rgb(51,51,153)">An=
-kur=E2=80=8B</div><br></div></div>
-
---047d7b471dbe5fde9005191211ed--
+------=_Part_584_575316856.1435023010458--
