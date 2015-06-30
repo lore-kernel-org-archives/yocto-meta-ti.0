@@ -1,38 +1,26 @@
-Return-Path: <denis@denix.org>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 19944E00A1E; Tue, 30 Jun 2015 11:55:36 -0700 (PDT)
+	id 7B2D4E00A7E; Tue, 30 Jun 2015 12:09:06 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-	http://www.dnswl.org/, no *      trust
-	*      [206.46.173.21 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9418DE009A7
-	for <meta-ti@yoctoproject.org>; Tue, 30 Jun 2015 11:55:32 -0700 (PDT)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173021.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NQR00B45TVYL7B0@vms173021.mailsrvcs.net> for
-	meta-ti@yoctoproject.org; Tue, 30 Jun 2015 13:55:16 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Jp0M15MC c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=XAFQembCKUMA:10
-	a=sozttTNsAAAA:8	a=4uDbyseLMRfaKlBkk24A:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id A8C23161ABD;	Tue,
-	30 Jun 2015 14:55:10 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01677E009A7
+	for <meta-ti@yoctoproject.org>; Tue, 30 Jun 2015 12:09:03 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id E267152A99; Tue, 30 Jun 2015 19:09:02 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Date: Tue, 30 Jun 2015 14:55:10 -0400
-Message-id: <1435690510-27499-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] layer.conf: add more modules to safe ABI list
+Message-Id: <20150630190902.E267152A99@arago-project.org>
+Date: Tue, 30 Jun 2015 19:09:02 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Sam Nelson : hplib: Add Run time dependency on hplib-mod
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,69 +33,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2015 18:55:36 -0000
+X-List-Received-Date: Tue, 30 Jun 2015 19:09:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Denys Dmytriyenko <denys@ti.com>
+Module: meta-ti
+Branch: master
+Commit: eadcdb3b89c6f9ae6ca9b273e9836e120e6bf116
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=eadcdb3b89c6f9ae6ca9b273e9836e120e6bf116
 
+Author: Sam Nelson <sam.nelson@ti.com>
+Date:   Fri Jun 19 02:06:43 2015 +0000
+
+hplib: Add Run time dependency on hplib-mod
+
+- Library requires hplib kernel module loaded
+
+Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- conf/layer.conf                               | 3 +++
- recipes-bsp/cppi-lld/cppi-lld-test_git.bb     | 0
- recipes-bsp/cppi-lld/cppi-lld_git.bb          | 0
- recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb | 0
- recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb      | 0
- recipes-bsp/mmap-lld/mmap-lld-test_git.bb     | 0
- recipes-bsp/mmap-lld/mmap-lld_git.bb          | 0
- recipes-bsp/qmss-lld/qmss-lld-test_git.bb     | 0
- recipes-bsp/qmss-lld/qmss-lld_git.bb          | 0
- 9 files changed, 3 insertions(+)
- mode change 100755 => 100644 recipes-bsp/cppi-lld/cppi-lld-test_git.bb
- mode change 100755 => 100644 recipes-bsp/cppi-lld/cppi-lld_git.bb
- mode change 100755 => 100644 recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
- mode change 100755 => 100644 recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
- mode change 100755 => 100644 recipes-bsp/mmap-lld/mmap-lld-test_git.bb
- mode change 100755 => 100644 recipes-bsp/mmap-lld/mmap-lld_git.bb
- mode change 100755 => 100644 recipes-bsp/qmss-lld/qmss-lld-test_git.bb
- mode change 100755 => 100644 recipes-bsp/qmss-lld/qmss-lld_git.bb
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index abce730..ac0c854 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -13,5 +13,8 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
- SIGGEN_EXCLUDERECIPES_ABISAFE += " \
-     ti-ipc \
-     cmem-mod \
-+    hplib-mod \
-     gdbserverproxy-module-drv \
-+    debugss-module-drv \
-+    uio-module-drv \
- "
-diff --git a/recipes-bsp/cppi-lld/cppi-lld-test_git.bb b/recipes-bsp/cppi-lld/cppi-lld-test_git.bb
-old mode 100755
-new mode 100644
-diff --git a/recipes-bsp/cppi-lld/cppi-lld_git.bb b/recipes-bsp/cppi-lld/cppi-lld_git.bb
-old mode 100755
-new mode 100644
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld-test_git.bb
-old mode 100755
-new mode 100644
-diff --git a/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb b/recipes-bsp/hyplnk-lld/hyplnk-lld_git.bb
-old mode 100755
-new mode 100644
-diff --git a/recipes-bsp/mmap-lld/mmap-lld-test_git.bb b/recipes-bsp/mmap-lld/mmap-lld-test_git.bb
-old mode 100755
-new mode 100644
-diff --git a/recipes-bsp/mmap-lld/mmap-lld_git.bb b/recipes-bsp/mmap-lld/mmap-lld_git.bb
-old mode 100755
-new mode 100644
-diff --git a/recipes-bsp/qmss-lld/qmss-lld-test_git.bb b/recipes-bsp/qmss-lld/qmss-lld-test_git.bb
-old mode 100755
-new mode 100644
-diff --git a/recipes-bsp/qmss-lld/qmss-lld_git.bb b/recipes-bsp/qmss-lld/qmss-lld_git.bb
-old mode 100755
-new mode 100644
--- 
-2.2.0
+---
+
+ recipes-bsp/hplib/hplib_git.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/recipes-bsp/hplib/hplib_git.bb b/recipes-bsp/hplib/hplib_git.bb
+index fbb3004..da8853b 100644
+--- a/recipes-bsp/hplib/hplib_git.bb
++++ b/recipes-bsp/hplib/hplib_git.bb
+@@ -3,6 +3,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/runtime/hplib/src/COPYING.txt;md5=b7982a377c680ad71ca2fbb735982462"
+ 
+ DEPENDS = "common-csl-ip rm-lld qmss-lld sa-lld pktlib"
++RDEPENDS_${PN} = "hplib-mod"
+ 
+ include hplib.inc
+ 
 
 
