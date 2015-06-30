@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 7B2D4E00A7E; Tue, 30 Jun 2015 12:09:06 -0700 (PDT)
+	id 7C2F3E009A7; Tue, 30 Jun 2015 12:09:06 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 01677E009A7
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 02AF6E009C8
 	for <meta-ti@yoctoproject.org>; Tue, 30 Jun 2015 12:09:03 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id E267152A99; Tue, 30 Jun 2015 19:09:02 +0000 (UTC)
+	id 7C955529BB; Tue, 30 Jun 2015 19:09:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150630190902.E267152A99@arago-project.org>
-Date: Tue, 30 Jun 2015 19:09:02 +0000 (UTC)
+Message-Id: <20150630190903.7C955529BB@arago-project.org>
+Date: Tue, 30 Jun 2015 19:09:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Sam Nelson : hplib: Add Run time dependency on hplib-mod
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Tue, 30 Jun 2015 19:09:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: eadcdb3b89c6f9ae6ca9b273e9836e120e6bf116
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=eadcdb3b89c6f9ae6ca9b273e9836e120e6bf116
+Branch: fido
+Commit: 8e6d4122288d06bcfecbbaed16a9ea905ba368d7
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8e6d4122288d06bcfecbbaed16a9ea905ba368d7
 
 Author: Sam Nelson <sam.nelson@ti.com>
 Date:   Fri Jun 19 02:06:43 2015 +0000
