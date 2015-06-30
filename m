@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id C9B7DE009C8; Tue, 30 Jun 2015 12:09:06 -0700 (PDT)
+	id CBC98E00A1E; Tue, 30 Jun 2015 12:09:06 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 03E77E00A1E
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 054BAE00A21
 	for <meta-ti@yoctoproject.org>; Tue, 30 Jun 2015 12:09:03 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0179652AA4; Tue, 30 Jun 2015 19:09:02 +0000 (UTC)
+	id 5DFA952AA5; Tue, 30 Jun 2015 19:09:03 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150630190903.0179652AA4@arago-project.org>
-Date: Tue, 30 Jun 2015 19:09:02 +0000 (UTC)
+Message-Id: <20150630190903.5DFA952AA5@arago-project.org>
+Date: Tue, 30 Jun 2015 19:09:03 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : hyplnk-lld: Correct reference to k2l library
+Subject: Sam Nelson : boot-monitor: Mark the package as machine-specific
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,39 +37,42 @@ X-List-Received-Date: Tue, 30 Jun 2015 19:09:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 416c472d48f288dd5055e21a9c8c2e65525faf8f
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=416c472d48f288dd5055e21a9c8c2e65525faf8f
+Branch: fido
+Commit: 073b7fdd643dcd440d7bb08ed84831fb55723c3f
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=073b7fdd643dcd440d7bb08ed84831fb55723c3f
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Mon Jun 29 22:56:23 2015 +0000
+Date:   Fri Jun 19 02:00:50 2015 +0000
 
-hyplnk-lld: Correct reference to k2l library
+boot-monitor: Mark the package as machine-specific
 
-- Hyperlink module is not present in k2l device.
+- Recipe builds machine specific skern image
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/hyplnk-lld/files/init_hyplnk.sh |    4 ----
- 1 files changed, 0 insertions(+), 4 deletions(-)
+ recipes-bsp/boot-monitor/boot-monitor_git.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh b/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh
-index fb65057..d6795f1 100755
---- a/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh
-+++ b/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh
-@@ -28,10 +28,6 @@ case "$compatible" in
- 		device=k2hk
- 		ln -sf libhyplnk_k2h.so.1.0.0 libhyplnk_device.so.1
- 	;;
--	*k2l*)
--		device=k2l
--		ln -sf libhyplnk_k2l.so.1.0.0 libhyplnk_device.so.1
--	;;
- 	*k2e*)
- 		device=k2e
- 		ln -sf libhyplnk_k2e.so.1.0.0 libhyplnk_device.so.1
+diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+index 678e99c..4ad8448 100644
+--- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
++++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
+@@ -3,11 +3,12 @@ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=25fe219a6febf6e5bb45beda1b2eb315"
+ 
+ COMPATIBLE_MACHINE = "keystone"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
+ 
+ PV = "2.0+git${SRCPV}"
+-PR = "r2"
++PR = "r3"
+ 
+ BRANCH = "master"
+ 
 
 
