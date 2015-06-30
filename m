@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 85747E00AAB; Tue, 30 Jun 2015 12:09:25 -0700 (PDT)
+	id D98B8E00AAF; Tue, 30 Jun 2015 12:09:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2E45DE00A86
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 367E0E00A92
 	for <meta-ti@yoctoproject.org>; Tue, 30 Jun 2015 12:09:12 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id F08C152A99; Tue, 30 Jun 2015 19:09:11 +0000 (UTC)
+	id 0F73552AA4; Tue, 30 Jun 2015 19:09:12 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150630190911.F08C152A99@arago-project.org>
-Date: Tue, 30 Jun 2015 19:09:11 +0000 (UTC)
+Message-Id: <20150630190912.0F73552AA4@arago-project.org>
+Date: Tue, 30 Jun 2015 19:09:12 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : hplib: Add Run time dependency on hplib-mod
+Subject: Sam Nelson : hyplnk-lld: Correct reference to k2l library
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,35 +38,38 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: 878b2fb694e12c533346a0c1e3cab8a67f13fc88
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=878b2fb694e12c533346a0c1e3cab8a67f13fc88
+Commit: 6e02d2ddefc589a5f64fae807f62b00772f22481
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=6e02d2ddefc589a5f64fae807f62b00772f22481
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Jun 19 02:06:43 2015 +0000
+Date:   Mon Jun 29 22:56:23 2015 +0000
 
-hplib: Add Run time dependency on hplib-mod
+hyplnk-lld: Correct reference to k2l library
 
-- Library requires hplib kernel module loaded
+- Hyperlink module is not present in k2l device.
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/hplib/hplib_git.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+ recipes-bsp/hyplnk-lld/files/init_hyplnk.sh |    4 ----
+ 1 files changed, 0 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-bsp/hplib/hplib_git.bb b/recipes-bsp/hplib/hplib_git.bb
-index fbb3004..da8853b 100644
---- a/recipes-bsp/hplib/hplib_git.bb
-+++ b/recipes-bsp/hplib/hplib_git.bb
-@@ -3,6 +3,7 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/runtime/hplib/src/COPYING.txt;md5=b7982a377c680ad71ca2fbb735982462"
- 
- DEPENDS = "common-csl-ip rm-lld qmss-lld sa-lld pktlib"
-+RDEPENDS_${PN} = "hplib-mod"
- 
- include hplib.inc
- 
+diff --git a/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh b/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh
+index fb65057..d6795f1 100755
+--- a/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh
++++ b/recipes-bsp/hyplnk-lld/files/init_hyplnk.sh
+@@ -28,10 +28,6 @@ case "$compatible" in
+ 		device=k2hk
+ 		ln -sf libhyplnk_k2h.so.1.0.0 libhyplnk_device.so.1
+ 	;;
+-	*k2l*)
+-		device=k2l
+-		ln -sf libhyplnk_k2l.so.1.0.0 libhyplnk_device.so.1
+-	;;
+ 	*k2e*)
+ 		device=k2e
+ 		ln -sf libhyplnk_k2e.so.1.0.0 libhyplnk_device.so.1
 
 
