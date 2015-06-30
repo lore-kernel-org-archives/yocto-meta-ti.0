@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 5F276E00A7D; Tue, 30 Jun 2015 12:09:07 -0700 (PDT)
+	id 85747E00AAB; Tue, 30 Jun 2015 12:09:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 06851E00A25
-	for <meta-ti@yoctoproject.org>; Tue, 30 Jun 2015 12:09:03 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2E45DE00A86
+	for <meta-ti@yoctoproject.org>; Tue, 30 Jun 2015 12:09:12 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id D027D52A8E; Tue, 30 Jun 2015 19:09:02 +0000 (UTC)
+	id F08C152A99; Tue, 30 Jun 2015 19:09:11 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150630190902.D027D52A8E@arago-project.org>
-Date: Tue, 30 Jun 2015 19:09:02 +0000 (UTC)
+Message-Id: <20150630190911.F08C152A99@arago-project.org>
+Date: Tue, 30 Jun 2015 19:09:11 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Sam Nelson : boot-monitor: Mark the package as machine-specific
+Subject: Sam Nelson : hplib: Add Run time dependency on hplib-mod
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,46 +33,40 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2015 19:09:07 -0000
+X-List-Received-Date: Tue, 30 Jun 2015 19:09:25 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 1a0d1223f800541193ed79ba1d83995ee49e4614
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1a0d1223f800541193ed79ba1d83995ee49e4614
+Branch: daisy
+Commit: 878b2fb694e12c533346a0c1e3cab8a67f13fc88
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=878b2fb694e12c533346a0c1e3cab8a67f13fc88
 
 Author: Sam Nelson <sam.nelson@ti.com>
-Date:   Fri Jun 19 02:00:50 2015 +0000
+Date:   Fri Jun 19 02:06:43 2015 +0000
 
-boot-monitor: Mark the package as machine-specific
+hplib: Add Run time dependency on hplib-mod
 
-- Recipe builds machine specific skern image
+- Library requires hplib kernel module loaded
 
 Signed-off-by: Sam Nelson <sam.nelson@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/boot-monitor/boot-monitor_git.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes-bsp/hplib/hplib_git.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-bsp/boot-monitor/boot-monitor_git.bb b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-index 678e99c..4ad8448 100644
---- a/recipes-bsp/boot-monitor/boot-monitor_git.bb
-+++ b/recipes-bsp/boot-monitor/boot-monitor_git.bb
-@@ -3,11 +3,12 @@ LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=25fe219a6febf6e5bb45beda1b2eb315"
+diff --git a/recipes-bsp/hplib/hplib_git.bb b/recipes-bsp/hplib/hplib_git.bb
+index fbb3004..da8853b 100644
+--- a/recipes-bsp/hplib/hplib_git.bb
++++ b/recipes-bsp/hplib/hplib_git.bb
+@@ -3,6 +3,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/ti/runtime/hplib/src/COPYING.txt;md5=b7982a377c680ad71ca2fbb735982462"
  
- COMPATIBLE_MACHINE = "keystone"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
+ DEPENDS = "common-csl-ip rm-lld qmss-lld sa-lld pktlib"
++RDEPENDS_${PN} = "hplib-mod"
  
- SRC_URI = "git://git.ti.com/keystone-linux/boot-monitor.git;protocol=git;branch=${BRANCH}"
- 
- PV = "2.0+git${SRCPV}"
--PR = "r2"
-+PR = "r3"
- 
- BRANCH = "master"
+ include hplib.inc
  
 
 
