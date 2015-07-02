@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id BED83E009A7; Thu,  2 Jul 2015 16:12:47 -0700 (PDT)
+	id BFE1AE00939; Thu,  2 Jul 2015 16:12:47 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,13 +12,13 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2F524E00939
-	for <meta-ti@yoctoproject.org>; Thu,  2 Jul 2015 16:12:43 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 2EA39E007A3
+	for <meta-ti@yoctoproject.org>; Thu,  2 Jul 2015 16:12:41 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id CAEAD52A4E; Thu,  2 Jul 2015 23:12:42 +0000 (UTC)
+	id 802EC52A4B; Thu,  2 Jul 2015 23:12:40 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150702231242.CAEAD52A4E@arago-project.org>
-Date: Thu,  2 Jul 2015 23:12:42 +0000 (UTC)
+Message-Id: <20150702231240.802EC52A4B@arago-project.org>
+Date: Thu,  2 Jul 2015 23:12:40 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
 Subject: Jacob Stiffler : ti-softhsmv2: Stop recipe from using headers from host build machine.
 X-BeenThere: meta-ti@yoctoproject.org
@@ -37,9 +37,9 @@ X-List-Received-Date: Thu, 02 Jul 2015 23:12:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: fido
-Commit: 8e8311e4755210634a326ccbb2a6f28b37c1bd24
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=8e8311e4755210634a326ccbb2a6f28b37c1bd24
+Branch: master
+Commit: 1dd7db9681ca78aada641339cae88602ff333a2a
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=1dd7db9681ca78aada641339cae88602ff333a2a
 
 Author: Jacob Stiffler <j-stiffler@ti.com>
 Date:   Wed Jul  1 21:19:54 2015 +0000
