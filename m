@@ -1,40 +1,41 @@
-Return-Path: <karthik.ramanan@ti.com>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id ECB37E00A1A; Mon,  6 Jul 2015 01:28:40 -0700 (PDT)
+	id 2E418E00978; Mon,  6 Jul 2015 08:21:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI,
-	URI_HEX autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
+X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
+	http://www.dnswl.org/, high *      trust
+	*      [198.47.26.152 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [198.47.26.153 listed in list.dnswl.org]
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 32899E009CC
-	for <meta-ti@yoctoproject.org>; Mon,  6 Jul 2015 01:28:37 -0700 (PDT)
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 9D43DE004D2
+	for <meta-ti@yoctoproject.org>; Mon,  6 Jul 2015 08:21:21 -0700 (PDT)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t668Sam1020098
-	for <meta-ti@yoctoproject.org>; Mon, 6 Jul 2015 03:28:36 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id t66FLKEH023068
+	for <meta-ti@yoctoproject.org>; Mon, 6 Jul 2015 10:21:20 -0500
 Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t668SakS030043
-	for <meta-ti@yoctoproject.org>; Mon, 6 Jul 2015 03:28:36 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE70.ent.ti.com
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t66FLKgK021689
+	for <meta-ti@yoctoproject.org>; Mon, 6 Jul 2015 10:21:20 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
 	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 6 Jul 2015 03:28:24 -0500
-Received: from swubn01.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-	by dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t668SZPL005664;
-	Mon, 6 Jul 2015 03:28:35 -0500
-From: Karthik Ramanan <a0393906@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Mon, 6 Jul 2015 13:58:32 +0530
-Message-ID: <1436171313-7471-1-git-send-email-a0393906@ti.com>
-X-Mailer: git-send-email 1.7.9.5
+	Mon, 6 Jul 2015 10:21:08 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id t66FLKXJ019568;
+	Mon, 6 Jul 2015 10:21:20 -0500
+Date: Mon, 6 Jul 2015 11:21:19 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Karthik Ramanan <a0393906@ti.com>
+Message-ID: <20150706152119.GA9792@edge>
+References: <1436169077-6013-1-git-send-email-a0393906@ti.com>
 MIME-Version: 1.0
-Subject: [[GRAPHICS PATCHES] [for daisy, master] 1/2] omapdrm-pvr: Bug fixes and updates to the driver
+In-Reply-To: <1436169077-6013-1-git-send-email-a0393906@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [daisy, master] ipumm-fw: Update download path and checksum
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -47,40 +48,58 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jul 2015 08:28:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 06 Jul 2015 15:21:24 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
- * Fixed array out of bounds issue which causes failure in create_gem_wrapper
- * Truncate SGX HW recovery traces
+On Mon, Jul 06, 2015 at 01:21:17PM +0530, Karthik Ramanan wrote:
+> Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+> ---
+>  recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb |   10 ++++++----
+>  1 file changed, 6 insertions(+), 4 deletions(-)
+> 
+> diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
+> index 2e43584..821a502 100644
+> --- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
+> +++ b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
+> @@ -9,17 +9,17 @@ python __anonymous() {
+>  DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
+>  LICENSE = "TI-TSPA"
+>  
+> -LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=caa45d993ac010abe2fd319f6613bc26"
+> +LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=57d49afcca8f1be47b1c4e79aa06b3ba"
+>  
+>  COMPATIBLE_MACHINE = "dra7xx"
+>  PACKAGE_ARCH = "${MACHINE_ARCH}"
+>  
+>  RDEPENDS_${PN} = "libdce"
+>  
+> -SRC_URI = "http://arago-project.org/files/short-term/misc/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
+> +SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/ipumm/3_00_08_01/exports/
+> ipumm-dra7xx-evm-${PV}.tar.gz;protocol=ftp"
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
----
- .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Looks good, but are you sure the protocol ^^^ is correct?
 
-diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-index 39885f8..e173557 100644
---- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-+++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=2b841bf
- 
- inherit module
- 
--MACHINE_KERNEL_PR_append = "e"
-+MACHINE_KERNEL_PR_append = "f"
- PR = "${MACHINE_KERNEL_PR}"
- 
- BRANCH = "next"
-@@ -13,7 +13,7 @@ BRANCH = "next"
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
- 
--SRCREV = "872aa64b227cadbc97755a4192919dd5ca637971"
-+SRCREV = "430673f78b79eccdf308a6bbfb524209b485d2cc"
- 
- EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}"'
- 
--- 
-1.7.9.5
 
+> -SRC_URI[md5sum] = "e770dce63fdf218bb19ceb748d9812c0"
+> -SRC_URI[sha256sum] = "044d49b77560660bdfc29894e669fe8f70dc467c66b4acb49b24722a0799baa1"
+> +SRC_URI[md5sum] = "a1873333e7676ec1b7fcb18fb8b90696"
+> +SRC_URI[sha256sum] = "d583d827191a3772f496145cbf81747e10e7ed553d4653379576ac891019d7fb"
+>  
+>  S = "${WORKDIR}/ipumm-dra7xx-evm-${PV}"
+>  
+> @@ -31,3 +31,5 @@ do_install() {
+>  }
+>  
+>  FILES_${PN} += "${base_libdir}/firmware/${TARGET}"
+> +
+> +PR = "r4"
+> -- 
+> 1.7.9.5
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
