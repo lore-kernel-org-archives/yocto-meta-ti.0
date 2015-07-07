@@ -1,38 +1,26 @@
-Return-Path: <j-stiffler@ti.com>
+Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id F39DAE00A30; Tue,  7 Jul 2015 06:04:41 -0700 (PDT)
+	id D29A1E009CC; Tue,  7 Jul 2015 13:28:24 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
-	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at
-	http://www.dnswl.org/, high *      trust
-	*      [192.94.94.41 listed in list.dnswl.org]
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.1
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A958DE009FD
-	for <meta-ti@yoctoproject.org>; Tue,  7 Jul 2015 06:04:33 -0700 (PDT)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t67D4Wlb020539
-	for <meta-ti@yoctoproject.org>; Tue, 7 Jul 2015 08:04:33 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t67D4WSl022096
-	for <meta-ti@yoctoproject.org>; Tue, 7 Jul 2015 08:04:32 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DLEE70.ent.ti.com
-	(157.170.170.113) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 7 Jul 2015 08:04:19 -0500
-Received: from localhost.localdomain (ileax41-snat.itg.ti.com
-	[10.172.224.153])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t67D4WTZ018363;	Tue, 7 Jul 2015 08:04:32 -0500
-From: Jacob Stiffler <j-stiffler@ti.com>
-To: <meta-ti@yoctoproject.org>
-Date: Tue, 7 Jul 2015 09:04:29 -0400
-Message-ID: <1436274269-31734-1-git-send-email-j-stiffler@ti.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH] ti-xdctools: Add version 3.31.02.38.
+	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
+	*      dynamic-looking rDNS
+Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
+	[184.73.161.183])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A95D1E00957
+	for <meta-ti@yoctoproject.org>; Tue,  7 Jul 2015 13:28:20 -0700 (PDT)
+Received: by arago-project.org (Postfix, from userid 107)
+	id D028B5299C; Tue,  7 Jul 2015 20:28:19 +0000 (UTC)
+To: meta-ti@yoctoproject.org
+Message-Id: <20150707202819.D028B5299C@arago-project.org>
+Date: Tue,  7 Jul 2015 20:28:19 +0000 (UTC)
+From: git@arago-project.org (Arago Project git)
+Subject: Karthik Ramanan : omap5-sgx-ddk-um-linux: Bug fixes for memory leak
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -45,178 +33,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jul 2015 13:04:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 07 Jul 2015 20:28:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* This version adheres to the new "core" package format.
-* Add the version-indepedent include file for the core packages
-* Extract common information between the core and legacy packages
-  into the ti-xdctools-common.inc file.
+Module: meta-ti
+Branch: master
+Commit: 5f6cf869fbf7a819298c56ce3a6aa8a7f87f2665
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5f6cf869fbf7a819298c56ce3a6aa8a7f87f2665
 
-Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Mon Jul  6 14:28:33 2015 +0000
+
+omap5-sgx-ddk-um-linux: Bug fixes for memory leak
+
+* Fix memory leak in Wayland WSEGL
+* Refactor the code for print messages
+
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
- recipes-ti/devtools/ti-xdctools-common.inc    |   54 +++++++++++++++++++++++++
- recipes-ti/devtools/ti-xdctools-core.inc      |    5 +++
- recipes-ti/devtools/ti-xdctools.inc           |   54 +------------------------
- recipes-ti/devtools/ti-xdctools_3.31.02.38.bb |    9 +++++
- 4 files changed, 69 insertions(+), 53 deletions(-)
- create mode 100644 recipes-ti/devtools/ti-xdctools-common.inc
- create mode 100644 recipes-ti/devtools/ti-xdctools-core.inc
- create mode 100644 recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
 
-diff --git a/recipes-ti/devtools/ti-xdctools-common.inc b/recipes-ti/devtools/ti-xdctools-common.inc
-new file mode 100644
-index 0000000..2d5f2d7
---- /dev/null
-+++ b/recipes-ti/devtools/ti-xdctools-common.inc
-@@ -0,0 +1,54 @@
-+DESCRIPTION = "TI XDCtools (RTSC - Real Time Software Components - http://rtsc.eclipse.org)"
-+HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc"
-+SECTION = "devel"
-+LICENSE = "BSD & GPLv2"
-+
-+require recipes-ti/includes/ti-paths.inc
-+require recipes-ti/includes/ti-staging.inc
-+
-+do_install() {
-+    install -d ${D}${XDC_INSTALL_DIR_RECIPE}
-+    cp -pPrf ${S}/* ${D}${XDC_INSTALL_DIR_RECIPE}
-+}
-+
-+INSANE_SKIP_${PN} = "installed-vs-shipped"
-+
-+# Prevent internal libs from getting picked up
-+PRIVATE_LIBS = " \
-+libncdb.so \
-+libcdb.so \
-+libjavaplugin_oji.so \
-+libjavaplugin_jni.so \
-+libjsound.so \
-+libinstrument.so \
-+libjawt.so \
-+libzip.so \
-+libjava_crw_demo.so \
-+libjavaplugin_nscp_gcc29.so \
-+libhprof.so \
-+libcmm.so \
-+libjdwp.so \
-+libmlib_image.so \
-+libjpeg.so \
-+libverify.so \
-+libjavaplugin_nscp.so \
-+libmanagement.so \
-+libunpack.so \
-+librmi.so \
-+libJdbcOdbc.so \
-+libawt.so \
-+libnet.so \
-+libjaas_unix.so \
-+libnio.so \
-+libdcpr.so \
-+libioser12.so \
-+libjsoundalsa.so \
-+libjava.so \
-+libfontmanager.so \
-+libdt_socket.so \
-+libmawt.so \
-+libjvm.so \
-+libhpi.so \
-+lib.so \
-+libcairo.so.2 \
-+"
-diff --git a/recipes-ti/devtools/ti-xdctools-core.inc b/recipes-ti/devtools/ti-xdctools-core.inc
-new file mode 100644
-index 0000000..47f73b6
---- /dev/null
-+++ b/recipes-ti/devtools/ti-xdctools-core.inc
-@@ -0,0 +1,5 @@
-+require ti-xdctools-common.inc
-+
-+S = "${WORKDIR}/xdctools_${PV}_core"
-+
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/${PV}/exports/xdccore/xdctools_${PV}_core_linux.zip;name=xdczip"
-diff --git a/recipes-ti/devtools/ti-xdctools.inc b/recipes-ti/devtools/ti-xdctools.inc
-index 547a555..1415f83 100644
---- a/recipes-ti/devtools/ti-xdctools.inc
-+++ b/recipes-ti/devtools/ti-xdctools.inc
-@@ -1,10 +1,4 @@
--DESCRIPTION = "TI XDCtools (RTSC - Real Time Software Components - http://rtsc.eclipse.org)"
--HOMEPAGE = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc"
--SECTION = "devel"
--LICENSE = "BSD & GPLv2"
--
--require ../includes/ti-paths.inc
--require ../includes/ti-staging.inc
-+require ti-xdctools-common.inc
- require ../includes/ti-eula-unpack.inc
+ .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+index f806ae8..2f3f6aa 100644
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+@@ -4,9 +4,9 @@ LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=360d293df455e4f2d363bb4014a49603"
  
- S = "${WORKDIR}/xdctools_${PV}"
-@@ -14,49 +8,3 @@ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rt
- BINFILE="xdctools_setuplinux_${PV}.bin"
- TI_BIN_UNPK_CMDS="Y:workdir:Y"
- TI_BIN_UNPK_WDEXT="/ti"
--
--do_install() {
--    install -d ${D}${XDC_INSTALL_DIR_RECIPE}
--    cp -pPrf ${S}/* ${D}${XDC_INSTALL_DIR_RECIPE}
--}
--
--# Prevent internal libs from getting picked up
--PRIVATE_LIBS = " \
--libncdb.so \
--libcdb.so \
--libjavaplugin_oji.so \
--libjavaplugin_jni.so \
--libjsound.so \
--libinstrument.so \
--libjawt.so \
--libzip.so \
--libjava_crw_demo.so \
--libjavaplugin_nscp_gcc29.so \
--libhprof.so \
--libcmm.so \
--libjdwp.so \
--libmlib_image.so \
--libjpeg.so \
--libverify.so \
--libjavaplugin_nscp.so \
--libmanagement.so \
--libunpack.so \
--librmi.so \
--libJdbcOdbc.so \
--libawt.so \
--libnet.so \
--libjaas_unix.so \
--libnio.so \
--libdcpr.so \
--libioser12.so \
--libjsoundalsa.so \
--libjava.so \
--libfontmanager.so \
--libdt_socket.so \
--libmawt.so \
--libjvm.so \
--libhpi.so \
--lib.so \
--libcairo.so.2 \
--"
--
-diff --git a/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb b/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
-new file mode 100644
-index 0000000..5e970ee
---- /dev/null
-+++ b/recipes-ti/devtools/ti-xdctools_3.31.02.38.bb
-@@ -0,0 +1,9 @@
-+require ti-xdctools-core.inc
-+
-+PV = "3_31_02_38"
-+PR = "r0"
-+
-+LIC_FILES_CHKSUM = "file://docs/license/xdc/shelf/package.html;md5=9dbb0095cdb8b35508b344aa4f1de333"
-+
-+SRC_URI[xdczip.md5sum] = "c76b3d90c3e25d199765557e393d165b"
-+SRC_URI[xdczip.sha256sum] = "c0e1f6911f2294bfb76471fac1a0ceac3e89c7eb1300f84d2571bf78cb62a7d2"
--- 
-1.7.9.5
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git"
+-SRCREV = "53be02a24a30a4c74eb48f2c84fda789bd95ab33"
++SRCREV = "b6e57ccf36fc8c36d988246bc7510f0dec42d991"
+ 
+-PR = "r4"
++PR = "r7"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
+ 
+ RREPLACES_${PN} = "libegl libgles1 libgles2"
 
 
