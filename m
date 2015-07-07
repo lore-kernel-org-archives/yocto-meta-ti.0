@@ -1,26 +1,41 @@
-Return-Path: <git@arago-project.org>
+Return-Path: <denys@ti.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 3C60EE00A2C; Tue,  7 Jul 2015 13:29:19 -0700 (PDT)
+	id A06EDE00957; Tue,  7 Jul 2015 13:59:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
-	*      dynamic-looking rDNS
-Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
-	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 7B51EE00AA5
-	for <meta-ti@yoctoproject.org>; Tue,  7 Jul 2015 13:29:02 -0700 (PDT)
-Received: by arago-project.org (Postfix, from userid 107)
-	id 448BC5298F; Tue,  7 Jul 2015 20:29:02 +0000 (UTC)
-To: meta-ti@yoctoproject.org
-Message-Id: <20150707202902.448BC5298F@arago-project.org>
-Date: Tue,  7 Jul 2015 20:29:02 +0000 (UTC)
-From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : omap5-sgx-ddk-um-linux: Bug fixes for memory leak
+	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
+	high *      trust
+	*      [192.94.94.40 listed in list.dnswl.org]
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5440FE006C6
+	for <meta-ti@yoctoproject.org>; Tue,  7 Jul 2015 13:59:22 -0700 (PDT)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t67KxMAv001588
+	for <meta-ti@yoctoproject.org>; Tue, 7 Jul 2015 15:59:22 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t67KxMC0022685
+	for <meta-ti@yoctoproject.org>; Tue, 7 Jul 2015 15:59:22 -0500
+Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
+	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 7 Jul 2015 15:59:08 -0500
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t67KxL98026800;
+	Tue, 7 Jul 2015 15:59:21 -0500
+Date: Tue, 7 Jul 2015 16:59:21 -0400
+From: Denys Dmytriyenko <denys@ti.com>
+To: Jacob Stiffler <j-stiffler@ti.com>
+Message-ID: <20150707205920.GH11382@edge>
+References: <1436272155-9491-1-git-send-email-j-stiffler@ti.com>
+MIME-Version: 1.0
+In-Reply-To: <1436272155-9491-1-git-send-email-j-stiffler@ti.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: meta-ti@yoctoproject.org
+Subject: Re: [PATCH 1/2] ti-sysbios: Add version 6.41.04.54.
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -33,45 +48,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jul 2015 20:29:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 07 Jul 2015 20:59:25 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Module: meta-ti
-Branch: fido
-Commit: ad67b710ae424bdcb8c829af3c05fc3d3e828351
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ad67b710ae424bdcb8c829af3c05fc3d3e828351
+Same comment/question about version update - any specific reason for 2 
+separate patches?
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Mon Jul  6 14:28:33 2015 +0000
 
-omap5-sgx-ddk-um-linux: Bug fixes for memory leak
-
-* Fix memory leak in Wayland WSEGL
-* Refactor the code for print messages
-
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
----
-
- .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-index f806ae8..2f3f6aa 100644
---- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-+++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
-@@ -4,9 +4,9 @@ LICENSE = "TI-TSPA"
- LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=360d293df455e4f2d363bb4014a49603"
- 
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git"
--SRCREV = "53be02a24a30a4c74eb48f2c84fda789bd95ab33"
-+SRCREV = "b6e57ccf36fc8c36d988246bc7510f0dec42d991"
- 
--PR = "r4"
-+PR = "r7"
- PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
- 
- RREPLACES_${PN} = "libegl libgles1 libgles2"
-
+On Tue, Jul 07, 2015 at 08:29:14AM -0400, Jacob Stiffler wrote:
+> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+> ---
+>  recipes-ti/bios/ti-sysbios_6.41.04.54.bb |   12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+>  create mode 100644 recipes-ti/bios/ti-sysbios_6.41.04.54.bb
+> 
+> diff --git a/recipes-ti/bios/ti-sysbios_6.41.04.54.bb b/recipes-ti/bios/ti-sysbios_6.41.04.54.bb
+> new file mode 100644
+> index 0000000..1e24fe1
+> --- /dev/null
+> +++ b/recipes-ti/bios/ti-sysbios_6.41.04.54.bb
+> @@ -0,0 +1,12 @@
+> +require ti-sysbios.inc
+> +
+> +PV = "6_41_04_54"
+> +PR = "r0"
+> +
+> +LIC_FILES_CHKSUM = "file://bios_${PV}_manifest.html;md5=95c3c6050fb23f2755ab75bf76805190"
+> +
+> +SRC_URI[sysbiosbin.md5sum] = "cbc53f2b15c2f70e2eaa05c1ed90b8db"
+> +SRC_URI[sysbiosbin.sha256sum] = "2b4fcb85af4c0abc46dadc925312b2a28906ec34db9b1500f0c484ee3fcb58cf"
+> +
+> +TI_BIN_UNPK_CMDS=""
+> +TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
+> -- 
+> 1.7.9.5
+> 
+> -- 
+> _______________________________________________
+> meta-ti mailing list
+> meta-ti@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/meta-ti
 
