@@ -1,41 +1,38 @@
-Return-Path: <denys@ti.com>
+Return-Path: <denis@denix.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A06EDE00957; Tue,  7 Jul 2015 13:59:25 -0700 (PDT)
+	id 5AE80E00957; Tue,  7 Jul 2015 14:41:32 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_HI
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_NONE
 	autolearn=ham version=3.3.1
-X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+	http://www.dnswl.org/, no *      trust
+	*      [206.46.173.21 listed in list.dnswl.org]
+	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
-	* -5.0 RCVD_IN_DNSWL_HI RBL: Sender listed at http://www.dnswl.org/,
-	high *      trust
-	*      [192.94.94.40 listed in list.dnswl.org]
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 5440FE006C6
-	for <meta-ti@yoctoproject.org>; Tue,  7 Jul 2015 13:59:22 -0700 (PDT)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t67KxMAv001588
-	for <meta-ti@yoctoproject.org>; Tue, 7 Jul 2015 15:59:22 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t67KxMC0022685
-	for <meta-ti@yoctoproject.org>; Tue, 7 Jul 2015 15:59:22 -0500
-Received: from dflp32.itg.ti.com (10.64.6.15) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 7 Jul 2015 15:59:08 -0500
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id t67KxL98026800;
-	Tue, 7 Jul 2015 15:59:21 -0500
-Date: Tue, 7 Jul 2015 16:59:21 -0400
-From: Denys Dmytriyenko <denys@ti.com>
-To: Jacob Stiffler <j-stiffler@ti.com>
-Message-ID: <20150707205920.GH11382@edge>
-References: <1436272155-9491-1-git-send-email-j-stiffler@ti.com>
-MIME-Version: 1.0
-In-Reply-To: <1436272155-9491-1-git-send-email-j-stiffler@ti.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: meta-ti@yoctoproject.org
-Subject: Re: [PATCH 1/2] ti-sysbios: Add version 6.41.04.54.
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 25DD5E006C6
+	for <meta-ti@yoctoproject.org>; Tue,  7 Jul 2015 14:41:28 -0700 (PDT)
+Received: from gandalf.denix.org ([108.51.169.48]) by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NR500JY2092HYD0@vms173021.mailsrvcs.net> for
+	meta-ti@yoctoproject.org; Tue, 07 Jul 2015 16:41:27 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=Jp0M15MC c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=zOBTXjUuO1YA:10
+	a=sozttTNsAAAA:8	a=uhA27H4bkROY20stIjsA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id AE7FE161B01;	Tue,
+	7 Jul 2015 17:41:26 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: meta-ti@yoctoproject.org
+Date: Tue, 07 Jul 2015 17:41:25 -0400
+Message-id: <1436305285-5921-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Subject: [PATCH] linux-ti-staging: update to 3.14.47 stable
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -48,45 +45,35 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jul 2015 20:59:25 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 07 Jul 2015 21:41:32 -0000
 
-Same comment/question about version update - any specific reason for 2 
-separate patches?
+From: Denys Dmytriyenko <denys@ti.com>
 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-kernel/linux/linux-ti-staging_3.14.bb |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-On Tue, Jul 07, 2015 at 08:29:14AM -0400, Jacob Stiffler wrote:
-> Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
-> ---
->  recipes-ti/bios/ti-sysbios_6.41.04.54.bb |   12 ++++++++++++
->  1 file changed, 12 insertions(+)
->  create mode 100644 recipes-ti/bios/ti-sysbios_6.41.04.54.bb
-> 
-> diff --git a/recipes-ti/bios/ti-sysbios_6.41.04.54.bb b/recipes-ti/bios/ti-sysbios_6.41.04.54.bb
-> new file mode 100644
-> index 0000000..1e24fe1
-> --- /dev/null
-> +++ b/recipes-ti/bios/ti-sysbios_6.41.04.54.bb
-> @@ -0,0 +1,12 @@
-> +require ti-sysbios.inc
-> +
-> +PV = "6_41_04_54"
-> +PR = "r0"
-> +
-> +LIC_FILES_CHKSUM = "file://bios_${PV}_manifest.html;md5=95c3c6050fb23f2755ab75bf76805190"
-> +
-> +SRC_URI[sysbiosbin.md5sum] = "cbc53f2b15c2f70e2eaa05c1ed90b8db"
-> +SRC_URI[sysbiosbin.sha256sum] = "2b4fcb85af4c0abc46dadc925312b2a28906ec34db9b1500f0c484ee3fcb58cf"
-> +
-> +TI_BIN_UNPK_CMDS=""
-> +TI_BIN_UNPK_ARGS = "--mode unattended --prefix ${WORKDIR}"
-> -- 
-> 1.7.9.5
-> 
-> -- 
-> _______________________________________________
-> meta-ti mailing list
-> meta-ti@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/meta-ti
+diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+index fcf9f2f..eca072a 100644
+--- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
++++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
+@@ -46,11 +46,11 @@ S = "${WORKDIR}/git"
+ 
+ BRANCH = "ti-linux-3.14.y"
+ 
+-SRCREV = "e19ba3d996f22ad8cc7187b30c18347aba0d594d"
+-PV = "3.14.43+git${SRCPV}"
++SRCREV = "ce65c710bd587f3f2a900a85ae89334eb729aa72"
++PV = "3.14.47+git${SRCPV}"
+ 
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "j"
++MACHINE_KERNEL_PR_append = "a"
+ PR = "${MACHINE_KERNEL_PR}"
+ 
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+-- 
+1.7.9.5
+
 
