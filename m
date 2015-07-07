@@ -1,28 +1,26 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id D4398E009C5; Tue,  7 Jul 2015 13:28:24 -0700 (PDT)
+	id D264EE006EE; Tue,  7 Jul 2015 13:28:25 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00, RDNS_DYNAMIC, URI_HEX
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 	autolearn=no version=3.3.1
-X-Spam-HAM-Report: * 1.1 URI_HEX URI: URI hostname has long hexadecimal
-	sequence
-	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id AA8CEE00960
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A6EDEE006C6
 	for <meta-ti@yoctoproject.org>; Tue,  7 Jul 2015 13:28:20 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id C30645298F; Tue,  7 Jul 2015 20:28:19 +0000 (UTC)
+	id D697A529A7; Tue,  7 Jul 2015 20:28:19 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150707202819.C30645298F@arago-project.org>
+Message-Id: <20150707202819.D697A529A7@arago-project.org>
 Date: Tue,  7 Jul 2015 20:28:19 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : omapdrm-pvr: Bug fixes and updates to the driver
+Subject: Karthik Ramanan : omap5-sgx-ddk-um-linux: Bug fixes for memory leak
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -35,51 +33,45 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jul 2015 20:28:24 -0000
+X-List-Received-Date: Tue, 07 Jul 2015 20:28:25 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: 65d78fb6866acfd3a5c8c8a064a980fb6964bc41
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=65d78fb6866acfd3a5c8c8a064a980fb6964bc41
+Commit: 89489aaeeedcdcf97be136e8143e254ef53ec00b
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=89489aaeeedcdcf97be136e8143e254ef53ec00b
 
 Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Mon Jul  6 14:28:32 2015 +0000
+Date:   Mon Jul  6 14:28:33 2015 +0000
 
-omapdrm-pvr: Bug fixes and updates to the driver
+omap5-sgx-ddk-um-linux: Bug fixes for memory leak
 
-* Fixed array out of bounds issue which causes failure in create_gem_wrapper
-* Truncate SGX HW recovery traces
+* Fix memory leak in Wayland WSEGL
+* Refactor the code for print messages
 
 Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- .../powervr-drivers/omapdrm-pvr_1.9.2253347.bb     |    4 ++--
+ .../libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb     |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-index 39885f8..e173557 100644
---- a/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-+++ b/recipes-bsp/powervr-drivers/omapdrm-pvr_1.9.2253347.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://eurasia_km/README;beginline=13;endline=22;md5=2b841bf
+diff --git a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+index f806ae8..2f3f6aa 100644
+--- a/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
++++ b/recipes-graphics/libgles/omap5-sgx-ddk-um-linux_1.9.0.12.bb
+@@ -4,9 +4,9 @@ LICENSE = "TI-TSPA"
+ LIC_FILES_CHKSUM = "file://OMAP5-Linux-Graphics-DDK-UM-Manifest.doc;md5=360d293df455e4f2d363bb4014a49603"
  
- inherit module
+ SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-um-linux.git;protocol=git"
+-SRCREV = "53be02a24a30a4c74eb48f2c84fda789bd95ab33"
++SRCREV = "b6e57ccf36fc8c36d988246bc7510f0dec42d991"
  
--MACHINE_KERNEL_PR_append = "e"
-+MACHINE_KERNEL_PR_append = "f"
- PR = "${MACHINE_KERNEL_PR}"
+-PR = "r4"
++PR = "r7"
+ PROVIDES += "virtual/egl virtual/libgles1 virtual/libgles2"
  
- BRANCH = "next"
-@@ -13,7 +13,7 @@ BRANCH = "next"
- SRC_URI = "git://git.ti.com/graphics/omap5-sgx-ddk-linux.git;protocol=git;branch=${BRANCH}"
- S = "${WORKDIR}/git"
- 
--SRCREV = "872aa64b227cadbc97755a4192919dd5ca637971"
-+SRCREV = "430673f78b79eccdf308a6bbfb524209b485d2cc"
- 
- EXTRA_OEMAKE += 'KERNELDIR="${STAGING_KERNEL_DIR}"'
- 
+ RREPLACES_${PN} = "libegl libgles1 libgles2"
 
 
