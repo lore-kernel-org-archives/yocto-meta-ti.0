@@ -1,57 +1,49 @@
-Return-Path: <sflowers1@gmail.com>
+Return-Path: <sivagopi715@gmail.com>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 53CBAE00998; Mon, 13 Apr 2015 06:38:02 -0700 (PDT)
+	id 8C305E00A3C; Sat, 25 Jul 2015 02:35:54 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID, DKIM_VALID_AU, FREEMAIL_FROM,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.3.1
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.3.1
 X-Spam-HAM-Report: * 0.0 FREEMAIL_FROM Sender email is commonly abused enduser
-	mail provider *      (sflowers1[at]gmail.com)
+	mail provider *      (sivagopi715[at]gmail.com)
 	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/,
 	low *      trust
-	*      [209.85.220.176 listed in list.dnswl.org]
+	*      [209.85.218.41 listed in list.dnswl.org]
 	* -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
+	*  0.0 HTML_MESSAGE BODY: HTML included in message
 	* -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
 	author's *       domain
 	*  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
 	*      valid
 	* -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
-	[209.85.220.176])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 136FFE00963;
-	Mon, 13 Apr 2015 06:38:00 -0700 (PDT)
-Received: by qkx62 with SMTP id 62so180650502qkx.0;
-	Mon, 13 Apr 2015 06:38:00 -0700 (PDT)
+Received: from mail-oi0-f41.google.com (mail-oi0-f41.google.com
+	[209.85.218.41])
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id CA5FAE00995
+	for <meta-ti@yoctoproject.org>; Sat, 25 Jul 2015 02:35:49 -0700 (PDT)
+Received: by oihq81 with SMTP id q81so30896557oih.2
+	for <meta-ti@yoctoproject.org>; Sat, 25 Jul 2015 02:35:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=aUxOS3pYOojSx9CmAJ1zqQuVlNGPaRwzfBPwSNsZqAQ=;
-	b=ohV7IX2QSDi/w5XtkibofrQyyUEy2ourK7Cis5Uf6s6lwqBo4UWdCftofKz+woRYJq
-	XIs9ttBGcmQC2jjsVtd/Ug8O5PPhAkhGjF7V2yVlgsFWdCbZnLzbnHDDvnh1zzbhF0TL
-	Oxn9WXhZggReggGS/Xc2Otq53E74+Gp1w96osY8upCne7XJQdNZcI99OPKhGbtkyd0rq
-	35OiPKIJxkN1m5FuoMQpR/rQRWOEbURMW6aD4uPFPPjV9MNJOTaGHTtNt5FZUHbNgZCk
-	gYPIH6wxQVWsUHVBh4XvuOrAqsvO+HKRcEWi/ePXeBN6MDZFYSdp4evwclEaUfq5DT/b
-	ULWA==
-X-Received: by 10.229.29.136 with SMTP id q8mr18769807qcc.2.1428932279940;
-	Mon, 13 Apr 2015 06:37:59 -0700 (PDT)
-Received: from [10.158.50.129] ([89.191.218.226])
-	by mx.google.com with ESMTPSA id u48sm5827625qgd.34.2015.04.13.06.37.56
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Apr 2015 06:37:59 -0700 (PDT)
-Message-ID: <552BC6AA.5020704@gmail.com>
-From: Stephen Flowers <sflowers1@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=2PwFfXvLqSzxypCF9oNbW0Y30fs+FRmPVSAYj64//so=;
+	b=DVrez6T11fQhHAaYDRIHFZRO34yvvuAP5TIpiMWv4l3LsBgal5KFP7VnfUZ+5oEYLW
+	CKxZjHY7uomMBMM8ePD5rhFkDFl7m482kq2XXSRSl+3sV+hxnBg5UdsGxHjz7gmidxAC
+	4LMZvqk79OZlcG49S4af1vY51etL+hdFg6EnHsp5audvNhPyD4e00FNHxCyL1nG0ke/J
+	0LTF0uox560gwFTKBEVJUACR8bj4rY1fUIHDpgJFDnnPdkfGpg04J0LNKvzcbq9eCTpV
+	zVTwBF0JAjMgZI44+5qnlhAnvVqYiUAsraON/YF4kgUM1gywAkIam0n1is1swk6N2DPV
+	TkIA==
 MIME-Version: 1.0
-To: Trevor Woerner <twoerner@gmail.com>, yocto@yoctoproject.org, 
-	meta-ti@yoctoproject.org
-References: <54DA0258.9070108@gmail.com> <552BC39D.7000806@gmail.com>
-In-Reply-To: <552BC39D.7000806@gmail.com>
+X-Received: by 10.202.79.11 with SMTP id d11mr18112753oib.120.1437816948933;
+	Sat, 25 Jul 2015 02:35:48 -0700 (PDT)
+Received: by 10.202.222.65 with HTTP; Sat, 25 Jul 2015 02:35:48 -0700 (PDT)
+Message-ID: <CAK88ezGUw7xSFSQhssxTQCKOb4S4duEKw1TCZmo-btUVJNx2wQ@mail.gmail.com>
+From: sivagopiraju kudeti <sivagopi715@gmail.com>
+To: meta-ti@yoctoproject.org
 X-Mailman-Approved-At: Fri, 23 Dec 2016 15:51:53 -0800
-Subject: Re: [yocto] Yocto Realtime tests on beaglebone black
+Subject: Yocto linux rebuild issue
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -64,45 +56,64 @@ List-Post: <mailto:meta-ti@yoctoproject.org>
 List-Help: <mailto:meta-ti-request@yoctoproject.org?subject=help>
 List-Subscribe: <https://lists.yoctoproject.org/listinfo/meta-ti>,
 	<mailto:meta-ti-request@yoctoproject.org?subject=subscribe>
-Date: Mon, 13 Apr 2015 13:38:02 -0000
-X-Original-Date: Mon, 13 Apr 2015 14:37:46 +0100
-X-List-Received-Date: Mon, 13 Apr 2015 13:38:02 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+Date: Sat, 25 Jul 2015 09:35:54 -0000
+X-Original-Date: Sat, 25 Jul 2015 15:05:48 +0530
+X-List-Received-Date: Sat, 25 Jul 2015 09:35:54 -0000
+Content-Type: multipart/alternative; boundary=001a113d80947e4983051bafd8dd
 
+--001a113d80947e4983051bafd8dd
+Content-Type: text/plain; charset=UTF-8
 
-Trevor,
+Hi YoctoProject team,
 
-I added the following to .../build/conf/local.conf
+     I have downloaded and compiled the yocto source (kernel version 3.1.0)
+for my pandaboard, as the instructions given in  URL (
+https://maniacbug.wordpress.com/2012/08/03/pandayocto/). So , pandaboard is
+came up, its good to me.
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-yocto-rt"
-COMPATIBLE_MACHINE_beaglebone = "beaglebone"
-COMPATIBLE_MACHINE_quilt-native = "beaglebone"
+      But, i have modified the .config under
+directory(tmp/work/pandaboard-poky-linux-gnueabi/linux-omap4-3.1.0-r0/git)
+as per my requirement. So, i need to recompile the kernel using the BITBAKE.
 
-Then change the required package within 
-/meta/recipes-rt/images/core-image-rt.bb from -minimal to -base
-(base package is not working for some reason - no files created within 
-target /boot folder)
+       i have tried with "bitbake -c compile -f virtual/kernel" but its not
+working, i understand that it is going to take the .bb file from
+"meta/recipes-kernel/linux/linux-dummy.bb". But the actual path is
+"meta-ti/recipes-kernel/linux/linux-omap4_3.1.0.bb" and moreover i have
+modified the defconfig under
+"meta-ti/recipes-kernel/linux/linux-omap4_3.1.0/pandaboard/defconfig/".
 
-Then I added some desired features to the build not found in -base
-EXTRA_IMAGE_FEATURES = "debug-tweaks dev-pkgs tools-sdk"
+       So, I need to compile the kernel with bitbake after modifying the
+defconfig file. And i need some bitbake instructions too for to compile
+newly included meta-xxx  directory. Please reply for this mail, thanks in
+advance.
 
-Then the build succeeded... after about 4 hours :-)
+Thanks,
+Gopi.
 
+--001a113d80947e4983051bafd8dd
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 13/04/2015 14:24, Trevor Woerner wrote:
-> Hi Stephen,
->
-> (replying to really old post, sorry)
->
-> On 02/10/15 08:06, Stephen Flowers wrote:
->> I have built the realtime kernel using Yocto and deployed on the
->> beaglebone black (specifically core-image-rt-sdk).
-> I'm curious to know how you built your image. When I try "bitbake
-> core-image-rt" or "bitbake core-image-rt-sdk" bitbake complains about
-> incompatibilities "not in COMPATIBLE_MACHINE" for linux-yocto-rt.
->
-> Best regards,
->      Trevor
+<div dir=3D"ltr"><div><div><div><div><div><div>Hi YoctoProject team,<br><br=
+></div>=C2=A0=C2=A0=C2=A0=C2=A0 I have downloaded and compiled the yocto so=
+urce (kernel version 3.1.0) for my pandaboard, as the instructions given in=
+=C2=A0 URL (<a href=3D"https://maniacbug.wordpress.com/2012/08/03/pandayoct=
+o/">https://maniacbug.wordpress.com/2012/08/03/pandayocto/</a>). So , panda=
+board is came up, its good to me.<br><br></div>=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 But, i have modified the .config under directory(tmp/work/pandaboard-po=
+ky-linux-gnueabi/linux-omap4-3.1.0-r0/git) as per my requirement. So, i nee=
+d to recompile the kernel using the BITBAKE.<br>=C2=A0<br></div>=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 i have tried with &quot;bitbake -c compile -f v=
+irtual/kernel&quot; but its not working, i understand that it is going to t=
+ake the .bb file from &quot;meta/recipes-kernel/linux/<a href=3D"http://lin=
+ux-dummy.bb">linux-dummy.bb</a>&quot;. But the actual path is &quot;meta-ti=
+/recipes-kernel/linux/<a href=3D"http://linux-omap4_3.1.0.bb">linux-omap4_3=
+.1.0.bb</a>&quot; and moreover i have modified the defconfig under &quot;me=
+ta-ti/recipes-kernel/linux/linux-omap4_3.1.0/pandaboard/defconfig/&quot;.<b=
+r><br></div>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 So, I need to compile the =
+kernel with bitbake after modifying the defconfig file. And i need some bit=
+bake instructions too for to compile newly included meta-xxx=C2=A0 director=
+y. Please reply for this mail, thanks in advance. <br><br></div>Thanks,<br>=
+</div>Gopi.<br></div>
 
-
+--001a113d80947e4983051bafd8dd--
