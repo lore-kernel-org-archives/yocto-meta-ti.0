@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 148A2E00A76; Mon, 27 Jul 2015 17:39:40 -0700 (PDT)
+	id 19EEDE00A71; Mon, 27 Jul 2015 17:39:40 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A649CE00A71
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A576DE00A70
 	for <meta-ti@yoctoproject.org>; Mon, 27 Jul 2015 17:39:39 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 65BDF52991; Tue, 28 Jul 2015 00:39:39 +0000 (UTC)
+	id 552D652987; Tue, 28 Jul 2015 00:39:39 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150728003939.65BDF52991@arago-project.org>
+Message-Id: <20150728003939.552D652987@arago-project.org>
 Date: Tue, 28 Jul 2015 00:39:39 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging 3.14: update to 3.14.48 stable
+Subject: Karthik Ramanan : ipumm-fw: Update download path and checksum
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,35 +38,47 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: daisy
-Commit: e8491188ccb7b15ec00070360f7773d7e774f3d5
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=e8491188ccb7b15ec00070360f7773d7e774f3d5
+Commit: fed606f46829bebbc3430954979a5f2276fafd89
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=fed606f46829bebbc3430954979a5f2276fafd89
 
-Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Jul 28 04:00:37 2015 +0000
+Author: Karthik Ramanan <a0393906@ti.com>
+Date:   Mon Jul 27 12:54:42 2015 +0000
 
-linux-ti-staging 3.14: update to 3.14.48 stable
+ipumm-fw: Update download path and checksum
 
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_3.14.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_3.14.bb b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-index eca072a..b02b51b 100644
---- a/recipes-kernel/linux/linux-ti-staging_3.14.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_3.14.bb
-@@ -46,8 +46,8 @@ S = "${WORKDIR}/git"
+diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
+index 2e43584..81de45e 100644
+--- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
++++ b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
+@@ -9,17 +9,17 @@ python __anonymous() {
+ DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
+ LICENSE = "TI-TSPA"
  
- BRANCH = "ti-linux-3.14.y"
+-LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=caa45d993ac010abe2fd319f6613bc26"
++LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=57d49afcca8f1be47b1c4e79aa06b3ba"
  
--SRCREV = "ce65c710bd587f3f2a900a85ae89334eb729aa72"
--PV = "3.14.47+git${SRCPV}"
-+SRCREV = "847342b35913473684d8618364ee3551e47ead46"
-+PV = "3.14.48+git${SRCPV}"
+ COMPATIBLE_MACHINE = "dra7xx"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
- MACHINE_KERNEL_PR_append = "a"
+ RDEPENDS_${PN} = "libdce"
+ 
+-SRC_URI = "http://arago-project.org/files/short-term/misc/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
++SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/ipumm/3_00_08_01/exports/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
+ 
+-SRC_URI[md5sum] = "e770dce63fdf218bb19ceb748d9812c0"
+-SRC_URI[sha256sum] = "044d49b77560660bdfc29894e669fe8f70dc467c66b4acb49b24722a0799baa1"
++SRC_URI[md5sum] = "a1873333e7676ec1b7fcb18fb8b90696"
++SRC_URI[sha256sum] = "d583d827191a3772f496145cbf81747e10e7ed553d4653379576ac891019d7fb"
+ 
+ S = "${WORKDIR}/ipumm-dra7xx-evm-${PV}"
+ 
 
 
