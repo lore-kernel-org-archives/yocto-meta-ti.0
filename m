@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id A9553E00A70; Mon, 27 Jul 2015 17:39:35 -0700 (PDT)
+	id AC925E00A64; Mon, 27 Jul 2015 17:39:35 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 84C9AE009B8
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 86224E009D9
 	for <meta-ti@yoctoproject.org>; Mon, 27 Jul 2015 17:39:31 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 0D2C752A21; Tue, 28 Jul 2015 00:39:30 +0000 (UTC)
+	id 4692552A22; Tue, 28 Jul 2015 00:39:31 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150728003931.0D2C752A21@arago-project.org>
-Date: Tue, 28 Jul 2015 00:39:30 +0000 (UTC)
+Message-Id: <20150728003931.4692552A22@arago-project.org>
+Date: Tue, 28 Jul 2015 00:39:31 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Karthik Ramanan : ipumm-fw: Update download path and checksum
+Subject: Denys Dmytriyenko : u-boot-ti-staging: update to the latest 2015.07
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -38,47 +38,41 @@ Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
 Branch: fido
-Commit: 3e978c8c4dc5e4f7bee82d515a100df728554bff
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e978c8c4dc5e4f7bee82d515a100df728554bff
+Commit: 3e4278b4ecf66355c3d34e4a160f33b6a6e4352c
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=3e4278b4ecf66355c3d34e4a160f33b6a6e4352c
 
-Author: Karthik Ramanan <a0393906@ti.com>
-Date:   Mon Jul 27 12:54:42 2015 +0000
+Author: Denys Dmytriyenko <denys@ti.com>
+Date:   Tue Jul 28 04:00:39 2015 +0000
 
-ipumm-fw: Update download path and checksum
+u-boot-ti-staging: update to the latest 2015.07
 
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
-index 2e43584..81de45e 100644
---- a/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
-+++ b/recipes-bsp/ipumm-fw/ipumm-fw_3.00.08.01.bb
-@@ -9,17 +9,17 @@ python __anonymous() {
- DESCRIPTION = "Firmware for IPU for supporting Accelerated MM decode and encode"
- LICENSE = "TI-TSPA"
+diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+index 10566bb..86bbfff 100644
+--- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
++++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
+@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
  
--LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=caa45d993ac010abe2fd319f6613bc26"
-+LIC_FILES_CHKSUM = "file://MMIP-${PV}-Manifest.doc;md5=57d49afcca8f1be47b1c4e79aa06b3ba"
+ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
  
- COMPATIBLE_MACHINE = "dra7xx"
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+-PR = "r0"
++PR = "r1"
+ PV_append = "+git${SRCPV}"
  
- RDEPENDS_${PN} = "libdce"
+ SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
  
--SRC_URI = "http://arago-project.org/files/short-term/misc/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
-+SRC_URI = "http://downloads.ti.com/dsps/dsps_public_sw/glsdk/ipumm/3_00_08_01/exports/ipumm-dra7xx-evm-${PV}.tar.gz;protocol=http"
+ BRANCH ?= "ti-u-boot-2015.07"
  
--SRC_URI[md5sum] = "e770dce63fdf218bb19ceb748d9812c0"
--SRC_URI[sha256sum] = "044d49b77560660bdfc29894e669fe8f70dc467c66b4acb49b24722a0799baa1"
-+SRC_URI[md5sum] = "a1873333e7676ec1b7fcb18fb8b90696"
-+SRC_URI[sha256sum] = "d583d827191a3772f496145cbf81747e10e7ed553d4653379576ac891019d7fb"
+-SRCREV = "9c6b05cb724e18d1db3f9e1a75b2272572f06fbd"
++SRCREV = "8dcdcb22f9d06df1ac411b2fe70c06adcd15237b"
  
- S = "${WORKDIR}/ipumm-dra7xx-evm-${PV}"
- 
+ SPL_BINARY = "MLO"
+ SPL_UART_BINARY = "u-boot-spl.bin"
 
 
