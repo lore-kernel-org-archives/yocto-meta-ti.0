@@ -1,26 +1,27 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 420B9E00B02; Thu, 30 Jul 2015 08:26:20 -0700 (PDT)
+	id 42D04E00ABE; Thu, 30 Jul 2015 08:26:20 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.1
+X-Spam-Level: *
+X-Spam-Status: No, score=1.3 required=5.0 tests=BAYES_00,RDNS_DYNAMIC,
+	TO_NO_BRKTS_PCNT autolearn=no version=3.3.1
 X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      [score: 0.0000]
 	*  1.0 RDNS_DYNAMIC Delivered to internal network by host with
 	*      dynamic-looking rDNS
+	*  2.2 TO_NO_BRKTS_PCNT To: misformatted + percentage
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 137CDE00B02
-	for <meta-ti@yoctoproject.org>; Thu, 30 Jul 2015 08:26:15 -0700 (PDT)
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 71B21E00AE9
+	for <meta-ti@yoctoproject.org>; Thu, 30 Jul 2015 08:26:11 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 1974352AA4; Thu, 30 Jul 2015 15:26:12 +0000 (UTC)
+	id 9D57A529B5; Thu, 30 Jul 2015 15:26:10 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150730152612.1974352AA4@arago-project.org>
-Date: Thu, 30 Jul 2015 15:26:12 +0000 (UTC)
+Message-Id: <20150730152610.9D57A529B5@arago-project.org>
+Date: Thu, 30 Jul 2015 15:26:10 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : linux-ti-staging: update with recent merges, switch to new PM firmware
+Subject: Denys Dmytriyenko : am33x-cm3: move into cm3-pm-firmware folder
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,50 +38,25 @@ X-List-Received-Date: Thu, 30 Jul 2015 15:26:20 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: a213b607961bfa40becf877d2c703ae7812a2c3e
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=a213b607961bfa40becf877d2c703ae7812a2c3e
+Branch: fido
+Commit: 804d6921fa45a1a0b052d844b0de9ecb38445822
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=804d6921fa45a1a0b052d844b0de9ecb38445822
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Thu Jul 30 09:15:42 2015 +0000
+Date:   Wed Jul 29 23:11:26 2015 -0400
 
-linux-ti-staging: update with recent merges, switch to new PM firmware
+am33x-cm3: move into cm3-pm-firmware folder
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-kernel/linux/linux-ti-staging_4.1.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ .../am33x-cm3_git.bb                               |    0
+ 1 files changed, 0 insertions(+), 0 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-index 7b5fadd..cd4497a 100644
---- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
-+++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
-@@ -18,8 +18,8 @@ RDEPENDS_kernel-base += "kernel-devicetree"
- 
- # Add a run-time dependency for the PM firmware to be installed
- # on the target file system.
--RDEPENDS_kernel-base_append_ti33x = " am33x-cm3"
--RDEPENDS_kernel-base_append_ti43x = " am33x-cm3"
-+RDEPENDS_kernel-base_append_ti33x = " amx3-cm3"
-+RDEPENDS_kernel-base_append_ti43x = " amx3-cm3"
- 
- # Add a run-time dependency for the VPE VPDMA firmware to be installed
- # on the target file system.
-@@ -47,11 +47,11 @@ S = "${WORKDIR}/git"
- 
- BRANCH = "ti-linux-4.1.y"
- 
--SRCREV = "c34fd7dc89f0f3690a84e6ec0d0d76ab86466366"
-+SRCREV = "83b86ca5dacc381b5c21db27aba348f187890632"
- PV = "4.1.3+git${SRCPV}"
- 
- # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
--MACHINE_KERNEL_PR_append = "b"
-+MACHINE_KERNEL_PR_append = "c"
- PR = "${MACHINE_KERNEL_PR}"
- 
- KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
+diff --git a/recipes-bsp/am33x-cm3/am33x-cm3_git.bb b/recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
+similarity index 100%
+rename from recipes-bsp/am33x-cm3/am33x-cm3_git.bb
+rename to recipes-bsp/cm3-pm-firmware/am33x-cm3_git.bb
 
 
