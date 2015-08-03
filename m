@@ -1,6 +1,6 @@
 Return-Path: <git@arago-project.org>
 Received: by yocto-www.yoctoproject.org (Postfix, from userid 118)
-	id 2C591E009D9; Mon,  3 Aug 2015 12:24:50 -0700 (PDT)
+	id 2D456E00A01; Mon,  3 Aug 2015 12:24:50 -0700 (PDT)
 X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
 	yocto-www.yoctoproject.org
 X-Spam-Level: 
@@ -12,15 +12,15 @@ X-Spam-HAM-Report: * -1.9 BAYES_00 BODY: Bayes spam probability is 0 to 1%
 	*      dynamic-looking rDNS
 Received: from arago-project.org (ec2-184-73-161-183.compute-1.amazonaws.com
 	[184.73.161.183])
-	by yocto-www.yoctoproject.org (Postfix) with ESMTP id A0C1CE00A28
+	by yocto-www.yoctoproject.org (Postfix) with ESMTP id 41790E009D9
 	for <meta-ti@yoctoproject.org>; Mon,  3 Aug 2015 12:24:47 -0700 (PDT)
 Received: by arago-project.org (Postfix, from userid 107)
-	id 21FD652A72; Mon,  3 Aug 2015 19:24:47 +0000 (UTC)
+	id 021D852A08; Mon,  3 Aug 2015 19:24:44 +0000 (UTC)
 To: meta-ti@yoctoproject.org
-Message-Id: <20150803192447.21FD652A72@arago-project.org>
-Date: Mon,  3 Aug 2015 19:24:47 +0000 (UTC)
+Message-Id: <20150803192445.021D852A08@arago-project.org>
+Date: Mon,  3 Aug 2015 19:24:44 +0000 (UTC)
 From: git@arago-project.org (Arago Project git)
-Subject: Denys Dmytriyenko : u-boot-ti-staging: update with Keystone2 fixes
+Subject: Denys Dmytriyenko : linux-ti-staging 4.1: update to 4.1.4
 X-BeenThere: meta-ti@yoctoproject.org
 X-Mailman-Version: 2.1.13
 Precedence: list
@@ -37,42 +37,40 @@ X-List-Received-Date: Mon, 03 Aug 2015 19:24:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Module: meta-ti
-Branch: master
-Commit: 5ff540fe7c89aed790affb9582299645f2e9fb9c
-URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=5ff540fe7c89aed790affb9582299645f2e9fb9c
+Branch: fido
+Commit: ac0d92a2526f396ce28d4cb604e1a46e6604d56d
+URL:    http://arago-project.org/git/meta-ti.git?a=commit;h=ac0d92a2526f396ce28d4cb604e1a46e6604d56d
 
 Author: Denys Dmytriyenko <denys@ti.com>
-Date:   Tue Aug  4 01:20:48 2015 +0000
+Date:   Tue Aug  4 01:20:47 2015 +0000
 
-u-boot-ti-staging: update with Keystone2 fixes
+linux-ti-staging 4.1: update to 4.1.4
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
 ---
 
- recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-kernel/linux/linux-ti-staging_4.1.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-index 86bbfff..d8d72b4 100644
---- a/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-+++ b/recipes-bsp/u-boot/u-boot-ti-staging_2015.07.bb
-@@ -7,14 +7,14 @@ DESCRIPTION = "u-boot bootloader for TI devices"
+diff --git a/recipes-kernel/linux/linux-ti-staging_4.1.bb b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+index cd4497a..67fba2c 100644
+--- a/recipes-kernel/linux/linux-ti-staging_4.1.bb
++++ b/recipes-kernel/linux/linux-ti-staging_4.1.bb
+@@ -47,11 +47,11 @@ S = "${WORKDIR}/git"
  
- LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
+ BRANCH = "ti-linux-4.1.y"
  
--PR = "r1"
-+PR = "r2"
- PV_append = "+git${SRCPV}"
+-SRCREV = "83b86ca5dacc381b5c21db27aba348f187890632"
+-PV = "4.1.3+git${SRCPV}"
++SRCREV = "583d3e9ad9f1610b3ac0c531b10fed1cad466b5c"
++PV = "4.1.4+git${SRCPV}"
  
- SRC_URI = "git://git.ti.com/ti-u-boot/ti-u-boot.git;protocol=git;branch=${BRANCH}"
+ # Append to the MACHINE_KERNEL_PR so that a new SRCREV will cause a rebuild
+-MACHINE_KERNEL_PR_append = "c"
++MACHINE_KERNEL_PR_append = "a"
+ PR = "${MACHINE_KERNEL_PR}"
  
- BRANCH ?= "ti-u-boot-2015.07"
- 
--SRCREV = "8dcdcb22f9d06df1ac411b2fe70c06adcd15237b"
-+SRCREV = "42971a80dc9c7c3161d50f125cd59d8741810a8b"
- 
- SPL_BINARY = "MLO"
- SPL_UART_BINARY = "u-boot-spl.bin"
+ KERNEL_CONFIG_DIR = "${S}/ti_config_fragments"
 
 
